@@ -417,12 +417,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		exit(2);
 	}
 
-	// Start intro music before splashscreen: it takes slightly less time,
-	// and the music starts with some delay
-	g_sh = new SoundHandler();
-	g_sh->register_songs("music", Songset::kIntro);
-	g_sh->change_music(Songset::kIntro);
-
 	g_gr = new Graphic();
 	g_gr->initialize(
 	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
@@ -450,6 +444,30 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	// The initital splash screen is only drawn once, it doesn't get updates until the main menu
 	// overrides it. Normally it shouldn't take more than a few seconds.
+	{
+		SDL_Event ev;
+		int ignored = 0;
+		int handled = 0;
+		while (SDL_PollEvent(&ev) != 0) {
+			// Except the window manager may resize the window on creation, so we have to look for resize
+			// events first. We throw away everything else, hopefully we don't have much yet...
+			// This is not ideal, but Graphic messes a lot with SDL_SetWindowResizable() (not good
+			// either), so using that would be much harder.
+			if (ev.type == SDL_WINDOWEVENT) {
+				handle_window_event(ev);
+				++handled;
+			} else if (ev.type != SDL_MOUSEMOTION) {
+				++ignored;
+			}
+		}
+		if (ignored > 0) {
+			log_warn("Ignored %d non-mousemove SDL events at start up", ignored);
+		}
+		if (handled > 0) {
+			// Initial creation already creates some events
+			verb_log_info("Handled %d SDL window events at start up", handled);
+		}
+	}
 	RenderTarget* r = g_gr->get_render_target();
 	draw_splashscreen(*r, _("Loading…"), 1.0f);
 	g_gr->refresh();
@@ -458,6 +476,14 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// This was taken out of Graphic::initialize() to allow showing the splashscreen earlier.
 	// This is one of the slowest parts of the start up.
 	g_gr->rebuild_texture_atlas();
+
+	g_sh = new SoundHandler();
+
+	g_sh->register_songs("music", Songset::kMenu);
+	g_sh->register_songs("music", Songset::kIngame);
+	g_sh->register_songs("music", Songset::kCustom);
+
+	g_sh->change_music(Songset::kMenu);
 
 	// Try to detect configurations with inverted horizontal scroll
 	SDL_version sdl_ver = {SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL};
@@ -492,10 +518,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	cleanup_ai_files();
 	cleanup_temp_files();
 	cleanup_temp_backups();
-
-	g_sh->register_songs("music", Songset::kMenu);
-	g_sh->register_songs("music", Songset::kIngame);
-	g_sh->register_songs("music", Songset::kCustom);
 
 	UI::ColorChooser::read_favorites_settings();
 
@@ -973,26 +995,14 @@ bool WLApplication::poll_event(SDL_Event& ev) const {
 		}
 		break;
 
+	// TODO(tothxa): no longer pushes fake event, can be moved to handle_input()
 	case SDL_USEREVENT: {
 		if (ev.user.code == CHANGE_MUSIC) {
 			/* Notofication from the SoundHandler that a song has finished playing.
-			 * Usually, another song from the same songset will be started.
-			 * There is a special case for the intro screen's music: only one song will be
-			 * played. If the user has not clicked the mouse or pressed escape when the song
-			 * finishes, Widelands will automatically go on to the main menu.
+			 * Another song from the same songset will be started.
 			 */
 			assert(!SoundHandler::is_backend_disabled());
-			if (g_sh->current_songset() == "intro") {
-				// Special case for splashscreen: there, only one song is ever played,
-				// then we simulate a keypress to go to the main menu.
-				SDL_Event new_event;
-				new_event.type = SDL_KEYDOWN;
-				new_event.key.state = SDL_PRESSED;
-				new_event.key.keysym.sym = SDLK_SPACE;
-				SDL_PushEvent(&new_event);
-			} else {
-				g_sh->change_music();
-			}
+			g_sh->change_music();
 		}
 	} break;
 
@@ -1000,6 +1010,25 @@ bool WLApplication::poll_event(SDL_Event& ev) const {
 		break;
 	}
 	return true;
+}
+
+void WLApplication::handle_window_event(SDL_Event& ev) {
+	assert(ev.type = SDL_WINDOWEVENT);
+	switch (ev.window.event) {
+	case SDL_WINDOWEVENT_RESIZED:
+		// Do not save the new size to config at this point to avoid saving sizes that
+		// result from maximization etc. Save at shutdown instead.
+		if (!g_gr->fullscreen()) {
+			g_gr->change_resolution(ev.window.data1, ev.window.data2, false);
+		}
+		break;
+	case SDL_WINDOWEVENT_MAXIMIZED:
+		set_config_bool("maximized", true);
+		break;
+	case SDL_WINDOWEVENT_RESTORED:
+		set_config_bool("maximized", g_gr->maximized());
+		break;
+	}
 }
 
 bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, const int modifiers) {
@@ -1092,21 +1121,7 @@ void WLApplication::handle_input(InputCallback const* cb) {
 			}
 			break;
 		case SDL_WINDOWEVENT:
-			switch (ev.window.event) {
-			case SDL_WINDOWEVENT_RESIZED:
-				// Do not save the new size to config at this point to avoid saving sizes that
-				// result from maximization etc. Save at shutdown instead.
-				if (!g_gr->fullscreen()) {
-					g_gr->change_resolution(ev.window.data1, ev.window.data2, false);
-				}
-				break;
-			case SDL_WINDOWEVENT_MAXIMIZED:
-				set_config_bool("maximized", true);
-				break;
-			case SDL_WINDOWEVENT_RESTORED:
-				set_config_bool("maximized", g_gr->maximized());
-				break;
-			}
+			handle_window_event(ev);
 			break;
 		case SDL_QUIT:
 			should_die_ = true;

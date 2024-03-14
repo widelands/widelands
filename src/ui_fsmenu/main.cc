@@ -200,7 +200,6 @@ MainMenu::MainMenu(const bool skip_init)
                 "",
                 UI::Align::kCenter),
      init_time_(kNoSplash),
-     splash_state_(SplashState::kDone),
 
      menu_capsule_(*this) {
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
@@ -544,20 +543,22 @@ void MainMenu::set_button_visibility(const bool v) {
 	clock_.set_visible(v);
 }
 
-// With fadeout/fadein if not immediately. Repeated call (repeated keypress) is always immediate.
-void MainMenu::abort_splashscreen(const bool immediately) {
-	if (!immediately && splash_state_ == SplashState::kSplash) {
-		init_time_ = SDL_GetTicks();
-		splash_state_ = SplashState::kSplashFadeOut;
-	} else {
-		init_time_ = kNoSplash;
-		splash_state_ = SplashState::kDone;
-	}
+void MainMenu::end_splashscreen() {
+	assert(splash_state_ == SplashState::kSplash);
+	verb_log_info("Initiating splash screen fade out");
+	init_time_ = SDL_GetTicks();
+	splash_state_ = SplashState::kSplashFadeOut;
+}
+
+void MainMenu::abort_splashscreen() {
+	verb_log_info("Splash screen ended");
+	init_time_ = kNoSplash;
+	splash_state_ = SplashState::kDone;
 }
 
 bool MainMenu::handle_mousepress(uint8_t /*btn*/, int32_t /*x*/, int32_t /*y*/) {
 	if (splash_state_ != SplashState::kDone) {
-		abort_splashscreen(false);
+		abort_splashscreen();
 		return true;
 	}
 	return false;
@@ -588,9 +589,8 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 	if (down) {
 		bool fell_through = false;
 		if (splash_state_ != SplashState::kDone) {
-			// Default key is "Escape", but also hardcode it
-			abort_splashscreen(
-			   matches_shortcut(KeyboardShortcut::kMainMenuQuit, code) || code.sym == SDLK_ESCAPE);
+			abort_splashscreen();
+			// Don't quit on escape when it is pressed to skip fading
 			fell_through = true;
 		}
 
@@ -705,8 +705,8 @@ inline float MainMenu::calc_opacity(const uint32_t time) const {
 
 /*
  * The four phases of the animation:
- *   1) Show the splash image with full opacity on a black background until intro music ends or
- *      keypress (end of music is signalled as a keypress)
+ *   1) We start with the splash image shown with full opacity on a black background, we initiate
+ *      fade out on first refresh (this is to reset init_time_ when we can actually start fading)
  *   2) Show the splash image semi-transparent on a black background for `kSplashFadeoutDuration`
  *   3) Show the background & menu semi-transparent for `kSplashFadeoutDuration`
  *   4) Show the background & menu with full opacity indefinitely
@@ -723,27 +723,30 @@ void MainMenu::draw(RenderTarget& r) {
 	if (splash_state_ != SplashState::kDone) {
 		assert(init_time_ != kNoSplash && time >= init_time_);
 
-		if (splash_state_ != SplashState::kSplash && (time - init_time_ > kSplashFadeoutDuration)) {
+		if (splash_state_ == SplashState::kSplash) {
+			end_splashscreen();
+			return;
+		}
+
+		if (time - init_time_ > kSplashFadeoutDuration) {
 			if (splash_state_ == SplashState::kMenuFadeIn ||
 			    (time - init_time_ > 2 * kSplashFadeoutDuration)) {
-				init_time_ = kNoSplash;
-				splash_state_ = SplashState::kDone;
+				abort_splashscreen();
 			} else if (splash_state_ == SplashState::kSplashFadeOut) {
 				init_time_ = time;
 				splash_state_ = SplashState::kMenuFadeIn;
 			}
 		}
 
-		if (splash_state_ != SplashState::kMenuFadeIn && splash_state_ != SplashState::kDone) {
+		if (splash_state_ == SplashState::kSplashFadeOut) {
 			// still in splash phase
 			return;
 		}
 	}
 
-	// TODO(tothxa): This probably shouldn't be in draw(), but we don't have think(), nor a
-	//               single entry point, and it is at least related to the splashscreen fade out.
-	//               The songset should be reset when the splash is over and when a game, replay
-	//               or editing session returns.
+	// TODO(tothxa): This shouldn't be in draw(), but we don't have think(), nor a single
+	//               entry point.
+	//               Reset the songset when a game, replay or editing session returns.
 	if (g_sh->current_songset() != Songset::kMenu) {
 		g_sh->change_music(Songset::kMenu, 1000);
 	}
@@ -810,13 +813,14 @@ void MainMenu::draw_overlay(RenderTarget& r) {
 	const uint32_t time = SDL_GetTicks();
 
 	float progress = 0.0f;
-	if (splash_state_ != SplashState::kSplash) {
+	if (splash_state_ == SplashState::kSplash) {
+		end_splashscreen();
+	} else {
 		progress = static_cast<float>(time - init_time_) / kSplashFadeoutDuration;
 		if (progress > 1.0f) {
 			if (splash_state_ == SplashState::kMenuFadeIn || progress > 2.0f) {
 				// We're done
-				init_time_ = kNoSplash;
-				splash_state_ = SplashState::kDone;
+				abort_splashscreen();
 				return;
 			}
 
@@ -828,10 +832,7 @@ void MainMenu::draw_overlay(RenderTarget& r) {
 	}
 
 	if (splash_state_ != SplashState::kMenuFadeIn) {
-		draw_splashscreen(
-		   /** TRANSLATORS: Actually any key works */
-		   r, (splash_state_ == SplashState::kSplash ? _("Press ‘Space’ to skip") : ""),
-		   1.0f - progress);
+		draw_splashscreen(r, "", 1.0f - progress);
 	} else {
 		const unsigned alpha = 255 - 255.f * progress;  // fade in of menu = fade out of overlay
 		r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, alpha), BlendMode::Default);

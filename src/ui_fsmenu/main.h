@@ -101,13 +101,17 @@ public:
 
 	Widelands::Game* create_safe_game(bool show_error = true);
 
-	void abort_splashscreen(bool immediately = true);
+	// Signal ending immediately from any phase
+	void abort_splashscreen();
 
 protected:
 	void update_template() override;
 
 private:
 	void layout() override;
+
+	// Called only from splash screen phase to signal start of fading
+	void end_splashscreen();
 
 	Recti box_rect_;
 	uint32_t butw_, buth_;
@@ -136,7 +140,7 @@ private:
 	uint32_t init_time_;
 
 	enum class SplashState { kSplash, kSplashFadeOut, kMenuFadeIn, kDone };
-	SplashState splash_state_;
+	SplashState splash_state_{SplashState::kDone};
 
 	std::vector<std::string> images_;
 	uint32_t last_image_exchange_time_{0U};
