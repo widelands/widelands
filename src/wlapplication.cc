@@ -449,8 +449,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		int ignored = 0;
 		int handled = 0;
 		while (SDL_PollEvent(&ev) != 0) {
-			// Except the window manager may resize the window on creation, so we have to look for resize
-			// events first. We throw away everything else, hopefully we don't have much yet...
+			// Except the window manager may resize the window on creation, so we have to look for
+			// resize events first. We throw away everything else, hopefully we don't have much yet...
 			// This is not ideal, but Graphic messes a lot with SDL_SetWindowResizable() (not good
 			// either), so using that would be much harder.
 			if (ev.type == SDL_WINDOWEVENT) {

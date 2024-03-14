@@ -734,9 +734,8 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 		if (can_act_ && fill_index_under_mouse_ >= 0) {
 			r.blitrect_scale(Rectf(calc_xpos(fill_index_under_mouse_), ypos,
 			                       max_fill_indicator_.width(), max_fill_indicator_.height()),
-			                 &max_fill_indicator_,
-			                 max_fill_indicator_.rect(),
-			                 0.4f, BlendMode::Default);
+			                 &max_fill_indicator_, max_fill_indicator_.rect(), 0.4f,
+			                 BlendMode::Default);
 		}
 	}
 
