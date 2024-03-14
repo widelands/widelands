@@ -371,7 +371,7 @@ bool AddOnInfo::requires_texture_atlas_rebuild() const {
 	}
 }
 
-void do_update_ui_theme(const UpdateThemeAction action, std::string arg) {
+inline void do_update_ui_theme(const UpdateThemeAction action, std::string arg) {
 	AddOnState* previously_enabled = nullptr;
 	std::list<AddOnState*> installed;
 	for (AddOnState& s : g_addons) {
