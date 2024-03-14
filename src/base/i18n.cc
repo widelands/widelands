@@ -123,10 +123,7 @@ const char* translate(const char* const str) {
 }
 const std::string& translate(const std::string& str) {
 	log_i18n_if_desired_("gettext", str.c_str());
-	if (textdomains.empty()) {
-		log_err("Call to translate with empty textdomain stack");
-		return str;
-	}
+	assert(!textdomains.empty());
 	return textdomains.back()->translate(str);
 }
 
@@ -135,10 +132,7 @@ const char* pgettext_wrapper(const char* msgctxt, const char* msgid) {
 }
 const std::string& pgettext_wrapper(const std::string& msgctxt, const std::string& msgid) {
 	log_i18n_if_desired_("pgettext", msgid.c_str());
-	if (textdomains.empty()) {
-		log_err("Call to pgettext with empty textdomain stack");
-		return msgid;
-	}
+	assert(!textdomains.empty());
 	return textdomains.back()->translate_ctxt(msgctxt, msgid);
 }
 
@@ -148,10 +142,7 @@ const char* ngettext_wrapper(const char* singular, const char* plural, const int
 const std::string&
 ngettext_wrapper(const std::string& singular, const std::string& plural, const int n) {
 	log_i18n_if_desired_("ngettext", singular.c_str());
-	if (textdomains.empty()) {
-		log_err("Call to ngettext with empty textdomain stack");
-		return n == 1 ? singular : plural;
-	}
+	assert(!textdomains.empty());
 	return textdomains.back()->translate_plural(singular, plural, n);
 }
 
@@ -165,10 +156,7 @@ const std::string& npgettext_wrapper(const std::string& msgctxt,
                                      const std::string& plural,
                                      int n) {
 	log_i18n_if_desired_("npgettext", singular.c_str());
-	if (textdomains.empty()) {
-		log_err("Call to npgettext with empty textdomain stack");
-		return n == 1 ? singular : plural;
-	}
+	assert(!textdomains.empty());
 	return textdomains.back()->translate_ctxt_plural(msgctxt, singular, plural, n);
 }
 
@@ -206,12 +194,12 @@ GenericTextdomain::~GenericTextdomain() {
 	release_textdomain();
 }
 Textdomain::Textdomain(const std::string& name) {
-	grab_textdomain(name, get_localedir().c_str());
+	grab_textdomain(name, get_localedir());
 }
 AddOnTextdomain::AddOnTextdomain(std::string addon, const int i18n_version) {
 	addon += '.';
 	addon += std::to_string(i18n_version);
-	grab_textdomain(addon, get_addon_locale_dir().c_str());
+	grab_textdomain(addon, get_addon_locale_dir());
 }
 
 /**
@@ -231,10 +219,7 @@ void grab_textdomain(const std::string& domain, const std::string& ldir) {
  * See grab_textdomain()
  */
 void release_textdomain() {
-	if (textdomains.empty()) {
-		log_err("Trying to pop textdomain from empty stack");
-		return;
-	}
+	assert(!textdomains.empty());
 	textdomains.pop_back();
 }
 

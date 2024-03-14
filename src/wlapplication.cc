@@ -1254,7 +1254,7 @@ void WLApplication::init_language() {
 
 	// Initialize locale and grab "widelands" textdomain
 	i18n::init_locale();
-	i18n::grab_textdomain("widelands", i18n::get_localedir().c_str());
+	i18n::grab_textdomain("widelands", i18n::get_localedir());
 
 	// Set locale corresponding to selected language
 	std::string language = get_config_string("language", "");
