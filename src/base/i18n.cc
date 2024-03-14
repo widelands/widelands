@@ -103,13 +103,15 @@ private:
 		}
 
 		const std::string& lang_to_use = get_locale_or_default();
-		if (auto it = dictionary_pointer->dictionaries.find(lang_to_use); it != dictionary_pointer->dictionaries.end()) {
+		if (auto it = dictionary_pointer->dictionaries.find(lang_to_use);
+		    it != dictionary_pointer->dictionaries.end()) {
 			return it->second;
 		}
 
 		tinygettext::Dictionary* result = nullptr;
 		try {
-			result = &dictionary_pointer->manager.get_dictionary(tinygettext::Language::from_env(lang_to_use));
+			result = &dictionary_pointer->manager.get_dictionary(
+			   tinygettext::Language::from_env(lang_to_use));
 		} catch (const std::exception& e) {
 			verb_log_warn("Could not open dictionary: %s", e.what());
 			// Cache the null value so we don't retry again and again
