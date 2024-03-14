@@ -1012,7 +1012,7 @@ bool WLApplication::poll_event(SDL_Event& ev) const {
 }
 
 void WLApplication::handle_window_event(SDL_Event& ev) {
-	assert(ev.type = SDL_WINDOWEVENT);
+	assert(ev.type == SDL_WINDOWEVENT);
 	switch (ev.window.event) {
 	case SDL_WINDOWEVENT_RESIZED:
 		// Do not save the new size to config at this point to avoid saving sizes that
