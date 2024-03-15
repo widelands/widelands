@@ -31,8 +31,7 @@
 #include "base/mutex.h"
 #include "config.h"
 
-// prevent defining sprintf / snprintf / vsnprintf to libintl_sprintf / libintl_snprintf /
-// libintl_vsnprintf in libintl.h, libintl.h is included by getext.h
+// Prevent even more symbol clashes with libintl.h
 #ifdef sprintf
 #undef sprintf
 #endif

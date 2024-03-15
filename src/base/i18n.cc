@@ -72,34 +72,30 @@ struct TextdomainStackEntry {
 	                                         const std::string& pl,
 	                                         int n) {
 		tinygettext::Dictionary* d = dictionary();
-		cached_return_values.push_back(d != nullptr ? d->translate_ctxt_plural(ctxt, sg, pl, n) :
+		return *cached_return_values.insert(d != nullptr ? d->translate_ctxt_plural(ctxt, sg, pl, n) :
 		                               n == 1       ? sg :
-                                                    pl);
-		return cached_return_values.back();
+                                                    pl).first;
 	}
 	const std::string& translate_plural(const std::string& sg, const std::string& pl, int n) {
 		tinygettext::Dictionary* d = dictionary();
-		cached_return_values.push_back(d != nullptr ? d->translate_plural(sg, pl, n) :
+		return *cached_return_values.insert(d != nullptr ? d->translate_plural(sg, pl, n) :
 		                               n == 1       ? sg :
-                                                    pl);
-		return cached_return_values.back();
+                                                    pl).first;
 	}
 	const std::string& translate_ctxt(const std::string& ctxt, const std::string& msg) {
 		tinygettext::Dictionary* d = dictionary();
-		cached_return_values.push_back(d != nullptr ? d->translate_ctxt(ctxt, msg) : msg);
-		return cached_return_values.back();
+		return *cached_return_values.insert(d != nullptr ? d->translate_ctxt(ctxt, msg) : msg).first;
 	}
 	const std::string& translate(const std::string& msg) {
 		tinygettext::Dictionary* d = dictionary();
-		cached_return_values.push_back(d != nullptr ? d->translate(msg) : msg);
-		return cached_return_values.back();
+		return *cached_return_values.insert(d != nullptr ? d->translate(msg) : msg).first;
 	}
 
 private:
 	DictionaryCache* dictionary_pointer = nullptr;
 
 	// To prevent translations from going out of scope before use in complex string assemblies.
-	std::vector<std::string> cached_return_values;
+	std::set<std::string> cached_return_values;
 
 	tinygettext::Dictionary* dictionary() {
 		if (dictionary_pointer == nullptr) {
