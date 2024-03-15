@@ -47,17 +47,17 @@ struct DictionaryCache {
 	tinygettext::DictionaryManager manager;
 	std::map<std::string /* language */, tinygettext::Dictionary*> dictionaries;
 };
-std::map<std::string /* textdomain */, std::shared_ptr<DictionaryCache>> g_dictionary_cache;
+std::map<std::string /* textdomain */, std::unique_ptr<DictionaryCache>> g_dictionary_cache;
 
 struct TextdomainStackEntry {
 	explicit TextdomainStackEntry(const std::string& dir) {
 		if (g_fs->is_directory(dir)) {
 			auto it = g_dictionary_cache.find(dir);
 			if (it == g_dictionary_cache.end()) {
-				it = g_dictionary_cache.emplace(dir, std::make_shared<DictionaryCache>()).first;
+				it = g_dictionary_cache.emplace(dir, new DictionaryCache()).first;
 				it->second->manager.add_directory(dir);
 			}
-			dictionary_pointer = it->second;
+			dictionary_pointer = it->second.get();
 		} else {
 			log_warn("Textdomain directory %s does not exist", dir.c_str());
 		}
@@ -92,7 +92,7 @@ struct TextdomainStackEntry {
 	}
 
 private:
-	std::shared_ptr<DictionaryCache> dictionary_pointer;
+	DictionaryCache* dictionary_pointer;
 
 	// To prevent translations from going out of scope before use in complex string assemblies.
 	std::vector<std::string> cached_return_values;
