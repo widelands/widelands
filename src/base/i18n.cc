@@ -28,6 +28,8 @@
 #include <map>
 #include <memory>
 
+CLANG_DIAG_OFF("-Wdocumentation-unknown-command")
+
 #include "base/log.h"
 #include "base/string.h"
 #include "config.h"
@@ -35,6 +37,8 @@
 #include "logic/filesystem_constants.h"
 #include "third_party/tinygettext/include/tinygettext/log.hpp"
 #include "third_party/tinygettext/include/tinygettext/tinygettext.hpp"
+
+CLANG_DIAG_ON("-Wdocumentation-unknown-command")
 
 namespace i18n {
 
