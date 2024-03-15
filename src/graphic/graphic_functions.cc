@@ -59,8 +59,10 @@ void draw_splashscreen(RenderTarget& rt, const std::string& footer_message, cons
 	rt.blit_fit(image, false, opacity);
 
 	if (!footer_message.empty()) {
+		std::string intro_font = get_config_string(
+		   "intro_font", g_style_manager->font_style(UI::FontStyle::kFsMenuIntro).as_font_open());
 		std::shared_ptr<const UI::RenderedText> footer = UI::g_fh->render(
-		   as_richtext_paragraph(footer_message, UI::FontStyle::kFsMenuIntro, UI::Align::kCenter));
+		   format("<rt><p align=center>%s%s</font></p></rt>", intro_font, footer_message));
 		Vector2i footer_pos(rt.width() / 2, rt.height() - 3 * footer->height());
 		footer->draw(rt, footer_pos, UI::Align::kCenter);
 	}

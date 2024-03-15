@@ -431,6 +431,8 @@ void update_ui_theme(const UpdateThemeAction action, std::string arg) {
 	// Save splash image realpath to the config, because start up needs it before addon themes
 	// are initialized
 	set_config_string("splash_image", resolve_template_image_filename(kSplashImage));
+	set_config_string(
+	   "intro_font", g_style_manager->font_style(UI::FontStyle::kFsMenuIntro).as_font_open());
 }
 
 bool AddOnInfo::matches_widelands_version(const bool warn_future) const {
