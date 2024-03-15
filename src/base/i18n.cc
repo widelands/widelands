@@ -72,15 +72,19 @@ struct TextdomainStackEntry {
 	                                         const std::string& pl,
 	                                         int n) {
 		tinygettext::Dictionary* d = dictionary();
-		return *cached_return_values.insert(d != nullptr ? d->translate_ctxt_plural(ctxt, sg, pl, n) :
-		                               n == 1       ? sg :
-                                                    pl).first;
+		return *cached_return_values
+		           .insert(d != nullptr ? d->translate_ctxt_plural(ctxt, sg, pl, n) :
+		                   n == 1       ? sg :
+                                        pl)
+		           .first;
 	}
 	const std::string& translate_plural(const std::string& sg, const std::string& pl, int n) {
 		tinygettext::Dictionary* d = dictionary();
-		return *cached_return_values.insert(d != nullptr ? d->translate_plural(sg, pl, n) :
-		                               n == 1       ? sg :
-                                                    pl).first;
+		return *cached_return_values
+		           .insert(d != nullptr ? d->translate_plural(sg, pl, n) :
+		                   n == 1       ? sg :
+                                        pl)
+		           .first;
 	}
 	const std::string& translate_ctxt(const std::string& ctxt, const std::string& msg) {
 		tinygettext::Dictionary* d = dictionary();
