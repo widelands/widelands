@@ -31,6 +31,7 @@
 // Setup the static objects Widelands needs to operate and initializes systems.
 void initialize() {
 	set_initializer_thread();
+	g_verbose = true;
 
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		// We sometimes run into a missing video driver in our CI environment, so we exit 0 to prevent

@@ -96,7 +96,7 @@ struct TextdomainStackEntry {
 	}
 
 private:
-	DictionaryCache* dictionary_pointer;
+	DictionaryCache* dictionary_pointer = nullptr;
 
 	// To prevent translations from going out of scope before use in complex string assemblies.
 	std::vector<std::string> cached_return_values;
@@ -207,6 +207,7 @@ const std::string& npgettext_wrapper(const std::string& msgctxt,
  */
 void set_localedir(const std::string& dname) {
 	localedir = dname;
+	verb_log_info("Setting localedir: %s\n", localedir.c_str());
 }
 
 const std::string& get_localedir() {
