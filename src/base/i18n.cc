@@ -165,6 +165,7 @@ const char* translate(const char* const str) {
 }
 const std::string& translate(const std::string& str) {
 	log_i18n_if_desired_("gettext", str.c_str());
+	MutexLock m(MutexLock::ID::kI18N);
 	assert(!textdomains.empty());
 	return textdomains.back()->translate(str);
 }
@@ -174,6 +175,7 @@ const char* pgettext_wrapper(const char* msgctxt, const char* msgid) {
 }
 const std::string& pgettext_wrapper(const std::string& msgctxt, const std::string& msgid) {
 	log_i18n_if_desired_("pgettext", msgid.c_str());
+	MutexLock m(MutexLock::ID::kI18N);
 	assert(!textdomains.empty());
 	return textdomains.back()->translate_ctxt(msgctxt, msgid);
 }
@@ -184,6 +186,7 @@ const char* ngettext_wrapper(const char* singular, const char* plural, const int
 const std::string&
 ngettext_wrapper(const std::string& singular, const std::string& plural, const int n) {
 	log_i18n_if_desired_("ngettext", singular.c_str());
+	MutexLock m(MutexLock::ID::kI18N);
 	assert(!textdomains.empty());
 	return textdomains.back()->translate_plural(singular, plural, n);
 }
@@ -198,6 +201,7 @@ const std::string& npgettext_wrapper(const std::string& msgctxt,
                                      const std::string& plural,
                                      int n) {
 	log_i18n_if_desired_("npgettext", singular.c_str());
+	MutexLock m(MutexLock::ID::kI18N);
 	assert(!textdomains.empty());
 	return textdomains.back()->translate_ctxt_plural(msgctxt, singular, plural, n);
 }
