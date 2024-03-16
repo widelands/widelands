@@ -114,7 +114,7 @@ TechInfo::TechInfo(const TechInfo::Type t) {
 	}
 
 	if (t != TechInfo::Type::kMousewheelReport) {
-		add_plain_entry(gettext_noop("Locale:"), i18n::get_locale(), false);
+		add_plain_entry(gettext_noop("Locale:"), i18n::get_locale_or_default(), false);
 		add_plain_entry(gettext_noop("Home Directory:"), i18n::get_homedir(), false);
 		add_plain_entry(gettext_noop("Configuration File:"), get_config_file(), false);
 		add_plain_entry(gettext_noop("Data Directory:"), WLApplication::get().get_datadir(), false);
