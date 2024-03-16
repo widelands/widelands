@@ -1,3 +1,4 @@
+set(TINYGETTEXT_WITH_SDL ON)
 add_subdirectory(tinygettext)
 
 if (NOT MINIZIP_STATIC_LIBRARIES)
