@@ -477,7 +477,7 @@ void SoundHandler::change_music(const std::string& songset_name, int const fadeo
 		if (songset_name == Songset::kIngame && use_custom_songset_instead_ingame_) {
 			current_songset_ = Songset::kCustom;
 		} else if (songset_name == Songset::kIntro) {
-			// Intro cannot be set in advance, because then its replacement by kIngame in
+			// Intro cannot be set in advance, because then its replacement by kMenu in
 			// WLApplication::poll_event() would be triggered when the previous song ends.
 			intro_scheduled_ = true;
 		} else {
