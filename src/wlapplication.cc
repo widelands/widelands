@@ -995,10 +995,14 @@ bool WLApplication::poll_event(SDL_Event& ev) const {
 			 * Usually, another song from the same songset will be started.
 			 * There is a special case for the intro music: it will only be played
 			 * once, then we switch to the in-game music.
+			 * TODO(tothxa): The intro music is currently unused. Various attempts
+			 *               to resurrect or repurpose it failed, because it is too
+			 *               long for a simple intro, but not long enough for a demo
+			 *               or a credits list.
 			 */
 			assert(!SoundHandler::is_backend_disabled());
 			if (g_sh->current_songset() == Songset::kIntro) {
-				g_sh->change_music(Songset::kIngame, 1000);
+				g_sh->change_music(Songset::kMenu, 500);
 			} else {
 				g_sh->change_music();
 			}

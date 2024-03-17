@@ -729,7 +729,7 @@ bool Game::run(StartGameType const start_game_type,
 		;
 #endif
 
-	g_sh->change_music(Songset::kIntro);
+	g_sh->change_music(Songset::kIngame);
 
 	state_ = gs_running;
 

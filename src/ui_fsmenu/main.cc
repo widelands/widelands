@@ -1009,7 +1009,6 @@ void MainMenu::action(const MenuTarget t) {
 			break;
 		}
 		menu_capsule_.clear_content();
-		// g_sh->change_music(Songset::kIngame, 1000);
 		new NetSetupLAN(menu_capsule_);
 		break;
 	case MenuTarget::kMetaserver: {
@@ -1033,7 +1032,6 @@ void MainMenu::action(const MenuTarget t) {
 			get_config_string("password_sha1", password_);
 		}
 
-		// g_sh->change_music(Songset::kIngame, 1000);
 		new InternetLobby(menu_capsule_, nickname_, password_, register_, tribeinfos);
 	} break;
 
