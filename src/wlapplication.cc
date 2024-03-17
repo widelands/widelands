@@ -997,10 +997,10 @@ bool WLApplication::poll_event(SDL_Event& ev) const {
 			 * once, then we switch to the in-game music.
 			 */
 			/* TODO(tothxa): The intro music is currently unused. Various attempts
-			 *               to resurrect or repurpose it failed, because it is too
-			 *               long for a simple intro, but not long enough for a demo
-			 *               or a credits list.
-			 */
+			                 to resurrect or repurpose it failed, because it is too
+			                 long for a simple intro, but not long enough for a demo
+			                 or a credits list.
+			*/
 			assert(!SoundHandler::is_backend_disabled());
 			if (g_sh->current_songset() == Songset::kIntro) {
 				g_sh->change_music(Songset::kMenu, 500);
