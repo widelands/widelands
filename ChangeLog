@@ -61,6 +61,7 @@
 - Implement `walk=<direction>` in worker programs (CB #4467 / GH #6149)
 - Pass correct parameter to lua_typename() (CB #4646 / GH #6282)
 - Add Lua APIs for Missing Bob Types (#6125): `PinnedNote`, `NavalInvasionBase`, `ShipFleetYardInterface`, `FerryFleetYardInterface`
+- Clarify use of spinbox parameters from Lua (CB #4734 / GH #6371)
 - Fix icons on dropdowns in Lua API (CB #4742 / GH #6379)
 
 
@@ -333,6 +334,7 @@
 - Make naval warfare a game flag, disabled by default (CB #4547 / GH #6205)
 - Don't send "known portspace" messages for ship underway to destination (CB #4655 / GH #6292)
 - Show total number of ships in seafaring stats menu (CB #4685 / GH #6322)
+- Fix duplicated setting name for replay shortcuts (CB #4721 / GH #6358)
 - Fix deadlock in mutex responsiveness code (CB #4726 / GH #6363)
 - Use unique names for map object windows (CB #4737 / GH #6374)
 - Speed up Wares Display Drawing (GH #6382 / CB #4744)
@@ -375,7 +377,6 @@
 - Add images to theme documentation for fonts and buttons (CB #4695 / GH #6332)
 - Lua doc about playernumber fixed (CB #4535 / GH #6193)
 - Turn function mentions into links in richtext.lua examples section (CB #4738 / GH #6375)
-- Clarify use of spinbox parameters from Lua (CB #4734 / GH #6371)
 
 
 ### Editor
@@ -521,7 +522,6 @@
     - Detect and break deadlocks
     - Refactor NoteThreadSafeFunction handling
 - Correct naval warfare rebasing artifacts (CB #4699)
-- Fix duplicated setting name for replay shortcuts (CB #4721 / GH #6358)
 - Refactor commandline handling (CB #4471 / GH #6154)
 
 
