@@ -1165,7 +1165,7 @@ msgstr "Značky:"
 #. * "Teams of 2", etc.
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:397
 msgid "This map is suitable for:"
-msgstr ""
+msgstr "Táto mapa je vhodná pre:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:399
 msgid ""
@@ -2261,7 +2261,7 @@ msgstr ""
 #: ../../src/logic/generic_save_handler.cc:236
 #, c-format
 msgid "File ‘%s’ could not be removed!"
-msgstr ""
+msgstr "Nepodarilo sa vymazať súbor „%s“!"
 
 #: ../../src/logic/generic_save_handler.cc:237
 msgid "Try saving under a different name!"
@@ -3572,10 +3572,10 @@ msgstr "UPOZORNENIE: Prijal sa príkaz %s, hoci nie sme v stave CONNECTING."
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Časový posun servera je %d sekunda."
+msgstr[1] "Časový posun servera sú %d sekundy."
+msgstr[2] "Časový posun servera je %d sekúnd."
+msgstr[3] "Časový posun servera je %d sekúnd."
 
 #: ../../src/network/internet_gaming.cc:509
 #, c-format
@@ -3612,7 +3612,7 @@ msgstr "Nepodarilo sa odoslať chatovú správu."
 
 #: ../../src/network/internet_gaming.cc:674
 msgid "Command could not be executed."
-msgstr ""
+msgstr "Nepodarilo sa vykonať príkaz."
 
 #: ../../src/network/internet_gaming.cc:692
 #, c-format
@@ -3993,7 +3993,7 @@ msgstr ""
 #: ../../src/ui_basic/dropdown.cc:111
 msgctxt "dropdown"
 msgid "Select Item"
-msgstr ""
+msgstr "Vybrať položku"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
 #: ../../src/ui_basic/dropdown.cc:422
@@ -5220,7 +5220,7 @@ msgstr "Naozaj chcete vymazať adresár „%s“ a všetok jeho obsah?"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:441
 #, c-format
 msgid "Do you really want to delete the map ‘%s’?"
-msgstr "Naozaj chcete zmazať mapu „%s“?"
+msgstr "Naozaj chcete vymazať mapu „%s“?"
 
 #. * TRANSLATORS: Header for campaign difficulty
 #: ../../src/ui_fsmenu/addons/packager_box.cc:489
@@ -6097,7 +6097,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_game.cc:310
 msgid "Forbid fighting between players"
-msgstr ""
+msgstr "Zakázané boje medzi hráčmi"
 
 #: ../../src/ui_fsmenu/launch_game.cc:340
 msgid "All selected starting conditions ignore the map’s starting positions"
@@ -7020,7 +7020,7 @@ msgstr "Maximálny počet súborov pre automatické ukladanie:"
 
 #: ../../src/ui_fsmenu/options.cc:253
 msgid "Delete replays after:"
-msgstr "Vymazať záznamy po:"
+msgstr "Vymazať záznamy po dobe:"
 
 #: ../../src/ui_fsmenu/options.cc:263
 msgid "Skip autosaves while inactive"
@@ -7856,7 +7856,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:541
 msgid "Toggle Grid"
-msgstr ""
+msgstr "Prepnúť mriežku"
 
 #: ../../src/wlapplication_options.cc:546
 msgid "Toggle Immovables"
@@ -7864,11 +7864,11 @@ msgstr "Prepnúť nehybné objekty"
 
 #: ../../src/wlapplication_options.cc:551
 msgid "Toggle Animals"
-msgstr ""
+msgstr "Prepnúť zvieratá"
 
 #: ../../src/wlapplication_options.cc:556
 msgid "Toggle Resources"
-msgstr ""
+msgstr "Prepnúť zdroje"
 
 #: ../../src/wlapplication_options.cc:562
 msgid "Toggle Maximum Build Spaces"
@@ -9551,10 +9551,10 @@ msgstr[3] "%d súborov"
 #: ../../src/wui/gamedetails.cc:119
 msgid "Selected %1% directory and %2%:"
 msgid_plural "Selected %1% directories and %2%:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Vybratý %1% adresár a %2%:"
+msgstr[1] "Vybraté %1% adresáre a %2%:"
+msgstr[2] "Vybratých %1% adresárov a %2%:"
+msgstr[3] "Vybratých %1% adresárov a %2%:"
 
 #: ../../src/wui/gamedetails.cc:137
 msgid "Directory Name:"
@@ -10392,10 +10392,10 @@ msgstr "Naozaj chcete vymazať túto hru?"
 #, c-format
 msgid "Do you really want to delete this %d game?"
 msgid_plural "Do you really want to delete these %d games?"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naozaj chcete vymazať túto %d hru?"
+msgstr[1] "Naozaj chcete vymazať tieto %d hry?"
+msgstr[2] "Naozaj chcete vymazať týchto %d hier?"
+msgstr[3] "Naozaj chcete vymazať týchto %d hier?"
 
 #: ../../src/wui/savegamedeleter.cc:96
 msgid "Error Deleting File!"
@@ -10407,7 +10407,7 @@ msgstr ""
 
 #: ../../src/wui/savegamedeleter.cc:108
 msgid "The game could not be deleted."
-msgstr ""
+msgstr "Nepodarilo sa vymazať hru."
 
 #. * TRANSLATORS: Used with multiple games, 1 game has a separate string. DO
 #. NOT omit the
@@ -10416,10 +10416,10 @@ msgstr ""
 #, c-format
 msgid "%d game could not be deleted."
 msgid_plural "%d games could not be deleted."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Nepodarilo sa vymazať %d hru."
+msgstr[1] "Nepodarilo sa vymazať %d hry."
+msgstr[2] "Nepodarilo sa vymazať %d hier."
+msgstr[3] "Nepodarilo sa vymazať %d hier."
 
 #: ../../src/wui/savegamedeleter.cc:124
 msgid "Do you really want to delete this replay?"
@@ -10431,14 +10431,14 @@ msgstr "Naozaj chcete vymazať tento záznam?"
 #, c-format
 msgid "Do you really want to delete this %d replay?"
 msgid_plural "Do you really want to delete these %d replays?"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naozaj chcete vymazať tento %d záznam?"
+msgstr[1] "Naozaj chcete vymazať tieto %d záznamy?"
+msgstr[2] "Naozaj chcete vymazať týchto %d záznamov?"
+msgstr[3] "Naozaj chcete vymazať týchto %d záznamov?"
 
 #: ../../src/wui/savegamedeleter.cc:137
 msgid "The replay could not be deleted."
-msgstr ""
+msgstr "Nepodarilo sa vymazať záznam."
 
 #. * TRANSLATORS: Used with multiple replays, 1 replay has a separate string.
 #. DO NOT omit the
@@ -10447,10 +10447,10 @@ msgstr ""
 #, c-format
 msgid "%d replay could not be deleted."
 msgid_plural "%d replays could not be deleted."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Nepodarilo sa vymazať %d záznam."
+msgstr[1] "Nepodarilo sa vymazať %d záznamy."
+msgstr[2] "Nepodarilo sa vymazať %d záznamov."
+msgstr[3] "Nepodarilo sa vymazať %d záznamov."
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
