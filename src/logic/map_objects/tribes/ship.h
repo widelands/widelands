@@ -26,6 +26,7 @@
 #include "economy/shippingitem.h"
 #include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
+#include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/tribes/shipstates.h"
 
 namespace Widelands {
@@ -56,7 +57,9 @@ struct NoteShip {
 
 class ShipDescr : public BobDescr {
 public:
-	ShipDescr(const std::string& init_descname, const LuaTable& t);
+	ShipDescr(const std::string& init_descname,
+	          const LuaTable& t,
+	          Widelands::Descriptions& descriptions);
 	~ShipDescr() override = default;
 
 	[[nodiscard]] Bob& create_object() const override;
@@ -74,6 +77,10 @@ public:
 		return ship_names_;
 	}
 
+	[[nodiscard]] const Buildcost& get_refit_cost() const {
+		return refit_cost_;
+	}
+
 	const uint32_t max_hitpoints_;
 	const uint32_t min_attack_;
 	const uint32_t max_attack_;
@@ -82,6 +89,7 @@ public:
 	const uint32_t heal_per_second_;
 
 private:
+	const Buildcost refit_cost_;
 	DirAnimations sail_anims_;
 	Quantity default_capacity_;
 	std::vector<std::string> ship_names_;
@@ -147,6 +155,8 @@ struct Ship : Bob {
 	void start_task_ship(Game&);
 	bool start_task_movetodock(Game&, PortDock&);
 	void start_task_expedition(Game&);
+	void start_task_refit_to_warship(Game& game);
+	void start_task_refit_to_transport(Game& game);
 
 	struct Battle {
 		enum class Phase : uint8_t {
@@ -332,7 +342,6 @@ struct Ship : Bob {
 	[[nodiscard]] inline bool is_refitting() const {
 		return get_pending_refit() != get_ship_type();
 	}
-	void refit(Game&, ShipType);
 
 	void set_soldier_preference(SoldierPreference pref);
 	[[nodiscard]] SoldierPreference get_soldier_preference() const {
@@ -368,8 +377,12 @@ private:
 	void ship_update(Game&, State&);
 	void ship_wakeup(Game&);
 
+	void heal(Game& game);
+
 	bool ship_update_transport(Game&, State&);
 	bool ship_update_expedition(Game&, State&);
+	void ship_update_refit_to_warship(Game&);
+	void ship_update_refit_to_transport(Game&);
 	void ship_update_idle(Game&, State&);
 	void battle_update(Game&);
 	void update_warship_soldier_request(bool create);
@@ -440,6 +453,10 @@ private:
 	std::deque<Battle> battles_;
 	uint32_t hitpoints_;
 	Time last_heal_time_{0U};
+	Time refit_start_time_{};
+	uint32_t refit_percent_{0};
+	Worker* refit_worker_{nullptr};
+
 	bool send_message_at_destination_{false};
 
 	Quantity capacity_;

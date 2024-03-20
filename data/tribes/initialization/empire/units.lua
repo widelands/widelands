@@ -2754,6 +2754,7 @@ wl.Descriptions():new_tribe {
 
    -- Special types
    builder = "empire_builder",
+   shipwright = "empire_shipwright",
    carriers = {"empire_carrier", "empire_donkey"},
    geologist = "empire_geologist",
    scouts_house = "empire_scouts_house",

@@ -31,6 +31,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/shipstates.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/message_queue.h"
@@ -451,7 +452,7 @@ public:
 	void bulldoze(PlayerImmovable&, bool recurse = false);
 	void flagaction(Flag&, FlagJob::Type);
 	void start_stop_building(PlayerImmovable&);
-	void start_or_cancel_expedition(const Warehouse&);
+	void start_or_cancel_expedition(const Warehouse&, ExpeditionType);
 	void enhance_building(Building*, DescriptionIndex index_of_new_building, bool keep_wares);
 	void dismantle_building(Building*, bool keep_wares);
 

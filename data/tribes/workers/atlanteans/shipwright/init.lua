@@ -20,7 +20,7 @@ wl.Descriptions():new_worker_type {
          "walk=object-or-coords",
          "plant=attrib:atlanteans_shipconstruction unless object",
          "playsound=sound/sawmill/sawmill priority:80% allow_multiple",
-         "animate=idle duration:500ms",
+         "animate=work duration:500ms",
          "construct",
          "animate=idle duration:5s",
          "return"
@@ -28,14 +28,20 @@ wl.Descriptions():new_worker_type {
       buildferry = {
          "findspace=size:swim radius:5 ferry",
          "walk=coords",
-         "animate=idle duration:10s",
+         "animate=work duration:10s",
          "createbob=atlanteans_ferry",
          "return"
       },
    },
 
    spritesheets = {
-        idle = {
+      idle = {
+         frames = 1,
+         rows = 1,
+         columns = 1,
+         hotspot = { 8, 25 },
+      },
+      work = {
          sound_effect = {
             path = "sound/hammering/hammering",
             priority = "50%"
@@ -46,7 +52,7 @@ wl.Descriptions():new_worker_type {
          columns = 9,
          hotspot = { 11, 27 }
       },
-        walk = {
+      walk = {
          fps = 10,
          frames = 10,
          rows = 4,

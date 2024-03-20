@@ -104,8 +104,10 @@ public:
 	[[nodiscard]] ImmovableDescr const* get_immovable_descr(const DescriptionIndex& index) const;
 	[[nodiscard]] WareDescr const* get_ware_descr(const DescriptionIndex& index) const;
 	[[nodiscard]] WorkerDescr const* get_worker_descr(const DescriptionIndex& index) const;
+	[[nodiscard]] ShipDescr const* get_ship_descr() const;
 
 	[[nodiscard]] DescriptionIndex builder() const;
+	[[nodiscard]] DescriptionIndex shipwright() const;
 	[[nodiscard]] DescriptionIndex geologist() const;
 	[[nodiscard]] DescriptionIndex scouts_house() const;
 	[[nodiscard]] DescriptionIndex soldier() const;
@@ -268,6 +270,7 @@ private:
 	std::set<DescriptionIndex> construction_materials_;
 	// Special units. Some of them are used by the engine, some are only used by the AI.
 	DescriptionIndex builder_;                // The builder for this tribe
+	DescriptionIndex shipwright_;             // The shipwright for this tribe
 	std::vector<DescriptionIndex> carriers_;  // The basic and advanced carriers for this tribe
 	DescriptionIndex geologist_;              // This tribe's geologist worker
 	DescriptionIndex soldier_;                // The soldier that this tribe uses

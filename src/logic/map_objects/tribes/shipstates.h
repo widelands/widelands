@@ -62,6 +62,12 @@ enum class WarshipCommand : uint8_t {
 	kSetCapacity = 2,
 };
 
+enum class ExpeditionType : uint8_t {
+	kNone = 0,
+	kExpedition = 1,
+	kRefitToWarship = 2,
+};
+
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_SHIPSTATES_H
