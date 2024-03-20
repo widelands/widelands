@@ -122,6 +122,10 @@ void fill_parameter_vector() {
 	  {"", "play_intro_music", _("[true*|false]"),
 		_("Play the intro music at startup and show splash image until it ends."), true},
 	  {"", "fail-on-lua-error", "", _("Force Widelands to crash when a Lua error occurs."), false},
+	  {"", "messagebox-timeout",
+	   /** TRANSLATORS: Placeholder for a time value in seconds */
+	   _("<seconds>"),
+	   _("Automatically close modal message boxes after the given number of seconds time."), true},
 	  {"", "replay_lifetime", _("n"), _("Delete replays automatically after `n` weeks."), true},
 	  {"", "ai_training", "",
 		_("Enable AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ for a full "

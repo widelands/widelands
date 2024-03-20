@@ -19,10 +19,13 @@
 #include "wui/story_message_box.h"
 
 #include <SDL_mouse.h>
+#include <SDL_timer.h>
 
+#include "base/log.h"
 #include "logic/game_controller.h"
 #include "logic/save_handler.h"
 #include "ui_basic/button.h"
+#include "ui_basic/messagebox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "wui/interactive_player.h"
 
@@ -90,7 +93,8 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
                 _("Return to the main menu")),
      desired_speed_(game->game_controller()->desired_speed()),
      modal_(modal),
-     game_(game) {
+     game_(game),
+     start_time_(SDL_GetTicks()) {
 
 	// Pause the game
 	game_->game_controller()->set_desired_speed(0);
@@ -202,4 +206,11 @@ bool StoryMessageBox::handle_key(bool down, SDL_Keysym code) {
 		}
 	}
 	return UI::Window::handle_key(down, code);
+}
+
+void StoryMessageBox::think() {
+	if (is_modal() && g_message_box_timeout > 0 &&
+	    SDL_GetTicks() > start_time_ + g_message_box_timeout) {
+		clicked_ok();
+	}
 }

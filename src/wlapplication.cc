@@ -1701,6 +1701,31 @@ void WLApplication::handle_commandline_parameters() {
 		g_fail_on_lua_error = true;
 	}
 
+	if (OptionalParameter msg_timeout = get_commandline_option_value("messagebox-timeout");
+	    msg_timeout.has_value()) {
+		char* endp;
+		long t = strtol(msg_timeout.value().c_str(), &endp, 10);
+		if (*endp != 0) {
+			throw ParameterError(
+			   CmdLineVerbosity::None,
+			   format(_("Non-integer value for command line parameter --messagebox-timeout=%s"),
+			          msg_timeout.value()));
+		}
+		if (t <= 0) {
+			throw ParameterError(CmdLineVerbosity::None,
+			   ("Value for command line parameter --messagebox-timeout must be positive."));
+		}
+
+		g_message_box_timeout = 1000 * t;
+		if (g_message_box_timeout / 1000 != t) {
+			g_message_box_timeout = 0;
+			throw ParameterError(
+			   CmdLineVerbosity::None,
+			   format(_("Value is out of range for command line parameter --messagebox-timeout=%s"),
+			          msg_timeout.value()));
+		}
+	}
+
 	// Mutually exclusive options.
 	// These would be better as e.g. "--use_zip=[true|false]", but then we'd have to negate the
 	// boolean value stored in the string, but trueWords and falseWords are hidden in io/profile.cc.
