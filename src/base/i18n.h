@@ -85,7 +85,6 @@ void release_textdomain();
 void init_locale();
 void set_locale(const std::string&);
 const std::string& get_locale();
-const std::string& get_locale_or_default();
 
 void set_localedir(const std::string&);
 const std::string& get_localedir();

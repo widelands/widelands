@@ -106,7 +106,7 @@ private:
 			return nullptr;
 		}
 
-		const std::string& lang_to_use = get_locale_or_default();
+		const std::string& lang_to_use = get_locale();
 		if (auto it = dictionary_pointer->dictionaries.find(lang_to_use);
 		    it != dictionary_pointer->dictionaries.end()) {
 			return it->second;
@@ -274,9 +274,6 @@ void set_locale(const std::string& name) {
 	locale = name;
 }
 const std::string& get_locale() {
-	return locale;
-}
-const std::string& get_locale_or_default() {
 	return locale.empty() ? env_locale : locale;
 }
 
