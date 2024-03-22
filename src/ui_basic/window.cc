@@ -33,29 +33,8 @@
 
 namespace UI {
 
-/// Width the horizontal border graphics must have.
-constexpr int16_t kHorizonalBorderTotalLength = 100;
-
 constexpr int16_t kWindowTitlebarButtonsSize = 18;
 constexpr int16_t kWindowTitlebarButtonsSpacing = 1;
-// Used for both vertical and horizontal position finetuning
-constexpr int16_t kWindowTitlebarButtonsPos =
-   (Window::kTopBorderThickness + kWindowTitlebarButtonsSize) / -2;
-
-/// Width to use as the corner. This must be >= kVerticalBorderThickness.
-constexpr int16_t kCornerWidth = 20;
-
-constexpr int16_t kHorizontalBorderMiddleLength(kHorizonalBorderTotalLength - 2 * kCornerWidth);
-
-/// Height the vertical border graphics must have
-constexpr int16_t kVerticalBorderTotalLength = 100;
-
-/// Height to use as the thingy.
-// TODO(Nordfriese): What is this?
-constexpr int16_t kVerticalBorderThingyHeight = 20;
-
-constexpr int16_t kVerticalBorderMiddleLength =
-   (kVerticalBorderTotalLength - 2 * kVerticalBorderThingyHeight);
 
 /**
  * Initialize a framed window.
@@ -82,11 +61,11 @@ Window::Window(Panel* const parent,
            name,
            x,
            y,
-           w + kVerticalBorderThickness * 2,
-           kTopBorderThickness + h + kBottomBorderThickness),
+           w + g_style_manager->window_style(s).left_border_thickness() + g_style_manager->window_style(s).right_border_thickness(),
+           h + g_style_manager->window_style(s).top_border_thickness() + g_style_manager->window_style(s).bottom_border_thickness()),
      window_style_(s),
 
-     oldh_(kTopBorderThickness + h + kBottomBorderThickness),
+     oldh_(h + g_style_manager->window_style(s).top_border_thickness() + g_style_manager->window_style(s).bottom_border_thickness()),
 
      button_close_(new Button(
         this,
@@ -139,8 +118,7 @@ Window::Window(Panel* const parent,
 	});
 	update_toolbar_buttons();
 
-	set_border(kVerticalBorderThickness, kVerticalBorderThickness, kTopBorderThickness,
-	           kBottomBorderThickness);
+	set_border(window_style_info().left_border_thickness(), window_style_info().right_border_thickness(), window_style_info().top_border_thickness(), window_style_info().bottom_border_thickness());
 	set_top_on_click(true);
 	set_layout_toplevel(true);
 	set_snap_target(true);
@@ -222,12 +200,15 @@ void Window::layout() {
 		center_panel_->set_pos(Vector2i::zero());
 		center_panel_->set_size(get_inner_w(), get_inner_h());
 	}
+
+	const int16_t buttons_pos = (get_tborder() + kWindowTitlebarButtonsSize) / -2;
+
 	button_close_->set_pos(Vector2i(
-	   get_w() + kWindowTitlebarButtonsPos - kTopBorderThickness, kWindowTitlebarButtonsPos));
-	button_pin_->set_pos(Vector2i(kWindowTitlebarButtonsPos, kWindowTitlebarButtonsPos));
+	   get_w() + buttons_pos - get_tborder(), buttons_pos));
+	button_pin_->set_pos(Vector2i(buttons_pos, buttons_pos));
 	button_minimize_->set_pos(
 	   Vector2i(button_pin_->get_x() + button_pin_->get_w() + kWindowTitlebarButtonsSpacing,
-	            kWindowTitlebarButtonsPos));
+	            buttons_pos));
 }
 
 /**
@@ -284,10 +265,10 @@ void Window::move_out_of_the_way() {
 			if (parent_is_main) {
 				if (toolbar_at_bottom) {
 					need_check_popups =
-					   mouse.y + get_h() / 2 - kBottomBorderThickness > ph - max_popup_h;
+					   mouse.y + get_h() / 2 - get_bborder() > ph - max_popup_h;
 				} else {
 					need_check_popups =
-					   mouse.y - get_h() / 2 + kTopBorderThickness < toolbar_top_h + max_popup_h;
+					   mouse.y - get_h() / 2 + get_tborder() < toolbar_top_h + max_popup_h;
 				}
 			}
 
@@ -306,7 +287,7 @@ void Window::move_out_of_the_way() {
 		ny -= get_h() / 2;
 	} else {
 		const int max_popup_h_bottom =
-		   toolbar_bottom_h > 0 ? (max_popup_h - kBottomBorderThickness) : 0;
+		   toolbar_bottom_h > 0 ? (max_popup_h - get_bborder()) : 0;
 		if (mouse.y + kClearance + get_h() + max_popup_h_bottom < ph || mouse.y < ph / 2) {
 			ny += kClearance;
 		} else {
@@ -364,12 +345,12 @@ void Window::move_inside_parent() {
 			if (px < 0) {
 				px = 0;
 				if (parent->get_dock_windows_to_edges()) {
-					px -= kVerticalBorderThickness;
+					px -= get_lborder();
 				}
 			} else if (px + get_w() >= parent->get_inner_w()) {
 				px = parent->get_inner_w() - get_w();
 				if (parent->get_dock_windows_to_edges()) {
-					px += kVerticalBorderThickness;
+					px += get_rborder();
 				}
 			}
 		}
@@ -388,7 +369,7 @@ void Window::move_inside_parent() {
 			           py + get_h() > p_bottom) {
 				py = p_bottom - get_h();
 				if (!is_minimal_ && toolbar_bottom_h == 0 && parent->get_dock_windows_to_edges()) {
-					py += kBottomBorderThickness;
+					py += get_bborder();
 				}
 			}
 		}
@@ -424,154 +405,126 @@ void Window::draw(RenderTarget& dst) {
  * Redraw the window frame
  */
 void Window::draw_border(RenderTarget& dst) {
-	static_assert(
-	   kCornerWidth >= kVerticalBorderThickness, "kCornerWidth < kVerticalBorderThickness");
-	static_assert(kHorizontalBorderMiddleLength > 0, "kHorizontalBorderMiddleLength <= 0");
-
-	const int32_t hz_bar_end = get_w() - kCornerWidth;
-	const int32_t hz_bar_end_minus_middle = hz_bar_end - kHorizontalBorderMiddleLength;
-
 	const RGBAColor& focus_color =
 	   ((get_parent() != nullptr) && get_parent()->focused_child() == this) || is_modal() ?
          window_style_info().window_border_focused() :
          window_style_info().window_border_unfocused();
 
-	{  //  Top border.
-		int32_t pos = kCornerWidth;
+	{  // Top border
+		const int img_len_total = window_style_info().border_top()->width();
+		const int corner_width = img_len_total > 2 * get_tborder() ? get_tborder() : 0;
+		const int border_x1 = corner_width;
+		const int border_x2 = get_w() - corner_width;
+		const int img_len_inner = img_len_total - 2 * corner_width;
 
-		dst.blitrect  //  top left corner
-		   (Vector2i::zero(), window_style_info().border_top(),
-		    Recti(Vector2i::zero(), pos, kTopBorderThickness));
+		// Left corner
+		dst.blitrect(Vector2i::zero(), window_style_info().border_top(), Recti(Vector2i::zero(), border_x1, corner_width));
 
-		//  top bar
-		static_assert(0 <= kCornerWidth, "assert(0 <= kCornerWidth) failed.");
-		for (; pos < hz_bar_end_minus_middle; pos += kHorizontalBorderMiddleLength) {
-			dst.blitrect(
-			   Vector2i(pos, 0), window_style_info().border_top(),
-			   Recti(Vector2i(kCornerWidth, 0), kHorizontalBorderMiddleLength, kTopBorderThickness));
+		// Middle
+		int pos = border_x1;
+		for (; pos + img_len_inner < border_x2; pos += img_len_inner) {
+			dst.blitrect(Vector2i(pos, 0), window_style_info().border_top(), Recti(Vector2i(corner_width, 0), img_len_inner, get_tborder()));
 		}
 
-		// odd pixels of top bar and top right corner
-		const int32_t width = hz_bar_end - pos + kCornerWidth;
-		assert(0 <= kHorizonalBorderTotalLength - width);
-		dst.blitrect(
-		   Vector2i(pos, 0), window_style_info().border_top(),
-		   Recti(Vector2i(kHorizonalBorderTotalLength - width, 0), width, kTopBorderThickness));
+		// Trailing pixels at the right
+		dst.blitrect(Vector2i(pos, 0), window_style_info().border_top(), Recti(Vector2i(corner_width, 0), border_x2 - pos, get_tborder()));
 
-		// Focus overlay
-		dst.fill_rect(Recti(0, 0, get_w(), kTopBorderThickness), focus_color, BlendMode::Default);
+		// Right corner
+		dst.blitrect(Vector2i(border_x2, 0), window_style_info().border_top(), Recti(Vector2i(img_len_total - corner_width, 0), corner_width, get_tborder()));
 	}
+
+	if (!is_minimal()) {
+		{  // Bottom border
+			const int img_len_total = window_style_info().border_bottom()->width();
+			const int corner_width = img_len_total > 2 * get_bborder() ? get_bborder() : 0;
+			const int border_y = get_h() - get_bborder();
+			const int border_x1 = corner_width;
+			const int border_x2 = get_w() - corner_width;
+			const int img_len_inner = img_len_total - 2 * corner_width;
+
+			// Left corner
+			dst.blitrect(Vector2i(0, border_y), window_style_info().border_bottom(), Recti(Vector2i::zero(), border_x1, corner_width));
+
+			// Middle
+			int pos = border_x1;
+			for (; pos + img_len_inner < border_x2; pos += img_len_inner) {
+				dst.blitrect(Vector2i(pos, border_y), window_style_info().border_bottom(), Recti(Vector2i(corner_width, 0), img_len_inner, get_bborder()));
+			}
+
+			// Trailing pixels at the right
+			dst.blitrect(Vector2i(pos, border_y), window_style_info().border_bottom(), Recti(Vector2i(corner_width, 0), border_x2 - pos, get_bborder()));
+
+			// Right corner
+			dst.blitrect(Vector2i(border_x2, border_y), window_style_info().border_bottom(), Recti(Vector2i(img_len_total - corner_width, 0), corner_width, get_bborder()));
+		}
+
+		{  // Left border
+			const int img_len = window_style_info().border_left()->height();
+			const int border_y1 = get_tborder();
+			const int border_y2 = get_h() - get_bborder();
+
+			// Middle
+			int pos = border_y1;
+			for (; pos + img_len < border_y2; pos += img_len) {
+				dst.blitrect(Vector2i(0, pos), window_style_info().border_left(), Recti(Vector2i::zero(), get_lborder(), img_len));
+			}
+
+			// Trailing pixels at the bottom
+			dst.blitrect(Vector2i(0, pos), window_style_info().border_left(), Recti(Vector2i::zero(), get_lborder(), border_y2 - pos));
+		}
+
+		{  // Right border
+			const int img_len = window_style_info().border_right()->height();
+			const int border_x = get_w() - get_rborder();
+			const int border_y1 = get_tborder();
+			const int border_y2 = get_h() - get_bborder();
+
+			// Middle
+			int pos = border_y1;
+			for (; pos + img_len < border_y2; pos += img_len) {
+				dst.blitrect(Vector2i(border_x, pos), window_style_info().border_right(), Recti(Vector2i::zero(), get_rborder(), img_len));
+			}
+
+			// Trailing pixels at the bottom
+			dst.blitrect(Vector2i(border_x, pos), window_style_info().border_right(), Recti(Vector2i::zero(), get_rborder(), border_y2 - pos));
+		}
+
+		// Focus overlays
+		// Bottom
+		dst.fill_rect(Recti(0, get_h() - get_bborder(), get_w(), get_bborder()),
+		              focus_color, BlendMode::Default);
+		// Left
+		dst.fill_rect(Recti(0, get_tborder(), get_lborder(),
+		                    get_h() - get_tborder() - get_bborder()),
+		              focus_color, BlendMode::Default);
+		// Right
+		dst.fill_rect(
+		   Recti(get_w() - get_rborder(), get_tborder(), get_rborder(),
+		         get_h() - get_tborder() - get_bborder()),
+		   focus_color, BlendMode::Default);
+
+	}  // end if (!is_minimal())
+
+	// Top focus overlays
+	dst.fill_rect(Recti(0, 0, get_w(), get_tborder()), focus_color, BlendMode::Default);
 
 	// draw the title if we have one
 	if (!title_.empty()) {
 		// The title shouldn't be richtext, but we escape it just to make sure.
 		std::shared_ptr<const UI::RenderedText> text =
-		   autofit_text(richtext_escape(title_), title_style(), get_inner_w() - kTopBorderThickness);
+		   autofit_text(richtext_escape(title_), title_style(), get_inner_w() - get_tborder());
 
 		Vector2i pos(
-		   get_lborder() + (get_inner_w() + kTopBorderThickness) / 2, kTopBorderThickness / 2);
+		   get_lborder() + (get_inner_w() + get_tborder()) / 2, get_tborder() / 2);
 		UI::center_vertically(text->height(), &pos);
 		text->draw(dst, pos, UI::Align::kCenter);
 	}
 
-	if (!is_minimal_) {
-		const int32_t vt_bar_end = get_h() - kBottomBorderThickness - kVerticalBorderThingyHeight;
-		const int32_t vt_bar_end_minus_middle = vt_bar_end - kVerticalBorderMiddleLength;
-
-		{  // Left border
-
-			static_assert(
-			   0 <= kVerticalBorderThickness, "assert(0 <= kVerticalBorderThickness) failed.");
-			dst.blitrect  // left top thingy
-			   (Vector2i(0, kTopBorderThickness), window_style_info().border_left(),
-			    Recti(Vector2i::zero(), kVerticalBorderThickness, kVerticalBorderThingyHeight));
-
-			int32_t pos = kTopBorderThickness + kVerticalBorderThingyHeight;
-
-			//  left bar
-			static_assert(
-			   0 <= kVerticalBorderThingyHeight, "assert(0 <= kVerticalBorderThingyHeight) failed.");
-			for (; pos < vt_bar_end_minus_middle; pos += kVerticalBorderMiddleLength) {
-				dst.blitrect(Vector2i(0, pos), window_style_info().border_left(),
-				             Recti(Vector2i(0, kVerticalBorderThingyHeight), kVerticalBorderThickness,
-				                   kVerticalBorderMiddleLength));
-			}
-
-			//  odd pixels of left bar and left bottom thingy
-			const int32_t height = vt_bar_end - pos + kVerticalBorderThingyHeight;
-			assert(0 <= kVerticalBorderTotalLength - height);
-			dst.blitrect(Vector2i(0, pos), window_style_info().border_left(),
-			             Recti(Vector2i(0, kVerticalBorderTotalLength - height),
-			                   kVerticalBorderThickness, height));
-		}
-
-		{  // Right border
-			const int32_t right_border_x = get_w() - kVerticalBorderThickness;
-
-			dst.blitrect  // right top thingy
-			   (Vector2i(right_border_x, kTopBorderThickness), window_style_info().border_right(),
-			    Recti(Vector2i::zero(), kVerticalBorderThickness, kVerticalBorderThingyHeight));
-
-			int32_t pos = kTopBorderThickness + kVerticalBorderThingyHeight;
-
-			//  right bar
-			static_assert(
-			   0 <= kVerticalBorderThingyHeight, "assert(0 <= kVerticalBorderThingyHeight) failed.");
-			for (; pos < vt_bar_end_minus_middle; pos += kVerticalBorderMiddleLength) {
-				dst.blitrect(Vector2i(right_border_x, pos), window_style_info().border_right(),
-				             Recti(Vector2i(0, kVerticalBorderThingyHeight), kVerticalBorderThickness,
-				                   kVerticalBorderMiddleLength));
-			}
-
-			// odd pixels of right bar and right bottom thingy
-			const int32_t height = vt_bar_end - pos + kVerticalBorderThingyHeight;
-			dst.blitrect(Vector2i(right_border_x, pos), window_style_info().border_right(),
-			             Recti(Vector2i(0, kVerticalBorderTotalLength - height),
-			                   kVerticalBorderThickness, height));
-		}
-
-		{  // Bottom border
-			int32_t pos = kCornerWidth;
-
-			dst.blitrect  //  bottom left corner
-			   (Vector2i(0, get_h() - kBottomBorderThickness), window_style_info().border_bottom(),
-			    Recti(Vector2i::zero(), pos, kBottomBorderThickness));
-
-			//  bottom bar
-			for (; pos < hz_bar_end_minus_middle; pos += kHorizontalBorderMiddleLength) {
-				dst.blitrect(Vector2i(pos, get_h() - kBottomBorderThickness),
-				             window_style_info().border_bottom(),
-				             Recti(Vector2i(kCornerWidth, 0), kHorizontalBorderMiddleLength,
-				                   kBottomBorderThickness));
-			}
-
-			// odd pixels of bottom bar and bottom right corner
-			const int32_t width = hz_bar_end - pos + kCornerWidth;
-			dst.blitrect(
-			   Vector2i(pos, get_h() - kBottomBorderThickness), window_style_info().border_bottom(),
-			   Recti(Vector2i(kHorizonalBorderTotalLength - width, 0), width, kBottomBorderThickness));
-		}
-
-		// Focus overlays
-		// Bottom
-		dst.fill_rect(Recti(0, get_h() - kBottomBorderThickness, get_w(), kBottomBorderThickness),
-		              focus_color, BlendMode::Default);
-		// Left
-		dst.fill_rect(Recti(0, kTopBorderThickness, kVerticalBorderThickness,
-		                    get_h() - kTopBorderThickness - kBottomBorderThickness),
-		              focus_color, BlendMode::Default);
-		// Right
-		dst.fill_rect(
-		   Recti(get_w() - kVerticalBorderThickness, kTopBorderThickness, kVerticalBorderThickness,
-		         get_h() - kTopBorderThickness - kBottomBorderThickness),
-		   focus_color, BlendMode::Default);
-	}
-
 	// draw them again so they aren't hidden by the border
 	for (Button* b : {button_close_, button_pin_, button_minimize_}) {
-		b->set_pos(Vector2i(b->get_x() + kTopBorderThickness, b->get_y() + kTopBorderThickness));
+		b->set_pos(Vector2i(b->get_x() + get_tborder(), b->get_y() + get_tborder()));
 		b->do_draw(dst);
-		b->set_pos(Vector2i(b->get_x() - kTopBorderThickness, b->get_y() - kTopBorderThickness));
+		b->set_pos(Vector2i(b->get_x() - get_tborder(), b->get_y() - get_tborder()));
 	}
 }
 
@@ -590,7 +543,7 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
 	if ((((SDL_GetModState() & KMOD_CTRL) != 0) && btn == SDL_BUTTON_LEFT &&
-	     my < kVerticalBorderThickness) ||
+	     my < get_tborder()) ||
 	    btn == SDL_BUTTON_MIDDLE) {
 		is_minimal() ? restore() : minimize();
 	} else if (btn == SDL_BUTTON_LEFT) {
@@ -671,7 +624,7 @@ Window::~Window() {
 void Window::restore() {
 	assert(is_minimal_);
 	is_minimal_ = false;
-	set_border(get_lborder(), get_rborder(), get_tborder(), kBottomBorderThickness);
+	set_border(get_lborder(), get_rborder(), get_tborder(), window_style_info().bottom_border_thickness());
 	set_inner_size(get_inner_w(), oldh_);
 	update_desired_size();
 	move_inside_parent();
@@ -688,7 +641,7 @@ void Window::minimize() {
 	oldh_ = get_inner_h();
 	is_minimal_ = true;
 	set_border(get_lborder(), get_rborder(), get_tborder(), 0);
-	set_size(get_w(), kTopBorderThickness);
+	set_size(get_w(), window_style_info().top_border_thickness());
 	set_pos(Vector2i(x, y));  // If on border, this feels more natural
 	set_handle_keypresses(false);
 	update_toolbar_buttons();
@@ -819,15 +772,15 @@ bool Window::handle_mousemove(
 			}
 
 			if (parent->get_dock_windows_to_edges()) {
-				if (new_left <= 0 && new_left >= -kVerticalBorderThickness) {
-					new_left = -kVerticalBorderThickness;
+				if (new_left <= 0 && new_left >= -get_lborder()) {
+					new_left = -get_lborder();
 				}
-				if (new_left >= (max_x - w) && new_left <= (max_x - w) + kVerticalBorderThickness) {
-					new_left = (max_x - w) + kVerticalBorderThickness;
+				if (new_left >= (max_x - w) && new_left <= (max_x - w) + get_rborder()) {
+					new_left = (max_x - w) + get_rborder();
 				}
 				if (!is_minimal_) {  //  minimal windows can not be bottom-docked
-					if (new_top >= (max_y - h) && new_top <= (max_y - h) + kBottomBorderThickness) {
-						new_top = (max_y - h) + kBottomBorderThickness;
+					if (new_top >= (max_y - h) && new_top <= (max_y - h) + get_bborder()) {
+						new_top = (max_y - h) + get_bborder();
 					}
 				}
 			}

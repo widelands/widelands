@@ -93,6 +93,19 @@ struct WindowStyleInfo {
 		return button_minimize_;
 	}
 
+	[[nodiscard]] int top_border_thickness() const {
+		return border_top_->height();
+	}
+	[[nodiscard]] int bottom_border_thickness() const {
+		return border_bottom_->height();
+	}
+	[[nodiscard]] int left_border_thickness() const {
+		return border_left_->width();
+	}
+	[[nodiscard]] int right_border_thickness() const {
+		return border_right_->width();
+	}
+
 private:
 	const RGBAColor window_border_focused_, window_border_unfocused_;
 	const Image* border_top_;
