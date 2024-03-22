@@ -682,11 +682,12 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 
 	// Draw level info in building windows, or if kSoldierLevels is on.
 	if (draw_mode == InfoMode::kInBuilding || ((info_to_draw & InfoToDraw::kSoldierLevels) != 0)) {
-		const auto draw_level_image = [icon_size, scale, &draw_position, dst](
+		const Recti src_rect(0, 0, icon_size, icon_size);
+		const auto draw_level_image = [icon_size, scale, &draw_position, dst, &src_rect](
 		                                 const Vector2i& offset, const Image* image) {
 			dst->blitrect_scale(
 			   Rectf(draw_position + offset * icon_size * scale, icon_size * scale, icon_size * scale),
-			   image, Recti(0, 0, icon_size, icon_size), 1.f, BlendMode::UseAlpha);
+			   image, src_rect, 1.f, BlendMode::UseAlpha);
 		};
 
 		draw_level_image(Vector2i(-1, -2), get_attack_level_pic());

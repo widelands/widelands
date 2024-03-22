@@ -32,6 +32,7 @@
 #include "build_info.h"
 #include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
+#include "graphic/graphic_functions.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/filesystem_constants.h"
@@ -59,8 +60,7 @@
 
 namespace FsMenu {
 
-constexpr uint32_t kInitialFadeoutDelay = 2500;
-constexpr uint32_t kInitialFadeoutDuration = 4000;
+constexpr uint32_t kSplashFadeoutDuration = 2000;
 constexpr uint32_t kImageExchangeInterval = 20000;
 constexpr uint32_t kImageExchangeDuration = 2500;
 
@@ -238,6 +238,7 @@ MainMenu::MainMenu(const bool skip_init)
 
 	if (!skip_init) {
 		init_time_ = SDL_GetTicks();
+		splash_state_ = SplashState::kSplash;
 		set_button_visibility(false);
 	}
 
@@ -301,7 +302,6 @@ void MainMenu::update_template() {
 	editor_.set_min_lineheight(dropdowns_lineheight);
 	replay_.set_min_lineheight(dropdowns_lineheight);
 
-	splashscreen_ = g_image_cache->get("loadscreens/splash.jpg");
 	title_image_ = g_image_cache->get("loadscreens/logo.png");
 
 	images_.clear();
@@ -543,13 +543,22 @@ void MainMenu::set_button_visibility(const bool v) {
 	clock_.set_visible(v);
 }
 
+void MainMenu::end_splashscreen() {
+	assert(splash_state_ == SplashState::kSplash);
+	verb_log_info("Initiating splash screen fade out");
+	init_time_ = SDL_GetTicks();
+	splash_state_ = SplashState::kSplashFadeOut;
+}
+
 void MainMenu::abort_splashscreen() {
+	verb_log_info("Splash screen ended");
 	init_time_ = kNoSplash;
+	splash_state_ = SplashState::kDone;
 }
 
 bool MainMenu::handle_mousepress(uint8_t /*btn*/, int32_t /*x*/, int32_t /*y*/) {
-	if (init_time_ != kNoSplash) {
-		init_time_ = kNoSplash;
+	if (splash_state_ != SplashState::kDone) {
+		abort_splashscreen();
 		return true;
 	}
 	return false;
@@ -579,8 +588,9 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 
 	if (down) {
 		bool fell_through = false;
-		if (init_time_ != kNoSplash) {
-			init_time_ = kNoSplash;
+		if (splash_state_ != SplashState::kDone) {
+			abort_splashscreen();
+			// Don't quit on escape when it is pressed to skip fading
 			fell_through = true;
 		}
 
@@ -686,16 +696,6 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 	return UI::Panel::handle_key(down, code);
 }
 
-inline Rectf MainMenu::image_pos(const Image& i, const bool crop) {
-	return UI::fit_image(i.width(), i.height(), get_w(), get_h(), crop);
-}
-
-static inline void
-do_draw_image(RenderTarget& r, const Rectf& dest, const Image& img, const float opacity) {
-	r.blitrect_scale(
-	   dest, &img, Recti(0, 0, img.width(), img.height()), opacity, BlendMode::UseAlpha);
-}
-
 inline float MainMenu::calc_opacity(const uint32_t time) const {
 	return last_image_ == draw_image_ ?
              1.f :
@@ -705,9 +705,10 @@ inline float MainMenu::calc_opacity(const uint32_t time) const {
 
 /*
  * The four phases of the animation:
- *   1) Show the splash image with full opacity on a black background for `kInitialFadeoutDelay`
- *   2) Show the splash image semi-transparent on a black background for `kInitialFadeoutDuration`
- *   3) Show the background & menu semi-transparent for `kInitialFadeoutDuration`
+ *   1) We start with the splash image shown with full opacity on a black background, we initiate
+ *      fade out on first refresh (this is to reset init_time_ when we can actually start fading)
+ *   2) Show the splash image semi-transparent on a black background for `kSplashFadeoutDuration`
+ *   3) Show the background & menu semi-transparent for `kSplashFadeoutDuration`
  *   4) Show the background & menu with full opacity indefinitely
  * We skip straight to the last phase 4 if we are returning from some other FsMenu screen.
  */
@@ -717,23 +718,40 @@ void MainMenu::draw(RenderTarget& r) {
 	r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, 255));
 
 	const uint32_t time = SDL_GetTicks();
-	assert(init_time_ == kNoSplash || time >= init_time_);
 
-	if (init_time_ != kNoSplash &&
-	    time - init_time_ < kInitialFadeoutDelay + kInitialFadeoutDuration) {
-		// still in splash phase
-		return;
+	// Handle splash screen
+	if (splash_state_ != SplashState::kDone) {
+		assert(init_time_ != kNoSplash && time >= init_time_);
+
+		if (splash_state_ == SplashState::kSplash) {
+			end_splashscreen();
+			return;
+		}
+
+		if (time - init_time_ > kSplashFadeoutDuration) {
+			if (splash_state_ == SplashState::kMenuFadeIn ||
+			    (time - init_time_ > 2 * kSplashFadeoutDuration)) {
+				abort_splashscreen();
+			} else if (splash_state_ == SplashState::kSplashFadeOut) {
+				init_time_ = time;
+				splash_state_ = SplashState::kMenuFadeIn;
+			}
+		}
+
+		if (splash_state_ == SplashState::kSplashFadeOut) {
+			// still in splash phase
+			return;
+		}
 	}
 
-	// Sanitize phase info and button visibility
-	if (init_time_ != kNoSplash &&
-	    time - init_time_ > kInitialFadeoutDelay + 2 * kInitialFadeoutDuration) {
-		init_time_ = kNoSplash;
+	// TODO(tothxa): This shouldn't be in draw(), but we don't have think(), nor a single
+	//               entry point.
+	//               Reset the songset when a game, replay or editing session returns.
+	if (g_sh->current_songset() != Songset::kMenu) {
+		g_sh->change_music(Songset::kMenu, 500);
 	}
-	if (init_time_ == kNoSplash ||
-	    time - init_time_ > kInitialFadeoutDelay + kInitialFadeoutDuration) {
-		set_button_visibility(true);
-	}
+
+	set_button_visibility(true);
 
 	// Exchange stale background images
 	assert(time >= last_image_exchange_time_);
@@ -751,13 +769,13 @@ void MainMenu::draw(RenderTarget& r) {
 		float opacity = 1.f;
 
 		if (time - last_image_exchange_time_ < kImageExchangeDuration) {
-			const Image& img = *g_image_cache->get(images_[last_image_]);
+			const Image* img = g_image_cache->get(images_[last_image_]);
 			opacity = calc_opacity(time);
-			do_draw_image(r, image_pos(img), img, 1.f - opacity);
+			r.blit_fit(img, true, 1.f - opacity);
 		}
 
-		const Image& img = *g_image_cache->get(images_[draw_image_]);
-		do_draw_image(r, image_pos(img), img, opacity);
+		const Image* img = g_image_cache->get(images_[draw_image_]);
+		r.blit_fit(img, true, opacity);
 	}
 
 	{  // Darken button boxes
@@ -783,29 +801,41 @@ void MainMenu::draw(RenderTarget& r) {
 
 	// Widelands logo
 	const Rectf rect = title_pos();
-	do_draw_image(
-	   r, Rectf(rect.x + rect.w * 0.2f, rect.y + rect.h * 0.2f, rect.w * 0.6f, rect.h * 0.6f),
-	   *title_image_, 1.f);
+	const Rectf dest(rect.x + rect.w * 0.2f, rect.y + rect.h * 0.2f, rect.w * 0.6f, rect.h * 0.6f);
+	r.blitrect_scale(dest, title_image_, title_image_->rect(), 1.0f, BlendMode::UseAlpha);
 }
 
 void MainMenu::draw_overlay(RenderTarget& r) {
-	if (init_time_ == kNoSplash) {
+	if (splash_state_ == SplashState::kDone) {
 		// overlays are needed only during the first three phases
 		return;
 	}
 	const uint32_t time = SDL_GetTicks();
 
-	if (time - init_time_ < kInitialFadeoutDelay + kInitialFadeoutDuration) {
-		const float opacity = time - init_time_ > kInitialFadeoutDelay ?
-                               1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay) /
-		                                  kInitialFadeoutDuration :
-                               1.f;
-		do_draw_image(r, image_pos(*splashscreen_, false), *splashscreen_, opacity);
+	float progress = 0.0f;
+	if (splash_state_ == SplashState::kSplash) {
+		end_splashscreen();
 	} else {
-		const unsigned opacity =
-		   255 - 255.f * (time - init_time_ - kInitialFadeoutDelay - kInitialFadeoutDuration) /
-		            kInitialFadeoutDuration;
-		r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, opacity), BlendMode::Default);
+		progress = static_cast<float>(time - init_time_) / kSplashFadeoutDuration;
+		if (progress > 1.0f) {
+			if (splash_state_ == SplashState::kMenuFadeIn || progress > 2.0f) {
+				// We're done
+				abort_splashscreen();
+				return;
+			}
+
+			// End of splash fade out, start menu fade in
+			init_time_ = time;
+			splash_state_ = SplashState::kMenuFadeIn;
+			progress = 0.0f;
+		}
+	}
+
+	if (splash_state_ != SplashState::kMenuFadeIn) {
+		draw_splashscreen(r, "", 1.0f - progress);
+	} else {
+		const unsigned alpha = 255 - 255.f * progress;  // fade in of menu = fade out of overlay
+		r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, alpha), BlendMode::Default);
 	}
 }
 
@@ -979,7 +1009,6 @@ void MainMenu::action(const MenuTarget t) {
 			break;
 		}
 		menu_capsule_.clear_content();
-		g_sh->change_music(Songset::kIngame, 1000);
 		new NetSetupLAN(menu_capsule_);
 		break;
 	case MenuTarget::kMetaserver: {
@@ -1003,7 +1032,6 @@ void MainMenu::action(const MenuTarget t) {
 			get_config_string("password_sha1", password_);
 		}
 
-		g_sh->change_music(Songset::kIngame, 1000);
 		new InternetLobby(menu_capsule_, nickname_, password_, register_, tribeinfos);
 	} break;
 

@@ -53,6 +53,7 @@
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/graphic_functions.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/style_manager.h"
 #include "graphic/text/font_set.h"
@@ -399,10 +400,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	init_language();  // search paths must already be set up
 	changedir_on_mac();
-	cleanup_replays();
-	cleanup_ai_files();
-	cleanup_temp_files();
-	cleanup_temp_backups();
 
 #ifndef SDL_BYTEORDER
 	log_info("Byte order: unknown, assuming little-endian\n");
@@ -420,13 +417,80 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		exit(2);
 	}
 
+	g_gr = new Graphic();
+	g_gr->initialize(
+	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
+	   get_config_int("xres", kDefaultResolutionW), get_config_int("yres", kDefaultResolutionH),
+	   get_config_bool("fullscreen", false), get_config_bool("maximized", false));
+
+	/*****
+	 * These could be moved later if we decide to show some graphic (an hourglass?) instead
+	 * of the text label in the initial splash screen to draw it faster.
+	 */
+	if (TTF_Init() == -1) {
+		log_err("True Type library did not initialize: %s\n", TTF_GetError());
+		exit(2);
+	}
+
+	UI::g_fh = UI::create_fonthandler(
+	   g_image_cache, i18n::get_locale());  // This will create the fontset, so loading it first.
+	verb_log_info("Font handler created");
+
+	set_template_dir("");
+	verb_log_info("Loaded default styles");
+	/*
+	 * End of text rendering dependencies
+	 *****/
+
+	// The initital splash screen is only drawn once, it doesn't get updates until the main menu
+	// overrides it. Normally it shouldn't take more than a few seconds.
+	{
+		SDL_Event ev;
+		int ignored = 0;
+		int handled = 0;
+		while (SDL_PollEvent(&ev) != 0) {
+			// Except the window manager may resize the window on creation, so we have to look for
+			// resize events first. We throw away everything else, hopefully we don't have much yet...
+			// This is not ideal, but Graphic messes a lot with SDL_SetWindowResizable() (not good
+			// either), so using that would be much harder.
+			if (ev.type == SDL_WINDOWEVENT) {
+				handle_window_event(ev);
+				++handled;
+			} else if (ev.type != SDL_MOUSEMOTION) {
+				++ignored;
+			}
+		}
+		if (ignored > 0) {
+			log_warn("Ignored %d non-mousemove SDL events at start up", ignored);
+		}
+		if (handled > 0) {
+			// Initial creation already creates some events
+			verb_log_info("Handled %d SDL window events at start up", handled);
+		}
+	}
+	RenderTarget* r = g_gr->get_render_target();
+	draw_splashscreen(*r, _("Loading…"), 1.0f);
+	g_gr->refresh();
+	verb_log_info("Splash screen shown");
+
+	// This was taken out of Graphic::initialize() to allow showing the splashscreen earlier.
+	// This is one of the slowest parts of the start up.
+	g_gr->rebuild_texture_atlas();
+
+	g_sh = new SoundHandler();
+
+	g_sh->register_songs("music", Songset::kMenu);
+	g_sh->register_songs("music", Songset::kIntro);
+	g_sh->register_songs("music", Songset::kIngame);
+	g_sh->register_songs("music", Songset::kCustom);
+
+	g_sh->change_music(Songset::kMenu);
+
 	// Try to detect configurations with inverted horizontal scroll
-	const char* sdl_video = SDL_GetCurrentVideoDriver();
-	assert(sdl_video != nullptr);
 	SDL_version sdl_ver = {SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL};
 	SDL_GetVersion(&sdl_ver);
-	// Keep cursor in window while dragging
-	SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
+	const char* sdl_video = SDL_GetCurrentVideoDriver();
+	assert(sdl_video != nullptr);
 	bool sdl_scroll_x_bug = false;
 
 	// SDL version < 2.0 is not supported, >= 2.1 will have the changes
@@ -444,35 +508,23 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		update_mousewheel_settings();
 	}
 
-	g_gr = new Graphic();
-
-	if (TTF_Init() == -1) {
-		log_err("True Type library did not initialize: %s\n", TTF_GetError());
-		exit(2);
-	}
-
-	UI::g_fh = UI::create_fonthandler(
-	   g_image_cache, i18n::get_locale());  // This will create the fontset, so loading it first.
-
-	g_gr->initialize(
-	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
-	   get_config_int("xres", kDefaultResolutionW), get_config_int("yres", kDefaultResolutionH),
-	   get_config_bool("fullscreen", false), get_config_bool("maximized", false));
+	// Keep cursor in window while dragging
+	SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
 
 	g_mouse_cursor = new MouseCursor();
 	g_mouse_cursor->initialize(get_config_bool("sdl_cursor", true));
 
-	g_sh = new SoundHandler();
-
-	g_sh->register_songs("music", Songset::kIntro);
-	g_sh->register_songs("music", Songset::kMenu);
-	g_sh->register_songs("music", Songset::kIngame);
-	g_sh->register_songs("music", Songset::kCustom);
+	verb_log_info("Cleaning up temporary files");
+	cleanup_replays();
+	cleanup_ai_files();
+	cleanup_temp_files();
+	cleanup_temp_backups();
 
 	UI::ColorChooser::read_favorites_settings();
 
-	set_template_dir("");
+	verb_log_info("Initializing Add-Ons");
 	initialize_g_addons();
+	verb_log_info("Done initializing Add-Ons");
 
 	// Register the click sound for UI::Panel.
 	// We do it here to ensure that the sound handler has been created first, and we only want to
@@ -493,6 +545,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		log_info("Developer tools are enabled.");
 		g_script_console_history.load(kScriptConsoleHistoryFile);
 	}
+
+	verb_log_info("WLApplication created");
 }
 
 /**
@@ -820,7 +874,6 @@ void WLApplication::run() {
 	switch (game_type_) {
 	case GameType::kEditor: {
 		bool success = false;
-		g_sh->change_music(Songset::kIngame);
 		if (filename_.empty()) {
 			success = EditorInteractive::run_editor(&menu, EditorInteractive::Init::kDefault);
 		} else {
@@ -832,7 +885,6 @@ void WLApplication::run() {
 					const std::string message = _("Widelands could not find the last edited map.");
 					log_err("%s\n", message.c_str());
 
-					g_sh->change_music(Songset::kMenu);
 					menu.show_messagebox(_("No Last Edited Map"), message);
 					have_filename = false;
 				}
@@ -854,7 +906,6 @@ void WLApplication::run() {
 		Widelands::Game game;
 		std::string title;
 		std::string message;
-		g_sh->change_music(Songset::kIngame);
 		try {
 			bool start_replay = (game_type_ == GameType::kReplay);
 			if (use_last(filename_)) {
@@ -887,14 +938,12 @@ void WLApplication::run() {
 		if (!message.empty()) {
 			log_err("%s\n", message.c_str());
 			game.full_cleanup();
-			g_sh->change_music(Songset::kMenu);
 			menu.show_messagebox(title, message);
 			menu.main_loop();
 		}
 	} break;
 
 	case GameType::kScenario: {
-		g_sh->change_music(Songset::kIngame);
 		Widelands::Game game;
 		try {
 			game.run_splayer_scenario_direct({filename_}, script_to_run_);
@@ -904,17 +953,10 @@ void WLApplication::run() {
 	} break;
 
 	case GameType::kFromTemplate: {
-		g_sh->change_music(Songset::kIngame);
 		init_and_run_game_from_template(menu);
 	} break;
 
 	default:
-		// TODO(tothxa): This is actually never heard due to the next one replacing it immediately.
-		//               Can we delete this, and the song file too?
-		g_sh->change_music(Songset::kIntro);
-
-		g_sh->change_music(Songset::kMenu, 1000);
-
 		menu.main_loop();
 	}
 
@@ -946,22 +988,21 @@ bool WLApplication::poll_event(SDL_Event& ev) const {
 		}
 		break;
 
+	// TODO(tothxa): no longer pushes fake event, can be moved to handle_input()
 	case SDL_USEREVENT: {
 		if (ev.user.code == CHANGE_MUSIC) {
-			/* Notofication from the SoundHandler that a song has finished playing.
+			/* Notification from the SoundHandler that a song has finished playing.
 			 * Usually, another song from the same songset will be started.
-			 * There is a special case for the intro screen's music: only one song will be
-			 * played. If the user has not clicked the mouse or pressed escape when the song
-			 * finishes, Widelands will automatically go on to the main menu.
+			 * There is a special case for the intro music: it will only be played
+			 * once, then we switch to the main menu music.
 			 */
+			// TODO(tothxa): The intro music is currently unused. Various attempts
+			//               to resurrect or repurpose it failed, because it is too
+			//               long for a simple intro, but not long enough for a demo
+			//               or a credits list.
 			assert(!SoundHandler::is_backend_disabled());
-			if (g_sh->current_songset() == "intro") {
-				// Special case for splashscreen: there, only one song is ever played
-				SDL_Event new_event;
-				new_event.type = SDL_KEYDOWN;
-				new_event.key.state = SDL_PRESSED;
-				new_event.key.keysym.sym = SDLK_ESCAPE;
-				SDL_PushEvent(&new_event);
+			if (g_sh->current_songset() == Songset::kIntro) {
+				g_sh->change_music(Songset::kMenu, 500);
 			} else {
 				g_sh->change_music();
 			}
@@ -972,6 +1013,25 @@ bool WLApplication::poll_event(SDL_Event& ev) const {
 		break;
 	}
 	return true;
+}
+
+void WLApplication::handle_window_event(SDL_Event& ev) {
+	assert(ev.type == SDL_WINDOWEVENT);
+	switch (ev.window.event) {
+	case SDL_WINDOWEVENT_RESIZED:
+		// Do not save the new size to config at this point to avoid saving sizes that
+		// result from maximization etc. Save at shutdown instead.
+		if (!g_gr->fullscreen()) {
+			g_gr->change_resolution(ev.window.data1, ev.window.data2, false);
+		}
+		break;
+	case SDL_WINDOWEVENT_MAXIMIZED:
+		set_config_bool("maximized", true);
+		break;
+	case SDL_WINDOWEVENT_RESTORED:
+		set_config_bool("maximized", g_gr->maximized());
+		break;
+	}
 }
 
 bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, const int modifiers) {
@@ -1064,21 +1124,7 @@ void WLApplication::handle_input(InputCallback const* cb) {
 			}
 			break;
 		case SDL_WINDOWEVENT:
-			switch (ev.window.event) {
-			case SDL_WINDOWEVENT_RESIZED:
-				// Do not save the new size to config at this point to avoid saving sizes that
-				// result from maximization etc. Save at shutdown instead.
-				if (!g_gr->fullscreen()) {
-					g_gr->change_resolution(ev.window.data1, ev.window.data2, false);
-				}
-				break;
-			case SDL_WINDOWEVENT_MAXIMIZED:
-				set_config_bool("maximized", true);
-				break;
-			case SDL_WINDOWEVENT_RESTORED:
-				set_config_bool("maximized", g_gr->maximized());
-				break;
-			}
+			handle_window_event(ev);
 			break;
 		case SDL_QUIT:
 			should_die_ = true;
@@ -2004,7 +2050,6 @@ void WLApplication::check_crash_reports(FsMenu::MainMenu& menu) {
 		log_info("- %s", filename.c_str());
 	}
 
-	g_sh->change_music(Songset::kMenu);
 	menu.abort_splashscreen();
 	FsMenu::CrashReportWindow reporter(menu, crashes);
 	reporter.run<UI::Panel::Returncodes>();

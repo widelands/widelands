@@ -70,6 +70,7 @@ wl_library(ui_fsmenu
     editor
     graphic
     graphic_fonthandler
+    graphic_functions
     graphic_mouse_cursor
     graphic_playercolor
     graphic_styles

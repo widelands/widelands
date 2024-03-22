@@ -228,15 +228,12 @@ void Button::draw(RenderTarget& dst) {
 			if (!is_monochrome) {
 				dst.blitrect_scale(Rectf((get_w() - blit_width) / 2.f, (get_h() - blit_height) / 2.f,
 				                         blit_width, blit_height),
-				                   title_image_,
-				                   Recti(0, 0, title_image_->width(), title_image_->height()), 1.,
-				                   BlendMode::UseAlpha);
+				                   title_image_, title_image_->rect(), 1.f, BlendMode::UseAlpha);
 			} else {
 				dst.blitrect_scale_monochrome(
 				   Rectf((get_w() - blit_width) / 2.f, (get_h() - blit_height) / 2.f, blit_width,
 				         blit_height),
-				   title_image_, Recti(0, 0, title_image_->width(), title_image_->height()),
-				   RGBAColor(255, 255, 255, 127));
+				   title_image_, title_image_->rect(), RGBAColor(255, 255, 255, 127));
 			}
 		}
 

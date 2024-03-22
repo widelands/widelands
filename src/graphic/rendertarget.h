@@ -90,6 +90,14 @@ public:
 	                    float opacity,
 	                    BlendMode blend_mode);
 
+	// Draws 'image' centered in this rendertarget, as large as possible without upscaling,
+	// with or without cropping the image. Shorthand for using blitrect_scale() with
+	// 'destination_rect' calculated automatically using UI::fit_image().
+	void blit_fit(const Image* image,
+	              bool crop,
+	              float opacity = 1.0f,
+	              BlendMode blend_mode = BlendMode::UseAlpha);
+
 	// Like blitrect_scale. See MonochromeBlitProgram for details. Takes by
 	// value on purpose.
 	void blitrect_scale_monochrome(Rectf destination_rect,

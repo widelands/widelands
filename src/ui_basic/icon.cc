@@ -74,11 +74,10 @@ void Icon::draw(RenderTarget& dst) {
 		if (grey_out_) {
 			dst.blitrect_scale_monochrome(
 			   Rectf(draw_frame_ ? x + 1 : x, draw_frame_ ? y + 1 : y, width, height), pic_,
-			   Recti(0, 0, pic_->width(), pic_->height()), grey_out_color_);
+			   pic_->rect(), grey_out_color_);
 		} else {
 			dst.blitrect_scale(Rectf(draw_frame_ ? x + 1 : x, draw_frame_ ? y + 1 : y, width, height),
-			                   pic_, Recti(0, 0, pic_->width(), pic_->height()), 1.,
-			                   BlendMode::UseAlpha);
+			                   pic_, pic_->rect(), 1., BlendMode::UseAlpha);
 		}
 		if (draw_frame_) {
 			dst.draw_rect(Recti(x, y, width + 2, height + 2), framecolor_);
