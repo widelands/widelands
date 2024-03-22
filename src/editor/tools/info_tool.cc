@@ -41,8 +41,12 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 	registry.open_window = [this, &parent, &registry, &center, &f, &tf, map]() {
 		// if window reaches bottom right corner, start from top left corner again
 		const UI::WindowStyleInfo& style = g_style_manager->window_style(UI::WindowStyle::kWui);
-		int a = (parent.get_inner_w() - FieldInfoWindow::kWidth - style.left_border_thickness() - style.right_border_thickness()) / kOffset;
-		int b = (parent.get_inner_h() - FieldInfoWindow::kHeight - style.top_border_thickness() - style.bottom_border_thickness()) / kOffset;
+		int a = (parent.get_inner_w() - FieldInfoWindow::kWidth - style.left_border_thickness() -
+		         style.right_border_thickness()) /
+		        kOffset;
+		int b = (parent.get_inner_h() - FieldInfoWindow::kHeight - style.top_border_thickness() -
+		         style.bottom_border_thickness()) /
+		        kOffset;
 		int offset_factor = number_of_open_windows_ % std::min(a, b);
 		int offset = offset_factor * kOffset;
 

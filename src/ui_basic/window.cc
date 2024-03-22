@@ -61,11 +61,14 @@ Window::Window(Panel* const parent,
            name,
            x,
            y,
-           w + g_style_manager->window_style(s).left_border_thickness() + g_style_manager->window_style(s).right_border_thickness(),
-           h + g_style_manager->window_style(s).top_border_thickness() + g_style_manager->window_style(s).bottom_border_thickness()),
+           w + g_style_manager->window_style(s).left_border_thickness() +
+              g_style_manager->window_style(s).right_border_thickness(),
+           h + g_style_manager->window_style(s).top_border_thickness() +
+              g_style_manager->window_style(s).bottom_border_thickness()),
      window_style_(s),
 
-     oldh_(h + g_style_manager->window_style(s).top_border_thickness() + g_style_manager->window_style(s).bottom_border_thickness()),
+     oldh_(h + g_style_manager->window_style(s).top_border_thickness() +
+           g_style_manager->window_style(s).bottom_border_thickness()),
 
      button_close_(new Button(
         this,
@@ -118,7 +121,9 @@ Window::Window(Panel* const parent,
 	});
 	update_toolbar_buttons();
 
-	set_border(window_style_info().left_border_thickness(), window_style_info().right_border_thickness(), window_style_info().top_border_thickness(), window_style_info().bottom_border_thickness());
+	set_border(
+	   window_style_info().left_border_thickness(), window_style_info().right_border_thickness(),
+	   window_style_info().top_border_thickness(), window_style_info().bottom_border_thickness());
 	set_top_on_click(true);
 	set_layout_toplevel(true);
 	set_snap_target(true);
@@ -203,12 +208,10 @@ void Window::layout() {
 
 	const int16_t buttons_pos = (get_tborder() + kWindowTitlebarButtonsSize) / -2;
 
-	button_close_->set_pos(Vector2i(
-	   get_w() + buttons_pos - get_tborder(), buttons_pos));
+	button_close_->set_pos(Vector2i(get_w() + buttons_pos - get_tborder(), buttons_pos));
 	button_pin_->set_pos(Vector2i(buttons_pos, buttons_pos));
-	button_minimize_->set_pos(
-	   Vector2i(button_pin_->get_x() + button_pin_->get_w() + kWindowTitlebarButtonsSpacing,
-	            buttons_pos));
+	button_minimize_->set_pos(Vector2i(
+	   button_pin_->get_x() + button_pin_->get_w() + kWindowTitlebarButtonsSpacing, buttons_pos));
 }
 
 /**
@@ -264,8 +267,7 @@ void Window::move_out_of_the_way() {
 			bool need_check_popups = false;
 			if (parent_is_main) {
 				if (toolbar_at_bottom) {
-					need_check_popups =
-					   mouse.y + get_h() / 2 - get_bborder() > ph - max_popup_h;
+					need_check_popups = mouse.y + get_h() / 2 - get_bborder() > ph - max_popup_h;
 				} else {
 					need_check_popups =
 					   mouse.y - get_h() / 2 + get_tborder() < toolbar_top_h + max_popup_h;
@@ -286,8 +288,7 @@ void Window::move_out_of_the_way() {
 		}
 		ny -= get_h() / 2;
 	} else {
-		const int max_popup_h_bottom =
-		   toolbar_bottom_h > 0 ? (max_popup_h - get_bborder()) : 0;
+		const int max_popup_h_bottom = toolbar_bottom_h > 0 ? (max_popup_h - get_bborder()) : 0;
 		if (mouse.y + kClearance + get_h() + max_popup_h_bottom < ph || mouse.y < ph / 2) {
 			ny += kClearance;
 		} else {
@@ -418,19 +419,23 @@ void Window::draw_border(RenderTarget& dst) {
 		const int img_len_inner = img_len_total - 2 * corner_width;
 
 		// Left corner
-		dst.blitrect(Vector2i::zero(), window_style_info().border_top(), Recti(Vector2i::zero(), border_x1, corner_width));
+		dst.blitrect(Vector2i::zero(), window_style_info().border_top(),
+		             Recti(Vector2i::zero(), border_x1, corner_width));
 
 		// Middle
 		int pos = border_x1;
 		for (; pos + img_len_inner < border_x2; pos += img_len_inner) {
-			dst.blitrect(Vector2i(pos, 0), window_style_info().border_top(), Recti(Vector2i(corner_width, 0), img_len_inner, get_tborder()));
+			dst.blitrect(Vector2i(pos, 0), window_style_info().border_top(),
+			             Recti(Vector2i(corner_width, 0), img_len_inner, get_tborder()));
 		}
 
 		// Trailing pixels at the right
-		dst.blitrect(Vector2i(pos, 0), window_style_info().border_top(), Recti(Vector2i(corner_width, 0), border_x2 - pos, get_tborder()));
+		dst.blitrect(Vector2i(pos, 0), window_style_info().border_top(),
+		             Recti(Vector2i(corner_width, 0), border_x2 - pos, get_tborder()));
 
 		// Right corner
-		dst.blitrect(Vector2i(border_x2, 0), window_style_info().border_top(), Recti(Vector2i(img_len_total - corner_width, 0), corner_width, get_tborder()));
+		dst.blitrect(Vector2i(border_x2, 0), window_style_info().border_top(),
+		             Recti(Vector2i(img_len_total - corner_width, 0), corner_width, get_tborder()));
 	}
 
 	if (!is_minimal()) {
@@ -443,19 +448,24 @@ void Window::draw_border(RenderTarget& dst) {
 			const int img_len_inner = img_len_total - 2 * corner_width;
 
 			// Left corner
-			dst.blitrect(Vector2i(0, border_y), window_style_info().border_bottom(), Recti(Vector2i::zero(), border_x1, corner_width));
+			dst.blitrect(Vector2i(0, border_y), window_style_info().border_bottom(),
+			             Recti(Vector2i::zero(), border_x1, corner_width));
 
 			// Middle
 			int pos = border_x1;
 			for (; pos + img_len_inner < border_x2; pos += img_len_inner) {
-				dst.blitrect(Vector2i(pos, border_y), window_style_info().border_bottom(), Recti(Vector2i(corner_width, 0), img_len_inner, get_bborder()));
+				dst.blitrect(Vector2i(pos, border_y), window_style_info().border_bottom(),
+				             Recti(Vector2i(corner_width, 0), img_len_inner, get_bborder()));
 			}
 
 			// Trailing pixels at the right
-			dst.blitrect(Vector2i(pos, border_y), window_style_info().border_bottom(), Recti(Vector2i(corner_width, 0), border_x2 - pos, get_bborder()));
+			dst.blitrect(Vector2i(pos, border_y), window_style_info().border_bottom(),
+			             Recti(Vector2i(corner_width, 0), border_x2 - pos, get_bborder()));
 
 			// Right corner
-			dst.blitrect(Vector2i(border_x2, border_y), window_style_info().border_bottom(), Recti(Vector2i(img_len_total - corner_width, 0), corner_width, get_bborder()));
+			dst.blitrect(
+			   Vector2i(border_x2, border_y), window_style_info().border_bottom(),
+			   Recti(Vector2i(img_len_total - corner_width, 0), corner_width, get_bborder()));
 		}
 
 		{  // Left border
@@ -466,11 +476,13 @@ void Window::draw_border(RenderTarget& dst) {
 			// Middle
 			int pos = border_y1;
 			for (; pos + img_len < border_y2; pos += img_len) {
-				dst.blitrect(Vector2i(0, pos), window_style_info().border_left(), Recti(Vector2i::zero(), get_lborder(), img_len));
+				dst.blitrect(Vector2i(0, pos), window_style_info().border_left(),
+				             Recti(Vector2i::zero(), get_lborder(), img_len));
 			}
 
 			// Trailing pixels at the bottom
-			dst.blitrect(Vector2i(0, pos), window_style_info().border_left(), Recti(Vector2i::zero(), get_lborder(), border_y2 - pos));
+			dst.blitrect(Vector2i(0, pos), window_style_info().border_left(),
+			             Recti(Vector2i::zero(), get_lborder(), border_y2 - pos));
 		}
 
 		{  // Right border
@@ -482,26 +494,26 @@ void Window::draw_border(RenderTarget& dst) {
 			// Middle
 			int pos = border_y1;
 			for (; pos + img_len < border_y2; pos += img_len) {
-				dst.blitrect(Vector2i(border_x, pos), window_style_info().border_right(), Recti(Vector2i::zero(), get_rborder(), img_len));
+				dst.blitrect(Vector2i(border_x, pos), window_style_info().border_right(),
+				             Recti(Vector2i::zero(), get_rborder(), img_len));
 			}
 
 			// Trailing pixels at the bottom
-			dst.blitrect(Vector2i(border_x, pos), window_style_info().border_right(), Recti(Vector2i::zero(), get_rborder(), border_y2 - pos));
+			dst.blitrect(Vector2i(border_x, pos), window_style_info().border_right(),
+			             Recti(Vector2i::zero(), get_rborder(), border_y2 - pos));
 		}
 
 		// Focus overlays
 		// Bottom
-		dst.fill_rect(Recti(0, get_h() - get_bborder(), get_w(), get_bborder()),
-		              focus_color, BlendMode::Default);
+		dst.fill_rect(Recti(0, get_h() - get_bborder(), get_w(), get_bborder()), focus_color,
+		              BlendMode::Default);
 		// Left
-		dst.fill_rect(Recti(0, get_tborder(), get_lborder(),
-		                    get_h() - get_tborder() - get_bborder()),
+		dst.fill_rect(Recti(0, get_tborder(), get_lborder(), get_h() - get_tborder() - get_bborder()),
 		              focus_color, BlendMode::Default);
 		// Right
-		dst.fill_rect(
-		   Recti(get_w() - get_rborder(), get_tborder(), get_rborder(),
-		         get_h() - get_tborder() - get_bborder()),
-		   focus_color, BlendMode::Default);
+		dst.fill_rect(Recti(get_w() - get_rborder(), get_tborder(), get_rborder(),
+		                    get_h() - get_tborder() - get_bborder()),
+		              focus_color, BlendMode::Default);
 
 	}  // end if (!is_minimal())
 
@@ -514,8 +526,7 @@ void Window::draw_border(RenderTarget& dst) {
 		std::shared_ptr<const UI::RenderedText> text =
 		   autofit_text(richtext_escape(title_), title_style(), get_inner_w() - get_tborder());
 
-		Vector2i pos(
-		   get_lborder() + (get_inner_w() + get_tborder()) / 2, get_tborder() / 2);
+		Vector2i pos(get_lborder() + (get_inner_w() + get_tborder()) / 2, get_tborder() / 2);
 		UI::center_vertically(text->height(), &pos);
 		text->draw(dst, pos, UI::Align::kCenter);
 	}
@@ -542,8 +553,7 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
-	if ((((SDL_GetModState() & KMOD_CTRL) != 0) && btn == SDL_BUTTON_LEFT &&
-	     my < get_tborder()) ||
+	if ((((SDL_GetModState() & KMOD_CTRL) != 0) && btn == SDL_BUTTON_LEFT && my < get_tborder()) ||
 	    btn == SDL_BUTTON_MIDDLE) {
 		is_minimal() ? restore() : minimize();
 	} else if (btn == SDL_BUTTON_LEFT) {
@@ -624,7 +634,8 @@ Window::~Window() {
 void Window::restore() {
 	assert(is_minimal_);
 	is_minimal_ = false;
-	set_border(get_lborder(), get_rborder(), get_tborder(), window_style_info().bottom_border_thickness());
+	set_border(
+	   get_lborder(), get_rborder(), get_tborder(), window_style_info().bottom_border_thickness());
 	set_inner_size(get_inner_w(), oldh_);
 	update_desired_size();
 	move_inside_parent();
