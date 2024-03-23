@@ -121,6 +121,7 @@ return {
          button_unpin      = "fsmenu/windows/unpin.png",
          button_minimize   = "fsmenu/windows/minimize.png",
          button_unminimize = "fsmenu/windows/maximize.png",
+         button_spacing    = 1,
       },
       wui = {
          window_border_focused = {220, 220, 250, 40},
@@ -135,6 +136,7 @@ return {
          button_unpin      = "wui/windows/unpin.png",
          button_minimize   = "wui/windows/minimize.png",
          button_unminimize = "wui/windows/maximize.png",
+         button_spacing    = 1,
       },
    },
 

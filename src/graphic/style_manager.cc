@@ -901,7 +901,9 @@ void StyleManager::add_window_style(UI::WindowStyle style,
 		   g_image_cache->get(style_table->get_string("background")),
 		   style_table->get_string("button_pin"), style_table->get_string("button_unpin"),
 		   style_table->get_string("button_minimize"), style_table->get_string("button_unminimize"),
-		   style_table->get_string("button_close"));
+		   style_table->get_string("button_close"),
+		   style_table->get_int("button_spacing")
+		   );
 	} else {
 		fail_if_doing_default_style("window style", key);
 		w_style = new UI::WindowStyleInfo(default_style->window_style(style));

@@ -38,7 +38,8 @@ struct WindowStyleInfo {
 	                const std::string& b_unpin,
 	                const std::string& b_minimize,
 	                const std::string& b_unminimize,
-	                const std::string& b_close)
+	                const std::string& b_close,
+	                int b_spacing)
 	   : window_border_focused_(col_f),
 	     window_border_unfocused_(col_uf),
 	     border_top_(img_t),
@@ -50,7 +51,8 @@ struct WindowStyleInfo {
 	     button_pin_(b_pin),
 	     button_unpin_(b_unpin),
 	     button_minimize_(b_minimize),
-	     button_unminimize_(b_unminimize) {
+	     button_unminimize_(b_unminimize),
+	     button_spacing_(b_spacing) {
 	}
 	WindowStyleInfo(const WindowStyleInfo&) = default;
 
@@ -106,6 +108,13 @@ struct WindowStyleInfo {
 		return border_right_->width();
 	}
 
+	[[nodiscard]] int button_spacing() const {
+		return button_spacing_;
+	}
+	[[nodiscard]] int button_size() const {
+		return top_border_thickness() - 2 * button_spacing();
+	}
+
 private:
 	const RGBAColor window_border_focused_, window_border_unfocused_;
 	const Image* border_top_;
@@ -118,6 +127,7 @@ private:
 	const std::string button_unpin_;
 	const std::string button_minimize_;
 	const std::string button_unminimize_;
+	const int button_spacing_;
 };
 
 }  // namespace UI

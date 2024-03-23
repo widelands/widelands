@@ -26,33 +26,7 @@
 #include "ui_basic/button.h"
 
 namespace UI {
-/**
- * Windows are cached by default.
- *
- * The graphics (see pic__*) are used in the following manner: (Example)
- *
- * top:
- *  <--20leftmostpixel_of_top-->
- *     <60Pixels as often as possible to reach window with from top>
- *  <20rightmost pixel of top>
- * site:
- *  ^
- *  20 topmost pixels of l_border                       <--- > same for r_border
- *  as often as needed: 60 pixels of l_border           <--- > same for r_border
- *  20 bottom pixels of l_border                        <--- > same for r_border
- * bottom:
- *  <--20leftmostpixel_of_bot-->
- *     <60Pixels as often as possible to reach window with from bot>
- *  <20rightmost pixel of bot>
- *
- * So: the l_border and the r_border pics MUST have a height of 100, while the
- *     width must be 20 and the top and bot pics MUST have a width of 100, while
- *     the height must be 20
- *
- * A click with the middle mouse button (or STRG+LClick) minimizes a window.
- * Minimize means, that the window is only the caption bar, nothing inside.
- * Another click on this bar resizes the window again
- */
+
 class Window : public Panel {
 public:
 	/// Do not use richtext for 'title'.

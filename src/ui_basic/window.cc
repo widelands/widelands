@@ -33,9 +33,6 @@
 
 namespace UI {
 
-constexpr int16_t kWindowTitlebarButtonsSize = 18;
-constexpr int16_t kWindowTitlebarButtonsSpacing = 1;
-
 /**
  * Initialize a framed window.
  *
@@ -76,8 +73,8 @@ Window::Window(Panel* const parent,
         // positions will be set by first call to layout()
         0,
         0,
-        kWindowTitlebarButtonsSize,
-        kWindowTitlebarButtonsSize,
+        window_style_info().button_size(),
+        window_style_info().button_size(),
         s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary,
         g_image_cache->get(window_style_info().button_close()),
         _("Close"))),
@@ -86,8 +83,8 @@ Window::Window(Panel* const parent,
         "b_pin",
         0,
         0,
-        kWindowTitlebarButtonsSize,
-        kWindowTitlebarButtonsSize,
+        window_style_info().button_size(),
+        window_style_info().button_size(),
         s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary,
         "",
         "")),
@@ -96,8 +93,8 @@ Window::Window(Panel* const parent,
         "b_minimize",
         0,
         0,
-        kWindowTitlebarButtonsSize,
-        kWindowTitlebarButtonsSize,
+        window_style_info().button_size(),
+        window_style_info().button_size(),
         s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary,
         "",
         "")) {
@@ -206,12 +203,12 @@ void Window::layout() {
 		center_panel_->set_size(get_inner_w(), get_inner_h());
 	}
 
-	const int16_t buttons_pos = (get_tborder() + kWindowTitlebarButtonsSize) / -2;
+	const int16_t buttons_pos = (get_tborder() + window_style_info().button_size()) / -2;
 
 	button_close_->set_pos(Vector2i(get_w() + buttons_pos - get_tborder(), buttons_pos));
 	button_pin_->set_pos(Vector2i(buttons_pos, buttons_pos));
 	button_minimize_->set_pos(Vector2i(
-	   button_pin_->get_x() + button_pin_->get_w() + kWindowTitlebarButtonsSpacing, buttons_pos));
+	   button_pin_->get_x() + button_pin_->get_w() + window_style_info().button_spacing(), buttons_pos));
 }
 
 /**
