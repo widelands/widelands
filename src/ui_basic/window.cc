@@ -207,8 +207,9 @@ void Window::layout() {
 
 	button_close_->set_pos(Vector2i(get_w() + buttons_pos - get_tborder(), buttons_pos));
 	button_pin_->set_pos(Vector2i(buttons_pos, buttons_pos));
-	button_minimize_->set_pos(Vector2i(
-	   button_pin_->get_x() + button_pin_->get_w() + window_style_info().button_spacing(), buttons_pos));
+	button_minimize_->set_pos(
+	   Vector2i(button_pin_->get_x() + button_pin_->get_w() + window_style_info().button_spacing(),
+	            buttons_pos));
 }
 
 /**
