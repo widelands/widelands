@@ -10,7 +10,7 @@
 # litoll <litoll@freemail.hu>, 2016
 # litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
-# Tóth András <txa-dev@posteo.hu>, 2021-2023
+# Tóth András <txa-dev@posteo.hu>, 2021-2024
 # zone <z-one@freemail.hu>, 2015
 # zone <z-one@freemail.hu>, 2015
 msgid ""
@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-02-08 02:24+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: zone <z-one@freemail.hu>, 2015\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2024\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -113,7 +113,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr "Amikor Chat'Karuth meghalt, nagyon öreg, három erős és törekvő fiú apja és egy erős hadúr volt, olyan hadsereggel, amely bármelyik ellenséget képes legyőzni, amely szembe mer szállni az ősi erdővel. Dicső uralkodása után, Chat'Karuth a legidősebb fiára hagyta a trónt – ezzel magára haragítva másik két fiát. Az öreg hadúr tudta ezt. Ahogy az apja meghagyta neki, Thron elhagyta Al'thunran fővárosát, a korona otthonát a fák között, és visszavonta erőit a magas hegyekbe, ahol eltemette apját és megesküdött az Isteneknek, hogy egy nap visszatér és helyreállítja a rendet. Amíg testvérei vak háborút indítottak Thron és katonái ellen, akiket hátrahagyott, hogy megvédjék Al'thunran határát, a fiatal hadúr igyekezett maga mellé állítani nagyravágyó testvéreit, hogy a törzseket újra egy zászló alatt egyesíthesse."
+msgstr "Chat'Karuth öregen halt meg, három erős és törekvő fiú apjként, és erős hadúrként, olyan hadsereggel, amely bármelyik ellenséget képes legyőzni, amely szembe mer szállni az ősi erdővel. Dicső uralkodása után, Chat'Karuth a legidősebb fiára, Thronra hagyta a törzs vezetését – ezzel magára haragítva másik két fiát. Az öreg hadúr tudta ezt. Thron, ahogy azt az apja meghagyta neki, elhagyta Al'thunran fővárosát, az Erdők Övezte Trón otthonát, és visszavonta erőit a magas hegyekbe, ahol eltemette apját és megesküdött az Isteneknek, hogy egy nap visszatér és helyreállítja a rendet. Amíg testvérei vak háborút indítottak Thron és katonái ellen, akiket hátrahagyott, hogy megvédjék Al'thunran határát, a fiatal hadúr célja az volt, hogy megbékítse nagyravágyó testvéreit, hogy a törzseket újra egy zászló alatt egyesíthesse."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70

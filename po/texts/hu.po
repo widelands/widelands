@@ -9,14 +9,14 @@
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016-2017,2019-2020
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
-# Tóth András <txa-dev@posteo.hu>, 2021-2023
+# Tóth András <txa-dev@posteo.hu>, 2021-2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2024\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -655,7 +655,7 @@ msgstr "A %1% billentyűk lehetővé teszik, hogy közvetlenül megadd az egérk
 msgid ""
 "%1% behaves like in normal games: It switches if building spaces are shown "
 "on or off."
-msgstr "A „%1%” billentyű hasonlóan működik, mint a normál játékban: ki-/bekapcsolja a beépíthető helyeket"
+msgstr "A „%1%” billentyű hasonlóan működik, mint a normál játékban: ki-/bekapcsolja a beépíthető helyeket."
 
 #: ../../data/txts/tips/editor.lua:36
 msgid ""
@@ -695,7 +695,7 @@ msgid ""
 "To produce bricks, you need granite; to produce granite, you need a quarry "
 "or rock mine; to build those, you need bricks. Take care not to get "
 "deadlocked!"
-msgstr "A téglák előállításához gránitra lesz szükséged; a gránit termeléséhez kőfejtő vagy kőbánya kell; azok építéséhez téglákra van szükséged. Figyelj rá, nehogy ördögi körbe kerülj."
+msgstr "A téglák előállításához gránitra lesz szükséged; a gránit termeléséhez kőfejtő vagy kőbánya kell; azok építéséhez téglákra van szükséged. Figyelj rá, nehogy ördögi körbe kerülj!"
 
 #: ../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."

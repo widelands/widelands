@@ -337,8 +337,7 @@ ferry_yard_production = {
    body = (
       h1(_("More ferries needed?")) ..
       p(_([[As you can see, ferries can be produced quite quickly, but you don't need to worry about wasted materials, because ferry yards normally only produce them on demand, when there are unserviced waterways.]])) ..
-      p(_([[As long as a ferry services a waterway, its lifetime is unlimited, but unemployed ferries will rot away and eventually sink.]])) ..
-      li_image("images/ui_basic/stop.png", _([[This is the icon for stopping production. You will find it in the building window.]]))
+      p(_([[As long as a ferry services a waterway, its lifetime is unlimited, but unemployed ferries will rot away and eventually sink.]]))
    ),
    h = messagebox_h_step(-3)
 }

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-03-04 03:06+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
 "Last-Translator: Petr Valášek, 2023\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -757,14 +757,16 @@ msgid "Open the ‘Configure economy’ window."
 msgstr "Otevři okno \"Nastavení hospodářství\"."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:462
-msgid "The window can be accessed by clicking on any flag you own."
-msgstr "K tomuto oknu máš přístup kliknutím na některou ze svých vlajek."
+msgid ""
+"The window can be accessed by clicking on any flag you own or from warehouse"
+" windows."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:480
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:495
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:504
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:524
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:482
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:526
 msgid "Economy options"
 msgstr "Nastavení hospodářství"
 
@@ -785,26 +787,39 @@ msgstr "Teď ti ukážu, jakým způsobem si můžeš určit, kolik surovin tam 
 msgid "This is the icon."
 msgstr "Takto vypadá jeho ikona."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:483
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:474
+msgid "The same button is also available in warehouse windows."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:475
+msgid ""
+"Note that the buttons are called ‘Configure this flag’s/building’s economy’ "
+"for a reason. An economy consists of all buildings and flags connected by "
+"roads, ferries, or ships, so you can have more than one economy if their "
+"flags are not connected by any means of transportation. In that case, your "
+"separate economies can have different settings for wares."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""
 "This window looks similar to the stock window, but it has additional buttons"
 " at the bottom."
 msgstr "Toto okno vypadá jako okno zásob, ale má dole další tlačítka."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:484
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:486
 msgid ""
 "You first have to select one or more wares (you can also left-click and "
 "drag). Then you can set the desired target quantity for the selected wares."
 msgstr "Nejdříve vyber jednu nebo více surovin (můžeš kliknout levým tlačítkem a táhnout). Pak můžeš nastavit požadovanou cílovou hodnotu pro vybrané suroviny."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:487
 msgid ""
 "Most buildings will only produce something when the stock level in your "
 "warehouses falls below the target quantity, so you should indicate the "
 "reserve you want to stockpile."
 msgstr "Většina budov vyrábí pouze až zásoby ve skladu spadnou pod nastavenou cílovou hodnotu. Můžeš si tedy nastavit, jak velkou rezervu dané suroviny chceš skladovat."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:487
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:489
 msgid ""
 "An example: the default value for scythes is 1. If you build a farm, a "
 "carrier will take a scythe and become a farmer. Then there will be no "
@@ -812,7 +827,7 @@ msgid ""
 "start producing another one."
 msgstr "Například nastavená hodnota pro kosy je 1. Pokud postavíš statek, nosič vezme kosu a stane se sedlákem. Tím pádem už nemáš žádnou kosu, ale cílové množství je 1. Kovář tedy začne vyrábět novou."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:489
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:491
 msgid ""
 "If you build two farms, only one of them will start working immediately. The"
 " second farm will have to wait for its worker, who will lack a scythe. If "
@@ -820,7 +835,7 @@ msgid ""
 "available and both farms would have been able to start working right away."
 msgstr "Pokud postavíš dva statky, pouze jeden začne fungovat okamžitě. Druhý bude muset počkat na dělníka, kterému chybí kosa. Kdyby bylo cílové množství nastaveno na 2, byly by ve skladišti dvě kosy a oba statky by mohly začít fungovat ihned."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:499
 msgid ""
 "Stockpiling wares is a double-edged sword. On the one hand, wares in stock "
 "are useful to buffer temporary fluctuations in your economy, which tend to "
@@ -831,14 +846,14 @@ msgid ""
 "economy. When in doubt, lean towards having some extra reserves."
 msgstr "Skladování zboží je dvousečná zbraň. Na jedné straně je zboží na skladě užitečné k tlumení dočasných výkyvů ve vaší ekonomice, ke kterým dochází neustále. Na druhou stranu veškeré zboží, které leží ve skladu, místo aby bylo zpracováno na něco jiného, ​​je plýtvání. Nalezení rovnováhy mezi nehospodárným hromaděním zásob a výrobou just-in-time ve vašich dodavatelských řetězcích je jednou z nejzávažnějších výzev při zdokonalování vaší ekonomiky. V případě pochybností se přiklánějte k tomu, abyste měli nějaké rezervy navíc."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:498
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
 msgid ""
 "To ease the process of switching between different economic situations, you "
 "can save and apply economy profiles at the bottom of the economy options "
 "window. A profile for stockpiling and one for efficiency are preset there."
 msgstr "Pro usnadnění procesu přepínání mezi různými ekonomickými situacemi můžete uložit a použít ekonomické profily ve spodní části okna ekonomických možností. Je zde přednastaven profil pro předzásobení a profil pro efektivitu."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:508
 msgid ""
 "Most of the time, the economy options are a useful tool to ensure that "
 "resources are not wasted to produce wares your economy does not actually "
@@ -847,7 +862,7 @@ msgid ""
 "the target of a ware to infinite, so that it will always be produced."
 msgstr "Většinu času jsou ekonomické možnosti užitečným nástrojem, který zajistí, že nebude plýtváno zdroji na výrobu zboží, které vaše ekonomika aktuálně nepotřebuje. Nicméně, někdy může být užitečné skladovat zboží ve velmi velkém množství. K dosažení tohoto vám okno ekonomických možností umožňuje nastavit produkci na nekonečno, takže bude vždy vyráběno."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:507
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:509
 msgid ""
 "The same button can also be found in the building window of production "
 "sites. There, it causes only this one site to produce indefinitely, "
@@ -856,36 +871,36 @@ msgid ""
 "there are plenty in stock far away in your homeland."
 msgstr "Stejné tlačítko lze nalézt také v okně budovy výrobních míst. Tam způsobí neomezenou produkci pouze zde, bez ohledu na nastavení ekonomiky. To může být užitečné například pro zřízení produkci stavebních materiálů v blízkosti hranic, i když daleko ve vaší domovině je jich dost na skladě."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:513
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
 msgid "Produce 20 marble columns"
 msgstr "Vyrob 20 mramorových sloupů"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:516
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:518
 msgid ""
 "To be prepared for additional fortifications, you should produce 20 marble "
 "columns."
 msgstr "Abychom byli připraveni na další opevňování, měli bychom vyrobit 20 mramorových sloupů."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
 msgid ""
 "Your stonemason will not produce marble columns when they are not needed. "
 "You have to increase the target quantity."
 msgstr "Tvůj kameník nebude vyrábět mramorové sloupy, když po nich není poptávka. Budeš muset zvýšit cílové množství."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:518
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:520
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this window, "
 "you can decide how many wares of each type you wish to have in stock."
 msgstr "Proto je třeba kliknout na libovolnou vlajku a zvolit \"Nastavení hospodářství\". V zobrazeném okně pak zvolíš, jaké množství jednotlivých surovin chceš mít skladem."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:521
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
 "they can be produced. In this case, it is good to have enough on reserve."
 msgstr "Občas se stane, že potřebuješ v jednu chvíli rychle získat hodně surovin – a to rychleji, než se dají vyrobit. Pro tento případ je dobré mít zásoby."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:527
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:529
 msgid ""
 "By changing the target quantity, you can therefore decide which wares/tools "
 "your resources (in this case: iron) should be turned into or whether you "
@@ -893,86 +908,86 @@ msgid ""
 "for."
 msgstr "Změnou cílového množství můžeš rozhodnout, na výrobu kterých surovin/nástrojů se má určitá jiná surovina (například železo) použít. Nebo také můžeš rozhodnout, že si ji necháš, než budeš vědět, co je skutečně potřeba vyrobit."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:528
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:530
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
 msgstr "Toto nastavení ovlivňuje pouze budovy, které spotřebovávají suroviny. Budovy, které suroviny vyrábí zadarmo (jako třeba statky nebo studny), budou fungovat pořád."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:530
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:532
 msgid ""
 "Now let’s try it out: the current target quantity for marble columns is 10. "
 "Increase it to be prepared in case you will have to build up your "
 "fortifications quickly."
 msgstr "Teď si to vyzkoušíme. Aktuální cílové množství mramorových sloupů je 10. Zvyš tuto hodnotu pro případ, že bychom potřebovali rychle postavit opevnění."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:537
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:539
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:541
 msgid "Bring 20 marble columns to the front line"
 msgstr "Dodej 20 mramorových sloupů na frontovou linii"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:540
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:542
 msgid ""
 "Bring all of the 20 marble columns to the warehouse near the front line."
 msgstr "Doprav celkem 20 mramorových sloupů do skladu na frontové linii."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:542
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
 msgid ""
 "To achieve this, you will have to do two things. First, set a preference for"
 " marble columns in the desired warehouse. All marble columns produced in the"
 " future will be brought there if possible."
 msgstr "Abychom toho dosáhli, je zapotřebí dvou věcí. První je nastavit přednostní skladování mramorových sloupů v požadovaném skladu, ve kterém mají být všechny od té chvíle vyrobené mramorové sloupy podle možností uskladněny."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:546
 msgid ""
 "Then, to move the marble columns out of your headquarters, you will have to "
 "click on the remove button there."
 msgstr "A potom, je třeba přesunout mramorové sloupy z hlavní budovy. Budeš tam muset označit mramorové sloupy a kliknout na tlačítko \"Vystěhovat odtud označené suroviny\"."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:550
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:552
 msgid "Warehouse Preferences"
 msgstr "Nastavení skladu"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:552
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:554
 msgid "Bring the marble columns to the front line"
 msgstr "Přeprav mramorové sloupy na frontovou linii"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:554
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:556
 msgid ""
 "The production of marble columns is working fine now, but it would be great "
 "if they were stored where we need them."
 msgstr "Výroba mramorových sloupů je nyní v plném proudu. Bylo by ale skvělé, kdyby se naskladnily tam, kde je potřebujeme."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:555
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:557
 msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
 msgstr "Obvykle je vyrobená surovina donesena do nejbližšího skladu, pokud není zrovna potřeba jinde. V našem případě to znamená do naší hlavní budovy. My bychom ji ale rádi uložili do skladu poblíž pevností."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:556
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:558
 msgid ""
 "Every warehouse has four buttons to set the preference. If you move your "
 "mouse pointer over them, you will see tooltips that explain what the buttons"
 " do."
 msgstr "Každý sklad má čtyři tlačítka na nastavení preferencí. Když na ně přesuneš ukazatel myši, uvidíš nápovědu, která ti vysvětlí, co dělají."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:562
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:564
 msgid "Borders Secured"
 msgstr "Hranice jsou zajištěny"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:564
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:566
 msgid "We’re safe now"
 msgstr "Prozatím jsme v bezpečí"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:566
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:568
 msgid ""
 "Great. We now have enough marble columns so that in case of an aggressor, we"
 " can build up our fortifications. But I do not think that that will be "
 "necessary. So far, no enemy has shown up."
 msgstr "Výborně. Teď máme dostatek mramorových sloupů, takže pokud se objeví nepřítel, můžeme se opevnit. Ale nemyslím si, že to bude nutné. Zatím se žádný nepřítel neukázal."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:567
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:569
 msgid ""
 "I hope I could teach you how you can control the economy in Widelands. There"
 " are many options and they can be confusing at first. Even if you’ve only "
@@ -981,7 +996,7 @@ msgid ""
 "this tutorial and learn the rest!"
 msgstr "Doufám, že jsem tě naučil, jak ovládat hospodářství ve Widelands. Je tu hodně nastavení a to může být na začátku matoucí. Pokud nebylo vše hned jasné, nenech se odradit. Zkus si nastavení v nějaké hře, osvoj si ho a objevuj další možnosti. Pak se můžeš vrátit k tomuto tutoriálům a určitě pochopíš i zbytek!"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:569
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:571
 msgid ""
 "This was the last tutorial I had prepared for you. I’ve now taught you "
 "everything I know. There are still secrets hidden in this world even I don’t"
