@@ -168,7 +168,7 @@ void MapPlayersMessagesPacket::write(FileSystem& fs, EditorGameBase& egbase, Map
 			s.set_string("icon", message.icon_filename());
 			s.set_int("sent", message.sent().get());
 			s.set_string("body", message.body());
-			if (Coords const c = message.position()) {
+			if (Coords const c = message.position(); c.valid()) {
 				set_coords("position", c, &s);
 			}
 			switch (message.status()) {

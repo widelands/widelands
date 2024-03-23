@@ -685,7 +685,7 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 	// Now modify our starting positions and port spaces
 
 	for (Coords& c : starting_pos_) {
-		if (c) {  // only if set (c != Coords::null())
+		if (c.valid()) {  // only if set (c != Coords::null())
 			const int16_t x = resize_coordinates_conversion(c.x, split.x, width_, w);
 			const int16_t y = resize_coordinates_conversion(c.y, split.y, height_, h);
 			assert((x >= 0 && x < w) || x == kInvalidCoords);

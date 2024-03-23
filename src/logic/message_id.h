@@ -21,8 +21,6 @@
 
 #include <cstdint>
 
-#include "base/macros.h"
-
 namespace Widelands {
 
 /// Each message has an id that is unique per message queue. (Each player has
@@ -37,50 +35,38 @@ namespace Widelands {
 /// MapMessageSaver does that.
 struct MessageId {
 	MessageId() = default;
-	explicit MessageId(uint32_t const init_id) : id(init_id) {
+	explicit MessageId(uint32_t const init_id) : id_(init_id) {
 	}
 
 	/// Constant value for no message.
-	static MessageId null() {
-		MessageId result;
-		result.id = 0;
-		return result;
+	[[nodiscard]] static MessageId null() {
+		return MessageId(0);
 	}
 
-	bool operator==(const MessageId& other) const {
-		return id == other.id;
+	[[nodiscard]] bool operator==(const MessageId& other) const {
+		return id_ == other.id_;
 	}
-	bool operator!=(const MessageId& other) const {
-		return id != other.id;
+	[[nodiscard]] bool operator!=(const MessageId& other) const {
+		return id_ != other.id_;
 	}
-	bool operator<(const MessageId& other) const {
-		return id < other.id;
+	[[nodiscard]] bool operator<(const MessageId& other) const {
+		return id_ < other.id_;
 	}
-	explicit operator bool() const {
+	[[nodiscard]] bool valid() const {
 		return *this != null();
 	}
 	[[nodiscard]] uint32_t value() const {
-		return id;
+		return id_;
 	}
 
 private:
-	//  This is needed to prevent operator bool from being applied when someone
-	//  tries to use a MessageId where an int*_t is needed. It will try to use
-	//  this operator instead and fail because it is private. As an extra line
-	//  of defense, it is marked as deprectated. In any case, the linking will
-	//  fail because the function body is missing.
-	explicit operator int8_t() const __attribute__((deprecated));
-	explicit operator int16_t() const __attribute__((deprecated));
-	explicit operator int32_t() const __attribute__((deprecated));
-	explicit operator int64_t() const __attribute__((deprecated));
-
 	friend struct MapMessageSaver;
 	friend struct MessageQueue;
 	MessageId operator++() {
-		++id;
+		++id_;
 		return *this;
 	}
-	uint32_t id{0U};
+	uint32_t id_{0U};
 };
 }  // namespace Widelands
 

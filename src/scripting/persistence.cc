@@ -251,9 +251,9 @@ uint32_t persist_object(lua_State* L, FileWrite& fw, Widelands::MapObjectSaver& 
 	eris_set_setting(L, "path", lua_gettop(L));
 	lua_pop(L, 1);
 
-	size_t cpos = fw.get_pos();
+	const size_t cpos = fw.get_pos().value();
 	eris_dump(L, &LuaWriter, &fw);
-	uint32_t nwritten = fw.get_pos() - cpos;
+	uint32_t nwritten = fw.get_pos().value() - cpos;
 
 	lua_pop(L, 2);  // pop the object and the table
 

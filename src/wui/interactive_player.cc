@@ -67,14 +67,14 @@ namespace {
 float adjusted_field_brightness(const Widelands::FCoords& fcoords,
                                 const Time& gametime,
                                 const Widelands::Player::Field& pf) {
-	if (pf.vision == Widelands::VisibleState::kUnexplored) {
+	if (pf.vision.state() == Widelands::VisibleState::kUnexplored) {
 		return 0.;
 	}
 
 	uint32_t brightness = 144 + fcoords.field->get_brightness();
 	brightness = std::min<uint32_t>(255, (brightness * 255) / 160);
 
-	if (pf.vision == Widelands::VisibleState::kPreviouslySeen) {
+	if (pf.vision.state() == Widelands::VisibleState::kPreviouslySeen) {
 		static const Duration kDecayTimeInMs = Duration(20000);
 		const Duration time_ago = gametime - pf.time_node_last_unseen;
 		if (time_ago < kDecayTimeInMs) {
@@ -86,6 +86,7 @@ float adjusted_field_brightness(const Widelands::FCoords& fcoords,
 	}
 	return brightness / 255.;
 }
+
 // Remove statistics from the text to draw if the player does not match the map object's owner
 InfoToDraw filter_info_to_draw(InfoToDraw info_to_draw,
                                const Widelands::MapObject* object,
@@ -394,7 +395,7 @@ InteractivePlayer::has_expedition_port_space(const Widelands::Coords& coords) co
 			continue;
 		}
 		const Widelands::Coords portspace = ship->current_portspace();
-		if (!static_cast<bool>(portspace)) {
+		if (!portspace.valid()) {
 			continue;
 		}
 		// Expeditions can only use the primary port space, show the others faded.
@@ -455,7 +456,7 @@ void InteractivePlayer::think() {
 		   playercolor_image(player().get_playercolor(), "images/players/player_position_menu.png"));
 	}
 
-	if (flag_to_connect_) {
+	if (flag_to_connect_.valid()) {
 		Widelands::Field& field = egbase().map()[flag_to_connect_];
 		if (upcast(Widelands::Flag const, flag, field.get_immovable())) {
 			if (!flag->has_road() && !in_road_building_mode()) {
@@ -539,8 +540,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			f->road_e = player_field.r_e;
 			f->road_se = player_field.r_se;
 			f->road_sw = player_field.r_sw;
-			f->seeing = player_field.vision;
-			if (player_field.vision == Widelands::VisibleState::kPreviouslySeen) {
+			f->seeing = player_field.vision.state();
+			if (f->seeing == Widelands::VisibleState::kPreviouslySeen) {
 				f->owner = player_field.owner != 0 ? gbase.get_player(player_field.owner) : nullptr;
 				f->is_border = player_field.border;
 			}
@@ -1031,7 +1032,7 @@ bool InteractivePlayer::player_hears_field(const Widelands::Coords& coords) cons
 	const Widelands::Map& map = egbase().map();
 	const Widelands::Player::Field& player_field =
 	   plr.fields()[map.get_index(coords, map.get_width())];
-	return player_field.vision == Widelands::VisibleState::kVisible;
+	return player_field.vision.state() == Widelands::VisibleState::kVisible;
 }
 
 void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {

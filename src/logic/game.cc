@@ -617,7 +617,7 @@ bool Game::run(StartGameType const start_game_type,
 			training_wheels_wanted_ = false;
 #endif
 			iterate_players_existing_novar(p, nr_players, *this) {
-				if (!map().get_starting_pos(p)) {
+				if (!map().get_starting_pos(p).valid()) {
 					throw WLWarning(_("Missing starting position"),
 					                _("Widelands could not start the game, because player %u has "
 					                  "no starting position.\n"

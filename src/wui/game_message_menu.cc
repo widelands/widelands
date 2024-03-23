@@ -358,7 +358,7 @@ void GameMessageMenu::selected(uint32_t const t) {
 				game.send_player_command(new Widelands::CmdMessageSetStatusRead(
 				   game.get_gametime(), player.player_number(), id));
 			}
-			centerviewbtn_->set_enabled(bool(message->position()));
+			centerviewbtn_->set_enabled(message->position().valid());
 			message_body.set_text(as_message(message->heading(), message->body()));
 			update_archive_button_tooltip();
 			return;
@@ -457,7 +457,7 @@ void GameMessageMenu::center_view() {
 	assert(selection < list->size());
 	if (Message const* const message =
 	       iplayer().player().messages()[MessageId((*list)[selection])]) {
-		assert(message->position());
+		assert(message->position().valid());
 		iplayer().map_view()->scroll_to_field(message->position(), MapView::Transition::Smooth);
 	}
 }

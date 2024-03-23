@@ -122,7 +122,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 						assert(f.vision.is_hidden());
 					}
 
-					if (f.vision == VisibleState::kPreviouslySeen) {
+					if (f.vision.state() == VisibleState::kPreviouslySeen) {
 						seen_fields.insert(&f);
 					}
 				}
@@ -143,7 +143,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 					assert(field_vector.size() == additionally_seen);
 					for (size_t i = 0; i < additionally_seen; ++i) {
 						Player::Field& f = player->fields_[stoi(field_vector[i])];
-						assert(f.vision == VisibleState::kUnexplored);
+						assert(f.vision.state() == VisibleState::kUnexplored);
 						seen_fields.insert(&f);
 					}
 				}
@@ -288,7 +288,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 			iterate_players_existing(p, nr_players, egbase, player) {
 				for (MapIndex m = 0; m < no_of_fields; ++m) {
 					Player::Field& f = player->fields_[m];
-					if (f.vision == VisibleState::kVisible) {
+					if (f.vision.state() == VisibleState::kVisible) {
 						player->rediscover_node(map, map.get_fcoords(map[m]));
 					}
 				}
@@ -330,10 +330,10 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 				const Player::Field& f = player->fields_[m];
 				oss << static_cast<char>(f.vision.is_revealed() ? SavedVisionState::kRevealed :
 				                         f.vision.is_hidden()   ? SavedVisionState::kHidden :
-				                         f.vision == VisibleState::kPreviouslySeen ?
+				                         f.vision.state() == VisibleState::kPreviouslySeen ?
                                                             SavedVisionState::kPreviouslySeen :
                                                             SavedVisionState::kNone);
-				if (f.vision == VisibleState::kPreviouslySeen) {
+				if (f.vision.state() == VisibleState::kPreviouslySeen) {
 					seen_fields.insert(&f);
 					// The data for some of the terrains and edges between PreviouslySeen
 					// and Unexplored fields is stored in an Unexplored field. The data
@@ -341,7 +341,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 					const Coords coords(m % map.get_width(), m / map.get_width());
 					for (const Coords& c : {map.tr_n(coords), map.tl_n(coords), map.l_n(coords)}) {
 						const Player::Field& neighbour = player->fields_[map.get_index(c)];
-						if (neighbour.vision == VisibleState::kUnexplored) {
+						if (neighbour.vision.state() == VisibleState::kUnexplored) {
 							additionally_seen_fields.insert(&neighbour);
 						}
 					}
@@ -350,10 +350,10 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			const Player::Field& f = player->fields_[upper_bound];
 			oss << static_cast<char>(f.vision.is_revealed() ? SavedVisionState::kRevealed :
 			                         f.vision.is_hidden()   ? SavedVisionState::kHidden :
-			                         f.vision == VisibleState::kPreviouslySeen ?
+			                         f.vision.state() == VisibleState::kPreviouslySeen ?
                                                          SavedVisionState::kPreviouslySeen :
                                                          SavedVisionState::kNone);
-			if (f.vision == VisibleState::kPreviouslySeen) {
+			if (f.vision.state() == VisibleState::kPreviouslySeen) {
 				seen_fields.insert(&f);
 			}
 			fw.c_string(oss.str());
