@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Tóth András <txa-dev@posteo.hu>, 2022
+# Tóth András <txa-dev@posteo.hu>, 2024
 # 
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2022\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2024\n"
 "Language-Team: Hungarian (https://app.transifex.com/widelands/teams/35159/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -682,7 +682,7 @@ msgid ""
 " more."
 msgstr ""
 "Ezek a betolakodók nem voltak olyan erősek, mint hitték. Akárkik is voltak, "
-"nem fognak többé zavarni titeket."
+"nem fognak többé zavarni benneteket."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:284
 msgid "Strangers defeated"
