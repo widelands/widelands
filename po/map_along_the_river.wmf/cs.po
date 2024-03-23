@@ -4,10 +4,10 @@
 # 
 # Translators:
 # Antonín Jehlář, 2022
-# Václav Černý <vaclav.vatoz.cerny@gmail.com>, 2022
 # Tomáš Mráz, 2022
 # Jiří Doubravský <jiri.doubravsky@gmail.com>, 2022
 # Petr Valášek, 2023
+# Václav Černý <vaclav.vatoz.cerny@gmail.com>, 2024
 # 
 msgid ""
 msgstr ""
@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
-"Last-Translator: Petr Valášek, 2023\n"
+"Last-Translator: Václav Černý <vaclav.vatoz.cerny@gmail.com>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/widelands/teams/35159/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -283,6 +283,9 @@ msgid ""
 " our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
+"Můj pane, ačkoli by se naši vojáci hrdinně postavili jakémukoli nepříteli, "
+"nepřítel na severu je stále silnější než všechny naše armády dohromady. Měli"
+" bychom se vyhnout konfliktu, dokud jej nedokážeme porazit."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
@@ -294,7 +297,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
 msgid "Peril from the North"
-msgstr ""
+msgstr "Nebezpečí ze severu"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""
@@ -344,6 +347,9 @@ msgid ""
 "their excellent access to the adjacent great lake. A port in the North will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
+"Sire, nyní, kdy jste dobyli zemi Torverskou, můžeme využít jejich výborný "
+"přístup k nádhernému velkému jezeru. Přístav na severu nám poskytne lepší "
+"příležitosti ke kontaktu s ostatními kmeny."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -415,6 +421,10 @@ msgid ""
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
+"Pane, v období silných dešťů se podél potoka na východě vytvořily bažiny, "
+"kterými nemůžeme projít. Než budeme moci pokračovat, musíme je vysušit. "
+"Pokud přinesete do nového skladiště dostatek lopat, pak bažiny odstraní "
+"dobrovolníci."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
@@ -422,6 +432,9 @@ msgid ""
 "will not have removed the swamps before the next wet season. If you bring "
 "more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
+"Pane, všechny lopaty byly rozdány, ale pokud budeme pokračovat tímto tempem,"
+" neodstraníme bažiny před dalším obdobím dešťů. Pokud do nového skladu "
+"přinesete více lopat, připojí se více dobrovolníků."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-03-04 03:06+0000\n"
+"POT-Creation-Date: 2024-03-07 10:16+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -82,7 +82,7 @@ msgid ""
 "tabs: ‘Wares waiting to be shipped’ and ‘workers waiting to embark.’ They "
 "are waiting for a ship to transport them to another port. Currently, there "
 "are none because we have not yet built a second port. So let’s change this!"
-msgstr ""
+msgstr "Prístavy navyše ponúkajú možnosť prepravy výrobkov pomocou lodí. Ak kliknete na prístav, ktorý je už postavený, môžete si všimnúť ďalšie dve karty: „Výrobky, ktoré sa majú dopraviť“ a „Pracovníci čakajúci na nalodenie“. Čakajú na loď, ktorá ich dopraví do ďalšieho prístavu. Momentálne tam nie sú žiadne výrobky ani pracovníci, lebo sme ešte nepostavili druhý prístav. Tak to napravme!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:47
 msgid "Building ports"
@@ -215,7 +215,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
 msgid "Construct two ships"
-msgstr ""
+msgstr "Postavte dve lode"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:107
 msgid ""
@@ -251,7 +251,6 @@ msgid ""
 msgstr "Keď budete mať dosť lodí, zastavte produkciu v lodenici. Lodiar by inak spotreboval všetky vaše kmene a pavúčiu látku na výrobu tuctov lodí."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:122
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:341
 msgid ""
 "This is the icon for stopping production. You will find it in the building "
 "window."
@@ -455,7 +454,7 @@ msgid ""
 "ships and how to send out an expedition. Remember that expeditions are "
 "sometimes the fastest way to reach essential resources – and sometimes the "
 "only one."
-msgstr ""
+msgstr "Doteraz ste sa oboznámili so všetkým o moreplavbe: ako stavať prístavy a lode a ako vyslať loď na výpravu. Treba si zapamätať, že výpravy sú niekedy najrýchlejším spôsobom, ako zabezpečiť prístup k nevyhnutným zdrojom – niekedy i jediným."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:214
 msgid ""
@@ -725,22 +724,22 @@ msgid ""
 "unemployed ferries will rot away and eventually sink."
 msgstr ""
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:348
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349
 msgid "Congratulations"
 msgstr "Blahoželáme"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
 msgid "You have learnt all there is to learn about ships and ferries!"
 msgstr ""
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:351
 msgid ""
 "There is also another island where you can build a port if you wish to try "
 "launching another expedition."
 msgstr ""
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:353
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:352
 msgid ""
 "As always, you can continue playing and practice a bit more on this map if "
 "you like, or get your captain’s license ready and try out your new skills in"

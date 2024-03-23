@@ -756,7 +756,7 @@ msgstr "Maak dat Fenster för Weertskupp-Instellens up."
 msgid ""
 "The window can be accessed by clicking on any flag you own or from warehouse"
 " windows."
-msgstr ""
+msgstr "Du kannst deeses Fenster vun elkeen vun dienen Fahnen of Kraamhuus-Fensters opmaken."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:482
@@ -785,7 +785,7 @@ msgstr "Dat is dat Teken."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:474
 msgid "The same button is also available in warehouse windows."
-msgstr ""
+msgstr "De sülve Knoop gifft ’t ok in Kraamhuus-Fensters."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:475
 msgid ""
@@ -794,7 +794,7 @@ msgid ""
 "roads, ferries, or ships, so you can have more than one economy if their "
 "flags are not connected by any means of transportation. In that case, your "
 "separate economies can have different settings for wares."
-msgstr ""
+msgstr "Mark, dat de Knoopen nich sünner Grund »Weertskupp-Instellens för deese Fahn/deeses Huus hör/sien Weertskupp« heten. Een Weertskupp umfaat all Husen un Fahnen, wat mit Straten, Fähren of Schippen verbunnen sünd, un du kannst mehr as eene Weertskupp hebben, wenn hör Fahnen nich eets verbunnen sünd. Dann könen diene Weertskuppens all hör eegen Instellens för Waren hebben."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""
