@@ -18,6 +18,7 @@
 
 #include "economy/economy.h"
 
+#include <algorithm>
 #include <memory>
 
 #include "base/log.h"
@@ -420,6 +421,15 @@ void Economy::remove_warehouse(Warehouse& wh) {
 		if (warehouses_[i] == &wh) {
 			warehouses_[i] = *warehouses_.rbegin();
 			warehouses_.pop_back();
+
+			// Trigger districts recalculation
+			for (Flag* flag : flags_) {
+				if (flag->get_district_center(type()) == &wh) {
+					flag->set_district_center(type(), nullptr);
+				}
+			}
+			start_request_timer();
+
 			return;
 		}
 	}
@@ -435,7 +445,6 @@ void Economy::remove_warehouse(Warehouse& wh) {
  * Important: This must only be called by the \ref Request class.
  */
 void Economy::add_request(Request& req) {
-	assert(req.is_open());
 	assert(!has_request(req));
 
 	assert(&owner());
@@ -504,12 +513,28 @@ Worker& Economy::soldier_prototype(const WorkerDescr* d) {
 	return *soldier_prototype_;
 }
 
-bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type) const {
-	Quantity const target = target_quantity(ware_or_worker_type).permanent;
+bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type,
+                                   const Flag* flag) const {
+	Quantity const target_global = target_quantity(ware_or_worker_type).permanent;
 	const bool is_soldier = type_ == wwWORKER && ware_or_worker_type == owner().tribe().soldier();
 
-	if (target > 0) {  // We have a target quantity set
-		Quantity quantity = 0;
+	if (target_global > 0 && !warehouses_.empty()) {
+		// We have a target quantity set.
+		Quantity target_district;
+		if (flag != nullptr && nr_districts_ > 0) {
+			target_district = target_global / nr_districts_;
+			if (target_district * nr_districts_ < target_global) {
+				++target_district;  // Rounding up is important for wares with small targets
+			}
+		} else {
+			target_district = 0;
+		}
+
+		bool this_district_has_normal = false;
+		bool this_district_has_prefer = false;
+		bool other_district_has_prefer = false;
+		Quantity quantity_global = 0;
+		Quantity quantity_district = 0;
 		for (const Warehouse* wh : warehouses_) {
 			Quantity stock = type_ == wwWARE ? wh->get_wares().stock(ware_or_worker_type) :
                                             wh->get_workers().stock(ware_or_worker_type);
@@ -521,13 +546,43 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type) c
 				stock -= garrison;
 			}
 
-			quantity += stock;
-			if (quantity >= target) {
+			quantity_global += stock;
+
+			if (flag != nullptr) {
+				const StockPolicy policy = type() == wwWARE ?
+                                          wh->get_ware_policy(ware_or_worker_type) :
+                                          wh->get_worker_policy(ware_or_worker_type);
+				if (flag->get_district_center(type()) == wh->base_flag().get_district_center(type())) {
+					quantity_district += stock;
+
+					this_district_has_normal |= policy == StockPolicy::kNormal;
+					this_district_has_prefer |= policy == StockPolicy::kPrefer;
+
+					if (quantity_district >= target_district && quantity_global >= target_global) {
+						// If a district is specified, the ware is needed if the district lacks it
+						// even if the global stock is above target.
+						// If the global stock is below target we also need it.
+						return false;
+					}
+				} else {
+					other_district_has_prefer |= policy == StockPolicy::kPrefer;
+				}
+			} else if (quantity_global >= target_global) {
 				return false;
 			}
 		}
 
-		return true;
+		if (flag != nullptr && quantity_global >= target_global) {
+			// We only need the ware locally but not globally. But...
+			if (!this_district_has_normal && !this_district_has_prefer) {
+				return false;  // we can't store it, so we don't need it.
+			}
+			if (other_district_has_prefer && !this_district_has_prefer) {
+				return false;  // another district would take it all.
+			}
+		}
+
+		return true;  // Ware is needed globally or locally.
 	}
 
 	// Target quantity is set to 0, we need to check if there is an open request.
@@ -661,10 +716,13 @@ void Economy::split(const std::set<OPtr<Flag>>& flags) {
 		e->add_flag(flag);
 	}
 
+	e->recalc_districts();
+
 	// As long as rebalance commands are tied to specific flags, we
 	// need this, because the flag that rebalance commands for us were
 	// tied to might have been moved into the other economy
 	start_request_timer();
+	e->start_request_timer();
 }
 
 /**
@@ -674,8 +732,11 @@ void Economy::split(const std::set<OPtr<Flag>>& flags) {
 void Economy::start_request_timer(const Duration& delta) {
 	if (!flags_.empty()) {
 		if (upcast(Game, game, &owner_.egbase())) {
-			game->cmdqueue().enqueue(
-			   new CmdCallEconomyBalance(game->get_gametime() + delta, this, request_timerid_));
+			Flag* flag = get_arbitrary_flag();
+			if (flag->get_economy(type()) == this) {  // Sanity check during economy splits
+				game->cmdqueue().enqueue(new CmdCallEconomyBalance(
+				   game->get_gametime() + delta, flag, type(), request_timerid_));
+			}
 		}
 	}
 }
@@ -684,9 +745,8 @@ void Economy::start_request_timer(const Duration& delta) {
  * Find the supply that is best suited to fulfill the given request.
  * \return 0 if no supply is found, the best supply otherwise
  */
-Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost) {
-	assert(req.is_open());
-
+Supply*
+Economy::find_best_supply(Game& game, const Request& req, int32_t& cost, bool allow_import) {
 	Route buf_route0;
 	Route buf_route1;
 	Supply* best_supply = nullptr;
@@ -696,33 +756,46 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 
 	available_supplies_.clear();
 
-	for (size_t i = 0; i < supplies_.get_nrsupplies(); ++i) {
-		Supply& supp = supplies_[i];
+	for (int pass = 0; pass < 2; ++pass) {
+		for (size_t i = 0; i < supplies_.get_nrsupplies(); ++i) {
+			Supply& supp = supplies_[i];
 
-		// Just skip if supply does not provide required ware
-		if (supp.nr_supplies(game, req) == 0u) {
-			continue;
+			// Just skip if supply does not provide required ware
+			if (supp.nr_supplies(game, req) == 0u) {
+				continue;
+			}
+
+			const SupplyProviders provider = supp.provider_type(&game);
+
+			// We generally ignore disponible wares on ship as it is not possible to reliably
+			// calculate route (transportation time)
+			if (provider == SupplyProviders::kShip) {
+				continue;
+			}
+
+			const Widelands::Flag& supp_flag = supp.get_position(game)->base_flag();
+
+			if (pass == 0 && !same_district(target_flag, supp_flag)) {
+				// Do not consider imports in the first pass
+				continue;
+			}
+
+			// Use birds-eye distance for performance, may be inaccurate.
+			const uint32_t dist =
+			   game.map().calc_distance(target_flag.get_position(), supp_flag.get_position());
+
+			UniqueDistance ud = {dist, supp.get_position(game)->serial(), provider};
+
+			// std::map quarantees uniqueness, practically it means that if more wares are on the same
+			// flag, only
+			// first one will be inserted into available_supplies
+			available_supplies_.insert(std::make_pair(ud, &supplies_[i]));
 		}
 
-		const SupplyProviders provider = supp.provider_type(&game);
-
-		// We generally ignore disponible wares on ship as it is not possible to reliably
-		// calculate route (transportation time)
-		if (provider == SupplyProviders::kShip) {
-			continue;
+		if (!available_supplies_.empty() || !allow_import) {
+			// Perform a second pass permitting imports only if no same-district supplies were found.
+			break;
 		}
-
-		const Widelands::Coords provider_position =
-		   supp.get_position(game)->base_flag().get_position();
-
-		const uint32_t dist = game.map().calc_distance(target_flag.get_position(), provider_position);
-
-		UniqueDistance ud = {dist, supp.get_position(game)->serial(), provider};
-
-		// std::map quarantees uniqueness, practically it means that if more wares are on the same
-		// flag, only
-		// first one will be inserted into available_supplies
-		available_supplies_.insert(std::make_pair(ud, &supplies_[i]));
 	}
 
 	// Now available supplies have been sorted by distance to requestor
@@ -803,6 +876,9 @@ void Economy::process_requests(Game& game, RSPairStruct* supply_pairs) {
 	// right now, therefore we need to shcedule next pairing
 	for (Request* temp_req : requests_) {
 		Request& req = *temp_req;
+		if (!req.is_open()) {
+			continue;
+		}
 
 		// We somehow get desynced request lists that don't trigger desync
 		// alerts, so add info to the sync stream here.
@@ -815,7 +891,7 @@ void Economy::process_requests(Game& game, RSPairStruct* supply_pairs) {
 		}
 
 		int32_t cost;  // estimated time in milliseconds to fulfill Request
-		Supply* const supp = find_best_supply(game, req, cost);
+		Supply* const supp = find_best_supply(game, req, cost, true);
 
 		if (supp == nullptr) {
 			continue;
@@ -915,7 +991,7 @@ void Economy::create_requested_worker(Game& game, DescriptionIndex index) {
 	for (Request* temp_req : requests_) {
 		const Request& req = *temp_req;
 
-		if (req.get_type() != wwWORKER || req.get_index() != index) {
+		if (!req.is_open() || req.get_type() != wwWORKER || req.get_index() != index) {
 			continue;
 		}
 
@@ -1147,6 +1223,182 @@ void Economy::handle_active_supplies(Game& game) {
 	}
 }
 
+bool Economy::same_district(const PlayerImmovable& p1, const PlayerImmovable& p2) const {
+	const Warehouse* wh = p1.base_flag().get_district_center(type());
+	return wh != nullptr && wh == p2.base_flag().get_district_center(type());
+}
+
+// Note: Do not call this function when pending road network splits and merges may exist!
+void Economy::recalc_districts() {
+	if (flags_.empty()) {
+		nr_districts_ = 0;
+		return;
+	}
+
+	if (warehouses_.empty()) {
+		// Special case for economy without warehouses: Obviously there are no districts.
+		nr_districts_ = 0;
+		for (Flag* flag : flags_) {
+			flag->set_district_center(type(), nullptr);
+		}
+		return;
+	}
+
+	// First pass: Assign each flag to the closest warehouse.
+	RouteAStar<AStarZeroEstimator> astar(*router_, type_, AStarZeroEstimator());
+	for (Warehouse* wh : warehouses_) {
+		wh->base_flag().set_district_center(type(), wh);
+		astar.push(wh->base_flag());
+	}
+	while (RoutingNode* current = astar.step()) {
+		current->base_flag().set_district_center(
+		   type(), astar.route_start(*current).base_flag().get_district_center(type()));
+	}
+
+	// Second pass: Identify minimal monodirectional distances between warehouses.
+	constexpr uint32_t kClusterThreshold = 12 * 1800;  // 12 nodes on flat terrain.
+	std::map<std::pair<Warehouse*, Warehouse*>, uint32_t> warehouse_distances;
+
+	for (Flag* flag1 : flags_) {
+		Warehouse* wh1 = flag1->get_district_center(type());
+
+		RoutingNodeNeighbours neighbours;
+		flag1->get_neighbours(type(), neighbours);
+
+		for (RoutingNodeNeighbour& flag2 : neighbours) {
+			Warehouse* wh2 = flag2.get_neighbour()->base_flag().get_district_center(type());
+			if (wh1 != wh2) {
+				uint32_t cost =
+				   flag2.get_cost() +
+				   (type() == wwWARE ?
+                   (flag1->mpf_realcost_ware + flag2.get_neighbour()->mpf_realcost_ware) :
+                   (flag1->mpf_realcost_worker + flag2.get_neighbour()->mpf_realcost_worker));
+
+				if (cost < kClusterThreshold) {
+					std::pair<Warehouse*, Warehouse*> key(wh1->serial() < wh2->serial() ? wh1 : wh2,
+					                                      wh1->serial() < wh2->serial() ? wh2 : wh1);
+
+					auto it = warehouse_distances.find(key);
+					if (it == warehouse_distances.end()) {
+						warehouse_distances.emplace(key, cost);
+					} else if (cost < it->second) {
+						it->second = cost;
+					}
+				}
+			}
+		}
+	}
+
+	// Third pass: Cluster warehouses within the distance threshold.
+	using Cluster = std::vector<Warehouse*>;
+	std::vector<Cluster> all_clusters;
+	using ClusterIterator = std::vector<Cluster>::iterator;
+
+	for (Warehouse* current : warehouses_) {
+		// Find all warehouses this one should be clustered with
+		Cluster current_cluster = {current};
+		for (auto& pair : warehouse_distances) {
+			if (pair.first.first == current) {
+				current_cluster.push_back(pair.first.second);
+			} else if (pair.first.second == current) {
+				current_cluster.push_back(pair.first.first);
+			}
+		}
+
+		// Now find all existing clusters to merge this one with
+		std::vector<ClusterIterator> merge_iterators;
+		for (auto it = all_clusters.begin(); it != all_clusters.end(); ++it) {
+			for (Warehouse* wh : current_cluster) {
+				if (std::find(it->begin(), it->end(), wh) != it->end()) {
+					merge_iterators.push_back(it);
+					break;
+				}
+			}
+		}
+
+		if (merge_iterators.empty()) {  // New cluster
+			all_clusters.emplace_back(current_cluster);
+		} else {  // Merge into other cluster(s)
+			ClusterIterator it_merge = merge_iterators.front();
+			it_merge->insert(it_merge->end(), current_cluster.begin(), current_cluster.end());
+
+			for (ClusterIterator iterator : merge_iterators) {
+				if (iterator != it_merge) {
+					it_merge->insert(it_merge->end(), iterator->begin(), iterator->end());
+					all_clusters.erase(iterator);
+				}
+			}
+		}
+	}
+
+	// Fourth pass: Assign each flag to its district's representative warehouse.
+	std::map<Warehouse*, Warehouse*> warehouse_to_district;
+
+	for (Cluster& cluster : all_clusters) {
+		// Sort each cluster by warehouse serials and remove duplicate entries
+		std::sort(cluster.begin(), cluster.end(),
+		          [](const Warehouse* a, const Warehouse* b) { return a->serial() < b->serial(); });
+		cluster.erase(std::unique(cluster.begin(), cluster.end()), cluster.end());
+
+		for (Warehouse* wh : cluster) {
+			// Identity each cluster with its first (i.e. lowest serial) warehouse
+			warehouse_to_district.emplace(wh, cluster.front());
+		}
+	}
+
+	for (Flag* flag : flags_) {
+		flag->set_district_center(
+		   type(), warehouse_to_district.at(flag->get_district_center(type())));
+	}
+	nr_districts_ = all_clusters.size();
+}
+
+/** Cancel cross-district imports when suitable wares become available locally. */
+void Economy::check_imports(Game& game) {
+	for (Request* request : requests_) {
+		if (request->get_num_transfers() == 0) {
+			continue;
+		}
+
+		Flag& target_flag = request->target().base_flag();
+		Warehouse* target_district = target_flag.get_district_center(type());
+		if (target_district == nullptr) {
+			continue;
+		}
+
+		for (size_t i = 0; i < request->get_num_transfers(); ++i) {
+			MapObject* location;
+			if (request->get_transfers()[i]->get_ware() != nullptr) {
+				location = request->get_transfers()[i]->get_ware()->get_location(game);
+			} else {
+				location = request->get_transfers()[i]->get_worker()->get_location(game);
+			}
+
+			upcast(PlayerImmovable, imm, location);
+			if (imm == nullptr) {
+				continue;
+			}
+
+			Flag& supply_flag = imm->base_flag();
+			Warehouse* supply_district = supply_flag.get_district_center(type());
+			if (supply_district == nullptr || supply_district == target_district) {
+				continue;
+			}
+
+			// The transfer we are looking at is an import. Check for available local supplies.
+			int cost;
+			Supply* local_supply = find_best_supply(game, *request, cost, false);
+			if (local_supply == nullptr) {
+				continue;
+			}
+
+			request->cancel_transfer(i);
+			request->start_transfer(game, *local_supply);
+			break;  // Exchange at most one import per request per cycle.
+		}
+	}
+}
+
 /**
  * Balance Requests and Supplies by collecting and weighing pairs, and
  * starting transfers for them.
@@ -1161,10 +1413,14 @@ void Economy::balance(uint32_t const timerid) {
 
 	check_splits();
 
+	recalc_districts();
+
 	create_requested_workers(game);
 
 	balance_requestsupply(game);
 
 	handle_active_supplies(game);
+
+	check_imports(game);
 }
 }  // namespace Widelands
