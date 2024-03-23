@@ -29,16 +29,14 @@ end
 -- we need to find the plans how to build a farm
 function farm_plans()
    local f = map:get_field(47, 10)
-   local window_names = {}
-   for i,b in ipairs(p1:get_buildings("empire_farm1")) do
-      table.insert(window_names, string.bformat("building_window_%u", b.serial))
-   end
    local farmclick = false
    local count = 0
    local o1 = nil
    while not (farmclick or p1.defeated or (f.owner == p1)) do
-      for i,w in ipairs(window_names) do
-         if mv.windows[w] then
+      -- Serials change on save and reload, we must update for every check
+      for i,b in ipairs(p1:get_buildings("empire_farm1")) do
+         local farm_window_name = string.bformat("building_window_%u", b.serial)
+         if mv.windows[farm_window_name] then
             farmclick = true
          end
       end

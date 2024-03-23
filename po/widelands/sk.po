@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-26 02:28+0000\n"
+"POT-Creation-Date: 2024-03-02 02:23+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -1165,7 +1165,7 @@ msgstr "Značky:"
 #. * "Teams of 2", etc.
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:397
 msgid "This map is suitable for:"
-msgstr ""
+msgstr "Táto mapa je vhodná pre:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:399
 msgid ""
@@ -2261,7 +2261,7 @@ msgstr ""
 #: ../../src/logic/generic_save_handler.cc:236
 #, c-format
 msgid "File ‘%s’ could not be removed!"
-msgstr ""
+msgstr "Nepodarilo sa vymazať súbor „%s“!"
 
 #: ../../src/logic/generic_save_handler.cc:237
 msgid "Try saving under a different name!"
@@ -3334,7 +3334,7 @@ msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was running at the supposed port or the server shut down as"
 " you tried to connect."
-msgstr ""
+msgstr "Nepodarilo sa nadviazať spojenie so zadanou adresou. Buď na predpokladanom porte nebežal žiaden server hry Widelands, alebo bol server ukončený, keď ste sa naň pokúšali pripojiť."
 
 #: ../../src/network/gameclient.cc:814
 #, c-format
@@ -3508,7 +3508,7 @@ msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
-msgstr "Nepodarilo sa nadviazať spojenie so zadanou adresou.\nBuď na uvedenom porte nebežal žiaden metaserver,\naleob vaše nastavenie siete je nesprávne."
+msgstr "Nepodarilo sa nadviazať spojenie so zadanou adresou.\nBuď na predpokladanom porte nebežal žiaden metaserver,\nalebo vaše nastavenie siete je nesprávne."
 
 #: ../../src/network/internet_gaming.cc:168
 msgid "Users marked with IRC will possibly not react to messages."
@@ -3572,10 +3572,10 @@ msgstr "UPOZORNENIE: Prijal sa príkaz %s, hoci nie sme v stave CONNECTING."
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Časový posun servera je %d sekunda."
+msgstr[1] "Časový posun servera sú %d sekundy."
+msgstr[2] "Časový posun servera je %d sekúnd."
+msgstr[3] "Časový posun servera je %d sekúnd."
 
 #: ../../src/network/internet_gaming.cc:509
 #, c-format
@@ -3612,7 +3612,7 @@ msgstr "Nepodarilo sa odoslať chatovú správu."
 
 #: ../../src/network/internet_gaming.cc:674
 msgid "Command could not be executed."
-msgstr ""
+msgstr "Nepodarilo sa vykonať príkaz."
 
 #: ../../src/network/internet_gaming.cc:692
 #, c-format
@@ -3922,11 +3922,11 @@ msgstr ""
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/scripting/lua_ui.cc:1153 ../../src/wui/interactive_base.cc:311
+#: ../../src/scripting/lua_ui.cc:1158 ../../src/wui/interactive_base.cc:311
 msgid "Plugin Error"
 msgstr ""
 
-#: ../../src/scripting/lua_ui.cc:1154 ../../src/wui/interactive_base.cc:312
+#: ../../src/scripting/lua_ui.cc:1159 ../../src/wui/interactive_base.cc:312
 #, c-format
 msgid ""
 "Error when running plugin:\n"
@@ -3993,7 +3993,7 @@ msgstr ""
 #: ../../src/ui_basic/dropdown.cc:111
 msgctxt "dropdown"
 msgid "Select Item"
-msgstr ""
+msgstr "Vybrať položku"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
 #: ../../src/ui_basic/dropdown.cc:422
@@ -5220,7 +5220,7 @@ msgstr "Naozaj chcete vymazať adresár „%s“ a všetok jeho obsah?"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:441
 #, c-format
 msgid "Do you really want to delete the map ‘%s’?"
-msgstr "Naozaj chcete zmazať mapu „%s“?"
+msgstr "Naozaj chcete vymazať mapu „%s“?"
 
 #. * TRANSLATORS: Header for campaign difficulty
 #: ../../src/ui_fsmenu/addons/packager_box.cc:489
@@ -6097,7 +6097,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_game.cc:310
 msgid "Forbid fighting between players"
-msgstr ""
+msgstr "Zakázané boje medzi hráčmi"
 
 #: ../../src/ui_fsmenu/launch_game.cc:340
 msgid "All selected starting conditions ignore the map’s starting positions"
@@ -7020,7 +7020,7 @@ msgstr "Maximálny počet súborov pre automatické ukladanie:"
 
 #: ../../src/ui_fsmenu/options.cc:253
 msgid "Delete replays after:"
-msgstr "Vymazať záznamy po:"
+msgstr "Vymazať záznamy po dobe:"
 
 #: ../../src/ui_fsmenu/options.cc:263
 msgid "Skip autosaves while inactive"
@@ -7452,11 +7452,11 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1780
 msgid "Game ended unexpectedly"
-msgstr ""
+msgstr "Neočakávané ukončenie hry"
 
 #: ../../src/wlapplication.cc:1780
 msgid "Unexpected error during the game"
-msgstr ""
+msgstr "Neočakávaná chyba počas hry"
 
 #: ../../src/wlapplication.cc:1783
 #, c-format
@@ -7480,11 +7480,11 @@ msgid ""
 "%s\n"
 "\n"
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
-msgstr ""
+msgstr "Hra sa skončila neočakávane kvôli nasledovnej príčine:\n\n%s\n\nChcete, aby sa Widelands pokúsil vytvoriť núdzovo uloženú hru? Väčšinou je možné jej načítanie a pokračovanie v hre."
 
 #: ../../src/wlapplication.cc:1826
 msgid "Emergency save failed"
-msgstr ""
+msgstr "Núdzové uloženie zlyhalo"
 
 #: ../../src/wlapplication.cc:1827
 #, c-format
@@ -7728,7 +7728,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:361
 msgid "Toggle Minimap"
-msgstr ""
+msgstr "Prepnúť minimapu"
 
 #: ../../src/wlapplication_options.cc:366
 msgid "Encyclopedia"
@@ -7856,7 +7856,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:541
 msgid "Toggle Grid"
-msgstr ""
+msgstr "Prepnúť mriežku"
 
 #: ../../src/wlapplication_options.cc:546
 msgid "Toggle Immovables"
@@ -7864,11 +7864,11 @@ msgstr "Prepnúť nehybné objekty"
 
 #: ../../src/wlapplication_options.cc:551
 msgid "Toggle Animals"
-msgstr ""
+msgstr "Prepnúť zvieratá"
 
 #: ../../src/wlapplication_options.cc:556
 msgid "Toggle Resources"
-msgstr ""
+msgstr "Prepnúť zdroje"
 
 #: ../../src/wlapplication_options.cc:562
 msgid "Toggle Maximum Build Spaces"
@@ -8438,7 +8438,7 @@ msgstr "(neaktívne)"
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
 #. * icon indicating a trend. Very little space is available.
-#: ../../src/wlapplication_options.cc:1496 ../../src/wui/waresdisplay.cc:548
+#: ../../src/wlapplication_options.cc:1496 ../../src/wui/waresdisplay.cc:637
 #, c-format
 msgid "%1$s%2$s"
 msgstr ""
@@ -9323,7 +9323,7 @@ msgstr ""
 
 #: ../../src/wui/game_diplomacy_menu.cc:272
 msgid "Approve"
-msgstr ""
+msgstr "Schváliť"
 
 #: ../../src/wui/game_diplomacy_menu.cc:273
 msgid "Reject"
@@ -9551,10 +9551,10 @@ msgstr[3] "%d súborov"
 #: ../../src/wui/gamedetails.cc:119
 msgid "Selected %1% directory and %2%:"
 msgid_plural "Selected %1% directories and %2%:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Vybratý %1% adresár a %2%:"
+msgstr[1] "Vybraté %1% adresáre a %2%:"
+msgstr[2] "Vybratých %1% adresárov a %2%:"
+msgstr[3] "Vybratých %1% adresárov a %2%:"
 
 #: ../../src/wui/gamedetails.cc:137
 msgid "Directory Name:"
@@ -9948,7 +9948,7 @@ msgstr "Vojaci"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:319 ../../src/wui/stock_menu.cc:40
-#: ../../src/wui/ware_statistics_menu.cc:152 ../../src/wui/waresdisplay.cc:81
+#: ../../src/wui/ware_statistics_menu.cc:152 ../../src/wui/waresdisplay.cc:84
 msgid "Stock"
 msgstr "Zásoby"
 
@@ -10392,10 +10392,10 @@ msgstr "Naozaj chcete vymazať túto hru?"
 #, c-format
 msgid "Do you really want to delete this %d game?"
 msgid_plural "Do you really want to delete these %d games?"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naozaj chcete vymazať túto %d hru?"
+msgstr[1] "Naozaj chcete vymazať tieto %d hry?"
+msgstr[2] "Naozaj chcete vymazať týchto %d hier?"
+msgstr[3] "Naozaj chcete vymazať týchto %d hier?"
 
 #: ../../src/wui/savegamedeleter.cc:96
 msgid "Error Deleting File!"
@@ -10407,7 +10407,7 @@ msgstr ""
 
 #: ../../src/wui/savegamedeleter.cc:108
 msgid "The game could not be deleted."
-msgstr ""
+msgstr "Nepodarilo sa vymazať hru."
 
 #. * TRANSLATORS: Used with multiple games, 1 game has a separate string. DO
 #. NOT omit the
@@ -10416,10 +10416,10 @@ msgstr ""
 #, c-format
 msgid "%d game could not be deleted."
 msgid_plural "%d games could not be deleted."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Nepodarilo sa vymazať %d hru."
+msgstr[1] "Nepodarilo sa vymazať %d hry."
+msgstr[2] "Nepodarilo sa vymazať %d hier."
+msgstr[3] "Nepodarilo sa vymazať %d hier."
 
 #: ../../src/wui/savegamedeleter.cc:124
 msgid "Do you really want to delete this replay?"
@@ -10431,14 +10431,14 @@ msgstr "Naozaj chcete vymazať tento záznam?"
 #, c-format
 msgid "Do you really want to delete this %d replay?"
 msgid_plural "Do you really want to delete these %d replays?"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naozaj chcete vymazať tento %d záznam?"
+msgstr[1] "Naozaj chcete vymazať tieto %d záznamy?"
+msgstr[2] "Naozaj chcete vymazať týchto %d záznamov?"
+msgstr[3] "Naozaj chcete vymazať týchto %d záznamov?"
 
 #: ../../src/wui/savegamedeleter.cc:137
 msgid "The replay could not be deleted."
-msgstr ""
+msgstr "Nepodarilo sa vymazať záznam."
 
 #. * TRANSLATORS: Used with multiple replays, 1 replay has a separate string.
 #. DO NOT omit the
@@ -10447,10 +10447,10 @@ msgstr ""
 #, c-format
 msgid "%d replay could not be deleted."
 msgid_plural "%d replays could not be deleted."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Nepodarilo sa vymazať %d záznam."
+msgstr[1] "Nepodarilo sa vymazať %d záznamy."
+msgstr[2] "Nepodarilo sa vymazať %d záznamov."
+msgstr[3] "Nepodarilo sa vymazať %d záznamov."
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
@@ -11030,29 +11030,29 @@ msgstr "Pracovníci čakajúci na nalodenie"
 msgid "Expedition"
 msgstr "Výprava"
 
-#: ../../src/wui/waresdisplay.cc:542
+#: ../../src/wui/waresdisplay.cc:631
 msgid "↓"
 msgstr "↓"
 
-#: ../../src/wui/waresdisplay.cc:544
+#: ../../src/wui/waresdisplay.cc:633
 msgid "↑"
 msgstr "↑"
 
-#: ../../src/wui/waresdisplay.cc:545
+#: ../../src/wui/waresdisplay.cc:634
 msgid "="
 msgstr "="
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:583
+#: ../../src/wui/waresdisplay.cc:672
 msgid "%1%k"
 msgstr ""
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:586
+#: ../../src/wui/waresdisplay.cc:675
 msgid "%1%M"
 msgstr ""
 
@@ -11060,7 +11060,7 @@ msgstr ""
 #. 5,000,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:589
+#: ../../src/wui/waresdisplay.cc:678
 msgid "%1%G"
 msgstr ""
 

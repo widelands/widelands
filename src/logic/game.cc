@@ -378,8 +378,8 @@ void Game::init_newgame(const GameSettings& settings) {
 			}
 		}
 
-		diplomacy_allowed_ &= ((settings.flags & GameSettings::Flags::kForbidDiplomacy) == 0);
-		naval_warfare_allowed_ &= ((settings.flags & GameSettings::Flags::kAllowNavalWarfare) != 0);
+		diplomacy_allowed_ = ((settings.flags & GameSettings::Flags::kForbidDiplomacy) == 0);
+		naval_warfare_allowed_ = ((settings.flags & GameSettings::Flags::kAllowNavalWarfare) != 0);
 		win_condition_duration_ = settings.win_condition_duration;
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		table->do_not_warn_about_unaccessed_keys();
@@ -865,7 +865,7 @@ void Game::cleanup_for_load() {
 
 	pending_diplomacy_actions_.clear();
 	diplomacy_allowed_ = true;
-	naval_warfare_allowed_ = true;
+	naval_warfare_allowed_ = false;
 
 	// Statistics
 	general_stats_.clear();
