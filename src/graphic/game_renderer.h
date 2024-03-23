@@ -28,6 +28,7 @@ void draw_terrain(uint32_t gametime,
                   const FieldsToDraw& fields_to_draw,
                   float scale,
                   const Workareas& workarea,
+                  bool height_heat_map,
                   bool grid,
                   const Widelands::Player*,
                   RenderTarget* dst);

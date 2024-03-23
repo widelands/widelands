@@ -55,6 +55,7 @@ void draw_terrain(uint32_t gametime,
                   const FieldsToDraw& fields_to_draw,
                   const float scale,
                   const Workareas& workarea,
+                  bool height_heat_map,
                   bool grid,
                   const Widelands::Player* player,
                   RenderTarget* dst) {
@@ -77,12 +78,15 @@ void draw_terrain(uint32_t gametime,
 	i.terrain_arguments.fields_to_draw = &fields_to_draw;
 	i.terrain_arguments.scale = scale;
 	i.terrain_arguments.player = player;
+	i.terrain_arguments.height_heat_map = height_heat_map;
 	RenderQueue::instance().enqueue(i);
 
 	// Enqueue the drawing of the dither layer.
-	i.program_id = RenderQueue::Program::kTerrainDither;
-	i.blend_mode = BlendMode::UseAlpha;
-	RenderQueue::instance().enqueue(i);
+	if (!height_heat_map) {
+		i.program_id = RenderQueue::Program::kTerrainDither;
+		i.blend_mode = BlendMode::UseAlpha;
+		RenderQueue::instance().enqueue(i);
+	}
 
 	if (!workarea.empty()) {
 		// Enqueue the drawing of the workarea overlay layer.
