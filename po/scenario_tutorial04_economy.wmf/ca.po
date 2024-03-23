@@ -3,14 +3,14 @@
 # 
 # Translators:
 # GunChleoc, 2016
-# Juanjo, 2015-2022
+# Juanjo, 2015-2022,2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-03-04 03:06+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: Juanjo, 2015-2022\n"
+"Last-Translator: Juanjo, 2015-2022,2024\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -757,7 +757,7 @@ msgstr "Obriu la finestra «Opcions de l’economia»."
 msgid ""
 "The window can be accessed by clicking on any flag you own or from warehouse"
 " windows."
-msgstr ""
+msgstr "A aquesta finestra s’hi pot accedir amb un clic a qualsevol bandera de les vostres o des de les finestres dels magatzems."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:482
@@ -786,7 +786,7 @@ msgstr "Aquesta és la icona."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:474
 msgid "The same button is also available in warehouse windows."
-msgstr ""
+msgstr "Aquest botó també està disponible a les finestres dels magatzems."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:475
 msgid ""
@@ -795,7 +795,7 @@ msgid ""
 "roads, ferries, or ships, so you can have more than one economy if their "
 "flags are not connected by any means of transportation. In that case, your "
 "separate economies can have different settings for wares."
-msgstr ""
+msgstr "Tingueu en compte que els botons es diuen «Configura l'economia d'aquesta bandera/edifici» per algun motiu. Una economia està formada per un conjunt d'edificis i banderes connectats per camins, transbordadors o vaixells. Per això podeu tenir més d'una economia si les seves banderes no estan connectades per cap mitjà de transport. En aquest cas, les economies separades poden tenir configuracions diferents de béns."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""

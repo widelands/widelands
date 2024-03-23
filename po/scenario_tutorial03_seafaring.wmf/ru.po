@@ -6,7 +6,7 @@
 # Anton Khabarov <2233009@gmail.com>, 2015
 # nskdmitry, 2021
 # Viktor Skachkov <awsswa59@gmail.com>, 2019
-# Yuriy Sokolov <lention@mail.ru>, 2022
+# Yuriy Sokolov <lention@mail.ru>, 2022,2024
 # 6da4f49c4b78e697e34b24b2a66289f5, 2016
 # bcd998a534fa92d05529385de8735da7_84390ba <27ce5340b01d4cdb2226fa37a41159b9_403942>, 2016
 # Олег Шевченко <olegrock@gmail.com>, 2017
@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-03-04 03:06+0000\n"
+"POT-Creation-Date: 2024-03-07 10:16+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
-"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2022\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2022,2024\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -259,7 +259,6 @@ msgid ""
 msgstr "Вам нужно остановить свою верфь, когда у вас достаточно кораблей. В противном случае, ваш корабел переработает все ваши брёвна и шёлк, создавая десятки кораблей."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:122
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:341
 msgid ""
 "This is the icon for stopping production. You will find it in the building "
 "window."
@@ -320,7 +319,7 @@ msgstr "Экспедиции могут быть запущены в любом 
 msgid ""
 "You can check out the needed wares in the Expedition tab of your port (it "
 "will appear in the last place when you’ve started an expedition)."
-msgstr ""
+msgstr "Вы можете ознакомиться с необходимыми товарами на вкладке Экспедиция вашего порта (она появится в конце, когда вы начнете экспедицию)."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:152
 msgid "Now try this out. I will tell you later what the next steps are."
@@ -481,14 +480,14 @@ msgid ""
 "any number of soldiers. The desired number makes sure that defenders are "
 "requested by the port or headquarters, and once they are garrisoned there, "
 "they don't get sent away to serve other needs."
-msgstr ""
+msgstr "Чтобы убедиться, что они должным образом защищены, вы можете установить желаемое количество обороняющихся солдат на вкладке Солдаты, так же как и в военных зданиях. В то же время они являются складами, поэтому в них может находиться любое количество солдат. Желаемое количество гарантирует, что порт или штаб-квартира запросят защитников, и как только они разместятся там, их не отправят в другие места."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:216
 msgid ""
 "On this map, there is no enemy to fear. In other games, you should set some "
 "defenders for your ports and make building one or two military "
 "fortifications around your new colonies a priority."
-msgstr ""
+msgstr "На этой карте нет врагов, которых стоит бояться. В других играх вам следует установить несколько защитников для своих портов и обязательно построить одно-два военных строения вокруг ваших новых колоний."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:223
 msgid "Our mission"
@@ -725,30 +724,30 @@ msgid ""
 "As you can see, ferries can be produced quite quickly, but you don't need to"
 " worry about wasted materials, because ferry yards normally only produce "
 "them on demand, when there are unserviced waterways."
-msgstr ""
+msgstr "Как видите, паромы строят довольно быстро, и вам не нужно беспокоиться о ненужных товарах, потому что паромные верфи производят их только по требованию, когда есть необслуживаемые переправы."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:340
 msgid ""
 "As long as a ferry services a waterway, its lifetime is unlimited, but "
 "unemployed ferries will rot away and eventually sink."
-msgstr ""
+msgstr "Пока паром обслуживаетпереправу, срок его службы неограничен, но неработающие паромы будут гнить и в конце концов пойдут ко дну."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:348
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349
 msgid "Congratulations"
 msgstr "Поздравляем"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
 msgid "You have learnt all there is to learn about ships and ferries!"
 msgstr "Теперь вы все знаете о кораблях и паромах!"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:351
 msgid ""
 "There is also another island where you can build a port if you wish to try "
 "launching another expedition."
 msgstr "При желании, вы можете запустить экспедицию и построить порт еще на одном острове."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:353
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:352
 msgid ""
 "As always, you can continue playing and practice a bit more on this map if "
 "you like, or get your captain’s license ready and try out your new skills in"

@@ -59,7 +59,7 @@ msgstr "Nájdite miesto na postavenie prístavu"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:51
 msgid "Find Portspace"
-msgstr ""
+msgstr "Nájdenie prístavného miesta"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:52
 msgid ""
