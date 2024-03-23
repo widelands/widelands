@@ -5099,7 +5099,7 @@ msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %s a
 #: ../../data/tribes/initialization/atlanteans/units.lua:1928
 msgctxt "atlanteans_building"
 msgid "Trains soldiers in ‘Attack’."
-msgstr "Katonákat képez a „Támadás” képességben"
+msgstr "Katonákat képez a „Támadás” képességben."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean training site: Dungeon, part
 #. 2
@@ -5920,7 +5920,7 @@ msgid ""
 "Besides pitta bread and meat, fish is also a foodstuff for the Barbarians. "
 "It is used in the taverns, inns and big inns and at the training sites "
 "(training camp and battle arena)."
-msgstr "A pita kenyér és a hús mellett a hal is a barbárok élelmiszerei közé tartozik. A kocsmában, fogadóban és a nagy fogadóban, valamint a kiképzőhelyeken (kiképzőtábor, harci aréna) használják fel."
+msgstr "A pita és a hús mellett a hal is a barbárok élelmiszerei közé tartozik. A kocsmában, fogadóban és a nagy fogadóban, valamint a kiképzőhelyeken (kiképzőtábor, harci aréna) használják fel."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Meat, part 2
 #: ../../data/tribes/initialization/barbarians/units.lua:172
@@ -5963,7 +5963,7 @@ msgid ""
 "is made out of wheat and water following a secret recipe. Pitta bread is "
 "used in the taverns, inns and big inns to prepare rations, snacks and meals."
 " It is also consumed at training sites (training camp and battle arena)."
-msgstr "A barbár pékek a legjobbak a lapos és ízletes pita kenyér elkészítésében. Búzából és vízből készül egy titkos recept alapján. A pita kenyeret a kocsmákban, fogadókban és a nagy fogadókban használják fel harapnivaló, uzsonna és ebéd elkészítéséhez. A kiképzőhelyeken (kiképzőtábor és harci aréna) szintén fogyasztják."
+msgstr "A barbár pékek a legjobbak a lapos és ízletes pita elkészítésében. Búzából és vízből készül egy titkos recept alapján. A pitát a kocsmákban, fogadókban és a nagy fogadókban használják fel harapnivaló, uzsonna és ebéd elkészítéséhez. A kiképzőhelyeken (kiképzőtábor és harci aréna) szintén fogyasztják."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Beer
 #: ../../data/tribes/initialization/barbarians/units.lua:215

@@ -10,7 +10,7 @@
 # litoll <litoll@freemail.hu>, 2016
 # litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
-# Tóth András <txa-dev@posteo.hu>, 2021-2022
+# Tóth András <txa-dev@posteo.hu>, 2021-2022,2024
 # Tóth András <txa-dev@posteo.hu>, 2023
 msgid ""
 msgstr ""
@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-02-08 02:24+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2023\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2022,2024\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2639,7 +2639,7 @@ msgstr "Pékség"
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/init.lua:54
 msgctxt "barbarians_building"
 msgid "baking pitta bread"
-msgstr "Pita kenyér sütése"
+msgstr "Pita sütése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:8
