@@ -2030,12 +2030,23 @@ std::string Player::pick_shipname() {
 	return new_name;
 }
 
-std::string Player::pick_warehousename(bool port) {
+std::string Player::pick_warehousename(const WarehouseNameType type) {
 	++warehouse_name_counter_;
 
 	if (remaining_warehousenames_.empty()) {
-		return format(port ? pgettext("warehouse", "Port %d") : pgettext("warehouse", "Warehouse %d"),
-		              warehouse_name_counter_);
+		std::string fmt;
+		switch (type) {
+		case WarehouseNameType::kPort:
+			fmt = pgettext("warehouse", "Port %d");
+			break;
+		case WarehouseNameType::kMarket:
+			fmt = pgettext("market", "Market %d");
+			break;
+		default:
+			fmt = pgettext("warehouse", "Warehouse %d");
+			break;
+		}
+		return format(fmt, warehouse_name_counter_);
 	}
 
 	const size_t index =

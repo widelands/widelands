@@ -23,8 +23,8 @@
 
 #include "economy/request.h"
 #include "economy/wares_queue.h"
-#include "logic/map_objects/tribes/bill_of_materials.h"
 #include "logic/map_objects/tribes/building.h"
+#include "logic/trade_agreement.h"
 
 namespace Widelands {
 
@@ -34,29 +34,33 @@ public:
 	~MarketDescr() override = default;
 
 	[[nodiscard]] Building& create_object() const override;
-
-	[[nodiscard]] DescriptionIndex carrier() const {
-		return carrier_;
-	}
-
-private:
-	DescriptionIndex carrier_;
 };
 
 class Market : public Building {
+	friend class MapBuildingdataPacket;
 	MO_DESCR(MarketDescr)
 public:
 	explicit Market(const MarketDescr& descr);
 	~Market() override = default;
 
-	void new_trade(int trade_id, const BillOfMaterials& items, int num_batches, Serial other_side);
-	void cancel_trade(int trade_id);
+	bool init(EditorGameBase&) override;
+	void set_economy(Economy*, WareWorker) override;
+	void update_statistics_string(std::string* str) override;
+	void log_general_info(const EditorGameBase&) const override;
+
+	[[nodiscard]] const std::string& get_market_name() const {
+		return market_name_;
+	}
+	void set_market_name(const std::string& name);
+
+	void new_trade(TradeID trade_id, const BillOfMaterials& items, int num_batches, Serial other_side);
+	void cancel_trade(TradeID trade_id);
 
 	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
 	void cleanup(EditorGameBase&) override;
 
 	void try_launching_batch(Game* game);
-	void traded_ware_arrived(int trade_id, DescriptionIndex ware_index, Game* game);
+	void traded_ware_arrived(TradeID trade_id, DescriptionIndex ware_index, Game* game);
 
 private:
 	struct TradeOrder {
@@ -84,12 +88,14 @@ private:
 	static void
 	ware_arrived_callback(Game& g, InputQueue* q, DescriptionIndex ware, Worker* worker, void* data);
 
-	void ensure_wares_queue_exists(int ware_index);
-	bool is_ready_to_launch_batch(int trade_id) const;
-	void launch_batch(int trade_id, Game* game);
+	void ensure_wares_queue_exists(DescriptionIndex ware_index);
+	bool is_ready_to_launch_batch(TradeID trade_id) const;
+	void launch_batch(TradeID trade_id, Game* game);
 
-	std::map<int, TradeOrder> trade_orders_;                  // Key is 'trade_id's.
-	std::map<int, std::unique_ptr<WaresQueue>> wares_queue_;  // Key is 'ware_index'.
+	std::string market_name_;
+
+	std::map<TradeID, TradeOrder> trade_orders_;
+	std::map<DescriptionIndex, std::unique_ptr<WaresQueue>> wares_queue_;
 
 	DISALLOW_COPY_AND_ASSIGN(Market);
 };

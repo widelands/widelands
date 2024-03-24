@@ -21,6 +21,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "graphic/text_layout.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/player.h"
@@ -31,14 +32,6 @@ MarketDescr::MarketDescr(const std::string& init_descname,
                          const LuaTable& table,
                          Descriptions& descriptions)
    : BuildingDescr(init_descname, MapObjectType::MARKET, table, descriptions) {
-
-	DescriptionIndex const woi = descriptions.worker_index(table.get_string("carrier"));
-	if (!descriptions.worker_exists(woi)) {
-		throw wexception("The tribe does not define the worker in 'carrier'.");
-	}
-	carrier_ = woi;
-
-	// TODO(sirver,trading): Add actual logic here.
 }
 
 Building& MarketDescr::create_object() const {
@@ -57,11 +50,64 @@ bool Market::TradeOrder::fulfilled() const {
 	return num_shipped_batches == initial_num_batches;
 }
 
-// TODO(sirver,trading): This needs to implement 'set_economy'. Maybe common code can be shared.
 Market::Market(const MarketDescr& the_descr) : Building(the_descr) {
 }
 
-void Market::new_trade(const int trade_id,
+bool Market::init(EditorGameBase& egbase) {
+	Building::init(egbase);
+
+	market_name_ = get_owner()->pick_warehousename(Player::WarehouseNameType::kMarket);
+
+	return true;
+}
+
+void Market::update_statistics_string(std::string* str) {
+	*str = richtext_escape(get_market_name());
+}
+
+void Market::set_economy(Economy* const e, WareWorker type) {
+	Economy* const old = get_economy(type);
+
+	if (old == e) {
+		return;
+	}
+
+	if (type == wwWARE) {
+		if (old != nullptr) {
+			for (auto& pair : wares_queue_) {
+				pair.second->remove_from_economy(*old);
+			}
+		}
+
+		if (e != nullptr) {
+			for (auto& pair : wares_queue_) {
+				pair.second->add_to_economy(*e);
+			}
+		}
+
+	} else {
+		for (auto& pair : trade_orders_) {
+			if (pair.second.worker_request != nullptr) {
+				pair.second.worker_request->set_economy(e);
+			}
+		}
+	}
+
+	Building::set_economy(e, type);
+
+	for (auto& pair : trade_orders_) {
+		for (Worker* worker : pair.second.workers) {
+			worker->set_economy(e, type);
+		}
+	}
+}
+
+void Market::set_market_name(const std::string& name) {
+	market_name_ = name;
+	get_owner()->reserve_warehousename(name);
+}
+
+void Market::new_trade(const TradeID trade_id,
                        const BillOfMaterials& items,
                        const int num_batches,
                        const Serial other_side) {
@@ -70,7 +116,7 @@ void Market::new_trade(const int trade_id,
 
 	// Request one worker for each item in a batch.
 	trade_order.worker_request.reset(
-	   new Request(*this, descr().carrier(), Market::worker_arrived_callback, wwWORKER));
+	   new Request(*this, owner().tribe().carriers().back(), Market::worker_arrived_callback, wwWORKER));
 	trade_order.worker_request->set_count(trade_order.num_wares_per_batch());
 
 	// Make sure we have a wares queue for each item in this.
@@ -79,7 +125,7 @@ void Market::new_trade(const int trade_id,
 	}
 }
 
-void Market::cancel_trade(const int trade_id) {
+void Market::cancel_trade(const TradeID trade_id) {
 	// TODO(sirver,trading): Launch workers, release no longer required wares and delete now unneeded
 	// 'WaresQueue's
 	trade_orders_.erase(trade_id);
@@ -143,7 +189,7 @@ void Market::try_launching_batch(Game* game) {
 	}
 }
 
-bool Market::is_ready_to_launch_batch(const int trade_id) const {
+bool Market::is_ready_to_launch_batch(const TradeID trade_id) const {
 	const auto it = trade_orders_.find(trade_id);
 	if (it == trade_orders_.end()) {
 		return false;
@@ -170,7 +216,7 @@ bool Market::is_ready_to_launch_batch(const int trade_id) const {
 	return num_available_carriers == trade_order.num_wares_per_batch();
 }
 
-void Market::launch_batch(const int trade_id, Game* game) {
+void Market::launch_batch(const TradeID trade_id, Game* game) {
 	assert(is_ready_to_launch_batch(trade_id));
 	auto& trade_order = trade_orders_.at(trade_id);
 
@@ -203,7 +249,7 @@ void Market::launch_batch(const int trade_id, Game* game) {
 	}
 }
 
-void Market::ensure_wares_queue_exists(int ware_index) {
+void Market::ensure_wares_queue_exists(DescriptionIndex ware_index) {
 	if (wares_queue_.count(ware_index) > 0) {
 		return;
 	}
@@ -229,7 +275,7 @@ void Market::cleanup(EditorGameBase& egbase) {
 	Building::cleanup(egbase);
 }
 
-void Market::traded_ware_arrived(const int trade_id,
+void Market::traded_ware_arrived(const TradeID trade_id,
                                  const DescriptionIndex ware_index,
                                  Game* game) {
 	auto& trade_order = trade_orders_.at(trade_id);
@@ -239,11 +285,10 @@ void Market::traded_ware_arrived(const int trade_id,
 	ware->init(*game);
 
 	// TODO(sirver,trading): This is a hack. We should have a worker that
-	// carriers stuff out. At the moment this assumes this market belongs to the Barbarians
-	// (which is always correct right now), creates a carrier for each received
+	// carriers stuff out. At the moment this creates a carrier for each received
 	// ware to drop it off. The carrier then leaves the building and goes home.
 	const WorkerDescr& w_desc = *game->descriptions().get_worker_descr(
-	   game->descriptions().worker_index("barbarians_carrier"));
+	   owner().tribe().carriers().front());
 	auto& worker = w_desc.create(*game, get_owner(), this, position_);
 	worker.start_task_dropoff(*game, *ware);
 	++trade_order.received_traded_wares_in_this_batch;
@@ -269,4 +314,16 @@ void Market::traded_ware_arrived(const int trade_id,
 	}
 }
 
+void Market::log_general_info(const EditorGameBase& egbase) const {
+	molog(egbase.get_gametime(), "Market '%s'", market_name_.c_str());
+	Building::log_general_info(egbase);
+
+	molog(egbase.get_gametime(), "%" PRIuS " trade orders", trade_orders_.size());
+	for (const auto& pair : trade_orders_) {
+		molog(egbase.get_gametime(), "  - #%6u: %3d/%3d to %6u, received %4d", pair.first, pair.second.num_shipped_batches, pair.second.initial_num_batches, pair.second.other_side, pair.second.received_traded_wares_in_this_batch);
+		for (const auto& ware_amount : pair.second.items) {
+			molog(egbase.get_gametime(), "    - %3u x %s", ware_amount.second, owner().tribe().get_ware_descr(ware_amount.first)->name().c_str());
+		}
+	}
+}
 }  // namespace Widelands

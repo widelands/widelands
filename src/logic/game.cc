@@ -1229,8 +1229,7 @@ void Game::send_player_fleet_targets(PlayerNumber p, Serial i, Quantity q) {
 int Game::propose_trade(const Trade& trade) {
 	// TODO(sirver,trading): Check if a trade is possible (i.e. if there is a
 	// path between the two markets);
-	const int id = next_trade_agreement_id_;
-	++next_trade_agreement_id_;
+	const TradeID id = next_trade_agreement_id_++;
 
 	auto* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
 	auto* receiver = dynamic_cast<Market*>(objects().get_object(trade.receiver));
@@ -1254,7 +1253,7 @@ int Game::propose_trade(const Trade& trade) {
 	return id;
 }
 
-void Game::accept_trade(const int trade_id) {
+void Game::accept_trade(const TradeID trade_id) {
 	auto it = trade_agreements_.find(trade_id);
 	if (it == trade_agreements_.end()) {
 		log_warn_time(
@@ -1275,7 +1274,7 @@ void Game::accept_trade(const int trade_id) {
 	// TODO(sirver,trading): Message the users that the trade has been accepted.
 }
 
-void Game::cancel_trade(int trade_id) {
+void Game::cancel_trade(TradeID trade_id) {
 	// The trade id might be long gone - since we never disconnect from the
 	// 'removed' signal of the two buildings, we might be invoked long after the
 	// trade was deleted for other reasons.

@@ -571,8 +571,9 @@ public:
 	void set_attack_forbidden(PlayerNumber who, bool forbid);
 	bool is_attack_forbidden(PlayerNumber who) const;
 
+	enum class WarehouseNameType { kWarehouse, kPort, kMarket };
 	[[nodiscard]] std::string pick_shipname();
-	[[nodiscard]] std::string pick_warehousename(bool port);
+	[[nodiscard]] std::string pick_warehousename(WarehouseNameType);
 
 	// Remove name from the list of remaining names
 	void reserve_shipname(const std::string& name);

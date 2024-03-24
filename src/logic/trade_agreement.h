@@ -19,11 +19,15 @@
 #ifndef WL_LOGIC_TRADE_AGREEMENT_H
 #define WL_LOGIC_TRADE_AGREEMENT_H
 
+#include <cstdint>
+#include <limits>
+
 #include "logic/map_objects/tribes/bill_of_materials.h"
 
 namespace Widelands {
 
-// TODO(sirver,trading): Document everything in here.
+using TradeID = uint32_t;
+constexpr TradeID kInvalidTrade = std::numeric_limits<TradeID>::max();
 
 // Maximum number of a single ware that can be contained in a trade batch.
 constexpr int kMaxPerItemTradeBatchSize = 15;

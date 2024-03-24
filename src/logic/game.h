@@ -381,8 +381,8 @@ public:
 
 	// TODO(sirver,trading): document these functions once the interface settles.
 	int propose_trade(const Trade& trade);
-	void accept_trade(int trade_id);
-	void cancel_trade(int trade_id);
+	void accept_trade(TradeID trade_id);
+	void cancel_trade(TradeID trade_id);
 
 	struct PendingDiplomacyAction {
 		PlayerNumber sender;     ///< The player who initiated the action.
@@ -495,9 +495,9 @@ private:
 	uint32_t scenario_difficulty_{kScenarioDifficultyNotSet};
 
 	GeneralStatsVector general_stats_;
-	int next_trade_agreement_id_ = 1;
+	TradeID next_trade_agreement_id_ = 1;
 	// Maps from trade agreement id to the agreement.
-	std::map<int, TradeAgreement> trade_agreements_;
+	std::map<TradeID, TradeAgreement> trade_agreements_;
 
 	std::list<PendingDiplomacyAction> pending_diplomacy_actions_;
 	bool diplomacy_allowed_{true};

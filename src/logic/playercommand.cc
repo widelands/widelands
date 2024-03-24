@@ -2241,14 +2241,14 @@ void CmdProposeTrade::serialize(StreamWrite& ser) {
 void CmdProposeTrade::read(FileRead& /* fr */,
                            EditorGameBase& /* egbase */,
                            MapObjectLoader& /* mol */) {
-	// TODO(sirver,trading): Implement this.
+	// TODO(sirver,trading, NOCOM): Implement this.
 	NEVER_HERE();
 }
 
 void CmdProposeTrade::write(FileWrite& /* fw */,
                             EditorGameBase& /* egbase */,
                             MapObjectSaver& /* mos */) {
-	// TODO(sirver,trading): Implement this.
+	// TODO(sirver,trading, NOCOM): Implement this.
 	NEVER_HERE();
 }
 
