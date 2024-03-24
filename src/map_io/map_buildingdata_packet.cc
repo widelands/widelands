@@ -588,6 +588,21 @@ void MapBuildingdataPacket::read_market(Market& market,
 		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionMarket) {
 
 			market.set_market_name(fr.string());
+			market.fetchfromflag_ = fr.unsigned_32();
+
+			assert(market.pending_dropout_wares_.empty());
+			for (size_t i = fr.unsigned_32(); i > 0; --i) {
+				market.pending_dropout_wares_.push_back(fr.unsigned_32());
+			}
+
+			assert(market.carrier_request_ == nullptr);
+			Serial carrier = fr.unsigned_32();
+			if (carrier != 0) {
+				market.carrier_ = &mol.get<Worker>(carrier);
+			} else {
+				market.carrier_request_.reset(new Request(market, 0, Market::carrier_callback, wwWORKER));
+				market.carrier_request_->read(fr, game, mol);
+			}
 
 			assert(market.trade_orders_.empty());
 			for (size_t i = fr.unsigned_32(); i > 0; --i) {
@@ -1355,6 +1370,19 @@ void MapBuildingdataPacket::write_market(const Market& market,
 	fw.unsigned_16(kCurrentPacketVersionMarket);
 
 	fw.string(market.market_name_);
+
+	fw.unsigned_32(market.fetchfromflag_);
+	fw.unsigned_32(market.pending_dropout_wares_.size());
+	for (DescriptionIndex di : market.pending_dropout_wares_) {
+		fw.unsigned_32(di);
+	}
+
+	MapObject* carrier = market.carrier_.get(game);
+	assert((market.carrier_request_ == nullptr) ^ (carrier == nullptr));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(carrier));
+	if (carrier == nullptr) {
+		market.carrier_request_->write(fw, game, mos);
+	}
 
 	fw.unsigned_32(market.trade_orders_.size());
 	for (const auto& pair : market.trade_orders_) {

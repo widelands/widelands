@@ -22,6 +22,9 @@ wl.Descriptions():new_market_type {
       rope = 1
    },
 
+   local_carrier = "amazons_carrier",
+   trade_carrier = "amazons_tapir",
+
    animation_directory = dirname,
    animations = {
       idle = {hotspot = {43, 62}},

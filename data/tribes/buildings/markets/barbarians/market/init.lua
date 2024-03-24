@@ -24,6 +24,9 @@ wl.Descriptions():new_market_type {
       grout = 1
    },
 
+   local_carrier = "barbarians_carrier",
+   trade_carrier = "barbarians_ox",
+
    animation_directory = dirname,
    animations = {
       idle = {

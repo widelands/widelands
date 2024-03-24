@@ -32,6 +32,9 @@ wl.Descriptions():new_market_type {
       quartz = 1
    },
 
+   local_carrier = "atlanteans_carrier",
+   trade_carrier = "atlanteans_horse",
+
    animation_directory = dirname,
    animations = {
       idle = {

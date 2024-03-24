@@ -31,7 +31,9 @@ namespace Widelands {
 MarketDescr::MarketDescr(const std::string& init_descname,
                          const LuaTable& table,
                          Descriptions& descriptions)
-   : BuildingDescr(init_descname, MapObjectType::MARKET, table, descriptions) {
+   : BuildingDescr(init_descname, MapObjectType::MARKET, table, descriptions),
+   local_carrier(descriptions.worker_index(table.get_string("local_carrier"))),
+   trade_carrier(descriptions.worker_index(table.get_string("trade_carrier"))) {
 }
 
 Building& MarketDescr::create_object() const {
@@ -58,7 +60,21 @@ bool Market::init(EditorGameBase& egbase) {
 
 	market_name_ = get_owner()->pick_warehousename(Player::WarehouseNameType::kMarket);
 
+	carrier_request_.reset(new Request(*this, descr().local_carrier, Market::carrier_callback, wwWORKER));
+
 	return true;
+}
+
+void Market::cleanup(EditorGameBase& egbase) {
+	for (auto& pair : trade_orders_) {
+		pair.second.cleanup(*this);
+	}
+
+	if (Worker* carrier = carrier_.get(egbase); carrier != nullptr) {
+		carrier->set_location(nullptr);
+	}
+
+	Building::cleanup(egbase);
 }
 
 void Market::TradeOrder::cleanup(Market& market) {
@@ -69,6 +85,12 @@ void Market::TradeOrder::cleanup(Market& market) {
 		}
 
 		pair.second->cleanup();
+	}
+
+	if (upcast(Game, game, &market.get_owner()->egbase()); game != nullptr) {
+		if (Worker* carrier = market.carrier_.get(*game); carrier != nullptr) {
+			carrier->update_task_buildingwork(*game);
+		}
 	}
 }
 
@@ -84,6 +106,10 @@ void Market::set_economy(Economy* const e, WareWorker type) {
 	}
 
 	Building::set_economy(e, type);
+
+	if (Worker* carrier = carrier_.get(get_owner()->egbase()); carrier != nullptr) {
+		carrier->set_economy(e, type);
+	}
 
 	if (type == wwWARE) {
 		for (DescriptionIndex ware : pending_dropout_wares_) {
@@ -139,7 +165,7 @@ void Market::new_trade(const TradeID trade_id,
 
 	// Request one worker for each item in a batch.
 	trade_order.worker_request.reset(
-	   new Request(*this, owner().tribe().carriers().back(), Market::worker_arrived_callback, wwWORKER));
+	   new Request(*this, descr().trade_carrier, Market::worker_arrived_callback, wwWORKER));
 	trade_order.worker_request->set_count(trade_order.num_wares_per_batch());
 
 	// Make sure we have a wares queue for each item in this.
@@ -160,6 +186,16 @@ void Market::cancel_trade(const TradeID trade_id) {
 	} else {
 		molog(owner().egbase().get_gametime(), "cancel_trade: trade #%u not found", trade_id);
 	}
+}
+
+void Market::carrier_callback(Game& game, Request& /* rq */, DescriptionIndex /* widx */, Worker* carrier, PlayerImmovable& target) {
+	Market& market = dynamic_cast<Market&>(target);
+	market.carrier_request_.reset();
+	market.carrier_ = carrier;
+	assert(carrier != nullptr);
+	assert(carrier->get_location(game) == &market);
+	carrier->reset_tasks(game);
+	carrier->start_task_buildingwork(game);
 }
 
 void Market::worker_arrived_callback(Game& game, Request& rq, DescriptionIndex /* widx */, Worker* const w, PlayerImmovable& target) {
@@ -295,14 +331,33 @@ InputQueue& Market::inputqueue(DescriptionIndex index, WareWorker ware_worker, c
 	return Building::inputqueue(index, ware_worker, r);
 }
 
-// NOCOM actually drop out pending_dropout_wares_ sometime...
+bool Market::fetch_from_flag(Game& game) {
+	++fetchfromflag_;
 
-void Market::cleanup(EditorGameBase& egbase) {
-	for (auto& pair : trade_orders_) {
-		pair.second.cleanup(*this);
+	if (Worker* carrier = carrier_.get(game); carrier != nullptr) {
+		carrier->update_task_buildingwork(game);
 	}
 
-	Building::cleanup(egbase);
+	return true;
+}
+
+bool Market::get_building_work(Game& game, Worker& worker, bool /* success */) {
+	if (fetchfromflag_ > 0) {
+		--fetchfromflag_;
+		worker.start_task_fetchfromflag(game);
+		return true;
+	}
+
+	if (!pending_dropout_wares_.empty()) {
+		get_economy(wwWARE)->remove_wares_or_workers(pending_dropout_wares_.front(), 1);
+		WareInstance& ware = *new WareInstance(pending_dropout_wares_.front(), owner().tribe().get_ware_descr(pending_dropout_wares_.front()));
+		ware.init(game);
+		worker.start_task_dropoff(game, ware);
+		pending_dropout_wares_.pop_front();
+		return true;
+	}
+
+	return false;
 }
 
 void Market::traded_ware_arrived(const TradeID trade_id,
@@ -314,6 +369,10 @@ void Market::traded_ware_arrived(const TradeID trade_id,
 	get_economy(wwWARE)->add_wares_or_workers(ware_index, 1);
 	++trade_order.received_traded_wares_in_this_batch;
 	get_owner()->ware_produced(ware_index);
+
+	if (Worker* carrier = carrier_.get(*game); carrier != nullptr) {
+		carrier->update_task_buildingwork(*game);
+	}
 
 	Market* other_market = dynamic_cast<Market*>(game->objects().get_object(trade_order.other_side));
 	assert(other_market != nullptr);

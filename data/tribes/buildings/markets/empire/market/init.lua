@@ -24,6 +24,9 @@ wl.Descriptions():new_market_type {
       marble_column = 1
    },
 
+   local_carrier = "empire_carrier",
+   trade_carrier = "empire_donkey",
+
    animation_directory = dirname,
    animations = {
       idle = {

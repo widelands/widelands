@@ -23,6 +23,9 @@ wl.Descriptions():new_market_type {
       reed = 1
    },
 
+   local_carrier = "frisians_carrier",
+   trade_carrier = "frisians_reindeer",
+
    animations = {
       idle = {
          hotspot = {50, 69},

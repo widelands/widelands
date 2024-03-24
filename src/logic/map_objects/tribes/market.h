@@ -36,6 +36,9 @@ public:
 	~MarketDescr() override = default;
 
 	[[nodiscard]] Building& create_object() const override;
+
+	const DescriptionIndex local_carrier;
+	const DescriptionIndex trade_carrier;
 };
 
 class Market : public Building {
@@ -70,7 +73,12 @@ public:
 
 	bool init(EditorGameBase&) override;
 	void set_economy(Economy*, WareWorker) override;
+
 	void update_statistics_string(std::string* str) override;
+
+	bool fetch_from_flag(Game&) override;
+	bool get_building_work(Game&, Worker&, bool success) override;
+
 	void log_general_info(const EditorGameBase&) const override;
 
 	[[nodiscard]] const std::string& get_market_name() const {
@@ -97,6 +105,8 @@ public:
 
 private:
 	static void
+	carrier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
+	static void
 	worker_arrived_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 	static void
 	ware_arrived_callback(Game& g, InputQueue* q, DescriptionIndex ware, Worker* worker, void* data);
@@ -107,6 +117,10 @@ private:
 	std::string market_name_;
 	std::map<TradeID, TradeOrder> trade_orders_;
 	std::deque<DescriptionIndex> pending_dropout_wares_;
+
+	OPtr<Worker> carrier_;
+	std::unique_ptr<Request> carrier_request_;
+	uint32_t fetchfromflag_{0U};
 
 	DISALLOW_COPY_AND_ASSIGN(Market);
 };
