@@ -47,6 +47,7 @@
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
@@ -1037,7 +1038,8 @@ void Player::enhance_or_dismantle(Building* building,
 			}
 		};
 
-		if (upcast(Warehouse, wh, building)) {
+		if (building->descr().type() == MapObjectType::WAREHOUSE) {
+			upcast(Warehouse, wh, building);
 			workers = wh->get_incorporated_workers();
 			if (keep_wares) {
 				for (DescriptionIndex di = wh->get_wares().get_nrwareids(); di != 0u; --di) {
@@ -1059,8 +1061,17 @@ void Player::enhance_or_dismantle(Building* building,
 		} else {
 			workers = building->get_workers();
 			if (keep_wares) {
-				// TODO(Nordfriese): Add support for markets?
-				if (upcast(ProductionSite, ps, building)) {
+				if (building->descr().type() == MapObjectType::MARKET) {
+					upcast(Market, market, building);
+					for (DescriptionIndex di : market->pending_dropout_wares()) {
+						auto it = wares.find(di);
+						if (it == wares.end()) {
+							wares[di] = 1;
+						} else {
+							it->second++;
+						}
+					}
+				} else if (upcast(ProductionSite, ps, building)) {
 					for (const InputQueue* q : ps->inputqueues()) {
 						if (q->get_type() == wwWARE) {
 							auto it = wares.find(q->get_index());

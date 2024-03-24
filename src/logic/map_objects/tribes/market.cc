@@ -61,6 +61,17 @@ bool Market::init(EditorGameBase& egbase) {
 	return true;
 }
 
+void Market::TradeOrder::cleanup(Market& market) {
+	for (auto& pair : wares_queues_) {
+		for (int i = pair.second->get_filled(); i > 0; --i) {
+			market.pending_dropout_wares_.push_back(pair.second->get_index());
+			market.get_economy(wwWARE)->add_wares_or_workers(pair.second->get_index(), 1);
+		}
+
+		pair.second->cleanup();
+	}
+}
+
 void Market::update_statistics_string(std::string* str) {
 	*str = richtext_escape(get_market_name());
 }
@@ -72,32 +83,40 @@ void Market::set_economy(Economy* const e, WareWorker type) {
 		return;
 	}
 
+	Building::set_economy(e, type);
+
 	if (type == wwWARE) {
-		if (old != nullptr) {
-			for (auto& pair : wares_queue_) {
-				pair.second->remove_from_economy(*old);
+		for (DescriptionIndex ware : pending_dropout_wares_) {
+			if (old != nullptr) {
+				old->remove_wares_or_workers(ware, 1);
 			}
-		}
-
-		if (e != nullptr) {
-			for (auto& pair : wares_queue_) {
-				pair.second->add_to_economy(*e);
-			}
-		}
-
-	} else {
-		for (auto& pair : trade_orders_) {
-			if (pair.second.worker_request != nullptr) {
-				pair.second.worker_request->set_economy(e);
+			if (e != nullptr) {
+				e->add_wares_or_workers(ware, 1);
 			}
 		}
 	}
 
-	Building::set_economy(e, type);
-
 	for (auto& pair : trade_orders_) {
 		for (Worker* worker : pair.second.workers) {
 			worker->set_economy(e, type);
+		}
+
+		if (type == wwWORKER) {
+			if (pair.second.worker_request != nullptr) {
+				pair.second.worker_request->set_economy(e);
+			}
+		} else {
+			if (old != nullptr) {
+				for (auto& pair : pair.second.wares_queues_) {
+					pair.second->remove_from_economy(*old);
+				}
+			}
+
+			if (e != nullptr) {
+				for (auto& pair : pair.second.wares_queues_) {
+					pair.second->add_to_economy(*e);
+				}
+			}
 		}
 	}
 }
@@ -111,8 +130,12 @@ void Market::new_trade(const TradeID trade_id,
                        const BillOfMaterials& items,
                        const int num_batches,
                        const Serial other_side) {
-	trade_orders_[trade_id] = TradeOrder{items, num_batches, 0, other_side, 0, nullptr, {}};
-	auto& trade_order = trade_orders_[trade_id];
+	assert(trade_orders_.count(trade_id) == 0);
+	TradeOrder& trade_order = trade_orders_[trade_id];
+
+	trade_order.items = items;
+	trade_order.initial_num_batches = num_batches;
+	trade_order.other_side = other_side;
 
 	// Request one worker for each item in a batch.
 	trade_order.worker_request.reset(
@@ -121,21 +144,28 @@ void Market::new_trade(const TradeID trade_id,
 
 	// Make sure we have a wares queue for each item in this.
 	for (const auto& entry : items) {
-		ensure_wares_queue_exists(entry.first);
+		auto& queue = trade_order.wares_queues_[entry.first];
+		queue.reset(new WaresQueue(*this, entry.first, entry.second));
+		queue->set_callback(Market::ware_arrived_callback, this);
 	}
+
+	molog(owner().egbase().get_gametime(), "Enqueuing new trade #%u with %d batches to %u", trade_id, num_batches, other_side);
 }
 
 void Market::cancel_trade(const TradeID trade_id) {
-	// TODO(sirver,trading): Launch workers, release no longer required wares and delete now unneeded
-	// 'WaresQueue's
-	trade_orders_.erase(trade_id);
+	if (auto it = trade_orders_.find(trade_id); it != trade_orders_.end()) {
+		it->second.cleanup(*this);
+		trade_orders_.erase(trade_id);
+		molog(owner().egbase().get_gametime(), "Cancelled trade #%u", trade_id);
+	} else {
+		molog(owner().egbase().get_gametime(), "cancel_trade: trade #%u not found", trade_id);
+	}
 }
 
-void Market::worker_arrived_callback(
-   Game& game, Request& rq, DescriptionIndex /* widx */, Worker* const w, PlayerImmovable& target) {
-	auto& market = dynamic_cast<Market&>(target);
+void Market::worker_arrived_callback(Game& game, Request& rq, DescriptionIndex /* widx */, Worker* const w, PlayerImmovable& target) {
+	Market& market = dynamic_cast<Market&>(target);
 
-	assert(w);
+	assert(w != nullptr);
 	assert(w->get_location(game) == &market);
 
 	for (auto& trade_order_pair : market.trade_orders_) {
@@ -154,6 +184,7 @@ void Market::worker_arrived_callback(
 		market.try_launching_batch(&game);
 		return;
 	}
+
 	NEVER_HERE();  // We should have found and handled a match by now.
 }
 
@@ -172,7 +203,7 @@ void Market::try_launching_batch(Game* game) {
 			continue;
 		}
 
-		auto* other_market =
+		Market* other_market =
 		   dynamic_cast<Market*>(game->objects().get_object(pair.second.other_side));
 		if (other_market == nullptr) {
 			// TODO(sirver,trading): Can this even happen? Where is this function called from?
@@ -199,8 +230,8 @@ bool Market::is_ready_to_launch_batch(const TradeID trade_id) const {
 
 	// Do we have all necessary wares for a batch?
 	for (const auto& item_pair : trade_order.items) {
-		const auto wares_it = wares_queue_.find(item_pair.first);
-		if (wares_it == wares_queue_.end()) {
+		const auto wares_it = trade_order.wares_queues_.find(item_pair.first);
+		if (wares_it == trade_order.wares_queues_.end()) {
 			return false;
 		}
 		if (wares_it->second->get_filled() < item_pair.second) {
@@ -210,7 +241,7 @@ bool Market::is_ready_to_launch_batch(const TradeID trade_id) const {
 
 	// Do we have enough people to carry wares?
 	int num_available_carriers = 0;
-	for (auto* worker : trade_order.workers) {
+	for (Worker* worker : trade_order.workers) {
 		num_available_carriers += worker->is_idle() ? 1 : 0;
 	}
 	return num_available_carriers == trade_order.num_wares_per_batch();
@@ -218,7 +249,8 @@ bool Market::is_ready_to_launch_batch(const TradeID trade_id) const {
 
 void Market::launch_batch(const TradeID trade_id, Game* game) {
 	assert(is_ready_to_launch_batch(trade_id));
-	auto& trade_order = trade_orders_.at(trade_id);
+	TradeOrder& trade_order = trade_orders_.at(trade_id);
+	molog(game->get_gametime(), "Launching batch for trade #%u", trade_id);
 
 	// Do we have all necessary wares for a batch?
 	int worker_index = 0;
@@ -238,8 +270,8 @@ void Market::launch_batch(const TradeID trade_id, Game* game) {
 			// considered idle (since it has no transport associated with it) and
 			// the engine would want to transfer it to the next warehouse.
 			ware->set_economy(nullptr);
-			wares_queue_.at(item_pair.first)
-			   ->set_filled(wares_queue_.at(item_pair.first)->get_filled() - 1);
+			trade_order.wares_queues_.at(item_pair.first)
+			   ->set_filled(trade_order.wares_queues_.at(item_pair.first)->get_filled() - 1);
 
 			// Send the carrier going.
 			carrier->reset_tasks(*game);
@@ -249,55 +281,44 @@ void Market::launch_batch(const TradeID trade_id, Game* game) {
 	}
 }
 
-void Market::ensure_wares_queue_exists(DescriptionIndex ware_index) {
-	if (wares_queue_.count(ware_index) > 0) {
-		return;
-	}
-	wares_queue_[ware_index] =
-	   std::unique_ptr<WaresQueue>(new WaresQueue(*this, ware_index, kMaxPerItemTradeBatchSize));
-	wares_queue_[ware_index]->set_callback(Market::ware_arrived_callback, this);
-}
-
 InputQueue& Market::inputqueue(DescriptionIndex index, WareWorker ware_worker, const Request* r) {
 	assert(ware_worker == wwWARE);
-	auto it = wares_queue_.find(index);
-	if (it != wares_queue_.end()) {
-		return *it->second;
+
+	for (auto& pair : trade_orders_) {
+		auto it = pair.second.wares_queues_.find(index);
+		if (it != pair.second.wares_queues_.end() && it->second->matches(*r)) {
+			return *it->second;
+		}
 	}
+
 	// The parent will throw an exception.
 	return Building::inputqueue(index, ware_worker, r);
 }
 
+// NOCOM actually drop out pending_dropout_wares_ sometime...
+
 void Market::cleanup(EditorGameBase& egbase) {
-	for (auto& pair : wares_queue_) {
-		pair.second->cleanup();
+	for (auto& pair : trade_orders_) {
+		pair.second.cleanup(*this);
 	}
+
 	Building::cleanup(egbase);
 }
 
 void Market::traded_ware_arrived(const TradeID trade_id,
                                  const DescriptionIndex ware_index,
                                  Game* game) {
-	auto& trade_order = trade_orders_.at(trade_id);
+	TradeOrder& trade_order = trade_orders_.at(trade_id);
 
-	WareInstance* ware =
-	   new WareInstance(ware_index, game->descriptions().get_ware_descr(ware_index));
-	ware->init(*game);
-
-	// TODO(sirver,trading): This is a hack. We should have a worker that
-	// carriers stuff out. At the moment this creates a carrier for each received
-	// ware to drop it off. The carrier then leaves the building and goes home.
-	const WorkerDescr& w_desc = *game->descriptions().get_worker_descr(
-	   owner().tribe().carriers().front());
-	auto& worker = w_desc.create(*game, get_owner(), this, position_);
-	worker.start_task_dropoff(*game, *ware);
+	pending_dropout_wares_.push_back(ware_index);
+	get_economy(wwWARE)->add_wares_or_workers(ware_index, 1);
 	++trade_order.received_traded_wares_in_this_batch;
 	get_owner()->ware_produced(ware_index);
 
-	auto* other_market = dynamic_cast<Market*>(game->objects().get_object(trade_order.other_side));
+	Market* other_market = dynamic_cast<Market*>(game->objects().get_object(trade_order.other_side));
 	assert(other_market != nullptr);
 	other_market->get_owner()->ware_consumed(ware_index, 1);
-	auto& other_trade_order = other_market->trade_orders_.at(trade_id);
+	TradeOrder& other_trade_order = other_market->trade_orders_.at(trade_id);
 	if (trade_order.received_traded_wares_in_this_batch == other_trade_order.num_wares_per_batch() &&
 	    other_trade_order.received_traded_wares_in_this_batch == trade_order.num_wares_per_batch()) {
 		// This batch is completed.

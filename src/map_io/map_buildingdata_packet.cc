@@ -589,15 +589,6 @@ void MapBuildingdataPacket::read_market(Market& market,
 
 			market.set_market_name(fr.string());
 
-			assert(market.wares_queue_.empty());
-			for (size_t i = fr.unsigned_32(); i > 0; --i) {
-				const std::string warename(fr.string());
-				const DescriptionIndex ware_index = game.descriptions().ware_index(warename);
-				std::unique_ptr<WaresQueue> queue(new WaresQueue(market, ware_index, 1));
-				queue->read(fr, game, mol);
-				market.wares_queue_[ware_index] = std::move(queue);
-			}
-
 			assert(market.trade_orders_.empty());
 			for (size_t i = fr.unsigned_32(); i > 0; --i) {
 				const TradeID trade_id = fr.unsigned_32();
@@ -621,6 +612,14 @@ void MapBuildingdataPacket::read_market(Market& market,
 				if (fr.unsigned_8() != 0) {
 					trade.worker_request.reset(new Request(market, 0, Market::worker_arrived_callback, wwWORKER));
 					trade.worker_request->read(fr, game, mol);
+				}
+
+				for (size_t i = fr.unsigned_32(); i > 0; --i) {
+					const std::string warename(fr.string());
+					const DescriptionIndex ware_index = game.descriptions().ware_index(warename);
+					std::unique_ptr<WaresQueue> queue(new WaresQueue(market, ware_index, 1));
+					queue->read(fr, game, mol);
+					trade.wares_queues_[ware_index] = std::move(queue);
 				}
 			}
 
@@ -1357,12 +1356,6 @@ void MapBuildingdataPacket::write_market(const Market& market,
 
 	fw.string(market.market_name_);
 
-	fw.unsigned_32(market.wares_queue_.size());
-	for (auto& pair : market.wares_queue_) {
-		fw.string(game.descriptions().get_ware_descr(pair.first)->name());
-		pair.second->write(fw, game, mos);
-	}
-
 	fw.unsigned_32(market.trade_orders_.size());
 	for (const auto& pair : market.trade_orders_) {
 		fw.unsigned_32(pair.first);
@@ -1387,6 +1380,12 @@ void MapBuildingdataPacket::write_market(const Market& market,
 			pair.second.worker_request->write(fw, game, mos);
 		} else {
 			fw.unsigned_8(0);
+		}
+
+		fw.unsigned_32(pair.second.wares_queues_.size());
+		for (auto& pair : pair.second.wares_queues_) {
+			fw.string(game.descriptions().get_ware_descr(pair.first)->name());
+			pair.second->write(fw, game, mos);
 		}
 	}
 }

@@ -19,6 +19,8 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_MARKET_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_MARKET_H
 
+#include <deque>
+#include <map>
 #include <memory>
 
 #include "economy/request.h"
@@ -40,6 +42,29 @@ class Market : public Building {
 	friend class MapBuildingdataPacket;
 	MO_DESCR(MarketDescr)
 public:
+	struct TradeOrder {
+		BillOfMaterials items;
+		int initial_num_batches{0};
+		int num_shipped_batches{0};
+		Serial other_side{0};
+
+		int received_traded_wares_in_this_batch{0};
+
+		// The invariant here is that worker.size() + worker_request.get_count()
+		// == 'num_wares_per_batch()'
+		std::unique_ptr<Request> worker_request;
+		std::vector<Worker*> workers;
+		std::map<DescriptionIndex, std::unique_ptr<WaresQueue>> wares_queues_;
+
+		// The number of individual wares in 'items', i.e. the sum of all '.second's.
+		[[nodiscard]] int num_wares_per_batch() const;
+
+		// True if the 'num_shipped_batches' equals the 'initial_num_batches'
+		[[nodiscard]] bool fulfilled() const;
+
+		void cleanup(Market& market);
+	};
+
 	explicit Market(const MarketDescr& descr);
 	~Market() override = default;
 
@@ -53,49 +78,35 @@ public:
 	}
 	void set_market_name(const std::string& name);
 
+	[[nodiscard]] const std::deque<DescriptionIndex>& pending_dropout_wares() const {
+		return pending_dropout_wares_;
+	}
+
 	void new_trade(TradeID trade_id, const BillOfMaterials& items, int num_batches, Serial other_side);
 	void cancel_trade(TradeID trade_id);
 
-	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
+	[[nodiscard]] InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
 	void cleanup(EditorGameBase&) override;
 
 	void try_launching_batch(Game* game);
 	void traded_ware_arrived(TradeID trade_id, DescriptionIndex ware_index, Game* game);
 
+	[[nodiscard]] const std::map<TradeID, TradeOrder> &trade_orders() const {
+		return trade_orders_;
+	}
+
 private:
-	struct TradeOrder {
-		BillOfMaterials items;
-		int initial_num_batches;
-		int num_shipped_batches;
-		Serial other_side;
-
-		int received_traded_wares_in_this_batch;
-
-		// The invariant here is that worker.size() + worker_request.get_count()
-		// == 'num_wares_per_batch()'
-		std::unique_ptr<Request> worker_request;
-		std::vector<Worker*> workers;
-
-		// The number of individual wares in 'items', i.e. the sum of all '.second's.
-		[[nodiscard]] int num_wares_per_batch() const;
-
-		// True if the 'num_shipped_batches' equals the 'initial_num_batches'
-		[[nodiscard]] bool fulfilled() const;
-	};
-
 	static void
 	worker_arrived_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 	static void
 	ware_arrived_callback(Game& g, InputQueue* q, DescriptionIndex ware, Worker* worker, void* data);
 
-	void ensure_wares_queue_exists(DescriptionIndex ware_index);
 	bool is_ready_to_launch_batch(TradeID trade_id) const;
 	void launch_batch(TradeID trade_id, Game* game);
 
 	std::string market_name_;
-
 	std::map<TradeID, TradeOrder> trade_orders_;
-	std::map<DescriptionIndex, std::unique_ptr<WaresQueue>> wares_queue_;
+	std::deque<DescriptionIndex> pending_dropout_wares_;
 
 	DISALLOW_COPY_AND_ASSIGN(Market);
 };

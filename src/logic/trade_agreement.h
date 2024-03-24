@@ -29,9 +29,6 @@ namespace Widelands {
 using TradeID = uint32_t;
 constexpr TradeID kInvalidTrade = std::numeric_limits<TradeID>::max();
 
-// Maximum number of a single ware that can be contained in a trade batch.
-constexpr int kMaxPerItemTradeBatchSize = 15;
-
 struct Trade {
 	BillOfMaterials items_to_send;
 	BillOfMaterials items_to_receive;
