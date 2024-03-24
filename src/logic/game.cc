@@ -1331,7 +1331,7 @@ void Game::retract_trade(const TradeID trade_id) {
 	trade_agreements_.erase(it);
 }
 
-void Game::cancel_trade(TradeID trade_id, bool reached_regular_end, Player* canceller) {
+void Game::cancel_trade(TradeID trade_id, bool reached_regular_end, const Player* canceller) {
 	// The trade id might be long gone - since we never disconnect from the
 	// 'removed' signal of the two buildings, we might be invoked long after the
 	// trade was deleted for other reasons.

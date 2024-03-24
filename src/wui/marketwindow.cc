@@ -24,6 +24,7 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/spinbox.h"
+#include "wui/actionconfirm.h"
 #include "wui/inputqueuedisplay.h"
 #include "wui/interactive_player.h"
 #include "wui/waresdisplay.h"
@@ -132,6 +133,22 @@ public:
 
 		add(&info_, UI::Box::Resizing::kExpandBoth);
 		add_space(kSpacing);
+
+		if (can_act) {
+			UI::Button* cancel = new UI::Button(this, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel"), _("Cancel this trade"));
+			cancel->sigclicked.connect([this]() {
+				upcast(InteractivePlayer, ipl, &ibase_);
+				assert(ipl != nullptr);
+				Widelands::Game& game = ipl->game();
+				if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+					game.send_player_trade_action(ipl->player_number(), trade_id_, Widelands::TradeAction::kCancel, 0);
+				} else {
+					show_cancel_trade_confirm(*ipl, trade_id_);
+				}
+			});
+			add(cancel, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+			add_space(kSpacing);
+		}
 
 		for (auto& pair : market.trade_orders().at(trade_id_).wares_queues_) {
 			add(new InputQueueDisplay(this, ibase, market, *pair.second, !can_act, true, collapsed), UI::Box::Resizing::kFullSize);

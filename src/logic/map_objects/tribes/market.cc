@@ -156,6 +156,8 @@ void Market::new_trade(const TradeID trade_id,
                        const BillOfMaterials& items,
                        const int num_batches,
                        const Serial other_side) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	assert(trade_orders_.count(trade_id) == 0);
 	TradeOrder& trade_order = trade_orders_[trade_id];
 
@@ -180,6 +182,8 @@ void Market::new_trade(const TradeID trade_id,
 }
 
 void Market::cancel_trade(Game& game, const TradeID trade_id, const bool reached_regular_end, const bool send_msg) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	if (auto it = trade_orders_.find(trade_id); it != trade_orders_.end()) {
 		molog(owner().egbase().get_gametime(), reached_regular_end ? "Completed trade #%u" : "Cancelling trade #%u", trade_id);
 

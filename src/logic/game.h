@@ -386,7 +386,11 @@ public:
 	void accept_trade(TradeID trade_id, Market& receiver);
 	void reject_trade(TradeID trade_id);
 	void retract_trade(TradeID trade_id);
-	void cancel_trade(TradeID trade_id, bool reached_regular_end, Player* canceller);
+	void cancel_trade(TradeID trade_id, bool reached_regular_end, const Player* canceller);
+
+	[[nodiscard]] bool has_trade(TradeID trade_id) const {
+		return trade_agreements_.count(trade_id) != 0;
+	}
 
 	struct PendingDiplomacyAction {
 		PlayerNumber sender;     ///< The player who initiated the action.
