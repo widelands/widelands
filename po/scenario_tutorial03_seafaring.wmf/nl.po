@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-03-04 03:06+0000\n"
+"POT-Creation-Date: 2024-03-07 02:19+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
 "Last-Translator: 78874c46c2b3a507dfdeacb75f6712de_6b7b1df, 2023\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -257,7 +257,6 @@ msgid ""
 msgstr "Je moet je scheepswerf stoppen wanneer je genoeg schepen hebt.  Anders zal al je hout en spinnendoek gebruikt worden om tientallen schepen te maken."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:122
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:341
 msgid ""
 "This is the icon for stopping production. You will find it in the building "
 "window."
@@ -731,22 +730,22 @@ msgid ""
 "unemployed ferries will rot away and eventually sink."
 msgstr ""
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:348
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349
 msgid "Congratulations"
 msgstr "Gefeliciteerd"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
 msgid "You have learnt all there is to learn about ships and ferries!"
 msgstr "Je hebt nu alles geleerd over schepen en veerboten!"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:351
 msgid ""
 "There is also another island where you can build a port if you wish to try "
 "launching another expedition."
 msgstr "Er is nog een ander eiland waarop je een haven kunt bouwen als je nog een expeditie wilt starten."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:353
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:352
 msgid ""
 "As always, you can continue playing and practice a bit more on this map if "
 "you like, or get your captain’s license ready and try out your new skills in"

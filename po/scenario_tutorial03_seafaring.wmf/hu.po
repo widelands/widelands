@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-03-04 03:06+0000\n"
+"POT-Creation-Date: 2024-03-07 02:19+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021,2024\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -258,7 +258,6 @@ msgid ""
 msgstr "Le kell állítanod a hajóács műhely termelését, amikor elég hajód van, különben elhasználná az összes fát és pókszövetet, miközben tucatnyi hajót készítene."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:122
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:341
 msgid ""
 "This is the icon for stopping production. You will find it in the building "
 "window."
@@ -319,7 +318,7 @@ msgstr "Bármelyik kikötőből lehet expedíciót indítani. Ilyenkor minden sz
 msgid ""
 "You can check out the needed wares in the Expedition tab of your port (it "
 "will appear in the last place when you’ve started an expedition)."
-msgstr ""
+msgstr "A kikötő ablakának Expedíció fülén (ami akkor jelenik meg a többi után, amikor kiadod a parancsot az expedíció indítására) követni tudod a szükséges árukat."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:152
 msgid "Now try this out. I will tell you later what the next steps are."
@@ -480,14 +479,14 @@ msgid ""
 "any number of soldiers. The desired number makes sure that defenders are "
 "requested by the port or headquarters, and once they are garrisoned there, "
 "they don't get sent away to serve other needs."
-msgstr ""
+msgstr "A megfelelő védelmük érdekében mindkettőben be tudod állítani a védők kívánt számát a Katonák fülön, a katonai épületekhez hasonlóan. Ugyanakkor ezek az épületek egyben raktárak is, így bármennyi katonát el tudnak helyezni. A beállítás arról gondoskodik, hogy a kikötő vagy a főhadiszállás igényelje a szükséges védőket a gazdaságtól, illetve ha már ott vannak, akkor csak addig szolgáljon ki más igényeket, amíg a saját védelme megfelelő marad."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:216
 msgid ""
 "On this map, there is no enemy to fear. In other games, you should set some "
 "defenders for your ports and make building one or two military "
 "fortifications around your new colonies a priority."
-msgstr ""
+msgstr "Ezen a térképen nem kell ellenségtől tartanod. Igazi játékokban viszont érdemes védőket beállítanod, és minél előbb katonai épületeket építened az új településed védelmére."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:223
 msgid "Our mission"
@@ -603,7 +602,7 @@ msgstr "A csónakkészítő műhelyt a part közelébe kell építened, különb
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:294
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:313
 msgid "Waterways"
-msgstr "Vízi utak"
+msgstr "Víziutak"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:282
 msgid ""
@@ -611,7 +610,7 @@ msgid ""
 "fixed transport routes called waterways. A waterway is built just like a "
 "road: You click on a flag near the shore, choose ‘Build a waterway’, and "
 "select the path for the waterway just as you would do for a road."
-msgstr "A hajóktól, amelyek szükség szerint utaznak bármelyik kikötőbe, a kompoknak rögzített szállítási útvonalaik vannak, amiket víziutaknak nevezünk. Víziutakat a szárazföldi utakhoz hasonlóan építhetsz: Rákattintasz egy vízparti zászlóra, kiválasztod a „Vízi út építésé”-t, és ugyanúgy kijelölöd az útvonalat, mint a szárazföldi utaknál."
+msgstr "A hajóktól, amelyek szükség szerint utaznak bármelyik kikötőbe, a kompoknak rögzített szállítási útvonalaik vannak, amiket víziutaknak nevezünk. Víziutakat a szárazföldi utakhoz hasonlóan építhetsz: Rákattintasz egy vízparti zászlóra, kiválasztod a „Víziút építésé”-t, és ugyanúgy kijelölöd az útvonalat, mint a szárazföldi utaknál."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:283
 msgid ""
@@ -697,7 +696,7 @@ msgid ""
 "not to claim regions you can reach neither by road nor by ship. Never cut "
 "all your roads between two places connected by waterways unless you are "
 "certain no worker will ever have to walk there."
-msgstr "Soha ne felejtsd el, hogy a kompok túl kicsik a munkások szállításához! Le tudod vágni velük az áruk útját a területed egyes részei között, de nem tudsz a segítségükkel meghódítani olyan helyeket, amelyeket nem tudsz se szárazföldön, se hajóval elérni. Soha ne vágd el teljesen a vízi utakkal összekötött helyek között a szárazföldi összeköttetést, hacsak nem vagy teljesen biztos benne, hogy soha többé nem kell munkásnak átjutnia!"
+msgstr "Soha ne felejtsd el, hogy a kompok túl kicsik a munkások szállításához! Le tudod vágni velük az áruk útját a területed egyes részei között, de nem tudsz a segítségükkel meghódítani olyan helyeket, amelyeket nem tudsz se szárazföldön, se hajóval elérni. Soha ne vágd el teljesen a víziutakkal összekötött helyek között a szárazföldi összeköttetést, hacsak nem vagy teljesen biztos benne, hogy soha többé nem kell munkásnak átjutnia!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:329
 msgid ""
@@ -724,30 +723,30 @@ msgid ""
 "As you can see, ferries can be produced quite quickly, but you don't need to"
 " worry about wasted materials, because ferry yards normally only produce "
 "them on demand, when there are unserviced waterways."
-msgstr ""
+msgstr "Láthatod, hogy a kompok elég gyorsan készülnek, de nem kell aggódnod amiatt, hogy szükségtelenül pocsékolnák a nyersanyagokat, mert alaphelyzetben a csónakkészítő műhely csak addig készíti őket, amíg van üres víziút."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:340
 msgid ""
 "As long as a ferry services a waterway, its lifetime is unlimited, but "
 "unemployed ferries will rot away and eventually sink."
-msgstr ""
+msgstr "Amíg egy komp be van osztva egy víziútra, addig nincs korlátozva az élettartama, de a nem használt kompok idővel tönkremennek és eltűnnek."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:348
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349
 msgid "Congratulations"
 msgstr "Gratulálok"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
 msgid "You have learnt all there is to learn about ships and ferries!"
 msgstr "Mindent megtanultál, amit a hajókról és kompokról tudni lehet!"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:351
 msgid ""
 "There is also another island where you can build a port if you wish to try "
 "launching another expedition."
 msgstr "Van itt még egy sziget, amire tudsz kikötőt építeni, ha szeretnél még egy expedíciót küldeni."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:353
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:352
 msgid ""
 "As always, you can continue playing and practice a bit more on this map if "
 "you like, or get your captain’s license ready and try out your new skills in"

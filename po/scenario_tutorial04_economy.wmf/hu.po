@@ -7,14 +7,14 @@
 # Balázs Meskó <meskobalazs@mailbox.org>, 2017
 # litoll <litoll@freemail.hu>, 2016-2017
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
-# Tóth András <txa-dev@posteo.hu>, 2021,2023
+# Tóth András <txa-dev@posteo.hu>, 2021,2023-2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-03-04 03:06+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021,2023-2024\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -761,7 +761,7 @@ msgstr "Nyisd meg a „Gazdaság beállításai” ablakot!"
 msgid ""
 "The window can be accessed by clicking on any flag you own or from warehouse"
 " windows."
-msgstr ""
+msgstr "Az ablak elérhető bármelyik zászlódra kattintva, vagy a raktárépületek ablakából."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:482
@@ -790,7 +790,7 @@ msgstr "Ez az az ikon."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:474
 msgid "The same button is also available in warehouse windows."
-msgstr ""
+msgstr "Ugyanez a gomb megtalálható a raktárépületek ablakában is."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:475
 msgid ""
@@ -799,7 +799,7 @@ msgid ""
 "roads, ferries, or ships, so you can have more than one economy if their "
 "flags are not connected by any means of transportation. In that case, your "
 "separate economies can have different settings for wares."
-msgstr ""
+msgstr "A gomb neve nem véletlenül „A zászlót/épületet tartalmazó gazdaság beállítása”. Egy gazdaság azon épületek és zászlók összességét jelenti, amelyeket utak, víziutak és hajók kötnek össze. Több gazdaságod is lehet egyszerre, ha ezeket nem köti össze semmilyen közlekedési útvonal. Ebben az esetben a különálló gazdaságaid beállításai különbözőek is lehetnek."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""

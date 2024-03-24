@@ -9,7 +9,7 @@
 # Lennard Hofmann <lennard.hofmann@web.de>, 2021
 # Matthias Mast, 2021
 # Simon Heimberg, 2023
-# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022
+# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022,2024
 # Elisabeth Jäger, 2015
 # wl-zocker, 2014-2015
 # 39a0b2e5ef9bf024c2fcfbdd0522de1a_96abb62, 2015
@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-03-04 03:06+0000\n"
+"POT-Creation-Date: 2024-03-07 10:16+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
-"Last-Translator: Simon Heimberg, 2023\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022,2024\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -130,7 +130,7 @@ msgstr "Baue einen Hafen"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:61
 msgid "Build a port in the northern part of your camp"
-msgstr "Baue einen Hafen in nördlichen Teil deines Lagers"
+msgstr "Baue einen Hafen im nördlichen Teil deines Lagers"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:62
 msgid "You always need a port when you want to transport wares with a ship."
@@ -260,7 +260,6 @@ msgid ""
 msgstr "Du musst deine Werft stoppen, wenn du genug Schiffe hast. Ansonsten wird dein Schiffbauer deinen gesamten Vorrat an Stämmen und Spinnenstoff aufbrauchen und dutzende Schiffe produzieren."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:122
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:341
 msgid ""
 "This is the icon for stopping production. You will find it in the building "
 "window."
@@ -321,7 +320,7 @@ msgstr "Expeditionen können in jedem Hafen gestartet werden. Alle benötigten W
 msgid ""
 "You can check out the needed wares in the Expedition tab of your port (it "
 "will appear in the last place when you’ve started an expedition)."
-msgstr ""
+msgstr "Du kannst die benötigten Waren im Expeditionsreiter deines Hafens einsehen (er taucht an der letzten Stelle auf, sobald du eine Expedition gestartet hast)."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:152
 msgid "Now try this out. I will tell you later what the next steps are."
@@ -482,14 +481,14 @@ msgid ""
 "any number of soldiers. The desired number makes sure that defenders are "
 "requested by the port or headquarters, and once they are garrisoned there, "
 "they don't get sent away to serve other needs."
-msgstr ""
+msgstr "Um sicher zu gehen, dass sie richtig verteidigt werden, kannst du die Anzahl der Verteidiger für beide im Soldatenreiter, ähnlich wie in Militärgebäuden, einstellen. Aber sie sind zugleich auch Lagerhäuser, so dass sie jede beliebige Anzahl Soldaten unterbringen können. Die gewünschte Anzahl an Verteidigern, stellt sicher, dass Verteidiger vom Hafen oder dem Hauptquartier angefordert werden, und nachdem sie dort stationiert wurden, nicht mehr für andere Aufgaben entsendet werden."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:216
 msgid ""
 "On this map, there is no enemy to fear. In other games, you should set some "
 "defenders for your ports and make building one or two military "
 "fortifications around your new colonies a priority."
-msgstr ""
+msgstr "Auf dieser Karte musst du keinen Gegner fürchten. In anderen Spielen solltest du aber einige Verteidiger in deinen Häfen stationieren und  Wert darauf legen, ein oder zwei militärische Befestigungen um deine neuen Kolonien zu bauen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:223
 msgid "Our mission"
@@ -726,30 +725,30 @@ msgid ""
 "As you can see, ferries can be produced quite quickly, but you don't need to"
 " worry about wasted materials, because ferry yards normally only produce "
 "them on demand, when there are unserviced waterways."
-msgstr ""
+msgstr "Wie du sehen kannst, können Fähren recht schnell gebaut werden, aber du brauchst dir keine Sorgen über verschwendetes Baumaterial zu machen, da Fährenwerften sie normalerweise nur nach Bedarf produzieren, sobald es unbesetzte Wasserwege gibt."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:340
 msgid ""
 "As long as a ferry services a waterway, its lifetime is unlimited, but "
 "unemployed ferries will rot away and eventually sink."
-msgstr ""
+msgstr "Solange Fähren Wasserwege besetzen, haben sie eine unbegrenzte Lebensdauer, aber unbeschäftigte Fähren fangen an zu verotten und werden gegebenenfalls sinken."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:348
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349
 msgid "Congratulations"
 msgstr "Glückwunsch"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
 msgid "You have learnt all there is to learn about ships and ferries!"
 msgstr "Du hast alles gelernt, was über Schiffe und Fähren zu lernen ist!"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:351
 msgid ""
 "There is also another island where you can build a port if you wish to try "
 "launching another expedition."
 msgstr "Da gibt es noch eine andere Insel, wo du einen Hafen bauen kannst, wenn du nochmal eine andere Expedition starten möchtest."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:353
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:352
 msgid ""
 "As always, you can continue playing and practice a bit more on this map if "
 "you like, or get your captain’s license ready and try out your new skills in"

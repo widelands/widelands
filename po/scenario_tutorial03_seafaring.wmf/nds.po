@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-03-04 03:06+0000\n"
+"POT-Creation-Date: 2024-03-07 02:19+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2024\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -250,7 +250,6 @@ msgid ""
 msgstr "Du mutt diene Warft anhollen, wenn du genoog Schippen hest. Anners verklüngelt de Schippebauer all diene Boomstammen un Spinnenstoff, um hunnert Schippen to bauen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:122
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:341
 msgid ""
 "This is the icon for stopping production. You will find it in the building "
 "window."
@@ -311,7 +310,7 @@ msgstr "Du kannst eene Söök in elkeen Muu begünnen. Alle nödigen Waren worde
 msgid ""
 "You can check out the needed wares in the Expedition tab of your port (it "
 "will appear in the last place when you’ve started an expedition)."
-msgstr ""
+msgstr "Du kannst de nödigen Waren in de Söök-Listenwessler vun de Muu sehn (’t is blot dann daar, wenn eene Söök utrüst word, un kummt dann in de leste Stee)."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:152
 msgid "Now try this out. I will tell you later what the next steps are."
@@ -472,14 +471,14 @@ msgid ""
 "any number of soldiers. The desired number makes sure that defenders are "
 "requested by the port or headquarters, and once they are garrisoned there, "
 "they don't get sent away to serve other needs."
-msgstr ""
+msgstr "Um klaar to wesen, dat se good verteidigt worden, kannst du de wünsket Tahl vun Soldaten tum Verteidigen in de Soldaten-Listenwessler setten, as in Soldateree-Boen. Aver se sünd togliek ok Kraamhusen un könen elkeen Tahl vun Soldaten enthollen. De wünsket Tahl maakt fast, dat de Muu of Raadhuus Verteidigers anfördert, un wenn se daar unnerbrocht sünd, worden se nich wegstüürt, um annerwaar to denen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:216
 msgid ""
 "On this map, there is no enemy to fear. In other games, you should set some "
 "defenders for your ports and make building one or two military "
 "fortifications around your new colonies a priority."
-msgstr ""
+msgstr "Up deeser Kaart gifft dat keene Feinde. In anner Spelen sallst du lever fix een paar Soldaten as Verteidigers in de Muu stüren un een paar Soldateree-Boen um diene nejen Dörper bauen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:223
 msgid "Our mission"
@@ -716,30 +715,30 @@ msgid ""
 "As you can see, ferries can be produced quite quickly, but you don't need to"
 " worry about wasted materials, because ferry yards normally only produce "
 "them on demand, when there are unserviced waterways."
-msgstr ""
+msgstr "As du süchst, worden Fähren leep fix baut, aver du mutts di keenen Kopp um verklüngelte Materialien maken, denn Fährenwarften bauen normaal blots as nödig, wenn ’t Prielen sünner eene Fähr gifft."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:340
 msgid ""
 "As long as a ferry services a waterway, its lifetime is unlimited, but "
 "unemployed ferries will rot away and eventually sink."
-msgstr ""
+msgstr "So lang eene Fähr up eenem Priel fährt, leevt se ewig, aver arbeidslose Fähren verrötten un sinken."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:348
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349
 msgid "Congratulations"
 msgstr "Glückwunsk"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
 msgid "You have learnt all there is to learn about ships and ferries!"
 msgstr "Du hest all lehrt, wat ’t över Schippen un Fähren to weten gifft!"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:351
 msgid ""
 "There is also another island where you can build a port if you wish to try "
 "launching another expedition."
 msgstr "’t gifft ok noch eene Insel, wo du eene Muu bauen kannst, wenn du noch eene Söök utproberen willst."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:353
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:352
 msgid ""
 "As always, you can continue playing and practice a bit more on this map if "
 "you like, or get your captain’s license ready and try out your new skills in"
