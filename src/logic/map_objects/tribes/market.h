@@ -99,7 +99,7 @@ public:
 	void try_launching_batch(Game* game);
 	void traded_ware_arrived(TradeID trade_id, DescriptionIndex ware_index, Game* game);
 
-	[[nodiscard]] const std::map<TradeID, TradeOrder> &trade_orders() const {
+	[[nodiscard]] const std::map<TradeID, TradeOrder>& trade_orders() const {
 		return trade_orders_;
 	}
 

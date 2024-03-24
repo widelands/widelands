@@ -18,9 +18,13 @@
 
 #include "wui/marketwindow.h"
 
+#include "graphic/font_handler.h"
+#include "graphic/text_layout.h"
 #include "ui_basic/box.h"
 #include "ui_basic/dropdown.h"
+#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/spinbox.h"
+#include "wui/inputqueuedisplay.h"
 #include "wui/interactive_player.h"
 #include "wui/waresdisplay.h"
 
@@ -28,6 +32,8 @@ constexpr int kButtonSize = 34;
 constexpr int kSpacing = 8;
 
 constexpr const char* pic_tab_wares = "images/wui/buildings/menu_tab_wares.png";
+
+constexpr Duration kUpdateTimeInGametimeMs(500);  //  half a second, gametime
 
 class TradeProposalBox : public UI::Box {
 public:
@@ -110,6 +116,98 @@ private:
 	UI::Button ok_;
 };
 
+class TradeAgreementTab : public UI::Box {
+public:
+	TradeAgreementTab(UI::Panel& parent, InteractiveBase& ibase, Widelands::Market& market, Widelands::TradeID trade_id, bool can_act, BuildingWindow::CollapsedState* collapsed)
+		: UI::Box(&parent, UI::PanelStyle::kWui, format("trade_agreement_%u", trade_id), 0, 0, UI::Box::Vertical),
+		ibase_(ibase),
+		market_(&market),
+		trade_id_(trade_id),
+		can_act_(can_act),
+		nextupdate_(ibase.egbase().get_gametime()),
+		info_(this, "info", 0, 0, 0, 0, UI::PanelStyle::kWui, std::string(), UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()), UI::MultilineTextarea::ScrollMode::kNoScrolling)
+	{
+		ensure_box_can_hold_input_queues(*this);
+		set_min_desired_breadth(250);
+
+		add(&info_, UI::Box::Resizing::kExpandBoth);
+		add_space(kSpacing);
+
+		for (auto& pair : market.trade_orders().at(trade_id_).wares_queues_) {
+			add(new InputQueueDisplay(this, ibase, market, *pair.second, !can_act, true, collapsed), UI::Box::Resizing::kFullSize);
+		}
+
+		think();
+	}
+
+	void think() override {
+		UI::Box::think();
+
+		if (nextupdate_ > ibase_.egbase().get_gametime()) {
+			return;
+		}
+
+		nextupdate_ = ibase_.egbase().get_gametime() + kUpdateTimeInGametimeMs;
+		MutexLock m(MutexLock::ID::kObjects);
+
+		Widelands::Market* market = market_.get(ibase_.egbase());
+		if (market == nullptr) {
+			return;
+		}
+
+		const auto trade = market->trade_orders().find(trade_id_);
+		if (trade == market->trade_orders().end()) {
+			return;
+		}
+
+		Widelands::Market* other_market = dynamic_cast<Widelands::Market*>(ibase_.egbase().objects().get_object(trade->second.other_side));
+		if (other_market == nullptr) {
+			return;
+		}
+
+		std::string infotext("<rt><p>");
+		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, format_l(_("Trade with %s"), other_market->owner().get_name()));
+
+		infotext += "</p><p>";
+		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph, format_l(ngettext("%d batch total", "%d batches total", trade->second.initial_num_batches), trade->second.initial_num_batches));
+
+		infotext += "</p><p>";
+		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph, format_l(ngettext("%d batch sent", "%d batches sent", trade->second.num_shipped_batches), trade->second.num_shipped_batches));
+
+		infotext += "</p><p>";
+		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph, format_l(ngettext("%d batch remaining", "%d batches remaining",
+				trade->second.initial_num_batches - trade->second.num_shipped_batches), trade->second.initial_num_batches - trade->second.num_shipped_batches));
+
+		infotext += "</p>";
+		infotext += as_vspace(kSpacing);
+		infotext += "<p>";
+		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, can_act_ ? _("You send:") : _("Player sends:"));
+		for (const auto& pair : trade->second.items) {
+			infotext += as_listitem(format_l(_("%1$i× %2$s"), pair.second, ibase_.egbase().descriptions().get_ware_descr(pair.first)->descname()), UI::FontStyle::kWuiInfoPanelParagraph);
+		}
+
+		infotext += "</p>";
+		infotext += as_vspace(kSpacing);
+		infotext += "<p>";
+		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, can_act_ ? _("You receive:") : _("Player receives:"));
+		for (const auto& pair : other_market->trade_orders().at(trade_id_).items) {
+			infotext += as_listitem(format_l(_("%1$i× %2$s"), pair.second, ibase_.egbase().descriptions().get_ware_descr(pair.first)->descname()), UI::FontStyle::kWuiInfoPanelParagraph);
+		}
+
+		infotext += "</p></rt>";
+		info_.set_text(infotext);
+	}
+
+private:
+	InteractiveBase& ibase_;
+	Widelands::OPtr<Widelands::Market> market_;
+	Widelands::TradeID trade_id_;
+	bool can_act_;
+
+	Time nextupdate_;
+	UI::MultilineTextarea info_;
+};
+
 MarketWindow::MarketWindow(InteractiveBase& parent,
                                        BuildingWindow::Registry& reg,
                                        Widelands::Market& m,
@@ -124,14 +222,15 @@ void MarketWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	assert(market != nullptr);
 	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
 
-	if (upcast(InteractivePlayer, iplayer, ibase())) {
+	if (upcast(InteractivePlayer, iplayer, ibase()); iplayer != nullptr && iplayer->can_act(market->owner().player_number())) {
 		get_tabs()->add("propose", g_image_cache->get(pic_tab_wares),
 			            new TradeProposalBox(*get_tabs(), *iplayer, *market), _("Propose Trade"));
 	}
 
-	// NOCOM add tabs for ongoing trades
-
-
+	for (auto& pair : market->trade_orders()) {
+		get_tabs()->add(format("trade_%u", pair.first), ibase()->egbase().descriptions().get_ware_descr(pair.second.items.front().first)->icon(),
+			            new TradeAgreementTab(*get_tabs(), *ibase(), *market, pair.first, ibase()->can_act(market->owner().player_number()), priority_collapsed()), _("Propose Trade"));
+	}
 
 	think();
 	initialization_complete();

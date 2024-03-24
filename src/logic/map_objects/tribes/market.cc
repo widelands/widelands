@@ -176,13 +176,15 @@ void Market::new_trade(const TradeID trade_id,
 	}
 
 	molog(owner().egbase().get_gametime(), "Enqueuing new trade #%u with %d batches to %u", trade_id, num_batches, other_side);
+	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));
 }
 
 void Market::cancel_trade(const TradeID trade_id) {
 	if (auto it = trade_orders_.find(trade_id); it != trade_orders_.end()) {
+		molog(owner().egbase().get_gametime(), "Cancelling trade #%u", trade_id);
 		it->second.cleanup(*this);
 		trade_orders_.erase(trade_id);
-		molog(owner().egbase().get_gametime(), "Cancelled trade #%u", trade_id);
+		Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));
 	} else {
 		molog(owner().egbase().get_gametime(), "cancel_trade: trade #%u not found", trade_id);
 	}
