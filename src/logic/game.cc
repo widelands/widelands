@@ -1190,10 +1190,14 @@ void Game::send_player_diplomacy(PlayerNumber p1, DiplomacyAction a, PlayerNumbe
 }
 
 void Game::send_player_propose_trade(const Trade& trade) {
-	auto* object = objects().get_object(trade.initiator);
+	MapObject* object = objects().get_object(trade.initiator);
 	assert(object != nullptr);
 	send_player_command(
 	   new CmdProposeTrade(get_gametime(), object->get_owner()->player_number(), trade));
+}
+
+void Game::send_player_trade_action(PlayerNumber sender, TradeID trade_id, TradeAction action, Serial serial) {
+	send_player_command(new CmdTradeAction(get_gametime(), sender, trade_id, action, serial));
 }
 
 void Game::send_player_set_stock_policy(Building& imm,
@@ -1232,7 +1236,18 @@ TradeID Game::propose_trade(const Trade& trade) {
 	Market* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
 	assert(initiator != nullptr);
 
-	initiator->removed.connect([this, id](const uint32_t /* serial */) { cancel_trade(id, false); });
+	Player* initiating_player = initiator->get_owner();
+	initiator->removed.connect([this, id, initiating_player](const uint32_t /* serial */) {
+		auto it = trade_agreements_.find(id);
+		if (it == trade_agreements_.end()) {
+			return;
+		}
+		if (it->second.state == TradeAgreement::State::kProposed) {
+			retract_trade(id);
+		} else {
+			cancel_trade(id, false, initiating_player);
+		}
+	});
 
 	trade_agreements_[id] = TradeAgreement{TradeAgreement::State::kProposed, trade, 0U};
 
@@ -1248,9 +1263,10 @@ TradeID Game::propose_trade(const Trade& trade) {
 
 void Game::accept_trade(const TradeID trade_id, Market& receiver) {
 	auto it = trade_agreements_.find(trade_id);
-	if (it == trade_agreements_.end()) {
+	if (it == trade_agreements_.end() || it->second.state != TradeAgreement::State::kProposed) {
 		return;
 	}
+
 	const Trade& trade = it->second.trade;
 	Market* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
 	if (initiator == nullptr) {
@@ -1260,8 +1276,10 @@ void Game::accept_trade(const TradeID trade_id, Market& receiver) {
 
 	// TODO(sirver,trading): Check connectivity between the markets.
 
-	receiver.removed.connect([this, trade_id](const uint32_t /* serial */) { cancel_trade(trade_id, false); });
+	Player* receiving_player = receiver.get_owner();
+	receiver.removed.connect([this, trade_id, receiving_player](const uint32_t /* serial */) { cancel_trade(trade_id, false, receiving_player); });
 	it->second.receiver = receiver.serial();
+	it->second.state = TradeAgreement::State::kRunning;
 
 	initiator->new_trade(trade_id, trade.items_to_send, trade.num_batches, receiver.serial());
 	receiver.new_trade(trade_id, trade.items_to_receive, trade.num_batches, trade.initiator);
@@ -1269,14 +1287,14 @@ void Game::accept_trade(const TradeID trade_id, Market& receiver) {
 	initiator->send_message(*this, Message::Type::kTradeOfferAccepted,
 				_("Trade Accepted"),
 				initiator->descr().icon_filename(),
-				_("Trade agreement accepted"),
+				_("Trade offer accepted"),
 				format_l(_("%1$s has accepted your trade offer at %2$s."), receiver.owner().get_name(), initiator->get_market_name()),
 				false);
 }
 
 void Game::reject_trade(const TradeID trade_id) {
 	auto it = trade_agreements_.find(trade_id);
-	if (it == trade_agreements_.end()) {
+	if (it == trade_agreements_.end() || it->second.state != TradeAgreement::State::kProposed) {
 		return;
 	}
 
@@ -1286,7 +1304,7 @@ void Game::reject_trade(const TradeID trade_id) {
 		initiator->send_message(*this, Message::Type::kTradeOfferRejected,
 					_("Trade Rejected"),
 					initiator->descr().icon_filename(),
-					_("Trade agreement rejected"),
+					_("Trade offer rejected"),
 					format_l(_("%1$s has rejected your trade offer at %2$s."), player(trade.receiving_player).get_name(), initiator->get_market_name()),
 					false);
 	}
@@ -1294,7 +1312,26 @@ void Game::reject_trade(const TradeID trade_id) {
 	trade_agreements_.erase(it);
 }
 
-void Game::cancel_trade(TradeID trade_id, bool reached_regular_end) {
+void Game::retract_trade(const TradeID trade_id) {
+	auto it = trade_agreements_.find(trade_id);
+	if (it == trade_agreements_.end() || it->second.state != TradeAgreement::State::kProposed) {
+		return;
+	}
+
+	const Trade& trade = it->second.trade;
+	Market* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
+
+	get_safe_player(trade.receiving_player)->add_message(*this, std::unique_ptr<Message>(new Message(
+		Message::Type::kTradeOfferRetracted,
+	        get_gametime(), _("Trade Retracted"),
+	        initiator->descr().icon_filename(),  // NOCOM use receiver's own tribe's market here
+	        _("Trade offer retracted"),
+	        format_l(_("The trade offer by %s has been retracted."), initiator->owner().get_name()))));
+
+	trade_agreements_.erase(it);
+}
+
+void Game::cancel_trade(TradeID trade_id, bool reached_regular_end, Player* canceller) {
 	// The trade id might be long gone - since we never disconnect from the
 	// 'removed' signal of the two buildings, we might be invoked long after the
 	// trade was deleted for other reasons.
@@ -1311,7 +1348,7 @@ void Game::cancel_trade(TradeID trade_id, bool reached_regular_end) {
 
 	Market* receiver = dynamic_cast<Market*>(objects().get_object(it->second.receiver));
 	if (receiver != nullptr) {
-		receiver->cancel_trade(*this, trade_id, reached_regular_end, true);
+		receiver->cancel_trade(*this, trade_id, reached_regular_end, reached_regular_end || canceller != receiver->get_owner());
 	}
 	trade_agreements_.erase(trade_id);
 }

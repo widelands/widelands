@@ -24,7 +24,8 @@
 namespace Widelands {
 
 /*
- * how many and which economies does a player have?
+ * Saves all the economies of all players.
+ * Also handles saving trade agreements.
  */
 struct GamePlayerEconomiesPacket : public GameDataPacket {
 	void read(FileSystem&, Game&, MapObjectLoader* = nullptr) override;

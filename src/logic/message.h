@@ -44,6 +44,7 @@ struct Message {
 		kTradeOfferReceived,
 		kTradeOfferAccepted,
 		kTradeOfferRejected,
+		kTradeOfferRetracted,
 		kTradeComplete,
 		kTradeCancelled,
 		kEconomySiteOccupied,  // end of economy section

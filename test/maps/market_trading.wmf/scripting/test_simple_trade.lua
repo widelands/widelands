@@ -1,3 +1,5 @@
+include "test/scripting/stable_save.lua"
+
 run(function()
    sleep(2000)
    place_markets()
@@ -15,6 +17,9 @@ run(function()
       log = p1:get_wares("log"),
       granite = p1:get_wares("granite"),
    }
+
+   sleep(60 * 1000)
+   stable_save(game, "trading", 50 * 1000)
 
    -- We await until one ware we trade has the right count for one player.
    -- Then, we'll sleep half as long as we already waited to make sure that no

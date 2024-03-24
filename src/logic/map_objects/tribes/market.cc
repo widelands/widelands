@@ -399,7 +399,7 @@ void Market::traded_ware_arrived(const TradeID trade_id,
 		other_trade_order.received_traded_wares_in_this_batch = 0;
 		if (trade_order.fulfilled()) {
 			assert(other_trade_order.fulfilled());
-			game->cancel_trade(trade_id, true);
+			game->cancel_trade(trade_id, true, get_owner());
 		}
 	}
 }

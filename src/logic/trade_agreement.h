@@ -38,14 +38,21 @@ struct Trade {
 };
 
 struct TradeAgreement {
-	enum class State {
-		kProposed,
-		kRunning,
+	enum class State : uint8_t {
+		kProposed = 0,
+		kRunning = 1,
 	};
 
 	State state;
 	Trade trade;
 	Serial receiver;
+};
+
+enum class TradeAction : uint8_t {
+	kCancel = 0,
+	kAccept = 1,
+	kReject = 2,
+	kRetract = 3,
 };
 
 }  // namespace Widelands

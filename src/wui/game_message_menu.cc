@@ -492,6 +492,7 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 	case Widelands::Message::Type::kTradeOfferReceived:
 	case Widelands::Message::Type::kTradeOfferAccepted:
 	case Widelands::Message::Type::kTradeOfferRejected:
+	case Widelands::Message::Type::kTradeOfferRetracted:
 	case Widelands::Message::Type::kTradeComplete:
 	case Widelands::Message::Type::kTradeCancelled:
 	case Widelands::Message::Type::kWarfareSiteDefeated:
@@ -578,6 +579,7 @@ std::string GameMessageMenu::display_message_type_icon(const Widelands::Message&
 	case Widelands::Message::Type::kTradeOfferReceived:
 	case Widelands::Message::Type::kTradeOfferAccepted:
 	case Widelands::Message::Type::kTradeOfferRejected:
+	case Widelands::Message::Type::kTradeOfferRetracted:
 	case Widelands::Message::Type::kTradeComplete:
 	case Widelands::Message::Type::kTradeCancelled:
 		return "images/wui/stats/genstats_nrwares.png";

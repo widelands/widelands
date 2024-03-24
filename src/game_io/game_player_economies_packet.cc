@@ -35,7 +35,12 @@
 namespace Widelands {
 namespace {
 
-constexpr uint16_t kCurrentPacketVersion = 7;
+/**
+ * Changelog:
+ * 7: v1.2
+ * 8: Added trading.
+ */
+constexpr uint16_t kCurrentPacketVersion = 8;
 
 bool write_expedition_ship_economy(Economy* economy,
                                    const Map& map,
@@ -68,7 +73,30 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 		FileRead fr;
 		fr.open(fs, "binary/player_economies");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		// TODO(Nordfriese): Savegame compatibility v1.2
+		if (packet_version >= 7 && packet_version <= kCurrentPacketVersion) {
+			for (size_t i = packet_version >= 8 ? fr.unsigned_32() : 0; i > 0; --i) {
+				const TradeID id = fr.unsigned_32();
+				game.next_trade_agreement_id_ = std::max(game.next_trade_agreement_id_, id + 1);
+				TradeAgreement& trade = game.trade_agreements_[id];
+
+				trade.state = static_cast<TradeAgreement::State>(fr.unsigned_8());
+				trade.receiver = trade.state == TradeAgreement::State::kProposed ? 0 : fr.unsigned_32();
+				trade.trade.initiator = fr.unsigned_32();
+				trade.trade.num_batches = fr.unsigned_32();
+				trade.trade.receiving_player = fr.unsigned_8();
+				for (size_t j = fr.unsigned_32(); j > 0; --j) {
+					uint32_t di = fr.unsigned_32();
+					uint32_t amount = fr.unsigned_32();
+					trade.trade.items_to_send.emplace_back(di, amount);
+				}
+				for (size_t j = fr.unsigned_32(); j > 0; --j) {
+					uint32_t di = fr.unsigned_32();
+					uint32_t amount = fr.unsigned_32();
+					trade.trade.items_to_receive.emplace_back(di, amount);
+				}
+			}
+
 			iterate_players_existing(p, nr_players, game, player) try {
 				const size_t num_economies = fr.unsigned_32();
 				for (uint32_t i = 0; i < num_economies; ++i) {
@@ -117,6 +145,28 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 void GamePlayerEconomiesPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const mos) {
 	FileWrite fw;
 	fw.unsigned_16(kCurrentPacketVersion);
+
+	fw.unsigned_32(game.trade_agreements_.size());
+	for (const auto& pair : game.trade_agreements_) {
+		fw.unsigned_32(pair.first);
+		fw.unsigned_8(static_cast<uint8_t>(pair.second.state));
+		if (pair.second.state != TradeAgreement::State::kProposed) {
+			fw.unsigned_32(mos->get_object_file_index_or_zero(game.objects().get_object(pair.second.receiver)));
+		}
+		fw.unsigned_32(mos->get_object_file_index_or_zero(game.objects().get_object(pair.second.trade.initiator)));
+		fw.unsigned_32(pair.second.trade.num_batches);
+		fw.unsigned_8(pair.second.trade.receiving_player);
+		fw.unsigned_32(pair.second.trade.items_to_send.size());
+		for (const WareAmount& amount : pair.second.trade.items_to_send) {
+			fw.unsigned_32(amount.first);
+			fw.unsigned_32(amount.second);
+		}
+		fw.unsigned_32(pair.second.trade.items_to_receive.size());
+		for (const WareAmount& amount : pair.second.trade.items_to_receive) {
+			fw.unsigned_32(amount.first);
+			fw.unsigned_32(amount.second);
+		}
+	}
 
 	const Map& map = game.map();
 	PlayerNumber const nr_players = map.get_nrplayers();

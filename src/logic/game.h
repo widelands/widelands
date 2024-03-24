@@ -150,6 +150,7 @@ public:
 
 	friend class CmdQueue;  // this class handles the commands
 	friend struct GameClassPacket;
+	friend struct GamePlayerEconomiesPacket;
 	friend struct GamePlayerInfoPacket;
 	friend struct GameLoader;
 
@@ -312,6 +313,7 @@ public:
 	                                 const std::vector<uint32_t>& parameters);
 	void send_player_cancel_expedition_ship(const Ship&);
 	void send_player_propose_trade(const Trade& trade);
+	void send_player_trade_action(PlayerNumber sender, TradeID trade_id, TradeAction action, Serial serial);
 	void send_player_toggle_mute(const Building&, bool all);
 	void send_player_diplomacy(PlayerNumber, DiplomacyAction, PlayerNumber);
 	void send_player_pinned_note(
@@ -383,7 +385,8 @@ public:
 	TradeID propose_trade(const Trade& trade);
 	void accept_trade(TradeID trade_id, Market& receiver);
 	void reject_trade(TradeID trade_id);
-	void cancel_trade(TradeID trade_id, bool reached_regular_end);
+	void retract_trade(TradeID trade_id);
+	void cancel_trade(TradeID trade_id, bool reached_regular_end, Player* canceller);
 
 	struct PendingDiplomacyAction {
 		PlayerNumber sender;     ///< The player who initiated the action.
