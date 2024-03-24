@@ -520,6 +520,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					tags = map.get_tags();
 				}
 			}
+			int first_added = -1;
 			for (size_t i = 0; i < tribeinfo.initializations.size(); ++i) {
 				const Widelands::TribeBasicInfo::Initialization& addme = tribeinfo.initializations[i];
 				bool matches_tags = true;
@@ -533,7 +534,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				                        settings_->get_win_condition_script()) == 0u)) {
 					init_dropdown_.add(_(addme.descname), i, nullptr,
 					                   i == player_setting.initialization_index, _(addme.tooltip));
+					if (first_added < 0) {
+						first_added = i;
+					}
 				}
+			}
+			if (!init_dropdown_.has_selection() && first_added >= 0) {
+				init_dropdown_.select(first_added);
+				set_init();
 			}
 		}
 
