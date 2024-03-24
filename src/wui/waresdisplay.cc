@@ -570,6 +570,8 @@ void AbstractWaresDisplay::set_hidden(Widelands::DescriptionIndex ware, bool hid
 		hidden_[ware] = hide;
 		if (hide) {
 			selected_[ware] = false;
+		} else {
+			last_ware_details_cache_update_ = 0;
 		}
 		need_texture_update_ = true;
 	}
