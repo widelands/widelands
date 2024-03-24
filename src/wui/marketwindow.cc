@@ -89,7 +89,7 @@ private:
 		trade.items_to_receive = demand_->get_selection();
 		trade.num_batches = batches_.get_value();
 		trade.initiator = market_.serial();
-		trade.receiver = 0;  // NOCOM let the recipient choose the market where to receive the trade
+		trade.receiving_player = player_.get_selected()->player_number();
 
 		iplayer_.game().send_player_propose_trade(trade);
 

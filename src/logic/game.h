@@ -50,6 +50,7 @@ struct Flag;
 struct Path;
 struct PlayerImmovable;
 enum class IslandExploreDirection;
+class Market;
 class PortDock;
 enum class ScoutingDirection;
 struct Ship;
@@ -379,10 +380,10 @@ public:
 		return list_of_scenarios_;
 	}
 
-	// TODO(sirver,trading): document these functions once the interface settles.
-	int propose_trade(const Trade& trade);
-	void accept_trade(TradeID trade_id);
-	void cancel_trade(TradeID trade_id);
+	TradeID propose_trade(const Trade& trade);
+	void accept_trade(TradeID trade_id, Market& receiver);
+	void reject_trade(TradeID trade_id);
+	void cancel_trade(TradeID trade_id, bool reached_regular_end);
 
 	struct PendingDiplomacyAction {
 		PlayerNumber sender;     ///< The player who initiated the action.

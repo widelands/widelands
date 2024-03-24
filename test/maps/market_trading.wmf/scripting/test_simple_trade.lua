@@ -1,7 +1,9 @@
 run(function()
    sleep(2000)
    place_markets()
-   market_p2:propose_trade(market_p1, 5, { log = 3 }, { granite = 2, iron = 1 })
+   local id = market_p2:propose_trade(p1, 5, { log = 3 }, { granite = 2, iron = 1 })
+   sleep(100)
+   market_p1:accept_trade(id)
 
    local p1_initial = {
       iron = p1:get_wares("iron"),

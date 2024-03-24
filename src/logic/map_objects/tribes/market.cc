@@ -179,9 +179,19 @@ void Market::new_trade(const TradeID trade_id,
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));
 }
 
-void Market::cancel_trade(const TradeID trade_id) {
+void Market::cancel_trade(Game& game, const TradeID trade_id, const bool reached_regular_end, const bool send_msg) {
 	if (auto it = trade_orders_.find(trade_id); it != trade_orders_.end()) {
-		molog(owner().egbase().get_gametime(), "Cancelling trade #%u", trade_id);
+		molog(owner().egbase().get_gametime(), reached_regular_end ? "Completed trade #%u" : "Cancelling trade #%u", trade_id);
+
+		if (send_msg) {
+			send_message(game, reached_regular_end ? Message::Type::kTradeComplete : Message::Type::kTradeCancelled,
+				reached_regular_end ? _("Trade Complete") : _("Trade Cancelled"),
+				descr().icon_filename(),
+				reached_regular_end ? _("Trade agreement complete") : _("Trade agreement cancelled"),
+				format(reached_regular_end ? _("Your trade agreement at %s has been completed.") : _("Your trade agreement at %s has been cancelled."), get_market_name()),
+				false);
+		}
+
 		it->second.cleanup(*this);
 		trade_orders_.erase(trade_id);
 		Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));
@@ -389,9 +399,7 @@ void Market::traded_ware_arrived(const TradeID trade_id,
 		other_trade_order.received_traded_wares_in_this_batch = 0;
 		if (trade_order.fulfilled()) {
 			assert(other_trade_order.fulfilled());
-			// TODO(sirver,trading): This is not quite correct. This should for
-			// example send a differnet message than actually canceling a trade.
-			game->cancel_trade(trade_id);
+			game->cancel_trade(trade_id, true);
 		}
 	}
 }

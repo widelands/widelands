@@ -2204,26 +2204,13 @@ void CmdProposeTrade::execute(Game& game) {
 		              sender(), initiator->owner().player_number());
 		return;
 	}
-	Market* receiver = dynamic_cast<Market*>(game.objects().get_object(trade_.receiver));
-	if (receiver == nullptr) {
-		log_warn_time(
-		   game.get_gametime(), "CmdProposeTrade: receiver vanished or is not a market.\n");
-		return;
-	}
-	if (initiator->get_owner() == receiver->get_owner()) {
-		log_warn_time(
-		   game.get_gametime(), "CmdProposeTrade: Sending and receiving player are the same.\n");
-		return;
-	}
 
-	// TODO(sirver,trading): Maybe check connectivity between markets here and
-	// report errors.
 	game.propose_trade(trade_);
 }
 
 CmdProposeTrade::CmdProposeTrade(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 	trade_.initiator = des.unsigned_32();
-	trade_.receiver = des.unsigned_32();
+	trade_.receiving_player = des.unsigned_8();
 	trade_.items_to_send = deserialize_bill_of_materials(&des);
 	trade_.items_to_receive = deserialize_bill_of_materials(&des);
 	trade_.num_batches = des.signed_32();
@@ -2232,7 +2219,7 @@ CmdProposeTrade::CmdProposeTrade(StreamRead& des) : PlayerCommand(Time(0), des.u
 void CmdProposeTrade::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
 	ser.unsigned_32(trade_.initiator);
-	ser.unsigned_32(trade_.receiver);
+	ser.unsigned_8(trade_.receiving_player);
 	serialize_bill_of_materials(trade_.items_to_send, &ser);
 	serialize_bill_of_materials(trade_.items_to_receive, &ser);
 	ser.signed_32(trade_.num_batches);

@@ -91,7 +91,7 @@ public:
 	}
 
 	void new_trade(TradeID trade_id, const BillOfMaterials& items, int num_batches, Serial other_side);
-	void cancel_trade(TradeID trade_id);
+	void cancel_trade(Game& game, TradeID trade_id, bool reached_regular_end, bool send_msg);
 
 	[[nodiscard]] InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
 	void cleanup(EditorGameBase&) override;

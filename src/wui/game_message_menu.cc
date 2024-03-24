@@ -489,10 +489,14 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 	case Widelands::Message::Type::kAllMessages:
 	case Widelands::Message::Type::kGameLogic:
 	case Widelands::Message::Type::kEconomySiteOccupied:
+	case Widelands::Message::Type::kTradeOfferReceived:
+	case Widelands::Message::Type::kTradeOfferAccepted:
+	case Widelands::Message::Type::kTradeOfferRejected:
+	case Widelands::Message::Type::kTradeComplete:
+	case Widelands::Message::Type::kTradeCancelled:
 	case Widelands::Message::Type::kWarfareSiteDefeated:
 	case Widelands::Message::Type::kWarfareSiteLost:
 	case Widelands::Message::Type::kWarfareUnderAttack:
-	case Widelands::Message::Type::kTradeOfferReceived:
 		set_filter_messages_tooltips();
 		message_filter_ = Widelands::Message::Type::kAllMessages;
 		geologistsbtn_->set_perm_pressed(false);
@@ -571,6 +575,11 @@ std::string GameMessageMenu::display_message_type_icon(const Widelands::Message&
 	case Widelands::Message::Type::kGeologists:
 		return "images/wui/fieldaction/menu_geologist.png";
 	case Widelands::Message::Type::kEconomy:
+	case Widelands::Message::Type::kTradeOfferReceived:
+	case Widelands::Message::Type::kTradeOfferAccepted:
+	case Widelands::Message::Type::kTradeOfferRejected:
+	case Widelands::Message::Type::kTradeComplete:
+	case Widelands::Message::Type::kTradeCancelled:
 		return "images/wui/stats/genstats_nrwares.png";
 	case Widelands::Message::Type::kSeafaring:
 		return "images/wui/buildings/start_expedition.png";
@@ -586,7 +595,6 @@ std::string GameMessageMenu::display_message_type_icon(const Widelands::Message&
 	case Widelands::Message::Type::kWarfareSiteDefeated:
 	case Widelands::Message::Type::kWarfareSiteLost:
 	case Widelands::Message::Type::kWarfareUnderAttack:
-	case Widelands::Message::Type::kTradeOfferReceived:
 		return "images/wui/messages/message_new.png";
 	}
 	NEVER_HERE();
