@@ -35,9 +35,9 @@ constexpr int kMaxPerItemTradeBatchSize = 15;
 struct Trade {
 	BillOfMaterials items_to_send;
 	BillOfMaterials items_to_receive;
-	int num_batches;
-	Serial initiator;
-	Serial receiver;
+	int num_batches;   ///< Total number of trade batches to send.
+	Serial initiator;  ///< The market that initiated this trade and sends items_to_send.
+	Serial receiver;   ///< The market that receives this trade and sends items_to_receive.
 };
 
 // TODO(sirver,trading): This class should probably be private to 'Game'.

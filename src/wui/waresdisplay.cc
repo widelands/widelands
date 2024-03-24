@@ -35,6 +35,7 @@
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
+#include "ui_basic/button.h"
 #include "ui_basic/window.h"
 
 constexpr int kWareMenuInfoSize = 12;
@@ -80,8 +81,6 @@ AbstractWaresDisplay::AbstractWaresDisplay(
 		ware_details_cache_.insert(
 		   std::make_pair(index, std::make_pair(RGBAColor(0, 0, 0, 0), nullptr)));
 	}
-
-	curware_.set_text(_("Stock"));
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& /* note */) { recalc_desired_size(true); });
@@ -566,12 +565,14 @@ bool AbstractWaresDisplay::ware_selected(Widelands::DescriptionIndex ware) const
 }
 
 // Wares hiding
-void AbstractWaresDisplay::hide_ware(Widelands::DescriptionIndex ware) {
-	if (hidden_[ware]) {
-		return;
+void AbstractWaresDisplay::set_hidden(Widelands::DescriptionIndex ware, bool hide) {
+	if (hidden_[ware] != hide) {
+		hidden_[ware] = hide;
+		if (hide) {
+			selected_[ware] = false;
+		}
+		need_texture_update_ = true;
 	}
-	hidden_[ware] = true;
-	need_texture_update_ = true;
 }
 
 bool AbstractWaresDisplay::is_ware_hidden(Widelands::DescriptionIndex ware) const {
@@ -708,6 +709,124 @@ uint32_t StockMenuWaresDisplay::amount_of(const Widelands::DescriptionIndex ware
 
 std::string WaresDisplay::info_for_ware(Widelands::DescriptionIndex ware) {
 	return get_amount_string(amount_of(ware));
+}
+
+UI::Box& TradeProposalWaresDisplay::create(UI::Panel* parent, const Widelands::TribeDescr& tribe, const std::string& heading, int spacing, TradeProposalWaresDisplay** result_pointer)
+{
+	UI::Box& box = *new UI::Box(parent, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical);
+	TradeProposalWaresDisplay* impl = new TradeProposalWaresDisplay(&box, tribe);
+
+	UI::Box* buttons_box = new UI::Box(&box, UI::PanelStyle::kWui, "buttons_left", 0, 0, UI::Box::Horizontal);
+	buttons_box->add_inf_space();
+	UI::Button* b = new UI::Button(buttons_box, "decrease_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
+			           g_image_cache->get("images/ui_basic/scrollbar_down_fast.png"), _("Decrease amount by 10"));
+	b->sigclicked.connect([impl] { impl->change(-10); });
+	buttons_box->add(b);
+	buttons_box->add_inf_space();
+	b->set_repeating(true);
+	b = new UI::Button(buttons_box, "decrease", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
+			           g_image_cache->get("images/ui_basic/scrollbar_down.png"), _("Decrease amount"));
+	b->sigclicked.connect([impl] { impl->change(-1); });
+	buttons_box->add(b);
+	buttons_box->add_inf_space();
+	b->set_repeating(true);
+	b = new UI::Button(buttons_box, "increase", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
+			           g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Increase amount"));
+	b->sigclicked.connect([impl] { impl->change(1); });
+	buttons_box->add(b);
+	buttons_box->add_inf_space();
+	b->set_repeating(true);
+	b = new UI::Button(buttons_box, "increase_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
+			           g_image_cache->get("images/ui_basic/scrollbar_up_fast.png"), _("Increase amount by 10"));
+	b->sigclicked.connect([impl] { impl->change(10); });
+	buttons_box->add(b);
+	buttons_box->add_inf_space();
+	b->set_repeating(true);
+
+	box.add(new UI::Textarea(&box, UI::PanelStyle::kWui, "label",
+	                          UI::FontStyle::kWuiInfoPanelHeading,
+	                          heading, UI::Align::kCenter), UI::Box::Resizing::kFullSize);
+	box.add_space(spacing);
+	box.add(impl, UI::Box::Resizing::kExpandBoth);
+	box.add_space(spacing);
+	box.add(buttons_box, UI::Box::Resizing::kFullSize);
+
+	*result_pointer = impl;
+	return box;
+}
+
+TradeProposalWaresDisplay::TradeProposalWaresDisplay(UI::Panel* parent, const Widelands::TribeDescr& tribe)
+   : WaresDisplay(parent, 0, 0, tribe, Widelands::wwWARE, true) {
+	set_other(nullptr);
+}
+
+uint32_t TradeProposalWaresDisplay::amount_of(Widelands::DescriptionIndex di) {
+	const auto it = config_.find(di);
+	return it != config_.end() ? it->second : 0;
+}
+
+void TradeProposalWaresDisplay::set_zero() {
+	config_.clear();
+	for (Widelands::DescriptionIndex di : tribe().wares()) {
+		unselect_ware(di);
+	}
+}
+
+void TradeProposalWaresDisplay::set_other(const Widelands::TribeDescr* other) {
+	for (auto it = config_.begin(); it != config_.end();) {
+		if (other == nullptr || !other->has_ware(it->first)) {
+			it = config_.erase(it);
+		} else {
+			++it;
+		}
+	}
+
+	for (Widelands::DescriptionIndex di : tribe().wares()) {
+		set_hidden(di, other == nullptr || !other->has_ware(di));
+	}
+}
+
+void TradeProposalWaresDisplay::change(const int delta) {
+	for (Widelands::DescriptionIndex di : tribe().wares()) {
+		if (ware_selected(di)) {
+			auto it = config_.find(di);
+			if (it == config_.end()) {
+				if (delta > 0) {
+					config_.emplace(di, delta);
+				}
+			} else {
+				if (it->second + delta > 0) {
+					it->second += delta;
+				} else {
+					config_.erase(it);
+				}
+			}
+		}
+	}
+}
+
+bool TradeProposalWaresDisplay::anything_selected() const {
+	for (const auto& pair : config_) {
+		if (pair.second > 0) {
+			return true;
+		}
+	}
+	return false;
+}
+
+Widelands::BillOfMaterials TradeProposalWaresDisplay::get_selection() const {
+	Widelands::BillOfMaterials bill;
+	for (const auto& pair : config_) {
+		if (pair.second > 0) {
+			bill.emplace_back(pair.first, pair.second);
+		}
+	}
+	return bill;
+}
+
+void TradeProposalWaresDisplay::draw(RenderTarget& dst) {
+	dst.brighten_rect(Recti(0, 0, get_inner_w(), get_inner_h()), -32);
+	WaresDisplay::draw(dst);
 }
 
 std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
