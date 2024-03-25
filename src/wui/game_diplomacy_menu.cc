@@ -393,7 +393,7 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 	MutexLock m(MutexLock::ID::kObjects);
 	for (Widelands::TradeID trade_id : trades) {
 		const Widelands::TradeAgreement& trade = iplayer_->game().get_trade(trade_id);
-		const Widelands::Market* other_market = dynamic_cast<const Widelands::Market*>(iplayer_->egbase().objects().get_object(trade.trade.initiator));
+		const Widelands::Market* other_market = trade.trade.initiator.get(iplayer_->egbase());
 		if (other_market == nullptr) {
 			continue;
 		}
@@ -491,7 +491,7 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 	for (Widelands::TradeID trade_id : trades) {
 		const Widelands::TradeAgreement& trade = iplayer_->game().get_trade(trade_id);
 		const Widelands::Player& other_player = iplayer_->egbase().player(trade.trade.receiving_player);
-		const Widelands::Market* market = dynamic_cast<const Widelands::Market*>(iplayer_->egbase().objects().get_object(trade.trade.initiator));
+		const Widelands::Market* market = trade.trade.initiator.get(iplayer_->egbase());
 		if (market == nullptr) {
 			continue;
 		}
@@ -571,8 +571,8 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 	for (Widelands::TradeID trade_id : trades) {
 		const Widelands::TradeAgreement& trade = iplayer_->game().get_trade(trade_id);
 
-		const Widelands::Market* own_market = dynamic_cast<const Widelands::Market*>(iplayer_->egbase().objects().get_object(trade.trade.initiator));
-		const Widelands::Market* other_market = dynamic_cast<const Widelands::Market*>(iplayer_->egbase().objects().get_object(trade.receiver));
+		const Widelands::Market* own_market = trade.trade.initiator.get(iplayer_->egbase());
+		const Widelands::Market* other_market = trade.receiver.get(iplayer_->egbase());
 
 		if (own_market == nullptr || other_market == nullptr) {
 			continue;

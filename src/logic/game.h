@@ -50,7 +50,6 @@ struct Flag;
 struct Path;
 struct PlayerImmovable;
 enum class IslandExploreDirection;
-class Market;
 class PortDock;
 enum class ScoutingDirection;
 struct Ship;

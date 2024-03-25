@@ -608,9 +608,11 @@ void MapBuildingdataPacket::read_market(Market& market,
 			for (size_t i = fr.unsigned_32(); i > 0; --i) {
 				const TradeID trade_id = fr.unsigned_32();
 				Market::TradeOrder& trade = market.trade_orders_[trade_id];
-
 				trade.market = &market;
-				trade.other_side = fr.unsigned_32();
+
+				Serial s = fr.unsigned_32();
+				trade.other_side = s == 0 ? nullptr : &mol.get<Market>(s);
+
 				trade.initial_num_batches = fr.unsigned_32();
 				trade.num_shipped_batches = fr.unsigned_32();
 				trade.received_traded_wares_in_this_batch = fr.unsigned_32();
@@ -1384,7 +1386,7 @@ void MapBuildingdataPacket::write_market(const Market& market,
 	fw.unsigned_32(market.trade_orders_.size());
 	for (const auto& pair : market.trade_orders_) {
 		fw.unsigned_32(pair.first);
-		fw.unsigned_32(mos.get_object_file_index(*game.objects().get_object(pair.second.other_side)));
+		fw.unsigned_32(mos.get_object_file_index(*pair.second.other_side.get(game)));
 		fw.unsigned_32(pair.second.initial_num_batches);
 		fw.unsigned_32(pair.second.num_shipped_batches);
 		fw.unsigned_32(pair.second.received_traded_wares_in_this_batch);

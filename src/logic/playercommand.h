@@ -948,6 +948,7 @@ struct CmdProposeTrade : PlayerCommand {
 
 private:
 	Trade trade_;
+	Serial initiator_;
 };
 
 struct CmdTradeAction : PlayerCommand {

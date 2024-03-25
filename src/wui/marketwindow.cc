@@ -90,7 +90,7 @@ private:
 		trade.items_to_send = offer_->get_selection();
 		trade.items_to_receive = demand_->get_selection();
 		trade.num_batches = batches_.get_value();
-		trade.initiator = market_.serial();
+		trade.initiator = market_;
 		trade.receiving_player = player_.get_selected()->player_number();
 
 		iplayer_.game().send_player_propose_trade(trade);
@@ -136,10 +136,11 @@ public:
 		add_space(kSpacing);
 
 		const Widelands::Market::TradeOrder& order = market.trade_orders().at(trade_id_);
-		add(new InputQueueDisplay(this, ibase, market, *order.carriers_queue_, !can_act, false, collapsed), UI::Box::Resizing::kFullSize);
+		// TODO(Nordfriese): Implement controls for those
+		add(new InputQueueDisplay(this, ibase, market, *order.carriers_queue_, true, false, collapsed), UI::Box::Resizing::kFullSize);
 		for (auto& pair : order.wares_queues_) {
 			add_space(kSpacing);
-			add(new InputQueueDisplay(this, ibase, market, *pair.second, !can_act, true, collapsed), UI::Box::Resizing::kFullSize);
+			add(new InputQueueDisplay(this, ibase, market, *pair.second, true, true, collapsed), UI::Box::Resizing::kFullSize);
 		}
 
 		if (can_act) {
@@ -182,7 +183,7 @@ public:
 			return;
 		}
 
-		Widelands::Market* other_market = dynamic_cast<Widelands::Market*>(ibase_.egbase().objects().get_object(trade->second.other_side));
+		Widelands::Market* other_market = trade->second.other_side.get(ibase_.egbase());
 		if (other_market == nullptr) {
 			return;
 		}

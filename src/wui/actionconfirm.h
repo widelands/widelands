@@ -19,7 +19,6 @@
 #ifndef WL_WUI_ACTIONCONFIRM_H
 #define WL_WUI_ACTIONCONFIRM_H
 
-#include "logic/trade_agreement.h"
 #include "logic/widelands.h"
 
 class InteractivePlayer;

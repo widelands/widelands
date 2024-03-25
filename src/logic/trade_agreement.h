@@ -23,17 +23,17 @@
 #include <limits>
 
 #include "logic/map_objects/tribes/bill_of_materials.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 
-using TradeID = uint32_t;
-constexpr TradeID kInvalidTrade = std::numeric_limits<TradeID>::max();
+class Market;
 
 struct Trade {
 	BillOfMaterials items_to_send;
 	BillOfMaterials items_to_receive;
 	int num_batches;
-	Serial initiator;
+	OPtr<Market> initiator;
 	PlayerNumber receiving_player;
 };
 
@@ -45,7 +45,7 @@ struct TradeAgreement {
 
 	State state;
 	Trade trade;
-	Serial receiver;
+	OPtr<Market> receiver;
 };
 
 enum class TradeAction : uint8_t {

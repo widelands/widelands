@@ -177,7 +177,7 @@ void Market::set_market_name(const std::string& name) {
 void Market::new_trade(const TradeID trade_id,
                        const BillOfMaterials& items,
                        const int num_batches,
-                       const Serial other_side) {
+                       OPtr<Market> other_side) {
 	MutexLock m(MutexLock::ID::kObjects);
 
 	assert(trade_orders_.count(trade_id) == 0);
@@ -196,7 +196,7 @@ void Market::new_trade(const TradeID trade_id,
 		queue->set_callback(Market::ware_arrived_callback, this);
 	}
 
-	molog(owner().egbase().get_gametime(), "Enqueuing new trade #%u with %d batches to %u", trade_id, num_batches, other_side);
+	molog(owner().egbase().get_gametime(), "Enqueuing new trade #%u with %d batches to %u", trade_id, num_batches, other_side.serial());
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));
 }
 
@@ -248,8 +248,7 @@ void Market::try_launching_batch(Game* game) {
 			continue;
 		}
 
-		Market* other_market =
-		   dynamic_cast<Market*>(game->objects().get_object(pair.second.other_side));
+		Market* other_market = pair.second.other_side.get(*game);
 		if (other_market == nullptr) {
 			// TODO(sirver,trading): Can this even happen? Where is this function called from?
 			// The other market seems to have vanished. The game tracks this and
@@ -323,7 +322,7 @@ void Market::launch_batch(const TradeID trade_id, Game* game) {
 			// Send the carrier going.
 			carrier->reset_tasks(*game);
 			carrier->start_task_carry_trade_item(
-			   *game, trade_id, ObjectPointer(game->objects().get_object(trade_order.other_side)));
+			   *game, trade_id, trade_order.other_side.get(*game));
 		}
 	}
 }
@@ -387,7 +386,7 @@ void Market::traded_ware_arrived(const TradeID trade_id,
 		carrier->update_task_buildingwork(*game);
 	}
 
-	Market* other_market = dynamic_cast<Market*>(game->objects().get_object(trade_order.other_side));
+	Market* other_market = trade_order.other_side.get(*game);
 	assert(other_market != nullptr);
 	other_market->get_owner()->ware_consumed(ware_index, 1);
 	TradeOrder& other_trade_order = other_market->trade_orders_.at(trade_id);
@@ -411,7 +410,7 @@ void Market::log_general_info(const EditorGameBase& egbase) const {
 
 	molog(egbase.get_gametime(), "%" PRIuS " trade orders", trade_orders_.size());
 	for (const auto& pair : trade_orders_) {
-		molog(egbase.get_gametime(), "  - #%6u: %3d/%3d to %6u, received %4d", pair.first, pair.second.num_shipped_batches, pair.second.initial_num_batches, pair.second.other_side, pair.second.received_traded_wares_in_this_batch);
+		molog(egbase.get_gametime(), "  - #%6u: %3d/%3d to %6u, received %4d", pair.first, pair.second.num_shipped_batches, pair.second.initial_num_batches, pair.second.other_side.serial(), pair.second.received_traded_wares_in_this_batch);
 		for (const auto& ware_amount : pair.second.items) {
 			molog(egbase.get_gametime(), "    - %3u x %s", ware_amount.second, owner().tribe().get_ware_descr(ware_amount.first)->name().c_str());
 		}

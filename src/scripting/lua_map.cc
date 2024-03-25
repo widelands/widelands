@@ -6724,7 +6724,7 @@ int LuaMarket::propose_trade(lua_State* L) {
 	const Widelands::BillOfMaterials items_to_receive =
 	   parse_wares_as_bill_of_material(L, 5, self->owner().tribe());
 	const Widelands::TradeID trade_id = game.propose_trade(Widelands::Trade{
-	   items_to_send, items_to_receive, num_batches, self->serial(), other_player.player_number()});
+	   items_to_send, items_to_receive, num_batches, self, other_player.player_number()});
 
 	// TODO(sirver,trading): Wrap 'Trade' into its own Lua class?
 	lua_pushint32(L, trade_id);

@@ -26,6 +26,7 @@
 #include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
 #include "logic/widelands_geometry_io.h"
@@ -81,15 +82,21 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 				TradeAgreement& trade = game.trade_agreements_[id];
 
 				trade.state = static_cast<TradeAgreement::State>(fr.unsigned_8());
-				trade.receiver = trade.state == TradeAgreement::State::kProposed ? 0 : fr.unsigned_32();
-				trade.trade.initiator = fr.unsigned_32();
+				Serial serial = trade.state == TradeAgreement::State::kProposed ? 0 : fr.unsigned_32();
+				trade.receiver = serial == 0 ? nullptr : &mol->get<Market>(serial);
+
+				serial = fr.unsigned_32();
+				trade.trade.initiator = serial == 0 ? nullptr : &mol->get<Market>(serial);
+
 				trade.trade.num_batches = fr.unsigned_32();
 				trade.trade.receiving_player = fr.unsigned_8();
+
 				for (size_t j = fr.unsigned_32(); j > 0; --j) {
 					uint32_t di = fr.unsigned_32();
 					uint32_t amount = fr.unsigned_32();
 					trade.trade.items_to_send.emplace_back(di, amount);
 				}
+
 				for (size_t j = fr.unsigned_32(); j > 0; --j) {
 					uint32_t di = fr.unsigned_32();
 					uint32_t amount = fr.unsigned_32();
@@ -151,9 +158,9 @@ void GamePlayerEconomiesPacket::write(FileSystem& fs, Game& game, MapObjectSaver
 		fw.unsigned_32(pair.first);
 		fw.unsigned_8(static_cast<uint8_t>(pair.second.state));
 		if (pair.second.state != TradeAgreement::State::kProposed) {
-			fw.unsigned_32(mos->get_object_file_index_or_zero(game.objects().get_object(pair.second.receiver)));
+			fw.unsigned_32(mos->get_object_file_index_or_zero(pair.second.receiver.get(game)));
 		}
-		fw.unsigned_32(mos->get_object_file_index_or_zero(game.objects().get_object(pair.second.trade.initiator)));
+		fw.unsigned_32(mos->get_object_file_index_or_zero(pair.second.trade.initiator.get(game)));
 		fw.unsigned_32(pair.second.trade.num_batches);
 		fw.unsigned_8(pair.second.trade.receiving_player);
 		fw.unsigned_32(pair.second.trade.items_to_send.size());

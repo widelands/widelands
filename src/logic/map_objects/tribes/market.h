@@ -51,7 +51,7 @@ public:
 		BillOfMaterials items;
 		int initial_num_batches{0};
 		int num_shipped_batches{0};
-		Serial other_side{0};
+		OPtr<Market> other_side{nullptr};
 
 		int received_traded_wares_in_this_batch{0};
 
@@ -90,7 +90,7 @@ public:
 		return pending_dropout_wares_;
 	}
 
-	void new_trade(TradeID trade_id, const BillOfMaterials& items, int num_batches, Serial other_side);
+	void new_trade(TradeID trade_id, const BillOfMaterials& items, int num_batches, OPtr<Market> other_side);
 	void cancel_trade(Game& game, TradeID trade_id, bool reached_regular_end, bool send_msg);
 
 	[[nodiscard]] InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;

@@ -1190,7 +1190,7 @@ void Game::send_player_diplomacy(PlayerNumber p1, DiplomacyAction a, PlayerNumbe
 }
 
 void Game::send_player_propose_trade(const Trade& trade) {
-	MapObject* object = objects().get_object(trade.initiator);
+	Market* object = trade.initiator.get(*this);
 	assert(object != nullptr);
 	send_player_command(
 	   new CmdProposeTrade(get_gametime(), object->get_owner()->player_number(), trade));
@@ -1234,7 +1234,7 @@ TradeID Game::propose_trade(const Trade& trade) {
 	MutexLock m(MutexLock::ID::kObjects);
 	const TradeID id = next_trade_agreement_id_++;
 
-	Market* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
+	Market* initiator = trade.initiator.get(*this);
 	assert(initiator != nullptr);
 
 	Player* initiating_player = initiator->get_owner();
@@ -1255,7 +1255,8 @@ TradeID Game::propose_trade(const Trade& trade) {
 	get_safe_player(trade.receiving_player)->add_message(*this, std::unique_ptr<Message>(new Message(
 		Message::Type::kTradeOfferReceived,
 	        get_gametime(), _("Trade Offer"),
-	        initiator->descr().icon_filename(),  // NOCOM use receiver's own tribe's market here
+	        // TODO(Nordfriese): Use receiver's own tribe's market here
+	        initiator->descr().icon_filename(),
 	        _("New trade offer received"),
 	        format_l(_("You have received a new trade offer from %s."), initiator->owner().get_name()))));
 
@@ -1271,7 +1272,7 @@ void Game::accept_trade(const TradeID trade_id, Market& receiver) {
 	}
 
 	const Trade& trade = it->second.trade;
-	Market* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
+	Market* initiator = trade.initiator.get(*this);
 	if (initiator == nullptr) {
 		trade_agreements_.erase(it);
 		return;
@@ -1281,10 +1282,10 @@ void Game::accept_trade(const TradeID trade_id, Market& receiver) {
 
 	Player* receiving_player = receiver.get_owner();
 	receiver.removed.connect([this, trade_id, receiving_player](const uint32_t /* serial */) { cancel_trade(trade_id, false, receiving_player); });
-	it->second.receiver = receiver.serial();
+	it->second.receiver = &receiver;
 	it->second.state = TradeAgreement::State::kRunning;
 
-	initiator->new_trade(trade_id, trade.items_to_send, trade.num_batches, receiver.serial());
+	initiator->new_trade(trade_id, trade.items_to_send, trade.num_batches, &receiver);
 	receiver.new_trade(trade_id, trade.items_to_receive, trade.num_batches, trade.initiator);
 
 	initiator->send_message(*this, Message::Type::kTradeOfferAccepted,
@@ -1304,7 +1305,7 @@ void Game::reject_trade(const TradeID trade_id) {
 	}
 
 	const Trade& trade = it->second.trade;
-	Market* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
+	Market* initiator = trade.initiator.get(*this);
 	if (initiator != nullptr) {
 		initiator->send_message(*this, Message::Type::kTradeOfferRejected,
 					_("Trade Rejected"),
@@ -1326,12 +1327,13 @@ void Game::retract_trade(const TradeID trade_id) {
 	}
 
 	const Trade& trade = it->second.trade;
-	Market* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
+	Market* initiator = trade.initiator.get(*this);
 
 	get_safe_player(trade.receiving_player)->add_message(*this, std::unique_ptr<Message>(new Message(
 		Message::Type::kTradeOfferRetracted,
 	        get_gametime(), _("Trade Retracted"),
-	        initiator->descr().icon_filename(),  // NOCOM use receiver's own tribe's market here
+	        // TODO(Nordfriese): Use receiver's own tribe's market here
+	        initiator->descr().icon_filename(),
 	        _("Trade offer retracted"),
 	        format_l(_("The trade offer by %s has been retracted."), initiator->owner().get_name()))));
 
@@ -1350,12 +1352,12 @@ void Game::cancel_trade(TradeID trade_id, bool reached_regular_end, const Player
 	}
 	const auto& trade = it->second.trade;
 
-	Market* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
+	Market* initiator = trade.initiator.get(*this);
 	if (initiator != nullptr) {
 		initiator->cancel_trade(*this, trade_id, reached_regular_end, reached_regular_end);
 	}
 
-	Market* receiver = dynamic_cast<Market*>(objects().get_object(it->second.receiver));
+	Market* receiver = it->second.receiver.get(*this);
 	if (receiver != nullptr) {
 		receiver->cancel_trade(*this, trade_id, reached_regular_end, reached_regular_end || canceller != receiver->get_owner());
 	}
@@ -1376,7 +1378,7 @@ std::vector<TradeID> Game::find_trade_proposals(PlayerNumber initiator) const {
 	std::vector<TradeID> result;
 	for (const auto& pair : trade_agreements_) {
 		if (pair.second.state == TradeAgreement::State::kProposed) {
-			if (Market* market = dynamic_cast<Market*>(objects().get_object(pair.second.trade.initiator)); market != nullptr && market->owner().player_number() == initiator) {
+			if (Market* market = pair.second.trade.initiator.get(*this); market != nullptr && market->owner().player_number() == initiator) {
 				result.push_back(pair.first);
 			}
 		}
@@ -1390,7 +1392,7 @@ std::vector<TradeID> Game::find_active_trades(PlayerNumber player) const {
 		if (pair.second.state == TradeAgreement::State::kRunning) {
 			if (pair.second.trade.receiving_player == player) {
 				result.push_back(pair.first);
-			} else if (Market* market = dynamic_cast<Market*>(objects().get_object(pair.second.trade.initiator)); market != nullptr && market->owner().player_number() == player) {
+			} else if (Market* market = pair.second.trade.initiator.get(*this); market != nullptr && market->owner().player_number() == player) {
 				result.push_back(pair.first);
 			}
 		}
