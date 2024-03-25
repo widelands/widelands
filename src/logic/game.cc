@@ -863,6 +863,9 @@ void Game::cleanup_for_load() {
 	delete_pending_player_commands();
 	cmdqueue().flush();
 
+	trade_agreements_.clear();
+	next_trade_agreement_id_ = 1;
+
 	pending_diplomacy_actions_.clear();
 	diplomacy_allowed_ = true;
 	naval_warfare_allowed_ = false;

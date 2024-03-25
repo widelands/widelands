@@ -623,7 +623,7 @@ void MapBuildingdataPacket::read_market(Market& market,
 					trade.items.emplace_back(ware_index, fr.unsigned_32());
 				}
 
-				for (size_t i = fr.unsigned_32(); i > 0; --i) {
+				for (size_t j = fr.unsigned_32(); j > 0; --j) {
 					const std::string warename(fr.string());
 					const DescriptionIndex ware_index = game.descriptions().ware_index(warename);
 					std::unique_ptr<WaresQueue> queue(new WaresQueue(market, ware_index, 1));

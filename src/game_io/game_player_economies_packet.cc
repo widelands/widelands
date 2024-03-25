@@ -79,6 +79,7 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 			for (size_t i = packet_version >= 8 ? fr.unsigned_32() : 0; i > 0; --i) {
 				const TradeID id = fr.unsigned_32();
 				game.next_trade_agreement_id_ = std::max(game.next_trade_agreement_id_, id + 1);
+				assert(game.trade_agreements_.count(id) == 0);
 				TradeAgreement& trade = game.trade_agreements_[id];
 
 				trade.state = static_cast<TradeAgreement::State>(fr.unsigned_8());

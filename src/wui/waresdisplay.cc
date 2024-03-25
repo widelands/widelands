@@ -718,40 +718,11 @@ UI::Box& TradeProposalWaresDisplay::create(UI::Panel* parent, const Widelands::T
 	UI::Box& box = *new UI::Box(parent, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical);
 	TradeProposalWaresDisplay* impl = new TradeProposalWaresDisplay(&box, tribe);
 
-	UI::Box* buttons_box = new UI::Box(&box, UI::PanelStyle::kWui, "buttons_left", 0, 0, UI::Box::Horizontal);
-	buttons_box->add_inf_space();
-	UI::Button* b = new UI::Button(buttons_box, "decrease_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
-			           g_image_cache->get("images/ui_basic/scrollbar_down_fast.png"), _("Decrease amount by 10"));
-	b->sigclicked.connect([impl] { impl->change(-10); });
-	buttons_box->add(b);
-	buttons_box->add_inf_space();
-	b->set_repeating(true);
-	b = new UI::Button(buttons_box, "decrease", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
-			           g_image_cache->get("images/ui_basic/scrollbar_down.png"), _("Decrease amount"));
-	b->sigclicked.connect([impl] { impl->change(-1); });
-	buttons_box->add(b);
-	buttons_box->add_inf_space();
-	b->set_repeating(true);
-	b = new UI::Button(buttons_box, "increase", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
-			           g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Increase amount"));
-	b->sigclicked.connect([impl] { impl->change(1); });
-	buttons_box->add(b);
-	buttons_box->add_inf_space();
-	b->set_repeating(true);
-	b = new UI::Button(buttons_box, "increase_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
-			           g_image_cache->get("images/ui_basic/scrollbar_up_fast.png"), _("Increase amount by 10"));
-	b->sigclicked.connect([impl] { impl->change(10); });
-	buttons_box->add(b);
-	buttons_box->add_inf_space();
-	b->set_repeating(true);
-
 	box.add(new UI::Textarea(&box, UI::PanelStyle::kWui, "label",
 	                          UI::FontStyle::kWuiInfoPanelHeading,
 	                          heading, UI::Align::kCenter), UI::Box::Resizing::kFullSize);
 	box.add_space(spacing);
 	box.add(impl, UI::Box::Resizing::kExpandBoth);
-	box.add_space(spacing);
-	box.add(buttons_box, UI::Box::Resizing::kFullSize);
 
 	*result_pointer = impl;
 	return box;

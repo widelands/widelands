@@ -43,9 +43,10 @@ public:
 		iplayer_(iplayer),
 		market_(&market),
 		hbox_(this, UI::PanelStyle::kWui, "hbox", 0, 0, UI::Box::Horizontal),
+		buttons_box_(this, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal),
 		player_(this, "player", 0, 0, 200, 8, kButtonSize, _("Player"), UI::DropdownType::kTextual, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary),
 		batches_(this, "batches", 0, 0, 400, 250, 10, 1, 100, UI::PanelStyle::kWui, _("Batches:"), UI::SpinBox::Units::kNone, UI::SpinBox::Type::kBig),
-		ok_(this, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("Propose"), _("Propose the configured trade to the selected player"))
+		ok_(&buttons_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("Propose"), _("Propose the configured trade to the selected player"))
 	{
 		set_size(400, 100);  // guard against SpinBox asserts
 
@@ -55,7 +56,6 @@ public:
 			}
 		}
 
-		ok_.set_size(ok_.get_w(), std::max(ok_.get_h(), kButtonSize));
 		player_.selected.connect([this]() { rebuild(); });
 		ok_.sigclicked.connect([this]() { clicked_ok(); });
 
@@ -63,13 +63,43 @@ public:
 		hbox_.add_space(kSpacing);
 		hbox_.add(&TradeProposalWaresDisplay::create(&hbox_, iplayer.player().tribe(), _("You demand:"), kSpacing, &demand_), UI::Box::Resizing::kExpandBoth);
 
+		buttons_box_.add_inf_space();
+		UI::Button* b = new UI::Button(&buttons_box_, "decrease_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
+					       g_image_cache->get("images/ui_basic/scrollbar_down_fast.png"), _("Decrease amount by 10"));
+		b->sigclicked.connect([this] { change(-10); });
+		buttons_box_.add(b, UI::Box::Resizing::kFullSize);
+		buttons_box_.add_inf_space();
+		b->set_repeating(true);
+		b = new UI::Button(&buttons_box_, "decrease", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
+					       g_image_cache->get("images/ui_basic/scrollbar_down.png"), _("Decrease amount"));
+		b->sigclicked.connect([this] { change(-1); });
+		buttons_box_.add(b, UI::Box::Resizing::kFullSize);
+		buttons_box_.add_inf_space();
+
+		buttons_box_.add(&ok_, UI::Box::Resizing::kExpandBoth);
+		buttons_box_.add_inf_space();
+
+		b->set_repeating(true);
+		b = new UI::Button(&buttons_box_, "increase", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
+					       g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Increase amount"));
+		b->sigclicked.connect([this] { change(1); });
+		buttons_box_.add(b, UI::Box::Resizing::kFullSize);
+		buttons_box_.add_inf_space();
+		b->set_repeating(true);
+		b = new UI::Button(&buttons_box_, "increase_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
+					       g_image_cache->get("images/ui_basic/scrollbar_up_fast.png"), _("Increase amount by 10"));
+		b->sigclicked.connect([this] { change(10); });
+		buttons_box_.add(b, UI::Box::Resizing::kFullSize);
+		buttons_box_.add_inf_space();
+		b->set_repeating(true);
+
 		add(&player_, UI::Box::Resizing::kFullSize);
 		add_space(kSpacing);
 		add(&hbox_, UI::Box::Resizing::kExpandBoth);
 		add_space(kSpacing);
-		add(&batches_, UI::Box::Resizing::kFullSize);
+		add(&buttons_box_, UI::Box::Resizing::kExpandBoth);
 		add_space(kSpacing);
-		add(&ok_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		add(&batches_, UI::Box::Resizing::kFullSize);
 		add_space(kSpacing);
 
 		rebuild();
@@ -100,6 +130,11 @@ private:
 		ok_.set_enabled(false);
 	}
 
+	void change(int delta) {
+		offer_->change(delta);
+		demand_->change(delta);
+	}
+
 	void rebuild() {
 		offer_->set_other(player_.has_selection() ? &player_.get_selected()->tribe() : nullptr);
 		demand_->set_other(player_.has_selection() ? &player_.get_selected()->tribe() : nullptr);
@@ -110,7 +145,7 @@ private:
 	InteractivePlayer& iplayer_;
 	Widelands::OPtr<Widelands::Market> market_;
 
-	UI::Box hbox_;
+	UI::Box hbox_, buttons_box_;
 	UI::Dropdown<Widelands::Player*> player_;
 	TradeProposalWaresDisplay* offer_;
 	TradeProposalWaresDisplay* demand_;
@@ -188,6 +223,7 @@ public:
 			return;
 		}
 		const Widelands::TradeAgreement& agreement = ibase_.game().get_trade(trade_id_);
+		const bool is_receiver = agreement.trade.initiator == other_market;
 
 		std::string infotext("<rt><p>");
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, format_l(_("Trade with %s"), other_market->owner().get_name()));
@@ -206,7 +242,7 @@ public:
 		infotext += as_vspace(kSpacing);
 		infotext += "<p>";
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, can_act_ ? _("You send:") : _("Player sends:"));
-		for (const auto& pair : agreement.trade.items_to_send) {
+		for (const auto& pair : is_receiver ? agreement.trade.items_to_receive : agreement.trade.items_to_send) {
 			infotext += as_listitem(format_l(_("%1$i× %2$s"), pair.second, ibase_.egbase().descriptions().get_ware_descr(pair.first)->descname()), UI::FontStyle::kWuiInfoPanelParagraph);
 		}
 
@@ -214,7 +250,7 @@ public:
 		infotext += as_vspace(kSpacing);
 		infotext += "<p>";
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, can_act_ ? _("You receive:") : _("Player receives:"));
-		for (const auto& pair : agreement.trade.items_to_receive) {
+		for (const auto& pair : is_receiver ? agreement.trade.items_to_send : agreement.trade.items_to_receive) {
 			infotext += as_listitem(format_l(_("%1$i× %2$s"), pair.second, ibase_.egbase().descriptions().get_ware_descr(pair.first)->descname()), UI::FontStyle::kWuiInfoPanelParagraph);
 		}
 
