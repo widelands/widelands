@@ -401,6 +401,10 @@ public:
 
 	[[nodiscard]] Panel& get_topmost_forefather();
 
+	[[nodiscard]] PanelStyle get_panel_style() const {
+		return panel_style_;
+	}
+
 	struct ModalGuard {
 		explicit ModalGuard(Panel& p);
 		~ModalGuard();

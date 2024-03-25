@@ -708,7 +708,8 @@ int LuaPanel::get_child(lua_State* L) {
            * ``"min"``: **Mandatory**. The slider's minimum value.
            * ``"max"``: **Mandatory**. The slider's maximum value.
            * ``"cursor_size"``: **Optional**. The size of the slider button in pixels (default 20).
-           * ``"dark"``: **Optional**. Draw the slider darker instead of lighter.
+           * ``"dark"``: **Optional**. Ignored in the main menu.
+             Draw the slider darker instead of lighter (default :const:`false`).
            * ``"on_changed"``: **Optional**. Callback code to run when the slider's value changes.
 
          * ``"discrete_slider"``: A button that can be slid along a horizontal line to change
@@ -717,7 +718,8 @@ int LuaPanel::get_child(lua_State* L) {
            * ``"labels"``: **Mandatory**. Array of strings. Each string defines one slider point.
            * ``"value"``: **Mandatory**. The initially selected value.
            * ``"cursor_size"``: **Optional**. The size of the slider button in pixels (default 20).
-           * ``"dark"``: **Optional**. Draw the slider darker instead of lighter.
+           * ``"dark"``: **Optional**. Ignored in the main menu.
+             Draw the slider darker instead of lighter (default :const:`false`).
            * ``"on_changed"``: **Optional**. Callback code to run when the slider's value changes.
 
          * ``"multilineeditbox"``: A multi-line field where the user can enter text. Properties:
@@ -837,7 +839,8 @@ int LuaPanel::get_child(lua_State* L) {
 
          * ``"tabpanel"``: A panel that allows switching between multiple tabs.
 
-           * ``"dark"``: **Optional**. Whether to use dark appearance (default :const:`false`).
+           * ``"dark"``: **Optional**. Ignored in the main menu.
+             Whether to use dark appearance (default :const:`false`).
            * ``"active"``: **Optional**. The name or index of the initially active tab.
            * ``"tabs"``: **Optional**. The tabs in the tab panel.
              An array of tables with the following keys:
@@ -866,6 +869,12 @@ int LuaPanel::get_child(lua_State* L) {
       Therefore, any callbacks attached to such widgets must not use any functions or variables
       defined at an arbitrary earlier time by your script -
       they may have been deleted by the time the callback is invoked.
+
+      Similarly, in the main menu, a plugin's init script may be called multiple times
+      without resetting the user interface in the mean time. Therefore, the script
+      needs to check whether the elements it intends to add already exist from an
+      earlier invocation using a different Lua context.
+
       Example:
 
       .. code-block:: lua
@@ -971,6 +980,10 @@ int LuaPanel::create_child(lua_State* L) {
 /*
  * C Functions
  */
+static inline UI::PanelStyle panel_style(lua_State* L) {
+	return is_main_menu(L) ? UI::PanelStyle::kWui : UI::PanelStyle::kFsMenu;
+}
+
 static UI::Align get_table_align(lua_State* L,
                                  const char* key,
                                  bool mandatory,
@@ -1077,20 +1090,25 @@ get_table_button_style(lua_State* L,
                        const char* key,
                        bool mandatory,
                        UI::ButtonStyle default_value = UI::ButtonStyle::kWuiSecondary) {
+	const bool mainmenu = is_main_menu(L);
+
 	lua_getfield(L, -1, key);
 	if (!lua_isnil(L, -1)) {
 		std::string str = luaL_checkstring(L, -1);
 		if (str == "primary") {
-			default_value = UI::ButtonStyle::kWuiPrimary;
+			default_value = mainmenu ? UI::ButtonStyle::kFsMenuPrimary : UI::ButtonStyle::kWuiPrimary;
 		} else if (str == "secondary") {
-			default_value = UI::ButtonStyle::kWuiSecondary;
+			default_value =
+			   mainmenu ? UI::ButtonStyle::kFsMenuSecondary : UI::ButtonStyle::kWuiSecondary;
 		} else if (str == "menu") {
-			default_value = UI::ButtonStyle::kWuiMenu;
+			default_value = mainmenu ? UI::ButtonStyle::kFsMenuMenu : UI::ButtonStyle::kWuiMenu;
 		} else {
 			report_error(L, "Unknown button style '%s'", str.c_str());
 		}
 	} else if (mandatory) {
 		report_error(L, "Missing button style: %s", key);
+	} else if (mainmenu) {
+		default_value = UI::ButtonStyle::kFsMenuSecondary;
 	}
 	lua_pop(L, 1);
 	return default_value;
@@ -1144,6 +1162,26 @@ static unsigned get_table_button_box_orientation(lua_State* L,
 template <typename... Args>
 static std::function<void(Args...)> create_plugin_action_lambda(lua_State* L,
                                                                 const std::string& cmd) {
+	if (is_main_menu(L)) {
+		FsMenu::MainMenu& fsmm = get_main_menu(L);
+		return [&fsmm, cmd](Args...) {  // do not capture L directly
+			try {
+				fsmm.lua().interpret_string(cmd);
+			} catch (const LuaError& e) {
+				log_err("Lua error in plugin: %s", e.what());
+
+				if (g_fail_on_lua_error) {
+					throw;
+				}
+
+				UI::WLMessageBox m(&fsmm, UI::WindowStyle::kFsMenu, _("Plugin Error"),
+				                   format_l(_("Error when running plugin:\n%s"), e.what()),
+				                   UI::WLMessageBox::MBoxType::kOk);
+				m.run<UI::Panel::Returncodes>();
+			}
+		};
+	}
+
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	return [&egbase, cmd](Args...) {  // do not capture L directly
 		try {
@@ -1279,7 +1317,7 @@ UI::Box* LuaPanel::do_create_child_box(lua_State* L, UI::Panel* parent) {
 	int32_t y = get_table_int(L, "y", false);
 
 	UI::Box* box =
-	   new UI::Box(parent, UI::PanelStyle::kWui, name, x, y, orientation, max_x, max_y, spacing);
+	   new UI::Box(parent, panel_style(L), name, x, y, orientation, max_x, max_y, spacing);
 
 	box->set_scrolling(get_table_boolean(L, "scrolling", false));
 
@@ -1337,10 +1375,9 @@ UI::Panel* LuaPanel::do_create_child_checkbox(lua_State* L, UI::Panel* parent) {
 	UI::Checkbox* checkbox;
 	if (title.empty()) {
 		checkbox = new UI::Checkbox(
-		   parent, UI::PanelStyle::kWui, name, Vector2i(x, y), g_image_cache->get(icon), tooltip);
+		   parent, panel_style(L), name, Vector2i(x, y), g_image_cache->get(icon), tooltip);
 	} else {
-		checkbox =
-		   new UI::Checkbox(parent, UI::PanelStyle::kWui, name, Vector2i(x, y), title, tooltip);
+		checkbox = new UI::Checkbox(parent, panel_style(L), name, Vector2i(x, y), title, tooltip);
 	}
 
 	checkbox->set_state(initial_state, false);
@@ -1381,9 +1418,11 @@ UI::Panel* LuaPanel::do_create_child_discrete_slider(lua_State* L, UI::Panel* pa
 		report_error(L, "Discrete slider initial value out of range");
 	}
 
-	UI::DiscreteSlider* slider = new UI::DiscreteSlider(
-	   parent, name, x, y, w, h, labels, init_value,
-	   dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight, tooltip, cursor_size);
+	UI::DiscreteSlider* slider = new UI::DiscreteSlider(parent, name, x, y, w, h, labels, init_value,
+	                                                    is_main_menu(L) ? UI::SliderStyle::kFsMenu :
+	                                                    dark            ? UI::SliderStyle::kWuiDark :
+                                                                         UI::SliderStyle::kWuiLight,
+	                                                    tooltip, cursor_size);
 
 	if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
 		slider->changed.connect(create_plugin_action_lambda(L, on_changed));
@@ -1409,7 +1448,7 @@ UI::Panel* LuaPanel::do_create_child_dropdown(lua_State* L, UI::Panel* parent) {
 	if (datatype == "string") {
 		DropdownOfString* dd =
 		   new DropdownOfString(parent, name, x, y, w, max_list_items, button_dimension, label, type,
-		                        UI::PanelStyle::kWui, button_style);
+		                        panel_style(L), button_style);
 		dropdown = dd;
 
 		lua_getfield(L, -1, "entries");
@@ -1455,7 +1494,7 @@ UI::Panel* LuaPanel::do_create_child_editbox(lua_State* L, UI::Panel* parent) {
 	int32_t y = get_table_int(L, "y", false);
 	int32_t w = get_table_int(L, "w", false);
 
-	UI::EditBox* editbox = new UI::EditBox(parent, name, x, y, w, UI::PanelStyle::kWui);
+	UI::EditBox* editbox = new UI::EditBox(parent, name, x, y, w, panel_style(L));
 
 	editbox->set_text(text);
 	editbox->set_password(password);
@@ -1488,7 +1527,7 @@ UI::Panel* LuaPanel::do_create_child_listselect(lua_State* L, UI::Panel* parent)
 	UI::BaseListselect* listselect;
 	if (datatype == "string") {
 		ListselectOfString* ls =
-		   new ListselectOfString(parent, name, x, y, w, h, UI::PanelStyle::kWui, layout);
+		   new ListselectOfString(parent, name, x, y, w, h, panel_style(L), layout);
 		listselect = ls;
 
 		lua_getfield(L, -1, "entries");
@@ -1538,7 +1577,7 @@ UI::Panel* LuaPanel::do_create_child_multilineeditbox(lua_State* L, UI::Panel* p
 	int32_t h = get_table_int(L, "h", false);
 
 	UI::MultilineEditbox* editbox =
-	   new UI::MultilineEditbox(parent, name, x, y, w, h, UI::PanelStyle::kWui);
+	   new UI::MultilineEditbox(parent, name, x, y, w, h, panel_style(L));
 
 	editbox->set_text(text);
 	editbox->set_password(password);
@@ -1580,8 +1619,8 @@ UI::Panel* LuaPanel::do_create_child_multilinetextarea(lua_State* L, UI::Panel* 
 		report_error(L, "Unknown scroll mode '%s'", scroll.c_str());
 	}
 
-	UI::MultilineTextarea* txt = new UI::MultilineTextarea(
-	   parent, name, x, y, w, h, UI::PanelStyle::kWui, text, align, scroll_mode);
+	UI::MultilineTextarea* txt =
+	   new UI::MultilineTextarea(parent, name, x, y, w, h, panel_style(L), text, align, scroll_mode);
 
 	if (std::string font = get_table_string(L, "font", false); !font.empty()) {
 		txt->set_style(g_style_manager->safe_font_style(font));
@@ -1599,7 +1638,7 @@ UI::Panel* LuaPanel::do_create_child_panel(lua_State* L, UI::Panel* parent) {
 	int32_t w = get_table_int(L, "w", false);
 	int32_t h = get_table_int(L, "h", false);
 
-	return new UI::Panel(parent, UI::PanelStyle::kWui, name, x, y, w, h, tooltip);
+	return new UI::Panel(parent, panel_style(L), name, x, y, w, h, tooltip);
 }
 
 UI::Panel* LuaPanel::do_create_child_progressbar(lua_State* L, UI::Panel* parent) {
@@ -1622,7 +1661,7 @@ UI::Panel* LuaPanel::do_create_child_progressbar(lua_State* L, UI::Panel* parent
 	int32_t h = get_table_int(L, "h", false);
 
 	UI::ProgressBar* bar =
-	   new UI::ProgressBar(parent, UI::PanelStyle::kWui, name, x, y, w, h, orientation);
+	   new UI::ProgressBar(parent, panel_style(L), name, x, y, w, h, orientation);
 
 	bar->set_total(total);
 	bar->set_state(state);
@@ -1650,8 +1689,8 @@ void LuaPanel::do_create_child_radiogroup(lua_State* L, UI::Panel* parent, UI::B
 		int32_t ry = get_table_int(L, "y", false);
 
 		UI::Radiobutton* radiobutton;
-		group->add_button(parent, UI::PanelStyle::kWui, name, Vector2i(rx, ry),
-		                  g_image_cache->get(icon), rtooltip, &radiobutton);
+		group->add_button(parent, panel_style(L), name, Vector2i(rx, ry), g_image_cache->get(icon),
+		                  rtooltip, &radiobutton);
 
 		// Box layouting if applicable
 		if (as_box != nullptr) {
@@ -1695,12 +1734,16 @@ UI::Panel* LuaPanel::do_create_child_slider(lua_State* L, UI::Panel* parent) {
 	UI::Slider* slider;
 	if (orientation == UI::Box::Vertical) {
 		slider = new UI::VerticalSlider(parent, name, x, y, w, h, val_min, val_max, val,
-		                                dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight,
+		                                is_main_menu(L) ? UI::SliderStyle::kFsMenu :
+		                                dark            ? UI::SliderStyle::kWuiDark :
+                                                        UI::SliderStyle::kWuiLight,
 		                                cursor_size, tooltip);
 	} else {
-		slider = new UI::HorizontalSlider(
-		   parent, name, x, y, w, h, val_min, val_max, val,
-		   dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight, tooltip, cursor_size);
+		slider = new UI::HorizontalSlider(parent, name, x, y, w, h, val_min, val_max, val,
+		                                  is_main_menu(L) ? UI::SliderStyle::kFsMenu :
+		                                  dark            ? UI::SliderStyle::kWuiDark :
+                                                          UI::SliderStyle::kWuiLight,
+		                                  tooltip, cursor_size);
 	}
 
 	if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
@@ -1798,8 +1841,8 @@ UI::Panel* LuaPanel::do_create_child_spinbox(lua_State* L, UI::Panel* parent) {
 	}
 
 	UI::SpinBox* spinbox =
-	   new UI::SpinBox(parent, name, x, y, w, unit_w, val, val_min, val_max, UI::PanelStyle::kWui,
-	                   label, units, sb_type, step_size_small, step_size_big);
+	   new UI::SpinBox(parent, name, x, y, w, unit_w, val, val_min, val_max, panel_style(L), label,
+	                   units, sb_type, step_size_small, step_size_big);
 
 	if (!value_list.empty()) {
 		spinbox->set_value_list(value_list);
@@ -1828,8 +1871,11 @@ UI::Panel* LuaPanel::do_create_child_tabpanel(lua_State* L, UI::Panel* parent) {
 	std::string name = get_table_string(L, "name", true);
 	bool dark = get_table_boolean(L, "dark", false);
 
-	UI::TabPanel* tabpanel = new UI::TabPanel(
-	   parent, dark ? UI::TabPanelStyle::kWuiDark : UI::TabPanelStyle::kWuiLight, name);
+	UI::TabPanel* tabpanel = new UI::TabPanel(parent,
+	                                          is_main_menu(L) ? UI::TabPanelStyle::kFsMenu :
+	                                          dark            ? UI::TabPanelStyle::kWuiDark :
+                                                               UI::TabPanelStyle::kWuiLight,
+	                                          name);
 
 	lua_getfield(L, -1, "tabs");
 	if (!lua_isnil(L, -1)) {
@@ -1891,7 +1937,7 @@ UI::Panel* LuaPanel::do_create_child_table(lua_State* L, UI::Panel* parent) {
 
 	UI::BaseTable* table;
 	if (datatype == "int") {
-		table = new TableOfInt(parent, name, x, y, w, h, UI::PanelStyle::kWui,
+		table = new TableOfInt(parent, name, x, y, w, h, panel_style(L),
 		                       multiselect ? UI::TableRows::kMulti : UI::TableRows::kSingle);
 	} else {
 		report_error(L, "Unsupported table datatype '%s'", datatype.c_str());
@@ -1983,7 +2029,7 @@ UI::Panel* LuaPanel::do_create_child_textarea(lua_State* L, UI::Panel* parent) {
 	int32_t h = get_table_int(L, "h", false);
 
 	UI::Textarea* txt =
-	   new UI::Textarea(parent, UI::PanelStyle::kWui, name, font, x, y, w, h, text, align);
+	   new UI::Textarea(parent, panel_style(L), name, font, x, y, w, h, text, align);
 
 	txt->set_fixed_width(get_table_int(L, "fixed_width", false));
 
@@ -1991,15 +2037,24 @@ UI::Panel* LuaPanel::do_create_child_textarea(lua_State* L, UI::Panel* parent) {
 }
 
 UI::Panel* LuaPanel::do_create_child_unique_window(lua_State* L, UI::Panel* parent) {
-	if (parent != get_egbase(L).get_ibase()) {
+	if (parent->get_parent() != nullptr) {
 		report_error(L, "Unique windows must be toplevel components");
 	}
 
 	std::string registry = get_table_string(L, "registry", true);
-	UI::UniqueWindow::Registry& reg =
-	   get_egbase(L).get_ibase()->unique_windows().get_registry(registry);
-	if (reg.window != nullptr) {
-		return reg.window;
+	UI::UniqueWindow::Registry* reg;
+	UI::WindowStyle style;
+
+	if (is_main_menu(L)) {
+		reg = &get_main_menu(L).unique_windows().get_registry(registry);
+		style = UI::WindowStyle::kFsMenu;
+	} else {
+		reg = &get_egbase(L).get_ibase()->unique_windows().get_registry(registry);
+		style = UI::WindowStyle::kWui;
+	}
+
+	if (reg->window != nullptr) {
+		return reg->window;
 	}
 
 	std::string name = get_table_string(L, "name", true);
@@ -2010,8 +2065,7 @@ UI::Panel* LuaPanel::do_create_child_unique_window(lua_State* L, UI::Panel* pare
 	int32_t w = get_table_int(L, "w", false);
 	int32_t h = get_table_int(L, "h", false);
 
-	UI::UniqueWindow* window =
-	   new UI::UniqueWindow(parent, UI::WindowStyle::kWui, name, &reg, x, y, w, h, title);
+	UI::UniqueWindow* window = new UI::UniqueWindow(parent, style, name, reg, x, y, w, h, title);
 
 	lua_getfield(L, -1, "content");
 	if (!lua_isnil(L, -1)) {
@@ -2023,7 +2077,7 @@ UI::Panel* LuaPanel::do_create_child_unique_window(lua_State* L, UI::Panel* pare
 }
 
 UI::Panel* LuaPanel::do_create_child_window(lua_State* L, UI::Panel* parent) {
-	if (parent != get_egbase(L).get_ibase()) {
+	if (parent->get_parent() != nullptr) {
 		report_error(L, "Windows must be toplevel components");
 	}
 
@@ -2034,7 +2088,9 @@ UI::Panel* LuaPanel::do_create_child_window(lua_State* L, UI::Panel* parent) {
 
 	std::string name = get_table_string(L, "name", true);
 	std::string title = get_table_string(L, "title", true);
-	UI::Window* window = new UI::Window(parent, UI::WindowStyle::kWui, name, x, y, w, h, title);
+	UI::Window* window =
+	   new UI::Window(parent, is_main_menu(L) ? UI::WindowStyle::kWui : UI::WindowStyle::kFsMenu,
+	                  name, x, y, w, h, title);
 
 	lua_getfield(L, -1, "content");
 	if (!lua_isnil(L, -1)) {
@@ -3607,6 +3663,10 @@ MapView
 
    The map view is the main widget and the root of all panels. It is the big
    view of the map that is visible at all times while playing.
+
+   This class may only be accessed in a game or the editor.
+   You can construct as many instances of it as you like,
+   and they will all refer to the same map view.
 */
 const char LuaMapView::className[] = "MapView";
 const MethodType<LuaMapView> LuaMapView::Methods[] = {
@@ -4007,6 +4067,70 @@ int LuaMapView::add_plugin_timer(lua_State* L) {
  * C Functions
  */
 
+/* RST
+MainMenu
+--------
+
+.. class:: MainMenu
+
+   .. versionadded:: 1.3
+
+   The main menu screen is the main widget and the root of all panels.
+
+   This class may not be accessed in a game or the editor.
+   You can construct as many instances of it as you like,
+   and they will all refer to the same main menu.
+*/
+const char LuaMainMenu::className[] = "MainMenu";
+const MethodType<LuaMainMenu> LuaMainMenu::Methods[] = {
+   METHOD(LuaMainMenu, add_plugin_timer),
+   {nullptr, nullptr},
+};
+const PropertyType<LuaMainMenu> LuaMainMenu::Properties[] = {
+   {nullptr, nullptr, nullptr},
+};
+
+LuaMainMenu::LuaMainMenu(lua_State* L) : LuaPanel(&get_main_menu(L)) {
+}
+
+void LuaMainMenu::__unpersist(lua_State* L) {
+	panel_ = &get_main_menu(L);
+}
+
+/*
+ * Lua Functions
+ */
+
+/* RST
+   .. method:: add_plugin_timer(action, interval[, failsafe=true])
+
+      Register a piece of code that will be run periodically as long as the game/editor is running.
+
+      :arg action: The Lua code to run.
+      :type action: :class:`string`
+      :arg interval: The interval in milliseconds realtime in which the code will be invoked.
+      :type interval: :class:`int`
+      :arg failsafe: In event of an error, an error message is shown and the timer is removed.
+         If this is set to :const:`false`, the game will be aborted with no error handling instead.
+      :type failsafe: :class:`boolean`
+*/
+int LuaMainMenu::add_plugin_timer(lua_State* L) {
+	std::string action = luaL_checkstring(L, 2);
+	uint32_t interval = luaL_checkuint32(L, 3);
+	bool failsafe = lua_gettop(L) < 4 || luaL_checkboolean(L, 4);
+
+	if (interval == 0) {
+		report_error(L, "Timer interval must be non-zero");
+	}
+
+	get()->add_plugin_timer(action, interval, failsafe);
+	return 0;
+}
+
+/*
+ * C Functions
+ */
+
 /*
  * ========================================================================
  *                            MODULE FUNCTIONS
@@ -4136,8 +4260,11 @@ static int L_show_messagebox(lua_State* L) {
 	std::string text = luaL_checkstring(L, 2);
 	bool allow_cancel = nargs < 3 || luaL_checkboolean(L, 3);
 
+	const bool mainmenu = is_main_menu(L);
 	UI::WLMessageBox m(
-	   get_egbase(L).get_ibase(), UI::WindowStyle::kWui, title, text,
+	   mainmenu ? static_cast<UI::Panel*>(&get_main_menu(L)) :
+                 static_cast<UI::Panel*>(get_egbase(L).get_ibase()),
+	   mainmenu ? UI::WindowStyle::kFsMenu : UI::WindowStyle::kWui, title, text,
 	   allow_cancel ? UI::WLMessageBox::MBoxType::kOkCancel : UI::WLMessageBox::MBoxType::kOk);
 	UI::Panel::Returncodes result;
 	NoteThreadSafeFunction::instantiate(
@@ -4156,7 +4283,7 @@ const static struct luaL_Reg wlui[] = {{"set_user_input_allowed", &L_set_user_in
                                        {"show_messagebox", &L_show_messagebox},
                                        {nullptr, nullptr}};
 
-void luaopen_wlui(lua_State* L) {
+void luaopen_wlui(lua_State* L, const bool game_or_editor) {
 	lua_getglobal(L, "wl");   // S: wl_table
 	lua_pushstring(L, "ui");  // S: wl_table "ui"
 	luaL_newlib(L, wlui);     // S: wl_table "ui" wl.ui_table
@@ -4225,8 +4352,16 @@ void luaopen_wlui(lua_State* L) {
 	add_parent<LuaWindow, LuaPanel>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
-	register_class<LuaMapView>(L, "ui", true);
-	add_parent<LuaMapView, LuaPanel>(L);
-	lua_pop(L, 1);  // Pop the meta table
+	if (game_or_editor) {
+		// Only in game and editor
+		register_class<LuaMapView>(L, "ui", true);
+		add_parent<LuaMapView, LuaPanel>(L);
+		lua_pop(L, 1);  // Pop the meta table
+	} else {
+		// Only in main menu
+		register_class<LuaMainMenu>(L, "ui", true);
+		add_parent<LuaMainMenu, LuaPanel>(L);
+		lua_pop(L, 1);  // Pop the meta table
+	}
 }
 }  // namespace LuaUi

@@ -129,6 +129,7 @@ wl_library(scripting_logic
     scripting_luna
     third_party_eris
     ui_basic
+    ui_fsmenu
     widelands_options
     wui
     wui_mapview_pixelfunctions

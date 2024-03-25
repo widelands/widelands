@@ -34,6 +34,7 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/textinput.h"
 #include "ui_basic/window.h"
+#include "ui_fsmenu/main.h"
 #include "wui/interactive_base.h"
 
 namespace LuaUi {
@@ -683,9 +684,42 @@ public:
 	}
 };
 
+class LuaMainMenu : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaMainMenu);
+
+	LuaMainMenu() = default;
+	explicit LuaMainMenu(FsMenu::MainMenu* p) : LuaPanel(p) {
+	}
+	explicit LuaMainMenu(lua_State* L);
+	~LuaMainMenu() override = default;
+
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
+	void __persist(lua_State*) override {
+	}
+	void __unpersist(lua_State* L) override;
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua Methods
+	 */
+	int add_plugin_timer(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	FsMenu::MainMenu* get() {
+		return dynamic_cast<FsMenu::MainMenu*>(panel_);
+	}
+};
+
 int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel);
 
-void luaopen_wlui(lua_State*);
+void luaopen_wlui(lua_State*, bool game_or_editor);
 }  // namespace LuaUi
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_UI_H

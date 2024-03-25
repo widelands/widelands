@@ -72,3 +72,26 @@ Widelands::MapObjectSaver* get_mos(lua_State* const L) {
 
 	return mos;
 }
+
+FsMenu::MainMenu& get_main_menu(lua_State* const L) {
+	lua_pushstring(L, "fsmenu");
+	lua_gettable(L, LUA_REGISTRYINDEX);
+
+	FsMenu::MainMenu* menu = static_cast<FsMenu::MainMenu*>(lua_touserdata(L, -1));
+
+	lua_pop(L, 1);  // pop this userdata
+
+	if (menu == nullptr) {
+		throw LuaError("\"fsmenu\" field was nil. This should be impossible.");
+	}
+
+	return *menu;
+}
+
+bool is_main_menu(lua_State* const L) {
+	lua_pushstring(L, "fsmenu");
+	lua_gettable(L, LUA_REGISTRYINDEX);
+	const bool is_nil = lua_isnil(L, -1);
+	lua_pop(L, 1);  // pop this userdata
+	return !is_nil;
+}
