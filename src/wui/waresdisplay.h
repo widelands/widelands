@@ -234,8 +234,6 @@ protected:
 
 private:
 	TradeProposalWaresDisplay(UI::Panel* parent, const Widelands::TribeDescr& tribe);
-
-	const Widelands::TribeDescr* other_tribe_;
 	std::map<Widelands::DescriptionIndex, int> config_;
 };
 

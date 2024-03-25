@@ -1401,12 +1401,13 @@ std::vector<TradeID> Game::find_active_trades(PlayerNumber player) const {
 	std::vector<TradeID> result;
 	for (const auto& pair : trade_agreements_) {
 		if (pair.second.state == TradeAgreement::State::kRunning) {
-			if (pair.second.trade.receiving_player == player) {
-				result.push_back(pair.first);
-			} else if (Market* market = pair.second.trade.initiator.get(*this);
-			           market != nullptr && market->owner().player_number() == player) {
-				result.push_back(pair.first);
+			if (pair.second.trade.receiving_player != player) {
+				if (Market* market = pair.second.trade.initiator.get(*this);
+			           market == nullptr || market->owner().player_number() != player) {
+					continue;
+				}
 			}
+			result.push_back(pair.first);
 		}
 	}
 	return result;

@@ -298,17 +298,10 @@ bool Market::is_ready_to_launch_batch(const TradeID trade_id) const {
 		}
 	}
 
-	for (const auto& item_pair : trade_order.items) {
-		const auto wares_it = trade_order.wares_queues_.find(item_pair.first);
-		if (wares_it == trade_order.wares_queues_.end()) {
-			return false;
-		}
-		if (wares_it->second->get_filled() < item_pair.second) {
-			return false;
-		}
-	}
-
-	return true;
+	return std::all_of(trade_order.items.begin(), trade_order.items.end(), [&trade_order](const WareAmount& ware_amount) {
+		const auto wares_it = trade_order.wares_queues_.find(ware_amount.first);
+		return wares_it != trade_order.wares_queues_.end() && wares_it->second->get_filled() >= ware_amount.second;
+	});
 }
 
 void Market::launch_batch(const TradeID trade_id, Game* game) {

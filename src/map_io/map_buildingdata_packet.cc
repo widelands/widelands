@@ -1387,26 +1387,26 @@ void MapBuildingdataPacket::write_market(const Market& market,
 	}
 
 	fw.unsigned_32(market.trade_orders_.size());
-	for (const auto& pair : market.trade_orders_) {
-		fw.unsigned_32(pair.first);
-		fw.unsigned_32(mos.get_object_file_index(*pair.second.other_side.get(game)));
-		fw.unsigned_32(pair.second.initial_num_batches);
-		fw.unsigned_32(pair.second.num_shipped_batches);
-		fw.unsigned_32(pair.second.received_traded_wares_in_this_batch);
+	for (const auto& order : market.trade_orders_) {
+		fw.unsigned_32(order.first);
+		fw.unsigned_32(mos.get_object_file_index(*order.second.other_side.get(game)));
+		fw.unsigned_32(order.second.initial_num_batches);
+		fw.unsigned_32(order.second.num_shipped_batches);
+		fw.unsigned_32(order.second.received_traded_wares_in_this_batch);
 
-		fw.unsigned_32(pair.second.items.size());
-		for (const auto& ware_amount : pair.second.items) {
+		fw.unsigned_32(order.second.items.size());
+		for (const auto& ware_amount : order.second.items) {
 			fw.string(game.descriptions().get_ware_descr(ware_amount.first)->name());
 			fw.unsigned_32(ware_amount.second);
 		}
 
-		fw.unsigned_32(pair.second.wares_queues_.size());
-		for (auto& pair : pair.second.wares_queues_) {
-			fw.string(game.descriptions().get_ware_descr(pair.first)->name());
-			pair.second->write(fw, game, mos);
+		fw.unsigned_32(order.second.wares_queues_.size());
+		for (const auto& queue : order.second.wares_queues_) {
+			fw.string(game.descriptions().get_ware_descr(queue.first)->name());
+			queue.second->write(fw, game, mos);
 		}
 
-		pair.second.carriers_queue_->write(fw, game, mos);
+		order.second.carriers_queue_->write(fw, game, mos);
 	}
 }
 

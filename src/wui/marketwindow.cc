@@ -236,7 +236,7 @@ public:
 		add(
 		   new InputQueueDisplay(this, ibase, market, *order.carriers_queue_, true, false, collapsed),
 		   UI::Box::Resizing::kFullSize);
-		for (auto& pair : order.wares_queues_) {
+		for (const auto& pair : order.wares_queues_) {
 			add_space(kSpacing);
 			add(new InputQueueDisplay(this, ibase, market, *pair.second, true, true, collapsed),
 			    UI::Box::Resizing::kFullSize);
@@ -398,7 +398,7 @@ void MarketWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 		                new TradeProposalBox(*get_tabs(), *iplayer, *market), _("Propose Trade"));
 	}
 
-	for (auto& pair : market->trade_orders()) {
+	for (const auto& pair : market->trade_orders()) {
 		get_tabs()->add(
 		   format("trade_%u", pair.first),
 		   ibase()->egbase().descriptions().get_ware_descr(pair.second.items.front().first)->icon(),
