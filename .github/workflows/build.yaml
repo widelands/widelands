@@ -85,7 +85,7 @@ jobs:
 
   pre-build_checks:
     #needs: [changes]
-    #uses: ./.github/workflows/pre-build_checks.yaml
+    uses: ./.github/workflows/pre-build_checks.yaml
     with:
       clang_tidy: ${{ needs.changes.outputs.clang_tidy }}
       codecheck: ${{ needs.changes.outputs.codecheck }}
