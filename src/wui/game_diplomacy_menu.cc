@@ -390,6 +390,7 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 		return;
 	}
 
+	MutexLock m(MutexLock::ID::kObjects);
 	for (Widelands::TradeID trade_id : trades) {
 		const Widelands::TradeAgreement& trade = iplayer_->game().get_trade(trade_id);
 		const Widelands::Market* other_market = dynamic_cast<const Widelands::Market*>(iplayer_->egbase().objects().get_object(trade.trade.initiator));
@@ -486,6 +487,7 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 		return;
 	}
 
+	MutexLock m(MutexLock::ID::kObjects);
 	for (Widelands::TradeID trade_id : trades) {
 		const Widelands::TradeAgreement& trade = iplayer_->game().get_trade(trade_id);
 		const Widelands::Player& other_player = iplayer_->egbase().player(trade.trade.receiving_player);
@@ -565,6 +567,7 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		return;
 	}
 
+	MutexLock m(MutexLock::ID::kObjects);
 	for (Widelands::TradeID trade_id : trades) {
 		const Widelands::TradeAgreement& trade = iplayer_->game().get_trade(trade_id);
 

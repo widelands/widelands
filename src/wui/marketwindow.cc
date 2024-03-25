@@ -70,6 +70,7 @@ public:
 		add(&batches_, UI::Box::Resizing::kFullSize);
 		add_space(kSpacing);
 		add(&ok_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		add_space(kSpacing);
 
 		rebuild();
 	}
@@ -134,6 +135,13 @@ public:
 		add(&info_, UI::Box::Resizing::kExpandBoth);
 		add_space(kSpacing);
 
+		const Widelands::Market::TradeOrder& order = market.trade_orders().at(trade_id_);
+		add(new InputQueueDisplay(this, ibase, market, *order.carriers_queue_, !can_act, false, collapsed), UI::Box::Resizing::kFullSize);
+		for (auto& pair : order.wares_queues_) {
+			add_space(kSpacing);
+			add(new InputQueueDisplay(this, ibase, market, *pair.second, !can_act, true, collapsed), UI::Box::Resizing::kFullSize);
+		}
+
 		if (can_act) {
 			UI::Button* cancel = new UI::Button(this, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel"), _("Cancel this trade"));
 			cancel->sigclicked.connect([this]() {
@@ -146,14 +154,11 @@ public:
 					show_cancel_trade_confirm(*ipl, trade_id_);
 				}
 			});
-			add(cancel, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			add_space(kSpacing);
+			add(cancel, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		}
 
-		for (auto& pair : market.trade_orders().at(trade_id_).wares_queues_) {
-			add(new InputQueueDisplay(this, ibase, market, *pair.second, !can_act, true, collapsed), UI::Box::Resizing::kFullSize);
-		}
-
+		add_space(kSpacing);
 		think();
 	}
 

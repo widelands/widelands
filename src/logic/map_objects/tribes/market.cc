@@ -109,10 +109,15 @@ void Market::update_statistics_string(std::string* str) {
 void Market::remove_worker(Worker& worker) {
 	Building::remove_worker(worker);
 
-	// NOCOM do we need to remove him from the inputqueue???
-
 	if (carrier_.serial() == worker.serial()) {
 		carrier_ = nullptr;
+		return;
+	}
+
+	for (auto& pair : trade_orders_) {
+		if (pair.second.carriers_queue_->remove_if_present(worker)) {
+			return;
+		}
 	}
 }
 
@@ -272,6 +277,11 @@ bool Market::is_ready_to_launch_batch(const TradeID trade_id) const {
 	if (static_cast<int>(trade_order.carriers_queue_->get_filled()) < trade_order.num_wares_per_batch()) {
 		return false;
 	}
+	for (Worker* carrier : trade_order.carriers_queue_->workers_in_queue()) {
+		if (carrier->get_position() != get_position() || !carrier->is_idle()) {
+			return false;
+		}
+	}
 
 	for (const auto& item_pair : trade_order.items) {
 		const auto wares_it = trade_order.wares_queues_.find(item_pair.first);
@@ -292,11 +302,10 @@ void Market::launch_batch(const TradeID trade_id, Game* game) {
 	molog(game->get_gametime(), "Launching batch for trade #%u", trade_id);
 
 	// Do we have all necessary wares for a batch?
-	Worker** next_carrier = trade_order.carriers_queue_->workers_in_queue();
+	Worker** next_carrier = trade_order.carriers_queue_->workers_in_queue().data();
 	for (const auto& item_pair : trade_order.items) {
 		for (size_t i = 0; i < item_pair.second; ++i) {
 			Worker* carrier = *next_carrier++;
-			assert(carrier->is_idle());
 
 			// Give the carrier a ware.
 			WareInstance* ware =

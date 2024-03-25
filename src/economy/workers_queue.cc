@@ -180,6 +180,17 @@ Worker* WorkersQueue::extract_worker() {
 	return w;
 }
 
+bool WorkersQueue::remove_if_present(Worker& worker) {
+	for (auto it = workers_.begin(); it != workers_.end(); ++it) {
+		if (*it == &worker) {
+			*it = workers_.back();
+			workers_.pop_back();
+			return true;
+		}
+	}
+	return false;
+}
+
 /**
  * Read and write
  */

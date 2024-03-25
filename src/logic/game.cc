@@ -1231,6 +1231,7 @@ void Game::send_player_fleet_targets(PlayerNumber p, Serial i, Quantity q) {
 }
 
 TradeID Game::propose_trade(const Trade& trade) {
+	MutexLock m(MutexLock::ID::kObjects);
 	const TradeID id = next_trade_agreement_id_++;
 
 	Market* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
@@ -1262,6 +1263,8 @@ TradeID Game::propose_trade(const Trade& trade) {
 }
 
 void Game::accept_trade(const TradeID trade_id, Market& receiver) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	auto it = trade_agreements_.find(trade_id);
 	if (it == trade_agreements_.end() || it->second.state != TradeAgreement::State::kProposed) {
 		return;
@@ -1293,6 +1296,8 @@ void Game::accept_trade(const TradeID trade_id, Market& receiver) {
 }
 
 void Game::reject_trade(const TradeID trade_id) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	auto it = trade_agreements_.find(trade_id);
 	if (it == trade_agreements_.end() || it->second.state != TradeAgreement::State::kProposed) {
 		return;
@@ -1313,6 +1318,8 @@ void Game::reject_trade(const TradeID trade_id) {
 }
 
 void Game::retract_trade(const TradeID trade_id) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	auto it = trade_agreements_.find(trade_id);
 	if (it == trade_agreements_.end() || it->second.state != TradeAgreement::State::kProposed) {
 		return;
@@ -1332,6 +1339,8 @@ void Game::retract_trade(const TradeID trade_id) {
 }
 
 void Game::cancel_trade(TradeID trade_id, bool reached_regular_end, const Player* canceller) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	// The trade id might be long gone - since we never disconnect from the
 	// 'removed' signal of the two buildings, we might be invoked long after the
 	// trade was deleted for other reasons.
