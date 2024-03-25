@@ -25,6 +25,7 @@
 
 #include "economy/request.h"
 #include "economy/wares_queue.h"
+#include "economy/workers_queue.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/trade_agreement.h"
 
@@ -54,10 +55,7 @@ public:
 
 		int received_traded_wares_in_this_batch{0};
 
-		// The invariant here is that worker.size() + worker_request.get_count()
-		// == 'num_wares_per_batch()'
-		std::unique_ptr<Request> worker_request;
-		std::vector<Worker*> workers;
+		std::unique_ptr<WorkersQueue> carriers_queue_;
 		std::map<DescriptionIndex, std::unique_ptr<WaresQueue>> wares_queues_;
 
 		// The number of individual wares in 'items', i.e. the sum of all '.second's.
@@ -105,15 +103,13 @@ public:
 		return trade_orders_;
 	}
 
-private:
 	static void
 	carrier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 	static void
-	worker_arrived_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
-	static void
 	ware_arrived_callback(Game& g, InputQueue* q, DescriptionIndex ware, Worker* worker, void* data);
 
-	bool is_ready_to_launch_batch(TradeID trade_id) const;
+private:
+	[[nodiscard]] bool is_ready_to_launch_batch(TradeID trade_id) const;
 	void launch_batch(TradeID trade_id, Game* game);
 
 	std::string market_name_;

@@ -621,22 +621,18 @@ void MapBuildingdataPacket::read_market(Market& market,
 					trade.items.emplace_back(ware_index, fr.unsigned_32());
 				}
 
-				for (size_t j = fr.unsigned_32(); j > 0; --j) {
-					trade.workers.push_back(&mol.get<Worker>(fr.unsigned_32()));
-				}
-
-				if (fr.unsigned_8() != 0) {
-					trade.worker_request.reset(new Request(market, 0, Market::worker_arrived_callback, wwWORKER));
-					trade.worker_request->read(fr, game, mol);
-				}
-
 				for (size_t i = fr.unsigned_32(); i > 0; --i) {
 					const std::string warename(fr.string());
 					const DescriptionIndex ware_index = game.descriptions().ware_index(warename);
 					std::unique_ptr<WaresQueue> queue(new WaresQueue(market, ware_index, 1));
 					queue->read(fr, game, mol);
+					queue->set_callback(Market::ware_arrived_callback, &market);
 					trade.wares_queues_[ware_index] = std::move(queue);
 				}
+
+				trade.carriers_queue_.reset(new WorkersQueue(market, 0, 1));
+				trade.carriers_queue_->read(fr, game, mol);
+				trade.carriers_queue_->set_callback(Market::ware_arrived_callback, &market);
 			}
 
 		} else {
@@ -1399,23 +1395,13 @@ void MapBuildingdataPacket::write_market(const Market& market,
 			fw.unsigned_32(ware_amount.second);
 		}
 
-		fw.unsigned_32(pair.second.workers.size());
-		for (const Worker* worker : pair.second.workers) {
-			fw.unsigned_32(mos.get_object_file_index(*worker));
-		}
-
-		if (pair.second.worker_request != nullptr) {
-			fw.unsigned_8(1);
-			pair.second.worker_request->write(fw, game, mos);
-		} else {
-			fw.unsigned_8(0);
-		}
-
 		fw.unsigned_32(pair.second.wares_queues_.size());
 		for (auto& pair : pair.second.wares_queues_) {
 			fw.string(game.descriptions().get_ware_descr(pair.first)->name());
 			pair.second->write(fw, game, mos);
 		}
+
+		pair.second.carriers_queue_->write(fw, game, mos);
 	}
 }
 

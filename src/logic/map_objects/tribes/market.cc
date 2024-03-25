@@ -78,9 +78,15 @@ void Market::cleanup(EditorGameBase& egbase) {
 }
 
 void Market::TradeOrder::cleanup() {
-	for (Worker* worker : workers) {
+	upcast(Game, game, &market->get_owner()->egbase());
+
+	while (carriers_queue_->get_filled() > 0) {
+		Worker* worker = carriers_queue_->extract_worker();
 		worker->set_location(nullptr);
+		worker->reset_tasks(*game);
 	}
+
+	carriers_queue_->cleanup();
 
 	for (auto& pair : wares_queues_) {
 		for (int i = pair.second->get_filled(); i > 0; --i) {
@@ -91,10 +97,8 @@ void Market::TradeOrder::cleanup() {
 		pair.second->cleanup();
 	}
 
-	if (upcast(Game, game, &market->get_owner()->egbase()); game != nullptr) {
-		if (Worker* carrier = market->carrier_.get(*game); carrier != nullptr) {
-			carrier->update_task_buildingwork(*game);
-		}
+	if (Worker* carrier = market->carrier_.get(*game); carrier != nullptr) {
+		carrier->update_task_buildingwork(*game);
 	}
 }
 
@@ -105,19 +109,10 @@ void Market::update_statistics_string(std::string* str) {
 void Market::remove_worker(Worker& worker) {
 	Building::remove_worker(worker);
 
+	// NOCOM do we need to remove him from the inputqueue???
+
 	if (carrier_.serial() == worker.serial()) {
 		carrier_ = nullptr;
-		return;
-	}
-
-	for (auto& pair : trade_orders_) {
-		for (auto it = pair.second.workers.begin(); it != pair.second.workers.end(); ++it) {
-			if (*it == &worker) {
-				*it = pair.second.workers.back();
-				pair.second.workers.pop_back();
-				return;
-			}
-		}
 	}
 }
 
@@ -146,24 +141,23 @@ void Market::set_economy(Economy* const e, WareWorker type) {
 	}
 
 	for (auto& pair : trade_orders_) {
-		for (Worker* worker : pair.second.workers) {
-			worker->set_economy(e, type);
-		}
-
 		if (type == wwWORKER) {
-			if (pair.second.worker_request != nullptr) {
-				pair.second.worker_request->set_economy(e);
+			if (old != nullptr) {
+				pair.second.carriers_queue_->remove_from_economy(*old);
+			}
+			if (e != nullptr) {
+				pair.second.carriers_queue_->add_to_economy(*old);
 			}
 		} else {
 			if (old != nullptr) {
-				for (auto& pair : pair.second.wares_queues_) {
-					pair.second->remove_from_economy(*old);
+				for (auto& q : pair.second.wares_queues_) {
+					q.second->remove_from_economy(*old);
 				}
 			}
 
 			if (e != nullptr) {
-				for (auto& pair : pair.second.wares_queues_) {
-					pair.second->add_to_economy(*e);
+				for (auto& q : pair.second.wares_queues_) {
+					q.second->add_to_economy(*e);
 				}
 			}
 		}
@@ -189,12 +183,8 @@ void Market::new_trade(const TradeID trade_id,
 	trade_order.initial_num_batches = num_batches;
 	trade_order.other_side = other_side;
 
-	// Request one worker for each item in a batch.
-	trade_order.worker_request.reset(
-	   new Request(*this, descr().trade_carrier, Market::worker_arrived_callback, wwWORKER));
-	trade_order.worker_request->set_count(trade_order.num_wares_per_batch());
-
-	// Make sure we have a wares queue for each item in this.
+	trade_order.carriers_queue_.reset(new WorkersQueue(*this, descr().trade_carrier, trade_order.num_wares_per_batch()));
+	trade_order.carriers_queue_->set_callback(Market::ware_arrived_callback, this);
 	for (const auto& entry : items) {
 		auto& queue = trade_order.wares_queues_[entry.first];
 		queue.reset(new WaresQueue(*this, entry.first, entry.second));
@@ -238,32 +228,6 @@ void Market::carrier_callback(Game& game, Request& /* rq */, DescriptionIndex /*
 	carrier->start_task_buildingwork(game);
 }
 
-void Market::worker_arrived_callback(Game& game, Request& rq, DescriptionIndex /* widx */, Worker* const w, PlayerImmovable& target) {
-	Market& market = dynamic_cast<Market&>(target);
-
-	assert(w != nullptr);
-	assert(w->get_location(game) == &market);
-
-	for (auto& trade_order_pair : market.trade_orders_) {
-		auto& trade_order = trade_order_pair.second;
-		if (trade_order.worker_request.get() != &rq) {
-			continue;
-		}
-
-		if (rq.get_count() == 0) {
-			// Erase this request.
-			trade_order.worker_request.reset();
-		}
-		w->start_task_idle(game, 0, -1);
-		trade_order.workers.push_back(w);
-		Notifications::publish(NoteBuilding(market.serial(), NoteBuilding::Action::kWorkersChanged));
-		market.try_launching_batch(&game);
-		return;
-	}
-
-	NEVER_HERE();  // We should have found and handled a match by now.
-}
-
 void Market::ware_arrived_callback(Game& g,
                                    InputQueue* /* queue */,
                                    DescriptionIndex /* index */,
@@ -304,7 +268,11 @@ bool Market::is_ready_to_launch_batch(const TradeID trade_id) const {
 	const auto& trade_order = it->second;
 	assert(!trade_order.fulfilled());
 
-	// Do we have all necessary wares for a batch?
+	// Do we have all necessary carriers and wares for a batch?
+	if (static_cast<int>(trade_order.carriers_queue_->get_filled()) < trade_order.num_wares_per_batch()) {
+		return false;
+	}
+
 	for (const auto& item_pair : trade_order.items) {
 		const auto wares_it = trade_order.wares_queues_.find(item_pair.first);
 		if (wares_it == trade_order.wares_queues_.end()) {
@@ -315,12 +283,7 @@ bool Market::is_ready_to_launch_batch(const TradeID trade_id) const {
 		}
 	}
 
-	// Do we have enough people to carry wares?
-	int num_available_carriers = 0;
-	for (Worker* worker : trade_order.workers) {
-		num_available_carriers += worker->is_idle() ? 1 : 0;
-	}
-	return num_available_carriers == trade_order.num_wares_per_batch();
+	return true;
 }
 
 void Market::launch_batch(const TradeID trade_id, Game* game) {
@@ -329,11 +292,10 @@ void Market::launch_batch(const TradeID trade_id, Game* game) {
 	molog(game->get_gametime(), "Launching batch for trade #%u", trade_id);
 
 	// Do we have all necessary wares for a batch?
-	int worker_index = 0;
+	Worker** next_carrier = trade_order.carriers_queue_->workers_in_queue();
 	for (const auto& item_pair : trade_order.items) {
 		for (size_t i = 0; i < item_pair.second; ++i) {
-			Worker* carrier = trade_order.workers.at(worker_index);
-			++worker_index;
+			Worker* carrier = *next_carrier++;
 			assert(carrier->is_idle());
 
 			// Give the carrier a ware.
@@ -358,12 +320,14 @@ void Market::launch_batch(const TradeID trade_id, Game* game) {
 }
 
 InputQueue& Market::inputqueue(DescriptionIndex index, WareWorker ware_worker, const Request* r) {
-	assert(ware_worker == wwWARE);
-
 	for (auto& pair : trade_orders_) {
-		auto it = pair.second.wares_queues_.find(index);
-		if (it != pair.second.wares_queues_.end() && it->second->matches(*r)) {
-			return *it->second;
+		if (ware_worker == wwWARE) {
+			auto it = pair.second.wares_queues_.find(index);
+			if (it != pair.second.wares_queues_.end() && it->second->matches(*r)) {
+				return *it->second;
+			}
+		} else if (pair.second.carriers_queue_->matches(*r)) {
+			return *pair.second.carriers_queue_;
 		}
 	}
 
