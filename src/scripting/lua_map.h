@@ -1202,6 +1202,8 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_marketname(lua_State* L);
+	int set_marketname(lua_State* L);
 
 	/*
 	 * Lua Methods

@@ -6697,6 +6697,7 @@ const MethodType<LuaMarket> LuaMarket::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaMarket> LuaMarket::Properties[] = {
+   PROP_RW(LuaMarket, marketname),
    {nullptr, nullptr, nullptr},
 };
 
@@ -6705,6 +6706,22 @@ const PropertyType<LuaMarket> LuaMarket::Properties[] = {
  PROPERTIES
  ==========================================================
  */
+
+/* RST
+   .. attribute:: marketname
+
+   (RW) The name of the market as :class:`string`.
+*/
+int LuaMarket::get_marketname(lua_State* L) {
+	Widelands::Market* market = get(L, get_egbase(L));
+	lua_pushstring(L, market->get_market_name().c_str());
+	return 1;
+}
+int LuaMarket::set_marketname(lua_State* L) {
+	Widelands::Market* market = get(L, get_egbase(L));
+	market->set_market_name(luaL_checkstring(L, -1));
+	return 0;
+}
 
 /*
  ==========================================================
