@@ -3670,7 +3670,8 @@ const MethodType<LuaMarketDescription> LuaMarketDescription::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaMarketDescription> LuaMarketDescription::Properties[] = {
-   PROP_RO(LuaMarketDescription, local_carrier), PROP_RO(LuaMarketDescription, trade_carrier),
+   PROP_RO(LuaMarketDescription, local_carrier),
+   PROP_RO(LuaMarketDescription, trade_carrier),
    {nullptr, nullptr, nullptr},
 };
 
@@ -3686,7 +3687,8 @@ const PropertyType<LuaMarketDescription> LuaMarketDescription::Properties[] = {
       (RO) The name of the worker that works in the market.
 */
 int LuaMarketDescription::get_local_carrier(lua_State* L) {
-	lua_pushstring(L, get_egbase(L).descriptions().get_worker_descr(get()->local_carrier)->name().c_str());
+	lua_pushstring(
+	   L, get_egbase(L).descriptions().get_worker_descr(get()->local_carrier)->name().c_str());
 	return 1;
 }
 
@@ -3696,7 +3698,8 @@ int LuaMarketDescription::get_local_carrier(lua_State* L) {
       (RO) The name of the worker that carries wares across the map to other markets.
 */
 int LuaMarketDescription::get_trade_carrier(lua_State* L) {
-	lua_pushstring(L, get_egbase(L).descriptions().get_worker_descr(get()->trade_carrier)->name().c_str());
+	lua_pushstring(
+	   L, get_egbase(L).descriptions().get_worker_descr(get()->trade_carrier)->name().c_str());
 	return 1;
 }
 

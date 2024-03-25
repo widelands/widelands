@@ -401,8 +401,7 @@ void MarketSettings::read(const Game& game, FileRead& fr) {
 		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionMarket) {
 			// Nothing to do currently.
 		} else {
-			throw UnhandledVersionError(
-			   "MarketSettings", packet_version, kCurrentPacketVersionMarket);
+			throw UnhandledVersionError("MarketSettings", packet_version, kCurrentPacketVersionMarket);
 		}
 	} catch (const WException& e) {
 		throw GameDataError("MarketSettings: %s", e.what());

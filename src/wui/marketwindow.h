@@ -27,10 +27,10 @@
  */
 struct MarketWindow : public BuildingWindow {
 	MarketWindow(InteractiveBase& parent,
-	                   BuildingWindow::Registry& reg,
-	                   Widelands::Market&,
-	                   bool avoid_fastclick,
-	                   bool workarea_preview_wanted);
+	             BuildingWindow::Registry& reg,
+	             Widelands::Market&,
+	             bool avoid_fastclick,
+	             bool workarea_preview_wanted);
 
 private:
 	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
