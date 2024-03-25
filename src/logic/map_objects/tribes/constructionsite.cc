@@ -270,7 +270,6 @@ void ConstructionSite::init_settings() {
 	} else if (upcast(const MarketDescr, mkt, building_)) {
 		settings_.reset(new MarketSettings(*mkt, tribe));
 	} else {
-		// TODO(Nordfriese): Add support for markets when trading is implemented
 		log_warn("Created constructionsite for a %s, which is not of any known building type\n",
 		         building_->name().c_str());
 	}
@@ -541,8 +540,12 @@ void ConstructionSite::enhance(const EditorGameBase& egbase) {
 		   new_desired_capacity(ms->max_capacity, ms->desired_capacity, new_settings->max_capacity));
 		new_settings->soldier_preference = ms->soldier_preference;
 	} break;
+	case Widelands::MapObjectType::MARKET: {
+		upcast(const MarketDescr, md, building_);
+		// Markets don't have any special properties currently.
+		settings_.reset(new MarketSettings(*md, owner().tribe()));
+	} break;
 	default:
-		// TODO(Nordfriese): Add support for markets when trading is implemented
 		log_warn_time(egbase.get_gametime(),
 		              "Enhanced constructionsite to a %s, which is not of any known building type\n",
 		              building_->name().c_str());
