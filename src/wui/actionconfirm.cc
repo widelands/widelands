@@ -498,7 +498,7 @@ void ResignConfirm::ok() {
 CancelTradeConfirm::CancelTradeConfirm(InteractivePlayer& parent, Widelands::TradeID trade_id)
    : ActionConfirm(
         parent, _("Cancel?"), _("Do you really want to cancel this trade agreement?"), nullptr),
-	trade_id_(trade_id) {
+     trade_id_(trade_id) {
 	// Nothing special to do
 }
 
@@ -515,7 +515,8 @@ void CancelTradeConfirm::think() {
  * The "Ok" button was clicked, so issue the command for cancelling the trade.
  */
 void CancelTradeConfirm::ok() {
-	iaplayer().game().send_player_trade_action(iaplayer().player_number(), trade_id_, Widelands::TradeAction::kCancel, 0);
+	iaplayer().game().send_player_trade_action(
+	   iaplayer().player_number(), trade_id_, Widelands::TradeAction::kCancel, 0);
 	die();
 }
 

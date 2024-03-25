@@ -32,8 +32,8 @@ MarketDescr::MarketDescr(const std::string& init_descname,
                          const LuaTable& table,
                          Descriptions& descriptions)
    : BuildingDescr(init_descname, MapObjectType::MARKET, table, descriptions),
-   local_carrier(descriptions.worker_index(table.get_string("local_carrier"))),
-   trade_carrier(descriptions.worker_index(table.get_string("trade_carrier"))) {
+     local_carrier(descriptions.worker_index(table.get_string("local_carrier"))),
+     trade_carrier(descriptions.worker_index(table.get_string("trade_carrier"))) {
 }
 
 Building& MarketDescr::create_object() const {
@@ -60,7 +60,8 @@ bool Market::init(EditorGameBase& egbase) {
 
 	market_name_ = get_owner()->pick_warehousename(Player::WarehouseNameType::kMarket);
 
-	carrier_request_.reset(new Request(*this, descr().local_carrier, Market::carrier_callback, wwWORKER));
+	carrier_request_.reset(
+	   new Request(*this, descr().local_carrier, Market::carrier_callback, wwWORKER));
 
 	return true;
 }
@@ -188,7 +189,8 @@ void Market::new_trade(const TradeID trade_id,
 	trade_order.initial_num_batches = num_batches;
 	trade_order.other_side = other_side;
 
-	trade_order.carriers_queue_.reset(new WorkersQueue(*this, descr().trade_carrier, trade_order.num_wares_per_batch()));
+	trade_order.carriers_queue_.reset(
+	   new WorkersQueue(*this, descr().trade_carrier, trade_order.num_wares_per_batch()));
 	trade_order.carriers_queue_->set_callback(Market::ware_arrived_callback, this);
 	for (const auto& entry : items) {
 		auto& queue = trade_order.wares_queues_[entry.first];
@@ -196,23 +198,32 @@ void Market::new_trade(const TradeID trade_id,
 		queue->set_callback(Market::ware_arrived_callback, this);
 	}
 
-	molog(owner().egbase().get_gametime(), "Enqueuing new trade #%u with %d batches to %u", trade_id, num_batches, other_side.serial());
+	molog(owner().egbase().get_gametime(), "Enqueuing new trade #%u with %d batches to %u", trade_id,
+	      num_batches, other_side.serial());
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));
 }
 
-void Market::cancel_trade(Game& game, const TradeID trade_id, const bool reached_regular_end, const bool send_msg) {
+void Market::cancel_trade(Game& game,
+                          const TradeID trade_id,
+                          const bool reached_regular_end,
+                          const bool send_msg) {
 	MutexLock m(MutexLock::ID::kObjects);
 
 	if (auto it = trade_orders_.find(trade_id); it != trade_orders_.end()) {
-		molog(owner().egbase().get_gametime(), reached_regular_end ? "Completed trade #%u" : "Cancelling trade #%u", trade_id);
+		molog(owner().egbase().get_gametime(),
+		      reached_regular_end ? "Completed trade #%u" : "Cancelling trade #%u", trade_id);
 
 		if (send_msg) {
-			send_message(game, reached_regular_end ? Message::Type::kTradeComplete : Message::Type::kTradeCancelled,
-				reached_regular_end ? _("Trade Complete") : _("Trade Cancelled"),
-				descr().icon_filename(),
-				reached_regular_end ? _("Trade agreement complete") : _("Trade agreement cancelled"),
-				format(reached_regular_end ? _("Your trade agreement at %s has been completed.") : _("Your trade agreement at %s has been cancelled."), get_market_name()),
-				false);
+			send_message(
+			   game,
+			   reached_regular_end ? Message::Type::kTradeComplete : Message::Type::kTradeCancelled,
+			   reached_regular_end ? _("Trade Complete") : _("Trade Cancelled"),
+			   descr().icon_filename(),
+			   reached_regular_end ? _("Trade agreement complete") : _("Trade agreement cancelled"),
+			   format(reached_regular_end ? _("Your trade agreement at %s has been completed.") :
+                                         _("Your trade agreement at %s has been cancelled."),
+			          get_market_name()),
+			   false);
 		}
 
 		it->second.cleanup();
@@ -223,7 +234,11 @@ void Market::cancel_trade(Game& game, const TradeID trade_id, const bool reached
 	}
 }
 
-void Market::carrier_callback(Game& game, Request& /* rq */, DescriptionIndex /* widx */, Worker* carrier, PlayerImmovable& target) {
+void Market::carrier_callback(Game& game,
+                              Request& /* rq */,
+                              DescriptionIndex /* widx */,
+                              Worker* carrier,
+                              PlayerImmovable& target) {
 	Market& market = dynamic_cast<Market&>(target);
 	market.carrier_request_.reset();
 	market.carrier_ = carrier;
@@ -273,7 +288,8 @@ bool Market::is_ready_to_launch_batch(const TradeID trade_id) const {
 	assert(!trade_order.fulfilled());
 
 	// Do we have all necessary carriers and wares for a batch?
-	if (static_cast<int>(trade_order.carriers_queue_->get_filled()) < trade_order.num_wares_per_batch()) {
+	if (static_cast<int>(trade_order.carriers_queue_->get_filled()) <
+	    trade_order.num_wares_per_batch()) {
 		return false;
 	}
 	for (Worker* carrier : trade_order.carriers_queue_->workers_in_queue()) {
@@ -321,8 +337,7 @@ void Market::launch_batch(const TradeID trade_id, Game* game) {
 
 			// Send the carrier going.
 			carrier->reset_tasks(*game);
-			carrier->start_task_carry_trade_item(
-			   *game, trade_id, trade_order.other_side.get(*game));
+			carrier->start_task_carry_trade_item(*game, trade_id, trade_order.other_side.get(*game));
 		}
 	}
 }
@@ -362,7 +377,9 @@ bool Market::get_building_work(Game& game, Worker& worker, bool /* success */) {
 
 	if (!pending_dropout_wares_.empty()) {
 		get_economy(wwWARE)->remove_wares_or_workers(pending_dropout_wares_.front(), 1);
-		WareInstance& ware = *new WareInstance(pending_dropout_wares_.front(), owner().tribe().get_ware_descr(pending_dropout_wares_.front()));
+		WareInstance& ware =
+		   *new WareInstance(pending_dropout_wares_.front(),
+		                     owner().tribe().get_ware_descr(pending_dropout_wares_.front()));
 		ware.init(game);
 		worker.start_task_dropoff(game, ware);
 		pending_dropout_wares_.pop_front();
@@ -410,9 +427,12 @@ void Market::log_general_info(const EditorGameBase& egbase) const {
 
 	molog(egbase.get_gametime(), "%" PRIuS " trade orders", trade_orders_.size());
 	for (const auto& pair : trade_orders_) {
-		molog(egbase.get_gametime(), "  - #%6u: %3d/%3d to %6u, received %4d", pair.first, pair.second.num_shipped_batches, pair.second.initial_num_batches, pair.second.other_side.serial(), pair.second.received_traded_wares_in_this_batch);
+		molog(egbase.get_gametime(), "  - #%6u: %3d/%3d to %6u, received %4d", pair.first,
+		      pair.second.num_shipped_batches, pair.second.initial_num_batches,
+		      pair.second.other_side.serial(), pair.second.received_traded_wares_in_this_batch);
 		for (const auto& ware_amount : pair.second.items) {
-			molog(egbase.get_gametime(), "    - %3u x %s", ware_amount.second, owner().tribe().get_ware_descr(ware_amount.first)->name().c_str());
+			molog(egbase.get_gametime(), "    - %3u x %s", ware_amount.second,
+			      owner().tribe().get_ware_descr(ware_amount.first)->name().c_str());
 		}
 	}
 }

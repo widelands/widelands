@@ -952,7 +952,8 @@ private:
 };
 
 struct CmdTradeAction : PlayerCommand {
-	CmdTradeAction(const Time& time, PlayerNumber pn, TradeID trade_id, TradeAction action, Serial accepter);
+	CmdTradeAction(
+	   const Time& time, PlayerNumber pn, TradeID trade_id, TradeAction action, Serial accepter);
 
 	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kTradeAction;

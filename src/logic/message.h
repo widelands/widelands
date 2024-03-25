@@ -40,7 +40,7 @@ struct Message {
 
 		kSeafaring,
 
-		kEconomy,              // start of economy section
+		kEconomy,  // start of economy section
 		kTradeOfferReceived,
 		kTradeOfferAccepted,
 		kTradeOfferRejected,
@@ -49,7 +49,7 @@ struct Message {
 		kTradeCancelled,
 		kEconomySiteOccupied,  // end of economy section
 
-		kWarfare,              // everything starting from here is warfare
+		kWarfare,  // everything starting from here is warfare
 		kWarfareSiteDefeated,
 		kWarfareSiteLost,
 		kWarfareUnderAttack,

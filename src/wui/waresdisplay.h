@@ -94,7 +94,8 @@ public:
 		return min_free_vertical_space_;
 	}
 
-	[[nodiscard]] static inline int32_t calc_hgap(int32_t columns, int32_t total_w, int32_t min = 3) {
+	[[nodiscard]] static inline int32_t
+	calc_hgap(int32_t columns, int32_t total_w, int32_t min = 3) {
 		return std::max(min, (total_w - columns * kWareMenuPicWidth) / (columns - 1));
 	}
 
@@ -214,7 +215,11 @@ protected:
 
 class TradeProposalWaresDisplay : public WaresDisplay {
 public:
-	static UI::Box& create(UI::Panel* parent, const Widelands::TribeDescr& tribe, const std::string& heading, int spacing, TradeProposalWaresDisplay** result_pointer);
+	static UI::Box& create(UI::Panel* parent,
+	                       const Widelands::TribeDescr& tribe,
+	                       const std::string& heading,
+	                       int spacing,
+	                       TradeProposalWaresDisplay** result_pointer);
 
 	[[nodiscard]] Widelands::BillOfMaterials get_selection() const;
 	[[nodiscard]] bool anything_selected() const;

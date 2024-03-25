@@ -395,8 +395,11 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 			assert(warehouse.get_warehouse_name().empty());
 			// TODO(tothxa): Savegame compatibility v1.1
 			warehouse.set_warehouse_name(
-			   packet_version >= 9 ? fr.string() :
-                                  player->pick_warehousename(warehouse.descr().get_isport() ? Player::WarehouseNameType::kPort : Player::WarehouseNameType::kWarehouse));
+			   packet_version >= 9 ?
+               fr.string() :
+               player->pick_warehousename(warehouse.descr().get_isport() ?
+                                             Player::WarehouseNameType::kPort :
+                                             Player::WarehouseNameType::kWarehouse));
 
 			while (fr.unsigned_8() != 0u) {
 				const DescriptionIndex& id = game.mutable_descriptions()->load_ware(fr.c_string());
@@ -579,9 +582,9 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 }
 
 void MapBuildingdataPacket::read_market(Market& market,
-                                              FileRead& fr,
-                                              Game& game,
-                                              MapObjectLoader& mol) {
+                                        FileRead& fr,
+                                        Game& game,
+                                        MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionMarket) {
@@ -599,7 +602,8 @@ void MapBuildingdataPacket::read_market(Market& market,
 			if (carrier != 0) {
 				market.carrier_ = &mol.get<Worker>(carrier);
 			} else {
-				market.carrier_request_.reset(new Request(market, 0, Market::carrier_callback, wwWORKER));
+				market.carrier_request_.reset(
+				   new Request(market, 0, Market::carrier_callback, wwWORKER));
 				market.carrier_request_->read(fr, game, mol);
 			}
 
@@ -637,8 +641,8 @@ void MapBuildingdataPacket::read_market(Market& market,
 			}
 
 		} else {
-			throw UnhandledVersionError("MapBuildingdataPacket - Market", packet_version,
-			                            kCurrentPacketVersionMarket);
+			throw UnhandledVersionError(
+			   "MapBuildingdataPacket - Market", packet_version, kCurrentPacketVersionMarket);
 		}
 	} catch (const WException& e) {
 		throw GameDataError("market: %s", e.what());
@@ -1362,9 +1366,9 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 }
 
 void MapBuildingdataPacket::write_market(const Market& market,
-                                               FileWrite& fw,
-                                               Game& game,
-                                               MapObjectSaver& mos) {
+                                         FileWrite& fw,
+                                         Game& game,
+                                         MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersionMarket);
 
 	fw.string(market.market_name_);

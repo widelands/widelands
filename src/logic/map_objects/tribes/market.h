@@ -90,7 +90,10 @@ public:
 		return pending_dropout_wares_;
 	}
 
-	void new_trade(TradeID trade_id, const BillOfMaterials& items, int num_batches, OPtr<Market> other_side);
+	void new_trade(TradeID trade_id,
+	               const BillOfMaterials& items,
+	               int num_batches,
+	               OPtr<Market> other_side);
 	void cancel_trade(Game& game, TradeID trade_id, bool reached_regular_end, bool send_msg);
 
 	[[nodiscard]] InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
@@ -103,8 +106,7 @@ public:
 		return trade_orders_;
 	}
 
-	static void
-	carrier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
+	static void carrier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 	static void
 	ware_arrived_callback(Game& g, InputQueue* q, DescriptionIndex ware, Worker* worker, void* data);
 

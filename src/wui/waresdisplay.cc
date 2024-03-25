@@ -713,14 +713,17 @@ std::string WaresDisplay::info_for_ware(Widelands::DescriptionIndex ware) {
 	return get_amount_string(amount_of(ware));
 }
 
-UI::Box& TradeProposalWaresDisplay::create(UI::Panel* parent, const Widelands::TribeDescr& tribe, const std::string& heading, int spacing, TradeProposalWaresDisplay** result_pointer)
-{
+UI::Box& TradeProposalWaresDisplay::create(UI::Panel* parent,
+                                           const Widelands::TribeDescr& tribe,
+                                           const std::string& heading,
+                                           int spacing,
+                                           TradeProposalWaresDisplay** result_pointer) {
 	UI::Box& box = *new UI::Box(parent, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical);
 	TradeProposalWaresDisplay* impl = new TradeProposalWaresDisplay(&box, tribe);
 
 	box.add(new UI::Textarea(&box, UI::PanelStyle::kWui, "label",
-	                          UI::FontStyle::kWuiInfoPanelHeading,
-	                          heading, UI::Align::kCenter), UI::Box::Resizing::kFullSize);
+	                         UI::FontStyle::kWuiInfoPanelHeading, heading, UI::Align::kCenter),
+	        UI::Box::Resizing::kFullSize);
 	box.add_space(spacing);
 	box.add(impl, UI::Box::Resizing::kExpandBoth);
 
@@ -728,7 +731,8 @@ UI::Box& TradeProposalWaresDisplay::create(UI::Panel* parent, const Widelands::T
 	return box;
 }
 
-TradeProposalWaresDisplay::TradeProposalWaresDisplay(UI::Panel* parent, const Widelands::TribeDescr& tribe)
+TradeProposalWaresDisplay::TradeProposalWaresDisplay(UI::Panel* parent,
+                                                     const Widelands::TribeDescr& tribe)
    : WaresDisplay(parent, 0, 0, tribe, Widelands::wwWARE, true) {
 	set_other(nullptr);
 }

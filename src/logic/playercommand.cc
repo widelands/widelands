@@ -2208,8 +2208,8 @@ void CmdProposeTrade::execute(Game& game) {
 		return;
 	}
 	if (sender() == trade_.receiving_player) {
-		log_warn_time(game.get_gametime(), "CmdProposeTrade: sender and recipient are the same %u\n",
-		              sender());
+		log_warn_time(
+		   game.get_gametime(), "CmdProposeTrade: sender and recipient are the same %u\n", sender());
 		return;
 	}
 
@@ -2270,7 +2270,8 @@ void CmdProposeTrade::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSave
 }
 
 // CmdTradeAction
-CmdTradeAction::CmdTradeAction(const Time& time, PlayerNumber pn, TradeID trade_id, TradeAction action, Serial accepter)
+CmdTradeAction::CmdTradeAction(
+   const Time& time, PlayerNumber pn, TradeID trade_id, TradeAction action, Serial accepter)
    : PlayerCommand(time, pn), trade_id_(trade_id), action_(action), accepter_(accepter) {
 }
 
@@ -2288,7 +2289,8 @@ void CmdTradeAction::execute(Game& game) {
 		game.reject_trade(trade_id_);
 		break;
 	case TradeAction::kAccept:
-		if (Market* market = dynamic_cast<Market*>(game.objects().get_object(accepter_)); market != nullptr) {
+		if (Market* market = dynamic_cast<Market*>(game.objects().get_object(accepter_));
+		    market != nullptr) {
 			game.accept_trade(trade_id_, *market);
 		}
 		break;

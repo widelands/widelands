@@ -1816,7 +1816,7 @@ UI::UniqueWindow* InteractiveBase::show_building_window(const Widelands::Coords&
 	case Widelands::MapObjectType::MARKET:
 		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
 			new MarketWindow(*this, registry, *dynamic_cast<Widelands::Market*>(building),
-			                    avoid_fastclick, workarea_preview_wanted);
+			                 avoid_fastclick, workarea_preview_wanted);
 		};
 		break;
 	default:

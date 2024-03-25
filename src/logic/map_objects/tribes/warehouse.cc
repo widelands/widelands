@@ -552,7 +552,9 @@ bool Warehouse::init(EditorGameBase& egbase) {
 	Player* player = get_owner();
 
 	init_containers(*player);
-	warehouse_name_ = player->pick_warehousename(descr().get_isport() ? Player::WarehouseNameType::kPort : Player::WarehouseNameType::kWarehouse);
+	warehouse_name_ =
+	   player->pick_warehousename(descr().get_isport() ? Player::WarehouseNameType::kPort :
+                                                        Player::WarehouseNameType::kWarehouse);
 
 	set_seeing(true);
 
