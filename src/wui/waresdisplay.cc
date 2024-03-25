@@ -783,9 +783,9 @@ void TradeProposalWaresDisplay::change(const int delta) {
 }
 
 bool TradeProposalWaresDisplay::anything_selected() const {
-	return std::any_of(config_.begin(), config_.end(), [](const std::pair<Widelands::DescriptionIndex, int>& pair) {
-		return pair.second > 0;
-	});
+	return std::any_of(
+	   config_.begin(), config_.end(),
+	   [](const std::pair<Widelands::DescriptionIndex, int>& pair) { return pair.second > 0; });
 }
 
 Widelands::BillOfMaterials TradeProposalWaresDisplay::get_selection() const {
