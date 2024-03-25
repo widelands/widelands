@@ -79,6 +79,7 @@ public:
 
 	bool fetch_from_flag(Game&) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
+	void remove_worker(Worker&) override;
 
 	void log_general_info(const EditorGameBase&) const override;
 

@@ -181,6 +181,7 @@ public:
 		if (other_market == nullptr) {
 			return;
 		}
+		const Widelands::TradeAgreement& agreement = ibase_.game().get_trade(trade_id_);
 
 		std::string infotext("<rt><p>");
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, format_l(_("Trade with %s"), other_market->owner().get_name()));
@@ -199,7 +200,7 @@ public:
 		infotext += as_vspace(kSpacing);
 		infotext += "<p>";
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, can_act_ ? _("You send:") : _("Player sends:"));
-		for (const auto& pair : trade->second.items) {
+		for (const auto& pair : agreement.trade.items_to_send) {
 			infotext += as_listitem(format_l(_("%1$i× %2$s"), pair.second, ibase_.egbase().descriptions().get_ware_descr(pair.first)->descname()), UI::FontStyle::kWuiInfoPanelParagraph);
 		}
 
@@ -207,7 +208,7 @@ public:
 		infotext += as_vspace(kSpacing);
 		infotext += "<p>";
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, can_act_ ? _("You receive:") : _("Player receives:"));
-		for (const auto& pair : other_market->trade_orders().at(trade_id_).items) {
+		for (const auto& pair : agreement.trade.items_to_receive) {
 			infotext += as_listitem(format_l(_("%1$i× %2$s"), pair.second, ibase_.egbase().descriptions().get_ware_descr(pair.first)->descname()), UI::FontStyle::kWuiInfoPanelParagraph);
 		}
 

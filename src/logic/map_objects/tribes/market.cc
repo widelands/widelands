@@ -78,6 +78,10 @@ void Market::cleanup(EditorGameBase& egbase) {
 }
 
 void Market::TradeOrder::cleanup() {
+	for (Worker* worker : workers) {
+		worker->set_location(nullptr);
+	}
+
 	for (auto& pair : wares_queues_) {
 		for (int i = pair.second->get_filled(); i > 0; --i) {
 			market->pending_dropout_wares_.push_back(pair.second->get_index());
@@ -96,6 +100,25 @@ void Market::TradeOrder::cleanup() {
 
 void Market::update_statistics_string(std::string* str) {
 	*str = richtext_escape(get_market_name());
+}
+
+void Market::remove_worker(Worker& worker) {
+	Building::remove_worker(worker);
+
+	if (carrier_.serial() == worker.serial()) {
+		carrier_ = nullptr;
+		return;
+	}
+
+	for (auto& pair : trade_orders_) {
+		for (auto it = pair.second.workers.begin(); it != pair.second.workers.end(); ++it) {
+			if (*it == &worker) {
+				*it = pair.second.workers.back();
+				pair.second.workers.pop_back();
+				return;
+			}
+		}
+	}
 }
 
 void Market::set_economy(Economy* const e, WareWorker type) {
