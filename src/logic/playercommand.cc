@@ -2702,6 +2702,10 @@ void CmdShipPortName::execute(Game& game) {
 		dynamic_cast<Warehouse&>(*mo).set_warehouse_name(name_);
 		return;
 
+	case MapObjectType::MARKET:
+		dynamic_cast<Market&>(*mo).set_market_name(name_);
+		return;
+
 	default:
 		throw wexception("CmdShipPortName for object %u of type %s", serial_,
 		                 to_string(mo->descr().type()).c_str());

@@ -24,6 +24,7 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/spinbox.h"
+#include "ui_basic/textinput.h"
 #include "wui/actionconfirm.h"
 #include "wui/inputqueuedisplay.h"
 #include "wui/interactive_player.h"
@@ -275,6 +276,29 @@ MarketWindow::MarketWindow(InteractiveBase& parent,
                                        bool workarea_preview_wanted)
    : BuildingWindow(parent, reg, m, avoid_fastclick), market_(&m) {
 	init(avoid_fastclick, workarea_preview_wanted);
+}
+
+void MarketWindow::setup_name_field_editbox(UI::Box& vbox) {
+	Widelands::Market* market = market_.get(ibase()->egbase());
+	if (market == nullptr || !ibase()->can_act(market->owner().player_number())) {
+		return BuildingWindow::setup_name_field_editbox(vbox);
+	}
+
+	UI::EditBox* name_field = new UI::EditBox(&vbox, "name", 0, 0, 0, UI::PanelStyle::kWui);
+	name_field->set_text(market->get_market_name());
+	name_field->changed.connect([this, name_field]() {
+		Widelands::Market* mkt = market_.get(ibase()->egbase());
+		if (mkt == nullptr) {
+			return;
+		}
+		if (Widelands::Game* game = ibase()->get_game(); game != nullptr) {
+			game->send_player_ship_port_name(
+			   mkt->owner().player_number(), mkt->serial(), name_field->get_text());
+		} else {
+			mkt->set_market_name(name_field->get_text());
+		}
+	});
+	vbox.add(name_field, UI::Box::Resizing::kFullSize);
 }
 
 void MarketWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
