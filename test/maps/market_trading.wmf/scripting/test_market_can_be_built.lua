@@ -7,6 +7,11 @@ run(function()
    while #p2:get_buildings("barbarians_market") == 0 do
       sleep(10000)
    end
+
+   market = p2:get_buildings("barbarians_market")[1]
+   assert_equal("barbarians_carrier", market.descr.local_carrier)
+   assert_equal("barbarians_ox", market.descr.trade_carrier)
+
    print("# All Tests passed.")
    wl.ui.MapView():close()
 end)

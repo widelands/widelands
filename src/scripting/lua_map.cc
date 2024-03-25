@@ -3665,13 +3665,12 @@ MarketDescription
    trading over land with other players. See the parent classes for more
    properties.
 */
-// TODO(sirver,trading): Expose the properties of MarketDescription here once
-// the interface settles.
 const char LuaMarketDescription::className[] = "MarketDescription";
 const MethodType<LuaMarketDescription> LuaMarketDescription::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaMarketDescription> LuaMarketDescription::Properties[] = {
+   PROP_RO(LuaMarketDescription, local_carrier), PROP_RO(LuaMarketDescription, trade_carrier),
    {nullptr, nullptr, nullptr},
 };
 
@@ -3680,6 +3679,26 @@ const PropertyType<LuaMarketDescription> LuaMarketDescription::Properties[] = {
  PROPERTIES
  ==========================================================
  */
+
+/* RST
+   .. attribute:: local_carrier
+
+      (RO) The name of the worker that works in the market.
+*/
+int LuaMarketDescription::get_local_carrier(lua_State* L) {
+	lua_pushstring(L, get_egbase(L).descriptions().get_worker_descr(get()->local_carrier)->name().c_str());
+	return 1;
+}
+
+/* RST
+   .. attribute:: trade_carrier
+
+      (RO) The name of the worker that carries wares across the map to other markets.
+*/
+int LuaMarketDescription::get_trade_carrier(lua_State* L) {
+	lua_pushstring(L, get_egbase(L).descriptions().get_worker_descr(get()->trade_carrier)->name().c_str());
+	return 1;
+}
 
 /* RST
 ShipDescription
@@ -6698,16 +6717,16 @@ const PropertyType<LuaMarket> LuaMarket::Properties[] = {
 
       Propose a trade from this market to another player.
 
-      :arg player: The player to make the trade offer to
+      :arg player: The player to make the trade offer to.
       :type player: :class:`wl.game.Player`
-      :arg num_batches: Total number of trading batches to send
+      :arg num_batches: Total number of trading batches to send.
       :type num_batches: :class:`integer`
       :arg items_to_send: A table of warename to amount of items to send in each batch.
       :type items_to_send: :class:`table`
       :arg items_to_receive: A table of warename to amount of items to receive in each batch.
       :type items_to_receive: :class:`table`
 
-      :returns: The unique ID for this trade
+      :returns: The unique ID for the new trade offer.
       :rtype: :class:`integer`
 */
 int LuaMarket::propose_trade(lua_State* L) {
@@ -6726,7 +6745,6 @@ int LuaMarket::propose_trade(lua_State* L) {
 	const Widelands::TradeID trade_id = game.propose_trade(Widelands::Trade{
 	   items_to_send, items_to_receive, num_batches, self, other_player.player_number()});
 
-	// TODO(sirver,trading): Wrap 'Trade' into its own Lua class?
 	lua_pushint32(L, trade_id);
 	return 1;
 }
@@ -6736,8 +6754,14 @@ int LuaMarket::propose_trade(lua_State* L) {
 
       Accept the proposed trade with the provided ID.
 
+      Only proposed trade offers can be accepted.
+      Only the recipient of the offer may accept it.
+      The offer can be accepted by any market with a land connection to the initiating market.
+
       :arg id: Unique ID of the trade to accept.
       :type id: :class:`integer`
+
+      :see also: :attr:`wl.Game.trades`
 */
 int LuaMarket::accept_trade(lua_State* L) {
 	if (lua_gettop(L) != 2) {

@@ -516,8 +516,8 @@ public:
 	~LuaMarketDescription() override = default;
 
 	LuaMarketDescription() = default;
-	explicit LuaMarketDescription(const Widelands::MarketDescr* const warehousedescr)
-	   : LuaBuildingDescription(warehousedescr) {
+	explicit LuaMarketDescription(const Widelands::MarketDescr* const marketdescr)
+	   : LuaBuildingDescription(marketdescr) {
 	}
 	explicit LuaMarketDescription(lua_State* L) : LuaBuildingDescription(L) {
 	}
@@ -525,6 +525,8 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_local_carrier(lua_State*);
+	int get_trade_carrier(lua_State*);
 
 	/*
 	 * Lua methods
