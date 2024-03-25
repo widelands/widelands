@@ -447,7 +447,7 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 		infotext += as_vspace(kSpacing);
 		infotext += "<p>";
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, _("You send:"));
-		for (const auto& pair : trade.trade.items_to_send) {
+		for (const auto& pair : trade.trade.items_to_receive) {
 			infotext += as_listitem(format_l(_("%1$i× %2$s"), pair.second, iplayer_->egbase().descriptions().get_ware_descr(pair.first)->descname()), UI::FontStyle::kWuiInfoPanelParagraph);
 		}
 
@@ -455,7 +455,7 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 		infotext += as_vspace(kSpacing);
 		infotext += "<p>";
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, _("You receive:"));
-		for (const auto& pair : trade.trade.items_to_receive) {
+		for (const auto& pair : trade.trade.items_to_send) {
 			infotext += as_listitem(format_l(_("%1$i× %2$s"), pair.second, iplayer_->egbase().descriptions().get_ware_descr(pair.first)->descname()), UI::FontStyle::kWuiInfoPanelParagraph);
 		}
 		infotext += "</p></rt>";
