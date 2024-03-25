@@ -1353,6 +1353,42 @@ void Game::cancel_trade(TradeID trade_id, bool reached_regular_end, const Player
 	trade_agreements_.erase(trade_id);
 }
 
+std::vector<TradeID> Game::find_trade_offers(PlayerNumber receiver) const {
+	std::vector<TradeID> result;
+	for (const auto& pair : trade_agreements_) {
+		if (pair.second.state == TradeAgreement::State::kProposed && pair.second.trade.receiving_player == receiver) {
+			result.push_back(pair.first);
+		}
+	}
+	return result;
+}
+
+std::vector<TradeID> Game::find_trade_proposals(PlayerNumber initiator) const {
+	std::vector<TradeID> result;
+	for (const auto& pair : trade_agreements_) {
+		if (pair.second.state == TradeAgreement::State::kProposed) {
+			if (Market* market = dynamic_cast<Market*>(objects().get_object(pair.second.trade.initiator)); market != nullptr && market->owner().player_number() == initiator) {
+				result.push_back(pair.first);
+			}
+		}
+	}
+	return result;
+}
+
+std::vector<TradeID> Game::find_active_trades(PlayerNumber player) const {
+	std::vector<TradeID> result;
+	for (const auto& pair : trade_agreements_) {
+		if (pair.second.state == TradeAgreement::State::kRunning) {
+			if (pair.second.trade.receiving_player == player) {
+				result.push_back(pair.first);
+			} else if (Market* market = dynamic_cast<Market*>(objects().get_object(pair.second.trade.initiator)); market != nullptr && market->owner().player_number() == player) {
+				result.push_back(pair.first);
+			}
+		}
+	}
+	return result;
+}
+
 LuaGameInterface& Game::lua() {
 	return dynamic_cast<LuaGameInterface&>(EditorGameBase::lua());
 }

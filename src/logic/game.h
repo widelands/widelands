@@ -391,6 +391,12 @@ public:
 	[[nodiscard]] bool has_trade(TradeID trade_id) const {
 		return trade_agreements_.count(trade_id) != 0;
 	}
+	[[nodiscard]] const TradeAgreement& get_trade(TradeID trade_id) const {
+		return trade_agreements_.at(trade_id);
+	}
+	[[nodiscard]] std::vector<TradeID> find_trade_offers(PlayerNumber receiver) const;
+	[[nodiscard]] std::vector<TradeID> find_trade_proposals(PlayerNumber initiator) const;
+	[[nodiscard]] std::vector<TradeID> find_active_trades(PlayerNumber player) const;
 
 	struct PendingDiplomacyAction {
 		PlayerNumber sender;     ///< The player who initiated the action.

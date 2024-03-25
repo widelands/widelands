@@ -67,7 +67,7 @@ bool Market::init(EditorGameBase& egbase) {
 
 void Market::cleanup(EditorGameBase& egbase) {
 	for (auto& pair : trade_orders_) {
-		pair.second.cleanup(*this);
+		pair.second.cleanup();
 	}
 
 	if (Worker* carrier = carrier_.get(egbase); carrier != nullptr) {
@@ -77,18 +77,18 @@ void Market::cleanup(EditorGameBase& egbase) {
 	Building::cleanup(egbase);
 }
 
-void Market::TradeOrder::cleanup(Market& market) {
+void Market::TradeOrder::cleanup() {
 	for (auto& pair : wares_queues_) {
 		for (int i = pair.second->get_filled(); i > 0; --i) {
-			market.pending_dropout_wares_.push_back(pair.second->get_index());
-			market.get_economy(wwWARE)->add_wares_or_workers(pair.second->get_index(), 1);
+			market->pending_dropout_wares_.push_back(pair.second->get_index());
+			market->get_economy(wwWARE)->add_wares_or_workers(pair.second->get_index(), 1);
 		}
 
 		pair.second->cleanup();
 	}
 
-	if (upcast(Game, game, &market.get_owner()->egbase()); game != nullptr) {
-		if (Worker* carrier = market.carrier_.get(*game); carrier != nullptr) {
+	if (upcast(Game, game, &market->get_owner()->egbase()); game != nullptr) {
+		if (Worker* carrier = market->carrier_.get(*game); carrier != nullptr) {
 			carrier->update_task_buildingwork(*game);
 		}
 	}
@@ -161,6 +161,7 @@ void Market::new_trade(const TradeID trade_id,
 	assert(trade_orders_.count(trade_id) == 0);
 	TradeOrder& trade_order = trade_orders_[trade_id];
 
+	trade_order.market = this;
 	trade_order.items = items;
 	trade_order.initial_num_batches = num_batches;
 	trade_order.other_side = other_side;
@@ -196,7 +197,7 @@ void Market::cancel_trade(Game& game, const TradeID trade_id, const bool reached
 				false);
 		}
 
-		it->second.cleanup(*this);
+		it->second.cleanup();
 		trade_orders_.erase(trade_id);
 		Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));
 	} else {

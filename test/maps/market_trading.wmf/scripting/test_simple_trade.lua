@@ -4,7 +4,7 @@ run(function()
    sleep(2000)
    place_markets()
    local id = market_p2:propose_trade(p1, 5, { log = 3 }, { granite = 2, iron = 1 })
-   sleep(100)
+   sleep(2000)
    market_p1:accept_trade(id)
 
    local p1_initial = {
@@ -18,7 +18,7 @@ run(function()
       granite = p1:get_wares("granite"),
    }
 
-   sleep(60 * 1000)
+   sleep(2 * 60 * 1000)
    stable_save(game, "trading", 50 * 1000)
 
    -- We await until one ware we trade has the right count for one player.

@@ -149,6 +149,10 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdSetSoldierPreference(des);
 	case QueueCommandTypes::kToggleMuteMessages:
 		return new CmdToggleMuteMessages(des);
+	case QueueCommandTypes::kProposeTrade:
+		return new CmdProposeTrade(des);
+	case QueueCommandTypes::kTradeAction:
+		return new CmdTradeAction(des);
 
 	case QueueCommandTypes::kStartOrCancelExpedition:
 		return new CmdStartOrCancelExpedition(des);

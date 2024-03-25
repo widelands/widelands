@@ -609,6 +609,7 @@ void MapBuildingdataPacket::read_market(Market& market,
 				const TradeID trade_id = fr.unsigned_32();
 				Market::TradeOrder& trade = market.trade_orders_[trade_id];
 
+				trade.market = &market;
 				trade.other_side = fr.unsigned_32();
 				trade.initial_num_batches = fr.unsigned_32();
 				trade.num_shipped_batches = fr.unsigned_32();

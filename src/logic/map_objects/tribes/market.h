@@ -46,6 +46,7 @@ class Market : public Building {
 	MO_DESCR(MarketDescr)
 public:
 	struct TradeOrder {
+		Market* market{nullptr};
 		BillOfMaterials items;
 		int initial_num_batches{0};
 		int num_shipped_batches{0};
@@ -65,7 +66,7 @@ public:
 		// True if the 'num_shipped_batches' equals the 'initial_num_batches'
 		[[nodiscard]] bool fulfilled() const;
 
-		void cleanup(Market& market);
+		void cleanup();
 	};
 
 	explicit Market(const MarketDescr& descr);
