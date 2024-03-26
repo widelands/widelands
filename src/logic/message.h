@@ -31,17 +31,28 @@ struct Message {
 	enum class Type : uint8_t {
 		kNoMessages,
 		kAllMessages,
+
 		kGameLogic,
+
 		kGeologists,
+
 		kScenario,
+
 		kSeafaring,
-		kEconomy,              // economy
-		kEconomySiteOccupied,  // economy
-		kWarfare,              // everything starting from here is warfare
+
+		kEconomy,  // start of economy section
+		kTradeOfferReceived,
+		kTradeOfferAccepted,
+		kTradeOfferRejected,
+		kTradeOfferRetracted,
+		kTradeComplete,
+		kTradeCancelled,
+		kEconomySiteOccupied,  // end of economy section
+
+		kWarfare,  // everything starting from here is warfare
 		kWarfareSiteDefeated,
 		kWarfareSiteLost,
 		kWarfareUnderAttack,
-		kTradeOfferReceived,
 	};
 
 	/**

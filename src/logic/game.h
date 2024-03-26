@@ -149,6 +149,7 @@ public:
 
 	friend class CmdQueue;  // this class handles the commands
 	friend struct GameClassPacket;
+	friend struct GamePlayerTradesPacket;
 	friend struct GamePlayerInfoPacket;
 	friend struct GameLoader;
 
@@ -311,6 +312,10 @@ public:
 	                                 const std::vector<uint32_t>& parameters);
 	void send_player_cancel_expedition_ship(const Ship&);
 	void send_player_propose_trade(const Trade& trade);
+	void send_player_trade_action(PlayerNumber sender,
+	                              TradeID trade_id,
+	                              TradeAction action,
+	                              Serial serial);
 	void send_player_toggle_mute(const Building&, bool all);
 	void send_player_diplomacy(PlayerNumber, DiplomacyAction, PlayerNumber);
 	void send_player_pinned_note(
@@ -379,10 +384,24 @@ public:
 		return list_of_scenarios_;
 	}
 
-	// TODO(sirver,trading): document these functions once the interface settles.
-	int propose_trade(const Trade& trade);
-	void accept_trade(int trade_id);
-	void cancel_trade(int trade_id);
+	TradeID propose_trade(const Trade& trade);
+	void accept_trade(TradeID trade_id, Market& receiver);
+	void reject_trade(TradeID trade_id);
+	void retract_trade(TradeID trade_id);
+	void cancel_trade(TradeID trade_id, bool reached_regular_end, const Player* canceller);
+
+	[[nodiscard]] bool has_trade(TradeID trade_id) const {
+		return trade_agreements_.count(trade_id) != 0;
+	}
+	[[nodiscard]] const TradeAgreement& get_trade(TradeID trade_id) const {
+		return trade_agreements_.at(trade_id);
+	}
+	[[nodiscard]] const std::map<TradeID, TradeAgreement>& all_trade_agreements() const {
+		return trade_agreements_;
+	}
+	[[nodiscard]] std::vector<TradeID> find_trade_offers(PlayerNumber receiver) const;
+	[[nodiscard]] std::vector<TradeID> find_trade_proposals(PlayerNumber initiator) const;
+	[[nodiscard]] std::vector<TradeID> find_active_trades(PlayerNumber player) const;
 
 	struct PendingDiplomacyAction {
 		PlayerNumber sender;     ///< The player who initiated the action.
@@ -495,9 +514,9 @@ private:
 	uint32_t scenario_difficulty_{kScenarioDifficultyNotSet};
 
 	GeneralStatsVector general_stats_;
-	int next_trade_agreement_id_ = 1;
+	TradeID next_trade_agreement_id_ = 1;
 	// Maps from trade agreement id to the agreement.
-	std::map<int, TradeAgreement> trade_agreements_;
+	std::map<TradeID, TradeAgreement> trade_agreements_;
 
 	std::list<PendingDiplomacyAction> pending_diplomacy_actions_;
 	bool diplomacy_allowed_{true};

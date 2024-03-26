@@ -3653,24 +3653,25 @@ int LuaWarehouseDescription::get_heal_per_second(lua_State* L) {
 	return 1;
 }
 
-// TODO(kaputtnik): Readd RST once this get fully implemented
-/*
+/* RST
 MarketDescription
 -----------------
 
 .. class:: MarketDescription
 
+   .. versionadded:: 1.3
+
    A static description of a tribe's market. A Market is used for
    trading over land with other players. See the parent classes for more
    properties.
 */
-// TODO(sirver,trading): Expose the properties of MarketDescription here once
-// the interface settles.
 const char LuaMarketDescription::className[] = "MarketDescription";
 const MethodType<LuaMarketDescription> LuaMarketDescription::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaMarketDescription> LuaMarketDescription::Properties[] = {
+   PROP_RO(LuaMarketDescription, local_carrier),
+   PROP_RO(LuaMarketDescription, trade_carrier),
    {nullptr, nullptr, nullptr},
 };
 
@@ -3679,6 +3680,28 @@ const PropertyType<LuaMarketDescription> LuaMarketDescription::Properties[] = {
  PROPERTIES
  ==========================================================
  */
+
+/* RST
+   .. attribute:: local_carrier
+
+      (RO) The name of the worker that works in the market.
+*/
+int LuaMarketDescription::get_local_carrier(lua_State* L) {
+	lua_pushstring(
+	   L, get_egbase(L).descriptions().get_worker_descr(get()->local_carrier)->name().c_str());
+	return 1;
+}
+
+/* RST
+   .. attribute:: trade_carrier
+
+      (RO) The name of the worker that carries wares across the map to other markets.
+*/
+int LuaMarketDescription::get_trade_carrier(lua_State* L) {
+	lua_pushstring(
+	   L, get_egbase(L).descriptions().get_worker_descr(get()->trade_carrier)->name().c_str());
+	return 1;
+}
 
 /* RST
 ShipDescription
@@ -6648,12 +6671,13 @@ bool LuaProductionSite::create_new_worker(lua_State* /* L */,
 	return ps.warp_worker(egbase, *wdes);
 }
 
-// TODO(kaputtnik): Readd RST once this get implemented
-/*
+/* RST
 Market
 ---------
 
 .. class:: Market
+
+   .. versionadded:: 1.3
 
    A Market used for trading with other players.
 
@@ -6667,6 +6691,7 @@ Market
 const char LuaMarket::className[] = "Market";
 const MethodType<LuaMarket> LuaMarket::Methods[] = {
    METHOD(LuaMarket, propose_trade),
+   METHOD(LuaMarket, accept_trade),
    // TODO(sirver,trading): Implement and fix documentation.
    // METHOD(LuaMarket, set_wares),
    // METHOD(LuaMarket, get_wares),
@@ -6675,6 +6700,7 @@ const MethodType<LuaMarket> LuaMarket::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaMarket> LuaMarket::Properties[] = {
+   PROP_RW(LuaMarket, marketname),
    {nullptr, nullptr, nullptr},
 };
 
@@ -6684,19 +6710,44 @@ const PropertyType<LuaMarket> LuaMarket::Properties[] = {
  ==========================================================
  */
 
+/* RST
+   .. attribute:: marketname
+
+   (RW) The name of the market as :class:`string`.
+*/
+int LuaMarket::get_marketname(lua_State* L) {
+	Widelands::Market* market = get(L, get_egbase(L));
+	lua_pushstring(L, market->get_market_name().c_str());
+	return 1;
+}
+int LuaMarket::set_marketname(lua_State* L) {
+	Widelands::Market* market = get(L, get_egbase(L));
+	market->set_market_name(luaL_checkstring(L, -1));
+	return 0;
+}
+
 /*
  ==========================================================
  LUA METHODS
  ==========================================================
  */
 
-// TODO(kaputtnik): Readd RST once this get implemented
-/*
-   .. method:: propose_trade(other_market, num_batches, items_to_send, items_to_receive)
+/* RST
+   .. method:: propose_trade(player, num_batches, items_to_send, items_to_receive)
 
-      TODO(sirver,trading): document
+      Propose a trade from this market to another player.
 
-      :returns: :const:`nil`
+      :arg player: The player to make the trade offer to.
+      :type player: :class:`wl.game.Player`
+      :arg num_batches: Total number of trading batches to send.
+      :type num_batches: :class:`integer`
+      :arg items_to_send: A table of warename to amount of items to send in each batch.
+      :type items_to_send: :class:`table`
+      :arg items_to_receive: A table of warename to amount of items to receive in each batch.
+      :type items_to_receive: :class:`table`
+
+      :returns: The unique ID for the new trade offer.
+      :rtype: :class:`integer`
 */
 int LuaMarket::propose_trade(lua_State* L) {
 	if (lua_gettop(L) != 5) {
@@ -6704,21 +6755,41 @@ int LuaMarket::propose_trade(lua_State* L) {
 	}
 	Widelands::Game& game = get_game(L);
 	Widelands::Market* self = get(L, game);
-	Widelands::Market* other_market = (*get_user_class<LuaMarket>(L, 2))->get(L, game);
+	Widelands::Player& other_player = (*get_user_class<LuaGame::LuaPlayer>(L, 2))->get(L, game);
 	const int num_batches = luaL_checkinteger(L, 3);
 
 	const Widelands::BillOfMaterials items_to_send =
 	   parse_wares_as_bill_of_material(L, 4, self->owner().tribe());
-	// TODO(sirver,trading): unsure if correct. Test inter-tribe trading, i.e.
-	// Barbarians trading with Empire, but shipping Atlantean only wares.
 	const Widelands::BillOfMaterials items_to_receive =
 	   parse_wares_as_bill_of_material(L, 5, self->owner().tribe());
-	const int trade_id = game.propose_trade(Widelands::Trade{
-	   items_to_send, items_to_receive, num_batches, self->serial(), other_market->serial()});
+	const Widelands::TradeID trade_id = game.propose_trade(Widelands::Trade{
+	   items_to_send, items_to_receive, num_batches, self, other_player.player_number()});
 
-	// TODO(sirver,trading): Wrap 'Trade' into its own Lua class?
 	lua_pushint32(L, trade_id);
 	return 1;
+}
+
+/* RST
+   .. method:: accept_trade(id)
+
+      Accept the proposed trade with the provided ID.
+
+      Only proposed trade offers can be accepted.
+      Only the recipient of the offer may accept it.
+      The offer can be accepted by any market with a land connection to the initiating market.
+
+      :arg id: Unique ID of the trade to accept.
+      :type id: :class:`integer`
+
+      :see also: :attr:`wl.Game.trades`
+*/
+int LuaMarket::accept_trade(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes one argument.");
+	}
+	Widelands::Game& game = get_game(L);
+	game.accept_trade(luaL_checkinteger(L, 2), *get(L, game));
+	return 0;
 }
 
 /*
