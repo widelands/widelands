@@ -84,15 +84,15 @@ jobs:
             - '.github/workflows/build_appimage.yaml'
 
   pre-build_checks:
-    needs: [changes]
+    #needs: [changes]
     uses: ./.github/workflows/pre-build_checks.yaml
     with:
       clang_tidy: ${{ needs.changes.outputs.clang_tidy }}
       codecheck: ${{ needs.changes.outputs.codecheck }}
 
   testsuite:
-    needs: [changes, pre-build_checks]
-    if: needs.changes.outputs.run_test_suite == 'true'
+    #needs: [changes, pre-build_checks]
+    #if: needs.changes.outputs.run_test_suite == 'true'
     uses: ./.github/workflows/build_testsuite.yaml
 
   windows-msvc:
