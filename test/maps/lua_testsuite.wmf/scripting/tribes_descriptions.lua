@@ -24,11 +24,11 @@ end
 
 function test_descr:test_get_buildings()
    local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal(43, #tribe.buildings)
+   assert_equal(44, #tribe.buildings)
    tribe = egbase:get_tribe_description("barbarians")
-   assert_equal(52, #tribe.buildings)
-   tribe = egbase:get_tribe_description("empire")
    assert_equal(53, #tribe.buildings)
+   tribe = egbase:get_tribe_description("empire")
+   assert_equal(54, #tribe.buildings)
 
    -- Test if buildings have been casted to their correct types
    for i, building in ipairs(tribe.buildings) do
@@ -42,6 +42,9 @@ function test_descr:test_get_buildings()
          assert_true(building.max_number_of_soldiers == nil)
       elseif (building.type_name == "trainingsite") then
          assert_true(building.max_attack ~= nil or building.max_defense ~= nil or building.max_evade ~= nil or building.max_health ~= nil)
+      elseif (building.type_name == "market") then
+         assert_true(building.local_carrier ~= nil)
+         assert_true(building.trade_carrier ~= nil)
       end
    end
 end
