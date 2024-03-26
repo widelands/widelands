@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,18 +16,18 @@
  *
  */
 
-#ifndef WL_GAME_IO_GAME_PLAYER_ECONOMIES_PACKET_H
-#define WL_GAME_IO_GAME_PLAYER_ECONOMIES_PACKET_H
+#ifndef WL_GAME_IO_GAME_PLAYER_TRADES_PACKET_H
+#define WL_GAME_IO_GAME_PLAYER_TRADES_PACKET_H
 
 #include "game_io/game_data_packet.h"
 
 namespace Widelands {
 
-/** Saves all the economies of all players. */
-struct GamePlayerEconomiesPacket : public GameDataPacket {
+/** Saves all the trade agreements and proposals. */
+struct GamePlayerTradesPacket : public GameDataPacket {
 	void read(FileSystem&, Game&, MapObjectLoader* = nullptr) override;
 	void write(FileSystem&, Game&, MapObjectSaver* = nullptr) override;
 };
 }  // namespace Widelands
 
-#endif  // end of include guard: WL_GAME_IO_GAME_PLAYER_ECONOMIES_PACKET_H
+#endif  // end of include guard: WL_GAME_IO_GAME_PLAYER_TRADES_PACKET_H

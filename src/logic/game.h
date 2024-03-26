@@ -149,7 +149,7 @@ public:
 
 	friend class CmdQueue;  // this class handles the commands
 	friend struct GameClassPacket;
-	friend struct GamePlayerEconomiesPacket;
+	friend struct GamePlayerTradesPacket;
 	friend struct GamePlayerInfoPacket;
 	friend struct GameLoader;
 
