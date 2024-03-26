@@ -144,17 +144,14 @@ void Market::set_economy(Economy* const e, WareWorker type) {
 				e->add_wares_or_workers(ware, 1);
 			}
 		}
+	} else {
+		if (carrier_request_ != nullptr) {
+			carrier_request_->set_economy(e);
+		}
 	}
 
 	for (auto& pair : trade_orders_) {
-		if (type == wwWORKER) {
-			if (old != nullptr) {
-				pair.second.carriers_queue_->remove_from_economy(*old);
-			}
-			if (e != nullptr) {
-				pair.second.carriers_queue_->add_to_economy(*old);
-			}
-		} else {
+		if (type == wwWARE) {
 			if (old != nullptr) {
 				for (auto& q : pair.second.wares_queues_) {
 					q.second->remove_from_economy(*old);
@@ -165,6 +162,13 @@ void Market::set_economy(Economy* const e, WareWorker type) {
 				for (auto& q : pair.second.wares_queues_) {
 					q.second->add_to_economy(*e);
 				}
+			}
+		} else {
+			if (old != nullptr) {
+				pair.second.carriers_queue_->remove_from_economy(*old);
+			}
+			if (e != nullptr) {
+				pair.second.carriers_queue_->add_to_economy(*old);
 			}
 		}
 	}
