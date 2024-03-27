@@ -714,18 +714,14 @@ std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
                                 const std::map<Widelands::DescriptionIndex, uint8_t>& map) {
 	std::string ret;
 
-	std::map<Widelands::DescriptionIndex, uint8_t>::const_iterator c;
-
-	Widelands::TribeDescr::WaresOrder::iterator i;
-	std::vector<Widelands::DescriptionIndex>::iterator j;
 	Widelands::TribeDescr::WaresOrder order = tribe.wares_order();
 
 	const UI::WareInfoStyleInfo& style =
 	   g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
 
-	for (i = order.begin(); i != order.end(); ++i) {
-		for (j = i->begin(); j != i->end(); ++j) {
-			if ((c = map.find(*j)) != map.end()) {
+	for (auto i = order.begin(); i != order.end(); ++i) {
+		for (auto j = i->begin(); j != i->end(); ++j) {
+			if (auto c = map.find(*j); c != map.end()) {
 				ret += "<div width=30 padding=2><p align=center>"
 				       "<div width=26 background=" +
 				       style.icon_background().hex_value() + "><p align=center><img src=\"" +

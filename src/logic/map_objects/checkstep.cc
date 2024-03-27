@@ -103,7 +103,7 @@ bool CheckStepDefault::reachable_dest(const Map& map, const FCoords& dest) const
 	NodeCaps const caps = dest.field->nodecaps();
 
 	if ((caps & movecaps_) == 0) {
-		if (!(((movecaps_ & MOVECAPS_SWIM) != 0) && ((caps & MOVECAPS_WALK) != 0))) {
+		if (((movecaps_ & MOVECAPS_SWIM) == 0) || ((caps & MOVECAPS_WALK) == 0)) {
 			return false;
 		}
 		if (!map.can_reach_by_water(dest)) {
@@ -231,8 +231,8 @@ bool CheckStepRoad::allowed(const Map& map,
 
 	// Calculate cost and passability
 	if (((endcaps & movecaps_) == 0) &&
-	    !(((endcaps & MOVECAPS_WALK) != 0) &&
-	      ((player_.get_buildcaps(start) & movecaps_ & MOVECAPS_SWIM) != 0))) {
+	    (((endcaps & MOVECAPS_WALK) == 0) ||
+	      ((player_.get_buildcaps(start) & movecaps_ & MOVECAPS_SWIM) == 0))) {
 		return false;
 	}
 
@@ -254,7 +254,7 @@ bool CheckStepRoad::reachable_dest(const Map& map, const FCoords& dest) const {
 	NodeCaps const caps = dest.field->nodecaps();
 
 	if ((caps & movecaps_) == 0) {
-		if (!(((movecaps_ & MOVECAPS_SWIM) != 0) && ((caps & MOVECAPS_WALK) != 0))) {
+		if (((movecaps_ & MOVECAPS_SWIM) == 0) || ((caps & MOVECAPS_WALK) == 0)) {
 			return false;
 		}
 		if (!map.can_reach_by_water(dest)) {

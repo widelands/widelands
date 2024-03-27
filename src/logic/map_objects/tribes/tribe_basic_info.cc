@@ -112,7 +112,7 @@ AllTribes get_all_tribeinfos(const AddOns::AddOnsList* addons_to_consider) {
 		for (const std::string& dir : dirs) {
 			for (const std::string& file : g_fs->list_directory(dir)) {
 				if (strcmp(FileSystem::fs_filename(file.c_str()), "init.lua") == 0) {
-					tribeinfos.push_back(Widelands::TribeBasicInfo(lua.run_script(file)));
+					tribeinfos.emplace_back(lua.run_script(file));
 				}
 			}
 		}
@@ -142,7 +142,7 @@ AllTribes get_all_tribeinfos(const AddOns::AddOnsList* addons_to_consider) {
 			for (const std::string& tribe : g_fs->list_directory(dirname)) {
 				const std::string script_path = tribe + FileSystem::file_separator() + "init.lua";
 				if (g_fs->file_exists(script_path)) {
-					tribeinfos.push_back(Widelands::TribeBasicInfo(lua.run_script(script_path)));
+					tribeinfos.emplace_back(lua.run_script(script_path));
 				}
 			}
 		}

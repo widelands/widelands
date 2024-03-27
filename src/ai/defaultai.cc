@@ -708,7 +708,7 @@ void DefaultAI::late_initialization() {
 		    bh.basic_amount() > 0) {  // This is the very begining of the game
 			assert(persistent_data->remaining_basic_buildings.count(bo.id) == 0);
 			persistent_data->remaining_basic_buildings.emplace(
-			   std::make_pair(bo.id, bh.basic_amount()));
+			   bo.id, bh.basic_amount());
 		}
 		bo.basic_amount = bh.basic_amount();
 		if (bh.needs_water()) {
@@ -3123,8 +3123,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 				assert(bo.new_building != BuildingNecessity::kAllowed);
 
 				// skip if a mine is not required
-				if (!(bo.new_building == BuildingNecessity::kNeeded ||
-				      bo.new_building == BuildingNecessity::kForced)) {
+				if (bo.new_building != BuildingNecessity::kNeeded &&
+				      bo.new_building != BuildingNecessity::kForced) {
 					continue;
 				}
 
@@ -3817,7 +3817,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 	// only used to collect flags reachable walking over roads
 	std::vector<NearFlag> reachableflags;
 
-	queue.push(NearFlag(full_road.front(), 0));
+	queue.emplace(full_road.front(), 0);
 	uint16_t alternative_path = std::numeric_limits<uint16_t>::max();
 	const uint8_t checkradius = 3 * game().map().calc_distance(full_road.front()->get_position(),
 	                                                           full_road.back()->get_position());
@@ -3875,7 +3875,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 			}
 
 			const uint32_t new_length = nf.current_road_distance + near_road->get_path().get_nsteps();
-			queue.push(NearFlag(endflag, new_length));
+			queue.emplace(endflag, new_length);
 		}
 	}
 
@@ -7949,9 +7949,9 @@ void DefaultAI::check_critical_material_of_ms() {
 		}
 
 		// not doing this for non-military buildins
-		if (!(bo.type == BuildingObserver::Type::kMilitarysite ||
-		      bo.type == BuildingObserver::Type::kTrainingsite ||
-		      bo.type == BuildingObserver::Type::kProductionsite)) {
+		if (bo.type != BuildingObserver::Type::kMilitarysite &&
+		      bo.type != BuildingObserver::Type::kTrainingsite &&
+		      bo.type != BuildingObserver::Type::kProductionsite) {
 			continue;
 		}
 
@@ -7992,7 +7992,7 @@ void DefaultAI::pre_calculating_needness_of_buildings(const Time& gametime) {
 		// This should only happen in scenarios via scripting
 		if (!basic_economy_established && bo.basic_amount > static_cast<uint32_t>(bo.total_count()) &&
 		    bo.buildable(*player_)) {
-			persistent_data->remaining_basic_buildings.emplace(std::make_pair(bo.id, bo.basic_amount));
+			persistent_data->remaining_basic_buildings.emplace(bo.id, bo.basic_amount);
 		}
 		if (!bo.buildable(*player_)) {
 			bo.new_building = BuildingNecessity::kNotNeeded;

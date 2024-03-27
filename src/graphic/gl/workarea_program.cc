@@ -179,10 +179,10 @@ void WorkareaProgram::draw(uint32_t texture_id,
                            Vector2f rendertarget_dimension) {
 	const FieldsToDraw::Field& topleft = fields_to_draw.at(0);
 	if (cache_ && cache_->fcoords == topleft.fcoords &&
-	    !(cache_->surface_pixel.x > topleft.surface_pixel.x ||
-	      cache_->surface_pixel.x < topleft.surface_pixel.x ||
-	      cache_->surface_pixel.y > topleft.surface_pixel.y ||
-	      cache_->surface_pixel.y < topleft.surface_pixel.y) &&
+	    cache_->surface_pixel.x <= topleft.surface_pixel.x &&
+	      cache_->surface_pixel.x >= topleft.surface_pixel.x &&
+	      cache_->surface_pixel.y <= topleft.surface_pixel.y &&
+	      cache_->surface_pixel.y >= topleft.surface_pixel.y &&
 	    cache_->workareas == workarea) {
 		return gl_draw(texture_id, z_value);
 	}

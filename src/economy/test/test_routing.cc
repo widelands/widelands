@@ -78,8 +78,8 @@ void TestingRoutingNode::get_neighbours(Widelands::WareWorker type,
 	for (TestingRoutingNode* nb : neighbours_) {
 		// second parameter is walktime in ms from this flag to the neighbour.
 		// only depends on slope
-		n.push_back(Widelands::RoutingNodeNeighbour(
-		   nb, 1000 * ((type == Widelands::wwWARE) ? 1 + waitcost_ : 1)));
+		n.emplace_back(
+		   nb, 1000 * ((type == Widelands::wwWARE) ? 1 + waitcost_ : 1));
 	}
 }
 bool TestingRoutingNode::all_members_zeroed() const {

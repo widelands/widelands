@@ -1445,8 +1445,9 @@ bool Panel::do_key(bool const down, SDL_Keysym const code) {
 		case SDLK_RCTRL:
 		case SDLK_LALT:
 			return false;
+		default:
+            return (code.mod & KMOD_CTRL) == 0 && (code.sym < SDLK_F1 || code.sym > SDLK_F12);
 		}
-		return !(((code.mod & KMOD_CTRL) != 0) || (code.sym >= SDLK_F1 && code.sym <= SDLK_F12));
 	}
 
 	return false;
