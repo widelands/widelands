@@ -574,7 +574,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 		return;
 	}
 	if (((brn.field->get_immovable() == nullptr) ||
-	      brn.field->get_immovable()->descr().type() != Widelands::MapObjectType::FLAG) &&
+	     brn.field->get_immovable()->descr().type() != Widelands::MapObjectType::FLAG) &&
 	    ((player_->get_buildcaps(brn) & Widelands::BUILDCAPS_FLAG) == 0)) {
 		return;
 	}
@@ -607,8 +607,8 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 
 		if (building_descr->get_built_over_immovable() != Widelands::INVALID_INDEX &&
 		    ((node_.field->get_immovable() == nullptr) ||
-		      !node_.field->get_immovable()->has_attribute(
-		         building_descr->get_built_over_immovable()))) {
+		     !node_.field->get_immovable()->has_attribute(
+		        building_descr->get_built_over_immovable()))) {
 			continue;
 		}
 		// Figure out if we can build it here, and in which tab it belongs

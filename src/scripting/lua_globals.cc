@@ -152,7 +152,8 @@ static std::map<const lua_State*, std::vector<TextdomainInfo>> textdomains;
       :returns: :const:`nil`
 */
 static int L_push_textdomain(lua_State* L) {
-	textdomains[L].emplace_back(luaL_checkstring(L, 1), lua_gettop(L) > 1 && luaL_checkboolean(L, 2));
+	textdomains[L].emplace_back(
+	   luaL_checkstring(L, 1), lua_gettop(L) > 1 && luaL_checkboolean(L, 2));
 	return 0;
 }
 

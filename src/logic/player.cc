@@ -815,7 +815,7 @@ bool Player::check_can_build(const BuildingDescr& descr, const FCoords& fc) cons
 
 	if (descr.get_built_over_immovable() != INVALID_INDEX &&
 	    ((fc.field->get_immovable() == nullptr) ||
-	      !fc.field->get_immovable()->has_attribute(descr.get_built_over_immovable()))) {
+	     !fc.field->get_immovable()->has_attribute(descr.get_built_over_immovable()))) {
 		return false;
 	}
 

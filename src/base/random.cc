@@ -82,8 +82,7 @@ constexpr uint32_t kRngSaveMagic = 0xf0057763;
 void RNG::read_state(StreamRead& sr) {
 	uint32_t const magic = sr.unsigned_32();
 	if (magic != kRngSaveMagic) {
-		throw wexception(
-		   "Different RNG version (magic = %08x, expected %08x)", magic, kRngSaveMagic);
+		throw wexception("Different RNG version (magic = %08x, expected %08x)", magic, kRngSaveMagic);
 	}
 
 	state0 = sr.unsigned_32();

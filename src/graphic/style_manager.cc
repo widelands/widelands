@@ -971,8 +971,7 @@ void StyleManager::add_paragraph_style(UI::ParagraphStyle style,
 		fail_if_doing_default_style("paragraph style", table_key);
 		p_style = new UI::ParagraphStyleInfo(default_style->paragraph_style(style));
 	}
-	paragraphstyles_.emplace(
-	   style, std::unique_ptr<UI::ParagraphStyleInfo>(p_style));
+	paragraphstyles_.emplace(style, std::unique_ptr<UI::ParagraphStyleInfo>(p_style));
 	paragraphstyle_keys_.emplace(table_key, style);
 }
 

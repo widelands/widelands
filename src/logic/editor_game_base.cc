@@ -776,7 +776,7 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 				//  so, transfer the ownership to that player.
 				PlayerNumber best_player;
 				if ((preferred_player != 0u) &&
-					(player(preferred_player).military_influence(index) != 0u)) {
+				    (player(preferred_player).military_influence(index) != 0u)) {
 					best_player = preferred_player;
 				} else {
 					best_player = neutral_when_no_influence ? 0 : player_area.player_number;
@@ -788,7 +788,8 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 								highest_military_influence = value;
 								best_player = p;
 							} else if (value == highest_military_influence) {
-								best_player = neutral_when_competing_influence ? 0 : player_area.player_number;
+								best_player =
+								   neutral_when_competing_influence ? 0 : player_area.player_number;
 							}
 						}
 					}

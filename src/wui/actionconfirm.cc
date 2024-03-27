@@ -343,7 +343,7 @@ void EnhanceConfirm::think() {
 
 	if ((building == nullptr) || !iaplayer().can_act(building->owner().player_number()) ||
 	    (!still_under_construction_ &&
-	      ((building->get_playercaps() & Widelands::Building::PCap_Enhancable) == 0u))) {
+	     ((building->get_playercaps() & Widelands::Building::PCap_Enhancable) == 0u))) {
 		die();
 	}
 }

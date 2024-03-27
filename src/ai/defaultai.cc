@@ -707,8 +707,7 @@ void DefaultAI::late_initialization() {
 		if (create_basic_buildings_list &&
 		    bh.basic_amount() > 0) {  // This is the very begining of the game
 			assert(persistent_data->remaining_basic_buildings.count(bo.id) == 0);
-			persistent_data->remaining_basic_buildings.emplace(
-			   bo.id, bh.basic_amount());
+			persistent_data->remaining_basic_buildings.emplace(bo.id, bh.basic_amount());
 		}
 		bo.basic_amount = bh.basic_amount();
 		if (bh.needs_water()) {
@@ -3124,7 +3123,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 				// skip if a mine is not required
 				if (bo.new_building != BuildingNecessity::kNeeded &&
-				      bo.new_building != BuildingNecessity::kForced) {
+				    bo.new_building != BuildingNecessity::kForced) {
 					continue;
 				}
 
@@ -7950,8 +7949,8 @@ void DefaultAI::check_critical_material_of_ms() {
 
 		// not doing this for non-military buildins
 		if (bo.type != BuildingObserver::Type::kMilitarysite &&
-		      bo.type != BuildingObserver::Type::kTrainingsite &&
-		      bo.type != BuildingObserver::Type::kProductionsite) {
+		    bo.type != BuildingObserver::Type::kTrainingsite &&
+		    bo.type != BuildingObserver::Type::kProductionsite) {
 			continue;
 		}
 

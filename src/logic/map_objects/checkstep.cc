@@ -232,7 +232,7 @@ bool CheckStepRoad::allowed(const Map& map,
 	// Calculate cost and passability
 	if (((endcaps & movecaps_) == 0) &&
 	    (((endcaps & MOVECAPS_WALK) == 0) ||
-	      ((player_.get_buildcaps(start) & movecaps_ & MOVECAPS_SWIM) == 0))) {
+	     ((player_.get_buildcaps(start) & movecaps_ & MOVECAPS_SWIM) == 0))) {
 		return false;
 	}
 

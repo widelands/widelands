@@ -84,7 +84,7 @@ bool CheckStepRoadAI::reachable_dest(const Widelands::Map& map,
 
 	if ((caps & movecaps) == 0) {
 		if (((movecaps & Widelands::MOVECAPS_SWIM) == 0) ||
-		      ((caps & Widelands::MOVECAPS_WALK) == 0)) {
+		    ((caps & Widelands::MOVECAPS_WALK) == 0)) {
 			return false;
 		}
 		if (!map.can_reach_by_water(dest)) {
