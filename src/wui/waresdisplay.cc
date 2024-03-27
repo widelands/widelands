@@ -714,20 +714,18 @@ std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
                                 const std::map<Widelands::DescriptionIndex, uint8_t>& map) {
 	std::string ret;
 
-	Widelands::TribeDescr::WaresOrder order = tribe.wares_order();
-
 	const UI::WareInfoStyleInfo& style =
 	   g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
 
-	for (auto i = order.begin(); i != order.end(); ++i) {
-		for (auto j = i->begin(); j != i->end(); ++j) {
-			if (auto c = map.find(*j); c != map.end()) {
+	for (const auto& column : tribe.wares_order()) {
+		for (Widelands::DescriptionIndex di : column) {
+			if (const auto ware_amount = map.find(di); ware_amount != map.end()) {
 				ret += "<div width=30 padding=2><p align=center>"
 				       "<div width=26 background=" +
 				       style.icon_background().hex_value() + "><p align=center><img src=\"" +
-				       tribe.get_ware_descr(c->first)->icon_filename() +
+				       tribe.get_ware_descr(ware_amount->first)->icon_filename() +
 				       "\"></p></div><div width=26 background=" + style.info_background().hex_value() +
-				       "><p>" + style.info_font().as_font_tag(get_amount_string(c->second)) +
+				       "><p>" + style.info_font().as_font_tag(get_amount_string(ware_amount->second)) +
 				       "</p></div></p></div>";
 			}
 		}
