@@ -1,0 +1,11 @@
+@PACKAGE_INIT@
+
+include("${CMAKE_CURRENT_LIST_DIR}/tinygettext-config-version.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/tinygettext-targets.cmake")
+
+include(CMakeFindDependencyMacro)
+find_dependency(Iconv)
+
+check_required_components(tinygettext)
+
+# EOF #

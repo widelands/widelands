@@ -170,10 +170,10 @@ class BuildcatError(Exception):
 
 def are_we_in_root_directory():
     """Make sure we are called in the root directory."""
-    if (not os.path.isdir('po')):
-        print("Error: no 'po/' subdir found.\n")
+    if (not os.path.isdir('data/i18n/translations')):
+        print("Error: no 'data/i18n/translations/' subdir found.\n")
         print('This script needs to access translations placed ' +
-              "under 'po/' subdir, but these seem unavailable. Check " +
+              "under 'data/i18n/translations/' subdir, but these seem unavailable. Check " +
               "that you called this script from Widelands' main dir.\n")
         sys.exit(1)
 
@@ -366,7 +366,7 @@ def do_update_potfiles():
     dangerous_chars = "'\" "  # Those chars are replaced via '_'
     for pot, srcfiles in potfiles:
         pot = pot.lower().translate(maketrans(dangerous_chars, len(dangerous_chars) * '_'))
-        path = os.path.normpath('po/' + os.path.dirname(pot))
+        path = os.path.normpath('data/i18n/translations/' + os.path.dirname(pot))
         do_makedirs(path)
         oldcwd = os.getcwd()
         os.chdir(path)
@@ -376,7 +376,7 @@ def do_update_potfiles():
         os.chdir(oldcwd)
 
         if succ:
-            print('\tpo/%s.pot' % pot)
+            print('\tdata/i18n/translations/%s.pot' % pot)
         else:
             os.rmdir(path)
 
@@ -437,7 +437,7 @@ def do_update_po(lang, files):
 
     for f in files:
         # File names to use
-        pot = os.path.normpath('po/%s' % f)
+        pot = os.path.normpath('data/i18n/translations/%s' % f)
         po = os.path.join(os.path.dirname(pot), lang + '.po')
         tmp = 'tmp.po'
 

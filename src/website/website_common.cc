@@ -31,7 +31,7 @@
 // Setup the static objects Widelands needs to operate and initializes systems.
 void initialize() {
 	set_initializer_thread();
-	i18n::set_locale("en");
+	g_verbose = true;
 
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		// We sometimes run into a missing video driver in our CI environment, so we exit 0 to prevent
@@ -41,7 +41,13 @@ void initialize() {
 	}
 
 	g_fs = new LayeredFileSystem();
-	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
+	FileSystem& fs = FileSystem::create(INSTALL_DATADIR);
+	g_fs->add_file_system(&fs);
+
+	i18n::set_localedir(fs.canonicalize_name("i18n/translations"));
+	i18n::init_locale();
+	i18n::set_locale("en");
+	i18n::grab_textdomain("widelands", i18n::get_localedir());
 
 	// We don't really need graphics here, but we will get error messages
 	// when they aren't initialized
@@ -55,6 +61,8 @@ void cleanup() {
 		delete g_gr;
 		g_gr = nullptr;
 	}
+
+	i18n::release_textdomain();
 
 	if (g_fs != nullptr) {
 		delete g_fs;

@@ -122,7 +122,7 @@ def generate_translation_stats(po_dir, output_file):
 
 def main():
     po_dir = os.path.abspath(os.path.join(
-        os.path.dirname(__file__), '../po'))
+        os.path.dirname(__file__), '../data/i18n/translations'))
     output_file = os.path.abspath(os.path.join(
         os.path.dirname(__file__), '../data/i18n/translation_stats.conf'))
     result = generate_translation_stats(po_dir, output_file)

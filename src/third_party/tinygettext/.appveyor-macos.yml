@@ -1,0 +1,23 @@
+version: '{build}'
+
+image:
+  - macos
+  # - macos-mojave # doesn't work due to missing std::filesystem
+
+configuration:
+  - Release
+  - Debug
+
+branches:
+  except:
+    - coverity_scan
+
+before_build:
+  - brew install libiconv
+  - git submodule update --init --recursive
+  - cmake -DCMAKE_INSTALL_PREFIX="%P%" -DWARNINGS=ON -DWERROR=ON -DBUILD_TESTS=ON
+
+build_script:
+  - make
+
+# EOF #

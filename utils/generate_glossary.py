@@ -307,7 +307,7 @@ def main():
             return 1
 
         po_dir = os.path.abspath(os.path.join(
-            os.path.dirname(__file__), '../po'))
+            os.path.dirname(__file__), '../data/i18n/translations'))
         output_path = make_path(os.path.dirname(__file__), '../po_validation')
         result = generate_glossary(
             po_dir, output_path, input_glossary, output_glossary, locale)
