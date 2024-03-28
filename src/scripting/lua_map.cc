@@ -691,7 +691,7 @@ parse_wares_as_bill_of_material(lua_State* L, int table_index, const Widelands::
 	parse_wares_workers(L, table_index, tribe, &input_map, true /* is_ware */);
 	Widelands::BillOfMaterials result;
 	for (const auto& pair : input_map) {
-		result.push_back(std::make_pair(pair.first.first, pair.second));
+		result.emplace_back(pair.first.first, pair.second);
 	}
 	return result;
 }

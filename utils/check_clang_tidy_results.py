@@ -56,6 +56,9 @@ SUPPRESSED_CHECKS = {
     'modernize-replace-disallow-copy-and-assign-macro',
     'readability-identifier-length',
     'boost-use-to-string',
+    'bugprone-unchecked-optional-access',
+    'misc-use-anonymous-namespace',
+    'cppcoreguidelines-avoid-const-or-ref-data-members',
 
     # Checks we probably want to clean up sometime (discussible; see link above)
     'bugprone-exception-escape',

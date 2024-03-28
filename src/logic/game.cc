@@ -345,11 +345,11 @@ void Game::init_newgame(const GameSettings& settings) {
 		Notifications::publish(UI::NoteLoadingMessage(_("Initializing game…")));
 		if ((settings.flags & GameSettings::Flags::kPeaceful) != 0) {
 			for (uint32_t i = 1; i < settings.players.size(); ++i) {
-				if (Player* p1 = get_player(i)) {
+				if (Player* first = get_player(i); first != nullptr) {
 					for (uint32_t j = i + 1; j <= settings.players.size(); ++j) {
-						if (Player* p2 = get_player(j)) {
-							p1->set_attack_forbidden(j, true);
-							p2->set_attack_forbidden(i, true);
+						if (Player* second = get_player(j); second != nullptr) {
+							first->set_attack_forbidden(j, true);
+							second->set_attack_forbidden(i, true);
 						}
 					}
 				}

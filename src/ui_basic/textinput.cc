@@ -402,8 +402,9 @@ bool AbstractTextInputPanel::handle_mousepress(const uint8_t btn, int32_t x, int
 		clicked();
 		return true;
 	}
+
 #if HAS_PRIMARY_SELECTION_BUFFER
-	else if (btn == SDL_BUTTON_MIDDLE) {
+	if (btn == SDL_BUTTON_MIDDLE) {
 		/* Primary buffer is inserted without affecting cursor position, selection, and focus. */
 		const uint32_t old_caret_pos = d_->cursor_pos;
 		const uint32_t old_selection_start = d_->selection_start;

@@ -50,7 +50,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version <= kCurrentPacketVersion && packet_version >= 4) {
 			PlayerNumber player_number = fr.unsigned_8();
-			if (!(0 < player_number && player_number <= game.map().get_nrplayers())) {
+			if (player_number < 1 || player_number > game.map().get_nrplayers()) {
 				throw GameDataError("Invalid player number: %i.", player_number);
 			}
 

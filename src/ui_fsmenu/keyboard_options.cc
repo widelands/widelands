@@ -244,7 +244,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	                  UI::Box& box, const KeyboardShortcut key) {
 		UI::Button* b = new UI::Button(&box, std::to_string(static_cast<int>(key)), 0, 0, 0, 0,
 		                               UI::ButtonStyle::kFsMenuMenu, generate_title(key));
-		all_keyboard_buttons.emplace(std::make_pair(key, b));
+		all_keyboard_buttons.emplace(key, b);
 		box.add(b, UI::Box::Resizing::kFullSize);
 		box.add_space(kPadding);
 		b->sigclicked.connect([this, b, key, generate_title]() {

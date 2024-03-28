@@ -238,7 +238,7 @@ Flag& Request::target_flag() const {
  */
 Time Request::get_base_required_time(const EditorGameBase& egbase, uint32_t const nr) const {
 	if (count_ <= nr) {
-		if (!(count_ == 1 && nr == 1)) {
+		if (count_ != 1 || nr != 1) {
 			log_warn_time(egbase.get_gametime(),
 			              "Request::get_base_required_time: WARNING nr = %u but count is %u, "
 			              "which is not allowed according to the comment for this function\n",

@@ -219,7 +219,7 @@ void NetSetupLAN::game_doubleclicked(uint32_t /* index */) {
 	assert(table_.has_selection());
 	const NetOpenGame* const game = table_.get_selected();
 	// Only join games that are open
-	if (game->info.state == LAN_GAME_OPEN || !playername_.has_warning()) {
+	if (game->info.state == kLanGameOpen || !playername_.has_warning()) {
 		clicked_joingame();
 	}
 }
@@ -237,12 +237,12 @@ void NetSetupLAN::update_game_info(UI::Table<NetOpenGame const* const>::EntryRec
 		er.set_string(1, info.map[0] != 0 ? i18n::translate(info.map) : "");
 	}
 
-	er.set_disabled(info.state != LAN_GAME_OPEN);
+	er.set_disabled(info.state != kLanGameOpen);
 	switch (info.state) {
-	case LAN_GAME_OPEN:
+	case kLanGameOpen:
 		er.set_string(2, _("Open"));
 		break;
-	case LAN_GAME_CLOSED:
+	case kLanGameClosed:
 		er.set_string(2, _("Closed"));
 		break;
 	default:

@@ -55,7 +55,7 @@ void MapFlagPacket::read(FileSystem& fs,
 			Widelands::Extent const extent = map.extent();
 			iterate_Map_FCoords(map, extent, fc) if (fr.unsigned_8() != 0u) {
 				PlayerNumber const owner = fr.unsigned_8();
-				if (!(0 < owner && owner <= nr_players)) {
+				if (0 >= owner || owner > nr_players) {
 					throw GameDataError("Invalid player number: %i.", owner);
 				}
 				const Serial ware_economy_serial = fr.unsigned_32();

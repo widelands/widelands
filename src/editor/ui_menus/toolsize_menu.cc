@@ -46,7 +46,7 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                      kSpinboxUnitW,
                      1,
                      1,
-                     MAX_TOOL_AREA + 1,
+                     kMaxToolArea + 1,
                      UI::PanelStyle::kWui,
                      _("Size:"),
                      UI::SpinBox::Units::kNone,
@@ -107,7 +107,7 @@ void EditorToolsizeMenu::set_buttons_enabled(bool enable) {
 	is_updating_ = true;
 	int32_t sbval = radius_ + 1;
 	if (enable) {
-		spinbox_radius_.set_interval(1, MAX_TOOL_AREA + 1);
+		spinbox_radius_.set_interval(1, kMaxToolArea + 1);
 		spinbox_radius_.set_value(sbval);
 
 		spinbox_gap_.set_interval(0, 100);

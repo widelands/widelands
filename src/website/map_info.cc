@@ -35,7 +35,7 @@
 
 int main(int argc, char** argv) {
 	set_testcase_logging_dir();
-	if (!(2 <= argc && argc <= 3)) {
+	if (argc < 2 || argc > 3) {
 		log_err("Usage: %s <map file>\n", argv[0]);
 		return 1;
 	}

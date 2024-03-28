@@ -118,7 +118,7 @@ void MapFlagdataPacket::read(FileSystem& fs,
 								//  waitforcapacity task for this flag is in
 								//  Flag::load_finish, which is called after the worker
 								//  (with his stack of tasks) has been fully loaded.
-								flag.capacity_wait_.push_back(&mol.get<Worker>(worker_serial));
+								flag.capacity_wait_.emplace_back(&mol.get<Worker>(worker_serial));
 							} catch (const WException& e) {
 								throw GameDataError("worker #%u (%u): %s", i, worker_serial, e.what());
 							}

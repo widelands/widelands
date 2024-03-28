@@ -423,7 +423,7 @@ bool Flag::has_capacity() const {
  * The capacity queue is a simple FIFO queue.
  */
 void Flag::wait_for_capacity(Game& /* game */, Worker& bob) {
-	capacity_wait_.push_back(&bob);
+	capacity_wait_.emplace_back(&bob);
 }
 
 /**
