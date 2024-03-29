@@ -249,7 +249,7 @@ ExpeditionDisplay::ExpeditionDisplay(UI::Panel* parent,
 	const Widelands::PortDock* pd = warehouse_->get_portdock();
 	assert(pd != nullptr);
 
-	// TODO(tothxa):
+	// TODO(tothxa): .
 	//   This shouldn't be necessary (think() should do the updates), but for some reason
 	//   then the input queues are not drawn if the expedition is already started when the
 	//   port window is opened. This does not make sense. See also comment in update_contents().
@@ -335,7 +335,7 @@ void ExpeditionDisplay::update_contents() {
 	const Widelands::ExpeditionBootstrap* expedition =
 	   warehouse_->get_portdock()->expedition_bootstrap();
 	if (expedition == nullptr
-	    // TODO(tothxa):
+	    // TODO(tothxa): .
 	    //   It should be safer with these, but for some reason then the queues aren't drawn for
 	    //   newly started expeditions, even though they are added and the space is reserved for
 	    //   them. This just does not make sense.
