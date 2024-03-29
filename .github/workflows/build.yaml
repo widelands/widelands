@@ -188,8 +188,8 @@ jobs:
 
           echo "These builds are automatically generated from master. " >> release_notes
           echo "## Latest changes" >> release_notes
-          # Print changelog from last 10 commits
-          git log --pretty="- %h: %s (%an)" --no-decorate HEAD~10..HEAD >> release_notes
+          # Print changelog from last 10 commits, strip Co-authored/Co-committed tags
+          git log --pretty="- %h: %s (%ai) (%an)" --no-decorate HEAD~10..HEAD | sed 's/Co-.*> //' >> release_notes
           echo "<details><summary>Original filenames</summary><pre>" >> release_notes
           cat artifacts.list >> release_notes
           echo "</pre></details>" >> release_notes

@@ -32,7 +32,7 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:52
 #, c-format
 msgid "%1$s|%2$s"
-msgstr ""
+msgstr "%1$s|%2$s"
 
 #: ../../src/wlapplication_messages.cc:55
 #: ../../src/wlapplication_messages.cc:87
@@ -47,7 +47,7 @@ msgstr "FILENAME"
 #. punctuation marks
 #: ../../src/wlapplication_messages.cc:60
 msgid "last"
-msgstr ""
+msgstr "последний"
 
 #: ../../src/wlapplication_messages.cc:66
 msgid "Usage:"
@@ -120,7 +120,7 @@ msgstr "Запустить одиночную игру на карте `FILENAME
 #, c-format
 msgid ""
 "Load the savegame `%1$s` directly or the last saved game if `=%2$s` is used."
-msgstr ""
+msgstr "Загрузить сохранение \"%1$s\" напрямую или последнюю сохраненную игру если используется \"=%2$s\"."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -128,7 +128,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Load the replay `%1$s` directly or the last saved replay if `=%2$s` is used."
-msgstr ""
+msgstr "Загрузить повтор \"%1$s\" напрямую или последний сохраненный повтор если используется \"=%2$s\"."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -138,7 +138,7 @@ msgid ""
 "Start the Widelands map editor directly. You can add `=%1$s` to directly "
 "load the map `FILENAME` in the editor or `=%2$s` to load the last edited "
 "map."
-msgstr ""
+msgstr "Запустить редактор карт Widelands. Добавьте \"=%1$s\" чтобы загрузить в редактор карту \"FILENAME\", или \"=%2$s\" чтобы загрузить последнюю отредатированную карту."
 
 #: ../../src/wlapplication_messages.cc:114
 msgid ""
@@ -231,7 +231,7 @@ msgstr "Не сжимать сохранения в архивы."
 
 #: ../../src/wlapplication_messages.cc:150
 msgid "Save files as binary zip archives."
-msgstr ""
+msgstr "Сохранять файлы в zip-архивах."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -384,11 +384,11 @@ msgstr "Настройки графики:"
 
 #: ../../src/wlapplication_messages.cc:214
 msgid "Use the whole display for the game screen."
-msgstr ""
+msgstr "Использовать весь дисплей в качестве игрового экрана."
 
 #: ../../src/wlapplication_messages.cc:216
 msgid "Start the game in a maximized window."
-msgstr ""
+msgstr "Запускать игру в развернутом окне."
 
 #. * TRANSLATORS: A placeholder for window width
 #: ../../src/wlapplication_messages.cc:219
