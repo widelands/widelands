@@ -21,6 +21,7 @@
 #include <memory>
 
 #include <SDL_mouse.h>
+#include <SDL_timer.h>
 
 #include "base/i18n.h"
 #include "base/wexception.h"
@@ -76,6 +77,8 @@ AbstractWaresDisplay::AbstractWaresDisplay(
 		selected_.insert(std::make_pair(index, false));
 		hidden_.insert(std::make_pair(index, false));
 		in_selection_.insert(std::make_pair(index, false));
+		ware_details_cache_.insert(
+		   std::make_pair(index, std::make_pair(RGBAColor(0, 0, 0, 0), nullptr)));
 	}
 
 	curware_.set_text(_("Stock"));
@@ -84,6 +87,10 @@ AbstractWaresDisplay::AbstractWaresDisplay(
 	   [this](const GraphicResolutionChanged& /* note */) { recalc_desired_size(true); });
 
 	recalc_desired_size(false);
+}
+
+AbstractWaresDisplay::~AbstractWaresDisplay() {
+	NoteThreadSafeFunction::instantiate([this]() { ware_details_cache_.clear(); }, true);
 }
 
 Widelands::Extent AbstractWaresDisplay::get_extent() const {
@@ -180,6 +187,7 @@ bool AbstractWaresDisplay::handle_mousepress(uint8_t btn, int32_t x, int32_t y) 
 			// multiple ware by dragging.
 			selection_anchor_ = ware;
 			in_selection_[ware] = true;
+			need_texture_update_ = true;
 		} else {
 			// A mouse release has been missed
 		}
@@ -263,6 +271,8 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y) {
 		return;
 	}
 
+	need_texture_update_ = true;
+
 	for (auto& resetme : in_selection_) {
 		in_selection_[resetme.first] = false;
 	}
@@ -335,6 +345,8 @@ void AbstractWaresDisplay::finalize_anchor_selection() {
 	for (auto& resetme : in_selection_) {
 		in_selection_[resetme.first] = false;
 	}
+
+	need_texture_update_ = true;
 }
 
 void AbstractWaresDisplay::layout() {
@@ -343,6 +355,8 @@ void AbstractWaresDisplay::layout() {
 }
 
 void AbstractWaresDisplay::draw(RenderTarget& dst) {
+	draw_ware_backgrounds(dst);
+
 	for (const Widelands::DescriptionIndex& index : indices_) {
 		if (!hidden_[index]) {
 			draw_ware(dst, index);
@@ -403,6 +417,98 @@ Vector2i AbstractWaresDisplay::ware_position(Widelands::DescriptionIndex id) con
 	return p;
 }
 
+bool AbstractWaresDisplay::draw_ware_as_selected(Widelands::DescriptionIndex id) const {
+	bool draw_selected = selected_.at(id);
+	if (selection_anchor_ != Widelands::INVALID_INDEX) {
+		// Draw the temporary selected wares as if they were selected.
+		// TODO(unknown): Use another pic for the temporary selection
+		if (!ware_selected(selection_anchor_)) {
+			draw_selected |= in_selection_.at(id);
+		} else {
+			draw_selected &= !in_selection_.at(id);
+		}
+	}
+	return draw_selected;
+}
+
+void AbstractWaresDisplay::draw_ware_backgrounds(RenderTarget& dst) {
+	const uint32_t time = SDL_GetTicks();
+	const bool update = time - last_ware_details_cache_update_ > 250;
+
+	if (update) {
+		last_ware_details_cache_update_ = time;
+
+		for (auto& pair : ware_details_cache_) {
+			if (!hidden_[pair.first]) {
+				RGBAColor rgba = draw_ware_background_overlay(pair.first);
+				if (pair.second.first != rgba) {
+					need_texture_update_ = true;
+					pair.second.first = rgba;
+				}
+			}
+		}
+	}
+
+	/* Blitting many small icons is super expensive.
+	 * Instead we blit them all once to a cached texture that is regenerated only when needed.
+	 * Similary, rendering the info texts is also performance-hungry and not done in every frame.
+	 */
+	if (need_texture_update_ || background_texture_ == nullptr) {
+		need_texture_update_ = false;
+		const int imgw = get_inner_w();
+		const int imgh = get_inner_h();
+		background_texture_.reset(new Texture(imgw, imgh));
+		background_texture_->fill_rect(
+		   Rectf(0, 0, imgw, imgh), RGBAColor(0, 0, 0, 0), BlendMode::Copy);
+
+		for (const Widelands::DescriptionIndex& id : indices_) {
+			if (!hidden_[id]) {
+				const bool draw_selected = draw_ware_as_selected(id);
+
+				const UI::WareInfoStyleInfo& style =
+				   draw_selected ? g_style_manager->ware_info_style(UI::WareInfoStyle::kHighlight) :
+                               g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
+
+				if (update) {
+					ware_details_cache_[id].second =
+					   UI::g_fh->render(as_richtext_paragraph(info_for_ware(id), style.info_font()));
+				}
+
+				const Image& bg = *style.icon_background_image();
+				uint16_t w = bg.width();
+				uint16_t h = bg.height();
+
+				const Vector2i p = ware_position(id);
+				background_texture_->blit(
+				   Rectf(p, w, h), bg, Rectf(0, 0, w, h), 1.f, BlendMode::Default);
+
+				if (const RGBAColor& overlay = ware_details_cache_[id].first; overlay.a != 0) {
+					background_texture_->fill_rect(Rectf(p, w, h), overlay, BlendMode::Default);
+				}
+
+				const Image* icon = type_ == Widelands::wwWARE ? tribe_.get_ware_descr(id)->icon() :
+                                                             tribe_.get_worker_descr(id)->icon();
+				background_texture_->blit(
+				   Rectf(p.x + (w - kWareMenuPicWidth) / 2.f, p.y + 1, icon->width(), icon->height()),
+				   *icon, Rectf(0, 0, icon->width(), icon->height()), 1.f, BlendMode::Default);
+			}
+		}
+	} else if (update) {
+		for (const Widelands::DescriptionIndex& id : indices_) {
+			if (!hidden_[id]) {
+				const UI::WareInfoStyleInfo& style =
+				   draw_ware_as_selected(id) ?
+                  g_style_manager->ware_info_style(UI::WareInfoStyle::kHighlight) :
+                  g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
+				ware_details_cache_[id].second =
+				   UI::g_fh->render(as_richtext_paragraph(info_for_ware(id), style.info_font()));
+			}
+		}
+	}
+
+	dst.blit(Vector2i::zero(), background_texture_.get(), BlendMode::Default);
+}
+
 /*
 ===============
 WaresDisplay::draw_ware [virtual]
@@ -411,19 +517,8 @@ Draw one ware icon + additional information.
 ===============
 */
 void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIndex id) {
-	bool draw_selected = selected_[id];
-	if (selection_anchor_ != Widelands::INVALID_INDEX) {
-		// Draw the temporary selected wares as if they were
-		// selected.
-		// TODO(unknown): Use another pic for the temporary selection
-		if (!ware_selected(selection_anchor_)) {
-			draw_selected |= in_selection_[id];
-		} else {
-			draw_selected &= !in_selection_[id];
-		}
-	}
+	const bool draw_selected = draw_ware_as_selected(id);
 
-	//  draw a background
 	const UI::WareInfoStyleInfo& style =
 	   draw_selected ? g_style_manager->ware_info_style(UI::WareInfoStyle::kHighlight) :
                       g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
@@ -431,23 +526,14 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 	uint16_t w = style.icon_background_image()->width();
 
 	const Vector2i p = ware_position(id);
-	dst.blit(p, style.icon_background_image());
-	dst.fill_rect(Recti(p.x, p.y, w, style.icon_background_image()->height()),
-	              draw_ware_background_overlay(id), BlendMode::Default);
-
-	const Image* icon = type_ == Widelands::wwWORKER ? tribe_.get_worker_descr(id)->icon() :
-                                                      tribe_.get_ware_descr(id)->icon();
-
-	dst.blit(p + Vector2i((w - kWareMenuPicWidth) / 2, 1), icon);
 
 	dst.fill_rect(
 	   Recti(p + Vector2i(0, kWareMenuPicHeight), w, kWareMenuInfoSize), info_color_for_ware(id));
 
-	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh->render(as_richtext_paragraph(info_for_ware(id), style.info_font()));
-	rendered_text->draw(
-	   dst, Vector2i(p.x + w - rendered_text->width() - 1,
-	                 p.y + kWareMenuPicHeight + kWareMenuInfoSize + 1 - rendered_text->height()));
+	const auto& rendered_text = *ware_details_cache_[id].second;
+	rendered_text.draw(
+	   dst, Vector2i(p.x + w - rendered_text.width() - 1,
+	                 p.y + kWareMenuPicHeight + kWareMenuInfoSize + 1 - rendered_text.height()));
 }
 
 // Wares highlighting/selecting
@@ -457,6 +543,7 @@ void AbstractWaresDisplay::select_ware(Widelands::DescriptionIndex ware) {
 	}
 
 	selected_[ware] = true;
+	need_texture_update_ = true;
 	if (callback_function_) {
 		callback_function_(ware, true);
 	}
@@ -468,13 +555,14 @@ void AbstractWaresDisplay::unselect_ware(Widelands::DescriptionIndex ware) {
 	}
 
 	selected_[ware] = false;
+	need_texture_update_ = true;
 	if (callback_function_) {
 		callback_function_(ware, false);
 	}
 }
 
-bool AbstractWaresDisplay::ware_selected(Widelands::DescriptionIndex ware) {
-	return selected_[ware];
+bool AbstractWaresDisplay::ware_selected(Widelands::DescriptionIndex ware) const {
+	return selected_.at(ware);
 }
 
 // Wares hiding
@@ -483,6 +571,7 @@ void AbstractWaresDisplay::hide_ware(Widelands::DescriptionIndex ware) {
 		return;
 	}
 	hidden_[ware] = true;
+	need_texture_update_ = true;
 }
 
 bool AbstractWaresDisplay::is_ware_hidden(Widelands::DescriptionIndex ware) const {
@@ -569,7 +658,7 @@ StockMenuWaresDisplay::draw_ware_background_overlay(const Widelands::Description
 	   amount < target ? g_style_manager->building_statistics_style().alternative_low_color() :
 	   amount > target ? g_style_manager->building_statistics_style().alternative_high_color() :
                         g_style_manager->building_statistics_style().alternative_medium_color();
-	return RGBAColor(color.r, color.g, color.b, 80);
+	return RGBAColor(color.r, color.g, color.b, 160);
 }
 
 RGBColor AbstractWaresDisplay::info_color_for_ware(Widelands::DescriptionIndex /* ware */) {

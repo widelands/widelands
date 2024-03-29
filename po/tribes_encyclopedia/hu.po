@@ -10,14 +10,14 @@
 # litoll <litoll@freemail.hu>, 2016
 # litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015-2016
-# Tóth András <txa-dev@posteo.hu>, 2021-2023
+# Tóth András <txa-dev@posteo.hu>, 2021-2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-02-01 02:29+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: litoll <litoll@freemail.hu>, 2016\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2024\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5099,7 +5099,7 @@ msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %s a
 #: ../../data/tribes/initialization/atlanteans/units.lua:1928
 msgctxt "atlanteans_building"
 msgid "Trains soldiers in ‘Attack’."
-msgstr "Katonákat képez a „Támadás” képességben"
+msgstr "Katonákat képez a „Támadás” képességben."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean training site: Dungeon, part
 #. 2
@@ -5920,7 +5920,7 @@ msgid ""
 "Besides pitta bread and meat, fish is also a foodstuff for the Barbarians. "
 "It is used in the taverns, inns and big inns and at the training sites "
 "(training camp and battle arena)."
-msgstr "A pita kenyér és a hús mellett a hal is a barbárok élelmiszerei közé tartozik. A kocsmában, fogadóban és a nagy fogadóban, valamint a kiképzőhelyeken (kiképzőtábor, harci aréna) használják fel."
+msgstr "A pita és a hús mellett a hal is a barbárok élelmiszerei közé tartozik. A kocsmában, fogadóban és a nagy fogadóban, valamint a kiképzőhelyeken (kiképzőtábor, harci aréna) használják fel."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Meat, part 2
 #: ../../data/tribes/initialization/barbarians/units.lua:172
@@ -5963,7 +5963,7 @@ msgid ""
 "is made out of wheat and water following a secret recipe. Pitta bread is "
 "used in the taverns, inns and big inns to prepare rations, snacks and meals."
 " It is also consumed at training sites (training camp and battle arena)."
-msgstr "A barbár pékek a legjobbak a lapos és ízletes pita kenyér elkészítésében. Búzából és vízből készül egy titkos recept alapján. A pita kenyeret a kocsmákban, fogadókban és a nagy fogadókban használják fel harapnivaló, uzsonna és ebéd elkészítéséhez. A kiképzőhelyeken (kiképzőtábor és harci aréna) szintén fogyasztják."
+msgstr "A barbár pékek a legjobbak a lapos és ízletes pita elkészítésében. Búzából és vízből készül egy titkos recept alapján. A pitát a kocsmákban, fogadókban és a nagy fogadókban használják fel harapnivaló, uzsonna és ebéd elkészítéséhez. A kiképzőhelyeken (kiképzőtábor és harci aréna) szintén fogyasztják."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Beer
 #: ../../data/tribes/initialization/barbarians/units.lua:215
@@ -8354,7 +8354,7 @@ msgstr "Gr’tangen"
 #: ../../data/tribes/initialization/barbarians/units.lua:2052
 msgctxt "warehousename"
 msgid "Grimst’d"
-msgstr " átlagosan %s alatt fejleszti"
+msgstr "Grimst’d"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2054
@@ -14927,7 +14927,7 @@ msgctxt "frisians_building"
 msgid ""
 "If this building is fully supplied, production of one of each smoked food "
 "takes %s on average."
-msgstr "Ha az ellátása folyamatos, akkor a füstölő átlagosan %1$senként készít egy-egy füstölt húst és halat."
+msgstr "Ha az ellátása folyamatos, akkor a füstölő átlagosan %senként készít egy-egy füstölt húst és halat."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Bakery
 #: ../../data/tribes/initialization/frisians/units.lua:1917

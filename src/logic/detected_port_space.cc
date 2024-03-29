@@ -89,8 +89,8 @@ std::string DetectedPortSpace::to_long_string(const EditorGameBase& egbase) cons
 			              gametimestring(time_discovered.get()), discovering_ship);
 		}
 		return format(
-		   /** TRANSLATORS: "Unowned port space discovered at 1:23 by Ship2 34 steps north of
-		       Port1" */
+		   /** TRANSLATORS: "Unowned port space discovered at 1:11 by Ship2 33 steps north of
+		       Port5" */
 		   ngettext("Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s",
 		            "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s of %5$s",
 		            distance_to_portdock),
@@ -103,8 +103,8 @@ std::string DetectedPortSpace::to_long_string(const EditorGameBase& egbase) cons
 		              discovering_ship);
 	}
 	return format(
-	   /** TRANSLATORS: "Port space of Player3 discovered at 1:23 by Ship2 34 steps north
-	       of Port1" */
+	   /** TRANSLATORS: "Port space of Player1 discovered at 2:22 by Ship3 44 steps north
+	       of Port6" */
 	   ngettext("Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s",
 	            "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s of %6$s",
 	            distance_to_portdock),

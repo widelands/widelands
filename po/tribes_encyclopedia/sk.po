@@ -1688,7 +1688,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1662
 msgctxt "amazons_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Umiestňuje vojačky, aby rozšírili vaše územie."
 
 #. TRANSLATORS: Note helptext for an Amazon military site: Patrol Post
 #. TRANSLATORS: Note helptext for an Amazon military site: Warriors’ Dwelling
@@ -4748,7 +4748,7 @@ msgid ""
 "one kind of trident is needed by the economy, production of one light "
 "trident takes %2$s and one long trident, one steel trident, one double "
 "trident or one heavy double trident takes %3$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky trojzubce, výroba jedného trojzubca trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh trojzubca, výroba jedného ľahkého trojzubca trvá priemerne %2$s a jedného dlhého, oceľového, dvojitého alebo ťažkého dvojitého trojzubca trvá %3$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Armor
 #. Smithy
@@ -4777,7 +4777,7 @@ msgid ""
 "the economy, production of one of each kind takes %1$s on average. If only "
 "one kind of shield is needed by the economy, production of one steel shield "
 "takes %2$s and one advanced shield takes %3$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje oba druhy štítov, výroba jedného štítu trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh štítu, výroba jedného oceľového štítu trvá priemerne %2$s a jedného vylepšeného štítu %3$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Barracks
 #: ../../data/tribes/initialization/atlanteans/units.lua:1782
@@ -4970,7 +4970,7 @@ msgid ""
 " diamond takes %3$s on average. If only one kind of mineral is needed by the"
 " economy, production of one granite takes %4$s, one quartz takes %5$s and "
 "one diamond takes %6$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky horniny, výroba jednej žuly trvá priemerne %1$s, jedného kremeňa %2$s a jedného diamantu %3$s. Ak ekonomika potrebuje len jeden druh horniny, výroba jednej žuly trvá priemerne %4$s, jedného kremeňa %5$s a jedného diamantu %6$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Coal Mine
@@ -5019,7 +5019,7 @@ msgstr ""
 msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Táto baňa dokáže pri stálom prísune jedla vyprodukovať uhlie v priemere za %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Iron Mine
@@ -5051,7 +5051,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
-msgstr ""
+msgstr "Táto baňa dokáže pri stálom prísune jedla vyprodukovať železnú rudu v priemere za %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Gold Mine
@@ -5097,7 +5097,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
-msgstr ""
+msgstr "Táto baňa dokáže pri stálom prísune jedla vyprodukovať zlatú rudu v priemere za %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean training site: Dungeon, part
 #. 1
@@ -5164,7 +5164,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:2031
 msgctxt "atlanteans_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Umiestňuje vojakov, aby rozšírili vaše územie."
 
 #. TRANSLATORS: Note helptext for an Atlantean military site: Guardhouse
 #. TRANSLATORS: Note helptext for an Atlantean military site: Guardhall
@@ -7032,7 +7032,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce beer in"
 " about %s on average."
-msgstr "Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vyrobiť pivo v priemere za asi %s."
+msgstr "Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vyrobiť pivo v priemere za %s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Brewery
 #: ../../data/tribes/initialization/barbarians/units.lua:1352
@@ -7064,7 +7064,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce strong "
 "beer in about %s on average."
-msgstr ""
+msgstr "Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vyrobiť silné pivo v priemere za %s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Tavern
 #: ../../data/tribes/initialization/barbarians/units.lua:1368
@@ -7519,7 +7519,7 @@ msgstr ""
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Táto baňa dokáže pri stálom prísune jedla vyprodukovať uhlie v priemere za %s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Iron Mine
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Deep Iron Mine
@@ -7719,7 +7719,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1792
 msgctxt "barbarians_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Umiestňuje vojakov, aby rozšírili vaše územie."
 
 #. TRANSLATORS: Note helptext for a Barbarian military site: Sentry
 #. TRANSLATORS: Note helptext for a Barbarian military site: Barrier
@@ -11711,7 +11711,7 @@ msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce marble in %1$s and "
 "granite in %2$s on average."
-msgstr ""
+msgstr "Táto baňa dokáže pri stálom prísune jedla vyprodukovať mramor v priemere za %1$s a žulu za %2$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11766,7 +11766,7 @@ msgstr ""
 msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Táto baňa dokáže pri stálom prísune jedla vyprodukovať uhlie v priemere za %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11822,7 +11822,7 @@ msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
-msgstr ""
+msgstr "Táto baňa dokáže pri stálom prísune jedla vyprodukovať železnú rudu v priemere za %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11876,7 +11876,7 @@ msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
-msgstr ""
+msgstr "Táto baňa dokáže pri stálom prísune jedla vyprodukovať zlatú rudu v priemere za %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12057,7 +12057,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:2276
 msgctxt "empire_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Umiestňuje vojakov, aby rozšírili vaše územie."
 
 #. TRANSLATORS: Note helptext for an Empire military site: Blockhouse
 #. TRANSLATORS: Note helptext for an Empire military site: Sentry
@@ -13976,7 +13976,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:840
 msgctxt "frisians_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or granite."
-msgstr ""
+msgstr "Pracuje hlboko v baniach, kde ťaží uhlie, železo, zlato alebo žulu."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Charcoal Burner
 #: ../../data/tribes/initialization/frisians/units.lua:847
@@ -15264,7 +15264,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the rock mine can produce granite in %s on "
 "average."
-msgstr ""
+msgstr "Kamenná baňa dokáže pri stálom prísune jedla vyprodukovať žulu v priemere za %s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Deep Rock
 #. Mine
@@ -15274,7 +15274,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep rock mine can produce granite in %s "
 "on average."
-msgstr ""
+msgstr "Hlbinná kamenná baňa dokáže pri stálom prísune jedla vyprodukovať žulu v priemere za %s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Coal Mine
 #: ../../data/tribes/initialization/frisians/units.lua:2069
@@ -15283,7 +15283,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the coal mine can produce coal in %s on "
 "average."
-msgstr ""
+msgstr "Uhoľná baňa dokáže pri stálom prísune jedla vyprodukovať uhlie v priemere za %s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Deep Coal
 #. Mine
@@ -15293,7 +15293,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep coal mine can produce coal in %s on "
 "average."
-msgstr ""
+msgstr "Hlbinná uhoľná baňa dokáže pri stálom prísune jedla vyprodukovať uhlie v priemere za %s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Iron Mine
 #: ../../data/tribes/initialization/frisians/units.lua:2087
@@ -15302,7 +15302,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the iron mine can produce one piece of iron "
 "ore in %s on average."
-msgstr ""
+msgstr "Železnorudná baňa dokáže pri stálom prísune jedla vyprodukovať železnú rudu v priemere za %s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Deep Iron
 #. Mine
@@ -15312,7 +15312,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep iron mine can produce iron ore in %s "
 "on average."
-msgstr ""
+msgstr "Hlbinná železnorudná baňa dokáže pri stálom prísune jedla vyprodukovať železnú rudu v priemere za %s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Gold Mine
 #: ../../data/tribes/initialization/frisians/units.lua:2105
@@ -15321,7 +15321,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the gold mine can produce one piece of gold "
 "ore in %s on average."
-msgstr ""
+msgstr "Zlatá baňa dokáže pri stálom prísune jedla vyprodukovať zlatú rudu v priemere za %s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Deep Gold
 #. Mine
@@ -15331,7 +15331,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep gold mine can produce gold ore in %s "
 "on average."
-msgstr ""
+msgstr "Hlbinná zlatá baňa dokáže pri stálom prísune jedla vyprodukovať zlatú rudu v priemere za %s."
 
 #. TRANSLATORS: Lore helptext for a Frisian training site: Training Camp
 #: ../../data/tribes/initialization/frisians/units.lua:2123
@@ -15407,7 +15407,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2196
 msgctxt "frisians_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Umiestňuje vojakov, aby rozšírili vaše územie."
 
 #. TRANSLATORS: Note helptext for a Frisian military site: Wooden Tower
 #. TRANSLATORS: Note helptext for a Frisian military site: High Wooden Tower
@@ -16050,17 +16050,17 @@ msgstr "Pracovná oblasť:"
 #: ../../data/tribes/scripting/help/building_help.lua:356
 #: ../../data/tribes/scripting/help/building_help.lua:361
 msgid "Healing:"
-msgstr "Výcvik zdravia:"
+msgstr "Liečenie:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:357
 #: ../../data/tribes/scripting/help/building_help.lua:362
 #, lua-format
 msgid "Garrisoned soldiers heal %d health point per second."
 msgid_plural "Garrisoned soldiers heal %d health points per second."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Vojaci umiestnení vnútri budovy sa liečia rýchlosťou %d bod zdravia za sekundu."
+msgstr[1] "Vojaci umiestnení vnútri budovy sa liečia rýchlosťou %d body zdravia za sekundu."
+msgstr[2] "Vojaci umiestnení vnútri budovy sa liečia rýchlosťou %d bodov zdravia za sekundu."
+msgstr[3] "Vojaci umiestnení vnútri budovy sa liečia rýchlosťou %d bodov zdravia za sekundu."
 
 #: ../../data/tribes/scripting/help/building_help.lua:358
 #: ../../data/tribes/scripting/help/building_help.lua:364
@@ -16309,7 +16309,7 @@ msgstr "Preskočenie potvrdzovacieho dialógového okna"
 
 #: ../../data/tribes/scripting/help/controls.lua:24
 msgid "Table Control"
-msgstr ""
+msgstr "Ovládanie tabuliek"
 
 #: ../../data/tribes/scripting/help/controls.lua:25
 msgid ""

@@ -34,7 +34,8 @@ jobs:
     - name: Restore vcpkg and its artifacts.
       uses: actions/cache@v4
       with:
-        path: ${{ env.VCPKG_ROOT }}\installed
+        # Explicit path here because env is overridden by msvc-dev-cmd
+        path: C:\vcpkg\installed
         key: |
           ${{ steps.prepare.outputs.vcpkg_key }}-${{ matrix.arch }}
     - name: Installing dependencies

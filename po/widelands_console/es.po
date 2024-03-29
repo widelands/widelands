@@ -3,7 +3,7 @@
 # 
 # Translators:
 # Facundo Gomez <facundogomez15@gmail.com>, 2019
-# Franco Mercado <francomercado724@outlook.com>, 2021
+# f774b9b6855b55c688bcca33ef7e3ad1_08819a0 <82be4cb914573eec57926f87ae10df0e_1008373>, 2021
 # Gastón <gastbr@gmail.com>, 2016
 # Gontzal Pujana Onaindia <juchuf@gmail.com>, 2018
 # Juan Miguel Bernal González, 2024
