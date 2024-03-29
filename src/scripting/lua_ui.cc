@@ -18,6 +18,8 @@
 
 #include "scripting/lua_ui.h"
 
+#include <memory>
+
 #include <SDL_mouse.h>
 
 #include "base/log.h"
@@ -566,7 +568,7 @@ int LuaPanel::get_child(lua_State* L) {
          * ``"textarea"``: A static text area with a single line of text. Properties:
 
            * ``"text"``: **Mandatory**. The text to display.
-           * ``"font"``: **Mandatory**. The font style to use.
+           * ``"font"``: **Mandatory**. The font style to use. See :ref:`theme_fonts`
            * ``"text_align"``: **Optional**. The alignment of the text. Valid values are
              ``"center"`` (the default), ``"left"``, and ``"right"``.
            * ``"fixed_width"``: **Optional**. If set, the text area's width is fixed instead
@@ -575,7 +577,8 @@ int LuaPanel::get_child(lua_State* L) {
          * ``"multilinetextarea"``: A static text area displaying multiple lines of text.
            Properties:
 
-           * ``"text"``: **Mandatory**. The text to display.
+           * ``"text"``: **Mandatory**. The text to display. The text can be formatted with richtext
+             (see :ref:`richtext.lua`), in which case the ``font`` attribute will have no effect.
            * ``"scroll_mode"``: **Mandatory**. The text area's scrolling behaviour. One of:
 
              * ``"none"``: The text area expands to accommodate its content instead of scrolling.
@@ -584,7 +587,7 @@ int LuaPanel::get_child(lua_State* L) {
              * ``"log"``: Follow the bottom of the log.
              * ``"log_force"``: Follow the bottom of the log with forced scrolling.
 
-           * ``"font"``: **Optional**. The font style to use.
+           * ``"font"``: **Optional**. The font style to use. See :ref:`theme_fonts`
            * ``"text_align"``: **Optional**. The alignment of the text. Valid values are
              ``"center"`` (the default), ``"left"``, and ``"right"``.
 
@@ -4083,7 +4086,9 @@ static int L_show_messagebox(lua_State* L) {
 	UI::WLMessageBox m(
 	   get_egbase(L).get_ibase(), UI::WindowStyle::kWui, title, text,
 	   allow_cancel ? UI::WLMessageBox::MBoxType::kOkCancel : UI::WLMessageBox::MBoxType::kOk);
-	UI::Panel::Returncodes result = m.run<UI::Panel::Returncodes>();
+	UI::Panel::Returncodes result;
+	NoteThreadSafeFunction::instantiate(
+	   [&result, &m]() { result = m.run<UI::Panel::Returncodes>(); }, true);
 
 	lua_pushboolean(L, static_cast<int>(result == UI::Panel::Returncodes::kOk));
 	return 1;

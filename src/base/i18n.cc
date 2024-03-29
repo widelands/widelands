@@ -427,4 +427,18 @@ std::string join_sentences(const std::string& sentence1, const std::string& sent
 	return format(pgettext("sentence_separator", "%1% %2%"), sentence1, sentence2);
 }
 
+bool is_translation_of(const std::string& input,
+                       const std::string& base,
+                       const std::string& textdomain_name) {
+	if (input == base) {
+		return true;
+	}
+	if (textdomain_name.empty()) {
+		return input == translate(base);
+	}
+
+	Textdomain td(textdomain_name);
+	return input == translate(base);
+}
+
 }  // namespace i18n

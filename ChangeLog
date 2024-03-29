@@ -1,6 +1,6 @@
 [TOC]
 
-## Post-1.1 until [git 301d672](https://codeberg.org/wl/widelands/commit/301d6725e2d5477eb1d0dde4d8a580fbdafc4374)
+## Post-1.1 until [git e058662](https://codeberg.org/wl/widelands/commit/e058662c90381ac7dc549e0bafde3890111d776d)
 
 ### Animations, Icons and Overlays
 
@@ -13,6 +13,7 @@
 - More playercolour for amazon ship (#6109)
 - Add high resolution images for most tribe immovables (#6137)
 - High resolution images of basic wares from blender models (CB #4576 / GH #6235)
+- Bigger `menu.png` for Amazon ship (#6143)
 
 
 ### Sounds and Music
@@ -27,6 +28,7 @@
 - Carry over ship names in Atlantean campaign (#5781)
 - Tutorial 01 fixes (#5909)
 - Fix Food Production objective in first atlantean campaign (#6081)
+- Fix changed tab name in encyclopedia tutorial (CB #4707 / GH #6344)
 
 
 ### Scripting
@@ -49,6 +51,7 @@
     - Add function `LuaWorker::evict`
     - Add property `LuaMapObject.exists`
     - Expose worker buildcost to `modify_unit`
+- UI Plugins (#5872, CB #4420 / GH #6030)
 - Lua UI API Extensions (#5933)
     - Read+Write access to most properties of all kinds of UI elements at runtime
     - Add support for checkboxes, radio groups, unique windows, spinboxes, sliders (all three flavours), progress bars, editboxes and multiline editboxes
@@ -57,12 +60,14 @@
 - Win condition artifacts minor fix (#6042)
 - Implement `walk=<direction>` in worker programs (CB #4467 / GH #6149)
 - Pass correct parameter to lua_typename() (CB #4646 / GH #6282)
+- Add Lua APIs for Missing Bob Types (#6125): `PinnedNote`, `NavalInvasionBase`, `ShipFleetYardInterface`, `FerryFleetYardInterface`
 
 
 ### Maps
 
 - Map Required Widelands Version Check (#5884)
 - Add a building plot to unusable port island on Calvisson (#6084)
+- Remove unwinnable-with-autocrat hint from map Crossing The Horizon
 
 
 ### Add-Ons
@@ -76,7 +81,6 @@
 - Fix add-ons admin dialog Enter key handling (#5763)
 - Turn unguaranteed add-on dependency check assert into a conditional (#5829)
 - Add-Ons Packager: Compute Minimum Widelands Version For Maps (#5905)
-- UI Plugins (#5872)
 - Do not hide Add-On comment text during layout (#6032)
 - Fix false positives in add-ons packager change detection (#6033)
 - Add missing `richtext_escape` for add-ons error message (#6049)
@@ -101,6 +105,9 @@
 - Fix double cleanup for direct loading of invalid replay (#6098)
 - Reinitialize forester cache when reloading (#6105)
 - Do not save partially initialized window (GH #6223 / CB #4564)
+- Save and load garrison settings (#5983)
+- Remove v1.0 compatibility code (CB #4615 / GH #6276)
+- Allow loading last savegame/replay/edited map from the command line (CB #4470 / GH #6153)
 
 
 ### AI
@@ -108,6 +115,9 @@
 - Small AI Fixes (#5683)
 - AI Diplomacy (#5774)
 - Make AI supplycheck non recursive and more efficient (#5866)
+- Navalwarfare AI (CB #4441 / GH #6083)
+- Fix integer overflow in AI ship utilisation calculation (CB #4713 / GH #6350)
+- Make AI set port garrison according to soldier availability (GH #6351 / CB #4714)
 
 
 ### Gameplay
@@ -143,6 +153,41 @@
 - Add quartz to the Amazon economy (CB #4512 / GH #6170)
 - Amazon starting conditions: Fix input quantities in stone workshop (GH #6178 / CB #4520)
 - Cancel battles only when players negotiate real truce (CB #4574 / GH #6233)
+- Fix evicting of secondary workers (CB #4657 / GH #6294)
+- Increase amount of coal in Amazon starting conditions (CB #4681 / GH #6318)
+- Make Amazons poor hamlet more forgiving with tools (CB #4554 / GH #6211)
+- Naval warfare baseplate implementation
+- Naval Warfare: Healing (#5795)
+- Naval Warfare: Onboard Soldiers Attack Bonus  (#5796)
+- Naval Warfare: Invasion Strategy (#5847)
+- Naval Warfare: Coastal Invasion (#5859)
+- Naval Warfare: Invasion Enhancements (#5869)
+- Naval Warfare: Better Invasion End Detection (#5887)
+- Naval Warfare: Make detected portspaces addressable for expeditions (#5929)
+- Garrisons for Warehouses and Warships (#5930)
+- Position attacking warships 2 nodes west of the defender (#5947)
+- Fix Warship Soldiers Capacity & Requesting Issues (#5953)
+- Fix stacking order of new ship battles (#5962)
+- Make `Game::random_location()` Normalize Coords (#5976)
+- Don't detect portspace under own port (#5974)
+- Fail safely when ship destination dock is unreachable (#5972)
+- Fix soldier request deletion when ship is destroyed (#5989)
+- Forbid soldiers boarding ships on high sea (#6006)
+- Update expedition swimmable directions on every field (#6018)
+- Forbid ships from sailing through too-narrow straits (#6013)
+- Reroute ships on the way to port-under-construction upon port completion (#6045)
+- Misc Naval Warfare Segfault/Assert Fixes (#6066)
+    - Fix assert failure during soldier swapping on a warship with maximal soldier capacity
+    - Transport ships skip updating warship soldier requests and kickouts
+- Make `SoldierList` robust against map object removal (#6087)
+- Make AttackPanel/Window robust against object deletion (#6123)
+- Fix naval battle stacking in complex situations (#6071)
+- Stop ship battles when ship is destroyed (#6099)
+- Garrisoned soldiers shouldn't count towards economy target (#6086)
+- Invasion soldiers conquer portspace for the duration of the invasion (#6115)
+- Warships don't detect own ports as portspaces (#6088)
+- Guard against invalid ship battle situations (#6140)
+- Track warship soldier requests (#6122)
 
 
 ### User Interface
@@ -261,16 +306,39 @@
 - Ask for more information when reporting crashes (CB #4592 / GH #6252)
 - Fix end status text sorting in game summary window (CB #4539 / GH #6197)
 - Fix size assert for very large panels (CB #4652 / GH #6289)
+- Refactor technical info box to handle long lines better (CB #4662 / GH #6299)
+- Allow sending expeditions and warships to specific ports, ships, and notes (#5786)
+- Send message when ship arrives at player-specified destination (#5832)
+- Naval Warfare: Attack UI Refactoring (#5885)
+- Naval Warfare: Attack Anything in Range (#5908)
+- Naval Warfare: Show fleet strength in general statistics (#5926)
+- Disambiguate selectable ship click targets (#5938)
+- Don't refresh inexistent soldier box in warehouse csite window (#5968)
+- Forbid spectators setting ship destination (#6010)
+- Redesign ship healthbar/bonus rendering to fix overflow-hang (#6039)
+- Warship soldier capacity setting enhancements (#6044)
+    - Allow changing soldier capacity and preference while refitting to warship.
+    - Turn "click soldier to send away" info texts into tooltips to make windows narrower.
+- Forbid changing soldier capacity in replays (#6053)
+- Misc sea-fighting-related UI tweaks (#6142)
+    - The attack window now uses bigger icons for ships to display the health bar properly, and also draws ship icons as background.
+    - Clicking and dragging on an empty part of the soldier list drags the window now.
+    - The ship window shows the warship's health.
+    - Fixes the bug with filtering the ship destination dropdown.
+    - Sinking ships show their status text as "Sinking" and their health as zero.
+    - Added an assert so if a very weird, very rare GL race condition is encountered in a debug build we might get a helpful backtrace of all threads.
+- Make naval warfare a game flag, disabled by default (CB #4547 / GH #6205)
+- Don't send "known portspace" messages for ship underway to destination (CB #4655 / GH #6292)
+- Show total number of ships in seafaring stats menu (CB #4685 / GH #6322)
 
 
 ### Internationalization
 
-- String Fixes (#5710, #5782, #5999)
+- String Fixes (#5710, #5782, #5999, CB #4697 / GH #6334)
 - Capitalisation of tribe names (#5910, #5913, #5916)
 - Keep PO and POT files in sync in translations updates (#6027)
 - Translations update CI: Commit pure translations separately (#6064)
 - Make spinbox current value and change-by value translatable separately (CB #4612 / GH #6273)
-
 
 ### Help and Documentation
 
@@ -292,6 +360,10 @@
 - Doc for lua function update_toolbar() matches code (CB #4594 / GH #6254)
 - Extend documentation about attributes of units (GH #6195 / CB #4537)
 - Documentation: place_road() needs a flag, not a field (GH #6262 / CB #4601)
+- Fix documentation of the objectives lua interface (CB #4613 / GH #6274)
+- Lua doc: explain `wl.Game().real_speed` a bit better (CB #4665 / GH #6302)
+- Lua styles documentation (CB #4704 / GH #6341)
+- Add images to theme documentation for fonts and buttons (CB #4695 / GH #6332)
 
 
 ### Editor
@@ -308,6 +380,7 @@
 - Z-Order Map Options Window Above Save Map Window (#5956)
 - Editor Tool Random Gap (#5864)
 - Select info tool after opening history window (#6002)
+- Sanitize suggested teams lineups (CB #4673 / GH #6310)
 
 
 ### Graphics Engine
@@ -400,6 +473,7 @@
 - New Msys dependencies (GH #6281 / CB #4645)
 - Update `download_asio.sh` to asio version 1.28.0 (CB #4616 / GH #6277)
 - MinGW dependency system (CB #4653 / GH #6290)
+- Skip CI workflows where nothing changed (CB #4644 / GH #6257, CB #4672 / GH #6309, GH #6320 / CB #4683)
 
 
 ### Other Issues
@@ -423,6 +497,12 @@
 - Add `.editorconfig` for automatic indentation in many editors (CB #4415 / GH #6019)
 - Update copyright end year to 2024
 - Fix title in test of `string_bformat.lua` of `lua_testsuite.wmf` (CB #4647 / GH #6283)
+- Logic exception handling fixes (#6053): Forward logic thread exceptions to main thread's handler
+- Fix some segfaults related to `Map::calc_distance` (#6135)
+- Deadlock-related improvements (#6139)
+    - Detect and break deadlocks
+    - Refactor NoteThreadSafeFunction handling
+- Correct naval warfare rebasing artifacts (CB #4699)
 
 
 ## Release 1.1

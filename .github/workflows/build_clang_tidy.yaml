@@ -10,7 +10,7 @@ jobs:
       CXX: /usr/bin/clang++
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 1
     - name: Installing dependencies
@@ -24,7 +24,7 @@ jobs:
         cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
         popd
     - name: Restore cache
-      uses: actions/cache/restore@v3
+      uses: actions/cache/restore@v4
       with:
         path: build/clang-tidy-cache
         key: clang-tidy-cache-${{ github.sha }}
@@ -40,7 +40,7 @@ jobs:
         popd
     - name: Save cache
       # We want to save the cache even if the report fails because of failed files
-      uses: actions/cache/save@v3
+      uses: actions/cache/save@v4
       with:
         path: build/clang-tidy-cache
         key: clang-tidy-cache-${{ github.sha }}

@@ -647,8 +647,7 @@ void EditorGameBase::set_road(const FCoords& f,
 	}
 }
 
-/// This unconquers an area. This is only possible, when there is a building
-/// placed on this node.
+/// This unconquers an area.
 void EditorGameBase::unconquer_area(PlayerArea<Area<FCoords>> player_area,
                                     PlayerNumber const destroying_player) {
 	assert(0 <= player_area.x);
@@ -659,11 +658,6 @@ void EditorGameBase::unconquer_area(PlayerArea<Area<FCoords>> player_area,
 	assert(player_area.field < &map()[map().max_index()]);
 	assert(0 < player_area.player_number);
 	assert(player_area.player_number <= map().get_nrplayers());
-
-	//  Here must be a building.
-	assert(
-	   dynamic_cast<const Building&>(*map().get_immovable(player_area)).owner().player_number() ==
-	   player_area.player_number);
 
 	//  step 1: unconquer area of this building
 	do_conquer_area(player_area, false, destroying_player);

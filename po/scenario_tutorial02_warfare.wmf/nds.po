@@ -629,7 +629,7 @@ msgid ""
 "Your soldiers will come from all nearby military buildings. Likewise, the "
 "defenders will come from all nearby military buildings of the enemy and "
 "intercept your forces."
-msgstr "Diene Soldaten komen vun all dienen Soldateree-Boen in de Naberskupp. Vun all Soldateree-Boen in de Naberskupp, de tum Feind hören, komen siene Soldaten un verdedigen sik tegen diene Soldateree."
+msgstr "Diene Soldaten komen vun all dienen Soldateree-Boen in de Naberskupp. Vun all Soldateree-Boen in de Naberskupp, de tum Feind hören, komen siene Soldaten un verteidigen sik tegen diene Soldateree."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:260
 msgid ""

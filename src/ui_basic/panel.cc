@@ -415,6 +415,13 @@ int Panel::do_run() {
 			}
 
 			{
+				// TODO(tothxa): This is overbroad locking. Should be refined, but that needs
+				//               a lot of hunting down problems.
+				//               Since the addition of Lua plugin timers, which run their actions
+				//               in the UI thread, this requires that all Lua entry points are
+				//               guarded first by the kObjects, then by the kLua locks, otherwise
+				//               deadlocks may occur when Lua code calls functions that need
+				//               kObjects, due to the different locking order.
 				current_think_mutex_.reset(new MutexLock(MutexLock::ID::kObjects));
 				do_think();
 				current_think_mutex_.reset();

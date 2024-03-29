@@ -9,16 +9,13 @@ SOURCE_DIR=$DIR/../../
 
 # Check if the SDK for the minimum build target is available.
 # If not, use the one for the installed macOS Version
-OSX_MIN_VERSION="10.7"
+OSX_MIN_VERSION="12.3"
 SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_MIN_VERSION.sdk"
 
 OSX_VERSION=$(sw_vers -productVersion | cut -d . -f 1,2)
-OSX_MINOR=$(sw_vers -productVersion | cut -d . -f 2)
 
 if [ ! -d "$SDK_DIRECTORY" ]; then
-   if [ "$OSX_MINOR" -ge 9 ]; then
-      OSX_MIN_VERSION="10.9"
-   fi
+   OSX_MIN_VERSION=$OSX_VERSION
    SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_VERSION.sdk"
    if [ ! -d "$SDK_DIRECTORY" ]; then
       # If the SDK for the current macOS Version can't be found, use whatever is linked to MacOSX.sdk
@@ -26,7 +23,15 @@ if [ ! -d "$SDK_DIRECTORY" ]; then
    fi
 fi
 
-WLVERSION=`python $DIR/../detect_revision.py`
+PYTHON=python
+if ! which python > /dev/null; then
+   if which python3 > /dev/null; then
+      PYTHON=python3
+   else
+      echo "No python executable found!"
+   fi
+fi
+WLVERSION=`$PYTHON $DIR/../detect_revision.py`
 
 DESTINATION="WidelandsRelease"
 
@@ -57,11 +62,7 @@ function MakeDMG {
    cp $SOURCE_DIR/COPYING  $DESTINATION/COPYING.txt
 
    echo "Creating DMG ..."
-   # if [ "$TYPE" == "Release" ]; then
-      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg"
-   # elif [ "$TYPE" == "Debug" ]; then
-   #  hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}_${TYPE}.dmg"
-   # fi
+   hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg"
 }
 
 function MakeAppPackage {
@@ -76,8 +77,6 @@ function MakeAppPackage {
    cp $SOURCE_DIR/data/images/logos/widelands.icns $DESTINATION/Widelands.app/Contents/Resources/widelands.icns
    ln -s /Applications $DESTINATION/Applications
 
-   # TODO(stonerl/k.halfmann): Check if NSHighResolutionCapable = false; is still neede with #3542
-   # is resolved. This needs an updated SDL2.
    cat > $DESTINATION/Widelands.app/Contents/Info.plist << EOF
 {
    CFBundleName = widelands;
@@ -109,10 +108,9 @@ EOF
    ASANPATH=`dirname $ASANLIB`
 
    echo "Copying and fixing dynamic libraries... "
-   dylibbundler --create-dir --bundle-deps \
-	--fix-file $DESTINATION/Widelands.app/Contents/MacOS/widelands \
-	--dest-dir $DESTINATION/Widelands.app/Contents/libs \
-	--search-path $ASANPATH 
+   $SOURCE_DIR/utils/macos/bundle-dylibs.sh \
+      -l ../libs \
+      $DESTINATION/Widelands.app
 
    echo "Re-sign libraries with an 'ad-hoc signing' see man codesign"
    codesign --sign - --force $DESTINATION/Widelands.app/Contents/libs/*
@@ -129,7 +127,10 @@ function BuildWidelands() {
    echo "FIXED ICU Issue $CMAKE_PREFIX_PATH"
 
    pushd $SOURCE_DIR
-   ./compile.sh $@
+   ./compile.sh \
+      -DCMAKE_OSX_DEPLOYMENT_TARGET:STRING="$OSX_MIN_VERSION" \
+      -DCMAKE_OSX_SYSROOT:PATH="$SDK_DIRECTORY" \
+      $@
    popd
 
    echo "Done building."

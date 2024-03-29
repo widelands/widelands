@@ -353,11 +353,21 @@ std::vector<Soldier*> Warehouse::SoldierControl::present_soldiers() const {
 }
 
 std::vector<Soldier*> Warehouse::SoldierControl::stationed_soldiers() const {
+	// TODO(tothxa): Outside defenders should be tracked. At least AI soldier accounting needs
+	//               this to be correct.
 	return present_soldiers();
 }
 
 std::vector<Soldier*> Warehouse::SoldierControl::associated_soldiers() const {
-	return stationed_soldiers();
+	std::vector<Soldier*> soldiers = stationed_soldiers();
+	Request* sr = warehouse_->soldier_request_.get_request();
+	if (sr != nullptr) {
+		for (const Transfer* t : sr->get_transfers()) {
+			Soldier& s = dynamic_cast<Soldier&>(*t->get_worker());
+			soldiers.push_back(&s);
+		}
+	}
+	return soldiers;
 }
 
 Quantity Warehouse::SoldierControl::min_soldier_capacity() const {

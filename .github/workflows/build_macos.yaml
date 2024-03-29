@@ -8,18 +8,25 @@ jobs:
       matrix:
         config: [debug, release]
         compiler: [clang]
-    name: MacOS ${{ matrix.config }} ${{ matrix.compiler }}
-    runs-on: macos-11
+        arch: [x86, arm64]
+        # Check https://github.com/actions/runner-images#available-images
+        include:
+          - arch: x86
+            os: 12
+          - arch: arm64
+            os: 14
+    name: MacOS ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.arch }}
+    runs-on: macos-${{ matrix.os }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 1
     - name: Installing dependencies
       run: |
         export ICU_ROOT="$(brew --prefix icu4c)" && \
         export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
-        ./install-dependencies.sh homebrew ccache dylibbundler
+        ./install-dependencies.sh homebrew ccache
     - name: Building
       run: |
         mkdir build_wl
@@ -29,10 +36,10 @@ jobs:
         DMGPATH="$(pwd)"
         DMGFILE="$(ls *.dmg)"
         echo "DMG file is: $DMGPATH/$DMGFILE"
-        mv "$DMGFILE" "${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg"
+        mv "$DMGFILE" "${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}-${{ matrix.arch }}.dmg"
 
     - name: Uploading DMG
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
-        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} MacOS 11 AppImage
-        path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg
+        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} MacOS ${{ matrix.os }} ${{ matrix.arch }} AppImage
+        path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}-${{ matrix.arch }}.dmg

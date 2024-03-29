@@ -8,6 +8,7 @@
 # Niektóry <niektory@gmail.com>, 2020
 # Marcin S <dzidek1003@o2.pl>, 2021
 # Antoni Szpikowski <szantek2004@gmail.com>, 2021
+# Karol Zygmunt, 2024
 # 
 msgid ""
 msgstr ""
@@ -15,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-02-01 02:29+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021\n"
+"Last-Translator: Karol Zygmunt, 2024\n"
 "Language-Team: Polish (https://app.transifex.com/widelands/teams/35159/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -153,6 +154,8 @@ msgid ""
 "Now build a sheep farm and use all the wheat to produce at least 50 bales of"
 " wool. Afterwards use the wool to weave cloth in order to build a ship."
 msgstr ""
+"Teraz zbuduj farmę owiec i użyj całej pszenicy do wyprodukowania co najmniej"
+" 50 bel wełny. Potem użyj wełny do wyrobu tkaniny w celu budowy statku."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
@@ -169,6 +172,8 @@ msgid ""
 "Explore the island in the south. Send an expedition from our port to build a"
 " port there. Afterwards, try to find some mining resources."
 msgstr ""
+"Zbadaj południe wyspy. Zbuduj tam port za pomocą ekspedycji. Następnie "
+"przeszukaj góry w celu znalezienia surowców."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid ""
@@ -320,6 +325,11 @@ msgid ""
 "we awoke at noon, nobody was really surprised that all we could see was "
 "sand… although the amount of rocks near our camp was astonishing."
 msgstr ""
+"Znowu, pozostawieni samym sobie na nieznanym wybrzeżu i spaliśmy w cieniu "
+"pod palmami dopóki słońce nie zawisło wysoko na niebie. Boję się, że gdy "
+"obudzimy się w południe nikogo nie zdziwi to, że wszystko co możemy zobaczyć"
+" to piasek... jednakże ilość kamieniu na plaży blisko naszego obozu była "
+"zdumiewająca."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:215
@@ -429,6 +439,10 @@ msgid ""
 "new ship or even have some basic infrastructure to make our lives more "
 "comfortable?"
 msgstr ""
+"Ale jednakże to dobry krok naprzód, nie mogę dojrzeć dostatecznie dużo "
+"miejsca na budynki. Cała wyspa jest pokryta kamieniami. Jak możemy "
+"kiedykolwiek zbudować nowy statek, nie mając nawet podstawowej "
+"infrastruktury, żeby sprawić, aby nasze życia były bardziej komfortowe?"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:269
 msgid "Amalea’s Plan"
@@ -444,6 +458,9 @@ msgid ""
 "Lutius, this may seem very tricky, but we can do it. First of all, we need "
 "patience as well as speed and a plan to succeed in this part of the world."
 msgstr ""
+"Lucjusz, to może wyglądać bardzo podstępnie, ale możemy to zrobić. Po "
+"pierwsze, potrzebujemy cierpliwości tak dobrze jak prędkości i planu "
+"powodzenia w tej części świata."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:275
@@ -461,6 +478,9 @@ msgid ""
 "our new world. We can use them as soon as there will finally be enough space"
 " for buildings."
 msgstr ""
+"Dodatkowo, to mogłoby dać nam trochę granitu i trochę marmuru, żeby zbudować"
+" nasz nowy świat. Możemy ich użyć tak szybko jak będziemy mieli dostatecznie"
+" dużo miejsca na budynki."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:286
 msgid "Amalea’s New Instructions"
@@ -477,6 +497,8 @@ msgid ""
 "Good news from the people, Lutius. I got the message that our first quarry "
 "has started its work today."
 msgstr ""
+"Dobre wieści od ludzi, Lucjuszu. Dostałem wiadomość, że nasz pierwszy "
+"kamieniołom rozpoczął dziś pracę."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:292
@@ -484,6 +506,8 @@ msgid ""
 "Perhaps it would be a good idea to wait until it has cleared some space and "
 "then build up a basic construction material industry."
 msgstr ""
+"Być może to byłby dobry pomysł, żeby poczekać dopóki nie zrobi się troche "
+"miejsca i potem zbudować podstawowe konstrukcje przemysłu materiałowego."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:300
 msgid "Amalea’s Recommendations"

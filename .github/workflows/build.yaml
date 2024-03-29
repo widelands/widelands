@@ -23,12 +23,12 @@ jobs:
       appimage: ${{ steps.changed_files.outputs.appimage }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       if: github.ref == 'refs/heads/master'
       with:
         fetch-depth: 1
     - name: Check for changed files
-      uses: dorny/paths-filter@v2
+      uses: dorny/paths-filter@v3
       id: changed_files
       with:
         # groups to check for changed files (as string, yaml anchors are resolved by the tool)
@@ -117,26 +117,6 @@ jobs:
     needs: [changes, pre-build_checks]
     uses: ./.github/workflows/build_appimage.yaml
 
-  # Dummy check for PRs that all required status checks have either passed or were skipped
-  # (see https://github.com/actions/runner/issues/952 and https://github.com/orgs/community/discussions/9141)
-  summary:
-    name: CI Results Summary
-    # "changes" has to be included in needs here too, because all others are skipped if it fails
-    needs: [changes, pre-build_checks, testsuite, windows, windows-msvc, macos, appimage]
-    if: always() # to check if dependencies have failed or passed
-    runs-on: "ubuntu-latest"
-    steps:
-    - name: Check for failed jobs
-      if: >-
-        contains(needs.*.result, 'failure') ||
-        contains(needs.*.result, 'cancelled')
-      run: |
-        echo "A job failed or was cancelled!"
-        exit 1
-    - name: No step skipped  # Optional, just gives info
-      if: "! contains(needs.*.result, 'skipped')"
-      run: exit 0
-
   dev_release:
     name: Automated development pre-release
     if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' && always() }}
@@ -144,12 +124,12 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 15
           token: '${{ secrets.WIDELANDS_FORMAT_TOKEN }}'
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
       - name: Check missing artifacts
         # This step ensures that the development release always contains an artifact for every platform.
         # artifacts.list lists all attachments of the pre-release. In case a build step failed, we detect

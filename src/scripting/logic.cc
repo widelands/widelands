@@ -41,6 +41,9 @@ namespace {
 // Setup the basic Widelands functions and pushes egbase into the Lua registry
 // so that it is available for all the other Lua functions.
 void setup_for_editor_and_game(lua_State* L, Widelands::EditorGameBase* g) {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
+	MutexLock m(MutexLock::ID::kLua);
 	LuaBases::luaopen_wlbases(L);
 	LuaMaps::luaopen_wlmap(L);
 	LuaUi::luaopen_wlui(L);
@@ -52,6 +55,7 @@ void setup_for_editor_and_game(lua_State* L, Widelands::EditorGameBase* g) {
 
 // Can run script also from the map.
 std::unique_ptr<LuaTable> run_script_maybe_from_map(lua_State* L, const std::string& path) {
+	// run_script locks kLua
 	if (starts_with(path, "map:")) {
 		return run_script(L, path.substr(4), get_egbase(L).map().filesystem());
 	}
@@ -62,6 +66,9 @@ std::unique_ptr<LuaTable> run_script_maybe_from_map(lua_State* L, const std::str
 
 LuaEditorInterface::LuaEditorInterface(Widelands::EditorGameBase* g)
    : factory_(new EditorFactory()) {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
+	MutexLock m(MutexLock::ID::kLua);
 	setup_for_editor_and_game(lua_state_, g);
 	LuaRoot::luaopen_wlroot(lua_state_, true);
 	LuaEditor::luaopen_wleditor(lua_state_);
@@ -86,6 +93,10 @@ std::unique_ptr<LuaTable> LuaEditorInterface::run_script(const std::string& scri
 // The function was designed to simulate the standard math.random function and
 // was therefore copied nearly verbatim from the Lua sources.
 static int L_math_random(lua_State* L) {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
+	MutexLock m(MutexLock::ID::kLua);
+
 	Widelands::Game& game = get_game(L);
 	uint32_t t = game.logic_rand();
 
@@ -117,6 +128,10 @@ static int L_math_random(lua_State* L) {
 }
 
 LuaGameInterface::LuaGameInterface(Widelands::Game* g) : factory_(new GameFactory()) {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
+	MutexLock m(MutexLock::ID::kLua);
+
 	setup_for_editor_and_game(lua_state_, g);
 
 	// Overwrite math.random
@@ -139,18 +154,30 @@ LuaGameInterface::LuaGameInterface(Widelands::Game* g) : factory_(new GameFactor
 }
 
 std::unique_ptr<LuaCoroutine> LuaGameInterface::read_coroutine(FileRead& fr) {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
+	MutexLock m(MutexLock::ID::kLua);
+
 	std::unique_ptr<LuaCoroutine> rv(new LuaCoroutine(nullptr));
 	rv->read(lua_state_, fr);
 	return rv;
 }
 
 void LuaGameInterface::write_coroutine(FileWrite& fw, const LuaCoroutine& cr) {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
+	MutexLock m(MutexLock::ID::kLua);
+
 	cr.write(fw);
 }
 
 void LuaGameInterface::read_global_env(FileRead& fr,
                                        Widelands::MapObjectLoader& mol,
                                        uint32_t size) {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
+	MutexLock m(MutexLock::ID::kLua);
+
 	// Clean out the garbage before loading.
 	lua_gc(lua_state_, LUA_GCCOLLECT, 0);
 
@@ -186,13 +213,25 @@ void LuaGameInterface::read_global_env(FileRead& fr,
 }
 
 void LuaGameInterface::read_textdomain_stack(FileRead& fr) {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
+	MutexLock m(MutexLock::ID::kLua);
+
 	LuaGlobals::read_textdomain_stack(fr, lua_state_);
 }
 void LuaGameInterface::write_textdomain_stack(FileWrite& fw) {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
+	MutexLock m(MutexLock::ID::kLua);
+
 	LuaGlobals::write_textdomain_stack(fw, lua_state_);
 }
 
 uint32_t LuaGameInterface::write_global_env(FileWrite& fw, Widelands::MapObjectSaver& mos) {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
+	MutexLock m(MutexLock::ID::kLua);
+
 	// Clean out the garbage before writing.
 	lua_gc(lua_state_, LUA_GCCOLLECT, 0);
 
@@ -209,6 +248,10 @@ uint32_t LuaGameInterface::write_global_env(FileWrite& fw, Widelands::MapObjectS
 }
 
 std::unique_ptr<LuaTable> LuaGameInterface::get_hook(const std::string& name) {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
+	MutexLock m(MutexLock::ID::kLua);
+
 	lua_getglobal(lua_state_, "hooks");
 	if (lua_isnil(lua_state_, -1)) {
 		lua_pop(lua_state_, 1);
