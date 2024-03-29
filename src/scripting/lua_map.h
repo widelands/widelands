@@ -1438,6 +1438,7 @@ public:
 	int get_workers(lua_State* L);
 	int build_colonization_port(lua_State* L);
 	int make_expedition(lua_State* L);
+	int cancel_expedition(lua_State* L);
 	int refit_to_transport(lua_State* L);
 
 	/*

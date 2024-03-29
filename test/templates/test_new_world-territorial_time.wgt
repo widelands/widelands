@@ -5,8 +5,8 @@ interactive_player="0"
 
 win_condition="territorial_time.lua"
 
-# give some time for the refitted ship to reach the port
-win_condition_duration="4"
+# give enough time for refitting the ship
+win_condition_duration="10"
 
 peaceful="false"
 fogless="false"
