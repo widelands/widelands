@@ -9,6 +9,7 @@
 # Raymond Vetter, 2016
 # Simon Heimberg, 2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018-2021,2024
+# Using User, 2024
 # Venatrix, 2015
 # Elisabeth Jäger, 2015
 # wl-zocker, 2014
@@ -19,7 +20,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-03-07 10:16+0000\n"
 "PO-Revision-Date: 2015-02-03 14:36+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2021,2024\n"
+"Last-Translator: Using User, 2024\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -585,7 +586,7 @@ msgid ""
 "processing economy. But that’s still not everything – most of our soldiers "
 "are quite young and neither have a good weapon nor are they well trained. We"
 " should build up training sites to prepare them for their future tasks."
-msgstr "Unsere Geologen haben noch viele weitere Vorkommen von Eisenerz, Kohle und sogar Gold gefunden. Wir sollten unsere derzeitigen Minen erweitern, sobald unsere Bergleute erfahrener sind. Wir sollten einige weitere Minen und eine verbesserte Nahrungsversorgung bauen. Um unsere Leute immer mit genügend Nahrung zu versorgen. Und eine größere weiterverarbeitende Industrie bauen. Aber das ist noch nicht alles – die meisten unserer Soldaten sind recht jung und haben weder eine gute Waffe noch sind sie gut ausgebildet. Wir sollten Ausbildungsgebäude bauen, um sie auf ihre zukünftigen Aufgaben vorzubereiten."
+msgstr "Unsere Geologen haben noch viele weitere Vorkommen von Eisenerz, Kohle und sogar Gold gefunden. Wir sollten unsere derzeitigen Minen erweitern, sobald unsere Bergleute erfahrener sind. Wir sollten einige weitere Minen und eine verbesserte Nahrungsversorgung bauen, um unsere Leute immer mit genug Nahrung zu versorgen und eine größere weiterverarbeitende Industrie. Aber das ist noch nicht alles – die meisten unserer Soldaten sind recht jung und haben weder eine gute Waffe, noch sind sie gut ausgebildet; wir sollten Ausbildungsgebäude bauen, um sie auf ihre zukünftigen Aufgaben vorzubereiten."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:328
