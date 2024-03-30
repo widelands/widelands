@@ -7041,6 +7041,7 @@ const PropertyType<LuaShip> LuaShip::Properties[] = {
    PROP_RO(LuaShip, destination),
    PROP_RO(LuaShip, state),
    PROP_RO(LuaShip, type),
+   PROP_RO(LuaShip, pending_refit),
    PROP_RW(LuaShip, scouting_direction),
    PROP_RW(LuaShip, island_explore_direction),
    PROP_RW(LuaShip, shipname),
@@ -7157,6 +7158,27 @@ int LuaShip::get_state(lua_State* L) {
 int LuaShip::get_type(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	switch (get(L, egbase)->get_ship_type()) {
+	case Widelands::ShipType::kTransport:
+		lua_pushstring(L, "transport");
+		break;
+	case Widelands::ShipType::kWarship:
+		lua_pushstring(L, "warship");
+		break;
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: pending_refit
+
+      .. versionadded:: 1.3
+
+      (RO) The type the ship is refitting to as :const:`string`: :const:`"transport"` or
+      :const:`"warship"`. If no refit is in progress, then it returns the current type.
+*/
+int LuaShip::get_pending_refit(lua_State* L) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	switch (get(L, egbase)->get_pending_refit()) {
 	case Widelands::ShipType::kTransport:
 		lua_pushstring(L, "transport");
 		break;

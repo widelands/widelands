@@ -39,16 +39,31 @@ run(function()
 
   port:start_refit_to_warship()
 
-  -- 3 minutes to allow the ship to arrive, 5 minutes for the refitting itself
-  timeout = game.time + (3 + 5) * 60 * 1000
+  -- 4 minutes to allow the ship to arrive, we will add the refitting time later
+  timeout = game.time + 4 * 60 * 1000
 
   local has_warship = false
+  local refitting_ship = nil
+  local name = "a ship"
   while not has_warship and game.time < timeout do
-    print(string.bformat("Waiting for ship to refit... time left: %d",
-                         (timeout - game.time) / 1000))
+    print(string.bformat("Waiting for %s to refit... time left: %d",
+                         name, (timeout - game.time) / 1000))
     sleep(5000)
-    for i,ship in ipairs(ships) do
-      if ship.type == "warship" then
+    if refitting_ship == nil then
+      for i,ship in ipairs(ships) do
+        if ship.type == "warship" then
+          has_warship = true
+        else
+          if ship.pending_refit == "warship" then
+            refitting_ship = ship
+            name = ship.shipname
+            timeout = game.time + 6 * 60 * 1000
+            print(string.bformat("Started refitting ship %s", name))
+          end
+        end
+      end
+    else
+      if refitting_ship.type == "warship" then
         has_warship = true
       end
     end
