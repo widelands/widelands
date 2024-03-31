@@ -37,16 +37,6 @@ void PlayerCommand::write_id_and_sender(StreamWrite& ser) {
 	ser.unsigned_8(sender());
 }
 
-PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
-	const uint8_t command_id = des.unsigned_8();
-	GameLogicCommand& cmd = create_correct_queue_command(static_cast<QueueCommandTypes>(command_id));
-	if (upcast(PlayerCommand, pc, &cmd); pc != nullptr) {
-		return pc;
-	}
-	throw wexception(
-	   "Queue_Cmd_Id is not a player command: %u", static_cast<unsigned int>(command_id));
-}
-
 /**
  * Write this player command to a file. Call this from base classes
  */
