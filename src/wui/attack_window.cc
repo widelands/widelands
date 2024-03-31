@@ -521,7 +521,7 @@ void AttackWindow::act_attack() {
 		iplayer_.map_view()->mouse_to_field(target_coordinates_, MapView::Transition::Jump);
 	} else if (Widelands::Building* building = get_building(); building != nullptr) {
 		iplayer_.game().send_player_attack(building->base_flag(), iplayer_.player_number(),
-		                                            attack_panel_.soldiers(), get_allow_conquer());
+		                                   attack_panel_.soldiers(), get_allow_conquer());
 		iplayer_.map_view()->mouse_to_field(building->get_position(), MapView::Transition::Jump);
 	} else if (Widelands::Ship* ship = get_ship(); ship != nullptr) {
 		for (Widelands::Serial serial : attack_panel_.soldiers()) {

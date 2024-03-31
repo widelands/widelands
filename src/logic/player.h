@@ -476,9 +476,9 @@ public:
 	                              std::vector<Soldier*>* soldiers = nullptr,
 	                              uint32_t nr_wanted = std::numeric_limits<uint32_t>::max());
 	void attack(const Flag&,
-	                     PlayerNumber attacker,
-	                     const std::vector<Widelands::Soldier*>&,
-	                     bool allow_conquer);
+	            PlayerNumber attacker,
+	            const std::vector<Widelands::Soldier*>&,
+	            bool allow_conquer);
 
 	uint32_t casualties() const {
 		return casualties_;

@@ -63,9 +63,8 @@ void CmdAttack::execute(Game& game) {
 					}
 				}
 			}
-			log_warn_time(
-			   game.get_gametime(),
-			   "Cmd_Attack::execute: wrong player target not seen or not hostile.\n");
+			log_warn_time(game.get_gametime(),
+			              "Cmd_Attack::execute: wrong player target not seen or not hostile.\n");
 		}
 	}
 }
@@ -96,8 +95,7 @@ void CmdAttack::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol)
 			}
 			allow_conquer_ = (fr.unsigned_8() != 0u);
 		} else {
-			throw UnhandledVersionError(
-			   "CmdAttack", packet_version, kCurrentPacketVersionCmdAttack);
+			throw UnhandledVersionError("CmdAttack", packet_version, kCurrentPacketVersionCmdAttack);
 		}
 	} catch (const WException& e) {
 		throw GameDataError("enemy flag action: %s", e.what());

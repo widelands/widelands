@@ -43,7 +43,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 	if (upcast(PlayerCommand, pc, &cmd); pc != nullptr) {
 		return pc;
 	}
-	throw wexception("Queue_Cmd_Id is not a player command: %u", static_cast<unsigned int>(command_id));
+	throw wexception(
+	   "Queue_Cmd_Id is not a player command: %u", static_cast<unsigned int>(command_id));
 }
 
 /**

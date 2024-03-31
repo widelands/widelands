@@ -997,7 +997,8 @@ void FieldActionWindow::act_build(Widelands::DescriptionIndex idx) {
 	upcast(Game, game, &ibase().egbase());
 	upcast(InteractivePlayer, iaplayer, &ibase());
 
-	game->send_player_build_building(iaplayer->player_number(), node_, Widelands::DescriptionIndex(idx));
+	game->send_player_build_building(
+	   iaplayer->player_number(), node_, Widelands::DescriptionIndex(idx));
 	iaplayer->set_flag_to_connect(game->map().br_n(node_));
 	reset_mouse_and_die();
 }

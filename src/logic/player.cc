@@ -1306,9 +1306,9 @@ uint32_t Player::find_attack_soldiers(const Flag& flag,
 }
 
 void Player::attack(const Flag& flag,
-                             PlayerNumber const attacker,
-                             const std::vector<Widelands::Soldier*>& soldiers,
-                             const bool allow_conquer) {
+                    PlayerNumber const attacker,
+                    const std::vector<Widelands::Soldier*>& soldiers,
+                    const bool allow_conquer) {
 	if (attacker != player_number()) {
 		log_warn_time(egbase().get_gametime(), "Player (%d) is not the sender of an attack (%d)\n",
 		              attacker, player_number());

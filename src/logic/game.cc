@@ -1070,7 +1070,9 @@ void Game::send_player_dismantle(PlayerImmovable& pi, bool keep_wares) {
 	   new CmdDismantleBuilding(get_gametime(), pi.owner().player_number(), pi, keep_wares));
 }
 
-void Game::send_player_build_building(int32_t const pid, const Coords& coords, DescriptionIndex const id) {
+void Game::send_player_build_building(int32_t const pid,
+                                      const Coords& coords,
+                                      DescriptionIndex const id) {
 	assert(descriptions().building_exists(id));
 	send_player_command(new CmdBuildBuilding(get_gametime(), pid, coords, id));
 }
@@ -1160,9 +1162,9 @@ void Game::send_player_change_soldier_capacity(Building& b, int32_t const val) {
 }
 
 void Game::send_player_attack(const Flag& flag,
-                                       PlayerNumber const who_attacks,
-                                       const std::vector<Serial>& soldiers,
-                                       const bool allow_conquer) {
+                              PlayerNumber const who_attacks,
+                              const std::vector<Serial>& soldiers,
+                              const bool allow_conquer) {
 	for (Widelands::Coords& coords : flag.get_building()->get_positions(*this)) {
 		if (player(who_attacks).is_seeing(Map::get_index(coords, map().get_width()))) {
 			send_player_command(

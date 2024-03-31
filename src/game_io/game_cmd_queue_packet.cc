@@ -58,8 +58,8 @@ void GameCmdQueuePacket::read(FileSystem& fs, Game& game, MapObjectLoader* const
 				item.category = fr.signed_32();
 				item.serial = fr.unsigned_32();
 
-				GameLogicCommand& cmd = create_correct_queue_command(
-				   static_cast<QueueCommandTypes>(packet_id));
+				GameLogicCommand& cmd =
+				   create_correct_queue_command(static_cast<QueueCommandTypes>(packet_id));
 				cmd.read(fr, game, *ol);
 
 				item.cmd = &cmd;

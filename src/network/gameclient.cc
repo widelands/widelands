@@ -1117,7 +1117,8 @@ void GameClient::handle_syncrequest(RecvPacket& packet) {
 	}
 	const Time time(packet.unsigned_32());
 	d->time.receive(time);
-	d->game->enqueue_command(new Widelands::CmdNetCheckSync(time, [this] { sync_report_callback(); }));
+	d->game->enqueue_command(
+	   new Widelands::CmdNetCheckSync(time, [this] { sync_report_callback(); }));
 	d->game->report_sync_request();
 }
 

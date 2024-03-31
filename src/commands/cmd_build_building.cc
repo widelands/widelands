@@ -56,7 +56,8 @@ void CmdBuildBuilding::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoade
 			bi = fr.unsigned_16();
 			coords = read_coords_32(&fr, egbase.map().extent());
 		} else {
-			throw UnhandledVersionError("CmdBuildBuilding", packet_version, kCurrentPacketVersionCmdBuildBuilding);
+			throw UnhandledVersionError(
+			   "CmdBuildBuilding", packet_version, kCurrentPacketVersionCmdBuildBuilding);
 		}
 
 	} catch (const WException& e) {

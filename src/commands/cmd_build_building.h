@@ -26,7 +26,10 @@ namespace Widelands {
 
 struct CmdBuildBuilding : public PlayerCommand {
 	CmdBuildBuilding() = default;  // For savegame loading
-	CmdBuildBuilding(const Time& init_duetime, const int32_t p, const Coords& c, const DescriptionIndex i)
+	CmdBuildBuilding(const Time& init_duetime,
+	                 const int32_t p,
+	                 const Coords& c,
+	                 const DescriptionIndex i)
 	   : PlayerCommand(init_duetime, p), coords(c), bi(i) {
 	}
 
