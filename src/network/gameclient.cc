@@ -27,7 +27,7 @@
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "build_info.h"
-#include "commands/command.h"
+#include "commands/cmd_net_check_sync.h"
 #include "config.h"
 #include "game_io/game_loader.h"
 #include "io/fileread.h"
@@ -1117,7 +1117,7 @@ void GameClient::handle_syncrequest(RecvPacket& packet) {
 	}
 	const Time time(packet.unsigned_32());
 	d->time.receive(time);
-	d->game->enqueue_command(new CmdNetCheckSync(time, [this] { sync_report_callback(); }));
+	d->game->enqueue_command(new Widelands::CmdNetCheckSync(time, [this] { sync_report_callback(); }));
 	d->game->report_sync_request();
 }
 

@@ -22,10 +22,10 @@
 
 #include <SDL_timer.h>
 
+#include "commands/cmd_replay_end.h"
 #include "logic/game.h"
 #include "logic/playersmanager.h"
 #include "logic/replay.h"
-#include "ui_basic/messagebox.h"
 #include "wui/interactive_base.h"
 
 ReplayGameController::ReplayGameController(Widelands::Game& game)
@@ -55,8 +55,9 @@ void ReplayGameController::think() {
 		}
 
 		if (replayreader_->end_of_replay()) {
+			time_ = game_.get_gametime();
 			replayreader_.reset(nullptr);
-			game_.enqueue_command(new CmdReplayEnd(time_ = game_.get_gametime()));
+			game_.enqueue_command(new Widelands::CmdReplayEnd(time_));
 		}
 	}
 }
@@ -91,24 +92,6 @@ bool ReplayGameController::is_paused() {
 
 void ReplayGameController::set_paused(bool const paused) {
 	paused_ = paused;
-}
-
-void ReplayGameController::CmdReplayEnd::execute(Widelands::Game& game) {
-	game.game_controller()->set_desired_speed(0);
-
-	// Need to pull this out into a variable to make the includes script happy
-	InteractiveBase* i = game.get_ibase();
-	assert(i != nullptr);
-	UI::WLMessageBox mmb(i, UI::WindowStyle::kWui, _("End of Replay"),
-	                     _("The end of the replay has been reached and the game has "
-	                       "been paused. You may unpause the game and continue watching "
-	                       "if you want to."),
-	                     UI::WLMessageBox::MBoxType::kOk);
-	mmb.run<UI::Panel::Returncodes>();
-}
-
-Widelands::QueueCommandTypes ReplayGameController::CmdReplayEnd::id() const {
-	return Widelands::QueueCommandTypes::kReplayEnd;
 }
 
 void ReplayGameController::report_result(uint8_t p_nr,

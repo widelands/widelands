@@ -84,25 +84,6 @@ struct NetAddress {
 	uint16_t port;
 };
 
-using SyncReportCallback = std::function<void()>;
-
-/**
- * This non-gamelogic command is used by \ref GameHost and \ref GameClient
- * to schedule taking a synchronization hash.
- */
-struct CmdNetCheckSync : public Widelands::Command {
-	CmdNetCheckSync(const Time& dt, SyncReportCallback);
-
-	void execute(Widelands::Game&) override;
-
-	[[nodiscard]] Widelands::QueueCommandTypes id() const override {
-		return Widelands::QueueCommandTypes::kNetCheckSync;
-	}
-
-private:
-	SyncReportCallback callback_;
-};
-
 /**
  * Keeping track of network time: This class answers the question of how
  * far the local simulation time should proceed, given the history of network

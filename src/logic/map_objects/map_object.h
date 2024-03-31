@@ -508,41 +508,6 @@ private:
 	ObjectPointer m;
 };
 
-struct CmdDestroyMapObject : public GameLogicCommand {
-	CmdDestroyMapObject() : GameLogicCommand(Time()) {
-	}  ///< For savegame loading
-	CmdDestroyMapObject(const Time&, MapObject&);
-	void execute(Game&) override;
-
-	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
-	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
-
-	[[nodiscard]] QueueCommandTypes id() const override {
-		return QueueCommandTypes::kDestroyMapObject;
-	}
-
-private:
-	Serial obj_serial{0U};
-};
-
-struct CmdAct : public GameLogicCommand {
-	CmdAct() : GameLogicCommand(Time()) {
-	}  ///< For savegame loading
-	CmdAct(const Time& t, MapObject&, int32_t a);
-
-	void execute(Game&) override;
-
-	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
-	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
-
-	[[nodiscard]] QueueCommandTypes id() const override {
-		return QueueCommandTypes::kAct;
-	}
-
-private:
-	Serial obj_serial{0U};
-	int32_t arg{0};
-};
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H

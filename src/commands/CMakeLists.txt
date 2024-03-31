@@ -1,5 +1,7 @@
 wl_library(commands
   SRCS
+    cmd_act.cc
+    cmd_act.h
     cmd_attack.cc
     cmd_attack.h
     cmd_build_building.cc
@@ -24,6 +26,8 @@ wl_library(commands
     cmd_change_training_options.h
     cmd_delete_message.cc
     cmd_delete_message.h
+    cmd_destroy_map_object.cc
+    cmd_destroy_map_object.h
     cmd_diplomacy.cc
     cmd_diplomacy.h
     cmd_dismantle_building.cc
@@ -52,6 +56,8 @@ wl_library(commands
     cmd_message_set_status_archived.h
     cmd_message_set_status_read.cc
     cmd_message_set_status_read.h
+    cmd_net_check_sync.cc
+    cmd_net_check_sync.h
     cmd_pick_custom_starting_position.cc
     cmd_pick_custom_starting_position.h
     cmd_pinned_note.cc
@@ -60,6 +66,12 @@ wl_library(commands
     cmd_propose_trade.h
     cmd_queue.cc
     cmd_queue.h
+    cmd_replay_end.cc
+    cmd_replay_end.h
+    cmd_replay_sync_read.cc
+    cmd_replay_sync_read.h
+    cmd_replay_sync_write.cc
+    cmd_replay_sync_write.h
     cmd_set_input_max_fill.cc
     cmd_set_input_max_fill.h
     cmd_set_soldier_preference.cc
@@ -104,7 +116,9 @@ wl_library(commands
     base
     base_exceptions
     base_macros
+    base_md5
     base_times
+    build_info
     economy # TODO(GunChleoc): Circular dependency
     graphic_color
     graphic_text_layout
@@ -121,5 +135,6 @@ wl_library(commands
     scripting_coroutine
     scripting_logic # TODO(GunChleoc): Circular dependency
     scripting_lua_table
+    ui_basic
     wui
 )

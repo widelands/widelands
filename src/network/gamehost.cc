@@ -36,7 +36,7 @@
 #include "base/wexception.h"
 #include "build_info.h"
 #include "chat/chat.h"
-#include "commands/command.h"
+#include "commands/cmd_net_check_sync.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
 #include "io/fileread.h"
@@ -2063,7 +2063,7 @@ void GameHost::request_sync_reports() {
 	broadcast(packet);
 
 	d->game->enqueue_command(
-	   new CmdNetCheckSync(d->syncreport_time, [this] { sync_report_callback(); }));
+	   new Widelands::CmdNetCheckSync(d->syncreport_time, [this] { sync_report_callback(); }));
 
 	committed_network_time(d->syncreport_time);
 }

@@ -70,7 +70,6 @@ wl_library(logic_game_controller
     logic
     commands
     logic_game_settings
-    ui_basic
     widelands_options
     wui
 )

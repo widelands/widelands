@@ -19,6 +19,7 @@
 #include "commands/queue_cmd_ids.h"
 
 #include "base/wexception.h"
+#include "commands/cmd_act.h"
 #include "commands/cmd_attack.h"
 #include "commands/cmd_build_building.h"
 #include "commands/cmd_build_flag.h"
@@ -31,6 +32,7 @@
 #include "commands/cmd_change_soldier_capacity.h"
 #include "commands/cmd_change_training_options.h"
 #include "commands/cmd_delete_message.h"
+#include "commands/cmd_destroy_map_object.h"
 #include "commands/cmd_diplomacy.h"
 #include "commands/cmd_dismantle_building.h"
 #include "commands/cmd_drop_soldier.h"
