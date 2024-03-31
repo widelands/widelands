@@ -192,7 +192,8 @@ GameLogicCommand& create_correct_queue_command(QueueCommandTypes const id) {
 
 PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 	const uint8_t command_id = des.unsigned_8();
-	GameLogicCommand& cmd = do_create_correct_queue_command<StreamRead&>(static_cast<QueueCommandTypes>(command_id), des);
+	GameLogicCommand& cmd =
+	   do_create_correct_queue_command<StreamRead&>(static_cast<QueueCommandTypes>(command_id), des);
 	if (upcast(PlayerCommand, pc, &cmd); pc != nullptr) {
 		return pc;
 	}
