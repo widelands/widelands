@@ -32,7 +32,7 @@ namespace Widelands {
 class EditorGameBase;
 class Game;
 class MapObjectLoader;
-class MapObjectSaver;
+struct MapObjectSaver;
 
 /**
  * A command that is supposed to be executed at a certain gametime.
