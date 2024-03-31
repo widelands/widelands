@@ -25,9 +25,9 @@
 
 #include "base/string.h"
 #include "base/wexception.h"
+#include "commands/command.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
-#include "logic/cmd_queue.h"
 #include "network/network_protocol.h"
 
 constexpr size_t kNetworkBufferSize = 512;

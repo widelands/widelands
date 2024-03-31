@@ -21,7 +21,7 @@
 
 #include <memory>
 
-#include "logic/cmd_queue.h"
+#include "commands/command.h"
 #include "logic/game_controller.h"
 
 namespace Widelands {

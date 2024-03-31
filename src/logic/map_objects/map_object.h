@@ -22,11 +22,11 @@
 #include <atomic>
 
 #include "base/macros.h"
+#include "commands/command.h"
 #include "graphic/animation/animation.h"
 #include "graphic/animation/diranimations.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
-#include "logic/cmd_queue.h"
 #include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/map_object_type.h"
 #include "logic/map_objects/tribes/training_attribute.h"
