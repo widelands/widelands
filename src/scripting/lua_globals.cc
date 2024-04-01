@@ -460,7 +460,7 @@ static int L_play_sound(lua_State* L) {
 
 	const FxId fx = SoundHandler::register_fx(SoundType::kAmbient, luaL_checkstring(L, 1));
 
-	const int32_t priority = nargs < 2 ? (kFxMaximumPriority / 2) : (luaL_checknumber(L, 2) * 100);
+	const int32_t priority = nargs < 2 ? (kFxMaximumPriority / 2) : static_cast<int32_t>(luaL_checknumber(L, 2) * 100);
 	if (priority < kFxPriorityLowest || priority > kFxMaximumPriority) {
 		report_error(L, "Priority %f%% is out of bounds %f..%f", priority / 100.0,
 		             kFxPriorityLowest / 100.0, kFxMaximumPriority / 100.0);
