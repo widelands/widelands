@@ -931,7 +931,8 @@ bool Panel::handle_key(bool down, SDL_Keysym code) {
 			return true;
 		}
 
-		if (matches_shortcut(KeyboardShortcut::kCommonContextMenu, code) && show_default_context_menu(Vector2i::zero())) {
+		if (matches_shortcut(KeyboardShortcut::kCommonContextMenu, code) &&
+		    show_default_context_menu(Vector2i::zero())) {
 			return true;
 		}
 
@@ -1808,11 +1809,16 @@ void Panel::handle_hyperlink(const std::string& action) {
 struct ContextMenu : public Listselect<Panel::ContentMenuEntry> {
 	using Base = Listselect<Panel::ContentMenuEntry>;
 
-	ContextMenu(UI::Panel* context_parent, UI::Panel* owner, Vector2i pos, PanelStyle ps, const std::vector<ContentMenuEntry>& entries)
-	: Base(context_parent, "context_menu", pos.x, pos.y, 0, 0, ps, ListselectLayout::kDropdown), owner_(owner)
-	{
+	ContextMenu(UI::Panel* context_parent,
+	            UI::Panel* owner,
+	            Vector2i pos,
+	            PanelStyle ps,
+	            const std::vector<ContentMenuEntry>& entries)
+	   : Base(context_parent, "context_menu", pos.x, pos.y, 0, 0, ps, ListselectLayout::kDropdown),
+	     owner_(owner) {
 		for (const ContentMenuEntry& entry : entries) {
-			add(entry.descname, entry, entry.icon, false, entry.tooltip, entry.shortcut, 0, entry.enable);
+			add(entry.descname, entry, entry.icon, false, entry.tooltip, entry.shortcut, 0,
+			    entry.enable);
 		}
 
 		set_z(ZOrder::kDropdown);

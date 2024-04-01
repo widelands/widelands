@@ -56,7 +56,8 @@ BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
                                                                          Align::kLeft),
      indent(i),
      enable(e) {
-	rendered_name = UI::g_fh->render(as_richtext_paragraph(richtext_escape(name), enable ? style.enabled() : style.disabled()));
+	rendered_name = UI::g_fh->render(
+	   as_richtext_paragraph(richtext_escape(name), enable ? style.enabled() : style.disabled()));
 	rendered_hotkey =
 	   UI::g_fh->render(as_richtext_paragraph(richtext_escape(hotkey_text), style.hotkey()));
 }
@@ -163,7 +164,8 @@ void BaseListselect::add(const std::string& name,
                          const std::string& hotkey,
                          const unsigned indent,
                          const bool enable) {
-	EntryRecord* er = new EntryRecord(name, entry, pic, tooltip_text, hotkey, indent, enable, table_style());
+	EntryRecord* er =
+	   new EntryRecord(name, entry, pic, tooltip_text, hotkey, indent, enable, table_style());
 
 	int entry_height = lineheight_;
 	if (pic != nullptr) {

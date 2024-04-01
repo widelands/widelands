@@ -369,13 +369,24 @@ std::pair<uint32_t, uint32_t> AbstractTextInputPanel::Data::paragraph_boundary(u
 }
 
 bool AbstractTextInputPanel::show_default_context_menu(Vector2i pos) {
-	show_context_menu(pos, {
-		{_("Cut"), _("Cut the selected text to the clipboard"), shortcut_string_for(KeyboardShortcut::kCommonTextCut, false), nullptr, d_->mode == Data::Mode::kSelection, [this]() { handle_cut(); } },
-		{_("Copy"), _("Copy the selected text to the clipboard"), shortcut_string_for(KeyboardShortcut::kCommonTextCopy, false), nullptr, d_->mode == Data::Mode::kSelection, [this]() { handle_copy(); }},
-		{_("Paste"), _("Paste the clipboard content"), shortcut_string_for(KeyboardShortcut::kCommonTextPaste, false), nullptr, SDL_HasClipboardText() != 0, [this]() { handle_paste(); }},
-		{_("Delete"), _("Delete the selected text"), shortcut_string_for(keysym(SDLK_DELETE), false), nullptr, d_->mode == Data::Mode::kSelection, [this]() { delete_selected_text(); }},
-		{_("Select All"), _("Select the entire text"), shortcut_string_for(KeyboardShortcut::kCommonSelectAll, false), nullptr, true, [this]() { handle_select_all(); } },
-	});
+	show_context_menu(
+	   pos, {
+	           {_("Cut"), _("Cut the selected text to the clipboard"),
+	            shortcut_string_for(KeyboardShortcut::kCommonTextCut, false), nullptr,
+	            d_->mode == Data::Mode::kSelection, [this]() { handle_cut(); }},
+	           {_("Copy"), _("Copy the selected text to the clipboard"),
+	            shortcut_string_for(KeyboardShortcut::kCommonTextCopy, false), nullptr,
+	            d_->mode == Data::Mode::kSelection, [this]() { handle_copy(); }},
+	           {_("Paste"), _("Paste the clipboard content"),
+	            shortcut_string_for(KeyboardShortcut::kCommonTextPaste, false), nullptr,
+	            SDL_HasClipboardText() != 0, [this]() { handle_paste(); }},
+	           {_("Delete"), _("Delete the selected text"),
+	            shortcut_string_for(keysym(SDLK_DELETE), false), nullptr,
+	            d_->mode == Data::Mode::kSelection, [this]() { delete_selected_text(); }},
+	           {_("Select All"), _("Select the entire text"),
+	            shortcut_string_for(KeyboardShortcut::kCommonSelectAll, false), nullptr, true,
+	            [this]() { handle_select_all(); }},
+	        });
 	return true;
 }
 

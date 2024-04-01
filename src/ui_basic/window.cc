@@ -843,24 +843,31 @@ bool Window::handle_mousemove(
 }
 
 bool Window::show_default_context_menu(Vector2i pos) {
-	show_context_menu(pos, {
-		{is_minimal_ ? _("Restore") : _("Minimize"), is_minimal_ ? _("Unminimize the window") : _("Minimize the window"), std::string(), nullptr, true, [this]() {
-			if (is_minimal_) {
-				restore();
-			} else {
-				minimize();
-			}
-		}},
-		{pinned_ ? _("Unpin") : _("Pin"), pinned_ ? _("Unpin the window") : _("Pin the window"), std::string(), nullptr, true, [this]() {
-			pinned_ = !pinned_;
-			update_toolbar_buttons();
-		}},
-		{_("Close"), _("Close the window"), std::string(), nullptr, !pinned_, [this]() {
-			if (!pinned_) {
-				clicked_button_close();
-			}
-		}},
-	});
+	show_context_menu(
+	   pos, {
+	           {is_minimal_ ? _("Restore") : _("Minimize"),
+	            is_minimal_ ? _("Unminimize the window") : _("Minimize the window"), std::string(),
+	            nullptr, true,
+	            [this]() {
+		            if (is_minimal_) {
+			            restore();
+		            } else {
+			            minimize();
+		            }
+	            }},
+	           {pinned_ ? _("Unpin") : _("Pin"),
+	            pinned_ ? _("Unpin the window") : _("Pin the window"), std::string(), nullptr, true,
+	            [this]() {
+		            pinned_ = !pinned_;
+		            update_toolbar_buttons();
+	            }},
+	           {_("Close"), _("Close the window"), std::string(), nullptr, !pinned_,
+	            [this]() {
+		            if (!pinned_) {
+			            clicked_button_close();
+		            }
+	            }},
+	        });
 	return true;
 }
 
