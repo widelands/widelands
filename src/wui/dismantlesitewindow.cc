@@ -50,11 +50,14 @@ void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wante
 	box.add_space(8);
 
 	// Add the wares queue
+	dropout_queues_.reserve(dismantle_site->nr_dropout_waresqueues());
 	for (uint32_t i = 0; i < dismantle_site->nr_dropout_waresqueues(); ++i) {
-		subbox.add(new InputQueueDisplay(&subbox, *ibase(), *dismantle_site,
+		InputQueueDisplay* iqd = new InputQueueDisplay(&subbox, *ibase(), *dismantle_site,
 		                                 *dismantle_site->get_dropout_waresqueue(i), true, false,
-		                                 priority_collapsed()),
-		           UI::Box::Resizing::kFullSize);
+		                                 priority_collapsed());
+		iqd->set_max_icons(20);
+		dropout_queues_.push_back(iqd);
+		subbox.add(iqd, UI::Box::Resizing::kFullSize);
 	}
 	for (uint32_t i = 0; i < dismantle_site->nr_consume_waresqueues(); ++i) {
 		subbox.add(new InputQueueDisplay(&subbox, *ibase(), *dismantle_site,
@@ -69,6 +72,22 @@ void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wante
 
 	think();
 	initialization_complete();
+}
+
+void DismantleSiteWindow::draw(RenderTarget& rt) {
+	BuildingWindow::draw(rt);
+
+	for (InputQueueDisplay* iqd : dropout_queues_) {
+		if (iqd->is_visible()) {
+			int x = 0;
+			int y = 0;
+			for (UI::Panel* panel = iqd; panel != this; panel = panel->get_parent()) {
+				x += panel->get_x();
+				y += panel->get_y();
+			}
+			rt.brighten_rect(Recti(x, y, iqd->get_w(), iqd->get_h()), -16);
+		}
+	}
 }
 
 /*
