@@ -252,7 +252,12 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                                               settings_->ware_queues.at(index_).max_fill),
      max_icons_(nr_icons_),
      icons_(nr_icons_, nullptr),
-     total_fill_(&hbox_, UI::PanelStyle::kWui, "total_fill", UI::FontStyle::kWuiLabel, std::string(), UI::Align::kRight),
+     total_fill_(&hbox_,
+                 UI::PanelStyle::kWui,
+                 "total_fill",
+                 UI::FontStyle::kWuiLabel,
+                 std::string(),
+                 UI::Align::kRight),
      fill_index_under_mouse_(-1) {
 
 	assert((queue_ == nullptr) ^ (settings_ == nullptr));
@@ -675,7 +680,8 @@ void InputQueueDisplay::think() {
 		icons_[i]->set_grey_out(i >= real_fill);
 		icons_[i]->set_grey_out_color(i < real_fill + nr_coming ? kColorComing : kColorMissing);
 	}
-	total_fill_.set_text(max_fill > max_icons_ ? format_l(_("+%u"), max_fill - max_icons_) : std::string());
+	total_fill_.set_text(max_fill > max_icons_ ? format_l(_("+%u"), max_fill - max_icons_) :
+                                                std::string());
 
 	if (has_priority_) {
 		const Widelands::WarePriority& p =                                     // NOLINT

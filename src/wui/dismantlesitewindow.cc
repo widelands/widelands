@@ -53,8 +53,8 @@ void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wante
 	dropout_queues_.reserve(dismantle_site->nr_dropout_waresqueues());
 	for (uint32_t i = 0; i < dismantle_site->nr_dropout_waresqueues(); ++i) {
 		InputQueueDisplay* iqd = new InputQueueDisplay(&subbox, *ibase(), *dismantle_site,
-		                                 *dismantle_site->get_dropout_waresqueue(i), true, false,
-		                                 priority_collapsed());
+		                                               *dismantle_site->get_dropout_waresqueue(i),
+		                                               true, false, priority_collapsed());
 		iqd->set_max_icons(20);
 		dropout_queues_.push_back(iqd);
 		subbox.add(iqd, UI::Box::Resizing::kFullSize);
