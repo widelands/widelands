@@ -462,7 +462,8 @@ static int L_play_sound(lua_State* L) {
 
 	const int32_t priority = nargs < 2 ? 5000 : (luaL_checknumber(L, 2) * 100);
 	if (priority < kFxPriorityLowest || priority > kFxMaximumPriority) {
-		report_error(L, "Priority %f%% is out of bounds %f..%f", priority / 100.f, kFxPriorityLowest / 100.f, kFxMaximumPriority / 100.f);
+		report_error(L, "Priority %f%% is out of bounds %f..%f", priority / 100.f,
+		             kFxPriorityLowest / 100.f, kFxMaximumPriority / 100.f);
 	}
 
 	const bool allow_multiple = nargs < 3 || luaL_checkboolean(L, 3);
@@ -471,7 +472,8 @@ static int L_play_sound(lua_State* L) {
 		g_sh->play_fx(SoundType::kAmbient, fx, priority, allow_multiple);
 	} else {
 		LuaMaps::LuaField* coords = *get_user_class<LuaMaps::LuaField>(L, 4);
-		Notifications::publish(NoteSound(SoundType::kAmbient, fx, coords->coords(), priority, allow_multiple));
+		Notifications::publish(
+		   NoteSound(SoundType::kAmbient, fx, coords->coords(), priority, allow_multiple));
 	}
 
 	return 0;
