@@ -33,6 +33,7 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
 #include "sound/sound_handler.h"
+#include "ui_basic/listselect.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 
@@ -689,8 +690,13 @@ void Panel::set_visible(bool const on) {
 	}
 
 	set_flag(pf_visible, on);
-	if (!on && (parent_ != nullptr) && parent_->focus_ == this) {
-		parent_->focus_ = nullptr;
+	if (!on) {
+		if ((parent_ != nullptr) && parent_->focus_ == this) {
+			parent_->focus_ = nullptr;
+		}
+		if (Panel* cm = find_context_menu(); cm != nullptr) {
+			cm->die();
+		}
 	}
 	if (parent_ != nullptr) {
 		parent_->on_visibility_changed();
@@ -871,11 +877,16 @@ void Panel::handle_mousein(bool /* inside */) {
  *
  * \return true if the mouseclick was processed, false otherwise
  */
-bool Panel::handle_mousepress(const uint8_t btn, int32_t /* x */, int32_t /* y */) {
+bool Panel::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
+	if (btn == SDL_BUTTON_RIGHT && show_default_context_menu(Vector2i(x, y))) {
+		return true;
+	}
+
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
 		clicked();
 	}
+
 	return false;
 }
 
@@ -919,6 +930,11 @@ bool Panel::handle_key(bool down, SDL_Keysym code) {
 			tooltip_fixed_pos_ = Vector2i::invalid();
 			return true;
 		}
+
+		if (matches_shortcut(KeyboardShortcut::kCommonContextMenu, code) && show_default_context_menu(Vector2i::zero())) {
+			return true;
+		}
+
 		switch (code.sym) {
 		case SDLK_TAB:
 			return handle_tab_pressed((code.mod & KMOD_SHIFT) != 0);
@@ -1323,6 +1339,15 @@ bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	}
 	x -= lborder_;
 	y -= tborder_;
+
+	if (Panel* cm = find_context_menu(); cm != nullptr) {
+		for (Panel* p = cm; p != this; p = p->get_parent()) {
+			x -= p->get_x();
+			y -= p->get_y();
+		}
+		return cm->do_mousepress(btn, x, y);
+	}
+
 	if (get_flag(pf_top_on_click)) {
 		move_to_top();
 	}
@@ -1408,6 +1433,10 @@ bool Panel::do_key(bool const down, SDL_Keysym const code) {
 		return false;
 	}
 
+	if (Panel* cm = find_context_menu(); cm != nullptr && cm->do_key(down, code)) {
+		return true;
+	}
+
 	if ((focus_ != nullptr) && focus_->do_key(down, code)) {
 		return true;
 	}
@@ -1457,6 +1486,10 @@ bool Panel::do_textinput(const std::string& text) {
 		return false;
 	}
 
+	if (Panel* cm = find_context_menu(); cm != nullptr && cm->do_textinput(text)) {
+		return true;
+	}
+
 	if ((focus_ != nullptr) && focus_->do_textinput(text)) {
 		return true;
 	}
@@ -1496,8 +1529,25 @@ bool Panel::get_key_state(const SDL_Scancode key) const {
 
 UI::Panel* Panel::get_open_dropdown() {
 	for (Panel* child = first_child_; child != nullptr; child = child->next_) {
-		if (UI::Panel* dd = child->get_open_dropdown()) {
+		if (UI::Panel* dd = child->get_open_dropdown(); dd != nullptr) {
 			return dd;
+		}
+	}
+
+	if (Panel* cm = find_context_menu(); cm != nullptr) {
+		return cm;
+	}
+
+	return nullptr;
+}
+
+Panel* Panel::find_context_menu() {
+	if (context_menu_ != nullptr) {
+		return context_menu_;
+	}
+	for (Panel* child = first_child_; child != nullptr; child = child->next_) {
+		if (UI::Panel* cm = child->find_context_menu(); cm != nullptr) {
+			return cm;
 		}
 	}
 	return nullptr;
@@ -1753,6 +1803,82 @@ bool Panel::draw_tooltip(const std::string& text, const PanelStyle style, Vector
 
 void Panel::handle_hyperlink(const std::string& action) {
 	throw wexception("Panel %s: Invalid hyperlink action '%s'", name_.c_str(), action.c_str());
+}
+
+struct ContextMenu : public Listselect<Panel::ContentMenuEntry> {
+	using Base = Listselect<Panel::ContentMenuEntry>;
+
+	ContextMenu(UI::Panel* context_parent, UI::Panel* owner, Vector2i pos, PanelStyle ps, const std::vector<ContentMenuEntry>& entries)
+	: Base(context_parent, "context_menu", pos.x, pos.y, 0, 0, ps, ListselectLayout::kDropdown), owner_(owner)
+	{
+		for (const ContentMenuEntry& entry : entries) {
+			add(entry.descname, entry, entry.icon, false, entry.tooltip, entry.shortcut, 0, entry.enable);
+		}
+
+		set_z(ZOrder::kDropdown);
+		set_size(get_w(), get_lineheight() * entries.size());
+
+		clicked.connect([this]() { do_select(); });
+
+		if (Panel* cm = owner_->find_context_menu(); cm != nullptr) {
+			cm->die();
+		}
+		owner_->context_menu_ = this;
+		initialization_complete();
+	}
+
+	void die() override {
+		owner_->context_menu_ = nullptr;
+		Base::die();
+	}
+
+	bool handle_mousepress(const uint8_t btn, int32_t x, int32_t y) override {
+		if (x < 0 || y < 0 || x > get_w() || y > get_h()) {
+			die();
+			return true;
+		}
+		return Base::handle_mousepress(btn, x, y);
+	}
+
+	bool handle_key(bool down, SDL_Keysym code) override {
+		if (down) {
+			switch (code.sym) {
+			case SDLK_ESCAPE:
+				die();
+				return true;
+			case SDLK_RETURN:
+				do_select();
+				return true;
+			default:
+				break;
+			}
+		}
+		return Base::handle_key(down, code);
+	}
+
+private:
+	void do_select() {
+		if (has_selection()) {
+			get_selected().callback();
+			die();
+		}
+	}
+
+	Panel* owner_;
+};
+
+void Panel::show_context_menu(Vector2i pos, const std::vector<ContentMenuEntry>& entries) {
+	if (entries.empty()) {
+		return;
+	}
+
+	UI::Panel* context_parent = this;
+	while (context_parent->get_parent() != nullptr) {
+		pos += context_parent->get_pos();
+		context_parent = context_parent->get_parent();
+	}
+
+	new ContextMenu(context_parent, this, pos, panel_style_, entries);
 }
 
 }  // namespace UI

@@ -183,10 +183,6 @@ constexpr uint16_t kDefaultCtrlModifier = KMOD_GUI;
 constexpr uint16_t kDefaultCtrlModifier = KMOD_CTRL;
 #endif
 
-static inline SDL_Keysym keysym(const SDL_Keycode c, uint16_t mod = 0) {
-	return SDL_Keysym{SDL_GetScancodeFromKey(c), c, mod, 0};
-}
-
 static const std::vector<KeyboardShortcutInfo> kFastplaceDefaults = {
 #define FP(name, descname)                                                                         \
 	KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),                \
@@ -364,6 +360,10 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_F1),
                          "encyclopedia",
                          gettext_noop("Encyclopedia"))},
+   {KeyboardShortcut::kCommonContextMenu, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
+                                                             keysym(SDLK_MENU),
+                                                             "context_menu",
+                                                             gettext_noop("Context Menu"))},
    {KeyboardShortcut::kCommonTextCut, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
                                                            keysym(SDLK_x, kDefaultCtrlModifier),
                                                            "cut",

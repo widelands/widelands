@@ -45,6 +45,7 @@ BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
                                          const std::string& tooltip_text,
                                          const std::string& hotkey_text,
                                          const unsigned i,
+                                         const bool e,
                                          const TableStyleInfo& style)
    : name(init_name),
      entry_(init_entry),
@@ -53,8 +54,9 @@ BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
      name_alignment(i18n::has_rtl_character(init_name.c_str(), 20) ? Align::kRight : Align::kLeft),
      hotkey_alignment(i18n::has_rtl_character(hotkey_text.c_str(), 20) ? Align::kRight :
                                                                          Align::kLeft),
-     indent(i) {
-	rendered_name = UI::g_fh->render(as_richtext_paragraph(richtext_escape(name), style.enabled()));
+     indent(i),
+     enable(e) {
+	rendered_name = UI::g_fh->render(as_richtext_paragraph(richtext_escape(name), enable ? style.enabled() : style.disabled()));
 	rendered_hotkey =
 	   UI::g_fh->render(as_richtext_paragraph(richtext_escape(hotkey_text), style.hotkey()));
 }
@@ -116,8 +118,8 @@ BaseListselect::BaseListselect(Panel* const parent,
  */
 BaseListselect::~BaseListselect() {
 	clear();
-	if (linked_dropdown != nullptr) {
-		linked_dropdown->notify_list_deleted();
+	if (linked_dropdown_ != nullptr) {
+		linked_dropdown_->notify_list_deleted();
 	}
 }
 
@@ -159,8 +161,9 @@ void BaseListselect::add(const std::string& name,
                          bool const sel,
                          const std::string& tooltip_text,
                          const std::string& hotkey,
-                         const unsigned indent) {
-	EntryRecord* er = new EntryRecord(name, entry, pic, tooltip_text, hotkey, indent, table_style());
+                         const unsigned indent,
+                         const bool enable) {
+	EntryRecord* er = new EntryRecord(name, entry, pic, tooltip_text, hotkey, indent, enable, table_style());
 
 	int entry_height = lineheight_;
 	if (pic != nullptr) {
@@ -410,7 +413,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 		   (selection_mode_ == ListselectLayout::kDropdown ? scrollbar_.is_enabled() ? 4 : 5 : 2);
 
 		// Highlight the current selected entry
-		if (idx == selection_) {
+		if (idx == selection_ && entry_records_.at(idx)->enable) {
 			Recti r(point, maxw, lineheight_unpadded);
 			if (r.x < 0) {
 				r.w += r.x;
@@ -544,7 +547,9 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t /*x*/, int32_t
 		if (y < 0 || static_cast<int32_t>(entry_records_.size()) <= y) {
 			if (selection_mode_ == ListselectLayout::kDropdown) {
 				set_visible(false);
-				linked_dropdown->disable_textinput();
+				if (linked_dropdown_ != nullptr) {
+					linked_dropdown_->disable_textinput();
+				}
 				return true;
 			}
 			return false;
@@ -584,15 +589,15 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_BACKSPACE:
-			if (linked_dropdown != nullptr) {
-				linked_dropdown->delete_last_of_filter();
+			if (linked_dropdown_ != nullptr) {
+				linked_dropdown_->delete_last_of_filter();
 				return true;
 			}
 			return UI::Panel::handle_key(down, code);
 		case SDLK_ESCAPE:
 		case SDLK_RETURN:
-			if (linked_dropdown != nullptr && (code.mod & KMOD_CTRL) == 0) {
-				return linked_dropdown->handle_key(down, code);
+			if (linked_dropdown_ != nullptr && (code.mod & KMOD_CTRL) == 0) {
+				return linked_dropdown_->handle_key(down, code);
 			}
 			return UI::Panel::handle_key(down, code);
 		default:
@@ -690,7 +695,7 @@ void BaseListselect::remove(const char* const str) {
 
 Recti BaseListselect::get_highlight_rect(const std::string& text, int x, int y) {
 
-	if (linked_dropdown == nullptr) {
+	if (linked_dropdown_ == nullptr) {
 		return Recti();
 	}
 
@@ -698,7 +703,7 @@ Recti BaseListselect::get_highlight_rect(const std::string& text, int x, int y) 
 	// UI::g_fh::render ignores spaces at the beginning and end of a string.
 	replace_all(text2, " ", "_");
 
-	std::string filter = linked_dropdown->get_filter_text();
+	std::string filter = linked_dropdown_->get_filter_text();
 	replace_all(filter, " ", "_");
 
 	std::size_t start = to_lower(text2).find(filter);
