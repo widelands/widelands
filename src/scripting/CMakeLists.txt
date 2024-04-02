@@ -97,6 +97,49 @@ wl_library(scripting_logic
     lua_root.h
     lua_ui.cc
     lua_ui.h
+    map/lua_base_immovable.h
+    map/lua_bob.h
+    map/lua_building_description.h
+    map/lua_building.h
+    map/lua_construction_site_description.h
+    map/lua_construction_site.h
+    map/lua_dismantle_site_description.h
+    map/lua_dismantle_site.h
+    map/lua_economy.h
+    map/lua_ferry_fleet_yard_interface.h
+    map/lua_field.h
+    map/lua_flag.h
+    map/lua_immovable_description.h
+    map/lua_map.h
+    map/lua_map_object_description.h
+    map/lua_map_object.h
+    map/lua_market_description.h
+    map/lua_market.h
+    map/lua_military_site_description.h
+    map/lua_military_site.h
+    map/lua_naval_invasion_base.h
+    map/lua_pinned_note.h
+    map/lua_player_immovable.h
+    map/lua_player_slot.h
+    map/lua_port_dock.h
+    map/lua_production_site_description.h
+    map/lua_production_site.h
+    map/lua_resource_description.h
+    map/lua_road.h
+    map/lua_ship_description.h
+    map/lua_ship_fleet_yard_interface.h
+    map/lua_ship.h
+    map/lua_soldier_description.h
+    map/lua_soldier.h
+    map/lua_terrain_description.h
+    map/lua_training_site_description.h
+    map/lua_training_site.h
+    map/lua_tribe_description.h
+    map/lua_ware_description.h
+    map/lua_warehouse_description.h
+    map/lua_warehouse.h
+    map/lua_worker_description.h
+    map/lua_worker.h
     persistence.cc
     persistence.h
     eris.h
