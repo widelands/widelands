@@ -123,8 +123,12 @@ int do_get_workers(lua_State* L,
                    const Widelands::PlayerImmovable& pi,
                    const WaresWorkersMap& valid_workers);
 
-int do_set_workers_for_road(lua_State* L, Widelands::RoadBase* pi, const WaresWorkersMap& valid_workers);
-int do_set_workers_for_productionsite(lua_State* L, Widelands::ProductionSite* pi, const WaresWorkersMap& valid_workers);
+int do_set_workers_for_road(lua_State* L,
+                            Widelands::RoadBase* pi,
+                            const WaresWorkersMap& valid_workers);
+int do_set_workers_for_productionsite(lua_State* L,
+                                      Widelands::ProductionSite* pi,
+                                      const WaresWorkersMap& valid_workers);
 
 // Return the valid workers for a Road.
 WaresWorkersMap get_valid_workers_for(const Widelands::RoadBase& r);

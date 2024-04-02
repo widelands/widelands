@@ -447,12 +447,15 @@ static int do_set_workers(lua_State* L, TMapObject* pi, const WaresWorkersMap& v
 	return 0;
 }
 
-int do_set_workers_for_road(lua_State* L, Widelands::RoadBase* pi, const WaresWorkersMap& valid_workers) {
+int do_set_workers_for_road(lua_State* L,
+                            Widelands::RoadBase* pi,
+                            const WaresWorkersMap& valid_workers) {
 	return do_set_workers<LuaRoad>(L, pi, valid_workers);
 }
-int do_set_workers_for_productionsite(lua_State* L, Widelands::ProductionSite* pi, const WaresWorkersMap& valid_workers) {
+int do_set_workers_for_productionsite(lua_State* L,
+                                      Widelands::ProductionSite* pi,
+                                      const WaresWorkersMap& valid_workers) {
 	return do_set_workers<LuaProductionSite>(L, pi, valid_workers);
-
 }
 
 // Unpacks the Lua table of the form {health, attack, defense, evade} at the stack index
