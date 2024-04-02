@@ -28,10 +28,10 @@
 #include "scripting/luna.h"
 
 namespace Widelands {
-class RoadBase;
 class MapObject;
 class MapObjectDescr;
 class ProductionSite;
+struct RoadBase;
 class Soldier;
 class SoldierDescr;
 class TribeDescr;
@@ -165,7 +165,7 @@ parse_wares_as_bill_of_material(lua_State* L, int table_index, const Widelands::
 
 const Widelands::TribeDescr* get_tribe_descr(lua_State* L, const std::string& tribename);
 
-std::string soldier_preference_to_string(const Widelands::SoldierPreference p);
+std::string soldier_preference_to_string(Widelands::SoldierPreference p);
 Widelands::SoldierPreference string_to_soldier_preference(const std::string& p);
 
 // Transforms the given warehouse policy to a string which is used by the lua code
