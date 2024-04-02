@@ -192,6 +192,7 @@
 - Guard against invalid ship battle situations (#6140)
 - Track warship soldier requests (#6122)
 - Initialise `Game::naval_warfare_allowed_` as `false` (CB #4749 / GH #6387)
+- Fix replay desync with timed win conditions
 
 
 ### User Interface
