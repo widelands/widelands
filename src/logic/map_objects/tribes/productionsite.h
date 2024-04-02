@@ -27,6 +27,8 @@
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/production_program.h"
 #include "logic/map_objects/tribes/program_result.h"
+#include "logic/map_objects/tribes/worker.h"
+#include "logic/map_objects/tribes/worker_descr.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
@@ -34,7 +36,6 @@ namespace Widelands {
 class FerryFleetYardInterface;
 class ShipFleetYardInterface;
 class Soldier;
-class WorkerDescr;
 
 enum class FailNotificationType { kDefault, kFull };
 

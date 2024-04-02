@@ -19,6 +19,7 @@
 #ifndef WL_SCRIPTING_MAP_LUA_FIELD_H
 #define WL_SCRIPTING_MAP_LUA_FIELD_H
 
+#include "logic/widelands_geometry.h"
 #include "scripting/lua_map.h"
 
 namespace LuaMaps {

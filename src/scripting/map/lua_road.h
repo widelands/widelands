@@ -20,6 +20,7 @@
 #define WL_SCRIPTING_MAP_LUA_ROAD_H
 
 #include "economy/roadbase.h"
+#include "logic/map_objects/tribes/worker_descr.h"
 #include "scripting/map/lua_player_immovable.h"
 
 namespace LuaMaps {
