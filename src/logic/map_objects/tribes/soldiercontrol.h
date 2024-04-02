@@ -25,6 +25,7 @@ namespace Widelands {
 
 class EditorGameBase;
 class Soldier;
+class TribeDescr;
 
 /**
  * This interface is implemented by buildings that explicitly house soldiers.
@@ -72,6 +73,12 @@ public:
 	 * right now.
 	 */
 	[[nodiscard]] virtual Quantity soldier_capacity() const = 0;
+
+	/**
+	 * \return a richtext string for the building's status line.
+	 */
+	[[nodiscard]] std::string get_status_string(const TribeDescr& tribe,
+	                                            SoldierPreference pref) const;
 
 	/**
 	 * Sets the capacity for soldiers of this building.

@@ -192,15 +192,12 @@ public:
 		return productionsite_experienced_workers_missing_;
 	}
 
-	[[nodiscard]] const std::string& get_soldier_context_string() const {
-		return soldier_context_;
-	}
-	[[nodiscard]] const std::string* get_soldier_capacity_strings_sg() const {
-		return soldier_capacity_strings_sg_;
-	}
-	[[nodiscard]] const std::string* get_soldier_capacity_strings_pl() const {
-		return soldier_capacity_strings_pl_;
-	}
+	enum class CapacityStringIndex { kLacking = 0, kFull = 1, kOutAndLacking = 2, kOut = 3 };
+
+	// Return the translated format string for case `index` and plural form according to
+	// `number_to_format`
+	[[nodiscard]] std::string get_soldiers_format_string(CapacityStringIndex index,
+	                                                     int number_to_format) const;
 
 	// The custom toolbar imageset if any. Can be nullptr.
 	[[nodiscard]] ToolbarImageset* toolbar_image_set() const;

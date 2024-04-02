@@ -215,7 +215,7 @@
 --    singular and plural strings. Additionally, it is necessary to specify an ``npgettext`` call for all four types of soldier strings
 --    so as to ensure that all keys appear in the PO files. The ``npgettext`` results (i.e. the translated pluralized strings for an arbitrary constant)
 --    are unused; the actual use is performed later in C++. Their table keys must be prefixed with ``UNUSED_``; the rest of the name is irrelevant.
---    The strings themselves **must not** derivate from the template below in anything other than the name of the soldier.
+--    The strings themselves **must not** deviate from the template below in anything other than the name of the soldier.
 --    Make sure that the unlocalized string constants are exactly identical to the strings in the ``npgettext`` dummy calls.
 --    Example:
 --
