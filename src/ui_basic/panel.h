@@ -21,6 +21,7 @@
 
 #include <atomic>
 #include <deque>
+#include <functional>
 #include <list>
 #include <memory>
 #include <set>
@@ -373,6 +374,10 @@ public:
 		return tooltip_;
 	}
 
+	void set_hyperlink_action(std::function<void(std::string)> fn) {
+		hyperlink_action_ = fn;
+	}
+
 	virtual void die();
 	static void register_click();
 
@@ -632,6 +637,7 @@ private:
 	static FxId click_fx_;
 
 	std::unique_ptr<Notifications::Subscriber<NoteHyperlink>> hyperlink_subscriber_;
+	std::function<void(std::string)> hyperlink_action_;
 
 	enum class LogicThreadState { kFree, kLocked, kEndingRequested, kEndingConfirmed };
 	std::atomic<LogicThreadState> logic_thread_locked_;

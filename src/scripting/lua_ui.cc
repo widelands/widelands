@@ -515,6 +515,9 @@ int LuaPanel::get_child(lua_State* L) {
            user clicks anywhere inside the widget.
          * ``"on_position_changed"``: **Optional**. Callback code to run when the
            widget's position changes.
+         * ``"on_hyperlink"``: **Optional**. New in version 1.3. Callback code to run when
+            the panel is the target of a hyperlink clicked by the user. The hyperlink's action
+            argument will be stored in a global variable called ``HYPERLINK_ACTION``.
          * ``"children"``: **Optional**. An array of widget descriptor tables.
 
       Keys that are not supported by the widget type are silently ignored.
@@ -1142,11 +1145,24 @@ static unsigned get_table_button_box_orientation(lua_State* L,
 }
 
 template <typename... Args>
+static inline void do_set_global_string(lua_State*, const char*, Args...) {
+	NEVER_HERE();
+}
+template <> inline void do_set_global_string<std::string>(lua_State* L, const char* name, std::string arg) {
+	lua_pushstring(L, arg);
+	lua_setglobal(L, name);
+}
+
+template <typename... Args>
 static std::function<void(Args...)> create_plugin_action_lambda(lua_State* L,
-                                                                const std::string& cmd) {
+                                                                const std::string& cmd,
+                                                                bool is_hyperlink = false) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	return [&egbase, cmd](Args...) {  // do not capture L directly
+	return [&egbase, cmd, is_hyperlink](Args... args) {  // do not capture L directly
 		try {
+			if (is_hyperlink) {
+				do_set_global_string(egbase.lua().L(), "HYPERLINK_ACTION", args...);
+			}
 			egbase.lua().interpret_string(cmd);
 		} catch (const LuaError& e) {
 			log_err("Lua error in plugin: %s", e.what());
@@ -1237,6 +1253,10 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 
 		if (std::string cmd = get_table_string(L, "on_position_changed", false); !cmd.empty()) {
 			created_panel->position_changed.connect(create_plugin_action_lambda(L, cmd));
+		}
+
+		if (std::string cmd = get_table_string(L, "on_hyperlink", false); !cmd.empty()) {
+			created_panel->set_hyperlink_action(create_plugin_action_lambda<std::string>(L, cmd, true));
 		}
 
 		// If a tooltip is desired, we may need to force it for some passive widget types
