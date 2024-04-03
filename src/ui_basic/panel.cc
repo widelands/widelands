@@ -87,11 +87,11 @@ Panel::Panel(Panel* const nparent,
      hyperlink_subscriber_(
         Notifications::subscribe<NoteHyperlink>([this](const NoteHyperlink& note) {
 	        if (starts_with(name_, note.target)) {
-				if (static_cast<bool>(hyperlink_action_)) {
-					hyperlink_action_(note.action);
-				} else {
-					handle_hyperlink(note.action);
-				}
+		        if (static_cast<bool>(hyperlink_action_)) {
+			        hyperlink_action_(note.action);
+		        } else {
+			        handle_hyperlink(note.action);
+		        }
 	        }
         })),
      logic_thread_locked_(LogicThreadState::kEndingConfirmed) {

@@ -1148,15 +1148,15 @@ template <typename... Args>
 static inline void do_set_global_string(lua_State*, const char*, Args...) {
 	NEVER_HERE();
 }
-template <> inline void do_set_global_string<std::string>(lua_State* L, const char* name, std::string arg) {
+template <>
+inline void do_set_global_string<std::string>(lua_State* L, const char* name, std::string arg) {
 	lua_pushstring(L, arg);
 	lua_setglobal(L, name);
 }
 
 template <typename... Args>
-static std::function<void(Args...)> create_plugin_action_lambda(lua_State* L,
-                                                                const std::string& cmd,
-                                                                bool is_hyperlink = false) {
+static std::function<void(Args...)>
+create_plugin_action_lambda(lua_State* L, const std::string& cmd, bool is_hyperlink = false) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	return [&egbase, cmd, is_hyperlink](Args... args) {  // do not capture L directly
 		try {
@@ -1256,7 +1256,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		}
 
 		if (std::string cmd = get_table_string(L, "on_hyperlink", false); !cmd.empty()) {
-			created_panel->set_hyperlink_action(create_plugin_action_lambda<std::string>(L, cmd, true));
+			created_panel->set_hyperlink_action(
+			   create_plugin_action_lambda<std::string>(L, cmd, true));
 		}
 
 		// If a tooltip is desired, we may need to force it for some passive widget types
