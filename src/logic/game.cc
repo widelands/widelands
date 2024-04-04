@@ -1426,6 +1426,9 @@ void Game::set_win_condition_displayname(const std::string& name) {
 int32_t Game::get_win_condition_duration() const {
 	return win_condition_duration_;
 }
+void Game::set_win_condition_duration(int32_t d) {
+	win_condition_duration_ = d;
+}
 
 /**
  * Sample global statistics for the game.
