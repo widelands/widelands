@@ -138,7 +138,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:72
 msgid "Choose the ‘Medium buildings’ tab in the building statistics window."
-msgstr ""
+msgstr "V okne Štatistika budov kliknite na kartu „Stredné budovy“."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:73
 msgid "Look up how many taverns you have."
@@ -608,7 +608,7 @@ msgid ""
 "because they supply our taverns, so you could set water to the highest "
 "priority for them. The other buildings (for example the donkey farm) would "
 "then get less water, but the bakery could work faster."
-msgstr "Vzhľadom na našu situáciu môže byť žiaduce, aby pekárne pracovali čo najrýchlejšie, pretože zásobujú naše krčmy. Zásobovaniu pekární vodou by ste preto mohli predeliť najvyššiu prioritu. Ostatné budovy (napríklad oslia farma) by dostávali menej vody, zato pekárne by pracovali rýchlejšie."
+msgstr "Vzhľadom na našu situáciu môže byť žiadúce, aby pekárne pracovali čo najrýchlejšie, pretože zásobujú naše krčmy. Zásobovaniu pekární vodou by ste preto mohli prideliť najvyššiu prioritu. Ostatné budovy (napríklad oslia farma) by dostávali menej vody, zato pekárne by pracovali rýchlejšie."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:334
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:336
@@ -703,7 +703,7 @@ msgid ""
 "In the last tab, you can also see your absolute stock. It will increase when"
 " the economy health is positive, and decrease otherwise. Compare the two "
 "graphs!"
-msgstr "Na poslednej karte možno sledovať absolútne zásoby. Zvyšujú sa, ak je stav ekonomiky kladný, inak sa znižujú. Obe grafy porovnajte!"
+msgstr "Na poslednej karte možno sledovať absolútne zásoby. Zvyšujú sa, ak je stav ekonomiky kladný, inak sa znižujú. Oba grafy porovnajte!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:405
 msgid ""
