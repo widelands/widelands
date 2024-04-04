@@ -7,6 +7,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Frank Tang <roadtang@gmail.com>, 2015
 # GunChleoc, 2015
+# Hao Hu, 2024
 # 92373a9a734415f33212259453a6274d_77ab48e, 2022
 # Roy Luo <1598359376@qq.com>, 2020-2021
 # liu lizhi <xingzuo88@qq.com>, 2021
@@ -16,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-03-02 02:23+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: 92373a9a734415f33212259453a6274d_77ab48e, 2022\n"
+"Last-Translator: Hao Hu, 2024\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +41,7 @@ msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
-msgstr "你的一些起始建筑没有足够的空间并且尚未建设完成。 您在这方面处于劣势；请考虑以合理的起始条件重新开始这张地图。 "
+msgstr "你的一些起始建筑没有足够的空间并且尚未建设完成。 您在这方面处于劣势；请考虑以合理的初始条件重新开始这张地图。 "
 
 #: ../../data/scripting/infrastructure.lua:190
 msgid "Not enough space"
@@ -58,13 +59,13 @@ msgstr "你的起始位置附近没有岩石。因此，你会得到额外的资
 
 #: ../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
-msgstr ""
+msgstr "附近没有足够的树木"
 
 #: ../../data/scripting/infrastructure.lua:294
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "你的起始位置附近没有足够的树木。因此，你会获得额外的资源来启动你的经济。"
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
 #: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:119
@@ -77,7 +78,7 @@ msgstr "新的目标"
 
 #: ../../data/scripting/messages.lua:295
 msgid "New Objectives"
-msgstr "新的一些目标"
+msgstr "一些新的目标"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
@@ -304,7 +305,7 @@ msgstr "Esc键"
 #: ../../src/wlapplication_options.cc:1054
 msgctxt "editor"
 msgid "Tools"
-msgstr ""
+msgstr "工具"
 
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
@@ -371,7 +372,7 @@ msgstr "保存地图"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:237
 msgid "Publish Map Online…"
-msgstr ""
+msgstr "发布在线地图..."
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:245
@@ -519,12 +520,12 @@ msgstr "点击区域以显示与其相关的信息"
 #: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../src/wlapplication_options.cc:536
 msgid "Tool History"
-msgstr ""
+msgstr "工具历史"
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
 #: ../../src/editor/editorinteractive.cc:396
 msgid "Restore previous tool settings"
-msgstr ""
+msgstr "恢复先前的工具设置"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -549,7 +550,7 @@ msgstr "显示建筑空间"
 #. etc.) are removed
 #: ../../src/editor/editorinteractive.cc:473
 msgid "Hide Maximum Building Spaces"
-msgstr ""
+msgstr "隐藏最大建筑空间"
 
 #: ../../src/editor/editorinteractive.cc:474
 msgid "Show Maximum Building Spaces"
@@ -5857,7 +5858,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:211
 msgid "Edit Keyboard And Mouse Actions"
-msgstr ""
+msgstr "编辑键盘和鼠标操作"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:223
 msgid "Reset all"
@@ -6895,7 +6896,7 @@ msgstr "窗口吸附到边界的距离"
 
 #: ../../src/ui_fsmenu/options.cc:207
 msgid "Edit keyboard and mouse actions…"
-msgstr ""
+msgstr "编辑键盘和鼠标操作..."
 
 #: ../../src/ui_fsmenu/options.cc:223
 msgid "Save game automatically every:"
@@ -7044,7 +7045,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:658
 msgid "Try system language"
-msgstr "试用系统语言"
+msgstr "尝试系统语言"
 
 #. * TRANSLATORS: %s = language name
 #: ../../src/ui_fsmenu/options.cc:768
@@ -10710,7 +10711,7 @@ msgstr "调节音量。单击此处收听示例。"
 
 #: ../../src/wui/sound_options.cc:149
 msgid "Play your own music in-game"
-msgstr ""
+msgstr "在游戏中播放你自己的音乐"
 
 #: ../../src/wui/sound_options.cc:151
 msgid ""
@@ -10718,7 +10719,7 @@ msgid ""
 "‘<Widelands Home Directory>/music/custom_XX.*’ (where ‘XX’ are sequential "
 "two-digit numbers starting with 00). Supported file formats are ‘.mp3’ and "
 "‘.ogg’."
-msgstr ""
+msgstr "您可以通过将自己的音乐文件放置在“<Widelands Home Directory>/music/custom_XX.*”（其中“XX”是以00开头的连续两位数字）来播放自定义游戏内音乐。支持的文件格式为“.mp3”和“.ogg”。"
 
 #: ../../src/wui/sound_options.cc:160
 msgctxt "sound_options"
