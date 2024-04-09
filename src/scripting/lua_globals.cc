@@ -442,7 +442,8 @@ static int L_set_textdomain(lua_State*) {
    The volume of the sound and whether the sound will be played at all are determined
    by the user's settings for ambient sounds.
 
-   :arg file: The path and basename of the sound effect to play.
+   :arg file: The path and basename of the sound effect to play
+      (without the .ogg filename extension and the optional ``_??`` numbering).
    :type file: :class:`string`
    :arg priority: The priority of the sound in percent.
    :type priority: :class:`number`
@@ -461,7 +462,7 @@ static int L_play_sound(lua_State* L) {
 	const FxId fx = SoundHandler::register_fx(SoundType::kAmbient, luaL_checkstring(L, 1));
 
 	const int32_t priority =
-	   nargs < 2 ? (kFxMaximumPriority / 2) : static_cast<int32_t>(luaL_checknumber(L, 2) * 100);
+	   nargs < 2 ? kFxMaximumPriority : static_cast<int32_t>(luaL_checknumber(L, 2) * 100);
 	if (priority < kFxPriorityLowest || priority > kFxMaximumPriority) {
 		report_error(L, "Priority %f%% is out of bounds %f..%f", priority / 100.0,
 		             kFxPriorityLowest / 100.0, kFxMaximumPriority / 100.0);
