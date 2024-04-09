@@ -633,7 +633,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 				}
 				changed();
 			}
-			break;
+			return true;
 
 		case SDLK_BACKSPACE:
 			if (d_->mode == Data::Mode::kSelection) {
@@ -646,7 +646,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 				}
 				changed();
 			}
-			break;
+			return true;
 
 		case SDLK_LEFT: {
 			if (d_->cursor_pos > 0) {
@@ -678,7 +678,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					d_->set_cursor_pos(d_->prev_char(d_->cursor_pos));
 				}
 			}
-			break;
+			return true;
 		}
 
 		case SDLK_RIGHT:
@@ -707,7 +707,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					d_->set_cursor_pos(d_->next_char(d_->cursor_pos));
 				}
 			}
-			break;
+			return true;
 
 		case SDLK_DOWN:
 			if (d_->cursor_pos < d_->text.size()) {
@@ -745,7 +745,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					d_->set_cursor_pos(d_->text.size());
 				}
 			}
-			break;
+			return true;
 
 		case SDLK_UP:
 			if (d_->cursor_pos > 0) {
@@ -780,7 +780,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					d_->set_cursor_pos(0);
 				}
 			}
-			break;
+			return true;
 
 		case SDLK_HOME:
 			if ((code.mod & KMOD_CTRL) != 0) {
@@ -803,7 +803,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 				}
 				d_->set_cursor_pos(d_->ww.line_offset(cursorline));
 			}
-			break;
+			return true;
 
 		case SDLK_END:
 			if ((code.mod & KMOD_CTRL) != 0) {
@@ -836,7 +836,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					d_->set_cursor_pos(d_->text.size());
 				}
 			}
-			break;
+			return true;
 
 		case SDLK_ESCAPE:
 			cancel();
@@ -844,12 +844,12 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 
 		case SDLK_RETURN:
 			if ((code.mod & KMOD_CTRL) != 0) {
-				return false;
+				break;
 			}
 			d_->insert(d_->cursor_pos, "\n");
 			d_->reset_selection();
 			changed();
-			break;
+			return true;
 
 		default:
 			break;

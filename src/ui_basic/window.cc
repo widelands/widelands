@@ -603,9 +603,7 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 		clicked();
 		focus();
 	} else if (btn == SDL_BUTTON_RIGHT) {
-		if (my < get_tborder()) {
-			show_default_context_menu(Vector2i(mx, my));
-		} else if (!pinned_) {
+		if (!pinned_) {
 			play_click();
 			die();
 		}
