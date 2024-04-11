@@ -126,7 +126,7 @@ function developers() return {
                "Benedikt Straub (Nordfriese)",
                "Lucki from Holarse.de",
                "Tomasz Turowski (Niektóry)",
-               "Antonino Siena (nifker)",
+               "Luna Siena",
                "Jonas Mörschbach (jmoerschbach)",
                "Libor Pospíchal",
                "Rikard Falkeborn",
