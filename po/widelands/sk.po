@@ -6545,13 +6545,13 @@ msgstr "Uložení hráči"
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:58
 #, c-format
 msgid "Player %u: –"
-msgstr ""
+msgstr "Hráč %u: –"
 
 #. * TRANSLATORS: "Player 1 (Barbarians): Playername"
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:81
 #, c-format
 msgid "Player %1$u (%2$s): %3$s"
-msgstr ""
+msgstr "Hráč %1$u (%2$s): %3$s"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:107
 msgid "Map Details"
@@ -10910,7 +10910,7 @@ msgstr "Zvuky okolia"
 msgid ""
 "Sound is disabled either due to a problem with the sound driver, or because "
 "it was switched off at the command line."
-msgstr ""
+msgstr "Zvuk je neaktívny buď kvôli problému s ovládačom zvuku alebo preto, že bol vypnutý z príkazového riadku."
 
 #. * TRANSLATORS: If this checkbox is ticked, all icons in the stock menu are
 #. drawn with

@@ -75,6 +75,8 @@ wl_library(scripting_lua_interface
     scripting_logic
     scripting_lua_table
     scripting_luna
+    sound
+    note_sound
 )
 
 wl_library(scripting_logic
