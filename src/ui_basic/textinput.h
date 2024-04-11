@@ -97,9 +97,9 @@ protected:
 
 	bool show_default_context_menu(Vector2i pos) override;
 
-	bool handle_cut();
-	bool handle_copy();
-	bool handle_paste();
+	void handle_cut();
+	void handle_copy();
+	void handle_paste();
 	void handle_select_all();
 
 	struct Data;

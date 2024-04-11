@@ -453,7 +453,7 @@ public:
 		NEVER_HERE();
 	}
 
-	struct ContentMenuEntry {
+	struct ContextMenuEntry {
 		std::string descname;
 		std::string tooltip;
 		std::string shortcut;
@@ -461,7 +461,7 @@ public:
 		bool enable;
 		std::function<void()> callback;
 	};
-	void show_context_menu(Vector2i pos, const std::vector<ContentMenuEntry>& entries);
+	void show_context_menu(Vector2i pos, const std::vector<ContextMenuEntry>& entries);
 
 	virtual bool show_default_context_menu(Vector2i /* pos */) {
 		return false;

@@ -878,8 +878,8 @@ void Panel::handle_mousein(bool /* inside */) {
  * \return true if the mouseclick was processed, false otherwise
  */
 bool Panel::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
-	if (btn == SDL_BUTTON_RIGHT && show_default_context_menu(Vector2i(x, y))) {
-		return true;
+	if (btn == SDL_BUTTON_RIGHT) {
+		return show_default_context_menu(Vector2i(x, y));
 	}
 
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
@@ -931,9 +931,8 @@ bool Panel::handle_key(bool down, SDL_Keysym code) {
 			return true;
 		}
 
-		if (matches_shortcut(KeyboardShortcut::kCommonContextMenu, code) &&
-		    show_default_context_menu(Vector2i::zero())) {
-			return true;
+		if (matches_shortcut(KeyboardShortcut::kCommonContextMenu, code)) {
+			return show_default_context_menu(Vector2i::zero());
 		}
 
 		switch (code.sym) {
@@ -1806,17 +1805,17 @@ void Panel::handle_hyperlink(const std::string& action) {
 	throw wexception("Panel %s: Invalid hyperlink action '%s'", name_.c_str(), action.c_str());
 }
 
-struct ContextMenu : public Listselect<Panel::ContentMenuEntry> {
-	using Base = Listselect<Panel::ContentMenuEntry>;
+struct ContextMenu : public Listselect<Panel::ContextMenuEntry> {
+	using Base = Listselect<Panel::ContextMenuEntry>;
 
 	ContextMenu(UI::Panel* context_parent,
 	            UI::Panel* owner,
 	            Vector2i pos,
 	            PanelStyle ps,
-	            const std::vector<ContentMenuEntry>& entries)
+	            const std::vector<ContextMenuEntry>& entries)
 	   : Base(context_parent, "context_menu", pos.x, pos.y, 0, 0, ps, ListselectLayout::kDropdown),
 	     owner_(owner) {
-		for (const ContentMenuEntry& entry : entries) {
+		for (const ContextMenuEntry& entry : entries) {
 			add(entry.descname, entry, entry.icon, false, entry.tooltip, entry.shortcut, 0,
 			    entry.enable);
 		}
@@ -1873,7 +1872,7 @@ private:
 	Panel* owner_;
 };
 
-void Panel::show_context_menu(Vector2i pos, const std::vector<ContentMenuEntry>& entries) {
+void Panel::show_context_menu(Vector2i pos, const std::vector<ContextMenuEntry>& entries) {
 	if (entries.empty()) {
 		return;
 	}
