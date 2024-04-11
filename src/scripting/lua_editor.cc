@@ -36,7 +36,7 @@ namespace LuaEditor {
 .. currentmodule:: wl.editor
 
 The :mod:`wl.editor` module contains functionality that integrates Lua into the
-editor. This module is not loaded inside the game, that is if wl.editor is
+editor. This module is not loaded inside the game, that is if ``wl.editor`` is
 :const:`nil` the script is run inside a game, else in the editor.
 */
 
