@@ -8,6 +8,7 @@ information, etc.
 Parallel Simulation
 -------------------
 The game logic is supposed to be affected only by the following factors:
+
 - the pseudo RNG (which is completely determined by the initial seed)
 - the starting conditions
 - the sequence of player commands sent to the Cmd_Queue
@@ -18,24 +19,25 @@ be the same.
 
 This property of the Widelands game logic is extremely important for two
 reasons:
+
 - Multiplayer by parallel simulation:
 
   Every host keeps the complete state of the simulation in memory, and only
   player commands are exchanged to keep network traffic low. The properties
   above guarantuee that there is no desync.
-  
-- Demo recording
+
+- Replay recording
 
   By creating a savegame followed by a sequence of player commands, it is
-  possible to create a demo recording of a game (similar to Age of Empires,
+  possible to create a replay (demo) recording of a game (similar to Age of Empires,
   for example)
 
 
-Why std::set<SomePointer*> is a bad idea
-----------------------------------------
+Why ``std::set<SomePointer*>`` is a bad idea
+--------------------------------------------
 Well, actually it's only a bad idea in the game logic, here's why.
 
-std::set<Foo*> uses pointer comparisons to sort the set. Pointers aren't
+``std::set<Foo*>`` uses pointer comparisons to sort the set. Pointers aren't
 system-independent (in fact, they might even differ from one run to the
 next on the same system). Therefore, this construct *must not* be used in
 the game logic.
