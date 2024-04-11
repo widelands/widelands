@@ -19,9 +19,13 @@
 #ifndef WL_WUI_DISMANTLESITEWINDOW_H
 #define WL_WUI_DISMANTLESITEWINDOW_H
 
+#include <vector>
+
 #include "logic/map_objects/tribes/dismantlesite.h"
 #include "ui_basic/progressbar.h"
 #include "wui/buildingwindow.h"
+
+class InputQueueDisplay;
 
 /**
  * Status window for dismantle sites.
@@ -33,12 +37,14 @@ struct DismantleSiteWindow : public BuildingWindow {
 	                    bool avoid_fastclick);
 
 	void think() override;
+	void draw(RenderTarget& rt) override;
 
 private:
 	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
 
 	Widelands::OPtr<Widelands::DismantleSite> dismantle_site_;
 	UI::ProgressBar* progress_{nullptr};
+	std::vector<InputQueueDisplay*> dropout_queues_;
 	DISALLOW_COPY_AND_ASSIGN(DismantleSiteWindow);
 };
 
