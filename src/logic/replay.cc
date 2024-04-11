@@ -157,7 +157,7 @@ Command* ReplayReader::get_next_command(const Time& time) {
 
 		case pkt_end: {
 			Time endtime(cmdlog_->unsigned_32());
-			log_err_time(time, "REPLAY: End of replay (gametime: %u)\n", endtime.get());
+			verb_log_info_time(time, "REPLAY: End of replay (gametime: %u)\n", endtime.get());
 			delete cmdlog_;
 			cmdlog_ = nullptr;
 			return nullptr;

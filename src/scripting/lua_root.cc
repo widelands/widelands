@@ -46,7 +46,7 @@ namespace LuaRoot {
 ======================
 
 .. module:: wl
-   :synopsis: Base classes which allow access to all widelands internals.
+   :synopsis: Base classes which allow access to all Widelands internals.
 
 .. moduleauthor:: The Widelands development team
 
