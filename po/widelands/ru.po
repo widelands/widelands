@@ -2598,7 +2598,7 @@ msgstr "Пропал пункт назначения"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Ship Destination Vanished"
-msgstr "Пункт назначения корабля изчез"
+msgstr "Пункт назначения корабля исчез"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:400
 msgid "Your ship’s destination has disappeared."
@@ -3450,7 +3450,7 @@ msgstr "Вы не можете изгнать себя!"
 #: ../../src/network/gamehost.cc:179
 #, c-format
 msgid "Are you sure you want to kick %s?"
-msgstr "Точно хотите выгнать  %s?"
+msgstr "Точно хотите выгнать %s?"
 
 #: ../../src/network/gamehost.cc:180
 #, c-format
@@ -3735,7 +3735,7 @@ msgstr "Метасервер не отвечает"
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
-msgstr "Вы были оключены от метасервера, так как не отвечаете на запрос PING."
+msgstr "Вы были отключены от метасервера, так как не отвечаете на запрос PING."
 
 #: ../../src/network/network_gaming_messages.cc:30
 msgid "Client has left the game."
@@ -4860,7 +4860,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr "Дополнение  ‘%1$s’ не может быть загружено на сервер.\nСообщение об ошибке:\n%2$s "
+msgstr "Дополнение ‘%1$s’ не может быть загружено на сервер.\nСообщение об ошибке:\n%2$s "
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1469
 #, c-format
@@ -5138,7 +5138,7 @@ msgstr "Символ ‘%c’ недопустим"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:68
 #, c-format
 msgid "Filename may not contain ‘%s’"
-msgstr "В названии файла не должно быть  ‘%s’"
+msgstr "В названии файла не должно быть ‘%s’"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:154
 msgid "Add selected map"
@@ -5630,7 +5630,7 @@ msgstr "Требуется версия Widelands в диапазоне от%1$s
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:150
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:201
 msgid "Disable"
-msgstr "Отключно"
+msgstr "Отключено"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:150
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:201
