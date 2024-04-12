@@ -649,7 +649,7 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 		uint32_t selected_idx = selection_index();
 		const uint32_t max = empty() ? 0 : size() - 1;
 		const uint32_t pagesize = std::max(1, get_h() / get_lineheight());
-		SnapSelectionToEnabled snap;
+		SnapSelectionToEnabled snap = SnapSelectionToEnabled::kNo;
 		switch (code.sym) {
 		case SDLK_DOWN:
 			if (!has_selection()) {
