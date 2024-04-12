@@ -230,11 +230,49 @@ void BaseListselect::set_scrollpos(const int32_t i) {
 }
 
 /**
- * Change the currently selected entry
+ * Change the currently selected entry.
+ * If the desired entry is disabled, snap to the nearest enabled entry depending on `snap`.
  *
  * Args: i  the entry to select
+ *    snap  whether to go up, down, or do nothing if the entry is disabled
  */
-void BaseListselect::select(const uint32_t i) {
+void BaseListselect::select(uint32_t i, SnapSelectionToEnabled snap) {
+	if (i != no_selection_index()) {
+		if (snap != SnapSelectionToEnabled::kNo) {
+			// Step until we find an enabled entry
+			while (!entry_records_.at(i)->enable) {
+				if (snap == SnapSelectionToEnabled::kDown) {
+					if (i + 1 >= size()) {
+						break;
+					}
+					++i;
+				} else {
+					if (i == 0) {
+						break;
+					}
+					--i;
+				}
+			}
+			// If nothing found, try stepping in the opposite direction too
+			while (!entry_records_.at(i)->enable) {
+				if (snap == SnapSelectionToEnabled::kUp) {
+					if (i + 1 >= size()) {
+						break;
+					}
+					++i;
+				} else {
+					if (i == 0) {
+						break;
+					}
+					--i;
+				}
+			}
+		}
+		if (!entry_records_.at(i)->enable) {
+			i = no_selection_index();
+		}
+	}
+
 	if (selection_ == i) {
 		return;
 	}
@@ -516,11 +554,11 @@ bool BaseListselect::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) 
 
 	if (y != 0 && matches_keymod(modstate, KMOD_NONE)) {
 		if (selected_idx > max) {
-			select(y < 0 ? 0 : max);
+			select(y < 0 ? 0 : max, y < 0 ? SnapSelectionToEnabled::kUp : SnapSelectionToEnabled::kDown);
 		} else if (y > 0 && selected_idx > 0) {
-			select(selected_idx - 1);
+			select(selected_idx - 1, SnapSelectionToEnabled::kUp);
 		} else if (y < 0 && selected_idx < max) {
-			select(selected_idx + 1);
+			select(selected_idx + 1, SnapSelectionToEnabled::kDown);
 		}
 
 		return scrollbar_.handle_mousewheel(x, y, modstate);
@@ -610,6 +648,7 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 		uint32_t selected_idx = selection_index();
 		const uint32_t max = empty() ? 0 : size() - 1;
 		const uint32_t pagesize = std::max(1, get_h() / get_lineheight());
+		SnapSelectionToEnabled snap;
 		switch (code.sym) {
 		case SDLK_DOWN:
 			if (!has_selection()) {
@@ -617,6 +656,7 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 			} else if (selected_idx < max) {
 				++selected_idx;
 			}
+			snap = SnapSelectionToEnabled::kDown;
 			break;
 		case SDLK_UP:
 			if (!has_selection()) {
@@ -624,19 +664,43 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 			} else if (selected_idx > 0) {
 				--selected_idx;
 			}
+			snap = SnapSelectionToEnabled::kUp;
 			break;
 		case SDLK_HOME:
 			selected_idx = 0;
+			snap = SnapSelectionToEnabled::kDown;
 			break;
 		case SDLK_END:
 			selected_idx = max;
+			snap = SnapSelectionToEnabled::kUp;
 			break;
 		case SDLK_PAGEDOWN:
-			selected_idx = has_selection() ? std::min(max, selected_idx + pagesize) : 0;
+			if (has_selection()) {
+				if (selected_idx + pagesize < max) {
+					selected_idx += pagesize;
+					snap = SnapSelectionToEnabled::kDown;
+				} else {
+					selected_idx = max;
+					snap = SnapSelectionToEnabled::kUp;
+				}
+			} else {
+				selected_idx = 0;
+				snap = SnapSelectionToEnabled::kDown;
+			}
 			break;
 		case SDLK_PAGEUP:
-			selected_idx =
-			   has_selection() ? selected_idx > pagesize ? selected_idx - pagesize : 0 : max;
+			if (has_selection()) {
+				if (selected_idx > pagesize) {
+					selected_idx -= pagesize;
+					snap = SnapSelectionToEnabled::kUp;
+				} else {
+					selected_idx = 0;
+					snap = SnapSelectionToEnabled::kDown;
+				}
+			} else {
+				selected_idx = max;
+				snap = SnapSelectionToEnabled::kUp;
+			}
 			break;
 		default:
 			handle = false;
@@ -644,7 +708,7 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 		}
 		assert((selected_idx <= max) ^ (selected_idx == no_selection_index()));
 		if (handle) {
-			select(selected_idx);
+			select(selected_idx, snap);
 			return true;
 		}
 	}

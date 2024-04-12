@@ -1835,6 +1835,7 @@ struct ContextMenu : public Listselect<Panel::ContextMenuEntry> {
 	void die() override {
 		owner_->context_menu_ = nullptr;
 		Base::die();
+		owner_->focus();
 	}
 
 	bool handle_mousepress(const uint8_t btn, int32_t x, int32_t y) override {

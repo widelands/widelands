@@ -94,7 +94,8 @@ struct BaseListselect : public Panel {
 		return selection_;
 	}
 
-	void select(uint32_t i);
+	enum class SnapSelectionToEnabled { kNo, kUp, kDown };
+	void select(uint32_t i, SnapSelectionToEnabled snap = SnapSelectionToEnabled::kNo);
 	bool has_selection() const;
 
 	uint32_t get_selected() const;
