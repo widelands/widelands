@@ -941,9 +941,9 @@ void MainMenu::action(const MenuTarget t) {
 		break;
 	case MenuTarget::kReplayLast:
 		if (!filename_for_last_replay_.empty()) {
-			if (Widelands::Game* g = create_safe_game(); g != nullptr) {
-				menu_capsule_.clear_content();
-				g->run_replay(filename_for_last_replay_, "");
+			std::unique_ptr<Widelands::Game> game(create_safe_game(true));
+			if (game != nullptr) {
+				game->run_replay(filename_for_last_replay_, "");
 			}
 		}
 		break;
