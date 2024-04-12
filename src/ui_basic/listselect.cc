@@ -237,7 +237,7 @@ void BaseListselect::set_scrollpos(const int32_t i) {
  *    snap  whether to go up, down, or do nothing if the entry is disabled
  */
 void BaseListselect::select(uint32_t i, SnapSelectionToEnabled snap) {
-	if (i != no_selection_index()) {
+	if (i != no_selection_index() && !empty()) {
 		if (snap != SnapSelectionToEnabled::kNo) {
 			// Step until we find an enabled entry
 			while (!entry_records_.at(i)->enable) {
