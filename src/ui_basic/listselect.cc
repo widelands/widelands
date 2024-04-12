@@ -554,7 +554,8 @@ bool BaseListselect::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) 
 
 	if (y != 0 && matches_keymod(modstate, KMOD_NONE)) {
 		if (selected_idx > max) {
-			select(y < 0 ? 0 : max, y < 0 ? SnapSelectionToEnabled::kUp : SnapSelectionToEnabled::kDown);
+			select(
+			   y < 0 ? 0 : max, y < 0 ? SnapSelectionToEnabled::kUp : SnapSelectionToEnabled::kDown);
 		} else if (y > 0 && selected_idx > 0) {
 			select(selected_idx - 1, SnapSelectionToEnabled::kUp);
 		} else if (y < 0 && selected_idx < max) {
