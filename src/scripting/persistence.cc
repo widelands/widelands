@@ -213,6 +213,7 @@ static const char* kPersistentGlobals[] = {"_VERSION",
                                            "pop_textdomain",
                                            "npgettext",
                                            "styles",
+                                           "play_sound",
                                            nullptr};
 // clang-format on
 
