@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-03-02 02:23+0000\n"
+"POT-Creation-Date: 2024-04-13 02:20+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2015-2021\n"
 "Language-Team: Gaelic, Scottish (http://app.transifex.com/widelands/widelands/language/gd/)\n"
@@ -469,7 +469,7 @@ msgstr "Cuir ris no thoir air falbh raointean puirt"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:361
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:708
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:716
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "Cluicheadairean"
@@ -6857,7 +6857,7 @@ msgid "Type"
 msgstr "Seòrsa"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:249
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:357
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:366
 #: ../../src/wui/game_chat_panel.cc:449 ../../src/wui/game_summary.cc:118
 msgid "Team"
 msgstr "Sgioba"
@@ -6905,18 +6905,18 @@ msgstr "Co-roinnte ann an Cluicheadair %u"
 msgid "Start type is set via the scenario"
 msgstr "Tha seòrsa an tòiseachaidh ’ga shuidheachadh leis a’ chnàmh-sgeul"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:579
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:378
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:587
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:387
 msgid "No Team"
 msgstr "Gun sgioba"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:585
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:384
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:593
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:393
 #, c-format
 msgid "Team %d"
 msgstr "Sgioba %d"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:698
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:706
 msgid "Clients"
 msgstr "Cliantan"
 
@@ -8810,7 +8810,7 @@ msgid "Cancel the expedition"
 msgstr "Sguir dhen triall"
 
 #: ../../src/wui/constructionsitewindow.cc:154
-#: ../../src/wui/dismantlesitewindow.cc:68
+#: ../../src/wui/dismantlesitewindow.cc:71
 msgid "Building materials"
 msgstr "Stuth togail"
 
@@ -9736,13 +9736,18 @@ msgstr "Thoir am bathar air falbh"
 msgid "Add ware"
 msgstr "Cuir bathar ris"
 
-#: ../../src/wui/inputqueuedisplay.cc:620
+#: ../../src/wui/inputqueuedisplay.cc:627
 msgid "Hide controls"
 msgstr "Falaich na h-uidheaman-smachd"
 
-#: ../../src/wui/inputqueuedisplay.cc:620
+#: ../../src/wui/inputqueuedisplay.cc:627
 msgid "Show controls"
 msgstr "Seall na h-uidheaman-smachd"
+
+#: ../../src/wui/inputqueuedisplay.cc:683
+#, c-format
+msgid "+%u"
+msgstr ""
 
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../src/wui/interactive_base.cc:144
