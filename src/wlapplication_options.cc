@@ -1253,7 +1253,7 @@ static const std::map<SDL_Keycode, SDL_Keycode> kNumpadIdentifications = {
    {SDLK_KP_3, SDLK_PAGEDOWN},       {SDLK_KP_2, SDLK_DOWN},        {SDLK_KP_1, SDLK_END},
    {SDLK_KP_0, SDLK_INSERT},         {SDLK_KP_PERIOD, SDLK_DELETE}, {SDLK_KP_ENTER, SDLK_RETURN},
    {SDLK_KP_MINUS, SDLK_MINUS},      {SDLK_KP_PLUS, SDLK_PLUS},     {SDLK_KP_DIVIDE, SDLK_SLASH},
-   {SDLK_KP_MULTIPLY, SDLK_ASTERISK}};
+   {SDLK_KP_MULTIPLY, SDLK_ASTERISK}, {SDLK_APPLICATION, SDLK_MENU}};
 
 void normalize_numpad(SDL_Keysym& keysym) {
 	auto search = kNumpadIdentifications.find(keysym.sym);
@@ -1421,6 +1421,8 @@ static std::string key_name(const SDL_Keycode k) {
 		return pgettext("hotkey", "Tab");
 	case SDLK_MENU:
 		return pgettext("hotkey", "Menu");
+	case SDLK_APPLICATION:
+		return pgettext("hotkey", "Application");
 	case SDLK_PAUSE:
 		return pgettext("hotkey", "Pause");
 	case SDLK_PAGEUP:
