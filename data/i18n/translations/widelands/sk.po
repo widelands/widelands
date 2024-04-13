@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-03-02 02:23+0000\n"
+"POT-Creation-Date: 2024-04-13 02:20+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -471,7 +471,7 @@ msgstr "Pridať alebo odobrať miesta pre prístavy"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:361
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:708
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:716
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "Hráči"
@@ -5630,7 +5630,7 @@ msgstr "Aktivovať"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:334
 #, c-format
 msgid "%1$s+%2$u"
-msgstr ""
+msgstr "%1$s+%2$u"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:184
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:383
@@ -5678,7 +5678,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:360
 #, c-format
 msgid "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
-msgstr ""
+msgstr "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:388
 #, c-format
@@ -6008,7 +6008,7 @@ msgstr "Všeobecné"
 #: ../../src/ui_fsmenu/keyboard_options.cc:299
 #: ../../src/wlapplication_options.cc:295
 msgid "Editor"
-msgstr ""
+msgstr "Editor"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:303
 msgid "Fastplace"
@@ -6545,13 +6545,13 @@ msgstr "Uložení hráči"
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:58
 #, c-format
 msgid "Player %u: –"
-msgstr ""
+msgstr "Hráč %u: –"
 
 #. * TRANSLATORS: "Player 1 (Barbarians): Playername"
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:81
 #, c-format
 msgid "Player %1$u (%2$s): %3$s"
-msgstr ""
+msgstr "Hráč %1$u (%2$s): %3$s"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:107
 msgid "Map Details"
@@ -6859,7 +6859,7 @@ msgid "Type"
 msgstr "Typ"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:249
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:357
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:366
 #: ../../src/wui/game_chat_panel.cc:449 ../../src/wui/game_summary.cc:118
 msgid "Team"
 msgstr "Tím"
@@ -6907,18 +6907,18 @@ msgstr ""
 msgid "Start type is set via the scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:579
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:378
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:587
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:387
 msgid "No Team"
 msgstr "Bez tímu"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:585
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:384
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:593
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:393
 #, c-format
 msgid "Team %d"
 msgstr "Tím %d"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:698
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:706
 msgid "Clients"
 msgstr "Klienti"
 
@@ -8812,7 +8812,7 @@ msgid "Cancel the expedition"
 msgstr "Zrušiť výpravu"
 
 #: ../../src/wui/constructionsitewindow.cc:154
-#: ../../src/wui/dismantlesitewindow.cc:68
+#: ../../src/wui/dismantlesitewindow.cc:71
 msgid "Building materials"
 msgstr "Stavebné materiály"
 
@@ -9738,13 +9738,18 @@ msgstr ""
 msgid "Add ware"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:620
+#: ../../src/wui/inputqueuedisplay.cc:627
 msgid "Hide controls"
 msgstr "Skryť ovládanie"
 
-#: ../../src/wui/inputqueuedisplay.cc:620
+#: ../../src/wui/inputqueuedisplay.cc:627
 msgid "Show controls"
 msgstr "Zobraziť ovládanie"
+
+#: ../../src/wui/inputqueuedisplay.cc:683
+#, c-format
+msgid "+%u"
+msgstr ""
 
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../src/wui/interactive_base.cc:144
@@ -10910,7 +10915,7 @@ msgstr "Zvuky okolia"
 msgid ""
 "Sound is disabled either due to a problem with the sound driver, or because "
 "it was switched off at the command line."
-msgstr ""
+msgstr "Zvuk je neaktívny buď kvôli problému s ovládačom zvuku alebo preto, že bol vypnutý z príkazového riadku."
 
 #. * TRANSLATORS: If this checkbox is ticked, all icons in the stock menu are
 #. drawn with

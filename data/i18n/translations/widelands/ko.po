@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-03-02 02:23+0000\n"
+"POT-Creation-Date: 2024-04-13 02:20+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -472,7 +472,7 @@ msgstr "항구 공간을 추가하거나 제거"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:361
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:708
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:716
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "선수"
@@ -6746,7 +6746,7 @@ msgid "Type"
 msgstr "유형"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:249
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:357
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:366
 #: ../../src/wui/game_chat_panel.cc:449 ../../src/wui/game_summary.cc:118
 msgid "Team"
 msgstr "편"
@@ -6794,18 +6794,18 @@ msgstr "선수 %u와 공유함"
 msgid "Start type is set via the scenario"
 msgstr "시작 유형은 시나리오를 통해 설정됩니다"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:579
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:378
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:587
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:387
 msgid "No Team"
 msgstr "편 없음"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:585
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:384
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:593
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:393
 #, c-format
 msgid "Team %d"
 msgstr "편 %d"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:698
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:706
 msgid "Clients"
 msgstr "클라이언트"
 
@@ -8693,7 +8693,7 @@ msgid "Cancel the expedition"
 msgstr "탐험 취소"
 
 #: ../../src/wui/constructionsitewindow.cc:154
-#: ../../src/wui/dismantlesitewindow.cc:68
+#: ../../src/wui/dismantlesitewindow.cc:71
 msgid "Building materials"
 msgstr "건설 재료"
 
@@ -9607,13 +9607,18 @@ msgstr "물품을 제거"
 msgid "Add ware"
 msgstr "물품을 추가"
 
-#: ../../src/wui/inputqueuedisplay.cc:620
+#: ../../src/wui/inputqueuedisplay.cc:627
 msgid "Hide controls"
 msgstr "제어를 숨김"
 
-#: ../../src/wui/inputqueuedisplay.cc:620
+#: ../../src/wui/inputqueuedisplay.cc:627
 msgid "Show controls"
 msgstr "제어를 표시"
+
+#: ../../src/wui/inputqueuedisplay.cc:683
+#, c-format
+msgid "+%u"
+msgstr ""
 
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../src/wui/interactive_base.cc:144
