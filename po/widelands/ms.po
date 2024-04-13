@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-03-02 02:23+0000\n"
+"POT-Creation-Date: 2024-04-13 02:20+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: abuyop <abuyop@gmail.com>, 2015,2017\n"
 "Language-Team: Malay (http://app.transifex.com/widelands/widelands/language/ms/)\n"
@@ -467,7 +467,7 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:361
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:708
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:716
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "Pemain"
@@ -6741,7 +6741,7 @@ msgid "Type"
 msgstr "Jenis"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:249
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:357
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:366
 #: ../../src/wui/game_chat_panel.cc:449 ../../src/wui/game_summary.cc:118
 msgid "Team"
 msgstr "Pasukan"
@@ -6789,18 +6789,18 @@ msgstr "Dikongsi dengan Pemain %u"
 msgid "Start type is set via the scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:579
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:378
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:587
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:387
 msgid "No Team"
 msgstr ""
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:585
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:384
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:593
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:393
 #, c-format
 msgid "Team %d"
 msgstr ""
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:698
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:706
 msgid "Clients"
 msgstr "Klien"
 
@@ -8688,7 +8688,7 @@ msgid "Cancel the expedition"
 msgstr "Batalkan ekspedisi"
 
 #: ../../src/wui/constructionsitewindow.cc:154
-#: ../../src/wui/dismantlesitewindow.cc:68
+#: ../../src/wui/dismantlesitewindow.cc:71
 msgid "Building materials"
 msgstr "Bahan Bangunan"
 
@@ -9602,12 +9602,17 @@ msgstr ""
 msgid "Add ware"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:620
+#: ../../src/wui/inputqueuedisplay.cc:627
 msgid "Hide controls"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:620
+#: ../../src/wui/inputqueuedisplay.cc:627
 msgid "Show controls"
+msgstr ""
+
+#: ../../src/wui/inputqueuedisplay.cc:683
+#, c-format
+msgid "+%u"
 msgstr ""
 
 #. * TRANSLATORS: Title for the map view menu button in the game

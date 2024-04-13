@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-03-02 02:23+0000\n"
+"POT-Creation-Date: 2024-04-13 02:20+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Francisco Fernandes <franciscof09@gmail.com>, 2021\n"
 "Language-Team: Portuguese (http://app.transifex.com/widelands/widelands/language/pt/)\n"
@@ -469,7 +469,7 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:361
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:708
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:716
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "Jogadores"
@@ -6819,7 +6819,7 @@ msgid "Type"
 msgstr "Tipo"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:249
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:357
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:366
 #: ../../src/wui/game_chat_panel.cc:449 ../../src/wui/game_summary.cc:118
 msgid "Team"
 msgstr "Equipa"
@@ -6867,18 +6867,18 @@ msgstr "Partilhado no Jogador %u"
 msgid "Start type is set via the scenario"
 msgstr "O tipo de início é definido através do cenário"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:579
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:378
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:587
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:387
 msgid "No Team"
 msgstr "Sem Equipa"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:585
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:384
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:593
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:393
 #, c-format
 msgid "Team %d"
 msgstr "Equipa %d"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:698
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:706
 msgid "Clients"
 msgstr "Clientes"
 
@@ -8770,7 +8770,7 @@ msgid "Cancel the expedition"
 msgstr "Cancelar a expedição"
 
 #: ../../src/wui/constructionsitewindow.cc:154
-#: ../../src/wui/dismantlesitewindow.cc:68
+#: ../../src/wui/dismantlesitewindow.cc:71
 msgid "Building materials"
 msgstr "Materiais de construção"
 
@@ -9692,12 +9692,17 @@ msgstr ""
 msgid "Add ware"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:620
+#: ../../src/wui/inputqueuedisplay.cc:627
 msgid "Hide controls"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:620
+#: ../../src/wui/inputqueuedisplay.cc:627
 msgid "Show controls"
+msgstr ""
+
+#: ../../src/wui/inputqueuedisplay.cc:683
+#, c-format
+msgid "+%u"
 msgstr ""
 
 #. * TRANSLATORS: Title for the map view menu button in the game
