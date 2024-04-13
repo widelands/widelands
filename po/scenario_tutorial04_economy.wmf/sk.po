@@ -298,7 +298,7 @@ msgid ""
 "The stock window has four tabs. The first one shows you all your current "
 "wares, including those on roads, at flags and inside buildings waiting for "
 "processing."
-msgstr ""
+msgstr "V okne Zásoby sú štyri karty. Na prvej sa zobrazujú všetky vaše výrobky v danom momente vrátane tých na cestách, vlajkách a tých, ktoré čakajú na spracovanie vnútri budov."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:156
 msgid ""

@@ -5630,7 +5630,7 @@ msgstr "Aktivovať"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:334
 #, c-format
 msgid "%1$s+%2$u"
-msgstr ""
+msgstr "%1$s+%2$u"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:184
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:383
@@ -5678,7 +5678,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:360
 #, c-format
 msgid "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
-msgstr ""
+msgstr "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:388
 #, c-format
@@ -6008,7 +6008,7 @@ msgstr "Všeobecné"
 #: ../../src/ui_fsmenu/keyboard_options.cc:299
 #: ../../src/wlapplication_options.cc:295
 msgid "Editor"
-msgstr ""
+msgstr "Editor"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:303
 msgid "Fastplace"
