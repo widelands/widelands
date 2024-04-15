@@ -279,7 +279,8 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 
 	// ---------- Worlds ----------
 
-	world_.add(_("Random"), Widelands::Map::kOldWorldNames.size(), nullptr, true);
+	/** TRANSLATORS: Random Climate */
+	world_.add(pgettext("climate", "Random"), Widelands::Map::kOldWorldNames.size(), nullptr, true);
 	for (size_t i = 0; i < Widelands::Map::kOldWorldNames.size(); ++i) {
 		world_.add(Widelands::Map::kOldWorldNames[i].descname(), i);
 	}
@@ -313,7 +314,8 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 	terrains_distribution_.add(_("Alpine"), TerrainDistribution::kAlpine);
 	terrains_distribution_.add(_("Atoll"), TerrainDistribution::kAtoll);
 	terrains_distribution_.add(_("Wasteland"), TerrainDistribution::kWasteland);
-	terrains_distribution_.add(_("Random"), TerrainDistribution::kRandom);
+	/** TRANSLATORS: Random Terrain Distribution */
+	terrains_distribution_.add(pgettext("terrain", "Random"), TerrainDistribution::kRandom);
 
 	select_terrains_distribution();
 	terrains_distribution_.selected.connect([this]() { select_terrains_distribution(); });
