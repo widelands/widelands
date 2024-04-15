@@ -254,7 +254,8 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 
 	generator_.set_enabled(false);
 	/** TRANSLATORS: Default Map Generator */
-	generator_.add(pgettext("map_generator", "Default"), nullptr, g_image_cache->get("images/logos/wl-ico-64.png"), true);
+	generator_.add(pgettext("map_generator", "Default"), nullptr,
+	               g_image_cache->get("images/logos/wl-ico-64.png"), true);
 	for (const auto& addon : AddOns::g_addons) {
 		if (addon.second && addon.first->category == AddOns::AddOnCategory::kMapGenerator) {
 			generator_.add(addon.first->descname(), addon.first, addon.first->icon, false);
@@ -312,7 +313,8 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 	// Terrains Distribution
 
 	/** TRANSLATORS: Default Terrain Distribution */
-	terrains_distribution_.add(pgettext("terrain", "Default"), TerrainDistribution::kDefault, nullptr, true);
+	terrains_distribution_.add(
+	   pgettext("terrain", "Default"), TerrainDistribution::kDefault, nullptr, true);
 	terrains_distribution_.add(_("Alpine"), TerrainDistribution::kAlpine);
 	terrains_distribution_.add(_("Atoll"), TerrainDistribution::kAtoll);
 	terrains_distribution_.add(_("Wasteland"), TerrainDistribution::kWasteland);
