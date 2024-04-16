@@ -312,9 +312,9 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 
 	// Terrains Distribution
 
-	/** TRANSLATORS: Default Terrain Distribution */
-	terrains_distribution_.add(
-	   pgettext("terrain", "Default"), TerrainDistribution::kDefault, nullptr, true);
+	terrains_distribution_.add(/** TRANSLATORS: Default Terrain Distribution */
+	                           pgettext("terrain", "Default"), TerrainDistribution::kDefault,
+	                           nullptr, true);
 	terrains_distribution_.add(_("Alpine"), TerrainDistribution::kAlpine);
 	terrains_distribution_.add(_("Atoll"), TerrainDistribution::kAtoll);
 	terrains_distribution_.add(_("Wasteland"), TerrainDistribution::kWasteland);
