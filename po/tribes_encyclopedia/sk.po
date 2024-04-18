@@ -10008,7 +10008,7 @@ msgstr[3] "%1%(+%2%) vojakov"
 #: ../../data/tribes/initialization/empire/units.lua:12
 msgctxt "empire_lore"
 msgid "‘%1%’<br>(%2%)"
-msgstr ""
+msgstr "„%1%“<br>(%2%)"
 
 #. TRANSLATORS: Helptext for an Empire ware: Granite, part 2
 #: ../../data/tribes/initialization/empire/units.lua:115

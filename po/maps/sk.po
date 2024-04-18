@@ -32,7 +32,7 @@ msgstr "Po vylodení na tajuplnom ostrove neďaleko Atlantídy, zostávajúci At
 
 #: ../../data/campaigns/atl02.wmf/elemental:8
 msgid "Struggling For a New Home Again"
-msgstr ""
+msgstr "Ďalší boj o nový domov"
 
 #: ../../data/campaigns/atl02.wmf/elemental:10
 msgid ""

@@ -695,7 +695,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:1430
 msgid "Publish Map"
-msgstr "Zverejni mapu"
+msgstr "Zverejnenie mapy"
 
 #: ../../src/editor/editorinteractive.cc:1431
 #, c-format
@@ -1667,7 +1667,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:34
 msgid "Resize"
-msgstr "Zmeniť rozmer"
+msgstr "Zmena veľkosti"
 
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:59
 msgid ""
@@ -4097,7 +4097,7 @@ msgstr[3] "%d hodín"
 #, c-format
 msgctxt "spinbox_change_hours_mins"
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s a %2$s"
 
 #. * TRANSLATORS: ..
 #. The hours part of "Increase/Decrease the value by X hours and Y minutes".
@@ -4204,7 +4204,7 @@ msgstr[3] "%d políčok"
 #, c-format
 msgctxt "spinbox_change"
 msgid "%i %%"
-msgstr ""
+msgstr "%i %%"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n>"
 #. You may want to treat this as "by <n>", depending on how you
@@ -4229,7 +4229,7 @@ msgstr "Kliknutím zoradíte tento stĺpec"
 #: ../../src/ui_basic/table.cc:163
 #, c-format
 msgid "%1$s<br>(%2$s)"
-msgstr ""
+msgstr "%1$s<br>(%2$s)"
 
 #: ../../src/ui_basic/window.cc:101 ../../src/ui_fsmenu/about.cc:41
 #: ../../src/ui_fsmenu/crash_report.cc:71
@@ -5549,7 +5549,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:938
 #, c-format
 msgid "%1$u / %2$u"
-msgstr ""
+msgstr "%1$u / %2$u"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:974
 msgid "This screenshot could not be fetched from the server due to an error."
@@ -5656,7 +5656,7 @@ msgstr "Kategória: %s"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:477
 #, c-format
 msgid "Version: %1$s+%2$u"
-msgstr ""
+msgstr "Verzia: %1$s+%2$u"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:283
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:403
@@ -5985,7 +5985,7 @@ msgstr "Obnoviť všetko do predvolených nastavení"
 #: ../../src/ui_fsmenu/keyboard_options.cc:240
 #, c-format
 msgid "%1$s: %2$s"
-msgstr ""
+msgstr "%1$s: %2$s"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:265
 msgid "Keyboard Shortcut Conflict"
@@ -8249,7 +8249,7 @@ msgstr "Ctrl"
 #: ../../src/wlapplication_options.cc:1401
 #, c-format
 msgid "%1$s+%2$s"
-msgstr ""
+msgstr "%1$s+%2$s"
 
 #: ../../src/wlapplication_options.cc:1414
 msgctxt "hotkey"
@@ -8441,7 +8441,7 @@ msgstr "(neaktívne)"
 #: ../../src/wlapplication_options.cc:1496 ../../src/wui/waresdisplay.cc:637
 #, c-format
 msgid "%1$s%2$s"
-msgstr ""
+msgstr "%1$s%2$s"
 
 #: ../../src/wlapplication_options.cc:1521
 #, c-format
@@ -9749,7 +9749,7 @@ msgstr "Zobraziť ovládanie"
 #: ../../src/wui/inputqueuedisplay.cc:683
 #, c-format
 msgid "+%u"
-msgstr ""
+msgstr "+%u"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../src/wui/interactive_base.cc:144
