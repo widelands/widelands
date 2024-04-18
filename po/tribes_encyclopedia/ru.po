@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-01 02:29+0000\n"
+"POT-Creation-Date: 2024-04-18 02:34+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2019,2022-2024\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
@@ -3165,8 +3165,8 @@ msgstr "Оружейная и верфь также используют дос�
 msgctxt "atlanteans_ware"
 msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth in a weaving mill."
-msgstr "Эту пряжу дают пауки, которых разводят на паучьих фермах. Затем из неё делают шёлк на ткацкой фабрике."
+"processed into spidercloth or tabards in a weaving mill."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../data/tribes/initialization/atlanteans/units.lua:481
@@ -3416,9 +3416,10 @@ msgstr "Именно поэтому ими пользуются лесник и 
 #: ../../data/tribes/initialization/atlanteans/units.lua:709
 msgctxt "atlanteans_ware"
 msgid ""
-"Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
-"sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr "Геологи, строители, оружейники и бронники - всем нужен молоток. Убедитесь, что у вас всегда есть небольшой резерв! Он изготавливается инструментальщиком."
+"Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
+"hammer. Make sure you’ve always got some in reserve! They are produced by "
+"the toolsmith."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Milking Tongs
 #: ../../data/tribes/initialization/atlanteans/units.lua:719

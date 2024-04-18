@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-08 02:24+0000\n"
+"POT-Creation-Date: 2024-04-18 02:34+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2022,2024\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -215,8 +215,8 @@ msgstr "Lomb őrház"
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:41
 msgctxt "amazons_building"
-msgid "Your soldiers have occupied your treetop sentry."
-msgstr "A katonáid elfoglalták a lomb őrházat."
+msgid "Your soldier has occupied your treetop sentry."
+msgstr ""
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:43
