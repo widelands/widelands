@@ -209,7 +209,7 @@ msgstr "Boompostje"
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:41
 msgctxt "amazons_building"
 msgid "Your soldier has occupied your treetop sentry."
-msgstr ""
+msgstr "Diene Soldatske hett dien Boompostje besett."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:43

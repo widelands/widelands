@@ -981,7 +981,7 @@ msgstr "Popis: %s"
 #: ../../src/editor/ui_menus/field_info_window.cc:251
 msgctxt "addons"
 msgid "(none)"
-msgstr ""
+msgstr "(žiadne)"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:258
 #, c-format
@@ -1332,19 +1332,19 @@ msgstr "Identifikátor mapy:"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:257
 msgctxt "map_generator"
 msgid "Default"
-msgstr ""
+msgstr "Predvolený"
 
 #. * TRANSLATORS: Random Climate
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:285
 msgctxt "climate"
 msgid "Random"
-msgstr ""
+msgstr "Náhodné"
 
 #. * TRANSLATORS: Default Terrain Distribution
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:316
 msgctxt "terrain"
 msgid "Default"
-msgstr ""
+msgstr "Štandardná"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:318
 msgid "Alpine"
@@ -1364,7 +1364,7 @@ msgstr "Pustatina"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:322
 msgctxt "terrain"
 msgid "Random"
-msgstr ""
+msgstr "Náhodná"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:630
 msgid "Generating random map…"
@@ -3347,7 +3347,7 @@ msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was reachable at the TCP port %u or the server shut down as"
 " you tried to connect."
-msgstr ""
+msgstr "Nepodarilo sa nadviazať spojenie so zadanou adresou. Buď bol server hry Widelands nedosiahnuteľný na TCP porte %u, alebo bol server ukončený, keď ste sa naň pokúšali pripojiť."
 
 #: ../../src/network/gameclient.cc:816
 #, c-format
@@ -5201,7 +5201,7 @@ msgstr "Minimálna verzia Widelands: %s"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:295
 msgctxt "version"
 msgid "(none)"
-msgstr ""
+msgstr "(žiadna)"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:325
 msgid "Top-level directory"
@@ -5828,7 +5828,7 @@ msgstr "Názov kampane"
 #: ../../src/ui_fsmenu/campaigns.cc:45
 msgctxt "difficulty"
 msgid "Default"
-msgstr ""
+msgstr "Štandardná"
 
 #: ../../src/ui_fsmenu/crash_report.cc:44
 msgid "Crash Report Details"
@@ -10822,7 +10822,7 @@ msgstr ""
 #: ../../src/wui/shipwindow.cc:362
 msgctxt "destination"
 msgid "(none)"
-msgstr ""
+msgstr "(žiaden)"
 
 #: ../../src/wui/shipwindow.cc:429 ../../src/wui/shipwindow.cc:434
 #: ../../src/wui/shipwindow.cc:439

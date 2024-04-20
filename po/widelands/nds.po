@@ -980,7 +980,7 @@ msgstr "Beschrieven: %s"
 #: ../../src/editor/ui_menus/field_info_window.cc:251
 msgctxt "addons"
 msgid "(none)"
-msgstr ""
+msgstr "(keene)"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:258
 #, c-format
@@ -1329,19 +1329,19 @@ msgstr "Kennteken för de Kaart:"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:257
 msgctxt "map_generator"
 msgid "Default"
-msgstr ""
+msgstr "Normaal"
 
 #. * TRANSLATORS: Random Climate
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:285
 msgctxt "climate"
 msgid "Random"
-msgstr ""
+msgstr "Tofällig"
 
 #. * TRANSLATORS: Default Terrain Distribution
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:316
 msgctxt "terrain"
 msgid "Default"
-msgstr ""
+msgstr "Normaal"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:318
 msgid "Alpine"
@@ -1361,7 +1361,7 @@ msgstr "Unland"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:322
 msgctxt "terrain"
 msgid "Random"
-msgstr ""
+msgstr "Tofällig"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:630
 msgid "Generating random map…"
@@ -3324,7 +3324,7 @@ msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was reachable at the TCP port %u or the server shut down as"
 " you tried to connect."
-msgstr ""
+msgstr "Widelands kunn sik nich mit de angeven Adress verbinnen. Of keen Widelands-Server löppt up de TCP-Port %u of the Server hett sik ofsluten jüüst as du di verbinnen wullst."
 
 #: ../../src/network/gameclient.cc:816
 #, c-format
@@ -5136,7 +5136,7 @@ msgstr "Minnste Widelands-Versioon: %s"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:295
 msgctxt "version"
 msgid "(none)"
-msgstr ""
+msgstr "(keene)"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:325
 msgid "Top-level directory"
@@ -5751,7 +5751,7 @@ msgstr "Naam vun de Rutfödderungs-Riege"
 #: ../../src/ui_fsmenu/campaigns.cc:45
 msgctxt "difficulty"
 msgid "Default"
-msgstr ""
+msgstr "Normaal"
 
 #: ../../src/ui_fsmenu/crash_report.cc:44
 msgid "Crash Report Details"
@@ -10713,7 +10713,7 @@ msgstr "Kann de Söök nich ofbreken, wiel de Schipp keene Muu tum Torüggkomen 
 #: ../../src/wui/shipwindow.cc:362
 msgctxt "destination"
 msgid "(none)"
-msgstr ""
+msgstr "(keens)"
 
 #: ../../src/wui/shipwindow.cc:429 ../../src/wui/shipwindow.cc:434
 #: ../../src/wui/shipwindow.cc:439
