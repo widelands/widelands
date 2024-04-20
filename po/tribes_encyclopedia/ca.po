@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-01 02:29+0000\n"
+"POT-Creation-Date: 2024-04-18 02:34+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Juanjo, 2015-2024\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
@@ -3145,8 +3145,8 @@ msgstr "El taller d’armes i la drassana també utilitzen taulons per produir d
 msgctxt "atlanteans_ware"
 msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth in a weaving mill."
-msgstr "La seda d’aranya la produeixen les aranyes criades en granges. Es transforma en tela de seda d’aranya en tallers de teixir."
+"processed into spidercloth or tabards in a weaving mill."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../data/tribes/initialization/atlanteans/units.lua:481
@@ -3396,9 +3396,10 @@ msgstr "Per això les usen el guarda forestal i el cultivador de negrarrel. Es p
 #: ../../data/tribes/initialization/atlanteans/units.lua:709
 msgctxt "atlanteans_ware"
 msgid ""
-"Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
-"sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr "Els geòlegs, constructors, armers i fabricants d’armadures necessiten un martell per treballar. Assegureu-vos tenir-ne sempre alguns de reserva! Es produeixen al taller d’eines."
+"Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
+"hammer. Make sure you’ve always got some in reserve! They are produced by "
+"the toolsmith."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Milking Tongs
 #: ../../data/tribes/initialization/atlanteans/units.lua:719
