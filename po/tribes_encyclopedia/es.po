@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-01 02:29+0000\n"
+"POT-Creation-Date: 2024-04-18 02:34+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Juan Miguel Bernal González, 2024\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
@@ -3164,8 +3164,8 @@ msgstr "La armería y el astillero además usan tablas para producir diferentes 
 msgctxt "atlanteans_ware"
 msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth in a weaving mill."
-msgstr "La seda de araña es producida por arañas, que son criadas por granjas de arañas. Es procesada en tela de araña en un telar."
+"processed into spidercloth or tabards in a weaving mill."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../data/tribes/initialization/atlanteans/units.lua:481
@@ -3415,9 +3415,10 @@ msgstr "Por lo tanto el silvicultor y el granjero de raíz negra la usan. Son pr
 #: ../../data/tribes/initialization/atlanteans/units.lua:709
 msgctxt "atlanteans_ware"
 msgid ""
-"Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
-"sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr "Geólogos, constructores, armeros y fabricantes de armaduras, todos necesitan un martillo. Asegúrate de tener siempre algunos en reserva! Son producidos por el fabricante de herramientas."
+"Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
+"hammer. Make sure you’ve always got some in reserve! They are produced by "
+"the toolsmith."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Milking Tongs
 #: ../../data/tribes/initialization/atlanteans/units.lua:719
