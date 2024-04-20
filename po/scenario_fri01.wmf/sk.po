@@ -58,6 +58,8 @@ msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
 msgstr ""
+"Postavte tehliarsku pec, uhoľnú baňu, kamennú baňu, jamu na hlinu a studňu, "
+"aby sme mohli vyrábať tehly."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:41
 msgid "Gather building materials"
@@ -71,6 +73,8 @@ msgstr "Vytvorte zásoby stavebných materiálov"
 msgid ""
 "Stockpile some building materials in your headquarters. Gather at least:"
 msgstr ""
+"Vytvorte si zásoby niektorých stavebných materiálov vo vašom ústredí. "
+"Zhromaždite aspoň:"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:45
 msgid "30 × Log"
@@ -331,6 +335,11 @@ msgid ""
 "Reed is easily cultivated, so the reed farmer doesn’t need anything more to "
 "start growing reed fields."
 msgstr ""
+"Tiež by sme mali čoskoro postaviť trstinovú záhradu. Dokonca aj trstinové "
+"záhrady potrebujú trstinu na stavbu, takže sa musíme postarať o to, aby sme "
+"nemali nedostatok predtým, ako si vypestujeme svoju vlastnú. Trstina sa "
+"ľahko pestuje, takže trstinový farmár nepotrebuje nič navyše k pestovaniu "
+"trstinových polí."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:161
 msgid "Building our new home"
@@ -438,7 +447,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:201
 msgid "Build another brick kiln"
-msgstr ""
+msgstr "Postavte ďalšiu tehliarsku pec"
 
 #. TRANSLATORS: Hauke – no bricks
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:203
@@ -476,7 +485,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:214
 msgid "Hungry Miners"
-msgstr ""
+msgstr "Hladní baníci"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:215
 msgid "The miners are protesting…"

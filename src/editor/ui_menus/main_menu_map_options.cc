@@ -363,7 +363,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	main_box_.add_space(indent_);
 
 	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, "label_author",
-	                               UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_, _("Authors:")));
+	                               UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_, _("Author:")));
 	main_box_.add(&author_);
 	main_box_.add_space(indent_);
 

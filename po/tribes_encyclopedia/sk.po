@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-01 02:29+0000\n"
+"POT-Creation-Date: 2024-04-18 02:34+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -3155,8 +3155,8 @@ msgstr "Vyhne na zbrane a lodenice ich používajú na výrobu rozličných troj
 msgctxt "atlanteans_ware"
 msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth in a weaving mill."
-msgstr "Pavúčí hodváb produkujú pavúky, ktoré sa chovajú na pavúčich farmách. V tkáčovni sa spracúva na pavúčiu látku."
+"processed into spidercloth or tabards in a weaving mill."
+msgstr "Pavúčí hodváb produkujú pavúky, ktoré sa chovajú na pavúčích farmách. V tkáčovni sa spracúva na pavúčiu látku alebo kabátce."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../data/tribes/initialization/atlanteans/units.lua:481
@@ -3406,9 +3406,10 @@ msgstr "Používajú ich preto horári a pestovatelia čierneho koreňa. Vyrába
 #: ../../data/tribes/initialization/atlanteans/units.lua:709
 msgctxt "atlanteans_ware"
 msgid ""
-"Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
-"sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr "Potrebujú ho geológia, stavbári, kováči zbraní a kováči zbrojí. Dbajte na to, aby ste vždy mali nejaké v rezerve! Vyrába ho kováč nástrojov."
+"Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
+"hammer. Make sure you’ve always got some in reserve! They are produced by "
+"the toolsmith."
+msgstr "Potrebujú ho geológovia, stavbári, kováči zbraní, kováči zbrojí a lodiari. Dbajte na to, aby ste vždy mali nejaké v rezerve! Vyrába ich kováč nástrojov."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Milking Tongs
 #: ../../data/tribes/initialization/atlanteans/units.lua:719
@@ -6108,7 +6109,7 @@ msgid ""
 "sure you’ve always got some in reserve! They are one of the basic tools "
 "produced at the metal workshop (but cease to be produced by the building if "
 "it is enhanced to an ax workshop and war mill)."
-msgstr "Potrebujú ho geológovia, stavbári, kováči a kováči heliem. Dbajte na to, aby ste vždy mali nejaké v rezerve! Je jedným z najzákladnejších nástrojov vyrábaných v kovodielni (ktorá ho však prestane vyrábať po vylepšení na výrobňu sekier alebo vojenský závod)."
+msgstr "Potrebujú ho geológovia, stavbári, kováči a kováči heliem. Dbajte na to, aby ste vždy mali nejaké v rezerve! Sú jedným z najzákladnejších nástrojov vyrábaných v kovodielni (ktorá ich však prestane vyrábať po vylepšení na výrobňu sekier alebo vojenský závod)."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Fishing Rod, part 1
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 1
@@ -10008,7 +10009,7 @@ msgstr[3] "%1%(+%2%) vojakov"
 #: ../../data/tribes/initialization/empire/units.lua:12
 msgctxt "empire_lore"
 msgid "‘%1%’<br>(%2%)"
-msgstr ""
+msgstr "„%1%“<br>(%2%)"
 
 #. TRANSLATORS: Helptext for an Empire ware: Granite, part 2
 #: ../../data/tribes/initialization/empire/units.lua:115
@@ -10229,7 +10230,7 @@ msgctxt "empire_ware"
 msgid ""
 "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr "Potrebujú ho geológia, stavbári, kováči zbraní a kováči zbrojí. Dbajte na to, aby ste vždy mali nejaké v rezerve! Vyrába ho kováč nástrojov."
+msgstr "Potrebujú ho geológovia, stavbári, kováči zbraní a kováči zbrojí. Dbajte na to, aby ste vždy mali nejaké v rezerve! Vyrába ich kováč nástrojov."
 
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 2
 #. TRANSLATORS: Helptext for an Empire ware: Hunting Spear, part 2
