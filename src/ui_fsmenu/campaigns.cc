@@ -42,7 +42,7 @@ Campaigns::Campaigns() {
 	Section& campvis_scenarios = campvis->get_safe_section("scenarios");
 
 	/** TRANSLATORS: A campaign difficulty */
-	const std::string default_difficulty_name = _("Default");
+	const std::string default_difficulty_name = pgettext("difficulty", "Default");
 	i18n::Textdomain td("maps");
 
 	// Now load the campaign info

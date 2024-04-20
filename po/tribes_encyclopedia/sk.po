@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-01 02:29+0000\n"
+"POT-Creation-Date: 2024-04-18 02:34+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -1688,7 +1688,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1662
 msgctxt "amazons_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Umiestňuje vojačky, aby rozšírili vaše územie."
 
 #. TRANSLATORS: Note helptext for an Amazon military site: Patrol Post
 #. TRANSLATORS: Note helptext for an Amazon military site: Warriors’ Dwelling
@@ -3155,8 +3155,8 @@ msgstr "Vyhne na zbrane a lodenice ich používajú na výrobu rozličných troj
 msgctxt "atlanteans_ware"
 msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth in a weaving mill."
-msgstr "Pavúčí hodváb produkujú pavúky, ktoré sa chovajú na pavúčich farmách. V tkáčovni sa spracúva na pavúčiu látku."
+"processed into spidercloth or tabards in a weaving mill."
+msgstr "Pavúčí hodváb produkujú pavúky, ktoré sa chovajú na pavúčích farmách. V tkáčovni sa spracúva na pavúčiu látku alebo kabátce."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../data/tribes/initialization/atlanteans/units.lua:481
@@ -3406,9 +3406,10 @@ msgstr "Používajú ich preto horári a pestovatelia čierneho koreňa. Vyrába
 #: ../../data/tribes/initialization/atlanteans/units.lua:709
 msgctxt "atlanteans_ware"
 msgid ""
-"Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
-"sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr "Potrebujú ho geológia, stavbári, kováči zbraní a kováči zbrojí. Dbajte na to, aby ste vždy mali nejaké v rezerve! Vyrába ho kováč nástrojov."
+"Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
+"hammer. Make sure you’ve always got some in reserve! They are produced by "
+"the toolsmith."
+msgstr "Potrebujú ho geológovia, stavbári, kováči zbraní, kováči zbrojí a lodiari. Dbajte na to, aby ste vždy mali nejaké v rezerve! Vyrába ich kováč nástrojov."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Milking Tongs
 #: ../../data/tribes/initialization/atlanteans/units.lua:719
@@ -4748,7 +4749,7 @@ msgid ""
 "one kind of trident is needed by the economy, production of one light "
 "trident takes %2$s and one long trident, one steel trident, one double "
 "trident or one heavy double trident takes %3$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky trojzubce, výroba jedného trojzubca trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh trojzubca, výroba jedného ľahkého trojzubca trvá priemerne %2$s a jedného dlhého, oceľového, dvojitého alebo ťažkého dvojitého trojzubca trvá %3$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Armor
 #. Smithy
@@ -4777,7 +4778,7 @@ msgid ""
 "the economy, production of one of each kind takes %1$s on average. If only "
 "one kind of shield is needed by the economy, production of one steel shield "
 "takes %2$s and one advanced shield takes %3$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje oba druhy štítov, výroba jedného štítu trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh štítu, výroba jedného oceľového štítu trvá priemerne %2$s a jedného vylepšeného štítu %3$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Barracks
 #: ../../data/tribes/initialization/atlanteans/units.lua:1782
@@ -5164,7 +5165,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:2031
 msgctxt "atlanteans_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Umiestňuje vojakov, aby rozšírili vaše územie."
 
 #. TRANSLATORS: Note helptext for an Atlantean military site: Guardhouse
 #. TRANSLATORS: Note helptext for an Atlantean military site: Guardhall
@@ -6108,7 +6109,7 @@ msgid ""
 "sure you’ve always got some in reserve! They are one of the basic tools "
 "produced at the metal workshop (but cease to be produced by the building if "
 "it is enhanced to an ax workshop and war mill)."
-msgstr "Potrebujú ho geológovia, stavbári, kováči a kováči heliem. Dbajte na to, aby ste vždy mali nejaké v rezerve! Je jedným z najzákladnejších nástrojov vyrábaných v kovodielni (ktorá ho však prestane vyrábať po vylepšení na výrobňu sekier alebo vojenský závod)."
+msgstr "Potrebujú ho geológovia, stavbári, kováči a kováči heliem. Dbajte na to, aby ste vždy mali nejaké v rezerve! Sú jedným z najzákladnejších nástrojov vyrábaných v kovodielni (ktorá ich však prestane vyrábať po vylepšení na výrobňu sekier alebo vojenský závod)."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Fishing Rod, part 1
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 1
@@ -7032,7 +7033,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce beer in"
 " about %s on average."
-msgstr "Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vyrobiť pivo v priemere za asi %s."
+msgstr "Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vyrobiť pivo v priemere za %s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Brewery
 #: ../../data/tribes/initialization/barbarians/units.lua:1352
@@ -7064,7 +7065,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce strong "
 "beer in about %s on average."
-msgstr ""
+msgstr "Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vyrobiť silné pivo v priemere za %s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Tavern
 #: ../../data/tribes/initialization/barbarians/units.lua:1368
@@ -7719,7 +7720,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1792
 msgctxt "barbarians_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Umiestňuje vojakov, aby rozšírili vaše územie."
 
 #. TRANSLATORS: Note helptext for a Barbarian military site: Sentry
 #. TRANSLATORS: Note helptext for a Barbarian military site: Barrier
@@ -10008,7 +10009,7 @@ msgstr[3] "%1%(+%2%) vojakov"
 #: ../../data/tribes/initialization/empire/units.lua:12
 msgctxt "empire_lore"
 msgid "‘%1%’<br>(%2%)"
-msgstr ""
+msgstr "„%1%“<br>(%2%)"
 
 #. TRANSLATORS: Helptext for an Empire ware: Granite, part 2
 #: ../../data/tribes/initialization/empire/units.lua:115
@@ -10229,7 +10230,7 @@ msgctxt "empire_ware"
 msgid ""
 "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr "Potrebujú ho geológia, stavbári, kováči zbraní a kováči zbrojí. Dbajte na to, aby ste vždy mali nejaké v rezerve! Vyrába ho kováč nástrojov."
+msgstr "Potrebujú ho geológovia, stavbári, kováči zbraní a kováči zbrojí. Dbajte na to, aby ste vždy mali nejaké v rezerve! Vyrába ich kováč nástrojov."
 
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 2
 #. TRANSLATORS: Helptext for an Empire ware: Hunting Spear, part 2
@@ -12057,7 +12058,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:2276
 msgctxt "empire_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Umiestňuje vojakov, aby rozšírili vaše územie."
 
 #. TRANSLATORS: Note helptext for an Empire military site: Blockhouse
 #. TRANSLATORS: Note helptext for an Empire military site: Sentry
@@ -15407,7 +15408,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2196
 msgctxt "frisians_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Umiestňuje vojakov, aby rozšírili vaše územie."
 
 #. TRANSLATORS: Note helptext for a Frisian military site: Wooden Tower
 #. TRANSLATORS: Note helptext for a Frisian military site: High Wooden Tower
@@ -16057,10 +16058,10 @@ msgstr "Liečenie:"
 #, lua-format
 msgid "Garrisoned soldiers heal %d health point per second."
 msgid_plural "Garrisoned soldiers heal %d health points per second."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Vojaci umiestnení vnútri budovy sa liečia rýchlosťou %d bod zdravia za sekundu."
+msgstr[1] "Vojaci umiestnení vnútri budovy sa liečia rýchlosťou %d body zdravia za sekundu."
+msgstr[2] "Vojaci umiestnení vnútri budovy sa liečia rýchlosťou %d bodov zdravia za sekundu."
+msgstr[3] "Vojaci umiestnení vnútri budovy sa liečia rýchlosťou %d bodov zdravia za sekundu."
 
 #: ../../data/tribes/scripting/help/building_help.lua:358
 #: ../../data/tribes/scripting/help/building_help.lua:364

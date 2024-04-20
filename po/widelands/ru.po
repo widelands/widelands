@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-03-02 02:23+0000\n"
+"POT-Creation-Date: 2024-04-18 02:34+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2024\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
@@ -358,7 +358,7 @@ msgstr "Новая карта"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:216
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:842
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:848
 #: ../../src/wlapplication_options.cc:462
 msgid "New Random Map"
 msgstr "Новая случайная карта"
@@ -483,7 +483,7 @@ msgstr "Добавление или удаление мест для порта"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:361
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:708
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:716
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "Игроки"
@@ -681,7 +681,7 @@ msgstr "Загрузка карты “%s”…"
 #. * TRANSLATORS: Default name for new map
 #: ../../src/editor/editorinteractive.cc:1201
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:115
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:620
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:626
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:144
 #: ../../src/logic/map.h:231 ../../src/wui/mapdata.cc:50
 msgid "No Name"
@@ -690,7 +690,7 @@ msgstr "Без имени"
 #. * TRANSLATORS: Map author name when it hasn't been set yet
 #: ../../src/editor/editorinteractive.cc:1204
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:116
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:621
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:627
 #: ../../src/logic/map.h:232 ../../src/ui_fsmenu/addons/packager.cc:412
 msgctxt "author_name"
 msgid "Unknown"
@@ -983,7 +983,7 @@ msgid "Author: %s"
 msgstr "Автор: %s"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:244
-#: ../../src/ui_fsmenu/addons/packager_box.cc:296
+#: ../../src/ui_fsmenu/addons/packager_box.cc:297
 #: ../../src/ui_fsmenu/main.cc:449 ../../src/ui_fsmenu/mapdetailsbox.cc:124
 #, c-format
 msgid "Description: %s"
@@ -991,10 +991,9 @@ msgstr "Описание: %s"
 
 #. * TRANSLATORS: No add-ons enabled
 #: ../../src/editor/ui_menus/field_info_window.cc:251
-#: ../../src/ui_fsmenu/addons/packager_box.cc:294
-#: ../../src/wui/shipwindow.cc:361
+msgctxt "addons"
 msgid "(none)"
-msgstr "(нету)"
+msgstr ""
 
 #: ../../src/editor/ui_menus/field_info_window.cc:258
 #, c-format
@@ -1075,7 +1074,7 @@ msgstr "OK"
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:115
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:258
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:70
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:860
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:866
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:70
 #: ../../src/ui_basic/color_chooser.cc:281
 #: ../../src/ui_basic/messagebox.cc:117 ../../src/ui_basic/text_prompt.cc:55
@@ -1114,7 +1113,7 @@ msgid "Click player to remove"
 msgstr "Щёлкните игрока для удаления"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:61
-#: ../../src/ui_fsmenu/addons/packager_box.cc:437
+#: ../../src/ui_fsmenu/addons/packager_box.cc:438
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:67
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:90
 #: ../../src/wui/economy_options_window.cc:680
@@ -1156,8 +1155,9 @@ msgid "Map name:"
 msgstr "Имя карты:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:366
-msgid "Authors:"
-msgstr "Авторы:"
+#: ../../src/ui_fsmenu/addons/packager.cc:166
+msgid "Author:"
+msgstr "Автор: "
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:372
 #: ../../src/ui_fsmenu/addons/packager.cc:189
@@ -1318,7 +1318,7 @@ msgstr "Горы:"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:193
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:500
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:506
 #: ../../src/ui_basic/spinbox.cc:592
 #, c-format
 msgid "%i %%"
@@ -1340,41 +1340,53 @@ msgstr "Сгенерировать новое случайное число"
 msgid "Map ID:"
 msgstr "ID карты:"
 
-#. * TRANSLATORS: A campaign difficulty
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:256
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:312
-#: ../../src/ui_fsmenu/campaigns.cc:45
+#. * TRANSLATORS: Default Map Generator
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:257
+msgctxt "map_generator"
 msgid "Default"
-msgstr "По-умолчанию"
+msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:282
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:316
+#. * TRANSLATORS: Random Climate
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:285
+msgctxt "climate"
 msgid "Random"
-msgstr "Случайно"
+msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:313
+#. * TRANSLATORS: Default Terrain Distribution
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:316
+msgctxt "terrain"
+msgid "Default"
+msgstr ""
+
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:318
 msgid "Alpine"
 msgstr "Высокогорье"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:314
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:319
 msgid "Atoll"
 msgstr "Атолл"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:315
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:320
 #: ../../src/logic/map.cc:62
 msgid "Wasteland"
 msgstr "Пустошь"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:624
+#. * TRANSLATORS: Random Terrain Distribution
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:322
+msgctxt "terrain"
+msgid "Random"
+msgstr ""
+
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:630
 msgid "Generating random map…"
 msgstr "Создание случайной карты..."
 
 #. * TRANSLATORS: Window title. This is shown after a random map has been
 #. created in the
 #. editor.
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:691
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:725
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:697
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:731
 #: ../../src/ui_fsmenu/main.cc:421
 msgid "Random Map"
 msgstr "Случайная карта"
@@ -1385,7 +1397,7 @@ msgstr "Случайная карта"
 #. * TRANSLATORS: as long as the user understands that he needs to check the
 #. player
 #. positions.
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:697
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:703
 msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
@@ -1397,34 +1409,34 @@ msgstr "Карта сгенерирована. Пожалуйста, переп�
 #. * TRANSLATORS: You don't need to be literal with your translation, as long
 #. as
 #. * TRANSLATORS: the user understands that the map's quality is pretty poor.
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:703
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:709
 msgid ""
 "The map generator could not produce a good-enough map with the provided "
 "settings. This map will probably need extensive editing to be playable. "
 "Consider creating a new map with different parameters."
 msgstr "Генератор карт не смог создать достаточно качественную карту с заданными настройками. Похоже, что эту карту нужно хорошенько отредактировать, прежде чем играть в неё. Возможно стоит попробовать создать новую карту с другими параметрами."
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:726
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:732
 msgid "The Widelands Random Map Generator"
 msgstr "Генератор карт Widelands"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:728
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:734
 msgid ""
 "This map was generated automatically by the Widelands Random Map Generator."
 msgstr "Эта карта была сгенерирована автоматически генератором случайных карт Widelands."
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:736
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:742
 #: ../../src/network/gamehost.cc:1663
 #, c-format
 msgid "Computer %u"
 msgstr "Компьютер %u"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:736
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:742
 #: ../../src/wui/game_summary.cc:117
 msgid "Player"
 msgstr "Игрок"
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:852
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:858
 msgid "Generate Map"
 msgstr "Генерировать карту"
 
@@ -1540,7 +1552,7 @@ msgstr "Игрок %u"
 
 #. * TRANSLATORS: Header for campaign tribe
 #: ../../src/editor/ui_menus/player_menu.cc:195
-#: ../../src/ui_fsmenu/addons/packager_box.cc:478
+#: ../../src/ui_fsmenu/addons/packager_box.cc:479
 #: ../../src/ui_fsmenu/campaign_select.cc:48
 #: ../../src/ui_fsmenu/campaigndetails.cc:56
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:227
@@ -2032,47 +2044,47 @@ msgstr[3] "Задействовано %u игровых дополнений:"
 #. * TRANSLATORS: "12 steps northwest of Port1"
 #: ../../src/logic/detected_port_space.cc:52
 msgid "northwest"
-msgstr ""
+msgstr "северо-запад"
 
 #. * TRANSLATORS: "12 steps northeast of Port1"
 #: ../../src/logic/detected_port_space.cc:56
 msgid "northeast"
-msgstr ""
+msgstr "северо-восток"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../src/logic/detected_port_space.cc:60
 msgid "southwest"
-msgstr ""
+msgstr "юго-запад"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../src/logic/detected_port_space.cc:64
 msgid "southeast"
-msgstr ""
+msgstr "юго-восток"
 
 #. * TRANSLATORS: "12 steps north of Port1"
 #: ../../src/logic/detected_port_space.cc:68
 msgid "north"
-msgstr ""
+msgstr "север"
 
 #. * TRANSLATORS: "12 steps south of Port1"
 #: ../../src/logic/detected_port_space.cc:72
 msgid "south"
-msgstr ""
+msgstr "юг"
 
 #. * TRANSLATORS: "12 steps west of Port1"
 #: ../../src/logic/detected_port_space.cc:76
 msgid "west"
-msgstr ""
+msgstr "запад"
 
 #. * TRANSLATORS: "12 steps east of Port1"
 #: ../../src/logic/detected_port_space.cc:80
 msgid "east"
-msgstr ""
+msgstr "восток"
 
 #: ../../src/logic/detected_port_space.cc:88
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s"
-msgstr ""
+msgstr "%2$s обнаружил незанятое место для порта в %1$s "
 
 #. * TRANSLATORS: "Unowned port space discovered at 1:11 by Ship2 33 steps
 #. north of
@@ -2082,15 +2094,15 @@ msgstr ""
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
 msgid_plural ""
 "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s of %5$s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1$s обнаружил незанятое место для порта в %2$s в %3$u шаге на %4$s от %5$s"
+msgstr[1] "%2$s обнаружил незанятое место для порта в %1$s в %3$u шагах на %4$s от %5$s"
+msgstr[2] "%2$s обнаружил незанятое место для порта в %1$s d %3$u шагах на %4$s от %5$s"
+msgstr[3] "%2$s обнаружил незанятое место для порта в %1$s в %3$uшагах на %4$s от %5$s"
 
 #: ../../src/logic/detected_port_space.cc:101
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s"
-msgstr ""
+msgstr "%2$s обнаружил место для порта принадлежащее %1$s в %3$s"
 
 #. * TRANSLATORS: "Port space of Player1 discovered at 2:22 by Ship3 44 steps
 #. north
@@ -2100,65 +2112,65 @@ msgstr ""
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
 msgid_plural ""
 "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s of %6$s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%3$s обнаружил место для порта принадлежащее %1$s в %2$s в %4$u шаге на %5$s от %6$s"
+msgstr[1] "%3$s обнаружил место для порта принадлежащее %1$s в %2$s в %4$u шагах на %5$s от %6$s"
+msgstr[2] " %3$s обнаружил место для порта принадлежащее %1$s в %2$s в %4$u шагах на %5$s от %6$s"
+msgstr[3] "%3$s обнаружил место для порта принадлежащее %1$s в %2$s в %4$u шагах на %5$s от %6$s"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
 #: ../../src/logic/detected_port_space.cc:120
 msgctxt "direction"
 msgid "NW"
-msgstr ""
+msgstr "СЗ"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northeast.
 #: ../../src/logic/detected_port_space.cc:124
 msgctxt "direction"
 msgid "NE"
-msgstr ""
+msgstr "СВ"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southwest.
 #: ../../src/logic/detected_port_space.cc:128
 msgctxt "direction"
 msgid "SW"
-msgstr ""
+msgstr "ЮЗ"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southeast.
 #: ../../src/logic/detected_port_space.cc:132
 msgctxt "direction"
 msgid "SE"
-msgstr ""
+msgstr "ЮВ"
 
 #. * TRANSLATORS: This is an abbreviated direction: North.
 #: ../../src/logic/detected_port_space.cc:136
 msgctxt "direction"
 msgid "N"
-msgstr ""
+msgstr "С"
 
 #. * TRANSLATORS: This is an abbreviated direction: South.
 #: ../../src/logic/detected_port_space.cc:140
 msgctxt "direction"
 msgid "S"
-msgstr ""
+msgstr "Ю"
 
 #. * TRANSLATORS: This is an abbreviated direction: West.
 #: ../../src/logic/detected_port_space.cc:144
 msgctxt "direction"
 msgid "W"
-msgstr ""
+msgstr "З"
 
 #. * TRANSLATORS: This is an abbreviated direction: East.
 #: ../../src/logic/detected_port_space.cc:148
 msgctxt "direction"
 msgid "E"
-msgstr ""
+msgstr "В"
 
 #. * TRANSLATORS: Placeholders are gametime and shipname. Keep this short.
 #: ../../src/logic/detected_port_space.cc:157
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s"
-msgstr ""
+msgstr "Свободно / %1$s / %2$s"
 
 #. * TRANSLATORS: Placeholders are gametime, shipname, and distance direction
 #. port_name.
@@ -2167,7 +2179,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s / %3$u %4$s %5$s"
-msgstr ""
+msgstr "Свободно / %1$s / %2$s / %3$u %4$s %5$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this
 #. short.
@@ -2175,7 +2187,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s"
-msgstr ""
+msgstr "%1$s / %2$s / %3$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, shipname, and "distance
 #. direction port_name.
@@ -2184,7 +2196,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
-msgstr ""
+msgstr "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
 
 #: ../../src/logic/editor_game_base.cc:236
 #, c-format
@@ -2594,35 +2606,35 @@ msgstr "Ваша паромная верфь построена недостат
 
 #: ../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Destination Gone"
-msgstr ""
+msgstr "Пропал пункт назначения"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Ship Destination Vanished"
-msgstr ""
+msgstr "Пункт назначения корабля исчез"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:400
 msgid "Your ship’s destination has disappeared."
-msgstr ""
+msgstr "Пункт назначения вашего корабля исчез."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:427
 msgid "Ship Arrived"
-msgstr ""
+msgstr "Корабль прибыл"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:427
 msgid "Ship Reached Destination"
-msgstr ""
+msgstr "Судно достигло цели"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:428
 msgid "Your ship has arrived at its destination."
-msgstr ""
+msgstr "Ваш корабль прибыл в пункт назначения."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:637
 msgid "A warship arrived at a known port build space."
-msgstr ""
+msgstr "Военный корабль прибыл в известное место для строительства порта."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:638
 msgid "An expedition ship arrived at a known port build space."
-msgstr ""
+msgstr "Экспедиционный корабль прибыл в известное место для порта."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:639
 #: ../../src/logic/map_objects/tribes/ship.cc:647
@@ -2631,11 +2643,11 @@ msgstr "Место порта"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:639
 msgid "Port Space Spotted"
-msgstr ""
+msgstr "Замечено место для порта"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:645
 msgid "A warship found a new port build space."
-msgstr ""
+msgstr "Военный корабль нашёл место для строительства нового порта."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:646
 msgid "An expedition ship found a new port build space."
@@ -2647,65 +2659,65 @@ msgstr "Найдено место для порта"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:747
 msgid "Enemy Ship"
-msgstr ""
+msgstr "Вражеское судно"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:747
 msgid "Enemy Ship Spotted"
-msgstr ""
+msgstr "Замечено вражеское судно"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:748
 msgid "A warship spotted an enemy ship."
-msgstr ""
+msgstr "Военный корабль заметил вражеское судно."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:778
 #: ../../src/logic/map_objects/tribes/ship.cc:797
 msgid "Destination Unreachable"
-msgstr ""
+msgstr "Пункт назначения вне досягаемости"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:778
 #: ../../src/logic/map_objects/tribes/ship.cc:797
 msgid "Ship Destination Unreachable"
-msgstr ""
+msgstr "Пункт назначения корабля вне досягаемости"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:779
 msgid "Your ship could not find a path to its destination."
-msgstr ""
+msgstr "Ваш корабль не может проложить путь к пункту назначения."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:798
 #, c-format
 msgid "Your ship could not find a path to its destination port ‘%s’."
-msgstr ""
+msgstr "Ваш корабль не может проложить путь к порту назначения \"%s\"."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1303
 #: ../../src/logic/map_objects/tribes/ship.cc:1561
 msgid "Enemy Ship Attacking"
-msgstr ""
+msgstr "Вражеское судно атаковано"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1303
 #: ../../src/logic/map_objects/tribes/ship.cc:1560
 msgid "Naval Attack"
-msgstr ""
+msgstr "Морская атака"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1304
 #, c-format
 msgid "Your ship ‘%s’ is under attack from an enemy warship."
-msgstr ""
+msgstr "Ваше судно \"%s\" is атаковано вражеским военным кораблем."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1423
 msgid "Ship Destroyed"
-msgstr ""
+msgstr "Судно повреждено"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1423
 msgid "Ship Sunk"
-msgstr ""
+msgstr "Судно затонуло"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1424
 msgid "An enemy ship has destroyed your warship."
-msgstr ""
+msgstr "Вражеское судно уничтожило ваш военный корабль."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1562
 msgid "Your coast is under attack from an enemy warship."
-msgstr ""
+msgstr "Ваще побережье атаковано вражеским военным кораблем."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1791
 msgid "Island Circumnavigated"
@@ -2765,15 +2777,15 @@ msgstr "Обнаруженное место для порта больше не�
 #: ../../src/logic/map_objects/tribes/ship.cc:2214
 msgctxt "ship"
 msgid "Warship"
-msgstr ""
+msgstr "Военный корабль"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2214
 msgid "Warship Ready"
-msgstr ""
+msgstr "Военный корабль готов"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2215
 msgid "A warship is waiting for your commands."
-msgstr ""
+msgstr "Военный корабль ждет ваших приказаний."
 
 #. * TRANSLATORS: Ship expedition ready
 #: ../../src/logic/map_objects/tribes/ship.cc:2220
@@ -2792,28 +2804,28 @@ msgstr "Экспедиционный корабль ждёт ваших указ
 #: ../../src/logic/map_objects/tribes/ship.cc:2385
 msgctxt "ship_state"
 msgid "Sinking"
-msgstr ""
+msgstr "Тонет"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2387
 msgctxt "ship_state"
 msgid "Fighting"
-msgstr ""
+msgstr "Сражается"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2391
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
-msgstr ""
+msgstr "Переоборудуется в транспорт"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2394
 msgctxt "ship_state"
 msgid "Refitting to Warship"
-msgstr ""
+msgstr "Переоборудовать в военный корабль"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2400
 #: ../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
-msgstr ""
+msgstr "Военный корабль"
 
 #. * TRANSLATORS: This is a ship state. The ship is
 #. * currently sailing to a specific destination ship.
@@ -3331,24 +3343,25 @@ msgstr "Проверка карты"
 msgid "Postloading map objects"
 msgstr "Загрузка объектов карты"
 
-#: ../../src/network/gameclient.cc:162 ../../src/network/gamehost.cc:561
+#: ../../src/network/gameclient.cc:163 ../../src/network/gamehost.cc:561
 #: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:788
 msgid "Preparing game…"
 msgstr "Подготовка к игре..."
 
-#: ../../src/network/gameclient.cc:232
+#: ../../src/network/gameclient.cc:233
 #: ../../src/network/internet_gaming.cc:104
 msgid "Could not establish connection to host"
 msgstr "Невозможно установить соединение с хостом"
 
-#: ../../src/network/gameclient.cc:233
+#: ../../src/network/gameclient.cc:234
+#, c-format
 msgid ""
 "Widelands could not establish a connection to the given address. Either no "
-"Widelands server was running at the supposed port or the server shut down as"
+"Widelands server was reachable at the TCP port %u or the server shut down as"
 " you tried to connect."
-msgstr "Widelands не может осуществить соединение по указанному адресу. Возможно сервер выключен или запущен на другом порту. Проверьте настройки и попробуйте подключиться еще раз."
+msgstr ""
 
-#: ../../src/network/gameclient.cc:814
+#: ../../src/network/gameclient.cc:816
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
@@ -3357,35 +3370,35 @@ msgstr[1] "%u конфликта дополнений:\n"
 msgstr[2] "%u конфликтов дополнений:\n"
 msgstr[3] "%u конфликтов дополнений:\n"
 
-#: ../../src/network/gameclient.cc:816
+#: ../../src/network/gameclient.cc:818
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
 msgstr "%1$s\n. Требования  \"%2$s\" не выполнены"
 
-#: ../../src/network/gameclient.cc:819
+#: ../../src/network/gameclient.cc:821
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n• ‘%2$s’ установлено версии %3$s, но хост использует версию %4$s"
 
-#: ../../src/network/gameclient.cc:990
+#: ../../src/network/gameclient.cc:992
 msgid "/me ’s file failed md5 checksumming."
 msgstr "Файл /me не прошел проверку контрольной суммы MD5."
 
-#: ../../src/network/gameclient.cc:1032
+#: ../../src/network/gameclient.cc:1034
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me проверка полученного файла. Хотя проверка md5 суммы успешна, файл не доступен."
 
-#: ../../src/network/gameclient.cc:1353
+#: ../../src/network/gameclient.cc:1355
 msgid "Disconnected"
 msgstr "Отвалилась сеть"
 
-#: ../../src/network/gameclient.cc:1354
+#: ../../src/network/gameclient.cc:1356
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -3450,7 +3463,7 @@ msgstr "Вы не можете изгнать себя!"
 #: ../../src/network/gamehost.cc:179
 #, c-format
 msgid "Are you sure you want to kick %s?"
-msgstr "Точно хотите выгнать  %s?"
+msgstr "Точно хотите выгнать %s?"
 
 #: ../../src/network/gamehost.cc:180
 #, c-format
@@ -3735,7 +3748,7 @@ msgstr "Метасервер не отвечает"
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
-msgstr "Вы были оключены от метасервера, так как не отвечаете на запрос PING."
+msgstr "Вы были отключены от метасервера, так как не отвечаете на запрос PING."
 
 #: ../../src/network/network_gaming_messages.cc:30
 msgid "Client has left the game."
@@ -4031,7 +4044,7 @@ msgstr "Загрузка..."
 
 #: ../../src/ui_basic/spinbox.cc:151
 msgid "Decrease the value"
-msgstr ""
+msgstr "Уменьшить значение"
 
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
@@ -4043,7 +4056,7 @@ msgstr "Уменьшить значение на %s"
 
 #: ../../src/ui_basic/spinbox.cc:164
 msgid "Increase the value"
-msgstr ""
+msgstr "Увеличить значение"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
@@ -4860,7 +4873,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr "Дополнение  ‘%1$s’ не может быть загружено на сервер.\nСообщение об ошибке:\n%2$s "
+msgstr "Дополнение ‘%1$s’ не может быть загружено на сервер.\nСообщение об ошибке:\n%2$s "
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1469
 #, c-format
@@ -4923,10 +4936,6 @@ msgstr "Идёт сохранение. Пожалуйста, подождите.
 msgid "Name:"
 msgstr "Название: "
 
-#: ../../src/ui_fsmenu/addons/packager.cc:166
-msgid "Author:"
-msgstr "Автор: "
-
 #: ../../src/ui_fsmenu/addons/packager.cc:171
 #: ../../src/ui_fsmenu/tech_info.cc:76
 msgid "Version:"
@@ -4956,14 +4965,14 @@ msgstr "Категория"
 #: ../../src/ui_fsmenu/addons/packager.cc:380
 #: ../../src/ui_fsmenu/addons/packager.cc:396
 #: ../../src/ui_fsmenu/addons/packager.cc:401
-#: ../../src/ui_fsmenu/addons/packager_box.cc:401
-#: ../../src/ui_fsmenu/addons/packager_box.cc:417
-#: ../../src/ui_fsmenu/addons/packager_box.cc:423
+#: ../../src/ui_fsmenu/addons/packager_box.cc:402
+#: ../../src/ui_fsmenu/addons/packager_box.cc:418
+#: ../../src/ui_fsmenu/addons/packager_box.cc:424
 msgid "Invalid Name"
 msgstr "Недопустимое название"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:381
-#: ../../src/ui_fsmenu/addons/packager_box.cc:403
+#: ../../src/ui_fsmenu/addons/packager_box.cc:404
 #, c-format
 msgid ""
 "This name is invalid. Reason: %s\n"
@@ -5138,7 +5147,7 @@ msgstr "Символ ‘%c’ недопустим"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:68
 #, c-format
 msgid "Filename may not contain ‘%s’"
-msgstr "В названии файла не должно быть  ‘%s’"
+msgstr "В названии файла не должно быть ‘%s’"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:154
 msgid "Add selected map"
@@ -5200,19 +5209,25 @@ msgstr "Игроки: %s"
 msgid "Minimum Widelands Version: %s"
 msgstr "Минимальная версия Widelands: %s"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:324
+#. * TRANSLATORS: No minimum required version
+#: ../../src/ui_fsmenu/addons/packager_box.cc:295
+msgctxt "version"
+msgid "(none)"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:325
 msgid "Top-level directory"
 msgstr "Каталог верхнего уровня"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:389
+#: ../../src/ui_fsmenu/addons/packager_box.cc:390
 msgid "New Directory"
 msgstr "Новый каталог"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:390
+#: ../../src/ui_fsmenu/addons/packager_box.cc:391
 msgid "Enter the name for the new directory."
 msgstr "Введите название каталога."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:410
+#: ../../src/ui_fsmenu/addons/packager_box.cc:411
 #, c-format
 msgid ""
 "Directories may not use the extension ‘%s’.\n"
@@ -5220,37 +5235,37 @@ msgid ""
 "Please choose a different name."
 msgstr "У директорий не может быть расширения ‘%s’.\n\nПодберите другое имя."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:423
+#: ../../src/ui_fsmenu/addons/packager_box.cc:424
 msgid "A directory with this name already exists."
 msgstr "Каталог с таким названием уже есть."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:439
+#: ../../src/ui_fsmenu/addons/packager_box.cc:440
 #, c-format
 msgid "Do you really want to delete the directory ‘%s’ and all its contents?"
 msgstr "Вы уверены, что хотите удалить каталог '%s' со всем его содержимым?"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:441
+#: ../../src/ui_fsmenu/addons/packager_box.cc:442
 #, c-format
 msgid "Do you really want to delete the map ‘%s’?"
 msgstr "Вы уверены, что хотите удалить карту '%s'?"
 
 #. * TRANSLATORS: Header for campaign difficulty
-#: ../../src/ui_fsmenu/addons/packager_box.cc:489
+#: ../../src/ui_fsmenu/addons/packager_box.cc:490
 #: ../../src/ui_fsmenu/campaign_select.cc:47
 #: ../../src/ui_fsmenu/campaigndetails.cc:60
 #: ../../src/ui_fsmenu/scenario_select.cc:70
 msgid "Difficulty"
 msgstr "Уровень сложности"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:499
+#: ../../src/ui_fsmenu/addons/packager_box.cc:500
 msgid "Difficulty:"
 msgstr "Сложность: "
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:524
+#: ../../src/ui_fsmenu/addons/packager_box.cc:525
 msgid "The campaigns difficulty. One word."
 msgstr "Сложность кампании одним словом."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:525
+#: ../../src/ui_fsmenu/addons/packager_box.cc:526
 msgid "Short description, which will be appended to the difficulty."
 msgstr "Краткое описание того, что вас ждет."
 
@@ -5630,7 +5645,7 @@ msgstr "Требуется версия Widelands в диапазоне от%1$s
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:150
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:201
 msgid "Disable"
-msgstr "Отключно"
+msgstr "Отключено"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:150
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:201
@@ -5820,6 +5835,12 @@ msgstr "Название племени"
 #: ../../src/ui_fsmenu/campaign_select.cc:50
 msgid "Campaign Name"
 msgstr "Название кампании"
+
+#. * TRANSLATORS: A campaign difficulty
+#: ../../src/ui_fsmenu/campaigns.cc:45
+msgctxt "difficulty"
+msgid "Default"
+msgstr ""
 
 #: ../../src/ui_fsmenu/crash_report.cc:44
 msgid "Crash Report Details"
@@ -6065,7 +6086,7 @@ msgstr "Запретить дипломатию"
 
 #: ../../src/ui_fsmenu/launch_game.cc:141
 msgid "Enable naval warfare (experimental feature)"
-msgstr ""
+msgstr "Включить морские сражения (экспериментальная функция)"
 
 #: ../../src/ui_fsmenu/launch_game.cc:149
 msgid "Custom starting positions"
@@ -6143,18 +6164,18 @@ msgstr "Сделать карту видимой для всех игроков"
 
 #: ../../src/ui_fsmenu/launch_game.cc:395
 msgid "Naval warfare is set by the scenario"
-msgstr ""
+msgstr "Морские сражения устанавливаются сценарием"
 
 #: ../../src/ui_fsmenu/launch_game.cc:397
 msgid "Naval warfare is set by the saved game"
-msgstr ""
+msgstr "Морские сражения устанавливаются сохранением"
 
 #: ../../src/ui_fsmenu/launch_game.cc:400
 msgid ""
 "Enable coastal invasions and ship-to-ship battles. This feature is "
 "experimental and may undergo substantial redesign in future versions of "
 "Widelands."
-msgstr ""
+msgstr "Включите захват берега и сражения между кораблями. Эта функция является экспериментальной и может подвергнуться существенной переработке в будущих версиях Widelands."
 
 #: ../../src/ui_fsmenu/launch_game.cc:420
 msgid "Player relations are set by the scenario"
@@ -6445,7 +6466,7 @@ msgstr "Просмотр повтора старой игры"
 
 #: ../../src/ui_fsmenu/main.cc:464
 msgid "Watch last saved replay"
-msgstr ""
+msgstr "Смотреть последний сохраненный повтор"
 
 #: ../../src/ui_fsmenu/main.cc:490
 msgid "Single Player…"
@@ -6461,7 +6482,7 @@ msgstr "Редактор..."
 
 #: ../../src/ui_fsmenu/main.cc:493
 msgid "Watch Replay…"
-msgstr ""
+msgstr "Посмотреть повтор..."
 
 #: ../../src/ui_fsmenu/main.cc:495
 msgid "Begin or load a single-player campaign or free game"
@@ -6477,7 +6498,7 @@ msgstr "Запустить редактор карт"
 
 #: ../../src/ui_fsmenu/main.cc:504
 msgid "Watch again a recorded earlier game"
-msgstr ""
+msgstr "Посмотреть запись сыгранной ранее игры"
 
 #: ../../src/ui_fsmenu/main.cc:507 ../../src/wlapplication_options.cc:333
 msgid "Add-Ons"
@@ -6871,7 +6892,7 @@ msgid "Type"
 msgstr "Тип"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:249
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:357
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:366
 #: ../../src/wui/game_chat_panel.cc:449 ../../src/wui/game_summary.cc:118
 msgid "Team"
 msgstr "Команда"
@@ -6919,18 +6940,18 @@ msgstr "Совместная с игроком %u"
 msgid "Start type is set via the scenario"
 msgstr "Тип запуска устанавливается по сценарию"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:579
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:378
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:587
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:387
 msgid "No Team"
 msgstr "Нет команды"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:585
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:384
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:593
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:393
 #, c-format
 msgid "Team %d"
 msgstr "Команда %d"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:698
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:706
 msgid "Clients"
 msgstr "Клиенты"
 
@@ -7402,19 +7423,19 @@ msgstr "Снять метки со всех"
 
 #: ../../src/wlapplication.cc:832
 msgid "Widelands could not find the last edited map."
-msgstr ""
+msgstr "Widelands не может найти последнюю отредактированную карту."
 
 #: ../../src/wlapplication.cc:836
 msgid "No Last Edited Map"
-msgstr ""
+msgstr "Нет последней карты"
 
 #: ../../src/wlapplication.cc:867
 msgid "No last saved replay."
-msgstr ""
+msgstr "Нет последнего повтора."
 
 #: ../../src/wlapplication.cc:869
 msgid "No last saved game."
-msgstr ""
+msgstr "Нет последнего сохранения."
 
 #: ../../src/wlapplication.cc:879
 #, c-format
@@ -7434,17 +7455,17 @@ msgstr "Ошибка файловой системы"
 #: ../../src/wlapplication.cc:1360
 #, c-format
 msgid "Command line parameter --%s can not use a value"
-msgstr ""
+msgstr "Параметр командной строки - %s невозможно использовать значение"
 
 #: ../../src/wlapplication.cc:1365
 #, c-format
 msgid "Empty value of command line parameter --%s"
-msgstr ""
+msgstr "Не указан параметр командной строки - %s"
 
 #: ../../src/wlapplication.cc:1371
 #, c-format
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
-msgstr ""
+msgstr "Параметры командной строки %1$s и %2$s нельзя использовать вместе"
 
 #: ../../src/wlapplication.cc:1559
 #, c-format
@@ -7704,7 +7725,7 @@ msgstr "Посмотреть повтор"
 
 #: ../../src/wlapplication_options.cc:268
 msgid "Watch Latest Replay"
-msgstr ""
+msgstr "Смотреть последний повтор"
 
 #: ../../src/wlapplication_options.cc:287
 msgid "Singleplayer"
@@ -8054,7 +8075,7 @@ msgstr "Показать бездействующие корабли"
 
 #: ../../src/wlapplication_options.cc:799
 msgid "Show Transport Ships"
-msgstr "Показать загруженные суда"
+msgstr "Показать транспорты"
 
 #: ../../src/wlapplication_options.cc:804
 msgid "Show Waiting Expeditions"
@@ -8070,11 +8091,11 @@ msgstr "Показать экспедиции, с местами для порт
 
 #: ../../src/wlapplication_options.cc:819
 msgid "Show Warships"
-msgstr ""
+msgstr "Показать военные корабли"
 
 #: ../../src/wlapplication_options.cc:824
 msgid "Show Ships Being Refitted"
-msgstr ""
+msgstr "Показать корабли на переоборудовании"
 
 #: ../../src/wlapplication_options.cc:829
 msgid "Toggle Quick Navigation"
@@ -8542,10 +8563,10 @@ msgstr "Атака"
 #, c-format
 msgid "%u ship"
 msgid_plural "%u ships"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%u корабль"
+msgstr[1] "%u корабля"
+msgstr[2] "%u кораблей"
+msgstr[3] "%u корабли"
 
 #. * TRANSLATORS: Number of soldiers that should attack. Used in the attack
 #. window.
@@ -8561,7 +8582,7 @@ msgstr[3] "%u солдат"
 
 #: ../../src/wui/attack_window.cc:376
 msgid "Number of ships"
-msgstr ""
+msgstr "Число судов"
 
 #: ../../src/wui/attack_window.cc:376
 msgid "Number of soldiers"
@@ -8569,7 +8590,7 @@ msgstr "Выберете количество солдат для атаки"
 
 #: ../../src/wui/attack_window.cc:383
 msgid "Send less ships. Hold down Ctrl to send no ships"
-msgstr ""
+msgstr "Отправить меньше кораблей. Удерживайте нажатой клавишу Ctrl, чтобы не отправлять корабли"
 
 #: ../../src/wui/attack_window.cc:384
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
@@ -8577,7 +8598,7 @@ msgstr "Отправьте меньше солдат. Удерживайте Ctr
 
 #: ../../src/wui/attack_window.cc:390
 msgid "Send more ships. Hold down Ctrl to send as many ships as possible"
-msgstr ""
+msgstr "Отправить больше кораблей. Удерживайте нажатой клавишу Ctrl, чтобы отправить как можно больше кораблей"
 
 #: ../../src/wui/attack_window.cc:391
 msgid ""
@@ -8594,7 +8615,7 @@ msgstr "Атакующие:"
 
 #: ../../src/wui/attack_window.cc:424
 msgid "Click on a ship to remove her from the list of attackers"
-msgstr ""
+msgstr "Щелкнуть корабль, чтобы удалить его из списка атакующих"
 
 #: ../../src/wui/attack_window.cc:425
 msgid "Click on a soldier to remove him from the list of attackers"
@@ -8602,7 +8623,7 @@ msgstr "Щёлкнуть солдата, чтобы удалить его из �
 
 #: ../../src/wui/attack_window.cc:427
 msgid "Hold down Ctrl to remove all ships from the list"
-msgstr ""
+msgstr "Удерживайте нажатой клавишу Ctrl, чтобы удалить все корабли из списка"
 
 #: ../../src/wui/attack_window.cc:428
 msgid "Hold down Ctrl to remove all soldiers from the list"
@@ -8610,7 +8631,7 @@ msgstr "Удерживайте Ctrl, чтобы удалить всех солд
 
 #: ../../src/wui/attack_window.cc:432
 msgid "Hold down Shift to remove all ships up to the one you’re pointing at"
-msgstr ""
+msgstr "Удерживайте нажатой клавишу Shift, чтобы удалить все корабли, вплоть до того, на который вы указываете"
 
 #: ../../src/wui/attack_window.cc:433
 msgid ""
@@ -8623,7 +8644,7 @@ msgstr "Не атакуют:"
 
 #: ../../src/wui/attack_window.cc:446
 msgid "Click on a ship to add her to the list of attackers"
-msgstr ""
+msgstr "Щелкнуть на корабль, чтобы добавить его в список атакующих"
 
 #: ../../src/wui/attack_window.cc:447
 msgid "Click on a soldier to add him to the list of attackers"
@@ -8631,7 +8652,7 @@ msgstr "Щёлкнуть солдата, чтобы добавить его в �
 
 #: ../../src/wui/attack_window.cc:449
 msgid "Hold down Ctrl to add all ships to the list"
-msgstr ""
+msgstr "Удерживайте нажатой клавишу Ctrl, чтобы добавить все корабли в список"
 
 #: ../../src/wui/attack_window.cc:450
 msgid "Hold down Ctrl to add all soldiers to the list"
@@ -8639,7 +8660,7 @@ msgstr "Удерживайте Ctrl, чтобы добавить всех сол
 
 #: ../../src/wui/attack_window.cc:453
 msgid "Hold down Shift to add all ships up to the one you’re pointing at"
-msgstr ""
+msgstr "Удерживайте нажатой клавишу Shift, чтобы добавить все корабли вплоть до того, на который вы указываете"
 
 #: ../../src/wui/attack_window.cc:454
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
@@ -8665,7 +8686,7 @@ msgstr "Центрировать вид на это здание"
 #: ../../src/wui/attack_window.cc:630
 #, c-format
 msgid "%1$s  HP: %2$u/%3$u  AT: +%4$u%%"
-msgstr ""
+msgstr "%1$s  HP: %2$u/%3$u  AT: +%4$u%%"
 
 #: ../../src/wui/attack_window.cc:635 ../../src/wui/soldierlist.cc:556
 #, c-format
@@ -8824,7 +8845,7 @@ msgid "Cancel the expedition"
 msgstr "Отменить экспедицию"
 
 #: ../../src/wui/constructionsitewindow.cc:154
-#: ../../src/wui/dismantlesitewindow.cc:68
+#: ../../src/wui/dismantlesitewindow.cc:71
 msgid "Building materials"
 msgstr "Стройматериалы"
 
@@ -8881,7 +8902,7 @@ msgstr "Предпочитать героев"
 #: ../../src/wui/constructionsitewindow.cc:364
 #: ../../src/wui/soldierlist.cc:496
 msgid "No preference"
-msgstr ""
+msgstr "Нет предпочтений"
 
 #: ../../src/wui/constructionsitewindow.cc:395
 msgid "Settings to apply after construction"
@@ -9133,22 +9154,22 @@ msgstr "Построить переправы"
 #, c-format
 msgctxt "ship_state"
 msgid "Warship · HP %1$u%% · AT +%2$u%%"
-msgstr ""
+msgstr "Военный корабль · HP %1$u%% · AT +%2$u%%"
 
 #: ../../src/wui/fieldaction.cc:1258
 msgctxt "ship_state"
 msgid "Enemy Transport Ship"
-msgstr ""
+msgstr "Вражеский транспорт"
 
 #: ../../src/wui/fieldaction.cc:1260
 msgctxt "ship_state"
 msgid "Expedition"
-msgstr ""
+msgstr "Экспедиция"
 
 #: ../../src/wui/fieldaction.cc:1262
 msgctxt "ship_state"
 msgid "Transport"
-msgstr ""
+msgstr "Транспорт"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
 #: ../../src/wui/fieldaction.cc:1264 ../../src/wui/interactive_gamebase.cc:614
@@ -9159,15 +9180,15 @@ msgstr "%1$s (%2$s)"
 
 #: ../../src/wui/fieldaction.cc:1274
 msgid "Select Ship"
-msgstr ""
+msgstr "Выбрать судно"
 
 #: ../../src/wui/fieldaction.cc:1297
 msgid "Own Ships"
-msgstr ""
+msgstr "Свои корабли"
 
 #: ../../src/wui/fieldaction.cc:1311
 msgid "Attackable Ships"
-msgstr ""
+msgstr "Корабли, доступные для атаки"
 
 #: ../../src/wui/fleet_options_window.cc:94
 msgid "Ferry Fleet Options"
@@ -9617,11 +9638,11 @@ msgstr "Производительность"
 
 #: ../../src/wui/general_statistics_menu.cc:185
 msgid "Warships lost"
-msgstr ""
+msgstr "Утеряно военных кораблей"
 
 #: ../../src/wui/general_statistics_menu.cc:194
 msgid "Warships defeated"
-msgstr ""
+msgstr "Уничтожено военных кораблей"
 
 #: ../../src/wui/general_statistics_menu.cc:203
 msgid "Casualties"
@@ -9750,13 +9771,18 @@ msgstr "Убрать товар"
 msgid "Add ware"
 msgstr "Добавить товар"
 
-#: ../../src/wui/inputqueuedisplay.cc:620
+#: ../../src/wui/inputqueuedisplay.cc:627
 msgid "Hide controls"
 msgstr "Скрыть панель"
 
-#: ../../src/wui/inputqueuedisplay.cc:620
+#: ../../src/wui/inputqueuedisplay.cc:627
 msgid "Show controls"
 msgstr "Показать панель"
+
+#: ../../src/wui/inputqueuedisplay.cc:683
+#, c-format
+msgid "+%u"
+msgstr "+%u"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../src/wui/interactive_base.cc:144
@@ -10675,16 +10701,16 @@ msgstr "Транспортировка"
 #: ../../src/wui/seafaring_statistics_menu.cc:272
 msgctxt "ship_state"
 msgid "Being Refitted"
-msgstr ""
+msgstr "Переоборудовано"
 
 #: ../../src/wui/seafaring_statistics_menu.cc:426
 #, c-format
 msgid "Seafaring Statistics (%u Ship)"
 msgid_plural "Seafaring Statistics (%u Ships)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Статистика мореплавания (%u корабль)"
+msgstr[1] "Статистика мореплавания (%u корабля)"
+msgstr[2] "Статистика мореплавания (%u кораблей)"
+msgstr[3] "Статистика мореплавания (%u корабли)"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:568
@@ -10719,12 +10745,12 @@ msgstr "Показать экспедиции, которые нашли мес�
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:603
 msgid "Show warships"
-msgstr ""
+msgstr "Показать военные корабли"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:608
 msgid "Show ships being refitted"
-msgstr ""
+msgstr "Показать корабли на переоборудовании"
 
 #: ../../src/wui/shipwindow.cc:92
 #, c-format
@@ -10732,10 +10758,10 @@ msgid ""
 "Damaged warships regain %u hitpoint per second when anchored in a port."
 msgid_plural ""
 "Damaged warships regain %u hitpoints per second when anchored in a port."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Поврежденные военные корабли восстанавливают %u очко здоровья в секунду, когда стоят на якоре в порту."
+msgstr[1] "Поврежденные военные корабли восстанавливают %u очка здоровья в секунду, когда стоят на якоре в порту."
+msgstr[2] "Поврежденные военные корабли восстанавливают %u очков здоровья в секунду, когда стоят на якоре в порту."
+msgstr[3] "Поврежденные военные корабли восстанавливают %u очков здоровья в секунду, когда стоят на якоре в порту."
 
 #: ../../src/wui/shipwindow.cc:117
 msgid "Scout towards the north west"
@@ -10759,7 +10785,7 @@ msgstr "Построить порт в текущей локации"
 
 #: ../../src/wui/shipwindow.cc:142
 msgid "Anchor at the current location"
-msgstr ""
+msgstr "Бросить якорь в текущем месте"
 
 #: ../../src/wui/shipwindow.cc:147
 msgid "Scout towards the east"
@@ -10779,7 +10805,7 @@ msgstr "Вести разведку на южном направлении"
 
 #: ../../src/wui/shipwindow.cc:169
 msgid "Destination"
-msgstr ""
+msgstr "Пункт назначения"
 
 #: ../../src/wui/shipwindow.cc:180
 msgid "Sink the ship"
@@ -10804,28 +10830,34 @@ msgid ""
 "to."
 msgstr "Эта экспедиция не может быть отменена, т.к. нет порта, чтобы вернутся туда."
 
-#: ../../src/wui/shipwindow.cc:427 ../../src/wui/shipwindow.cc:432
-#: ../../src/wui/shipwindow.cc:437
+#. * TRANSLATORS: No destination
+#: ../../src/wui/shipwindow.cc:362
+msgctxt "destination"
+msgid "(none)"
+msgstr ""
+
+#: ../../src/wui/shipwindow.cc:429 ../../src/wui/shipwindow.cc:434
+#: ../../src/wui/shipwindow.cc:439
 #, c-format
 msgid "Go to destination (%s)"
 msgstr "Идти к (%s)"
 
-#: ../../src/wui/shipwindow.cc:442
+#: ../../src/wui/shipwindow.cc:444
 msgid "Go to destination"
 msgstr "Идти к указанному месту"
 
-#: ../../src/wui/shipwindow.cc:469
+#: ../../src/wui/shipwindow.cc:471
 msgid "Refit to transport ship"
-msgstr ""
+msgstr "Переоборудовать в транспорт"
 
-#: ../../src/wui/shipwindow.cc:470
+#: ../../src/wui/shipwindow.cc:472
 msgid "Refit to warship"
-msgstr ""
+msgstr "Переоборудование в военный корабль"
 
-#: ../../src/wui/shipwindow.cc:492
+#: ../../src/wui/shipwindow.cc:494
 #, c-format
 msgid "HP: %1$u/%2$u"
-msgstr ""
+msgstr "HP: %1$u/%2$u"
 
 #: ../../src/wui/soldier_statistics_menu.cc:89
 #: ../../src/wui/soldier_statistics_menu.cc:182
@@ -11028,7 +11060,7 @@ msgstr "Добавить 10 ед. товара"
 
 #: ../../src/wui/warehousewindow.cc:195
 msgid "Configure this building’s economy"
-msgstr "Настроить экономику в здании"
+msgstr "Настроить экономику здания"
 
 #: ../../src/wui/warehousewindow.cc:329
 msgid "Wares waiting to be shipped"
