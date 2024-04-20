@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-04-13 02:20+0000\n"
+"POT-Creation-Date: 2024-04-18 02:34+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Irish (http://app.transifex.com/widelands/widelands/language/ga/)\n"
@@ -339,7 +339,7 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:216
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:842
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:848
 #: ../../src/wlapplication_options.cc:462
 msgid "New Random Map"
 msgstr ""
@@ -662,7 +662,7 @@ msgstr ""
 #. * TRANSLATORS: Default name for new map
 #: ../../src/editor/editorinteractive.cc:1201
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:115
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:620
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:626
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:144
 #: ../../src/logic/map.h:231 ../../src/wui/mapdata.cc:50
 msgid "No Name"
@@ -671,7 +671,7 @@ msgstr ""
 #. * TRANSLATORS: Map author name when it hasn't been set yet
 #: ../../src/editor/editorinteractive.cc:1204
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:116
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:621
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:627
 #: ../../src/logic/map.h:232 ../../src/ui_fsmenu/addons/packager.cc:412
 msgctxt "author_name"
 msgid "Unknown"
@@ -964,7 +964,7 @@ msgid "Author: %s"
 msgstr ""
 
 #: ../../src/editor/ui_menus/field_info_window.cc:244
-#: ../../src/ui_fsmenu/addons/packager_box.cc:296
+#: ../../src/ui_fsmenu/addons/packager_box.cc:297
 #: ../../src/ui_fsmenu/main.cc:449 ../../src/ui_fsmenu/mapdetailsbox.cc:124
 #, c-format
 msgid "Description: %s"
@@ -972,8 +972,7 @@ msgstr ""
 
 #. * TRANSLATORS: No add-ons enabled
 #: ../../src/editor/ui_menus/field_info_window.cc:251
-#: ../../src/ui_fsmenu/addons/packager_box.cc:294
-#: ../../src/wui/shipwindow.cc:361
+msgctxt "addons"
 msgid "(none)"
 msgstr ""
 
@@ -1056,7 +1055,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:115
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:258
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:70
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:860
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:866
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:70
 #: ../../src/ui_basic/color_chooser.cc:281
 #: ../../src/ui_basic/messagebox.cc:117 ../../src/ui_basic/text_prompt.cc:55
@@ -1095,7 +1094,7 @@ msgid "Click player to remove"
 msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:61
-#: ../../src/ui_fsmenu/addons/packager_box.cc:437
+#: ../../src/ui_fsmenu/addons/packager_box.cc:438
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:67
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:90
 #: ../../src/wui/economy_options_window.cc:680
@@ -1137,7 +1136,8 @@ msgid "Map name:"
 msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:366
-msgid "Authors:"
+#: ../../src/ui_fsmenu/addons/packager.cc:166
+msgid "Author:"
 msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:372
@@ -1300,7 +1300,7 @@ msgstr ""
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:193
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:500
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:506
 #: ../../src/ui_basic/spinbox.cc:592
 #, c-format
 msgid "%i %%"
@@ -1322,41 +1322,53 @@ msgstr ""
 msgid "Map ID:"
 msgstr ""
 
-#. * TRANSLATORS: A campaign difficulty
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:256
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:312
-#: ../../src/ui_fsmenu/campaigns.cc:45
+#. * TRANSLATORS: Default Map Generator
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:257
+msgctxt "map_generator"
 msgid "Default"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:282
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:316
+#. * TRANSLATORS: Random Climate
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:285
+msgctxt "climate"
 msgid "Random"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:313
+#. * TRANSLATORS: Default Terrain Distribution
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:316
+msgctxt "terrain"
+msgid "Default"
+msgstr ""
+
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:318
 msgid "Alpine"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:314
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:319
 msgid "Atoll"
 msgstr ""
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:315
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:320
 #: ../../src/logic/map.cc:62
 msgid "Wasteland"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:624
+#. * TRANSLATORS: Random Terrain Distribution
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:322
+msgctxt "terrain"
+msgid "Random"
+msgstr ""
+
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:630
 msgid "Generating random map…"
 msgstr ""
 
 #. * TRANSLATORS: Window title. This is shown after a random map has been
 #. created in the
 #. editor.
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:691
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:725
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:697
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:731
 #: ../../src/ui_fsmenu/main.cc:421
 msgid "Random Map"
 msgstr ""
@@ -1367,7 +1379,7 @@ msgstr ""
 #. * TRANSLATORS: as long as the user understands that he needs to check the
 #. player
 #. positions.
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:697
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:703
 msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
@@ -1379,34 +1391,34 @@ msgstr ""
 #. * TRANSLATORS: You don't need to be literal with your translation, as long
 #. as
 #. * TRANSLATORS: the user understands that the map's quality is pretty poor.
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:703
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:709
 msgid ""
 "The map generator could not produce a good-enough map with the provided "
 "settings. This map will probably need extensive editing to be playable. "
 "Consider creating a new map with different parameters."
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:726
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:732
 msgid "The Widelands Random Map Generator"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:728
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:734
 msgid ""
 "This map was generated automatically by the Widelands Random Map Generator."
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:736
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:742
 #: ../../src/network/gamehost.cc:1663
 #, c-format
 msgid "Computer %u"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:736
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:742
 #: ../../src/wui/game_summary.cc:117
 msgid "Player"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:852
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:858
 msgid "Generate Map"
 msgstr ""
 
@@ -1522,7 +1534,7 @@ msgstr ""
 
 #. * TRANSLATORS: Header for campaign tribe
 #: ../../src/editor/ui_menus/player_menu.cc:195
-#: ../../src/ui_fsmenu/addons/packager_box.cc:478
+#: ../../src/ui_fsmenu/addons/packager_box.cc:479
 #: ../../src/ui_fsmenu/campaign_select.cc:48
 #: ../../src/ui_fsmenu/campaigndetails.cc:56
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:227
@@ -3323,24 +3335,25 @@ msgstr ""
 msgid "Postloading map objects"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:162 ../../src/network/gamehost.cc:561
+#: ../../src/network/gameclient.cc:163 ../../src/network/gamehost.cc:561
 #: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:788
 msgid "Preparing game…"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:232
+#: ../../src/network/gameclient.cc:233
 #: ../../src/network/internet_gaming.cc:104
 msgid "Could not establish connection to host"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:233
+#: ../../src/network/gameclient.cc:234
+#, c-format
 msgid ""
 "Widelands could not establish a connection to the given address. Either no "
-"Widelands server was running at the supposed port or the server shut down as"
+"Widelands server was reachable at the TCP port %u or the server shut down as"
 " you tried to connect."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:814
+#: ../../src/network/gameclient.cc:816
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
@@ -3350,35 +3363,35 @@ msgstr[2] ""
 msgstr[3] ""
 msgstr[4] ""
 
-#: ../../src/network/gameclient.cc:816
+#: ../../src/network/gameclient.cc:818
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:819
+#: ../../src/network/gameclient.cc:821
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:990
+#: ../../src/network/gameclient.cc:992
 msgid "/me ’s file failed md5 checksumming."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:1032
+#: ../../src/network/gameclient.cc:1034
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:1353
+#: ../../src/network/gameclient.cc:1355
 msgid "Disconnected"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:1354
+#: ../../src/network/gameclient.cc:1356
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -4933,10 +4946,6 @@ msgstr ""
 msgid "Name:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:166
-msgid "Author:"
-msgstr ""
-
 #: ../../src/ui_fsmenu/addons/packager.cc:171
 #: ../../src/ui_fsmenu/tech_info.cc:76
 msgid "Version:"
@@ -4966,14 +4975,14 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/packager.cc:380
 #: ../../src/ui_fsmenu/addons/packager.cc:396
 #: ../../src/ui_fsmenu/addons/packager.cc:401
-#: ../../src/ui_fsmenu/addons/packager_box.cc:401
-#: ../../src/ui_fsmenu/addons/packager_box.cc:417
-#: ../../src/ui_fsmenu/addons/packager_box.cc:423
+#: ../../src/ui_fsmenu/addons/packager_box.cc:402
+#: ../../src/ui_fsmenu/addons/packager_box.cc:418
+#: ../../src/ui_fsmenu/addons/packager_box.cc:424
 msgid "Invalid Name"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:381
-#: ../../src/ui_fsmenu/addons/packager_box.cc:403
+#: ../../src/ui_fsmenu/addons/packager_box.cc:404
 #, c-format
 msgid ""
 "This name is invalid. Reason: %s\n"
@@ -5213,19 +5222,25 @@ msgstr ""
 msgid "Minimum Widelands Version: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:324
+#. * TRANSLATORS: No minimum required version
+#: ../../src/ui_fsmenu/addons/packager_box.cc:295
+msgctxt "version"
+msgid "(none)"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:325
 msgid "Top-level directory"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:389
+#: ../../src/ui_fsmenu/addons/packager_box.cc:390
 msgid "New Directory"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:390
+#: ../../src/ui_fsmenu/addons/packager_box.cc:391
 msgid "Enter the name for the new directory."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:410
+#: ../../src/ui_fsmenu/addons/packager_box.cc:411
 #, c-format
 msgid ""
 "Directories may not use the extension ‘%s’.\n"
@@ -5233,37 +5248,37 @@ msgid ""
 "Please choose a different name."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:423
+#: ../../src/ui_fsmenu/addons/packager_box.cc:424
 msgid "A directory with this name already exists."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:439
+#: ../../src/ui_fsmenu/addons/packager_box.cc:440
 #, c-format
 msgid "Do you really want to delete the directory ‘%s’ and all its contents?"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:441
+#: ../../src/ui_fsmenu/addons/packager_box.cc:442
 #, c-format
 msgid "Do you really want to delete the map ‘%s’?"
 msgstr ""
 
 #. * TRANSLATORS: Header for campaign difficulty
-#: ../../src/ui_fsmenu/addons/packager_box.cc:489
+#: ../../src/ui_fsmenu/addons/packager_box.cc:490
 #: ../../src/ui_fsmenu/campaign_select.cc:47
 #: ../../src/ui_fsmenu/campaigndetails.cc:60
 #: ../../src/ui_fsmenu/scenario_select.cc:70
 msgid "Difficulty"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:499
+#: ../../src/ui_fsmenu/addons/packager_box.cc:500
 msgid "Difficulty:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:524
+#: ../../src/ui_fsmenu/addons/packager_box.cc:525
 msgid "The campaigns difficulty. One word."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:525
+#: ../../src/ui_fsmenu/addons/packager_box.cc:526
 msgid "Short description, which will be appended to the difficulty."
 msgstr ""
 
@@ -5838,6 +5853,12 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:50
 msgid "Campaign Name"
+msgstr ""
+
+#. * TRANSLATORS: A campaign difficulty
+#: ../../src/ui_fsmenu/campaigns.cc:45
+msgctxt "difficulty"
+msgid "Default"
 msgstr ""
 
 #: ../../src/ui_fsmenu/crash_report.cc:44
@@ -10844,25 +10865,31 @@ msgid ""
 "to."
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:427 ../../src/wui/shipwindow.cc:432
-#: ../../src/wui/shipwindow.cc:437
+#. * TRANSLATORS: No destination
+#: ../../src/wui/shipwindow.cc:362
+msgctxt "destination"
+msgid "(none)"
+msgstr ""
+
+#: ../../src/wui/shipwindow.cc:429 ../../src/wui/shipwindow.cc:434
+#: ../../src/wui/shipwindow.cc:439
 #, c-format
 msgid "Go to destination (%s)"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:442
+#: ../../src/wui/shipwindow.cc:444
 msgid "Go to destination"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:469
+#: ../../src/wui/shipwindow.cc:471
 msgid "Refit to transport ship"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:470
+#: ../../src/wui/shipwindow.cc:472
 msgid "Refit to warship"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:492
+#: ../../src/wui/shipwindow.cc:494
 #, c-format
 msgid "HP: %1$u/%2$u"
 msgstr ""
