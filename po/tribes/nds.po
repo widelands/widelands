@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-08 02:24+0000\n"
+"POT-Creation-Date: 2024-04-18 02:34+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2024\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -208,8 +208,8 @@ msgstr "Boompostje"
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:41
 msgctxt "amazons_building"
-msgid "Your soldiers have occupied your treetop sentry."
-msgstr "Diene Soldatsken hebben dien Boompostje besett."
+msgid "Your soldier has occupied your treetop sentry."
+msgstr "Diene Soldatske hett dien Boompostje besett."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:43
