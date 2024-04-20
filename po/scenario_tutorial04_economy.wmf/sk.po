@@ -134,7 +134,7 @@ msgstr "Zistite, koľko krčiem máte."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:70
 msgid "We want to know whether we still have taverns."
-msgstr ""
+msgstr "Chceme vedieť, či ešte máme krčmy."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:72
 msgid "Choose the ‘Medium buildings’ tab in the building statistics window."
@@ -211,7 +211,7 @@ msgstr "Ak nemáte žiadne budovy nejakého typu, zobrazí sa v odtieňoch sivej
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:91
 msgid "This is enough explanation for now. Now try it out yourself."
-msgstr ""
+msgstr "Toto zatiaľ stačí na vysvetlenie. Teraz si to vyskúšajte sami."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
 msgid "You closed the building statistics window!"
@@ -248,7 +248,7 @@ msgstr "Otvorte okno Zásoby"
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:124
 msgid ""
 "The stock window gives you an overview over the wares you currently have."
-msgstr ""
+msgstr "Okno Zásoby ponúka prehľad o výrobkoch, ktoré momentálne máte."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:126
 msgid "Afterwards, choose ‘Stock’."
@@ -257,7 +257,7 @@ msgstr "Následne vyberte „Zásoby“."
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
 #, lua-format
 msgid "You can also use the hotkey ‘%s’ to access this window quickly."
-msgstr ""
+msgstr "Do tohto okna sa tiež možno rýchlo dostať pomocou klávesovej skratky „%s“."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:152
@@ -298,7 +298,7 @@ msgid ""
 "The stock window has four tabs. The first one shows you all your current "
 "wares, including those on roads, at flags and inside buildings waiting for "
 "processing."
-msgstr ""
+msgstr "V okne Zásoby sú štyri karty. Na prvej sa zobrazujú všetky vaše výrobky v danom momente vrátane tých na cestách, vlajkách a tých, ktoré čakajú na spracovanie vnútri budov."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:156
 msgid ""
