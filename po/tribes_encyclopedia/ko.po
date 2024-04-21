@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-01 02:29+0000\n"
+"POT-Creation-Date: 2024-04-18 02:34+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: tamanegi, 2018\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -3145,8 +3145,8 @@ msgstr "무기 제작소와 조선소 또한 다양한 삼지창과 거대한 �
 msgctxt "atlanteans_ware"
 msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth in a weaving mill."
-msgstr "거미실은 거미 농장에서 사육된 거미들로부터 생산됩니다. 직조 공장에서 거미천으로 처리됩니다."
+"processed into spidercloth or tabards in a weaving mill."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../data/tribes/initialization/atlanteans/units.lua:481
@@ -3396,9 +3396,10 @@ msgstr "그러므로 숲꾼과 검은뿌리 농부가 그것들을 사용합니�
 #: ../../data/tribes/initialization/atlanteans/units.lua:709
 msgctxt "atlanteans_ware"
 msgid ""
-"Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
-"sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr "지질학자들, 건축업자들, 무기 대장장이들, 갑옷 대장장이들 모두 망치가 필요합니다. 언제나 여분의 것을 남기는 것을 명심하십시오! 도구 대장장이가 만듭니다."
+"Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
+"hammer. Make sure you’ve always got some in reserve! They are produced by "
+"the toolsmith."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Milking Tongs
 #: ../../data/tribes/initialization/atlanteans/units.lua:719

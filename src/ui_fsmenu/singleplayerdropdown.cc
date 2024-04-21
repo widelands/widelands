@@ -311,6 +311,7 @@ void SinglePlayerStartTypeDropdown::fill() {
 		}
 	}
 
+	int first_added = -1;
 	for (size_t i = 0; i < tribeinfo.initializations.size(); ++i) {
 		const Widelands::TribeBasicInfo::Initialization& addme = tribeinfo.initializations[i];
 		bool matches_tags = true;
@@ -324,7 +325,15 @@ void SinglePlayerStartTypeDropdown::fill() {
 		    (addme.incompatible_win_conditions.count(settings_->get_win_condition_script()) == 0u)) {
 			dropdown_.add(_(addme.descname), i, nullptr, i == player_setting.initialization_index,
 			              _(addme.tooltip));
+			if (first_added < 0) {
+				first_added = i;
+			}
 		}
+	}
+
+	if (!dropdown_.has_selection() && first_added >= 0) {
+		dropdown_.select(first_added);
+		selection_action();
 	}
 }
 

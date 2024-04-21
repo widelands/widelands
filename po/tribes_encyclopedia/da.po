@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-01 02:29+0000\n"
+"POT-Creation-Date: 2024-04-18 02:34+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2017,2019-2021\n"
 "Language-Team: Danish (http://app.transifex.com/widelands/widelands/language/da/)\n"
@@ -3145,8 +3145,8 @@ msgstr "Våbensmedjen og skibsværftet bruger også brædder til at fremstille d
 msgctxt "atlanteans_ware"
 msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth in a weaving mill."
-msgstr "Edderkoppesilke produceres af edderkopper som opdrættes i silkegårde. Det væves til silkeklæde i et væveri."
+"processed into spidercloth or tabards in a weaving mill."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../data/tribes/initialization/atlanteans/units.lua:481
@@ -3396,9 +3396,10 @@ msgstr "Skovfogeden og rodfrugtsavleren bruger dem. De fremstilles af klejnsmede
 #: ../../data/tribes/initialization/atlanteans/units.lua:709
 msgctxt "atlanteans_ware"
 msgid ""
-"Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
-"sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr "Geologer, byggearbejdere, våbensmede og rustningsmede har alle brug for en hammer. Sikr dig at du altid har nogle i reserve! De fremstilles af klejnsmeden."
+"Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
+"hammer. Make sure you’ve always got some in reserve! They are produced by "
+"the toolsmith."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Milking Tongs
 #: ../../data/tribes/initialization/atlanteans/units.lua:719

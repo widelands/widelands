@@ -361,7 +361,9 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 	if (needs_update) {
 		set_destination_->clear();
 		texture_cache_.clear();
-		set_destination_->add(_("(none)"), DestinationWrapper(), nullptr, !ship->has_destination());
+		set_destination_->add(/** TRANSLATORS: No destination */
+		                      pgettext("destination", "(none)"), DestinationWrapper(), nullptr,
+		                      !ship->has_destination());
 
 		for (Widelands::PortDock* pd : all_ports) {
 			set_destination_->add(pd->get_warehouse()->get_warehouse_name(),
