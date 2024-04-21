@@ -467,7 +467,7 @@ wl.Descriptions():new_tribe {
             preciousness = 11,
             helptexts = {
                -- TRANSLATORS: Helptext for an Atlantean ware: Spider Silk
-               purpose = pgettext("atlanteans_ware", "Spider silk is produced by spiders, which are bred by spider farms. It is processed into spidercloth in a weaving mill.")
+               purpose = pgettext("atlanteans_ware", "Spider silk is produced by spiders, which are bred by spider farms. It is processed into spidercloth or tabards in a weaving mill.")
             }
          },
          {
@@ -704,7 +704,7 @@ wl.Descriptions():new_tribe {
                   -- TRANSLATORS: Helptext for an Atlantean ware: Hammer, part 1
                   pgettext("ware", "The hammer is an essential tool."),
                   -- TRANSLATORS: Helptext for an Atlantean ware: Hammer, part 2
-                  pgettext("atlanteans_ware", "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make sure you’ve always got some in reserve! They are produced by the toolsmith.")
+                  pgettext("atlanteans_ware", "Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a hammer. Make sure you’ve always got some in reserve! They are produced by the toolsmith.")
                }
             }
          },
