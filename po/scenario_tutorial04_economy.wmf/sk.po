@@ -279,7 +279,7 @@ msgstr "V poriadku. Ako ste si mohli všimnúť zo zoznamu, už nemáte žiadne 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:142
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:144
 msgid "Examine the first two tabs in the stock window"
-msgstr ""
+msgstr "Vyskúšajte si prvé dve karty v okne Zásoby."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:145
 msgid ""
@@ -400,12 +400,12 @@ msgstr "Potrebujeme nové krčmy"
 msgid ""
 "Now that you have an overview, you should act. I think we should build more "
 "than one tavern – two or three are better."
-msgstr ""
+msgstr "Teraz, keď máte prehľad, mali by ste konať. Myslím, že by sme mali postaviť viac ako jednu krčmu – dve alebo tri sú lepšie."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:243
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:245
 msgid "Open the in-game help window"
-msgstr ""
+msgstr "Otvorte okno pomoci v hre"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:246
 msgid ""
