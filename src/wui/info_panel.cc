@@ -23,10 +23,10 @@
 #include <SDL_timer.h>
 
 #include "base/time_string.h"
+#include "commands/cmd_message_set_status_archived.h"
 #include "graphic/font_handler.h"
 #include "graphic/text_layout.h"
 #include "logic/message_queue.h"
-#include "logic/playercommand.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/toolbar.h"
