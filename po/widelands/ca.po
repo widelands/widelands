@@ -978,7 +978,7 @@ msgstr "Descripció: %s"
 #: ../../src/editor/ui_menus/field_info_window.cc:251
 msgctxt "addons"
 msgid "(none)"
-msgstr ""
+msgstr "(cap)"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:258
 #, c-format
@@ -1327,19 +1327,19 @@ msgstr "Identificador del Mapa (ID):"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:257
 msgctxt "map_generator"
 msgid "Default"
-msgstr ""
+msgstr "Per defecte"
 
 #. * TRANSLATORS: Random Climate
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:285
 msgctxt "climate"
 msgid "Random"
-msgstr ""
+msgstr "Aleatori"
 
 #. * TRANSLATORS: Default Terrain Distribution
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:316
 msgctxt "terrain"
 msgid "Default"
-msgstr ""
+msgstr "Per defecte"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:318
 msgid "Alpine"
@@ -1359,7 +1359,7 @@ msgstr "Paisatge volcànic"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:322
 msgctxt "terrain"
 msgid "Random"
-msgstr ""
+msgstr "Aleatòria"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:630
 msgid "Generating random map…"
@@ -3322,7 +3322,7 @@ msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was reachable at the TCP port %u or the server shut down as"
 " you tried to connect."
-msgstr ""
+msgstr "El Widelands no ha pogut establir una connexió amb l’adreça donada. O bé no hi ha servidors amb els quals contactar al port TCP %u o bé el servidor s’ha tancat quan us hi heu intentat connectar."
 
 #: ../../src/network/gameclient.cc:816
 #, c-format
@@ -5134,7 +5134,7 @@ msgstr "Versió del Widelands mínima: %s"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:295
 msgctxt "version"
 msgid "(none)"
-msgstr ""
+msgstr "(cap)"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:325
 msgid "Top-level directory"
@@ -5749,7 +5749,7 @@ msgstr "Nom de la campanya"
 #: ../../src/ui_fsmenu/campaigns.cc:45
 msgctxt "difficulty"
 msgid "Default"
-msgstr ""
+msgstr "Per defecte"
 
 #: ../../src/ui_fsmenu/crash_report.cc:44
 msgid "Crash Report Details"
@@ -9679,7 +9679,7 @@ msgstr "Mostra els controls"
 #: ../../src/wui/inputqueuedisplay.cc:683
 #, c-format
 msgid "+%u"
-msgstr ""
+msgstr "+%u"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../src/wui/interactive_base.cc:144
@@ -10711,7 +10711,7 @@ msgstr "No es pot cancel·lar l’expedició perquè el vaixell no disposa de po
 #: ../../src/wui/shipwindow.cc:362
 msgctxt "destination"
 msgid "(none)"
-msgstr ""
+msgstr "(cap)"
 
 #: ../../src/wui/shipwindow.cc:429 ../../src/wui/shipwindow.cc:434
 #: ../../src/wui/shipwindow.cc:439
