@@ -457,6 +457,20 @@ public:
 		NEVER_HERE();
 	}
 
+	struct ContextMenuEntry {
+		std::string descname;
+		std::string tooltip;
+		std::string shortcut;
+		const Image* icon;
+		bool enable;
+		std::function<void()> callback;
+	};
+	void show_context_menu(Vector2i pos, const std::vector<ContextMenuEntry>& entries);
+
+	virtual bool show_default_context_menu(Vector2i /* pos */) {
+		return false;
+	}
+
 protected:
 	// This panel will never receive keypresses (do_key), instead
 	// textinput will be passed on (do_textinput).
@@ -502,6 +516,7 @@ protected:
 	}
 
 	[[nodiscard]] virtual Panel* get_open_dropdown();
+	[[nodiscard]] Panel* find_context_menu();
 
 	[[nodiscard]] virtual bool is_focus_toplevel() const;
 
@@ -634,6 +649,9 @@ private:
 	static bool allow_fastclick_;
 
 	static FxId click_fx_;
+
+	friend struct ContextMenu;
+	Panel* context_menu_{nullptr};
 
 	std::unique_ptr<Notifications::Subscriber<NoteHyperlink>> hyperlink_subscriber_;
 
