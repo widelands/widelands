@@ -99,6 +99,8 @@ public:
 	bool handle_tooltip() override;
 	bool handle_key(bool down, SDL_Keysym code) override;
 
+	bool show_default_context_menu(Vector2i pos) override;
+
 	enum class WindowLayoutID {
 		kNone,
 		kFsMenuDefault,

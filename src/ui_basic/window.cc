@@ -563,9 +563,11 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 		grab_mouse(true);
 		clicked();
 		focus();
-	} else if (btn == SDL_BUTTON_RIGHT && !pinned_) {
-		play_click();
-		die();
+	} else if (btn == SDL_BUTTON_RIGHT) {
+		if (!pinned_) {
+			play_click();
+			die();
+		}
 	}
 
 	return true;
@@ -797,6 +799,35 @@ bool Window::handle_mousemove(
 		set_pos(Vector2i(new_left, new_top));
 		moved_by_user_ = true;
 	}
+	return true;
+}
+
+bool Window::show_default_context_menu(Vector2i pos) {
+	show_context_menu(
+	   pos, {
+	           {is_minimal_ ? _("Restore") : _("Minimize"),
+	            is_minimal_ ? _("Unminimize the window") : _("Minimize the window"), std::string(),
+	            nullptr, true,
+	            [this]() {
+		            if (is_minimal_) {
+			            restore();
+		            } else {
+			            minimize();
+		            }
+	            }},
+	           {pinned_ ? _("Unpin") : _("Pin"),
+	            pinned_ ? _("Unpin the window") : _("Pin the window"), std::string(), nullptr, true,
+	            [this]() {
+		            pinned_ = !pinned_;
+		            update_toolbar_buttons();
+	            }},
+	           {_("Close"), _("Close the window"), std::string(), nullptr, !pinned_,
+	            [this]() {
+		            if (!pinned_) {
+			            clicked_button_close();
+		            }
+	            }},
+	        });
 	return true;
 }
 
