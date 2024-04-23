@@ -129,13 +129,13 @@ void NetAddons::check_checksum(const std::string& path, const std::string& check
 	const std::string md5 = md5sum.get_checksum().str();
 	if (checksum != md5) {
 		throw_warning(format("Downloaded file '%s': Checksum mismatch, found %s, expected %s",
-		                path.c_str(), md5.c_str(), checksum.c_str()));
+		                     path.c_str(), md5.c_str(), checksum.c_str()));
 	}
 }
 
 size_t NetAddons::gather_addon_content(const std::string& current_dir,
-                            const std::string& prefix,
-                            std::map<std::string, std::set<std::string>>& result) {
+                                       const std::string& prefix,
+                                       std::map<std::string, std::set<std::string>>& result) {
 	result[prefix] = {};
 	size_t nr_files = 0;
 	for (const std::string& f : g_fs->list_directory(current_dir)) {
@@ -329,14 +329,15 @@ void NetAddons::write_to_server(const char* send, const size_t length) {
 
 	if (message.empty()) {
 		if (is_uploading_addon_) {
-			throw_warning(format(
-			                "Connection interrupted (%s). Please note that you can not upload updates "
-			                "for an add-on more often than every three days.",
-			                strerror(errno)));
+			throw_warning(
+			   format("Connection interrupted (%s). Please note that you can not upload updates "
+			          "for an add-on more often than every three days.",
+			          strerror(errno)));
 		}
 		throw_warning(format("Connection interrupted (%s)", strerror(errno)));
 	}
-	throw_warning(format("Connection interrupted (%s). Reason: %s", strerror(errno), message.c_str()));
+	throw_warning(
+	   format("Connection interrupted (%s). Reason: %s", strerror(errno), message.c_str()));
 }
 
 std::string NetAddons::read_line() const {
@@ -354,7 +355,8 @@ std::string NetAddons::read_line() const {
 		line += c;
 	}
 
-	if (contains(line, "WL", false) && contains(line, "Protocol", false) && contains(line, "Exception", false)) {
+	if (contains(line, "WL", false) && contains(line, "Protocol", false) &&
+	    contains(line, "Exception", false)) {
 		if (!last_error_message_.empty()) {
 			last_error_message_.push_back('\n');
 		}
