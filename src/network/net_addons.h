@@ -93,6 +93,14 @@ private:
 	void write_to_server(const std::string&);
 	void write_to_server(const char*, size_t);
 
+	void throw_warning(const std::string& message) const;
+	void check_string_validity(const std::string& str);
+	void check_checksum(const std::string& path, const std::string& checksum);
+	size_t gather_addon_content(const std::string& current_dir,
+                            const std::string& prefix,
+                            std::map<std::string, std::set<std::string>>& result);
+	void append_multiline_message(std::string& send, const std::string& message);
+
 	std::string last_username_, last_password_;
 	bool initialized_{false};
 	bool network_active_{false};
@@ -101,6 +109,7 @@ private:
 	size_t cached_remotes_{0U};
 	std::string server_descname_;
 	bool is_uploading_addon_{false};
+	mutable std::string last_error_message_;
 };
 
 }  // namespace AddOns
