@@ -95,7 +95,8 @@ static void segfault_handler(const int sig) {
 		std::cout << "The crash report could not be saved to a file." << std::endl << std::endl;
 	} else {
 		fprintf /* NOLINT codecheck */ (
-		   file, "Crash report for Widelands %s %s at %s, signal %d (%s)\n\n**** BEGIN BACKTRACE ****\n",
+		   file,
+		   "Crash report for Widelands %s %s at %s, signal %d (%s)\n\n**** BEGIN BACKTRACE ****\n",
 		   build_ver_details().c_str(), thread_name.c_str(), timestr.c_str(), sig, strsignal(sig));
 		fflush(file);
 		backtrace_symbols_fd(array, size, fileno(file));
