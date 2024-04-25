@@ -63,6 +63,7 @@ else()
     SRCS
       main.cc
     DEPENDS
+      base
       base_exceptions
       base_time_string
       logic_filesystem_constants
