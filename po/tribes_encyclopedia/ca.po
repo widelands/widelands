@@ -3146,7 +3146,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It is "
 "processed into spidercloth or tabards in a weaving mill."
-msgstr ""
+msgstr "La seda d’aranya la produeixen les aranyes criades en granges. Es transforma en tela de seda d’aranya o tabards en tallers de teixir."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../data/tribes/initialization/atlanteans/units.lua:481
@@ -3399,7 +3399,7 @@ msgid ""
 "Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
 "hammer. Make sure you’ve always got some in reserve! They are produced by "
 "the toolsmith."
-msgstr ""
+msgstr "Els geòlegs, constructors, armers, fabricants d’armadures i mestres d'aixa necessiten un martell per treballar. Assegureu-vos tenir-ne sempre alguns de reserva! Es produeixen al taller d’eines."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Milking Tongs
 #: ../../data/tribes/initialization/atlanteans/units.lua:719
