@@ -111,7 +111,7 @@ function calculate_territory_points(fields, players)
       for tidx, teaminfo in ipairs(ranked_players) do
          remaining_points = remaining_points - teaminfo.points
       end
-      if (ranked_players[1].points - ranked_players[2].points) > remaining_points then
+      if (count_factions(plrs) == 1 or (ranked_players[1].points - ranked_players[2].points) > remaining_points) then
          winning_points = ranked_players[1].points
       end
    -- Without peaceful mode we need half the useful fields to win
