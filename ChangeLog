@@ -1,5 +1,15 @@
 [TOC]
 
+## Release 1.2.1
+
+- Skip invalid map files in editor Load/Save map window
+- Fix memory leaks in main menu Watch Last Replay
+- Game setup: Unselect incompatible starting conditions when changing win condition
+- Fix soldier request for expedition ships
+- Add thread identifier to crash reports
+- Check for invalid combination before calling `DefaultAI::expedition_management()`
+
+
 ## Release 1.2
 
 ### Animations, Icons and Overlays
