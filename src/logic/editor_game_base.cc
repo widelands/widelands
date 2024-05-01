@@ -783,7 +783,7 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 					MilitaryInfluence highest_military_influence = 0;
 					PlayerNumber const nr_players = map().get_nrplayers();
 					iterate_players_existing_const(p, nr_players, *this, plr) {
-						if (MilitaryInfluence const value = plr->military_influence(index)) {
+						if (const MilitaryInfluence value = plr->military_influence(index); value != 0) {
 							if (value > highest_military_influence) {
 								highest_military_influence = value;
 								best_player = p;
