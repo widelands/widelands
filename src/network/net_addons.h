@@ -97,8 +97,8 @@ private:
 	void check_string_validity(const std::string& str);
 	void check_checksum(const std::string& path, const std::string& checksum);
 	size_t gather_addon_content(const std::string& current_dir,
-                            const std::string& prefix,
-                            std::map<std::string, std::set<std::string>>& result);
+	                            const std::string& prefix,
+	                            std::map<std::string, std::set<std::string>>& result);
 	void append_multiline_message(std::string& send, const std::string& message);
 
 	std::string last_username_, last_password_;
