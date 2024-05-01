@@ -189,7 +189,8 @@ void NetAddons::init(std::string username, std::string password) {
 	}
 	check_string_validity(username);
 
-	if ((client_socket_ = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+	client_socket_ = socket(AF_INET, SOCK_STREAM, 0);
+	if (client_socket_ < 0) {
 		throw WLWarning("", "Unable to create socket");
 	}
 

@@ -38,7 +38,7 @@ static BillOfMaterials deserialize_bill_of_materials(StreamRead* des) {
 	for (int i = 0; i < count; ++i) {
 		const auto index = des->unsigned_8();
 		const auto amount = des->unsigned_32();
-		bill.push_back(std::make_pair(index, amount));
+		bill.emplace_back(index, amount);
 	}
 	return bill;
 }
