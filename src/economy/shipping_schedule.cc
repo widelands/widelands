@@ -214,7 +214,7 @@ bool ShippingSchedule::do_remove_port_from_plan(Game& game,
 				sslog("Ship %s is carrying %u items, rerouting to NEW destination %u %s\n",
 				      ship.get_shipname().c_str(), ship.get_nritems(), closest->serial(),
 				      closest->get_warehouse()->get_warehouse_name().c_str());
-				ship_plan.push_back(SchedulingState(closest, false, Duration(dist)));
+				ship_plan.emplace_back(closest, false, Duration(dist));
 				ship.set_destination(game, closest);
 			} else {
 				// PANIC! There are no ports at all left!!
@@ -363,7 +363,7 @@ void ShippingSchedule::ship_added(Game& game, Ship& s) {
 	for (ShippingItem& si : s.items_) {
 		si.destination_dock_ = closest;
 	}
-	plans_[&s].push_back(SchedulingState(closest, false, Duration(dist)));
+	plans_[&s].emplace_back(closest, false, Duration(dist));
 	s.set_destination(game, closest);
 	// Check for closest to make clang-tidy happy
 	sslog("Sent to %u %s\n\n", closest ? closest->serial() : 0,
@@ -623,7 +623,7 @@ void ShippingSchedule::load_on_ship(Game& game,
 		fleet_.get_path(*ppp.start, *ppp.end, path);
 		game.map().calc_cost(path, &d, nullptr);
 		assert(d >= 0);
-		plans_[ship].push_back(SchedulingState(ppp.end, false, Duration(d)));
+		plans_[ship].emplace_back(ppp.end, false, Duration(d));
 	} else {
 		for (SchedulingState& ss : plans_[ship]) {
 			if (ss.dock == ppp.start) {
@@ -1090,7 +1090,7 @@ Duration ShippingSchedule::update(Game& game) {
 			      (*closest)->get_warehouse()->get_warehouse_name().c_str());
 			ship->set_destination(game, *closest);
 			plans_[ship].clear();
-			plans_[ship].push_back(SchedulingState(*closest, true, Duration(dist)));
+			plans_[ship].emplace_back(*closest, true, Duration(dist));
 			ports_with_unserviced_expeditions.erase(closest);
 			ships_for_expeditions.pop_front();
 		}
@@ -1224,7 +1224,7 @@ Duration ShippingSchedule::update(Game& game) {
 			      ppp.end->serial(), ppp.end->get_warehouse()->get_warehouse_name().c_str(),
 			      ppp.open_count, take, closest->get_shipname().c_str());
 			plans_[closest].clear();
-			plans_[closest].push_back(SchedulingState(ppp.start, false, Duration(dist)));
+			plans_[closest].emplace_back(ppp.start, false, Duration(dist));
 			plans_[closest].front().load_there[ppp.end] = take;
 			closest->set_destination(game, ppp.start);
 			ppp.open_count -= take;
@@ -1233,7 +1233,7 @@ Duration ShippingSchedule::update(Game& game) {
 			fleet_.get_path(*ppp.start, *ppp.end, path);
 			game.map().calc_cost(path, &dist, nullptr);
 			assert(dist >= 0);
-			plans_[closest].push_back(SchedulingState(ppp.end, false, Duration(dist)));
+			plans_[closest].emplace_back(ppp.end, false, Duration(dist));
 			idle_ships.erase(std::find(idle_ships.begin(), idle_ships.end(), closest));
 			for (PrioritisedPortPair& p : open_pairs) {
 				for (auto it = p.ships.begin(); it != p.ships.end(); ++it) {
@@ -1621,7 +1621,7 @@ Duration ShippingSchedule::update(Game& game) {
 			      closest ? closest->serial() : 0,
 			      closest ? closest->get_warehouse()->get_warehouse_name().c_str() : "");
 		} else {
-			plans_[ship].push_back(SchedulingState(closest, false, Duration(dist)));
+			plans_[ship].emplace_back(closest, false, Duration(dist));
 			ship->set_destination(game, closest);
 			sslog("Sending %s to %u %s\n", ship->get_shipname().c_str(), closest->serial(),
 			      closest->get_warehouse()->get_warehouse_name().c_str());

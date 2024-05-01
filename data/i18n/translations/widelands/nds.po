@@ -4194,11 +4194,11 @@ msgstr "%1$s<br>(%2$s)"
 
 #: ../../src/ui_basic/textinput.cc:374
 msgid "Cut"
-msgstr ""
+msgstr "Utsnieden"
 
 #: ../../src/ui_basic/textinput.cc:374
 msgid "Cut the selected text to the clipboard"
-msgstr ""
+msgstr "De utköört Text utsnieden"
 
 #: ../../src/ui_basic/textinput.cc:377 ../../src/ui_fsmenu/tech_info.cc:238
 msgid "Copy"
@@ -4206,19 +4206,19 @@ msgstr "Koperen"
 
 #: ../../src/ui_basic/textinput.cc:377
 msgid "Copy the selected text to the clipboard"
-msgstr ""
+msgstr "De utköört Text koperen"
 
 #: ../../src/ui_basic/textinput.cc:380
 msgid "Paste"
-msgstr ""
+msgstr "Infögen"
 
 #: ../../src/ui_basic/textinput.cc:380
 msgid "Paste the clipboard content"
-msgstr ""
+msgstr "De kopeert of utsniedt Text infögen"
 
 #: ../../src/ui_basic/textinput.cc:383
 msgid "Delete the selected text"
-msgstr ""
+msgstr "De utköört Text lösken"
 
 #: ../../src/ui_basic/textinput.cc:386 ../../src/wlapplication_options.cc:383
 msgid "Select All"
@@ -4226,7 +4226,7 @@ msgstr "All utkören"
 
 #: ../../src/ui_basic/textinput.cc:386
 msgid "Select the entire text"
-msgstr ""
+msgstr "De hele Text utkören"
 
 #: ../../src/ui_basic/window.cc:101 ../../src/ui_basic/window.cc:862
 #: ../../src/ui_fsmenu/about.cc:41 ../../src/ui_fsmenu/crash_report.cc:71
@@ -4255,23 +4255,23 @@ msgstr "Lösssteken"
 
 #: ../../src/ui_basic/window.cc:847
 msgid "Minimize the window"
-msgstr ""
+msgstr "Fenster lütt maken"
 
 #: ../../src/ui_basic/window.cc:847
 msgid "Unminimize the window"
-msgstr ""
+msgstr "Fenster groot maken"
 
 #: ../../src/ui_basic/window.cc:857
 msgid "Pin the window"
-msgstr ""
+msgstr "Fenster faststeken"
 
 #: ../../src/ui_basic/window.cc:857
 msgid "Unpin the window"
-msgstr ""
+msgstr "Fenster lösssteken"
 
 #: ../../src/ui_basic/window.cc:862
 msgid "Close the window"
-msgstr ""
+msgstr "Fenster dichtmaken"
 
 #: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:515
 msgid "About Widelands"
@@ -7734,7 +7734,7 @@ msgstr "Tum Naslaan"
 
 #: ../../src/wlapplication_options.cc:367
 msgid "Context Menu"
-msgstr ""
+msgstr "Kontextmenü"
 
 #: ../../src/wlapplication_options.cc:371
 msgid "Cut Text"
@@ -8277,7 +8277,7 @@ msgstr "Menü"
 #: ../../src/wlapplication_options.cc:1425
 msgctxt "hotkey"
 msgid "Application"
-msgstr ""
+msgstr "Anwennen"
 
 #: ../../src/wlapplication_options.cc:1427
 msgctxt "hotkey"

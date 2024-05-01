@@ -705,7 +705,7 @@ msgstr "Wczytywanie świata…"
 #: ../../src/editor/editorinteractive.cc:1407
 #, c-format
 msgid "Tool gaps: %u%%"
-msgstr ""
+msgstr "Wszystkie luki: %u%%"
 
 #: ../../src/editor/editorinteractive.cc:1430
 msgid "Publish Map"
@@ -995,7 +995,7 @@ msgstr "Opis: %s"
 #: ../../src/editor/ui_menus/field_info_window.cc:251
 msgctxt "addons"
 msgid "(none)"
-msgstr ""
+msgstr "(żaden)"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:258
 #, c-format
@@ -1347,19 +1347,19 @@ msgstr "ID mapy:"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:257
 msgctxt "map_generator"
 msgid "Default"
-msgstr ""
+msgstr "Domyślny"
 
 #. * TRANSLATORS: Random Climate
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:285
 msgctxt "climate"
 msgid "Random"
-msgstr ""
+msgstr "Losowo"
 
 #. * TRANSLATORS: Default Terrain Distribution
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:316
 msgctxt "terrain"
 msgid "Default"
-msgstr ""
+msgstr "Domyślny"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:318
 msgid "Alpine"
@@ -1379,7 +1379,7 @@ msgstr "Pustkowia"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:322
 msgctxt "terrain"
 msgid "Random"
-msgstr ""
+msgstr "Losowo"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:630
 msgid "Generating random map…"
@@ -1672,17 +1672,17 @@ msgstr "%1$s (usuwalne za pomocą np. układania dróg)"
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:54
 #, c-format
 msgid "%1$s (needs a small building plot)"
-msgstr ""
+msgstr "%1$s (potrzebuje małej działki)"
 
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:57
 #, c-format
 msgid "%1$s (needs a medium building plot)"
-msgstr ""
+msgstr "%1$s (potrzebuje średniej działki)"
 
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:60
 #, c-format
 msgid "%1$s (needs a big building plot)"
-msgstr ""
+msgstr "%1$s (potrzebuje dużej działki)"
 
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:99
 msgid "Automatically place the trees which grow best on the terrain"
@@ -1690,7 +1690,7 @@ msgstr "Automatycznie umieszczaj drzewa, które najlepiej rosną na terenie"
 
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:115
 msgid "Automatic Immovable Placement"
-msgstr ""
+msgstr "Automatyczny obiekt nieruchomy"
 
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:34
 msgid "Resize"
@@ -1739,7 +1739,7 @@ msgstr "Promień aktywnego narzędzia"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:68
 msgid "Amount of random gaps in the tool’s area"
-msgstr ""
+msgstr "Liczba losowych przerw w strefie narzędzi"
 
 #: ../../src/game_io/game_loader.cc:69
 #, c-format
@@ -2033,16 +2033,16 @@ msgstr "%1$s<br>· %2$s (wersja %3$s)"
 
 #: ../../src/logic/addons.cc:305
 msgid "No game-relevant add-ons in use."
-msgstr ""
+msgstr "Dodatek niezwiązany z grą w użyciu"
 
 #: ../../src/logic/addons.cc:310
 #, c-format
 msgid "%u game-relevant add-on in use:"
 msgid_plural "%u game-relevant add-ons in use:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%udodatek związany z grą w użyciu: "
+msgstr[1] "%udodatki związane z grą w użyciu:"
+msgstr[2] "%udodatek związany z grą w użyciu"
+msgstr[3] "%u dodatki związane z grą w użyciu"
 
 #. * TRANSLATORS: "12 steps northwest of Port1"
 #: ../../src/logic/detected_port_space.cc:52
@@ -2097,15 +2097,15 @@ msgstr "Bezpańskie miejsce na port odkryte na %1$s przez %2$s"
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
 msgid_plural ""
 "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s of %5$s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Bezpańskie miejsce na port odkryte na %1$s przez %2$s%3$u kroków %4$s z %5$s"
+msgstr[1] "Bezpańskie miejsce na port odkryte na %1$s przez %2$s %3$u kroków %4$s z %5$s"
+msgstr[2] "Bezpańskie miejsce na port odkryte na %1$s przez %2$s %3$u kroków %4$s z %5$s "
+msgstr[3] "Bezpańskie miejsce na port odkryte na %1$s przez %2$s %3$u kroków %4$s z %5$s"
 
 #: ../../src/logic/detected_port_space.cc:101
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s"
-msgstr ""
+msgstr "Miejsce na port z %1$s odkryte na %2$s przez %3$s"
 
 #. * TRANSLATORS: "Port space of Player1 discovered at 2:22 by Ship3 44 steps
 #. north
@@ -2115,10 +2115,10 @@ msgstr ""
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
 msgid_plural ""
 "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s of %6$s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Miejsce na port z %1$s odkryte na %2$s przez %3$s%4$u kroków %5$s z %6$s"
+msgstr[1] "Miejsce na port z %1$s odkryte na %2$s przez %3$s%4$u kroków %5$sz %6$s"
+msgstr[2] "Miejsce na port z %1$s odkryte na %2$s przez%3$s%4$u kroków %5$s z %6$s"
+msgstr[3] "Miejsce na port z %1$s odkryte na %2$s przez %3$s%4$u kroków %5$s z %6$s"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
 #: ../../src/logic/detected_port_space.cc:120
@@ -2173,7 +2173,7 @@ msgstr "WSCH"
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s"
-msgstr ""
+msgstr "Bezpańskie / %1$s / %2$s"
 
 #. * TRANSLATORS: Placeholders are gametime, shipname, and distance direction
 #. port_name.
@@ -2182,7 +2182,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s / %3$u %4$s %5$s"
-msgstr ""
+msgstr "Bezpańskie / %1$s/ %2$s/ %3$u%4$s%5$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this
 #. short.
@@ -2190,7 +2190,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s"
-msgstr ""
+msgstr "%1$s/%2$s/%3$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, shipname, and "distance
 #. direction port_name.
@@ -2199,7 +2199,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
-msgstr ""
+msgstr "%1$s/%2$s/%3$s/%4$u%5$s%6$s"
 
 #: ../../src/logic/editor_game_base.cc:236
 #, c-format
@@ -2633,11 +2633,11 @@ msgstr "Twój statek dotarł do celu."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:637
 msgid "A warship arrived at a known port build space."
-msgstr ""
+msgstr "Okręt wojenny przybył do nieznanej lokalizacji portu."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:638
 msgid "An expedition ship arrived at a known port build space."
-msgstr ""
+msgstr "Ekspedycja przybyła do znanego miejsca zdatnego do budowy portu."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:639
 #: ../../src/logic/map_objects/tribes/ship.cc:647
@@ -2650,7 +2650,7 @@ msgstr "Miejsce na port dostrzeżone"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:645
 msgid "A warship found a new port build space."
-msgstr ""
+msgstr "Okręt wojenny znalazł nowe zdatne miejsce do budowy portu."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:646
 msgid "An expedition ship found a new port build space."
@@ -3362,7 +3362,7 @@ msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was reachable at the TCP port %u or the server shut down as"
 " you tried to connect."
-msgstr ""
+msgstr "Widelands nie mógł połączyć się ze wskazanym adresem. Albo serwer Widelands był nieosiągalny na porcie TCP %u albo serwer został wyłączony jak próbowałeś się połączyć."
 
 #: ../../src/network/gameclient.cc:816
 #, c-format
@@ -4047,7 +4047,7 @@ msgstr "Wczytywanie..."
 
 #: ../../src/ui_basic/spinbox.cc:151
 msgid "Decrease the value"
-msgstr ""
+msgstr "Zmniejsz wartośc"
 
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
@@ -4059,7 +4059,7 @@ msgstr "Zmniejsz wartość o %s"
 
 #: ../../src/ui_basic/spinbox.cc:164
 msgid "Increase the value"
-msgstr ""
+msgstr "Zwiększ wartość"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
@@ -4261,11 +4261,11 @@ msgstr "%1$s <br> (%2$s)"
 
 #: ../../src/ui_basic/textinput.cc:374
 msgid "Cut"
-msgstr ""
+msgstr "Wytnij"
 
 #: ../../src/ui_basic/textinput.cc:374
 msgid "Cut the selected text to the clipboard"
-msgstr ""
+msgstr "Wytnij zaznaczony tekst do schowka"
 
 #: ../../src/ui_basic/textinput.cc:377 ../../src/ui_fsmenu/tech_info.cc:238
 msgid "Copy"
@@ -4273,19 +4273,19 @@ msgstr "Kopiuj"
 
 #: ../../src/ui_basic/textinput.cc:377
 msgid "Copy the selected text to the clipboard"
-msgstr ""
+msgstr "Skopiuj zaznaczony tekst do schowka"
 
 #: ../../src/ui_basic/textinput.cc:380
 msgid "Paste"
-msgstr ""
+msgstr "Wklej"
 
 #: ../../src/ui_basic/textinput.cc:380
 msgid "Paste the clipboard content"
-msgstr ""
+msgstr "Wklej tekst ze schowka"
 
 #: ../../src/ui_basic/textinput.cc:383
 msgid "Delete the selected text"
-msgstr ""
+msgstr "Usuń zaznaczony tekst"
 
 #: ../../src/ui_basic/textinput.cc:386 ../../src/wlapplication_options.cc:383
 msgid "Select All"
@@ -4293,7 +4293,7 @@ msgstr "Wybierz wszystko"
 
 #: ../../src/ui_basic/textinput.cc:386
 msgid "Select the entire text"
-msgstr ""
+msgstr "Zaznacz cały tekst"
 
 #: ../../src/ui_basic/window.cc:101 ../../src/ui_basic/window.cc:862
 #: ../../src/ui_fsmenu/about.cc:41 ../../src/ui_fsmenu/crash_report.cc:71
@@ -4322,23 +4322,23 @@ msgstr "Odepnij"
 
 #: ../../src/ui_basic/window.cc:847
 msgid "Minimize the window"
-msgstr ""
+msgstr "Zminimalizuj okno"
 
 #: ../../src/ui_basic/window.cc:847
 msgid "Unminimize the window"
-msgstr ""
+msgstr "Zmaksymalizuj okno"
 
 #: ../../src/ui_basic/window.cc:857
 msgid "Pin the window"
-msgstr ""
+msgstr "Przypnij okno"
 
 #: ../../src/ui_basic/window.cc:857
 msgid "Unpin the window"
-msgstr ""
+msgstr "Odepnij okno"
 
 #: ../../src/ui_basic/window.cc:862
 msgid "Close the window"
-msgstr ""
+msgstr "Zamknij okno"
 
 #: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:515
 msgid "About Widelands"
@@ -5273,7 +5273,7 @@ msgstr "Minimalna wersja Widelands: %s"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:295
 msgctxt "version"
 msgid "(none)"
-msgstr ""
+msgstr "(żaden)"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:325
 msgid "Top-level directory"
@@ -5900,7 +5900,7 @@ msgstr "Nazwa kampanii"
 #: ../../src/ui_fsmenu/campaigns.cc:45
 msgctxt "difficulty"
 msgid "Default"
-msgstr ""
+msgstr "Domyślna"
 
 #: ../../src/ui_fsmenu/crash_report.cc:44
 msgid "Crash Report Details"
@@ -6235,7 +6235,7 @@ msgid ""
 "Enable coastal invasions and ship-to-ship battles. This feature is "
 "experimental and may undergo substantial redesign in future versions of "
 "Widelands."
-msgstr ""
+msgstr "Włącz najazdy wybrzeżne i pojedynki statek-statek. Jest to eksperymentalne i może przejść zmiany w przyszłych wersjach Widelands."
 
 #: ../../src/ui_fsmenu/launch_game.cc:420
 msgid "Player relations are set by the scenario"
@@ -7511,17 +7511,17 @@ msgstr "Błąd systemu plików"
 #: ../../src/wlapplication.cc:1360
 #, c-format
 msgid "Command line parameter --%s can not use a value"
-msgstr ""
+msgstr "Polecenie parametru linii - %s nie może używać wartości"
 
 #: ../../src/wlapplication.cc:1365
 #, c-format
 msgid "Empty value of command line parameter --%s"
-msgstr ""
+msgstr "Pusta wartość wiersza poleceń - %s"
 
 #: ../../src/wlapplication.cc:1371
 #, c-format
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
-msgstr ""
+msgstr "Komendy wiersza poleceń - %1$s i -%2$s nie mogą zostać połączone"
 
 #: ../../src/wlapplication.cc:1559
 #, c-format
@@ -7593,11 +7593,11 @@ msgstr "Port"
 
 #: ../../src/wlapplication_options.cc:192
 msgid "Minor Training Site"
-msgstr ""
+msgstr "Mniejszy obszar treningowy"
 
 #: ../../src/wlapplication_options.cc:193
 msgid "Major Training Site"
-msgstr ""
+msgstr "Większy obszar treningowy"
 
 #: ../../src/wlapplication_options.cc:194
 msgid "Primary Small Military Site"
@@ -7641,11 +7641,11 @@ msgstr "Przemysł podstawowych materiałów budowlanych"
 
 #: ../../src/wlapplication_options.cc:204
 msgid "Secondary Building Materials Industry"
-msgstr ""
+msgstr "Przemysł drugorzędnych materiałów budowlanych"
 
 #: ../../src/wlapplication_options.cc:205
 msgid "Tertiary Building Materials Industry"
-msgstr ""
+msgstr "Przemysł trzeciorzędnych materiałów budowlanych"
 
 #: ../../src/wlapplication_options.cc:206
 msgid "Fishing"
@@ -7665,11 +7665,11 @@ msgstr "Studnia"
 
 #: ../../src/wlapplication_options.cc:210
 msgid "Primary Farm"
-msgstr ""
+msgstr "Główna farma"
 
 #: ../../src/wlapplication_options.cc:211
 msgid "Secondary Farm"
-msgstr ""
+msgstr "Drugorzędna farma"
 
 #: ../../src/wlapplication_options.cc:212
 msgid "Mill"
@@ -7781,7 +7781,7 @@ msgstr "Obejrzyj powtórkę"
 
 #: ../../src/wlapplication_options.cc:264
 msgid "Watch Latest Replay"
-msgstr ""
+msgstr "Obejrzyj ostatnią  powtórkę"
 
 #: ../../src/wlapplication_options.cc:283
 msgid "Singleplayer"
@@ -7825,7 +7825,7 @@ msgstr "Encyklopedia"
 
 #: ../../src/wlapplication_options.cc:367
 msgid "Context Menu"
-msgstr ""
+msgstr "Menu kontekstowe"
 
 #: ../../src/wlapplication_options.cc:371
 msgid "Cut Text"
@@ -7897,35 +7897,35 @@ msgstr "Opublikuj mapę online"
 
 #: ../../src/wlapplication_options.cc:484
 msgid "Toggle Tools Menu"
-msgstr ""
+msgstr "Przełącza menu narzędziowe"
 
 #: ../../src/wlapplication_options.cc:489
 msgid "Change Height Tool"
-msgstr ""
+msgstr "Zmień wysokość narzędzia"
 
 #: ../../src/wlapplication_options.cc:494
 msgid "Random Height Tool"
-msgstr ""
+msgstr "Losowa wysokość narzędzia"
 
 #: ../../src/wlapplication_options.cc:498
 msgid "Terrain Tool"
-msgstr ""
+msgstr "Narzędzie terenu"
 
 #: ../../src/wlapplication_options.cc:503
 msgid "Immovables Tool"
-msgstr ""
+msgstr "Nieruchome narzędzie"
 
 #: ../../src/wlapplication_options.cc:507
 msgid "Animals Tool"
-msgstr ""
+msgstr "Narzędzie zwierzęce"
 
 #: ../../src/wlapplication_options.cc:511
 msgid "Resources Tool"
-msgstr ""
+msgstr "Narzędzie surowców"
 
 #: ../../src/wlapplication_options.cc:516
 msgid "Port Spaces Tool"
-msgstr ""
+msgstr "Narzędzie miejsca na port"
 
 #: ../../src/wlapplication_options.cc:520
 msgid "Info Tool"
@@ -7933,11 +7933,11 @@ msgstr "Narzędzie informacyjne"
 
 #: ../../src/wlapplication_options.cc:524
 msgid "Map Origin Tool"
-msgstr ""
+msgstr "Narzędzie rogu mapy"
 
 #: ../../src/wlapplication_options.cc:528
 msgid "Map Size Tool"
-msgstr ""
+msgstr "Narzędzie wielkości mapy"
 
 #: ../../src/wlapplication_options.cc:532
 msgid "Players Menu"
@@ -7971,7 +7971,7 @@ msgstr "Ustaw rozmiar narzędzia na %d"
 #: ../../src/wlapplication_options.cc:589
 #, c-format
 msgid "Set Tool Gap to %d%%"
-msgstr ""
+msgstr "Ustaw rozstaw przerwy do%d%%"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wlapplication_options.cc:607
@@ -7982,7 +7982,7 @@ msgstr "Opcje dźwięku"
 
 #: ../../src/wlapplication_options.cc:612
 msgid "Restart Scenario or Replay"
-msgstr ""
+msgstr "Restartuj scenariusz albo powtórkę"
 
 #: ../../src/wlapplication_options.cc:617
 msgid "Toggle Census"
@@ -8087,23 +8087,23 @@ msgstr "Pokaż wszystkie wiadomości"
 
 #: ../../src/wlapplication_options.cc:745
 msgid "Show Geologists’ Messages Only"
-msgstr ""
+msgstr "Wyświetl tylko wiadomości geologów"
 
 #: ../../src/wlapplication_options.cc:750
 msgid "Show Economy Messages Only"
-msgstr ""
+msgstr "Pokazuje tylko wiadomości gospodarcze"
 
 #: ../../src/wlapplication_options.cc:755
 msgid "Show Seafaring Messages Only"
-msgstr ""
+msgstr "Pokazuje tylko wiadomości morskie"
 
 #: ../../src/wlapplication_options.cc:760
 msgid "Show Military Messages Only"
-msgstr ""
+msgstr "Pokazuje tylko wiadomości wojskowe"
 
 #: ../../src/wlapplication_options.cc:765
 msgid "Show Scenario Messages Only"
-msgstr ""
+msgstr "Pokazuje tylko wiadomości scenariusza"
 
 #: ../../src/wlapplication_options.cc:770
 msgid "Go to Ship"
@@ -8147,15 +8147,15 @@ msgstr "Pokaż ekspedycje z miejscami na port"
 
 #: ../../src/wlapplication_options.cc:820
 msgid "Show Warships"
-msgstr ""
+msgstr "Pokaż okręty wojenne"
 
 #: ../../src/wlapplication_options.cc:825
 msgid "Show Ships Being Refitted"
-msgstr ""
+msgstr "Pokaż statki będące w naprawie"
 
 #: ../../src/wlapplication_options.cc:830
 msgid "Toggle Quick Navigation"
-msgstr ""
+msgstr "Włącz szybką nawigację"
 
 #: ../../src/wlapplication_options.cc:837
 #, c-format
@@ -8368,7 +8368,7 @@ msgstr "Menu"
 #: ../../src/wlapplication_options.cc:1425
 msgctxt "hotkey"
 msgid "Application"
-msgstr ""
+msgstr "Wniosek"
 
 #: ../../src/wlapplication_options.cc:1427
 msgctxt "hotkey"
@@ -8624,10 +8624,10 @@ msgstr "Atak"
 #, c-format
 msgid "%u ship"
 msgid_plural "%u ships"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%ustatki"
+msgstr[1] "%ustatki"
+msgstr[2] "%ustatki"
+msgstr[3] "%ustatki"
 
 #. * TRANSLATORS: Number of soldiers that should attack. Used in the attack
 #. window.
@@ -8643,7 +8643,7 @@ msgstr[3] "%u żołnierzy"
 
 #: ../../src/wui/attack_window.cc:376
 msgid "Number of ships"
-msgstr ""
+msgstr "Liczba statków"
 
 #: ../../src/wui/attack_window.cc:376
 msgid "Number of soldiers"
@@ -8651,7 +8651,7 @@ msgstr "Liczba żołnierzy"
 
 #: ../../src/wui/attack_window.cc:383
 msgid "Send less ships. Hold down Ctrl to send no ships"
-msgstr ""
+msgstr "Wyślij mniej statków. Przytrzymaj Ctrl, by nie wysyłać statków w ogóle"
 
 #: ../../src/wui/attack_window.cc:384
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
@@ -8659,7 +8659,7 @@ msgstr "Wyślij mniej żołnierzy. Przytrzymaj Ctrl, by nie wysyłać żołnierz
 
 #: ../../src/wui/attack_window.cc:390
 msgid "Send more ships. Hold down Ctrl to send as many ships as possible"
-msgstr ""
+msgstr "Wyślij więcej statków. Przytrzymaj Ctrl, by wysyłać tyle statków, ile to tylko możliwe"
 
 #: ../../src/wui/attack_window.cc:391
 msgid ""
@@ -8676,7 +8676,7 @@ msgstr "Atakujący:"
 
 #: ../../src/wui/attack_window.cc:424
 msgid "Click on a ship to remove her from the list of attackers"
-msgstr ""
+msgstr "Kliknij statek, by usunąć go z listy atakujących"
 
 #: ../../src/wui/attack_window.cc:425
 msgid "Click on a soldier to remove him from the list of attackers"
@@ -8684,7 +8684,7 @@ msgstr "Kliknij żołnierza, by usunąć go z listy atakujących"
 
 #: ../../src/wui/attack_window.cc:427
 msgid "Hold down Ctrl to remove all ships from the list"
-msgstr ""
+msgstr "Przytrzymaj Ctrl, by usunąć wszystkie statki z listy"
 
 #: ../../src/wui/attack_window.cc:428
 msgid "Hold down Ctrl to remove all soldiers from the list"
@@ -8692,7 +8692,7 @@ msgstr "Przytrzymaj Ctrl, by usunąć wszystkich żołnierzy z listy"
 
 #: ../../src/wui/attack_window.cc:432
 msgid "Hold down Shift to remove all ships up to the one you’re pointing at"
-msgstr ""
+msgstr "Przytrzymaj Shift, by usunąć wszystkie statki aż do tego, którego wskazujesz."
 
 #: ../../src/wui/attack_window.cc:433
 msgid ""
@@ -8705,7 +8705,7 @@ msgstr "Nieatakujący:"
 
 #: ../../src/wui/attack_window.cc:446
 msgid "Click on a ship to add her to the list of attackers"
-msgstr ""
+msgstr "Kliknij statek, by dodać go do listy atakujących"
 
 #: ../../src/wui/attack_window.cc:447
 msgid "Click on a soldier to add him to the list of attackers"
@@ -8713,7 +8713,7 @@ msgstr "Kliknij żołnierza, by dodać go do listy atakujących"
 
 #: ../../src/wui/attack_window.cc:449
 msgid "Hold down Ctrl to add all ships to the list"
-msgstr ""
+msgstr "Przytrzymaj Ctrl, by dodać wszystkie statki do listy"
 
 #: ../../src/wui/attack_window.cc:450
 msgid "Hold down Ctrl to add all soldiers to the list"
@@ -8721,7 +8721,7 @@ msgstr "Przytrzymaj Ctrl, by dodać wszystkich żołnierzy do listy"
 
 #: ../../src/wui/attack_window.cc:453
 msgid "Hold down Shift to add all ships up to the one you’re pointing at"
-msgstr ""
+msgstr "Przytrzymaj Shift, by dodać wszystkie statki aż do tego, którego wskazujesz"
 
 #: ../../src/wui/attack_window.cc:454
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
@@ -8747,7 +8747,7 @@ msgstr "Wycentruj na tym widok"
 #: ../../src/wui/attack_window.cc:630
 #, c-format
 msgid "%1$s  HP: %2$u/%3$u  AT: +%4$u%%"
-msgstr ""
+msgstr "%1$s HP:%2$u/%3$u NA: +%4$u%%"
 
 #: ../../src/wui/attack_window.cc:635 ../../src/wui/soldierlist.cc:556
 #, c-format
@@ -8963,7 +8963,7 @@ msgstr "Preferuj bohaterów"
 #: ../../src/wui/constructionsitewindow.cc:364
 #: ../../src/wui/soldierlist.cc:496
 msgid "No preference"
-msgstr ""
+msgstr "Bez preferencji"
 
 #: ../../src/wui/constructionsitewindow.cc:395
 msgid "Settings to apply after construction"
@@ -9215,22 +9215,22 @@ msgstr "Buduj drogi wodne"
 #, c-format
 msgctxt "ship_state"
 msgid "Warship · HP %1$u%% · AT +%2$u%%"
-msgstr ""
+msgstr "Okręt wojenny - HP %1$u%% NA + %2$u%%"
 
 #: ../../src/wui/fieldaction.cc:1258
 msgctxt "ship_state"
 msgid "Enemy Transport Ship"
-msgstr ""
+msgstr "Wrogi statek transportowy"
 
 #: ../../src/wui/fieldaction.cc:1260
 msgctxt "ship_state"
 msgid "Expedition"
-msgstr ""
+msgstr "Ekspedycja"
 
 #: ../../src/wui/fieldaction.cc:1262
 msgctxt "ship_state"
 msgid "Transport"
-msgstr ""
+msgstr "Transport"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
 #: ../../src/wui/fieldaction.cc:1264 ../../src/wui/interactive_gamebase.cc:614
@@ -9241,15 +9241,15 @@ msgstr "%1$s (%2$s)"
 
 #: ../../src/wui/fieldaction.cc:1274
 msgid "Select Ship"
-msgstr ""
+msgstr "Wybór statku"
 
 #: ../../src/wui/fieldaction.cc:1297
 msgid "Own Ships"
-msgstr ""
+msgstr "Swoje statki"
 
 #: ../../src/wui/fieldaction.cc:1311
 msgid "Attackable Ships"
-msgstr ""
+msgstr "Statki możliwe do ataku"
 
 #: ../../src/wui/fleet_options_window.cc:94
 msgid "Ferry Fleet Options"
@@ -9261,7 +9261,7 @@ msgstr "Opcje floty statków"
 
 #: ../../src/wui/fleet_options_window.cc:124
 msgid "Toggle infinite production"
-msgstr ""
+msgstr "Przełącz nieskończoną produkcję"
 
 #: ../../src/wui/fleet_options_window.cc:134
 msgid "Fleet Statistics"
@@ -9277,27 +9277,27 @@ msgstr "Statki:"
 
 #: ../../src/wui/fleet_options_window.cc:161
 msgid "Total waterways:"
-msgstr ""
+msgstr "Wszystkie kanały:"
 
 #: ../../src/wui/fleet_options_window.cc:162
 msgid "Unserviced waterways:"
-msgstr ""
+msgstr "Nieobsługiwane kanały:"
 
 #: ../../src/wui/fleet_options_window.cc:163
 msgid "Total ferries:"
-msgstr ""
+msgstr "Wszystkie promy:"
 
 #: ../../src/wui/fleet_options_window.cc:164
 msgid "Unemployed ferries:"
-msgstr ""
+msgstr "Nieobługiwane promy:"
 
 #: ../../src/wui/fleet_options_window.cc:175
 msgid "Desired number of transport ships:"
-msgstr ""
+msgstr "Docelowa liczba statków transportowych:"
 
 #: ../../src/wui/fleet_options_window.cc:176
 msgid "Desired number of unemployed ferries:"
-msgstr ""
+msgstr "Docelowa liczba nieobsługiwanych promów:"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_chat_menu.cc:79
@@ -9699,11 +9699,11 @@ msgstr "Produktywność"
 
 #: ../../src/wui/general_statistics_menu.cc:185
 msgid "Warships lost"
-msgstr ""
+msgstr "Okręty wojenne stracone"
 
 #: ../../src/wui/general_statistics_menu.cc:194
 msgid "Warships defeated"
-msgstr ""
+msgstr "Okręty wojenne pokonane"
 
 #: ../../src/wui/general_statistics_menu.cc:203
 msgid "Casualties"
@@ -9762,13 +9762,13 @@ msgstr "Tryb oszukiwania uruchomiony"
 #: ../../src/wui/info_panel.cc:460
 #, c-format
 msgid "%1$s • %2$s"
-msgstr ""
+msgstr "%1$s•%2$s"
 
 #. * TRANSLATORS: Gametime • Realtime • Gamespeed
 #: ../../src/wui/info_panel.cc:465
 #, c-format
 msgid "%1$s • %2$s • %3$s"
-msgstr ""
+msgstr "%1$s•%2$s•%3$s"
 
 #: ../../src/wui/inputqueuedisplay.cc:69
 msgid "Priority: Very Low"
@@ -9843,7 +9843,7 @@ msgstr "Pokaż sterowanie"
 #: ../../src/wui/inputqueuedisplay.cc:683
 #, c-format
 msgid "+%u"
-msgstr ""
+msgstr "+%u"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../src/wui/interactive_base.cc:144
@@ -10075,7 +10075,7 @@ msgstr[3] "%u nowych wiadomości"
 
 #: ../../src/wui/interactive_player.cc:978
 msgid "Fastplace Shortcuts"
-msgstr ""
+msgstr "Skróty szybkiego stawiania"
 
 #: ../../src/wui/load_or_save_game.cc:146
 msgid "Version Mismatch"
@@ -10313,11 +10313,11 @@ msgstr "Drogi"
 
 #: ../../src/wui/minimap.cc:226
 msgid "High Traffic"
-msgstr ""
+msgstr "Wysoki ruch"
 
 #: ../../src/wui/minimap.cc:237
 msgid "Attacks"
-msgstr ""
+msgstr "Ataki"
 
 #: ../../src/wui/minimap.cc:248
 msgid "Zoom"
@@ -10762,16 +10762,16 @@ msgstr "Transportuje"
 #: ../../src/wui/seafaring_statistics_menu.cc:272
 msgctxt "ship_state"
 msgid "Being Refitted"
-msgstr ""
+msgstr "Bycie naprawianym"
 
 #: ../../src/wui/seafaring_statistics_menu.cc:426
 #, c-format
 msgid "Seafaring Statistics (%u Ship)"
 msgid_plural "Seafaring Statistics (%u Ships)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Statystyki żeglarstwa (%ustatki)"
+msgstr[1] "Statystyki żeglarstwa (%u statki)"
+msgstr[2] "Statystyki żeglarstwa (%u statki)"
+msgstr[3] "Statystyki żeglarstwa (%ustatki)"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:568
@@ -10806,12 +10806,12 @@ msgstr "Pokaż ekspedycje, które znalazły miejsce na postawienie portu lub zak
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:603
 msgid "Show warships"
-msgstr ""
+msgstr "Pokaż okręty wojenne"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:608
 msgid "Show ships being refitted"
-msgstr ""
+msgstr "Pokaż statki będące w naprawie"
 
 #: ../../src/wui/shipwindow.cc:92
 #, c-format
@@ -10819,10 +10819,10 @@ msgid ""
 "Damaged warships regain %u hitpoint per second when anchored in a port."
 msgid_plural ""
 "Damaged warships regain %u hitpoints per second when anchored in a port."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Uszkodzone okręty odnawiają %u punktów na sekundę gdy stoją zadokowane w porcie."
+msgstr[1] "Uszkodzone okręty odnawiają %u punktów na sekundę gdy stoją zadokowane w porcie."
+msgstr[2] "Uszkodzone okręty odnawiają %upunktów na sekundę gdy stoją zadokowane w porcie."
+msgstr[3] "Uszkodzone okręty odnawiają %u punktów na sekundę gdy stoją zadokowane w porcie."
 
 #: ../../src/wui/shipwindow.cc:117
 msgid "Scout towards the north west"
@@ -10846,7 +10846,7 @@ msgstr "Zbuduj port w tym miejscu"
 
 #: ../../src/wui/shipwindow.cc:142
 msgid "Anchor at the current location"
-msgstr ""
+msgstr "Kotwica w danej lokalizacji"
 
 #: ../../src/wui/shipwindow.cc:147
 msgid "Scout towards the east"
@@ -10866,7 +10866,7 @@ msgstr "Przeprowadź zwiad na południowym wschodzie"
 
 #: ../../src/wui/shipwindow.cc:169
 msgid "Destination"
-msgstr ""
+msgstr "Kierunek"
 
 #: ../../src/wui/shipwindow.cc:180
 msgid "Sink the ship"
@@ -10895,7 +10895,7 @@ msgstr "Tej ekspedycji nie można anulować, ponieważ nie ma portu, do którego
 #: ../../src/wui/shipwindow.cc:362
 msgctxt "destination"
 msgid "(none)"
-msgstr ""
+msgstr "(żaden)"
 
 #: ../../src/wui/shipwindow.cc:429 ../../src/wui/shipwindow.cc:434
 #: ../../src/wui/shipwindow.cc:439
@@ -10909,16 +10909,16 @@ msgstr "Idź do celu"
 
 #: ../../src/wui/shipwindow.cc:471
 msgid "Refit to transport ship"
-msgstr ""
+msgstr "Remont do statku transportowego"
 
 #: ../../src/wui/shipwindow.cc:472
 msgid "Refit to warship"
-msgstr ""
+msgstr "Remont do okrętu"
 
 #: ../../src/wui/shipwindow.cc:494
 #, c-format
 msgid "HP: %1$u/%2$u"
-msgstr ""
+msgstr "HP: %1$u/%2$u"
 
 #: ../../src/wui/soldier_statistics_menu.cc:89
 #: ../../src/wui/soldier_statistics_menu.cc:182
