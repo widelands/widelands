@@ -1266,7 +1266,7 @@ msgstr "Hráči:"
 #. editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:88
 msgid "Low"
-msgstr "Nízke"
+msgstr "Chudobné"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
@@ -1279,7 +1279,7 @@ msgstr "Stredné"
 #. editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:92
 msgid "High"
-msgstr "Vysoké"
+msgstr "Bohaté"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:102
 msgid "Climate"
@@ -1412,7 +1412,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:734
 msgid ""
 "This map was generated automatically by the Widelands Random Map Generator."
-msgstr ""
+msgstr "Táto mapa bola vygenerovaná automaticky generátorom náhodných máp Widelands."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:742
 #: ../../src/network/gamehost.cc:1663
@@ -4013,7 +4013,7 @@ msgstr "Vybrať položku"
 #: ../../src/ui_basic/dropdown.cc:422
 msgctxt "dropdown"
 msgid "Not Selected"
-msgstr ""
+msgstr "Nevybraná"
 
 #: ../../src/ui_basic/dropdown.h:479
 msgid "No matches"
@@ -6194,7 +6194,7 @@ msgstr ""
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
-msgstr ""
+msgstr "Umožní hráčom, aby si na začiatku hry vybrali svoje vlastné začiatočné pozície"
 
 #: ../../src/ui_fsmenu/launch_game.cc:370
 msgid "Player vision is set by the scenario"
