@@ -531,6 +531,8 @@ msgid ""
 "I noticed that our stonemason has started his work, finally. He will cut the"
 " number of marble columns that we request in our basic economy settings."
 msgstr ""
+"Zauważyłam, że nasz kamieniarz rozpoczął wreszcie swoją pracę. Będzie ciął "
+"marmurowe kolumny, zgodnie z naszą prośbą i naszymi ustawieniami ekenomi."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:309
@@ -540,6 +542,10 @@ msgid ""
 "settings to a smaller amount. I think a reserve of four columns might be "
 "sufficient for the moment being."
 msgstr ""
+"Ale w tym rzecz, że jeśli zużyjemy cały nasz marmur na kolumny, niedługo "
+"może się nam skończyć. Więc powinniśmy obniżyć ustawienia dla marmurowych "
+"kolumn w ustawieniach ekonomii do mniejszej wartości. Myślę, że rezerwa "
+"czterech kolumn będzie wystarczająca na tę chwilę."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:317
 msgid "Amalea Looks Happy"
@@ -556,6 +562,8 @@ msgid ""
 "I found out that the construction of the lumberjack’s house and the sawmill "
 "is complete, so we can begin to harvest logs and make planks out of them."
 msgstr ""
+"Zauważyłam, że chata drwala jak i tartak są ukończone, więc możemy rozpocząć"
+" zbieranie kłód i robienie z nich desek."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:326
@@ -563,6 +571,8 @@ msgid ""
 "This is a great step forward in constructing advanced buildings. And we can "
 "think of using some planks to build new ships."
 msgstr ""
+"To świetny krok naprzód w konstrukcji zaawansowanych budowli. Możemy myśleć "
+"o użyciu desek do budowy nowych statków."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:332
 msgid "We Need a Port"
@@ -578,6 +588,8 @@ msgid ""
 "Sire, I just pondered our way home. It is of utmost importance to build a "
 "port for loading our ships and starting an expedition."
 msgstr ""
+"Panie, rozważałem nasze drogi do domu. Skrajnie najważniejsza jest budowa "
+"portu do załadunku statków i ruszenie na ekspedycję."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:338
@@ -587,6 +599,9 @@ msgid ""
 "further to discover the whole island. Let’s try to find such a valuable "
 "construction site."
 msgstr ""
+"Problem w tym, że port jest budowlą, która potrzebuje specjalnego miejsca do"
+" postawienia. Gdy formujemy naszą ekonomię, powinniśmy jednakowoż zajrzeć w "
+"inne zakątki wyspy. Znajdźmy warty uwagi plac budowy."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:346
 msgid "A Step Closer to Getting Home"
@@ -603,6 +618,8 @@ msgid ""
 "military has spotted a space to build a port on. We should start to build a "
 "port quickly."
 msgstr ""
+"Panie, dziś jesteśmy o wiele bliżej powrotu do domu. Nasze wojsko dostrzegło"
+" miejsce do budowy portu. Powinniśmy prędko zbudować port."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:352
@@ -610,6 +627,8 @@ msgid ""
 "Now we truly can look forward to building some ships. So, we should build a "
 "shipyard as well."
 msgstr ""
+"Teraz możemy prawdziwie spojrzeć wprzód i budować statki. Powinniśmy też "
+"wznieść stocznię."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:360
 msgid "Amalea’s Wisdom"
@@ -652,6 +671,9 @@ msgid ""
 "farm. The sheep farm itself needs wheat and water to work. So, let’s find a "
 "space for a big building and build a farm first."
 msgstr ""
+"Więc zastanówmy się nad tym. Do tkania tkaniny potrzebujemy wełny z "
+"owczarni. Sama owczarnia potrzebuje do pracy pszenicy i wody. Więc najpierw "
+"znajdźmy miejsce na duży budynek i zbudujmy tam farmę."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:375
@@ -662,6 +684,10 @@ msgid ""
 "our wool for weaving cloth. But for the moment being, let’s start by "
 "producing a reasonable amount of wheat."
 msgstr ""
+"Gdy wystarczająco dużo pszenicy zostanie wyprodukowane, możemy rozebrać "
+"farmę i zbudować owczarnię w celu produkcji wełny. Później możemy zbudować "
+"tkalnie w tym samym miejscu, by użyć naszej wełny do tkania tkaniny. Ale na "
+"razie zacznijmy od wyprodukowania rozsądnych ilości pszenicy."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:378
@@ -670,6 +696,9 @@ msgid ""
 "not have a target quantity for wheat, because the farmer does not need other"
 " wares to produce it. All we have to do is watch our stock of wheat grow."
 msgstr ""
+"Myślę, że 50 snopów zboża wystarczy na start. Nie mamy ustalonej liczby dla "
+"zboża, ponieważ farmer nie wymaga innych towarów do jej produkcji. Wszystko,"
+" co teraz musimy to patrzeć jak nasze zasoby zboża rosną."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:386
 msgid "Seafaring is Possible Again"
@@ -686,7 +715,7 @@ msgstr "Amalea jest dumna"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:396
 msgid "Amalea cheers…"
-msgstr ""
+msgstr "Amalea pozdrawia..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:398
@@ -704,6 +733,9 @@ msgid ""
 "settings. We need to turn all the wheat into wool and then the all the wool "
 "into cloth."
 msgstr ""
+"Nie zapomnij sprawdzić docelowej liczby wełny i tkaniny w ustawieniach "
+"ekonomii. Potrzebujemy przerobić całe zboże w wełnę i potem całą wełnę w "
+"tkaninę."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:404
@@ -711,6 +743,8 @@ msgid ""
 "Perhaps it would be a good idea to stop the shipyard’s production until we "
 "have some cloth available in order to not waste any logs or planks."
 msgstr ""
+"Być może to będzie dobry pomysł, jeżeli wstrzymamy produkcję w stoczni "
+"dopóki będziemy mieć nieco tkaniny, w celu nie marnowania kłód ani desek."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:412
 msgid "We Should Explore the Islands"
@@ -737,6 +771,9 @@ msgid ""
 " have spotted an island with some mountains in the south. Perhaps we can "
 "find some valuable resources like iron there."
 msgstr ""
+"Po pierwsze potrzebujemy znaleźć nieco więcej surowców, aby odbudować naszą "
+"ekonomię. Dostrzegłem górzystą wyspę na południu. Może znajdziemy tam jakieś"
+" cenne minerały, jak chociażby żelazo."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:421

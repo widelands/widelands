@@ -3151,7 +3151,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It is "
 "processed into spidercloth or tabards in a weaving mill."
-msgstr ""
+msgstr "A pókselymet pókok állítják elő, amelyeket a póktenyészeteken tenyésztenek. Pókszövetté vagy köntössé dolgozzák fel a szövőmalomban."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../data/tribes/initialization/atlanteans/units.lua:481
@@ -3404,7 +3404,7 @@ msgid ""
 "Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
 "hammer. Make sure you’ve always got some in reserve! They are produced by "
 "the toolsmith."
-msgstr ""
+msgstr "A geológusoknak, építőmunkásoknak, fegyverkovácsoknak, páncélkovácsoknak és hajóácsoknak egyaránt szükségük van kalapácsra. Mindig legyen belőle néhány tartalék! A szerszámkovács készíti."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Milking Tongs
 #: ../../data/tribes/initialization/atlanteans/units.lua:719
