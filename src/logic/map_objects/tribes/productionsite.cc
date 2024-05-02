@@ -143,7 +143,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 							   "ware type '%s' was declared multiple times", ware_or_worker_name.c_str());
 						}
 					}
-					input_wares_.push_back(WareAmount(wareworker.second, amount));
+					input_wares_.emplace_back(wareworker.second, amount);
 				} break;
 				case WareWorker::wwWORKER: {
 					for (const auto& temp_inputs : input_workers()) {
@@ -152,7 +152,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 							                    ware_or_worker_name.c_str());
 						}
 					}
-					input_workers_.push_back(WareAmount(wareworker.second, amount));
+					input_workers_.emplace_back(wareworker.second, amount);
 				} break;
 				}
 			} catch (const std::exception& e) {
