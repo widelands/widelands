@@ -8418,7 +8418,7 @@ msgstr "Kliešte na uhlie"
 #: ../../data/tribes/wares/firestones/init.lua:8
 msgctxt "ware"
 msgid "Firestones"
-msgstr ""
+msgstr "Pazúriky"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fish/init.lua:8
@@ -8798,7 +8798,7 @@ msgstr "Vylepšená kopija"
 #: ../../data/tribes/wares/spear_hardened/init.lua:8
 msgctxt "ware"
 msgid "Hardened Spear"
-msgstr ""
+msgstr "Vystužená kopija"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_heavy/init.lua:8
@@ -8810,7 +8810,7 @@ msgstr "Ťažká kopija"
 #: ../../data/tribes/wares/spear_stone_tipped/init.lua:8
 msgctxt "ware"
 msgid "Stone-tipped Spear"
-msgstr ""
+msgstr "Kopija s kamenným hrotom"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_war/init.lua:8
@@ -8912,7 +8912,7 @@ msgstr "Oceľový trojzubec"
 #: ../../data/tribes/wares/tunic/init.lua:8
 msgctxt "ware"
 msgid "Tunic"
-msgstr ""
+msgstr "Tunika"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/vest_padded/init.lua:8
