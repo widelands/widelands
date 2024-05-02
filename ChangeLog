@@ -7,6 +7,7 @@
 - Game setup: Unselect incompatible starting conditions when changing win condition
 - Add thread identifier to crash reports
 - Check for invalid combination before calling `DefaultAI::expedition_management()`
+- Territorial Lua error fix
 
 
 ## Release 1.2
