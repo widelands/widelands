@@ -8,7 +8,7 @@ jobs:
       matrix:
         config: [debug, release]
         compiler: [clang]
-        os: [12-large, 13-large, 14-large, 13-xlarge, 14]
+        os: [12-large, 13-large, 14-large, 14]
         # arch: [x86, arm64]]
         # Check https://github.com/actions/runner-images#available-images
         include:
@@ -18,8 +18,8 @@ jobs:
             osname: macOS13 x86
           - os: 14-large
             osname: macOS14 x86
-          - os: 13-xlarge
-            osname: macOS13 arm64
+          # - os: 13-xlarge
+            # osname: macOS13 arm64
           - os: 14
             osname: macOS14 arm64
     name: MacOS ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.osname}}
