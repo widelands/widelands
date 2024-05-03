@@ -17,7 +17,7 @@ jobs:
           - arch: arm64
             runner-suffix: xlarge
     name: MacOS ${{ matrix.config }} ${{ matrix.arch }} ${{ matrix.os}}
-    runs-on: macos-${{ matrix.os }}-${{ matrix.runner-suffix }}
+    runs-on: macos-${{ matrix.os }}-${{ matrix.arch }}
     steps:
     - name: Checkout
       uses: actions/checkout@v4
