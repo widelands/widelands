@@ -24,7 +24,7 @@ jobs:
             os: 13-xlarge
             osname: Ventura
           - arch: arm64
-            os: 14-xlarge
+            os: 14
             osname: Sonoma
     name: MacOS ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.arch }} ${{ matrix.osname}}
     runs-on: macos-${{ matrix.os }}
