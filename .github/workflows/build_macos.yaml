@@ -8,25 +8,21 @@ jobs:
       matrix:
         config: [debug, release]
         compiler: [clang]
+        os: [12-large, 13-large, 14-large, 13-xlarge, 14]
         # arch: [x86, arm64]]
         # Check https://github.com/actions/runner-images#available-images
         include:
           - os: 12-large
-            arch: x86
-            osname: macOS12
+            osname: macOS12 x86
           - os: 13-large
-            arch: x86
-            osname: macOS13
+            osname: macOS13 x86
           - os: 14-large
-            arch: x86
-            osname: macOS14
+            osname: macOS14 x86
           - os: 13-xlarge
-            arch: arm64
-            osname: macOS13
+            osname: macOS13 arm64
           - os: 14
-            arch: arm64
-            osname: macOS14
-    name: MacOS ${{ matrix.config }} ${{ matrix.arch }} ${{ matrix.osname}}
+            osname: macOS14 arm64
+    name: MacOS ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.osname}}
     runs-on: macos-${{ matrix.os }}
     steps:
     - name: Checkout
@@ -47,10 +43,10 @@ jobs:
         DMGPATH="$(pwd)"
         DMGFILE="$(ls *.dmg)"
         echo "DMG file is: $DMGPATH/$DMGFILE"
-        mv "$DMGFILE" "${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}-${{ matrix.osname }}.dmg"
+        mv "$DMGFILE" "${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}-${{ matrix.osname }}.dmg"
 
     - name: Uploading DMG
       uses: actions/upload-artifact@v4
       with:
-        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.osname }} ${{ matrix.arch }} AppImage
-        path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}-${{ matrix.osname }}.dmg
+        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.osname }} AppImage
+        path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}-${{ matrix.osname }}.dmg
