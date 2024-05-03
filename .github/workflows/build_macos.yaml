@@ -16,8 +16,7 @@ jobs:
             runner-suffix: large
           - arch: arm64
             runner-suffix: xlarge
-            osname: Ventura
-    name: MacOS ${{ matrix.config }} ${{ matrix.arch }} ${{ matrix.osname}}
+    name: MacOS ${{ matrix.config }} ${{ matrix.arch }} ${{ matrix.os}}
     runs-on: macos-${{ matrix.os }}-${{ matrix.runner-suffix }}
     steps:
     - name: Checkout
