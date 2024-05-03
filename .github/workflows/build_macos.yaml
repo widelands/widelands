@@ -11,20 +11,20 @@ jobs:
         # arch: [x86, arm64]]
         # Check https://github.com/actions/runner-images#available-images
         include:
-          - arch: x86
-            os: 12-large
+          - os: 12-large
+            arch: x86
             osname: macOS12
-          - arch: x86
-            os: 13-large
+          - os: 13-large
+            arch: x86
             osname: macOS13
-          - arch: x86
-            os: 14-large
+          - os: 14-large
+            arch: x86
             osname: macOS14
-          - arch: arm64
-            os: 13-xlarge
+          - os: 13-xlarge
+            arch: arm64
             osname: macOS13
-          - arch: arm64
-            os: 14
+          - os: 14
+            arch: arm64
             osname: macOS14
     name: MacOS ${{ matrix.config }} ${{ matrix.arch }} ${{ matrix.osname}}
     runs-on: macos-${{ matrix.os }}
