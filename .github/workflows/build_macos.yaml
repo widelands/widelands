@@ -12,9 +12,9 @@ jobs:
         # Check https://github.com/actions/runner-images#available-images
         include:
           - arch: x86
-            os: 12
+            os: [12-large, 13-large, 14-large]
           - arch: arm64
-            os: 14
+            os: [13-xlarge, 14-xlarge]
     name: MacOS ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.arch }}
     runs-on: macos-${{ matrix.os }}
     steps:
