@@ -8,20 +8,25 @@ jobs:
       matrix:
         config: [debug, release]
         compiler: [clang]
-        arch: [x86, arm64]
+        # arch: [x86, arm64]
         # Check https://github.com/actions/runner-images#available-images
         include:
           - arch: x86
             os: 12-large
+            osname: Monterrey
           - arch: x86
             os: 13-large
+            osname: Ventura
           - arch: x86
             os: 14-large
+            osname: Sonoma
           - arch: arm64
             os: 13-xlarge
+            osname: Ventura
           - arch: arm64
             os: 14-xlarge
-    name: MacOS ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.arch }}
+            osname: Sonoma
+    name: MacOS ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.arch }} ${{ matrix.osname}}
     runs-on: macos-${{ matrix.os }}
     steps:
     - name: Checkout
