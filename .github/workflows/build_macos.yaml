@@ -9,7 +9,7 @@ jobs:
         config: [debug, release]
         compiler: [clang]
         arch: [x86, arm64]
-        os: [13, 14]
+        os: [13]
         # Check https://github.com/actions/runner-images#available-images
         include:
           - arch: x86
@@ -17,7 +17,7 @@ jobs:
           - arch: arm64
             runner-suffix: xlarge
     name: MacOS ${{ matrix.config }} ${{ matrix.arch }} ${{ matrix.os}}
-    runs-on: macos-${{ matrix.os }}-${{ matrix.arch }}
+    runs-on: macos-${{ matrix.os }}-${{ matrix.runner-suffix }}
     steps:
     - name: Checkout
       uses: actions/checkout@v4
