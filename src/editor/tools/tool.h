@@ -19,8 +19,6 @@
 #ifndef WL_EDITOR_TOOLS_TOOL_H
 #define WL_EDITOR_TOOLS_TOOL_H
 
-#define MAX_TOOL_AREA 9
-
 #include "base/macros.h"
 #include "editor/tools/action_args.h"
 #include "editor/tools/tool_conf.h"
@@ -39,6 +37,8 @@ enum class WindowID {
 	Resize,
 	ToolHistory,
 };
+
+constexpr int kMaxToolArea = 9;
 
 constexpr int32_t kAutoTreesIndex = std::numeric_limits<uint16_t>::max() - 4;
 

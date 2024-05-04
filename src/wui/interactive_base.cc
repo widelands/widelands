@@ -1655,9 +1655,9 @@ void InteractiveBase::road_building_add_overlay(const Widelands::CoordPath& path
 		//  can't build on robusts
 		const Widelands::BaseImmovable* imm = map.get_immovable(neighb);
 		if ((imm != nullptr) && imm->get_size() >= Widelands::BaseImmovable::SMALL &&
-		    (!((dynamic_cast<const Widelands::Flag*>(imm) != nullptr) ||
-		       ((dynamic_cast<const Widelands::RoadBase*>(imm) != nullptr) &&
-		        ((caps & Widelands::BUILDCAPS_FLAG) != 0))))) {
+		    ((dynamic_cast<const Widelands::Flag*>(imm) == nullptr) &&
+		     ((dynamic_cast<const Widelands::RoadBase*>(imm) == nullptr) ||
+		      ((caps & Widelands::BUILDCAPS_FLAG) == 0)))) {
 			continue;
 		}
 		if (path.get_index(neighb) >= 0) {
