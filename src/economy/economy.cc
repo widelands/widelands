@@ -1205,7 +1205,7 @@ void Economy::handle_active_supplies(Game& game) {
 			return;
 		}
 
-		assignments.push_back(std::make_pair(&supply, wh));
+		assignments.emplace_back(&supply, wh);
 	}
 
 	// Actually start with the transfers in a separate second phase,
