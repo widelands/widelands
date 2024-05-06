@@ -1807,7 +1807,7 @@ bool Panel::draw_tooltip(const std::string& text, const PanelStyle style, Vector
 }
 
 void Panel::handle_hyperlink(const std::string& action) {
-	throw wexception("Panel %s: Invalid hyperlink action '%s'", name_.c_str(), action.c_str());
+	log_err("Panel %s: Invalid hyperlink action '%s'", name_.c_str(), action.c_str());
 }
 
 struct ContextMenu : public Listselect<Panel::ContextMenuEntry> {
