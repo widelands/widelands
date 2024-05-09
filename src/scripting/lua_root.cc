@@ -1141,7 +1141,8 @@ void LuaDescriptions::do_modify_worker(lua_State* L,
 	} else if (property == "becomes") {
 		worker_descr.set_becomes(descrs, luaL_checkstring(L, 5));
 	} else if (property == "target_quantity") {
-		worker_descr.set_default_target_quantity(lua_isnil(L, 5) ? Widelands::kInvalidWare : luaL_checkuint32(L, 5));
+		worker_descr.set_default_target_quantity(lua_isnil(L, 5) ? Widelands::kInvalidWare :
+                                                                 luaL_checkuint32(L, 5));
 	} else if (property == "preciousness") {
 		worker_descr.set_preciousness(luaL_checkstring(L, 5), luaL_checkuint32(L, 6));
 	} else if (property == "programs") {
@@ -1375,11 +1376,12 @@ void LuaDescriptions::do_modify_ware(lua_State* L,
                                      const std::string& property) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
-	Widelands::WareDescr& ware_descr =
-	   *descrs.get_mutable_ware_descr(descrs.load_ware(unit_name));
+	Widelands::WareDescr& ware_descr = *descrs.get_mutable_ware_descr(descrs.load_ware(unit_name));
 
 	if (property == "target_quantity") {
-		ware_descr.set_default_target_quantity(luaL_checkstring(L, 5), lua_isnil(L, 6) ? Widelands::kInvalidWare : luaL_checkuint32(L, 6));
+		ware_descr.set_default_target_quantity(luaL_checkstring(L, 5), lua_isnil(L, 6) ?
+                                                                        Widelands::kInvalidWare :
+                                                                        luaL_checkuint32(L, 6));
 	} else if (property == "preciousness") {
 		ware_descr.set_preciousness(luaL_checkstring(L, 5), luaL_checkuint32(L, 6));
 	} else {
