@@ -993,7 +993,7 @@ msgstr "Описание: %s"
 #: ../../src/editor/ui_menus/field_info_window.cc:251
 msgctxt "addons"
 msgid "(none)"
-msgstr ""
+msgstr "(ничего)"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:258
 #, c-format
@@ -1345,19 +1345,19 @@ msgstr "ID карты:"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:257
 msgctxt "map_generator"
 msgid "Default"
-msgstr ""
+msgstr "По умолчанию"
 
 #. * TRANSLATORS: Random Climate
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:285
 msgctxt "climate"
 msgid "Random"
-msgstr ""
+msgstr "Случайно"
 
 #. * TRANSLATORS: Default Terrain Distribution
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:316
 msgctxt "terrain"
 msgid "Default"
-msgstr ""
+msgstr "По умолчанию"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:318
 msgid "Alpine"
@@ -1377,7 +1377,7 @@ msgstr "Пустошь"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:322
 msgctxt "terrain"
 msgid "Random"
-msgstr ""
+msgstr "Случайно"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:630
 msgid "Generating random map…"
@@ -3360,7 +3360,7 @@ msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was reachable at the TCP port %u or the server shut down as"
 " you tried to connect."
-msgstr ""
+msgstr "Widelands не может осуществить соединение по указанному адресу. Сервер Widelands не доступен по TCP-порту %u, либо он отключился при попытке подключения."
 
 #: ../../src/network/gameclient.cc:816
 #, c-format
@@ -4259,11 +4259,11 @@ msgstr "%1$s<br>(%2$s)"
 
 #: ../../src/ui_basic/textinput.cc:374
 msgid "Cut"
-msgstr ""
+msgstr "вырезать"
 
 #: ../../src/ui_basic/textinput.cc:374
 msgid "Cut the selected text to the clipboard"
-msgstr ""
+msgstr "Вырезать выделенный текст в буфер обмена"
 
 #: ../../src/ui_basic/textinput.cc:377 ../../src/ui_fsmenu/tech_info.cc:238
 msgid "Copy"
@@ -4271,19 +4271,19 @@ msgstr "Копировать"
 
 #: ../../src/ui_basic/textinput.cc:377
 msgid "Copy the selected text to the clipboard"
-msgstr ""
+msgstr "Скопировать выделенный текст в буфер обмена"
 
 #: ../../src/ui_basic/textinput.cc:380
 msgid "Paste"
-msgstr ""
+msgstr "Вставить"
 
 #: ../../src/ui_basic/textinput.cc:380
 msgid "Paste the clipboard content"
-msgstr ""
+msgstr "Вставить содержимое буфера"
 
 #: ../../src/ui_basic/textinput.cc:383
 msgid "Delete the selected text"
-msgstr ""
+msgstr "Удалить выделенный текст"
 
 #: ../../src/ui_basic/textinput.cc:386 ../../src/wlapplication_options.cc:383
 msgid "Select All"
@@ -4291,7 +4291,7 @@ msgstr "Выбрать все"
 
 #: ../../src/ui_basic/textinput.cc:386
 msgid "Select the entire text"
-msgstr ""
+msgstr "Выделить весь текст"
 
 #: ../../src/ui_basic/window.cc:101 ../../src/ui_basic/window.cc:862
 #: ../../src/ui_fsmenu/about.cc:41 ../../src/ui_fsmenu/crash_report.cc:71
@@ -4320,23 +4320,23 @@ msgstr "Освободить"
 
 #: ../../src/ui_basic/window.cc:847
 msgid "Minimize the window"
-msgstr ""
+msgstr "Свернуть окно"
 
 #: ../../src/ui_basic/window.cc:847
 msgid "Unminimize the window"
-msgstr ""
+msgstr "Развернуть окно"
 
 #: ../../src/ui_basic/window.cc:857
 msgid "Pin the window"
-msgstr ""
+msgstr "Закрепить окно"
 
 #: ../../src/ui_basic/window.cc:857
 msgid "Unpin the window"
-msgstr ""
+msgstr "Открепить окно"
 
 #: ../../src/ui_basic/window.cc:862
 msgid "Close the window"
-msgstr ""
+msgstr "Закрыть окно"
 
 #: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:515
 msgid "About Widelands"
@@ -5271,7 +5271,7 @@ msgstr "Минимальная версия Widelands: %s"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:295
 msgctxt "version"
 msgid "(none)"
-msgstr ""
+msgstr "(ничего)"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:325
 msgid "Top-level directory"
@@ -5898,7 +5898,7 @@ msgstr "Название кампании"
 #: ../../src/ui_fsmenu/campaigns.cc:45
 msgctxt "difficulty"
 msgid "Default"
-msgstr ""
+msgstr "По умолчанию"
 
 #: ../../src/ui_fsmenu/crash_report.cc:44
 msgid "Crash Report Details"
@@ -7823,7 +7823,7 @@ msgstr "Энциклопедия"
 
 #: ../../src/wlapplication_options.cc:367
 msgid "Context Menu"
-msgstr ""
+msgstr "Контекстное меню"
 
 #: ../../src/wlapplication_options.cc:371
 msgid "Cut Text"
@@ -8366,7 +8366,7 @@ msgstr "Меню"
 #: ../../src/wlapplication_options.cc:1425
 msgctxt "hotkey"
 msgid "Application"
-msgstr ""
+msgstr "Приложение"
 
 #: ../../src/wlapplication_options.cc:1427
 msgctxt "hotkey"
@@ -10893,7 +10893,7 @@ msgstr "Эта экспедиция не может быть отменена, �
 #: ../../src/wui/shipwindow.cc:362
 msgctxt "destination"
 msgid "(none)"
-msgstr ""
+msgstr "(ничего)"
 
 #: ../../src/wui/shipwindow.cc:429 ../../src/wui/shipwindow.cc:434
 #: ../../src/wui/shipwindow.cc:439
