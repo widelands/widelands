@@ -18,8 +18,8 @@ jobs:
             osname: macOS13 x86
           # - os: 14-large
             # osname: macOS14 x86
-          - os: 13-arm64
-            osname: macOS13 arm64
+          # - os: 13-arm64
+            # osname: macOS13 arm64
           - os: 14
             osname: macOS14 arm64
     name: MacOS ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.osname}}
@@ -38,7 +38,7 @@ jobs:
       run: |
         mkdir build_wl
         cd build_wl/
-        ../utils/macos/build_app.sh "--${{ matrix.config }}" "--${{ matrix.compiler }}"
+        ../utils/macos/build_app.sh "--${{ matrix.config }}" "--${{ matrix.compiler }}" "--no-website"
         grep -v REVDETECT-BROKEN ../build/VERSION
         DMGPATH="$(pwd)"
         DMGFILE="$(ls *.dmg)"
