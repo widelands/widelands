@@ -8,7 +8,7 @@ jobs:
       matrix:
         config: [debug, release]
         compiler: [clang]
-        os: [12, 13, 13-arm64, 14]
+        os: [12, 13, 14]
         # arch: [x86, arm64]]
         # Check https://github.com/actions/runner-images#available-images
         include:
