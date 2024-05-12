@@ -1173,9 +1173,8 @@ inline void do_set_global_string<std::string>(lua_State* L, const char* name, st
 }
 
 template <typename... Args>
-static std::function<void(Args...)> create_plugin_action_lambda(lua_State* L,
-                                                                const std::string& cmd,
-                                                                bool is_hyperlink = false) {
+static std::function<void(Args...)>
+create_plugin_action_lambda(lua_State* L, const std::string& cmd, bool is_hyperlink = false) {
 	if (is_main_menu(L)) {
 		FsMenu::MainMenu& fsmm = get_main_menu(L);
 		return [&fsmm, cmd, is_hyperlink](Args... args) {  // do not capture L directly
