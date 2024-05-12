@@ -4129,7 +4129,8 @@ void LuaMainMenu::__unpersist(lua_State* L) {
 /* RST
    .. method:: add_plugin_timer(action, interval[, failsafe=true])
 
-      Register a piece of code that will be run periodically as long as the game/editor is running.
+      Register a piece of code that will be run periodically as long as the main menu is running
+      and its Lua context is not reset.
 
       :arg action: The Lua code to run.
       :type action: :class:`string`
