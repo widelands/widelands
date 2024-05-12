@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-04-22 02:31+0000\n"
+"POT-Creation-Date: 2024-05-09 02:35+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Hao Hu, 2024\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -3896,11 +3896,11 @@ msgstr "Widelands无法使用本地网络。可能其他的进程正运行在服
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/scripting/lua_ui.cc:1158 ../../src/wui/interactive_base.cc:311
+#: ../../src/scripting/lua_ui.cc:1174 ../../src/wui/interactive_base.cc:311
 msgid "Plugin Error"
 msgstr ""
 
-#: ../../src/scripting/lua_ui.cc:1159 ../../src/wui/interactive_base.cc:312
+#: ../../src/scripting/lua_ui.cc:1175 ../../src/wui/interactive_base.cc:312
 #, c-format
 msgid ""
 "Error when running plugin:\n"
@@ -3979,11 +3979,11 @@ msgstr "未选定"
 msgid "No matches"
 msgstr "没有匹配到对手"
 
-#: ../../src/ui_basic/panel.cc:321
+#: ../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
 msgstr "请稍候..."
 
-#: ../../src/ui_basic/panel.cc:458
+#: ../../src/ui_basic/panel.cc:462
 msgid "Game ending – please wait…"
 msgstr "游戏结束 – 请稍候..."
 
