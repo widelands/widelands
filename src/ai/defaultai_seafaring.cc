@@ -533,7 +533,13 @@ bool DefaultAI::check_ships(const Time& gametime) {
 		// if ship is waiting for command
 		if (so.waiting_for_command_) {
 			if (so.ship->get_ship_type() == Widelands::ShipType::kTransport) {
-				expedition_management(so);
+				// so.waiting_for_command_ can still be true right after a warship is backfitted to
+				// transport.
+				if (so.ship->is_expedition_or_warship()) {
+					expedition_management(so);
+				} else {
+					so.waiting_for_command_ = false;
+				}
 			} else {
 				warship_management(so);
 			}

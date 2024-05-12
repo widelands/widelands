@@ -25,10 +25,12 @@
 
 #include "network/network.h"
 
-#define LAN_PROMOTION_PROTOCOL_VERSION 1
+constexpr uint8_t kLanPromotionProtocolVersion = 1;
 
-#define LAN_GAME_CLOSED 0
-#define LAN_GAME_OPEN 1
+enum {
+	kLanGameClosed = 0,
+	kLanGameOpen = 1,
+};
 
 struct NetGameInfo {
 	char magic[6];

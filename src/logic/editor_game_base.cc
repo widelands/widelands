@@ -766,32 +766,37 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 			if ((owner == 0u) || player(owner).military_influence(index) < new_influence_modified) {
 				change_field_owner(mr.location(), player_area.player_number);
 			}
-		} else if (((conquering_player->military_influence(index) -= influence) == 0u) &&
-		           owner == player_area.player_number) {
-			//  The player completely lost influence over the location, which he
-			//  owned. Now we must see if some other player has influence and if
-			//  so, transfer the ownership to that player.
-			PlayerNumber best_player;
-			if ((preferred_player != 0u) &&
-			    (player(preferred_player).military_influence(index) != 0u)) {
-				best_player = preferred_player;
-			} else {
-				best_player = neutral_when_no_influence ? 0 : player_area.player_number;
-				MilitaryInfluence highest_military_influence = 0;
-				PlayerNumber const nr_players = map().get_nrplayers();
-				iterate_players_existing_const(p, nr_players, *this, plr) {
-					if (MilitaryInfluence const value = plr->military_influence(index)) {
-						if (value > highest_military_influence) {
-							highest_military_influence = value;
-							best_player = p;
-						} else if (value == highest_military_influence) {
-							best_player = neutral_when_competing_influence ? 0 : player_area.player_number;
+		} else {
+			MilitaryInfluence& player_infl = conquering_player->military_influence(index);
+			assert(player_infl >= influence);
+			player_infl -= influence;
+			if (player_infl == 0u && owner == player_area.player_number) {
+				//  The player completely lost influence over the location, which he
+				//  owned. Now we must see if some other player has influence and if
+				//  so, transfer the ownership to that player.
+				PlayerNumber best_player;
+				if ((preferred_player != 0u) &&
+				    (player(preferred_player).military_influence(index) != 0u)) {
+					best_player = preferred_player;
+				} else {
+					best_player = neutral_when_no_influence ? 0 : player_area.player_number;
+					MilitaryInfluence highest_military_influence = 0;
+					PlayerNumber const nr_players = map().get_nrplayers();
+					iterate_players_existing_const(p, nr_players, *this, plr) {
+						if (const MilitaryInfluence value = plr->military_influence(index); value != 0) {
+							if (value > highest_military_influence) {
+								highest_military_influence = value;
+								best_player = p;
+							} else if (value == highest_military_influence) {
+								best_player =
+								   neutral_when_competing_influence ? 0 : player_area.player_number;
+							}
 						}
 					}
 				}
-			}
-			if (best_player != player_area.player_number) {
-				change_field_owner(mr.location(), best_player);
+				if (best_player != player_area.player_number) {
+					change_field_owner(mr.location(), best_player);
+				}
 			}
 		}
 	} while (mr.advance(map()));

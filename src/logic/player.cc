@@ -814,8 +814,8 @@ bool Player::check_can_build(const BuildingDescr& descr, const FCoords& fc) cons
 	}
 
 	if (descr.get_built_over_immovable() != INVALID_INDEX &&
-	    !((fc.field->get_immovable() != nullptr) &&
-	      fc.field->get_immovable()->has_attribute(descr.get_built_over_immovable()))) {
+	    ((fc.field->get_immovable() == nullptr) ||
+	     !fc.field->get_immovable()->has_attribute(descr.get_built_over_immovable()))) {
 		return false;
 	}
 
@@ -1167,7 +1167,7 @@ Economy* Player::create_economy(WareWorker type) {
 	const Serial serial = eco->serial();
 
 	assert(economies_.count(serial) == 0);
-	economies_.emplace(std::make_pair(serial, std::move(eco)));
+	economies_.emplace(serial, std::move(eco));
 	assert(economies_.at(serial)->serial() == serial);
 	assert(economies_.count(serial) == 1);
 
@@ -1180,7 +1180,7 @@ Economy* Player::create_economy(Serial serial, WareWorker type) {
 	std::unique_ptr<Economy> eco(new Economy(*this, serial, type));
 
 	assert(economies_.count(serial) == 0);
-	economies_.emplace(std::make_pair(serial, std::move(eco)));
+	economies_.emplace(serial, std::move(eco));
 	assert(economies_.at(serial)->serial() == serial);
 	assert(economies_.count(serial) == 1);
 
