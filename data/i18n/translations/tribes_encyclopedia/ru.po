@@ -3166,7 +3166,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It is "
 "processed into spidercloth or tabards in a weaving mill."
-msgstr ""
+msgstr "Паутину делают пауки, которых разводят на паучьих фермах. Затем из неё ткут шёлк на ткацкой фабрике."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../data/tribes/initialization/atlanteans/units.lua:481
@@ -3175,7 +3175,7 @@ msgid ""
 "Spidercloth is made out of spider silk in a weaving mill. It is used in the "
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
-msgstr "Шёлк делают на ткацкой фабрике из паучьего шелка. Шелк используют в инструментальной мастерской и на верфи. Кроме того, шёлк используется при строительстве некоторых зданий."
+msgstr "Шёлк делают на ткацкой фабрике из паутины. Шелк используют в инструментальной мастерской и на верфи. Кроме того, шёлк используется при строительстве некоторых зданий."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fish
 #: ../../data/tribes/initialization/atlanteans/units.lua:492
@@ -3419,7 +3419,7 @@ msgid ""
 "Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
 "hammer. Make sure you’ve always got some in reserve! They are produced by "
 "the toolsmith."
-msgstr ""
+msgstr "Геологи, строители, оружейники, бронники и корабелы - всем нужен молоток. Убедитесь, что у вас всегда есть небольшой резерв! Он изготавливается инструментальщиком."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Milking Tongs
 #: ../../data/tribes/initialization/atlanteans/units.lua:719
@@ -3660,7 +3660,7 @@ msgstr "Работает на строительных площадках, во�
 #: ../../data/tribes/initialization/atlanteans/units.lua:971
 msgctxt "atlanteans_worker"
 msgid "Breeds spiders for silk."
-msgstr "Разводит пауков для получения шёлка."
+msgstr "Разводит пауков для получения паутины."
 
 #. TRANSLATORS: Helptext for an Atlantean worker: Weaver
 #: ../../data/tribes/initialization/atlanteans/units.lua:978
@@ -4891,7 +4891,7 @@ msgstr "Фермеру козельца нужно в среднем %1% для 
 #: ../../data/tribes/initialization/atlanteans/units.lua:1833
 msgctxt "building"
 msgid "Breeds spiders for silk."
-msgstr "Разводит пауков для получения шёлка."
+msgstr "Разводит пауков для получения паутины."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Spider Farm
 #: ../../data/tribes/initialization/atlanteans/units.lua:1835
@@ -4902,7 +4902,7 @@ msgid ""
 "gain the spider silk once a day. There is no need to spin this again. The "
 "thread can directly be used by the weaving mill. Oh hello, here is one of "
 "our nice spiders … Hey! Why are you running away?"
-msgstr "Нет, пауков не кормят кукурузой. Мы откармливаем кукурузой жирных кузнечиков, их то, как раз, и едят наши паучки. Раз в день мы помещаем их в специальное устройство для получения паучьего шелка. Нет необходимости его перематывать. Можно сразу заправлять нить в ткацкий станок. А вот и один из наших милых пауков … Эй! Ты куда побежал?"
+msgstr "Нет, пауков не кормят кукурузой. Мы откармливаем кукурузой жирных кузнечиков, их то, как раз, и едят наши паучки. Раз в день мы помещаем их в специальное устройство для получения паутины. Нет необходимости её перематывать. Можно сразу заправлять нить в ткацкий станок. А вот и один из наших милых пауков … Эй! Ты куда побежал?"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Spider
 #. Farm
@@ -16305,7 +16305,7 @@ msgstr "Щелчок СКМ или Ctrl + ЛКМ"
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:18
 msgid "Minimize/Maximize window"
-msgstr "Минимизировать/максимизировать окно"
+msgstr "Свернуть/развернуть окно"
 
 #. TRANSLATORS: This is an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:20

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-04-22 02:31+0000\n"
+"POT-Creation-Date: 2024-05-09 02:35+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Irish (http://app.transifex.com/widelands/widelands/language/ga/)\n"
@@ -3943,11 +3943,11 @@ msgstr ""
 msgid "%1% (%2%)"
 msgstr ""
 
-#: ../../src/scripting/lua_ui.cc:1158 ../../src/wui/interactive_base.cc:311
+#: ../../src/scripting/lua_ui.cc:1174 ../../src/wui/interactive_base.cc:311
 msgid "Plugin Error"
 msgstr ""
 
-#: ../../src/scripting/lua_ui.cc:1159 ../../src/wui/interactive_base.cc:312
+#: ../../src/scripting/lua_ui.cc:1175 ../../src/wui/interactive_base.cc:312
 #, c-format
 msgid ""
 "Error when running plugin:\n"
@@ -4026,11 +4026,11 @@ msgstr ""
 msgid "No matches"
 msgstr ""
 
-#: ../../src/ui_basic/panel.cc:321
+#: ../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
 msgstr ""
 
-#: ../../src/ui_basic/panel.cc:458
+#: ../../src/ui_basic/panel.cc:462
 msgid "Game ending – please wait…"
 msgstr ""
 
