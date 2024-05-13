@@ -227,7 +227,7 @@ msgstr "Zavreli ste okno Štatistika budov. Nevšimol som si, že by ste vybrali
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:109
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:111
 msgid "Open the building statistics window again"
-msgstr ""
+msgstr "Znova otvorte okno Štatistika budov"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:113
 msgid ""
@@ -238,7 +238,7 @@ msgstr "Zavreli ste okno Štatistika budov, ale ešte ste nezistili počet krči
 #. TRANSLATORS: "it" refers to the building statistics window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:115
 msgid "Please reopen it and choose the second tab (medium buildings)."
-msgstr "Znovu ho otvorte a kliknite na druhú kartu (stredné budovy)."
+msgstr "Znova ho otvorte a kliknite na druhú kartu (stredné budovy)."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:121
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:123
@@ -345,7 +345,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:211
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:213
 msgid "Open the stock window again"
-msgstr ""
+msgstr "Znova otvorte okno Zásoby"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:193
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:215
@@ -371,7 +371,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:217
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:429
 msgid "Otherwise, please reopen it and choose the third tab."
-msgstr "V opačnom prípade ho znovu otvorte a kliknite na tretiu kartu."
+msgstr "V opačnom prípade ho znova otvorte a kliknite na tretiu kartu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:223
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:225
@@ -421,7 +421,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:249
 #, lua-format
 msgid "Alternatively, you can access it directly with the ‘%s’ key."
-msgstr ""
+msgstr "Môžete si ho tiež otvoriť priamo stlačením klávesu „%s“."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "Encyclopedia"
@@ -540,7 +540,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:306
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:308
 msgid "Open the encyclopedia window again"
-msgstr ""
+msgstr "Znova otvorte okno Encyklopédia"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:310
 msgid ""
@@ -725,7 +725,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:423
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:446
 msgid "Open the ware statistics window again"
-msgstr ""
+msgstr "Znova otvorte okno Štatistika výrobkov"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:427
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:450
@@ -744,7 +744,7 @@ msgstr ""
 #. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:452
 msgid "Otherwise, please reopen it and choose the fourth tab."
-msgstr "V opačnom prípade ho znovu otvorte a kliknite na štvrtú kartu."
+msgstr "V opačnom prípade ho znova otvorte a kliknite na štvrtú kartu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:458
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:460

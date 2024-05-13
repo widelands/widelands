@@ -328,7 +328,7 @@ msgstr "Späť"
 #: ../../src/editor/editorinteractive.cc:163
 #: ../../src/wlapplication_options.cc:480
 msgid "Redo"
-msgstr "Znovu"
+msgstr "Znova"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/editor/editorinteractive.cc:175
@@ -659,7 +659,7 @@ msgid ""
 "\n"
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
 "Please add this information to your report."
-msgstr ""
+msgstr "Objavila sa chyba. Chybové hlásenie je:\n\n%1$s\n\nProsím, ohláste tento problém, aby ste nám pomohli zlepšiť Widelands. Súvisiace správy nájdete v štandardnom výstupe (stdout.txt v systéme Windows). Používate verziu %2$s.\nProsím pridajte túto informáciu k vášmu hláseniu."
 
 #: ../../src/editor/editorinteractive.cc:1179
 #, c-format
@@ -1987,7 +1987,7 @@ msgstr ""
 #: ../../src/logic/addons.cc:257
 #, c-format
 msgid "%1$s and %2$s: %3$s"
-msgstr ""
+msgstr "%1$s a %2$s: %3$s"
 
 #: ../../src/logic/addons.cc:258
 #, c-format
@@ -2176,7 +2176,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s"
-msgstr ""
+msgstr "%1$s / %2$s / %3$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, shipname, and "distance
 #. direction port_name.
@@ -2185,7 +2185,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
-msgstr ""
+msgstr "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
 
 #: ../../src/logic/editor_game_base.cc:236
 #, c-format
@@ -2648,7 +2648,7 @@ msgstr "Nález miesta pre prístav"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:747
 msgid "Enemy Ship"
-msgstr ""
+msgstr "Nepriateľská loď"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:747
 msgid "Enemy Ship Spotted"
@@ -3255,7 +3255,7 @@ msgstr ""
 
 #: ../../src/map_io/map_saver.cc:280
 msgid "Territory"
-msgstr ""
+msgstr "Územie"
 
 #: ../../src/map_io/map_saver.cc:287
 #: ../../src/map_io/widelands_map_loader.cc:390
@@ -3306,7 +3306,7 @@ msgstr "Nahrávanie mapy: %1$s (%2$u/%3$d)"
 
 #: ../../src/map_io/widelands_map_loader.cc:304
 msgid "Territories"
-msgstr ""
+msgstr "Územia"
 
 #: ../../src/map_io/widelands_map_loader.cc:344
 msgid "Initializing flags"
@@ -5073,7 +5073,7 @@ msgstr[3] ""
 msgid ""
 "%1$s\n"
 "• %2$s"
-msgstr ""
+msgstr "%1$s\n• %2$s"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:463
 msgid "Quit Packager"
@@ -5201,7 +5201,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:162
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:163
 msgid "Create subdirectory"
@@ -5394,7 +5394,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:246
 msgctxt "markup"
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:246
 msgid "Tiny"
@@ -5404,7 +5404,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:250
 msgctxt "markup"
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:250
 msgid "Small"
@@ -5414,13 +5414,13 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:254
 msgctxt "markup"
 msgid "3"
-msgstr ""
+msgstr "3"
 
 #. * TRANSLATORS: Short for Large text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:258
 msgctxt "markup"
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:258
 msgid "Large"
@@ -5430,7 +5430,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:262
 msgctxt "markup"
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:262
 msgid "Huge"
@@ -6544,7 +6544,7 @@ msgstr "Spustiť editor máp"
 
 #: ../../src/ui_fsmenu/main.cc:504
 msgid "Watch again a recorded earlier game"
-msgstr "Znovu sledovať zaznamenanú hru"
+msgstr "Znova sledovať zaznamenanú hru"
 
 #: ../../src/ui_fsmenu/main.cc:507 ../../src/wlapplication_options.cc:329
 msgid "Add-Ons"
@@ -7545,7 +7545,7 @@ msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
-msgstr ""
+msgstr "Objavila sa chyba počas hry. Chybové hlásenie je:\n\n%1$s\n\nProsím, ohláste tento problém, aby ste nám pomohli zlepšiť Widelands. Súvisiace správy nájdete v štandardnom výstupe (stdout.txt v systéme Windows). Používate verziu %2$s.\n\nProsím pridajte túto informáciu k vášmu hláseniu.\n\nChcete, aby sa Widelands pokúsil vytvoriť núdzovo uloženú hru? Väčšinou je možné jej načítanie a pokračovanie v hre."
 
 #: ../../src/wlapplication.cc:1792
 #, c-format
@@ -8255,7 +8255,7 @@ msgstr "Klik"
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "Umiestnenie nových prvkov do mapy alebo zvýšenie prvkov na mape o hodnotu určenú nastavením „Zvýšiť/znížiť hodnotu“"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../src/wlapplication_options.cc:1071
@@ -8268,7 +8268,7 @@ msgstr "Shift + klik"
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "Odstránenie prvkov z mapy alebo zníženie prvkov na mape o hodnotu určenú nastavením „Zvýšiť/znížiť hodnotu“"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../src/wlapplication_options.cc:1076
@@ -8279,7 +8279,7 @@ msgstr "Ctrl + klik"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:1078
 msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr ""
+msgstr "Nastavenie prvkov na mape na hodnotu určenú nastavením „Nastaviť hodnotu“"
 
 #. * TRANSLATORS: prefix for message window shortcuts in keyboard options
 #: ../../src/wlapplication_options.cc:1182
@@ -9002,7 +9002,7 @@ msgstr "Uložiť nastavenia cieľa"
 #. * TRANSLATORS: Infinite number of wares or workers
 #: ../../src/wui/economy_options_window.cc:309
 msgid "∞"
-msgstr ""
+msgstr "∞"
 
 #: ../../src/wui/economy_options_window.cc:579
 msgid "The profile name cannot be empty"
@@ -10980,7 +10980,7 @@ msgstr "Hudba"
 #: ../../src/wui/sound_options.cc:163
 msgctxt "sound_options"
 msgid "Chat Messages"
-msgstr ""
+msgstr "Chatové správy"
 
 #: ../../src/wui/sound_options.cc:167
 msgctxt "sound_options"
