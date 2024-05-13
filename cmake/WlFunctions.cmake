@@ -14,6 +14,7 @@ macro(_parse_common_args ARGS)
     USES_SDL2_IMAGE
     USES_SDL2_MIXER
     USES_SDL2_TTF
+    USES_STD_FS
     USES_TINYGETTEXT
     USES_ZLIB
   )
@@ -178,6 +179,10 @@ macro(_common_compile_tasks)
 
   if(ARG_USES_SDL2_TTF)
     target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::TTF ${SDL_TTF_STATIC_LIBS})
+  endif()
+
+  if(ARG_USES_STD_FS)
+    target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} stdc++fs)
   endif()
 
   if(ARG_USES_TINYGETTEXT)
