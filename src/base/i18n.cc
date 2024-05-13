@@ -61,7 +61,7 @@ struct TextdomainStackEntry {
 				it = g_dictionary_cache.emplace(dir, new DictionaryCache()).first;
 				it->second->manager.add_directory(dir);
 			}
-			dictionary_pointer = it->second.get();
+			dictionary_pointer_ = it->second.get();
 		} else {
 			log_warn("Textdomain directory %s does not exist", dir.c_str());
 		}
@@ -72,7 +72,7 @@ struct TextdomainStackEntry {
 	                                         const std::string& pl,
 	                                         int n) {
 		tinygettext::Dictionary* d = dictionary();
-		return *cached_return_values
+		return *cached_return_values_
 		           .insert(d != nullptr ? d->translate_ctxt_plural(ctxt, sg, pl, n) :
 		                   n == 1       ? sg :
                                         pl)
@@ -80,7 +80,7 @@ struct TextdomainStackEntry {
 	}
 	const std::string& translate_plural(const std::string& sg, const std::string& pl, int n) {
 		tinygettext::Dictionary* d = dictionary();
-		return *cached_return_values
+		return *cached_return_values_
 		           .insert(d != nullptr ? d->translate_plural(sg, pl, n) :
 		                   n == 1       ? sg :
                                         pl)
@@ -88,42 +88,42 @@ struct TextdomainStackEntry {
 	}
 	const std::string& translate_ctxt(const std::string& ctxt, const std::string& msg) {
 		tinygettext::Dictionary* d = dictionary();
-		return *cached_return_values.insert(d != nullptr ? d->translate_ctxt(ctxt, msg) : msg).first;
+		return *cached_return_values_.insert(d != nullptr ? d->translate_ctxt(ctxt, msg) : msg).first;
 	}
 	const std::string& translate(const std::string& msg) {
 		tinygettext::Dictionary* d = dictionary();
-		return *cached_return_values.insert(d != nullptr ? d->translate(msg) : msg).first;
+		return *cached_return_values_.insert(d != nullptr ? d->translate(msg) : msg).first;
 	}
 
 private:
-	DictionaryCache* dictionary_pointer = nullptr;
-
-	// To prevent translations from going out of scope before use in complex string assemblies.
-	std::set<std::string> cached_return_values;
-
 	tinygettext::Dictionary* dictionary() {
-		if (dictionary_pointer == nullptr) {
+		if (dictionary_pointer_ == nullptr) {
 			return nullptr;
 		}
 
 		const std::string& lang_to_use = get_locale();
-		if (auto it = dictionary_pointer->dictionaries.find(lang_to_use);
-		    it != dictionary_pointer->dictionaries.end()) {
+		if (auto it = dictionary_pointer_->dictionaries.find(lang_to_use);
+		    it != dictionary_pointer_->dictionaries.end()) {
 			return it->second;
 		}
 
 		tinygettext::Dictionary* result = nullptr;
 		try {
-			result = &dictionary_pointer->manager.get_dictionary(
+			result = &dictionary_pointer_->manager.get_dictionary(
 			   tinygettext::Language::from_env(lang_to_use));
 		} catch (const std::exception& e) {
 			verb_log_warn("Could not open dictionary: %s", e.what());
 			// Cache the null value so we don't retry again and again
 		}
 
-		dictionary_pointer->dictionaries.emplace(lang_to_use, result);
+		dictionary_pointer_->dictionaries.emplace(lang_to_use, result);
 		return result;
 	}
+
+	DictionaryCache* dictionary_pointer_ = nullptr;
+
+	// To prevent translations from going out of scope before use in complex string assemblies.
+	std::set<std::string> cached_return_values_;
 };
 
 std::vector<std::unique_ptr<TextdomainStackEntry>> textdomains;
@@ -284,7 +284,7 @@ void init_locale() {
 
 	locale = std::string();
 	env_locale = "en";
-	for (const auto& var : {"LANG", "LANGUAGE"}) {
+	for (const auto& var : {"LANGUAGE", "LC_ALL", "LC_MESSAGES", "LANG"}) {
 		const char* environment_variable = getenv(var);
 		if (environment_variable != nullptr && environment_variable[0] != '\0') {
 			env_locale = environment_variable;
