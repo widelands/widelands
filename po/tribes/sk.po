@@ -1345,7 +1345,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:8
 msgctxt "amazons_building"
 msgid "Dressmakery"
-msgstr ""
+msgstr "Krajčírstvo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
@@ -1607,7 +1607,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Rare Tree Cutter’s Hut"
-msgstr ""
+msgstr "Chatrč na ťažbu vzácnych drevín"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
@@ -8966,19 +8966,19 @@ msgstr "Nosička"
 #: ../../data/tribes/workers/amazons/cassava_farmer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Cassava Farmer"
-msgstr ""
+msgstr "Pestovateľka manioku"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/charcoal_burner/init.lua:8
 msgctxt "amazons_worker"
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Uhliarka"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/cocoa_farmer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Cocoa Farmer"
-msgstr ""
+msgstr "Pestovateľka kakaovníkov"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/cook/init.lua:8
@@ -8990,7 +8990,7 @@ msgstr "Kuchárka"
 #: ../../data/tribes/workers/amazons/dressmaker/init.lua:8
 msgctxt "amazons_worker"
 msgid "Dressmaker"
-msgstr ""
+msgstr "Krajčírka"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/ferry/init.lua:8
@@ -9008,13 +9008,13 @@ msgstr "Geologička"
 #: ../../data/tribes/workers/amazons/gold_digger/init.lua:8
 msgctxt "amazons_worker"
 msgid "Gold Digger"
-msgstr ""
+msgstr "Zlatokopka"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/gold_smelter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Gold Smelter"
-msgstr ""
+msgstr "Tavička zlata"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/hunter_gatherer/init.lua:8
@@ -9026,19 +9026,19 @@ msgstr "Lovkyňa-zberačka"
 #: ../../data/tribes/workers/amazons/jungle_master/init.lua:8
 msgctxt "amazons_worker"
 msgid "Jungle Master"
-msgstr ""
+msgstr "Majsterka džungle"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/jungle_preserver/init.lua:8
 msgctxt "amazons_worker"
 msgid "Jungle Preserver"
-msgstr ""
+msgstr "Strážkyňa džungle"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/liana_cutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Liana Cutter"
-msgstr ""
+msgstr "Rezačka lián"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/scout/init.lua:8
@@ -9062,7 +9062,7 @@ msgstr "Vojačka"
 #: ../../data/tribes/workers/amazons/stone_carver/init.lua:8
 msgctxt "amazons_worker"
 msgid "Stone Carver"
-msgstr ""
+msgstr "Kamenosochárka"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/stonecutter/init.lua:8
@@ -9080,7 +9080,7 @@ msgstr "Tapír"
 #: ../../data/tribes/workers/amazons/tapir_breeder/init.lua:8
 msgctxt "amazons_worker"
 msgid "Tapir Breeder"
-msgstr ""
+msgstr "Chovateľka tapírov"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/trainer/init.lua:8
@@ -9092,7 +9092,7 @@ msgstr "Cvičiteľka"
 #: ../../data/tribes/workers/amazons/wilderness_keeper/init.lua:8
 msgctxt "amazons_worker"
 msgid "Wilderness Keeper"
-msgstr ""
+msgstr "Ochrankyňa divočiny"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/woodcutter/init.lua:8
