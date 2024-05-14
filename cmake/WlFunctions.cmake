@@ -182,7 +182,11 @@ macro(_common_compile_tasks)
   endif()
 
   if(ARG_USES_STD_FS)
-    target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} stdc++fs)
+    # Some compilers need an extra library for filesystem support, while others don't know about it.
+    find_library(NEEDS_EXTERNAL_FILESYSTEM stdc++fs)
+    if(NEEDS_EXTERNAL_FILESYSTEM)
+      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} stdc++fs)
+    endif(NEEDS_EXTERNAL_FILESYSTEM)
   endif()
 
   if(ARG_USES_TINYGETTEXT)
