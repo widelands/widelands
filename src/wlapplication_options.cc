@@ -828,6 +828,11 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_v),
                          "quicknav_gui",
                          gettext_noop("Toggle Quick Navigation"))},
+   {KeyboardShortcut::kInGameCancelRoadAndWaterwayBuilding,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                         keysym(SDLK_ESCAPE),
+                         "cancel_road_and_waterway_building",
+                         gettext_noop("Cancel Road And Waterway Building"))},
 
 // quicknav_descr() uses these format strings and adds the landmark number
 #define QUICKNAV(i)                                                                                \
