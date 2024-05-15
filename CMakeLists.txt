@@ -322,6 +322,16 @@ else()
   endif()
 endif()
 
+# Some compilers need an extra library for filesystem support, while others don't know about it.
+# If the detection is incorrect, you can override it by setting `-DNEEDS_EXTERNAL_FILESYSTEM=ON|OFF` explicitly.
+if (NEEDS_EXTERNAL_FILESYSTEM STREQUAL "")
+  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.1))
+    set(NEEDS_EXTERNAL_FILESYSTEM ON)
+  else()
+    set(NEEDS_EXTERNAL_FILESYSTEM OFF)
+  endif()
+endif()
+
 if(NOT MSVC)
   if(CMAKE_BUILD_TYPE STREQUAL "Release")
     message(STATUS "Compiler warnings will be ignored.")
