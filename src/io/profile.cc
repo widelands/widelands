@@ -32,28 +32,28 @@
 #include "io/filewrite.h"
 
 static char const* trueWords[] = {
-   "true",
+   "1",
    /** TRANSLATORS: A variant of the commandline parameter "true" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   gettext_noop("true"), "yes",
+   gettext_noop("true"),
    /** TRANSLATORS: A variant of the commandline parameter "true" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   gettext_noop("yes"), "on",
+   gettext_noop("yes"),
    /** TRANSLATORS: A variant of the commandline parameter "true" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   gettext_noop("on"), "1"};
+   gettext_noop("on")};
 
 static char const* falseWords[] = {
-   "false",
+   "0",
    /** TRANSLATORS: A variant of the commandline parameter "false" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   gettext_noop("false"), "no",
+   gettext_noop("false"),
    /** TRANSLATORS: A variant of the commandline parameter "false" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   gettext_noop("no"), "off",
+   gettext_noop("no"),
    /** TRANSLATORS: A variant of the commandline parameter "false" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   gettext_noop("off"), "0"};
+   gettext_noop("off")};
 
 Section::Value::Value(const std::string& nname, const char* const nval)
    : used_(false), translate_(false), name_(nname) {
