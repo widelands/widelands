@@ -124,12 +124,12 @@ uint32_t Section::Value::get_positive() const {
 
 bool Section::Value::get_bool() const {
 	for (char const* word : trueWords) {
-		if (iequals(value_.get(), word)) {
+		if (iequals(value_.get(), word) || iequals(value_.get(), i18n::translate(word))) {
 			return true;
 		}
 	}
 	for (char const* word : falseWords) {
-		if (iequals(value_.get(), word)) {
+		if (iequals(value_.get(), word) || iequals(value_.get(), i18n::translate(word))) {
 			return false;
 		}
 	}
