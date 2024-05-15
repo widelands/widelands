@@ -324,12 +324,15 @@ endif()
 
 # Some compilers need an extra library for filesystem support, while others don't know about it.
 # If the detection is incorrect, you can override it by setting `-DNEEDS_EXTERNAL_FILESYSTEM=ON|OFF` explicitly.
-if (NEEDS_EXTERNAL_FILESYSTEM STREQUAL "")
+if (NOT DEFINED NEEDS_EXTERNAL_FILESYSTEM)
   if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.1))
-    set(NEEDS_EXTERNAL_FILESYSTEM ON)
+    set(NEEDS_EXTERNAL_FILESYSTEM ON CACHE BOOL "Use linker flag for stdc++fs")
   else()
-    set(NEEDS_EXTERNAL_FILESYSTEM OFF)
+    set(NEEDS_EXTERNAL_FILESYSTEM OFF CACHE BOOL "Don't use linker flag for stdc++fs")
   endif()
+endif()
+if (NEEDS_EXTERNAL_FILESYSTEM)
+  message(STATUS "Linking with external stdc++fs")
 endif()
 
 if(NOT MSVC)
