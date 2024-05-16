@@ -16497,7 +16497,7 @@ msgstr "Úvod"
 #: ../../data/tribes/scripting/help/init.lua:107
 #: ../../data/tribes/scripting/help/tips.lua:60
 msgid "Tips"
-msgstr ""
+msgstr "Tipy"
 
 #: ../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"

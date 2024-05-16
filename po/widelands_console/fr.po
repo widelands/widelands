@@ -6,6 +6,7 @@
 # Boese Kaiser, 2022
 # Renaud Bouchard, 2014
 # C138, 2021,2023
+# Ch L, 2024
 # David D, 2023
 # GunChleoc, 2016,2018-2019
 # GunChleoc, 2016
@@ -22,7 +23,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-02-15 02:28+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
-"Last-Translator: C138, 2021,2023\n"
+"Last-Translator: Ch L, 2024\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -87,7 +88,7 @@ msgstr "Utilisez le Dossier spécifié pour les fichiers de configuration de Wid
 
 #: ../../src/wlapplication_messages.cc:77
 msgid "Use the specified directory for the Widelands locale files."
-msgstr "Utilisez le Dossier spécifié pour les fichiers locaux de Widelands."
+msgstr "Utiliser le dossier spécifié pour les fichiers locaux de Widelands."
 
 #: ../../src/wlapplication_messages.cc:81
 msgid "Use the specified locale."
@@ -110,7 +111,7 @@ msgstr " Ne vérifie pas si le dossier de données à utiliser est compatible av
 msgid ""
 "Create a new game directly with the settings configured in the given file. "
 "An example can be found in `%s`."
-msgstr "Cree une nouvelle partie avec les paramètres configurés dans le fichier indiqué.  Un exemple peut être trouvé dans '%s'"
+msgstr "Crée une nouvelle partie avec les paramètres configurés dans le fichier indiqué.  Un exemple peut être trouvé dans '%s'"
 
 #: ../../src/wlapplication_messages.cc:93
 msgid "Start the map `FILENAME` directly as a singleplayer scenario."
@@ -182,7 +183,7 @@ msgstr "Active le mode entrainement de l'IA. Voir https://www.widelands.org/wiki
 msgid ""
 "Constantly adjust the game speed automatically depending on AI delay. Only "
 "to be used for AI testing or training (in conjunction with --ai_training)."
-msgstr "ajuste la vitesse de jeu en permanence et automatiquepent en fonction du délai de l'IA. N'est cecnsé être utilisé pour tester ou entrainer l'IA (avec --ai_training)."
+msgstr "Ajuste la vitesse de jeu en permanence et automatiquement en fonction du délai de l'IA. À n'utiliser que pour tester ou entraîner l'IA (avec --ai_training)."
 
 #: ../../src/wlapplication_messages.cc:130
 msgid "Enable the Script Console and Cheating Mode."
@@ -233,7 +234,7 @@ msgstr "Ne pas sauver les fichiers en archives zip binaires."
 
 #: ../../src/wlapplication_messages.cc:150
 msgid "Save files as binary zip archives."
-msgstr ""
+msgstr "Sauver les fichiers en tant qu'archives zip binaires."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -390,7 +391,7 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:216
 msgid "Start the game in a maximized window."
-msgstr ""
+msgstr "Démarre le jeu dans une fenêtre agrandie au maximum."
 
 #. * TRANSLATORS: A placeholder for window width
 #: ../../src/wlapplication_messages.cc:219
