@@ -508,6 +508,9 @@ WLApplication::~WLApplication() {
 		g_script_console_history.save(kScriptConsoleHistoryFile);
 	}
 
+	// To be proper, release our textdomain
+	i18n::release_textdomain();
+
 	assert(UI::g_fh);
 	delete UI::g_fh;
 	UI::g_fh = nullptr;
@@ -1269,8 +1272,6 @@ void WLApplication::init_language() {
  * Remember the last settings: write them into the config file
  */
 void WLApplication::shutdown_settings() {
-	// To be proper, release our textdomain
-	i18n::release_textdomain();
 	write_config();
 }
 
