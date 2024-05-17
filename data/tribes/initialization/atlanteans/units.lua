@@ -1720,8 +1720,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an Atlantean production site: Charcoal Kiln
             lore = pgettext("atlanteans_building", "We must admit that this business is not really the Atlantean way, but in times of need we do what’s necessary."),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Charcoal Kiln
-            lore_author = pgettext("atlanteans_building", "A black voice from inside the charcoal kiln")
-
+            lore_author = pgettext("atlanteans_building", "A black voice from inside the charcoal kiln"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Charcoal Kiln
+            performance = pgettext("atlanteans_building", "The charcoal kiln needs %s on average to produce one coal."):bformat(format_minutes_seconds(2, 4))
          }
       },
       {

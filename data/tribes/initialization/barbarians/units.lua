@@ -1417,7 +1417,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a Barbarian production site: Charcoal Kiln
             lore_author = pgettext("barbarians_building", "Song of the charcoal burners"),
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Charcoal Kiln
-            purpose = pgettext("building", "Burns logs into charcoal.")
+            purpose = pgettext("building", "Burns logs into charcoal."),
+            -- TRANSLATORS: Performance helptext for a Barbarian production site: Charcoal Kiln
+            performance = pgettext("barbarians_building", "The charcoal kiln needs %s on average to produce one coal."):bformat(format_minutes_seconds(2, 4))
          }
       },
       {

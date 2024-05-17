@@ -1894,7 +1894,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Charcoal Kiln
             purpose = pgettext("building", "Burns logs into charcoal."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Charcoal Kiln
-            performance = pgettext("frisians_building", "The charcoal kiln needs %s on average to produce one coal."):bformat(format_minutes(1))
+            performance = pgettext("frisians_building", "The charcoal kiln needs %s on average to produce one coal."):bformat(format_minutes_seconds(1, 4))
          }
       },
       {

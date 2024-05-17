@@ -1629,7 +1629,9 @@ wl.Descriptions():new_tribe {
                "Imperial proverb meaning to judge whether they are good or bad"
             ),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Charcoal Kiln
-            purpose = pgettext("building", "Burns logs into charcoal.")
+            purpose = pgettext("building", "Burns logs into charcoal."),
+            -- TRANSLATORS: Performance helptext for an Empire production site: Charcoal Kiln
+            performance = pgettext("empire_building", "The charcoal kiln needs %s on average to produce one coal."):bformat(format_minutes_seconds(2, 4))
          }
       },
       {
