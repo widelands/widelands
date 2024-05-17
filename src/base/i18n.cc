@@ -284,11 +284,33 @@ void init_locale() {
 
 	locale = std::string();
 	env_locale = "en";
+
+	/* Check environment variables in order of precedence:
+	 * "LANGUAGE", "LC_ALL", "LC_MESSAGES", "LANG"
+	 * Each environment variable, if set and not empty, may be a preference list of any number of
+	 * languages separated by colons. We must skip entries that are not known to the translations
+	 * backend or we will get problems later.
+	 * Of course there's an exception to the precedence rules:
+	 * Setting LC_ALL="C" takes precedence over everything else.
+	 */
+	if (const char* lc_all = getenv("LC_ALL"); lc_all != nullptr && strcmp(lc_all, "C") == 0) {
+		return;
+	}
+
 	for (const auto& var : {"LANGUAGE", "LC_ALL", "LC_MESSAGES", "LANG"}) {
 		const char* environment_variable = getenv(var);
 		if (environment_variable != nullptr && environment_variable[0] != '\0') {
-			env_locale = environment_variable;
-			break;
+			std::vector<std::string> components;
+			split(components, environment_variable, {':'});
+			for (const std::string& candidate : components) {
+				if (candidate == "C") {
+					return;  // "C" locale should disable localization.
+				}
+				if (static_cast<bool>(tinygettext::Language::from_env(candidate))) {
+					env_locale = candidate;
+					return;
+				}
+			}
 		}
 	}
 }
