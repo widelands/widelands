@@ -1440,7 +1440,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Furnace
             purpose = pgettext("amazons_building", "Smelts gold dust into gold ingots using charcoal."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Furnace
-            performance = pgettext("amazons_building", "The furnace can produce one gold ingot in %s on average if the supply is steady."):bformat(format_minutes_seconds(1, 12))
+            performance = pgettext("amazons_building", "The furnace can produce one gold ingot in %s on average if the supply is steady."):bformat(format_minutes_seconds(1, 16))
          }
       },
       {
