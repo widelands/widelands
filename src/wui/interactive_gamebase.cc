@@ -417,7 +417,8 @@ void InteractiveGameBase::add_chat_ui() {
 }
 
 void InteractiveGameBase::cancel_build_road_and_waterway() {
-	if (!in_road_building_mode(RoadBuildingType::kRoad) && !in_road_building_mode(RoadBuildingType::kWaterway)) {
+	if (!in_road_building_mode(RoadBuildingType::kRoad) &&
+	    !in_road_building_mode(RoadBuildingType::kWaterway)) {
 		return;
 	}
 
