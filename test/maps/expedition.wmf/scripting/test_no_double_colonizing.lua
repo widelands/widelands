@@ -39,16 +39,12 @@ run(function()
    end
 
    local port_window = mv.windows[pw_name]
-   assert_nil(port_window.tabs.expedition)
+   assert_not_nil(port_window.tabs.expedition_controls)
+   port_window.tabs.expedition_controls:click()
 
    port:start_expedition()
-   while(port_window.tabs.expedition_wares_queue == nil) do
-      sleep(100)
-   end
-   port_window.tabs.expedition_wares_queue:click()
-
    wait_for_message("Expedition")
-   assert_nil(port_window.tabs.expedition_wares_queue)
+
    port_window:close()
 
    game.desired_speed = 2 * 1000

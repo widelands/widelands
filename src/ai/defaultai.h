@@ -462,6 +462,7 @@ private:
 	uint16_t expeditions_in_prep{0U};
 	uint16_t expeditions_ready{0U};
 	uint16_t expeditions_in_progress{0U};
+	uint16_t warships_in_prep{0U};
 	uint16_t warships_count{0U};
 	uint16_t tradeships_count{0U};
 	uint16_t fleet_target{1U};

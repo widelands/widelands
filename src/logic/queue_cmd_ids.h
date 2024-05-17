@@ -99,7 +99,7 @@ enum class QueueCommandTypes : uint8_t {
 	kCalculateStatistics,
 	kExpeditionConfig,
 	kPickCustomStartingPosition,
-	kShipRefit,
+	kShipRefitTransport,
 	kWarshipCommand,
 	kShipSetDestination,  // 138
 

@@ -2096,6 +2096,7 @@ wl.Descriptions():new_tribe {
 
    -- Special types
    builder = "amazons_builder",
+   shipwright = "amazons_shipwright",
    carriers = {"amazons_carrier", "amazons_tapir"},
    geologist = "amazons_geologist",
    scouts_house = "amazons_scouts_hut",

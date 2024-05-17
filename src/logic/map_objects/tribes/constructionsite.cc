@@ -359,7 +359,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 					site.set_worker_policy(pair.first, pair.second);
 				}
 				if (ws->launch_expedition) {
-					get_owner()->start_or_cancel_expedition(site);
+					get_owner()->start_or_cancel_expedition(site, ExpeditionType::kExpedition);
 				}
 				site.mutable_soldier_control()->set_soldier_capacity(ws->desired_capacity);
 				site.set_soldier_preference(ws->soldier_preference);

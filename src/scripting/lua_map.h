@@ -1178,6 +1178,7 @@ public:
 	int set_warehouse_policies(lua_State*);
 	int get_warehouse_policies(lua_State*);
 	int start_expedition(lua_State*);
+	int start_refit_to_warship(lua_State*);
 	int cancel_expedition(lua_State*);
 
 	/*
@@ -1422,6 +1423,7 @@ public:
 	int get_destination(lua_State* L);
 	int get_state(lua_State* L);
 	int get_type(lua_State* L);
+	int get_pending_refit(lua_State* L);
 	int get_scouting_direction(lua_State* L);
 	int set_scouting_direction(lua_State* L);
 	int get_island_explore_direction(lua_State* L);
@@ -1437,7 +1439,8 @@ public:
 	int get_workers(lua_State* L);
 	int build_colonization_port(lua_State* L);
 	int make_expedition(lua_State* L);
-	int refit(lua_State* L);
+	int cancel_expedition(lua_State* L);
+	int refit_to_transport(lua_State* L);
 
 	/*
 	 * C methods

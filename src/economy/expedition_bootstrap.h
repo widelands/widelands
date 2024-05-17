@@ -23,6 +23,7 @@
 
 #include "base/macros.h"
 #include "economy/input_queue.h"
+#include "logic/map_objects/tribes/shipstates.h"
 
 namespace Widelands {
 
@@ -47,7 +48,7 @@ public:
 	virtual ~ExpeditionBootstrap();
 
 	// Start bootstrapping an expedition. This will request all wares and workers.
-	void start();
+	void start(ExpeditionType what = ExpeditionType::kExpedition);
 
 	// Cancel an ongoing bootstrap. This will incorporate wares and workers into
 	// the corresponding warehouse.

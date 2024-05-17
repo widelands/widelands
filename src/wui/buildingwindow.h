@@ -21,7 +21,6 @@
 
 #include <memory>
 
-#include "economy/expedition_bootstrap.h"
 #include "economy/input_queue.h"
 #include "logic/map_objects/tribes/building.h"
 #include "ui_basic/button.h"
@@ -105,7 +104,6 @@ protected:
 	void configure_workarea_button();
 	void act_start_stop();
 	void act_produce_infinite();
-	void act_start_or_cancel_expedition();
 	void act_enhance(Widelands::DescriptionIndex, bool is_csite);
 	void clicked_goto();
 	void act_mute(bool all);
@@ -126,9 +124,6 @@ protected:
 
 private:
 	void create_capsbuttons(UI::Box* buttons, Widelands::Building* building);
-
-	// For ports only.
-	void update_expedition_button(bool expedition_was_canceled);
 
 	InteractiveBase* parent_;
 
@@ -159,11 +154,8 @@ private:
 	bool avoid_fastclick_;
 	CollapsedState* priority_collapsed_;  ///< Owned by the BuildingWindow::Registry
 
-	UI::Button* expeditionbtn_;
 	UI::Button* mute_this_;
 	UI::Button* mute_all_;
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteExpeditionCanceled>>
-	   expedition_canceled_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>> buildingnotes_subscriber_;
 	DISALLOW_COPY_AND_ASSIGN(BuildingWindow);
 };

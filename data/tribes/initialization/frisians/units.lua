@@ -2435,6 +2435,7 @@ wl.Descriptions():new_tribe {
 
    -- Special types
    builder = "frisians_builder",
+   shipwright = "frisians_shipwright",
    carriers = {"frisians_carrier", "frisians_reindeer"},
    geologist = "frisians_geologist",
    scouts_house = "frisians_scouts_house",

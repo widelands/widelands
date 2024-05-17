@@ -330,13 +330,10 @@ void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 		get_tabs()->add("dock_workers", g_image_cache->get(pic_tab_dock_workers),
 		                create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWORKER),
 		                _("Workers waiting to embark"));
-		if (pd->expedition_started()) {
-			if (upcast(InteractiveGameBase, igb, ibase())) {
-				get_tabs()->add("expedition_wares_queue", g_image_cache->get(pic_tab_expedition),
-				                create_portdock_expedition_display(
-				                   get_tabs(), *warehouse, *igb, priority_collapsed()),
-				                _("Expedition"));
-			}
+		if (upcast(InteractiveGameBase, igb, ibase())) {
+			get_tabs()->add("expedition_controls", g_image_cache->get(pic_tab_expedition),
+			                new ExpeditionDisplay(get_tabs(), warehouse, igb, priority_collapsed()),
+			                _("Expedition"));
 		}
 	}
 

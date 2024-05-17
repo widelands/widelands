@@ -235,6 +235,7 @@ public:
 	[[nodiscard]] Bob* get_next_bob() const {
 		return linknext_;
 	}
+	void draw_on_top();
 
 	/// Check whether this bob should be able to move onto the given node.
 	///

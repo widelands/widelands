@@ -19,23 +19,37 @@
 #ifndef WL_WUI_PORTDOCKWARESDISPLAY_H
 #define WL_WUI_PORTDOCKWARESDISPLAY_H
 
+#include "economy/expedition_bootstrap.h"
 #include "ui_basic/box.h"
 #include "wui/buildingwindow.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/waresdisplay.h"
-
-namespace Widelands {
-class PortDock;
-}  // namespace Widelands
 
 AbstractWaresDisplay* create_portdock_wares_display(UI::Panel* parent,
                                                     uint32_t width,
                                                     const Widelands::PortDock& pd,
                                                     Widelands::WareWorker type);
 
-UI::Box* create_portdock_expedition_display(UI::Panel* parent,
-                                            Widelands::Warehouse& wh,
-                                            InteractiveGameBase&,
-                                            BuildingWindow::CollapsedState* priority_collapsed);
+class ExpeditionDisplay : public UI::Box {
+public:
+	ExpeditionDisplay(UI::Panel* parent,
+	                  Widelands::Warehouse* wh,
+	                  InteractiveGameBase*,
+	                  BuildingWindow::CollapsedState* collapsed);
+
+private:
+	void act_start_or_cancel(Widelands::ExpeditionType t);
+	void update_buttons();
+	void update_contents();
+	void think() override;
+
+	Widelands::Warehouse* warehouse_;
+	InteractiveGameBase* igbase_;
+	BuildingWindow::CollapsedState* collapsed_;
+	UI::Box control_box_;
+	UI::Button expeditionbtn_;
+	UI::Button refitbutton_;
+	Widelands::ExpeditionType current_type_{Widelands::ExpeditionType::kNone};
+};
 
 #endif  // end of include guard: WL_WUI_PORTDOCKWARESDISPLAY_H
