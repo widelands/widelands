@@ -1341,10 +1341,12 @@ static void install_translation(const std::string& temp_locale_path,
 	   FileSystem::fs_filename(temp_locale_path.c_str());                         // nds.po.tmp
 	const std::string locale = temp_filename.substr(0, temp_filename.find('.'));  // nds
 
-	const std::string new_locale_dir = kAddOnLocaleDir + FileSystem::file_separator() + addon_name;  // addons_i18n/name.wad
+	const std::string new_locale_dir =
+	   kAddOnLocaleDir + FileSystem::file_separator() + addon_name;  // addons_i18n/name.wad
 	g_fs->ensure_directory_exists(new_locale_dir);
 
-	const std::string new_locale_path = new_locale_dir + FileSystem::file_separator() + locale + ".po";  // addons_i18n/name.wad/nds.po
+	const std::string new_locale_path = new_locale_dir + FileSystem::file_separator() + locale +
+	                                    ".po";  // addons_i18n/name.wad/nds.po
 
 	assert(!g_fs->is_directory(new_locale_path));
 	if (g_fs->file_exists(new_locale_path)) {
