@@ -1286,7 +1286,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a Barbarian production site: Wood Hardener
             lore_author = pgettext("barbarians_building", "Legend about a quarrel between the brothers Harthor and Manthor,<br>Manthor is said to be the inventor of blackwood"),
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Wood Hardener
-            purpose = pgettext("barbarians_building", "Hardens logs by fire into blackwood, which is used to construct robust buildings.")
+            purpose = pgettext("barbarians_building", "Hardens logs by fire into blackwood, which is used to construct robust buildings."),
+            -- TRANSLATORS: Performance helptext for a Barbarian production site: Wood Hardener
+            performance = pgettext("barbarians_building", "The wood hardener needs %s on average to produce one blackwood."):bformat(format_minutes_seconds(1, 11))
          }
       },
       {

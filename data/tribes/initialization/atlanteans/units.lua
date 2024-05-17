@@ -1659,7 +1659,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an Atlantean production site:  Sawmill
             lore = pgettext("atlanteans_building", "The design of our sawmills makes operation simple, yet powerful. Patent pending."),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site:  Sawmill
-            lore_author = pgettext("atlanteans_building", "Askadus, Inventor of the vertical axis windmill")
+            lore_author = pgettext("atlanteans_building", "Askadus, Inventor of the vertical axis windmill"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Sawmill
+            performance = pgettext("atlanteans_building", "The sawmill needs %s on average to produce one plank."):bformat(format_seconds(40))
          }
       },
       {
