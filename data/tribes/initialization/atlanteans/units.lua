@@ -1703,7 +1703,9 @@ wl.Descriptions():new_tribe {
                                                    "It is more nutritious than that paper-like bread you find elsewhere. And it is needed for the personal rite "..
                                                    "of preparing one’s meal. May Satul bless you."),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Bakery
-            lore_author = pgettext("atlanteans_building", "Head of the bakers’ guild")
+            lore_author = pgettext("atlanteans_building", "Head of the bakers’ guild"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Bakery
+            performance = pgettext("atlanteans_building", "If all needed wares are delivered in time, this building can produce one bread in %s on average."):bformat(format_seconds(36))
          }
       },
       {

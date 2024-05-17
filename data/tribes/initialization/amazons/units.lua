@@ -1491,7 +1491,9 @@ wl.Descriptions():new_tribe {
          name = "amazons_cassava_root_cooker",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Cassava Root Cooker
-            purpose = pgettext("amazons_building", "Bakes bread from cassava root.")
+            purpose = pgettext("amazons_building", "Bakes bread from cassava root."),
+            -- TRANSLATORS: Performance helptext for an Amazon production site: Cassava Root Cooker
+            performance = pgettext("amazons_building", "If all needed wares are delivered in time, this building can produce one bread in %s on average."):bformat(format_seconds(37))
          }
       },
       {
