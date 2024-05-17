@@ -1717,7 +1717,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Barracks
             lore_author = pgettext("empire_building", "Argument in the Senate for increasing recruitment"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Barracks
-            purpose = pgettext("empire_building", "Equips recruits and trains them as soldiers.")
+            purpose = pgettext("empire_building", "Equips recruits and trains them as soldiers."),
+            -- TRANSLATORS: Performance helptext for an Empire production site: Barracks
+            performance = pgettext("empire_building", "The barracks need %s on average to recruit one soldier."):bformat(format_seconds(30))
          }
       },
 

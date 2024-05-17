@@ -1788,7 +1788,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an Atlantean production site: Barracks
             lore = pgettext("atlanteans_building", "See these fine silk tabards and those sharp tridents? This is your way to defend your tribe!"),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Barracks
-            lore_author = pgettext("atlanteans_building", "Recruiting poster")
+            lore_author = pgettext("atlanteans_building", "Recruiting poster"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Barracks
+            performance = pgettext("atlanteans_building", "The barracks need %s on average to recruit one soldier."):bformat(format_seconds(30))
          }
       },
 
