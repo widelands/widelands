@@ -416,6 +416,15 @@ void InteractiveGameBase::add_chat_ui() {
 	};
 }
 
+void InteractiveGameBase::cancel_build_road_and_waterway() {
+	if (!in_road_building_mode(RoadBuildingType::kRoad) &&
+	    !in_road_building_mode(RoadBuildingType::kWaterway)) {
+		return;
+	}
+
+	abort_build_road();
+}
+
 void InteractiveGameBase::increase_gamespeed(uint16_t speed) const {
 	if (GameController* const ctrl = get_game()->game_controller()) {
 		uint32_t const current_speed = ctrl->desired_speed();
@@ -534,6 +543,12 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 		menu_windows_.sound_options.toggle();
 		return true;
 	}
+
+	if (matches_shortcut(KeyboardShortcut::kInGameCancelRoadAndWaterwayBuilding, code)) {
+		cancel_build_road_and_waterway();
+		return true;
+	}
+
 	if ((chat_provider_ != nullptr) && matches_shortcut(KeyboardShortcut::kInGameChat, code)) {
 		if (chat_.window == nullptr) {
 			GameChatMenu::create_chat_console(this, color_functor(), chat_, *chat_provider_);

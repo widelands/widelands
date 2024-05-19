@@ -309,6 +309,8 @@ enum class KeyboardShortcut : uint16_t {
 
 	kInGame_End = kInGameSeafaringstats_End,
 
+	kInGameCancelRoadAndWaterwayBuilding,
+
 	kFastplace_Begin = kInGame_End + 1,
 	kFastplace_End = kFastplace_Begin + 127,  // Arbitrary limit of 128 fastplace shortcuts.
 
