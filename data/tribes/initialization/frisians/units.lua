@@ -1698,8 +1698,12 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("building", "Burns logs into charcoal."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Charcoal Burner's House
             note = pgettext("building", "The charcoal burner’s house needs holes in the ground that were dug by a clay pit’s worker nearby to erect charcoal stacks in them."),
-            -- TRANSLATORS: Performance helptext for a Frisian production site: Charcoal Burner's House
-            performance = pgettext("frisians_building", "The charcoal burner’s house needs %s on average to produce one coal."):bformat(format_minutes_seconds(1, 20))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Charcoal Burner's House, part 1
+               pgettext("frisians_building", "This building can produce one coal between %1$s and %2$s, depending on how far the charcoal burner has to walk."):bformat(format_minutes_seconds(1, 7), format_minutes_seconds(2, 12)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Charcoal Burner's House, part 2
+               pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
