@@ -32,28 +32,28 @@
 #include "io/filewrite.h"
 
 static char const* trueWords[] = {
-   "true",
+   "1",
    /** TRANSLATORS: A variant of the commandline parameter "true" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   _("true"), "yes",
+   gettext_noop("true"),
    /** TRANSLATORS: A variant of the commandline parameter "true" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   _("yes"), "on",
+   gettext_noop("yes"),
    /** TRANSLATORS: A variant of the commandline parameter "true" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   _("on"), "1"};
+   gettext_noop("on")};
 
 static char const* falseWords[] = {
-   "false",
+   "0",
    /** TRANSLATORS: A variant of the commandline parameter "false" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   _("false"), "no",
+   gettext_noop("false"),
    /** TRANSLATORS: A variant of the commandline parameter "false" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   _("no"), "off",
+   gettext_noop("no"),
    /** TRANSLATORS: A variant of the commandline parameter "false" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   _("off"), "0"};
+   gettext_noop("off")};
 
 Section::Value::Value(const std::string& nname, const char* const nval)
    : used_(false), translate_(false), name_(nname) {
@@ -124,12 +124,12 @@ uint32_t Section::Value::get_positive() const {
 
 bool Section::Value::get_bool() const {
 	for (char const* word : trueWords) {
-		if (iequals(value_.get(), word)) {
+		if (iequals(value_.get(), word) || iequals(value_.get(), i18n::translate(word))) {
 			return true;
 		}
 	}
 	for (char const* word : falseWords) {
-		if (iequals(value_.get(), word)) {
+		if (iequals(value_.get(), word) || iequals(value_.get(), i18n::translate(word))) {
 			return false;
 		}
 	}

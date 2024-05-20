@@ -83,8 +83,8 @@ const AddOnInfo* find_addon(const std::string& name) {
 }
 
 i18n::GenericTextdomain* create_textdomain_for_addon(std::string addon, const std::string& dflt) {
-	if (const AddOnInfo* a = find_addon(addon)) {
-		return new i18n::AddOnTextdomain(addon, a->i18n_version);
+	if (find_addon(addon) != nullptr) {
+		return new i18n::AddOnTextdomain(addon);
 	}
 	return dflt.empty() ? nullptr : new i18n::Textdomain(dflt);
 }
@@ -486,15 +486,15 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 	i->min_wl_version = s.get_string("min_wl_version", "");
 	i->max_wl_version = s.get_string("max_wl_version", "");
 	i->descname = [i]() {
-		i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
+		i18n::AddOnTextdomain td(i->internal_name);
 		return i18n::translate(i->unlocalized_descname);
 	};
 	i->description = [i]() {
-		i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
+		i18n::AddOnTextdomain td(i->internal_name);
 		return i18n::translate(i->unlocalized_description);
 	};
 	i->author = [i]() {
-		i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
+		i18n::AddOnTextdomain td(i->internal_name);
 		return i18n::translate(i->unlocalized_author);
 	};
 	i->icon = g_image_cache->get(fs->file_exists(kAddOnIconFile) ?
