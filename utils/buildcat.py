@@ -26,7 +26,8 @@ except AttributeError:
 from confgettext import Conf_GetText
 
 # Holds the names of non-iterative catalogs to build and the
-# corresponding source paths list. Note that paths MUST be relative to po/pot,
+# corresponding source paths list. Note that paths MUST be relative to the POT file
+# (at data/i18n/translations/<dirname>/<filename>.pot),
 # to let .po[t] comments point to somewhere useful
 BASEDIR = '../../../..'
 MAINPOTS = [
@@ -100,9 +101,9 @@ MAINPOTS = [
 #       - target .pot file mask
 #       - base directory to scan for catalogs (referred to Widelands' base dir)
 #       - List of source paths for catalog creation: tells the program which
-#         files to use for building .pot files (referred to
-#         "po/pot/<path_to_pot/" dir, so the file pointers inside .pot files
-#         actually point somewhere useful)
+#         files to use for building .pot files (relative to the
+#         "data/i18n/translations/<dirname>/<filename>.pot", so the file pointers inside .pot files
+#         actually point somewhere useful).
 #
 # For every instance found of a given type, '%s' in this values is replaced
 # with the name of the instance.
