@@ -28,66 +28,67 @@ from confgettext import Conf_GetText
 # Holds the names of non-iterative catalogs to build and the
 # corresponding source paths list. Note that paths MUST be relative to po/pot,
 # to let .po[t] comments point to somewhere useful
+BASEDIR = '../../../..'
 MAINPOTS = [
     ('maps/maps', [
-        '../../data/maps/*/elemental',
-        '../../data/maps/*/*/elemental',
-        '../../data/campaigns/*.lua',
-        '../../data/campaigns/*/elemental'
+        BASEDIR + '/data/maps/*/elemental',
+        BASEDIR + '/data/maps/*/*/elemental',
+        BASEDIR + '/data/campaigns/*.lua',
+        BASEDIR + '/data/campaigns/*/elemental'
     ]),
-    ('texts/texts', ['../../data/txts/*.lua',
-                     '../../data/txts/*/*.lua',
-                     '../../data/txts/tips/*.tip']),
+    ('texts/texts', [BASEDIR + '/data/txts/*.lua',
+                     BASEDIR + '/data/txts/*/*.lua',
+                     BASEDIR + '/data/txts/tips/*.tip']),
     ('widelands/widelands', [
-        '../../src/wlapplication.cc',
-        '../../src/wlapplication_options.cc',
-        '../../src/*/*.cc',
-        '../../src/*/*/*.cc',
-        '../../src/*/*/*/*.cc',
-        '../../src/*/*/*/*/*.cc',
-        '../../src/*/*/*/*/*/*.cc',
-        '../../src/wlapplication.h',
-        '../../src/*/*.h',
-        '../../src/*/*/*.h',
-        '../../src/*/*/*/*.h',
-        '../../src/*/*/*/*/*.h',
-        '../../src/*/*/*/*/*/*.h',
-        '../../data/scripting/*.lua',
+        BASEDIR + '/src/wlapplication.cc',
+        BASEDIR + '/src/wlapplication_options.cc',
+        BASEDIR + '/src/*/*.cc',
+        BASEDIR + '/src/*/*/*.cc',
+        BASEDIR + '/src/*/*/*/*.cc',
+        BASEDIR + '/src/*/*/*/*/*.cc',
+        BASEDIR + '/src/*/*/*/*/*/*.cc',
+        BASEDIR + '/src/wlapplication.h',
+        BASEDIR + '/src/*/*.h',
+        BASEDIR + '/src/*/*/*.h',
+        BASEDIR + '/src/*/*/*/*.h',
+        BASEDIR + '/src/*/*/*/*/*.h',
+        BASEDIR + '/src/*/*/*/*/*/*.h',
+        BASEDIR + '/data/scripting/*.lua',
     ]),
     ('widelands_console/widelands_console', [
-        '../../src/wlapplication_messages.cc',
-        '../../src/wlapplication_messages.h',
+        BASEDIR + '/src/wlapplication_messages.cc',
+        BASEDIR + '/src/wlapplication_messages.h',
     ]),
     ('win_conditions/win_conditions', [
-        '../../data/scripting/win_conditions/*.lua',
+        BASEDIR + '/data/scripting/win_conditions/*.lua',
     ]),
     ('training_wheels/training_wheels', [
-        '../../data/scripting/training_wheels/*.lua',
+        BASEDIR + '/data/scripting/training_wheels/*.lua',
     ]),
     ('world/world', [
-        '../../data/world/*.lua',
-        '../../data/world/*/*.lua',
-        '../../data/world/*/*/*.lua',
-        '../../data/world/*/*/*/*.lua',
-        '../../data/world/*/*/*/*/*.lua',
-        '../../data/world/*/*/*/*/*/*.lua',
+        BASEDIR + '/data/world/*.lua',
+        BASEDIR + '/data/world/*/*.lua',
+        BASEDIR + '/data/world/*/*/*.lua',
+        BASEDIR + '/data/world/*/*/*/*.lua',
+        BASEDIR + '/data/world/*/*/*/*/*.lua',
+        BASEDIR + '/data/world/*/*/*/*/*/*.lua',
     ]),
     ('tribes/tribes', [
-        '../../data/tribes/initialization/*/military_capacity.lua',
-        '../../data/tribes/initialization/*/starting_conditions/*.lua',
-        '../../data/tribes/economy_profiles/*',
-        '../../data/tribes/*/init.lua',
-        '../../data/tribes/*/*/init.lua',
-        '../../data/tribes/*/*/*/init.lua',
-        '../../data/tribes/*/*/*/*/init.lua',
-        '../../data/tribes/*/*/*/*/*/init.lua',
+        BASEDIR + '/data/tribes/initialization/*/military_capacity.lua',
+        BASEDIR + '/data/tribes/initialization/*/starting_conditions/*.lua',
+        BASEDIR + '/data/tribes/economy_profiles/*',
+        BASEDIR + '/data/tribes/*/init.lua',
+        BASEDIR + '/data/tribes/*/*/init.lua',
+        BASEDIR + '/data/tribes/*/*/*/init.lua',
+        BASEDIR + '/data/tribes/*/*/*/*/init.lua',
+        BASEDIR + '/data/tribes/*/*/*/*/*/init.lua',
     ]),
     ('tribes_encyclopedia/tribes_encyclopedia', [
-        '../../data/tribes/initialization/*/units.lua',
-        '../../data/tribes/scripting/help/*.lua',
+        BASEDIR + '/data/tribes/initialization/*/units.lua',
+        BASEDIR + '/data/tribes/scripting/help/*.lua',
     ]),
     ('widelands_editor/widelands_editor', [
-        '../../data/scripting/editor/*.lua',
+        BASEDIR + '/data/scripting/editor/*.lua',
     ]),
 ]
 
@@ -107,18 +108,18 @@ MAINPOTS = [
 # with the name of the instance.
 ITERATIVEPOTS = [
     ('scenario_%(name)s/scenario_%(name)s', 'data/campaigns/',
-     ['../../data/campaigns/%(name)s/extra_data',
-      '../../data/campaigns/%(name)s/objective',
-      '../../data/campaigns/%(name)s/scripting/*.lua',
-      '../../data/campaigns/%(name)s/scripting/*/*.lua',
-      '../../data/campaigns/%(name)s/scripting/*/*/*.lua',
+     [BASEDIR + '/data/campaigns/%(name)s/extra_data',
+      BASEDIR + '/data/campaigns/%(name)s/objective',
+      BASEDIR + '/data/campaigns/%(name)s/scripting/*.lua',
+      BASEDIR + '/data/campaigns/%(name)s/scripting/*/*.lua',
+      BASEDIR + '/data/campaigns/%(name)s/scripting/*/*/*.lua',
       ]
      ),
     ('map_%(name)s/map_%(name)s', 'data/maps/SP_Scenarios',
-     ['../../data/maps/SP_Scenarios/%(name)s/scripting/*.lua', ]
+     [BASEDIR + '/data/maps/SP_Scenarios/%(name)s/scripting/*.lua', ]
      ),
     ('mp_scenario_%(name)s/mp_scenario_%(name)s', 'data/maps/MP_Scenarios/',
-     ['../../data/maps/MP_Scenarios/%(name)s/scripting/*.lua', ]
+     [BASEDIR + '/data/maps/MP_Scenarios/%(name)s/scripting/*.lua', ]
      ),
 ]
 
