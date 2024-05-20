@@ -166,7 +166,7 @@ Workareas EditorSetPortSpaceTool::get_overlays() {
 			// New ocean found.
 			++nr_oceans;
 
-			constexpr uint32_t kAlpha = 0x9f << 24;
+			constexpr uint32_t kAlpha = 0x9f << 24;  // NOLINT clang-diagnostic-shift-sign-overflow
 			if (kOceanColors.empty()) {
 				for (const RGBColor& col : kPlayerColors) {
 					kOceanColors.emplace_back(kAlpha | (col.r << 16) | (col.g << 8) | (col.b));
