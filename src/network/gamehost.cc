@@ -436,7 +436,7 @@ void GameHost::replace_client_with_ai(uint8_t playernumber, const std::string& a
 	// Inform all players about the change
 	// Has to be done at first in this method since the calls later on overwrite players[].name
 	send_system_message_code("CLIENT_X_REPLACED_WITH", d->settings.players.at(playernumber).name,
-	                         AI::ComputerPlayer::get_implementation(ai)->descname);
+	                         i18n::translate(AI::ComputerPlayer::get_implementation(ai)->descname));
 	set_player_ai(playernumber, ai, false);
 	d->game->get_player(playernumber + 1)->set_ai(ai);
 	// Activate the ai

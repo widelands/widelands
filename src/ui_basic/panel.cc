@@ -88,7 +88,11 @@ Panel::Panel(Panel* const nparent,
      hyperlink_subscriber_(
         Notifications::subscribe<NoteHyperlink>([this](const NoteHyperlink& note) {
 	        if (starts_with(name_, note.target)) {
-		        handle_hyperlink(note.action);
+		        if (static_cast<bool>(hyperlink_action_)) {
+			        hyperlink_action_(note.action);
+		        } else {
+			        handle_hyperlink(note.action);
+		        }
 	        }
         })),
      logic_thread_locked_(LogicThreadState::kEndingConfirmed) {
@@ -1803,7 +1807,7 @@ bool Panel::draw_tooltip(const std::string& text, const PanelStyle style, Vector
 }
 
 void Panel::handle_hyperlink(const std::string& action) {
-	throw wexception("Panel %s: Invalid hyperlink action '%s'", name_.c_str(), action.c_str());
+	log_err("Panel %s: Invalid hyperlink action '%s'", name_.c_str(), action.c_str());
 }
 
 struct ContextMenu : public Listselect<Panel::ContextMenuEntry> {

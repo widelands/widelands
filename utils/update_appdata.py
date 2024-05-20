@@ -64,7 +64,7 @@ if (not os.path.isfile(english_source_filename)):
 print('- Reading textdomains:')
 
 textdomain_path = os.path.normpath(
-    base_path + '/po')
+    base_path + '/data/i18n/translations')
 textdomains = []
 textdomain_path_contents = sorted(os.listdir(textdomain_path), key=str.lower)
 for textdomain in textdomain_path_contents:
