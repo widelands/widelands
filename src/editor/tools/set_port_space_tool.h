@@ -68,7 +68,8 @@ public:
 	Workareas get_overlays() override;
 
 private:
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldTerrainChanged>> field_terrain_changed_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldTerrainChanged>>
+	   field_terrain_changed_subscriber_;
 	std::unique_ptr<Workareas> workareas_;
 };
 

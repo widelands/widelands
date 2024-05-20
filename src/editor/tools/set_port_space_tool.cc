@@ -47,9 +47,7 @@ EditorSetPortSpaceTool::EditorSetPortSpaceTool(EditorInteractive& parent,
                                                EditorUnsetPortSpaceTool& the_unset_tool)
    : EditorTool(parent, the_unset_tool, the_unset_tool) {
 	field_terrain_changed_subscriber_ = Notifications::subscribe<Widelands::NoteFieldTerrainChanged>(
-	   [this](const Widelands::NoteFieldTerrainChanged& /*note*/) {
-		   workareas_.reset();
-	   });
+	   [this](const Widelands::NoteFieldTerrainChanged& /*note*/) { workareas_.reset(); });
 }
 
 EditorUnsetPortSpaceTool::EditorUnsetPortSpaceTool(EditorInteractive& parent)
@@ -179,19 +177,25 @@ Workareas EditorSetPortSpaceTool::get_overlays() {
 			}
 
 			std::vector<Widelands::Coords> ocean_fields;
-			map.find_reachable_fields(egbase, Widelands::Area<Widelands::FCoords>(map.get_fcoords(field), std::numeric_limits<uint16_t>::max()), &ocean_fields, checkstep, functor);
+			map.find_reachable_fields(egbase,
+			                          Widelands::Area<Widelands::FCoords>(
+			                             map.get_fcoords(field), std::numeric_limits<uint16_t>::max()),
+			                          &ocean_fields, checkstep, functor);
 
 			// Store and validate the fields.
 			for (const Widelands::Coords& coords : ocean_fields) {
 				size_t i = map.get_index(coords);
 				if (field_to_ocean_index[i] != 0 && field_to_ocean_index[i] != nr_oceans) {
-					throw wexception("Field #%" PRIuS " (%dx%d) belongs to two oceans #%d and #%d!", i, coords.x, coords.y, field_to_ocean_index[i], nr_oceans);
+					throw wexception("Field #%" PRIuS " (%dx%d) belongs to two oceans #%d and #%d!", i,
+					                 coords.x, coords.y, field_to_ocean_index[i], nr_oceans);
 				}
 				field_to_ocean_index[i] = nr_oceans;
 			}
 
 			if (field_to_ocean_index[index] != nr_oceans) {
-				throw wexception("Field #%" PRIuS " does not belong to its own ocean #%d of size %" PRIuS "!", index, nr_oceans, ocean_fields.size());
+				throw wexception("Field #%" PRIuS
+				                 " does not belong to its own ocean #%d of size %" PRIuS "!",
+				                 index, nr_oceans, ocean_fields.size());
 			}
 		}
 
@@ -222,19 +226,25 @@ Workareas EditorSetPortSpaceTool::get_overlays() {
 				const bool l = field_to_ocean_index[map.get_index(map.l_n(coords))] == ocean;
 				const bool r = field_to_ocean_index[map.get_index(map.r_n(coords))] == ocean;
 
-				v_triangles.emplace_back(Widelands::TCoords<>(coords, Widelands::TriangleIndex::D), 0, col);
-				v_triangles.emplace_back(Widelands::TCoords<>(coords, Widelands::TriangleIndex::R), 0, col);
+				v_triangles.emplace_back(
+				   Widelands::TCoords<>(coords, Widelands::TriangleIndex::D), 0, col);
+				v_triangles.emplace_back(
+				   Widelands::TCoords<>(coords, Widelands::TriangleIndex::R), 0, col);
 
 				if (!tl) {
-					v_triangles.emplace_back(Widelands::TCoords<>(map.tl_n(coords), Widelands::TriangleIndex::D), 0, col);
-					v_triangles.emplace_back(Widelands::TCoords<>(map.tl_n(coords), Widelands::TriangleIndex::R), 0, col);
+					v_triangles.emplace_back(
+					   Widelands::TCoords<>(map.tl_n(coords), Widelands::TriangleIndex::D), 0, col);
+					v_triangles.emplace_back(
+					   Widelands::TCoords<>(map.tl_n(coords), Widelands::TriangleIndex::R), 0, col);
 				}
 
 				if (!tr && !r) {
-					v_triangles.emplace_back(Widelands::TCoords<>(map.tr_n(coords), Widelands::TriangleIndex::D), 0, col);
+					v_triangles.emplace_back(
+					   Widelands::TCoords<>(map.tr_n(coords), Widelands::TriangleIndex::D), 0, col);
 				}
 				if (!l && !bl) {
-					v_triangles.emplace_back(Widelands::TCoords<>(map.l_n(coords), Widelands::TriangleIndex::R), 0, col);
+					v_triangles.emplace_back(
+					   Widelands::TCoords<>(map.l_n(coords), Widelands::TriangleIndex::R), 0, col);
 				}
 			}
 		}
