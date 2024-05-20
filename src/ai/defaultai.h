@@ -92,7 +92,7 @@ struct DefaultAI : ComputerPlayer {
 		   : Implementation(
 		        "normal",
 		        /** TRANSLATORS: This is the name of an AI used in the game setup screens */
-		        _("Normal AI"),
+		        gettext_noop("Normal AI"),
 		        "images/ai/ai_normal.png",
 		        Implementation::Type::kDefault) {
 		}
@@ -107,7 +107,7 @@ struct DefaultAI : ComputerPlayer {
 		   : Implementation(
 		        "weak",
 		        /** TRANSLATORS: This is the name of an AI used in the game setup screens */
-		        _("Weak AI"),
+		        gettext_noop("Weak AI"),
 		        "images/ai/ai_weak.png",
 		        Implementation::Type::kDefault) {
 		}
@@ -122,7 +122,7 @@ struct DefaultAI : ComputerPlayer {
 		   : Implementation(
 		        "very_weak",
 		        /** TRANSLATORS: This is the name of an AI used in the game setup screens */
-		        _("Very Weak AI"),
+		        gettext_noop("Very Weak AI"),
 		        "images/ai/ai_very_weak.png",
 		        Implementation::Type::kDefault) {
 		}
