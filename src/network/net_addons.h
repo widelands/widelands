@@ -67,10 +67,10 @@ struct NetAddons {
 	// from the server and downloads it to the given canonical location.
 	void download_addon(const std::string& name, const std::string& save_as, const CallbackFn&);
 
-	// Requests the MO files for the given add-on (cool_feature.wad) from the server and
+	// Requests the PO files for the given add-on (cool_feature.wad) from the server and
 	// downloads them into the given temporary location (e.g. ~/.widelands/temp/some_dir).
-	// The filename of the created MO files is guaranteed to be in the format
-	// "nds.mo.tmp" (where 'nds' is the language's abbreviation).
+	// The filename of the created PO files is guaranteed to be in the format
+	// "nds.po.tmp" (where 'nds' is the language's abbreviation).
 	void download_i18n(const std::string& name,
 	                   const std::string& directory,
 	                   const CallbackFn& progress,

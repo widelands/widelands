@@ -1,4 +1,3 @@
-
 if (NOT MINIZIP_STATIC_LIBRARIES)
   wl_library(third_party_minizip
     THIRD_PARTY
@@ -88,9 +87,32 @@ wl_library(third_party_eris
     eris/lzio.h
 )
 
-wl_library(third_party_gettext
+add_definitions(-DTINYGETTEXT_WITH_SDL)
+wl_library(tinygettext
   THIRD_PARTY
   SRCS
-    gettext/gettext.h
-    gettext/dummy_gettext.cc
+    tinygettext/src/dictionary.cpp
+    tinygettext/src/dictionary_manager.cpp
+    tinygettext/src/iconv.cpp
+    tinygettext/src/language.cpp
+    tinygettext/src/log.cpp
+    tinygettext/src/plural_forms.cpp
+    tinygettext/src/po_parser.cpp
+    tinygettext/src/tinygettext.cpp
+    tinygettext/src/unix_file_system.cpp
+    tinygettext/include/tinygettext/dictionary.hpp
+    tinygettext/include/tinygettext/dictionary_manager.hpp
+    tinygettext/include/tinygettext/dirent.h
+    tinygettext/include/tinygettext/file_system.hpp
+    tinygettext/include/tinygettext/iconv.hpp
+    tinygettext/include/tinygettext/language.hpp
+    tinygettext/include/tinygettext/log.hpp
+    tinygettext/include/tinygettext/log_stream.hpp
+    tinygettext/include/tinygettext/plural_forms.hpp
+    tinygettext/include/tinygettext/po_parser.hpp
+    tinygettext/include/tinygettext/tinygettext.hpp
+    tinygettext/include/tinygettext/unix_file_system.hpp
+  USES_SDL2
+  USES_STD_FS
 )
+wl_include_directories(tinygettext ${CMAKE_CURRENT_SOURCE_DIR}/tinygettext/include)
