@@ -25,6 +25,9 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       buildferry = {
+         -- steps from building to water: 2-8
+         -- min. worker time: 2 * 2 * 1.8 + 10 = 17.2 sec
+         -- max. worker time: 2 * 8 * 1.8 + 10 = 38.8 sec
          "findspace=size:swim radius:5 ferry",
          "walk=coords",
          "animate=work duration:10s",

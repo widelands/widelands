@@ -2064,7 +2064,13 @@ wl.Descriptions():new_tribe {
                                           [[Steadily steadily steadily steadily<br>]] ..
                                           [[bring the wares ashore.’]]),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Ferry Yard
-            lore_author = pgettext("atlanteans_building", "Traditional song of the ferrymen")
+            lore_author = pgettext("atlanteans_building", "Traditional song of the ferrymen"),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Ferry Yard, part 1
+               pgettext("atlanteans_building", "This building can produce one ferry between %1$s and %2$s, depending on how far the shipwright has to walk."):bformat(format_seconds(37), format_seconds(59)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Ferry Yard, part 2
+               pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -2087,7 +2093,7 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("atlanteans_building", "Transcript from oral tradition"),
             performance = {
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Shipyard, part 1
-               pgettext("atlanteans_building", "This building can produce one ship between %1$s and %2$s, depending on how far the shipyard has to walk."):bformat(format_minutes_seconds(18, 8), format_minutes_seconds(24, 51)),
+               pgettext("atlanteans_building", "This building can produce one ship between %1$s and %2$s, depending on how far the shipwright has to walk."):bformat(format_minutes_seconds(18, 8), format_minutes_seconds(24, 51)),
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Shipyard, part 2
                pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
             }

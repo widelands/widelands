@@ -1810,6 +1810,12 @@ wl.Descriptions():new_tribe {
                pgettext("building", "Needs water nearby. Be aware ferries carry wares only, no workers."),
                -- TRANSLATORS: Note helptext for a Barbarian production site: Ferry Yard, part 2
                pgettext("building", "Roads and trees along the shoreline block access to water."),
+            },
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Ferry Yard, part 1
+               pgettext("barbarians_building", "This building can produce one ferry between %1$s and %2$s, depending on how far the shipwright has to walk."):bformat(format_seconds(37), format_seconds(59)),
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Ferry Yard, part 2
+               pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },
@@ -1831,7 +1837,7 @@ wl.Descriptions():new_tribe {
             },
             performance = {
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Shipyard, part 1
-               pgettext("barbarians_building", "This building can produce one ship between %1$s and %2$s, depending on how far the shipyard has to walk."):bformat(format_minutes_seconds(18, 8), format_minutes_seconds(24, 51)),
+               pgettext("barbarians_building", "This building can produce one ship between %1$s and %2$s, depending on how far the shipwright has to walk."):bformat(format_minutes_seconds(18, 8), format_minutes_seconds(24, 51)),
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Shipyard, part 2
                pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
