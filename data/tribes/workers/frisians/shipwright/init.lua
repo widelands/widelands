@@ -17,6 +17,7 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       buildship = {
+         -- worker time: 0.5 + 5 = 5.5 sec
          "walk=object-or-coords",
          "plant=attrib:frisians_shipconstruction unless object",
          "animate=work duration:500ms",

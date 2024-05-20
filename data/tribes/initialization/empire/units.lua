@@ -2337,6 +2337,12 @@ wl.Descriptions():new_tribe {
                pgettext("building", "Needs wide open water nearby."),
                -- TRANSLATORS: Note helptext for an Empire production site: Shipyard, part 2
                pgettext("building", "Roads and trees along the shoreline block access to water."),
+            },
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Shipyard, part 1
+               pgettext("empire_building", "This building can produce one ship between %1$s and %2$s, depending on how far the shipyard has to walk."):bformat(format_minutes_seconds(18, 8), format_minutes_seconds(24, 51)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Shipyard, part 2
+               pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },
