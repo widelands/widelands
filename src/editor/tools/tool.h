@@ -129,6 +129,10 @@ public:
 		return WindowID::Unset;
 	}
 
+	virtual Workareas get_overlays() {
+		return Workareas();
+	}
+
 	bool save_configuration(ToolConf& conf) {
 		conf.primary = this;
 		return conf.primary->save_configuration_impl(conf);
