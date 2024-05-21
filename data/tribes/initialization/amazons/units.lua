@@ -1502,7 +1502,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Chocolate Brewery
             purpose = pgettext("amazons_building", "Brews chocolate for soldier training."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Chocolate Brewery
-            performance = pgettext("amazons_building", "The chocolate brewery needs %s on average to brew one mug of chocolate."):bformat(format_minutes(1))
+            performance = pgettext("amazons_building", "The chocolate brewery needs %s on average to brew one mug of chocolate."):bformat(format_minutes_seconds(1, 4))
          }
       },
       {
