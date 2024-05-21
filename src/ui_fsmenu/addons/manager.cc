@@ -1753,36 +1753,23 @@ bool AddOnsCtrl::is_remote(const std::string& name) const {
 }
 
 static void install_translation(const std::string& temp_locale_path,
-                                const std::string& addon_name,
-                                const int i18n_version) {
+                                const std::string& addon_name) {
 	assert(g_fs->file_exists(temp_locale_path));
 
-	// NOTE:
-	// gettext expects a directory structure such as
-	// "~/.widelands/addons_i18n/nds/LC_MESSAGES/addon_name.wad.VERSION.mo"
-	// where "nds" is the language abbreviation, VERSION the add-on's i18n version,
-	// and "addon_name.wad" the add-on's name.
-	// If we use a different structure, gettext will not find the translations!
-
 	const std::string temp_filename =
-	   FileSystem::fs_filename(temp_locale_path.c_str());                         // nds.mo.tmp
+	   FileSystem::fs_filename(temp_locale_path.c_str());                         // nds.po.tmp
 	const std::string locale = temp_filename.substr(0, temp_filename.find('.'));  // nds
 
-	const std::string new_locale_dir = kAddOnLocaleDir + FileSystem::file_separator() + locale +
-	                                   FileSystem::file_separator() +
-	                                   "LC_MESSAGES";  // addons_i18n/nds/LC_MESSAGES
+	const std::string new_locale_dir =
+	   kAddOnLocaleDir + FileSystem::file_separator() + addon_name;  // addons_i18n/name.wad
 	g_fs->ensure_directory_exists(new_locale_dir);
 
-	const std::string new_locale_path = new_locale_dir + FileSystem::file_separator() + addon_name +
-	                                    '.' + std::to_string(i18n_version) + ".mo";
+	const std::string new_locale_path = new_locale_dir + FileSystem::file_separator() + locale +
+	                                    ".po";  // addons_i18n/name.wad/nds.po
 
 	assert(!g_fs->is_directory(new_locale_path));
-	// Delete outdated translations if present.
-	for (const std::string& mo : g_fs->list_directory(new_locale_dir)) {
-		if (strncmp(FileSystem::fs_filename(mo.c_str()), addon_name.c_str(), addon_name.size()) ==
-		    0) {
-			g_fs->fs_unlink(mo);
-		}
+	if (g_fs->file_exists(new_locale_path)) {
+		g_fs->fs_unlink(new_locale_path);
 	}
 	assert(!g_fs->file_exists(new_locale_path));
 
@@ -2023,8 +2010,9 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 		   });
 
 		for (const std::string& n : g_fs->list_directory(temp_dir)) {
-			install_translation(n, remote->internal_name, remote->i18n_version);
+			install_translation(n, remote->internal_name);
 		}
+		i18n::clear_addon_translations_cache(remote->internal_name);
 		for (auto& pair : AddOns::g_addons) {
 			if (pair.first->internal_name == remote->internal_name) {
 				pair.first->i18n_version = remote->i18n_version;
