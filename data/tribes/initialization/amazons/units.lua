@@ -1453,7 +1453,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree Plantation
             purpose = pgettext("amazons_building", "Plants rare trees which are needed by the Amazons, like balsa, rubber and ironwood."),
             -- TRANSLATORS: Note helptext for an Amazon production site: Rare Tree Plantation
-            note = pgettext("amazons_building", "Rare trees are planted according to the economy requirements. Keep roads connected to rare tree plantations so they adhere to economy targets.")
+            note = pgettext("amazons_building", "Rare trees are planted according to the economy requirements. Keep roads connected to rare tree plantations so they adhere to economy targets."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Plantation, part 1
+               pgettext("amazons_building", "The jungle master plants one tree between %1$s and %2$s, depending on how far she has to walk."):bformat(format_seconds(24), format_seconds(46)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Plantation, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
