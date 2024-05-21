@@ -182,7 +182,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 							   type.c_str());
 						}
 						assert(oldidx != INVALID_INDEX);
-						building.old_buildings_.push_back(std::make_pair(oldidx, type != "immovable"));
+						building.old_buildings_.emplace_back(oldidx, type != "immovable");
 					}
 					// Only construction sites may have an empty list
 					if (building.old_buildings_.empty() &&
@@ -431,7 +431,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 						if (warehouse.incorporated_workers_.count(worker_index) == 0u) {
 							warehouse.incorporated_workers_[worker_index] = Warehouse::WorkerList();
 						}
-						warehouse.incorporated_workers_[worker_index].push_back(&worker);
+						warehouse.incorporated_workers_[worker_index].emplace_back(&worker);
 					} catch (const WException& e) {
 						throw GameDataError(
 						   "incorporated worker #%u (%u): %s", i, worker_serial, e.what());
@@ -594,7 +594,8 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
 				}
 			}
 
-			if ((militarysite.didconquer_ = (fr.unsigned_8() != 0u))) {
+			militarysite.didconquer_ = (fr.unsigned_8() != 0u);
+			if (militarysite.didconquer_) {
 				//  Add to map of military influence.
 				const Map& map = game.map();
 				Area<FCoords> a(

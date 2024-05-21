@@ -669,20 +669,20 @@ static const char* unit_suffixes[] = {
    "%1%",
    /** TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000). */
    /** TRANSLATORS: Space is limited, use only 1 letter for the suffix and no whitespace. */
-   _("%1%k"),
+   gettext_noop("%1%k"),
    /** TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000). */
    /** TRANSLATORS: Space is limited, use only 1 letter for the suffix and no whitespace. */
-   _("%1%M"),
+   gettext_noop("%1%M"),
    /** TRANSLATORS: This is a large number with a suffix (e.g. 5G = 5,000,000,000). */
    /** TRANSLATORS: Space is limited, use only 1 letter for the suffix and no whitespace. */
-   _("%1%G")};
+   gettext_noop("%1%G")};
 std::string get_amount_string(uint32_t amount, bool cutoff1k) {
 	uint8_t size = 0;
 	while (amount >= ((size != 0u) || cutoff1k ? 1000 : 10000)) {
 		amount /= 1000;
 		size++;
 	}
-	return format(unit_suffixes[size], amount);
+	return format(_(unit_suffixes[size]), amount);
 }
 
 uint32_t StockMenuWaresDisplay::amount_of(const Widelands::DescriptionIndex ware) {
@@ -714,24 +714,18 @@ std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
                                 const std::map<Widelands::DescriptionIndex, uint8_t>& map) {
 	std::string ret;
 
-	std::map<Widelands::DescriptionIndex, uint8_t>::const_iterator c;
-
-	Widelands::TribeDescr::WaresOrder::iterator i;
-	std::vector<Widelands::DescriptionIndex>::iterator j;
-	Widelands::TribeDescr::WaresOrder order = tribe.wares_order();
-
 	const UI::WareInfoStyleInfo& style =
 	   g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
 
-	for (i = order.begin(); i != order.end(); ++i) {
-		for (j = i->begin(); j != i->end(); ++j) {
-			if ((c = map.find(*j)) != map.end()) {
+	for (const auto& column : tribe.wares_order()) {
+		for (Widelands::DescriptionIndex di : column) {
+			if (const auto ware_amount = map.find(di); ware_amount != map.end()) {
 				ret += "<div width=30 padding=2><p align=center>"
 				       "<div width=26 background=" +
 				       style.icon_background().hex_value() + "><p align=center><img src=\"" +
-				       tribe.get_ware_descr(c->first)->icon_filename() +
+				       tribe.get_ware_descr(ware_amount->first)->icon_filename() +
 				       "\"></p></div><div width=26 background=" + style.info_background().hex_value() +
-				       "><p>" + style.info_font().as_font_tag(get_amount_string(c->second)) +
+				       "><p>" + style.info_font().as_font_tag(get_amount_string(ware_amount->second)) +
 				       "</p></div></p></div>";
 			}
 		}

@@ -67,7 +67,7 @@ void MapWaterwaydataPacket::read(FileSystem& fs,
 						throw GameDataError("already loaded");
 					}
 					PlayerNumber player_index = fr.unsigned_8();
-					if (!(0 < player_index && player_index <= nr_players)) {
+					if (0 >= player_index || player_index > nr_players) {
 						throw GameDataError(
 						   "Invalid player number: %i.", static_cast<unsigned int>(player_index));
 					}

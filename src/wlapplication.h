@@ -213,6 +213,7 @@ private:
 	void handle_window_event(SDL_Event& ev);
 
 	bool init_settings();
+	void init_filesystems();
 	void init_language();
 	void shutdown_settings();
 

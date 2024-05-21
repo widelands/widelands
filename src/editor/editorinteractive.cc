@@ -1086,7 +1086,7 @@ bool EditorInteractive::handle_mousewheel(int32_t x, int32_t y, uint16_t modstat
 	}
 
 	set_sel_radius_and_update_menu(
-	   std::max(0, std::min(static_cast<int32_t>(get_sel_radius()) + change_size, MAX_TOOL_AREA)),
+	   std::max(0, std::min(static_cast<int32_t>(get_sel_radius()) + change_size, kMaxToolArea)),
 	   std::max(0, std::min(static_cast<int32_t>(get_sel_gap_percent()) + change_gap, 100)));
 	return true;
 }

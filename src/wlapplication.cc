@@ -380,9 +380,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	parse_commandline(argc, argv);  // throws ParameterError, handled by main.cc
 
 	setup_homedir();
-	init_settings();
-	datadir_ = g_fs->canonicalize_name(datadir_);
-	datadir_for_testing_ = g_fs->canonicalize_name(datadir_for_testing_);
+
+	init_settings();  // Also sets up the filesystems and language support.
 
 	set_initializer_thread();
 
@@ -390,15 +389,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	signal(SIGUSR1, toggle_verbose);
 #endif
 
-	log_info("Adding directory: %s\n", datadir_.c_str());
-	g_fs->add_file_system(&FileSystem::create(datadir_));
-
-	if (!datadir_for_testing_.empty()) {
-		log_info("Adding directory: %s\n", datadir_for_testing_.c_str());
-		g_fs->add_file_system(&FileSystem::create(datadir_for_testing_));
-	}
-
-	init_language();  // search paths must already be set up
 	changedir_on_mac();
 
 #ifndef SDL_BYTEORDER
@@ -571,6 +561,9 @@ WLApplication::~WLApplication() {
 	if (g_allow_script_console) {
 		g_script_console_history.save(kScriptConsoleHistoryFile);
 	}
+
+	// To be proper, release our textdomain
+	i18n::release_textdomain();
 
 	assert(UI::g_fh);
 	delete UI::g_fh;
@@ -1233,6 +1226,20 @@ void WLApplication::set_mouse_lock(const bool locked) {
 	}
 }
 
+/** Register the datadir and the datadir for testing (if any) with the global filesystem wrapper. */
+void WLApplication::init_filesystems() {
+	datadir_ = g_fs->canonicalize_name(datadir_);
+	datadir_for_testing_ = g_fs->canonicalize_name(datadir_for_testing_);
+
+	log_info("Adding data directory: %s\n", datadir_.c_str());
+	g_fs->add_file_system(&FileSystem::create(datadir_));
+
+	if (!datadir_for_testing_.empty()) {
+		log_info("Adding testing directory: %s\n", datadir_for_testing_.c_str());
+		g_fs->add_file_system(&FileSystem::create(datadir_for_testing_));
+	}
+}
+
 /**
  * Read the config file, parse the commandline and give all other internal
  * parameters sensible default values
@@ -1280,7 +1287,7 @@ void WLApplication::init_language() {
 	if (!localedir_.empty()) {
 		i18n::set_localedir(g_fs->canonicalize_name(localedir_));
 	} else {
-		i18n::set_localedir(g_fs->canonicalize_name(datadir_ + "/locale"));
+		i18n::set_localedir(g_fs->canonicalize_name(datadir_ + "/i18n/translations"));
 	}
 
 	// If locale dir is not a directory, barf. We can handle it not being there tough.
@@ -1300,7 +1307,7 @@ void WLApplication::init_language() {
 
 	// Initialize locale and grab "widelands" textdomain
 	i18n::init_locale();
-	i18n::grab_textdomain("widelands", i18n::get_localedir().c_str());
+	i18n::grab_textdomain("widelands", i18n::get_localedir());
 
 	// Set locale corresponding to selected language
 	std::string language = get_config_string("language", "");
@@ -1311,8 +1318,6 @@ void WLApplication::init_language() {
  * Remember the last settings: write them into the config file
  */
 void WLApplication::shutdown_settings() {
-	// To be proper, release our textdomain
-	i18n::release_textdomain();
 	write_config();
 }
 
@@ -1516,14 +1521,14 @@ void WLApplication::handle_commandline_parameters() {
 		}
 		return std::string();
 	};
-	bool found = false;
+	bool found_datadir = false;
 	if (OptionalParameter datadir_option = get_commandline_option_value("datadir");
 	    datadir_option.has_value()) {
 		datadir_ = *datadir_option;
 
 		const std::string err = checkdatadirversion(datadir_);
-		found = err.empty();
-		if (!found) {
+		found_datadir = err.empty();
+		if (!found_datadir) {
 			log_err("Invalid explicit datadir '%s': %s", datadir_.c_str(), err.c_str());
 		}
 	} else {
@@ -1534,7 +1539,7 @@ void WLApplication::handle_commandline_parameters() {
 			datadir_ = INSTALL_DATADIR;
 			const std::string err = checkdatadirversion(datadir_);
 			if (err.empty()) {
-				found = true;
+				found_datadir = true;
 			} else {
 				wrong_candidates.emplace_back(datadir_, err);
 			}
@@ -1542,7 +1547,7 @@ void WLApplication::handle_commandline_parameters() {
 
 		// Next, pick the first applicable XDG path.
 #ifdef USE_XDG
-		if (!found) {
+		if (!found_datadir) {
 			for (const auto& datadir : FileSystem::get_xdgdatadirs()) {
 				RealFSImpl dir(datadir);
 				if (dir.is_directory(datadir + "/widelands")) {
@@ -1550,7 +1555,7 @@ void WLApplication::handle_commandline_parameters() {
 
 					const std::string err = checkdatadirversion(datadir_);
 					if (err.empty()) {
-						found = true;
+						found_datadir = true;
 						break;
 					}
 					wrong_candidates.emplace_back(datadir_, err);
@@ -1560,17 +1565,17 @@ void WLApplication::handle_commandline_parameters() {
 #endif
 
 		// Finally, try a relative datadir.
-		if (!found) {
+		if (!found_datadir) {
 			datadir_ = get_executable_directory() + FileSystem::file_separator() + INSTALL_DATADIR;
 			const std::string err = checkdatadirversion(datadir_);
 			if (err.empty()) {
-				found = true;
+				found_datadir = true;
 			} else {
 				wrong_candidates.emplace_back(datadir_, err);
 			}
 		}
 
-		if (!found) {
+		if (!found_datadir) {
 			log_err("Unable to detect the datadir. Please specify a datadir explicitly\n"
 			        "with the --datadir command line option. Tried the following %d path(s):",
 			        static_cast<int>(wrong_candidates.size()));
@@ -1579,22 +1584,30 @@ void WLApplication::handle_commandline_parameters() {
 			}
 		}
 	}
-	if (found && !is_absolute_path(datadir_)) {
+	if (found_datadir && !is_absolute_path(datadir_)) {
 		try {
 			datadir_ = absolute_path_if_not_windows(FileSystem::get_working_directory() +
 			                                        FileSystem::file_separator() + datadir_);
 		} catch (const WException& e) {
 			log_err("Error parsing datadir: %s\n", e.what());
-			found = false;
+			found_datadir = false;
 		}
+	}
+
+	if (OptionalParameter testdir = get_commandline_option_value("datadir_for_testing");
+	    testdir.has_value()) {
+		datadir_for_testing_ = *testdir;
 	}
 
 	if (OptionalParameter lang = get_commandline_option_value("language"); lang.has_value()) {
 		set_config_string("language", *lang);
 	}
-	if (found) {
-		init_language();  // do this now to have translated command line help
-	}
+
+	init_filesystems();
+
+	// Do this now to have translated command line help.
+	init_language();
+
 	// Set up list of valid command line options and their translated help texts
 	fill_parameter_vector();
 
@@ -1603,11 +1616,6 @@ void WLApplication::handle_commandline_parameters() {
 		throw ParameterError(
 		   CmdLineVerbosity::Normal,
 		   format(_("Unknown command line parameter: %s\nMaybe a '=' is missing?"), *err));
-	}
-
-	if (OptionalParameter testdir = get_commandline_option_value("datadir_for_testing");
-	    testdir.has_value()) {
-		datadir_for_testing_ = *testdir;
 	}
 
 	// TODO(tothxa): These were checked before datadir and locale were set up, but don't seem to be
@@ -1759,7 +1767,7 @@ void WLApplication::handle_commandline_parameters() {
 		}
 	}
 
-	if (!found) {
+	if (!found_datadir) {
 		throw ParameterError(CmdLineVerbosity::None);  // datadir error already printed
 	}
 }
