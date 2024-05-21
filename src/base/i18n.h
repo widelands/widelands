@@ -81,6 +81,7 @@ const std::string& npgettext_wrapper(const std::string& msgctxt,
 
 void grab_textdomain(const std::string& domain, const std::string& ldir);
 void release_textdomain();
+void clear_addon_translations_cache(const std::string& addon);
 
 void init_locale();
 void set_locale(const std::string&);
@@ -113,7 +114,7 @@ struct Textdomain : GenericTextdomain {
 };
 struct AddOnTextdomain : GenericTextdomain {
 	// For strings defined in an add-on
-	explicit AddOnTextdomain(std::string addon, int i18n_version);
+	explicit AddOnTextdomain(const std::string& addon);
 };
 
 enum class ConcatenateWith { AND, OR, AMPERSAND, COMMA };
