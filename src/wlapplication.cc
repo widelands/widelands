@@ -407,6 +407,12 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		exit(2);
 	}
 
+	// Start intro music before splashscreen: it takes slightly less time,
+	// and the music starts with some delay
+	g_sh = new SoundHandler();
+	g_sh->register_songs("music", Songset::kIntro);
+	g_sh->change_music(Songset::kIntro);
+
 	g_gr = new Graphic();
 	g_gr->initialize(
 	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
@@ -467,15 +473,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// This is one of the slowest parts of the start up.
 	g_gr->rebuild_texture_atlas();
 
-	g_sh = new SoundHandler();
-
-	g_sh->register_songs("music", Songset::kMenu);
-	g_sh->register_songs("music", Songset::kIntro);
-	g_sh->register_songs("music", Songset::kIngame);
-	g_sh->register_songs("music", Songset::kCustom);
-
-	g_sh->change_music(Songset::kMenu);
-
 	// Try to detect configurations with inverted horizontal scroll
 	SDL_version sdl_ver = {SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL};
 	SDL_GetVersion(&sdl_ver);
@@ -509,6 +506,11 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	cleanup_ai_files();
 	cleanup_temp_files();
 	cleanup_temp_backups();
+
+	verb_log_info("Loading songsets");
+	g_sh->register_songs("music", Songset::kMenu);
+	g_sh->register_songs("music", Songset::kIngame);
+	g_sh->register_songs("music", Songset::kCustom);
 
 	UI::ColorChooser::read_favorites_settings();
 
@@ -989,10 +991,6 @@ bool WLApplication::poll_event(SDL_Event& ev) const {
 			 * There is a special case for the intro music: it will only be played
 			 * once, then we switch to the main menu music.
 			 */
-			// TODO(tothxa): The intro music is currently unused. Various attempts
-			//               to resurrect or repurpose it failed, because it is too
-			//               long for a simple intro, but not long enough for a demo
-			//               or a credits list.
 			assert(!SoundHandler::is_backend_disabled());
 			if (g_sh->current_songset() == Songset::kIntro) {
 				g_sh->change_music(Songset::kMenu, 500);
