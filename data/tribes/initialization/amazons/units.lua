@@ -1511,7 +1511,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Food Preserver
             purpose = pgettext("amazons_building", "Prepares rations to feed the scouts and the workers digging for gold dust and granite."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Food Preserver
-            performance = pgettext("amazons_building", "The food preserver can produce one ration in %s on average if the supply is steady."):bformat(format_seconds(17))
+            performance = pgettext("amazons_building", "The food preserver can produce one ration in %s on average if the supply is steady."):bformat(format_seconds(20))
          }
       },
       {
