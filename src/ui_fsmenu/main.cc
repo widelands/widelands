@@ -704,44 +704,33 @@ inline float MainMenu::calc_opacity(const uint32_t time) const {
 }
 
 /*
- * The four phases of the animation:
- *   1) We start with the splash image shown with full opacity on a black background, we initiate
- *      fade out on first refresh (this is to reset init_time_ when we can actually start fading)
- *   2) Show the splash image semi-transparent on a black background for `kSplashFadeoutDuration`
- *   3) Show the background & menu semi-transparent for `kSplashFadeoutDuration`
- *   4) Show the background & menu with full opacity indefinitely
- * We skip straight to the last phase 4 if we are returning from some other FsMenu screen.
+ * The four phases of the splash screen are:
+ *   1) SplashState::kSplash:
+ *        We start with the splash image shown with full opacity on a black background.
+ *        We initiate fade out when the intro music ends.
+ *   2) SplashState::kSplashFadeOut:
+ *        Show the splash image semi-transparent on a black background for `kSplashFadeoutDuration`
+ *   3) SplashState::kMenuFadeIn:
+ *        Show the background & menu semi-transparent for `kSplashFadeoutDuration`
+ *   4) SplashState::kDone:
+ *        Show the background & menu with full opacity indefinitely
+ *
+ * Phases 1 and 2 are handled by draw_overlay().
+ * Phase 3 is handled by draw() and draw_overlay() together.
+ * Phase 4 is handled by draw() alone.
+ * Stepping through the phases is handled by draw_overlay().
+ *
+ * We skip straight to phase 4 if we are returning from some other FsMenu screen or if a key is
+ * pressed or the mouse is clicked.
  */
 
 void MainMenu::draw(RenderTarget& r) {
 	UI::Panel::draw(r);
 	r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, 255));
 
-	const uint32_t time = SDL_GetTicks();
-
-	// Handle splash screen
-	if (splash_state_ != SplashState::kDone) {
-		assert(init_time_ != kNoSplash && time >= init_time_);
-
-		if (splash_state_ == SplashState::kSplash) {
-			end_splashscreen();
-			return;
-		}
-
-		if (time - init_time_ > kSplashFadeoutDuration) {
-			if (splash_state_ == SplashState::kMenuFadeIn ||
-			    (time - init_time_ > 2 * kSplashFadeoutDuration)) {
-				abort_splashscreen();
-			} else if (splash_state_ == SplashState::kSplashFadeOut) {
-				init_time_ = time;
-				splash_state_ = SplashState::kMenuFadeIn;
-			}
-		}
-
-		if (splash_state_ == SplashState::kSplashFadeOut) {
-			// still in splash phase
-			return;
-		}
+	if (splash_state_ == SplashState::kSplash || splash_state_ == SplashState::kSplashFadeOut) {
+		// Handled by draw_overlay(). The actual menu is not visible in these states.
+		return;
 	}
 
 	// TODO(tothxa): This shouldn't be in draw(), but we don't have think(), nor a single
@@ -754,6 +743,7 @@ void MainMenu::draw(RenderTarget& r) {
 	set_button_visibility(true);
 
 	// Exchange stale background images
+	const uint32_t time = SDL_GetTicks();
 	assert(time >= last_image_exchange_time_);
 	if (time - last_image_exchange_time_ > kImageExchangeInterval) {
 		last_image_ = draw_image_;
@@ -810,29 +800,38 @@ void MainMenu::draw_overlay(RenderTarget& r) {
 		// overlays are needed only during the first three phases
 		return;
 	}
+
 	const uint32_t time = SDL_GetTicks();
 
-	float progress = 0.0f;
-	if (splash_state_ == SplashState::kSplash) {
-		end_splashscreen();
-	} else {
-		progress = static_cast<float>(time - init_time_) / kSplashFadeoutDuration;
-		if (progress > 1.0f) {
-			if (splash_state_ == SplashState::kMenuFadeIn || progress > 2.0f) {
-				// We're done
-				abort_splashscreen();
-				return;
-			}
+	assert(init_time_ != kNoSplash && time >= init_time_);
 
-			// End of splash fade out, start menu fade in
+	float progress = 0.0f;
+
+	if (splash_state_ == SplashState::kSplash) {
+		// When the intro music ends, the event handler in wlapplication.cc starts the main menu
+		// music. We use that to detect when it's time to end the splash screen. We can't set up
+		// a notification, because the main menu may not be created before it ends if the startup
+		// is extremely slow for some reason.
+		if (g_sh->current_songset() != Songset::kIntro) {
+			end_splashscreen();
+		}
+	} else if (time - init_time_ > kSplashFadeoutDuration) {
+		// The next step is due
+		if (splash_state_ == SplashState::kMenuFadeIn ||
+		    (time - init_time_ > 2 * kSplashFadeoutDuration)) {
+			abort_splashscreen();
+			return;
+		} else if (splash_state_ == SplashState::kSplashFadeOut) {
 			init_time_ = time;
 			splash_state_ = SplashState::kMenuFadeIn;
-			progress = 0.0f;
 		}
+	} else {
+		// We're in the middle of phase 2 or 3
+		progress = static_cast<float>(time - init_time_) / kSplashFadeoutDuration;
 	}
 
 	if (splash_state_ != SplashState::kMenuFadeIn) {
-		draw_splashscreen(r, "", 1.0f - progress);
+		draw_splashscreen(r, _("Click for the main menu"), 1.0f - progress);
 	} else {
 		const unsigned alpha = 255 - 255.f * progress;  // fade in of menu = fade out of overlay
 		r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, alpha), BlendMode::Default);

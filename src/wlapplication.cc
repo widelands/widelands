@@ -407,6 +407,9 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		exit(2);
 	}
 
+	// Hide the mouse cursor until the user can actually interact with the window
+	SDL_ShowCursor(SDL_DISABLE);
+
 	// Start intro music before splashscreen: it takes slightly less time,
 	// and the music starts with some delay
 	g_sh = new SoundHandler();
@@ -500,6 +503,10 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	g_mouse_cursor = new MouseCursor();
 	g_mouse_cursor->initialize(get_config_bool("sdl_cursor", true));
+
+	// There's still some more time before the user can actually skip the splash screen
+	g_mouse_cursor->set_visible(false);
+	// It's re-enabled by the event loop in Panel::do_run() when it starts to work
 
 	verb_log_info("Cleaning up temporary files");
 	cleanup_replays();
