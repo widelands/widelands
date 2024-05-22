@@ -504,7 +504,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_mouse_cursor = new MouseCursor();
 	g_mouse_cursor->initialize(get_config_bool("sdl_cursor", true));
 
-	// There's still some more time before the user can actually skip the splash screen
+	// There's still some more time after this constructor finishes before the user can
+	// actually skip the splash screen
 	g_mouse_cursor->set_visible(false);
 	// It's re-enabled by the event loop in Panel::do_run() when it starts to work
 

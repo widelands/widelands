@@ -546,19 +546,25 @@ void MainMenu::set_button_visibility(const bool v) {
 void MainMenu::end_splashscreen() {
 	assert(splash_state_ == SplashState::kSplash);
 	verb_log_info("Initiating splash screen fade out");
-	init_time_ = SDL_GetTicks();
+	g_sh->change_music(Songset::kMenu, kSplashFadeoutDuration);
 	splash_state_ = SplashState::kSplashFadeOut;
+	init_time_ = SDL_GetTicks();
 }
 
 void MainMenu::abort_splashscreen() {
 	verb_log_info("Splash screen ended");
-	init_time_ = kNoSplash;
 	splash_state_ = SplashState::kDone;
+	init_time_ = kNoSplash;
 }
 
 bool MainMenu::handle_mousepress(uint8_t /*btn*/, int32_t /*x*/, int32_t /*y*/) {
 	if (splash_state_ != SplashState::kDone) {
-		abort_splashscreen();
+		// First click ends the splash gently, second click immediately
+		if (splash_state_ != SplashState::kSplash) {
+			abort_splashscreen();
+		} else {
+			end_splashscreen();
+		}
 		return true;
 	}
 	return false;
@@ -587,11 +593,23 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 	}
 
 	if (down) {
-		bool fell_through = false;
 		if (splash_state_ != SplashState::kDone) {
-			abort_splashscreen();
-			// Don't quit on escape when it is pressed to skip fading
-			fell_through = true;
+			// First keypress ends the splash gently, second keypress or escape immediately
+			if (splash_state_ != SplashState::kSplash ||
+			    matches_shortcut(KeyboardShortcut::kMainMenuQuit, code)) {
+				abort_splashscreen();
+
+				// Don't quit on escape when it is pressed to skip the splash screen,
+				// don't interpret second keypress because we have already scheduled
+				// handling the first.
+				// TODO(tothxa): Should flush the remaining keypresses from the event queue,
+				//               but I don't know how to do it, as I don't think we should
+				//               mess with other event types.
+				return true;
+
+			} else {
+				end_splashscreen();
+			}
 		}
 
 		auto check_match_shortcut = [this, &code](KeyboardShortcut k, MenuTarget t) {
@@ -664,10 +682,8 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kMainMenuQuit, code)) {
-			if (!fell_through) {
-				exit();
-				return true;
-			}
+			exit();
+			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kMainMenuContinuePlaying, code)) {
 			if (!filename_for_continue_playing_.empty()) {
@@ -725,9 +741,6 @@ inline float MainMenu::calc_opacity(const uint32_t time) const {
  */
 
 void MainMenu::draw(RenderTarget& r) {
-	UI::Panel::draw(r);
-	r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, 255));
-
 	if (splash_state_ == SplashState::kSplash || splash_state_ == SplashState::kSplashFadeOut) {
 		// Handled by draw_overlay(). The actual menu is not visible in these states.
 		return;
@@ -735,11 +748,13 @@ void MainMenu::draw(RenderTarget& r) {
 
 	// TODO(tothxa): This shouldn't be in draw(), but we don't have think(), nor a single
 	//               entry point.
-	//               Reset the songset when a game, replay or editing session returns.
+	// Reset the songset when a game, replay or editing session returns.
 	if (g_sh->current_songset() != Songset::kMenu) {
 		g_sh->change_music(Songset::kMenu, 500);
 	}
 
+	UI::Panel::draw(r);
+	r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, 255));
 	set_button_visibility(true);
 
 	// Exchange stale background images
@@ -831,7 +846,11 @@ void MainMenu::draw_overlay(RenderTarget& r) {
 	}
 
 	if (splash_state_ != SplashState::kMenuFadeIn) {
-		draw_splashscreen(r, _("Click for the main menu"), 1.0f - progress);
+		// TODO(tothxa): Some dynamic content would be nice to entertain the user while the
+		//               intro music is playing
+		const std::string footer =
+		   splash_state_ == SplashState::kSplash ? _("Click for the main menu") : "";
+		draw_splashscreen(r, footer, 1.0f - progress);
 	} else {
 		const unsigned alpha = 255 - 255.f * progress;  // fade in of menu = fade out of overlay
 		r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, alpha), BlendMode::Default);
