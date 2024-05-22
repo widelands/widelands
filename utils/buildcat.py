@@ -26,68 +26,70 @@ except AttributeError:
 from confgettext import Conf_GetText
 
 # Holds the names of non-iterative catalogs to build and the
-# corresponding source paths list. Note that paths MUST be relative to po/pot,
+# corresponding source paths list. Note that paths MUST be relative to the POT file
+# (at data/i18n/translations/<dirname>/<filename>.pot),
 # to let .po[t] comments point to somewhere useful
+BASEDIR = '../../../..'
 MAINPOTS = [
     ('maps/maps', [
-        '../../data/maps/*/elemental',
-        '../../data/maps/*/*/elemental',
-        '../../data/campaigns/*.lua',
-        '../../data/campaigns/*/elemental'
+        BASEDIR + '/data/maps/*/elemental',
+        BASEDIR + '/data/maps/*/*/elemental',
+        BASEDIR + '/data/campaigns/*.lua',
+        BASEDIR + '/data/campaigns/*/elemental'
     ]),
-    ('texts/texts', ['../../data/txts/*.lua',
-                     '../../data/txts/*/*.lua',
-                     '../../data/txts/tips/*.tip']),
+    ('texts/texts', [BASEDIR + '/data/txts/*.lua',
+                     BASEDIR + '/data/txts/*/*.lua',
+                     BASEDIR + '/data/txts/tips/*.tip']),
     ('widelands/widelands', [
-        '../../src/wlapplication.cc',
-        '../../src/wlapplication_options.cc',
-        '../../src/*/*.cc',
-        '../../src/*/*/*.cc',
-        '../../src/*/*/*/*.cc',
-        '../../src/*/*/*/*/*.cc',
-        '../../src/*/*/*/*/*/*.cc',
-        '../../src/wlapplication.h',
-        '../../src/*/*.h',
-        '../../src/*/*/*.h',
-        '../../src/*/*/*/*.h',
-        '../../src/*/*/*/*/*.h',
-        '../../src/*/*/*/*/*/*.h',
-        '../../data/scripting/*.lua',
+        BASEDIR + '/src/wlapplication.cc',
+        BASEDIR + '/src/wlapplication_options.cc',
+        BASEDIR + '/src/*/*.cc',
+        BASEDIR + '/src/*/*/*.cc',
+        BASEDIR + '/src/*/*/*/*.cc',
+        BASEDIR + '/src/*/*/*/*/*.cc',
+        BASEDIR + '/src/*/*/*/*/*/*.cc',
+        BASEDIR + '/src/wlapplication.h',
+        BASEDIR + '/src/*/*.h',
+        BASEDIR + '/src/*/*/*.h',
+        BASEDIR + '/src/*/*/*/*.h',
+        BASEDIR + '/src/*/*/*/*/*.h',
+        BASEDIR + '/src/*/*/*/*/*/*.h',
+        BASEDIR + '/data/scripting/*.lua',
     ]),
     ('widelands_console/widelands_console', [
-        '../../src/wlapplication_messages.cc',
-        '../../src/wlapplication_messages.h',
+        BASEDIR + '/src/wlapplication_messages.cc',
+        BASEDIR + '/src/wlapplication_messages.h',
     ]),
     ('win_conditions/win_conditions', [
-        '../../data/scripting/win_conditions/*.lua',
+        BASEDIR + '/data/scripting/win_conditions/*.lua',
     ]),
     ('training_wheels/training_wheels', [
-        '../../data/scripting/training_wheels/*.lua',
+        BASEDIR + '/data/scripting/training_wheels/*.lua',
     ]),
     ('world/world', [
-        '../../data/world/*.lua',
-        '../../data/world/*/*.lua',
-        '../../data/world/*/*/*.lua',
-        '../../data/world/*/*/*/*.lua',
-        '../../data/world/*/*/*/*/*.lua',
-        '../../data/world/*/*/*/*/*/*.lua',
+        BASEDIR + '/data/world/*.lua',
+        BASEDIR + '/data/world/*/*.lua',
+        BASEDIR + '/data/world/*/*/*.lua',
+        BASEDIR + '/data/world/*/*/*/*.lua',
+        BASEDIR + '/data/world/*/*/*/*/*.lua',
+        BASEDIR + '/data/world/*/*/*/*/*/*.lua',
     ]),
     ('tribes/tribes', [
-        '../../data/tribes/initialization/*/military_capacity.lua',
-        '../../data/tribes/initialization/*/starting_conditions/*.lua',
-        '../../data/tribes/economy_profiles/*',
-        '../../data/tribes/*/init.lua',
-        '../../data/tribes/*/*/init.lua',
-        '../../data/tribes/*/*/*/init.lua',
-        '../../data/tribes/*/*/*/*/init.lua',
-        '../../data/tribes/*/*/*/*/*/init.lua',
+        BASEDIR + '/data/tribes/initialization/*/military_capacity.lua',
+        BASEDIR + '/data/tribes/initialization/*/starting_conditions/*.lua',
+        BASEDIR + '/data/tribes/economy_profiles/*',
+        BASEDIR + '/data/tribes/*/init.lua',
+        BASEDIR + '/data/tribes/*/*/init.lua',
+        BASEDIR + '/data/tribes/*/*/*/init.lua',
+        BASEDIR + '/data/tribes/*/*/*/*/init.lua',
+        BASEDIR + '/data/tribes/*/*/*/*/*/init.lua',
     ]),
     ('tribes_encyclopedia/tribes_encyclopedia', [
-        '../../data/tribes/initialization/*/units.lua',
-        '../../data/tribes/scripting/help/*.lua',
+        BASEDIR + '/data/tribes/initialization/*/units.lua',
+        BASEDIR + '/data/tribes/scripting/help/*.lua',
     ]),
     ('widelands_editor/widelands_editor', [
-        '../../data/scripting/editor/*.lua',
+        BASEDIR + '/data/scripting/editor/*.lua',
     ]),
 ]
 
@@ -99,26 +101,26 @@ MAINPOTS = [
 #       - target .pot file mask
 #       - base directory to scan for catalogs (referred to Widelands' base dir)
 #       - List of source paths for catalog creation: tells the program which
-#         files to use for building .pot files (referred to
-#         "po/pot/<path_to_pot/" dir, so the file pointers inside .pot files
-#         actually point somewhere useful)
+#         files to use for building .pot files (relative to the
+#         "data/i18n/translations/<dirname>/<filename>.pot", so the file pointers inside .pot files
+#         actually point somewhere useful).
 #
 # For every instance found of a given type, '%s' in this values is replaced
 # with the name of the instance.
 ITERATIVEPOTS = [
     ('scenario_%(name)s/scenario_%(name)s', 'data/campaigns/',
-     ['../../data/campaigns/%(name)s/extra_data',
-      '../../data/campaigns/%(name)s/objective',
-      '../../data/campaigns/%(name)s/scripting/*.lua',
-      '../../data/campaigns/%(name)s/scripting/*/*.lua',
-      '../../data/campaigns/%(name)s/scripting/*/*/*.lua',
+     [BASEDIR + '/data/campaigns/%(name)s/extra_data',
+      BASEDIR + '/data/campaigns/%(name)s/objective',
+      BASEDIR + '/data/campaigns/%(name)s/scripting/*.lua',
+      BASEDIR + '/data/campaigns/%(name)s/scripting/*/*.lua',
+      BASEDIR + '/data/campaigns/%(name)s/scripting/*/*/*.lua',
       ]
      ),
     ('map_%(name)s/map_%(name)s', 'data/maps/SP_Scenarios',
-     ['../../data/maps/SP_Scenarios/%(name)s/scripting/*.lua', ]
+     [BASEDIR + '/data/maps/SP_Scenarios/%(name)s/scripting/*.lua', ]
      ),
     ('mp_scenario_%(name)s/mp_scenario_%(name)s', 'data/maps/MP_Scenarios/',
-     ['../../data/maps/MP_Scenarios/%(name)s/scripting/*.lua', ]
+     [BASEDIR + '/data/maps/MP_Scenarios/%(name)s/scripting/*.lua', ]
      ),
 ]
 
@@ -170,10 +172,10 @@ class BuildcatError(Exception):
 
 def are_we_in_root_directory():
     """Make sure we are called in the root directory."""
-    if (not os.path.isdir('po')):
-        print("Error: no 'po/' subdir found.\n")
+    if (not os.path.isdir('data/i18n/translations')):
+        print("Error: no 'data/i18n/translations/' subdir found.\n")
         print('This script needs to access translations placed ' +
-              "under 'po/' subdir, but these seem unavailable. Check " +
+              "under 'data/i18n/translations/' subdir, but these seem unavailable. Check " +
               "that you called this script from Widelands' main dir.\n")
         sys.exit(1)
 
@@ -366,7 +368,7 @@ def do_update_potfiles():
     dangerous_chars = "'\" "  # Those chars are replaced via '_'
     for pot, srcfiles in potfiles:
         pot = pot.lower().translate(maketrans(dangerous_chars, len(dangerous_chars) * '_'))
-        path = os.path.normpath('po/' + os.path.dirname(pot))
+        path = os.path.normpath('data/i18n/translations/' + os.path.dirname(pot))
         do_makedirs(path)
         oldcwd = os.getcwd()
         os.chdir(path)
@@ -376,7 +378,7 @@ def do_update_potfiles():
         os.chdir(oldcwd)
 
         if succ:
-            print('\tpo/%s.pot' % pot)
+            print('\tdata/i18n/translations/%s.pot' % pot)
         else:
             os.rmdir(path)
 
@@ -437,7 +439,7 @@ def do_update_po(lang, files):
 
     for f in files:
         # File names to use
-        pot = os.path.normpath('po/%s' % f)
+        pot = os.path.normpath('data/i18n/translations/%s' % f)
         po = os.path.join(os.path.dirname(pot), lang + '.po')
         tmp = 'tmp.po'
 

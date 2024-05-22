@@ -172,6 +172,8 @@ public:
 	// Clear the render queue without drawing anything.
 	void clear();
 
+	void set_dither_mask(const std::string& filepath);
+
 private:
 	RenderQueue();
 
