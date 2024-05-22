@@ -555,6 +555,7 @@ void MainMenu::abort_splashscreen() {
 	verb_log_info("Splash screen ended");
 	splash_state_ = SplashState::kDone;
 	init_time_ = kNoSplash;
+	last_image_exchange_time_ = SDL_GetTicks();
 }
 
 bool MainMenu::handle_mousepress(uint8_t /*btn*/, int32_t /*x*/, int32_t /*y*/) {
