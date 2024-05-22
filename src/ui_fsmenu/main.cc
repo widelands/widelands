@@ -606,10 +606,9 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 				//               but I don't know how to do it, as I don't think we should
 				//               mess with other event types.
 				return true;
-
-			} else {
-				end_splashscreen();
 			}
+
+			end_splashscreen();
 		}
 
 		auto check_match_shortcut = [this, &code](KeyboardShortcut k, MenuTarget t) {
@@ -836,10 +835,12 @@ void MainMenu::draw_overlay(RenderTarget& r) {
 		    (time - init_time_ > 2 * kSplashFadeoutDuration)) {
 			abort_splashscreen();
 			return;
-		} else if (splash_state_ == SplashState::kSplashFadeOut) {
-			init_time_ = time;
-			splash_state_ = SplashState::kMenuFadeIn;
 		}
+
+		assert(splash_state_ == SplashState::kSplashFadeOut);
+		init_time_ = time;
+		splash_state_ = SplashState::kMenuFadeIn;
+
 	} else {
 		// We're in the middle of phase 2 or 3
 		progress = static_cast<float>(time - init_time_) / kSplashFadeoutDuration;
