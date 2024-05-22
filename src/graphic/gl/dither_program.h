@@ -39,6 +39,8 @@ public:
 	          float z_value,
 	          const Widelands::Player*);
 
+	void set_dither_mask(const std::string& filepath);
+
 private:
 	enum class TrianglePoint {
 		kTopLeft,
