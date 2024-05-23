@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-03 14:28+0000\n"
 "Last-Translator: Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
@@ -22,44 +22,44 @@ msgstr ""
 "Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:79
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:79
 msgid "Wares Smuggled"
 msgstr "Salekuljetetut tuotteet"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:102
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:105
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:103
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:134
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:195
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:102
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:105
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:103
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:134
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:195
 #, lua-format
 msgid "%i point"
 msgid_plural "%i points"
 msgstr[0] "%i piste"
 msgstr[1] "%i pistettä"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:105
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:8
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:105
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:8
 msgid "Rules"
 msgstr "Säännöt"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:201
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:204
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:207
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:201
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:204
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:207
 msgid "Status"
 msgstr "Tila"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:6
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:6
 msgid "Smugglers"
 msgstr "Salakuljettajat"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:9
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:9
 msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
 "tunnels on this island, each consisting of a receiving and a sending end."
 msgstr "Salakuljettajat on hauska kartta neljälle pelaajalle. Sinä ja kaverisi aloitatte symmetrisen kartan vastakkaisista kulmista. Kartalla on runsaasti salakuljetustunneleita, joista jokin koostuu lähetys- ja vastaanottopisteistä."
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:10
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:10
 msgid ""
 "To establish a smuggling route, you need to build a warehouse on a "
 "sending/receiving spot while your team mate has to build one on the "
@@ -68,33 +68,33 @@ msgid ""
 msgstr "Tehdäksesi salakuljetusreitin, joudut tekemään varaston, joka vastaa partnerisi varastoa pyörähdyssymmetrisesti. Tämän jälkeen tavara kuljetetaan 10 sekunnin välein."
 
 #. TRANSLATORS: %s = '<number> points'
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:12
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:12
 #, lua-format
 msgid ""
 "For harder to defend smuggling routes, you get 2 or 3 points per ware "
 "smuggled. The first team to collect %s wins."
 msgstr "Vaikeasti puolustettavista salakuljetusreiteistä saat 2 tai 3 pistettä tavaraa kohden. Ensimmäinen joukkue, joka saa kasaan %s pistettä, voittaa."
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:13
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:13
 msgid "A sending spot"
 msgstr "Lähtöpiste"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:14
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:14
 msgid "A receiving spot"
 msgstr "Vastaanottopiste"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:15
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:15
 msgid "Notes"
 msgstr "Huomioita"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:16
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:16
 msgid ""
 "Remember that the map has rotational symmetry. For example, when you have "
 "found a spot to the top-left of your headquarters, the corresponding spot "
 "will be to the bottom-right of the headquarters of your team mate."
 msgstr "Kartta on pyörähdyssymmetrinen: Partnerisi päämajan lounaiskulma vastaa sinun päämajasi koilliskulmaa."
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:17
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:17
 msgid ""
 "You can see the number of wares traded at any time in the general statistics"
 " menu. Good luck!"
@@ -102,14 +102,14 @@ msgstr "Voit nähdä kuljetettujen tuotteiden määrän milloin tahansa yleisest
 
 #. TRANSLATORS: the first 2 parameters are player names, the last parameter is
 #. '<number> points'
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:22
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:22
 msgid ""
 "A new smuggling route from %1$s to %2$s has been established! Every ware "
 "they smuggle there is worth %3$s."
 msgstr "Uusi salakuljetusreitti %1$s:ltä %2$s:lle on avattu! Jokainen salakuljetettu tavara tuo %3$s voittopistettä."
 
 #. TRANSLATORS: %s = '<number> points'
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:26
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:26
 #, lua-format
 msgid ""
 "Your team has established a new smuggling route. You have the sending "
@@ -117,7 +117,7 @@ msgid ""
 msgstr "Ryhmäsi on saanut uuden salakuljetusreitin. Varastostasi siirtyy tavaraa joukkuetoverillesi. Jokainen kuljetettu tavara on %s pisteen arvoinen."
 
 #. TRANSLATORS: %s = '<number> points'
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:30
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:30
 #, lua-format
 msgid ""
 "Your team has established a new smuggling route. You have the receiving "
@@ -126,17 +126,17 @@ msgstr "Ryhmäsi on saanut uuden salakuljetusreitin. Varastoosi siirtyy joukkuet
 
 #. TRANSLATORS: the first parameter is '<number> points', the last 2
 #. parameters are player names
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:34
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:34
 msgid "The smuggling route worth %1$s from %2$s to %3$s has been broken!"
 msgstr "%1$s pisteen salakuljetusreitti %2$s:ltä %3$s:lle on tukittu."
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:37
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:37
 msgid "Game over!"
 msgstr "Peli on päättynyt!"
 
 #. TRANSLATORS: the first 4 parameters are player names, the last parameter is
 #. '<number> points'
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:39
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:39
 msgid ""
 "Game over! %1$s and %2$s have won the game! %3$s and %4$s only managed to "
 "collect %5$s."

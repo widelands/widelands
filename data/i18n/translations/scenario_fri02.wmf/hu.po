@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2023\n"
 "Language-Team: Hungarian (https://app.transifex.com/widelands/teams/35159/hu/)\n"
@@ -22,11 +22,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. TRANSLATORS: Message title for a piece of information
-#: ../../data/campaigns/fri02.wmf/scripting/init.lua:33
+#: ../../../../data/campaigns/fri02.wmf/scripting/init.lua:33
 msgid "Note"
 msgstr "Megjegyzés"
 
-#: ../../data/campaigns/fri02.wmf/scripting/init.lua:34
+#: ../../../../data/campaigns/fri02.wmf/scripting/init.lua:34
 msgid ""
 "You appear not to have completed the previous mission. You may still play "
 "this scenario, but you will be at a disadvantage. I recommend that you "
@@ -36,15 +36,15 @@ msgstr ""
 "küldetéssel, de hátrányban leszel, javaslom előbb fejezd be az előző "
 "küldetést, aztán indítsd ezt újra."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:25
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:25
 msgid "Build a basic economy"
 msgstr "Építs ki egy alap gazdaságot!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:27
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:27
 msgid "Supply All Basic Materials"
 msgstr "Biztosítsd minden alapvető nyersanyag utánpótlását!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:28
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:28
 msgid ""
 "Build a quarry, a reed farm, a clay pit, a well, a charcoal kiln, a brick "
 "kiln, and houses for a woodcutter and a forester."
@@ -52,30 +52,30 @@ msgstr ""
 "Építs kőfejtőt, nád ültetvényt, agyagvermet, kutat, faszénégető kemencét, "
 "téglaégetőt, favágóházat és erdészházat!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:33
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:33
 msgid "Expand to the south"
 msgstr "Terjeszkedj dél felé!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:35
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:35
 msgid "Expand Your Territory to Explore the South"
 msgstr "Terjeszd ki területedet a déli irány felderítéséhez!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:36
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:36
 msgid ""
 "The north looks not very useful to us, but who knows what we might find in "
 "the south?"
 msgstr ""
 "Északon nem sok hasznosat látni, de ki tudja, mit találhatunk dél felé?"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:41
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:41
 msgid "Train and recycle"
 msgstr "Kiképzés és újrahasznosítás"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:43
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:43
 msgid "Recycle Weapons to Regain Metal"
 msgstr "Hasznosítsd újra a fegyvereket, hogy fémet szerezz!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:44
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:44
 msgid ""
 "When soldiers train, their old weapons are discarded. They can be turned "
 "into metal in a recycling center. Use the weapons in the store to train "
@@ -86,7 +86,7 @@ msgstr ""
 "fegyvereket katonák fejlesztésére, és hasznosítsd újra a keletkező "
 "ócskavasat!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:45
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:45
 msgid ""
 "The blacksmithy only produces a pick in its second production cycle. If it "
 "is supplied with only one iron ingot at a time, it might never reach this "
@@ -97,15 +97,15 @@ msgstr ""
 "egy vasa van, akkor soha nem jut el idáig. Le kell állítani a kovácsműhelyt,"
 " amíg nincs legalább két vas a bemeneti készletében."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:50
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:50
 msgid "Build an aqua farm"
 msgstr "Építs egy halgazdaságot!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:52
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:52
 msgid "Build an Aqua Farm to Start Producing Fish"
 msgstr "Halgazdaság építése halak tenyésztéséhez"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:53
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:53
 msgid ""
 "Build an aqua farm to produce fish. The aqua farm needs the holes left by a "
 "clay pit nearby to use as ponds to grow fish in. Only a fisher working at an"
@@ -116,16 +116,16 @@ msgstr ""
 "Ezekből a halastavakból csak a halgazdaságban dolgozó halász tudja kifogni a"
 " halakat."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:58
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:58
 msgid "Decide whether you want to cooperate with the Empire"
 msgstr "Döntsd el, hogy együttműködsz-e a Birodalommal!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:60
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:60
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
 msgstr ""
 "Gyűjts árukat az ajándékhoz, vagy semmisítsd meg a birodalom raktárát!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:61
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:61
 msgid ""
 "Decide whether you want to work with Murilius against the Barbarians. If so,"
 " fill his warehouse with these wares:"
@@ -133,58 +133,58 @@ msgstr ""
 "Döntsd el, hogy együttműködsz-e Murilius-szal a barbárok ellen. Ha igen, "
 "töltsd föl a raktárát az alábbi árukkal:"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:62
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "30 × Log"
 msgstr "30 x Farönk"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:63
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:63
 msgid "40 × Granite"
 msgstr "40 x Gránit"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:64
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:64
 msgid "30 × Fish"
 msgstr "30 × Hal"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:65
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:65
 msgid "30 × Beer"
 msgstr "30 × Sör"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:66
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:66
 msgid "150 × Water"
 msgstr "150 × Víz"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:67
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:67
 msgid "40 × Ration"
 msgstr "40 × Harapnivaló"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:68
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:68
 msgid "10 × Meal"
 msgstr "10 × Ebéd"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:69
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:69
 msgid "30 × Coal"
 msgstr "30 × Szén"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:70
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:70
 msgid "40 × Iron Ore"
 msgstr "40 × Vasérc"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:71
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:71
 msgid "20 × Iron"
 msgstr "20 × Vas"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:72
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:72
 msgid "20 × Gold Ore"
 msgstr "20 × Aranyérc"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:73
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:73
 msgid "10 × Gold"
 msgstr "10 × Arany"
 
 #. TRANSLATORS: Continues from "Decide whether you want to work with Murilius
 #. against the Barbarians. If so, fill his warehouse with these wares: [list
 #. of wares]"
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:75
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:75
 msgid ""
 "Otherwise, just destroy the warehouse and risk having Murilius as an enemy. "
 "He forbade you to expand your territory until the wares have been handed "
@@ -194,74 +194,74 @@ msgstr ""
 "megtámad! Azt is megtiltotta, hogy növeld a területedet, amíg át nem adtad "
 "az árukat."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:80
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:80
 msgid "Spy on Murilius"
 msgstr "Kémkedj Murilius után!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:82
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:82
 msgid "Send a Scout to Spy on the Empire"
 msgstr "Felderítő küldése a Birodalom után kémkedni"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:83
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:83
 msgid ""
 "Build a scout’s house near the border to discover the Empire’s secrets."
 msgstr "Építs felderítőházat a határhoz, hogy felfedd a Birodalom titkait!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:88
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:88
 msgid "Decipher the poem"
 msgstr "Fejtsd meg a költeményt!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:90
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:90
 msgid "Understand the Poem the Scout has Found in the Empire"
 msgstr ""
 "Értelmezd a költeményt, amit a felderítő talált a Birodalom területén!"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:91
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:336
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:91
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:336
 msgid "How many sites where soldiers stay,"
 msgstr "Mennyi hely, hol katona lakoz',"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:92
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:339
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:92
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:339
 msgid "How many sites where thou hold’st sway,"
 msgstr "Mennyi hely, hol te uralkodsz,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 3
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:93
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:342
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:93
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:342
 msgid "Though not their whereabouts sees he"
 msgstr "Látja ő, de nem látja, hol"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 4
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:94
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:345
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:94
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:345
 msgid "Who’s ordering around here thee!"
 msgstr "Ő, ki néked parancsnokol!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:99
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:99
 msgid "Defeat the Barbarians!"
 msgstr "Győzd le a barbárokat!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:101
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:101
 msgid "Defeat the Barbarians"
 msgstr "A barbárok legyőzése"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:102
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:102
 msgid "Defeat the hostile tribe living northwest of the Empire’s outpost!"
 msgstr ""
 "Győzd le a Birodalom helyőrségétől észak-nyugatra élő ellenséges törzset!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:107
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:107
 msgid "Defeat Murilius!"
 msgstr "Győzd le Muriliust!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:109
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:109
 msgid "Defeat the Arrogant Outpost of the Empire"
 msgstr "Győzd le a Birodalom arrogáns helyőrségét!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:110
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:110
 msgid ""
 "The only way to put an end to the Empire’s desire to steal our liberty is to"
 " destroy this outpost once and for all. Conquer its entire land."
@@ -270,19 +270,19 @@ msgstr ""
 "szemben az, ha mindörökre leromboljuk ezt a helyőrséget. Foglald el az "
 "összes földjüket!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:111
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:111
 msgid "Conquer every single field that still belongs to Murilius."
 msgstr "Foglalj el minden egyes mezőt, ami meg Muriliusé!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:116
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:116
 msgid "Defeat Murilius and the Barbarians!"
 msgstr "Győzd le Muriliust és a barbárokat!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:118
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:118
 msgid "Defeat the Barbarians and the Empire Colony"
 msgstr "Győzd le a barbárokat és a Birodalom települését!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:119
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:119
 msgid ""
 "The Barbarians and the Empire are too dangerous to allow them to live near "
 "us. We must defeat them both."
@@ -291,7 +291,7 @@ msgstr ""
 "Mindkettőt le kell győznünk."
 
 #. TRANSLATORS: Reebaud – Introduction 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:128
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:128
 msgid ""
 "I began to believe the journey would never end. I have no idea how long we "
 "were at sea, tossed about by envious storms… it must have been months."
@@ -301,7 +301,7 @@ msgstr ""
 "hónapok telhettek el."
 
 #. TRANSLATORS: Reebaud – Introduction 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:130
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:130
 msgid ""
 "The storms maintained a firm grip on the ship throughout our voyage. There "
 "was hardly a day on which we did not wonder whether it would be our last. We"
@@ -316,7 +316,7 @@ msgstr ""
 "órával hosszabb élet reményéért."
 
 #. TRANSLATORS: Reebaud – Introduction 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:132
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:132
 msgid ""
 "The few tools we managed to salvage from Langeness did not cope well. The "
 "miners’ picks proved especially vulnerable, and we had to throw them in the "
@@ -329,7 +329,7 @@ msgstr ""
 "alkalmasak semmire."
 
 #. TRANSLATORS: Reebaud – Introduction 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:134
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:134
 msgid ""
 "But we survived. Finally, we reached the mouth of a calmer fjord. We sailed "
 "upriver, and arrived here."
@@ -337,20 +337,20 @@ msgstr ""
 "De túléltük. Végül egy nyugodtabb fjord torkolatához érkeztünk. Felfelé "
 "hajózva a folyón ide érkeztünk."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:140
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:145
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:154
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:140
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:145
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:154
 msgid "Welcome Back!"
 msgstr "Üdvözöllek újra!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:141
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:146
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:155
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:141
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:146
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:155
 msgid "A new home"
 msgstr "Az új otthon"
 
 #. TRANSLATORS: Reebaud – Introduction 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:148
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:148
 msgid ""
 "There was a small group of foreigners living here. They welcomed us by "
 "brandishing their axes at us, and shouted in an incoherent language."
@@ -359,7 +359,7 @@ msgstr ""
 " érthetetlen nyelvükön kiabálva."
 
 #. TRANSLATORS: Reebaud – Introduction 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:151
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:151
 msgid ""
 "Our ship was in no state to continue sailing, so we killed the locals and "
 "took their land. I just hope there aren’t more of them, so we can live in "
@@ -370,7 +370,7 @@ msgstr ""
 "több belőlük, és békében élhetünk."
 
 #. TRANSLATORS: Reebaud – Introduction 3
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:157
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:157
 msgid ""
 "This place looks bleak and barren, my companions say, but I think it looks… "
 "beautiful."
@@ -378,7 +378,7 @@ msgstr ""
 "A társaim szerint ez a táj kopár és lehangoló, de szerintem… gyönyörű."
 
 #. TRANSLATORS: Reebaud – Introduction 3
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:160
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:160
 msgid ""
 "My scouts no longer report any signs of living creatures nearby. We will "
 "start building our new home here."
@@ -387,7 +387,7 @@ msgstr ""
 " otthonunkat itt."
 
 #. TRANSLATORS: Reebaud – Introduction 3
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:163
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:163
 msgid ""
 "We must start by building all the basic buildings. I see no mountains nearby"
 " where we might mine coal. We’d better build a charcoal kiln to burn logs "
@@ -402,16 +402,16 @@ msgstr ""
 "mindig irigyeltek minket a szomszédos népek, de soha nem sikerült ellesniük "
 "a titkot."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:168
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:168
 msgid "Go South"
 msgstr "Menj délre!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:169
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:169
 msgid "Expand and conquer"
 msgstr "Terjeszkedés és hódítás"
 
 #. TRANSLATORS: Reebaud – Expand South
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:171
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:171
 msgid ""
 "We have built a home in this wonderful landscape. But as our tribe grows, we"
 " need more space. We should start expanding our territory."
@@ -420,7 +420,7 @@ msgstr ""
 "több helyre van szükségünk. El kell kezdenünk terjeszkedni."
 
 #. TRANSLATORS: Reebaud – Expand South
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:174
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:174
 msgid ""
 "The scouts reported that the lands to the north are rugged hills, beautiful "
 "to behold but not suited for buildings. Let’s find out what we can discover "
@@ -430,19 +430,19 @@ msgstr ""
 "gyönyörű látvány, de építkezésre nem alkalmas. Lássuk, mit találunk dél "
 "felé!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:179
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:188
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:197
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:207
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:179
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:188
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:197
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:207
 msgid "Metal Shortage"
 msgstr "Fémhiány"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:180
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:180
 msgid "We are out of metals"
 msgstr "Nincs fémünk"
 
 #. TRANSLATORS: Hauke – Train and recycle 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:182
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:182
 msgid ""
 "Chieftain Reebaud! We have a serious problem. We have discovered a mountain "
 "where we might be able to start mining coal and iron, but we have no miners,"
@@ -453,7 +453,7 @@ msgstr ""
 "hogy új bányászokat szereljünk fel."
 
 #. TRANSLATORS: Hauke – Train and recycle 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:185
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:185
 msgid ""
 "And we don’t have any iron left. We must find a way to get some metal for "
 "forging new picks. Unfortunately, I have no idea how to do this."
@@ -461,13 +461,13 @@ msgstr ""
 "És nem maradt vasunk sem. Ki kell találnunk valamit, hogy hogyan "
 "szerezhetünk fémet új csákányokhoz. Sajnos nekem nincs ötletem."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:189
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:208
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:189
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:208
 msgid "Getting new metal"
 msgstr "Fémet szerezni"
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:191
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:191
 msgid ""
 "This is terrible news! Without iron or the means to produce any, we are "
 "stuck like this forever! You must come up with a solution."
@@ -476,7 +476,7 @@ msgstr ""
 "Megoldást kell találnod!"
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:194
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:194
 msgid ""
 "I have seen some advanced weapons in our warehouses. Perhaps it would be "
 "possible to smelt them back into metal? But that seems like a waste of the "
@@ -486,12 +486,12 @@ msgstr ""
 "visszaolvaszthatnánk nyers fémmé? De ezzel elpazarolnánk az értékes "
 "kardokat."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:198
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:198
 msgid "New metal"
 msgstr "Új fém"
 
 #. TRANSLATORS: Hauke – Train and recycle 3
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:200
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:200
 msgid ""
 "Now I have an idea: When our soldiers are trained, they are equipped with "
 "new swords and the old weapons are discarded. These are unfit to use in "
@@ -502,7 +502,7 @@ msgstr ""
 "értük, ha beolvasztjuk őket."
 
 #. TRANSLATORS: Hauke – Train and recycle 3
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:203
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:203
 msgid ""
 "That is what we must do. We will use our weapons to train soldiers, then "
 "smelt the scrap metal into iron and gold. And then our blacksmiths can "
@@ -513,7 +513,7 @@ msgstr ""
 "kovács a bányászoknak. Azonnal intézkedek is!"
 
 #. TRANSLATORS: Reebaud – Train and recycle 4
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:210
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:210
 msgid ""
 "Not so hasty! To build a training camp, we will first need gold, and we "
 "don’t have any. We must first dismantle our port, which will give us just "
@@ -526,16 +526,16 @@ msgstr ""
 "kiképzőtáborhoz. Nem tetszik, de ez az egyetlen megoldás. Persze a kikötő "
 "lebontása előtt az összes árut át kell vinnünk egy másik raktárba."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:214
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:214
 msgid "Metal Production"
 msgstr "Fémtermelés"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:215
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:215
 msgid "The mines are working"
 msgstr "Működnek a bányák"
 
 #. TRANSLATORS: Reebaud – Aqua Farms 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:217
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:217
 msgid ""
 "Our mines have started working. Now, we only need to build a furnace and the"
 " metal production will be running smoothly."
@@ -544,7 +544,7 @@ msgstr ""
 "akkor zökkenőmentesen fog működni a fémtermelésünk."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:220
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:220
 msgid ""
 "Do we have a reindeer farm already? If not, we should build one now. We need"
 " more reindeer for the crowded roads, and we could already start sewing fur "
@@ -555,17 +555,17 @@ msgstr ""
 "kellenek a forgalmas utakra, és most már elkezdhetünk kacagányt varrni a "
 "katonáknak. Ki tudja, kell-e majd egyszer harcolnunk?"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:223
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:233
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:223
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:233
 msgid "Fishing"
 msgstr "Halászat"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:224
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:224
 msgid "We need fish"
 msgstr "Halra van szükségünk"
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:226
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:226
 msgid ""
 "Chieftain Reebaud, I have more bad news. There are almost no fish in the "
 "waters nearby. While we can prepare rations using only fruit or bread, "
@@ -578,7 +578,7 @@ msgstr ""
 "mellett csak mellékesen készül egy kevés hús, ami nem elég."
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:229
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:229
 msgid ""
 "Fortunately, one of our fishermen thought of a solution. Our clay pits leave"
 " large holes in the ground; a fisher could fill them with water and grow "
@@ -590,12 +590,12 @@ msgstr ""
 "hogy halakat tenyésszenek bennük. Ehhez csak sok vízre és a halak etetéséhez"
 " gyümölcsre van szükségük."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:234
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:234
 msgid "We have fish again"
 msgstr "Újra van halunk"
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:236
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:236
 msgid ""
 "Well done. We have built an aqua farm, and our mining economy is stable for "
 "now. However, the miners tell me that the resources are already low, and the"
@@ -606,7 +606,7 @@ msgstr ""
 "hamarosan teljesen kimerülhetnek."
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:239
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:239
 msgid ""
 "The mines will still be able to produce then, but it will take about twenty "
 "times longer – ten times if it is a deep mine – to produce ores or coal. You"
@@ -616,16 +616,16 @@ msgstr ""
 "tízszer – annyi ideig tart ércet vagy szenet termelni. Érdemes felkészülnöd "
 "a megnövekedett élelmiszer- és időszükségletre."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:242
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:242
 msgid "Recruiting"
 msgstr "Toborzás"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:243
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:243
 msgid "Our economy is complete"
 msgstr "Teljes a gazdaságunk"
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:245
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:245
 msgid ""
 "You are right – we should build more berry farms, fruit collector’s houses "
 "and taverns as well as a drinking hall, and advanced bakeries and breweries."
@@ -634,7 +634,7 @@ msgstr ""
 " valamint ivót és fejlesztett pékséget és sörfőzdét is."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:248
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:248
 msgid ""
 "However, we can already start focusing on recruiting and training soldiers. "
 "We can now afford to use metal for weapons, helmets and garments. I propose "
@@ -646,25 +646,25 @@ msgstr ""
 "kacagányokhoz használjuk. Azt javaslom, építsünk páncélkovácsműhelyeket, "
 "laktanyát, kiképző arénát és szabóműhelyt."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:252
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:259
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:265
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:274
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:280
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:289
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:298
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:304
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:314
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:252
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:259
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:265
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:274
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:280
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:289
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:298
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:304
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:314
 msgid "We Are Not Alone"
 msgstr "Nem vagyunk egyedül"
 
 #. TRANSLATORS: "Greetings, strangers!". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:254
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:266
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:281
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:290
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:305
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:254
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:266
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:281
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:290
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:305
 msgid "Salvete peregrini!"
 msgstr "Salvete peregrini!"
 
@@ -672,7 +672,7 @@ msgstr "Salvete peregrini!"
 #. province 'The Northern Lands'. Name yourselves!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
 #. though
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:256
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:256
 msgid ""
 "Salvete peregrini! Murilius Proconsul Terrae Septentrionalis provinciae ego "
 "sum. Vos nominate!"
@@ -680,26 +680,26 @@ msgstr ""
 "Salvete peregrini! Murilius Proconsul Terrae Septentrionalis provinciae ego "
 "sum. Vos nominate!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:260
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:275
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:299
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:315
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:260
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:275
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:299
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:315
 msgid "Strangers"
 msgstr "Idegenek"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:262
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:262
 msgid "…does anyone understand what he is saying?"
 msgstr "…érti valaki, hogy mit mond?"
 
 #. TRANSLATORS: Murilius – Supply Murilius 3. This is a foreign language to
 #. Murilius, so he sounds very formal.
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:268
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:268
 msgid "Do they not even speak the noble language of the Empire?"
 msgstr "Még a Birodalom dicsőséges nyelvét sem beszélik?"
 
 #. TRANSLATORS: Murilius – Supply Murilius 3
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:271
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:271
 msgid ""
 "Strangers! I, Murilius, Proconsul of the Northern Lands, a province of the "
 "Empire, demand to know who you are and what business you have in these "
@@ -710,7 +710,7 @@ msgstr ""
 
 #. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
 #. Frisian greeting, nothing more.
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:277
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:277
 msgid ""
 "Peace, representative of the Empire! I am Reebaud, the chieftain of this "
 "tribe. All we want is to settle down here, build our home and live our lives"
@@ -722,7 +722,7 @@ msgstr ""
 
 #. TRANSLATORS: Murilius – Supply Murilius 5. "Reebaude" is the Latin vocative
 #. case (form of address) of Reebaud.
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:283
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:283
 msgid ""
 "In this case, Reebaude, I must inform you of the presence of an "
 "inhospitable, hostile tribe of Barbarians in the vicinity of this very "
@@ -733,7 +733,7 @@ msgstr ""
 "közelében."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:286
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:286
 msgid ""
 "If you seek to live peacefully here, you are not faced with a choice whether"
 " to allow them to live here – you are required to assist the Empire in "
@@ -743,7 +743,7 @@ msgstr ""
 "megtűröd-e őket: Segítened kell a Birodalmat a kiűzésükben."
 
 #. TRANSLATORS: Murilius – Supply Murilius 6
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:292
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:292
 msgid ""
 "Also, as a sign of your good intentions, we demand a gift of friendship to "
 "the Empire. As you should have noticed, I have presented you with a new "
@@ -756,7 +756,7 @@ msgstr ""
 " árukat adományozd nekünk:"
 
 #. TRANSLATORS: Murilius – Supply Murilius 6. A list of wares.
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:295
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:295
 msgid ""
 "30 logs, 40 slabs of granite, 30 fish, 30 mugs of beer, 150 buckets of "
 "water, 40 rations, 10 meals, 30 lumps of coal, 40 lumps of iron ore, 20 iron"
@@ -767,7 +767,7 @@ msgstr ""
 "10 aranyrudat."
 
 #. TRANSLATORS: Hauke – Supply Murilius 7
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:301
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:301
 msgid ""
 "Chieftain Reebaud – the demands of this arrogant Empire Proconsul are just "
 "outrageous. He treats us like we are his servants. And we certainly cannot "
@@ -780,7 +780,7 @@ msgstr ""
 "javaslom, romboljuk le a ronda raktárát, és vívja meg egyedül a csatáját."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:307
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:307
 msgid ""
 "If you fail to deliver these wares, the Empire shall treat you like enemies."
 " And so as to prevent you wasting your precious metal, I forbid you to "
@@ -793,7 +793,7 @@ msgstr ""
 "nem engedelmeskedtek, a Birodalom ellenségként fog kezelni titeket."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:310
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:310
 msgid ""
 "You will have to fight those Barbarians if you intend to live in the area; "
 "surely you can see that fighting them together with the Empire is easier "
@@ -808,7 +808,7 @@ msgstr ""
 " is el fogjátok hinni, hogy igazat beszéltem."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:317
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:317
 msgid ""
 "This is the greatest outrage of all. How dare he order us to stop expanding "
 "our territory when all we want is to build a new home, and threaten us with "
@@ -819,7 +819,7 @@ msgstr ""
 "háborúval fenyegetni, ha nem leszünk a rabszolgái?"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:320
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:320
 msgid ""
 "I’d like to say we should attack him right now, but I fear we aren’t strong "
 "enough yet to hold our own against him in battle. We should hurry our "
@@ -832,7 +832,7 @@ msgstr ""
 "ajándéknak nevezett hadisarcát. Ezzel időt nyerhetünk."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:323
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:323
 msgid ""
 "As for expansion – I wonder how strictly he can possibly control us. Perhaps"
 " we should send a scout to spy on him…"
@@ -840,16 +840,16 @@ msgstr ""
 "A terjeszkedésről pedig… kíváncsi vagyok, hogyan tud ellenőrizni minket. "
 "Talán kiküldhetnénk egy felderítőt, hogy kémkedjen utána…"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:330
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:330
 msgid "The Scout Discovered Something"
 msgstr "A felderítő talált valamit"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:331
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:331
 msgid "Our scout returned"
 msgstr "A felderítő visszatért"
 
 #. TRANSLATORS: Hauke – Expansion hint
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:333
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:333
 msgid ""
 "Chieftain Reebaud! Our scout just returned. He has found a poem in the "
 "strange tongue this Proconsul speaks. With some difficulty, I have "
@@ -861,7 +861,7 @@ msgstr ""
 "rontottam el, akkor így szól:"
 
 #. TRANSLATORS: Hauke – Expansion hint
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:348
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:348
 msgid ""
 "I don’t know what it means, but I’m sure it’s important. Perhaps you can "
 "make some sense of it."
@@ -869,21 +869,21 @@ msgstr ""
 "Nem tudom, mit jelent, de érzem, hogy nagyon fontos. Hátha te meg tudod "
 "fejteni, hogy mi az értelme."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:353
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:363
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:353
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:363
 msgid "The Empire is Angry"
 msgstr "A Birodalom dühös"
 
 #. TRANSLATORS: "You are enemies of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
 #. though
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:355
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:364
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:355
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:364
 msgid "Hostes Imperii estis!"
 msgstr "Hostes Imperii estis!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire: player destroyed the warehouse
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:357
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:357
 msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "destroying the beautiful building we presented you with!"
@@ -893,8 +893,8 @@ msgstr ""
 "ajándékoztunk!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:360
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:369
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:360
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:369
 msgid "You are enemies of the Empire, and I shall treat you as such!"
 msgstr ""
 "A Birodalom ellenségei vagytok, és ennek megfelelően foglak kezelni "
@@ -902,7 +902,7 @@ msgstr ""
 
 #. TRANSLATORS: Murilius – enemy of the Empire: player built forbidden
 #. military buildings
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:366
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:366
 msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "basely wasting your precious resources on expansion!"
@@ -910,16 +910,16 @@ msgstr ""
 "Barbárok! Visszautasítottátok szövetségesi ajánlatunkat, méghozzá a "
 "legbecstelenebb módon, terjeszkedésre pazarolva az értékes nyersanyagokat!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:372
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:372
 msgid "Two Enemies"
 msgstr "Két ellenség"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:373
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:373
 msgid "Defeat the enemies!"
 msgstr "Győzd le az ellenségeket!"
 
 #. TRANSLATORS: Reebaud – defeat both enemies
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:375
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:375
 msgid ""
 "Murilius has made it quite clear that he won’t leave us alone. I fear we "
 "must defeat him and destroy his colony if we ever want to have peace here."
@@ -929,7 +929,7 @@ msgstr ""
 "békében szeretnénk itt élni."
 
 #. TRANSLATORS: Reebaud – defeat both enemies
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:378
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:378
 msgid ""
 "The Barbarian tribe he mentioned is also a threat. I don’t want to share "
 "this land with anyone, as sharing only leads to conflicts and battles, as we"
@@ -939,19 +939,19 @@ msgstr ""
 "senkivel ezen az országon, mert az mindig ellentétekhez és háborúhoz vezet, "
 "ahogy régi hazánkban is tapasztaltuk. Le kell győznünk a barbárokat is."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:382
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:382
 msgid "The Empire is Grateful"
 msgstr "A Birodalom hálás"
 
 #. TRANSLATORS: "Greetings, friends of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
 #. though
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:384
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:384
 msgid "Salvete amici Imperii!"
 msgstr "Salvete amici Imperii!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:386
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:386
 msgid ""
 "Strangers! I see you have kept your word. The Empire rewards its friends, "
 "therefore I shall reward you with the friendship of the Empire!"
@@ -962,7 +962,7 @@ msgstr ""
 #. TRANSLATORS: Murilius – Supplied Murilius. Murilius’s plan is to use the
 #. player as cannon fodder, while he himself only attacks when he has no
 #. choice
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:389
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:389
 msgid ""
 "Now I permit you to assist us in conquering the Barbarians, who live in a "
 "sheltered valley northwest to us. I charge you, expand along the northern "
@@ -975,18 +975,18 @@ msgstr ""
 "megtalálod a barbárokat. Támadd meg őket! Mi addig kivédjük az ellenség "
 "támadásait."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:393
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:393
 msgid "The Reward For Your Service"
 msgstr "Jutalom a szolgálataidért"
 
 #. TRANSLATORS: "Friends of the Empire". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:395
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:395
 msgid "Amici Imperii"
 msgstr "Amici Imperii"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:397
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:397
 msgid ""
 "You have done well, strangers! As I did tell you earlier, you will be "
 "rewarded with the friendship of the Empire!"
@@ -995,7 +995,7 @@ msgstr ""
 "barátsága!"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:400
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:400
 msgid ""
 "I propose you start by sending legates to the Capital, so as to discover the"
 " most recent political activities. Once there, you can receive instructions "
@@ -1009,16 +1009,16 @@ msgstr ""
 "mennyi adót kell fizetnetek, és persze azt, hogy ki lesz a törzsetek "
 "királya."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:403
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:403
 msgid "Another Enemy"
 msgstr "Újabb ellenség"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:404
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:404
 msgid "Defeat the Empire!"
 msgstr "Győzd le a Birodalmat!"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:406
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:406
 msgid ""
 "Did I understand him correctly? After all we have done for him, after so "
 "many of my soldiers have laid down their lives for his sake, he wants us to "
@@ -1031,7 +1031,7 @@ msgstr ""
 "képmutató?"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:409
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:409
 msgid ""
 "We will punish this self-proclaimed Proconsul for his treachery! I shall "
 "burn down his entire colony, and kill every single person in his realm. He "
@@ -1041,16 +1041,16 @@ msgstr ""
 "települését, és az utolsó szálig kiirtom az embereit. Súlyosan megemlegeti "
 "még, hogy így megsértette a törzsünket."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:413
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:413
 msgid "Victory"
 msgstr "Győzelem"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:414
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:414
 msgid "Victory!"
 msgstr "Győzelem!"
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:416
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:416
 msgid ""
 "We have defeated all our enemies! Now no other tribe will ever dare settle "
 "here again. We are safe, and we can finally live our lives in peace."
@@ -1058,11 +1058,11 @@ msgstr ""
 "Legyőztük minden ellenségünket! Most már semelyik másik törzs nem fog ide "
 "merészkedni. Biztonságban vagyunk, és végre békében élhetjük az életünket."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:417
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:417
 msgid "Congratulations"
 msgstr "Gratulálunk"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:418
+#: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:418
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
@@ -1071,7 +1071,7 @@ msgstr ""
 " folytasd a következő küldetéssel!"
 
 #. TRANSLATORS: Purpose helptext for an Empire warehouse: Warehouse
-#: ../../data/campaigns/fri02.wmf/scripting/tribes/init.lua:13
+#: ../../../../data/campaigns/fri02.wmf/scripting/tribes/init.lua:13
 msgctxt "empire_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
@@ -1081,7 +1081,7 @@ msgstr ""
 " tárolja."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/campaigns/fri02.wmf/scripting/tribes/warehouse/init.lua:8
+#: ../../../../data/campaigns/fri02.wmf/scripting/tribes/warehouse/init.lua:8
 msgctxt "frisians_building"
 msgid "Empire Warehouse"
 msgstr "Birodalmi raktár"
