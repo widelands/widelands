@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-03 14:28+0000\n"
 "Last-Translator: GunChleoc, 2016,2018\n"
 "Language-Team: Arabic (http://app.transifex.com/widelands/widelands/language/ar/)\n"
@@ -20,15 +20,15 @@ msgstr ""
 "Language: ar\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:79
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:79
 msgid "Wares Smuggled"
 msgstr "هُرِبَت السلع"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:102
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:105
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:103
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:134
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:195
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:102
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:105
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:103
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:134
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:195
 #, lua-format
 msgid "%i point"
 msgid_plural "%i points"
@@ -39,29 +39,29 @@ msgstr[3] "%i نقاط"
 msgstr[4] "%i نقاط"
 msgstr[5] "%i نقاط"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:105
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:8
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:105
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:8
 msgid "Rules"
 msgstr "القواعد"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:201
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:204
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:207
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:201
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:204
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:207
 msgid "Status"
 msgstr "الحالة"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:6
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:6
 msgid "Smugglers"
 msgstr "المُهَرِبون"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:9
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:9
 msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
 "tunnels on this island, each consisting of a receiving and a sending end."
 msgstr "المُهَرِبون هى خريطة ممتعة من أجل 4 لاعبيين. أنت وصديقك تبدأون بعيداً عن بعضكم البعض على نقطة خريطة متماثلة. هناك الكثير من أنفاق التهريب فى هذه الجزيرة، كل منها تتألف من نهاية إستقبال وأرسال."
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:10
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:10
 msgid ""
 "To establish a smuggling route, you need to build a warehouse on a "
 "sending/receiving spot while your team mate has to build one on the "
@@ -70,33 +70,33 @@ msgid ""
 msgstr "لإنشاء طريق التهريب، أنت تحتاج أن تبنى مخزن في كل نقطة أرسال/أستقبال حينما يبنى صديقك واحداً أخر علي كل نقاط الأستقبال/الأرسال المقابلة. البضاعة يتم نقلها كل 10 ثواني."
 
 #. TRANSLATORS: %s = '<number> points'
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:12
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:12
 #, lua-format
 msgid ""
 "For harder to defend smuggling routes, you get 2 or 3 points per ware "
 "smuggled. The first team to collect %s wins."
 msgstr "بعدها ستُنقَل سلعه كل 10 ثوانى. كل سلعه مُهربة يحصل صاحبها على 2 نقطة او 3 نقاط. أول فريق يُحرز %s يفوز."
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:13
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:13
 msgid "A sending spot"
 msgstr "بُقعه إرسال"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:14
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:14
 msgid "A receiving spot"
 msgstr "بُقعه إستقبال"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:15
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:15
 msgid "Notes"
 msgstr "ملاحظات"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:16
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:16
 msgid ""
 "Remember that the map has rotational symmetry. For example, when you have "
 "found a spot to the top-left of your headquarters, the corresponding spot "
 "will be to the bottom-right of the headquarters of your team mate."
 msgstr "تذكر جيداً أن الخريطة دارت بشكل تناظرى بمعنى أنه مثلاً البُقعة التى كانت عند أعلى يسار مقرك الرئيسى سيتغير موقعها لتصبح فى البُقعة المقابلة لها وهو عند أسفل يمين المقر الرئيسى لزميلك فى الفريق."
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:17
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:17
 msgid ""
 "You can see the number of wares traded at any time in the general statistics"
 " menu. Good luck!"
@@ -104,14 +104,14 @@ msgstr "يمكنك رؤيه عدد السلع المتداولة فى اى وق�
 
 #. TRANSLATORS: the first 2 parameters are player names, the last parameter is
 #. '<number> points'
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:22
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:22
 msgid ""
 "A new smuggling route from %1$s to %2$s has been established! Every ware "
 "they smuggle there is worth %3$s."
 msgstr "طريق تهريب جديد من %1$s إلي %2$s قد اُنشئ! كل بضاعة تهرب من هنا تساوى %3$s."
 
 #. TRANSLATORS: %s = '<number> points'
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:26
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:26
 #, lua-format
 msgid ""
 "Your team has established a new smuggling route. You have the sending "
@@ -119,7 +119,7 @@ msgid ""
 msgstr "فريقك قد أنشئ طريق تهريب جديد. أنت لديك المخزن المُرسل. كل بضاعة تهرب من هنا تساوى %s."
 
 #. TRANSLATORS: %s = '<number> points'
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:30
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:30
 #, lua-format
 msgid ""
 "Your team has established a new smuggling route. You have the receiving "
@@ -128,17 +128,17 @@ msgstr "فريقك قد أنشئ طريق تهريب جديد. انت لديك �
 
 #. TRANSLATORS: the first parameter is '<number> points', the last 2
 #. parameters are player names
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:34
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:34
 msgid "The smuggling route worth %1$s from %2$s to %3$s has been broken!"
 msgstr "طريق التهريب يساوى %1$s من %2$s إلي %3$s قد دُمر!"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:37
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:37
 msgid "Game over!"
 msgstr "انتهت اللعبة!"
 
 #. TRANSLATORS: the first 4 parameters are player names, the last parameter is
 #. '<number> points'
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:39
+#: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:39
 msgid ""
 "Game over! %1$s and %2$s have won the game! %3$s and %4$s only managed to "
 "collect %5$s."
