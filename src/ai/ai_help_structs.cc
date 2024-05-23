@@ -640,6 +640,8 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 		case DnaParent::kSecondary:
 			set_military_number_at(i, AI_military_numbers_P2[i]);
 			break;
+	default:
+		NEVER_HERE();
 		}
 	}
 
@@ -661,6 +663,8 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 			persistent_data->neuron_weights.push_back(input_weights_P2[i]);
 			persistent_data->neuron_functs.push_back(input_func_P2[i]);
 			break;
+	default:
+		NEVER_HERE();
 		}
 	}
 
@@ -675,6 +679,8 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 		case DnaParent::kSecondary:
 			persistent_data->f_neurons.push_back(f_neurons_P2[i]);
 			break;
+	default:
+		NEVER_HERE();
 		}
 	}
 

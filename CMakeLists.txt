@@ -248,6 +248,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     # so we have to switch off the warning for one of them.
     # http://clang-developers.42468.n3.nabble.com/Question-on-Wswitch-enum-td4025927.html
     "-Wno-switch-enum"
+    "-Wno-covered-switch-default"
 
     # TODO(sirver: weak-vtables should be enabled, but leads to lot of errors right now.
     "-Wno-weak-vtables"
@@ -265,9 +266,6 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   endif()
   if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 16)
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-unsafe-buffer-usage")
-  endif()
-  if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 18)
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-switch-default")
   endif()
 elseif(MSVC)
   wl_add_flag(WL_GENERIC_CXX_FLAGS "/std:c++17")

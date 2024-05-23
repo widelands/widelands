@@ -97,8 +97,9 @@ bool FindNodeSize::accept(const EditorGameBase& egbase, const FCoords& coord) co
 	}
 	case sizeAny:
 		return true;
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 bool FindNodeTerraform::accept(const EditorGameBase& egbase, const FCoords& coord) const {
@@ -173,6 +174,8 @@ bool FindNodeResourceBreedable::accept(const EditorGameBase& egbase, const FCoor
 			return true;
 		}
 		break;
+	default:
+		NEVER_HERE();
 	}
 	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 		const FCoords neighb = egbase.map().get_neighbour(coord, dir);
@@ -188,6 +191,8 @@ bool FindNodeResourceBreedable::accept(const EditorGameBase& egbase, const FCoor
 					return true;
 				}
 				break;
+	default:
+		NEVER_HERE();
 			}
 		}
 	}

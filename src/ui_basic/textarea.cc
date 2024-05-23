@@ -172,6 +172,8 @@ void Textarea::collapse() {
 		break;
 	case UI::Align::kLeft:
 		break;
+	default:
+		NEVER_HERE();
 	}
 
 	set_pos(Vector2i(x, y));
@@ -199,6 +201,8 @@ void Textarea::expand() {
 		break;
 	case UI::Align::kLeft:
 		break;
+	default:
+		NEVER_HERE();
 	}
 
 	set_pos(Vector2i(x, y));

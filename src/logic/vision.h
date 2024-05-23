@@ -19,6 +19,8 @@
 #ifndef WL_LOGIC_VISION_H
 #define WL_LOGIC_VISION_H
 
+#include "base/wexception.h"
+
 namespace Widelands {
 
 enum class HideOrRevealFieldMode { kReveal, kUnreveal, kHide, kUnexplore };
@@ -60,6 +62,8 @@ public:
 			// kVisible initializes to the "visible by teammates" state
 			value_ = 2;
 			break;
+		default:
+			NEVER_HERE();
 		}
 		override_ = static_cast<uint8_t>(Override::kNoOverride);
 	}
@@ -75,6 +79,8 @@ public:
 			// kVisible initializes to the "visible by teammates" state
 			value_ = 2;
 			break;
+		default:
+			NEVER_HERE();
 		}
 		override_ = static_cast<uint8_t>(Override::kNoOverride);
 		return *this;

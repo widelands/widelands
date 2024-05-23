@@ -176,6 +176,8 @@ void WarehouseSupply::set_economy(Economy* const e, WareWorker type) {
 				}
 			}
 			break;
+	default:
+		NEVER_HERE();
 		}
 	}
 
@@ -197,6 +199,8 @@ void WarehouseSupply::set_economy(Economy* const e, WareWorker type) {
 				}
 			}
 			break;
+		default:
+			NEVER_HERE();
 		}
 		ec->add_supply(*this);
 	}

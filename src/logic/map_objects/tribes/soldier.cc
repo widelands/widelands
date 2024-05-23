@@ -431,8 +431,9 @@ uint32_t Soldier::get_level(TrainingAttribute const at) const {
 		return evade_level_;
 	case TrainingAttribute::kTotal:
 		return health_level_ + attack_level_ + defense_level_ + evade_level_;
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 int32_t Soldier::get_training_attribute(TrainingAttribute const attr) const {
@@ -447,8 +448,9 @@ int32_t Soldier::get_training_attribute(TrainingAttribute const attr) const {
 		return evade_level_;
 	case TrainingAttribute::kTotal:
 		return health_level_ + attack_level_ + defense_level_ + evade_level_;
-	}
+	default:
 	return Worker::get_training_attribute(attr);
+	}
 }
 
 unsigned Soldier::get_max_health() const {
@@ -540,6 +542,8 @@ Vector2f Soldier::calc_drawpos(const EditorGameBase& game,
 		break;
 	case CD_NONE:
 		break;
+	default:
+		NEVER_HERE();
 	}
 
 	if (moving) {
@@ -633,6 +637,9 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 		if (draw_health_bar) {
 			draw_position.y -= 5 * scale;
 		}
+		break;
+	default:
+		NEVER_HERE();
 	}
 
 	if (draw_health_bar) {
@@ -1350,6 +1357,7 @@ void Soldier::start_task_move_in_battle(Game& game, CombatWalkingDir dir) {
 	case CD_NONE:
 	case CD_COMBAT_E:
 	case CD_COMBAT_W:
+	default:
 		throw GameDataError("bad direction '%d'", dir);
 	}
 
@@ -1383,6 +1391,8 @@ void Soldier::move_in_battle_update(Game& game, State& /* state */) {
 		case CD_COMBAT_E:
 			combat_walking_ = CD_NONE;
 			break;
+	default:
+		NEVER_HERE();
 		}
 		return pop_task(game);
 	}

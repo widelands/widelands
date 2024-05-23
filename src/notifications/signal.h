@@ -78,6 +78,8 @@ public:
 		case SubscriberPosition::kFront:
 			all_subscribers_.emplace_front(s, callback);
 			break;
+		default:
+			NEVER_HERE();
 		}
 		return std::unique_ptr<SignalSubscriber>(s);
 	}

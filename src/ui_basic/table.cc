@@ -384,6 +384,8 @@ void BaseTable::draw(RenderTarget& dst) {
 				break;
 			case UI::Align::kLeft:
 				break;
+	default:
+		NEVER_HERE();
 			}
 
 			constexpr int kMargin = 1;

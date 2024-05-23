@@ -1409,8 +1409,9 @@ public:
 			SDL_SetClipboardText(target_.c_str());
 #endif
 			return true;
-		}
+	default:
 		NEVER_HERE();
+		}
 	}
 
 	[[nodiscard]] const std::string* get_tooltip(int32_t /* x */, int32_t /* y */) const override {
@@ -1743,6 +1744,8 @@ public:
 					break;
 				case UI::Align::kLeft:
 					break;
+	default:
+		NEVER_HERE();
 				}
 			}
 		}

@@ -23,6 +23,7 @@ wl_library(graphic_align
     align.cc
   DEPENDS
     base_geometry
+    base_exceptions
 )
 
 wl_library(graphic_color

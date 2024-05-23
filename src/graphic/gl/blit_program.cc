@@ -116,6 +116,9 @@ void BlitProgram::draw(const std::vector<Arguments>& arguments) {
 			case BlitMode::kBlendedWithMask:
 				program_flavor = 2.;
 				break;
+
+	default:
+		NEVER_HERE();
 			}
 
 			vertices_.emplace_back(current_args.destination_rect.x, current_args.destination_rect.y,

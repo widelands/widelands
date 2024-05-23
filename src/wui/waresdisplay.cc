@@ -370,8 +370,9 @@ const Widelands::TribeDescr::WaresOrder& AbstractWaresDisplay::icons_order() con
 		return tribe_.wares_order();
 	case Widelands::wwWORKER:
 		return tribe_.workers_order();
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 const WaresOrderCoords& AbstractWaresDisplay::icons_order_coords() const {

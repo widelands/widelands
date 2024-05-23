@@ -47,7 +47,7 @@ DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 		   case NoteMapObjectDescription::LoadType::kObject:
 			   load_description_on_demand(note.name, note.allow_failure);
 			   break;
-		   case NoteMapObjectDescription::LoadType::kAttribute:
+		   case NoteMapObjectDescription::LoadType::kAttribute: {
 			   auto it = registered_attributes_.find(note.name);
 			   if (it != registered_attributes_.end()) {
 				   for (const std::string& objectname : it->second) {
@@ -56,6 +56,9 @@ DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 				   registered_attributes_.erase(it);
 			   }
 			   break;
+			   }
+	default:
+		NEVER_HERE();
 		   }
 	   });
 }
@@ -157,6 +160,8 @@ void DescriptionManager::register_description(const std::string& description_nam
 			replace = true;
 		}
 		break;
+	default:
+		NEVER_HERE();
 	}
 
 	if (registered_descriptions_.count(description_name) == 1) {

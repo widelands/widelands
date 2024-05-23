@@ -186,8 +186,9 @@ ProductionProgram::ActReturn::Condition* create_economy_condition(
 			descr.worker_demand_checks()->insert(wareworker.second);
 			return new ProductionProgram::ActReturn::EconomyNeedsWorker(wareworker.second);
 		}
+		default:
+			NEVER_HERE();
 		}
-		NEVER_HERE();
 	} catch (const GameDataError& e) {
 		throw GameDataError("economy condition: %s", e.what());
 	}
@@ -779,7 +780,9 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 			// TODO(GunChleoc): Same as skipped - is this on purpose?
 			result_string = format(
 			   _("Skipped %1$s because %2$s"), ps.top_state().program->descname(), condition_string);
-		}
+		} break;
+		default:
+			NEVER_HERE();
 		}
 		if (ps.production_result() != ps.descr().out_of_resource_heading() ||
 		    ps.descr().out_of_resource_heading().empty()) {
@@ -924,6 +927,8 @@ void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
 		ps.program_timer_ = true;
 		ps.program_time_ = ps.schedule_act(game, Duration(10));
 		break;
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -1874,6 +1879,8 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 				break;
 			case TrainingAttribute::kTotal:
 				throw wexception("'total' training attribute can't be trained");
+			default:
+				NEVER_HERE();
 			}
 		} catch (...) {
 			throw wexception("Fail training soldier!!");

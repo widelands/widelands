@@ -56,6 +56,8 @@ template <typename AreaType = Area<>> struct MapDifferenceRegion {
 			DIRECTION_CASE(WALK_SW, get_bln)
 			DIRECTION_CASE(WALK_W, get_ln)
 #undef DIRECTION_CASE
+		default:
+			NEVER_HERE();
 		}
 		--direction;
 		if (direction == 0u) {

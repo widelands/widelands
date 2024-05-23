@@ -244,6 +244,8 @@ void Scrollbar::action(Area const area) {
 	case Area::Knob:
 	case Area::None:
 		return;
+	default:
+		NEVER_HERE();
 	}
 
 	pos = static_cast<int32_t>(pos_) + diff;

@@ -245,6 +245,8 @@ void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
 			// Make sure that the panels stop thinking first.
 			die();
 			break;
+	default:
+		NEVER_HERE();
 		}
 	}
 }
@@ -845,6 +847,8 @@ void EconomyOptionsWindow::read_targets() {
 					case Widelands::WareWorker::wwWORKER:
 						t.workers.insert(std::make_pair(wareworker.second, v->get_natural()));
 						break;
+	default:
+		NEVER_HERE();
 					}
 				} catch (const Widelands::GameDataError&) {
 					log_warn("Unknown ware or worker '%s' in economy profile '%s'", name.c_str(),
