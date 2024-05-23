@@ -773,13 +773,9 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 			   /** TRANSLATORS: "Completed working because the economy needs the ware '%s'" */
 			   _("Completed %1$s because %2$s"), ps.top_state().program->descname(), condition_string);
 		} break;
-		case ProgramResult::kSkipped: {
-			result_string = format(
-			   /** TRANSLATORS: "Skipped working because the economy needs the ware '%s'" */
-			   _("Skipped %1$s because %2$s"), ps.top_state().program->descname(), condition_string);
-		} break;
+		case ProgramResult::kSkipped:
 		case ProgramResult::kNone: {
-			// TODO(GunChleoc): Same as skipped - is this on purpose?
+			// TODO(GunChleoc): kNone same as kSkipped - is this on purpose?
 			result_string = format(
 			   _("Skipped %1$s because %2$s"), ps.top_state().program->descname(), condition_string);
 		} break;
