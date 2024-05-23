@@ -119,7 +119,7 @@ LanBase::LanBase(uint16_t port) : socket_v4(io_service), socket_v6(io_service) {
 			// No address to store here. There is only one "broadcast" address for IPv6
 			break;
 		default:
-			NEVER_HERE();
+			break;
 		}
 	}
 	freeifaddrs(ifaddr);
