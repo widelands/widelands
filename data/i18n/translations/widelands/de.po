@@ -1007,7 +1007,7 @@ msgstr "Beschreibung: %s"
 #: ../../src/editor/ui_menus/field_info_window.cc:251
 msgctxt "addons"
 msgid "(none)"
-msgstr ""
+msgstr "(keine)"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:258
 #, c-format
@@ -1357,19 +1357,19 @@ msgstr "Karten-ID:"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:257
 msgctxt "map_generator"
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 #. * TRANSLATORS: Random Climate
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:285
 msgctxt "climate"
 msgid "Random"
-msgstr ""
+msgstr "Zufällig"
 
 #. * TRANSLATORS: Default Terrain Distribution
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:316
 msgctxt "terrain"
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:318
 msgid "Alpine"
@@ -1389,7 +1389,7 @@ msgstr "Ödland"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:322
 msgctxt "terrain"
 msgid "Random"
-msgstr ""
+msgstr "Zufällig"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:630
 msgid "Generating random map…"
@@ -3352,7 +3352,7 @@ msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was reachable at the TCP port %u or the server shut down as"
 " you tried to connect."
-msgstr ""
+msgstr "Widelands konnte keine Verbindung zu der angegebenen Adresse erstellen. Entweder es war kein Widelandsserver am TCP-Port %u erreichbar, oder der Server wurde gerade geschlossen, als du dich anmelden wolltest."
 
 #: ../../src/network/gameclient.cc:816
 #, c-format
@@ -4221,11 +4221,11 @@ msgstr "%1$s<br>(%2$s)"
 
 #: ../../src/ui_basic/textinput.cc:374
 msgid "Cut"
-msgstr ""
+msgstr "Ausschneiden"
 
 #: ../../src/ui_basic/textinput.cc:374
 msgid "Cut the selected text to the clipboard"
-msgstr ""
+msgstr "Schneide den markierten Text in die Zwischenablage aus"
 
 #: ../../src/ui_basic/textinput.cc:377 ../../src/ui_fsmenu/tech_info.cc:238
 msgid "Copy"
@@ -4233,19 +4233,19 @@ msgstr "Kopieren"
 
 #: ../../src/ui_basic/textinput.cc:377
 msgid "Copy the selected text to the clipboard"
-msgstr ""
+msgstr "Kopiere den markierten Text in die Zwischenablage"
 
 #: ../../src/ui_basic/textinput.cc:380
 msgid "Paste"
-msgstr ""
+msgstr "Einfügen"
 
 #: ../../src/ui_basic/textinput.cc:380
 msgid "Paste the clipboard content"
-msgstr ""
+msgstr "Füge den Inhalt der Zwischenablage ein"
 
 #: ../../src/ui_basic/textinput.cc:383
 msgid "Delete the selected text"
-msgstr ""
+msgstr "Lösche den ausgewählten Text"
 
 #: ../../src/ui_basic/textinput.cc:386 ../../src/wlapplication_options.cc:383
 msgid "Select All"
@@ -4253,7 +4253,7 @@ msgstr "Alles auswählen"
 
 #: ../../src/ui_basic/textinput.cc:386
 msgid "Select the entire text"
-msgstr ""
+msgstr "Wähle den gesamten Text aus"
 
 #: ../../src/ui_basic/window.cc:101 ../../src/ui_basic/window.cc:862
 #: ../../src/ui_fsmenu/about.cc:41 ../../src/ui_fsmenu/crash_report.cc:71
@@ -4282,23 +4282,23 @@ msgstr "Lösen"
 
 #: ../../src/ui_basic/window.cc:847
 msgid "Minimize the window"
-msgstr ""
+msgstr "Fenster minimieren"
 
 #: ../../src/ui_basic/window.cc:847
 msgid "Unminimize the window"
-msgstr ""
+msgstr "Fenster wiederherstellen"
 
 #: ../../src/ui_basic/window.cc:857
 msgid "Pin the window"
-msgstr ""
+msgstr "Fenster festsetzen"
 
 #: ../../src/ui_basic/window.cc:857
 msgid "Unpin the window"
-msgstr ""
+msgstr "Fenster loslösen"
 
 #: ../../src/ui_basic/window.cc:862
 msgid "Close the window"
-msgstr ""
+msgstr "Fenster schließen"
 
 #: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:515
 msgid "About Widelands"
@@ -5221,7 +5221,7 @@ msgstr "Minimale Widelands Version: %s"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:295
 msgctxt "version"
 msgid "(none)"
-msgstr ""
+msgstr "(keine)"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:325
 msgid "Top-level directory"
@@ -5836,7 +5836,7 @@ msgstr "Kampagnenname"
 #: ../../src/ui_fsmenu/campaigns.cc:45
 msgctxt "difficulty"
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 #: ../../src/ui_fsmenu/crash_report.cc:44
 msgid "Crash Report Details"
@@ -7761,7 +7761,7 @@ msgstr "Stammeslexikon"
 
 #: ../../src/wlapplication_options.cc:367
 msgid "Context Menu"
-msgstr ""
+msgstr "Kontextmenü"
 
 #: ../../src/wlapplication_options.cc:371
 msgid "Cut Text"
@@ -8304,7 +8304,7 @@ msgstr "Menü"
 #: ../../src/wlapplication_options.cc:1425
 msgctxt "hotkey"
 msgid "Application"
-msgstr ""
+msgstr "Anwendung"
 
 #: ../../src/wlapplication_options.cc:1427
 msgctxt "hotkey"
@@ -9767,7 +9767,7 @@ msgstr "Steuerungselemente anzeigen"
 #: ../../src/wui/inputqueuedisplay.cc:683
 #, c-format
 msgid "+%u"
-msgstr ""
+msgstr "+%u"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../src/wui/interactive_base.cc:144
@@ -10799,7 +10799,7 @@ msgstr "Diese Expedition kann nicht abgebrochen werden, weil das Schiff keinen H
 #: ../../src/wui/shipwindow.cc:362
 msgctxt "destination"
 msgid "(none)"
-msgstr ""
+msgstr "(keine)"
 
 #: ../../src/wui/shipwindow.cc:429 ../../src/wui/shipwindow.cc:434
 #: ../../src/wui/shipwindow.cc:439

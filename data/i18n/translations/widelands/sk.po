@@ -3953,25 +3953,25 @@ msgstr "Výber farby…"
 
 #: ../../src/ui_basic/color_chooser.cc:290
 msgid "Initial Color"
-msgstr ""
+msgstr "Posledná farba"
 
 #. * TRANSLATORS: First letter of the word "Red"
 #: ../../src/ui_basic/color_chooser.cc:299
 msgctxt "color"
 msgid "R"
-msgstr ""
+msgstr "Č"
 
 #. * TRANSLATORS: First letter of the word "Green"
 #: ../../src/ui_basic/color_chooser.cc:308
 msgctxt "color"
 msgid "G"
-msgstr ""
+msgstr "Z"
 
 #. * TRANSLATORS: First letter of the word "Blue"
 #: ../../src/ui_basic/color_chooser.cc:317
 msgctxt "color"
 msgid "B"
-msgstr ""
+msgstr "M"
 
 #: ../../src/ui_basic/color_chooser.cc:327
 msgid "Default Color"
@@ -3979,30 +3979,30 @@ msgstr "Predvolená farba"
 
 #: ../../src/ui_basic/color_chooser.cc:339
 msgid "Red"
-msgstr ""
+msgstr "Červená"
 
 #: ../../src/ui_basic/color_chooser.cc:352
 msgid "Green"
-msgstr ""
+msgstr "Zelená"
 
 #: ../../src/ui_basic/color_chooser.cc:365
 msgid "Blue"
-msgstr ""
+msgstr "Modrá"
 
 #: ../../src/ui_basic/color_chooser.cc:484
 msgid "Remove from favorites"
-msgstr ""
+msgstr "Odobrať z obľúbených"
 
 #: ../../src/ui_basic/color_chooser.cc:484
 #: ../../src/ui_fsmenu/addons/packager.cc:109
 #: ../../src/ui_fsmenu/addons/packager_box.cc:171
 #: ../../src/wui/quicknavigation.cc:286
 msgid "–"
-msgstr ""
+msgstr "–"
 
 #: ../../src/ui_basic/color_chooser.cc:491
 msgid "Add current color to favorites"
-msgstr ""
+msgstr "Pridať aktuálnu farbu k obľúbeným"
 
 #: ../../src/ui_basic/dropdown.cc:111
 msgctxt "dropdown"
@@ -4247,7 +4247,7 @@ msgstr "%1$s<br>(%2$s)"
 
 #: ../../src/ui_basic/textinput.cc:374
 msgid "Cut"
-msgstr ""
+msgstr "Vystrihnúť"
 
 #: ../../src/ui_basic/textinput.cc:374
 msgid "Cut the selected text to the clipboard"
@@ -4263,7 +4263,7 @@ msgstr ""
 
 #: ../../src/ui_basic/textinput.cc:380
 msgid "Paste"
-msgstr ""
+msgstr "Vložiť"
 
 #: ../../src/ui_basic/textinput.cc:380
 msgid "Paste the clipboard content"
@@ -6041,7 +6041,7 @@ msgstr "Obnoviť do predvolených nastavení"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:74
 msgid "Press the new shortcut or close this window to cancel."
-msgstr ""
+msgstr "Stlačte novú klávesovú skratku alebo zrušte akciu zatvorením tohto okna."
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:133
 msgid "(unused)"
@@ -7811,7 +7811,7 @@ msgstr "Encyklopédia"
 
 #: ../../src/wlapplication_options.cc:367
 msgid "Context Menu"
-msgstr ""
+msgstr "Kontextové menu"
 
 #: ../../src/wlapplication_options.cc:371
 msgid "Cut Text"
@@ -8020,27 +8020,27 @@ msgstr "Námorná štatistika"
 
 #: ../../src/wlapplication_options.cc:683
 msgid "Decrease Game Speed by 1×"
-msgstr ""
+msgstr "Znížiť násobok rýchlosti hry o 1"
 
 #: ../../src/wlapplication_options.cc:688
 msgid "Decrease Game Speed by 0.25×"
-msgstr ""
+msgstr "Znížiť násobok rýchlosti hry o 0,25"
 
 #: ../../src/wlapplication_options.cc:693
 msgid "Decrease Game Speed by 10×"
-msgstr ""
+msgstr "Znížiť násobok rýchlosti hry o 10"
 
 #: ../../src/wlapplication_options.cc:698
 msgid "Increase Game Speed by 1×"
-msgstr ""
+msgstr "Zvýšiť násobok rýchlosti hry o 1"
 
 #: ../../src/wlapplication_options.cc:703
 msgid "Increase Game Speed by 0.25×"
-msgstr ""
+msgstr "Zvýšiť násobok rýchlosti hry o 0,25"
 
 #: ../../src/wlapplication_options.cc:708
 msgid "Increase Game Speed by 10×"
-msgstr ""
+msgstr "Zvýšiť násobok rýchlosti hry o 10"
 
 #: ../../src/wlapplication_options.cc:712
 msgid "Reset Game Speed"

@@ -4192,11 +4192,11 @@ msgstr "%1$s<br>(%2$s)"
 
 #: ../../src/ui_basic/textinput.cc:374
 msgid "Cut"
-msgstr ""
+msgstr "Retalla"
 
 #: ../../src/ui_basic/textinput.cc:374
 msgid "Cut the selected text to the clipboard"
-msgstr ""
+msgstr "Retalla el text seleccionat al porta-retalls."
 
 #: ../../src/ui_basic/textinput.cc:377 ../../src/ui_fsmenu/tech_info.cc:238
 msgid "Copy"
@@ -4204,19 +4204,19 @@ msgstr "Copia"
 
 #: ../../src/ui_basic/textinput.cc:377
 msgid "Copy the selected text to the clipboard"
-msgstr ""
+msgstr "Copia el text seleccionat al porta-retalls"
 
 #: ../../src/ui_basic/textinput.cc:380
 msgid "Paste"
-msgstr ""
+msgstr "Enganxa"
 
 #: ../../src/ui_basic/textinput.cc:380
 msgid "Paste the clipboard content"
-msgstr ""
+msgstr "Enganxa el contingut del porta-retalls."
 
 #: ../../src/ui_basic/textinput.cc:383
 msgid "Delete the selected text"
-msgstr ""
+msgstr "Esborra el text seleccionat"
 
 #: ../../src/ui_basic/textinput.cc:386 ../../src/wlapplication_options.cc:383
 msgid "Select All"
@@ -4224,7 +4224,7 @@ msgstr "Selecciona-ho tot"
 
 #: ../../src/ui_basic/textinput.cc:386
 msgid "Select the entire text"
-msgstr ""
+msgstr "Selecciona tot el text"
 
 #: ../../src/ui_basic/window.cc:101 ../../src/ui_basic/window.cc:862
 #: ../../src/ui_fsmenu/about.cc:41 ../../src/ui_fsmenu/crash_report.cc:71
@@ -4253,23 +4253,23 @@ msgstr "Desenganxa"
 
 #: ../../src/ui_basic/window.cc:847
 msgid "Minimize the window"
-msgstr ""
+msgstr "Minimitza la finestra"
 
 #: ../../src/ui_basic/window.cc:847
 msgid "Unminimize the window"
-msgstr ""
+msgstr "Desplega la finestra"
 
 #: ../../src/ui_basic/window.cc:857
 msgid "Pin the window"
-msgstr ""
+msgstr "Fixa la finestra"
 
 #: ../../src/ui_basic/window.cc:857
 msgid "Unpin the window"
-msgstr ""
+msgstr "Desfixa la finestra"
 
 #: ../../src/ui_basic/window.cc:862
 msgid "Close the window"
-msgstr ""
+msgstr "Tanca la finestra"
 
 #: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:515
 msgid "About Widelands"
@@ -7732,7 +7732,7 @@ msgstr "Enciclopèdia"
 
 #: ../../src/wlapplication_options.cc:367
 msgid "Context Menu"
-msgstr ""
+msgstr "Menú contextual"
 
 #: ../../src/wlapplication_options.cc:371
 msgid "Cut Text"
@@ -8275,7 +8275,7 @@ msgstr "Menú"
 #: ../../src/wlapplication_options.cc:1425
 msgctxt "hotkey"
 msgid "Application"
-msgstr ""
+msgstr "Aplicació"
 
 #: ../../src/wlapplication_options.cc:1427
 msgctxt "hotkey"

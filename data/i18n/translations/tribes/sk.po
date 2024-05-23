@@ -1156,7 +1156,7 @@ msgstr "Miesto rozoberania"
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:8
 msgctxt "amazons_building"
 msgid "Cassava Plantation"
-msgstr ""
+msgstr "Manioková plantáž"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:41
@@ -1286,7 +1286,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
 msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
-msgstr ""
+msgstr "Manioková kuchyňa"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
@@ -1300,7 +1300,7 @@ msgstr "pečenie chleba"
 #: ../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:8
 msgctxt "amazons_building"
 msgid "Charcoal Kiln"
-msgstr ""
+msgstr "Uhliarska pec"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing charcoal because ...
 #: ../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:50
@@ -1322,7 +1322,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:8
 msgctxt "amazons_building"
 msgid "Cocoa Farm"
-msgstr ""
+msgstr "Kakaovníková plantáž"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:55
@@ -1407,7 +1407,7 @@ msgstr "Trajektový dvor"
 #: ../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:8
 msgctxt "amazons_building"
 msgid "Food Preserver"
-msgstr ""
+msgstr "Prípravovňa jedál"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #: ../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:60
@@ -1424,7 +1424,7 @@ msgstr "pripravovanie prídelu"
 #: ../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:8
 msgctxt "amazons_building"
 msgid "Furnace"
-msgstr ""
+msgstr "Pec"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
 #: ../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:59
@@ -1439,7 +1439,7 @@ msgstr "tavenie zlata"
 #: ../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:8
 msgctxt "amazons_building"
 msgid "Gardening Center"
-msgstr ""
+msgstr "Záhradné centrum"
 
 #. TRANSLATORS: Completed/Skipped/Did not start enhancing the fertility of
 #. land because ...
@@ -1452,7 +1452,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:8
 msgctxt "amazons_building"
 msgid "Gold Digger Dwelling"
-msgstr ""
+msgstr "Obydlie zlatokopky"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
 #: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:52
@@ -3575,11 +3575,11 @@ msgstr "Vodná farma"
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:94
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:94
 msgid "No Ponds"
-msgstr "Došli rybníky"
+msgstr "Došli nádrže"
 
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:95
 msgid "Out of Fish Ponds"
-msgstr "Došli rybníky"
+msgstr "Došli nádrže s rybami"
 
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:96
 msgctxt "frisians_building"
@@ -3588,7 +3588,7 @@ msgid ""
 "area. Please make sure there is a working clay pit nearby and the aqua farm "
 "is supplied with all needed wares, or consider dismantling or destroying "
 "this building."
-msgstr "Rybár pracujúci v tejto vodnej farme nedokáže vo svojej pracovnej oblasti nájsť žiadne ryby. Prosím uistite sa, že v okolí sa nachádza funkčná jama na hlinu a vodná farma je zásobená všetkým potrebným, prípadne uvažujte nad rozobratím alebo zničením tejto budovy."
+msgstr "Rybár pracujúci v tejto vodnej farme nedokáže vo svojej pracovnej oblasti nájsť žiadne nádrže s rybami. Prosím uistite sa, že v okolí sa nachádza funkčná jama na hlinu a vodná farma je zásobená všetkým potrebným, prípadne uvažujte nad rozobratím alebo zničením tejto budovy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:8
@@ -5087,19 +5087,19 @@ msgstr "Nádrž uhlia"
 #: ../../data/tribes/immovables/pond/dry/init.lua:8
 msgctxt "immovable"
 msgid "Dry Pond"
-msgstr "Suchý rybník"
+msgstr "Suchá nádrž"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/growing/init.lua:8
 msgctxt "immovable"
 msgid "Pond With Fish Spawn"
-msgstr "Rybník s trejúcimi sa rybami"
+msgstr "Nádrž s trejúcimi sa rybami"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/mature/init.lua:8
 msgctxt "immovable"
 msgid "Pond With Fish"
-msgstr "Rybník s rybami"
+msgstr "Nádrž s rybami"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reedfield/medium/init.lua:8
@@ -5325,7 +5325,7 @@ msgstr ""
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr ""
+msgstr "Mŕtvy strom"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/mature/black/init.lua:11
@@ -7327,7 +7327,7 @@ msgstr ""
 #: ../../data/tribes/ships/barbarians/init.lua:55
 msgctxt "shipname"
 msgid "Chat’Karuth"
-msgstr ""
+msgstr "Chat’Karuth"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:57
