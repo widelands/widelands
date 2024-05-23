@@ -314,8 +314,8 @@ bool Slider::handle_key(bool down, SDL_Keysym code) {
 		case ChangeType::kSetMin:
 			set_value(0);
 			return true;
-	default:
-		NEVER_HERE();
+		default:
+			NEVER_HERE();
 		}
 
 		int32_t num = -1;

@@ -135,8 +135,8 @@ private:
 			return RGBColor(val1, texture_cache_g_, val2);
 		case ColorAttribute::kBlue:
 			return RGBColor(val1, val2, texture_cache_b_);
-	default:
-		NEVER_HERE();
+		default:
+			NEVER_HERE();
 		}
 	}
 	RGBColor right_color(const uint16_t val) const {

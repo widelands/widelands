@@ -56,9 +56,9 @@ DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 				   registered_attributes_.erase(it);
 			   }
 			   break;
-			   }
-	default:
-		NEVER_HERE();
+		   }
+		   default:
+			   NEVER_HERE();
 		   }
 	   });
 }

@@ -276,8 +276,8 @@ bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 		case ChangeType::kSetMin:
 			set_value(sbi_->min);
 			return true;
-	default:
-		NEVER_HERE();
+		default:
+			NEVER_HERE();
 		}
 	}
 	return Panel::handle_key(down, code);

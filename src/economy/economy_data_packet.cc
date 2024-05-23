@@ -118,8 +118,8 @@ void EconomyDataPacket::read(FileRead& fr) {
 							         type_name, tribe.name().c_str());
 						}
 						break;
-	default:
-		NEVER_HERE();
+					default:
+						NEVER_HERE();
 					}
 				}
 			} catch (const WException& e) {

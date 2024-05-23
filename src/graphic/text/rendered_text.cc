@@ -265,8 +265,8 @@ void RenderedText::blit_rect(RenderTarget& dst,
 		case RenderedRect::DrawMode::kTile:
 			dst.tile(Recti(blit_point, rect.width(), rect.height()), rect.image(), Vector2i::zero());
 			break;
-	default:
-		NEVER_HERE();
+		default:
+			NEVER_HERE();
 		}
 	}
 }

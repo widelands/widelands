@@ -124,9 +124,9 @@ void ExpeditionBootstrap::cancel(Game& game) {
 				warehouse->incorporate_worker(game, wq.extract_worker());
 			}
 			break;
-			}
-	default:
-		NEVER_HERE();
+		}
+		default:
+			NEVER_HERE();
 		}
 		iq.first->cleanup();
 	}
@@ -276,8 +276,8 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares(Game& game,
 			}
 			break;
 		}
-	default:
-		NEVER_HERE();
+		default:
+			NEVER_HERE();
 		}
 	}
 

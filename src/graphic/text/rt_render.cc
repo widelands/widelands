@@ -1409,8 +1409,8 @@ public:
 			SDL_SetClipboardText(target_.c_str());
 #endif
 			return true;
-	default:
-		NEVER_HERE();
+		default:
+			NEVER_HERE();
 		}
 	}
 
@@ -1744,8 +1744,8 @@ public:
 					break;
 				case UI::Align::kLeft:
 					break;
-	default:
-		NEVER_HERE();
+				default:
+					NEVER_HERE();
 				}
 			}
 		}

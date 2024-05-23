@@ -245,8 +245,8 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 			   case Widelands::NoteShip::Action::kLost:
 				   remove_ship(note.ship->serial());
 				   return;
-	default:
-		NEVER_HERE();
+			   default:
+				   NEVER_HERE();
 			   }
 		   }
 	   });
@@ -347,12 +347,12 @@ SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 			case Widelands::ShipStates::kSinkAnimation:
 				status = ShipFilterStatus::kAll;
 				break;
-	default:
-		NEVER_HERE();
+			default:
+				NEVER_HERE();
 			}
 			break;
-	default:
-		NEVER_HERE();
+		default:
+			NEVER_HERE();
 		}
 	}
 	return std::unique_ptr<const ShipInfo>(new ShipInfo(ship.get_shipname(), status, ship.serial()));

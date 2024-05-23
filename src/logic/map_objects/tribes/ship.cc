@@ -1270,8 +1270,8 @@ void Ship::warship_command(Game& game,
 		}
 		return;
 
-default:
-	throw wexception("Invalid warship command %d", static_cast<int>(cmd));
+	default:
+		throw wexception("Invalid warship command %d", static_cast<int>(cmd));
 	}
 }
 
@@ -1949,7 +1949,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 	case ShipStates::kSinkRequest:
 	case ShipStates::kSinkAnimation:
 	default:
-	NEVER_HERE();
+		NEVER_HERE();
 	}
 }
 
@@ -2402,8 +2402,8 @@ void Ship::draw(const EditorGameBase& egbase,
 			case ShipType::kWarship:
 				statistics_string = pgettext("ship_state", "Refitting to Warship");
 				break;
-	default:
-		NEVER_HERE();
+			default:
+				NEVER_HERE();
 			}
 		} else {
 			if (ship_type_ == ShipType::kWarship) {
@@ -2469,8 +2469,8 @@ void Ship::draw(const EditorGameBase& egbase,
 				case (ShipStates::kSinkRequest):
 				case (ShipStates::kSinkAnimation):
 					break;
-	default:
-		NEVER_HERE();
+				default:
+					NEVER_HERE();
 				}
 			}
 		}

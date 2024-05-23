@@ -236,8 +236,8 @@ void GameSummaryScreen::fill_data() {
 			/** TRANSLATORS: if the player has lost or won. */
 			stat_str = pgettext("player_won", "Unknown");
 			break;
-	default:
-		NEVER_HERE();
+		default:
+			NEVER_HERE();
 		}
 		te.set_string(2, stat_str);
 		// Time

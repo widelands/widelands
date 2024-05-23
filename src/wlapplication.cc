@@ -1071,14 +1071,15 @@ void WLApplication::handle_input(InputCallback const* cb) {
 			case SDL_WINDOWEVENT_RESTORED:
 				set_config_bool("maximized", g_gr->maximized());
 				break;
-	default:
-		break;
+			default:
+				break;
 			}
 			break;
 		case SDL_QUIT:
 			should_die_ = true;
 			break;
-		default: break;
+		default:
+			break;
 		}
 	}
 

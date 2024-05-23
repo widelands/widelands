@@ -449,7 +449,7 @@ int32_t Soldier::get_training_attribute(TrainingAttribute const attr) const {
 	case TrainingAttribute::kTotal:
 		return health_level_ + attack_level_ + defense_level_ + evade_level_;
 	default:
-	return Worker::get_training_attribute(attr);
+		return Worker::get_training_attribute(attr);
 	}
 }
 
@@ -1391,8 +1391,8 @@ void Soldier::move_in_battle_update(Game& game, State& /* state */) {
 		case CD_COMBAT_E:
 			combat_walking_ = CD_NONE;
 			break;
-	default:
-		NEVER_HERE();
+		default:
+			NEVER_HERE();
 		}
 		return pop_task(game);
 	}

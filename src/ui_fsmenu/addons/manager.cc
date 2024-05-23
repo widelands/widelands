@@ -1120,8 +1120,8 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 				} else {
 					return a->average_rating() > b->average_rating();
 				}
-	default:
-		NEVER_HERE();
+			default:
+				NEVER_HERE();
 			}
 		});
 	}

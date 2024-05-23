@@ -127,8 +127,8 @@ void RouteAStar<Est_>::push(RoutingNode& node, int32_t cost, RoutingNode* backli
 			open_.decrease_key(&node);
 		}
 	} break;
-		default:
-			NEVER_HERE();
+	default:
+		NEVER_HERE();
 	}
 }
 

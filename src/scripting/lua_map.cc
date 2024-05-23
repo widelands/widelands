@@ -7115,8 +7115,8 @@ int LuaShip::get_state(lua_State* L) {
 		case Widelands::ShipStates::kSinkAnimation:
 			lua_pushstring(L, "sink_animation");
 			break;
-	default:
-		NEVER_HERE();
+		default:
+			NEVER_HERE();
 		}
 		return 1;
 	}
@@ -7170,8 +7170,8 @@ int LuaShip::get_scouting_direction(lua_State* L) {
 			break;
 		case Widelands::WalkingDir::IDLE:
 			return 0;
-	default:
-		NEVER_HERE();
+		default:
+			NEVER_HERE();
 		}
 		return 1;
 	}
@@ -7224,8 +7224,8 @@ int LuaShip::get_island_explore_direction(lua_State* L) {
 			break;
 		case Widelands::IslandExploreDirection::kNotSet:
 			return 0;
-	default:
-		NEVER_HERE();
+		default:
+			NEVER_HERE();
 		}
 		return 1;
 	}

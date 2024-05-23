@@ -365,8 +365,8 @@ uint32_t PortDock::count_waiting(WareWorker waretype, DescriptionIndex wareindex
 				count++;
 			}
 			break;
-	default:
-		NEVER_HERE();
+		default:
+			NEVER_HERE();
 		}
 	}
 

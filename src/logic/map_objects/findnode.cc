@@ -191,8 +191,8 @@ bool FindNodeResourceBreedable::accept(const EditorGameBase& egbase, const FCoor
 					return true;
 				}
 				break;
-	default:
-		NEVER_HERE();
+			default:
+				NEVER_HERE();
 			}
 		}
 	}

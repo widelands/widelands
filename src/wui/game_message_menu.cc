@@ -448,8 +448,8 @@ void GameMessageMenu::archive_or_restore() {
 			game.send_player_command(new Widelands::CmdMessageSetStatusRead(
 			   game.get_gametime(), plnum, MessageId(selected_record)));
 			break;
-	default:
-		NEVER_HERE();
+		default:
+			NEVER_HERE();
 		}
 	}
 }

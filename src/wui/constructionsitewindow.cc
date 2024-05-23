@@ -593,8 +593,8 @@ bool ConstructionSoldierCapacityBox::handle_key(bool down, SDL_Keysym code) {
 		case ChangeType::kSetMin:
 			set_current(min_);
 			return true;
-	default:
-		NEVER_HERE();
+		default:
+			NEVER_HERE();
 		}
 	}
 	return UI::Box::handle_key(down, code);

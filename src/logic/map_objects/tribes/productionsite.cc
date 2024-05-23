@@ -154,8 +154,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 					}
 					input_workers_.emplace_back(wareworker.second, amount);
 				} break;
-	default:
-		NEVER_HERE();
+				default:
+					NEVER_HERE();
 				}
 			} catch (const std::exception& e) {
 				throw GameDataError(
