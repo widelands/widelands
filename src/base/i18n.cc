@@ -235,6 +235,10 @@ const std::string& get_addon_locale_dir() {
 	return canonical_addon_locale_dir;
 }
 
+static inline std::string textdomain_cache_key(const std::string& domain, const std::string& ldir) {
+	return ldir + "/" + domain;
+}
+
 GenericTextdomain::GenericTextdomain() : lock_(MutexLock::ID::kI18N) {
 }
 GenericTextdomain::~GenericTextdomain() {
@@ -243,10 +247,13 @@ GenericTextdomain::~GenericTextdomain() {
 Textdomain::Textdomain(const std::string& name) {
 	grab_textdomain(name, get_localedir());
 }
-AddOnTextdomain::AddOnTextdomain(std::string addon, const int i18n_version) {
-	addon += '.';
-	addon += std::to_string(i18n_version);
+AddOnTextdomain::AddOnTextdomain(const std::string& addon) {
 	grab_textdomain(addon, get_addon_locale_dir());
+}
+
+void clear_addon_translations_cache(const std::string& addon) {
+	MutexLock m(MutexLock::ID::kI18N);
+	g_dictionary_cache.erase(textdomain_cache_key(addon, get_addon_locale_dir()));
 }
 
 /**
@@ -259,7 +266,7 @@ AddOnTextdomain::AddOnTextdomain(std::string addon, const int i18n_version) {
  */
 void grab_textdomain(const std::string& domain, const std::string& ldir) {
 	log_i18n_if_desired_("textdomain", (domain + " @ " + ldir).c_str());
-	textdomains.emplace_back(new TextdomainStackEntry(ldir + "/" + domain));
+	textdomains.emplace_back(new TextdomainStackEntry(textdomain_cache_key(domain, ldir)));
 }
 
 /**
