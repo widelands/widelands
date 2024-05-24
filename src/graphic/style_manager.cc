@@ -26,6 +26,7 @@
 #include "base/wexception.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
+#include "graphic/render_queue.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_interface.h"
 
@@ -81,6 +82,8 @@ void set_template_dir(std::string dir) {
 			default_style = g_style_manager;
 		}
 	}
+
+	RenderQueue::instance().set_dither_mask(resolve_template_image_filename("world/pics/edge.png"));
 }
 
 std::string resolve_template_image_filename(const std::string& path) {
