@@ -29,6 +29,7 @@
 #include "economy/road.h"
 #include "economy/waterway.h"
 #include "graphic/color.h"
+#include "graphic/mouse_cursor.h"
 #include "graphic/road_segments.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
@@ -350,6 +351,7 @@ UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::stri
                                                      bool crop,
                                                      UI::Panel* parent) {
 	assert(!has_loader_ui());
+	g_mouse_cursor->change_wait(true);  // Panel::do_run() will disable it
 	loader_ui_.reset(new UI::ProgressWindow(parent, theme, background, crop));
 	registered_game_tips_ = tipstexts;
 	if (show_game_tips) {

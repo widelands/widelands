@@ -29,6 +29,7 @@
 #include <regex>
 
 #include <SDL.h>
+#include <SDL_mouse.h>
 #include <SDL_ttf.h>
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
@@ -407,8 +408,9 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		exit(2);
 	}
 
-	// Hide the mouse cursor until the user can actually interact with the window
-	SDL_ShowCursor(SDL_DISABLE);
+	// Use system's "waiting" mouse cursor
+	SDL_Cursor* tmp_cursor = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_WAIT);
+	SDL_SetCursor(tmp_cursor);
 
 	// Start intro music before splashscreen: it takes slightly less time,
 	// and the music starts with some delay
@@ -476,6 +478,23 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// This is one of the slowest parts of the start up.
 	g_gr->rebuild_texture_atlas();
 
+	// Keep cursor in window while dragging
+	SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
+
+	g_mouse_cursor = new MouseCursor();
+	g_mouse_cursor->initialize(get_config_bool("sdl_cursor", true));
+
+	// There's still some more time after this constructor finishes before the user can
+	// actually skip the splash screen, so we change the cursor to an hourglass until then.
+	g_mouse_cursor->change_wait(true);
+	// It's restored by the event loop in Panel::do_run() when it starts to work
+
+	SDL_FreeCursor(tmp_cursor);
+	// TODO(tothxa): In soft-cursor mode the SDL mouse cursor is disabled after
+	//               g_mouse_cursor->initialize(), but cursor drawing doesn't work
+	//               until we start refreshing the screen, so the cursor disappears.
+	//               It would be nice to delay disabling the SDL cursor until then.
+
 	// Try to detect configurations with inverted horizontal scroll
 	SDL_version sdl_ver = {SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL};
 	SDL_GetVersion(&sdl_ver);
@@ -497,17 +516,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		set_mousewheel_option_bool(MousewheelOptionID::kInvertedXDetected, true);
 		update_mousewheel_settings();
 	}
-
-	// Keep cursor in window while dragging
-	SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
-
-	g_mouse_cursor = new MouseCursor();
-	g_mouse_cursor->initialize(get_config_bool("sdl_cursor", true));
-
-	// There's still some more time after this constructor finishes before the user can
-	// actually skip the splash screen
-	g_mouse_cursor->set_visible(false);
-	// It's re-enabled by the event loop in Panel::do_run() when it starts to work
 
 	verb_log_info("Cleaning up temporary files");
 	cleanup_replays();

@@ -367,12 +367,9 @@ int Panel::do_run() {
 	// TODO(sirver): the main loop should not be in UI, but in WLApplication.
 	WLApplication& app = WLApplication::get();
 	ModalGuard prevmodal(*this);
-	mousegrab_ = nullptr;       // good ol' paranoia
-	app.set_mouse_lock(false);  // more paranoia :-)
-	if (!g_mouse_cursor->is_using_sdl()) {
-		// app.set_mouse_lock() only turns it on for SDL
-		g_mouse_cursor->set_visible(true);
-	}
+	mousegrab_ = nullptr;                // good ol' paranoia
+	app.set_mouse_lock(false);           // more paranoia :-)
+	g_mouse_cursor->change_wait(false);  // We're handling input now, aren't we?
 
 	// With the default of 30FPS, the game will be drawn every 33ms.
 	constexpr uint32_t kMaxFPS = 30;
