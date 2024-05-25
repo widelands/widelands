@@ -253,6 +253,16 @@ private:
 	std::thread thread_;
 };
 
+void init_mouse_cursor(const bool use_sdl) {
+	g_mouse_cursor = new MouseCursor();
+	g_mouse_cursor->initialize(use_sdl);
+
+	// There's still some more time after WLApplication is created before the user can
+	// actually skip the splash screen, so we change the cursor to an hourglass until then.
+	g_mouse_cursor->change_wait(true);
+	// It's restored by the event loop in Panel::do_run() when it starts to work
+}
+
 }  // namespace
 
 std::string WLApplication::segfault_backtrace_dir;
@@ -481,19 +491,14 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// Keep cursor in window while dragging
 	SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
 
-	g_mouse_cursor = new MouseCursor();
-	g_mouse_cursor->initialize(get_config_bool("sdl_cursor", true));
-
-	// There's still some more time after this constructor finishes before the user can
-	// actually skip the splash screen, so we change the cursor to an hourglass until then.
-	g_mouse_cursor->change_wait(true);
-	// It's restored by the event loop in Panel::do_run() when it starts to work
-
-	SDL_FreeCursor(tmp_cursor);
-	// TODO(tothxa): In soft-cursor mode the SDL mouse cursor is disabled after
-	//               g_mouse_cursor->initialize(), but cursor drawing doesn't work
-	//               until we start refreshing the screen, so the cursor disappears.
-	//               It would be nice to delay disabling the SDL cursor until then.
+	// In soft-cursor mode the SDL mouse cursor is disabled after g_mouse_cursor->initialize(),
+	// but cursor drawing doesn't work until we start refreshing the screen, so the cursor
+	// disappears.
+	// In SDL cursor mode there's no such problem, so we can switch to our own cursor early.
+	const bool use_sdl_cursor = get_config_bool("sdl_cursor", true);
+	if (use_sdl_cursor) {
+		init_mouse_cursor(use_sdl_cursor);
+	}
 
 	// Try to detect configurations with inverted horizontal scroll
 	SDL_version sdl_ver = {SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL};
@@ -553,6 +558,14 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		log_info("Developer tools are enabled.");
 		g_script_console_history.load(kScriptConsoleHistoryFile);
 	}
+
+	// See counterpart above for explanation. This is the latest we can do it cleanly and safely.
+	if (!use_sdl_cursor) {
+		init_mouse_cursor(use_sdl_cursor);
+	}
+	SDL_FreeCursor(tmp_cursor);
+	// TODO(tothxa): Keep the system cursor in g_mouse_cursor too and allow delaying disabling it,
+	//               then make sure it's done before we can start drawing?
 
 	verb_log_info("WLApplication created");
 }

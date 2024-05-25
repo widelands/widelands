@@ -31,6 +31,7 @@
 #include "base/random.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/mouse_cursor.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text/font_set.h"
@@ -64,6 +65,7 @@ ProgressWindow::ProgressWindow(UI::Panel* parent,
 	// As long as this window exists and is visible, no tooltips will be drawn.
 	set_hide_all_overlays();
 	Panel::set_allow_fastclick(false);
+	g_mouse_cursor->change_wait(true);
 
 	if (parent == nullptr) {
 		graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
@@ -89,6 +91,7 @@ ProgressWindow::~ProgressWindow() {
 	}
 
 	Panel::set_allow_fastclick(true);
+	g_mouse_cursor->change_wait(false);
 }
 
 inline const UI::ProgressbarStyleInfo& ProgressWindow::progress_style() const {

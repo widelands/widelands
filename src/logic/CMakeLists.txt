@@ -284,7 +284,6 @@ wl_library(logic
     game_io
     graphic
     graphic_color
-    graphic_mouse_cursor
     graphic_playercolor
     io_fileread
     io_filesystem
