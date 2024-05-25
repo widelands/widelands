@@ -840,6 +840,7 @@ void MainMenu::draw_overlay(RenderTarget& r) {
 
 		assert(splash_state_ == SplashState::kSplashFadeOut);
 		init_time_ = time;
+		last_image_exchange_time_ = time;
 		splash_state_ = SplashState::kMenuFadeIn;
 
 	} else {
