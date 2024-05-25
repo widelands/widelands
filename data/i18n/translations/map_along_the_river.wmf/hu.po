@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2023\n"
 "Language-Team: Hungarian (https://app.transifex.com/widelands/teams/35159/hu/)\n"
@@ -20,56 +20,56 @@ msgstr ""
 "Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
 msgid "%1% unit of %2% has been brought to your ‘%3%’ building."
 msgid_plural "%1% units of %2% have been brought to your ‘%3%’ building."
 msgstr[0] "%1% darab %2% érkezett a %3% épületébe."
 msgstr[1] "%1% darab %2% érkezett a %3% épületébe."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
 msgid "Transport"
 msgstr "Szállítmány"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
 msgid ""
 "Four shovels for removing the swamps have been collected at the warehouse."
 msgstr "Összegyűlt négy lapát a raktárban a mocsarak feltöltéséhez."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
 msgid "Shovels"
 msgstr "Lapátok"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
 msgid ""
 "Four more shovels for removing the swamps have been collected at the "
 "warehouse."
 msgstr "Összegyűlt további négy lapát a raktárban a mocsarak feltöltéséhez."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:7
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:7
 msgid "Defeat Törver"
 msgstr "Törver legyőzése"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:9
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:9
 msgid "Defeat the Armies of Törver"
 msgstr "Győzd le Törver seregeit!"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:10
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:10
 msgid ""
 "Törver is the enemy in the North, who is fighting under the red banner."
 msgstr "Törver az északi ellenség, aki a vörös lobogó alatt harcol."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:16
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:16
 msgid "Build a port"
 msgstr "Kikötő építése"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:18
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:18
 msgid "Build a Port in the North"
 msgstr "Építs egy kikötőt északon!"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:19
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:19
 msgid ""
 "We should build a port in Törver’s former land to be ready to send an "
 "expedition as soon as we found out how to build ships."
@@ -77,15 +77,15 @@ msgstr ""
 "Építsünk egy kikötőt a Törvertől elvett területen, hogy készen álljunk "
 "expedíciót indítani, amint megtanulunk hajót építeni!"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:25
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:25
 msgid "Conquer pirate sentry"
 msgstr "A kalózok őrházának elfoglalása"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:27
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:27
 msgid "Conquer the Pirate Sentry"
 msgstr "Foglald el a kalózok őrházát!"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:28
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:28
 msgid ""
 "Conquer the pirate sentry near the brook to the East. Hopefully we will find"
 " out what happened to the gold in this area."
@@ -93,15 +93,15 @@ msgstr ""
 "Foglald el a kalózok őrházát keleten, a patak mellett! Talán így "
 "megtudhatjuk, hogy hová tűnt erről a környékről az arany."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:34
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:34
 msgid "Build warehouse"
 msgstr "Raktár építése"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:36
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:36
 msgid "Build a Warehouse near the Pirate Sentry"
 msgstr "Építs egy raktárat a kalózok őrháza mellett!"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:37
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:37
 msgid ""
 "Build a warehouse close to the conquered pirate sentry near the brook. We "
 "will need it as a basis for further exploration. Furthermore we could use it"
@@ -111,35 +111,35 @@ msgstr ""
 "alapot fog szolgáltatni a további terjeszkedésünkhöz. Ezen kívül a környező "
 "dombokból bányászott aranyat is tárolhatjuk benne."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:43
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:52
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:43
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:52
 msgid "Bring shovels"
 msgstr "Lapátok gyűjtése"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:45
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:54
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:45
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:54
 msgid "Bring Four Shovels to the new Warehouse"
 msgstr "Hozass négy lapátot az új raktárba!"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:46
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:46
 msgid "They will be handed out to some volunteers for drying up the swamps."
 msgstr "Ezeket kiosztjuk az önkénteseknek a mocsár feltöltéséhez."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:55
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:55
 msgid ""
 "They will be handed out to additional volunteers for drying up the swamps."
 msgstr "Ezeket további önkénteseknek osztjuk ki a mocsár feltöltéséhez."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:61
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:93
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:61
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:93
 msgid "Defeat the pirates"
 msgstr "A kalózok legyőzése"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:63
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:63
 msgid "Defeat the Pirates"
 msgstr "Győzd le a kalózokat!"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:64
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:64
 msgid ""
 "Free our neighbourhood from the pirate menace. The pirates are fighting "
 "under the grey banner."
@@ -147,27 +147,27 @@ msgstr ""
 "Szabadítsd meg a környékünket a kalózok fenyegetésétől. A kalózok a szürke "
 "lobogó alatt harcolnak."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:70
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:70
 msgid "Free our scout from the pirates"
 msgstr "A felderítő kiszabadítása a kalózok fogságából"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:72
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:72
 msgid "Conquer the Stronghold on the Island"
 msgstr "Foglald el az erődítményt a szigeten!"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:73
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:73
 msgid "This is where the scout is held captive."
 msgstr "Itt tartják fogva a felderítőnket."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:79
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:79
 msgid "Defeat Hjalmar"
 msgstr "Hjalmar legyőzése"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:81
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:81
 msgid "Defeat the Armies of Hjalmar"
 msgstr "Győzd le Hjalmar seregeit!"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:82
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:82
 msgid ""
 "Hjalmar is the enemy north of the former pirates, who is fighting under the "
 "green banner."
@@ -175,15 +175,15 @@ msgstr ""
 "Hjalmar a kalózoktól északra található ellenség, aki a zöld lobogó alatt "
 "harcol."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:88
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:88
 msgid "Defeat Runar"
 msgstr "Runar legyőzése"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:90
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:90
 msgid "Defeat the Armies of Runar"
 msgstr "Győzd le Runar seregeit!"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:91
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:91
 msgid ""
 "Runar is the enemy south-east of the former pirates, who is fighting under "
 "the yellow banner."
@@ -191,37 +191,37 @@ msgstr ""
 "Runar a kalózoktól dél-keletre található ellenség, aki a sárga lobogó alatt "
 "harcol."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:10
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:26
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:34
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:45
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:51
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:60
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:69
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:78
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:85
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:92
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:99
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:105
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:111
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:117
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:123
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:132
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:138
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:147
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:156
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:10
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:26
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:34
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:45
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:51
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:60
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:69
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:78
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:85
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:92
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:99
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:105
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:111
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:117
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:123
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:132
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:138
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:147
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:156
 msgid "Your Advisor"
 msgstr "A tanácsadód"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:11
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:11
 msgid "Along the River"
 msgstr "A folyó mentén"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:12
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:12
 msgid "Sire, let me inform you about the surrounding tribes."
 msgstr "Uram! Tájékoztatni szeretnélek a környező törzsekről."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:14
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:14
 msgid ""
 "From the North we are endangered by a belligerent tribe, led by warlord "
 "Törver, that is rapidly building up its armies. They may soon have become "
@@ -231,7 +231,7 @@ msgstr ""
 "aki rohamléptekkel fejleszti a haderejét. Hamarosan olyan erősek lehetnek, "
 "hogy nem tudnánk nekik ellenállni."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
 "A large area to the north-east is agonized by a wild horde of unfettered "
 "pirates, led by their insane Arvid. Their presence blocks our ways to other "
@@ -241,7 +241,7 @@ msgstr ""
 "sanyargat, amit az őrült Arvid vezet. Ők zárnak el minket a távolabbi "
 "törzsektől."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:18
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:18
 msgid ""
 "Over the river lies the prosperous land of the mysterious king Runar. We "
 "have been in war with him before the pirates occupied the eastern area. His "
@@ -251,7 +251,7 @@ msgstr ""
 "álltunk vele, mielőtt a kalózok elfoglalták a keleti vidéket. Az erejét "
 "fejlett ipara és hatalmas hadserege biztosítja."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:20
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:20
 msgid ""
 "The area beyond the pirates belongs to a developed tribe led by their mighty"
 " chieftain Hjalmar. They have had a long time of preparement to build up "
@@ -260,7 +260,7 @@ msgstr ""
 "A kalózokon túli vidék egy fejlett törzsé, akiket a hatalmas Hjalmar vezet. "
 "Hosszú idejük volt rá, hogy felfejlesszék a mindenkit elrettentő seregüket."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:22
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:22
 msgid ""
 "The situation looks quite perilous and my advice is that we direct our "
 "efforts towards building up a strong army."
@@ -268,11 +268,11 @@ msgstr ""
 "A helyzet meglehetősen veszélyesnek tűnik, ezért azt tanácsolom, hogy "
 "erőfeszítéseinket fordítsuk egy erős hadsereg felépítésére."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:27
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:27
 msgid "Our northern enemy"
 msgstr "Az északi ellenségünk"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:28
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:28
 msgid ""
 "Sire, although our soldiers would face any enemy without the slightest fear,"
 " our rival in the North is still stronger than all our armies combined. We "
@@ -282,7 +282,7 @@ msgstr ""
 "az északi ellenségünk mégiscsak erősebb, mint a mi teljes haderőnk összesen."
 " Jobb lenne kerülni az összetűzést, amíg nem tudjuk legyőzni őket."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
 "Be patient and recognize that a strong army is indispensable in this "
 "situation. Törver has a very bad reputation."
@@ -290,11 +290,11 @@ msgstr ""
 "Légy türelemmel, és gondolj arra, hogy ebben a helyzetben nélkülözhetetlen "
 "egy erős hadsereg. Törvernek igen rossz híre van."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
 msgid "Peril from the North"
 msgstr "Veszély északról"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""
 "Sire, we received an alarming message from one of our explorers. Törver is "
 "expanding his front line and approaching our territory."
@@ -302,7 +302,7 @@ msgstr ""
 "Uram! Aggasztó hírt kaptunk az egyik felderítőnktől. Törver kiterjesztette a"
 " frontvonalait, és közeledik a mi területünkhöz."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:38
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:38
 msgid ""
 "We cannot avoid attacking their armies forever. If we manage to conquer our "
 "northern enemy, we will enlarge our territory and find more resources to "
@@ -312,18 +312,18 @@ msgstr ""
 " az északi ellenséget, akkor megnőne a területünk, és több nyersanyagot "
 "találhatnánk a hadseregünk megerősítéséhez."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:40
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:40
 msgid ""
 "We can then also use their access to the lake in order to explore more land."
 msgstr ""
 "Ezen kívül így hozzáférést nyerhetünk a tóhoz, amelynek révén még nagyobb "
 "területet fedezhetünk fel."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:46
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:46
 msgid "On the good way"
 msgstr "Jó úton"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:47
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:47
 msgid ""
 "Sire, the battle with Törver progresses gloriously and we have already "
 "beaten the strongest part of his army. But this enemy will not be defeated "
@@ -334,11 +334,11 @@ msgstr ""
 "erősebb részét. De nem adja ilyen könnyen magát. Végső elkeseredésében "
 "Törver kemény zsoldosokat hívott segítségül."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:52
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:52
 msgid "The great lake"
 msgstr "A nagy tó"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:53
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:53
 msgid ""
 "Sire, now that we have conquered the land of Törver, we can make use of "
 "their excellent access to the adjacent great lake. A port in the North will "
@@ -348,7 +348,7 @@ msgstr ""
 "nagy tó adta lehetőségeket. Ha építünk egy kikötőt északon, jobb "
 "lehetőségeink lesznek elérni a többi törzset."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
 "In Törver’s headquarters we found papers describing the construction of "
 "ships. Unfortunately, the texts are written in a language that is unknown to"
@@ -358,11 +358,11 @@ msgstr ""
 " azonban számunkra ismeretlen nyelven vannak. A bölcseink megpróbálják "
 "lefordítani az útmutatót."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:61
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:61
 msgid "Searching for gold"
 msgstr "Arany után kutatva"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:62
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:62
 msgid ""
 "Sire, our men have located an isolated enemy pirate sentry. The abandoned "
 "huts indicate that there is gold nearby."
@@ -370,7 +370,7 @@ msgstr ""
 "Uram! Az embereink felfedeztek egy különálló ellenséges kalóz őrházat. Az "
 "elhagyatott kunyhókból arra következtetünk, hogy arany található a közelben."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:64
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:64
 msgid ""
 "We should however be careful if we want to conquer the sentry. There can be "
 "more enemy buildings that are still out of sight, and the pirates are known "
@@ -382,11 +382,11 @@ msgstr ""
 "pedig híresek arról, hogy milyen jó harcosok. Érdemes először komolyabb "
 "haderőt felvonultatnunk ide, mielőtt támadnánk."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:70
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:70
 msgid "Found a treasure"
 msgstr "Kincset találtunk"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:71
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:71
 msgid ""
 "Sire, we have found 25 units of gold ore inside the pirate sentry. They may "
 "have been looted from the gold diggers’ huts nearby. This gold ore will be "
@@ -396,7 +396,7 @@ msgstr ""
 "közeli aranyásókunyhókból zsákmányolták. Az aranyércet a főhadiszállásra "
 "szállítjuk."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:73
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:73
 msgid ""
 "With our successful expansion into this area we should consider building a "
 "warehouse to the direct southwest of the sentry in order to further explore "
@@ -408,12 +408,12 @@ msgstr ""
 "terjeszkedni errefelé. Van is egy megfelelő beépíthető hely három lépésre az"
 " őrháztól."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:79
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:86
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:79
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:86
 msgid "Removing the swamps"
 msgstr "A mocsár feltöltése"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:80
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:80
 msgid ""
 "Sire, the wet season has created swamps along the brook to the East and we "
 "are unable to pass through them. They have to be removed before we can "
@@ -425,7 +425,7 @@ msgstr ""
 "továbbléphessünk. Ha hozatsz elegendő lapátot az új raktárba, akkor "
 "önkéntesek el tudják végezni a munkát."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
 "Sire, all shovels have been handed out, but if we continue at this pace we "
 "will not have removed the swamps before the next wet season. If you bring "
@@ -435,7 +435,7 @@ msgstr ""
 " a mocsarak feltöltésével a következő esős évszakig. Ha tudnál még több "
 "lapátot hozatni az új raktárba, akkor további önkénteseket küldhetnénk."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""
 "Sire, now that we have access to the pirates’ hideout, we should conquer it "
 "and finish them off. Maybe there are even more treasures hidden in their "
@@ -444,11 +444,11 @@ msgstr ""
 "Uram! Most már elérjük a kalózok rejtekhelyét. Foglaljuk el, és számoljunk "
 "le velük! Lehet, hogy további kincseket is találunk náluk."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:100
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:100
 msgid "The pirates were defeated."
 msgstr "Legyőztük a kalózokat."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:101
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:101
 msgid ""
 "Sire, we have defeated the pirates. They have hidden some gold in their last"
 " bastion which is now being transferred to our headquarters."
@@ -456,11 +456,11 @@ msgstr ""
 "Uram! Legyőztük a kalózokat. Az utolsó menedékükön aranyat rejtettek el, "
 "amit most átszállítunk a főhadiszállásunkra."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:106
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:106
 msgid "Pirates are regrouping"
 msgstr "A kalózok újraszerveződnek"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:107
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:107
 msgid ""
 "Sire, as a result of our attacks on the pirates they have started to regroup"
 " with pirates from other tribes. They could regain much of their previously "
@@ -472,11 +472,11 @@ msgstr ""
 "csökkenő készleteink gondot okozhatnak, ha ilyen hatalmas ellenséggel "
 "találjuk magunkat szemben."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
 msgid "Pirates on the run"
 msgstr "Menekülő kalózok"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:113
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:113
 msgid ""
 "Sire, thanks to our successful efforts to drive out the pirates, lots of "
 "them have fled and moved away in small boats. It is unknown in which "
@@ -485,11 +485,11 @@ msgstr ""
 "Uram! A kalózok kiűzése során elért sikereink miatt sokan csónakokon "
 "menekültek el. Nem tudjuk, milyen irányba mehettek."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:118
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:118
 msgid "Ability to build shipyards"
 msgstr "Hajóépítés lehetősége"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:119
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:119
 msgid ""
 "Sire, after long study and research our wise men have finally managed to "
 "decipher the strange language in Törver’s descriptions that we had found in "
@@ -499,11 +499,11 @@ msgstr ""
 " a Törver főhadiszállásán talált jegyzetek furcsa nyelvét. Mostantól képesek"
 " lettünk hajóács műhelyt építeni."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:124
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:124
 msgid "Our scout has been captured"
 msgstr "Elfogták a felderítőnket"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:125
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:125
 msgid ""
 "Sire, one of our scouts has been captured by the pirates and brought to "
 "their island. He is the only person who knows the way through the swamps "
@@ -513,7 +513,7 @@ msgstr ""
 "szigetükre. Ő volt az egyetlen emberünk, aki ismerte az utat a mocsarakon "
 "keresztül Hjalmarhoz."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:127
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:127
 msgid ""
 "According to our fishermen he is locked up in the stronghold on the island. "
 "We should use the knowledge about shipbuilding that we took from Törver to "
@@ -523,11 +523,11 @@ msgstr ""
 "Kihasználhatjuk a Törvertől szerzett hajóépítési tudományunkat, hogy hajókat"
 " építsünk, amelyekkel megtámadhatjuk őket."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
 msgid "Island conquered"
 msgstr "A sziget elfoglalva"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:134
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:134
 msgid ""
 "Sire, our soldiers have conquered the island and managed to free the scout. "
 "It turns out that the pirates have left a large amount of gold, beer, and "
@@ -537,11 +537,11 @@ msgstr ""
 "Kiderült az is, hogy a kalózok nagy mennyiségű aranyat, sört és fegyvert "
 "hagytak a szigeten."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:139
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:139
 msgid "The scout returns"
 msgstr "A felderítő visszatér"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:140
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:140
 msgid ""
 "Sire, our scout has returned to our territory, and he has shown us the road "
 "through the swamps towards Hjalmar."
@@ -549,7 +549,7 @@ msgstr ""
 "Uram! Visszatért hozzánk a felderítő, és megmutatta az utat a mocsáron át "
 "Hjalmarhoz."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:142
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:142
 msgid ""
 "He noticed that we can also move along the other side of the mountain, in "
 "case we might fail here, but it will be much more difficult to do."
@@ -557,11 +557,11 @@ msgstr ""
 "Azt is felderítette, hogy a hegy másik oldalán is haladhatunk, ha itt "
 "elbukunk, de arra sokkal nehezebb lesz."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:148
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:148
 msgid "The last frontier"
 msgstr "Az utolsó határ"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:149
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:149
 msgid ""
 "Sire, we have almost defeated all armies and we are now approaching our "
 "final enemy. They have been expecting us for a long time and will be "
@@ -571,22 +571,22 @@ msgstr ""
 "közeledünk. Már régóta várnak minket, és alaposan felkészültek életük "
 "legkeményebb csatájára ellenünk."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:151
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:151
 msgid ""
 "Make sure that our armies are at full strength and then act decisively."
 msgstr ""
 "Gondoskodj róla, hogy a seregeink teljes erejükben álljanak fel, és utána "
 "határozottan cselekedj!"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:157
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:157
 msgid "Victory!"
 msgstr "Győzelem!"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:158
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:158
 msgid "Sire, my congratulations!"
 msgstr "Gratulálok, uram!"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:160
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:160
 msgid ""
 "You have completed all goals and defeated all our enemies. You have not only"
 " conquered our rivalling tribes, but you have also captured the hearts of "
@@ -595,6 +595,6 @@ msgstr ""
 "Minden célt teljesítettél és minden ellenséget legyőztél. Nem csak a rivális"
 " törzseket, de embereid szívét is meghódítottad."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:162
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:162
 msgid "Your name will be remembered forever."
 msgstr "Nevedre örökké emlékezni fognak."
