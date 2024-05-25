@@ -39,7 +39,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2024-05-25 02:33+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2024\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
@@ -6156,89 +6156,89 @@ msgstr "Gespeichertes Spiel wechseln …"
 msgid "Start game"
 msgstr "Spiel starten"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:289
+#: ../../../../src/ui_fsmenu/launch_game.cc:290
 msgid "Show fewer options"
 msgstr "Weniger Optionen anzeigen"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:289
+#: ../../../../src/ui_fsmenu/launch_game.cc:290
 msgid "Show more options"
 msgstr "Mehr Optionen anzeigen"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:304
+#: ../../../../src/ui_fsmenu/launch_game.cc:306
 msgid "The relations between players are set by the scenario"
 msgstr "Die Beziehungen zwischen den Spielern werden durch das Szenario definiert"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:306
+#: ../../../../src/ui_fsmenu/launch_game.cc:308
 msgid "The relations between players are set by the saved game"
 msgstr "Die Beziehungen zwischen den Spielern werden durch das gespeicherte Spiel definiert"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:308
+#: ../../../../src/ui_fsmenu/launch_game.cc:310
 msgid "The selected win condition does not allow peaceful matches"
 msgstr "Die gewählte Siegbedingung erlaubt keinen friedlichen Spielmodus"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:310
+#: ../../../../src/ui_fsmenu/launch_game.cc:312
 msgid "Forbid fighting between players"
 msgstr "Verbiete das Kämpfen zwischen den Spielern"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:340
+#: ../../../../src/ui_fsmenu/launch_game.cc:343
 msgid "All selected starting conditions ignore the map’s starting positions"
 msgstr "Alle ausgewählten Startbedingungen ignorieren die Ausgangspositionen der Karte"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:346
+#: ../../../../src/ui_fsmenu/launch_game.cc:349
 msgid "The starting positions are set by the scenario"
 msgstr "Die Ausgangspositionen der Spieler werden durch das Szenario definiert"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:348
+#: ../../../../src/ui_fsmenu/launch_game.cc:351
 msgid "The starting positions are set by the saved game"
 msgstr "Die Ausgangspositionen der Spieler werden durch das gespeicherte Spiel definiert"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:351
+#: ../../../../src/ui_fsmenu/launch_game.cc:354
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr "Den Spielern erlauben ihre eigene Ausgangsposition zum Beginn des Spiels zu wählen"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:370
+#: ../../../../src/ui_fsmenu/launch_game.cc:374
 msgid "Player vision is set by the scenario"
 msgstr "Die Sichtbarkeit der Karte wird durch das Szenario definiert"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:372
+#: ../../../../src/ui_fsmenu/launch_game.cc:376
 msgid "Player vision is set by the saved game"
 msgstr "Die Sichtbarkeit der Karte wird durch das gespeicherte Spiel definiert"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:374
+#: ../../../../src/ui_fsmenu/launch_game.cc:378
 msgid "Give all players permanent vision of the entire map"
 msgstr "Erlaube allen Spielern permanente Sicht der ganzen Karte"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:395
+#: ../../../../src/ui_fsmenu/launch_game.cc:400
 msgid "Naval warfare is set by the scenario"
 msgstr "Die Seekriegsführung wird durch das Szenario definiert"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:397
+#: ../../../../src/ui_fsmenu/launch_game.cc:402
 msgid "Naval warfare is set by the saved game"
 msgstr "Die Seekriegsführung wird durch das gespeicherte Spiel definiert"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:400
+#: ../../../../src/ui_fsmenu/launch_game.cc:405
 msgid ""
 "Enable coastal invasions and ship-to-ship battles. This feature is "
 "experimental and may undergo substantial redesign in future versions of "
 "Widelands."
 msgstr "Aktiviere Küsteninvasionen und Schiff zu Schiff Kämpfe. Diese Funktion ist experimentell und kann in zukünftigen Widelandsversionen noch stark verändert werden. "
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:420
+#: ../../../../src/ui_fsmenu/launch_game.cc:426
 msgid "Player relations are set by the scenario"
 msgstr "Die Beziehungen zwischen den Spielern werden durch das Szenario festgelegt"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:422
+#: ../../../../src/ui_fsmenu/launch_game.cc:428
 msgid "Player relations are set by the saved game"
 msgstr "Spielerbeziehungen werden durch das gespeicherte Spiel festgelegt"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:424
+#: ../../../../src/ui_fsmenu/launch_game.cc:430
 msgid "Disallow players to change their alliances during the game"
 msgstr "Verbiete den Spielern ihre Allianzen während des Spiels zu wechseln."
 
 #. * TRANSLATORS: This is a map tag
-#: ../../../../src/ui_fsmenu/launch_game.cc:432
+#: ../../../../src/ui_fsmenu/launch_game.cc:439
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:506
 #: ../../../../src/ui_fsmenu/scenariodetails.cc:47
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:283
@@ -6246,21 +6246,21 @@ msgstr "Verbiete den Spielern ihre Allianzen während des Spiels zu wechseln."
 msgid "Scenario"
 msgstr "Szenario"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:433
+#: ../../../../src/ui_fsmenu/launch_game.cc:440
 msgid "Win condition is set through the scenario"
 msgstr "Die Siegbedingung wird durch das Szenario bestimmt"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:439
+#: ../../../../src/ui_fsmenu/launch_game.cc:446
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:510
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:287
 msgid "Saved Game"
 msgstr "Gesp. Spiel"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:441
+#: ../../../../src/ui_fsmenu/launch_game.cc:448
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Dies ist ein gespeichertes Spiel – die Siegbedingung wurde bereits festgelegt."
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:515
+#: ../../../../src/ui_fsmenu/launch_game.cc:522
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2024-05-25 02:33+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: MK, 2016-2017\n"
 "Language-Team: Karelian (http://app.transifex.com/widelands/widelands/language/krl/)\n"
@@ -6124,89 +6124,89 @@ msgstr ""
 msgid "Start game"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:289
+#: ../../../../src/ui_fsmenu/launch_game.cc:290
 msgid "Show fewer options"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:289
+#: ../../../../src/ui_fsmenu/launch_game.cc:290
 msgid "Show more options"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:304
+#: ../../../../src/ui_fsmenu/launch_game.cc:306
 msgid "The relations between players are set by the scenario"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:306
+#: ../../../../src/ui_fsmenu/launch_game.cc:308
 msgid "The relations between players are set by the saved game"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:308
+#: ../../../../src/ui_fsmenu/launch_game.cc:310
 msgid "The selected win condition does not allow peaceful matches"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:310
+#: ../../../../src/ui_fsmenu/launch_game.cc:312
 msgid "Forbid fighting between players"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:340
+#: ../../../../src/ui_fsmenu/launch_game.cc:343
 msgid "All selected starting conditions ignore the map’s starting positions"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:346
+#: ../../../../src/ui_fsmenu/launch_game.cc:349
 msgid "The starting positions are set by the scenario"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:348
+#: ../../../../src/ui_fsmenu/launch_game.cc:351
 msgid "The starting positions are set by the saved game"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:351
+#: ../../../../src/ui_fsmenu/launch_game.cc:354
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:370
+#: ../../../../src/ui_fsmenu/launch_game.cc:374
 msgid "Player vision is set by the scenario"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:372
+#: ../../../../src/ui_fsmenu/launch_game.cc:376
 msgid "Player vision is set by the saved game"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:374
+#: ../../../../src/ui_fsmenu/launch_game.cc:378
 msgid "Give all players permanent vision of the entire map"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:395
+#: ../../../../src/ui_fsmenu/launch_game.cc:400
 msgid "Naval warfare is set by the scenario"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:397
+#: ../../../../src/ui_fsmenu/launch_game.cc:402
 msgid "Naval warfare is set by the saved game"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:400
+#: ../../../../src/ui_fsmenu/launch_game.cc:405
 msgid ""
 "Enable coastal invasions and ship-to-ship battles. This feature is "
 "experimental and may undergo substantial redesign in future versions of "
 "Widelands."
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:420
+#: ../../../../src/ui_fsmenu/launch_game.cc:426
 msgid "Player relations are set by the scenario"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:422
+#: ../../../../src/ui_fsmenu/launch_game.cc:428
 msgid "Player relations are set by the saved game"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:424
+#: ../../../../src/ui_fsmenu/launch_game.cc:430
 msgid "Disallow players to change their alliances during the game"
 msgstr ""
 
 #. * TRANSLATORS: This is a map tag
-#: ../../../../src/ui_fsmenu/launch_game.cc:432
+#: ../../../../src/ui_fsmenu/launch_game.cc:439
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:506
 #: ../../../../src/ui_fsmenu/scenariodetails.cc:47
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:283
@@ -6214,21 +6214,21 @@ msgstr ""
 msgid "Scenario"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:433
+#: ../../../../src/ui_fsmenu/launch_game.cc:440
 msgid "Win condition is set through the scenario"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:439
+#: ../../../../src/ui_fsmenu/launch_game.cc:446
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:510
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:287
 msgid "Saved Game"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:441
+#: ../../../../src/ui_fsmenu/launch_game.cc:448
 msgid "The game is a saved game – the win condition was set before."
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:515
+#: ../../../../src/ui_fsmenu/launch_game.cc:522
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2024-05-25 02:33+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Alex Rijckaert, 2023-2024\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -989,7 +989,7 @@ msgstr "Beschrijving: %s"
 #: ../../../../src/editor/ui_menus/field_info_window.cc:251
 msgctxt "addons"
 msgid "(none)"
-msgstr ""
+msgstr "(geen)"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:258
 #, c-format
@@ -1348,19 +1348,19 @@ msgstr "Kaart ID:"
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:257
 msgctxt "map_generator"
 msgid "Default"
-msgstr ""
+msgstr "Standaard"
 
 #. * TRANSLATORS: Random Climate
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:285
 msgctxt "climate"
 msgid "Random"
-msgstr ""
+msgstr "Willekeurig"
 
 #. * TRANSLATORS: Default Terrain Distribution
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:316
 msgctxt "terrain"
 msgid "Default"
-msgstr ""
+msgstr "Standaard"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:318
 msgid "Alpine"
@@ -1380,7 +1380,7 @@ msgstr "Ruigland"
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:322
 msgctxt "terrain"
 msgid "Random"
-msgstr ""
+msgstr "Willekeurig"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:630
 msgid "Generating random map…"
@@ -3359,7 +3359,7 @@ msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was reachable at the TCP port %u or the server shut down as"
 " you tried to connect."
-msgstr ""
+msgstr "Widelands kon geen verbinding maken met het opgegeven adres. Ofwel was er geen Widelands server bereikbaar op de TCP poort %u of de server is afgesloten toen je verbinding probeerde te maken."
 
 #: ../../../../src/network/gameclient.cc:816
 #, c-format
@@ -4235,11 +4235,11 @@ msgstr "%1$s<br>(%2$s)"
 
 #: ../../../../src/ui_basic/textinput.cc:374
 msgid "Cut"
-msgstr ""
+msgstr "Knippen"
 
 #: ../../../../src/ui_basic/textinput.cc:374
 msgid "Cut the selected text to the clipboard"
-msgstr ""
+msgstr "De geselecteerde tekst naar het klembord knippen"
 
 #: ../../../../src/ui_basic/textinput.cc:377
 #: ../../../../src/ui_fsmenu/tech_info.cc:238
@@ -4248,19 +4248,19 @@ msgstr "Kopiëren"
 
 #: ../../../../src/ui_basic/textinput.cc:377
 msgid "Copy the selected text to the clipboard"
-msgstr ""
+msgstr "Kopieer de geselecteerde tekst naar het klembord"
 
 #: ../../../../src/ui_basic/textinput.cc:380
 msgid "Paste"
-msgstr ""
+msgstr "Plakken"
 
 #: ../../../../src/ui_basic/textinput.cc:380
 msgid "Paste the clipboard content"
-msgstr ""
+msgstr "De inhoud van het klembord plakken"
 
 #: ../../../../src/ui_basic/textinput.cc:383
 msgid "Delete the selected text"
-msgstr ""
+msgstr "De geselecteerde tekst verwijderen"
 
 #: ../../../../src/ui_basic/textinput.cc:386
 #: ../../../../src/wlapplication_options.cc:383
@@ -4269,7 +4269,7 @@ msgstr "Selecteer Alles"
 
 #: ../../../../src/ui_basic/textinput.cc:386
 msgid "Select the entire text"
-msgstr ""
+msgstr "Selecteer de volledige tekst"
 
 #: ../../../../src/ui_basic/window.cc:101
 #: ../../../../src/ui_basic/window.cc:862
@@ -4304,23 +4304,23 @@ msgstr "Losmaken"
 
 #: ../../../../src/ui_basic/window.cc:847
 msgid "Minimize the window"
-msgstr ""
+msgstr "Het venster minimaliseren"
 
 #: ../../../../src/ui_basic/window.cc:847
 msgid "Unminimize the window"
-msgstr ""
+msgstr "Venster minimaliseren opheffen"
 
 #: ../../../../src/ui_basic/window.cc:857
 msgid "Pin the window"
-msgstr ""
+msgstr "Zet het venster vast"
 
 #: ../../../../src/ui_basic/window.cc:857
 msgid "Unpin the window"
-msgstr ""
+msgstr "Het venster ontgrendelen"
 
 #: ../../../../src/ui_basic/window.cc:862
 msgid "Close the window"
-msgstr ""
+msgstr "Sluit het venster"
 
 #: ../../../../src/ui_fsmenu/about.cc:38 ../../../../src/ui_fsmenu/main.cc:515
 msgid "About Widelands"
@@ -5247,7 +5247,7 @@ msgstr "Minimale Widelands-versie: %s"
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:295
 msgctxt "version"
 msgid "(none)"
-msgstr ""
+msgstr "(geen)"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:325
 msgid "Top-level directory"
@@ -5864,7 +5864,7 @@ msgstr "Naam Veldtocht"
 #: ../../../../src/ui_fsmenu/campaigns.cc:45
 msgctxt "difficulty"
 msgid "Default"
-msgstr ""
+msgstr "Standaard"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:44
 msgid "Crash Report Details"
@@ -6133,89 +6133,89 @@ msgstr "Verander bewaard spel..."
 msgid "Start game"
 msgstr "Start spel"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:289
+#: ../../../../src/ui_fsmenu/launch_game.cc:290
 msgid "Show fewer options"
 msgstr "Minder opties tonen"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:289
+#: ../../../../src/ui_fsmenu/launch_game.cc:290
 msgid "Show more options"
 msgstr "Meer opties weergeven"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:304
+#: ../../../../src/ui_fsmenu/launch_game.cc:306
 msgid "The relations between players are set by the scenario"
 msgstr "De verhouding tussen spelers is bepaald door het scenario"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:306
+#: ../../../../src/ui_fsmenu/launch_game.cc:308
 msgid "The relations between players are set by the saved game"
 msgstr "De verhouding tussen spelers is bepaald door het opgeslagen spel"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:308
+#: ../../../../src/ui_fsmenu/launch_game.cc:310
 msgid "The selected win condition does not allow peaceful matches"
 msgstr "De geselecteerde winconditie staat geen vreedzame spellen toe"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:310
+#: ../../../../src/ui_fsmenu/launch_game.cc:312
 msgid "Forbid fighting between players"
 msgstr "Verbied gevechten tussen spelers"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:340
+#: ../../../../src/ui_fsmenu/launch_game.cc:343
 msgid "All selected starting conditions ignore the map’s starting positions"
 msgstr "Alle geslecteerde startposities negeren de startposities van de kaart"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:346
+#: ../../../../src/ui_fsmenu/launch_game.cc:349
 msgid "The starting positions are set by the scenario"
 msgstr "De start posities zijn door het scenario ingesteld"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:348
+#: ../../../../src/ui_fsmenu/launch_game.cc:351
 msgid "The starting positions are set by the saved game"
 msgstr "De begin posities zijn ingesteld door het bewaarde spel"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:351
+#: ../../../../src/ui_fsmenu/launch_game.cc:354
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr "Sta toe dat spelers aan het begin van het spel hun eigen start posities kiezen"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:370
+#: ../../../../src/ui_fsmenu/launch_game.cc:374
 msgid "Player vision is set by the scenario"
 msgstr "De visie van de speler wordt bepaald door het scenario"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:372
+#: ../../../../src/ui_fsmenu/launch_game.cc:376
 msgid "Player vision is set by the saved game"
 msgstr "De visie van de speler wordt ingesteld door het opgeslagen spel"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:374
+#: ../../../../src/ui_fsmenu/launch_game.cc:378
 msgid "Give all players permanent vision of the entire map"
 msgstr "Geef alle spelers permanent zicht op de hele kaart"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:395
+#: ../../../../src/ui_fsmenu/launch_game.cc:400
 msgid "Naval warfare is set by the scenario"
 msgstr "Oorlogvoering op zee wordt bepaald door het scenario"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:397
+#: ../../../../src/ui_fsmenu/launch_game.cc:402
 msgid "Naval warfare is set by the saved game"
 msgstr "Oorlogvoering op zee wordt bepaald door het opgeslagen spel"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:400
+#: ../../../../src/ui_fsmenu/launch_game.cc:405
 msgid ""
 "Enable coastal invasions and ship-to-ship battles. This feature is "
 "experimental and may undergo substantial redesign in future versions of "
 "Widelands."
 msgstr "Maak kustinvasies en schip-tegen-schip gevechten mogelijk. Deze functie is experimenteel en kan in toekomstige versies van Widelands ingrijpend worden aangepast."
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:420
+#: ../../../../src/ui_fsmenu/launch_game.cc:426
 msgid "Player relations are set by the scenario"
 msgstr "Relaties tussen spelers worden bepaald door het scenario"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:422
+#: ../../../../src/ui_fsmenu/launch_game.cc:428
 msgid "Player relations are set by the saved game"
 msgstr "Relaties met spelers worden ingesteld door het opgeslagen spel"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:424
+#: ../../../../src/ui_fsmenu/launch_game.cc:430
 msgid "Disallow players to change their alliances during the game"
 msgstr "Verbied spelers om van bondgenoot te veranderen tijdens het spel"
 
 #. * TRANSLATORS: This is a map tag
-#: ../../../../src/ui_fsmenu/launch_game.cc:432
+#: ../../../../src/ui_fsmenu/launch_game.cc:439
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:506
 #: ../../../../src/ui_fsmenu/scenariodetails.cc:47
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:283
@@ -6223,21 +6223,21 @@ msgstr "Verbied spelers om van bondgenoot te veranderen tijdens het spel"
 msgid "Scenario"
 msgstr "Scenario"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:433
+#: ../../../../src/ui_fsmenu/launch_game.cc:440
 msgid "Win condition is set through the scenario"
 msgstr "Winconditie wordt tijdens het scenario gesteld"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:439
+#: ../../../../src/ui_fsmenu/launch_game.cc:446
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:510
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:287
 msgid "Saved Game"
 msgstr "Opgeslagen Spel"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:441
+#: ../../../../src/ui_fsmenu/launch_game.cc:448
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Het spel is een bewaard spel - de winconditie was al eerder ingesteld."
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:515
+#: ../../../../src/ui_fsmenu/launch_game.cc:522
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -7817,7 +7817,7 @@ msgstr "Encyclopedie"
 
 #: ../../../../src/wlapplication_options.cc:367
 msgid "Context Menu"
-msgstr ""
+msgstr "Contextmenu"
 
 #: ../../../../src/wlapplication_options.cc:371
 msgid "Cut Text"
@@ -8363,7 +8363,7 @@ msgstr "Menu"
 #: ../../../../src/wlapplication_options.cc:1425
 msgctxt "hotkey"
 msgid "Application"
-msgstr ""
+msgstr "Toepassing"
 
 #: ../../../../src/wlapplication_options.cc:1427
 msgctxt "hotkey"
@@ -9843,7 +9843,7 @@ msgstr "Toon bediening"
 #: ../../../../src/wui/inputqueuedisplay.cc:683
 #, c-format
 msgid "+%u"
-msgstr ""
+msgstr "+%u"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../../../src/wui/interactive_base.cc:144
@@ -10889,7 +10889,7 @@ msgstr "Deze expeditie kan je niet annuleren, omdat er geen haven is waar het sc
 #: ../../../../src/wui/shipwindow.cc:362
 msgctxt "destination"
 msgid "(none)"
-msgstr ""
+msgstr "(geen)"
 
 #: ../../../../src/wui/shipwindow.cc:429 ../../../../src/wui/shipwindow.cc:434
 #: ../../../../src/wui/shipwindow.cc:439
