@@ -154,7 +154,7 @@ static void tinygettext_log_warn(const std::string& msg) {
 	log_warn("%s", msg.c_str());
 }
 static void tinygettext_log_info(const std::string& msg) {
-	verb_log_info("%s", msg.c_str());
+	log_i18n_if_desired_("dictionary", msg.c_str());
 }
 
 /**
