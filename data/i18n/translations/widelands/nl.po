@@ -989,7 +989,7 @@ msgstr "Beschrijving: %s"
 #: ../../../../src/editor/ui_menus/field_info_window.cc:251
 msgctxt "addons"
 msgid "(none)"
-msgstr ""
+msgstr "(geen)"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:258
 #, c-format
@@ -1348,19 +1348,19 @@ msgstr "Kaart ID:"
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:257
 msgctxt "map_generator"
 msgid "Default"
-msgstr ""
+msgstr "Standaard"
 
 #. * TRANSLATORS: Random Climate
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:285
 msgctxt "climate"
 msgid "Random"
-msgstr ""
+msgstr "Willekeurig"
 
 #. * TRANSLATORS: Default Terrain Distribution
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:316
 msgctxt "terrain"
 msgid "Default"
-msgstr ""
+msgstr "Standaard"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:318
 msgid "Alpine"
@@ -1380,7 +1380,7 @@ msgstr "Ruigland"
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:322
 msgctxt "terrain"
 msgid "Random"
-msgstr ""
+msgstr "Willekeurig"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:630
 msgid "Generating random map…"
@@ -3359,7 +3359,7 @@ msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was reachable at the TCP port %u or the server shut down as"
 " you tried to connect."
-msgstr ""
+msgstr "Widelands kon geen verbinding maken met het opgegeven adres. Ofwel was er geen Widelands server bereikbaar op de TCP poort %u of de server is afgesloten toen je verbinding probeerde te maken."
 
 #: ../../../../src/network/gameclient.cc:816
 #, c-format
@@ -4235,11 +4235,11 @@ msgstr "%1$s<br>(%2$s)"
 
 #: ../../../../src/ui_basic/textinput.cc:374
 msgid "Cut"
-msgstr ""
+msgstr "Knippen"
 
 #: ../../../../src/ui_basic/textinput.cc:374
 msgid "Cut the selected text to the clipboard"
-msgstr ""
+msgstr "De geselecteerde tekst naar het klembord knippen"
 
 #: ../../../../src/ui_basic/textinput.cc:377
 #: ../../../../src/ui_fsmenu/tech_info.cc:238
@@ -4248,19 +4248,19 @@ msgstr "Kopiëren"
 
 #: ../../../../src/ui_basic/textinput.cc:377
 msgid "Copy the selected text to the clipboard"
-msgstr ""
+msgstr "Kopieer de geselecteerde tekst naar het klembord"
 
 #: ../../../../src/ui_basic/textinput.cc:380
 msgid "Paste"
-msgstr ""
+msgstr "Plakken"
 
 #: ../../../../src/ui_basic/textinput.cc:380
 msgid "Paste the clipboard content"
-msgstr ""
+msgstr "De inhoud van het klembord plakken"
 
 #: ../../../../src/ui_basic/textinput.cc:383
 msgid "Delete the selected text"
-msgstr ""
+msgstr "De geselecteerde tekst verwijderen"
 
 #: ../../../../src/ui_basic/textinput.cc:386
 #: ../../../../src/wlapplication_options.cc:383
@@ -4269,7 +4269,7 @@ msgstr "Selecteer Alles"
 
 #: ../../../../src/ui_basic/textinput.cc:386
 msgid "Select the entire text"
-msgstr ""
+msgstr "Selecteer de volledige tekst"
 
 #: ../../../../src/ui_basic/window.cc:101
 #: ../../../../src/ui_basic/window.cc:862
@@ -4304,23 +4304,23 @@ msgstr "Losmaken"
 
 #: ../../../../src/ui_basic/window.cc:847
 msgid "Minimize the window"
-msgstr ""
+msgstr "Het venster minimaliseren"
 
 #: ../../../../src/ui_basic/window.cc:847
 msgid "Unminimize the window"
-msgstr ""
+msgstr "Venster minimaliseren opheffen"
 
 #: ../../../../src/ui_basic/window.cc:857
 msgid "Pin the window"
-msgstr ""
+msgstr "Zet het venster vast"
 
 #: ../../../../src/ui_basic/window.cc:857
 msgid "Unpin the window"
-msgstr ""
+msgstr "Het venster ontgrendelen"
 
 #: ../../../../src/ui_basic/window.cc:862
 msgid "Close the window"
-msgstr ""
+msgstr "Sluit het venster"
 
 #: ../../../../src/ui_fsmenu/about.cc:38 ../../../../src/ui_fsmenu/main.cc:515
 msgid "About Widelands"
@@ -5247,7 +5247,7 @@ msgstr "Minimale Widelands-versie: %s"
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:295
 msgctxt "version"
 msgid "(none)"
-msgstr ""
+msgstr "(geen)"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:325
 msgid "Top-level directory"
@@ -5864,7 +5864,7 @@ msgstr "Naam Veldtocht"
 #: ../../../../src/ui_fsmenu/campaigns.cc:45
 msgctxt "difficulty"
 msgid "Default"
-msgstr ""
+msgstr "Standaard"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:44
 msgid "Crash Report Details"
@@ -7817,7 +7817,7 @@ msgstr "Encyclopedie"
 
 #: ../../../../src/wlapplication_options.cc:367
 msgid "Context Menu"
-msgstr ""
+msgstr "Contextmenu"
 
 #: ../../../../src/wlapplication_options.cc:371
 msgid "Cut Text"
@@ -8363,7 +8363,7 @@ msgstr "Menu"
 #: ../../../../src/wlapplication_options.cc:1425
 msgctxt "hotkey"
 msgid "Application"
-msgstr ""
+msgstr "Toepassing"
 
 #: ../../../../src/wlapplication_options.cc:1427
 msgctxt "hotkey"
@@ -9843,7 +9843,7 @@ msgstr "Toon bediening"
 #: ../../../../src/wui/inputqueuedisplay.cc:683
 #, c-format
 msgid "+%u"
-msgstr ""
+msgstr "+%u"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../../../src/wui/interactive_base.cc:144
@@ -10889,7 +10889,7 @@ msgstr "Deze expeditie kan je niet annuleren, omdat er geen haven is waar het sc
 #: ../../../../src/wui/shipwindow.cc:362
 msgctxt "destination"
 msgid "(none)"
-msgstr ""
+msgstr "(geen)"
 
 #: ../../../../src/wui/shipwindow.cc:429 ../../../../src/wui/shipwindow.cc:434
 #: ../../../../src/wui/shipwindow.cc:439

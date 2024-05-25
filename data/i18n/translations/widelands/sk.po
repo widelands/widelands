@@ -7746,7 +7746,7 @@ msgstr "Pekáreň"
 
 #: ../../../../src/wlapplication_options.cc:214
 msgid "Brewery"
-msgstr ""
+msgstr "Pivovar"
 
 #: ../../../../src/wlapplication_options.cc:215
 msgid "Smokery"
