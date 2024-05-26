@@ -151,6 +151,10 @@ RenderQueue& RenderQueue::instance() {
 	return render_queue;
 }
 
+void RenderQueue::set_dither_mask(const std::string& filepath) {
+	dither_program_->set_dither_mask(filepath);
+}
+
 void RenderQueue::enqueue(const Item& given_item) {
 	Item* item;
 	uint32_t extra_value = 0;

@@ -542,7 +542,13 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 	}
 
 	if (code.sym == SDLK_ESCAPE) {
-		mainmenu_.toggle();
+		if (in_road_building_mode(RoadBuildingType::kRoad) ||
+		    in_road_building_mode(RoadBuildingType::kWaterway)) {
+			abort_build_road();
+		} else {
+			mainmenu_.toggle();
+		}
+
 		return true;
 	}
 
