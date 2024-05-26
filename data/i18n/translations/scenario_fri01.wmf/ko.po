@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: ks k, 2021\n"
 "Language-Team: Korean (https://app.transifex.com/widelands/teams/35159/ko/)\n"
@@ -20,166 +20,166 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. TRANSLATORS: Name of a backup autosave
-#: ../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:129
+#: ../../../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:129
 msgid "The Great Stormflood (Backup Autosave)"
 msgstr "거대한 비바람 홍수 (백업 자동 저장)"
 
-#: ../../data/campaigns/fri01.wmf/scripting/starting_conditions.lua:8
+#: ../../../../data/campaigns/fri01.wmf/scripting/starting_conditions.lua:8
 msgid "Langeneß"
 msgstr ""
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:25
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:25
 msgid "Build a wood economy and a reed farm"
 msgstr "목재 경제와 갈대 농장을 짓기"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:27
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Wood Economy"
 msgstr "목재 경제"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:28
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:28
 msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
 msgstr "통나무 생산을 시작하기 위해 최소한 나무꾼의 집 1 곳과 숲꾼의 집 2 곳을 짓고 갈대 농장에서 갈대를 기르기 시작하십시오."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:33
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:33
 msgid "Start producing bricks"
 msgstr "벽돌을 만들기 시작하십시오"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:35
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:35
 msgid "Brick Economy"
 msgstr "벽돌 경제"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:36
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:36
 msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
 msgstr "벽돌 가마, 탄광, 암석 광산, 진흙 구덩이, 우물 등을 지어 벽돌을 생산하기 시작하십시오."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:41
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:41
 msgid "Gather building materials"
 msgstr "건축 자재들을 모으십시오"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:43
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:43
 msgid "Stockpile Building Materials"
 msgstr "건축 자재들을 비축하십시오"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:44
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:44
 msgid ""
 "Stockpile some building materials in your headquarters. Gather at least:"
 msgstr "본부에 건축 자재들을 비축해 두십시오. 적어도 다음 사항을 수집하십시오:"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:45
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:45
 msgid "30 × Log"
 msgstr "30 × 통나무"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:46
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:46
 msgid "30 × Granite"
 msgstr "30 × 화강암"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:47
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:47
 msgid "10 × Clay"
 msgstr "10 × 진흙"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:48
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:48
 msgid "40 × Brick"
 msgstr "40 × 벽돌"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:49
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:49
 msgid "20 × Coal"
 msgstr "20 × 석탄"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:50
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:50
 msgid "30 × Reed"
 msgstr "30 × 갈대"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:51
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:51
 msgid ""
 "Remember that you can set target quantities for most of these wares in your "
 "economy settings."
 msgstr "경제 설정에서 이러한 대부분의 물품에 대한 목표 수량을 설정할 수 있습니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:56
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:56
 msgid "Produce food for the miners"
 msgstr "광부들을 위해 식량을 생산하십시오"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:58
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:58
 msgid "Food Economy"
 msgstr "식량 경제"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:59
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:59
 msgid ""
 "Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
 "collector’s house."
 msgstr "선술집, 어부의 집, 훈제 장, 딸기 열매 농장 및 과일 따는 이의 집을 지으십시오."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:64
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:64
 msgid "Enhance your food economy"
 msgstr "식량 경제를 향상시키십시오"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:66
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:66
 msgid "Enhance Food Economy"
 msgstr "식량 경제를 향상시키십시오"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:67
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:67
 msgid ""
 "Build at least two farms, a beekeeper’s house (next to the berry farm), a "
 "bakery, a brewery, and another tavern."
 msgstr "적어도 두 곳의 농장, 양봉가 집(딸기 열매 농장 옆), 빵집, 양조장, 그리고 다른 선술집을 지어야 합니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:72
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:72
 msgid "Build an iron mine and a mining infrastructure"
 msgstr "철광산 및 광산 기반시설을 지으십시오"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:74
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:74
 msgid "Build Mines and Mining Infrastructure"
 msgstr "광산 및 광산 기반시설을 지으십시오"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:75
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:75
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
 msgstr "철광산, 용광로, 대장간, 작은 갑옷 제작소를 지으십시오."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:80
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:255
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:264
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:80
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:255
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:264
 msgid "Start recruiting soldiers"
 msgstr "군인을 모집하기 시작하십시오"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:82
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:82
 msgid "Recruiting Soldiers"
 msgstr "군인을 모집하고 있음"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:83
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:83
 msgid "Build a barracks, a reindeer farm and a sewing room."
 msgstr "병영, 순록 농장, 바느질 방을 지으십시오."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:88
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:88
 msgid "Discover more of the island"
 msgstr "섬에서 더 많은 것을 발견하십시오"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:90
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:90
 msgid "Expand and Discover"
 msgstr "확장하고 발견하기"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:91
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:91
 msgid "Expand further and discover more of the island."
 msgstr "더 멀리 확장하고 더 많은 섬을 발견하십시오."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:96
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:96
 msgid "Train your soldiers"
 msgstr "군인들을 훈련시킵니다"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:98
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:309
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:318
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:330
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:346
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:352
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:358
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:98
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:309
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:318
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:330
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:346
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:352
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:358
 msgid "Training Soldiers"
 msgstr "군인들을 훈련시키고 있음"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:99
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:99
 msgid ""
 "Train a soldier to the highest possible level. Soldiers are trained in "
 "training camps and training arenas. We will need a gold mine, a tailor’s "
@@ -189,39 +189,39 @@ msgstr ""
 "군인을 가능한 가장 높은 수준으로 훈련시키십시오. 군인들은 훈련소와 훈련 경기장에서 훈련을 받습니다. 우리는 더 좋은 무기와 투구를 "
 "만들기 위해서는 황금 광산, 튼튼한 옷을 꿰매는 맞춤 옷가게, 큰 갑옷 제작소가 필요합니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:104
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:104
 msgid "Defeat the enemy!"
 msgstr "적을 물리치십시오!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:106
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:106
 msgid "Defeat the Enemy!"
 msgstr "적을 물리치십시오!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:107
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:107
 msgid "Destroy the enemy tribe’s headquarters."
 msgstr "적 부족의 본부를 파괴하십시오."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:112
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:112
 msgid "Escape from the floods"
 msgstr "홍수로부터 탈출"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:114
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:114
 msgid "Flee from the Floods"
 msgstr "홍수를 피해 도망"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:115
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a port, a weaving mill and a shipyard, then start an expedition to "
 "flee before the storm flood drowns the island."
 msgstr "항구와 방직 공장, 조선소를 지은 다음 폭풍 홍수로 섬이 가라 앉기 전에 탈출하기 위한 탐험을 시작하십시오."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:116
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:116
 msgid ""
 "You can build the port either on the easternmost tip of the island or in the"
 " place where the enemy’s headquarters stood."
 msgstr "섬의 가장 동쪽 끝이나 적의 본부가 세워져 있는 곳에 항구를 지을 수 있습니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:117
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:117
 msgid ""
 "If you did not prepare well enough to master this challenge in time, you can"
 " reload the scenario from the backup savegame automatically created for you "
@@ -230,20 +230,20 @@ msgstr ""
 "이 도전 과제를 제 시간에 완수하기에 충분하지 않은 경우 적의 본부에 도착하기 직전에 자동으로 생성된 백업 저장 놀이에서 시나리오를 다시"
 " 불러올 수 있습니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:126
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:135
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:144
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:160
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:176
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:126
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:135
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:144
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:160
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:176
 msgid "Introduction"
 msgstr "소개"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:127
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:127
 msgid "Welcome!"
 msgstr "환영합니다!"
 
 #. TRANSLATORS: Reebaud – Introduction 1
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:129
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:129
 msgid ""
 "Welcome to the beautiful isle of Langeness! I am Reebaud, the chieftain of "
 "this pristine island."
@@ -251,7 +251,7 @@ msgstr "아름다운 랑게네스 섬에 온것을 환영하오! 나는 이 깨�
 
 #. TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are
 #. dukedoms
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:132
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:132
 msgid ""
 "My tribe and I have just arrived from the mainland. There were fights with "
 "the Danes in the North, the Schauenburgers and Holsteiners in the East and "
@@ -261,12 +261,12 @@ msgstr ""
 "우리 부족과 저는 방금 본토에서 도착했습니다. 북쪽에있는 덴마크 인들과 동부와 남부에있는 샤우 엔 부르거 족과 홀스타인족과의 싸움이 "
 "있었습니다. 그래서 저는 이 부족한 섬에서 조용하고 평화로운 삶을 시작하기 위해 부족을 이끌기로 결정했습니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:136
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:136
 msgid "A new home"
 msgstr "새로운 고향"
 
 #. TRANSLATORS: Reebaud – Introduction 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:138
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:138
 msgid ""
 "This is as good a place as any to start building our new home. First of all,"
 " we must ensure a stable supply of basic building materials."
@@ -275,26 +275,26 @@ msgstr ""
 "합니다."
 
 #. TRANSLATORS: Reebaud – Introduction 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:141
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:141
 msgid ""
 "I have asked Hauke, one of my advisors, to oversee the construction of our "
 "settlement."
 msgstr "저는 제 조언자 중 한 명인 하우케에게 우리의 정착촌 짓기에 감독할 것을 요청했습니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:145
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:145
 msgid "The first buildings"
 msgstr "첫번째 건물"
 
 #. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional Frisian
 #. greeting
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:147
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:147
 msgid ""
 "Peace, Chieftain Reebaud! I will start with the colonization of the island "
 "straight away."
 msgstr "평화를 빕니다, 리바우드 족장! 저는 바로 섬의 식민지화부터 시작하겠습니다."
 
 #. TRANSLATORS: Hauke – Introduction 3
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:150
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:150
 msgid ""
 "Like all Frisians, we build our houses mainly with bricks. We improve them "
 "by adding some logs and granite. The roofs are thatched with reed, "
@@ -304,7 +304,7 @@ msgstr ""
 "자연스럽게 갈대로 깔려 있습니다.  비를 막는 데 이보다 더 적합한 것은 없습니다."
 
 #. TRANSLATORS: Hauke – Introduction 3
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:153
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:153
 msgid ""
 "We should start by taking care of our wood production. Trees don’t seem to "
 "grow well on this island; better build at least two houses for foresters and"
@@ -314,7 +314,7 @@ msgstr ""
 " 집 1 곳을 짓는 것이 좋겠습니다."
 
 #. TRANSLATORS: Hauke – Introduction 3
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:156
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:156
 msgid ""
 "Also, we had better build a reed farm soon. Even reed farms need reed to be "
 "built, so we must take care not to run short before we can grow our own. "
@@ -324,12 +324,12 @@ msgstr ""
 "또한, 우리는 곧 갈대 농장을 짓는 것이 좋습니다. 갈대농장도 갈대가 필요하기 때문에 우리는 스스로 성장하기 전에 부족함이 없도록 "
 "주의해야합니다. 갈대는 재배가 쉽기 때문에 갈대밭을 가꾸기 위해 갈대 농부가 관리를 더 이상 필요로 하지 않습니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:161
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:161
 msgid "Building our new home"
 msgstr "우리의 새로운 고향을 짓기"
 
 #. TRANSLATORS: Hauke – Introduction 4
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:163
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:163
 msgid ""
 "Our wood and reed supplies are ensured. Now, we must take care of our brick "
 "supply. Bricks are burned in a brick kiln out of granite and clay, so we "
@@ -342,7 +342,7 @@ msgstr ""
 " 채굴하기에 충분한 돌을 포함하고 있을 것입니다."
 
 #. TRANSLATORS: Hauke – Introduction 4
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:166
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:166
 msgid ""
 "Clay is easy to make: A clay digger working at a clay pit will simply dig up"
 " some earth and mix it with water. Just make sure that he has plenty of "
@@ -353,7 +353,7 @@ msgstr ""
 "충분한지 확인하십시오. 확장하기 위해 몇 개의 감시초소를 세우는 것이 좋을 수도 있습니다."
 
 #. TRANSLATORS: Hauke – Introduction 4
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:169
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:169
 msgid ""
 "To burn bricks, the brick kiln needs a fire. We need to use coal as fuel. "
 "Build a coal mine to make sure we don’t run out. No coal means no bricks, no"
@@ -364,18 +364,18 @@ msgstr ""
 " 수 있습니다."
 
 #. TRANSLATORS: Hauke – Introduction 4
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:172
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:172
 msgid ""
 "Also, build a well – nobody likes to drink salt water, and it is no good for"
 " making clay."
 msgstr "또한, 우물을 지으십시오 – 아무도 소금물을 마시는 것을 좋아하지 않고, 찰흙을 만드는 데도 좋지 않습니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:177
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:177
 msgid "Our first settlement"
 msgstr "우리의 첫번째 정착지"
 
 #. TRANSLATORS: Reebaud – Introduction 5
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:179
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:179
 msgid ""
 "You did well. Our entire building material production is working now. Let’s "
 "wait until we have gathered some more materials. We could expand our "
@@ -384,16 +384,16 @@ msgstr ""
 "잘했습니다. 현재 건축 자재 생산은 모두 정상적으로 진행되고 있습니다. 자재를 좀 더 모을 때까지 기다리겠습니다. 우리는 이 섬에서 다른"
 " 것을 찾을 수 있도록 영토를 더 확장 할 수 있습니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:184
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:184
 msgid "Reed Shortages"
 msgstr "갈대가 부족함"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:185
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:185
 msgid "Build another reed farm"
 msgstr "또다른 갈대 농장을 짓기"
 
 #. TRANSLATORS: Hauke – no reed
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:187
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:187
 msgid ""
 "I noticed we have been short of reed for a while now. Our buildings seem to "
 "need quite a lot of it. We should build another reed farm or two. Reed is "
@@ -404,22 +404,22 @@ msgstr ""
 "갈대농장을 지어야 합니다. 갈대는 또한 고기잡이 그물 및 다른 도구를 만드는 데 사용됩니다; 따라서 이러한 부족을 해결하는 것이 우선 "
 "순위가 되어야 합니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:188
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:188
 msgid ""
 "You should assign the new reed farm the highest priority for reed in the "
 "construction site window."
 msgstr "새로운 갈대 농장은 건설 현장 창에서 갈대의 우선 순위를 가장 높게 지정해야 합니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:191
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:191
 msgid "Clay Shortages"
 msgstr "찰흙이 부족함"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:192
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:192
 msgid "Build another clay pit"
 msgstr "또다른 찰흙 구덩이를 짓기"
 
 #. TRANSLATORS: Hauke – no clay
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:194
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:194
 msgid ""
 "Our brickmakers have been complaining about a shortage of clay for a while "
 "now. No clay means no bricks can be produced, so this shortage is slowing us"
@@ -431,7 +431,7 @@ msgstr ""
 " 게 좋을 것 같습니다."
 
 #. TRANSLATORS: Hauke – no clay
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:197
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:197
 msgid ""
 "Clay is also used in shipbuilding and to improve charcoal kilns. If we ever "
 "need to build a ship, or the mines cannot provide us with enough coal, we "
@@ -440,16 +440,16 @@ msgstr ""
 "찰흙은 또한 조선과 숯가마 개선에도 사용됩니다. 만약 우리가 배를 건조해야 하거나 광산이 충분한 석탄을 공급하지 못한다면, 우리는 더 "
 "많은 찰흙이 필요할 것입니다. 따라서 부족분은 해결되어야 합니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:200
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:200
 msgid "Brick Shortages"
 msgstr "벽돌이 부족함"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:201
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:201
 msgid "Build another brick kiln"
 msgstr "또다른 벽돌 가마를 짓기"
 
 #. TRANSLATORS: Hauke – no bricks
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:203
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:203
 msgid ""
 "I noticed we are running out of bricks. This slows down construction of our "
 "buildings a lot, since we need so many bricks. We should really start to "
@@ -461,22 +461,22 @@ msgstr ""
 "정말 다른 벽돌 가마를 건설하기 시작해야 하고 가능한 빨리 부족함을 해결할 수 있도록 건설 현장 창에서 벽돌의 우선순위를 가장 높게 "
 "두어야 합니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:204
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:204
 msgid ""
 "You should assign the new brick kiln the highest priority for bricks in the "
 "construction site window."
 msgstr "새로운 벽돌 가마는 건설 현장 창에서 벽돌의 우선 순위를 가장 높게 지정해야 합니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:207
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:207
 msgid "Warehouses"
 msgstr "창고들"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:208
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:208
 msgid "Build a warehouse in the east"
 msgstr "동쪽에 창고를 지으십시오"
 
 #. TRANSLATORS: Hauke – build a warehouse
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:210
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:210
 msgid ""
 "We are expanding our territory further and further to the east, and wares "
 "need to be transported over longer distances. We should build warehouses "
@@ -488,16 +488,16 @@ msgstr ""
 "창고를 짓고, 가급적 가장 동쪽에 건축 자재들을 보관해야 합니다. 우리 본부는 서쪽에 너무 멀어서 오랜 시간 창고 보관에 유용하지 "
 "않습니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:214
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:214
 msgid "Hungry Miners"
 msgstr "배고픈 광부들"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:215
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:215
 msgid "The miners are protesting…"
 msgstr "광부들이 항의하고 있습니다…"
 
 #. TRANSLATORS: Hauke – no rations left
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:217
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:217
 msgid ""
 "Chieftain Reebaud! I bring bad news. The miners are working so hard that "
 "they have no time to prepare their own food. They demand to be supplied with"
@@ -507,7 +507,7 @@ msgstr ""
 "공급받기를 요구하고 있습니다."
 
 #. TRANSLATORS: Hauke – no rations left
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:220
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:220
 msgid ""
 "We need to build a tavern for preparing rations. To get the raw food, we "
 "have to build a fisher’s house, and as nobody likes raw fish, a smokery to "
@@ -519,28 +519,28 @@ msgstr ""
 "하십시오."
 
 #. TRANSLATORS: Hauke – no rations left
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:223
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:223
 msgid ""
 "We should start expanding our territory faster in order to have enough space"
 " for many berry farms, and a longer coastline for fishing."
 msgstr ""
 "우리는 많은 딸기 열매 농장에 충분한 공간을 확보하고 낚시를 위해 더 긴 바닷가를 갖기 위해 영토를 더 빨리 확장해야 합니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:227
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:227
 msgid "Enhancing the Food Economy"
 msgstr "식량 경제를 향상시키고 있음"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:228
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:228
 msgid "Feeding the soldiers"
 msgstr "군인들에게 먹을것을 주고 있음"
 
 #. TRANSLATORS: Hauke – better food
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:230
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:230
 msgid "Well done. The miners are satisfied and have started working again."
 msgstr "잘 하셨습니다. 광부들은 만족하고 다시 일을 시작했습니다."
 
 #. TRANSLATORS: Hauke – better food
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:233
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:233
 msgid ""
 "But when the mines will have to be enhanced, rations won’t keep the miners "
 "happy. Better take precautions – build a second tavern, then consider "
@@ -550,7 +550,7 @@ msgstr ""
 "만들고, 그 중 하나를 술을 마시는 주점으로 바꾸는것을 생각해보십시오."
 
 #. TRANSLATORS: Hauke – better food
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:236
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:236
 msgid ""
 "A drinking hall needs better food. Build a bakery, a brewery, and two or "
 "three farms to start growing barley. Keep in mind that barley grows very "
@@ -563,7 +563,7 @@ msgstr ""
 "빠르게 확장해서 농사를 지을 수 있는 공간을 더 확보해야 합니다."
 
 #. TRANSLATORS: Hauke – better food
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:239
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:239
 msgid ""
 "The bakery and brewery should be enhanced as soon as the workers have enough"
 " experience. They can then produce mead, and bread sweetened with honey. "
@@ -573,16 +573,16 @@ msgstr ""
 "제과점과 양조장은 일꾼들이 충분한 경험을 쌓는 즉시 향상되어야 합니다. 그리고 나서 그들은 달콤한 꿀로 벌꿀술과 꿀로 감미로운 빵을 "
 "생산할 수 있습니다. 딸기 열매 농장 옆에 양봉가 집을 지어서 약간의 꿀을 생산하십시오. 꿀은 필요할 때까지 보관할 수 있습니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:244
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:244
 msgid "Build a Mining Economy"
 msgstr "광산 경제 짓기"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:245
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:245
 msgid "Mining economy"
 msgstr "광산 경제"
 
 #. TRANSLATORS: Reebaud – mining economy
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:247
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:247
 msgid ""
 "We can now produce all the kinds of food that we are used to. I wonder what "
 "treasures these hills might contain? We should find out."
@@ -590,7 +590,7 @@ msgstr ""
 "우리는 이제 우리가 익숙한 모든 종류의 음식을 생산할 수 있습니다. 이 언덕에는 어떤 보물이 들어있을까요? 우리는 알아 내야합니다."
 
 #. TRANSLATORS: Reebaud – mining economy
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:250
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:250
 msgid ""
 "Build an iron mine and perhaps a gold mine. As they produce only ores, we "
 "will need a furnace to smelt them. Also build a blacksmithy to ensure we "
@@ -602,20 +602,20 @@ msgstr ""
 "않도록 해야 합니다.  – 물론, 작은 갑옷 제작소도 있습니다. 그것은 칼뿐만 아니라 투구도 생산합니다. 여기서 적을 만나지 않기를 "
 "바라지만 대비하는 것이 좋습니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:254
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:263
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:254
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:263
 msgid "Be Prepared"
 msgstr "준비하십시오"
 
 #. TRANSLATORS: Reebaud – recruit 1
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:257
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:257
 msgid ""
 "Our mines are working well. We can now produce all the tools we need, and "
 "some weapons as well."
 msgstr "우리 광산은 잘 돌아가고 있습니다. 우리는 이제 필요한 모든 도구와 무기들을 생산할 수 있습니다."
 
 #. TRANSLATORS: Reebaud – recruit 1
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:260
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:260
 msgid ""
 "We could use these weapons to equip some new soldiers. I hope we won’t find "
 "enemies here, but it is always better to be prepared. New soldiers are "
@@ -626,7 +626,7 @@ msgstr ""
 "짧은 칼과 모든 명예로운 전사들의 제복인 털가죽 의복이 병영에 장비되어 있습니다."
 
 #. TRANSLATORS: Hauke – recruit 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:266
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:266
 msgid ""
 "We will need a barracks, of course; a reindeer farm to produce fur, and a "
 "sewing room to sew the fur into garments. The reindeer farm produces some "
@@ -637,7 +637,7 @@ msgstr ""
 "농장은 털가죽의 부산물로 약간의 고기를 생산하고, 또한 순록을 훈련 시켜 바쁜 땅길에서 우리의 짐꾼들을 도울 수 있습니다."
 
 #. TRANSLATORS: Hauke – recruit 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:269
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:269
 msgid ""
 "I advise to build all those buildings within a short distance of each other,"
 " and to construct two warehouses nearby: One should be set to store only "
@@ -647,7 +647,7 @@ msgstr ""
 " 보관하도록 설정되어야 하고, 다른 하나는 건축 자재들을 보관하도록 설정되어야 합니다."
 
 #. TRANSLATORS: Hauke – recruit 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:272
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:272
 msgid ""
 "We should also build other related buildings nearby, such as a furnace, and "
 "some wells and farms to supply the reindeer farm. This design will make our "
@@ -657,22 +657,22 @@ msgstr ""
 "우리는 또한 근처에 용광로와 같은 다른 관련 건물들과 순록 농장에 공급할 몇 곳의 우물과 농장을 지어야 합니다. 이 설계는 가공 건물의 "
 "물품 대기 시간을 줄이기 때문에 우리 군사 경제를 더욱 효율적으로 만들 것입니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:276
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:276
 msgid "Explore the Island"
 msgstr "섬을 탐사하기"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:277
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:277
 msgid "Expanding"
 msgstr "확장하고 있음"
 
 #. TRANSLATORS: Reebaud – expand
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:279
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:279
 msgid ""
 "Our barracks has started working, and we are recruiting new soldiers now."
 msgstr "우리 병영은 일을 시작했고 지금 신병을 모집하고 있습니다."
 
 #. TRANSLATORS: Reebaud – expand
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:282
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:282
 msgid ""
 "But we can’t be sure we’re safe here yet. It would be better to expand "
 "further to the east to find out whether we really are alone here."
@@ -681,7 +681,7 @@ msgstr ""
 " 같습니다."
 
 #. TRANSLATORS: Reebaud – expand
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:285
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:285
 msgid ""
 "Expanding would also provide more space for farming. We could use some extra"
 " barley to recruit more reindeer, as our roads are quite busy."
@@ -689,27 +689,27 @@ msgstr ""
 "확장하는것은 또한 농업을 위한 더 많은 공간을 제공할 것입니다. 땅길이 매우 붐비기 때문에 보리를 좀 더 사용하여 순록을 더 많이 모집 "
 "할 수 있습니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:290
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:296
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:302
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:290
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:296
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:302
 msgid "Enemies!"
 msgstr "적이다!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:291
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:297
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:303
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:291
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:297
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:303
 msgid "Enemy sighted!"
 msgstr "적을 발견했습니다!"
 
 #. TRANSLATORS: Reebaud – enemy sighted
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:293
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:293
 msgid "Another tribe! On OUR island! What are you doing here, invaders?"
 msgstr "또 다른 부족이다! 우리 섬에서요! 침략자들아, 여기서 뭐하는거야?"
 
 #. TRANSLATORS: Maukor – enemy sighted. The great storm flood of 1362 was
 #. supposed to be a sign of the victory of the Christian God over the old
 #. northern gods
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:299
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:299
 msgid ""
 "This is MY island! YOU are the intruder here! I pray to the one and solely "
 "true God that we will kill you all, and your souls shall be tormented in "
@@ -719,36 +719,36 @@ msgstr ""
 "기도드립니다!"
 
 #. TRANSLATORS: Reebaud – enemy sighted
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:305
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:305
 msgid ""
 "Unbelievers! I pray to OUR gods that this faithless tribe shall be utterly "
 "shattered! War upon them!"
 msgstr "불신자들아! 나는 이 믿음이 없는 부족이 완전히 무너지길 우리의 신들에게 기도합니다! 그들과 전쟁이다!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:310
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:310
 msgid "Stronger in battle"
 msgstr "전투의 힘쎈자"
 
 #. TRANSLATORS: Reebaud – train soldiers 1
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:312
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:312
 msgid ""
 "We are recruiting soldiers easily enough, but they are fairly weak. We must "
 "train our soldiers if they are to beat the enemy."
 msgstr "우리는 군인들을 쉽게 모집하고 있지만 상당히 약합니다. 적을 물리치려면 군인들을 훈련시켜야 합니다."
 
 #. TRANSLATORS: Reebaud – train soldiers 1
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:315
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:315
 msgid ""
 "Soldiers are trained in basic attack, health and defense by a training camp."
 " They can learn the finer points in a training arena."
 msgstr "군인들은 훈련소에서 기본적인 공격, 체력, 방어 훈련을 받습니다. 그들은 훈련장에서 더 질 높은 점을 배울 수 있습니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:319
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:319
 msgid "Frisian fighting"
 msgstr "프리지아인이 싸우고 있음"
 
 #. TRANSLATORS: Reebaud – train soldiers 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:321
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:321
 msgid ""
 "Soldiers are trained in two steps in defense and health. They get fur "
 "garments studded with iron and also gold to cushion blows; and helmets "
@@ -758,7 +758,7 @@ msgstr ""
 " 투구를 지급받습니다."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:324
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:324
 msgid ""
 "They learn to attack with three different swords: The long sword, broadsword"
 " and double-edged sword. The latter two contain gold, and all of them iron. "
@@ -771,7 +771,7 @@ msgstr ""
 " 다양한 다른 칼들이 주어집니다. 이렇게 하면 6 단계의 공격 훈련을 할 수 있습니다."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:327
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:327
 msgid ""
 "We do not train soldiers to evade attacks; a true warrior can block his "
 "opponent’s blows with a skillful twist of the sword instead of jumping away "
@@ -780,12 +780,12 @@ msgstr ""
 "우리는 군인들이 공격을 회피하도록 훈련시키지 않습니다. 진정한 전사는 겁쟁이처럼 도망지 않고 칼을 능숙하게 비틀어 상대의 타격을 막을 수"
 " 있습니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:331
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:331
 msgid "Planning a training center"
 msgstr "훈련원을 계획하고 있음"
 
 #. TRANSLATORS: Hauke – train soldiers 3
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:333
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:333
 msgid ""
 "We will need a tailor’s shop to sew more protective garments, and another "
 "sewing room to keep producing normal fur garments. Also, you should enhance "
@@ -798,7 +798,7 @@ msgstr ""
 " 갑옷은 금을 사용하기 때문에 금광이 한 곳 이상 필요합니다."
 
 #. TRANSLATORS: Hauke – train soldiers 3
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:336
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:336
 msgid ""
 "We should build these buildings close to the barracks, since it is, as I "
 "already mentioned earlier, much more efficient to centralize all our "
@@ -810,7 +810,7 @@ msgstr ""
 "있는 것보다 훨씬 효율적이기 때문입니다. 거기에 훈련에 필요한 음식만 보관할 세 번째 창고를 지으십시오."
 
 #. TRANSLATORS: Hauke – train soldiers 3
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:339
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:339
 msgid ""
 "When soldiers train to use new weapons, their old equipment is discarded. "
 "Take into account that the useless scraps will clutter up your roads until "
@@ -820,28 +820,28 @@ msgstr ""
 " 땅길을 어지럽힐 것이라는 점을 고려하십시오."
 
 #. TRANSLATORS: Hauke – train soldiers 3
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:342
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:342
 msgid ""
 "I recommend to train at least one soldier to the highest level in health, "
 "defense and attack. Until then, the enemy is just too strong for us."
 msgstr ""
 "체력, 방어, 공격에서 적어도 한 명의 군인을 가장 높은 수준으로 훈련시키는 것이 좋습니다. 그때까지, 적은 우리에게 너무 강합니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:347
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:347
 msgid "Our soldiers are strong"
 msgstr "우리 군인들은 강합니다"
 
 #. TRANSLATORS: Reebaud – attack enemy 1
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:349
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:349
 msgid "We finally have our first fully trained soldier. Let’s attack!"
 msgstr "드디어 우리에게는 처음으로 완전히 훈련된 군일을 가졌습니다. 공격합시다!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:353
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:353
 msgid "Are our soldiers strong enough?"
 msgstr "우리 군인들은 충분히 강합니까?"
 
 #. TRANSLATORS: Hauke – attack enemy 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:355
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:355
 msgid ""
 "With respect, Chieftain, please be not so hasty! The enemies are very "
 "strong, and I’m still not convinced we can defeat them. I’d prefer not to "
@@ -852,12 +852,12 @@ msgstr ""
 " 저는 우리군을 잃을 가능성이 큰 전투에 보내지 않기를 원합니다. 군인들을 잃지 않고 적을 물리 칠 수있을 때까지 조금 더 기다리기를 "
 "원합니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:359
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:359
 msgid "Our soldiers are strong enough"
 msgstr "우리 군인들은 충분히 강하다"
 
 #. TRANSLATORS: Reebaud – attack enemy 3
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:361
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:361
 msgid ""
 "Of course I also prefer to keep our soldiers alive, but we can’t save every "
 "life. Soldiers die in battle, that’s just the way things are. You may decide"
@@ -868,18 +868,18 @@ msgstr ""
 "세상 돌아가는 방식입니다. 공격할 때까지 얼마나 기다려야 할지 결정하시겠지만, 너무 오래 걸리지는 마십시오. 그렇지 않으면 적들이 우리의"
 " 약점을 이용하게 될 것입니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:365
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:371
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:365
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:371
 msgid "Beware!"
 msgstr "조심해!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:366
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:372
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:366
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:372
 msgid "Not strong enough"
 msgstr "충분하지 않은 공간"
 
 #. TRANSLATORS: Hauke – beware of early attacks 1
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:368
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:368
 msgid ""
 "Chieftain Reebaud! Our scouts report that the enemy is advancing fast. I "
 "fear we are not strong enough yet to defend ourselves if he attacks first. "
@@ -889,7 +889,7 @@ msgstr ""
 "않은 것 같습니다. 그를 막을 무언가를 고안해야합니다."
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:374
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:374
 msgid ""
 "The scouts informed me that the enemy can’t build towers. We could build a "
 "fortress, which is the building that will push the border as far east as "
@@ -900,7 +900,7 @@ msgstr ""
 " 적들은 국경 바로 앞에 자신들의 요새를 지어야만 우리 요새를 볼 수 있을 것입니다."
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:377
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:377
 msgid ""
 "We can prevent this, or at least make it harder to do, by ordering some "
 "foresters to plant trees at the border. The enemy will have to cut down many"
@@ -910,25 +910,25 @@ msgstr ""
 "우리는 몇몇 숲꾼들에게 국경지역에 나무를 심도록 명령함으로써 이것을 예방할 수도 있고, 적어도 어렵게 만들 수도 있습니다. 적들은 그 "
 "자리를 마련하기 위해 많은 나무들을 베어내야 하므로, 우리가 선택한 시기에 전투를 개시할 때까지 우리는 안전할 수 있습니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:380
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:386
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:380
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:386
 msgid "Enemy Defeated"
 msgstr "적이 패배하였습니다"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:381
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:387
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:381
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:387
 msgid "Enemy defeated!"
 msgstr "적이 패배하였습니다!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 1
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:383
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:383
 msgid ""
 "They are defeated! I thank you, all my gods, for granting us victory over "
 "the unbelievers!"
 msgstr "그들이 패배하였습니다! 불신자들을 물리치고 우리에게 승리를 안겨 주신 나의 모든 신들께 감사드립니다!"
 
 #. TRANSLATORS: Maukor – enemy defeated 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:389
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:389
 msgid ""
 "I pray to God to hear my last words. Let not the false fiend triumph! Punish"
 " them for this ignoble feat!"
@@ -936,18 +936,18 @@ msgstr ""
 "나는 나의 마지막 말을 듣기 위해 하나님께 기도합니다. 거짓된 악마가 승리하지 못하게 해주십시오! 이 비열한 짓에 대해 그들을 "
 "처벌해주십시오!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:392
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:398
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:392
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:398
 msgid "Storm Flood"
 msgstr "폭풍 홍수"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:393
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:399
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:393
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:399
 msgid "The island is flooding!"
 msgstr "섬이 범람하고 있습니다!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 3
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:395
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:395
 msgid ""
 "His God has granted his wish! The ocean is rising! The island is almost flat"
 " – we will all drown!"
@@ -956,7 +956,7 @@ msgstr ""
 "것입니다!"
 
 #. TRANSLATORS: Hauke – rising water
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:401
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:401
 msgid ""
 "Despair not, I did espy some hope! The easternmost tip of the island, as "
 "well as the space where the fiends’ headquarters stood, seems well suited to"
@@ -967,7 +967,7 @@ msgstr ""
 "적합해 보입니다. 만약 우리가 배를 만들고, 새로운 정착지를 짓는 데 필요한 모든 것을 채운다면, 우리는 탈출할 수 있을 것입니다."
 
 #. TRANSLATORS: Hauke – rising water
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:404
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:404
 msgid ""
 "The storm flood seems to be coming from the west. If we hurry, we will just "
 "make it! We only need to build a port and a shipyard – oh, and a weaving "
@@ -979,16 +979,16 @@ msgstr ""
 "아, 그리고 돛을 위해 갈대와 털로 만든 튼튼한 천을 짜는 직조공장이 필요합니다. 그런 다음 항구에서 원정을 시작할 수 있습니다. "
 "신들에게 기도드리시고 서두르십시오!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Don’t Forget the Soldiers"
 msgstr "군인들을 잊지 마십시오"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:412
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:412
 msgid "Soldiers to the port!"
 msgstr "군인들이 항구로 이동합니다!"
 
 #. TRANSLATORS: Reebaud – rising water
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:414
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:414
 #, lua-format
 msgid ""
 "I almost forgot in this haste – wherever we will land, we’ll need some "
@@ -1012,22 +1012,22 @@ msgstr[0] ""
 "%d 명까지 수용 할 수있는 공간이 있어야 합니다. 만약 아무도 모두 함께 꽉 차 있는 것에 개의치 않는다면 말이죠. 항구가 완공되면 "
 "건축 자재와 우리의 가장 좋은 사람들을 항구로 보내서 우리가 출항할 때 출항할 준비를 하도록 하십시오!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:417
 msgid ""
 "All wares and workers that are loaded onto the expedition as well as some of"
 " the soldiers in the port will be carried over to the next scenario."
 msgstr "항구에 있는 일부 군인들은 물론 원정대에 실리는 모든 물품과 일꾼들은 다음 시나리오로 넘어갈 것입니다."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"
 msgstr "승리"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:422
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:422
 msgid "We escaped!"
 msgstr "우리는 탈출했습니다!"
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:424
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:424
 msgid ""
 "The gods have answered our prayers. We will escape the island’s drowning, "
 "and I am confident we will be able to build a new home again in a more "
@@ -1036,12 +1036,12 @@ msgstr ""
 "신들은 우리의 기도에 응답했습니다. 우리는 이 섬의 익사로부터 탈출할 것이고, 저는 우리가 이 세상의 더 평화로운 구석에 새로운 집을 "
 "다시 지을 수 있을 것이라고 확신합니다!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:425
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:425
 msgid "Congratulations"
 msgstr "축하합니다"
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:427
+#: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:427
 msgid ""
 "You have completed this mission. You may move on to the next scenario now to"
 " help us build a new home, far from the false God’s vengeful reach…"
