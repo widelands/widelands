@@ -33,8 +33,8 @@ constexpr int default_hotspot_x = 3;
 constexpr int default_hotspot_y = 7;
 
 const std::string default_wait_filename = "images/ui_basic/hourglass.png";
-constexpr int wait_hotspot_x = 19;
-constexpr int wait_hotspot_y = 29;
+constexpr int wait_hotspot_x = 15;
+constexpr int wait_hotspot_y = 23;
 
 MouseCursor* g_mouse_cursor;
 
