@@ -169,8 +169,11 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
 		description += as_content(mapdata.authors.get_names(), style_);
 
 		std::vector<std::string> tags(mapdata.tags.size());
-		for (const auto& tag : mapdata.tags) {
-			tags.push_back(localize_tag(tag).displayname);
+		{
+			size_t i = 0;
+			for (const auto& tag : mapdata.tags) {
+				tags.at(i++) = localize_tag(tag).displayname;
+			}
 		}
 		std::sort(tags.begin(), tags.end());
 		description += as_heading(_("Tags"), style_);
