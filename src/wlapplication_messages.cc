@@ -251,14 +251,14 @@ void fill_parameter_vector() {
 	  // TODO(tothxa): allow translatable textual aliases at least on the command line,
 	  //               ideally also in the config file
 	  {_("Startup options"), "end_splash", _("n"),
-	   _("Wait `n` seconds after loading is finished before closing splashscreen."), true},
+		_("Wait `n` seconds after loading is finished before closing splashscreen."), true},
 	  {"", std::string("   ") + _("Special values:"), "--", "", true},
 	  {"", "      -1:", "--", _("end immediately without fading"), true},
 	  {"", "     999:", "--", _("wait until intro music ends"), true},
 	  {"", "    1110:", "--",
-	   _("wait until mouse click or keypress, play menu music after intro music"), true},
+		_("wait until mouse click or keypress, play menu music after intro music"), true},
 	  {"", "    1111:", "--", _("wait until mouse click or keypress, silence after intro music"),
-	   true},
+		true},
 	  /// Others
 	  {_("Others:"), "verbose", "", _("Enable verbose debug messages"), false},
 	  {"", "verbose-i18n", "",

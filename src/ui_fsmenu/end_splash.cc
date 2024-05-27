@@ -21,33 +21,32 @@
 #include "base/i18n.h"
 
 const std::vector<EndSplashOption> kEndSplashOptionEntries = {
-	{EndSplashOption::kHard,
-	 /** TRANSLATORS: Dropdown entry for time to end splashscreen */
-	 gettext_noop("Immediate"),
-	 /** TRANSLATORS: Tooltip for an end splashscreen time option */
-	 gettext_noop("End splash screen as soon as possible, without fading")},
+   {EndSplashOption::kHard,
+    /** TRANSLATORS: Dropdown entry for time to end splashscreen */
+    gettext_noop("Immediate"),
+    /** TRANSLATORS: Tooltip for an end splashscreen time option */
+    gettext_noop("End splash screen as soon as possible, without fading")},
 
-	{EndSplashOption::kSoft,
-	 /** TRANSLATORS: Dropdown entry for time to end splashscreen */
-	 gettext_noop("Early"),
-	 /** TRANSLATORS: Tooltip for an end splashscreen time option */
-	 gettext_noop("Fade to main menu as soon as possible")},
+   {EndSplashOption::kSoft,
+    /** TRANSLATORS: Dropdown entry for time to end splashscreen */
+    gettext_noop("Early"),
+    /** TRANSLATORS: Tooltip for an end splashscreen time option */
+    gettext_noop("Fade to main menu as soon as possible")},
 
-	{EndSplashOption::kWaitIntroMusic,
-	 /** TRANSLATORS: Dropdown entry for time to end splashscreen */
-	 gettext_noop("End of intro music"),
-	 /** TRANSLATORS: Tooltip for an end splashscreen time option */
-	 gettext_noop("Wait until intro music ends, then fade to main menu")},
+   {EndSplashOption::kWaitIntroMusic,
+    /** TRANSLATORS: Dropdown entry for time to end splashscreen */
+    gettext_noop("End of intro music"),
+    /** TRANSLATORS: Tooltip for an end splashscreen time option */
+    gettext_noop("Wait until intro music ends, then fade to main menu")},
 
-	{EndSplashOption::kUserMenuMusic,
-	 /** TRANSLATORS: Dropdown entry for time to end splashscreen */
-	 gettext_noop("Click, change music"),
-	 /** TRANSLATORS: Tooltip for an end splashscreen time option */
-	 gettext_noop("Wait for mouse click or keypress. Play main menu music after intro music ends.")},
+   {EndSplashOption::kUserMenuMusic,
+    /** TRANSLATORS: Dropdown entry for time to end splashscreen */
+    gettext_noop("Click, change music"),
+    /** TRANSLATORS: Tooltip for an end splashscreen time option */
+    gettext_noop("Wait for mouse click or keypress. Play main menu music after intro music ends.")},
 
-	{EndSplashOption::kUserSilent,
-	 /** TRANSLATORS: Dropdown entry for time to end splashscreen */
-	 gettext_noop("Click, end music"),
-	 /** TRANSLATORS: Tooltip for an end splashscreen time option */
-	 gettext_noop("Wait for mouse click or keypress. No music after intro music ends.")}
-};
+   {EndSplashOption::kUserSilent,
+    /** TRANSLATORS: Dropdown entry for time to end splashscreen */
+    gettext_noop("Click, end music"),
+    /** TRANSLATORS: Tooltip for an end splashscreen time option */
+    gettext_noop("Wait for mouse click or keypress. No music after intro music ends.")}};

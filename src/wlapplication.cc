@@ -893,7 +893,8 @@ void WLApplication::run() {
 	GameLogicThread game_logic_thread(&should_die_);
 
 	FsMenu::MainMenu menu(game_type_ != GameType::kNone ||
-	   get_config_int("end_splash", EndSplashOption::kDefault) <= EndSplashOption::kHard);
+	                      get_config_int("end_splash", EndSplashOption::kDefault) <=
+	                         EndSplashOption::kHard);
 
 	check_crash_reports(menu);
 

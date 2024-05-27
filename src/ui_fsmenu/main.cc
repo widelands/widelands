@@ -832,7 +832,8 @@ void MainMenu::draw_overlay(RenderTarget& r) {
 		// music. We use that to detect when it's time to end the splash screen by default.
 		// We can't set up a notification, because the main menu may not be created before it ends
 		// if the startup is extremely slow for some reason.
-		const bool intro_is_playing = (g_sh->current_songset() == Songset::kIntro) && (g_sh->is_sound_audible(SoundType::kMusic));
+		const bool intro_is_playing = (g_sh->current_songset() == Songset::kIntro) &&
+		                              (g_sh->is_sound_audible(SoundType::kMusic));
 
 		if ((!intro_is_playing && end_splash_time_ < EndSplashOption::kUserMenuMusic) ||
 		    time - init_time_ > 1000 * static_cast<uint32_t>(end_splash_time_)) {

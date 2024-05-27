@@ -608,8 +608,8 @@ void Options::add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt) {
 
 void Options::add_end_splash_options(const OptionsCtrl::OptionsStruct& opt) {
 	for (const EndSplashOption& entry : kEndSplashOptionEntries) {
-		const bool selected = !end_splash_dropdown_.has_selection() &&
-		                      entry.time == opt.end_splash_time;
+		const bool selected =
+		   !end_splash_dropdown_.has_selection() && entry.time == opt.end_splash_time;
 		end_splash_dropdown_.add(_(entry.name), entry.time, nullptr, selected, _(entry.tooltip));
 	}
 
