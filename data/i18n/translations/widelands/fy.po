@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-25 02:33+0000\n"
+"POT-Creation-Date: 2024-05-27 02:37+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Luitzen Hietkamp <luitzenhietkamp@gmail.com>, 2017\n"
 "Language-Team: Western Frisian (http://app.transifex.com/widelands/widelands/language/fy/)\n"
@@ -86,7 +86,7 @@ msgstr ""
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../../../data/scripting/richtext.lua:703
-#: ../../../../src/base/i18n.cc:313
+#: ../../../../src/base/i18n.cc:335
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s&%2$s"
@@ -94,7 +94,7 @@ msgstr "%1$s&%2$s"
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../../../data/scripting/richtext.lua:705
-#: ../../../../src/base/i18n.cc:317
+#: ../../../../src/base/i18n.cc:339
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s of %2$s"
@@ -105,7 +105,7 @@ msgstr "%1$s of %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../../../data/scripting/richtext.lua:707
 #: ../../../../data/scripting/richtext.lua:712
-#: ../../../../src/base/i18n.cc:321 ../../../../src/base/i18n.cc:330
+#: ../../../../src/base/i18n.cc:343 ../../../../src/base/i18n.cc:352
 #: ../../../../src/logic/addons.cc:236
 #, c-format
 msgid "%1$s, %2$s"
@@ -115,7 +115,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: The current value of a spinbox, "X hours and Y minutes"
 #: ../../../../data/scripting/richtext.lua:709
-#: ../../../../src/base/i18n.cc:325 ../../../../src/ui_basic/spinbox.cc:528
+#: ../../../../src/base/i18n.cc:347 ../../../../src/ui_basic/spinbox.cc:528
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s еn %2$s"
