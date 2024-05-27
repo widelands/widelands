@@ -237,6 +237,8 @@ MainMenu::MainMenu(const bool skip_init)
 	vbox2_.add(&exit_, UI::Box::Resizing::kFullSize);
 
 	if (!skip_init) {
+		end_splash_time_ = get_config_int("end_splash", EndSplashOption::kDefault);
+		assert(end_splash_time_ > EndSplashOption::kHard);
 		init_time_ = SDL_GetTicks();
 		splash_state_ = SplashState::kSplash;
 		set_button_visibility(false);
@@ -546,7 +548,9 @@ void MainMenu::set_button_visibility(const bool v) {
 void MainMenu::end_splashscreen() {
 	assert(splash_state_ == SplashState::kSplash);
 	verb_log_info("Initiating splash screen fade out");
-	g_sh->change_music(Songset::kMenu, kSplashFadeoutDuration);
+	if (g_sh->current_songset() != Songset::kMenu) {
+		g_sh->change_music(Songset::kMenu, kSplashFadeoutDuration);
+	}
 	splash_state_ = SplashState::kSplashFadeOut;
 	init_time_ = SDL_GetTicks();
 }
@@ -819,15 +823,19 @@ void MainMenu::draw_overlay(RenderTarget& r) {
 	const uint32_t time = SDL_GetTicks();
 
 	assert(init_time_ != kNoSplash && time >= init_time_);
+	assert(end_splash_time_ >= 0);
 
 	float progress = 0.0f;
 
 	if (splash_state_ == SplashState::kSplash) {
 		// When the intro music ends, the event handler in wlapplication.cc starts the main menu
-		// music. We use that to detect when it's time to end the splash screen. We can't set up
-		// a notification, because the main menu may not be created before it ends if the startup
-		// is extremely slow for some reason.
-		if (g_sh->current_songset() != Songset::kIntro) {
+		// music. We use that to detect when it's time to end the splash screen by default.
+		// We can't set up a notification, because the main menu may not be created before it ends
+		// if the startup is extremely slow for some reason.
+		const bool intro_is_playing = (g_sh->current_songset() == Songset::kIntro) && (g_sh->is_sound_audible(SoundType::kMusic));
+
+		if ((!intro_is_playing && end_splash_time_ < EndSplashOption::kUserMenuMusic) ||
+		    time - init_time_ > 1000 * static_cast<uint32_t>(end_splash_time_)) {
 			end_splashscreen();
 		}
 	} else if (time - init_time_ > kSplashFadeoutDuration) {

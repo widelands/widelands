@@ -81,6 +81,7 @@
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/about.h"
 #include "ui_fsmenu/crash_report.h"
+#include "ui_fsmenu/end_splash.h"
 #include "ui_fsmenu/launch_spg.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/main.h"
@@ -891,7 +892,8 @@ void WLApplication::init_and_run_game_from_template(FsMenu::MainMenu& mainmenu) 
 void WLApplication::run() {
 	GameLogicThread game_logic_thread(&should_die_);
 
-	FsMenu::MainMenu menu(game_type_ != GameType::kNone);
+	FsMenu::MainMenu menu(game_type_ != GameType::kNone ||
+	   get_config_int("end_splash", EndSplashOption::kDefault) <= EndSplashOption::kHard);
 
 	check_crash_reports(menu);
 
@@ -1018,11 +1020,14 @@ bool WLApplication::poll_event(SDL_Event& ev) const {
 			/* Notification from the SoundHandler that a song has finished playing.
 			 * Usually, another song from the same songset will be started.
 			 * There is a special case for the intro music: it will only be played
-			 * once, then we switch to the main menu music.
+			 * once, then we switch to the main menu music or keep silent.
 			 */
 			assert(!SoundHandler::is_backend_disabled());
 			if (g_sh->current_songset() == Songset::kIntro) {
-				g_sh->change_music(Songset::kMenu, 500);
+				if (get_config_int("end_splash", EndSplashOption::kDefault) <
+				    EndSplashOption::kUserSilent) {
+					g_sh->change_music(Songset::kMenu, 500);
+				}
 			} else {
 				g_sh->change_music();
 			}

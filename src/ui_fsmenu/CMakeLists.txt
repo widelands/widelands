@@ -12,6 +12,8 @@ wl_library(ui_fsmenu
     campaign_select.h
     crash_report.cc
     crash_report.h
+    end_splash.cc
+    end_splash.h
     helpwindow.cc
     helpwindow.h
     internet_lobby.cc

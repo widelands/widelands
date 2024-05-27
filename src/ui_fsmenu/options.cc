@@ -147,6 +147,17 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                           UI::DropdownType::kTextual,
                           UI::PanelStyle::kFsMenu,
                           UI::ButtonStyle::kFsMenuMenu),
+     end_splash_dropdown_(&box_interface_vbox_,
+                          "dropdown_end_splash",
+                          0,
+                          0,
+                          100,  // 100 is arbitrary, will be resized in layout().
+                          50,
+                          24,
+                          _("End Splashscreen"),
+                          UI::DropdownType::kTextual,
+                          UI::PanelStyle::kFsMenu,
+                          UI::ButtonStyle::kFsMenuMenu),
      sdl_cursor_(&box_interface_,
                  UI::PanelStyle::kFsMenu,
                  "sdl_cursor",
@@ -408,6 +419,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	// Interface
 	box_interface_vbox_.add(&language_dropdown_, UI::Box::Resizing::kFullSize);
 	box_interface_vbox_.add(&resolution_dropdown_, UI::Box::Resizing::kFullSize);
+	box_interface_vbox_.add(&end_splash_dropdown_, UI::Box::Resizing::kFullSize);
 	// TODO(tothxa): Replace with infinite space if box layouting quirks get fixed
 	box_interface_vbox_.add(&translation_padding_, UI::Box::Resizing::kFullSize);
 	// box_interface_vbox_.add_inf_space();
@@ -511,6 +523,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	// Fill in data
 	// Interface options
 	add_screen_resolutions(opt);
+	add_end_splash_options(opt);
 
 	sdl_cursor_.set_state(opt.sdl_cursor);
 	tooltip_accessibility_mode_.set_state(opt.tooltip_accessibility_mode);
@@ -556,6 +569,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	}
 	initialization_complete();
 }
+
 void Options::add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt) {
 	ScreenResolution current_res = {g_gr->get_window_mode_xres(), g_gr->get_window_mode_yres()};
 
@@ -592,6 +606,37 @@ void Options::add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt) {
 	}
 }
 
+void Options::add_end_splash_options(const OptionsCtrl::OptionsStruct& opt) {
+	for (const EndSplashOption& entry : kEndSplashOptionEntries) {
+		const bool selected = !end_splash_dropdown_.has_selection() &&
+		                      entry.time == opt.end_splash_time;
+		end_splash_dropdown_.add(_(entry.name), entry.time, nullptr, selected, _(entry.tooltip));
+	}
+
+	if (end_splash_dropdown_.has_selection()) {
+		return;
+	}
+	if (opt.end_splash_time < 0) {
+		end_splash_dropdown_.select(EndSplashOption::kHard);
+		return;
+	}
+	if (opt.end_splash_time > EndSplashOption::kUserSilent) {
+		end_splash_dropdown_.select(EndSplashOption::kUserSilent);
+		return;
+	}
+	// This is possible from the command line or by manually editing the config
+	if (opt.end_splash_time < EndSplashOption::kWaitIntroMusic) {
+		end_splash_dropdown_.add(
+		   format(_("Wait %ds"), opt.end_splash_time), opt.end_splash_time, nullptr, true,
+		   format(_("Wait %d seconds after loading is completed, then fade to main menu"),
+		          opt.end_splash_time));
+		return;
+	}
+	// EndSplashOption::kWaitIntroMusic < opt.end_splash_time < EndSplashOption::kUserMenuMusic
+	// No point in creating a custom entry, the effect is equivalent in practice
+	end_splash_dropdown_.select(EndSplashOption::kWaitIntroMusic);
+}
+
 void Options::layout() {
 	if (!is_minimal()) {
 		const int16_t butw = get_inner_w() / 5;
@@ -615,7 +660,8 @@ void Options::layout() {
 		language_dropdown_.set_height(tabs_.get_h() - language_dropdown_.get_y() - buth -
 		                              3 * kPadding);
 
-		const int min_h = language_dropdown_.get_h() + resolution_dropdown_.get_h() + 2 * kPadding;
+		const int min_h = language_dropdown_.get_h() + resolution_dropdown_.get_h() +
+		                  end_splash_dropdown_.get_h() + 2 * kPadding;
 		const int half_w = (tab_panel_width - 3 * kPadding) / 2;
 
 		// Make initial value big enough to avoid needing a scrollbar
@@ -836,6 +882,9 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 			os_.yres = res.yres;
 		}
 	}
+	if (end_splash_dropdown_.has_selection()) {
+		os_.end_splash_time = end_splash_dropdown_.get_selected();
+	}
 	os_.sdl_cursor = sdl_cursor_.get_state();
 	os_.tooltip_accessibility_mode = tooltip_accessibility_mode_.get_state();
 
@@ -919,6 +968,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.fullscreen = opt_section_.get_bool("fullscreen", false);
 	opt.sdl_cursor = opt_section_.get_bool("sdl_cursor", true);
 	opt.tooltip_accessibility_mode = opt_section_.get_bool("tooltip_accessibility_mode", false);
+	opt.end_splash_time = opt_section_.get_int("end_splash", EndSplashOption::kDefault);
 
 	// Window options
 	opt.dock_windows_to_edges = opt_section_.get_bool("dock_windows_to_edges", false);
@@ -968,6 +1018,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("fullscreen", opt.fullscreen);
 	opt_section_.set_bool("sdl_cursor", opt.sdl_cursor);
 	opt_section_.set_bool("tooltip_accessibility_mode", opt.tooltip_accessibility_mode);
+	opt_section_.set_int("end_splash", opt.end_splash_time);
 
 	// Window options
 	opt_section_.set_bool("dock_windows_to_edges", opt.dock_windows_to_edges);

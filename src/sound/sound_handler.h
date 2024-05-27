@@ -196,6 +196,9 @@ public:
 	void set_enable_sound(SoundType type, bool enable);
 	[[nodiscard]] int32_t get_volume(SoundType type) const;
 	void set_volume(SoundType type, int32_t volume);
+	[[nodiscard]] inline bool is_sound_audible(SoundType type) const {
+		return !is_backend_disabled() && is_sound_enabled(type) && get_volume(type) > 0;
+	}
 
 	[[nodiscard]] int32_t get_max_volume() const;
 
