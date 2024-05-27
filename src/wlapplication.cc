@@ -435,6 +435,15 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	   get_config_int("xres", kDefaultResolutionW), get_config_int("yres", kDefaultResolutionH),
 	   get_config_bool("fullscreen", false), get_config_bool("maximized", false));
 
+	// In soft-cursor mode the SDL mouse cursor is disabled after g_mouse_cursor->initialize(),
+	// but cursor drawing doesn't work until we start refreshing the screen, so the cursor
+	// disappears.
+	// In SDL cursor mode there's no such problem, so we can switch to our own cursor early.
+	const bool use_sdl_cursor = get_config_bool("sdl_cursor", true);
+	if (use_sdl_cursor) {
+		init_mouse_cursor(use_sdl_cursor);
+	}
+
 	/*****
 	 * These could be moved later if we decide to show some graphic (an hourglass?) instead
 	 * of the text label in the initial splash screen to draw it faster.
@@ -489,18 +498,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// This is one of the slowest parts of the start up.
 	g_gr->rebuild_texture_atlas();
 
-	// Keep cursor in window while dragging
-	SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
-
-	// In soft-cursor mode the SDL mouse cursor is disabled after g_mouse_cursor->initialize(),
-	// but cursor drawing doesn't work until we start refreshing the screen, so the cursor
-	// disappears.
-	// In SDL cursor mode there's no such problem, so we can switch to our own cursor early.
-	const bool use_sdl_cursor = get_config_bool("sdl_cursor", true);
-	if (use_sdl_cursor) {
-		init_mouse_cursor(use_sdl_cursor);
-	}
-
 	// Try to detect configurations with inverted horizontal scroll
 	SDL_version sdl_ver = {SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL};
 	SDL_GetVersion(&sdl_ver);
@@ -522,6 +519,9 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		set_mousewheel_option_bool(MousewheelOptionID::kInvertedXDetected, true);
 		update_mousewheel_settings();
 	}
+
+	// Keep cursor in window while dragging
+	SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
 
 	verb_log_info("Cleaning up temporary files");
 	cleanup_replays();
