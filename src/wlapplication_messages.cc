@@ -247,6 +247,18 @@ void fill_parameter_vector() {
 		_("Move a window to the edge of the panel when the edge of the window comes within "
 		  "a distance of `n` from the edge of the panel."),
 		true},
+	  /// Ending splashscreen
+	  // TODO(tothxa): allow translatable textual aliases at least on the command line,
+	  //               ideally also in the config file
+	  {_("Startup options"), "end_splash", _("n"),
+	   _("Wait `n` seconds after loading is finished before closing splashscreen."), true},
+	  {"", std::string("   ") + _("Special values:"), "--", "", true},
+	  {"", "      -1:", "--", _("end immediately without fading"), true},
+	  {"", "     999:", "--", _("wait until intro music ends"), true},
+	  {"", "    1110:", "--",
+	   _("wait until mouse click or keypress, play menu music after intro music"), true},
+	  {"", "    1111:", "--", _("wait until mouse click or keypress, silence after intro music"),
+	   true},
 	  /// Others
 	  {_("Others:"), "verbose", "", _("Enable verbose debug messages"), false},
 	  {"", "verbose-i18n", "",
