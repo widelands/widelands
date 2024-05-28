@@ -19,6 +19,7 @@
 #ifndef WL_UI_FSMENU_END_SPLASH_H
 #define WL_UI_FSMENU_END_SPLASH_H
 
+#include <cstdint>
 #include <string>
 #include <vector>
 
