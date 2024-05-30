@@ -32,7 +32,7 @@ const std::string default_click_filename = "images/ui_basic/cursor_click.png";
 constexpr int default_hotspot_x = 3;
 constexpr int default_hotspot_y = 7;
 
-const std::string default_wait_filename = "images/ui_basic/hourglass.png";
+const std::string default_wait_filename = "images/ui_basic/cursor_wait.png";
 constexpr int wait_hotspot_x = 15;
 constexpr int wait_hotspot_y = 23;
 
