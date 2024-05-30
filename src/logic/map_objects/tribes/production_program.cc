@@ -260,7 +260,7 @@ ProductionProgram::parse_ware_type_groups(std::vector<std::string>::const_iterat
 			ware_worker_names.insert(std::make_pair(item_index, type));
 		}
 		// Add set
-		result.push_back(std::make_pair(ware_worker_names, amount));
+		result.emplace_back(ware_worker_names, amount);
 	}
 	if (result.empty()) {
 		throw GameDataError("No wares or workers found");
@@ -278,7 +278,7 @@ BillOfMaterials ProductionProgram::parse_bill_of_materials(
                                         descriptions.load_ware(produceme.first) :
                                         descriptions.load_worker(produceme.first);
 
-		result.push_back(std::make_pair(index, read_positive(produceme.second)));
+		result.emplace_back(index, read_positive(produceme.second));
 	}
 	return result;
 }
@@ -515,11 +515,12 @@ bool ProductionProgram::ActReturn::SiteHas::evaluate(const ProductionSite& ps) c
 
 std::string
 ProductionProgram::ActReturn::SiteHas::description(const Descriptions& descriptions) const {
-	std::vector<std::string> condition_list;
+	std::vector<std::string> condition_list(group.first.size());
+	size_t i = 0;
 	for (const auto& entry : group.first) {
-		condition_list.push_back(entry.second == wwWARE ?
-                                  descriptions.get_ware_descr(entry.first)->descname() :
-                                  descriptions.get_worker_descr(entry.first)->descname());
+		condition_list.at(i++) =
+		   (entry.second == wwWARE ? descriptions.get_ware_descr(entry.first)->descname() :
+                                   descriptions.get_worker_descr(entry.first)->descname());
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
@@ -538,11 +539,12 @@ ProductionProgram::ActReturn::SiteHas::description(const Descriptions& descripti
 
 std::string ProductionProgram::ActReturn::SiteHas::description_negation(
    const Descriptions& descriptions) const {
-	std::vector<std::string> condition_list;
+	std::vector<std::string> condition_list(group.first.size());
+	size_t i = 0;
 	for (const auto& entry : group.first) {
-		condition_list.push_back(entry.second == wwWARE ?
-                                  descriptions.get_ware_descr(entry.first)->descname() :
-                                  descriptions.get_worker_descr(entry.first)->descname());
+		condition_list.at(i++) =
+		   (entry.second == wwWARE ? descriptions.get_ware_descr(entry.first)->descname() :
+                                   descriptions.get_worker_descr(entry.first)->descname());
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
@@ -1248,11 +1250,12 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 		for (const auto& group : l_groups) {
 			assert(!group.first.empty());
 
-			std::vector<std::string> ware_list;
+			std::vector<std::string> ware_list(group.first.size());
+			size_t i = 0;
 			for (const auto& entry : group.first) {
-				ware_list.push_back(entry.second == wwWARE ?
-                                   tribe.get_ware_descr(entry.first)->descname() :
-                                   tribe.get_worker_descr(entry.first)->descname());
+				ware_list.at(i++) =
+				   (entry.second == wwWARE ? tribe.get_ware_descr(entry.first)->descname() :
+                                         tribe.get_worker_descr(entry.first)->descname());
 			}
 			std::string ware_string = i18n::localize_list(ware_list, i18n::ConcatenateWith::OR);
 

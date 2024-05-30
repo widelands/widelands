@@ -26,6 +26,7 @@
 #include "base/wexception.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
+#include "graphic/render_queue.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_interface.h"
 
@@ -78,6 +79,8 @@ void set_template_dir(std::string dir) {
 			default_style = g_style_manager;
 		}
 	}
+
+	RenderQueue::instance().set_dither_mask(resolve_template_image_filename("world/pics/edge.png"));
 }
 
 std::string resolve_template_image_filename(const std::string& path) {
@@ -957,8 +960,8 @@ void StyleManager::add_font_style(UI::FontStyle font_key,
 		fail_if_doing_default_style("font style", table_key);
 		fontstyle = new UI::FontStyleInfo(default_style->font_style(font_key));
 	}
-	fontstyles_.emplace(std::make_pair(font_key, std::unique_ptr<UI::FontStyleInfo>(fontstyle)));
-	fontstyle_keys_.emplace(std::make_pair(table_key, font_key));
+	fontstyles_.emplace(font_key, std::unique_ptr<UI::FontStyleInfo>(fontstyle));
+	fontstyle_keys_.emplace(table_key, font_key);
 }
 
 void StyleManager::add_paragraph_style(UI::ParagraphStyle style,
@@ -971,30 +974,29 @@ void StyleManager::add_paragraph_style(UI::ParagraphStyle style,
 		fail_if_doing_default_style("paragraph style", table_key);
 		p_style = new UI::ParagraphStyleInfo(default_style->paragraph_style(style));
 	}
-	paragraphstyles_.emplace(
-	   std::make_pair(style, std::unique_ptr<UI::ParagraphStyleInfo>(p_style)));
-	paragraphstyle_keys_.emplace(std::make_pair(table_key, style));
+	paragraphstyles_.emplace(style, std::unique_ptr<UI::ParagraphStyleInfo>(p_style));
+	paragraphstyle_keys_.emplace(table_key, style);
 }
 
 void StyleManager::add_color(UI::ColorStyle id, const LuaTable& table, const std::string& key) {
 	if (table.has_key(key)) {
 		const std::unique_ptr<LuaTable> color_table(table.get_table(key));
-		colors_.emplace(std::make_pair(id, read_rgb_color(*color_table)));
+		colors_.emplace(id, read_rgb_color(*color_table));
 	} else {
 		fail_if_doing_default_style("color style", key);
-		colors_.emplace(std::make_pair(id, default_style->color(id)));
+		colors_.emplace(id, default_style->color(id));
 	}
-	color_keys_.emplace(std::make_pair(key, id));
+	color_keys_.emplace(key, id);
 }
 
 void StyleManager::add_styled_size(UI::StyledSize id,
                                    const LuaTable& table,
                                    const std::string& key) {
 	if (table.has_key(key)) {
-		styled_sizes_.emplace(std::make_pair(id, table.get_int(key)));
+		styled_sizes_.emplace(id, table.get_int(key));
 	} else {
 		fail_if_doing_default_style("styled size", key);
-		styled_sizes_.emplace(std::make_pair(id, default_style->styled_size(id)));
+		styled_sizes_.emplace(id, default_style->styled_size(id));
 	}
-	styled_size_keys_.emplace(std::make_pair(key, id));
+	styled_size_keys_.emplace(key, id);
 }

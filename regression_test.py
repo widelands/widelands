@@ -108,7 +108,7 @@ class WidelandsTestCase(unittest.TestCase):
                     '--homedir={}'.format(self.run_dir),
                     '--nosound',
                     '--fail-on-lua-error',
-                    '--language=en_US' ]
+                    '--language=en' ]
             args += [ "--{}={}".format(key, value) for key, value in iteritems(wlargs) ]
 
             stdout_file.write("Running widelands binary: ")
