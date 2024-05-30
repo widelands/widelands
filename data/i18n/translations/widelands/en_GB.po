@@ -3,7 +3,7 @@
 # 
 # Translators:
 # Adam Piggott, 2016-2017
-# Andi Chandler <andi@gowling.com>, 2017
+# Andi Chandler <andi@gowling.com>, 2017,2024
 # Benedikt Straub <benedikt-straub@web.de>, 2021
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Lindsay Smart <robertsonsmart+transifex@gmail.com>, 2018
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-05-27 02:37+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>, 2017,2024\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,7 +46,7 @@ msgstr "Not enough space"
 
 #: ../../../../data/scripting/infrastructure.lua:288
 msgid "No rocks nearby"
-msgstr ""
+msgstr "No rocks nearby"
 
 #: ../../../../data/scripting/infrastructure.lua:288
 msgid ""
@@ -56,7 +56,7 @@ msgstr ""
 
 #: ../../../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
-msgstr ""
+msgstr "Not enough trees nearby"
 
 #: ../../../../data/scripting/infrastructure.lua:294
 msgid ""
@@ -73,11 +73,11 @@ msgstr "Status"
 
 #: ../../../../data/scripting/messages.lua:293
 msgid "New Objective"
-msgstr ""
+msgstr "New Objective"
 
 #: ../../../../data/scripting/messages.lua:295
 msgid "New Objectives"
-msgstr ""
+msgstr "New Objectives"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
@@ -171,7 +171,7 @@ msgstr "true"
 #: ../../../../src/base/format/float_node.h:33
 msgctxt "decimal_separator"
 msgid "."
-msgstr ""
+msgstr "."
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -293,7 +293,7 @@ msgstr "Main Menu"
 #: ../../../../src/wui/interactive_gamebase.cc:102
 msgctxt "hotkey"
 msgid "Esc"
-msgstr ""
+msgstr "Esc"
 
 #. * TRANSLATORS: Title for the tool menu button in the editor
 #. * TRANSLATORS: Heading in the editor keyboard shortcuts help
@@ -301,7 +301,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1055
 msgctxt "editor"
 msgid "Tools"
-msgstr ""
+msgstr "Tools"
 
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
@@ -312,7 +312,7 @@ msgstr ""
 #: ../../../../src/editor/editorinteractive.cc:130
 #: ../../../../src/wui/interactive_gamebase.cc:83
 msgid "Show / Hide"
-msgstr ""
+msgstr "Show / Hide"
 
 #: ../../../../src/editor/editorinteractive.cc:143
 msgid "Tool size"
@@ -371,7 +371,7 @@ msgstr "Save Map"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../../../src/editor/editorinteractive.cc:237
 msgid "Publish Map Online…"
-msgstr ""
+msgstr "Publish Map Online…"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../../../src/editor/editorinteractive.cc:245
@@ -420,7 +420,7 @@ msgstr "Terrain"
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:314
 msgid "Change the map’s terrain"
-msgstr ""
+msgstr "Change the map’s terrain"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:322
@@ -432,7 +432,7 @@ msgstr "Immovables"
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:325
 msgid "Add or remove immovables"
-msgstr ""
+msgstr "Add or remove immovables"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:332
@@ -458,12 +458,12 @@ msgstr "Resources"
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:346
 msgid "Set or change resources"
-msgstr ""
+msgstr "Set or change resources"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:350
 msgid "Port spaces"
-msgstr ""
+msgstr "Port spaces"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:353
@@ -512,19 +512,19 @@ msgstr ""
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:389
 msgid "Click on a field to show information about it"
-msgstr ""
+msgstr "Click on a field to show information about it"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:393
 #: ../../../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../../../src/wlapplication_options.cc:537
 msgid "Tool History"
-msgstr ""
+msgstr "Tool History"
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:396
 msgid "Restore previous tool settings"
-msgstr ""
+msgstr "Restore previous tool settings"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -535,13 +535,13 @@ msgstr ""
 #: ../../../../src/editor/editorinteractive.cc:466
 #: ../../../../src/wui/interactive_gamebase.cc:269
 msgid "Hide Building Spaces"
-msgstr ""
+msgstr "Hide Building Spaces"
 
 #: ../../../../src/editor/editorinteractive.cc:466
 #: ../../../../src/ui_fsmenu/options.cc:287
 #: ../../../../src/wui/interactive_gamebase.cc:269
 msgid "Show Building Spaces"
-msgstr ""
+msgstr "Show Building Spaces"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether to
 #. show maximum
@@ -549,7 +549,7 @@ msgstr ""
 #. etc.) are removed
 #: ../../../../src/editor/editorinteractive.cc:473
 msgid "Hide Maximum Building Spaces"
-msgstr ""
+msgstr "Hide Maximum Building Spaces"
 
 #: ../../../../src/editor/editorinteractive.cc:474
 msgid "Show Maximum Building Spaces"
