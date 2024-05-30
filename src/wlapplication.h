@@ -224,7 +224,7 @@ private:
 	bool check_commandline_flag(const std::string& opt);
 	OptionalParameter get_commandline_option_value(const std::string& opt, bool allow_empty = false);
 
-	void init_mouse_cursor(const bool use_sdl);
+	void init_mouse_cursor(bool use_sdl);
 
 	void setup_homedir();
 
