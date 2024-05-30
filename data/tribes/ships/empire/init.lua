@@ -34,6 +34,22 @@ wl.Descriptions():new_ship_type {
          directional = true,
          hotspot = { 107, 99 }
       },
+
+      warship = {
+         fps = 10,
+         frames = 40,
+         rows = 4,
+         columns = 10,
+         hotspot = { 83, 95 }
+      },
+      sail_warship = {
+         fps = 10,
+         frames = 40,
+         rows = 4,
+         columns = 10,
+         directional = true,
+         hotspot = { 107, 99 }
+      },
    },
 
    names = {
