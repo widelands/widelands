@@ -258,7 +258,8 @@ void ShipWindow::set_button_visibility() {
 	   (ship->get_ship_type() == Widelands::ShipType::kWarship) ^ is_refitting;
 	const bool show_wares = (ship->get_ship_type() != Widelands::ShipType::kWarship) || is_refitting;
 	const bool show_construct_port =
-	   ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound;
+	   ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound ||
+	   ship->get_ship_state() == Widelands::ShipStates::kExpeditionColonizing;
 
 	display_->set_visible(show_wares);
 	warship_capacity_control_->set_visible(show_soldier_controls);
