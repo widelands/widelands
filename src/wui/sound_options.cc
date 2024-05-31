@@ -203,7 +203,8 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
 
 	add(&play_intro_music_);
 	play_intro_music_.set_state(get_config_bool("play_intro_music", true));
-	play_intro_music_.changedto.connect([](bool state) { set_config_bool("play_intro_music", state); });
+	play_intro_music_.changedto.connect(
+	   [](bool state) { set_config_bool("play_intro_music", state); });
 
 	// TODO(GunChleoc): There's a bug (probably somewhere in Box, triggered in combination with
 	// Window::set_center_panel) that will hide the bottom SoundControl in GameOptionsSoundMenu if
