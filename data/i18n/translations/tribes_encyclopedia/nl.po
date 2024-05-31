@@ -3150,7 +3150,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It is "
 "processed into spidercloth or tabards in a weaving mill."
-msgstr ""
+msgstr "Spinnenzijde wordt geproduceerd door spinnen, die worden gekweekt in spinnenkwekerijen. In een weverij wordt het verwerkt tot spinnendoek of tabbaard."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:481
@@ -3403,7 +3403,7 @@ msgid ""
 "Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
 "hammer. Make sure you’ve always got some in reserve! They are produced by "
 "the toolsmith."
-msgstr ""
+msgstr "Geologen, bouwers, wapensmeden, pantsersmeden en scheepstimmerlieden hebben allemaal een hamer nodig. Zorg dat je er altijd een paar achter de hand hebt! Ze worden gemaakt door de gereedschapsmaker."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Milking Tongs
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:719
