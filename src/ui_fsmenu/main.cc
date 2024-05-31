@@ -617,6 +617,8 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 			if (get_config_bool("play_intro_music", true)) {
 				end_splashscreen();
 			} else {
+				// We should only get here if the user pressed a key before the main menu was started,
+				// when otherwise the fade out would start immediately
 				abort_splashscreen();
 			}
 		}

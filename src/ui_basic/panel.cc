@@ -367,9 +367,8 @@ int Panel::do_run() {
 	// TODO(sirver): the main loop should not be in UI, but in WLApplication.
 	WLApplication& app = WLApplication::get();
 	ModalGuard prevmodal(*this);
-	mousegrab_ = nullptr;                // good ol' paranoia
-	app.set_mouse_lock(false);           // more paranoia :-)
-	g_mouse_cursor->change_wait(false);  // We're handling input now, aren't we?
+	mousegrab_ = nullptr;       // good ol' paranoia
+	app.set_mouse_lock(false);  // more paranoia :-)
 
 	// With the default of 30FPS, the game will be drawn every 33ms.
 	constexpr uint32_t kMaxFPS = 30;
@@ -453,6 +452,7 @@ int Panel::do_run() {
 	// so we continue refreshing the graphics while we wait.
 	if (logic_thread_locked_ != LogicThreadState::kEndingConfirmed && logic_thread_running_) {
 		logic_thread_locked_ = LogicThreadState::kEndingRequested;
+		g_mouse_cursor->change_wait(true);
 		while (get_flag(pf_logic_think) && logic_thread_running_ &&
 		       logic_thread_locked_ != LogicThreadState::kEndingConfirmed) {
 			const uint32_t start_time = SDL_GetTicks();

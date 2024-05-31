@@ -456,9 +456,13 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// The initital splash screen is only drawn once, it doesn't get updates until the main menu
 	// overrides it. Normally it shouldn't take more than a few seconds.
 	{
+		SDL_PumpEvents();
+		SDL_FlushEvent(SDL_AUDIODEVICEADDED);
+
 		SDL_Event ev;
 		int ignored = 0;
 		int handled = 0;
+
 		while (SDL_PollEvent(&ev) != 0) {
 			// Except the window manager may resize the window on creation, so we have to look for
 			// resize events first. We throw away everything else, hopefully we don't have much yet...
@@ -641,7 +645,6 @@ void WLApplication::init_mouse_cursor(const bool use_sdl) {
 	// There's still some more time after WLApplication is created before the user can
 	// actually skip the splash screen, so we change the cursor to an hourglass until then.
 	g_mouse_cursor->change_wait(true);
-	// It's restored by the event loop in Panel::do_run() when it starts to work
 }
 
 void WLApplication::initialize_g_addons() {
@@ -1119,6 +1122,8 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, const int 
 }
 
 void WLApplication::handle_input(InputCallback const* cb) {
+	g_mouse_cursor->change_wait(false);  // we are handling input now
+
 	// Container for keyboard events using the Alt key.
 	// <sym, mod>, type.
 	std::map<std::pair<SDL_Keycode, uint16_t>, unsigned> alt_events;
