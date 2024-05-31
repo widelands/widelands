@@ -1122,8 +1122,6 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, const int 
 }
 
 void WLApplication::handle_input(InputCallback const* cb) {
-	g_mouse_cursor->change_wait(false);  // we are handling input now
-
 	// Container for keyboard events using the Alt key.
 	// <sym, mod>, type.
 	std::map<std::pair<SDL_Keycode, uint16_t>, unsigned> alt_events;

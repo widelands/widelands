@@ -105,8 +105,8 @@ void MouseCursor::change_cursor(bool is_pressed) {
 	was_pressed_ = is_pressed;
 }
 
-// Can be set anywhere without worrying about resetting: WLApplication::handle_input() resets it
-// whenever user input can actually be processed.
+// Can be set anywhere without worrying about resetting: panel::do_run() resets it whenever
+// user input can actually be processed.
 // TODO(tothxa): This cursor should also be used during forced pauses
 void MouseCursor::change_wait(bool to_wait) {
 	if (is_wait_ == to_wait) {

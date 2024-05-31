@@ -410,6 +410,10 @@ int Panel::do_run() {
 		}
 
 		if (is_initializer) {
+			// We are handling input now. Can not be in WLApplication::handle_input(), because it is
+			// also called from ProgressWindow::step(), where the cursor shouldn't be reset.
+			g_mouse_cursor->change_wait(false);
+
 			app.handle_input(&input_callback);
 		}
 

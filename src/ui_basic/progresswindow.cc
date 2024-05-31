@@ -91,7 +91,6 @@ ProgressWindow::~ProgressWindow() {
 	}
 
 	Panel::set_allow_fastclick(true);
-	g_mouse_cursor->change_wait(false);
 }
 
 inline const UI::ProgressbarStyleInfo& ProgressWindow::progress_style() const {
