@@ -1311,7 +1311,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:8
 msgctxt "amazons_building"
 msgid "Chocolate Brewery"
-msgstr ""
+msgstr "Výrobňa čokolády"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing chocolate because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:55
@@ -1547,7 +1547,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:8
 msgctxt "amazons_building"
 msgid "Initiation Site"
-msgstr ""
+msgstr "Iniciačný tábor"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:60
@@ -1559,7 +1559,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Jungle Preserver’s Hut"
-msgstr ""
+msgstr "Chatrč strážkyne džungle"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:48
@@ -1574,7 +1574,7 @@ msgstr "sadenie stromov"
 #: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Liana Cutter’s Hut"
-msgstr ""
+msgstr "Chatrč rezačky lián"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making clay because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:39
