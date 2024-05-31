@@ -193,8 +193,7 @@ ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
 	for (const char* anim : {"idle", "warship", "sinking", "sinking_warship",
 			"atk_ok_w", "atk_fail_w", "eva_ok_w", "eva_fail_w", "atk_ok_e", "atk_fail_e", "eva_ok_e", "eva_fail_e"}) {
 		if (!is_animation_known(anim)) {
-			// NOCOM make this a GameDataError
-			log_err("Ship %s has no %s anim", name().c_str(), anim);
+			throw GameDataError("Ship %s has no '%s' anim", name().c_str(), anim);
 		}
 	}
 }
@@ -1465,8 +1464,8 @@ void Ship::battle_update(Game& game) {
 			molog(game.get_gametime(), "[battle] Defender's turn begins");
 			fight();
 			set_phase(Battle::Phase::kDefenderAttacking);
-			start_task_idle(game, idle_animation(),
-			                kAttackAnimationDuration);  // TODO(Nordfriese): proper animation
+			start_task_idle(game, descr().get_animation(current_battle.pending_damage > 0 ? "atk_ok_e" : "atk_fail_e", this), kAttackAnimationDuration);
+			target_ship->start_task_idle(game, target_ship->descr().get_animation(current_battle.pending_damage > 0 ? "eva_fail_w" : "eva_ok_w", target_ship), kAttackAnimationDuration);
 			return;
 
 		case Battle::Phase::kAttackerMovingTowardsOpponent: {
@@ -1492,7 +1491,7 @@ void Ship::battle_update(Game& game) {
 	case Battle::Phase::kDefenderAttacking:
 		// Idle until the opponent's turn is over.
 		molog(game.get_gametime(), "[battle] Attacker waiting for turn");
-		return start_task_idle(game, descr().idle_animation(), 100);
+		return start_task_idle(game, idle_animation(), 100);
 
 	case Battle::Phase::kNotYetStarted:
 		molog(game.get_gametime(), "[battle] Preparing to engage");
@@ -1674,8 +1673,10 @@ void Ship::battle_update(Game& game) {
 		molog(game.get_gametime(), "[battle] Attacker's turn begins");
 		fight();
 		set_phase(Battle::Phase::kAttackerAttacking);
-		start_task_idle(game, idle_animation(),
-		                kAttackAnimationDuration);  // TODO(Nordfriese): proper animation
+		start_task_idle(game, descr().get_animation(current_battle.pending_damage > 0 ? "atk_ok_w" : "atk_fail_w", this), kAttackAnimationDuration);
+		if (target_ship != nullptr) {
+			target_ship->start_task_idle(game, target_ship->descr().get_animation(current_battle.pending_damage > 0 ? "eva_fail_e" : "eva_ok_e", target_ship), kAttackAnimationDuration);
+		}
 		return;
 	}
 
