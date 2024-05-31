@@ -237,8 +237,6 @@ MainMenu::MainMenu(const bool skip_init)
 	vbox2_.add(&exit_, UI::Box::Resizing::kFullSize);
 
 	if (!skip_init) {
-		end_splash_time_ = get_config_int("end_splash", EndSplashOption::kDefault);
-		assert(end_splash_time_ > EndSplashOption::kHard);
 		init_time_ = SDL_GetTicks();
 		splash_state_ = SplashState::kSplash;
 		set_button_visibility(false);
@@ -549,7 +547,9 @@ void MainMenu::end_splashscreen() {
 	assert(splash_state_ == SplashState::kSplash);
 	verb_log_info("Initiating splash screen fade out");
 	if (g_sh->current_songset() != Songset::kMenu) {
-		g_sh->change_music(Songset::kMenu, kSplashFadeoutDuration);
+		// mix the intro down during the splash fade out phase, then draw() will start the menu music
+		// in the menu fade in phase
+		g_sh->stop_music(kSplashFadeoutDuration);
 	}
 	splash_state_ = SplashState::kSplashFadeOut;
 	init_time_ = SDL_GetTicks();
@@ -565,7 +565,7 @@ void MainMenu::abort_splashscreen() {
 bool MainMenu::handle_mousepress(uint8_t /*btn*/, int32_t /*x*/, int32_t /*y*/) {
 	if (splash_state_ != SplashState::kDone) {
 		// First click ends the splash gently, second click immediately
-		if (splash_state_ != SplashState::kSplash) {
+		if (splash_state_ != SplashState::kSplash || !get_config_bool("play_intro_music", true)) {
 			abort_splashscreen();
 		} else {
 			end_splashscreen();
@@ -608,12 +608,17 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 				// don't interpret second keypress because we have already scheduled
 				// handling the first.
 				// TODO(tothxa): Should flush the remaining keypresses from the event queue,
-				//               but I don't know how to do it, as I don't think we should
-				//               mess with other event types.
+				//               but I'm not sure if it would be safe:
+				//               SDL_PumpEvents();
+				//               SDL_FlushEvents(SDL_KEYDOWN, SDL_KEYUP);
 				return true;
 			}
 
-			end_splashscreen();
+			if (get_config_bool("play_intro_music", true)) {
+				end_splashscreen();
+			} else {
+				abort_splashscreen();
+			}
 		}
 
 		auto check_match_shortcut = [this, &code](KeyboardShortcut k, MenuTarget t) {
@@ -823,7 +828,6 @@ void MainMenu::draw_overlay(RenderTarget& r) {
 	const uint32_t time = SDL_GetTicks();
 
 	assert(init_time_ != kNoSplash && time >= init_time_);
-	assert(end_splash_time_ >= 0);
 
 	float progress = 0.0f;
 
@@ -833,10 +837,10 @@ void MainMenu::draw_overlay(RenderTarget& r) {
 		// We can't set up a notification, because the main menu may not be created before it ends
 		// if the startup is extremely slow for some reason.
 		const bool intro_is_playing = (g_sh->current_songset() == Songset::kIntro) &&
-		                              (g_sh->is_sound_audible(SoundType::kMusic));
+		                              (g_sh->is_sound_audible(SoundType::kMusic)) &&
+		                              Mix_PlayingMusic() != 0;
 
-		if ((!intro_is_playing && end_splash_time_ < EndSplashOption::kUserMenuMusic) ||
-		    time - init_time_ > 1000 * static_cast<uint32_t>(end_splash_time_)) {
+		if (!intro_is_playing) {
 			end_splashscreen();
 		}
 	} else if (time - init_time_ > kSplashFadeoutDuration) {

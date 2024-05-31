@@ -116,6 +116,11 @@ void fill_parameter_vector() {
 		false},
 	  /// Misc
 	  {"", "nosound", "", _("Start the game with sound disabled."), false},
+	  /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
+	  /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
+	  /** TRANSLATORS: * marks the default value */
+	  {"", "play_intro_music", _("[true*|false]"),
+		_("Play the intro music at startup and show splash image until it ends."), true},
 	  {"", "fail-on-lua-error", "", _("Force Widelands to crash when a Lua error occurs."), false},
 	  {"", "replay_lifetime", _("n"), _("Delete replays automatically after `n` weeks."), true},
 	  {"", "ai_training", "",
@@ -140,9 +145,6 @@ void fill_parameter_vector() {
 	  {"", "rolling_autosave", _("n"),
 		/** TRANSLATORS: `n` references a numerical placeholder */
 		_("Use `n` files for rolling autosaves."), true},
-	  /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
-	  /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
-	  /** TRANSLATORS: * marks the default value */
 	  {"", "skip_autosave_on_inactivity", _("[true*|false]"),
 		_("Do not create an autosave when the user has been inactive since the last autosave."),
 		true},
@@ -246,18 +248,6 @@ void fill_parameter_vector() {
 		/** TRANSLATORS: `n` references a numerical placeholder */
 		_("Move a window to the edge of the panel when the edge of the window comes within "
 		  "a distance of `n` from the edge of the panel."),
-		true},
-	  /// Ending splashscreen
-	  // TODO(tothxa): allow translatable textual aliases at least on the command line,
-	  //               ideally also in the config file
-	  {_("Startup options"), "end_splash", _("n"),
-		_("Wait `n` seconds after loading is finished before closing splashscreen."), true},
-	  {"", std::string("   ") + _("Special values:"), "--", "", true},
-	  {"", "      -1:", "--", _("end immediately without fading"), true},
-	  {"", "     999:", "--", _("wait until intro music ends"), true},
-	  {"", "    1110:", "--",
-		_("wait until mouse click or keypress, play menu music after intro music"), true},
-	  {"", "    1111:", "--", _("wait until mouse click or keypress, silence after intro music"),
 		true},
 	  /// Others
 	  {_("Others:"), "verbose", "", _("Enable verbose debug messages"), false},

@@ -9,6 +9,7 @@ wl_library(wui_sound_options
     graphic_text_layout
     sound
     ui_basic
+    widelands_options
 )
 
 wl_library(wui_chat_ui

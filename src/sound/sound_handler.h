@@ -134,7 +134,7 @@
  * stop_music() (or change_music()) we just start the fadeout. The
  * callback then tells us when the audio has actually stopped and we can start
  * the next music. To differentiate between the two states we can just take a
- * peek with Mix_MusicPlaying() if there is music running. To make sure that
+ * peek with Mix_PlayingMusic() if there is music running. To make sure that
  * nothing bad happens, that check is not only required in change_music()
  * but also in start_music(), which causes the seemingly recursive call to
  * change_music() from inside start_music(). It really is not recursive, trust
@@ -256,10 +256,6 @@ private:
 	 * if there actually is a song playing \e right \e now.
 	 */
 	std::string current_songset_;
-
-	/// Marks when kIntro should be the next songset when changing music.
-	/// (see implementation why it is needed)
-	bool intro_scheduled_{false};
 
 	/** The random number generator.
 	 * \note The RNG here \e must \e not be the same as the one for the game

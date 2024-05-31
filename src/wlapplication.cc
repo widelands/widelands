@@ -81,7 +81,6 @@
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/about.h"
 #include "ui_fsmenu/crash_report.h"
-#include "ui_fsmenu/end_splash.h"
 #include "ui_fsmenu/launch_spg.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/main.h"
@@ -417,7 +416,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// and the music starts with some delay
 	g_sh = new SoundHandler();
 	g_sh->register_songs("music", Songset::kIntro);
-	g_sh->change_music(Songset::kIntro);
+	g_sh->register_songs("music", Songset::kMenu);
+	g_sh->change_music(get_config_bool("play_intro_music", true) ? Songset::kIntro : Songset::kMenu);
 
 	g_gr = new Graphic();
 	g_gr->initialize(
@@ -521,7 +521,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	cleanup_temp_backups();
 
 	verb_log_info("Loading songsets");
-	g_sh->register_songs("music", Songset::kMenu);
 	g_sh->register_songs("music", Songset::kIngame);
 	g_sh->register_songs("music", Songset::kCustom);
 
@@ -921,9 +920,7 @@ void WLApplication::init_and_run_game_from_template(FsMenu::MainMenu& mainmenu) 
 void WLApplication::run() {
 	GameLogicThread game_logic_thread(&should_die_);
 
-	FsMenu::MainMenu menu(game_type_ != GameType::kNone ||
-	                      get_config_int("end_splash", EndSplashOption::kDefault) <=
-	                         EndSplashOption::kHard);
+	FsMenu::MainMenu menu(game_type_ != GameType::kNone);
 
 	check_crash_reports(menu);
 
@@ -1044,21 +1041,14 @@ bool WLApplication::poll_event(SDL_Event& ev) const {
 		}
 		break;
 
-	// TODO(tothxa): no longer pushes fake event, can be moved to handle_input()
 	case SDL_USEREVENT: {
 		if (ev.user.code == CHANGE_MUSIC) {
 			/* Notification from the SoundHandler that a song has finished playing.
 			 * Usually, another song from the same songset will be started.
-			 * There is a special case for the intro music: it will only be played
-			 * once, then we switch to the main menu music or keep silent.
+			 * There is a special case for the intro music: it will only be played once.
 			 */
 			assert(!SoundHandler::is_backend_disabled());
-			if (g_sh->current_songset() == Songset::kIntro) {
-				if (get_config_int("end_splash", EndSplashOption::kDefault) <
-				    EndSplashOption::kUserSilent) {
-					g_sh->change_music(Songset::kMenu, 500);
-				}
-			} else {
+			if (g_sh->current_songset() != Songset::kIntro) {
 				g_sh->change_music();
 			}
 		}

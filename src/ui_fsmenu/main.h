@@ -25,7 +25,6 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-#include "ui_fsmenu/end_splash.h"
 #include "ui_fsmenu/menu.h"
 
 namespace Widelands {
@@ -142,7 +141,6 @@ private:
 
 	enum class SplashState { kSplash, kSplashFadeOut, kMenuFadeIn, kDone };
 	SplashState splash_state_{SplashState::kDone};
-	int32_t end_splash_time_{EndSplashOption::kWaitIntroMusic};
 
 	std::vector<std::string> images_;
 	uint32_t last_image_exchange_time_{0U};

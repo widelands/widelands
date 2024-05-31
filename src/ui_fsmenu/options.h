@@ -50,7 +50,6 @@ public:
 		bool fullscreen;
 		bool sdl_cursor;
 		bool tooltip_accessibility_mode;
-		int32_t end_splash_time;
 
 		// Window options
 		bool dock_windows_to_edges;
@@ -122,8 +121,6 @@ private:
 
 	void add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt);
 
-	void add_end_splash_options(const OptionsCtrl::OptionsStruct& opt);
-
 	// Saves the options and closes the window
 	void clicked_ok();
 	// Saves the options and reloads the active tab
@@ -158,7 +155,6 @@ private:
 	// Interface options
 	UI::Dropdown<std::string> language_dropdown_;
 	UI::Dropdown<ScreenResolution> resolution_dropdown_;
-	UI::Dropdown<int32_t> end_splash_dropdown_;
 	UI::Checkbox sdl_cursor_;
 	UI::Checkbox tooltip_accessibility_mode_;
 	UI::MultilineTextarea translation_info_;
