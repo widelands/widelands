@@ -1143,7 +1143,7 @@ bool Ship::is_on_destination_dock() const {
 }
 
 uint32_t Ship::min_warship_soldier_capacity() const {
-	return is_on_destination_dock() ? 0U : get_nritems();
+	return (ship_type_ != ShipType::kWarship || is_on_destination_dock()) ? 0U : get_nritems();
 }
 
 std::vector<Soldier*> Ship::onboard_soldiers() const {
@@ -2241,8 +2241,18 @@ void Ship::exp_scouting_direction(Game& game, WalkingDir scouting_direction) {
 	assert(expedition_ != nullptr);
 	destination_object_ = nullptr;
 	destination_coords_ = nullptr;
-	set_ship_state_and_notify(
-	   ShipStates::kExpeditionScouting, NoteShip::Action::kDestinationChanged);
+	if (scouting_direction == WalkingDir::IDLE) {
+		if (ship_type_ == ShipType::kTransport && !expedition_->seen_port_buildspaces.empty()) {
+			set_ship_state_and_notify(
+			   ShipStates::kExpeditionPortspaceFound, NoteShip::Action::kWaitingForCommand);
+		} else {
+			set_ship_state_and_notify(
+			   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
+		}
+	} else {
+		set_ship_state_and_notify(
+		   ShipStates::kExpeditionScouting, NoteShip::Action::kDestinationChanged);
+	}
 	expedition_->scouting_direction = scouting_direction;
 	expedition_->island_exploration = false;
 	set_destination(game, nullptr);
