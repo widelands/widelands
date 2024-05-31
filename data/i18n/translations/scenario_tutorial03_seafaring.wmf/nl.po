@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
+# Alex Rijckaert, 2024
 # CrisiusXIII <chris@cborn.nl>, 2021
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # FvZ, 2020
@@ -16,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
-"Last-Translator: 78874c46c2b3a507dfdeacb75f6712de_6b7b1df, 2023\n"
+"Last-Translator: Alex Rijckaert, 2024\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -317,7 +318,7 @@ msgstr "Expedities kunnen gestart worden vanuit elke haven.  Alle benodigde goed
 msgid ""
 "You can check out the needed wares in the Expedition tab of your port (it "
 "will appear in the last place when you’ve started an expedition)."
-msgstr ""
+msgstr "Je kunt de benodigde goederen bekijken in het Expeditie tabblad van je haven (het verschijnt op de laatste plaats wanneer je een expeditie bent begonnen)."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:152
 msgid "Now try this out. I will tell you later what the next steps are."
@@ -478,14 +479,14 @@ msgid ""
 "any number of soldiers. The desired number makes sure that defenders are "
 "requested by the port or headquarters, and once they are garrisoned there, "
 "they don't get sent away to serve other needs."
-msgstr ""
+msgstr "Om ervoor te zorgen dat ze goed verdedigd worden, kun je het gewenste aantal verdedigende soldaten voor beide instellen in het tabblad Soldaten, vergelijkbaar met militaire gebouwen. Maar het zijn tegelijkertijd ook pakhuizen, dus ze kunnen elk aantal soldaten bevatten. Het gewenste aantal zorgt ervoor dat verdedigers worden gevraagd door de haven of het hoofdkwartier, en als ze daar eenmaal in garnizoen zijn, worden ze niet weggestuurd om andere behoeften te dienen."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:216
 msgid ""
 "On this map, there is no enemy to fear. In other games, you should set some "
 "defenders for your ports and make building one or two military "
 "fortifications around your new colonies a priority."
-msgstr ""
+msgstr "Op deze kaart is er geen vijand te vrezen. In andere spellen moet je verdedigers voor je havens zetten en prioriteit geven aan het bouwen van een of twee militaire forten rond je nieuwe koloniën."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:223
 msgid "Our mission"
@@ -722,13 +723,13 @@ msgid ""
 "As you can see, ferries can be produced quite quickly, but you don't need to"
 " worry about wasted materials, because ferry yards normally only produce "
 "them on demand, when there are unserviced waterways."
-msgstr ""
+msgstr "Zoals je kunt zien, kunnen veerboten vrij snel worden geproduceerd, maar je hoeft je geen zorgen te maken over verspilling van materiaal, omdat veerbootwerven ze normaal gesproken alleen produceren op aanvraag, wanneer er onbevaren waterwegen zijn."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:340
 msgid ""
 "As long as a ferry services a waterway, its lifetime is unlimited, but "
 "unemployed ferries will rot away and eventually sink."
-msgstr ""
+msgstr "Zolang een veerboot een waterweg bedient, is zijn levensduur onbeperkt, maar werkloze veerboten zullen wegrotten en uiteindelijk zinken."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349
