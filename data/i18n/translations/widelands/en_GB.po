@@ -3,7 +3,7 @@
 # 
 # Translators:
 # Adam Piggott, 2016-2017
-# Andi Chandler <andi@gowling.com>, 2017
+# Andi Chandler <andi@gowling.com>, 2017,2024
 # Benedikt Straub <benedikt-straub@web.de>, 2021
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Lindsay Smart <robertsonsmart+transifex@gmail.com>, 2018
@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-25 02:33+0000\n"
+"POT-Creation-Date: 2024-06-01 02:39+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>, 2017,2024\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,7 +46,7 @@ msgstr "Not enough space"
 
 #: ../../../../data/scripting/infrastructure.lua:288
 msgid "No rocks nearby"
-msgstr ""
+msgstr "No rocks nearby"
 
 #: ../../../../data/scripting/infrastructure.lua:288
 msgid ""
@@ -56,7 +56,7 @@ msgstr ""
 
 #: ../../../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
-msgstr ""
+msgstr "Not enough trees nearby"
 
 #: ../../../../data/scripting/infrastructure.lua:294
 msgid ""
@@ -73,11 +73,11 @@ msgstr "Status"
 
 #: ../../../../data/scripting/messages.lua:293
 msgid "New Objective"
-msgstr ""
+msgstr "New Objective"
 
 #: ../../../../data/scripting/messages.lua:295
 msgid "New Objectives"
-msgstr ""
+msgstr "New Objectives"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
@@ -91,7 +91,7 @@ msgstr "%s %s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../../../data/scripting/richtext.lua:703
-#: ../../../../src/base/i18n.cc:313
+#: ../../../../src/base/i18n.cc:335
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s & %2$s"
@@ -99,7 +99,7 @@ msgstr "%1$s & %2$s"
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../../../data/scripting/richtext.lua:705
-#: ../../../../src/base/i18n.cc:317
+#: ../../../../src/base/i18n.cc:339
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s or %2$s"
@@ -110,7 +110,7 @@ msgstr "%1$s or %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../../../data/scripting/richtext.lua:707
 #: ../../../../data/scripting/richtext.lua:712
-#: ../../../../src/base/i18n.cc:321 ../../../../src/base/i18n.cc:330
+#: ../../../../src/base/i18n.cc:343 ../../../../src/base/i18n.cc:352
 #: ../../../../src/logic/addons.cc:236
 #, c-format
 msgid "%1$s, %2$s"
@@ -120,7 +120,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: The current value of a spinbox, "X hours and Y minutes"
 #: ../../../../data/scripting/richtext.lua:709
-#: ../../../../src/base/i18n.cc:325 ../../../../src/ui_basic/spinbox.cc:528
+#: ../../../../src/base/i18n.cc:347 ../../../../src/ui_basic/spinbox.cc:528
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s and %2$s"
@@ -171,7 +171,7 @@ msgstr "true"
 #: ../../../../src/base/format/float_node.h:33
 msgctxt "decimal_separator"
 msgid "."
-msgstr ""
+msgstr "."
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -293,7 +293,7 @@ msgstr "Main Menu"
 #: ../../../../src/wui/interactive_gamebase.cc:102
 msgctxt "hotkey"
 msgid "Esc"
-msgstr ""
+msgstr "Esc"
 
 #. * TRANSLATORS: Title for the tool menu button in the editor
 #. * TRANSLATORS: Heading in the editor keyboard shortcuts help
@@ -301,7 +301,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1055
 msgctxt "editor"
 msgid "Tools"
-msgstr ""
+msgstr "Tools"
 
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
@@ -312,7 +312,7 @@ msgstr ""
 #: ../../../../src/editor/editorinteractive.cc:130
 #: ../../../../src/wui/interactive_gamebase.cc:83
 msgid "Show / Hide"
-msgstr ""
+msgstr "Show / Hide"
 
 #: ../../../../src/editor/editorinteractive.cc:143
 msgid "Tool size"
@@ -371,7 +371,7 @@ msgstr "Save Map"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../../../src/editor/editorinteractive.cc:237
 msgid "Publish Map Online…"
-msgstr ""
+msgstr "Publish Map Online…"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../../../src/editor/editorinteractive.cc:245
@@ -420,7 +420,7 @@ msgstr "Terrain"
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:314
 msgid "Change the map’s terrain"
-msgstr ""
+msgstr "Change the map’s terrain"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:322
@@ -432,7 +432,7 @@ msgstr "Immovables"
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:325
 msgid "Add or remove immovables"
-msgstr ""
+msgstr "Add or remove immovables"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:332
@@ -458,12 +458,12 @@ msgstr "Resources"
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:346
 msgid "Set or change resources"
-msgstr ""
+msgstr "Set or change resources"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:350
 msgid "Port spaces"
-msgstr ""
+msgstr "Port spaces"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:353
@@ -512,19 +512,19 @@ msgstr ""
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:389
 msgid "Click on a field to show information about it"
-msgstr ""
+msgstr "Click on a field to show information about it"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:393
 #: ../../../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../../../src/wlapplication_options.cc:537
 msgid "Tool History"
-msgstr ""
+msgstr "Tool History"
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:396
 msgid "Restore previous tool settings"
-msgstr ""
+msgstr "Restore previous tool settings"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -535,13 +535,13 @@ msgstr ""
 #: ../../../../src/editor/editorinteractive.cc:466
 #: ../../../../src/wui/interactive_gamebase.cc:269
 msgid "Hide Building Spaces"
-msgstr ""
+msgstr "Hide Building Spaces"
 
 #: ../../../../src/editor/editorinteractive.cc:466
 #: ../../../../src/ui_fsmenu/options.cc:287
 #: ../../../../src/wui/interactive_gamebase.cc:269
 msgid "Show Building Spaces"
-msgstr ""
+msgstr "Show Building Spaces"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether to
 #. show maximum
@@ -549,7 +549,7 @@ msgstr ""
 #. etc.) are removed
 #: ../../../../src/editor/editorinteractive.cc:473
 msgid "Hide Maximum Building Spaces"
-msgstr ""
+msgstr "Hide Maximum Building Spaces"
 
 #: ../../../../src/editor/editorinteractive.cc:474
 msgid "Show Maximum Building Spaces"
@@ -2791,27 +2791,27 @@ msgstr "Expedition Ready"
 msgid "An expedition ship is waiting for your commands."
 msgstr "An expedition ship is waiting for your commands."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2390
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2400
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2392
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2402
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2396
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2406
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2399
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2409
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2405
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2415
 #: ../../../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
@@ -2823,10 +2823,10 @@ msgstr ""
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2411
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2421
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2427
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2441
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2431
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2437
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2451
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -2834,7 +2834,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2416
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2426
 #: ../../../../src/wui/seafaring_statistics_menu.cc:260
 msgctxt "ship_state"
 msgid "Empty"
@@ -2842,7 +2842,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2436
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2446
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -2850,7 +2850,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2448
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2458
 #: ../../../../src/wui/seafaring_statistics_menu.cc:264
 msgctxt "ship_state"
 msgid "Waiting"
@@ -2858,14 +2858,14 @@ msgstr "Waiting"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2452
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2462
 #: ../../../../src/wui/seafaring_statistics_menu.cc:266
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Scouting"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2456
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2466
 #: ../../../../src/wui/seafaring_statistics_menu.cc:268
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -2874,7 +2874,7 @@ msgstr "Port Space Found"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2461
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2471
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Founding a Colony"
@@ -8727,7 +8727,7 @@ msgstr ""
 
 #: ../../../../src/wui/attack_window.cc:483
 #: ../../../../src/wui/buildingwindow.cc:420
-#: ../../../../src/wui/shipwindow.cc:197
+#: ../../../../src/wui/shipwindow.cc:196
 msgid "Show Debug Window"
 msgstr "Show Debug Window"
 
@@ -8742,7 +8742,7 @@ msgid "%1$s  HP: %2$u/%3$u  AT: +%4$u%%"
 msgstr ""
 
 #: ../../../../src/wui/attack_window.cc:635
-#: ../../../../src/wui/soldierlist.cc:556
+#: ../../../../src/wui/soldierlist.cc:558
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 msgstr "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
@@ -10834,78 +10834,78 @@ msgstr "Scout westwards"
 msgid "Construct a port at the current location"
 msgstr "Construct a port at the current location"
 
-#: ../../../../src/wui/shipwindow.cc:142
+#: ../../../../src/wui/shipwindow.cc:141
 msgid "Anchor at the current location"
 msgstr ""
 
-#: ../../../../src/wui/shipwindow.cc:147
+#: ../../../../src/wui/shipwindow.cc:146
 msgid "Scout towards the east"
 msgstr "Scout eastwards"
 
-#: ../../../../src/wui/shipwindow.cc:152
+#: ../../../../src/wui/shipwindow.cc:151
 msgid "Scout towards the south west"
 msgstr "Scout south-westwards"
 
-#: ../../../../src/wui/shipwindow.cc:157
+#: ../../../../src/wui/shipwindow.cc:156
 msgid "Explore the island’s coast counter clockwise"
 msgstr "Explore the island’s coast anticlockwise"
 
-#: ../../../../src/wui/shipwindow.cc:162
+#: ../../../../src/wui/shipwindow.cc:161
 msgid "Scout towards the south east"
 msgstr "Scout south-eastwards"
 
-#: ../../../../src/wui/shipwindow.cc:169
+#: ../../../../src/wui/shipwindow.cc:168
 msgid "Destination"
 msgstr ""
 
-#: ../../../../src/wui/shipwindow.cc:180
+#: ../../../../src/wui/shipwindow.cc:179
 msgid "Sink the ship"
 msgstr "Sink the ship"
 
-#: ../../../../src/wui/shipwindow.cc:189
+#: ../../../../src/wui/shipwindow.cc:188
 msgid "Cancel the Expedition"
 msgstr "Cancel the Expedition"
 
-#: ../../../../src/wui/shipwindow.cc:207
+#: ../../../../src/wui/shipwindow.cc:206
 msgid "Go to ship"
 msgstr "Go to ship"
 
 #. * TRANSLATORS: Window label when an expedition can't be canceled
-#: ../../../../src/wui/shipwindow.cc:278
+#: ../../../../src/wui/shipwindow.cc:282
 msgid "Cancel Expedition"
 msgstr "Cancel Expedition"
 
-#: ../../../../src/wui/shipwindow.cc:279
+#: ../../../../src/wui/shipwindow.cc:283
 msgid ""
 "This expedition can’t be canceled, because the ship has no port to return "
 "to."
 msgstr "This expedition can’t be canceled, because the ship has no port to return to."
 
 #. * TRANSLATORS: No destination
-#: ../../../../src/wui/shipwindow.cc:362
+#: ../../../../src/wui/shipwindow.cc:366
 msgctxt "destination"
 msgid "(none)"
 msgstr ""
 
-#: ../../../../src/wui/shipwindow.cc:429 ../../../../src/wui/shipwindow.cc:434
-#: ../../../../src/wui/shipwindow.cc:439
+#: ../../../../src/wui/shipwindow.cc:433 ../../../../src/wui/shipwindow.cc:438
+#: ../../../../src/wui/shipwindow.cc:443
 #, c-format
 msgid "Go to destination (%s)"
 msgstr ""
 
-#: ../../../../src/wui/shipwindow.cc:444
+#: ../../../../src/wui/shipwindow.cc:448
 msgid "Go to destination"
 msgstr "Go to destination"
 
-#: ../../../../src/wui/shipwindow.cc:471
+#: ../../../../src/wui/shipwindow.cc:475
 msgid "Refit to transport ship"
 msgstr ""
 
-#: ../../../../src/wui/shipwindow.cc:472
+#: ../../../../src/wui/shipwindow.cc:476
 msgid "Refit to warship"
 msgstr ""
 
-#: ../../../../src/wui/shipwindow.cc:494
+#: ../../../../src/wui/shipwindow.cc:498
 #, c-format
 msgid "HP: %1$u/%2$u"
 msgstr ""
@@ -10955,7 +10955,7 @@ msgstr ""
 msgid "Capacity"
 msgstr "Capacity"
 
-#: ../../../../src/wui/soldierlist.cc:564
+#: ../../../../src/wui/soldierlist.cc:566
 msgid "Click soldier to send away"
 msgstr "Click soldier to send away"
 
