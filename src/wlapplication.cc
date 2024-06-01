@@ -471,7 +471,10 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 			if (ev.type == SDL_WINDOWEVENT) {
 				handle_window_event(ev);
 				++handled;
-			} else if (ev.type != SDL_MOUSEMOTION) {
+			} else if (ev.type == SDL_MOUSEMOTION) {
+				mouse_position_ = Vector2i(ev.motion.x, ev.motion.y);
+				log_dbg("handling mouse motion: %d %d", mouse_position_.x, mouse_position_.y);  // NOCOM
+			} else {
 				verb_log_dbg("Ignoring SDL event 0x%4x", ev.type);
 				++ignored;
 			}
@@ -611,6 +614,12 @@ WLApplication::~WLApplication() {
 }
 
 void WLApplication::init_mouse_cursor(const bool use_sdl) {
+	// NOCOM
+	log_dbg("Initializing the mouse cursor in %s mode", use_sdl ? "SDL" : "soft");
+	SDL_GetMouseState(&mouse_position_.x, &mouse_position_.y);
+	log_dbg("reported mouse position: %d %d", mouse_position_.x, mouse_position_.y);
+	// end NOCOM
+
 	// Initialize the mouse position to the current one.
 	// Unfortunately we have to do it the hard way, because SDL_GetMouseState() doesn't work
 	// right if the mouse doesn't move during startup.
@@ -624,6 +633,9 @@ void WLApplication::init_mouse_cursor(const bool use_sdl) {
 	mouse_position_.x = mouse_global_x - window_x;
 	mouse_position_.y = mouse_global_y - window_y;
 
+	log_dbg("window position: %d %d", window_x, window_y);  // NOCOM
+	log_dbg("calculated mouse position: %d %d", mouse_position_.x, mouse_position_.y);  // NOCOM
+
 	// Fix SDL's internal notion of the relative cursor position by generating some motion events.
 	// Must be done before g_mouse_cursor->initialize().
 	// TODO(tothxa): I don't know why, but all these steps seem to be necessary on my system to
@@ -635,6 +647,11 @@ void WLApplication::init_mouse_cursor(const bool use_sdl) {
 	SDL_Delay(2);  // 1 tick doesn't work
 	SDL_WarpMouseInWindow(sdl_window, mouse_position_.x, mouse_position_.y);
 	SDL_PumpEvents();
+
+	// NOCOM
+	SDL_GetMouseState(&mouse_position_.x, &mouse_position_.y);
+	log_dbg("mouse position after warping: %d %d", mouse_position_.x, mouse_position_.y);
+	// end NOCOM
 
 	// The cursor initialization itself
 	g_mouse_cursor = new MouseCursor();
