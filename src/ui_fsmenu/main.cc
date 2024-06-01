@@ -564,12 +564,7 @@ void MainMenu::abort_splashscreen() {
 
 bool MainMenu::handle_mousepress(uint8_t /*btn*/, int32_t /*x*/, int32_t /*y*/) {
 	if (splash_state_ != SplashState::kDone) {
-		// First click ends the splash gently, second click immediately
-		if (splash_state_ != SplashState::kSplash || !get_config_bool("play_intro_music", true)) {
-			abort_splashscreen();
-		} else {
-			end_splashscreen();
-		}
+		abort_splashscreen();
 		return true;
 	}
 	return false;
