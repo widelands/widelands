@@ -408,10 +408,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		exit(2);
 	}
 
-	// Use system's "waiting" mouse cursor
-	SDL_Cursor* tmp_cursor = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_WAIT);
-	SDL_SetCursor(tmp_cursor);
-
 	// Start intro music before splashscreen: it takes slightly less time,
 	// and the music starts with some delay
 	g_sh = new SoundHandler();
@@ -425,14 +421,60 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	   get_config_int("xres", kDefaultResolutionW), get_config_int("yres", kDefaultResolutionH),
 	   get_config_bool("fullscreen", false), get_config_bool("maximized", false));
 
+	{
+		// The window manager may resize the window on creation, so we have to handle resize events
+		// first to be able to draw the splash screen in the right size. This also creates mousemove
+		// events that we may mess up when we set the cursor.
+		// We throw away everything else, hopefully we don't have much yet...
+		// Window event and mouse cursor handling needs g_gr.
+
+		SDL_PumpEvents();
+
+		// Known harmless events we'd drop anyway
+		SDL_FlushEvent(SDL_AUDIODEVICEADDED);
+		//
+
+		SDL_Event ev;
+		int ignored = 0;
+		int handled = 0;
+
+		while (SDL_PollEvent(&ev) != 0) {
+			if (ev.type == SDL_WINDOWEVENT) {
+				handle_window_event(ev);
+				++handled;
+			} else if (ev.type == SDL_MOUSEMOTION) {
+				mouse_position_ = Vector2i(ev.motion.x, ev.motion.y);
+				log_dbg("handling mouse motion: %d %d", mouse_position_.x, mouse_position_.y);  // NOCOM
+			} else {
+				/* NOCOM verb_ */ log_dbg("Ignoring SDL event 0x%04x", ev.type);
+				++ignored;
+			}
+		}
+		if (ignored > 0) {
+			log_warn("Ignored %d non-mousemove SDL events at start up", ignored);
+		}
+		if (handled > 0) {
+			// Initial creation already creates some events
+			verb_log_info("Handled %d SDL window events at start up", handled);
+		}
+	}
+
+	// Set "waiting" mouse cursor
+
 	// In soft-cursor mode the SDL mouse cursor is disabled after g_mouse_cursor->initialize(),
 	// but cursor drawing doesn't work until we start refreshing the screen, so the cursor
 	// disappears.
 	// In SDL cursor mode there's no such problem, so we can switch to our own cursor early.
 	const bool use_sdl_cursor = get_config_bool("sdl_cursor", true);
+	SDL_Cursor* tmp_cursor = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_WAIT);
 	if (use_sdl_cursor) {
 		init_mouse_cursor(use_sdl_cursor);
+	} else {
+		// Use system's "waiting" mouse cursor
+		SDL_SetCursor(tmp_cursor);
 	}
+
+	// Prepare for drawing splash screen
 
 	/*****
 	 * These could be moved later if we decide to show some graphic (an hourglass?) instead
@@ -455,38 +497,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	// The initital splash screen is only drawn once, it doesn't get updates until the main menu
 	// overrides it. Normally it shouldn't take more than a few seconds.
-	{
-		SDL_PumpEvents();
-		SDL_FlushEvent(SDL_AUDIODEVICEADDED);
-
-		SDL_Event ev;
-		int ignored = 0;
-		int handled = 0;
-
-		while (SDL_PollEvent(&ev) != 0) {
-			// Except the window manager may resize the window on creation, so we have to look for
-			// resize events first. We throw away everything else, hopefully we don't have much yet...
-			// This is not ideal, but Graphic messes a lot with SDL_SetWindowResizable() (not good
-			// either), so using that would be much harder.
-			if (ev.type == SDL_WINDOWEVENT) {
-				handle_window_event(ev);
-				++handled;
-			} else if (ev.type == SDL_MOUSEMOTION) {
-				mouse_position_ = Vector2i(ev.motion.x, ev.motion.y);
-				log_dbg("handling mouse motion: %d %d", mouse_position_.x, mouse_position_.y);  // NOCOM
-			} else {
-				verb_log_dbg("Ignoring SDL event 0x%4x", ev.type);
-				++ignored;
-			}
-		}
-		if (ignored > 0) {
-			log_warn("Ignored %d non-mousemove SDL events at start up", ignored);
-		}
-		if (handled > 0) {
-			// Initial creation already creates some events
-			verb_log_info("Handled %d SDL window events at start up", handled);
-		}
-	}
 	RenderTarget* r = g_gr->get_render_target();
 	draw_splashscreen(*r, _("Loading…"), 1.0f);
 	g_gr->refresh();
@@ -620,38 +630,40 @@ void WLApplication::init_mouse_cursor(const bool use_sdl) {
 	log_dbg("reported mouse position: %d %d", mouse_position_.x, mouse_position_.y);
 	// end NOCOM
 
-	// Initialize the mouse position to the current one.
-	// Unfortunately we have to do it the hard way, because SDL_GetMouseState() doesn't work
-	// right if the mouse doesn't move during startup.
-	int mouse_global_x;
-	int mouse_global_y;
-	int window_x;
-	int window_y;
-	SDL_Window* sdl_window = g_gr->get_sdlwindow();
-	SDL_GetWindowPosition(sdl_window, &window_x, &window_y);
-	SDL_GetGlobalMouseState(&mouse_global_x, &mouse_global_y);
-	mouse_position_.x = mouse_global_x - window_x;
-	mouse_position_.y = mouse_global_y - window_y;
+	if (!use_sdl) {
+		// Initialize the mouse position to the current one.
+		// Unfortunately we have to do it the hard way, because SDL_GetMouseState() doesn't work
+		// right if the mouse doesn't move during startup.
+		int mouse_global_x;
+		int mouse_global_y;
+		int window_x;
+		int window_y;
+		SDL_Window* sdl_window = g_gr->get_sdlwindow();
+		SDL_GetWindowPosition(sdl_window, &window_x, &window_y);
+		SDL_GetGlobalMouseState(&mouse_global_x, &mouse_global_y);
+		mouse_position_.x = mouse_global_x - window_x;
+		mouse_position_.y = mouse_global_y - window_y;
 
-	log_dbg("window position: %d %d", window_x, window_y);                              // NOCOM
-	log_dbg("calculated mouse position: %d %d", mouse_position_.x, mouse_position_.y);  // NOCOM
+		log_dbg("window position: %d %d", window_x, window_y);                              // NOCOM
+		log_dbg("calculated mouse position: %d %d", mouse_position_.x, mouse_position_.y);  // NOCOM
 
-	// Fix SDL's internal notion of the relative cursor position by generating some motion events.
-	// Must be done before g_mouse_cursor->initialize().
-	// TODO(tothxa): I don't know why, but all these steps seem to be necessary on my system to
-	//               fix the case in soft mode when the mouse is first moved while it is hidden.
-	//               Without these, it is resumed at the position where it was hidden.
-	SDL_PumpEvents();
-	SDL_WarpMouseInWindow(sdl_window, mouse_position_.x - 1, mouse_position_.y - 1);
-	SDL_PumpEvents();
-	SDL_Delay(2);  // 1 tick doesn't work
-	SDL_WarpMouseInWindow(sdl_window, mouse_position_.x, mouse_position_.y);
-	SDL_PumpEvents();
+		// Fix SDL's internal notion of the relative cursor position by generating some motion events.
+		// Must be done before g_mouse_cursor->initialize().
+		// TODO(tothxa): I don't know why, but all these steps seem to be necessary on my system to
+		//               fix the case in soft mode when the mouse is first moved while it is hidden.
+		//               Without these, it is resumed at the position where it was hidden.
+		SDL_PumpEvents();
+		SDL_WarpMouseInWindow(sdl_window, mouse_position_.x - 1, mouse_position_.y - 1);
+		SDL_PumpEvents();
+		SDL_Delay(2);  // 1 tick doesn't work
+		SDL_WarpMouseInWindow(sdl_window, mouse_position_.x, mouse_position_.y);
+		SDL_PumpEvents();
 
-	// NOCOM
-	SDL_GetMouseState(&mouse_position_.x, &mouse_position_.y);
-	log_dbg("mouse position after warping: %d %d", mouse_position_.x, mouse_position_.y);
-	// end NOCOM
+		// NOCOM
+		SDL_GetMouseState(&mouse_position_.x, &mouse_position_.y);
+		log_dbg("mouse position after warping: %d %d", mouse_position_.x, mouse_position_.y);
+		// end NOCOM
+	}
 
 	// The cursor initialization itself
 	g_mouse_cursor = new MouseCursor();
@@ -1082,6 +1094,7 @@ void WLApplication::handle_window_event(SDL_Event& ev) {
 	assert(ev.type == SDL_WINDOWEVENT);
 	switch (ev.window.event) {
 	case SDL_WINDOWEVENT_RESIZED:
+		log_dbg("Handling window resize event: %dx%d", ev.window.data1, ev.window.data2);  // NOCOM
 		// Do not save the new size to config at this point to avoid saving sizes that
 		// result from maximization etc. Save at shutdown instead.
 		if (!g_gr->fullscreen()) {
@@ -1089,11 +1102,15 @@ void WLApplication::handle_window_event(SDL_Event& ev) {
 		}
 		break;
 	case SDL_WINDOWEVENT_MAXIMIZED:
+		log_dbg("Handling window maximized event");  // NOCOM
 		set_config_bool("maximized", true);
 		break;
 	case SDL_WINDOWEVENT_RESTORED:
+		log_dbg("Handling window restored event");  // NOCOM
 		set_config_bool("maximized", g_gr->maximized());
 		break;
+	default:
+		log_dbg("Ignoring window event: %d", ev.window.event);  // NOCOM
 	}
 }
 
