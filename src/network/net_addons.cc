@@ -399,7 +399,8 @@ void NetAddons::check_endofstream() {
 // reading or writing random leftover bytes. Create it before doing some
 // networking stuff and call `ok()` after everything has gone well.
 struct CrashGuard {
-	explicit CrashGuard(NetAddons& n, bool suppress_timeout, bool uses_cache = false) : net_(n), timeout_was_suppressed_(n.timeout_was_suppressed_) {
+	explicit CrashGuard(NetAddons& n, bool suppress_timeout, bool uses_cache = false)
+	   : net_(n), timeout_was_suppressed_(n.timeout_was_suppressed_) {
 		assert(net_.initialized_);
 
 		if (net_.network_active_) {
