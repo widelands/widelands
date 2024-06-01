@@ -167,6 +167,27 @@ void NetAddons::append_multiline_message(std::string& send, const std::string& m
 	send += "\nENDOFSTREAM\n";
 }
 
+void NetAddons::set_timeouts(bool suppress_timeout) {
+	timeout_was_suppressed_ = suppress_timeout;
+	const uint32_t kTimeout = suppress_timeout ? (60 * 60 * 12) : 4;
+#ifdef _WIN32
+	DWORD timeout_val = kTimeout * 1000;
+	const char* timeout_ptr = reinterpret_cast<const char*>(&timeout_val);
+	// Set timeout of read()
+	setsockopt(client_socket_, SOL_SOCKET, SO_RCVTIMEO, timeout_ptr, sizeof(timeout_val));
+	// Set timeout of write()
+	setsockopt(client_socket_, SOL_SOCKET, SO_SNDTIMEO, timeout_ptr, sizeof(timeout_val));
+#else
+	struct timeval timeout_val;
+	timeout_val.tv_sec = kTimeout;
+	timeout_val.tv_usec = 0;
+	// Set timeout of read()
+	setsockopt(client_socket_, SOL_SOCKET, SO_RCVTIMEO, &timeout_val, sizeof(timeout_val));
+	// Set timeout of write()
+	setsockopt(client_socket_, SOL_SOCKET, SO_SNDTIMEO, &timeout_val, sizeof(timeout_val));
+#endif
+}
+
 void NetAddons::init(std::string username, std::string password) {
 	if (initialized_) {
 		// already initialized
@@ -202,23 +223,7 @@ void NetAddons::init(std::string username, std::string password) {
 		throw_warning("Unable to create socket");
 	}
 
-	constexpr uint32_t kTimeout = 4;
-#ifdef _WIN32
-	DWORD timeout_val = kTimeout * 1000;
-	const char* timeout_ptr = reinterpret_cast<const char*>(&timeout_val);
-	// Set timeout of read()
-	setsockopt(client_socket_, SOL_SOCKET, SO_RCVTIMEO, timeout_ptr, sizeof(timeout_val));
-	// Set timeout of write()
-	setsockopt(client_socket_, SOL_SOCKET, SO_SNDTIMEO, timeout_ptr, sizeof(timeout_val));
-#else
-	struct timeval timeout_val;
-	timeout_val.tv_sec = kTimeout;
-	timeout_val.tv_usec = 0;
-	// Set timeout of read()
-	setsockopt(client_socket_, SOL_SOCKET, SO_RCVTIMEO, &timeout_val, sizeof(timeout_val));
-	// Set timeout of write()
-	setsockopt(client_socket_, SOL_SOCKET, SO_SNDTIMEO, &timeout_val, sizeof(timeout_val));
-#endif
+	set_timeouts(false);
 
 	const std::string target_ip = get_config_string("addon_server_ip", "widelands.org");
 	const int target_port = get_config_int("addon_server_port", 7388);
@@ -394,15 +399,21 @@ void NetAddons::check_endofstream() {
 // reading or writing random leftover bytes. Create it before doing some
 // networking stuff and call `ok()` after everything has gone well.
 struct CrashGuard {
-	explicit CrashGuard(NetAddons& n, bool uses_cache = false) : net_(n) {
+	explicit CrashGuard(NetAddons& n, bool suppress_timeout, bool uses_cache = false) : net_(n), timeout_was_suppressed_(n.timeout_was_suppressed_) {
 		assert(net_.initialized_);
+
 		if (net_.network_active_) {
 			net_.throw_warning("Network is already active");
 		}
 		if (!uses_cache && net_.cached_remotes_ > 0) {
 			net_.throw_warning("Network has stale remotes cache");
 		}
+
 		net_.network_active_ = true;
+
+		if (timeout_was_suppressed_ != suppress_timeout) {
+			net_.set_timeouts(suppress_timeout);
+		}
 	}
 	void ok() {
 		assert(net_.initialized_);
@@ -417,17 +428,20 @@ struct CrashGuard {
 		net_.is_uploading_addon_ = false;
 		if (!ok_) {
 			net_.quit_connection();
+		} else {
+			net_.set_timeouts(timeout_was_suppressed_);
 		}
 	}
 
 private:
 	NetAddons& net_;
 	bool ok_{false};
+	bool timeout_was_suppressed_{false};
 };
 
 std::vector<std::string> NetAddons::refresh_remotes(const bool all) {
 	init();
-	CrashGuard guard(*this);
+	CrashGuard guard(*this, false);
 
 	std::string send = kCmdList;
 	send += ' ';
@@ -450,7 +464,7 @@ std::vector<std::string> NetAddons::refresh_remotes(const bool all) {
 AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 	check_string_validity(name);
 	init();
-	CrashGuard guard(*this, true);
+	CrashGuard guard(*this, false, true);
 	if (cached_remotes_ > 0) {
 		--cached_remotes_;
 	} else {
@@ -564,7 +578,7 @@ void NetAddons::download_addon(const std::string& name,
                                const CallbackFn& progress) {
 	check_string_validity(name);
 	init();
-	CrashGuard guard(*this);
+	CrashGuard guard(*this, false);
 	{
 		std::string send = kCmdDownload;
 		send += ' ';
@@ -623,7 +637,7 @@ void NetAddons::download_i18n(const std::string& name,
                               const CallbackFn& init_fn) {
 	check_string_validity(name);
 	init();
-	CrashGuard guard(*this);
+	CrashGuard guard(*this, false);
 	{
 		std::string send = kCmdI18N;
 		send += ' ';
@@ -657,7 +671,7 @@ int NetAddons::get_vote(const std::string& addon) {
 	int v;
 	try {
 		init();
-		CrashGuard guard(*this);
+		CrashGuard guard(*this, false);
 
 		std::string send = kCmdGetVote;
 		send += ' ';
@@ -685,7 +699,7 @@ void NetAddons::vote(const std::string& addon, const unsigned vote) {
 	check_string_validity(addon);
 	assert(vote <= kMaxRating);
 	init();
-	CrashGuard guard(*this);
+	CrashGuard guard(*this, false);
 	std::string send = kCmdVote;
 	send += ' ';
 	send += addon;
@@ -702,7 +716,7 @@ void NetAddons::comment(const AddOnInfo& addon,
                         const size_t* index_to_edit) {
 	check_string_validity(addon.internal_name);
 	init();
-	CrashGuard guard(*this);
+	CrashGuard guard(*this, false);
 
 	std::string send;
 	if (index_to_edit == nullptr) {
@@ -731,7 +745,7 @@ void NetAddons::admin_action(const AdminAction a,
 	}
 	check_string_validity(addon.internal_name);
 	init();
-	CrashGuard guard(*this);
+	CrashGuard guard(*this, true);
 
 	std::string send;
 	switch (a) {
@@ -789,7 +803,7 @@ void NetAddons::upload_addon(const std::string& name,
 	}
 
 	is_uploading_addon_ = true;
-	CrashGuard guard(*this);
+	CrashGuard guard(*this, true);
 	std::string send = kCmdSubmit;
 	send += ' ';
 	send += name;
@@ -886,7 +900,7 @@ void NetAddons::upload_screenshot(const std::string& addon,
 		throw_warning("Screenshot descriptions may not contain newlines");
 	}
 	init();
-	CrashGuard guard(*this);
+	CrashGuard guard(*this, true);
 
 	std::string send = kCmdSubmitScreenshot;
 	send += ' ';
@@ -923,7 +937,7 @@ std::string NetAddons::download_screenshot(const std::string& name, const std::s
 	try {
 		check_string_validity(name);
 		init();
-		CrashGuard guard(*this);
+		CrashGuard guard(*this, false);
 
 		std::string send = kCmdScreenshot;
 		send += ' ';
@@ -954,7 +968,7 @@ std::string NetAddons::download_screenshot(const std::string& name, const std::s
 
 void NetAddons::contact(const std::string& enquiry) {
 	init();
-	CrashGuard guard(*this);
+	CrashGuard guard(*this, false);
 
 	std::string send = kCmdContact;
 	append_multiline_message(send, enquiry);
