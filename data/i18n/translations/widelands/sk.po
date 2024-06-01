@@ -1043,7 +1043,7 @@ msgstr "Aktuálny adresár: %s"
 #. * TRANSLATORS: "Display: Original/Localized map/file names"
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:94
 msgid "Display"
-msgstr ""
+msgstr "Zobraziť"
 
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:114
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:250
@@ -1095,7 +1095,7 @@ msgstr "Zrušiť"
 
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:143
 msgid "File names"
-msgstr ""
+msgstr "Názvy súborov"
 
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:144
 msgid "Map names"
@@ -1103,11 +1103,11 @@ msgstr ""
 
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:144
 msgid "Original map names"
-msgstr ""
+msgstr "Pôvodné názvy máp"
 
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:148
 msgid "Translated map names"
-msgstr ""
+msgstr "Preložené názvy máp"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:51
 msgid "Click player to remove"
@@ -6168,7 +6168,7 @@ msgstr "Čas hry"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:104
 msgid "Show or hide additional game configuration options"
-msgstr ""
+msgstr "Zobraziť alebo skryť ďalšie možnosti nastavenia hry"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:117
 msgid "Peaceful mode"
@@ -6748,7 +6748,7 @@ msgstr "Oficiálne a neoficiálne"
 
 #: ../../../../src/ui_fsmenu/mapselect.cc:109
 msgid "Show both official and unofficial maps"
-msgstr ""
+msgstr "Ukázať aj oficiálne aj neoficiálne mapy"
 
 #: ../../../../src/ui_fsmenu/mapselect.cc:121
 msgid "Filter by desired line-up"
@@ -6775,7 +6775,7 @@ msgstr "Vyvážené a nevyvážené"
 
 #: ../../../../src/ui_fsmenu/mapselect.cc:495
 msgid "Show both balanced and unbalanced maps"
-msgstr ""
+msgstr "Ukázať aj vyvážené aj nevyvážené mapy"
 
 #: ../../../../src/ui_fsmenu/mapselect.cc:500
 msgctxt "balancing"
@@ -7802,7 +7802,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:228
 msgid "Stone Mine"
-msgstr ""
+msgstr "Kamenná baňa"
 
 #: ../../../../src/wlapplication_options.cc:229
 msgid "Coal Mine"
@@ -9449,7 +9449,7 @@ msgstr "Opustiť"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:93
 msgid "Leave your current team and become teamless"
-msgstr ""
+msgstr "Opustiť svoj súčasný tím a zostať bez tímu"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:95
 msgid "Resign"
@@ -9465,7 +9465,7 @@ msgstr "Pripojiť sa"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:114
 msgid "Request to join this player’s team"
-msgstr ""
+msgstr "Požiadať o prijatie do tímu tohto hráča"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:116
 msgid "Invite"
@@ -9473,7 +9473,7 @@ msgstr "Pozvať"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:117
 msgid "Invite this player to join your team"
-msgstr ""
+msgstr "Pozvať tohto hráča do svojho tímu"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:192
 msgid "No team"
@@ -10245,7 +10245,7 @@ msgstr ""
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../../../src/wui/map_tags.cc:53
 msgid "The map allows building ports and ships"
-msgstr ""
+msgstr "Mapa umožňuje stavbu prístavov a lodí"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../../../src/wui/map_tags.cc:56
@@ -10255,7 +10255,7 @@ msgstr "Trajekty"
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../../../src/wui/map_tags.cc:58
 msgid "The map allows building ferries, ferry yards and waterways"
-msgstr ""
+msgstr "Mapa umožňuje stavbu trajektov, trajektových dvorov a vodných ciest"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../../../src/wui/map_tags.cc:61 ../../../../src/wui/minimap.cc:226
@@ -10265,7 +10265,7 @@ msgstr "Artefakty"
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../../../src/wui/map_tags.cc:63
 msgid "The map contains artifacts for the Artifacts win condition"
-msgstr ""
+msgstr "Táto mapa obsahuje artefakty pre podmienku výhry „Artefakty“"
 
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../../../src/wui/map_tags.cc:68
