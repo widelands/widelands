@@ -633,7 +633,7 @@ void WLApplication::init_mouse_cursor(const bool use_sdl) {
 	mouse_position_.x = mouse_global_x - window_x;
 	mouse_position_.y = mouse_global_y - window_y;
 
-	log_dbg("window position: %d %d", window_x, window_y);  // NOCOM
+	log_dbg("window position: %d %d", window_x, window_y);                              // NOCOM
 	log_dbg("calculated mouse position: %d %d", mouse_position_.x, mouse_position_.y);  // NOCOM
 
 	// Fix SDL's internal notion of the relative cursor position by generating some motion events.
