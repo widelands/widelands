@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-27 02:37+0000\n"
+"POT-Creation-Date: 2024-06-01 02:39+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -2814,27 +2814,27 @@ msgstr "Výprava pripravená"
 msgid "An expedition ship is waiting for your commands."
 msgstr "Expedičná loď čaká na vaše rozkazy."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2390
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2400
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr "Potápa sa"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2392
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2402
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr "Bojuje"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2396
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2406
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2399
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2409
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2405
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2415
 #: ../../../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
@@ -2846,10 +2846,10 @@ msgstr "Vojnová loď"
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2411
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2421
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2427
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2441
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2431
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2437
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2451
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -2857,7 +2857,7 @@ msgstr "Plaví sa ku %s"
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2416
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2426
 #: ../../../../src/wui/seafaring_statistics_menu.cc:260
 msgctxt "ship_state"
 msgid "Empty"
@@ -2865,7 +2865,7 @@ msgstr "Prázdna"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2436
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2446
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -2873,7 +2873,7 @@ msgstr "Preváža ku %s"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2448
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2458
 #: ../../../../src/wui/seafaring_statistics_menu.cc:264
 msgctxt "ship_state"
 msgid "Waiting"
@@ -2881,14 +2881,14 @@ msgstr "Čaká"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2452
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2462
 #: ../../../../src/wui/seafaring_statistics_menu.cc:266
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Vykonáva prieskum"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2456
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2466
 #: ../../../../src/wui/seafaring_statistics_menu.cc:268
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -2897,7 +2897,7 @@ msgstr "Našla prístavné miesto"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2461
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2471
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Zakladá kolóniu"
@@ -8808,7 +8808,7 @@ msgstr ""
 
 #: ../../../../src/wui/attack_window.cc:483
 #: ../../../../src/wui/buildingwindow.cc:420
-#: ../../../../src/wui/shipwindow.cc:197
+#: ../../../../src/wui/shipwindow.cc:196
 msgid "Show Debug Window"
 msgstr "Zobraziť okno ladenia"
 
@@ -8823,7 +8823,7 @@ msgid "%1$s  HP: %2$u/%3$u  AT: +%4$u%%"
 msgstr ""
 
 #: ../../../../src/wui/attack_window.cc:635
-#: ../../../../src/wui/soldierlist.cc:556
+#: ../../../../src/wui/soldierlist.cc:558
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 msgstr "ZD: %1$u/%2$u  ÚT: %3$u/%4$u  OB: %5$u/%6$u  UH: %7$u/%8$u"
@@ -10943,78 +10943,78 @@ msgstr "Preskúmať oblasť smerom na západ"
 msgid "Construct a port at the current location"
 msgstr "Postaviť prístav na aktuálnej pozícii"
 
-#: ../../../../src/wui/shipwindow.cc:142
+#: ../../../../src/wui/shipwindow.cc:141
 msgid "Anchor at the current location"
 msgstr "Zakotviť na aktuálnej pozícii"
 
-#: ../../../../src/wui/shipwindow.cc:147
+#: ../../../../src/wui/shipwindow.cc:146
 msgid "Scout towards the east"
 msgstr "Preskúmať oblasť smerom na východ"
 
-#: ../../../../src/wui/shipwindow.cc:152
+#: ../../../../src/wui/shipwindow.cc:151
 msgid "Scout towards the south west"
 msgstr "Preskúmať oblasť smerom na juhozápad"
 
-#: ../../../../src/wui/shipwindow.cc:157
+#: ../../../../src/wui/shipwindow.cc:156
 msgid "Explore the island’s coast counter clockwise"
 msgstr "Preskúmať pobrežie ostrova proti smeru pohybu hodinových ručičiek"
 
-#: ../../../../src/wui/shipwindow.cc:162
+#: ../../../../src/wui/shipwindow.cc:161
 msgid "Scout towards the south east"
 msgstr "Preskúmať oblasť smerom na juhovýchod"
 
-#: ../../../../src/wui/shipwindow.cc:169
+#: ../../../../src/wui/shipwindow.cc:168
 msgid "Destination"
 msgstr "Cieľ"
 
-#: ../../../../src/wui/shipwindow.cc:180
+#: ../../../../src/wui/shipwindow.cc:179
 msgid "Sink the ship"
 msgstr "Potopiť loď"
 
-#: ../../../../src/wui/shipwindow.cc:189
+#: ../../../../src/wui/shipwindow.cc:188
 msgid "Cancel the Expedition"
 msgstr "Zrušiť výpravu"
 
-#: ../../../../src/wui/shipwindow.cc:207
+#: ../../../../src/wui/shipwindow.cc:206
 msgid "Go to ship"
 msgstr "Ísť k lodi"
 
 #. * TRANSLATORS: Window label when an expedition can't be canceled
-#: ../../../../src/wui/shipwindow.cc:278
+#: ../../../../src/wui/shipwindow.cc:282
 msgid "Cancel Expedition"
 msgstr ""
 
-#: ../../../../src/wui/shipwindow.cc:279
+#: ../../../../src/wui/shipwindow.cc:283
 msgid ""
 "This expedition can’t be canceled, because the ship has no port to return "
 "to."
 msgstr ""
 
 #. * TRANSLATORS: No destination
-#: ../../../../src/wui/shipwindow.cc:362
+#: ../../../../src/wui/shipwindow.cc:366
 msgctxt "destination"
 msgid "(none)"
 msgstr "(žiaden)"
 
-#: ../../../../src/wui/shipwindow.cc:429 ../../../../src/wui/shipwindow.cc:434
-#: ../../../../src/wui/shipwindow.cc:439
+#: ../../../../src/wui/shipwindow.cc:433 ../../../../src/wui/shipwindow.cc:438
+#: ../../../../src/wui/shipwindow.cc:443
 #, c-format
 msgid "Go to destination (%s)"
 msgstr "Ísť k cieľu (%s)"
 
-#: ../../../../src/wui/shipwindow.cc:444
+#: ../../../../src/wui/shipwindow.cc:448
 msgid "Go to destination"
 msgstr "Ísť k cieľu"
 
-#: ../../../../src/wui/shipwindow.cc:471
+#: ../../../../src/wui/shipwindow.cc:475
 msgid "Refit to transport ship"
 msgstr "Prerobiť na transportnú loď"
 
-#: ../../../../src/wui/shipwindow.cc:472
+#: ../../../../src/wui/shipwindow.cc:476
 msgid "Refit to warship"
 msgstr "Prerobiť na vojnovú loď"
 
-#: ../../../../src/wui/shipwindow.cc:494
+#: ../../../../src/wui/shipwindow.cc:498
 #, c-format
 msgid "HP: %1$u/%2$u"
 msgstr ""
@@ -11064,7 +11064,7 @@ msgstr "×%u"
 msgid "Capacity"
 msgstr "Kapacita"
 
-#: ../../../../src/wui/soldierlist.cc:564
+#: ../../../../src/wui/soldierlist.cc:566
 msgid "Click soldier to send away"
 msgstr "Kliknutím na vojaka ho pošlete preč"
 

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-27 02:37+0000\n"
+"POT-Creation-Date: 2024-06-01 02:39+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Juanjo, 2015-2024\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
@@ -2789,27 +2789,27 @@ msgstr "Expedició preparada"
 msgid "An expedition ship is waiting for your commands."
 msgstr "Un vaixell espera l’ordre de començar l’expedició."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2390
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2400
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr "Enfonsant-se"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2392
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2402
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr "Lluita"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2396
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2406
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr "Es converteix a vaixell de transport"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2399
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2409
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr "Es converteix a vaixell de guerra"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2405
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2415
 #: ../../../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
@@ -2821,10 +2821,10 @@ msgstr "Vaixell de guerra"
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2411
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2421
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2427
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2441
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2431
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2437
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2451
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -2832,7 +2832,7 @@ msgstr "Es navega cap a %s"
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2416
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2426
 #: ../../../../src/wui/seafaring_statistics_menu.cc:260
 msgctxt "ship_state"
 msgid "Empty"
@@ -2840,7 +2840,7 @@ msgstr "Buit"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2436
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2446
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -2848,7 +2848,7 @@ msgstr "Es fa un enviament a %s"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2448
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2458
 #: ../../../../src/wui/seafaring_statistics_menu.cc:264
 msgctxt "ship_state"
 msgid "Waiting"
@@ -2856,14 +2856,14 @@ msgstr "Està a l’espera"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2452
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2462
 #: ../../../../src/wui/seafaring_statistics_menu.cc:266
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Està explorant"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2456
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2466
 #: ../../../../src/wui/seafaring_statistics_menu.cc:268
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -2872,7 +2872,7 @@ msgstr "S’ha trobat una zona portuària"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2461
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2471
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Fundació de colònies"
@@ -8725,7 +8725,7 @@ msgstr "Destrueix l’objectiu en lloc de conquerir-lo."
 
 #: ../../../../src/wui/attack_window.cc:483
 #: ../../../../src/wui/buildingwindow.cc:420
-#: ../../../../src/wui/shipwindow.cc:197
+#: ../../../../src/wui/shipwindow.cc:196
 msgid "Show Debug Window"
 msgstr "Mostra la finestra de depuració"
 
@@ -8740,7 +8740,7 @@ msgid "%1$s  HP: %2$u/%3$u  AT: +%4$u%%"
 msgstr "%1$s  PdV: %2$u/%3$u  AT: +%4$u%%"
 
 #: ../../../../src/wui/attack_window.cc:635
-#: ../../../../src/wui/soldierlist.cc:556
+#: ../../../../src/wui/soldierlist.cc:558
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 msgstr "PS: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
@@ -10832,78 +10832,78 @@ msgstr "Explora cap a l’oest"
 msgid "Construct a port at the current location"
 msgstr "Construeix un port en aquest lloc"
 
-#: ../../../../src/wui/shipwindow.cc:142
+#: ../../../../src/wui/shipwindow.cc:141
 msgid "Anchor at the current location"
 msgstr "Ancora a la posició actual"
 
-#: ../../../../src/wui/shipwindow.cc:147
+#: ../../../../src/wui/shipwindow.cc:146
 msgid "Scout towards the east"
 msgstr "Explora cap a l’est"
 
-#: ../../../../src/wui/shipwindow.cc:152
+#: ../../../../src/wui/shipwindow.cc:151
 msgid "Scout towards the south west"
 msgstr "Explorar cap al sud-oest"
 
-#: ../../../../src/wui/shipwindow.cc:157
+#: ../../../../src/wui/shipwindow.cc:156
 msgid "Explore the island’s coast counter clockwise"
 msgstr "Explora la costa de l’illa en sentit antihorari"
 
-#: ../../../../src/wui/shipwindow.cc:162
+#: ../../../../src/wui/shipwindow.cc:161
 msgid "Scout towards the south east"
 msgstr "Explora cap al sud-est"
 
-#: ../../../../src/wui/shipwindow.cc:169
+#: ../../../../src/wui/shipwindow.cc:168
 msgid "Destination"
 msgstr "Destinació"
 
-#: ../../../../src/wui/shipwindow.cc:180
+#: ../../../../src/wui/shipwindow.cc:179
 msgid "Sink the ship"
 msgstr "Enfonsa el vaixell"
 
-#: ../../../../src/wui/shipwindow.cc:189
+#: ../../../../src/wui/shipwindow.cc:188
 msgid "Cancel the Expedition"
 msgstr "Cancel·la l’expedició"
 
-#: ../../../../src/wui/shipwindow.cc:207
+#: ../../../../src/wui/shipwindow.cc:206
 msgid "Go to ship"
 msgstr "Vés al vaixell"
 
 #. * TRANSLATORS: Window label when an expedition can't be canceled
-#: ../../../../src/wui/shipwindow.cc:278
+#: ../../../../src/wui/shipwindow.cc:282
 msgid "Cancel Expedition"
 msgstr "Cancel·la l’expedició"
 
-#: ../../../../src/wui/shipwindow.cc:279
+#: ../../../../src/wui/shipwindow.cc:283
 msgid ""
 "This expedition can’t be canceled, because the ship has no port to return "
 "to."
 msgstr "No es pot cancel·lar l’expedició perquè el vaixell no disposa de port on tornar."
 
 #. * TRANSLATORS: No destination
-#: ../../../../src/wui/shipwindow.cc:362
+#: ../../../../src/wui/shipwindow.cc:366
 msgctxt "destination"
 msgid "(none)"
 msgstr "(cap)"
 
-#: ../../../../src/wui/shipwindow.cc:429 ../../../../src/wui/shipwindow.cc:434
-#: ../../../../src/wui/shipwindow.cc:439
+#: ../../../../src/wui/shipwindow.cc:433 ../../../../src/wui/shipwindow.cc:438
+#: ../../../../src/wui/shipwindow.cc:443
 #, c-format
 msgid "Go to destination (%s)"
 msgstr "Vés al destí (%s)"
 
-#: ../../../../src/wui/shipwindow.cc:444
+#: ../../../../src/wui/shipwindow.cc:448
 msgid "Go to destination"
 msgstr "Vés al destí"
 
-#: ../../../../src/wui/shipwindow.cc:471
+#: ../../../../src/wui/shipwindow.cc:475
 msgid "Refit to transport ship"
 msgstr "Reconverteix en vaixell de transport"
 
-#: ../../../../src/wui/shipwindow.cc:472
+#: ../../../../src/wui/shipwindow.cc:476
 msgid "Refit to warship"
 msgstr "Reconverteix en vaixell de guerra"
 
-#: ../../../../src/wui/shipwindow.cc:494
+#: ../../../../src/wui/shipwindow.cc:498
 #, c-format
 msgid "HP: %1$u/%2$u"
 msgstr "PdV: %1$u/%2$u"
@@ -10953,7 +10953,7 @@ msgstr "×%u"
 msgid "Capacity"
 msgstr "Capacitat"
 
-#: ../../../../src/wui/soldierlist.cc:564
+#: ../../../../src/wui/soldierlist.cc:566
 msgid "Click soldier to send away"
 msgstr "Cliqueu el soldat per acomiadar-lo"
 
