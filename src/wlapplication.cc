@@ -432,7 +432,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 		// Known harmless events we'd drop anyway
 		SDL_FlushEvent(SDL_AUDIODEVICEADDED);
-		//
+		SDL_FlushEvent(SDL_TEXTEDITING);  // reported on windows
+		// end of ignored events
 
 		SDL_Event ev;
 		int ignored = 0;
@@ -458,20 +459,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		}
 	}
 
-	// Set "waiting" mouse cursor
-
-	// In soft-cursor mode the SDL mouse cursor is disabled after g_mouse_cursor->initialize(),
-	// but cursor drawing doesn't work until we start refreshing the screen, so the cursor
-	// disappears.
-	// In SDL cursor mode there's no such problem, so we can switch to our own cursor early.
-	const bool use_sdl_cursor = get_config_bool("sdl_cursor", true);
-	SDL_Cursor* tmp_cursor = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_WAIT);
-	if (use_sdl_cursor) {
-		init_mouse_cursor(use_sdl_cursor);
-	} else {
-		// Use system's "waiting" mouse cursor
-		SDL_SetCursor(tmp_cursor);
-	}
+	init_mouse_cursor();
 
 	// Prepare for drawing splash screen
 
@@ -566,14 +554,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		g_script_console_history.load(kScriptConsoleHistoryFile);
 	}
 
-	// See counterpart above for explanation. This is the latest we can do it cleanly and safely.
-	if (!use_sdl_cursor) {
-		init_mouse_cursor(use_sdl_cursor);
-	}
-	SDL_FreeCursor(tmp_cursor);
-	// TODO(tothxa): Keep the system cursor in g_mouse_cursor too and allow delaying disabling it,
-	//               then make sure it's done before we can start drawing?
-
 	verb_log_info("WLApplication created");
 }
 
@@ -622,11 +602,15 @@ WLApplication::~WLApplication() {
 	SDL_Quit();
 }
 
-void WLApplication::init_mouse_cursor(const bool use_sdl) {
-	if (!use_sdl && mouse_position_ == Vector2i::zero()) {
+void WLApplication::init_mouse_cursor() {
+	// Fix mouse_position_ initialisation when we don't have mousemove events at startup.
+	// This is actually only needed by soft mode, but we do it for SDL mode too to make the
+	// cursor appear at the right position if the user has to use the keyboard to turn SDL
+	// mode off.
+	if (mouse_position_ == Vector2i::zero()) {
 		// Initialize the mouse position to the current one.
 		// Unfortunately we have to do it the hard way, because SDL_GetMouseState() doesn't work
-		// right if the mouse doesn't move during startup.
+		// right until we had a mousemove event.
 		int mouse_global_x;
 		int mouse_global_y;
 		int window_x;
@@ -637,8 +621,8 @@ void WLApplication::init_mouse_cursor(const bool use_sdl) {
 		mouse_position_.x = mouse_global_x - window_x;
 		mouse_position_.y = mouse_global_y - window_y;
 
-		// Fix SDL's internal notion of the relative cursor position by generating some motion events.
-		// Must be done before g_mouse_cursor->initialize().
+		// Fix SDL's internal notion of the relative cursor position too by generating some motion
+		// events. Must be done before g_mouse_cursor->initialize().
 		// TODO(tothxa): I don't know why, but all these steps seem to be necessary on my system to
 		//               fix the case in soft mode when the mouse is first moved while it is hidden.
 		//               Without these, it is resumed at the position where it was hidden.
@@ -650,12 +634,24 @@ void WLApplication::init_mouse_cursor(const bool use_sdl) {
 		SDL_PumpEvents();
 	}
 
-	// The cursor initialization itself
-	g_mouse_cursor = new MouseCursor();
-	g_mouse_cursor->initialize(use_sdl);
+	if (!get_config_bool("sdl_cursor", true)) {
+		// Set system's "waiting" mouse cursor in case setting our own cursor in
+		// g_mouse_cursor->initialize() fails. Maybe it works, maybe not.
+		SDL_Cursor* tmp_cursor = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_WAIT);
+		SDL_SetCursor(tmp_cursor);
+		SDL_FreeCursor(tmp_cursor);
+	}
 
-	// There's still some more time after WLApplication is created before the user can
-	// actually skip the splash screen, so we change the cursor to an hourglass until then.
+	// The cursor initialization itself
+	// We always init it in SDL mode to have a chance of a working cursor in the splash screen,
+	// before we start refreshing the screen ourselves.
+	// TODO(tothxa): May not work if the system doesn't support color cursors? What happens then?
+	//               No cursor, default system cursor or error?
+	//               Remove argument if this works out. And move initialize() into the constructor?
+	g_mouse_cursor = new MouseCursor();
+	g_mouse_cursor->initialize(true);
+
+	// TODO(tothxa): Do this in g_mouse_cursor->initialize() or the constructor too?
 	g_mouse_cursor->change_wait(true);
 }
 
@@ -936,6 +932,13 @@ void WLApplication::run() {
 	GameLogicThread game_logic_thread(&should_die_);
 
 	FsMenu::MainMenu menu(game_type_ != GameType::kNone);
+
+	// This is actually the last step of initialization, postponed from init_mouse_cursor().
+	// FsMenu::MainMenu() takes a few seconds and we will only start refreshing the screen
+	// by the chosen option below.
+	if (!get_config_bool("sdl_cursor", true)) {
+		g_mouse_cursor->set_use_sdl(false);
+	}
 
 	check_crash_reports(menu);
 
