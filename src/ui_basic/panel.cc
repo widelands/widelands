@@ -706,6 +706,8 @@ void Panel::set_visible(bool const on) {
 		if (Panel* cm = find_context_menu(); cm != nullptr) {
 			cm->die();
 		}
+	} else if (name_ == "progresswindow") {
+		g_mouse_cursor->change_wait(true);
 	}
 	if (parent_ != nullptr) {
 		parent_->on_visibility_changed();
