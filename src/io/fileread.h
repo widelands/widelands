@@ -34,7 +34,7 @@
 class FileRead : public StreamRead {
 public:
 	struct Pos {
-		explicit Pos(size_t const p = 0) : pos(p) {  // NOLINT allow implicit conversion
+		explicit Pos(size_t const p = 0) : pos(p) {
 		}
 		/// Returns a special value indicating invalidity.
 		[[nodiscard]] static Pos null() {

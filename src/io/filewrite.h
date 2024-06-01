@@ -30,7 +30,7 @@ class FileSystem;
 class FileWrite : public StreamWrite {
 public:
 	struct Pos {
-		explicit Pos(size_t const p = 0) : pos(p) {  // NOLINT allow implicit conversion
+		explicit Pos(size_t const p = 0) : pos(p) {
 		}
 
 		/// Returns a special value indicating invalidity.
