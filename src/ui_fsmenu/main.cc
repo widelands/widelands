@@ -599,27 +599,10 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 
 	if (down) {
 		if (splash_state_ != SplashState::kDone) {
-			// First keypress ends the splash gently, second keypress or escape immediately
-			if (splash_state_ != SplashState::kSplash ||
-			    matches_shortcut(KeyboardShortcut::kMainMenuQuit, code)) {
-				abort_splashscreen();
-
-				// Don't quit on escape when it is pressed to skip the splash screen,
-				// don't interpret second keypress because we have already scheduled
-				// handling the first.
-				// TODO(tothxa): Should flush the remaining keypresses from the event queue,
-				//               but I'm not sure if it would be safe:
-				//               SDL_PumpEvents();
-				//               SDL_FlushEvents(SDL_KEYDOWN, SDL_KEYUP);
+			abort_splashscreen();
+			if (matches_shortcut(KeyboardShortcut::kMainMenuQuit, code)) {
+				// don't initiate quitting in this case
 				return true;
-			}
-
-			if (get_config_bool("play_intro_music", true)) {
-				end_splashscreen();
-			} else {
-				// We should only get here if the user pressed a key before the main menu was started,
-				// when otherwise the fade out would start immediately
-				abort_splashscreen();
 			}
 		}
 

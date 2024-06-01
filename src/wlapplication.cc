@@ -611,32 +611,30 @@ WLApplication::~WLApplication() {
 }
 
 void WLApplication::init_mouse_cursor(const bool use_sdl) {
-	if (!use_sdl) {
-		// Initialize the mouse position to the current one.
-		// Unfortunately we have to do it the hard way, because SDL_GetMouseState() doesn't work
-		// right if the mouse doesn't move during startup.
-		int mouse_global_x;
-		int mouse_global_y;
-		int window_x;
-		int window_y;
-		SDL_Window* sdl_window = g_gr->get_sdlwindow();
-		SDL_GetWindowPosition(sdl_window, &window_x, &window_y);
-		SDL_GetGlobalMouseState(&mouse_global_x, &mouse_global_y);
-		mouse_position_.x = mouse_global_x - window_x;
-		mouse_position_.y = mouse_global_y - window_y;
+	// Initialize the mouse position to the current one.
+	// Unfortunately we have to do it the hard way, because SDL_GetMouseState() doesn't work
+	// right if the mouse doesn't move during startup.
+	int mouse_global_x;
+	int mouse_global_y;
+	int window_x;
+	int window_y;
+	SDL_Window* sdl_window = g_gr->get_sdlwindow();
+	SDL_GetWindowPosition(sdl_window, &window_x, &window_y);
+	SDL_GetGlobalMouseState(&mouse_global_x, &mouse_global_y);
+	mouse_position_.x = mouse_global_x - window_x;
+	mouse_position_.y = mouse_global_y - window_y;
 
-		// Fix SDL's internal notion of the relative cursor position by generating some motion events.
-		// Must be done before g_mouse_cursor->initialize().
-		// TODO(tothxa): I don't know why, but all these steps seem to be necessary on my system to
-		//               fix the case in soft mode when the mouse is first moved while it is hidden.
-		//               Without these, it is resumed at the position where it was hidden.
-		SDL_PumpEvents();
-		SDL_WarpMouseInWindow(sdl_window, mouse_position_.x - 1, mouse_position_.y - 1);
-		SDL_PumpEvents();
-		SDL_Delay(2);  // 1 tick doesn't work
-		SDL_WarpMouseInWindow(sdl_window, mouse_position_.x, mouse_position_.y);
-		SDL_PumpEvents();
-	}
+	// Fix SDL's internal notion of the relative cursor position by generating some motion events.
+	// Must be done before g_mouse_cursor->initialize().
+	// TODO(tothxa): I don't know why, but all these steps seem to be necessary on my system to
+	//               fix the case in soft mode when the mouse is first moved while it is hidden.
+	//               Without these, it is resumed at the position where it was hidden.
+	SDL_PumpEvents();
+	SDL_WarpMouseInWindow(sdl_window, mouse_position_.x - 1, mouse_position_.y - 1);
+	SDL_PumpEvents();
+	SDL_Delay(2);  // 1 tick doesn't work
+	SDL_WarpMouseInWindow(sdl_window, mouse_position_.x, mouse_position_.y);
+	SDL_PumpEvents();
 
 	// The cursor initialization itself
 	g_mouse_cursor = new MouseCursor();
