@@ -226,7 +226,9 @@ void fill_parameter_vector() {
 		_("y"),
 		/** TRANSLATORS: `y` references a window height placeholder */
 		_("Height `y` of the window in pixel."), false},
-	  {"", "sdl_cursor", _("[true*|false]"), _("Whether to use the mouse cursor provided by SDL."),
+	  {"", "sdl_cursor", _("[true*|false]"),
+		_("Whether to let the system draw the mouse cursor. Disable it only if the cursor doesn't "
+		  "appear right, or if you want it to be visible in screenshots or screencasts."),
 		true},
 	  {"", "tooltip_accessibility_mode", _("[true|false*]"), _("Whether to use sticky tooltips."),
 		true},
