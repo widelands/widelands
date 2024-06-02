@@ -156,7 +156,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                  /** TRANSLATORS: tooltip text for the sdl_cursor option */
                  _("If in doubt, leave this enabled. When disabled, cursor updates may be slow "
                    "and the cursor appears frozen during long operations. Disable it only if "
-                   "the cursor doesn't appear right, or if you want it to be visible in "
+                   "the cursor doesn’t appear right, or if you want it to be visible in "
                    "screenshots or screencasts."),
                  0),
      tooltip_accessibility_mode_(&box_interface_,

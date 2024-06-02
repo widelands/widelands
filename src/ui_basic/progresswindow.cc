@@ -77,6 +77,8 @@ ProgressWindow::ProgressWindow(UI::Panel* parent,
 	event_buffer_.clear();
 	initialization_complete();
 
+	set_flag(UI::Panel::pf_unresponsive, true);
+
 	set_background(background);
 	step(_("Loading…"));
 }
