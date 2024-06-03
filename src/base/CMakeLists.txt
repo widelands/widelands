@@ -12,6 +12,8 @@ wl_library(base
     format/tree.h
     format/wildcard_node.h
     format/write_number.h
+    backtrace_provider.h
+    backtrace_provider.cc
     i18n.h
     i18n.cc
     multithreading.h
