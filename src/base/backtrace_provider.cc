@@ -18,14 +18,15 @@
 
 #include "backtrace_provider.h"
 
-#include <iostream>
-#include <sstream>
-
-#ifdef PRINT_SEGFAULT_BACKTRACE
 #include <csignal>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <iostream>
+#include <sstream>
+#include <thread>
+
+#ifdef PRINT_SEGFAULT_BACKTRACE
 #include <execinfo.h>
 #endif
 
@@ -84,7 +85,7 @@ static void segfault_handler(const int sig) {
 
 	FILE* file = fopen(filename.c_str(), "w+");
 	if (file == nullptr) {
-		std::cout << "The crash report could not be saved to a file." << std::endl << std::endl;
+		std::cout << "The crash report could not be saved to file" << filename << std::endl << std::endl;
 	} else {
 		fprintf /* NOLINT codecheck */ (
 		   file,
@@ -110,7 +111,7 @@ void BacktraceProvider::register_signal_handler()
 	 * We can't handle SIGABRT like this since we have to redirect that one elsewhere to
 	 * suppress non-critical errors from Eris.
 	 */
-	for (int s : {SIGSEGV, SIGBUS, SIGFPE, SIGILL}) {
+	for (int s : {SIGBUS, SIGFPE, SIGILL, SIGSEGV}) {
 		signal(s, segfault_handler);
 	}
 #endif
