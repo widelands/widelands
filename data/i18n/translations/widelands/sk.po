@@ -1968,7 +1968,7 @@ msgstr "%1$s.%2$u"
 
 #: ../../../../src/logic/addons.cc:209
 msgid "No conflicts"
-msgstr ""
+msgstr "Žiadne konflikty"
 
 #: ../../../../src/logic/addons.cc:214
 #, c-format
@@ -5941,31 +5941,31 @@ msgstr "Štandardná"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:44
 msgid "Crash Report Details"
-msgstr ""
+msgstr "Detaily havárie"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:62
 #: ../../../../src/ui_fsmenu/crash_report.cc:149
 msgid "Open link"
-msgstr ""
+msgstr "Otvoriť odkaz"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:64
 #: ../../../../src/ui_fsmenu/crash_report.cc:151
 msgid "Copy link"
-msgstr ""
+msgstr "Kopírovať odkaz"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:68
 #: ../../../../src/ui_fsmenu/crash_report.cc:156
 msgid "Copy report"
-msgstr ""
+msgstr "Kopírovať hlásenie"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:69
 #: ../../../../src/ui_fsmenu/crash_report.cc:156
 msgid "Copy the full report to the clipboard"
-msgstr ""
+msgstr "Kopírovať celé hlásenie do schránky"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:98
 msgid "Crash Report"
-msgstr ""
+msgstr "Hlásenie o havárii"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:132
 #, c-format
@@ -5975,19 +5975,19 @@ msgid ""
 "with a description of what was going on in the game and what you did last "
 "before the crash to the Widelands Development Team under %s so we can fix "
 "the problem."
-msgstr ""
+msgstr "Zdá sa, že hra Widelands havarovala pri poslednom behu a pri tom sa automaticky vygeneroval backtrace záznam pre ladenie. Poskytnite hlásenie spolu s popisom toho, čo sa dialo v hre a čo ste robili naposledy pred zlyhaním, vývojovému tímu Widelands na %s, aby sme mohli problém vyriešiť."
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:142
 msgid "Show details…"
-msgstr ""
+msgstr "Ukázať detaily…"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:142
 msgid "View the detailed crash report"
-msgstr ""
+msgstr "Pozrieť si detaily havárie"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:159
 msgid "Remind me later"
-msgstr ""
+msgstr "Pripomenúť neskôr"
 
 #: ../../../../src/ui_fsmenu/helpwindow.cc:46
 #: ../../../../src/wui/helpwindow.cc:48
