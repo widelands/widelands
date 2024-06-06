@@ -320,6 +320,7 @@ wl_library(graphic_functions
     graphic
     graphic_fonthandler
     graphic_text_layout
+    widelands_options
 )
 
 # Base library
