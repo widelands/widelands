@@ -38,25 +38,35 @@ struct Extent {
 // TODO(sirver): This should go away and be replaced by Vector2i16.
 struct Coords {
 	Coords() = default;
-	Coords(int16_t nx, int16_t ny);
+	Coords(int16_t nx, int16_t ny) : x(nx), y(ny) {
+	}
 
 	/// Returns a special value indicating invalidity.
-	static Coords null();
+	[[nodiscard]] static Coords null() {
+		return Coords(-1, -1);
+	}
 
 	/// Unhash coordinates so they can be gotten from a container
-	static Coords unhash(uint32_t hash);
+	[[nodiscard]] static Coords unhash(uint32_t hash);
 
 	/// Hash coordinates to use them as keys in a container
 	[[nodiscard]] uint32_t hash() const;
 
-	bool operator==(const Coords& other) const;
-	bool operator!=(const Coords& other) const;
-	bool operator<(const Coords& other) const {
+	[[nodiscard]] bool operator==(const Coords& other) const {
+		return x == other.x && y == other.y;
+	}
+
+	[[nodiscard]] bool operator!=(const Coords& other) const {
+		return !(*this == other);
+	}
+
+	[[nodiscard]] bool operator<(const Coords& other) const {
 		return std::forward_as_tuple(y, x) < std::forward_as_tuple(other.y, other.x);
 	}
 
-	// should be explicit to avoid accidental conversions to numbers
-	explicit operator bool() const;
+	[[nodiscard]] bool valid() const {
+		return *this != null();
+	}
 
 	// Move the coords to the 'new_origin'.
 	void reorigin(Coords new_origin, const Extent& extent);

@@ -377,7 +377,7 @@ bool AddOnInfo::requires_texture_atlas_rebuild() const {
 	}
 }
 
-void update_ui_theme(const UpdateThemeAction action, std::string arg) {
+inline void do_update_ui_theme(const UpdateThemeAction action, std::string arg) {
 	AddOnState* previously_enabled = nullptr;
 	std::list<AddOnState*> installed;
 	for (AddOnState& s : g_addons) {
@@ -405,7 +405,8 @@ void update_ui_theme(const UpdateThemeAction action, std::string arg) {
 	case UpdateThemeAction::kLoadFromConfig:
 		arg = get_config_string("theme", "");
 		if (arg.empty()) {
-			return set_template_dir("");
+			set_template_dir("");
+			return;
 		}
 		for (AddOnState* s : installed) {
 			if (s->first->internal_name == arg) {
@@ -428,6 +429,16 @@ void update_ui_theme(const UpdateThemeAction action, std::string arg) {
 		return;
 	}
 	NEVER_HERE();
+}
+
+void update_ui_theme(const UpdateThemeAction action, std::string arg) {
+	do_update_ui_theme(action, arg);
+
+	// Save splash image realpath and intro font to the config, because start up needs it before
+	// addon themes are initialized
+	set_config_string("splash_image", resolve_template_image_filename(kSplashImage));
+	set_config_string(
+	   "intro_font", g_style_manager->font_style(UI::FontStyle::kFsMenuIntro).as_font_open());
 }
 
 bool AddOnInfo::matches_widelands_version(const bool warn_future) const {
