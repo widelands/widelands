@@ -138,10 +138,9 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	               kImgConstructPort, true, [this]() { act_construct_port(); });
 	exp_mid->add(btn_construct_port_);
 
-	btn_warship_stay_ =
-	   make_button(exp_mid, "stay", _("Anchor at the current location"), kImgWarshipStay, true,
-	               [this]() { act_scout_towards(Widelands::IDLE); });
-	exp_mid->add(btn_warship_stay_);
+	btn_stay_ = make_button(exp_mid, "stay", _("Anchor at the current location"), kImgWarshipStay,
+	                        true, [this]() { act_scout_towards(Widelands::IDLE); });
+	exp_mid->add(btn_stay_);
 
 	btn_scout_[Widelands::WALK_E - 1] =
 	   make_button(exp_mid, "sce", _("Scout towards the east"), kImgScoutE, true,
@@ -255,13 +254,18 @@ void ShipWindow::set_button_visibility() {
 
 	const bool is_refitting = ship->is_refitting();
 	const bool show_expedition_controls = ship->state_is_expedition() && !is_refitting;
-	const bool is_warship = (ship->get_ship_type() == Widelands::ShipType::kWarship) ^ is_refitting;
+	const bool show_soldier_controls =
+	   (ship->get_ship_type() == Widelands::ShipType::kWarship) ^ is_refitting;
+	const bool show_wares = (ship->get_ship_type() != Widelands::ShipType::kWarship) || is_refitting;
+	const bool show_construct_port =
+	   ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound ||
+	   ship->get_ship_state() == Widelands::ShipStates::kExpeditionColonizing;
 
-	display_->set_visible(!is_warship);
-	warship_capacity_control_->set_visible(is_warship);
+	display_->set_visible(show_wares);
+	warship_capacity_control_->set_visible(show_soldier_controls);
 	btn_cancel_expedition_->set_visible(btn_cancel_expedition_->enabled());
-	btn_warship_stay_->set_visible(is_warship);
-	btn_construct_port_->set_visible(!is_warship);
+	btn_stay_->set_visible(!show_construct_port);
+	btn_construct_port_->set_visible(show_construct_port);
 	navigation_box_.set_visible(show_expedition_controls);
 	set_destination_->set_visible(show_expedition_controls);
 }
@@ -392,9 +396,7 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 				result_rect.x = 0;
 				result_rect.y = (kTextureSize - result_rect.h) / 2.f;
 			}
-			rt.blitrect_scale(result_rect, unscaled,
-			                  Recti(0, 0, unscaled->width(), unscaled->height()), 1.f,
-			                  BlendMode::UseAlpha);
+			rt.blitrect_scale(result_rect, unscaled, unscaled->rect(), 1.f, BlendMode::UseAlpha);
 			texture_cache_.emplace(downscaled);
 
 			set_destination_->add(
@@ -470,7 +472,7 @@ void ShipWindow::think() {
 	btn_refit_->set_tooltip(ship->get_ship_type() == Widelands::ShipType::kWarship ?
                               _("Refit to transport ship") :
                               _("Refit to warship"));
-	btn_warship_stay_->set_enabled(can_act);
+	btn_stay_->set_enabled(can_act);
 
 	display_->clear();
 	for (uint32_t idx = 0; idx < ship->get_nritems(); ++idx) {
@@ -496,15 +498,12 @@ void ShipWindow::think() {
 	Widelands::ShipStates state = ship->get_ship_state();
 	if (ship->state_is_expedition()) {
 		/* The following rules apply:
-		 * - The "construct port" button is only active, if the ship is waiting for commands and found
-		 * a port
-		 *   buildspace
+		 * - The "construct port" button is only active, if the ship is waiting for commands and
+		 *   found a port buildspace
 		 * - The "scout towards a direction" buttons are only active, if the ship can move at least
-		 * one field
-		 *   in that direction without reaching the coast.
-		 * - The "explore island's coast" buttons are only active, if a coast is in vision range (no
-		 * matter if
-		 *   in waiting or already expedition/scouting mode)
+		 *   one field in that direction without reaching the coast.
+		 * - The "explore island's coast" buttons are only active, if a coast is in vision range
+		 *   (no matter if in waiting or already expedition/scouting mode)
 		 */
 		btn_construct_port_->set_enabled(can_act &&
 		                                 (state == Widelands::ShipStates::kExpeditionPortspaceFound));
@@ -674,7 +673,7 @@ void ShipWindow::act_construct_port() {
 		return;
 	}
 	const Widelands::Coords portspace = ship->current_portspace();
-	if (!static_cast<bool>(portspace)) {
+	if (!portspace.valid()) {
 		return;
 	}
 	if (Widelands::Game* game = ibase_.get_game()) {
