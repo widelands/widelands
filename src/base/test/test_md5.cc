@@ -24,11 +24,13 @@
 TESTSUITE_START(md5)
 
 TESTCASE(ASCII) {
-	check_equal(MD5::md5_str("Hello World! This is an ASCII-only string."), "7c8e4f06895ac16461bfa37f7f43ebd2");
+	check_equal(MD5::md5_str("Hello World! This is an ASCII-only string."),
+	            "7c8e4f06895ac16461bfa37f7f43ebd2");
 }
 
 TESTCASE(Unicode) {
-	check_equal(MD5::md5_str("Hello World! This is a string with Ûñīcøđȩ Bÿtèş."), "d4e32b0d5b4fc7b10c7c46fafabf1e17");
+	check_equal(MD5::md5_str("Hello World! This is a string with Ûñīcøđȩ Bÿtèş."),
+	            "d4e32b0d5b4fc7b10c7c46fafabf1e17");
 }
 
 TESTSUITE_END()

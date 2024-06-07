@@ -28,8 +28,7 @@ std::string Checksum::str() const {
 	return result;
 }
 
-bool Checksum::operator==(const Checksum& other) const
-{
+bool Checksum::operator==(const Checksum& other) const {
 	return memcmp(data(), other.data(), size()) == 0;
 }
 

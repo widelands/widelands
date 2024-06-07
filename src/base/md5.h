@@ -31,7 +31,9 @@ namespace MD5 {
 struct Checksum : public std::array<uint8_t, MD5_DIGEST_LENGTH> {
 	std::string str() const;
 	bool operator==(const Checksum& other) const;
-	bool operator!=(const Checksum& other) const { return !(*this == other); }
+	bool operator!=(const Checksum& other) const {
+		return !(*this == other);
+	}
 };
 
 struct Checksummer {
