@@ -10,6 +10,7 @@ macro(_parse_common_args ARGS)
     USES_MINIZIP
     USES_OPENGL
     USES_PNG
+    USES_MD5
     USES_SDL2
     USES_SDL2_IMAGE
     USES_SDL2_MIXER
@@ -163,6 +164,10 @@ macro(_common_compile_tasks)
 
   if(ARG_USES_PNG)
     target_link_libraries(${NAME} PNG::PNG)
+  endif()
+
+  if(ARG_USES_MD5)
+    target_link_libraries(${NAME} md)
   endif()
 
   if(ARG_USES_SDL2)

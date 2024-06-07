@@ -29,9 +29,8 @@
 
 #include <string>
 
+#include "base/md5.h"
 #include "base/times.h"
-
-struct Md5Checksum;
 
 class StreamRead;
 class StreamWrite;
@@ -67,7 +66,7 @@ public:
 	~ReplayWriter();
 
 	void send_player_command(PlayerCommand*);
-	void send_sync(const Md5Checksum&);
+	void send_sync(const MD5::Checksum& hash);
 
 private:
 	Game& game_;

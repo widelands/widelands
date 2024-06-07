@@ -11,3 +11,4 @@ SDL2_image: aom dav1d rav1e libjpeg-turbo libyuv giflib jbigkit lerc libdeflate 
 glew:
 glbinding:
 icu:
+md:

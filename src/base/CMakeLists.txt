@@ -66,8 +66,7 @@ wl_library(base_md5
   SRCS
     md5.cc
     md5.h
-  DEPENDS
-    base_macros
+  USES_MD5
 )
 
 wl_library(base_random

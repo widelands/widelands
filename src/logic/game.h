@@ -264,7 +264,7 @@ public:
 	StreamWrite& syncstream();
 	void report_sync_request();
 	void report_desync(int32_t playernumber);
-	Md5Checksum get_sync_hash() const;
+	MD5::Checksum get_sync_hash() const;
 
 	void enqueue_command(Command*);
 
@@ -424,10 +424,10 @@ private:
 
 	void sync_reset();
 
-	MD5Checksum<StreamWrite> synchash_;
+	MD5::Checksummer synchash_;
 
 	struct SyncWrapper : public StreamWrite {
-		SyncWrapper(Game& game, StreamWrite& target) : game_(game), target_(target) {
+		SyncWrapper(Game& game, MD5::Checksummer& target) : game_(game), target_(target) {
 		}
 
 		~SyncWrapper() override;
@@ -440,13 +440,9 @@ private:
 
 		void data(void const* data, size_t size) override;
 
-		void flush() override {
-			target_.flush();
-		}
-
 	public:
 		Game& game_;
-		StreamWrite& target_;
+		MD5::Checksummer& target_;
 		uint32_t counter_{0U};
 		uint32_t next_diskspacecheck_{0U};
 		std::unique_ptr<StreamWrite> dump_;
