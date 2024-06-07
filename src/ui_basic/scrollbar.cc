@@ -270,7 +270,7 @@ void Scrollbar::draw_button(RenderTarget& dst, Area area, const Recti& r) {
 		dst.blitrect_scale(
 		   Rectf(r.origin() + Vector2i((r.w - blit_width) / 2, (r.h - blit_height) / 2), blit_width,
 		         blit_height),
-		   pic, Recti(0, 0, pic->width(), pic->height()), 1., BlendMode::UseAlpha);
+		   pic, pic->rect(), 1., BlendMode::UseAlpha);
 	}
 
 	// Draw border

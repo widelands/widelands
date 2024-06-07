@@ -132,16 +132,19 @@ size_t gather_addon_content(const std::string& current_dir,
 	result[prefix] = {};
 	size_t nr_files = 0;
 	for (const std::string& f : g_fs->list_directory(current_dir)) {
-		if (g_fs->is_directory(f)) {
-			std::string str = prefix;
-			if (!str.empty()) {
-				str += FileSystem::file_separator();
+		const std::string fname = FileSystem::fs_filename(f.c_str());
+		if (!fname.empty() && fname.front() != '.') {  // Ignore hidden files
+			if (g_fs->is_directory(f)) {
+				std::string str = prefix;
+				if (!str.empty()) {
+					str += FileSystem::file_separator();
+				}
+				str += fname;
+				nr_files += gather_addon_content(f, str, result);
+			} else {
+				result[prefix].insert(fname);
+				++nr_files;
 			}
-			str += FileSystem::fs_filename(f.c_str());
-			nr_files += gather_addon_content(f, str, result);
-		} else {
-			result[prefix].insert(FileSystem::fs_filename(f.c_str()));
-			++nr_files;
 		}
 	}
 	return nr_files;

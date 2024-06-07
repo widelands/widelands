@@ -500,7 +500,7 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr "Na pravej strane nájdete informácie o vybranej mape alebo uloženej hre. Tlačidlo napravo od názvu mapy umožňuje hostiteľovi zmeniť mapu. Hostiteľ okrem toho dokáže nastaviť presnú podmienku na víťazstvo a nakoniec, keď sa nastavia všetci hráči, začať hru."
+msgstr "Na pravej strane nájdete informácie o vybranej mape alebo uloženej hre. Tlačidlo napravo od názvu mapy umožňuje hostiteľovi zmeniť mapu. Hostiteľ okrem toho dokáže nastaviť presnú podmienku výhry a nakoniec, keď sa nastavia všetci hráči, začať hru."
 
 #: ../../../../data/txts/tips/amazons.lua:4
 msgid ""

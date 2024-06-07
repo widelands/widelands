@@ -410,6 +410,10 @@ int Panel::do_run() {
 		}
 
 		if (is_initializer) {
+			// We are handling input now. Can not be in WLApplication::handle_input(), because it is
+			// also called from ProgressWindow::step(), where the cursor shouldn't be reset.
+			g_mouse_cursor->change_wait(false);
+
 			app.handle_input(&input_callback);
 		}
 
@@ -452,6 +456,7 @@ int Panel::do_run() {
 	// so we continue refreshing the graphics while we wait.
 	if (logic_thread_locked_ != LogicThreadState::kEndingConfirmed && logic_thread_running_) {
 		logic_thread_locked_ = LogicThreadState::kEndingRequested;
+		g_mouse_cursor->change_wait(true);
 		while (get_flag(pf_logic_think) && logic_thread_running_ &&
 		       logic_thread_locked_ != LogicThreadState::kEndingConfirmed) {
 			const uint32_t start_time = SDL_GetTicks();
@@ -701,6 +706,8 @@ void Panel::set_visible(bool const on) {
 		if (Panel* cm = find_context_menu(); cm != nullptr) {
 			cm->die();
 		}
+	} else if (get_flag(pf_unresponsive)) {
+		g_mouse_cursor->change_wait(true);
 	}
 	if (parent_ != nullptr) {
 		parent_->on_visibility_changed();
