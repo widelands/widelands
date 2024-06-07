@@ -29,9 +29,9 @@
 namespace MD5 {
 
 struct Checksum : public std::array<uint8_t, MD5_DIGEST_LENGTH> {
-	std::string str() const;
-	bool operator==(const Checksum& other) const;
-	bool operator!=(const Checksum& other) const {
+	[[nodiscard]] std::string str() const;
+	[[nodiscard]] bool operator==(const Checksum& other) const;
+	[[nodiscard]] bool operator!=(const Checksum& other) const {
 		return !(*this == other);
 	}
 };
@@ -40,27 +40,27 @@ struct Checksummer {
 	Checksummer();
 
 	void data(const void* data, size_t len);
-	std::string finish_checksum_str();
-	Checksum finish_checksum_raw();
+	[[nodiscard]] std::string finish_checksum_str();
+	[[nodiscard]] Checksum finish_checksum_raw();
 	void reset();
 
 private:
 	MD5_CTX context_;
 };
 
-inline Checksum md5_raw(const void* data, size_t len) {
+[[nodiscard]] inline Checksum md5_raw(const void* data, size_t len) {
 	Checksummer checksummer;
 	checksummer.data(data, len);
 	return checksummer.finish_checksum_raw();
 }
 
-inline std::string md5_str(const void* data, size_t len) {
+[[nodiscard]] inline std::string md5_str(const void* data, size_t len) {
 	Checksummer checksummer;
 	checksummer.data(data, len);
 	return checksummer.finish_checksum_str();
 }
 
-inline std::string md5_str(const std::string& str) {
+[[nodiscard]] inline std::string md5_str(const std::string& str) {
 	return md5_str(str.c_str(), str.size());
 }
 
