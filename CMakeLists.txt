@@ -141,6 +141,7 @@ function(find_header variable name header)
       message(FATAL_ERROR "Could NOT find ${name} (missing: ${header}). Please run:\n./install-dependencies.sh\nwhich will attempt to install all missing dependencies automatically, or provide further instructions if this not supported on your system.")
     endif()
   endif()
+  include_directories(${${variable}})
 endfunction()
 
 find_header(asio_location Asio asio.hpp)
