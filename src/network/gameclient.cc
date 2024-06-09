@@ -749,7 +749,7 @@ void GameClient::send_time() {
 void GameClient::sync_report_callback() {
 	assert(d->net != nullptr);
 	if (d->net->is_connected()) {
-		crypto::MD5Checksum md5sum = d->game->get_sync_hash();
+		MD5::Checksum md5sum = d->game->get_sync_hash();
 		SendPacket s;
 		s.unsigned_8(NETCMD_SYNCREPORT);
 		s.unsigned_32(d->game->get_gametime().get());
@@ -882,7 +882,7 @@ void GameClient::handle_new_file(RecvPacket& packet) {
 				}
 				fr.data_complete(complete.get(), bytes);
 				// TODO(Klaus Halfmann): compute MD5 on the fly in FileRead...
-				std::string localmd5 = crypto::md5_str(complete.get(), bytes);
+				std::string localmd5 = MD5::md5_str(complete.get(), bytes);
 				if (localmd5 == expected_md5) {
 					// everything is alright we now have the file.
 					return;
@@ -975,7 +975,7 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 		std::unique_ptr<char[]> complete(new char[d->file_->bytes]);
 
 		fr.data_complete(complete.get(), d->file_->bytes);
-		std::string localmd5 = crypto::md5_str(complete.get(), d->file_->bytes);
+		std::string localmd5 = MD5::md5_str(complete.get(), d->file_->bytes);
 		if (localmd5 != d->file_->md5sum) {
 			// Something went wrong! We have to rerequest the file.
 			s.reset();

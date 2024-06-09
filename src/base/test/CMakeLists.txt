@@ -3,16 +3,16 @@ wl_test(test_base
     base_test_main.cc
     test_geometry.cc
     test_math.cc
-    test_crypto.cc
+    test_md5.cc
     test_times.cc
     test_time_string.cc
     test_utf8.cc
     test_string.cc
   DEPENDS
     base
-    base_crypto
     base_geometry
     base_math
+    base_md5
     base_test
     base_times
     base_time_string

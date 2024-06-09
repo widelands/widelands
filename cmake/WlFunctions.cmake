@@ -10,7 +10,7 @@ macro(_parse_common_args ARGS)
     USES_MINIZIP
     USES_OPENGL
     USES_PNG
-    USES_LIBMD
+    USES_MD5
     USES_SDL2
     USES_SDL2_IMAGE
     USES_SDL2_MIXER
@@ -102,9 +102,6 @@ macro(_common_compile_tasks)
     else()
       wl_include_directories(${NAME} ${CMAKE_SOURCE_DIR}/src/third_party/minizip)
     endif()
-    if(NOT libmd_location)
-      wl_include_directories(${NAME} ${CMAKE_SOURCE_DIR}/src/third_party/libmd/include)
-    endif()
   endif()
 
   if(ARG_USES_MINIZIP)
@@ -169,12 +166,8 @@ macro(_common_compile_tasks)
     target_link_libraries(${NAME} PNG::PNG)
   endif()
 
-  if(ARG_USES_LIBMD)
-    if(libmd_location)
-      target_link_libraries(${NAME} md)
-    else(libmd_location)
-      target_link_libraries(${NAME} third_party_libmd)
-    endif()
+  if(ARG_USES_MD5)
+    target_link_libraries(${NAME} ${LIBMD_LIBRARY})
   endif()
 
   if(ARG_USES_SDL2)

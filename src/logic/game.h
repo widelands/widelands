@@ -21,7 +21,7 @@
 
 #include <memory>
 
-#include "base/crypto.h"
+#include "base/md5.h"
 #include "base/random.h"
 #include "economy/flag_job.h"
 #include "io/streamwrite.h"
@@ -264,7 +264,7 @@ public:
 	StreamWrite& syncstream();
 	void report_sync_request();
 	void report_desync(int32_t playernumber);
-	crypto::MD5Checksum get_sync_hash() const;
+	MD5::Checksum get_sync_hash() const;
 
 	void enqueue_command(Command*);
 
@@ -424,10 +424,10 @@ private:
 
 	void sync_reset();
 
-	crypto::MD5Checksummer synchash_;
+	MD5::Checksummer synchash_;
 
 	struct SyncWrapper : public StreamWrite {
-		SyncWrapper(Game& game, crypto::MD5Checksummer& target) : game_(game), target_(target) {
+		SyncWrapper(Game& game, MD5::Checksummer& target) : game_(game), target_(target) {
 		}
 
 		~SyncWrapper() override;
@@ -442,7 +442,7 @@ private:
 
 	public:
 		Game& game_;
-		crypto::MD5Checksummer& target_;
+		MD5::Checksummer& target_;
 		uint32_t counter_{0U};
 		uint32_t next_diskspacecheck_{0U};
 		std::unique_ptr<StreamWrite> dump_;

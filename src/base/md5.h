@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_BASE_CRYPTO_H
-#define WL_BASE_CRYPTO_H
+#ifndef WL_BASE_MD5_H
+#define WL_BASE_MD5_H
 
 #include <array>
 #include <cstdint>
@@ -26,36 +26,36 @@
 
 #include <md5.h>
 
-namespace crypto {
+namespace MD5 {
 
-struct MD5Checksum : public std::array<uint8_t, MD5_DIGEST_LENGTH> {
+struct Checksum : public std::array<uint8_t, MD5_DIGEST_LENGTH> {
 	[[nodiscard]] std::string str() const;
-	[[nodiscard]] bool operator==(const MD5Checksum& other) const;
-	[[nodiscard]] bool operator!=(const MD5Checksum& other) const {
+	[[nodiscard]] bool operator==(const Checksum& other) const;
+	[[nodiscard]] bool operator!=(const Checksum& other) const {
 		return !(*this == other);
 	}
 };
 
-struct MD5Checksummer {
-	MD5Checksummer();
+struct Checksummer {
+	Checksummer();
 
 	void data(const void* data, size_t len);
 	[[nodiscard]] std::string finish_checksum_str();
-	[[nodiscard]] MD5Checksum finish_checksum_raw();
+	[[nodiscard]] Checksum finish_checksum_raw();
 	void reset();
 
 private:
 	MD5_CTX context_;
 };
 
-[[nodiscard]] inline MD5Checksum md5_raw(const void* data, size_t len) {
-	MD5Checksummer checksummer;
+[[nodiscard]] inline Checksum md5_raw(const void* data, size_t len) {
+	Checksummer checksummer;
 	checksummer.data(data, len);
 	return checksummer.finish_checksum_raw();
 }
 
 [[nodiscard]] inline std::string md5_str(const void* data, size_t len) {
-	MD5Checksummer checksummer;
+	Checksummer checksummer;
 	checksummer.data(data, len);
 	return checksummer.finish_checksum_str();
 }
@@ -64,12 +64,6 @@ private:
 	return md5_str(str.c_str(), str.size());
 }
 
-[[nodiscard]] std::string sha1(const void* data, size_t len);
+}  // namespace MD5
 
-[[nodiscard]] inline std::string sha1(const std::string& str) {
-	return sha1(str.c_str(), str.size());
-}
-
-}  // namespace crypto
-
-#endif  // end of include guard: WL_BASE_CRYPTO_H
+#endif  // end of include guard: WL_BASE_MD5_H

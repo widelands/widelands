@@ -29,7 +29,7 @@
 
 #include <string>
 
-#include "base/crypto.h"
+#include "base/md5.h"
 #include "base/times.h"
 
 class StreamRead;
@@ -66,7 +66,7 @@ public:
 	~ReplayWriter();
 
 	void send_player_command(PlayerCommand*);
-	void send_sync(const crypto::MD5Checksum& hash);
+	void send_sync(const MD5::Checksum& hash);
 
 private:
 	Game& game_;

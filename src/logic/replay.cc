@@ -59,7 +59,7 @@ enum { pkt_end = 2, pkt_playercommand = 3, pkt_syncreport = 4 };
 
 class CmdReplaySyncRead : public Command {
 public:
-	CmdReplaySyncRead(const Time& init_duetime, crypto::MD5Checksum hash)
+	CmdReplaySyncRead(const Time& init_duetime, MD5::Checksum hash)
 	   : Command(init_duetime), hash_(hash) {
 	}
 
@@ -73,7 +73,7 @@ public:
 			return;
 		}
 
-		const crypto::MD5Checksum myhash = game.get_sync_hash();
+		const MD5::Checksum myhash = game.get_sync_hash();
 
 		if (hash_ != myhash) {
 			reported_desync_for_ = &game;
@@ -105,7 +105,7 @@ public:
 	}
 
 private:
-	crypto::MD5Checksum hash_;
+	MD5::Checksum hash_;
 
 	static const Game* reported_desync_for_;
 };
@@ -204,7 +204,7 @@ Command* ReplayReader::get_next_command(const Time& time) {
 
 		case pkt_syncreport: {
 			Time duetime(cmdlog_->unsigned_32());
-			crypto::MD5Checksum hash;
+			MD5::Checksum hash;
 			cmdlog_->data(hash.data(), hash.size());
 
 			return new CmdReplaySyncRead(duetime, hash);
@@ -338,7 +338,7 @@ void ReplayWriter::send_player_command(PlayerCommand* cmd) {
 /**
  * Store a synchronization hash for the current game time in the replay.
  */
-void ReplayWriter::send_sync(const crypto::MD5Checksum& hash) {
+void ReplayWriter::send_sync(const MD5::Checksum& hash) {
 	cmdlog_->unsigned_8(pkt_syncreport);
 	cmdlog_->unsigned_32(game_.get_gametime().get());
 	cmdlog_->data(hash.data(), hash.size());

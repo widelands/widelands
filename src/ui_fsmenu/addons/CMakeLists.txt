@@ -19,7 +19,6 @@ wl_library(ui_addons
     screenshot_upload.cc
     screenshot_upload.h
   DEPENDS
-    base_crypto
     base_time_string
     scripting_lua_table
     logic_filesystem_constants
@@ -27,6 +26,7 @@ wl_library(ui_addons
     io_filesystem
     graphic_text_layout
     ui_basic
+    third_party_sha1
     base
     io_filesystem_illegal_filename_check
     ui_fsmenu

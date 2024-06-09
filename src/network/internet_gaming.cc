@@ -21,7 +21,6 @@
 #include <algorithm>
 #include <memory>
 
-#include "base/crypto.h"
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/random.h"
@@ -32,6 +31,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "network/internet_gaming_messages.h"
 #include "network/internet_gaming_protocol.h"
+#include "third_party/sha1/sha1.h"
 
 /// Max length of formatted time string
 const uint8_t kTimeFormatLength = 32;

@@ -75,7 +75,7 @@ __USES_INCLUDES['USES_OPENGL'] = r'(<glbinding\/\w+\.h>)|(<GL\/glew\.h>)'
 __USES_INCLUDES['USES_ICU'] = r'<unicode\/.+\.h>'
 __USES_INCLUDES['USES_TINYGETTEXT'] = r'"third_party\/tinygettext\/include\/tinygettext\/tinygettext\.hpp"'
 __USES_INCLUDES['USES_PNG'] = r'<png\.h>'
-__USES_INCLUDES['USES_LIBMD'] = r'<(md5|sha1)\.h>'
+__USES_INCLUDES['USES_MD5'] = r'<md5\.h>'
 __USES_INCLUDES['USES_SDL2_IMAGE'] = r'<SDL_image\.h>'
 __USES_INCLUDES['USES_SDL2_MIXER'] = r'<SDL_mixer\.h>'
 __USES_INCLUDES['USES_SDL2_TTF'] = r'<SDL_ttf\.h>'
@@ -190,7 +190,7 @@ def report_unused_sources(srcdir, sources, owners_of_src):
     unused_sources = sources - set(owners_of_src.keys())
     allowed = 0
     for src in sorted(unused_sources):
-        if 'third_party/tinygettext' in src or 'third_party/libmd' in src:
+        if 'third_party/tinygettext' in src:
             allowed += 1
         else:
             print_error(src, 1, '(CRITICAL) File not mentioned in any build rule.')
@@ -231,8 +231,6 @@ def report_unmentioned_or_unnecessary_dependencies(srcdir, target, includes_by_s
         dependson_string = 'DEPENDS on '
         if name.startswith('USES'):
             dependson_string = ''
-            if target.name == 'third_party_libmd' and name == 'USES_LIBMD':
-                continue
 
         print_error(
             target.defined_at[1], target.defined_at[0],

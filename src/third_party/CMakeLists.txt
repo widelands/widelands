@@ -11,17 +11,12 @@ if (NOT MINIZIP_STATIC_LIBRARIES)
   message(STATUS "Using embedded minizip libraries")
 endif()
 
-if(NOT libmd_location)
-  wl_library(third_party_libmd
-    THIRD_PARTY
-    C_LIBRARY
-    SRCS
-      libmd/include/md5.h
-      libmd/include/sha1.h
-      libmd/src/md5.c
-      libmd/src/sha1.c
-  )
-endif()
+wl_library(third_party_sha1
+  THIRD_PARTY
+  SRCS
+    sha1/sha1.cc
+    sha1/sha1.h
+)
 
 wl_library(third_party_eris
   THIRD_PARTY

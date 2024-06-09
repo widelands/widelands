@@ -1,0 +1,6 @@
+This directory contains a copy of @983's public domain SHA-1 algorithm from
+https://github.com/983/SHA1, version 0ec907360c70b7eac33ec87927d227c602bb1265.
+Many thanks to the authors.
+
+The file has been adapted by the Widelands Development Team for our
+convenience without changing the actual algorithms.
