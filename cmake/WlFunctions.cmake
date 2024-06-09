@@ -167,7 +167,7 @@ macro(_common_compile_tasks)
   endif()
 
   if(ARG_USES_MD5)
-    target_link_libraries(${NAME} md)
+    target_link_libraries(${NAME} ${LIBMD_LIBRARY})
   endif()
 
   if(ARG_USES_SDL2)
