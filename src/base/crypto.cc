@@ -61,8 +61,7 @@ MD5Checksum MD5Checksummer::finish_checksum_raw() {
 }
 
 std::string sha1(const void* data, size_t len) {
-	std::string result(
-	   SHA1_DIGEST_STRING_LENGTH - 1 /* correct for implicit null terminator */, '?');
+	std::string result(SHA1_DIGEST_STRING_LENGTH - 1 /* correct for implicit null terminator */, '?');
 	SHA1_CTX context;
 	SHA1Init(&context);
 	SHA1Update(&context, reinterpret_cast<const uint8_t*>(data), len);
