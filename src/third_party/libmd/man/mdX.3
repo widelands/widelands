@@ -1,0 +1,227 @@
+.\"
+.\" ----------------------------------------------------------------------------
+.\" "THE BEER-WARE LICENSE" (Revision 42):
+.\" <phk@login.dkuug.dk> wrote this file.  As long as you retain this notice you
+.\" can do whatever you want with this stuff. If we meet some day, and you think
+.\" this stuff is worth it, you can buy me a beer in return.   Poul-Henning Kamp
+.\" ----------------------------------------------------------------------------
+.\"
+.\" 	$OpenBSD: mdX.3,v 1.11 2010/07/13 22:34:45 tedu Exp $
+.\"
+.Dd $Mdocdate: July 13 2010 $
+.Dt MDX 3
+.Os
+.Sh NAME
+.Nm MDXInit ,
+.Nm MDXUpdate ,
+.Nm MDXPad ,
+.Nm MDXFinal ,
+.Nm MDXTransform ,
+.Nm MDXEnd ,
+.Nm MDXFile ,
+.Nm MDXFileChunk ,
+.Nm MDXData
+.Nd calculate the RSA Data Security, Inc.,
+.Dq MDX
+message digest
+.Sh LIBRARY
+.Lb libmd
+.Sh SYNOPSIS
+.In sys/types.h
+.In mdX.h
+.Ft void
+.Fn MDXInit "MDX_CTX *context"
+.Ft void
+.Fn MDXUpdate "MDX_CTX *context" "const uint8_t *data" "size_t len"
+.Ft void
+.Fn MDXPad "MDX_CTX *context"
+.Ft void
+.Fn MDXFinal "uint8_t digest[MDX_DIGEST_LENGTH]" "MDX_CTX *context"
+.Ft void
+.Fn MDXTransform "uint32_t state[4]" "uint8_t block[MDX_BLOCK_LENGTH]"
+.Ft "char *"
+.Fn MDXEnd "MDX_CTX *context" "char *buf"
+.Ft "char *"
+.Fn MDXFile "const char *filename" "char *buf"
+.Ft "char *"
+.Fn MDXFileChunk "const char *filename" "char *buf" "off_t offset" "off_t length"
+.Ft "char *"
+.Fn MDXData "const uint8_t *data" "size_t len" "char *buf"
+.Sh DESCRIPTION
+The MDX functions calculate a 128-bit cryptographic checksum (digest)
+for any number of input bytes.
+A cryptographic checksum is a one-way
+hash-function, that is, you cannot find (except by exhaustive search)
+the input corresponding to a particular output.
+This net result is a
+.Dq fingerprint
+of the input-data, which doesn't disclose the actual input.
+.Pp
+MD2 is the slowest, MD4 is the fastest and MD5 is somewhere in the middle.
+MD2 can only be used for Privacy-Enhanced Mail.
+MD4 has been criticized for being too weak, so MD5 was developed in
+response as ``MD4 with safety-belts''.
+MD4 and MD5 have been broken; they should only be used where necessary for
+backward compatibility.
+The attacks on both MD4 and MD5
+are both in the nature of finding
+.Dq collisions
+\- that is, multiple
+inputs which hash to the same value; it is still unlikely for an attacker
+to be able to determine the exact original input given a hash value.
+.Pp
+The
+.Fn MDXInit ,
+.Fn MDXUpdate ,
+and
+.Fn MDXFinal
+functions are the core functions.
+Allocate an MDX_CTX, initialize it with
+.Fn MDXInit ,
+run over the data with
+.Fn MDXUpdate ,
+and finally extract the result using
+.Fn MDXFinal .
+.Pp
+The
+.Fn MDXPad
+function can be used to apply padding to the message digest as in
+.Fn MDXFinal ,
+but the current context can still be used with
+.Fn MDXUpdate .
+.Pp
+The
+.Fn MDXTransform
+function is used by
+.Fn MDXUpdate
+to hash 512-bit blocks and forms the core of the algorithm.
+Most programs should use the interface provided by
+.Fn MDXInit ,
+.Fn MDXUpdate
+and
+.Fn MDXFinal
+instead of calling
+.Fn MDXTransform
+directly.
+.Pp
+.Fn MDXEnd
+is a wrapper for
+.Fn MDXFinal
+which converts the return value to an MDX_DIGEST_STRING_LENGTH-character
+(including the terminating '\e0')
+.Tn ASCII
+string which represents the 128 bits in hexadecimal.
+.Pp
+.Fn MDXFile
+calculates the digest of a file, and uses
+.Fn MDXEnd
+to return the result.
+If the file cannot be opened, a null pointer is returned.
+.Pp
+.Fn MDXFileChunk
+behaves like
+.Fn MDXFile
+but calculates the digest only for that portion of the file starting at
+.Fa offset
+and continuing for
+.Fa length
+bytes or until end of file is reached, whichever comes first.
+A zero
+.Fa length
+can be specified to read until end of file.
+A negative
+.Fa length
+or
+.Fa offset
+will be ignored.
+.Fn MDXData
+calculates the digest of a chunk of data in memory, and uses
+.Fn MDXEnd
+to return the result.
+.Pp
+When using
+.Fn MDXEnd ,
+.Fn MDXFile ,
+.Fn MDXFileChunk ,
+or
+.Fn MDXData ,
+the
+.Ar buf
+argument can be a null pointer, in which case the returned string
+is allocated with
+.Xr malloc 3
+and subsequently must be explicitly deallocated using
+.Xr free 3
+after use.
+If the
+.Ar buf
+argument is non-null it must point to at least MDX_DIGEST_STRING_LENGTH
+characters of buffer space.
+.Sh SEE ALSO
+.Xr md2 3 ,
+.Xr md4 3 ,
+.Xr md5 3 ,
+.Xr rmd160 3 ,
+.Xr sha1 3 ,
+.Xr sha2 3
+.Rs
+.%A B. Kaliski
+.%T The MD2 Message-Digest Algorithm
+.%O RFC 1319
+.Re
+.Rs
+.%A R. Rivest
+.%T The MD4 Message-Digest Algorithm
+.%O RFC 1186
+.Re
+.Rs
+.%A R. Rivest
+.%T The MD5 Message-Digest Algorithm
+.%O RFC 1321
+.Re
+.Rs
+.%A RSA Laboratories
+.%T Frequently Asked Questions About today's Cryptography
+.%O \&<http://www.rsa.com/rsalabs/faq/>
+.Re
+.Rs
+.%A H. Dobbertin
+.%T Alf Swindles Ann
+.%J CryptoBytes
+.%N 1(3):5
+.%D 1995
+.Re
+.Rs
+.%A MJ. B. Robshaw
+.%T On Recent Results for MD4 and MD5
+.%J RSA Laboratories Bulletin
+.%N 4
+.%D November 12, 1996
+.Re
+.Rs
+.%A Hans Dobbertin
+.%T Cryptanalysis of MD5 Compress
+.Re
+.Sh HISTORY
+These functions appeared in
+.Ox 2.0
+and
+.Nx 1.3 .
+.Sh AUTHORS
+The original MDX routines were developed by
+.Tn RSA
+Data Security, Inc., and published in the above references.
+This code is derived from a public domain implementation written by Colin Plumb.
+.Pp
+The
+.Fn MDXEnd ,
+.Fn MDXFile ,
+.Fn MDXFileChunk ,
+and
+.Fn MDXData
+helper functions are derived from code written by Poul-Henning Kamp.
+.Sh BUGS
+Collisions have been found for the full versions of both MD4 and MD5.
+The use of
+.Xr sha2 3
+is recommended instead.

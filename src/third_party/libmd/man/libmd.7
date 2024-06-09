@@ -1,0 +1,102 @@
+.\" libmd man page
+.\"
+.\" Copyright © 2021 Guillem Jover <guillem@hadrons.org>
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. The name of the author may not be used to endorse or promote products
+.\"    derived from this software without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES,
+.\" INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+.\" AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL
+.\" THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+.\" EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+.\" PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+.\" OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+.\" WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+.\" OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+.\" ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+\"
+.Dd Oct 05, 2021
+.Dt libmd 7
+.Os
+.Sh NAME
+.Nm libmd
+.Nd Message Digest functions from BSD systems
+.Sh DESCRIPTION
+The
+.Nm libmd
+library provides message digest functions found on BSD systems either
+on their libc or libmd libraries and lacking on others like GNU systems,
+thus making it easier to port projects with strong BSD origins, without
+needing to embed the same code over and over again on each project.
+.Pp
+The library provides a compatibility interface for the Aladding Enterprises
+MD5 implementation, but the interface is not exposed by default to avoid
+polluting the namespace.
+The
+.Dv LIBMD_MD5_ALADDIN
+pre-processor variable needs to be defined to expose this interface.
+.Pp
+The library provides a
+.Xr pkgconf 1
+entry named
+.Pa libmd .
+.Sh HEADERS
+The
+.Nm libmd
+library provides compatibility with various
+.Bx
+headers and interfaces.
+.Pp
+The following headers are provided for compatibility with
+.Nx
+and
+.Ox .
+.Pp
+.Bl -tag -width 4m -compact
+.It In md2.h
+.It In md4.h
+.It In md5.h
+.It In rmd160.h
+.It In sha1.h
+.It In sha2.h
+.El
+.Pp
+The following headers are provided for compatibility with
+.Fx
+and
+.Dx .
+.Pp
+.Bl -tag -width 4m -compact
+.It In ripemd.h
+.It In sha.h
+.It In sha256.h
+.It In sha512.h
+.El
+.Sh SEE ALSO
+.Xr md2 3 ,
+.Xr md4 3 ,
+.Xr md5 3 ,
+.Xr rmd160 3 ,
+.Xr sha1 3 ,
+.Xr sha2 3 .
+.Sh HISTORY
+The
+.Nm libmd
+project started in the Debian GNU/kFreeBSD port as part of the
+.Nm libbsd
+library, as a way to ease porting
+code from FreeBSD to the GNU-based system.
+It was subsequently split into a project created on Hadrons.Org (mirrored
+on FreeDesktop.Org) for other distributions and projects to use, and
+further extended to match the other BSD interfaces.
+.Pp
+It is now distributed as part of most non-BSD distributions

@@ -965,8 +965,8 @@ void Game::report_desync(int32_t playernumber) {
  *
  * \return the checksum
  */
-MD5::Checksum Game::get_sync_hash() const {
-	MD5::Checksummer copy(synchash_);
+crypto::MD5Checksum Game::get_sync_hash() const {
+	crypto::MD5Checksummer copy(synchash_);
 	return copy.finish_checksum_raw();
 }
 

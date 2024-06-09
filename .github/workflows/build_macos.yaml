@@ -31,7 +31,7 @@ jobs:
       run: |
         mkdir build_wl
         cd build_wl/
-        ../utils/macos/build_app.sh "--${{ matrix.config }}" "--${{ matrix.compiler }}"
+        ../utils/macos/build_app.sh "--${{ matrix.config }}" "--${{ matrix.compiler }}" "-DOPTION_FORCE_EMBEDDED_LIBMD=ON"
         grep -v REVDETECT-BROKEN ../build/VERSION
         DMGPATH="$(pwd)"
         DMGFILE="$(ls *.dmg)"

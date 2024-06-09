@@ -272,9 +272,9 @@ wl_library(logic
   USES_ATOMIC
   DEPENDS
     base
+    base_crypto
     base_exceptions
     base_macros
-    base_md5
     base_random
     base_scoped_timer
     base_time_string

@@ -1,0 +1,29 @@
+image: debian:latest
+
+before_script:
+  - apt-get update -qq
+  - apt-get install -qq -y --no-install-recommends
+            git gcc make autoconf automake libtool gcovr
+  - ./autogen
+
+vpath-tests:
+  stage: test
+  script:
+    - mkdir -p build-tree
+    - cd build-tree
+    - ../configure
+    - make check
+
+unit-tests:
+  stage: test
+  script:
+    - ./configure --enable-sanitize
+    - make check
+
+coverage:
+  stage: test
+  script:
+    - ./configure --disable-static
+    - make check CFLAGS="--coverage -O0 -ggdb" LDFLAGS="--coverage -O0 -ggdb"
+    - gcovr -s -e test/
+  coverage: /^TOTAL.*\s+(\d+\%)$/

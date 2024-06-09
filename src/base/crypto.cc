@@ -16,11 +16,13 @@
  *
  */
 
-#include "base/md5.h"
+#include "base/crypto.h"
 
-namespace MD5 {
+#include <sha1.h>
 
-std::string Checksum::str() const {
+namespace crypto {
+
+std::string MD5Checksum::str() const {
 	std::string result(size() * 2, '?');
 	for (size_t i = 0; i < size(); ++i) {
 		snprintf(result.data() + 2 * i, 3, "%02x", at(i));
@@ -28,34 +30,43 @@ std::string Checksum::str() const {
 	return result;
 }
 
-bool Checksum::operator==(const Checksum& other) const {
+bool MD5Checksum::operator==(const MD5Checksum& other) const {
 	return memcmp(data(), other.data(), size()) == 0;
 }
 
-Checksummer::Checksummer() {
+MD5Checksummer::MD5Checksummer() {
 	reset();
 }
 
-void Checksummer::reset() {
+void MD5Checksummer::reset() {
 	MD5Init(&context_);
 }
 
-void Checksummer::data(const void* data, size_t len) {
+void MD5Checksummer::data(const void* data, size_t len) {
 	MD5Update(&context_, reinterpret_cast<const uint8_t*>(data), len);
 }
 
-std::string Checksummer::finish_checksum_str() {
+std::string MD5Checksummer::finish_checksum_str() {
 	std::string result(MD5_DIGEST_STRING_LENGTH - 1 /* correct for implicit null terminator */, '?');
 	MD5End(&context_, result.data());
 	reset();
 	return result;
 }
 
-Checksum Checksummer::finish_checksum_raw() {
-	Checksum result;
+MD5Checksum MD5Checksummer::finish_checksum_raw() {
+	MD5Checksum result;
 	MD5Final(result.data(), &context_);
 	reset();
 	return result;
 }
 
-}  // namespace MD5
+std::string sha1(const void* data, size_t len) {
+	std::string result(SHA1_DIGEST_STRING_LENGTH - 1 /* correct for implicit null terminator */, '?');
+	SHA1_CTX context;
+	SHA1Init(&context);
+	SHA1Update(&context, reinterpret_cast<const uint8_t*>(data), len);
+	SHA1End(&context, result.data());
+	return result;
+}
+
+}  // namespace crypto
