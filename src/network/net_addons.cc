@@ -40,9 +40,9 @@
 
 #include <SDL_timer.h>
 
+#include "base/crypto.h"
 #include "base/i18n.h"
 #include "base/math.h"
-#include "base/md5.h"
 #include "base/time_string.h"
 #include "base/warning.h"
 #include "build_info.h"
@@ -115,7 +115,7 @@ void check_checksum(const std::string& path, const std::string& checksum) {
 	const size_t bytes = fr.get_size();
 	std::unique_ptr<char[]> complete(new char[bytes]);
 	fr.data_complete(complete.get(), bytes);
-	const std::string md5sum = MD5::md5_str(complete.get(), bytes);
+	const std::string md5sum = crypto::md5_str(complete.get(), bytes);
 	if (checksum != md5sum) {
 		throw WLWarning("", "Downloaded file '%s': Checksum mismatch, found %s, expected %s",
 		                path.c_str(), md5sum.c_str(), checksum.c_str());
@@ -252,7 +252,7 @@ void NetAddons::init(std::string username, std::string password) {
 		data += read_line();
 		data += '\n';
 		check_endofstream();
-		send = MD5::md5_str(data.c_str(), data.size());
+		send = crypto::md5_str(data.c_str(), data.size());
 		send += "\nENDOFSTREAM\n";
 		write_to_server(send);
 
@@ -806,7 +806,7 @@ void NetAddons::upload_addon(const std::string& name,
 
 			send = file;
 			send += '\n';
-			send += MD5::md5_str(complete.get(), bytes);
+			send += crypto::md5_str(complete.get(), bytes);
 			send += '\n';
 			send += std::to_string(bytes);
 			send += '\n';
@@ -873,7 +873,7 @@ void NetAddons::upload_screenshot(const std::string& addon,
 
 	send += std::to_string(bytes);
 	send += ' ';
-	send += MD5::md5_str(complete.get(), bytes);
+	send += crypto::md5_str(complete.get(), bytes);
 	send += ' ';
 	send += std::to_string(std::count(description.begin(), description.end(), ' '));
 	send += ' ';

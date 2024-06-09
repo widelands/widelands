@@ -10,7 +10,7 @@ macro(_parse_common_args ARGS)
     USES_MINIZIP
     USES_OPENGL
     USES_PNG
-    USES_MD5
+    USES_LIBMD
     USES_SDL2
     USES_SDL2_IMAGE
     USES_SDL2_MIXER
@@ -166,7 +166,7 @@ macro(_common_compile_tasks)
     target_link_libraries(${NAME} PNG::PNG)
   endif()
 
-  if(ARG_USES_MD5)
+  if(ARG_USES_LIBMD)
     target_link_libraries(${NAME} ${LIBMD_LIBRARY})
   endif()
 
