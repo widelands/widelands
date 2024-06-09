@@ -134,7 +134,7 @@ endif()
 function(find_header variable name header)
   if(NOT ${variable} OR ${variable} STREQUAL "")
     unset(${variable} CACHE)
-    find_path(${variable} ${header} HINTS C:/usr/include)
+    find_path(${variable} ${header})
     if(${variable})
       message(STATUS "Found ${name} in '${${variable}}'.")
     else()
@@ -144,11 +144,11 @@ function(find_header variable name header)
 endfunction()
 
 find_header(asio_location Asio asio.hpp)
-find_header(md5_location libmd md5.h)
+find_header(libmd_location libmd md5.h)
 
 add_definitions(-DASIO_STANDALONE)
-include_directories(AFTER SYSTEM ${md5_location})
-find_library(LIBMD_LIBRARY md HINTS C:/usr/lib REQUIRED)
+include_directories(BEFORE SYSTEM ${libmd_location})
+find_library(LIBMD_LIBRARY md REQUIRED)
 
 if (APPLE OR WIN32 OR
     CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
