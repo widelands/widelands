@@ -6612,7 +6612,7 @@ msgstr "(C) %1%-%2% Widelands-Entwicklungsteam • Lizenziert unter der GNU Gene
 
 #: ../../../../src/ui_fsmenu/main.cc:848
 msgid "Click for the main menu"
-msgstr ""
+msgstr "Klicke für das Hauptmenü"
 
 #: ../../../../src/ui_fsmenu/main.cc:926
 msgid "Desyncing Add-On Found"
@@ -7097,7 +7097,7 @@ msgstr "Fenstergröße"
 #. * TRANSLATORS: short description for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:155
 msgid "Let the system draw the mouse cursor"
-msgstr ""
+msgstr "Lass das System den Mauszeiger zeichnen"
 
 #. * TRANSLATORS: tooltip text for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:157
@@ -7106,7 +7106,7 @@ msgid ""
 "and the cursor appears frozen during long operations. Disable it only if the"
 " cursor doesn’t appear right, or if you want it to be visible in screenshots"
 " or screencasts."
-msgstr ""
+msgstr "Im Zweifel eingeschaltet lassen. Wenn dies abgeschaltet wird, kann der Mauszeiger langsam erscheinen und in langen Vorgängen eingefroren erscheinen. Schalten sie dies nur ab, wenn der Cursor nicht richtig dargestellt wird, oder wenn er auch in Bildschirmfotos oder Bildschirmvideos zu sehen sein soll."
 
 #: ../../../../src/ui_fsmenu/options.cc:166
 msgid "Accessibility mode for tooltips"
@@ -11020,14 +11020,14 @@ msgstr "Du kannst die Musik im Spiel ändern, in dem du deine eigenen Musikdatei
 
 #: ../../../../src/wui/sound_options.cc:161
 msgid "Play the intro music at startup"
-msgstr ""
+msgstr "Spiele die Einführungsmusik zu Beginn"
 
 #: ../../../../src/wui/sound_options.cc:163
 msgid ""
 "Whether to play the intro music when Widelands is started. The splashscreen "
 "is only closed automatically when the intro music ends, but can be skipped "
 "by a keypress or a mouse click."
-msgstr ""
+msgstr "Ob die Einführungsmusik zum Start von Widelands gespielt wird. Der Startbildschirm wird nur automatisch beendet, sobald die Einführungsmusik zu Ende ist, kann aber per Tastendruck oder Mausklick abgebrochen werden"
 
 #: ../../../../src/wui/sound_options.cc:172
 msgctxt "sound_options"

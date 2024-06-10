@@ -157,7 +157,7 @@ msgstr "[jau*|nee]"
 
 #: ../../../../src/wlapplication_messages.cc:123
 msgid "Play the intro music at startup and show splash image until it ends."
-msgstr ""
+msgstr "Spööl de Begröten-Musik bi’m Starten un wies de Begröten-Billschirm, bit se ennt."
 
 #: ../../../../src/wlapplication_messages.cc:124
 msgid "Force Widelands to crash when a Lua error occurs."
@@ -409,7 +409,7 @@ msgid ""
 "Whether to let the system draw the mouse cursor. Disable it only if the "
 "cursor doesn't appear right, or if you want it to be visible in screenshots "
 "or screencasts."
-msgstr ""
+msgstr "Of dat Systeem de Muuswieser teken sall. Knips dat blots dann ut, wenn de Muuswieser nich recht tekent word, of wenn dat in Billschirmfotos of Billschirm-Uptekens to sehn wesen sall."
 
 #: ../../../../src/wlapplication_messages.cc:233
 msgid "Whether to use sticky tooltips."
