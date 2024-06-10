@@ -86,7 +86,7 @@ forbidden = [
     '/// TODO: This is a todo comment',
     '//! TODO: This is a todo comment',
     r'\TODO: This is a todo comment',
-    '\\\todo: This is a todo comment'
+    r'\\\todo: This is a todo comment'
 ]
 
 allowed = [
