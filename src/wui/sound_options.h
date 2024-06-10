@@ -31,6 +31,7 @@ struct SoundOptions : public UI::Box {
 
 private:
 	UI::Checkbox custom_songset_;
+	UI::Checkbox play_intro_music_;
 };
 
 #endif  // end of include guard: WL_WUI_SOUND_OPTIONS_H
