@@ -1027,7 +1027,8 @@ void Flag::log_general_info(const Widelands::EditorGameBase& egbase) const {
 	if (district_center_[wwWORKER] == nullptr) {
 		molog(egbase.get_gametime(), "No worker district\n");
 	} else {
-		molog(egbase.get_gametime(), "Worker district %u (%s)\n", district_center_[wwWORKER]->serial(),
+		molog(egbase.get_gametime(), "Worker district %u (%s)\n",
+		      district_center_[wwWORKER]->serial(),
 		      district_center_[wwWORKER]->get_warehouse_name().c_str());
 	}
 
