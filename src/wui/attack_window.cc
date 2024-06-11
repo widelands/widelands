@@ -760,8 +760,7 @@ void AttackPanel::ListOfSoldiers::draw(RenderTarget& dst) {
 					dst.blitrect_scale(Rectf((column + kOffset) * attack_box_->icon_w_,
 					                         (row + kOffset) * attack_box_->icon_h_,
 					                         attack_box_->icon_w_ * kSize, attack_box_->icon_h_ * kSize),
-					                   anchor, Recti(0, 0, anchor->width(), anchor->height()), kAlpha,
-					                   BlendMode::Default);
+					                   anchor, anchor->rect(), kAlpha, BlendMode::Default);
 				}
 			}
 		}
