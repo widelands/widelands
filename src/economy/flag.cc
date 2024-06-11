@@ -1018,17 +1018,17 @@ void Flag::log_general_info(const Widelands::EditorGameBase& egbase) const {
 
 	Widelands::PlayerImmovable::log_general_info(egbase);
 
-	if (district_center_[0] == nullptr) {
+	if (district_center_[wwWARE] == nullptr) {
 		molog(egbase.get_gametime(), "No ware district\n");
 	} else {
-		molog(egbase.get_gametime(), "Ware district %u (%s)\n", district_center_[0]->serial(),
-		      district_center_[0]->get_warehouse_name().c_str());
+		molog(egbase.get_gametime(), "Ware district %u (%s)\n", district_center_[wwWARE]->serial(),
+		      district_center_[wwWARE]->get_warehouse_name().c_str());
 	}
-	if (district_center_[1] == nullptr) {
+	if (district_center_[wwWORKER] == nullptr) {
 		molog(egbase.get_gametime(), "No worker district\n");
 	} else {
-		molog(egbase.get_gametime(), "Worker district %u (%s)\n", district_center_[1]->serial(),
-		      district_center_[1]->get_warehouse_name().c_str());
+		molog(egbase.get_gametime(), "Worker district %u (%s)\n", district_center_[wwWORKER]->serial(),
+		      district_center_[wwWORKER]->get_warehouse_name().c_str());
 	}
 
 	if (ware_filled_ != 0) {

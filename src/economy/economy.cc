@@ -520,14 +520,12 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type,
 
 	if (target_global > 0 && !warehouses_.empty()) {
 		// We have a target quantity set.
-		Quantity target_district;
+		Quantity target_district = 0;
 		if (flag != nullptr && nr_districts_ > 0) {
 			target_district = target_global / nr_districts_;
 			if (target_district * nr_districts_ < target_global) {
 				++target_district;  // Rounding up is important for wares with small targets
 			}
-		} else {
-			target_district = 0;
 		}
 
 		bool this_district_has_normal = false;
@@ -1250,15 +1248,23 @@ void Economy::recalc_districts() {
 		wh->base_flag().set_district_center(type(), wh);
 		astar.push(wh->base_flag());
 	}
-	while (RoutingNode* current = astar.step()) {
-		current->base_flag().set_district_center(
-		   type(), astar.route_start(*current).base_flag().get_district_center(type()));
+	{
+		RoutingNode* current;
+		while ((current = astar.step()) != nullptr) {
+			current->base_flag().set_district_center(
+			   type(), astar.route_start(*current).base_flag().get_district_center(type()));
+		}
 	}
 
 	// Second pass: Identify minimal monodirectional distances between warehouses.
 	constexpr uint32_t kClusterThreshold = 12 * 1800;  // 12 nodes on flat terrain.
 	std::map<std::pair<Warehouse*, Warehouse*>, uint32_t> warehouse_distances;
 
+	/* When this function is called shortly before or after an economy split, it can happen that
+	 * the warehouse_ vector is temporarily unsanitized, and there may be warehouses missing or
+	 * it may contain warehouses belonging to a different economy. So we need to iterate over all
+	 * flags instead to get exactly those warehouses that truly belong to us.
+	 */
 	for (Flag* flag1 : flags_) {
 		Warehouse* wh1 = flag1->get_district_center(type());
 

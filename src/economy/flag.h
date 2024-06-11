@@ -219,6 +219,7 @@ private:
 	Warehouse* district_center_[2] = {
 	   nullptr,
 	   nullptr};  ///< Warehouse at the center of our district, indexed by WareWorker (may be null).
+	static_assert((wwWARE | wwWORKER) == 1, "WareWorker is not a suitable array index type");
 
 	Building* building_{nullptr};  ///< attached building (replaces road WALK_NW)
 	RoadBase* roads_[WalkingDir::LAST_DIRECTION];
