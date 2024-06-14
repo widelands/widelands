@@ -739,99 +739,107 @@ void Economy::start_request_timer(const Duration& delta) {
 	}
 }
 
+// make these members, replacing available_supplies_
+// (only kept around to avoid always creating and destroying them)
+static std::vector<Supply*> possible_imports;
+static std::vector<Supply*> possible_supplies;  // std::map<Flag*, Supply*> ?
+static std::vector<Widelands::RoutingNode*> possible_flags;  // std::set ?
+
 /**
  * Find the supply that is best suited to fulfill the given request.
  * \return 0 if no supply is found, the best supply otherwise
  */
 Supply*
 Economy::find_best_supply(Game& game, const Request& req, int32_t& cost, bool allow_import) {
-	Route buf_route0;
-	Route buf_route1;
-	Supply* best_supply = nullptr;
-	Route* best_route = nullptr;
-	int32_t best_cost = -1;
 	Flag& target_flag = req.target_flag();
 
-	available_supplies_.clear();
+	possible_imports.clear();
+	possible_supplies.clear();
+	possible_flags.clear();
 
-	for (int pass = 0; pass < 2; ++pass) {
-		for (size_t i = 0; i < supplies_.get_nrsupplies(); ++i) {
-			Supply& supp = supplies_[i];
+	for (size_t i = 0; i < supplies_.get_nrsupplies(); ++i) {
+		Supply& supp = supplies_[i];
 
-			// Just skip if supply does not provide required ware
-			if (supp.nr_supplies(game, req) == 0u) {
-				continue;
-			}
-
-			const SupplyProviders provider = supp.provider_type(&game);
-
-			// We generally ignore disponible wares on ship as it is not possible to reliably
-			// calculate route (transportation time)
-			if (provider == SupplyProviders::kShip) {
-				continue;
-			}
-
-			const Widelands::Flag& supp_flag = supp.get_position(game)->base_flag();
-
-			if (pass == 0 && !same_district(target_flag, supp_flag)) {
-				// Do not consider imports in the first pass
-				continue;
-			}
-
-			// Use birds-eye distance for performance, may be inaccurate.
-			const uint32_t dist =
-			   game.map().calc_distance(target_flag.get_position(), supp_flag.get_position());
-
-			UniqueDistance ud = {dist, supp.get_position(game)->serial(), provider};
-
-			// std::map quarantees uniqueness, practically it means that if more wares are on the same
-			// flag, only
-			// first one will be inserted into available_supplies
-			available_supplies_.insert(std::make_pair(ud, &supplies_[i]));
+		// Just skip if supply does not provide required ware
+		if (supp.nr_supplies(game, req) == 0u) {
+			continue;
 		}
 
-		if (!available_supplies_.empty() || !allow_import) {
-			// Perform a second pass permitting imports only if no same-district supplies were found.
-			break;
+		const SupplyProviders provider = supp.provider_type(&game);
+
+		// We generally ignore disponible wares on ship as it is not possible to reliably
+		// calculate route (transportation time)
+		if (provider == SupplyProviders::kShip) {
+			continue;
 		}
-	}
 
-	// Now available supplies have been sorted by distance to requestor
-	for (auto& supplypair : available_supplies_) {
-		Supply& supp = *supplypair.second;
+		Widelands::Flag& supp_flag = supp.get_position(game)->base_flag();
 
-		Route* const route = best_route != &buf_route0 ? &buf_route0 : &buf_route1;
-		// will be cleared by find_route()
-
-		if (!find_route(supp.get_position(game)->base_flag(), target_flag, route, best_cost)) {
-			if (best_route == nullptr) {
-				log_err_time(
-				   game.get_gametime(),
-				   "Economy::find_best_supply: %s-Economy %u of player %u: Error, COULD NOT FIND A "
-				   "ROUTE!\n",
-				   type_ ? "WORKER" : "WARE", serial_, owner_.player_number());
-				// To help to debug this a bit:
-				log_err_time(game.get_gametime(),
-				             " ... ware/worker at: %3dx%3d, requestor at: %3dx%3d! Item: %s.\n",
-				             supp.get_position(game)->base_flag().get_position().x,
-				             supp.get_position(game)->base_flag().get_position().y,
-				             target_flag.get_position().x, target_flag.get_position().y,
-				             type_ == wwWARE ?
-                            game.descriptions().get_ware_descr(req.get_index())->name().c_str() :
-                            game.descriptions().get_worker_descr(req.get_index())->name().c_str());
+		if (!same_district(target_flag, supp_flag)) {
+			// Do not consider imports in the first pass, but save them in case we don't find
+			// any local supply.
+			if (allow_import) {
+				possible_imports.emplace_back(&supp);
 			}
 			continue;
 		}
-		best_supply = &supp;
-		best_route = route;
-		best_cost = route->get_totalcost();
+
+		possible_supplies.emplace_back(&supplies_[i]);
+		possible_flags.emplace_back(&supp_flag);
+
+		/* We may still need this if we start tracking neighbouring districts, but not now
+		// Use birds-eye distance for performance, may be inaccurate.
+		const uint32_t dist =
+		   game.map().calc_distance(target_flag.get_position(), supp_flag.get_position());
+
+		// we only need to keep the shortest distance, to see whether we should consider
+		// supplies from neighbouring districts
+		*/
 	}
 
-	if (best_route == nullptr) {
+	// Try imports if no local supply was found
+	if (allow_import && possible_flags.empty() && !possible_imports.empty()) {
+		for (Supply* supp : possible_imports) {
+			possible_supplies.emplace_back(supp);
+			possible_flags.emplace_back(&(supp->get_position(game)->base_flag()));
+		}
+	}
+
+	if (possible_flags.empty()) {
 		return nullptr;
 	}
 
-	cost = best_cost;
+	Supply* best_supply = nullptr;
+	Route best_route;
+	Flag* best_supp_flag;
+
+	bool success = false;
+
+	if (possible_flags.size() == 1) {  // faster than messing with a single element vector
+		success = router_->find_route(*possible_flags[0], target_flag, &best_route, type_, -1,
+		                    *owner().egbase().mutable_map());
+	} else {
+		success = router_->find_nearest(
+	       possible_flags, target_flag, &best_route, type_, *owner().egbase().mutable_map());
+	}
+
+	if (!success) {
+		log_err_time(
+		   game.get_gametime(),
+		   "Economy::find_best_supply: %s-Economy %u of player %u: Error, COULD NOT FIND A ROUTE!\n",
+		   type_ ? "WORKER" : "WARE", serial_, owner_.player_number());
+		return nullptr;
+	}
+
+	best_supp_flag = best_route.get_flag_raw(game, 0);
+
+	// Ugly as hell, but I'm not sure how slow storing them in a std::map<Flag*, Supply*> would be
+	int i = 0;
+	for ( ; possible_flags.at(i) != best_supp_flag ; ++i) {
+	}
+	best_supply = possible_supplies.at(i);
+
+	cost = best_route.get_totalcost();
 	return best_supply;
 }
 
@@ -1256,15 +1264,16 @@ void Economy::recalc_districts() {
 		}
 	}
 
+/*
 	// Second pass: Identify minimal monodirectional distances between warehouses.
 	constexpr uint32_t kClusterThreshold = 12 * 1800;  // 12 nodes on flat terrain.
 	std::map<std::pair<Warehouse*, Warehouse*>, uint32_t> warehouse_distances;
 
-	/* When this function is called shortly before or after an economy split, it can happen that
+	/ * When this function is called shortly before or after an economy split, it can happen that
 	 * the warehouse_ vector is temporarily unsanitized, and there may be warehouses missing or
 	 * it may contain warehouses belonging to a different economy. So we need to iterate over all
 	 * flags instead to get exactly those warehouses that truly belong to us.
-	 */
+	 * /
 	for (Flag* flag1 : flags_) {
 		Warehouse* wh1 = flag1->get_district_center(type());
 
@@ -1357,6 +1366,8 @@ void Economy::recalc_districts() {
 		   type(), warehouse_to_district.at(flag->get_district_center(type())));
 	}
 	nr_districts_ = all_clusters.size();
+*/
+nr_districts_ = warehouses_.size();
 }
 
 /** Cancel cross-district imports when suitable wares become available locally. */
