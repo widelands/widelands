@@ -671,7 +671,7 @@ msgid ""
 "But a war is expensive, and not always the path leading to the goal. When "
 "setting up a new game, you can also choose peaceful win conditions. You "
 "should definitely try them out, they’re worth it."
-msgstr "Vojna je však drahá a nie je vždy cestou vedúcou k cieľu. Pri nastavovaní novej hry si môžete zvoliť aj mierumilovné podmienky na víťazstvo. Určite stoja za vyskúšanie."
+msgstr "Vojna je však drahá a nie je vždy cestou vedúcou k cieľu. Pri nastavovaní novej hry si môžete zvoliť aj mierumilovné podmienky výhry. Určite stoja za vyskúšanie."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:280
 msgid ""
