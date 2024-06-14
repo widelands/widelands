@@ -29,6 +29,7 @@
 enum class LogType {
 	kInfo,     // normal info messages
 	kDebug,    // additional debug output
+	kLua,      // output from Lua scripts
 	kWarning,  // warnings
 	kError     // fatal errors
 };
