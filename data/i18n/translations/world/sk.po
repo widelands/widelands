@@ -753,7 +753,7 @@ msgstr "Artefakty"
 
 #: ../../../../data/world/init.lua:207
 msgid "These immovables are used by the win condition “Artifacts”."
-msgstr "Tieto nehybné objekty používa podmienka na víťazstvo „Artefakty“."
+msgstr "Tieto nehybné objekty používa podmienka výhry „Artefakty“."
 
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../../../data/world/init.lua:220
