@@ -733,6 +733,7 @@ int LuaDescriptions::new_tribe(lua_State* L) {
 
       - Resource_
       - Terrain_
+      - Ware_
       - Worker_
       - Building_
       - Productionsite_
@@ -766,6 +767,21 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          :const:`"textures"`                           **textures_and_fps** (*table*)           1.1
          ============================================  =======================================  =============
 
+      .. table:: ``"ware"``
+         :name: ware
+         :width: 100%
+         :widths: 40,50,10
+         :align: left
+
+         ============================================  =======================================  =============
+         Property descriptor                           Values                                   Since version
+         ============================================  =======================================  =============
+         :const:`"target_quantity"`                    **tribe**          (*string*),           1.3
+                                                       **amount**         (*int* or *nil*)
+         :const:`"preciousness"`                       **tribe**          (*string*),           1.3
+                                                       **amount**         (*int*)
+         ============================================  =======================================  =============
+
       .. table:: ``"worker"``
          :name: worker
          :width: 100%
@@ -782,6 +798,9 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          :const:`"buildcost"`, :const:`"set"`          **ware_name**      (*string*),           1.2
                                                        **amount**         (*int*)
          :const:`"buildcost"`, :const:`"remove"`       **ware_name**      (*string*),           1.2
+         :const:`"target_quantity"`                    **amount**         (*int* or *nil*)      1.3
+         :const:`"preciousness"`                       **tribe**          (*string*),           1.3
+                                                       **amount**         (*int*)
          ============================================  =======================================  =============
 
       .. table:: ``"building"``
@@ -1121,6 +1140,11 @@ void LuaDescriptions::do_modify_worker(lua_State* L,
 		worker_descr.set_needed_experience(luaL_checkuint32(L, 5));
 	} else if (property == "becomes") {
 		worker_descr.set_becomes(descrs, luaL_checkstring(L, 5));
+	} else if (property == "target_quantity") {
+		worker_descr.set_default_target_quantity(lua_isnil(L, 5) ? Widelands::kInvalidWare :
+                                                                 luaL_checkuint32(L, 5));
+	} else if (property == "preciousness") {
+		worker_descr.set_preciousness(luaL_checkstring(L, 5), luaL_checkuint32(L, 6));
 	} else if (property == "programs") {
 		const std::string cmd = luaL_checkstring(L, 5);
 		const std::string prog_name = luaL_checkstring(L, 6);
@@ -1348,9 +1372,21 @@ void LuaDescriptions::do_modify_immovable(lua_State* L,
 }
 
 void LuaDescriptions::do_modify_ware(lua_State* L,
-                                     const std::string& /* unit_name */,
-                                     const std::string& /* property */) {
-	report_error(L, "modify_unit for wares not yet supported");
+                                     const std::string& unit_name,
+                                     const std::string& property) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
+	Widelands::WareDescr& ware_descr = *descrs.get_mutable_ware_descr(descrs.load_ware(unit_name));
+
+	if (property == "target_quantity") {
+		ware_descr.set_default_target_quantity(luaL_checkstring(L, 5), lua_isnil(L, 6) ?
+                                                                        Widelands::kInvalidWare :
+                                                                        luaL_checkuint32(L, 6));
+	} else if (property == "preciousness") {
+		ware_descr.set_preciousness(luaL_checkstring(L, 5), luaL_checkuint32(L, 6));
+	} else {
+		report_error(L, "modify_unit: invalid ware property '%s'", property.c_str());
+	}
 }
 
 void LuaDescriptions::do_modify_trainingsite(lua_State* L,
