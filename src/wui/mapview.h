@@ -162,6 +162,10 @@ public:
 	void increase_zoom();
 	// Zoom out a bit
 	void decrease_zoom();
+	// Zoom to max
+	void zoom_to_max();
+	// Zoom to min
+	void zoom_to_min();
 
 	// True if the user is currently dragging the map.
 	bool is_dragging() const;
