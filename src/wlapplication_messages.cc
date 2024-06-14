@@ -116,6 +116,11 @@ void fill_parameter_vector() {
 		false},
 	  /// Misc
 	  {"", "nosound", "", _("Start the game with sound disabled."), false},
+	  /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
+	  /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
+	  /** TRANSLATORS: * marks the default value */
+	  {"", "play_intro_music", _("[true*|false]"),
+		_("Play the intro music at startup and show splash image until it ends."), true},
 	  {"", "fail-on-lua-error", "", _("Force Widelands to crash when a Lua error occurs."), false},
 	  {"", "replay_lifetime", _("n"), _("Delete replays automatically after `n` weeks."), true},
 	  {"", "ai_training", "",
@@ -140,9 +145,6 @@ void fill_parameter_vector() {
 	  {"", "rolling_autosave", _("n"),
 		/** TRANSLATORS: `n` references a numerical placeholder */
 		_("Use `n` files for rolling autosaves."), true},
-	  /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
-	  /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
-	  /** TRANSLATORS: * marks the default value */
 	  {"", "skip_autosave_on_inactivity", _("[true*|false]"),
 		_("Do not create an autosave when the user has been inactive since the last autosave."),
 		true},
@@ -224,7 +226,9 @@ void fill_parameter_vector() {
 		_("y"),
 		/** TRANSLATORS: `y` references a window height placeholder */
 		_("Height `y` of the window in pixel."), false},
-	  {"", "sdl_cursor", _("[true*|false]"), _("Whether to use the mouse cursor provided by SDL."),
+	  {"", "sdl_cursor", _("[true*|false]"),
+		_("Whether to let the system draw the mouse cursor. Disable it only if the cursor doesn't "
+		  "appear right, or if you want it to be visible in screenshots or screencasts."),
 		true},
 	  {"", "tooltip_accessibility_mode", _("[true|false*]"), _("Whether to use sticky tooltips."),
 		true},

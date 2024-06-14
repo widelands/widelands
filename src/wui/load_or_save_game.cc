@@ -21,6 +21,7 @@
 #include <memory>
 
 #include "build_info.h"
+#include "graphic/mouse_cursor.h"
 #include "logic/filesystem_constants.h"
 #include "ui_basic/messagebox.h"
 
@@ -59,6 +60,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
      basedir_(filetype_ == FileType::kReplay ? kReplayDir : kSaveDir),
      curdir_(basedir_),
      game_(g) {
+
+	g_mouse_cursor->change_wait(true);
 
 	switch (filetype_) {
 	case FileType::kReplay:
