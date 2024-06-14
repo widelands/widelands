@@ -626,7 +626,7 @@ return {
       fsmenu_intro = {
          color = { 192, 192, 128 },
          face = fs_font_face,
-         size = 16,
+         size = 24,
          bold = true,
          shadow = true
       },

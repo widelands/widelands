@@ -94,6 +94,8 @@ public:
 		pf_snap_target = 1 << 14,
 		// Layouting hint that this panel is expected to grow to some very large sizes.
 		pf_unlimited_size = 1 << 15,
+		// Use the "wait" mouse cursor when this panel is active.
+		pf_unresponsive = 1 << 16,
 	};
 
 	/** The Z ordering of overlapping panels; highest value is always on top. */
