@@ -2,9 +2,13 @@
 
 // Attributes.
 attribute vec2 attr_position;
+attribute vec3 attr_color;
 
 uniform float u_z_value;
 
+varying vec3 var_color;
+
 void main() {
 	gl_Position = vec4(attr_position, u_z_value, 1.);
+	var_color = attr_color;
 }
