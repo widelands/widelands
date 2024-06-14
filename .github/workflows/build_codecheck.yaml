@@ -10,20 +10,26 @@ jobs:
       uses: actions/checkout@v4
       with:
         fetch-depth: 1
-    - name: Installing dependencies
-      run: sh ./.github/scripts/install_deps.sh
     - name: Test
       run: |
         ./cmake/codecheck/run_tests.py
     - name: Check
       run: |
-        mkdir build
-        cd build
-        cmake .. -DCMAKE_BUILD_TYPE:STRING="Debug"
-        TERM=dumb make -j1 codecheck 2>&1 | tee codecheck.out
+        # to show failures clearly on github
+        echo ::add-matcher::.github/problem_matchers/file_line_column_msg.json
+        #
+        set -o pipefail # to keep return value
+        #
+        # for all c++ source files excluding /third_party/
+        ./cmake/codecheck/CodeCheck.py src/*.cc src/*.h src/[^t][^h]*/ |
+          tee codecheck.out
+        # exit code of CodeCheck.py is also 0 if failures detected
+        #
+        echo ::remove-matcher owner=file_line_column_msg:: # removes the problem matcher
+      timeout-minutes: 2
     - name: Report
       run: |
-        if grep '^[/_.a-zA-Z]\+:[0-9]\+:' build/codecheck.out; then
+        if [ -s codecheck.out ] ; then
           echo "You have codecheck warnings (see above). Please fix."
           exit 1
         else
