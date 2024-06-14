@@ -1631,7 +1631,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:8
 msgctxt "amazons_building"
 msgid "Rare Tree Plantation"
-msgstr ""
+msgstr "Plantáž vzácnych drevín"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
@@ -1655,7 +1655,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua:8
 msgctxt "amazons_building"
 msgid "Rope Weaver Booth"
-msgstr ""
+msgstr "Výrobňa lán"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua:52
@@ -1702,7 +1702,7 @@ msgstr "konštruovanie lode"
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:8
 msgctxt "amazons_building"
 msgid "Stone Workshop"
-msgstr ""
+msgstr "Kamenárstvo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:87
@@ -1830,7 +1830,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:8
 msgctxt "amazons_building"
 msgid "Stone Mine"
-msgstr ""
+msgstr "Kamenná baňa"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:51

@@ -6,7 +6,7 @@
 # Javier Mora <morehash@gmail.com>, 2015
 # Madkat Here, 2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020,2023
-# Gontzal Pujana Onaindia <juchuf@gmail.com>, 2017
+# Thadah D. Denyse <gontzalpujana@protonmail.com>, 2017
 # Walter Benkel, 2020
 msgid ""
 msgstr ""

@@ -16316,7 +16316,7 @@ msgstr "Ovládanie tabuliek"
 msgid ""
 "In tables that allow the selection of multiple entries, the following key "
 "combinations are available:"
-msgstr ""
+msgstr "V tabuľkách, ktoré umožňujú výber viacerých položiek, sú k dispozícii nasledujúce klávesové skratky:"
 
 #. TRANSLATORS: This is an access key combination.
 #: ../../../../data/tribes/scripting/help/controls.lua:28

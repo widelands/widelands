@@ -659,7 +659,7 @@ bool Game::run(StartGameType const start_game_type,
 			training_wheels_wanted_ = false;
 #endif
 			iterate_players_existing_novar(p, nr_players, *this) {
-				if (!map().get_starting_pos(p)) {
+				if (!map().get_starting_pos(p).valid()) {
 					throw WLWarning(_("Missing starting position"),
 					                _("Widelands could not start the game, because player %u has "
 					                  "no starting position.\n"
@@ -771,7 +771,7 @@ bool Game::run(StartGameType const start_game_type,
 		;
 #endif
 
-	g_sh->change_music(Songset::kIngame, 1000);
+	g_sh->change_music(Songset::kIngame);
 
 	state_ = gs_running;
 
@@ -793,8 +793,6 @@ bool Game::run(StartGameType const start_game_type,
 	get_ibase()->run<UI::Panel::Returncodes>();
 
 	state_ = gs_ending;
-
-	g_sh->change_music(Songset::kMenu, 1000);
 
 	cleanup_objects();
 	delete_pending_player_commands();
