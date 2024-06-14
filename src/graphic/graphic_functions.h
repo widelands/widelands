@@ -25,4 +25,6 @@
 
 void draw_game_tip(RenderTarget& rt, const Recti& bounds, const std::string&, unsigned opacity = 1);
 
+void draw_splashscreen(RenderTarget& rt, const std::string& footer_message, float opacity = 1.0f);
+
 #endif  // end of include guard: WL_GRAPHIC_GRAPHIC_FUNCTIONS_H
