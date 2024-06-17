@@ -20,6 +20,7 @@
 
 #include <algorithm>
 #include <memory>
+#include <set>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -742,8 +743,9 @@ void Economy::start_request_timer(const Duration& delta) {
 // make these members, replacing available_supplies_
 // (only kept around to avoid always creating and destroying them)
 static std::vector<Supply*> possible_imports;
-static std::vector<Supply*> possible_supplies;  // std::map<Flag*, Supply*> ?
-static std::vector<Widelands::RoutingNode*> possible_flags;  // std::set ?
+static std::vector<Supply*> possible_supplies;
+static std::vector<Widelands::RoutingNode*> possible_flags;
+static std::set<Widelands::Flag*> seen_flags;
 
 constexpr uint32_t kTryImportThreshold = 8;  // straight line distance in nodes count
 
@@ -760,6 +762,7 @@ Economy::find_best_supply(Game& game, const Request& req, int32_t& cost, const u
 	possible_imports.clear();
 	possible_supplies.clear();
 	possible_flags.clear();
+	seen_flags.clear();
 
 	for (size_t i = 0; i < supplies_.get_nrsupplies(); ++i) {
 		Supply& supp = supplies_[i];
@@ -778,6 +781,12 @@ Economy::find_best_supply(Game& game, const Request& req, int32_t& cost, const u
 		}
 
 		Widelands::Flag& supp_flag = supp.get_position(game)->base_flag();
+		// std::set seems to be efficient enough to make this worth it. This way we don't waste
+		// time on multiple items in e.g. a warehouse. Seems to be a slight gain in most situations,
+		// and also only a slight loss in the rest.
+		if (!seen_flags.insert(&supp_flag).second) {
+			continue;  // we've already seen an equivalent supply
+		}
 
 		// If we are searching for a new supply, then we consider all available local ones within
 		// the requesting district for safety, because district assignment considers actual
@@ -798,7 +807,8 @@ Economy::find_best_supply(Game& game, const Request& req, int32_t& cost, const u
 		dist_min = std::min(
 		   dist_min, game.map().calc_distance(target_flag.get_position(), supp_flag.get_position()));
 
-		possible_supplies.emplace_back(&supplies_[i]);
+		// Not nice, but std::map is too slow and we'll also need the flags separately.
+		possible_supplies.emplace_back(&supp);
 		possible_flags.emplace_back(&supp_flag);
 	}
 
@@ -850,9 +860,10 @@ Economy::find_best_supply(Game& game, const Request& req, int32_t& cost, const u
 
 	best_supp_flag = best_route.get_flag_raw(game, 0);
 
-	// Ugly as hell, but I'm not sure how slow storing them in a std::map<Flag*, Supply*> would be
+	// Ugly as hell, but the whole function is still much faster than with a std::map
 	int i = 0;
-	for ( ; possible_flags.at(i) != best_supp_flag ; ++i) {
+	while (possible_flags.at(i) != best_supp_flag) {
+		++i;
 	}
 	best_supply = possible_supplies.at(i);
 
