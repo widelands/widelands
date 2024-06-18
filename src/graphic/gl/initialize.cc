@@ -266,7 +266,7 @@ SDL_GLContext initialize(
 	{                                                                                               \
 		int value;                                                                                   \
 		SDL_GL_GetAttribute(x, &value);                                                              \
-		log_info("Graphics: %s is %d\n", #x, value);                                                 \
+		verb_log_info("Graphics: %s is %d\n", #x, value);                                            \
 	}
 
 	LOG_SDL_GL_ATTRIBUTE(SDL_GL_RED_SIZE)

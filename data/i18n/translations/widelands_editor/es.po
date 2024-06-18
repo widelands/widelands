@@ -6,7 +6,7 @@
 # Juanjo Cb <jjcabrejas@gmail.com>, 2019
 # Madkat Here, 2016
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
-# Gontzal Pujana Onaindia <juchuf@gmail.com>, 2017
+# Thadah D. Denyse <gontzalpujana@protonmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"

@@ -205,7 +205,7 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 			Widelands::Coords starting_pos;
 			for (uint32_t p = 1; p <= map.get_nrplayers(); p++) {
 				starting_pos = map.get_starting_pos(p);
-				if (!static_cast<bool>(starting_pos)) {
+				if (!starting_pos.valid()) {
 					continue;
 				}
 				uint32_t dist = map.calc_distance(f, starting_pos);
@@ -333,7 +333,7 @@ void do_draw_minimap(Texture& texture,
 				// vision on the field.
 				// If she never had vision, field.vision will be kUnexplored.
 				const auto& field = player->fields()[i];
-				vision = field.vision;
+				vision = field.vision.state();
 				owner = field.owner;
 			}
 
