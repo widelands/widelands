@@ -30,7 +30,7 @@ namespace math {
 		try {                                                                                        \
 			return function(str);                                                                     \
 		} catch (...) {                                                                              \
-			throw WLWarning("", "Expected a " #type ", received: %s", str.c_str());                   \
+			throw WLWarning("", "Expected a " #type ", received: '%s'", str.c_str());                 \
 		}                                                                                            \
 	}
 
