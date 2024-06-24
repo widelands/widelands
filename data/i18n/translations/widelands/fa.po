@@ -55,13 +55,13 @@ msgstr "هیچ سنگی در اطراف موقعیت شروع شما نیست. �
 
 #: ../../../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
-msgstr ""
+msgstr "در اطراف به اندازه کافی درخت نیست"
 
 #: ../../../../data/scripting/infrastructure.lua:294
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "درخت به تعداد کافی در اطراف موقعیت شروع شما نیست. از این رو، برای راه اندازی اقتصادتان منابع اضافی دریافت میکنید."
 
 #: ../../../../data/scripting/messages.lua:66
 #: ../../../../data/scripting/messages.lua:68
@@ -72,11 +72,11 @@ msgstr "وضعیت"
 
 #: ../../../../data/scripting/messages.lua:293
 msgid "New Objective"
-msgstr ""
+msgstr "هدف جدید"
 
 #: ../../../../data/scripting/messages.lua:295
 msgid "New Objectives"
-msgstr ""
+msgstr "اهداف جدید"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
@@ -179,7 +179,7 @@ msgstr "."
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../../../src/base/time_string.cc:94
 msgid "Jan"
-msgstr ""
+msgstr "ژانویه"
 
 #. * TRANSLATORS: February. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -188,7 +188,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../../../src/base/time_string.cc:100
 msgid "Feb"
-msgstr ""
+msgstr "فوریه"
 
 #. * TRANSLATORS: March. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -197,7 +197,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../../../src/base/time_string.cc:106
 msgid "Mar"
-msgstr ""
+msgstr "مارس"
 
 #. * TRANSLATORS: April. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -206,7 +206,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../../../src/base/time_string.cc:112
 msgid "Apr"
-msgstr ""
+msgstr "آوریل"
 
 #. * TRANSLATORS: May. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -215,7 +215,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../../../src/base/time_string.cc:118
 msgid "May"
-msgstr ""
+msgstr "مه"
 
 #. * TRANSLATORS: June. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -224,7 +224,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../../../src/base/time_string.cc:124
 msgid "Jun"
-msgstr ""
+msgstr "ژوئن"
 
 #. * TRANSLATORS: July. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -233,7 +233,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../../../src/base/time_string.cc:130
 msgid "Jul"
-msgstr ""
+msgstr "ژوئیه"
 
 #. * TRANSLATORS: August. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -242,7 +242,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../../../src/base/time_string.cc:136
 msgid "Aug"
-msgstr ""
+msgstr "اوت"
 
 #. * TRANSLATORS: September. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -251,7 +251,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../../../src/base/time_string.cc:142
 msgid "Sep"
-msgstr ""
+msgstr "سپتامبر"
 
 #. * TRANSLATORS: October. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -260,7 +260,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../../../src/base/time_string.cc:148
 msgid "Oct"
-msgstr ""
+msgstr "اکتبر"
 
 #. * TRANSLATORS: November. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -269,7 +269,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../../../src/base/time_string.cc:154
 msgid "Nov"
-msgstr ""
+msgstr "نوامبر"
 
 #. * TRANSLATORS: December. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -277,7 +277,7 @@ msgstr ""
 #. * TRANSLATORS: definition if there is one for your language.
 #: ../../../../src/base/time_string.cc:159
 msgid "Dec"
-msgstr ""
+msgstr "دسامبر"
 
 #. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
@@ -390,7 +390,7 @@ msgstr "خروج از ویرایشگر"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:291
 msgid "Change height"
-msgstr ""
+msgstr "تغییر ارتفاع"
 
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:294
