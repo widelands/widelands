@@ -31,6 +31,7 @@ struct BaseRouteAStar {
 	BaseRouteAStar(Router& router, WareWorker type);
 
 	void routeto(RoutingNode& to, IRoute& route);
+	RoutingNode& route_start(RoutingNode& to);
 
 protected:
 	RoutingNode::Queue open_;

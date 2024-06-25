@@ -167,9 +167,10 @@ public:
 	}
 
 	/// Whether the economy needs more of this ware/worker type.
+	/// If a flag is given, consider only its district, otherwise the entire economy.
 	/// Productionsites may ask this before they produce, to avoid depleting a
 	/// ware type by overproducing another from it.
-	[[nodiscard]] bool needs_ware_or_worker(DescriptionIndex) const;
+	[[nodiscard]] bool needs_ware_or_worker(DescriptionIndex, const Flag* flag) const;
 
 	[[nodiscard]] const TargetQuantity& target_quantity(DescriptionIndex const i) const {
 		return target_quantities_[i];
@@ -208,6 +209,8 @@ public:
 		start_request_timer();
 	}
 
+	[[nodiscard]] bool same_district(const PlayerImmovable& p1, const PlayerImmovable& p2) const;
+
 protected:
 	static Serial last_economy_serial_;
 
@@ -239,7 +242,7 @@ private:
 
 	void start_request_timer(const Duration& delta = Duration(200));
 
-	Supply* find_best_supply(Game&, const Request&, int32_t& cost);
+	Supply* find_best_supply(Game&, const Request&, int32_t& cost, bool allow_import);
 	void process_requests(Game&, RSPairStruct* supply_pairs);
 	void balance_requestsupply(Game&);
 	void handle_active_supplies(Game&);
@@ -247,6 +250,9 @@ private:
 	void create_requested_worker(Game&, DescriptionIndex);
 
 	bool has_request(Request&) const;
+
+	void check_imports(Game& game);
+	void recalc_districts();
 
 	/*************/
 	/* Variables */
@@ -261,6 +267,7 @@ private:
 	Flags flags_;
 	WareList wares_or_workers_;  ///< virtual storage with all wares/workers in this Economy
 	std::vector<Warehouse*> warehouses_;
+	uint32_t nr_districts_{0U};
 
 	WareWorker type_;  ///< whether we are a WareEconomy or a WorkerEconomy
 
