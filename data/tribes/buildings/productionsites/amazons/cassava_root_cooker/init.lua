@@ -60,10 +60,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
          descname = _("baking bread"),
          actions = {
-            -- time total: 33
+            -- time total: 5.4 + 18 + 10 + 3.6 = 37 sec
             "return=skipped unless economy needs amazons_bread",
             "consume=cassavaroot water:2",
-            "sleep=duration:5s",
+            "sleep=duration:5s400ms",
             "animate=working duration:18s",
             "sleep=duration:10s",
             "produce=amazons_bread"

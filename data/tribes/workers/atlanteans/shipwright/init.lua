@@ -17,6 +17,7 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       buildship = {
+         -- worker time: 0.5 + 5 = 5.5 sec
          "walk=object-or-coords",
          "plant=attrib:atlanteans_shipconstruction unless object",
          "playsound=sound/sawmill/sawmill priority:80% allow_multiple",
@@ -26,6 +27,9 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       buildferry = {
+         -- steps from building to water: 2-8
+         -- min. worker time: 2 * 2 * 1.8 + 10 = 17.2 sec
+         -- max. worker time: 2 * 8 * 1.8 + 10 = 38.8 sec
          "findspace=size:swim radius:5 ferry",
          "walk=coords",
          "animate=idle duration:10s",

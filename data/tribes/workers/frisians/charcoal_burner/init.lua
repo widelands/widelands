@@ -16,6 +16,9 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       collect_coal = {
+         -- steps from building to pond: 2-11
+         -- min. worker time: 2 * 2 * 1.8 + 8 = 15.2 sec
+         -- max. worker time: 2 * 11 * 1.8 + 8 = 47.6 sec
          "findobject=attrib:pond_coal radius:8",
          "walk=object",
          "animate=collecting duration:8s",
@@ -24,6 +27,9 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       make_stack = {
+         -- steps from building to pond: 2-11
+         -- min. worker time: 2 * 2 * 1.8 + 14 + 1 = 22.2 sec
+         -- max. worker time: 2 * 11 * 1.8 + 14 + 1 = 54.6 sec
          "findobject=attrib:pond_dry radius:8",
          "walk=object",
          "animate=stacking_1 duration:14s",

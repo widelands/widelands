@@ -49,9 +49,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start producing charcoal because ...
          descname = _("producing charcoal"),
          actions = {
+            -- time total: 30.4 + 90 + 3.6 = 124 sec
             "return=skipped unless economy needs coal",
             "consume=log:6",
-            "sleep=duration:30s",
+            "sleep=duration:30s400ms",
             "animate=working duration:90s", -- Charcoal fires will burn for some days in real life
             "produce=coal"
          }

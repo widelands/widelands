@@ -64,9 +64,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
          descname = _("hardening wood"),
          actions = {
+            -- time total: 43.4 + 24 + 3.6 = 71 sec
             "return=skipped unless economy needs blackwood",
             "consume=log:2",
-            "sleep=duration:43s",
+            "sleep=duration:43s400ms",
             "playsound=sound/barbarians/blackwood priority:60%",
             "animate=working duration:24s",
             "produce=blackwood"
