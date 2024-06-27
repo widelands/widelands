@@ -179,7 +179,7 @@ The ``windows`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/
 * **window_border_focused** (RGBA): The color to blend over the border of the window if it has focus.
 * **window_border_unfocused** (RGBA): The color to blend over the border of the window if it does not have focus.
 * **background**, **border_top**, **border_bottom**, **border_right**, **border_left**, **button_close**, **button_pin**, **button_unpin**, **button_minimize**, **button_unminimize** (strings): The paths to the corresponding icons. See above for the recommended directory structure.
-* **button_spacing** (int): The spacing around the window titlebar buttons. Introduced in version 1.3.
+* **button_spacing** (int) (*optional*, default ``1``): The spacing around the window titlebar buttons. Introduced in version 1.3.
 
 buttons
 ~~~~~~~

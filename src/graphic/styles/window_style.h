@@ -111,6 +111,7 @@ struct WindowStyleInfo {
 	[[nodiscard]] int button_spacing() const {
 		return button_spacing_;
 	}
+	// TODO(Nordfriese): Allow buttons with arbitrary widths
 	[[nodiscard]] int button_size() const {
 		return top_border_thickness() - 2 * button_spacing();
 	}
