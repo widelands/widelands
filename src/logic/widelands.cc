@@ -30,8 +30,9 @@ std::string soldier_preference_icon(const SoldierPreference p) {
 		return "↓";
 	case SoldierPreference::kAny:
 		return "=";
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 }  // namespace Widelands
