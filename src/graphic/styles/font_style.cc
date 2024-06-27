@@ -55,6 +55,7 @@ const std::string FontStyleInfo::face_to_string() const {
 		return "serif";
 	case Face::kCondensed:
 		return "condensed";
+	case Face::kSans:
 	default:
 		return "sans";
 	}

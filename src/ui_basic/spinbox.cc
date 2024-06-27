@@ -605,6 +605,8 @@ const std::string SpinBox::unit_text(int32_t value, const bool change) const {
 	default:
 		NEVER_HERE();
 	}
+
+	NEVER_HERE();
 }
 
 }  // namespace UI

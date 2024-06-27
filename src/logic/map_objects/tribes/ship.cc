@@ -1679,6 +1679,8 @@ void Ship::battle_update(Game& game) {
 	default:
 		NEVER_HERE();
 	}
+
+	NEVER_HERE();
 }
 
 void Ship::ship_update_idle(Game& game, Bob::State& state) {
@@ -1951,6 +1953,8 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 	default:
 		NEVER_HERE();
 	}
+
+	NEVER_HERE();
 }
 
 void Ship::set_ship_state_and_notify(ShipStates state, NoteShip::Action action) {

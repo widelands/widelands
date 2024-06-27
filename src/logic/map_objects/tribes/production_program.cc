@@ -777,6 +777,7 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 		case ProgramResult::kNone: {
 			// TODO(GunChleoc): kNone same as kSkipped - is this on purpose?
 			result_string = format(
+			   /** TRANSLATORS: "Skipped working because the economy needs the ware '%s'" */
 			   _("Skipped %1$s because %2$s"), ps.top_state().program->descname(), condition_string);
 		} break;
 		default:
