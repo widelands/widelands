@@ -97,12 +97,16 @@ int16_t MainMenu::calc_desired_window_height(const UI::Window::WindowLayoutID id
 
 int16_t MainMenu::calc_desired_window_x(const UI::Window::WindowLayoutID id) {
 	const UI::WindowStyleInfo& wsi = g_style_manager->window_style(UI::WindowStyle::kFsMenu);
-	return (get_w() - (calc_desired_window_width(id) + wsi.left_border_thickness() + wsi.right_border_thickness())) / 2;
+	return (get_w() - (calc_desired_window_width(id) + wsi.left_border_thickness() +
+	                   wsi.right_border_thickness())) /
+	       2;
 }
 
 int16_t MainMenu::calc_desired_window_y(const UI::Window::WindowLayoutID id) {
 	const UI::WindowStyleInfo& wsi = g_style_manager->window_style(UI::WindowStyle::kFsMenu);
-	return (get_h() - (calc_desired_window_height(id) + wsi.top_border_thickness() + wsi.bottom_border_thickness())) / 2;
+	return (get_h() - (calc_desired_window_height(id) + wsi.top_border_thickness() +
+	                   wsi.bottom_border_thickness())) /
+	       2;
 }
 
 MainMenu::MainMenu(const bool skip_init)
