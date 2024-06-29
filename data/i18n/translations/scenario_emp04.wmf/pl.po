@@ -554,11 +554,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:311
 msgid "Amalea Investigates"
-msgstr ""
+msgstr "Amalea prowadzi dochodzenie"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:312
 msgid "Amalea is nodding thoughtfully…"
-msgstr ""
+msgstr "Amalea kiwa głową w zamyśleniu..."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:314
@@ -569,6 +569,11 @@ msgid ""
 " You can hardly find a grain of dust left in there: no wares, no tools, no "
 "workers and no soldiers either."
 msgstr ""
+"Lucjuszu moim zdaniem to znowu będzie bardzo trudne wyzwanie. Jednak obawiam"
+" się, że jesteśmy skazani na radzenie sobie z tą sytuacją. Co gorsza, "
+"spotkała mnie niemiła niespodzianka w naszych magazynach: wszystkie są "
+"puste. Trudno znaleźć tam choćby ziarenko kurzu: żadnych towarów, żadnych "
+"narzędzi, żadnych robotników, żadnych żołnierzy."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:317
@@ -581,6 +586,13 @@ msgid ""
 "of the lumberjacks’ houses and the wells seem also to be inefficient or worn"
 " out."
 msgstr ""
+"Zatem przede wszystkim potrzebujemy materiałów budowlanych, aby zacząć "
+"naprawiać błędy popełnione przez niesławnego sekretarza. Myślę, że "
+"powinniśmy spróbować rozebrać nieproduktywne małe budynki, aby odzyskać z "
+"nich trochę materiałów budowlanych i zebrać je w naszej kwaterze głównej. Z "
+"tego, co teraz widzę, domy rybaków i kamieniołomy nie mają w pobliżu żadnych"
+" surowców. Wszystkie domy drwali i studnie również wydają się nieefektywne "
+"lub zużyte."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:320
@@ -589,6 +601,9 @@ msgid ""
 "need to closely monitor them when we are able to supply them. Until then we "
 "shouldn’t do anything with them."
 msgstr ""
+"W przypadku pozostałych budynków nie możemy jeszcze stwierdzić, czy działają"
+" prawidłowo. Musimy je uważnie monitorować, kiedy już będziemy w stanie je "
+"zaopatrywać. Do tego czasu nie powinniśmy z nimi nic robić."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:323
@@ -598,15 +613,20 @@ msgid ""
 "production in all bigger buildings and get the workers some rest until we "
 "have produced some of their input wares."
 msgstr ""
+"Z wyjątkiem tego, że może powinniśmy ograniczyć do zera nakład wszystkich "
+"budynków, które zużywają jakiekolwiek materiały budowlane. A może moglibyśmy"
+" nawet wstrzymać produkcję we wszystkich większych budynkach i dać "
+"pracownikom odpocząć do czasu, aż wyprodukujemy część ich towarów "
+"wejściowych."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:330
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:590
 msgid "Amalea has Bad News"
-msgstr ""
+msgstr "Amalea ma złe wieści"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:331
 msgid "Amalea recommends…"
-msgstr ""
+msgstr "Amalea rekomenduje..."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:333
@@ -614,6 +634,8 @@ msgid ""
 "Brother, I’m really worried that I have to deliver bad news again. As you "
 "can see, our farms aren’t producing anything and we can’t dismantle them."
 msgstr ""
+"Bracie, martwię się, że znowu muszę przekazać złe wieści. Jak widzisz nasze "
+"farmy nic nie produkują i nie możemy ich rozebrać."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:336
@@ -622,6 +644,9 @@ msgid ""
 "instructions on how to construct and operate farms. Therefore they have zero"
 " productivity and the constructors don’t know how to dismantle them either."
 msgstr ""
+"Sytuację tą wywołał smutny fakt, że nasi ludzie stracili instrukcję "
+"dotyczącą budowy i obsługi farm. Z tego powodu mają zerową produktywność, a "
+"konstruktorzy też nie wiedzą, jak je zdemontować."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:339
@@ -630,6 +655,9 @@ msgid ""
 "operation of farms. One older constructor told me that they might have been "
 "concealed in a cave in the hills east of our border."
 msgstr ""
+"Musimy zatem pilnie odzyskać plany dotyczące budowy i obsługi farm. Jeden ze"
+" starszych konstruktorów powiedział mi, że mogą być ukryte w jaskini na "
+"wzgórzach na wschód od naszej granicy."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:342
@@ -637,6 +665,8 @@ msgid ""
 "Until we have found the plans, the only option for our farms is to destroy "
 "them."
 msgstr ""
+"Dopóki nie znajdziemy planów, jedyną opcją dla naszych farm jest ich "
+"zniszczenie."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:349
 msgid "Amalea Looks Confident"

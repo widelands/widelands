@@ -6583,7 +6583,7 @@ msgstr "(C) %1%-%2% de l’equip de desenvolupament del Widelands • Sota la Ll
 
 #: ../../../../src/ui_fsmenu/main.cc:848
 msgid "Click for the main menu"
-msgstr ""
+msgstr "Feu-hi clic per a anar al menú principal."
 
 #: ../../../../src/ui_fsmenu/main.cc:926
 msgid "Desyncing Add-On Found"
@@ -7068,7 +7068,7 @@ msgstr "Mida de la finestra"
 #. * TRANSLATORS: short description for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:155
 msgid "Let the system draw the mouse cursor"
-msgstr ""
+msgstr "Permet que el cursor el dibuixi el sistema"
 
 #. * TRANSLATORS: tooltip text for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:157
@@ -7077,7 +7077,7 @@ msgid ""
 "and the cursor appears frozen during long operations. Disable it only if the"
 " cursor doesn’t appear right, or if you want it to be visible in screenshots"
 " or screencasts."
-msgstr ""
+msgstr "Si teniu dubtes, deixeu-ho activat. Quan està desactivat, les actualitzacions del cursor poden ser lentes i que aparegui congelat durant operacions llargues. Desactiveu-ho només si el cursor no es veu bé o si voleu que sigui visible a les captures de pantalla o a les reproduccions de vídeo."
 
 #: ../../../../src/ui_fsmenu/options.cc:166
 msgid "Accessibility mode for tooltips"
@@ -10991,14 +10991,14 @@ msgstr "Podeu reproduir la vostra música durant les partides posant les peces e
 
 #: ../../../../src/wui/sound_options.cc:161
 msgid "Play the intro music at startup"
-msgstr ""
+msgstr "Reprodueix la música d'inici"
 
 #: ../../../../src/wui/sound_options.cc:163
 msgid ""
 "Whether to play the intro music when Widelands is started. The splashscreen "
 "is only closed automatically when the intro music ends, but can be skipped "
 "by a keypress or a mouse click."
-msgstr ""
+msgstr "Indica si s'ha de reproduir la música d'introducció quan s'engega el Widelands. La imatge de presentació només es tanca automàticament quan acaba la música, però es pot saltar si es prem una tecla o es fa un clic amb el ratolí."
 
 #: ../../../../src/wui/sound_options.cc:172
 msgctxt "sound_options"
