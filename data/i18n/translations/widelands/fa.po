@@ -395,18 +395,18 @@ msgstr "تغییر ارتفاع"
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:297
 msgid "Change the terrain height"
-msgstr ""
+msgstr "تغییر بلندای زمینگان"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:304
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:98
 msgid "Random height"
-msgstr ""
+msgstr "بلندای تصادفی"
 
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:307
 msgid "Set the terrain height to random values"
-msgstr ""
+msgstr "گذاشتن مقادیر تصادفی برای بلندای زمینگان"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:314
@@ -414,24 +414,24 @@ msgstr ""
 #: ../../../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:92
 #: ../../../../src/wui/minimap.cc:158
 msgid "Terrain"
-msgstr ""
+msgstr "زمینگان"
 
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:317
 msgid "Change the map’s terrain"
-msgstr ""
+msgstr "تغییر زمینگان نقشه"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:325
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:80
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:169
 msgid "Immovables"
-msgstr ""
+msgstr "پدیده‌های غیر قابل حرکت"
 
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:328
 msgid "Add or remove immovables"
-msgstr ""
+msgstr "افزودن یا حذف پدیده‌های غیر قابل حرکت"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:335
@@ -442,7 +442,7 @@ msgstr "حیوانات"
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:338
 msgid "Add or remove animals"
-msgstr ""
+msgstr "افزودن یا حذف حیوانات"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:346
@@ -457,17 +457,17 @@ msgstr "منابع"
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:349
 msgid "Set or change resources"
-msgstr ""
+msgstr "تنظیم یا تغییر منابع"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:353
 msgid "Port spaces"
-msgstr ""
+msgstr "لنگرگاه‌ها"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:356
 msgid "Add or remove port spaces"
-msgstr ""
+msgstr "افزودن یا برداشتن لنگرگاه‌ها"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:364
@@ -479,7 +479,7 @@ msgstr "بازیکنان"
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:367
 msgid "Set number of players and their names, tribes and starting positions"
-msgstr ""
+msgstr "تنظیمِ شمار بازیکن‌ها و نام هایشان، قبایل و موقعیت‌های آغاز"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:371
@@ -496,7 +496,7 @@ msgstr ""
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:382
 msgid "Map size"
-msgstr ""
+msgstr "اندازه نقشه"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:385
@@ -506,7 +506,7 @@ msgstr ""
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:389
 msgid "Information"
-msgstr ""
+msgstr "اطلاعات"
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:392
