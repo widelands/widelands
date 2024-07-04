@@ -225,9 +225,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 				   break;
 				// If the ship state has changed, e.g. expedition started or scouting direction changed,
 				// think() will take care of it.
-			   case Widelands::NoteShip::Action::kDestinationChanged:
-			   case Widelands::NoteShip::Action::kWaitingForCommand:
-			   case Widelands::NoteShip::Action::kGained:
+			   default:
 				   break;
 			   }
 		   }

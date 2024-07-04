@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Madkat Here, 2020
-# Gontzal Pujana Onaindia <juchuf@gmail.com>, 2021
+# Thadah D. Denyse <gontzalpujana@protonmail.com>, 2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2021
 # Juan Miguel Bernal González, 2024
 # 

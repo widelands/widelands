@@ -1194,7 +1194,8 @@ void WLApplication::handle_input(InputCallback const* cb) {
 		case SDL_QUIT:
 			should_die_ = true;
 			break;
-		default:;
+		default:
+			break;
 		}
 	}
 
