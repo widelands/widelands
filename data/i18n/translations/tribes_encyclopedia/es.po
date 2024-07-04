@@ -9,7 +9,7 @@
 # Javier Mora <morehash@gmail.com>, 2015
 # Juan Miguel Bernal González, 2024
 # Juan Miguel Bernal González, 2024
-# Gontzal Pujana Onaindia <juchuf@gmail.com>, 2015
+# Thadah D. Denyse <gontzalpujana@protonmail.com>, 2015
 # Kiibakun, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015
@@ -17,8 +17,8 @@
 # Miguel de Dios Matias <tres.14159@gmail.com>, 2015
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022
-# Gontzal Pujana Onaindia <juchuf@gmail.com>, 2017
-# Gontzal Pujana Onaindia <juchuf@gmail.com>, 2015
+# Thadah D. Denyse <gontzalpujana@protonmail.com>, 2017
+# Thadah D. Denyse <gontzalpujana@protonmail.com>, 2015
 # Walter Benkel, 2020
 # X Bello <xbello@gmail.com>, 2020
 msgid ""

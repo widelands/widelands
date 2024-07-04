@@ -158,6 +158,8 @@ bool CheckStepFerry::allowed(const Map& map,
 		fd = map.tl_n(from);
 		fr = to;
 		break;
+	default:
+		NEVER_HERE();
 	}
 	const Descriptions& descriptions = egbase_.descriptions();
 	return ((descriptions.get_terrain_descr(fd.field->terrain_d())->get_is() &

@@ -1535,8 +1535,9 @@ void CmdSetInputMaxFill::execute(Game& game) {
 						}
 					}
 					NEVER_HERE();
+				default:
+					NEVER_HERE();
 				}
-				NEVER_HERE();
 			}
 		}
 	} else if (upcast(Building, b, mo)) {
@@ -2041,7 +2042,7 @@ void PlayerMessageCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectL
 		if (packet_version == kCurrentPacketVersionPlayerMessageCommand) {
 			PlayerCommand::read(fr, egbase, mol);
 			message_id_ = MessageId(fr.unsigned_32());
-			if (!static_cast<bool>(message_id_)) {
+			if (!message_id_.valid()) {
 				verb_log_warn("PlayerMessageCommand (player %u): message ID is null", sender());
 			}
 		} else {
@@ -2571,6 +2572,9 @@ void CmdDiplomacy::execute(Game& game) {
 		// If we found nothing, perhaps the command had been sent twice. Ignore.
 		break;
 	}
+
+	default:
+		NEVER_HERE();
 	}
 }
 

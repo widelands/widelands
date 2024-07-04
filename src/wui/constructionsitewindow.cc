@@ -104,6 +104,8 @@ void ConstructionSiteWindow::FakeWaresDisplay::draw_ware(RenderTarget& dst,
 	case Widelands::StockPolicy::kNormal:
 		// No icon for the normal policy
 		return;
+	default:
+		NEVER_HERE();
 	}
 	assert(pic);
 	dst.blit(ware_position(ware), pic);
@@ -595,6 +597,8 @@ bool ConstructionSoldierCapacityBox::handle_key(bool down, SDL_Keysym code) {
 		case ChangeType::kSetMin:
 			set_current(min_);
 			return true;
+		default:
+			NEVER_HERE();
 		}
 	}
 	return UI::Box::handle_key(down, code);

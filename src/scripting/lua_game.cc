@@ -1598,6 +1598,8 @@ int LuaInboxMessage::get_status(lua_State* L) {
 	case Widelands::Message::Status::kArchived:
 		lua_pushstring(L, "archived");
 		break;
+	default:
+		NEVER_HERE();
 	}
 	return 1;
 }
