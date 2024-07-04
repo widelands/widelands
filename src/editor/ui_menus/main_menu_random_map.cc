@@ -444,6 +444,9 @@ void MainMenuNewRandomMapPanel::button_clicked(MainMenuNewRandomMapPanel::Button
 		}
 		// Make sure that landmass is consistent
 		normalize_landmass(n);
+		break;
+	default:
+		NEVER_HERE();
 	}
 	nr_edit_box_changed();  // Update ID String
 }
@@ -645,6 +648,8 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	case Widelands::UniqueRandomMapInfo::ResourceAmount::raHigh:
 		log_info("Resources:     high\n");
 		break;
+	default:
+		NEVER_HERE();
 	}
 	log_info("Land: %0.2f  Water: %0.2f  Wasteland: %0.2f\n", map_info.landRatio,
 	         map_info.waterRatio, map_info.wastelandRatio);

@@ -248,6 +248,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     # so we have to switch off the warning for one of them.
     # http://clang-developers.42468.n3.nabble.com/Question-on-Wswitch-enum-td4025927.html
     "-Wno-switch-enum"
+    "-Wno-covered-switch-default"
 
     # TODO(sirver: weak-vtables should be enabled, but leads to lot of errors right now.
     "-Wno-weak-vtables"

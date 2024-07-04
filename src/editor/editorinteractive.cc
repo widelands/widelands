@@ -277,7 +277,10 @@ void EditorInteractive::main_menu_selected(MainMenuEntry entry) {
 	} break;
 	case MainMenuEntry::kExitEditor: {
 		exit((SDL_GetModState() & KMOD_CTRL) != 0);
+		break;
 	}
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -442,6 +445,8 @@ void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
 	case ToolMenuEntry::kToolHistory:
 		tool_windows_.toolhistory.toggle();
 		break;
+	default:
+		NEVER_HERE();
 	}
 	toolmenu_.toggle();
 }
@@ -540,6 +545,8 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 	case ShowHideEntry::kResources: {
 		toggle_resources();
 	} break;
+	default:
+		NEVER_HERE();
 	}
 	showhidemenu_.toggle();
 }
@@ -1341,6 +1348,9 @@ void EditorInteractive::map_changed(const MapWas& action) {
 	case MapWas::kResized:
 		resize_minimap();
 		break;
+
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -1415,11 +1425,9 @@ UI::UniqueWindow::Registry& EditorInteractive::get_registry_for_window(WindowID 
 		return tool_windows_.resources;
 	case WindowID::Resize:
 		return tool_windows_.resizemap;
-	case WindowID::Unset:
-		break;
+	default:
+		NEVER_HERE();
 	}
-
-	NEVER_HERE();
 }
 
 void EditorInteractive::set_sel_radius(uint32_t radius, uint16_t gap) {

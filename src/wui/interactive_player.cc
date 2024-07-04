@@ -361,6 +361,8 @@ void InteractivePlayer::statistics_menu_selected(StatisticsMenuEntry entry) {
 			menu_windows_.stats_seafaring.toggle();
 		}
 	} break;
+	default:
+		NEVER_HERE();
 	}
 	statisticsmenu_.toggle();
 }

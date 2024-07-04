@@ -5,7 +5,7 @@
 # Translators:
 # Walter Benkel, 2020
 # Madkat Here, 2020
-# Gontzal Pujana Onaindia <juchuf@gmail.com>, 2020
+# Thadah D. Denyse <gontzalpujana@protonmail.com>, 2020
 # Stephan Lutz <stephan-lutz@gmx.de>, 2023
 # 
 msgid ""

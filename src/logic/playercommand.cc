@@ -1531,8 +1531,9 @@ void CmdSetInputMaxFill::execute(Game& game) {
 						}
 					}
 					NEVER_HERE();
+				default:
+					NEVER_HERE();
 				}
-				NEVER_HERE();
 			}
 		}
 	} else if (upcast(Building, b, mo)) {
@@ -2485,6 +2486,9 @@ void CmdDiplomacy::execute(Game& game) {
 		// If we found nothing, perhaps the command had been sent twice. Ignore.
 		break;
 	}
+
+	default:
+		NEVER_HERE();
 	}
 }
 

@@ -11,7 +11,7 @@
 # Madkat Here, 2015-2016
 # Puniasterus <puniasterus@gmail.com>, 2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2022
-# Gontzal Pujana Onaindia <juchuf@gmail.com>, 2017
+# Thadah D. Denyse <gontzalpujana@protonmail.com>, 2017
 # Walter Benkel, 2020
 # Walter Benkel, 2020
 msgid ""
