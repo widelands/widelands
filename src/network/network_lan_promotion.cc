@@ -118,6 +118,8 @@ LanBase::LanBase(uint16_t port) : socket_v4(io_service), socket_v6(io_service) {
 			start_socket(&socket_v6, asio::ip::udp::v6(), port);
 			// No address to store here. There is only one "broadcast" address for IPv6
 			break;
+		default:
+			break;
 		}
 	}
 	freeifaddrs(ifaddr);

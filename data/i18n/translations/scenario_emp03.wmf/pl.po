@@ -237,7 +237,7 @@ msgstr "Znajdź święty relikt"
 msgid ""
 "We need to find and secure all six pieces of the holy shrine of Neptune."
 msgstr ""
-"Musimy znaleźć i zabezpieczyć wszystkie sześć kawałków świętego reliktu "
+"Musimy znaleźć i zabezpieczyć wszystkie sześć fragmentów świętego reliktu "
 "Neptuna."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:170
@@ -947,7 +947,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:495
 msgid "Amalea’s Reminder"
-msgstr ""
+msgstr "Przypomnienie Amalei"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:496
 msgid "Amalea is shaking her head…"
@@ -1039,7 +1039,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:536
 msgid "Amalea’s Counsel"
-msgstr ""
+msgstr "Doradca Amalei"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:539
@@ -1084,7 +1084,7 @@ msgstr "Zwycięstwo należy do nas"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:550
 msgid "Saledus is cheering…"
-msgstr ""
+msgstr "Saledus wiwatuje…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:552
@@ -1101,7 +1101,7 @@ msgstr "Król będzie bardzo zadowolony z naszej wygranej."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:560
 msgid "Pleasing Neptune"
-msgstr ""
+msgstr "Zadowolenie Neptuna"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:561
 msgid "Saledus is Very Sad and Anxious…"
@@ -1145,11 +1145,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:577
 msgid "Praise, Praise, Praise"
-msgstr ""
+msgstr "Chwała, chwała, chwała"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:578
 msgid "Saledus is happily worshipping…"
-msgstr ""
+msgstr "Saledus z radością oddaje cześć…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:580
@@ -1172,7 +1172,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:588
 msgid "Unpleasant Discoveries"
-msgstr ""
+msgstr "Niemiłe odkrycia"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:589
 msgid "Saledus looks very worried…"
@@ -1221,7 +1221,7 @@ msgstr "Potrzebujemy infrastruktury szkoleniowej"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:609
 msgid "Saledus has security concerns"
-msgstr ""
+msgstr "Saledus ma obawy związane z bezpieczeństwem"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:611
@@ -1240,6 +1240,9 @@ msgid ""
 "limited space available. We need some barracks, a training camp and an arena"
 " or a colosseum."
 msgstr ""
+"Dlatego też, pomimo ograniczonej przestrzeni, musimy zbudować pełną "
+"infrastrukturę szkoleniową. Potrzebujemy koszarów, obozu szkoleniowego oraz "
+"areny lub koloseum."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:621
 msgid "Time to get Home Again"
@@ -1252,6 +1255,10 @@ msgid ""
 " were put in front of us. But my heart is still with our home. We shall set "
 "sail as soon as possible to help defend the Empire from the Barbarian tribe."
 msgstr ""
+"Tak, moi towarzysze żołnierze, dokonaliśmy tego! Sprostaliśmy wszystkim "
+"wyzwaniom jakie przed nami postawiono. Jednak moje serce nadal jest z naszym"
+" domem. Wypłyniemy tak szybko, jak to możliwe, aby pomóc obronić imperium "
+"przed plemieniem barbarzyńców."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:625
 msgid "Victory"
@@ -1262,26 +1269,28 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Ukończyłeś tę misję. Jeśli chcesz, możesz kontynuować grę, w przeciwnym "
+"razie przejdź do następnej misji."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:637
 msgid "Finally, we have discovered a piece of our shrine. Praise Neptune!"
-msgstr ""
+msgstr "W końcu odkryliśmy fragment naszego reliktu. Chwała Neptunowi!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:640
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
-msgstr ""
+msgstr "Odkryliśmy kolejny fragment naszego reliktu. Chwała Neptunowi!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:645
 #, lua-format
 msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Musimy jeszcze odkryć %d fragment naszego reliktu."
+msgstr[1] "Musimy jeszcze odkryć %d fragmentów naszego reliktu."
+msgstr[2] "Musimy jeszcze odkryć %d fragmentów naszego reliktu."
+msgstr[3] "Musimy jeszcze odkryć %d fragmentów naszego reliktu."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:648
@@ -1289,6 +1298,8 @@ msgid ""
 "Finally, we have discovered the last piece of our shrine. Now we can "
 "reassemble it to worship our god. Praise Neptune!"
 msgstr ""
+"W końcu odkryliśmy ostatni fragment naszego reliktu. Teraz możemy go "
+"ponownie złożyć, aby oddać cześć naszemu bogu. Chwała Neptunowi!"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:651
 msgid "Artifact Found"

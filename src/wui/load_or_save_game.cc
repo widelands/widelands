@@ -86,6 +86,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 		savegame_deleter_.reset(new SavegameDeleter(parent, ws));
 		savegame_loader_.reset(new EverythingLoader(g));
 		break;
+	default:
+		NEVER_HERE();
 	}
 
 	table_->set_column_compare(

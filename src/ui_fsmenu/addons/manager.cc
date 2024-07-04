@@ -125,8 +125,10 @@ create_sort_functor(const AddOnSortingCriteria sort_by) {
 			} else {
 				return a->average_rating() > b->average_rating();
 			}
+
+		default:
+			NEVER_HERE();
 		}
-		NEVER_HERE();
 	};
 }
 
@@ -1515,10 +1517,9 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 			remotes_to_show.push_back(a);
 		}
 	}
-	{
-		remotes_to_show.sort(create_sort_functor(sort_order_browse_.get_selected()));
-		maps_to_show.sort(create_sort_functor(sort_order_maps_.get_selected()));
-	}
+	remotes_to_show.sort(create_sort_functor(sort_order_browse_.get_selected()));
+	maps_to_show.sort(create_sort_functor(sort_order_maps_.get_selected()));
+
 	std::vector<std::string> has_upgrades;
 
 	index = 0;
