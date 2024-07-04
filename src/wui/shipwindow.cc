@@ -225,9 +225,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 				   break;
 				// If the ship state has changed, e.g. expedition started or scouting direction changed,
 				// think() will take care of it.
-			   case Widelands::NoteShip::Action::kDestinationChanged:
-			   case Widelands::NoteShip::Action::kWaitingForCommand:
-			   case Widelands::NoteShip::Action::kGained:
+			   default:
 				   break;
 			   }
 		   }
@@ -396,9 +394,7 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 				result_rect.x = 0;
 				result_rect.y = (kTextureSize - result_rect.h) / 2.f;
 			}
-			rt.blitrect_scale(result_rect, unscaled,
-			                  Recti(0, 0, unscaled->width(), unscaled->height()), 1.f,
-			                  BlendMode::UseAlpha);
+			rt.blitrect_scale(result_rect, unscaled, unscaled->rect(), 1.f, BlendMode::UseAlpha);
 			texture_cache_.emplace(downscaled);
 
 			set_destination_->add(
@@ -675,7 +671,7 @@ void ShipWindow::act_construct_port() {
 		return;
 	}
 	const Widelands::Coords portspace = ship->current_portspace();
-	if (!static_cast<bool>(portspace)) {
+	if (!portspace.valid()) {
 		return;
 	}
 	if (Widelands::Game* game = ibase_.get_game()) {

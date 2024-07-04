@@ -276,6 +276,8 @@ bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 		case ChangeType::kSetMin:
 			set_value(sbi_->min);
 			return true;
+		default:
+			NEVER_HERE();
 		}
 	}
 	return Panel::handle_key(down, code);
@@ -599,7 +601,11 @@ const std::string SpinBox::unit_text(int32_t value, const bool change) const {
                       format(
 		                   /** TRANSLATORS: The current value of a spinbox */
 		                   "%d", value);
+
+	default:
+		NEVER_HERE();
 	}
+
 	NEVER_HERE();
 }
 

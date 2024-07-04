@@ -159,10 +159,9 @@ unsigned TrainingSiteDescr::get_min_level(const TrainingAttribute at) const {
 		return min_defense_;
 	case TrainingAttribute::kEvade:
 		return min_evade_;
-	case TrainingAttribute::kTotal:
+	default:
 		throw wexception("Unknown attribute value!");
 	}
-	NEVER_HERE();
 }
 
 /**
@@ -181,10 +180,9 @@ unsigned TrainingSiteDescr::get_max_level(const TrainingAttribute at) const {
 		return max_defense_;
 	case TrainingAttribute::kEvade:
 		return max_evade_;
-	case TrainingAttribute::kTotal:
+	default:
 		throw wexception("Unknown attribute value!");
 	}
-	NEVER_HERE();
 }
 
 /**
@@ -235,10 +233,9 @@ void TrainingSiteDescr::update_level(TrainingAttribute attrib,
 		max_evade_ = std::max(max_evade_, to_level);
 		train_evade_ = true;
 		return;
-	case TrainingAttribute::kTotal:
+	default:
 		throw wexception("Unknown attribute value!");
 	}
-	NEVER_HERE();
 }
 
 // TODO(sirver): This SoldierControl looks very similar to te one in

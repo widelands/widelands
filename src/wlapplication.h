@@ -210,6 +210,7 @@ private:
 	WLApplication(int argc, char const* const* argv);
 
 	bool poll_event(SDL_Event&) const;
+	void handle_window_event(SDL_Event& ev);
 
 	bool init_settings();
 	void init_filesystems();
@@ -222,6 +223,8 @@ private:
 	void handle_commandline_parameters();
 	bool check_commandline_flag(const std::string& opt);
 	OptionalParameter get_commandline_option_value(const std::string& opt, bool allow_empty = false);
+
+	void init_mouse_cursor();
 
 	void setup_homedir();
 
