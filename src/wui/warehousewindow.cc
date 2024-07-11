@@ -97,6 +97,8 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionI
 	case Widelands::StockPolicy::kNormal:
 		// don't draw anything for the normal policy
 		return;
+	default:
+		NEVER_HERE();
 	}
 	assert(pic != nullptr);
 

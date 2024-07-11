@@ -421,6 +421,8 @@ void Button::toggle() {
 		break;
 	case UI::Button::VisualState::kFlat:
 		break;  // Do nothing for flat buttons
+	default:
+		NEVER_HERE();
 	}
 }
 }  // namespace UI

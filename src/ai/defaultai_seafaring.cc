@@ -401,6 +401,9 @@ void DefaultAI::manage_ports() {
 			if (full && current_garrison < desired_garrison) {
 				change_value = 1;
 			}
+			break;
+		default:
+			NEVER_HERE();
 		}
 
 		// Check soldiers requirement of port and set garrison to desired value
