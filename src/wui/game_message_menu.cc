@@ -449,6 +449,8 @@ void GameMessageMenu::archive_or_restore() {
 			game.send_player_command(new Widelands::CmdMessageSetStatusRead(
 			   game.get_gametime(), plnum, MessageId(selected_record)));
 			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 }
@@ -502,6 +504,9 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 		warfarebtn_->set_perm_pressed(false);
 		scenariobtn_->set_perm_pressed(false);
 		break;
+
+	default:
+		NEVER_HERE();
 	}
 	think();
 }
@@ -589,8 +594,9 @@ std::string GameMessageMenu::display_message_type_icon(const Widelands::Message&
 	case Widelands::Message::Type::kWarfareUnderAttack:
 	case Widelands::Message::Type::kTradeOfferReceived:
 		return "images/wui/messages/message_new.png";
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 void GameMessageMenu::toggle_mode() {
@@ -610,6 +616,8 @@ void GameMessageMenu::toggle_mode() {
 		togglemodebtn_->set_pic(g_image_cache->get("images/wui/messages/message_archived.png"));
 		togglemodebtn_->set_tooltip(_("Show Archive"));
 		break;
+	default:
+		NEVER_HERE();
 	}
 	update_archive_button_tooltip();
 }
@@ -654,6 +662,8 @@ void GameMessageMenu::update_archive_button_tooltip() {
 			button_tooltip = _("Archive selected message");
 		}
 		break;
+	default:
+		NEVER_HERE();
 	}
 	archivebtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   button_tooltip, shortcut_string_for(KeyboardShortcut::kCommonDeleteItem, true),

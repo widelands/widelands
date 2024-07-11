@@ -121,6 +121,9 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 			break;
 		case AiType::kVeryWeak:
 			general_score = -1;
+			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 

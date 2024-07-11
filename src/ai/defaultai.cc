@@ -548,7 +548,7 @@ void DefaultAI::think() {
 			   gametime + kDiplomacyInterval + Duration(RNG::static_rand(30) * 1000),
 			   SchedulerTaskId::kDiplomacy);
 			break;
-		case SchedulerTaskId::kUnset:
+		default:
 			NEVER_HERE();
 		}
 

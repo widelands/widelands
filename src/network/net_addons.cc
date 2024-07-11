@@ -731,6 +731,8 @@ void NetAddons::admin_action(const AdminAction a,
 	case AdminAction::kDelete:
 		send = kCmdAdminDelete;
 		break;
+	default:
+		NEVER_HERE();
 	}
 	send += ' ';
 	send += addon.internal_name;

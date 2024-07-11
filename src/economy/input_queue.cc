@@ -178,6 +178,8 @@ void InputQueue::write(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 		fw.unsigned_8(1);
 		fw.c_string(owner().tribe().get_worker_descr(index_)->name().c_str());
 		break;
+	default:
+		NEVER_HERE();
 	}
 	fw.signed_32(max_size_);
 	fw.signed_32(max_fill_);

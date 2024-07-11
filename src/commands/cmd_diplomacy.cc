@@ -170,6 +170,9 @@ void CmdDiplomacy::execute(Game& game) {
 		// If we found nothing, perhaps the command had been sent twice. Ignore.
 		break;
 	}
+
+	default:
+		NEVER_HERE();
 	}
 }
 

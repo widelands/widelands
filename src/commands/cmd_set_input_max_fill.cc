@@ -67,8 +67,9 @@ void CmdSetInputMaxFill::execute(Game& game) {
 						}
 					}
 					NEVER_HERE();
+				default:
+					NEVER_HERE();
 				}
-				NEVER_HERE();
 			}
 		}
 	} else if (upcast(Building, b, mo)) {
