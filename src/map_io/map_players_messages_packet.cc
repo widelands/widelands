@@ -180,6 +180,8 @@ void MapPlayersMessagesPacket::write(FileSystem& fs, EditorGameBase& egbase, Map
 				break;
 			case Message::Status::kArchived:  //  The default status. Do not write.
 				break;
+			default:
+				NEVER_HERE();
 			}
 			if (message.serial() != 0u) {
 				const MapObject* mo = egbase.objects().get_object(message.serial());

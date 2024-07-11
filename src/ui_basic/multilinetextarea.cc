@@ -185,6 +185,9 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 		break;
 	case UI::Align::kLeft:
 		anchor = kRichtextMargin;
+		break;
+	default:
+		NEVER_HERE();
 	}
 	render_anchor_ = Vector2i(anchor, 0);
 	rendered_text_->draw(dst, render_anchor_,

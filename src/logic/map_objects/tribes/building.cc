@@ -558,6 +558,8 @@ std::string Building::info_string(const InfoStringFormat& format) {
 			result = productionsite->production_result();
 		}
 		break;
+	default:
+		NEVER_HERE();
 	}
 	return result;
 }

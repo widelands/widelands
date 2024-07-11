@@ -602,6 +602,9 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 		}
 		break;
 	}
+
+	default:
+		NEVER_HERE();
 	}
 
 	if (found) {
