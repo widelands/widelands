@@ -457,6 +457,9 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 		}
 		break;
 	}
+
+	default:
+		NEVER_HERE();
 	}
 
 	if (modified_) {

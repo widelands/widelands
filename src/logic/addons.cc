@@ -421,8 +421,10 @@ inline void do_update_ui_theme(const UpdateThemeAction action, std::string arg) 
 		set_config_string("theme", previously_enabled->first->internal_name);
 		set_template_dir(theme_addon_template_dir(previously_enabled->first->internal_name));
 		return;
+
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 void update_ui_theme(const UpdateThemeAction action, std::string arg) {
