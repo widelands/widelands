@@ -4,10 +4,11 @@
 # Translators:
 # Antoni Szpikowski <szantek2004@gmail.com>, 2022
 # GunChleoc, 2014
-# Wesmania <ikk_pl@yahoo.co.uk>, 2015
-# Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2015
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2016-2017
 # Jacek Wolszczak <shutdownrunner@o2.pl>, 2008
 # Jakub Magnowski <qoiutek@gmail.com>, 2018
+# Leszek Szary, 2024
 # Marcin S <dzidek1003@o2.pl>, 2021
 # Niektóry <niektory@gmail.com>, 2020
 # Niektóry <niektory@gmail.com>, 2020
@@ -21,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2022\n"
+"Last-Translator: Leszek Szary, 2024\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -221,7 +222,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr ""
+msgstr "Po przegraniu ważnej bitwy przeciwko barbarzyńcom i utracie dużej części ziem Imperium, Lucjusz opuszcza Fremil, aby zacząć nowe życie. Jednak przeznaczenie kieruje jego statek w ostry sztorm, który prawie go niszczy. Szczęśliwie udaje mu się osadzić statek na nieznanym pustynnym wybrzeżu i ocalić swoich ludzi. Póki co."
 
 #: ../../../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
@@ -254,7 +255,7 @@ msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the Empire."
-msgstr ""
+msgstr "Po powrocie do domu Lucjusz i jego załoga zderzają się z gospodarką w rozsypce. Znalezienie rozwiązania dla wąskich gardeł w gospodarce będzie miało ogromne znaczenie dla przywrócenia chwały imperium."
 
 #: ../../../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
@@ -308,14 +309,14 @@ msgstr "Claus i Henneke Lembeck w końcu dotarli na północ. Ale czy uda im si�
 
 #: ../../../../data/campaigns/fri05.wmf/elemental:8
 msgid "Reconquest"
-msgstr ""
+msgstr "Ponowny podbój"
 
 #: ../../../../data/campaigns/fri05.wmf/elemental:10
 msgid ""
 "Back in Northern Frisia at last, Claus, Henneke, and Reebaud are preparing "
 "for battle against the invaders. They must gather allies and plan their "
 "strategy, but the foe is never far away…"
-msgstr ""
+msgstr "W końcu w Północnej Fryzji Claus, Henneke i Reebaud przygotowują się do bitwy z najeźdźcami. Muszą zebrać sojuszników i zaplanować strategię, ale wróg nigdy nie jest daleko…"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"

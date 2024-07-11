@@ -100,6 +100,8 @@ int LuaEconomy::target_quantity(lua_State* L) {
 		}
 		break;
 	}
+	default:
+		NEVER_HERE();
 	}
 	return 1;
 }
@@ -150,6 +152,8 @@ int LuaEconomy::set_target_quantity(lua_State* L) {
 		}
 		break;
 	}
+	default:
+		NEVER_HERE();
 	}
 	return 0;
 }
@@ -189,6 +193,8 @@ int LuaEconomy::needs(lua_State* L) {
 		}
 		break;
 	}
+	default:
+		NEVER_HERE();
 	}
 	return 1;
 }

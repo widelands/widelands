@@ -717,8 +717,9 @@ std::string soldier_preference_to_string(const Widelands::SoldierPreference p) {
 		return "rookies";
 	case Widelands::SoldierPreference::kAny:
 		return "any";
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 Widelands::SoldierPreference string_to_soldier_preference(const std::string& p) {
@@ -749,6 +750,8 @@ void wh_policy_to_string(lua_State* L, Widelands::StockPolicy p) {
 	case Widelands::StockPolicy::kRemove:
 		lua_pushstring(L, "remove");
 		break;
+	default:
+		NEVER_HERE();
 	}
 }
 // Transforms the given string from the lua code to a warehouse policy
@@ -951,10 +954,10 @@ int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo) {
 	case Widelands::MapObjectType::SHIP_FLEET:
 	case Widelands::MapObjectType::FERRY_FLEET:
 	case Widelands::MapObjectType::WARE:
+	default:
 		throw LuaError(
 		   format("upcasted_map_object_to_lua: Unknown %i", static_cast<int>(mo->descr().type())));
 	}
-	NEVER_HERE();
 }
 #undef CAST_TO_LUA
 
