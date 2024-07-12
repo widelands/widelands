@@ -256,12 +256,17 @@ void RenderedText::blit_rect(RenderTarget& dst,
 				break;
 			case CropMode::kSelf:
 				blit_cropped(dst, offset_x, aligned_position, blit_point, rect, region, align);
+				break;
+			default:
+				NEVER_HERE();
 			}
 		} break;
 		// Draw a background image (tiling)
 		case RenderedRect::DrawMode::kTile:
 			dst.tile(Recti(blit_point, rect.width(), rect.height()), rect.image(), Vector2i::zero());
 			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 }
