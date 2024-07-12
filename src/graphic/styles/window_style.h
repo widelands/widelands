@@ -33,6 +33,12 @@ struct WindowStyleInfo {
 	                const Image* img_b,
 	                const Image* img_r,
 	                const Image* img_l,
+	                const Image* img_c_bl,
+	                const Image* img_c_br,
+	                const Image* img_c_tl,
+	                const Image* img_c_tr,
+	                const Image* img_c_ml,
+	                const Image* img_c_mr,
 	                const Image* img_bg,
 	                const std::string& b_pin,
 	                const std::string& b_unpin,
@@ -46,6 +52,12 @@ struct WindowStyleInfo {
 	     border_bottom_(img_b),
 	     border_left_(img_l),
 	     border_right_(img_r),
+	     corner_bottom_left_(img_c_bl),
+	     corner_bottom_right_(img_c_br),
+	     corner_top_left_(img_c_tl),
+	     corner_top_right_(img_c_tr),
+	     corner_minimal_left_(img_c_ml),
+	     corner_minimal_right_(img_c_mr),
 	     background_(img_bg),
 	     button_close_(b_close),
 	     button_pin_(b_pin),
@@ -77,6 +89,25 @@ struct WindowStyleInfo {
 	}
 	[[nodiscard]] const Image* border_bottom() const {
 		return border_bottom_;
+	}
+
+	[[nodiscard]] const Image* corner_bottom_left() const {
+		return corner_bottom_left_;
+	}
+	[[nodiscard]] const Image* corner_bottom_right() const {
+		return corner_bottom_right_;
+	}
+	[[nodiscard]] const Image* corner_top_left() const {
+		return corner_top_left_;
+	}
+	[[nodiscard]] const Image* corner_top_right() const {
+		return corner_top_right_;
+	}
+	[[nodiscard]] const Image* corner_minimal_left() const {
+		return corner_minimal_left_;
+	}
+	[[nodiscard]] const Image* corner_minimal_right() const {
+		return corner_minimal_right_;
 	}
 
 	[[nodiscard]] const std::string& button_close() const {
@@ -122,6 +153,12 @@ private:
 	const Image* border_bottom_;
 	const Image* border_left_;
 	const Image* border_right_;
+	const Image* corner_bottom_left_;
+	const Image* corner_bottom_right_;
+	const Image* corner_top_left_;
+	const Image* corner_top_right_;
+	const Image* corner_minimal_left_;
+	const Image* corner_minimal_right_;
 	const Image* background_;
 	const std::string button_close_;
 	const std::string button_pin_;

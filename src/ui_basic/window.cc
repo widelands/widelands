@@ -410,110 +410,94 @@ void Window::draw_border(RenderTarget& dst) {
          window_style_info().window_border_unfocused();
 
 	{  // Top border
-		const int img_len_total = window_style_info().border_top()->width();
-		const int corner_width = img_len_total > 2 * get_tborder() ? get_tborder() : 0;
-		const int border_x1 = corner_width;
-		const int border_x2 = get_w() - corner_width;
-		const int img_len_inner = img_len_total - 2 * corner_width;
-
-		// Left corner
-		dst.blitrect(Vector2i::zero(), window_style_info().border_top(),
-		             Recti(Vector2i::zero(), border_x1, corner_width));
+		const int img_len = window_style_info().border_top()->width();
+		const int border_x1 = is_minimal() ? window_style_info().corner_minimal_left()->width() : window_style_info().corner_top_left()->width();
+		const int border_x2 = get_w() - (is_minimal() ? window_style_info().corner_minimal_right()->width() : window_style_info().corner_top_right()->width());
 
 		// Middle
 		int pos = border_x1;
-		for (; pos + img_len_inner < border_x2; pos += img_len_inner) {
-			dst.blitrect(Vector2i(pos, 0), window_style_info().border_top(),
-			             Recti(Vector2i(corner_width, 0), img_len_inner, get_tborder()));
+		for (; pos + img_len < border_x2; pos += img_len) {
+			dst.blitrect(Vector2i(pos, 0), window_style_info().border_top(), window_style_info().border_top()->rect());
 		}
 
-		// Trailing pixels at the right
-		dst.blitrect(Vector2i(pos, 0), window_style_info().border_top(),
-		             Recti(Vector2i(corner_width, 0), border_x2 - pos, get_tborder()));
-
-		// Right corner
-		dst.blitrect(Vector2i(border_x2, 0), window_style_info().border_top(),
-		             Recti(Vector2i(img_len_total - corner_width, 0), corner_width, get_tborder()));
+		if (pos < border_x2) {  // Trailing pixels at the right
+			dst.blitrect(Vector2i(pos, 0), window_style_info().border_top(),
+				         Recti(Vector2i::zero(), border_x2 - pos, get_tborder()));
+		}
 	}
 
-	if (!is_minimal()) {
-		{  // Bottom border
-			const int img_len_total = window_style_info().border_bottom()->width();
-			const int corner_width = img_len_total > 2 * get_bborder() ? get_bborder() : 0;
-			const int border_y = get_h() - get_bborder();
-			const int border_x1 = corner_width;
-			const int border_x2 = get_w() - corner_width;
-			const int img_len_inner = img_len_total - 2 * corner_width;
+	if (is_minimal()) {
+		// Left corner
+		dst.blitrect(Vector2i::zero(), window_style_info().corner_minimal_left(), window_style_info().corner_minimal_left()->rect());
 
-			// Left corner
-			dst.blitrect(Vector2i(0, border_y), window_style_info().border_bottom(),
-			             Recti(Vector2i::zero(), border_x1, corner_width));
+		// Right corner
+		dst.blitrect(Vector2i(get_w() - window_style_info().corner_minimal_right()->width(), 0), window_style_info().corner_minimal_right(), window_style_info().corner_minimal_right()->rect());
+
+	} else {  // Not minimal
+		// Top-left corner
+		dst.blitrect(Vector2i::zero(), window_style_info().corner_top_left(), window_style_info().corner_top_left()->rect());
+
+		// Top-right corner
+		dst.blitrect(Vector2i(get_w() - window_style_info().corner_top_right()->width(), 0), window_style_info().corner_top_right(), window_style_info().corner_top_right()->rect());
+
+		// Bottom-left corner
+		dst.blitrect(Vector2i(0, get_h() - window_style_info().corner_bottom_left()->height()), window_style_info().corner_bottom_left(), window_style_info().corner_bottom_left()->rect());
+
+		// Bottom-right corner
+		dst.blitrect(Vector2i(get_w() - window_style_info().corner_bottom_right()->width(), get_h() - window_style_info().corner_bottom_right()->height()),
+				window_style_info().corner_bottom_right(), window_style_info().corner_bottom_right()->rect());
+
+		{  // Bottom border
+			const int img_len = window_style_info().border_bottom()->width();
+			const int border_x1 = window_style_info().corner_bottom_left()->width();
+			const int border_x2 = get_w() - window_style_info().corner_bottom_right()->width();
 
 			// Middle
 			int pos = border_x1;
-			for (; pos + img_len_inner < border_x2; pos += img_len_inner) {
-				dst.blitrect(Vector2i(pos, border_y), window_style_info().border_bottom(),
-				             Recti(Vector2i(corner_width, 0), img_len_inner, get_bborder()));
+			for (; pos + img_len < border_x2; pos += img_len) {
+				dst.blitrect(Vector2i(pos, get_h() - get_bborder()), window_style_info().border_bottom(), window_style_info().border_bottom()->rect());
 			}
 
-			// Trailing pixels at the right
-			dst.blitrect(Vector2i(pos, border_y), window_style_info().border_bottom(),
-			             Recti(Vector2i(corner_width, 0), border_x2 - pos, get_bborder()));
-
-			// Right corner
-			dst.blitrect(
-			   Vector2i(border_x2, border_y), window_style_info().border_bottom(),
-			   Recti(Vector2i(img_len_total - corner_width, 0), corner_width, get_bborder()));
+			if (pos < border_x2) {  // Trailing pixels at the right
+				dst.blitrect(Vector2i(pos, get_h() - get_bborder()), window_style_info().border_bottom(),
+						     Recti(Vector2i::zero(), border_x2 - pos, get_bborder()));
+			}
 		}
 
 		{  // Left border
 			const int img_len = window_style_info().border_left()->height();
-			const int border_y1 = get_tborder();
-			const int border_y2 = get_h() - get_bborder();
+			const int border_y1 = window_style_info().corner_top_left()->height();
+			const int border_y2 = get_h() - window_style_info().corner_bottom_left()->height();
 
 			// Middle
 			int pos = border_y1;
 			for (; pos + img_len < border_y2; pos += img_len) {
-				dst.blitrect(Vector2i(0, pos), window_style_info().border_left(),
-				             Recti(Vector2i::zero(), get_lborder(), img_len));
+				dst.blitrect(Vector2i(0, pos), window_style_info().border_left(), window_style_info().border_left()->rect());
 			}
 
-			// Trailing pixels at the bottom
-			dst.blitrect(Vector2i(0, pos), window_style_info().border_left(),
-			             Recti(Vector2i::zero(), get_lborder(), border_y2 - pos));
+			if (pos < border_y2) {  // Trailing pixels at the bottom
+				dst.blitrect(Vector2i(0, pos), window_style_info().border_left(),
+						     Recti(Vector2i::zero(), get_lborder(), border_y2 - pos));
+			}
 		}
 
 		{  // Right border
 			const int img_len = window_style_info().border_right()->height();
-			const int border_x = get_w() - get_rborder();
-			const int border_y1 = get_tborder();
-			const int border_y2 = get_h() - get_bborder();
+			const int border_y1 = window_style_info().corner_top_right()->height();
+			const int border_y2 = get_h() - window_style_info().corner_bottom_right()->height();
 
 			// Middle
 			int pos = border_y1;
 			for (; pos + img_len < border_y2; pos += img_len) {
-				dst.blitrect(Vector2i(border_x, pos), window_style_info().border_right(),
-				             Recti(Vector2i::zero(), get_rborder(), img_len));
+				dst.blitrect(Vector2i(get_w() - get_rborder(), pos), window_style_info().border_right(), window_style_info().border_right()->rect());
 			}
 
-			// Trailing pixels at the bottom
-			dst.blitrect(Vector2i(border_x, pos), window_style_info().border_right(),
-			             Recti(Vector2i::zero(), get_rborder(), border_y2 - pos));
+			if (pos < border_y2) {  // Trailing pixels at the bottom
+				dst.blitrect(Vector2i(get_w() - get_rborder(), pos), window_style_info().border_right(),
+						     Recti(Vector2i::zero(), get_rborder(), border_y2 - pos));
+			}
 		}
-
-		// Focus overlays
-		// Bottom
-		dst.fill_rect(Recti(0, get_h() - get_bborder(), get_w(), get_bborder()), focus_color,
-		              BlendMode::Default);
-		// Left
-		dst.fill_rect(Recti(0, get_tborder(), get_lborder(), get_h() - get_tborder() - get_bborder()),
-		              focus_color, BlendMode::Default);
-		// Right
-		dst.fill_rect(Recti(get_w() - get_rborder(), get_tborder(), get_rborder(),
-		                    get_h() - get_tborder() - get_bborder()),
-		              focus_color, BlendMode::Default);
-
-	}  // end if (!is_minimal())
+	}  // end if-else (is_minimal())
 
 	// Top focus overlays
 	dst.fill_rect(Recti(0, 0, get_w(), get_tborder()), focus_color, BlendMode::Default);
