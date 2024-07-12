@@ -411,41 +411,55 @@ void Window::draw_border(RenderTarget& dst) {
 
 	{  // Top border
 		const int img_len = window_style_info().border_top()->width();
-		const int border_x1 = is_minimal() ? window_style_info().corner_minimal_left()->width() : window_style_info().corner_top_left()->width();
-		const int border_x2 = get_w() - (is_minimal() ? window_style_info().corner_minimal_right()->width() : window_style_info().corner_top_right()->width());
+		const int border_x1 = is_minimal() ? window_style_info().corner_minimal_left()->width() :
+                                           window_style_info().corner_top_left()->width();
+		const int border_x2 =
+		   get_w() - (is_minimal() ? window_style_info().corner_minimal_right()->width() :
+                                   window_style_info().corner_top_right()->width());
 
 		// Middle
 		int pos = border_x1;
 		for (; pos + img_len < border_x2; pos += img_len) {
-			dst.blitrect(Vector2i(pos, 0), window_style_info().border_top(), window_style_info().border_top()->rect());
+			dst.blitrect(Vector2i(pos, 0), window_style_info().border_top(),
+			             window_style_info().border_top()->rect());
 		}
 
 		if (pos < border_x2) {  // Trailing pixels at the right
 			dst.blitrect(Vector2i(pos, 0), window_style_info().border_top(),
-				         Recti(Vector2i::zero(), border_x2 - pos, get_tborder()));
+			             Recti(Vector2i::zero(), border_x2 - pos, get_tborder()));
 		}
 	}
 
 	if (is_minimal()) {
 		// Left corner
-		dst.blitrect(Vector2i::zero(), window_style_info().corner_minimal_left(), window_style_info().corner_minimal_left()->rect());
+		dst.blitrect(Vector2i::zero(), window_style_info().corner_minimal_left(),
+		             window_style_info().corner_minimal_left()->rect());
 
 		// Right corner
-		dst.blitrect(Vector2i(get_w() - window_style_info().corner_minimal_right()->width(), 0), window_style_info().corner_minimal_right(), window_style_info().corner_minimal_right()->rect());
+		dst.blitrect(Vector2i(get_w() - window_style_info().corner_minimal_right()->width(), 0),
+		             window_style_info().corner_minimal_right(),
+		             window_style_info().corner_minimal_right()->rect());
 
 	} else {  // Not minimal
 		// Top-left corner
-		dst.blitrect(Vector2i::zero(), window_style_info().corner_top_left(), window_style_info().corner_top_left()->rect());
+		dst.blitrect(Vector2i::zero(), window_style_info().corner_top_left(),
+		             window_style_info().corner_top_left()->rect());
 
 		// Top-right corner
-		dst.blitrect(Vector2i(get_w() - window_style_info().corner_top_right()->width(), 0), window_style_info().corner_top_right(), window_style_info().corner_top_right()->rect());
+		dst.blitrect(Vector2i(get_w() - window_style_info().corner_top_right()->width(), 0),
+		             window_style_info().corner_top_right(),
+		             window_style_info().corner_top_right()->rect());
 
 		// Bottom-left corner
-		dst.blitrect(Vector2i(0, get_h() - window_style_info().corner_bottom_left()->height()), window_style_info().corner_bottom_left(), window_style_info().corner_bottom_left()->rect());
+		dst.blitrect(Vector2i(0, get_h() - window_style_info().corner_bottom_left()->height()),
+		             window_style_info().corner_bottom_left(),
+		             window_style_info().corner_bottom_left()->rect());
 
 		// Bottom-right corner
-		dst.blitrect(Vector2i(get_w() - window_style_info().corner_bottom_right()->width(), get_h() - window_style_info().corner_bottom_right()->height()),
-				window_style_info().corner_bottom_right(), window_style_info().corner_bottom_right()->rect());
+		dst.blitrect(Vector2i(get_w() - window_style_info().corner_bottom_right()->width(),
+		                      get_h() - window_style_info().corner_bottom_right()->height()),
+		             window_style_info().corner_bottom_right(),
+		             window_style_info().corner_bottom_right()->rect());
 
 		{  // Bottom border
 			const int img_len = window_style_info().border_bottom()->width();
@@ -455,12 +469,15 @@ void Window::draw_border(RenderTarget& dst) {
 			// Middle
 			int pos = border_x1;
 			for (; pos + img_len < border_x2; pos += img_len) {
-				dst.blitrect(Vector2i(pos, get_h() - get_bborder()), window_style_info().border_bottom(), window_style_info().border_bottom()->rect());
+				dst.blitrect(Vector2i(pos, get_h() - get_bborder()),
+				             window_style_info().border_bottom(),
+				             window_style_info().border_bottom()->rect());
 			}
 
 			if (pos < border_x2) {  // Trailing pixels at the right
-				dst.blitrect(Vector2i(pos, get_h() - get_bborder()), window_style_info().border_bottom(),
-						     Recti(Vector2i::zero(), border_x2 - pos, get_bborder()));
+				dst.blitrect(Vector2i(pos, get_h() - get_bborder()),
+				             window_style_info().border_bottom(),
+				             Recti(Vector2i::zero(), border_x2 - pos, get_bborder()));
 			}
 		}
 
@@ -472,12 +489,13 @@ void Window::draw_border(RenderTarget& dst) {
 			// Middle
 			int pos = border_y1;
 			for (; pos + img_len < border_y2; pos += img_len) {
-				dst.blitrect(Vector2i(0, pos), window_style_info().border_left(), window_style_info().border_left()->rect());
+				dst.blitrect(Vector2i(0, pos), window_style_info().border_left(),
+				             window_style_info().border_left()->rect());
 			}
 
 			if (pos < border_y2) {  // Trailing pixels at the bottom
 				dst.blitrect(Vector2i(0, pos), window_style_info().border_left(),
-						     Recti(Vector2i::zero(), get_lborder(), border_y2 - pos));
+				             Recti(Vector2i::zero(), get_lborder(), border_y2 - pos));
 			}
 		}
 
@@ -489,12 +507,13 @@ void Window::draw_border(RenderTarget& dst) {
 			// Middle
 			int pos = border_y1;
 			for (; pos + img_len < border_y2; pos += img_len) {
-				dst.blitrect(Vector2i(get_w() - get_rborder(), pos), window_style_info().border_right(), window_style_info().border_right()->rect());
+				dst.blitrect(Vector2i(get_w() - get_rborder(), pos), window_style_info().border_right(),
+				             window_style_info().border_right()->rect());
 			}
 
 			if (pos < border_y2) {  // Trailing pixels at the bottom
 				dst.blitrect(Vector2i(get_w() - get_rborder(), pos), window_style_info().border_right(),
-						     Recti(Vector2i::zero(), get_rborder(), border_y2 - pos));
+				             Recti(Vector2i::zero(), get_rborder(), border_y2 - pos));
 			}
 		}
 	}  // end if-else (is_minimal())
