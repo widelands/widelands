@@ -516,6 +516,18 @@ void Window::draw_border(RenderTarget& dst) {
 				             Recti(Vector2i::zero(), get_rborder(), border_y2 - pos));
 			}
 		}
+
+		// Focus overlays
+		// Bottom
+		dst.fill_rect(Recti(0, get_h() - get_bborder(), get_w(), get_bborder()), focus_color,
+		              BlendMode::Default);
+		// Left
+		dst.fill_rect(Recti(0, get_tborder(), get_lborder(), get_h() - get_tborder() - get_bborder()),
+		              focus_color, BlendMode::Default);
+		// Right
+		dst.fill_rect(Recti(get_w() - get_rborder(), get_tborder(), get_rborder(),
+		                    get_h() - get_tborder() - get_bborder()),
+		              focus_color, BlendMode::Default);
 	}  // end if-else (is_minimal())
 
 	// Top focus overlays
