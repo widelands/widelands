@@ -100,6 +100,9 @@ void SoldierRequest::update() {
 		rmax = best_soldier - 1;
 		break;
 	}
+
+	default:
+		NEVER_HERE();
 	}
 
 	if (rmax < rmin || rmin > max_level || rmax < 0) {

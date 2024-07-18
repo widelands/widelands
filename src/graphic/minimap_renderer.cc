@@ -244,6 +244,9 @@ void draw_view_window(const Widelands::Map& map,
 		   Vector2i(origin.x / kTriangleWidth, origin.y / kTriangleHeight) * scale_map(map, zoom);
 		break;
 	}
+
+	default:
+		NEVER_HERE();
 	}
 
 	const int width = map.get_width() * scale_map(map, zoom);
@@ -368,6 +371,9 @@ Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
 	case MiniMapType::kStaticMap:
 		top_left = Vector2f::zero();
 		break;
+
+	default:
+		NEVER_HERE();
 	}
 
 	const float multiplier = scale_map(map, zoom);
@@ -463,6 +469,9 @@ std::unique_ptr<Texture> draw_minimap_final(const Texture& input_texture,
 		texture->blit(Rectf(0.f, 0.f, minimap_w, minimap_h), input_texture,
 		              Rectf(0.f, 0.f, minimap_w, minimap_h), 1., BlendMode::Copy);
 		break;
+
+	default:
+		NEVER_HERE();
 	}
 
 	if ((layers & MiniMapLayer::ViewWindow) != 0) {

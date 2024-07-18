@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Gontzal Pujana Onaindia <juchuf@gmail.com>, 2022
+# Thadah D. Denyse <gontzalpujana@protonmail.com>, 2022
 # Stephan Lutz <stephan-lutz@gmx.de>, 2022
 # Juan Miguel Bernal González, 2024
 # Juan Miguel Bernal González, 2024

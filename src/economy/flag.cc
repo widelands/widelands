@@ -980,6 +980,8 @@ void Flag::add_flag_job(Game& game, const FlagJob::Type t) {
 	case FlagJob::Type::kScout:
 		do_schedule_act(game, Duration(10));
 		break;
+	default:
+		NEVER_HERE();
 	}
 
 	flag_jobs_.push_back(j);

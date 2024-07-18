@@ -125,6 +125,8 @@ void Request::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 					                    target_.owner().tribe().name().c_str(), wareworker_name.c_str());
 				}
 			} break;
+			default:
+				NEVER_HERE();
 			}
 
 			// Overwrite initial economy because our WareWorker type may have changed
@@ -201,6 +203,8 @@ void Request::write(FileWrite& fw, Game& game, MapObjectSaver& mos) const {
 		assert(game.descriptions().worker_exists(index_));
 		fw.c_string(game.descriptions().get_worker_descr(index_)->name());
 		break;
+	default:
+		NEVER_HERE();
 	}
 
 	fw.unsigned_32(count_);
@@ -430,6 +434,8 @@ void Request::start_transfer(Game& game, Supply& supp) {
 		t = new Transfer(game, *this, ware);
 		break;
 	}
+	default:
+		NEVER_HERE();
 	}
 
 	transfers_.push_back(t);

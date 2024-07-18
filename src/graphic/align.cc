@@ -18,6 +18,8 @@
 
 #include "graphic/align.h"
 
+#include "base/wexception.h"
+
 namespace UI {
 
 /**
@@ -59,6 +61,8 @@ Align mirror_alignment(Align alignment, bool is_rtl) {
 			break;
 		case Align::kCenter:
 			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 	return alignment;
