@@ -5,9 +5,10 @@
 # Antoni Szpikowski <szantek2004@gmail.com>, 2021-2022
 # Be Trzy <byaqya@gmail.com>, 2020
 # Endrju <endrjux@gmail.com>, 2005
-# Wesmania <ikk_pl@yahoo.co.uk>, 2015
-# Wesmania <ikk_pl@yahoo.co.uk>, 2016
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2015
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2016
 # Karol Zygmunt, 2024
+# Leszek Szary, 2024
 # Marcin S <dzidek1003@o2.pl>, 2021
 # Pawel <pawcio980@gmail.com>, 2022
 # tombox <wptom@wp.pl>, 2016,2018-2019
@@ -18,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-06-08 02:37+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
-"Last-Translator: Karol Zygmunt, 2024\n"
+"Last-Translator: Leszek Szary, 2024\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -166,7 +167,7 @@ msgstr "[true*|false]"
 
 #: ../../../../src/wlapplication_messages.cc:123
 msgid "Play the intro music at startup and show splash image until it ends."
-msgstr ""
+msgstr "Odtwórz muzykę intro przy uruchomieniu i wyświetlaj obraz powitalny dopóki się nie zakończy."
 
 #: ../../../../src/wlapplication_messages.cc:124
 msgid "Force Widelands to crash when a Lua error occurs."
@@ -418,7 +419,7 @@ msgid ""
 "Whether to let the system draw the mouse cursor. Disable it only if the "
 "cursor doesn't appear right, or if you want it to be visible in screenshots "
 "or screencasts."
-msgstr ""
+msgstr "Określa, czy to system ma rysować kursor myszy. Wyłącz tę opcję tylko wtedy, gdy kursor nie jest wyświetlany prawidłowo lub jeśli chcesz, aby był on widoczny na zrzutach ekranu lub nagraniach."
 
 #: ../../../../src/wlapplication_messages.cc:233
 msgid "Whether to use sticky tooltips."
