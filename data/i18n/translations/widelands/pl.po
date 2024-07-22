@@ -5,8 +5,8 @@
 # Antoni Szpikowski <szantek2004@gmail.com>, 2021-2022
 # Endrju <endrjux@gmail.com>, 2005
 # GunChleoc, 2016,2018
-# Wesmania <ikk_pl@yahoo.co.uk>, 2015
-# Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2015
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2016-2017
 # Karol Zygmunt, 2024
 # Lech Lorens <lech.lorens@gmail.com>, 2019
 # Leszek Szary, 2024
@@ -29,7 +29,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-06-29 02:37+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Karol Zygmunt, 2024\n"
+"Last-Translator: Leszek Szary, 2024\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -6675,7 +6675,7 @@ msgstr "(C) %1%-%2% przez Widelands Development Team · Opublikowane na licencji
 
 #: ../../../../src/ui_fsmenu/main.cc:848
 msgid "Click for the main menu"
-msgstr ""
+msgstr "Kliknij, aby wyświetlić menu główne"
 
 #: ../../../../src/ui_fsmenu/main.cc:926
 msgid "Desyncing Add-On Found"
@@ -7160,7 +7160,7 @@ msgstr "Rozmiar okna"
 #. * TRANSLATORS: short description for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:155
 msgid "Let the system draw the mouse cursor"
-msgstr ""
+msgstr "Pozwól systemowi rysować kursor myszy"
 
 #. * TRANSLATORS: tooltip text for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:157
@@ -7169,7 +7169,7 @@ msgid ""
 "and the cursor appears frozen during long operations. Disable it only if the"
 " cursor doesn’t appear right, or if you want it to be visible in screenshots"
 " or screencasts."
-msgstr ""
+msgstr "W razie wątpliwości pozostaw tę opcję włączoną. Gdy opcja jest wyłączona, aktualizacje kursora mogą być powolne, a podczas długich operacji kursor może wydawać się zawieszony. Wyłącz tę opcję tylko wtedy, gdy kursor nie pojawia się prawidłowo lub jeśli chcesz, aby był widoczny na zrzutach ekranu lub nagraniach."
 
 #: ../../../../src/ui_fsmenu/options.cc:166
 msgid "Accessibility mode for tooltips"
@@ -11115,14 +11115,14 @@ msgstr "Możesz odtwarzać własną muzykę w grze, umieszczając własne pliki 
 
 #: ../../../../src/wui/sound_options.cc:161
 msgid "Play the intro music at startup"
-msgstr ""
+msgstr "Odtwórz muzykę intro przy uruchomieniu"
 
 #: ../../../../src/wui/sound_options.cc:163
 msgid ""
 "Whether to play the intro music when Widelands is started. The splashscreen "
 "is only closed automatically when the intro music ends, but can be skipped "
 "by a keypress or a mouse click."
-msgstr ""
+msgstr "Określa, czy odtwarzać muzykę intro po uruchomieniu Widelands. Ekran powitalny zamyka się automatycznie dopiero po zakończeniu muzyki intro, ale można go pominąć naciśnięciem klawisza lub kliknięciem myszy."
 
 #: ../../../../src/wui/sound_options.cc:172
 msgctxt "sound_options"
