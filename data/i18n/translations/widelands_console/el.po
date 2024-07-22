@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
+# Alexandros Koutroulis, 2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-06-08 02:37+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: Alexandros Koutroulis, 2024\n"
 "Language-Team: Greek (http://app.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +28,7 @@ msgstr ""
 #: ../../../../src/wlapplication_messages.cc:92
 #: ../../../../src/wlapplication_messages.cc:113
 msgid "FILENAME"
-msgstr ""
+msgstr "ΟΝΟΜΑ_ΑΡΧΕΙΟΥ"
 
 #. * TRANSLATORS: Used instead of a file name indicating last savegame, replay
 #. or map.
@@ -39,41 +40,41 @@ msgstr ""
 
 #: ../../../../src/wlapplication_messages.cc:66
 msgid "Usage:"
-msgstr ""
+msgstr "Χρήση:"
 
 #: ../../../../src/wlapplication_messages.cc:66
 msgid "widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr ""
+msgstr "widelands <option0>=<value0> ... <optionN>=<valueN>"
 
 #: ../../../../src/wlapplication_messages.cc:67
 msgid "widelands <save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "widelands <save.wgf>/<replay.wry>"
 
 #: ../../../../src/wlapplication_messages.cc:69
 #: ../../../../src/wlapplication_messages.cc:71
 #: ../../../../src/wlapplication_messages.cc:76
 #: ../../../../src/wlapplication_messages.cc:235
 msgid "DIRNAME"
-msgstr ""
+msgstr "ΟΝΟΜΑ_ΚΑΤΑΛΟΓΟΥ"
 
 #: ../../../../src/wlapplication_messages.cc:69
 msgid "Options:"
-msgstr ""
+msgstr "Επιλογές:"
 
 #: ../../../../src/wlapplication_messages.cc:70
 msgid "Use the specified directory for the Widelands data files."
-msgstr ""
+msgstr "Χρησιμοποίησε τον ορισμένο κατάλογο για τα αρχεία δεδομένων του Widelands."
 
 #: ../../../../src/wlapplication_messages.cc:72
 #, c-format
 msgid ""
 "Use the specified directory for Widelands config files, savegames, and "
 "replays. Default is `%s`."
-msgstr ""
+msgstr "Χρησιμοποίησε τον ορισμένο κατάλογο για τα αρχεία ρυθμίσεων, τα αποθηκευμένα παιχνίδια και τα replays του Widelands. Η προεπιλογή είναι `%s`."
 
 #: ../../../../src/wlapplication_messages.cc:77
 msgid "Use the specified directory for the Widelands locale files."
-msgstr ""
+msgstr "Χρησιμοποίησε τον ορισμένο κατάλογο για τα γλωσσικά αρχεία του Widelands."
 
 #: ../../../../src/wlapplication_messages.cc:81
 msgid "Use the specified locale."
@@ -83,7 +84,7 @@ msgstr ""
 #. monospaced terminals
 #: ../../../../src/wlapplication_messages.cc:81
 msgid "[de_DE|sv_SE|...]"
-msgstr ""
+msgstr "[de_DE|sv_SE|...]"
 
 #: ../../../../src/wlapplication_messages.cc:83
 msgid ""
