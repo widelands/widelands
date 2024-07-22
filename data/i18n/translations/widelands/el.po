@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
+# Alexandros Koutroulis, 2024
 # Elias Delakovias, 2015
 # erimitis, 2018,2021
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-06-29 02:37+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: erimitis, 2018,2021\n"
+"Last-Translator: Alexandros Koutroulis, 2024\n"
 "Language-Team: Greek (http://app.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,17 +50,17 @@ msgstr "Κανένας βράχος κοντά"
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Δεν υπάρχουν βράχια κοντά στο σημείο εκκίνησής. Επομένως, λαμβάνεις επιπλέον πόρους για να εκκινήσεις την οικονομία σου"
 
 #: ../../../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
-msgstr ""
+msgstr "Δεν υπάρχουν αρκετά δέντρα κοντά"
 
 #: ../../../../data/scripting/infrastructure.lua:294
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Δεν υπάρχουν αρκετά δέντρα κοντά στο σημείο εκκίνησης. Επομένως λαμβάνεις επιπλέον πόρους για να εκκινήσεις την οικονομία σου"
 
 #: ../../../../data/scripting/messages.lua:66
 #: ../../../../data/scripting/messages.lua:68
@@ -155,7 +156,7 @@ msgstr "Πολύ Αδύναμη ΤΝ"
 #: ../../../../src/base/format/boolean_node.h:52
 #: ../../../../src/io/profile.cc:50
 msgid "false"
-msgstr ""
+msgstr "ψευδές"
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -163,12 +164,12 @@ msgstr ""
 #: ../../../../src/base/format/boolean_node.h:52
 #: ../../../../src/io/profile.cc:38
 msgid "true"
-msgstr ""
+msgstr "αληθές"
 
 #: ../../../../src/base/format/float_node.h:33
 msgctxt "decimal_separator"
 msgid "."
-msgstr ""
+msgstr "."
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -284,13 +285,13 @@ msgstr "Δεκ"
 #: ../../../../src/wui/interactive_gamebase.cc:101
 #: ../../../../src/wui/story_message_box.cc:89
 msgid "Main Menu"
-msgstr "Αρχικό Μενού"
+msgstr "Κεντρικό Μενού"
 
 #: ../../../../src/editor/editorinteractive.cc:100
 #: ../../../../src/wui/interactive_gamebase.cc:102
 msgctxt "hotkey"
 msgid "Esc"
-msgstr ""
+msgstr "Esc"
 
 #. * TRANSLATORS: Title for the tool menu button in the editor
 #. * TRANSLATORS: Heading in the editor keyboard shortcuts help
@@ -298,7 +299,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1055
 msgctxt "editor"
 msgid "Tools"
-msgstr ""
+msgstr "Εργαλεία"
 
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
@@ -309,11 +310,11 @@ msgstr ""
 #: ../../../../src/editor/editorinteractive.cc:130
 #: ../../../../src/wui/interactive_gamebase.cc:83
 msgid "Show / Hide"
-msgstr ""
+msgstr "Εμφάνισε / Απέκρυψε"
 
 #: ../../../../src/editor/editorinteractive.cc:143
 msgid "Tool size"
-msgstr "Μέγεθος εργαλείων"
+msgstr "Μέγεθος εργαλείου"
 
 #: ../../../../src/editor/editorinteractive.cc:158
 #: ../../../../src/wlapplication_options.cc:476
@@ -368,7 +369,7 @@ msgstr "Αποθήκευση Χάρτη"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../../../src/editor/editorinteractive.cc:237
 msgid "Publish Map Online…"
-msgstr ""
+msgstr "Δημοσίευση χάρτη στο διαδίκτυο..."
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../../../src/editor/editorinteractive.cc:245
@@ -383,7 +384,7 @@ msgstr "Επιλογές Χάρτη"
 #: ../../../../src/editor/editorinteractive.cc:250
 #: ../../../../src/wlapplication_options.cc:873
 msgid "Exit Editor"
-msgstr "Έξοδος από Συντάκτη"
+msgstr "Έξοδος από τον Επεξεργαστή"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:294
@@ -393,7 +394,7 @@ msgstr "Αλλαγή ύψους"
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:297
 msgid "Change the terrain height"
-msgstr "Αλλαγή ύψους εδάφους"
+msgstr "Αλλαξε το ύψος του εδάφους"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:304
@@ -404,7 +405,7 @@ msgstr "Τυχαίο ύψος"
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:307
 msgid "Set the terrain height to random values"
-msgstr ""
+msgstr "Θέσε το ύψος του εδάφους σε τυχαίες τιμές"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:314
@@ -417,7 +418,7 @@ msgstr "Έδαφος"
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:317
 msgid "Change the map’s terrain"
-msgstr ""
+msgstr "Άλλαξε το έδαφος του χάρτη"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:325
@@ -429,7 +430,7 @@ msgstr "Αμετακίνητα"
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:328
 msgid "Add or remove immovables"
-msgstr ""
+msgstr "Πρόσθεσε ή αφαίρεσε αμετακίνητα"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:335
@@ -440,7 +441,7 @@ msgstr "Ζώα"
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:338
 msgid "Add or remove animals"
-msgstr ""
+msgstr "Πρόσθεσε ή αφαίρεσε ζώα"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:346
@@ -455,17 +456,17 @@ msgstr "Πόροι"
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:349
 msgid "Set or change resources"
-msgstr ""
+msgstr "Θέσε ή άλλαξε πόρους"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:353
 msgid "Port spaces"
-msgstr ""
+msgstr "Τόποι λιμανιών"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:356
 msgid "Add or remove port spaces"
-msgstr ""
+msgstr "Πρόσθεσε ή αφαίρεσε τόπους λιμανιών"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:364
@@ -477,7 +478,7 @@ msgstr "Παίκτες"
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:367
 msgid "Set number of players and their names, tribes and starting positions"
-msgstr ""
+msgstr "Όρισε τον αριθμό των παικτών, τα ονόματά τους τις φυλές και τα σημεία εκκίνησής τους"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:371
@@ -489,7 +490,7 @@ msgstr "Αρχικό σημείο χάρτη"
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
-msgstr "Ορισμός της θέσης με συντεταγμένες (0, 0). Αυτή θα χρησιμοποιηθεί ως πάνω-αριστερά γωνία του μικροχάρτη."
+msgstr "Ορισμός της θέσης που έχει συντεταγμένες (0, 0). Αυτή θα χρησιμοποιηθεί ως η πάνω-αριστερά γωνία του μικροχάρτη."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:382
@@ -499,7 +500,7 @@ msgstr "Μέγεθος χάρτη"
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:385
 msgid "Change the map’s size"
-msgstr "Αλλαγή μεγέθους χάρτη"
+msgstr "Άλλαξε το μέγεθος του χάρτη"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:389
@@ -509,19 +510,19 @@ msgstr "Πληροφορίες"
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:392
 msgid "Click on a field to show information about it"
-msgstr ""
+msgstr "Κάνε κλίκ σε ένα πεδίο για να δεις περισσότερες πληροφορίες γι' αυτό"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:396
 #: ../../../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../../../src/wlapplication_options.cc:537
 msgid "Tool History"
-msgstr ""
+msgstr "Ιστορία εργαλείου"
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:399
 msgid "Restore previous tool settings"
-msgstr ""
+msgstr "Επανέφερε τις ρυθμίσεις εργαλείου"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -532,13 +533,13 @@ msgstr ""
 #: ../../../../src/editor/editorinteractive.cc:471
 #: ../../../../src/wui/interactive_gamebase.cc:271
 msgid "Hide Building Spaces"
-msgstr ""
+msgstr "Απόκρυψη οικοδομήσιμων εκτάσεων"
 
 #: ../../../../src/editor/editorinteractive.cc:471
 #: ../../../../src/ui_fsmenu/options.cc:292
 #: ../../../../src/wui/interactive_gamebase.cc:271
 msgid "Show Building Spaces"
-msgstr ""
+msgstr "Εμφάνιση οικοδομήσιμων εκτάσεων"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether to
 #. show maximum
@@ -546,85 +547,85 @@ msgstr ""
 #. etc.) are removed
 #: ../../../../src/editor/editorinteractive.cc:478
 msgid "Hide Maximum Building Spaces"
-msgstr ""
+msgstr "Απόκρυψη μέγιστης οικοδομήσιμης έκτασης"
 
 #: ../../../../src/editor/editorinteractive.cc:479
 msgid "Show Maximum Building Spaces"
-msgstr ""
+msgstr "Εμφάνιση μέγιστης οικοδομήσιμης έκτασης"
 
 #: ../../../../src/editor/editorinteractive.cc:482
 msgid ""
 "Toggle whether to show maximum building spaces that will be available if all"
 " immovables (trees, rocks, etc.) are removed"
-msgstr ""
+msgstr "Εναλλαγή μεταξύ της εμφάνισης ή της απόκρυψης της μέγιστης οικοδομήσιμης έκτασης που θα είναι διαθέσιμη, εάν όλα τα αμετακίνητα (δέντρα, βράχια, κλπ.) αφαιρεθούν"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
 #: ../../../../src/editor/editorinteractive.cc:488
 msgid "Hide Grid"
-msgstr ""
+msgstr "Απόκρυψη πλέγματος"
 
 #: ../../../../src/editor/editorinteractive.cc:488
 msgid "Show Grid"
-msgstr ""
+msgstr "Εμφάνιση πλέγματος"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
 #. *  (trees, rocks etc.) are shown
 #: ../../../../src/editor/editorinteractive.cc:496
 msgid "Hide Immovables"
-msgstr ""
+msgstr "Απόκρυψη αμετακίνητων"
 
 #: ../../../../src/editor/editorinteractive.cc:496
 msgid "Show Immovables"
-msgstr ""
+msgstr "Εμφάνιση αμετακίνητων"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
 #: ../../../../src/editor/editorinteractive.cc:501
 msgid "Hide Animals"
-msgstr ""
+msgstr "Απόκρυψη ζώων"
 
 #: ../../../../src/editor/editorinteractive.cc:501
 msgid "Show Animals"
-msgstr ""
+msgstr "Εμφάνιση ζώων"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. resources are shown
 #: ../../../../src/editor/editorinteractive.cc:507
 msgid "Hide Resources"
-msgstr ""
+msgstr "Απόκρυψη πόρων"
 
 #: ../../../../src/editor/editorinteractive.cc:507
 msgid "Show Resources"
-msgstr ""
+msgstr "Εμφάνιση πόρων"
 
 #: ../../../../src/editor/editorinteractive.cc:552
 msgid "Unsupported Format"
-msgstr "Μη Υποστηριζόμενη Δομή"
+msgstr "Μη υποστηριζόμενη μορφή"
 
 #: ../../../../src/editor/editorinteractive.cc:553
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
-msgstr "Αδυναμία φορτώματος του αρχείου \"%s\". Η δομή του αρχείου δεν φαίνεται συμβατή."
+msgstr "Αδυναμία φόρτωσης του αρχείου \"%s\". Η μορφή του αρχείου δεν φαίνεται συμβατή."
 
 #: ../../../../src/editor/editorinteractive.cc:618
 msgid "Exit Editor Confirmation"
-msgstr ""
+msgstr "Επιβεβαίωση Εγκατάλειψης Επεξεργαστή"
 
 #: ../../../../src/editor/editorinteractive.cc:618
 msgid "Unsaved Map"
-msgstr "Μη Αποθηκευμένοι Χάρτες"
+msgstr "Μη Αποθηκευμένος Χάρτης"
 
 #: ../../../../src/editor/editorinteractive.cc:619
 msgid "The map has not been saved, do you really want to quit?"
-msgstr "Ο χάρτης δεν έχει αποθηκευτεί. Θέλετε σίγουρα έξοδο;"
+msgstr "Ο χάρτης δεν έχει αποθηκευτεί. Θέλετε σίγουρα να βγείτε;"
 
 #: ../../../../src/editor/editorinteractive.cc:620
 msgid "Are you sure you wish to exit the editor?"
-msgstr ""
+msgstr "Είστε σίγουρος ότι θέλετε να εγκαταλείψετε τον επεξεργαστή;"
 
 #: ../../../../src/editor/editorinteractive.cc:1147
 #: ../../../../src/logic/addons.cc:48 ../../../../src/ui_basic/dropdown.cc:358
@@ -658,7 +659,7 @@ msgid ""
 "\n"
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
 "Please add this information to your report."
-msgstr ""
+msgstr "Συνέβη κάποιο σφάλμα. Το μήνυμα σφάλματος είναι:\n\n%1$s\n\nΠαρακαλώ αναφέρετε το πρόβλημα για να μας βοηθήσετε να βελτιώσουμε το Widelands. Θα βρείτε σχετικά μηνύματα στην στάνταρντ έξοδο (stdout.txt στα Windows). Χρησιμοποιείτε την έκδοση %2$s.\nΠαρακαλώ προσθέστε αυτή την πληροφορία στην αναφορά σας."
 
 #: ../../../../src/editor/editorinteractive.cc:1185
 #, c-format
@@ -695,7 +696,7 @@ msgstr ""
 
 #: ../../../../src/editor/editorinteractive.cc:1437
 msgid "Publish Map"
-msgstr ""
+msgstr "Δημοσίευση Χάρτη"
 
 #: ../../../../src/editor/editorinteractive.cc:1438
 #, c-format
@@ -707,19 +708,19 @@ msgid ""
 "Author: %3$s\n"
 "Description: %4$s\n"
 "Hint: %5$s\n"
-msgstr ""
+msgstr "Είσαι σίγουρος ότι θέλεις να δημοσιεύσεις αυτόν τον χάρτη στο διαδίκτυο;\n\nΌνομα: %1$s\nΕσωτερικό όνομα: %2$s\nΔημιουργός: %3$s\nΠεριγραφή: %4$s\nΣτοιχείο: %5$s\n"
 
 #: ../../../../src/editor/editorinteractive.cc:1462
 msgid "Login Error"
-msgstr ""
+msgstr "Σφάλμα Εισόδου"
 
 #: ../../../../src/editor/editorinteractive.cc:1467
 msgid "Uploading Add-On…"
-msgstr ""
+msgstr "Ανέβασμα πρόσθετου..."
 
 #: ../../../../src/editor/editorinteractive.cc:1468
 msgid "Saving map…"
-msgstr ""
+msgstr "Αποθήκευση Χάρτη..."
 
 #: ../../../../src/editor/editorinteractive.cc:1487
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:315
@@ -729,32 +730,32 @@ msgstr "Σφάλμα Αποθήκευσης Χάρτη!"
 
 #: ../../../../src/editor/editorinteractive.cc:1493
 msgid "Packaging add-on…"
-msgstr ""
+msgstr "Πακετάρισμα πρόσθετου..."
 
 #: ../../../../src/editor/editorinteractive.cc:1544
 msgid "Add-On Generation Error"
-msgstr ""
+msgstr "Σφάλμα δημιουργίας πρόσθετου"
 
 #: ../../../../src/editor/editorinteractive.cc:1545
 msgid "The add-on could not be written to the disk."
-msgstr ""
+msgstr "Το πρόσθετο δεν μπορεί να γραφτεί στο δίσκο."
 
 #: ../../../../src/editor/editorinteractive.cc:1552
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:108
 msgid "Uploading…"
-msgstr ""
+msgstr "Ανέβασμα..."
 
 #: ../../../../src/editor/editorinteractive.cc:1558
 msgid "Upload Error"
-msgstr ""
+msgstr "Σφάλμα ανεβάσματος"
 
 #: ../../../../src/editor/editorinteractive.cc:1580
 msgid "Success"
-msgstr ""
+msgstr "Επιτυχία"
 
 #: ../../../../src/editor/editorinteractive.cc:1581
 msgid "The add-on was uploaded successfully."
-msgstr ""
+msgstr "Το πρόσθετο ανέβηκε επιτυχώς."
 
 #: ../../../../src/editor/map_generator.cc:754
 msgid "Random Player"
@@ -766,7 +767,7 @@ msgstr "Τυχαίος Παίκτης"
 #: ../../../../src/editor/tools/increase_height_tool.cc:62
 #, c-format
 msgid "Height: inc./dec. %1$d, set to %2$d"
-msgstr ""
+msgstr "Ύψος: αυξ./μει. %1$d, ορίστηκε σε %2$d"
 
 #. * TRANSLATORS: An entry in the tool history list. Inc. and dec. stand for
 #. increase and
@@ -774,43 +775,43 @@ msgstr ""
 #: ../../../../src/editor/tools/increase_resources_tool.cc:85
 #, c-format
 msgid "%1$s: inc./dec. %2$d, set to %3$d"
-msgstr ""
+msgstr "%1$s: αύξ./μει. %2$d, ορίστηκε σε %3$d"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../../../src/editor/tools/noise_height_tool.cc:78
 #, c-format
 msgid "Noise height: %1$d–%2$d"
-msgstr ""
+msgstr "Θόρυβος ύψους: %1$d–%2$d"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../../../src/editor/tools/place_critter_tool.cc:127
 #, c-format
 msgid "Critter: %1$s"
-msgstr ""
+msgstr "Ζώο: %1$s"
 
 #: ../../../../src/editor/tools/place_immovable_tool.cc:141
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:95
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:100
 msgid "Automatic Trees"
-msgstr ""
+msgstr "Αυτόματα δέντρα"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../../../src/editor/tools/place_immovable_tool.cc:148
 #, c-format
 msgid "Immovable: %1$s"
-msgstr ""
+msgstr "Αμετακίνητο: %1$s"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../../../src/editor/tools/set_terrain_tool.cc:120
 #, c-format
 msgid "Terrain: %1$s"
-msgstr ""
+msgstr "Έδαφος: %1$s"
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../../../src/editor/ui_menus/categorized_item_selection_menu.h:192
 #, c-format
 msgid "Current: %s …"
-msgstr ""
+msgstr "Τρέχον: %s …"
 
 #. * TRANSLATORS: Help text in an editor tool
 #: ../../../../src/editor/ui_menus/categorized_item_selection_menu.h:195
@@ -822,7 +823,7 @@ msgstr "Κλικ για επιλογή ενός στοιχείου. Χρήση �
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:176
 #, c-format
 msgid "Current: %s"
-msgstr ""
+msgstr "Τρέχον: %s"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:44
 msgid "Field Information"
@@ -888,11 +889,11 @@ msgstr ""
 #: ../../../../src/editor/ui_menus/field_info_window.cc:131
 #, c-format
 msgid "Owned by: Player %u"
-msgstr ""
+msgstr "Κατέχεται από τον παίχτη %u"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:134
 msgid "Owned by: —"
-msgstr ""
+msgstr "Κατέχεται από: —"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:144
 #, c-format
@@ -907,7 +908,7 @@ msgstr "Όνομα: %s"
 #: ../../../../src/editor/ui_menus/field_info_window.cc:155
 #, c-format
 msgid "Is: %s"
-msgstr "Είναι: %s"
+msgstr "είναι: %s"
 
 #. * TRANSLATORS: Heading for immovables and animals in editor info tool
 #: ../../../../src/editor/ui_menus/field_info_window.cc:164
@@ -937,7 +938,7 @@ msgstr "Πλοία: %s"
 #: ../../../../src/editor/ui_menus/field_info_window.cc:222
 msgctxt "resources"
 msgid "%1%× %2%"
-msgstr ""
+msgstr "%1%× %2%"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:229
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:159
@@ -954,7 +955,7 @@ msgstr "Όνομα: %s"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:233
 msgid "Size: %1% × %2%"
-msgstr ""
+msgstr "Μέγεθος: %1% × %2%"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:237
 #, c-format
@@ -968,7 +969,7 @@ msgstr "Παίκτες: –"
 #: ../../../../src/editor/ui_menus/field_info_window.cc:242
 #, c-format
 msgid "Author: %s"
-msgstr "Συγγραφέας: %s"
+msgstr "Δημιουργός: %s"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:244
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:297
@@ -982,17 +983,17 @@ msgstr "Περιγραφή: %s"
 #: ../../../../src/editor/ui_menus/field_info_window.cc:251
 msgctxt "addons"
 msgid "(none)"
-msgstr ""
+msgstr "(κανένα)"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:258
 #, c-format
 msgid "%1$s; %2$s"
-msgstr ""
+msgstr "%1$s· %2$s"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:262
 #, c-format
 msgid "Enabled Add-Ons: %s"
-msgstr ""
+msgstr "Ενεργά πρόσθετα: %s"
 
 #: ../../../../src/editor/ui_menus/help.cc:36
 #: ../../../../src/ui_fsmenu/login_box.cc:255
@@ -1015,19 +1016,19 @@ msgstr "Οι χάρτες μου"
 #: ../../../../src/editor/ui_menus/main_menu_load_map.cc:84
 #: ../../../../src/wui/mapdata.cc:193
 msgid "Multiplayer Scenarios"
-msgstr ""
+msgstr "Σενάριο με πολλούς παίκτες"
 
 #. * TRANSLATORS: Directory name for SP Scenarios in map selection
 #: ../../../../src/editor/ui_menus/main_menu_load_map.cc:86
 #: ../../../../src/wui/mapdata.cc:196
 msgid "Singleplayer Scenarios"
-msgstr ""
+msgstr "Σενάριο με έναν παίκτη"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
 #: ../../../../src/editor/ui_menus/main_menu_load_map.cc:88
 #: ../../../../src/wui/mapdata.cc:202
 msgid "Downloaded Maps"
-msgstr ""
+msgstr "Κατεβασμένοι χάρτες"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
 #: ../../../../src/editor/ui_menus/main_menu_load_map.cc:91
@@ -1039,7 +1040,7 @@ msgstr "Τρέχων κατάλογος: %s"
 #. * TRANSLATORS: "Display: Original/Localized map/file names"
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:94
 msgid "Display"
-msgstr ""
+msgstr "Εμφάνιση"
 
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:114
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:250
@@ -1091,7 +1092,7 @@ msgstr "Άκυρο"
 
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:143
 msgid "File names"
-msgstr ""
+msgstr "Ονόματα αρχείων"
 
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:144
 msgid "Map names"
@@ -1103,11 +1104,11 @@ msgstr "Πρωταρχικά ονόματα χαρτών"
 
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:148
 msgid "Translated map names"
-msgstr ""
+msgstr "Μεταφρασμένα ονόματα χαρτών"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:51
 msgid "Click player to remove"
-msgstr ""
+msgstr "Κάνε κλικ στον παίκτη για αφαίρεση"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:61
 #: ../../../../src/ui_basic/textinput.cc:383
@@ -1134,12 +1135,12 @@ msgstr "+"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:114
 msgid "Add a player to this team"
-msgstr ""
+msgstr "Πρόσθεσε έναν παίκτη σε αυτή την ομάδα"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:327
 #: ../../../../src/logic/addons.cc:69
 msgid "Theme"
-msgstr ""
+msgstr "Θέμα"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:338
 msgid "Add lineup"
@@ -1156,7 +1157,7 @@ msgstr "Όνομα χάρτη:"
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:366
 #: ../../../../src/ui_fsmenu/addons/packager.cc:166
 msgid "Author:"
-msgstr ""
+msgstr "Δημιουργός:"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:372
 #: ../../../../src/ui_fsmenu/addons/packager.cc:189
@@ -1166,7 +1167,7 @@ msgstr "Περιγραφή:"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:378
 msgid "Hint (optional):"
-msgstr ""
+msgstr "Στοιχείο (προαιρετικά):"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:389
 msgid "Tags:"
@@ -1176,7 +1177,7 @@ msgstr "Ετικέτες:"
 #. * "Teams of 2", etc.
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:397
 msgid "This map is suitable for:"
-msgstr ""
+msgstr "Αυτός ο χάρτης είναι κατάλληλος για:"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:399
 msgid ""
@@ -1195,11 +1196,11 @@ msgstr ""
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:421
 msgctxt "map_theme"
 msgid "(none)"
-msgstr ""
+msgstr "(κανένα)"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:432
 msgid "Ferry range:"
-msgstr ""
+msgstr "Εύρος πορθμείου:"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:433
 msgid ""
@@ -1263,7 +1264,7 @@ msgstr "Δημιουργία άδειου χάρτη σε εξέλιξη…"
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:63
 #: ../../../../src/logic/addons.cc:59
 msgid "Map Generator"
-msgstr ""
+msgstr "Γεννήτρια Χάρτη"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:81
 #: ../../../../src/wui/gamedetails.cc:169
@@ -1295,7 +1296,7 @@ msgstr "Κλίμα"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:126
 msgid "Terrain Distribution"
-msgstr ""
+msgstr "Κατανομή Εδάφους"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:143
 msgid "Water:"
@@ -1307,7 +1308,7 @@ msgstr "Γη:"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:171
 msgid "Wasteland:"
-msgstr "Ρημαδιό:"
+msgstr "Άγονη γη:"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:184
 msgid "Mountains:"
@@ -1331,7 +1332,7 @@ msgstr "Τυχαίος αριθμός:"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:235
 msgid "Generate a new random number"
-msgstr ""
+msgstr "Πάραξε έναν νέο τυχαίο αριθμό"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:244
 msgid "Map ID:"
@@ -1341,39 +1342,39 @@ msgstr "Αναγνωριστικό χάρτη:"
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:257
 msgctxt "map_generator"
 msgid "Default"
-msgstr ""
+msgstr "Προεπιλεγμένο"
 
 #. * TRANSLATORS: Random Climate
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:285
 msgctxt "climate"
 msgid "Random"
-msgstr ""
+msgstr "Τυχαίο"
 
 #. * TRANSLATORS: Default Terrain Distribution
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:316
 msgctxt "terrain"
 msgid "Default"
-msgstr ""
+msgstr "Προεπιλεγμένο"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:318
 msgid "Alpine"
-msgstr ""
+msgstr "Αλπικό"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:319
 msgid "Atoll"
-msgstr ""
+msgstr "Κοραλλιογενές νησί"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:320
 #: ../../../../src/logic/map.cc:62
 msgid "Wasteland"
-msgstr "Ρημαδιό"
+msgstr "Άγονη γη"
 
 #. * TRANSLATORS: Random Terrain Distribution
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:322
 msgctxt "terrain"
 msgid "Random"
-msgstr ""
+msgstr "Τυχαίο"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:633
 msgid "Generating random map…"
@@ -1456,17 +1457,17 @@ msgstr "ανώνυμος"
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:173
 msgid "A file or directory with that name already exists."
-msgstr ""
+msgstr "Υπάρχει ήδη αρχείο ή κατάλογος με αυτό το όνομα."
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:174
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:187
 msgid "Error Creating Directory!"
-msgstr ""
+msgstr "Σφάλμα δημιουργίας καταλόγου!"
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:186
 #, c-format
 msgid "Error while creating directory ‘%s’."
-msgstr ""
+msgstr "Σφάλμα κατά τη δημιουργία του καταλόγου ‘%s’."
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:313
 #: ../../../../src/wui/game_main_menu_save_game.cc:286
@@ -1476,11 +1477,11 @@ msgstr "Ένα αρχείο με το όνομα ‘%s’ ήδη υπάρχει.
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:345
 msgid "Saving the map…"
-msgstr ""
+msgstr "Αποθήκευση του χάρτη..."
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:363
 msgid "Map saved"
-msgstr ""
+msgstr "Ο χάρτης αποθηκεύτηκε"
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:53
 msgid "Enter Directory Name:"
@@ -1488,15 +1489,15 @@ msgstr "Εισαγωγή Ονόματος Καταλόγου:"
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:110
 msgid "This extension is reserved!"
-msgstr ""
+msgstr "Η επέκταση είναι δεσμευμένη!"
 
 #: ../../../../src/editor/ui_menus/map_size_box.cc:38
 msgid "Width"
-msgstr ""
+msgstr "Πλάτος"
 
 #: ../../../../src/editor/ui_menus/map_size_box.cc:50
 msgid "Height"
-msgstr ""
+msgstr "Ύψος"
 
 #. * TRANSLATORS: Window title in the editor when a player has selected more
 #. than the
@@ -1519,7 +1520,7 @@ msgstr "Δεν συνιστάται ο ορισμός άνω των 8 παικτ
 #. for testing purposes. Are you sure that you want more than 8 players?'
 #: ../../../../src/editor/ui_menus/player_menu.cc:77
 msgid "Do not remind me again"
-msgstr "Μη υπενθύμιση ξανά"
+msgstr "Μη μου το ξαναθυμίσεις"
 
 #: ../../../../src/editor/ui_menus/player_menu.cc:88
 msgid "Abort"
@@ -1658,27 +1659,27 @@ msgstr "Σταθερό ύψος"
 #: ../../../../src/wui/stock_menu.cc:36
 #, c-format
 msgid "%1$s %2$s"
-msgstr ""
+msgstr "%1$s %2$s"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:51
 #, c-format
 msgid "%1$s (removable by e.g. placing roads)"
-msgstr ""
+msgstr "%1$s (αφαιρέσιμο από π.χ. δρόμους)"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:54
 #, c-format
 msgid "%1$s (needs a small building plot)"
-msgstr ""
+msgstr "%1$s (χρειάζεται ένα μικρό οικόπεδο)"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:57
 #, c-format
 msgid "%1$s (needs a medium building plot)"
-msgstr ""
+msgstr "%1$s (χρειάζεται ένα μεσαίο οικόπεδο)"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:60
 #, c-format
 msgid "%1$s (needs a big building plot)"
-msgstr ""
+msgstr "%1$s (χρειάζεται ένα μεγάλο οικόπεδο)"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:101
 msgid "Automatically place the trees which grow best on the terrain"
@@ -1725,7 +1726,7 @@ msgstr "Μέγεθος Εργαλείου"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:51
 msgid "Size:"
-msgstr ""
+msgstr "Μέγεθος:"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:64
 msgid "Gaps:"
@@ -1733,7 +1734,7 @@ msgstr ""
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:67
 msgid "Radius of the active tool"
-msgstr ""
+msgstr "Ακτίνα του ενεργού εργαλείου"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:68
 msgid "Amount of random gaps in the tool’s area"
@@ -1742,7 +1743,7 @@ msgstr ""
 #: ../../../../src/game_io/game_loader.cc:69
 #, c-format
 msgid "Loading game: %1$s (%2$u/%3$d)"
-msgstr ""
+msgstr "Φόρτωση παιχνιδιού: %1$s (%2$u/%3$d)"
 
 #: ../../../../src/game_io/game_loader.cc:71
 #: ../../../../src/game_io/game_saver.cc:57
@@ -1754,17 +1755,17 @@ msgstr ""
 #: ../../../../src/game_io/game_loader.cc:135
 #: ../../../../src/game_io/game_saver.cc:82
 msgid "Economies"
-msgstr ""
+msgstr "Οικονομίες"
 
 #: ../../../../src/game_io/game_loader.cc:142
 #: ../../../../src/game_io/game_saver.cc:89
 msgid "AI"
-msgstr ""
+msgstr "TN"
 
 #: ../../../../src/game_io/game_loader.cc:149
 #: ../../../../src/game_io/game_saver.cc:96
 msgid "Command queue"
-msgstr ""
+msgstr "Ουρά εντολών"
 
 #: ../../../../src/game_io/game_loader.cc:157
 #: ../../../../src/map_io/map_saver.cc:146
@@ -1778,20 +1779,20 @@ msgstr "Μηνύματα"
 #: ../../../../src/game_io/game_loader.cc:175
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:193
 msgid "Finishing"
-msgstr ""
+msgstr "Τερματισμός"
 
 #: ../../../../src/game_io/game_saver.cc:50
 #, c-format
 msgid "Saving game: %1$s (%2$d/%3$d)"
-msgstr ""
+msgstr "Αποθήκευση παιχνιδιού: %1$s (%2$d/%3$d)"
 
 #: ../../../../src/game_io/game_saver.cc:52
 msgid "Autosaving game…"
-msgstr ""
+msgstr "Αυτόματη αποθήκευση παιχνιδιού..."
 
 #: ../../../../src/game_io/game_saver.cc:103
 msgid "Interactive player"
-msgstr ""
+msgstr "Διαδραστικός παίκτης"
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1854,7 +1855,7 @@ msgstr ""
 
 #: ../../../../src/graphic/text/rt_render.cc:1421
 msgid "Copy link to clipboard"
-msgstr ""
+msgstr "Αντιγραφή συνδέσμου στο πρόχειρο"
 
 #: ../../../../src/graphic/text_layout.cc:278
 #, c-format
@@ -1868,7 +1869,7 @@ msgstr ""
 #: ../../../../src/io/filesystem/illegal_filename_check.cc:69
 msgctxt "illegal_filename_characters"
 msgid "blank space"
-msgstr ""
+msgstr "κενό διάστημα"
 
 #. * TRANSLATORS: Tooltip entry for characters in illegal filenames.
 #. *  %s is a list of illegal characters
@@ -1905,7 +1906,7 @@ msgstr "ναι"
 #. console
 #: ../../../../src/io/profile.cc:44
 msgid "on"
-msgstr ""
+msgstr "ενεργό"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -1919,15 +1920,15 @@ msgstr "όχι"
 #. console
 #: ../../../../src/io/profile.cc:56
 msgid "off"
-msgstr ""
+msgstr "ανενεργό"
 
 #: ../../../../src/logic/addons.cc:50
 msgid "Tribes"
-msgstr ""
+msgstr "Φυλές"
 
 #: ../../../../src/logic/addons.cc:52
 msgid "World"
-msgstr ""
+msgstr "Κόσμος"
 
 #: ../../../../src/logic/addons.cc:54
 msgid "Script"
@@ -1958,7 +1959,7 @@ msgstr ""
 #: ../../../../src/logic/addons.cc:112
 #, c-format
 msgid "%1$s.%2$u"
-msgstr ""
+msgstr "%1$s.%2$u"
 
 #: ../../../../src/logic/addons.cc:209
 msgid "No conflicts"
@@ -2020,7 +2021,7 @@ msgstr[1] ""
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../../../src/logic/addons.cc:271
 msgid "None"
-msgstr ""
+msgstr "Κανένα"
 
 #: ../../../../src/logic/addons.cc:275
 #, c-format
@@ -2041,42 +2042,42 @@ msgstr[1] ""
 #. * TRANSLATORS: "12 steps northwest of Port1"
 #: ../../../../src/logic/detected_port_space.cc:52
 msgid "northwest"
-msgstr ""
+msgstr "βορειοδυτικά"
 
 #. * TRANSLATORS: "12 steps northeast of Port1"
 #: ../../../../src/logic/detected_port_space.cc:56
 msgid "northeast"
-msgstr ""
+msgstr "βορειοανατολικά"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../../../src/logic/detected_port_space.cc:60
 msgid "southwest"
-msgstr ""
+msgstr "νοτιοδυτικά"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../../../src/logic/detected_port_space.cc:64
 msgid "southeast"
-msgstr ""
+msgstr "νοτιοανατολικά"
 
 #. * TRANSLATORS: "12 steps north of Port1"
 #: ../../../../src/logic/detected_port_space.cc:68
 msgid "north"
-msgstr ""
+msgstr "βόρεια"
 
 #. * TRANSLATORS: "12 steps south of Port1"
 #: ../../../../src/logic/detected_port_space.cc:72
 msgid "south"
-msgstr ""
+msgstr "νότια"
 
 #. * TRANSLATORS: "12 steps west of Port1"
 #: ../../../../src/logic/detected_port_space.cc:76
 msgid "west"
-msgstr ""
+msgstr "δυτικά"
 
 #. * TRANSLATORS: "12 steps east of Port1"
 #: ../../../../src/logic/detected_port_space.cc:80
 msgid "east"
-msgstr ""
+msgstr "ανατολικά"
 
 #: ../../../../src/logic/detected_port_space.cc:88
 #, c-format
@@ -2114,49 +2115,49 @@ msgstr[1] ""
 #: ../../../../src/logic/detected_port_space.cc:120
 msgctxt "direction"
 msgid "NW"
-msgstr ""
+msgstr "ΒΔ"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northeast.
 #: ../../../../src/logic/detected_port_space.cc:124
 msgctxt "direction"
 msgid "NE"
-msgstr ""
+msgstr "ΒΑ"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southwest.
 #: ../../../../src/logic/detected_port_space.cc:128
 msgctxt "direction"
 msgid "SW"
-msgstr ""
+msgstr "ΝΔ"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southeast.
 #: ../../../../src/logic/detected_port_space.cc:132
 msgctxt "direction"
 msgid "SE"
-msgstr ""
+msgstr "ΝΑ"
 
 #. * TRANSLATORS: This is an abbreviated direction: North.
 #: ../../../../src/logic/detected_port_space.cc:136
 msgctxt "direction"
 msgid "N"
-msgstr ""
+msgstr "Β"
 
 #. * TRANSLATORS: This is an abbreviated direction: South.
 #: ../../../../src/logic/detected_port_space.cc:140
 msgctxt "direction"
 msgid "S"
-msgstr ""
+msgstr "Ν"
 
 #. * TRANSLATORS: This is an abbreviated direction: West.
 #: ../../../../src/logic/detected_port_space.cc:144
 msgctxt "direction"
 msgid "W"
-msgstr ""
+msgstr "Δ"
 
 #. * TRANSLATORS: This is an abbreviated direction: East.
 #: ../../../../src/logic/detected_port_space.cc:148
 msgctxt "direction"
 msgid "E"
-msgstr ""
+msgstr "Α"
 
 #. * TRANSLATORS: Placeholders are gametime and shipname. Keep this short.
 #: ../../../../src/logic/detected_port_space.cc:157
@@ -2194,7 +2195,7 @@ msgstr ""
 #: ../../../../src/logic/editor_game_base.cc:236
 #, c-format
 msgid "Creating player %d…"
-msgstr ""
+msgstr "Δημιουργία παίκτη %d…"
 
 #: ../../../../src/logic/editor_game_base.cc:306
 msgid "Postloading world and tribes…"
@@ -2202,15 +2203,15 @@ msgstr ""
 
 #: ../../../../src/logic/editor_game_base.cc:564
 msgid "Cleaning up for loading: Map objects (1/3)"
-msgstr ""
+msgstr "Σιγύρισμα για φόρτωση: Αντικείμενα χάρτη (1/3)"
 
 #: ../../../../src/logic/editor_game_base.cc:570
 msgid "Cleaning up for loading: Players (2/3)"
-msgstr ""
+msgstr "Σιγύρισμα για φόρτωση: Παίκτες (2/3)"
 
 #: ../../../../src/logic/editor_game_base.cc:573
 msgid "Cleaning up for loading: Map (3/3)"
-msgstr ""
+msgstr "Σιγύρισμα για φόρτωση: Χάρτης (3/3)"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
 #: ../../../../src/logic/game.cc:145
@@ -2220,16 +2221,16 @@ msgstr "Μη ορισμένη"
 #: ../../../../src/logic/game.cc:246 ../../../../src/logic/game.cc:289
 #: ../../../../src/logic/game.cc:407 ../../../../src/logic/game.cc:462
 msgid "Preloading map…"
-msgstr ""
+msgstr "Προφόρτωση χάρτη..."
 
 #: ../../../../src/logic/game.cc:345
 msgid "Initializing game…"
-msgstr ""
+msgstr "Αρχικοποίηση παιχνιδιού..."
 
 #. * TRANSLATORS: All players (plural)
 #: ../../../../src/logic/game.cc:604
 msgid "Creating player infrastructure…"
-msgstr ""
+msgstr "Δημιουργία υποδομής παικτών..."
 
 #: ../../../../src/logic/game.cc:621 ../../../../src/logic/player.cc:258
 msgid "Missing starting position"
@@ -2240,15 +2241,15 @@ msgstr "Έλλειψη θέσης εκκίνησης"
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
-msgstr ""
+msgstr "Το Widelands δεν μπόρεσε να εκκινήσει το παιχνίδι διότι ο παίχτης %u δεν έχει σημείο εκκίνησης.\nΜπορείς να προσθέσεις χειροκίνητα ένα σημείο εκκινησης με τον επεξεργαστή του Widelands για να διορθώσεις το πρόβλημα."
 
 #: ../../../../src/logic/game.cc:722
 msgid "Initializing…"
-msgstr ""
+msgstr "Αρχικοποίηση..."
 
 #: ../../../../src/logic/game.cc:1244
 msgid "Trade Offer"
-msgstr "Προσφορά Εμπορίου"
+msgstr "Εμπορική Προσφορά"
 
 #: ../../../../src/logic/game.cc:1246
 msgid "This market has received a new trade offer."
@@ -2263,7 +2264,7 @@ msgstr ""
 #: ../../../../src/logic/generic_save_handler.cc:223
 #: ../../../../src/logic/generic_save_handler.cc:227
 msgid "File successfully saved!"
-msgstr ""
+msgstr "Το αρχείο σωθηκε με επιτυχία!"
 
 #: ../../../../src/logic/generic_save_handler.cc:228
 #, c-format
@@ -2310,7 +2311,7 @@ msgstr ""
 
 #: ../../../../src/logic/generic_save_handler.cc:273
 msgid "An unexpected error occurred:"
-msgstr ""
+msgstr "Συνέβη ένα απροσδόκητο σφάλμα:"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../../../src/logic/map.cc:58
@@ -2335,18 +2336,18 @@ msgstr "Δεν ορίστηκε περιγραφή"
 #: ../../../../src/logic/map_objects/tribes/constructionsite.cc:169
 #, c-format
 msgid "%i%% built"
-msgstr ""
+msgstr "%i%% χτίστηκαν"
 
 #: ../../../../src/logic/map_objects/tribes/dismantlesite.cc:115
 #, c-format
 msgid "%u%% dismantled"
-msgstr "%u%% αποσυναρμολογημένο"
+msgstr "%u%% αποξηλώθηκαν"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:254
 msgctxt "building"
 msgid "Lost!"
-msgstr ""
+msgstr "Ήττα!"
 
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:255
 msgid "Militarysite lost!"
@@ -2357,7 +2358,7 @@ msgstr ""
 #. "Success!"
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:297
 msgid "Enemy Defeated!"
-msgstr ""
+msgstr "Κατατρόπωση Εχθρού!"
 
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:297
 msgid "Enemy at site defeated!"
@@ -2379,7 +2380,7 @@ msgstr "Βρίσκεστε υπό επίθεση"
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:454
 #, c-format
 msgid "the economy needs the ware ‘%s’"
-msgstr "η οικονομία χρειάζεται το υλικό ‘%s’"
+msgstr "η οικονομία χρειάζεται το εμπόρευμα ‘%s’"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn't need the
@@ -2387,7 +2388,7 @@ msgstr "η οικονομία χρειάζεται το υλικό ‘%s’"
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:461
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
-msgstr "η οικονομία δεν χρειάζεται το υλικό ‘%s’"
+msgstr "η οικονομία δεν χρειάζεται το εμπόρευμα ‘%s’"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
@@ -2433,13 +2434,13 @@ msgstr "%1$ix %2$s"
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:537
 #, c-format
 msgid "the building has the following wares: %s"
-msgstr "το κτίριο έχει τα εξής υλικά: %s"
+msgstr "το κτίριο έχει τα εξής εμπορεύματα: %s"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:561
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
-msgstr "το κτίριο δεν έχει τα εξής υλικά: %s"
+msgstr "το κτίριο δεν έχει τα εξής εμπορεύματα: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
@@ -2490,19 +2491,19 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1294
 #, c-format
 msgid "Did not start %1$s because %2$s"
-msgstr ""
+msgstr "Η %1$sδεν ξεκίνησε επειδή %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware '%s'"
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:774
 #, c-format
 msgid "Completed %1$s because %2$s"
-msgstr ""
+msgstr "Η %1$s ολοκληρώθηκε επειδή %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware '%s'"
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:781
 #, c-format
 msgid "Skipped %1$s because %2$s"
-msgstr ""
+msgstr "Η %1$s παραλήφθηκε επειδή %2$s"
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
 #. are missing'
@@ -2522,8 +2523,8 @@ msgstr[1] "%s λείπουν"
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
-msgstr[0] "Παρήγαγε %s"
-msgstr[1] "Παρήγαγε %s"
+msgstr[0] "Παράχθηκε %s"
+msgstr[1] "Παράχθησαν %s"
 
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
@@ -2532,8 +2533,8 @@ msgstr[1] "Παρήγαγε %s"
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
-msgstr[0] "Στρατολόγησε %s"
-msgstr[1] "Στρατολόγησε %s"
+msgstr[0] "Στρατολογήθηκε %s"
+msgstr[1] "Στρατολογήθηκαν %s"
 
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1851
 msgid "No soldier found for this training level!"
@@ -2546,7 +2547,7 @@ msgstr "Δεν βρέθηκε κανένας στρατιώτης για αυτ�
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1894
 #, c-format
 msgid "Completed %s"
-msgstr ""
+msgstr "Ολοκληρώθηκε %s"
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:397
 msgid "(stopped)"
@@ -2568,11 +2569,11 @@ msgstr "Αδυναμία εύρεσης άλλων πόρων!"
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1270
 msgctxt "building"
 msgid "No Shore"
-msgstr ""
+msgstr "Δεν υπάρχει ακτή"
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1250
 msgid "Shipyard Without Shore"
-msgstr ""
+msgstr "Ναυπηγείο Χωρίς Ακτή"
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1251
 msgid ""
@@ -2790,7 +2791,7 @@ msgstr "Ένα πλοίο αποστολής αναμένει εντολές σ�
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2408
 msgctxt "ship_state"
 msgid "Sinking"
-msgstr ""
+msgstr "Βυθίζεται"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2410
 msgctxt "ship_state"
@@ -2834,7 +2835,7 @@ msgstr ""
 #: ../../../../src/wui/seafaring_statistics_menu.cc:261
 msgctxt "ship_state"
 msgid "Empty"
-msgstr ""
+msgstr "Άδειο"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
@@ -2878,18 +2879,18 @@ msgstr "Ιδρύει Αποικία"
 #: ../../../../src/logic/map_objects/tribes/soldier.cc:1544
 #: ../../../../src/logic/map_objects/tribes/soldier.cc:1548
 msgid "Logic error"
-msgstr ""
+msgstr "Λογικό σφάλμα"
 
 #. * TRANSLATORS: Example: Loading Barbarians: Buildings (2/6)
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:160
 msgid "Loading %1%: %2% (%3%/%4%)"
-msgstr ""
+msgstr "Φόρτωση %1%: %2% (%3%/%4%)"
 
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:165
 #: ../../../../src/wui/general_statistics_menu.cc:175
 #: ../../../../src/wui/minimap.cc:213
 msgid "Ships"
-msgstr ""
+msgstr "Πλοία"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:173
@@ -3001,7 +3002,7 @@ msgstr ""
 #: ../../../../src/wui/productionsitewindow.cc:107
 #: ../../../../src/wui/productionsitewindow.cc:124
 msgid "Worker"
-msgstr ""
+msgstr "Εργάτης"
 
 #: ../../../../src/logic/map_objects/tribes/worker.cc:2092
 msgid "Worker got lost!"
@@ -3010,12 +3011,12 @@ msgstr "Χάθηκε εργάτης!"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../../../src/logic/map_objects/world/terrain_description.cc:71
 msgid "arable"
-msgstr ""
+msgstr "καλλιεργήσιμο"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../../../src/logic/map_objects/world/terrain_description.cc:81
 msgid "navigable"
-msgstr ""
+msgstr "πλευστό"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../../../src/logic/map_objects/world/terrain_description.cc:86
@@ -3025,7 +3026,7 @@ msgstr "απρόσιτο"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../../../src/logic/map_objects/world/terrain_description.cc:91
 msgid "mineable"
-msgstr ""
+msgstr "εξορύξιμο"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../../../src/logic/map_objects/world/terrain_description.cc:96
@@ -3053,20 +3054,20 @@ msgstr "Πλοίο %d"
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
-msgstr ""
+msgstr "Λιμάνι %d"
 
 #: ../../../../src/logic/player.cc:2040
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
-msgstr ""
+msgstr "Αποθήκη %d"
 
 #: ../../../../src/logic/playercommand.cc:2358
 #: ../../../../src/wlapplication_options.cc:674
 #: ../../../../src/wui/game_diplomacy_menu.cc:36
 #: ../../../../src/wui/interactive_gamebase.cc:250
 msgid "Diplomacy"
-msgstr ""
+msgstr "Διπλωματία"
 
 #: ../../../../src/logic/playercommand.cc:2372
 #, c-format
@@ -3146,7 +3147,7 @@ msgstr ""
 
 #: ../../../../src/logic/replay.cc:94
 msgid "Desync"
-msgstr ""
+msgstr "Αποσυγχρονισμός"
 
 #: ../../../../src/logic/replay.cc:95
 #, c-format
@@ -3170,7 +3171,7 @@ msgstr "Η αποθηκευμένη αναπαραγωγή έφτασε στο �
 
 #: ../../../../src/logic/save_handler.cc:114
 msgid "Saving game…"
-msgstr ""
+msgstr "Αποθήκευση παιχνιδιού..."
 
 #: ../../../../src/logic/save_handler.cc:152
 msgid "Saving skipped"
@@ -3184,7 +3185,7 @@ msgstr "Αποτυχία αποθήκευσης!"
 #: ../../../../src/logic/save_handler.cc:186
 #: ../../../../src/wui/game_main_menu_save_game.cc:321
 msgid "Game saved"
-msgstr ""
+msgstr "Το παιχνίδι αποθηκεύτηκε"
 
 #: ../../../../src/map_io/map_saver.cc:85
 #, c-format
@@ -3198,12 +3199,12 @@ msgstr ""
 #: ../../../../src/map_io/map_saver.cc:120
 #: ../../../../src/map_io/widelands_map_loader.cc:237
 msgid "Heights"
-msgstr ""
+msgstr "Ύψη"
 
 #: ../../../../src/map_io/map_saver.cc:127
 #: ../../../../src/map_io/widelands_map_loader.cc:244
 msgid "Terrains"
-msgstr ""
+msgstr "Εδάφη"
 
 #: ../../../../src/map_io/map_saver.cc:134
 #: ../../../../src/map_io/widelands_map_loader.cc:257
@@ -3224,7 +3225,7 @@ msgstr ""
 #: ../../../../src/map_io/widelands_map_loader.cc:316
 #: ../../../../src/wui/minimap.cc:180
 msgid "Flags"
-msgstr ""
+msgstr "Σημαίες"
 
 #: ../../../../src/map_io/map_saver.cc:206
 #: ../../../../src/map_io/widelands_map_loader.cc:323
@@ -3255,7 +3256,7 @@ msgstr ""
 
 #: ../../../../src/map_io/map_saver.cc:280
 msgid "Territory"
-msgstr ""
+msgstr "Περιοχή"
 
 #: ../../../../src/map_io/map_saver.cc:287
 #: ../../../../src/map_io/widelands_map_loader.cc:390
@@ -3278,11 +3279,11 @@ msgstr "Στόχοι"
 #: ../../../../src/map_io/map_saver.cc:307
 #: ../../../../src/map_io/widelands_map_loader.cc:432
 msgid "Images"
-msgstr ""
+msgstr "Εικόνες"
 
 #: ../../../../src/map_io/map_saver.cc:317
 msgid "Minimap"
-msgstr ""
+msgstr "Μικροχάρτης"
 
 #: ../../../../src/map_io/map_scripting_packet.cc:80
 msgid ""
@@ -3307,7 +3308,7 @@ msgstr ""
 
 #: ../../../../src/map_io/widelands_map_loader.cc:304
 msgid "Territories"
-msgstr ""
+msgstr "Περιοχές"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:344
 msgid "Initializing flags"
@@ -3343,7 +3344,7 @@ msgstr ""
 #: ../../../../src/network/gameclient.cc:233
 #: ../../../../src/network/internet_gaming.cc:104
 msgid "Could not establish connection to host"
-msgstr ""
+msgstr "Αδυναμία δημιουργίας σύνδεσης με τον εξυπηρετητή"
 
 #: ../../../../src/network/gameclient.cc:234
 #, c-format
@@ -3351,7 +3352,7 @@ msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was reachable at the TCP port %u or the server shut down as"
 " you tried to connect."
-msgstr ""
+msgstr "Το Widelands δεν μπόρεσε να δημιουργήσει μια σύνδεση στην συγκεκριμένη διεύθυνση. Είτε δεν είναι προσπελάσιμος κάποιος διακομιστής Widelands στην TCP πόρτα %u είτε ο διακομιστής έκλεισε καθώς προσπαθούσες να συνδεθείς."
 
 #: ../../../../src/network/gameclient.cc:816
 #, c-format
@@ -3687,7 +3688,7 @@ msgstr ""
 #: ../../../../src/network/internet_gaming.cc:1018
 msgctxt "chat_sender"
 msgid "Unknown"
-msgstr ""
+msgstr "Άγνωστο"
 
 #: ../../../../src/network/internet_gaming_messages.cc:28
 msgid "There is no user with this name logged in."
@@ -3959,19 +3960,19 @@ msgstr ""
 #: ../../../../src/ui_basic/color_chooser.cc:305
 msgctxt "color"
 msgid "R"
-msgstr ""
+msgstr "Κ"
 
 #. * TRANSLATORS: First letter of the word "Green"
 #: ../../../../src/ui_basic/color_chooser.cc:314
 msgctxt "color"
 msgid "G"
-msgstr ""
+msgstr "Π"
 
 #. * TRANSLATORS: First letter of the word "Blue"
 #: ../../../../src/ui_basic/color_chooser.cc:323
 msgctxt "color"
 msgid "B"
-msgstr ""
+msgstr "Μπ"
 
 #: ../../../../src/ui_basic/color_chooser.cc:333
 msgid "Default Color"
@@ -3979,15 +3980,15 @@ msgstr ""
 
 #: ../../../../src/ui_basic/color_chooser.cc:345
 msgid "Red"
-msgstr ""
+msgstr "Κόκκινο"
 
 #: ../../../../src/ui_basic/color_chooser.cc:358
 msgid "Green"
-msgstr ""
+msgstr "Πράσινο"
 
 #: ../../../../src/ui_basic/color_chooser.cc:371
 msgid "Blue"
-msgstr ""
+msgstr "Μπλέ"
 
 #: ../../../../src/ui_basic/color_chooser.cc:490
 msgid "Remove from favorites"
@@ -3998,7 +3999,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:171
 #: ../../../../src/wui/quicknavigation.cc:286
 msgid "–"
-msgstr ""
+msgstr "–"
 
 #: ../../../../src/ui_basic/color_chooser.cc:497
 msgid "Add current color to favorites"
@@ -4034,7 +4035,7 @@ msgstr "Φόρτωση σε εξέλιξη…"
 
 #: ../../../../src/ui_basic/spinbox.cc:151
 msgid "Decrease the value"
-msgstr ""
+msgstr "Μείωσε την τιμή"
 
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
@@ -4047,7 +4048,7 @@ msgstr ""
 
 #: ../../../../src/ui_basic/spinbox.cc:164
 msgid "Increase the value"
-msgstr ""
+msgstr "Αύξησε την τιμή"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
@@ -4228,41 +4229,41 @@ msgstr ""
 
 #: ../../../../src/ui_basic/textinput.cc:374
 msgid "Cut"
-msgstr ""
+msgstr "Αποκοπή"
 
 #: ../../../../src/ui_basic/textinput.cc:374
 msgid "Cut the selected text to the clipboard"
-msgstr ""
+msgstr "Απέκοψε το επιλεγμένο κείμενο στο πρόχειρο"
 
 #: ../../../../src/ui_basic/textinput.cc:377
 #: ../../../../src/ui_fsmenu/tech_info.cc:238
 msgid "Copy"
-msgstr ""
+msgstr "Αντιγραφή"
 
 #: ../../../../src/ui_basic/textinput.cc:377
 msgid "Copy the selected text to the clipboard"
-msgstr ""
+msgstr "Αντέγραψε το επιλεγμένο κείμενο στο πρόχειρο"
 
 #: ../../../../src/ui_basic/textinput.cc:380
 msgid "Paste"
-msgstr ""
+msgstr "Επικόλληση"
 
 #: ../../../../src/ui_basic/textinput.cc:380
 msgid "Paste the clipboard content"
-msgstr ""
+msgstr "Επικόλλησε τα περιεχόμενα του προχείρου"
 
 #: ../../../../src/ui_basic/textinput.cc:383
 msgid "Delete the selected text"
-msgstr ""
+msgstr "Διέγραψε το επιλεγμένο κείμενο"
 
 #: ../../../../src/ui_basic/textinput.cc:386
 #: ../../../../src/wlapplication_options.cc:383
 msgid "Select All"
-msgstr ""
+msgstr "Επιλογή όλων"
 
 #: ../../../../src/ui_basic/textinput.cc:386
 msgid "Select the entire text"
-msgstr ""
+msgstr "Επέλεξε όλο το κείμενο"
 
 #: ../../../../src/ui_basic/window.cc:101
 #: ../../../../src/ui_basic/window.cc:862
@@ -4297,7 +4298,7 @@ msgstr ""
 
 #: ../../../../src/ui_basic/window.cc:847
 msgid "Minimize the window"
-msgstr ""
+msgstr "Ελαχιστοποίησε το παράθυρο"
 
 #: ../../../../src/ui_basic/window.cc:847
 msgid "Unminimize the window"
@@ -4305,15 +4306,15 @@ msgstr ""
 
 #: ../../../../src/ui_basic/window.cc:857
 msgid "Pin the window"
-msgstr ""
+msgstr "Καρφίτσωσε το παράθυρο"
 
 #: ../../../../src/ui_basic/window.cc:857
 msgid "Unpin the window"
-msgstr ""
+msgstr "Αποκαρφίτσωσε το παράθυρο"
 
 #: ../../../../src/ui_basic/window.cc:862
 msgid "Close the window"
-msgstr ""
+msgstr "Κλείσε το παράθυρο"
 
 #: ../../../../src/ui_fsmenu/about.cc:38 ../../../../src/ui_fsmenu/main.cc:515
 msgid "About Widelands"
@@ -4372,7 +4373,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:182
 #: ../../../../src/ui_fsmenu/training_wheel_options.cc:119
 msgid "Reset"
-msgstr ""
+msgstr "Επαναφορά"
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:81
 #: ../../../../src/ui_fsmenu/login_box.cc:71
@@ -4395,22 +4396,22 @@ msgstr "Κωδικός:"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:62
 #, c-format
 msgid "%.2f GB"
-msgstr ""
+msgstr "%.2f GB"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:65
 #, c-format
 msgid "%.2f MB"
-msgstr ""
+msgstr "%.2f MB"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:68
 #, c-format
 msgid "%.2f kB"
-msgstr ""
+msgstr "%.2f kB"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:70
 #, c-format
 msgid "%u bytes"
-msgstr ""
+msgstr "%u bytes"
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../../../src/ui_fsmenu/addons/manager.cc:89
@@ -4496,7 +4497,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:287
 msgid "Refresh"
-msgstr ""
+msgstr "Ανανέωση"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:288
 msgid "Refresh the list of add-ons available from the server"
@@ -4616,7 +4617,7 @@ msgstr ""
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:525
 msgid "Name"
-msgstr ""
+msgstr "Όνομα"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
 #: ../../../../src/ui_fsmenu/addons/manager.cc:527
@@ -4646,12 +4647,12 @@ msgstr ""
 #. * TRANSLATORS: Sort add-ons by upload date/time
 #: ../../../../src/ui_fsmenu/addons/manager.cc:537
 msgid "Oldest"
-msgstr ""
+msgstr "Παλιότερο"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
 #: ../../../../src/ui_fsmenu/addons/manager.cc:539
 msgid "Newest"
-msgstr ""
+msgstr "Νεότερο"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:547
 msgid "Filter add-ons by name"
@@ -4964,12 +4965,12 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:161
 msgid "Name:"
-msgstr ""
+msgstr "Όνομα:"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:171
 #: ../../../../src/ui_fsmenu/tech_info.cc:76
 msgid "Version:"
-msgstr ""
+msgstr "Έκδοση:"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:177
 #: ../../../../src/wui/mapdetails.cc:201 ../../../../src/wui/mapdetails.cc:206
@@ -4990,7 +4991,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:359
 msgid "Category"
-msgstr ""
+msgstr "Κατηγορία"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:380
 #: ../../../../src/ui_fsmenu/addons/packager.cc:396
@@ -5179,7 +5180,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:162
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:163
 msgid "Create subdirectory"
@@ -5221,7 +5222,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:114
 #, c-format
 msgid "%1$u×%2$u"
-msgstr ""
+msgstr "%1$u×%2$u"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:288
 #: ../../../../src/ui_fsmenu/main.cc:396 ../../../../src/ui_fsmenu/main.cc:447
@@ -5240,7 +5241,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:295
 msgctxt "version"
 msgid "(none)"
-msgstr ""
+msgstr "(κανένα)"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:325
 msgid "Top-level directory"
@@ -5483,7 +5484,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:413
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:441
 msgid "Verified"
-msgstr ""
+msgstr "Επιβεβαιωμέν"
 
 #. * TRANSLATORS: This add-on is known to cause desyncs
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:506
@@ -5617,7 +5618,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:140
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:301
 msgid "Uninstall"
-msgstr ""
+msgstr "Απεγκατάσταση"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:46
 #, c-format
@@ -5668,26 +5669,26 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:150
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:201
 msgid "Disable"
-msgstr ""
+msgstr "Απενεργοποίηση"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:150
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:201
 msgid "Enable"
-msgstr ""
+msgstr "Ενεργοποίηση"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:166
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:334
 #, c-format
 msgid "%1$s+%2$u"
-msgstr ""
+msgstr "%1$s+%2$u"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:184
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:383
 #: ../../../../src/wui/constructionsitewindow.cc:139
 #, c-format
 msgid "(%s)"
-msgstr ""
+msgstr "(%s)"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:186
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:387
@@ -5711,12 +5712,12 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:283
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:403
 msgid "Install"
-msgstr ""
+msgstr "Εγκατάσταση"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:292
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:430
 msgid "Upgrade"
-msgstr ""
+msgstr "Αναβάθμιση"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:310
 msgid "Comments and Votes"
@@ -5857,7 +5858,7 @@ msgstr "Όνομα Εκστρατείας"
 #: ../../../../src/ui_fsmenu/campaigns.cc:45
 msgctxt "difficulty"
 msgid "Default"
-msgstr ""
+msgstr "Προεπιλεγμένο"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:44
 msgid "Crash Report Details"
@@ -5955,11 +5956,11 @@ msgstr "Διαχειριστής"
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:184
 msgid "Registered"
-msgstr ""
+msgstr "Εγγεγραμμένος"
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:185
 msgid "Unregistered"
-msgstr ""
+msgstr "Μη εγγεγραμένος"
 
 #. * TRANSLATORS: Player Name
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:188
@@ -6054,12 +6055,12 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:297
 #: ../../../../src/wui/interactive_player.cc:335
 msgid "General"
-msgstr ""
+msgstr "Γενικά"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:299
 #: ../../../../src/wlapplication_options.cc:291
 msgid "Editor"
-msgstr ""
+msgstr "Επεξεργαστής"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:303
 msgid "Fastplace"
@@ -6329,7 +6330,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:418
 #: ../../../../src/wui/economy_options_window.cc:680
 msgid "Save"
-msgstr ""
+msgstr "Αποθήκευση"
 
 #: ../../../../src/ui_fsmenu/login_box.cc:53
 msgid "Log in to a registered account."
@@ -6512,7 +6513,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/main.cc:492
 msgid "Editor…"
-msgstr ""
+msgstr "Επεξεργαστής..."
 
 #: ../../../../src/ui_fsmenu/main.cc:493
 msgid "Watch Replay…"
@@ -6581,7 +6582,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/main.cc:848
 msgid "Click for the main menu"
-msgstr ""
+msgstr "Κλίκ για το αρχικό μενού"
 
 #: ../../../../src/ui_fsmenu/main.cc:926
 msgid "Desyncing Add-On Found"
@@ -6997,7 +6998,7 @@ msgstr "Ομάδα %d"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:706
 msgid "Clients"
-msgstr ""
+msgstr "Πελάτες"
 
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:35
 msgid "Begin LAN Game"
@@ -7066,7 +7067,7 @@ msgstr "Μέγεθος Παραθύρου"
 #. * TRANSLATORS: short description for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:155
 msgid "Let the system draw the mouse cursor"
-msgstr ""
+msgstr "Αφησε το σύστημα να σχεδιάσει τον δρομέα ποντικιού"
 
 #. * TRANSLATORS: tooltip text for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:157
@@ -7196,11 +7197,11 @@ msgstr ""
 #. Options
 #: ../../../../src/ui_fsmenu/options.cc:391
 msgid "Progress…"
-msgstr ""
+msgstr "Πρόοδος..."
 
 #: ../../../../src/ui_fsmenu/options.cc:407
 msgid "Interface"
-msgstr ""
+msgstr "Διεπαφή"
 
 #: ../../../../src/ui_fsmenu/options.cc:408
 msgid "Sound"
@@ -7237,7 +7238,7 @@ msgstr "Πλήρης οθόνη"
 #. * TRANSLATORS: Entry in the window size dropdown
 #: ../../../../src/ui_fsmenu/options.cc:572
 msgid "Maximized"
-msgstr ""
+msgstr "Μεγιστοποιημένο"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 × 600
 #: ../../../../src/ui_fsmenu/options.cc:588
@@ -7348,7 +7349,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/scenariodetails.cc:55
 #: ../../../../src/wui/mapdetails.cc:164
 msgid "Author"
-msgstr ""
+msgstr "Δημιουργός"
 
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
@@ -7359,12 +7360,12 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/scenariodetails.cc:58
 #: ../../../../src/wui/mapdetails.cc:167
 msgid "Authors"
-msgstr ""
+msgstr "Δημιουργοί"
 
 #. * TRANSLATORS: This is the "name" of the single player
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:183
 msgid "You"
-msgstr ""
+msgstr "Εσύ"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:80
 msgid "MacOS"
@@ -8071,7 +8072,7 @@ msgstr ""
 #: ../../../../src/wui/game_chat_menu.cc:68
 #: ../../../../src/wui/interactive_gamebase.cc:416
 msgid "Chat"
-msgstr ""
+msgstr "Συνομιλία"
 
 #: ../../../../src/wlapplication_options.cc:730
 #: ../../../../src/wui/pinned_note.cc:41
@@ -8370,7 +8371,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1425
 msgctxt "hotkey"
 msgid "Application"
-msgstr ""
+msgstr "Εφαρμογή"
 
 #: ../../../../src/wlapplication_options.cc:1427
 msgctxt "hotkey"
@@ -8538,7 +8539,7 @@ msgstr ""
 #: ../../../../src/wui/waresdisplay.cc:638
 #, c-format
 msgid "%1$s%2$s"
-msgstr ""
+msgstr "%1$s%2$s"
 
 #: ../../../../src/wlapplication_options.cc:1524
 #, c-format
@@ -8824,7 +8825,7 @@ msgstr ""
 #: ../../../../src/wui/building_statistics_menu.cc:764
 #: ../../../../src/wui/productionsitewindow.cc:233
 msgid "%1%/%2%"
-msgstr ""
+msgstr "%1%/%2%"
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
 #: ../../../../src/wui/building_statistics_menu.cc:753
@@ -8855,7 +8856,7 @@ msgstr "Συνέχεια"
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
 #: ../../../../src/wui/buildingwindow.cc:288
 msgid "Stop"
-msgstr ""
+msgstr "Σταμάτησε"
 
 #. * TRANSLATORS: Infinite Production toggle button for production sites.
 #: ../../../../src/wui/buildingwindow.cc:302
@@ -8875,7 +8876,7 @@ msgstr "Αναβάθμιση σε %s"
 #: ../../../../src/wui/buildingwindow.cc:331
 #: ../../../../src/wui/fieldaction.cc:107
 msgid "Construction costs:"
-msgstr "Δαπάνες κατασκευής:"
+msgstr "Κόστος κατασκευής:"
 
 #: ../../../../src/wui/buildingwindow.cc:349
 msgid "Destroy"
@@ -8887,7 +8888,7 @@ msgstr "Αποσυναρμολόγηση"
 
 #: ../../../../src/wui/buildingwindow.cc:367
 msgid "Returns:"
-msgstr ""
+msgstr "Επιστρέφει:"
 
 #: ../../../../src/wui/buildingwindow.cc:429
 msgid "Watch the scout"
@@ -8917,7 +8918,7 @@ msgstr "Οικοδομικά υλικά"
 
 #: ../../../../src/wui/constructionsitewindow.cc:232
 msgid "Stopped"
-msgstr ""
+msgstr "Σταματημένο"
 
 #: ../../../../src/wui/constructionsitewindow.cc:233
 msgid "Stop this building’s work after completion"
@@ -9021,7 +9022,7 @@ msgstr ""
 #. * TRANSLATORS: Infinite number of wares or workers
 #: ../../../../src/wui/economy_options_window.cc:311
 msgid "∞"
-msgstr ""
+msgstr "∞"
 
 #: ../../../../src/wui/economy_options_window.cc:581
 msgid "The profile name cannot be empty"
@@ -9320,7 +9321,7 @@ msgstr ""
 
 #: ../../../../src/wui/game_chat_panel.cc:69
 msgid "Recipient"
-msgstr ""
+msgstr "Παραλήπτης"
 
 #: ../../../../src/wui/game_chat_panel.cc:374
 #: ../../../../src/wui/game_chat_panel.cc:498
@@ -9329,7 +9330,7 @@ msgstr ""
 
 #: ../../../../src/wui/game_chat_panel.cc:443
 msgid "All"
-msgstr ""
+msgstr "Όλα"
 
 #. * TRANSLATORS: Window label
 #: ../../../../src/wui/game_client_disconnected.cc:47
@@ -9586,19 +9587,19 @@ msgstr ""
 
 #: ../../../../src/wui/game_summary.cc:120
 msgid "Time"
-msgstr ""
+msgstr "Χρόνος"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. lost.
 #: ../../../../src/wui/game_summary.cc:219
 msgid "Lost"
-msgstr ""
+msgstr "Ήττα"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. won.
 #: ../../../../src/wui/game_summary.cc:223
 msgid "Won"
-msgstr ""
+msgstr "Νίκη"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. resigned.
@@ -9698,7 +9699,7 @@ msgstr ""
 
 #: ../../../../src/wui/general_statistics_menu.cc:150
 msgid "Land"
-msgstr ""
+msgstr "Γη"
 
 #: ../../../../src/wui/general_statistics_menu.cc:171
 msgid "Productivity"
@@ -9850,7 +9851,7 @@ msgstr ""
 #: ../../../../src/wui/inputqueuedisplay.cc:683
 #, c-format
 msgid "+%u"
-msgstr ""
+msgstr "+%u"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../../../src/wui/interactive_base.cc:144
@@ -10008,7 +10009,7 @@ msgstr ""
 
 #: ../../../../src/wui/interactive_gamebase.cc:368
 msgid "Resume"
-msgstr ""
+msgstr "Συνέχιση"
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
 #: ../../../../src/wui/interactive_gamebase.cc:371
@@ -10017,7 +10018,7 @@ msgstr ""
 
 #: ../../../../src/wui/interactive_gamebase.cc:374
 msgid "Pause"
-msgstr ""
+msgstr "Παύση"
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
 #: ../../../../src/wui/interactive_gamebase.cc:377
@@ -10032,7 +10033,7 @@ msgstr ""
 
 #: ../../../../src/wui/interactive_gamebase.cc:669
 msgid "Remaining construction costs:"
-msgstr ""
+msgstr "Υπολοιπόμενο κόστος κατασκευής:"
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
 #: ../../../../src/wui/interactive_player.cc:189
@@ -10144,7 +10145,7 @@ msgstr ""
 #. * TRANSLATORS: This is a map tag
 #: ../../../../src/wui/map_tags.cc:40
 msgid "Balanced"
-msgstr ""
+msgstr "Ισορροπημένος"
 
 #: ../../../../src/wui/map_tags.cc:43
 msgid ""
@@ -10205,7 +10206,7 @@ msgstr ""
 #. * TRANSLATORS: This is a map tag. One versus one.
 #: ../../../../src/wui/map_tags.cc:76
 msgid "1v1"
-msgstr ""
+msgstr "1v1"
 
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../../../src/wui/map_tags.cc:78
@@ -10290,7 +10291,7 @@ msgstr "Σφάλμα δεδομένων παιχνιδιού"
 #. * TRANSLATORS: Column title for number of players in map list
 #: ../../../../src/wui/maptable.cc:34
 msgid "Pl."
-msgstr ""
+msgstr "Αρ. Παιχτ."
 
 #: ../../../../src/wui/maptable.cc:35 ../../../../src/wui/maptable.cc:64
 msgid "Filename"
@@ -10314,7 +10315,7 @@ msgstr "Όνομα Χάρτη"
 
 #: ../../../../src/wui/minimap.cc:169
 msgid "Owner"
-msgstr ""
+msgstr "Ιδιοκτήτης"
 
 #: ../../../../src/wui/minimap.cc:191
 msgid "Roads"
@@ -10389,7 +10390,7 @@ msgstr ""
 
 #: ../../../../src/wui/portdockwaresdisplay.cc:105
 msgid "(Empty)"
-msgstr ""
+msgstr "(Κενό)"
 
 #. * TRANSLATORS: Tooltip for a ware that is present in the building
 #: ../../../../src/wui/portdockwaresdisplay.cc:157
@@ -10438,7 +10439,7 @@ msgstr ""
 
 #: ../../../../src/wui/productionsitewindow.cc:311
 msgid "(vacant)"
-msgstr ""
+msgstr "(κενό)"
 
 #: ../../../../src/wui/quicknavigation.cc:161
 msgid "Quick Navigation"
@@ -10623,7 +10624,7 @@ msgstr "%1%: %2%"
 #. tooltip.
 #: ../../../../src/wui/savegametable.cc:65
 msgid "SP"
-msgstr ""
+msgstr "ΜΠ"
 
 #. * TRANSLATORS: "Multiplayer Host" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 2 letters maximum.
@@ -10896,7 +10897,7 @@ msgstr "Η αποστολή δεν μπορεί να ακυρωθεί, επει�
 #: ../../../../src/wui/shipwindow.cc:364
 msgctxt "destination"
 msgid "(none)"
-msgstr ""
+msgstr "(κανένα)"
 
 #: ../../../../src/wui/shipwindow.cc:429 ../../../../src/wui/shipwindow.cc:434
 #: ../../../../src/wui/shipwindow.cc:439
@@ -10960,7 +10961,7 @@ msgstr ""
 #: ../../../../src/wui/soldier_statistics_menu.cc:278
 #, c-format
 msgid "×%u"
-msgstr ""
+msgstr "×%u"
 
 #: ../../../../src/wui/soldiercapacitycontrol.cc:101
 msgid "Capacity"
@@ -10989,7 +10990,7 @@ msgstr ""
 
 #: ../../../../src/wui/sound_options.cc:161
 msgid "Play the intro music at startup"
-msgstr ""
+msgstr "Παίξε την εισαγωγική μουσική στην εκκίνηση"
 
 #: ../../../../src/wui/sound_options.cc:163
 msgid ""
@@ -11001,7 +11002,7 @@ msgstr ""
 #: ../../../../src/wui/sound_options.cc:172
 msgctxt "sound_options"
 msgid "Music"
-msgstr ""
+msgstr "Μουσική"
 
 #: ../../../../src/wui/sound_options.cc:175
 msgctxt "sound_options"
@@ -11044,7 +11045,7 @@ msgstr ""
 
 #: ../../../../src/wui/stock_menu.cc:59
 msgid "Red:"
-msgstr ""
+msgstr "Κόκκινο:"
 
 #: ../../../../src/wui/stock_menu.cc:59
 msgid "Stock is lower than the target"
@@ -11052,7 +11053,7 @@ msgstr ""
 
 #: ../../../../src/wui/stock_menu.cc:62
 msgid "Yellow:"
-msgstr ""
+msgstr "Κίτρινο:"
 
 #: ../../../../src/wui/stock_menu.cc:63
 msgid "Stock is equal to the target"
@@ -11153,25 +11154,25 @@ msgstr ""
 
 #: ../../../../src/wui/waresdisplay.cc:634
 msgid "↑"
-msgstr ""
+msgstr "↑"
 
 #: ../../../../src/wui/waresdisplay.cc:635
 msgid "="
-msgstr ""
+msgstr "="
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
 #: ../../../../src/wui/waresdisplay.cc:673
 msgid "%1%k"
-msgstr ""
+msgstr "%1%κ"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
 #: ../../../../src/wui/waresdisplay.cc:676
 msgid "%1%M"
-msgstr ""
+msgstr "%1%Μ"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5G =
 #. 5,000,000,000).
@@ -11179,11 +11180,11 @@ msgstr ""
 #. whitespace.
 #: ../../../../src/wui/waresdisplay.cc:679
 msgid "%1%G"
-msgstr ""
+msgstr "%1%Γ"
 
 #: ../../../../src/wui/watchwindow.cc:93
 msgid "Follow"
-msgstr ""
+msgstr "Ακολούθησε"
 
 #: ../../../../src/wui/watchwindow.cc:98
 msgid "Center the main view on this"
