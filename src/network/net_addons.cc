@@ -68,7 +68,7 @@ constexpr unsigned kCurrentProtocolVersion = 7;
 static const std::string kCmdList = "2:CMD_LIST";
 static const std::string kCmdInfo = "2:CMD_INFO";
 static const std::string kCmdDownload = "1:CMD_DOWNLOAD";
-static const std::string kCmdI18N = "1:CMD_I18N";
+static const std::string kCmdI18N = "2:CMD_I18N";
 static const std::string kCmdScreenshot = "1:CMD_SCREENSHOT";
 static const std::string kCmdVote = "1:CMD_VOTE";
 static const std::string kCmdGetVote = "1:CMD_GET_VOTE";
@@ -131,16 +131,19 @@ size_t gather_addon_content(const std::string& current_dir,
 	result[prefix] = {};
 	size_t nr_files = 0;
 	for (const std::string& f : g_fs->list_directory(current_dir)) {
-		if (g_fs->is_directory(f)) {
-			std::string str = prefix;
-			if (!str.empty()) {
-				str += FileSystem::file_separator();
+		const std::string fname = FileSystem::fs_filename(f.c_str());
+		if (!fname.empty() && fname.front() != '.') {  // Ignore hidden files
+			if (g_fs->is_directory(f)) {
+				std::string str = prefix;
+				if (!str.empty()) {
+					str += FileSystem::file_separator();
+				}
+				str += fname;
+				nr_files += gather_addon_content(f, str, result);
+			} else {
+				result[prefix].insert(fname);
+				++nr_files;
 			}
-			str += FileSystem::fs_filename(f.c_str());
-			nr_files += gather_addon_content(f, str, result);
-		} else {
-			result[prefix].insert(FileSystem::fs_filename(f.c_str()));
-			++nr_files;
 		}
 	}
 	return nr_files;
@@ -189,7 +192,8 @@ void NetAddons::init(std::string username, std::string password) {
 	}
 	check_string_validity(username);
 
-	if ((client_socket_ = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+	client_socket_ = socket(AF_INET, SOCK_STREAM, 0);
+	if (client_socket_ < 0) {
 		throw WLWarning("", "Unable to create socket");
 	}
 
@@ -727,6 +731,8 @@ void NetAddons::admin_action(const AdminAction a,
 	case AdminAction::kDelete:
 		send = kCmdAdminDelete;
 		break;
+	default:
+		NEVER_HERE();
 	}
 	send += ' ';
 	send += addon.internal_name;

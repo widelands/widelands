@@ -46,7 +46,7 @@ namespace LuaRoot {
 ======================
 
 .. module:: wl
-   :synopsis: Base classes which allow access to all widelands internals.
+   :synopsis: Base classes which allow access to all Widelands internals.
 
 .. moduleauthor:: The Widelands development team
 
@@ -1237,7 +1237,7 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L,
 			const Widelands::DescriptionIndex di = descrs.load_ware(input_name);
 			const Widelands::Quantity amount = luaL_checkuint32(L, 7);
 			assert(amount);
-			psdescr.mutable_input_wares().push_back(Widelands::WareAmount(di, amount));
+			psdescr.mutable_input_wares().emplace_back(di, amount);
 		} else if (cmd == "modify_ware") {
 			const Widelands::DescriptionIndex di = descrs.load_ware(input_name);
 			const Widelands::Quantity amount = luaL_checkuint32(L, 7);
@@ -1265,7 +1265,7 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L,
 			const Widelands::DescriptionIndex di = descrs.load_worker(input_name);
 			const Widelands::Quantity amount = luaL_checkuint32(L, 7);
 			assert(amount);
-			psdescr.mutable_input_workers().push_back(Widelands::WareAmount(di, amount));
+			psdescr.mutable_input_workers().emplace_back(di, amount);
 		} else if (cmd == "modify_worker") {
 			const Widelands::DescriptionIndex di = descrs.load_worker(input_name);
 			const Widelands::Quantity amount = luaL_checkuint32(L, 7);

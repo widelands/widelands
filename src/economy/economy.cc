@@ -76,6 +76,8 @@ Economy::Economy(Player& player, Serial init_serial, WareWorker wwtype)
 		case wwWORKER:
 			tq.permanent = tribe.get_worker_descr(i)->default_target_quantity();
 			break;
+		default:
+			NEVER_HERE();
 		}
 		tq.last_modified = Time(0);
 		target_quantities_[i] = tq;
@@ -1129,7 +1131,7 @@ void Economy::handle_active_supplies(Game& game) {
 			return;
 		}
 
-		assignments.push_back(std::make_pair(&supply, wh));
+		assignments.emplace_back(&supply, wh);
 	}
 
 	// Actually start with the transfers in a separate second phase,

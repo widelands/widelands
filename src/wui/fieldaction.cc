@@ -233,9 +233,9 @@ static const char* const pic_tab_buildhouse[] = {"images/wui/fieldaction/menu_ta
                                                  "images/wui/fieldaction/menu_tab_buildmedium.png",
                                                  "images/wui/fieldaction/menu_tab_buildbig.png",
                                                  "images/wui/fieldaction/menu_tab_buildport.png"};
-static const char* const tooltip_tab_build[] = {_("Build small building"),
-                                                _("Build medium building"), _("Build big building"),
-                                                _("Build port building")};
+static const char* const tooltip_tab_build[] = {
+   gettext_noop("Build small building"), gettext_noop("Build medium building"),
+   gettext_noop("Build big building"), gettext_noop("Build port building")};
 static const char* const name_tab_build[] = {"small", "medium", "big", "port"};
 
 constexpr const char* const kImgTabBuildmine = "images/wui/fieldaction/menu_tab_buildmine.png";
@@ -573,8 +573,8 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 	    !brn.field->is_interior(player_->player_number())) {
 		return;
 	}
-	if (!((brn.field->get_immovable() != nullptr) &&
-	      brn.field->get_immovable()->descr().type() == Widelands::MapObjectType::FLAG) &&
+	if (((brn.field->get_immovable() == nullptr) ||
+	     brn.field->get_immovable()->descr().type() != Widelands::MapObjectType::FLAG) &&
 	    ((player_->get_buildcaps(brn) & Widelands::BUILDCAPS_FLAG) == 0)) {
 		return;
 	}
@@ -606,9 +606,9 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 		// TODO(Nordfriese): Use Player::check_can_build to simplify the code
 
 		if (building_descr->get_built_over_immovable() != Widelands::INVALID_INDEX &&
-		    !((node_.field->get_immovable() != nullptr) &&
-		      node_.field->get_immovable()->has_attribute(
-		         building_descr->get_built_over_immovable()))) {
+		    ((node_.field->get_immovable() == nullptr) ||
+		     !node_.field->get_immovable()->has_attribute(
+		        building_descr->get_built_over_immovable()))) {
 			continue;
 		}
 		// Figure out if we can build it here, and in which tab it belongs

@@ -423,7 +423,7 @@ bool Flag::has_capacity() const {
  * The capacity queue is a simple FIFO queue.
  */
 void Flag::wait_for_capacity(Game& /* game */, Worker& bob) {
-	capacity_wait_.push_back(&bob);
+	capacity_wait_.emplace_back(&bob);
 }
 
 /**
@@ -977,6 +977,8 @@ void Flag::add_flag_job(Game& game, const FlagJob::Type t) {
 	case FlagJob::Type::kScout:
 		do_schedule_act(game, Duration(10));
 		break;
+	default:
+		NEVER_HERE();
 	}
 
 	flag_jobs_.push_back(j);

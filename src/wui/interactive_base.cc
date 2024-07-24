@@ -397,6 +397,8 @@ void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 		map_view()->reset_zoom();
 		mapviewmenu_.toggle();
 	} break;
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -1039,8 +1041,8 @@ void InteractiveBase::blit_overlay(RenderTarget* dst,
                                    float opacity) {
 	const Recti pixel_perfect_rect =
 	   Recti(position - hotspot * scale, image->width() * scale, image->height() * scale);
-	dst->blitrect_scale(pixel_perfect_rect.cast<float>(), image,
-	                    Recti(0, 0, image->width(), image->height()), opacity, BlendMode::UseAlpha);
+	dst->blitrect_scale(
+	   pixel_perfect_rect.cast<float>(), image, image->rect(), opacity, BlendMode::UseAlpha);
 }
 
 void InteractiveBase::blit_field_overlay(RenderTarget* dst,
@@ -1691,9 +1693,9 @@ void InteractiveBase::road_building_add_overlay(const Widelands::CoordPath& path
 		//  can't build on robusts
 		const Widelands::BaseImmovable* imm = map.get_immovable(neighb);
 		if ((imm != nullptr) && imm->get_size() >= Widelands::BaseImmovable::SMALL &&
-		    (!((dynamic_cast<const Widelands::Flag*>(imm) != nullptr) ||
-		       ((dynamic_cast<const Widelands::RoadBase*>(imm) != nullptr) &&
-		        ((caps & Widelands::BUILDCAPS_FLAG) != 0))))) {
+		    ((dynamic_cast<const Widelands::Flag*>(imm) == nullptr) &&
+		     ((dynamic_cast<const Widelands::RoadBase*>(imm) == nullptr) ||
+		      ((caps & Widelands::BUILDCAPS_FLAG) == 0)))) {
 			continue;
 		}
 		if (path.get_index(neighb) >= 0) {

@@ -9,6 +9,7 @@ wl_library(wui_sound_options
     graphic_text_layout
     sound
     ui_basic
+    widelands_options
 )
 
 wl_library(wui_chat_ui
@@ -89,6 +90,7 @@ wl_library(wui_common_gamedetails
     graphic
     graphic_image_io
     graphic_minimap_renderer
+    graphic_mouse_cursor
     graphic_styles
     graphic_surface
     graphic_text_layout

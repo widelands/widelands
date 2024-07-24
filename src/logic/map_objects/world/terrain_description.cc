@@ -96,6 +96,8 @@ TerrainDescription::Type::Type(TerrainDescription::Is init_is) : is(init_is) {
 		descname = _("unwalkable");
 		icon = g_image_cache->get("images/wui/editor/terrain_unwalkable.png");
 		break;
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -131,10 +133,10 @@ TerrainDescription::TerrainDescription(const LuaTable& table,
 		}
 	}
 
-	if (!(0 < fertility_ && fertility_ < 1000)) {
+	if (fertility_ <= 0 || fertility_ >= 1000) {
 		throw GameDataError("%s: fertility is not in (0, 1000).", name_.c_str());
 	}
-	if (!(0 < humidity_ && humidity_ < 1000)) {
+	if (humidity_ <= 0 || humidity_ >= 1000) {
 		throw GameDataError("%s: humidity is not in (0, 1000).", name_.c_str());
 	}
 	if (temperature_ < 0) {

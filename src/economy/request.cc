@@ -125,6 +125,8 @@ void Request::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 					                    target_.owner().tribe().name().c_str(), wareworker_name.c_str());
 				}
 			} break;
+			default:
+				NEVER_HERE();
 			}
 
 			// Overwrite initial economy because our WareWorker type may have changed
@@ -203,6 +205,8 @@ void Request::write(FileWrite& fw, Game& game, MapObjectSaver& mos) const {
 		assert(game.descriptions().worker_exists(index_));
 		fw.c_string(game.descriptions().get_worker_descr(index_)->name());
 		break;
+	default:
+		NEVER_HERE();
 	}
 
 	fw.unsigned_32(count_);
@@ -238,7 +242,7 @@ Flag& Request::target_flag() const {
  */
 Time Request::get_base_required_time(const EditorGameBase& egbase, uint32_t const nr) const {
 	if (count_ <= nr) {
-		if (!(count_ == 1 && nr == 1)) {
+		if (count_ != 1 || nr != 1) {
 			log_warn_time(egbase.get_gametime(),
 			              "Request::get_base_required_time: WARNING nr = %u but count is %u, "
 			              "which is not allowed according to the comment for this function\n",
@@ -443,6 +447,8 @@ void Request::start_transfer(Game& game, Supply& supp) {
 		t = new Transfer(game, *this, ware);
 		break;
 	}
+	default:
+		NEVER_HERE();
 	}
 
 	transfers_.push_back(t);

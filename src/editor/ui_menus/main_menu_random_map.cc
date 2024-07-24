@@ -253,7 +253,9 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 	set_size(inner_w, 50);  // Prevent assert failures
 
 	generator_.set_enabled(false);
-	generator_.add(_("Default"), nullptr, g_image_cache->get("images/logos/wl-ico-64.png"), true);
+	/** TRANSLATORS: Default Map Generator */
+	generator_.add(pgettext("map_generator", "Default"), nullptr,
+	               g_image_cache->get("images/logos/wl-ico-64.png"), true);
 	for (const auto& addon : AddOns::g_addons) {
 		if (addon.second && addon.first->category == AddOns::AddOnCategory::kMapGenerator) {
 			generator_.add(addon.first->descname(), addon.first, addon.first->icon, false);
@@ -279,7 +281,8 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 
 	// ---------- Worlds ----------
 
-	world_.add(_("Random"), Widelands::Map::kOldWorldNames.size(), nullptr, true);
+	/** TRANSLATORS: Random Climate */
+	world_.add(pgettext("climate", "Random"), Widelands::Map::kOldWorldNames.size(), nullptr, true);
 	for (size_t i = 0; i < Widelands::Map::kOldWorldNames.size(); ++i) {
 		world_.add(Widelands::Map::kOldWorldNames[i].descname(), i);
 	}
@@ -309,11 +312,14 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 
 	// Terrains Distribution
 
-	terrains_distribution_.add(_("Default"), TerrainDistribution::kDefault, nullptr, true);
+	terrains_distribution_.add(/** TRANSLATORS: Default Terrain Distribution */
+	                           pgettext("terrain", "Default"), TerrainDistribution::kDefault,
+	                           nullptr, true);
 	terrains_distribution_.add(_("Alpine"), TerrainDistribution::kAlpine);
 	terrains_distribution_.add(_("Atoll"), TerrainDistribution::kAtoll);
 	terrains_distribution_.add(_("Wasteland"), TerrainDistribution::kWasteland);
-	terrains_distribution_.add(_("Random"), TerrainDistribution::kRandom);
+	/** TRANSLATORS: Random Terrain Distribution */
+	terrains_distribution_.add(pgettext("terrain", "Random"), TerrainDistribution::kRandom);
 
 	select_terrains_distribution();
 	terrains_distribution_.selected.connect([this]() { select_terrains_distribution(); });
@@ -438,6 +444,9 @@ void MainMenuNewRandomMapPanel::button_clicked(MainMenuNewRandomMapPanel::Button
 		}
 		// Make sure that landmass is consistent
 		normalize_landmass(n);
+		break;
+	default:
+		NEVER_HERE();
 	}
 	nr_edit_box_changed();  // Update ID String
 }
@@ -639,6 +648,8 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	case Widelands::UniqueRandomMapInfo::ResourceAmount::raHigh:
 		log_info("Resources:     high\n");
 		break;
+	default:
+		NEVER_HERE();
 	}
 	log_info("Land: %0.2f  Water: %0.2f  Wasteland: %0.2f\n", map_info.landRatio,
 	         map_info.waterRatio, map_info.wastelandRatio);
