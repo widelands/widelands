@@ -47,7 +47,7 @@ function initial_message_and_small_food_economy()
          barbarians_quarry = 1,
          barbarians_wood_hardener = 1,
       }) do sleep(3413) end
-   while not check_for_buildings(p1, {barbarians_sentry=1}, game.map:get_field(57,36):region(6)) do
+   while game.map:get_field(60,38).owner ~= p1 do
       sleep(1500)
    end
    set_objective_done(o)
