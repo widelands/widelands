@@ -24,8 +24,8 @@ msgstr ""
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
 msgid "%1% unit of %2% has been brought to your ‘%3%’ building."
 msgid_plural "%1% units of %2% have been brought to your ‘%3%’ building."
-msgstr[0] "%1% μονάδα από %2% έχει μεταφερθεί στο ‘%3%’ κτήριό σου."
-msgstr[1] "%1%μονάδες από %2% έχουν μεταφερθεί στο ‘%3%’ κτήριό σου."
+msgstr[0] "%1% μονάδα %2% έχει μεταφερθεί στο ‘%3%’ κτήριό σου."
+msgstr[1] "%1% μονάδες %2% έχουν μεταφερθεί στο ‘%3%’ κτήριό σου."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
@@ -36,7 +36,7 @@ msgstr "Μεταφορά"
 msgid ""
 "Four shovels for removing the swamps have been collected at the warehouse."
 msgstr ""
-"Για την αφάιρεση των βάλτων, τέσσερα φτυάρχια έχουν συλλεχθεί στην αποθήκη."
+"Για την αφαίρεση των βάλτων, τέσσερα φτυάρια έχουν συλλεχθεί στην αποθήκη."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
@@ -67,11 +67,11 @@ msgstr ""
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:16
 msgid "Build a port"
-msgstr "Φτιάξτε ένα λιμάνι"
+msgstr "Φτιάξε ένα λιμάνι"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:18
 msgid "Build a Port in the North"
-msgstr "Φτιάξτε ένα Λιμάνι στον Βορρά"
+msgstr "Φτιάξε ένα Λιμάνι στον Βορρά"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:19
 msgid ""
@@ -96,7 +96,7 @@ msgid ""
 " out what happened to the gold in this area."
 msgstr ""
 "Κατέκτησε το πειρατικό φυλάκιο κοντά στο ρυάκι, ανατολικά. Ας ελπίσουμε ότι "
-"θα ανακαλύψουμε τι έγινε στο χρυσό σε αυτή την περιοχή."
+"θα ανακαλύψουμε τι έγινε στον χρυσό αυτής της περιοχής."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:34
 msgid "Build warehouse"
@@ -112,7 +112,7 @@ msgid ""
 "will need it as a basis for further exploration. Furthermore we could use it"
 " to store some gold that we will mine from the surrounding hills."
 msgstr ""
-"Χτίσε μια αποθήκη κοντά στο κατεκτημένο πειρατικό φυλάκιο, κοντά στο ρυάκι. "
+"Χτίσε μια αποθήκη κοντά στο κατακτημένο πειρατικό φυλάκιο, κοντά στο ρυάκι. "
 "Θα τη χρειαστούμε σαν βάση για περαιτέρω εξερεύνηση. Επιπροσθέτως θα "
 "μπορούσαμε να τη χρησιμοποιήσουμε για να αποθηκεύσουμε λίγο χρυσό που θα "
 "εξορύξουμε από τους γειτονικούς λόφους."
@@ -129,12 +129,13 @@ msgstr "Φέρε Τέσσερα Φτυάρια στη νέα Αποθήκη"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:46
 msgid "They will be handed out to some volunteers for drying up the swamps."
-msgstr "Θα δοθούν σε κάποιους εθελοντές για να στεγνώσουν τους βάλτους."
+msgstr "Θα διανεμηθούν σε κάποιους εθελοντές για να στεγνώσουν τους βάλτους."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:55
 msgid ""
 "They will be handed out to additional volunteers for drying up the swamps."
-msgstr "Θα δορθούν σε περισσότερους εθελοντές για να στεγνώσουν τους βάλτους."
+msgstr ""
+"Θα διανεμηθούν σε περισσότερους εθελοντές για να στεγνώσουν τους βάλτους."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:61
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:93
@@ -155,7 +156,7 @@ msgstr ""
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:70
 msgid "Free our scout from the pirates"
-msgstr "Απελευθέρωσε τον ανιχνευτή μας απο τους πειρατές"
+msgstr "Απελευθέρωσε τον ανιχνευτή μας από τους πειρατές"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:72
 msgid "Conquer the Stronghold on the Island"
@@ -163,7 +164,7 @@ msgstr "Κατέκτησε το Οχυρό στο Νησί"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:73
 msgid "This is where the scout is held captive."
-msgstr "Εκεί κρατείται αιχμάλωτος ο ανιχνευτής"
+msgstr "Εκεί κρατείται αιχμάλωτος ο ανιχνευτής."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:79
 msgid "Defeat Hjalmar"
@@ -235,7 +236,7 @@ msgid ""
 "too strong to be defeated."
 msgstr ""
 "Από τον βορρά κινδυνεύουμε από μία επιθετική φυλή, της οποίας ηγείται ο "
-"πολέμαρχος Τόρβερ και η οποία εξοπλιζεται τάχιστα. Μπορεί σύντομα να είναι "
+"πολέμαρχος Τόρβερ και η οποία εξοπλίζεται τάχιστα. Μπορεί σύντομα να είναι "
 "υπερβολικά δυνατοί για να συντριφθούν."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
@@ -245,8 +246,8 @@ msgid ""
 "tribes."
 msgstr ""
 "Μια μεγάλη περιοχή στα βορειοανατολικά διαταράσσεται από μια άγρια ορδή "
-"ασυγκράτητων πειρατών, της οποίας ηγείται ο παράφρων Αρβίντ. Η παρουσία τους"
-" εμποδίζει την προσέγγιση των άλλων φυλών."
+"ασυγκράτητων πειρατών, της οποίας ηγείται ο παράφρονας Αρβίντ. Η παρουσία "
+"τους εμποδίζει την προσέγγιση των άλλων φυλών."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:18
 msgid ""
@@ -255,8 +256,8 @@ msgid ""
 "strength is based on his vast industry and large armies."
 msgstr ""
 "Πέρα απ' το ποτάμι κείτεται η εύπορη γη του μυστηριώδους βασιλιά Ρούναρ. "
-"Βρισκόμαστε σε πόλεμο μαζί του από πριν να καταλάβουν την ανατολική περιοχή "
-"οι πειρατές. Η δύναμή του είναι η τεράστια βιομηχανία του και οι μεγάλες "
+"Βρισκόμαστε σε πόλεμο μαζί του, από πριν να καταλάβουν την ανατολική περιοχή"
+" οι πειρατές. Η δύναμή του είναι η τεράστια βιομηχανία του και οι μεγάλες "
 "στρατιές του."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:20
@@ -267,7 +268,7 @@ msgid ""
 msgstr ""
 "Η περιοχή πέρα από τους πειρατές ανήκει σε μια αναπτυγμένη φυλή της οποίας "
 "ηγείται ο πανίσχυρος φύλαρχος Χιάλμαρ. Είχαν πολύ χρόνο προετοιμασίας στη "
-"διαθεσή τους για να χτίσουν τους αποτρεπτικούς στρατούς τους."
+"διάθεσή τους για να χτίσουν τους αποτρεπτικούς στρατούς τους."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:22
 msgid ""
@@ -287,7 +288,7 @@ msgid ""
 " our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
-"Αφέντη μου, αν και οι στρατιώτες μας μπορούν να αντικρύσουν οποιονδήποτε "
+"Άρχοντά μου, αν και οι στρατιώτες μας μπορούν να αντικρούσουν οποιονδήποτε "
 "εχθρό χωρίς τον παραμικρό φόβο, ο αντίπαλός μας στο Βορρά είναι πιο δυνατός "
 "από όλες τις στρατιές μας μαζί. Θα πρέπει να αποφύγουμε μια σύγκρουση μαζί "
 "του, μέχρι να μπορούμε να τον συντρίψουμε."
@@ -298,7 +299,7 @@ msgid ""
 "situation. Törver has a very bad reputation."
 msgstr ""
 "Να είσαι υπομονετικός και να αναγνωρίζεις πως ένας δυνατός στρατός είναι "
-"απαραίτητος σε αυτή την κατάσταση. Ο Τόρβερ έχει πολύ καλή φήμη. "
+"απαραίτητος σε αυτή την κατάσταση. Ο Τόρβερ έχει πολύ καλή φήμη."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
 msgid "Peril from the North"
@@ -309,8 +310,8 @@ msgid ""
 "Sire, we received an alarming message from one of our explorers. Törver is "
 "expanding his front line and approaching our territory."
 msgstr ""
-"Αφέντη μου, λάβαμε ένα ανησυχητικό μήνυμα από έναν από τους εξερευνητές μας."
-" Ο Τόρβερ επεκτείνει την πρώτη του γραμμή και πλησιάζει τα εδάφη μας."
+"Άρχοντά μου, λάβαμε ένα ανησυχητικό μήνυμα από έναν από τους εξερευνητές "
+"μας. Ο Τόρβερ επεκτείνει την πρώτη του γραμμή και πλησιάζει τα εδάφη μας."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:38
 msgid ""
@@ -355,9 +356,9 @@ msgid ""
 "their excellent access to the adjacent great lake. A port in the North will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
-"Αρχοντά μου, τώρα που κατακτήσαμε τα εδάφη του Τόρβερ, μπορούμε να έχουμε "
+"Άρχοντά μου, τώρα που κατακτήσαμε τα εδάφη του Τόρβερ, μπορούμε να έχουμε "
 "πρόσβαση στην γειτονική μεγάλη λίμνη. Ένα λιμάνι στον Βορρά θα μας δώσει "
-"καλύτερες πιθανότητες να επικοινωνίσουμε με άλλες φυλές."
+"καλύτερες πιθανότητες να επικοινωνήσουμε με άλλες φυλές."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -378,7 +379,7 @@ msgid ""
 "Sire, our men have located an isolated enemy pirate sentry. The abandoned "
 "huts indicate that there is gold nearby."
 msgstr ""
-"Αρχοντά μου, οι άντρες μας έχουν εντοπίσει ένα απομονωμένο πειρατικό "
+"Άρχοντά μου, οι άντρες μας έχουν εντοπίσει ένα απομονωμένο πειρατικό "
 "φυλάκιο. Τα εγκαταλελειμμένα καλύβια μαρτυρούν την ύπαρξη χρυσού κοντά."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:64
@@ -404,9 +405,9 @@ msgid ""
 "have been looted from the gold diggers’ huts nearby. This gold ore will be "
 "transported to our headquarters."
 msgstr ""
-"Αρχοντά μου, βρήκαμε 25 μονάδες μεταλλεύματος χρυσού μέσα στο πειρατικό "
-"φυλάκιο. Μπορεί να έχουν λεηλατηθεί από τις κοντινές καλύβες των χρυσορύχων."
-" Αυτό το μετάλλευμα χρυσού θα μεταφερθεί στο αρχηγείο μας."
+"Άρχοντά μου, βρήκαμε 25 κομμάτια μεταλλεύματος χρυσού μέσα στο πειρατικό "
+"φυλάκιο. Μπορεί να έχουν λεηλατηθεί από τις κοντινές καλύβες των χρυσωρύχων."
+" Το μετάλλευμα χρυσού θα μεταφερθεί στο αρχηγείο μας."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:73
 msgid ""
@@ -432,10 +433,10 @@ msgid ""
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
-"Αρχοντά μου, η υγρή εποχή έχει δημιουργήσει βάλτους κατά μήκος του ρυακιού "
-"στα ανατολικά και δεν μπορούμε να τους διασχίσουμε. Θα πρέπει να αφαιρεθούν "
-"πριν μπορέσουμε να συνεχίσουμε. Αν φέρεις αρκετά φτυάρια στη νέα αποθήκη, "
-"τότε εθελοντές θα αποξηράνουν τους βάλτους."
+"Άρχοντά μου, η περίοδος των βροχών έχει δημιουργήσει βάλτους κατά μήκος του "
+"ρυακιού στα ανατολικά και δεν μπορούμε να τους διασχίσουμε. Θα πρέπει να "
+"αφαιρεθούν πριν μπορέσουμε να συνεχίσουμε. Αν φέρεις αρκετά φτυάρια στη νέα "
+"αποθήκη, τότε θα αποξηράνουν τους βάλτους κάποιοι εθελοντές."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
@@ -443,10 +444,10 @@ msgid ""
 "will not have removed the swamps before the next wet season. If you bring "
 "more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
-"Αρχοντά μου, όλα τα φτυάρια έχουν διανεμηθεί, αλλά αν συνεχίσουμε με αυτό "
+"Άρχοντά μου, όλα τα φτυάρια έχουν διανεμηθεί, αλλά αν συνεχίσουμε με αυτό "
 "τον ρυθμό, δεν θα έχουμε αποξηράνει τους βάλτους πριν την επόμενη περίοδο "
-"βροχών.  Αν φέρεις περισσότερα φτυάρια στην νέα αποθήκη τότε θα έρθουν κι "
-"άλλοι εθελοντές."
+"των βροχών. Αν φέρεις περισσότερα φτυάρια στην νέα αποθήκη τότε θα έρθουν κι"
+" άλλοι εθελοντές."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""
@@ -454,7 +455,7 @@ msgid ""
 "and finish them off. Maybe there are even more treasures hidden in their "
 "territory."
 msgstr ""
-"Αρχοντά μου, τώρα που έχουμε πρόσβαση στην κρυψώνα των πειρατών, θα πρέπει "
+"Άρχοντά μου, τώρα που έχουμε πρόσβαση στην κρυψώνα των πειρατών, θα πρέπει "
 "να την κατακτήσουμε και να τους αποτελειώσουμε. Μπορεί να υπάρχουν ακόμη "
 "περισσότεροι θησαυροί κρυμμένοι στην επικράτειά τους."
 
@@ -467,7 +468,7 @@ msgid ""
 "Sire, we have defeated the pirates. They have hidden some gold in their last"
 " bastion which is now being transferred to our headquarters."
 msgstr ""
-"Αρχοντά μου, έχουμε συντρίψει τους πειρατές. Είχαν κρύψει λίγο χρυσό στο "
+"Άρχοντά μου, έχουμε συντρίψει τους πειρατές. Είχαν κρύψει λίγο χρυσό στο "
 "τελευταίο οχυρό τους, το οποίο μεταφέρεται στο αρχηγείο μας."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:106
@@ -481,10 +482,10 @@ msgid ""
 "lost strength. Our dwindling resources can become a problem with such a "
 "mighty enemy in front of us."
 msgstr ""
-"Αρχοντά μου, ως αποτέλεσμα των επιθέσεών μας στους πειρατές, έχουν αρχίσει "
-"να ανασυντάσσονται με πειρατές από άλλες φυλές. Θα μπορούσαν να ανακτήσουν "
-"αρκετή από τη δύναμη που έχουν χάσει. Οι πόροι μας που ελλατώνονται θα "
-"μπορούσαν να γίνουν πρόβλημα με έναν τέτοιο ισχυρό εχθρό μπροστά μας."
+"Άρχοντά μου, το αποτέλεσμα των επιθέσεών μας στους πειρατές, είναι η "
+"ανασύνταξή τους με πειρατές από άλλες φυλές. Θα μπορούσαν να ανακτήσουν "
+"αρκετή από τη χαμένη τους δύναμη. Οι πόροι μας, που ελαττώνονται συνεχώς, θα"
+" μπορούσαν να γίνουν πρόβλημα με έναν τέτοιο ισχυρό εχθρό μπροστά μας."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
 msgid "Pirates on the run"
@@ -496,9 +497,9 @@ msgid ""
 "them have fled and moved away in small boats. It is unknown in which "
 "direction they have escaped."
 msgstr ""
-"Αρχοντά μου, χάρη στις επιτυχημένες προσπάθειές μας να εκδιώξουμε τους "
+"Άρχοντά μου, χάρη στις επιτυχημένες προσπάθειές μας να εκδιώξουμε τους "
 "πειρατές, πολλοί από αυτούς τράπηκαν σε φυγή και απομακρύνθηκαν σε μικρές "
-"βάρκες. Είναι άγνωστο προς ποιά κατεύθυνση δραπέτευσαν."
+"βάρκες. Είναι άγνωστο προς ποια κατεύθυνση δραπέτευσαν."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:118
 msgid "Ability to build shipyards"
@@ -510,7 +511,7 @@ msgid ""
 "decipher the strange language in Törver’s descriptions that we had found in "
 "his headquarters. From now on we are able to build shipyards."
 msgstr ""
-"Αρχοντά μου, μετά από πολλή μελέτη και έρευνα, οι σοφοί μας κατάφεραν να "
+"Άρχοντά μου, μετά από πολλή μελέτη και έρευνα, οι σοφοί μας κατάφεραν να "
 "αποκρυπτογραφήσουν την άγνωστη γλώσσα των περιγραφών του Τόρβερ, που βρήκαμε"
 " στο αρχηγείο του. Από τώρα και στο εξής μπορούμε να ναυπηγήσουμε πλοία."
 
@@ -524,7 +525,7 @@ msgid ""
 "their island. He is the only person who knows the way through the swamps "
 "towards Hjalmar."
 msgstr ""
-"Αρχοντά μου, ένας από τους ανιχνευτές μας αιχμαλωτίστηκε από τους πειρατές "
+"Άρχοντά μου, ένας από τους ανιχνευτές μας αιχμαλωτίστηκε από τους πειρατές "
 "και μεταφέρθηκε στο νησί τους. Είναι ο μόνος άνθρωπος που γνωρίζει τα "
 "μονοπάτια μέσα από τους βάλτους προς τον Χιάλμαρ."
 
@@ -561,7 +562,7 @@ msgid ""
 "Sire, our scout has returned to our territory, and he has shown us the road "
 "through the swamps towards Hjalmar."
 msgstr ""
-"Αρχοντά μου, ο ανιχνευτής μας επέστρεψε στην επικράτειά μας και μας έχει "
+"Άρχοντά μου, ο ανιχνευτής μας επέστρεψε στην επικράτειά μας και μας έχει "
 "δείξει τον δρόμο προς τον Χιάλμαρ μέσα από τους βάλτους."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:142
@@ -600,7 +601,7 @@ msgstr "Νίκη!"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:158
 msgid "Sire, my congratulations!"
-msgstr "Αφέντη μου, τα συγχαρητήριά μου!"
+msgstr "Άρχοντά μου, τα συγχαρητήριά μου!"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:160
 msgid ""
@@ -614,4 +615,4 @@ msgstr ""
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:162
 msgid "Your name will be remembered forever."
-msgstr "Το όνομά σας θα μνημονεύεται για πάντα."
+msgstr "Το όνομά σου θα μνημονεύεται για πάντα."
