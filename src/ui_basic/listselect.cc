@@ -756,14 +756,9 @@ void BaseListselect::remove(const uint32_t i) {
 			int w = er->pic->width();
 			if (new_max_pic_width < w) {
 				new_max_pic_width = w;
-<<<<<<< HEAD
 				if (max_pic_width_ == w) {
 					break;
 				}
-=======
-				if (max_pic_width_ == w)
-					break;
->>>>>>> 5b1a1e7741e599473a9622c95a1de65fbd1c4b21
 			}
 		}
 		max_pic_width_ = new_max_pic_width;
