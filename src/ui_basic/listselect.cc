@@ -448,9 +448,11 @@ void BaseListselect::draw(RenderTarget& dst) {
 		const int lineheight_unpadded = get_lineheight_without_padding();
 
 		Vector2i point(selection_mode_ == ListselectLayout::kDropdown ? 3 : 1, y);
-		uint32_t maxw =
-		   get_eff_w() -
+
+		const uint32_t w_reduction =
 		   (selection_mode_ == ListselectLayout::kDropdown ? scrollbar_.is_enabled() ? 4 : 5 : 2);
+		assert(w_reduction <= get_eff_w());
+		uint32_t maxw = get_eff_w() - w_reduction;
 
 		// Highlight the current selected entry
 		if (idx == selection_ && entry_records_.at(idx)->enable) {
@@ -463,7 +465,6 @@ void BaseListselect::draw(RenderTarget& dst) {
 				r.h += r.y;
 				r.y = 0;
 			}
-			assert(2 <= get_eff_w());
 			// Make the area a bit more white and more transparent
 			if (r.w > 0 && r.h > 0) {
 				dst.brighten_rect(r, -ms_darken_value * 2);
