@@ -142,6 +142,7 @@ void BaseListselect::clear() {
 	}
 	entry_records_.clear();
 
+	max_pic_width_ = 0;
 	scrollbar_.set_steps(1);
 	scrollpos_ = 0;
 	selection_ = no_selection_index();
@@ -737,12 +738,28 @@ void BaseListselect::scroll_to_selection() {
 void BaseListselect::remove(const uint32_t i) {
 	assert(i < entry_records_.size());
 
+	// flag for whether max_pic_width_ needs to be rechecked
+	const bool recheck_max_pic_width = max_pic_width_ > 0 &&
+		entry_records_[i]->pic->width() == max_pic_width_;
+
 	delete (entry_records_[i]);
 	entry_records_.erase(entry_records_.begin() + i);
 	if (selection_ == i) {
 		selected(selection_ = no_selection_index());
 	} else if (i < selection_) {
 		--selection_;
+	}
+
+	if (recheck_max_pic_width) {
+		int new_max_pic_width = 0;
+		for (EntryRecord* er : entry_records_) {
+			int w = er->pic->width();
+			if (new_max_pic_width < w) {
+				new_max_pic_width = w;
+				if (max_pic_width_ == w) break;
+			}
+		}
+		max_pic_width_ = new_max_pic_width;
 	}
 }
 
