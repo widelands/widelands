@@ -739,8 +739,8 @@ void BaseListselect::remove(const uint32_t i) {
 	assert(i < entry_records_.size());
 
 	// flag for whether max_pic_width_ needs to be rechecked
-	const bool recheck_max_pic_width = max_pic_width_ > 0 &&
-		entry_records_[i]->pic->width() == max_pic_width_;
+	const bool recheck_max_pic_width =
+	   max_pic_width_ > 0 && entry_records_[i]->pic->width() == max_pic_width_;
 
 	delete (entry_records_[i]);
 	entry_records_.erase(entry_records_.begin() + i);
@@ -756,7 +756,8 @@ void BaseListselect::remove(const uint32_t i) {
 			int w = er->pic->width();
 			if (new_max_pic_width < w) {
 				new_max_pic_width = w;
-				if (max_pic_width_ == w) break;
+				if (max_pic_width_ == w)
+					break;
 			}
 		}
 		max_pic_width_ = new_max_pic_width;
