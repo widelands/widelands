@@ -33,7 +33,7 @@ msgctxt "ware"
 msgid ""
 "Logs are an important basic building material. They are produced by felling "
 "trees."
-msgstr "Οι κορμοί είναι ένα οικοδομικό υλικό. Παράγονται από την κοπή δέντρων."
+msgstr "Οι κορμοί είναι ένα σημαντικό οικοδομικό υλικό. Παράγονται από την κοπή δέντρων."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Log, part 2
 #: ../../../../data/tribes/initialization/amazons/units.lua:92
@@ -42,7 +42,7 @@ msgid ""
 "Amazon woodcutters fell trees and jungle preservers will plant them. The "
 "resulting logs are used by the stone carver. The charcoal kiln also needs "
 "logs to produce charcoal."
-msgstr "Οι Αμαζόνες υλοτόμισσες κόβουν δέντρα και οι αναδασωτές ζούγκλας θα τα φυτέψουν. Οι παραγόμενοι κορμοί χρησιμοποιούνται από τον λαξευτή πέτρας. Η κάμινος άνθρακα επίσης χρειάζεται κορμούς για την παραγωγή ξυλάνθρακα."
+msgstr "Οι Αμαζόνες υλοτόμισσες κόβουν τα δέντρα και οι αναδασώτριες ζούγκλας θα τα ξαναφυτέψουν. Οι κορμοί χρησιμοποιούνται από τις λαξεύτριες πέτρας. Επίσης, το ανθρακοποιείο χρειάζεται κορμούς για την παραγωγή ξυλάνθρακα."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Granite, part 1
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
@@ -189,13 +189,13 @@ msgctxt "amazons_ware"
 msgid ""
 "The Amazons use granite for making some tools as well. It is produced by the"
 " stonecutters and in stone mines."
-msgstr "Οι Αμαζόνες χρησιμοποιούν επίσης γρανίτη για την παραγωγή κάποιων εργαλείων. Παράγεται από τις λιθοξόους και στα ορυχεία πέτρας."
+msgstr "Οι Αμαζόνες χρησιμοποιούν γρανίτη για την παραγωγή κάποιων εργαλείων. Παράγεται από τις λιθοξόους και στα λατομεία."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 1
 #: ../../../../data/tribes/initialization/amazons/units.lua:116
 msgctxt "ware"
 msgid "Amazons use quartz for sharp tools and weapons."
-msgstr "Οι αμαζόνες χρησιμοποιούν χαλαζία για αιχμηρά εργαλεία και όπλα."
+msgstr "Οι αμαζόνες χρησιμοποιούν χαλαζία για την κατασκευή αιχμηρών εργαλείων και όπλων."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 2
 #: ../../../../data/tribes/initialization/amazons/units.lua:118
@@ -203,7 +203,7 @@ msgctxt "amazons_ware"
 msgid ""
 "It is also a building material for some advanced buildings. It is produced "
 "in stone mines."
-msgstr "Είναι επίσης οικοδομικό υλικό για κάποια προχωρημένα κτήρια. Παράγειτα στα ορυχεία πέτρας."
+msgstr "Επίσης χρησιμοποιείται ως οικοδομικό υλικό για κάποια προχωρημένα κτήρια. Παράγεται στα λατομεία."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Balsa
 #: ../../../../data/tribes/initialization/amazons/units.lua:129
@@ -211,7 +211,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Balsa wood is an important building material. It is also used to make light "
 "armor. Balsa trees are cut by an experienced woodcutter."
-msgstr "To ξύλο μπάλσα είναι ένα σημαντικό οικοδομικό υλικό. Χρησιμοποιείται επίσης στην κατασκευή ελαφριών πανοπλιών. Τα δέντρα μπάλσα κόβονται από έμπειρους υλοτόμους."
+msgstr "To ξύλο μπάλσα είναι ένα σημαντικό οικοδομικό υλικό. Επίσης, χρησιμοποιείται στην κατασκευή ελαφριών πανοπλιών. Τα δέντρα μπάλσα κόβονται από έμπειρες υλοτόμισσες."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Ironwood
 #: ../../../../data/tribes/initialization/amazons/units.lua:140
@@ -219,7 +219,7 @@ msgctxt "amazons_ware"
 msgid ""
 "This very hard wood is as hard as iron and it is used for several buildings,"
 " tools and weapons. It is cut by a very experienced woodcutter."
-msgstr "Αυτό το πολύ σκληρό ξύλο, είναι τόσο σκληρό όσο ο σίδηρος και χρησιμοποιείται για αρκετά κτήρια, εργαλεία και όπλα. Κόβεται από έναν πολύ έμπειρο υλοτόμο."
+msgstr "Αυτό το πολύ σκληρό ξύλο, είναι τόσο σκληρό όσο ο σίδηρος και χρησιμοποιείται στην κατασκευή αρκετών κτηρίων, εργαλείων και όπλων. Κόβεται από πολύ έμπειρες υλοτόμισσες."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Rubber
 #: ../../../../data/tribes/initialization/amazons/units.lua:151
@@ -227,13 +227,13 @@ msgctxt "amazons_ware"
 msgid ""
 "Rubber is important for making warriors’ armor and shoes. Rubber trees are "
 "collected by experienced woodcutters."
-msgstr "Το καοτσούκ είναι σημαντικό για την κατασκευή πανοπλιών και παπουτσιών των πολεμιστών. Τα καοτσουκόδεντρα συλλέγονται από έμπειρους υλοτόμους."
+msgstr "Το καοτσούκ είναι σημαντικό για την κατασκευή πανοπλιών και παπουτσιών για τις πολεμίστριες. Τα καοτσουκόδεντρα συλλέγονται από έμπειρες υλοτόμισσες."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Liana
 #: ../../../../data/tribes/initialization/amazons/units.lua:161
 msgctxt "amazons_ware"
 msgid "Lianas grow on trees. Very durable ropes are made out of them."
-msgstr "Τα λιάνα μεγαλώνου στα δέντρα. Από αυτά κατασκευάζονται πολύ ανθεκτικά σχοινιά."
+msgstr "Τα λιάνα μεγαλώνουν στα δέντρα και από αυτά κατασκευάζονται πολύ ανθεκτικά σχοινιά."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Rope
 #: ../../../../data/tribes/initialization/amazons/units.lua:171
@@ -241,7 +241,7 @@ msgctxt "amazons_ware"
 msgid ""
 "This rope is made out of lianas. It is used for armor dresses and to "
 "construct buildings and ships."
-msgstr "Το σχοινί είναι κατασκευασμένο από λιάνα. Χρησιμοποιείται για την θωράκιση φορεμάτων και για την κατασκευή κτηρίων και πλοίων"
+msgstr "Το σχοινί κατασκευάζεται από λιάνα. Χρησιμοποιείται για την θωράκιση φορεμάτων και για την κατασκευή κτηρίων και πλοίων"
 
 #. TRANSLATORS: Helptext for an Amazon ware: Water, part 1
 #. TRANSLATORS: Helptext for an Atlantean ware: Water, part 1
@@ -263,7 +263,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Water is used by the cassava root cooker, the chocolate brewery, the gold "
 "digger and the tapir farm."
-msgstr ""
+msgstr "Το νερό χρησιμοποιείται από το μαγειρείο ριζών κασάβα, το σοκολατοποιείο, τις χρυσορύχους και την φάρμα ταπίρ."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Cassava Root
 #: ../../../../data/tribes/initialization/amazons/units.lua:196
@@ -272,7 +272,7 @@ msgid ""
 "Cassava roots are a special kind of root produced at cassava plantations. "
 "The Amazons like their strong taste for making bread and they also feed "
 "their tapirs with them."
-msgstr ""
+msgstr "Οι ρίζες κασάβα είναι ένα ξεχωριστό είδος ριζών που παράγεται στις φυτείες κασάβα. Στις Αμαζόνες αρέσει η δυνατή τους γεύση για την παρασκευή ψωμιού. Επίσης, με ρίζες κασάβα ταΐζουν τα ταπίρ τους."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Cocoa Beans
 #: ../../../../data/tribes/initialization/amazons/units.lua:206
@@ -280,7 +280,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Cocoa beans are gathered from cocoa trees by a cocoa farmer. They are used "
 "for producing chocolate."
-msgstr ""
+msgstr "Οι αγρότισσες μαζεύουν τους κόκκους κακάο από τα κακαόδεντρα. Χρησιμοποιούνται για την παρασκευή σοκολάτας."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Bread
 #: ../../../../data/tribes/initialization/amazons/units.lua:217
@@ -289,14 +289,14 @@ msgid ""
 "This tasty bread is made in cassava root cookeries out of cassava root and "
 "water. It is the basic ingredient of a ration that is made by a food "
 "preserver. Soldiers like it too."
-msgstr ""
+msgstr "Αυτό το νόστιμο ψωμί παρασκευάζεται στα μαγειρεία ριζών κασάβα από νερό και ρίζες κασάβα. Είναι το βασικό συστατικό μιας μερίδας φαγητού, που παράγεται από τις συντηρήτριες φαγητού. Αρέσει, επίσης, στους στρατιώτες."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Chocolate
 #: ../../../../data/tribes/initialization/amazons/units.lua:228
 msgctxt "amazons_ware"
 msgid ""
 "Chocolate is produced by chocolate breweries and used to train soldiers."
-msgstr ""
+msgstr "Η σοκολάτα παράγεται στα σοκολατοποιεία και χρησιμοποιείται στην εκπαίδευση των στρατιωτών."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Fish
 #: ../../../../data/tribes/initialization/amazons/units.lua:238
@@ -306,7 +306,7 @@ msgid ""
 "the food preserver to prepare rations for the workers digging for gold dust "
 "and granite. It is also consumed at the training sites (training glade and "
 "warriors’ gathering) and for recruiting new soldiers."
-msgstr ""
+msgstr "Τα ψάρια είναι μία από τις δύο κύριες πηγές φαγητού για τις Αμαζόνες. Χρησιμοποιείται από τις διατηρήτριες φαγητού για να προετοιμάσουν μερίδες, για τις εργάτριες που σκάβουν για χρυσόσκονη και γρανίτη. Επίσης, το ψάρι καταναλώνεται στα κέντρα εκπαίδευσης (traning glade and warriors' gathering) και για την στρατολόγηση νέων στρατιωτών."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Meat, part 1
 #: ../../../../data/tribes/initialization/amazons/units.lua:248
@@ -314,7 +314,7 @@ msgctxt "ware"
 msgid ""
 "Meat contains a lot of energy, and it is obtained from wild game taken by "
 "hunter-gatherers."
-msgstr ""
+msgstr "Το κρέας περιέχει πολλή ενέργεια. Αποκομιζεται από τροφοσυλλέκτριες από άγρια θηράματα."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Meat, part 2
 #: ../../../../data/tribes/initialization/amazons/units.lua:250
