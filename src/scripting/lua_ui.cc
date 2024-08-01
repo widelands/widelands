@@ -2810,15 +2810,13 @@ Dropdown
 */
 const char LuaDropdown::className[] = "Dropdown";
 const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
-   METHOD(LuaDropdown, open),   METHOD(LuaDropdown, highlight_item),
+   METHOD(LuaDropdown, open),           METHOD(LuaDropdown, highlight_item),
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
    METHOD(LuaDropdown, indicate_item),
 #endif
-   METHOD(LuaDropdown, select), METHOD(LuaDropdown, add),
-   METHOD(LuaDropdown, get_value_at),
-   METHOD(LuaDropdown, get_label_at),
-   METHOD(LuaDropdown, get_tooltip_at),
-   {nullptr, nullptr},
+   METHOD(LuaDropdown, select),         METHOD(LuaDropdown, add),
+   METHOD(LuaDropdown, get_value_at),   METHOD(LuaDropdown, get_label_at),
+   METHOD(LuaDropdown, get_tooltip_at), {nullptr, nullptr},
 };
 const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
    PROP_RO(LuaDropdown, datatype),    PROP_RO(LuaDropdown, expanded),
