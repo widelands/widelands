@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
+# Alexandros Koutroulis, 2024
 # erimitis, 2018
 # GunChleoc, 2016
 msgid ""
@@ -10,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: erimitis, 2018\n"
+"Last-Translator: Alexandros Koutroulis, 2024\n"
 "Language-Team: Greek (http://app.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +33,7 @@ msgctxt "ware"
 msgid ""
 "Logs are an important basic building material. They are produced by felling "
 "trees."
-msgstr ""
+msgstr "Οι κορμοί είναι ένα σημαντικό οικοδομικό υλικό. Παράγονται από την κοπή δέντρων."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Log, part 2
 #: ../../../../data/tribes/initialization/amazons/units.lua:92
@@ -41,7 +42,7 @@ msgid ""
 "Amazon woodcutters fell trees and jungle preservers will plant them. The "
 "resulting logs are used by the stone carver. The charcoal kiln also needs "
 "logs to produce charcoal."
-msgstr ""
+msgstr "Οι Αμαζόνες υλοτόμισσες κόβουν τα δέντρα και οι αναδασώτριες ζούγκλας θα τα ξαναφυτέψουν. Οι κορμοί χρησιμοποιούνται από τις λαξεύτριες πέτρας. Επίσης, το ανθρακοποιείο χρειάζεται κορμούς για την παραγωγή ξυλάνθρακα."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Granite, part 1
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
@@ -180,7 +181,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:112
 msgctxt "ware"
 msgid "Granite is a basic building material."
-msgstr ""
+msgstr "Ο γρανίτης είναι ένα βασικό οικοδομικό υλικό."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Granite, part 2
 #: ../../../../data/tribes/initialization/amazons/units.lua:105
@@ -188,13 +189,13 @@ msgctxt "amazons_ware"
 msgid ""
 "The Amazons use granite for making some tools as well. It is produced by the"
 " stonecutters and in stone mines."
-msgstr ""
+msgstr "Οι Αμαζόνες χρησιμοποιούν γρανίτη για την παραγωγή κάποιων εργαλείων. Παράγεται από τις λιθοξόους και στα λατομεία."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 1
 #: ../../../../data/tribes/initialization/amazons/units.lua:116
 msgctxt "ware"
 msgid "Amazons use quartz for sharp tools and weapons."
-msgstr ""
+msgstr "Οι αμαζόνες χρησιμοποιούν χαλαζία για την κατασκευή αιχμηρών εργαλείων και όπλων."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 2
 #: ../../../../data/tribes/initialization/amazons/units.lua:118
@@ -202,7 +203,7 @@ msgctxt "amazons_ware"
 msgid ""
 "It is also a building material for some advanced buildings. It is produced "
 "in stone mines."
-msgstr ""
+msgstr "Επίσης χρησιμοποιείται ως οικοδομικό υλικό για κάποια προχωρημένα κτήρια. Παράγεται στα λατομεία."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Balsa
 #: ../../../../data/tribes/initialization/amazons/units.lua:129
@@ -210,7 +211,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Balsa wood is an important building material. It is also used to make light "
 "armor. Balsa trees are cut by an experienced woodcutter."
-msgstr ""
+msgstr "To ξύλο μπάλσα είναι ένα σημαντικό οικοδομικό υλικό. Επίσης, χρησιμοποιείται στην κατασκευή ελαφριών πανοπλιών. Τα δέντρα μπάλσα κόβονται από έμπειρες υλοτόμισσες."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Ironwood
 #: ../../../../data/tribes/initialization/amazons/units.lua:140
@@ -218,7 +219,7 @@ msgctxt "amazons_ware"
 msgid ""
 "This very hard wood is as hard as iron and it is used for several buildings,"
 " tools and weapons. It is cut by a very experienced woodcutter."
-msgstr ""
+msgstr "Αυτό το πολύ σκληρό ξύλο, είναι τόσο σκληρό όσο ο σίδηρος και χρησιμοποιείται στην κατασκευή αρκετών κτηρίων, εργαλείων και όπλων. Κόβεται από πολύ έμπειρες υλοτόμισσες."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Rubber
 #: ../../../../data/tribes/initialization/amazons/units.lua:151
@@ -226,13 +227,13 @@ msgctxt "amazons_ware"
 msgid ""
 "Rubber is important for making warriors’ armor and shoes. Rubber trees are "
 "collected by experienced woodcutters."
-msgstr ""
+msgstr "Το καοτσούκ είναι σημαντικό για την κατασκευή πανοπλιών και παπουτσιών για τις πολεμίστριες. Τα καοτσουκόδεντρα συλλέγονται από έμπειρες υλοτόμισσες."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Liana
 #: ../../../../data/tribes/initialization/amazons/units.lua:161
 msgctxt "amazons_ware"
 msgid "Lianas grow on trees. Very durable ropes are made out of them."
-msgstr ""
+msgstr "Τα λιάνα μεγαλώνουν στα δέντρα και από αυτά κατασκευάζονται πολύ ανθεκτικά σχοινιά."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Rope
 #: ../../../../data/tribes/initialization/amazons/units.lua:171
@@ -240,7 +241,7 @@ msgctxt "amazons_ware"
 msgid ""
 "This rope is made out of lianas. It is used for armor dresses and to "
 "construct buildings and ships."
-msgstr ""
+msgstr "Το σχοινί κατασκευάζεται από λιάνα. Χρησιμοποιείται για την θωράκιση φορεμάτων και για την κατασκευή κτηρίων και πλοίων"
 
 #. TRANSLATORS: Helptext for an Amazon ware: Water, part 1
 #. TRANSLATORS: Helptext for an Atlantean ware: Water, part 1
@@ -254,7 +255,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:179
 msgctxt "ware"
 msgid "Water is the essence of life!"
-msgstr ""
+msgstr "Το νερό είναι η πηγή της ζωής!"
 
 #. TRANSLATORS: Helptext for an Amazon ware: Water, part 2
 #: ../../../../data/tribes/initialization/amazons/units.lua:186
@@ -262,7 +263,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Water is used by the cassava root cooker, the chocolate brewery, the gold "
 "digger and the tapir farm."
-msgstr ""
+msgstr "Το νερό χρησιμοποιείται από το μαγειρείο ριζών κασάβα, το σοκολατοποιείο, τις χρυσορύχους και την φάρμα ταπίρ."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Cassava Root
 #: ../../../../data/tribes/initialization/amazons/units.lua:196
@@ -271,7 +272,7 @@ msgid ""
 "Cassava roots are a special kind of root produced at cassava plantations. "
 "The Amazons like their strong taste for making bread and they also feed "
 "their tapirs with them."
-msgstr ""
+msgstr "Οι ρίζες κασάβα είναι ένα ξεχωριστό είδος ριζών που παράγεται στις φυτείες κασάβα. Στις Αμαζόνες αρέσει η δυνατή τους γεύση για την παρασκευή ψωμιού. Επίσης, με ρίζες κασάβα ταΐζουν τα ταπίρ τους."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Cocoa Beans
 #: ../../../../data/tribes/initialization/amazons/units.lua:206
@@ -279,7 +280,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Cocoa beans are gathered from cocoa trees by a cocoa farmer. They are used "
 "for producing chocolate."
-msgstr ""
+msgstr "Οι αγρότισσες μαζεύουν τους κόκκους κακάο από τα κακαόδεντρα. Χρησιμοποιούνται για την παρασκευή σοκολάτας."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Bread
 #: ../../../../data/tribes/initialization/amazons/units.lua:217
@@ -288,14 +289,14 @@ msgid ""
 "This tasty bread is made in cassava root cookeries out of cassava root and "
 "water. It is the basic ingredient of a ration that is made by a food "
 "preserver. Soldiers like it too."
-msgstr ""
+msgstr "Αυτό το νόστιμο ψωμί παρασκευάζεται στα μαγειρεία ριζών κασάβα από νερό και ρίζες κασάβα. Είναι το βασικό συστατικό μιας μερίδας φαγητού, που παράγεται από τις συντηρήτριες φαγητού. Αρέσει, επίσης, στους στρατιώτες."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Chocolate
 #: ../../../../data/tribes/initialization/amazons/units.lua:228
 msgctxt "amazons_ware"
 msgid ""
 "Chocolate is produced by chocolate breweries and used to train soldiers."
-msgstr ""
+msgstr "Η σοκολάτα παράγεται στα σοκολατοποιεία και χρησιμοποιείται στην εκπαίδευση των στρατιωτών."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Fish
 #: ../../../../data/tribes/initialization/amazons/units.lua:238
@@ -305,7 +306,7 @@ msgid ""
 "the food preserver to prepare rations for the workers digging for gold dust "
 "and granite. It is also consumed at the training sites (training glade and "
 "warriors’ gathering) and for recruiting new soldiers."
-msgstr ""
+msgstr "Τα ψάρια είναι μία από τις δύο κύριες πηγές φαγητού για τις Αμαζόνες. Χρησιμοποιείται από τις διατηρήτριες φαγητού για να προετοιμάσουν μερίδες, για τις εργάτριες που σκάβουν για χρυσόσκονη και γρανίτη. Επίσης, το ψάρι καταναλώνεται στα κέντρα εκπαίδευσης (traning glade and warriors' gathering) και για την στρατολόγηση νέων στρατιωτών."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Meat, part 1
 #: ../../../../data/tribes/initialization/amazons/units.lua:248
@@ -313,7 +314,7 @@ msgctxt "ware"
 msgid ""
 "Meat contains a lot of energy, and it is obtained from wild game taken by "
 "hunter-gatherers."
-msgstr ""
+msgstr "Το κρέας περιέχει πολλή ενέργεια. Αποκομιζεται από τροφοσυλλέκτριες από άγρια θηράματα."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Meat, part 2
 #: ../../../../data/tribes/initialization/amazons/units.lua:250
@@ -643,7 +644,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:618
 msgctxt "amazons_worker"
 msgid "Fells trees."
-msgstr ""
+msgstr "Κόβει δέντρα."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Master Woodcutter
 #: ../../../../data/tribes/initialization/amazons/units.lua:625
@@ -655,7 +656,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:632
 msgctxt "amazons_worker"
 msgid "Plants trees."
-msgstr ""
+msgstr "Φυτεύει δέντρα."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Jungle Master
 #: ../../../../data/tribes/initialization/amazons/units.lua:639
@@ -691,13 +692,13 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:677
 msgctxt "amazons_worker"
 msgid "Grows cassava."
-msgstr ""
+msgstr "Καλλιεργεί κασάβα."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Cocoa Farmer
 #: ../../../../data/tribes/initialization/amazons/units.lua:684
 msgctxt "amazons_worker"
 msgid "Grows cocoa."
-msgstr ""
+msgstr "Καλλιεργεί κακάο."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Cook
 #: ../../../../data/tribes/initialization/amazons/units.lua:691
@@ -1715,7 +1716,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:1673
 msgctxt "amazons_building"
 msgid "Builds ferries."
-msgstr ""
+msgstr "Κατασκευάζει πορθμεία."
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Ferry Yard, part
 #. 1
@@ -1849,7 +1850,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2265
 msgctxt "building"
 msgid "Proverb"
-msgstr ""
+msgstr "Παροιμία"
 
 #. TRANSLATORS: Purpose helptext for an Amazon building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an Atlantean building: Dismantle Site
@@ -1880,14 +1881,14 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:1725
 msgctxt "warehousename"
 msgid "Anumā"
-msgstr ""
+msgstr "Ανουμά"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../../../data/tribes/initialization/amazons/units.lua:1727
 msgctxt "warehousename"
 msgid "Aquiqui"
-msgstr ""
+msgstr "Ακίκι"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
@@ -3079,8 +3080,8 @@ msgstr[1] ""
 msgctxt "amazons_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% στρατιώτης"
+msgstr[1] "%1% στρατιώτες"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -3098,8 +3099,8 @@ msgstr[1] ""
 msgctxt "amazons_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) στρατιώτης"
+msgstr[1] "%1%(+%2%) στρατιώτες"
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Granite, part 2
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:435
@@ -3297,13 +3298,13 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:321
 msgctxt "default_ware"
 msgid "Iron ore is mined in iron mines."
-msgstr ""
+msgstr "Το σιδηρομετάλλευμα εξορύσσεται στα ορυχεία σιδήρου."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Iron Ore, part 2
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:623
 msgctxt "atlanteans_ware"
 msgid "It is smelted in a smelting works to retrieve the iron."
-msgstr ""
+msgstr "Λιώνεται σε ένα χυτήριο για να παραχθεί ο σίδηρος"
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Iron, part 1
 #. TRANSLATORS: Helptext for a Barbarian ware: Iron, part 1
@@ -3315,7 +3316,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:334
 msgctxt "ware"
 msgid "Iron is smelted out of iron ores."
-msgstr ""
+msgstr "Ο σίδηρος λιώνεται από το σιδηρομετάλλευμα."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Iron, part 2
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:636
@@ -3323,7 +3324,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "It is produced by the smelting works and used in the toolsmithy, armor "
 "smithy and weapon smithy."
-msgstr ""
+msgstr "Παράγεται από το χυτήριο και χρησιμοποιείται στο εργαλειοποιείο, στο πανοπλιοποιείο και στο οπλοποιείο"
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for a Barbarian ware: Gold Ore, part 1
@@ -3335,7 +3336,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:347
 msgctxt "ware"
 msgid "Gold ore is mined in a gold mine."
-msgstr ""
+msgstr "Το μετάλλευμα χρυσού εξορύσσεται σε ένα χρυσορυχείο."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Gold Ore, part 2
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:649
@@ -3343,7 +3344,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Λιώνεται σε ένα χυτήριο και μετατρέπεται σε χρυσό το οποίο χρησιμοποιείται ως πολύτιμο οικοδομικό υλικό και για την κατασκευή όπλων και πανοπλιών."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Gold, part 1
 #. TRANSLATORS: Helptext for a Barbarian ware: Gold, part 1
@@ -3356,7 +3357,7 @@ msgstr ""
 msgctxt "ware"
 msgid ""
 "Gold is the most valuable of all metals, and it is smelted out of gold ore."
-msgstr ""
+msgstr "Ο χρυσός είναι το πιο πολύτιμο από όλα τα μέταλλα και λιώνεται από το μετάλλευμα χρυσού."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Gold, part 2
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:662
@@ -3614,7 +3615,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:943
 msgctxt "atlanteans_worker"
 msgid "Fells trees."
-msgstr ""
+msgstr "Κόβει δέντρα."
 
 #. TRANSLATORS: Helptext for an Atlantean worker: Sawyer
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:950
@@ -3626,7 +3627,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:957
 msgctxt "atlanteans_worker"
 msgid "Plants trees."
-msgstr ""
+msgstr "Φυτεύει δέντρα."
 
 #. TRANSLATORS: Helptext for an Atlantean worker: Builder
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:964
@@ -3718,7 +3719,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1068
 msgctxt "atlanteans_worker"
 msgid "Burns coal."
-msgstr ""
+msgstr "Καίει άνθρακα."
 
 #. TRANSLATORS: Helptext for an Atlantean worker: Smelter
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1075
@@ -5270,7 +5271,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2207
 msgctxt "building"
 msgid "Builds ferries."
-msgstr ""
+msgstr "Κατασκευάζει πορθμεία."
 
 #. TRANSLATORS: Note helptext for an Atlantean production site: Ferry Yard,
 #. part 1
@@ -5336,451 +5337,451 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2111
 msgctxt "warehousename"
 msgid "Aegina"
-msgstr ""
+msgstr "Αίγινα"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2113
 msgctxt "warehousename"
 msgid "Constantinos"
-msgstr ""
+msgstr "Κωνσταντίνος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2115
 msgctxt "warehousename"
 msgid "Kirikos"
-msgstr ""
+msgstr "Κύρηκος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2117
 msgctxt "warehousename"
 msgid "Aggistri"
-msgstr ""
+msgstr "Αγκίστρι"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2119
 msgctxt "warehousename"
 msgid "Alonissos"
-msgstr ""
+msgstr "Αλόνησσος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2121
 msgctxt "warehousename"
 msgid "Anafi"
-msgstr ""
+msgstr "Ανάφη"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2123
 msgctxt "warehousename"
 msgid "Andros"
-msgstr ""
+msgstr "Άνδρος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2125
 msgctxt "warehousename"
 msgid "Antikythira"
-msgstr ""
+msgstr "Αντικύθηρα"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2127
 msgctxt "warehousename"
 msgid "Arkyi"
-msgstr ""
+msgstr "Αρκύη"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2129
 msgctxt "warehousename"
 msgid "Astypalea"
-msgstr ""
+msgstr "Αστυπάλαια"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2131
 msgctxt "warehousename"
 msgid "Chalki"
-msgstr ""
+msgstr "Χάλκη"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2133
 msgctxt "warehousename"
 msgid "Chania"
-msgstr ""
+msgstr "Χανιά"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2135
 msgctxt "warehousename"
 msgid "Chios"
-msgstr ""
+msgstr "Χίος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2137
 msgctxt "warehousename"
 msgid "Diafani"
-msgstr ""
+msgstr "Διάφανη"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2139
 msgctxt "warehousename"
 msgid "Donoussa"
-msgstr ""
+msgstr "Δονούσσα"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2141
 msgctxt "warehousename"
 msgid "Euboea"
-msgstr ""
+msgstr "Εύβοια"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2143
 msgctxt "warehousename"
 msgid "Folegandros"
-msgstr ""
+msgstr "Φολέγανδρος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2145
 msgctxt "warehousename"
 msgid "Fourni"
-msgstr ""
+msgstr "Φούρνοι"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2147
 msgctxt "warehousename"
 msgid "Gytheio"
-msgstr ""
+msgstr "Γύθειο"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2149
 msgctxt "warehousename"
 msgid "Heraklion"
-msgstr ""
+msgstr "Ηράκλειο"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2151
 msgctxt "warehousename"
 msgid "Hydra"
-msgstr ""
+msgstr "Ύδρα"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2153
 msgctxt "warehousename"
 msgid "Igoumenitsa"
-msgstr ""
+msgstr "Ηγουμενίτσα"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2155
 msgctxt "warehousename"
 msgid "Ios"
-msgstr ""
+msgstr "Ίος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2157
 msgctxt "warehousename"
 msgid "Iraklia"
-msgstr ""
+msgstr "Ηράκλεια"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2159
 msgctxt "warehousename"
 msgid "Ithaki"
-msgstr ""
+msgstr "Ιθάκη"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2161
 msgctxt "warehousename"
 msgid "Kalamata"
-msgstr ""
+msgstr "Καλαμάτα"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2163
 msgctxt "warehousename"
 msgid "Kalymnos"
-msgstr ""
+msgstr "Κάλυμνος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2165
 msgctxt "warehousename"
 msgid "Karlovassi"
-msgstr ""
+msgstr "Καρλόβασι"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2167
 msgctxt "warehousename"
 msgid "Karpathos"
-msgstr ""
+msgstr "Κάρπαθος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2169
 msgctxt "warehousename"
 msgid "Kasos"
-msgstr ""
+msgstr "Κάσος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2171
 msgctxt "warehousename"
 msgid "Kastelorizo"
-msgstr ""
+msgstr "Καστελόριζο"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2173
 msgctxt "warehousename"
 msgid "Katapola"
-msgstr ""
+msgstr "Κατάπολα"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2175
 msgctxt "warehousename"
 msgid "Kavala"
-msgstr ""
+msgstr "Καβάλα"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2177
 msgctxt "warehousename"
 msgid "Kefalonia"
-msgstr ""
+msgstr "Κεφαλονιά"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2179
 msgctxt "warehousename"
 msgid "Kilini"
-msgstr ""
+msgstr "Κυλλήνη"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2181
 msgctxt "warehousename"
 msgid "Kimolos"
-msgstr ""
+msgstr "Κίμωλος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2183
 msgctxt "warehousename"
 msgid "Kissamos"
-msgstr ""
+msgstr "Κίσσαμος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2185
 msgctxt "warehousename"
 msgid "Korfu"
-msgstr ""
+msgstr "Κέρκυρα"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2187
 msgctxt "warehousename"
 msgid "Kos"
-msgstr ""
+msgstr "Κώς"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2189
 msgctxt "warehousename"
 msgid "Koufonissi"
-msgstr ""
+msgstr "Κουφονήσι"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2191
 msgctxt "warehousename"
 msgid "Kythira"
-msgstr ""
+msgstr "Κύθηρα"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2193
 msgctxt "warehousename"
 msgid "Kythnos"
-msgstr ""
+msgstr "Κύθνος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2195
 msgctxt "warehousename"
 msgid "Lavrio"
-msgstr ""
+msgstr "Λαύριο"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2197
 msgctxt "warehousename"
 msgid "Leros"
-msgstr ""
+msgstr "Λέρος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2199
 msgctxt "warehousename"
 msgid "Lesvos"
-msgstr ""
+msgstr "Λέσβος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2201
 msgctxt "warehousename"
 msgid "Limnos"
-msgstr ""
+msgstr "Λήμνος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2203
 msgctxt "warehousename"
 msgid "Lipsi"
-msgstr ""
+msgstr "Λειψοί"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2205
 msgctxt "warehousename"
 msgid "Milos"
-msgstr ""
+msgstr "Μήλος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2207
 msgctxt "warehousename"
 msgid "Mykonos"
-msgstr ""
+msgstr "Μύκονος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2209
 msgctxt "warehousename"
 msgid "Naxos"
-msgstr ""
+msgstr "Νάξος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2211
 msgctxt "warehousename"
 msgid "Nisyros"
-msgstr ""
+msgstr "Νίσυρος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2213
 msgctxt "warehousename"
 msgid "Paros"
-msgstr ""
+msgstr "Πάρος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2215
 msgctxt "warehousename"
 msgid "Patmos"
-msgstr ""
+msgstr "Πάτμος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2217
 msgctxt "warehousename"
 msgid "Patras"
-msgstr ""
+msgstr "Πάτρα"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2219
 msgctxt "warehousename"
 msgid "Paxoi"
-msgstr ""
+msgstr "Παξοί"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2221
 msgctxt "warehousename"
 msgid "Piraeus"
-msgstr ""
+msgstr "Πειραιάς"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2223
 msgctxt "warehousename"
 msgid "Poros"
-msgstr ""
+msgstr "Πόρος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2225
 msgctxt "warehousename"
 msgid "Rafina"
-msgstr ""
+msgstr "Ραφήνα"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2227
 msgctxt "warehousename"
 msgid "Rhodos"
-msgstr ""
+msgstr "Ρόδος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2229
 msgctxt "warehousename"
 msgid "Samos"
-msgstr ""
+msgstr "Σάμος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2231
 msgctxt "warehousename"
 msgid "Santorini"
-msgstr ""
+msgstr "Σαντορίνη"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2233
 msgctxt "warehousename"
 msgid "Schinoussa"
-msgstr ""
+msgstr "Σχοινούσα"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2235
 msgctxt "warehousename"
 msgid "Serifos"
-msgstr ""
+msgstr "Σέριφος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2237
 msgctxt "warehousename"
 msgid "Sifnos"
-msgstr ""
+msgstr "Σίφνος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2239
 msgctxt "warehousename"
 msgid "Sikinos"
-msgstr ""
+msgstr "Σίκινος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2241
 msgctxt "warehousename"
 msgid "Sitia"
-msgstr ""
+msgstr "Σητεία"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2243
 msgctxt "warehousename"
 msgid "Skiathos"
-msgstr ""
+msgstr "Σκιάθος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2245
 msgctxt "warehousename"
 msgid "Skopelos"
-msgstr ""
+msgstr "Σκόπελος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2247
 msgctxt "warehousename"
 msgid "Symi"
-msgstr ""
+msgstr "Σύμη"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2249
 msgctxt "warehousename"
 msgid "Syros"
-msgstr ""
+msgstr "Σύρος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2251
 msgctxt "warehousename"
 msgid "Thessaloniki"
-msgstr ""
+msgstr "Θεσσαλονίκη"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2253
 msgctxt "warehousename"
 msgid "Tilos"
-msgstr ""
+msgstr "Τήλος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2255
 msgctxt "warehousename"
 msgid "Tinos"
-msgstr ""
+msgstr "Τήνος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2257
 msgctxt "warehousename"
 msgid "Volos"
-msgstr ""
+msgstr "Βόλος"
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2259
 msgctxt "warehousename"
 msgid "Zakynthos"
-msgstr ""
+msgstr "Ζάκυνθος"
 
 #. TRANSLATORS: Productivity label on an Atlantean building if there is 1
 #. worker missing
@@ -5839,8 +5840,8 @@ msgstr[1] ""
 msgctxt "atlanteans_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% στρατιώτης"
+msgstr[1] "%1% στρατιώτες"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -6282,13 +6283,13 @@ msgstr ""
 #: ../../../../data/tribes/initialization/barbarians/units.lua:588
 msgctxt "barbarians_worker"
 msgid "Fells trees."
-msgstr ""
+msgstr "Κόβει δέντρα."
 
 #. TRANSLATORS: Helptext for a Barbarian worker: Ranger
 #: ../../../../data/tribes/initialization/barbarians/units.lua:595
 msgctxt "barbarians_worker"
 msgid "Plants trees."
-msgstr ""
+msgstr "Φυτεύει δέντρα."
 
 #. TRANSLATORS: Helptext for a Barbarian worker: Builder
 #: ../../../../data/tribes/initialization/barbarians/units.lua:602
@@ -6344,7 +6345,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/barbarians/units.lua:661
 msgctxt "barbarians_worker"
 msgid "Plants fields."
-msgstr ""
+msgstr "Σπέρνει χωράφια."
 
 #. TRANSLATORS: Helptext for a Barbarian worker: Baker
 #: ../../../../data/tribes/initialization/barbarians/units.lua:668
@@ -6391,7 +6392,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/barbarians/units.lua:727
 msgctxt "barbarians_worker"
 msgid "Burns coal."
-msgstr ""
+msgstr "Καίει άνθρακα."
 
 #. TRANSLATORS: Helptext for a Barbarian worker: Smelter
 #: ../../../../data/tribes/initialization/barbarians/units.lua:734
@@ -9981,7 +9982,7 @@ msgstr[1] ""
 #: ../../../../data/tribes/initialization/empire/units.lua:12
 msgctxt "empire_lore"
 msgid "‘%1%’<br>(%2%)"
-msgstr ""
+msgstr "‘%1%’<br>(%2%)"
 
 #. TRANSLATORS: Helptext for an Empire ware: Granite, part 2
 #: ../../../../data/tribes/initialization/empire/units.lua:115
@@ -10372,13 +10373,13 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:649
 msgctxt "empire_worker"
 msgid "Fells trees."
-msgstr ""
+msgstr "Κόβει δέντρα."
 
 #. TRANSLATORS: Helptext for an Empire worker: Forester
 #: ../../../../data/tribes/initialization/empire/units.lua:656
 msgctxt "empire_worker"
 msgid "Plants trees."
-msgstr ""
+msgstr "Φυτεύει δέντρα."
 
 #. TRANSLATORS: Helptext for an Empire worker: Builder
 #: ../../../../data/tribes/initialization/empire/units.lua:663
@@ -10390,7 +10391,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:670
 msgctxt "empire_worker"
 msgid "Keeping sheep."
-msgstr ""
+msgstr "Βόσκει πρόβατα."
 
 #. TRANSLATORS: Helptext for an Empire worker: Weaver
 #: ../../../../data/tribes/initialization/empire/units.lua:677
@@ -10420,7 +10421,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:708
 msgctxt "empire_worker"
 msgid "Plants fields."
-msgstr ""
+msgstr "Σπέρνει χωράφια."
 
 #. TRANSLATORS: Helptext for an Empire worker: Miller
 #: ../../../../data/tribes/initialization/empire/units.lua:715
@@ -10438,19 +10439,19 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:729
 msgctxt "empire_worker"
 msgid "Produces beer."
-msgstr ""
+msgstr "Παράγει μπύρα."
 
 #. TRANSLATORS: Helptext for an Empire worker: Vine Farmer
 #: ../../../../data/tribes/initialization/empire/units.lua:736
 msgctxt "empire_worker"
 msgid "Grows grapevines."
-msgstr ""
+msgstr "Καλλιεργεί αμπέλια."
 
 #. TRANSLATORS: Helptext for an Empire worker: Vintner
 #: ../../../../data/tribes/initialization/empire/units.lua:743
 msgctxt "empire_worker"
 msgid "Produces wine."
-msgstr ""
+msgstr "Παράγει κρασί."
 
 #. TRANSLATORS: Helptext for an Empire worker: Pig Breeder
 #: ../../../../data/tribes/initialization/empire/units.lua:750
@@ -10482,7 +10483,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:788
 msgctxt "empire_worker"
 msgid "Burns coal."
-msgstr ""
+msgstr "Καίει άνθρακα."
 
 #. TRANSLATORS: Helptext for an Empire worker: Smelter
 #: ../../../../data/tribes/initialization/empire/units.lua:795
@@ -11230,7 +11231,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1567
 msgctxt "empire_building"
 msgid "Produces wine."
-msgstr ""
+msgstr "Παράγει κρασί."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -13807,7 +13808,7 @@ msgstr "Κόβει δέντρα."
 #: ../../../../data/tribes/initialization/frisians/units.lua:673
 msgctxt "frisians_worker"
 msgid "Plants trees."
-msgstr ""
+msgstr "Φυτεύει δέντρα."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Clay Digger
 #: ../../../../data/tribes/initialization/frisians/units.lua:680
@@ -13873,7 +13874,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:753
 msgctxt "frisians_worker"
 msgid "Plants fields."
-msgstr ""
+msgstr "Σπέρνει χωράφια."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Berry Farmer
 #: ../../../../data/tribes/initialization/frisians/units.lua:760
@@ -13885,7 +13886,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:767
 msgctxt "frisians_worker"
 msgid "Gathers berries."
-msgstr ""
+msgstr "Μαζεύει μούρα."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Smoker
 #: ../../../../data/tribes/initialization/frisians/units.lua:774
@@ -13915,7 +13916,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:802
 msgctxt "frisians_worker"
 msgid "Brews beer."
-msgstr ""
+msgstr "Ζυθοποιεί."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Master Brewer
 #: ../../../../data/tribes/initialization/frisians/units.lua:809
@@ -14933,7 +14934,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1919
 msgctxt "frisians_building"
 msgid "A baker"
-msgstr ""
+msgstr "Ένας φούρναρης"
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Bakery
 #: ../../../../data/tribes/initialization/frisians/units.lua:1921
@@ -15963,12 +15964,12 @@ msgstr[1] ""
 #: ../../../../data/tribes/scripting/help/building_help.lua:240
 #: ../../../../data/tribes/scripting/help/building_help.lua:316
 msgid "Text needed"
-msgstr ""
+msgstr "Απαιτείται κείμενο"
 
 #. TRANSLATORS: Heading for a flavour text in the building help.
 #: ../../../../data/tribes/scripting/help/building_help.lua:245
 msgid "Lore"
-msgstr ""
+msgstr "Λαική παράδοση"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:254
 #: ../../../../data/tribes/scripting/help/init.lua:90
@@ -15978,7 +15979,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:255
 msgid "Purpose:"
-msgstr ""
+msgstr "Σκοπός:"
 
 #. TRANSLATORS: Note helptext for a mine.
 #: ../../../../data/tribes/scripting/help/building_help.lua:336
@@ -15998,7 +15999,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/building_help.lua:347
 #: ../../../../data/tribes/scripting/help/building_help.lua:494
 msgid "Note:"
-msgstr ""
+msgstr "Σημείωση:"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:352
 msgid "Work area radius:"
@@ -16029,7 +16030,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:365
 msgid "Vision range:"
-msgstr ""
+msgstr "Οπτική εμβέλεια:"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:395
 msgid "%1$s from: %2$s"
@@ -16039,28 +16040,28 @@ msgstr ""
 #. (e.g. wheat for a mill).
 #: ../../../../data/tribes/scripting/help/building_help.lua:401
 msgid "Incoming:"
-msgstr ""
+msgstr "Εισερχόμενα:"
 
 #. TRANSLATORS: This is a verb (The miner mines)
 #: ../../../../data/tribes/scripting/help/building_help.lua:410
 msgid "Mines:"
-msgstr ""
+msgstr "Εξορύσσει"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:412
 msgid "Collects:"
-msgstr ""
+msgstr "Συλλέγει:"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:421
 msgid "Creates:"
-msgstr ""
+msgstr "Δημιουργεί:"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:462
 msgid "Outgoing:"
-msgstr ""
+msgstr "Εξερχόμενα:"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:463
 msgid "None"
-msgstr ""
+msgstr "Κανένα"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:464
 msgid "Dependencies"
@@ -16085,7 +16086,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/building_help.lua:503
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:59
 msgid "Build cost:"
-msgstr ""
+msgstr "Κόστος κατασκευής:"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:514
 msgid "Or enhanced from:"
@@ -16093,16 +16094,16 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:516
 msgid "Enhanced from:"
-msgstr ""
+msgstr "Αναβαθμίζεται από:"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:525
 msgid "Cumulative cost:"
-msgstr ""
+msgstr "Αθροιστικό κόστος:"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:570
 #: ../../../../data/tribes/scripting/help/building_help.lua:619
 msgid "Unknown"
-msgstr ""
+msgstr "Άγνωστο"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:575
 msgid "If built directly, dismantle yields:"
@@ -16117,7 +16118,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/building_help.lua:583
 #: ../../../../data/tribes/scripting/help/building_help.lua:624
 msgid "Dismantle yields:"
-msgstr ""
+msgstr "Η αποξήλωση αποδίδει:"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:633
 msgid "Can be enhanced to:"
@@ -16125,12 +16126,12 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:663
 msgid "Crew required:"
-msgstr ""
+msgstr "Απαιτούμενο πλήρωμα:"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:663
 #: ../../../../data/tribes/scripting/help/init.lua:123
 msgid "Workers"
-msgstr ""
+msgstr "Εργάτες"
 
 #. TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
 #: ../../../../data/tribes/scripting/help/building_help.lua:685
@@ -16141,7 +16142,7 @@ msgstr ""
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool 1 worker uses
 #: ../../../../data/tribes/scripting/help/building_help.lua:697
 msgid "Worker uses:"
-msgstr ""
+msgstr "Ο εργάτης χρησιμοποιεί:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool more than 1 worker
 #. uses
@@ -16152,11 +16153,11 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/building_help.lua:710
 #: ../../../../data/tribes/scripting/help/worker_help.lua:169
 msgid "Experience levels"
-msgstr ""
+msgstr "Επίπεδο εμπειρίας"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:732
 msgid "Production"
-msgstr ""
+msgstr "Παραγωγή"
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:741
@@ -16191,7 +16192,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/building_help.lua:796
 #: ../../../../data/tribes/scripting/help/ware_help.lua:60
 msgid "Ware produced:"
-msgstr ""
+msgstr "Παραγόμενο εμπόρευμα:"
 
 #. TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a
 #. productionsite
@@ -16214,7 +16215,7 @@ msgstr ""
 #. yet.
 #: ../../../../data/tribes/scripting/help/building_help.lua:823
 msgid "Calculation needed"
-msgstr ""
+msgstr "Απαιτείται υπολογισμός"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:827
 msgid "Performance:"
@@ -16223,7 +16224,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/controls.lua:7
 #: ../../../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
-msgstr ""
+msgstr "Ελέγχει"
 
 #: ../../../../data/tribes/scripting/help/controls.lua:9
 msgid "Window Control"
@@ -16233,12 +16234,12 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/controls.lua:12
 msgctxt "hotkey"
 msgid "Right-click"
-msgstr ""
+msgstr "Δεξί κλικ"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../data/tribes/scripting/help/controls.lua:14
 msgid "Close window"
-msgstr ""
+msgstr "Κλείσιμο παραθύρου"
 
 #. TRANSLATORS: This is an access key combination.
 #: ../../../../data/tribes/scripting/help/controls.lua:16
@@ -16249,7 +16250,7 @@ msgstr ""
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../data/tribes/scripting/help/controls.lua:18
 msgid "Minimize/Maximize window"
-msgstr ""
+msgstr "Ελαχιστοποίηση/Μεγιστοποίηση παραθύρου"
 
 #. TRANSLATORS: This is an access key combination.
 #: ../../../../data/tribes/scripting/help/controls.lua:20
@@ -16326,48 +16327,48 @@ msgstr ""
 #. TRANSLATORS: Size of a map immovablee
 #: ../../../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
-msgstr ""
+msgstr "Μικρό"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
-msgstr ""
+msgstr "Μεσαίο"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:66
 msgid "Big"
-msgstr ""
+msgstr "Μεγάλο"
 
 #. TRANSLATORS: Size of a map immovable
 #. TRANSLATORS: Space on the map required for building a building there
 #: ../../../../data/tribes/scripting/help/format_help.lua:76
 msgid "Mine plot"
-msgstr ""
+msgstr "Οικόπεδο ορυχείου"
 
 #. TRANSLATORS: Space on the map required for building a building there
 #: ../../../../data/tribes/scripting/help/format_help.lua:80
 msgid "Port plot"
-msgstr ""
+msgstr "Οικόπεδο λιμανιού"
 
 #. TRANSLATORS: Space on the map required for building a building there
 #: ../../../../data/tribes/scripting/help/format_help.lua:84
 msgid "Small plot"
-msgstr ""
+msgstr "Μικρό οικόπεδο"
 
 #. TRANSLATORS: Space on the map required for building a building there
 #: ../../../../data/tribes/scripting/help/format_help.lua:88
 msgid "Medium plot"
-msgstr ""
+msgstr "Μεσαίο οικόπεδο"
 
 #. TRANSLATORS: Space on the map required for building a building there
 #: ../../../../data/tribes/scripting/help/format_help.lua:92
 msgid "Big plot"
-msgstr ""
+msgstr "Μεγάλο οικόπεδο"
 
 #. TRANSLATORS: Space on the map required for building a building there
 #: ../../../../data/tribes/scripting/help/format_help.lua:99
 msgid "Space required:"
-msgstr ""
+msgstr "Απαιτούμενος χώρος:"
 
 #. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
 #: ../../../../data/tribes/scripting/help/format_help.lua:154
@@ -16385,7 +16386,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/format_help.lua:256
 #, lua-format
 msgid "%s and"
-msgstr ""
+msgstr "%s και"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares and workers consumed by
 #. a productionsite
@@ -16409,20 +16410,20 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/ware_help.lua:30
 #: ../../../../data/tribes/scripting/help/worker_help.lua:137
 msgid "Purpose"
-msgstr ""
+msgstr "Σκοπός"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:43
 #: ../../../../data/tribes/scripting/help/worker_help.lua:143
 msgid "Note"
-msgstr ""
+msgstr "Σημείωση"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:58
 msgid "Requirements"
-msgstr ""
+msgstr "Απαιτήσεις"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:62
 msgid "Size"
-msgstr ""
+msgstr "Μέγεθος"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."
@@ -16438,7 +16439,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:100
 msgid "Preferred Terrains"
-msgstr ""
+msgstr "Προτιμώμενα εδάφη"
 
 #: ../../../../data/tribes/scripting/help/init.lua:85
 msgid "Tribal Encyclopedia"
@@ -16446,7 +16447,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
-msgstr ""
+msgstr "Εισαγωγή"
 
 #: ../../../../data/tribes/scripting/help/init.lua:107
 #: ../../../../data/tribes/scripting/help/tips.lua:60
@@ -16455,11 +16456,11 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
-msgstr ""
+msgstr "Εμπορεύματα"
 
 #: ../../../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"
-msgstr ""
+msgstr "Κτήρια"
 
 #: ../../../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
@@ -16471,23 +16472,23 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
-msgstr ""
+msgstr "Σχετικά με το Widelands"
 
 #: ../../../../data/tribes/scripting/help/time_strings.lua:26
 #: ../../../../data/tribes/scripting/help/time_strings.lua:62
 #, lua-format
 msgid "%d second"
 msgid_plural "%d seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d δευτερόλεπτο"
+msgstr[1] "%d δευτερόλεπτα"
 
 #: ../../../../data/tribes/scripting/help/time_strings.lua:42
 #: ../../../../data/tribes/scripting/help/time_strings.lua:61
 #, lua-format
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d λεπτό"
+msgstr[1] "%d λεπτά"
 
 #: ../../../../data/tribes/scripting/help/time_strings.lua:60
 msgid "%1% and %2%"
@@ -16506,24 +16507,24 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/ware_help.lua:51
 #: ../../../../data/tribes/scripting/help/worker_help.lua:40
 msgid "Producer"
-msgstr ""
+msgstr "Παραγωγός"
 
 #. TRANSLATORS: Ware Encyclopedia: Heading for 1 building and / or worker that
 #. consumes a ware
 #: ../../../../data/tribes/scripting/help/ware_help.lua:125
 msgid "Consumer"
-msgstr ""
+msgstr "Καταναλωτής"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
 #: ../../../../data/tribes/scripting/help/ware_help.lua:128
 msgid "Consumers"
-msgstr ""
+msgstr "Καταναλωτές"
 
 #. TRANSLATORS: Worker Encyclopedia: 1 worker recruited by a productionsite
 #: ../../../../data/tribes/scripting/help/worker_help.lua:53
 msgid "Worker recruited:"
-msgstr ""
+msgstr "Εργάτης που στρατολογήθηκε:"
 
 #. TRANSLATORS: Worker Encyclopedia: Heading for 1 building where a worker can
 #. work
@@ -16531,7 +16532,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/worker_help.lua:86
 msgctxt "workerhelp_one_building"
 msgid "Works at"
-msgstr ""
+msgstr "Δουλεύει σε"
 
 #. TRANSLATORS: Worker Encyclopedia: A list of more than 1 building where a
 #. worker can work
@@ -16539,7 +16540,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/worker_help.lua:90
 msgctxt "workerhelp_multiple_buildings"
 msgid "Works at"
-msgstr ""
+msgstr "Δουλεύει σε"
 
 #. TRANSLATORS: You can also translate this as 'additional workplace'
 #: ../../../../data/tribes/scripting/help/worker_help.lua:106
@@ -16556,16 +16557,16 @@ msgstr ""
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
 #: ../../../../data/tribes/scripting/help/worker_help.lua:158
 msgid "Worker uses"
-msgstr ""
+msgstr "Ο εργάτης χρησιμοποιεί"
 
 #. TRANSLATORS: Soldier levels
 #: ../../../../data/tribes/scripting/help/worker_help.lua:175
 msgid "Levels"
-msgstr ""
+msgstr "Επίπεδα"
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:177
 msgid "Health"
-msgstr ""
+msgstr "Υγεία"
 
 #. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
 #: ../../../../data/tribes/scripting/help/worker_help.lua:181
@@ -16592,7 +16593,7 @@ msgstr[1] ""
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:189
 msgid "Attack"
-msgstr ""
+msgstr "Επίθεση"
 
 #. TRANSLATORS: Points are 4 digit numbers.
 #: ../../../../data/tribes/scripting/help/worker_help.lua:192
@@ -16601,7 +16602,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:199
 msgid "Defense"
-msgstr ""
+msgstr "Άμυνα"
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:203
 #: ../../../../data/tribes/scripting/help/worker_help.lua:211
@@ -16622,4 +16623,4 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:215
 msgid "Evade"
-msgstr ""
+msgstr "Αποφυγή"

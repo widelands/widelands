@@ -44,13 +44,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:36
 msgctxt "amazons_building"
 msgid "Your fortification is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vaše opevnenie."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:38
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the fortification."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojačky pri opevnení."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:40
@@ -80,13 +80,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:66
 msgctxt "amazons_building"
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu pevnosť."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:68
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojačky pri pevnosti."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:70
@@ -116,13 +116,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:34
 msgctxt "amazons_building"
 msgid "Your observation tower is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu pozorovaciu vežu."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:36
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the observation tower."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojačky pri pozorovacej veži."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:38
@@ -152,13 +152,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:43
 msgctxt "amazons_building"
 msgid "Your patrol post is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vaše hliadkové stanovište."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:45
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the patrol post."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojačky pri hliadkovom stanovišti."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:47
@@ -188,13 +188,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/amazons/tower/init.lua:63
 msgctxt "amazons_building"
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu vežu."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/tower/init.lua:65
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojačky pri veži."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/tower/init.lua:67
@@ -224,13 +224,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:45
 msgctxt "amazons_building"
 msgid "Your treetop sentry is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu stážnicu na strome."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:47
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the treetop sentry."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojačky pri strážnici na stome."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:49
@@ -242,13 +242,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:8
 msgctxt "amazons_building"
 msgid "Warriors’ Dwelling"
-msgstr ""
+msgstr "Obydlie bojovníčok"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:41
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your warriors’ dwelling."
-msgstr ""
+msgstr "Vaše vojačky obsadili vaše obydlie bojovníčok."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:43
@@ -260,13 +260,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:45
 msgctxt "amazons_building"
 msgid "Your warriors’ dwelling is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vaše obydlie bojovníčok."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:47
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the warriors’ dwelling."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojačky pri obydlí bojovníčok."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:49
@@ -296,13 +296,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:157
 msgctxt "atlanteans_building"
 msgid "Your castle is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na váš hrad."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:159
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the castle."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri hrade."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:161
@@ -332,13 +332,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:46
 msgctxt "atlanteans_building"
 msgid "Your guardhall is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu strážnu halu."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:48
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the guardhall."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri strážnej hale."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:50
@@ -368,13 +368,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:44
 msgctxt "atlanteans_building"
 msgid "Your guardhouse is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu strážnicu."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:46
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the guardhouse."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri strážnici."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:48
@@ -404,13 +404,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:61
 msgctxt "atlanteans_building"
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu vežu."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:63
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri veži."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:65
@@ -440,13 +440,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:33
 msgctxt "atlanteans_building"
 msgid "Your high tower is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu vysokú vežu."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:35
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the high tower."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri vysokej veži."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:37
@@ -476,13 +476,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:45
 msgctxt "atlanteans_building"
 msgid "Your small tower is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu malú vežu."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:47
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the small tower."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri malej veži."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:49
@@ -512,13 +512,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:56
 msgctxt "barbarians_building"
 msgid "Your barrier is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu hradbu."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:58
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri hradbe."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:60
@@ -548,13 +548,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:47
 msgctxt "barbarians_building"
 msgid "Your citadel is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu citadelu."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:49
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the citadel."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri citadele."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:51
@@ -584,13 +584,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:81
 msgctxt "barbarians_building"
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu pevnosť."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:83
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri pevnosti."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:85
@@ -620,13 +620,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:58
 msgctxt "barbarians_building"
 msgid "Your sentry is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu strážnicu."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:60
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the sentry."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri strážnici."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:62
@@ -656,13 +656,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:63
 msgctxt "barbarians_building"
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu vežu."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:65
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri veži."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:67
@@ -692,13 +692,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/empire/barrier/init.lua:49
 msgctxt "empire_building"
 msgid "Your barrier is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu hradbu."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/barrier/init.lua:51
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri hradbe."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/barrier/init.lua:53
@@ -728,13 +728,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:54
 msgctxt "empire_building"
 msgid "Your blockhouse is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na váš vojenský zrub."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:56
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the blockhouse."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri vojenskom zrube."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:58
@@ -764,13 +764,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/empire/castle/init.lua:35
 msgctxt "empire_building"
 msgid "Your castle is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na váš hrad."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/castle/init.lua:37
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the castle."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri hrade."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/castle/init.lua:39
@@ -800,13 +800,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/empire/fortress/init.lua:77
 msgctxt "empire_building"
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu pevnosť."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/fortress/init.lua:79
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri pevnosti."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/fortress/init.lua:81
@@ -836,13 +836,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/empire/outpost/init.lua:63
 msgctxt "empire_building"
 msgid "Your outpost is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu pozorovateľňu."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/outpost/init.lua:65
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri pozorovateľni."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/outpost/init.lua:67
@@ -872,13 +872,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/empire/sentry/init.lua:49
 msgctxt "empire_building"
 msgid "Your sentry is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu strážnicu."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/sentry/init.lua:51
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the sentry."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri strážnici."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/sentry/init.lua:53
@@ -908,13 +908,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/empire/tower/init.lua:57
 msgctxt "empire_building"
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu vežu."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/tower/init.lua:59
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri veži."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/tower/init.lua:61
@@ -944,13 +944,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:59
 msgctxt "frisians_building"
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu pevnosť."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:61
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri pevnosti."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:63
@@ -980,13 +980,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:57
 msgctxt "frisians_building"
 msgid "Your outpost is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu pozorovateľňu."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:59
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri pozorovateľni."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:61
@@ -1004,7 +1004,7 @@ msgstr "Strážnica"
 #: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:51
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your sentinel."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu strážnicu."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:53
@@ -1016,13 +1016,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:55
 msgctxt "frisians_building"
 msgid "Your sentinel is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu strážnicu."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:57
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the sentinel."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri strážnici."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:59
@@ -1052,13 +1052,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:60
 msgctxt "frisians_building"
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu vežu."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:62
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri veži."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:64
@@ -1088,13 +1088,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:64
 msgctxt "frisians_building"
 msgid "Your wooden tower is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu drevenú vežu."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:66
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the wooden tower."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri drevenej veži."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:68
@@ -1124,13 +1124,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:44
 msgctxt "frisians_building"
 msgid "Your high wooden tower is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na vašu vysokú drevenú vežu."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:46
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the high wooden tower."
-msgstr ""
+msgstr "Nepriateľ porazil vašich vojakov pri vysokej drevenej veži."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:48
@@ -1891,7 +1891,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Water Gatherer’s Hut"
-msgstr ""
+msgstr "Chatrč nosičky vody"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:55
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:58
@@ -1920,7 +1920,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:8
 msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
-msgstr ""
+msgstr "Stan ochrankyne divočiny"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
@@ -4201,7 +4201,7 @@ msgstr "Drevorubač pracujúci v tomto drevorubačskom dome nedokáže vo svojej
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:8
 msgctxt "amazons_building"
 msgid "Training Glade"
-msgstr ""
+msgstr "Výcviková čistina"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:73
@@ -4285,7 +4285,7 @@ msgstr "Nenašla sa vojačka pre túto úroveň výcviku!"
 #: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:8
 msgctxt "amazons_building"
 msgid "Warriors’ Gathering"
-msgstr ""
+msgstr "Zhromaždenie bojovníčok"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:76
