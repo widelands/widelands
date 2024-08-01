@@ -64,8 +64,8 @@ wl.Descriptions():new_productionsite_type {
             -- worker time: 5.5 sec
             -- number of wares to carry: 10 + 2 + 6 = 18
             -- (see data/tribes/immovables/shipconstruction_frisians/init.lua)
-            -- min. time total: 5 + 18 * (2 * 2 * 1.8 + 5.5 + 20 + 35) = 1223.6 sec
-            -- max. time total: 5 + 18 * (2 * 9 * 1.8 + 5.5 + 20 + 35) = 1677.2 sec
+            -- min. time total: 18 * (2 * 2 * 1.8 + 5.5 + 20 + 35) = 1218.6 sec
+            -- max. time total: 18 * (2 * 9 * 1.8 + 5.5 + 20 + 35) = 1672.2 sec
             "call=ship on failure fail",
             "call=ship_preparation",
          }

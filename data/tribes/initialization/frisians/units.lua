@@ -2240,7 +2240,7 @@ wl.Descriptions():new_tribe {
             },
             performance = {
                -- TRANSLATORS: Performance helptext for a Frisian production site: Shipyard, part 1
-               pgettext("frisians_building", "This building can produce one ship between %1$s and %2$s, depending on how far the shipwright has to walk."):bformat(format_minutes_seconds(20, 24), format_minutes_seconds(27, 57)),
+               pgettext("frisians_building", "This building can produce one ship between %1$s and %2$s, depending on how far the shipwright has to walk."):bformat(format_minutes_seconds(20, 19), format_minutes_seconds(27, 52)),
                -- TRANSLATORS: Performance helptext for a Frisian production site: Shipyard, part 2
                pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased.")
             }

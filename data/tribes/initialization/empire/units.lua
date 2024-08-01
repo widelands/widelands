@@ -2346,7 +2346,7 @@ wl.Descriptions():new_tribe {
             },
             performance = {
                -- TRANSLATORS: Performance helptext for an Empire production site: Shipyard, part 1
-               pgettext("empire_building", "This building can produce one ship between %1$s and %2$s, depending on how far the shipwright has to walk."):bformat(format_minutes_seconds(18, 8), format_minutes_seconds(24, 51)),
+               pgettext("empire_building", "This building can produce one ship between %1$s and %2$s, depending on how far the shipwright has to walk."):bformat(format_minutes_seconds(18, 3), format_minutes_seconds(24, 46)),
                -- TRANSLATORS: Performance helptext for an Empire production site: Shipyard, part 2
                pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
             }

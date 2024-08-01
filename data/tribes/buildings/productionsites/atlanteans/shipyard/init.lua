@@ -72,8 +72,8 @@ wl.Descriptions():new_productionsite_type {
             -- worker time: 5.5 sec
             -- number of wares to carry: 10 + 2 + 4 = 16
             -- (see data/tribes/immovables/shipconstruction_atlanteans/init.lua)
-            -- min. time total: 5 + 16 * (2 * 2 * 1.8 + 5.5 + 20 + 35) = 1088.2 sec
-            -- max. time total: 5 + 16 * (2 * 9 * 1.8 + 5.5 + 20 + 35) = 1491.4 sec
+            -- min. time total: 16 * (2 * 2 * 1.8 + 5.5 + 20 + 35) = 1083.2 sec
+            -- max. time total: 16 * (2 * 9 * 1.8 + 5.5 + 20 + 35) = 1486.4 sec
             "call=ship on failure fail",
             "call=ship_preparation",
          }

@@ -2093,7 +2093,7 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("atlanteans_building", "Transcript from oral tradition"),
             performance = {
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Shipyard, part 1
-               pgettext("atlanteans_building", "This building can produce one ship between %1$s and %2$s, depending on how far the shipwright has to walk."):bformat(format_minutes_seconds(18, 8), format_minutes_seconds(24, 51)),
+               pgettext("atlanteans_building", "This building can produce one ship between %1$s and %2$s, depending on how far the shipwright has to walk."):bformat(format_minutes_seconds(18, 3), format_minutes_seconds(24, 46)),
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Shipyard, part 2
                pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
