@@ -754,10 +754,10 @@ bool Worker::run_walk(Game& game, State& state, const Action& action) {
 			forceonlast = true;
 		}
 	}
-	if (!dest && ((action.iparam1 & Action::walkCoords) != 0)) {
+	if (!dest.valid() && ((action.iparam1 & Action::walkCoords) != 0)) {
 		dest = state.coords;
 	}
-	if (!dest) {
+	if (!dest.valid()) {
 		send_signal(game, "fail");
 		pop_task(game);
 		return true;
@@ -1317,6 +1317,8 @@ void Worker::set_economy(Economy* const economy, WareWorker type) {
 			   owner().tribe().worker_index(descr().name()), 1, ware_economy_);
 		}
 	} break;
+	default:
+		NEVER_HERE();
 	}
 }
 

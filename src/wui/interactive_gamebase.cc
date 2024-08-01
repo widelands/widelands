@@ -224,6 +224,8 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 			new GameExitConfirmBox(*this, *this);
 		}
 	} break;
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -328,6 +330,8 @@ void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
 	case ShowHideEntry::kWorkareaOverlap: {
 		set_display_flag(dfShowWorkareaOverlap, !get_display_flag(dfShowWorkareaOverlap));
 	} break;
+	default:
+		NEVER_HERE();
 	}
 	showhidemenu_.toggle();
 }
@@ -400,6 +404,8 @@ void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 			gamespeedmenu_.toggle();
 		}
 	} break;
+	default:
+		NEVER_HERE();
 	}
 }
 

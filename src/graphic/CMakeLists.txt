@@ -23,6 +23,7 @@ wl_library(graphic_align
     align.cc
   DEPENDS
     base_geometry
+    base_exceptions
 )
 
 wl_library(graphic_color
@@ -320,6 +321,7 @@ wl_library(graphic_functions
     graphic
     graphic_fonthandler
     graphic_text_layout
+    widelands_options
 )
 
 # Base library

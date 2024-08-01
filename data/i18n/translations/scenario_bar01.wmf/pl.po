@@ -5,7 +5,7 @@
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006
 # GunChleoc, 2014
 # GunChleoc, 2014
-# Wesmania <ikk_pl@yahoo.co.uk>, 2016
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2016
 # Niektóry <niektory@gmail.com>, 2020
 # Sylwia Studzińska <sanuspg@gmail.com>, 2019
 # tombox <wptom@wp.pl>, 2020

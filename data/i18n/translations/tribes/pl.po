@@ -5,9 +5,10 @@
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006
 # Antoni Szpikowski <szantek2004@gmail.com>, 2021-2022
 # GunChleoc, 2014
-# Wesmania <ikk_pl@yahoo.co.uk>, 2015
-# Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2015
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2016-2017
 # Jacek Wolszczak <shutdownrunner@o2.pl>, 2008
+# Leszek Szary, 2024
 # Marcin S <dzidek1003@o2.pl>, 2021
 # Niektóry <niektory@gmail.com>, 2020
 # Niektóry <niektory@gmail.com>, 2020
@@ -21,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021-2022\n"
+"Last-Translator: Leszek Szary, 2024\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -219,7 +220,7 @@ msgstr "Posterunek na drzewie"
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:41
 msgctxt "amazons_building"
 msgid "Your soldier has occupied your treetop sentry."
-msgstr ""
+msgstr "Twój żołnierz zajął miejsce w twoim posterunku na drzewie."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:43
@@ -1842,7 +1843,7 @@ msgstr "Kopalnia kamienia"
 #. TRANSLATORS: Completed/Skipped/Did not start mining because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:51
 msgid "mining"
-msgstr ""
+msgstr "wydobycie"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:64
@@ -1869,11 +1870,11 @@ msgstr "wydobycie kwarcu"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:91
 msgid "No Stones"
-msgstr ""
+msgstr "Brak kamieni"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:92
 msgid "Main Stone Vein Exhausted"
-msgstr ""
+msgstr "Wyczerpano główną żyłę kamienia."
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:94
 msgctxt "amazons_building"
@@ -5166,13 +5167,13 @@ msgstr "Brak surowców"
 #: ../../../../data/tribes/immovables/resi/amazons/stones_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Quartz"
-msgstr ""
+msgstr "Trochę kwarcu"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../../../data/tribes/immovables/resi/amazons/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Quartz"
-msgstr ""
+msgstr "Mnóstwo kwarcu"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../../../data/tribes/immovables/resi/atlanteans/coal_1/init.lua:8
@@ -6158,7 +6159,7 @@ msgstr "Içana"
 #: ../../../../data/tribes/ships/amazons/init.lua:174
 msgctxt "shipname"
 msgid "Igapó-Açu"
-msgstr ""
+msgstr "Igapó-Açu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../../../data/tribes/ships/amazons/init.lua:176
@@ -6386,7 +6387,7 @@ msgstr "Mapari"
 #: ../../../../data/tribes/ships/amazons/init.lua:250
 msgctxt "shipname"
 msgid "Mapiá"
-msgstr ""
+msgstr "Mapiá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../../../data/tribes/ships/amazons/init.lua:252
@@ -6770,151 +6771,151 @@ msgstr "Xie"
 #: ../../../../data/tribes/ships/amazons/init.lua:378
 msgctxt "shipname"
 msgid "Apu Illapu"
-msgstr ""
+msgstr "Apu Illapu"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../../../data/tribes/ships/amazons/init.lua:380
 msgctxt "shipname"
 msgid "Ayar Cachi"
-msgstr ""
+msgstr "Ayar Cachi"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../../../data/tribes/ships/amazons/init.lua:382
 msgctxt "shipname"
 msgid "Illapa"
-msgstr ""
+msgstr "Illapa"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../../../data/tribes/ships/amazons/init.lua:384
 msgctxt "shipname"
 msgid "Inti"
-msgstr ""
+msgstr "Inti"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../../../data/tribes/ships/amazons/init.lua:386
 msgctxt "shipname"
 msgid "Kuychi"
-msgstr ""
+msgstr "Kuychi"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../../../data/tribes/ships/amazons/init.lua:388
 msgctxt "shipname"
 msgid "Mama Killa"
-msgstr ""
+msgstr "Mama Killa"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../../../data/tribes/ships/amazons/init.lua:390
 msgctxt "shipname"
 msgid "Mama Occlo"
-msgstr ""
+msgstr "Mama Occlo"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../../../data/tribes/ships/amazons/init.lua:392
 msgctxt "shipname"
 msgid "Manco Cápac"
-msgstr ""
+msgstr "Manco Cápac"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../../../data/tribes/ships/amazons/init.lua:394
 msgctxt "shipname"
 msgid "Pachamama"
-msgstr ""
+msgstr "Pachamama"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../../../data/tribes/ships/amazons/init.lua:396
 msgctxt "shipname"
 msgid "Quchamama"
-msgstr ""
+msgstr "Quchamama"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../../../data/tribes/ships/amazons/init.lua:398
 msgctxt "shipname"
 msgid "Sachamama"
-msgstr ""
+msgstr "Sachamama"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../../../data/tribes/ships/amazons/init.lua:400
 msgctxt "shipname"
 msgid "Viracocha"
-msgstr ""
+msgstr "Viracocha"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../../../data/tribes/ships/amazons/init.lua:402
 msgctxt "shipname"
 msgid "Yakumama"
-msgstr ""
+msgstr "Yakumama"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../../../data/tribes/ships/amazons/init.lua:404
 msgctxt "shipname"
 msgid "Atahuallpa"
-msgstr ""
+msgstr "Atahuallpa"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../../../data/tribes/ships/amazons/init.lua:406
 msgctxt "shipname"
 msgid "Lloqe Yupanki"
-msgstr ""
+msgstr "Lloqe Yupanki"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../../../data/tribes/ships/amazons/init.lua:408
 msgctxt "shipname"
 msgid "Manqo Qhapaq"
-msgstr ""
+msgstr "Manqo Qhapaq"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../../../data/tribes/ships/amazons/init.lua:410
 msgctxt "shipname"
 msgid "Mayta Qhapaq"
-msgstr ""
+msgstr "Mayta Qhapaq"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../../../data/tribes/ships/amazons/init.lua:412
 msgctxt "shipname"
 msgid "Pachakuti"
-msgstr ""
+msgstr "Pachakuti"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../../../data/tribes/ships/amazons/init.lua:414
 msgctxt "shipname"
 msgid "Qhapaq Yupanki"
-msgstr ""
+msgstr "Qhapaq Yupanki"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../../../data/tribes/ships/amazons/init.lua:416
 msgctxt "shipname"
 msgid "Thupa"
-msgstr ""
+msgstr "Thupa"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../../../data/tribes/ships/amazons/init.lua:418
 msgctxt "shipname"
 msgid "Urqon"
-msgstr ""
+msgstr "Urqon"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../../../data/tribes/ships/amazons/init.lua:420
 msgctxt "shipname"
 msgid "Washkar"
-msgstr ""
+msgstr "Washkar"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../../../data/tribes/ships/amazons/init.lua:422
 msgctxt "shipname"
 msgid "Wayna Qhapaq"
-msgstr ""
+msgstr "Wayna Qhapaq"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../../../data/tribes/ships/amazons/init.lua:424
 msgctxt "shipname"
 msgid "Yawar Waqaq"
-msgstr ""
+msgstr "Yawar Waqaq"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../../../data/tribes/ships/amazons/init.lua:426
 msgctxt "shipname"
 msgid "Zinchi Roqa"
-msgstr ""
+msgstr "Zinchi Roqa"
 
 #. TRANSLATORS: This Amazonian ship is named after the lake in the Andes
 #: ../../../../data/tribes/ships/amazons/init.lua:428
@@ -6926,7 +6927,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/amazons/init.lua:430
 msgctxt "shipname"
 msgid "Koricancha"
-msgstr ""
+msgstr "Koricancha"
 
 #. TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
 #: ../../../../data/tribes/ships/atlanteans/init.lua:113
@@ -7370,7 +7371,7 @@ msgstr "Hagbard"
 #: ../../../../data/tribes/ships/barbarians/init.lua:67
 msgctxt "shipname"
 msgid "Hakhor"
-msgstr ""
+msgstr "Hakhor"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../../../data/tribes/ships/barbarians/init.lua:69

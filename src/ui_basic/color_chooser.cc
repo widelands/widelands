@@ -135,8 +135,9 @@ private:
 			return RGBColor(val1, texture_cache_g_, val2);
 		case ColorAttribute::kBlue:
 			return RGBColor(val1, val2, texture_cache_b_);
+		default:
+			NEVER_HERE();
 		}
-		NEVER_HERE();
 	}
 	RGBColor right_color(const uint16_t val) const {
 		switch (sidebar_attribute_) {
@@ -146,8 +147,9 @@ private:
 			return RGBColor(texture_cache_r_, val, texture_cache_b_);
 		case ColorAttribute::kBlue:
 			return RGBColor(texture_cache_r_, texture_cache_g_, val);
+		default:
+			NEVER_HERE();
 		}
-		NEVER_HERE();
 	}
 
 	RGBColor left_color_at(const uint16_t x, const uint16_t y) {
@@ -158,8 +160,9 @@ private:
 			return RGBColor(x, chooser_.get_color().g, y);
 		case ColorAttribute::kBlue:
 			return RGBColor(x, y, chooser_.get_color().b);
+		default:
+			NEVER_HERE();
 		}
-		NEVER_HERE();
 	}
 	RGBColor right_color_at(const uint16_t y) {
 		switch (sidebar_attribute_) {
@@ -169,8 +172,9 @@ private:
 			return RGBColor(chooser_.get_color().r, y, chooser_.get_color().b);
 		case ColorAttribute::kBlue:
 			return RGBColor(chooser_.get_color().r, chooser_.get_color().g, y);
+		default:
+			NEVER_HERE();
 		}
-		NEVER_HERE();
 	}
 
 	void update_textures() {
@@ -216,6 +220,8 @@ private:
 			y = chooser_.get_color().g;
 			a = chooser_.get_color().b;
 			break;
+		default:
+			NEVER_HERE();
 		}
 		do_draw_cursor(dst, x - selector_.width() / 2, y - selector_.height() / 2);
 		do_draw_cursor(dst, kMainDimension + kSpacing + (kSidebarWidth - selector_.width()) / 2,

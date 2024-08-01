@@ -245,8 +245,9 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 			   case Widelands::NoteShip::Action::kLost:
 				   remove_ship(note.ship->serial());
 				   return;
+			   default:
+				   NEVER_HERE();
 			   }
-			   NEVER_HERE();
 		   }
 	   });
 
@@ -272,8 +273,9 @@ SeafaringStatisticsMenu::status_to_string(SeafaringStatisticsMenu::ShipFilterSta
 		return pgettext("ship_state", "Being Refitted");
 	case SeafaringStatisticsMenu::ShipFilterStatus::kAll:
 		return "All";  // The user shouldn't see this, so we don't localize
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 const Image*
@@ -304,6 +306,8 @@ SeafaringStatisticsMenu::status_to_image(SeafaringStatisticsMenu::ShipFilterStat
 	case SeafaringStatisticsMenu::ShipFilterStatus::kAll:
 		filename = "images/wui/ship/ship_scout_ne.png";
 		break;
+	default:
+		NEVER_HERE();
 	}
 	return g_image_cache->get(filename);
 }
@@ -343,8 +347,12 @@ SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 			case Widelands::ShipStates::kSinkAnimation:
 				status = ShipFilterStatus::kAll;
 				break;
+			default:
+				NEVER_HERE();
 			}
 			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 	return std::unique_ptr<const ShipInfo>(new ShipInfo(ship.get_shipname(), status, ship.serial()));
@@ -542,6 +550,8 @@ void SeafaringStatisticsMenu::filter_ships(ShipFilterStatus status) {
 		warship_btn_.set_perm_pressed(false);
 		refitting_btn_.set_perm_pressed(false);
 		break;
+	default:
+		NEVER_HERE();
 	}
 	fill_table();
 }
