@@ -3335,7 +3335,7 @@ int LuaListselect::get_enable_at(lua_State* L) {
 	if (index < 1 || index > nritems) {
 		report_error(L, "Index %u out of range for list of size %u", index, nritems);
 	}
-	lua_pushboolean(L, get()->at(index - 1).enable);
+	lua_pushboolean(L, static_cast<int>(get()->at(index - 1).enable));
 	return 1;
 }
 
