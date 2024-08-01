@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
+# Alexandros Koutroulis, 2024
 # Elias Delakovias, 2015
 # erimitis, 2018
 # 77960155d0a4db79ed901e7c2ee242e7_4b8c532, 2015
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-06-08 02:37+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: erimitis, 2018\n"
+"Last-Translator: Alexandros Koutroulis, 2024\n"
 "Language-Team: Greek (http://app.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +22,7 @@ msgstr ""
 
 #: ../../../../data/txts/ABOUT.lua:7
 msgid "Readme"
-msgstr ""
+msgstr "Διάβασέ με"
 
 #: ../../../../data/txts/ABOUT.lua:11
 msgid "License"
@@ -29,7 +30,7 @@ msgstr "Άδεια"
 
 #: ../../../../data/txts/ABOUT.lua:15
 msgid "Developers"
-msgstr ""
+msgstr "Ομάδα ανάπτυξης"
 
 #: ../../../../data/txts/ABOUT.lua:19
 msgid "Translators"
@@ -46,7 +47,7 @@ msgstr "Πληροφορίες για την άδεια του Widelands"
 #. TRANSLATORS: Placeholder is copyright end year
 #: ../../../../data/txts/LICENSE.lua:14
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
-msgstr ""
+msgstr "Copyright 2002 - %1% από την ομάδα ανάπτυξης του Widelands."
 
 #: ../../../../data/txts/LICENSE.lua:16
 msgid ""
@@ -59,13 +60,13 @@ msgstr "Αυτό το παιχνίδι είναι Δωρεάν και Ανοικ
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr ""
+msgstr "Μπορείτε να βρείτε περισσότερες πληροφορίες σχετικά με τα FOSS και την GPL με επίσκεψη στον παρακάτω ιστότοπο: %s"
 
 #: ../../../../data/txts/LICENSE.lua:20
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
-msgstr "Εκεί μπορείτε να βρείτε ολόκληρο το κείμενο της άδειας καθώς επίσης και περεταίρω πληροφορίες γύρω από τη φιλοσοφία της και τις νομικές επιπτώσεις αυτής."
+msgstr "Εκεί μπορείτε να βρείτε ολόκληρο το κείμενο της άδειας καθώς επίσης και περαιτέρω πληροφορίες γύρω από τη φιλοσοφία της και τις νομικές επιπτώσεις αυτής."
 
 #: ../../../../data/txts/LICENSE.lua:22
 msgid "We are also shipping the GPL as a text document with Widelands itself."
@@ -75,13 +76,13 @@ msgstr "Επιπλέον η GPL παρέχεται ως αρχείο κειμέ�
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr "Στα Linux, μπορείτε να βρείτε το αρχείο COPYING στη ρίζα του πηγαίου κώδικα ή του ανεξάρτητου εκτελέσιμου πακέτου, ή στο φάκελο εγκατάστασης (π.χ. ‘%1%’)."
+msgstr "Στο Linux, μπορείτε να βρείτε το αρχείο COPYING στη ρίζα του πηγαίου κώδικα ή του ανεξάρτητου εκτελέσιμου πακέτου, ή στο φάκελο εγκατάστασης (π.χ. ‘%1%’)."
 
 #: ../../../../data/txts/LICENSE.lua:24
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
-msgstr "Στα Windows, μπορείτε να βρείτε το αρχείο COPYING.txt στον φάκελο εγκατάστασης, και στο μενού έναρξης, στην καταχώριση του Widelands, υπάρχει σύνδεσμος για το αρχείο."
+msgstr "Στα Windows, μπορείτε να βρείτε το αρχείο COPYING.txt στον φάκελο εγκατάστασης, και στο μενού έναρξης στην καταχώριση του Widelands, υπάρχει σύνδεσμος για το αρχείο."
 
 #: ../../../../data/txts/LICENSE.lua:25
 msgid ""
@@ -91,14 +92,14 @@ msgstr "Σε MacOS, μπορείτε να βρείτε το αρχείο ονό�
 
 #: ../../../../data/txts/LICENSE.lua:27
 msgid "This game comes as-is and without any warranty."
-msgstr ""
+msgstr "Το παιχνίδι διατίθεται όπως είναι χωρίς καμία εγγύηση"
 
 #: ../../../../data/txts/LICENSE.lua:28
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
-msgstr ""
+msgstr "Για περισσότερες πληροφορίες και υποστήριξη μπορείτε να μας βρείτε στα %1% (ιστότοπος, wiki, φόρουμ για ερωτήσεις για γενική υποστήριξη), %2% (bugtracker) και %3% (μεταφράσεις)."
 
 #: ../../../../data/txts/README.lua:9
 msgid "an open source strategy game"
@@ -112,7 +113,7 @@ msgstr "Επισκεφθείτε την αρχική σελίδα του Widelan
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
-msgstr ""
+msgstr "To Widelands διατίθεται με άδεια χρήσης GNU General Public License (GPL). Για περισσότερες πληροφορίες, δείτε το αρχείο ‘COPYING’."
 
 #: ../../../../data/txts/README.lua:13
 msgid "Status"
@@ -129,7 +130,7 @@ msgstr ""
 
 #: ../../../../data/txts/README.lua:16
 msgid "Widelands Help"
-msgstr ""
+msgstr "Βοήθεια για το Widelands"
 
 #. TRANSLATORS: %1% is a key on the keyboard
 #: ../../../../data/txts/README.lua:18
@@ -141,7 +142,7 @@ msgstr ""
 #. TRANSLATORS: This is a key on the keyboard
 #: ../../../../data/txts/README.lua:20
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: ../../../../data/txts/README.lua:23
 msgid "Reporting Bugs"
@@ -197,7 +198,7 @@ msgstr ""
 
 #: ../../../../data/txts/TRANSLATORS.lua:26
 msgid "Widelands Translators"
-msgstr ""
+msgstr "Μεταφραστές του Widelands"
 
 #: ../../../../data/txts/developers.lua:5
 msgid "Chieftains"
@@ -205,7 +206,7 @@ msgstr "Φύλαρχοι"
 
 #: ../../../../data/txts/developers.lua:18
 msgid "Elders"
-msgstr ""
+msgstr "Γηραιοί"
 
 #: ../../../../data/txts/developers.lua:22
 #: ../../../../data/txts/developers.lua:415
@@ -220,16 +221,16 @@ msgstr "Αρχική σελίδα"
 
 #: ../../../../data/txts/developers.lua:34
 msgid "Scripting"
-msgstr ""
+msgstr "Scripting"
 
 #: ../../../../data/txts/developers.lua:40
 #: ../../../../data/txts/developers.lua:430
 msgid "Sound"
-msgstr ""
+msgstr "Ήχος"
 
 #: ../../../../data/txts/developers.lua:42
 msgid "vacant"
-msgstr ""
+msgstr "κενό"
 
 #: ../../../../data/txts/developers.lua:46
 msgid "Tongues"
@@ -237,11 +238,11 @@ msgstr "Γλώσσες"
 
 #: ../../../../data/txts/developers.lua:54
 msgid "Coders"
-msgstr ""
+msgstr "Προγραμματιστές"
 
 #: ../../../../data/txts/developers.lua:149
 msgid "Graphicians"
-msgstr ""
+msgstr "Γραφίστες"
 
 #: ../../../../data/txts/developers.lua:187
 msgid "Musicians"
@@ -257,11 +258,11 @@ msgstr "Χάρτες και Αποστολές"
 
 #: ../../../../data/txts/developers.lua:256
 msgid "Campaign Story"
-msgstr ""
+msgstr "Ιστορία Εκστρατειών"
 
 #: ../../../../data/txts/developers.lua:260
 msgid "Barbarians"
-msgstr ""
+msgstr "Βάρβαροι"
 
 #: ../../../../data/txts/developers.lua:268
 msgid "Empire"
@@ -269,15 +270,15 @@ msgstr "Αυτοκρατορία"
 
 #: ../../../../data/txts/developers.lua:275
 msgid "Atlanteans"
-msgstr ""
+msgstr "Ατλαντίδες"
 
 #: ../../../../data/txts/developers.lua:283
 msgid "Frisians"
-msgstr ""
+msgstr "Φρίσιοι"
 
 #: ../../../../data/txts/developers.lua:291
 msgid "Packagers"
-msgstr ""
+msgstr "Πακετάδες"
 
 #: ../../../../data/txts/developers.lua:295
 msgid "Debian Linux"
@@ -297,11 +298,11 @@ msgstr "FreeBSD"
 
 #: ../../../../data/txts/developers.lua:321
 msgid "Flatpak"
-msgstr ""
+msgstr "Flatpak"
 
 #: ../../../../data/txts/developers.lua:328
 msgid "Mac OS X"
-msgstr ""
+msgstr "Mac OS X"
 
 #: ../../../../data/txts/developers.lua:340
 msgid "Windows"
@@ -313,7 +314,7 @@ msgstr "ZetaOS"
 
 #: ../../../../data/txts/developers.lua:363
 msgid "Homepage Coders"
-msgstr ""
+msgstr "Προγραμματιστές Ιστοσελίδας"
 
 #: ../../../../data/txts/developers.lua:374
 msgid "Documentation, Help and Wiki"
@@ -321,11 +322,11 @@ msgstr "Τεκμηρίωση, Βοήθεια και Wiki"
 
 #: ../../../../data/txts/developers.lua:392
 msgid "Add-Ons"
-msgstr ""
+msgstr "Πρόσθετα"
 
 #: ../../../../data/txts/developers.lua:411
 msgid "Former Elders"
-msgstr ""
+msgstr "Πρώην Γηραιοί"
 
 #: ../../../../data/txts/developers.lua:437
 msgid "Translation"
@@ -333,11 +334,11 @@ msgstr "Μετάφραση"
 
 #: ../../../../data/txts/developers.lua:446
 msgid "Other"
-msgstr ""
+msgstr "Άλλοι"
 
 #: ../../../../data/txts/developers.lua:454
 msgid "and many, many more (thank you for everything you’ve done)"
-msgstr ""
+msgstr "και πολλοί, πολλοί ακόμη (ευχαριστούμε για όλα όσα έχετε κάνει)"
 
 #: ../../../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -408,17 +409,17 @@ msgstr ""
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #: ../../../../data/txts/help/common_helptexts.lua:48
 #: ../../../../data/txts/help/common_helptexts.lua:57
 #: ../../../../data/txts/help/common_helptexts.lua:67
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Ρυθμίσεις Παιχνιδιού Πολλών Παιχτών"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."
@@ -426,7 +427,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:11
 msgid "Client settings"
-msgstr ""
+msgstr "Ρυθμίσεις Πελάτη"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:12
 msgid ""
@@ -448,7 +449,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
-msgstr ""
+msgstr "Ρυθμίσεις παίκτη"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:17
 msgid ""
@@ -473,7 +474,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:21
 msgid "Closed."
-msgstr ""
+msgstr "Κλειστό"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:22
 msgid ""
@@ -491,7 +492,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:25
 msgid "Map details"
-msgstr ""
+msgstr "Πληροφορίες Χάρτη"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:26
 msgid ""
@@ -505,36 +506,36 @@ msgstr ""
 msgid ""
 "Amazons love trees. Build enough jungle preserver’s huts to have enough of "
 "them."
-msgstr ""
+msgstr "Οι Αμαζόνες λατρεύουν τα δέντρα. Χτίσε αρκετές καλύβες διατηρητών ζούγκλας για να έχεις αρκετά δέντρα."
 
 #: ../../../../data/txts/tips/amazons.lua:8
 msgid ""
 "Rare woods are the backbone of an Amazon economy. Build rare tree "
 "plantations to plant the special trees for these woods."
-msgstr ""
+msgstr "Τα σπάνια ξύλα είναι η ραχοκοκαλιά της οικονομίας των Αμαζόνων. Χτίσε φυτείες σπάνιων ξύλων για να φυτέψουν τα δέντρα από τα οποία παράγονται."
 
 #: ../../../../data/txts/tips/amazons.lua:12
 msgid ""
 "Rare trees are cut by experienced woodcutters in woodcutter’s huts enhanced "
 "to rare tree cutter’s huts. But they stop cutting normal trees. Plan their "
 "locations in advance."
-msgstr ""
+msgstr "Τα σπάνια ξύλα κόβονται από έμπειρες υλοτόμισσες σε καλύβες υλοτόμων οι οποίες έχουν αναβαθμιστεί σε καλύβες κοπτών σπάνιων ξύλων. Μετά την αναβάθμιση, σταματούν να κόβουν κανονικά δέντρα. Σχεδίασε σωστά την τοποθέτησή τους."
 
 #: ../../../../data/txts/tips/amazons.lua:16
 msgid "Food is dried with charcoal fires. Ensure a steady supply."
-msgstr ""
+msgstr "Το φαγητό στεγνώνει στην φωτιά. Σιγουρέψουν ότι έχεις μια σταθερή ροή ξυλάνθρακα γι' αυτό τον σκοπό."
 
 #: ../../../../data/txts/tips/amazons.lua:20
 msgid ""
 "Liana cutters harvest lianas from nearby trees, but trees are not harmed in "
 "this process."
-msgstr ""
+msgstr "Οι κόπτριες λιάνα μαζεύουν τα λιάνα από κοντινά δέντρα. Τα δεντρα δεν παθαίνουν κακό κατά τη διαδικασία."
 
 #: ../../../../data/txts/tips/amazons.lua:24
 msgid ""
 "Water is life for the Amazons. Water gatherers perform an important service "
 "to their tribe."
-msgstr ""
+msgstr "Το νερό είναι πηγή ζωής για τις Αμαζόνες. Οι συλλέκτες νερού παρέχουν μια σημαντική υπηρεσία στη φυλή τους."
 
 #: ../../../../data/txts/tips/amazons.lua:28
 msgid ""
@@ -596,7 +597,7 @@ msgstr ""
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or game."
-msgstr "Φτιάχνετε πάντα μια καλύβα δασοφύλακα και μια κτηνοτρόφου, ώστε να μην ξεμείνετε από κορμούς και κρέας."
+msgstr "Φτιάξε πάντα καλύβες δασοφύλακα και θηροτρόφου ώστε να μην ξεμείνεις ποτέ από κορμούς και θηράματα."
 
 #: ../../../../data/txts/tips/barbarians.lua:12
 #: ../../../../data/txts/tips/empire.lua:12
@@ -604,13 +605,13 @@ msgstr "Φτιάχνετε πάντα μια καλύβα δασοφύλακα �
 msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
-msgstr ""
+msgstr "Τα περισσότερα αναβαθμισμένα κτήρια χρειάζονται έμπειρους εργάτες. Μην αναβαθμίσεις ένα κτήριο αν δεν έχεις διαθέσιμους τους απαραίτητους εργάτες."
 
 #: ../../../../data/txts/tips/crash.lua:7
 msgid ""
 "Widelands is creating an emergency save, so you can continue playing exactly"
 " where the game closed."
-msgstr ""
+msgstr "Το Widelands δημιουργεί ένα αρχείο αποθήκευσης έκτακτης ανάγκης, για να μπορείς να συνεχίσεις να παίζεις από το σημείο που έκλεισε το παιχνίδι."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../../../data/txts/tips/editor.lua:8
@@ -618,7 +619,7 @@ msgstr ""
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
-msgstr ""
+msgstr "Μπορείς να βρεις βοήθεια για τον επεξεργαστή καθώς και έναν σύντομο οδηγό στο wiki μας στη σελίδα %s."
 
 #: ../../../../data/txts/tips/editor.lua:12
 msgid ""
@@ -673,61 +674,61 @@ msgid ""
 "You can place a medium building on any node where there is a slope no "
 "greater than 1 in the south-east direction and its height difference to all "
 "nodes in a radius of 2 is no greater than 2."
-msgstr ""
+msgstr "Μπορείς να χτίσεις ένα μεσαίο κτήριο σε οποιονδήποτε κόμβο δεν έχει κλίση μεγαλύτερη από 1 στην νοτιοανατολική κατεύθυνση και η υψομετρική του διαφορά με τους κοντινούς κόμβους σε απόσταση 2 βημάτων δεν είναι μεγαλύτερη από 2. "
 
 #: ../../../../data/txts/tips/editor.lua:48
 msgid ""
 "You can place a big building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr ""
+msgstr "Μπορείς να χτίσεις ένα μεγάλο κτήριο σε κάθε κόμβο που θα έχτιζες ένα μεσαίο κτήριο, εάν δεν υπάρχει κάποιο εμπόδιο ή μη καλλιεργήσιμο έδαφος προς τα δυτικά, βορειοδυτικά και βορειοανατολικά."
 
 #: ../../../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr ""
+msgstr "Πάντα να χτίζεις ένα σπίτι δασοφύλακα ώστε να μην ξεμένεις από κορμούς."
 
 #: ../../../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
-msgstr ""
+msgstr "Η αυτοκρατορία χρειάζεται πολύ μάρμαρο. Έχε τα μάτια σου ανοιχτά για μάρμαρο."
 
 #: ../../../../data/txts/tips/frisians.lua:4
 msgid ""
 "To produce bricks, you need granite; to produce granite, you need a quarry "
 "or rock mine; to build those, you need bricks. Take care not to get "
 "deadlocked!"
-msgstr ""
+msgstr "Για να φτιάξεις τούβλα, χρειάζεσαι γρανίτη. Για να φτιάξεις γρανίτη χρειάζεσαι ένα σπίτ λατόμου ή ένα λατομείο. Για να τα χτίσεις αυτά, χρειάζεσαι τούβλα. Πρόσεξε να μην βρεθείς σε αδιέξοδο λόγω έλλειψης πόρων!"
 
 #: ../../../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."
-msgstr ""
+msgstr "Πάντα να χτίζεις ένα σπίτι δασοφύλακα ώστε να μην ξεμένεις από κορμούς."
 
 #: ../../../../data/txts/tips/general_game.lua:7
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
-msgstr ""
+msgstr "Η διαδικασία κατασκευής ενός κτηρίου αρχίζει μόνο αφού κατασκευαστεί ένας δρόμος προς το εργοτάξιο."
 
 #: ../../../../data/txts/tips/general_game.lua:11
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a "
 "mine."
-msgstr ""
+msgstr "Σιγουρέψου ότι έστειλες έναν γεωλόγο για να κάνει αυτοψία πριν χτίσεις ένα πηγάδι ή ένα ορυχείο."
 
 #: ../../../../data/txts/tips/general_game.lua:15
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
-msgstr ""
+msgstr "Η επικράτειά σου μπορεί να επεκταθεί χτίζοντας διάφορα στρατιωτικά κτήρια – Φυλάκια, Καταφύγια, Φρούρια, κλπ."
 
 #: ../../../../data/txts/tips/general_game.lua:19
 msgid "Miners will work only if supplied with food."
-msgstr ""
+msgstr "Οι εργάτες στα ορυχεία θα δουλέψουν μόνο εάν τους προμηθεύσεις με φαγητό."
 
 #: ../../../../data/txts/tips/general_game.lua:23
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
-msgstr ""
+msgstr "Χώρισε τους δρόμους σου σε μικρότερα κομμάτια, τοποθετόντας σημαίες. Αυτό θα επισπεύσει την μεταφορά των εμπορευμάτων σου."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../../../data/txts/tips/general_game.lua:28
@@ -735,7 +736,7 @@ msgstr ""
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found online at %s."
-msgstr ""
+msgstr "Κι άλλες ερωτήσεις. Το FAQ μας, το wiki και φυσικά το φόρουμ της κοινότητας μπορούν να βρεθού στο διαδίκτυο στη διεύθυνση %s."
 
 #: ../../../../data/txts/tips/general_game.lua:32
 msgid ""
@@ -823,12 +824,12 @@ msgstr ""
 #: ../../../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "Βελάκια"
 
 #: ../../../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl + Βελάκια"
 
 #: ../../../../data/txts/tips/general_game.lua:98
 msgid ""
@@ -838,7 +839,7 @@ msgstr ""
 #: ../../../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Shift + Βελάκια"
 
 #: ../../../../data/txts/tips/general_game.lua:102
 msgid ""

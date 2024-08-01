@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
-# Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2016-2017
 # Marcin S <dzidek1003@o2.pl>, 2021
 # Niektóry <niektory@gmail.com>, 2020
 # Patryk, 2016

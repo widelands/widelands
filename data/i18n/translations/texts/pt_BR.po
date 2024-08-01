@@ -3,6 +3,7 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Frank Carvalho, 2024
 # GunChleoc, 2014
 # Renata Campos <renata.p.campos@gmail.com>, 2016
 # Willian Francisco Urbano, 2022
@@ -12,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-06-08 02:37+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Willian Francisco Urbano, 2022\n"
+"Last-Translator: Frank Carvalho, 2024\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -60,7 +61,7 @@ msgstr "Este jogo é gratuito e de Fonte Aberta(Open Source) (FOSS), licenciado 
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr ""
+msgstr "Você pode encontrar mais informações sobre FOSS e GPL visitando a seguinte página: %s"
 
 #: ../../../../data/txts/LICENSE.lua:20
 msgid ""
