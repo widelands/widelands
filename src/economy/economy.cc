@@ -747,10 +747,8 @@ void Economy::start_request_timer(const Duration& delta) {
  * Find the supply within search_radius that is best suited to fulfill the given request.
  * \return 0 if no supply is found, the best supply otherwise
  */
-Supply* Economy::find_best_supply(Game& game,
-                                  const Request& req,
-                                  int32_t& cost,
-                                  const uint32_t search_radius) {
+Supply*
+Economy::find_best_supply(Game& game, const Request& req, int32_t& cost, const uint32_t search_radius) {
 	Flag& target_flag = req.target_flag();
 	const bool all_in_second_pass = search_radius < std::numeric_limits<uint32_t>::max();
 	uint32_t dist_min = search_radius;
@@ -812,8 +810,7 @@ Supply* Economy::find_best_supply(Game& game,
 	if (!possible_imports_.empty() && (all_in_second_pass || dist_min >= kTryImportThreshold)) {
 		for (Supply* supp : possible_imports_) {
 			Widelands::Flag& supp_flag = supp->get_position(game)->base_flag();
-			const uint32_t dist =
-			   game.map().calc_distance(target_flag.get_position(), supp_flag.get_position());
+			const uint32_t dist = game.map().calc_distance(target_flag.get_position(), supp_flag.get_position());
 
 			// Give some allowance as routes may not be straight and flat.
 			// dist_min may still be max<uint32_t> if there was no local supply. So this should also
@@ -839,21 +836,12 @@ Supply* Economy::find_best_supply(Game& game,
 
 	bool success = false;
 
-<<<<<<< HEAD
 	if (possible_flags_.size() == 1) {  // faster than messing with a single element vector
-		success = router_->find_route(
-		   *possible_flags_[0], target_flag, &best_route, type_, -1, *owner().egbase().mutable_map());
+		success = router_->find_route(*possible_flags_[0], target_flag, &best_route, type_, -1,
+		                    *owner().egbase().mutable_map());
 	} else {
 		success = router_->find_nearest(
-		   possible_flags_, target_flag, &best_route, type_, *owner().egbase().mutable_map());
-=======
-	if (possible_flags.size() == 1) {  // faster than messing with a single element vector
-		success = router_->find_route(
-		   *possible_flags[0], target_flag, &best_route, type_, -1, *owner().egbase().mutable_map());
-	} else {
-		success = router_->find_nearest(
-		   possible_flags, target_flag, &best_route, type_, *owner().egbase().mutable_map());
->>>>>>> 360a3bca554ab110bd43c6501df0db836de3baa0
+	       possible_flags_, target_flag, &best_route, type_, *owner().egbase().mutable_map());
 	}
 
 	if (!success) {
@@ -1372,7 +1360,8 @@ void Economy::check_imports(Game& game) {
 			// Prefer old one, only replace if cost saving is significant
 			const int old_cost = request->get_transfers()[i]->get_cost_left();
 			int saving = old_cost - cost;
-			if (saving < kSupplyReplacementMinSaving || saving < old_cost / kSupplyReplacementRatio) {
+			if (saving < kSupplyReplacementMinSaving ||
+				 saving < old_cost / kSupplyReplacementRatio) {
 				continue;
 			}
 
@@ -1406,5 +1395,6 @@ void Economy::balance(uint32_t const timerid) {
 	handle_active_supplies(game);
 
 	check_imports(game);
+
 }
 }  // namespace Widelands
