@@ -20,8 +20,8 @@
 #define WL_ECONOMY_ECONOMY_H
 
 #include <functional>
-#include <memory>
 #include <limits>
+#include <memory>
 
 #include "base/macros.h"
 #include "economy/supply.h"
@@ -243,8 +243,10 @@ private:
 
 	void start_request_timer(const Duration& delta = Duration(200));
 
-	Supply* find_best_supply(Game&, const Request&, int32_t& cost,
-	   uint32_t search_radius = std::numeric_limits<uint32_t>::max());
+	Supply* find_best_supply(Game&,
+	                         const Request&,
+	                         int32_t& cost,
+	                         uint32_t search_radius = std::numeric_limits<uint32_t>::max());
 	void process_requests(Game&, RSPairStruct* supply_pairs);
 	void balance_requestsupply(Game&);
 	void handle_active_supplies(Game&);
