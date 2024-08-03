@@ -21,6 +21,7 @@
 
 #include <functional>
 #include <memory>
+#include <limits>
 
 #include "base/macros.h"
 #include "economy/supply.h"
@@ -242,7 +243,8 @@ private:
 
 	void start_request_timer(const Duration& delta = Duration(200));
 
-	Supply* find_best_supply(Game&, const Request&, int32_t& cost, bool allow_import);
+	Supply* find_best_supply(Game&, const Request&, int32_t& cost,
+	   uint32_t search_radius = std::numeric_limits<uint32_t>::max());
 	void process_requests(Game&, RSPairStruct* supply_pairs);
 	void balance_requestsupply(Game&);
 	void handle_active_supplies(Game&);
@@ -293,9 +295,6 @@ private:
 	// We cannot use UniqueWindow to make sure an economy never has two windows because the serial
 	// may change when merging while the window is open, so we have to keep track of it here.
 	void* options_window_;
-
-	// 'list' of unique providers
-	std::map<UniqueDistance, Supply*> available_supplies_;
 
 	// Helper function for `find_closest_occupied_productionsite()`
 	bool check_building_can_start_working(const ProductionSite&, bool check_inputqueues);
