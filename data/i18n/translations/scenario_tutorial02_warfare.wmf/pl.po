@@ -6,7 +6,7 @@
 # Antoni Szpikowski <szantek2004@gmail.com>, 2021
 # GunChleoc, 2018
 # GunChleoc, 2014
-# Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2016-2017
 # Leszek Szary, 2024
 # Marcin S <dzidek1003@o2.pl>, 2021
 # Niektóry <niektory@gmail.com>, 2020

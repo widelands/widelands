@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-06-29 02:37+0000\n"
+"POT-Creation-Date: 2024-08-01 02:59+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Juanjo, 2015-2024\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
@@ -743,7 +743,7 @@ msgstr "No s'ha pogut escriure el complement al disc."
 #: ../../../../src/editor/editorinteractive.cc:1552
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:108
 msgid "Uploading…"
-msgstr "Es va pujant…"
+msgstr "Es puja…"
 
 #: ../../../../src/editor/editorinteractive.cc:1558
 msgid "Upload Error"
@@ -1779,7 +1779,7 @@ msgstr "Missatges"
 #: ../../../../src/game_io/game_loader.cc:175
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:193
 msgid "Finishing"
-msgstr "Es va acabant."
+msgstr "S'acaba."
 
 #: ../../../../src/game_io/game_saver.cc:50
 #, c-format
@@ -3737,6 +3737,16 @@ msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
 msgstr "Heu sigut desconnectat del metaservidor, ja que no heu respost la petició PING a temps."
+
+#: ../../../../src/network/net_addons.cc:844
+#, c-format
+msgid "Sending metadata for %s"
+msgstr "S'envien les metadades de %s"
+
+#: ../../../../src/network/net_addons.cc:889
+#, c-format
+msgid "Uploading %s"
+msgstr "Es carrega %s"
 
 #: ../../../../src/network/network_gaming_messages.cc:30
 msgid "Client has left the game."
