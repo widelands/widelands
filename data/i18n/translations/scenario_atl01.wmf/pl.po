@@ -6,7 +6,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # GunChleoc, 2014
-# Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2016-2017
 # Karol Zygmunt, 2024
 # b439f035459e0f385cf8827d1a76f480_497be4c <c2ca683ad439533996d91e14a0c79e7e_269278>, 2015
 # b439f035459e0f385cf8827d1a76f480_497be4c <c2ca683ad439533996d91e14a0c79e7e_269278>, 2015
