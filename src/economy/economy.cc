@@ -20,7 +20,6 @@
 
 #include <algorithm>
 #include <memory>
-#include <set>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -39,6 +38,8 @@
 #include "logic/player.h"
 
 namespace Widelands {
+
+constexpr uint32_t kTryImportThreshold = 8;  // straight line distance in nodes count
 
 Serial Economy::last_economy_serial_ = 0;
 
@@ -742,15 +743,6 @@ void Economy::start_request_timer(const Duration& delta) {
 	}
 }
 
-// make these members, replacing available_supplies_
-// (only kept around to avoid always creating and destroying them)
-static std::vector<Supply*> possible_imports;
-static std::vector<Supply*> possible_supplies;
-static std::vector<Widelands::RoutingNode*> possible_flags;
-static std::set<Widelands::Flag*> seen_flags;
-
-constexpr uint32_t kTryImportThreshold = 8;  // straight line distance in nodes count
-
 /**
  * Find the supply within search_radius that is best suited to fulfill the given request.
  * \return 0 if no supply is found, the best supply otherwise
@@ -761,10 +753,10 @@ Economy::find_best_supply(Game& game, const Request& req, int32_t& cost, const u
 	const bool all_in_second_pass = search_radius < std::numeric_limits<uint32_t>::max();
 	uint32_t dist_min = search_radius;
 
-	possible_imports.clear();
-	possible_supplies.clear();
-	possible_flags.clear();
-	seen_flags.clear();
+	possible_imports_.clear();
+	possible_supplies_.clear();
+	possible_flags_.clear();
+	seen_flags_.clear();
 
 	for (size_t i = 0; i < supplies_.get_nrsupplies(); ++i) {
 		Supply& supp = supplies_[i];
@@ -786,7 +778,7 @@ Economy::find_best_supply(Game& game, const Request& req, int32_t& cost, const u
 		// std::set seems to be efficient enough to make this worth it. This way we don't waste
 		// time on multiple items in e.g. a warehouse. Seems to be a slight gain in most situations,
 		// and also only a slight loss in the rest.
-		if (!seen_flags.insert(&supp_flag).second) {
+		if (!seen_flags_.insert(&supp_flag).second) {
 			continue;  // we've already seen an equivalent supply
 		}
 
@@ -799,7 +791,7 @@ Economy::find_best_supply(Game& game, const Request& req, int32_t& cost, const u
 			// any local supply.
 			// If we are searching for a possible replacement, treat local the same as import,
 			// as we already have an upper limit for the search radius.
-			possible_imports.emplace_back(&supp);
+			possible_imports_.emplace_back(&supp);
 			continue;
 		}
 
@@ -810,13 +802,13 @@ Economy::find_best_supply(Game& game, const Request& req, int32_t& cost, const u
 		   dist_min, game.map().calc_distance(target_flag.get_position(), supp_flag.get_position()));
 
 		// Not nice, but std::map is too slow and we'll also need the flags separately.
-		possible_supplies.emplace_back(&supp);
-		possible_flags.emplace_back(&supp_flag);
+		possible_supplies_.emplace_back(&supp);
+		possible_flags_.emplace_back(&supp_flag);
 	}
 
 	// Try imports if no local supply was found
-	if (!possible_imports.empty() && (all_in_second_pass || dist_min >= kTryImportThreshold)) {
-		for (Supply* supp : possible_imports) {
+	if (!possible_imports_.empty() && (all_in_second_pass || dist_min >= kTryImportThreshold)) {
+		for (Supply* supp : possible_imports_) {
 			Widelands::Flag& supp_flag = supp->get_position(game)->base_flag();
 			const uint32_t dist = game.map().calc_distance(target_flag.get_position(), supp_flag.get_position());
 
@@ -824,8 +816,8 @@ Economy::find_best_supply(Game& game, const Request& req, int32_t& cost, const u
 			// dist_min may still be max<uint32_t> if there was no local supply. So this should also
 			// take care of always storing the first found supply for new searches.
 			if (dist / 2 < dist_min) {
-				possible_supplies.emplace_back(supp);
-				possible_flags.emplace_back(&supp_flag);
+				possible_supplies_.emplace_back(supp);
+				possible_flags_.emplace_back(&supp_flag);
 				dist_min = std::min(dist_min, dist);
 				// Yes, previous far supplies remain in the list, we only prevent adding new ones.
 				// Most of the time we don't have many candidates anyway, so trying to clean up previous
@@ -834,7 +826,7 @@ Economy::find_best_supply(Game& game, const Request& req, int32_t& cost, const u
 		}
 	}
 
-	if (possible_flags.empty()) {
+	if (possible_flags_.empty()) {
 		return nullptr;
 	}
 
@@ -844,12 +836,12 @@ Economy::find_best_supply(Game& game, const Request& req, int32_t& cost, const u
 
 	bool success = false;
 
-	if (possible_flags.size() == 1) {  // faster than messing with a single element vector
-		success = router_->find_route(*possible_flags[0], target_flag, &best_route, type_, -1,
+	if (possible_flags_.size() == 1) {  // faster than messing with a single element vector
+		success = router_->find_route(*possible_flags_[0], target_flag, &best_route, type_, -1,
 		                    *owner().egbase().mutable_map());
 	} else {
 		success = router_->find_nearest(
-	       possible_flags, target_flag, &best_route, type_, *owner().egbase().mutable_map());
+	       possible_flags_, target_flag, &best_route, type_, *owner().egbase().mutable_map());
 	}
 
 	if (!success) {
@@ -864,10 +856,10 @@ Economy::find_best_supply(Game& game, const Request& req, int32_t& cost, const u
 
 	// Ugly as hell, but the whole function is still much faster than with a std::map
 	int i = 0;
-	while (possible_flags.at(i) != best_supp_flag) {
+	while (possible_flags_.at(i) != best_supp_flag) {
 		++i;
 	}
-	best_supply = possible_supplies.at(i);
+	best_supply = possible_supplies_.at(i);
 
 	cost = best_route.get_totalcost();
 	return best_supply;

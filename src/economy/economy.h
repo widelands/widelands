@@ -20,8 +20,9 @@
 #define WL_ECONOMY_ECONOMY_H
 
 #include <functional>
-#include <memory>
 #include <limits>
+#include <memory>
+#include <set>
 
 #include "base/macros.h"
 #include "economy/supply.h"
@@ -40,6 +41,7 @@ class ProductionSite;
 struct RSPairStruct;
 struct Route;
 struct Router;
+struct RoutingNode;
 class WorkerDescr;
 
 struct NoteEconomy {
@@ -275,6 +277,13 @@ private:
 
 	RequestList requests_;  ///< requests
 	SupplyList supplies_;
+
+	/* Used in find_best_supply. These are only members to avoid
+	 * frequent memory allocation and freeing. */
+	std::vector<Supply*> possible_imports_;
+	std::vector<Supply*> possible_supplies_;
+	std::vector<Widelands::RoutingNode*> possible_flags_;
+	std::set<Widelands::Flag*> seen_flags_;
 
 	TargetQuantity* target_quantities_;
 	std::unique_ptr<Router> router_;
