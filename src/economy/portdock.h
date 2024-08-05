@@ -91,6 +91,7 @@ public:
 	[[nodiscard]] bool get_passable() const override;
 
 	[[nodiscard]] Flag& base_flag() override;
+	[[nodiscard]] const Flag& base_flag() const override;
 	[[nodiscard]] PositionList get_positions(const EditorGameBase&) const override;
 
 	bool init(EditorGameBase&) override;

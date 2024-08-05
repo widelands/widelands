@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-06-29 02:37+0000\n"
+"POT-Creation-Date: 2024-08-01 02:59+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -3769,6 +3769,16 @@ msgid ""
 "request in time."
 msgstr "Boli ste odpojený(á) od metaservera, keďže ste neodpovedali včas na požiadavku PING."
 
+#: ../../../../src/network/net_addons.cc:844
+#, c-format
+msgid "Sending metadata for %s"
+msgstr ""
+
+#: ../../../../src/network/net_addons.cc:889
+#, c-format
+msgid "Uploading %s"
+msgstr ""
+
 #: ../../../../src/network/network_gaming_messages.cc:30
 msgid "Client has left the game."
 msgstr "Klient opustil hru."
@@ -6788,7 +6798,7 @@ msgstr "Neurčené"
 
 #: ../../../../src/ui_fsmenu/mapselect.cc:505
 msgid "The map does not specify whether it is balanced"
-msgstr ""
+msgstr "Mapa neuvádza, či je vyvážená"
 
 #: ../../../../src/ui_fsmenu/menu.cc:129 ../../../../src/wui/helpwindow.cc:69
 msgid "Back"
@@ -10223,7 +10233,7 @@ msgstr "Oficiálne"
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../../../src/wui/map_tags.cc:32
 msgid "The map is provided by the official Widelands release"
-msgstr ""
+msgstr "Mapu poskytuje oficiálne vydanie Widelands"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../../../src/wui/map_tags.cc:35
@@ -10233,7 +10243,7 @@ msgstr "Neoficiálne"
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../../../src/wui/map_tags.cc:37
 msgid "Custom or add-on map"
-msgstr ""
+msgstr "Vlastná alebo doplnková mapa"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../../../src/wui/map_tags.cc:40
@@ -10244,7 +10254,7 @@ msgstr "Vyvážené"
 msgid ""
 "Player starting positions were designed to provide equal conditions for all "
 "players"
-msgstr ""
+msgstr "Počiatočné pozície hráčov boli navrhnuté tak, aby poskytovali rovnaké podmienky pre všetkých hráčov"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../../../src/wui/map_tags.cc:46
@@ -10254,7 +10264,7 @@ msgstr "Nevyvážené"
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../../../src/wui/map_tags.cc:48
 msgid "Players face different conditions or balancing is not checked"
-msgstr ""
+msgstr "Hráči čelia rôznym podmienkam alebo sa vyváženie nekontrolovalo"
 
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../../../src/wui/map_tags.cc:53

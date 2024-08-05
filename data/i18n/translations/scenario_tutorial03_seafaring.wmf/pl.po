@@ -5,7 +5,7 @@
 # Aleksandra <a.kurda@o2.pl>, 2023
 # Antoni Szpikowski <szantek2004@gmail.com>, 2021
 # GunChleoc, 2016
-# Wesmania <ikk_pl@yahoo.co.uk>, 2016
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2016
 # Leszek Szary, 2024
 # Marcin S <dzidek1003@o2.pl>, 2021
 # Niektóry <niektory@gmail.com>, 2020
