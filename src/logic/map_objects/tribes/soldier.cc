@@ -156,7 +156,7 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
 				}
 				map.emplace(dir, anim_name);
 			}
-			walk_name_.emplace(std::make_pair(std::move(range), map));
+			walk_name_.emplace(std::move(range), map);
 		}
 	}
 }
@@ -431,8 +431,9 @@ uint32_t Soldier::get_level(TrainingAttribute const at) const {
 		return evade_level_;
 	case TrainingAttribute::kTotal:
 		return health_level_ + attack_level_ + defense_level_ + evade_level_;
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 int32_t Soldier::get_training_attribute(TrainingAttribute const attr) const {
@@ -447,8 +448,9 @@ int32_t Soldier::get_training_attribute(TrainingAttribute const attr) const {
 		return evade_level_;
 	case TrainingAttribute::kTotal:
 		return health_level_ + attack_level_ + defense_level_ + evade_level_;
+	default:
+		return Worker::get_training_attribute(attr);
 	}
-	return Worker::get_training_attribute(attr);
 }
 
 unsigned Soldier::get_max_health() const {
@@ -540,6 +542,8 @@ Vector2f Soldier::calc_drawpos(const EditorGameBase& game,
 		break;
 	case CD_NONE:
 		break;
+	default:
+		NEVER_HERE();
 	}
 
 	if (moving) {
@@ -633,6 +637,9 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 		if (draw_health_bar) {
 			draw_position.y -= 5 * scale;
 		}
+		break;
+	default:
+		NEVER_HERE();
 	}
 
 	if (draw_health_bar) {
@@ -682,11 +689,12 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 
 	// Draw level info in building windows, or if kSoldierLevels is on.
 	if (draw_mode == InfoMode::kInBuilding || ((info_to_draw & InfoToDraw::kSoldierLevels) != 0)) {
-		const auto draw_level_image = [icon_size, scale, &draw_position, dst](
+		const Recti src_rect(0, 0, icon_size, icon_size);
+		const auto draw_level_image = [icon_size, scale, &draw_position, dst, &src_rect](
 		                                 const Vector2i& offset, const Image* image) {
 			dst->blitrect_scale(
 			   Rectf(draw_position + offset * icon_size * scale, icon_size * scale, icon_size * scale),
-			   image, Recti(0, 0, icon_size, icon_size), 1.f, BlendMode::UseAlpha);
+			   image, src_rect, 1.f, BlendMode::UseAlpha);
 		};
 
 		draw_level_image(Vector2i(-1, -2), get_attack_level_pic());
@@ -1024,7 +1032,7 @@ void Soldier::attack_update(Game& game, State& state) {
 		// The old militarysite gets replaced by a new one, so if "enemy" is not
 		// valid anymore, we either "conquered" the new building, or it was
 		// destroyed.
-		if (state.coords) {
+		if (state.coords.valid()) {
 			BaseImmovable* const newimm = map[state.coords].get_immovable();
 			upcast(MilitarySite, newsite, newimm);
 			if ((newsite != nullptr) && (&newsite->owner() == &owner())) {
@@ -1350,6 +1358,7 @@ void Soldier::start_task_move_in_battle(Game& game, CombatWalkingDir dir) {
 	case CD_NONE:
 	case CD_COMBAT_E:
 	case CD_COMBAT_W:
+	default:
 		throw GameDataError("bad direction '%d'", dir);
 	}
 
@@ -1383,6 +1392,8 @@ void Soldier::move_in_battle_update(Game& game, State& /* state */) {
 		case CD_COMBAT_E:
 			combat_walking_ = CD_NONE;
 			break;
+		default:
+			NEVER_HERE();
 		}
 		return pop_task(game);
 	}

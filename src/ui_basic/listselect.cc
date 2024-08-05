@@ -45,6 +45,7 @@ BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
                                          const std::string& tooltip_text,
                                          const std::string& hotkey_text,
                                          const unsigned i,
+                                         const bool e,
                                          const TableStyleInfo& style)
    : name(init_name),
      entry_(init_entry),
@@ -53,8 +54,10 @@ BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
      name_alignment(i18n::has_rtl_character(init_name.c_str(), 20) ? Align::kRight : Align::kLeft),
      hotkey_alignment(i18n::has_rtl_character(hotkey_text.c_str(), 20) ? Align::kRight :
                                                                          Align::kLeft),
-     indent(i) {
-	rendered_name = UI::g_fh->render(as_richtext_paragraph(richtext_escape(name), style.enabled()));
+     indent(i),
+     enable(e) {
+	rendered_name = UI::g_fh->render(
+	   as_richtext_paragraph(richtext_escape(name), enable ? style.enabled() : style.disabled()));
 	rendered_hotkey =
 	   UI::g_fh->render(as_richtext_paragraph(richtext_escape(hotkey_text), style.hotkey()));
 }
@@ -116,8 +119,8 @@ BaseListselect::BaseListselect(Panel* const parent,
  */
 BaseListselect::~BaseListselect() {
 	clear();
-	if (linked_dropdown != nullptr) {
-		linked_dropdown->notify_list_deleted();
+	if (linked_dropdown_ != nullptr) {
+		linked_dropdown_->notify_list_deleted();
 	}
 }
 
@@ -159,8 +162,10 @@ void BaseListselect::add(const std::string& name,
                          bool const sel,
                          const std::string& tooltip_text,
                          const std::string& hotkey,
-                         const unsigned indent) {
-	EntryRecord* er = new EntryRecord(name, entry, pic, tooltip_text, hotkey, indent, table_style());
+                         const unsigned indent,
+                         const bool enable) {
+	EntryRecord* er =
+	   new EntryRecord(name, entry, pic, tooltip_text, hotkey, indent, enable, table_style());
 
 	int entry_height = lineheight_;
 	if (pic != nullptr) {
@@ -225,11 +230,49 @@ void BaseListselect::set_scrollpos(const int32_t i) {
 }
 
 /**
- * Change the currently selected entry
+ * Change the currently selected entry.
+ * If the desired entry is disabled, snap to the nearest enabled entry depending on `snap`.
  *
  * Args: i  the entry to select
+ *    snap  whether to go up, down, or do nothing if the entry is disabled
  */
-void BaseListselect::select(const uint32_t i) {
+void BaseListselect::select(uint32_t i, SnapSelectionToEnabled snap) {
+	if (i != no_selection_index() && !empty()) {
+		if (snap != SnapSelectionToEnabled::kNo) {
+			// Step until we find an enabled entry
+			while (!entry_records_.at(i)->enable) {
+				if (snap == SnapSelectionToEnabled::kDown) {
+					if (i + 1 >= size()) {
+						break;
+					}
+					++i;
+				} else {
+					if (i == 0) {
+						break;
+					}
+					--i;
+				}
+			}
+			// If nothing found, try stepping in the opposite direction too
+			while (!entry_records_.at(i)->enable) {
+				if (snap == SnapSelectionToEnabled::kUp) {
+					if (i + 1 >= size()) {
+						break;
+					}
+					++i;
+				} else {
+					if (i == 0) {
+						break;
+					}
+					--i;
+				}
+			}
+		}
+		if (!entry_records_.at(i)->enable) {
+			i = no_selection_index();
+		}
+	}
+
 	if (selection_ == i) {
 		return;
 	}
@@ -410,7 +453,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 		   (selection_mode_ == ListselectLayout::kDropdown ? scrollbar_.is_enabled() ? 4 : 5 : 2);
 
 		// Highlight the current selected entry
-		if (idx == selection_) {
+		if (idx == selection_ && entry_records_.at(idx)->enable) {
 			Recti r(point, maxw, lineheight_unpadded);
 			if (r.x < 0) {
 				r.w += r.x;
@@ -431,11 +474,13 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		// Now draw pictures
 		if (er.pic != nullptr) {
-			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ?
-                              get_eff_w() - er.pic->width() - 1 - kIndentStrength * er.indent :
-                              kIndentStrength * er.indent + 1,
-			                  y + (lineheight_unpadded - er.pic->height()) / 2),
-			         er.pic);
+			dst.blit(
+			   Vector2i(UI::g_fh->fontset()->is_rtl() ?
+                        get_eff_w() - er.pic->width() - (max_pic_width_ - er.pic->width()) / 2 - 1 -
+			                  kIndentStrength * er.indent :
+                        kIndentStrength * er.indent + (max_pic_width_ - er.pic->width()) / 2 + 1,
+			            y + (lineheight_unpadded - er.pic->height()) / 2),
+			   er.pic);
 		}
 
 		// Fix vertical position for mixed font heights
@@ -511,11 +556,12 @@ bool BaseListselect::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) 
 
 	if (y != 0 && matches_keymod(modstate, KMOD_NONE)) {
 		if (selected_idx > max) {
-			select(y < 0 ? 0 : max);
+			select(
+			   y < 0 ? 0 : max, y < 0 ? SnapSelectionToEnabled::kUp : SnapSelectionToEnabled::kDown);
 		} else if (y > 0 && selected_idx > 0) {
-			select(selected_idx - 1);
+			select(selected_idx - 1, SnapSelectionToEnabled::kUp);
 		} else if (y < 0 && selected_idx < max) {
-			select(selected_idx + 1);
+			select(selected_idx + 1, SnapSelectionToEnabled::kDown);
 		}
 
 		return scrollbar_.handle_mousewheel(x, y, modstate);
@@ -544,7 +590,9 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t /*x*/, int32_t
 		if (y < 0 || static_cast<int32_t>(entry_records_.size()) <= y) {
 			if (selection_mode_ == ListselectLayout::kDropdown) {
 				set_visible(false);
-				linked_dropdown->disable_textinput();
+				if (linked_dropdown_ != nullptr) {
+					linked_dropdown_->disable_textinput();
+				}
 				return true;
 			}
 			return false;
@@ -584,15 +632,15 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_BACKSPACE:
-			if (linked_dropdown != nullptr) {
-				linked_dropdown->delete_last_of_filter();
+			if (linked_dropdown_ != nullptr) {
+				linked_dropdown_->delete_last_of_filter();
 				return true;
 			}
 			return UI::Panel::handle_key(down, code);
 		case SDLK_ESCAPE:
 		case SDLK_RETURN:
-			if (linked_dropdown != nullptr && (code.mod & KMOD_CTRL) == 0) {
-				return linked_dropdown->handle_key(down, code);
+			if (linked_dropdown_ != nullptr && (code.mod & KMOD_CTRL) == 0) {
+				return linked_dropdown_->handle_key(down, code);
 			}
 			return UI::Panel::handle_key(down, code);
 		default:
@@ -603,6 +651,7 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 		uint32_t selected_idx = selection_index();
 		const uint32_t max = empty() ? 0 : size() - 1;
 		const uint32_t pagesize = std::max(1, get_h() / get_lineheight());
+		SnapSelectionToEnabled snap = SnapSelectionToEnabled::kNo;
 		switch (code.sym) {
 		case SDLK_DOWN:
 			if (!has_selection()) {
@@ -610,6 +659,7 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 			} else if (selected_idx < max) {
 				++selected_idx;
 			}
+			snap = SnapSelectionToEnabled::kDown;
 			break;
 		case SDLK_UP:
 			if (!has_selection()) {
@@ -617,19 +667,43 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 			} else if (selected_idx > 0) {
 				--selected_idx;
 			}
+			snap = SnapSelectionToEnabled::kUp;
 			break;
 		case SDLK_HOME:
 			selected_idx = 0;
+			snap = SnapSelectionToEnabled::kDown;
 			break;
 		case SDLK_END:
 			selected_idx = max;
+			snap = SnapSelectionToEnabled::kUp;
 			break;
 		case SDLK_PAGEDOWN:
-			selected_idx = has_selection() ? std::min(max, selected_idx + pagesize) : 0;
+			if (has_selection()) {
+				if (selected_idx + pagesize < max) {
+					selected_idx += pagesize;
+					snap = SnapSelectionToEnabled::kDown;
+				} else {
+					selected_idx = max;
+					snap = SnapSelectionToEnabled::kUp;
+				}
+			} else {
+				selected_idx = 0;
+				snap = SnapSelectionToEnabled::kDown;
+			}
 			break;
 		case SDLK_PAGEUP:
-			selected_idx =
-			   has_selection() ? selected_idx > pagesize ? selected_idx - pagesize : 0 : max;
+			if (has_selection()) {
+				if (selected_idx > pagesize) {
+					selected_idx -= pagesize;
+					snap = SnapSelectionToEnabled::kUp;
+				} else {
+					selected_idx = 0;
+					snap = SnapSelectionToEnabled::kDown;
+				}
+			} else {
+				selected_idx = max;
+				snap = SnapSelectionToEnabled::kUp;
+			}
 			break;
 		default:
 			handle = false;
@@ -637,7 +711,7 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 		}
 		assert((selected_idx <= max) ^ (selected_idx == no_selection_index()));
 		if (handle) {
-			select(selected_idx);
+			select(selected_idx, snap);
 			return true;
 		}
 	}
@@ -690,7 +764,7 @@ void BaseListselect::remove(const char* const str) {
 
 Recti BaseListselect::get_highlight_rect(const std::string& text, int x, int y) {
 
-	if (linked_dropdown == nullptr) {
+	if (linked_dropdown_ == nullptr) {
 		return Recti();
 	}
 
@@ -698,7 +772,7 @@ Recti BaseListselect::get_highlight_rect(const std::string& text, int x, int y) 
 	// UI::g_fh::render ignores spaces at the beginning and end of a string.
 	replace_all(text2, " ", "_");
 
-	std::string filter = linked_dropdown->get_filter_text();
+	std::string filter = linked_dropdown_->get_filter_text();
 	replace_all(filter, " ", "_");
 
 	std::size_t start = to_lower(text2).find(filter);

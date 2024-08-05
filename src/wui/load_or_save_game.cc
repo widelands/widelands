@@ -21,6 +21,7 @@
 #include <memory>
 
 #include "build_info.h"
+#include "graphic/mouse_cursor.h"
 #include "logic/filesystem_constants.h"
 #include "ui_basic/messagebox.h"
 
@@ -60,6 +61,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
      curdir_(basedir_),
      game_(g) {
 
+	g_mouse_cursor->change_wait(true);
+
 	switch (filetype_) {
 	case FileType::kReplay:
 		table_ = new SavegameTableReplay(table_box_, style, localize_autosave);
@@ -83,6 +86,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 		savegame_deleter_.reset(new SavegameDeleter(parent, ws));
 		savegame_loader_.reset(new EverythingLoader(g));
 		break;
+	default:
+		NEVER_HERE();
 	}
 
 	table_->set_column_compare(

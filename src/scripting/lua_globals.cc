@@ -32,8 +32,11 @@
 #include "logic/addons.h"
 #include "logic/game_data_error.h"
 #include "scripting/lua_interface.h"
+#include "scripting/lua_map.h"
 #include "scripting/lua_table.h"
 #include "scripting/report_error.h"
+#include "sound/note_sound.h"
+#include "sound/sound_handler.h"
 
 namespace LuaGlobals {
 
@@ -152,8 +155,8 @@ static std::map<const lua_State*, std::vector<TextdomainInfo>> textdomains;
       :returns: :const:`nil`
 */
 static int L_push_textdomain(lua_State* L) {
-	textdomains[L].push_back(
-	   std::make_pair(luaL_checkstring(L, 1), lua_gettop(L) > 1 && luaL_checkboolean(L, 2)));
+	textdomains[L].emplace_back(
+	   luaL_checkstring(L, 1), lua_gettop(L) > 1 && luaL_checkboolean(L, 2));
 	return 0;
 }
 
@@ -190,7 +193,7 @@ void read_textdomain_stack(FileRead& fr, const lua_State* L) {
 			for (size_t i = fr.unsigned_32(); i > 0u; --i) {
 				const std::string str = fr.string();
 				const bool a = fr.unsigned_8() != 0u;
-				textdomains[L].push_back(std::make_pair(str, a));
+				textdomains[L].emplace_back(str, a);
 			}
 		} else {
 			throw Widelands::UnhandledVersionError(
@@ -422,6 +425,62 @@ static int L_set_textdomain(lua_State*) {
 	throw LuaError("set_textdomain() is no longer supported");
 }
 
+/* RST
+.. function:: play_sound(file[, priority = 100, allow_multiple = true, field = nil])
+
+   .. versionadded:: 1.3
+
+   Play a sound effect.
+
+   See :ref:`the playsound program <map_object_programs_playsound>` for information
+   on how the file has to be provided and the meaning of the optional arguments.
+   Only ``.ogg`` files are supported.
+
+   If a field is provided, the sound is played in stereo,
+   and only if the player can hear sounds on the given field.
+
+   The volume of the sound and whether the sound will be played at all are determined
+   by the user's settings for ambient sounds.
+
+   :arg file: The path and basename of the sound effect to play
+      (without the .ogg filename extension and the optional ``_??`` numbering).
+   :type file: :class:`string`
+   :arg priority: The priority of the sound in percent.
+   :type priority: :class:`number`
+   :arg allow_multiple: Whether the sound may be played
+      even when another instance of it is already playing.
+   :type allow_multiple: :class:`boolean`
+   :arg field: The map position of the sound, if any.
+   :type field: :class:`wl.map.Field`
+*/
+static int L_play_sound(lua_State* L) {
+	const int nargs = lua_gettop(L);
+	if (nargs < 1 || nargs > 4) {
+		report_error(L, "Wrong number of arguments");
+	}
+
+	const FxId fx = SoundHandler::register_fx(SoundType::kAmbient, luaL_checkstring(L, 1));
+
+	const int32_t priority =
+	   nargs < 2 ? kFxMaximumPriority : static_cast<int32_t>(luaL_checknumber(L, 2) * 100);
+	if (priority < kFxPriorityLowest || priority > kFxMaximumPriority) {
+		report_error(L, "Priority %f%% is out of bounds %f..%f", priority / 100.0,
+		             kFxPriorityLowest / 100.0, kFxMaximumPriority / 100.0);
+	}
+
+	const bool allow_multiple = nargs < 3 || luaL_checkboolean(L, 3);
+
+	if (nargs < 4 || lua_isnil(L, 4)) {
+		g_sh->play_fx(SoundType::kAmbient, fx, priority, allow_multiple);
+	} else {
+		LuaMaps::LuaField* coords = *get_user_class<LuaMaps::LuaField>(L, 4);
+		Notifications::publish(
+		   NoteSound(SoundType::kAmbient, fx, coords->coords(), priority, allow_multiple));
+	}
+
+	return 0;
+}
+
 const static struct luaL_Reg globals[] = {{"_", &L__},
                                           {"get_build_id", &L_get_build_id},
                                           {"include", &L_include},
@@ -434,6 +493,7 @@ const static struct luaL_Reg globals[] = {{"_", &L__},
                                           {"push_textdomain", &L_push_textdomain},
                                           {"pop_textdomain", &L_pop_textdomain},
                                           {"ticks", &L_ticks},
+                                          {"play_sound", &L_play_sound},
                                           {nullptr, nullptr}};
 
 void luaopen_globals(lua_State* L) {

@@ -21,6 +21,7 @@
 
 #include <atomic>
 #include <deque>
+#include <functional>
 #include <list>
 #include <memory>
 #include <set>
@@ -93,6 +94,8 @@ public:
 		pf_snap_target = 1 << 14,
 		// Layouting hint that this panel is expected to grow to some very large sizes.
 		pf_unlimited_size = 1 << 15,
+		// Use the "wait" mouse cursor when this panel is active.
+		pf_unresponsive = 1 << 16,
 	};
 
 	/** The Z ordering of overlapping panels; highest value is always on top. */
@@ -373,6 +376,10 @@ public:
 		return tooltip_;
 	}
 
+	void set_hyperlink_action(std::function<void(std::string)> fn) {
+		hyperlink_action_ = fn;
+	}
+
 	virtual void die();
 	static void register_click();
 
@@ -453,6 +460,20 @@ public:
 		NEVER_HERE();
 	}
 
+	struct ContextMenuEntry {
+		std::string descname;
+		std::string tooltip;
+		std::string shortcut;
+		const Image* icon;
+		bool enable;
+		std::function<void()> callback;
+	};
+	void show_context_menu(Vector2i pos, const std::vector<ContextMenuEntry>& entries);
+
+	virtual bool show_default_context_menu(Vector2i /* pos */) {
+		return false;
+	}
+
 protected:
 	// This panel will never receive keypresses (do_key), instead
 	// textinput will be passed on (do_textinput).
@@ -498,6 +519,7 @@ protected:
 	}
 
 	[[nodiscard]] virtual Panel* get_open_dropdown();
+	[[nodiscard]] Panel* find_context_menu();
 
 	[[nodiscard]] virtual bool is_focus_toplevel() const;
 
@@ -631,7 +653,11 @@ private:
 
 	static FxId click_fx_;
 
+	friend struct ContextMenu;
+	Panel* context_menu_{nullptr};
+
 	std::unique_ptr<Notifications::Subscriber<NoteHyperlink>> hyperlink_subscriber_;
+	std::function<void(std::string)> hyperlink_action_;
 
 	enum class LogicThreadState { kFree, kLocked, kEndingRequested, kEndingConfirmed };
 	std::atomic<LogicThreadState> logic_thread_locked_;

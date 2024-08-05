@@ -349,7 +349,7 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 		}
 
 		if (now - last_function_call > sleeptime) {
-			if (id_ != MutexLock::ID::kMutexInternal) {
+			if (is_initializer_thread() && id_ != MutexLock::ID::kMutexInternal) {
 				MutexLock guard(MutexLock::ID::kMutexInternal);
 				if (!stay_responsive_.empty()) {
 					stay_responsive_.back()();

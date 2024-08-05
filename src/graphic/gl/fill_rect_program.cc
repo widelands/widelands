@@ -74,6 +74,9 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 
 		case BlendMode::Default:
 			break;
+
+		default:
+			NEVER_HERE();
 		}
 
 		glUseProgram(gl_program_.object());
@@ -141,6 +144,9 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 
 		case BlendMode::Default:
 			break;
+
+		default:
+			NEVER_HERE();
 		}
 	}
 }

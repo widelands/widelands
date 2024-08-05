@@ -143,7 +143,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 							   "ware type '%s' was declared multiple times", ware_or_worker_name.c_str());
 						}
 					}
-					input_wares_.push_back(WareAmount(wareworker.second, amount));
+					input_wares_.emplace_back(wareworker.second, amount);
 				} break;
 				case WareWorker::wwWORKER: {
 					for (const auto& temp_inputs : input_workers()) {
@@ -152,8 +152,10 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 							                    ware_or_worker_name.c_str());
 						}
 					}
-					input_workers_.push_back(WareAmount(wareworker.second, amount));
+					input_workers_.emplace_back(wareworker.second, amount);
 				} break;
+				default:
+					NEVER_HERE();
 				}
 			} catch (const std::exception& e) {
 				throw GameDataError(
@@ -1170,6 +1172,8 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 	case ProgramResult::kNone:
 		failed_skipped_programs_.erase(program_name);
 		break;
+	default:
+		NEVER_HERE();
 	}
 
 	program_timer_ = true;

@@ -168,7 +168,7 @@ void MapPlayersMessagesPacket::write(FileSystem& fs, EditorGameBase& egbase, Map
 			s.set_string("icon", message.icon_filename());
 			s.set_int("sent", message.sent().get());
 			s.set_string("body", message.body());
-			if (Coords const c = message.position()) {
+			if (Coords const c = message.position(); c.valid()) {
 				set_coords("position", c, &s);
 			}
 			switch (message.status()) {
@@ -180,6 +180,8 @@ void MapPlayersMessagesPacket::write(FileSystem& fs, EditorGameBase& egbase, Map
 				break;
 			case Message::Status::kArchived:  //  The default status. Do not write.
 				break;
+			default:
+				NEVER_HERE();
 			}
 			if (message.serial() != 0u) {
 				const MapObject* mo = egbase.objects().get_object(message.serial());

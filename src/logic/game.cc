@@ -345,11 +345,11 @@ void Game::init_newgame(const GameSettings& settings) {
 		Notifications::publish(UI::NoteLoadingMessage(_("Initializing game…")));
 		if ((settings.flags & GameSettings::Flags::kPeaceful) != 0) {
 			for (uint32_t i = 1; i < settings.players.size(); ++i) {
-				if (Player* p1 = get_player(i)) {
+				if (Player* first = get_player(i); first != nullptr) {
 					for (uint32_t j = i + 1; j <= settings.players.size(); ++j) {
-						if (Player* p2 = get_player(j)) {
-							p1->set_attack_forbidden(j, true);
-							p2->set_attack_forbidden(i, true);
+						if (Player* second = get_player(j); second != nullptr) {
+							first->set_attack_forbidden(j, true);
+							second->set_attack_forbidden(i, true);
 						}
 					}
 				}
@@ -378,8 +378,8 @@ void Game::init_newgame(const GameSettings& settings) {
 			}
 		}
 
-		diplomacy_allowed_ &= ((settings.flags & GameSettings::Flags::kForbidDiplomacy) == 0);
-		naval_warfare_allowed_ &= ((settings.flags & GameSettings::Flags::kAllowNavalWarfare) != 0);
+		diplomacy_allowed_ = ((settings.flags & GameSettings::Flags::kForbidDiplomacy) == 0);
+		naval_warfare_allowed_ = ((settings.flags & GameSettings::Flags::kAllowNavalWarfare) != 0);
 		win_condition_duration_ = settings.win_condition_duration;
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		table->do_not_warn_about_unaccessed_keys();
@@ -617,7 +617,7 @@ bool Game::run(StartGameType const start_game_type,
 			training_wheels_wanted_ = false;
 #endif
 			iterate_players_existing_novar(p, nr_players, *this) {
-				if (!map().get_starting_pos(p)) {
+				if (!map().get_starting_pos(p).valid()) {
 					throw WLWarning(_("Missing starting position"),
 					                _("Widelands could not start the game, because player %u has "
 					                  "no starting position.\n"
@@ -729,7 +729,7 @@ bool Game::run(StartGameType const start_game_type,
 		;
 #endif
 
-	g_sh->change_music(Songset::kIngame, 1000);
+	g_sh->change_music(Songset::kIngame);
 
 	state_ = gs_running;
 
@@ -751,8 +751,6 @@ bool Game::run(StartGameType const start_game_type,
 	get_ibase()->run<UI::Panel::Returncodes>();
 
 	state_ = gs_ending;
-
-	g_sh->change_music(Songset::kMenu, 1000);
 
 	cleanup_objects();
 	delete_pending_player_commands();
@@ -865,7 +863,7 @@ void Game::cleanup_for_load() {
 
 	pending_diplomacy_actions_.clear();
 	diplomacy_allowed_ = true;
-	naval_warfare_allowed_ = true;
+	naval_warfare_allowed_ = false;
 
 	// Statistics
 	general_stats_.clear();
@@ -1312,6 +1310,9 @@ void Game::set_win_condition_displayname(const std::string& name) {
 int32_t Game::get_win_condition_duration() const {
 	return win_condition_duration_;
 }
+void Game::set_win_condition_duration(int32_t d) {
+	win_condition_duration_ = d;
+}
 
 /**
  * Sample global statistics for the game.
@@ -1421,6 +1422,8 @@ void Game::sample_statistics() {
 					wostock += economy.second->stock_ware_or_worker(worker_index);
 				}
 				break;
+			default:
+				NEVER_HERE();
 			}
 		}
 		nr_wares[p - 1] = wastock;

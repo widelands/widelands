@@ -63,6 +63,7 @@ else()
     SRCS
       main.cc
     DEPENDS
+      base
       base_exceptions
       base_time_string
       logic_filesystem_constants
@@ -127,6 +128,7 @@ wl_library(widelands_ball_of_mud
     editor
     graphic
     graphic_fonthandler
+    graphic_functions
     graphic_mouse_cursor
     graphic_text
     io_filesystem

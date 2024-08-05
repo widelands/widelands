@@ -347,6 +347,7 @@ public:
 	const std::string& get_win_condition_displayname() const;
 	void set_win_condition_displayname(const std::string& name);
 	int32_t get_win_condition_duration() const;
+	void set_win_condition_duration(int32_t);
 
 	bool is_replay() const {
 		return !replay_filename_.empty();
@@ -501,7 +502,7 @@ private:
 
 	std::list<PendingDiplomacyAction> pending_diplomacy_actions_;
 	bool diplomacy_allowed_{true};
-	bool naval_warfare_allowed_{true};
+	bool naval_warfare_allowed_{false};
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;

@@ -401,6 +401,9 @@ void DefaultAI::manage_ports() {
 			if (full && current_garrison < desired_garrison) {
 				change_value = 1;
 			}
+			break;
+		default:
+			NEVER_HERE();
 		}
 
 		// Check soldiers requirement of port and set garrison to desired value
@@ -533,7 +536,13 @@ bool DefaultAI::check_ships(const Time& gametime) {
 		// if ship is waiting for command
 		if (so.waiting_for_command_) {
 			if (so.ship->get_ship_type() == Widelands::ShipType::kTransport) {
-				expedition_management(so);
+				// so.waiting_for_command_ can still be true right after a warship is backfitted to
+				// transport.
+				if (so.ship->is_expedition_or_warship()) {
+					expedition_management(so);
+				} else {
+					so.waiting_for_command_ = false;
+				}
 			} else {
 				warship_management(so);
 			}
@@ -732,7 +741,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 	// if we have a port-space we can build a Port or continue exploring
 	// 1. examine to build a port (colony founding)
 	const Widelands::Coords portspace = so.ship->current_portspace();
-	if (static_cast<bool>(portspace)) {
+	if (portspace.valid()) {
 
 		// we score the place (value max == 8)
 		const uint8_t spot_score = spot_scoring(portspace) * 2;
