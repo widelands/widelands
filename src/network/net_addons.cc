@@ -599,7 +599,7 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 void NetAddons::download_map(const std::string& name, const std::string& save_as) {
 	check_string_validity(name);
 	init();
-	CrashGuard guard(*this);
+	CrashGuard guard(*this, false);
 
 	std::string send = kCmdDownload;
 	send += ' ';
