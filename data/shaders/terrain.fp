@@ -6,6 +6,7 @@ uniform vec2 u_texture_dimensions;
 varying float var_brightness;
 varying vec2 var_texture_position;
 varying vec2 var_texture_offset;
+varying vec4 var_heatmap_color;
 
 // TODO(sirver): This is a hack to make sure we are sampling inside of the
 // terrain texture. This is a common problem with OpenGL and texture atlases.
@@ -21,6 +22,12 @@ void main() {
 			vec2(MARGIN, MARGIN),
 			vec2(1. - MARGIN, 1. - MARGIN));
 	vec4 clr = texture2D(u_terrain_texture, var_texture_offset + u_texture_dimensions * texture_fract);
+
+	if (var_heatmap_color.a > 0) {
+		clr = mix(clr, var_heatmap_color, 0.9);
+	}
+
 	clr.rgb *= var_brightness;
+
 	gl_FragColor = clr;
 }
