@@ -134,6 +134,11 @@ If any of the above images or directories is missing, a fallback image will be u
     * **windows/corner_bottom_left.png**, **windows/corner_bottom_right.png**, **windows/corner_top_left.png**, and **windows/corner_top_right.png** are used as the window's border's corners.
     * **windows/corner_minimal_left.png** and **windows/corner_minimal_right.png** are used as the window's corners when the window is minimized.
 
+    The thicknesses of the borders are determined by the height of the upper and lower border images and the width of the left and right border images respectively.
+    The corner images are aligned to the corners of the resulting outer rectangle. Because of this, the corner images can be bigger than the respective borders
+    to create fixed transitions to the main border images, but should not be smaller, as that would create gaps in the drawn window borders.
+
+
 **images/**
     This directory may contain replacement images for any image file located under the data directory's ``images`` directory.
 
