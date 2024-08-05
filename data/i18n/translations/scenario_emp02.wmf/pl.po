@@ -3,7 +3,7 @@
 # 
 # Translators:
 # GunChleoc, 2014
-# Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2016-2017
 # Jakub Magnowski <qoiutek@gmail.com>, 2018
 # Niektóry <niektory@gmail.com>, 2020
 # Stanislaw Gackowski <soeb@soeb.eu>, 2009

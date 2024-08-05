@@ -1467,7 +1467,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Sawmill
             lore_author = pgettext("empire_building", "Motto of the Carpenters’ Guild"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Sawmill
-            purpose = pgettext("building", "Saws logs to produce planks.")
+            purpose = pgettext("building", "Saws logs to produce planks."),
+            -- TRANSLATORS: Performance helptext for an Empire production site: Sawmill
+            performance = pgettext("empire_building", "The sawmill needs %s on average to produce one plank."):bformat(format_seconds(40))
          }
       },
       {
@@ -1531,7 +1533,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Empire production site: Brewery
             purpose = pgettext("building", "Produces beer to keep the miners strong and happy."),
             -- TRANSLATORS: Performance helptext for an Empire production site: Brewery
-            performance = pgettext("empire_building", "The brewer needs %1% on average to brew a vat of beer."):bformat(format_minutes_seconds(1, 5))
+            performance = pgettext("empire_building", "The brewer needs %1% on average to brew a vat of beer."):bformat(format_minutes_seconds(1, 4))
          }
       },
       {
@@ -1634,7 +1636,9 @@ wl.Descriptions():new_tribe {
                "Imperial proverb meaning to judge whether they are good or bad"
             ),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Charcoal Kiln
-            purpose = pgettext("building", "Burns logs into charcoal.")
+            purpose = pgettext("building", "Burns logs into charcoal."),
+            -- TRANSLATORS: Performance helptext for an Empire production site: Charcoal Kiln
+            performance = pgettext("empire_building", "The charcoal kiln needs %s on average to produce one coal."):bformat(format_minutes_seconds(2, 4))
          }
       },
       {
@@ -1720,7 +1724,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Barracks
             lore_author = pgettext("empire_building", "Argument in the Senate for increasing recruitment"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Barracks
-            purpose = pgettext("empire_building", "Equips recruits and trains them as soldiers.")
+            purpose = pgettext("empire_building", "Equips recruits and trains them as soldiers."),
+            -- TRANSLATORS: Performance helptext for an Empire production site: Barracks
+            performance = pgettext("empire_building", "The barracks need %s on average to recruit one soldier."):bformat(format_seconds(30))
          }
       },
 
@@ -2311,6 +2317,12 @@ wl.Descriptions():new_tribe {
                pgettext("building", "Needs water nearby. Be aware ferries carry wares only, no workers."),
                -- TRANSLATORS: Note helptext for an Empire production site: Ferry Yard, part 2
                pgettext("building", "Roads and trees along the shoreline block access to water."),
+            },
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Ferry Yard, part 1
+               pgettext("empire_building", "This building can produce one ferry between %1$s and %2$s, depending on how far the shipwright has to walk."):bformat(format_seconds(37), format_seconds(59)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Ferry Yard, part 2
+               pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },
@@ -2338,6 +2350,12 @@ wl.Descriptions():new_tribe {
                pgettext("building", "Needs wide open water nearby."),
                -- TRANSLATORS: Note helptext for an Empire production site: Shipyard, part 2
                pgettext("building", "Roads and trees along the shoreline block access to water."),
+            },
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Shipyard, part 1
+               pgettext("empire_building", "This building can produce one ship between %1$s and %2$s, depending on how far the shipwright has to walk."):bformat(format_minutes_seconds(18, 3), format_minutes_seconds(24, 46)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Shipyard, part 2
+               pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },

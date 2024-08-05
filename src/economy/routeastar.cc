@@ -48,4 +48,23 @@ void BaseRouteAStar::routeto(RoutingNode& to, IRoute& route) {
 	}
 }
 
+RoutingNode& BaseRouteAStar::route_start(RoutingNode& to) {
+	if (to.cookie(type_).is_active()) {
+		throw wexception("BaseRouteAStar::routeto should not have an active cookie.");
+	}
+	assert(mpf_cycle == (type_ == wwWARE ? to.mpf_cycle_ware : to.mpf_cycle_worker));
+
+	RoutingNode* node = &to;
+	if (type_ == wwWARE) {
+		while (node->mpf_backlink_ware != nullptr) {
+			node = node->mpf_backlink_ware;
+		}
+	} else {
+		while (node->mpf_backlink_worker != nullptr) {
+			node = node->mpf_backlink_worker;
+		}
+	}
+	return *node;
+}
+
 }  // namespace Widelands

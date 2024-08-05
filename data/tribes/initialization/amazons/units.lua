@@ -1446,7 +1446,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Furnace
             purpose = pgettext("amazons_building", "Smelts gold dust into gold ingots using charcoal."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Furnace
-            performance = pgettext("amazons_building", "The furnace can produce one gold ingot in %s on average if the supply is steady."):bformat(format_minutes_seconds(1, 12))
+            performance = pgettext("amazons_building", "The furnace can produce one gold ingot in %s on average if the supply is steady."):bformat(format_minutes_seconds(1, 16))
          }
       },
       {
@@ -1459,7 +1459,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree Plantation
             purpose = pgettext("amazons_building", "Plants rare trees which are needed by the Amazons, like balsa, rubber and ironwood."),
             -- TRANSLATORS: Note helptext for an Amazon production site: Rare Tree Plantation
-            note = pgettext("amazons_building", "Rare trees are planted according to the economy requirements. Keep roads connected to rare tree plantations so they adhere to economy targets.")
+            note = pgettext("amazons_building", "Rare trees are planted according to the economy requirements. Keep roads connected to rare tree plantations so they adhere to economy targets."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Plantation, part 1
+               pgettext("amazons_building", "The jungle master plants one tree between %1$s and %2$s, depending on how far she has to walk."):bformat(format_seconds(24), format_seconds(46)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Plantation, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1490,14 +1496,16 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Charcoal Kiln
             purpose = pgettext("amazons_building", "Burns logs into charcoal."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Charcoal Kiln
-            performance = pgettext("amazons_building", "The charcoal kiln needs %s on average to produce one lump of coal."):bformat(format_minutes_seconds(2,1))
+            performance = pgettext("amazons_building", "The charcoal kiln needs %s on average to produce one lump of coal."):bformat(format_minutes_seconds(2, 4))
          }
       },
       {
          name = "amazons_cassava_root_cooker",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Cassava Root Cooker
-            purpose = pgettext("amazons_building", "Bakes bread from cassava root.")
+            purpose = pgettext("amazons_building", "Bakes bread from cassava root."),
+            -- TRANSLATORS: Performance helptext for an Amazon production site: Cassava Root Cooker
+            performance = pgettext("amazons_building", "If all needed wares are delivered in time, this building can produce one bread in %s on average."):bformat(format_seconds(37))
          }
       },
       {
@@ -1506,7 +1514,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Chocolate Brewery
             purpose = pgettext("amazons_building", "Brews chocolate for soldier training."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Chocolate Brewery
-            performance = pgettext("amazons_building", "The chocolate brewery needs %s on average to brew one mug of chocolate."):bformat(format_minutes(1))
+            performance = pgettext("amazons_building", "The chocolate brewery needs %s on average to brew one mug of chocolate."):bformat(format_minutes_seconds(1, 4))
          }
       },
       {
@@ -1515,7 +1523,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Food Preserver
             purpose = pgettext("amazons_building", "Prepares rations to feed the scouts and the workers digging for gold dust and granite."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Food Preserver
-            performance = pgettext("amazons_building", "The food preserver can produce one ration in %s on average if the supply is steady."):bformat(format_seconds(17))
+            performance = pgettext("amazons_building", "The food preserver can produce one ration in %s on average if the supply is steady."):bformat(format_seconds(20))
          }
       },
       {
@@ -1682,6 +1690,12 @@ wl.Descriptions():new_tribe {
                pgettext("amazons_building", "Needs water nearby. Be aware ferries carry wares only, no workers."),
                -- TRANSLATORS: Note helptext for an Amazon production site: Ferry Yard, part 2
                pgettext("building", "Roads and trees along the shoreline block access to water."),
+            },
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Ferry Yard, part 1
+               pgettext("amazons_building", "This building can produce one ferry between %1$s and %2$s, depending on how far the shipwright has to walk."):bformat(format_seconds(37), format_seconds(59)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Ferry Yard, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },
@@ -1695,6 +1709,12 @@ wl.Descriptions():new_tribe {
                pgettext("building", "Needs wide open water nearby."),
                -- TRANSLATORS: Note helptext for an Amazon production site: Shipyard, part 2
                pgettext("building", "Roads and trees along the shoreline block access to water."),
+            },
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Shipyard, part 1
+               pgettext("amazons_building", "This building can produce one ship between %1$s and %2$s, depending on how far the shipwright has to walk."):bformat(format_minutes_seconds(18, 3), format_minutes_seconds(24, 46)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Shipyard, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },

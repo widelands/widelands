@@ -59,6 +59,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
          descname = pgettext("amazons_building", "recruiting soldier"),
          actions = {
+            -- time total: 15 + 15 = 30 sec
             "return=skipped unless economy needs amazons_soldier",
             "consume=spear_wooden tunic amazons_bread fish,meat amazons_carrier",
             "sleep=duration:15s",

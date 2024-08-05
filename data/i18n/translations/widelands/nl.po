@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-06-29 02:37+0000\n"
+"POT-Creation-Date: 2024-08-01 02:59+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Alex Rijckaert, 2023-2024\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -3743,6 +3743,16 @@ msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
 msgstr "De verbinding met de metaservers is verbroken, omdat je een PING-verzoek niet op tijd hebt beantwoord."
+
+#: ../../../../src/network/net_addons.cc:844
+#, c-format
+msgid "Sending metadata for %s"
+msgstr ""
+
+#: ../../../../src/network/net_addons.cc:889
+#, c-format
+msgid "Uploading %s"
+msgstr ""
 
 #: ../../../../src/network/network_gaming_messages.cc:30
 msgid "Client has left the game."

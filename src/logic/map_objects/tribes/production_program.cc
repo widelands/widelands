@@ -444,7 +444,8 @@ ProductionProgram::ActReturn::Negation::description_negation(const Descriptions&
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWare::evaluate(const ProductionSite& ps) const {
-	return ps.infinite_production() || ps.get_economy(wwWARE)->needs_ware_or_worker(ware_type);
+	return ps.infinite_production() ||
+	       ps.get_economy(wwWARE)->needs_ware_or_worker(ware_type, &ps.base_flag());
 }
 std::string ProductionProgram::ActReturn::EconomyNeedsWare::description(
    const Descriptions& descriptions) const {
@@ -464,7 +465,8 @@ std::string ProductionProgram::ActReturn::EconomyNeedsWare::description_negation
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWorker::evaluate(const ProductionSite& ps) const {
-	return ps.infinite_production() || ps.get_economy(wwWORKER)->needs_ware_or_worker(worker_type);
+	return ps.infinite_production() ||
+	       ps.get_economy(wwWORKER)->needs_ware_or_worker(worker_type, &ps.base_flag());
 }
 std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description(
    const Descriptions& descriptions) const {

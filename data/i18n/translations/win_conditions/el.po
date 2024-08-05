@@ -27,7 +27,7 @@ msgstr "Κομψοτεχνήματα"
 msgid ""
 "Search for ancient artifacts. Once all of them are found, the team who owns "
 "most of them will win the game."
-msgstr "Ψάξτε για αρχαία κομψοτεχνήματα. Όταν βρεθούν όλα, η ομάδα που κατέχει τα περισσότερα θα νικήσει το παιχνίδι."
+msgstr "Ψάξε για αρχαία κομψοτεχνήματα. Όταν βρεθούν όλα, η ομάδα που κατέχει τα περισσότερα θα νικήσει το παιχνίδι."
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:21
 msgid "Artifacts owned"
@@ -43,7 +43,7 @@ msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
 "bug report on %s and specify your Widelands version and the map you tried to"
 " load."
-msgstr "Δεν υπάρχουν κομψοτεχνήματα σε αυτόν τον χάρτη. Αυτό δεν έπρεπε να συμβεί. Παρακαλώ καταχωρείστε μια αναφορά σφάλματος στο %s και αναφέρετε την έκδοση του Widelands σας και τον χάρτη που προσπαθήσατε να φορτώσετε."
+msgstr "Δεν υπάρχουν κομψοτεχνήματα σε αυτόν τον χάρτη. Αυτό δεν έπρεπε να συμβεί. Παρακαλώ καταχωρήστε μια αναφορά σφάλματος στο %s και αναφέρετε την έκδοση του Widelands και τον χάρτη που προσπαθήσατε να φορτώσετε."
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
@@ -66,11 +66,11 @@ msgstr "Χάθηκε Κομψοτέχνημα"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:89
 msgid "One of your team’s artifacts was stolen by an enemy."
-msgstr "Ένα από τα κομψοτεχνήματα της ομάδας σας κλάπηκε από κάποιον εχθρό."
+msgstr "Ένα από τα κομψοτεχνήματα της ομάδας σου κλάπηκε από κάποιον εχθρό."
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:90
 msgid "One of your artifacts was stolen by an enemy."
-msgstr "Ένα από τα κομψοτεχνήματά σου κλάπηκε από έναν εχθρό."
+msgstr "Ένα από τα κομψοτεχνήματά σου κλάπηκε από κάποιον εχθρό."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../../../data/scripting/win_conditions/artifacts.lua:94
@@ -79,7 +79,7 @@ msgstr "Κατακτήθηκε Κομψοτέχνημα"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:95
 msgid "Your team stole an artifact from an enemy."
-msgstr "Η ομάδα σας έκλεψε ένα κομψοτέχνημα από κάποιον εχθρό."
+msgstr "Η ομάδα σου έκλεψε ένα κομψοτέχνημα από κάποιον εχθρό."
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:96
 msgid "You stole an artifact from an enemy."
@@ -100,7 +100,7 @@ msgstr[1] "%i κομψοτεχνήματα"
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
 #: ../../../../data/scripting/win_conditions/artifacts.lua:184
 msgid "%1$s owns %2$s."
-msgstr "Ο %1$s κατέχει %2$s."
+msgstr "Ο/Η %1$s κατέχει %2$s."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
@@ -117,7 +117,7 @@ msgstr "Συλλέκτες"
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest score after %s wins the game."
-msgstr "Λαμβάνεις πόντους για πολύτιμα υλικά στις αποθήκες σου. Ο παίκτης με την υψηλότερη βαθμολογία μετά από %s κερδίζει το παιχνίδι."
+msgstr "Λαμβάνεις πόντους για πολύτιμα εμπορεύματα που υπάρχουνστις αποθήκες σου. Ο παίκτης με την υψηλότερη βαθμολογία μετά από %s κερδίζει το παιχνίδι."
 
 #. TRANSLATORS: Will be inserted into "The player with the highest score after
 #. %s wins the game."
