@@ -279,11 +279,12 @@ void WorkerProgram::parse_breed(Worker::Action* act, const std::vector<std::stri
 findobject
 ^^^^^^^^^^
 .. function:: findobject=radius:\<distance\> [type:\<map_object_type\>] [attrib:\<attribute\>]
-   [no_notify]
+   [name:\<name\>] [no_notify]
 
    :arg int radius: Search for an object within the given radius around the worker.
    :arg string type: The type of map object to search for. Defaults to ``immovable``.
    :arg string attrib: The attribute that the map object should possess.
+   :arg string name: The name of the map.
    :arg empty no_notify: Do not send a message to the player if this step fails.
 
    Find and select an object based on a number of predicates, which can be specified
@@ -316,6 +317,7 @@ findobject
  * iparam2 = attribute predicate (if >= 0)
  * iparam3 = send message on failure (if != 0)
  * sparam1 = type
+ * sparam2 = name
  */
 void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std::string>& cmd) {
 	act->function = &Worker::run_findobject;
@@ -323,6 +325,7 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 	act->iparam2 = -1;
 	act->iparam3 = 1;
 	act->sparam1 = "immovable";
+	act->sparam2 = "";
 
 	// Parse predicates
 	for (const std::string& argument : cmd) {
@@ -341,6 +344,8 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 			act->iparam2 = MapObjectDescr::get_attribute_id(item.second);
 		} else if (item.first == "type") {
 			act->sparam1 = item.second;
+		} else if (item.first == "name") {
+			act->sparam2 = item.second;
 		} else {
 			throw GameDataError("Unknown findobject predicate %s", argument.c_str());
 		}
