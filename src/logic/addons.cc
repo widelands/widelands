@@ -45,31 +45,36 @@ const std::unordered_map<std::string, std::string> kDifficultyIcons = {
 
 const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
    {AddOnCategory::kNone,
-    AddOnCategoryInfo{"", []() { return _("Error"); }, "images/ui_basic/stop.png", false}},
+    AddOnCategoryInfo{"", []() { return _("Error"); }, "images/ui_basic/stop.png", false, true}},
    {AddOnCategory::kTribes,
     AddOnCategoryInfo{"tribes", []() { return _("Tribes"); },
-                      "images/wui/stats/menu_tab_wares_warehouse.png", true}},
-   {AddOnCategory::kWorld, AddOnCategoryInfo{"world", []() { return _("World"); },
-                                             "images/wui/menus/toggle_immovables.png", true}},
+                      "images/wui/stats/menu_tab_wares_warehouse.png", true, false}},
+   {AddOnCategory::kWorld,
+    AddOnCategoryInfo{"world", []() { return _("World"); },
+                      "images/wui/menus/toggle_immovables.png", true, false}},
    {AddOnCategory::kScript, AddOnCategoryInfo{"script", []() { return _("Script"); },
-                                              "images/logos/WL-Editor-32.png", true}},
+                                              "images/logos/WL-Editor-32.png", true, false}},
+   {AddOnCategory::kSingleMap,
+    AddOnCategoryInfo{
+       "map", []() { return _("Map"); }, "images/wui/menus/toggle_minimap.png", true, true}},
    {AddOnCategory::kMaps, AddOnCategoryInfo{"maps", []() { return _("Map Set"); },
-                                            "images/wui/menus/toggle_minimap.png", true}},
+                                            "images/wui/menus/toggle_minimap.png", true, false}},
    {AddOnCategory::kMapGenerator,
     AddOnCategoryInfo{"map_generator", []() { return _("Map Generator"); },
-                      "images/wui/editor/menus/new_random_map.png", false}},
-   {AddOnCategory::kCampaign, AddOnCategoryInfo{"campaign", []() { return _("Campaign"); },
-                                                "images/wui/messages/messages_warfare.png", false}},
+                      "images/wui/editor/menus/new_random_map.png", false, false}},
+   {AddOnCategory::kCampaign,
+    AddOnCategoryInfo{"campaign", []() { return _("Campaign"); },
+                      "images/wui/messages/messages_warfare.png", false, false}},
    {AddOnCategory::kWinCondition,
     AddOnCategoryInfo{"win_condition", []() { return _("Win Condition"); },
-                      "images/wui/menus/objectives.png", true}},
+                      "images/wui/menus/objectives.png", true, false}},
    {AddOnCategory::kStartingCondition,
     AddOnCategoryInfo{"starting_condition", []() { return _("Starting Condition"); },
-                      "tribes/buildings/warehouses/atlanteans/headquarters/menu.png", true}},
+                      "tribes/buildings/warehouses/atlanteans/headquarters/menu.png", true, false}},
    {AddOnCategory::kTheme, AddOnCategoryInfo{"theme", []() { return _("Theme"); },
-                                             "images/wui/menus/main_menu.png", false}},
-   {AddOnCategory::kUIPlugin,
-    AddOnCategoryInfo{"ui_plugin", []() { return _("UI Plugin"); }, "images/plugin.png", false}}};
+                                             "images/wui/menus/main_menu.png", false, false}},
+   {AddOnCategory::kUIPlugin, AddOnCategoryInfo{"ui_plugin", []() { return _("UI Plugin"); },
+                                                "images/plugin.png", false, false}}};
 
 std::vector<AddOnState> g_addons;
 
@@ -175,6 +180,7 @@ bool order_matters(AddOnCategory base, AddOnCategory dependency) {
 
 bool require_enabled(AddOnCategory base, AddOnCategory dependency) {
 	switch (base) {
+	case AddOnCategory::kSingleMap:
 	case AddOnCategory::kMaps:
 	case AddOnCategory::kCampaign:
 		// Maps enable their own world add-ons automatically
