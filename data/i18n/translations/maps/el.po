@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
+# Alexandros Koutroulis, 2024
 # erimitis, 2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 msgid ""
@@ -10,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: erimitis, 2018\n"
+"Last-Translator: Alexandros Koutroulis, 2024\n"
 "Language-Team: Greek (http://app.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,13 +31,13 @@ msgstr "Αφού αποβιβάστηκαν σε ένα μυστήριο νησ�
 
 #: ../../../../data/campaigns/atl02.wmf/elemental:8
 msgid "Struggling For a New Home Again"
-msgstr ""
+msgstr "Παλεύοντας Ξανά για ένα Νέο Σπίτι"
 
 #: ../../../../data/campaigns/atl02.wmf/elemental:10
 msgid ""
 "After the quick escape from the drowning island, the Atlanteans around "
 "Jundlina are faced with new challenges."
-msgstr ""
+msgstr "Μετά την γρήγορη απόδραση από το νησί που καταποντιζόταν, οι Ατλαντίδες γύρω από την Τζαντλίνα έρχονται αντιμέτωποι με νέες προκλήσεις."
 
 #: ../../../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
@@ -61,32 +62,32 @@ msgstr "Αυτό το παιχνίδι εκμάθησης εξηγεί τον χ
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:14
 msgid "Easy."
-msgstr ""
+msgstr "Εύκολο."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:20
 msgid "Medium."
-msgstr ""
+msgstr "Μεσαίο."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:25
 msgid "Hard."
-msgstr ""
+msgstr "Δύσκολο."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:30
 msgid "Challenging."
-msgstr ""
+msgstr "Απαιτητικό."
 
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "Η Δεύτερη Αυτοκρατορία"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:49
 msgid "Introduces the Barbarians."
-msgstr ""
+msgstr "Εισαγωγή στους Βάρβαρους."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:52

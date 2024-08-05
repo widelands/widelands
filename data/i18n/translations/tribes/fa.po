@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2024-08-03 02:40+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: RadinShirzad, 2024\n"
 "Language-Team: Persian (http://app.transifex.com/widelands/widelands/language/fa/)\n"
@@ -1162,7 +1162,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:30
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:47
 #: ../../../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:52
-#: ../../../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:67
+#: ../../../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:73
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:60
 #: ../../../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:38
@@ -1174,7 +1174,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:57
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:57
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:69
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:84
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:90
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:52
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:60
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/spiderfarm/init.lua:50
@@ -1192,7 +1192,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:85
 #: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:40
 #: ../../../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:66
-#: ../../../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:81
+#: ../../../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:87
 #: ../../../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/barbarians/well/init.lua:52
@@ -1203,7 +1203,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:74
 #: ../../../../data/tribes/buildings/productionsites/empire/quarry/init.lua:39
 #: ../../../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:72
-#: ../../../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:87
+#: ../../../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:93
 #: ../../../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:64
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:49
@@ -1226,7 +1226,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:53
 #: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:64
 #: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:61
-#: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:76
+#: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:82
 #: ../../../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:67
 #: ../../../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:53
 #: ../../../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:82
@@ -1636,13 +1636,13 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
-#: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:66
+#: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:69
 msgid "planting rubber tree"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
-#: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:76
+#: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:82
 msgid "planting ironwood tree"
 msgstr ""
 
@@ -1685,11 +1685,11 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because
 #. ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:60
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:77
-#: ../../../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:74
-#: ../../../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:80
-#: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:69
+#: ../../../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:66
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:83
+#: ../../../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:80
+#: ../../../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:86
+#: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:75
 msgid "constructing a ship"
 msgstr ""
 
@@ -3568,7 +3568,7 @@ msgid "Aqua Farm"
 msgstr ""
 
 #: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:94
-#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:94
+#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:102
 msgid "No Ponds"
 msgstr ""
 
@@ -3720,20 +3720,20 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a charcoal stack
 #. because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:65
+#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:67
 msgid "making a charcoal stack"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:76
+#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:81
 msgid "collecting coal"
 msgstr ""
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:95
+#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:103
 msgid "Out of Clay Ponds"
 msgstr ""
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:96
+#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:104
 msgctxt "frisians_building"
 msgid ""
 "The charcoal burner working at this charcoal burner’s house can’t find any "
