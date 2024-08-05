@@ -174,6 +174,9 @@ bool Flag::get_passable() const {
 Flag& Flag::base_flag() {
 	return *this;
 }
+const Flag& Flag::base_flag() const {
+	return *this;
+}
 
 /**
  * Call this only from Economy code!
@@ -1016,6 +1019,20 @@ void Flag::log_general_info(const Widelands::EditorGameBase& egbase) const {
 	molog(egbase.get_gametime(), "Flag at %i,%i\n", position_.x, position_.y);
 
 	Widelands::PlayerImmovable::log_general_info(egbase);
+
+	if (district_center_[wwWARE] == nullptr) {
+		molog(egbase.get_gametime(), "No ware district\n");
+	} else {
+		molog(egbase.get_gametime(), "Ware district %u (%s)\n", district_center_[wwWARE]->serial(),
+		      district_center_[wwWARE]->get_warehouse_name().c_str());
+	}
+	if (district_center_[wwWORKER] == nullptr) {
+		molog(egbase.get_gametime(), "No worker district\n");
+	} else {
+		molog(egbase.get_gametime(), "Worker district %u (%s)\n",
+		      district_center_[wwWORKER]->serial(),
+		      district_center_[wwWORKER]->get_warehouse_name().c_str());
+	}
 
 	if (ware_filled_ != 0) {
 		molog(egbase.get_gametime(), "Wares at flag:\n");
