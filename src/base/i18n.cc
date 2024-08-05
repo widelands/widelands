@@ -20,7 +20,7 @@
 
 #include "base/i18n.h"
 
-#ifdef __FreeBSD__
+#if defined(__FreeBSD__) || defined(__NetBSD__)
 #include <clocale>
 #endif
 
