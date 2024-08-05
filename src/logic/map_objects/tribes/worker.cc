@@ -314,7 +314,7 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
  * type:\<what\>         (optional, defaults to immovable)
  * Find only objects of this type
  *
-  * name:\<name\>         (optional)
+ * name:\<name\>         (optional)
  * Find only objects of this name
  *
  * iparam1 = radius predicate
