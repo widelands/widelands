@@ -25,9 +25,30 @@
 
 namespace AddOns {
 
+struct OperationCancelledByUserException : std::exception {
+	[[nodiscard]] const char* what() const noexcept override {
+		return "Operation cancelled by user";
+	}
+};
+
+/**
+ * A function that is called periodically during operations that may hang.
+ * First argument is the elapsed time in milliseconds.
+ * Second argument is whether the hang is over now.
+ */
+using HangupFn = std::function<void(uint32_t, bool)>;
+
+struct AsyncIOWrapper;
+void cleanup_abandoned_hung_threads();
+
 struct NetAddons {
 	NetAddons() = default;
 	~NetAddons();
+
+	void set_hangup_fn(HangupFn fn) {
+		hangup_fn_ = fn;
+	}
+	void interrupt();
 
 	[[nodiscard]] bool is_admin() const {
 		return is_admin_;
@@ -103,6 +124,8 @@ private:
 	                            std::map<std::string, std::set<std::string>>& result);
 	void append_multiline_message(std::string& send, const std::string& message);
 
+	HangupFn hangup_fn_{nullptr};
+	AsyncIOWrapper* async_io_wrapper_{nullptr};
 	std::string last_username_, last_password_;
 	bool initialized_{false};
 	bool network_active_{false};
