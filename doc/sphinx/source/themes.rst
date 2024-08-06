@@ -137,10 +137,16 @@ If any of the above images or directories is missing, a fallback image will be u
     * **windows/corner_bottom_left.png**, **windows/corner_bottom_right.png**, **windows/corner_top_left.png**, and **windows/corner_top_right.png** are used as the window's border's corners.
     * **windows/corner_minimal_left.png** and **windows/corner_minimal_right.png** are used as the window's corners when the window is minimized.
 
+    A window consists of a main panel surrounded on all four sides by a border, with corners where borders meet.
+    The main panel is tiled with the ``background.png`` image.
+    Each border is tiled with the respective ``{top,left,right,bottom}.png`` image.
+    The four corner images ``corner_{top,bottom}_{left,right}.png`` are drawn only once each.
+
+    A minimized window consists only of the two corners ``windows/corner_minimal_{left,right}.png`` with the ``top.png`` border image tiled between them to fit the width.
+
     The thicknesses of the borders are determined by the height of the upper and lower border images and the width of the left and right border images respectively.
     The corner images are aligned to the corners of the resulting outer rectangle. Because of this, the corner images can be bigger than the respective borders
     to create fixed transitions to the main border images, but should not be smaller, as that would create gaps in the drawn window borders.
-
 
 **images/**
     This directory may contain replacement images for any image file located under the data directory's ``images`` directory.

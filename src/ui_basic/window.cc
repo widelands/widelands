@@ -544,11 +544,11 @@ void Window::draw_border(RenderTarget& dst) {
 		text->draw(dst, pos, UI::Align::kCenter);
 	}
 
-	// draw them again so they aren't hidden by the border
+	// Draw the buttons here explicitly, since they're located outside the normal render clip.
 	for (Button* b : {button_close_, button_pin_, button_minimize_}) {
-		b->set_pos(Vector2i(b->get_x() + get_tborder(), b->get_y() + get_tborder()));
+		b->set_pos(Vector2i(b->get_x() + get_lborder(), b->get_y() + get_tborder()));
 		b->do_draw(dst);
-		b->set_pos(Vector2i(b->get_x() - get_tborder(), b->get_y() - get_tborder()));
+		b->set_pos(Vector2i(b->get_x() - get_lborder(), b->get_y() - get_tborder()));
 	}
 }
 
