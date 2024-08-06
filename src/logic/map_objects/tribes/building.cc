@@ -361,6 +361,9 @@ bool Building::get_passable() const {
 Flag& Building::base_flag() {
 	return *flag_;
 }
+const Flag& Building::base_flag() const {
+	return *flag_;
+}
 
 /**
  * \return a bitfield of commands the owning player can issue for this building.
@@ -558,6 +561,8 @@ std::string Building::info_string(const InfoStringFormat& format) {
 			result = productionsite->production_result();
 		}
 		break;
+	default:
+		NEVER_HERE();
 	}
 	return result;
 }

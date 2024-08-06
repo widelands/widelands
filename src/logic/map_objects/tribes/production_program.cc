@@ -186,8 +186,9 @@ ProductionProgram::ActReturn::Condition* create_economy_condition(
 			descr.worker_demand_checks()->insert(wareworker.second);
 			return new ProductionProgram::ActReturn::EconomyNeedsWorker(wareworker.second);
 		}
+		default:
+			NEVER_HERE();
 		}
-		NEVER_HERE();
 	} catch (const GameDataError& e) {
 		throw GameDataError("economy condition: %s", e.what());
 	}
@@ -443,7 +444,8 @@ ProductionProgram::ActReturn::Negation::description_negation(const Descriptions&
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWare::evaluate(const ProductionSite& ps) const {
-	return ps.infinite_production() || ps.get_economy(wwWARE)->needs_ware_or_worker(ware_type);
+	return ps.infinite_production() ||
+	       ps.get_economy(wwWARE)->needs_ware_or_worker(ware_type, &ps.base_flag());
 }
 std::string ProductionProgram::ActReturn::EconomyNeedsWare::description(
    const Descriptions& descriptions) const {
@@ -463,7 +465,8 @@ std::string ProductionProgram::ActReturn::EconomyNeedsWare::description_negation
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWorker::evaluate(const ProductionSite& ps) const {
-	return ps.infinite_production() || ps.get_economy(wwWORKER)->needs_ware_or_worker(worker_type);
+	return ps.infinite_production() ||
+	       ps.get_economy(wwWORKER)->needs_ware_or_worker(worker_type, &ps.base_flag());
 }
 std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description(
    const Descriptions& descriptions) const {
@@ -772,16 +775,15 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 			   /** TRANSLATORS: "Completed working because the economy needs the ware '%s'" */
 			   _("Completed %1$s because %2$s"), ps.top_state().program->descname(), condition_string);
 		} break;
-		case ProgramResult::kSkipped: {
+		case ProgramResult::kSkipped:
+		case ProgramResult::kNone: {
+			// TODO(GunChleoc): kNone same as kSkipped - is this on purpose?
 			result_string = format(
 			   /** TRANSLATORS: "Skipped working because the economy needs the ware '%s'" */
 			   _("Skipped %1$s because %2$s"), ps.top_state().program->descname(), condition_string);
 		} break;
-		case ProgramResult::kNone: {
-			// TODO(GunChleoc): Same as skipped - is this on purpose?
-			result_string = format(
-			   _("Skipped %1$s because %2$s"), ps.top_state().program->descname(), condition_string);
-		}
+		default:
+			NEVER_HERE();
 		}
 		if (ps.production_result() != ps.descr().out_of_resource_heading() ||
 		    ps.descr().out_of_resource_heading().empty()) {
@@ -926,6 +928,8 @@ void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
 		ps.program_timer_ = true;
 		ps.program_time_ = ps.schedule_act(game, Duration(10));
 		break;
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -1877,6 +1881,8 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 				break;
 			case TrainingAttribute::kTotal:
 				throw wexception("'total' training attribute can't be trained");
+			default:
+				NEVER_HERE();
 			}
 		} catch (...) {
 			throw wexception("Fail training soldier!!");

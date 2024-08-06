@@ -1420,6 +1420,8 @@ void Game::sample_statistics() {
 					wostock += economy.second->stock_ware_or_worker(worker_index);
 				}
 				break;
+			default:
+				NEVER_HERE();
 			}
 		}
 		nr_wares[p - 1] = wastock;

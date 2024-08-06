@@ -152,6 +152,7 @@ find_library(LIBMD_LIBRARY md REQUIRED)
 
 if (APPLE OR WIN32 OR
     CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
+    CMAKE_SYSTEM_NAME MATCHES "NetBSD" OR
     CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 endif()
 
@@ -256,6 +257,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     # so we have to switch off the warning for one of them.
     # http://clang-developers.42468.n3.nabble.com/Question-on-Wswitch-enum-td4025927.html
     "-Wno-switch-enum"
+    "-Wno-covered-switch-default"
 
     # TODO(sirver: weak-vtables should be enabled, but leads to lot of errors right now.
     "-Wno-weak-vtables"
@@ -413,7 +415,7 @@ IF (WIN32)
       set(MINGW_SDL_IMG_DEPS webp webpdemux webpdecoder jbig deflate Lerc jxl hwy avif aom rav1e yuv dav1d sharpyuv ntdll)
     else (CMAKE_SIZEOF_VOID_P EQUAL 4)
       message (STATUS "Detected mingw32-w64")
-	  set(MINGW_SDL_IMG_DEPS webp webpdemux webpdecoder jbig deflate Lerc jxl hwy avif aom rav1e yuv dav1d SvtAv1Dec SvtAv1Enc sharpyuv ntdll)
+      set(MINGW_SDL_IMG_DEPS webp webpdemux webpdecoder jbig deflate Lerc jxl hwy avif aom rav1e yuv dav1d SvtAv1Enc sharpyuv ntdll)
     endif (CMAKE_SIZEOF_VOID_P EQUAL 4)
   endif()
 else()
@@ -458,7 +460,9 @@ if(NOT OPTION_ASAN)
 endif()
 
 # on BSD this must be explicitly linked
-if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
+if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
+    CMAKE_SYSTEM_NAME MATCHES "NetBSD" OR
+    CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   # Not needed on Debian GNU/kFreeBSD..
   if (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
     find_library(EXECINFO_LIBRARY NAMES execinfo)
@@ -469,7 +473,9 @@ if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
     find_package(X11 REQUIRED)
     include_directories(${X11_INCLUDE_DIR})
   endif ()
-endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
+endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
+       CMAKE_SYSTEM_NAME MATCHES "NetBSD" OR
+       CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 
 if (NOT DEFINED WL_VERSION)
   include (${CMAKE_SOURCE_DIR}/cmake/BzrRevision.cmake)

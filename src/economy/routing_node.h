@@ -19,6 +19,7 @@
 #ifndef WL_ECONOMY_ROUTING_NODE_H
 #define WL_ECONOMY_ROUTING_NODE_H
 
+#include "base/wexception.h"
 #include "logic/cookie_priority_queue.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands_geometry.h"
@@ -86,6 +87,8 @@ public:
 		case wwWORKER:
 			mpf_cycle_worker = 0;
 			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 
