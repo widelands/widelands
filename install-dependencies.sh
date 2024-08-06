@@ -182,6 +182,8 @@ elif [ "$DISTRO" = "homebrew" ]; then
    brew install $@ asio git cmake doxygen glew graphviz icu4c jpeg \
     libogg libpng libmd libvorbis ninja python sdl2 sdl2_image sdl2_mixer sdl2_ttf zlib
 
+   brew info libmd  # NOCOM
+
 elif [ "$DISTRO" = "solus" ]; then
    echo "Installing dependencies for Solus..."
    sudo eopkg install -c system.devel
