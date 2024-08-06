@@ -144,7 +144,7 @@ function(find_header variable name header)
 endfunction()
 
 find_header(asio_location Asio asio.hpp)
-find_header(libmd_location libmd md5.h)
+find_header(libmd_location libmd sha1.h)
 
 add_definitions(-DASIO_STANDALONE)
 include_directories(BEFORE SYSTEM ${libmd_location})
