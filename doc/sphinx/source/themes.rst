@@ -10,7 +10,7 @@ styles of themes.
 When working with :doc:`richtext <autogen_auxiliary_richtext>` it is recommended to use the
 theme styles. Look at :doc:`autogen_styles` to access the styles within richtext.
 
-A theme's directory needs to use the following directory structure:
+The following directory structure is recommended for a theme's directory:
 
 * base_directory/
     * init.lua
@@ -83,6 +83,9 @@ The names of all files and directories in ``loadscreens`` as well as the names `
 are hardcoded, except for the names and amounts of the image files in ``loadscreens/mainmenu`` and
 in the subdirectories of ``loadscreens/gameloading/``. These directories may contain any number of
 images. Supported image formats are JPG (large, photographic pictures) and PNG (all other images).
+
+The paths for the images in ``wui/`` and ``fsmenu/`` are specified in the ``init.lua``
+and may differ from the recommended structure.
 
 Required Files
 --------------
