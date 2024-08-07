@@ -1454,7 +1454,7 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 							message,
 							kRowButtonSize,
 							_("Filenames may only contain alphanumeric characters (A-Z, a-z, 0-9) and simple punctuation "
-							  "(period, hyphen, and underscore). Other characters such as whitespace are not permitted. Filenames may not exceed 80 characters."
+							  "(period, hyphen, and underscore; not multiple periods). Other characters such as whitespace are not permitted. Filenames may not exceed 80 characters."
 							  )
 						  )
 				));
