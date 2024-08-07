@@ -351,7 +351,7 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 		}
 	}
 
-	if (act->iparam2 >= 0 and not act->sparam2.empty()) {
+	if (act->iparam2 >= 0 && !act->sparam2.empty()) {
 		throw GameDataError("Wrong usage of findobject predicates: 'attrib' and 'name' are not to be used together.");
 	}
 
