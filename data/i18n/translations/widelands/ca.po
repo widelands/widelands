@@ -743,7 +743,7 @@ msgstr "No s'ha pogut escriure el complement al disc."
 #: ../../../../src/editor/editorinteractive.cc:1552
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:108
 msgid "Uploading…"
-msgstr "Es va pujant…"
+msgstr "Es puja…"
 
 #: ../../../../src/editor/editorinteractive.cc:1558
 msgid "Upload Error"
@@ -1779,7 +1779,7 @@ msgstr "Missatges"
 #: ../../../../src/game_io/game_loader.cc:175
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:193
 msgid "Finishing"
-msgstr "Es va acabant."
+msgstr "S'acaba."
 
 #: ../../../../src/game_io/game_saver.cc:50
 #, c-format
@@ -3741,12 +3741,12 @@ msgstr "Heu sigut desconnectat del metaservidor, ja que no heu respost la petici
 #: ../../../../src/network/net_addons.cc:844
 #, c-format
 msgid "Sending metadata for %s"
-msgstr ""
+msgstr "S'envien les metadades de %s"
 
 #: ../../../../src/network/net_addons.cc:889
 #, c-format
 msgid "Uploading %s"
-msgstr ""
+msgstr "Es carrega %s"
 
 #: ../../../../src/network/network_gaming_messages.cc:30
 msgid "Client has left the game."
