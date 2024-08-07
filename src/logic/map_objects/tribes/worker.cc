@@ -331,12 +331,17 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 	if (action.sparam1 == "immovable") {
 		std::vector<ImmovableFound> list;
 		Area<FCoords> area(map.get_fcoords(get_position()), action.iparam1);
-		if (action.iparam2 < 0) {
-			map.find_reachable_immovables(game, area, &list, cstep);
+		if (action.sparam2.empty()) {
+			if (action.iparam2 < 0) {
+				map.find_reachable_immovables(game, area, &list, cstep);
+			} else {
+				map.find_reachable_immovables(
+				   game, area, &list, cstep, FindImmovableAttribute(action.iparam2));
+			}
 		} else {
-			map.find_reachable_immovables(
-			   game, area, &list, cstep, FindImmovableAttribute(action.iparam2));
+			map.find_reachable_immovables(game, area, &list, cstep, FindImmovableByName(action.sparam2));
 		}
+
 		for (auto it = list.begin(); it != list.end();) {
 			if (it->object->is_reserved_by_worker() ||
 			    !dynamic_cast<Immovable&>(*it->object)
@@ -375,11 +380,15 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 				productionsite->unnotify_player();
 			}
 			std::vector<ImmovableFound> list;
-			if (action.iparam2 < 0) {
-				map.find_reachable_immovables(game, area, &list, cstep);
+			if (action.sparam2.empty()) {
+				if (action.iparam2 < 0) {
+					map.find_reachable_immovables(game, area, &list, cstep);
+				} else {
+					map.find_reachable_immovables(
+					   game, area, &list, cstep, FindImmovableAttribute(action.iparam2));
+				}
 			} else {
-				map.find_reachable_immovables(
-				   game, area, &list, cstep, FindImmovableAttribute(action.iparam2));
+				map.find_reachable_immovables(game, area, &list, cstep, FindImmovableByName(action.sparam2));
 			}
 
 			for (int idx = list.size() - 1; idx >= 0; idx--) {
@@ -406,7 +415,7 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 				productionsite->unnotify_player();
 			}
 			std::vector<Bob*> list;
-			if (action.sparam2 == "") {
+			if (action.sparam2.empty()) {
 				if (action.iparam2 < 0) {
 					map.find_reachable_bobs(game, area, &list, cstep);
 				} else {

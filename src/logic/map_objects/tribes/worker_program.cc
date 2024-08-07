@@ -166,7 +166,7 @@ createware
  */
 void WorkerProgram::parse_createware(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (cmd.size() != 1) {
-		throw wexception("Usage: createware=<ware type>");
+		throw GameDataError("Usage: createware=<ware type>");
 	}
 
 	const DescriptionIndex ware_index = descriptions_.load_ware(cmd[0]);
@@ -284,11 +284,11 @@ findobject
    :arg int radius: Search for an object within the given radius around the worker.
    :arg string type: The type of map object to search for. Defaults to ``immovable``.
    :arg string attrib: The attribute that the map object should possess.
-   :arg string name: The name of the map.
+   :arg string name: The internal name of the map object (since version 1.3)
    :arg empty no_notify: Do not send a message to the player if this step fails.
 
    Find and select an object based on a number of predicates, which can be specified
-   in arbitrary order. The object can then be used in other commands like ``walk``
+   in arbitrary order. Note that the predicates ``attrib`` and ``name`` are mutually exclusive. The object can then be used in other commands like ``walk``
    or ``callobject``. Examples::
 
       cut_granite = {
@@ -325,7 +325,7 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 	act->iparam2 = -1;
 	act->iparam3 = 1;
 	act->sparam1 = "immovable";
-	act->sparam2 = "";
+	act->sparam2.clear();
 
 	// Parse predicates
 	for (const std::string& argument : cmd) {
@@ -349,6 +349,10 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 		} else {
 			throw GameDataError("Unknown findobject predicate %s", argument.c_str());
 		}
+	}
+
+	if (act->iparam2 >= 0 and not act->sparam2.empty()) {
+		throw GameDataError("Wrong usage of findobject predicates: 'attrib' and 'name' are not to be used together.");
 	}
 
 	if (act->iparam2 >= 0) {
