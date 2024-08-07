@@ -289,7 +289,7 @@ findobject
 
    Find and select an object based on a number of predicates, which can be specified
    in arbitrary order. Note that the predicates ``attrib`` and ``name`` are mutually exclusive. The
-object can then be used in other commands like ``walk`` or ``callobject``. Examples::
+   object can then be used in other commands like ``walk`` or ``callobject``. Examples::
 
       cut_granite = {
          "findobject=attrib:rocks radius:6", -- Find rocks on the map within a radius of 6 from your
