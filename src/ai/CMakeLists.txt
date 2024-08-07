@@ -31,7 +31,7 @@ wl_library(ai
     economy
     logic
     logic_constants
-    logic_commands
+    commands
     logic_game_controller
     logic_map
     logic_map_objects
