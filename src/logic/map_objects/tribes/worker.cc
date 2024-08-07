@@ -339,7 +339,8 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 				   game, area, &list, cstep, FindImmovableAttribute(action.iparam2));
 			}
 		} else {
-			map.find_reachable_immovables(game, area, &list, cstep, FindImmovableByName(action.sparam2));
+			map.find_reachable_immovables(
+			   game, area, &list, cstep, FindImmovableByName(action.sparam2));
 		}
 
 		for (auto it = list.begin(); it != list.end();) {
@@ -388,7 +389,8 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 					   game, area, &list, cstep, FindImmovableAttribute(action.iparam2));
 				}
 			} else {
-				map.find_reachable_immovables(game, area, &list, cstep, FindImmovableByName(action.sparam2));
+				map.find_reachable_immovables(
+				   game, area, &list, cstep, FindImmovableByName(action.sparam2));
 			}
 
 			for (int idx = list.size() - 1; idx >= 0; idx--) {
