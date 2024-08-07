@@ -102,11 +102,11 @@ inline int portable_read(const int socket, char* buffer, const size_t length) {
 
 [[nodiscard]] inline bool name_valid(const std::string& filename) {
 	// Requirements are defined and enforced by the server.
-	return !filename.empty() && filename.size() <= 80 && filename.find_first_not_of(
-		"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-		"abcdefghijklmnopqrstuvwxyz"
-		"0123456789._-"
-	) == std::string::npos && filename.find("..") == std::string::npos;
+	return !filename.empty() && filename.size() <= 80 &&
+	       filename.find_first_not_of("ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	                                  "abcdefghijklmnopqrstuvwxyz"
+	                                  "0123456789._-") == std::string::npos &&
+	       filename.find("..") == std::string::npos;
 }
 }  // namespace
 
