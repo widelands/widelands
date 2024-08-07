@@ -3743,12 +3743,12 @@ msgstr "De Verbinnung wurr vun de Metaserver trennt, wiel du up eene PING-Anfraa
 #: ../../../../src/network/net_addons.cc:844
 #, c-format
 msgid "Sending metadata for %s"
-msgstr ""
+msgstr "Schicke Metadaten för %s"
 
 #: ../../../../src/network/net_addons.cc:889
 #, c-format
 msgid "Uploading %s"
-msgstr ""
+msgstr "Lade %s up"
 
 #: ../../../../src/network/network_gaming_messages.cc:30
 msgid "Client has left the game."
