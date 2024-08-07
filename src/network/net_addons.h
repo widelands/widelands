@@ -25,6 +25,10 @@
 
 namespace AddOns {
 
+struct IllegalFilenamesException : public std::exception {
+	std::set<std::string> illegal_names;
+};
+
 struct NetAddons {
 	NetAddons() = default;
 	~NetAddons();
@@ -100,7 +104,8 @@ private:
 	void check_checksum(const std::string& path, const std::string& checksum);
 	size_t gather_addon_content(const std::string& current_dir,
 	                            const std::string& prefix,
-	                            std::map<std::string, std::set<std::string>>& result);
+	                            std::map<std::string, std::set<std::string>>& result,
+	                            std::set<std::string>& invalid_names);
 	void append_multiline_message(std::string& send, const std::string& message);
 
 	std::string last_username_, last_password_;
