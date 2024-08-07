@@ -203,13 +203,9 @@ void Window::layout() {
 		center_panel_->set_size(get_inner_w(), get_inner_h());
 	}
 
-	const int16_t buttons_pos = (get_tborder() + window_style_info().button_size()) / -2;
-
-	button_close_->set_pos(Vector2i(get_w() + buttons_pos - get_tborder(), buttons_pos));
-	button_pin_->set_pos(Vector2i(buttons_pos, buttons_pos));
-	button_minimize_->set_pos(
-	   Vector2i(button_pin_->get_x() + button_pin_->get_w() + window_style_info().button_spacing(),
-	            buttons_pos));
+	button_close_->set_pos(Vector2i(get_inner_w() + window_style_info().button_close_x(), window_style_info().buttons_y()));
+	button_pin_->set_pos(Vector2i(window_style_info().button_pin_x(), window_style_info().buttons_y()));
+	button_minimize_->set_pos(Vector2i(window_style_info().button_minimize_x(), window_style_info().buttons_y()));
 }
 
 /**

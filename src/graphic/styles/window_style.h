@@ -65,7 +65,14 @@ struct WindowStyleInfo {
 	     button_minimize_(b_minimize),
 	     button_unminimize_(b_unminimize),
 	     button_spacing_(b_spacing) {
+		// TODO(tothxa): allow different width
+		button_size_ = top_border_thickness() - 2 * button_spacing_;
+		buttons_y_ = -top_border_thickness() + button_spacing_;
+		button_close_x_ = right_border_thickness() - button_size_ - button_spacing_;
+		button_pin_x_ = -left_border_thickness() + button_spacing_;
+		button_minimize_x_ = button_pin_x_ + button_size_ + button_spacing_;
 	}
+
 	WindowStyleInfo(const WindowStyleInfo&) = default;
 
 	[[nodiscard]] const RGBAColor& window_border_focused() const {
@@ -144,7 +151,20 @@ struct WindowStyleInfo {
 	}
 	// TODO(Nordfriese): Allow buttons with arbitrary widths
 	[[nodiscard]] int button_size() const {
-		return top_border_thickness() - 2 * button_spacing();
+		return button_size_;
+	}
+
+	[[nodiscard]] int buttons_y() const {
+		return buttons_y_;
+	}
+	[[nodiscard]] int button_close_x() const {
+		return button_close_x_;
+	}
+	[[nodiscard]] int button_pin_x() const {
+		return button_pin_x_;
+	}
+	[[nodiscard]] int button_minimize_x() const {
+		return button_minimize_x_;
 	}
 
 private:
@@ -166,6 +186,11 @@ private:
 	const std::string button_minimize_;
 	const std::string button_unminimize_;
 	const int button_spacing_;
+	int button_size_;
+	int buttons_y_;
+	int button_close_x_;
+	int button_pin_x_;
+	int button_minimize_x_;
 };
 
 }  // namespace UI
