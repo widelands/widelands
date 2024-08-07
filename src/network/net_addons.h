@@ -26,6 +26,8 @@
 namespace AddOns {
 
 struct IllegalFilenamesException : public std::exception {
+	explicit IllegalFilenamesException(std::set<std::string> in) : illegal_names(in) {
+	}
 	std::set<std::string> illegal_names;
 };
 

@@ -818,10 +818,10 @@ void NetAddons::upload_addon(const std::string& name,
 		std::string dir = kAddOnDir;
 		dir += FileSystem::file_separator();
 		dir += name;
-		IllegalFilenamesException illegal;
-		init_fn("", gather_addon_content(dir, "", content, illegal.illegal_names));
-		if (!illegal.illegal_names.empty()) {
-			throw illegal;
+		std::set<std::string> invalid_names;
+		init_fn("", gather_addon_content(dir, "", content, invalid_names));
+		if (!invalid_names.empty()) {
+			throw IllegalFilenamesException(invalid_names);
 		}
 	}
 
