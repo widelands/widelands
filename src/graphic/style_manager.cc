@@ -904,10 +904,17 @@ void StyleManager::add_window_style(UI::WindowStyle style,
 		   g_image_cache->get(style_table->get_string("border_bottom")),
 		   g_image_cache->get(style_table->get_string("border_right")),
 		   g_image_cache->get(style_table->get_string("border_left")),
+		   g_image_cache->get(style_table->get_string("corner_bottom_left")),
+		   g_image_cache->get(style_table->get_string("corner_bottom_right")),
+		   g_image_cache->get(style_table->get_string("corner_top_left")),
+		   g_image_cache->get(style_table->get_string("corner_top_right")),
+		   g_image_cache->get(style_table->get_string("corner_minimal_left")),
+		   g_image_cache->get(style_table->get_string("corner_minimal_right")),
 		   g_image_cache->get(style_table->get_string("background")),
 		   style_table->get_string("button_pin"), style_table->get_string("button_unpin"),
 		   style_table->get_string("button_minimize"), style_table->get_string("button_unminimize"),
-		   style_table->get_string("button_close"));
+		   style_table->get_string("button_close"),
+		   style_table->get_int_with_default("button_spacing", 1));
 	} else {
 		fail_if_doing_default_style("window style", key);
 		w_style = new UI::WindowStyleInfo(default_style->window_style(style));

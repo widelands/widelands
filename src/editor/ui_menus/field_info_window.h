@@ -24,11 +24,8 @@
 #include "ui_basic/unique_window.h"
 
 struct FieldInfoWindow : public UI::UniqueWindow {
-	static constexpr int16_t width = 400;
-	static constexpr int16_t total_width = width + 2 * UI::Window::kVerticalBorderThickness;
-	static constexpr int16_t height = 200;
-	static constexpr int16_t total_height =
-	   height + UI::Window::kTopBorderThickness + UI::Window::kBottomBorderThickness;
+	static constexpr int16_t kWidth = 400;
+	static constexpr int16_t kHeight = 200;
 	FieldInfoWindow(EditorInteractive& parent,
 	                UI::UniqueWindow::Registry&,
 	                int32_t x,
