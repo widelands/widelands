@@ -294,7 +294,7 @@ SHA224Transform(uint64_t state[8], const uint8_t data[SHA256_BLOCK_LENGTH])
 	 * for whatever reason SHA256Transform only accepts a uint32_t[8]
 	 */
 	// SHA256Transform(state, data);
-	std::cerr << "Invalid code encountered" << std::endl;
+	std::cerr << "Invalid code in SHA224Transform encountered" << std::endl;
 	throw std::exception();
 }
 
