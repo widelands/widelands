@@ -358,6 +358,7 @@ struct PlayerImmovable : public BaseImmovable {
 	}
 
 	virtual Flag& base_flag() = 0;
+	virtual const Flag& base_flag() const = 0;
 
 	virtual void set_economy(Economy*, WareWorker);
 

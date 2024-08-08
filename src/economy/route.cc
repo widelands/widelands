@@ -53,6 +53,10 @@ Flag& Route::get_flag(EditorGameBase& egbase, std::vector<Flag*>::size_type cons
 	assert(idx < route_.size());
 	return *route_[idx].get(egbase);
 }
+Flag* Route::get_flag_raw(EditorGameBase& egbase, std::vector<Flag*>::size_type const idx) const {
+	assert(idx < route_.size());
+	return route_[idx].get(egbase);
+}
 
 /**
  * Remove the first count steps from the route.
