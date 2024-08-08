@@ -66,7 +66,8 @@ wl_library(base_crypto
   SRCS
     crypto.cc
     crypto.h
-  USES_LIBMD
+  DEPENDS
+    third_party_libmd
 )
 
 wl_library(base_random

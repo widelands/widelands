@@ -18,7 +18,7 @@
 
 #include "base/crypto.h"
 
-#include <sha1.h>
+#include "third_party/libmd/include/sha1.h"
 
 namespace crypto {
 
@@ -39,34 +39,34 @@ MD5Checksummer::MD5Checksummer() {
 }
 
 void MD5Checksummer::reset() {
-	MD5Init(&context_);
+	libmd::MD5Init(&context_);
 }
 
 void MD5Checksummer::data(const void* data, size_t len) {
-	MD5Update(&context_, reinterpret_cast<const uint8_t*>(data), len);
+	libmd::MD5Update(&context_, reinterpret_cast<const uint8_t*>(data), len);
 }
 
 std::string MD5Checksummer::finish_checksum_str() {
 	std::string result(MD5_DIGEST_STRING_LENGTH - 1 /* correct for implicit null terminator */, '?');
-	MD5End(&context_, result.data());
+	libmd::MD5End(&context_, result.data());
 	reset();
 	return result;
 }
 
 MD5Checksum MD5Checksummer::finish_checksum_raw() {
 	MD5Checksum result;
-	MD5Final(result.value.data(), &context_);
+	libmd::MD5Final(result.value.data(), &context_);
 	reset();
 	return result;
 }
 
 std::string sha1(const void* data, size_t len) {
-	SHA1_CTX context;
+	libmd::SHA1_CTX context;
 	std::string result(
 	   SHA1_DIGEST_STRING_LENGTH - 1 /* correct for implicit null terminator */, '?');
-	SHA1Init(&context);
-	SHA1Update(&context, reinterpret_cast<const uint8_t*>(data), len);
-	SHA1End(&context, result.data());
+	libmd::SHA1Init(&context);
+	libmd::SHA1Update(&context, reinterpret_cast<const uint8_t*>(data), len);
+	libmd::SHA1End(&context, result.data());
 	return result;
 }
 

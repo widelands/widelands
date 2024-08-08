@@ -24,7 +24,7 @@
 #include <cstring>
 #include <string>
 
-#include <md5.h>
+#include "third_party/libmd/include/md5.h"
 
 namespace crypto {
 
@@ -48,7 +48,7 @@ struct MD5Checksummer {
 	void reset();
 
 private:
-	MD5_CTX context_;
+	libmd::MD5_CTX context_;
 };
 
 [[nodiscard]] inline MD5Checksum md5_raw(const void* data, size_t len) {
