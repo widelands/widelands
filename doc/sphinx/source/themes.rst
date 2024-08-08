@@ -10,7 +10,7 @@ styles of themes.
 When working with :doc:`richtext <autogen_auxiliary_richtext>` it is recommended to use the
 theme styles. Look at :doc:`autogen_styles` to access the styles within richtext.
 
-A theme's directory needs to use the following directory structure:
+The following directory structure is recommended for a theme's directory:
 
 * base_directory/
     * init.lua
@@ -20,6 +20,12 @@ A theme's directory needs to use the following directory structure:
             * background.png
             * bottom.png
             * close.png
+            * corner_bottom_left.png
+            * corner_bottom_right.png
+            * corner_minimal_left.png
+            * corner_minimal_right.png
+            * corner_top_left.png
+            * corner_top_right.png
             * left.png
             * maximize.png
             * minimize.png
@@ -33,6 +39,12 @@ A theme's directory needs to use the following directory structure:
             * background.png
             * bottom.png
             * close.png
+            * corner_bottom_left.png
+            * corner_bottom_right.png
+            * corner_minimal_left.png
+            * corner_minimal_right.png
+            * corner_top_left.png
+            * corner_top_right.png
             * left.png
             * maximize.png
             * minimize.png
@@ -71,6 +83,9 @@ The names of all files and directories in ``loadscreens`` as well as the names `
 are hardcoded, except for the names and amounts of the image files in ``loadscreens/mainmenu`` and
 in the subdirectories of ``loadscreens/gameloading/``. These directories may contain any number of
 images. Supported image formats are JPG (large, photographic pictures) and PNG (all other images).
+
+The paths for the images in ``wui/`` and ``fsmenu/`` are specified in the ``init.lua``
+and may differ from the recommended structure.
 
 Required Files
 --------------
@@ -119,6 +134,19 @@ If any of the above images or directories is missing, a fallback image will be u
     * **windows/maximize.png** is used as the icon for the unminimize button in a minimized window's top-left corner.
     * **windows/background.png** is used as the window background. The image is tiled to fit the window's width and height.
     * **windows/top.png**, **windows/bottom.png**, **windows/left.png**, and **windows/right.png** are used as the window's upper, lower, left, and right border respectively. The images are tiled to fit the window's length.
+    * **windows/corner_bottom_left.png**, **windows/corner_bottom_right.png**, **windows/corner_top_left.png**, and **windows/corner_top_right.png** are used as the window's border's corners.
+    * **windows/corner_minimal_left.png** and **windows/corner_minimal_right.png** are used as the window's corners when the window is minimized.
+
+    A window consists of a main panel surrounded on all four sides by a border, with corners where borders meet.
+    The main panel is tiled with the ``background.png`` image.
+    Each border is tiled with the respective ``{top,left,right,bottom}.png`` image.
+    The four corner images ``corner_{top,bottom}_{left,right}.png`` are drawn only once each.
+
+    A minimized window consists only of the two corners ``windows/corner_minimal_{left,right}.png`` with the ``top.png`` border image tiled between them to fit the width.
+
+    The thicknesses of the borders are determined by the height of the upper and lower border images and the width of the left and right border images respectively.
+    The corner images are aligned to the corners of the resulting outer rectangle. Because of this, the corner images can be bigger than the respective borders
+    to create fixed transitions to the main border images, but should not be smaller, as that would create gaps in the drawn window borders.
 
 **images/**
     This directory may contain replacement images for any image file located under the data directory's ``images`` directory.
@@ -179,6 +207,7 @@ The ``windows`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/
 * **window_border_focused** (RGBA): The color to blend over the border of the window if it has focus.
 * **window_border_unfocused** (RGBA): The color to blend over the border of the window if it does not have focus.
 * **background**, **border_top**, **border_bottom**, **border_right**, **border_left**, **button_close**, **button_pin**, **button_unpin**, **button_minimize**, **button_unminimize** (strings): The paths to the corresponding icons. See above for the recommended directory structure.
+* **button_spacing** (int) (*optional*, default ``1``): The spacing around the window titlebar buttons. Introduced in version 1.3.
 
 buttons
 ~~~~~~~

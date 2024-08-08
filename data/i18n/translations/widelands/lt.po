@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-01 02:59+0000\n"
+"POT-Creation-Date: 2024-08-08 02:42+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Tachionas <tachionexas@gmail.com>, 2020-2021,2023\n"
 "Language-Team: Lithuanian (http://app.transifex.com/widelands/widelands/language/lt/)\n"
@@ -337,7 +337,7 @@ msgstr "Pagalba"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../../../src/editor/editorinteractive.cc:207
 #: ../../../../src/editor/ui_menus/main_menu_new_map.cc:40
-#: ../../../../src/ui_fsmenu/main.cc:419
+#: ../../../../src/ui_fsmenu/main.cc:425
 #: ../../../../src/wlapplication_options.cc:458
 msgid "New Map"
 msgstr "Naujas žemėlapis"
@@ -353,7 +353,7 @@ msgstr "Naujas atsitiktinis žemėlapis"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/editor/editorinteractive.cc:224
 #: ../../../../src/editor/ui_menus/main_menu_load_map.cc:34
-#: ../../../../src/ui_fsmenu/main.cc:424
+#: ../../../../src/ui_fsmenu/main.cc:430
 #: ../../../../src/wlapplication_options.cc:867
 msgid "Load Map"
 msgstr "Įkelti žemėlapį"
@@ -645,12 +645,12 @@ msgstr "Ar tikrai norite išeiti iš redaktoriaus?"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:486
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:320
-#: ../../../../src/ui_fsmenu/main.cc:286 ../../../../src/wlapplication.cc:1892
+#: ../../../../src/ui_fsmenu/main.cc:292 ../../../../src/wlapplication.cc:1892
 msgid "Error"
 msgstr "Klaida"
 
 #: ../../../../src/editor/editorinteractive.cc:1149
-#: ../../../../src/ui_fsmenu/main.cc:270 ../../../../src/wlapplication.cc:1894
+#: ../../../../src/ui_fsmenu/main.cc:276 ../../../../src/wlapplication.cc:1894
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -973,7 +973,7 @@ msgstr "Autorius: %s"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:244
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:297
-#: ../../../../src/ui_fsmenu/main.cc:449
+#: ../../../../src/ui_fsmenu/main.cc:455
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:124
 #, c-format
 msgid "Description: %s"
@@ -997,8 +997,8 @@ msgstr "Galimi priedai: %s"
 
 #: ../../../../src/editor/ui_menus/help.cc:36
 #: ../../../../src/ui_fsmenu/login_box.cc:255
-#: ../../../../src/ui_fsmenu/main.cc:268
-#: ../../../../src/ui_fsmenu/main.cc:1143
+#: ../../../../src/ui_fsmenu/main.cc:274
+#: ../../../../src/ui_fsmenu/main.cc:1149
 #: ../../../../src/wui/encyclopedia_window.cc:146
 #: ../../../../src/wui/tribal_encyclopedia.cc:55
 msgid "Error!"
@@ -1387,7 +1387,7 @@ msgstr "Generuojamas atsitiktinis žemėlapis..."
 #. editor.
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:702
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:736
-#: ../../../../src/ui_fsmenu/main.cc:421
+#: ../../../../src/ui_fsmenu/main.cc:427
 msgid "Random Map"
 msgstr "Atsitiktinis žemėlapis"
 
@@ -2393,7 +2393,7 @@ msgstr "Tu užpultas"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
 #. * '%s'
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:454
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:455
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr "ekonomikai reikalingi '%s' gaminiai"
@@ -2401,7 +2401,7 @@ msgstr "ekonomikai reikalingi '%s' gaminiai"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn't need the
 #. * ware '%s'
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:461
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:462
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr "ekonomikai nereikalingi '%s' gaminiai"
@@ -2409,14 +2409,14 @@ msgstr "ekonomikai nereikalingi '%s' gaminiai"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
 #. * '%s'
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:473
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:475
 #, c-format
 msgid "the economy needs the worker ‘%s’"
 msgstr ""
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker '%s'
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:482
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:484
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
 msgstr ""
@@ -2437,56 +2437,56 @@ msgstr ""
 #. Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:532
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:556
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1272
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1377
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1459
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:534
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:558
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1274
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1379
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1461
 #, c-format
 msgid "%1$ix %2$s"
 msgstr ""
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:537
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:539
 #, c-format
 msgid "the building has the following wares: %s"
 msgstr "statinys turi šiuos gaminius: %s"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:561
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:563
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
 msgstr "statinys neturi šių gaminių:%s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:577
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:579
 msgid "a worker needs experience"
 msgstr ""
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:583
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:585
 msgid "the workers need no experience"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:612
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:614
 msgid "the fleet needs a ferry"
 msgstr ""
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs
 #. a ship/ferry'.
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:612
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:614
 msgid "the fleet needs a ship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:619
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:621
 msgid "the fleet needs no ferries"
 msgstr ""
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs
 #. no ships/ferries'.
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:619
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:621
 msgid "the fleet needs no ships"
 msgstr ""
 
@@ -2503,20 +2503,20 @@ msgstr ""
 #. * TRANSLATORS: on a development build if you can, and let us know if there
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:768
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1294
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:770
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1296
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr ""
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware '%s'"
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:774
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:776
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr ""
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware '%s'"
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:781
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:783
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr ""
@@ -2525,7 +2525,7 @@ msgstr ""
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1281
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1283
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -2537,7 +2537,7 @@ msgstr[3] ""
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1386
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1388
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -2549,7 +2549,7 @@ msgstr[3] ""
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1468
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1470
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
@@ -2558,7 +2558,7 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1851
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1853
 msgid "No soldier found for this training level!"
 msgstr "Nėra kareivių šiam apmokymų lygiui!"
 
@@ -2566,7 +2566,7 @@ msgstr "Nėra kareivių šiam apmokymų lygiui!"
 #. description of the
 #. * training program, e.g. Completed upgrading soldier evade from level 0 to
 #. level 1
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1894
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1896
 #, c-format
 msgid "Completed %s"
 msgstr ""
@@ -4327,8 +4327,8 @@ msgstr ""
 msgid "Select the entire text"
 msgstr ""
 
-#: ../../../../src/ui_basic/window.cc:101
-#: ../../../../src/ui_basic/window.cc:862
+#: ../../../../src/ui_basic/window.cc:80
+#: ../../../../src/ui_basic/window.cc:838
 #: ../../../../src/ui_fsmenu/about.cc:41
 #: ../../../../src/ui_fsmenu/crash_report.cc:71
 #: ../../../../src/ui_fsmenu/crash_report.cc:161
@@ -4337,48 +4337,48 @@ msgstr ""
 msgid "Close"
 msgstr "Užverti"
 
-#: ../../../../src/ui_basic/window.cc:167
-#: ../../../../src/ui_basic/window.cc:846
+#: ../../../../src/ui_basic/window.cc:147
+#: ../../../../src/ui_basic/window.cc:822
 msgid "Minimize"
 msgstr "Sumažinti"
 
-#: ../../../../src/ui_basic/window.cc:167
-#: ../../../../src/ui_basic/window.cc:846
+#: ../../../../src/ui_basic/window.cc:147
+#: ../../../../src/ui_basic/window.cc:822
 msgid "Restore"
 msgstr ""
 
-#: ../../../../src/ui_basic/window.cc:172
-#: ../../../../src/ui_basic/window.cc:856
+#: ../../../../src/ui_basic/window.cc:152
+#: ../../../../src/ui_basic/window.cc:832
 #: ../../../../src/wui/info_panel.cc:204
 msgid "Pin"
 msgstr ""
 
-#: ../../../../src/ui_basic/window.cc:172
-#: ../../../../src/ui_basic/window.cc:856
+#: ../../../../src/ui_basic/window.cc:152
+#: ../../../../src/ui_basic/window.cc:832
 msgid "Unpin"
 msgstr ""
 
-#: ../../../../src/ui_basic/window.cc:847
+#: ../../../../src/ui_basic/window.cc:823
 msgid "Minimize the window"
 msgstr ""
 
-#: ../../../../src/ui_basic/window.cc:847
+#: ../../../../src/ui_basic/window.cc:823
 msgid "Unminimize the window"
 msgstr ""
 
-#: ../../../../src/ui_basic/window.cc:857
+#: ../../../../src/ui_basic/window.cc:833
 msgid "Pin the window"
 msgstr ""
 
-#: ../../../../src/ui_basic/window.cc:857
+#: ../../../../src/ui_basic/window.cc:833
 msgid "Unpin the window"
 msgstr ""
 
-#: ../../../../src/ui_basic/window.cc:862
+#: ../../../../src/ui_basic/window.cc:838
 msgid "Close the window"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/about.cc:38 ../../../../src/ui_fsmenu/main.cc:515
+#: ../../../../src/ui_fsmenu/about.cc:38 ../../../../src/ui_fsmenu/main.cc:521
 msgid "About Widelands"
 msgstr "Apie Widelands"
 
@@ -5279,28 +5279,28 @@ msgid "Directory Tree"
 msgstr "Katalogo medis"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:282
-#: ../../../../src/ui_fsmenu/main.cc:442
+#: ../../../../src/ui_fsmenu/main.cc:448
 #, c-format
 msgid "Name: %s"
 msgstr "Pavadinimas: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:285
-#: ../../../../src/ui_fsmenu/main.cc:444
+#: ../../../../src/ui_fsmenu/main.cc:450
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:112
 #, c-format
 msgid "Size: %s"
 msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:287
-#: ../../../../src/ui_fsmenu/main.cc:446
+#: ../../../../src/ui_fsmenu/main.cc:452
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:114
 #, c-format
 msgid "%1$u×%2$u"
 msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:288
-#: ../../../../src/ui_fsmenu/main.cc:396 ../../../../src/ui_fsmenu/main.cc:447
-#: ../../../../src/ui_fsmenu/main.cc:477
+#: ../../../../src/ui_fsmenu/main.cc:402 ../../../../src/ui_fsmenu/main.cc:453
+#: ../../../../src/ui_fsmenu/main.cc:483
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:119
 #, c-format
 msgid "Players: %s"
@@ -6408,7 +6408,7 @@ msgid "Load this game"
 msgstr "Įkelti šį žaidimą"
 
 #: ../../../../src/ui_fsmenu/login_box.cc:37
-#: ../../../../src/ui_fsmenu/main.cc:412
+#: ../../../../src/ui_fsmenu/main.cc:418
 msgid "Online Game Settings"
 msgstr ""
 
@@ -6449,7 +6449,7 @@ msgstr ""
 msgid "Please enter your password!"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:287
+#: ../../../../src/ui_fsmenu/main.cc:293
 #, c-format
 msgid ""
 "Unable to create a Game instance!\n"
@@ -6457,46 +6457,46 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:361
+#: ../../../../src/ui_fsmenu/main.cc:367
 msgid "Begin a new game"
 msgstr "Pradėti naują žaidimą"
 
-#: ../../../../src/ui_fsmenu/main.cc:361
+#: ../../../../src/ui_fsmenu/main.cc:367
 #: ../../../../src/wlapplication_options.cc:245
 msgid "New Game"
 msgstr "Naujas žaidimas"
 
-#: ../../../../src/ui_fsmenu/main.cc:363
+#: ../../../../src/ui_fsmenu/main.cc:369
 #: ../../../../src/ui_fsmenu/random_game.cc:29
 #: ../../../../src/wlapplication_options.cc:269
 msgid "New Random Game"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:364
+#: ../../../../src/ui_fsmenu/main.cc:370
 msgid "Create a new random match"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:366
+#: ../../../../src/ui_fsmenu/main.cc:372
 #: ../../../../src/wlapplication_options.cc:279
 msgid "Campaigns"
 msgstr "Kampanijos"
 
-#: ../../../../src/ui_fsmenu/main.cc:366
+#: ../../../../src/ui_fsmenu/main.cc:372
 msgid "Play a campaign"
 msgstr "Žaisti kampaniją"
 
-#: ../../../../src/ui_fsmenu/main.cc:368
+#: ../../../../src/ui_fsmenu/main.cc:374
 #: ../../../../src/wlapplication_options.cc:274
 msgid "Tutorials"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:369
+#: ../../../../src/ui_fsmenu/main.cc:375
 msgid "Play one of our beginners’ tutorials"
 msgstr "Žaisti vieną iš mūsų pradedantiesiems skirtą pamoką "
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../../../src/ui_fsmenu/main.cc:371
+#: ../../../../src/ui_fsmenu/main.cc:377
 #: ../../../../src/wlapplication_options.cc:249
 #: ../../../../src/wlapplication_options.cc:888
 #: ../../../../src/wui/game_main_menu_save_game.cc:48
@@ -6504,195 +6504,195 @@ msgstr "Žaisti vieną iš mūsų pradedantiesiems skirtą pamoką "
 msgid "Load Game"
 msgstr "Įkelti žaidimą"
 
-#: ../../../../src/ui_fsmenu/main.cc:372
+#: ../../../../src/ui_fsmenu/main.cc:378
 msgid "Continue a saved game"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:383
+#: ../../../../src/ui_fsmenu/main.cc:389
 #: ../../../../src/wlapplication_options.cc:316
 msgid "Continue Playing"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:392 ../../../../src/ui_fsmenu/main.cc:473
+#: ../../../../src/ui_fsmenu/main.cc:398 ../../../../src/ui_fsmenu/main.cc:479
 #, c-format
 msgid "Map: %s"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:394 ../../../../src/ui_fsmenu/main.cc:475
+#: ../../../../src/ui_fsmenu/main.cc:400 ../../../../src/ui_fsmenu/main.cc:481
 #, c-format
 msgid "Win Condition: %s"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:398 ../../../../src/ui_fsmenu/main.cc:479
+#: ../../../../src/ui_fsmenu/main.cc:404 ../../../../src/ui_fsmenu/main.cc:485
 #, c-format
 msgid "Gametime: %s"
 msgstr ""
 
 #. * TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
 #. * 10:30'
-#: ../../../../src/ui_fsmenu/main.cc:403 ../../../../src/ui_fsmenu/main.cc:484
+#: ../../../../src/ui_fsmenu/main.cc:409 ../../../../src/ui_fsmenu/main.cc:490
 #, c-format
 msgid "Saved: %s"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:409
+#: ../../../../src/ui_fsmenu/main.cc:415
 msgid "Online Game"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:410
+#: ../../../../src/ui_fsmenu/main.cc:416
 msgid "Join the Widelands lobby"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:413
+#: ../../../../src/ui_fsmenu/main.cc:419
 msgid "Log in as a registered user"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:415
+#: ../../../../src/ui_fsmenu/main.cc:421
 #: ../../../../src/wlapplication_options.cc:333
 msgid "LAN / Direct IP"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:416
+#: ../../../../src/ui_fsmenu/main.cc:422
 msgid "Play a private online game"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:419
+#: ../../../../src/ui_fsmenu/main.cc:425
 msgid "Create a new empty map"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:422
+#: ../../../../src/ui_fsmenu/main.cc:428
 msgid "Create a new random map"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:424
+#: ../../../../src/ui_fsmenu/main.cc:430
 msgid "Edit an existing map"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:433
+#: ../../../../src/ui_fsmenu/main.cc:439
 #: ../../../../src/wlapplication_options.cc:311
 msgid "Continue Editing"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../../../src/ui_fsmenu/main.cc:455
+#: ../../../../src/ui_fsmenu/main.cc:461
 #: ../../../../src/wlapplication_options.cc:259
 #: ../../../../src/wui/game_main_menu_save_game.cc:46
 #: ../../../../src/wui/interactive_gamebase.cc:167
 msgid "Load Replay"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:456
+#: ../../../../src/ui_fsmenu/main.cc:462
 msgid "Watch the replay of an old game"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:464
+#: ../../../../src/ui_fsmenu/main.cc:470
 msgid "Watch last saved replay"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:490
+#: ../../../../src/ui_fsmenu/main.cc:496
 msgid "Single Player…"
 msgstr "Vieno žaidėjo ..."
 
-#: ../../../../src/ui_fsmenu/main.cc:491
+#: ../../../../src/ui_fsmenu/main.cc:497
 msgid "Multiplayer…"
 msgstr "Kelių žaidėjų ..."
 
-#: ../../../../src/ui_fsmenu/main.cc:492
+#: ../../../../src/ui_fsmenu/main.cc:498
 msgid "Editor…"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:493
+#: ../../../../src/ui_fsmenu/main.cc:499
 msgid "Watch Replay…"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:495
+#: ../../../../src/ui_fsmenu/main.cc:501
 msgid "Begin or load a single-player campaign or free game"
 msgstr "Pradėti arba paleisti vieno žaidėjo kampaniją ar laisvą žaidimą"
 
-#: ../../../../src/ui_fsmenu/main.cc:498
+#: ../../../../src/ui_fsmenu/main.cc:504
 msgid "Play with your friends over the internet"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:501
+#: ../../../../src/ui_fsmenu/main.cc:507
 msgid "Launch the map editor"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:504
+#: ../../../../src/ui_fsmenu/main.cc:510
 msgid "Watch again a recorded earlier game"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:507
+#: ../../../../src/ui_fsmenu/main.cc:513
 #: ../../../../src/wlapplication_options.cc:329
 msgid "Add-Ons"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:509
+#: ../../../../src/ui_fsmenu/main.cc:515
 msgid "Install and manage add-ons"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:511
+#: ../../../../src/ui_fsmenu/main.cc:517
 #: ../../../../src/ui_fsmenu/options.cc:87
 #: ../../../../src/wlapplication_options.cc:346
 msgid "Options"
 msgstr "Nustatymai"
 
-#: ../../../../src/ui_fsmenu/main.cc:513
+#: ../../../../src/ui_fsmenu/main.cc:519
 msgid "Technical and game-related settings"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:517
+#: ../../../../src/ui_fsmenu/main.cc:523
 msgid "Readme, License, and Credits"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:519
+#: ../../../../src/ui_fsmenu/main.cc:525
 #: ../../../../src/wlapplication_options.cc:320
 msgid "Exit Widelands"
 msgstr "Išeiti iš Widelands"
 
-#: ../../../../src/ui_fsmenu/main.cc:521
+#: ../../../../src/ui_fsmenu/main.cc:527
 msgid "Quit the game"
 msgstr ""
 
 #. * TRANSLATORS: %1$s = version string and build type  ("Debug" or "Release")
-#: ../../../../src/ui_fsmenu/main.cc:526
+#: ../../../../src/ui_fsmenu/main.cc:532
 #, c-format
 msgid "Version %1$s"
 msgstr ""
 
 #. * TRANSLATORS: Placeholders are the copyright years
-#: ../../../../src/ui_fsmenu/main.cc:529
+#: ../../../../src/ui_fsmenu/main.cc:535
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team • Licensed under the GNU "
 "General Public License V2.0"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:848
+#: ../../../../src/ui_fsmenu/main.cc:854
 msgid "Click for the main menu"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:926
+#: ../../../../src/ui_fsmenu/main.cc:932
 msgid "Desyncing Add-On Found"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:927
+#: ../../../../src/ui_fsmenu/main.cc:933
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:1036
+#: ../../../../src/ui_fsmenu/main.cc:1042
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:352
 msgid "No tribes found!"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:1037
+#: ../../../../src/ui_fsmenu/main.cc:1043
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:353
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:1080
+#: ../../../../src/ui_fsmenu/main.cc:1086
 msgid "Exit Confirmation"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:1081
+#: ../../../../src/ui_fsmenu/main.cc:1087
 msgid "Are you sure you wish to exit Widelands?"
 msgstr ""
 
