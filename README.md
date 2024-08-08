@@ -36,7 +36,6 @@ You will need to install the following dependencies:
 * libiconv (on same mirrors as gettext)
 *  [zlib](https://www.zlib.net/)
 *  [libpng](http://www.libpng.org/pub/png/libpng.html)
-*  [libmd](https://www.hadrons.org/software/libmd/)
 *  [Asio](https://think-async.com/Asio/)
 *  [Python](https://www.python.org) >= 1.5.2
 *  [libglew](http://glew.sourceforge.net) or [glbinding](https://glbinding.org/)

@@ -130,25 +130,17 @@ else()
   find_package(GLEW REQUIRED)
 endif()
 
-# Check that Asio and libmd are installed. These do not have corresponding Find… CMake Modules, so we "only" check whether the headers exist.
-function(find_header variable name header)
-  if(NOT ${variable} OR ${variable} STREQUAL "")
-    unset(${variable} CACHE)
-    find_path(${variable} ${header} HINTS /opt/homebrew/Cellar/libmd)
-    if(${variable})
-      message(STATUS "Found ${name} in '${${variable}}'.")
-    else()
-      message(FATAL_ERROR "Could NOT find ${name} (missing: ${header}). Please run:\n./install-dependencies.sh\nwhich will attempt to install all missing dependencies automatically, or provide further instructions if this not supported on your system.")
-    endif()
+# Check that Asio is installed. Asio does not have (or need) a Find… CMake Module, so we "only" need to check if the header exists.
+if(NOT asio_location OR asio_location STREQUAL "")
+  unset(asio_location CACHE)
+  find_path(asio_location "asio.hpp")
+  if(asio_location)
+    message(STATUS "Found Asio in '${asio_location}'.")
+  else()
+    message(FATAL_ERROR "Could NOT find Asio (missing: asio.hpp). Please run:\n./install-dependencies.sh\nwhich will attempt to install all missing dependencies automatically, or provide further instructions if this not supported on your system.")
   endif()
-endfunction()
-
-find_header(asio_location Asio asio.hpp)
-find_header(libmd_location libmd sha1.h)
-
+endif()
 add_definitions(-DASIO_STANDALONE)
-include_directories(BEFORE SYSTEM ${libmd_location})
-find_library(LIBMD_LIBRARY md REQUIRED)
 
 if (APPLE OR WIN32 OR
     CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
