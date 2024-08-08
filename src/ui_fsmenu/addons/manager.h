@@ -84,6 +84,9 @@ public:
 	bool is_remote(const std::string& name) const;
 	void erase_remote(std::shared_ptr<AddOns::AddOnInfo>);
 
+	FsMenu::MainMenu& fsmm() {
+		return fsmm_;
+	}
 	const std::string& username() const {
 		return username_;
 	}
