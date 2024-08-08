@@ -98,6 +98,10 @@ bool FindImmovableByDescr::accept(const BaseImmovable& baseimm) const {
 	return &baseimm.descr() == &descr;
 }
 
+bool FindImmovableByName::accept(const BaseImmovable& baseimm) const {
+	return baseimm.descr().name() == name_;
+}
+
 bool FindImmovableNotReserved::accept(const BaseImmovable& i) const {
 	return !i.is_reserved_by_worker();
 }

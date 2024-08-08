@@ -186,6 +186,16 @@ private:
 	const ImmovableDescr& descr;
 };
 
+struct FindImmovableByName {
+	explicit FindImmovableByName(const std::string& n) : name_(n) {
+	}
+
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
+
+private:
+	const std::string name_;
+};
+
 struct FindImmovableNotReserved {
 	[[nodiscard]] bool accept(const BaseImmovable&) const;
 };
