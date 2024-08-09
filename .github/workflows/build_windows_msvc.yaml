@@ -23,7 +23,7 @@ jobs:
     - name: Checkout vcpkg
       id: prepare
       run: |
-        read REF < .github/scripts/vcpkg_ref
+        REF=$(cat .github/scripts/vcpkg_ref)
         cd ${{ env.VCPKG_ROOT }}
         # REF can be empty, a commit hash or a pull request
         echo "Checking out '$REF'"
