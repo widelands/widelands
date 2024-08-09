@@ -253,6 +253,9 @@ private:
 	enum class GameType { kNone, kEditor, kReplay, kScenario, kLoadGame, kFromTemplate };
 	GameType game_type_{GameType::kNone};
 
+	/// Difficulty for the game started with --scenario
+	uint32_t scenario_difficulty_{0};
+
 	/// True if left and right mouse button should be swapped
 	bool mouse_swapped_{false};
 

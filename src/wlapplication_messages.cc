@@ -114,6 +114,11 @@ void fill_parameter_vector() {
 		_("Run the given Lua script after initialization. Only valid with --scenario, --loadgame, or "
 		  "--editor."),
 		false},
+	  {"", "difficulty",
+		/** TRANSLATORS: A placeholder for a numerical value */
+		_("n"),
+		/** TRANSLATORS: `n` references a numerical placeholder */
+		_("Start the scenario with difficulty `n`. Only valid with --scenario."), false},
 	  /// Misc
 	  {"", "nosound", "", _("Start the game with sound disabled."), false},
 	  /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */

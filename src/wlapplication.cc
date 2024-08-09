@@ -1017,6 +1017,9 @@ void WLApplication::run() {
 	case GameType::kScenario: {
 		Widelands::Game game;
 		try {
+			if (scenario_difficulty_ != Widelands::kScenarioDifficultyNotSet) {
+				game.set_scenario_difficulty(scenario_difficulty_);
+			}
 			game.run_splayer_scenario_direct({filename_}, script_to_run_);
 		} catch (const std::exception& e) {
 			emergency_save(&menu, game, e.what());
@@ -1772,6 +1775,27 @@ void WLApplication::handle_commandline_parameters() {
 			// Strip trailing directory separator
 			filename_.erase(filename_.size() - 1);
 		}
+	}
+
+	if (OptionalParameter difficulty = get_commandline_option_value("difficulty");
+	    difficulty.has_value()) {
+		if (game_type_ != GameType::kScenario) {
+			throw ParameterError(CmdLineVerbosity::None,
+			   ("Command line parameter --difficulty can only be used with --scenario=..."));
+		}
+		char* endp;
+		long d = strtol(difficulty.value().c_str(), &endp, 10);
+		if (*endp != 0) {
+			throw ParameterError(
+			   CmdLineVerbosity::None,
+			   format(_("Non-integer value for command line parameter --difficulty=%s"),
+			          difficulty.value()));
+		}
+		if (d <= 0) {
+			throw ParameterError(CmdLineVerbosity::None,
+			   ("Value for command line parameter --difficulty must be positive."));
+		}
+		scenario_difficulty_ = d;
 	}
 
 	if (OptionalParameter val = get_commandline_option_value("script"); val.has_value()) {
