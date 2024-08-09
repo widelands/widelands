@@ -26,6 +26,7 @@ jobs:
         read REF < .github/scripts/vcpkg_ref
         cd ${{ env.VCPKG_ROOT }}
         # REF can be empty, a commit hash or a pull request
+        echo "Checking out '$REF'"
         [ -n "$REF" ] && git fetch
         git checkout $REF || git pull origin $REF
         echo "vcpkg_key=${{ hashFiles( './install-dependencies.sh' ) }}-${REF}" >> $GITHUB_OUTPUT
