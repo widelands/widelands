@@ -91,7 +91,7 @@ for S in atl02 emp04 fri02 fri03 fri04 fri05 ; do
                 --homedir="$TMPDIR" \
                 --datadir="$WL_DIR"/data \
                 --datadir_for_testing="$WL_DIR" \
-                --scenario="campaigns/${S}.wmf" \
+                --scenario="campaigns/${S}.wmf" --difficulty=1 \
                 --script=test/scripting/wait_save_and_quit.lua
    if [ ! -f "$SAVEFILE" ] ; then
       echo "ERROR: No savegame found for scenario $S"
