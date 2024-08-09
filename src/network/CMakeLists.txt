@@ -42,10 +42,10 @@ wl_library(network
   DEPENDS
     ai
     base
+    base_crypto
     base_exceptions
     base_macros
     base_math
-    base_md5
     base_random
     base_time_string
     build_info
@@ -67,7 +67,6 @@ wl_library(network
     notifications
     scripting_lua_interface
     scripting_lua_table
-    third_party_sha1
     ui_basic
     ui_fsmenu
     widelands_ball_of_mud

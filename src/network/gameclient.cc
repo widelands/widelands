@@ -749,10 +749,11 @@ void GameClient::send_time() {
 void GameClient::sync_report_callback() {
 	assert(d->net != nullptr);
 	if (d->net->is_connected()) {
+		crypto::MD5Checksum md5sum = d->game->get_sync_hash();
 		SendPacket s;
 		s.unsigned_8(NETCMD_SYNCREPORT);
 		s.unsigned_32(d->game->get_gametime().get());
-		s.data(d->game->get_sync_hash().data, 16);
+		s.data(md5sum.value.data(), md5sum.value.size());
 		d->net->send(s);
 	}
 }
@@ -864,7 +865,7 @@ void GameClient::handle_setting_map(RecvPacket& packet) {
 void GameClient::handle_new_file(RecvPacket& packet) {
 	std::string path = g_fs->FileSystem::fix_cross_file(packet.string());
 	uint32_t bytes = packet.unsigned_32();
-	std::string md5 = packet.string();
+	std::string expected_md5 = packet.string();
 
 	// Check whether the file or a file with that name already exists
 	if (g_fs->file_exists(path)) {
@@ -881,11 +882,8 @@ void GameClient::handle_new_file(RecvPacket& packet) {
 				}
 				fr.data_complete(complete.get(), bytes);
 				// TODO(Klaus Halfmann): compute MD5 on the fly in FileRead...
-				SimpleMD5Checksum md5sum;
-				md5sum.data(complete.get(), bytes);
-				md5sum.finish_checksum();
-				std::string localmd5 = md5sum.get_checksum().str();
-				if (localmd5 == md5) {
+				std::string localmd5 = crypto::md5_str(complete.get(), bytes);
+				if (localmd5 == expected_md5) {
 					// everything is alright we now have the file.
 					return;
 				}
@@ -911,7 +909,7 @@ void GameClient::handle_new_file(RecvPacket& packet) {
 	d->file_.reset(new NetTransferFile());
 	d->file_->bytes = bytes;
 	d->file_->filename = path;
-	d->file_->md5sum = md5;
+	d->file_->md5sum = expected_md5;
 	size_t position = path.rfind(FileSystem::file_separator(), path.size() - 2);
 	if (position != std::string::npos) {
 		path.resize(position);
@@ -977,10 +975,7 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 		std::unique_ptr<char[]> complete(new char[d->file_->bytes]);
 
 		fr.data_complete(complete.get(), d->file_->bytes);
-		SimpleMD5Checksum md5sum;
-		md5sum.data(complete.get(), d->file_->bytes);
-		md5sum.finish_checksum();
-		std::string localmd5 = md5sum.get_checksum().str();
+		std::string localmd5 = crypto::md5_str(complete.get(), d->file_->bytes);
 		if (localmd5 != d->file_->md5sum) {
 			// Something went wrong! We have to rerequest the file.
 			s.reset();
