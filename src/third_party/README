@@ -20,3 +20,4 @@ libmd:
 - Converted all files to C++, moved them into the "libmd" namespace, and renamed the include guards.
 - Included some of the files that are normally generated semi-automatically.
 - Removed file input functions specific to POSIX.
+- Removed support for MD2 and MD4.
