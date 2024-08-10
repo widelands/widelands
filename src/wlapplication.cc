@@ -1706,9 +1706,8 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (OptionalParameter msg_timeout = get_commandline_option_value("messagebox-timeout");
 	    msg_timeout.has_value()) {
-		char* endp;
-		long t = strtol(msg_timeout.value().c_str(), &endp, 10);
-		if (*endp != 0) {
+		int64_t t;
+		if (!to_long(msg_timeout.value(), &t)) {
 			throw ParameterError(
 			   CmdLineVerbosity::None,
 			   format(_("Non-integer value for command line parameter --messagebox-timeout=%s"),
@@ -1785,9 +1784,8 @@ void WLApplication::handle_commandline_parameters() {
 			   CmdLineVerbosity::None,
 			   ("Command line parameter --difficulty can only be used with --scenario=..."));
 		}
-		char* endp;
-		long d = strtol(difficulty.value().c_str(), &endp, 10);
-		if (*endp != 0) {
+		int64_t d;
+		if (!to_long(difficulty.value(), &d)) {
 			throw ParameterError(
 			   CmdLineVerbosity::None,
 			   format(_("Non-integer value for command line parameter --difficulty=%s"),

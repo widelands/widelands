@@ -21,7 +21,6 @@
 #include <SDL_mouse.h>
 #include <SDL_timer.h>
 
-#include "base/log.h"
 #include "logic/game_controller.h"
 #include "logic/save_handler.h"
 #include "ui_basic/button.h"
@@ -209,6 +208,8 @@ bool StoryMessageBox::handle_key(bool down, SDL_Keysym code) {
 }
 
 void StoryMessageBox::think() {
+	Window::think();
+
 	if (is_modal() && g_message_box_timeout > 0 &&
 	    SDL_GetTicks() > start_time_ + g_message_box_timeout) {
 		clicked_ok();

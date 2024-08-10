@@ -189,6 +189,8 @@ void WLMessageBox::clicked_back() {
 }
 
 void WLMessageBox::think() {
+	Window::think();
+
 	if (is_modal() && g_message_box_timeout > 0 &&
 	    SDL_GetTicks() > start_time_ + g_message_box_timeout) {
 		if (type_ == MBoxType::kOk) {
