@@ -1715,7 +1715,8 @@ void WLApplication::handle_commandline_parameters() {
 			          msg_timeout.value()));
 		}
 		if (t <= 0) {
-			throw ParameterError(CmdLineVerbosity::None,
+			throw ParameterError(
+			   CmdLineVerbosity::None,
 			   ("Value for command line parameter --messagebox-timeout must be positive."));
 		}
 
@@ -1780,7 +1781,8 @@ void WLApplication::handle_commandline_parameters() {
 	if (OptionalParameter difficulty = get_commandline_option_value("difficulty");
 	    difficulty.has_value()) {
 		if (game_type_ != GameType::kScenario) {
-			throw ParameterError(CmdLineVerbosity::None,
+			throw ParameterError(
+			   CmdLineVerbosity::None,
 			   ("Command line parameter --difficulty can only be used with --scenario=..."));
 		}
 		char* endp;
@@ -1793,7 +1795,7 @@ void WLApplication::handle_commandline_parameters() {
 		}
 		if (d <= 0) {
 			throw ParameterError(CmdLineVerbosity::None,
-			   ("Value for command line parameter --difficulty must be positive."));
+			                     ("Value for command line parameter --difficulty must be positive."));
 		}
 		scenario_difficulty_ = d;
 	}
