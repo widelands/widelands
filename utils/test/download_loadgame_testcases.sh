@@ -14,6 +14,7 @@ echo "Downloading v${SAVES_VER} saveloading test cases..."
 
 WL_DIR=$(dirname $(dirname $(dirname "$0")))
 cd "$WL_DIR"
+WL_DIR="$(pwd)"
 if ! [ -f src/wlapplication.cc -a -d test ] ; then
    echo
    echo "ERROR:  Cannot find the main directory of the Widelands source code."
@@ -43,5 +44,5 @@ cd "$TMPDIR"
 tar -xzf "$DL_TARGET"
 cd "$WL_DIR"
 
-mv -v "$EXTRACTED_DIR"/*.wgf test/save
+mv -v "$EXTRACTED_DIR"/*.wgf "$WL_DIR"/test/save
 
