@@ -168,7 +168,7 @@ msgstr "[true*|false]"
 
 #: ../../../../src/wlapplication_messages.cc:123
 msgid "Play the intro music at startup and show splash image until it ends."
-msgstr ""
+msgstr "Воспроизводить вступительную музыку при запуске и показывать заставку до тех пор, пока она не закончится."
 
 #: ../../../../src/wlapplication_messages.cc:124
 msgid "Force Widelands to crash when a Lua error occurs."
@@ -420,7 +420,7 @@ msgid ""
 "Whether to let the system draw the mouse cursor. Disable it only if the "
 "cursor doesn't appear right, or if you want it to be visible in screenshots "
 "or screencasts."
-msgstr ""
+msgstr "Разрешает системе отрисовывать курсор мыши. Отключайте это только в том случае, если курсор отображается неправильно или если вы хотите, чтобы он был виден на скриншотах или скринкастах."
 
 #: ../../../../src/wlapplication_messages.cc:233
 msgid "Whether to use sticky tooltips."

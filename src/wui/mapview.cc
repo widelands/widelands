@@ -358,8 +358,10 @@ void MapView::mouse_to_pixel(const Vector2i& pixel, const Transition& transition
 		}
 		return;
 	}
+
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
@@ -450,6 +452,9 @@ void MapView::set_view(const View& target_view, const Transition& passed_transit
 		}
 		return;
 	}
+
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -656,8 +661,10 @@ void MapView::zoom_around(float new_zoom,
 		}
 		return;
 	}
+
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 void MapView::reset_zoom() {

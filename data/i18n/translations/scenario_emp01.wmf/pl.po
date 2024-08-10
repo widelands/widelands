@@ -3,7 +3,7 @@
 # 
 # Translators:
 # GunChleoc, 2014
-# Wesmania <ikk_pl@yahoo.co.uk>, 2016
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2016
 # Jacek Wolszczak <shutdownrunner@o2.pl>, 2008
 # Niektóry <niektory@gmail.com>, 2020
 # tombox <wptom@wp.pl>, 2020

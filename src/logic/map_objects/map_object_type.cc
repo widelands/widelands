@@ -89,9 +89,8 @@ std::string to_string(const MapObjectType type) {
 		return "militarysite";
 	case MapObjectType::TRAININGSITE:
 		return "trainingsite";
-	case MapObjectType::MAPOBJECT:
+	default:
 		throw wexception("Unknown MapObjectType %d.", static_cast<int>(type));
 	}
-	NEVER_HERE();
 }
 }  // namespace Widelands

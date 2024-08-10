@@ -521,6 +521,8 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 		pop_task(game);
 		schedule_destroy(game);
 		return;
+	default:
+		NEVER_HERE();
 	}
 	// if the real update function failed (e.g. nothing to transport), the ship goes idle
 	ship_update_idle(game, state);
@@ -1271,9 +1273,10 @@ void Ship::warship_command(Game& game,
 			             false);
 		}
 		return;
-	}
 
-	throw wexception("Invalid warship command %d", static_cast<int>(cmd));
+	default:
+		throw wexception("Invalid warship command %d", static_cast<int>(cmd));
+	}
 }
 
 void Ship::start_battle(Game& game, Battle new_battle, bool immediately) {
@@ -1678,6 +1681,9 @@ void Ship::battle_update(Game& game) {
 			target_ship->start_task_idle(game, target_ship->descr().get_animation(current_battle.pending_damage > 0 ? "eva_fail_e" : "eva_ok_e", target_ship), kAttackAnimationDuration);
 		}
 		return;
+
+	default:
+		NEVER_HERE();
 	}
 
 	NEVER_HERE();
@@ -1950,8 +1956,10 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 	}
 	case ShipStates::kSinkRequest:
 	case ShipStates::kSinkAnimation:
-		break;
+	default:
+		NEVER_HERE();
 	}
+
 	NEVER_HERE();
 }
 
@@ -2414,6 +2422,8 @@ void Ship::draw(const EditorGameBase& egbase,
 			case ShipType::kWarship:
 				statistics_string = pgettext("ship_state", "Refitting to Warship");
 				break;
+			default:
+				NEVER_HERE();
 			}
 		} else {
 			if (ship_type_ == ShipType::kWarship) {
@@ -2479,6 +2489,8 @@ void Ship::draw(const EditorGameBase& egbase,
 				case (ShipStates::kSinkRequest):
 				case (ShipStates::kSinkAnimation):
 					break;
+				default:
+					NEVER_HERE();
 				}
 			}
 		}

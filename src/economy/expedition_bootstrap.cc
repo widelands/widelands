@@ -118,12 +118,15 @@ void ExpeditionBootstrap::cancel(Game& game) {
 		case wwWARE:
 			warehouse->insert_wares(iq.first->get_index(), iq.first->get_filled());
 			break;
-		case wwWORKER:
+		case wwWORKER: {
 			WorkersQueue& wq = dynamic_cast<WorkersQueue&>(*iq.first);
 			while (wq.get_filled() > 0) {
 				warehouse->incorporate_worker(game, wq.extract_worker());
 			}
 			break;
+		}
+		default:
+			NEVER_HERE();
 		}
 		iq.first->cleanup();
 	}
@@ -273,6 +276,8 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares(Game& game,
 			}
 			break;
 		}
+		default:
+			NEVER_HERE();
 		}
 	}
 

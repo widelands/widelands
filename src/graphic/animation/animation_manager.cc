@@ -40,6 +40,9 @@ uint32_t AnimationManager::load(const LuaTable& table,
 	case Animation::Type::kSpritesheet:
 		animations_.push_back(std::unique_ptr<Animation>(
 		   new SpriteSheetAnimation(table, basename, animation_directory)));
+		break;
+	default:
+		NEVER_HERE();
 	}
 	return animations_.size();
 }
