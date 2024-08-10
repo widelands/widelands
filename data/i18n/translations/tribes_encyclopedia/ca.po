@@ -1453,7 +1453,7 @@ msgctxt "amazons_building"
 msgid ""
 "The jungle master plants one tree between %1$s and %2$s, depending on how "
 "far she has to walk."
-msgstr ""
+msgstr "La mestra de la jungla planta un arbre aproximadament entre %1$s i %2$s, en funció de la distància que ha de caminar."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stone Workshop
 #: ../../../../data/tribes/initialization/amazons/units.lua:1469
@@ -1535,7 +1535,7 @@ msgctxt "amazons_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce one "
 "bread in %s on average."
-msgstr ""
+msgstr "Si se li subministren els béns necessaris adequadament, aquest edifici pot elaborar una peça de pa cada %s de mitjana."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Chocolate
 #. Brewery
@@ -1792,7 +1792,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Aquest edifici produeix un transbordador aproximadament entre %1$s i %2$s, en funció de la distància que ha de caminar el mestre d'aixa."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Shipyard
 #: ../../../../data/tribes/initialization/amazons/units.lua:1700
@@ -1825,7 +1825,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Aquest edifici produeix un vaixell aproximadament entre %1$s i %2$s, en funció de la distància que ha de caminar el mestre d'aixa."
 
 #. TRANSLATORS: Lore helptext for an Amazon building: Construction Site
 #. TRANSLATORS: Lore helptext for an Atlantean building: Construction Site
@@ -4545,7 +4545,7 @@ msgstr "Askadus, inventor de l’eix vertical per als molins de vent"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The sawmill needs %s on average to produce one plank."
-msgstr ""
+msgstr "La serradora triga %s de mitjana a produir un tauló."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Smokery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1671
@@ -4656,7 +4656,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce one "
 "bread in %s on average."
-msgstr ""
+msgstr "Si se li subministren els béns necessaris adequadament, aquest edifici pot elaborar una peça de pa cada %s de mitjana."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Charcoal
 #. Kiln
@@ -4704,7 +4704,7 @@ msgstr "Una veu negra que surt d’un kiln de carbó"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "El kiln de carbó necessita %s de mitjana per produir una unitat de carbó."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Smelting
 #. Works
@@ -4873,7 +4873,7 @@ msgstr "Pòster de reclutament"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "El quarter necessita %s de mitjana per reclutar un soldat."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Horse Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1802
@@ -5396,7 +5396,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Aquest edifici produeix un transbordador aproximadament entre %1$s i %2$s, en funció de la distància que ha de caminar el mestre d'aixa."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Shipyard
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Shipyard
@@ -5434,7 +5434,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Aquest edifici produeix un vaixell aproximadament entre %1$s i %2$s, en funció de la distància que ha de caminar el mestre d'aixa."
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2130
@@ -6989,7 +6989,7 @@ msgstr "Endureix els troncs amb un procediment amb foc. Aquesta fusta endurida s
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The wood hardener needs %s on average to produce one blackwood."
-msgstr ""
+msgstr "L'enduridor de fusta triga %s de mitjana a produir una peça de fusta endurida."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Reed Yard
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1298
@@ -7281,7 +7281,7 @@ msgstr "Cançó dels carboners"
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "El kiln de carbó necessita %s de mitjana per produir una unitat de carbó."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Smelting Works
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1429
@@ -7899,7 +7899,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Aquest edifici produeix un transbordador aproximadament entre %1$s i %2$s, en funció de la distància que ha de caminar el mestre d'aixa."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Shipyard
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1826
@@ -7917,7 +7917,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Aquest edifici produeix un vaixell aproximadament entre %1$s i %2$s, en funció de la distància que ha de caminar el mestre d'aixa."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Weaving Mill
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1850
@@ -11230,7 +11230,7 @@ msgstr "Lema del gremi de fusters"
 #, lua-format
 msgctxt "empire_building"
 msgid "The sawmill needs %s on average to produce one plank."
-msgstr ""
+msgstr "La serradora triga %s de mitjana a produir un tauló."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11483,7 +11483,7 @@ msgstr "Proverbi imperial que significa que s’ha de jutjar si són bons o dole
 #, lua-format
 msgctxt "empire_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "El kiln de carbó necessita %s de mitjana per produir una unitat de carbó."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11630,7 +11630,7 @@ msgstr "Equipa i entrena els reclutes per convertir-los en soldats."
 #, lua-format
 msgctxt "empire_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "El quarter necessita %s de mitjana per reclutar un soldat."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12395,7 +12395,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Aquest edifici produeix un transbordador aproximadament entre %1$s i %2$s, en funció de la distància que ha de caminar el mestre d'aixa."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12425,7 +12425,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Aquest edifici produeix un vaixell aproximadament entre %1$s i %2$s, en funció de la distància que ha de caminar el mestre d'aixa."
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2383
@@ -14657,7 +14657,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one coal between %1$s and %2$s, depending on how "
 "far the charcoal burner has to walk."
-msgstr ""
+msgstr "Aquest edifici aconsegueix una unitat de carbó aproximadament entre %1$s i %2$s, en funció de la distància que ha de caminar el carboner."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Berry Farm
 #: ../../../../data/tribes/initialization/frisians/units.lua:1713
@@ -15600,7 +15600,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Aquest edifici produeix un transbordador aproximadament entre %1$s i %2$s, en funció de la distància que ha de caminar el mestre d'aixa."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Shipyard
 #: ../../../../data/tribes/initialization/frisians/units.lua:2230
@@ -15625,7 +15625,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Aquest edifici produeix un vaixell aproximadament entre %1$s i %2$s, en funció de la distància que ha de caminar el mestre d'aixa."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Weaving Mill
 #: ../../../../data/tribes/initialization/frisians/units.lua:2253
