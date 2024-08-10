@@ -72,23 +72,13 @@ jobs:
   update:
     needs: vcpkg-packages
     if: ${{ github.repository == 'widelands/widelands' && needs.vcpkg-packages.outputs.result-x64 && needs.vcpkg-packages.outputs.result-x86 }}
-    name: Commit new version
-    runs-on: windows-2022
+    name: Update vcpkg_ref
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+    - name: Set variable
+      uses: mmoyaferrer/set-github-variable@v1.0.0
       with:
-        fetch-depth: 1
-        persist-credentials: false
-    - name: Update vcpkg_ref
-      run: |
-        echo "Updating to ${{ needs.vcpkg-packages.outputs.vcpkg_ref }}"
-        echo "${{ needs.vcpkg-packages.outputs.vcpkg_ref }}" > .github/scripts/vcpkg_ref
-        if [ -n "$(git status -s)" ]; then
-          git config --global user.name "The Widelands Build Bot"
-          git config --global user.email "bunnybot@widelands.org"
-          git add .github/scripts/vcpkg_ref
-          git commit -m "Update vcpkg version"
-          git push "https://bunnybot:${{ secrets.WIDELANDS_FORMAT_TOKEN }}@github.com/${{ github.repository }}.git" master
-        fi
-      shell: bash
+        name: 'VCPKG_REF'
+        value: ${{ needs.vcpkg-packages.outputs.vcpkg_ref }}
+        repository: widelands/widelands
+        token: ${{ secrets.VARIABLES_TOKEN }}
