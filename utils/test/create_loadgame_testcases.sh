@@ -56,6 +56,13 @@ if [ -z "$WIDELANDS" ] ; then
       echo "       You can specify it by setting the WIDELANDS environment variable."
       exit 1
    fi
+elif ! hash "$WIDELANDS" ; then
+   if hash "${WL_DIR}/${WIDELANDS}" ; then
+      WIDELANDS="${WL_DIR}/${WIDELANDS}"
+   else
+      echo "ERROR: The Widelands binary was not found at '$WIDELANDS'"
+      exit 1
+   fi
 fi
 
 REGTEST_DIR=widelands_regression_test/WidelandsTestCase/save
@@ -86,17 +93,19 @@ SAVEFILE="${TMPDIR}/save/test_save.wgf"
 
 echo "Creating test savegames of all campaigns with custom units..."
 for S in atl02 emp04 fri02 fri03 fri04 fri05 ; do
+   echo "   running ${S}..."
    "$WIDELANDS" --nosound --fail-on-lua-error --language=en_US \
                 --messagebox-timeout=1 \
                 --homedir="$TMPDIR" \
                 --datadir="$WL_DIR"/data \
                 --datadir_for_testing="$WL_DIR" \
                 --scenario="campaigns/${S}.wmf" --difficulty=1 \
-                --script=test/scripting/wait_save_and_quit.lua
+                --script=test/scripting/wait_save_and_quit.lua >"${TMPDIR}/${S}.log"
    if [ ! -f "$SAVEFILE" ] ; then
       echo "ERROR: No savegame found for scenario $S"
       exit 1
    fi
+   echo "      done."
    mv "$SAVEFILE" "${TARGET_DIR}/${PREFIX}campaign_${S}.wgf"
 done
 
