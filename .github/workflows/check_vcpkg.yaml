@@ -71,7 +71,7 @@ jobs:
         echo "result-${{ matrix.arch }}=true" >> $env:GITHUB_OUTPUT
   update:
     needs: vcpkg-packages
-    if: ${{ github.repository == 'tothxa/widelands' && needs.vcpkg-packages.outputs.result-x64 && needs.vcpkg-packages.outputs.result-x86 }}
+    # if: ${{ github.repository == 'tothxa/widelands' && needs.vcpkg-packages.outputs.result-x64 && needs.vcpkg-packages.outputs.result-x86 }}
     name: Update vcpkg_ref
     runs-on: ubuntu-latest
     steps:
