@@ -4,6 +4,7 @@ concurrency:
   cancel-in-progress: true
 on:
   workflow_dispatch:
+  workflow_call:
   schedule:
     # Weekly on Friday at 2:00 a.m.
     - cron: '0 2 * * 5'
