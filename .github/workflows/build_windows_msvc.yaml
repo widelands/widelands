@@ -20,10 +20,23 @@ jobs:
       uses: actions/checkout@v4
       with:
         fetch-depth: 1
+    - name: Get vcpkg_ref
+      if ${{ vars.VCPKG_REF == "" }}
+      # PRs from forked repos can't access repo variables (nor variables from the forked repo),
+      # but can restore caches from master
+      uses: actions/cache/restore@v4
+      with:
+        path: vcpkg_ref
+        restore-keys: |
+          vcpkg_ref-
     - name: Checkout vcpkg
       id: prepare
       run: |
         REF=${{ vars.VCPKG_REF }}
+        if [ -z "$REF" -a -f vcpkg_ref ] ; then
+          REF="$(cat vcpkg_ref)"
+        fi
+        if
         cd ${{ env.VCPKG_ROOT }}
         # REF can be empty, a commit hash or a pull request
         echo "Checking out '$REF'"

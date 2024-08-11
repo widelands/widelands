@@ -74,11 +74,14 @@ jobs:
     if: ${{ github.repository == 'widelands/widelands' && needs.vcpkg-packages.outputs.result-x64 && needs.vcpkg-packages.outputs.result-x86 }}
     name: Update vcpkg_ref
     runs-on: ubuntu-latest
+    env: GH_TOKEN=${{ secrets.WIDELANDS_FORMAT_TOKEN }}
     steps:
     - name: Set variable
-      uses: mmoyaferrer/set-github-variable@v1.0.0
-      with:
-        name: 'VCPKG_REF'
-        value: ${{ needs.vcpkg-packages.outputs.vcpkg_ref }}
-        repository: widelands/widelands
-        token: ${{ secrets.VARIABLES_TOKEN }}
+      run: |
+        gh variable set -b "${{ needs.vcpkg-packages.outputs.vcpkg_ref }}"
+        echo "${{ needs.vcpkg-packages.outputs.vcpkg_ref }}" > vcpkg_ref
+    - name: Store in cache
+      uses: actions/cache/save@v4
+        with:
+          path: vcpkg_ref
+          key: vcpkg_ref-"${{ GITHUB_JOB }}-${{ needs.vcpkg-packages.outputs.vcpkg_ref }}"
