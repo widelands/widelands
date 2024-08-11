@@ -10,10 +10,6 @@ on:
         type: string
 
 jobs:
-  check_vcpkg:
-    # NOCOM: just once, for testing and to update the stale VCPKG_REF variable
-    uses: ./.github/workflows/check_vcpkg.yaml
-
   clang_tidy:
     if: ${{ inputs.clang_tidy != 'false' }}
     uses: ./.github/workflows/build_clang_tidy.yaml

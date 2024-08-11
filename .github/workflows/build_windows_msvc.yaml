@@ -27,6 +27,9 @@ jobs:
       uses: actions/cache/restore@v4
       with:
         path: vcpkg_ref
+        key: vcpkg_ref-invalid-to-use-latest
+        # Never fall back to unspecified vcpkg version
+        fail-on-cache-miss: true
         restore-keys: |
           vcpkg_ref-
     - name: Checkout vcpkg
@@ -36,7 +39,6 @@ jobs:
         if [ -z "$REF" -a -f vcpkg_ref ] ; then
           REF="$(cat vcpkg_ref)"
         fi
-        if
         cd ${{ env.VCPKG_ROOT }}
         # REF can be empty, a commit hash or a pull request
         echo "Checking out '$REF'"
