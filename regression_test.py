@@ -10,8 +10,10 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import concurrent.futures as cf
 import time
 import datetime
+import multiprocessing
 
 #Python2/3 compat code for iterating items
 try:
@@ -145,7 +147,7 @@ class WidelandsTestCase(unittest.TestCase):
         stdout = open(stdout_filename, "r").read()
         self.verify_success(stdout, stdout_filename)
 
-        find_saves = lambda stdout: re.findall("Script requests save to: (\w+)$", stdout, re.M)
+        find_saves = lambda stdout: re.findall(r'Script requests save to: (\w+)$', stdout, re.M)
         savegame_done = { fn: False for fn in find_saves(stdout) }
         which_time = 1
         while not all(savegame_done.values()):
@@ -216,6 +218,9 @@ def parse_args():
         help = "Assume success on return code 1, to allow running the tests "
         "without ASan reporting false positives."
     )
+    p.add_argument("-j", "--workers", type=int, default = 1,
+        help = "Use this many parallel workers."
+    )
     if has_timeout:
         p.add_argument("-t", "--timeout", type=float, default = "10",
             help = "Set the timeout duration for test cases in minutes. Default is 10 minutes."
@@ -254,7 +259,7 @@ def discover_loadgame_tests(regexp, suite):
         for test_script in sorted(glob(os.path.join(fixture, "test*.lua"))):
             if regexp is not None and not re.search(regexp, test_script):
                 continue
-            suite.addTest(
+            suite.append(
                     WidelandsTestCase(test_script,
                         loadgame=savegame, script=test_script))
     # Savegames without custom script, just test loading
@@ -262,7 +267,7 @@ def discover_loadgame_tests(regexp, suite):
     for savegame in sorted(glob(os.path.join("test", "save", "*.wgf"))):
         if regexp is not None and not re.search(regexp, savegame):
             continue
-        suite.addTest(WidelandsTestCase(savegame, loadgame=savegame, script=test_script))
+        suite.append(WidelandsTestCase(savegame, loadgame=savegame, script=test_script))
 
 
 def discover_scenario_tests(regexp, suite):
@@ -273,7 +278,7 @@ def discover_scenario_tests(regexp, suite):
         for test_script in sorted(glob(os.path.join(wlmap, "scripting", "test*.lua"))):
             if regexp is not None and not re.search(regexp, test_script):
                 continue
-            suite.addTest(
+            suite.append(
                     WidelandsTestCase(test_script,
                         scenario=wlmap, script=test_script))
 
@@ -288,7 +293,7 @@ def discover_game_template_tests(regexp, suite):
             continue
         if regexp is not None and not re.search(regexp, test_script):
             continue
-        suite.addTest(
+        suite.append(
                 WidelandsTestCase(test_script,
                     new_game_from_template=templ, script=test_script))
 
@@ -300,7 +305,7 @@ def discover_editor_tests(regexp, suite):
         for test_script in sorted(glob(os.path.join(wlmap, "scripting", "editor_test*.lua"))):
             if regexp is not None and not re.search(regexp, test_script):
                 continue
-            suite.addTest(
+            suite.append(
                     WidelandsTestCase(test_script,
                         editor=wlmap, script=test_script))
 
@@ -318,13 +323,44 @@ def main():
         out("Python version does not support timeout on subprocesses,\n"
             "test cases may run indefinitely.\n\n")
 
-    suite = unittest.TestSuite()
-    discover_loadgame_tests(args.regexp, suite)
-    discover_scenario_tests(args.regexp, suite)
-    discover_game_template_tests(args.regexp, suite)
-    discover_editor_tests(args.regexp, suite)
+    if args.workers == 0:
+        args.workers = max(1, multiprocessing.cpu_count() // 2)
+        print(f"Will run with %d workers." % args.workers)
 
-    return unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()
+    test_cases = []
+    discover_loadgame_tests(args.regexp, test_cases)
+    discover_scenario_tests(args.regexp, test_cases)
+    discover_game_template_tests(args.regexp, test_cases)
+    discover_editor_tests(args.regexp, test_cases)
+
+    if args.workers == 1:
+        # Single-threaded execution is special-cased for nicer grouping.
+        suite = unittest.TestSuite()
+        suite.addTests(test_cases)
+        return unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()
+
+    # Parallel execution creates one single-test suite for each testcase.
+    def run_test_suite(test_case):
+        suite = unittest.TestSuite()
+        suite.addTest(test_case)
+        result = unittest.TextTestRunner(verbosity=2).run(suite)
+        return result.wasSuccessful()
+
+    nr_errors = 0
+    start_time = get_time()
+
+    with cf.ThreadPoolExecutor(max_workers = args.workers) as executor:
+        futures = {executor.submit(run_test_suite, test_case): test_case for test_case in test_cases}
+        for future in cf.as_completed(futures):
+            if not future.result():
+                nr_errors += 1
+
+    end_time = get_time()
+    if nr_errors == 0:
+        print(f"\nRan %d test cases in %.3f s, all tests passed." % (len(test_cases), end_time - start_time))
+        return True
+    print(f"\nRan %d test cases in %.3f s, %d tests passed, %d tests failed!" % (len(test_cases), end_time - start_time, len(test_cases) - nr_errors, nr_errors))
+    return False
 
 if __name__ == '__main__':
     sys.exit(0 if main() else 1)
