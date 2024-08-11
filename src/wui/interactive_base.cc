@@ -516,6 +516,9 @@ InfoToDraw InteractiveBase::get_info_to_draw(bool show) const {
 	if ((display_flags & InteractiveBase::dfShowBuildings) != 0u) {
 		info_to_draw = info_to_draw | InfoToDraw::kShowBuildings;
 	}
+	if ((display_flags & InteractiveBase::dfShowImmovables) != 0u) {
+		info_to_draw = info_to_draw | InfoToDraw::kShowImmovables;
+	}
 
 	if (!show) {
 		return info_to_draw;
