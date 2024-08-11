@@ -86,4 +86,4 @@ jobs:
       uses: actions/cache/save@v4
       with:
         path: vcpkg_ref
-        key: vcpkg_ref-"${{ GITHUB_JOB }}-${{ needs.vcpkg-packages.outputs.vcpkg_ref }}"
+        key: vcpkg_ref-"${{ env.GITHUB_JOB }}-${{ needs.vcpkg-packages.outputs.vcpkg_ref }}"
