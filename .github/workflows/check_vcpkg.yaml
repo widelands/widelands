@@ -72,15 +72,16 @@ jobs:
         echo "result-${{ matrix.arch }}=true" >> $env:GITHUB_OUTPUT
   update:
     needs: vcpkg-packages
-    if: ${{ github.repository == 'widelands/widelands' && needs.vcpkg-packages.outputs.result-x64 && needs.vcpkg-packages.outputs.result-x86 }}
+    # NOCOM: just once to force update
+    # if: ${{ github.repository == 'widelands/widelands' && needs.vcpkg-packages.outputs.result-x64 && needs.vcpkg-packages.outputs.result-x86 }}
     name: Update vcpkg_ref
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ secrets.WIDELANDS_FORMAT_TOKEN }}
+    #env:
+    #  GH_TOKEN: ${{ secrets.WIDELANDS_FORMAT_TOKEN }}
     steps:
     - name: Set variable
       run: |
-        gh variable set -b "${{ needs.vcpkg-packages.outputs.vcpkg_ref }}"
+        GH_TOKEN="${{ secrets.WIDELANDS_FORMAT_TOKEN }}" gh variable set -b "${{ needs.vcpkg-packages.outputs.vcpkg_ref }}"
         echo "${{ needs.vcpkg-packages.outputs.vcpkg_ref }}" > vcpkg_ref
     - name: Store in cache
       uses: actions/cache/save@v4
