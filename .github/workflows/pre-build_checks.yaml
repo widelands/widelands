@@ -10,6 +10,14 @@ on:
         type: string
 
 jobs:
+  variable_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: test
+        run: |
+          echo "vcpkg_ref is '${{ vars.VCPKG_REF }}'"
+          exit 1
+  
   clang_tidy:
     if: ${{ inputs.clang_tidy != 'false' }}
     uses: ./.github/workflows/build_clang_tidy.yaml
