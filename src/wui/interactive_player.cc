@@ -141,7 +141,7 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
 				opacity = 1.0f;
 			} else {
 				player_color = nullptr;
-				opacity = Widelands::kBuildingSilhouetteOpacity;
+				opacity = Widelands::kImmovableSilhouetteOpacity;
 			}
 			if (building->type() == Widelands::MapObjectType::DISMANTLESITE &&
 			    // TODO(Nordfriese): `building` can only be nullptr in savegame
