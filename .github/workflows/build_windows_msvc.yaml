@@ -21,7 +21,7 @@ jobs:
       with:
         fetch-depth: 1
     - name: Get vcpkg_ref
-      if ${{ vars.VCPKG_REF == "" }}
+      if: ${{ vars.VCPKG_REF == "" }}
       # PRs from forked repos can't access repo variables (nor variables from the forked repo),
       # but can restore caches from master
       uses: actions/cache/restore@v4
