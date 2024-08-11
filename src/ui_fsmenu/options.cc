@@ -301,8 +301,11 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                           _("Show Soldier Levels")),
      show_buildings_(
         &box_newgame_, UI::PanelStyle::kFsMenu, "buildings", Vector2i::zero(), _("Show Buildings")),
-     show_immovables_(
-        &box_newgame_, UI::PanelStyle::kFsMenu, "immovables", Vector2i::zero(), _("Show Immovables")),
+     show_immovables_(&box_newgame_,
+                      UI::PanelStyle::kFsMenu,
+                      "immovables",
+                      Vector2i::zero(),
+                      _("Show Immovables")),
      show_workarea_overlap_(&box_newgame_,
                             UI::PanelStyle::kFsMenu,
                             "workarea_overlap",

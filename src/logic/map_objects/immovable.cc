@@ -433,9 +433,9 @@ void Immovable::draw(const Time& gametime,
 			dst->blit_animation(
 			   point_on_dst, coords, scale, anim_, Time(gametime.get() - animstart_.get()));
 		} else {
-			dst->blit_animation(
-			   point_on_dst, coords, scale, anim_, Time(gametime.get() - animstart_.get()), nullptr,
-			   kImmovableSilhouetteOpacity);
+			dst->blit_animation(point_on_dst, coords, scale, anim_,
+			                    Time(gametime.get() - animstart_.get()), nullptr,
+			                    kImmovableSilhouetteOpacity);
 		}
 		if (former_building_descr_ != nullptr) {
 			do_draw_info(
@@ -484,11 +484,11 @@ void Immovable::draw_construction(const Time& gametime,
 		// Not the first pic, so draw the previous one in the back
 		if ((info_to_draw & InfoToDraw::kShowImmovables) != 0) {
 			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_,
-				            Time(frametime.get() * (current_frame - 1)), &player_color);
+			                    Time(frametime.get() * (current_frame - 1)), &player_color);
 		} else {
 			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_,
-				            Time(frametime.get() * (current_frame - 1)), nullptr,
-				            kImmovableSilhouetteOpacity);
+			                    Time(frametime.get() * (current_frame - 1)), nullptr,
+			                    kImmovableSilhouetteOpacity);
 		}
 	}
 
@@ -496,12 +496,11 @@ void Immovable::draw_construction(const Time& gametime,
 
 	if ((info_to_draw & InfoToDraw::kShowImmovables) != 0) {
 		dst->blit_animation(point_on_dst, coords, scale, anim_,
-			            Time((frametime * current_frame).get()),
-			            &player_color, 1.f, percent);
+		                    Time((frametime * current_frame).get()), &player_color, 1.f, percent);
 	} else {
 		dst->blit_animation(point_on_dst, coords, scale, anim_,
-			            Time((frametime * current_frame).get()),
-			            nullptr, kImmovableSilhouetteOpacity, percent);
+		                    Time((frametime * current_frame).get()), nullptr,
+		                    kImmovableSilhouetteOpacity, percent);
 	}
 
 	// Additionally, if statistics are enabled, draw a progression string
