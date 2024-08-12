@@ -102,13 +102,10 @@ BaseListselect::BaseListselect(Panel* const parent,
 
 	if (selection_mode_ == ListselectLayout::kShowCheck) {
 		check_pic_ = g_image_cache->get("images/ui_basic/list_selected.png");
-		max_pic_width_ = check_pic_->width();
 		int pic_h = check_pic_->height();
 		if (pic_h > lineheight_) {
 			lineheight_ = pic_h;
 		}
-	} else {
-		max_pic_width_ = 0;
 	}
 	set_can_focus(true);
 	layout();
@@ -280,9 +277,9 @@ void BaseListselect::select(uint32_t i, SnapSelectionToEnabled snap) {
 
 	if (selection_mode_ == ListselectLayout::kShowCheck) {
 		if (selection_ != no_selection_index()) {
-			entry_records_[selection_]->pic = nullptr;
+			entry_records_[selection_]->checked_ = false;
 		}
-		entry_records_[i]->pic = check_pic_;
+		entry_records_[i]->checked_ = true;
 	}
 	selection_ = i;
 	scroll_to_selection();
@@ -374,8 +371,9 @@ int BaseListselect::calculate_desired_width() {
 	}
 
 	const int picw = max_pic_width_ != 0 ? max_pic_width_ + 10 : 0;
+	const int chkw = selection_mode_ == ListselectLayout::kShowCheck ? check_pic_->width() + 10 : 0;
 	const int old_width = get_w();
-	return txt_width + picw + 8 + old_width - get_eff_w();
+	return txt_width + picw + chkw + 8 + old_width - get_eff_w();
 }
 
 void BaseListselect::layout() {
@@ -432,6 +430,9 @@ void BaseListselect::draw(RenderTarget& dst) {
 		dst.brighten_rect(Recti(0, 0, get_eff_w(), get_h()), ms_darken_value);
 	}
 
+	int chkw = selection_mode_ == ListselectLayout::kShowCheck ? check_pic_->width() + 10 : 0;
+	int picw = max_pic_width_ != 0 ? max_pic_width_ + 10 : 0;
+
 	while (idx < entry_records_.size()) {
 		assert(eff_h < std::numeric_limits<int32_t>::max());
 
@@ -472,17 +473,22 @@ void BaseListselect::draw(RenderTarget& dst) {
 			}
 		}
 
-		int picw = max_pic_width_ != 0 ? max_pic_width_ + 10 : 0;
+		// Draw checkmark
+		if (er.checked_) {
+			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ?
+                              get_eff_w() - check_pic_->width() - 1 - kIndentStrength * er.indent :
+                              kIndentStrength * er.indent + 1,
+			                  y + (lineheight_unpadded - check_pic_->height()) / 2),
+			         check_pic_);
+		}
 
 		// Now draw pictures
 		if (er.pic != nullptr) {
-			dst.blit(
-			   Vector2i(UI::g_fh->fontset()->is_rtl() ?
-                        get_eff_w() - er.pic->width() - (max_pic_width_ - er.pic->width()) / 2 - 1 -
-			                  kIndentStrength * er.indent :
-                        kIndentStrength * er.indent + (max_pic_width_ - er.pic->width()) / 2 + 1,
-			            y + (lineheight_unpadded - er.pic->height()) / 2),
-			   er.pic);
+			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ?
+                              get_eff_w() - chkw - er.pic->width() - (max_pic_width_ - er.pic->width()) / 2 - 1 - kIndentStrength * er.indent :
+                              chkw + kIndentStrength * er.indent + (max_pic_width_ - er.pic->width()) / 2 + 1,
+			                  y + (lineheight_unpadded - er.pic->height()) / 2),
+				 er.pic);
 		}
 
 		// Fix vertical position for mixed font heights
@@ -503,14 +509,14 @@ void BaseListselect::draw(RenderTarget& dst) {
 		Vector2i hotkey_point(point);
 		if (UI::g_fh->fontset()->is_rtl()) {
 			if (er.name_alignment == UI::Align::kRight) {
-				text_point.x = maxw - widest_text_ - picw;
+				text_point.x = maxw - widest_text_ - picw - chkw;
 			} else if (widest_hotkey_ > 0) {
 				text_point.x += widest_hotkey_ + kHotkeyGap;
 			}
 			text_point.x -= kIndentStrength * er.indent;
 		} else {
 			hotkey_point.x = maxw - widest_hotkey_;
-			text_point.x += picw;
+			text_point.x += picw + chkw;
 			text_point.x += kIndentStrength * er.indent;
 		}
 
