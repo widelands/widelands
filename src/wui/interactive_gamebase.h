@@ -74,8 +74,7 @@ protected:
 		kStatistics,
 		kSoldierLevels,
 		kWorkareaOverlap,
-		kBuildings,
-		kImmovables
+		kBuildings
 	};
 
 	// Adds the mapviewmenu_ to the toolbar

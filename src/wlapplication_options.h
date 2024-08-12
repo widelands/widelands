@@ -248,7 +248,6 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameShowhideStats,
 	kInGameShowhideSoldiers,
 	kInGameShowhideBuildings,
-	kInGameShowhideImmovables,
 	kInGameShowhideWorkareas,
 
 	kInGameMinimap,           // alias of kCommonMinimap

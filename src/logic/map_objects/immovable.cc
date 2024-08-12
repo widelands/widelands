@@ -429,7 +429,7 @@ void Immovable::draw(const Time& gametime,
 		return;
 	}
 	if (anim_construction_total_ == 0u) {
-		if ((info_to_draw & InfoToDraw::kShowImmovables) != 0) {
+		if ((info_to_draw & InfoToDraw::kShowBuildings) != 0) {
 			dst->blit_animation(
 			   point_on_dst, coords, scale, anim_, Time(gametime.get() - animstart_.get()));
 		} else {
@@ -482,7 +482,7 @@ void Immovable::draw_construction(const Time& gametime,
 	const RGBColor& player_color = get_owner()->get_playercolor();
 	if (current_frame > 0) {
 		// Not the first pic, so draw the previous one in the back
-		if ((info_to_draw & InfoToDraw::kShowImmovables) != 0) {
+		if ((info_to_draw & InfoToDraw::kShowBuildings) != 0) {
 			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_,
 			                    Time(frametime.get() * (current_frame - 1)), &player_color);
 		} else {
@@ -494,7 +494,7 @@ void Immovable::draw_construction(const Time& gametime,
 
 	const int percent = ((done.get() % units_per_frame.get()) * 100) / units_per_frame.get();
 
-	if ((info_to_draw & InfoToDraw::kShowImmovables) != 0) {
+	if ((info_to_draw & InfoToDraw::kShowBuildings) != 0) {
 		dst->blit_animation(point_on_dst, coords, scale, anim_,
 		                    Time((frametime * current_frame).get()), &player_color, 1.f, percent);
 	} else {

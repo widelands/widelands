@@ -301,11 +301,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                           _("Show Soldier Levels")),
      show_buildings_(
         &box_newgame_, UI::PanelStyle::kFsMenu, "buildings", Vector2i::zero(), _("Show Buildings")),
-     show_immovables_(&box_newgame_,
-                      UI::PanelStyle::kFsMenu,
-                      "immovables",
-                      Vector2i::zero(),
-                      _("Show Immovables")),
      show_workarea_overlap_(&box_newgame_,
                             UI::PanelStyle::kFsMenu,
                             "workarea_overlap",
@@ -454,7 +449,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_newgame_.add(&show_statistics_, UI::Box::Resizing::kFullSize);
 	box_newgame_.add(&show_soldier_levels_, UI::Box::Resizing::kFullSize);
 	box_newgame_.add(&show_buildings_, UI::Box::Resizing::kFullSize);
-	box_newgame_.add(&show_immovables_, UI::Box::Resizing::kFullSize);
 	box_newgame_.add(&show_workarea_overlap_, UI::Box::Resizing::kFullSize);
 
 	// In-Game
@@ -553,7 +547,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	show_statistics_.set_state((opt.display_flags & InteractiveBase::dfShowStatistics) != 0);
 	show_soldier_levels_.set_state((opt.display_flags & InteractiveBase::dfShowSoldierLevels) != 0);
 	show_buildings_.set_state((opt.display_flags & InteractiveBase::dfShowBuildings) != 0);
-	show_immovables_.set_state((opt.display_flags & InteractiveBase::dfShowImmovables) != 0);
 	show_workarea_overlap_.set_state((opt.display_flags & InteractiveBase::dfShowWorkareaOverlap) !=
 	                                 0);
 
@@ -884,7 +877,6 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 	flags |= show_statistics_.get_state() ? InteractiveBase::dfShowStatistics : 0;
 	flags |= show_soldier_levels_.get_state() ? InteractiveBase::dfShowSoldierLevels : 0;
 	flags |= show_buildings_.get_state() ? InteractiveBase::dfShowBuildings : 0;
-	flags |= show_immovables_.get_state() ? InteractiveBase::dfShowImmovables : 0;
 	flags |= show_workarea_overlap_.get_state() ? InteractiveBase::dfShowWorkareaOverlap : 0;
 	os_.display_flags = flags;
 

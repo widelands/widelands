@@ -185,7 +185,6 @@ private:
 	UI::Checkbox show_statistics_;
 	UI::Checkbox show_soldier_levels_;
 	UI::Checkbox show_buildings_;
-	UI::Checkbox show_immovables_;
 	UI::Checkbox show_workarea_overlap_;
 
 	// In-Game options

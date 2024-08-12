@@ -307,15 +307,6 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	                  g_image_cache->get("images/wui/stats/genstats_nrbuildings.png"), false, "",
 	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideBuildings, false));
 
-	showhidemenu_.add(get_display_flag(dfShowImmovables) ?
-                         /** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
-                          * immovables (trees, rocks etc.) are shown */
-                         _("Hide Immovables") :
-                         _("Show Immovables"),
-	                  ShowHideEntry::kImmovables,
-	                  g_image_cache->get("images/wui/menus/toggle_immovables.png"), false, "",
-	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideImmovables, false));
-
 	showhidemenu_.select(last_selection);
 }
 
@@ -335,9 +326,6 @@ void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
 	} break;
 	case ShowHideEntry::kBuildings: {
 		set_display_flag(dfShowBuildings, !get_display_flag(dfShowBuildings));
-	} break;
-	case ShowHideEntry::kImmovables: {
-		set_display_flag(dfShowImmovables, !get_display_flag(dfShowImmovables));
 	} break;
 	case ShowHideEntry::kWorkareaOverlap: {
 		set_display_flag(dfShowWorkareaOverlap, !get_display_flag(dfShowWorkareaOverlap));
@@ -520,11 +508,6 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 		set_display_flag(dfShowBuildings, !get_display_flag(dfShowBuildings));
 		return true;
 	}
-	if (matches_shortcut(KeyboardShortcut::kInGameShowhideImmovables, code)) {
-		set_display_flag(dfShowImmovables, !get_display_flag(dfShowImmovables));
-		return true;
-	}
-
 	if (matches_shortcut(KeyboardShortcut::kInGameStatsGeneral, code)) {
 		menu_windows_.stats_general.toggle();
 		return true;
