@@ -4,7 +4,7 @@
 # 
 # Translators:
 # tombox <wptom@wp.pl>, 2019
-# Sylwia Studzińska <sanuspg@gmail.com>, 2019
+# ef893623c0d73ce70e67d8651f0d6c55_469af92 <8dc4100963128dc61a2750ba4ad599c3_832097>, 2019
 # Niektóry <niektory@gmail.com>, 2020
 # Marcin S <dzidek1003@o2.pl>, 2021
 # Antoni Szpikowski <szantek2004@gmail.com>, 2021
