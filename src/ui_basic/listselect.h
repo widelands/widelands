@@ -136,6 +136,7 @@ struct BaseListselect : public Panel {
 	void scroll_to_selection();
 
 	void set_linked_dropdown(UI::BaseDropdown* d) {
+		assert(selection_mode_ == ListselectLayout::kDropdown);
 		linked_dropdown_ = d;
 	}
 
