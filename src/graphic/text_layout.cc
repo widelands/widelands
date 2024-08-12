@@ -47,6 +47,8 @@ std::string as_richtext_paragraph(const std::string& text, UI::Align align) {
 	case UI::Align::kLeft:
 		alignment = "left";
 		break;
+	default:
+		NEVER_HERE();
 	}
 
 	return format("<rt><p align=%s>%s</p></rt>", alignment, text);
@@ -169,7 +171,7 @@ as_url_hyperlink(const std::string& url, const std::string& text, const std::str
 std::shared_ptr<const UI::RenderedText>
 autofit_text(const std::string& text, const UI::FontStyleInfo& font_info, int width) {
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh->render(as_richtext_paragraph(text, font_info));
+	   UI::g_fh->render(is_richtext(text) ? text : as_richtext_paragraph(text, font_info));
 
 	// Autoshrink if it doesn't fit
 	if (width > 0 && rendered_text->width() > width) {
@@ -203,8 +205,9 @@ std::string as_heading_with_content(const std::string& header,
 		                          noescape ? header : richtext_escape(header)),
 		              as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
 		                          noescape ? content : richtext_escape(content)));
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 std::string as_heading(const std::string& txt, UI::PanelStyle style, bool is_first) {
@@ -215,8 +218,9 @@ std::string as_heading(const std::string& txt, UI::PanelStyle style, bool is_fir
 	case UI::PanelStyle::kWui:
 		return format("<p>%s%s</p>", (is_first ? "" : "<vspace gap=6>"),
 		              as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, richtext_escape(txt)));
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 std::string as_content(const std::string& txt, UI::PanelStyle style) {
@@ -227,8 +231,9 @@ std::string as_content(const std::string& txt, UI::PanelStyle style) {
 	case UI::PanelStyle::kWui:
 		return format("<p><vspace gap=2>%s</p>",
 		              as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph, richtext_escape(txt)));
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 std::string as_tooltip_text_with_hotkey(const std::string& text,

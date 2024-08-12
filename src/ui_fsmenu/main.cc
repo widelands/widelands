@@ -20,6 +20,7 @@
 
 #include <cstdlib>
 #include <memory>
+#include <optional>
 
 #include <SDL_timer.h>
 
@@ -31,12 +32,12 @@
 #include "build_info.h"
 #include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
+#include "graphic/graphic_functions.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/single_player_game_settings_provider.h"
-#include "map_io/widelands_map_loader.h"
 #include "network/internet_gaming.h"
 #include "network/internet_gaming_protocol.h"
 #include "sound/sound_handler.h"
@@ -54,12 +55,12 @@
 #include "ui_fsmenu/scenario_select.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
+#include "wui/maptable.h"
 #include "wui/savegameloader.h"
 
 namespace FsMenu {
 
-constexpr uint32_t kInitialFadeoutDelay = 2500;
-constexpr uint32_t kInitialFadeoutDuration = 4000;
+constexpr uint32_t kSplashFadeoutDuration = 2000;
 constexpr uint32_t kImageExchangeInterval = 20000;
 constexpr uint32_t kImageExchangeDuration = 2500;
 
@@ -95,11 +96,17 @@ int16_t MainMenu::calc_desired_window_height(const UI::Window::WindowLayoutID id
 }
 
 int16_t MainMenu::calc_desired_window_x(const UI::Window::WindowLayoutID id) {
-	return (get_w() - calc_desired_window_width(id)) / 2 - UI::Window::kVerticalBorderThickness;
+	const UI::WindowStyleInfo& wsi = g_style_manager->window_style(UI::WindowStyle::kFsMenu);
+	return (get_w() - (calc_desired_window_width(id) + wsi.left_border_thickness() +
+	                   wsi.right_border_thickness())) /
+	       2;
 }
 
 int16_t MainMenu::calc_desired_window_y(const UI::Window::WindowLayoutID id) {
-	return (get_h() - calc_desired_window_height(id)) / 2 - UI::Window::kTopBorderThickness;
+	const UI::WindowStyleInfo& wsi = g_style_manager->window_style(UI::WindowStyle::kFsMenu);
+	return (get_h() - (calc_desired_window_height(id) + wsi.top_border_thickness() +
+	                   wsi.bottom_border_thickness())) /
+	       2;
 }
 
 MainMenu::MainMenu(const bool skip_init)
@@ -140,7 +147,18 @@ MainMenu::MainMenu(const bool skip_init)
                   UI::PanelStyle::kFsMenu,
                   UI::ButtonStyle::kFsMenuMenu,
                   [this](MenuTarget t) { action(t); }),
-     replay_(&vbox1_, "replay", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
+     replay_(&vbox1_,
+             "replay",
+             0,
+             0,
+             butw_,
+             6,
+             buth_,
+             "",
+             UI::DropdownType::kTextualMenu,
+             UI::PanelStyle::kFsMenu,
+             UI::ButtonStyle::kFsMenuMenu,
+             [this](MenuTarget t) { action(t); }),
      editor_(&vbox1_,
              "editor",
              0,
@@ -202,7 +220,7 @@ MainMenu::MainMenu(const bool skip_init)
 	singleplayer_.selected.connect([this]() { action(singleplayer_.get_selected()); });
 	multiplayer_.selected.connect([this]() { action(multiplayer_.get_selected()); });
 	editor_.selected.connect([this]() { action(editor_.get_selected()); });
-	replay_.sigclicked.connect([this]() { action(MenuTarget::kReplay); });
+	replay_.selected.connect([this]() { action(replay_.get_selected()); });
 	addons_.sigclicked.connect([this]() { action(MenuTarget::kAddOns); });
 	options_.sigclicked.connect([this]() { action(MenuTarget::kOptions); });
 	about_.sigclicked.connect([this]() { action(MenuTarget::kAbout); });
@@ -226,6 +244,7 @@ MainMenu::MainMenu(const bool skip_init)
 
 	if (!skip_init) {
 		init_time_ = SDL_GetTicks();
+		splash_state_ = SplashState::kSplash;
 		set_button_visibility(false);
 	}
 
@@ -287,8 +306,8 @@ void MainMenu::update_template() {
 	singleplayer_.set_min_lineheight(dropdowns_lineheight);
 	multiplayer_.set_min_lineheight(dropdowns_lineheight);
 	editor_.set_min_lineheight(dropdowns_lineheight);
+	replay_.set_min_lineheight(dropdowns_lineheight);
 
-	splashscreen_ = g_image_cache->get("loadscreens/splash.jpg");
 	title_image_ = g_image_cache->get("loadscreens/logo.png");
 
 	images_.clear();
@@ -330,30 +349,6 @@ void MainMenu::become_modal_again(UI::Panel& prevmodal) {
 	}
 }
 
-void MainMenu::find_maps(const std::string& directory, std::vector<MapEntry>& results) {
-	for (const std::string& file : g_fs->list_directory(directory)) {
-		Widelands::Map map;
-		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(file);
-		if (ml) {
-			try {
-				map.set_filename(file);
-				ml->preload_map(true, nullptr);
-				if (map.version().map_version_timestamp > 0) {
-					MapData::MapType type = map.scenario_types() == Widelands::Map::SP_SCENARIO ?
-                                          MapData::MapType::kScenario :
-                                          MapData::MapType::kNormal;
-					results.emplace_back(
-					   MapData(map, file, type, MapData::DisplayType::kFilenames), map.version());
-				}
-			} catch (...) {
-				// invalid file – silently ignore
-			}
-		} else if (g_fs->is_directory(file)) {
-			find_maps(file, results);
-		}
-	}
-}
-
 void MainMenu::set_labels() {
 	{
 		// TODO(Nordfriese): Code duplication, the same code is used in InteractiveBase
@@ -367,6 +362,7 @@ void MainMenu::set_labels() {
 	singleplayer_.clear();
 	multiplayer_.clear();
 	editor_.clear();
+	replay_.clear();
 
 	singleplayer_.add(_("New Game"), MenuTarget::kNewGame, nullptr, false, _("Begin a new game"),
 	                  shortcut_string_for(KeyboardShortcut::kMainMenuNew, false));
@@ -386,49 +382,33 @@ void MainMenu::set_labels() {
 	// every language switch because it contains localized strings.
 	{
 		filename_for_continue_playing_ = "";
-		std::unique_ptr<Widelands::Game> game(create_safe_game(false));
-		if (game != nullptr) {
-			SinglePlayerLoader loader(*game);
-			std::vector<SavegameData> games = loader.load_files(kSaveDir);
-			SavegameData* newest_singleplayer = nullptr;
-			for (SavegameData& data : games) {
-				if (!data.is_directory() && data.is_singleplayer() &&
-				    (newest_singleplayer == nullptr || newest_singleplayer->compare_save_time(data))) {
-					newest_singleplayer = &data;
-				}
-			}
-			if (newest_singleplayer != nullptr) {
-				filename_for_continue_playing_ = newest_singleplayer->filename;
-				singleplayer_.add(
-				   _("Continue Playing"), MenuTarget::kContinueLastsave, nullptr, false,
-				   format("%s<br>%s<br>%s<br>%s<br>%s<br>%s",
-				          g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
-				             .as_font_tag(
-				                /* strip leading "save/" and trailing ".wgf" */
-				                filename_for_continue_playing_.substr(
-				                   kSaveDir.length() + 1, filename_for_continue_playing_.length() -
-				                                             kSaveDir.length() -
-				                                             kSavegameExtension.length() - 1)),
-				          format(_("Map: %s"),
-				                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-				                    .as_font_tag(newest_singleplayer->mapname)),
-				          format(_("Win Condition: %s"),
-				                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-				                    .as_font_tag(newest_singleplayer->wincondition)),
-				          format(_("Players: %s"),
-				                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-				                    .as_font_tag(newest_singleplayer->nrplayers)),
-				          format(_("Gametime: %s"),
-				                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-				                    .as_font_tag(newest_singleplayer->gametime)),
-				          /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
-				           * 10:30'
-				           */
-				          format(_("Saved: %s"),
-				                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-				                    .as_font_tag(newest_singleplayer->savedatestring))),
-				   shortcut_string_for(KeyboardShortcut::kMainMenuContinuePlaying, false));
-			}
+		std::optional<SavegameData> newest_singleplayer = newest_saved_game_or_replay();
+		if (newest_singleplayer.has_value()) {
+			filename_for_continue_playing_ = newest_singleplayer->filename;
+			singleplayer_.add(
+			   _("Continue Playing"), MenuTarget::kContinueLastsave, nullptr, false,
+			   format(
+			      "%s<br>%s<br>%s<br>%s<br>%s<br>%s",
+			      as_font_tag(UI::FontStyle::kFsTooltipHeader,
+			                  /* strip leading "save/" and trailing ".wgf" */
+			                  filename_for_continue_playing_.substr(
+			                     kSaveDir.length() + 1, filename_for_continue_playing_.length() -
+			                                               kSaveDir.length() -
+			                                               kSavegameExtension.length() - 1)),
+			      format(_("Map: %s"), as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                                       newest_singleplayer->mapname)),
+			      format(_("Win Condition: %s"), as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                                                 newest_singleplayer->wincondition)),
+			      format(_("Players: %s"), as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                                           newest_singleplayer->nrplayers)),
+			      format(_("Gametime: %s"), as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                                            newest_singleplayer->gametime)),
+			      /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
+			       * 10:30'
+			       */
+			      format(_("Saved: %s"), as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                                         newest_singleplayer->savedatestring))),
+			   shortcut_string_for(KeyboardShortcut::kMainMenuContinuePlaying, false));
 		}
 	}
 
@@ -452,45 +432,71 @@ void MainMenu::set_labels() {
 
 	{
 		filename_for_continue_editing_ = "";
-		std::vector<MapEntry> v;
-		find_maps("maps/My_Maps", v);
-		MapEntry* last_edited = nullptr;
-		for (MapEntry& m : v) {
-			if (last_edited == nullptr ||
-			    m.second.map_version_timestamp > last_edited->second.map_version_timestamp) {
-				last_edited = &m;
-			}
-		}
-		if (last_edited != nullptr) {
-			filename_for_continue_editing_ = last_edited->first.filenames.at(0);
+		std::optional<MapData> last_edited = newest_edited_map();
+		if (last_edited.has_value()) {
+			filename_for_continue_editing_ = last_edited->filenames.at(0);
 			editor_.add(
 			   _("Continue Editing"), MenuTarget::kEditorContinue, nullptr, false,
-			   format("%s<br>%s<br>%s<br>%s<br>%s",
-			          g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
-			             .as_font_tag(
-			                /* strip leading "maps/My_Maps/" and trailing ".wgf" */
-			                filename_for_continue_editing_.substr(
-			                   13, filename_for_continue_editing_.length() - 17)),
-			          format(_("Name: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(last_edited->first.localized_name)),
-			          format(_("Size: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(format(_("%1$u×%2$u"), last_edited->first.width,
-			                                        last_edited->first.height))),
-			          format(_("Players: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(std::to_string(last_edited->first.nrplayers))),
-			          format(_("Description: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(last_edited->first.description))),
+			   format(
+			      "%s<br>%s<br>%s<br>%s<br>%s",
+			      as_font_tag(UI::FontStyle::kFsTooltipHeader,
+			                  /* strip leading "maps/My_Maps/" and trailing ".wmf" */
+			                  filename_for_continue_editing_.substr(
+			                     kMyMapsDirFull.length() + 1, filename_for_continue_editing_.length() -
+			                                                     kMyMapsDirFull.length() -
+			                                                     kWidelandsMapExtension.length() - 1)),
+			      format(_("Name: %s"), as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                                        last_edited->localized_name)),
+			      format(_("Size: %s"),
+			             as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                         format(_("%1$u×%2$u"), last_edited->width, last_edited->height))),
+			      format(_("Players: %s"), as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                                           std::to_string(last_edited->nrplayers))),
+			      format(_("Description: %s"), as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                                               last_edited->description))),
 			   shortcut_string_for(KeyboardShortcut::kMainMenuContinueEditing, false));
+		}
+	}
+
+	replay_.add(_("Load Replay"), MenuTarget::kReplay, nullptr, false,
+	            _("Watch the replay of an old game"),
+	            shortcut_string_for(KeyboardShortcut::kMainMenuLoadReplay, false));
+	{
+		filename_for_last_replay_ = "";
+		std::optional<SavegameData> newest_replay = newest_saved_game_or_replay(true);
+		if (newest_replay.has_value()) {
+			filename_for_last_replay_ = newest_replay->filename;
+			replay_.add(
+			   _("Watch last saved replay"), MenuTarget::kReplayLast, nullptr, false,
+			   format(
+			      "%s<br>%s<br>%s<br>%s<br>%s<br>%s",
+			      as_font_tag(UI::FontStyle::kFsTooltipHeader,
+			                  /* strip leading "replays/" and trailing ".wry" */
+			                  filename_for_last_replay_.substr(
+			                     kReplayDir.length() + 1, filename_for_last_replay_.length() -
+			                                                 kReplayDir.length() -
+			                                                 kReplayExtension.length() - 1)),
+			      format(_("Map: %s"), as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                                       newest_replay->mapname)),
+			      format(_("Win Condition: %s"), as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                                                 newest_replay->wincondition)),
+			      format(_("Players: %s"), as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                                           newest_replay->nrplayers)),
+			      format(_("Gametime: %s"), as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                                            newest_replay->gametime)),
+			      /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
+			       * 10:30'
+			       */
+			      format(_("Saved: %s"), as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                                         newest_replay->savedatestring))),
+			   shortcut_string_for(KeyboardShortcut::kMainMenuReplayLast, false));
 		}
 	}
 
 	singleplayer_.set_label(_("Single Player…"));
 	multiplayer_.set_label(_("Multiplayer…"));
 	editor_.set_label(_("Editor…"));
+	replay_.set_label(_("Watch Replay…"));
 	singleplayer_.set_tooltip(as_tooltip_text_with_hotkey(
 	   _("Begin or load a single-player campaign or free game"),
 	   shortcut_string_for(KeyboardShortcut::kMainMenuSP, true), UI::PanelStyle::kFsMenu));
@@ -500,10 +506,8 @@ void MainMenu::set_labels() {
 	editor_.set_tooltip(as_tooltip_text_with_hotkey(
 	   _("Launch the map editor"), shortcut_string_for(KeyboardShortcut::kMainMenuE, true),
 	   UI::PanelStyle::kFsMenu));
-
-	replay_.set_title(_("Watch Replay"));
 	replay_.set_tooltip(as_tooltip_text_with_hotkey(
-	   _("Watch the replay of an old game"),
+	   _("Watch again a recorded earlier game"),
 	   shortcut_string_for(KeyboardShortcut::kMainMenuReplay, true), UI::PanelStyle::kFsMenu));
 
 	addons_.set_title(_("Add-Ons"));
@@ -528,7 +532,7 @@ void MainMenu::set_labels() {
 	   format(_("Version %1$s"), build_ver_details()));
 	copyright_.set_text(
 	   /** TRANSLATORS: Placeholders are the copyright years */
-	   format(_("(C) %1%-%2% by the Widelands Development Team · Licensed under "
+	   format(_("(C) %1%-%2% by the Widelands Development Team • Licensed under "
 	            "the GNU General Public License V2.0"),
 	          kWidelandsCopyrightStart, kWidelandsCopyrightEnd));
 }
@@ -545,9 +549,28 @@ void MainMenu::set_button_visibility(const bool v) {
 	clock_.set_visible(v);
 }
 
+void MainMenu::end_splashscreen() {
+	assert(splash_state_ == SplashState::kSplash);
+	verb_log_info("Initiating splash screen fade out");
+	if (g_sh->current_songset() != Songset::kMenu) {
+		// mix the intro down during the splash fade out phase, then draw() will start the menu music
+		// in the menu fade in phase
+		g_sh->stop_music(kSplashFadeoutDuration);
+	}
+	splash_state_ = SplashState::kSplashFadeOut;
+	init_time_ = SDL_GetTicks();
+}
+
+void MainMenu::abort_splashscreen() {
+	verb_log_info("Splash screen ended");
+	splash_state_ = SplashState::kDone;
+	init_time_ = kNoSplash;
+	last_image_exchange_time_ = SDL_GetTicks();
+}
+
 bool MainMenu::handle_mousepress(uint8_t /*btn*/, int32_t /*x*/, int32_t /*y*/) {
-	if (init_time_ != kNoSplash) {
-		init_time_ = kNoSplash;
+	if (splash_state_ != SplashState::kDone) {
+		abort_splashscreen();
 		return true;
 	}
 	return false;
@@ -576,10 +599,12 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 	}
 
 	if (down) {
-		bool fell_through = false;
-		if (init_time_ != kNoSplash) {
-			init_time_ = kNoSplash;
-			fell_through = true;
+		if (splash_state_ != SplashState::kDone) {
+			abort_splashscreen();
+			if (matches_shortcut(KeyboardShortcut::kMainMenuQuit, code)) {
+				// don't initiate quitting in this case
+				return true;
+			}
 		}
 
 		auto check_match_shortcut = [this, &code](KeyboardShortcut k, MenuTarget t) {
@@ -595,7 +620,10 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 		if (check_match_shortcut(KeyboardShortcut::kMainMenuLoad, MenuTarget::kLoadGame)) {
 			return true;
 		}
-		if (check_match_shortcut(KeyboardShortcut::kMainMenuReplay, MenuTarget::kReplay)) {
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuLoadReplay, MenuTarget::kReplay)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuReplayLast, MenuTarget::kReplayLast)) {
 			return true;
 		}
 		if (check_match_shortcut(KeyboardShortcut::kMainMenuTutorial, MenuTarget::kTutorial)) {
@@ -644,11 +672,13 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 			editor_.toggle();
 			return true;
 		}
+		if (matches_shortcut(KeyboardShortcut::kMainMenuReplay, code)) {
+			replay_.toggle();
+			return true;
+		}
 		if (matches_shortcut(KeyboardShortcut::kMainMenuQuit, code)) {
-			if (!fell_through) {
-				exit();
-				return true;
-			}
+			exit();
+			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kMainMenuContinuePlaying, code)) {
 			if (!filename_for_continue_playing_.empty()) {
@@ -677,16 +707,6 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 	return UI::Panel::handle_key(down, code);
 }
 
-inline Rectf MainMenu::image_pos(const Image& i, const bool crop) {
-	return UI::fit_image(i.width(), i.height(), get_w(), get_h(), crop);
-}
-
-static inline void
-do_draw_image(RenderTarget& r, const Rectf& dest, const Image& img, const float opacity) {
-	r.blitrect_scale(
-	   dest, &img, Recti(0, 0, img.width(), img.height()), opacity, BlendMode::UseAlpha);
-}
-
 inline float MainMenu::calc_opacity(const uint32_t time) const {
 	return last_image_ == draw_image_ ?
              1.f :
@@ -695,38 +715,45 @@ inline float MainMenu::calc_opacity(const uint32_t time) const {
 }
 
 /*
- * The four phases of the animation:
- *   1) Show the splash image with full opacity on a black background for `kInitialFadeoutDelay`
- *   2) Show the splash image semi-transparent on a black background for `kInitialFadeoutDuration`
- *   3) Show the background & menu semi-transparent for `kInitialFadeoutDuration`
- *   4) Show the background & menu with full opacity indefinitely
- * We skip straight to the last phase 4 if we are returning from some other FsMenu screen.
+ * The four phases of the splash screen are:
+ *   1) SplashState::kSplash:
+ *        We start with the splash image shown with full opacity on a black background.
+ *        We initiate fade out when the intro music ends.
+ *   2) SplashState::kSplashFadeOut:
+ *        Show the splash image semi-transparent on a black background for `kSplashFadeoutDuration`
+ *   3) SplashState::kMenuFadeIn:
+ *        Show the background & menu semi-transparent for `kSplashFadeoutDuration`
+ *   4) SplashState::kDone:
+ *        Show the background & menu with full opacity indefinitely
+ *
+ * Phases 1 and 2 are handled by draw_overlay().
+ * Phase 3 is handled by draw() and draw_overlay() together.
+ * Phase 4 is handled by draw() alone.
+ * Stepping through the phases is handled by draw_overlay().
+ *
+ * We skip straight to phase 4 if we are returning from some other FsMenu screen or if a key is
+ * pressed or the mouse is clicked.
  */
 
 void MainMenu::draw(RenderTarget& r) {
-	UI::Panel::draw(r);
-	r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, 255));
-
-	const uint32_t time = SDL_GetTicks();
-	assert(init_time_ == kNoSplash || time >= init_time_);
-
-	if (init_time_ != kNoSplash &&
-	    time - init_time_ < kInitialFadeoutDelay + kInitialFadeoutDuration) {
-		// still in splash phase
+	if (splash_state_ == SplashState::kSplash || splash_state_ == SplashState::kSplashFadeOut) {
+		// Handled by draw_overlay(). The actual menu is not visible in these states.
 		return;
 	}
 
-	// Sanitize phase info and button visibility
-	if (init_time_ != kNoSplash &&
-	    time - init_time_ > kInitialFadeoutDelay + 2 * kInitialFadeoutDuration) {
-		init_time_ = kNoSplash;
-	}
-	if (init_time_ == kNoSplash ||
-	    time - init_time_ > kInitialFadeoutDelay + kInitialFadeoutDuration) {
-		set_button_visibility(true);
+	// TODO(tothxa): This shouldn't be in draw(), but we don't have think(), nor a single
+	//               entry point.
+	// Reset the songset when a game, replay or editing session returns.
+	if (g_sh->current_songset() != Songset::kMenu) {
+		g_sh->change_music(Songset::kMenu, 500);
 	}
 
+	UI::Panel::draw(r);
+	r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, 255));
+	set_button_visibility(true);
+
 	// Exchange stale background images
+	const uint32_t time = SDL_GetTicks();
 	assert(time >= last_image_exchange_time_);
 	if (time - last_image_exchange_time_ > kImageExchangeInterval) {
 		last_image_ = draw_image_;
@@ -742,13 +769,13 @@ void MainMenu::draw(RenderTarget& r) {
 		float opacity = 1.f;
 
 		if (time - last_image_exchange_time_ < kImageExchangeDuration) {
-			const Image& img = *g_image_cache->get(images_[last_image_]);
+			const Image* img = g_image_cache->get(images_[last_image_]);
 			opacity = calc_opacity(time);
-			do_draw_image(r, image_pos(img), img, 1.f - opacity);
+			r.blit_fit(img, true, 1.f - opacity);
 		}
 
-		const Image& img = *g_image_cache->get(images_[draw_image_]);
-		do_draw_image(r, image_pos(img), img, opacity);
+		const Image* img = g_image_cache->get(images_[draw_image_]);
+		r.blit_fit(img, true, opacity);
 	}
 
 	{  // Darken button boxes
@@ -774,29 +801,61 @@ void MainMenu::draw(RenderTarget& r) {
 
 	// Widelands logo
 	const Rectf rect = title_pos();
-	do_draw_image(
-	   r, Rectf(rect.x + rect.w * 0.2f, rect.y + rect.h * 0.2f, rect.w * 0.6f, rect.h * 0.6f),
-	   *title_image_, 1.f);
+	const Rectf dest(rect.x + rect.w * 0.2f, rect.y + rect.h * 0.2f, rect.w * 0.6f, rect.h * 0.6f);
+	r.blitrect_scale(dest, title_image_, title_image_->rect(), 1.0f, BlendMode::UseAlpha);
 }
 
 void MainMenu::draw_overlay(RenderTarget& r) {
-	if (init_time_ == kNoSplash) {
+	if (splash_state_ == SplashState::kDone) {
 		// overlays are needed only during the first three phases
 		return;
 	}
+
 	const uint32_t time = SDL_GetTicks();
 
-	if (time - init_time_ < kInitialFadeoutDelay + kInitialFadeoutDuration) {
-		const float opacity = time - init_time_ > kInitialFadeoutDelay ?
-                               1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay) /
-		                                  kInitialFadeoutDuration :
-                               1.f;
-		do_draw_image(r, image_pos(*splashscreen_, false), *splashscreen_, opacity);
+	assert(init_time_ != kNoSplash && time >= init_time_);
+
+	float progress = 0.0f;
+
+	if (splash_state_ == SplashState::kSplash) {
+		// When the intro music ends, the event handler in wlapplication.cc starts the main menu
+		// music. We use that to detect when it's time to end the splash screen by default.
+		// We can't set up a notification, because the main menu may not be created before it ends
+		// if the startup is extremely slow for some reason.
+		const bool intro_is_playing = (g_sh->current_songset() == Songset::kIntro) &&
+		                              (g_sh->is_sound_audible(SoundType::kMusic)) &&
+		                              Mix_PlayingMusic() != 0;
+
+		if (!intro_is_playing) {
+			end_splashscreen();
+		}
+	} else if (time - init_time_ > kSplashFadeoutDuration) {
+		// The next step is due
+		if (splash_state_ == SplashState::kMenuFadeIn ||
+		    (time - init_time_ > 2 * kSplashFadeoutDuration)) {
+			abort_splashscreen();
+			return;
+		}
+
+		assert(splash_state_ == SplashState::kSplashFadeOut);
+		init_time_ = time;
+		last_image_exchange_time_ = time;
+		splash_state_ = SplashState::kMenuFadeIn;
+
 	} else {
-		const unsigned opacity =
-		   255 - 255.f * (time - init_time_ - kInitialFadeoutDelay - kInitialFadeoutDuration) /
-		            kInitialFadeoutDuration;
-		r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, opacity), BlendMode::Default);
+		// We're in the middle of phase 2 or 3
+		progress = static_cast<float>(time - init_time_) / kSplashFadeoutDuration;
+	}
+
+	if (splash_state_ != SplashState::kMenuFadeIn) {
+		// TODO(tothxa): Some dynamic content would be nice to entertain the user while the
+		//               intro music is playing
+		const std::string footer =
+		   splash_state_ == SplashState::kSplash ? _("Click for the main menu") : "";
+		draw_splashscreen(r, footer, 1.0f - progress);
+	} else {
+		const unsigned alpha = 255 - 255.f * progress;  // fade in of menu = fade out of overlay
+		r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, alpha), BlendMode::Default);
 	}
 }
 
@@ -905,9 +964,17 @@ void MainMenu::action(const MenuTarget t) {
 		break;
 
 	case MenuTarget::kReplay:
-		if (Widelands::Game* g = create_safe_game()) {
+		if (Widelands::Game* g = create_safe_game(); g != nullptr) {
 			menu_capsule_.clear_content();
 			new LoadGame(menu_capsule_, *g, *new SinglePlayerGameSettingsProvider(), true, true);
+		}
+		break;
+	case MenuTarget::kReplayLast:
+		if (!filename_for_last_replay_.empty()) {
+			std::unique_ptr<Widelands::Game> game(create_safe_game(true));
+			if (game != nullptr) {
+				game->run_replay(filename_for_last_replay_, "");
+			}
 		}
 		break;
 	case MenuTarget::kLoadGame:
@@ -962,7 +1029,6 @@ void MainMenu::action(const MenuTarget t) {
 			break;
 		}
 		menu_capsule_.clear_content();
-		g_sh->change_music(Songset::kIngame, 1000);
 		new NetSetupLAN(menu_capsule_);
 		break;
 	case MenuTarget::kMetaserver: {
@@ -986,7 +1052,6 @@ void MainMenu::action(const MenuTarget t) {
 			get_config_string("password_sha1", password_);
 		}
 
-		g_sh->change_music(Songset::kIngame, 1000);
 		new InternetLobby(menu_capsule_, nickname_, password_, register_, tribeinfos);
 	} break;
 

@@ -180,6 +180,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 		new EditorHelp(*this, menu_windows_.help, &egbase().lua());
 	};
 
+	add_plugin_menu();
+
 	finalize_toolbar();
 
 	set_display_flags(EditorInteractive::dfShowResources | EditorInteractive::dfShowImmovables |
@@ -275,7 +277,10 @@ void EditorInteractive::main_menu_selected(MainMenuEntry entry) {
 	} break;
 	case MainMenuEntry::kExitEditor: {
 		exit((SDL_GetModState() & KMOD_CTRL) != 0);
+		break;
 	}
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -440,6 +445,8 @@ void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
 	case ToolMenuEntry::kToolHistory:
 		tool_windows_.toolhistory.toggle();
 		break;
+	default:
+		NEVER_HERE();
 	}
 	toolmenu_.toggle();
 }
@@ -525,6 +532,8 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 	case ShowHideEntry::kResources: {
 		toggle_resources();
 	} break;
+	default:
+		NEVER_HERE();
 	}
 	showhidemenu_.toggle();
 }
@@ -614,7 +623,6 @@ void EditorInteractive::exit(const bool force) {
 			return;
 		}
 	}
-	g_sh->change_music(Songset::kMenu, 200);
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
@@ -1085,7 +1093,7 @@ bool EditorInteractive::handle_mousewheel(int32_t x, int32_t y, uint16_t modstat
 	}
 
 	set_sel_radius_and_update_menu(
-	   std::max(0, std::min(static_cast<int32_t>(get_sel_radius()) + change_size, MAX_TOOL_AREA)),
+	   std::max(0, std::min(static_cast<int32_t>(get_sel_radius()) + change_size, kMaxToolArea)),
 	   std::max(0, std::min(static_cast<int32_t>(get_sel_gap_percent()) + change_gap, 100)));
 	return true;
 }
@@ -1118,7 +1126,7 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 	tool_settings_changed_ = true;
 }
 
-void EditorInteractive::run_editor(UI::Panel* error_message_parent,
+bool EditorInteractive::run_editor(UI::Panel* error_message_parent,
                                    const EditorInteractive::Init init,
                                    const std::string& filename,
                                    const std::string& script_to_run) {
@@ -1130,7 +1138,7 @@ void EditorInteractive::run_editor(UI::Panel* error_message_parent,
 		        "##############################\n",
 		        e.what());
 		if (error_message_parent == nullptr) {
-			return;
+			return false;
 		}
 		// Note: We don't necessarily want a bug report here, but the wording must
 		// be EXACTLY LIKE THIS in v1.0 to avoid adding a new translatable string
@@ -1145,7 +1153,9 @@ void EditorInteractive::run_editor(UI::Panel* error_message_parent,
 		      e.what(), build_ver_details()),
 		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
+		return false;
 	}
+	return true;
 }
 
 void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
@@ -1315,6 +1325,9 @@ void EditorInteractive::map_changed(const MapWas& action) {
 	case MapWas::kResized:
 		resize_minimap();
 		break;
+
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -1389,11 +1402,9 @@ UI::UniqueWindow::Registry& EditorInteractive::get_registry_for_window(WindowID 
 		return tool_windows_.resources;
 	case WindowID::Resize:
 		return tool_windows_.resizemap;
-	case WindowID::Unset:
-		break;
+	default:
+		NEVER_HERE();
 	}
-
-	NEVER_HERE();
 }
 
 void EditorInteractive::set_sel_radius(uint32_t radius, uint16_t gap) {

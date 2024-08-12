@@ -34,7 +34,7 @@
 #include "wui/interactive_player.h"
 
 constexpr int kPlotHeight = 145;
-constexpr int kNrBaseDatasets = 12;
+constexpr int kNrBaseDatasets = 15;
 
 GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
                                              GeneralStatisticsMenu::Registry& registry)
@@ -103,21 +103,29 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
                                              // The plot is always invisible if this player doesn't
                                              // exist, but we need to assign a color anyway
                                              kPlayerColors[i];
-		plot_.register_plot_data(i * ndatasets_ + 0, &genstats[i].land_size, color);
-		plot_.register_plot_data(i * ndatasets_ + 1, &genstats[i].nr_workers, color);
-		plot_.register_plot_data(i * ndatasets_ + 2, &genstats[i].nr_buildings, color);
-		plot_.register_plot_data(i * ndatasets_ + 3, &genstats[i].nr_wares, color);
-		plot_.register_plot_data(i * ndatasets_ + 4, &genstats[i].productivity, color);
-		plot_.register_plot_data(i * ndatasets_ + 5, &genstats[i].nr_casualties, color);
-		plot_.register_plot_data(i * ndatasets_ + 6, &genstats[i].nr_kills, color);
-		plot_.register_plot_data(i * ndatasets_ + 7, &genstats[i].nr_msites_lost, color);
-		plot_.register_plot_data(i * ndatasets_ + 8, &genstats[i].nr_msites_defeated, color);
-		plot_.register_plot_data(i * ndatasets_ + 9, &genstats[i].nr_civil_blds_lost, color);
-		plot_.register_plot_data(i * ndatasets_ + 10, &genstats[i].nr_civil_blds_defeated, color);
-		plot_.register_plot_data(i * ndatasets_ + 11, &genstats[i].miltary_strength, color);
+
+		unsigned o = 0;
+		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].land_size, color);
+		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_workers, color);
+		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_buildings, color);
+		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_wares, color);
+		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].productivity, color);
+		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_ships, color);
+		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_naval_losses, color);
+		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_naval_victories, color);
+		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_casualties, color);
+		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_kills, color);
+		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_msites_lost, color);
+		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_msites_defeated, color);
+		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_civil_blds_lost, color);
+		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_civil_blds_defeated, color);
+		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].miltary_strength, color);
 		if (hook) {
-			plot_.register_plot_data(i * ndatasets_ + 12, &genstats[i].custom_statistic, color);
+			plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].custom_statistic, color);
 		}
+
+		assert(o == ndatasets_);
+
 		if (game_.get_player(i + 1) != nullptr) {  // Show area plot
 			plot_.show_plot(i * ndatasets_ + selected_information_, my_registry_->selected_players[i]);
 		}
@@ -162,6 +170,33 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	                       g_image_cache->get("images/wui/stats/genstats_productivity.png"),
 	                       _("Productivity"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
+
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, "ships", zero,
+	                       g_image_cache->get("images/wui/stats/genstats_ships.png"), _("Ships"),
+	                       &btn);
+	if (parent.egbase().map().allows_seafaring()) {
+		hbox2->add(btn, UI::Box::Resizing::kFillSpace);
+	} else {
+		btn->set_visible(false);
+	}
+
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, "naval_losses", zero,
+	                       g_image_cache->get("images/wui/stats/genstats_naval_losses.png"),
+	                       _("Warships lost"), &btn);
+	if (parent.egbase().map().allows_seafaring()) {
+		hbox2->add(btn, UI::Box::Resizing::kFillSpace);
+	} else {
+		btn->set_visible(false);
+	}
+
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, "naval_victories", zero,
+	                       g_image_cache->get("images/wui/stats/genstats_naval_victories.png"),
+	                       _("Warships defeated"), &btn);
+	if (parent.egbase().map().allows_seafaring()) {
+		hbox2->add(btn, UI::Box::Resizing::kFillSpace);
+	} else {
+		btn->set_visible(false);
+	}
 
 	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, "casualties", zero,
 	                       g_image_cache->get("images/wui/stats/genstats_casualties.png"),

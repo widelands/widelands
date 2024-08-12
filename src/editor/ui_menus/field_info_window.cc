@@ -39,8 +39,8 @@ FieldInfoWindow::FieldInfoWindow(EditorInteractive& parent,
                       &registry,
                       x,
                       y,
-                      width,
-                      height,
+                      kWidth,
+                      kHeight,
                       _("Field Information")),
      parent_(parent),
      center_(center),
@@ -248,7 +248,7 @@ void FieldInfoWindow::add_map_info(std::string& buf) const {
 		const size_t nr_addons = parent_.egbase().enabled_addons().size();
 		if (nr_addons == 0) {
 			/** TRANSLATORS: No add-ons enabled */
-			addons = _("(none)");
+			addons = pgettext("addons", "(none)");
 		} else {
 			for (size_t i = 0; i < nr_addons; ++i) {
 				if (addons.empty()) {

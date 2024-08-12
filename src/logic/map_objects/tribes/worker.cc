@@ -754,10 +754,10 @@ bool Worker::run_walk(Game& game, State& state, const Action& action) {
 			forceonlast = true;
 		}
 	}
-	if (!dest && ((action.iparam1 & Action::walkCoords) != 0)) {
+	if (!dest.valid() && ((action.iparam1 & Action::walkCoords) != 0)) {
 		dest = state.coords;
 	}
-	if (!dest) {
+	if (!dest.valid()) {
 		send_signal(game, "fail");
 		pop_task(game);
 		return true;
@@ -1004,32 +1004,32 @@ bool Worker::run_terraform(Game& game, State& state, const Action& a) {
 	DescriptionIndex di = descriptions.terrain_index(
 	   descriptions.get_terrain_descr(f.field->terrain_r())->enhancement(a.sparam1));
 	if (di != INVALID_INDEX) {
-		triangles.emplace(std::make_pair(TCoords<FCoords>(f, TriangleIndex::R), di));
+		triangles.emplace(TCoords<FCoords>(f, TriangleIndex::R), di);
 	}
 	di = descriptions.terrain_index(
 	   descriptions.get_terrain_descr(f.field->terrain_d())->enhancement(a.sparam1));
 	if (di != INVALID_INDEX) {
-		triangles.emplace(std::make_pair(TCoords<FCoords>(f, TriangleIndex::D), di));
+		triangles.emplace(TCoords<FCoords>(f, TriangleIndex::D), di);
 	}
 	di = descriptions.terrain_index(
 	   descriptions.get_terrain_descr(tln.field->terrain_r())->enhancement(a.sparam1));
 	if (di != INVALID_INDEX) {
-		triangles.emplace(std::make_pair(TCoords<FCoords>(tln, TriangleIndex::R), di));
+		triangles.emplace(TCoords<FCoords>(tln, TriangleIndex::R), di);
 	}
 	di = descriptions.terrain_index(
 	   descriptions.get_terrain_descr(tln.field->terrain_d())->enhancement(a.sparam1));
 	if (di != INVALID_INDEX) {
-		triangles.emplace(std::make_pair(TCoords<FCoords>(tln, TriangleIndex::D), di));
+		triangles.emplace(TCoords<FCoords>(tln, TriangleIndex::D), di);
 	}
 	di = descriptions.terrain_index(
 	   descriptions.get_terrain_descr(ln.field->terrain_r())->enhancement(a.sparam1));
 	if (di != INVALID_INDEX) {
-		triangles.emplace(std::make_pair(TCoords<FCoords>(ln, TriangleIndex::R), di));
+		triangles.emplace(TCoords<FCoords>(ln, TriangleIndex::R), di);
 	}
 	di = descriptions.terrain_index(
 	   descriptions.get_terrain_descr(trn.field->terrain_d())->enhancement(a.sparam1));
 	if (di != INVALID_INDEX) {
-		triangles.emplace(std::make_pair(TCoords<FCoords>(trn, TriangleIndex::D), di));
+		triangles.emplace(TCoords<FCoords>(trn, TriangleIndex::D), di);
 	}
 
 	if (triangles.empty()) {
@@ -1043,21 +1043,6 @@ bool Worker::run_terraform(Game& game, State& state, const Action& a) {
 		++it;
 	}
 	game.mutable_map()->change_terrain(game, it->first, it->second);
-	++state.ivar1;
-	schedule_act(game, Duration(10));
-	return true;
-}
-
-/**
- * buildferry
- *
- * Creates a new instance of the ferry the worker's
- * tribe uses and adds it to the appropriate fleet.
- *
- */
-// TODO(GunChleoc): Savegame compatibility, remove after v1.0.
-bool Worker::run_buildferry(Game& game, State& state, const Action& /* action */) {
-	game.create_worker(get_position(), owner_.load()->tribe().ferry(), owner_);
 	++state.ivar1;
 	schedule_act(game, Duration(10));
 	return true;
@@ -1105,7 +1090,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action& /* action
 	BaseImmovable const* const imm = position.field->get_immovable();
 	const Descriptions& descriptions = game.descriptions();
 
-	if (!((imm != nullptr) && imm->get_size() > BaseImmovable::NONE)) {
+	if ((imm == nullptr) || imm->get_size() <= BaseImmovable::NONE) {
 
 		const ResourceDescription* rdescr =
 		   descriptions.get_resource_descr(position.field->get_resources());
@@ -1332,6 +1317,8 @@ void Worker::set_economy(Economy* const economy, WareWorker type) {
 			   owner().tribe().worker_index(descr().name()), 1, ware_economy_);
 		}
 	} break;
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -1687,8 +1674,8 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 			set_animation(game, descr().get_animation("idle", this));
 			schedule_act(game, Duration(10));  //  wait a little
 		} else {
-			throw wexception(
-			   "MO(%u): [transfer]: flag to bad nextstep %u", serial(), nextstep->serial());
+			throw wexception("MO(%u): [transfer]: flag to bad nextstep %s %u", serial(),
+			                 nextstep->descr().name().c_str(), nextstep->serial());
 		}
 	} else if (upcast(RoadBase, road, location)) {
 		// Road to Flag
@@ -1760,7 +1747,8 @@ void Worker::start_task_shipping(Game& game, PortDock* pd) {
  * @note the worker must be in a @ref Warehouse location
  */
 void Worker::end_shipping(Game& game) {
-	if (State* state = get_state(taskShipping)) {
+	set_ship_serial(0);
+	if (State* state = get_state(taskShipping); state != nullptr) {
 		state->ivar1 = 1;
 		send_signal(game, "endshipping");
 	}
@@ -1769,7 +1757,7 @@ void Worker::end_shipping(Game& game) {
 /**
  * Whether we are currently being handled by the shipping code.
  */
-bool Worker::is_shipping() {
+bool Worker::is_shipping() const {
 	return get_state(taskShipping) != nullptr;
 }
 
@@ -2664,24 +2652,6 @@ void Worker::start_task_fugitive(Game& game) {
 	// Fugitives survive for two to four minutes
 	top_state().ivar1 = game.get_gametime().get() + 120000 + 200 * (game.logic_rand() % 600);
 }
-
-struct FindFlagWithPlayersWarehouse {
-	explicit FindFlagWithPlayersWarehouse(const Player& owner) : owner_(owner) {
-	}
-	[[nodiscard]] bool accept(const BaseImmovable& imm) const {
-		if (upcast(Flag const, flag, &imm)) {
-			if (flag->get_owner() == &owner_) {
-				if (!flag->economy(wwWORKER).warehouses().empty()) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-private:
-	const Player& owner_;
-};
 
 void Worker::fugitive_update(Game& game, State& state) {
 	if (!get_signal().empty()) {

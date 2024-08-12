@@ -55,8 +55,13 @@ BuildingWindow::BuildingWindow(InteractiveBase& parent,
                                Widelands::Building& b,
                                const Widelands::BuildingDescr& descr,
                                bool avoid_fastclick)
-   : UI::UniqueWindow(
-        &parent, UI::WindowStyle::kWui, "building_window", &reg, Width, 0, b.descr().descname()),
+   : UI::UniqueWindow(&parent,
+                      UI::WindowStyle::kWui,
+                      format("building_window_%u", b.serial()),
+                      &reg,
+                      Width,
+                      0,
+                      b.descr().descname()),
      game_(parent.get_game()),
      is_dying_(false),
      parent_(&parent),
@@ -172,7 +177,7 @@ void BuildingWindow::draw(RenderTarget& dst) {
 	dst.blitrect_scale(
 	   Rectf((get_inner_w() - image->width()) / 2.f, (get_inner_h() - image->height()) / 2.f,
 	         image->width(), image->height()),
-	   image, Recti(0, 0, image->width(), image->height()), 0.5, BlendMode::UseAlpha);
+	   image, image->rect(), 0.5, BlendMode::UseAlpha);
 }
 
 /*

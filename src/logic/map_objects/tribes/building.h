@@ -38,6 +38,7 @@ namespace Widelands {
 class InputQueue;
 class Request;
 
+constexpr Duration kSoldierSwapTime(20000);
 constexpr float kBuildingSilhouetteOpacity = 0.3f;
 
 /* The value 'true' means that the DescriptionIndex is a normal building, as
@@ -262,6 +263,7 @@ public:
 	bool get_passable() const override;
 
 	Flag& base_flag() override;
+	const Flag& base_flag() const override;
 	virtual uint32_t get_playercaps() const;
 
 	virtual Coords get_position() const {

@@ -76,8 +76,8 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 					   "Ignoring malformed add-on requirement substring '%s'\n", substring.c_str());
 				} else {
 					const std::string version = substring.substr(colonpos + 1);
-					map->required_addons_.push_back(std::make_pair(
-					   substring.substr(0, colonpos), AddOns::string_to_version(version)));
+					map->required_addons_.emplace_back(
+					   substring.substr(0, colonpos), AddOns::string_to_version(version));
 				}
 				if (commapos == std::string::npos) {
 					break;
@@ -125,6 +125,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 				++team_section_id;
 				teamsection_key = format("teams%02i", team_section_id);
 			}
+			map->sanitize_suggested_teams();
 		} else {
 			throw UnhandledVersionError(
 			   "MapElementalPacket", packet_version, kEightPlayersPacketVersion);

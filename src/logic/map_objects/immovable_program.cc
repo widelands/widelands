@@ -105,14 +105,12 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActGrow(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "remove") {
-				actions_.push_back(
-				   std::unique_ptr<Action>(new ActRemove(parseinput.arguments, immovable)));
+				actions_.push_back(std::unique_ptr<Action>(new ActRemove(parseinput.arguments)));
 			} else if (parseinput.name == "seed") {
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActSeed(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "playsound") {
-				actions_.push_back(
-				   std::unique_ptr<Action>(new ActPlaySound(parseinput.arguments, immovable)));
+				actions_.push_back(std::unique_ptr<Action>(new ActPlaySound(parseinput.arguments)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActConstruct(parseinput.arguments, immovable)));
@@ -156,9 +154,8 @@ playsound
 ---------
 Plays a sound effect. See :ref:`map_object_programs_playsound`.
 */
-ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments,
-                                             const ImmovableDescr& descr)
-   : parameters(MapObjectProgram::parse_act_play_sound(arguments, descr)) {
+ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments)
+   : parameters(MapObjectProgram::parse_act_play_sound(arguments)) {
 }
 
 /**
@@ -222,17 +219,6 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 					throw GameDataError(
 					   "Unknown argument '%s'. Usage: [bob:]name [chance:<percent>]", argument.c_str());
 				}
-			} else if (item.first == "bob") {
-				// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
-				bob_ = true;
-				log_warn("%s: Deprecated 'bob' in 'transform' program, use 'bob:<name>' instead.\n",
-				         descr.name().c_str());
-			} else if (item.first[0] >= '0' && item.first[0] <= '9') {
-				// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
-				log_warn("%s: Deprecated chance in 'transform' program, use 'chance:<percent>' "
-				         "instead.\n",
-				         descr.name().c_str());
-				probability_ = (read_positive(item.first, 254) * math::k100PercentAsInt) / 256;
 			} else {
 				type_name_ = argument;
 			}
@@ -378,8 +364,7 @@ remove
          "remove=", -- This object will always be removed when 'fall' is called
       },
 */
-ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments,
-                                       const ImmovableDescr& descr) {
+ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments) {
 	if (arguments.size() > 1) {
 		throw GameDataError("Usage: remove=[chance:<percent>]");
 	}
@@ -389,11 +374,6 @@ ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments,
 		const std::pair<std::string, std::string> item = read_key_value_pair(arguments.front(), ':');
 		if (item.first == "chance") {
 			probability_ = math::read_percent_to_int(item.second);
-		} else if (item.first[0] >= '0' && item.first[0] <= '9') {
-			// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
-			log_warn("%s: Deprecated chance in 'remove' program, use 'chance:<percent>' instead.\n",
-			         descr.name().c_str());
-			probability_ = (read_positive(item.first, 254) * math::k100PercentAsInt) / 256;
 		} else {
 			throw GameDataError(
 			   "Unknown argument '%s'. Usage: [chance:<percent>]", arguments.front().c_str());
@@ -454,27 +434,18 @@ ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments,
 		   "Immovable %s can 'seed', but has no terrain_affinity entry.", descr.name().c_str());
 	}
 
-	if (read_key_value_pair(arguments.at(1), ':').second.empty()) {
-		// TODO(GunChleoc): Compatibility, remove this argument option after v1.0
-		log_warn("'seed' program without parameter names is deprecated, please use "
-		         "'seed=<immovable_name> proximity:<percent>' in %s\n",
-		         descr.name().c_str());
-		type_name_ = arguments.front();
-		probability_ = (read_positive(arguments.at(1), 254) * math::k100PercentAsInt) / 256;
-	} else {
-		for (const std::string& argument : arguments) {
-			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
-			if (item.first == "proximity") {
-				probability_ = math::read_percent_to_int(item.second);
-			} else if (item.second.empty()) {
-				// TODO(GunChleoc): It would be nice to check if target exists, but we can't guarantee
-				// the load order. Maybe in postload() one day.
-				type_name_ = item.first;
-			} else {
-				throw GameDataError(
-				   "Unknown parameter '%s'. Usage: seed=<immovable_name> proximity:<percent>",
-				   item.first.c_str());
-			}
+	for (const std::string& argument : arguments) {
+		const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+		if (item.first == "proximity") {
+			probability_ = math::read_percent_to_int(item.second);
+		} else if (item.second.empty()) {
+			// TODO(GunChleoc): It would be nice to check if target exists, but we can't guarantee
+			// the load order. Maybe in postload() one day.
+			type_name_ = item.first;
+		} else {
+			throw GameDataError(
+			   "Unknown parameter '%s'. Usage: seed=<immovable_name> proximity:<percent>",
+			   item.first.c_str());
 		}
 	}
 
@@ -549,30 +520,20 @@ ImmovableProgram::ActConstruct::ActConstruct(std::vector<std::string>& arguments
 		throw GameDataError(
 		   "Usage: construct=<animation_name> duration:<duration> decay_after:<duration>");
 	}
-	if (read_key_value_pair(arguments[1], ':').second.empty()) {
-		// TODO(GunChleoc): Compatibility, remove this argument option after v1.0
-		log_warn("Old-style syntax found for 'construct' program in %s, use "
-		         "construct=<animation_name> duration:<duration> decay_after:<duration> instead.\n",
-		         descr.name().c_str());
-		animation_name_ = arguments[0];
 
-		buildtime_ = Duration(read_positive(arguments[1]));
-		decaytime_ = Duration(read_positive(arguments[2]));
-	} else {
-		for (const std::string& argument : arguments) {
-			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+	for (const std::string& argument : arguments) {
+		const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
 
-			if (item.first == "duration") {
-				buildtime_ = read_duration(item.second, descr);
-			} else if (item.first == "decay_after") {
-				decaytime_ = read_duration(item.second, descr);
-			} else if (item.second.empty()) {
-				animation_name_ = item.first;
-			} else {
-				throw GameDataError("Unknown predicate '%s'. Usage: construct=<animation_name> "
-				                    "duration:<duration> decay_after:<duration>.",
-				                    argument.c_str());
-			}
+		if (item.first == "duration") {
+			buildtime_ = read_duration(item.second);
+		} else if (item.first == "decay_after") {
+			decaytime_ = read_duration(item.second);
+		} else if (item.second.empty()) {
+			animation_name_ = item.first;
+		} else {
+			throw GameDataError("Unknown predicate '%s'. Usage: construct=<animation_name> "
+			                    "duration:<duration> decay_after:<duration>.",
+			                    argument.c_str());
 		}
 	}
 

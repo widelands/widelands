@@ -37,8 +37,14 @@ const std::string kWidelandsMapExtension = ".wmf";
 const std::string kS2MapExtension1 = ".swd";
 const std::string kS2MapExtension2 = ".wld";
 const std::string kMyMapsDir = "My_Maps";
+const std::string kMyMapsDirFull = kMapsDir + "/" + kMyMapsDir;
 const std::string kDownloadedMapsDir = "Downloaded";
+const std::string kDownloadedMapsDirFull = kMapsDir + "/" + kDownloadedMapsDir;
 const std::string kAddOnMapsDir = "AddOn_Maps";
+const std::string kSinglePlayerScenarioDir = "SP_Scenarios";
+const std::string kSinglePlayerScenarioDirFull = kMapsDir + "/" + kSinglePlayerScenarioDir;
+const std::string kMultiPlayerScenarioDir = "MP_Scenarios";
+const std::string kMultiPlayerScenarioDirFull = kMapsDir + "/" + kMultiPlayerScenarioDir;
 
 /// Filesystem names for temp files holding static data that needs to be accessible via filesystem
 /// Kept in a separate dir to avoid filesystem conflicts

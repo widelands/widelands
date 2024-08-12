@@ -68,7 +68,7 @@ constexpr unsigned kCurrentProtocolVersion = 7;
 static const std::string kCmdList = "2:CMD_LIST";
 static const std::string kCmdInfo = "2:CMD_INFO";
 static const std::string kCmdDownload = "1:CMD_DOWNLOAD";
-static const std::string kCmdI18N = "1:CMD_I18N";
+static const std::string kCmdI18N = "2:CMD_I18N";
 static const std::string kCmdScreenshot = "1:CMD_SCREENSHOT";
 static const std::string kCmdVote = "1:CMD_VOTE";
 static const std::string kCmdGetVote = "1:CMD_GET_VOTE";
@@ -99,17 +99,25 @@ inline int portable_read(const int socket, char* buffer, const size_t length) {
 	return read(socket, buffer, length);
 #endif
 }
+}  // namespace
 
-inline void check_string_validity(const std::string& str) {
+void NetAddons::throw_warning(const std::string& message) const {
+	if (last_error_message_.empty()) {
+		throw WLWarning("", "%s", message.c_str());
+	}
+	throw WLWarning("", "%s\n\nRecent errors:\n%s", message.c_str(), last_error_message_.c_str());
+}
+
+void NetAddons::check_string_validity(const std::string& str) {
 	if (contains(str, " ")) {
-		throw WLWarning("", "String '%s' may not contain whitespaces", str.c_str());
+		throw_warning(format("String '%s' may not contain whitespaces", str.c_str()));
 	}
 	if (contains(str, "\n")) {
-		throw WLWarning("", "String '%s' may not contain newlines", str.c_str());
+		throw_warning(format("String '%s' may not contain newlines", str.c_str()));
 	}
 }
 
-void check_checksum(const std::string& path, const std::string& checksum) {
+void NetAddons::check_checksum(const std::string& path, const std::string& checksum) {
 	FileRead fr;
 	fr.open(*g_fs, path);
 	const size_t bytes = fr.get_size();
@@ -120,33 +128,36 @@ void check_checksum(const std::string& path, const std::string& checksum) {
 	md5sum.finish_checksum();
 	const std::string md5 = md5sum.get_checksum().str();
 	if (checksum != md5) {
-		throw WLWarning("", "Downloaded file '%s': Checksum mismatch, found %s, expected %s",
-		                path.c_str(), md5.c_str(), checksum.c_str());
+		throw_warning(format("Downloaded file '%s': Checksum mismatch, found %s, expected %s",
+		                     path.c_str(), md5.c_str(), checksum.c_str()));
 	}
 }
 
-size_t gather_addon_content(const std::string& current_dir,
-                            const std::string& prefix,
-                            std::map<std::string, std::set<std::string>>& result) {
+size_t NetAddons::gather_addon_content(const std::string& current_dir,
+                                       const std::string& prefix,
+                                       std::map<std::string, std::set<std::string>>& result) {
 	result[prefix] = {};
 	size_t nr_files = 0;
 	for (const std::string& f : g_fs->list_directory(current_dir)) {
-		if (g_fs->is_directory(f)) {
-			std::string str = prefix;
-			if (!str.empty()) {
-				str += FileSystem::file_separator();
+		const std::string fname = FileSystem::fs_filename(f.c_str());
+		if (!fname.empty() && fname.front() != '.') {  // Ignore hidden files
+			if (g_fs->is_directory(f)) {
+				std::string str = prefix;
+				if (!str.empty()) {
+					str += FileSystem::file_separator();
+				}
+				str += fname;
+				nr_files += gather_addon_content(f, str, result);
+			} else {
+				result[prefix].insert(fname);
+				++nr_files;
 			}
-			str += FileSystem::fs_filename(f.c_str());
-			nr_files += gather_addon_content(f, str, result);
-		} else {
-			result[prefix].insert(FileSystem::fs_filename(f.c_str()));
-			++nr_files;
 		}
 	}
 	return nr_files;
 }
 
-void append_multiline_message(std::string& send, const std::string& message) {
+void NetAddons::append_multiline_message(std::string& send, const std::string& message) {
 	send += ' ';
 	if (message.empty()) {
 		send += "0\nENDOFSTREAM\n";
@@ -158,7 +169,27 @@ void append_multiline_message(std::string& send, const std::string& message) {
 	send += message;
 	send += "\nENDOFSTREAM\n";
 }
-}  // namespace
+
+void NetAddons::set_timeouts(bool suppress_timeout) {
+	timeout_was_suppressed_ = suppress_timeout;
+	const uint32_t kTimeout = suppress_timeout ? (60 * 60 * 12) : 4;
+#ifdef _WIN32
+	DWORD timeout_val = kTimeout * 1000;
+	const char* timeout_ptr = reinterpret_cast<const char*>(&timeout_val);
+	// Set timeout of read()
+	setsockopt(client_socket_, SOL_SOCKET, SO_RCVTIMEO, timeout_ptr, sizeof(timeout_val));
+	// Set timeout of write()
+	setsockopt(client_socket_, SOL_SOCKET, SO_SNDTIMEO, timeout_ptr, sizeof(timeout_val));
+#else
+	struct timeval timeout_val;
+	timeout_val.tv_sec = kTimeout;
+	timeout_val.tv_usec = 0;
+	// Set timeout of read()
+	setsockopt(client_socket_, SOL_SOCKET, SO_RCVTIMEO, &timeout_val, sizeof(timeout_val));
+	// Set timeout of write()
+	setsockopt(client_socket_, SOL_SOCKET, SO_SNDTIMEO, &timeout_val, sizeof(timeout_val));
+#endif
+}
 
 void NetAddons::init(std::string username, std::string password) {
 	if (initialized_) {
@@ -166,13 +197,14 @@ void NetAddons::init(std::string username, std::string password) {
 		return;
 	}
 	if (network_active_) {
-		throw WLWarning("", "Network is already active during init");
+		throw_warning("Network is already active during init");
 	}
 
 #ifdef SIGPIPE
 	signal(SIGPIPE, SIG_IGN);  // NOLINT
 #endif
 
+	last_error_message_.clear();
 	cached_remotes_ = 0;
 	if (password.empty()) {
 		username = "";
@@ -189,9 +221,12 @@ void NetAddons::init(std::string username, std::string password) {
 	}
 	check_string_validity(username);
 
-	if ((client_socket_ = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-		throw WLWarning("", "Unable to create socket");
+	client_socket_ = socket(AF_INET, SOCK_STREAM, 0);
+	if (client_socket_ < 0) {
+		throw_warning("Unable to create socket");
 	}
+
+	set_timeouts(false);
 
 	const std::string target_ip = get_config_string("addon_server_ip", "widelands.org");
 	const int target_port = get_config_int("addon_server_port", 7388);
@@ -201,8 +236,8 @@ void NetAddons::init(std::string username, std::string password) {
 		NetAddress addr;
 		// TODO(Nordfriese): inet_addr can't handle IPv6 addresses
 		if (!NetAddress::resolve_to_v4(&addr, target_ip, target_port)) {
-			throw WLWarning(
-			   "", "Unable to resolve host name and port '%s' / %d", target_ip.c_str(), target_port);
+			throw_warning(format(
+			   "Unable to resolve host name and port '%s' / %d", target_ip.c_str(), target_port));
 		}
 		std::ostringstream oss("");
 		oss << addr.ip;
@@ -210,7 +245,7 @@ void NetAddons::init(std::string username, std::string password) {
 		server.sin_port = htons(addr.port);
 	}
 	if (connect(client_socket_, reinterpret_cast<sockaddr*>(&server), sizeof(server)) < 0) {
-		throw WLWarning("", "Unable to connect to the server");
+		throw_warning("Unable to connect to the server");
 	}
 
 	std::string send = std::to_string(kCurrentProtocolVersion);
@@ -244,7 +279,7 @@ void NetAddons::init(std::string username, std::string password) {
 		if (data == "ADMIN") {
 			is_admin_ = true;
 		} else if (data != "SUCCESS") {
-			throw WLWarning("", "Expected login result, received:\n%s", data.c_str());
+			throw_warning(format("Expected login result, received:\n'%s'", data.c_str()));
 		}
 	}
 
@@ -287,6 +322,7 @@ inline void NetAddons::write_to_server(const std::string& send) {
 }
 void NetAddons::write_to_server(const char* send, const size_t length) {
 	if (portable_write(client_socket_, send, length) >= 0) {
+		SDL_Delay(50);  // Give the send buffer time to clear up before sending more data.
 		return;
 	}
 
@@ -302,14 +338,15 @@ void NetAddons::write_to_server(const char* send, const size_t length) {
 
 	if (message.empty()) {
 		if (is_uploading_addon_) {
-			throw WLWarning("",
-			                "Connection interrupted (%s). Please note that you can not upload updates "
-			                "for an add-on more often than every three days.",
-			                strerror(errno));
+			throw_warning(
+			   format("Connection interrupted (%s). Please note that you can not upload updates "
+			          "for an add-on more often than every three days.",
+			          strerror(errno)));
 		}
-		throw WLWarning("", "Connection interrupted (%s)", strerror(errno));
+		throw_warning(format("Connection interrupted (%s)", strerror(errno)));
 	}
-	throw WLWarning("", "Connection interrupted (%s). Reason: %s", strerror(errno), message.c_str());
+	throw_warning(
+	   format("Connection interrupted (%s). Reason: %s", strerror(errno), message.c_str()));
 }
 
 std::string NetAddons::read_line() const {
@@ -318,11 +355,23 @@ std::string NetAddons::read_line() const {
 	int n;
 	for (;;) {
 		n = portable_read(client_socket_, &c, 1);
+		if (n < 1) {
+			throw_warning(format("Connection interrupted (%s)", strerror(errno)));
+		}
 		if (n != 1 || c == '\n') {
 			break;
 		}
 		line += c;
 	}
+
+	if (contains(line, "WL", false) && contains(line, "Protocol", false) &&
+	    contains(line, "Exception", false)) {
+		if (!last_error_message_.empty()) {
+			last_error_message_.push_back('\n');
+		}
+		last_error_message_ += line;
+	}
+
 	return line;
 }
 
@@ -333,7 +382,7 @@ void NetAddons::read_file(const int64_t length, const std::string& out) const {
 	do {
 		int64_t l = portable_read(client_socket_, buffer.get(), length - nr_bytes_read);
 		if (l < 1) {
-			throw WLWarning("", "Connection interrupted");
+			throw_warning("Connection interrupted");
 		}
 		nr_bytes_read += l;
 		fw.data(buffer.get(), l);
@@ -344,7 +393,7 @@ void NetAddons::read_file(const int64_t length, const std::string& out) const {
 void NetAddons::check_endofstream() {
 	const std::string text = read_line();
 	if (text != "ENDOFSTREAM") {
-		throw WLWarning("", "Expected end of stream, received:\n%s", text.c_str());
+		throw_warning(format("Expected end of stream, received:\n'%s'", text.c_str()));
 	}
 }
 
@@ -353,15 +402,22 @@ void NetAddons::check_endofstream() {
 // reading or writing random leftover bytes. Create it before doing some
 // networking stuff and call `ok()` after everything has gone well.
 struct CrashGuard {
-	explicit CrashGuard(NetAddons& n, bool uses_cache = false) : net_(n) {
+	explicit CrashGuard(NetAddons& n, bool suppress_timeout, bool uses_cache = false)
+	   : net_(n), timeout_was_suppressed_(n.timeout_was_suppressed_) {
 		assert(net_.initialized_);
+
 		if (net_.network_active_) {
-			throw WLWarning("", "Network is already active");
+			net_.throw_warning("Network is already active");
 		}
 		if (!uses_cache && net_.cached_remotes_ > 0) {
-			throw WLWarning("", "Network has stale remotes cache");
+			net_.throw_warning("Network has stale remotes cache");
 		}
+
 		net_.network_active_ = true;
+
+		if (timeout_was_suppressed_ != suppress_timeout) {
+			net_.set_timeouts(suppress_timeout);
+		}
 	}
 	void ok() {
 		assert(net_.initialized_);
@@ -376,17 +432,20 @@ struct CrashGuard {
 		net_.is_uploading_addon_ = false;
 		if (!ok_) {
 			net_.quit_connection();
+		} else {
+			net_.set_timeouts(timeout_was_suppressed_);
 		}
 	}
 
 private:
 	NetAddons& net_;
 	bool ok_{false};
+	bool timeout_was_suppressed_{false};
 };
 
 std::vector<std::string> NetAddons::refresh_remotes(const bool all) {
 	init();
-	CrashGuard guard(*this);
+	CrashGuard guard(*this, false);
 
 	std::string send = kCmdList;
 	send += ' ';
@@ -409,7 +468,7 @@ std::vector<std::string> NetAddons::refresh_remotes(const bool all) {
 AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 	check_string_validity(name);
 	init();
-	CrashGuard guard(*this, true);
+	CrashGuard guard(*this, false, true);
 	if (cached_remotes_ > 0) {
 		--cached_remotes_;
 	} else {
@@ -523,7 +582,7 @@ void NetAddons::download_addon(const std::string& name,
                                const CallbackFn& progress) {
 	check_string_validity(name);
 	init();
-	CrashGuard guard(*this);
+	CrashGuard guard(*this, false);
 	{
 		std::string send = kCmdDownload;
 		send += ' ';
@@ -561,7 +620,7 @@ void NetAddons::download_addon(const std::string& name,
 				progress(relative_path, progress_state);
 				int64_t l = portable_read(client_socket_, buffer.get(), length - nr_bytes_read);
 				if (l < 1) {
-					throw WLWarning("", "Connection interrupted");
+					throw_warning("Connection interrupted");
 				}
 				nr_bytes_read += l;
 				progress_state += l;
@@ -582,7 +641,7 @@ void NetAddons::download_i18n(const std::string& name,
                               const CallbackFn& init_fn) {
 	check_string_validity(name);
 	init();
-	CrashGuard guard(*this);
+	CrashGuard guard(*this, false);
 	{
 		std::string send = kCmdI18N;
 		send += ' ';
@@ -616,7 +675,7 @@ int NetAddons::get_vote(const std::string& addon) {
 	int v;
 	try {
 		init();
-		CrashGuard guard(*this);
+		CrashGuard guard(*this, false);
 
 		std::string send = kCmdGetVote;
 		send += ' ';
@@ -644,7 +703,7 @@ void NetAddons::vote(const std::string& addon, const unsigned vote) {
 	check_string_validity(addon);
 	assert(vote <= kMaxRating);
 	init();
-	CrashGuard guard(*this);
+	CrashGuard guard(*this, false);
 	std::string send = kCmdVote;
 	send += ' ';
 	send += addon;
@@ -661,7 +720,7 @@ void NetAddons::comment(const AddOnInfo& addon,
                         const size_t* index_to_edit) {
 	check_string_validity(addon.internal_name);
 	init();
-	CrashGuard guard(*this);
+	CrashGuard guard(*this, false);
 
 	std::string send;
 	if (index_to_edit == nullptr) {
@@ -686,11 +745,11 @@ void NetAddons::admin_action(const AdminAction a,
                              const AddOnInfo& addon,
                              const std::string& value) {
 	if (!is_admin()) {
-		throw WLWarning("", "Only admins can send admin actions");
+		throw_warning("Only admins can send admin actions");
 	}
 	check_string_validity(addon.internal_name);
 	init();
-	CrashGuard guard(*this);
+	CrashGuard guard(*this, true);
 
 	std::string send;
 	switch (a) {
@@ -709,6 +768,8 @@ void NetAddons::admin_action(const AdminAction a,
 	case AdminAction::kDelete:
 		send = kCmdAdminDelete;
 		break;
+	default:
+		NEVER_HERE();
 	}
 	send += ' ';
 	send += addon.internal_name;
@@ -748,7 +809,7 @@ void NetAddons::upload_addon(const std::string& name,
 	}
 
 	is_uploading_addon_ = true;
-	CrashGuard guard(*this);
+	CrashGuard guard(*this, true);
 	std::string send = kCmdSubmit;
 	send += ' ';
 	send += name;
@@ -780,7 +841,7 @@ void NetAddons::upload_addon(const std::string& name,
 			full_path += FileSystem::file_separator();
 			full_path += relative_path;
 
-			progress(relative_path, state++);
+			progress(format_l(_("Sending metadata for %s"), relative_path), state++);
 
 			FileRead fr;
 			fr.open(*g_fs, full_path);
@@ -808,6 +869,7 @@ void NetAddons::upload_addon(const std::string& name,
 
 	// Phase 2: The server tells us which files to send.
 
+	SDL_Delay(10 * state);  // Give the server some time to process large data batches.
 	int64_t nr_files_to_send = math::to_int(read_line());
 	state = 0;
 	progress("", state);
@@ -824,11 +886,10 @@ void NetAddons::upload_addon(const std::string& name,
 		std::string relative_path = pair.first;
 		relative_path += FileSystem::file_separator();
 		relative_path += pair.second;
-		progress(relative_path, state++);
+		progress(format_l(_("Uploading %s"), relative_path), state++);
 
 		const auto& data = file_contents.at(pair);
 		write_to_server(data.second.get(), data.first);
-		SDL_Delay(100);  // Give the send buffer time to clear up
 	}
 	progress("", state);
 	write_to_server("ENDOFSTREAM\n");
@@ -842,10 +903,10 @@ void NetAddons::upload_screenshot(const std::string& addon,
                                   const std::string& description) {
 	check_string_validity(addon);
 	if (contains(description, "\n")) {
-		throw WLWarning("", "Screenshot descriptions may not contain newlines");
+		throw_warning("Screenshot descriptions may not contain newlines");
 	}
 	init();
-	CrashGuard guard(*this);
+	CrashGuard guard(*this, true);
 
 	std::string send = kCmdSubmitScreenshot;
 	send += ' ';
@@ -882,7 +943,7 @@ std::string NetAddons::download_screenshot(const std::string& name, const std::s
 	try {
 		check_string_validity(name);
 		init();
-		CrashGuard guard(*this);
+		CrashGuard guard(*this, false);
 
 		std::string send = kCmdScreenshot;
 		send += ' ';
@@ -913,7 +974,7 @@ std::string NetAddons::download_screenshot(const std::string& name, const std::s
 
 void NetAddons::contact(const std::string& enquiry) {
 	init();
-	CrashGuard guard(*this);
+	CrashGuard guard(*this, false);
 
 	std::string send = kCmdContact;
 	append_multiline_message(send, enquiry);

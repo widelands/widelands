@@ -151,6 +151,10 @@ add_iterator_function_to_not_unpersist(lua_State* L, const std::string& global, 
 // Those are the globals that will be regenerated (not by the persistence engine),
 // e.g. C-functions or automatically populated fields. Changing the ordering here will
 // break save game compatibility.
+// clang-format off
+// TODO(tothxa): The to-do comment in the middle made clang-format decide on a wildly different
+//               format than without it. You can re-enable it if the to-do is solved and the
+//               comment is removed.
 static const char* kPersistentGlobals[] = {"_VERSION",
                                            "assert",
                                            "collectgarbage",
@@ -192,7 +196,12 @@ static const char* kPersistentGlobals[] = {"_VERSION",
                                            "xpcall",
                                            "string",
                                            "_",
+
+                                           // TODO(tothxa): set_textdomain should be deleted, but
+                                           //    that would break the rest. Replace the next time
+                                           //    when a new global function is added?
                                            "set_textdomain",
+
                                            "get_build_id",
                                            "coroutine.yield",
                                            "ngettext",
@@ -204,7 +213,9 @@ static const char* kPersistentGlobals[] = {"_VERSION",
                                            "pop_textdomain",
                                            "npgettext",
                                            "styles",
+                                           "play_sound",
                                            nullptr};
+// clang-format on
 
 /**
  * Does all the persisting work. Returns the number of bytes
@@ -241,9 +252,9 @@ uint32_t persist_object(lua_State* L, FileWrite& fw, Widelands::MapObjectSaver& 
 	eris_set_setting(L, "path", lua_gettop(L));
 	lua_pop(L, 1);
 
-	size_t cpos = fw.get_pos();
+	const size_t cpos = fw.get_pos().value();
 	eris_dump(L, &LuaWriter, &fw);
-	uint32_t nwritten = fw.get_pos() - cpos;
+	uint32_t nwritten = fw.get_pos().value() - cpos;
 
 	lua_pop(L, 2);  // pop the object and the table
 

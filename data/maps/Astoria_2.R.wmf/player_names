@@ -10,7 +10,7 @@ ai=
 closeable="false"
 
 [player_2]
-name="Human"
+name="Dwarf"
 tribe="empire"
 ai=
 closeable="false"

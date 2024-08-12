@@ -96,6 +96,19 @@ public:
 	}
 };
 
+struct CheckStepAlwaysTrue {
+	[[nodiscard]] bool allowed(const Map& /* map */,
+	                           const FCoords& /* start */,
+	                           const FCoords& /* end */,
+	                           int32_t /* dir */,
+	                           CheckStep::StepId /* id */) const {
+		return true;
+	}
+	[[nodiscard]] bool reachable_dest(const Map& /* map */, const FCoords& /* dest */) const {
+		return true;
+	}
+};
+
 /**
  * CheckStep implementation that returns the logic and of all
  * sub-implementations that have been added via \ref add().

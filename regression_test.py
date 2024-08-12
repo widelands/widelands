@@ -200,13 +200,13 @@ class WidelandsTestCase(unittest.TestCase):
 
         with open(stdout_filename, 'a') as stdout_file:
             args = [self.path_to_widelands_binary,
-                    '--verbose=true',
+                    '--verbose',
                     '--datadir={}'.format(datadir()),
                     '--datadir_for_testing={}'.format(datadir_for_testing()),
                     '--homedir={}'.format(self.run_dir),
                     '--nosound',
                     '--fail-on-lua-error',
-                    '--language=en_US' ]
+                    '--language=en' ]
             args += [ "--{}={}".format(key, value) for key, value in iteritems(wlargs) ]
 
             stdout_file.write("Running widelands binary: ")
@@ -370,6 +370,7 @@ def parse_args():
 
 def discover_loadgame_tests(regexp, suite):
     """Add all tests using --loadgame to the 'suite'."""
+    # Savegames with custom scripts
     for fixture in sorted(glob(os.path.join("test", "save", "*"))):
         if not os.path.isdir(fixture):
             continue
@@ -380,6 +381,13 @@ def discover_loadgame_tests(regexp, suite):
             suite.addTest(
                     WidelandsTestCase(test_script,
                         loadgame=savegame, script=test_script))
+    # Savegames without custom script, just test loading
+    test_script = os.path.join("test", "scripting", "load_and_quit.lua")
+    for savegame in sorted(glob(os.path.join("test", "save", "*.wgf"))):
+        if regexp is not None and not re.search(regexp, savegame):
+            continue
+        suite.addTest(WidelandsTestCase(savegame, loadgame=savegame, script=test_script))
+
 
 def discover_scenario_tests(regexp, suite):
     """Add all tests using --scenario to the 'suite'."""
@@ -392,6 +400,21 @@ def discover_scenario_tests(regexp, suite):
             suite.addTest(
                     WidelandsTestCase(test_script,
                         scenario=wlmap, script=test_script))
+
+def discover_game_template_tests(regexp, suite):
+    """Add all tests using --new_game_from_template to the 'suite'."""
+    for templ in sorted(glob(os.path.join("test", "templates", "test*.wgt"))):
+        if not os.path.isfile(templ):
+            continue
+        test_script = templ[:-3] + 'lua'
+        if not os.path.isfile(test_script):
+            print(f"WARNING: Game template test { templ }: corresponding script { test_script } not found - Skipping.")
+            continue
+        if regexp is not None and not re.search(regexp, test_script):
+            continue
+        suite.addTest(
+                WidelandsTestCase(test_script,
+                    new_game_from_template=templ, script=test_script))
 
 def discover_editor_tests(regexp, suite):
     """Add all tests needing --editor to the 'suite'."""
@@ -422,6 +445,7 @@ def main():
     suite = unittest.TestSuite()
     discover_loadgame_tests(args.regexp, suite)
     discover_scenario_tests(args.regexp, suite)
+    discover_game_template_tests(args.regexp, suite)
     discover_editor_tests(args.regexp, suite)
 
     result = unittest.TextTestRunner(verbosity=2).run(suite)

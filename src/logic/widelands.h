@@ -21,6 +21,7 @@
 
 #include <cstdint>
 #include <limits>
+#include <string>
 #include <vector>
 
 namespace Widelands {
@@ -88,6 +89,16 @@ struct SoldierStrength {
 		          (defense < other.defense || (defense == other.defense && evade < other.evade)))));
 	}
 };
+
+// It is assumed elsewhere that enum SoldierPreference fits to uint8_t.
+// These constants are written to savegames.
+enum class SoldierPreference : uint8_t {
+	kRookies = 0,
+	kHeroes = 1,
+	kAny = 2,
+};
+
+std::string soldier_preference_icon(SoldierPreference p);
 
 // For suggested teams info during map preload
 using SuggestedTeam = std::vector<PlayerNumber>;  // Players in a team

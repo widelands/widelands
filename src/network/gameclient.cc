@@ -39,6 +39,7 @@
 #include "logic/playercommand.h"
 #include "logic/playersmanager.h"
 #include "map_io/widelands_map_loader.h"
+#include "network/constants.h"
 #include "network/internet_gaming.h"
 #include "network/netclient.h"
 #include "network/netclientproxy.h"
@@ -231,8 +232,9 @@ GameClient::GameClient(FsMenu::MenuCapsule& c,
 	if (!d->net || !d->net->is_connected()) {
 		throw WLWarning(_("Could not establish connection to host"),
 		                _("Widelands could not establish a connection to the given address. "
-		                  "Either no Widelands server was running at the supposed port or "
-		                  "the server shut down as you tried to connect."));
+		                  "Either no Widelands server was reachable at the TCP port %u or "
+		                  "the server shut down as you tried to connect."),
+		                kWidelandsLanPort);
 	}
 
 	d->settings.playernum = UserSettings::not_connected();
@@ -813,10 +815,10 @@ void GameClient::handle_hello(RecvPacket& packet) {
 		std::string message = format(
 		   ngettext("%u add-on mismatch detected:\n", "%u add-on mismatches detected:\n", nr), nr);
 		for (const std::string& name : missing_addons) {
-			message = format(_("%1$s\n· ‘%2$s’ required by host not found"), message, name);
+			message = format(_("%1$s\n• ‘%2$s’ required by host not found"), message, name);
 		}
 		for (const auto& pair : wrong_version_addons) {
-			message = format(_("%1$s\n· ‘%2$s’ installed at version %3$s but host uses version %4$s"),
+			message = format(_("%1$s\n• ‘%2$s’ installed at version %3$s but host uses version %4$s"),
 			                 message, pair.first, pair.second.first, pair.second.second);
 		}
 		throw AddOnsMismatchException(message);

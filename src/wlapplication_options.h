@@ -106,6 +106,8 @@ enum class KeyboardShortcut : uint16_t {
 	kMainMenuEditorLoad,
 	kMainMenuContinueEditing,
 	kMainMenuReplay,
+	kMainMenuLoadReplay,
+	kMainMenuReplayLast,
 	kMainMenuOptions,
 	kMainMenuAddons,
 	kMainMenuAbout,
@@ -125,6 +127,7 @@ enum class KeyboardShortcut : uint16_t {
 	kCommonZoomIn = kCommonGeneral_Begin,
 	kCommonZoomOut,
 	kCommonZoomReset,
+	kCommonContextMenu,
 	kCommonTextCut,
 	kCommonTextCopy,
 	kCommonTextPaste,
@@ -296,6 +299,8 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameSeafaringstatsFilterExpWait,
 	kInGameSeafaringstatsFilterExpScout,
 	kInGameSeafaringstatsFilterExpPortspace,
+	kInGameSeafaringstatsFilterWarship,
+	kInGameSeafaringstatsFilterRefitting,
 	kInGameSeafaringstatsGotoShip,
 	kInGameSeafaringstatsWatchShip,
 	kInGameSeafaringstatsOpenShipWindow,
@@ -412,6 +417,10 @@ void init_fastplace_default_shortcuts(
 
 /** Clear a shortcut. */
 void unset_shortcut(KeyboardShortcut);
+
+inline SDL_Keysym keysym(const SDL_Keycode c, uint16_t mod = 0) {
+	return SDL_Keysym{SDL_GetScancodeFromKey(c), c, mod, 0};
+}
 
 // Default step sizes for changing value of spinbox, slider, etc. on PgUp/PgDown or Ctrl+mousewheel
 namespace ChangeBigStep {

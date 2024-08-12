@@ -26,6 +26,7 @@
 #include "graphic/font_handler.h"
 #include "graphic/text_layout.h"
 #include "logic/message_queue.h"
+#include "logic/playercommand.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/toolbar.h"
@@ -61,8 +62,9 @@ MessagePreview::MessagePreview(InfoPanel* i, const Widelands::Message* m, Widela
 }
 
 inline bool MessagePreview::message_still_exists() const {
-	return !(id_.operator bool()) || (owner_.message_queue_ == nullptr) ||
-	       (owner_.message_queue_->count(id_.value()) != 0u);
+	return !id_.valid() || (owner_.message_queue_ == nullptr) ||
+	       (owner_.message_queue_->count(id_.value()) != 0u &&
+	        message_->status() != Widelands::Message::Status::kArchived);
 }
 
 void MessagePreview::think() {
@@ -107,12 +109,16 @@ void MessagePreview::draw(RenderTarget& r) {
 bool MessagePreview::handle_mousepress(const uint8_t button, int32_t /* x */, int32_t /* y */) {
 	switch (button) {
 	case SDL_BUTTON_LEFT:  // center view
-		if ((message_ != nullptr) && (message_->position().operator bool())) {
+		if ((message_ != nullptr) && (message_->position().valid())) {
 			owner_.ibase_.map_view()->scroll_to_field(
 			   message_->position(), MapView::Transition::Smooth);
 		}
 		break;
-	case SDL_BUTTON_MIDDLE:  // hide message
+	case SDL_BUTTON_MIDDLE:  // hide and delete message
+		if (owner_.iplayer_ != nullptr && message_ != nullptr) {
+			owner_.iplayer_->game().send_player_command(new Widelands::CmdMessageSetStatusArchived(
+			   owner_.iplayer_->game().get_gametime(), owner_.iplayer_->player_number(), id_));
+		}
 		owner_.pop_message(this);
 		break;
 	case SDL_BUTTON_RIGHT: {  // open message menu
@@ -449,14 +455,14 @@ void InfoPanel::update_time_speed_string() {
 		break;
 	case 2:
 		text_time_speed_.set_text(format(
-		   /** TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime · Gamespeed)
+		   /** TRANSLATORS: (Gametime • Realtime) or (Gametime • Gamespeed) or (Realtime • Gamespeed)
 		    */
-		   _("%1$s · %2$s"), *non_empty[0], *non_empty[1]));
+		   _("%1$s • %2$s"), *non_empty[0], *non_empty[1]));
 		break;
 	case 3:
 		text_time_speed_.set_text(format(
-		   /** TRANSLATORS: Gametime · Realtime · Gamespeed */
-		   _("%1$s · %2$s · %3$s"), *non_empty[0], *non_empty[1], *non_empty[2]));
+		   /** TRANSLATORS: Gametime • Realtime • Gamespeed */
+		   _("%1$s • %2$s • %3$s"), *non_empty[0], *non_empty[1], *non_empty[2]));
 		break;
 	default:
 		NEVER_HERE();

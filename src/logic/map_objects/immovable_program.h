@@ -92,7 +92,7 @@ struct ImmovableProgram : public MapObjectProgram {
 
 	class ActRemove : public Action {
 	public:
-		ActRemove(std::vector<std::string>& arguments, const ImmovableDescr& descr);
+		explicit ActRemove(std::vector<std::string>& arguments);
 		void execute(Game&, Immovable&) const override;
 
 	private:
@@ -124,7 +124,7 @@ struct ImmovableProgram : public MapObjectProgram {
 	/// sound effect is actually played is determined by the sound handler.
 	class ActPlaySound : public Action {
 	public:
-		ActPlaySound(const std::vector<std::string>& arguments, const ImmovableDescr& descr);
+		explicit ActPlaySound(const std::vector<std::string>& arguments);
 		void execute(Game&, Immovable&) const override;
 
 	private:

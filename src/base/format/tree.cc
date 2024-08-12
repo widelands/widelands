@@ -56,8 +56,9 @@ std::string to_string(const AbstractNode::ArgType t) {
 		return "pointer";
 	case AbstractNode::ArgType::kNullptr:
 		return "nullptr";
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 // Parser implementation

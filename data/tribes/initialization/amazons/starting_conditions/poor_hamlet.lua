@@ -26,6 +26,7 @@ init = {
             log = 4,
             -- rope weaver
             rubber = 1,
+            -- for firestones:
             quartz = 1,
             -- Woodcutter, stonecutter, jungle preserver, liana cutter, stonecarver:
             felling_ax = 1,

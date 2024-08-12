@@ -652,7 +652,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 			text += '\n';
 			for (const auto& pair : upgrades) {
 				if (pair.second) {
-					text += format(_("\n· %1$s (%2$s) by %3$s"), pair.first->descname(),
+					text += format(_("\n• %1$s (%2$s) by %3$s"), pair.first->descname(),
 					               (pair.first->verified ? _("verified") : _("NOT VERIFIED")),
 					               pair.first->author());
 				}
@@ -1120,8 +1120,9 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 				} else {
 					return a->average_rating() > b->average_rating();
 				}
+			default:
+				NEVER_HERE();
 			}
-			NEVER_HERE();
 		});
 	}
 	std::vector<std::string> has_upgrades;
@@ -1166,7 +1167,7 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 		                          has_upgrades.size());
 		for (const std::string& name : has_upgrades) {
 			text += "<br>";
-			text += format(_("· %s"), name);
+			text += format(_("• %s"), name);
 		}
 		upgrade_all_.set_tooltip(text);
 	}
@@ -1202,19 +1203,19 @@ void AddOnsCtrl::update_dependency_errors() {
 			}
 			if (search_result == AddOns::g_addons.end()) {
 				warn_requirements.push_back(
-				   format(_("· ‘%1$s’ requires ‘%2$s’ which could not be found"),
+				   format(_("• ‘%1$s’ requires ‘%2$s’ which could not be found"),
 				          addon->first->descname(), requirement));
 			} else {
 				if (!search_result->second &&
 				    AddOns::require_enabled(addon->first->category, search_result->first->category)) {
-					warn_requirements.push_back(format(_("· ‘%1$s’ requires ‘%2$s’ which is disabled"),
+					warn_requirements.push_back(format(_("• ‘%1$s’ requires ‘%2$s’ which is disabled"),
 					                                   addon->first->descname(),
 					                                   search_result->first->descname()));
 				}
 				if (too_late &&
 				    AddOns::order_matters(addon->first->category, search_result->first->category)) {
 					warn_requirements.push_back(
-					   format(_("· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"),
+					   format(_("• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"),
 					          addon->first->descname(), search_result->first->descname()));
 				}
 			}
@@ -1242,7 +1243,7 @@ void AddOnsCtrl::update_dependency_errors() {
 					assert(!too_late || next != nullptr);
 					if (too_late && AddOns::order_matters(prev->category, next->category)) {
 						warn_requirements.push_back(format(
-						   _("· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
+						   _("• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
 						     "listed in the wrong order"),
 						   addon->first->descname(), prev->descname(), search_result->first->descname()));
 					}
@@ -1334,36 +1335,23 @@ bool AddOnsCtrl::is_remote(const std::string& name) const {
 }
 
 static void install_translation(const std::string& temp_locale_path,
-                                const std::string& addon_name,
-                                const int i18n_version) {
+                                const std::string& addon_name) {
 	assert(g_fs->file_exists(temp_locale_path));
 
-	// NOTE:
-	// gettext expects a directory structure such as
-	// "~/.widelands/addons_i18n/nds/LC_MESSAGES/addon_name.wad.VERSION.mo"
-	// where "nds" is the language abbreviation, VERSION the add-on's i18n version,
-	// and "addon_name.wad" the add-on's name.
-	// If we use a different structure, gettext will not find the translations!
-
 	const std::string temp_filename =
-	   FileSystem::fs_filename(temp_locale_path.c_str());                         // nds.mo.tmp
+	   FileSystem::fs_filename(temp_locale_path.c_str());                         // nds.po.tmp
 	const std::string locale = temp_filename.substr(0, temp_filename.find('.'));  // nds
 
-	const std::string new_locale_dir = kAddOnLocaleDir + FileSystem::file_separator() + locale +
-	                                   FileSystem::file_separator() +
-	                                   "LC_MESSAGES";  // addons_i18n/nds/LC_MESSAGES
+	const std::string new_locale_dir =
+	   kAddOnLocaleDir + FileSystem::file_separator() + addon_name;  // addons_i18n/name.wad
 	g_fs->ensure_directory_exists(new_locale_dir);
 
-	const std::string new_locale_path = new_locale_dir + FileSystem::file_separator() + addon_name +
-	                                    '.' + std::to_string(i18n_version) + ".mo";
+	const std::string new_locale_path = new_locale_dir + FileSystem::file_separator() + locale +
+	                                    ".po";  // addons_i18n/name.wad/nds.po
 
 	assert(!g_fs->is_directory(new_locale_path));
-	// Delete outdated translations if present.
-	for (const std::string& mo : g_fs->list_directory(new_locale_dir)) {
-		if (strncmp(FileSystem::fs_filename(mo.c_str()), addon_name.c_str(), addon_name.size()) ==
-		    0) {
-			g_fs->fs_unlink(mo);
-		}
+	if (g_fs->file_exists(new_locale_path)) {
+		g_fs->fs_unlink(new_locale_path);
 	}
 	assert(!g_fs->file_exists(new_locale_path));
 
@@ -1561,8 +1549,9 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 		   });
 
 		for (const std::string& n : g_fs->list_directory(temp_dir)) {
-			install_translation(n, remote->internal_name, remote->i18n_version);
+			install_translation(n, remote->internal_name);
 		}
+		i18n::clear_addon_translations_cache(remote->internal_name);
 		for (auto& pair : AddOns::g_addons) {
 			if (pair.first->internal_name == remote->internal_name) {
 				pair.first->i18n_version = remote->i18n_version;

@@ -44,8 +44,7 @@ static size_t priority_to_index(const Widelands::WarePriority& priority) {
 	if (priority == Widelands::WarePriority::kVeryHigh) {
 		return 4;
 	}
-	// TODO(Nordfriese): For savegame compatibility. Replace with NEVER_HERE() after v1.0
-	return 1;
+	NEVER_HERE();
 }
 static const Widelands::WarePriority& index_to_priority(const size_t priority) {
 	switch (priority) {
@@ -251,7 +250,14 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
      nr_icons_(queue_ != nullptr            ? queue_->get_max_size() :
                type_ == Widelands::wwWORKER ? settings_->worker_queues.at(index_).max_fill :
                                               settings_->ware_queues.at(index_).max_fill),
+     max_icons_(nr_icons_),
      icons_(nr_icons_, nullptr),
+     total_fill_(&hbox_,
+                 UI::PanelStyle::kWui,
+                 "total_fill",
+                 UI::FontStyle::kWuiLabel,
+                 std::string(),
+                 UI::Align::kRight),
      fill_index_under_mouse_(-1) {
 
 	assert((queue_ == nullptr) ^ (settings_ == nullptr));
@@ -281,10 +287,10 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                                       building.owner().tribe().get_worker_descr(index_)->icon());
 		hbox_.add(icons_[i]);
 	}
-
 	hbox_.add_inf_space();
 	hbox_.add(&b_increase_desired_fill_);
 	hbox_.add(&b_increase_real_fill_);
+	hbox_.add(&total_fill_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	priority_.set_cursor_fixed_height(kButtonSize * 2 / 3);
 
@@ -630,6 +636,10 @@ InputQueueDisplay::get_setting() const {
                                  nullptr;
 }
 
+void InputQueueDisplay::set_max_icons(size_t m) {
+	max_icons_ = m;
+}
+
 static const RGBAColor kColorComing(127, 127, 127, 191);
 static const RGBAColor kColorMissing(191, 191, 191, 127);
 
@@ -666,10 +676,12 @@ void InputQueueDisplay::think() {
 	assert(max_fill <= nr_icons_);
 
 	for (unsigned i = 0; i < nr_icons_; ++i) {
-		icons_[i]->set_visible(i < max_fill);
+		icons_[i]->set_visible(i < max_fill && i < max_icons_);
 		icons_[i]->set_grey_out(i >= real_fill);
 		icons_[i]->set_grey_out_color(i < real_fill + nr_coming ? kColorComing : kColorMissing);
 	}
+	total_fill_.set_text(max_fill > max_icons_ ? format_l(_("+%u"), max_fill - max_icons_) :
+                                                std::string());
 
 	if (has_priority_) {
 		const Widelands::WarePriority& p =                                     // NOLINT
@@ -735,9 +747,8 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 		if (can_act_ && fill_index_under_mouse_ >= 0) {
 			r.blitrect_scale(Rectf(calc_xpos(fill_index_under_mouse_), ypos,
 			                       max_fill_indicator_.width(), max_fill_indicator_.height()),
-			                 &max_fill_indicator_,
-			                 Recti(0, 0, max_fill_indicator_.width(), max_fill_indicator_.height()),
-			                 0.4f, BlendMode::Default);
+			                 &max_fill_indicator_, max_fill_indicator_.rect(), 0.4f,
+			                 BlendMode::Default);
 		}
 	}
 
