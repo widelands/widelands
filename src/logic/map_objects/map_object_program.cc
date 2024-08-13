@@ -477,24 +477,25 @@ script
 MapObjectProgram::RunScriptParameters
 MapObjectProgram::parse_act_script(const std::vector<std::string>& arguments) {
 	if (arguments.size() != 1) {
-		throw GameDataError(
-		   "Usage: script=<function_name>");
+		throw GameDataError("Usage: script=<function_name>");
 	}
 	RunScriptParameters result;
 	result.function = arguments.front();
 
-	if (result.function.find_first_not_of(
-		"abcdefghijklmnopqrstuvwxyz"
-		"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-		"_0123456789"
-	) != std::string::npos) {
-		throw GameDataError("Not a valid function name: '%s' (do not use object attributes or other expressions, and do not add parentheses)", result.function.c_str());
+	if (result.function.find_first_not_of("abcdefghijklmnopqrstuvwxyz"
+	                                      "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	                                      "_0123456789") != std::string::npos) {
+		throw GameDataError("Not a valid function name: '%s' (do not use object attributes or other "
+		                    "expressions, and do not add parentheses)",
+		                    result.function.c_str());
 	}
 
 	return result;
 }
 
-void MapObjectProgram::do_run_script(LuaInterface& lua, MapObject* mo, const std::string& function) {
+void MapObjectProgram::do_run_script(LuaInterface& lua,
+                                     MapObject* mo,
+                                     const std::string& function) {
 	MutexLock m(MutexLock::ID::kLua);
 
 	lua_getglobal(lua.L(), function.c_str());
@@ -511,7 +512,8 @@ void MapObjectProgram::do_run_script(LuaInterface& lua, MapObject* mo, const std
 		if (g_fail_on_lua_error) {
 			abort();
 		}
-		throw wexception("Error running script program function %s: %s", function.c_str(), what.c_str());
+		throw wexception(
+		   "Error running script program function %s: %s", function.c_str(), what.c_str());
 	}
 }
 
