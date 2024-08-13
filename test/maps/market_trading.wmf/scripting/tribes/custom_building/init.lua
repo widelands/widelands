@@ -56,5 +56,6 @@ wl.Descriptions():new_productionsite_type {
 }
 
 function barbarians_custom_building_program_counter_increment(site)
+   assert_equal("barbarians_custom_building", site.descr.name)
    barbarians_custom_building_program_counter = (barbarians_custom_building_program_counter or 0) + 1
 end

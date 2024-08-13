@@ -504,7 +504,15 @@ void MapObjectProgram::do_run_script(LuaInterface& lua, MapObject* mo, const std
 
 	LuaMaps::upcasted_map_object_to_lua(lua.L(), mo);
 
-	lua_call(lua.L(), 1, 0);
+	if (lua_pcall(lua.L(), 1, 0, 0) != LUA_OK) {
+		std::string what = luaL_checkstring(lua.L(), -1);
+		lua_pop(lua.L(), 1);
+		log_err("Error running Lua script program function %s: %s", function.c_str(), what.c_str());
+		if (g_fail_on_lua_error) {
+			abort();
+		}
+		throw wexception("Error running script program function %s: %s", function.c_str(), what.c_str());
+	}
 }
 
 }  // namespace Widelands

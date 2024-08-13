@@ -47,5 +47,6 @@ wl.Descriptions():new_worker_type {
 }
 
 function barbarians_custom_worker_program_counter_increment(worker)
+   assert_equal("barbarians_custom_worker", worker.descr.name)
    barbarians_custom_worker_program_counter = (barbarians_custom_worker_program_counter or 0) + 1
 end
