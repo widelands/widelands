@@ -40,7 +40,12 @@ wl.Descriptions():new_worker_type {
          "callobject=fall",
          "animate=idle duration:2s",
          "createware=custom_ware",
+         "script=barbarians_custom_worker_program_counter_increment",
          "return"
       }
    },
 }
+
+function barbarians_custom_worker_program_counter_increment(worker)
+   barbarians_custom_worker_program_counter = (barbarians_custom_worker_program_counter or 0) + 1
+end

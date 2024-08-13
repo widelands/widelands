@@ -24,6 +24,7 @@
 #include "base/math.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/map_object.h"
+#include "scripting/lua_map.h"
 #include "sound/sound_handler.h"
 
 /* RST
@@ -438,6 +439,72 @@ MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments
 		                    kFxPriorityLowest, result.priority, arguments.at(0).c_str());
 	}
 	return result;
+}
+
+/* RST
+
+.. _map_object_programs_script:
+
+script
+^^^^^^
+.. function:: script=\<function\>
+
+   .. versionadded:: 1.3
+
+   :arg string function: The name of the Lua function to call.
+
+   Run a Lua function.
+   The function being called will receive the acting map object as its parameter.
+
+   Examples:
+
+.. code-block:: lua
+
+      -- Production site
+     sleep = {
+         -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
+         descname = _("sleeping"),
+         actions = {
+            "sleep=duration:20s",
+            "script=sleep_done"
+         }
+      }
+
+      function sleep_done(site)
+         print("A " .. site.descr.name " .. has finished sleeping.")
+      end
+*/
+MapObjectProgram::RunScriptParameters
+MapObjectProgram::parse_act_script(const std::vector<std::string>& arguments) {
+	if (arguments.size() != 1) {
+		throw GameDataError(
+		   "Usage: script=<function_name>");
+	}
+	RunScriptParameters result;
+	result.function = arguments.front();
+
+	if (result.function.find_first_not_of(
+		"abcdefghijklmnopqrstuvwxyz"
+		"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+		"_0123456789"
+	) != std::string::npos) {
+		throw GameDataError("Not a valid function name: '%s' (do not use object attributes or other expressions, and do not add parentheses)", result.function.c_str());
+	}
+
+	return result;
+}
+
+void MapObjectProgram::do_run_script(LuaInterface& lua, MapObject* mo, const std::string& function) {
+	MutexLock m(MutexLock::ID::kLua);
+
+	lua_getglobal(lua.L(), function.c_str());
+	if (!lua_isfunction(lua.L(), -1)) {
+		throw wexception("RunScript: '%s' is not a function", function.c_str());
+	}
+
+	LuaMaps::upcasted_map_object_to_lua(lua.L(), mo);
+
+	lua_call(lua.L(), 1, 0);
 }
 
 }  // namespace Widelands
