@@ -913,7 +913,9 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kInGameObjectives, code)) {
-			if (toggle_objective_menu_->enabled()) {
+			// check the toggle's enabled state to make sure there are objectives to show
+			// if there are no objectives, allow closing the window but not opening it
+			if (toggle_objective_menu_->enabled() || objectives_.is_open()) {
 				objectives_.toggle();
 			}
 			return true;
