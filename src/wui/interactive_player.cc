@@ -481,7 +481,7 @@ void InteractivePlayer::think() {
 		}
 	}
 	{
-		bool const has_objectives = !game().map().objectives().empty();
+		bool const has_objectives = game().map().objectives_count(false, true) > 0;
 		std::string obj_tooltip = has_objectives ? _("Objectives") : _("No current objectives");
 		toggle_objective_menu_->set_enabled(has_objectives);
 		toggle_objective_menu_->set_tooltip(as_tooltip_text_with_hotkey(

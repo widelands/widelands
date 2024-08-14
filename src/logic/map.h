@@ -21,6 +21,7 @@
 
 #include <map>
 #include <memory>
+#include <optional>
 #include <set>
 #include <string>
 
@@ -559,6 +560,15 @@ public:
 	// The objectives that are defined in this map if it is a scenario.
 	[[nodiscard]] const Objectives& objectives() const {
 		return objectives_;
+	}
+	// Count the number of objectives that match the given done/visible flags
+	// Pass nullopt for "don't care"
+	int objectives_count(std::optional<bool> done = std::nullopt, std::optional<bool> visible = std::nullopt) const {
+		return std::count_if(objectives_.begin(), objectives_.end(),
+		    [done, visible](const auto& o) {
+			return (!done.has_value() || o.second->done() == *done ) &&
+			       (!visible.has_value() || o.second->visible() == *visible );
+		    });
 	}
 	Objectives* mutable_objectives() {
 		return &objectives_;
