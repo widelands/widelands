@@ -124,6 +124,7 @@ private:
 
 	UI::Button* toggle_objective_menu_;
 	UI::Button* toggle_message_menu_;
+	void do_toggle_objective_menu();
 
 	// Statistics menu on the toolbar
 	UI::Dropdown<StatisticsMenuEntry> statisticsmenu_;
