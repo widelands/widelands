@@ -287,7 +287,8 @@ findobject
 
       * ``immovable``: Only immovables with the given name or attribute are considered.
       * ``bob``: Only critters and workers with the given name or attribute are considered.
-      * ``special``: Special objects like pinned notes might be considered. (no consistency checks are implemented for this case)
+      * ``special``: Considers special objects like pinned notes.
+         (no consistency checks are implemented for this case)
 
    :arg string attrib: The attribute that the map object should possess.
    :arg string name: The internal name of the map object (since version 1.3)
