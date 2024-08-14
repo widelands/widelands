@@ -282,7 +282,12 @@ findobject
    [name:\<name\>] [no_notify]
 
    :arg int radius: Search for an object within the given radius around the worker.
-   :arg string type: The type of map object to search for. Defaults to ``immovable``.
+   :arg string type: The type of map object to search for.
+      The possible values are:
+      * ``immovable``: Only immovables with the given name or attribute are considered.
+      * ``bob``: Only critters and workers with the given name or attribute are considered.
+      * ``special``: Special objects like pinned notes might be considered. (no consistency checks are implemented for this case)
+      Defaults to ``immovable``.
    :arg string attrib: The attribute that the map object should possess.
    :arg string name: The internal name of the map object (since version 1.3)
    :arg empty no_notify: Do not send a message to the player if this step fails.
@@ -343,7 +348,10 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 			   NoteMapObjectDescription(item.second, NoteMapObjectDescription::LoadType::kAttribute));
 			act->iparam2 = MapObjectDescr::get_attribute_id(item.second);
 		} else if (item.first == "type") {
-			act->sparam1 = item.second;
+			if (item.second == "immovable" || item.second == "bob" || item.second == "special") {
+				act->sparam1 = item.second;
+			} else {
+				throw GameDataError("Invalid usage of 'type' predicate: Possible values are 'immovable', 'bob' and 'special'.");
 		} else if (item.first == "name") {
 			act->sparam2 = item.second;
 		} else {
@@ -351,9 +359,16 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 		}
 	}
 
-	if (act->iparam2 >= 0 && !act->sparam2.empty()) {
-		throw GameDataError(
-		   "Wrong usage of findobject predicates: 'attrib' and 'name' are not to be used together.");
+	if (!act->sparam2.empty()) {
+		if (act->sparam1 == "immovable" || act->sparam1 == "bob") {
+			Notifications::publish(
+			   NoteMapObjectDescription(act->sparam2, NoteMapObjectDescription::LoadType::kObject, false));
+		}
+
+		if (act->iparam2 >= 0) {
+			throw GameDataError(
+			   "Invalid usage of findobject predicates: 'attrib' and 'name' are not to be used together.");
+		}
 	}
 
 	if (act->iparam2 >= 0) {

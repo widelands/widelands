@@ -317,8 +317,12 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
  * name:\<name\>         (optional)
  * Find only objects of this name
  *
+ * [no notify]         (optional)
+ * Do not notify the player of the result of the search
+ *
  * iparam1 = radius predicate
  * iparam2 = attribute predicate (if >= 0)
+ * iparam3 = send message on failure (if != 0)
  * sparam1 = type
  * sparam2 = name
  */
