@@ -122,6 +122,7 @@ private:
 	bool auto_roadbuild_mode_;
 	Widelands::Coords flag_to_connect_;
 
+	UI::Button* toggle_objective_menu_;
 	UI::Button* toggle_message_menu_;
 
 	// Statistics menu on the toolbar

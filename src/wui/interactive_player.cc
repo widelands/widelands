@@ -213,7 +213,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	add_statistics_menu();
 
-	add_toolbar_button(
+	toggle_objective_menu_ = add_toolbar_button(
 	   "wui/menus/objectives", "objectives",
 	   as_tooltip_text_with_hotkey(_("Objectives"),
 	                               shortcut_string_for(KeyboardShortcut::kInGameObjectives, true),
@@ -479,6 +479,14 @@ void InteractivePlayer::think() {
 			}
 			flag_to_connect_ = Widelands::Coords::null();
 		}
+	}
+	{
+		bool const has_objectives = !game().map().objectives().empty();
+		std::string obj_tooltip = has_objectives ? _("Objectives") : _("No current objectives");
+		toggle_objective_menu_->set_enabled(has_objectives);
+		toggle_objective_menu_->set_tooltip(as_tooltip_text_with_hotkey(
+		   obj_tooltip, shortcut_string_for(KeyboardShortcut::kInGameObjectives, true),
+		   UI::PanelStyle::kWui));
 	}
 	{
 		char const* msg_icon = "images/wui/menus/message_old.png";
