@@ -913,7 +913,9 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kInGameObjectives, code)) {
-			objectives_.toggle();
+			if (toggle_objective_menu_->enabled()) {
+				objectives_.toggle();
+			}
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kInGameStatsBuildings, code)) {
