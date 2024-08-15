@@ -4056,7 +4056,7 @@ msgid ""
 "Maybe you think it’s a boring task to store, count and retrieve all this "
 "stuff, but do you really want your carriers to walk all the way to your "
 "Headquarters?"
-msgstr "Du denkst villicht, dat is dröge, all deesen Kraam to verwahren, tellen un ruttohalen, aver willst du würrelk, dat diene Lastendragers de hele Weg but tum Raadhuus lopen mutten?"
+msgstr "Du denkst villicht, dat is dröge, all deesen Kraam to verwahren, tellen un ruttohalen, aver willst du würrelk, dat diene Lastendragers de hele Weg bit tum Raadhuus lopen mutten?"
 
 #. TRANSLATORS: Note lore_autor for an Atlantean production site: Headquarters
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1454
@@ -4933,7 +4933,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The secret of Atlantean health and strength is hidden in these roots. It’s "
 "not spinach, it’s not a carrot, it’s … a secret."
-msgstr "Dat Geheimnis vun de Atlantisk Gesundheid un Starkde liggt in deesen Wuddels. ’t is keen Spinaat, ’t is keen Bollsteert, ’t is … een Geheimnis."
+msgstr "Dat Geheemnis vun de Atlantisk Gesundheid un Starkde liggt in deesen Wuddels. ’t is keen Spinaat, ’t is keen Bollsteert, ’t is … een Geheemnis."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Blackroot Farm
@@ -5195,7 +5195,7 @@ msgstr "Rüst de Soldaten mit all nödigen Wapen un Wapenrocken ut."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1940
 msgctxt "atlanteans_building"
 msgid "Make our enemies feel the pain, so enter here to gain your train!"
-msgstr "Sall uns’ Feind an Qualen glöven, dann kumm herin tum stipptelk Öven!"
+msgstr "Sall uns’ Feind an Qualen glöven, dann kumm herin tum stippelk Öven!"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Dungeon
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1942
