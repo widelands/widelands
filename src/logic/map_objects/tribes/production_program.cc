@@ -1046,6 +1046,37 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 	for (const std::string& bobname : workerprogram->created_bobs()) {
 		descr->add_created_bob(bobname);
 	}
+
+	const DescriptionMaintainer<ImmovableDescr>& all_immovables = descriptions.immovables();
+
+	for (const auto& object_info : workerprogram->needed_named_map_objects()) {
+		const MapObjectType mapobjecttype = object_info.first;
+		const std::string object_name = object_info.second;
+
+		// Add needed entities
+		if (mapobjecttype == MapObjectType::IMMOVABLE ) {
+			descr->add_needed_immovable(object_info.second);
+		}
+	}
+	for (const auto& object_info : workerprogram->collected_named_map_objects()) {
+		const MapObjectType mapobjecttype = object_info.first;
+		const std::string object_name = object_info.second;
+
+		// Add collected entities
+		switch (mapobjecttype) {
+		case MapObjectType::IMMOVABLE: {
+			descr->add_collected_immovable(object_info.second);
+			const Widelands::DescriptionIndex immo_id = all_immovables.get_index(object_info.second);
+			const ImmovableDescr& immovable_descr = all_immovables.get(immo_id);
+			const_cast<ImmovableDescr&>(immovable_descr).add_collected_by(descriptions, descr->name());
+		} break;
+		case MapObjectType::BOB: {
+			descr->add_collected_bob(object_info.second);
+		} break;
+		default:
+			NEVER_HERE();
+		}
+	}
 }
 
 void ProductionProgram::ActCallWorker::execute(Game& game, ProductionSite& ps) const {
