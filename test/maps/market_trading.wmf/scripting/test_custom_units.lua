@@ -8,10 +8,14 @@ run(function()
 
    hq = p1:get_buildings("barbarians_headquarters")[1]
    assert_true(hq:get_wares("custom_ware") > 350, "We should have collected some of the custom ware")
+   assert_true(barbarians_custom_worker_program_counter   > 0, "The worker program script should have been called")
+   assert_true(barbarians_custom_building_program_counter > 0, "The building program script should have been called")
 
    stable_save(game, "custom_units", 50 * 1000)
 
    assert_true(hq:get_wares("custom_ware") > 350, "We should have collected some of the custom ware")
+   assert_true(barbarians_custom_worker_program_counter   > 0, "The worker program script should have been called")
+   assert_true(barbarians_custom_building_program_counter > 0, "The building program script should have been called")
 
    print("# All Tests passed.")
    wl.ui.MapView():close()
