@@ -1475,7 +1475,7 @@ msgctxt "amazons_building"
 msgid ""
 "The jungle master plants one tree between %1$s and %2$s, depending on how "
 "far she has to walk."
-msgstr ""
+msgstr "Die Dschungelmeisterin pflanzt einen Baum zwischen %1$s und %2$s, je nachdem, wie weit sie laufen muss."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stone Workshop
 #: ../../../../data/tribes/initialization/amazons/units.lua:1469
@@ -1557,7 +1557,7 @@ msgctxt "amazons_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce one "
 "bread in %s on average."
-msgstr ""
+msgstr "Wenn alle benötigten Waren rechtzeitig geliefert werden, kann dieses Gebäude ein Brot in durchschnittlich %s herstellen."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Chocolate
 #. Brewery
@@ -4567,7 +4567,7 @@ msgstr "Askadus, Erfinder der Vertikalachsenwindmühle"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The sawmill needs %s on average to produce one plank."
-msgstr ""
+msgstr "Die Sägemühle benötigt durchschnittlich %s, um ein Brett herzustellen."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Smokery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1671
@@ -4678,7 +4678,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce one "
 "bread in %s on average."
-msgstr ""
+msgstr "Wenn alle benötigten Waren rechtzeitig geliefert werden, kann dieses Gebäude ein Brot in durchschnittlich %s herstellen."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Charcoal
 #. Kiln
@@ -4726,7 +4726,7 @@ msgstr "Eine dunkle Stimme aus der Köhlerei"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "Die Köhlerei benötigt durchschnittlich %s, um eine Kohle herzustellen."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Smelting
 #. Works
@@ -4895,7 +4895,7 @@ msgstr "Rekrutierungsplakat"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "Die Kaserne benötigt durchschnittlich %s, um einen Soldaten zu rekrutieren."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Horse Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1802
@@ -7011,7 +7011,7 @@ msgstr "Härtet Stämme mit Feuer zu Hartholz, mit dem robuste Gebäude gebaut w
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The wood hardener needs %s on average to produce one blackwood."
-msgstr ""
+msgstr "Der Holzhärter benötigt durchschnittlich %s, um ein Hartholz herzustellen."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Reed Yard
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1298
@@ -7303,7 +7303,7 @@ msgstr "Lied der Köhler"
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "Die Köhlerei benötigt durchschnittlich %s, um eine Kohle herzustellen."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Smelting Works
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1429
@@ -11252,7 +11252,7 @@ msgstr "Wahlspruch der Zimmermannsgilde"
 #, lua-format
 msgctxt "empire_building"
 msgid "The sawmill needs %s on average to produce one plank."
-msgstr ""
+msgstr "Das Sägewerk benötigt durchschnittlich %s, um ein Brett herzustellen."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11505,7 +11505,7 @@ msgstr "Sprichwort des Imperiums zur Unterscheidung ob etwas gut oder schlecht i
 #, lua-format
 msgctxt "empire_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "Die Köhlerei benötigt durchschnittlich %s, um eine Kohle herzustellen."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11652,7 +11652,7 @@ msgstr "Bewaffnet Rekruten und bildet sie zu Soldaten aus."
 #, lua-format
 msgctxt "empire_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "Die Kaserne benötigt durchschnittlich %s, um einen Soldaten zu rekrutieren."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
