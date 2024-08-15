@@ -141,6 +141,7 @@ function developers() return {
                "Pavol Gono",
                "Javier G. Sogo (jgsogo)",
                "aDiscoverer",
+               "cake>pie",
             },
          },
       },

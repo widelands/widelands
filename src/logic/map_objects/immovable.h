@@ -46,6 +46,8 @@ struct ImmovableActionData;
 struct ImmovableProgram;
 struct PlayerImmovable;
 
+constexpr float kImmovableSilhouetteOpacity = 0.3f;
+
 struct NoteImmovable {
 	CAN_BE_SENT_AS_NOTE(NoteId::Immovable)
 
