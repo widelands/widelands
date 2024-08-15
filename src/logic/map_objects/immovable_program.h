@@ -139,7 +139,7 @@ struct ImmovableProgram : public MapObjectProgram {
 	///    function:
 	///       The name of the function to call.
 	///
-	/// Invokes the specified Lua function with this productionsite as the argument.
+	/// Invokes the specified Lua function with this immovable as the argument.
 	class ActRunScript : public Action {
 	public:
 		explicit ActRunScript(const std::vector<std::string>& arguments);
