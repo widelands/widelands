@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-08 02:42+0000\n"
+"POT-Creation-Date: 2024-08-15 02:44+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2017,2024\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/widelands/widelands/language/en_GB/)\n"
@@ -2334,7 +2334,7 @@ msgstr "Desert"
 msgid "No description defined"
 msgstr "No description defined"
 
-#: ../../../../src/logic/map_objects/immovable.cc:491
+#: ../../../../src/logic/map_objects/immovable.cc:509
 #: ../../../../src/logic/map_objects/tribes/constructionsite.cc:169
 #, c-format
 msgid "%i%% built"
