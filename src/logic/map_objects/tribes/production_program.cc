@@ -1054,7 +1054,7 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 		const std::string object_name = object_info.second;
 
 		// Add needed entities
-		if (mapobjecttype == MapObjectType::IMMOVABLE ) {
+		if (mapobjecttype == MapObjectType::IMMOVABLE) {
 			descr->add_needed_immovable(object_info.second);
 		}
 	}

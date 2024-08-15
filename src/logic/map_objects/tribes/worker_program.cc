@@ -369,9 +369,9 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 		if (act->sparam1 == "immovable" || act->sparam1 == "bob") {
 			Notifications::publish(NoteMapObjectDescription(
 			   act->sparam2, NoteMapObjectDescription::LoadType::kObject, false));
-			needed_named_map_objects_.insert(
-		   std::make_pair(act->sparam1 == "immovable" ? MapObjectType::IMMOVABLE : MapObjectType::BOB,
-		                  act->sparam2));
+			needed_named_map_objects_.insert(std::make_pair(
+			   act->sparam1 == "immovable" ? MapObjectType::IMMOVABLE : MapObjectType::BOB,
+			   act->sparam2));
 		}
 
 		if (act->iparam2 >= 0) {
@@ -722,7 +722,8 @@ void WorkerProgram::parse_callobject(Worker::Action* act, const std::vector<std:
 	}
 	// same for the mapobjects found by name
 	if (!needed_named_map_objects_.empty()) {
-		collected_named_map_objects_.insert(needed_named_map_objects_.begin(), needed_named_map_objects_.end());
+		collected_named_map_objects_.insert(
+		   needed_named_map_objects_.begin(), needed_named_map_objects_.end());
 	}
 }
 
@@ -901,7 +902,8 @@ void WorkerProgram::parse_removeobject(Worker::Action* act,
 	}
 	// same for the mapobjects found by name
 	if (!needed_named_map_objects_.empty()) {
-		collected_named_map_objects_.insert(needed_named_map_objects_.begin(), needed_named_map_objects_.end());
+		collected_named_map_objects_.insert(
+		   needed_named_map_objects_.begin(), needed_named_map_objects_.end());
 	}
 }
 
