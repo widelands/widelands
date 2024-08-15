@@ -353,7 +353,8 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 			if (item.second == "immovable" || item.second == "bob" || item.second == "special") {
 				act->sparam1 = item.second;
 			} else {
-				throw GameDataError("Invalid usage of 'type' predicate: Possible values are 'immovable', 'bob' and 'special'.");
+				throw GameDataError("Invalid usage of 'type' predicate: Possible values are "
+				                    "'immovable', 'bob' and 'special'.");
 			}
 		} else if (item.first == "name") {
 			act->sparam2 = item.second;
@@ -364,13 +365,13 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 
 	if (!act->sparam2.empty()) {
 		if (act->sparam1 == "immovable" || act->sparam1 == "bob") {
-			Notifications::publish(
-			   NoteMapObjectDescription(act->sparam2, NoteMapObjectDescription::LoadType::kObject, false));
+			Notifications::publish(NoteMapObjectDescription(
+			   act->sparam2, NoteMapObjectDescription::LoadType::kObject, false));
 		}
 
 		if (act->iparam2 >= 0) {
-			throw GameDataError(
-			   "Invalid usage of findobject predicates: 'attrib' and 'name' are not to be used together.");
+			throw GameDataError("Invalid usage of findobject predicates: 'attrib' and 'name' are not "
+			                    "to be used together.");
 		}
 	}
 
