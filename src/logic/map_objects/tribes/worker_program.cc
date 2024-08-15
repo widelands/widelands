@@ -286,10 +286,9 @@ findobject
       The possible values are:
       * ``immovable``: Only immovables with the given name or attribute are considered.
       * ``bob``: Only critters and workers with the given name or attribute are considered.
-      * ``special``: Special objects like pinned notes might be considered. (no consistency checks are implemented for this case)
-      Defaults to ``immovable``.
-   :arg string attrib: The attribute that the map object should possess.
-   :arg string name: The internal name of the map object (since version 1.3)
+      * ``special``: Special objects like pinned notes might be considered. (no consistency checks
+are implemented for this case) Defaults to ``immovable``. :arg string attrib: The attribute that the
+map object should possess. :arg string name: The internal name of the map object (since version 1.3)
    :arg empty no_notify: Do not send a message to the player if this step fails.
 
    Find and select an object based on a number of predicates, which can be specified
@@ -351,7 +350,8 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 			if (item.second == "immovable" || item.second == "bob" || item.second == "special") {
 				act->sparam1 = item.second;
 			} else {
-				throw GameDataError("Invalid usage of 'type' predicate: Possible values are 'immovable', 'bob' and 'special'.");
+				throw GameDataError("Invalid usage of 'type' predicate: Possible values are "
+				                    "'immovable', 'bob' and 'special'.");
 			}
 		} else if (item.first == "name") {
 			act->sparam2 = item.second;
@@ -362,13 +362,13 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 
 	if (!act->sparam2.empty()) {
 		if (act->sparam1 == "immovable" || act->sparam1 == "bob") {
-			Notifications::publish(
-			   NoteMapObjectDescription(act->sparam2, NoteMapObjectDescription::LoadType::kObject, false));
+			Notifications::publish(NoteMapObjectDescription(
+			   act->sparam2, NoteMapObjectDescription::LoadType::kObject, false));
 		}
 
 		if (act->iparam2 >= 0) {
-			throw GameDataError(
-			   "Invalid usage of findobject predicates: 'attrib' and 'name' are not to be used together.");
+			throw GameDataError("Invalid usage of findobject predicates: 'attrib' and 'name' are not "
+			                    "to be used together.");
 		}
 	}
 
