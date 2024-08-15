@@ -284,10 +284,12 @@ findobject
    :arg int radius: Search for an object within the given radius around the worker.
    :arg string type: The type of map object to search for.
       The possible values are:
+
       * ``immovable``: Only immovables with the given name or attribute are considered.
       * ``bob``: Only critters and workers with the given name or attribute are considered.
       * ``special``: Special objects like pinned notes might be considered. (no consistency checks are implemented for this case)
       Defaults to ``immovable``.
+
    :arg string attrib: The attribute that the map object should possess.
    :arg string name: The internal name of the map object (since version 1.3)
    :arg empty no_notify: Do not send a message to the player if this step fails.
