@@ -9,9 +9,10 @@ import shutil
 import subprocess
 import sys
 import tempfile
-import unittest
+import concurrent.futures as cf
 import time
 import datetime
+import multiprocessing
 
 #Python2/3 compat code for iterating items
 try:
@@ -42,6 +43,13 @@ elif "perf_counter" in dir(time):
 else:
     get_time = time.time
 
+try:
+    import psutil
+    # NOCOM
+    print("DEBUG: psutil is available")
+except:
+    psutil = None
+
 def datadir():
     return os.path.join(os.path.dirname(__file__), "data")
 
@@ -52,51 +60,34 @@ def out(string):
     sys.stdout.write(string)
     sys.stdout.flush()
 
-class WidelandsTestCase(unittest.TestCase):
+class WidelandsTestCase():
     do_use_random_directory = True
     path_to_widelands_binary = None
     keep_output_around = False
     ignore_error_code = False
     timeout = 600
+    total_tests = 0
 
     def __init__(self, test_script, **wlargs):
-        unittest.TestCase.__init__(self)
-        self._test_script = test_script
+        self.test_script = test_script
+        self._shortname = os.path.basename(test_script)
         self._wlargs = wlargs
+        self.success = None
+        self.result = "NOT EXECUTED"
+        self.report_header = None
+        # 'which_time' is an integer defining the number of times Widelands has run this test
+        # case (i.e. because we might load a saved game from an earlier run). This will impact
+        # the filenames for stdout.txt.
+        self.which_time = 0
+        self.outputs = []
+        WidelandsTestCase.total_tests += 1
+        self._test_number = WidelandsTestCase.total_tests
 
-    def __str__(self):
-        return self._test_script
-
-    def setUp(self):
-        if self.do_use_random_directory:
-            self.run_dir = tempfile.mkdtemp(prefix="widelands_regression_test")
-        else:
-            self.run_dir = os.path.join(tempfile.gettempdir(), "widelands_regression_test", self.__class__.__name__)
-            if os.path.exists(self.run_dir):
-                if not self.keep_output_around:
-                    shutil.rmtree(self.run_dir)
-                    os.makedirs(self.run_dir)
-            else:
-                os.makedirs(self.run_dir)
-        self.widelands_returncode = 0
-        self.wl_timed_out = False
-
-    def run(self, result=None):
-        self.currentResult = result # remember result for use in tearDown
-        unittest.TestCase.run(self, result)
-
-    def tearDown(self):
-        if self.currentResult.wasSuccessful() and not self.keep_output_around:
-            shutil.rmtree(self.run_dir)
-
-    def run_widelands(self, wlargs, which_time):
-        """Run Widelands with the given 'wlargs'. 'which_time' is an integer
-        defining the number of times Widelands has been run this test case
-        (i.e. because we might load a saved game from an earlier run. This will
-        impact the filenames for stdout.txt.
+    def run_widelands(self, wlargs):
+        """Run Widelands with the given 'wlargs'.
 
         Returns the stdout filename."""
-        stdout_filename = os.path.join(self.run_dir, "stdout_{:02d}.txt".format(which_time))
+        stdout_filename = os.path.join(self.run_dir, "stdout_{:02d}.txt".format(self.which_time))
         if (os.path.exists(stdout_filename)):
             os.unlink(stdout_filename)
 
@@ -116,6 +107,7 @@ class WidelandsTestCase(unittest.TestCase):
               stdout_file.write(anarg)
               stdout_file.write(" ")
             stdout_file.write("\n")
+            stdout_file.flush()
 
             start_time = get_time()
             widelands = subprocess.Popen(
@@ -133,28 +125,43 @@ class WidelandsTestCase(unittest.TestCase):
             end_time = get_time()
             stdout_file.flush()
             self.duration = datetime.timedelta(seconds = end_time - start_time)
-            stdout_file.write("\nReturned from Widelands in {}, return code is {:d}\n".format(
-                self.duration, widelands.returncode))
+            stdout_file.write("\n{}Returned from Widelands in {}, return code is {:d}\n".format(
+                self.step_prefix(), self.duration, widelands.returncode))
             self.widelands_returncode = widelands.returncode
+        self.outputs.append(stdout_filename)
         return stdout_filename
 
-    def runTest(self):
-        out("\nStarting test case {}\n".format(self._test_script))
-        out("  Running Widelands ...\n")
-        stdout_filename = self.run_widelands(self._wlargs, 0)
+    def run(self):
+        if self.do_use_random_directory:
+            self.run_dir = tempfile.mkdtemp(prefix="widelands_regression_test")
+        else:
+            self.run_dir = os.path.join(tempfile.gettempdir(), "widelands_regression_test", self.__class__.__name__)
+            if os.path.exists(self.run_dir):
+                if not self.keep_output_around:
+                    shutil.rmtree(self.run_dir)
+                    os.makedirs(self.run_dir)
+            else:
+                os.makedirs(self.run_dir)
+
+        self.widelands_returncode = 0
+        self.wl_timed_out = False
+        self.current_step = ""
+
+        out("{} {} ({}): Starting test...\n".format(self.progress(), self._shortname, self.test_script))
+        stdout_filename = self.run_widelands(self._wlargs)
         stdout = open(stdout_filename, "r").read()
         self.verify_success(stdout, stdout_filename)
 
-        find_saves = lambda stdout: re.findall("Script requests save to: (\w+)$", stdout, re.M)
+        find_saves = lambda stdout: re.findall(r'Script requests save to: (\w+)$', stdout, re.M)
         savegame_done = { fn: False for fn in find_saves(stdout) }
-        which_time = 1
-        while not all(savegame_done.values()):
+        while self.success and not all(savegame_done.values()):
+            self.which_time += 1
             for savegame in sorted(savegame_done):
                 if not savegame_done[savegame]: break
-            out("  Loading savegame: {} ...\n".format(savegame))
+            self.current_step = "{}.wgf".format(savegame)
+            out("{} {}: Loading savegame: {} ...\n".format(self.progress(), self._shortname, savegame))
             stdout_filename = self.run_widelands({ "loadgame": os.path.join(
-                self.run_dir, "save", "{}.wgf".format(savegame))}, which_time)
-            which_time += 1
+                self.run_dir, "save", "{}.wgf".format(savegame))})
             stdout = open(stdout_filename, "r").read()
             for new_save in find_saves(stdout):
                 if new_save not in savegame_done:
@@ -162,36 +169,97 @@ class WidelandsTestCase(unittest.TestCase):
             savegame_done[savegame] = True
             self.verify_success(stdout, stdout_filename)
 
+        if self.report_header == None and not self.keep_output_around:
+            shutil.rmtree(self.run_dir)
+
+    def progress(self):
+        # return "{}/{}".format(self._test_number, WidelandsTestCase.total_tests)
+        return "{}/{}".format(self._test_number, self.total_tests)
+
+    def step_prefix(self):
+        if self.which_time == 0:
+            return "{} {}:   ".format(self.progress(), self._shortname)
+        else:
+            return "{} {} / {}:   ".format(self.progress(), self._shortname, self.current_step)
+
+    def out_result(self, stdout_filename):
+        out("{}{}   in {}\n".format(self.step_prefix(), self.result, self.duration))
+        if self.keep_output_around:
+            out("{}stdout: {}\n".format(self.step_prefix(), stdout_filename))
+
+    def fail(self, short, long, stdout_filename):
+        self.success = False
+        self.result = short
+        self.report_header = "{} Analyze the files in {} to see why this test case failed.\nStdout is: {}".format(
+                             long, self.run_dir, stdout_filename)
+        self.out_result(stdout_filename)
+
+    def step_success(self, stdout_filename):
+        old_result = self.result
+        self.result = "DONE"
+        self.out_result(stdout_filename)
+        if self.which_time == 0:
+            self.success = True
+        else:
+            self.result = old_result
+
     def verify_success(self, stdout, stdout_filename):
-        out("    Elapsed time: {}\n".format(self.duration))
         # Catch instabilities with SDL in CI environment
         if self.widelands_returncode == 2:
-            print("SDL initialization failed. TEST SKIPPED.")
-            with open(stdout_filename, 'r') as stdout_file:
-                for line in stdout_file.readlines():
-                    print(line.strip())
-            out("  SKIPPED.\n")
+            # Print stdout in the final summary with this header
+            out("{}SDL initialization failed in step {}. TEST SKIPPED.".format( \
+                self.step_prefix(), self.which_time + 1))
+            self.result = "SKIPPED"
+            if self.which_time == 0:  # must set it for the first run, later just ignore
+                self.success = True
         else:
-            common_msg = "Analyze the files in {} to see why this test case failed. Stdout is\n  {}\n\nstdout:\n{}".format(
-                    self.run_dir, stdout_filename, stdout)
             if self.wl_timed_out:
-                out("  TIMED OUT.\n")
-                self.assertTrue(False, "The test timed out. {}".format(common_msg))
-            if self.widelands_returncode == 1 and self.ignore_error_code:
-                out("  IGNORING error code 1\n")
-            else:
-                self.assertTrue(self.widelands_returncode == 0,
-                    "Widelands exited abnormally. {}".format(common_msg)
-                )
-            self.assertTrue("All Tests passed" in stdout,
-                "Not all tests pass. {}.".format(common_msg)
-            )
-            self.assertFalse("lua_errors.cc" in stdout,
-                "Not all tests pass. {}.".format(common_msg)
-            )
-            out("  done.\n")
-        if self.keep_output_around:
-            out("    stdout: {}\n".format(stdout_filename))
+                self.fail("TIMED OUT", "The test timed out.", stdout_filename)
+                return
+            if self.widelands_returncode != 0:
+                if self.widelands_returncode == 1 and self.ignore_error_code:
+                    out("{}IGNORING error code 1\n".format(self.step_prefix(), step_name))
+                else:
+                    self.fail("FAILED", "Widelands exited abnormally.", stdout_filename)
+                    return
+            if not "All Tests passed" in stdout or "lua_errors.cc" in stdout:
+                self.fail("FAILED", "Not all tests pass.", stdout_filename)
+                return
+            self.step_success(stdout_filename)
+
+
+def recommended_workers(binary):
+    cpu_count = multiprocessing.cpu_count()
+
+    # Widelands uses 2 threads, but the logic thread is much more heavy,
+    # so we give each Widelands instance one full CPU for the logic thread
+    # while we let the graphic threads of up to 3 instances share one CPU.
+    max_threads_cpu = 1
+    if cpu_count > 2 :
+        max_threads_cpu = cpu_count - 1 - (cpu_count - 1) // 4
+
+    # Also test memory as a limiting factor
+    if psutil != None:
+        mem_per_instance = 1500 # MB - default for debug builds
+
+        widelands = subprocess.run([binary, '--version'], shell=False, encoding='utf-8', capture_output=True)
+        firstline = widelands.stdout.splitlines(keepends=False)[0]
+        firstline_OK = False
+        if firstline.startswith('This is Widelands version'):
+            if firstline.endswith('Release'):
+                mem_per_instance = 800 # MB
+                firstline_OK = True
+            elif firstline.endswith('Debug'):
+                firstline_OK = True
+        if not firstline_OK:
+            print('Cannot parse build type from stdout:', firstline)
+
+        max_threads_mem = max(1, psutil.virtual_memory().available // (mem_per_instance * 1000 * 1000))
+        # NOCOM
+        print("DEBUG: {} CPUs, {}/{} bytes memory free".format(cpu_count, psutil.virtual_memory().available, psutil.virtual_memory().total))
+        return min(max_threads_cpu, max_threads_mem)
+    else:
+        return max_threads_cpu
 
 def parse_args():
     p = argparse.ArgumentParser(description=
@@ -216,6 +284,9 @@ def parse_args():
         help = "Assume success on return code 1, to allow running the tests "
         "without ASan reporting false positives."
     )
+    p.add_argument("-j", "--workers", type=int, default = 1,
+        help = "Use this many parallel workers."
+    )
     if has_timeout:
         p.add_argument("-t", "--timeout", type=float, default = "10",
             help = "Set the timeout duration for test cases in minutes. Default is 10 minutes."
@@ -226,20 +297,43 @@ def parse_args():
 
     args = p.parse_args()
 
+    found_binary = False
     if args.binary is None:
-        potential_binaries = (
+        for potential_binary in (
             glob(os.path.join(os.curdir, "widelands")) +
             glob(os.path.join(os.path.dirname(__file__), "widelands")) +
             glob(os.path.join("src", "widelands")) +
             glob(os.path.join("..", "*", "src", "widelands"))
-        )
-        if potential_binaries:
-            args.binary = potential_binaries[0]
-        elif "which" in dir(shutil):
+        ):
+            if os.access(potential_binary, os.X_OK):
+                args.binary = potential_binary
+                found_binary = True
+                break
+        if not found_binary and "which" in dir(shutil):
             args.binary = shutil.which("widelands")
 
         if args.binary is None:
             p.error("No widelands binary found. Please specify with -b.")
+    else:
+        if not os.access(args.binary, os.X_OK):
+            for potential_path in [ os.curdir, os.path.dirname(__file__) ]:
+                fullpath = os.path.join(potential_path, args.binary)
+                if os.access(fullpath, os.X_OK):
+                    args.binary = fullpath
+                    found_binary = True
+                    break
+            if not found_binary:
+                p.error("The specified widelands binary is not found.")
+
+    if args.nonrandom:
+        if args.workers != 1:
+            args.workers = 1
+            print("Only one worker is possible with --nonrandom!")
+        if args.keep_around:
+            print("--nonrandom is not recommended with --keep-around, some files will be overwritten!")
+
+    if args.workers == 0:
+        args.workers = recommended_workers(args.binary)
 
     return args
 
@@ -254,7 +348,7 @@ def discover_loadgame_tests(regexp, suite):
         for test_script in sorted(glob(os.path.join(fixture, "test*.lua"))):
             if regexp is not None and not re.search(regexp, test_script):
                 continue
-            suite.addTest(
+            suite.append(
                     WidelandsTestCase(test_script,
                         loadgame=savegame, script=test_script))
     # Savegames without custom script, just test loading
@@ -262,8 +356,7 @@ def discover_loadgame_tests(regexp, suite):
     for savegame in sorted(glob(os.path.join("test", "save", "*.wgf"))):
         if regexp is not None and not re.search(regexp, savegame):
             continue
-        suite.addTest(WidelandsTestCase(savegame, loadgame=savegame, script=test_script))
-
+        suite.append(WidelandsTestCase(savegame, loadgame=savegame, script=test_script))
 
 def discover_scenario_tests(regexp, suite):
     """Add all tests using --scenario to the 'suite'."""
@@ -273,7 +366,7 @@ def discover_scenario_tests(regexp, suite):
         for test_script in sorted(glob(os.path.join(wlmap, "scripting", "test*.lua"))):
             if regexp is not None and not re.search(regexp, test_script):
                 continue
-            suite.addTest(
+            suite.append(
                     WidelandsTestCase(test_script,
                         scenario=wlmap, script=test_script))
 
@@ -288,7 +381,7 @@ def discover_game_template_tests(regexp, suite):
             continue
         if regexp is not None and not re.search(regexp, test_script):
             continue
-        suite.addTest(
+        suite.append(
                 WidelandsTestCase(test_script,
                     new_game_from_template=templ, script=test_script))
 
@@ -300,7 +393,7 @@ def discover_editor_tests(regexp, suite):
         for test_script in sorted(glob(os.path.join(wlmap, "scripting", "editor_test*.lua"))):
             if regexp is not None and not re.search(regexp, test_script):
                 continue
-            suite.addTest(
+            suite.append(
                     WidelandsTestCase(test_script,
                         editor=wlmap, script=test_script))
 
@@ -318,13 +411,63 @@ def main():
         out("Python version does not support timeout on subprocesses,\n"
             "test cases may run indefinitely.\n\n")
 
-    suite = unittest.TestSuite()
-    discover_loadgame_tests(args.regexp, suite)
-    discover_scenario_tests(args.regexp, suite)
-    discover_game_template_tests(args.regexp, suite)
-    discover_editor_tests(args.regexp, suite)
+    test_cases = []
+    discover_loadgame_tests(args.regexp, test_cases)
+    discover_scenario_tests(args.regexp, test_cases)
+    discover_game_template_tests(args.regexp, test_cases)
+    discover_editor_tests(args.regexp, test_cases)
 
-    return unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()
+    print(f"Will run { len(test_cases) } tests with { args.workers } workers.\n")
+
+    start_time = get_time()
+
+    if args.workers == 1:
+        # Single-threaded execution is special-cased for nicer grouping.
+        for test_case in test_cases:
+            test_case.run()
+    else:
+        # Parallel execution
+        with cf.ThreadPoolExecutor(max_workers = args.workers) as executor:
+            futures = {executor.submit(test_case.run): test_case for test_case in test_cases}
+            cf.wait(futures)
+
+    end_time = get_time()
+
+    separator = "\n--------------------------------------------------------------"
+
+    nr_errors = 0
+    results = dict()
+    for test_case in test_cases:
+        # Skipped test cases are logged, but don't count as failure
+        if test_case.report_header != None:
+            print(separator)
+            print("{}: {}\n".format(test_case.result, test_case.test_script))
+            print(test_case.report_header)
+            print("\nstdout:")
+            for stdout_fn in test_case.outputs:
+                with open(stdout_fn, "r") as stdout:
+                    for line in stdout:
+                        print(line, end='')
+            if test_case.result in results.keys():
+                results[test_case.result].append(test_case.test_script)
+            else:
+                results[test_case.result] = [ test_case.test_script ]
+        if not test_case.success:
+            nr_errors += 1
+
+    print(separator)
+
+    if nr_errors == 0:
+        print(f"Ran %d test cases in %.3f s, all tests passed." % (len(test_cases), end_time - start_time))
+        return True
+
+    print(f"Ran %d test cases in %.3f s, %d tests passed, %d tests failed!\n" % (len(test_cases), end_time - start_time, len(test_cases) - nr_errors, nr_errors))
+    for result,tests in iteritems(results):
+        print("{} tests {}:".format(len(tests), result))
+        for test in tests:
+            print("     {}".format(test))
+
+    return False
 
 if __name__ == '__main__':
     sys.exit(0 if main() else 1)
