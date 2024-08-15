@@ -17,7 +17,7 @@
 # Niektóry <niektory@gmail.com>, 2020
 # Sebastian Janus <sebek89@gmail.com>, 2015
 # Sergiusz NA, 2023
-# Sylwia Studzińska <sanuspg@gmail.com>, 2019
+# ef893623c0d73ce70e67d8651f0d6c55_469af92 <8dc4100963128dc61a2750ba4ad599c3_832097>, 2019
 # Szymon Gackowski <szymon.gackowski@gmail.com>, 2016
 # a1ece48630b5a0de9356e79b7737a2be_5b7424f, 2022
 # tombox <wptom@wp.pl>, 2015-2016,2018
@@ -27,7 +27,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-08 02:42+0000\n"
+"POT-Creation-Date: 2024-08-15 02:44+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Leszek Szary, 2024\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
@@ -2365,7 +2365,7 @@ msgstr "Pustynia"
 msgid "No description defined"
 msgstr "Brak opisu"
 
-#: ../../../../src/logic/map_objects/immovable.cc:491
+#: ../../../../src/logic/map_objects/immovable.cc:509
 #: ../../../../src/logic/map_objects/tribes/constructionsite.cc:169
 #, c-format
 msgid "%i%% built"
