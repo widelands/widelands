@@ -99,6 +99,15 @@ inline int portable_read(const int socket, char* buffer, const size_t length) {
 	return read(socket, buffer, length);
 #endif
 }
+
+[[nodiscard]] inline bool name_valid(const std::string& filename) {
+	// Requirements are defined and enforced by the server.
+	return !filename.empty() && filename.size() <= 80 &&
+	       filename.find_first_not_of("ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	                                  "abcdefghijklmnopqrstuvwxyz"
+	                                  "0123456789._-") == std::string::npos &&
+	       filename.find("..") == std::string::npos;
+}
 }  // namespace
 
 void NetAddons::throw_warning(const std::string& message) const {
@@ -135,19 +144,23 @@ void NetAddons::check_checksum(const std::string& path, const std::string& check
 
 size_t NetAddons::gather_addon_content(const std::string& current_dir,
                                        const std::string& prefix,
-                                       std::map<std::string, std::set<std::string>>& result) {
+                                       std::map<std::string, std::set<std::string>>& result,
+                                       std::set<std::string>& invalid_names) {
 	result[prefix] = {};
 	size_t nr_files = 0;
 	for (const std::string& f : g_fs->list_directory(current_dir)) {
 		const std::string fname = FileSystem::fs_filename(f.c_str());
 		if (!fname.empty() && fname.front() != '.') {  // Ignore hidden files
+			if (!name_valid(fname)) {
+				invalid_names.insert(f /* check the filename but display with full path */);
+			}
 			if (g_fs->is_directory(f)) {
 				std::string str = prefix;
 				if (!str.empty()) {
 					str += FileSystem::file_separator();
 				}
 				str += fname;
-				nr_files += gather_addon_content(f, str, result);
+				nr_files += gather_addon_content(f, str, result, invalid_names);
 			} else {
 				result[prefix].insert(fname);
 				++nr_files;
@@ -805,7 +818,11 @@ void NetAddons::upload_addon(const std::string& name,
 		std::string dir = kAddOnDir;
 		dir += FileSystem::file_separator();
 		dir += name;
-		init_fn("", gather_addon_content(dir, "", content));
+		std::set<std::string> invalid_names;
+		init_fn("", gather_addon_content(dir, "", content, invalid_names));
+		if (!invalid_names.empty()) {
+			throw IllegalFilenamesException(invalid_names);
+		}
 	}
 
 	is_uploading_addon_ = true;
