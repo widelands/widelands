@@ -141,6 +141,7 @@ struct ImmovableProgram : public MapObjectProgram {
 	///
 	/// Invokes the specified Lua function with this productionsite as the argument.
 	class ActRunScript : public Action {
+	public:
 		explicit ActRunScript(const std::vector<std::string>& arguments);
 		void execute(Game&, Immovable&) const override;
 
