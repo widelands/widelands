@@ -328,6 +328,7 @@ private:
 
 class ProductionSite : public Building {
 	friend class MapBuildingdataPacket;
+	// TODO(Nordfriese): Refactor this. Many friend classes are bad style.
 	friend struct ProductionProgram::ActReturn;
 	friend struct ProductionProgram::ActReturn::WorkersNeedExperience;
 	friend struct ProductionProgram::ActCall;
@@ -341,6 +342,7 @@ class ProductionSite : public Building {
 	friend struct ProductionProgram::ActCheckSoldier;
 	friend struct ProductionProgram::ActTrain;
 	friend struct ProductionProgram::ActPlaySound;
+	friend struct ProductionProgram::ActRunScript;
 	friend struct ProductionProgram::ActConstruct;
 	MO_DESCR(ProductionSiteDescr)
 

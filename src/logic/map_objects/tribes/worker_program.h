@@ -113,6 +113,7 @@ private:
 	void parse_playsound(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_construct(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_terraform(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_script(Worker::Action* act, const std::vector<std::string>& cmd);
 
 	const WorkerDescr& worker_;
 	Descriptions& descriptions_;
