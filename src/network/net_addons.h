@@ -25,6 +25,12 @@
 
 namespace AddOns {
 
+struct IllegalFilenamesException : public std::exception {
+	explicit IllegalFilenamesException(std::set<std::string> in) : illegal_names(in) {
+	}
+	std::set<std::string> illegal_names;
+};
+
 struct NetAddons {
 	NetAddons() = default;
 	~NetAddons();
@@ -86,12 +92,23 @@ private:
 	void init(std::string username = std::string(), std::string password = std::string());
 	void quit_connection();
 
+	void set_timeouts(bool suppress_timeout);
+
 	// Read a '\n'-terminated string from the socket. The terminator is not part of the result.
 	[[nodiscard]] std::string read_line() const;
 	void read_file(int64_t length, const std::string& out) const;
 	void check_endofstream();
 	void write_to_server(const std::string&);
 	void write_to_server(const char*, size_t);
+
+	void throw_warning(const std::string& message) const;
+	void check_string_validity(const std::string& str);
+	void check_checksum(const std::string& path, const std::string& checksum);
+	size_t gather_addon_content(const std::string& current_dir,
+	                            const std::string& prefix,
+	                            std::map<std::string, std::set<std::string>>& result,
+	                            std::set<std::string>& invalid_names);
+	void append_multiline_message(std::string& send, const std::string& message);
 
 	std::string last_username_, last_password_;
 	bool initialized_{false};
@@ -101,6 +118,8 @@ private:
 	size_t cached_remotes_{0U};
 	std::string server_descname_;
 	bool is_uploading_addon_{false};
+	bool timeout_was_suppressed_{false};
+	mutable std::string last_error_message_;
 };
 
 }  // namespace AddOns

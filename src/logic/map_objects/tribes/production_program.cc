@@ -169,6 +169,7 @@ Available actions are:
 - `return`_
 - `sleep`_
 - `train`_
+- `script`_
 */
 
 ProductionProgram::ActReturn::Condition* create_economy_condition(
@@ -186,8 +187,9 @@ ProductionProgram::ActReturn::Condition* create_economy_condition(
 			descr.worker_demand_checks()->insert(wareworker.second);
 			return new ProductionProgram::ActReturn::EconomyNeedsWorker(wareworker.second);
 		}
+		default:
+			NEVER_HERE();
 		}
-		NEVER_HERE();
 	} catch (const GameDataError& e) {
 		throw GameDataError("economy condition: %s", e.what());
 	}
@@ -443,7 +445,8 @@ ProductionProgram::ActReturn::Negation::description_negation(const Descriptions&
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWare::evaluate(const ProductionSite& ps) const {
-	return ps.infinite_production() || ps.get_economy(wwWARE)->needs_ware_or_worker(ware_type);
+	return ps.infinite_production() ||
+	       ps.get_economy(wwWARE)->needs_ware_or_worker(ware_type, &ps.base_flag());
 }
 std::string ProductionProgram::ActReturn::EconomyNeedsWare::description(
    const Descriptions& descriptions) const {
@@ -463,7 +466,8 @@ std::string ProductionProgram::ActReturn::EconomyNeedsWare::description_negation
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWorker::evaluate(const ProductionSite& ps) const {
-	return ps.infinite_production() || ps.get_economy(wwWORKER)->needs_ware_or_worker(worker_type);
+	return ps.infinite_production() ||
+	       ps.get_economy(wwWORKER)->needs_ware_or_worker(worker_type, &ps.base_flag());
 }
 std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description(
    const Descriptions& descriptions) const {
@@ -772,16 +776,15 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 			   /** TRANSLATORS: "Completed working because the economy needs the ware '%s'" */
 			   _("Completed %1$s because %2$s"), ps.top_state().program->descname(), condition_string);
 		} break;
-		case ProgramResult::kSkipped: {
+		case ProgramResult::kSkipped:
+		case ProgramResult::kNone: {
+			// TODO(GunChleoc): kNone same as kSkipped - is this on purpose?
 			result_string = format(
 			   /** TRANSLATORS: "Skipped working because the economy needs the ware '%s'" */
 			   _("Skipped %1$s because %2$s"), ps.top_state().program->descname(), condition_string);
 		} break;
-		case ProgramResult::kNone: {
-			// TODO(GunChleoc): Same as skipped - is this on purpose?
-			result_string = format(
-			   _("Skipped %1$s because %2$s"), ps.top_state().program->descname(), condition_string);
-		}
+		default:
+			NEVER_HERE();
 		}
 		if (ps.production_result() != ps.descr().out_of_resource_heading() ||
 		    ps.descr().out_of_resource_heading().empty()) {
@@ -926,6 +929,8 @@ void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
 		ps.program_timer_ = true;
 		ps.program_time_ = ps.schedule_act(game, Duration(10));
 		break;
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -1877,6 +1882,8 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 				break;
 			case TrainingAttribute::kTotal:
 				throw wexception("'total' training attribute can't be trained");
+			default:
+				NEVER_HERE();
 			}
 		} catch (...) {
 			throw wexception("Fail training soldier!!");
@@ -1906,6 +1913,20 @@ ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& ar
 void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) const {
 	Notifications::publish(NoteSound(SoundType::kAmbient, parameters.fx, ps.position_,
 	                                 parameters.priority, parameters.allow_multiple));
+	return ps.program_step(game);
+}
+
+/* RST
+script
+------
+Runs a Lua function. See :ref:`map_object_programs_script`.
+*/
+ProductionProgram::ActRunScript::ActRunScript(const std::vector<std::string>& arguments)
+   : parameters(MapObjectProgram::parse_act_script(arguments)) {
+}
+
+void ProductionProgram::ActRunScript::execute(Game& game, ProductionSite& ps) const {
+	MapObjectProgram::do_run_script(game.lua(), &ps, parameters.function);
 	return ps.program_step(game);
 }
 
@@ -2173,6 +2194,9 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 			} else if (parseinput.name == "playsound") {
 				actions_.push_back(
 				   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(parseinput.arguments)));
+			} else if (parseinput.name == "script") {
+				actions_.push_back(
+				   std::unique_ptr<ProductionProgram::Action>(new ActRunScript(parseinput.arguments)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActConstruct(parseinput.arguments, name(), building, descriptions)));

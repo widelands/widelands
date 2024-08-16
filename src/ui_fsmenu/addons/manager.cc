@@ -1120,8 +1120,9 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 				} else {
 					return a->average_rating() > b->average_rating();
 				}
+			default:
+				NEVER_HERE();
 			}
-			NEVER_HERE();
 		});
 	}
 	std::vector<std::string> has_upgrades;
@@ -1435,6 +1436,34 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 		rebuild(false);
 	} catch (const OperationCancelledByUserException&) {
 		log_info("upload addon %s cancelled by user", addon->internal_name.c_str());
+	} catch (const AddOns::IllegalFilenamesException& illegal) {
+		log_warn("upload addon %s contains illegal filenames:", addon->internal_name.c_str());
+
+		std::string message;
+		for (const std::string& name : illegal.illegal_names) {
+			log_warn("\t- %s", name.c_str());
+			message += as_listitem(format(_("‘%s’"), name), UI::FontStyle::kFsMenuInfoPanelParagraph);
+		}
+
+		message = format(
+		   "<rt>%1$s</rt>",
+		   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+		      .as_font_tag(format(
+		         "<p>%s</p><vspace gap=%d><p>%s</p><vspace gap=%d><p>%s</p>",
+		         format(_("The add-on ‘%s’ may not be uploaded to the server because the following "
+		                  "filenames contained in the add-on are not allowed:"),
+		                addon->internal_name),
+		         kRowButtonSize, message, kRowButtonSize,
+		         _("Filenames may only contain alphanumeric characters (A-Z, a-z, 0-9) and simple "
+		           "punctuation "
+		           "(period, hyphen, and underscore; not multiple periods). Other characters such as "
+		           "whitespace are not permitted. Filenames may not exceed 80 characters."))));
+
+		w.set_visible(false);
+		UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"), message,
+		                   UI::WLMessageBox::MBoxType::kOk);
+		m.run<UI::Panel::Returncodes>();
+
 	} catch (const std::exception& e) {
 		log_err("upload addon %s: %s", addon->internal_name.c_str(), e.what());
 		w.set_visible(false);

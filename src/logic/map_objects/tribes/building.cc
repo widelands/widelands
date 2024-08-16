@@ -361,6 +361,9 @@ bool Building::get_passable() const {
 Flag& Building::base_flag() {
 	return *flag_;
 }
+const Flag& Building::base_flag() const {
+	return *flag_;
+}
 
 /**
  * \return a bitfield of commands the owning player can issue for this building.
@@ -558,6 +561,8 @@ std::string Building::info_string(const InfoStringFormat& format) {
 			result = productionsite->production_result();
 		}
 		break;
+	default:
+		NEVER_HERE();
 	}
 	return result;
 }
@@ -700,7 +705,7 @@ void Building::draw(const Time& gametime,
 			                    &get_owner()->get_playercolor());
 		} else {
 			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(), t,
-			                    nullptr, kBuildingSilhouetteOpacity);
+			                    nullptr, kImmovableSilhouetteOpacity);
 		}
 	}
 
@@ -708,7 +713,7 @@ void Building::draw(const Time& gametime,
 		dst->blit_animation(point_on_dst, coords, scale, anim_, t, &get_owner()->get_playercolor());
 	} else {
 		dst->blit_animation(
-		   point_on_dst, coords, scale, anim_, t, nullptr, kBuildingSilhouetteOpacity);
+		   point_on_dst, coords, scale, anim_, t, nullptr, kImmovableSilhouetteOpacity);
 	}
 
 	//  door animation?
