@@ -44,7 +44,6 @@ jobs:
         [ -n "$REF" ] && git fetch
         git checkout $REF || git pull origin $REF
         echo "vcpkg_key=${{ hashFiles( './install-dependencies.sh' ) }}-${REF}" >> $GITHUB_OUTPUT
-        echo "toolset=${TOOLSET}" >> $GITHUB_OUTPUT
       shell: bash
     - name: Restore vcpkg and its artifacts.
       uses: actions/cache@v4
@@ -63,8 +62,6 @@ jobs:
       uses: ilammy/msvc-dev-cmd@v1
       with:
         arch: ${{ matrix.arch }}
-        # Check https://github.com/actions/runner-images/blob/main/images/win/toolsets/toolset-2022.json for installed versions
-        toolset: ${{ steps.prepare.outputs.toolset }}
     - name: Compiler
       env:
         VCPKG_ROOT: C:\vcpkg
