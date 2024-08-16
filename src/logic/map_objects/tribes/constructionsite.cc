@@ -92,7 +92,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		opacity = 1.0f;
 	} else {
 		player_color_to_draw = nullptr;
-		opacity = kBuildingSilhouetteOpacity;
+		opacity = kImmovableSilhouetteOpacity;
 	}
 
 	// Initialize variable to make checks happy
@@ -742,7 +742,7 @@ void ConstructionSite::draw(const Time& gametime,
 			   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
 		} else {
 			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(), tanim,
-			                    nullptr, kBuildingSilhouetteOpacity);
+			                    nullptr, kImmovableSilhouetteOpacity);
 		}
 	} else {
 		// Draw the construction site marker
@@ -751,7 +751,7 @@ void ConstructionSite::draw(const Time& gametime,
 			   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
 		} else {
 			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, nullptr,
-			                    kBuildingSilhouetteOpacity);
+			                    kImmovableSilhouetteOpacity);
 		}
 	}
 

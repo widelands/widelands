@@ -33,7 +33,7 @@ class Game;
 class InteractiveBase;
 class InteractivePlayer;
 
-///  Shows the not already fulfilled objectives.
+///  Shows messages and alerts.
 struct GameMessageMenu : public UI::UniqueWindow {
 	GameMessageMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
 

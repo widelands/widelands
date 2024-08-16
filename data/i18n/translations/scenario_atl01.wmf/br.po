@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
-# ThonyVezbe <a.guechoum@gmail.com>, 2020
+# Anthony Guéchoum <a.guechoum@proton.me>, 2020
 # GunChleoc, 2018
 # Irriep Nala Novram <per.morvan.bzh29@gmail.com>, 2017,2021
 # Irriep Nala Novram <per.morvan.bzh29@gmail.com>, 2016

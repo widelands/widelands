@@ -169,6 +169,7 @@ Available actions are:
 - `return`_
 - `sleep`_
 - `train`_
+- `script`_
 */
 
 ProductionProgram::ActReturn::Condition* create_economy_condition(
@@ -1916,6 +1917,20 @@ void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) co
 }
 
 /* RST
+script
+------
+Runs a Lua function. See :ref:`map_object_programs_script`.
+*/
+ProductionProgram::ActRunScript::ActRunScript(const std::vector<std::string>& arguments)
+   : parameters(MapObjectProgram::parse_act_script(arguments)) {
+}
+
+void ProductionProgram::ActRunScript::execute(Game& game, ProductionSite& ps) const {
+	MapObjectProgram::do_run_script(game.lua(), &ps, parameters.function);
+	return ps.program_step(game);
+}
+
+/* RST
 construct
 ---------
 .. function:: construct=\<immovable_name\> worker:\<program_name\> radius:\<number\>
@@ -2179,6 +2194,9 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 			} else if (parseinput.name == "playsound") {
 				actions_.push_back(
 				   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(parseinput.arguments)));
+			} else if (parseinput.name == "script") {
+				actions_.push_back(
+				   std::unique_ptr<ProductionProgram::Action>(new ActRunScript(parseinput.arguments)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActConstruct(parseinput.arguments, name(), building, descriptions)));

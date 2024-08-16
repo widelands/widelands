@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-08 02:42+0000\n"
+"POT-Creation-Date: 2024-08-15 02:44+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: 425467bb0c9da71484550c3c99a0865a_432023a <42ebb87f8d673776150a6c232428c0ac_329642>, 2017\n"
 "Language-Team: Arabic (http://app.transifex.com/widelands/widelands/language/ar/)\n"
@@ -2364,7 +2364,7 @@ msgstr "الصحراء"
 msgid "No description defined"
 msgstr "لا وصف مُحدد"
 
-#: ../../../../src/logic/map_objects/immovable.cc:491
+#: ../../../../src/logic/map_objects/immovable.cc:509
 #: ../../../../src/logic/map_objects/tribes/constructionsite.cc:169
 #, c-format
 msgid "%i%% built"

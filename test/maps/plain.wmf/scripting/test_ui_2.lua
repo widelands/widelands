@@ -40,7 +40,21 @@ function test_window_property1()
    assert_not_nil(mv.windows.messages)
 end
 
-function test_window_property2()
+function test_window_property2a()
+   -- Won't open with no current objectives
+   assert_equal(0, _cnt_PANEL(mv.windows))
+
+   mv.buttons.objectives:click()
+   sleep(2000)
+   assert_equal(0, _cnt_PANEL(mv.windows))
+
+   assert_nil(mv.windows.objectives)
+end
+
+function test_window_property2b()
+   -- Will open when there are objectives
+   p1:add_objective("test", "blah", "blah blah")
+   sleep(2000)
    assert_equal(0, _cnt_PANEL(mv.windows))
 
    mv.buttons.objectives:click()
@@ -202,7 +216,8 @@ run(function()
    for i,fn in pairs({
          test_buttons_property,
          test_window_property1,
-         test_window_property2,
+         test_window_property2a,
+         test_window_property2b,
          test_position_x,
          test_position_y,
          test_descendant_position,
