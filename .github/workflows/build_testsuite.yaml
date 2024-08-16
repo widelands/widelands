@@ -86,8 +86,4 @@ jobs:
         then
           TIMEOUT="-t 20"
         fi
-        # NOCOM let's see how much RAM we have
-        free
-        pip install psutil
-        # end NOCOM
         ./regression_test.py -b build/src/widelands $TIMEOUT -j 0
