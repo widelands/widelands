@@ -36,19 +36,23 @@
 #include "logic/filesystem_constants.h"
 #include "wlapplication.h"
 
-#ifdef PRINT_SEGFAULT_BACKTRACE
 // Taken from https://stackoverflow.com/a/77336
 // TODO(Nordfriese): Implement this on Windows as well (see https://stackoverflow.com/a/26398082)
 static void segfault_handler(const int sig) {
 	constexpr int kMaxBacktraceSize = 256;
-	void* array[kMaxBacktraceSize];
-	size_t size = backtrace(array, kMaxBacktraceSize);
+	const std::string signal_description = BacktraceProvider::get_signal_description(sig);
 
 	std::cout << std::endl
 	          << "##############################" << std::endl
-	          << "FATAL ERROR: Received signal " << sig << " (" << strsignal(sig) << ")" << std::endl
+	          << "FATAL ERROR: Received signal " << signal_description << std::endl
 	          << "Backtrace:" << std::endl;
+
+#ifdef PRINT_SEGFAULT_BACKTRACE
+	void* array[kMaxBacktraceSize];
+	size_t size = backtrace(array, kMaxBacktraceSize);
 	backtrace_symbols_fd(array, size, STDOUT_FILENO);
+#endif
+
 	std::cout
 	   << std::endl
 	   << "Please report this problem to help us improve Widelands, and provide the complete output."
@@ -83,17 +87,19 @@ static void segfault_handler(const int sig) {
 
 	filename += kCrashExtension;
 
-	FILE* file = fopen(filename.c_str(), "w+");
+	FILE* file = fopen(filename.c_str(), "w+b");
 	if (file == nullptr) {
-		std::cout << "The crash report could not be saved to file" << filename << std::endl << std::endl;
+		std::cout << "The crash report could not be saved to file " << filename << std::endl << std::endl;
 	} else {
 		fprintf /* NOLINT codecheck */ (
 		   file,
-		   "Crash report for Widelands %s %s at %s, signal %d (%s)\n\n**** BEGIN BACKTRACE ****\n",
-		   build_ver_details().c_str(), thread_name.c_str(), timestr.c_str(), sig, strsignal(sig));
+		   "Crash report for Widelands %s %s at %s, signal %s\n\n**** BEGIN BACKTRACE ****\n",
+		   build_ver_details().c_str(), thread_name.c_str(), timestr.c_str(), signal_description.c_str());
+#ifdef PRINT_SEGFAULT_BACKTRACE
 		fflush(file);
 		backtrace_symbols_fd(array, size, fileno(file));
 		fflush(file);
+#endif
 		fputs("**** END BACKTRACE ****\n", file);
 
 		fclose(file);
@@ -102,17 +108,29 @@ static void segfault_handler(const int sig) {
 
 	::exit(sig);
 }
-#endif
 
 void BacktraceProvider::register_signal_handler()
 {
-#ifdef PRINT_SEGFAULT_BACKTRACE
 	/* Handle several types of fatal crashes with a useful backtrace on supporting systems.
 	 * We can't handle SIGABRT like this since we have to redirect that one elsewhere to
 	 * suppress non-critical errors from Eris.
 	 */
+#ifdef PRINT_SEGFAULT_BACKTRACE
 	for (int s : {SIGBUS, SIGFPE, SIGILL, SIGSEGV}) {
 		signal(s, segfault_handler);
 	}
 #endif
+}
+
+std::string BacktraceProvider::get_signal_description(int sig)
+{
+	std::ostringstream s;
+
+#ifdef PRINT_SEGFAULT_BACKTRACE
+	s << sig << " (" << strsignal(sig) << ")";
+#else
+	s << sig;
+#endif
+
+	return s.str();
 }

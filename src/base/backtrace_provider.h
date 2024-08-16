@@ -19,9 +19,12 @@
 #ifndef WL_BASE_BACKTRACE_PROVIDER_H
 #define WL_BASE_BACKTRACE_PROVIDER_H
 
+#include <string>
+
 class BacktraceProvider {
 public:
 	static void register_signal_handler();
+	static std::string get_signal_description(int sig);
 };
 
 #endif  // end of include guard: WL_BASE_BACKTRACE_PROVIDER_H
