@@ -465,7 +465,7 @@ wl.Descriptions():new_tribe {
          },
          {
             name = "spider_silk",
-            default_target_quantity = 10,
+            default_target_quantity = 15,
             preciousness = 11,
             helptexts = {
                -- TRANSLATORS: Helptext for an Atlantean ware: Spider Silk
@@ -474,7 +474,7 @@ wl.Descriptions():new_tribe {
          },
          {
             name = "spidercloth",
-            default_target_quantity = 20,
+            default_target_quantity = 15,
             preciousness = 7,
             helptexts = {
                -- TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
