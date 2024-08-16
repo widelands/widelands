@@ -28,8 +28,6 @@ jobs:
       with:
         path: vcpkg_ref
         key: vcpkg_ref-invalid-to-use-latest
-        # Never fall back to unspecified vcpkg version
-        fail-on-cache-miss: true
         restore-keys: |
           vcpkg_ref-
     - name: Checkout vcpkg
