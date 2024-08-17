@@ -54,6 +54,41 @@ def datadir():
 def datadir_for_testing():
     return os.path.relpath(".", os.path.dirname(__file__))
 
+ansi_colors = {
+    'black':   '\033[30m',
+    'red':     '\033[31m',
+    'green':   '\033[32m',
+    'yellow':  '\033[33m',
+    'blue':    '\033[34m',
+    'purple':  '\033[35m',
+    'cyan':    '\033[36m',
+    'white':   '\033[37m',
+    'default': '\033[39m'
+}
+
+log_colors = {
+    # order in decreasing priority
+    'ERROR':   'red',
+    'WARNING': 'yellow',
+}
+
+info_color = 'cyan'
+separator_color = 'purple'
+
+use_colors = False
+
+def colorize(text, color):
+    if not use_colors:
+        return text
+    return f'{ansi_colors[color]}{text}{ansi_colors["default"]}'
+
+def colorize_log(text):
+    if not use_colors:
+        return text
+    for key,color in iteritems(log_colors):
+        if key in text:
+            return colorize(text, color)
+    return text
 
 class WidelandsTestCase():
     do_use_random_directory = True
@@ -72,6 +107,15 @@ class WidelandsTestCase():
         'SKIPPED':   'SKIP ',
         'IGNORING':  ' IGN ',
         'Info':      'Info '
+    }
+
+    status_colors = {
+        'Done ': 'green',
+        'FAIL ': 'red',
+        'TMOUT': 'red',
+        'SKIP ': 'yellow',
+        ' IGN ': 'yellow',
+        'Info ': info_color
     }
 
     def __init__(self, test_script, **wlargs):
@@ -125,14 +169,15 @@ class WidelandsTestCase():
                     widelands.kill()
                     widelands.communicate()
                     self.wl_timed_out = True
-                    stdout_file.write("\nTimed out.\n")
+                    stdout_file.write(colorize("\nTimed out.\n", info_color))
             else:
                 widelands.communicate()
             end_time = get_time()
             stdout_file.flush()
             self.duration = datetime.timedelta(seconds = end_time - start_time)
-            stdout_file.write("\n{}: Returned from Widelands in {}, return code is {:d}\n".format(
-                self.step_name(), self.duration, widelands.returncode))
+            stdout_file.write(colorize(
+                f"\n{self.step_name()}: Returned from Widelands in {self.duration}, " \
+                f"return code is {widelands.returncode:d}\n", info_color))
             self.widelands_returncode = widelands.returncode
         self.outputs.append(stdout_filename)
         return stdout_filename
@@ -188,19 +233,33 @@ class WidelandsTestCase():
 
     def out_status(self, status, message):
         # Force writing to main test log immediately
+        if use_colors and status in self.status_colors.keys():
+            color = self.status_colors[status]
+            status = colorize(status, color)
+            message = colorize(message, color)
         sys.stdout.write(f"{self._progress} {status} {self.step_name()}: {message}\n")
         sys.stdout.flush()
+
+    def get_result_color(self):
+        if not use_colors:
+            return 'default'
+        status = self.statuses[self.result]
+        if status in self.status_colors.keys():
+            return self.status_colors[status]
+        return 'default'
 
     def out_result(self, stdout_filename):
         self.out_status(self.statuses[self.result], f'{self.result} in {self.duration}')
         if self.keep_output_around:
-            self.out_status('Info', f'stdout: {stdout_filename}')
+            self.out_status('Info ', f'stdout: {stdout_filename}')
 
     def fail(self, short, long, stdout_filename):
         self.success = False
         self.result = short
-        self.report_header = f'{long} Analyze the files in {self.run_dir} to see why this test case failed.\nStdout is: {stdout_filename}'
         self.out_result(stdout_filename)
+        long = colorize(long, self.status_colors['FAIL '])
+        self.report_header = f'{long} Analyze the files in {self.run_dir} to see why this test case failed.\n'
+        self.report_header += colorize(f'Stdout is: {stdout_filename}', info_color)
 
     def step_success(self, stdout_filename):
         old_result = self.result
@@ -218,6 +277,8 @@ class WidelandsTestCase():
             self.result = "SKIPPED"
             self.report_header = 'SDL initialization failed. TEST SKIPPED.'
             self.out_status('SKIP ', self.report_header)
+            if use_color:
+                self.report_header = colorize(self.report_header, self.status_colors['SKIP '])
             if self.which_time == 0:  # must set it for the first run, later just ignore
                 self.success = True
         else:
@@ -326,6 +387,9 @@ def parse_args():
     p.add_argument("-j", "--workers", type=int, default = 1,
         help = "Use this many parallel workers."
     )
+    p.add_argument("-c", "--color", "--colour", action="store_true", default = False,
+        help = "Colorize the output with ANSI color sequences."
+    )
     if has_timeout:
         p.add_argument("-t", "--timeout", type=float, default = "10",
             help = "Set the timeout duration for test cases in minutes. Default is 10 minutes."
@@ -420,6 +484,8 @@ def discover_editor_tests(regexp, suite):
 def main():
     args = parse_args()
 
+    global use_colors
+    use_colors = args.color
     WidelandsTestCase.path_to_widelands_binary = args.binary
     print("Using '{}' binary.".format(args.binary))
     WidelandsTestCase.do_use_random_directory = not args.nonrandom
@@ -455,7 +521,9 @@ def main():
 
     end_time = get_time()
 
-    separator = "\n--------------------------------------------------------------"
+    separator = colorize(
+        '\n---------------------------------------------------------------------------\n',
+        separator_color)
 
     nr_errors = 0
     results = dict()
@@ -463,12 +531,13 @@ def main():
         # Skipped test cases are logged, but don't count as failure
         if test_case.report_header != None:
             print(separator)
-            print("{}: {}\n".format(test_case.result, test_case.test_script))
+            print(f'{colorize(test_case.result, test_case.get_result_color())}: {test_case.test_script}\n')
             print(test_case.report_header)
-            print("\nstdout:")
+            print(colorize("\nstdout:", info_color))
             for stdout_fn in test_case.outputs:
                 with open(stdout_fn, "r") as stdout:
                     for line in stdout:
+                        line = colorize_log(line)
                         print(line, end='')
             if test_case.result in results.keys():
                 results[test_case.result].append(test_case.test_script)
