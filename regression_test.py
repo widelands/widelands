@@ -284,7 +284,7 @@ class WidelandsTestCase():
             self.result = "SKIPPED"
             self.report_header = 'SDL initialization failed. TEST SKIPPED.'
             self.out_status('SKIP ', self.report_header)
-            if use_color:
+            if use_colors:
                 self.report_header = colorize(self.report_header, self.status_colors['SKIP '])
             if self.which_time == 0:  # must set it for the first run, later just ignore
                 self.success = True
