@@ -525,6 +525,12 @@ def main():
         '\n---------------------------------------------------------------------------\n',
         separator_color)
 
+    group_start = "\n"
+    group_end = ""
+    if os.getenv("GITHUB_ACTION"):
+        group_start = "\n::group::"
+        group_end = "\n::endgroup::\n"
+
     nr_errors = 0
     results = dict()
     for test_case in test_cases:
@@ -533,12 +539,14 @@ def main():
             print(separator)
             print(f'{colorize(test_case.result, test_case.get_result_color())}: {test_case.test_script}\n')
             print(test_case.report_header)
-            print(colorize("\nstdout:", info_color))
+            print(group_start, end='')
+            print(colorize("stdout:", info_color))
             for stdout_fn in test_case.outputs:
                 with open(stdout_fn, "r") as stdout:
                     for line in stdout:
                         line = colorize_log(line)
                         print(line, end='')
+            print(group_end, end='')
             if test_case.result in results.keys():
                 results[test_case.result].append(test_case.test_script)
             else:
