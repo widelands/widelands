@@ -751,8 +751,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		if (get_display_flag(dfShowImmovables)) {
 			Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 			if (imm != nullptr && imm->get_positions(ebase).front() == field.fcoords) {
-				imm->draw(
-				   gametime, InfoToDraw::kNone, field.rendertarget_pixel, field.fcoords, scale, &dst);
+				imm->draw(gametime, InfoToDraw::kShowBuildings, field.rendertarget_pixel, field.fcoords,
+				          scale, &dst);
 			}
 		}
 

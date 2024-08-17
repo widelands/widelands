@@ -26,8 +26,11 @@
 #include "base/times.h"
 #include "sound/constants.h"
 
+class LuaInterface;
+
 namespace Widelands {
 
+class MapObject;
 class MapObjectDescr;
 
 /// Superclass for Worker, Immovable and Productionsite programs. Includes a program name and
@@ -115,6 +118,16 @@ protected:
 	};
 	/// Parses the arguments for a playsound action
 	static PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments);
+
+	/// Run script information
+	struct RunScriptParameters {
+		std::string function;  ///< The name of the Lua function to run.
+	};
+	/// Parses the arguments for a script action
+	static RunScriptParameters parse_act_script(const std::vector<std::string>& arguments);
+
+public:
+	static void do_run_script(LuaInterface& lua, MapObject* mo, const std::string& function);
 
 private:
 	const std::string name_;
