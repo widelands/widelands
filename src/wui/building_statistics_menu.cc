@@ -379,9 +379,9 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 }
 
 bool BuildingStatisticsMenu::own_tribe_building_is_valid(const Widelands::Player& player,
-                                                   Widelands::DescriptionIndex index,
-                                                   bool map_allows_seafaring,
-                                                   bool map_allows_waterways) const {
+                                                         Widelands::DescriptionIndex index,
+                                                         bool map_allows_seafaring,
+                                                         bool map_allows_waterways) const {
 	if (!player.tribe().has_building(index)) {
 		return false;
 	}
