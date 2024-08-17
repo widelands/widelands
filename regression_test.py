@@ -66,14 +66,17 @@ ansi_colors = {
     'default': '\033[39m'
 }
 
+info_color      = 'cyan'
+success_color   = 'green'
+warning_color     = 'yellow'
+error_color     = 'red'
+separator_color = 'purple'
+
 log_colors = {
     # order in decreasing priority
-    'ERROR':   'red',
-    'WARNING': 'yellow',
+    'ERROR':   error_color,
+    'WARNING': warning_color,
 }
-
-info_color = 'cyan'
-separator_color = 'purple'
 
 use_colors = False
 
@@ -110,11 +113,11 @@ class WidelandsTestCase():
     }
 
     status_colors = {
-        'Done ': 'green',
-        'FAIL ': 'red',
-        'TMOUT': 'red',
-        'SKIP ': 'yellow',
-        ' IGN ': 'yellow',
+        'Done ': success_color,
+        'FAIL ': error_color,
+        'TMOUT': error_color,
+        'SKIP ': warning_color,
+        ' IGN ': warning_color,
         'Info ': info_color
     }
 
@@ -169,15 +172,19 @@ class WidelandsTestCase():
                     widelands.kill()
                     widelands.communicate()
                     self.wl_timed_out = True
-                    stdout_file.write(colorize("\nTimed out.\n", info_color))
+                    stdout_file.write('\n')
+                    stdout_file.write(colorize('Timed out.', error_color))
+                    stdout_file.write('\n')
             else:
                 widelands.communicate()
             end_time = get_time()
             stdout_file.flush()
             self.duration = datetime.timedelta(seconds = end_time - start_time)
-            stdout_file.write(colorize(
-                f"\n{self.step_name()}: Returned from Widelands in {self.duration}, " \
-                f"return code is {widelands.returncode:d}\n", info_color))
+            stdout_file.write('\n')
+            stdout_file.write(
+                colorize(f'{self.step_name()}: Returned from Widelands in {self.duration}, ' \
+                f'return code is {widelands.returncode:d}', info_color))
+            stdout_file.write('\n')
             self.widelands_returncode = widelands.returncode
         self.outputs.append(stdout_filename)
         return stdout_filename
@@ -237,7 +244,7 @@ class WidelandsTestCase():
             color = self.status_colors[status]
             status = colorize(status, color)
             message = colorize(message, color)
-        sys.stdout.write(f"{self._progress} {status} {self.step_name()}: {message}\n")
+        sys.stdout.write(f'{self._progress} {status} {self.step_name()}: {message}\n')
         sys.stdout.flush()
 
     def get_result_color(self):
@@ -521,15 +528,15 @@ def main():
 
     end_time = get_time()
 
-    separator = colorize(
-        '\n---------------------------------------------------------------------------\n',
-        separator_color)
+    separator = '\n' + \
+        colorize('---------------------------------------------------------------------------',
+            separator_color) + '\n'
 
-    group_start = "\n"
-    group_end = ""
-    if os.getenv("GITHUB_ACTION"):
-        group_start = "\n::group::"
-        group_end = "\n::endgroup::\n"
+    group_start = '\n'
+    group_end = ''
+    if os.getenv('GITHUB_ACTION'):
+        group_start = '\n::group::'
+        group_end = '\n::endgroup::\n'
 
     nr_errors = 0
     results = dict()
@@ -556,16 +563,19 @@ def main():
 
     print(separator)
 
+    summary_common = f'Ran {len(test_cases)} test cases in {(end_time - start_time):.3f} s,'
+
     if nr_errors == 0:
-        print(f"Ran %d test cases in %.3f s, all tests passed." % (len(test_cases), end_time - start_time))
+        print(summary_common, colorize('all tests passed.', success_color))
         return True
 
-    print(f"Ran %d test cases in %.3f s, %d tests passed, %d tests failed!\n" % (len(test_cases), end_time - start_time, len(test_cases) - nr_errors, nr_errors))
     for result,tests in iteritems(results):
-        print("{} tests {}:".format(len(tests), result))
-        for test in tests:
-            print("     {}".format(test))
-
+        print(f'{len(tests)} tests {result}:')
+        for test_name in tests:
+            print("     {}".format(test_name))
+    print(separator)
+    print(summary_common, f'{len(test_cases) - nr_errors} tests passed,',
+          colorize(f'{nr_errors} tests failed!', error_color))
     return False
 
 if __name__ == '__main__':
