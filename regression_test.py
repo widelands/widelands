@@ -45,8 +45,6 @@ else:
 
 try:
     import psutil
-    # NOCOM
-    print("DEBUG: psutil is available")
 except:
     psutil = None
 
@@ -56,9 +54,6 @@ def datadir():
 def datadir_for_testing():
     return os.path.relpath(".", os.path.dirname(__file__))
 
-def out(string):
-    sys.stdout.write(string)
-    sys.stdout.flush()
 
 class WidelandsTestCase():
     do_use_random_directory = True
@@ -67,6 +62,17 @@ class WidelandsTestCase():
     ignore_error_code = False
     timeout = 600
     total_tests = 0
+
+    statuses = {
+        'Starting':  'Start',
+        'Loading':   'Load ',
+        'Passed':    'Done ',
+        'FAILED':    'FAIL ',
+        'TIMED OUT': 'TMOUT',
+        'SKIPPED':   'SKIP ',
+        'IGNORING':  ' IGN ',
+        'Info':      'Info '
+    }
 
     def __init__(self, test_script, **wlargs):
         self.test_script = test_script
@@ -125,13 +131,16 @@ class WidelandsTestCase():
             end_time = get_time()
             stdout_file.flush()
             self.duration = datetime.timedelta(seconds = end_time - start_time)
-            stdout_file.write("\n{}Returned from Widelands in {}, return code is {:d}\n".format(
-                self.step_prefix(), self.duration, widelands.returncode))
+            stdout_file.write("\n{}: Returned from Widelands in {}, return code is {:d}\n".format(
+                self.step_name(), self.duration, widelands.returncode))
             self.widelands_returncode = widelands.returncode
         self.outputs.append(stdout_filename)
         return stdout_filename
 
     def run(self):
+        num_w = len(str(self.total_tests))
+        self._progress = str(self._test_number).rjust(num_w) + '/' + str(self.total_tests)
+
         if self.do_use_random_directory:
             self.run_dir = tempfile.mkdtemp(prefix="widelands_regression_test")
         else:
@@ -147,7 +156,7 @@ class WidelandsTestCase():
         self.wl_timed_out = False
         self.current_step = ""
 
-        out("{} {} ({}): Starting test...\n".format(self.progress(), self._shortname, self.test_script))
+        self.out_status('Start', f'{self.test_script} starting ...')
         stdout_filename = self.run_widelands(self._wlargs)
         stdout = open(stdout_filename, "r").read()
         self.verify_success(stdout, stdout_filename)
@@ -159,7 +168,7 @@ class WidelandsTestCase():
             for savegame in sorted(savegame_done):
                 if not savegame_done[savegame]: break
             self.current_step = "{}.wgf".format(savegame)
-            out("{} {}: Loading savegame: {} ...\n".format(self.progress(), self._shortname, savegame))
+            self.out_status('Load ', f'loading savegame ...')
             stdout_filename = self.run_widelands({ "loadgame": os.path.join(
                 self.run_dir, "save", "{}.wgf".format(savegame))})
             stdout = open(stdout_filename, "r").read()
@@ -172,31 +181,30 @@ class WidelandsTestCase():
         if self.report_header == None and not self.keep_output_around:
             shutil.rmtree(self.run_dir)
 
-    def progress(self):
-        # return "{}/{}".format(self._test_number, WidelandsTestCase.total_tests)
-        return "{}/{}".format(self._test_number, self.total_tests)
-
-    def step_prefix(self):
+    def step_name(self):
         if self.which_time == 0:
-            return "{} {}:   ".format(self.progress(), self._shortname)
-        else:
-            return "{} {} / {}:   ".format(self.progress(), self._shortname, self.current_step)
+            return self._shortname
+        return f'{self._shortname} / {self.current_step}'
+
+    def out_status(self, status, message):
+        # Force writing to main test log immediately
+        sys.stdout.write(f"{self._progress} {status} {self.step_name()}: {message}\n")
+        sys.stdout.flush()
 
     def out_result(self, stdout_filename):
-        out("{}{}   in {}\n".format(self.step_prefix(), self.result, self.duration))
+        self.out_status(self.statuses[self.result], f'{self.result} in {self.duration}')
         if self.keep_output_around:
-            out("{}stdout: {}\n".format(self.step_prefix(), stdout_filename))
+            self.out_status('Info', f'stdout: {stdout_filename}')
 
     def fail(self, short, long, stdout_filename):
         self.success = False
         self.result = short
-        self.report_header = "{} Analyze the files in {} to see why this test case failed.\nStdout is: {}".format(
-                             long, self.run_dir, stdout_filename)
+        self.report_header = f'{long} Analyze the files in {self.run_dir} to see why this test case failed.\nStdout is: {stdout_filename}'
         self.out_result(stdout_filename)
 
     def step_success(self, stdout_filename):
         old_result = self.result
-        self.result = "DONE"
+        self.result = "Passed"
         self.out_result(stdout_filename)
         if self.which_time == 0:
             self.success = True
@@ -207,9 +215,8 @@ class WidelandsTestCase():
         # Catch instabilities with SDL in CI environment
         if self.widelands_returncode == 2:
             # Print stdout in the final summary with this header
-            out("{}SDL initialization failed in step {}. TEST SKIPPED.".format( \
-                self.step_prefix(), self.which_time + 1))
             self.result = "SKIPPED"
+            self.out_status('SKIP ', f'SDL initialization failed in step {self.which_time + 1}.')
             if self.which_time == 0:  # must set it for the first run, later just ignore
                 self.success = True
         else:
@@ -218,7 +225,7 @@ class WidelandsTestCase():
                 return
             if self.widelands_returncode != 0:
                 if self.widelands_returncode == 1 and self.ignore_error_code:
-                    out("{}IGNORING error code 1\n".format(self.step_prefix(), step_name))
+                    self.out_status(' IGN ', f'IGNORING error code 1')
                 else:
                     self.fail("FAILED", "Widelands exited abnormally.", stdout_filename)
                     return
@@ -228,6 +235,7 @@ class WidelandsTestCase():
             self.step_success(stdout_filename)
 
 
+# For parallel execution of tests
 def recommended_workers(binary):
     cpu_count = multiprocessing.cpu_count()
 
@@ -255,11 +263,41 @@ def recommended_workers(binary):
             print('Cannot parse build type from stdout:', firstline)
 
         max_threads_mem = max(1, psutil.virtual_memory().available // (mem_per_instance * 1000 * 1000))
-        # NOCOM
-        print("DEBUG: {} CPUs, {}/{} bytes memory free".format(cpu_count, psutil.virtual_memory().available, psutil.virtual_memory().total))
+        print("{} CPUs, {}/{} bytes memory free".format(cpu_count, psutil.virtual_memory().available, psutil.virtual_memory().total))
         return min(max_threads_cpu, max_threads_mem)
     else:
         return max_threads_cpu
+
+def find_binary():
+    # Prefer binary from source directory
+    for potential_binary in (
+        glob(os.path.join(os.curdir, "widelands")) +
+        glob(os.path.join(os.path.dirname(__file__), "widelands")) +
+        glob(os.path.join("src", "widelands")) +
+        glob(os.path.join("..", "*", "src", "widelands"))
+    ):
+        if os.access(potential_binary, os.X_OK):
+            return potential_binary
+
+    # Fall back to binary in $PATH if possible
+    if "which" in dir(shutil):
+        return shutil.which("widelands")
+
+    return None
+
+def check_binary(binary):
+    if "which" in dir(shutil) and shutil.which(binary) != None:
+        return binary
+
+    if os.path.dirname(binary) != '' and os.access(binary, os.X_OK):
+        return binary
+
+    for potential_path in [ os.curdir, os.path.dirname(__file__) ]:
+        fullpath = os.path.join(potential_path, binary)
+        if os.access(fullpath, os.X_OK):
+            return fullpath
+
+    return None
 
 def parse_args():
     p = argparse.ArgumentParser(description=
@@ -297,33 +335,14 @@ def parse_args():
 
     args = p.parse_args()
 
-    found_binary = False
     if args.binary is None:
-        for potential_binary in (
-            glob(os.path.join(os.curdir, "widelands")) +
-            glob(os.path.join(os.path.dirname(__file__), "widelands")) +
-            glob(os.path.join("src", "widelands")) +
-            glob(os.path.join("..", "*", "src", "widelands"))
-        ):
-            if os.access(potential_binary, os.X_OK):
-                args.binary = potential_binary
-                found_binary = True
-                break
-        if not found_binary and "which" in dir(shutil):
-            args.binary = shutil.which("widelands")
-
+        args.binary = find_binary()
         if args.binary is None:
             p.error("No widelands binary found. Please specify with -b.")
     else:
-        if not os.access(args.binary, os.X_OK):
-            for potential_path in [ os.curdir, os.path.dirname(__file__) ]:
-                fullpath = os.path.join(potential_path, args.binary)
-                if os.access(fullpath, os.X_OK):
-                    args.binary = fullpath
-                    found_binary = True
-                    break
-            if not found_binary:
-                p.error("The specified widelands binary is not found.")
+        args.binary = check_binary(args.binary)
+        if args.binary is None:
+            p.error("The specified widelands binary is not found.")
 
     if args.nonrandom:
         if args.workers != 1:
@@ -408,8 +427,8 @@ def main():
     if has_timeout:
         WidelandsTestCase.timeout = args.timeout * 60
     else:
-        out("Python version does not support timeout on subprocesses,\n"
-            "test cases may run indefinitely.\n\n")
+        print("Python version does not support timeout on subprocesses,\n"
+            "test cases may run indefinitely.\n")
 
     test_cases = []
     discover_loadgame_tests(args.regexp, test_cases)
@@ -429,7 +448,9 @@ def main():
         # Parallel execution
         with cf.ThreadPoolExecutor(max_workers = args.workers) as executor:
             futures = {executor.submit(test_case.run): test_case for test_case in test_cases}
-            cf.wait(futures)
+            for future in cf.as_completed(futures):
+                if future.exception():
+                    raise future.exception()
 
     end_time = get_time()
 
