@@ -31,6 +31,12 @@ struct OperationCancelledByUserException : std::exception {
 	}
 };
 
+struct IllegalFilenamesException : public std::exception {
+	explicit IllegalFilenamesException(std::set<std::string> in) : illegal_names(in) {
+	}
+	std::set<std::string> illegal_names;
+};
+
 /**
  * A function that is called periodically during operations that may hang.
  * First argument is the elapsed time in milliseconds.
@@ -121,7 +127,8 @@ private:
 	void check_checksum(const std::string& path, const std::string& checksum);
 	size_t gather_addon_content(const std::string& current_dir,
 	                            const std::string& prefix,
-	                            std::map<std::string, std::set<std::string>>& result);
+	                            std::map<std::string, std::set<std::string>>& result,
+	                            std::set<std::string>& invalid_names);
 	void append_multiline_message(std::string& send, const std::string& message);
 
 	HangupFn hangup_fn_{nullptr};
