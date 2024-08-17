@@ -84,6 +84,7 @@ jobs:
         TIMEOUT=""
         if [ "${{ matrix.config }}" = "Debug" ]
         then
-          TIMEOUT="-t 20"
+          # NOCOM let's cause some failures, was 20
+          TIMEOUT="-t 1"
         fi
         ./regression_test.py -b build/src/widelands $TIMEOUT -j 0 -c
