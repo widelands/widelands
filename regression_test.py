@@ -216,7 +216,8 @@ class WidelandsTestCase():
         if self.widelands_returncode == 2:
             # Print stdout in the final summary with this header
             self.result = "SKIPPED"
-            self.out_status('SKIP ', f'SDL initialization failed in step {self.which_time + 1}.')
+            self.report_header = 'SDL initialization failed. TEST SKIPPED.'
+            self.out_status('SKIP ', self.report_header)
             if self.which_time == 0:  # must set it for the first run, later just ignore
                 self.success = True
         else:
