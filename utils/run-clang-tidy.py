@@ -494,10 +494,13 @@ def apply_fixes(args, tmpdir):
 
 # List of files with a non-zero return code.
 failed_files = []
+progress_counter = 0
+total_files = 0
 
 def run_tidy(tmpdir, build_path, quiet, queue, lock):
     """Takes filenames out of queue and runs clang-tidy on them."""
     global failed_files
+    global progress_counter
     while True:
         name, command, dir = queue.get()
         hash = None
@@ -538,7 +541,8 @@ def run_tidy(tmpdir, build_path, quiet, queue, lock):
         with lock:
             if tidy_error:
                 failed_files.append(name)
-            sys.stderr.write('\n' + ' '.join(invocation) + '\n')
+            progress_counter += 1
+            sys.stderr.write('\n' + f'{progress_counter}/{total_files}: ' + ' '.join(invocation) + '\n')
             sys.stderr.flush()
             if len(output) > 0:
                 sys.stdout.write(output + '\n')
@@ -737,6 +741,9 @@ def main():
         name = make_absolute(entry['file'], entry['directory'])
         if file_name_re.search(name) and not 'src/third_party' in name:
             files.append((name, entry['command'], entry['directory']))
+
+    global total_files
+    total_files = len(files)
 
     return_code = 0
     lock = threading.Lock()
