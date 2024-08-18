@@ -89,3 +89,7 @@ jobs:
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Installer (MSVC)
         path: ${{ github.workspace }}\Widelands-${{ github.sha }}-msvc-${{ matrix.config }}-${{ matrix.arch }}.exe
+    - name: Regression testing
+      if: ${{ matrix.arch = "x64" }} and ${{ matrix.config = "Debug" }}
+      run:
+        ./regression_test.py
