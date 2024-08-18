@@ -53,7 +53,7 @@ log_colors = {
     'WARNING': warning_color,
 }
 
-use_colors = False
+use_colors = True
 
 def colorize(text, color):
     if not use_colors:
@@ -316,6 +316,7 @@ def find_binary():
     for potential_binary in (
         glob(os.path.join(os.curdir, "widelands")) +
         glob(os.path.join(os.path.dirname(__file__), "widelands")) +
+        glob(os.path.join("build", "src", "widelands")) +
         glob(os.path.join("src", "widelands")) +
         glob(os.path.join("..", "*", "src", "widelands"))
     ):
@@ -328,6 +329,10 @@ def find_binary():
     return None
 
 def check_binary(binary):
+    # Prefer binary from source directory instead of PATH
+    if os.path.dirname(binary) == '' and os.access(binary, os.X_OK):
+        return os.path.join(os.curdir, binary)
+
     if shutil.which(binary) != None:
         return binary
 
@@ -364,11 +369,11 @@ def parse_args():
         help = "Assume success on return code 1, to allow running the tests "
         "without ASan reporting false positives."
     )
-    p.add_argument("-j", "--workers", type=int, default = 1,
+    p.add_argument("-j", "--workers", type=int, default = 0,
         help = "Use this many parallel workers."
     )
-    p.add_argument("-c", "--color", "--colour", action="store_true", default = False,
-        help = "Colorize the output with ANSI color sequences."
+    p.add_argument("-p", "--plain", "--nocolor", action="store_true", default = False,
+        help = "Don't use ANSI color sequences in the output."
     )
     p.add_argument("-t", "--timeout", type=float, default = "10",
         help = "Set the timeout duration for test cases in minutes. Default is 10 minutes."
@@ -461,7 +466,7 @@ def main():
     args = parse_args()
 
     global use_colors
-    use_colors = args.color
+    use_colors = not args.plain
     WidelandsTestCase.path_to_widelands_binary = args.binary
     print(f"Using '{args.binary}' binary.")
     WidelandsTestCase.do_use_random_directory = not args.nonrandom
