@@ -304,7 +304,9 @@ def recommended_workers(binary):
             print('Cannot parse build type from stdout:', firstline)
 
         max_threads_mem = max(1, psutil.virtual_memory().available // (mem_per_instance * 1000 * 1000))
-        print(f"{cpu_count} CPUs, {psutil.virtual_memory().available}/{psutil.virtual_memory().total} bytes memory free")
+        mem_avail = psutil.virtual_memory().available / 1000 / 1000 / 1000 # GB, not GiB :)
+        mem_total = psutil.virtual_memory().total / 1000 / 1000 / 1000
+        print(f"{cpu_count} CPUs, {mem_avail:.1f}/{mem_total:.1f} gigabytes memory free")
         return min(max_threads_cpu, max_threads_mem)
     else:
         return max_threads_cpu
