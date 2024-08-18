@@ -14,35 +14,10 @@ import time
 import datetime
 import multiprocessing
 
-#Python2/3 compat code for iterating items
-try:
-    dict.iteritems
-except AttributeError:
-    # Python 3
-    def itervalues(d):
-        return iter(d.values())
-    def iteritems(d):
-        return iter(d.items())
-    def bytes_to_str(bytes):
-        return str(bytes, 'utf-8')
-else:
-    # Python 2
-    def itervalues(d):
-        return d.itervalues()
-    def iteritems(d):
-        return d.iteritems()
-    def bytes_to_str(bytes):
-        return str(bytes)
+get_time = time.monotonic
 
-has_timeout = "TimeoutExpired" in dir(subprocess)
-
-if "monotonic" in dir(time):
-    get_time = time.monotonic
-elif "perf_counter" in dir(time):
-    get_time = time.perf_counter
-else:
-    get_time = time.time
-
+# psutil is not part of the standard library.
+# It's only used to get the amount of memory for -j 0
 try:
     import psutil
 except:
@@ -68,7 +43,7 @@ ansi_colors = {
 
 info_color      = 'cyan'
 success_color   = 'green'
-warning_color     = 'yellow'
+warning_color   = 'yellow'
 error_color     = 'red'
 separator_color = 'purple'
 
@@ -88,7 +63,7 @@ def colorize(text, color):
 def colorize_log(text):
     if not use_colors:
         return text
-    for key,color in iteritems(log_colors):
+    for key,color in log_colors.items():
         if key in text:
             return colorize(text, color)
     return text
@@ -153,7 +128,7 @@ class WidelandsTestCase():
                     '--nosound',
                     '--fail-on-lua-error',
                     '--language=en' ]
-            args += [ "--{}={}".format(key, value) for key, value in iteritems(wlargs) ]
+            args += [ "--{}={}".format(key, value) for key, value in wlargs.items() ]
 
             stdout_file.write("Running widelands binary: ")
             for anarg in args:
@@ -165,18 +140,15 @@ class WidelandsTestCase():
             start_time = get_time()
             widelands = subprocess.Popen(
                     args, shell=False, stdout=stdout_file, stderr=subprocess.STDOUT)
-            if has_timeout:
-                try:
-                    widelands.communicate(timeout = self.timeout)
-                except subprocess.TimeoutExpired:
-                    widelands.kill()
-                    widelands.communicate()
-                    self.wl_timed_out = True
-                    stdout_file.write('\n')
-                    stdout_file.write(colorize('Timed out.', error_color))
-                    stdout_file.write('\n')
-            else:
+            try:
+                widelands.communicate(timeout = self.timeout)
+            except subprocess.TimeoutExpired:
+                widelands.kill()
                 widelands.communicate()
+                self.wl_timed_out = True
+                stdout_file.write('\n')
+                stdout_file.write(colorize('Timed out.', error_color))
+                stdout_file.write('\n')
             end_time = get_time()
             stdout_file.flush()
             self.duration = datetime.timedelta(seconds = end_time - start_time)
@@ -349,13 +321,12 @@ def find_binary():
             return potential_binary
 
     # Fall back to binary in $PATH if possible
-    if "which" in dir(shutil):
-        return shutil.which("widelands")
+    return shutil.which("widelands")
 
     return None
 
 def check_binary(binary):
-    if "which" in dir(shutil) and shutil.which(binary) != None:
+    if shutil.which(binary) != None:
         return binary
 
     if os.path.dirname(binary) != '' and os.access(binary, os.X_OK):
@@ -397,13 +368,9 @@ def parse_args():
     p.add_argument("-c", "--color", "--colour", action="store_true", default = False,
         help = "Colorize the output with ANSI color sequences."
     )
-    if has_timeout:
-        p.add_argument("-t", "--timeout", type=float, default = "10",
-            help = "Set the timeout duration for test cases in minutes. Default is 10 minutes."
-        )
-    else:
-        p.epilog = "Python version does not support timeout. -t, --timeout is disabled. " \
-                   "Python >=3.3 is required for timeout support."
+    p.add_argument("-t", "--timeout", type=float, default = "10",
+        help = "Set the timeout duration for test cases in minutes. Default is 10 minutes."
+    )
 
     args = p.parse_args()
 
@@ -498,11 +465,7 @@ def main():
     WidelandsTestCase.do_use_random_directory = not args.nonrandom
     WidelandsTestCase.keep_output_around = args.keep_around
     WidelandsTestCase.ignore_error_code = args.ignore_error_code
-    if has_timeout:
-        WidelandsTestCase.timeout = args.timeout * 60
-    else:
-        print("Python version does not support timeout on subprocesses,\n"
-            "test cases may run indefinitely.\n")
+    WidelandsTestCase.timeout = args.timeout * 60
 
     test_cases = []
     discover_loadgame_tests(args.regexp, test_cases)
@@ -569,7 +532,7 @@ def main():
         print(summary_common, colorize('all tests passed.', success_color))
         return True
 
-    for result,tests in iteritems(results):
+    for result,tests in results.items():
         print(f'{len(tests)} tests {result}:')
         for test_name in tests:
             print("     {}".format(test_name))
