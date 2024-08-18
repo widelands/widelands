@@ -44,6 +44,6 @@ jobs:
         name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} MacOS ${{ matrix.os }} ${{ matrix.arch }} AppImage
         path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}-${{ matrix.arch }}.dmg
     - name: Regression testing
-      if: ${{ matrix.arch = arm64 }} and ${{ matrix.config = "debug" }}
+      if: ${{ matrix.arch == arm64 && matrix.config == "debug" }}
       run:
         ./regression_test.py
