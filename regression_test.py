@@ -101,7 +101,7 @@ class WidelandsTestCase():
         self._shortname = os.path.basename(test_script)
         self._wlargs = wlargs
         self.success = None
-        self.result = "NOT EXECUTED"
+        self.result = 'NOT EXECUTED'
         self.report_header = None
         # 'which_time' is an integer defining the number of times Widelands has run this test
         # case (i.e. because we might load a saved game from an earlier run). This will impact
@@ -115,22 +115,22 @@ class WidelandsTestCase():
         """Run Widelands with the given 'wlargs'.
 
         Returns the stdout filename."""
-        stdout_filename = os.path.join(self.run_dir, "stdout_{:02d}.txt".format(self.which_time))
+        stdout_filename = os.path.join(self.run_dir, f'stdout_{self.which_time:02d}.txt')
         if (os.path.exists(stdout_filename)):
             os.unlink(stdout_filename)
 
         with open(stdout_filename, 'a') as stdout_file:
             args = [self.path_to_widelands_binary,
                     '--verbose',
-                    '--datadir={}'.format(datadir()),
-                    '--datadir_for_testing={}'.format(datadir_for_testing()),
-                    '--homedir={}'.format(self.run_dir),
+                    f'--datadir={datadir()}',
+                    f'--datadir_for_testing={datadir_for_testing()}',
+                    f'--homedir={self.run_dir}',
                     '--nosound',
                     '--fail-on-lua-error',
                     '--language=en' ]
-            args += [ "--{}={}".format(key, value) for key, value in wlargs.items() ]
+            args += [ f'--{key}={value}' for key, value in wlargs.items() ]
 
-            stdout_file.write("Running widelands binary: ")
+            stdout_file.write('Running widelands binary: ')
             for anarg in args:
               stdout_file.write(anarg)
               stdout_file.write(" ")
@@ -191,10 +191,10 @@ class WidelandsTestCase():
             self.which_time += 1
             for savegame in sorted(savegame_done):
                 if not savegame_done[savegame]: break
-            self.current_step = "{}.wgf".format(savegame)
-            self.out_status('Load ', f'loading savegame ...')
+            self.current_step = f"{savegame}.wgf"
+            self.out_status("Load ", "loading savegame ...")
             stdout_filename = self.run_widelands({ "loadgame": os.path.join(
-                self.run_dir, "save", "{}.wgf".format(savegame))})
+                self.run_dir, "save", f"{savegame}.wgf")})
             stdout = open(stdout_filename, "r").read()
             for new_save in find_saves(stdout):
                 if new_save not in savegame_done:
@@ -304,7 +304,7 @@ def recommended_workers(binary):
             print('Cannot parse build type from stdout:', firstline)
 
         max_threads_mem = max(1, psutil.virtual_memory().available // (mem_per_instance * 1000 * 1000))
-        print("{} CPUs, {}/{} bytes memory free".format(cpu_count, psutil.virtual_memory().available, psutil.virtual_memory().total))
+        print(f"{cpu_count} CPUs, {psutil.virtual_memory().available}/{psutil.virtual_memory().total} bytes memory free")
         return min(max_threads_cpu, max_threads_mem)
     else:
         return max_threads_cpu
@@ -461,7 +461,7 @@ def main():
     global use_colors
     use_colors = args.color
     WidelandsTestCase.path_to_widelands_binary = args.binary
-    print("Using '{}' binary.".format(args.binary))
+    print(f"Using '{args.binary}' binary.")
     WidelandsTestCase.do_use_random_directory = not args.nonrandom
     WidelandsTestCase.keep_output_around = args.keep_around
     WidelandsTestCase.ignore_error_code = args.ignore_error_code
@@ -535,7 +535,7 @@ def main():
     for result,tests in results.items():
         print(f'{len(tests)} tests {result}:')
         for test_name in tests:
-            print("     {}".format(test_name))
+            print(f'     {test_name}')
     print(separator)
     print(summary_common, f'{len(test_cases) - nr_errors} tests passed,',
           colorize(f'{nr_errors} tests failed!', error_color))
