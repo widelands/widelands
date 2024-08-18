@@ -87,4 +87,4 @@ jobs:
           # NOCOM: cause some failures
           TIMEOUT="-t 1.2"
         fi
-        ./regression_test.py $TIMEOUT
+        ./regression_test.py $TIMEOUT -r plain
