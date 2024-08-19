@@ -137,8 +137,7 @@ private:
 
 	/// Traffic tab content
 	struct TrafficStatData {
-		TrafficStatData(const std::string& n, const Image* i)
-		   : name(n), image(i) {};
+		TrafficStatData(const std::string& n, const Image* i) : name(n), image(i){};
 
 		std::string name;
 		const Image* image;
