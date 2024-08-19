@@ -139,7 +139,7 @@ public:
 	[[nodiscard]] std::vector<Flag*>::size_type get_nrflags() const {
 		return flags_.size();
 	}
-	const std::vector<Flag*>& flags() const {
+	[[nodiscard]] const std::vector<Flag*>& flags() const {
 		return flags_;
 	}
 	void add_flag(Flag&);

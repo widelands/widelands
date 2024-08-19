@@ -83,7 +83,7 @@ private:
 	add_button(Widelands::DescriptionIndex id, const Widelands::BuildingDescr& descr, UI::Box* row);
 
 	/// Adds button, traffic tab version
-	void add_button(TrafficStat idx, UI::Box* row);
+	void add_button(TrafficStat ts, UI::Box* row);
 
 	/// Jumps to the next / previous building / traffic stat
 	void jump(JumpTarget target, bool reverse);
@@ -102,7 +102,7 @@ private:
 
 	/// Sets the current building type for the bottom navigation
 	void set_current_building_type(Widelands::DescriptionIndex id);
-	void set_current_traffic_type(BuildingStatisticsMenu::TrafficStat idx);
+	void set_current_traffic_type(BuildingStatisticsMenu::TrafficStat ts);
 
 	/// Change the percentage where buildings are deemed unproductive
 	void low_production_changed();
@@ -137,7 +137,7 @@ private:
 
 	/// Traffic tab content
 	struct TrafficStatData {
-		TrafficStatData(const std::string& n, const Image* i) : name(n), image(i){};
+		TrafficStatData(const std::string& n, const Image* i) : name(n), image(i) {}
 
 		std::string name;
 		const Image* image;

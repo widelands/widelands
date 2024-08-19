@@ -692,36 +692,27 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 }
 
 void BuildingStatisticsMenu::jump_traffic(JumpTarget target, bool reverse) {
+	assert(target == JumpTarget::kUnproductive);
 	assert(current_traffic_type_ != TrafficStat::kLast);
 	assert(!traffic_stats_[current_traffic_type_].jump_targets.empty());
-	switch (target) {
-	case JumpTarget::kUnproductive: {
-		Vector2f cv = iplayer().map_view()->get_centered_view().viewpoint;
-		Widelands::Coords cur =
-		   MapviewPixelFunctions::calc_node_and_triangle(iplayer().game().map(), cv.x, cv.y).node;
-		if (reverse) {
-			auto it = traffic_stats_[current_traffic_type_].jump_targets.lower_bound(cur);
-			if (it == traffic_stats_[current_traffic_type_].jump_targets.begin()) {
-				it = traffic_stats_[current_traffic_type_].jump_targets.end();
-			}
-			--it;
-			iplayer().map_view()->scroll_to_field(*it, MapView::Transition::Smooth);
-		} else {
-			auto it = traffic_stats_[current_traffic_type_].jump_targets.upper_bound(cur);
-			if (it == traffic_stats_[current_traffic_type_].jump_targets.end()) {
-				it = traffic_stats_[current_traffic_type_].jump_targets.begin();
-			}
-			iplayer().map_view()->scroll_to_field(*it, MapView::Transition::Smooth);
+	Vector2f cv = iplayer().map_view()->get_centered_view().viewpoint;
+	Widelands::Coords cur =
+	   MapviewPixelFunctions::calc_node_and_triangle(iplayer().game().map(), cv.x, cv.y).node;
+	if (reverse) {
+		auto it = traffic_stats_[current_traffic_type_].jump_targets.lower_bound(cur);
+		if (it == traffic_stats_[current_traffic_type_].jump_targets.begin()) {
+			it = traffic_stats_[current_traffic_type_].jump_targets.end();
 		}
-		break;
+		--it;
+		iplayer().map_view()->scroll_to_field(*it, MapView::Transition::Smooth);
+	} else {
+		auto it = traffic_stats_[current_traffic_type_].jump_targets.upper_bound(cur);
+		if (it == traffic_stats_[current_traffic_type_].jump_targets.end()) {
+			it = traffic_stats_[current_traffic_type_].jump_targets.begin();
+		}
+		iplayer().map_view()->scroll_to_field(*it, MapView::Transition::Smooth);
 	}
-	case JumpTarget::kOwned:
-		FALLS_THROUGH;
-	case JumpTarget::kConstruction:
-		FALLS_THROUGH;
-	default:
-		NEVER_HERE();
-	}
+	return;
 }
 
 /*
