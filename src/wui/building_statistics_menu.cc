@@ -712,7 +712,6 @@ void BuildingStatisticsMenu::jump_traffic(JumpTarget target, bool reverse) {
 		}
 		iplayer().map_view()->scroll_to_field(*it, MapView::Transition::Smooth);
 	}
-	return;
 }
 
 /*
