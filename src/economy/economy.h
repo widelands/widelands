@@ -20,7 +20,9 @@
 #define WL_ECONOMY_ECONOMY_H
 
 #include <functional>
+#include <limits>
 #include <memory>
+#include <set>
 
 #include "base/macros.h"
 #include "economy/supply.h"
@@ -39,6 +41,7 @@ class ProductionSite;
 struct RSPairStruct;
 struct Route;
 struct Router;
+struct RoutingNode;
 class WorkerDescr;
 
 struct NoteEconomy {
@@ -167,9 +170,10 @@ public:
 	}
 
 	/// Whether the economy needs more of this ware/worker type.
+	/// If a flag is given, consider only its district, otherwise the entire economy.
 	/// Productionsites may ask this before they produce, to avoid depleting a
 	/// ware type by overproducing another from it.
-	[[nodiscard]] bool needs_ware_or_worker(DescriptionIndex) const;
+	[[nodiscard]] bool needs_ware_or_worker(DescriptionIndex, const Flag* flag) const;
 
 	[[nodiscard]] const TargetQuantity& target_quantity(DescriptionIndex const i) const {
 		return target_quantities_[i];
@@ -208,6 +212,8 @@ public:
 		start_request_timer();
 	}
 
+	[[nodiscard]] bool same_district(const PlayerImmovable& p1, const PlayerImmovable& p2) const;
+
 protected:
 	static Serial last_economy_serial_;
 
@@ -239,7 +245,10 @@ private:
 
 	void start_request_timer(const Duration& delta = Duration(200));
 
-	Supply* find_best_supply(Game&, const Request&, int32_t& cost);
+	Supply* find_best_supply(Game&,
+	                         const Request&,
+	                         int32_t& cost,
+	                         uint32_t search_radius = std::numeric_limits<uint32_t>::max());
 	void process_requests(Game&, RSPairStruct* supply_pairs);
 	void balance_requestsupply(Game&);
 	void handle_active_supplies(Game&);
@@ -247,6 +256,9 @@ private:
 	void create_requested_worker(Game&, DescriptionIndex);
 
 	bool has_request(Request&) const;
+
+	void check_imports(Game& game);
+	void recalc_districts();
 
 	/*************/
 	/* Variables */
@@ -261,11 +273,19 @@ private:
 	Flags flags_;
 	WareList wares_or_workers_;  ///< virtual storage with all wares/workers in this Economy
 	std::vector<Warehouse*> warehouses_;
+	uint32_t nr_districts_{0U};
 
 	WareWorker type_;  ///< whether we are a WareEconomy or a WorkerEconomy
 
 	RequestList requests_;  ///< requests
 	SupplyList supplies_;
+
+	/* Used in find_best_supply. These are only members to avoid
+	 * frequent memory allocation and freeing. */
+	std::vector<Supply*> possible_imports_;
+	std::vector<Supply*> possible_supplies_;
+	std::vector<Widelands::RoutingNode*> possible_flags_;
+	std::set<Widelands::Flag*> seen_flags_;
 
 	TargetQuantity* target_quantities_;
 	std::unique_ptr<Router> router_;
@@ -286,9 +306,6 @@ private:
 	// We cannot use UniqueWindow to make sure an economy never has two windows because the serial
 	// may change when merging while the window is open, so we have to keep track of it here.
 	void* options_window_;
-
-	// 'list' of unique providers
-	std::map<UniqueDistance, Supply*> available_supplies_;
 
 	// Helper function for `find_closest_occupied_productionsite()`
 	bool check_building_can_start_working(const ProductionSite&, bool check_inputqueues);

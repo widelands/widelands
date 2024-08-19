@@ -144,6 +144,7 @@ add_definitions(-DASIO_STANDALONE)
 
 if (APPLE OR WIN32 OR
     CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
+    CMAKE_SYSTEM_NAME MATCHES "NetBSD" OR
     CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 endif()
 
@@ -337,7 +338,7 @@ if (NEEDS_EXTERNAL_FILESYSTEM)
 endif()
 
 if(NOT MSVC)
-  if(CMAKE_BUILD_TYPE STREQUAL "Release")
+  if((CMAKE_BUILD_TYPE STREQUAL "Release") OR (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo"))
     message(STATUS "Compiler warnings will be ignored.")
   elseif(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (
          ((NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 12.0)) AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 12.2))
@@ -369,7 +370,7 @@ endif()
 if(USE_FLTO_IF_AVAILABLE STREQUAL "yes")
 # Cross-compile-unit optimization not supported by gcc with debug on!
 # Therefore, this may only be done with Release builds.
-if(CMAKE_BUILD_TYPE STREQUAL "Release")
+if((CMAKE_BUILD_TYPE STREQUAL "Release") OR (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo"))
   # Only tested on Linux. Might work also on other platforms.
   # If tested and found good, remove this check
   if (CMAKE_SYSTEM MATCHES "Linux")
@@ -388,7 +389,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
       message(STATUS "Enabling link-time optimizations")
     endif()
   endif(CMAKE_SYSTEM MATCHES "Linux")
-endif(CMAKE_BUILD_TYPE STREQUAL "Release")
+endif((CMAKE_BUILD_TYPE STREQUAL "Release") OR (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo"))
 endif(USE_FLTO_IF_AVAILABLE STREQUAL  "yes")
 
 IF (WIN32)
@@ -451,7 +452,9 @@ if(NOT OPTION_ASAN)
 endif()
 
 # on BSD this must be explicitly linked
-if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
+if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
+    CMAKE_SYSTEM_NAME MATCHES "NetBSD" OR
+    CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   # Not needed on Debian GNU/kFreeBSD..
   if (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
     find_library(EXECINFO_LIBRARY NAMES execinfo)
@@ -462,7 +465,9 @@ if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
     find_package(X11 REQUIRED)
     include_directories(${X11_INCLUDE_DIR})
   endif ()
-endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
+endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
+       CMAKE_SYSTEM_NAME MATCHES "NetBSD" OR
+       CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 
 if (NOT DEFINED WL_VERSION)
   include (${CMAKE_SOURCE_DIR}/cmake/BzrRevision.cmake)
@@ -491,7 +496,7 @@ endif (OPTION_BUILD_TESTS)
 install (
   FILES ${CMAKE_CURRENT_BINARY_DIR}/VERSION
   DESTINATION ${WL_INSTALL_BASEDIR}
-  CONFIGURATIONS Debug;Release;None
+  CONFIGURATIONS Debug;Release;RelWithDebInfo;None
   COMPONENT CoreVersionFile
 )
 
@@ -504,7 +509,7 @@ install(
   FILES
     data/datadirversion
   DESTINATION ${WL_INSTALL_DATADIR}
-  CONFIGURATIONS Debug;Release;None
+  CONFIGURATIONS Debug;Release;RelWithDebInfo;None
   COMPONENT VersionFile
 )
 
@@ -521,7 +526,7 @@ install(
     data/txts
     data/world
   DESTINATION ${WL_INSTALL_DATADIR}
-  CONFIGURATIONS Debug;Release;None
+  CONFIGURATIONS Debug;Release;RelWithDebInfo;None
   COMPONENT CoreDataFiles
 )
 
@@ -529,7 +534,7 @@ install(
   DIRECTORY
     data/maps
   DESTINATION ${WL_INSTALL_DATADIR}
-  CONFIGURATIONS Debug;Release;None
+  CONFIGURATIONS Debug;Release;RelWithDebInfo;None
   COMPONENT MapFiles
 )
 
@@ -538,7 +543,7 @@ install(
     data/music
     data/sound
   DESTINATION ${WL_INSTALL_DATADIR}
-  CONFIGURATIONS Debug;Release;None
+  CONFIGURATIONS Debug;Release;RelWithDebInfo;None
   COMPONENT MusicFiles
 )
 
@@ -548,7 +553,7 @@ install(
     CREDITS
     ChangeLog
   DESTINATION ${WL_INSTALL_BASEDIR}
-  CONFIGURATIONS Debug;Release;None
+  CONFIGURATIONS Debug;Release;RelWithDebInfo;None
   COMPONENT CoreLicenseFiles
 )
 

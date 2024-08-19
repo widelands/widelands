@@ -475,11 +475,13 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		// Now draw pictures
 		if (er.pic != nullptr) {
-			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ?
-                              get_eff_w() - er.pic->width() - 1 - kIndentStrength * er.indent :
-                              kIndentStrength * er.indent + 1,
-			                  y + (lineheight_unpadded - er.pic->height()) / 2),
-			         er.pic);
+			dst.blit(
+			   Vector2i(UI::g_fh->fontset()->is_rtl() ?
+                        get_eff_w() - er.pic->width() - (max_pic_width_ - er.pic->width()) / 2 - 1 -
+			                  kIndentStrength * er.indent :
+                        kIndentStrength * er.indent + (max_pic_width_ - er.pic->width()) / 2 + 1,
+			            y + (lineheight_unpadded - er.pic->height()) / 2),
+			   er.pic);
 		}
 
 		// Fix vertical position for mixed font heights
