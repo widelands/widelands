@@ -166,7 +166,7 @@ class WidelandsTestCase():
         self._progress = str(self._test_number).rjust(num_w) + '/' + str(self.total_tests)
 
         if self.do_use_random_directory:
-            self.run_dir = tempfile.mkdtemp(prefix="widelands_regression_test")
+            self.run_dir = tempfile.mkdtemp(prefix="widelands_regression_test_")
         else:
             self.run_dir = os.path.join(tempfile.gettempdir(), "widelands_regression_test", self.__class__.__name__)
             if os.path.exists(self.run_dir):
