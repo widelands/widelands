@@ -75,7 +75,6 @@ private:
 	void update_building_list();
 
 	/// Adds a button for the building type belonging to the id and descr to the tab.
-	/// Returns true when a new row needs to be created.
 	void
 	add_button(Widelands::DescriptionIndex id, const Widelands::BuildingDescr& descr, UI::Box* row);
 
