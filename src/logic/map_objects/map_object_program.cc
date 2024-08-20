@@ -24,6 +24,7 @@
 #include "base/math.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/map_object.h"
+#include "scripting/lua_interface.h"
 #include "scripting/lua_map.h"
 #include "sound/sound_handler.h"
 
