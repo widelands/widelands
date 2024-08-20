@@ -213,12 +213,13 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	add_statistics_menu();
 
-	add_toolbar_button(
+	toggle_objective_menu_ = add_toolbar_button(
 	   "wui/menus/objectives", "objectives",
 	   as_tooltip_text_with_hotkey(_("Objectives"),
 	                               shortcut_string_for(KeyboardShortcut::kInGameObjectives, true),
 	                               UI::PanelStyle::kWui),
-	   &objectives_, true);
+	   &objectives_, false);
+	toggle_objective_menu_->sigclicked.connect([this]() { do_toggle_objective_menu(); });
 	objectives_.open_window = [this] { new GameObjectivesMenu(*this, objectives_); };
 
 	add_diplomacy_menu();
@@ -479,6 +480,17 @@ void InteractivePlayer::think() {
 			}
 			flag_to_connect_ = Widelands::Coords::null();
 		}
+	}
+	{
+		bool const has_objectives = game().map().objectives_count(false, true) > 0;
+		std::string obj_tooltip = has_objectives ? _("Objectives") : _("No current objectives");
+
+		// only allow toggle to open window when there are objectives to show
+		// however, do allow closing the window if there are no objectives
+		toggle_objective_menu_->set_enabled(has_objectives || objectives_.exists());
+		toggle_objective_menu_->set_tooltip(as_tooltip_text_with_hotkey(
+		   obj_tooltip, shortcut_string_for(KeyboardShortcut::kInGameObjectives, true),
+		   UI::PanelStyle::kWui));
 	}
 	{
 		char const* msg_icon = "images/wui/menus/message_old.png";
@@ -905,7 +917,10 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kInGameObjectives, code)) {
-			objectives_.toggle();
+			// follow same criteria for enabled state as the toggle
+			if (toggle_objective_menu_->enabled()) {
+				do_toggle_objective_menu();
+			}
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kInGameStatsBuildings, code)) {
@@ -958,6 +973,15 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 	}
 
 	return InteractiveGameBase::handle_key(down, code);
+}
+
+void InteractivePlayer::do_toggle_objective_menu() {
+	if (game().map().objectives_count(false, true) == 0) {
+		// toggle() would restore minimized windows
+		objectives_.destroy();
+	} else {
+		objectives_.toggle();
+	}
 }
 
 std::string InteractivePlayer::get_fastplace_help() const {

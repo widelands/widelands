@@ -48,6 +48,9 @@ struct UniqueWindow : public Window {
 		void destroy() const;
 		void toggle();
 
+		bool exists() const;
+		bool is_open() const;
+
 		int32_t x{0};
 		int32_t y{0};
 		bool valid_pos{false};
