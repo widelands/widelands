@@ -23,6 +23,7 @@
 #include <sstream>
 
 bool g_fail_on_lua_error(false);
+bool g_fail_on_errors(false);
 
 /*
  * class WException implementation

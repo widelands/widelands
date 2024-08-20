@@ -71,6 +71,7 @@ protected:
 };
 
 extern bool g_fail_on_lua_error;
+extern bool g_fail_on_errors;
 
 #define wexception(...) WException(__FILE__, __LINE__, __VA_ARGS__)
 

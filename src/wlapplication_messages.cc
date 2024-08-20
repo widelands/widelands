@@ -127,6 +127,8 @@ void fill_parameter_vector() {
 	  {"", "play_intro_music", _("[true*|false]"),
 		_("Play the intro music at startup and show splash image until it ends."), true},
 	  {"", "fail-on-lua-error", "", _("Force Widelands to crash when a Lua error occurs."), false},
+	  {"", "fail-on-errors", "",
+      _("Force Widelands to crash when a game or the editor terminates with an error."), false},
 	  {"", "messagebox-timeout",
 		/** TRANSLATORS: Placeholder for a time value in seconds */
 		_("<seconds>"),

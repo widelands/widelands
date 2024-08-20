@@ -955,7 +955,9 @@ void WLApplication::run() {
 				} else {
 					const std::string message = _("Widelands could not find the last edited map.");
 					log_err("%s\n", message.c_str());
-
+					if (g_fail_on_errors) {
+						abort();
+					}
 					menu.show_messagebox(_("No Last Edited Map"), message);
 					have_filename = false;
 				}
@@ -1009,6 +1011,9 @@ void WLApplication::run() {
 		if (!message.empty()) {
 			log_err("%s\n", message.c_str());
 			game.full_cleanup();
+			if (g_fail_on_errors) {
+				abort();
+			}
 			menu.show_messagebox(title, message);
 			menu.main_loop();
 		}
@@ -1746,6 +1751,10 @@ void WLApplication::handle_commandline_parameters() {
 
 	// *** End of moved checks ***
 
+	if (check_commandline_flag("fail-on-errors")) {
+		g_fail_on_errors = true;
+	}
+
 	if (check_commandline_flag("verbose")) {
 		g_verbose = true;
 	}
@@ -1915,6 +1924,9 @@ void WLApplication::emergency_save(UI::Panel* panel,
 
 	if (Widelands::UnhandledVersionError::is_unhandled_version_error(error)) {
 		// It's an incompatible savegame. Don't ask for a bug report, don't bother trying to save.
+		if (g_fail_on_errors) {
+			abort();
+		}
 		if (panel != nullptr) {
 			UI::WLMessageBox m(panel, UI::WindowStyle::kFsMenu, _("Incompatible"), error,
 			                   UI::WLMessageBox::MBoxType::kOk);
@@ -1929,6 +1941,9 @@ void WLApplication::emergency_save(UI::Panel* panel,
 		        "  You are using version %s.\n"
 		        "  Please add this information to your report.\n",
 		        build_ver_details().c_str());
+	}
+	if (g_fail_on_errors) {
+		abort();
 	}
 	log_err("  If desired, Widelands attempts to create an emergency savegame.\n"
 	        "  It is often – though not always – possible to load it and continue playing.\n"
