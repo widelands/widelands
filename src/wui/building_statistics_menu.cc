@@ -24,6 +24,7 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/waterway.h"
+#include "graphic/animation/animation_manager.h"
 #include "graphic/style_manager.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/descriptions.h"
@@ -207,14 +208,16 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      last_traffic_type_((iplayer().game().map().get_waterway_max_length() >= 2) ?
                            TrafficStat::kLast :
                            TrafficStat::kWaterway) {
+	const Widelands::Player& player = iplayer().player();
+	const Widelands::TribeDescr& tribe = player.tribe();
+	const Widelands::Descriptions& descriptions = iplayer().egbase().descriptions();
 	traffic_stats_ = {
-	   TrafficStatData(_("Flag"), g_image_cache->get("images/wui/fieldaction/menu_build_flag.png")),
-	   TrafficStatData(_("Road"), g_image_cache->get("images/wui/fieldaction/menu_build_way.png")),
-	   TrafficStatData(
-	      _("Busy Road"), g_image_cache->get("images/wui/fieldaction/menu_build_way.png"))};
+	   TrafficStatData(_("Flag"), g_animation_manager->get_representative_image(tribe.flag_animation(), &player.get_playercolor())),
+	   TrafficStatData(_("Road"), descriptions.get_worker_descr(tribe.carriers()[0])->representative_image(&player.get_playercolor())),
+	   TrafficStatData(_("Busy Road"), descriptions.get_worker_descr(tribe.carriers()[1])->representative_image(&player.get_playercolor()))
+	};
 	if (last_traffic_type_ == TrafficStat::kLast) {
-		traffic_stats_.emplace_back(
-		   _("Waterway"), g_image_cache->get("images/wui/fieldaction/menu_build_water.png"));
+		traffic_stats_.emplace_back(_("Waterway"), descriptions.get_worker_descr(tribe.ferry())->representative_image(&player.get_playercolor()));
 	}
 
 	building_buttons_ = std::vector<UI::Button*>(nr_building_types_);
