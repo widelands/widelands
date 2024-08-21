@@ -212,12 +212,16 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	const Widelands::TribeDescr& tribe = player.tribe();
 	const Widelands::Descriptions& descriptions = iplayer().egbase().descriptions();
 	traffic_stats_ = {
-	   TrafficStatData(_("Flag"), g_animation_manager->get_representative_image(tribe.flag_animation(), &player.get_playercolor())),
-	   TrafficStatData(_("Road"), descriptions.get_worker_descr(tribe.carriers()[0])->representative_image(&player.get_playercolor())),
-	   TrafficStatData(_("Busy Road"), descriptions.get_worker_descr(tribe.carriers()[1])->representative_image(&player.get_playercolor()))
-	};
+	   TrafficStatData(_("Flag"), g_animation_manager->get_representative_image(
+	                                 tribe.flag_animation(), &player.get_playercolor())),
+	   TrafficStatData(_("Road"), descriptions.get_worker_descr(tribe.carriers()[0])
+	                                 ->representative_image(&player.get_playercolor())),
+	   TrafficStatData(_("Busy Road"), descriptions.get_worker_descr(tribe.carriers()[1])
+	                                      ->representative_image(&player.get_playercolor()))};
 	if (last_traffic_type_ == TrafficStat::kLast) {
-		traffic_stats_.emplace_back(_("Waterway"), descriptions.get_worker_descr(tribe.ferry())->representative_image(&player.get_playercolor()));
+		traffic_stats_.emplace_back(
+		   _("Waterway"), descriptions.get_worker_descr(tribe.ferry())
+		                     ->representative_image(&player.get_playercolor()));
 	}
 
 	building_buttons_ = std::vector<UI::Button*>(nr_building_types_);
