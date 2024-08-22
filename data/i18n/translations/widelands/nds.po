@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-15 02:44+0000\n"
+"POT-Creation-Date: 2024-08-22 02:44+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2024\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -332,7 +332,7 @@ msgstr "Wedderhalen"
 #: ../../../../src/editor/editorinteractive.cc:175
 #: ../../../../src/wlapplication_options.cc:876
 #: ../../../../src/wui/buildingwindow.cc:448
-#: ../../../../src/wui/interactive_player.cc:238
+#: ../../../../src/wui/interactive_player.cc:239
 msgid "Help"
 msgstr "Hülp"
 
@@ -635,10 +635,11 @@ msgstr "Willst du de Bewarker würrelk verlaten?"
 #: ../../../../src/ui_fsmenu/addons/contact.cc:81
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1381
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1392
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1443
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1491
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1570
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1639
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1463
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1471
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1519
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1598
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1667
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:104
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:292
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:565
@@ -673,7 +674,7 @@ msgstr "Lade Kaart »%s« …"
 #: ../../../../src/editor/ui_menus/main_menu_new_map.cc:115
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:629
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:144
-#: ../../../../src/logic/map.h:231 ../../../../src/wui/mapdata.cc:50
+#: ../../../../src/logic/map.h:232 ../../../../src/wui/mapdata.cc:50
 msgid "No Name"
 msgstr "Keen Naam"
 
@@ -681,7 +682,7 @@ msgstr "Keen Naam"
 #: ../../../../src/editor/editorinteractive.cc:1210
 #: ../../../../src/editor/ui_menus/main_menu_new_map.cc:116
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:630
-#: ../../../../src/logic/map.h:232
+#: ../../../../src/logic/map.h:233
 #: ../../../../src/ui_fsmenu/addons/packager.cc:412
 msgctxt "author_name"
 msgid "Unknown"
@@ -1773,8 +1774,8 @@ msgstr "Speelbefehlen"
 #: ../../../../src/map_io/map_saver.cc:146
 #: ../../../../src/map_io/widelands_map_loader.cc:400
 #: ../../../../src/wlapplication_options.cc:678
-#: ../../../../src/wui/interactive_player.cc:228
-#: ../../../../src/wui/interactive_player.cc:485
+#: ../../../../src/wui/interactive_player.cc:229
+#: ../../../../src/wui/interactive_player.cc:497
 msgid "Messages"
 msgstr "Narichten"
 
@@ -1836,8 +1837,8 @@ msgstr "Widelands kann nich warken, wiel dien Bill-Utgaav-Driever to oll is."
 #. Font support is limited here, so do not use advanced typography *
 #: ../../../../src/graphic/gl/initialize.cc:227
 #, c-format
-msgid "The %1$u version needs to be version %2$u.%3$u or newer."
-msgstr "De %1$u mutt de Versioon %2$u.%3$u of nejer hebben."
+msgid "The %1$s version needs to be version %2$u.%3$u or newer."
+msgstr ""
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -2330,7 +2331,7 @@ msgstr "Winter"
 msgid "Desert"
 msgstr "Wüüst"
 
-#: ../../../../src/logic/map.h:233
+#: ../../../../src/logic/map.h:234
 msgid "No description defined"
 msgstr "Nich beschrieven"
 
@@ -2379,7 +2380,7 @@ msgstr "Du worst angrepen!"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
 #. * '%s'
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:455
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:456
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr "de Weertskupp bruukt de Waar »%s«"
@@ -2387,7 +2388,7 @@ msgstr "de Weertskupp bruukt de Waar »%s«"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn't need the
 #. * ware '%s'
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:462
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:463
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr "de Weertskupp bruukt de Waar »%s« nich"
@@ -2395,14 +2396,14 @@ msgstr "de Weertskupp bruukt de Waar »%s« nich"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
 #. * '%s'
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:475
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:476
 #, c-format
 msgid "the economy needs the worker ‘%s’"
 msgstr "de Weertskupp bruukt de Arbeider »%s«"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker '%s'
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:484
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:485
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
 msgstr "de Weertskupp bruukt de Arbeider »%s« nich"
@@ -2423,56 +2424,56 @@ msgstr "de Weertskupp bruukt de Arbeider »%s« nich"
 #. Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:534
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:558
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1274
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1379
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1461
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:535
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:559
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1275
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1380
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1462
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$i×%2$s"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:539
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:540
 #, c-format
 msgid "the building has the following wares: %s"
 msgstr "dat Huus hett deese Waren: %s"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:563
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:564
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
 msgstr "dat Huus hett deese Waren nich: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:579
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:580
 msgid "a worker needs experience"
 msgstr "een Arbeider bruukt Erfahrung"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:585
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:586
 msgid "the workers need no experience"
 msgstr "de Arbeiders bruken keene Erfahrung"
 
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:614
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:615
 msgid "the fleet needs a ferry"
 msgstr "de Flott bruukt eene Fähr"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs
 #. a ship/ferry'.
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:614
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:615
 msgid "the fleet needs a ship"
 msgstr "de Flott bruukt een Schipp"
 
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:621
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:622
 msgid "the fleet needs no ferries"
 msgstr "de Flott bruukt keene Fähren"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs
 #. no ships/ferries'.
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:621
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:622
 msgid "the fleet needs no ships"
 msgstr "de Flott bruukt keene Schippen"
 
@@ -2489,20 +2490,20 @@ msgstr "de Flott bruukt keene Schippen"
 #. * TRANSLATORS: on a development build if you can, and let us know if there
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:770
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1296
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:771
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1297
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "Hett nich begunnen, %1$s, denn %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware '%s'"
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:776
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:777
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr "Hett %1$s daankregen, denn %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware '%s'"
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:783
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:784
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr "Hett %1$s översprungen, denn %2$s"
@@ -2511,7 +2512,7 @@ msgstr "Hett %1$s översprungen, denn %2$s"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1283
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1284
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -2521,7 +2522,7 @@ msgstr[1] "dat hapert an %s"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1388
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1389
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -2531,14 +2532,14 @@ msgstr[1] "%s sünd produzeert worden"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1470
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1471
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "%s is anhüürt worden"
 msgstr[1] "%s sünd anhüürt worden"
 
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1853
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1854
 msgid "No soldier found for this training level!"
 msgstr "Keen Soldat för deese Lehre is funden worden!"
 
@@ -2546,7 +2547,7 @@ msgstr "Keen Soldat för deese Lehre is funden worden!"
 #. description of the
 #. * training program, e.g. Completed upgrading soldier evade from level 0 to
 #. level 1
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1896
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1897
 #, c-format
 msgid "Completed %s"
 msgstr "Hett %s daankregen"
@@ -2898,7 +2899,7 @@ msgstr "Schippen"
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:173
 #: ../../../../src/wui/economy_options_window.cc:75
 #: ../../../../src/wui/general_statistics_menu.cc:165
-#: ../../../../src/wui/interactive_player.cc:330
+#: ../../../../src/wui/interactive_player.cc:331
 #: ../../../../src/wui/productionsitewindow.cc:90
 #: ../../../../src/wui/warehousewindow.cc:295
 msgid "Wares"
@@ -2920,7 +2921,7 @@ msgstr "Arbeiders"
 #: ../../../../src/map_io/map_saver.cc:219
 #: ../../../../src/map_io/widelands_map_loader.cc:336
 #: ../../../../src/wui/general_statistics_menu.cc:161
-#: ../../../../src/wui/interactive_player.cc:325
+#: ../../../../src/wui/interactive_player.cc:326
 #: ../../../../src/wui/minimap.cc:202
 msgid "Buildings"
 msgstr "Husen"
@@ -2994,19 +2995,19 @@ msgstr "Een Priel is verneelt worden, daarmit diene neje Muu baut worden kunn."
 msgid "A geologist found resources."
 msgstr "Een Schattsöker hett Mineraale funnen."
 
-#: ../../../../src/logic/map_objects/tribes/worker.cc:2086
+#: ../../../../src/logic/map_objects/tribes/worker.cc:2097
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr "Dien %s kann keenen Weg na Huus finnen un word wull doodgahn."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../../../src/logic/map_objects/tribes/worker.cc:2091
+#: ../../../../src/logic/map_objects/tribes/worker.cc:2102
 #: ../../../../src/wui/productionsitewindow.cc:107
 #: ../../../../src/wui/productionsitewindow.cc:124
 msgid "Worker"
 msgstr "Arbeider"
 
-#: ../../../../src/logic/map_objects/tribes/worker.cc:2092
+#: ../../../../src/logic/map_objects/tribes/worker.cc:2103
 msgid "Worker got lost!"
 msgstr "Fehlgahner Arbeider!"
 
@@ -3275,6 +3276,7 @@ msgstr "Schrievens"
 #: ../../../../src/wlapplication_options.cc:669
 #: ../../../../src/wui/game_objectives_menu.cc:30
 #: ../../../../src/wui/interactive_player.cc:218
+#: ../../../../src/wui/interactive_player.cc:486
 msgid "Objectives"
 msgstr "Upgaven"
 
@@ -3740,12 +3742,12 @@ msgid ""
 "request in time."
 msgstr "De Verbinnung wurr vun de Metaserver trennt, wiel du up eene PING-Anfraag nich bi Tied antwoordt hest."
 
-#: ../../../../src/network/net_addons.cc:844
+#: ../../../../src/network/net_addons.cc:861
 #, c-format
 msgid "Sending metadata for %s"
 msgstr "Schicke Metadaten för %s"
 
-#: ../../../../src/network/net_addons.cc:889
+#: ../../../../src/network/net_addons.cc:906
 #, c-format
 msgid "Uploading %s"
 msgstr "Lade %s up"
@@ -4904,12 +4906,32 @@ msgid "Uploading ‘%s’…"
 msgstr "Lade »%s« up …"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1422
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1477
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1539
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1505
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1567
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1444
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1445
+#, c-format
+msgid "‘%s’"
+msgstr "»%s«"
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1453
+#, c-format
+msgid ""
+"The add-on ‘%s’ may not be uploaded to the server because the following "
+"filenames contained in the add-on are not allowed:"
+msgstr "Dat Verwiedern »%s« düür nich to de Server upladen worden, denn deese Dateinaamen, wat daar enthollen sünd, sünd nich verlöövt:"
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1457
+msgid ""
+"Filenames may only contain alphanumeric characters (A-Z, a-z, 0-9) and "
+"simple punctuation (period, hyphen, and underscore; not multiple periods). "
+"Other characters such as whitespace are not permitted. Filenames may not "
+"exceed 80 characters."
+msgstr "Dateinaamen düren nix as alphanumeriske Bookstavens (A-Z, a-z, 0-9) un slichte Satztekens (Punkt, Binnestreek un Unnerstreek; nich mehr as een Punkt) enhollen. Anner Bookstavens, to’n Bispööl Leegtekens, sünd nich verlöövt. Dateinaamen düren nich langer as 80 Bookstavens wesen."
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1472
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be uploaded to the server.\n"
@@ -4918,12 +4940,12 @@ msgid ""
 "%2$s"
 msgstr "Dat Verwiedern »%1$s« kunn nich to de Server upladen worden.\n\nFehler-Naricht:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1457
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1485
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr "Lade »%s« runner …"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1493
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1521
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -4932,7 +4954,7 @@ msgid ""
 "%2$s"
 msgstr "Dat Verwiedern »%1$s« kunn nich vun de Server runnerladen worden. Dat Installeren/Vernejen vun deeser Verwiedern word översprungen.\n\nFehler:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1571
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1599
 #, c-format
 msgid ""
 "The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations will be skipped.\n"
@@ -4941,7 +4963,7 @@ msgid ""
 "%2$s"
 msgstr "De Översettens för dat Verwiedern »%1$s« kunnen nich vun de Server runnerladen worden. Dat Installeren/Vernejen vun de Översettens word översprungen.\n\nFehler-Naricht:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1640
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1668
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr "De bruukt Verwiedern »%s« gifft dat up de Server nich."
@@ -6065,7 +6087,7 @@ msgstr "De utköört Handigtast (»%1$s«) word all för dat hier bruukt: »%2$s
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:297
-#: ../../../../src/wui/interactive_player.cc:335
+#: ../../../../src/wui/interactive_player.cc:336
 msgid "General"
 msgstr "Allgemeen"
 
@@ -7158,7 +7180,7 @@ msgstr "Husen wiesen"
 #. workarea overlaps
 #. * are highlighted
 #: ../../../../src/ui_fsmenu/options.cc:308
-#: ../../../../src/wui/interactive_player.cc:382
+#: ../../../../src/wui/interactive_player.cc:383
 msgid "Show Workarea Overlaps"
 msgstr "Arbeidsgewest-Övernannerliggen wiesen"
 
@@ -10055,20 +10077,20 @@ msgstr "Tahlen över alls"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
-#: ../../../../src/wui/interactive_player.cc:309
+#: ../../../../src/wui/interactive_player.cc:310
 #: ../../../../src/wui/map_tags.cc:51
 msgid "Seafaring"
 msgstr "Seefahrt"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../../../src/wui/interactive_player.cc:315
+#: ../../../../src/wui/interactive_player.cc:316
 #: ../../../../src/wui/militarysitewindow.cc:40
 #: ../../../../src/wui/warehousewindow.cc:326
 msgid "Soldiers"
 msgstr "Soldaten"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../../../src/wui/interactive_player.cc:320
+#: ../../../../src/wui/interactive_player.cc:321
 #: ../../../../src/wui/stock_menu.cc:40
 #: ../../../../src/wui/ware_statistics_menu.cc:152
 #: ../../../../src/wui/waresdisplay.cc:84
@@ -10078,24 +10100,28 @@ msgstr "Bestand"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../../../src/wui/interactive_player.cc:379
+#: ../../../../src/wui/interactive_player.cc:380
 msgid "Hide Workarea Overlaps"
 msgstr "Arbeidsgewest-Övernannerliggen verbargen"
 
-#: ../../../../src/wui/interactive_player.cc:385
+#: ../../../../src/wui/interactive_player.cc:386
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
 msgstr "Of Arbeidsgewesten, wat övernanner liggen, wiest worden sallen, wenn du eene Baustee baust"
 
-#: ../../../../src/wui/interactive_player.cc:490
+#: ../../../../src/wui/interactive_player.cc:486
+msgid "No current objectives"
+msgstr "Keene stedenwies Upgaven"
+
+#: ../../../../src/wui/interactive_player.cc:502
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
 msgstr[0] "%u neje Naricht"
 msgstr[1] "%u neje Narichten"
 
-#: ../../../../src/wui/interactive_player.cc:981
+#: ../../../../src/wui/interactive_player.cc:1005
 msgid "Fastplace Shortcuts"
 msgstr "Fixbau-Handigtasten"
 
