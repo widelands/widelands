@@ -1838,7 +1838,7 @@ msgstr "Widelands kann nich warken, wiel dien Bill-Utgaav-Driever to oll is."
 #: ../../../../src/graphic/gl/initialize.cc:227
 #, c-format
 msgid "The %1$s version needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "De %1$s mutt de Versioon %2$u.%3$u of nejer hebben."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
