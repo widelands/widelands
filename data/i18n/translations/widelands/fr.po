@@ -20,7 +20,7 @@
 # Julien Schneider <schneider.julien@gmail.com>, 2020
 # nicolas jardin <niko472006@sfr.fr>, 2016
 # Papa Ben <ben-oni@hotmail.fr>, 2024
-# Renaud Bouchard, 2015-2023
+# Renaud Bouchard, 2015-2024
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022
 # syl_, 2016
 # Tubuntu, 2015,2018
@@ -30,9 +30,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-17 02:51+0000\n"
+"POT-Creation-Date: 2024-08-22 02:44+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Papa Ben <ben-oni@hotmail.fr>, 2024\n"
+"Last-Translator: Renaud Bouchard, 2015-2024\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1004,7 +1004,7 @@ msgstr "Description : %s"
 #: ../../../../src/editor/ui_menus/field_info_window.cc:251
 msgctxt "addons"
 msgid "(none)"
-msgstr ""
+msgstr "(aucun)"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:258
 #, c-format
@@ -1364,19 +1364,19 @@ msgstr "ID de la carte :"
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:257
 msgctxt "map_generator"
 msgid "Default"
-msgstr ""
+msgstr "Défaut"
 
 #. * TRANSLATORS: Random Climate
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:285
 msgctxt "climate"
 msgid "Random"
-msgstr ""
+msgstr "Aléatoire"
 
 #. * TRANSLATORS: Default Terrain Distribution
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:316
 msgctxt "terrain"
 msgid "Default"
-msgstr ""
+msgstr "Défaut"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:318
 msgid "Alpine"
@@ -1396,7 +1396,7 @@ msgstr "Terres en friche"
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:322
 msgctxt "terrain"
 msgid "Random"
-msgstr ""
+msgstr "Aléatoire"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:633
 msgid "Generating random map…"
@@ -1856,8 +1856,8 @@ msgstr "Widelands ne fonctionnera pas car votre pilote graphique est trop vieux.
 #. Font support is limited here, so do not use advanced typography *
 #: ../../../../src/graphic/gl/initialize.cc:227
 #, c-format
-msgid "The %1$u version needs to be version %2$u.%3$u or newer."
-msgstr "La version de %1$u nécessite d'être la version %2$u.%3$u ou supérieure."
+msgid "The %1$s version needs to be version %2$u.%3$u or newer."
+msgstr ""
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -2052,7 +2052,7 @@ msgstr "Aucun"
 #: ../../../../src/logic/addons.cc:275
 #, c-format
 msgid "%1$s<br>• %2$s (version %3$s)"
-msgstr ""
+msgstr "%1$s<br>• %2$s (version %3$s)"
 
 #: ../../../../src/logic/addons.cc:305
 msgid "No game-relevant add-ons in use."
@@ -2144,49 +2144,49 @@ msgstr[2] ""
 #: ../../../../src/logic/detected_port_space.cc:120
 msgctxt "direction"
 msgid "NW"
-msgstr ""
+msgstr "NO"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northeast.
 #: ../../../../src/logic/detected_port_space.cc:124
 msgctxt "direction"
 msgid "NE"
-msgstr ""
+msgstr "NE"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southwest.
 #: ../../../../src/logic/detected_port_space.cc:128
 msgctxt "direction"
 msgid "SW"
-msgstr ""
+msgstr "SO"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southeast.
 #: ../../../../src/logic/detected_port_space.cc:132
 msgctxt "direction"
 msgid "SE"
-msgstr ""
+msgstr "SE"
 
 #. * TRANSLATORS: This is an abbreviated direction: North.
 #: ../../../../src/logic/detected_port_space.cc:136
 msgctxt "direction"
 msgid "N"
-msgstr ""
+msgstr "N"
 
 #. * TRANSLATORS: This is an abbreviated direction: South.
 #: ../../../../src/logic/detected_port_space.cc:140
 msgctxt "direction"
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #. * TRANSLATORS: This is an abbreviated direction: West.
 #: ../../../../src/logic/detected_port_space.cc:144
 msgctxt "direction"
 msgid "W"
-msgstr ""
+msgstr "O"
 
 #. * TRANSLATORS: This is an abbreviated direction: East.
 #: ../../../../src/logic/detected_port_space.cc:148
 msgctxt "direction"
 msgid "E"
-msgstr ""
+msgstr "E"
 
 #. * TRANSLATORS: Placeholders are gametime and shipname. Keep this short.
 #: ../../../../src/logic/detected_port_space.cc:157
@@ -2202,7 +2202,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s / %3$u %4$s %5$s"
-msgstr ""
+msgstr "Non possédé / %1$s / %2$s / %3$u %4$s %5$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this
 #. short.
@@ -2210,7 +2210,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s"
-msgstr ""
+msgstr "%1$s / %2$s / %3$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, shipname, and "distance
 #. direction port_name.
@@ -2219,7 +2219,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
-msgstr ""
+msgstr "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
 
 #: ../../../../src/logic/editor_game_base.cc:236
 #, c-format
@@ -3400,14 +3400,14 @@ msgstr[2] "Modules complémentaires %u inadéquats détecté:\n"
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
-msgstr ""
+msgstr "%1$s\n• ‘%2$s’ requis par l'hôte n'ont pas été trouvé"
 
 #: ../../../../src/network/gameclient.cc:821
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
-msgstr ""
+msgstr "%1$s\n• ‘%2$s’ installé en version %3$s mais l'hôte utilise la version %4$s"
 
 #: ../../../../src/network/gameclient.cc:992
 msgid "/me ’s file failed md5 checksumming."
@@ -3777,12 +3777,12 @@ msgstr "Vous avez été déconnecté du méta-serveur car vous n'avez pas répon
 #: ../../../../src/network/net_addons.cc:861
 #, c-format
 msgid "Sending metadata for %s"
-msgstr ""
+msgstr "Envoi des métadonnées pour %s"
 
 #: ../../../../src/network/net_addons.cc:906
 #, c-format
 msgid "Uploading %s"
-msgstr ""
+msgstr "Téléverse %s"
 
 #: ../../../../src/network/network_gaming_messages.cc:30
 msgid "Client has left the game."
@@ -4081,7 +4081,7 @@ msgstr "Chargement..."
 
 #: ../../../../src/ui_basic/spinbox.cc:151
 msgid "Decrease the value"
-msgstr ""
+msgstr "Décroît la valeur"
 
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
@@ -4094,7 +4094,7 @@ msgstr "Diminuer la valeur par %s"
 
 #: ../../../../src/ui_basic/spinbox.cc:164
 msgid "Increase the value"
-msgstr ""
+msgstr "Augmente la valeur"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
@@ -4113,9 +4113,9 @@ msgstr "Augmenter la valeur par %s"
 msgctxt "spinbox_change"
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d minute"
+msgstr[1] "%d minutes"
+msgstr[2] "%d minutes"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../../../src/ui_basic/spinbox.cc:503
@@ -4135,9 +4135,9 @@ msgstr[2] "%d minutes"
 msgctxt "spinbox_change"
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d heure"
+msgstr[1] "%d heures"
+msgstr[2] "%d heures"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../../../src/ui_basic/spinbox.cc:516
@@ -4159,7 +4159,7 @@ msgstr[2] "%d heures"
 #, c-format
 msgctxt "spinbox_change_hours_mins"
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s et %2$s"
 
 #. * TRANSLATORS: ..
 #. The hours part of "Increase/Decrease the value by X hours and Y minutes".
@@ -4171,9 +4171,9 @@ msgstr ""
 msgctxt "spinbox_change_hours_mins"
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d heure"
+msgstr[1] "%d heures"
+msgstr[2] "%d heures"
 
 #. * TRANSLATORS: ..
 #. The minutes part of "Increase/Decrease the value by X hours and Y minutes"
@@ -4184,9 +4184,9 @@ msgstr[2] ""
 msgctxt "spinbox_change_hours_mins"
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d minute"
+msgstr[1] "%d minutes"
+msgstr[2] "%d minutes"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n> weeks"
 #. You may want to treat this as "by <n> weeks", depending on how you
@@ -4196,9 +4196,9 @@ msgstr[2] ""
 msgctxt "spinbox_change"
 msgid "%d week"
 msgid_plural "%d weeks"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d semaine"
+msgstr[1] "%d semaines"
+msgstr[2] "%d semaines"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../../../src/ui_basic/spinbox.cc:567
@@ -4217,9 +4217,9 @@ msgstr[2] "%d semaines"
 msgctxt "spinbox_change"
 msgid "%d pixel"
 msgid_plural "%d pixels"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d pixel"
+msgstr[1] "%d pixels"
+msgstr[2] "%d pixels"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../../../src/ui_basic/spinbox.cc:576
@@ -4238,9 +4238,9 @@ msgstr[2] "%d pixels"
 msgctxt "spinbox_change"
 msgid "%d field"
 msgid_plural "%d fields"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d champ"
+msgstr[1] "%d champs"
+msgstr[2] "%d champs"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../../../src/ui_basic/spinbox.cc:585
@@ -4258,7 +4258,7 @@ msgstr[2] "%d champs"
 #, c-format
 msgctxt "spinbox_change"
 msgid "%i %%"
-msgstr ""
+msgstr "%i %%"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n>"
 #. You may want to treat this as "by <n>", depending on how you
@@ -4267,7 +4267,7 @@ msgstr ""
 #, c-format
 msgctxt "spinbox_change"
 msgid "%d"
-msgstr ""
+msgstr "%d"
 
 #: ../../../../src/ui_basic/table.cc:157
 msgid "Click to reverse sorting"
@@ -4287,11 +4287,11 @@ msgstr "%1$s<br>(%2$s)"
 
 #: ../../../../src/ui_basic/textinput.cc:374
 msgid "Cut"
-msgstr ""
+msgstr "Couper"
 
 #: ../../../../src/ui_basic/textinput.cc:374
 msgid "Cut the selected text to the clipboard"
-msgstr ""
+msgstr "Couper le texte sélectionné dans le bloc note"
 
 #: ../../../../src/ui_basic/textinput.cc:377
 #: ../../../../src/ui_fsmenu/tech_info.cc:238
@@ -4300,19 +4300,19 @@ msgstr "Copier"
 
 #: ../../../../src/ui_basic/textinput.cc:377
 msgid "Copy the selected text to the clipboard"
-msgstr ""
+msgstr "Coller le texte sélectionné dans le bloc note"
 
 #: ../../../../src/ui_basic/textinput.cc:380
 msgid "Paste"
-msgstr ""
+msgstr "Coller"
 
 #: ../../../../src/ui_basic/textinput.cc:380
 msgid "Paste the clipboard content"
-msgstr ""
+msgstr "Coller le contenu du bloc note"
 
 #: ../../../../src/ui_basic/textinput.cc:383
 msgid "Delete the selected text"
-msgstr ""
+msgstr "Supprimer le texte sélectionné"
 
 #: ../../../../src/ui_basic/textinput.cc:386
 #: ../../../../src/wlapplication_options.cc:383
@@ -4321,7 +4321,7 @@ msgstr "Sélectionner tout"
 
 #: ../../../../src/ui_basic/textinput.cc:386
 msgid "Select the entire text"
-msgstr ""
+msgstr "Sélectionner le texte entier"
 
 #: ../../../../src/ui_basic/window.cc:80
 #: ../../../../src/ui_basic/window.cc:838
@@ -4356,23 +4356,23 @@ msgstr "Décrocher"
 
 #: ../../../../src/ui_basic/window.cc:823
 msgid "Minimize the window"
-msgstr ""
+msgstr "Minimiser la fenêtre"
 
 #: ../../../../src/ui_basic/window.cc:823
 msgid "Unminimize the window"
-msgstr ""
+msgstr "Dé-Minimiser la fenêtre"
 
 #: ../../../../src/ui_basic/window.cc:833
 msgid "Pin the window"
-msgstr ""
+msgstr "épingler la fenêtre"
 
 #: ../../../../src/ui_basic/window.cc:833
 msgid "Unpin the window"
-msgstr ""
+msgstr "Désépingler la fenêtre"
 
 #: ../../../../src/ui_basic/window.cc:838
 msgid "Close the window"
-msgstr ""
+msgstr "Fermer la fenêtre"
 
 #: ../../../../src/ui_fsmenu/about.cc:38 ../../../../src/ui_fsmenu/main.cc:521
 msgid "About Widelands"
@@ -4734,7 +4734,7 @@ msgstr[2] "Êtes vous certain de vouloir mettre à jour ces %u modules compléme
 msgid ""
 "\n"
 "• %1$s (%2$s) by %3$s"
-msgstr ""
+msgstr "\n• %1$s (%2$s) par %3$s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:656
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:413
@@ -4877,29 +4877,29 @@ msgstr[2] "Mise à niveau des modules complémentaires %u :"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1170
 #, c-format
 msgid "• %s"
-msgstr ""
+msgstr "• %s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1206
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which could not be found"
-msgstr ""
+msgstr "• ‘%1$s’ nécessite ‘%2$s’ qui ne peut être trouvé"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1211
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is disabled"
-msgstr ""
+msgstr "• ‘%1$s’ nécessite ‘%2$s’ qui est désactivé"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1218
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
-msgstr ""
+msgstr "• ‘%1$s’ nécessite ‘%2$s’ qui est listé ci-dessous comme un module complémentaire requis"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1246
 #, c-format
 msgid ""
 "• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
-msgstr ""
+msgstr "• ‘%1$s’ nécessite d'abord ‘%2$s’ et puis ‘%3$s’, mais ils sont listé dans le mauvais ordre"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1262
 #, c-format
@@ -4961,7 +4961,7 @@ msgstr "%1% / %2%"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1445
 #, c-format
 msgid "‘%s’"
-msgstr ""
+msgstr "‘%s’"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1453
 #, c-format
@@ -5138,7 +5138,7 @@ msgstr[2] "Si vous quittez l'empaqueteur maintenant, tout les changements fait a
 msgid ""
 "%1$s\n"
 "• %2$s"
-msgstr ""
+msgstr "%1$s\n• %2$s"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:463
 msgid "Quit Packager"
@@ -5325,7 +5325,7 @@ msgstr "Version minimum de Widelands: %s"
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:295
 msgctxt "version"
 msgid "(none)"
-msgstr ""
+msgstr "(aucun)"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:325
 msgid "Top-level directory"
@@ -5948,7 +5948,7 @@ msgstr "Nom de la campagne"
 #: ../../../../src/ui_fsmenu/campaigns.cc:45
 msgctxt "difficulty"
 msgid "Default"
-msgstr ""
+msgstr "Défaut"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:44
 msgid "Crash Report Details"
@@ -6607,7 +6607,7 @@ msgstr "Éditeur..."
 
 #: ../../../../src/ui_fsmenu/main.cc:499
 msgid "Watch Replay…"
-msgstr ""
+msgstr "Voir replay..."
 
 #: ../../../../src/ui_fsmenu/main.cc:501
 msgid "Begin or load a single-player campaign or free game"
@@ -6672,7 +6672,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/main.cc:854
 msgid "Click for the main menu"
-msgstr ""
+msgstr "Cliquez pour le menu principal"
 
 #: ../../../../src/ui_fsmenu/main.cc:932
 msgid "Desyncing Add-On Found"
@@ -7915,7 +7915,7 @@ msgstr "Encyclopédie"
 
 #: ../../../../src/wlapplication_options.cc:367
 msgid "Context Menu"
-msgstr ""
+msgstr "Menu contextuel"
 
 #: ../../../../src/wlapplication_options.cc:371
 msgid "Cut Text"
@@ -9330,12 +9330,12 @@ msgstr ""
 #: ../../../../src/wui/fieldaction.cc:1260
 msgctxt "ship_state"
 msgid "Expedition"
-msgstr ""
+msgstr "Expédition"
 
 #: ../../../../src/wui/fieldaction.cc:1262
 msgctxt "ship_state"
 msgid "Transport"
-msgstr ""
+msgstr "Transport"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
 #: ../../../../src/wui/fieldaction.cc:1264
@@ -9866,13 +9866,13 @@ msgstr "Mode triche activé"
 #: ../../../../src/wui/info_panel.cc:460
 #, c-format
 msgid "%1$s • %2$s"
-msgstr ""
+msgstr "%1$s • %2$s"
 
 #. * TRANSLATORS: Gametime • Realtime • Gamespeed
 #: ../../../../src/wui/info_panel.cc:465
 #, c-format
 msgid "%1$s • %2$s • %3$s"
-msgstr ""
+msgstr "%1$s • %2$s • %3$s"
 
 #: ../../../../src/wui/inputqueuedisplay.cc:69
 msgid "Priority: Very Low"
@@ -9947,7 +9947,7 @@ msgstr "Afficher les contrôles"
 #: ../../../../src/wui/inputqueuedisplay.cc:683
 #, c-format
 msgid "+%u"
-msgstr ""
+msgstr "+%u"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../../../src/wui/interactive_base.cc:144
@@ -10978,7 +10978,7 @@ msgstr "Explorer vers le Sud-Est"
 
 #: ../../../../src/wui/shipwindow.cc:168
 msgid "Destination"
-msgstr ""
+msgstr "Destination"
 
 #: ../../../../src/wui/shipwindow.cc:179
 msgid "Sink the ship"
@@ -11007,7 +11007,7 @@ msgstr "Cette expédition ne peut être annulée car le navire ne peut s'arrimer
 #: ../../../../src/wui/shipwindow.cc:364
 msgctxt "destination"
 msgid "(none)"
-msgstr ""
+msgstr "(aucun)"
 
 #: ../../../../src/wui/shipwindow.cc:429 ../../../../src/wui/shipwindow.cc:434
 #: ../../../../src/wui/shipwindow.cc:439
@@ -11100,7 +11100,7 @@ msgstr "Vous pouvez écouter vos musiques personnelles durant le jeu en plaçant
 
 #: ../../../../src/wui/sound_options.cc:161
 msgid "Play the intro music at startup"
-msgstr ""
+msgstr "Jouer la musique d'intro au démarrage"
 
 #: ../../../../src/wui/sound_options.cc:163
 msgid ""

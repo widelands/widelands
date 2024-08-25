@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-17 02:51+0000\n"
+"POT-Creation-Date: 2024-08-22 02:44+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2024\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
@@ -1852,8 +1852,8 @@ msgstr "Widelands не будет работать, потому что ваш �
 #. Font support is limited here, so do not use advanced typography *
 #: ../../../../src/graphic/gl/initialize.cc:227
 #, c-format
-msgid "The %1$u version needs to be version %2$u.%3$u or newer."
-msgstr "Версия %1$u требует версию %2$u.%3$u или новее."
+msgid "The %1$s version needs to be version %2$u.%3$u or newer."
+msgstr ""
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -3786,12 +3786,12 @@ msgstr "Вы были отключены от метасервера, так к�
 #: ../../../../src/network/net_addons.cc:861
 #, c-format
 msgid "Sending metadata for %s"
-msgstr ""
+msgstr "Отправка метаданных для %s"
 
 #: ../../../../src/network/net_addons.cc:906
 #, c-format
 msgid "Uploading %s"
-msgstr ""
+msgstr "Загружается %s"
 
 #: ../../../../src/network/network_gaming_messages.cc:30
 msgid "Client has left the game."
@@ -4985,14 +4985,14 @@ msgstr "%1% / %2%"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1445
 #, c-format
 msgid "‘%s’"
-msgstr ""
+msgstr "‘%s’"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1453
 #, c-format
 msgid ""
 "The add-on ‘%s’ may not be uploaded to the server because the following "
 "filenames contained in the add-on are not allowed:"
-msgstr ""
+msgstr "Дополнение \"%s\" не может быть загружено на сервер, поскольку следующие имена файлов, содержащиеся в дополнении, недопустимы:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1457
 msgid ""
@@ -5000,7 +5000,7 @@ msgid ""
 "simple punctuation (period, hyphen, and underscore; not multiple periods). "
 "Other characters such as whitespace are not permitted. Filenames may not "
 "exceed 80 characters."
-msgstr ""
+msgstr "Имена файлов могут содержать только буквенно-цифровые символы (A-Z, a-z, 0-9) и простые знаки препинания (точка, дефис и подчеркивание, но не несколько точек). Другие символы, такие как пробелы, не допускаются. Длина имен файлов не должна превышать 80 символов."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1472
 #, c-format
@@ -10213,7 +10213,7 @@ msgstr "Переключить, указываются ли перекрываю
 
 #: ../../../../src/wui/interactive_player.cc:486
 msgid "No current objectives"
-msgstr ""
+msgstr "Нет текущих заданий"
 
 #: ../../../../src/wui/interactive_player.cc:502
 #, c-format
