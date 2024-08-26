@@ -226,6 +226,9 @@ void Window::update_template() {
 	set_inner_size(inw, inh);
 	set_pos(Vector2i(x - get_lborder(), y - get_tborder()));
 
+	button_close_->set_pic(g_image_cache->get(window_style_info().button_close()));
+	update_toolbar_buttons();
+
 	layout();
 }
 
