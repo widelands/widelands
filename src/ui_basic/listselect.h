@@ -139,12 +139,6 @@ struct BaseListselect : public Panel {
 		linked_dropdown_ = d;
 	}
 
-private:
-	static const int32_t ms_darken_value = -20;
-
-	void set_scrollpos(int32_t);
-	Recti get_highlight_rect(const std::string& text, int x, int y);
-
 	struct EntryRecord {
 		explicit EntryRecord(const std::string& init_name,
 		                     uint32_t init_entry,
@@ -167,6 +161,17 @@ private:
 		std::shared_ptr<const UI::RenderedText> rendered_name;
 		std::shared_ptr<const UI::RenderedText> rendered_hotkey;
 	};
+
+	const EntryRecord& at(size_t index) const {
+		assert(index < entry_records_.size());
+		return *entry_records_.at(index);
+	}
+
+private:
+	static const int32_t ms_darken_value = -20;
+
+	void set_scrollpos(int32_t);
+	Recti get_highlight_rect(const std::string& text, int x, int y);
 
 	int max_pic_width_;
 	int widest_text_{0};
