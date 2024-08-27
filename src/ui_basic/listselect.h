@@ -31,10 +31,31 @@ namespace UI {
 
 class BaseDropdown;
 
-enum class ListselectLayout {
-	kPlain,     // Highlight the selected element
-	kDropdown,  // When the mouse moves, instantly select the element that the mouse hovers over
-	kShowCheck  // Show a green arrow in front of the selected element
+struct ListselectLayout {
+	enum class Checkmark { kNone, kSingleSelect }; // will add: kMultiSelect
+	Checkmark checkmark;
+	bool dropdown{false};
+
+	ListselectLayout(Checkmark c, bool d)
+	  : checkmark(c),
+	    dropdown(d) {}
+
+	bool show_check() const {
+		return checkmark > Checkmark::kNone;
+	}
+
+	bool operator == (const ListselectLayout &other) const {
+		return (checkmark == other.checkmark) && (dropdown == other.dropdown);
+	}
+
+	bool operator != (const ListselectLayout &other) const {
+		return (checkmark != other.checkmark) || (dropdown != other.dropdown);
+	}
+
+	// ----- PRESETS -----
+	static const ListselectLayout kPlain;      // Highlight the selected element
+	static const ListselectLayout kDropdown;   // When the mouse moves, instantly highlight the element that the mouse hovers over
+	static const ListselectLayout kShowCheck;  // Show a green arrow in front of the selected element
 };
 
 /**
@@ -136,7 +157,7 @@ struct BaseListselect : public Panel {
 	void scroll_to_selection();
 
 	void set_linked_dropdown(UI::BaseDropdown* d) {
-		assert(selection_mode_ == ListselectLayout::kDropdown);
+		assert(selection_mode_.dropdown);
 		linked_dropdown_ = d;
 	}
 
