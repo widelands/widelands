@@ -142,6 +142,7 @@ void BaseListselect::clear() {
 	}
 	entry_records_.clear();
 
+	max_pic_width_ = 0;
 	scrollbar_.set_steps(1);
 	scrollpos_ = 0;
 	selection_ = no_selection_index();
@@ -448,9 +449,11 @@ void BaseListselect::draw(RenderTarget& dst) {
 		const int lineheight_unpadded = get_lineheight_without_padding();
 
 		Vector2i point(selection_mode_ == ListselectLayout::kDropdown ? 3 : 1, y);
-		uint32_t maxw =
-		   get_eff_w() -
+
+		const uint32_t w_reduction =
 		   (selection_mode_ == ListselectLayout::kDropdown ? scrollbar_.is_enabled() ? 4 : 5 : 2);
+		assert(w_reduction <= get_eff_w());
+		uint32_t maxw = get_eff_w() - w_reduction;
 
 		// Highlight the current selected entry
 		if (idx == selection_ && entry_records_.at(idx)->enable) {
@@ -463,7 +466,6 @@ void BaseListselect::draw(RenderTarget& dst) {
 				r.h += r.y;
 				r.y = 0;
 			}
-			assert(2 <= get_eff_w());
 			// Make the area a bit more white and more transparent
 			if (r.w > 0 && r.h > 0) {
 				dst.brighten_rect(r, -ms_darken_value * 2);
@@ -739,12 +741,30 @@ void BaseListselect::scroll_to_selection() {
 void BaseListselect::remove(const uint32_t i) {
 	assert(i < entry_records_.size());
 
+	// flag for whether max_pic_width_ needs to be rechecked
+	const bool recheck_max_pic_width =
+	   max_pic_width_ > 0 && entry_records_[i]->pic->width() == max_pic_width_;
+
 	delete (entry_records_[i]);
 	entry_records_.erase(entry_records_.begin() + i);
 	if (selection_ == i) {
 		selected(selection_ = no_selection_index());
 	} else if (i < selection_) {
 		--selection_;
+	}
+
+	if (recheck_max_pic_width) {
+		int new_max_pic_width = 0;
+		for (EntryRecord* er : entry_records_) {
+			int w = er->pic->width();
+			if (new_max_pic_width < w) {
+				new_max_pic_width = w;
+				if (max_pic_width_ == w) {
+					break;
+				}
+			}
+		}
+		max_pic_width_ = new_max_pic_width;
 	}
 }
 
