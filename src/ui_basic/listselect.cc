@@ -42,6 +42,7 @@ namespace UI {
 const ListselectLayout ListselectLayout::kPlain = ListselectLayout(ListselectLayout::Checkmark::kNone, false);
 const ListselectLayout ListselectLayout::kDropdown = ListselectLayout(ListselectLayout::Checkmark::kNone, true);
 const ListselectLayout ListselectLayout::kShowCheck = ListselectLayout(ListselectLayout::Checkmark::kSingleSelect, false);
+const ListselectLayout ListselectLayout::kMultiCheck = ListselectLayout(ListselectLayout::Checkmark::kMultiSelect, false);
 
 BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
                                          uint32_t init_entry,
@@ -188,7 +189,7 @@ void BaseListselect::add(const std::string& name,
 	layout();
 
 	if (sel) {
-		select(entry_records_.size() - 1);
+		select(entry_records_.size() - 1, true);
 	}
 }
 
@@ -234,11 +235,13 @@ void BaseListselect::set_scrollpos(const int32_t i) {
 /**
  * Change the currently selected entry.
  * If the desired entry is disabled, snap to the nearest enabled entry depending on `snap`.
+ * Checkmark behavior depends on selection_mode_
  *
- * Args: i  the entry to select
- *    snap  whether to go up, down, or do nothing if the entry is disabled
+ * Args: i                  the entry to select
+ *       snap               whether to go up, down, or do nothing if the entry is disabled
+ *       affect_checkmarks  whether this change impacts checkmark state of list entries
  */
-void BaseListselect::select(uint32_t i, SnapSelectionToEnabled snap) {
+void BaseListselect::select(uint32_t i, SnapSelectionToEnabled snap, bool affect_checkmarks) {
 	if (i != no_selection_index() && !empty()) {
 		if (snap != SnapSelectionToEnabled::kNo) {
 			// Step until we find an enabled entry
@@ -275,16 +278,31 @@ void BaseListselect::select(uint32_t i, SnapSelectionToEnabled snap) {
 		}
 	}
 
+	if (selection_mode_.show_check()) {
+		if (selection_mode_.checkmark == ListselectLayout::Checkmark::kMultiSelect) {
+			// independent checkboxes
+			if (affect_checkmarks && i != no_selection_index()) {
+				bool newstate = !entry_records_[i]->checked_;
+				entry_records_[i]->checked_ = newstate;
+				emit_checkmark_changed(entry_records_[i]->entry_, newstate);
+			}
+		} else if (affect_checkmarks || !selection_mode_.dropdown) {
+			// dropdown radio group (require affect_checkmarks to filter out mousemove),
+			// or plain single selection (ignores affect_checkmarks flag)
+			if (i == no_selection_index() || !entry_records_[i]->checked_) {
+				clear_checked(true);
+				if (i != no_selection_index()) {
+					entry_records_[i]->checked_ = true;
+					emit_checkmark_changed(entry_records_[i]->entry_, true);
+				}
+			}
+		}
+	}
+
 	if (selection_ == i) {
 		return;
 	}
 
-	if (selection_mode_.show_check()) {
-		if (selection_ != no_selection_index()) {
-			entry_records_[selection_]->checked_ = false;
-		}
-		entry_records_[i]->checked_ = true;
-	}
 	selection_ = i;
 	scroll_to_selection();
 
@@ -332,6 +350,57 @@ const std::string& BaseListselect::get_selected_tooltip() const {
 const Image* BaseListselect::get_selected_image() const {
 	assert(selection_ < entry_records_.size());
 	return entry_records_[selection_]->pic;
+}
+
+void BaseListselect::clear_checked(bool notify) {
+	assert(selection_mode_.show_check());
+	for (uint32_t i = 0; i < entry_records_.size(); ++i) {
+		if (entry_records_[i]->checked_) {
+			entry_records_[i]->checked_ = false;
+			if (notify) {
+				emit_checkmark_changed(entry_records_[i]->entry_, false);
+			}
+		}
+	}
+}
+
+bool BaseListselect::is_checked(uint32_t entry) const {
+	assert(selection_mode_.show_check());
+	for (const EntryRecord* er : entry_records_) {
+		if (er->entry_ == entry) {
+			return er->checked_;
+		}
+	}
+	return false;
+}
+
+bool BaseListselect::set_checked(uint32_t entry, bool newstate, bool notify) {
+	assert(selection_mode_.show_check());
+	for (EntryRecord* er : entry_records_) {
+		if (er->entry_ == entry) {
+			er->checked_ = newstate;
+			if (notify) {
+				emit_checkmark_changed(entry, newstate);
+			}
+			return true;
+		}
+	}
+	return false;
+}
+
+bool BaseListselect::toggle_checked(uint32_t entry, bool notify) {
+	assert(selection_mode_.show_check());
+	for (EntryRecord* er : entry_records_) {
+		if (er->entry_ == entry) {
+			bool newstate = !er->checked_;
+			er->checked_ = newstate;
+			if (notify) {
+				emit_checkmark_changed(entry, newstate);
+			}
+			return true;
+		}
+	}
+	return false;
 }
 
 int BaseListselect::get_lineheight_without_padding() const {
@@ -610,7 +679,7 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t /*x*/, int32_t
 			return false;
 		}
 		play_click();
-		select(y);
+		select(y, true);
 		clicked();
 
 		if  //  check if doubleclicked
@@ -649,8 +718,16 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 				return true;
 			}
 			return UI::Panel::handle_key(down, code);
-		case SDLK_ESCAPE:
 		case SDLK_RETURN:
+			if ((code.mod & KMOD_CTRL) == 0 && has_selection() &&
+			   selection_mode_.show_check() &&
+			   selection_mode_ != ListselectLayout::kShowCheck) { // not required in this case
+				// checkmark toggling
+				select(selection_index(), true);
+				return true;
+			}
+			FALLS_THROUGH;
+		case SDLK_ESCAPE:
 			if (linked_dropdown_ != nullptr && (code.mod & KMOD_CTRL) == 0) {
 				return linked_dropdown_->handle_key(down, code);
 			}
