@@ -356,11 +356,11 @@ const Image* BaseListselect::get_selected_image() const {
 
 void BaseListselect::clear_checked(bool notify) {
 	assert(selection_mode_.show_check());
-	for (uint32_t i = 0; i < entry_records_.size(); ++i) {
-		if (entry_records_[i]->checked_) {
-			entry_records_[i]->checked_ = false;
+	for (EntryRecord* er : entry_records_) {
+		if (er->checked_) {
+			er->checked_ = false;
 			if (notify) {
-				emit_checkmark_changed(entry_records_[i]->entry_, false);
+				emit_checkmark_changed(er->entry_, false);
 			}
 		}
 	}
@@ -378,29 +378,29 @@ bool BaseListselect::is_checked(uint32_t entry) const {
 
 bool BaseListselect::set_checked(uint32_t entry, bool newstate, bool notify) {
 	assert(selection_mode_.show_check());
-	for (EntryRecord* er : entry_records_) {
-		if (er->entry_ == entry) {
-			er->checked_ = newstate;
-			if (notify) {
-				emit_checkmark_changed(entry, newstate);
-			}
-			return true;
+	auto it = std::find_if(entry_records_.begin(), entry_records_.end(),
+	                       [entry] (EntryRecord* er) { return er->entry_ == entry; });
+	if (it != entry_records_.end()) {
+		(*it)->checked_ = newstate;
+		if (notify) {
+			emit_checkmark_changed(entry, newstate);
 		}
+		return true;
 	}
 	return false;
 }
 
 bool BaseListselect::toggle_checked(uint32_t entry, bool notify) {
 	assert(selection_mode_.show_check());
-	for (EntryRecord* er : entry_records_) {
-		if (er->entry_ == entry) {
-			bool newstate = !er->checked_;
-			er->checked_ = newstate;
-			if (notify) {
-				emit_checkmark_changed(entry, newstate);
-			}
-			return true;
+	auto it = std::find_if(entry_records_.begin(), entry_records_.end(),
+	                       [entry] (EntryRecord* er) { return er->entry_ == entry; });
+	if (it != entry_records_.end()) {
+		bool newstate = !(*it)->checked_;
+		(*it)->checked_ = newstate;
+		if (notify) {
+			emit_checkmark_changed(entry, newstate);
 		}
+		return true;
 	}
 	return false;
 }

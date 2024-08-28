@@ -39,7 +39,7 @@ struct ListselectLayout {
 	ListselectLayout(Checkmark c, bool d) : checkmark(c), dropdown(d) {
 	}
 
-	bool show_check() const {
+	[[nodiscard]] bool show_check() const {
 		return checkmark > Checkmark::kNone;
 	}
 
@@ -250,7 +250,7 @@ template <typename Entry> struct Listselect : public BaseListselect {
 	   : BaseListselect(parent, name, x, y, w, h, style, selection_mode) {
 	}
 
-	Notifications::Signal<Entry, bool> checkmark_changed;
+	Notifications::Signal<Entry, bool> checkmark_changed; // NOLINT: intentional shadowing
 
 	void clear() override {
 		entry_cache_.clear();
@@ -334,7 +334,7 @@ template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> 
 	   : Base(parent, name, x, y, w, h, style, selection_mode) {
 	}
 
-	Notifications::Signal<Entry&, bool> checkmark_changed;
+	Notifications::Signal<Entry&, bool> checkmark_changed; // NOLINT: intentional shadowing
 
 	void add(const std::string& name,
 	         Entry& value,
