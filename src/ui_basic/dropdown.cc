@@ -160,8 +160,6 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	list_->set_can_focus(false);
 	set_can_focus(true);
 
-	set_value();
-
 	const int serial = id_;  // Not a member variable, because when the lambda below is triggered we
 	                         // might no longer exist
 	living_dropdowns_.insert(std::make_pair(serial, this));
