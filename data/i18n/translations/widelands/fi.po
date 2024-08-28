@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-17 02:51+0000\n"
+"POT-Creation-Date: 2024-08-22 02:44+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
@@ -1843,8 +1843,8 @@ msgstr "Widelands ei käynisty, koska näytönohjain tai sen ajuri on liian vanh
 #. Font support is limited here, so do not use advanced typography *
 #: ../../../../src/graphic/gl/initialize.cc:227
 #, c-format
-msgid "The %1$u version needs to be version %2$u.%3$u or newer."
-msgstr "%1$u täytyy olla versiota %2$u.%3$u tai uudempi."
+msgid "The %1$s version needs to be version %2$u.%3$u or newer."
+msgstr ""
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.

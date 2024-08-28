@@ -313,11 +313,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:132
 msgid "Build a scout’s hut."
-msgstr ""
+msgstr "Build a scout’s hut."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:140
 msgid "Build a scout’s hut"
-msgstr ""
+msgstr "Build a scout’s hut"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:141
 msgid ""
