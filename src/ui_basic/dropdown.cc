@@ -510,10 +510,7 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_RETURN:
 			if (list_->is_visible()) {
 				set_value();
-				// Check list visibility again, set_value() might have toggled it
-				if (list_->is_visible()) {
-					toggle_list();
-				}
+				close(); // close if not already done so by set_value()
 			} else {
 				set_list_visibility(true);
 			}
