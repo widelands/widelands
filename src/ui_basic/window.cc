@@ -227,6 +227,9 @@ void Window::update_template() {
 	set_pos(Vector2i(x - get_lborder(), y - get_tborder()));
 
 	button_close_->set_pic(g_image_cache->get(window_style_info().button_close()));
+	for (Button* b : {button_close_, button_pin_, button_minimize_}) {
+		b->set_size(window_style_info().button_size(), window_style_info().button_size());
+	}
 	update_toolbar_buttons();
 
 	layout();
