@@ -379,7 +379,7 @@ bool BaseListselect::is_checked(uint32_t entry) const {
 bool BaseListselect::set_checked(uint32_t entry, bool newstate, bool notify) {
 	assert(selection_mode_.show_check());
 	auto it = std::find_if(entry_records_.begin(), entry_records_.end(),
-	                       [entry] (EntryRecord* er) { return er->entry_ == entry; });
+	                       [entry](EntryRecord* er) { return er->entry_ == entry; });
 	if (it != entry_records_.end()) {
 		(*it)->checked_ = newstate;
 		if (notify) {
@@ -393,7 +393,7 @@ bool BaseListselect::set_checked(uint32_t entry, bool newstate, bool notify) {
 bool BaseListselect::toggle_checked(uint32_t entry, bool notify) {
 	assert(selection_mode_.show_check());
 	auto it = std::find_if(entry_records_.begin(), entry_records_.end(),
-	                       [entry] (EntryRecord* er) { return er->entry_ == entry; });
+	                       [entry](EntryRecord* er) { return er->entry_ == entry; });
 	if (it != entry_records_.end()) {
 		bool newstate = !(*it)->checked_;
 		(*it)->checked_ = newstate;
