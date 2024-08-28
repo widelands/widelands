@@ -40,6 +40,12 @@ namespace UI {
 
 int BaseDropdown::next_id_ = 0;
 
+const DropdownType DropdownType::kTextual = DropdownType(DropdownType::Display::kShowText, DropdownType::Format::kTraditional);
+const DropdownType DropdownType::kTextualNarrow = DropdownType(DropdownType::Display::kShowText, DropdownType::Format::kButtonOnly);
+const DropdownType DropdownType::kPictorial = DropdownType(DropdownType::Display::kShowIcon, DropdownType::Format::kButtonOnly);
+const DropdownType DropdownType::kTextualMenu = DropdownType(DropdownType::Display::kShowText, DropdownType::Format::kMenu);
+const DropdownType DropdownType::kPictorialMenu = DropdownType(DropdownType::Display::kShowIcon, DropdownType::Format::kMenu);
+
 // Dropdowns hook into parent elements to be notified of layouting changes. We need to keep track of
 // whether a dropdown actually still exists when notified to avoid heap-use-after-free's.
 static std::map<int, BaseDropdown*> living_dropdowns_;
@@ -67,9 +73,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                name,
                x,
                y,
-               (type == DropdownType::kPictorial || type == DropdownType::kPictorialMenu) ?
-                  button_dimension :
-                  w,
+               type.display == DropdownType::Display::kShowIcon ? button_dimension : w,
                // Height only to fit the button, so we can use this in Box layout.
                base_height(button_dimension, style)),
      id_(next_id_++),
@@ -78,7 +82,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
      base_height_(base_height(button_dimension, style)),
 
      button_box_(this, style, "dropdown_button_box", 0, 0, UI::Box::Horizontal, w, get_h()),
-     push_button_(type == DropdownType::kTextual ?
+     push_button_(type.format == DropdownType::Format::kTraditional ?
                      new UI::Button(&button_box_,
                                     "dropdown_select",
                                     0,
@@ -92,11 +96,10 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                      "dropdown_label",
                      0,
                      0,
-                     type == DropdownType::kTextual       ? w - button_dimension :
-                     type == DropdownType::kTextualNarrow ? w :
-                                                            button_dimension,
+                     type.format == DropdownType::Format::kTraditional ? w - button_dimension :
+                        type.display == DropdownType::Display::kShowIcon ? button_dimension : w,
                      get_h(),
-                     type == DropdownType::kTextual ?
+                     type.format == DropdownType::Format::kTraditional ?
                         (style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
                                                             UI::ButtonStyle::kWuiSecondary) :
                         button_style,
@@ -293,7 +296,7 @@ void BaseDropdown::add(const std::string& name,
                        const bool select_this,
                        const std::string& tooltip_text,
                        const std::string& hotkey) {
-	assert(pic != nullptr || type_ != DropdownType::kPictorial);
+	assert(pic != nullptr || type_.display == DropdownType::Display::kShowText);
 	list_->add(name, value, pic, select_this, tooltip_text, hotkey);
 	if (select_this) {
 		set_value();
@@ -335,7 +338,7 @@ void BaseDropdown::select(uint32_t entry) {
 
 void BaseDropdown::set_label(const std::string& text) {
 	label_ = text;
-	if (type_ != DropdownType::kPictorial && type_ != DropdownType::kPictorialMenu) {
+	if (type_.display == DropdownType::Display::kShowText) {
 		display_button_.set_title(label_);
 	}
 }
@@ -354,7 +357,7 @@ void BaseDropdown::set_tooltip(const std::string& text) {
 
 void BaseDropdown::set_errored(const std::string& error_message) {
 	set_tooltip(format(_("%1%: %2%"), _("Error"), error_message));
-	if (type_ != DropdownType::kPictorial && type_ != DropdownType::kPictorialMenu) {
+	if (type_.display == DropdownType::Display::kShowText) {
 		set_label(_("Error"));
 	} else {
 		set_image(g_image_cache->get("images/ui_basic/different.png"));
@@ -409,7 +412,7 @@ uint32_t BaseDropdown::size() const {
 }
 
 void BaseDropdown::update() {
-	if (type_ == DropdownType::kPictorialMenu || type_ == DropdownType::kTextualMenu) {
+	if (type_.format >= DropdownType::Format::kMenu) {
 		// Menus never change their main image and text
 		return;
 	}
@@ -419,7 +422,7 @@ void BaseDropdown::update() {
                                /** TRANSLATORS: Selection in Dropdown menus. */
                                pgettext("dropdown", "Not Selected");
 
-	if (type_ != DropdownType::kPictorial) {
+	if (type_.display == DropdownType::Display::kShowText) {
 		if (label_.empty()) {
 			display_button_.set_title(name);
 		} else {
@@ -471,14 +474,13 @@ void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {
 			                       display_button_.get_y() + (display_button_.get_h() * 2 / 5)));
 		}
 
-		if ((type_ == DropdownType::kPictorialMenu || type_ == DropdownType::kTextualMenu) &&
-		    !has_selection() && !list_->empty()) {
+		if (type_.format >= DropdownType::Format::kMenu && !has_selection() && !list_->empty()) {
 			select(0);
 		}
 	} else {
 		disable_textinput();
 	}
-	if (type_ != DropdownType::kTextual) {
+	if (type_.format != DropdownType::Format::kTraditional) {
 		display_button_.set_perm_pressed(list_->is_visible());
 	}
 	// Make sure that the list covers and deactivates the elements below it

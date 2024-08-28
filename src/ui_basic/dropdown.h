@@ -47,13 +47,36 @@ struct NoteDropdown {
 	}
 };
 
-/// The narrow textual dropdown omits the extra push button.
-/// Use kPictorialMenu if you want to trigger an action without changing the menu button.
-/// kTextual: Text of selected entry and drop-down arrow
-/// kTextualNarrow: Text of selected entry
-/// kPictorial: Icon of the selected entry
-/// kPictorialMenu: Displays \c label when not enough space (?)
-enum class DropdownType { kTextual, kTextualNarrow, kPictorial, kPictorialMenu, kTextualMenu };
+struct DropdownType {
+	enum class Display { kShowText, kShowIcon };
+	enum class Format {
+		kTraditional,   // selected entry display separate from drop-down arrow push button
+		kButtonOnly,    // selected entry displayed on button, no separate drop-down arrow
+		kMenu,          // selected entry not displayed; use to trigger actions without changing the button text or icon
+		// kCheckmark,     // like kMenu, but with checkmark next to the selected entry in the dropdown
+		// kMultiSelect    // like kCheckmark, but checkmark of each entry is toggled independently
+	};
+
+	Display display;
+	Format format;
+
+	DropdownType(Display d, Format f)
+	   : display(d),
+	     format(f) {
+		assert(!(d == Display::kShowIcon && f == Format::kTraditional)); // pointless combination
+	}
+
+	bool operator == (const DropdownType &other) const {
+		return (display == other.display) && (format == other.format);
+	}
+
+	// ----- PRESETS -----
+	static const DropdownType kTextual;       // Display::kShowText, Format::kTraditional
+	static const DropdownType kTextualNarrow; // Display::kShowText, Format::kButtonOnly
+	static const DropdownType kPictorial;     // Display::kShowIcon, Format::kButtonOnly
+	static const DropdownType kTextualMenu;   // Display::kShowText, Format::kMenu
+	static const DropdownType kPictorialMenu; // Display::kShowIcon, Format::kMenu
+};
 
 /// Implementation for a dropdown menu that lets the user select a value.
 class BaseDropdown : public Panel {
