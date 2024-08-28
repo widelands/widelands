@@ -36,27 +36,28 @@ struct ListselectLayout {
 	Checkmark checkmark;
 	bool dropdown{false};
 
-	ListselectLayout(Checkmark c, bool d)
-	  : checkmark(c),
-	    dropdown(d) {}
+	ListselectLayout(Checkmark c, bool d) : checkmark(c), dropdown(d) {
+	}
 
 	bool show_check() const {
 		return checkmark > Checkmark::kNone;
 	}
 
-	bool operator == (const ListselectLayout &other) const {
+	bool operator==(const ListselectLayout& other) const {
 		return (checkmark == other.checkmark) && (dropdown == other.dropdown);
 	}
 
-	bool operator != (const ListselectLayout &other) const {
+	bool operator!=(const ListselectLayout& other) const {
 		return (checkmark != other.checkmark) || (dropdown != other.dropdown);
 	}
 
 	// ----- PRESETS -----
 	static const ListselectLayout kPlain;      // Highlight the selected element
-	static const ListselectLayout kDropdown;   // When the mouse moves, instantly highlight the element that the mouse hovers over
+	static const ListselectLayout kDropdown;   // When the mouse moves, instantly highlight the
+	                                           // element that the mouse hovers over
 	static const ListselectLayout kShowCheck;  // Show a green arrow in front of the selected element
-	static const ListselectLayout kMultiCheck; // Checkmark for each element can be toggled independently
+	static const ListselectLayout
+	   kMultiCheck;  // Checkmark for each element can be toggled independently
 };
 
 /**
@@ -118,7 +119,9 @@ struct BaseListselect : public Panel {
 	}
 
 	enum class SnapSelectionToEnabled { kNo, kUp, kDown };
-	void select(uint32_t i, SnapSelectionToEnabled snap = SnapSelectionToEnabled::kNo, bool affect_checkmarks = false);
+	void select(uint32_t i,
+	            SnapSelectionToEnabled snap = SnapSelectionToEnabled::kNo,
+	            bool affect_checkmarks = false);
 	void select(uint32_t i, bool affect_checkmarks) {
 		select(i, SnapSelectionToEnabled::kNo, affect_checkmarks);
 	}

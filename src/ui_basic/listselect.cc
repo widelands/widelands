@@ -39,10 +39,14 @@ constexpr int kIndentStrength = 20;
 
 namespace UI {
 
-const ListselectLayout ListselectLayout::kPlain = ListselectLayout(ListselectLayout::Checkmark::kNone, false);
-const ListselectLayout ListselectLayout::kDropdown = ListselectLayout(ListselectLayout::Checkmark::kNone, true);
-const ListselectLayout ListselectLayout::kShowCheck = ListselectLayout(ListselectLayout::Checkmark::kSingleSelect, false);
-const ListselectLayout ListselectLayout::kMultiCheck = ListselectLayout(ListselectLayout::Checkmark::kMultiSelect, false);
+const ListselectLayout ListselectLayout::kPlain =
+   ListselectLayout(ListselectLayout::Checkmark::kNone, false);
+const ListselectLayout ListselectLayout::kDropdown =
+   ListselectLayout(ListselectLayout::Checkmark::kNone, true);
+const ListselectLayout ListselectLayout::kShowCheck =
+   ListselectLayout(ListselectLayout::Checkmark::kSingleSelect, false);
+const ListselectLayout ListselectLayout::kMultiCheck =
+   ListselectLayout(ListselectLayout::Checkmark::kMultiSelect, false);
 
 BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
                                          uint32_t init_entry,
@@ -130,9 +134,7 @@ inline const UI::TableStyleInfo& BaseListselect::table_style() const {
 	return g_style_manager->table_style(panel_style_);
 }
 inline const UI::PanelStyleInfo* BaseListselect::background_style() const {
-	return selection_mode_.dropdown ?
-             g_style_manager->dropdown_style(panel_style_) :
-             nullptr;
+	return selection_mode_.dropdown ? g_style_manager->dropdown_style(panel_style_) : nullptr;
 }
 
 /**
@@ -408,8 +410,7 @@ int BaseListselect::get_lineheight_without_padding() const {
 }
 
 int BaseListselect::get_lineheight() const {
-	return get_lineheight_without_padding() +
-	       (selection_mode_.dropdown ? 2 * kMargin : kMargin);
+	return get_lineheight_without_padding() + (selection_mode_.dropdown ? 2 * kMargin : kMargin);
 }
 
 uint32_t BaseListselect::get_eff_w() const {
@@ -478,8 +479,7 @@ Redraw the listselect box
 */
 void BaseListselect::draw(RenderTarget& dst) {
 	// draw text lines
-	const int eff_h =
-	   selection_mode_.dropdown ? get_inner_h() - kMargin : get_inner_h();
+	const int eff_h = selection_mode_.dropdown ? get_inner_h() - kMargin : get_inner_h();
 	uint32_t idx = scrollpos_ / get_lineheight();
 	int y = 1 + idx * get_lineheight() - scrollpos_;
 
@@ -524,8 +524,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		Vector2i point(selection_mode_.dropdown ? 3 : 1, y);
 
-		const uint32_t w_reduction =
-		   selection_mode_.dropdown ? scrollbar_.is_enabled() ? 4 : 5 : 2;
+		const uint32_t w_reduction = selection_mode_.dropdown ? scrollbar_.is_enabled() ? 4 : 5 : 2;
 		assert(w_reduction <= get_eff_w());
 		uint32_t maxw = get_eff_w() - w_reduction;
 
@@ -557,11 +556,14 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		// Now draw pictures
 		if (er.pic != nullptr) {
-			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ?
-                              get_eff_w() - chkw - er.pic->width() - (max_pic_width_ - er.pic->width()) / 2 - 1 - kIndentStrength * er.indent :
-                              chkw + kIndentStrength * er.indent + (max_pic_width_ - er.pic->width()) / 2 + 1,
-			                  y + (lineheight_unpadded - er.pic->height()) / 2),
-				 er.pic);
+			dst.blit(
+			   Vector2i(
+			      UI::g_fh->fontset()->is_rtl() ?
+                  get_eff_w() - chkw - er.pic->width() - (max_pic_width_ - er.pic->width()) / 2 -
+			            1 - kIndentStrength * er.indent :
+                  chkw + kIndentStrength * er.indent + (max_pic_width_ - er.pic->width()) / 2 + 1,
+			      y + (lineheight_unpadded - er.pic->height()) / 2),
+			   er.pic);
 		}
 
 		// Fix vertical position for mixed font heights
@@ -719,9 +721,8 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return UI::Panel::handle_key(down, code);
 		case SDLK_RETURN:
-			if ((code.mod & KMOD_CTRL) == 0 && has_selection() &&
-			   selection_mode_.show_check() &&
-			   selection_mode_ != ListselectLayout::kShowCheck) { // not required in this case
+			if ((code.mod & KMOD_CTRL) == 0 && has_selection() && selection_mode_.show_check() &&
+			    selection_mode_ != ListselectLayout::kShowCheck) {  // not required in this case
 				// checkmark toggling
 				select(selection_index(), true);
 				return true;
