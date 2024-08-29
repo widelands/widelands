@@ -21,6 +21,7 @@ run(function()
    -- Make the worker (file animations) walk out of the building and idle for a few times
    sleep(5 * 40000)
 
-   print("# All Tests passed.")
+   -- print("# All Tests passed.")
+   print("ERROR")
    wl.ui.MapView():close()
 end)
