@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-17 02:51+0000\n"
+"POT-Creation-Date: 2024-08-29 02:47+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2024\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -1837,8 +1837,8 @@ msgstr "Widelands kann nich warken, wiel dien Bill-Utgaav-Driever to oll is."
 #. Font support is limited here, so do not use advanced typography *
 #: ../../../../src/graphic/gl/initialize.cc:227
 #, c-format
-msgid "The %1$u version needs to be version %2$u.%3$u or newer."
-msgstr "De %1$u mutt de Versioon %2$u.%3$u of nejer hebben."
+msgid "The %1$s version needs to be version %2$u.%3$u or newer."
+msgstr "De %1$s mutt de Versioon %2$u.%3$u of nejer hebben."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -4280,7 +4280,7 @@ msgid "Select the entire text"
 msgstr "De hele Text utkören"
 
 #: ../../../../src/ui_basic/window.cc:80
-#: ../../../../src/ui_basic/window.cc:838
+#: ../../../../src/ui_basic/window.cc:862
 #: ../../../../src/ui_fsmenu/about.cc:41
 #: ../../../../src/ui_fsmenu/crash_report.cc:71
 #: ../../../../src/ui_fsmenu/crash_report.cc:161
@@ -4290,43 +4290,43 @@ msgid "Close"
 msgstr "Dichtmaken"
 
 #: ../../../../src/ui_basic/window.cc:147
-#: ../../../../src/ui_basic/window.cc:822
+#: ../../../../src/ui_basic/window.cc:846
 msgid "Minimize"
 msgstr "Lütt maken"
 
 #: ../../../../src/ui_basic/window.cc:147
-#: ../../../../src/ui_basic/window.cc:822
+#: ../../../../src/ui_basic/window.cc:846
 msgid "Restore"
 msgstr "Weer groot maken"
 
 #: ../../../../src/ui_basic/window.cc:152
-#: ../../../../src/ui_basic/window.cc:832
+#: ../../../../src/ui_basic/window.cc:856
 #: ../../../../src/wui/info_panel.cc:204
 msgid "Pin"
 msgstr "Faststeken"
 
 #: ../../../../src/ui_basic/window.cc:152
-#: ../../../../src/ui_basic/window.cc:832
+#: ../../../../src/ui_basic/window.cc:856
 msgid "Unpin"
 msgstr "Lösssteken"
 
-#: ../../../../src/ui_basic/window.cc:823
+#: ../../../../src/ui_basic/window.cc:847
 msgid "Minimize the window"
 msgstr "Fenster lütt maken"
 
-#: ../../../../src/ui_basic/window.cc:823
+#: ../../../../src/ui_basic/window.cc:847
 msgid "Unminimize the window"
 msgstr "Fenster groot maken"
 
-#: ../../../../src/ui_basic/window.cc:833
+#: ../../../../src/ui_basic/window.cc:857
 msgid "Pin the window"
 msgstr "Fenster faststeken"
 
-#: ../../../../src/ui_basic/window.cc:833
+#: ../../../../src/ui_basic/window.cc:857
 msgid "Unpin the window"
 msgstr "Fenster lösssteken"
 
-#: ../../../../src/ui_basic/window.cc:838
+#: ../../../../src/ui_basic/window.cc:862
 msgid "Close the window"
 msgstr "Fenster dichtmaken"
 
@@ -4914,14 +4914,14 @@ msgstr "%1% / %2%"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1445
 #, c-format
 msgid "‘%s’"
-msgstr ""
+msgstr "»%s«"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1453
 #, c-format
 msgid ""
 "The add-on ‘%s’ may not be uploaded to the server because the following "
 "filenames contained in the add-on are not allowed:"
-msgstr ""
+msgstr "Dat Verwiedern »%s« düür nich to de Server upladen worden, denn deese Dateinaamen, wat daar enthollen sünd, sünd nich verlöövt:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1457
 msgid ""
@@ -4929,7 +4929,7 @@ msgid ""
 "simple punctuation (period, hyphen, and underscore; not multiple periods). "
 "Other characters such as whitespace are not permitted. Filenames may not "
 "exceed 80 characters."
-msgstr ""
+msgstr "Dateinaamen düren nix as alphanumeriske Bookstavens (A-Z, a-z, 0-9) un slichte Satztekens (Punkt, Binnestreek un Unnerstreek; nich mehr as een Punkt) enhollen. Anner Bookstavens, to’n Bispööl Leegtekens, sünd nich verlöövt. Dateinaamen düren nich langer as 80 Bookstavens wesen."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1472
 #, c-format
@@ -10112,7 +10112,7 @@ msgstr "Of Arbeidsgewesten, wat övernanner liggen, wiest worden sallen, wenn du
 
 #: ../../../../src/wui/interactive_player.cc:486
 msgid "No current objectives"
-msgstr ""
+msgstr "Keene stedenwies Upgaven"
 
 #: ../../../../src/wui/interactive_player.cc:502
 #, c-format

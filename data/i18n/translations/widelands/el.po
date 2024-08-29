@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-17 02:51+0000\n"
+"POT-Creation-Date: 2024-08-29 02:47+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Alexandros Koutroulis, 2024\n"
 "Language-Team: Greek (http://app.transifex.com/widelands/widelands/language/el/)\n"
@@ -1838,8 +1838,8 @@ msgstr "Το Widelands δεν θα λειτουργήσει καθώς ο οδη
 #. Font support is limited here, so do not use advanced typography *
 #: ../../../../src/graphic/gl/initialize.cc:227
 #, c-format
-msgid "The %1$u version needs to be version %2$u.%3$u or newer."
-msgstr "Η έκδοση του  %1$u χρειάζεται να είναι %2$u.%3$u ή νεότερη."
+msgid "The %1$s version needs to be version %2$u.%3$u or newer."
+msgstr ""
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -4281,7 +4281,7 @@ msgid "Select the entire text"
 msgstr "Επέλεξε όλο το κείμενο"
 
 #: ../../../../src/ui_basic/window.cc:80
-#: ../../../../src/ui_basic/window.cc:838
+#: ../../../../src/ui_basic/window.cc:862
 #: ../../../../src/ui_fsmenu/about.cc:41
 #: ../../../../src/ui_fsmenu/crash_report.cc:71
 #: ../../../../src/ui_fsmenu/crash_report.cc:161
@@ -4291,43 +4291,43 @@ msgid "Close"
 msgstr "Κλείσιμο"
 
 #: ../../../../src/ui_basic/window.cc:147
-#: ../../../../src/ui_basic/window.cc:822
+#: ../../../../src/ui_basic/window.cc:846
 msgid "Minimize"
 msgstr "Ελαχιστοποίηση"
 
 #: ../../../../src/ui_basic/window.cc:147
-#: ../../../../src/ui_basic/window.cc:822
+#: ../../../../src/ui_basic/window.cc:846
 msgid "Restore"
 msgstr "Επαναφορά"
 
 #: ../../../../src/ui_basic/window.cc:152
-#: ../../../../src/ui_basic/window.cc:832
+#: ../../../../src/ui_basic/window.cc:856
 #: ../../../../src/wui/info_panel.cc:204
 msgid "Pin"
 msgstr "Καρφίτσωμα"
 
 #: ../../../../src/ui_basic/window.cc:152
-#: ../../../../src/ui_basic/window.cc:832
+#: ../../../../src/ui_basic/window.cc:856
 msgid "Unpin"
 msgstr "Αποκαρφίτσωμα"
 
-#: ../../../../src/ui_basic/window.cc:823
+#: ../../../../src/ui_basic/window.cc:847
 msgid "Minimize the window"
 msgstr "Ελαχιστοποίησε το παράθυρο"
 
-#: ../../../../src/ui_basic/window.cc:823
+#: ../../../../src/ui_basic/window.cc:847
 msgid "Unminimize the window"
 msgstr "Επανέφερε το παράθυρο"
 
-#: ../../../../src/ui_basic/window.cc:833
+#: ../../../../src/ui_basic/window.cc:857
 msgid "Pin the window"
 msgstr "Καρφίτσωσε το παράθυρο"
 
-#: ../../../../src/ui_basic/window.cc:833
+#: ../../../../src/ui_basic/window.cc:857
 msgid "Unpin the window"
 msgstr "Αποκαρφίτσωσε το παράθυρο"
 
-#: ../../../../src/ui_basic/window.cc:838
+#: ../../../../src/ui_basic/window.cc:862
 msgid "Close the window"
 msgstr "Κλείσε το παράθυρο"
 

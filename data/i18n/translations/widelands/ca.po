@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-17 02:51+0000\n"
+"POT-Creation-Date: 2024-08-29 02:47+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Juanjo, 2015-2024\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
@@ -1835,8 +1835,8 @@ msgstr "El Widelands no funciona perquè els controladors gràfics de la màquin
 #. Font support is limited here, so do not use advanced typography *
 #: ../../../../src/graphic/gl/initialize.cc:227
 #, c-format
-msgid "The %1$u version needs to be version %2$u.%3$u or newer."
-msgstr "La versió de %1$u ha de ser %2$u.%3$u o superior."
+msgid "The %1$s version needs to be version %2$u.%3$u or newer."
+msgstr "La versió %1$s ha de ser %2$u.%3$u o superior."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -4278,7 +4278,7 @@ msgid "Select the entire text"
 msgstr "Selecciona tot el text"
 
 #: ../../../../src/ui_basic/window.cc:80
-#: ../../../../src/ui_basic/window.cc:838
+#: ../../../../src/ui_basic/window.cc:862
 #: ../../../../src/ui_fsmenu/about.cc:41
 #: ../../../../src/ui_fsmenu/crash_report.cc:71
 #: ../../../../src/ui_fsmenu/crash_report.cc:161
@@ -4288,43 +4288,43 @@ msgid "Close"
 msgstr "Tanca"
 
 #: ../../../../src/ui_basic/window.cc:147
-#: ../../../../src/ui_basic/window.cc:822
+#: ../../../../src/ui_basic/window.cc:846
 msgid "Minimize"
 msgstr "Minimitza"
 
 #: ../../../../src/ui_basic/window.cc:147
-#: ../../../../src/ui_basic/window.cc:822
+#: ../../../../src/ui_basic/window.cc:846
 msgid "Restore"
 msgstr "Restaura"
 
 #: ../../../../src/ui_basic/window.cc:152
-#: ../../../../src/ui_basic/window.cc:832
+#: ../../../../src/ui_basic/window.cc:856
 #: ../../../../src/wui/info_panel.cc:204
 msgid "Pin"
 msgstr "Enganxa"
 
 #: ../../../../src/ui_basic/window.cc:152
-#: ../../../../src/ui_basic/window.cc:832
+#: ../../../../src/ui_basic/window.cc:856
 msgid "Unpin"
 msgstr "Desenganxa"
 
-#: ../../../../src/ui_basic/window.cc:823
+#: ../../../../src/ui_basic/window.cc:847
 msgid "Minimize the window"
 msgstr "Minimitza la finestra"
 
-#: ../../../../src/ui_basic/window.cc:823
+#: ../../../../src/ui_basic/window.cc:847
 msgid "Unminimize the window"
 msgstr "Desplega la finestra"
 
-#: ../../../../src/ui_basic/window.cc:833
+#: ../../../../src/ui_basic/window.cc:857
 msgid "Pin the window"
 msgstr "Fixa la finestra"
 
-#: ../../../../src/ui_basic/window.cc:833
+#: ../../../../src/ui_basic/window.cc:857
 msgid "Unpin the window"
 msgstr "Desfixa la finestra"
 
-#: ../../../../src/ui_basic/window.cc:838
+#: ../../../../src/ui_basic/window.cc:862
 msgid "Close the window"
 msgstr "Tanca la finestra"
 
@@ -4912,14 +4912,14 @@ msgstr "%1% / %2%"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1445
 #, c-format
 msgid "‘%s’"
-msgstr ""
+msgstr "«%s»"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1453
 #, c-format
 msgid ""
 "The add-on ‘%s’ may not be uploaded to the server because the following "
 "filenames contained in the add-on are not allowed:"
-msgstr ""
+msgstr "El complement «%s» potser no s'ha carregat al servidor perquè aquests fitxers no estan permesos:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1457
 msgid ""
@@ -4927,7 +4927,7 @@ msgid ""
 "simple punctuation (period, hyphen, and underscore; not multiple periods). "
 "Other characters such as whitespace are not permitted. Filenames may not "
 "exceed 80 characters."
-msgstr ""
+msgstr "Els fitxers només poden contenir caràcters alfanumèrics (A-Z, a-z, 0-9) i signes de puntuació simple(punt, guió i ratlla baixa, però no es permeten punts suspensius). Altres caràcters com els espais no es permeten. Els noms dels fitxers no poden excedir els 80 caràcters."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1472
 #, c-format
@@ -10110,7 +10110,7 @@ msgstr "Mostra o no si les àrees de treball se sobreposen quan se situa un nou 
 
 #: ../../../../src/wui/interactive_player.cc:486
 msgid "No current objectives"
-msgstr ""
+msgstr "Ara no hi ha objectius"
 
 #: ../../../../src/wui/interactive_player.cc:502
 #, c-format
