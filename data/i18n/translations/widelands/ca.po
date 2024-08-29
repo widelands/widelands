@@ -1836,7 +1836,7 @@ msgstr "El Widelands no funciona perquè els controladors gràfics de la màquin
 #: ../../../../src/graphic/gl/initialize.cc:227
 #, c-format
 msgid "The %1$s version needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "La versió %1$s ha de ser %2$u.%3$u o superior."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
