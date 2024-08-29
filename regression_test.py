@@ -68,6 +68,13 @@ def colorize_log(text):
             return colorize(text, color)
     return text
 
+group_start = '\n'
+group_end = ''
+if os.getenv('GITHUB_ACTION'):
+    group_start = '\n::group::'
+    group_end = '\n::endgroup::\n'
+
+
 class WidelandsTestCase():
     do_use_random_directory = True
     path_to_widelands_binary = None
@@ -274,6 +281,18 @@ class WidelandsTestCase():
                 self.fail("FAILED", "Not all tests pass.", stdout_filename)
                 return
             self.step_success(stdout_filename)
+
+    def print_report(self):
+        print(f'{colorize(self.result, self.get_result_color())}: {self.test_script}\n')
+        print(self.report_header)
+        print(group_start, end='')
+        print(colorize("stdout:", info_color))
+        for stdout_fn in self.outputs:
+            with open(stdout_fn, "r") as stdout:
+                for line in stdout:
+                    line = colorize_log(line)
+                    print(line, end='')
+        print(group_end, end='')
 
 
 # For parallel execution of tests
@@ -502,28 +521,13 @@ def main():
         colorize('---------------------------------------------------------------------------',
             separator_color) + '\n'
 
-    group_start = '\n'
-    group_end = ''
-    if os.getenv('GITHUB_ACTION'):
-        group_start = '\n::group::'
-        group_end = '\n::endgroup::\n'
-
     nr_errors = 0
     results = dict()
     for test_case in test_cases:
         # Skipped test cases are logged, but don't count as failure
         if test_case.report_header != None:
             print(separator)
-            print(f'{colorize(test_case.result, test_case.get_result_color())}: {test_case.test_script}\n')
-            print(test_case.report_header)
-            print(group_start, end='')
-            print(colorize("stdout:", info_color))
-            for stdout_fn in test_case.outputs:
-                with open(stdout_fn, "r") as stdout:
-                    for line in stdout:
-                        line = colorize_log(line)
-                        print(line, end='')
-            print(group_end, end='')
+            test_case.print_report()
             if test_case.result in results.keys():
                 results[test_case.result].append(test_case.test_script)
             else:
