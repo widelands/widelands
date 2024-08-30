@@ -293,6 +293,13 @@ void BaseListselect::select(uint32_t i, SnapSelectionToEnabled snap, bool affect
 			// or plain single selection (ignores affect_checkmarks flag)
 			if (i == no_selection_index() || !entry_records_[i]->checked_) {
 				clear_checked(true);
+
+				// clear current selection that is filtered out by Dropdown,
+				// but not if it is about to be re-selected
+				if (linked_dropdown_ != nullptr && linked_dropdown_->is_filtered()) {
+					linked_dropdown_->clear_filtered_out_checkmarks(i);
+				}
+
 				if (i != no_selection_index()) {
 					entry_records_[i]->checked_ = true;
 					emit_checkmark_changed(entry_records_[i]->entry_, true);

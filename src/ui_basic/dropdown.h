@@ -202,6 +202,8 @@ public:
 
 	std::string get_filter_text();
 
+	virtual void clear_filtered_out_checkmarks(uint32_t) = 0;
+
 protected:
 	/// Add an element to the list
 	/// \param name         the display name of the entry
@@ -398,6 +400,25 @@ public:
 		// MultiSelect, which restores checkmark state during repopulation
 		if (type_.format != DropdownType::Format::kMultiSelect) {
 			select(selected_entry_);
+		}
+	}
+
+	void clear_filtered_out_checkmarks(uint32_t sel) override {
+		assert(type_.format == DropdownType::Format::kCheckmark);
+		if (no_filter_matches_) {
+			return;
+		}
+
+		Entry sel_entry{};
+		if (sel != BaseListselect::no_selection_index()) {
+			sel_entry = *filtered_entries[sel];
+		}
+
+		auto it = std::find_if(unfiltered_entries.begin(), unfiltered_entries.end(),
+			               [sel_entry](auto& x) { return x.checked && x.value != sel_entry; });
+		if (it != unfiltered_entries.end()) {
+			it->checked = false;
+			checkmark_changed(it->value, false);
 		}
 	}
 
