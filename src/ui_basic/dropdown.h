@@ -259,9 +259,9 @@ private:
 	/// Updates the buttons
 	void update();
 
-	/// Updates the title and tooltip of the display button, closes the dropdown and triggers a
-	/// 'selected' signal.
-	void set_value();
+	/// Updates the title and tooltip of the display button, closes the dropdown (unless
+	/// keep_open is set) and triggers a 'selected' signal.
+	void set_value(bool keep_open = false);
 	/// Toggles the dropdown list on and off and sends a notification if the list is visible
 	/// afterwards.
 	void toggle_list();

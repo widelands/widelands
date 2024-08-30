@@ -162,7 +162,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	}
 	button_box_.set_size(w, get_h());
 	list_->clicked.connect([this]() {
-		set_value();
+		set_value(type_.format >= DropdownType::Format::kCheckmark);
 		clear_filter();
 	});
 
@@ -483,12 +483,14 @@ void BaseDropdown::update() {
 	}
 }
 
-void BaseDropdown::set_value() {
+void BaseDropdown::set_value(bool keep_open) {
 	if (list_->has_selection()) {
 		current_selection_ = list_->selection_index();
 		save_selected_entry(current_selection_);
 		update();
-		close();
+		if (!keep_open) {
+			close();
+		}
 		selected();
 	}
 }
@@ -560,13 +562,9 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 			case SDLK_RETURN:
 				if (list_->is_visible()) {
 					if (type_.format >= DropdownType::Format::kCheckmark) {
-						if (list_->has_selection()) {
-							current_selection_ = list_->selection_index();
-							save_selected_entry(current_selection_);
-							list_->select(current_selection_, true); // set checkmark
-							selected();
-							clear_filter();
-						}
+						list_->select(list_->selection_index(), true); // set checkmark
+						set_value(true); // keep open
+						clear_filter();
 					} else {
 						set_value();
 						close(); // close if not already done so by set_value()
