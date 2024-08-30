@@ -721,8 +721,8 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return UI::Panel::handle_key(down, code);
 		case SDLK_RETURN:
-			if ((code.mod & KMOD_CTRL) == 0 && has_selection() && selection_mode_.show_check() &&
-			    selection_mode_ != ListselectLayout::kShowCheck) {  // not required in this case
+			if ((code.mod & KMOD_CTRL) == 0 && has_selection() &&
+			    selection_mode_ == ListselectLayout::kMultiCheck) {
 				// checkmark toggling
 				select(selection_index(), true);
 				return true;
