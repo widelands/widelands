@@ -217,7 +217,9 @@ protected:
 	         const Image* pic,
 	         bool select_this,
 	         const std::string& tooltip_text,
-	         const std::string& hotkey);
+	         const std::string& hotkey,
+	         const unsigned indent = 0,
+	         const bool enable = true);
 
 	/// \return the index of the selected element
 	uint32_t get_selected() const;
@@ -246,6 +248,7 @@ protected:
 	std::vector<Recti> focus_overlay_rects() override;
 
 	std::string current_filter_;
+	bool no_filter_matches_{false};
 
 private:
 	static void layout_if_alive(int);
@@ -358,6 +361,7 @@ public:
 			// Adapt checkmark_changed signal from underlying listselect
 			BaseDropdown::connect_checkmark_changed(
 			    [this](uint32_t idx, bool newstate) {
+				assert(!no_filter_matches_); // entry is disabled, should not respond to input
 				Entry entry = *filtered_entries[idx];
 
 				// update state stored in unfiltered
@@ -387,6 +391,7 @@ public:
 			return;
 		}
 		current_filter_.clear();
+		no_filter_matches_ = false;
 
 		restore_filtered_list();
 		// re-select the selected entry after clear & repopulate; excludes
@@ -422,7 +427,7 @@ public:
 	         const std::string& hotkey = std::string()) {
 		filtered_entries.push_back(std::unique_ptr<Entry>(new Entry(value)));
 		unfiltered_entries.push_back({name, value, pic, tooltip_text, hotkey, select_this && (type_.format >= DropdownType::Format::kCheckmark)});
-		BaseDropdown::add(name, size(), pic, select_this, tooltip_text, hotkey);
+		BaseDropdown::add(name, size(), pic, select_this, tooltip_text, hotkey, 0, true);
 	}
 
 	/// \return the selected element
@@ -555,7 +560,7 @@ private:
 	                          const std::string& tooltip_text = std::string(),
 	                          const std::string& hotkey = std::string()) {
 		filtered_entries.push_back(std::unique_ptr<Entry>(new Entry(value)));
-		BaseDropdown::add(name, size(), pic, select_this, tooltip_text, hotkey);
+		BaseDropdown::add(name, size(), pic, select_this, tooltip_text, hotkey, 0, true);
 	}
 	bool check_hotkey_match(const std::string& input_text) {
 		for (auto& x : unfiltered_entries) {
@@ -602,28 +607,27 @@ private:
 		clear_filtered_list();
 		add_matching_entries();
 
+		no_filter_matches_ = filtered_entries.empty();
+		if (no_filter_matches_) {
+			add_no_match_entry();
+		}
+
 		// highlight currently selected entry if it is in the filtered list
 		if (type_.format < DropdownType::Format::kMenu || type_.format == DropdownType::Format::kCheckmark) {
 			select(selected_entry_);
 		}
 
-		if (filtered_entries.empty()) {
-			add_no_match_entry();
-		}
 		// force list to stay open even if mouse is now away due to smaller
 		// dropdown list because of applied filter
 		set_list_visibility(true);
 	}
 
 	void add_no_match_entry() {
-		// re-add initially selected entry with adapted texts to inform user
-		for (auto& x : unfiltered_entries) {
-			if (x.value == selected_entry_) {
-				const Image* empty_icon =
-				   x.img == nullptr ? nullptr : g_image_cache->get("images/wui/editor/no_ware.png");
-				add_to_filtered_list("", x.value, empty_icon, false, _("No matches"));
-			}
-		}
+		const Image* empty_icon = (type_.display == DropdownType::Display::kShowText) ?
+		   nullptr : g_image_cache->get("images/wui/editor/no_ware.png");
+		BaseDropdown::add(_("No matches"), 0, empty_icon, false,
+		                  /** TRANSLATORS: Tooltip shown when filtering a dropdown menu yields no matches. */
+		                  "No dropdown entries matched the given filter", std::string(), 0, false);
 	}
 
 	void add_matching_entries() {

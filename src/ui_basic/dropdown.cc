@@ -305,15 +305,17 @@ void BaseDropdown::add(const std::string& name,
                        const Image* pic,
                        const bool select_this,
                        const std::string& tooltip_text,
-                       const std::string& hotkey) {
+                       const std::string& hotkey,
+                       const unsigned indent,
+                       const bool enable) {
 	assert(pic != nullptr || type_.display == DropdownType::Display::kShowText);
 	if (type_.format == DropdownType::Format::kMultiSelect) {
-		list_->add(name, value, pic, false, tooltip_text, hotkey);
+		list_->add(name, value, pic, false, tooltip_text, hotkey, indent, enable);
 		if (select_this) {
 			set_checked(size()-1, true, false);
 		}
 	} else {
-		list_->add(name, value, pic, select_this, tooltip_text, hotkey);
+		list_->add(name, value, pic, select_this, tooltip_text, hotkey, indent, enable);
 		if (select_this) {
 			set_value();
 		}
@@ -611,7 +613,7 @@ void BaseDropdown::enable_textinput() {
 }
 
 std::string BaseDropdown::get_filter_text() {
-	return current_filter_;
+	return no_filter_matches_ ? "" : current_filter_;
 }
 
 }  // namespace UI
