@@ -389,7 +389,11 @@ public:
 		current_filter_.clear();
 
 		restore_filtered_list();
-		select(selected_entry_);
+		// re-select the selected entry after clear & repopulate; excludes
+		// MultiSelect, which restores checkmark state during repopulation
+		if (type_.format != DropdownType::Format::kMultiSelect) {
+			select(selected_entry_);
+		}
 	}
 
 	bool handle_textinput(const std::string& input_text) override {
@@ -597,6 +601,11 @@ private:
 	void apply_filter() override {
 		clear_filtered_list();
 		add_matching_entries();
+
+		// highlight currently selected entry if it is in the filtered list
+		if (type_.format < DropdownType::Format::kMenu || type_.format == DropdownType::Format::kCheckmark) {
+			select(selected_entry_);
+		}
 
 		if (filtered_entries.empty()) {
 			add_no_match_entry();
