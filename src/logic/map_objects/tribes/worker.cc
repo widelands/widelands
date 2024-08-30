@@ -754,10 +754,10 @@ bool Worker::run_walk(Game& game, State& state, const Action& action) {
 			forceonlast = true;
 		}
 	}
-	if (!dest && ((action.iparam1 & Action::walkCoords) != 0)) {
+	if (!dest.valid() && ((action.iparam1 & Action::walkCoords) != 0)) {
 		dest = state.coords;
 	}
-	if (!dest) {
+	if (!dest.valid()) {
 		send_signal(game, "fail");
 		pop_task(game);
 		return true;
@@ -1143,6 +1143,17 @@ bool Worker::run_playsound(Game& game, State& state, const Action& action) {
 }
 
 /**
+ * Call a Lua function.
+ */
+bool Worker::run_script(Game& game, State& state, const Action& action) {
+	MapObjectProgram::do_run_script(game.lua(), this, action.sparam1);
+
+	++state.ivar1;
+	schedule_act(game, Duration(10));
+	return true;
+}
+
+/**
  * If we are currently carrying some ware ware, hand it off to the currently
  * selected immovable (\ref objvar1) for construction.
  */
@@ -1317,6 +1328,8 @@ void Worker::set_economy(Economy* const economy, WareWorker type) {
 			   owner().tribe().worker_index(descr().name()), 1, ware_economy_);
 		}
 	} break;
+	default:
+		NEVER_HERE();
 	}
 }
 

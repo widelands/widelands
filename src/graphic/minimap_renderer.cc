@@ -205,7 +205,7 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 			Widelands::Coords starting_pos;
 			for (uint32_t p = 1; p <= map.get_nrplayers(); p++) {
 				starting_pos = map.get_starting_pos(p);
-				if (!static_cast<bool>(starting_pos)) {
+				if (!starting_pos.valid()) {
 					continue;
 				}
 				uint32_t dist = map.calc_distance(f, starting_pos);
@@ -244,6 +244,9 @@ void draw_view_window(const Widelands::Map& map,
 		   Vector2i(origin.x / kTriangleWidth, origin.y / kTriangleHeight) * scale_map(map, zoom);
 		break;
 	}
+
+	default:
+		NEVER_HERE();
 	}
 
 	const int width = map.get_width() * scale_map(map, zoom);
@@ -333,7 +336,7 @@ void do_draw_minimap(Texture& texture,
 				// vision on the field.
 				// If she never had vision, field.vision will be kUnexplored.
 				const auto& field = player->fields()[i];
-				vision = field.vision;
+				vision = field.vision.state();
 				owner = field.owner;
 			}
 
@@ -368,6 +371,9 @@ Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
 	case MiniMapType::kStaticMap:
 		top_left = Vector2f::zero();
 		break;
+
+	default:
+		NEVER_HERE();
 	}
 
 	const float multiplier = scale_map(map, zoom);
@@ -463,6 +469,9 @@ std::unique_ptr<Texture> draw_minimap_final(const Texture& input_texture,
 		texture->blit(Rectf(0.f, 0.f, minimap_w, minimap_h), input_texture,
 		              Rectf(0.f, 0.f, minimap_w, minimap_h), 1., BlendMode::Copy);
 		break;
+
+	default:
+		NEVER_HERE();
 	}
 
 	if ((layers & MiniMapLayer::ViewWindow) != 0) {

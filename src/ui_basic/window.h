@@ -26,42 +26,9 @@
 #include "ui_basic/button.h"
 
 namespace UI {
-/**
- * Windows are cached by default.
- *
- * The graphics (see pic__*) are used in the following manner: (Example)
- *
- * top:
- *  <--20leftmostpixel_of_top-->
- *     <60Pixels as often as possible to reach window with from top>
- *  <20rightmost pixel of top>
- * site:
- *  ^
- *  20 topmost pixels of l_border                       <--- > same for r_border
- *  as often as needed: 60 pixels of l_border           <--- > same for r_border
- *  20 bottom pixels of l_border                        <--- > same for r_border
- * bottom:
- *  <--20leftmostpixel_of_bot-->
- *     <60Pixels as often as possible to reach window with from bot>
- *  <20rightmost pixel of bot>
- *
- * So: the l_border and the r_border pics MUST have a height of 100, while the
- *     width must be 20 and the top and bot pics MUST have a width of 100, while
- *     the height must be 20
- *
- * A click with the middle mouse button (or STRG+LClick) minimizes a window.
- * Minimize means, that the window is only the caption bar, nothing inside.
- * Another click on this bar resizes the window again
- */
+
 class Window : public Panel {
 public:
-	/// Height the top border must have
-	static constexpr int16_t kTopBorderThickness = 20;
-	/// Height the bottom border must have
-	static constexpr int16_t kBottomBorderThickness = 20;
-	/// Width the vertical border graphics must have
-	static constexpr int16_t kVerticalBorderThickness = 20;
-
 	/// Do not use richtext for 'title'.
 	/// Text conventions: Title Case for the 'title'
 	Window(Panel* parent,
@@ -131,6 +98,8 @@ public:
 	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 	bool handle_tooltip() override;
 	bool handle_key(bool down, SDL_Keysym code) override;
+
+	void update_template() override;
 
 	bool show_default_context_menu(Vector2i pos) override;
 

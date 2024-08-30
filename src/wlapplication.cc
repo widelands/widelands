@@ -29,6 +29,7 @@
 #include <regex>
 
 #include <SDL.h>
+#include <SDL_mouse.h>
 #include <SDL_ttf.h>
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
@@ -53,6 +54,7 @@
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/graphic_functions.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/style_manager.h"
 #include "graphic/text/font_set.h"
@@ -379,9 +381,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	parse_commandline(argc, argv);  // throws ParameterError, handled by main.cc
 
 	setup_homedir();
-	init_settings();
-	datadir_ = g_fs->canonicalize_name(datadir_);
-	datadir_for_testing_ = g_fs->canonicalize_name(datadir_for_testing_);
+
+	init_settings();  // Also sets up the filesystems and language support.
 
 	set_initializer_thread();
 
@@ -389,20 +390,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	signal(SIGUSR1, toggle_verbose);
 #endif
 
-	log_info("Adding directory: %s\n", datadir_.c_str());
-	g_fs->add_file_system(&FileSystem::create(datadir_));
-
-	if (!datadir_for_testing_.empty()) {
-		log_info("Adding directory: %s\n", datadir_for_testing_.c_str());
-		g_fs->add_file_system(&FileSystem::create(datadir_for_testing_));
-	}
-
-	init_language();  // search paths must already be set up
 	changedir_on_mac();
-	cleanup_replays();
-	cleanup_ai_files();
-	cleanup_temp_files();
-	cleanup_temp_backups();
 
 #ifndef SDL_BYTEORDER
 	log_info("Byte order: unknown, assuming little-endian\n");
@@ -420,13 +408,96 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		exit(2);
 	}
 
+	// Start intro music before splashscreen: it takes slightly less time,
+	// and the music starts with some delay
+	g_sh = new SoundHandler();
+	g_sh->register_songs("music", Songset::kIntro);
+	g_sh->register_songs("music", Songset::kMenu);
+	g_sh->change_music(get_config_bool("play_intro_music", true) ? Songset::kIntro : Songset::kMenu);
+
+	g_gr = new Graphic();
+	g_gr->initialize(
+	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
+	   get_config_int("xres", kDefaultResolutionW), get_config_int("yres", kDefaultResolutionH),
+	   get_config_bool("fullscreen", false), get_config_bool("maximized", false));
+
+	{
+		// The window manager may resize the window on creation, so we have to handle resize events
+		// first to be able to draw the splash screen in the right size. This also creates mousemove
+		// events that we may mess up when we set the cursor.
+		// We throw away everything else, hopefully we don't have much yet...
+		// Window event and mouse cursor handling needs g_gr.
+
+		SDL_PumpEvents();
+
+		// Known harmless events we'd drop anyway
+		SDL_FlushEvent(SDL_AUDIODEVICEADDED);
+		SDL_FlushEvent(SDL_TEXTEDITING);  // reported on windows
+		// end of ignored events
+
+		SDL_Event ev;
+		int ignored = 0;
+		int handled = 0;
+
+		while (SDL_PollEvent(&ev) != 0) {
+			if (ev.type == SDL_WINDOWEVENT) {
+				handle_window_event(ev);
+				++handled;
+			} else if (ev.type == SDL_MOUSEMOTION) {
+				mouse_position_ = Vector2i(ev.motion.x, ev.motion.y);
+			} else {
+				verb_log_dbg("Ignoring SDL event 0x%04x", ev.type);
+				++ignored;
+			}
+		}
+		if (ignored > 0) {
+			log_warn("Ignored %d non-mousemove SDL events at start up", ignored);
+		}
+		if (handled > 0) {
+			// Initial creation already creates some events
+			verb_log_info("Handled %d SDL window events at start up", handled);
+		}
+	}
+
+	init_mouse_cursor();
+
+	// Prepare for drawing splash screen
+
+	/*****
+	 * These could be moved later if we decide to show some graphic (an hourglass?) instead
+	 * of the text label in the initial splash screen to draw it faster.
+	 */
+	if (TTF_Init() == -1) {
+		log_err("True Type library did not initialize: %s\n", TTF_GetError());
+		exit(2);
+	}
+
+	UI::g_fh = UI::create_fonthandler(
+	   g_image_cache, i18n::get_locale());  // This will create the fontset, so loading it first.
+	verb_log_info("Font handler created");
+
+	set_template_dir("");
+	verb_log_info("Loaded default styles");
+	/*
+	 * End of text rendering dependencies
+	 *****/
+
+	// The initital splash screen is only drawn once, it doesn't get updates until the main menu
+	// overrides it. Normally it shouldn't take more than a few seconds.
+	RenderTarget* r = g_gr->get_render_target();
+	draw_splashscreen(*r, _("Loading…"), 1.0f);
+	g_gr->refresh();
+	verb_log_info("Splash screen shown");
+
+	// This was taken out of Graphic::initialize() to allow showing the splashscreen earlier.
+	// This is one of the slowest parts of the start up.
+	g_gr->rebuild_texture_atlas();
+
 	// Try to detect configurations with inverted horizontal scroll
-	const char* sdl_video = SDL_GetCurrentVideoDriver();
-	assert(sdl_video != nullptr);
 	SDL_version sdl_ver = {SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL};
 	SDL_GetVersion(&sdl_ver);
-	// Keep cursor in window while dragging
-	SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
+	const char* sdl_video = SDL_GetCurrentVideoDriver();
+	assert(sdl_video != nullptr);
 	bool sdl_scroll_x_bug = false;
 
 	// SDL version < 2.0 is not supported, >= 2.1 will have the changes
@@ -444,35 +515,24 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		update_mousewheel_settings();
 	}
 
-	g_gr = new Graphic();
+	// Keep cursor in window while dragging
+	SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
 
-	if (TTF_Init() == -1) {
-		log_err("True Type library did not initialize: %s\n", TTF_GetError());
-		exit(2);
-	}
+	verb_log_info("Cleaning up temporary files");
+	cleanup_replays();
+	cleanup_ai_files();
+	cleanup_temp_files();
+	cleanup_temp_backups();
 
-	UI::g_fh = UI::create_fonthandler(
-	   g_image_cache, i18n::get_locale());  // This will create the fontset, so loading it first.
-
-	g_gr->initialize(
-	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
-	   get_config_int("xres", kDefaultResolutionW), get_config_int("yres", kDefaultResolutionH),
-	   get_config_bool("fullscreen", false), get_config_bool("maximized", false));
-
-	g_mouse_cursor = new MouseCursor();
-	g_mouse_cursor->initialize(get_config_bool("sdl_cursor", true));
-
-	g_sh = new SoundHandler();
-
-	g_sh->register_songs("music", Songset::kIntro);
-	g_sh->register_songs("music", Songset::kMenu);
+	verb_log_info("Loading songsets");
 	g_sh->register_songs("music", Songset::kIngame);
 	g_sh->register_songs("music", Songset::kCustom);
 
 	UI::ColorChooser::read_favorites_settings();
 
-	set_template_dir("");
+	verb_log_info("Initializing Add-Ons");
 	initialize_g_addons();
+	verb_log_info("Done initializing Add-Ons");
 
 	// Register the click sound for UI::Panel.
 	// We do it here to ensure that the sound handler has been created first, and we only want to
@@ -493,6 +553,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		log_info("Developer tools are enabled.");
 		g_script_console_history.load(kScriptConsoleHistoryFile);
 	}
+
+	verb_log_info("WLApplication created");
 }
 
 /**
@@ -518,6 +580,9 @@ WLApplication::~WLApplication() {
 		g_script_console_history.save(kScriptConsoleHistoryFile);
 	}
 
+	// To be proper, release our textdomain
+	i18n::release_textdomain();
+
 	assert(UI::g_fh);
 	delete UI::g_fh;
 	UI::g_fh = nullptr;
@@ -535,6 +600,59 @@ WLApplication::~WLApplication() {
 	}
 
 	SDL_Quit();
+}
+
+void WLApplication::init_mouse_cursor() {
+	// Fix mouse_position_ initialisation when we don't have mousemove events at startup.
+	// This is actually only needed by soft mode, but we do it for SDL mode too to make the
+	// cursor appear at the right position if the user has to use the keyboard to turn SDL
+	// mode off.
+	if (mouse_position_ == Vector2i::zero()) {
+		// Initialize the mouse position to the current one.
+		// Unfortunately we have to do it the hard way, because SDL_GetMouseState() doesn't work
+		// right until we had a mousemove event.
+		int mouse_global_x;
+		int mouse_global_y;
+		int window_x;
+		int window_y;
+		SDL_Window* sdl_window = g_gr->get_sdlwindow();
+		SDL_GetWindowPosition(sdl_window, &window_x, &window_y);
+		SDL_GetGlobalMouseState(&mouse_global_x, &mouse_global_y);
+		mouse_position_.x = mouse_global_x - window_x;
+		mouse_position_.y = mouse_global_y - window_y;
+
+		// Fix SDL's internal notion of the relative cursor position too by generating some motion
+		// events. Must be done before g_mouse_cursor->initialize().
+		// TODO(tothxa): I don't know why, but all these steps seem to be necessary on my system to
+		//               fix the case in soft mode when the mouse is first moved while it is hidden.
+		//               Without these, it is resumed at the position where it was hidden.
+		SDL_PumpEvents();
+		SDL_WarpMouseInWindow(sdl_window, mouse_position_.x - 1, mouse_position_.y - 1);
+		SDL_PumpEvents();
+		SDL_Delay(2);  // 1 tick doesn't work
+		SDL_WarpMouseInWindow(sdl_window, mouse_position_.x, mouse_position_.y);
+		SDL_PumpEvents();
+	}
+
+	if (!get_config_bool("sdl_cursor", true)) {
+		// Set system's "waiting" mouse cursor in case setting our own cursor in
+		// g_mouse_cursor->initialize() fails. Maybe it works, maybe not.
+		SDL_Cursor* tmp_cursor = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_WAIT);
+		SDL_SetCursor(tmp_cursor);
+		SDL_FreeCursor(tmp_cursor);
+	}
+
+	// The cursor initialization itself
+	// We always init it in SDL mode to have a chance of a working cursor in the splash screen,
+	// before we start refreshing the screen ourselves.
+	// TODO(tothxa): May not work if the system doesn't support color cursors? What happens then?
+	//               No cursor, default system cursor or error?
+	//               Remove argument if this works out. And move initialize() into the constructor?
+	g_mouse_cursor = new MouseCursor();
+	g_mouse_cursor->initialize(true);
+
+	// TODO(tothxa): Do this in g_mouse_cursor->initialize() or the constructor too?
+	g_mouse_cursor->change_wait(true);
 }
 
 void WLApplication::initialize_g_addons() {
@@ -815,12 +933,18 @@ void WLApplication::run() {
 
 	FsMenu::MainMenu menu(game_type_ != GameType::kNone);
 
+	// This is actually the last step of initialization, postponed from init_mouse_cursor().
+	// FsMenu::MainMenu() takes a few seconds and we will only start refreshing the screen
+	// by the chosen option below.
+	if (!get_config_bool("sdl_cursor", true)) {
+		g_mouse_cursor->set_use_sdl(false);
+	}
+
 	check_crash_reports(menu);
 
 	switch (game_type_) {
 	case GameType::kEditor: {
 		bool success = false;
-		g_sh->change_music(Songset::kIngame);
 		if (filename_.empty()) {
 			success = EditorInteractive::run_editor(&menu, EditorInteractive::Init::kDefault);
 		} else {
@@ -832,7 +956,6 @@ void WLApplication::run() {
 					const std::string message = _("Widelands could not find the last edited map.");
 					log_err("%s\n", message.c_str());
 
-					g_sh->change_music(Songset::kMenu);
 					menu.show_messagebox(_("No Last Edited Map"), message);
 					have_filename = false;
 				}
@@ -854,7 +977,6 @@ void WLApplication::run() {
 		Widelands::Game game;
 		std::string title;
 		std::string message;
-		g_sh->change_music(Songset::kIngame);
 		try {
 			bool start_replay = (game_type_ == GameType::kReplay);
 			if (use_last(filename_)) {
@@ -887,14 +1009,12 @@ void WLApplication::run() {
 		if (!message.empty()) {
 			log_err("%s\n", message.c_str());
 			game.full_cleanup();
-			g_sh->change_music(Songset::kMenu);
 			menu.show_messagebox(title, message);
 			menu.main_loop();
 		}
 	} break;
 
 	case GameType::kScenario: {
-		g_sh->change_music(Songset::kIngame);
 		Widelands::Game game;
 		try {
 			game.run_splayer_scenario_direct({filename_}, script_to_run_);
@@ -904,17 +1024,10 @@ void WLApplication::run() {
 	} break;
 
 	case GameType::kFromTemplate: {
-		g_sh->change_music(Songset::kIngame);
 		init_and_run_game_from_template(menu);
 	} break;
 
 	default:
-		// TODO(tothxa): This is actually never heard due to the next one replacing it immediately.
-		//               Can we delete this, and the song file too?
-		g_sh->change_music(Songset::kIntro);
-
-		g_sh->change_music(Songset::kMenu, 1000);
-
 		menu.main_loop();
 	}
 
@@ -948,21 +1061,12 @@ bool WLApplication::poll_event(SDL_Event& ev) const {
 
 	case SDL_USEREVENT: {
 		if (ev.user.code == CHANGE_MUSIC) {
-			/* Notofication from the SoundHandler that a song has finished playing.
+			/* Notification from the SoundHandler that a song has finished playing.
 			 * Usually, another song from the same songset will be started.
-			 * There is a special case for the intro screen's music: only one song will be
-			 * played. If the user has not clicked the mouse or pressed escape when the song
-			 * finishes, Widelands will automatically go on to the main menu.
+			 * There is a special case for the intro music: it will only be played once.
 			 */
 			assert(!SoundHandler::is_backend_disabled());
-			if (g_sh->current_songset() == "intro") {
-				// Special case for splashscreen: there, only one song is ever played
-				SDL_Event new_event;
-				new_event.type = SDL_KEYDOWN;
-				new_event.key.state = SDL_PRESSED;
-				new_event.key.keysym.sym = SDLK_ESCAPE;
-				SDL_PushEvent(&new_event);
-			} else {
+			if (g_sh->current_songset() != Songset::kIntro) {
 				g_sh->change_music();
 			}
 		}
@@ -972,6 +1076,27 @@ bool WLApplication::poll_event(SDL_Event& ev) const {
 		break;
 	}
 	return true;
+}
+
+void WLApplication::handle_window_event(SDL_Event& ev) {
+	assert(ev.type == SDL_WINDOWEVENT);
+	switch (ev.window.event) {
+	case SDL_WINDOWEVENT_RESIZED:
+		// Do not save the new size to config at this point to avoid saving sizes that
+		// result from maximization etc. Save at shutdown instead.
+		if (!g_gr->fullscreen()) {
+			g_gr->change_resolution(ev.window.data1, ev.window.data2, false);
+		}
+		break;
+	case SDL_WINDOWEVENT_MAXIMIZED:
+		set_config_bool("maximized", true);
+		break;
+	case SDL_WINDOWEVENT_RESTORED:
+		set_config_bool("maximized", g_gr->maximized());
+		break;
+	default:
+		break;
+	}
 }
 
 bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, const int modifiers) {
@@ -1064,26 +1189,13 @@ void WLApplication::handle_input(InputCallback const* cb) {
 			}
 			break;
 		case SDL_WINDOWEVENT:
-			switch (ev.window.event) {
-			case SDL_WINDOWEVENT_RESIZED:
-				// Do not save the new size to config at this point to avoid saving sizes that
-				// result from maximization etc. Save at shutdown instead.
-				if (!g_gr->fullscreen()) {
-					g_gr->change_resolution(ev.window.data1, ev.window.data2, false);
-				}
-				break;
-			case SDL_WINDOWEVENT_MAXIMIZED:
-				set_config_bool("maximized", true);
-				break;
-			case SDL_WINDOWEVENT_RESTORED:
-				set_config_bool("maximized", g_gr->maximized());
-				break;
-			}
+			handle_window_event(ev);
 			break;
 		case SDL_QUIT:
 			should_die_ = true;
 			break;
-		default:;
+		default:
+			break;
 		}
 	}
 
@@ -1187,6 +1299,20 @@ void WLApplication::set_mouse_lock(const bool locked) {
 	}
 }
 
+/** Register the datadir and the datadir for testing (if any) with the global filesystem wrapper. */
+void WLApplication::init_filesystems() {
+	datadir_ = g_fs->canonicalize_name(datadir_);
+	datadir_for_testing_ = g_fs->canonicalize_name(datadir_for_testing_);
+
+	log_info("Adding data directory: %s\n", datadir_.c_str());
+	g_fs->add_file_system(&FileSystem::create(datadir_));
+
+	if (!datadir_for_testing_.empty()) {
+		log_info("Adding testing directory: %s\n", datadir_for_testing_.c_str());
+		g_fs->add_file_system(&FileSystem::create(datadir_for_testing_));
+	}
+}
+
 /**
  * Read the config file, parse the commandline and give all other internal
  * parameters sensible default values
@@ -1234,7 +1360,7 @@ void WLApplication::init_language() {
 	if (!localedir_.empty()) {
 		i18n::set_localedir(g_fs->canonicalize_name(localedir_));
 	} else {
-		i18n::set_localedir(g_fs->canonicalize_name(datadir_ + "/locale"));
+		i18n::set_localedir(g_fs->canonicalize_name(datadir_ + "/i18n/translations"));
 	}
 
 	// If locale dir is not a directory, barf. We can handle it not being there tough.
@@ -1254,7 +1380,7 @@ void WLApplication::init_language() {
 
 	// Initialize locale and grab "widelands" textdomain
 	i18n::init_locale();
-	i18n::grab_textdomain("widelands", i18n::get_localedir().c_str());
+	i18n::grab_textdomain("widelands", i18n::get_localedir());
 
 	// Set locale corresponding to selected language
 	std::string language = get_config_string("language", "");
@@ -1265,8 +1391,6 @@ void WLApplication::init_language() {
  * Remember the last settings: write them into the config file
  */
 void WLApplication::shutdown_settings() {
-	// To be proper, release our textdomain
-	i18n::release_textdomain();
 	write_config();
 }
 
@@ -1470,14 +1594,14 @@ void WLApplication::handle_commandline_parameters() {
 		}
 		return std::string();
 	};
-	bool found = false;
+	bool found_datadir = false;
 	if (OptionalParameter datadir_option = get_commandline_option_value("datadir");
 	    datadir_option.has_value()) {
 		datadir_ = *datadir_option;
 
 		const std::string err = checkdatadirversion(datadir_);
-		found = err.empty();
-		if (!found) {
+		found_datadir = err.empty();
+		if (!found_datadir) {
 			log_err("Invalid explicit datadir '%s': %s", datadir_.c_str(), err.c_str());
 		}
 	} else {
@@ -1488,7 +1612,7 @@ void WLApplication::handle_commandline_parameters() {
 			datadir_ = INSTALL_DATADIR;
 			const std::string err = checkdatadirversion(datadir_);
 			if (err.empty()) {
-				found = true;
+				found_datadir = true;
 			} else {
 				wrong_candidates.emplace_back(datadir_, err);
 			}
@@ -1496,7 +1620,7 @@ void WLApplication::handle_commandline_parameters() {
 
 		// Next, pick the first applicable XDG path.
 #ifdef USE_XDG
-		if (!found) {
+		if (!found_datadir) {
 			for (const auto& datadir : FileSystem::get_xdgdatadirs()) {
 				RealFSImpl dir(datadir);
 				if (dir.is_directory(datadir + "/widelands")) {
@@ -1504,7 +1628,7 @@ void WLApplication::handle_commandline_parameters() {
 
 					const std::string err = checkdatadirversion(datadir_);
 					if (err.empty()) {
-						found = true;
+						found_datadir = true;
 						break;
 					}
 					wrong_candidates.emplace_back(datadir_, err);
@@ -1514,17 +1638,17 @@ void WLApplication::handle_commandline_parameters() {
 #endif
 
 		// Finally, try a relative datadir.
-		if (!found) {
+		if (!found_datadir) {
 			datadir_ = get_executable_directory() + FileSystem::file_separator() + INSTALL_DATADIR;
 			const std::string err = checkdatadirversion(datadir_);
 			if (err.empty()) {
-				found = true;
+				found_datadir = true;
 			} else {
 				wrong_candidates.emplace_back(datadir_, err);
 			}
 		}
 
-		if (!found) {
+		if (!found_datadir) {
 			log_err("Unable to detect the datadir. Please specify a datadir explicitly\n"
 			        "with the --datadir command line option. Tried the following %d path(s):",
 			        static_cast<int>(wrong_candidates.size()));
@@ -1533,22 +1657,30 @@ void WLApplication::handle_commandline_parameters() {
 			}
 		}
 	}
-	if (found && !is_absolute_path(datadir_)) {
+	if (found_datadir && !is_absolute_path(datadir_)) {
 		try {
 			datadir_ = absolute_path_if_not_windows(FileSystem::get_working_directory() +
 			                                        FileSystem::file_separator() + datadir_);
 		} catch (const WException& e) {
 			log_err("Error parsing datadir: %s\n", e.what());
-			found = false;
+			found_datadir = false;
 		}
+	}
+
+	if (OptionalParameter testdir = get_commandline_option_value("datadir_for_testing");
+	    testdir.has_value()) {
+		datadir_for_testing_ = *testdir;
 	}
 
 	if (OptionalParameter lang = get_commandline_option_value("language"); lang.has_value()) {
 		set_config_string("language", *lang);
 	}
-	if (found) {
-		init_language();  // do this now to have translated command line help
-	}
+
+	init_filesystems();
+
+	// Do this now to have translated command line help.
+	init_language();
+
 	// Set up list of valid command line options and their translated help texts
 	fill_parameter_vector();
 
@@ -1557,11 +1689,6 @@ void WLApplication::handle_commandline_parameters() {
 		throw ParameterError(
 		   CmdLineVerbosity::Normal,
 		   format(_("Unknown command line parameter: %s\nMaybe a '=' is missing?"), *err));
-	}
-
-	if (OptionalParameter testdir = get_commandline_option_value("datadir_for_testing");
-	    testdir.has_value()) {
-		datadir_for_testing_ = *testdir;
 	}
 
 	// TODO(tothxa): These were checked before datadir and locale were set up, but don't seem to be
@@ -1713,7 +1840,7 @@ void WLApplication::handle_commandline_parameters() {
 		}
 	}
 
-	if (!found) {
+	if (!found_datadir) {
 		throw ParameterError(CmdLineVerbosity::None);  // datadir error already printed
 	}
 }
@@ -2004,7 +2131,6 @@ void WLApplication::check_crash_reports(FsMenu::MainMenu& menu) {
 		log_info("- %s", filename.c_str());
 	}
 
-	g_sh->change_music(Songset::kMenu);
 	menu.abort_splashscreen();
 	FsMenu::CrashReportWindow reporter(menu, crashes);
 	reporter.run<UI::Panel::Returncodes>();

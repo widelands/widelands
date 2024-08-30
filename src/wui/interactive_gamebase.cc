@@ -224,6 +224,8 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 			new GameExitConfirmBox(*this, *this);
 		}
 	} break;
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -328,6 +330,8 @@ void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
 	case ShowHideEntry::kWorkareaOverlap: {
 		set_display_flag(dfShowWorkareaOverlap, !get_display_flag(dfShowWorkareaOverlap));
 	} break;
+	default:
+		NEVER_HERE();
 	}
 	showhidemenu_.toggle();
 }
@@ -400,6 +404,8 @@ void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 			gamespeedmenu_.toggle();
 		}
 	} break;
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -542,7 +548,13 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 	}
 
 	if (code.sym == SDLK_ESCAPE) {
-		mainmenu_.toggle();
+		if (in_road_building_mode(RoadBuildingType::kRoad) ||
+		    in_road_building_mode(RoadBuildingType::kWaterway)) {
+			abort_build_road();
+		} else {
+			mainmenu_.toggle();
+		}
+
 		return true;
 	}
 

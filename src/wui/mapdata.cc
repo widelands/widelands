@@ -108,6 +108,9 @@ bool MapData::compare_names(const MapData& other) const {
 		this_name = localized_name;
 		other_name = other.localized_name;
 		break;
+
+	default:
+		NEVER_HERE();
 	}
 
 	// If there is no width, we have a directory - we want them first.

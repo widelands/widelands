@@ -26,6 +26,7 @@
 #include "base/wexception.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
+#include "graphic/render_queue.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_interface.h"
 
@@ -34,6 +35,9 @@ static std::string g_template_dir;
 static std::map<std::string, std::unique_ptr<StyleManager>> g_style_managers;
 StyleManager* g_style_manager(nullptr);       // points to an entry in `g_style_managers`
 static StyleManager* default_style(nullptr);  // points to the default style in `g_style_managers`
+
+const std::string kSplashImage("loadscreens/splash.jpg");
+const std::string kFallbackImage("images/novalue.png");
 
 const std::string& template_dir() {
 	return g_template_dir;
@@ -78,6 +82,8 @@ void set_template_dir(std::string dir) {
 			default_style = g_style_manager;
 		}
 	}
+
+	RenderQueue::instance().set_dither_mask(resolve_template_image_filename("world/pics/edge.png"));
 }
 
 std::string resolve_template_image_filename(const std::string& path) {
@@ -107,7 +113,7 @@ std::string resolve_template_image_filename(const std::string& path) {
 
 	/* If all else fails (e.g. a missing template sprite): Default image. */
 	log_warn("Template image '%s' not found, using fallback image", path.c_str());
-	return "images/novalue.png";
+	return kFallbackImage;
 }
 
 namespace {
@@ -898,10 +904,17 @@ void StyleManager::add_window_style(UI::WindowStyle style,
 		   g_image_cache->get(style_table->get_string("border_bottom")),
 		   g_image_cache->get(style_table->get_string("border_right")),
 		   g_image_cache->get(style_table->get_string("border_left")),
+		   g_image_cache->get(style_table->get_string("corner_bottom_left")),
+		   g_image_cache->get(style_table->get_string("corner_bottom_right")),
+		   g_image_cache->get(style_table->get_string("corner_top_left")),
+		   g_image_cache->get(style_table->get_string("corner_top_right")),
+		   g_image_cache->get(style_table->get_string("corner_minimal_left")),
+		   g_image_cache->get(style_table->get_string("corner_minimal_right")),
 		   g_image_cache->get(style_table->get_string("background")),
 		   style_table->get_string("button_pin"), style_table->get_string("button_unpin"),
 		   style_table->get_string("button_minimize"), style_table->get_string("button_unminimize"),
-		   style_table->get_string("button_close"));
+		   style_table->get_string("button_close"),
+		   style_table->get_int_with_default("button_spacing", 1));
 	} else {
 		fail_if_doing_default_style("window style", key);
 		w_style = new UI::WindowStyleInfo(default_style->window_style(style));
