@@ -550,38 +550,44 @@ bool BaseDropdown::is_mouse_away() const {
 }
 
 bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
-	if (down && (code.mod & KMOD_CTRL) == 0) {
-		switch (code.sym) {
-		case SDLK_RETURN:
-			if (list_->is_visible()) {
-				if (type_.format >= DropdownType::Format::kCheckmark) {
-					if (list_->has_selection()) {
-						current_selection_ = list_->selection_index();
-						save_selected_entry(current_selection_);
-						list_->select(current_selection_, true); // set checkmark
-						selected();
-						clear_filter();
+	if (down) {
+		if (code.sym == SDLK_BACKSPACE) {
+			delete_last_of_filter();
+			return true;
+		}
+		if ((code.mod & KMOD_CTRL) == 0) {
+			switch (code.sym) {
+			case SDLK_RETURN:
+				if (list_->is_visible()) {
+					if (type_.format >= DropdownType::Format::kCheckmark) {
+						if (list_->has_selection()) {
+							current_selection_ = list_->selection_index();
+							save_selected_entry(current_selection_);
+							list_->select(current_selection_, true); // set checkmark
+							selected();
+							clear_filter();
+						}
+					} else {
+						set_value();
+						close(); // close if not already done so by set_value()
 					}
 				} else {
-					set_value();
-					close(); // close if not already done so by set_value()
-				}
-			} else {
-				set_list_visibility(true);
-			}
-			return true;
-		case SDLK_ESCAPE:
-			if (is_expanded()) {
-				if (is_filtered()) {
-					clear_filter();
-				} else {
-					set_list_visibility(false);
+					set_list_visibility(true);
 				}
 				return true;
+			case SDLK_ESCAPE:
+				if (is_expanded()) {
+					if (is_filtered()) {
+						clear_filter();
+					} else {
+						set_list_visibility(false);
+					}
+					return true;
+				}
+				break;
+			default:
+				break;  // not handled
 			}
-			break;
-		default:
-			break;  // not handled
 		}
 	}
 	if (is_expanded()) {

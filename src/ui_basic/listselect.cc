@@ -720,28 +720,13 @@ bool BaseListselect::handle_mousemove(
 
 bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
-		switch (code.sym) {
-		case SDLK_BACKSPACE:
-			if (linked_dropdown_ != nullptr) {
-				linked_dropdown_->delete_last_of_filter();
-				return true;
-			}
-			return UI::Panel::handle_key(down, code);
-		case SDLK_RETURN:
-			if ((code.mod & KMOD_CTRL) == 0 && has_selection() &&
-			    selection_mode_ == ListselectLayout::kMultiCheck) {
-				// checkmark toggling
+		if ((code.mod & KMOD_CTRL) == 0 && code.sym == SDLK_RETURN) {
+			if (has_selection() && selection_mode_ == ListselectLayout::kMultiCheck) {
+				// checkmark toggling for non-dropdown-related multi-select enabled listselect
+				// (handled in dropdown.cc for dropdowns)
 				select(selection_index(), true);
 				return true;
 			}
-			FALLS_THROUGH;
-		case SDLK_ESCAPE:
-			if (linked_dropdown_ != nullptr && (code.mod & KMOD_CTRL) == 0) {
-				return linked_dropdown_->handle_key(down, code);
-			}
-			return UI::Panel::handle_key(down, code);
-		default:
-			break;
 		}
 
 		bool handle = true;
