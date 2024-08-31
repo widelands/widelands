@@ -52,6 +52,104 @@ def out(string):
     sys.stdout.write(string)
     sys.stdout.flush()
 
+
+def mark_line(severity, line, file=None, line_no=None, title=None):
+    """Add an annotation on github or color on console."""
+    if os.getenv("GITHUB_ACTION"):
+        ref_list = []
+        for k, val in iteritems({"file": file, "line": line_no, "title": title}):
+            if val:
+                ref_list.append(f"{k}={val}")
+        refs = " " + ",".join(ref_list) if ref_list else ""
+        return f"::{ severity }{ refs }::{ line }"
+    else:
+        sev_to_col = {
+            "info": 36,  # cyan
+            "warning": 33,  # yellow
+            "error": 31,  # red
+        }
+        color = sev_to_col.get(severity, 35)  # fallback to violet
+        line = f"\033[{ color }m{ line }\033[{ 39 }m"  # line has colour
+        if file:
+            line = line.replace(file, f"\033[4m{ file }\033[24m", 1)  # underline filename
+        return line
+
+
+def mark_failures(stdout, test_script):
+    """find failure lines in stdout of a test run and mark them
+
+    finds: failure lines and test summary from lunit, failure messages from widelands
+
+    Examples of detected lines are shown in code.
+
+    Failures are marked on github or colored on console.
+
+    returns the modified stdout
+    """
+    map_dir = os.path.dirname(os.path.dirname(test_script))
+    test_title = ""
+    test_titles = set()
+    last_wl_err_idx = -2
+    lines = stdout.split("\n")
+    for idx, line in enumerate(lines):
+        if line.startswith("#### Running "):
+            m = re.search("'(.*)'", line)
+            test_title = m.group(1) if m else line.split("Running", 1)[1].strip()
+            warn = ""
+            if "(0 Test" in line:  # to detect usage of wrong test variable (copy/paste)
+                warn = "no tests"
+            if test_title in test_titles:  # to detect copied test name
+                warn = (warn + ", duplicate test name").lstrip(", ")
+            test_titles.add(test_title)
+            if warn:
+                lines[idx] = mark_line("warning", line, title=warn)
+        elif ":" in line and line.startswith(("FAIL: ", "ERROR: ", "WARNING: ")):
+            data = line.split(':', 4)
+            severity = "warning" if data[0] == "WARNING" else "error"
+            if len(data) > 4 and data[3].isnumeric():
+                # format:
+                # FAIL: test_name: [string "scripting/flag.lua"]:22: expected 'flag' but was 'ware'!
+                test_name = data[1].lstrip()
+                m = re.search(r'"(.*)"', data[2])
+                if m:  # found file name in double quotes
+                    file = m.group(1)
+                else:
+                    m = re.search(r"\[(.*)\]", data[2])  # filename in brackets
+                    file = m.group(1) if m else data[2].strip()
+                if file.startswith("scripting"):
+                    file = f"{map_dir}/{file}"
+                line_no = data[3]
+                title = f"{test_title} - {test_name}"
+                err = mark_line(severity, line, file=file, line_no=line_no, title=title)
+            elif len(data) > 1:
+                # format:
+                # FAIL: test_road_crosses_another: Couldn't build flag!
+                test_name = data[1].lstrip()
+                # could try to find file and line in following traceback
+                err = mark_line(severity, line, title=f"{test_title} - {test_name}")
+            else:
+                # format:
+                # WARNING: teardown() failed!
+                err = mark_line(severity, line, title=test_title)
+            lines[idx] = err
+        elif "Assertions checked." in line and "Tests passed" in line:
+            # summary of lua test run
+            lines[idx] = mark_line("warning", line, title="test summary")
+        elif "] ERROR: " in line:
+            # error message of widelands, like:
+            # [00:00:00.000 real] ERROR: [] config:0: RealFSImpl::load: ...
+            if "could not open file for reading" in line and "/config" in line or \
+               test_title == "string.bformat test":
+                # no config is no problem, or triggered by testrun
+                continue
+            if "lua_errors.cc" in line:
+                lines[idx] = mark_line("error", line, title="lua error")
+            elif last_wl_err_idx + 1 != idx:  # to mark each block only once
+                lines[idx] = mark_line("info", line, title="potential problem")
+            last_wl_err_idx = idx
+    return "\n".join(lines) + "\n"
+
+
 class WidelandsTestCase(unittest.TestCase):
     do_use_random_directory = True
     path_to_widelands_binary = None
@@ -164,34 +262,60 @@ class WidelandsTestCase(unittest.TestCase):
 
     def verify_success(self, stdout, stdout_filename):
         out("    Elapsed time: {}\n".format(self.duration))
+        skipped_msg = None
         # Catch instabilities with SDL in CI environment
         if self.widelands_returncode == 2:
             print("SDL initialization failed. TEST SKIPPED.")
-            with open(stdout_filename, 'r') as stdout_file:
-                for line in stdout_file.readlines():
-                    print(line.strip())
+            if os.getenv("GITHUB_ACTION"):
+                print("\n::group::stdout")  # visual group for stdout on github
+            out(stdout)
+            if os.getenv("GITHUB_ACTION"):
+                print("\n::endgroup::")
             out("  SKIPPED.\n")
+            skipped_msg = "SDL initialization failed"
         else:
-            common_msg = "Analyze the files in {} to see why this test case failed. Stdout is\n  {}\n\nstdout:\n{}".format(
-                    self.run_dir, stdout_filename, stdout)
+            class CommonFailMsg:
+                """To only create error message on failure"""
+
+                def __init__(self_msg, intro):
+                    self_msg.intro = intro
+
+                def __str__(self_msg):
+                    start_stdout = end_stdout = ""
+                    stdout_txt = stdout  # stdout is a nonlocal variable
+                    if os.getenv("GITHUB_ACTION"):
+                        start_stdout = "::group::stdout\n"
+                        end_stdout = "::endgroup::\n"
+
+                    if os.getenv("GITHUB_ACTION") or \
+                            sys.stdout.isatty() and os.getenv("TERM") != "dumb":
+                        stdout_txt = mark_failures(stdout, self._test_script)
+
+                    return (f"{self_msg.intro} Analyze the files in {self.run_dir} to see why "
+                            f"this test case failed. Stdout is\n  {stdout_filename}\n\n"
+                            f"{start_stdout}stdout:\n{stdout_txt}{end_stdout}")
+
             if self.wl_timed_out:
                 out("  TIMED OUT.\n")
-                self.assertTrue(False, "The test timed out. {}".format(common_msg))
+                self.fail(CommonFailMsg("The test timed out."))
             if self.widelands_returncode == 1 and self.ignore_error_code:
                 out("  IGNORING error code 1\n")
             else:
-                self.assertTrue(self.widelands_returncode == 0,
-                    "Widelands exited abnormally. {}".format(common_msg)
-                )
+                self.assertEqual(self.widelands_returncode, 0,
+                                 CommonFailMsg("Widelands exited abnormally."))
+            longMessage = self.longMessage
+            self.longMessage = False  # only show custom message
             self.assertTrue("All Tests passed" in stdout,
-                "Not all tests pass. {}.".format(common_msg)
-            )
+                            CommonFailMsg("Not all tests pass."))
             self.assertFalse("lua_errors.cc" in stdout,
-                "Not all tests pass. {}.".format(common_msg)
-            )
+                             CommonFailMsg("Not all tests pass (output has error message)."))
+                             # mainly happens if error code is ignored
+            self.longMessage = longMessage  # reset to combined messages for next call
             out("  done.\n")
         if self.keep_output_around:
             out("    stdout: {}\n".format(stdout_filename))
+        if skipped_msg:
+            self.skipTest(skipped_msg)  # reports this clearly and aborts this TestCase here
 
 def parse_args():
     p = argparse.ArgumentParser(description=
@@ -324,7 +448,33 @@ def main():
     discover_game_template_tests(args.regexp, suite)
     discover_editor_tests(args.regexp, suite)
 
-    return unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()
+    result = unittest.TextTestRunner(verbosity=2).run(suite)
+
+    to_check = {
+        "Failed tests": result.failures,
+        "Error in test": result.errors,  # error in python code, should not happend
+        "Unexpected in test": result.unexpectedSuccesses,  # we have no expected failure yet
+        "Skipped tests": result.skipped,
+    }
+    for reason, issues in iteritems(to_check):
+        if len(issues) > 0:
+            out(f"{ reason }:\n")
+            for issue in issues:
+                info = ""
+                if isinstance(issue, (list, tuple)):
+                    p_issue = issue[0]
+                    initial_line = True  # title of traceback
+                    for line in issue[1].split("\n"):
+                        if not initial_line and line[0] != " ":
+                            # first line which starts with no space: AssertionXxx or ErrorXxx
+                            info = "    \t" + line.split(".", 1)[0] + "."
+                            break
+                        initial_line = False
+                else:  # unexpectedSuccess has no additional info
+                    p_issue = issue
+                out(f" - {p_issue}{info}\n")
+
+    return result.wasSuccessful()
 
 if __name__ == '__main__':
     sys.exit(0 if main() else 1)
