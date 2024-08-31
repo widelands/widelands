@@ -26,7 +26,10 @@ jobs:
       run: |
         export ICU_ROOT="$(brew --prefix icu4c)" && \
         export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
-        ./install-dependencies.sh homebrew ccache
+        # Use --quiet to silence warnings and corresponding workflow annotations about
+        # already installed packages and packages that could be installed from casks.
+        # Not good, but those annotations were even worse.
+        ./install-dependencies.sh homebrew --quiet ccache
     - name: Building
       run: |
         mkdir build_wl
