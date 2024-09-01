@@ -50,36 +50,35 @@ struct NoteDropdown {
 struct DropdownType {
 	enum class Display { kShowText, kShowIcon };
 	enum class Format {
-		kTraditional,   // selected entry display separate from drop-down arrow push button
-		kButtonOnly,    // selected entry displayed on button, no separate drop-down arrow
-		kMenu,          // selected entry not displayed; use to trigger actions without changing the button text or icon
-		kCheckmark,     // like kMenu, but with checkmark next to the selected entry in the dropdown
-		kMultiSelect    // like kCheckmark, but checkmark of each entry is toggled independently
+		kTraditional,  // selected entry display separate from drop-down arrow push button
+		kButtonOnly,   // selected entry displayed on button, no separate drop-down arrow
+		kMenu,  // selected entry not displayed; use to trigger actions without changing the button
+		        // text or icon
+		kCheckmark,   // like kMenu, but with checkmark next to the selected entry in the dropdown
+		kMultiSelect  // like kCheckmark, but checkmark of each entry is toggled independently
 	};
 
 	Display display;
 	Format format;
 
-	DropdownType(Display d, Format f)
-	   : display(d),
-	     format(f) {
-		assert(!(d == Display::kShowIcon && f == Format::kTraditional)); // pointless combination
+	DropdownType(Display d, Format f) : display(d), format(f) {
+		assert(!(d == Display::kShowIcon && f == Format::kTraditional));  // pointless combination
 	}
 
-	bool operator == (const DropdownType &other) const {
+	bool operator==(const DropdownType& other) const {
 		return (display == other.display) && (format == other.format);
 	}
 
 	// ----- PRESETS -----
-	static const DropdownType kTextual;           // Display::kShowText, Format::kTraditional
-	static const DropdownType kTextualNarrow;     // Display::kShowText, Format::kButtonOnly
-	static const DropdownType kPictorial;         // Display::kShowIcon, Format::kButtonOnly
-	static const DropdownType kTextualMenu;       // Display::kShowText, Format::kMenu
-	static const DropdownType kPictorialMenu;     // Display::kShowIcon, Format::kMenu
-	static const DropdownType kTextualRadioGrp;   // Display::kShowText, Format::kCheckmark
-	static const DropdownType kPictorialRadioGrp; // Display::kShowIcon, Format::kCheckmark
-	static const DropdownType kTextualToggles;    // Display::kShowText, Format::kMultiSelect
-	static const DropdownType kPictorialToggles;  // Display::kShowIcon, Format::kMultiSelect
+	static const DropdownType kTextual;            // Display::kShowText, Format::kTraditional
+	static const DropdownType kTextualNarrow;      // Display::kShowText, Format::kButtonOnly
+	static const DropdownType kPictorial;          // Display::kShowIcon, Format::kButtonOnly
+	static const DropdownType kTextualMenu;        // Display::kShowText, Format::kMenu
+	static const DropdownType kPictorialMenu;      // Display::kShowIcon, Format::kMenu
+	static const DropdownType kTextualRadioGrp;    // Display::kShowText, Format::kCheckmark
+	static const DropdownType kPictorialRadioGrp;  // Display::kShowIcon, Format::kCheckmark
+	static const DropdownType kTextualToggles;     // Display::kShowText, Format::kMultiSelect
+	static const DropdownType kPictorialToggles;   // Display::kShowIcon, Format::kMultiSelect
 };
 
 /// Implementation for a dropdown menu that lets the user select a value.
@@ -299,8 +298,10 @@ private:
 	std::string label_;
 	std::string tooltip_;
 	uint32_t current_selection_;
+
 protected:
 	DropdownType type_;
+
 private:
 	bool is_enabled_{true};
 	ButtonStyle button_style_;
@@ -317,7 +318,7 @@ public:
 		const Image* img;
 		const std::string tooltip;
 		const std::string hotkey;
-		bool checked{false}; // checked state
+		bool checked{false};  // checked state
 	};
 
 	using HotkeyFunction = std::function<void(Entry)>;
@@ -361,15 +362,14 @@ public:
 	     hotkey_fn_(hotkey_fn) {
 		if (type_.format >= DropdownType::Format::kCheckmark) {
 			// Adapt checkmark_changed signal from underlying listselect
-			BaseDropdown::connect_checkmark_changed(
-			    [this](uint32_t idx, bool newstate) {
-				assert(!no_filter_matches_); // entry is disabled, should not respond to input
+			BaseDropdown::connect_checkmark_changed([this](uint32_t idx, bool newstate) {
+				assert(!no_filter_matches_);  // entry is disabled, should not respond to input
 				Entry entry = *filtered_entries[idx];
 
 				// update state stored in unfiltered
 				auto it = std::find_if(unfiltered_entries.begin(), unfiltered_entries.end(),
-					               [entry](auto& x) { return x.value == entry; });
-				assert (it != unfiltered_entries.end());
+				                       [entry](auto& x) { return x.value == entry; });
+				assert(it != unfiltered_entries.end());
 				if (it->checked != newstate) {
 					it->checked = newstate;
 					checkmark_changed(entry, newstate);
@@ -415,7 +415,7 @@ public:
 		}
 
 		auto it = std::find_if(unfiltered_entries.begin(), unfiltered_entries.end(),
-			               [sel_entry](auto& x) { return x.checked && x.value != sel_entry; });
+		                       [sel_entry](auto& x) { return x.checked && x.value != sel_entry; });
 		if (it != unfiltered_entries.end()) {
 			it->checked = false;
 			checkmark_changed(it->value, false);
@@ -447,7 +447,9 @@ public:
 	         const std::string& tooltip_text = std::string(),
 	         const std::string& hotkey = std::string()) {
 		filtered_entries.push_back(std::unique_ptr<Entry>(new Entry(value)));
-		unfiltered_entries.push_back({name, value, pic, tooltip_text, hotkey, select_this && (type_.format >= DropdownType::Format::kCheckmark)});
+		unfiltered_entries.push_back(
+		   {name, value, pic, tooltip_text, hotkey,
+		    select_this && (type_.format >= DropdownType::Format::kCheckmark)});
 		BaseDropdown::add(name, size(), pic, select_this, tooltip_text, hotkey, 0, true);
 	}
 
@@ -634,7 +636,8 @@ private:
 		}
 
 		// highlight currently selected entry if it is in the filtered list
-		if (type_.format < DropdownType::Format::kMenu || type_.format == DropdownType::Format::kCheckmark) {
+		if (type_.format < DropdownType::Format::kMenu ||
+		    type_.format == DropdownType::Format::kCheckmark) {
 			select(selected_entry_);
 		}
 
@@ -645,10 +648,12 @@ private:
 
 	void add_no_match_entry() {
 		const Image* empty_icon = (type_.display == DropdownType::Display::kShowText) ?
-		   nullptr : g_image_cache->get("images/wui/editor/no_ware.png");
-		BaseDropdown::add(_("No matches"), 0, empty_icon, false,
-		                  /** TRANSLATORS: Tooltip shown when filtering a dropdown menu yields no matches. */
-		                  "No dropdown entries matched the given filter", std::string(), 0, false);
+                                   nullptr :
+                                   g_image_cache->get("images/wui/editor/no_ware.png");
+		BaseDropdown::add(
+		   _("No matches"), 0, empty_icon, false,
+		   /** TRANSLATORS: Tooltip shown when filtering a dropdown menu yields no matches. */
+		   "No dropdown entries matched the given filter", std::string(), 0, false);
 	}
 
 	void add_matching_entries() {

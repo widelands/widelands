@@ -40,15 +40,24 @@ namespace UI {
 
 int BaseDropdown::next_id_ = 0;
 
-const DropdownType DropdownType::kTextual = DropdownType(DropdownType::Display::kShowText, DropdownType::Format::kTraditional);
-const DropdownType DropdownType::kTextualNarrow = DropdownType(DropdownType::Display::kShowText, DropdownType::Format::kButtonOnly);
-const DropdownType DropdownType::kPictorial = DropdownType(DropdownType::Display::kShowIcon, DropdownType::Format::kButtonOnly);
-const DropdownType DropdownType::kTextualMenu = DropdownType(DropdownType::Display::kShowText, DropdownType::Format::kMenu);
-const DropdownType DropdownType::kPictorialMenu = DropdownType(DropdownType::Display::kShowIcon, DropdownType::Format::kMenu);
-const DropdownType DropdownType::kTextualRadioGrp = DropdownType(DropdownType::Display::kShowText, DropdownType::Format::kCheckmark);
-const DropdownType DropdownType::kPictorialRadioGrp = DropdownType(DropdownType::Display::kShowIcon, DropdownType::Format::kCheckmark);
-const DropdownType DropdownType::kTextualToggles = DropdownType(DropdownType::Display::kShowText, DropdownType::Format::kMultiSelect);
-const DropdownType DropdownType::kPictorialToggles = DropdownType(DropdownType::Display::kShowIcon, DropdownType::Format::kMultiSelect);
+const DropdownType DropdownType::kTextual =
+   DropdownType(DropdownType::Display::kShowText, DropdownType::Format::kTraditional);
+const DropdownType DropdownType::kTextualNarrow =
+   DropdownType(DropdownType::Display::kShowText, DropdownType::Format::kButtonOnly);
+const DropdownType DropdownType::kPictorial =
+   DropdownType(DropdownType::Display::kShowIcon, DropdownType::Format::kButtonOnly);
+const DropdownType DropdownType::kTextualMenu =
+   DropdownType(DropdownType::Display::kShowText, DropdownType::Format::kMenu);
+const DropdownType DropdownType::kPictorialMenu =
+   DropdownType(DropdownType::Display::kShowIcon, DropdownType::Format::kMenu);
+const DropdownType DropdownType::kTextualRadioGrp =
+   DropdownType(DropdownType::Display::kShowText, DropdownType::Format::kCheckmark);
+const DropdownType DropdownType::kPictorialRadioGrp =
+   DropdownType(DropdownType::Display::kShowIcon, DropdownType::Format::kCheckmark);
+const DropdownType DropdownType::kTextualToggles =
+   DropdownType(DropdownType::Display::kShowText, DropdownType::Format::kMultiSelect);
+const DropdownType DropdownType::kPictorialToggles =
+   DropdownType(DropdownType::Display::kShowIcon, DropdownType::Format::kMultiSelect);
 
 // Dropdowns hook into parent elements to be notified of layouting changes. We need to keep track of
 // whether a dropdown actually still exists when notified to avoid heap-use-after-free's.
@@ -101,7 +110,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                      0,
                      0,
                      type.format == DropdownType::Format::kTraditional ? w - button_dimension :
-                        type.display == DropdownType::Display::kShowIcon ? button_dimension : w,
+                     type.display == DropdownType::Display::kShowIcon  ? button_dimension :
+                                                                         w,
                      get_h(),
                      type.format == DropdownType::Format::kTraditional ?
                         (style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
@@ -141,8 +151,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	} else if (type_.format == DropdownType::Format::kCheckmark) {
 		lsl.checkmark = ListselectLayout::Checkmark::kSingleSelect;
 	}
-	list_ = new UI::Listselect<uintptr_t>(
-	   list_parent, "list", 0, 0, w, 0, style, lsl);
+	list_ = new UI::Listselect<uintptr_t>(list_parent, "list", 0, 0, w, 0, style, lsl);
 	list_->set_linked_dropdown(this);
 
 	list_->set_visible(false);
@@ -312,7 +321,7 @@ void BaseDropdown::add(const std::string& name,
 	if (type_.format == DropdownType::Format::kMultiSelect) {
 		list_->add(name, value, pic, false, tooltip_text, hotkey, indent, enable);
 		if (select_this) {
-			set_checked(size()-1, true, false);
+			set_checked(size() - 1, true, false);
 		}
 	} else {
 		list_->add(name, value, pic, select_this, tooltip_text, hotkey, indent, enable);
@@ -521,7 +530,7 @@ void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {
 		}
 
 		if (type_.format >= DropdownType::Format::kMenu && !has_selection() && !list_->empty()) {
-			list_->select(0, false); // for keyboard nav only; don't set checkmarks
+			list_->select(0, false);  // for keyboard nav only; don't set checkmarks
 			current_selection_ = 0;
 		}
 	} else {
@@ -562,12 +571,12 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 			case SDLK_RETURN:
 				if (list_->is_visible()) {
 					if (type_.format >= DropdownType::Format::kCheckmark) {
-						list_->select(list_->selection_index(), true); // set checkmark
-						set_value(true); // keep open
+						list_->select(list_->selection_index(), true);  // set checkmark
+						set_value(true);                                // keep open
 						clear_filter();
 					} else {
 						set_value();
-						close(); // close if not already done so by set_value()
+						close();  // close if not already done so by set_value()
 					}
 				} else {
 					set_list_visibility(true);
