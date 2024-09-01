@@ -219,8 +219,8 @@ protected:
 	         bool select_this,
 	         const std::string& tooltip_text,
 	         const std::string& hotkey,
-	         const unsigned indent = 0,
-	         const bool enable = true);
+	         unsigned indent = 0,
+	         bool enable = true);
 
 	/// \return the index of the selected element
 	uint32_t get_selected() const;
@@ -368,7 +368,7 @@ public:
 
 				// update state stored in unfiltered
 				auto it = std::find_if(unfiltered_entries.begin(), unfiltered_entries.end(),
-				                       [entry](auto& x) { return x.value == entry; });
+				                       [entry](auto& e) { return e.value == entry; });
 				assert(it != unfiltered_entries.end());
 				if (it->checked != newstate) {
 					it->checked = newstate;
