@@ -113,6 +113,7 @@ private:
 	// Takes the appropriate action when an item in the statisticsmenu_ is selected
 	void statistics_menu_selected(StatisticsMenuEntry entry);
 	void rebuild_showhide_menu() override;
+	void build_showhide_menu() override;
 
 	bool player_hears_field(const Widelands::Coords& coords) const override;
 

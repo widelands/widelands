@@ -369,24 +369,19 @@ void InteractivePlayer::statistics_menu_selected(StatisticsMenuEntry entry) {
 }
 
 void InteractivePlayer::rebuild_showhide_menu() {
-	const ShowHideEntry last_selection =
-	   showhidemenu_.has_selection() ? showhidemenu_.get_selected() : ShowHideEntry::kBuildingSpaces;
-
 	InteractiveGameBase::rebuild_showhide_menu();
-	showhidemenu_.add(
-	   get_display_flag(dfShowWorkareaOverlap) ?
-          /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
-           * are highlighted */
-          _("Hide Workarea Overlaps") :
-          /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
-           * are highlighted */
-          _("Show Workarea Overlaps"),
-	   ShowHideEntry::kWorkareaOverlap,
-	   g_image_cache->get("images/wui/menus/show_workarea_overlap.png"), false,
+	showhidemenu_.set_checked(ShowHideEntry::kWorkareaOverlap, get_display_flag(dfShowWorkareaOverlap), false);
+}
+
+void InteractivePlayer::build_showhide_menu() {
+	InteractiveGameBase::build_showhide_menu();
+	/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps are
+	 * highlighted */
+	showhidemenu_.add(_("Show Workarea Overlaps"), ShowHideEntry::kWorkareaOverlap,
+	   g_image_cache->get("images/wui/menus/show_workarea_overlap.png"),
+	   get_display_flag(dfShowWorkareaOverlap),
 	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"),
 	   shortcut_string_for(KeyboardShortcut::kInGameShowhideWorkareas, false));
-
-	showhidemenu_.select(last_selection);
 }
 
 InteractivePlayer::HasExpeditionPortSpace
@@ -949,7 +944,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kInGameShowhideWorkareas, code)) {
-			set_display_flag(dfShowWorkareaOverlap, !get_display_flag(dfShowWorkareaOverlap));
+			showhidemenu_.toggle_checked(ShowHideEntry::kWorkareaOverlap, true);
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kInGameScrollToHQ, code) ||

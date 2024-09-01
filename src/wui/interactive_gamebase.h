@@ -82,6 +82,7 @@ protected:
 	// Adds the showhidemenu_ to the toolbar
 	void add_showhide_menu();
 	void rebuild_showhide_menu() override;
+	virtual void build_showhide_menu();
 	// Adds the gamespeedmenu_ to the toolbar
 	void add_gamespeed_menu();
 
@@ -148,7 +149,7 @@ private:
 	// Takes the appropriate action when an item in the mainmenu_ is selected
 	void main_menu_selected(MainMenuEntry entry);
 	// Takes the appropriate action when an item in the showhidemenu_ is selected
-	void showhide_menu_selected(ShowHideEntry entry);
+	void showhide_menu_selected(ShowHideEntry entry, bool checked);
 	// Takes the appropriate action when an item in the gamespeedmenu_ is selected
 	void gamespeed_menu_selected(GameSpeedEntry entry);
 	// Rebuilds the gamespeedmenu_ according to current game settings
