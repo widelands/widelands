@@ -128,10 +128,10 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                    /** TRANSLATORS: Title for a menu button in the editor. This menu will show/hide
                       building spaces, animals, immovables, resources */
                    _("Show / Hide"),
-                   UI::DropdownType::kPictorialMenu,
+                   UI::DropdownType::kPictorialToggles,
                    UI::PanelStyle::kWui,
                    UI::ButtonStyle::kWuiPrimary,
-                   [this](ShowHideEntry t) { showhide_menu_selected(t); }),
+                   [this](ShowHideEntry t) { showhidemenu_.toggle_checked(t, true); }),
 
      tools_(new Tools(*this, e.map())),
      history_(nullptr)  // history needs the undo/redo buttons
@@ -455,87 +455,89 @@ void EditorInteractive::add_showhide_menu() {
 	showhidemenu_.set_image(g_image_cache->get("images/wui/menus/showhide.png"));
 	toolbar()->add(&showhidemenu_);
 
-	rebuild_showhide_menu();
+	build_showhide_menu();
 
-	showhidemenu_.selected.connect([this] { showhide_menu_selected(showhidemenu_.get_selected()); });
+	showhidemenu_.checkmark_changed.connect(
+	    [this](ShowHideEntry entry, bool checked) {
+		showhide_menu_selected(entry, checked);
+	    });
 }
 
 void EditorInteractive::rebuild_showhide_menu() {
-	const ShowHideEntry last_selection =
-	   showhidemenu_.has_selection() ? showhidemenu_.get_selected() : ShowHideEntry::kBuildingSpaces;
+	showhidemenu_.set_checked(ShowHideEntry::kBuildingSpaces, buildhelp(), false);
+	showhidemenu_.set_checked(ShowHideEntry::kMaximumBuildingSpaces, get_display_flag(dfShowMaximumBuildhelp), false);
+	showhidemenu_.set_checked(ShowHideEntry::kGrid, get_display_flag(dfShowGrid), false);
+	showhidemenu_.set_checked(ShowHideEntry::kImmovables, get_display_flag(dfShowImmovables), false);
+	showhidemenu_.set_checked(ShowHideEntry::kAnimals, get_display_flag(dfShowBobs), false);
+	showhidemenu_.set_checked(ShowHideEntry::kResources, get_display_flag(dfShowResources), false);
+}
 
-	showhidemenu_.clear();
-
+void EditorInteractive::build_showhide_menu() {
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether building spaces are
 	 * shown */
-	showhidemenu_.add(buildhelp() ? _("Hide Building Spaces") : _("Show Building Spaces"),
-	                  ShowHideEntry::kBuildingSpaces,
-	                  g_image_cache->get("images/wui/menus/toggle_buildhelp.png"), false, "",
+	showhidemenu_.add(_("Show Building Spaces"), ShowHideEntry::kBuildingSpaces,
+	                  g_image_cache->get("images/wui/menus/toggle_buildhelp.png"), buildhelp(), "",
 	                  shortcut_string_for(KeyboardShortcut::kCommonBuildhelp, false));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether to show maximum
 	 * building spaces that will be available if all immovables (trees, rocks, etc.) are removed */
-	showhidemenu_.add(get_display_flag(dfShowMaximumBuildhelp) ? _("Hide Maximum Building Spaces") :
-                                                                _("Show Maximum Building Spaces"),
-	                  ShowHideEntry::kMaximumBuildingSpaces,
-	                  g_image_cache->get("images/wui/menus/toggle_maxbuild.png"), false,
+	showhidemenu_.add(_("Show Maximum Building Spaces"), ShowHideEntry::kMaximumBuildingSpaces,
+	                  g_image_cache->get("images/wui/menus/toggle_maxbuild.png"),
+	                  get_display_flag(dfShowMaximumBuildhelp),
 	                  _("Toggle whether to show maximum building spaces that will be available if "
 	                    "all immovables (trees, rocks, etc.) are removed"),
 	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideMaximumBuildhelp, false));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether the map grid is shown
 	 */
-	showhidemenu_.add(get_display_flag(dfShowGrid) ? _("Hide Grid") : _("Show Grid"),
-	                  ShowHideEntry::kGrid,
-	                  g_image_cache->get("images/wui/menus/menu_toggle_grid.png"), false, "",
+	showhidemenu_.add(_("Show Grid"), ShowHideEntry::kGrid,
+	                  g_image_cache->get("images/wui/menus/menu_toggle_grid.png"),
+	                  get_display_flag(dfShowGrid), "",
 	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideGrid, false));
 
-	showhidemenu_.add(
-	   /** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether immovables
-	    *  (trees, rocks etc.) are shown */
-	   get_display_flag(dfShowImmovables) ? _("Hide Immovables") : _("Show Immovables"),
-	   ShowHideEntry::kImmovables, g_image_cache->get("images/wui/menus/toggle_immovables.png"),
-	   false, "", shortcut_string_for(KeyboardShortcut::kEditorShowhideImmovables, false));
+	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether immovables
+	 *  (trees, rocks etc.) are shown */
+	showhidemenu_.add(_("Show Immovables"), ShowHideEntry::kImmovables,
+	                  g_image_cache->get("images/wui/menus/toggle_immovables.png"),
+	                  get_display_flag(dfShowImmovables), "",
+	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideImmovables, false));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether animals are shown */
-	showhidemenu_.add(get_display_flag(dfShowBobs) ? _("Hide Animals") : _("Show Animals"),
-	                  ShowHideEntry::kAnimals,
-	                  g_image_cache->get("images/wui/menus/toggle_bobs.png"), false, "",
+	showhidemenu_.add(_("Show Animals"), ShowHideEntry::kAnimals,
+	                  g_image_cache->get("images/wui/menus/toggle_bobs.png"),
+	                  get_display_flag(dfShowBobs), "",
 	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideCritters, false));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether resources are shown */
-	showhidemenu_.add(get_display_flag(dfShowResources) ? _("Hide Resources") : _("Show Resources"),
-	                  ShowHideEntry::kResources,
-	                  g_image_cache->get("images/wui/menus/toggle_resources.png"), false, "",
+	showhidemenu_.add(_("Show Resources"), ShowHideEntry::kResources,
+	                  g_image_cache->get("images/wui/menus/toggle_resources.png"),
+	                  get_display_flag(dfShowResources), "",
 	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideResources, false));
-
-	showhidemenu_.select(last_selection);
 }
 
-void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
+void EditorInteractive::showhide_menu_selected(ShowHideEntry entry, bool checked) {
 	switch (entry) {
 	case ShowHideEntry::kBuildingSpaces: {
-		toggle_buildhelp();
+		show_buildhelp(checked);
 	} break;
 	case ShowHideEntry::kMaximumBuildingSpaces: {
-		toggle_maximum_buildhelp();
+		set_display_flag(EditorInteractive::dfShowMaximumBuildhelp, checked);
 	} break;
 	case ShowHideEntry::kGrid: {
-		toggle_grid();
+		set_display_flag(EditorInteractive::dfShowGrid, checked);
 	} break;
 	case ShowHideEntry::kImmovables: {
-		toggle_immovables();
+		set_display_flag(EditorInteractive::dfShowImmovables, checked);
 	} break;
 	case ShowHideEntry::kAnimals: {
-		toggle_bobs();
+		set_display_flag(EditorInteractive::dfShowBobs, checked);
 	} break;
 	case ShowHideEntry::kResources: {
-		toggle_resources();
+		set_display_flag(EditorInteractive::dfShowResources, checked);
 	} break;
 	default:
 		NEVER_HERE();
 	}
-	showhidemenu_.toggle();
 }
 
 void EditorInteractive::load(const std::string& filename) {
@@ -888,31 +890,6 @@ bool EditorInteractive::player_hears_field(const Widelands::Coords& /*coords*/) 
 	return true;
 }
 
-void EditorInteractive::toggle_resources() {
-	set_display_flag(
-	   EditorInteractive::dfShowResources, !get_display_flag(EditorInteractive::dfShowResources));
-}
-
-void EditorInteractive::toggle_immovables() {
-	set_display_flag(
-	   EditorInteractive::dfShowImmovables, !get_display_flag(EditorInteractive::dfShowImmovables));
-}
-
-void EditorInteractive::toggle_bobs() {
-	set_display_flag(
-	   EditorInteractive::dfShowBobs, !get_display_flag(EditorInteractive::dfShowBobs));
-}
-
-void EditorInteractive::toggle_grid() {
-	set_display_flag(
-	   EditorInteractive::dfShowGrid, !get_display_flag(EditorInteractive::dfShowGrid));
-}
-
-void EditorInteractive::toggle_maximum_buildhelp() {
-	set_display_flag(EditorInteractive::dfShowMaximumBuildhelp,
-	                 !get_display_flag(EditorInteractive::dfShowMaximumBuildhelp));
-}
-
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		if (matches_shortcut(KeyboardShortcut::kCommonEncyclopedia, code)) {
@@ -996,23 +973,27 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kEditorShowhideGrid, code)) {
-			toggle_grid();
+			showhidemenu_.toggle_checked(ShowHideEntry::kGrid, true);
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kEditorShowhideCritters, code)) {
-			toggle_bobs();
+			showhidemenu_.toggle_checked(ShowHideEntry::kAnimals, true);
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kEditorShowhideImmovables, code)) {
-			toggle_immovables();
+			showhidemenu_.toggle_checked(ShowHideEntry::kImmovables, true);
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kEditorShowhideResources, code)) {
-			toggle_resources();
+			showhidemenu_.toggle_checked(ShowHideEntry::kResources, true);
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kEditorShowhideMaximumBuildhelp, code)) {
-			toggle_maximum_buildhelp();
+			showhidemenu_.toggle_checked(ShowHideEntry::kMaximumBuildingSpaces, true);
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kCommonBuildhelp, code)) {
+			showhidemenu_.toggle_checked(ShowHideEntry::kBuildingSpaces, true);
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kEditorUndo, code)) {

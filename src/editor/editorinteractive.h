@@ -232,20 +232,11 @@ private:
 	// Adds the showhidemenu_ to the toolbar
 	void add_showhide_menu();
 	void rebuild_showhide_menu() override;
+	void build_showhide_menu();
 	// Takes the appropriate action when an item in the showhidemenu_ is selected
-	void showhide_menu_selected(ShowHideEntry entry);
+	void showhide_menu_selected(ShowHideEntry entry, bool checked);
 
 	bool player_hears_field(const Widelands::Coords& coords) const override;
-
-	// Toggles the buildhelp for maximum building spaces and calls rebuild_showhide_menu
-	void toggle_maximum_buildhelp();
-	// Show / hide the resources overlays in the mapview
-	void toggle_resources();
-	// Show / hide the immovables in the mapview
-	void toggle_immovables();
-	// Show / hide the bobs in the mapview
-	void toggle_bobs();
-	void toggle_grid();
 
 	void update_tool_history_window();
 
