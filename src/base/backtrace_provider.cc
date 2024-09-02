@@ -39,7 +39,6 @@
 // Taken from https://stackoverflow.com/a/77336
 // TODO(Nordfriese): Implement this on Windows as well (see https://stackoverflow.com/a/26398082)
 static void segfault_handler(const int sig) {
-	constexpr int kMaxBacktraceSize = 256;
 	const std::string signal_description = BacktraceProvider::get_signal_description(sig);
 
 	std::cout << std::endl
@@ -48,6 +47,7 @@ static void segfault_handler(const int sig) {
 	          << "Backtrace:" << std::endl;
 
 #ifdef PRINT_SEGFAULT_BACKTRACE
+	constexpr int kMaxBacktraceSize = 256;
 	void* array[kMaxBacktraceSize];
 	size_t size = backtrace(array, kMaxBacktraceSize);
 	backtrace_symbols_fd(array, size, STDOUT_FILENO);
@@ -87,6 +87,8 @@ static void segfault_handler(const int sig) {
 
 	filename += kCrashExtension;
 
+	// Mode 'b' is suitable on Windows platforms, to prevent pollution with '\r' characters
+	// in CrashReportWindow::CrashReportWindow()
 	FILE* file = fopen(filename.c_str(), "w+b");
 	if (file == nullptr) {
 		std::cout << "The crash report could not be saved to file " << filename << std::endl << std::endl;
@@ -117,6 +119,10 @@ void BacktraceProvider::register_signal_handler()
 	 */
 #ifdef PRINT_SEGFAULT_BACKTRACE
 	for (int s : {SIGBUS, SIGFPE, SIGILL, SIGSEGV}) {
+		signal(s, segfault_handler);
+	}
+#elif _WIN32 // TODO consider narrowing condition for mingw platform, it could be different for MSVC
+	for (int s : {SIGFPE, SIGILL, SIGSEGV}) {
 		signal(s, segfault_handler);
 	}
 #endif
