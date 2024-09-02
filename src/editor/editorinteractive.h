@@ -231,7 +231,7 @@ private:
 
 	// Adds the showhidemenu_ to the toolbar
 	void add_showhide_menu();
-	void rebuild_showhide_menu() override;
+	void update_showhide_menu() override;
 	void build_showhide_menu();
 	// Takes the appropriate action when an item in the showhidemenu_ is selected
 	void showhide_menu_selected(ShowHideEntry entry, bool checked);

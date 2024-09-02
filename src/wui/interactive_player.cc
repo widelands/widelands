@@ -368,8 +368,8 @@ void InteractivePlayer::statistics_menu_selected(StatisticsMenuEntry entry) {
 	statisticsmenu_.toggle();
 }
 
-void InteractivePlayer::rebuild_showhide_menu() {
-	InteractiveGameBase::rebuild_showhide_menu();
+void InteractivePlayer::update_showhide_menu() {
+	InteractiveGameBase::update_showhide_menu();
 	showhidemenu_.set_checked(ShowHideEntry::kWorkareaOverlap, get_display_flag(dfShowWorkareaOverlap), false);
 }
 

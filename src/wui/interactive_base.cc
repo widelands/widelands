@@ -547,10 +547,6 @@ void InteractiveBase::show_buildhelp(bool t) {
 	set_display_flag(dfShowBuildhelp, t);
 }
 
-void InteractiveBase::toggle_buildhelp() {
-	show_buildhelp(!buildhelp());
-}
-
 UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basename,
                                                 const std::string& name,
                                                 const std::string& tooltip_text,
@@ -1143,7 +1139,7 @@ void InteractiveBase::set_display_flags(uint32_t flags) {
 	const uint32_t old_value = display_flags_;
 	display_flags_ = flags;
 	if (old_value != display_flags_) {
-		rebuild_showhide_menu();
+		update_showhide_menu();
 	}
 }
 
@@ -1156,15 +1152,15 @@ bool InteractiveBase::get_display_flag(uint32_t const flag) const {
 	return (display_flags_ & flag) != 0u;
 }
 
-void InteractiveBase::set_display_flag(uint32_t const flag, bool const on) {
+void InteractiveBase::set_display_flag(uint32_t const flag, bool const on, bool const update) {
 	const uint32_t old_value = display_flags_;
 	display_flags_ &= ~flag;
 
 	if (on) {
 		display_flags_ |= flag;
 	}
-	if (old_value != display_flags_) {
-		NoteThreadSafeFunction::instantiate([this]() { rebuild_showhide_menu(); }, false);
+	if (update && old_value != display_flags_) {
+		NoteThreadSafeFunction::instantiate([this]() { update_showhide_menu(); }, false);
 	}
 }
 
@@ -1898,10 +1894,6 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 	}
 
 	if (down) {
-		if (matches_shortcut(KeyboardShortcut::kCommonBuildhelp, code)) {
-			toggle_buildhelp();
-			return true;
-		}
 		if (matches_shortcut(KeyboardShortcut::kCommonMinimap, code)) {
 			toggle_minimap();
 			return true;

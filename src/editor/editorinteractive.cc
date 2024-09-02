@@ -463,7 +463,7 @@ void EditorInteractive::add_showhide_menu() {
 	    });
 }
 
-void EditorInteractive::rebuild_showhide_menu() {
+void EditorInteractive::update_showhide_menu() {
 	showhidemenu_.set_checked(ShowHideEntry::kBuildingSpaces, buildhelp(), false);
 	showhidemenu_.set_checked(ShowHideEntry::kMaximumBuildingSpaces, get_display_flag(dfShowMaximumBuildhelp), false);
 	showhidemenu_.set_checked(ShowHideEntry::kGrid, get_display_flag(dfShowGrid), false);
@@ -518,22 +518,22 @@ void EditorInteractive::build_showhide_menu() {
 void EditorInteractive::showhide_menu_selected(ShowHideEntry entry, bool checked) {
 	switch (entry) {
 	case ShowHideEntry::kBuildingSpaces: {
-		show_buildhelp(checked);
+		set_display_flag(EditorInteractive::dfShowBuildhelp, checked, false);
 	} break;
 	case ShowHideEntry::kMaximumBuildingSpaces: {
-		set_display_flag(EditorInteractive::dfShowMaximumBuildhelp, checked);
+		set_display_flag(EditorInteractive::dfShowMaximumBuildhelp, checked, false);
 	} break;
 	case ShowHideEntry::kGrid: {
-		set_display_flag(EditorInteractive::dfShowGrid, checked);
+		set_display_flag(EditorInteractive::dfShowGrid, checked, false);
 	} break;
 	case ShowHideEntry::kImmovables: {
-		set_display_flag(EditorInteractive::dfShowImmovables, checked);
+		set_display_flag(EditorInteractive::dfShowImmovables, checked, false);
 	} break;
 	case ShowHideEntry::kAnimals: {
-		set_display_flag(EditorInteractive::dfShowBobs, checked);
+		set_display_flag(EditorInteractive::dfShowBobs, checked, false);
 	} break;
 	case ShowHideEntry::kResources: {
-		set_display_flag(EditorInteractive::dfShowResources, checked);
+		set_display_flag(EditorInteractive::dfShowResources, checked, false);
 	} break;
 	default:
 		NEVER_HERE();

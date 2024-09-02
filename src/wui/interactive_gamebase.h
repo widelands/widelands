@@ -81,7 +81,7 @@ protected:
 	void add_main_menu();
 	// Adds the showhidemenu_ to the toolbar
 	void add_showhide_menu();
-	void rebuild_showhide_menu() override;
+	void update_showhide_menu() override;
 	virtual void build_showhide_menu();
 	// Adds the gamespeedmenu_ to the toolbar
 	void add_gamespeed_menu();

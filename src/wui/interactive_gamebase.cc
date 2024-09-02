@@ -265,7 +265,7 @@ void InteractiveGameBase::add_showhide_menu() {
 	    });
 }
 
-void InteractiveGameBase::rebuild_showhide_menu() {
+void InteractiveGameBase::update_showhide_menu() {
 	showhidemenu_.set_checked(ShowHideEntry::kBuildingSpaces, buildhelp(), false);
 	showhidemenu_.set_checked(ShowHideEntry::kCensus, get_display_flag(dfShowCensus), false);
 	showhidemenu_.set_checked(ShowHideEntry::kStatistics, get_display_flag(dfShowStatistics), false);
@@ -312,22 +312,22 @@ void InteractiveGameBase::build_showhide_menu() {
 void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry, bool checked) {
 	switch (entry) {
 	case ShowHideEntry::kBuildingSpaces: {
-		show_buildhelp(checked);
+		set_display_flag(dfShowBuildhelp, checked, false);
 	} break;
 	case ShowHideEntry::kCensus: {
-		set_display_flag(dfShowCensus, checked);
+		set_display_flag(dfShowCensus, checked, false);
 	} break;
 	case ShowHideEntry::kStatistics: {
-		set_display_flag(dfShowStatistics, checked);
+		set_display_flag(dfShowStatistics, checked, false);
 	} break;
 	case ShowHideEntry::kSoldierLevels: {
-		set_display_flag(dfShowSoldierLevels, checked);
+		set_display_flag(dfShowSoldierLevels, checked, false);
 	} break;
 	case ShowHideEntry::kBuildings: {
-		set_display_flag(dfShowBuildings, checked);
+		set_display_flag(dfShowBuildings, checked, false);
 	} break;
 	case ShowHideEntry::kWorkareaOverlap: {
-		set_display_flag(dfShowWorkareaOverlap, checked);
+		set_display_flag(dfShowWorkareaOverlap, checked, false);
 	} break;
 	default:
 		NEVER_HERE();
