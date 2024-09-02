@@ -260,16 +260,15 @@ void InteractiveGameBase::add_showhide_menu() {
 
 	build_showhide_menu();
 	showhidemenu_.checkmark_changed.connect(
-	    [this](ShowHideEntry entry, bool checked) {
-		showhide_menu_selected(entry, checked);
-	    });
+	   [this](ShowHideEntry entry, bool checked) { showhide_menu_selected(entry, checked); });
 }
 
 void InteractiveGameBase::update_showhide_menu() {
 	showhidemenu_.set_checked(ShowHideEntry::kBuildingSpaces, buildhelp(), false);
 	showhidemenu_.set_checked(ShowHideEntry::kCensus, get_display_flag(dfShowCensus), false);
 	showhidemenu_.set_checked(ShowHideEntry::kStatistics, get_display_flag(dfShowStatistics), false);
-	showhidemenu_.set_checked(ShowHideEntry::kSoldierLevels, get_display_flag(dfShowSoldierLevels), false);
+	showhidemenu_.set_checked(
+	   ShowHideEntry::kSoldierLevels, get_display_flag(dfShowSoldierLevels), false);
 	showhidemenu_.set_checked(ShowHideEntry::kBuildings, get_display_flag(dfShowBuildings), false);
 }
 

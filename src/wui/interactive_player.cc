@@ -370,14 +370,16 @@ void InteractivePlayer::statistics_menu_selected(StatisticsMenuEntry entry) {
 
 void InteractivePlayer::update_showhide_menu() {
 	InteractiveGameBase::update_showhide_menu();
-	showhidemenu_.set_checked(ShowHideEntry::kWorkareaOverlap, get_display_flag(dfShowWorkareaOverlap), false);
+	showhidemenu_.set_checked(
+	   ShowHideEntry::kWorkareaOverlap, get_display_flag(dfShowWorkareaOverlap), false);
 }
 
 void InteractivePlayer::build_showhide_menu() {
 	InteractiveGameBase::build_showhide_menu();
 	/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps are
 	 * highlighted */
-	showhidemenu_.add(_("Show Workarea Overlaps"), ShowHideEntry::kWorkareaOverlap,
+	showhidemenu_.add(
+	   _("Show Workarea Overlaps"), ShowHideEntry::kWorkareaOverlap,
 	   g_image_cache->get("images/wui/menus/show_workarea_overlap.png"),
 	   get_display_flag(dfShowWorkareaOverlap),
 	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"),

@@ -458,14 +458,13 @@ void EditorInteractive::add_showhide_menu() {
 	build_showhide_menu();
 
 	showhidemenu_.checkmark_changed.connect(
-	    [this](ShowHideEntry entry, bool checked) {
-		showhide_menu_selected(entry, checked);
-	    });
+	   [this](ShowHideEntry entry, bool checked) { showhide_menu_selected(entry, checked); });
 }
 
 void EditorInteractive::update_showhide_menu() {
 	showhidemenu_.set_checked(ShowHideEntry::kBuildingSpaces, buildhelp(), false);
-	showhidemenu_.set_checked(ShowHideEntry::kMaximumBuildingSpaces, get_display_flag(dfShowMaximumBuildhelp), false);
+	showhidemenu_.set_checked(
+	   ShowHideEntry::kMaximumBuildingSpaces, get_display_flag(dfShowMaximumBuildhelp), false);
 	showhidemenu_.set_checked(ShowHideEntry::kGrid, get_display_flag(dfShowGrid), false);
 	showhidemenu_.set_checked(ShowHideEntry::kImmovables, get_display_flag(dfShowImmovables), false);
 	showhidemenu_.set_checked(ShowHideEntry::kAnimals, get_display_flag(dfShowBobs), false);
