@@ -454,6 +454,9 @@ public:
 	int indicate_item(lua_State* L);
 	int select(lua_State* L);
 	int add(lua_State* L);
+	int get_value_at(lua_State* L);
+	int get_label_at(lua_State* L);
+	int get_tooltip_at(lua_State* L);
 
 	/*
 	 * C Methods
@@ -485,6 +488,11 @@ public:
 	 * Lua Methods
 	 */
 	int add(lua_State* L);
+	int get_value_at(lua_State* L);
+	int get_label_at(lua_State* L);
+	int get_tooltip_at(lua_State* L);
+	int get_enable_at(lua_State* L);
+	int get_indent_at(lua_State* L);
 
 	/*
 	 * C Methods
