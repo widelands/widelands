@@ -505,6 +505,10 @@ static int L_play_sound(lua_State* L) {
 	return 0;
 }
 
+static int L_deleted_function(lua_State*) {
+	throw LuaError("call to a removed function");
+}
+
 /* Always append new globals to the end, and never remove any list entries.
  * Otherwise you break savegame compatibility.
  */
@@ -514,7 +518,7 @@ const static struct luaL_Reg globals[] = {{"_", &L__},
                                           {"ngettext", &L_ngettext},
                                           {"pgettext", &L_pgettext},
                                           {"npgettext", &L_npgettext},
-                                          {"set_textdomain", nullptr},
+                                          {"set_textdomain", &L_deleted_function},
                                           {"push_textdomain", &L_push_textdomain},
                                           {"pop_textdomain", &L_pop_textdomain},
                                           {"ticks", &L_ticks},
