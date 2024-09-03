@@ -211,6 +211,30 @@ void Window::layout() {
 	   Vector2i(window_style_info().button_minimize_x(), window_style_info().buttons_y()));
 }
 
+void Window::update_template() {
+	Panel::update_template();
+
+	const int inw = get_inner_w();
+	const int inh = get_inner_h();
+	const int x = get_x() + get_lborder();
+	const int y = get_y() + get_tborder();
+
+	set_border(
+	   window_style_info().left_border_thickness(), window_style_info().right_border_thickness(),
+	   window_style_info().top_border_thickness(), window_style_info().bottom_border_thickness());
+
+	set_inner_size(inw, inh);
+	set_pos(Vector2i(x - get_lborder(), y - get_tborder()));
+
+	button_close_->set_pic(g_image_cache->get(window_style_info().button_close()));
+	for (Button* b : {button_close_, button_pin_, button_minimize_}) {
+		b->set_size(window_style_info().button_size(), window_style_info().button_size());
+	}
+	update_toolbar_buttons();
+
+	layout();
+}
+
 /**
  * Position the window near the clicked position, but keeping the clicked field visible
  */
