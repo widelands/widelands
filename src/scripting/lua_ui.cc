@@ -1463,8 +1463,8 @@ UI::Panel* LuaPanel::do_create_child_discrete_slider(lua_State* L, UI::Panel* pa
 		report_error(L, "Discrete slider initial value out of range");
 	}
 
-	UI::DiscreteSlider* slider = new UI::DiscreteSlider(parent, name, x, y, w, h, labels, init_value,
-	                                                    get_slider_style(L), tooltip, cursor_size);
+	UI::DiscreteSlider* slider = new UI::DiscreteSlider(
+	   parent, name, x, y, w, h, labels, init_value, get_slider_style(L), tooltip, cursor_size);
 
 	if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
 		slider->changed.connect(create_plugin_action_lambda(L, on_changed));
