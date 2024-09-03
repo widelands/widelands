@@ -505,17 +505,21 @@ static int L_play_sound(lua_State* L) {
 	return 0;
 }
 
+/* Always append new globals to the end, and never remove any list entries.
+ * Otherwise you break savegame compatibility.
+ */
 const static struct luaL_Reg globals[] = {{"_", &L__},
                                           {"get_build_id", &L_get_build_id},
                                           {"include", &L_include},
                                           {"ngettext", &L_ngettext},
                                           {"pgettext", &L_pgettext},
                                           {"npgettext", &L_npgettext},
-                                          {"print", &L_print},
+                                          {"set_textdomain", nullptr},
                                           {"push_textdomain", &L_push_textdomain},
                                           {"pop_textdomain", &L_pop_textdomain},
                                           {"ticks", &L_ticks},
                                           {"play_sound", &L_play_sound},
+                                          {"print", &L_print},
                                           {nullptr, nullptr}};
 
 void luaopen_globals(lua_State* L) {
