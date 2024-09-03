@@ -791,6 +791,8 @@ int LuaPanel::get_child(lua_State* L) {
              * ``"tooltip"``: **Optional**. The entry's tooltip.
              * ``"select"``: **Optional**. Whether to select this entry (default :const:`false`).
              * ``"indent"``: **Optional**. How many levels to indent the item (default 0).
+             * ``"enable"``: **Optional**. **New in version 1.3**.
+               Whether to enable this entry (default :const:`true`).
 
            * ``"on_selected"``: **Optional**. Callback code to run when the user selects an entry.
            * ``"on_double_clicked"``: **Optional**.
@@ -1522,10 +1524,11 @@ UI::Panel* LuaPanel::do_create_child_listselect(lua_State* L, UI::Panel* parent)
 				std::string etooltip = get_table_string(L, "tooltip", false);
 				std::string icon = get_table_string(L, "icon", false);
 				bool select = get_table_boolean(L, "select", false);
+				bool enable = get_table_boolean(L, "enable", false, true);
 				int32_t indent = get_table_int(L, "indent", false);
 
 				ls->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select,
-				        etooltip, "", indent);
+				        etooltip, "", indent, enable);
 				lua_pop(L, 1);
 			}
 		}
@@ -2807,12 +2810,13 @@ Dropdown
 */
 const char LuaDropdown::className[] = "Dropdown";
 const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
-   METHOD(LuaDropdown, open),   METHOD(LuaDropdown, highlight_item),
+   METHOD(LuaDropdown, open),           METHOD(LuaDropdown, highlight_item),
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
    METHOD(LuaDropdown, indicate_item),
 #endif
-   METHOD(LuaDropdown, select), METHOD(LuaDropdown, add),
-   {nullptr, nullptr},
+   METHOD(LuaDropdown, select),         METHOD(LuaDropdown, add),
+   METHOD(LuaDropdown, get_value_at),   METHOD(LuaDropdown, get_label_at),
+   METHOD(LuaDropdown, get_tooltip_at), {nullptr, nullptr},
 };
 const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
    PROP_RO(LuaDropdown, datatype),    PROP_RO(LuaDropdown, expanded),
@@ -3036,6 +3040,87 @@ int LuaDropdown::add(lua_State* L) {
 	return 0;
 }
 
+/* RST
+   .. method:: get_value_at(index)
+
+      .. versionadded:: 1.3
+
+      Get the internal value of the item at the specified position.
+      Only allowed for dropdowns with supported datatypes.
+
+      :arg index: The index to query, starting from ``1``.
+      :type index: :class:`integer`
+      :returns: The entry's internal value.
+      :rtype: This list's :attr:`datatype`
+*/
+int LuaDropdown::get_value_at(lua_State* L) {
+	const uint32_t index = luaL_checkuint32(L, 2);
+	const uint32_t nritems = get()->size();
+	if (index < 1 || index > nritems) {
+		report_error(L, "Index %u out of range for dropdown of size %u", index, nritems);
+	}
+	if (upcast(DropdownOfString, dd, get()); dd != nullptr) {
+		lua_pushstring(L, dd->at(index - 1).value);
+	} else {
+		report_error(L, "get_value_at() not allowed for dropdown with unsupported datatype");
+	}
+	return 1;
+}
+
+/* RST
+   .. method:: get_label_at(index)
+
+      .. versionadded:: 1.3
+
+      Get the user-facing name of the item at the specified position.
+      Only allowed for dropdowns with supported datatypes.
+
+      :arg index: The index to query, starting from ``1``.
+      :type index: :class:`integer`
+      :returns: The entry's display name.
+      :rtype: :class:`string`
+*/
+int LuaDropdown::get_label_at(lua_State* L) {
+	const uint32_t index = luaL_checkuint32(L, 2);
+	const uint32_t nritems = get()->size();
+	if (index < 1 || index > nritems) {
+		report_error(L, "Index %u out of range for dropdown of size %u", index, nritems);
+	}
+	if (upcast(DropdownOfString, dd, get()); dd != nullptr) {
+		lua_pushstring(L, dd->at(index - 1).name);
+	} else {
+		report_error(L, "get_label_at() not allowed for dropdown with unsupported datatype");
+	}
+	return 1;
+}
+
+/* RST
+   .. method:: get_tooltip_at(index)
+
+      .. versionadded:: 1.3
+
+      Get the tooltip of the item at the specified position.
+      Only allowed for dropdowns with supported datatypes.
+
+      :arg index: The index to query, starting from ``1``.
+      :type index: :class:`integer`
+      :returns: The entry's tooltip (may be empty if the item has no tooltip).
+      :rtype: :class:`string`
+*/
+int LuaDropdown::get_tooltip_at(lua_State* L) {
+	const uint32_t index = luaL_checkuint32(L, 2);
+	const uint32_t nritems = get()->size();
+	if (index < 1 || index > nritems) {
+		report_error(L, "Index %u out of range for dropdown of size %u", index, nritems);
+	}
+	if (upcast(DropdownOfString, dd, get()); dd != nullptr) {
+		lua_pushstring(L, dd->at(index - 1).tooltip);
+	} else {
+		report_error(L, "get_tooltip_at() not allowed for dropdown with unsupported datatype");
+	}
+	return 1;
+}
+
 /*
  * C Functions
  */
@@ -3056,6 +3141,11 @@ Listselect
 const char LuaListselect::className[] = "Listselect";
 const MethodType<LuaListselect> LuaListselect::Methods[] = {
    METHOD(LuaListselect, add),
+   METHOD(LuaListselect, get_value_at),
+   METHOD(LuaListselect, get_label_at),
+   METHOD(LuaListselect, get_tooltip_at),
+   METHOD(LuaListselect, get_enable_at),
+   METHOD(LuaListselect, get_indent_at),
    {nullptr, nullptr},
 };
 const PropertyType<LuaListselect> LuaListselect::Properties[] = {
@@ -3116,7 +3206,11 @@ int LuaListselect::get_selection(lua_State* L) {
  */
 
 /* RST
-   .. method:: add(label, value[, icon = nil, tooltip = "", select = false, indent = 0])
+   .. method:: add(label, value
+      [, icon = nil, tooltip = "", select = false, indent = 0, enable = true])
+
+   .. versionchanged:: 1.3
+      Added ``enable`` parameter.
 
       Add an entry to the list. Only allowed for lists with supported datatypes.
 
@@ -3140,15 +3234,131 @@ int LuaListselect::add(lua_State* L) {
 	std::string tooltip = top >= 5 ? luaL_checkstring(L, 5) : "";
 	bool select = top >= 6 && luaL_checkboolean(L, 6);
 	uint32_t indent = top >= 7 ? luaL_checkuint32(L, 7) : 0;
+	bool enable = top < 8 || luaL_checkboolean(L, 8);
 
 	if (upcast(ListselectOfString, list, get()); list != nullptr) {
 		std::string value = luaL_checkstring(L, 3);
 		list->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip,
-		          "", indent);
+		          "", indent, enable);
 	} else {
 		report_error(L, "add() not allowed for listselect with unsupported datatype");
 	}
 	return 0;
+}
+
+/* RST
+   .. method:: get_value_at(index)
+
+      .. versionadded:: 1.3
+
+      Get the internal value of the item at the specified position.
+      Only allowed for lists with supported datatypes.
+
+      :arg index: The index to query, starting from ``1``.
+      :type index: :class:`integer`
+      :returns: The entry's internal value.
+      :rtype: This list's :attr:`datatype`
+*/
+int LuaListselect::get_value_at(lua_State* L) {
+	const uint32_t index = luaL_checkuint32(L, 2);
+	const uint32_t nritems = get()->size();
+	if (index < 1 || index > nritems) {
+		report_error(L, "Index %u out of range for list of size %u", index, nritems);
+	}
+	if (upcast(ListselectOfString, dd, get()); dd != nullptr) {
+		lua_pushstring(L, (*dd)[index - 1]);
+	} else {
+		report_error(L, "get_value_at() not allowed for list with unsupported datatype");
+	}
+	return 1;
+}
+
+/* RST
+   .. method:: get_label_at(index)
+
+      .. versionadded:: 1.3
+
+      Get the user-facing name of the item at the specified position.
+
+      :arg index: The index to query, starting from ``1``.
+      :type index: :class:`integer`
+      :returns: The entry's display name.
+      :rtype: :class:`string`
+*/
+int LuaListselect::get_label_at(lua_State* L) {
+	const uint32_t index = luaL_checkuint32(L, 2);
+	const uint32_t nritems = get()->size();
+	if (index < 1 || index > nritems) {
+		report_error(L, "Index %u out of range for list of size %u", index, nritems);
+	}
+	lua_pushstring(L, get()->at(index - 1).name);
+	return 1;
+}
+
+/* RST
+   .. method:: get_tooltip_at(index)
+
+      .. versionadded:: 1.3
+
+      Get the tooltip of the item at the specified position.
+
+      :arg index: The index to query, starting from ``1``.
+      :type index: :class:`integer`
+      :returns: The entry's tooltip (may be empty if the item has no tooltip).
+      :rtype: :class:`string`
+*/
+int LuaListselect::get_tooltip_at(lua_State* L) {
+	const uint32_t index = luaL_checkuint32(L, 2);
+	const uint32_t nritems = get()->size();
+	if (index < 1 || index > nritems) {
+		report_error(L, "Index %u out of range for list of size %u", index, nritems);
+	}
+	lua_pushstring(L, get()->at(index - 1).tooltip);
+	return 1;
+}
+
+/* RST
+   .. method:: get_enable_at(index)
+
+      .. versionadded:: 1.3
+
+      Get the enable/disable display state of the item at the specified position.
+
+      :arg index: The index to query, starting from ``1``.
+      :type index: :class:`integer`
+      :returns: Whether the entry is marked as enabled.
+      :rtype: :class:`boolean`
+*/
+int LuaListselect::get_enable_at(lua_State* L) {
+	const uint32_t index = luaL_checkuint32(L, 2);
+	const uint32_t nritems = get()->size();
+	if (index < 1 || index > nritems) {
+		report_error(L, "Index %u out of range for list of size %u", index, nritems);
+	}
+	lua_pushboolean(L, static_cast<int>(get()->at(index - 1).enable));
+	return 1;
+}
+
+/* RST
+   .. method:: get_indent_at(index)
+
+      .. versionadded:: 1.3
+
+      Get the indentation level of the item at the specified position.
+
+      :arg index: The index to query, starting from ``1``.
+      :type index: :class:`integer`
+      :returns: The entry's indentation.
+      :rtype: :class:`integer`
+*/
+int LuaListselect::get_indent_at(lua_State* L) {
+	const uint32_t index = luaL_checkuint32(L, 2);
+	const uint32_t nritems = get()->size();
+	if (index < 1 || index > nritems) {
+		report_error(L, "Index %u out of range for list of size %u", index, nritems);
+	}
+	lua_pushinteger(L, get()->at(index - 1).indent);
+	return 1;
 }
 
 /*
