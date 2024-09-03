@@ -1119,6 +1119,26 @@ get_table_button_style(lua_State* L,
 	return default_value;
 }
 
+static inline UI::SliderStyle get_slider_style(lua_State* L) {
+	if (is_main_menu(L)) {
+		return UI::SliderStyle::kFsMenu;
+	}
+	if (get_table_boolean(L, "dark", false)) {
+		return UI::SliderStyle::kWuiDark;
+	}
+	return UI::SliderStyle::kWuiLight;
+}
+
+static inline UI::TabPanelStyle get_tab_panel_style(lua_State* L) {
+	if (is_main_menu(L)) {
+		return UI::TabPanelStyle::kFsMenu;
+	}
+	if (get_table_boolean(L, "dark", false)) {
+		return UI::TabPanelStyle::kWuiDark;
+	}
+	return UI::TabPanelStyle::kWuiLight;
+}
+
 static UI::Button::VisualState get_table_button_visual_state(
    lua_State* L,
    const char* key,
@@ -1419,7 +1439,6 @@ UI::Panel* LuaPanel::do_create_child_discrete_slider(lua_State* L, UI::Panel* pa
 	std::string name = get_table_string(L, "name", true);
 	uint32_t cursor_size = get_table_int(L, "cursor_size", false, 20);
 	uint32_t init_value = get_table_int(L, "value", true);
-	bool dark = get_table_boolean(L, "dark", false);
 
 	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
@@ -1445,10 +1464,7 @@ UI::Panel* LuaPanel::do_create_child_discrete_slider(lua_State* L, UI::Panel* pa
 	}
 
 	UI::DiscreteSlider* slider = new UI::DiscreteSlider(parent, name, x, y, w, h, labels, init_value,
-	                                                    is_main_menu(L) ? UI::SliderStyle::kFsMenu :
-	                                                    dark            ? UI::SliderStyle::kWuiDark :
-                                                                         UI::SliderStyle::kWuiLight,
-	                                                    tooltip, cursor_size);
+	                                                    get_slider_style(L), tooltip, cursor_size);
 
 	if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
 		slider->changed.connect(create_plugin_action_lambda(L, on_changed));
@@ -1743,7 +1759,6 @@ UI::Panel* LuaPanel::do_create_child_slider(lua_State* L, UI::Panel* parent) {
 	int32_t val_max = get_table_int(L, "max", true);
 	int32_t val = get_table_int(L, "value", true);
 	uint32_t cursor_size = get_table_int(L, "cursor_size", false, 20);
-	bool dark = get_table_boolean(L, "dark", false);
 
 	if (val_min > val_max) {
 		report_error(L, "Malformed slider value range");
@@ -1761,16 +1776,10 @@ UI::Panel* LuaPanel::do_create_child_slider(lua_State* L, UI::Panel* parent) {
 	UI::Slider* slider;
 	if (orientation == UI::Box::Vertical) {
 		slider = new UI::VerticalSlider(parent, name, x, y, w, h, val_min, val_max, val,
-		                                is_main_menu(L) ? UI::SliderStyle::kFsMenu :
-		                                dark            ? UI::SliderStyle::kWuiDark :
-                                                        UI::SliderStyle::kWuiLight,
-		                                cursor_size, tooltip);
+		                                get_slider_style(L), cursor_size, tooltip);
 	} else {
 		slider = new UI::HorizontalSlider(parent, name, x, y, w, h, val_min, val_max, val,
-		                                  is_main_menu(L) ? UI::SliderStyle::kFsMenu :
-		                                  dark            ? UI::SliderStyle::kWuiDark :
-                                                          UI::SliderStyle::kWuiLight,
-		                                  tooltip, cursor_size);
+		                                  get_slider_style(L), tooltip, cursor_size);
 	}
 
 	if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
@@ -1896,13 +1905,8 @@ UI::Panel* LuaPanel::do_create_child_spinbox(lua_State* L, UI::Panel* parent) {
 
 UI::Panel* LuaPanel::do_create_child_tabpanel(lua_State* L, UI::Panel* parent) {
 	std::string name = get_table_string(L, "name", true);
-	bool dark = get_table_boolean(L, "dark", false);
 
-	UI::TabPanel* tabpanel = new UI::TabPanel(parent,
-	                                          is_main_menu(L) ? UI::TabPanelStyle::kFsMenu :
-	                                          dark            ? UI::TabPanelStyle::kWuiDark :
-                                                               UI::TabPanelStyle::kWuiLight,
-	                                          name);
+	UI::TabPanel* tabpanel = new UI::TabPanel(parent, get_tab_panel_style(L), name);
 
 	lua_getfield(L, -1, "tabs");
 	if (!lua_isnil(L, -1)) {
