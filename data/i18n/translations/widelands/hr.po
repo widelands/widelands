@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-22 02:44+0000\n"
+"POT-Creation-Date: 2024-08-29 02:47+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Ivan Bižaca <biza@malilosinj.info>, 2015,2023\n"
 "Language-Team: Croatian (http://app.transifex.com/widelands/widelands/language/hr/)\n"
@@ -4303,7 +4303,7 @@ msgid "Select the entire text"
 msgstr ""
 
 #: ../../../../src/ui_basic/window.cc:80
-#: ../../../../src/ui_basic/window.cc:838
+#: ../../../../src/ui_basic/window.cc:862
 #: ../../../../src/ui_fsmenu/about.cc:41
 #: ../../../../src/ui_fsmenu/crash_report.cc:71
 #: ../../../../src/ui_fsmenu/crash_report.cc:161
@@ -4313,43 +4313,43 @@ msgid "Close"
 msgstr "Zatvori"
 
 #: ../../../../src/ui_basic/window.cc:147
-#: ../../../../src/ui_basic/window.cc:822
+#: ../../../../src/ui_basic/window.cc:846
 msgid "Minimize"
 msgstr "Stisni"
 
 #: ../../../../src/ui_basic/window.cc:147
-#: ../../../../src/ui_basic/window.cc:822
+#: ../../../../src/ui_basic/window.cc:846
 msgid "Restore"
 msgstr "Povečaj"
 
 #: ../../../../src/ui_basic/window.cc:152
-#: ../../../../src/ui_basic/window.cc:832
+#: ../../../../src/ui_basic/window.cc:856
 #: ../../../../src/wui/info_panel.cc:204
 msgid "Pin"
 msgstr ""
 
 #: ../../../../src/ui_basic/window.cc:152
-#: ../../../../src/ui_basic/window.cc:832
+#: ../../../../src/ui_basic/window.cc:856
 msgid "Unpin"
 msgstr ""
 
-#: ../../../../src/ui_basic/window.cc:823
+#: ../../../../src/ui_basic/window.cc:847
 msgid "Minimize the window"
 msgstr ""
 
-#: ../../../../src/ui_basic/window.cc:823
+#: ../../../../src/ui_basic/window.cc:847
 msgid "Unminimize the window"
 msgstr ""
 
-#: ../../../../src/ui_basic/window.cc:833
+#: ../../../../src/ui_basic/window.cc:857
 msgid "Pin the window"
 msgstr ""
 
-#: ../../../../src/ui_basic/window.cc:833
+#: ../../../../src/ui_basic/window.cc:857
 msgid "Unpin the window"
 msgstr ""
 
-#: ../../../../src/ui_basic/window.cc:838
+#: ../../../../src/ui_basic/window.cc:862
 msgid "Close the window"
 msgstr ""
 
