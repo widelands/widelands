@@ -728,7 +728,7 @@ void BuildingStatisticsMenu::think() {
 	// Update statistics
 	const Time& gametime = iplayer().game().get_gametime();
 
-	if (was_minimized_ || (gametime - lastupdate_) > kUpdateTimeInGametimeMs) {
+	if (!is_minimal() && (was_minimized_ || (gametime - lastupdate_) > kUpdateTimeInGametimeMs)) {
 		update_building_list();
 		update();
 		lastupdate_ = gametime;

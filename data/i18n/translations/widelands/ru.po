@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-17 02:51+0000\n"
+"POT-Creation-Date: 2024-08-29 02:47+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2024\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
@@ -1852,8 +1852,8 @@ msgstr "Widelands не будет работать, потому что ваш �
 #. Font support is limited here, so do not use advanced typography *
 #: ../../../../src/graphic/gl/initialize.cc:227
 #, c-format
-msgid "The %1$u version needs to be version %2$u.%3$u or newer."
-msgstr "Версия %1$u требует версию %2$u.%3$u или новее."
+msgid "The %1$s version needs to be version %2$u.%3$u or newer."
+msgstr ""
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -4345,7 +4345,7 @@ msgid "Select the entire text"
 msgstr "Выделить весь текст"
 
 #: ../../../../src/ui_basic/window.cc:80
-#: ../../../../src/ui_basic/window.cc:838
+#: ../../../../src/ui_basic/window.cc:862
 #: ../../../../src/ui_fsmenu/about.cc:41
 #: ../../../../src/ui_fsmenu/crash_report.cc:71
 #: ../../../../src/ui_fsmenu/crash_report.cc:161
@@ -4355,43 +4355,43 @@ msgid "Close"
 msgstr "Закрыть"
 
 #: ../../../../src/ui_basic/window.cc:147
-#: ../../../../src/ui_basic/window.cc:822
+#: ../../../../src/ui_basic/window.cc:846
 msgid "Minimize"
 msgstr "Свернуть"
 
 #: ../../../../src/ui_basic/window.cc:147
-#: ../../../../src/ui_basic/window.cc:822
+#: ../../../../src/ui_basic/window.cc:846
 msgid "Restore"
 msgstr "Развернуть"
 
 #: ../../../../src/ui_basic/window.cc:152
-#: ../../../../src/ui_basic/window.cc:832
+#: ../../../../src/ui_basic/window.cc:856
 #: ../../../../src/wui/info_panel.cc:204
 msgid "Pin"
 msgstr "Закрепить"
 
 #: ../../../../src/ui_basic/window.cc:152
-#: ../../../../src/ui_basic/window.cc:832
+#: ../../../../src/ui_basic/window.cc:856
 msgid "Unpin"
 msgstr "Освободить"
 
-#: ../../../../src/ui_basic/window.cc:823
+#: ../../../../src/ui_basic/window.cc:847
 msgid "Minimize the window"
 msgstr "Свернуть окно"
 
-#: ../../../../src/ui_basic/window.cc:823
+#: ../../../../src/ui_basic/window.cc:847
 msgid "Unminimize the window"
 msgstr "Развернуть окно"
 
-#: ../../../../src/ui_basic/window.cc:833
+#: ../../../../src/ui_basic/window.cc:857
 msgid "Pin the window"
 msgstr "Закрепить окно"
 
-#: ../../../../src/ui_basic/window.cc:833
+#: ../../../../src/ui_basic/window.cc:857
 msgid "Unpin the window"
 msgstr "Открепить окно"
 
-#: ../../../../src/ui_basic/window.cc:838
+#: ../../../../src/ui_basic/window.cc:862
 msgid "Close the window"
 msgstr "Закрыть окно"
 
