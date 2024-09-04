@@ -3919,6 +3919,7 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
    METHOD(LuaMapView, mouse_to_pixel),
    METHOD(LuaMapView, add_toolbar_plugin),
    METHOD(LuaMapView, update_toolbar),
+   METHOD(LuaMapView, set_keyboard_shortcut),
    METHOD(LuaMapView, add_plugin_timer),
    {nullptr, nullptr},
 };
@@ -4274,6 +4275,33 @@ int LuaMapView::add_toolbar_plugin(lua_State* L) {
 }
 
 /* RST
+   .. method:: set_keyboard_shortcut(name, action[, failsafe=true])
+
+      .. versionadded:: 1.3
+
+      Associate a named keyboard shortcut with a piece of code to run when the shortcut is pressed.
+      This replaces any existing action associated with the shortcut.
+
+      :arg name: The internal name of the keyboard shortcut.
+      :type name: :class:`string`
+      :arg action: The Lua code to run.
+      :type action: :class:`string`
+      :arg failsafe: In event of an error, an error message is shown and the timer is removed.
+         If this is set to :const:`false`, the game will be aborted with no error handling instead.
+      :type failsafe: :class:`boolean`
+*/
+int LuaMapView::set_keyboard_shortcut(lua_State* L) {
+	std::string name = luaL_checkstring(L, 2);
+	std::string action = luaL_checkstring(L, 3);
+	bool failsafe = lua_gettop(L) < 4 || luaL_checkboolean(L, 4);
+	if (!shortcut_exists(name)) {
+		report_error(L, "Invalid shortcut name '%s'", name.c_str());
+	}
+	get()->set_lua_shortcut(name, action, failsafe);
+	return 0;
+}
+
+/* RST
    .. method:: add_plugin_timer(action, interval[, failsafe=true])
 
       .. versionadded:: 1.2
@@ -4321,6 +4349,7 @@ MainMenu
 */
 const char LuaMainMenu::className[] = "MainMenu";
 const MethodType<LuaMainMenu> LuaMainMenu::Methods[] = {
+   METHOD(LuaMainMenu, set_keyboard_shortcut),
    METHOD(LuaMainMenu, add_plugin_timer),
    {nullptr, nullptr},
 };
@@ -4338,6 +4367,31 @@ void LuaMainMenu::__unpersist(lua_State* L) {
 /*
  * Lua Functions
  */
+
+/* RST
+   .. method:: set_keyboard_shortcut(name, action[, failsafe=true])
+
+      Associate a named keyboard shortcut with a piece of code to run when the shortcut is pressed.
+      This replaces any existing action associated with the shortcut.
+
+      :arg name: The internal name of the keyboard shortcut.
+      :type name: :class:`string`
+      :arg action: The Lua code to run.
+      :type action: :class:`string`
+      :arg failsafe: In event of an error, an error message is shown and the timer is removed.
+         If this is set to :const:`false`, the game will be aborted with no error handling instead.
+      :type failsafe: :class:`boolean`
+*/
+int LuaMainMenu::set_keyboard_shortcut(lua_State* L) {
+	std::string name = luaL_checkstring(L, 2);
+	std::string action = luaL_checkstring(L, 3);
+	bool failsafe = lua_gettop(L) < 4 || luaL_checkboolean(L, 4);
+	if (!shortcut_exists(name)) {
+		report_error(L, "Invalid shortcut name '%s'", name.c_str());
+	}
+	get()->set_lua_shortcut(name, action, failsafe);
+	return 0;
+}
 
 /* RST
    .. method:: add_plugin_timer(action, interval[, failsafe=true])
@@ -4418,6 +4472,21 @@ static int L_get_shortcut(lua_State* L) {
 	} catch (const WException& e) {
 		report_error(L, "Unable to query shortcut for '%s': %s", name.c_str(), e.what());
 	}
+	return 1;
+}
+
+/* RST
+.. method:: shortcut_exists(name)
+
+   .. versionadded:: 1.3
+
+   Check whether the given name belongs to a known keyboard shortcut.
+
+   :returns: Whether the named shortcut exists.
+   :rtype: :class:`boolean`
+*/
+static int L_shortcut_exists(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(shortcut_exists(luaL_checkstring(L, -1))));
 	return 1;
 }
 
@@ -4520,6 +4589,7 @@ const static struct luaL_Reg wlui[] = {{"set_user_input_allowed", &L_set_user_in
                                        {"get_fastplace_help", &L_get_fastplace_help},
                                        {"get_editor_shortcut_help", &L_get_editor_shortcut_help},
                                        {"show_messagebox", &L_show_messagebox},
+                                       {"shortcut_exists", &L_shortcut_exists},
                                        {nullptr, nullptr}};
 
 void luaopen_wlui(lua_State* L, const bool game_or_editor) {

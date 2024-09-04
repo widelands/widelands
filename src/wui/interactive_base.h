@@ -260,6 +260,10 @@ public:
 		plugin_timers_.add_plugin_timer(action, interval, failsafe);
 	}
 
+	void set_lua_shortcut(const std::string& name, const std::string& action, bool failsafe) {
+		plugin_timers_.set_keyboard_shortcut(name, action, failsafe);
+	}
+
 	UI::Box* toolbar();
 	// Sets the toolbar's position to the bottom middle and configures its background images
 	void finalize_toolbar();

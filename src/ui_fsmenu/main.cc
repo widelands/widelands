@@ -627,6 +627,10 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 			}
 		}
 
+		if (plugin_timers_->check_keyboard_shortcut_action(code)) {
+			return true;
+		}
+
 		auto check_match_shortcut = [this, &code](KeyboardShortcut k, MenuTarget t) {
 			if (matches_shortcut(k, code)) {
 				action(t);

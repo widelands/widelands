@@ -1373,6 +1373,10 @@ KeyboardShortcut shortcut_from_string(const std::string& name) {
 	throw wexception("Shortcut '%s' does not exist", name.c_str());
 }
 
+bool shortcut_exists(const std::string& name) {
+	return std::any_of(shortcuts_.begin(), shortcuts_.end(), [&name](const auto& pair) { return pair.second.internal_name == name; });
+}
+
 std::string keymod_string_for(const uint16_t modstate, const bool rt_escape) {
 	i18n::Textdomain textdomain("widelands");
 	std::vector<std::string> mods;

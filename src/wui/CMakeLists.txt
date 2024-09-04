@@ -63,6 +63,7 @@ wl_library(wui_common_plugins
     base
     scripting_base
     ui_basic
+    widelands_options
   USES_SDL2
 )
 

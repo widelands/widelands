@@ -112,6 +112,10 @@ public:
 		return *lua_;
 	}
 
+	void set_lua_shortcut(const std::string& name, const std::string& action, bool failsafe) {
+		plugin_timers_->set_keyboard_shortcut(name, action, failsafe);
+	}
+
 	void reinit_plugins();
 	void add_plugin_timer(const std::string& action, uint32_t interval, bool failsafe) {
 		plugin_timers_->add_plugin_timer(action, interval, failsafe);

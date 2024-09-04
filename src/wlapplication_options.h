@@ -396,6 +396,7 @@ std::string to_string(KeyboardShortcut);
 
 /** Get the shortcut ID from an internal shortcut name. Throws an exception for invalid names. */
 KeyboardShortcut shortcut_from_string(const std::string&);
+bool shortcut_exists(const std::string&);
 
 /**
  * Generate a human-readable description of a keyboard shortcut.

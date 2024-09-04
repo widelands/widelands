@@ -29,7 +29,7 @@ bool PluginTimers::plugin_action(const std::string& action, bool failsafe) {
 	try {
 		lua_(action);
 		return true;
-	} catch (const LuaError& e) {
+	} catch (const std::exception& e) {
 		if (!failsafe || g_fail_on_lua_error) {
 			log_err("FATAL: Lua error in plugin: %s", e.what());
 			throw;
@@ -104,4 +104,18 @@ void PluginTimers::think() {
 		}
 		++timer;
 	}
+}
+
+bool PluginTimers::check_keyboard_shortcut_action(const SDL_Keysym code) {
+	for (auto it = keyboard_shortcuts_.begin(); it != keyboard_shortcuts_.end(); ++it) {
+		if (matches_shortcut(it->first, code)) {
+			if (!plugin_action(it->second.action, it->second.failsafe)) {
+				// In case of an error, remove it from the mapping
+				log_err("Unregistering defective plugin keyboard shortcut");
+				keyboard_shortcuts_.erase(it);
+			}
+			return true;
+		}
+	}
+	return false;
 }
