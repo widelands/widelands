@@ -197,6 +197,8 @@ struct WLApplication {
 	// Pump SDL events and dispatch them.
 	void handle_input(InputCallback const*);
 
+	void init_plugin_shortcuts();
+
 	static void emergency_save(UI::Panel*,
 	                           Widelands::Game&,
 	                           const std::string& error,

@@ -22,7 +22,6 @@
 
 #include "base/log.h"
 #include "base/string.h"
-#include "scripting/lua_errors.h"
 #include "ui_basic/messagebox.h"
 
 bool PluginTimers::plugin_action(const std::string& action, bool failsafe) {

@@ -4275,15 +4275,15 @@ int LuaMapView::add_toolbar_plugin(lua_State* L) {
 }
 
 /* RST
-   .. method:: set_keyboard_shortcut(name, action[, failsafe=true])
+   .. method:: set_keyboard_shortcut(internal_name, action[, failsafe=true])
 
       .. versionadded:: 1.3
 
       Associate a named keyboard shortcut with a piece of code to run when the shortcut is pressed.
       This replaces any existing action associated with the shortcut.
 
-      :arg name: The internal name of the keyboard shortcut.
-      :type name: :class:`string`
+      :arg internal_name: The internal name of the keyboard shortcut.
+      :type internal_name: :class:`string`
       :arg action: The Lua code to run.
       :type action: :class:`string`
       :arg failsafe: In event of an error, an error message is shown and the timer is removed.
@@ -4369,13 +4369,13 @@ void LuaMainMenu::__unpersist(lua_State* L) {
  */
 
 /* RST
-   .. method:: set_keyboard_shortcut(name, action[, failsafe=true])
+   .. method:: set_keyboard_shortcut(internal_name, action[, failsafe=true])
 
       Associate a named keyboard shortcut with a piece of code to run when the shortcut is pressed.
       This replaces any existing action associated with the shortcut.
 
-      :arg name: The internal name of the keyboard shortcut.
-      :type name: :class:`string`
+      :arg internal_name: The internal name of the keyboard shortcut.
+      :type internal_name: :class:`string`
       :arg action: The Lua code to run.
       :type action: :class:`string`
       :arg failsafe: In event of an error, an error message is shown and the timer is removed.
@@ -4476,12 +4476,14 @@ static int L_get_shortcut(lua_State* L) {
 }
 
 /* RST
-.. method:: shortcut_exists(name)
+.. method:: shortcut_exists(internal_name)
 
    .. versionadded:: 1.3
 
    Check whether the given name belongs to a known keyboard shortcut.
 
+   :arg internal_name: The internal name of the keyboard shortcut.
+   :type internal_name: :class:`string`
    :returns: Whether the named shortcut exists.
    :rtype: :class:`boolean`
 */

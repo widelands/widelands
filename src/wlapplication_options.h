@@ -319,6 +319,14 @@ KeyboardShortcut operator+(const KeyboardShortcut& id, int i);
 KeyboardShortcut& operator++(KeyboardShortcut& id);
 uint16_t operator-(const KeyboardShortcut& a, const KeyboardShortcut& b);
 
+enum class KeyboardShortcutScope {
+	kGlobal,  // special value that intersects with all other scopes
+
+	kMainMenu,
+	kEditor,
+	kGame,
+};
+
 /**
  * Check whether the given shortcut can be used for setting and retrieving the
  * actual key combination.
@@ -337,6 +345,9 @@ bool is_developer_tool(KeyboardShortcut id);
 inline bool is_fastplace(const KeyboardShortcut id) {
 	return id >= KeyboardShortcut::kFastplace_Begin && id <= KeyboardShortcut::kFastplace_End;
 }
+
+void create_replace_shortcut(const std::string& name, const std::string& descname, const std::set<KeyboardShortcutScope>& scopes, SDL_Keysym default_shortcut);
+KeyboardShortcut get_highest_used_keyboard_shortcut();
 
 /**
  * Change a keyboard shortcut.
