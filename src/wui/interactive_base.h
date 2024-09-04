@@ -255,7 +255,8 @@ public:
 	void add_toolbar_plugin(const std::string& action,
 	                        const std::string& icon,
 	                        const std::string& label,
-	                        const std::string& tt);
+	                        const std::string& tt,
+	                        const std::string& hotkey);
 	void add_plugin_timer(const std::string& action, uint32_t interval, bool failsafe) {
 		plugin_timers_.add_plugin_timer(action, interval, failsafe);
 	}

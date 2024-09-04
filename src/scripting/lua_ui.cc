@@ -100,6 +100,13 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 	return 1;
 }
 
+static std::string shortcut_string_if_set(const std::string& name, bool rt_escape) {
+	if (name.empty()) {
+		return std::string();
+	}
+	return shortcut_string_for(shortcut_from_string(name), rt_escape);
+}
+
 /*
  * ========================================================================
  *                         MODULE CLASSES
@@ -515,7 +522,7 @@ int LuaPanel::get_child(lua_State* L) {
            user clicks anywhere inside the widget.
          * ``"on_position_changed"``: **Optional**. Callback code to run when the
            widget's position changes.
-         * ``"on_hyperlink"``: **Optional**. New in version 1.3. Callback code to run when
+         * ``"on_hyperlink"``: **Optional**. **New in version 1.3**. Callback code to run when
             the panel is the target of a hyperlink clicked by the user. The hyperlink's action
             argument will be stored in a global variable called ``HYPERLINK_ACTION``.
          * ``"children"``: **Optional**. An array of widget descriptor tables.
@@ -770,6 +777,8 @@ int LuaPanel::get_child(lua_State* L) {
                **optional** for other types. The icon filepath for the entry.
              * ``"tooltip"``: **Optional**. The entry's tooltip.
              * ``"select"``: **Optional**. Whether to select this entry (default :const:`false`).
+             * ``"hotkey"``: **Optional**. **New in version 1.3**.
+                The internal name of the hotkey for this entry.
 
            * ``"on_selected"``: **Optional**. Callback code to run when the user selects an entry.
 
@@ -795,6 +804,8 @@ int LuaPanel::get_child(lua_State* L) {
              * ``"indent"``: **Optional**. How many levels to indent the item (default 0).
              * ``"enable"``: **Optional**. **New in version 1.3**.
                Whether to enable this entry (default :const:`true`).
+             * ``"hotkey"``: **Optional**. **New in version 1.3**.
+                The internal name of the hotkey for this entry.
 
            * ``"on_selected"``: **Optional**. Callback code to run when the user selects an entry.
            * ``"on_double_clicked"``: **Optional**.
@@ -1501,11 +1512,12 @@ UI::Panel* LuaPanel::do_create_child_dropdown(lua_State* L, UI::Panel* parent) {
 				std::string elabel = get_table_string(L, "label", true);
 				std::string value = get_table_string(L, "value", true);
 				std::string etooltip = get_table_string(L, "tooltip", false);
+				std::string ehotkey = get_table_string(L, "hotkey", false);
 				std::string icon = get_table_string(L, "icon", type == UI::DropdownType::kPictorial);
 				bool select = get_table_boolean(L, "select", false);
 
 				dd->add(
-				   elabel, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, etooltip);
+				   elabel, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, etooltip, shortcut_string_if_set(ehotkey, false));
 				lua_pop(L, 1);
 			}
 		}
@@ -1580,13 +1592,14 @@ UI::Panel* LuaPanel::do_create_child_listselect(lua_State* L, UI::Panel* parent)
 				std::string label = get_table_string(L, "label", true);
 				std::string value = get_table_string(L, "value", true);
 				std::string etooltip = get_table_string(L, "tooltip", false);
+				std::string ehotkey = get_table_string(L, "hotkey", false);
 				std::string icon = get_table_string(L, "icon", false);
 				bool select = get_table_boolean(L, "select", false);
 				bool enable = get_table_boolean(L, "enable", false, true);
 				int32_t indent = get_table_int(L, "indent", false);
 
 				ls->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select,
-				        etooltip, "", indent, enable);
+				        etooltip, shortcut_string_if_set(ehotkey, false), indent, enable);
 				lua_pop(L, 1);
 			}
 		}
@@ -3070,9 +3083,12 @@ int LuaDropdown::select(lua_State* /* L */) {
 }
 
 /* RST
-   .. method:: add(label, value[, icon = nil, tooltip = "", select = false])
+   .. method:: add(label, value[, icon = nil, tooltip = "", select = false, hotkey = nil])
 
       .. versionadded:: 1.2
+
+      .. versionchanged:: 1.3
+         Added parameter ``hotkey``.
 
       Add an entry to the dropdown. Only allowed for dropdowns with supported datatypes.
 
@@ -3086,6 +3102,8 @@ int LuaDropdown::select(lua_State* /* L */) {
       :type tooltip: :class:`string`
       :arg select: Whether to select this entry.
       :type select: :class:`boolean`
+      :arg hotkey: The internal name of the hotkey for this entry.
+      :type hotkey: :class:`string`
 */
 int LuaDropdown::add(lua_State* L) {
 	int top = lua_gettop(L);
@@ -3093,10 +3111,11 @@ int LuaDropdown::add(lua_State* L) {
 	std::string icon = (top >= 4 && !lua_isnil(L, 4)) ? luaL_checkstring(L, 4) : "";
 	std::string tooltip = top >= 5 ? luaL_checkstring(L, 5) : "";
 	bool select = top >= 6 && luaL_checkboolean(L, 6);
+	std::string hotkey = top >= 7 ? luaL_checkstring(L, 7) : "";
 
 	if (upcast(DropdownOfString, dd, get()); dd != nullptr) {
 		std::string value = luaL_checkstring(L, 3);
-		dd->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip);
+		dd->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip, shortcut_string_if_set(hotkey, false));
 	} else {
 		report_error(L, "add() not allowed for dropdown with unsupported datatype");
 	}
@@ -3270,10 +3289,10 @@ int LuaListselect::get_selection(lua_State* L) {
 
 /* RST
    .. method:: add(label, value
-      [, icon = nil, tooltip = "", select = false, indent = 0, enable = true])
+      [, icon = nil, tooltip = "", select = false, indent = 0, enable = true, hotkey = nil])
 
    .. versionchanged:: 1.3
-      Added ``enable`` parameter.
+      Added ``enable`` and ``hotkey`` parameters.
 
       Add an entry to the list. Only allowed for lists with supported datatypes.
 
@@ -3289,6 +3308,10 @@ int LuaListselect::get_selection(lua_State* L) {
       :type select: :class:`boolean`
       :arg indent: By how many levels to indent this entry.
       :type indent: :class:`int`
+      :arg enable: Whether to enable this entry.
+      :type enable: :class:`boolean`
+      :arg hotkey: The internal name of the hotkey for this entry.
+      :type hotkey: :class:`string`
 */
 int LuaListselect::add(lua_State* L) {
 	int top = lua_gettop(L);
@@ -3298,11 +3321,12 @@ int LuaListselect::add(lua_State* L) {
 	bool select = top >= 6 && luaL_checkboolean(L, 6);
 	uint32_t indent = top >= 7 ? luaL_checkuint32(L, 7) : 0;
 	bool enable = top < 8 || luaL_checkboolean(L, 8);
+	std::string hotkey = top >= 9 ? luaL_checkstring(L, 9) : "";
 
 	if (upcast(ListselectOfString, list, get()); list != nullptr) {
 		std::string value = luaL_checkstring(L, 3);
 		list->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip,
-		          "", indent, enable);
+		          shortcut_string_if_set(hotkey, false), indent, enable);
 	} else {
 		report_error(L, "add() not allowed for listselect with unsupported datatype");
 	}
@@ -4251,9 +4275,12 @@ int LuaMapView::update_toolbar(lua_State* L) {
 }
 
 /* RST
-   .. method:: add_toolbar_plugin(action, icon, name[, tooltip = ""])
+   .. method:: add_toolbar_plugin(action, icon, name[, tooltip = "", hotkey = nil])
 
       .. versionadded:: 1.2
+
+   .. versionchanged:: 1.3
+      Added ``hotkey`` parameter.
 
       Add an entry to the main toolbar's Plugin dropdown.
       This makes the plugin dropdown visible if it was hidden.
@@ -4266,11 +4293,15 @@ int LuaMapView::update_toolbar(lua_State* L) {
       :type name: :class:`string`
       :arg tooltip: Tooltip for the entry.
       :type tooltip: :class:`string`
+      :arg hotkey: The internal name of the hotkey for this entry.
+      :type hotkey: :class:`string`
 */
 int LuaMapView::add_toolbar_plugin(lua_State* L) {
 	get_egbase(L).get_ibase()->add_toolbar_plugin(luaL_checkstring(L, 2), luaL_checkstring(L, 3),
 	                                              luaL_checkstring(L, 4),
-	                                              lua_gettop(L) < 5 ? "" : luaL_checkstring(L, 5));
+	                                              lua_gettop(L) >= 5 ? luaL_checkstring(L, 5) : "",
+	                                              lua_gettop(L) >= 6 ? shortcut_string_if_set(luaL_checkstring(L, 6), false) : ""
+	                                              );
 	return 0;
 }
 

@@ -295,8 +295,9 @@ void InteractiveBase::add_plugin_menu() {
 void InteractiveBase::add_toolbar_plugin(const std::string& action,
                                          const std::string& icon,
                                          const std::string& label,
-                                         const std::string& tt) {
-	plugins_dropdown_.add(label, action, g_image_cache->get(icon), false, tt);
+                                         const std::string& tt,
+                                         const std::string& hotkey) {
+	plugins_dropdown_.add(label, action, g_image_cache->get(icon), false, tt, hotkey);
 	finalize_toolbar();
 }
 
