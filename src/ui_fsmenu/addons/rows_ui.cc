@@ -81,6 +81,9 @@ void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const 
 				AddOns::update_ui_theme(AddOns::UpdateThemeAction::kAutodetect);
 				ctrl->get_topmost_forefather().template_directory_changed();
 			}
+			if (info->category == AddOns::AddOnCategory::kUIPlugin) {
+				ctrl->fsmm().reinit_plugins();
+			}
 			return ctrl->rebuild(true);
 		}
 	}
@@ -204,6 +207,8 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                                                      AddOns::UpdateThemeAction::kAutodetect,
 					                        pair.first->internal_name);
 					get_topmost_forefather().template_directory_changed();
+				} else if (pair.first->category == AddOns::AddOnCategory::kUIPlugin) {
+					ctrl->fsmm().reinit_plugins();
 				}
 				return ctrl->rebuild(true);
 			}

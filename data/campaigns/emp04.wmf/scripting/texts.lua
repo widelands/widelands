@@ -85,7 +85,7 @@ obj_build_quarries_and_lumberjacks = {
    title=_("Build at least 3 lumberjack’s houses and 2 quarries"),
    number = 1,
    body = objective_text(_("Quarries and Lumberjacks"),
-      li(_([[Build at least three lumberjack’s houses and two quarries to renew your building material supply chain.]]))
+      li(_([[Build at least three new lumberjack’s houses and two new quarries to renew your building material supply chain.]]))
    ),
 }
 
