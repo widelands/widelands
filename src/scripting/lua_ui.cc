@@ -4636,16 +4636,17 @@ static int L_show_messagebox(lua_State* L) {
 	return 1;
 }
 
-const static struct luaL_Reg wlui[] = {{"set_user_input_allowed", &L_set_user_input_allowed},
-                                       {"get_user_input_allowed", &L_get_user_input_allowed},
-                                       {"get_shortcut", &L_get_shortcut},
-                                       {"get_ingame_shortcut_help", &L_get_ingame_shortcut_help},
-                                       {"get_fastplace_help", &L_get_fastplace_help},
-                                       {"get_editor_shortcut_help", &L_get_editor_shortcut_help},
-                                       {"show_messagebox", &L_show_messagebox},
-                                       {"shortcut_exists", &L_shortcut_exists},
-                                       {"get_all_keyboard_shortcut_names", &L_get_all_keyboard_shortcut_names},
-                                       {nullptr, nullptr}};
+const static struct luaL_Reg wlui[] = {
+   {"set_user_input_allowed", &L_set_user_input_allowed},
+   {"get_user_input_allowed", &L_get_user_input_allowed},
+   {"get_shortcut", &L_get_shortcut},
+   {"get_ingame_shortcut_help", &L_get_ingame_shortcut_help},
+   {"get_fastplace_help", &L_get_fastplace_help},
+   {"get_editor_shortcut_help", &L_get_editor_shortcut_help},
+   {"show_messagebox", &L_show_messagebox},
+   {"shortcut_exists", &L_shortcut_exists},
+   {"get_all_keyboard_shortcut_names", &L_get_all_keyboard_shortcut_names},
+   {nullptr, nullptr}};
 
 void luaopen_wlui(lua_State* L, const bool game_or_editor) {
 	lua_getglobal(L, "wl");   // S: wl_table
