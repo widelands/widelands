@@ -160,7 +160,7 @@ Each shortcut definition :class:`table` contains the following keys:
 * ``internal_name``: The internal name of the shortcut, for use in scripts. If a shortcut with this name already exists, it will be replaced.
 * ``descname``: The human-readable, localized name of the shortcut.
 * ``scopes``: An :class:`array` of the scopes in which the shortcut is valid. This is used to detect clashes with other shortcuts. Valid scopes are ``"game"``, ``"editor"``, ``"main_menu"``, and ``"global"``. Each shortcut definition must have at least one scope.
-* ``keycode``: The default keyboard shortcut key code. Currently only numeric key constants as defined by SDL are supported. See `the SDL documentation <https://wiki.libsdl.org/SDL3/SDL_Keycode>`_ for the list of supported keys and their numerical codes.
+* ``keycode``: The default keyboard shortcut keycode name.
 * ``mods`` *Optional*: An :class:`array` of the modifiers keys in the default keyboard shortcut. Valid modifiers are ``"control"`` (also known as ``"ctrl"``), ``"shift"``, ``"alt"``, and ``"gui"`` (also known as ``"super"``, ``"meta"``, ``"cmd"``, ``"command"``, or ``"windows"``).
 
 

@@ -1422,8 +1422,11 @@ void WLApplication::init_plugin_shortcuts() {
 							throw WLWarning("", "No scopes");
 						}
 
-						// TODO(Nordfriese): Allow named default shortcuts.
-						SDL_Keycode default_shortcut = table->get_int("keycode");
+						std::string keycode_name = table->get_string("keycode");
+						SDL_Keycode default_shortcut = SDL_GetKeyFromName(keycode_name.c_str());
+						if (default_shortcut == SDLK_UNKNOWN) {
+							throw WLWarning("", "Invalid keycode '%s'", keycode_name.c_str());
+						}
 
 						int default_mods = 0;
 						if (table->has_key("mods")) {
