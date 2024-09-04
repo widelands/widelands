@@ -4524,6 +4524,27 @@ static int L_shortcut_exists(lua_State* L) {
 }
 
 /* RST
+.. method:: get_all_keyboard_shortcut_names()
+
+   .. versionadded:: 1.3
+
+   List the internal names of all known keyboard shortcuts.
+
+   :returns: The names.
+   :rtype: :class:`array` of :class:`string`
+*/
+static int L_get_all_keyboard_shortcut_names(lua_State* L) {
+	lua_newtable(L);
+	int i = 1;
+	for (const std::string& name : get_all_keyboard_shortcut_names()) {
+		lua_pushint32(L, i++);
+		lua_pushstring(L, name.c_str());
+		lua_rawset(L, -3);
+	}
+	return 1;
+}
+
+/* RST
 .. method:: get_ingame_shortcut_help()
 
    .. versionadded:: 1.2
@@ -4623,6 +4644,7 @@ const static struct luaL_Reg wlui[] = {{"set_user_input_allowed", &L_set_user_in
                                        {"get_editor_shortcut_help", &L_get_editor_shortcut_help},
                                        {"show_messagebox", &L_show_messagebox},
                                        {"shortcut_exists", &L_shortcut_exists},
+                                       {"get_all_keyboard_shortcut_names", &L_get_all_keyboard_shortcut_names},
                                        {nullptr, nullptr}};
 
 void luaopen_wlui(lua_State* L, const bool game_or_editor) {

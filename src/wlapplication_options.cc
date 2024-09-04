@@ -1472,6 +1472,15 @@ std::string shortcut_string_for(const SDL_Keysym sym, const bool rt_escape) {
 	return rt_escape ? richtext_escape(result) : result;
 }
 
+std::vector<std::string> get_all_keyboard_shortcut_names() {
+	std::vector<std::string> result(shortcuts_.size());
+	size_t i = 0;
+	for (const auto& pair : shortcuts_) {
+		result.at(i++) = pair.second.internal_name;
+	}
+	return result;
+}
+
 KeyboardShortcut get_highest_used_keyboard_shortcut() {
 	return shortcuts_.empty() ? KeyboardShortcut::k_End : shortcuts_.rbegin()->first;
 }

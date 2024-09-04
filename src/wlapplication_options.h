@@ -351,6 +351,7 @@ void create_replace_shortcut(const std::string& name,
                              const std::set<KeyboardShortcutScope>& scopes,
                              SDL_Keysym default_shortcut);
 KeyboardShortcut get_highest_used_keyboard_shortcut();
+std::vector<std::string> get_all_keyboard_shortcut_names();
 
 /**
  * Change a keyboard shortcut.
