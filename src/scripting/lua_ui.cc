@@ -1516,8 +1516,8 @@ UI::Panel* LuaPanel::do_create_child_dropdown(lua_State* L, UI::Panel* parent) {
 				std::string icon = get_table_string(L, "icon", type == UI::DropdownType::kPictorial);
 				bool select = get_table_boolean(L, "select", false);
 
-				dd->add(
-				   elabel, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, etooltip, shortcut_string_if_set(ehotkey, false));
+				dd->add(elabel, value, icon.empty() ? nullptr : g_image_cache->get(icon), select,
+				        etooltip, shortcut_string_if_set(ehotkey, false));
 				lua_pop(L, 1);
 			}
 		}
@@ -3115,7 +3115,8 @@ int LuaDropdown::add(lua_State* L) {
 
 	if (upcast(DropdownOfString, dd, get()); dd != nullptr) {
 		std::string value = luaL_checkstring(L, 3);
-		dd->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip, shortcut_string_if_set(hotkey, false));
+		dd->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip,
+		        shortcut_string_if_set(hotkey, false));
 	} else {
 		report_error(L, "add() not allowed for dropdown with unsupported datatype");
 	}
@@ -4297,11 +4298,10 @@ int LuaMapView::update_toolbar(lua_State* L) {
       :type hotkey: :class:`string`
 */
 int LuaMapView::add_toolbar_plugin(lua_State* L) {
-	get_egbase(L).get_ibase()->add_toolbar_plugin(luaL_checkstring(L, 2), luaL_checkstring(L, 3),
-	                                              luaL_checkstring(L, 4),
-	                                              lua_gettop(L) >= 5 ? luaL_checkstring(L, 5) : "",
-	                                              lua_gettop(L) >= 6 ? shortcut_string_if_set(luaL_checkstring(L, 6), false) : ""
-	                                              );
+	get_egbase(L).get_ibase()->add_toolbar_plugin(
+	   luaL_checkstring(L, 2), luaL_checkstring(L, 3), luaL_checkstring(L, 4),
+	   lua_gettop(L) >= 5 ? luaL_checkstring(L, 5) : "",
+	   lua_gettop(L) >= 6 ? shortcut_string_if_set(luaL_checkstring(L, 6), false) : "");
 	return 0;
 }
 

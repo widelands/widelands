@@ -57,7 +57,9 @@ public:
 
 	struct CustomKeyboardShortcut {
 		CustomKeyboardShortcut() = default;
-		explicit CustomKeyboardShortcut(const std::string& act, bool safe) : action(act), failsafe(safe) {}
+		explicit CustomKeyboardShortcut(const std::string& act, bool safe)
+		   : action(act), failsafe(safe) {
+		}
 		std::string action;
 		bool failsafe{false};
 	};
