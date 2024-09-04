@@ -177,7 +177,7 @@ constexpr uint16_t kDefaultCtrlModifier = KMOD_CTRL;
 
 static const std::vector<KeyboardShortcutInfo> kFastplaceDefaults = {
 #define FP(name, descname)                                                                         \
-	KeyboardShortcutInfo({KeyboardShortcutScope::kGame}, keysym(SDLK_UNKNOWN),                \
+	KeyboardShortcutInfo({KeyboardShortcutScope::kGame}, keysym(SDLK_UNKNOWN),                      \
 	                     kFastplaceGroupPrefix + name, descname)
    FP("warehouse", gettext_noop("Warehouse")),
    FP("port", gettext_noop("Port")),
@@ -239,36 +239,31 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                           keysym(SDLK_l),
                                                           "mainmenu_load",
                                                           gettext_noop("Load Game"))},
-   {KeyboardShortcut::kMainMenuReplay,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
-                         keysym(SDLK_r),
-                         "mainmenu_replay",
-                         gettext_noop("Watch Replay"))},
-   {KeyboardShortcut::kMainMenuLoadReplay,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
-                         keysym(SDLK_g),
-                         "mainmenu_load_replay",
-                         gettext_noop("Load Replay"))},
+   {KeyboardShortcut::kMainMenuReplay, KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
+                                                            keysym(SDLK_r),
+                                                            "mainmenu_replay",
+                                                            gettext_noop("Watch Replay"))},
+   {KeyboardShortcut::kMainMenuLoadReplay, KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
+                                                                keysym(SDLK_g),
+                                                                "mainmenu_load_replay",
+                                                                gettext_noop("Load Replay"))},
    {KeyboardShortcut::kMainMenuReplayLast,
     KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
                          keysym(SDLK_d),
                          "mainmenu_replay_last",
                          gettext_noop("Watch Latest Replay"))},
-   {KeyboardShortcut::kMainMenuRandomMatch,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
-                         keysym(SDLK_z),
-                         "mainmenu_random",
-                         gettext_noop("New Random Game"))},
-   {KeyboardShortcut::kMainMenuTutorial,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
-                         keysym(SDLK_t),
-                         "mainmenu_tutorial",
-                         gettext_noop("Tutorials"))},
-   {KeyboardShortcut::kMainMenuCampaign,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
-                         keysym(SDLK_h),
-                         "mainmenu_campaign",
-                         gettext_noop("Campaigns"))},
+   {KeyboardShortcut::kMainMenuRandomMatch, KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
+                                                                 keysym(SDLK_z),
+                                                                 "mainmenu_random",
+                                                                 gettext_noop("New Random Game"))},
+   {KeyboardShortcut::kMainMenuTutorial, KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
+                                                              keysym(SDLK_t),
+                                                              "mainmenu_tutorial",
+                                                              gettext_noop("Tutorials"))},
+   {KeyboardShortcut::kMainMenuCampaign, KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
+                                                              keysym(SDLK_h),
+                                                              "mainmenu_campaign",
+                                                              gettext_noop("Campaigns"))},
    {KeyboardShortcut::kMainMenuSP, KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
                                                         keysym(SDLK_s),
                                                         "mainmenu_sp",
@@ -277,20 +272,17 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                         keysym(SDLK_m),
                                                         "mainmenu_mp",
                                                         gettext_noop("Multiplayer"))},
-   {KeyboardShortcut::kMainMenuE, KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
-                                                       keysym(SDLK_e),
-                                                       "mainmenu_e",
-                                                       gettext_noop("Editor"))},
-   {KeyboardShortcut::kMainMenuEditorLoad,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
-                         keysym(SDLK_b),
-                         "mainmenu_editor_load",
-                         gettext_noop("Editor – Load Map"))},
-   {KeyboardShortcut::kMainMenuEditorNew,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
-                         keysym(SDLK_k),
-                         "mainmenu_editor_new",
-                         gettext_noop("Editor – New Map"))},
+   {KeyboardShortcut::kMainMenuE,
+    KeyboardShortcutInfo(
+       {KeyboardShortcutScope::kMainMenu}, keysym(SDLK_e), "mainmenu_e", gettext_noop("Editor"))},
+   {KeyboardShortcut::kMainMenuEditorLoad, KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
+                                                                keysym(SDLK_b),
+                                                                "mainmenu_editor_load",
+                                                                gettext_noop("Editor – Load Map"))},
+   {KeyboardShortcut::kMainMenuEditorNew, KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
+                                                               keysym(SDLK_k),
+                                                               "mainmenu_editor_new",
+                                                               gettext_noop("Editor – New Map"))},
    {KeyboardShortcut::kMainMenuEditorRandom,
     KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
                          keysym(SDLK_y),
@@ -314,11 +306,10 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                            keysym(SDLK_F1),
                                                            "mainmenu_about",
                                                            gettext_noop("About"))},
-   {KeyboardShortcut::kMainMenuAddons,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
-                         keysym(SDLK_a),
-                         "mainmenu_addons",
-                         gettext_noop("Add-Ons"))},
+   {KeyboardShortcut::kMainMenuAddons, KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
+                                                            keysym(SDLK_a),
+                                                            "mainmenu_addons",
+                                                            gettext_noop("Add-Ons"))},
    {KeyboardShortcut::kMainMenuLAN, KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
                                                          keysym(SDLK_p),
                                                          "mainmenu_lan",
@@ -331,11 +322,10 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                            keysym(SDLK_u),
                                                            "mainmenu_login",
                                                            gettext_noop("Internet Login"))},
-   {KeyboardShortcut::kMainMenuOptions,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
-                         keysym(SDLK_o),
-                         "mainmenu_options",
-                         gettext_noop("Options"))},
+   {KeyboardShortcut::kMainMenuOptions, KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
+                                                             keysym(SDLK_o),
+                                                             "mainmenu_options",
+                                                             gettext_noop("Options"))},
 
    {KeyboardShortcut::kCommonBuildhelp,
     KeyboardShortcutInfo({KeyboardShortcutScope::kGame, KeyboardShortcutScope::kEditor},
@@ -352,11 +342,10 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_F1),
                          "encyclopedia",
                          gettext_noop("Encyclopedia"))},
-   {KeyboardShortcut::kCommonContextMenu,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kGlobal},
-                         keysym(SDLK_MENU),
-                         "context_menu",
-                         gettext_noop("Context Menu"))},
+   {KeyboardShortcut::kCommonContextMenu, KeyboardShortcutInfo({KeyboardShortcutScope::kGlobal},
+                                                               keysym(SDLK_MENU),
+                                                               "context_menu",
+                                                               gettext_noop("Context Menu"))},
    {KeyboardShortcut::kCommonTextCut, KeyboardShortcutInfo({KeyboardShortcutScope::kGlobal},
                                                            keysym(SDLK_x, kDefaultCtrlModifier),
                                                            "cut",
@@ -373,26 +362,23 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                              keysym(SDLK_a, kDefaultCtrlModifier),
                                                              "selectall",
                                                              gettext_noop("Select All"))},
-   {KeyboardShortcut::kCommonDeleteItem,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kGlobal},
-                         keysym(SDLK_DELETE),
-                         "delete",
-                         gettext_noop("Delete Item"))},
+   {KeyboardShortcut::kCommonDeleteItem, KeyboardShortcutInfo({KeyboardShortcutScope::kGlobal},
+                                                              keysym(SDLK_DELETE),
+                                                              "delete",
+                                                              gettext_noop("Delete Item"))},
    {KeyboardShortcut::kCommonTooltipAccessibilityMode,
     KeyboardShortcutInfo({KeyboardShortcutScope::kGlobal},
                          keysym(SDLK_F2),
                          "tt_access_mode",
                          gettext_noop("Tooltip Accessibility Mode Key"))},
-   {KeyboardShortcut::kCommonFullscreen,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kGlobal},
-                         keysym(SDLK_f, kDefaultCtrlModifier),
-                         "fullscreen",
-                         gettext_noop("Toggle Fullscreen"))},
-   {KeyboardShortcut::kCommonScreenshot,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kGlobal},
-                         keysym(SDLK_F11),
-                         "screenshot",
-                         gettext_noop("Take Screenshot"))},
+   {KeyboardShortcut::kCommonFullscreen, KeyboardShortcutInfo({KeyboardShortcutScope::kGlobal},
+                                                              keysym(SDLK_f, kDefaultCtrlModifier),
+                                                              "fullscreen",
+                                                              gettext_noop("Toggle Fullscreen"))},
+   {KeyboardShortcut::kCommonScreenshot, KeyboardShortcutInfo({KeyboardShortcutScope::kGlobal},
+                                                              keysym(SDLK_F11),
+                                                              "screenshot",
+                                                              gettext_noop("Take Screenshot"))},
    {KeyboardShortcut::kCommonDebugConsole,
     KeyboardShortcutInfo({KeyboardShortcutScope::kGlobal},
                          keysym(SDLK_SPACE, kDefaultCtrlModifier | KMOD_SHIFT),
@@ -457,11 +443,10 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                              keysym(SDLK_u, kDefaultCtrlModifier),
                                                              "editor_upload_map",
                                                              gettext_noop("Publish Map Online"))},
-   {KeyboardShortcut::kEditorMapOptions,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
-                         keysym(SDLK_o, kDefaultCtrlModifier),
-                         "editor_mapoptions",
-                         gettext_noop("Map Options"))},
+   {KeyboardShortcut::kEditorMapOptions, KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
+                                                              keysym(SDLK_o, kDefaultCtrlModifier),
+                                                              "editor_mapoptions",
+                                                              gettext_noop("Map Options"))},
    {KeyboardShortcut::kEditorUndo, KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
                                                         keysym(SDLK_z, kDefaultCtrlModifier),
                                                         "editor_undo",
@@ -470,10 +455,11 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                         keysym(SDLK_y, kDefaultCtrlModifier),
                                                         "editor_redo",
                                                         gettext_noop("Redo"))},
-   {KeyboardShortcut::kEditorTools, KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
-                                                         keysym(SDLK_t),
-                                                         "editor_tools",
-                                                         gettext_noop("Toggle Tools Menu"))},
+   {KeyboardShortcut::kEditorTools,
+    KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
+                         keysym(SDLK_t),
+                         "editor_tools",
+                         gettext_noop("Toggle Tools Menu"))},
    {KeyboardShortcut::kEditorChangeHeight,
     KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
                          keysym(SDLK_h, KMOD_SHIFT),
@@ -488,11 +474,10 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                            keysym(SDLK_t, KMOD_SHIFT),
                                                            "editor_terrain",
                                                            gettext_noop("Terrain Tool"))},
-   {KeyboardShortcut::kEditorImmovables,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
-                         keysym(SDLK_o, KMOD_SHIFT),
-                         "editor_immovables",
-                         gettext_noop("Immovables Tool"))},
+   {KeyboardShortcut::kEditorImmovables, KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
+                                                              keysym(SDLK_o, KMOD_SHIFT),
+                                                              "editor_immovables",
+                                                              gettext_noop("Immovables Tool"))},
    {KeyboardShortcut::kEditorAnimals, KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
                                                            keysym(SDLK_a, KMOD_SHIFT),
                                                            "editor_animals",
@@ -501,11 +486,10 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                              keysym(SDLK_r, KMOD_SHIFT),
                                                              "editor_resources",
                                                              gettext_noop("Resources Tool"))},
-   {KeyboardShortcut::kEditorPortSpaces,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
-                         keysym(SDLK_e, KMOD_SHIFT),
-                         "editor_port_spaces",
-                         gettext_noop("Port Spaces Tool"))},
+   {KeyboardShortcut::kEditorPortSpaces, KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
+                                                              keysym(SDLK_e, KMOD_SHIFT),
+                                                              "editor_port_spaces",
+                                                              gettext_noop("Port Spaces Tool"))},
    {KeyboardShortcut::kEditorInfo, KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
                                                         keysym(SDLK_i, KMOD_SHIFT),
                                                         "editor_info",
@@ -522,16 +506,14 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                            keysym(SDLK_p, KMOD_SHIFT),
                                                            "editor_players",
                                                            gettext_noop("Players Menu"))},
-   {KeyboardShortcut::kEditorToolHistory,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
-                         keysym(SDLK_h),
-                         "editor_tool_history",
-                         gettext_noop("Tool History"))},
-   {KeyboardShortcut::kEditorShowhideGrid,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
-                         keysym(SDLK_g),
-                         "editor_showhide_grid",
-                         gettext_noop("Toggle Grid"))},
+   {KeyboardShortcut::kEditorToolHistory, KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
+                                                               keysym(SDLK_h),
+                                                               "editor_tool_history",
+                                                               gettext_noop("Tool History"))},
+   {KeyboardShortcut::kEditorShowhideGrid, KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
+                                                                keysym(SDLK_g),
+                                                                "editor_showhide_grid",
+                                                                gettext_noop("Toggle Grid"))},
    {KeyboardShortcut::kEditorShowhideImmovables,
     KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
                          keysym(SDLK_o),
@@ -558,7 +540,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 #define EDITOR_TOOLSIZE(radius, key)                                                               \
 	{                                                                                               \
 		KeyboardShortcut::kEditorToolsize##radius,                                                   \
-		   KeyboardShortcutInfo({KeyboardShortcutScope::kEditor}, keysym(SDLK_##key),          \
+		   KeyboardShortcutInfo({KeyboardShortcutScope::kEditor}, keysym(SDLK_##key),                \
 		                        "editor_toolsize" #radius, gettext_noop("Set Toolsize to %d"))       \
 	}
    EDITOR_TOOLSIZE(1, 1),
@@ -576,9 +558,8 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 #define EDITOR_TOOLGAP(radius, key)                                                                \
 	{                                                                                               \
 		KeyboardShortcut::kEditorToolgap##radius,                                                    \
-		   KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},                              \
-		                        keysym(SDLK_##key, KMOD_SHIFT), "editor_toolgap" #radius,            \
-		                        gettext_noop("Set Tool Gap to %d%%"))                                \
+		   KeyboardShortcutInfo({KeyboardShortcutScope::kEditor}, keysym(SDLK_##key, KMOD_SHIFT),    \
+		                        "editor_toolgap" #radius, gettext_noop("Set Tool Gap to %d%%"))      \
 	}
    EDITOR_TOOLGAP(0, 0),
    EDITOR_TOOLGAP(10, 1),
@@ -602,11 +583,10 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_r, kDefaultCtrlModifier),
                          "game_restart",
                          gettext_noop("Restart Scenario or Replay"))},
-   {KeyboardShortcut::kInGameShowhideCensus,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kGame},
-                         keysym(SDLK_c),
-                         "game_showhide_census",
-                         gettext_noop("Toggle Census"))},
+   {KeyboardShortcut::kInGameShowhideCensus, KeyboardShortcutInfo({KeyboardShortcutScope::kGame},
+                                                                  keysym(SDLK_c),
+                                                                  "game_showhide_census",
+                                                                  gettext_noop("Toggle Census"))},
    {KeyboardShortcut::kInGameShowhideStats,
     KeyboardShortcutInfo({KeyboardShortcutScope::kGame},
                          keysym(SDLK_s),
@@ -659,15 +639,13 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                               keysym(SDLK_t),
                                                               "game_objectives",
                                                               gettext_noop("Objectives"))},
-   {KeyboardShortcut::kInGameDiplomacy,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kGame},
-                         keysym(SDLK_d),
-                         "game_diplomacy",
-                         gettext_noop("Diplomacy"))},
-   {KeyboardShortcut::kInGameMessages, KeyboardShortcutInfo({KeyboardShortcutScope::kGame},
-                                                            keysym(SDLK_n),
-                                                            "game_messages",
-                                                            gettext_noop("Messages"))},
+   {KeyboardShortcut::kInGameDiplomacy, KeyboardShortcutInfo({KeyboardShortcutScope::kGame},
+                                                             keysym(SDLK_d),
+                                                             "game_diplomacy",
+                                                             gettext_noop("Diplomacy"))},
+   {KeyboardShortcut::kInGameMessages,
+    KeyboardShortcutInfo(
+       {KeyboardShortcutScope::kGame}, keysym(SDLK_n), "game_messages", gettext_noop("Messages"))},
    {KeyboardShortcut::kInGameSpeedDown,
     KeyboardShortcutInfo({KeyboardShortcutScope::kGame},
                          keysym(SDLK_PAGEDOWN),
@@ -711,20 +689,17 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_HOME),
                          "game_hq",
                          gettext_noop("Scroll to Starting Field"))},
-   {KeyboardShortcut::kInGameChat, KeyboardShortcutInfo({KeyboardShortcutScope::kGame},
-                                                        keysym(SDLK_RETURN),
-                                                        "game_chat",
-                                                        gettext_noop("Chat"))},
-   {KeyboardShortcut::kInGamePinnedNote,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kGame},
-                         keysym(SDLK_F8),
-                         "game_pinned_note",
-                         gettext_noop("Pinned Note"))},
-   {KeyboardShortcut::kInGameMessagesGoto,
-    KeyboardShortcutInfo({KeyboardShortcutScope::kGame},
-                         keysym(SDLK_g),
-                         "game_msg_goto",
-                         gettext_noop("Go to Location"))},
+   {KeyboardShortcut::kInGameChat,
+    KeyboardShortcutInfo(
+       {KeyboardShortcutScope::kGame}, keysym(SDLK_RETURN), "game_chat", gettext_noop("Chat"))},
+   {KeyboardShortcut::kInGamePinnedNote, KeyboardShortcutInfo({KeyboardShortcutScope::kGame},
+                                                              keysym(SDLK_F8),
+                                                              "game_pinned_note",
+                                                              gettext_noop("Pinned Note"))},
+   {KeyboardShortcut::kInGameMessagesGoto, KeyboardShortcutInfo({KeyboardShortcutScope::kGame},
+                                                                keysym(SDLK_g),
+                                                                "game_msg_goto",
+                                                                gettext_noop("Go to Location"))},
    {KeyboardShortcut::kInGameMessagesFilterAll,
     KeyboardShortcutInfo({KeyboardShortcutScope::kGame},
                          keysym(SDLK_0, KMOD_ALT),
@@ -824,12 +799,11 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 // quicknav_descr() uses these format strings and adds the landmark number
 #define QUICKNAV(i)                                                                                \
 	{KeyboardShortcut::kInGameQuicknavSet##i,                                                       \
-	 KeyboardShortcutInfo({KeyboardShortcutScope::kGame},                                     \
-	                      keysym(SDLK_##i, kDefaultCtrlModifier), "game_quicknav_set_" #i,          \
-	                      gettext_noop("Set Landmark #%d"))},                                       \
+	 KeyboardShortcutInfo({KeyboardShortcutScope::kGame}, keysym(SDLK_##i, kDefaultCtrlModifier),   \
+	                      "game_quicknav_set_" #i, gettext_noop("Set Landmark #%d"))},              \
 	{                                                                                               \
 		KeyboardShortcut::kInGameQuicknavGoto##i,                                                    \
-		   KeyboardShortcutInfo({KeyboardShortcutScope::kGame}, keysym(SDLK_##i),              \
+		   KeyboardShortcutInfo({KeyboardShortcutScope::kGame}, keysym(SDLK_##i),                    \
 		                        "game_quicknav_goto_" #i, gettext_noop("Go To Landmark #%d"))        \
 	}
    QUICKNAV(1),
@@ -1366,7 +1340,8 @@ KeyboardShortcut shortcut_from_string(const std::string& name) {
 }
 
 bool shortcut_exists(const std::string& name) {
-	return std::any_of(shortcuts_.begin(), shortcuts_.end(), [&name](const auto& pair) { return pair.second.internal_name == name; });
+	return std::any_of(shortcuts_.begin(), shortcuts_.end(),
+	                   [&name](const auto& pair) { return pair.second.internal_name == name; });
 }
 
 std::string keymod_string_for(const uint16_t modstate, const bool rt_escape) {
@@ -1501,7 +1476,10 @@ KeyboardShortcut get_highest_used_keyboard_shortcut() {
 	return shortcuts_.empty() ? KeyboardShortcut::k_End : shortcuts_.rbegin()->first;
 }
 
-void create_replace_shortcut(const std::string& name, const std::string& descname, const std::set<KeyboardShortcutScope>& scopes, SDL_Keysym default_shortcut) {
+void create_replace_shortcut(const std::string& name,
+                             const std::string& descname,
+                             const std::set<KeyboardShortcutScope>& scopes,
+                             SDL_Keysym default_shortcut) {
 	for (auto& pair : shortcuts_) {
 		if (pair.second.internal_name == name) {
 			pair.second.scopes = scopes;
@@ -1513,8 +1491,7 @@ void create_replace_shortcut(const std::string& name, const std::string& descnam
 	}
 
 	shortcuts_.emplace(std::max(KeyboardShortcut::k_End, get_highest_used_keyboard_shortcut()) + 1,
-		KeyboardShortcutInfo(scopes, default_shortcut, name, descname)
-	);
+	                   KeyboardShortcutInfo(scopes, default_shortcut, name, descname));
 }
 
 static void init_fastplace_shortcuts(const bool force_defaults) {

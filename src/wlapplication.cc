@@ -1435,7 +1435,8 @@ void WLApplication::init_plugin_shortcuts() {
 									default_mods |= KMOD_SHIFT;
 								} else if (mod == "alt") {
 									default_mods |= KMOD_ALT;
-								} else if (mod == "gui" || mod == "super" || mod == "meta" || mod == "cmd" || mod == "command" || mod == "windows") {
+								} else if (mod == "gui" || mod == "super" || mod == "meta" ||
+								           mod == "cmd" || mod == "command" || mod == "windows") {
 									default_mods |= KMOD_GUI;
 								} else {
 									throw WLWarning("", "Invalid modifier '%s'", mod.c_str());
@@ -1443,13 +1444,16 @@ void WLApplication::init_plugin_shortcuts() {
 							}
 						}
 
-						create_replace_shortcut(internal_name, descname, scopes, keysym(default_shortcut, default_mods));
+						create_replace_shortcut(
+						   internal_name, descname, scopes, keysym(default_shortcut, default_mods));
 					} catch (const std::exception& e) {
-						log_err("Error in plugin keyboard shortcut definition in '%s': '%s': %s", path.c_str(), internal_name.c_str(), e.what());
+						log_err("Error in plugin keyboard shortcut definition in '%s': '%s': %s",
+						        path.c_str(), internal_name.c_str(), e.what());
 					}
 				}
 			} catch (const std::exception& e) {
-				log_err("Error reading plugin keyboard shortcut definitions from '%s': %s", path.c_str(), e.what());
+				log_err("Error reading plugin keyboard shortcut definitions from '%s': %s",
+				        path.c_str(), e.what());
 			}
 		}
 	}

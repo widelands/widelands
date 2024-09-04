@@ -346,7 +346,10 @@ inline bool is_fastplace(const KeyboardShortcut id) {
 	return id >= KeyboardShortcut::kFastplace_Begin && id <= KeyboardShortcut::kFastplace_End;
 }
 
-void create_replace_shortcut(const std::string& name, const std::string& descname, const std::set<KeyboardShortcutScope>& scopes, SDL_Keysym default_shortcut);
+void create_replace_shortcut(const std::string& name,
+                             const std::string& descname,
+                             const std::set<KeyboardShortcutScope>& scopes,
+                             SDL_Keysym default_shortcut);
 KeyboardShortcut get_highest_used_keyboard_shortcut();
 
 /**

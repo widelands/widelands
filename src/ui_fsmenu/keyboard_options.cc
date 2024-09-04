@@ -302,7 +302,8 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	const size_t fastplace_tab_index = tabs_.tabs().size();
 	create_tab(_("Fastplace"), KeyboardShortcut::kFastplace_Begin, KeyboardShortcut::kFastplace_End);
 
-	if (const KeyboardShortcut max_shortcut = get_highest_used_keyboard_shortcut(); max_shortcut > KeyboardShortcut::k_End) {
+	if (const KeyboardShortcut max_shortcut = get_highest_used_keyboard_shortcut();
+	    max_shortcut > KeyboardShortcut::k_End) {
 		create_tab(_("Add-Ons"), KeyboardShortcut::k_End + 1, max_shortcut);
 	}
 
