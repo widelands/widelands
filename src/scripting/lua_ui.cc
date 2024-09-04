@@ -986,7 +986,7 @@ int LuaPanel::create_child(lua_State* L) {
  * C Functions
  */
 static inline UI::PanelStyle panel_style(lua_State* L) {
-	return is_main_menu(L) ? UI::PanelStyle::kWui : UI::PanelStyle::kFsMenu;
+	return is_main_menu(L) ? UI::PanelStyle::kFsMenu : UI::PanelStyle::kWui;
 }
 
 static UI::Align get_table_align(lua_State* L,
@@ -2120,7 +2120,7 @@ UI::Panel* LuaPanel::do_create_child_window(lua_State* L, UI::Panel* parent) {
 	std::string name = get_table_string(L, "name", true);
 	std::string title = get_table_string(L, "title", true);
 	UI::Window* window =
-	   new UI::Window(parent, is_main_menu(L) ? UI::WindowStyle::kWui : UI::WindowStyle::kFsMenu,
+	   new UI::Window(parent, is_main_menu(L) ? UI::WindowStyle::kFsMenu : UI::WindowStyle::kWui,
 	                  name, x, y, w, h, title);
 
 	lua_getfield(L, -1, "content");
