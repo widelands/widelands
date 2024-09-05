@@ -9061,7 +9061,7 @@ msgstr "Préférer les héros"
 #: ../../../../src/wui/constructionsitewindow.cc:366
 #: ../../../../src/wui/soldierlist.cc:496
 msgid "No preference"
-msgstr ""
+msgstr "Pas de préférence"
 
 #: ../../../../src/wui/constructionsitewindow.cc:397
 msgid "Settings to apply after construction"
@@ -10174,7 +10174,7 @@ msgstr "Activer l'indication de superposition des zones de travaux quand vous pl
 
 #: ../../../../src/wui/interactive_player.cc:486
 msgid "No current objectives"
-msgstr ""
+msgstr "Pas d'objectifs actuellement"
 
 #: ../../../../src/wui/interactive_player.cc:502
 #, c-format
@@ -10882,9 +10882,9 @@ msgstr "En cours de reconditionnement"
 #, c-format
 msgid "Seafaring Statistics (%u Ship)"
 msgid_plural "Seafaring Statistics (%u Ships)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Statistiques des Affaires marines (%u Navire)"
+msgstr[1] "Statistiques des Affaires marines (%u Navires)"
+msgstr[2] "Statistiques des Affaires marines (%u Navires)"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../../../src/wui/seafaring_statistics_menu.cc:578
