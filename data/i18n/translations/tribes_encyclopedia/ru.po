@@ -1465,7 +1465,7 @@ msgctxt "amazons_building"
 msgid ""
 "The jungle master plants one tree between %1$s and %2$s, depending on how "
 "far she has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко ей нужно идти, хозяйке джунглей требуется от %1$s до %2$s, чтобы высадить одно дерево."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stone Workshop
 #: ../../../../data/tribes/initialization/amazons/units.lua:1469
@@ -1547,7 +1547,7 @@ msgctxt "amazons_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce one "
 "bread in %s on average."
-msgstr ""
+msgstr "Если все необходимые товары поставляются вовремя, это здание может производить хлеб, в среднем, за %s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Chocolate
 #. Brewery
@@ -1804,7 +1804,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти корабел, этому зданию нужно от %1$s до%2$s, чтобы произвести один паром."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Shipyard
 #: ../../../../data/tribes/initialization/amazons/units.lua:1700
@@ -1837,7 +1837,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти корабел, этому зданию нужно от %1$s до%2$s, чтобы произвести одно судно."
 
 #. TRANSLATORS: Lore helptext for an Amazon building: Construction Site
 #. TRANSLATORS: Lore helptext for an Atlantean building: Construction Site
@@ -4565,7 +4565,7 @@ msgstr "Аскадус, изобретатель вертикальной лес
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The sawmill needs %s on average to produce one plank."
-msgstr ""
+msgstr "Лесопилке нужно в среднем %s для производства одной доски"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Smokery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1671
@@ -4676,7 +4676,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce one "
 "bread in %s on average."
-msgstr ""
+msgstr "Если все необходимые товары поставляются вовремя, это здание может производить хлеб, в среднем, за %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Charcoal
 #. Kiln
@@ -4724,7 +4724,7 @@ msgstr "Говорит черная фигура из печи углежога"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "Печи углежога нужно в среднем %s для производства одной меры угля."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Smelting
 #. Works
@@ -4893,7 +4893,7 @@ msgstr "Агитплакат"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "Казарме нужно в среднем %s чтобы нанять одного солдата."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Horse Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1802
@@ -5416,7 +5416,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти корабел, этому зданию нужно от %1$s до%2$s, чтобы произвести один паром."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Shipyard
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Shipyard
@@ -5454,7 +5454,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти корабел, этому зданию нужно от %1$s до%2$s, чтобы произвести одно судно."
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2130
@@ -7017,7 +7017,7 @@ msgstr "Закаляет брёвна огнем в балки, которые �
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The wood hardener needs %s on average to produce one blackwood."
-msgstr ""
+msgstr "Балочной мастерской нужно в среднем %s для производства одной балки"
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Reed Yard
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1298
@@ -7309,7 +7309,7 @@ msgstr "Песня углежогов"
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "Печи углежога нужно в среднем %s для производства одной меры угля."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Smelting Works
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1429
@@ -7927,7 +7927,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти корабел, этому зданию нужно от %1$s до%2$s, чтобы произвести один паром."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Shipyard
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1826
@@ -7945,7 +7945,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти корабел, этому зданию нужно от %1$s до%2$s, чтобы произвести одно судно."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Weaving Mill
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1850
@@ -11266,7 +11266,7 @@ msgstr "Девиз Гильдии Плотников"
 #, lua-format
 msgctxt "empire_building"
 msgid "The sawmill needs %s on average to produce one plank."
-msgstr ""
+msgstr "Лесопилке нужно в среднем %s для производства одной доски"
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11519,7 +11519,7 @@ msgstr "Имперская пословица, смысл которой в то
 #, lua-format
 msgctxt "empire_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "Печи углежога нужно в среднем %s для производства одной меры угля."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11666,7 +11666,7 @@ msgstr "Снаряжает новобранцев и тренирует их д�
 #, lua-format
 msgctxt "empire_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "Казарме нужно в среднем %s чтобы нанять одного солдата."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12431,7 +12431,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти корабел, этому зданию нужно от %1$s до%2$s, чтобы произвести один паром."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12461,7 +12461,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти корабел, этому зданию нужно от %1$s до%2$s, чтобы произвести одно судно."
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2383
@@ -14701,7 +14701,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one coal between %1$s and %2$s, depending on how "
 "far the charcoal burner has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти углежог, этому зданию нужно от %1$s до%2$s, чтобы произвести одну меру угля."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Berry Farm
 #: ../../../../data/tribes/initialization/frisians/units.lua:1713
@@ -15644,7 +15644,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти корабел, этому зданию нужно от %1$s до%2$s, чтобы произвести один паром."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Shipyard
 #: ../../../../data/tribes/initialization/frisians/units.lua:2230
@@ -15669,7 +15669,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти корабел, этому зданию нужно от %1$s до%2$s, чтобы произвести одно судно."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Weaving Mill
 #: ../../../../data/tribes/initialization/frisians/units.lua:2253

@@ -371,7 +371,7 @@ uint8_t Flag::nr_of_roads() const {
 	uint8_t counter = 0;
 	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION;
 	     --road_id) {
-		if (get_roadbase(road_id) != nullptr) {
+		if (get_road(road_id) != nullptr) {
 			++counter;
 		}
 	}
