@@ -3705,10 +3705,10 @@ bool DefaultAI::improve_roads(const Time& gametime) {
 
 	// when deciding if we attempt to build a road from here we use probability
 	uint16_t probability_score = 0;
-	if (flag.nr_of_roads() == 1) {
+	if (flag.nr_of_roadbases() == 1) {
 		probability_score += 20;
 	}
-	if (is_warehouse && flag.nr_of_roads() <= 3) {
+	if (is_warehouse && flag.nr_of_roadbases() <= 3) {
 		probability_score += 20;
 	}
 	probability_score += flag.current_wares() * 5;
@@ -3748,7 +3748,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 
 	for (int j = 0; j < 2; ++j) {
 		bool new_road_found = true;
-		while (new_road_found && full_road.back()->nr_of_roads() <= 2 &&
+		while (new_road_found && full_road.back()->nr_of_roadbases() <= 2 &&
 		       full_road.back()->get_building() == nullptr) {
 			new_road_found = false;
 			for (uint8_t i = Widelands::WalkingDir::FIRST_DIRECTION;
