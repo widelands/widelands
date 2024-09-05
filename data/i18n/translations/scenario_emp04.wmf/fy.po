@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2024-08-22 02:44+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Language-Team: Western Frisian (https://app.transifex.com/widelands/teams/35159/fy/)\n"
 "MIME-Version: 1.0\n"
@@ -97,8 +97,8 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:88
 msgid ""
-"Build at least three lumberjack’s houses and two quarries to renew your "
-"building material supply chain."
+"Build at least three new lumberjack’s houses and two new quarries to renew "
+"your building material supply chain."
 msgstr ""
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:94
@@ -1526,17 +1526,17 @@ msgctxt "empire_building"
 msgid "felling trees"
 msgstr ""
 
-#: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:45
+#: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:46
 msgctxt "empire_building"
 msgid "No Trees"
 msgstr ""
 
-#: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:46
+#: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:47
 msgctxt "empire_building"
 msgid "Out of Trees"
 msgstr ""
 
-#: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:47
+#: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:48
 msgctxt "empire_building"
 msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "

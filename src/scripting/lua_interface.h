@@ -29,7 +29,7 @@ class LuaTable;
 // Provides an interface to call and execute Lua Code.
 class LuaInterface {
 public:
-	LuaInterface();
+	explicit LuaInterface(bool is_main_menu = false);
 	virtual ~LuaInterface();
 
 	// Interpret the given string, will throw 'LuaError' on any error.
