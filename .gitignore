@@ -44,4 +44,4 @@ gmon.out
 /clangtidy
 
 # Saveloading compatibility test cases
-/test/save/*.wgf
+/test/save/*

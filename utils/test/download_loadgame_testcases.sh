@@ -44,5 +44,5 @@ cd "$TMPDIR"
 tar -xzf "$DL_TARGET"
 cd "$WL_DIR"
 
-mv -v "$EXTRACTED_DIR"/*.wgf "$WL_DIR"/test/save
+cp -R -P -p "$EXTRACTED_DIR"/* "$WL_DIR"/test/save
 
