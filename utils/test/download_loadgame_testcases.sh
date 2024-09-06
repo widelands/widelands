@@ -45,4 +45,4 @@ tar -xzf "$DL_TARGET"
 cd "$WL_DIR"
 
 cp -R -P -p "$EXTRACTED_DIR"/* "$WL_DIR"/test/save
-
+ls -l -R "$WL_DIR"/test/save
