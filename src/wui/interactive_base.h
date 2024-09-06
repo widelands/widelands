@@ -72,20 +72,20 @@ public:
 	// Available Display Flags
 	// a new flag also needs its corresponding checkbox in options
 	enum {
-		dfShowCensus = 1 << 0,              ///< show census report on buildings
-		dfShowStatistics = 1 << 1,          ///< show statistics report on buildings
-		dfShowSoldierLevels = 1 << 2,       ///< show level information above soldiers
-		dfShowWorkareaOverlap = 1 << 3,     ///< highlight overlapping workareas when placing
-		                               //   a constructionsite
-		dfDebug = 1 << 4,                  ///< general debugging info
-		dfShowBuildings = 1 << 5,          ///<
-		dfShowBuildhelp = 1 << 6,          ///< show size of building spaces
+		dfShowCensus = 1 << 0,            ///< show census report on buildings
+		dfShowStatistics = 1 << 1,        ///< show statistics report on buildings
+		dfShowSoldierLevels = 1 << 2,     ///< show level information above soldiers
+		dfShowWorkareaOverlap = 1 << 3,   ///< highlight overlapping workareas when placing
+		                                  //   a constructionsite
+		dfDebug = 1 << 4,                 ///< general debugging info
+		dfShowBuildings = 1 << 5,         ///<
+		dfShowBuildhelp = 1 << 6,         ///< show size of building spaces
 		dfShowMaximumBuildhelp = 1 << 7,  ///< show max size of building spaces
 		dfShowGrid = 1 << 8,              ///<
 		dfShowImmovables = 1 << 9,        ///< show trees, rocks etc.
 		dfShowBobs = 1 << 10,             ///< show animals
 		dfShowResources = 1 << 11,        ///< show water, coal etc. in editor
-		dfShowOceans = 1 << 12,        ///< show oceans/fleets in editor
+		dfShowOceans = 1 << 12,           ///< show oceans/fleets in editor
 	};
 	static constexpr int32_t kDefaultDisplayFlags =
 	   dfShowSoldierLevels | dfShowBuildings | dfShowWorkareaOverlap;

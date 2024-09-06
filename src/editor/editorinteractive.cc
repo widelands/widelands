@@ -699,8 +699,9 @@ void EditorInteractive::draw(RenderTarget& dst) {
 	}
 
 	const auto& ebase = egbase();
-	auto* fields_to_draw = map_view()->draw_terrain(
-	   ebase, nullptr, show_oceans ? *ocean_overlays_ : Workareas(), get_display_flag(dfShowGrid), &dst);
+	auto* fields_to_draw =
+	   map_view()->draw_terrain(ebase, nullptr, show_oceans ? *ocean_overlays_ : Workareas(),
+	                            get_display_flag(dfShowGrid), &dst);
 
 	const float scale = 1.f / map_view()->view().zoom;
 	const Time& gametime = ebase.get_gametime();
@@ -877,7 +878,6 @@ void EditorInteractive::draw(RenderTarget& dst) {
 	}
 }
 
-
 void EditorInteractive::update_ocean_overlays() {
 	// Find all oceans on the map.
 	const Widelands::Map& map = egbase().map();
@@ -931,8 +931,8 @@ void EditorInteractive::update_ocean_overlays() {
 		}
 
 		if (field_to_ocean_index[index] != nr_oceans) {
-			throw wexception("Field #%" PRIuS
-			                 " does not belong to its own ocean #%d of size %" PRIuS "!",
+			throw wexception("Field #%" PRIuS " does not belong to its own ocean #%d of size %" PRIuS
+			                 "!",
 			                 index, nr_oceans, ocean_fields.size());
 		}
 	}
