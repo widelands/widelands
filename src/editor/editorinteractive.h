@@ -213,6 +213,7 @@ private:
 		kBuildingSpaces,
 		kMaximumBuildingSpaces,
 		kGrid,
+		kOceans,
 		kAnimals,
 		kImmovables,
 		kResources
@@ -246,6 +247,9 @@ private:
 	// Show / hide the bobs in the mapview
 	void toggle_bobs();
 	void toggle_grid();
+	void toggle_oceans();
+
+	void update_ocean_overlays();
 
 	void update_tool_history_window();
 
@@ -307,6 +311,10 @@ private:
 	/// Set to true when tool settings are changed in tool window.
 	/// Set to false when the tool is used with the new settings.
 	bool tool_settings_changed_ = true;
+
+	std::unique_ptr<Workareas> ocean_overlays_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldTerrainChanged>>
+	   field_terrain_changed_subscriber_;
 };
 
 #endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H
