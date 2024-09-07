@@ -433,8 +433,10 @@ void BaseListselect::draw(RenderTarget& dst) {
 	}
 
 	const int lineheight_unpadded = get_lineheight_without_padding();
-	const uint32_t w_reduction =
-	   (selection_mode_ == ListselectLayout::kDropdown ? scrollbar_.is_enabled() ? 4 : 5 : 2);
+	uint32_t w_reduction = 2;
+	if (selection_mode_ == ListselectLayout::kDropdown) {
+		w_reduction = scrollbar_.is_enabled() ? 4 : 5;
+	}
 	assert(w_reduction <= get_eff_w());
 	uint32_t maxw = get_eff_w() - w_reduction;
 	int picw = max_pic_width_ != 0 ? max_pic_width_ + 10 : 0;
