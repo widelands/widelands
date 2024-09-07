@@ -499,7 +499,9 @@ void EditorInteractive::rebuild_showhide_menu() {
 	 */
 	showhidemenu_.add(get_display_flag(dfShowOceans) ? _("Hide Oceans") : _("Show Oceans"),
 	                  ShowHideEntry::kOceans,
-	                  g_image_cache->get("images/wui/menus/menu_toggle_oceans.png"), false, "",
+	                  g_image_cache->get("images/wui/menus/menu_toggle_oceans.png"), false,
+	                  _("Display separate water bodies with differently coloured overlays to see "
+	                    "which coasts can be connected by shipping routes"),
 	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideOceans, false));
 
 	showhidemenu_.add(
@@ -904,7 +906,7 @@ void EditorInteractive::update_ocean_overlays() {
 		// New ocean found.
 		++nr_oceans;
 
-		constexpr uint32_t kAlpha = 0xcf000000;
+		constexpr uint32_t kAlpha = 0xdf000000;
 		if (kOceanColors.empty()) {
 			for (const RGBColor& col : kPlayerColors) {
 				kOceanColors.emplace_back(kAlpha | (col.r << 16) | (col.g << 8) | (col.b));
