@@ -408,6 +408,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 	// draw text lines
 	const int eff_h =
 	   selection_mode_ == ListselectLayout::kDropdown ? get_inner_h() - kMargin : get_inner_h();
+	assert(eff_h < std::numeric_limits<int32_t>::max());
 	uint32_t idx = scrollpos_ / get_lineheight();
 	int y = 1 + idx * get_lineheight() - scrollpos_;
 
@@ -431,9 +432,14 @@ void BaseListselect::draw(RenderTarget& dst) {
 		dst.brighten_rect(Recti(0, 0, get_eff_w(), get_h()), ms_darken_value);
 	}
 
-	while (idx < entry_records_.size()) {
-		assert(eff_h < std::numeric_limits<int32_t>::max());
+	const int lineheight_unpadded = get_lineheight_without_padding();
+	const uint32_t w_reduction =
+	   (selection_mode_ == ListselectLayout::kDropdown ? scrollbar_.is_enabled() ? 4 : 5 : 2);
+	assert(w_reduction <= get_eff_w());
+	uint32_t maxw = get_eff_w() - w_reduction;
+	int picw = max_pic_width_ != 0 ? max_pic_width_ + 10 : 0;
 
+	while (idx < entry_records_.size()) {
 		const EntryRecord& er = *entry_records_[idx];
 		const int txt_height = std::max(er.rendered_name->height(), er.rendered_hotkey->height());
 
@@ -445,14 +451,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 			break;
 		}
 
-		const int lineheight_unpadded = get_lineheight_without_padding();
-
 		Vector2i point(selection_mode_ == ListselectLayout::kDropdown ? 3 : 1, y);
-
-		const uint32_t w_reduction =
-		   (selection_mode_ == ListselectLayout::kDropdown ? scrollbar_.is_enabled() ? 4 : 5 : 2);
-		assert(w_reduction <= get_eff_w());
-		uint32_t maxw = get_eff_w() - w_reduction;
 
 		// Highlight the current selected entry
 		if (idx == selection_ && entry_records_.at(idx)->enable) {
@@ -470,8 +469,6 @@ void BaseListselect::draw(RenderTarget& dst) {
 				dst.brighten_rect(r, -ms_darken_value * 2);
 			}
 		}
-
-		int picw = max_pic_width_ != 0 ? max_pic_width_ + 10 : 0;
 
 		// Now draw pictures
 		if (er.pic != nullptr) {
