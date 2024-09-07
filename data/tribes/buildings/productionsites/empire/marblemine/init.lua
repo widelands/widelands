@@ -74,7 +74,7 @@ wl.Descriptions():new_productionsite_type {
          descname = _("working"),
          actions = {
             -- "return=skipped" causes 10 sec delay
-            -- time total: 69 + 69 + 10 = 148 sec
+            -- time total: 52 + 52 + 10 = 114 sec
             "call=mine_granite",
             "call=mine_marble",
             "return=skipped"
@@ -84,11 +84,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
          descname = _("mining granite"),
          actions = {
-            -- time: 12.6 + 4 * (10.5 + 3.6) = 69 sec
-            "return=skipped unless economy needs marble or economy needs granite",
+            -- time: 9.7 + 3 * (10.5 + 3.6) = 52 sec
+            "return=skipped unless economy needs granite",
             "consume=ration wine",
-            "sleep=duration:12s600ms",
-            "call=a_mine_produce_granite",
+            "sleep=duration:9s700ms",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_marble",
             "call=a_mine_produce_granite",
@@ -99,11 +98,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
          descname = _("mining marble"),
          actions = {
-            -- time: 12.6 + 4 * (10.5 + 3.6) = 69 sec
-            "return=skipped unless economy needs marble or economy needs granite",
+            -- time: 9.7 + 3 * (10.5 + 3.6) = 52 sec
+            "return=skipped unless economy needs marble",
             "consume=wine ration",
-            "sleep=duration:12s600ms",
-            "call=a_mine_produce_marble",
+            "sleep=duration:9s700ms",
             "call=a_mine_produce_marble",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_marble",
@@ -131,7 +129,7 @@ wl.Descriptions():new_productionsite_type {
          descname = "encyclopedia",
          actions = {
             "consume=ration wine",
-            "produce=granite:3 marble",
+            "produce=granite:2 marble",
          }
       },
       encyclopedia_marble = {
@@ -139,7 +137,7 @@ wl.Descriptions():new_productionsite_type {
          descname = "encyclopedia",
          actions = {
             "consume=wine ration",
-            "produce=marble:3 granite",
+            "produce=marble:2 granite",
          }
       },
    },
