@@ -923,15 +923,10 @@ void EditorInteractive::update_ocean_overlays() {
 		++nr_oceans;
 
 		constexpr uint32_t kAlpha = 0xff000000;
-		if (kOceanColors.empty()) {
-			for (const RGBColor& col : kPlayerColors) {
-				kOceanColors.emplace_back(kAlpha | (col.r << 16) | (col.g << 8) | (col.b));
-			}
-		}
 		if (kOceanColors.size() < nr_oceans) {
 			uint32_t color;
 			do {
-				color = kAlpha | (RNG::static_rand() % 0x1000000);
+				color = kAlpha | ((RNG::static_rand() % 0x10000) << 8);
 			} while (std::find(kOceanColors.begin(), kOceanColors.end(), color) != kOceanColors.end());
 			kOceanColors.emplace_back(color);
 			assert(nr_oceans == kOceanColors.size());
