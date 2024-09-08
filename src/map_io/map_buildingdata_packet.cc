@@ -831,8 +831,8 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 					delete wq;
 				} else {
 					// Savegame compatibility: check whether queue had size changed
-					auto it = std::find_if(curr_wares.begin(), curr_wares.end(),
-					                       [widx] (auto e) { return e.first == widx; });
+					auto it = std::find_if(
+					   curr_wares.begin(), curr_wares.end(), [widx](auto e) { return e.first == widx; });
 					if (it != curr_wares.end()) {
 						Quantity new_size = it->second;
 						Quantity old_size = wq->get_max_size();
@@ -851,7 +851,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				DescriptionIndex widx = wa.first;
 				auto it = std::find_if(productionsite.input_queues_.begin(),
 				                       productionsite.input_queues_.end(),
-				                       [widx] (auto e) { return e->get_index() == widx; });
+				                       [widx](auto e) { return e->get_index() == widx; });
 				if (it == productionsite.input_queues_.end()) {
 					WaresQueue* wq = new WaresQueue(productionsite, widx, wa.second);
 					productionsite.input_queues_.push_back(wq);
