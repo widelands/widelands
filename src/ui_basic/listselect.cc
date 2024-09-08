@@ -409,7 +409,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 	// draw text lines
 	int eff_h = get_inner_h();
 	if (selection_mode_ == ListselectLayout::kDropdown) {
-	   eff_h -= kMargin;
+		eff_h -= kMargin;
 	}
 	uint32_t idx = scrollpos_ / get_lineheight();
 	int y = 1 + idx * get_lineheight() - scrollpos_;
