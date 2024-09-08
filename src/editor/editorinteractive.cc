@@ -833,9 +833,15 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			if (value != 0) {
 				auto it = ocean_overlays_cache.find(value);
 				if (it == ocean_overlays_cache.end()) {
-					it = ocean_overlays_cache.emplace(value, playercolor_image(RGBColor(value), "images/wui/overlays/ocean.png", scale)).first;
+					it = ocean_overlays_cache
+					        .emplace(value, playercolor_image(
+					                           RGBColor(value), "images/wui/overlays/ocean.png", scale))
+					        .first;
 				}
-				blit_field_overlay(&dst, field, it->second.first, Vector2i(it->second.first->width() / 2, it->second.first->height() / 2), scale / it->second.second);
+				blit_field_overlay(
+				   &dst, field, it->second.first,
+				   Vector2i(it->second.first->width() / 2, it->second.first->height() / 2),
+				   scale / it->second.second);
 			}
 		}
 

@@ -59,7 +59,8 @@ const Image* playercolor_image(int player_number, const std::string& image_filen
 	return playercolor_image(kPlayerColors[player_number], image_filename);
 }
 
-std::pair<const Image*, float> playercolor_image(const RGBColor& clr, const std::string& image_filename, const float scale) {
+std::pair<const Image*, float>
+playercolor_image(const RGBColor& clr, const std::string& image_filename, const float scale) {
 	const uint8_t mipmap_bitset = g_image_cache->get_mipmap_bitset(image_filename);
 
 	if (mipmap_bitset == 0) {  // No mipmaps
