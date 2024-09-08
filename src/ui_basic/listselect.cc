@@ -411,7 +411,6 @@ void BaseListselect::draw(RenderTarget& dst) {
 	if (selection_mode_ == ListselectLayout::kDropdown) {
 	   eff_h -= kMargin;
 	}
-	assert(eff_h < std::numeric_limits<int32_t>::max());
 	uint32_t idx = scrollpos_ / get_lineheight();
 	int y = 1 + idx * get_lineheight() - scrollpos_;
 
