@@ -407,8 +407,10 @@ Redraw the listselect box
 */
 void BaseListselect::draw(RenderTarget& dst) {
 	// draw text lines
-	const int eff_h =
-	   selection_mode_ == ListselectLayout::kDropdown ? get_inner_h() - kMargin : get_inner_h();
+	int eff_h = get_inner_h();
+	if (selection_mode_ == ListselectLayout::kDropdown) {
+		eff_h -= kMargin;
+	}
 	uint32_t idx = scrollpos_ / get_lineheight();
 	int y = 1 + idx * get_lineheight() - scrollpos_;
 
@@ -432,9 +434,16 @@ void BaseListselect::draw(RenderTarget& dst) {
 		dst.brighten_rect(Recti(0, 0, get_eff_w(), get_h()), ms_darken_value);
 	}
 
-	while (idx < entry_records_.size()) {
-		assert(eff_h < std::numeric_limits<int32_t>::max());
+	const int lineheight_unpadded = get_lineheight_without_padding();
+	uint32_t w_reduction = 2;
+	if (selection_mode_ == ListselectLayout::kDropdown) {
+		w_reduction = scrollbar_.is_enabled() ? 4 : 5;
+	}
+	assert(w_reduction <= get_eff_w());
+	uint32_t maxw = get_eff_w() - w_reduction;
+	int picw = max_pic_width_ != 0 ? max_pic_width_ + 10 : 0;
 
+	while (idx < entry_records_.size()) {
 		const EntryRecord& er = *entry_records_[idx];
 		const int txt_height = std::max(er.rendered_name->height(), er.rendered_hotkey->height());
 
@@ -446,12 +455,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 			break;
 		}
 
-		const int lineheight_unpadded = get_lineheight_without_padding();
-
 		Vector2i point(selection_mode_ == ListselectLayout::kDropdown ? 3 : 1, y);
-		uint32_t maxw =
-		   get_eff_w() -
-		   (selection_mode_ == ListselectLayout::kDropdown ? scrollbar_.is_enabled() ? 4 : 5 : 2);
 
 		// Highlight the current selected entry
 		if (idx == selection_ && entry_records_.at(idx)->enable) {
@@ -464,14 +468,11 @@ void BaseListselect::draw(RenderTarget& dst) {
 				r.h += r.y;
 				r.y = 0;
 			}
-			assert(2 <= get_eff_w());
 			// Make the area a bit more white and more transparent
 			if (r.w > 0 && r.h > 0) {
 				dst.brighten_rect(r, -ms_darken_value * 2);
 			}
 		}
-
-		int picw = max_pic_width_ != 0 ? max_pic_width_ + 10 : 0;
 
 		// Now draw pictures
 		if (er.pic != nullptr) {
