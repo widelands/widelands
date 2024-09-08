@@ -407,8 +407,10 @@ Redraw the listselect box
 */
 void BaseListselect::draw(RenderTarget& dst) {
 	// draw text lines
-	const int eff_h =
-	   selection_mode_ == ListselectLayout::kDropdown ? get_inner_h() - kMargin : get_inner_h();
+	int eff_h = get_inner_h();
+	if (selection_mode_ == ListselectLayout::kDropdown) {
+	   eff_h -= kMargin;
+	}
 	assert(eff_h < std::numeric_limits<int32_t>::max());
 	uint32_t idx = scrollpos_ / get_lineheight();
 	int y = 1 + idx * get_lineheight() - scrollpos_;
