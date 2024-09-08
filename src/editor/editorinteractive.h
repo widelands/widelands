@@ -312,7 +312,7 @@ private:
 	/// Set to false when the tool is used with the new settings.
 	bool tool_settings_changed_ = true;
 
-	std::unique_ptr<Workareas> ocean_overlays_;
+	std::unique_ptr<std::vector<uint32_t>> ocean_overlays_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldTerrainChanged>>
 	   field_terrain_changed_subscriber_;
 };

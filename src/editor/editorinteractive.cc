@@ -702,8 +702,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 
 	const auto& ebase = egbase();
 	auto* fields_to_draw =
-	   map_view()->draw_terrain(ebase, nullptr, show_oceans ? *ocean_overlays_ : Workareas(),
-	                            get_display_flag(dfShowGrid), &dst);
+	   map_view()->draw_terrain(ebase, nullptr, Workareas(), get_display_flag(dfShowGrid), &dst);
 
 	const float scale = 1.f / map_view()->view().zoom;
 	const Time& gametime = ebase.get_gametime();
@@ -750,6 +749,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 
 	std::map<std::pair<Widelands::DescriptionIndex, Widelands::ResourceAmount>, const Image*>
 	   resource_images_cache;
+	std::map<uint32_t, std::pair<const Image*, float>> ocean_overlays_cache;
 
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
@@ -827,6 +827,18 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			}
 		}
 
+		// Show ocean overlay.
+		if (show_oceans) {
+			uint32_t value = ocean_overlays_->at(map.get_index(field.fcoords));
+			if (value != 0) {
+				auto it = ocean_overlays_cache.find(value);
+				if (it == ocean_overlays_cache.end()) {
+					it = ocean_overlays_cache.emplace(value, playercolor_image(RGBColor(value), "images/wui/overlays/ocean.png", scale)).first;
+				}
+				blit_field_overlay(&dst, field, it->second.first, Vector2i(it->second.first->width() / 2, it->second.first->height() / 2), scale / it->second.second);
+			}
+		}
+
 		// Draw the player starting position overlays.
 		const auto it = starting_positions.find(field.fcoords);
 		if (it != starting_positions.end()) {
@@ -885,16 +897,14 @@ void EditorInteractive::update_ocean_overlays() {
 	const Widelands::Map& map = egbase().map();
 	const Widelands::CheckStepDefault checkstep(Widelands::MOVECAPS_SWIM);
 	const Widelands::FindNodeAlwaysTrue functor;
-
-	// Ocean indices are 1-based, 0 means none
 	const size_t nr_fields = map.max_index();
-	std::unique_ptr<uint32_t[]> field_to_ocean_index(new uint32_t[nr_fields]);
-	unsigned nr_oceans = 0;
-	memset(field_to_ocean_index.get(), 0, nr_fields * sizeof(uint32_t));
+
 	static std::vector<uint32_t> kOceanColors;
+	unsigned nr_oceans = 0;
+	ocean_overlays_.reset(new std::vector<uint32_t>(nr_fields, 0));
 
 	for (size_t index = 0; index < nr_fields; ++index) {
-		if (field_to_ocean_index[index] != 0) {
+		if (ocean_overlays_->at(index) != 0) {
 			continue;  // Already visited
 		}
 
@@ -906,15 +916,21 @@ void EditorInteractive::update_ocean_overlays() {
 		// New ocean found.
 		++nr_oceans;
 
-		constexpr uint32_t kAlpha = 0xdf000000;
+		constexpr uint32_t kAlpha = 0xff000000;
 		if (kOceanColors.empty()) {
 			for (const RGBColor& col : kPlayerColors) {
 				kOceanColors.emplace_back(kAlpha | (col.r << 16) | (col.g << 8) | (col.b));
 			}
 		}
-		while (nr_oceans > kOceanColors.size()) {
-			kOceanColors.emplace_back(kAlpha | (RNG::static_rand() % 0x1000000));
+		if (kOceanColors.size() < nr_oceans) {
+			uint32_t color;
+			do {
+				color = kAlpha | (RNG::static_rand() % 0x1000000);
+			} while (std::find(kOceanColors.begin(), kOceanColors.end(), color) != kOceanColors.end());
+			kOceanColors.emplace_back(color);
+			assert(nr_oceans == kOceanColors.size());
 		}
+		const uint32_t this_ocean_color = kOceanColors.at(nr_oceans - 1);
 
 		std::vector<Widelands::Coords> ocean_fields;
 		map.find_reachable_fields(egbase(),
@@ -925,67 +941,17 @@ void EditorInteractive::update_ocean_overlays() {
 		// Store and validate the fields.
 		for (const Widelands::Coords& coords : ocean_fields) {
 			size_t i = map.get_index(coords);
-			if (field_to_ocean_index[i] != 0 && field_to_ocean_index[i] != nr_oceans) {
-				throw wexception("Field #%" PRIuS " (%dx%d) belongs to two oceans #%d and #%d!", i,
-				                 coords.x, coords.y, field_to_ocean_index[i], nr_oceans);
+			if (ocean_overlays_->at(i) != 0 && ocean_overlays_->at(i) != this_ocean_color) {
+				throw wexception("Field #%" PRIuS " (%dx%d) belongs to two oceans #%08x and #%08x!", i,
+				                 coords.x, coords.y, ocean_overlays_->at(i), this_ocean_color);
 			}
-			field_to_ocean_index[i] = nr_oceans;
+			ocean_overlays_->at(i) = this_ocean_color;
 		}
 
-		if (field_to_ocean_index[index] != nr_oceans) {
-			throw wexception("Field #%" PRIuS " does not belong to its own ocean #%d of size %" PRIuS
+		if (ocean_overlays_->at(index) != this_ocean_color) {
+			throw wexception("Field #%" PRIuS " does not belong to its own ocean #%08x of size %" PRIuS
 			                 "!",
-			                 index, nr_oceans, ocean_fields.size());
-		}
-	}
-
-	// Compute the triangles.
-	// We do not bother to compute borders because oceans can have very difficult shapes.
-	ocean_overlays_.reset(new Workareas(nr_oceans));
-
-	for (int y = 0; y < map.get_height(); ++y) {
-		for (int x = 0; x < map.get_width(); ++x) {
-			Widelands::Coords coords(x, y);
-			const uint32_t ocean = field_to_ocean_index[map.get_index(coords)];
-
-			if (ocean == 0) {
-				continue;  // Not in an ocean
-			}
-
-			std::vector<WorkareaPreviewData>& v_triangles = ocean_overlays_->at(ocean - 1).first;
-			const uint32_t col = kOceanColors.at(ocean - 1);
-
-			// Take care of all six triangles.
-			// R and D are always owned; the others only if their primary owners
-			// are not also in this ocean to avoid duplicates.
-			// Our L's R triangle is also our BL's TL's R.
-			// Our TR's D triangle is also our R's TL's D.
-			const bool tr = field_to_ocean_index[map.get_index(map.tr_n(coords))] == ocean;
-			const bool tl = field_to_ocean_index[map.get_index(map.tl_n(coords))] == ocean;
-			const bool bl = field_to_ocean_index[map.get_index(map.bl_n(coords))] == ocean;
-			const bool l = field_to_ocean_index[map.get_index(map.l_n(coords))] == ocean;
-			const bool r = field_to_ocean_index[map.get_index(map.r_n(coords))] == ocean;
-
-			v_triangles.emplace_back(
-			   Widelands::TCoords<>(coords, Widelands::TriangleIndex::D), 0, col);
-			v_triangles.emplace_back(
-			   Widelands::TCoords<>(coords, Widelands::TriangleIndex::R), 0, col);
-
-			if (!tl) {
-				v_triangles.emplace_back(
-				   Widelands::TCoords<>(map.tl_n(coords), Widelands::TriangleIndex::D), 0, col);
-				v_triangles.emplace_back(
-				   Widelands::TCoords<>(map.tl_n(coords), Widelands::TriangleIndex::R), 0, col);
-			}
-
-			if (!tr && !r) {
-				v_triangles.emplace_back(
-				   Widelands::TCoords<>(map.tr_n(coords), Widelands::TriangleIndex::D), 0, col);
-			}
-			if (!l && !bl) {
-				v_triangles.emplace_back(
-				   Widelands::TCoords<>(map.l_n(coords), Widelands::TriangleIndex::R), 0, col);
-			}
+			                 index, this_ocean_color, ocean_fields.size());
 		}
 	}
 }
@@ -1445,6 +1411,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 
 		set_need_save(false);
 		show_buildhelp(true);
+		ocean_overlays_.reset();
 
 		// Close all windows.
 		for (Panel* child = get_first_child(); child != nullptr; child = child->get_next_sibling()) {
@@ -1465,6 +1432,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 		break;
 
 	case MapWas::kResized:
+		ocean_overlays_.reset();
 		resize_minimap();
 		break;
 
