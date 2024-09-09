@@ -551,9 +551,8 @@ void DefaultAI::think() {
 			break;
 		case SchedulerTaskId::kTrading:
 			trading_actions(gametime);
-			set_taskpool_task_time(
-			   gametime + kTradingInterval + Duration(RNG::static_rand(30) * 1000),
-			   SchedulerTaskId::kTrading);
+			set_taskpool_task_time(gametime + kTradingInterval + Duration(RNG::static_rand(30) * 1000),
+			                       SchedulerTaskId::kTrading);
 			break;
 		default:
 			NEVER_HERE();
@@ -1040,7 +1039,8 @@ void DefaultAI::late_initialization() {
 			continue;
 		}
 
-		throw wexception("AI does not support buildings of type %s", Widelands::to_string(bld.type()).c_str());
+		throw wexception(
+		   "AI does not support buildings of type %s", Widelands::to_string(bld.type()).c_str());
 	}
 
 	// Forester/Ranger
@@ -1168,9 +1168,9 @@ void DefaultAI::late_initialization() {
 	                                                   SchedulerTaskId::kWarehouseFlagDist, 5,
 	                                                   "flag warehouse Update"));
 
-	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(10 * 60 * 1000)),
-		                                               SchedulerTaskId::kTrading, 5,
-		                                               "Trading tasks"));
+	taskPool.push_back(
+	   std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(10 * 60 * 1000)),
+	                                   SchedulerTaskId::kTrading, 5, "Trading tasks"));
 
 	if (game().diplomacy_allowed()) {
 		// don't do any diplomacy for the first 10 + x minutes to avoid click races for allies,
@@ -3377,27 +3377,43 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 		int receive_preciousness = 0;
 		for (const auto& pair : offer.trade.items_to_send) {
 			// This is what the other player sends to us.
-			receive_preciousness += pair.second * game().descriptions().get_ware_descr(pair.first)->ai_hints().preciousness(tribe_->name());
+			receive_preciousness += pair.second * game()
+			                                         .descriptions()
+			                                         .get_ware_descr(pair.first)
+			                                         ->ai_hints()
+			                                         .preciousness(tribe_->name());
 		}
 		for (const auto& pair : offer.trade.items_to_receive) {
 			// This is what the other player receives from us.
-			send_preciousness += pair.second * game().descriptions().get_ware_descr(pair.first)->ai_hints().preciousness(tribe_->name());
+			send_preciousness += pair.second * game()
+			                                      .descriptions()
+			                                      .get_ware_descr(pair.first)
+			                                      ->ai_hints()
+			                                      .preciousness(tribe_->name());
 		}
 
 		if (receive_preciousness > send_preciousness) {
 			// The trade is advantageous, accept.
-			std::multimap<uint32_t, const Widelands::Market*> candidates = game().player(player_number()).get_markets(offer.trade.initiator.get(game())->get_position());
+			std::multimap<uint32_t, const Widelands::Market*> candidates =
+			   game()
+			      .player(player_number())
+			      .get_markets(offer.trade.initiator.get(game())->get_position());
 			if (candidates.empty()) {
-				verb_log_dbg("AI %u: no market to accept trade #%u", static_cast<unsigned>(player_number()), trade_id);
+				verb_log_dbg("AI %u: no market to accept trade #%u",
+				             static_cast<unsigned>(player_number()), trade_id);
 			} else {
 				const Widelands::Market* select = candidates.begin()->second;
-				verb_log_dbg("AI %u: accepting trade #%u at %s", static_cast<unsigned>(player_number()), trade_id, select->get_market_name().c_str());
-				game().send_player_trade_action(player_number(), trade_id, Widelands::TradeAction::kAccept, select->serial());
+				verb_log_dbg("AI %u: accepting trade #%u at %s", static_cast<unsigned>(player_number()),
+				             trade_id, select->get_market_name().c_str());
+				game().send_player_trade_action(
+				   player_number(), trade_id, Widelands::TradeAction::kAccept, select->serial());
 			}
 		} else {
 			// The trade is not advantageous, reject.
-			verb_log_dbg("AI %u: rejecting trade #%u", static_cast<unsigned>(player_number()), trade_id);
-			game().send_player_trade_action(player_number(), trade_id, Widelands::TradeAction::kReject, 0);
+			verb_log_dbg(
+			   "AI %u: rejecting trade #%u", static_cast<unsigned>(player_number()), trade_id);
+			game().send_player_trade_action(
+			   player_number(), trade_id, Widelands::TradeAction::kReject, 0);
 		}
 	}
 }
