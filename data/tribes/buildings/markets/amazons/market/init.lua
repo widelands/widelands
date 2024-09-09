@@ -31,7 +31,8 @@ wl.Descriptions():new_market_type {
    },
 
    aihints = {
-      prohibited_till = 1000
+      prohibited_till = 1000,
+      forced_after = 1500,
    },
 }
 

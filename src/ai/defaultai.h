@@ -174,6 +174,7 @@ private:
 	static constexpr Duration kStatUpdateInterval{15 * 1000};
 	static constexpr Duration kFlagWarehouseUpdInterval{15 * 1000};
 	static constexpr Duration kDiplomacyInterval{90 * 1000};
+	static constexpr Duration kTradingInterval{90 * 1000};
 
 	// common for defaultai.cc and defaultai_seafaring.cc
 	static constexpr Duration kExpeditionMinDuration{60 * 60 * 1000};
@@ -246,6 +247,7 @@ private:
 	// calculating distances from local warehouse to flags
 	void check_flag_distances(const Time&);
 	void diplomacy_actions(const Time&);
+	void trading_actions(const Time&);
 	FlagWarehouseDistances flag_warehouse_distance;
 
 	bool check_economies();
