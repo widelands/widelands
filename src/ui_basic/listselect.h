@@ -283,19 +283,21 @@ template <typename Entry> struct Listselect : public BaseListselect {
 	bool is_checked(Entry entry) const {
 		auto it = std::find(entry_cache_.begin(), entry_cache_.end(), entry);
 		return (it == entry_cache_.end()) ? false :
-		   BaseListselect::is_checked(it - entry_cache_.begin());
+                                          BaseListselect::is_checked(it - entry_cache_.begin());
 	}
 
 	bool set_checked(Entry entry, bool newstate, bool notify = false) {
 		auto it = std::find(entry_cache_.begin(), entry_cache_.end(), entry);
-		return (it == entry_cache_.end()) ? false :
-		   BaseListselect::set_checked(it - entry_cache_.begin(), newstate, notify);
+		return (it == entry_cache_.end()) ?
+                false :
+                BaseListselect::set_checked(it - entry_cache_.begin(), newstate, notify);
 	}
 
 	bool toggle_checked(Entry entry, bool notify = false) {
 		auto it = std::find(entry_cache_.begin(), entry_cache_.end(), entry);
-		return (it == entry_cache_.end()) ? false :
-		   BaseListselect::toggle_checked(it - entry_cache_.begin(), notify);
+		return (it == entry_cache_.end()) ?
+                false :
+                BaseListselect::toggle_checked(it - entry_cache_.begin(), notify);
 	}
 
 protected:
