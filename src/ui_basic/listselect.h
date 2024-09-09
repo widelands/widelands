@@ -281,30 +281,21 @@ template <typename Entry> struct Listselect : public BaseListselect {
 	}
 
 	bool is_checked(Entry entry) const {
-		for (uint32_t i = 0; i < entry_cache_.size(); ++i) {
-			if (entry == entry_cache_[i]) {
-				return BaseListselect::is_checked(i);
-			}
-		}
-		return false;
+		auto it = std::find(entry_cache_.begin(), entry_cache_.end(), entry);
+		return (it == entry_cache_.end()) ? false :
+		   BaseListselect::is_checked(it - entry_cache_.begin());
 	}
 
 	bool set_checked(Entry entry, bool newstate, bool notify = false) {
-		for (uint32_t i = 0; i < entry_cache_.size(); ++i) {
-			if (entry == entry_cache_[i]) {
-				return BaseListselect::set_checked(i, newstate, notify);
-			}
-		}
-		return false;
+		auto it = std::find(entry_cache_.begin(), entry_cache_.end(), entry);
+		return (it == entry_cache_.end()) ? false :
+		   BaseListselect::set_checked(it - entry_cache_.begin(), newstate, notify);
 	}
 
 	bool toggle_checked(Entry entry, bool notify = false) {
-		for (uint32_t i = 0; i < entry_cache_.size(); ++i) {
-			if (entry == entry_cache_[i]) {
-				return BaseListselect::toggle_checked(i, notify);
-			}
-		}
-		return false;
+		auto it = std::find(entry_cache_.begin(), entry_cache_.end(), entry);
+		return (it == entry_cache_.end()) ? false :
+		   BaseListselect::toggle_checked(it - entry_cache_.begin(), notify);
 	}
 
 protected:
