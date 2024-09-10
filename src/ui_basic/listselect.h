@@ -239,6 +239,14 @@ private:
 };
 
 template <typename Entry> struct Listselect : public BaseListselect {
+	/**
+	 * Listselect<Entry&> is no longer permitted. Allowing references as
+	 * template parameter is not a good idea (e.g. STL containers don't
+	 * allow it). You should use pointers instead because they are more
+	 * explicit, and that was how Listselect<Entry&> worked internally.
+	 */
+	static_assert(!std::is_reference<Entry>::value, "Listselect does not accept reference types!");
+
 	Listselect(Panel* parent,
 	           const std::string& name,
 	           int32_t x,
@@ -306,68 +314,6 @@ protected:
 	}
 
 	std::deque<Entry> entry_cache_;
-};
-
-/**
- * This template specialization is for backwards compatibility and convenience
- * only. Allowing references as template parameter is not a good idea
- * (e.g. STL containers don't allow it), you should really use pointers instead
- * because they are more explicit, and that's what this specialization does
- * internally.
- */
-template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> {
-	using Base = Listselect<Entry*>;
-
-	Listselect(Panel* parent,
-	           const std::string& name,
-	           int32_t x,
-	           int32_t y,
-	           uint32_t w,
-	           uint32_t h,
-	           UI::PanelStyle style,
-	           ListselectLayout selection_mode = ListselectLayout::kPlain)
-	   : Base(parent, name, x, y, w, h, style, selection_mode) {
-	}
-
-	CLANG_DIAG_OFF("-Wshadow-field")
-	Notifications::Signal<Entry&, bool> checkmark_changed;  // NOLINT: intentional shadowing
-	CLANG_DIAG_ON("-Wshadow-field")
-
-	void add(const std::string& name,
-	         Entry& value,
-	         const Image* pic = nullptr,
-	         const bool select_this = false,
-	         const std::string& tooltip_text = std::string(),
-	         const std::string& hotkey = std::string(),
-	         const unsigned indent = 0,
-	         const bool enable = true) {
-		Base::add(name, &value, pic, select_this, tooltip_text, hotkey, indent, enable);
-	}
-
-	Entry& operator[](uint32_t const i) const {
-		return *Base::operator[](i);
-	}
-
-	Entry& get_selected() const {
-		return *Base::get_selected();
-	}
-
-	bool is_checked(Entry& entry) const {
-		return Base::is_checked(&entry);
-	}
-
-	bool set_checked(Entry& entry, bool newstate, bool notify = false) {
-		return Base::set_checked(&entry, newstate, notify);
-	}
-
-	bool toggle_checked(Entry& entry, bool notify = false) {
-		return Base::toggle_checked(&entry, notify);
-	}
-
-protected:
-	void emit_checkmark_changed(uint32_t base_entry, bool newstate) const override {
-		checkmark_changed(*Base::entry_cache_[base_entry], newstate);
-	}
 };
 }  // namespace UI
 
