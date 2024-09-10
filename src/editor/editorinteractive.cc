@@ -926,7 +926,12 @@ void EditorInteractive::update_ocean_overlays() {
 		if (kOceanColors.size() < nr_oceans) {
 			uint32_t color;
 			do {
-				color = kAlpha | ((RNG::static_rand() % 0x10000) << 8);
+				const int rg = (RNG::static_rand() % 0x10000);
+				int g = (rg & 0xff);
+				g -= 50;
+				// Cap Blue to Green minus 50 for visibility on blue water terrains.
+				const int b = g > 0 ? (RNG::static_rand() % g) : 0;
+				color = kAlpha | (rg << 8) | b;
 			} while (std::find(kOceanColors.begin(), kOceanColors.end(), color) != kOceanColors.end());
 			kOceanColors.emplace_back(color);
 			assert(nr_oceans == kOceanColors.size());
