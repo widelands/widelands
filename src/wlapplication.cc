@@ -1743,7 +1743,7 @@ void WLApplication::handle_commandline_parameters() {
 		game_type_ = pair.first;
 
 		filename_ = *val;
-		if (filename_.back() == '/') {
+		if (!filename_.empty() && filename_.back() == '/') {
 			// Strip trailing directory separator
 			filename_.erase(filename_.size() - 1);
 		}
