@@ -120,6 +120,8 @@ msgid ""
 "Build at least three new lumberjack’s houses and two new quarries to renew "
 "your building material supply chain."
 msgstr ""
+"Zbuduj co najmniej trzy nowe chaty drwala i dwa nowe kamieniołomy, aby "
+"odnowić łańcuch dostaw materiałów budowlanych."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:94
 msgid "Produce fish and rations"
