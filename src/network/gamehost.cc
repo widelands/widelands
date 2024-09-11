@@ -427,6 +427,9 @@ void GameHost::init_computer_player(Widelands::PlayerNumber p) {
 	d->computerplayers.push_back(
 	   AI::ComputerPlayer::get_implementation(d->game->get_player(p)->get_ai())
 	      ->instantiate(*d->game, p));
+	if (d->game->player_manager()->get_player_end_status(p)) {
+		d->computerplayers.back()->game_over();
+	}
 }
 
 void GameHost::replace_client_with_ai(uint8_t playernumber, const std::string& ai) {
@@ -2673,6 +2676,14 @@ void GameHost::report_result(uint8_t p_nr,
 				send_system_message_code("PLAYER_DEFEATED", user.name);
 			}
 		}
+	}
+
+	// neuter AI
+	if (d->settings.players.at(p_nr - 1).state == PlayerSettings::State::kComputer) {
+		auto it = std::find_if(d->computerplayers.begin(), d->computerplayers.end(),
+		                       [p_nr](auto cp) { return cp->player_number() == p_nr; });
+		assert(it != d->computerplayers.end());
+		(*it)->game_over();
 	}
 
 	verb_log_info("GameHost::report_result(%d, %u, %s)", player->player_number(),

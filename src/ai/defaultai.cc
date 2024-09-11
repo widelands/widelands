@@ -225,7 +225,7 @@ DefaultAI::~DefaultAI() {
  *
  * General behaviour is defined here.
  */
-void DefaultAI::think() {
+void DefaultAI::do_think() {
 	const Time& gametime = game().get_gametime();
 
 	if (next_ai_think_ > gametime) {
