@@ -152,10 +152,13 @@ local function init_buildingmaterials(player, sf, total_previous_buildings)
    connected_road("normal", player, building.flag, "tr,tr|tl,tr|tl,tl")
    connected_road("normal", player, building.flag, "l,l,l")
 
+   building = place_safe_building(player, "amazons_rare_tree_kiln", sf, -3, -3)
+   connected_road("normal", player, building.flag, "r,r")
+
    building = place_safe_building(player, "amazons_gardening_center", sf, 1, -4)
    building = place_safe_building(player, "amazons_gardening_center", sf, -4, 0)
 
-   return count_buildings(player, total_previous_buildings, 16)
+   return count_buildings(player, total_previous_buildings, 17)
 end
 
 local function init_food_and_transport(player, sf, total_previous_buildings)

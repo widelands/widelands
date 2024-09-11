@@ -48,7 +48,8 @@ wl.Descriptions():new_productionsite_type {
       { name = "ironwood", amount = 2 },
       { name = "balsa", amount = 6 },
       { name = "rubber", amount = 9 },
-      { name = "rope", amount = 6 },
+      { name = "rope", amount = 8 },
+      { name = "quartz", amount = 3 },
       { name = "gold", amount = 3 },
    },
 
@@ -87,7 +88,7 @@ wl.Descriptions():new_productionsite_type {
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs armor_wooden",
-            "consume=balsa:2 rope",
+            "consume=balsa:2 rope quartz",
             "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=armor_wooden"
@@ -99,7 +100,7 @@ wl.Descriptions():new_productionsite_type {
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs helmet_wooden",
-            "consume=ironwood rubber",
+            "consume=ironwood rubber quartz",
             "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=helmet_wooden"
@@ -123,7 +124,7 @@ wl.Descriptions():new_productionsite_type {
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs boots_sturdy",
-            "consume=rubber balsa",
+            "consume=rubber balsa rope",
             "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=boots_sturdy"
@@ -135,7 +136,7 @@ wl.Descriptions():new_productionsite_type {
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs boots_swift",
-            "consume=rubber:3",
+            "consume=rubber:3 rope quartz",
             "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=boots_swift"
@@ -147,7 +148,7 @@ wl.Descriptions():new_productionsite_type {
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs boots_hero",
-            "consume=rubber:3 gold",
+            "consume=rubber:3 rope gold",
             "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=boots_hero"
