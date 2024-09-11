@@ -1,5 +1,7 @@
 include "scripting/coroutine.lua"
 
+local saved_version = get_build_id()
+
 -- Save the game so that reloading does not skip
 function stable_save(game, savename, desired_speed)
    local mapview = wl.ui.MapView()
@@ -27,4 +29,13 @@ function stable_save(game, savename, desired_speed)
    sleep(1000)
    game.desired_speed = desired_speed
    sleep(100)
+end
+
+function check_reload_version()
+   if saved_version == get_build_id() then
+      print("# All Tests passed.")
+      wl.ui.MapView():close()
+   else
+      print("Game was saved with a different version, not quitting.")
+   end
 end
