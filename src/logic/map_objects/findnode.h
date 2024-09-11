@@ -89,6 +89,12 @@ public:
 	}
 };
 
+struct FindNodeAlwaysTrue {
+	[[nodiscard]] bool accept(const EditorGameBase&, const FCoords&) const {
+		return true;
+	}
+};
+
 struct FindNodeCaps {
 	explicit FindNodeCaps(uint8_t init_mincaps) : mincaps(init_mincaps) {
 	}
