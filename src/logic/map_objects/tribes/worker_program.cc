@@ -73,6 +73,7 @@ Available actions are:
 - `playsound`_
 - `construct`_
 - `terraform`_
+- `script`_
 */
 
 const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
@@ -94,6 +95,7 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
    {"playsound", &WorkerProgram::parse_playsound},
    {"construct", &WorkerProgram::parse_construct},
    {"terraform", &WorkerProgram::parse_terraform},
+   {"script", &WorkerProgram::parse_script},
 
    {nullptr, nullptr}};
 
@@ -1068,5 +1070,17 @@ void WorkerProgram::parse_construct(Worker::Action* act, const std::vector<std::
 	}
 
 	act->function = &Worker::run_construct;
+}
+
+/* RST
+script
+^^^^^^
+Runs a Lua function. See :ref:`map_object_programs_script`.
+*/
+void WorkerProgram::parse_script(Worker::Action* act, const std::vector<std::string>& cmd) {
+	RunScriptParameters parameters = MapObjectProgram::parse_act_script(cmd);
+
+	act->sparam1 = parameters.function;
+	act->function = &Worker::run_script;
 }
 }  // namespace Widelands

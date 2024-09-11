@@ -161,6 +161,8 @@ static const char* to_string(const LogType& type) {
 		return "INFO";
 	case LogType::kDebug:
 		return "DEBUG";
+	case LogType::kLua:
+		return "LUA";
 	case LogType::kWarning:
 		return "WARNING";
 	case LogType::kError:

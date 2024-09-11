@@ -125,6 +125,7 @@ run(function()
                                  value = "second",
                                  label = "2nd Item",
                                  tooltip = "Tooltip for i2",
+                                 enable = false,
                               },
                               {
                                  value = "third",
@@ -451,6 +452,16 @@ run(function()
    assert_equal("listselect", listselect.name)
    assert_equal(1, tabpanel.active)
    assert_equal(8, table.no_of_rows)
+
+   assert_equal("first", dropdown:get_value_at(1))
+   assert_equal("2nd Item", dropdown:get_label_at(2))
+   assert_equal("Tooltip for i3", dropdown:get_tooltip_at(3))
+   assert_equal("second", listselect:get_value_at(2))
+   assert_equal("3. Item", listselect:get_label_at(3))
+   assert_equal("Tooltip for i1", listselect:get_tooltip_at(1))
+   assert_equal(0, listselect:get_indent_at(1))
+   assert_equal(false, listselect:get_enable_at(2))
+   assert_equal(true, listselect:get_enable_at(3))
 
    button.enabled = true
    sleep(1000)

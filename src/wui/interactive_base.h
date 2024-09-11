@@ -35,6 +35,7 @@
 #include "wui/debugconsole.h"
 #include "wui/mapview.h"
 #include "wui/minimap.h"
+#include "wui/plugins.h"
 #include "wui/quicknavigation.h"
 
 class InfoPanel;
@@ -255,7 +256,9 @@ public:
 	                        const std::string& icon,
 	                        const std::string& label,
 	                        const std::string& tt);
-	void add_plugin_timer(const std::string& action, uint32_t interval, bool failsafe);
+	void add_plugin_timer(const std::string& action, uint32_t interval, bool failsafe) {
+		plugin_timers_.add_plugin_timer(action, interval, failsafe);
+	}
 
 	UI::Box* toolbar();
 	// Sets the toolbar's position to the bottom middle and configures its background images
@@ -277,7 +280,6 @@ protected:
 	void mapview_menu_selected(MapviewMenuEntry entry);
 
 	void add_plugin_menu();
-	bool plugin_action(const std::string& action, bool failsafe);
 
 	/// Adds a toolbar button to the toolbar
 	/// \param image_basename:      File path for button image starting from 'images' and without
@@ -460,19 +462,7 @@ private:
 	UI::Dropdown<MapviewMenuEntry> mapviewmenu_;
 	UI::Dropdown<std::string> plugins_dropdown_;
 	QuickNavigation quick_navigation_;
-
-	struct PluginTimer {
-		PluginTimer() = default;
-		explicit PluginTimer(const std::string& a, uint32_t i, bool f)
-		   : action(a), interval(i), failsafe(f) {
-		}
-
-		std::string action;
-		uint32_t interval{0U};
-		uint32_t next_run{0U};
-		bool failsafe{false};
-	};
-	std::vector<PluginTimer> plugin_timers_;
+	PluginTimers plugin_timers_;
 
 public:
 	MiniMap::Registry minimap_registry_;
