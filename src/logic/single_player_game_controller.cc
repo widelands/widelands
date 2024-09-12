@@ -126,14 +126,8 @@ void SinglePlayerGameController::report_result(uint8_t p_nr,
 	game_.player_manager()->add_player_end_status(pes);
 
 	// neuter AI
-<<<<<<< HEAD
 	if (p_nr != local_) {
 		assert(computerplayers_[p_nr - 1]->player_number() == p_nr);
 		computerplayers_[p_nr - 1]->game_over();
-=======
-	if (p != local_) {
-		assert(computerplayers_[p_nr - 1]->player_number() == p_nr);
-		computerplayers_[p_nr - 1]->game_over();
->>>>>>> e73a4401dc8f84a42e8ccbe946d63be0f43d080e
 	}
 }
