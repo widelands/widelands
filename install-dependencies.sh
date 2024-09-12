@@ -153,8 +153,11 @@ elif [ "$DISTRO" = "mageia" ]; then
 
 elif [ "$DISTRO" = "debian" ]; then
    echo "Installing dependencies for Debian/Ubuntu Linux, Linux Mint..."
-   sudo apt-get install $@ git cmake g++ gcc libasio-dev libglew-dev libpng-dev libsdl2-dev \
-    libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev libminizip-dev
+   PKGS=''
+   while read PKG <"${WL_DIR}"/utils/ubuntu/packages ; do
+      PKGS="$PKGS $PKG"
+   done
+   sudo apt-get install $@ $PKGS
 
 elif [ "$DISTRO" = "freebsd" ]; then
    echo "Installing dependencies for FreeBSD..."
@@ -178,8 +181,13 @@ elif [ "$DISTRO" = "msys64" ]; then
 elif [ "$DISTRO" = "homebrew" ]; then
    echo "Installing dependencies for Mac Homebrew..."
    # TODO(k.halfmann): minizip package of brew fails to link dynamically, See also #5620
-   brew install $@ asio git cmake doxygen glew graphviz icu4c jpeg \
-    libogg libpng libvorbis ninja python sdl2 sdl2_image sdl2_mixer sdl2_ttf zlib
+   PKGS=''
+   while read PKG <"${WL_DIR}"/utils/macos/packages ; do
+      # brew reports a nasty warning for already installed packages, so we want to make sure to
+      # only install the missing ones
+      brew list $PKG || PKGS="$PKGS $PKG"
+   done
+   brew install $@ $PKGS
 
 elif [ "$DISTRO" = "solus" ]; then
    echo "Installing dependencies for Solus..."
@@ -195,9 +203,11 @@ elif [ "$DISTRO" = "void" ]; then
 
 elif [ "$DISTRO" = "vcpkg" ]; then
    echo "Installing dependencies for vcpkg..."
-   vcpkg install --disable-metrics $@ asio gettext[tools] libpng icu glbinding sdl2 sdl2-ttf \
-     sdl2-mixer[core,libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 \
-     harfbuzz opusfile libwebp
+   PKGS=''
+   while read PKG <"${WL_DIR}"/utils/windows/vcpkg_deps ; do
+      PKGS="$PKGS $PKG"
+   done
+   vcpkg install --disable-metrics $@ $PKGS
 
 elif [ -z "$DISTRO" ]; then
    echo "ERROR. Unable to detect your operating system."
