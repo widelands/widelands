@@ -153,11 +153,7 @@ elif [ "$DISTRO" = "mageia" ]; then
 
 elif [ "$DISTRO" = "debian" ]; then
    echo "Installing dependencies for Debian/Ubuntu Linux, Linux Mint..."
-   PKGS=''
-   while read PKG ; do
-      PKGS="$PKGS $PKG"
-   done <"${WL_DIR}"/utils/ubuntu/packages
-   sudo apt-get install $@ $PKGS
+   sudo apt-get install $@ $(cat "${WL_DIR}"/utils/ubuntu/packages)
 
 elif [ "$DISTRO" = "freebsd" ]; then
    echo "Installing dependencies for FreeBSD..."
@@ -182,11 +178,11 @@ elif [ "$DISTRO" = "homebrew" ]; then
    echo "Installing dependencies for Mac Homebrew..."
    # TODO(k.halfmann): minizip package of brew fails to link dynamically, See also #5620
    PKGS=''
-   while read PKG ; do
+   for PKG in $(cat "${WL_DIR}"/utils/macos/packages) ; do
       # brew reports a nasty warning for already installed packages, so we want to make sure to
       # only install the missing ones
       brew list $PKG || PKGS="$PKGS $PKG"
-   done <"${WL_DIR}"/utils/macos/packages
+   done
    brew install $@ $PKGS
 
 elif [ "$DISTRO" = "solus" ]; then
@@ -203,12 +199,7 @@ elif [ "$DISTRO" = "void" ]; then
 
 elif [ "$DISTRO" = "vcpkg" ]; then
    echo "Installing dependencies for vcpkg..."
-   PKGS=''
-   for PKG in $( cat "${WL_DIR}"/utils/windows/vcpkg_deps ) ; do
-      echo "Adding dependency: '$PKG'"
-      PKGS="$PKGS $PKG"
-   done
-   vcpkg install --disable-metrics $@ $PKGS
+   vcpkg install --disable-metrics $@ $(cat "${WL_DIR}"/utils/windows/vcpkg_deps)
 
 elif [ -z "$DISTRO" ]; then
    echo "ERROR. Unable to detect your operating system."
