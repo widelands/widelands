@@ -41,26 +41,6 @@ char	*MD5File(const char *, char *);
 char	*MD5FileChunk(const char *, char *, off_t, off_t);
 char	*MD5Data(const uint8_t *, size_t, char *);
 
-/* Avoid polluting the namespace. Even though this makes this usage
- * implementation-specific, defining it unconditionally should not be
- * a problem, and better than possibly breaking unexpecting code. */
-#ifdef WIDELANDS_LIBMD_MD5_ALADDIN
-
-/*
- * Interface compatibility with Aladdin Enterprises independent
- * implementation from RFC 1321.
- */
-
-typedef uint8_t md5_byte_t;
-typedef uint32_t md5_word_t;
-typedef MD5_CTX md5_state_t;
-
-#define md5_init(pms) MD5Init(pms)
-#define md5_append(pms, data, nbytes) MD5Update(pms, data, nbytes)
-#define md5_finish(pms, digest) MD5Final(digest, pms)
-
-#endif /* WIDELANDS_LIBMD_MD5_ALADDIN */
-
 }  // namespace libmd
 
 #endif /* WIDELANDS_LIBMD_MD5_H_ */

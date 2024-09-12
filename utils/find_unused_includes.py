@@ -42,7 +42,7 @@ FILE_EXCLUDES = {'graphic/gl/system_headers.h', 'scripting/lua.h',
 # Headers files with contents that need to be detected by functions
 DIFFICULT_FILES = {'graphic/build_texture_atlas.h', 'base/string.h', 'wlapplication_options.h',
                    'scripting/report_error.h', 'editor/tools/set_resources_tool.h',
-                   'third_party/libmd/include/sha2.h', 'third_party/libmd/include/rmd160.h'}
+                   'third_party/libmd/include/sha2.h'}
 
 # Remove overgenerated symbols
 FUNCTION_EXCLUDES = {'_Pragma',
