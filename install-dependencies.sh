@@ -205,6 +205,7 @@ elif [ "$DISTRO" = "vcpkg" ]; then
    echo "Installing dependencies for vcpkg..."
    PKGS=''
    while read PKG ; do
+      echo "Adding dependency: '$PKG'"
       PKGS="$PKGS $PKG"
    done <"${WL_DIR}"/utils/windows/vcpkg_deps
    vcpkg install --disable-metrics $@ $PKGS

@@ -70,7 +70,7 @@ function MakeDMG {
    fi
    HDI_TRY=0
    HDI_RESULT=0
-   while [ $HDI_TRY -lt $HDI_MAX_TRIES ]; do
+   while true; do
       HDI_TRY=$(( ++HDI ))
       hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" \
               "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg" || HDI_RESULT=$?
@@ -81,6 +81,7 @@ function MakeDMG {
       if [ $HDI_RESULT -ne 16 -o $HDI_TRY -eq $HDI_MAX_TRIES]; then
          exit $HDI_RESULT
       fi
+      echo "  will retry after 10 seconds..."
       sleep 10
    done
 }
