@@ -37,6 +37,7 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/map_objects/tribes/bill_of_materials.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/militarysite.h"
@@ -819,13 +820,40 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 
 			uint16_t nr_queues = fr.unsigned_16();
 			assert(productionsite.input_queues_.empty());
+
+			const BillOfMaterials& curr_wares = pr_descr.input_wares();
 			for (uint16_t i = 0; i < nr_queues; ++i) {
 				WaresQueue* wq = new WaresQueue(productionsite, INVALID_INDEX, 0);
 				wq->read(fr, game, mol);
 
-				if (!game.descriptions().ware_exists(wq->get_index())) {
+				DescriptionIndex widx = wq->get_index();
+				if (!game.descriptions().ware_exists(widx)) {
 					delete wq;
 				} else {
+					// Savegame compatibility: check whether queue had size changed
+					auto it = std::find_if(
+					   curr_wares.begin(), curr_wares.end(), [widx](auto e) { return e.first == widx; });
+					if (it != curr_wares.end()) {
+						Quantity new_size = it->second;
+						Quantity old_size = wq->get_max_size();
+						if (new_size > old_size) {
+							wq->set_max_size(new_size);
+							if (wq->get_max_fill() == old_size) {
+								wq->set_max_fill(new_size);
+							}
+						}
+					}
+					productionsite.input_queues_.push_back(wq);
+				}
+			}
+			// Savegame compatibility: check for new queues that did not exist in older save file
+			for (WareAmount wa : curr_wares) {
+				DescriptionIndex widx = wa.first;
+				auto it = std::find_if(productionsite.input_queues_.begin(),
+				                       productionsite.input_queues_.end(),
+				                       [widx](auto e) { return e->get_index() == widx; });
+				if (it == productionsite.input_queues_.end()) {
+					WaresQueue* wq = new WaresQueue(productionsite, widx, wa.second);
 					productionsite.input_queues_.push_back(wq);
 				}
 			}
