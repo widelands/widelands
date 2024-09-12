@@ -181,7 +181,7 @@ elif [ "$DISTRO" = "homebrew" ]; then
    for PKG in $(cat "${WL_DIR}"/utils/macos/packages) ; do
       # brew reports a nasty warning for already installed packages, so we want to make sure to
       # only install the missing ones
-      brew list $PKG || PKGS="$PKGS $PKG"
+      brew list $PKG >/dev/null || PKGS="$PKGS $PKG"
    done
    brew install $@ $PKGS
 
