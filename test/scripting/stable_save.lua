@@ -31,8 +31,12 @@ function stable_save(game, savename, desired_speed)
    sleep(100)
 end
 
+function same_version()
+   return saved_version == get_build_id()
+end
+
 function check_reload_version()
-   if saved_version == get_build_id() then
+   if same_version() then
       print("# All Tests passed.")
       wl.ui.MapView():close()
    else
