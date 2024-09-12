@@ -204,10 +204,10 @@ elif [ "$DISTRO" = "void" ]; then
 elif [ "$DISTRO" = "vcpkg" ]; then
    echo "Installing dependencies for vcpkg..."
    PKGS=''
-   while read PKG ; do
+   for PKG in $( cat "${WL_DIR}"/utils/windows/vcpkg_deps ) ; do
       echo "Adding dependency: '$PKG'"
       PKGS="$PKGS $PKG"
-   done <"${WL_DIR}"/utils/windows/vcpkg_deps
+   done
    vcpkg install --disable-metrics $@ $PKGS
 
 elif [ -z "$DISTRO" ]; then
