@@ -107,7 +107,7 @@ struct ComputerPlayer {
 private:
 	Widelands::Game& game_;
 	Widelands::PlayerNumber const player_number_;
-	void (ComputerPlayer::*think_impl_)(){&ComputerPlayer::do_think};
+	void (ComputerPlayer::*think_impl_)() = &ComputerPlayer::do_think;
 
 	DISALLOW_COPY_AND_ASSIGN(ComputerPlayer);
 };
