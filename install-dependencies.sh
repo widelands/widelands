@@ -176,12 +176,16 @@ elif [ "$DISTRO" = "msys64" ]; then
 
 elif [ "$DISTRO" = "homebrew" ]; then
    echo "Installing dependencies for Mac Homebrew..."
-   # TODO(k.halfmann): minizip package of brew fails to link dynamically, See also #5620
+   # brew reports a nasty warning for already installed packages, so we want to make sure to
+   # only install the missing ones
+   # "brew list $PKG" does the same
+   INSTALLED="$(brew list)"
    PKGS=''
+   # TODO(k.halfmann): minizip package of brew fails to link dynamically, See also #5620
    for PKG in $(cat "${WL_DIR}"/utils/macos/packages) ; do
-      # brew reports a nasty warning for already installed packages, so we want to make sure to
-      # only install the missing ones
-      brew list $PKG >/dev/null || PKGS="$PKGS $PKG"
+      if ! echo "$INSTALLED" | grep -q $PKG ; then
+         PKGS="$PKGS $PKG"
+      fi
    done
    brew install $@ $PKGS
 
@@ -199,6 +203,8 @@ elif [ "$DISTRO" = "void" ]; then
 
 elif [ "$DISTRO" = "vcpkg" ]; then
    echo "Installing dependencies for vcpkg..."
+   # The dependencies must be on a single line, because linebreak handling is broken
+   # in the runner shell...
    vcpkg install --disable-metrics $@ $(cat "${WL_DIR}"/utils/windows/vcpkg_deps)
 
 elif [ -z "$DISTRO" ]; then
