@@ -154,9 +154,9 @@ elif [ "$DISTRO" = "mageia" ]; then
 elif [ "$DISTRO" = "debian" ]; then
    echo "Installing dependencies for Debian/Ubuntu Linux, Linux Mint..."
    PKGS=''
-   while read PKG <"${WL_DIR}"/utils/ubuntu/packages ; do
+   while read PKG ; do
       PKGS="$PKGS $PKG"
-   done
+   done <"${WL_DIR}"/utils/ubuntu/packages
    sudo apt-get install $@ $PKGS
 
 elif [ "$DISTRO" = "freebsd" ]; then
@@ -182,11 +182,11 @@ elif [ "$DISTRO" = "homebrew" ]; then
    echo "Installing dependencies for Mac Homebrew..."
    # TODO(k.halfmann): minizip package of brew fails to link dynamically, See also #5620
    PKGS=''
-   while read PKG <"${WL_DIR}"/utils/macos/packages ; do
+   while read PKG ; do
       # brew reports a nasty warning for already installed packages, so we want to make sure to
       # only install the missing ones
       brew list $PKG || PKGS="$PKGS $PKG"
-   done
+   done <"${WL_DIR}"/utils/macos/packages
    brew install $@ $PKGS
 
 elif [ "$DISTRO" = "solus" ]; then
@@ -204,9 +204,9 @@ elif [ "$DISTRO" = "void" ]; then
 elif [ "$DISTRO" = "vcpkg" ]; then
    echo "Installing dependencies for vcpkg..."
    PKGS=''
-   while read PKG <"${WL_DIR}"/utils/windows/vcpkg_deps ; do
+   while read PKG ; do
       PKGS="$PKGS $PKG"
-   done
+   done <"${WL_DIR}"/utils/windows/vcpkg_deps
    vcpkg install --disable-metrics $@ $PKGS
 
 elif [ -z "$DISTRO" ]; then
