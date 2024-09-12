@@ -161,12 +161,15 @@ static const char* to_string(const LogType& type) {
 		return "INFO";
 	case LogType::kDebug:
 		return "DEBUG";
+	case LogType::kLua:
+		return "LUA";
 	case LogType::kWarning:
 		return "WARNING";
 	case LogType::kError:
 		return "ERROR";
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 void do_log(const LogType type, const Time& gametime, const char* const fmt, ...) {

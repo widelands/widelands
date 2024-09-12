@@ -82,6 +82,7 @@ Available actions are:
 - `seed`_
 - `construct`_
 - `playsound`_
+- `script`_
 */
 
 ImmovableProgram::ImmovableProgram(const std::string& init_name,
@@ -111,6 +112,8 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 				   std::unique_ptr<Action>(new ActSeed(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "playsound") {
 				actions_.push_back(std::unique_ptr<Action>(new ActPlaySound(parseinput.arguments)));
+			} else if (parseinput.name == "script") {
+				actions_.push_back(std::unique_ptr<Action>(new ActRunScript(parseinput.arguments)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActConstruct(parseinput.arguments, immovable)));
@@ -166,6 +169,21 @@ void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) c
 	Notifications::publish(NoteSound(SoundType::kAmbient, parameters.fx, immovable.get_position(),
 	                                 parameters.priority, parameters.allow_multiple));
 	immovable.program_step(game);
+}
+
+/* RST
+
+script
+------
+Runs a Lua function. See :ref:`map_object_programs_script`.
+*/
+ImmovableProgram::ActRunScript::ActRunScript(const std::vector<std::string>& arguments)
+   : parameters(MapObjectProgram::parse_act_script(arguments)) {
+}
+
+void ImmovableProgram::ActRunScript::execute(Game& game, Immovable& immovable) const {
+	MapObjectProgram::do_run_script(game.lua(), &immovable, parameters.function);
+	return immovable.program_step(game);
 }
 
 /* RST

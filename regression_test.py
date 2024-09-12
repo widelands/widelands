@@ -108,7 +108,7 @@ class WidelandsTestCase(unittest.TestCase):
                     '--homedir={}'.format(self.run_dir),
                     '--nosound',
                     '--fail-on-lua-error',
-                    '--language=en_US' ]
+                    '--language=en' ]
             args += [ "--{}={}".format(key, value) for key, value in iteritems(wlargs) ]
 
             stdout_file.write("Running widelands binary: ")
@@ -145,7 +145,7 @@ class WidelandsTestCase(unittest.TestCase):
         stdout = open(stdout_filename, "r").read()
         self.verify_success(stdout, stdout_filename)
 
-        find_saves = lambda stdout: re.findall("Script requests save to: (\w+)$", stdout, re.M)
+        find_saves = lambda stdout: re.findall(r'Script requests save to: (\w+)$', stdout, re.M)
         savegame_done = { fn: False for fn in find_saves(stdout) }
         which_time = 1
         while not all(savegame_done.values()):

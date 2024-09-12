@@ -91,7 +91,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		opacity = 1.0f;
 	} else {
 		player_color_to_draw = nullptr;
-		opacity = kBuildingSilhouetteOpacity;
+		opacity = kImmovableSilhouetteOpacity;
 	}
 
 	// Initialize variable to make checks happy
@@ -299,7 +299,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 		// Put the real building in place
 		Game& game = dynamic_cast<Game&>(egbase);
 		DescriptionIndex becomes_idx = owner().tribe().building_index(building_->name());
-		old_buildings_.push_back(std::make_pair(becomes_idx, true));
+		old_buildings_.emplace_back(becomes_idx, true);
 		Building& b = building_->create(egbase, get_owner(), position_, false, false, old_buildings_);
 		if (Worker* const builder = builder_.get(egbase)) {
 			builder->reset_tasks(game);
@@ -400,8 +400,7 @@ void ConstructionSite::enhance(const EditorGameBase& egbase) {
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 
 	info_.intermediates.push_back(building_);
-	old_buildings_.push_back(
-	   std::make_pair(owner().tribe().building_index(building_->name()), true));
+	old_buildings_.emplace_back(owner().tribe().building_index(building_->name()), true);
 	building_ = owner().tribe().get_building_descr(building_->enhancement());
 	assert(building_);
 	info_.becomes = building_;
@@ -735,7 +734,7 @@ void ConstructionSite::draw(const Time& gametime,
 			   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
 		} else {
 			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(), tanim,
-			                    nullptr, kBuildingSilhouetteOpacity);
+			                    nullptr, kImmovableSilhouetteOpacity);
 		}
 	} else {
 		// Draw the construction site marker
@@ -744,7 +743,7 @@ void ConstructionSite::draw(const Time& gametime,
 			   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
 		} else {
 			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, nullptr,
-			                    kBuildingSilhouetteOpacity);
+			                    kImmovableSilhouetteOpacity);
 		}
 	}
 

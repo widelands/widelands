@@ -76,7 +76,7 @@ BillOfMaterials deserialize_bill_of_materials(StreamRead* des) {
 	for (int i = 0; i < count; ++i) {
 		const auto index = des->unsigned_8();
 		const auto amount = des->unsigned_32();
-		bill.push_back(std::make_pair(index, amount));
+		bill.emplace_back(index, amount);
 	}
 	return bill;
 }
@@ -1085,9 +1085,9 @@ CmdShipScoutDirection::CmdShipScoutDirection(StreamRead& des)
 void CmdShipScoutDirection::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
-		if (!(ship->get_ship_state() == Widelands::ShipStates::kExpeditionWaiting ||
-		      ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound ||
-		      ship->get_ship_state() == Widelands::ShipStates::kExpeditionScouting)) {
+		if (ship->get_ship_state() != Widelands::ShipStates::kExpeditionWaiting &&
+		    ship->get_ship_state() != Widelands::ShipStates::kExpeditionPortspaceFound &&
+		    ship->get_ship_state() != Widelands::ShipStates::kExpeditionScouting) {
 			log_warn_time(
 			   game.get_gametime(),
 			   " %1d:ship on %3dx%3d received scout command but not in "
@@ -1207,9 +1207,9 @@ CmdShipExploreIsland::CmdShipExploreIsland(StreamRead& des)
 void CmdShipExploreIsland::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
-		if (!(ship->get_ship_state() == Widelands::ShipStates::kExpeditionWaiting ||
-		      ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound ||
-		      ship->get_ship_state() == Widelands::ShipStates::kExpeditionScouting)) {
+		if (ship->get_ship_state() != Widelands::ShipStates::kExpeditionWaiting &&
+		    ship->get_ship_state() != Widelands::ShipStates::kExpeditionPortspaceFound &&
+		    ship->get_ship_state() != Widelands::ShipStates::kExpeditionScouting) {
 			log_warn_time(
 			   game.get_gametime(),
 			   " %1d:ship on %3dx%3d received explore island command "
@@ -1531,8 +1531,9 @@ void CmdSetInputMaxFill::execute(Game& game) {
 						}
 					}
 					NEVER_HERE();
+				default:
+					NEVER_HERE();
 				}
-				NEVER_HERE();
 			}
 		}
 	} else if (upcast(Building, b, mo)) {
@@ -2037,7 +2038,7 @@ void PlayerMessageCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectL
 		if (packet_version == kCurrentPacketVersionPlayerMessageCommand) {
 			PlayerCommand::read(fr, egbase, mol);
 			message_id_ = MessageId(fr.unsigned_32());
-			if (!static_cast<bool>(message_id_)) {
+			if (!message_id_.valid()) {
 				verb_log_warn("PlayerMessageCommand (player %u): message ID is null", sender());
 			}
 		} else {
@@ -2485,6 +2486,9 @@ void CmdDiplomacy::execute(Game& game) {
 		// If we found nothing, perhaps the command had been sent twice. Ignore.
 		break;
 	}
+
+	default:
+		NEVER_HERE();
 	}
 }
 

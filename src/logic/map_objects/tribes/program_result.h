@@ -32,10 +32,9 @@ inline int program_result_index(ProgramResult result) {
 		return 1;
 	case ProgramResult::kSkipped:
 		return 2;
-	case ProgramResult::kNone:
+	default:
 		NEVER_HERE();
 	}
-	return 0;
 }
 
 enum class ProgramResultHandlingMethod { kFail, kComplete, kSkip, kContinue, kRepeat };

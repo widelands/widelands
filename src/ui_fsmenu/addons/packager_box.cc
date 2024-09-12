@@ -291,7 +291,8 @@ void MapsAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 			      format(_("Minimum Widelands Version: %s"),
 			             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			                .as_font_tag(entry.data.minimum_required_widelands_version.empty() ?
-                                         _("(none)") :
+                                         /** TRANSLATORS: No minimum required version */
+                                         pgettext("version", "(none)") :
                                          entry.data.minimum_required_widelands_version)),
 			      format(_("Description: %s"),
 			             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
@@ -456,6 +457,9 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 		}
 		break;
 	}
+
+	default:
+		NEVER_HERE();
 	}
 
 	if (modified_) {

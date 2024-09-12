@@ -90,7 +90,9 @@ Button::Button(Panel* const parent,
             tooltip_text,
             init_state,
             UI::Button::ImageMode::kShrink) {
-	expand(w, h);
+	expand_w_ = (w == 0);
+	expand_h_ = (h == 0);
+	expand();
 }
 
 Button::Button  //  for pictorial buttons
@@ -121,14 +123,14 @@ void Button::set_pic(const Image* pic) {
 	title_image_ = pic;
 }
 
-void Button::expand(int w, int h) {
-	if (h == 0) {
+void Button::expand() {
+	if (expand_h_) {
 		// Automatically resize for font height and give it a margin.
 		int new_width = get_w();
 		const int new_height = std::max(text_height(button_style().enabled().font()),
 		                                text_height(button_style().disabled().font())) +
 		                       4 * kButtonImageMargin;
-		if (w == 0) {
+		if (expand_w_) {
 			// Automatically resize for text width too.
 			new_width = std::max(text_width(title_, button_style().enabled().font()),
 			                     text_width(title_, button_style().disabled().font())) +
@@ -228,15 +230,12 @@ void Button::draw(RenderTarget& dst) {
 			if (!is_monochrome) {
 				dst.blitrect_scale(Rectf((get_w() - blit_width) / 2.f, (get_h() - blit_height) / 2.f,
 				                         blit_width, blit_height),
-				                   title_image_,
-				                   Recti(0, 0, title_image_->width(), title_image_->height()), 1.,
-				                   BlendMode::UseAlpha);
+				                   title_image_, title_image_->rect(), 1.f, BlendMode::UseAlpha);
 			} else {
 				dst.blitrect_scale_monochrome(
 				   Rectf((get_w() - blit_width) / 2.f, (get_h() - blit_height) / 2.f, blit_width,
 				         blit_height),
-				   title_image_, Recti(0, 0, title_image_->width(), title_image_->height()),
-				   RGBAColor(255, 255, 255, 127));
+				   title_image_, title_image_->rect(), RGBAColor(255, 255, 255, 127));
 			}
 		}
 
@@ -318,6 +317,11 @@ void Button::think() {
 			//  longer be accessed.
 		}
 	}
+}
+
+void Button::update_template() {
+	Panel::update_template();
+	expand();
 }
 
 bool Button::handle_key(bool down, SDL_Keysym code) {
@@ -424,6 +428,8 @@ void Button::toggle() {
 		break;
 	case UI::Button::VisualState::kFlat:
 		break;  // Do nothing for flat buttons
+	default:
+		NEVER_HERE();
 	}
 }
 }  // namespace UI

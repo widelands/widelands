@@ -754,10 +754,10 @@ bool Worker::run_walk(Game& game, State& state, const Action& action) {
 			forceonlast = true;
 		}
 	}
-	if (!dest && ((action.iparam1 & Action::walkCoords) != 0)) {
+	if (!dest.valid() && ((action.iparam1 & Action::walkCoords) != 0)) {
 		dest = state.coords;
 	}
-	if (!dest) {
+	if (!dest.valid()) {
 		send_signal(game, "fail");
 		pop_task(game);
 		return true;
@@ -1004,32 +1004,32 @@ bool Worker::run_terraform(Game& game, State& state, const Action& a) {
 	DescriptionIndex di = descriptions.terrain_index(
 	   descriptions.get_terrain_descr(f.field->terrain_r())->enhancement(a.sparam1));
 	if (di != INVALID_INDEX) {
-		triangles.emplace(std::make_pair(TCoords<FCoords>(f, TriangleIndex::R), di));
+		triangles.emplace(TCoords<FCoords>(f, TriangleIndex::R), di);
 	}
 	di = descriptions.terrain_index(
 	   descriptions.get_terrain_descr(f.field->terrain_d())->enhancement(a.sparam1));
 	if (di != INVALID_INDEX) {
-		triangles.emplace(std::make_pair(TCoords<FCoords>(f, TriangleIndex::D), di));
+		triangles.emplace(TCoords<FCoords>(f, TriangleIndex::D), di);
 	}
 	di = descriptions.terrain_index(
 	   descriptions.get_terrain_descr(tln.field->terrain_r())->enhancement(a.sparam1));
 	if (di != INVALID_INDEX) {
-		triangles.emplace(std::make_pair(TCoords<FCoords>(tln, TriangleIndex::R), di));
+		triangles.emplace(TCoords<FCoords>(tln, TriangleIndex::R), di);
 	}
 	di = descriptions.terrain_index(
 	   descriptions.get_terrain_descr(tln.field->terrain_d())->enhancement(a.sparam1));
 	if (di != INVALID_INDEX) {
-		triangles.emplace(std::make_pair(TCoords<FCoords>(tln, TriangleIndex::D), di));
+		triangles.emplace(TCoords<FCoords>(tln, TriangleIndex::D), di);
 	}
 	di = descriptions.terrain_index(
 	   descriptions.get_terrain_descr(ln.field->terrain_r())->enhancement(a.sparam1));
 	if (di != INVALID_INDEX) {
-		triangles.emplace(std::make_pair(TCoords<FCoords>(ln, TriangleIndex::R), di));
+		triangles.emplace(TCoords<FCoords>(ln, TriangleIndex::R), di);
 	}
 	di = descriptions.terrain_index(
 	   descriptions.get_terrain_descr(trn.field->terrain_d())->enhancement(a.sparam1));
 	if (di != INVALID_INDEX) {
-		triangles.emplace(std::make_pair(TCoords<FCoords>(trn, TriangleIndex::D), di));
+		triangles.emplace(TCoords<FCoords>(trn, TriangleIndex::D), di);
 	}
 
 	if (triangles.empty()) {
@@ -1090,7 +1090,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action& /* action
 	BaseImmovable const* const imm = position.field->get_immovable();
 	const Descriptions& descriptions = game.descriptions();
 
-	if (!((imm != nullptr) && imm->get_size() > BaseImmovable::NONE)) {
+	if ((imm == nullptr) || imm->get_size() <= BaseImmovable::NONE) {
 
 		const ResourceDescription* rdescr =
 		   descriptions.get_resource_descr(position.field->get_resources());
@@ -1136,6 +1136,17 @@ bool Worker::run_findresources(Game& game, State& state, const Action& /* action
 bool Worker::run_playsound(Game& game, State& state, const Action& action) {
 	Notifications::publish(NoteSound(
 	   SoundType::kAmbient, action.iparam2, get_position(), action.iparam1, action.iparam3 == 1));
+
+	++state.ivar1;
+	schedule_act(game, Duration(10));
+	return true;
+}
+
+/**
+ * Call a Lua function.
+ */
+bool Worker::run_script(Game& game, State& state, const Action& action) {
+	MapObjectProgram::do_run_script(game.lua(), this, action.sparam1);
 
 	++state.ivar1;
 	schedule_act(game, Duration(10));
@@ -1317,6 +1328,8 @@ void Worker::set_economy(Economy* const economy, WareWorker type) {
 			   owner().tribe().worker_index(descr().name()), 1, ware_economy_);
 		}
 	} break;
+	default:
+		NEVER_HERE();
 	}
 }
 

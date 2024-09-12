@@ -83,8 +83,8 @@ const AddOnInfo* find_addon(const std::string& name) {
 }
 
 i18n::GenericTextdomain* create_textdomain_for_addon(std::string addon, const std::string& dflt) {
-	if (const AddOnInfo* a = find_addon(addon)) {
-		return new i18n::AddOnTextdomain(addon, a->i18n_version);
+	if (find_addon(addon) != nullptr) {
+		return new i18n::AddOnTextdomain(addon);
 	}
 	return dflt.empty() ? nullptr : new i18n::Textdomain(dflt);
 }
@@ -371,7 +371,7 @@ bool AddOnInfo::requires_texture_atlas_rebuild() const {
 	}
 }
 
-void update_ui_theme(const UpdateThemeAction action, std::string arg) {
+inline void do_update_ui_theme(const UpdateThemeAction action, std::string arg) {
 	AddOnState* previously_enabled = nullptr;
 	std::list<AddOnState*> installed;
 	for (AddOnState& s : g_addons) {
@@ -399,7 +399,8 @@ void update_ui_theme(const UpdateThemeAction action, std::string arg) {
 	case UpdateThemeAction::kLoadFromConfig:
 		arg = get_config_string("theme", "");
 		if (arg.empty()) {
-			return set_template_dir("");
+			set_template_dir("");
+			return;
 		}
 		for (AddOnState* s : installed) {
 			if (s->first->internal_name == arg) {
@@ -420,8 +421,20 @@ void update_ui_theme(const UpdateThemeAction action, std::string arg) {
 		set_config_string("theme", previously_enabled->first->internal_name);
 		set_template_dir(theme_addon_template_dir(previously_enabled->first->internal_name));
 		return;
+
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
+}
+
+void update_ui_theme(const UpdateThemeAction action, std::string arg) {
+	do_update_ui_theme(action, arg);
+
+	// Save splash image realpath and intro font to the config, because start up needs it before
+	// addon themes are initialized
+	set_config_string("splash_image", resolve_template_image_filename(kSplashImage));
+	set_config_string(
+	   "intro_font", g_style_manager->font_style(UI::FontStyle::kFsMenuIntro).as_font_open());
 }
 
 bool AddOnInfo::matches_widelands_version(const bool warn_future) const {
@@ -486,15 +499,15 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 	i->min_wl_version = s.get_string("min_wl_version", "");
 	i->max_wl_version = s.get_string("max_wl_version", "");
 	i->descname = [i]() {
-		i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
+		i18n::AddOnTextdomain td(i->internal_name);
 		return i18n::translate(i->unlocalized_descname);
 	};
 	i->description = [i]() {
-		i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
+		i18n::AddOnTextdomain td(i->internal_name);
 		return i18n::translate(i->unlocalized_description);
 	};
 	i->author = [i]() {
-		i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
+		i18n::AddOnTextdomain td(i->internal_name);
 		return i18n::translate(i->unlocalized_author);
 	};
 	i->icon = g_image_cache->get(fs->file_exists(kAddOnIconFile) ?

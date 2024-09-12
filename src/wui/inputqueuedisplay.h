@@ -27,6 +27,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/slider.h"
+#include "ui_basic/textarea.h"
 #include "wui/buildingwindow.h"
 
 namespace UI {
@@ -101,6 +102,8 @@ public:
 
 	~InputQueueDisplay() override = default;
 
+	void set_max_icons(size_t);
+
 protected:
 	void think() override;
 	void draw(RenderTarget&) override;
@@ -163,7 +166,9 @@ private:
 	BuildingWindow::CollapsedState* collapsed_;  ///< Owned by the window creating the input queue
 
 	size_t nr_icons_;
+	size_t max_icons_;
 	std::vector<UI::Icon*> icons_;
+	UI::Textarea total_fill_;
 
 	int32_t fill_index_at(int32_t, int32_t) const;
 	int32_t fill_index_under_mouse_;

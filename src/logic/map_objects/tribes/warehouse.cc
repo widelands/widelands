@@ -176,6 +176,8 @@ void WarehouseSupply::set_economy(Economy* const e, WareWorker type) {
 				}
 			}
 			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 
@@ -197,6 +199,8 @@ void WarehouseSupply::set_economy(Economy* const e, WareWorker type) {
 				}
 			}
 			break;
+		default:
+			NEVER_HERE();
 		}
 		ec->add_supply(*this);
 	}
@@ -1078,7 +1082,7 @@ void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 	if (incorporated_workers_.count(worker_index) == 0u) {
 		incorporated_workers_[worker_index] = WorkerList();
 	}
-	incorporated_workers_[worker_index].push_back(w);
+	incorporated_workers_[worker_index].emplace_back(w);
 
 	w->set_location(nullptr);  //  no longer in an economy
 

@@ -215,7 +215,7 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 	if (immovable != INVALID_INDEX) {
 		// Remember that we're building on top of an immovable so we can put it back if the building
 		// gets removed
-		b.old_buildings_.push_back(std::make_pair(immovable, false));
+		b.old_buildings_.emplace_back(immovable, false);
 	}
 	for (const auto& pair : former_buildings) {
 		b.old_buildings_.push_back(pair);
@@ -359,6 +359,9 @@ bool Building::get_passable() const {
 }
 
 Flag& Building::base_flag() {
+	return *flag_;
+}
+const Flag& Building::base_flag() const {
 	return *flag_;
 }
 
@@ -558,6 +561,8 @@ std::string Building::info_string(const InfoStringFormat& format) {
 			result = productionsite->production_result();
 		}
 		break;
+	default:
+		NEVER_HERE();
 	}
 	return result;
 }
@@ -611,7 +616,7 @@ bool Building::leave_check_and_wait(Game& game, Worker& w) {
 		schedule_act(game, leave_time_ - time);
 	}
 
-	leave_queue_.push_back(&w);
+	leave_queue_.emplace_back(&w);
 	return false;
 }
 
@@ -700,7 +705,7 @@ void Building::draw(const Time& gametime,
 			                    &get_owner()->get_playercolor());
 		} else {
 			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(), t,
-			                    nullptr, kBuildingSilhouetteOpacity);
+			                    nullptr, kImmovableSilhouetteOpacity);
 		}
 	}
 
@@ -708,7 +713,7 @@ void Building::draw(const Time& gametime,
 		dst->blit_animation(point_on_dst, coords, scale, anim_, t, &get_owner()->get_playercolor());
 	} else {
 		dst->blit_animation(
-		   point_on_dst, coords, scale, anim_, t, nullptr, kBuildingSilhouetteOpacity);
+		   point_on_dst, coords, scale, anim_, t, nullptr, kImmovableSilhouetteOpacity);
 	}
 
 	//  door animation?

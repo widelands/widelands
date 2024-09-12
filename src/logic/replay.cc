@@ -151,6 +151,7 @@ ReplayReader::ReplayReader(Game& game, const std::string& filename) : replaytime
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
 		game.set_win_condition_displayname(gpdp.get_win_condition());
+		game.set_win_condition_duration(gpdp.get_win_condition_duration());
 		gl.load_game();
 		game.postload_addons();
 
@@ -212,7 +213,7 @@ Command* ReplayReader::get_next_command(const Time& time) {
 
 		case pkt_end: {
 			Time endtime(cmdlog_->unsigned_32());
-			log_err_time(time, "REPLAY: End of replay (gametime: %u)\n", endtime.get());
+			verb_log_info_time(time, "REPLAY: End of replay (gametime: %u)\n", endtime.get());
 			delete cmdlog_;
 			cmdlog_ = nullptr;
 			return nullptr;

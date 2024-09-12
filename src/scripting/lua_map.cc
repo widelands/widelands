@@ -691,7 +691,7 @@ parse_wares_as_bill_of_material(lua_State* L, int table_index, const Widelands::
 	parse_wares_workers(L, table_index, tribe, &input_map, true /* is_ware */);
 	Widelands::BillOfMaterials result;
 	for (const auto& pair : input_map) {
-		result.push_back(std::make_pair(pair.first.first, pair.second));
+		result.emplace_back(pair.first.first, pair.second);
 	}
 	return result;
 }
@@ -712,8 +712,9 @@ std::string soldier_preference_to_string(const Widelands::SoldierPreference p) {
 		return "rookies";
 	case Widelands::SoldierPreference::kAny:
 		return "any";
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 Widelands::SoldierPreference string_to_soldier_preference(const std::string& p) {
@@ -744,6 +745,8 @@ void wh_policy_to_string(lua_State* L, Widelands::StockPolicy p) {
 	case Widelands::StockPolicy::kRemove:
 		lua_pushstring(L, "remove");
 		break;
+	default:
+		NEVER_HERE();
 	}
 }
 // Transforms the given string from the lua code to a warehouse policy
@@ -948,10 +951,10 @@ int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo) {
 	case Widelands::MapObjectType::SHIP_FLEET:
 	case Widelands::MapObjectType::FERRY_FLEET:
 	case Widelands::MapObjectType::WARE:
+	default:
 		throw LuaError(
 		   format("upcasted_map_object_to_lua: Unknown %i", static_cast<int>(mo->descr().type())));
 	}
-	NEVER_HERE();
 }
 #undef CAST_TO_LUA
 
@@ -4483,6 +4486,8 @@ int LuaEconomy::target_quantity(lua_State* L) {
 		}
 		break;
 	}
+	default:
+		NEVER_HERE();
 	}
 	return 1;
 }
@@ -4533,15 +4538,22 @@ int LuaEconomy::set_target_quantity(lua_State* L) {
 		}
 		break;
 	}
+	default:
+		NEVER_HERE();
 	}
 	return 0;
 }
 
 /* RST
-   .. method:: needs(name)
+   .. method:: needs(name[, flag = nil])
+
+      .. versionchanged:: 1.3
+         Added parameter ``flag``.
 
       Check whether the economy's stock of the given
       ware or worker is lower than the target setting.
+
+      If a flag is provided, only consider the flag's district, otherwise the entire economy.
 
       **Warning**: Since economies can disappear when a player merges them
       through placing/deleting roads and flags, you must get a fresh economy
@@ -4549,15 +4561,25 @@ int LuaEconomy::set_target_quantity(lua_State* L) {
 
       :arg name: The name of the ware or worker.
       :type name: :class:`string`
+      :arg flag: The flag whose district to query.
+      :type flag: :class:`wl.map.Flag` or :const:`nil`.
       :returns: :class:`boolean`
 */
 int LuaEconomy::needs(lua_State* L) {
 	const std::string wname = luaL_checkstring(L, 2);
+	Widelands::Flag* flag = nullptr;
+	if (lua_gettop(L) > 2) {
+		flag = (*get_user_class<LuaMaps::LuaFlag>(L, 3))->get(L, get_egbase(L));
+		if (flag->get_economy(get()->type()) != get()) {
+			report_error(L, "Flag does not belong to this economy.");
+		}
+	}
+
 	switch (get()->type()) {
 	case Widelands::wwWARE: {
 		const Widelands::DescriptionIndex index = get_egbase(L).descriptions().ware_index(wname);
 		if (get_egbase(L).descriptions().ware_exists(index)) {
-			lua_pushboolean(L, static_cast<int>(get()->needs_ware_or_worker(index)));
+			lua_pushboolean(L, static_cast<int>(get()->needs_ware_or_worker(index, flag)));
 		} else {
 			report_error(L, "There is no ware '%s'.", wname.c_str());
 		}
@@ -4566,12 +4588,14 @@ int LuaEconomy::needs(lua_State* L) {
 	case Widelands::wwWORKER: {
 		const Widelands::DescriptionIndex index = get_egbase(L).descriptions().worker_index(wname);
 		if (get_egbase(L).descriptions().worker_exists(index)) {
-			lua_pushboolean(L, static_cast<int>(get()->needs_ware_or_worker(index)));
+			lua_pushboolean(L, static_cast<int>(get()->needs_ware_or_worker(index, flag)));
 		} else {
 			report_error(L, "There is no worker '%s'.", wname.c_str());
 		}
 		break;
 	}
+	default:
+		NEVER_HERE();
 	}
 	return 1;
 }
@@ -7106,6 +7130,8 @@ int LuaShip::get_state(lua_State* L) {
 		case Widelands::ShipStates::kSinkAnimation:
 			lua_pushstring(L, "sink_animation");
 			break;
+		default:
+			NEVER_HERE();
 		}
 		return 1;
 	}
@@ -7129,6 +7155,8 @@ int LuaShip::get_type(lua_State* L) {
 	case Widelands::ShipType::kWarship:
 		lua_pushstring(L, "warship");
 		break;
+	default:
+		NEVER_HERE();
 	}
 	return 1;
 }
@@ -7157,6 +7185,8 @@ int LuaShip::get_scouting_direction(lua_State* L) {
 			break;
 		case Widelands::WalkingDir::IDLE:
 			return 0;
+		default:
+			NEVER_HERE();
 		}
 		return 1;
 	}
@@ -7209,6 +7239,8 @@ int LuaShip::get_island_explore_direction(lua_State* L) {
 			break;
 		case Widelands::IslandExploreDirection::kNotSet:
 			return 0;
+		default:
+			NEVER_HERE();
 		}
 		return 1;
 	}
@@ -7409,7 +7441,7 @@ int LuaShip::build_colonization_port(lua_State* L) {
 	if (ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound) {
 		if (upcast(Widelands::Game, game, &egbase)) {
 			const Widelands::Coords portspace = ship->current_portspace();
-			assert(static_cast<bool>(portspace));
+			assert(portspace.valid());
 			game->send_player_ship_construct_port(*ship, portspace);
 			return 1;
 		}

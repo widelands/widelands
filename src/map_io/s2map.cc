@@ -247,8 +247,9 @@ std::string get_world_name(S2MapLoader::WorldType world) {
 		return "blackland";
 	case S2MapLoader::WorldType::kWinterland:
 		return "winterland";
+	default:
+		throw wexception("Invalid world type %d", static_cast<int>(world));
 	}
-	NEVER_HERE();
 }
 
 /// Returns S2 terrain index into (pre one-world) terrain names. Those are then
@@ -1052,7 +1053,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 		log_info("-> Player %u: ", p);
 
 		Widelands::Coords starting_pos = map_.get_starting_pos(p);
-		if (!starting_pos) {
+		if (!starting_pos.valid()) {
 			//  Do not throw exception, else map will not be loadable in the
 			//  editor. Player initialization will keep track of wrong starting
 			//  positions.
