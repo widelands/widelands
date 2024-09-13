@@ -161,6 +161,7 @@ enum class KeyboardShortcut : uint16_t {
 	kEditorShowhideBuildhelp,  // alias of kCommonBuildhelp
 	kEditorShowhideMaximumBuildhelp,
 	kEditorShowhideGrid,
+	kEditorShowhideOceans,
 	kEditorShowhideImmovables,
 	kEditorShowhideCritters,
 	kEditorShowhideResources,
