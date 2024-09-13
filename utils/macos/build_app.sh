@@ -63,10 +63,12 @@ function MakeDMG {
 
    echo "Creating DMG ..."
    if [ -n "$GITHUB_ACTION" ]; then
-      HDI_MAX_TRIES=1
-   else
+      # NOCOM: test creating annotation
+      echo "::warning::hdiutil gets 3 chances"
       # Sometimes we get resource busy errors in the github actions
       HDI_MAX_TRIES=3
+   else
+      HDI_MAX_TRIES=1
    fi
    HDI_TRY=0
    HDI_RESULT=0
@@ -80,6 +82,9 @@ function MakeDMG {
       # EBUSY is error code 16. We only allow that, all others should fail immediately.
       if [ $HDI_RESULT -ne 16 -o $HDI_TRY -eq $HDI_MAX_TRIES]; then
          exit $HDI_RESULT
+      fi
+      if [ -n "$GITHUB_ACTION" ]; then
+         echo "::warning::hdiutil resource busy error... retrying"
       fi
       echo "  will retry after 10 seconds..."
       sleep 10

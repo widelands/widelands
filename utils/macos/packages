@@ -1,7 +1,7 @@
 asio
 git
 cmake
-doxygen
+homebrew/cask/doxygen
 glew
 graphviz
 icu4c
