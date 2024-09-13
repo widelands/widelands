@@ -176,9 +176,10 @@ elif [ "$DISTRO" = "msys64" ]; then
 
 elif [ "$DISTRO" = "homebrew" ]; then
    echo "Installing dependencies for Mac Homebrew..."
-   # brew reports a nasty warning for already installed packages, so we want to make sure to
-   # only install the missing ones
-   # "brew list $PKG" does the same
+   # All this tapdance is required in the github action to get rid of annotations spam
+   # that is spewed despite --quiet.
+   # Maybe we should just unset GITHUB_ACTION instead, but then the we'd lose deprecation
+   # warnings too.
    INSTALLED="$(brew list)"
    PKGS=''
    # TODO(k.halfmann): minizip package of brew fails to link dynamically, See also #5620
