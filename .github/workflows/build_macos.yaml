@@ -25,7 +25,7 @@ jobs:
     - name: Installing dependencies
       run: |
         export ICU_ROOT="$(brew --prefix icu4c)" && \
-        export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
+        export PATH="/usr/local/opt/ccache/libexec:$PATH";
         ./install-dependencies.sh homebrew --quiet ccache
     - name: Building
       run: |
