@@ -1,7 +1,6 @@
 asio
 git
 cmake
-doxygen
 glew
 graphviz
 icu4c
