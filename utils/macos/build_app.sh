@@ -63,8 +63,6 @@ function MakeDMG {
 
    echo "Creating DMG ..."
    if [ -n "$GITHUB_ACTION" ]; then
-      # NOCOM: test creating annotation
-      echo "::warning::hdiutil gets 3 chances"
       # Sometimes we get resource busy errors in the github actions
       HDI_MAX_TRIES=3
    else
