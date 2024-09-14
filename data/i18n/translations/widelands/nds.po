@@ -575,17 +575,17 @@ msgstr "Gadder wiesen"
 #. the oceans are shown
 #: ../../../../src/editor/editorinteractive.cc:500
 msgid "Hide Oceans"
-msgstr ""
+msgstr "Seen verbargen"
 
 #: ../../../../src/editor/editorinteractive.cc:500
 msgid "Show Oceans"
-msgstr ""
+msgstr "Seen wiesen"
 
 #: ../../../../src/editor/editorinteractive.cc:503
 msgid ""
 "Display separate water bodies with differently coloured overlays to see "
 "which coasts can be connected by shipping routes"
-msgstr ""
+msgstr "Över Unnerschedelk Waters Billers mit unnerschedelk Klöörs teken, daarmit man sücht, welke Küsten mit Schippen verbunnen worden könen"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
@@ -7999,7 +7999,7 @@ msgstr "Gadder wiesen of verbargen"
 
 #: ../../../../src/wlapplication_options.cc:547
 msgid "Toggle Oceans"
-msgstr ""
+msgstr "Seen wiesen of verbargen"
 
 #: ../../../../src/wlapplication_options.cc:552
 msgid "Toggle Immovables"
