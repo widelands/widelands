@@ -72,6 +72,20 @@ void UniqueWindow::Registry::toggle() {
 }
 
 /**
+ * Does the window exist? (may be open or minimal)
+ */
+bool UniqueWindow::Registry::exists() const {
+	return window != nullptr;
+}
+
+/**
+ * Is the window open? (not minimal)
+ */
+bool UniqueWindow::Registry::is_open() const {
+	return window != nullptr && !window->is_minimal();
+}
+
+/**
  * In order to avoid dangling pointers, we need to kill our contained window
  * here.
  */

@@ -64,6 +64,8 @@ public:
 	fill_with_texture_atlases(std::vector<std::unique_ptr<Texture>> texture_atlases,
 	                          std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas);
 
+	uint8_t get_mipmap_bitset(const std::string& hash);
+
 private:
 	std::vector<std::unique_ptr<Texture>> texture_atlases_;
 	std::map<std::string, std::unique_ptr<const Image>> images_;
