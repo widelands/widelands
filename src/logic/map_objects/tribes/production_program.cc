@@ -1051,17 +1051,13 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 	const DescriptionMaintainer<ImmovableDescr>& all_immovables = descriptions.immovables();
 
 	for (const auto& object_info : workerprogram->needed_named_map_objects()) {
-		const MapObjectType mapobjecttype = object_info.first;
-		const std::string object_name = object_info.second;
-
 		// Add needed entities
-		if (mapobjecttype == MapObjectType::IMMOVABLE) {
+		if (object_info.first == MapObjectType::IMMOVABLE) {
 			descr->add_needed_immovable(object_info.second);
 		}
 	}
 	for (const auto& object_info : workerprogram->collected_named_map_objects()) {
 		const MapObjectType mapobjecttype = object_info.first;
-		const std::string object_name = object_info.second;
 
 		// Add collected entities
 		switch (mapobjecttype) {

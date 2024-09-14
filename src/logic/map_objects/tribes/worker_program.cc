@@ -368,17 +368,16 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 	}
 
 	if (!act->sparam2.empty()) {
+		if (act->iparam2 >= 0) {
+			throw GameDataError("Invalid usage of findobject predicates: 'attrib' and 'name' are not "
+			                    "to be used together.");
+		}
 		if (act->sparam1 == "immovable" || act->sparam1 == "bob") {
 			Notifications::publish(NoteMapObjectDescription(
 			   act->sparam2, NoteMapObjectDescription::LoadType::kObject, false));
 			needed_named_map_objects_.insert(std::make_pair(
 			   act->sparam1 == "immovable" ? MapObjectType::IMMOVABLE : MapObjectType::BOB,
 			   act->sparam2));
-		}
-
-		if (act->iparam2 >= 0) {
-			throw GameDataError("Invalid usage of findobject predicates: 'attrib' and 'name' are not "
-			                    "to be used together.");
 		}
 	}
 
