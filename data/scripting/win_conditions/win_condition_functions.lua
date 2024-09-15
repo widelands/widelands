@@ -110,7 +110,7 @@ function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
          end
          p.see_all = 1
          if (wc_name and wc_ver) and not p.resigned then
-            wl.game.report_result(p, 0, make_extra_data(p, wc_name, wc_ver))
+            wl.game.report_result(p, 3, make_extra_data(p, wc_name, wc_ver))
          end
          table.remove(plrs, idx)
          break

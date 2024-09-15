@@ -1621,7 +1621,9 @@ const Widelands::Message& LuaInboxMessage::get(lua_State* L, Widelands::Game& ga
 
    :arg plr: The Player to report results for.
    :type plr: :class:`~wl.game.Player`
-   :arg result: The player result (0: lost, 1: won, 2: resigned)
+   :arg result: The player result (0: lost, 1: won, 2: resigned, 3: eliminated). If 0 or 1,
+       the player is able to carry on when the "continue playing" option is selected. Set
+       this to 3 for a loss in which the player is eliminated and cannot continue playing.
    :type result: :class:`integer`
    :arg info: A string containing extra data for this particular win
       condition. Likely one wants to use :meth:`make_extra_data` for this.

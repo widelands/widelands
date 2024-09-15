@@ -215,6 +215,7 @@ void GameSummaryScreen::fill_data() {
 		std::string stat_str;
 		switch (pes.result) {
 		case Widelands::PlayerEndResult::kLost:
+		case Widelands::PlayerEndResult::kEliminated:
 			/** TRANSLATORS: This is shown in the game summary for the players who have lost. */
 			stat_str = _("Lost");
 			break;

@@ -1970,7 +1970,7 @@ bool GameHost::client_may_change_speed(uint8_t playernum) const {
 	}
 	const Widelands::PlayerEndStatus* pes =
 	   d->game->player_manager()->get_player_end_status(playernum + 1);
-	return pes == nullptr || (pes->result != Widelands::PlayerEndResult::kLost &&
+	return pes == nullptr || (pes->result != Widelands::PlayerEndResult::kEliminated &&
 	                          pes->result != Widelands::PlayerEndResult::kResigned);
 }
 
@@ -2586,6 +2586,8 @@ void GameHost::disconnect_client(uint32_t const client_number,
 		} else {
 			assert(d->settings.users.at(client.usernum).result == Widelands::PlayerEndResult::kLost ||
 			       d->settings.users.at(client.usernum).result ==
+			          Widelands::PlayerEndResult::kEliminated ||
+			       d->settings.users.at(client.usernum).result ==
 			          Widelands::PlayerEndResult::kResigned);
 			replace_client_with_ai(client.playernum, "empty");
 		}
@@ -2672,7 +2674,8 @@ void GameHost::report_result(uint8_t p_nr,
 		if (user.position == p_nr - 1) {
 			user.result = result;
 			user.win_condition_string = info;
-			if (result == Widelands::PlayerEndResult::kLost) {
+			if (result == Widelands::PlayerEndResult::kLost ||
+			   result == Widelands::PlayerEndResult::kEliminated) {
 				send_system_message_code("PLAYER_DEFEATED", user.name);
 			}
 		}
