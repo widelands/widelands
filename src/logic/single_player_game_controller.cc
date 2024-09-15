@@ -72,7 +72,7 @@ void SinglePlayerGameController::think() {
 				computerplayers_[p - 1] =
 				   AI::ComputerPlayer::get_implementation(plr->get_ai())->instantiate(game_, p);
 				if (game_.player_manager()->get_player_end_status(p) != nullptr) {
-					computerplayers_[p - 1]->game_over();
+					computerplayers_[p - 1]->set_thinking(false);
 				}
 			}
 			computerplayers_[p - 1]->think();
@@ -128,6 +128,6 @@ void SinglePlayerGameController::report_result(uint8_t p_nr,
 	// neuter AI
 	if (p_nr != local_) {
 		assert(computerplayers_[p_nr - 1]->player_number() == p_nr);
-		computerplayers_[p_nr - 1]->game_over();
+		computerplayers_[p_nr - 1]->set_thinking(false);
 	}
 }

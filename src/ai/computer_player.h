@@ -52,8 +52,8 @@ struct ComputerPlayer {
 	void think() {
 		(this->*think_impl_)();
 	}
-	void game_over() {
-		think_impl_ = &ComputerPlayer::do_no_think;
+	void set_thinking(bool t) {
+		think_impl_ = t ? &ComputerPlayer::do_think : &ComputerPlayer::do_no_think;
 	}
 	virtual void do_think() = 0;
 	void do_no_think() {
