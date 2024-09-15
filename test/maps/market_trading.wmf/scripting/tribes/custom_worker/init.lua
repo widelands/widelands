@@ -47,7 +47,7 @@ wl.Descriptions():new_worker_type {
          "findobject=type:special name:pinned_note radius:5",
          "walk=object",
          "animate=hacking duration:15s",
-         "callobject=remove",
+         "removeobject",
          "animate=idle duration:2s",
          "return"
       }
