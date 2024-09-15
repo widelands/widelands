@@ -66,13 +66,13 @@ Available actions are:
 - `callobject`_
 - `plant`_
 - `createbob`_
+- `terraform`_
 - `removeobject`_
 - `repeatsearch`_
 - `findresources`_
 - `scout`_
 - `playsound`_
 - `construct`_
-- `terraform`_
 - `script`_
 */
 
