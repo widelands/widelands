@@ -16,7 +16,7 @@
  *
  */
 
-#include "backtrace_provider.h"
+#include "base/backtrace_provider.h"
 
 #include <csignal>
 #include <cstdio>
