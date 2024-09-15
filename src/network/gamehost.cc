@@ -427,7 +427,8 @@ void GameHost::init_computer_player(Widelands::PlayerNumber p) {
 	d->computerplayers.push_back(
 	   AI::ComputerPlayer::get_implementation(d->game->get_player(p)->get_ai())
 	      ->instantiate(*d->game, p));
-	if (d->game->player_manager()->get_player_end_status(p) != nullptr) {
+	auto pes = d->game->player_manager()->get_player_end_status(p);
+	if (pes != nullptr && pes->cannot_continue()) {
 		d->computerplayers.back()->set_thinking(false);
 	}
 }
@@ -1970,8 +1971,7 @@ bool GameHost::client_may_change_speed(uint8_t playernum) const {
 	}
 	const Widelands::PlayerEndStatus* pes =
 	   d->game->player_manager()->get_player_end_status(playernum + 1);
-	return pes == nullptr || (pes->result != Widelands::PlayerEndResult::kEliminated &&
-	                          pes->result != Widelands::PlayerEndResult::kResigned);
+	return pes == nullptr || !pes->cannot_continue();
 }
 
 /**
@@ -2682,7 +2682,8 @@ void GameHost::report_result(uint8_t p_nr,
 	}
 
 	// neuter AI
-	if (d->settings.players.at(p_nr - 1).state == PlayerSettings::State::kComputer) {
+	if (pes.cannot_continue() &&
+	   d->settings.players.at(p_nr - 1).state == PlayerSettings::State::kComputer) {
 		auto it = std::find_if(d->computerplayers.begin(), d->computerplayers.end(),
 		                       [p_nr](auto cp) { return cp->player_number() == p_nr; });
 		assert(it != d->computerplayers.end());
