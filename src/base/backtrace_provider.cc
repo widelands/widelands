@@ -117,15 +117,15 @@ void BacktraceProvider::register_signal_handler()
 	 * We can't handle SIGABRT like this since we have to redirect that one elsewhere to
 	 * suppress non-critical errors from Eris.
 	 */
-#ifdef PRINT_SEGFAULT_BACKTRACE
-	for (int s : {SIGBUS, SIGFPE, SIGILL, SIGSEGV}) {
-		signal(s, segfault_handler);
-	}
-#elif _WIN32 // TODO consider narrowing condition for mingw platform, it could be different for MSVC
-	for (int s : {SIGFPE, SIGILL, SIGSEGV}) {
-		signal(s, segfault_handler);
-	}
+#if defined PRINT_SEGFAULT_BACKTRACE || defined _WIN32
+	for (int s : {
+#ifdef SIGBUS
+	              SIGBUS,  // Not available on all systems
 #endif
+	              SIGFPE, SIGILL, SIGSEGV}) {
+		signal(s, segfault_handler);
+	}
+#endif  // PRINT_SEGFAULT_BACKTRACE || _WIN32
 }
 
 std::string BacktraceProvider::get_signal_description(int sig)
