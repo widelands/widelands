@@ -49,7 +49,7 @@ struct PlayerEndStatus {
 
 	bool cannot_continue() const {
 		return result == Widelands::PlayerEndResult::kEliminated ||
-		   result == Widelands::PlayerEndResult::kResigned;
+		       result == Widelands::PlayerEndResult::kResigned;
 	}
 };
 

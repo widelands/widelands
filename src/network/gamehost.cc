@@ -2675,7 +2675,7 @@ void GameHost::report_result(uint8_t p_nr,
 			user.result = result;
 			user.win_condition_string = info;
 			if (result == Widelands::PlayerEndResult::kLost ||
-			   result == Widelands::PlayerEndResult::kEliminated) {
+			    result == Widelands::PlayerEndResult::kEliminated) {
 				send_system_message_code("PLAYER_DEFEATED", user.name);
 			}
 		}
@@ -2683,7 +2683,7 @@ void GameHost::report_result(uint8_t p_nr,
 
 	// neuter AI
 	if (pes.cannot_continue() &&
-	   d->settings.players.at(p_nr - 1).state == PlayerSettings::State::kComputer) {
+	    d->settings.players.at(p_nr - 1).state == PlayerSettings::State::kComputer) {
 		auto it = std::find_if(d->computerplayers.begin(), d->computerplayers.end(),
 		                       [p_nr](auto cp) { return cp->player_number() == p_nr; });
 		assert(it != d->computerplayers.end());
