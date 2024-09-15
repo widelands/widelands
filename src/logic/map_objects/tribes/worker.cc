@@ -314,9 +314,17 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
  * type:\<what\>         (optional, defaults to immovable)
  * Find only objects of this type
  *
+ * name:\<name\>         (optional)
+ * Find only objects of this name
+ *
+ * [no notify]         (optional)
+ * Do not notify the player of the result of the search
+ *
  * iparam1 = radius predicate
  * iparam2 = attribute predicate (if >= 0)
+ * iparam3 = send message on failure (if != 0)
  * sparam1 = type
+ * sparam2 = name
  */
 bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 	CheckStepWalkOn cstep(descr().movecaps(), false);
@@ -327,12 +335,18 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 	if (action.sparam1 == "immovable") {
 		std::vector<ImmovableFound> list;
 		Area<FCoords> area(map.get_fcoords(get_position()), action.iparam1);
-		if (action.iparam2 < 0) {
-			map.find_reachable_immovables(game, area, &list, cstep);
+		if (action.sparam2.empty()) {
+			if (action.iparam2 < 0) {
+				map.find_reachable_immovables(game, area, &list, cstep);
+			} else {
+				map.find_reachable_immovables(
+				   game, area, &list, cstep, FindImmovableAttribute(action.iparam2));
+			}
 		} else {
 			map.find_reachable_immovables(
-			   game, area, &list, cstep, FindImmovableAttribute(action.iparam2));
+			   game, area, &list, cstep, FindImmovableByName(action.sparam2));
 		}
+
 		for (auto it = list.begin(); it != list.end();) {
 			if (it->object->is_reserved_by_worker() ||
 			    !dynamic_cast<Immovable&>(*it->object)
@@ -371,11 +385,16 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 				productionsite->unnotify_player();
 			}
 			std::vector<ImmovableFound> list;
-			if (action.iparam2 < 0) {
-				map.find_reachable_immovables(game, area, &list, cstep);
+			if (action.sparam2.empty()) {
+				if (action.iparam2 < 0) {
+					map.find_reachable_immovables(game, area, &list, cstep);
+				} else {
+					map.find_reachable_immovables(
+					   game, area, &list, cstep, FindImmovableAttribute(action.iparam2));
+				}
 			} else {
 				map.find_reachable_immovables(
-				   game, area, &list, cstep, FindImmovableAttribute(action.iparam2));
+				   game, area, &list, cstep, FindImmovableByName(action.sparam2));
 			}
 
 			for (int idx = list.size() - 1; idx >= 0; idx--) {
@@ -402,10 +421,14 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 				productionsite->unnotify_player();
 			}
 			std::vector<Bob*> list;
-			if (action.iparam2 < 0) {
-				map.find_reachable_bobs(game, area, &list, cstep);
+			if (action.sparam2.empty()) {
+				if (action.iparam2 < 0) {
+					map.find_reachable_bobs(game, area, &list, cstep);
+				} else {
+					map.find_reachable_bobs(game, area, &list, cstep, FindBobAttribute(action.iparam2));
+				}
 			} else {
-				map.find_reachable_bobs(game, area, &list, cstep, FindBobAttribute(action.iparam2));
+				map.find_reachable_bobs(game, area, &list, cstep, FindBobByName(action.sparam2));
 			}
 
 			for (int idx = list.size() - 1; idx >= 0; idx--) {
