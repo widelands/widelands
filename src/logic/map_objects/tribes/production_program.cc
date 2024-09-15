@@ -156,20 +156,20 @@ For general information about the format, see :ref:`map_object_programs_syntax`.
 
 Available actions are:
 
-- `animate`_
+- `return`_
 - `call`_
 - `callworker`_
-- `checksoldier`_
-- `construct`_
-- `consume`_
-- `mine`_
-- `playsound`_
-- `recruit`_
-- `produce`_
-- `return`_
 - `sleep`_
+- `animate`_
+- `consume`_
+- `produce`_
+- `recruit`_
+- `mine`_
+- `checksoldier`_
 - `train`_
+- `playsound`_
 - `script`_
+- `construct`_
 */
 
 ProductionProgram::ActReturn::Condition* create_economy_condition(
