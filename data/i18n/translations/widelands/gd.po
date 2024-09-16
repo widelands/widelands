@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-09-12 02:50+0000\n"
+"POT-Creation-Date: 2024-09-16 03:18+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2015-2021\n"
 "Language-Team: Gaelic, Scottish (http://app.transifex.com/widelands/widelands/language/gd/)\n"
@@ -2457,9 +2457,9 @@ msgstr "nach eil an eaconamaidh feumach air an neach-obrach “%s”"
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:535
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:559
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1275
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1380
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1462
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1302
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1407
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1489
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
@@ -2522,7 +2522,7 @@ msgstr ""
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:771
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1297
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1324
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "Cha do thòisich sinn air %1$s air sgàth ’s %2$s"
@@ -2543,7 +2543,7 @@ msgstr "Leig sinn seachad %1$s air sgàth ’s %2$s"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1284
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1311
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -2555,7 +2555,7 @@ msgstr[3] "gu bheil %s a dhìth"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1389
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1416
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -2567,7 +2567,7 @@ msgstr[3] "Chaidh %s a shaothrachadh"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1471
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1498
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
@@ -2576,7 +2576,7 @@ msgstr[1] "Chaidh %s a thrusadh"
 msgstr[2] "Chaidh %s a thrusadh"
 msgstr[3] "Chaidh %s a thrusadh"
 
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1854
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1881
 msgid "No soldier found for this training level!"
 msgstr "Cha deach saighdear airson an leibheil de dh’oideachadh seo a lorg!"
 
@@ -2584,7 +2584,7 @@ msgstr "Cha deach saighdear airson an leibheil de dh’oideachadh seo a lorg!"
 #. description of the
 #. * training program, e.g. Completed upgrading soldier evade from level 0 to
 #. level 1
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1897
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1924
 #, c-format
 msgid "Completed %s"
 msgstr "Chaidh %s a choileanadh"
@@ -3028,23 +3028,23 @@ msgstr "Chaidh slighe aiseig a mhilleadh"
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr "Bha againn ri slighe aiseig a mhilleadh ach an ruig na longan am port ùr agad."
 
-#: ../../../../src/logic/map_objects/tribes/worker.cc:1114
+#: ../../../../src/logic/map_objects/tribes/worker.cc:1137
 msgid "A geologist found resources."
 msgstr "Tha clach-eòlaiche air stòras a lorg."
 
-#: ../../../../src/logic/map_objects/tribes/worker.cc:2097
+#: ../../../../src/logic/map_objects/tribes/worker.cc:2120
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr "Chan urrainn dhan %s agad slighe dhachaigh a lorg is feumaidh gum faigh e bàs."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../../../src/logic/map_objects/tribes/worker.cc:2102
+#: ../../../../src/logic/map_objects/tribes/worker.cc:2125
 #: ../../../../src/wui/productionsitewindow.cc:107
 #: ../../../../src/wui/productionsitewindow.cc:124
 msgid "Worker"
 msgstr "Neach-obrach"
 
-#: ../../../../src/logic/map_objects/tribes/worker.cc:2103
+#: ../../../../src/logic/map_objects/tribes/worker.cc:2126
 msgid "Worker got lost!"
 msgstr "Chaidh neach-obrach air chall!"
 
