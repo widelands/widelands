@@ -25,7 +25,9 @@ jobs:
     - name: Installing dependencies
       run: |
         export ICU_ROOT="$(brew --prefix icu4c)"
-        ./install-dependencies.sh homebrew --quiet
+        # Suppress warnings about installing formulas instead of casks. Casks would raise another
+        # warning about disabling macos gatekeeper.
+        ./install-dependencies.sh homebrew --formula
     - name: Building
       run: |
         mkdir build_wl

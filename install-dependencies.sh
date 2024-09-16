@@ -176,10 +176,10 @@ elif [ "$DISTRO" = "msys64" ]; then
 
 elif [ "$DISTRO" = "homebrew" ]; then
    echo "Installing dependencies for Mac Homebrew..."
-   # All this tapdance is required in the github action to get rid of annotations spam
-   # that is spewed despite --quiet.
-   # Maybe we should just unset GITHUB_ACTION instead, but then the we'd lose deprecation
-   # warnings too.
+   # Workaround to get rid of github workflow annotation warnings about already installed packages.
+   # Alternatively we could use --quiet in the CI.
+   # TODO(tothxa): homebrew developers promised to look into cutting back the annotations,
+   #               we may be able to remove the filtering if they get around to it.
    INSTALLED="$(brew list)"
    PKGS=''
    # TODO(k.halfmann): minizip package of brew fails to link dynamically, See also #5620
@@ -205,7 +205,7 @@ elif [ "$DISTRO" = "void" ]; then
 elif [ "$DISTRO" = "vcpkg" ]; then
    echo "Installing dependencies for vcpkg..."
    # The dependencies must be on a single line, because linebreak handling is broken
-   # in the runner shell...
+   # in the github runner shell...
    vcpkg install --disable-metrics $@ $(cat "${WL_DIR}"/utils/windows/vcpkg_deps)
 
 elif [ -z "$DISTRO" ]; then
