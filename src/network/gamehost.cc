@@ -427,7 +427,7 @@ void GameHost::init_computer_player(Widelands::PlayerNumber p) {
 	d->computerplayers.push_back(
 	   AI::ComputerPlayer::get_implementation(d->game->get_player(p)->get_ai())
 	      ->instantiate(*d->game, p));
-	auto pes = d->game->player_manager()->get_player_end_status(p);
+	const auto *pes = d->game->player_manager()->get_player_end_status(p);
 	if (pes != nullptr && pes->cannot_continue()) {
 		d->computerplayers.back()->set_thinking(false);
 	}

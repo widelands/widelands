@@ -47,7 +47,7 @@ struct PlayerEndStatus {
 	Time time;
 	std::string info;
 
-	bool cannot_continue() const {
+	[[nodiscard]] bool cannot_continue() const {
 		return result == Widelands::PlayerEndResult::kEliminated ||
 		       result == Widelands::PlayerEndResult::kResigned;
 	}
