@@ -1254,7 +1254,7 @@ wl.Descriptions():new_tribe {
             },
             performance = {
                -- TRANSLATORS: Performance helptext for an Empire production site: Quarry, part 1
-               pgettext("empire_building", "This building can produce one granite between %1$s and %2$s and one marble between %3$s and %4$s, depending on how far the stonemason has to walk."):bformat(format_seconds(59), format_minutes_seconds(1, 34), format_minutes_seconds(2, 28), format_minutes_seconds(3, 56)),
+               pgettext("empire_building", "This building can produce one granite between %1$s and %2$s and one marble between %3$s and %4$s, depending on how far the stonemason has to walk."):bformat(format_seconds(63), format_minutes_seconds(1, 42), format_minutes_seconds(2, 7), format_minutes_seconds(3, 23)),
                -- TRANSLATORS: Performance helptext for an Empire production site: Quarry, part 2
                pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
@@ -1868,7 +1868,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Empire production site: Marble Mine
             purpose = pgettext("empire_building", "Carves marble and granite out of the rock in mountain terrain."),
             -- TRANSLATORS: Performance helptext for an Empire production site: Marble Mine
-            performance = pgettext("empire_building", "If the food supply is steady, this mine can produce marble in %1$s and granite in %2$s on average."):bformat(format_seconds(37), format_seconds(37))
+            performance = pgettext("empire_building", "If the food supply is steady and both types of stone are needed by the economy, this mine can produce one granite and one marble in %1$s on average. If only one kind is needed, then its production takes %2$s on average, and one of the other kind is produced in %3$s."):bformat(format_seconds(38), format_seconds(31), format_seconds(62))
          }
       },
       {
