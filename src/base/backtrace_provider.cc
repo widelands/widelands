@@ -91,12 +91,13 @@ static void segfault_handler(const int sig) {
 	// in CrashReportWindow::CrashReportWindow()
 	FILE* file = fopen(filename.c_str(), "w+b");
 	if (file == nullptr) {
-		std::cout << "The crash report could not be saved to file " << filename << std::endl << std::endl;
+		std::cout << "The crash report could not be saved to file " << filename << std::endl
+		          << std::endl;
 	} else {
 		fprintf /* NOLINT codecheck */ (
-		   file,
-		   "Crash report for Widelands %s %s at %s, signal %s\n\n**** BEGIN BACKTRACE ****\n",
-		   build_ver_details().c_str(), thread_name.c_str(), timestr.c_str(), signal_description.c_str());
+		   file, "Crash report for Widelands %s %s at %s, signal %s\n\n**** BEGIN BACKTRACE ****\n",
+		   build_ver_details().c_str(), thread_name.c_str(), timestr.c_str(),
+		   signal_description.c_str());
 #ifdef PRINT_SEGFAULT_BACKTRACE
 		fflush(file);
 		backtrace_symbols_fd(array, size, fileno(file));
@@ -111,8 +112,7 @@ static void segfault_handler(const int sig) {
 	::exit(sig);
 }
 
-void BacktraceProvider::register_signal_handler()
-{
+void BacktraceProvider::register_signal_handler() {
 	/* Handle several types of fatal crashes with a useful backtrace on supporting systems.
 	 * We can't handle SIGABRT like this since we have to redirect that one elsewhere to
 	 * suppress non-critical errors from Eris.
@@ -120,16 +120,15 @@ void BacktraceProvider::register_signal_handler()
 #if defined PRINT_SEGFAULT_BACKTRACE || defined _WIN32
 	for (int s : {
 #ifdef SIGBUS
-	              SIGBUS,  // Not available on all systems
+	        SIGBUS,  // Not available on all systems
 #endif
-	              SIGFPE, SIGILL, SIGSEGV}) {
+	        SIGFPE, SIGILL, SIGSEGV}) {
 		signal(s, segfault_handler);
 	}
 #endif  // PRINT_SEGFAULT_BACKTRACE || _WIN32
 }
 
-std::string BacktraceProvider::get_signal_description(int sig)
-{
+std::string BacktraceProvider::get_signal_description(int sig) {
 	std::ostringstream s;
 
 #ifdef PRINT_SEGFAULT_BACKTRACE
