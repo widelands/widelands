@@ -573,17 +573,17 @@ msgstr "Mostra la graella"
 #. the oceans are shown
 #: ../../../../src/editor/editorinteractive.cc:500
 msgid "Hide Oceans"
-msgstr ""
+msgstr "Amaga els oceans"
 
 #: ../../../../src/editor/editorinteractive.cc:500
 msgid "Show Oceans"
-msgstr ""
+msgstr "Mostra els oceans"
 
 #: ../../../../src/editor/editorinteractive.cc:503
 msgid ""
 "Display separate water bodies with differently coloured overlays to see "
 "which coasts can be connected by shipping routes"
-msgstr ""
+msgstr "Mostra les masses d'aigua amb capes de color diferents per a veure quines costes que es poden connectar via marítima."
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
@@ -7997,7 +7997,7 @@ msgstr "Commuta la graella"
 
 #: ../../../../src/wlapplication_options.cc:547
 msgid "Toggle Oceans"
-msgstr ""
+msgstr "Mostra/Amaga els oceans"
 
 #: ../../../../src/wlapplication_options.cc:552
 msgid "Toggle Immovables"
