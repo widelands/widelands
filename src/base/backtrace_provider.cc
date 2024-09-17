@@ -38,7 +38,7 @@
 
 // Taken from https://stackoverflow.com/a/77336
 // TODO(Nordfriese): Implement this on Windows as well (see https://stackoverflow.com/a/26398082)
-static void segfault_handler(const int sig) {
+[[maybe_unused]] static void segfault_handler(const int sig) {
 	const std::string signal_description = BacktraceProvider::get_signal_description(sig);
 
 	std::cout << std::endl

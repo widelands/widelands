@@ -29,11 +29,13 @@ wl_library(base
   DEPENDS
     base_exceptions
     base_macros
+    base_time_string
     base_times
     build_info
     io_filesystem
     logic_filesystem_constants
     notifications
+    widelands_ball_of_mud
 )
 
 wl_library(base_macros
