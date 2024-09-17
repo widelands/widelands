@@ -29,7 +29,7 @@ local r = {
       -- Iterate all players, if one has lost his Headquarters, destroy all remaing Warehouses and ports,
       -- remove him from the list, send him a defeated message and give him full vision
       repeat
-         sleep(5000)
+         sleep(1000)
          check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
          -- check if a player still has a Headquarters
          for idx, p in ipairs(plrs) do

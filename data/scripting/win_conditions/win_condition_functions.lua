@@ -104,8 +104,6 @@ function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
          for i,f in ipairs(fields_to_destroy) do
             if f.immovable then
                f.immovable:destroy()
-               -- add some delay to the destruction for dramaturgical reason
-               sleep(400)
             end
          end
          p.see_all = 1
