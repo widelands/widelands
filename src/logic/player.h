@@ -153,11 +153,6 @@ public:
 
 	bool is_hostile(const Player&) const;
 
-	/**
-	 * Returns whether the player lost the last warehouse.
-	 */
-	bool is_defeated() const;
-
 	// For cheating
 	void set_see_all(bool const t) {
 		see_all_ = t;

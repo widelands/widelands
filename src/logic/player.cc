@@ -384,15 +384,6 @@ bool Player::is_hostile(const Player& other) const {
 	       !is_attack_forbidden(other.player_number());
 }
 
-bool Player::is_defeated() const {
-	for (const auto& economy : economies()) {
-		if (!economy.second->warehouses().empty()) {
-			return false;
-		}
-	}
-	return true;
-}
-
 void Player::AiPersistentState::initialize() {
 	colony_scan_area = kColonyScanStartArea;
 	trees_around_cutters = 0;

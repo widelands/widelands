@@ -50,6 +50,7 @@
 #include "logic/mapregion.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
+#include "logic/playersmanager.h"
 
 namespace AI {
 
@@ -3338,7 +3339,6 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 	const Widelands::PlayerNumber mypn = player_number();
 	const Widelands::Player* me = game().get_player(mypn);
 	const Widelands::TeamNumber mytn = me->team_number();
-	const bool me_def = me->is_defeated();
 	const bool me_alone = player_statistics.get_is_alone(mypn);
 
 	// TODO(tothxa): detect and handle team changes since last stats update
@@ -3425,9 +3425,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			// We may still decide to stay if a strong enough player wants to join
 			const bool plan_to_leave = planned_action == Widelands::DiplomacyAction::kLeaveTeam;
 
-			// consider only if we are not defeated and if not resulting in a team win
-			bool accept =
-			   !me_def && player_statistics.members_in_team(
+			// consider only if not resulting in a team win
+			bool accept = player_statistics.members_in_team(
 			                 pda.action == Widelands::DiplomacyAction::kInvite ? other_tn : mytn) <
 			                 player_statistics.players_active() - 1;
 
@@ -6971,7 +6970,6 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 
 	// Collecting statistics and saving them in player_statistics object
 	const Widelands::Player* me = game().get_player(pn);
-	const bool me_def = me->is_defeated();
 
 	const uint32_t vsize = genstats.at(pn - 1).miltary_strength.size();
 	uint32_t me_strength = 0;
@@ -6982,7 +6980,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 	uint32_t me_old60_land = 0;
 	uint32_t me_cass = 0;
 	uint32_t me_buildings = 0;
-	if (vsize > 0 && !me_def) {
+	if (vsize > 0) {
 		me_strength = genstats.at(pn - 1).miltary_strength.back();
 		me_land = genstats.at(pn - 1).land_size.back();
 		me_cass = genstats.at(pn - 1).nr_casualties.back();
@@ -7007,8 +7005,9 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 	for (Widelands::PlayerNumber j = 1; j <= nr_players; ++j) {
 		const Widelands::Player* this_player = game().get_player(j);
 		if (this_player != nullptr) {
-			bool player_def = this_player->is_defeated();
-			if (player_def || me_def) {
+			const auto pes = game().player_manager()->get_player_end_status(this_player->player_number());
+			bool player_def = (pes != nullptr && pes->cannot_continue());
+			if (player_def) {
 				// setting all AI Player stats to zero and diploscore to -20
 				player_statistics.add(pn, j, me->team_number(), this_player->team_number(), 0, 0, 0, 0,
 				                      0, 0, 0, -20, 0, player_def);
