@@ -122,4 +122,8 @@ void ReplayGameController::report_result(uint8_t p_nr,
 	pes.result = result;
 	pes.info = info;
 	game_.player_manager()->add_player_end_status(pes);
+
+	if (pes.cannot_continue()) {
+		game_.invalidate_pending_diplomacy_actions(pes.player);
+	}
 }

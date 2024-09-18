@@ -2681,13 +2681,16 @@ void GameHost::report_result(uint8_t p_nr,
 		}
 	}
 
-	// neuter AI
-	if (pes.cannot_continue() &&
-	    d->settings.players.at(p_nr - 1).state == PlayerSettings::State::kComputer) {
-		auto it = std::find_if(d->computerplayers.begin(), d->computerplayers.end(),
-		                       [p_nr](auto cp) { return cp->player_number() == p_nr; });
-		assert(it != d->computerplayers.end());
-		(*it)->set_thinking(false);
+	if (pes.cannot_continue()) {
+		d->game->invalidate_pending_diplomacy_actions(pes.player);
+
+		// neuter AI
+		if (d->settings.players.at(p_nr - 1).state == PlayerSettings::State::kComputer) {
+			auto it = std::find_if(d->computerplayers.begin(), d->computerplayers.end(),
+				               [p_nr](auto cp) { return cp->player_number() == p_nr; });
+			assert(it != d->computerplayers.end());
+			(*it)->set_thinking(false);
+		}
 	}
 
 	verb_log_info("GameHost::report_result(%d, %u, %s)", player->player_number(),

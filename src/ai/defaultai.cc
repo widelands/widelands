@@ -3354,15 +3354,13 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 	int32_t planned_other_score = kNoScore;
 	std::string planned_log_append_text;
 
-	// If we are defeated or the last one in a team, then leave team, but check pending requests
-	// first.
-	// If alone, we may accept requests to join and cancel leaving.
-	// If defeated, just clean up by rejecting everything.
-	if (me->team_number() != 0 && (me_alone || me_def)) {
+	// If we are the last one in a team, then leave team, but check pending requests first --
+	// we may accept requests to join and cancel leaving.
+	if (me->team_number() != 0 && me_alone) {
 		planned_action = Widelands::DiplomacyAction::kLeaveTeam;
-		plan_priority = me_alone ? 0 : std::numeric_limits<int32_t>::max();
+		plan_priority = 0;
 		if (g_verbose) {
-			planned_log_append_text = me_alone ? " as last one" : " as defeated";
+			planned_log_append_text = " as last one";
 			/* verb_ */ log_dbg_time(gametime,
 			                         "AI Diplomacy: Player(%d) plans to leave team with priority %d",
 			                         static_cast<unsigned int>(mypn), plan_priority);

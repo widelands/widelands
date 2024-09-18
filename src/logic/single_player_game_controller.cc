@@ -126,9 +126,13 @@ void SinglePlayerGameController::report_result(uint8_t p_nr,
 	pes.info = info;
 	game_.player_manager()->add_player_end_status(pes);
 
-	// neuter AI
-	if (p_nr != local_ && pes.cannot_continue()) {
-		assert(computerplayers_[p_nr - 1]->player_number() == p_nr);
-		computerplayers_[p_nr - 1]->set_thinking(false);
+	if (pes.cannot_continue()) {
+		game_.invalidate_pending_diplomacy_actions(pes.player);
+
+		// neuter AI
+		if (p_nr != local_) {
+			assert(computerplayers_[p_nr - 1]->player_number() == p_nr);
+			computerplayers_[p_nr - 1]->set_thinking(false);
+		}
 	}
 }
