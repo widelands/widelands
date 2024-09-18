@@ -123,8 +123,7 @@ private:
 	                         std::vector<Widelands::DescriptionIndex>&);
 	int allow_forbid_buildings(lua_State* L, bool);
 	int do_get_buildings(lua_State* L, bool);
-	int do_get_buildings(lua_State* L, bool, bool,
-	                     const std::vector<Widelands::DescriptionIndex>&);
+	int do_get_buildings(lua_State* L, bool, bool, const std::vector<Widelands::DescriptionIndex>&);
 	int do_get_buildings_of_type(lua_State* L, bool);
 };
 

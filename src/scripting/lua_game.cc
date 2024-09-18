@@ -236,9 +236,10 @@ int LuaPlayer::get_defeated(lua_State* L) {
 int LuaPlayer::get_lost(lua_State* L) {
 	const Widelands::PlayerEndStatus* p =
 	   get_egbase(L).player_manager()->get_player_end_status(player_number());
-	lua_pushboolean(L, (p != nullptr &&
-	   (p->result == Widelands::PlayerEndResult::kLost ||
-	    p->result == Widelands::PlayerEndResult::kEliminated)) ? 1 : 0);
+	lua_pushboolean(L, (p != nullptr && (p->result == Widelands::PlayerEndResult::kLost ||
+	                                     p->result == Widelands::PlayerEndResult::kEliminated)) ?
+                         1 :
+                         0);
 	return 1;
 }
 
@@ -267,7 +268,8 @@ int LuaPlayer::get_resigned(lua_State* L) {
 int LuaPlayer::get_end_result(lua_State* L) {
 	const Widelands::PlayerEndStatus* p =
 	   get_egbase(L).player_manager()->get_player_end_status(player_number());
-	lua_pushinteger(L, static_cast<int>((p == nullptr) ? Widelands::PlayerEndResult::kUndefined : p->result));
+	lua_pushinteger(
+	   L, static_cast<int>((p == nullptr) ? Widelands::PlayerEndResult::kUndefined : p->result));
 	return 1;
 }
 
@@ -1302,7 +1304,9 @@ int LuaPlayer::do_get_buildings(lua_State* L, const bool csites) {
 	return do_get_buildings(L, csites, return_array, houses);
 }
 
-int LuaPlayer::do_get_buildings(lua_State* L, const bool csites, const bool return_array,
+int LuaPlayer::do_get_buildings(lua_State* L,
+                                const bool csites,
+                                const bool return_array,
                                 const std::vector<Widelands::DescriptionIndex>& houses) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Player& p = get(L, egbase);
