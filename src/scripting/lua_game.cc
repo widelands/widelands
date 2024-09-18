@@ -204,7 +204,7 @@ int LuaPlayer::get_objectives(lua_State* L) {
    .. attribute:: defeated
 
       .. deprecated:: 1.3 Caution: misleading name! You may be looking for :attr:`lost` instead.
-      To check the player's warehouses, it is preferred to use :meth:`get_buildings_of_type`.
+         To check the player's warehouses, it is preferred to use :meth:`get_buildings_of_type`.
 
       (RO) :const:`true` if this player has no warehouses left, :const:`false` otherwise.
 */
