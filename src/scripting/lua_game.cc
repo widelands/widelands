@@ -216,12 +216,12 @@ int LuaPlayer::get_defeated(lua_State* L) {
 	while (lua_next(L, -2) != 0) {
 		lua_pushnil(L);
 		if (lua_next(L, -2) != 0) {
-			lua_pushboolean(L, false);
+			lua_pushboolean(L, 0);
 			return 1;
 		}
 		lua_pop(L, 1);
 	}
-	lua_pushboolean(L, true);
+	lua_pushboolean(L, 1);
 	return 1;
 }
 
