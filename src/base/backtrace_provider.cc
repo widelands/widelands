@@ -28,6 +28,7 @@
 
 #ifdef PRINT_SEGFAULT_BACKTRACE
 #include <execinfo.h>
+#include <unistd.h>
 #endif
 
 #include "base/multithreading.h"
