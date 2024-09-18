@@ -72,8 +72,8 @@ public:
 	int get_inbox(lua_State* L);
 	int get_color(lua_State* L);
 	int get_team(lua_State* L);
-	int get_tribe(lua_State* L);
 	int set_team(lua_State* L);
+	int get_tribe(lua_State* L);
 	int get_see_all(lua_State* L);
 	int set_see_all(lua_State* L);
 	int get_allow_additional_expedition_items(lua_State* L);
