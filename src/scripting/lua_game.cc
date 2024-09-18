@@ -232,7 +232,7 @@ int LuaPlayer::get_resigned(lua_State* L) {
 int LuaPlayer::get_end_result(lua_State* L) {
 	const Widelands::PlayerEndStatus* p =
 	   get_egbase(L).player_manager()->get_player_end_status(player_number());
-	lua_pushinteger(L, static_cast<int>(p->result));
+	lua_pushinteger(L, static_cast<int>((p == nullptr) ? Widelands::PlayerEndResult::kUndefined : p->result));
 	return 1;
 }
 
