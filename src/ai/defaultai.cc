@@ -7005,7 +7005,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 	for (Widelands::PlayerNumber j = 1; j <= nr_players; ++j) {
 		const Widelands::Player* this_player = game().get_player(j);
 		if (this_player != nullptr) {
-			const auto pes =
+			const auto* pes =
 			   game().player_manager()->get_player_end_status(this_player->player_number());
 			bool player_def = (pes != nullptr && pes->cannot_continue());
 			if (player_def) {
