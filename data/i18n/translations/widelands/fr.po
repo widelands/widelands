@@ -593,17 +593,17 @@ msgstr "Afficher la grille"
 #. the oceans are shown
 #: ../../../../src/editor/editorinteractive.cc:500
 msgid "Hide Oceans"
-msgstr ""
+msgstr "Cacher les océans"
 
 #: ../../../../src/editor/editorinteractive.cc:500
 msgid "Show Oceans"
-msgstr ""
+msgstr "Afficher les océans"
 
 #: ../../../../src/editor/editorinteractive.cc:503
 msgid ""
 "Display separate water bodies with differently coloured overlays to see "
 "which coasts can be connected by shipping routes"
-msgstr ""
+msgstr "Afficher les courants d'eau séparés avec des surcouches de couleurs différentes pour voir quelles côtes peuvent êtres connectées par des routes de transport maritime"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
@@ -2501,7 +2501,7 @@ msgstr "l'ouvrier n'a pas besoin d'expérience"
 
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:615
 msgid "the fleet needs a ferry"
-msgstr "La flotte a besoin d'un ferry"
+msgstr "La flotte a besoin d'un traversier"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs
 #. a ship/ferry'.
@@ -2511,7 +2511,7 @@ msgstr "La flotte a besoin d'un vaisseau"
 
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:622
 msgid "the fleet needs no ferries"
-msgstr "La flotte ne nécessite pas de ferries"
+msgstr "La flotte ne nécessite pas de traversiers"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs
 #. no ships/ferries'.
@@ -2631,13 +2631,13 @@ msgstr "Votre chantier naval n'a pas été construit assez près d'une rive. Il 
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1271
 msgid "Ferry Yard Without Shore"
-msgstr "Chantier de ferry sans rivage"
+msgstr "Chantier de traversier sans rivage"
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1272
 msgid ""
 "Your ferry yard has not been built close enough to a shore. It will not be "
 "able to build ferries."
-msgstr "Votre chantier de ferry n'a pas été construit assez près d'une rive. Il ne sera pas capable de construire de ferries."
+msgstr "Votre chantier de traversier n'a pas été construit assez près d'une rive. Il ne sera pas capable de construire de traversiers."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Destination Gone"
@@ -6385,7 +6385,7 @@ msgstr "Widelands à tenté de démarrer un jeu avec un fichier introuvable dans
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
-msgstr "Le fichier sélectionné est introuvable. S'il ne vous est pas transféré automatiquement, veuiller contacter l'hébergeur concernant ce problème."
+msgstr "Le fichier sélectionné est introuvable. Si il ne vous est pas transféré automatiquement, veuillez contacter l'hébergeur concernant ce problème."
 
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:322
 #, c-format
@@ -7823,7 +7823,7 @@ msgstr "Chantier naval"
 
 #: ../../../../src/wlapplication_options.cc:223
 msgid "Ferry Yard"
-msgstr "Chantier de ferrys"
+msgstr "Chantier de traversiers"
 
 #: ../../../../src/wlapplication_options.cc:224
 msgid "Scouting"
@@ -8055,7 +8055,7 @@ msgstr "Activer le damier"
 
 #: ../../../../src/wlapplication_options.cc:547
 msgid "Toggle Oceans"
-msgstr ""
+msgstr "Activer les océans"
 
 #: ../../../../src/wlapplication_options.cc:552
 msgid "Toggle Immovables"
@@ -9274,7 +9274,7 @@ msgstr "Configuration de la flotte de navires de cet océan"
 
 #: ../../../../src/wui/fieldaction.cc:534
 msgid "Configure this ocean’s ferry fleet"
-msgstr "Configuration de la flotte de ferries de cet océan"
+msgstr "Configuration de la flotte de traversiers de cet océan"
 
 #: ../../../../src/wui/fieldaction.cc:541
 msgid "Watch field in a separate window"
@@ -9379,7 +9379,7 @@ msgstr "Navires attaquables"
 
 #: ../../../../src/wui/fleet_options_window.cc:94
 msgid "Ferry Fleet Options"
-msgstr "Options de la flotte de ferries"
+msgstr "Options de la flotte de traversiers"
 
 #: ../../../../src/wui/fleet_options_window.cc:94
 msgid "Ship Fleet Options"
@@ -9411,11 +9411,11 @@ msgstr "Voies navigables non utilisées :"
 
 #: ../../../../src/wui/fleet_options_window.cc:163
 msgid "Total ferries:"
-msgstr "Total des ferries :"
+msgstr "Total des traversiers :"
 
 #: ../../../../src/wui/fleet_options_window.cc:164
 msgid "Unemployed ferries:"
-msgstr "Ferries non utilisés :"
+msgstr "Traversiers non utilisés :"
 
 #: ../../../../src/wui/fleet_options_window.cc:175
 msgid "Desired number of transport ships:"
@@ -9423,7 +9423,7 @@ msgstr "Nombre désiré de vaisseaux de transport :"
 
 #: ../../../../src/wui/fleet_options_window.cc:176
 msgid "Desired number of unemployed ferries:"
-msgstr "Nombre désiré de ferries non utilisés :"
+msgstr "Nombre désiré de traversiers non utilisés :"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../../../src/wui/game_chat_menu.cc:79
@@ -10292,12 +10292,12 @@ msgstr "La carte permet de construire des ports et des navires"
 #. * TRANSLATORS: This is a map tag
 #: ../../../../src/wui/map_tags.cc:56
 msgid "Ferries"
-msgstr "Transbordeurs"
+msgstr "Traversiers"
 
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../../../src/wui/map_tags.cc:58
 msgid "The map allows building ferries, ferry yards and waterways"
-msgstr "La carte permet de construire des ferries, des chantier de construction de ferries et des voies navigables"
+msgstr "La carte permet de construire des traversiers, des chantier de construction de traversiers et des voies navigables"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../../../src/wui/map_tags.cc:61 ../../../../src/wui/minimap.cc:226
