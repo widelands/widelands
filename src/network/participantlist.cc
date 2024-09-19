@@ -182,7 +182,8 @@ int16_t ParticipantList::get_local_participant_index() const {
 
 Widelands::PlayerEndResult ParticipantList::get_participant_end_result(int16_t participant) const {
 	assert(is_ingame());
-	auto pes = game_->player_manager()->get_player_end_status(participant_to_playerindex(participant) + 1);
+	auto pes =
+	   game_->player_manager()->get_player_end_status(participant_to_playerindex(participant) + 1);
 	return (pes == nullptr) ? Widelands::PlayerEndResult::kUndefined : pes->result;
 }
 

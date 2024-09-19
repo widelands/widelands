@@ -168,14 +168,14 @@ public:
 	bool get_participant_defeated(int16_t participant) const {
 		Widelands::PlayerEndResult p = get_participant_end_result(participant);
 		switch (p) {
-		    case Widelands::PlayerEndResult::kLost:
-		    case Widelands::PlayerEndResult::kResigned:
-		    case Widelands::PlayerEndResult::kEliminated:
+		case Widelands::PlayerEndResult::kLost:
+		case Widelands::PlayerEndResult::kResigned:
+		case Widelands::PlayerEndResult::kEliminated:
 			return true;
-		    case Widelands::PlayerEndResult::kWon:
-		    case Widelands::PlayerEndResult::kUndefined:
+		case Widelands::PlayerEndResult::kWon:
+		case Widelands::PlayerEndResult::kUndefined:
 			return false;
-		    default:
+		default:
 			NEVER_HERE();
 		}
 	}
