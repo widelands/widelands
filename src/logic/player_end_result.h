@@ -19,6 +19,8 @@
 #ifndef WL_LOGIC_PLAYER_END_RESULT_H
 #define WL_LOGIC_PLAYER_END_RESULT_H
 
+#include <cstdint>
+
 namespace Widelands {
 enum class PlayerEndResult : uint8_t {
 	kLost = 0,        // player determined to have lost, but is tecnically still capable of
