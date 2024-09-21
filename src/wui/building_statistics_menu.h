@@ -61,7 +61,7 @@ private:
 
 	/// Initialize the buttons
 	void reset();
-	void init(int last_selected_tab = 0);
+	void init(int last_selected_tab = 1);
 
 	/// Whether a building that is used by the player's tribe should be added
 	bool own_building_is_valid(const Widelands::Player& player,
