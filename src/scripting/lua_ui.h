@@ -493,6 +493,7 @@ public:
 	int get_tooltip_at(lua_State* L);
 	int get_enable_at(lua_State* L);
 	int get_indent_at(lua_State* L);
+	int is_checked_at(lua_State* L);
 
 	/*
 	 * C Methods

@@ -98,6 +98,10 @@ struct BaseListselect : public Panel {
 	void remove(uint32_t);
 	void remove(const char* str);
 
+	ListselectLayout selection_mode() const {
+		return selection_mode_;
+	}
+
 	uint32_t size() const {
 		return entry_records_.size();
 	}
