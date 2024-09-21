@@ -90,8 +90,9 @@ protected:
 	/// \param y                  the y-position within 'parent'
 	/// \param list_w             the dropdown's width
 	/// \param max_list_items     the maximum number of items shown in the list before it starts
-	/// using a scrollbar \param button_dimension   the width of the push button in textual
-	/// dropdowns. For pictorial dropdowns, this is both the width and the height of the button.
+	///                           using a scrollbar
+	/// \param button_dimension   the width of the push button in textual dropdowns. For pictorial
+	///                           dropdowns, this is both the width and the height of the button.
 	/// \param label              a label to prefix to the selected entry on the display button.
 	/// \param type               whether this is a textual or pictorial dropdown
 	/// \param style              the style used for buttons and background
@@ -141,6 +142,11 @@ public:
 
 	/// Which visual style to use for disabled pictorial dropdowns.
 	void set_disable_style(UI::ButtonDisableStyle disable_style);
+
+	/// Accessor for dropdown type.
+	DropdownType type() const {
+		return type_;
+	}
 
 	/// Whether the dropdown has no elements to select.
 	bool empty() const {

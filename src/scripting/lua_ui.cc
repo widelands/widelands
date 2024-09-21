@@ -748,11 +748,19 @@ int LuaPanel::get_child(lua_State* L) {
              See: :ref:`Button widgets <button_description>`.
            * ``"type"``: **Mandatory**. The behaviour of the dropdown. One of:
 
-             * ``"textual"``: Shows the name of the selected entry and a push button.
-             * ``"textual_narrow"``: Only shows the name of the selected entry.
-             * ``"pictorial"``: Only shows the icon of the selected entry.
-             * ``"pictorial_menu"``: The shown icon remains always unchanged.
-             * ``"textual_menu"``: The shown text remains always unchanged.
+             * ``"textual"``: Shows the text of the selected entry, plus a drop-down arrow push button.
+             * ``"textual_narrow"``: Shows the text of the selected entry, no drop-down arrow button.
+             * ``"pictorial"``: Shows the icon of the selected entry, no drop-down arrow button.
+             * ``"textual_menu"``: Displays text that remains always unchanged. Used for triggering
+               different actions when entries are selected, rather than picking from a list of values.
+             * ``"pictorial_menu"``: Like ``"textual_menu"``, but displays an icon rather than text.
+             * Subsequent options are **New in version 1.3**
+             * ``"textual_radiogrp"``: Displays text that remains always unchanged. The currently
+               selected value is indicated by a checkmark next to its entry in the dropdown list.
+             * ``"pictorial_radiogrp"``: The icon version of ``"textual_radiogrp"``.
+             * ``"textual_toggles"``: Like ``"textual_radiogrp"``, but rather than picking a single
+               value from the list, this toggles the checkmark for each entry on/off independently.
+             * ``"pictorial_toggles"``: The icon version of ``"textual_toggles"``.
 
            * ``"datatype"``: **Mandatory**. The data type of the dropdown's entries.
              Currently only ``"string"`` is supported.
@@ -772,6 +780,8 @@ int LuaPanel::get_child(lua_State* L) {
              * ``"select"``: **Optional**. Whether to select this entry (default :const:`false`).
 
            * ``"on_selected"``: **Optional**. Callback code to run when the user selects an entry.
+           * ``"on_checkmark_changed"``: **Optional**. **New in version 1.3**. Callback code to run
+             when the checkmark state of an entry is changed.
 
          * ``"listselect"``: A list of entries from which the user may choose. Properties:
 
@@ -1059,10 +1069,18 @@ get_table_dropdown_type(lua_State* L,
 			default_value = UI::DropdownType::kTextualNarrow;
 		} else if (str == "pictorial") {
 			default_value = UI::DropdownType::kPictorial;
-		} else if (str == "pictorial_menu") {
-			default_value = UI::DropdownType::kPictorialMenu;
 		} else if (str == "textual_menu") {
 			default_value = UI::DropdownType::kTextualMenu;
+		} else if (str == "pictorial_menu") {
+			default_value = UI::DropdownType::kPictorialMenu;
+		} else if (str == "textual_radiogrp") {
+			default_value = UI::DropdownType::kTextualRadioGrp;
+		} else if (str == "pictorial_radiogrp") {
+			default_value = UI::DropdownType::kPictorialRadioGrp;
+		} else if (str == "textual_toggles") {
+			default_value = UI::DropdownType::kTextualToggles;
+		} else if (str == "pictorial_toggles") {
+			default_value = UI::DropdownType::kPictorialToggles;
 		} else {
 			report_error(L, "Unknown dropdown type '%s'", str.c_str());
 		}
@@ -1521,6 +1539,12 @@ UI::Panel* LuaPanel::do_create_child_dropdown(lua_State* L, UI::Panel* parent) {
 			}
 		}
 		lua_pop(L, 1);
+
+		if (std::string on_checkmark_changed = get_table_string(L, "on_checkmark_changed", false);
+		    !on_checkmark_changed.empty()) {
+			dd->checkmark_changed.connect(
+			   create_plugin_action_lambda<std::string, bool>(L, on_checkmark_changed));
+		}
 
 	} else {
 		report_error(L, "Unsupported dropdown datatype '%s'", datatype.c_str());
@@ -2896,7 +2920,8 @@ const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
 #endif
    METHOD(LuaDropdown, select),         METHOD(LuaDropdown, add),
    METHOD(LuaDropdown, get_value_at),   METHOD(LuaDropdown, get_label_at),
-   METHOD(LuaDropdown, get_tooltip_at), {nullptr, nullptr},
+   METHOD(LuaDropdown, get_tooltip_at), METHOD(LuaDropdown, is_checked_at),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
    PROP_RO(LuaDropdown, datatype),    PROP_RO(LuaDropdown, expanded),
@@ -3197,6 +3222,38 @@ int LuaDropdown::get_tooltip_at(lua_State* L) {
 		lua_pushstring(L, dd->at(index - 1).tooltip);
 	} else {
 		report_error(L, "get_tooltip_at() not allowed for dropdown with unsupported datatype");
+	}
+	return 1;
+}
+
+/* RST
+   .. method:: is_checked_at(index)
+
+      .. versionadded:: 1.3
+
+      Get the checkmark state of the item at the specified position.
+      Only allowed for dropdowns with supported datatypes.
+      Only allowed for ``"*_toggles"`` dropdowns types.
+
+      :arg index: The index to query, starting from ``1``.
+      :type index: :class:`integer`
+      :returns: Whether the entry's checkmark is checked (on).
+      :rtype: :class:`boolean`
+*/
+int LuaDropdown::is_checked_at(lua_State* L) {
+	const uint32_t index = luaL_checkuint32(L, 2);
+	const uint32_t nritems = get()->size();
+	if (index < 1 || index > nritems) {
+		report_error(L, "Index %u out of range for dropdown of size %u", index, nritems);
+	}
+	if (upcast(DropdownOfString, dd, get()); dd != nullptr) {
+		if (get()->type().format == UI::DropdownType::Format::kMultiSelect) {
+			lua_pushboolean(L, static_cast<int>(dd->at(index - 1).checked));
+		} else {
+			report_error(L, "is_checked_at() is only allowed for \"*_toggles\" dropdowns types");
+		}
+	} else {
+		report_error(L, "is_checked_at() not allowed for dropdown with unsupported datatype");
 	}
 	return 1;
 }
