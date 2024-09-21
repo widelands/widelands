@@ -376,7 +376,7 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 		}
 	}
 
-	// Add traffic (tecnically not buildings)
+	// Add traffic (technically not buildings)
 	tabs_[0] = new UI::Box(
 	   &tab_panel_, UI::PanelStyle::kWui, format("tab_box_%d", 0), 0, 0, UI::Box::Vertical);
 	UI::Box* traffic_row = new UI::Box(
@@ -903,47 +903,47 @@ void BuildingStatisticsMenu::update() {
 
 		for (const auto& eco : player.economies()) {
 			if (eco.second->type() == Widelands::wwWARE) {
-				for (Widelands::Flag* f : eco.second->flags()) {
+				for (Widelands::Flag* flag : eco.second->flags()) {
 					++traffic_stat_counts[TrafficStat::kFlag].first;
-					if (f->current_wares() > 5) {
+					if (flag->current_wares() > 5) {
 						++traffic_stat_counts[TrafficStat::kFlag].second;
 						if (current_traffic_type_ == TrafficStat::kFlag) {
-							traffic_stats_[TrafficStat::kFlag].jump_targets.insert(f->get_position());
+							traffic_stats_[TrafficStat::kFlag].jump_targets.insert(flag->get_position());
 						}
 					}
 					for (uint8_t road_id = Widelands::WalkingDir::LAST_DIRECTION;
 					     road_id >= Widelands::WalkingDir::FIRST_DIRECTION; --road_id) {
-						if (Widelands::Road* const r = f->get_road(road_id)) {
-							if (&r->base_flag() == f) {
-								++traffic_stat_counts[TrafficStat::kRoadNorm].first;
-								if (r->get_carrier(0).get(iplayer().game()) == nullptr) {
-									++traffic_stat_counts[TrafficStat::kRoadNorm].second;
-									if (current_traffic_type_ == TrafficStat::kRoadNorm) {
-										traffic_stats_[TrafficStat::kRoadNorm].jump_targets.insert(
-										   r->get_positions(iplayer().game())[r->get_idle_index() - 1]);
+						if (Widelands::Road* const road = flag->get_road(road_id); road != nullptr) {
+							if (&road->base_flag() == flag) {
+								++traffic_stat_counts[TrafficStat::kRoadNormal].first;
+								if (road->get_carrier(0).get(iplayer().game()) == nullptr) {
+									++traffic_stat_counts[TrafficStat::kRoadNormal].second;
+									if (current_traffic_type_ == TrafficStat::kRoadNormal) {
+										traffic_stats_[TrafficStat::kRoadNormal].jump_targets.insert(
+										   road->get_positions(iplayer().game())[road->get_idle_index() - 1]);
 									}
 								}
-								if (r->is_busy()) {
+								if (road->is_busy()) {
 									++traffic_stat_counts[TrafficStat::kRoadBusy].first;
-									if (r->get_carrier(1).get(iplayer().game()) == nullptr) {
+									if (road->get_carrier(1).get(iplayer().game()) == nullptr) {
 										++traffic_stat_counts[TrafficStat::kRoadBusy].second;
 										if (current_traffic_type_ == TrafficStat::kRoadBusy) {
 											traffic_stats_[TrafficStat::kRoadBusy].jump_targets.insert(
-											   r->get_positions(iplayer().game())[r->get_idle_index() - 1]);
+											   road->get_positions(iplayer().game())[road->get_idle_index() - 1]);
 										}
 									}
 								}
 							}
 						}
-						if (Widelands::Waterway* const w = f->get_waterway(road_id)) {
+						if (Widelands::Waterway* const wway = flag->get_waterway(road_id); wway != nullptr) {
 							assert(map_allows_waterways);
-							if (&w->base_flag() == f) {  // avoid double counting
+							if (&wway->base_flag() == flag) {  // avoid double counting
 								++traffic_stat_counts[TrafficStat::kWaterway].first;
-								if (w->get_ferry().get(iplayer().game()) == nullptr) {
+								if (wway->get_ferry().get(iplayer().game()) == nullptr) {
 									++traffic_stat_counts[TrafficStat::kWaterway].second;
 									if (current_traffic_type_ == TrafficStat::kWaterway) {
 										traffic_stats_[TrafficStat::kWaterway].jump_targets.insert(
-										   w->get_positions(iplayer().game())[w->get_idle_index() - 1]);
+										   wway->get_positions(iplayer().game())[wway->get_idle_index() - 1]);
 									}
 								}
 							}
@@ -970,17 +970,16 @@ void BuildingStatisticsMenu::update() {
 		}
 		if ((current_traffic_type_ != TrafficStat::kLast)) {
 			hbox_unproductive_.set_visible(true);
-			bool e = traffic_stat_counts[current_traffic_type_].second > 0;
+			bool enabled = traffic_stat_counts[current_traffic_type_].second > 0;
 			label_nr_unproductive_.set_text(
-			   e ? std::to_string(traffic_stat_counts[current_traffic_type_].second) : "");
-			b_next_unproductive_.set_enabled(e);
-			b_prev_unproductive_.set_enabled(e);
+			   enabled ? std::to_string(traffic_stat_counts[current_traffic_type_].second) : "");
+			b_next_unproductive_.set_enabled(enabled);
+			b_prev_unproductive_.set_enabled(enabled);
 			switch (current_traffic_type_) {
 			case TrafficStat::kFlag:
 				label_unproductive_.set_text(_("Congested:"));
 				break;
-			case TrafficStat::kRoadNorm:
-				FALLS_THROUGH;
+			case TrafficStat::kRoadNormal:
 			case TrafficStat::kRoadBusy:
 				label_unproductive_.set_text(_("Lacking carrier:"));
 				break;
@@ -988,7 +987,6 @@ void BuildingStatisticsMenu::update() {
 				label_unproductive_.set_text(_("Lacking ferry:"));
 				break;
 			case TrafficStat::kLast:
-				FALLS_THROUGH;
 			default:
 				NEVER_HERE();
 			}
@@ -1046,10 +1044,16 @@ void BuildingStatisticsMenu::low_production_changed() {
 	update();
 }
 
+
+
+/* Changelog:
+ * Version 1 → 2 (v1.3): Added traffic stats
+ */
 constexpr uint16_t kCurrentPacketVersion = 2;
 UI::Window& BuildingStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
+		// Savegame compatibility for v1.2
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
 			UI::UniqueWindow::Registry& r =
 			   dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_buildings;
@@ -1071,6 +1075,7 @@ UI::Window& BuildingStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 				}
 			}
 			m.last_building_index_ = fr.signed_32();
+			// Savegame compatibility for v1.2
 			if (packet_version >= 2) {
 				TrafficStat ts = static_cast<TrafficStat>(fr.unsigned_8());
 				if (ts < m.last_traffic_type_) {

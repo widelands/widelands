@@ -57,7 +57,7 @@ private:
 	enum class JumpTarget { kOwned, kConstruction, kUnproductive };
 
 	/// Traffic tab items, used for indexing and iteration
-	enum TrafficStat : uint8_t { kFlag, kRoadNorm, kRoadBusy, kWaterway, kLast };
+	enum TrafficStat : uint8_t { kFlag, kRoadNormal, kRoadBusy, kWaterway, kLast };
 
 	/// Initialize the buttons
 	void reset();
