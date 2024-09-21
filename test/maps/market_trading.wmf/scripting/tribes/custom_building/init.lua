@@ -43,6 +43,7 @@ wl.Descriptions():new_productionsite_type {
             "callworker=harvest",
             "sleep=duration:20s",
             "script=barbarians_custom_building_program_counter_increment",
+            "callworker=remove_pinned_note",
          }
       },
    },
