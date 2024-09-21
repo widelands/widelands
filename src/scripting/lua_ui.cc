@@ -748,11 +748,14 @@ int LuaPanel::get_child(lua_State* L) {
              See: :ref:`Button widgets <button_description>`.
            * ``"type"``: **Mandatory**. The behaviour of the dropdown. One of:
 
-             * ``"textual"``: Shows the text of the selected entry, plus a drop-down arrow push button.
-             * ``"textual_narrow"``: Shows the text of the selected entry, no drop-down arrow button.
+             * ``"textual"``: Shows the text of the selected entry, plus a drop-down arrow push
+   button.
+             * ``"textual_narrow"``: Shows the text of the selected entry, no drop-down arrow
+   button.
              * ``"pictorial"``: Shows the icon of the selected entry, no drop-down arrow button.
              * ``"textual_menu"``: Displays text that remains always unchanged. Used for triggering
-               different actions when entries are selected, rather than picking from a list of values.
+               different actions when entries are selected, rather than picking from a list of
+   values.
              * ``"pictorial_menu"``: Like ``"textual_menu"``, but displays an icon rather than text.
              * Subsequent options are **New in version 1.3**
              * ``"textual_radiogrp"``: Displays text that remains always unchanged. The currently
@@ -2914,13 +2917,17 @@ Dropdown
 */
 const char LuaDropdown::className[] = "Dropdown";
 const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
-   METHOD(LuaDropdown, open),           METHOD(LuaDropdown, highlight_item),
+   METHOD(LuaDropdown, open),
+   METHOD(LuaDropdown, highlight_item),
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
    METHOD(LuaDropdown, indicate_item),
 #endif
-   METHOD(LuaDropdown, select),         METHOD(LuaDropdown, add),
-   METHOD(LuaDropdown, get_value_at),   METHOD(LuaDropdown, get_label_at),
-   METHOD(LuaDropdown, get_tooltip_at), METHOD(LuaDropdown, is_checked_at),
+   METHOD(LuaDropdown, select),
+   METHOD(LuaDropdown, add),
+   METHOD(LuaDropdown, get_value_at),
+   METHOD(LuaDropdown, get_label_at),
+   METHOD(LuaDropdown, get_tooltip_at),
+   METHOD(LuaDropdown, is_checked_at),
    {nullptr, nullptr},
 };
 const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
@@ -3277,14 +3284,10 @@ Listselect
 */
 const char LuaListselect::className[] = "Listselect";
 const MethodType<LuaListselect> LuaListselect::Methods[] = {
-   METHOD(LuaListselect, add),
-   METHOD(LuaListselect, get_value_at),
-   METHOD(LuaListselect, get_label_at),
-   METHOD(LuaListselect, get_tooltip_at),
-   METHOD(LuaListselect, get_enable_at),
-   METHOD(LuaListselect, get_indent_at),
-   METHOD(LuaListselect, is_checked_at),
-   {nullptr, nullptr},
+   METHOD(LuaListselect, add),           METHOD(LuaListselect, get_value_at),
+   METHOD(LuaListselect, get_label_at),  METHOD(LuaListselect, get_tooltip_at),
+   METHOD(LuaListselect, get_enable_at), METHOD(LuaListselect, get_indent_at),
+   METHOD(LuaListselect, is_checked_at), {nullptr, nullptr},
 };
 const PropertyType<LuaListselect> LuaListselect::Properties[] = {
    PROP_RO(LuaListselect, datatype),
