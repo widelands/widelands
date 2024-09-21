@@ -42,6 +42,14 @@ wl.Descriptions():new_worker_type {
          "createware=custom_ware",
          "script=barbarians_custom_worker_program_counter_increment",
          "return"
+      },
+      remove_pinned_note = {
+         "findobject=type:special name:pinned_note radius:5",
+         "walk=object",
+         "animate=hacking duration:15s",
+         "removeobject",
+         "animate=idle duration:2s",
+         "return"
       }
    },
 }
