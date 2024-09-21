@@ -162,6 +162,7 @@ enum class KeyboardShortcut : uint16_t {
 	kEditorShowhideMaximumBuildhelp,
 	kEditorShowhideHeightHeatMap,
 	kEditorShowhideGrid,
+	kEditorShowhideOceans,
 	kEditorShowhideImmovables,
 	kEditorShowhideCritters,
 	kEditorShowhideResources,

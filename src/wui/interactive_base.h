@@ -78,14 +78,15 @@ public:
 		dfShowWorkareaOverlap = 1 << 3,   ///< highlight overlapping workareas when placing
 		                                  //   a constructionsite
 		dfDebug = 1 << 4,                 ///< general debugging info
-		dfShowBuildings = 1 << 5,         ///< don't hide buildings
+		dfShowBuildings = 1 << 5,         ///<
 		dfShowBuildhelp = 1 << 6,         ///< show size of building spaces
 		dfShowMaximumBuildhelp = 1 << 7,  ///< show max size of building spaces
-		dfShowGrid = 1 << 8,              ///< display a grid overlay
+		dfShowGrid = 1 << 8,              ///<
 		dfShowImmovables = 1 << 9,        ///< show trees, rocks etc.
 		dfShowBobs = 1 << 10,             ///< show animals
 		dfShowResources = 1 << 11,        ///< show water, coal etc. in editor
-		dfHeightHeatMap = 1 << 12,        ///< color triangles and edges by height
+		dfShowOceans = 1 << 12,           ///< show oceans/fleets in editor
+		dfHeightHeatMap = 1 << 13,        ///< color triangles and edges by height
 	};
 	static constexpr int32_t kDefaultDisplayFlags =
 	   dfShowSoldierLevels | dfShowBuildings | dfShowWorkareaOverlap;
