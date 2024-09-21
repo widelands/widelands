@@ -290,6 +290,10 @@ Actions
 
 The actions documented in this section are available to all map object types.
 
+- `animate`_
+- `playsound`_
+- `script`_
+
 .. _map_object_programs_animate:
 
 animate
@@ -472,7 +476,7 @@ script
       }
 
       function sleep_done(site)
-         print("A " .. site.descr.name " .. has finished sleeping.")
+         print("A %s has finished sleeping.":bformat(site.descr.name))
       end
 */
 MapObjectProgram::RunScriptParameters

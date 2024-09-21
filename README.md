@@ -49,6 +49,7 @@ You can then compile by running our convenience script.
 | --- | --- |
 | `./compile.sh` | Full debug build |
 | `./compile.sh -r -w` | Release build |
+| `./compile.sh -e -w` | Release build with debugging symbols |
 | `./compile.sh -h` | List available options |
 
 When compiling has finished, you can call Widelands with
@@ -99,7 +100,7 @@ Note that CMake options are prefixed with `-D`. These are the available options:
 
 | Name | Values | Default| Function
 | --- | --- | --- | --- |
-| `CMAKE_BUILD_TYPE` | `Debug`/`Release` | `Debug` | Create a release or debug build |
+| `CMAKE_BUILD_TYPE` | `Debug`/`Release`/`RelWithDebInfo` | `Debug` | Create a release or debug build |
 | `OPTION_ASAN` | `ON`/`OFF` | `ON` for Debug builds /`OFF` for Release builds | Use AddressSanitizer. Switching this off only works once. You will have to clear the `build` directory if you want to switch this off again in a later build. |
 | `OPTION_BUILD_CODECHECK` | `ON`/`OFF` | `ON` | Build codecheck. Only available in Debug builds. |
 | `OPTION_BUILD_WEBSITE_TOOLS` | `ON`/`OFF` | `ON` | Build website-related tools |
