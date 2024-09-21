@@ -929,13 +929,15 @@ void BuildingStatisticsMenu::update() {
 										++traffic_stat_counts[TrafficStat::kRoadBusy].second;
 										if (current_traffic_type_ == TrafficStat::kRoadBusy) {
 											traffic_stats_[TrafficStat::kRoadBusy].jump_targets.insert(
-											   road->get_positions(iplayer().game())[road->get_idle_index() - 1]);
+											   road->get_positions(
+											      iplayer().game())[road->get_idle_index() - 1]);
 										}
 									}
 								}
 							}
 						}
-						if (Widelands::Waterway* const wway = flag->get_waterway(road_id); wway != nullptr) {
+						if (Widelands::Waterway* const wway = flag->get_waterway(road_id);
+						    wway != nullptr) {
 							assert(map_allows_waterways);
 							if (&wway->base_flag() == flag) {  // avoid double counting
 								++traffic_stat_counts[TrafficStat::kWaterway].first;
@@ -1043,8 +1045,6 @@ void BuildingStatisticsMenu::low_production_changed() {
 	low_production_ = unproductive_threshold_.get_value();
 	update();
 }
-
-
 
 /* Changelog:
  * Version 1 → 2 (v1.3): Added traffic stats
