@@ -54,9 +54,9 @@ public:
 	void draw(const std::vector<Arguments>& arguments);
 
 	static std::vector<Arguments> make_arguments_for_rect(const Rectf& destination_rect,
-	                                                      const float z_value,
+	                                                      float z_value,
 	                                                      const RGBAColor& color,
-	                                                      const BlendMode blend_mode);
+	                                                      BlendMode blend_mode);
 
 private:
 	FillRectProgram();
