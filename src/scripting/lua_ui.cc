@@ -748,14 +748,11 @@ int LuaPanel::get_child(lua_State* L) {
              See: :ref:`Button widgets <button_description>`.
            * ``"type"``: **Mandatory**. The behaviour of the dropdown. One of:
 
-             * ``"textual"``: Shows the text of the selected entry, plus a drop-down arrow push
-   button.
-             * ``"textual_narrow"``: Shows the text of the selected entry, no drop-down arrow
-   button.
+             * ``"textual"``: Shows text of the selected entry, plus a drop-down arrow push button.
+             * ``"textual_narrow"``: Shows text of the selected entry, no drop-down arrow button.
              * ``"pictorial"``: Shows the icon of the selected entry, no drop-down arrow button.
              * ``"textual_menu"``: Displays text that remains always unchanged. Used for triggering
-               different actions when entries are selected, rather than picking from a list of
-   values.
+               various actions when entries are selected, rather than picking from a list of values.
              * ``"pictorial_menu"``: Like ``"textual_menu"``, but displays an icon rather than text.
              * Subsequent options are **New in version 1.3**
              * ``"textual_radiogrp"``: Displays text that remains always unchanged. The currently
