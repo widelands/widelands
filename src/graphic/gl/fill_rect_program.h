@@ -29,7 +29,7 @@ class FillRectProgram {
 public:
 	struct Arguments {
 		struct Vertex {
-			Vector2f point {Vector2f::zero()};
+			Vector2f point{Vector2f::zero()};
 			float color_r{0.f};
 			float color_g{0.f};
 			float color_b{0.f};
@@ -54,9 +54,9 @@ public:
 	void draw(const std::vector<Arguments>& arguments);
 
 	static std::vector<Arguments> make_arguments_for_rect(const Rectf& destination_rect,
-                           const float z_value,
-                           const RGBAColor& color,
-                           const BlendMode blend_mode);
+	                                                      const float z_value,
+	                                                      const RGBAColor& color,
+	                                                      const BlendMode blend_mode);
 
 private:
 	FillRectProgram();

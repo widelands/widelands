@@ -34,23 +34,28 @@ FillRectProgram::FillRectProgram() {
 	attr_color_ = glGetAttribLocation(gl_program_.object(), "attr_color");
 }
 
-std::vector<FillRectProgram::Arguments> FillRectProgram::make_arguments_for_rect(const Rectf& destination_rect,
-                           const float z_value,
-                           const RGBAColor& color,
-                           const BlendMode blend_mode) {
+std::vector<FillRectProgram::Arguments>
+FillRectProgram::make_arguments_for_rect(const Rectf& destination_rect,
+                                         const float z_value,
+                                         const RGBAColor& color,
+                                         const BlendMode blend_mode) {
 	const float r = color.r / 255.f;
 	const float g = color.g / 255.f;
 	const float b = color.b / 255.f;
 	const float a = color.a / 255.f;
 
-	Arguments::Vertex vbr = {Vector2f(destination_rect.x + destination_rect.w, destination_rect.y + destination_rect.h), r, g, b, a};
-	Arguments::Vertex vtr = {Vector2f(destination_rect.x + destination_rect.w, destination_rect.y), r, g, b, a};
-	Arguments::Vertex vbl = {Vector2f(destination_rect.x, destination_rect.y + destination_rect.h), r, g, b, a};
+	Arguments::Vertex vbr = {
+	   Vector2f(destination_rect.x + destination_rect.w, destination_rect.y + destination_rect.h), r,
+	   g, b, a};
+	Arguments::Vertex vtr = {
+	   Vector2f(destination_rect.x + destination_rect.w, destination_rect.y), r, g, b, a};
+	Arguments::Vertex vbl = {
+	   Vector2f(destination_rect.x, destination_rect.y + destination_rect.h), r, g, b, a};
 	Arguments::Vertex vtl = {Vector2f(destination_rect.x, destination_rect.y), r, g, b, a};
 
 	return {
-		Arguments{{vbr, vtl, vtr}, z_value, blend_mode},
-		Arguments{{vbr, vtl, vbl}, z_value, blend_mode},
+	   Arguments{{vbr, vtl, vtr}, z_value, blend_mode},
+	   Arguments{{vbr, vtl, vbl}, z_value, blend_mode},
 	};
 }
 
@@ -61,7 +66,8 @@ void FillRectProgram::draw(const Rectf& destination_rect,
 	draw(make_arguments_for_rect(destination_rect, z_value, color, blend_mode));
 }
 
-void FillRectProgram::draw_height_heat_map_overlays(const FieldsToDraw& fields_to_draw, const float z_value) {
+void FillRectProgram::draw_height_heat_map_overlays(const FieldsToDraw& fields_to_draw,
+                                                    const float z_value) {
 	constexpr float kAlpha = 0.9f;
 	std::vector<Arguments> arguments;
 
@@ -184,7 +190,8 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 			}
 
 			for (const Arguments::Vertex& vertex : current_args.triangle) {
-				vertices_.emplace_back(vertex.point.x, vertex.point.y, current_args.z_value, vertex.color_r, vertex.color_g, vertex.color_b, vertex.color_a);
+				vertices_.emplace_back(vertex.point.x, vertex.point.y, current_args.z_value,
+				                       vertex.color_r, vertex.color_g, vertex.color_b, vertex.color_a);
 			}
 
 			++i;
