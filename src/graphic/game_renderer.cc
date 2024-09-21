@@ -81,12 +81,10 @@ void draw_terrain(uint32_t gametime,
 	i.terrain_arguments.height_heat_map = height_heat_map;
 	RenderQueue::instance().enqueue(i);
 
-	// Enqueue the drawing of the dither layer.
-	if (!height_heat_map) {
-		i.program_id = RenderQueue::Program::kTerrainDither;
-		i.blend_mode = BlendMode::UseAlpha;
-		RenderQueue::instance().enqueue(i);
-	}
+	// Enqueue the drawing of the dither layer or height heat map layer.
+	i.blend_mode = BlendMode::UseAlpha;
+	i.program_id = RenderQueue::Program::kTerrainDitherOrHeightHeatMap;
+	RenderQueue::instance().enqueue(i);
 
 	if (!workarea.empty()) {
 		// Enqueue the drawing of the workarea overlay layer.

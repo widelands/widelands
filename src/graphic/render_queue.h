@@ -79,7 +79,7 @@ class RenderQueue {
 public:
 	enum Program {
 		kTerrainBase,
-		kTerrainDither,
+		kTerrainDitherOrHeightHeatMap,
 		kTerrainWorkarea,
 		kTerrainGrid,
 		kTerrainRoad,

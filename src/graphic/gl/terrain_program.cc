@@ -36,7 +36,6 @@ TerrainProgram::TerrainProgram() {
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
 	attr_texture_offset_ = glGetAttribLocation(gl_program_.object(), "attr_texture_offset");
 	attr_texture_position_ = glGetAttribLocation(gl_program_.object(), "attr_texture_position");
-	attr_heatmap_color_ = glGetAttribLocation(gl_program_.object(), "attr_heatmap_color");
 
 	u_terrain_texture_ = glGetUniformLocation(gl_program_.object(), "u_terrain_texture");
 	u_texture_dimensions_ = glGetUniformLocation(gl_program_.object(), "u_texture_dimensions");
@@ -48,7 +47,7 @@ void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h, f
 
 	auto& gl_state = Gl::State::instance();
 	gl_state.enable_vertex_attrib_array({attr_brightness_, attr_position_, attr_texture_offset_,
-	                                     attr_texture_position_, attr_heatmap_color_});
+	                                     attr_texture_position_});
 
 	gl_array_buffer_.bind();
 	gl_array_buffer_.update(vertices_);
@@ -61,8 +60,6 @@ void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h, f
 	   attr_texture_offset_, 2, sizeof(PerVertexData), offsetof(PerVertexData, texture_offset_x));
 	Gl::vertex_attrib_pointer(
 	   attr_texture_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, texture_x));
-	Gl::vertex_attrib_pointer(
-	   attr_heatmap_color_, 4, sizeof(PerVertexData), offsetof(PerVertexData, heatmap_r));
 
 	gl_state.bind(GL_TEXTURE0, gl_texture);
 
@@ -74,8 +71,7 @@ void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h, f
 }
 
 void TerrainProgram::add_vertex(const FieldsToDraw::Field& field,
-                                const Vector2f& texture_offset,
-                                bool height_heat_map) {
+                                const Vector2f& texture_offset) {
 	vertices_.emplace_back();
 	PerVertexData& back = vertices_.back();
 
@@ -86,16 +82,6 @@ void TerrainProgram::add_vertex(const FieldsToDraw::Field& field,
 	back.texture_y = field.texture_coords.y;
 	back.texture_offset_x = texture_offset.x;
 	back.texture_offset_y = texture_offset.y;
-
-	back.heatmap_a = height_heat_map ? 1.f : -1.f;
-	if (height_heat_map) {
-		float val = field.fcoords.field->get_height();
-		val /= MAX_FIELD_HEIGHT;
-		assert(val <= 1.f);
-		back.heatmap_r = val;
-		back.heatmap_g = 0;
-		back.heatmap_b = 1.f - val;
-	}
 }
 
 void TerrainProgram::draw(
@@ -103,7 +89,6 @@ void TerrainProgram::draw(
    const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
    const FieldsToDraw& fields_to_draw,
    float z_value,
-   bool height_heat_map,
    const Widelands::Player* player) {
 	// This method expects that all terrains have the same dimensions and that
 	// all are packed into the same texture atlas, i.e. all are in the same GL
@@ -130,9 +115,9 @@ void TerrainProgram::draw(
                field.fcoords.field->terrain_r();
 			const Vector2f texture_offset =
 			   to_gl_texture(terrains.get(terrain).get_texture(gametime).blit_data()).origin();
-			add_vertex(fields_to_draw.at(current_index), texture_offset, height_heat_map);
-			add_vertex(fields_to_draw.at(field.brn_index), texture_offset, height_heat_map);
-			add_vertex(fields_to_draw.at(field.rn_index), texture_offset, height_heat_map);
+			add_vertex(fields_to_draw.at(current_index), texture_offset);
+			add_vertex(fields_to_draw.at(field.brn_index), texture_offset);
+			add_vertex(fields_to_draw.at(field.rn_index), texture_offset);
 		}
 
 		// Down triangle.
@@ -143,9 +128,9 @@ void TerrainProgram::draw(
                field.fcoords.field->terrain_d();
 			const Vector2f texture_offset =
 			   to_gl_texture(terrains.get(terrain).get_texture(gametime).blit_data()).origin();
-			add_vertex(fields_to_draw.at(current_index), texture_offset, height_heat_map);
-			add_vertex(fields_to_draw.at(field.bln_index), texture_offset, height_heat_map);
-			add_vertex(fields_to_draw.at(field.brn_index), texture_offset, height_heat_map);
+			add_vertex(fields_to_draw.at(current_index), texture_offset);
+			add_vertex(fields_to_draw.at(field.bln_index), texture_offset);
+			add_vertex(fields_to_draw.at(field.brn_index), texture_offset);
 		}
 	}
 
