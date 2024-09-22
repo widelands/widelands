@@ -905,7 +905,7 @@ void BuildingStatisticsMenu::update() {
 			if (eco.second->type() == Widelands::wwWARE) {
 				for (Widelands::Flag* flag : eco.second->flags()) {
 					++traffic_stat_counts[TrafficStat::kFlag].first;
-					if (flag->current_wares() > 5) {
+					if (flag->is_congested()) {
 						++traffic_stat_counts[TrafficStat::kFlag].second;
 						if (current_traffic_type_ == TrafficStat::kFlag) {
 							traffic_stats_[TrafficStat::kFlag].jump_targets.insert(flag->get_position());
