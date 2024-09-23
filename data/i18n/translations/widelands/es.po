@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-09-16 03:18+0000\n"
+"POT-Creation-Date: 2024-09-23 02:56+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Juan Miguel Bernal González, 2024\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
@@ -1030,7 +1030,7 @@ msgstr "Complementos habilitados: %s"
 #: ../../../../src/editor/ui_menus/help.cc:36
 #: ../../../../src/ui_fsmenu/login_box.cc:255
 #: ../../../../src/ui_fsmenu/main.cc:276
-#: ../../../../src/ui_fsmenu/main.cc:1169
+#: ../../../../src/ui_fsmenu/main.cc:1170
 #: ../../../../src/wui/encyclopedia_window.cc:146
 #: ../../../../src/wui/tribal_encyclopedia.cc:55
 msgid "Error!"
@@ -6668,46 +6668,48 @@ msgstr "Salir de Widelands"
 msgid "Quit the game"
 msgstr "Salir del juego"
 
-#. * TRANSLATORS: %1$s = version string and build type  ("Debug" or "Release")
-#: ../../../../src/ui_fsmenu/main.cc:534
+#. * TRANSLATORS: %1$s = version string and build type  ("Debug", "Release",
+#. or
+#. "RelWithDebInfo")
+#: ../../../../src/ui_fsmenu/main.cc:535
 #, c-format
 msgid "Version %1$s"
 msgstr "Versión %1$s"
 
 #. * TRANSLATORS: Placeholders are the copyright years
-#: ../../../../src/ui_fsmenu/main.cc:537
+#: ../../../../src/ui_fsmenu/main.cc:538
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team • Licensed under the GNU "
 "General Public License V2.0"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:874
+#: ../../../../src/ui_fsmenu/main.cc:875
 msgid "Click for the main menu"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:952
+#: ../../../../src/ui_fsmenu/main.cc:953
 msgid "Desyncing Add-On Found"
 msgstr "Encontrado Complemento Desincronizado"
 
-#: ../../../../src/ui_fsmenu/main.cc:953
+#: ../../../../src/ui_fsmenu/main.cc:954
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr "Es conocido que un complemento habilitado provoca desincronizaciones. Proceda bajo su propio riesgo."
 
-#: ../../../../src/ui_fsmenu/main.cc:1062
+#: ../../../../src/ui_fsmenu/main.cc:1063
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:352
 msgid "No tribes found!"
 msgstr "¡No se han encontrado tribus!"
 
-#: ../../../../src/ui_fsmenu/main.cc:1063
+#: ../../../../src/ui_fsmenu/main.cc:1064
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:353
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "No se encontraron tribus en 'data/tribes/initialization/[tribename]/init.lua'."
 
-#: ../../../../src/ui_fsmenu/main.cc:1106
+#: ../../../../src/ui_fsmenu/main.cc:1107
 msgid "Exit Confirmation"
 msgstr "Confirmación de Salida"
 
-#: ../../../../src/ui_fsmenu/main.cc:1107
+#: ../../../../src/ui_fsmenu/main.cc:1108
 msgid "Are you sure you wish to exit Widelands?"
 msgstr "¿Estás seguro de que deseas salir de Widelands?"
 

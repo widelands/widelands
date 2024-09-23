@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-09-16 03:18+0000\n"
+"POT-Creation-Date: 2024-09-23 02:56+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2024\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -1024,7 +1024,7 @@ msgstr "Aktív bővítmények: %s"
 #: ../../../../src/editor/ui_menus/help.cc:36
 #: ../../../../src/ui_fsmenu/login_box.cc:255
 #: ../../../../src/ui_fsmenu/main.cc:276
-#: ../../../../src/ui_fsmenu/main.cc:1169
+#: ../../../../src/ui_fsmenu/main.cc:1170
 #: ../../../../src/wui/encyclopedia_window.cc:146
 #: ../../../../src/wui/tribal_encyclopedia.cc:55
 msgid "Error!"
@@ -6624,46 +6624,48 @@ msgstr "Kilépés a Widelandsből"
 msgid "Quit the game"
 msgstr "Kilépés a játékból"
 
-#. * TRANSLATORS: %1$s = version string and build type  ("Debug" or "Release")
-#: ../../../../src/ui_fsmenu/main.cc:534
+#. * TRANSLATORS: %1$s = version string and build type  ("Debug", "Release",
+#. or
+#. "RelWithDebInfo")
+#: ../../../../src/ui_fsmenu/main.cc:535
 #, c-format
 msgid "Version %1$s"
 msgstr "%1$s verzió"
 
 #. * TRANSLATORS: Placeholders are the copyright years
-#: ../../../../src/ui_fsmenu/main.cc:537
+#: ../../../../src/ui_fsmenu/main.cc:538
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team • Licensed under the GNU "
 "General Public License V2.0"
 msgstr "(C) %1%-%2%, Widelands fejlesztőcsapat • Licensz: GNU General Public License V2.0"
 
-#: ../../../../src/ui_fsmenu/main.cc:874
+#: ../../../../src/ui_fsmenu/main.cc:875
 msgid "Click for the main menu"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:952
+#: ../../../../src/ui_fsmenu/main.cc:953
 msgid "Desyncing Add-On Found"
 msgstr "Szinkronizációs hibákat okozó bővítményt találtunk"
 
-#: ../../../../src/ui_fsmenu/main.cc:953
+#: ../../../../src/ui_fsmenu/main.cc:954
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr "Egy bekapcsolt bővítmény szinkronizációs hibákat szokott okozni. Csak akkor folytasd, ha vállalod a kockázatokat!"
 
-#: ../../../../src/ui_fsmenu/main.cc:1062
+#: ../../../../src/ui_fsmenu/main.cc:1063
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:352
 msgid "No tribes found!"
 msgstr "A törzs nem található!"
 
-#: ../../../../src/ui_fsmenu/main.cc:1063
+#: ../../../../src/ui_fsmenu/main.cc:1064
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:353
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "Nem található törzs a data/tribes/initialization/[törzsnév]/init.lua parancsfájlban."
 
-#: ../../../../src/ui_fsmenu/main.cc:1106
+#: ../../../../src/ui_fsmenu/main.cc:1107
 msgid "Exit Confirmation"
 msgstr "Kilépés megerősítése"
 
-#: ../../../../src/ui_fsmenu/main.cc:1107
+#: ../../../../src/ui_fsmenu/main.cc:1108
 msgid "Are you sure you wish to exit Widelands?"
 msgstr "Valóban szeretnél kilépni a Widelandsből?"
 
