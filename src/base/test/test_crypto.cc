@@ -18,18 +18,33 @@
 
 #include <cstring>
 
-#include "base/md5.h"
+#include "base/crypto.h"
 #include "base/test.h"
 
 TESTSUITE_START(md5)
 
-TESTCASE(checksum) {
-	const char* const text = "Hello World! This is a string with Ûñīcøđȩ Bÿtèş.";
-	SimpleMD5Checksum md5sum;
-	md5sum.data(text, strlen(text));
-	md5sum.finish_checksum();
+TESTCASE(ASCII) {
+	check_equal(crypto::md5_str("Hello World! This is an ASCII-only string."),
+	            "7c8e4f06895ac16461bfa37f7f43ebd2");
+}
 
-	check_equal(md5sum.get_checksum().str(), "d4e32b0d5b4fc7b10c7c46fafabf1e17");
+TESTCASE(Unicode) {
+	check_equal(crypto::md5_str("Hello World! This is a string with Ûñīcøđȩ Bÿtèş."),
+	            "d4e32b0d5b4fc7b10c7c46fafabf1e17");
+}
+
+TESTSUITE_END()
+
+TESTSUITE_START(sha1)
+
+TESTCASE(ASCII) {
+	check_equal(crypto::sha1("Hello World! This is an ASCII-only string."),
+	            "eae56c3734fed035bd30c796ab282a6657f05a34");
+}
+
+TESTCASE(Unicode) {
+	check_equal(crypto::sha1("Hello World! This is a string with Ûñīcøđȩ Bÿtèş."),
+	            "1d8fd65bc996238a6795db335eab8adbce523d28");
 }
 
 TESTSUITE_END()

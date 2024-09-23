@@ -63,6 +63,7 @@ wl_library(ui_fsmenu
   DEPENDS
     ai
     base
+    base_crypto
     base_exceptions
     base_random
     base_time_string
@@ -98,7 +99,6 @@ wl_library(ui_fsmenu
     scripting_lua_table
     ui_basic
     sound
-    third_party_sha1
     ui_addons
     widelands_ball_of_mud
     widelands_options
