@@ -74,6 +74,7 @@ print_help () {
     echo "                      a debug build will be created."
     echo "-d or --debug         Create a debug build. This is the default,"
     echo "                      unless overridden locally."
+    echo "-e or --rel-with-dbg  Create a release build with debugging symbols."
     echo " "
     if which g++ >/dev/null; then # gcc specific
     echo "-c or --no-cross-opt  Do not use cross compile unit optimization,"
@@ -226,6 +227,13 @@ do
       BUILD_TYPE="Debug"
       if [ "${USE_ASAN}" = "default" ] && [ "${USE_TSAN}" = "OFF" ]; then
         USE_ASAN="ON"
+      fi
+    shift
+    ;;
+    -e|--rel-with-dbg)
+      BUILD_TYPE="RelWithDebInfo"
+      if [ "${USE_ASAN}" = "default" ]; then
+        USE_ASAN="OFF"
       fi
     shift
     ;;
@@ -420,9 +428,12 @@ echo " "
 if [ $BUILD_TYPE = "Release" ]; then
   echo "Creating a Release build. Use -d to create a Debug build."
   CMD_ADD "--release"
-else
+elif [ $BUILD_TYPE = "Debug" ]; then
   echo "Creating a Debug build. Use -r to create a Release build."
   CMD_ADD "--debug"
+elif [ $BUILD_TYPE = "RelWithDebInfo" ]; then
+  echo "Creating a RelWithDebInfo build."
+  CMD_ADD "--rel-with-dbg"
 fi
 echo " "
 if [ $USE_ASAN = "ON" ]; then
@@ -637,8 +648,10 @@ echo "# with the following settings:                            #"
 echo "#                                                         #"
 if [ $BUILD_TYPE = "Release" ]; then
   echo "# - Release build                                         #"
-else
+elif [ $BUILD_TYPE = "Debug" ]; then
   echo "# - Debug build                                           #"
+elif [ $BUILD_TYPE = "RelWithDebInfo" ]; then
+  echo "# - RelWithDebInfo build                                  #"
 fi
 if [ $BUILD_TESTS = "ON" ]; then
   echo "# - Tests                                                 #"
