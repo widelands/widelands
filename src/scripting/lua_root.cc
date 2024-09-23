@@ -27,7 +27,9 @@
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/production_program.h"
+#include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker_program.h"
 #include "logic/map_objects/world/critter.h"
@@ -35,8 +37,11 @@
 #include "scripting/globals.h"
 #include "scripting/lua_coroutine.h"
 #include "scripting/lua_game.h"
-#include "scripting/lua_map.h"
 #include "scripting/lua_table.h"
+#include "scripting/map/lua_building_description.h"
+#include "scripting/map/lua_immovable_description.h"
+#include "scripting/map/lua_terrain_description.h"
+#include "scripting/map/lua_tribe_description.h"
 #include "wui/interactive_player.h"
 
 namespace LuaRoot {
