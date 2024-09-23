@@ -6565,7 +6565,7 @@ msgstr "Editor…"
 
 #: ../../../../src/ui_fsmenu/main.cc:501
 msgid "Watch Replay…"
-msgstr "Mira una repetició…"
+msgstr "Mostra una repetició…"
 
 #: ../../../../src/ui_fsmenu/main.cc:503
 msgid "Begin or load a single-player campaign or free game"
