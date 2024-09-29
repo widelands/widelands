@@ -29,6 +29,7 @@
 #include "base/scoped_timer.h"
 #include "base/warning.h"
 #include "build_info.h"
+#include "editor/ocean_colors.h"
 #include "editor/tools/decrease_resources_tool.h"
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_port_space_tool.h"
@@ -905,7 +906,6 @@ void EditorInteractive::update_ocean_overlays() {
 	const Widelands::FindNodeAlwaysTrue functor;
 	const size_t nr_fields = map.max_index();
 
-	static std::vector<uint32_t> kOceanColors;
 	unsigned nr_oceans = 0;
 	ocean_overlays_.reset(new std::vector<uint32_t>(nr_fields, 0));
 
@@ -922,19 +922,6 @@ void EditorInteractive::update_ocean_overlays() {
 		// New ocean found.
 		++nr_oceans;
 
-		constexpr uint32_t kAlpha = 0xff000000;
-		if (kOceanColors.size() < nr_oceans) {
-			uint32_t color;
-			do {
-				const int rg = (RNG::static_rand() % 0x10000);
-				// Cap Blue to Green minus 50 or Red for visibility on blue water terrains.
-				const int bmax = std::max<int>((rg & 0xff) - 50, (rg & 0xff00) >> 8);
-				const int b = bmax > 0 ? (RNG::static_rand() % bmax) : 0;
-				color = kAlpha | (rg << 8) | b;
-			} while (std::find(kOceanColors.begin(), kOceanColors.end(), color) != kOceanColors.end());
-			kOceanColors.emplace_back(color);
-			assert(nr_oceans == kOceanColors.size());
-		}
 		const uint32_t this_ocean_color = kOceanColors.at(nr_oceans - 1);
 
 		std::vector<Widelands::Coords> ocean_fields;
@@ -959,6 +946,7 @@ void EditorInteractive::update_ocean_overlays() {
 			                 index, this_ocean_color, ocean_fields.size());
 		}
 	}
+	verb_log_dbg("Map has %u oceans.", nr_oceans);
 }
 
 /// Needed to get freehand painting tools (hold down mouse and move to edit).

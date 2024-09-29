@@ -6,6 +6,8 @@ wl_library(editor
     editor_category.h
     map_generator.cc
     map_generator.h
+    ocean_colors.cc
+    ocean_colors.h
     tools/action_args.h
     tools/decrease_height_tool.cc
     tools/decrease_height_tool.h
