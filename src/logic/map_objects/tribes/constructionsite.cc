@@ -33,6 +33,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/descriptions.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/partially_finished_building.h"
 #include "logic/map_objects/tribes/productionsite.h"
@@ -255,8 +256,8 @@ bool ConstructionSite::init(EditorGameBase& egbase) {
 }
 
 void ConstructionSite::init_settings() {
-	assert(building_);
-	assert(!settings_);
+	assert(building_ != nullptr);
+	assert(settings_ == nullptr);
 	const TribeDescr& tribe = owner().tribe();
 	if (upcast(const WarehouseDescr, wd, building_)) {
 		settings_.reset(new WarehouseSettings(*wd, tribe));
@@ -266,8 +267,9 @@ void ConstructionSite::init_settings() {
 		settings_.reset(new ProductionsiteSettings(*pd, tribe));
 	} else if (upcast(const MilitarySiteDescr, md, building_)) {
 		settings_.reset(new MilitarysiteSettings(*md, tribe));
+	} else if (upcast(const MarketDescr, mkt, building_)) {
+		settings_.reset(new MarketSettings(*mkt, tribe));
 	} else {
-		// TODO(Nordfriese): Add support for markets when trading is implemented
 		log_warn("Created constructionsite for a %s, which is not of any known building type\n",
 		         building_->name().c_str());
 	}
@@ -323,7 +325,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 #endif
 
 		// Apply settings
-		if (settings_) {
+		if (settings_ != nullptr) {
 			if (upcast(ProductionsiteSettings, ps, settings_.get())) {
 				for (const auto& pair : ps->ware_queues) {
 					b.inputqueue(pair.first, wwWARE, nullptr).set_max_fill(pair.second.desired_fill);
@@ -363,6 +365,8 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 				}
 				site.mutable_soldier_control()->set_soldier_capacity(ws->desired_capacity);
 				site.set_soldier_preference(ws->soldier_preference);
+			} else if (upcast(MarketSettings, mkt, settings_.get())) {
+				// Nothing to do currently.
 			} else {
 				NEVER_HERE();
 			}
@@ -535,8 +539,12 @@ void ConstructionSite::enhance(const EditorGameBase& egbase) {
 		   new_desired_capacity(ms->max_capacity, ms->desired_capacity, new_settings->max_capacity));
 		new_settings->soldier_preference = ms->soldier_preference;
 	} break;
+	case Widelands::MapObjectType::MARKET: {
+		upcast(const MarketDescr, md, building_);
+		// Markets don't have any special properties currently.
+		settings_.reset(new MarketSettings(*md, owner().tribe()));
+	} break;
 	default:
-		// TODO(Nordfriese): Add support for markets when trading is implemented
 		log_warn_time(egbase.get_gametime(),
 		              "Enhanced constructionsite to a %s, which is not of any known building type\n",
 		              building_->name().c_str());
