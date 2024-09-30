@@ -208,6 +208,7 @@ bool OceanColors::check_color(const uint32_t red, const uint32_t green, const ui
 
 	const uint32_t below_max = kMaxBrightness - brightness;
 	if (below_max == value_step_ || below_max == 2 * value_step_) {
+		// NOLINTNEXTLINE(readability-simplify-boolean-expr)
 		return false;
 	}
 
