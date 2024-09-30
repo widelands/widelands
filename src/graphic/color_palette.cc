@@ -16,7 +16,7 @@
  *
  */
 
-#include "editor/ocean_colors.h"
+#include "graphic/color_palette.h"
 
 #include <algorithm>
 #include <cassert>
@@ -24,52 +24,46 @@
 #include "base/log.h"
 #include "base/wexception.h"
 
-OceanColors kOceanColors;
+ColorPalette kOceanColors;
 
-constexpr uint32_t kMaxValue = 0xff;
-constexpr uint32_t kHalfValue = 0x7f;
-constexpr uint32_t kInitStep = 0x80;
-constexpr uint32_t kMinContrast = 0x20;
+constexpr uint8_t kMaxValue = 0xff;
+constexpr uint8_t kHalfValue = 0x7f;
+constexpr uint8_t kInitStep = 0x80;
+constexpr uint8_t kMinContrast = 0x20;
 
-OceanColors::OceanColors()
+ColorPalette::ColorPalette()
    : colors_({
         // Initialise with main colors.
-        // Colors in ARGB notation.
 
         // base
-        0xffff0000,  // red
-        0xff00ff00,  // green
-        0xffffff00,  // yellow
-        0xffff00ff,  // magenta
-        0xff7f7f7f,  // gray
+        RGBColor(0xff0000),  // red
+        RGBColor(0x00ff00),  // green
+        RGBColor(0xffff00),  // yellow
+        RGBColor(0xff00ff),  // magenta
+        RGBColor(0x7f7f7f),  // gray
 
         // light
-        0xffff7f7f,  // red
-        0xff7fff7f,  // green
-        0xffffff7f,  // yellow
-        0xffff7fff,  // magenta
-        0xffbfbfbf,  // gray
+        RGBColor(0xff7f7f),  // red
+        RGBColor(0x7fff7f),  // green
+        RGBColor(0xffff7f),  // yellow
+        RGBColor(0xff7fff),  // magenta
+        RGBColor(0xbfbfbf),  // gray
 
         // dark
-        0xffbf0000,  // red
-        0xff00bf00,  // green
-        0xffbfbf00,  // yellow
-        0xffbf00bf,  // magenta
-        0xff5f5f5f,  // gray (3f is too dark for now)
+        RGBColor(0xbf0000),  // red
+        RGBColor(0x00bf00),  // green
+        RGBColor(0xbfbf00),  // yellow
+        RGBColor(0xbf00bf),  // magenta
+        RGBColor(0x5f5f5f),  // gray (3f is too dark for now)
      }),
      values_sequence_({0, kMaxValue, kHalfValue}),
      value_step_(kInitStep) {
 }
 
-uint32_t OceanColors::at(const size_t i) {
-	if (i < colors_.size()) {
-		return colors_.at(i);
+const RGBColor& ColorPalette::at(const size_t i) {
+	while (i >= colors_.size()) {
+		generate_more_colors();
 	}
-	if (i > colors_.size()) {
-		throw wexception("Unallocated ocean color was requested!");
-	}
-	generate_more_colors();
-	assert(colors_.size() > i);
 	return colors_.at(i);
 }
 
@@ -84,25 +78,32 @@ struct Hue {
 static const std::vector<Hue> hue_sequence{
    {0, 1, 2}, {2, 0, 1}, {1, 2, 0}, {0, 2, 1}, {2, 1, 0}, {1, 0, 2}};
 
-void OceanColors::generate_more_colors() {
+void ColorPalette::generate_more_colors() {
 	generate_more_values();
 
 	// Let's shuffle them as much as we can
-	for (const uint32_t mid : values_sequence_) {
-		for (const uint32_t min : values_sequence_) {
+	for (const uint8_t mid : values_sequence_) {
+		for (const uint8_t min : values_sequence_) {
 			if (min > mid) {
 				continue;
 			}
 			for (auto max_it = values_sequence_.rbegin(); max_it != values_sequence_.rend();
 			     ++max_it) {
-				const uint32_t max = *max_it;
+				const uint8_t max = *max_it;
 				if (mid > max) {
 					continue;
 				}
-				std::vector<uint32_t> current_values{max, mid, min};
+				std::vector<uint8_t> current_values{max, mid, min};
 				for (const Hue& hue : hue_sequence) {
-					add_color(current_values.at(hue.index_red), current_values.at(hue.index_green),
-					          current_values.at(hue.index_blue));
+					const RGBColor next_color(current_values.at(hue.index_red),
+					                          current_values.at(hue.index_green),
+					                          current_values.at(hue.index_blue));
+					if (!check_color(next_color)) {
+						continue;
+					}
+					if (std::find(colors_.begin(), colors_.end(), next_color) == colors_.end()) {
+						colors_.emplace_back(next_color);
+					}
 				}
 			}
 		}
@@ -111,7 +112,7 @@ void OceanColors::generate_more_colors() {
 	             colors_.size(), values_sequence_.size());
 }
 
-void OceanColors::generate_more_values() {
+void ColorPalette::generate_more_values() {
 	if (value_step_ < 2) {
 		throw wexception("Too many ocean colors are requested. This shouldn't be possible.");
 	}
@@ -133,26 +134,11 @@ void OceanColors::generate_more_values() {
 	}
 }
 
-void OceanColors::add_color(const uint32_t red, const uint32_t green, const uint32_t blue) {
-	assert(red <= kMaxValue);
-	assert(green <= kMaxValue);
-	assert(blue <= kMaxValue);
+bool ColorPalette::check_color(const RGBColor& color) const {
+	const uint32_t red = color.r;
+	const uint32_t green = color.g;
+	const uint32_t blue = color.b;
 
-	if (!check_color(red, green, blue)) {
-		return;
-	}
-
-	constexpr uint32_t kAlpha = kMaxValue << 24;
-	constexpr uint32_t kRedShift = 16;
-	constexpr uint32_t kGreenShift = 8;
-
-	uint32_t argb_color = kAlpha + (red << kRedShift) + (green << kGreenShift) + blue;
-	if (std::find(colors_.begin(), colors_.end(), argb_color) == colors_.end()) {
-		colors_.emplace_back(argb_color);
-	}
-}
-
-bool OceanColors::check_color(const uint32_t red, const uint32_t green, const uint32_t blue) const {
 	// Don't allow shades of blue, except very dark ones
 
 	constexpr uint32_t kDecreaseGreen = 3;

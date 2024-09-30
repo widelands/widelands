@@ -29,7 +29,7 @@
 #include "base/scoped_timer.h"
 #include "base/warning.h"
 #include "build_info.h"
-#include "editor/ocean_colors.h"
+#include "graphic/color_palette.h"
 #include "editor/tools/decrease_resources_tool.h"
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_port_space_tool.h"
@@ -830,13 +830,14 @@ void EditorInteractive::draw(RenderTarget& dst) {
 
 		// Show ocean overlay.
 		if (show_oceans) {
-			uint32_t value = ocean_overlays_->at(map.get_index(field.fcoords));
-			if (value != 0) {
-				auto it = ocean_overlays_cache.find(value);
+			const unsigned ocean_number = ocean_overlays_->at(map.get_index(field.fcoords));
+			if (ocean_number != 0) {
+				auto it = ocean_overlays_cache.find(ocean_number);
 				if (it == ocean_overlays_cache.end()) {
 					it = ocean_overlays_cache
-					        .emplace(value, playercolor_image(
-					                           RGBColor(value), "images/wui/overlays/ocean.png", scale))
+					        .emplace(ocean_number, playercolor_image(kOceanColors.at(ocean_number - 1),
+					                                                 "images/wui/overlays/ocean.png",
+					                                                 scale))
 					        .first;
 				}
 				blit_field_overlay(
@@ -906,7 +907,7 @@ void EditorInteractive::update_ocean_overlays() {
 	const Widelands::FindNodeAlwaysTrue functor;
 	const size_t nr_fields = map.max_index();
 
-	unsigned nr_oceans = 0;
+	unsigned last_ocean = 0;
 	ocean_overlays_.reset(new std::vector<uint32_t>(nr_fields, 0));
 
 	for (size_t index = 0; index < nr_fields; ++index) {
@@ -920,9 +921,7 @@ void EditorInteractive::update_ocean_overlays() {
 		}
 
 		// New ocean found.
-		++nr_oceans;
-
-		const uint32_t this_ocean_color = kOceanColors.at(nr_oceans - 1);
+		++last_ocean;
 
 		std::vector<Widelands::Coords> ocean_fields;
 		map.find_reachable_fields(egbase(),
@@ -933,20 +932,20 @@ void EditorInteractive::update_ocean_overlays() {
 		// Store and validate the fields.
 		for (const Widelands::Coords& coords : ocean_fields) {
 			size_t i = map.get_index(coords);
-			if (ocean_overlays_->at(i) != 0 && ocean_overlays_->at(i) != this_ocean_color) {
-				throw wexception("Field #%" PRIuS " (%dx%d) belongs to two oceans #%08x and #%08x!", i,
-				                 coords.x, coords.y, ocean_overlays_->at(i), this_ocean_color);
+			if (ocean_overlays_->at(i) != 0 && ocean_overlays_->at(i) != last_ocean) {
+				throw wexception("Field #%" PRIuS " (%dx%d) belongs to two oceans #%u and #%u!", i,
+				                 coords.x, coords.y, ocean_overlays_->at(i), last_ocean);
 			}
-			ocean_overlays_->at(i) = this_ocean_color;
+			ocean_overlays_->at(i) = last_ocean;
 		}
 
-		if (ocean_overlays_->at(index) != this_ocean_color) {
-			throw wexception("Field #%" PRIuS " does not belong to its own ocean #%08x of size %" PRIuS
+		if (ocean_overlays_->at(index) != last_ocean) {
+			throw wexception("Field #%" PRIuS " does not belong to its own ocean #%u of size %" PRIuS
 			                 "!",
-			                 index, this_ocean_color, ocean_fields.size());
+			                 index, last_ocean, ocean_fields.size());
 		}
 	}
-	verb_log_dbg("Map has %u oceans.", nr_oceans);
+	verb_log_dbg("Map has %u oceans.", last_ocean);
 }
 
 /// Needed to get freehand painting tools (hold down mouse and move to edit).

@@ -16,33 +16,37 @@
  *
  */
 
-#ifndef WL_EDITOR_OCEAN_COLORS_H
-#define WL_EDITOR_OCEAN_COLORS_H
+#ifndef WL_GRAPHIC_COLOR_PALETTE_H
+#define WL_GRAPHIC_COLOR_PALETTE_H
 
 #include <cstddef>
 #include <cstdint>
 #include <vector>
 
-class OceanColors {
+#include "graphic/color.h"
+
+// TODO(tothxa): This is specific to the needs of ocean colors for now. If any other use arises,
+//               then it has to be generalised: at least allow specifying the initial colors and
+//               changing check_color(), but possibly also the sequences in generate_more_colors().
+class ColorPalette {
 public:
 	// Takes care of generating colors as needed
-	[[nodiscard]] uint32_t at(size_t i);
+	[[nodiscard]] const RGBColor& at(size_t i);
 
-	OceanColors();
+	ColorPalette();
 
 private:
 	void generate_more_colors();
 
-	std::vector<uint32_t> colors_;
+	std::vector<RGBColor> colors_;
 
 	// Internals for generate_more_colors()
-	void add_color(uint32_t red, uint32_t green, uint32_t blue);
-	[[nodiscard]] bool check_color(uint32_t red, uint32_t green, uint32_t blue) const;
+	[[nodiscard]] bool check_color(const RGBColor& color) const;
 	void generate_more_values();
 	std::vector<uint8_t> values_sequence_;
 	uint8_t value_step_;
 };
 
-extern OceanColors kOceanColors;
+extern ColorPalette kOceanColors;
 
-#endif  // end of include guard: WL_EDITOR_OCEAN_COLORS_H
+#endif  // end of include guard: WL_GRAPHIC_COLOR_PALETTE_H
