@@ -58,6 +58,9 @@ ColorPalette::ColorPalette()
      }),
      values_sequence_({0, kMaxValue, kHalfValue}),
      value_step_(kInitStep) {
+	for (auto color : colors_) {
+		rgb_cache_.insert((color.r << 16) + (color.g << 8) + color.b);
+	}
 }
 
 const RGBColor& ColorPalette::at(const size_t i) {
@@ -95,14 +98,20 @@ void ColorPalette::generate_more_colors() {
 				}
 				std::vector<uint8_t> current_values{max, mid, min};
 				for (const Hue& hue : hue_sequence) {
+					const uint32_t rgb = (current_values.at(hue.index_red) << 16) +
+					                     (current_values.at(hue.index_green) << 8) +
+					                     current_values.at(hue.index_blue);
+					if (rgb_cache_.count(rgb) > 0) {
+						continue;
+					}
 					const RGBColor next_color(current_values.at(hue.index_red),
 					                          current_values.at(hue.index_green),
 					                          current_values.at(hue.index_blue));
-					if (!check_color(next_color)) {
-						continue;
-					}
-					if (std::find(colors_.begin(), colors_.end(), next_color) == colors_.end()) {
+					if (check_color(next_color)) {
 						colors_.emplace_back(next_color);
+						// We must only cache added colors in the main cache, because previously
+						// filtered colors may become allowed when value_step_ decreases!
+						rgb_cache_.insert(rgb);
 					}
 				}
 			}

@@ -21,6 +21,7 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <set>
 #include <vector>
 
 #include "graphic/color.h"
@@ -45,6 +46,7 @@ private:
 	void generate_more_values();
 	std::vector<uint8_t> values_sequence_;
 	uint8_t value_step_;
+	std::set<uint32_t> rgb_cache_;
 };
 
 extern ColorPalette kOceanColors;

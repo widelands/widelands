@@ -41,6 +41,7 @@ wl_library(graphic_color_palette
     color_palette.cc
   DEPENDS
     base
+    base_exceptions
     graphic_color
 )
 
