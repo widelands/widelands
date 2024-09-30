@@ -6713,7 +6713,7 @@ msgstr "Wies all Kaarten"
 
 #: ../../../../src/ui_fsmenu/mapselect.cc:93
 msgid "Show original map names"
-msgstr "Wies echte Namen vun de Karten"
+msgstr "Wies echte Namen vun de Kaarten"
 
 #: ../../../../src/ui_fsmenu/mapselect.cc:111
 msgid "Filter by official status"
@@ -7227,7 +7227,7 @@ msgstr "Systeemtied in de Infobalken wiesen"
 
 #: ../../../../src/ui_fsmenu/options.cc:357
 msgid "Allow diagonal scrolling with the numeric keypad"
-msgstr "Diagonales Kart-Verschuven mit de Tahlenblock verlöven"
+msgstr "Diagonales Kaart-Verschuven mit de Tahlenblock verlöven"
 
 #: ../../../../src/ui_fsmenu/options.cc:362
 msgid "Scroll when the mouse cursor is near the screen edge"
