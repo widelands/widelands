@@ -81,9 +81,5 @@ jobs:
     - name: Testsuite
       run: |
         # regression_test.py
-        TIMEOUT=""
-        if [ "${{ matrix.config }}" = "Debug" ]
-        then
-          TIMEOUT="-t 20"
-        fi
-        ./regression_test.py -b build/src/widelands $TIMEOUT
+        utils/test/download_loadgame_testcases.sh
+        ./regression_test.py
