@@ -211,5 +211,7 @@ bool OceanColors::check_color(const uint32_t red, const uint32_t green, const ui
 		return false;
 	}
 
-	return true;  // NOLINT(readability-simplify-boolean-expr) -- this is the common else clause
+	// Tell clang-tidy that this is the common else clause, not just for the last condition
+	// NOLINTNEXTLINE(readability-simplify-boolean-expr)
+	return true;
 }

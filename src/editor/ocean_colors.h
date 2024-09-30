@@ -26,7 +26,7 @@
 class OceanColors {
 public:
 	// Takes care of generating colors as needed
-	uint32_t at(size_t i);
+	[[nodiscard]] uint32_t at(size_t i);
 
 	OceanColors();
 
@@ -37,7 +37,7 @@ private:
 
 	// Internals for generate_more_colors()
 	void add_color(uint32_t red, uint32_t green, uint32_t blue);
-	bool check_color(uint32_t red, uint32_t green, uint32_t blue) const;
+	[[nodiscard]] bool check_color(uint32_t red, uint32_t green, uint32_t blue) const;
 	void generate_more_values();
 	std::vector<uint8_t> values_sequence_;
 	uint8_t value_step_;
