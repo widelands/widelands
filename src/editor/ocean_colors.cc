@@ -18,8 +18,8 @@
 
 #include "editor/ocean_colors.h"
 
-#include <cassert>
 #include <algorithm>
+#include <cassert>
 
 #include "base/log.h"
 #include "base/wexception.h"
@@ -31,34 +31,34 @@ constexpr uint32_t kHalfValue = 0x7f;
 constexpr uint32_t kInitStep = 0x80;
 constexpr uint32_t kMinContrast = 0x20;
 
-OceanColors::OceanColors():
-	colors_({
-		// Initialise with main colors.
-		// Colors in ARGB notation.
+OceanColors::OceanColors()
+   : colors_({
+        // Initialise with main colors.
+        // Colors in ARGB notation.
 
-		// base
-		0xffff0000,  // red
-		0xff00ff00,  // green
-		0xffffff00,  // yellow
-		0xffff00ff,  // magenta
-		0xff7f7f7f,  // gray
+        // base
+        0xffff0000,  // red
+        0xff00ff00,  // green
+        0xffffff00,  // yellow
+        0xffff00ff,  // magenta
+        0xff7f7f7f,  // gray
 
-		// light
-		0xffff7f7f,  // red
-		0xff7fff7f,  // green
-		0xffffff7f,  // yellow
-		0xffff7fff,  // magenta
-		0xffbfbfbf,  // gray
+        // light
+        0xffff7f7f,  // red
+        0xff7fff7f,  // green
+        0xffffff7f,  // yellow
+        0xffff7fff,  // magenta
+        0xffbfbfbf,  // gray
 
-		// dark
-		0xffbf0000,  // red
-		0xff00bf00,  // green
-		0xffbfbf00,  // yellow
-		0xffbf00bf,  // magenta
-		0xff5f5f5f,  // gray (3f is too dark for now)
-	}),
-	values_sequence_({0, kMaxValue, kHalfValue}),
-	value_step_(kInitStep) {
+        // dark
+        0xffbf0000,  // red
+        0xff00bf00,  // green
+        0xffbfbf00,  // yellow
+        0xffbf00bf,  // magenta
+        0xff5f5f5f,  // gray (3f is too dark for now)
+     }),
+     values_sequence_({0, kMaxValue, kHalfValue}),
+     value_step_(kInitStep) {
 }
 
 uint32_t OceanColors::at(const size_t i) {
@@ -81,15 +81,15 @@ struct Hue {
 	size_t index_green;
 	size_t index_blue;
 };
-static const std::vector<Hue>
-hue_sequence{{0, 1, 2}, {2, 0, 1}, {1, 2, 0}, {0, 2, 1}, {2, 1, 0}, {1, 0, 2}};
+static const std::vector<Hue> hue_sequence{
+   {0, 1, 2}, {2, 0, 1}, {1, 2, 0}, {0, 2, 1}, {2, 1, 0}, {1, 0, 2}};
 
 void OceanColors::generate_more_colors() {
 	generate_more_values();
 
 	// Let's shuffle them as much as we can
-	for (const uint32_t mid: values_sequence_) {
-		for (const uint32_t min: values_sequence_) {
+	for (const uint32_t mid : values_sequence_) {
+		for (const uint32_t min : values_sequence_) {
 			if (min > mid) {
 				continue;
 			}
@@ -100,7 +100,7 @@ void OceanColors::generate_more_colors() {
 					continue;
 				}
 				std::vector<uint32_t> current_values{max, mid, min};
-				for (const Hue& hue: hue_sequence) {
+				for (const Hue& hue : hue_sequence) {
 					add_color(current_values.at(hue.index_red), current_values.at(hue.index_green),
 					          current_values.at(hue.index_blue));
 				}
