@@ -29,7 +29,6 @@
 #include "base/scoped_timer.h"
 #include "base/warning.h"
 #include "build_info.h"
-#include "graphic/color_palette.h"
 #include "editor/tools/decrease_resources_tool.h"
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_port_space_tool.h"
@@ -51,6 +50,7 @@
 #include "editor/ui_menus/tool_set_terrain_options_menu.h"
 #include "editor/ui_menus/tool_toolhistory_options_menu.h"
 #include "editor/ui_menus/toolsize_menu.h"
+#include "graphic/color_palette.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/playercolor.h"
 #include "graphic/text_layout.h"
@@ -835,9 +835,9 @@ void EditorInteractive::draw(RenderTarget& dst) {
 				auto it = ocean_overlays_cache.find(ocean_number);
 				if (it == ocean_overlays_cache.end()) {
 					it = ocean_overlays_cache
-					        .emplace(ocean_number, playercolor_image(kOceanColors.at(ocean_number - 1),
-					                                                 "images/wui/overlays/ocean.png",
-					                                                 scale))
+					        .emplace(
+					           ocean_number, playercolor_image(kOceanColors.at(ocean_number - 1),
+					                                           "images/wui/overlays/ocean.png", scale))
 					        .first;
 				}
 				blit_field_overlay(
