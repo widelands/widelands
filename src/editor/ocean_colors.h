@@ -19,6 +19,7 @@
 #ifndef WL_EDITOR_OCEAN_COLORS_H
 #define WL_EDITOR_OCEAN_COLORS_H
 
+#include <cstddef>
 #include <cstdint>
 #include <vector>
 
@@ -36,7 +37,7 @@ private:
 
 	// Internals for generate_more_colors()
 	void add_color(uint32_t red, uint32_t green, uint32_t blue);
-	bool check_color(uint32_t red, uint32_t green, uint32_t blue);
+	bool check_color(uint32_t red, uint32_t green, uint32_t blue) const;
 	void generate_more_values();
 	std::vector<uint8_t> values_sequence_;
 	uint8_t value_step_;

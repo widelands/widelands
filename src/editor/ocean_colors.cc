@@ -152,7 +152,7 @@ void OceanColors::add_color(const uint32_t red, const uint32_t green, const uint
 	}
 }
 
-bool OceanColors::check_color(const uint32_t red, const uint32_t green, const uint32_t blue) {
+bool OceanColors::check_color(const uint32_t red, const uint32_t green, const uint32_t blue) const {
 	// Don't allow shades of blue, except very dark ones
 
 	constexpr uint32_t kDecreaseGreen = 3;
@@ -211,5 +211,5 @@ bool OceanColors::check_color(const uint32_t red, const uint32_t green, const ui
 		return false;
 	}
 
-	return true;
+	return true;  // NOLINT(readability-simplify-boolean-expr) -- this is the common else clause
 }
