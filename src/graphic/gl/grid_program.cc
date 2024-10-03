@@ -18,6 +18,9 @@
 
 #include "graphic/gl/grid_program.h"
 
+#include <array>
+#include <cstdlib>
+
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
 
@@ -71,12 +74,21 @@ void GridProgram::draw(uint32_t texture_id,
 	float g = 0.f;
 	float b = 0.f;
 	auto calc_rgb = [&fields_to_draw, &r, &g, &b](const FieldsToDraw::Field& field, int neighbour) {
-		float h1 = field.fcoords.field->get_height();
-		float h2 = fields_to_draw.at(neighbour).fcoords.field->get_height();
-		float diff = std::min(1.f, fabs(h1 - h2) / Widelands::kDefaultMaxFieldHeightDiff);
-		r = diff;
-		g = 0;
-		b = 1.f - diff;
+		constexpr std::array<std::array<float, 3>, Widelands::kDefaultMaxFieldHeightDiff + 1> kColors = {{
+			{0.f, 0.64f, 0.f},
+			{0.48, 0.68f, 0.f},
+			{0.95f, 0.72f, 0.f},
+			{0.87f, 0.36f, 0.f},
+			{0.79f, 0.f, 0.f},
+			{0.59f, 0.f, 0.f},
+		}};
+
+		const int h1 = field.fcoords.field->get_height();
+		const int h2 = fields_to_draw.at(neighbour).fcoords.field->get_height();
+		const int index = std::min(abs(h1 - h2), Widelands::kDefaultMaxFieldHeightDiff);
+		r = kColors[index][0];
+		g = kColors[index][1];
+		b = kColors[index][2];
 	};
 
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {

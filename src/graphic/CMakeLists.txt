@@ -152,6 +152,7 @@ wl_library(graphic_draw_programs
   DEPENDS
     base_exceptions
     base_macros
+    base_math
     base_geometry
     graphic_fields_to_draw
     graphic_gl_utils

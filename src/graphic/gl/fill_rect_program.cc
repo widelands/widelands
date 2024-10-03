@@ -19,6 +19,7 @@
 #include "graphic/gl/fill_rect_program.h"
 
 #include "base/macros.h"
+#include "base/math.h"
 #include "base/wexception.h"
 
 // static
@@ -66,9 +67,17 @@ void FillRectProgram::draw(const Rectf& destination_rect,
 	draw(make_arguments_for_rect(destination_rect, z_value, color, blend_mode));
 }
 
+static inline void assign_color_to_vertex(FillRectProgram::Arguments::Vertex& vertex, const float val) {
+	vertex.color_a = 0.9f;
+	vertex.color_g = 0.f;
+
+	// Progression from black via blue and purple to red.
+	vertex.color_r = math::clamp(val * 3.f - 1.f, 0.f, 1.f);
+	vertex.color_b = math::clamp(3.f * (val < 0.5f ? val : (1.f - val)), 0.f, 1.f);
+}
+
 void FillRectProgram::draw_height_heat_map_overlays(const FieldsToDraw& fields_to_draw,
                                                     const float z_value) {
-	constexpr float kAlpha = 0.9f;
 	std::vector<Arguments> arguments;
 
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
@@ -90,15 +99,9 @@ void FillRectProgram::draw_height_heat_map_overlays(const FieldsToDraw& fields_t
 		arg.z_value = z_value;
 		arg.blend_mode = BlendMode::Default;
 		arg.triangle[0].point = field.gl_position;
-		arg.triangle[0].color_r = val1;
-		arg.triangle[0].color_g = 0.f;
-		arg.triangle[0].color_b = 1.f - val1;
-		arg.triangle[0].color_a = kAlpha;
 		arg.triangle[1].point = field_brn.gl_position;
-		arg.triangle[1].color_r = val2;
-		arg.triangle[1].color_g = 0.f;
-		arg.triangle[1].color_b = 1.f - val2;
-		arg.triangle[1].color_a = kAlpha;
+		assign_color_to_vertex(arg.triangle[0], val1);
+		assign_color_to_vertex(arg.triangle[1], val2);
 
 		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
 			const FieldsToDraw::Field& field_rn = fields_to_draw.at(field.rn_index);
@@ -107,10 +110,7 @@ void FillRectProgram::draw_height_heat_map_overlays(const FieldsToDraw& fields_t
 			assert(val3 >= 0.f && val3 <= 1.f);
 
 			arg.triangle[2].point = field_rn.gl_position;
-			arg.triangle[2].color_r = val3;
-			arg.triangle[2].color_g = 0.f;
-			arg.triangle[2].color_b = 1.f - val3;
-			arg.triangle[2].color_a = kAlpha;
+			assign_color_to_vertex(arg.triangle[2], val3);
 
 			arguments.push_back(arg);
 		}
@@ -122,10 +122,7 @@ void FillRectProgram::draw_height_heat_map_overlays(const FieldsToDraw& fields_t
 			assert(val3 >= 0.f && val3 <= 1.f);
 
 			arg.triangle[2].point = field_bln.gl_position;
-			arg.triangle[2].color_r = val3;
-			arg.triangle[2].color_g = 0.f;
-			arg.triangle[2].color_b = 1.f - val3;
-			arg.triangle[2].color_a = kAlpha;
+			assign_color_to_vertex(arg.triangle[2], val3);
 
 			arguments.push_back(arg);
 		}
