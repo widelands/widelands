@@ -67,7 +67,8 @@ void FillRectProgram::draw(const Rectf& destination_rect,
 	draw(make_arguments_for_rect(destination_rect, z_value, color, blend_mode));
 }
 
-static inline void assign_color_to_vertex(FillRectProgram::Arguments::Vertex& vertex, const float val) {
+static inline void assign_color_to_vertex(FillRectProgram::Arguments::Vertex& vertex,
+                                          const float val) {
 	vertex.color_a = 0.9f;
 	vertex.color_g = 0.f;
 

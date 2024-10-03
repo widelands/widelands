@@ -74,14 +74,15 @@ void GridProgram::draw(uint32_t texture_id,
 	float g = 0.f;
 	float b = 0.f;
 	auto calc_rgb = [&fields_to_draw, &r, &g, &b](const FieldsToDraw::Field& field, int neighbour) {
-		constexpr std::array<std::array<float, 3>, Widelands::kDefaultMaxFieldHeightDiff + 1> kColors = {{
-			{0.f, 0.64f, 0.f},
-			{0.48, 0.68f, 0.f},
-			{0.95f, 0.72f, 0.f},
-			{0.87f, 0.36f, 0.f},
-			{0.79f, 0.f, 0.f},
-			{0.59f, 0.f, 0.f},
-		}};
+		constexpr std::array<std::array<float, 3>, Widelands::kDefaultMaxFieldHeightDiff + 1>
+		   kColors = {{
+		      {0.f, 0.64f, 0.f},
+		      {0.48, 0.68f, 0.f},
+		      {0.95f, 0.72f, 0.f},
+		      {0.87f, 0.36f, 0.f},
+		      {0.79f, 0.f, 0.f},
+		      {0.59f, 0.f, 0.f},
+		   }};
 
 		const int h1 = field.fcoords.field->get_height();
 		const int h2 = fields_to_draw.at(neighbour).fcoords.field->get_height();
