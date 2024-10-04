@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-09-12 02:50+0000\n"
+"POT-Creation-Date: 2024-09-23 02:56+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -1019,7 +1019,7 @@ msgstr "사용설정된 추가기능: %s"
 #: ../../../../src/editor/ui_menus/help.cc:36
 #: ../../../../src/ui_fsmenu/login_box.cc:255
 #: ../../../../src/ui_fsmenu/main.cc:276
-#: ../../../../src/ui_fsmenu/main.cc:1169
+#: ../../../../src/ui_fsmenu/main.cc:1170
 #: ../../../../src/wui/encyclopedia_window.cc:146
 #: ../../../../src/wui/tribal_encyclopedia.cc:55
 msgid "Error!"
@@ -2436,9 +2436,9 @@ msgstr "경제가 일꾼 '%s'를 필요로 하지 않기"
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:535
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:559
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1275
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1380
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1462
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1302
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1407
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1489
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
@@ -2501,7 +2501,7 @@ msgstr ""
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:771
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1297
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1324
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "%2$s 때문에 %1$s 시작하지 않았습니다"
@@ -2522,7 +2522,7 @@ msgstr "%2$s 때문에 %1$s 건너뛰었습니다"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1284
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1311
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -2531,7 +2531,7 @@ msgstr[0] "%s 가 없기"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1389
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1416
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -2540,13 +2540,13 @@ msgstr[0] "%s 생산됨"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1471
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1498
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "%s 선발됨"
 
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1854
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1881
 msgid "No soldier found for this training level!"
 msgstr "훈련 수준에 걸맞는 군인이 없습니다!"
 
@@ -2554,7 +2554,7 @@ msgstr "훈련 수준에 걸맞는 군인이 없습니다!"
 #. description of the
 #. * training program, e.g. Completed upgrading soldier evade from level 0 to
 #. level 1
-#: ../../../../src/logic/map_objects/tribes/production_program.cc:1897
+#: ../../../../src/logic/map_objects/tribes/production_program.cc:1924
 #, c-format
 msgid "Completed %s"
 msgstr "%s를 완료했습니다"
@@ -2998,23 +2998,23 @@ msgstr "물길이 파괴됨"
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr "새로운 항구 부두를 위한 공간을 마련하기 위해 수로를 파괴해야 했습니다."
 
-#: ../../../../src/logic/map_objects/tribes/worker.cc:1114
+#: ../../../../src/logic/map_objects/tribes/worker.cc:1137
 msgid "A geologist found resources."
 msgstr "지질학자가 자원을 발견했습니다."
 
-#: ../../../../src/logic/map_objects/tribes/worker.cc:2097
+#: ../../../../src/logic/map_objects/tribes/worker.cc:2120
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr "%s 이(가) 집으로가는 길을 찾지 못하고 죽을 가능성이 높습니다."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../../../src/logic/map_objects/tribes/worker.cc:2102
+#: ../../../../src/logic/map_objects/tribes/worker.cc:2125
 #: ../../../../src/wui/productionsitewindow.cc:107
 #: ../../../../src/wui/productionsitewindow.cc:124
 msgid "Worker"
 msgstr "일꾼"
 
-#: ../../../../src/logic/map_objects/tribes/worker.cc:2103
+#: ../../../../src/logic/map_objects/tribes/worker.cc:2126
 msgid "Worker got lost!"
 msgstr "일꾼이 길을 잃었네요!"
 
@@ -6581,46 +6581,48 @@ msgstr "와이드랜드 종료"
 msgid "Quit the game"
 msgstr "놀이를 끝냅니다"
 
-#. * TRANSLATORS: %1$s = version string and build type  ("Debug" or "Release")
-#: ../../../../src/ui_fsmenu/main.cc:534
+#. * TRANSLATORS: %1$s = version string and build type  ("Debug", "Release",
+#. or
+#. "RelWithDebInfo")
+#: ../../../../src/ui_fsmenu/main.cc:535
 #, c-format
 msgid "Version %1$s"
 msgstr ""
 
 #. * TRANSLATORS: Placeholders are the copyright years
-#: ../../../../src/ui_fsmenu/main.cc:537
+#: ../../../../src/ui_fsmenu/main.cc:538
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team • Licensed under the GNU "
 "General Public License V2.0"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:874
+#: ../../../../src/ui_fsmenu/main.cc:875
 msgid "Click for the main menu"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:952
+#: ../../../../src/ui_fsmenu/main.cc:953
 msgid "Desyncing Add-On Found"
 msgstr "동기화 해제 추가 기능을 찾았습니다"
 
-#: ../../../../src/ui_fsmenu/main.cc:953
+#: ../../../../src/ui_fsmenu/main.cc:954
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr "사용하도록 설정된 추가 기능으로 인해 동기화가 해제되는 것으로 알려져 있습니다. 위험을 무릅쓰고 진행하십시오."
 
-#: ../../../../src/ui_fsmenu/main.cc:1062
+#: ../../../../src/ui_fsmenu/main.cc:1063
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:352
 msgid "No tribes found!"
 msgstr "부족을 찾을 수 없습니다!"
 
-#: ../../../../src/ui_fsmenu/main.cc:1063
+#: ../../../../src/ui_fsmenu/main.cc:1064
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:353
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "data/tribes/initialization/[tribename]/init.lua 에서 부족을 찾을 수 없습니다."
 
-#: ../../../../src/ui_fsmenu/main.cc:1106
+#: ../../../../src/ui_fsmenu/main.cc:1107
 msgid "Exit Confirmation"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:1107
+#: ../../../../src/ui_fsmenu/main.cc:1108
 msgid "Are you sure you wish to exit Widelands?"
 msgstr ""
 

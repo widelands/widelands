@@ -1,5 +1,5 @@
 # A game template file defines basic information for a singleplayer game.
-# A new singleplayer game with the specifications set here can then started using
+# A new singleplayer game with the specifications set here can then be started using
 #    ./widelands --new_game_from_template=<TEMPLATE_FILE>
 # where TEMPLATE_FILE must be a path relative to the Widelands data directory or your Widelands home directory.
 # To find the location of your home directory, see https://www.widelands.org/wiki/Technical%20FAQ/#where-are-my-maps-and-savegames-stored
