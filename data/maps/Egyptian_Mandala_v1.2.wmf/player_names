@@ -5,7 +5,7 @@ packet_version="2"
 
 [player_1]
 name=
-tribe="barbarians"
+tribe=
 ai=
 closeable="false"
 team="0"
@@ -13,7 +13,7 @@ random="false"
 
 [player_2]
 name=
-tribe="barbarians"
+tribe=
 ai=
 closeable="false"
 team="0"
@@ -21,7 +21,7 @@ random="false"
 
 [player_3]
 name=
-tribe="barbarians"
+tribe=
 ai=
 closeable="false"
 team="0"
@@ -29,7 +29,7 @@ random="false"
 
 [player_4]
 name=
-tribe="barbarians"
+tribe=
 ai=
 closeable="false"
 team="0"
@@ -37,7 +37,7 @@ random="false"
 
 [player_5]
 name=
-tribe="barbarians"
+tribe=
 ai=
 closeable="false"
 team="0"
@@ -45,7 +45,7 @@ random="false"
 
 [player_6]
 name=
-tribe="barbarians"
+tribe=
 ai=
 closeable="false"
 team="0"
