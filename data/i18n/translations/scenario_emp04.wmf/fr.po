@@ -11,15 +11,15 @@
 # David D, 2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2021
 # 34b6ffed036c169f8c0dd59e6bb8a305_b52781a <671f2e957f50d5213a1238cd588b004a_1012986>, 2021
-# Renaud Bouchard, 2023
+# Renaud Bouchard, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2024-08-22 02:44+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Renaud Bouchard, 2023\n"
+"Last-Translator: Renaud Bouchard, 2024\n"
 "Language-Team: French (https://app.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -120,11 +120,11 @@ msgstr "Carrières et bûcherons"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:88
 msgid ""
-"Build at least three lumberjack’s houses and two quarries to renew your "
-"building material supply chain."
+"Build at least three new lumberjack’s houses and two new quarries to renew "
+"your building material supply chain."
 msgstr ""
-"Construisez au moins trois cabanes de bûcheron et deux carrières pour "
-"renouveler votre chaîne d'approvisionnement de matériau."
+"Construisez au moins trois nouvelles cabanes de bûcheron et deux nouvelles "
+"carrières pour remplacer votre chaîne d'approvisionnement de matériau."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:94
 msgid "Produce fish and rations"
@@ -1856,17 +1856,17 @@ msgctxt "empire_building"
 msgid "felling trees"
 msgstr "Abat des arbres"
 
-#: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:45
+#: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:46
 msgctxt "empire_building"
 msgid "No Trees"
 msgstr "Pas d'arbres"
 
-#: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:46
+#: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:47
 msgctxt "empire_building"
 msgid "Out of Trees"
 msgstr "Plus d'arbres"
 
-#: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:47
+#: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:48
 msgctxt "empire_building"
 msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "

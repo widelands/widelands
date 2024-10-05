@@ -35,6 +35,7 @@
 #include "wui/debugconsole.h"
 #include "wui/mapview.h"
 #include "wui/minimap.h"
+#include "wui/plugins.h"
 #include "wui/quicknavigation.h"
 
 class InfoPanel;
@@ -71,19 +72,21 @@ public:
 	// Available Display Flags
 	// a new flag also needs its corresponding checkbox in options
 	enum {
-		dfShowCensus = 1,              ///< show census report on buildings
-		dfShowStatistics = 2,          ///< show statistics report on buildings
-		dfShowSoldierLevels = 4,       ///< show level information above soldiers
-		dfShowWorkareaOverlap = 8,     ///< highlight overlapping workareas when placing
-		                               //   a constructionsite
-		dfDebug = 16,                  ///< general debugging info
-		dfShowBuildings = 32,          ///<
-		dfShowBuildhelp = 64,          ///< show size of building spaces
-		dfShowMaximumBuildhelp = 128,  ///< show max size of building spaces
-		dfShowGrid = 256,              ///<
-		dfShowImmovables = 512,        ///< show trees, rocks etc.
-		dfShowBobs = 1024,             ///< show animals
-		dfShowResources = 2048,        ///< show water, coal etc. in editor
+		dfShowCensus = 1 << 0,            ///< show census report on buildings
+		dfShowStatistics = 1 << 1,        ///< show statistics report on buildings
+		dfShowSoldierLevels = 1 << 2,     ///< show level information above soldiers
+		dfShowWorkareaOverlap = 1 << 3,   ///< highlight overlapping workareas when placing
+		                                  //   a constructionsite
+		dfDebug = 1 << 4,                 ///< general debugging info
+		dfShowBuildings = 1 << 5,         ///<
+		dfShowBuildhelp = 1 << 6,         ///< show size of building spaces
+		dfShowMaximumBuildhelp = 1 << 7,  ///< show max size of building spaces
+		dfShowGrid = 1 << 8,              ///<
+		dfShowImmovables = 1 << 9,        ///< show trees, rocks etc.
+		dfShowBobs = 1 << 10,             ///< show animals
+		dfShowResources = 1 << 11,        ///< show water, coal etc. in editor
+		dfShowOceans = 1 << 12,           ///< show oceans/fleets in editor
+		dfHeightHeatMap = 1 << 13,        ///< color triangles and edges by height
 	};
 	static constexpr int32_t kDefaultDisplayFlags =
 	   dfShowSoldierLevels | dfShowBuildings | dfShowWorkareaOverlap;
@@ -255,7 +258,9 @@ public:
 	                        const std::string& icon,
 	                        const std::string& label,
 	                        const std::string& tt);
-	void add_plugin_timer(const std::string& action, uint32_t interval, bool failsafe);
+	void add_plugin_timer(const std::string& action, uint32_t interval, bool failsafe) {
+		plugin_timers_.add_plugin_timer(action, interval, failsafe);
+	}
 
 	UI::Box* toolbar();
 	// Sets the toolbar's position to the bottom middle and configures its background images
@@ -277,7 +282,6 @@ protected:
 	void mapview_menu_selected(MapviewMenuEntry entry);
 
 	void add_plugin_menu();
-	bool plugin_action(const std::string& action, bool failsafe);
 
 	/// Adds a toolbar button to the toolbar
 	/// \param image_basename:      File path for button image starting from 'images' and without
@@ -460,19 +464,7 @@ private:
 	UI::Dropdown<MapviewMenuEntry> mapviewmenu_;
 	UI::Dropdown<std::string> plugins_dropdown_;
 	QuickNavigation quick_navigation_;
-
-	struct PluginTimer {
-		PluginTimer() = default;
-		explicit PluginTimer(const std::string& a, uint32_t i, bool f)
-		   : action(a), interval(i), failsafe(f) {
-		}
-
-		std::string action;
-		uint32_t interval{0U};
-		uint32_t next_run{0U};
-		bool failsafe{false};
-	};
-	std::vector<PluginTimer> plugin_timers_;
+	PluginTimers plugin_timers_;
 
 public:
 	MiniMap::Registry minimap_registry_;

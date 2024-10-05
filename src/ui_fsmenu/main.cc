@@ -257,6 +257,8 @@ MainMenu::MainMenu(const bool skip_init)
 	layout();
 
 	initialization_complete();
+
+	reinit_plugins();
 }
 
 void MainMenu::main_loop() {
@@ -528,7 +530,8 @@ void MainMenu::set_labels() {
 	   UI::PanelStyle::kFsMenu));
 
 	version_.set_text(
-	   /** TRANSLATORS: %1$s = version string and build type  ("Debug" or "Release") */
+	   /** TRANSLATORS: %1$s = version string and build type  ("Debug", "Release", or
+	      "RelWithDebInfo") */
 	   format(_("Version %1$s"), build_ver_details()));
 	copyright_.set_text(
 	   /** TRANSLATORS: Placeholders are the copyright years */
@@ -566,6 +569,24 @@ void MainMenu::abort_splashscreen() {
 	splash_state_ = SplashState::kDone;
 	init_time_ = kNoSplash;
 	last_image_exchange_time_ = SDL_GetTicks();
+}
+
+void MainMenu::think() {
+	UI::Panel::think();
+	plugin_timers_->think();
+}
+
+void MainMenu::reinit_plugins() {
+	lua_.reset(new LuaFsMenuInterface(this));
+	plugin_timers_.reset(
+	   new PluginTimers(this, [this](const std::string& cmd) { lua_->interpret_string(cmd); }));
+
+	for (const auto& pair : AddOns::g_addons) {
+		if (pair.second && pair.first->category == AddOns::AddOnCategory::kUIPlugin) {
+			lua_->run_script(kAddOnDir + FileSystem::file_separator() + pair.first->internal_name +
+			                 FileSystem::file_separator() + "init.lua");
+		}
+	}
 }
 
 bool MainMenu::handle_mousepress(uint8_t /*btn*/, int32_t /*x*/, int32_t /*y*/) {
