@@ -1416,7 +1416,7 @@ msgstr "construit un gilet de protection"
 #: ../../../../data/tribes/buildings/productionsites/amazons/ferry_yard/init.lua:8
 msgctxt "amazons_building"
 msgid "Ferry Yard"
-msgstr "Chantier de ferrys"
+msgstr "Chantier de traversiers"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:8
@@ -2169,7 +2169,7 @@ msgstr "Le fermier qui travaille à cette ferme n'a pas défriché le sol pour p
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Ferry Yard"
-msgstr "Chantier de ferrys"
+msgstr "Chantier de traversiers"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:8
@@ -2775,7 +2775,7 @@ msgstr "Le fermier qui travaille à cette ferme n'a pas défriché le sol pour p
 #: ../../../../data/tribes/buildings/productionsites/barbarians/ferry_yard/init.lua:8
 msgctxt "barbarians_building"
 msgid "Ferry Yard"
-msgstr "Chantier de ferrys"
+msgstr "Chantier de traversiers"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:8
@@ -3234,7 +3234,7 @@ msgstr "Le fermier qui travaille à cette ferme n'a pas défriché le sol pour p
 #: ../../../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:8
 msgctxt "empire_building"
 msgid "Ferry Yard"
-msgstr "Chantier de ferrys"
+msgstr "Chantier de traversiers"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:8
@@ -3897,7 +3897,7 @@ msgstr "Le fermier qui travaille dans cette ferme n'a pas de sol défriché pour
 #: ../../../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:8
 msgctxt "frisians_building"
 msgid "Ferry Yard"
-msgstr "Chantier de ferrys"
+msgstr "Chantier de traversiers"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:8
@@ -9011,7 +9011,7 @@ msgstr "Couturier"
 #: ../../../../data/tribes/workers/amazons/ferry/init.lua:8
 msgctxt "amazons_worker"
 msgid "Ferry"
-msgstr "Ferry"
+msgstr "Traversier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/amazons/geologist/init.lua:8
@@ -9221,7 +9221,7 @@ msgstr "Fermier"
 #: ../../../../data/tribes/workers/atlanteans/ferry/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Ferry"
-msgstr "Ferry"
+msgstr "Traversier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/fishbreeder/init.lua:8
@@ -9425,7 +9425,7 @@ msgstr "Fermier"
 #: ../../../../data/tribes/workers/barbarians/ferry/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Ferry"
-msgstr "Ferry"
+msgstr "Traversier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/fisher/init.lua:8
@@ -9623,7 +9623,7 @@ msgstr "Fermier"
 #: ../../../../data/tribes/workers/empire/ferry/init.lua:8
 msgctxt "empire_worker"
 msgid "Ferry"
-msgstr "Ferry"
+msgstr "Traversier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/fisher/init.lua:8
@@ -9857,7 +9857,7 @@ msgstr "Fermier"
 #: ../../../../data/tribes/workers/frisians/ferry/init.lua:8
 msgctxt "frisians_worker"
 msgid "Ferry"
-msgstr "Ferry"
+msgstr "Traversier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/fisher/init.lua:8
