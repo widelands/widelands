@@ -293,7 +293,7 @@ msgstr "Kaart-Klick-un-Treck-Richtung umdreihen."
 
 #: ../../../../src/wlapplication_messages.cc:186
 msgid "Allow diagonal scrolling with the numeric keypad."
-msgstr "Diagonales Kart-Verschuven mit de Tahlenblock verlöven."
+msgstr "Diagonales Kaart-Verschuven mit de Tahlenblock verlöven."
 
 #: ../../../../src/wlapplication_messages.cc:187
 msgid "Display system time in the info panel."
