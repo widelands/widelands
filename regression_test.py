@@ -108,6 +108,7 @@ class WidelandsTestCase(unittest.TestCase):
                     '--homedir={}'.format(self.run_dir),
                     '--nosound',
                     '--fail-on-lua-error',
+                    '--fail-on-errors',
                     '--language=en' ]
             args += [ "--{}={}".format(key, value) for key, value in iteritems(wlargs) ]
 
