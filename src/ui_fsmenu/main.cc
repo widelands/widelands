@@ -541,7 +541,8 @@ void MainMenu::set_labels() {
 	   UI::PanelStyle::kFsMenu));
 
 	version_.set_text(
-	   /** TRANSLATORS: %1$s = version string and build type  ("Debug" or "Release") */
+	   /** TRANSLATORS: %1$s = version string and build type  ("Debug", "Release", or
+	      "RelWithDebInfo") */
 	   format(_("Version %1$s"), build_ver_details()));
 	copyright_.set_text(
 	   /** TRANSLATORS: Placeholders are the copyright years */
