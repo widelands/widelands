@@ -800,7 +800,7 @@ msgid ""
 "roads, ferries, or ships, so you can have more than one economy if their "
 "flags are not connected by any means of transportation. In that case, your "
 "separate economies can have different settings for wares."
-msgstr ""
+msgstr "Notez que les boutons sont appelés \"Configurer l'Économie de ce drapeau/bâtiment\" pour certaines raisons. Une Économie consiste en l'ensemble des bâtiments et drapeaux connectés par des routes, des traversiers, ou des navires, ainsi vous pouvez avoir plus d'une Économie si leurs drapeaux ne sont connectés en aucune manière pour le transport. Dans ce cas, vos Économie séparées peuvent avoir des réglages différents pour les marchandises."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""

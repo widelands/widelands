@@ -470,6 +470,7 @@ void EditorInteractive::update_showhide_menu() {
 	showhidemenu_.set_checked(ShowHideEntry::kBuildingSpaces, buildhelp(), false);
 	showhidemenu_.set_checked(
 	   ShowHideEntry::kMaximumBuildingSpaces, get_display_flag(dfShowMaximumBuildhelp), false);
+	showhidemenu_.set_checked(ShowHideEntry::kHeightHeatMap, get_display_flag(dfHeightHeatMap), false);
 	showhidemenu_.set_checked(ShowHideEntry::kGrid, get_display_flag(dfShowGrid), false);
 	showhidemenu_.set_checked(ShowHideEntry::kOceans, get_display_flag(dfShowOceans), false);
 	showhidemenu_.set_checked(ShowHideEntry::kImmovables, get_display_flag(dfShowImmovables), false);
@@ -492,6 +493,13 @@ void EditorInteractive::build_showhide_menu() {
 	                  _("Toggle whether to show maximum building spaces that will be available if "
 	                    "all immovables (trees, rocks, etc.) are removed"),
 	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideMaximumBuildhelp, false));
+
+	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether the map height heat
+	  * map is shown */
+	showhidemenu_.add(_("Enable height heat map"), ShowHideEntry::kHeightHeatMap,
+	                  g_image_cache->get("images/wui/menus/menu_toggle_height_heat_map.png"),
+	                  get_display_flag(dfHeightHeatMap), "",
+	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideHeightHeatMap, false));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether the map grid is shown
 	 */
@@ -536,6 +544,9 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry, bool checked
 	} break;
 	case ShowHideEntry::kMaximumBuildingSpaces: {
 		set_display_flag(EditorInteractive::dfShowMaximumBuildhelp, checked, false);
+	} break;
+	case ShowHideEntry::kHeightHeatMap: {
+		set_display_flag(EditorInteractive::dfHeightHeatMap, checked, false);
 	} break;
 	case ShowHideEntry::kGrid: {
 		set_display_flag(EditorInteractive::dfShowGrid, checked, false);
@@ -704,7 +715,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 
 	const auto& ebase = egbase();
 	auto* fields_to_draw =
-	   map_view()->draw_terrain(ebase, nullptr, Workareas(), get_display_flag(dfShowGrid), &dst);
+	   map_view()->draw_terrain(ebase, nullptr, Workareas(), get_display_flag(dfHeightHeatMap),
+	                            get_display_flag(dfShowGrid), &dst);
 
 	const float scale = 1.f / map_view()->view().zoom;
 	const Time& gametime = ebase.get_gametime();
@@ -1074,6 +1086,10 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		}
 		if (matches_shortcut(KeyboardShortcut::kEditorPlayers, code)) {
 			tool_windows_.players.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorShowhideHeightHeatMap, code)) {
+			showhidemenu_.toggle_checked(ShowHideEntry::kHeightHeatMap, true);
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kEditorShowhideGrid, code)) {

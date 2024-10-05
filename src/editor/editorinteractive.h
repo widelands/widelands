@@ -212,6 +212,7 @@ private:
 	enum class ShowHideEntry {
 		kBuildingSpaces,
 		kMaximumBuildingSpaces,
+		kHeightHeatMap,
 		kGrid,
 		kOceans,
 		kAnimals,

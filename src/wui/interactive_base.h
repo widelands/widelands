@@ -86,6 +86,7 @@ public:
 		dfShowBobs = 1 << 10,             ///< show animals
 		dfShowResources = 1 << 11,        ///< show water, coal etc. in editor
 		dfShowOceans = 1 << 12,           ///< show oceans/fleets in editor
+		dfHeightHeatMap = 1 << 13,        ///< color triangles and edges by height
 	};
 	static constexpr int32_t kDefaultDisplayFlags =
 	   dfShowSoldierLevels | dfShowBuildings | dfShowWorkareaOverlap;

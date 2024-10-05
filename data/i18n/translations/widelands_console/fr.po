@@ -14,7 +14,7 @@
 # Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
 # Jaypad <ju-ju@nataju.fr>, 2016
 # Olivier <olivier+transifex@migeot.org>, 2021
-# Renaud Bouchard, 2015-2022
+# Renaud Bouchard, 2015-2022,2024
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Tubuntu, 2015
 msgid ""
@@ -23,7 +23,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-06-08 02:37+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
-"Last-Translator: Ch L, 2024\n"
+"Last-Translator: Renaud Bouchard, 2015-2022,2024\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,7 +35,7 @@ msgstr ""
 #: ../../../../src/wlapplication_messages.cc:52
 #, c-format
 msgid "%1$s|%2$s"
-msgstr ""
+msgstr "%1$s|%2$s"
 
 #: ../../../../src/wlapplication_messages.cc:55
 #: ../../../../src/wlapplication_messages.cc:87
@@ -50,7 +50,7 @@ msgstr "NOMDEFICHIER"
 #. punctuation marks
 #: ../../../../src/wlapplication_messages.cc:60
 msgid "last"
-msgstr ""
+msgstr "dernier"
 
 #: ../../../../src/wlapplication_messages.cc:66
 msgid "Usage:"
@@ -123,7 +123,7 @@ msgstr "Lance la carte `NOMDEFICHIER` directement en tant que scenario un joueur
 #, c-format
 msgid ""
 "Load the savegame `%1$s` directly or the last saved game if `=%2$s` is used."
-msgstr ""
+msgstr "Charge la sauvegarde `%1$s` directement ou le dernier jeu sauvé si `=%2$s` est utilisé."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -131,7 +131,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Load the replay `%1$s` directly or the last saved replay if `=%2$s` is used."
-msgstr ""
+msgstr "Charge le replay `%1$s` directement ou le dernier replay sauvé si `=%2$s` est utilisé."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -141,7 +141,7 @@ msgid ""
 "Start the Widelands map editor directly. You can add `=%1$s` to directly "
 "load the map `FILENAME` in the editor or `=%2$s` to load the last edited "
 "map."
-msgstr ""
+msgstr "Lance directement l'éditeur de cartes de Widelands. Vous pouvez ajouter `=%1$s` pour charger la carte directement dans l'éditeur ou  `=%2$s` pour charger la dernière carte éditée."
 
 #: ../../../../src/wlapplication_messages.cc:114
 msgid ""
@@ -171,7 +171,7 @@ msgstr "[vrai*|faux]"
 
 #: ../../../../src/wlapplication_messages.cc:123
 msgid "Play the intro music at startup and show splash image until it ends."
-msgstr ""
+msgstr "Jouer la musique d'intro au démarrage et afficher l'image d'accueil jusqu'à la fin."
 
 #: ../../../../src/wlapplication_messages.cc:124
 msgid "Force Widelands to crash when a Lua error occurs."
@@ -392,7 +392,7 @@ msgstr "Options graphiques :"
 
 #: ../../../../src/wlapplication_messages.cc:216
 msgid "Use the whole display for the game screen."
-msgstr ""
+msgstr "Utiliser l'écran entier pour l'écran du jeu."
 
 #: ../../../../src/wlapplication_messages.cc:218
 msgid "Start the game in a maximized window."
@@ -423,7 +423,7 @@ msgid ""
 "Whether to let the system draw the mouse cursor. Disable it only if the "
 "cursor doesn't appear right, or if you want it to be visible in screenshots "
 "or screencasts."
-msgstr ""
+msgstr "Laisser ou non le système dessiner le curseur de la souris. Ne désactiver que si le curseur n'apparait pas correctement, ou s'il vous voulez qu'il soit visible dans les captures d'écran et les diffusions."
 
 #: ../../../../src/wlapplication_messages.cc:233
 msgid "Whether to use sticky tooltips."
