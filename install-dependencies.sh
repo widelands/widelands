@@ -204,6 +204,10 @@ elif [ "$DISTRO" = "void" ]; then
 
 elif [ "$DISTRO" = "vcpkg" ]; then
    echo "Installing dependencies for vcpkg..."
+   if [ -z "$SystemRoot" -a -n "SYSTEMROOT" ]; then
+      # fix environment variable
+      export SystemRoot="$SYSTEMROOT"
+   fi
    # The dependencies must be on a single line, because linebreak handling is broken
    # in the github runner shell...
    vcpkg install --disable-metrics $@ $(cat "${WL_DIR}"/utils/windows/vcpkg_deps)
