@@ -88,7 +88,7 @@ init = {
          inputs = {
             iron = 6,
             log = 6,
-            spidercloth = 4
+            spider_silk = 4
          }
       })
 
