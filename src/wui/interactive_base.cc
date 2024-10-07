@@ -295,8 +295,9 @@ void InteractiveBase::add_plugin_menu() {
 void InteractiveBase::add_toolbar_plugin(const std::string& action,
                                          const std::string& icon,
                                          const std::string& label,
-                                         const std::string& tt) {
-	plugins_dropdown_.add(label, action, g_image_cache->get(icon), false, tt);
+                                         const std::string& tt,
+                                         const std::string& hotkey) {
+	plugins_dropdown_.add(label, action, g_image_cache->get(icon), false, tt, hotkey);
 	finalize_toolbar();
 }
 
@@ -1843,6 +1844,10 @@ void InteractiveBase::broadcast_cheating_message(const std::string& code,
 }
 
 bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
+	if (plugin_timers_.check_keyboard_shortcut_action(code)) {
+		return true;
+	}
+
 	if (quick_navigation_.handle_key(down, code)) {
 		return true;
 	}
