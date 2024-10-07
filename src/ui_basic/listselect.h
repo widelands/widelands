@@ -31,10 +31,33 @@ namespace UI {
 
 class BaseDropdown;
 
-enum class ListselectLayout {
-	kPlain,     // Highlight the selected element
-	kDropdown,  // When the mouse moves, instantly select the element that the mouse hovers over
-	kShowCheck  // Show a green arrow in front of the selected element
+struct ListselectLayout {
+	enum class Checkmark { kNone, kSingleSelect, kMultiSelect };
+	Checkmark checkmark;
+	bool dropdown{false};
+
+	ListselectLayout(Checkmark c, bool d) : checkmark(c), dropdown(d) {
+	}
+
+	[[nodiscard]] bool show_check() const {
+		return checkmark > Checkmark::kNone;
+	}
+
+	bool operator==(const ListselectLayout& other) const {
+		return (checkmark == other.checkmark) && (dropdown == other.dropdown);
+	}
+
+	bool operator!=(const ListselectLayout& other) const {
+		return (checkmark != other.checkmark) || (dropdown != other.dropdown);
+	}
+
+	// ----- PRESETS -----
+	static const ListselectLayout kPlain;      // Highlight the selected element
+	static const ListselectLayout kDropdown;   // When the mouse moves, instantly highlight the
+	                                           // element that the mouse hovers over
+	static const ListselectLayout kShowCheck;  // Show a green arrow in front of the selected element
+	static const ListselectLayout
+	   kMultiCheck;  // Checkmark for each element can be toggled independently
 };
 
 /**
@@ -56,6 +79,7 @@ struct BaseListselect : public Panel {
 
 	Notifications::Signal<uint32_t> selected;
 	Notifications::Signal<uint32_t> double_clicked;
+	Notifications::Signal<uint32_t, bool> checkmark_changed;
 
 	virtual void clear();
 	void sort(uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
@@ -73,6 +97,10 @@ struct BaseListselect : public Panel {
 
 	void remove(uint32_t);
 	void remove(const char* str);
+
+	ListselectLayout selection_mode() const {
+		return selection_mode_;
+	}
 
 	uint32_t size() const {
 		return entry_records_.size();
@@ -95,7 +123,12 @@ struct BaseListselect : public Panel {
 	}
 
 	enum class SnapSelectionToEnabled { kNo, kUp, kDown };
-	void select(uint32_t i, SnapSelectionToEnabled snap = SnapSelectionToEnabled::kNo);
+	void select(uint32_t i,
+	            SnapSelectionToEnabled snap = SnapSelectionToEnabled::kNo,
+	            bool affect_checkmarks = false);
+	void select(uint32_t i, bool affect_checkmarks) {
+		select(i, SnapSelectionToEnabled::kNo, affect_checkmarks);
+	}
 	bool has_selection() const;
 
 	uint32_t get_selected() const;
@@ -103,6 +136,11 @@ struct BaseListselect : public Panel {
 	const std::string& get_selected_name() const;
 	const std::string& get_selected_tooltip() const;
 	const Image* get_selected_image() const;
+
+	void clear_checked(bool notify = false);
+	bool is_checked(uint32_t entry) const;
+	bool set_checked(uint32_t entry, bool newstate, bool notify = false);
+	bool toggle_checked(uint32_t entry, bool notify = false);
 
 	///  Return the total height (text + spacing) occupied by a single line.
 	int get_lineheight() const;
@@ -136,6 +174,7 @@ struct BaseListselect : public Panel {
 	void scroll_to_selection();
 
 	void set_linked_dropdown(UI::BaseDropdown* d) {
+		assert(selection_mode_.dropdown);
 		linked_dropdown_ = d;
 	}
 
@@ -158,6 +197,7 @@ struct BaseListselect : public Panel {
 		const Align hotkey_alignment;
 		const unsigned indent;
 		const bool enable;
+		bool checked_{false};
 		std::shared_ptr<const UI::RenderedText> rendered_name;
 		std::shared_ptr<const UI::RenderedText> rendered_hotkey;
 	};
@@ -167,13 +207,18 @@ struct BaseListselect : public Panel {
 		return *entry_records_.at(index);
 	}
 
+protected:
+	virtual void emit_checkmark_changed(uint32_t entry, bool newstate) const {
+		checkmark_changed(entry, newstate);
+	}
+
 private:
 	static const int32_t ms_darken_value = -20;
 
 	void set_scrollpos(int32_t);
 	Recti get_highlight_rect(const std::string& text, int x, int y);
 
-	int max_pic_width_;
+	int max_pic_width_{0};
 	int widest_text_{0};
 	int widest_hotkey_{0};
 
@@ -217,6 +262,10 @@ template <typename Entry> struct Listselect : public BaseListselect {
 	   : BaseListselect(parent, name, x, y, w, h, style, selection_mode) {
 	}
 
+	CLANG_DIAG_OFF("-Wshadow-field")
+	Notifications::Signal<Entry, bool> checkmark_changed;  // NOLINT: intentional shadowing
+	CLANG_DIAG_ON("-Wshadow-field")
+
 	void clear() override {
 		entry_cache_.clear();
 		BaseListselect::clear();
@@ -243,7 +292,31 @@ template <typename Entry> struct Listselect : public BaseListselect {
 		return entry_cache_[BaseListselect::get_selected()];
 	}
 
-private:
+	bool is_checked(Entry entry) const {
+		auto it = std::find(entry_cache_.begin(), entry_cache_.end(), entry);
+		return (it == entry_cache_.end()) ? false :
+                                          BaseListselect::is_checked(it - entry_cache_.begin());
+	}
+
+	bool set_checked(Entry entry, bool newstate, bool notify = false) {
+		auto it = std::find(entry_cache_.begin(), entry_cache_.end(), entry);
+		return (it == entry_cache_.end()) ?
+                false :
+                BaseListselect::set_checked(it - entry_cache_.begin(), newstate, notify);
+	}
+
+	bool toggle_checked(Entry entry, bool notify = false) {
+		auto it = std::find(entry_cache_.begin(), entry_cache_.end(), entry);
+		return (it == entry_cache_.end()) ?
+                false :
+                BaseListselect::toggle_checked(it - entry_cache_.begin(), notify);
+	}
+
+protected:
+	void emit_checkmark_changed(uint32_t base_entry, bool newstate) const override {
+		checkmark_changed(entry_cache_[base_entry], newstate);
+	}
+
 	std::deque<Entry> entry_cache_;
 };
 }  // namespace UI
