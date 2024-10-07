@@ -207,6 +207,7 @@ void GameDiplomacyMenu::update_diplomacy_details() {
 			str = format(_("Won at %s"), gametimestring(p->time.get()));
 			break;
 		case Widelands::PlayerEndResult::kLost:
+		case Widelands::PlayerEndResult::kEliminated:
 			str = format(_("Lost at %s"), gametimestring(p->time.get()));
 			break;
 		case Widelands::PlayerEndResult::kResigned:
