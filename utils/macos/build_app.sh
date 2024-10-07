@@ -62,7 +62,31 @@ function MakeDMG {
    cp $SOURCE_DIR/COPYING  $DESTINATION/COPYING.txt
 
    echo "Creating DMG ..."
-   hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg"
+   if [ -n "$GITHUB_ACTION" ]; then
+      # Sometimes we get resource busy errors in the github actions
+      HDI_MAX_TRIES=3
+   else
+      HDI_MAX_TRIES=1
+   fi
+   HDI_TRY=0
+   HDI_RESULT=0
+   while true; do
+      HDI_TRY=$(( ++HDI ))
+      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" \
+              "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg" || HDI_RESULT=$?
+      if [ $HDI_RESULT -eq 0 ]; then
+         return
+      fi
+      # EBUSY is error code 16. We only allow that, all others should fail immediately.
+      if [ $HDI_RESULT -ne 16 -o $HDI_TRY -eq $HDI_MAX_TRIES]; then
+         exit $HDI_RESULT
+      fi
+      if [ -n "$GITHUB_ACTION" ]; then
+         echo "::warning::hdiutil resource busy error... retrying"
+      fi
+      echo "  will retry after 10 seconds..."
+      sleep 10
+   done
 }
 
 function MakeAppPackage {

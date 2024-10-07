@@ -45,23 +45,28 @@ jobs:
               - *src_cmake_dependencies
               - 'data/**'
               - 'po/**'
+            - &ubuntu_dependencies
+              - *src_cmake_dependencies
+              - 'utils/ubuntu/packages'
           codecheck:
-            - *src_cmake_dependencies
+            - *ubuntu_dependencies
             - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_codecheck.yaml'
           clang_tidy:
-            - *src_cmake_dependencies
+            - *ubuntu_dependencies
             - 'utils/check_clang_tidy_results.py'
             - 'utils/run-clang-tidy.py'
             - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_clang_tidy.yaml'
           test_suite:
-            - *src_cmake_dependencies
+            - *ubuntu_dependencies
             - 'data/**' # TODO(aDiscoverer) list what needs to be checked
             - 'regression_test.py'
             - 'test/**'
             - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_testsuite.yaml'
+          # TODO(tothxa): utils/windows/** has some files that are only relevant to one of
+          #               msvc or mingw, they shouldn't trigger rebuilding the other
           inst_windows_msvc:
             - *installer
             # doc/** maybe for some installers TODO(unknown)
@@ -79,6 +84,7 @@ jobs:
             - '.github/workflows/build_macos.yaml' # calls install-dependencies.sh
           appimage:
             - *installer
+            - 'utils/ubuntu/packages'
             - 'xdg/org.widelands.Widelands.*'
             - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_appimage.yaml'

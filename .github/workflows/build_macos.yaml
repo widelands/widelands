@@ -24,9 +24,10 @@ jobs:
         fetch-depth: 1
     - name: Installing dependencies
       run: |
-        export ICU_ROOT="$(brew --prefix icu4c)" && \
-        export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
-        ./install-dependencies.sh homebrew ccache
+        export ICU_ROOT="$(brew --prefix icu4c)"
+        # Suppress warnings about installing formulas instead of casks. Casks would raise another
+        # warning about disabling macos gatekeeper.
+        ./install-dependencies.sh homebrew --formula
     - name: Building
       run: |
         mkdir build_wl
