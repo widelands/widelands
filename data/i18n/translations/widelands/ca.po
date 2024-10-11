@@ -563,11 +563,11 @@ msgstr "Mostra/Amaga els espais de construcció grans que estaran disponibles si
 #. the map height heat map is shown
 #: ../../../../src/editor/editorinteractive.cc:494
 msgid "Disable height heat map"
-msgstr ""
+msgstr "Desactiva el mapa de temperatura d'alçades"
 
 #: ../../../../src/editor/editorinteractive.cc:495
 msgid "Enable height heat map"
-msgstr ""
+msgstr "Activa el mapa de temperatura d'alçades"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
@@ -8005,7 +8005,7 @@ msgstr "Menú de jugadors"
 
 #: ../../../../src/wlapplication_options.cc:542
 msgid "Toggle Height Heat Map"
-msgstr ""
+msgstr "Commuta el mapa de temperatura d'alçades"
 
 #: ../../../../src/wlapplication_options.cc:547
 msgid "Toggle Grid"

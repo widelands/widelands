@@ -565,11 +565,11 @@ msgstr "Of the gröttste Rüümte tum Bauen, wat verföögbaar worden, wenn man 
 #. the map height heat map is shown
 #: ../../../../src/editor/editorinteractive.cc:494
 msgid "Disable height heat map"
-msgstr ""
+msgstr "Höchten-Farvkaart utknipsen"
 
 #: ../../../../src/editor/editorinteractive.cc:495
 msgid "Enable height heat map"
-msgstr ""
+msgstr "Höchten-Farvkaart anknipsen"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
@@ -8007,7 +8007,7 @@ msgstr "Spelers-Menü"
 
 #: ../../../../src/wlapplication_options.cc:542
 msgid "Toggle Height Heat Map"
-msgstr ""
+msgstr "Höchten-Farvkaart an- of utknipsen"
 
 #: ../../../../src/wlapplication_options.cc:547
 msgid "Toggle Grid"
