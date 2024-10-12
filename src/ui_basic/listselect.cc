@@ -39,6 +39,15 @@ constexpr int kIndentStrength = 20;
 
 namespace UI {
 
+const ListselectLayout ListselectLayout::kPlain =
+   ListselectLayout(ListselectLayout::Checkmark::kNone, false);
+const ListselectLayout ListselectLayout::kDropdown =
+   ListselectLayout(ListselectLayout::Checkmark::kNone, true);
+const ListselectLayout ListselectLayout::kShowCheck =
+   ListselectLayout(ListselectLayout::Checkmark::kSingleSelect, false);
+const ListselectLayout ListselectLayout::kMultiCheck =
+   ListselectLayout(ListselectLayout::Checkmark::kMultiSelect, false);
+
 BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
                                          uint32_t init_entry,
                                          const Image* init_pic,
@@ -100,15 +109,12 @@ BaseListselect::BaseListselect(Panel* const parent,
 
 	scrollbar_.moved.connect([this](int32_t a) { set_scrollpos(a); });
 
-	if (selection_mode_ == ListselectLayout::kShowCheck) {
+	if (selection_mode_.show_check()) {
 		check_pic_ = g_image_cache->get("images/ui_basic/list_selected.png");
-		max_pic_width_ = check_pic_->width();
 		int pic_h = check_pic_->height();
 		if (pic_h > lineheight_) {
 			lineheight_ = pic_h;
 		}
-	} else {
-		max_pic_width_ = 0;
 	}
 	set_can_focus(true);
 	layout();
@@ -128,9 +134,7 @@ inline const UI::TableStyleInfo& BaseListselect::table_style() const {
 	return g_style_manager->table_style(panel_style_);
 }
 inline const UI::PanelStyleInfo* BaseListselect::background_style() const {
-	return selection_mode_ == ListselectLayout::kDropdown ?
-             g_style_manager->dropdown_style(panel_style_) :
-             nullptr;
+	return selection_mode_.dropdown ? g_style_manager->dropdown_style(panel_style_) : nullptr;
 }
 
 /**
@@ -187,7 +191,7 @@ void BaseListselect::add(const std::string& name,
 	layout();
 
 	if (sel) {
-		select(entry_records_.size() - 1);
+		select(entry_records_.size() - 1, true);
 	}
 }
 
@@ -233,11 +237,13 @@ void BaseListselect::set_scrollpos(const int32_t i) {
 /**
  * Change the currently selected entry.
  * If the desired entry is disabled, snap to the nearest enabled entry depending on `snap`.
+ * Checkmark behavior depends on selection_mode_
  *
- * Args: i  the entry to select
- *    snap  whether to go up, down, or do nothing if the entry is disabled
+ * Args: i                  the entry to select
+ *       snap               whether to go up, down, or do nothing if the entry is disabled
+ *       affect_checkmarks  whether this change impacts checkmark state of list entries
  */
-void BaseListselect::select(uint32_t i, SnapSelectionToEnabled snap) {
+void BaseListselect::select(uint32_t i, SnapSelectionToEnabled snap, bool affect_checkmarks) {
 	if (i != no_selection_index() && !empty()) {
 		if (snap != SnapSelectionToEnabled::kNo) {
 			// Step until we find an enabled entry
@@ -274,16 +280,38 @@ void BaseListselect::select(uint32_t i, SnapSelectionToEnabled snap) {
 		}
 	}
 
+	if (selection_mode_.show_check()) {
+		if (selection_mode_.checkmark == ListselectLayout::Checkmark::kMultiSelect) {
+			// independent checkboxes
+			if (affect_checkmarks && i != no_selection_index()) {
+				bool newstate = !entry_records_[i]->checked_;
+				entry_records_[i]->checked_ = newstate;
+				emit_checkmark_changed(entry_records_[i]->entry_, newstate);
+			}
+		} else if (affect_checkmarks || !selection_mode_.dropdown) {
+			// dropdown radio group (require affect_checkmarks to filter out mousemove),
+			// or plain single selection (ignores affect_checkmarks flag)
+			if (i == no_selection_index() || !entry_records_[i]->checked_) {
+				clear_checked(true);
+
+				// clear current selection that is filtered out by Dropdown,
+				// but not if it is about to be re-selected
+				if (linked_dropdown_ != nullptr && linked_dropdown_->is_filtered()) {
+					linked_dropdown_->clear_filtered_out_checkmarks(i);
+				}
+
+				if (i != no_selection_index()) {
+					entry_records_[i]->checked_ = true;
+					emit_checkmark_changed(entry_records_[i]->entry_, true);
+				}
+			}
+		}
+	}
+
 	if (selection_ == i) {
 		return;
 	}
 
-	if (selection_mode_ == ListselectLayout::kShowCheck) {
-		if (selection_ != no_selection_index()) {
-			entry_records_[selection_]->pic = nullptr;
-		}
-		entry_records_[i]->pic = check_pic_;
-	}
 	selection_ = i;
 	scroll_to_selection();
 
@@ -333,13 +361,63 @@ const Image* BaseListselect::get_selected_image() const {
 	return entry_records_[selection_]->pic;
 }
 
+void BaseListselect::clear_checked(bool notify) {
+	assert(selection_mode_.show_check());
+	for (EntryRecord* er : entry_records_) {
+		if (er->checked_) {
+			er->checked_ = false;
+			if (notify) {
+				emit_checkmark_changed(er->entry_, false);
+			}
+		}
+	}
+}
+
+bool BaseListselect::is_checked(uint32_t entry) const {
+	assert(selection_mode_.show_check());
+	for (const EntryRecord* er : entry_records_) {
+		if (er->entry_ == entry) {
+			return er->checked_;
+		}
+	}
+	return false;
+}
+
+bool BaseListselect::set_checked(uint32_t entry, bool newstate, bool notify) {
+	assert(selection_mode_.show_check());
+	auto it = std::find_if(entry_records_.begin(), entry_records_.end(),
+	                       [entry](EntryRecord* er) { return er->entry_ == entry; });
+	if (it != entry_records_.end()) {
+		(*it)->checked_ = newstate;
+		if (notify) {
+			emit_checkmark_changed(entry, newstate);
+		}
+		return true;
+	}
+	return false;
+}
+
+bool BaseListselect::toggle_checked(uint32_t entry, bool notify) {
+	assert(selection_mode_.show_check());
+	auto it = std::find_if(entry_records_.begin(), entry_records_.end(),
+	                       [entry](EntryRecord* er) { return er->entry_ == entry; });
+	if (it != entry_records_.end()) {
+		bool newstate = !(*it)->checked_;
+		(*it)->checked_ = newstate;
+		if (notify) {
+			emit_checkmark_changed(entry, newstate);
+		}
+		return true;
+	}
+	return false;
+}
+
 int BaseListselect::get_lineheight_without_padding() const {
 	return std::max(lineheight_, min_lineheight_);
 }
 
 int BaseListselect::get_lineheight() const {
-	return get_lineheight_without_padding() +
-	       (selection_mode_ == ListselectLayout::kDropdown ? 2 * kMargin : kMargin);
+	return get_lineheight_without_padding() + (selection_mode_.dropdown ? 2 * kMargin : kMargin);
 }
 
 uint32_t BaseListselect::get_eff_w() const {
@@ -374,8 +452,9 @@ int BaseListselect::calculate_desired_width() {
 	}
 
 	const int picw = max_pic_width_ != 0 ? max_pic_width_ + 10 : 0;
+	const int chkw = selection_mode_.show_check() ? check_pic_->width() + 10 : 0;
 	const int old_width = get_w();
-	return txt_width + picw + 8 + old_width - get_eff_w();
+	return txt_width + picw + chkw + 8 + old_width - get_eff_w();
 }
 
 void BaseListselect::layout() {
@@ -386,7 +465,7 @@ void BaseListselect::layout() {
 		scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
 		scrollbar_.set_pagesize(get_h() - 2 * get_lineheight());
 		scrollbar_.set_singlestepsize(get_lineheight());
-		if (selection_mode_ == ListselectLayout::kDropdown) {
+		if (selection_mode_.dropdown) {
 			scrollbar_.set_steps(steps + kMargin);
 		}
 	} else {
@@ -394,7 +473,7 @@ void BaseListselect::layout() {
 		scrollbar_.set_size(0, get_h());
 	}
 	// For dropdowns, autoincrease width
-	if (selection_mode_ == ListselectLayout::kDropdown) {
+	if (selection_mode_.dropdown) {
 		const int new_width = calculate_desired_width();
 		if (new_width > get_w()) {
 			set_size(new_width, get_h());
@@ -408,7 +487,7 @@ Redraw the listselect box
 void BaseListselect::draw(RenderTarget& dst) {
 	// draw text lines
 	int eff_h = get_inner_h();
-	if (selection_mode_ == ListselectLayout::kDropdown) {
+	if (selection_mode_.dropdown) {
 		eff_h -= kMargin;
 	}
 	uint32_t idx = scrollpos_ / get_lineheight();
@@ -418,7 +497,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 		draw_background(dst, *s);
 	}
 
-	if (selection_mode_ == ListselectLayout::kDropdown) {
+	if (selection_mode_.dropdown) {
 		RGBAColor black(0, 0, 0, 255);
 		//  top edge
 		dst.brighten_rect(Recti(0, 0, get_w(), 2), BUTTON_EDGE_BRIGHT_FACTOR);
@@ -436,11 +515,12 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 	const int lineheight_unpadded = get_lineheight_without_padding();
 	uint32_t w_reduction = 2;
-	if (selection_mode_ == ListselectLayout::kDropdown) {
+	if (selection_mode_.dropdown) {
 		w_reduction = scrollbar_.is_enabled() ? 4 : 5;
 	}
 	assert(w_reduction <= get_eff_w());
 	uint32_t maxw = get_eff_w() - w_reduction;
+	int chkw = selection_mode_.show_check() ? check_pic_->width() + 10 : 0;
 	int picw = max_pic_width_ != 0 ? max_pic_width_ + 10 : 0;
 
 	while (idx < entry_records_.size()) {
@@ -455,7 +535,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 			break;
 		}
 
-		Vector2i point(selection_mode_ == ListselectLayout::kDropdown ? 3 : 1, y);
+		Vector2i point(selection_mode_.dropdown ? 3 : 1, y);
 
 		// Highlight the current selected entry
 		if (idx == selection_ && entry_records_.at(idx)->enable) {
@@ -474,14 +554,24 @@ void BaseListselect::draw(RenderTarget& dst) {
 			}
 		}
 
+		// Draw checkmark
+		if (er.checked_) {
+			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ?
+                              get_eff_w() - check_pic_->width() - 1 - kIndentStrength * er.indent :
+                              kIndentStrength * er.indent + 1,
+			                  y + (lineheight_unpadded - check_pic_->height()) / 2),
+			         check_pic_);
+		}
+
 		// Now draw pictures
 		if (er.pic != nullptr) {
 			dst.blit(
-			   Vector2i(UI::g_fh->fontset()->is_rtl() ?
-                        get_eff_w() - er.pic->width() - (max_pic_width_ - er.pic->width()) / 2 - 1 -
-			                  kIndentStrength * er.indent :
-                        kIndentStrength * er.indent + (max_pic_width_ - er.pic->width()) / 2 + 1,
-			            y + (lineheight_unpadded - er.pic->height()) / 2),
+			   Vector2i(
+			      UI::g_fh->fontset()->is_rtl() ?
+                  get_eff_w() - chkw - er.pic->width() - (max_pic_width_ - er.pic->width()) / 2 -
+			            1 - kIndentStrength * er.indent :
+                  chkw + kIndentStrength * er.indent + (max_pic_width_ - er.pic->width()) / 2 + 1,
+			      y + (lineheight_unpadded - er.pic->height()) / 2),
 			   er.pic);
 		}
 
@@ -503,14 +593,14 @@ void BaseListselect::draw(RenderTarget& dst) {
 		Vector2i hotkey_point(point);
 		if (UI::g_fh->fontset()->is_rtl()) {
 			if (er.name_alignment == UI::Align::kRight) {
-				text_point.x = maxw - widest_text_ - picw;
+				text_point.x = maxw - widest_text_ - picw - chkw;
 			} else if (widest_hotkey_ > 0) {
 				text_point.x += widest_hotkey_ + kHotkeyGap;
 			}
 			text_point.x -= kIndentStrength * er.indent;
 		} else {
 			hotkey_point.x = maxw - widest_hotkey_;
-			text_point.x += picw;
+			text_point.x += picw + chkw;
 			text_point.x += kIndentStrength * er.indent;
 		}
 
@@ -590,7 +680,7 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t /*x*/, int32_t
 
 		y = (y + scrollpos_) / get_lineheight();
 		if (y < 0 || static_cast<int32_t>(entry_records_.size()) <= y) {
-			if (selection_mode_ == ListselectLayout::kDropdown) {
+			if (selection_mode_.dropdown) {
 				set_visible(false);
 				if (linked_dropdown_ != nullptr) {
 					linked_dropdown_->disable_textinput();
@@ -600,7 +690,7 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t /*x*/, int32_t
 			return false;
 		}
 		play_click();
-		select(y);
+		select(y, true);
 		clicked();
 
 		if  //  check if doubleclicked
@@ -623,7 +713,7 @@ bool BaseListselect::handle_mousemove(
 		set_tooltip("");
 		return Panel::handle_mousemove(state, x, y, xdiff, ydiff);
 	}
-	if (selection_mode_ == ListselectLayout::kDropdown) {
+	if (selection_mode_.dropdown) {
 		select(y);
 	}
 	set_tooltip(entry_records_.at(y)->tooltip);
@@ -632,21 +722,13 @@ bool BaseListselect::handle_mousemove(
 
 bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
-		switch (code.sym) {
-		case SDLK_BACKSPACE:
-			if (linked_dropdown_ != nullptr) {
-				linked_dropdown_->delete_last_of_filter();
+		if ((code.mod & KMOD_CTRL) == 0 && code.sym == SDLK_RETURN) {
+			if (has_selection() && selection_mode_ == ListselectLayout::kMultiCheck) {
+				// checkmark toggling for non-dropdown-related multi-select enabled listselect
+				// (handled in dropdown.cc for dropdowns)
+				select(selection_index(), true);
 				return true;
 			}
-			return UI::Panel::handle_key(down, code);
-		case SDLK_ESCAPE:
-		case SDLK_RETURN:
-			if (linked_dropdown_ != nullptr && (code.mod & KMOD_CTRL) == 0) {
-				return linked_dropdown_->handle_key(down, code);
-			}
-			return UI::Panel::handle_key(down, code);
-		default:
-			break;
 		}
 
 		bool handle = true;

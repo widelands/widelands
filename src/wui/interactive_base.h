@@ -137,7 +137,7 @@ public:
 	// Returns true if the buildhelp is currently displayed.
 	bool buildhelp() const;
 
-	// Sets if the buildhelp should be displayed and then calls rebuild_showhide_menu
+	// Sets if the buildhelp should be displayed
 	void show_buildhelp(bool t);
 
 	/**
@@ -170,7 +170,7 @@ public:
 	uint32_t get_display_flags() const;
 	void set_display_flags(uint32_t flags);
 	bool get_display_flag(uint32_t flag) const;
-	void set_display_flag(uint32_t flag, bool on);
+	void set_display_flag(uint32_t flag, bool on, bool update = true);
 
 	//  road building
 	bool in_road_building_mode() const {
@@ -201,8 +201,6 @@ public:
 
 	void toggle_minimap();
 	void toggle_quicknav();
-	// Toggles the buildhelp and calls rebuild_showhide_menu
-	void toggle_buildhelp();
 
 	QuickNavigation& quick_navigation() {
 		return quick_navigation_;
@@ -404,8 +402,8 @@ private:
 	void cmd_map_object(const std::vector<std::string>& args);
 	void cmd_lua(const std::vector<std::string>& args) const;
 
-	// Rebuilds the subclass' showhidemenu_ according to current map settings
-	virtual void rebuild_showhide_menu() = 0;
+	// Updates checkmark states of the subclass' showhidemenu_
+	virtual void update_showhide_menu() = 0;
 
 	struct SelData {
 		explicit SelData(const bool Freeze = false,

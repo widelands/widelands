@@ -81,10 +81,10 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                    /** TRANSLATORS: Title for a menu button in the game. This menu will show/hide
                       building spaces, census, status, etc. */
                    _("Show / Hide"),
-                   UI::DropdownType::kPictorialMenu,
+                   UI::DropdownType::kPictorialToggles,
                    UI::PanelStyle::kWui,
                    UI::ButtonStyle::kWuiPrimary,
-                   [this](ShowHideEntry t) { showhide_menu_selected(t); }),
+                   [this](ShowHideEntry t) { showhidemenu_.toggle_checked(t, true); }),
      grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png")),
      special_coords_marker_pic_(g_image_cache->get("images/wui/overlays/special.png")),
      pause_on_inactivity_(get_config_int("pause_game_on_inactivity", 0) * 60 * 1000),
@@ -258,82 +258,79 @@ void InteractiveGameBase::add_showhide_menu() {
 	showhidemenu_.set_image(g_image_cache->get("images/wui/menus/showhide.png"));
 	toolbar()->add(&showhidemenu_);
 
-	rebuild_showhide_menu();
-	showhidemenu_.selected.connect([this] { showhide_menu_selected(showhidemenu_.get_selected()); });
+	build_showhide_menu();
+	showhidemenu_.checkmark_changed.connect(
+	   [this](ShowHideEntry entry, bool checked) { showhide_menu_selected(entry, checked); });
 }
 
-void InteractiveGameBase::rebuild_showhide_menu() {
-	const ShowHideEntry last_selection =
-	   showhidemenu_.has_selection() ? showhidemenu_.get_selected() : ShowHideEntry::kBuildingSpaces;
-	showhidemenu_.clear();
+void InteractiveGameBase::update_showhide_menu() {
+	showhidemenu_.set_checked(ShowHideEntry::kBuildingSpaces, buildhelp(), false);
+	showhidemenu_.set_checked(ShowHideEntry::kCensus, get_display_flag(dfShowCensus), false);
+	showhidemenu_.set_checked(ShowHideEntry::kStatistics, get_display_flag(dfShowStatistics), false);
+	showhidemenu_.set_checked(
+	   ShowHideEntry::kSoldierLevels, get_display_flag(dfShowSoldierLevels), false);
+	showhidemenu_.set_checked(ShowHideEntry::kBuildings, get_display_flag(dfShowBuildings), false);
+}
+
+void InteractiveGameBase::build_showhide_menu() {
 	/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether building spaces are
 	 * shown */
-	showhidemenu_.add(buildhelp() ? _("Hide Building Spaces") : _("Show Building Spaces"),
-	                  ShowHideEntry::kBuildingSpaces,
-	                  g_image_cache->get("images/wui/menus/toggle_buildhelp.png"), false, "",
+	showhidemenu_.add(_("Show Building Spaces"), ShowHideEntry::kBuildingSpaces,
+	                  g_image_cache->get("images/wui/menus/toggle_buildhelp.png"), buildhelp(), "",
 	                  shortcut_string_for(KeyboardShortcut::kCommonBuildhelp, false));
 
 	/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether building names are shown
 	 */
-	showhidemenu_.add(get_display_flag(dfShowCensus) ? _("Hide Census") : _("Show Census"),
-	                  ShowHideEntry::kCensus,
-	                  g_image_cache->get("images/wui/menus/toggle_census.png"), false, "",
+	showhidemenu_.add(_("Show Census"), ShowHideEntry::kCensus,
+	                  g_image_cache->get("images/wui/menus/toggle_census.png"),
+	                  get_display_flag(dfShowCensus), "",
 	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideCensus, false));
 
-	showhidemenu_.add(get_display_flag(dfShowStatistics) ?
-                         /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-                          * building status labels are shown */
-                         _("Hide Status") :
-                         _("Show Status"),
-	                  ShowHideEntry::kStatistics,
-	                  g_image_cache->get("images/wui/menus/toggle_statistics.png"), false, "",
+	/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether building status labels
+	 * are shown */
+	showhidemenu_.add(_("Show Status"), ShowHideEntry::kStatistics,
+	                  g_image_cache->get("images/wui/menus/toggle_statistics.png"),
+	                  get_display_flag(dfShowStatistics), "",
 	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideStats, false));
 
-	showhidemenu_.add(get_display_flag(dfShowSoldierLevels) ?
-                         /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-                          * level information is shown above soldiers' heads */
-                         _("Hide Soldier Levels") :
-                         _("Show Soldier Levels"),
-	                  ShowHideEntry::kSoldierLevels,
-	                  g_image_cache->get("images/wui/menus/toggle_soldier_levels.png"), false, "",
+	/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether level information is
+	 * shown above soldiers' heads */
+	showhidemenu_.add(_("Show Soldier Levels"), ShowHideEntry::kSoldierLevels,
+	                  g_image_cache->get("images/wui/menus/toggle_soldier_levels.png"),
+	                  get_display_flag(dfShowSoldierLevels), "",
 	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideSoldiers, false));
 
-	showhidemenu_.add(get_display_flag(dfShowBuildings) ?
-                         /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-                          * buildings are greyed out */
-                         _("Hide Buildings") :
-                         _("Show Buildings"),
-	                  ShowHideEntry::kBuildings,
-	                  g_image_cache->get("images/wui/stats/genstats_nrbuildings.png"), false, "",
+	/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether buildings are greyed out
+	 */
+	showhidemenu_.add(_("Show Buildings"), ShowHideEntry::kBuildings,
+	                  g_image_cache->get("images/wui/stats/genstats_nrbuildings.png"),
+	                  get_display_flag(dfShowBuildings), "",
 	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideBuildings, false));
-
-	showhidemenu_.select(last_selection);
 }
 
-void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
+void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry, bool checked) {
 	switch (entry) {
 	case ShowHideEntry::kBuildingSpaces: {
-		toggle_buildhelp();
+		set_display_flag(dfShowBuildhelp, checked, false);
 	} break;
 	case ShowHideEntry::kCensus: {
-		set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
+		set_display_flag(dfShowCensus, checked, false);
 	} break;
 	case ShowHideEntry::kStatistics: {
-		set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
+		set_display_flag(dfShowStatistics, checked, false);
 	} break;
 	case ShowHideEntry::kSoldierLevels: {
-		set_display_flag(dfShowSoldierLevels, !get_display_flag(dfShowSoldierLevels));
+		set_display_flag(dfShowSoldierLevels, checked, false);
 	} break;
 	case ShowHideEntry::kBuildings: {
-		set_display_flag(dfShowBuildings, !get_display_flag(dfShowBuildings));
+		set_display_flag(dfShowBuildings, checked, false);
 	} break;
 	case ShowHideEntry::kWorkareaOverlap: {
-		set_display_flag(dfShowWorkareaOverlap, !get_display_flag(dfShowWorkareaOverlap));
+		set_display_flag(dfShowWorkareaOverlap, checked, false);
 	} break;
 	default:
 		NEVER_HERE();
 	}
-	showhidemenu_.toggle();
 }
 
 void InteractiveGameBase::add_gamespeed_menu() {
@@ -491,21 +488,24 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 		increase_gamespeed(kSpeedFast);
 		return true;
 	}
+	if (matches_shortcut(KeyboardShortcut::kCommonBuildhelp, code)) {
+		showhidemenu_.toggle_checked(ShowHideEntry::kBuildingSpaces, true);
+		return true;
+	}
 	if (matches_shortcut(KeyboardShortcut::kInGameShowhideCensus, code)) {
-		set_display_flag(
-		   InteractiveBase::dfShowCensus, !get_display_flag(InteractiveBase::dfShowCensus));
+		showhidemenu_.toggle_checked(ShowHideEntry::kCensus, true);
 		return true;
 	}
 	if (matches_shortcut(KeyboardShortcut::kInGameShowhideStats, code)) {
-		set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
+		showhidemenu_.toggle_checked(ShowHideEntry::kStatistics, true);
 		return true;
 	}
 	if (matches_shortcut(KeyboardShortcut::kInGameShowhideSoldiers, code)) {
-		set_display_flag(dfShowSoldierLevels, !get_display_flag(dfShowSoldierLevels));
+		showhidemenu_.toggle_checked(ShowHideEntry::kSoldierLevels, true);
 		return true;
 	}
 	if (matches_shortcut(KeyboardShortcut::kInGameShowhideBuildings, code)) {
-		set_display_flag(dfShowBuildings, !get_display_flag(dfShowBuildings));
+		showhidemenu_.toggle_checked(ShowHideEntry::kBuildings, true);
 		return true;
 	}
 	if (matches_shortcut(KeyboardShortcut::kInGameStatsGeneral, code)) {

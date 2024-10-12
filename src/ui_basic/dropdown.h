@@ -47,13 +47,39 @@ struct NoteDropdown {
 	}
 };
 
-/// The narrow textual dropdown omits the extra push button.
-/// Use kPictorialMenu if you want to trigger an action without changing the menu button.
-/// kTextual: Text of selected entry and drop-down arrow
-/// kTextualNarrow: Text of selected entry
-/// kPictorial: Icon of the selected entry
-/// kPictorialMenu: Displays \c label when not enough space (?)
-enum class DropdownType { kTextual, kTextualNarrow, kPictorial, kPictorialMenu, kTextualMenu };
+struct DropdownType {
+	enum class Display { kShowText, kShowIcon };
+	enum class Format {
+		kTraditional,  // selected entry display separate from drop-down arrow push button
+		kButtonOnly,   // selected entry displayed on button, no separate drop-down arrow
+		kMenu,  // selected entry not displayed; use to trigger actions without changing the button
+		        // text or icon
+		kCheckmark,   // like kMenu, but with checkmark next to the selected entry in the dropdown
+		kMultiSelect  // like kCheckmark, but checkmark of each entry is toggled independently
+	};
+
+	Display display;
+	Format format;
+
+	DropdownType(Display d, Format f) : display(d), format(f) {
+		assert(!(d == Display::kShowIcon && f == Format::kTraditional));  // pointless combination
+	}
+
+	bool operator==(const DropdownType& other) const {
+		return (display == other.display) && (format == other.format);
+	}
+
+	// ----- PRESETS -----
+	static const DropdownType kTextual;            // Display::kShowText, Format::kTraditional
+	static const DropdownType kTextualNarrow;      // Display::kShowText, Format::kButtonOnly
+	static const DropdownType kPictorial;          // Display::kShowIcon, Format::kButtonOnly
+	static const DropdownType kTextualMenu;        // Display::kShowText, Format::kMenu
+	static const DropdownType kPictorialMenu;      // Display::kShowIcon, Format::kMenu
+	static const DropdownType kTextualRadioGrp;    // Display::kShowText, Format::kCheckmark
+	static const DropdownType kPictorialRadioGrp;  // Display::kShowIcon, Format::kCheckmark
+	static const DropdownType kTextualToggles;     // Display::kShowText, Format::kMultiSelect
+	static const DropdownType kPictorialToggles;   // Display::kShowIcon, Format::kMultiSelect
+};
 
 /// Implementation for a dropdown menu that lets the user select a value.
 class BaseDropdown : public Panel {
@@ -64,8 +90,9 @@ protected:
 	/// \param y                  the y-position within 'parent'
 	/// \param list_w             the dropdown's width
 	/// \param max_list_items     the maximum number of items shown in the list before it starts
-	/// using a scrollbar \param button_dimension   the width of the push button in textual
-	/// dropdowns. For pictorial dropdowns, this is both the width and the height of the button.
+	///                           using a scrollbar
+	/// \param button_dimension   the width of the push button in textual dropdowns. For pictorial
+	///                           dropdowns, this is both the width and the height of the button.
 	/// \param label              a label to prefix to the selected entry on the display button.
 	/// \param type               whether this is a textual or pictorial dropdown
 	/// \param style              the style used for buttons and background
@@ -115,6 +142,11 @@ public:
 
 	/// Which visual style to use for disabled pictorial dropdowns.
 	void set_disable_style(UI::ButtonDisableStyle disable_style);
+
+	/// Accessor for dropdown type.
+	DropdownType type() const {
+		return type_;
+	}
 
 	/// Whether the dropdown has no elements to select.
 	bool empty() const {
@@ -175,12 +207,14 @@ public:
 
 	std::string get_filter_text();
 
+	virtual void clear_filtered_out_checkmarks(uint32_t) = 0;
+
 protected:
 	/// Add an element to the list
 	/// \param name         the display name of the entry
 	/// \param value        the index of the entry
 	/// \param pic          an image to illustrate the entry. Can be nullptr for textual dropdowns.
-	/// \param select_this  whether this element should be selected
+	/// \param select_this  whether this element should be selected (checked state for MultiSelect)
 	/// \param tooltip_text a tooltip for this entry
 	/// \param hotkey       a hotkey tip if any
 	///
@@ -190,7 +224,9 @@ protected:
 	         const Image* pic,
 	         bool select_this,
 	         const std::string& tooltip_text,
-	         const std::string& hotkey);
+	         const std::string& hotkey,
+	         unsigned indent = 0,
+	         bool enable = true);
 
 	/// \return the index of the selected element
 	uint32_t get_selected() const;
@@ -201,6 +237,15 @@ protected:
 	/// Removes all elements from the list.
 	void clear();
 
+	/// Connect to checkmark_changed signal of underlying listselect
+	void connect_checkmark_changed(std::function<void(uint32_t, bool)> callback) const;
+
+	/// manipulate checkmarks in entries (requires Format::kMultiSelect)
+	void clear_checked(bool notify = false);
+	bool is_checked(uint32_t entry) const;
+	bool set_checked(uint32_t entry, bool newstate, bool notify = false);
+	bool toggle_checked(uint32_t entry, bool notify = false);
+
 	/// Automatically collapses the list if the mouse gets too far away from the dropdown, or if it
 	/// loses focus.
 	void think() override;
@@ -210,6 +255,7 @@ protected:
 	std::vector<Recti> focus_overlay_rects() override;
 
 	std::string current_filter_;
+	bool no_filter_matches_{false};
 
 private:
 	static void layout_if_alive(int);
@@ -218,9 +264,9 @@ private:
 	/// Updates the buttons
 	void update();
 
-	/// Updates the title and tooltip of the display button, closes the dropdown and triggers a
-	/// 'selected' signal.
-	void set_value();
+	/// Updates the title and tooltip of the display button, closes the dropdown (unless
+	/// keep_open is set) and triggers a 'selected' signal.
+	void set_value(bool keep_open = false);
 	/// Toggles the dropdown list on and off and sends a notification if the list is visible
 	/// afterwards.
 	void toggle_list();
@@ -258,7 +304,11 @@ private:
 	std::string label_;
 	std::string tooltip_;
 	uint32_t current_selection_;
+
+protected:
 	DropdownType type_;
+
+private:
 	bool is_enabled_{true};
 	ButtonStyle button_style_;
 	bool autoexpand_display_button_{false};
@@ -274,6 +324,7 @@ public:
 		const Image* img;
 		const std::string tooltip;
 		const std::string hotkey;
+		bool checked{false};  // checked state
 	};
 
 	using HotkeyFunction = std::function<void(Entry)>;
@@ -315,11 +366,29 @@ public:
 	                  style,
 	                  button_style),
 	     hotkey_fn_(hotkey_fn) {
+		if (type_.format >= DropdownType::Format::kCheckmark) {
+			// Adapt checkmark_changed signal from underlying listselect
+			BaseDropdown::connect_checkmark_changed([this](uint32_t idx, bool newstate) {
+				assert(!no_filter_matches_);  // entry is disabled, should not respond to input
+				Entry entry = *filtered_entries[idx];
+
+				// update state stored in unfiltered
+				auto it = std::find_if(unfiltered_entries.begin(), unfiltered_entries.end(),
+				                       [entry](auto& e) { return e.value == entry; });
+				assert(it != unfiltered_entries.end());
+				if (it->checked != newstate) {
+					it->checked = newstate;
+					checkmark_changed(entry, newstate);
+				}
+			});
+		}
 	}
 	~Dropdown() override {
 		filtered_entries.clear();
 		unfiltered_entries.clear();
 	}
+
+	Notifications::Signal<Entry, bool> checkmark_changed;
 
 	[[nodiscard]] uint32_t unfiltered_size() const {
 		return unfiltered_entries.size();
@@ -330,9 +399,33 @@ public:
 			return;
 		}
 		current_filter_.clear();
+		no_filter_matches_ = false;
 
 		restore_filtered_list();
-		select(selected_entry_);
+		// re-select the selected entry after clear & repopulate; excludes
+		// MultiSelect, which restores checkmark state during repopulation
+		if (type_.format != DropdownType::Format::kMultiSelect) {
+			select(selected_entry_);
+		}
+	}
+
+	void clear_filtered_out_checkmarks(uint32_t sel) override {
+		assert(type_.format == DropdownType::Format::kCheckmark);
+		if (no_filter_matches_) {
+			return;
+		}
+
+		Entry sel_entry{};
+		if (sel != BaseListselect::no_selection_index()) {
+			sel_entry = *filtered_entries[sel];
+		}
+
+		auto it = std::find_if(unfiltered_entries.begin(), unfiltered_entries.end(),
+		                       [sel_entry](auto& x) { return x.checked && x.value != sel_entry; });
+		if (it != unfiltered_entries.end()) {
+			it->checked = false;
+			checkmark_changed(it->value, false);
+		}
 	}
 
 	bool handle_textinput(const std::string& input_text) override {
@@ -350,7 +443,7 @@ public:
 	/// \param value        the value for the entry
 	/// \param pic          an image to illustrate the entry. Can be nullptr in textual dropdowns
 	/// only.
-	/// \param select_this  whether this element should be selected
+	/// \param select_this  whether this element should be selected (also: checked state)
 	/// \param tooltip_text a tooltip for this entry
 	/// \param hotkey       a hotkey tip if any
 	void add(const std::string& name,
@@ -360,8 +453,10 @@ public:
 	         const std::string& tooltip_text = std::string(),
 	         const std::string& hotkey = std::string()) {
 		filtered_entries.push_back(std::unique_ptr<Entry>(new Entry(value)));
-		unfiltered_entries.push_back({name, value, pic, tooltip_text, hotkey});
-		BaseDropdown::add(name, size(), pic, select_this, tooltip_text, hotkey);
+		unfiltered_entries.push_back(
+		   {name, value, pic, tooltip_text, hotkey,
+		    select_this && (type_.format >= DropdownType::Format::kCheckmark)});
+		BaseDropdown::add(name, size(), pic, select_this, tooltip_text, hotkey, 0, true);
 	}
 
 	/// \return the selected element
@@ -392,6 +487,83 @@ public:
 		unfiltered_entries.clear();
 	}
 
+	void clear_checked(bool notify) {
+		BaseDropdown::clear_checked(notify);
+		// update state stored in unfiltered: accounts for
+		// omissions due to either not in filtered list or notify == false
+		for (auto& ee : unfiltered_entries) {
+			if (ee.checked) {
+				ee.checked = false;
+				if (notify) {
+					checkmark_changed(ee.value, false);
+				}
+			}
+		}
+	}
+
+	bool is_checked(const Entry& entry) const {
+		assert(type_.format == DropdownType::Format::kMultiSelect);
+		auto it = std::find_if(unfiltered_entries.begin(), unfiltered_entries.end(),
+		                       [entry](auto& x) { return x.value == entry; });
+		if (it != unfiltered_entries.end()) {
+			return it->checked;
+		}
+		return false;
+	}
+
+	bool set_checked(const Entry& entry, bool newstate, bool notify = false) {
+		assert(type_.format == DropdownType::Format::kMultiSelect);
+		bool found = false;
+		bool result = false;
+		for (uint32_t i = 0; i < filtered_entries.size(); ++i) {
+			if (entry == *filtered_entries[i]) {
+				found = true;
+				result = BaseDropdown::set_checked(i, newstate, notify);
+			}
+		}
+		if (!found || (!notify && result)) {
+			// update state stored in unfiltered: accounts for
+			// omissions due to either not in filtered list or notify == false
+			auto it = std::find_if(unfiltered_entries.begin(), unfiltered_entries.end(),
+			                       [entry](auto& x) { return x.value == entry; });
+			if (it != unfiltered_entries.end()) {
+				result |= !found;
+				bool oldstate = it->checked;
+				it->checked = newstate;
+				if (notify && oldstate != newstate) {
+					checkmark_changed(entry, newstate);
+				}
+			}
+		}
+		return result;
+	}
+
+	bool toggle_checked(const Entry& entry, bool notify = false) {
+		assert(type_.format == DropdownType::Format::kMultiSelect);
+		bool found = false;
+		bool result = false;
+		for (uint32_t i = 0; i < filtered_entries.size(); ++i) {
+			if (entry == *filtered_entries[i]) {
+				found = true;
+				result = BaseDropdown::toggle_checked(i, notify);
+			}
+		}
+		if (!found || (!notify && result)) {
+			// update state stored in unfiltered: accounts for
+			// omissions due to either not in filtered list or notify == false
+			auto it = std::find_if(unfiltered_entries.begin(), unfiltered_entries.end(),
+			                       [entry](auto& x) { return x.value == entry; });
+			if (it != unfiltered_entries.end()) {
+				result |= !found;
+				it->checked = !it->checked;
+				if (notify) {
+					checkmark_changed(entry, it->checked);
+				}
+			}
+		}
+		return result;
+	}
+
 private:
 	void save_selected_entry(uint32_t index) override {
 		selected_entry_ = index < filtered_entries.size() ? *filtered_entries[index] : Entry{};
@@ -403,7 +575,9 @@ private:
 	void restore_filtered_list() {
 		clear_filtered_list();
 		for (auto& ee : unfiltered_entries) {
-			add_to_filtered_list(ee.name, ee.value, ee.img, false, ee.tooltip, ee.hotkey);
+			add_to_filtered_list(ee.name, ee.value, ee.img,
+			                     ee.checked && type_.format == DropdownType::Format::kMultiSelect,
+			                     ee.tooltip, ee.hotkey);
 		}
 	}
 
@@ -415,7 +589,7 @@ private:
 	                          const std::string& tooltip_text = std::string(),
 	                          const std::string& hotkey = std::string()) {
 		filtered_entries.push_back(std::unique_ptr<Entry>(new Entry(value)));
-		BaseDropdown::add(name, size(), pic, select_this, tooltip_text, hotkey);
+		BaseDropdown::add(name, size(), pic, select_this, tooltip_text, hotkey, 0, true);
 	}
 	bool check_hotkey_match(const std::string& input_text) {
 		for (auto& x : unfiltered_entries) {
@@ -462,29 +636,38 @@ private:
 		clear_filtered_list();
 		add_matching_entries();
 
-		if (filtered_entries.empty()) {
+		no_filter_matches_ = filtered_entries.empty();
+		if (no_filter_matches_) {
 			add_no_match_entry();
 		}
+
+		// highlight currently selected entry if it is in the filtered list
+		if (type_.format < DropdownType::Format::kMenu ||
+		    type_.format == DropdownType::Format::kCheckmark) {
+			select(selected_entry_);
+		}
+
 		// force list to stay open even if mouse is now away due to smaller
 		// dropdown list because of applied filter
 		set_list_visibility(true);
 	}
 
 	void add_no_match_entry() {
-		// re-add initially selected entry with adapted texts to inform user
-		for (auto& x : unfiltered_entries) {
-			if (x.value == selected_entry_) {
-				const Image* empty_icon =
-				   x.img == nullptr ? nullptr : g_image_cache->get("images/wui/editor/no_ware.png");
-				add_to_filtered_list("", x.value, empty_icon, false, _("No matches"));
-			}
-		}
+		const Image* empty_icon = (type_.display == DropdownType::Display::kShowText) ?
+                                   nullptr :
+                                   g_image_cache->get("images/wui/editor/no_ware.png");
+		BaseDropdown::add(
+		   _("No matches"), 0, empty_icon, false,
+		   /** TRANSLATORS: Tooltip shown when filtering a dropdown menu yields no matches. */
+		   "No dropdown entries matched the given filter", std::string(), 0, false);
 	}
 
 	void add_matching_entries() {
 		for (auto& x : unfiltered_entries) {
 			if (to_lower(x.name).find(current_filter_) != std::string::npos) {
-				add_to_filtered_list(x.name, x.value, x.img, false, x.tooltip, x.hotkey);
+				add_to_filtered_list(x.name, x.value, x.img,
+				                     x.checked && type_.format == DropdownType::Format::kMultiSelect,
+				                     x.tooltip, x.hotkey);
 			}
 		}
 	}
