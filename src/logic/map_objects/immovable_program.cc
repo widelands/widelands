@@ -76,13 +76,13 @@ For general information about the format, see :ref:`map_object_programs_syntax`.
 Available actions are:
 
 - `animate`_
+- `playsound`_
+- `script`_
 - `transform`_
 - `grow`_
 - `remove`_
 - `seed`_
 - `construct`_
-- `playsound`_
-- `script`_
 */
 
 ImmovableProgram::ImmovableProgram(const std::string& init_name,
