@@ -144,15 +144,15 @@ msgstr "Ĉasisto povas ĉasi bestojn, dum ĉasgardisto malhelpas ilian formorton
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
-msgstr ""
+msgstr "Tio estas nur la unua ekzemplo de varo, kiu devas esti rafinita antaŭ ol ĝi estos uzata en dua konstruaĵo  – aliaj sekvos."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:68
 msgid "Bake bread"
-msgstr ""
+msgstr "Baki panon."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:70
 msgid "Build a well, a farm and a bakery"
-msgstr ""
+msgstr "Konstruu puton, bienon kaj bakejon."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:71
 msgid ""
@@ -161,7 +161,7 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr ""
+msgstr "Aliaj manieroj produkti manĝaĵon – diversaj specoj de manĝaĵo – estas fiŝkaptistoj kaj bienoj. La tritiko de la bienoj devas esti prilaborata kun akvo en bakejo antaŭ ol ĝi fariĝos manĝebla. Vi povas akiri akvon per konstruado de puto. Por plej bona produktiveco, konstruu ĝin en loko, kie viaj geologoj trovis akvofonton."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
