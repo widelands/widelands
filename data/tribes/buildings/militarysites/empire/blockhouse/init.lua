@@ -12,7 +12,7 @@ wl.Descriptions():new_militarysite_type {
    enhancement = {
       name = "empire_sentry",
       enhancement_cost = {
-         planks = 1,
+         log = 1,
          granite = 1
       },
       enhancement_return_on_dismantle = {
@@ -21,7 +21,6 @@ wl.Descriptions():new_militarysite_type {
    },
 
    buildcost = {
-      log = 1,
       planks = 2
    },
    return_on_dismantle = {
@@ -42,7 +41,7 @@ wl.Descriptions():new_militarysite_type {
 
    max_soldiers = 1,
    heal_per_second = 60, -- very low -> smallest building
-   conquers = 6,
+   conquers = 5,
    prefer_heroes = false,
 
    messages = {
