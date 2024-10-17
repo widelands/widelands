@@ -66,10 +66,10 @@ process_dylibs() {
 	    cp "$dylib" "$dest"
 	    chmod 644 "$dest"
 	    install_name_tool -id "@rpath/$name" "$dest"
-	    process_dylibs "$(list_dylibs $dylib)" "$dest"
+	    echo "Adding $dylib"
 	fi
+    process_dylibs "$(list_dylibs $dest)" "$dest"
 	install_name_tool -change "$dylib" "@rpath/$name" "$file"
-	echo "Adding $dylib"
     done
 }
 
