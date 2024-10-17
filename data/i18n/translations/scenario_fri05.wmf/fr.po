@@ -621,6 +621,12 @@ msgid ""
 "expensive, and we will need to mark out a large amount of space purely to "
 "produce wares to sell."
 msgstr ""
+"A tout moment, nous devons garder à l’œil notre approvisionnement en biens "
+"commerciaux. Je vais demander à Ocke Ketelsen de n'acheter que les biens "
+"strictement nécessaires à notre économie afin que nous ne gaspillions pas de"
+" marchandises, mais nous devrons nous assurer d'en fournir les biens. Ces "
+"routes commerciales sont toutes très coûteuses, et nous devons réserver de "
+"grands espaces dédiés à produire ces biens à commercer."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:266
 msgid "Diking"
@@ -635,6 +641,8 @@ msgid ""
 " may need to take some chances, and use superior tactics to compensate for "
 "this disadvantage."
 msgstr ""
+"Le manque d'espace sur les Terres d' Helgo est toujours un problème.\n"
+"Les terres seraient suffisantes pour entraîner un nombre décent de soldats en un délai raisonnable, mais entraîner des armées prendrait l'éternité ! Nous allons avoir besoin de chance, et user de tactiques supérieures pour compenser ce désavantage."
 
 #. TRANSLATORS: Claus Lembeck – Diking
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:271
@@ -646,6 +654,13 @@ msgid ""
 "in the east, or if we are to be truly bold we could dike around the whole "
 "western coast of the island to attack the enemy from two sides at once!"
 msgstr ""
+"Cependant, si vous préférez la jouer sûre, n'oubliez pas que vous pouvez "
+"simplement élargir l'île. Comme nous avons un approvisionnement constant en "
+"bois, nous pouvons construire des digues et des brise-vagues pour gagner de "
+"l'espace sur la mer. Quand nous serons prêt à attaquer, nous pourrons même "
+"utiliser ces voies pour contourner le goulot d'étranglement à l'Est, et si "
+"l'audace nous prend nous pourrions même contourner la digue ouest de l'île "
+"afin d'attaquer l'ennemi des deux cotés en même temps !"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:277
 msgid "Good luck!"
@@ -675,6 +690,9 @@ msgid ""
 "time before we have a steady supply of logs, but the immediate problem has "
 "been averted."
 msgstr ""
+"Nos sylviculteurs et bûcherons ont entreprit leur travail. Cela prendra un "
+"peu de temps avant d'avoir un approvisionnement de bois régulier, mais le "
+"problème immédiat vient d'être réglé."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:290
 msgid "Pass Secured"
@@ -708,6 +726,10 @@ msgid ""
 " forget to always keep a close eye on the ware exchange between the Lowlands"
 " and the Uplands and keep it to a minimum so as to avoid jams on the roads."
 msgstr ""
+"Les Hautes-Terres sont transformées en vrai centre pour notre économie. "
+"N'oublions pas de garder l’œil sur les échanges de marchandises entre les "
+"Hautes-Terres et les Basses-Terres et gardez les au minimum pour ne pas "
+"saturer les routes."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:304
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:314
@@ -731,6 +753,10 @@ msgid ""
 "beaten them by ourselves. Our town did not even sustain any major damage – "
 "on the contrary, you have expanded it far beyond its former bounds."
 msgstr ""
+"Ils sont vaincus ! Merci, merci pour votre aide. Nous n'y serions jamais "
+"arrivé par nous mêmes. Notre ville n'a même pas subi de dommage majeur – au "
+"contraire, vous avez étendu son territoire bien au delà de ses anciennes "
+"frontières."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:310
@@ -752,6 +778,8 @@ msgid ""
 "You are very welcome, Ocke Ketelsen. Do not belittle your own part in this "
 "victory though, for we could not have achieved this by ourselves."
 msgstr ""
+"Vous êtes les bienvenus, Ocke Ketelsen. Ne minimisez pas votre rôle dans "
+"cette victoire, car nous n'y serions pas parvenus par nous mêmes."
 
 #. TRANSLATORS: Claus Lembeck – Victory 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:320
