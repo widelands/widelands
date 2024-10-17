@@ -85,7 +85,7 @@ void NonPackedAnimation::NonPackedMipMapEntry::load_graphics() {
 		if (!frames.empty() && (frames.front()->width() != image->width() ||
 		                        frames.front()->height() != image->height())) {
 			throw Widelands::GameDataError(
-			   "wrong size: (%u, %u) for file %s, should be (%u, %u) like the first frame",
+			   "wrong size: (%d, %d) for file %s, should be (%d, %d) like the first frame",
 			   image->width(), image->height(), filename.c_str(), frames.front()->width(),
 			   frames.front()->height());
 		}
@@ -98,8 +98,8 @@ void NonPackedAnimation::NonPackedMipMapEntry::load_graphics() {
 		const Image* pc_image = g_image_cache->get(filename);
 		if (frames.front()->width() != pc_image->width() ||
 		    frames.front()->height() != pc_image->height()) {
-			throw Widelands::GameDataError("playercolor mask %s has wrong size: (%u, %u), should "
-			                               "be (%u, %u) like the animation frame",
+			throw Widelands::GameDataError("playercolor mask %s has wrong size: (%d, %d), should "
+			                               "be (%d, %d) like the animation frame",
 			                               filename.c_str(), pc_image->width(), pc_image->height(),
 			                               frames.front()->width(), frames.front()->height());
 		}

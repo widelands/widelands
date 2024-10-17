@@ -109,7 +109,7 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 				if (from_checksoldier.level >= checkme.level) {
 					throw GameDataError(
 					   "Trainingsite '%s' is trying to train a soldier attribute from level "
-					   "%d to %d, but the 'checksoldier' action's level must be lower "
+					   "%u to %u, but the 'checksoldier' action's level must be lower "
 					   "than the 'train' action's level in program '%s'",
 					   name().c_str(), from_checksoldier.level, checkme.level, program.first.c_str());
 				}
@@ -813,7 +813,7 @@ void TrainingSite::drop_stalled_soldiers(Game& /* game */) {
 					TypeAndLevel train_tl(upgrade.attribute, level);
 					TrainFailCount::iterator tstep = training_failure_count_.find(train_tl);
 					if (tstep == training_failure_count_.end()) {
-						log_warn("TrainingSite::drop_stalled_soldiers: training step %d,%d "
+						log_warn("TrainingSite::drop_stalled_soldiers: training step %u,%d "
 						         "not found in this school!\n",
 						         static_cast<unsigned int>(upgrade.attribute), level);
 						break;

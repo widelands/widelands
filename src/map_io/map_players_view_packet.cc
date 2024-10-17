@@ -74,7 +74,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 		if (packet_version >= 3 && packet_version <= kCurrentPacketVersion) {
 			const PlayerNumber nr_players = fr.unsigned_8();
 			if (map.get_nrplayers() != nr_players) {
-				throw wexception("Wrong number of players. Expected %d but read %d from packet\n",
+				throw wexception("Wrong number of players. Expected %u but read %u from packet\n",
 				                 static_cast<unsigned>(map.get_nrplayers()),
 				                 static_cast<unsigned>(nr_players));
 			}
@@ -83,7 +83,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 			iterate_players_existing(p, nr_players, egbase, player) {
 				const unsigned player_no_from_packet = fr.unsigned_8();
 				if (p != player_no_from_packet) {
-					throw wexception("Wrong player number. Expected %d but read %d from packet\n",
+					throw wexception("Wrong player number. Expected %u but read %u from packet\n",
 					                 static_cast<unsigned>(p),
 					                 static_cast<unsigned>(player_no_from_packet));
 				}
@@ -150,7 +150,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 
 				if (seen_fields.size() != no_of_seen_fields) {
 					throw wexception("Read %" PRIuS
-					                 " unseen fields but detected %d when the packet was written\n",
+					                 " unseen fields but detected %u when the packet was written\n",
 					                 seen_fields.size(), static_cast<unsigned>(no_of_seen_fields));
 				}
 

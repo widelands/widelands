@@ -86,7 +86,7 @@ void Graphic::initialize(const TraceGl& trace_gl,
 		throw wexception("SDL_GL_LoadLibrary failed: %s", SDL_GetError());
 	}
 
-	log_info("Graphics: Try to set Videomode %ux%u\n", window_mode_width_, window_mode_height_);
+	log_info("Graphics: Try to set Videomode %dx%d\n", window_mode_width_, window_mode_height_);
 	uint32_t window_flags = SDL_WINDOW_OPENGL;
 #ifdef RESIZABLE_WINDOW
 	window_flags |= SDL_WINDOW_RESIZABLE;

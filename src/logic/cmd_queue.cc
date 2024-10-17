@@ -161,7 +161,7 @@ void GameLogicCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoade
 			set_duetime(Time(fr));
 			const Time& gametime = egbase.get_gametime();
 			if (duetime() < gametime) {
-				throw GameDataError("duetime (%i) < gametime (%i)", duetime().get(), gametime.get());
+				throw GameDataError("duetime (%u) < gametime (%u)", duetime().get(), gametime.get());
 			}
 		} else {
 			throw UnhandledVersionError("GameLogicCommand", packet_version, kCurrentPacketVersion);

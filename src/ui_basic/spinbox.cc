@@ -306,15 +306,15 @@ void SpinBox::layout() {
 
 	// 40 is an ad hoc width estimate for the MultilineTextarea scrollbar + a bit of text.
 	if (!sbi_->label->get_text().empty() && (get_w() + padding_ + 40) <= unit_width_) {
-		throw wexception("SpinBox: Overall width %d must be bigger than %d (unit width) "
-		                 "+ %d (padding) + 40 (label text)",
+		throw wexception("SpinBox: Overall width %d must be bigger than %u (unit width) "
+		                 "+ %u (padding) + 40 (label text)",
 		                 get_w(), unit_width_, padding_);
 	}
 
 	const uint32_t unit_text_min_width = button_size_;
 	if (unit_width_ < unit_text_min_width + buttons_width_) {
 		log_warn("Not enough space to draw spinbox \"%s\".\n"
-		         "Width %d is smaller than required width %d."
+		         "Width %u is smaller than required width %u."
 		         "Please report as a bug.\n",
 		         sbi_->label->get_text().c_str(), unit_width_, unit_text_min_width + buttons_width_);
 	}

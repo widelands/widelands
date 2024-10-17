@@ -72,9 +72,9 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 					        "\ttitle   : %s\n"
 					        "\tsent    : %u\n"
 					        "\tposition: (%i, %i)\n"
-					        "\tstatus  : %u\n"
+					        "\tstatus  : %d\n"
 					        "\tbody    : %s\n",
-					        p, static_cast<int>(begin->second->type()), begin->second->title().c_str(),
+					        p, static_cast<unsigned>(begin->second->type()), begin->second->title().c_str(),
 					        begin->second->sent().get(), begin->second->position().x,
 					        begin->second->position().y, static_cast<int>(begin->second->status()),
 					        begin->second->body().c_str());

@@ -902,7 +902,7 @@ Duration ShippingSchedule::update(Game& game) {
 							pair_it->second.second = 0;
 							erase = true;
 						}
-						sslog("Iteration: Iteration: planned_capacity reduced by %d (ship %s)\n",
+						sslog("Iteration: Iteration: planned_capacity reduced by %u (ship %s)\n",
 						      reducedby, pair_it->first.get(game)->get_shipname().c_str());
 						for (uint32_t i = reducedby; i != 0u; --i) {
 							assert(*std::prev(arrival_times.end()) == last_arrival);
