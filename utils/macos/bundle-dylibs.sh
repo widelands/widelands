@@ -68,7 +68,7 @@ process_dylibs() {
 	    install_name_tool -id "@rpath/$name" "$dest"
 	    echo "Adding $dylib"
 	fi
-    process_dylibs "$(list_dylibs $dest)" "$dest"
+    process_dylibs "$(list_dylibs $dylib)" "$dest"
 	install_name_tool -change "$dylib" "@rpath/$name" "$file"
     done
 }
