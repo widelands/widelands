@@ -272,7 +272,7 @@ int LuaConstructionSite::get_desired_fill(lua_State* L) {
 	const bool is_ware = get_egbase(L).descriptions().ware_exists(itemname);
 	const Widelands::DescriptionIndex item =
 	   is_ware ? get_egbase(L).descriptions().safe_ware_index(itemname) :
-                get_egbase(L).descriptions().safe_worker_index(itemname);
+	             get_egbase(L).descriptions().safe_worker_index(itemname);
 	if (lua_gettop(L) > 2 && luaL_checkboolean(L, 3)) {
 		upcast(const Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings());
 		if (ps == nullptr) {
@@ -297,7 +297,7 @@ int LuaConstructionSite::set_desired_fill(lua_State* L) {
 	const bool is_ware = get_egbase(L).descriptions().ware_exists(itemname);
 	const Widelands::DescriptionIndex item =
 	   is_ware ? get_egbase(L).descriptions().safe_ware_index(itemname) :
-                get_egbase(L).descriptions().safe_worker_index(itemname);
+	             get_egbase(L).descriptions().safe_worker_index(itemname);
 	if (lua_gettop(L) > 3 && luaL_checkboolean(L, 4)) {
 		upcast(Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings());
 		if (ps == nullptr) {
@@ -336,7 +336,7 @@ int LuaConstructionSite::get_setting_warehouse_policy(lua_State* L) {
 	const bool is_ware = get_egbase(L).descriptions().ware_exists(itemname);
 	const Widelands::DescriptionIndex item =
 	   is_ware ? get_egbase(L).descriptions().safe_ware_index(itemname) :
-                get_egbase(L).descriptions().safe_worker_index(itemname);
+	             get_egbase(L).descriptions().safe_worker_index(itemname);
 	wh_policy_to_string(
 	   L, is_ware ? ws->ware_preferences.at(item) : ws->worker_preferences.at(item));
 	return 1;
@@ -358,7 +358,7 @@ int LuaConstructionSite::set_setting_warehouse_policy(lua_State* L) {
 	const bool is_ware = get_egbase(L).descriptions().ware_exists(itemname);
 	const Widelands::DescriptionIndex item =
 	   is_ware ? get_egbase(L).descriptions().safe_ware_index(itemname) :
-                get_egbase(L).descriptions().safe_worker_index(itemname);
+	             get_egbase(L).descriptions().safe_worker_index(itemname);
 	(is_ware ? ws->ware_preferences.at(item) : ws->worker_preferences.at(item)) =
 	   string_to_wh_policy(L, 3);
 	return 0;
