@@ -461,15 +461,15 @@ void ShipWindow::think() {
 	btn_refit_->set_visible(!ibase_.egbase().is_game() || ibase_.game().naval_warfare_allowed());
 
 	btn_refit_->set_pic(g_image_cache->get(ship->get_ship_type() == Widelands::ShipType::kWarship ?
-                                             kImgRefitTransport :
-                                             kImgRefitWarship));
+	                                          kImgRefitTransport :
+	                                          kImgRefitWarship));
 	btn_refit_->set_enabled(can_act &&
 	                        ship->can_refit(ship->get_ship_type() == Widelands::ShipType::kWarship ?
-                                              Widelands::ShipType::kTransport :
-                                              Widelands::ShipType::kWarship));
+	                                           Widelands::ShipType::kTransport :
+	                                           Widelands::ShipType::kWarship));
 	btn_refit_->set_tooltip(ship->get_ship_type() == Widelands::ShipType::kWarship ?
-                              _("Refit to transport ship") :
-                              _("Refit to warship"));
+	                           _("Refit to transport ship") :
+	                           _("Refit to warship"));
 	btn_stay_->set_enabled(can_act);
 
 	display_->clear();
@@ -610,8 +610,8 @@ void ShipWindow::act_refit() {
 		return;
 	}
 	const Widelands::ShipType t = ship->get_ship_type() == Widelands::ShipType::kWarship ?
-                                    Widelands::ShipType::kTransport :
-                                    Widelands::ShipType::kWarship;
+	                                 Widelands::ShipType::kTransport :
+	                                 Widelands::ShipType::kWarship;
 	if (Widelands::Game* game = ibase_.get_game(); game != nullptr) {
 		game->send_player_refit_ship(*ship, t);
 	} else {

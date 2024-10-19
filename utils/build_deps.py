@@ -6,6 +6,7 @@ files are correct.
 
 It relies on the established build rule formatting conventions in the
 code base.
+
 """
 
 from collections import defaultdict
