@@ -281,14 +281,14 @@ EconomyOptionsWindow::TargetWaresDisplay::TargetWaresDisplay(UI::Panel* const pa
 		for (const Widelands::DescriptionIndex& worker_index : owner_tribe.workers()) {
 			const Widelands::WorkerDescr* worker_descr = owner_tribe.get_worker_descr(worker_index);
 			if (!worker_descr->has_demand_check()) {
-				hide_ware(worker_index);
+				set_hidden(worker_index, true);
 			}
 		}
 	} else {
 		for (const Widelands::DescriptionIndex& ware_index : owner_tribe.wares()) {
 			const Widelands::WareDescr* ware_descr = owner_tribe.get_ware_descr(ware_index);
 			if (!ware_descr->has_demand_check(owner_tribe.name())) {
-				hide_ware(ware_index);
+				set_hidden(ware_index, true);
 			}
 		}
 	}

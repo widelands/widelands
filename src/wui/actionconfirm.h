@@ -49,4 +49,7 @@ void show_ship_cancel_expedition_confirm(InteractivePlayer& player, Widelands::S
 // Diplomacy confirm windows
 void show_resign_confirm(InteractivePlayer& player);
 
+// Trade confirm windows
+void show_cancel_trade_confirm(InteractivePlayer& player, Widelands::TradeID trade_id);
+
 #endif  // end of include guard: WL_WUI_ACTIONCONFIRM_H

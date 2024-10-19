@@ -22,6 +22,7 @@
 #include "logic/game.h"
 #include "ui_basic/box.h"
 #include "ui_basic/icon.h"
+#include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
@@ -43,7 +44,12 @@ public:
 private:
 	InteractiveGameBase& igbase_;
 	InteractivePlayer* iplayer_;
+
+	void update(bool always);
 	void update_diplomacy_details();
+	void update_trades_offers(bool always);
+	void update_trades_proposed(bool always);
+	void update_trades_active(bool always);
 
 	UI::Box diplomacy_box_;
 
@@ -53,6 +59,14 @@ private:
 	std::map<Widelands::PlayerNumber, UI::Textarea*> diplomacy_status_;
 	std::map<Widelands::PlayerNumber, std::pair<UI::Button*, UI::Button*>> diplomacy_buttons_;
 	std::list<Widelands::Game::PendingDiplomacyAction> cached_diplomacy_actions_;
+
+	UI::TabPanel trades_tabs_;
+	UI::Box trades_box_offers_;
+	UI::Box trades_box_proposed_;
+	UI::Box trades_box_active_;
+	std::vector<Widelands::TradeID> cached_trades_offers_;
+	std::vector<Widelands::TradeID> cached_trades_proposed_;
+	std::vector<Widelands::TradeID> cached_trades_active_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_DIPLOMACY_MENU_H
