@@ -1038,11 +1038,11 @@ bool AddOnsCtrl::matches_filter(std::shared_ptr<AddOns::AddOnInfo> info) {
 void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 	const uint32_t scrollpos_i =
 	   installed_addons_inner_wrapper_.get_scrollbar() != nullptr ?
-         installed_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
-         0;
+	      installed_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
+	      0;
 	const uint32_t scrollpos_b = browse_addons_inner_wrapper_.get_scrollbar() != nullptr ?
-                                   browse_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
-                                   0;
+	                                browse_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
+	                                0;
 	installed_addons_box_.free_children();
 	browse_addons_box_.free_children();
 	installed_addons_box_.clear();

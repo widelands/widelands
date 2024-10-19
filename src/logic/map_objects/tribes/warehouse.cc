@@ -380,7 +380,7 @@ Quantity Warehouse::SoldierControl::min_soldier_capacity() const {
 
 Quantity Warehouse::SoldierControl::max_soldier_capacity() const {
 	return warehouse_->attack_target()->can_be_attacked() ? warehouse_->descr().get_max_garrison() :
-                                                           0;
+	                                                        0;
 }
 
 Quantity Warehouse::SoldierControl::soldier_capacity() const {
@@ -1486,7 +1486,7 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type, const
 	assert(portdock_ != nullptr);
 	assert(portdock_->expedition_bootstrap() != nullptr);
 	return r != nullptr ? portdock_->expedition_bootstrap()->inputqueue(*r) :
-                         portdock_->expedition_bootstrap()->inputqueue(index, type, false);
+	                      portdock_->expedition_bootstrap()->inputqueue(index, type, false);
 }
 
 void Warehouse::set_desired_soldier_count(Quantity q) {
