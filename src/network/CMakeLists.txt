@@ -57,7 +57,7 @@ wl_library(network
     io_stream
     logic
     logic_addons
-    logic_commands
+    commands
     logic_constants
     logic_filesystem_constants
     logic_game_controller
