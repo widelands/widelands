@@ -433,7 +433,7 @@ UI::FontStyleInfo& BaseTable::get_column_fontstyle(const BaseTable::EntryRecord&
 	return const_cast<FontStyleInfo&>(
 	   er.font_style() != nullptr ? *er.font_style() :
 	   er.is_disabled()           ? g_style_manager->table_style(panel_style_).disabled() :
-                                   g_style_manager->table_style(panel_style_).enabled());
+	                                g_style_manager->table_style(panel_style_).enabled());
 }
 bool BaseTable::is_mouse_in(const Vector2i& cursor_pos,
                             const Vector2i& point,

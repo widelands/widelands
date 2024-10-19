@@ -194,7 +194,7 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 
 	game->run(settings.savegame ? Widelands::Game::StartGameType::kSaveGame :
 	          settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
-                                 Widelands::Game::StartGameType::kMap,
+	                              Widelands::Game::StartGameType::kMap,
 	          "", format("netclient_%d", static_cast<int>(settings.usernum)));
 
 	// if this is an internet game, tell the metaserver that the game is done.
@@ -1345,17 +1345,17 @@ void GameClient::disconnect(const std::string& reason,
 			if (reason == "KICKED" || reason == "SERVER_LEFT" || reason == "SERVER_CRASHED") {
 				throw WLWarning("", "%s",
 				                arg.empty() ? NetworkGamingMessages::get_message(reason).c_str() :
-                                          NetworkGamingMessages::get_message(reason, arg).c_str());
+				                              NetworkGamingMessages::get_message(reason, arg).c_str());
 			}
 			throw wexception("%s", arg.empty() ?
-                                   NetworkGamingMessages::get_message(reason).c_str() :
-                                   NetworkGamingMessages::get_message(reason, arg).c_str());
+			                          NetworkGamingMessages::get_message(reason).c_str() :
+			                          NetworkGamingMessages::get_message(reason, arg).c_str());
 		}
 		capsule_.menu().show_messagebox(
 		   _("Disconnected"),
 		   format(_("The connection with the host was lost for the following reason:\n%s"),
 		          (arg.empty() ? NetworkGamingMessages::get_message(reason) :
-                               NetworkGamingMessages::get_message(reason, arg))));
+		                         NetworkGamingMessages::get_message(reason, arg))));
 	}
 
 	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a
