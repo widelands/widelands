@@ -104,14 +104,14 @@ struct HangupWindow : public UI::Window {
 	           panel_style_,
 	           "text",
 	           style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph :
-                                                  UI::FontStyle::kWuiInfoPanelParagraph,
+	                                               UI::FontStyle::kWuiInfoPanelParagraph,
 	           _("The server is not responding…"),
 	           UI::Align::kCenter),
 	     txt2_(&box_,
 	           panel_style_,
 	           "time",
 	           style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph :
-                                                  UI::FontStyle::kWuiInfoPanelParagraph,
+	                                               UI::FontStyle::kWuiInfoPanelParagraph,
 	           "",
 	           UI::Align::kCenter),
 	     interrupt_(&box_,
@@ -121,7 +121,7 @@ struct HangupWindow : public UI::Window {
 	                0,
 	                0,
 	                style == UI::WindowStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
-                                                       UI::ButtonStyle::kWuiSecondary,
+	                                                    UI::ButtonStyle::kWuiSecondary,
 	                _("Cancel")) {
 		box_.add(&txt1_, UI::Box::Resizing::kExpandBoth);
 		box_.add_space(kRowButtonSpacing);
