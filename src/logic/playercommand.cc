@@ -2477,10 +2477,10 @@ void CmdDiplomacy::execute(Game& game) {
 	case DiplomacyAction::kInvite:
 		broadcast_message(
 		   action_ == DiplomacyAction::kJoin ? _("Team Joining Request") :
-                                             _("Team Joining Invitation"),
+		                                       _("Team Joining Invitation"),
 		   format(action_ == DiplomacyAction::kJoin ?
-                   _("%1$s has requested to join the team of %2$s.") :
-                   _("%1$s has invited %2$s to join their team."),
+		             _("%1$s has requested to join the team of %2$s.") :
+		             _("%1$s has invited %2$s to join their team."),
 		          sending_player.get_name(), game.get_safe_player(other_player_)->get_name()));
 		game.pending_diplomacy_actions().emplace_back(sender(), action_, other_player_);
 		// If other_player_ is the interactive player, the IBase
@@ -2500,14 +2500,14 @@ void CmdDiplomacy::execute(Game& game) {
 			std::swap(other_player_, cmd_sender);
 			retract = true;
 			action_ = (action_ == DiplomacyAction::kRetractJoin) ? DiplomacyAction::kRefuseJoin :
-                                                                DiplomacyAction::kRefuseInvite;
+			                                                       DiplomacyAction::kRefuseInvite;
 		}
 		assert(other_player_ != cmd_sender);
 
 		const DiplomacyAction original_action =
 		   (action_ == DiplomacyAction::kAcceptJoin || action_ == DiplomacyAction::kRefuseJoin) ?
-            DiplomacyAction::kJoin :
-            DiplomacyAction::kInvite;
+		      DiplomacyAction::kJoin :
+		      DiplomacyAction::kInvite;
 		for (auto it = game.pending_diplomacy_actions().begin();
 		     it != game.pending_diplomacy_actions().end(); ++it) {
 			// Note that in the response the numbers of the two players

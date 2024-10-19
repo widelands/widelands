@@ -715,10 +715,10 @@ void BuildingStatisticsMenu::update() {
 				const RGBColor& color =
 				   (percent < low_production_) ? style_.low_color() :
 				   (percent < ((low_production_ < 50) ?
-                              2 * low_production_ :
-                              low_production_ + ((100 - low_production_) / 2))) ?
-                                             style_.medium_color() :
-                                             style_.high_color();
+				                  2 * low_production_ :
+				                  low_production_ + ((100 - low_production_) / 2))) ?
+				                                 style_.medium_color() :
+				                                 style_.high_color();
 
 				/** TRANSLATORS: Percent in building statistics window, e.g. 85% */
 				/** TRANSLATORS: If you wish to add a space, translate as '%i %%' */
@@ -727,7 +727,7 @@ void BuildingStatisticsMenu::update() {
 			}
 			if (has_selection_ && id == current_building_type_) {
 				label_nr_unproductive_.set_text(nr_unproductive > 0 ? std::to_string(nr_unproductive) :
-                                                                  "");
+				                                                      "");
 				b_next_unproductive_.set_enabled(nr_unproductive > 0);
 				b_prev_unproductive_.set_enabled(nr_unproductive > 0);
 				hbox_unproductive_.set_visible(true);
@@ -738,14 +738,14 @@ void BuildingStatisticsMenu::update() {
 				const RGBColor& color =
 				   (total_stationed_soldiers < total_soldier_capacity / 2) ? style_.low_color() :
 				   (total_stationed_soldiers < total_soldier_capacity)     ? style_.medium_color() :
-                                                                         style_.high_color();
+				                                                             style_.high_color();
 				const std::string perc_str =
 				   format(_("%1%/%2%"), total_stationed_soldiers, total_soldier_capacity);
 				set_labeltext(productivity_labels_[id], perc_str, color);
 			}
 			if (has_selection_ && id == current_building_type_) {
 				label_nr_unproductive_.set_text(nr_unproductive > 0 ? std::to_string(nr_unproductive) :
-                                                                  "");
+				                                                      "");
 				b_next_unproductive_.set_enabled(total_soldier_capacity > total_stationed_soldiers);
 				b_prev_unproductive_.set_enabled(total_soldier_capacity > total_stationed_soldiers);
 				hbox_unproductive_.set_visible(true);
@@ -858,7 +858,7 @@ void BuildingStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* m
 	fw.unsigned_8(tab_panel_.active());
 	fw.string(
 	   current_building_type_ == Widelands::INVALID_INDEX ?
-         "" :
-         iplayer().egbase().descriptions().get_building_descr(current_building_type_)->name());
+	      "" :
+	      iplayer().egbase().descriptions().get_building_descr(current_building_type_)->name());
 	fw.signed_32(last_building_index_);
 }

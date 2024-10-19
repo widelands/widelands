@@ -5,6 +5,7 @@ read" for Nicolai. It detects uses of the const keyword inside casts, that
 have.
 
 no effect, such as "static_cast<const uint32_t>" or "dynamic_cast<T * const>".
+
 """
 
 error_msg = "Remove the unneeded 'const' from the cast!"

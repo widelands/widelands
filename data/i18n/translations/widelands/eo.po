@@ -7,6 +7,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Peter Garami <petro.garami@gmail.com>, 2021
+# Raúl Contreras, 2024
 # Ximena Delgado, 2022
 msgid ""
 msgstr ""
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-10-05 02:52+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Ximena Delgado, 2022\n"
+"Last-Translator: Raúl Contreras, 2024\n"
 "Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/language/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,19 +27,19 @@ msgstr ""
 #: ../../../../data/scripting/help.lua:110
 #, lua-format
 msgid "%2.1f%%"
-msgstr ""
+msgstr "%2.1f%%"
 
 #. TRANSLATORS: Short for "Not enough space"
 #: ../../../../data/scripting/infrastructure.lua:188
 msgid "No Space"
-msgstr "Ne sufiĉa spaco"
+msgstr "Sen spaco"
 
 #: ../../../../data/scripting/infrastructure.lua:189
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
-msgstr "Kelkaj da viaj konstruaĵoj ne havis sufiĉe da spaco tial ili ne estis konstruitaj. Tio kaŭzas malavantaĝon por vi; eble estus pli bone rekomenci la mapon kun justaj kondiĉoj."
+msgstr "Kelkaj el viaj komencaj konstruaĵoj ne havis sufiĉe da spaco, kaj tial ili ne estis konstruitaj. Pro tio, vi estas en malavantaĝo; konsideru rekomenci ĉi tiun mapon kun justa komenca kondiĉo."
 
 #: ../../../../data/scripting/infrastructure.lua:190
 msgid "Not enough space"
@@ -52,17 +53,17 @@ msgstr "Ne estas rokoj proksime"
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr "Ne estas rokoj proksime al via komenca loko. Tial, vi ricevas pli da materialoj por startigi vian ekonomion."
+msgstr "Ne estas rokoj proksime al via komenca pozicio. Tial, vi ricevas ekstrajn resursojn por startigi vian ekonomion."
 
 #: ../../../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
-msgstr ""
+msgstr "Ne sufiĉe da arboj proksime."
 
 #: ../../../../data/scripting/infrastructure.lua:294
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Ne estas sufiĉe da arboj proksime al via komenca pozicio. Tial, vi ricevas ekstrajn resursojn  por startigi vian ekonomion."
 
 #: ../../../../data/scripting/messages.lua:66
 #: ../../../../data/scripting/messages.lua:68
@@ -86,7 +87,7 @@ msgstr "Novaj Taskoj"
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
-msgstr ""
+msgstr "%s %s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -94,7 +95,7 @@ msgstr ""
 #: ../../../../src/base/i18n.cc:335
 #, c-format
 msgid "%1$s & %2$s"
-msgstr "%1$s & %2$s"
+msgstr "%1$s k. %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -293,7 +294,7 @@ msgstr "Ĉefa menuo"
 #: ../../../../src/wui/interactive_gamebase.cc:102
 msgctxt "hotkey"
 msgid "Esc"
-msgstr ""
+msgstr "Esc"
 
 #. * TRANSLATORS: Title for the tool menu button in the editor
 #. * TRANSLATORS: Heading in the editor keyboard shortcuts help
@@ -301,7 +302,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1065
 msgctxt "editor"
 msgid "Tools"
-msgstr ""
+msgstr "Iloj"
 
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
@@ -316,7 +317,7 @@ msgstr "Montri / Kaŝi"
 
 #: ../../../../src/editor/editorinteractive.cc:145
 msgid "Tool size"
-msgstr "Grando de la ilo"
+msgstr "Grandeco de ilo"
 
 #: ../../../../src/editor/editorinteractive.cc:160
 #: ../../../../src/wlapplication_options.cc:476
@@ -371,7 +372,7 @@ msgstr "Konservi mapon"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../../../src/editor/editorinteractive.cc:242
 msgid "Publish Map Online…"
-msgstr ""
+msgstr "Publikigi mapon rete…"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../../../src/editor/editorinteractive.cc:250
@@ -386,7 +387,7 @@ msgstr "Agordoj de la mapo"
 #: ../../../../src/editor/editorinteractive.cc:255
 #: ../../../../src/wlapplication_options.cc:883
 msgid "Exit Editor"
-msgstr "Eliri redaktilon"
+msgstr "Eliri el la redaktilo"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:299
@@ -396,7 +397,7 @@ msgstr "Ŝanĝi altecon"
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:302
 msgid "Change the terrain height"
-msgstr "Ŝanĝi la altecon de la tereno"
+msgstr "Ŝanĝi la terenaltecon"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:309
@@ -407,7 +408,7 @@ msgstr "Hazarda alteco"
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:312
 msgid "Set the terrain height to random values"
-msgstr "Igi la altecon de la tereno hazarda"
+msgstr "Agordi la terenaltecon al hazardaj valoroj"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:319
@@ -427,12 +428,12 @@ msgstr "Ŝanĝi la terenon de la mapo"
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:80
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:169
 msgid "Immovables"
-msgstr "Nemoveblaj aĵoj"
+msgstr "Nemoveblaĵoj"
 
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:333
 msgid "Add or remove immovables"
-msgstr "Aldoni aŭ forigi nemoveblajn aĵojn"
+msgstr "Aldoni aŭ forigi nemoveblaĵojn."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:340
@@ -453,22 +454,22 @@ msgstr "Aldoni aŭ forigi bestojn"
 #: ../../../../src/map_io/map_saver.cc:154
 #: ../../../../src/map_io/widelands_map_loader.cc:275
 msgid "Resources"
-msgstr "Materialoj"
+msgstr "Resursoj"
 
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:354
 msgid "Set or change resources"
-msgstr "Aldoni aŭ ŝanĝi materialojn"
+msgstr "Agordi aŭ ŝanĝi resursojn"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:358
 msgid "Port spaces"
-msgstr "Havenoj"
+msgstr "Havenaj spacoj"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:361
 msgid "Add or remove port spaces"
-msgstr "Aldoni aŭ forigi havenojn"
+msgstr "Aldoni aŭ forigi havenajn spacojn"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:369
@@ -480,7 +481,7 @@ msgstr "Ludantoj"
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:372
 msgid "Set number of players and their names, tribes and starting positions"
-msgstr "Elekti la nombron de ludantoj, iliajn nomojn, gentojn kaj komencajn lokojn"
+msgstr "Agordi la nombron de ludantoj kaj iliajn nomojn, tribojn kaj komencajn poziciojn."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:376

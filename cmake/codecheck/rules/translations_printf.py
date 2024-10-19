@@ -8,6 +8,7 @@ Checks that unordered, ordered and wildcard placeholders aren't mixed up in the 
 Checks that ngettext singular and plural strings have the same placeholders.
 
 Checks that placeholders are numbered in ascending order.
+
 """
 
 import re
@@ -23,6 +24,7 @@ def FIND_UNORDERED_placeholders(sanitized_entry):
     """We need to remove wildcard matches first, because we have cases like.
 
     %1%m that match both regex expressions.
+
     """
     for entry in CLEAN_WILDCARD_FOR_UNORDERED.findall(sanitized_entry):
         sanitized_entry = sanitized_entry.replace(entry, '')
@@ -86,6 +88,7 @@ def find_line(entry, lines):
     """Find the line for the error entry.
 
     Grabs the first match, so this is imprecise for multiple matches
+
     """
     checkme = entry.split('\n')
     for lineno, line in enumerate(lines, 0):

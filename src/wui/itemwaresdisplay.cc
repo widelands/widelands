@@ -77,10 +77,10 @@ bool ItemWaresDisplay::handle_mousemove(
    uint8_t /* state */, int32_t x, int32_t y, int32_t /* xdiff */, int32_t /* ydiff */) {
 	const Item* i = at(x, y);
 	set_tooltip(i == nullptr ?
-                  std::string() :
+	               std::string() :
 	            i->type == Widelands::wwWARE ?
-                  player_.egbase().descriptions().get_ware_descr(i->index)->descname() :
-                  player_.egbase().descriptions().get_worker_descr(i->index)->descname());
+	               player_.egbase().descriptions().get_ware_descr(i->index)->descname() :
+	               player_.egbase().descriptions().get_worker_descr(i->index)->descname());
 	return true;
 }
 
