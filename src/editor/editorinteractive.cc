@@ -1042,6 +1042,10 @@ void EditorInteractive::toggle_oceans() {
 }
 
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
+	if (InteractiveBase::handle_key(down, code)) {
+		return true;
+	}
+
 	if (down) {
 		if (matches_shortcut(KeyboardShortcut::kCommonEncyclopedia, code)) {
 			menu_windows_.help.toggle();
@@ -1215,7 +1219,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		}
 	}
 
-	return InteractiveBase::handle_key(down, code);
+	return false;
 }
 
 bool EditorInteractive::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {

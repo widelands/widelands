@@ -2,6 +2,9 @@ game.desired_speed = 1000
 
 run(function()
 
+   assert_equal(true, wl.ui:shortcut_exists("fullscreen"))
+   assert_equal(false, wl.ui:shortcut_exists("this_does_not_exist"))
+
    wl.ui.MapView():create_child({
       widget   = "unique_window",
       registry = "uipluginstestwindow",
@@ -120,6 +123,7 @@ run(function()
                                  value = "first",
                                  label = "First Item",
                                  tooltip = "Tooltip for i1",
+                                 hotkey = "quicknav_gui",
                               },
                               {
                                  value = "second",
@@ -258,6 +262,7 @@ run(function()
                                           value = "third",
                                           label = "3. Item",
                                           tooltip = "Tooltip for i3",
+                                          hotkey = "game_showhide_census",
                                        },
                                     },
                                     on_selected = [=[ dropdown_changed() ]=]
@@ -432,7 +437,7 @@ run(function()
    button.enabled = false
    radiogroup.state = 2
    dropdown:add("New Item", "fourth")
-   listselect:add("New Item", "fourth", nil, "", true, 2)
+   listselect:add("New Item", "fourth", nil, "", true, 2, true, "game_msg_filter_seafaring")
    tabpanel.active = 1
    table:add(1234, false, true, {{text = "Invalid"}, {text = "1234"}, {icon = "images/ui_basic/menu_help.png"}})
 

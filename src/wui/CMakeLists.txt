@@ -61,8 +61,8 @@ wl_library(wui_common_plugins
     plugins.cc
   DEPENDS
     base
-    scripting_base
     ui_basic
+    widelands_options
   USES_SDL2
 )
 
