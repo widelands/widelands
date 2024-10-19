@@ -18,10 +18,10 @@
 
 #include "ui_fsmenu/addons/login_box.h"
 
+#include "base/crypto.h"
 #include "base/string.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
-#include "third_party/sha1/sha1.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "wlapplication_options.h"
