@@ -959,8 +959,8 @@ int LuaPlayerBase::place_building(lua_State* L) {  // NOLINT - can not be made c
 		}
 		if (b == nullptr) {
 			const std::string tempname(force ? constructionsite ? "force constructionsite" :
-                                                               "force building" :
-                                            "place building");
+			                                                      "force building" :
+			                                   "place building");
 			report_error(L, "Couldn't %s '%s' at (%d, %d)!", tempname.c_str(), name.c_str(),
 			             c->coords().x, c->coords().y);
 		}
@@ -1038,8 +1038,8 @@ int LuaPlayerBase::place_pinned_note(lua_State* L) {  // NOLINT - can not be mad
 	Widelands::PinnedNote& note = Widelands::PinnedNote::create(
 	   egbase, player, c->coords(), luaL_checkstring(L, 3),
 	   lua_gettop(L) < 6 ?
-         get(L, get_egbase(L)).get_playercolor() :
-         RGBColor(luaL_checkuint32(L, 4), luaL_checkuint32(L, 5), luaL_checkuint32(L, 6)));
+	      get(L, get_egbase(L)).get_playercolor() :
+	      RGBColor(luaL_checkuint32(L, 4), luaL_checkuint32(L, 5), luaL_checkuint32(L, 6)));
 
 	LuaMaps::upcasted_map_object_to_lua(L, &note);
 

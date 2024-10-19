@@ -4114,7 +4114,7 @@ int LuaMapView::start_road_building(lua_State* L) {
 	me->map_view()->mouse_to_field(starting_field, MapView::Transition::Jump);
 	me->start_build_road(starting_field, me->get_player()->player_number(),
 	                     lua_gettop(L) > 2 && luaL_checkboolean(L, 3) ? RoadBuildingType::kWaterway :
-                                                                       RoadBuildingType::kRoad);
+	                                                                    RoadBuildingType::kRoad);
 
 	return 0;
 }
@@ -4503,7 +4503,7 @@ static int L_show_messagebox(lua_State* L) {
 	const bool mainmenu = is_main_menu(L);
 	UI::WLMessageBox m(
 	   mainmenu ? static_cast<UI::Panel*>(&get_main_menu(L)) :
-                 static_cast<UI::Panel*>(get_egbase(L).get_ibase()),
+	              static_cast<UI::Panel*>(get_egbase(L).get_ibase()),
 	   mainmenu ? UI::WindowStyle::kFsMenu : UI::WindowStyle::kWui, title, text,
 	   allow_cancel ? UI::WLMessageBox::MBoxType::kOkCancel : UI::WLMessageBox::MBoxType::kOk);
 	UI::Panel::Returncodes result;

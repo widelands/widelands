@@ -44,7 +44,7 @@ jobs:
         echo "Checking out '$REF'"
         [ -n "$REF" ] && git fetch
         git checkout $REF || git pull origin $REF
-        echo "vcpkg_key=${{ hashFiles( './install-dependencies.sh' ) }}-${REF}" >> $GITHUB_OUTPUT
+        echo "vcpkg_key=vcpkg_cache-${{ hashFiles( 'utils/windows/vcpkg_deps' ) }}-${REF}" >> $GITHUB_OUTPUT
       shell: bash
     - name: Restore vcpkg and its artifacts.
       uses: actions/cache@v4

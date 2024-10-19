@@ -62,7 +62,7 @@ public:
 	                     Widelands::Map* map) {
 		return (i == First  ? *this :
 		        i == Second ? second_ :
-                            third_)
+		                      third_)
 		   .handle_click_impl(center, args, map);
 	}
 
@@ -72,7 +72,7 @@ public:
 	                    Widelands::Map* map) {
 		return (i == First  ? *this :
 		        i == Second ? second_ :
-                            third_)
+		                      third_)
 		   .handle_undo_impl(center, args, map);
 	}
 
