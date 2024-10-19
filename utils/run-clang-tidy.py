@@ -145,6 +145,7 @@ class Cache:
     came from https://github.com/matus-chochlik/ctcache.
 
     No code is copied directly from either.
+
     """
     failed_files_regexp = re.compile(r'^([0-9a-f]{64})\.std(out|err)$')
 
@@ -281,6 +282,7 @@ class Cache:
         Meaning of return values:
 
         found (bool), passed (bool), stdout (string), stderr (string)
+
         """
         if hash in self.passed:
             self.hits += 1
@@ -351,6 +353,7 @@ def pp_hash(file, command, dir):
 
     'command' is the compiler command line for compiling it, and 'directory'
     is the base directory for relative paths in either 'file' or 'command'.
+
     """
     preprocessor_args = []
     pp_args_loaded = shlex.split(command, posix = True)

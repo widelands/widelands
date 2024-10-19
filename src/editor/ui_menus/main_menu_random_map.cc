@@ -623,7 +623,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	      << "ID = " << map_id_edit_.get_text() << "\n"
 	      << "Generator = "
 	      << (generator_.get_selected() == nullptr ? "default" :
-                                                    generator_.get_selected()->internal_name)
+	                                                 generator_.get_selected()->internal_name)
 	      << "\n";
 
 	map->create_empty_map(egbase, map_info.w, map_info.h, 0, _("No Name"),
@@ -657,8 +657,8 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 		log_info("Using Island Mode\n");
 	}
 	log_info("Generator:     %s\n", generator_.get_selected() == nullptr ?
-                                      "default" :
-                                      generator_.get_selected()->internal_name.c_str());
+	                                   "default" :
+	                                   generator_.get_selected()->internal_name.c_str());
 	log_info("\n");
 
 	bool result;
@@ -701,19 +701,19 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 		     editor.*/
 		   _("Random Map"),
 		   result ?
-              /** TRANSLATORS: This is shown after a random map has been created in the editor. */
-              /** TRANSLATORS: You don't need to be literal with your translation, */
-              /** TRANSLATORS: as long as the user understands that he needs to check the player
-                positions.*/
-              _("The map has been generated. Please double-check the player starting positions to "
-              "make sure that your carriers won’t drown, or be stuck on an island or on top of a "
-              "mountain.") :
-              /** TRANSLATORS: This is shown after a random map has been created in the editor. */
-              /** TRANSLATORS: You don't need to be literal with your translation, as long as */
-              /** TRANSLATORS: the user understands that the map's quality is pretty poor.*/
-              _("The map generator could not produce a good-enough map with the provided settings. "
-              "This map will probably need extensive editing to be playable. Consider creating a "
-              "new map with different parameters."),
+		      /** TRANSLATORS: This is shown after a random map has been created in the editor. */
+		      /** TRANSLATORS: You don't need to be literal with your translation, */
+		      /** TRANSLATORS: as long as the user understands that he needs to check the player
+		        positions.*/
+		      _("The map has been generated. Please double-check the player starting positions to "
+		        "make sure that your carriers won’t drown, or be stuck on an island or on top of a "
+		        "mountain.") :
+		      /** TRANSLATORS: This is shown after a random map has been created in the editor. */
+		      /** TRANSLATORS: You don't need to be literal with your translation, as long as */
+		      /** TRANSLATORS: the user understands that the map's quality is pretty poor.*/
+		      _("The map generator could not produce a good-enough map with the provided settings. "
+		        "This map will probably need extensive editing to be playable. Consider creating a "
+		        "new map with different parameters."),
 		   UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
 	} else {

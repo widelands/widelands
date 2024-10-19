@@ -230,9 +230,9 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 
 bool BuildingDescr::suitability(const Map& /* map */, const FCoords& fc) const {
 	return ((mine_ ? fc.field->nodecaps() & Widelands::BUILDCAPS_MINE :
-                    static_cast<int>(
+	                 static_cast<int>(
 	                    size_ <= ((built_over_immovable_ == INVALID_INDEX ? fc.field->nodecaps() :
-                                                                           fc.field->maxcaps()) &
+	                                                                        fc.field->maxcaps()) &
 	                              Widelands::BUILDCAPS_SIZEMASK))) != 0) &&
 	       (built_over_immovable_ == INVALID_INDEX ||
 	        ((fc.field->get_immovable() != nullptr) &&
@@ -732,8 +732,8 @@ void Building::draw_info(const InfoToDraw info_to_draw,
                          const float scale,
                          RenderTarget* dst) {
 	const std::string statistics_string = (info_to_draw & InfoToDraw::kStatistics) != 0 ?
-                                            info_string(InfoStringFormat::kStatistics) :
-                                            "";
+	                                         info_string(InfoStringFormat::kStatistics) :
+	                                         "";
 	do_draw_info(info_to_draw, info_string(InfoStringFormat::kCensus), statistics_string,
 	             point_on_dst, scale, dst);
 }

@@ -113,15 +113,15 @@ SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
 
 uint32_t SoldierCapacityControl::get_cur_capacity() const {
 	return building_ != nullptr ? building_->soldier_control()->soldier_capacity() :
-                                 ship_->get_warship_soldier_capacity();
+	                              ship_->get_warship_soldier_capacity();
 }
 uint32_t SoldierCapacityControl::get_min_capacity() const {
 	return building_ != nullptr ? building_->soldier_control()->min_soldier_capacity() :
-                                 ship_->min_warship_soldier_capacity();
+	                              ship_->min_warship_soldier_capacity();
 }
 uint32_t SoldierCapacityControl::get_max_capacity() const {
 	return building_ != nullptr ? building_->soldier_control()->max_soldier_capacity() :
-                                 ship_->get_capacity();
+	                              ship_->get_capacity();
 }
 
 void SoldierCapacityControl::think() {
