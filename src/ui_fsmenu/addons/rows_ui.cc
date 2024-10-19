@@ -45,18 +45,18 @@ void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const 
 		UI::WLMessageBox w(
 		   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Uninstall"),
 		   is_map ?
-            safe_richtext_message(
+		      safe_richtext_message(
 		         format(local ? _("Are you certain that you want to uninstall this map?\n\n"
 		                          "%1$s\n"
 		                          "by %2$s\n"
 		                          "%3$s\n\n"
 		                          "Note that this map can not be downloaded again from the server.") :
-                              _("Are you certain that you want to uninstall this map?\n\n"
+		                        _("Are you certain that you want to uninstall this map?\n\n"
 		                          "%1$s\n"
 		                          "by %2$s\n"
 		                          "%3$s"),
 		                info->descname(), info->author(), info->description())) :
-            safe_richtext_message(format(
+		      safe_richtext_message(format(
 		         local ? _("Are you certain that you want to uninstall this add-on?\n\n"
 		                   "%1$s\n"
 		                   "by %2$s\n"
@@ -64,7 +64,7 @@ void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const 
 		                   "Category: %4$s\n"
 		                   "%5$s\n\n"
 		                   "Note that this add-on can not be downloaded again from the server.") :
-                       _("Are you certain that you want to uninstall this add-on?\n\n"
+		                 _("Are you certain that you want to uninstall this add-on?\n\n"
 		                   "%1$s\n"
 		                   "by %2$s\n"
 		                   "Version %3$s\n"
@@ -731,10 +731,10 @@ MapRow::MapRow(Panel* parent,
 	          info->total_file_size),
 	   format(ngettext("%u download", "%u downloads", info->download_count), info->download_count),
 	   (info->number_of_votes() != 0u ?
-          format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
+	       format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
 	                         "Average rating: %1$.3f (%2$u votes)", info->number_of_votes()),
 	                info->average_rating(), info->number_of_votes()) :
-          _("No votes yet")),
+	       _("No votes yet")),
 	   format(ngettext("%u comment", "%u comments", info->user_comments.size()),
 	          info->user_comments.size())));
 	set_can_focus(true);
