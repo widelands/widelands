@@ -558,7 +558,7 @@ bool Warehouse::init(EditorGameBase& egbase) {
 	init_containers(*player);
 	warehouse_name_ =
 	   player->pick_warehousename(descr().get_isport() ? Player::WarehouseNameType::kPort :
-                                                        Player::WarehouseNameType::kWarehouse);
+	                                                     Player::WarehouseNameType::kWarehouse);
 
 	set_seeing(true);
 

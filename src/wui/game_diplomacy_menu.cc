@@ -421,7 +421,7 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 		for (auto it = markets.rbegin(); it != markets.rend(); ++it) {
 			const bool first = it == markets.rbegin();
 			select_market->add(first ? format_l(_("%s (closest)"), it->second->get_market_name()) :
-                                    it->second->get_market_name(),
+			                           it->second->get_market_name(),
 			                   it->second->serial(), it->second->descr().icon(), first,
 			                   format_l(ngettext("%1$s (distance: %2$u field)",
 			                                     "%1$s (distance: %2$u fields)", it->first),

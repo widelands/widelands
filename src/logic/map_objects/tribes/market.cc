@@ -225,7 +225,7 @@ void Market::cancel_trade(Game& game,
 			   descr().icon_filename(),
 			   reached_regular_end ? _("Trade agreement complete") : _("Trade agreement cancelled"),
 			   format(reached_regular_end ? _("Your trade agreement at %s has been completed.") :
-                                         _("Your trade agreement at %s has been cancelled."),
+			                                _("Your trade agreement at %s has been cancelled."),
 			          get_market_name()),
 			   false);
 		}
