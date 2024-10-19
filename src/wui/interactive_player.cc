@@ -299,8 +299,8 @@ void InteractivePlayer::add_statistics_menu() {
 
 void InteractivePlayer::rebuild_statistics_menu() {
 	const StatisticsMenuEntry last_selection = statisticsmenu_.has_selection() ?
-                                                 statisticsmenu_.get_selected() :
-                                                 StatisticsMenuEntry::kSoldiers;
+	                                              statisticsmenu_.get_selected() :
+	                                              StatisticsMenuEntry::kSoldiers;
 
 	statisticsmenu_.clear();
 
@@ -374,12 +374,12 @@ void InteractivePlayer::rebuild_showhide_menu() {
 	InteractiveGameBase::rebuild_showhide_menu();
 	showhidemenu_.add(
 	   get_display_flag(dfShowWorkareaOverlap) ?
-          /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
-           * are highlighted */
-          _("Hide Workarea Overlaps") :
-          /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
-           * are highlighted */
-          _("Show Workarea Overlaps"),
+	      /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
+	       * are highlighted */
+	      _("Hide Workarea Overlaps") :
+	       /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
+	        * are highlighted */
+	       _("Show Workarea Overlaps"),
 	   ShowHideEntry::kWorkareaOverlap,
 	   g_image_cache->get("images/wui/menus/show_workarea_overlap.png"), false,
 	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"),
@@ -610,8 +610,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 					player_image = playercolor_image(p->get_playercolor(), icon_filename);
 					icon_scale = 1.0f;
 					icon_opacity = p->get_starting_position_suitability(f->fcoords) ?
-                                 kBuildhelpOpacityMedium :
-                                 kBuildhelpOpacityWeak;
+					                  kBuildhelpOpacityMedium :
+					                  kBuildhelpOpacityWeak;
 					break;
 				}
 			}
@@ -644,8 +644,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		if (f->seeing != Widelands::VisibleState::kUnexplored) {
 			// Draw build help.
 			const HasExpeditionPortSpace show_port_space = map.is_port_space(f->fcoords) ?
-                                                           has_expedition_port_space(f->fcoords) :
-                                                           HasExpeditionPortSpace::kNone;
+			                                                  has_expedition_port_space(f->fcoords) :
+			                                                  HasExpeditionPortSpace::kNone;
 			if (show_port_space != HasExpeditionPortSpace::kNone || buildhelp()) {
 				Widelands::NodeCaps caps;
 				Widelands::NodeCaps maxcaps = f->fcoords.field->maxcaps();
@@ -653,8 +653,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				   f->seeing == Widelands::VisibleState::kVisible ? 1.f : kBuildhelpOpacityWeak;
 				if (picking_starting_pos) {
 					caps = (show_port_space != HasExpeditionPortSpace::kNone || buildhelp()) ?
-                         f->fcoords.field->nodecaps() :
-                         Widelands::CAPS_NONE;
+					          f->fcoords.field->nodecaps() :
+					          Widelands::CAPS_NONE;
 				} else if (show_port_space != HasExpeditionPortSpace::kNone) {
 					caps = maxcaps;
 					if (show_port_space == HasExpeditionPortSpace::kOther) {

@@ -61,8 +61,8 @@ Economy::Economy(Player& player, Serial init_serial, WareWorker wwtype)
 	last_economy_serial_ = std::max(last_economy_serial_, serial_ + 1);
 	const TribeDescr& tribe = player.tribe();
 	DescriptionIndex const nr_wares_or_workers = wwtype == wwWARE ?
-                                                   player.egbase().descriptions().nr_wares() :
-                                                   player.egbase().descriptions().nr_workers();
+	                                                player.egbase().descriptions().nr_wares() :
+	                                                player.egbase().descriptions().nr_workers();
 	wares_or_workers_.set_nrwares(nr_wares_or_workers);
 
 	target_quantities_ = new TargetQuantity[nr_wares_or_workers];
@@ -539,7 +539,7 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type,
 		Quantity quantity_district = 0;
 		for (const Warehouse* wh : warehouses_) {
 			Quantity stock = type_ == wwWARE ? wh->get_wares().stock(ware_or_worker_type) :
-                                            wh->get_workers().stock(ware_or_worker_type);
+			                                   wh->get_workers().stock(ware_or_worker_type);
 			if (is_soldier) {
 				Quantity garrison = wh->get_desired_soldier_count();
 				if (garrison >= stock) {
@@ -552,8 +552,8 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type,
 
 			if (flag != nullptr) {
 				const StockPolicy policy = type() == wwWARE ?
-                                          wh->get_ware_policy(ware_or_worker_type) :
-                                          wh->get_worker_policy(ware_or_worker_type);
+				                              wh->get_ware_policy(ware_or_worker_type) :
+				                              wh->get_worker_policy(ware_or_worker_type);
 				if (flag->get_district_center(type()) == wh->base_flag().get_district_center(type())) {
 					quantity_district += stock;
 

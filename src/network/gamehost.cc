@@ -613,7 +613,7 @@ void GameHost::run_callback() {
 		init_computer_players();
 		game_->run(d->settings.savegame ? Widelands::Game::StartGameType::kSaveGame :
 		           d->settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
-                                        Widelands::Game::StartGameType::kMap,
+		                                  Widelands::Game::StartGameType::kMap,
 		           script_to_run_, "nethost");
 
 		// if this is an internet game, tell the metaserver that the game is done.
@@ -822,9 +822,9 @@ void GameHost::send(ChatMessage msg) {
 						}
 					}
 				}  // end team is not "no team"
-			}     // end team is not spectator
-		}        // end team message
-	}           // end directed message
+			}  // end team is not spectator
+		}  // end team message
+	}  // end directed message
 
 	// Assemble message packet
 	SendPacket packet;
@@ -2024,8 +2024,8 @@ void GameHost::update_network_speed() {
 		}
 
 		d->networkspeed = (speeds.size() % 2) != 0u ?
-                           speeds.at(speeds.size() / 2) :
-                           (speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
+		                     speeds.at(speeds.size() / 2) :
+		                     (speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
 
 		if (d->networkspeed > std::numeric_limits<uint16_t>::max()) {
 			d->networkspeed = std::numeric_limits<uint16_t>::max();
