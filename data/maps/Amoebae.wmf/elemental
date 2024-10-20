@@ -1,0 +1,35 @@
+# Automatically created by Widelands 1.2~git26575 (5372ade@master) Release
+
+[global]
+packet_version="1"
+map_w="160"
+map_h="160"
+nr_players="8"
+name=_"Amoebae"
+author="kaputtnik"
+descr=_"You are an Amoeba, expand and conquer all other Amoebae …"
+hint=_"Be aware that you are surrounded with enemies. Disable diplomacy for an easier game, enable it for a more challenging game. Additionally you can define the difficulty by playing against different AI teams. Although some players have more space in the beginning, the map is well balanced."
+tags="1v1,2teams,3teams,4teams,balanced,official"
+addons=
+
+[teams00]
+team1="0,6,2,4"
+team2="1,5,3,7"
+
+[teams01]
+team1="6,7"
+team2="5,4"
+team3="2,1"
+team4="3,0"
+
+[teams02]
+team1="6,2,4"
+team2="3,7,1"
+
+[teams03]
+team1="6"
+team2="5"
+
+[teams04]
+team1="7"
+team2="4"
