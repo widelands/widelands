@@ -129,9 +129,15 @@ EOF
    ASANPATH=`dirname $ASANLIB`
 
    echo "Copying and fixing dynamic libraries... "
-   $SOURCE_DIR/utils/macos/bundle-dylibs.sh \
-      -l ../libs \
-      $DESTINATION/Widelands.app
+   # $SOURCE_DIR/utils/macos/bundle-dylibs.sh \
+   #  -l ../libs \
+   #  $DESTINATION/Widelands.app
+
+   # Alternative Tool to use
+   dylibbundler --overwrite-dir --bundle-deps --no-codesign \
+	--search-path $ASANPATH \
+	--fix-file $DESTINATION/Widelands.app/Contents/MacOS/widelands \
+	--dest-dir $DESTINATION/Widelands.app/Contents/libs
 
    echo "Re-sign libraries with an 'ad-hoc signing' see man codesign"
    codesign --sign - --force $DESTINATION/Widelands.app/Contents/libs/*
