@@ -2,13 +2,13 @@ include "test/scripting/lunit.lua"
 include "test/scripting/check_game_end.lua"
 
 -- player 3 is on winning team, but is eliminated
-losers = {3, 2, 1}
+eliminated = {3, 2, 1}
 winners = {4, 5}
 
 run(function()
   sleep(8000)
 
-  for i,n in ipairs(losers) do
+  for i,n in ipairs(eliminated) do
     sleep(2000)
     p = game.players[n]
     print("Destroying HQ of " .. p.name)
@@ -20,4 +20,4 @@ run(function()
   print("All loser HQs destroyed, win condition should be triggered now.")
 end)
 
-check_win_condition(winners)
+check_win_condition(winners, eliminated)

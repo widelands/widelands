@@ -3,6 +3,7 @@ include "test/scripting/check_game_end.lua"
 
 -- Slots 3 to 5 are closed, players[3] is slot 6
 winner = 3
+eliminated = {1, 2, 4, 5}
 
 run(function()
   sleep(8000)
@@ -20,4 +21,4 @@ run(function()
   print("All loser HQs destroyed, win condition should be triggered now.")
 end)
 
-check_win_condition(winner)
+check_win_condition(winner, eliminated)
