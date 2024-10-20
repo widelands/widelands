@@ -10,7 +10,7 @@ jobs:
         # We test the two newest and the two oldest versions of each of the two compilers
         config: [Debug, Release]
         os: [ubuntu-24.04]
-        compiler: [clang-18, clang-17, g++-12, g++-11]
+        compiler: [clang-18, clang-17, g++-14, g++-13]
         include:
           # Some compilers need an older ubuntu version to run correctly
           - compiler: g++-9
