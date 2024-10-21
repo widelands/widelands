@@ -32,7 +32,7 @@ namespace Widelands {
 WareList::~WareList() {
 	for (uint32_t id = 0; id < wares_.size(); ++id) {
 		if (wares_[id] != 0u) {
-			log_warn("WareList: %i items of %i left.\n", wares_[id], id);
+			log_warn("WareList: %u items of %u left.\n", wares_[id], id);
 		}
 	}
 }

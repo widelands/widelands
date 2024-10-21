@@ -184,7 +184,7 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdWarshipCommand(des);
 
 	default:
-		throw wexception("PlayerCommand::deserialize(): Encountered invalid command id: %d",
+		throw wexception("PlayerCommand::deserialize(): Encountered invalid command id: %u",
 		                 static_cast<unsigned>(command_id));
 	}
 }

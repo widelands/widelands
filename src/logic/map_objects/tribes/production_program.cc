@@ -1776,7 +1776,7 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 		ps.set_production_result(ts->descr().no_soldier_to_train_message());
 		return ps.program_end(game, ProgramResult::kSkipped);
 	}
-	ps.molog(game.get_gametime(), "  Checking soldier (%u) level %d)\n",
+	ps.molog(game.get_gametime(), "  Checking soldier (%u) level %u)\n",
 	         static_cast<unsigned int>(training_.attribute), training_.level);
 
 	const std::vector<Soldier*>::const_iterator soldiers_end = soldiers.end();
@@ -1869,7 +1869,7 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 	const unsigned current_level = ts.checked_soldier_training().level;
 	assert(current_level != INVALID_INDEX);
 
-	ps.molog(game.get_gametime(), "  Training soldier's %u (%d to %d)",
+	ps.molog(game.get_gametime(), "  Training soldier's %u (%u to %u)",
 	         static_cast<unsigned int>(training_.attribute), current_level, training_.level);
 
 	assert(current_level < training_.level);

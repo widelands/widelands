@@ -815,8 +815,8 @@ DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* c
 	}
 
 	if (lowest < amount) {
-		throw GameDataError("Tribe '%s' has no indicators for amount %i of resource '%s' (highest "
-		                    "possible amount is %i)!",
+		throw GameDataError("Tribe '%s' has no indicators for amount %u of resource '%s' (highest "
+		                    "possible amount is %u)!",
 		                    name_.c_str(), amount, res->name().c_str(), lowest);
 	}
 

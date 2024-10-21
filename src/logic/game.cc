@@ -255,7 +255,7 @@ bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_sce
 		std::string tribe = map().get_scenario_player_tribe(p);
 		if (tribe.empty()) {
 			verb_log_info_time(
-			   get_gametime(), "Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
+			   get_gametime(), "Setting random tribe for Player %u\n", static_cast<unsigned int>(p));
 			const DescriptionIndex random = RNG::static_rand(descriptions().nr_tribes());
 			tribe = descriptions().get_tribe_descr(random)->name();
 		}

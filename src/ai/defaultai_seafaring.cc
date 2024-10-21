@@ -412,8 +412,8 @@ void DefaultAI::manage_ports() {
 			game().send_player_set_soldier_preference(
 			   *p_obs.site, Widelands::SoldierPreference::kHeroes);
 			verb_log_dbg_time(game().get_gametime(),
-			                  "AI %d: Set garrison for port %s, desired garrison %d, actual garrison "
-			                  "%d, change value %d\n",
+			                  "AI %d: Set garrison for port %s, desired garrison %u, actual garrison "
+			                  "%u, change value %d\n",
 			                  player_number(), p_obs.site->get_warehouse_name().c_str(),
 			                  desired_garrison, p_obs.site->get_desired_soldier_count(), change_value);
 			game().send_player_change_soldier_capacity(*p_obs.site, change_value);
@@ -525,7 +525,7 @@ bool DefaultAI::check_ships(const Time& gametime) {
 				if (!so.guarding) {
 					verb_log_warn_time(
 					   gametime,
-					   "AI %1d: last command for ship %s at %3dx%3d was %3d seconds ago, something "
+					   "AI %1d: last command for ship %s at %3dx%3d was %3u seconds ago, something "
 					   "wrong here?...\n",
 					   player_number(), so.ship->get_shipname().c_str(), so.ship->get_position().x,
 					   so.ship->get_position().y, (gametime - so.last_command_time).get() / 1000);
@@ -835,7 +835,7 @@ void DefaultAI::warship_management(ShipObserver& so) {
 		//               reshuffling on game loading.
 
 		for (PortSiteObserver& p_obs : portsites) {
-			verb_log_dbg_time(gametime, "AI %d: Port %s has %d ships assigned",
+			verb_log_dbg_time(gametime, "AI %d: Port %s has %u ships assigned",
 			                  player_->player_number(), p_obs.site->get_warehouse_name().c_str(),
 			                  p_obs.ships_assigned);
 			if (p_obs.ships_assigned < picked_port_guard_ships) {

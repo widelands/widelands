@@ -691,7 +691,7 @@ Waterway* Player::build_waterway(const Path& path) {
 	if (path.get_nsteps() > map.get_waterway_max_length()) {
 		log_warn_time(
 		   egbase().get_gametime(),
-		   "%d: Refused to build a waterway because it is too long. Permitted length %d, actual "
+		   "%u: Refused to build a waterway because it is too long. Permitted length %u, actual "
 		   "length %" PRIuS ".",
 		   static_cast<unsigned int>(player_number()), map.get_waterway_max_length(),
 		   path.get_nsteps());
@@ -713,17 +713,17 @@ Waterway* Player::build_waterway(const Path& path) {
 				}
 				if (!CheckStepFerry(egbase()).reachable_dest(map, fc)) {
 					log_warn_time(egbase().get_gametime(),
-					              "%i: building waterway aborted, unreachable for ferries\n",
+					              "%u: building waterway aborted, unreachable for ferries\n",
 					              static_cast<unsigned int>(player_number()));
 					return nullptr;
 				}
 			}
 			return &Waterway::create(egbase(), *start, *end, path);
 		}
-		log_warn_time(egbase().get_gametime(), "%i: building waterway aborted, missing end flag\n",
+		log_warn_time(egbase().get_gametime(), "%u: building waterway aborted, missing end flag\n",
 		              static_cast<unsigned int>(player_number()));
 	} else {
-		log_warn_time(egbase().get_gametime(), "%i: building waterway aborted, missing start flag\n",
+		log_warn_time(egbase().get_gametime(), "%u: building waterway aborted, missing start flag\n",
 		              static_cast<unsigned int>(player_number()));
 	}
 	return nullptr;

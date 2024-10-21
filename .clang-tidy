@@ -163,5 +163,4 @@ HeaderFilterRegex:
   #   /home/user/src/widelands/
   # TODO(tothxa): figure out which multiline format works...
   'src/((ai|base|chat|economy|editor|game_io|graphic|io|logic|map_io|network|notifications|scripting|sound|ui_basic|ui_fsmenu|website|wui)/|[a-z_]+\.h)'
-AnalyzeTemporaryDtors: true
 FormatStyle:     none

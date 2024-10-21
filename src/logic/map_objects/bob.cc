@@ -670,7 +670,7 @@ void Bob::movepath_update(Game& game, State& state) {
 			   game, Widelands::Area<Widelands::FCoords>(get_position(), 0), nullptr, FindBobShip());
 			assert(ships_count > 0);
 			if (ships_count > 1) {
-				molog(game.get_gametime(), "Pausing the ship because %d ships on the same spot\n",
+				molog(game.get_gametime(), "Pausing the ship because %u ships on the same spot\n",
 				      ships_count);
 				return start_task_idle(
 				   game, state.diranims.get_animation(dir), ((game.logic_rand() % 3) + 1) * 5000);
@@ -970,15 +970,15 @@ void Bob::log_general_info(const EditorGameBase& egbase) const {
 	molog(egbase.get_gametime(), "Owner: %p\n", owner_.load());
 	FORMAT_WARNINGS_ON
 	molog(egbase.get_gametime(), "Position: (%i, %i)\n", position_.x, position_.y);
-	molog(egbase.get_gametime(), "ActID: %i\n", actid_);
+	molog(egbase.get_gametime(), "ActID: %u\n", actid_);
 	molog(egbase.get_gametime(), "ActScheduled: %s\n", actscheduled_ ? "true" : "false");
 	molog(egbase.get_gametime(), "Animation: %s\n",
 	      anim_ != 0u ? descr().get_animation_name(anim_).c_str() : "\\<none\\>");
 
-	molog(egbase.get_gametime(), "AnimStart: %i\n", animstart_.get());
+	molog(egbase.get_gametime(), "AnimStart: %u\n", animstart_.get());
 	molog(egbase.get_gametime(), "WalkingDir: %i\n", walking_);
-	molog(egbase.get_gametime(), "WalkingStart: %i\n", walkstart_.get());
-	molog(egbase.get_gametime(), "WalkEnd: %i\n", walkend_.get());
+	molog(egbase.get_gametime(), "WalkingStart: %u\n", walkstart_.get());
+	molog(egbase.get_gametime(), "WalkEnd: %u\n", walkend_.get());
 
 	molog(egbase.get_gametime(), "Signal: %s\n", signal_.c_str());
 
@@ -1001,7 +1001,7 @@ void Bob::log_general_info(const EditorGameBase& egbase) const {
 		molog(egbase.get_gametime(), "* coords: (%i, %i)\n", stack_[i].coords.x, stack_[i].coords.y);
 		molog(egbase.get_gametime(), "* diranims:");
 		for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-			molog(egbase.get_gametime(), " %d", stack_[i].diranims.get_animation(dir));
+			molog(egbase.get_gametime(), " %u", stack_[i].diranims.get_animation(dir));
 		}
 		FORMAT_WARNINGS_OFF
 		molog(egbase.get_gametime(), "\n* path: %p\n", stack_[i].path);

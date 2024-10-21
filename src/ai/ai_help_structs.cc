@@ -584,7 +584,7 @@ void ManagementData::review(const Time& gametime,
 
 	verb_log_dbg_time(gametime,
 	                  "AIPARSE %2d reviewing sc: %5d Pr.p: %d (Bonuses:Te:%s I:%s Tr:%s, "
-	                  "Scores:Land:%5d+%4d Str:%4d PS:%4d, Att:%4d, Sh:%d, FinMns:%d\n",
+	                  "Scores:Land:%5d+%4d Str:%4d PS:%4u, Att:%4d, Sh:%d, FinMns:%d\n",
 	                  pn, score, primary_parent, (best_player_bonus) ? "Y" : "N",
 	                  (iron_mine_bonus) ? "Y" : "N", (training_bonus) ? "Y" : "N", land_score,
 	                  territory_growth_bonus, strength_score, ps_sites_score,
@@ -1184,7 +1184,7 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
 				invite = true;  // Will fall through
 			} else {
 				verb_log_dbg_time(gametime,
-				                  "AI Diplomacy: Player(%d)%s cannot invite player (%d) with "
+				                  "AI Diplomacy: Player(%u)%s cannot invite player (%u) with "
 				                  "diploscore %d\n",
 				                  static_cast<unsigned int>(this_player_number), myts_s.c_str(),
 				                  static_cast<unsigned int>(pn), get_diplo_score(pn));
@@ -1193,7 +1193,7 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
 		} else {  // Other has team, or own team is less desirable than other player alone
 			verb_log_dbg_time(
 			   gametime,
-			   "AI Diplomacy: Player(%d)%s requests to join player (%d) with diploscore %d%s\n",
+			   "AI Diplomacy: Player(%u)%s requests to join player (%u) with diploscore %d%s\n",
 			   static_cast<unsigned int>(this_player_number), myts_s.c_str(),
 			   static_cast<unsigned int>(pn), get_diplo_score(pn), ots_s.c_str());
 			game.send_player_diplomacy(this_player_number, Widelands::DiplomacyAction::kJoin, pn);
@@ -1203,7 +1203,7 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
 	} else {  // Own team is more desirable, or everyone else is teamed up against us
 		if (other_alone) {
 			verb_log_dbg_time(gametime,
-			                  "AI Diplomacy: Player(%d)%s declines to invite player (%d) with "
+			                  "AI Diplomacy: Player(%u)%s declines to invite player (%u) with "
 			                  "diploscore %d\n",
 			                  static_cast<unsigned int>(this_player_number), myts_s.c_str(),
 			                  static_cast<unsigned int>(pn), get_diplo_score(pn));
@@ -1216,7 +1216,7 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
 
 	if (invite) {
 		verb_log_dbg_time(
-		   gametime, "AI Diplomacy: Player(%d)%s invites player (%d) to join with diploscore %d%s\n",
+		   gametime, "AI Diplomacy: Player(%u)%s invites player (%u) to join with diploscore %d%s\n",
 		   static_cast<unsigned int>(this_player_number), myts_s.c_str(),
 		   static_cast<unsigned int>(pn), get_diplo_score(pn), ots_s.c_str());
 		game.send_player_diplomacy(this_player_number, Widelands::DiplomacyAction::kInvite, pn);
