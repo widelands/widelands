@@ -493,17 +493,17 @@ msgstr "Origino de la mapo"
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
-msgstr "Agordi la pozicion, kiu havu la koordinatojn (0, 0). Tiu estos la maldekstra supra angulo de la generita mapo."
+msgstr "Agordi la pozicion, kiu havos la koordinatojn (0, 0). Ĉi tiu estos la supra-maldekstra angulo de la generita minimapo."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:387
 msgid "Map size"
-msgstr "Amplekso de mapo"
+msgstr "Mapograndeco"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:390
 msgid "Change the map’s size"
-msgstr "Ŝanĝi la amplekson de la mapo"
+msgstr "Ŝanĝi la grandecon de la mapo"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:394
@@ -513,19 +513,19 @@ msgstr "Informo"
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:397
 msgid "Click on a field to show information about it"
-msgstr "Klaku sur la kampon por montri informon pri ĝi"
+msgstr "Alklaku la kampon por montri informon pri ĝi."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:401
 #: ../../../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../../../src/wlapplication_options.cc:537
 msgid "Tool History"
-msgstr ""
+msgstr "Ilohistorio"
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:404
 msgid "Restore previous tool settings"
-msgstr ""
+msgstr "Restarigi la antaŭajn iloagordojn"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -536,13 +536,13 @@ msgstr ""
 #: ../../../../src/editor/editorinteractive.cc:476
 #: ../../../../src/wui/interactive_gamebase.cc:271
 msgid "Hide Building Spaces"
-msgstr "Kaŝi eblajn ejojn por konstruo"
+msgstr "Kaŝi eblajn konstruejojn"
 
 #: ../../../../src/editor/editorinteractive.cc:476
 #: ../../../../src/ui_fsmenu/options.cc:292
 #: ../../../../src/wui/interactive_gamebase.cc:271
 msgid "Show Building Spaces"
-msgstr "Montri eblajn lokojn por konstruo"
+msgstr "Montri eblajn konstruejojn"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether to
 #. show maximum
@@ -550,27 +550,27 @@ msgstr "Montri eblajn lokojn por konstruo"
 #. etc.) are removed
 #: ../../../../src/editor/editorinteractive.cc:483
 msgid "Hide Maximum Building Spaces"
-msgstr ""
+msgstr "Kaŝi la plej grandajn konstruejojn"
 
 #: ../../../../src/editor/editorinteractive.cc:484
 msgid "Show Maximum Building Spaces"
-msgstr ""
+msgstr "Montri la plej grandajn konstruejojn"
 
 #: ../../../../src/editor/editorinteractive.cc:487
 msgid ""
 "Toggle whether to show maximum building spaces that will be available if all"
 " immovables (trees, rocks, etc.) are removed"
-msgstr ""
+msgstr "Alterni ĉu montri la plej grandajn konstruejojn, kiuj estos disponeblaj, se ĉiuj nemoveblaĵoj (arboj, rokoj, ktp.) estas forigitaj"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map height heat map is shown
 #: ../../../../src/editor/editorinteractive.cc:494
 msgid "Disable height heat map"
-msgstr ""
+msgstr "Malŝalti la altecan varmapon"
 
 #: ../../../../src/editor/editorinteractive.cc:495
 msgid "Enable height heat map"
-msgstr ""
+msgstr "Ŝalti la altecan varmapon"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
@@ -586,28 +586,28 @@ msgstr "Montri kradon"
 #. the oceans are shown
 #: ../../../../src/editor/editorinteractive.cc:510
 msgid "Hide Oceans"
-msgstr ""
+msgstr "Kaŝi oceanojn"
 
 #: ../../../../src/editor/editorinteractive.cc:510
 msgid "Show Oceans"
-msgstr ""
+msgstr "Montri oceanojn"
 
 #: ../../../../src/editor/editorinteractive.cc:513
 msgid ""
 "Display separate water bodies with differently coloured overlays to see "
 "which coasts can be connected by shipping routes"
-msgstr ""
+msgstr "Montru apartajn akvokorpojn kun malsamkoloraj tavoloj por vidi, kiuj marbordoj povas esti konektitaj per maraj itineroj."
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
 #. *  (trees, rocks etc.) are shown
 #: ../../../../src/editor/editorinteractive.cc:520
 msgid "Hide Immovables"
-msgstr "Kaŝi nemoveblajn aĵojn"
+msgstr "Kaŝi nemoveblaĵojn"
 
 #: ../../../../src/editor/editorinteractive.cc:520
 msgid "Show Immovables"
-msgstr "Montri nemoveblajn aĵojn"
+msgstr "Montri nemoveblaĵojn"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
@@ -623,26 +623,26 @@ msgstr "Montri bestojn"
 #. resources are shown
 #: ../../../../src/editor/editorinteractive.cc:531
 msgid "Hide Resources"
-msgstr "Kaŝi materialojn"
+msgstr "Kaŝi resursojn"
 
 #: ../../../../src/editor/editorinteractive.cc:531
 msgid "Show Resources"
-msgstr "Montri materialojn"
+msgstr "Montri resursojn"
 
 #: ../../../../src/editor/editorinteractive.cc:582
 msgid "Unsupported Format"
-msgstr "Ne konata formo"
+msgstr "Nesubtenata formato"
 
 #: ../../../../src/editor/editorinteractive.cc:583
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
-msgstr "Widelands ne povis ŝargi la dosieron \"%s\". La formato ŝajnas esti nekongrua"
+msgstr "Widelands ne povis ŝargi la dosieron \"%s\". Ŝajnas, ke la dosiera formato estas ne kongrua."
 
 #: ../../../../src/editor/editorinteractive.cc:648
 msgid "Exit Editor Confirmation"
-msgstr ""
+msgstr "Konfirmo de eliro el la redaktilo"
 
 #: ../../../../src/editor/editorinteractive.cc:648
 msgid "Unsaved Map"
@@ -654,7 +654,7 @@ msgstr "La mapo ne estis konservita; ĉu vi vere volas eliri?"
 
 #: ../../../../src/editor/editorinteractive.cc:650
 msgid "Are you sure you wish to exit the editor?"
-msgstr ""
+msgstr "Ĉu vi certas, ke vi volas eliri el la redaktilo?"
 
 #: ../../../../src/editor/editorinteractive.cc:1283
 #: ../../../../src/logic/addons.cc:48 ../../../../src/ui_basic/dropdown.cc:358
@@ -689,12 +689,12 @@ msgid ""
 "\n"
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
 "Please add this information to your report."
-msgstr ""
+msgstr "Eraro okazis. La erarmesaĝo estas:\n\n%1$s\n\nBonvolu raporti ĉi tiun problemon por helpi nin plibonigi Widelands. Vi trovos rilatajn mesaĝojn en la norma eligo (stdout.txt en Vindozo). Vi uzas la version %2$s.\nBonvolu aldoni ĉi tiun informon al via raporto."
 
 #: ../../../../src/editor/editorinteractive.cc:1321
 #, c-format
 msgid "Loading map “%s”…"
-msgstr "Ŝargante mapon “%s”…"
+msgstr "Ŝargante la mapon “%s”…"
 
 #. * TRANSLATORS: Default name for new map
 #: ../../../../src/editor/editorinteractive.cc:1343
@@ -703,7 +703,7 @@ msgstr "Ŝargante mapon “%s”…"
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:144
 #: ../../../../src/logic/map.h:232 ../../../../src/wui/mapdata.cc:50
 msgid "No Name"
-msgstr "Nenia nomo"
+msgstr "Sennoma"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
 #: ../../../../src/editor/editorinteractive.cc:1346
@@ -722,11 +722,11 @@ msgstr "Ŝargante mondon..."
 #: ../../../../src/editor/editorinteractive.cc:1552
 #, c-format
 msgid "Tool gaps: %u%%"
-msgstr ""
+msgstr "Ilaj interspacoj: %u%%"
 
 #: ../../../../src/editor/editorinteractive.cc:1575
 msgid "Publish Map"
-msgstr ""
+msgstr "Publikigi Mapon"
 
 #: ../../../../src/editor/editorinteractive.cc:1576
 #, c-format
@@ -738,54 +738,54 @@ msgid ""
 "Author: %3$s\n"
 "Description: %4$s\n"
 "Hint: %5$s\n"
-msgstr ""
+msgstr "Ĉu vi certas, ke vi volas publikigi ĉi tiun mapon rete?\n\nNomo: %1$s\nInterna nomo: %2$s\nAŭtoro: %3$s\nPriskribo: %4$s\nKonsilo: %5$s\n"
 
 #: ../../../../src/editor/editorinteractive.cc:1600
 msgid "Login Error"
-msgstr ""
+msgstr "Ensaluteraro"
 
 #: ../../../../src/editor/editorinteractive.cc:1605
 msgid "Uploading Add-On…"
-msgstr ""
+msgstr "Alŝutante kromprogramon…"
 
 #: ../../../../src/editor/editorinteractive.cc:1606
 msgid "Saving map…"
-msgstr ""
+msgstr "Konservante mapon…"
 
 #: ../../../../src/editor/editorinteractive.cc:1625
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:315
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:370
 msgid "Error Saving Map!"
-msgstr "Eraro dum konservado de mapo!"
+msgstr "Eraro dum konservado de la mapo!"
 
 #: ../../../../src/editor/editorinteractive.cc:1631
 msgid "Packaging add-on…"
-msgstr ""
+msgstr "Pakumante kromprogramon…"
 
 #: ../../../../src/editor/editorinteractive.cc:1682
 msgid "Add-On Generation Error"
-msgstr ""
+msgstr "Eraro dum generado de la kromprogramo"
 
 #: ../../../../src/editor/editorinteractive.cc:1683
 msgid "The add-on could not be written to the disk."
-msgstr ""
+msgstr "La kromprogramo ne povis esti skribita sur la disko."
 
 #: ../../../../src/editor/editorinteractive.cc:1690
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:108
 msgid "Uploading…"
-msgstr ""
+msgstr "Alŝutante..."
 
 #: ../../../../src/editor/editorinteractive.cc:1696
 msgid "Upload Error"
-msgstr ""
+msgstr "Alŝuteraro"
 
 #: ../../../../src/editor/editorinteractive.cc:1718
 msgid "Success"
-msgstr ""
+msgstr "Sukceso"
 
 #: ../../../../src/editor/editorinteractive.cc:1719
 msgid "The add-on was uploaded successfully."
-msgstr ""
+msgstr "La kromprogramo alŝutiĝis sukcese."
 
 #: ../../../../src/editor/map_generator.cc:754
 msgid "Random Player"
