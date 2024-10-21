@@ -1,8 +1,9 @@
-#!/bin/zsh
+#!/bin/bash
+
+# based on https://github.com/imrehorvath/bundle-dylibs/blob/main/bundle-dylibs
 
 # Copyright (c) 2021 Imre Horvath <imi [dot] horvath [at] gmail [dot] com>
 # MIT License
-# https://github.com/imrehorvath/bundle-dylibs
 # Should work with /bin/sh or /bin/bash too.
 # Inspired by:
 # https://github.com/renard/emacs-build-macosx/blob/master/build-emacs
@@ -12,7 +13,7 @@ set -e
 
 relpath="../Frameworks"  # dylibs go to @executable_path/../Frameworks by default
 
-usage_text="Usage: $(basename $0) [-h] [-l relative_path] path_to_app
+usage_text="Usage: $(basename "$0") [-h] [-l relative_path] path_to_app
 
 -h Show this usage description and exit.
 
@@ -22,7 +23,7 @@ usage_text="Usage: $(basename $0) [-h] [-l relative_path] path_to_app
 
 usage() {
     echo "$usage_text" 1>&2
-    exit ${1:-1}
+    exit "${1:-1}"
 }
 
 while getopts ':hl:' opt; do
@@ -48,9 +49,9 @@ libdir="$bundlepath/Contents/MacOS/$relpath"
 
 list_dylibs() {
     local file="$1"
-    echo $(otool -L "$file" |\
-	       sed -n 's/^[[:space:]]*\(.*\) (.*$/\1/p' |\
-	       sed -e '/^\/System/d' -e '/^\/usr\/lib/d' -e '/^@/d')
+    otool -L "$file" | \
+       sed -n 's/^[[:space:]]*\(.*\) (.*$/\1/p' | \
+       sed -e '/^\/System/d' -e '/^\/usr\/lib/d' -e '/^@/d'
 }
 
 process_dylibs() {
@@ -59,23 +60,25 @@ process_dylibs() {
     local dylib
     local name
     local dest
-    for dylib in $(echo $dylibs); do
-	name="$(basename $dylib)"
+    for dylib in $dylibs; do
+	name="$(basename "$dylib")"
 	dest="$libdir/$name"
 	if [[ ! -e $dest ]]; then
 	    cp "$dylib" "$dest"
 	    chmod 644 "$dest"
 	    install_name_tool -id "@rpath/$name" "$dest"
-	    process_dylibs "$(list_dylibs $dest)" "$dest"
+            process_dylibs "$(list_dylibs "$dest")" "$dest"
 	fi
 	install_name_tool -change "$dylib" "@rpath/$name" "$file"
-	echo "Adding $dylib"
     done
 }
 
 process_executable() {
-    local executable="$1"
-    local dylibs="$(list_dylibs $executable)"
+    local executable
+    local dylibs
+    
+    executable="$1"
+    dylibs="$(list_dylibs "$executable")"
     if [[ -n $dylibs ]]; then
 	mkdir -p "$libdir"
 	process_dylibs "$dylibs" "$executable"
@@ -83,16 +86,17 @@ process_executable() {
     fi
 }
 
-if [[ $(basename $bundlepath) =~ [.]app$ ]] &&
+if [[ $(basename "$bundlepath") =~ [.]app$ ]] &&
        [[ -f $bundlepath/Contents/Info.plist ]] &&
        [[ -d $bundlepath/Contents/MacOS ]]; then
-    for executable in $(find "$bundlepath/Contents/MacOS" -type f -perm +111); do
-	if [[ $(file $executable) =~ Mach-O.*executable ]]; then
+    find "$bundlepath/Contents/MacOS" -type f -perm +111 -print0 | while IFS= read -r -d '' executable; do
+	if [[ $(file "$executable") =~ Mach-O.*executable ]]; then
+	    echo process_executable "$executable"
 	    process_executable "$executable"
 	fi
     done
 else
-    echo "\"$bundlepath\" does not apper to be an application bundle." 1>&2
+    echo "\"$bundlepath\" does not appear to be an application bundle." 1>&2
     exit 1
 fi
 
