@@ -161,7 +161,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_messages.cc:124
 msgid "Play the intro music at startup and show splash image until it ends."
-msgstr ""
+msgstr "Prehrať úvodnú hudbu pri spúšťaní a ukázať úvodný obrázok, kým sa neskončí."
 
 #: ../../../../src/wlapplication_messages.cc:125
 msgid "Force Widelands to crash when a Lua error occurs."
