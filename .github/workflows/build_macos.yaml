@@ -28,6 +28,8 @@ jobs:
         # Suppress warnings about installing formulas instead of casks. Casks would raise another
         # warning about disabling macos gatekeeper.
         ./install-dependencies.sh homebrew --formula
+        # temporary fix for macos-14 arm failures
+        homebrew install --formula --quiet icu4c
     - name: Building
       run: |
         mkdir build_wl
