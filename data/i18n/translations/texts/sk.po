@@ -644,7 +644,7 @@ msgstr "Stlačením klávesu Shift možno zapnúť prvý alternatívny nástroj.
 #: ../../../../data/txts/tips/editor.lua:24
 msgid ""
 "Holding down Ctrl switches the second alternative tool on (if it exists)."
-msgstr ""
+msgstr "Stlačením klávesu Ctrl možno zapnúť druhý alternatívny nástroj (ak existuje)."
 
 #: ../../../../data/txts/tips/editor.lua:28
 msgid ""
