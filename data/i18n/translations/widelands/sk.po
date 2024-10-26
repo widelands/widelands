@@ -481,7 +481,7 @@ msgstr "Hráči"
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:372
 msgid "Set number of players and their names, tribes and starting positions"
-msgstr "Nastav počet hráčov, ich mená, kmene a štartovacie pozície"
+msgstr "Nastaviť počet hráčov, ich mená, kmene a začiatočné pozície"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:376
@@ -513,7 +513,7 @@ msgstr "Informácie"
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:397
 msgid "Click on a field to show information about it"
-msgstr "Kliknutím zobrazíte ďalšie informácie o políčku."
+msgstr "Kliknutím zobraziť ďalšie informácie o políčku."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:401
@@ -525,7 +525,7 @@ msgstr "História nástrojov"
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:404
 msgid "Restore previous tool settings"
-msgstr ""
+msgstr "Obnoviť predchádzajúce nastavenia nástroja"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -566,11 +566,11 @@ msgstr "Prepínač zobrazenia najväčších stavebných miest, ktoré sú k dis
 #. the map height heat map is shown
 #: ../../../../src/editor/editorinteractive.cc:494
 msgid "Disable height heat map"
-msgstr ""
+msgstr "Skry výškovú teplotnú mapu"
 
 #: ../../../../src/editor/editorinteractive.cc:495
 msgid "Enable height heat map"
-msgstr ""
+msgstr "Zobraz výškovú teplotnú mapu"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
@@ -586,11 +586,11 @@ msgstr "Zobraz mriežku"
 #. the oceans are shown
 #: ../../../../src/editor/editorinteractive.cc:510
 msgid "Hide Oceans"
-msgstr ""
+msgstr "Skry oceány"
 
 #: ../../../../src/editor/editorinteractive.cc:510
 msgid "Show Oceans"
-msgstr ""
+msgstr "Zobraz oceány"
 
 #: ../../../../src/editor/editorinteractive.cc:513
 msgid ""
@@ -1165,7 +1165,7 @@ msgstr "+"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:114
 msgid "Add a player to this team"
-msgstr ""
+msgstr "Pridať hráča do tohto tímu"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:327
 #: ../../../../src/logic/addons.cc:69
@@ -3261,7 +3261,7 @@ msgstr "Terény"
 #: ../../../../src/map_io/map_saver.cc:134
 #: ../../../../src/map_io/widelands_map_loader.cc:257
 msgid "Starting positions"
-msgstr ""
+msgstr "Začiatočné pozície"
 
 #: ../../../../src/map_io/map_saver.cc:162
 #: ../../../../src/map_io/widelands_map_loader.cc:285
@@ -4749,7 +4749,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:547
 msgid "Filter add-ons by name"
-msgstr ""
+msgstr "Filtrovať doplnky podľa mena"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:558
 #, c-format
@@ -6282,7 +6282,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:310
 msgid "The selected win condition does not allow peaceful matches"
-msgstr ""
+msgstr "Zvolená podmienka výhry nedovoľuje mierové nastavenie"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:312
 msgid "Forbid fighting between players"
@@ -6290,7 +6290,7 @@ msgstr "Zakázané boje medzi hráčmi"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:343
 msgid "All selected starting conditions ignore the map’s starting positions"
-msgstr ""
+msgstr "Všetky zvolené počiatočné podmienky ignorujú začiatočné pozície mapy"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:349
 msgid "The starting positions are set by the scenario"
@@ -6804,7 +6804,7 @@ msgstr "Zobraziť originálne názvy máp"
 
 #: ../../../../src/ui_fsmenu/mapselect.cc:111
 msgid "Filter by official status"
-msgstr ""
+msgstr "Filtrovať podľa oficiálneho stavu"
 
 #: ../../../../src/ui_fsmenu/mapselect.cc:113
 msgid "Official & Unofficial"
@@ -6816,7 +6816,7 @@ msgstr "Ukázať aj oficiálne aj neoficiálne mapy"
 
 #: ../../../../src/ui_fsmenu/mapselect.cc:125
 msgid "Filter by desired line-up"
-msgstr ""
+msgstr "Filtrovať podľa požadovanej zostavy"
 
 #. * TRANSLATORS: Filter entry in map selection. Other entries are "Free for
 #. all"",
@@ -6827,11 +6827,11 @@ msgstr "Ľubovoľné tímy"
 
 #: ../../../../src/ui_fsmenu/mapselect.cc:129
 msgid "Do not filter by line-up suggestions"
-msgstr ""
+msgstr "Nefiltrovať podľa návrhov zostáv"
 
 #: ../../../../src/ui_fsmenu/mapselect.cc:144
 msgid "Filter by balancing status"
-msgstr ""
+msgstr "Filtrovať podľa stavu vyváženia"
 
 #: ../../../../src/ui_fsmenu/mapselect.cc:499
 msgid "Balanced & Unbalanced"
@@ -7952,7 +7952,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:352
 msgid "Toggle Building Spaces"
-msgstr ""
+msgstr "Prepnúť stavebné miesta"
 
 #: ../../../../src/wlapplication_options.cc:357
 msgid "Toggle Minimap"
@@ -8084,7 +8084,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:542
 msgid "Toggle Height Heat Map"
-msgstr ""
+msgstr "Prepnúť výškovú teplotnú mapu"
 
 #: ../../../../src/wlapplication_options.cc:547
 msgid "Toggle Grid"
@@ -8092,7 +8092,7 @@ msgstr "Prepnúť mriežku"
 
 #: ../../../../src/wlapplication_options.cc:552
 msgid "Toggle Oceans"
-msgstr ""
+msgstr "Prepnúť oceány"
 
 #: ../../../../src/wlapplication_options.cc:557
 msgid "Toggle Immovables"
@@ -8108,7 +8108,7 @@ msgstr "Prepnúť zdroje"
 
 #: ../../../../src/wlapplication_options.cc:573
 msgid "Toggle Maximum Build Spaces"
-msgstr ""
+msgstr "Prepnúť najväčšie stavebné miesta"
 
 #: ../../../../src/wlapplication_options.cc:580
 #, c-format
@@ -8145,11 +8145,11 @@ msgstr "Prepnúť úrovne vojakov"
 
 #: ../../../../src/wlapplication_options.cc:642
 msgid "Toggle Buildings Visibility"
-msgstr ""
+msgstr "Prepnúť viditeľnosť budov"
 
 #: ../../../../src/wlapplication_options.cc:647
 msgid "Toggle Overlapping Workareas"
-msgstr ""
+msgstr "Prepnúť prekrytia pracovných oblastí"
 
 #: ../../../../src/wlapplication_options.cc:652
 #: ../../../../src/wui/general_statistics_menu.cc:47
@@ -8343,7 +8343,7 @@ msgstr "Šípky"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:924
 msgid "Move the map"
-msgstr ""
+msgstr "Posúvanie mapy"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:926
@@ -8354,7 +8354,7 @@ msgstr "Ctrl + šípky"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:928
 msgid "Move the map fast"
-msgstr ""
+msgstr "Rýchle posúvanie mapy"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:930
@@ -8365,7 +8365,7 @@ msgstr "Shift + šípky"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:932
 msgid "Move the map slowly"
-msgstr ""
+msgstr "Pomalé posúvanie mapy"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:944
@@ -9472,16 +9472,16 @@ msgstr ""
 
 #: ../../../../src/wui/game_chat_panel.cc:69
 msgid "Recipient"
-msgstr ""
+msgstr "Príjemca"
 
 #: ../../../../src/wui/game_chat_panel.cc:374
 #: ../../../../src/wui/game_chat_panel.cc:498
 msgid "Unknown Recipient"
-msgstr ""
+msgstr "Neznámy príjemca"
 
 #: ../../../../src/wui/game_chat_panel.cc:443
 msgid "All"
-msgstr ""
+msgstr "všetci"
 
 #. * TRANSLATORS: Window label
 #: ../../../../src/wui/game_client_disconnected.cc:47
@@ -10351,12 +10351,12 @@ msgstr "Artefakty"
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../../../src/wui/map_tags.cc:63
 msgid "The map contains artifacts for the Artifacts win condition"
-msgstr "Táto mapa obsahuje artefakty pre podmienku výhry „Artefakty“"
+msgstr "Mapa obsahuje artefakty pre podmienku výhry „Artefakty“"
 
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../../../src/wui/map_tags.cc:68
 msgid "The map contains a story line or other custom scripting"
-msgstr ""
+msgstr "Mapa obsahuje dej alebo iný vlastný skript"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../../../src/wui/map_tags.cc:71
@@ -11161,7 +11161,7 @@ msgstr ""
 
 #: ../../../../src/wui/sound_options.cc:150
 msgid "Play your own music in-game"
-msgstr ""
+msgstr "Prehrať si vlastnú hudbu v hre"
 
 #: ../../../../src/wui/sound_options.cc:152
 msgid ""
@@ -11173,7 +11173,7 @@ msgstr ""
 
 #: ../../../../src/wui/sound_options.cc:161
 msgid "Play the intro music at startup"
-msgstr ""
+msgstr "Prehrať úvodnú hudbu pri spúšťaní"
 
 #: ../../../../src/wui/sound_options.cc:163
 msgid ""
