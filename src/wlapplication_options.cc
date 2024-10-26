@@ -996,6 +996,9 @@ std::string get_ingame_shortcut_help() {
 	rv += get_shortcut_range_help(
 	   KeyboardShortcut::kInGameSeafaringstats_Begin, KeyboardShortcut::kInGameSeafaringstats_End);
 
+	rv += as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Add-Ons"));
+	rv += get_shortcut_range_help(KeyboardShortcut::k_End + 1, get_highest_used_keyboard_shortcut());
+
 	return rv;
 }
 
@@ -1051,6 +1054,9 @@ std::string get_editor_shortcut_help() {
 	rv += as_definition_line(pgettext("hotkey", "Ctrl + Click"),
 	                         /** TRANSLATORS: This is the helptext for an access key combination. */
 	                         _("Set map elements to the value selected by ‘Set Value’"));
+
+	rv += as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Add-Ons"));
+	rv += get_shortcut_range_help(KeyboardShortcut::k_End + 1, get_highest_used_keyboard_shortcut());
 
 	return rv;
 }
