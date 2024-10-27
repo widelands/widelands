@@ -150,7 +150,7 @@ msgstr "%1$s (%2$i P) x %3$i = %4$i P"
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "Sumo: %i poento"
-msgstr[1] "Sumo: %i poentoj"
+msgstr[1] "Suma: %i poentoj"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:111
 #, lua-format
@@ -162,7 +162,7 @@ msgstr "Stato por Teamo %d"
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
 msgstr[0] "Teama Sumo: %i poento"
-msgstr[1] "Teama sumo: %i poentoj"
+msgstr[1] "Suma de la teamo: %i poentoj"
 
 #: ../../../../data/scripting/win_conditions/defeat_all.lua:15
 msgid "Autocrat"
@@ -244,7 +244,7 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes. If the peaceful mode is selected, the game ends if one "
 "player has more land than any other player could gain."
-msgstr "Ĉiu ludanto aŭ teamo provas akiri pli ol la duonon de la mapareo. La venkinto estos la ludanto aŭ teamo, kiu sukcesas konservi tiun areon dum almenaŭ 20 minutoj. Se la paca modo estas elektita, la ludo finiĝas, kiam unu ludanto havas pli da teritorio ol kiun povus akiri iu ajn alia ludanto."
+msgstr "Ĉiu ludanto aŭ teamo provas akiri pli ol la duonon de la mapareo. La venkinto estos la ludanto aŭ teamo, kiu sukcesas konservi tiun areon dum almenaŭ 20 minutoj. Se la paca reĝimo estas elektita, la ludo finiĝas, kiam unu ludanto havas pli da teritorio ol kiun povus akiri iu ajn alia ludanto."
 
 #: ../../../../data/scripting/win_conditions/territorial_lord.lua:58
 msgid "Currently no faction owns more than half of the map’s area."
@@ -262,7 +262,7 @@ msgid ""
 "least 20 minutes, or the one with the most territory after %s, whichever "
 "comes first. If the peaceful mode is selected, the game ends if one player "
 "has more land than any other player could gain."
-msgstr "Ĉiu ludanto aŭ teamo provas akiri pli ol la duonon de la mapareo. La venkinto estos la ludanto aŭ teamo, kiu sukcesas konservi tiun areon dum almenaŭ 20 minutoj aŭ tiu kun la plej granda teritorio post %s, depende de kiu okazos unue. Se la paca modo estas elektita, la ludo finiĝas, kiam unu ludanto havas pli da teritorio ol kiun povus akiri iu ajn alia ludanto."
+msgstr "Ĉiu ludanto aŭ teamo provas akiri pli ol la duonon de la mapareo. La venkinto estos la ludanto aŭ teamo, kiu sukcesas konservi tiun areon dum almenaŭ 20 minutoj aŭ tiu kun la plej granda teritorio post %s, depende de kiu okazos unue. Se la paca reĝimo estas elektita, la ludo finiĝas, kiam unu ludanto havas pli da teritorio ol kiun povus akiri iu ajn alia ludanto."
 
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:357
 msgid "%1% day"
