@@ -73,7 +73,7 @@ msgid ""
 " will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that they will find, choosing the "
 "appropriate mine to be built:"
-msgstr "Por fari tion, metu flagon sur la orienta montoflanko (sed sur monta tereno, ne sur monta herbejo). Kiam vi klakos sur la nova flago, vi povos sendi geologojn tien. Ĉar la flago estas sur monto, la geologoj serĉos ercojn; alie, ili serĉus akvon. Poste konstruu minejon por ambaŭ specoj de resursoj, kiujn ili trovos, elektante la taŭgan minejon por konstrui:"
+msgstr "Por fari tion, metu flagon sur la orienta montoflanko (sed sur monta tereno, ne sur monta herbejo). Kiam vi alklakos la novan flagon, vi povos sendi geologojn tien. Ĉar la flago estas sur la monto, la geologoj serĉos ercojn; alie, ili serĉus akvon. Poste konstruu minejon por ambaŭ specoj de resursoj, kiujn ili trovos, elektante la taŭgan minejon por konstrui:"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "some coal"
@@ -201,7 +201,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr "Normala minejo povas nur elfosi ĉirkaŭ trionon de ĉiuj resursoj, kiuj kuŝas sub ĝi; poste ĝi devas esti plibonigita al profunda minejo por daŭre funkcii ĝuste. Por plibonigi konstruaĵon, elektu ĝin kaj poste klaku la taŭgan butonon en la aperanta fenestro."
+msgstr "Normala minejo povas nur elfosi ĉirkaŭ trionon de ĉiuj resursoj, kiuj kuŝas sub ĝi; poste ĝi devas esti plibonigita al profunda minejo por daŭre funkcii normale. Por plibonigi konstruaĵon, elektu ĝin kaj poste alklaku la taŭgan butonon en la aperanta fenestro."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid ""
@@ -269,7 +269,7 @@ msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
-msgstr "Por voki geologon por serĉi akvon, klaku sur flago en la areo, kie vi volas, ke li serĉu, kaj poste sur la butono etikedita «sendu geologon por esplori la lokon»."
+msgstr "Por voki geologon por serĉi akvon, alklaku flagon en la areo, kie vi volas, ke li serĉu, kaj poste alklaku la butonon kun la etikedo \"Sendu geologon por esplori la lokon\"."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
@@ -288,20 +288,20 @@ msgstr "Konstruu kalkfornon kaj puton. Krome, konstruu aŭ karbonigofornon aŭ k
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:120
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:122
 msgid "Build a reed yard"
-msgstr ""
+msgstr "Konstruu kankultivejon"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:121
 msgid ""
 "The third material necessary for improved buildings is reed, used to cover "
 "roofs. Reed fields are planted by a gardener around his building, the reed "
 "yard."
-msgstr ""
+msgstr "La tria materialo necesa por plibonigitaj konstruaĵoj estas kano, uzata por tegi tegmentojn. La ĝardenisto plantas kanon ĉirkaŭ sia konstruaĵo, formante la kankultivejon."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:127
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:132
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Konstruu bovbienon"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:130
 msgid ""
@@ -309,36 +309,36 @@ msgid ""
 "enough to transport goods swiftly. Traffic jams are the consequence. Such "
 "roads therefore employ a second carrier: an ox that helps to carry the "
 "wares. This doubles the transport capacity."
-msgstr ""
+msgstr "Kiam vojoj estas tre ŝarĝitaj dum longa tempo, unu transportisto ofte ne sufiĉas por rapide transporti varojn. Trafikaj ŝtopiĝoj sekvas. Tial, tiuj vojoj uzas duan transportiston: bovon, kiu helpas porti la varojn. Tio duobligas la transportkapaciton."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:131
 msgid "Oxen are bred in cattle farms out of wheat and water."
-msgstr ""
+msgstr "Bovoj estas bredataj en bovbienoj per tritiko kaj akvo."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:141
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:153
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:165
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:177
 msgid "The Story Begins"
-msgstr ""
+msgstr "La Aventuro Komenciĝas"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:142
 msgid "Thron sighs…"
-msgstr ""
+msgstr "Thron suspiras..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:144
 msgid ""
 "It’s been months, and we are still hiding where the forests are old and "
 "dark."
-msgstr ""
+msgstr "Estas pasintaj monatoj, kaj ni ankoraŭ kaŝiĝas tie, kie la arbaroj estas maljunaj kaj mallumaj."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:147
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
-msgstr ""
+msgstr "Miaj militistoj ĉasas tage kaj restas sendormaj nokte – aŭskultante la sonojn de la kruela buĉado, kiuj eĥas for inter la antikvaj arboj."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:156
