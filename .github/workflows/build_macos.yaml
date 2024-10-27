@@ -5,7 +5,6 @@ on:
 jobs:
   macos:
     strategy:
-      # NOCOM: let all of them run through until we fix them
       fail-fast: false
       matrix:
         config: [debug, release]
