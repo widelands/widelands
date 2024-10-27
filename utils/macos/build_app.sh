@@ -2,7 +2,7 @@
 
 set -e
 
-# USAGE="See compile.sh" usage will be cared for by compile.sh
+# Command line parameters will be passed to compile.sh, check its help for usage
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SOURCE_DIR=$DIR/../../
@@ -78,7 +78,7 @@ function MakeDMG {
          return
       fi
       # EBUSY is error code 16. We only allow that, all others should fail immediately.
-      if [ $HDI_RESULT -ne 16 ] || [ $HDI_TRY -eq $HDI_MAX_TRIES ]; then
+      if [ $HDI_RESULT -ne 16 -o $HDI_TRY -eq $HDI_MAX_TRIES ]; then
          exit $HDI_RESULT
       fi
       if [ -n "$GITHUB_ACTION" ]; then
@@ -91,13 +91,13 @@ function MakeDMG {
 
 function MakeAppPackage {
    echo "Making $DESTINATION/Widelands.app now."
-   rm -Rf ${DESTINATION:?}/
+   rm -Rf "$DESTINATION"
 
-   mkdir "$DESTINATION"/
-   mkdir "$DESTINATION"/Widelands.app/
-   mkdir "$DESTINATION"/Widelands.app/Contents/
-   mkdir "$DESTINATION"/Widelands.app/Contents/Resources/
-   mkdir "$DESTINATION"/Widelands.app/Contents/MacOS/
+   mkdir "$DESTINATION"
+   mkdir "$DESTINATION"/Widelands.app
+   mkdir "$DESTINATION"/Widelands.app/Contents
+   mkdir "$DESTINATION"/Widelands.app/Contents/Resources
+   mkdir "$DESTINATION"/Widelands.app/Contents/MacOS
    cp "$SOURCE_DIR"/data/images/logos/widelands.icns "$DESTINATION"/Widelands.app/Contents/Resources/widelands.icns
    ln -s /Applications "$DESTINATION"/Applications
 
