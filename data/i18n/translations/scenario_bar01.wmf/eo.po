@@ -309,36 +309,36 @@ msgid ""
 "enough to transport goods swiftly. Traffic jams are the consequence. Such "
 "roads therefore employ a second carrier: an ox that helps to carry the "
 "wares. This doubles the transport capacity."
-msgstr ""
+msgstr "Kiam vojoj estas tre ŝarĝitaj dum longa tempo, unu transportisto ofte ne sufiĉas por rapide transporti varojn. Trafikaj ŝtopiĝoj sekvas. Tial, tiuj vojoj uzas duan transportiston: bovon, kiu helpas porti la varojn. Tio duobligas la transportkapaciton."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:131
 msgid "Oxen are bred in cattle farms out of wheat and water."
-msgstr ""
+msgstr "Bovoj estas bredataj en bovbienoj per tritiko kaj akvo."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:141
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:153
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:165
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:177
 msgid "The Story Begins"
-msgstr ""
+msgstr "La Aventuro Komenciĝas"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:142
 msgid "Thron sighs…"
-msgstr ""
+msgstr "Thron suspiras..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:144
 msgid ""
 "It’s been months, and we are still hiding where the forests are old and "
 "dark."
-msgstr ""
+msgstr "Estas pasintaj monatoj, kaj ni ankoraŭ kaŝiĝas tie, kie la arbaroj estas maljunaj kaj mallumaj."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:147
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
-msgstr ""
+msgstr "Miaj militistoj ĉasas tage kaj restas sendormaj nokte – aŭskultante la sonojn de la kruela buĉado, kiuj eĥas for inter la antikvaj arboj."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:156
