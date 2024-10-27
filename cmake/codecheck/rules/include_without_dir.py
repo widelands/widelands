@@ -7,6 +7,7 @@
 and reports an error. The include should always be from the base dir upwards:
 
 #include "somedir/file.h"
+
 """
 
 import os
