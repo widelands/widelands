@@ -52,7 +52,7 @@ msgstr "No rocks nearby"
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "There are no rocks near to your starting position. Therefore, you receive extra resources for bootstrapping your economy."
 
 #: ../../../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
@@ -62,7 +62,7 @@ msgstr "Not enough trees nearby"
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "There are not enough trees near to your starting position. Therefore, you receive extra resources for bootstrapping your economy."
 
 #: ../../../../data/scripting/messages.lua:66
 #: ../../../../data/scripting/messages.lua:68
@@ -407,7 +407,7 @@ msgstr "Random height"
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:312
 msgid "Set the terrain height to random values"
-msgstr ""
+msgstr "Set the terrain height to random values"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:319
@@ -480,7 +480,7 @@ msgstr "Players"
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:372
 msgid "Set number of players and their names, tribes and starting positions"
-msgstr ""
+msgstr "Set number of players and their names, tribes and starting positions"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:376
@@ -553,7 +553,7 @@ msgstr "Hide Maximum Building Spaces"
 
 #: ../../../../src/editor/editorinteractive.cc:484
 msgid "Show Maximum Building Spaces"
-msgstr ""
+msgstr "Show Maximum Building Spaces"
 
 #: ../../../../src/editor/editorinteractive.cc:487
 msgid ""

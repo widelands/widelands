@@ -732,7 +732,7 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 			// Easter egg: Press Ctrl/Shift+Backspace to exchange the background immediately :-)
 			last_image_exchange_time_ -=
 			   (last_image_exchange_time_ > kImageExchangeInterval ? kImageExchangeInterval :
-                                                                  last_image_exchange_time_);
+			                                                         last_image_exchange_time_);
 			return true;
 		}
 	}
@@ -741,8 +741,8 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 
 inline float MainMenu::calc_opacity(const uint32_t time) const {
 	return last_image_ == draw_image_ ?
-             1.f :
-             std::max(0.f, std::min(1.f, static_cast<float>(time - last_image_exchange_time_) /
+	          1.f :
+	          std::max(0.f, std::min(1.f, static_cast<float>(time - last_image_exchange_time_) /
 	                                         kImageExchangeDuration));
 }
 

@@ -105,7 +105,7 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	   this, "ok",
 	   type_ == MBoxType::kOk        ? (width - button_w) / 2 :
 	   UI::g_fh->fontset()->is_rtl() ? left_button_x :
-                                      right_button_x,
+	                                   right_button_x,
 	   button_y, button_w, 0,
 	   s == WindowStyle::kWui ? UI::ButtonStyle::kWuiPrimary : UI::ButtonStyle::kFsMenuPrimary,
 	   _("OK")));
@@ -116,7 +116,7 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 		   new Button(this, "cancel", UI::g_fh->fontset()->is_rtl() ? right_button_x : left_button_x,
 		              button_y, button_w, 0,
 		              s == WindowStyle::kWui ? UI::ButtonStyle::kWuiSecondary :
-                                             UI::ButtonStyle::kFsMenuSecondary,
+		                                       UI::ButtonStyle::kFsMenuSecondary,
 		              _("Cancel")));
 		cancel_button_->sigclicked.connect([this]() { clicked_back(); });
 	}

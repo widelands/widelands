@@ -327,7 +327,7 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 
 	const uint32_t sleeptime = has_priority             ? kMutexPriorityLockInterval :
 	                           (id_ == ID::kLogicFrame) ? kMutexLogicFrameLockInterval :
-                                                         kMutexNormalLockInterval;
+	                                                      kMutexNormalLockInterval;
 	if (!has_priority && record.current_owner != self) {
 		SDL_Delay(sleeptime);
 	}
