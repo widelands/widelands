@@ -116,10 +116,10 @@ void fill_parameter_vector() {
 	      "--editor."),
 	    false},
 	   {"", "difficulty",
-		 /** TRANSLATORS: A placeholder for a numerical value */
-		 _("n"),
-		 /** TRANSLATORS: `n` references a numerical placeholder */
-		 _("Start the scenario with difficulty `n`. Only valid with --scenario."), false},
+	    /** TRANSLATORS: A placeholder for a numerical value */
+	    _("n"),
+	    /** TRANSLATORS: `n` references a numerical placeholder */
+	    _("Start the scenario with difficulty `n`. Only valid with --scenario."), false},
 	   /// Misc
 	   {"", "nosound", "", _("Start the game with sound disabled."), false},
 	   /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
@@ -129,11 +129,11 @@ void fill_parameter_vector() {
 	    _("Play the intro music at startup and show splash image until it ends."), true},
 	   {"", "fail-on-lua-error", "", _("Force Widelands to crash when a Lua error occurs."), false},
 	   {"", "fail-on-errors", "",
-		 _("Force Widelands to crash when a game or the editor terminates with an error."), false},
+	    _("Force Widelands to crash when a game or the editor terminates with an error."), false},
 	   {"", "messagebox-timeout",
-		 /** TRANSLATORS: Placeholder for a time value in seconds */
-		 _("<seconds>"),
-		 _("Automatically close modal message boxes after the given number of seconds time."), true},
+	    /** TRANSLATORS: Placeholder for a time value in seconds */
+	    _("<seconds>"),
+	    _("Automatically close modal message boxes after the given number of seconds time."), true},
 	   {"", "replay_lifetime", _("n"), _("Delete replays automatically after `n` weeks."), true},
 	   {"", "ai_training", "",
 	    _("Enable AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ for a full "
