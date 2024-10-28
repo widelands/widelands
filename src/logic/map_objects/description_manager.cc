@@ -283,8 +283,8 @@ DescriptionManager::get_attributes(const std::string& description_name) const {
 	       registered_descriptions_.count(description_name) == 1);
 
 	return registered_scenario_descriptions_.count(description_name) == 1 ?
-             registered_scenario_descriptions_.at(description_name).attributes :
-             registered_descriptions_.at(description_name).attributes;
+	          registered_scenario_descriptions_.at(description_name).attributes :
+	          registered_descriptions_.at(description_name).attributes;
 }
 
 const DescriptionManager::RegistryCallerInfo&
@@ -292,8 +292,8 @@ DescriptionManager::get_registry_caller_info(const std::string& description_name
 	assert(registered_scenario_descriptions_.count(description_name) == 1 ||
 	       registered_descriptions_.count(description_name) == 1);
 	return registered_scenario_descriptions_.count(description_name) == 1 ?
-             registered_scenario_descriptions_.at(description_name).caller :
-             registered_descriptions_.at(description_name).caller;
+	          registered_scenario_descriptions_.at(description_name).caller :
+	          registered_descriptions_.at(description_name).caller;
 }
 
 void DescriptionManager::clear_scenario_descriptions() {

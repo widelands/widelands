@@ -98,7 +98,7 @@ FieldData::FieldData(const Field& field)
 FindCritterByClass::Class FindCritterByClass::classof(const CritterDescr& cd) {
 	return cd.is_herbivore() ? cd.is_carnivore() ? Class::Neither : Class::Herbivore :
 	       cd.is_carnivore() ? Class::Carnivore :
-                              Class::Neither;
+	                           Class::Neither;
 }
 bool FindCritterByClass::accept(Bob* b) const {
 	if (upcast(const Critter, c, b)) {
@@ -628,14 +628,14 @@ static inline int32_t resize_coordinates_conversion(const int32_t old_coord,
 	if (split_point > new_dimension) {
 		// shrink, origin deleted
 		return (old_coord >= split_point || old_coord < split_point - new_dimension) ?
-                kInvalidCoords :
-                old_coord - split_point + new_dimension;
+		          kInvalidCoords :
+		          old_coord - split_point + new_dimension;
 	}
 	// shrink, origin preserved
 	return old_coord < split_point ? old_coord :
 	       old_coord < split_point + old_dimension - new_dimension ?
-                                    kInvalidCoords :
-                                    old_coord + new_dimension - old_dimension;
+	                                 kInvalidCoords :
+	                                 old_coord + new_dimension - old_dimension;
 }
 
 void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, const int32_t h) {
@@ -2332,13 +2332,13 @@ int32_t Map::findpath(Coords instart,
 			if (!checkstep.allowed(*this, cur, neighb, *direction,
 			                       neighb == end ? CheckStep::stepLast :
 			                       cur == start  ? CheckStep::stepFirst :
-                                                CheckStep::stepNormal)) {
+			                                       CheckStep::stepNormal)) {
 				continue;
 			}
 
 			// Calculate cost
 			cost = curpf->real_cost + ((flags & fpBidiCost) != 0u ? calc_bidi_cost(cur, *direction) :
-                                                                 calc_cost(cur, *direction));
+			                                                        calc_cost(cur, *direction));
 
 			// If required (indicated by caps_sensitivity) we increase the path costs
 			// if the path is just crossing a field with building capabilities
@@ -2580,11 +2580,11 @@ uint32_t Map::set_height(const EditorGameBase& egbase,
 		do {
 			changed = false;
 			height_interval.min = height_interval.min < max_field_height_diff() ?
-                                  0 :
-                                  height_interval.min - max_field_height_diff();
+			                         0 :
+			                         height_interval.min - max_field_height_diff();
 			height_interval.max = height_interval.max < MAX_FIELD_HEIGHT - max_field_height_diff() ?
-                                  height_interval.max + max_field_height_diff() :
-                                  MAX_FIELD_HEIGHT;
+			                         height_interval.max + max_field_height_diff() :
+			                         MAX_FIELD_HEIGHT;
 			do {
 				if (mr.location().field->height < height_interval.min) {
 					mr.location().field->height = height_interval.min;
