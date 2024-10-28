@@ -1294,7 +1294,7 @@ msgstr "Kreante malplenan mapon..."
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:63
 #: ../../../../src/logic/addons.cc:59
 msgid "Map Generator"
-msgstr "Mapogenerilo"
+msgstr "Mapgenerilo"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:81
 #: ../../../../src/wui/gamedetails.cc:169
@@ -1408,7 +1408,7 @@ msgstr "Hazarda"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:633
 msgid "Generating random map…"
-msgstr "Kreanta mapon hazardan…"
+msgstr "Kreante hazardan mapon…"
 
 #. * TRANSLATORS: Window title. This is shown after a random map has been
 #. created in the
@@ -1417,7 +1417,7 @@ msgstr "Kreanta mapon hazardan…"
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:736
 #: ../../../../src/ui_fsmenu/main.cc:429
 msgid "Random Map"
-msgstr "Hazarda mapo"
+msgstr "Hazarda Mapo"
 
 #. * TRANSLATORS: This is shown after a random map has been created in the
 #. editor.
@@ -1430,7 +1430,7 @@ msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
 "island or on top of a mountain."
-msgstr "La mapo estis generita. Certigu, ke la komencaj pozicioj de la ludantoj ne estas malbonaj; ekz. komenca pozicio ne estu sur insuleto aŭ sur la pinto de monto."
+msgstr "La mapo estas generita. Bonvolu reekzameni la komencajn poziciojn de la ludantoj por certigi, ke viaj transportistoj ne dronos aŭ restu kaptitaj sur insulo aŭ sur montopinto."
 
 #. * TRANSLATORS: This is shown after a random map has been created in the
 #. editor.
@@ -1442,16 +1442,16 @@ msgid ""
 "The map generator could not produce a good-enough map with the provided "
 "settings. This map will probably need extensive editing to be playable. "
 "Consider creating a new map with different parameters."
-msgstr ""
+msgstr "La mapgenerilo ne povis produkti sufiĉe bonan mapon kun la provizitaj agordoj. Ĉi tiu mapo probable bezonos ampleksan redaktadon por esti ludebla. Konsideru krei novan mapon kun malsamaj parametroj."
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:737
 msgid "The Widelands Random Map Generator"
-msgstr ""
+msgstr "La Hazarda Mapgenerilo de Widelands"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:739
 msgid ""
 "This map was generated automatically by the Widelands Random Map Generator."
-msgstr ""
+msgstr "Ĉi tiu mapo estis aŭtomate generita de la Hazarda Mapgenerilo de Widelands."
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:747
 #: ../../../../src/network/gamehost.cc:1663
@@ -1466,13 +1466,13 @@ msgstr "Ludanto"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:863
 msgid "Generate Map"
-msgstr "Generi mapon"
+msgstr "Generi Mapon"
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:71
 #: ../../../../src/wui/game_main_menu_save_game.cc:89
 #: ../../../../src/wui/gamedetails.cc:192
 msgid "Filename:"
-msgstr "Dosier-nomo:"
+msgstr "Dosiernomo:"
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:80
 #: ../../../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:31
@@ -1487,23 +1487,23 @@ msgstr "nenomita"
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:173
 msgid "A file or directory with that name already exists."
-msgstr ""
+msgstr "Jam ekzistas dosiero aŭ dosierujo kun tiu nomo."
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:174
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:187
 msgid "Error Creating Directory!"
-msgstr ""
+msgstr "Eraro dum kreado de la dosierujo!"
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:186
 #, c-format
 msgid "Error while creating directory ‘%s’."
-msgstr ""
+msgstr "Eraro dum kreado de la dosierujo \"%s\"."
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:313
 #: ../../../../src/wui/game_main_menu_save_game.cc:286
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
-msgstr "Dosiero kun la nomo ‘%s’ jam ekzistas. Ĉu anstataŭigi?"
+msgstr "Dosiero kun la nomo \"%s\" jam ekzistas. Ĉu anstataŭigi ĝin?"
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:345
 msgid "Saving the map…"
@@ -1515,7 +1515,7 @@ msgstr "Mapo konservita"
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:53
 msgid "Enter Directory Name:"
-msgstr "Entajpu dosieruj-nomon:"
+msgstr "Enigu la Dosierujnomon: "
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:110
 msgid "This extension is reserved!"
@@ -1543,14 +1543,14 @@ msgstr "Tro multe da ludantoj"
 msgid ""
 "We do not recommend setting more than 8 players except for testing purposes."
 " Are you sure that you want more than 8 players?"
-msgstr ""
+msgstr "Ni ne rekomendas agordi pli ol 8 ludantojn krom por testaj celoj. Ĉu vi certe volas pli ol 8 ludantojn?"
 
 #. * TRANSLATORS: Checkbox for: 'We do not recommend setting more than 8
 #. players except
 #. for testing purposes. Are you sure that you want more than 8 players?'
 #: ../../../../src/editor/ui_menus/player_menu.cc:77
 msgid "Do not remind me again"
-msgstr ""
+msgstr "Ne rememorigu min denove"
 
 #: ../../../../src/editor/ui_menus/player_menu.cc:88
 msgid "Abort"
@@ -1558,12 +1558,12 @@ msgstr "Aborti"
 
 #: ../../../../src/editor/ui_menus/player_menu.cc:142
 msgid "Player Options"
-msgstr "Ludant-opcioj"
+msgstr "Ludantopcioj"
 
 #: ../../../../src/editor/ui_menus/player_menu.cc:151
 #: ../../../../src/wui/maptable.cc:34
 msgid "Number of players"
-msgstr "Nombro da ludantoj"
+msgstr "Nombro de ludantoj"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
 #: ../../../../src/editor/ui_menus/player_menu.cc:169
@@ -1601,54 +1601,54 @@ msgstr "Hazarda"
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:463
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:99
 msgid "The tribe will be selected at random"
-msgstr ""
+msgstr "La tribo estos elektita hazarde"
 
 #. * TRANSLATORS: Button tooltip in the editor for using a player's starting
 #. position tool
 #: ../../../../src/editor/ui_menus/player_menu.cc:223
 msgid "Set this player’s starting position"
-msgstr ""
+msgstr "Agordi la komencan pozicion de ĉi tiu ludanto"
 
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:31
 msgid "Height Tools Options"
-msgstr "Altec-ilaj opcioj"
+msgstr "Altecilaj Opcioj"
 
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:53
 msgid "Increase/Decrease height by:"
-msgstr ""
+msgstr "Pliigi/Malpliigi altecon je:"
 
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:66
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:79
 msgid "Set height to:"
-msgstr ""
+msgstr "Agordi altecon al:"
 
 #. * TRANSLATORS: Editor change height access keys. *
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:71
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease terrain "
 "height"
-msgstr "Klaku je la mapo sen/kun premita majuskliga klavo por altigi/malaltigi la landon"
+msgstr "Alklaku sur la mapo por pliigi la altecon de la tereno, aŭ premu Shift dum vi alklakas por malpliigi ĝin"
 
 #. * TRANSLATORS: Editor set height access key. *
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:74
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:90
 msgid "Ctrl + Click on the map to set terrain height"
-msgstr "Klaku je la mapo kun premita stirklavo por meti la landalton"
+msgstr "Premu Ctrl dum vi alklakas sur la mapo por agordi la altecon de la tereno"
 
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:62
 msgid "Increase/Decrease amount by:"
-msgstr ""
+msgstr "Pliigi/Malpliigi la kvanton je:"
 
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:75
 msgid "Set amount to:"
-msgstr ""
+msgstr "Agordi la kvanton al:"
 
 #. * TRANSLATORS: Editor change rseources access keys. *
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:93
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease the "
 "amount of the selected resource"
-msgstr "Klaku je la mapo sen/kun premita majuskliga klavo por altigi/malaltigi la kvanton de la elektita krudmaterialo"
+msgstr "Alklaku sur la mapo por pliigi la kvanton de la elektita resurso, aŭ premu Shift dum vi alklakas por malpliigi ĝin"
 
 #. * TRANSLATORS: Editor set rseources access key. *
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:97
@@ -7696,7 +7696,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:202
 msgid "Quarry"
-msgstr ""
+msgstr "Ŝtonminejo"
 
 #: ../../../../src/wlapplication_options.cc:203
 msgid "Primary Building Materials Industry"
