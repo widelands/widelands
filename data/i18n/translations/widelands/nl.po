@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-10-05 02:52+0000\n"
+"POT-Creation-Date: 2024-10-28 03:02+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Alex Rijckaert, 2023-2024\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -569,11 +569,11 @@ msgstr "Schakel om het maximaal beschikbare bouwlocaties weer te geven als alle 
 #. the map height heat map is shown
 #: ../../../../src/editor/editorinteractive.cc:494
 msgid "Disable height heat map"
-msgstr ""
+msgstr "Hoogte warmtekaart uitschakelen"
 
 #: ../../../../src/editor/editorinteractive.cc:495
 msgid "Enable height heat map"
-msgstr ""
+msgstr "Hoogte warmtekaart inschakelen"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
@@ -589,17 +589,17 @@ msgstr "Toon Raster"
 #. the oceans are shown
 #: ../../../../src/editor/editorinteractive.cc:510
 msgid "Hide Oceans"
-msgstr ""
+msgstr "Verberg Oceanen"
 
 #: ../../../../src/editor/editorinteractive.cc:510
 msgid "Show Oceans"
-msgstr ""
+msgstr "Toon Oceanen"
 
 #: ../../../../src/editor/editorinteractive.cc:513
 msgid ""
 "Display separate water bodies with differently coloured overlays to see "
 "which coasts can be connected by shipping routes"
-msgstr ""
+msgstr "Toon afzonderlijke waterlichamen met verschillend gekleurde overlays om te zien welke kusten verbonden kunnen worden door scheepvaartroutes"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
@@ -663,13 +663,13 @@ msgstr "Weet je zeker dat je de editor wilt afsluiten?"
 #: ../../../../src/logic/addons.cc:48 ../../../../src/ui_basic/dropdown.cc:358
 #: ../../../../src/ui_basic/dropdown.cc:360
 #: ../../../../src/ui_fsmenu/addons/contact.cc:81
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1381
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1392
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1463
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1471
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1519
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1598
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1670
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1382
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1393
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1464
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1472
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1520
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1599
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1671
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:104
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:292
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:565
@@ -1868,7 +1868,7 @@ msgstr "Widelands zal niet werken omdat je grafisch stuurprogramma te oud is."
 #: ../../../../src/graphic/gl/initialize.cc:227
 #, c-format
 msgid "The %1$s version needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "De %1$s versie moet versie %2$u.%3$u of nieuwer zijn."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -3775,12 +3775,12 @@ msgstr "De verbinding met de metaservers is verbroken, omdat je een PING-verzoek
 #: ../../../../src/network/net_addons.cc:861
 #, c-format
 msgid "Sending metadata for %s"
-msgstr ""
+msgstr "Metagegevens verzenden voor %s"
 
 #: ../../../../src/network/net_addons.cc:906
 #, c-format
 msgid "Uploading %s"
-msgstr ""
+msgstr "Uploaden %s"
 
 #: ../../../../src/network/network_gaming_messages.cc:30
 msgid "Client has left the game."
@@ -4842,50 +4842,50 @@ msgstr "Bladeren"
 msgid "Browse (%u)"
 msgstr "Bladeren (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1160
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1161
 #, c-format
 msgid "Upgrade all (%u)"
 msgstr "Alles Opwaarderen (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1163
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1164
 msgid "No upgrades are available for your installed add-ons"
 msgstr "Geen opwaarderingen beschikbaar voor de geinstalleerde uitbreidingen"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1165
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1166
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
 msgstr[0] "Opwaarden van de volgende %u uitbreiding:"
 msgstr[1] "Opwaarden van de volgende %u uitbreidingen:"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1170
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1171
 #, c-format
 msgid "• %s"
 msgstr "• %s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1206
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1207
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which could not be found"
 msgstr "• ‘%1$s’ vereist ‘%2$s’ die niet kon worden gevonden"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1211
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1212
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is disabled"
 msgstr "• ‘%1$s’ vereist ‘%2$s’ die is uitgeschakeld"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1218
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1219
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
 msgstr "• ‘%1$s’ vereist ‘%2$s’ die onder de vereiste add-on staat"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1246
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1247
 #, c-format
 msgid ""
 "• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
 msgstr "• ‘%1$s’ vereist eerst ‘%2$s’ en dan ‘%3$s’, maar ze staan in de verkeerde volgorde"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1262
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1263
 #, c-format
 msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
@@ -4893,75 +4893,75 @@ msgid ""
 "%s"
 msgstr "Een actieve uitbreiding is kapot. Er kan geen spel gestart worden met de huidige configuratie.\nFoutmeldig:\n%s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1279
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1280
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
 msgstr[0] "%u Afhankelijksheid Fout"
 msgstr[1] "%u Afhankelijksheid Fouten"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1281
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1282
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
 msgstr "UItbreidingen met afhankelijkheids fouten kunnen incorrect werken of verhinderen spelen en kaarten om geladen te worden"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1382
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1383
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
 msgstr "De add-on ‘%1$s’ kan niet worden geüpload omdat de versie (%2$s) niet nieuwer is dan de versie op de server (%3$s)."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1393
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1394
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
 msgstr "De add-on ‘%1$s’ kan niet worden geüpload omdat de categorie (%2$s) niet overeen komt met de categorie van de versie op de server (%3$s)."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1404
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1405
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:54
 msgid "Upload"
 msgstr "Zend"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1405
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1406
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
 msgstr "Wilt u de add-on echt uploaden ‘%s’ naar de server?"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1415
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1416
 #, c-format
 msgid "Uploading ‘%s’…"
 msgstr "Uploaden ‘%s’…"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1422
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1505
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1567
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1423
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1506
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1568
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1445
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1446
 #, c-format
 msgid "‘%s’"
-msgstr ""
+msgstr "‘%s’"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1453
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1454
 #, c-format
 msgid ""
 "The add-on ‘%s’ may not be uploaded to the server because the following "
 "filenames contained in the add-on are not allowed:"
-msgstr ""
+msgstr "De add-on ‘%s’ kan niet worden geüpload naar de server omdat de volgende bestandsnamen in de add-on niet zijn toegestaan:"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1457
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1458
 msgid ""
 "Filenames may only contain alphanumeric characters (A-Z, a-z, 0-9) and "
 "simple punctuation (period, hyphen, and underscore; not multiple periods). "
 "Other characters such as whitespace are not permitted. Filenames may not "
 "exceed 80 characters."
-msgstr ""
+msgstr "Bestandsnamen mogen alleen alfanumerieke tekens (A-Z, a-z, 0-9) en eenvoudige interpunctie (punt, koppelteken en onderstrepingsteken; niet meerdere punten) bevatten. Andere tekens zoals spaties zijn niet toegestaan. Bestandsnamen mogen niet langer zijn dan 80 tekens."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1472
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1473
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be uploaded to the server.\n"
@@ -4970,12 +4970,12 @@ msgid ""
 "%2$s"
 msgstr "De add-on ‘%1$s’ kon niet worden geüpload naar de server.\n\nFoutmelding:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1485
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1486
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr "Ophalen '%s'..."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1521
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1522
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -4984,7 +4984,7 @@ msgid ""
 "%2$s"
 msgstr "De uitbreiding '%1$s' kon niet worden opgehaald van de server. Installeren/opwaarderen van deze uitbreiding zal worden overgeslagen.\n\nFout melding:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1599
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1600
 #, c-format
 msgid ""
 "The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations will be skipped.\n"
@@ -4993,7 +4993,7 @@ msgid ""
 "%2$s"
 msgstr "De vertalingen voor de add-on ‘%1$s’ kon niet worden gedownload van de server. Het installeren/upgraden van de vertalingen wordt overgeslagen.\n\nFoutmelding:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1671
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1672
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr "De benodigde uitbreiding '%s' kon niet worden gevonden op de server"
@@ -8011,7 +8011,7 @@ msgstr "Spelers Menu"
 
 #: ../../../../src/wlapplication_options.cc:542
 msgid "Toggle Height Heat Map"
-msgstr ""
+msgstr "Wisselen Hoogte Hittekaart"
 
 #: ../../../../src/wlapplication_options.cc:547
 msgid "Toggle Grid"
@@ -8019,7 +8019,7 @@ msgstr "Wissel Schaalverdeling"
 
 #: ../../../../src/wlapplication_options.cc:552
 msgid "Toggle Oceans"
-msgstr ""
+msgstr "Wissel Oceanen"
 
 #: ../../../../src/wlapplication_options.cc:557
 msgid "Toggle Immovables"
@@ -10152,7 +10152,7 @@ msgstr "Indicatie overlappend werkgebied bij plaatsing bouwplaats (aan/uit)"
 
 #: ../../../../src/wui/interactive_player.cc:486
 msgid "No current objectives"
-msgstr ""
+msgstr "Geen huidige streefdoelen"
 
 #: ../../../../src/wui/interactive_player.cc:502
 #, c-format
