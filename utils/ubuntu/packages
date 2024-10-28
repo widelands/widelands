@@ -12,3 +12,4 @@ libsdl2-ttf-dev
 python3
 zlib1g-dev
 libminizip-dev
+gettext
