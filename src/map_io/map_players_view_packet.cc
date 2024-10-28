@@ -269,8 +269,8 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 							descr = fr.string();
 							field->constructionsite->was =
 							   descr.empty() ?
-                           nullptr :
-                           descriptions.get_building_descr(descriptions.safe_building_index(descr));
+							      nullptr :
+							      descriptions.get_building_descr(descriptions.safe_building_index(descr));
 
 							for (uint32_t j = fr.unsigned_32(); j != 0u; --j) {
 								field->constructionsite->intermediates.push_back(
@@ -331,8 +331,8 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 				oss << static_cast<char>(f.vision.is_revealed() ? SavedVisionState::kRevealed :
 				                         f.vision.is_hidden()   ? SavedVisionState::kHidden :
 				                         f.vision == VisibleState::kPreviouslySeen ?
-                                                            SavedVisionState::kPreviouslySeen :
-                                                            SavedVisionState::kNone);
+				                                                SavedVisionState::kPreviouslySeen :
+				                                                SavedVisionState::kNone);
 				if (f.vision == VisibleState::kPreviouslySeen) {
 					seen_fields.insert(&f);
 					// The data for some of the terrains and edges between PreviouslySeen
@@ -351,8 +351,8 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			oss << static_cast<char>(f.vision.is_revealed() ? SavedVisionState::kRevealed :
 			                         f.vision.is_hidden()   ? SavedVisionState::kHidden :
 			                         f.vision == VisibleState::kPreviouslySeen ?
-                                                         SavedVisionState::kPreviouslySeen :
-                                                         SavedVisionState::kNone);
+			                                                SavedVisionState::kPreviouslySeen :
+			                                                SavedVisionState::kNone);
 			if (f.vision == VisibleState::kPreviouslySeen) {
 				seen_fields.insert(&f);
 			}
@@ -465,8 +465,8 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 				} else if (field->map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
 					fw.string(field->constructionsite->becomes->name());
 					fw.string(field->constructionsite->was != nullptr ?
-                            field->constructionsite->was->name() :
-                            "");
+					             field->constructionsite->was->name() :
+					             "");
 
 					fw.unsigned_32(field->constructionsite->intermediates.size());
 					for (const BuildingDescr* d : field->constructionsite->intermediates) {

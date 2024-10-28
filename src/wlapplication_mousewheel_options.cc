@@ -115,8 +115,8 @@ struct MousewheelHandlerOptions {
 			   default_sign_x_ * (get_mousewheel_option_bool(invert_x_) ? -1 : 1) *
 			   (get_mousewheel_option_bool(MousewheelOptionID::kInvertedXDetected) !=
 			          get_mousewheel_option_bool(MousewheelOptionID::kOverrideInvertedX) ?
-                -1 :
-                1);
+			       -1 :
+			       1);
 		} else {
 			current_sign_x_ = 0;
 		}

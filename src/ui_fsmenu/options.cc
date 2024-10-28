@@ -704,11 +704,11 @@ void Options::add_languages_to_list(const std::string& current_locale) {
 				log_err("Could not read locale for: %s\n", localename.c_str());
 				entries.insert(std::make_pair(localename, LanguageEntry(localename, localename)));
 			}  // End read locale from table
-		}     // End scan locales directory
+		}  // End scan locales directory
 	} catch (const LuaError& err) {
 		log_err("Could not read locales information from file: %s\n", err.what());
 		return;  // Nothing more can be done now.
-	}           // End read locales table
+	}  // End read locales table
 
 	find_selected_locale(&selected_locale, current_locale);
 	for (const auto& entry : entries) {

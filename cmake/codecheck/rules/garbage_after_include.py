@@ -5,6 +5,7 @@
 """Python CPPChecker broke down because of this wrong line.
 
 I add a style fix for it now, so it won't bother us again.
+
 """
 
 error_msg = 'Garbage tokens after include.'

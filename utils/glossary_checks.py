@@ -27,6 +27,7 @@ sheep     sheep          Nice, fluffy!       'sheep'
 ax        axe            axes|               'axe', 'axes'
 click     click          clicking|clicked    'click', 'clicking', 'clicked'
 click     click          clicking | clicked  'click', 'clicking', 'clicked'
+
 """
 
 import os.path
@@ -112,6 +113,7 @@ def load_hunspell_locales():
 
     Maps a list of generic locales to specific locales from available
     Hunspell dictionaries.
+
     """
 
     try:
@@ -162,6 +164,7 @@ def make_english_plural(word):
     This will create a few nonsense entries for irregular plurals, but
     it's good enough for our purpose. Glossary contains pluralized
     terms, so we don't add any plural forms for strings ending in 's'.
+
     """
     result = ''
     if not word.endswith('s'):
@@ -277,6 +280,7 @@ def contains_term(string, term):
     """Checks whether 'string' contains 'term' as a whole word.
 
     This check is case-insensitive.
+
     """
     result = False
     # Regex is slow, so we do this preliminary check
@@ -404,6 +408,7 @@ def check_translations_with_glossary(input_path, output_path, glossary_file, onl
     Loads the Transifex and Hunspell glossaries, converts all po files
     for languages that have glossary entries to temporary csv files,
     runs the check and then reports any hits to csv files.
+
     """
     print('Locale: ' + only_locale)
     temp_path = make_path(output_path, 'temp_glossary')

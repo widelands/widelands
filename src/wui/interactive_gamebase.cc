@@ -237,7 +237,7 @@ void InteractiveGameBase::handle_restart(const bool force) {
 		GameExitConfirmBox* gecb =
 		   new GameExitConfirmBox(*this, *this, r ? _("Restart Replay") : _("Restart Scenario"),
 		                          r ? _("Are you sure you wish to restart this replay?") :
-                                    _("Are you sure you wish to restart this scenario?"));
+		                              _("Are you sure you wish to restart this scenario?"));
 		gecb->ok.connect([this, next] { game().set_next_game_to_load(next); });
 	}
 }
@@ -279,28 +279,28 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideCensus, false));
 
 	showhidemenu_.add(get_display_flag(dfShowStatistics) ?
-                         /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-                          * building status labels are shown */
-                         _("Hide Status") :
-                         _("Show Status"),
+	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+	                      * building status labels are shown */
+	                     _("Hide Status") :
+	                     _("Show Status"),
 	                  ShowHideEntry::kStatistics,
 	                  g_image_cache->get("images/wui/menus/toggle_statistics.png"), false, "",
 	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideStats, false));
 
 	showhidemenu_.add(get_display_flag(dfShowSoldierLevels) ?
-                         /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-                          * level information is shown above soldiers' heads */
-                         _("Hide Soldier Levels") :
-                         _("Show Soldier Levels"),
+	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+	                      * level information is shown above soldiers' heads */
+	                     _("Hide Soldier Levels") :
+	                     _("Show Soldier Levels"),
 	                  ShowHideEntry::kSoldierLevels,
 	                  g_image_cache->get("images/wui/menus/toggle_soldier_levels.png"), false, "",
 	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideSoldiers, false));
 
 	showhidemenu_.add(get_display_flag(dfShowBuildings) ?
-                         /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-                          * buildings are greyed out */
-                         _("Hide Buildings") :
-                         _("Show Buildings"),
+	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+	                      * buildings are greyed out */
+	                     _("Hide Buildings") :
+	                     _("Show Buildings"),
 	                  ShowHideEntry::kBuildings,
 	                  g_image_cache->get("images/wui/stats/genstats_nrbuildings.png"), false, "",
 	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideBuildings, false));
@@ -383,14 +383,14 @@ void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 	case GameSpeedEntry::kIncrease: {
 		increase_gamespeed((SDL_GetModState() & KMOD_SHIFT) != 0 ? kSpeedSlow :
 		                   (SDL_GetModState() & KMOD_CTRL) != 0  ? kSpeedFast :
-                                                                 kSpeedDefault);
+		                                                           kSpeedDefault);
 		// Keep the window open so that the player can click this multiple times
 		gamespeedmenu_.toggle();
 	} break;
 	case GameSpeedEntry::kDecrease: {
 		decrease_gamespeed((SDL_GetModState() & KMOD_SHIFT) != 0 ? kSpeedSlow :
 		                   (SDL_GetModState() & KMOD_CTRL) != 0  ? kSpeedFast :
-                                                                 kSpeedDefault);
+		                                                           kSpeedDefault);
 		// Keep the window open so that the player can click this multiple times
 		gamespeedmenu_.toggle();
 	} break;
@@ -518,7 +518,7 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 		if (matches_shortcut(KeyboardShortcut::kCommonLoad, code)) {
 			new GameMainMenuSaveGame(*this, menu_windows_.loadgame,
 			                         game().is_replay() ? GameMainMenuSaveGame::Type::kLoadReplay :
-                                                       GameMainMenuSaveGame::Type::kLoadSavegame);
+			                                              GameMainMenuSaveGame::Type::kLoadSavegame);
 			return true;
 		}
 		if (can_restart_ && matches_shortcut(KeyboardShortcut::kInGameRestart, code)) {
