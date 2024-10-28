@@ -2282,21 +2282,26 @@ void CmdTradeAction::execute(Game& game) {
 	switch (action_) {
 	case TradeAction::kCancel:
 		game.cancel_trade(trade_id_, false, game.get_player(sender()));
-		return;
+		break;
+
 	case TradeAction::kRetract:
 		game.retract_trade(trade_id_);
-		return;
+		break;
+
 	case TradeAction::kReject:
 		game.reject_trade(trade_id_);
-		return;
+		break;
+
 	case TradeAction::kAccept:
 		if (Market* market = dynamic_cast<Market*>(game.objects().get_object(accepter_));
 		    market != nullptr) {
 			game.accept_trade(trade_id_, *market);
 		}
-		return;
+		break;
+
+	default:
+		throw wexception("CmdTradeAction: unrecognized action %u", static_cast<uint8_t>(action_));
 	}
-	throw wexception("CmdTradeAction: unrecognized action %u", static_cast<uint8_t>(action_));
 }
 
 CmdTradeAction::CmdTradeAction(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
