@@ -8,6 +8,16 @@
 - Add thread identifier to crash reports
 - Check for invalid combination before calling `DefaultAI::expedition_management()`
 - Territorial Lua error fix
+- Remove AV1 decoder dependency in mingw-64
+- Patches to support netbsd-pkgsrc
+- Keep vcpkg_ref in a repository variable instead of a file
+- vcpkg workflow fix for v1.2.1
+- Fix RelWithDebInfo build type
+- Fix out-of-bounds memory access when using `--editor` without filename
+- macos and other CI improvements
+- Temporary fix for macos CI builds
+- Fix for 6444 using mac dylibbundler to packe the .app Bundle
+- Re-add gettext ubuntu package
 
 
 ## Release 1.2
