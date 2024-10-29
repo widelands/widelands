@@ -3675,6 +3675,8 @@ int LuaListselect::clear(lua_State* /* L */) {
       :type select: :class:`boolean`
       :arg indent: By how many levels to indent this entry.
       :type indent: :class:`int`
+      :arg enable: Whether to enable this entry.
+      :type enable: :class:`boolean`
 */
 int LuaListselect::add(lua_State* L) {
 	int top = lua_gettop(L);
