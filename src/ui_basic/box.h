@@ -67,13 +67,27 @@ struct Box : public Panel {
 	/// Sets the maximum dimensions and calls set_desired_size()
 	virtual void set_max_size(int w, int h);
 
-	[[nodiscard]] uint32_t get_orientation() const { return orientation_; }
-	[[nodiscard]] bool is_scrolling() const { return scrolling_; }
-	[[nodiscard]] bool is_force_scrolling() const { return force_scrolling_; }
-	[[nodiscard]] uint32_t get_inner_spacing() const { return inner_spacing_; }
-	[[nodiscard]] uint32_t get_min_desired_breadth() const { return mindesiredbreadth_; }
-	[[nodiscard]] int get_max_x() const { return max_x_; }
-	[[nodiscard]] int get_max_y() const { return max_y_; }
+	[[nodiscard]] uint32_t get_orientation() const {
+		return orientation_;
+	}
+	[[nodiscard]] bool is_scrolling() const {
+		return scrolling_;
+	}
+	[[nodiscard]] bool is_force_scrolling() const {
+		return force_scrolling_;
+	}
+	[[nodiscard]] uint32_t get_inner_spacing() const {
+		return inner_spacing_;
+	}
+	[[nodiscard]] uint32_t get_min_desired_breadth() const {
+		return mindesiredbreadth_;
+	}
+	[[nodiscard]] int get_max_x() const {
+		return max_x_;
+	}
+	[[nodiscard]] int get_max_y() const {
+		return max_y_;
+	}
 
 	// Forget all our entries. Does not delete or even remove them.
 	void clear() {
@@ -131,7 +145,6 @@ public:
 	}
 
 private:
-
 	bool scrolling_{false};
 	bool force_scrolling_{false};
 	std::unique_ptr<Scrollbar> scrollbar_;

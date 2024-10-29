@@ -133,7 +133,8 @@ const PropertyType<LuaPanel> LuaPanel::Properties[] = {
    PROP_RO(LuaPanel, children),   PROP_RO(LuaPanel, buttons), PROP_RO(LuaPanel, dropdowns),
    PROP_RO(LuaPanel, tabs),       PROP_RO(LuaPanel, windows), PROP_RW(LuaPanel, position_x),
    PROP_RW(LuaPanel, position_y), PROP_RW(LuaPanel, width),   PROP_RW(LuaPanel, height),
-   PROP_RW(LuaPanel, visible),    PROP_RO(LuaPanel, name),    PROP_RO(LuaPanel, parent),    {nullptr, nullptr, nullptr},
+   PROP_RW(LuaPanel, visible),    PROP_RO(LuaPanel, name),    PROP_RO(LuaPanel, parent),
+   {nullptr, nullptr, nullptr},
 };
 const MethodType<LuaPanel> LuaPanel::Methods[] = {
    METHOD(LuaPanel, get_descendant_position),
@@ -2181,22 +2182,14 @@ Box
 */
 const char LuaBox::className[] = "Box";
 const MethodType<LuaBox> LuaBox::Methods[] = {
-   METHOD(LuaBox, clear),
-   METHOD(LuaBox, get_index),
-   METHOD(LuaBox, is_space),
-   METHOD(LuaBox, get_resizing),
-   METHOD(LuaBox, get_align),
-   {nullptr, nullptr},
+   METHOD(LuaBox, clear),        METHOD(LuaBox, get_index), METHOD(LuaBox, is_space),
+   METHOD(LuaBox, get_resizing), METHOD(LuaBox, get_align), {nullptr, nullptr},
 };
 const PropertyType<LuaBox> LuaBox::Properties[] = {
-   PROP_RO(LuaBox, orientation),
-   PROP_RO(LuaBox, no_of_items),
-   PROP_RW(LuaBox, scrolling),
-   PROP_RW(LuaBox, force_scrolling),
-   PROP_RW(LuaBox, inner_spacing),
-   PROP_RW(LuaBox, min_desired_breadth),
-   PROP_RW(LuaBox, max_width),
-   PROP_RW(LuaBox, max_height),
+   PROP_RO(LuaBox, orientation),   PROP_RO(LuaBox, no_of_items),
+   PROP_RW(LuaBox, scrolling),     PROP_RW(LuaBox, force_scrolling),
+   PROP_RW(LuaBox, inner_spacing), PROP_RW(LuaBox, min_desired_breadth),
+   PROP_RW(LuaBox, max_width),     PROP_RW(LuaBox, max_height),
    {nullptr, nullptr, nullptr},
 };
 
@@ -2341,7 +2334,8 @@ int LuaBox::get_index(lua_State* L) {
 	const UI::Box* box = get();
 
 	for (int i = 0; i < box->get_nritems(); ++i) {
-		if (box->at(i).type == UI::Box::Item::Type::ItemPanel && box->at(i).u.panel.panel == panel->get()) {
+		if (box->at(i).type == UI::Box::Item::Type::ItemPanel &&
+		    box->at(i).u.panel.panel == panel->get()) {
 			lua_pushinteger(L, i + 1);
 			return 1;
 		}
@@ -2425,18 +2419,19 @@ int LuaBox::get_align(lua_State* L) {
 	}
 
 	switch (item.u.panel.align) {
-		case UI::Align::kCenter:
-			lua_pushstring(L, "center");
-			break;
-		case UI::Align::kLeft:
-			lua_pushstring(L, "left");
-			break;
-		case UI::Align::kRight:
-			lua_pushstring(L, "right");
-			break;
-		default:
-			report_error(L, "Index %d: Invalid alignment %d", index, static_cast<int>(item.u.panel.align));
-			break;
+	case UI::Align::kCenter:
+		lua_pushstring(L, "center");
+		break;
+	case UI::Align::kLeft:
+		lua_pushstring(L, "left");
+		break;
+	case UI::Align::kRight:
+		lua_pushstring(L, "right");
+		break;
+	default:
+		report_error(
+		   L, "Index %d: Invalid alignment %d", index, static_cast<int>(item.u.panel.align));
+		break;
 	}
 
 	return 1;
@@ -3187,18 +3182,23 @@ Dropdown
 */
 const char LuaDropdown::className[] = "Dropdown";
 const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
-   METHOD(LuaDropdown, open),           METHOD(LuaDropdown, highlight_item),
+   METHOD(LuaDropdown, open),
+   METHOD(LuaDropdown, highlight_item),
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
    METHOD(LuaDropdown, indicate_item),
 #endif
-   METHOD(LuaDropdown, select),         METHOD(LuaDropdown, clear), METHOD(LuaDropdown, add),
-   METHOD(LuaDropdown, get_value_at),   METHOD(LuaDropdown, get_label_at),
-   METHOD(LuaDropdown, get_tooltip_at), {nullptr, nullptr},
+   METHOD(LuaDropdown, select),
+   METHOD(LuaDropdown, clear),
+   METHOD(LuaDropdown, add),
+   METHOD(LuaDropdown, get_value_at),
+   METHOD(LuaDropdown, get_label_at),
+   METHOD(LuaDropdown, get_tooltip_at),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
    PROP_RO(LuaDropdown, datatype),    PROP_RO(LuaDropdown, expanded),
    PROP_RO(LuaDropdown, no_of_items), PROP_RO(LuaDropdown, selection),
-   PROP_RO(LuaDropdown, listselect), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaDropdown, listselect),  {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -3556,10 +3556,8 @@ const MethodType<LuaListselect> LuaListselect::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaListselect> LuaListselect::Properties[] = {
-   PROP_RO(LuaListselect, datatype),
-   PROP_RO(LuaListselect, no_of_items),
-   PROP_RO(LuaListselect, selection),
-   PROP_RO(LuaListselect, linked_dropdown),
+   PROP_RO(LuaListselect, datatype),  PROP_RO(LuaListselect, no_of_items),
+   PROP_RO(LuaListselect, selection), PROP_RO(LuaListselect, linked_dropdown),
    {nullptr, nullptr, nullptr},
 };
 
