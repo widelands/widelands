@@ -2431,7 +2431,6 @@ int LuaBox::get_align(lua_State* L) {
 	default:
 		report_error(
 		   L, "Index %d: Invalid alignment %d", index, static_cast<int>(item.u.panel.align));
-		break;
 	}
 
 	return 1;
@@ -4929,7 +4928,7 @@ static int L_is_rtl(lua_State* L) {
    :rtype: :class:`string`
 */
 static int L_get_clipboard(lua_State* L) {
-	lua_pushstring(L, SDL_HasClipboardText() ? SDL_GetClipboardText() : "");
+	lua_pushstring(L, SDL_HasClipboardText() != 0 ? SDL_GetClipboardText() : "");
 	return 1;
 }
 
