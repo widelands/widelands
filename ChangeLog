@@ -18,6 +18,8 @@
 - Temporary fix for macos CI builds
 - Fix for 6444 using mac dylibbundler to packe the .app Bundle
 - Re-add gettext ubuntu package
+- Update translations for v1.2.1 (CB #4916 / GH #6556)
+- Replace MD5 checksumming code with `libmd`
 
 
 ## Release 1.2
