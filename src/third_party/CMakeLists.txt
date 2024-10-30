@@ -12,13 +12,6 @@ if (NOT MINIZIP_STATIC_LIBRARIES)
   message(STATUS "Using embedded minizip libraries")
 endif()
 
-wl_library(third_party_sha1
-  THIRD_PARTY
-  SRCS
-    sha1/sha1.cc
-    sha1/sha1.h
-)
-
 wl_library(third_party_eris
   THIRD_PARTY
   C_LIBRARY
@@ -86,6 +79,27 @@ wl_library(third_party_eris
     eris/lvm.h
     eris/lzio.c
     eris/lzio.h
+)
+
+wl_library(third_party_libmd
+  THIRD_PARTY_WITH_INCLUDES
+  SRCS
+    libmd/include/md5.h
+    libmd/include/sha1.h
+    libmd/include/sha256.h
+    libmd/include/sha2.h
+    libmd/include/sha512.h
+    libmd/include/sha.h
+    libmd/src/helper_md5.cc
+    libmd/src/helper_sha1.cc
+    libmd/src/helper_sha224.cc
+    libmd/src/helper_sha256.cc
+    libmd/src/helper_sha384.cc
+    libmd/src/helper_sha512_256.cc
+    libmd/src/helper_sha512.cc
+    libmd/src/md5.cc
+    libmd/src/sha1.cc
+    libmd/src/sha2.cc
 )
 
 wl_library(third_party_gettext

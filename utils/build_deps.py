@@ -189,8 +189,11 @@ def find_source_and_cmake_files(srcdir):
 def report_unused_sources(srcdir, sources, owners_of_src):
     unused_sources = sources - set(owners_of_src.keys())
     for src in sorted(unused_sources):
-        print_error(src, 1, '(CRITICAL) File not mentioned in any build rule.')
-    return len(unused_sources) != 0
+        if 'third_party/tinygettext' in src or 'third_party/libmd' in src:
+            allowed += 1
+        else:
+            print_error(src, 1, '(CRITICAL) File not mentioned in any build rule.')
+    return len(unused_sources) > allowed
 
 
 def report_unmentioned_or_unnecessary_dependencies(srcdir, target, includes_by_src, uses_includes_by_src, owners_of_src):

@@ -3,6 +3,7 @@ include(CMakeParseArguments)
 macro(_parse_common_args ARGS)
   set(OPTIONS
     THIRD_PARTY  # Is a third party lib. Less warnings, no codecheck.
+    THIRD_PARTY_WITH_INCLUDES
     C_LIBRARY # Pure C library. No CXX flags.
     WIN32 # Windows binary/library.
     USES_ATOMIC
@@ -70,7 +71,7 @@ macro(_common_compile_tasks)
     set(TARGET_LINK_FLAGS "-static")
   endif()
 
-  if(ARG_THIRD_PARTY)
+  if(ARG_THIRD_PARTY OR ARG_THIRD_PARTY_WITH_INCLUDES)
     # Disable all warnings for third_party.
     set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} -w")
   else()
