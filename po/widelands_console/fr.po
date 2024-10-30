@@ -1,11 +1,12 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
-# 
+#
 # Translators:
 # 34b6ffed036c169f8c0dd59e6bb8a305_b52781a <671f2e957f50d5213a1238cd588b004a_1012986>, 2021
 # Boese Kaiser, 2022
 # Renaud Bouchard, 2014
 # C138, 2021,2023
+# Ch L, 2024
 # David D, 2023
 # GunChleoc, 2016,2018-2019
 # GunChleoc, 2016
@@ -13,7 +14,7 @@
 # Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
 # Jaypad <ju-ju@nataju.fr>, 2016
 # Olivier <olivier+transifex@migeot.org>, 2021
-# Renaud Bouchard, 2015-2022
+# Renaud Bouchard, 2015-2022,2024
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Tubuntu, 2015
 msgid ""
@@ -22,19 +23,21 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-02-15 02:28+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
-"Last-Translator: C138, 2021,2023\n"
-"Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
+"Last-Translator: Renaud Bouchard, 2015-2022,2024\n"
+"Language-Team: French (http://app.transifex.com/widelands/widelands/language/"
+"fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % "
+"1000000 == 0 ? 1 : 2;\n"
 
 #. * TRANSLATORS: Separator for alternative values for command line parameters
 #: ../../src/wlapplication_messages.cc:52
 #, c-format
 msgid "%1$s|%2$s"
-msgstr ""
+msgstr "%1$s|%2$s"
 
 #: ../../src/wlapplication_messages.cc:55
 #: ../../src/wlapplication_messages.cc:87
@@ -49,7 +52,7 @@ msgstr "NOMDEFICHIER"
 #. punctuation marks
 #: ../../src/wlapplication_messages.cc:60
 msgid "last"
-msgstr ""
+msgstr "dernier"
 
 #: ../../src/wlapplication_messages.cc:66
 msgid "Usage:"
@@ -76,18 +79,22 @@ msgstr "Options :"
 
 #: ../../src/wlapplication_messages.cc:70
 msgid "Use the specified directory for the Widelands data files."
-msgstr "Utilisez le Dossier spécifié pour les fichiers de données de Widelands."
+msgstr ""
+"Utilisez le Dossier spécifié pour les fichiers de données de Widelands."
 
 #: ../../src/wlapplication_messages.cc:72
 #, c-format
 msgid ""
 "Use the specified directory for Widelands config files, savegames, and "
 "replays. Default is `%s`."
-msgstr "Utilisez le Dossier spécifié pour les fichiers de configuration de Widelands, les parties sauvegardées et les rediffusions. Par default, il s'agit de  `%s`."
+msgstr ""
+"Utilisez le Dossier spécifié pour les fichiers de configuration de "
+"Widelands, les parties sauvegardées et les rediffusions. Par default, il "
+"s'agit de  `%s`."
 
 #: ../../src/wlapplication_messages.cc:77
 msgid "Use the specified directory for the Widelands locale files."
-msgstr "Utilisez le Dossier spécifié pour les fichiers locaux de Widelands."
+msgstr "Utiliser le dossier spécifié pour les fichiers locaux de Widelands."
 
 #: ../../src/wlapplication_messages.cc:81
 msgid "Use the specified locale."
@@ -103,18 +110,23 @@ msgstr "[de_DE|sv_SE|...]"
 msgid ""
 "Do not check whether the data directory to use is compatible with this "
 "Widelands version."
-msgstr " Ne vérifie pas si le dossier de données à utiliser est compatible avec cette version de Widelands "
+msgstr ""
+" Ne vérifie pas si le dossier de données à utiliser est compatible avec "
+"cette version de Widelands "
 
 #: ../../src/wlapplication_messages.cc:88
 #, c-format
 msgid ""
 "Create a new game directly with the settings configured in the given file. "
 "An example can be found in `%s`."
-msgstr "Cree une nouvelle partie avec les paramètres configurés dans le fichier indiqué.  Un exemple peut être trouvé dans '%s'"
+msgstr ""
+"Crée une nouvelle partie avec les paramètres configurés dans le fichier "
+"indiqué.  Un exemple peut être trouvé dans '%s'"
 
 #: ../../src/wlapplication_messages.cc:93
 msgid "Start the map `FILENAME` directly as a singleplayer scenario."
-msgstr "Lance la carte `NOMDEFICHIER` directement en tant que scenario un joueur."
+msgstr ""
+"Lance la carte `NOMDEFICHIER` directement en tant que scenario un joueur."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -123,6 +135,8 @@ msgstr "Lance la carte `NOMDEFICHIER` directement en tant que scenario un joueur
 msgid ""
 "Load the savegame `%1$s` directly or the last saved game if `=%2$s` is used."
 msgstr ""
+"Charge la sauvegarde `%1$s` directement ou le dernier jeu sauvé si `=%2$s` "
+"est utilisé."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -131,6 +145,8 @@ msgstr ""
 msgid ""
 "Load the replay `%1$s` directly or the last saved replay if `=%2$s` is used."
 msgstr ""
+"Charge le replay `%1$s` directement ou le dernier replay sauvé si `=%2$s` "
+"est utilisé."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -138,15 +154,19 @@ msgstr ""
 #, c-format
 msgid ""
 "Start the Widelands map editor directly. You can add `=%1$s` to directly "
-"load the map `FILENAME` in the editor or `=%2$s` to load the last edited "
-"map."
+"load the map `FILENAME` in the editor or `=%2$s` to load the last edited map."
 msgstr ""
+"Lance directement l'éditeur de cartes de Widelands. Vous pouvez ajouter `="
+"%1$s` pour charger la carte directement dans l'éditeur ou  `=%2$s` pour "
+"charger la dernière carte éditée."
 
 #: ../../src/wlapplication_messages.cc:114
 msgid ""
-"Run the given Lua script after initialization. Only valid with --scenario, "
-"--loadgame, or --editor."
-msgstr "Lance le Script Lua indiqué après initiallisation. Ne fonctionne qu'avec --scenario, --loadgame, ou --editor"
+"Run the given Lua script after initialization. Only valid with --scenario, --"
+"loadgame, or --editor."
+msgstr ""
+"Lance le Script Lua indiqué après initiallisation. Ne fonctionne qu'avec --"
+"scenario, --loadgame, ou --editor"
 
 #: ../../src/wlapplication_messages.cc:118
 msgid "Start the game with sound disabled."
@@ -176,13 +196,19 @@ msgstr "n"
 msgid ""
 "Enable AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ "
 "for a full description of the AI training logic."
-msgstr "Active le mode entrainement de l'IA. Voir https://www.widelands.org/wiki/Ai%20Training/ pour une description complète de la logique d'apprentissage de l'IA."
+msgstr ""
+"Active le mode entrainement de l'IA. Voir https://www.widelands.org/wiki/Ai"
+"%20Training/ pour une description complète de la logique d'apprentissage de "
+"l'IA."
 
 #: ../../src/wlapplication_messages.cc:126
 msgid ""
 "Constantly adjust the game speed automatically depending on AI delay. Only "
 "to be used for AI testing or training (in conjunction with --ai_training)."
-msgstr "ajuste la vitesse de jeu en permanence et automatiquepent en fonction du délai de l'IA. N'est cecnsé être utilisé pour tester ou entrainer l'IA (avec --ai_training)."
+msgstr ""
+"Ajuste la vitesse de jeu en permanence et automatiquement en fonction du "
+"délai de l'IA. À n'utiliser que pour tester ou entraîner l'IA (avec --"
+"ai_training)."
 
 #: ../../src/wlapplication_messages.cc:130
 msgid "Enable the Script Console and Cheating Mode."
@@ -194,7 +220,9 @@ msgstr "Options de jeu :"
 
 #: ../../src/wlapplication_messages.cc:133
 msgid "Note: New values will be written to the config file."
-msgstr "Remarque : Les nouvelles valeurs seront écrites dans le fichier de configuration."
+msgstr ""
+"Remarque : Les nouvelles valeurs seront écrites dans le fichier de "
+"configuration."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:139
@@ -225,7 +253,9 @@ msgstr "[vrai*|faux]"
 msgid ""
 "Do not create an autosave when the user has been inactive since the last "
 "autosave."
-msgstr "Ne pas créer de sauvegarde automatique lorsque l'utilisateur a été inactif depuis la dernière sauvegarde automatique."
+msgstr ""
+"Ne pas créer de sauvegarde automatique lorsque l'utilisateur a été inactif "
+"depuis la dernière sauvegarde automatique."
 
 #: ../../src/wlapplication_messages.cc:149
 msgid "Do not save files as binary zip archives."
@@ -233,7 +263,7 @@ msgstr "Ne pas sauver les fichiers en archives zip binaires."
 
 #: ../../src/wlapplication_messages.cc:150
 msgid "Save files as binary zip archives."
-msgstr ""
+msgstr "Sauver les fichiers en tant qu'archives zip binaires."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -253,7 +283,9 @@ msgstr "[vrai|faux*]"
 
 #: ../../src/wlapplication_messages.cc:156
 msgid "Whether to save the history of sent chat messages to a file."
-msgstr "S'il faut enregistrer l'historique des messages de chat envoyés dans un fichier"
+msgstr ""
+"S'il faut enregistrer l'historique des messages de chat envoyés dans un "
+"fichier"
 
 #: ../../src/wlapplication_messages.cc:157
 msgid "Show filenames in the replay screen."
@@ -263,12 +295,15 @@ msgstr "Afficher les noms de fichiers dans l'écran de relecture."
 msgid ""
 "Whether a warning should be shown in the editor if there are too many "
 "players."
-msgstr "Si un avertissement doit être affiché dans l'éditeur s'il y a trop de joueurs."
+msgstr ""
+"Si un avertissement doit être affiché dans l'éditeur s'il y a trop de "
+"joueurs."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:164
 msgid "Pause the game after `n` minutes of user inactivity."
-msgstr "Mettre le jeu en pause après `n` minutes d'inactivité de l'utilisateur."
+msgstr ""
+"Mettre le jeu en pause après `n` minutes d'inactivité de l'utilisateur."
 
 #: ../../src/wlapplication_messages.cc:166
 msgid "Start building a road after placing a flag."
@@ -293,7 +328,8 @@ msgstr "[...]"
 
 #: ../../src/wlapplication_messages.cc:180
 msgid "Scroll when the mouse cursor is near the screen edge."
-msgstr "Faire défiler lorsque le curseur de la souris est près du bord de l'écran."
+msgstr ""
+"Faire défiler lorsque le curseur de la souris est près du bord de l'écran."
 
 #: ../../src/wlapplication_messages.cc:181
 msgid "Invert click-and-drag map movement direction."
@@ -354,7 +390,8 @@ msgstr "Le dernier hôte connecté."
 
 #: ../../src/wlapplication_messages.cc:201
 msgid "Whether the used metaserver login is for a registered user."
-msgstr "Si l'identifiant du métaserveur utilisé est pour un utilisateur enregistré."
+msgstr ""
+"Si l'identifiant du métaserveur utilisé est pour un utilisateur enregistré."
 
 #: ../../src/wlapplication_messages.cc:202
 msgid "The hashed password for online logins."
@@ -366,11 +403,14 @@ msgstr "IP"
 
 #: ../../src/wlapplication_messages.cc:204
 msgid "Connect to a different server address from the add-ons manager."
-msgstr "Connecter à une adresse de serveur différente depuis le gestionnaire d'add-ons."
+msgstr ""
+"Connecter à une adresse de serveur différente depuis le gestionnaire d'add-"
+"ons."
 
 #: ../../src/wlapplication_messages.cc:206
 msgid "Connect to a different server port from the add-ons manager."
-msgstr "Connecter à un port de serveur différent depuis le gestionnaire d'add-ons."
+msgstr ""
+"Connecter à un port de serveur différent depuis le gestionnaire d'add-ons."
 
 #. * TRANSLATORS: A syncstream is a synchronization stream. Syncstreams are
 #. used in multiplayer
@@ -378,7 +418,9 @@ msgstr "Connecter à un port de serveur différent depuis le gestionnaire d'add-
 #. players.
 #: ../../src/wlapplication_messages.cc:211
 msgid "Create syncstream dump files to help debug network games."
-msgstr "Créez des fichiers de dump syncstream pour aider à déboguer les jeux en réseau."
+msgstr ""
+"Créez des fichiers de dump syncstream pour aider à déboguer les jeux en "
+"réseau."
 
 #: ../../src/wlapplication_messages.cc:214
 msgid "Graphic options:"
@@ -386,11 +428,11 @@ msgstr "Options graphiques :"
 
 #: ../../src/wlapplication_messages.cc:214
 msgid "Use the whole display for the game screen."
-msgstr ""
+msgstr "Utiliser l'écran entier pour l'écran du jeu."
 
 #: ../../src/wlapplication_messages.cc:216
 msgid "Start the game in a maximized window."
-msgstr ""
+msgstr "Démarre le jeu dans une fenêtre agrandie au maximum."
 
 #. * TRANSLATORS: A placeholder for window width
 #: ../../src/wlapplication_messages.cc:219
@@ -423,7 +465,9 @@ msgstr "Si vous souhaitez utiliser des info-bulles collantes."
 #: ../../src/wlapplication_messages.cc:232
 msgid ""
 "The path to the active UI theme, relative to the Widelands home directory."
-msgstr "Chemin d'accès au thème d'IU actif, par rapport au répertoire d'accueil de Widelands."
+msgstr ""
+"Chemin d'accès au thème d'IU actif, par rapport au répertoire d'accueil de "
+"Widelands."
 
 #: ../../src/wlapplication_messages.cc:234
 msgid "Options for the internal window manager:"
@@ -438,20 +482,26 @@ msgstr "Si les mouvements automatiques de la carte doivent être animés."
 msgid ""
 "Move a window to the edge of the screen when the edge of the window comes "
 "within a distance `n` from the edge of the screen."
-msgstr "Déplace une fenêtre vers le bord de l'écran lorsque le bord de la fenêtre se trouve à une distance `n` du bord de l'écran."
+msgstr ""
+"Déplace une fenêtre vers le bord de l'écran lorsque le bord de la fenêtre se "
+"trouve à une distance `n` du bord de l'écran."
 
 #: ../../src/wlapplication_messages.cc:242
 msgid ""
 "Eliminate a window’s border towards the edge of the screen when the edge of "
 "the window is next to the edge of the screen."
-msgstr "Élimine la bordure d'une fenêtre vers le bord de l'écran lorsque le bord de la fenêtre est à côté du bord de l'écran."
+msgstr ""
+"Élimine la bordure d'une fenêtre vers le bord de l'écran lorsque le bord de "
+"la fenêtre est à côté du bord de l'écran."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:247
 msgid ""
 "Move a window to the edge of the panel when the edge of the window comes "
 "within a distance of `n` from the edge of the panel."
-msgstr "Déplace une fenêtre vers le bord du panneau lorsque le bord de la fenêtre se trouve à une distance de `n` du bord du panneau."
+msgstr ""
+"Déplace une fenêtre vers le bord du panneau lorsque le bord de la fenêtre se "
+"trouve à une distance de `n` du bord du panneau."
 
 #: ../../src/wlapplication_messages.cc:251
 msgid "Enable verbose debug messages"
@@ -465,7 +515,9 @@ msgstr "Autres :"
 msgid ""
 "Print all strings as they are translated. This helps with tracing down bugs "
 "with internationalization."
-msgstr "écrire toutes les chaines de caractères quand elles sont traduites. Ceci aide à identifier les problèmes avec l'internationalisation."
+msgstr ""
+"écrire toutes les chaines de caractères quand elles sont traduites. Ceci "
+"aide à identifier les problèmes avec l'internationalisation."
 
 #: ../../src/wlapplication_messages.cc:256
 msgid "Only print version and exit."
@@ -477,7 +529,8 @@ msgstr "Afficher cette aide."
 
 #: ../../src/wlapplication_messages.cc:258
 msgid "Show this help with all available config options."
-msgstr "Afficher cette aide avec toutes les options de configurations disponibles."
+msgstr ""
+"Afficher cette aide avec toutes les options de configurations disponibles."
 
 #: ../../src/wlapplication_messages.cc:259
 msgid "<save.wgf>/<replay.wry>"
@@ -486,9 +539,12 @@ msgstr "<save.wgf>/<replay.wry>"
 #: ../../src/wlapplication_messages.cc:260
 msgid ""
 "Load the given savegame or replay directly. Useful for .wgf/.wry file "
-"extension association. Does not work with other options. Also see "
-"--loadgame/--replay."
-msgstr "Charge la sauvegarde indiquée ou la rejoue directement. Utile pour l'association d'extension de fichiers .wgf/.wry. Ne fonctionne pas avec d'autres options. Voir aussi --loadgame/--replay."
+"extension association. Does not work with other options. Also see --"
+"loadgame/--replay."
+msgstr ""
+"Charge la sauvegarde indiquée ou la rejoue directement. Utile pour "
+"l'association d'extension de fichiers .wgf/.wry. Ne fonctionne pas avec "
+"d'autres options. Voir aussi --loadgame/--replay."
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:295
@@ -502,4 +558,9 @@ msgid ""
 "        https://www.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr "Rapports de bogues ? Suggestions ? Visitez le site web du projet :\nhttps://www.widelands.org/\n\nNous espérons que vous appréciez ce jeu !"
+msgstr ""
+"Rapports de bogues ? Suggestions ? Visitez le site web du projet :\n"
+"https://www.widelands.org/\n"
+"\n"
+"Nous espérons que vous appréciez ce jeu !"
+

@@ -1,7 +1,8 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
-# 
+#
 # Translators:
+# Alexandros Koutroulis, 2024
 # erimitis, 2018
 # GunChleoc, 2018
 msgid ""
@@ -10,8 +11,9 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-02 13:54+0000\n"
-"Last-Translator: erimitis, 2018\n"
-"Language-Team: Greek (http://app.transifex.com/widelands/widelands/language/el/)\n"
+"Last-Translator: Alexandros Koutroulis, 2024\n"
+"Language-Team: Greek (http://app.transifex.com/widelands/widelands/language/"
+"el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -56,7 +58,7 @@ msgstr "Νυφίτσα"
 
 #: ../../data/world/critters/moose/init.lua:7
 msgid "Moose"
-msgstr ""
+msgstr "Άλκη"
 
 #: ../../data/world/critters/reindeer/init.lua:7
 msgid "Reindeer"
@@ -347,7 +349,7 @@ msgstr "Νεκρό Δέντρο"
 
 #: ../../data/world/immovables/trees/fallentree/init.lua:7
 msgid "Felled Tree"
-msgstr ""
+msgstr "Κομμένο δέντρο"
 
 #: ../../data/world/immovables/trees/larch/mature/init.lua:9
 msgid "Larch (Mature)"
@@ -751,7 +753,8 @@ msgstr "Κομψοτεχνήματα"
 
 #: ../../data/world/init.lua:207
 msgid "These immovables are used by the win condition “Artifacts”."
-msgstr "Αυτά τα αμετακίνητα χρησιμοποιούνται από το κριτήριο νίκης “Κομψοτεχνήματα”."
+msgstr ""
+"Αυτά τα αμετακίνητα χρησιμοποιούνται από το κριτήριο νίκης “Κομψοτεχνήματα”."
 
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../data/world/init.lua:220
@@ -1011,19 +1014,19 @@ msgstr "Επιπλέων Πάγος 2"
 
 #: ../../data/world/terrains/winter/taiga1/init.lua:5
 msgid "Taiga 1"
-msgstr ""
+msgstr "Τάιγκα 1"
 
 #: ../../data/world/terrains/winter/taiga2/init.lua:5
 msgid "Taiga 2"
-msgstr ""
+msgstr "Τάιγκα 2"
 
 #: ../../data/world/terrains/winter/taiga3/init.lua:5
 msgid "Taiga 3"
-msgstr ""
+msgstr "Τάιγκα 3"
 
 #: ../../data/world/terrains/winter/tundra/init.lua:5
 msgid "Tundra"
-msgstr ""
+msgstr "Τούνδρα"
 
 #: ../../data/world/terrains/winter/tundra_taiga/init.lua:5
 msgid "Tundra Taiga"

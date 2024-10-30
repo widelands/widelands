@@ -1,19 +1,24 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
+# Translators:
+# Pavol Gono, 2024
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-03-04 03:06+0000\n"
 "PO-Revision-Date: 2023-01-04 20:43+0000\n"
+"Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (https://app.transifex.com/widelands/teams/35159/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sk\n"
-"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n "
+">= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
 
 #. TRANSLATORS: Message title for a piece of information
 #: ../../data/campaigns/fri05.wmf/scripting/init.lua:46
@@ -39,13 +44,13 @@ msgstr ""
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:34
 msgid "%1$d× %2$s"
-msgstr ""
+msgstr "%1$d× %2$s"
 
 #. TRANSLATORS: The placeholders are ware lists in a trade description, e.g.
 #. "2× Fish and 1× Honey → 1× Granite"
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:41
 msgid "%1$s → %2$s"
-msgstr ""
+msgstr "%1$s → %2$s"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:45
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:47
@@ -61,8 +66,8 @@ msgstr ""
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:49
 msgid ""
-"Any wares stored in a port will be traded. The trade prices are indicated by"
-" the following chart."
+"Any wares stored in a port will be traded. The trade prices are indicated by "
+"the following chart."
 msgstr ""
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:56
@@ -88,8 +93,8 @@ msgstr ""
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:68
 msgid ""
 "Secure the narrow passage to the east of the Uplands with several large "
-"military buildings, so the enemy cannot get past before you’re ready for the"
-" attack."
+"military buildings, so the enemy cannot get past before you’re ready for the "
+"attack."
 msgstr ""
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:74
@@ -147,9 +152,9 @@ msgid ""
 "For once the sea was mild and permitted swift passage back South. Henneke "
 "and me both spent the longest part of the voyage standing at the ship’s bow "
 "looking forward to our return. Reebaud at first stood at the stern and "
-"looked back the same way as we did look ahead. Clearly he loves his new home"
-" as much as I do my old one. I am sure the wish to return alive and a victor"
-" will inspire his soldiers to fight as hard as my own troops will strive to "
+"looked back the same way as we did look ahead. Clearly he loves his new home "
+"as much as I do my old one. I am sure the wish to return alive and a victor "
+"will inspire his soldiers to fight as hard as my own troops will strive to "
 "reclaim our home."
 msgstr ""
 
@@ -225,8 +230,8 @@ msgstr ""
 #. TRANSLATORS: Ocke Ketelsen – Introduction 5
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:139
 msgid ""
-"Peace and welcome to Helgoland! Your reputation precedes you, Claus Lembeck,"
-" the well-loved lord of Föhr, and Reebaud whom the bards term the Bold and "
+"Peace and welcome to Helgoland! Your reputation precedes you, Claus Lembeck, "
+"the well-loved lord of Föhr, and Reebaud whom the bards term the Bold and "
 "the Brave and the Mighty. I am Ocke Ketelsen, senior alderman of Helgoland, "
 "and despite these hard times I am pleased and honoured to receive such "
 "illustrious guests."
@@ -241,9 +246,9 @@ msgstr ""
 msgid ""
 "Peace and thanks for the friendly greeting to you, Ocke Ketelsen! It is a "
 "pleasant change not to be forced to go to war against someone on whose "
-"island we land. Yet your welcome sounds oddly short. Since your words are so"
-" warm, I can only conclude that some other sort of trouble has befallen you."
-" Assuming you don’t mind if I ask and that this question does not appear "
+"island we land. Yet your welcome sounds oddly short. Since your words are so "
+"warm, I can only conclude that some other sort of trouble has befallen you. "
+"Assuming you don’t mind if I ask and that this question does not appear "
 "impertinent, I would like to know if we can help you in any way."
 msgstr ""
 
@@ -277,8 +282,8 @@ msgstr ""
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:174
 msgid ""
 "This assumption is untrue, to my great chagrin. For the sake of brevity, I "
-"will only say that Atterdag invaded Föhr with such a mighty force that I was"
-" compelled to leave the island and ask Reebaud to help me reclaim it. In "
+"will only say that Atterdag invaded Föhr with such a mighty force that I was "
+"compelled to leave the island and ask Reebaud to help me reclaim it. In "
 "fact, we were sailing to Föhr to drive the invaders out once and for all "
 "when a storm blew us off our course and to Helgoland."
 msgstr ""
@@ -287,8 +292,7 @@ msgstr ""
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:177
 msgid ""
 "That it did so might even be heavenly intervention. We will gladly help you "
-"fight this enemy. A warm-up battle, so to speak – I am looking forward to "
-"it!"
+"fight this enemy. A warm-up battle, so to speak – I am looking forward to it!"
 msgstr ""
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:183
@@ -300,10 +304,10 @@ msgstr ""
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:186
 msgid ""
-"Your enthusiasm warms me as much as your plight engages my sympathy. But the"
-" enemies are more powerful than they may appear – they have brought an "
-"enormous force of Danish soldiers, and even your mighty soldiers will not be"
-" able to defeat them all."
+"Your enthusiasm warms me as much as your plight engages my sympathy. But the "
+"enemies are more powerful than they may appear – they have brought an "
+"enormous force of Danish soldiers, and even your mighty soldiers will not be "
+"able to defeat them all."
 msgstr ""
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
@@ -317,8 +321,8 @@ msgstr ""
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:192
 msgid ""
-"But first let me give you a clear picture of our small island by showing you"
-" around."
+"But first let me give you a clear picture of our small island by showing you "
+"around."
 msgstr ""
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:197
@@ -341,8 +345,8 @@ msgid ""
 "buy ores and granite from there. Let’s split out duties according to what "
 "each of us does best: You take charge of reorganizing our economy for war "
 "and training our people for battle, and I will arrange to import goods in "
-"any quantity you require. Simply drop off the wares to sell in the ports and"
-" I will take care of the rest. This chart indicates how many goods of which "
+"any quantity you require. Simply drop off the wares to sell in the ports and "
+"I will take care of the rest. This chart indicates how many goods of which "
 "sorts we usually trade."
 msgstr ""
 
@@ -362,9 +366,9 @@ msgstr ""
 #. TRANSLATORS: Reebaud – Getting Started 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:215
 msgid ""
-"First things first. This town has an excellent defensive position, but it is"
-" woefully unguarded. We must plan ahead tactically, because I agree that "
-"this battle will not be won quickly."
+"First things first. This town has an excellent defensive position, but it is "
+"woefully unguarded. We must plan ahead tactically, because I agree that this "
+"battle will not be won quickly."
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Getting Started 1
@@ -389,12 +393,12 @@ msgstr ""
 msgid ""
 "Our most urgent concern, however, should be to secure this pass near our "
 "northernmost port. Our enemy must pass through this narrow point to reach "
-"us, but the same is also true in reverse. If we are careful, we can hold the"
-" enemy at this point for a long time until we are ready to launch our "
+"us, but the same is also true in reverse. If we are careful, we can hold the "
+"enemy at this point for a long time until we are ready to launch our "
 "countercharge. However, the passage is too narrow to be fortified as easily "
 "as the Uplands. We must construct as many fortresses tightly together here "
-"as possible in order to prevent the enemy from gaining any land. It would be"
-" unwise to build anything at all north of the pass, as it would be "
+"as possible in order to prevent the enemy from gaining any land. It would be "
+"unwise to build anything at all north of the pass, as it would be "
 "dangerously exposed."
 msgstr ""
 
@@ -435,9 +439,9 @@ msgstr ""
 msgid ""
 "The land looks fairly barren, so we will need to reserve more space for "
 "foresting than I’m comfortable with. The Lowlands seem to be slightly more "
-"fertile, so it might be wise to build the foresters’ and woodcutters’ houses"
-" down here and relocate some of the farms to the Uplands. Farms, reed farms,"
-" and berry farms do not depend on fertile land quite as much as trees do."
+"fertile, so it might be wise to build the foresters’ and woodcutters’ houses "
+"down here and relocate some of the farms to the Uplands. Farms, reed farms, "
+"and berry farms do not depend on fertile land quite as much as trees do."
 msgstr ""
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:255
@@ -451,8 +455,8 @@ msgid ""
 "recruitment and training economy. We do have a basic food and metal "
 "production, but it seems to have grown haphazardly and will not suffice to "
 "meet our needs. We will require more numerous and more advanced sites to "
-"provide enough weapons and armour as well as food for our soldiers. Needless"
-" to say, a pair of training sites and a barracks are also essential."
+"provide enough weapons and armour as well as food for our soldiers. Needless "
+"to say, a pair of training sites and a barracks are also essential."
 msgstr ""
 
 #. TRANSLATORS: Henneke Lembeck – Training
@@ -475,8 +479,8 @@ msgstr ""
 msgid ""
 "The lack of space on Helgoland is still a concern. The land would be "
 "sufficiently large to train a decent number of soldiers in a reasonable "
-"time, but training the armies we believe we will need would take forever! We"
-" may need to take some chances, and use superior tactics to compensate for "
+"time, but training the armies we believe we will need would take forever! We "
+"may need to take some chances, and use superior tactics to compensate for "
 "this disadvantage."
 msgstr ""
 
@@ -484,10 +488,10 @@ msgstr ""
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:271
 msgid ""
 "However, if you prefer to play it safe, don’t forget that we can simply "
-"enlarge the island. As we have a steady supply of logs now, we can construct"
-" dikes and breakwaters to gain more building space from the sea. When we are"
-" ready to attack, we can even use this as a way to bypass the narrow point "
-"in the east, or if we are to be truly bold we could dike around the whole "
+"enlarge the island. As we have a steady supply of logs now, we can construct "
+"dikes and breakwaters to gain more building space from the sea. When we are "
+"ready to attack, we can even use this as a way to bypass the narrow point in "
+"the east, or if we are to be truly bold we could dike around the whole "
 "western coast of the island to attack the enemy from two sides at once!"
 msgstr ""
 
@@ -498,8 +502,8 @@ msgstr ""
 #. TRANSLATORS: Ocke Ketelsen – Getting Started 4
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:279
 msgid ""
-"I am heartened by your forwardness. Let us all hasten to our separate tasks,"
-" and may fortune smile on us!"
+"I am heartened by your forwardness. Let us all hasten to our separate tasks, "
+"and may fortune smile on us!"
 msgstr ""
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:283
@@ -544,9 +548,9 @@ msgstr ""
 #. TRANSLATORS: Reebaud – Uplands Secured
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:300
 msgid ""
-"The Uplands are being converted to a true center of our economy. We must not"
-" forget to always keep a close eye on the ware exchange between the Lowlands"
-" and the Uplands and keep it to a minimum so as to avoid jams on the roads."
+"The Uplands are being converted to a true center of our economy. We must not "
+"forget to always keep a close eye on the ware exchange between the Lowlands "
+"and the Uplands and keep it to a minimum so as to avoid jams on the roads."
 msgstr ""
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:304
@@ -575,10 +579,10 @@ msgstr ""
 #. TRANSLATORS: Ocke Ketelsen – Victory 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:310
 msgid ""
-"My people and I will never be able to repay the debt we owe you. I will send"
-" all the soldiers you have trained along with you to aid you in your quest "
-"to liberate your own home. If there is anything else we can do for you, now "
-"or forevermore, you need only ask and we will be yours to command."
+"My people and I will never be able to repay the debt we owe you. I will send "
+"all the soldiers you have trained along with you to aid you in your quest to "
+"liberate your own home. If there is anything else we can do for you, now or "
+"forevermore, you need only ask and we will be yours to command."
 msgstr ""
 
 #. TRANSLATORS: Claus Lembeck – Victory 2
@@ -593,9 +597,9 @@ msgstr ""
 msgid ""
 "And take my heartfelt thanks for your promise to send your soldiers. I "
 "already knew that Atterdag was a formidable enemy, but the forces we now "
-"encountered outrival anything I have seen in all my life, and they were just"
-" a vanguard! We will need every advantage we can get, and even then I am not"
-" as certain of victory as I was before. If you have heard of anything else "
+"encountered outrival anything I have seen in all my life, and they were just "
+"a vanguard! We will need every advantage we can get, and even then I am not "
+"as certain of victory as I was before. If you have heard of anything else "
 "that might be useful – any piece of tactical advice – any towns who might "
 "join us – please share this information with us."
 msgstr ""
@@ -630,8 +634,8 @@ msgstr ""
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:337
 msgid ""
 "There is one more thing. Trade ships attempting to sail well north of the "
-"occupied area have been boarded and sunk by pirates. The survivors, however,"
-" swear that the pirates were in fact Danish soldiers, and that their ships "
+"occupied area have been boarded and sunk by pirates. The survivors, however, "
+"swear that the pirates were in fact Danish soldiers, and that their ships "
 "belong to the Danish fleet."
 msgstr ""
 
@@ -667,8 +671,8 @@ msgstr ""
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:350
 msgid ""
 "And if we can block it, they will lose their most important trade route! We "
-"must try it. We will sail to the Kattegat at once to conquer the strait, and"
-" then we’ll raise the people of Föhr and all the other islands in joint "
+"must try it. We will sail to the Kattegat at once to conquer the strait, and "
+"then we’ll raise the people of Föhr and all the other islands in joint "
 "rebellion against the invader!"
 msgstr ""
 
@@ -676,11 +680,11 @@ msgstr ""
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:357
 msgid ""
 "I would like to make one more request. A request and an offer. My two sons, "
-"Harke Ockesen and Eschel Ockesen, are training as soldiers and commanders. I"
-" would much appreciate if if you would let them accompany you on your "
+"Harke Ockesen and Eschel Ockesen, are training as soldiers and commanders. I "
+"would much appreciate if if you would let them accompany you on your "
 "campaign to the Kattegat to gain some practical experience, and return them "
-"to me afterwards. In the meantime, we will use the industry you built for us"
-" to train more soldiers who shall aid you in your subsequent endeavours."
+"to me afterwards. In the meantime, we will use the industry you built for us "
+"to train more soldiers who shall aid you in your subsequent endeavours."
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Victory 7

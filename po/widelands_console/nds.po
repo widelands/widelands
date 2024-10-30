@@ -1,6 +1,6 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
-# 
+#
 # Translators:
 # Benedikt Straub <benedikt-straub@web.de>, 2018-2024
 msgid ""
@@ -10,7 +10,8 @@ msgstr ""
 "POT-Creation-Date: 2024-02-15 02:28+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2024\n"
-"Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
+"Language-Team: Low German (http://app.transifex.com/widelands/widelands/"
+"language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -70,7 +71,9 @@ msgstr "Bruuk deeses Verteeknis för de Widelands-Daten-Dateien."
 msgid ""
 "Use the specified directory for Widelands config files, savegames, and "
 "replays. Default is `%s`."
-msgstr "Bruuk deeses Verteeknis för de Widelands Instellens-Dateien, sekert Spelen un Uptekens. Normaal is `%s`."
+msgstr ""
+"Bruuk deeses Verteeknis för de Widelands Instellens-Dateien, sekert Spelen "
+"un Uptekens. Normaal is `%s`."
 
 #: ../../src/wlapplication_messages.cc:77
 msgid "Use the specified directory for the Widelands locale files."
@@ -90,18 +93,23 @@ msgstr "[de_DE|sv_SE|...]"
 msgid ""
 "Do not check whether the data directory to use is compatible with this "
 "Widelands version."
-msgstr "Nich nakieken, of dat data-Verteeknis mit deeser Widelands-Versioon verdragelk is."
+msgstr ""
+"Nich nakieken, of dat data-Verteeknis mit deeser Widelands-Versioon "
+"verdragelk is."
 
 #: ../../src/wlapplication_messages.cc:88
 #, c-format
 msgid ""
 "Create a new game directly with the settings configured in the given file. "
 "An example can be found in `%s`."
-msgstr "Stracks een nejes Speel mit de Instellens ut de angeven Datei begünnen. Een Bispööl finnt man in `%s`."
+msgstr ""
+"Stracks een nejes Speel mit de Instellens ut de angeven Datei begünnen. Een "
+"Bispööl finnt man in `%s`."
 
 #: ../../src/wlapplication_messages.cc:93
 msgid "Start the map `FILENAME` directly as a singleplayer scenario."
-msgstr "De Kaart `DATEINAAM` stracks as Rutfödderung för eenen Speler begünnen."
+msgstr ""
+"De Kaart `DATEINAAM` stracks as Rutfödderung för eenen Speler begünnen."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -109,7 +117,8 @@ msgstr "De Kaart `DATEINAAM` stracks as Rutfödderung för eenen Speler begünne
 #, c-format
 msgid ""
 "Load the savegame `%1$s` directly or the last saved game if `=%2$s` is used."
-msgstr "Stracks dat sekert Speel `%1$s` laden of mit `%2$s` dat tolest sekert Speel."
+msgstr ""
+"Stracks dat sekert Speel `%1$s` laden of mit `%2$s` dat tolest sekert Speel."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -117,7 +126,8 @@ msgstr "Stracks dat sekert Speel `%1$s` laden of mit `%2$s` dat tolest sekert Sp
 #, c-format
 msgid ""
 "Load the replay `%1$s` directly or the last saved replay if `=%2$s` is used."
-msgstr "Stracks dat Upteken `%1$s` laden of mit `%2$s` dat tolest sekert Upteken."
+msgstr ""
+"Stracks dat Upteken `%1$s` laden of mit `%2$s` dat tolest sekert Upteken."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -125,15 +135,19 @@ msgstr "Stracks dat Upteken `%1$s` laden of mit `%2$s` dat tolest sekert Upteken
 #, c-format
 msgid ""
 "Start the Widelands map editor directly. You can add `=%1$s` to directly "
-"load the map `FILENAME` in the editor or `=%2$s` to load the last edited "
-"map."
-msgstr "Stracks de Widelands-Bewarker opmaken. Du kannst daar ok `=%1$s` anfögen, um stracks de Kaart `DATEINAAM` im Bewarker to laden, of `=%2$s`, um de tolest bewarkt Kaart to laden."
+"load the map `FILENAME` in the editor or `=%2$s` to load the last edited map."
+msgstr ""
+"Stracks de Widelands-Bewarker opmaken. Du kannst daar ok `=%1$s` anfögen, um "
+"stracks de Kaart `DATEINAAM` im Bewarker to laden, of `=%2$s`, um de tolest "
+"bewarkt Kaart to laden."
 
 #: ../../src/wlapplication_messages.cc:114
 msgid ""
-"Run the given Lua script after initialization. Only valid with --scenario, "
-"--loadgame, or --editor."
-msgstr "Start dat angeven Lua-Skript na de Begünn. Gaht blot mit --scenario, --loadgame of --editor."
+"Run the given Lua script after initialization. Only valid with --scenario, --"
+"loadgame, or --editor."
+msgstr ""
+"Start dat angeven Lua-Skript na de Begünn. Gaht blot mit --scenario, --"
+"loadgame of --editor."
 
 #: ../../src/wlapplication_messages.cc:118
 msgid "Start the game with sound disabled."
@@ -163,13 +177,18 @@ msgstr "n"
 msgid ""
 "Enable AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ "
 "for a full description of the AI training logic."
-msgstr "Knipst de KS-Öven an. Kiek https://www.widelands.org/wiki/Ai%20Training/ an, um mehr daaröver to lesen."
+msgstr ""
+"Knipst de KS-Öven an. Kiek https://www.widelands.org/wiki/Ai%20Training/ an, "
+"um mehr daaröver to lesen."
 
 #: ../../src/wlapplication_messages.cc:126
 msgid ""
 "Constantly adjust the game speed automatically depending on AI delay. Only "
 "to be used for AI testing or training (in conjunction with --ai_training)."
-msgstr "De Speel-Gauheid all de Tied an dat Hentrecken vun de künstelk Spelers anpassen. Bruuk dat blot bi’m Utprobeeren of Öven vun de künstelk Spelers (tosamen mit --ai_training)."
+msgstr ""
+"De Speel-Gauheid all de Tied an dat Hentrecken vun de künstelk Spelers "
+"anpassen. Bruuk dat blot bi’m Utprobeeren of Öven vun de künstelk Spelers "
+"(tosamen mit --ai_training)."
 
 #: ../../src/wlapplication_messages.cc:130
 msgid "Enable the Script Console and Cheating Mode."
@@ -212,7 +231,9 @@ msgstr "[jau*|nee]"
 msgid ""
 "Do not create an autosave when the user has been inactive since the last "
 "autosave."
-msgstr "Nich automatisk sekern, wenn de Bruker sied de leste automatisk Sekern inaktiv wesen is."
+msgstr ""
+"Nich automatisk sekern, wenn de Bruker sied de leste automatisk Sekern "
+"inaktiv wesen is."
 
 #: ../../src/wlapplication_messages.cc:149
 msgid "Do not save files as binary zip archives."
@@ -240,7 +261,8 @@ msgstr "[jau|nee*]"
 
 #: ../../src/wlapplication_messages.cc:156
 msgid "Whether to save the history of sent chat messages to a file."
-msgstr "Of de Histoorje vun sent Snack-Narichtens in eener Datei sekert worden sall."
+msgstr ""
+"Of de Histoorje vun sent Snack-Narichtens in eener Datei sekert worden sall."
 
 #: ../../src/wlapplication_messages.cc:157
 msgid "Show filenames in the replay screen."
@@ -263,7 +285,8 @@ msgstr "Na de Fahnenbauen Straat bauen."
 
 #: ../../src/wlapplication_messages.cc:170
 msgid "Bitmask of display flags to set for new games."
-msgstr "De Bit-Tosamensetten vun de Wiesen-/Verbargen-Instellens för neje Spelen."
+msgstr ""
+"De Bit-Tosamensetten vun de Wiesen-/Verbargen-Instellens för neje Spelen."
 
 #. * TRANSLATORS: The … character is not used on purpose to increase
 #. readability on monospaced
@@ -280,7 +303,8 @@ msgstr "[...]"
 
 #: ../../src/wlapplication_messages.cc:180
 msgid "Scroll when the mouse cursor is near the screen edge."
-msgstr "Kaart-Sicht verschuven, wenn de Muuswieser dicht bi de Billschirm-Rand is."
+msgstr ""
+"Kaart-Sicht verschuven, wenn de Muuswieser dicht bi de Billschirm-Rand is."
 
 #: ../../src/wlapplication_messages.cc:181
 msgid "Invert click-and-drag map movement direction."
@@ -288,7 +312,7 @@ msgstr "Kaart-Klick-un-Treck-Richtung umdreihen."
 
 #: ../../src/wlapplication_messages.cc:184
 msgid "Allow diagonal scrolling with the numeric keypad."
-msgstr "Diagonales Kart-Verschuven mit de Tahlenblock verlöven."
+msgstr "Diagonales Kaart-Verschuven mit de Tahlenblock verlöven."
 
 #: ../../src/wlapplication_messages.cc:185
 msgid "Display system time in the info panel."
@@ -365,7 +389,8 @@ msgstr "Vun de Verwiederns-Verwalter mit eenem anner Server-Port verbinnen."
 #. players.
 #: ../../src/wlapplication_messages.cc:211
 msgid "Create syncstream dump files to help debug network games."
-msgstr "Sync-Streamen in Internett-Speelen schrieven, um Verschuvens to unnersöken."
+msgstr ""
+"Sync-Streamen in Internett-Speelen schrieven, um Verschuvens to unnersöken."
 
 #: ../../src/wlapplication_messages.cc:214
 msgid "Graphic options:"
@@ -410,7 +435,8 @@ msgstr "Of Muushülptexten faststeckt worden sallen."
 #: ../../src/wlapplication_messages.cc:232
 msgid ""
 "The path to the active UI theme, relative to the Widelands home directory."
-msgstr "De Padd to de anknipst Bruker-Schnittstee-Thema vun de Heem-Verteeknis ut."
+msgstr ""
+"De Padd to de anknipst Bruker-Schnittstee-Thema vun de Heem-Verteeknis ut."
 
 #: ../../src/wlapplication_messages.cc:234
 msgid "Options for the internal window manager:"
@@ -425,20 +451,26 @@ msgstr "Of automatiske Kaart-Bewegens spöölt worden sallen."
 msgid ""
 "Move a window to the edge of the screen when the edge of the window comes "
 "within a distance `n` from the edge of the screen."
-msgstr "Een Fenster word an de Billschirmrann sett, wenn siene Kant nich wieder as `n` vun de Billschirmrann weg is."
+msgstr ""
+"Een Fenster word an de Billschirmrann sett, wenn siene Kant nich wieder as "
+"`n` vun de Billschirmrann weg is."
 
 #: ../../src/wlapplication_messages.cc:242
 msgid ""
 "Eliminate a window’s border towards the edge of the screen when the edge of "
 "the window is next to the edge of the screen."
-msgstr "De Fensterrann word am Billschirmrann nich wiesen, wenn de Fensterrann am Billschirmrann liggt."
+msgstr ""
+"De Fensterrann word am Billschirmrann nich wiesen, wenn de Fensterrann am "
+"Billschirmrann liggt."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:247
 msgid ""
 "Move a window to the edge of the panel when the edge of the window comes "
 "within a distance of `n` from the edge of the panel."
-msgstr "Een Fenster word to de Rann vun eenem Paneel sett, wenn sien Rann nich wieder as `n` vun de Rann vun de Paneel weg is."
+msgstr ""
+"Een Fenster word to de Rann vun eenem Paneel sett, wenn sien Rann nich "
+"wieder as `n` vun de Rann vun de Paneel weg is."
 
 #: ../../src/wlapplication_messages.cc:251
 msgid "Enable verbose debug messages"
@@ -452,7 +484,9 @@ msgstr "Wat ’t sünst noch so gifft:"
 msgid ""
 "Print all strings as they are translated. This helps with tracing down bugs "
 "with internationalization."
-msgstr "All Texten bi’m Översetten utgeven. Dat hülpt daarbi, Fehlers in de Översetten to finnen."
+msgstr ""
+"All Texten bi’m Översetten utgeven. Dat hülpt daarbi, Fehlers in de "
+"Översetten to finnen."
 
 #: ../../src/wlapplication_messages.cc:256
 msgid "Only print version and exit."
@@ -473,9 +507,12 @@ msgstr "<Sekert.wgf>/<Upteken.wry>"
 #: ../../src/wlapplication_messages.cc:260
 msgid ""
 "Load the given savegame or replay directly. Useful for .wgf/.wry file "
-"extension association. Does not work with other options. Also see "
-"--loadgame/--replay."
-msgstr "Stracks dat geven sekert Speel of Upteken laden. Gadelk för .wgf-/.wry-Dateinaam-Verknüppens. Anner Instellens worden nich annohmen. Kiek ok an: --loadgame/--replay."
+"extension association. Does not work with other options. Also see --"
+"loadgame/--replay."
+msgstr ""
+"Stracks dat geven sekert Speel of Upteken laden. Gadelk för .wgf-/.wry-"
+"Dateinaam-Verknüppens. Anner Instellens worden nich annohmen. Kiek ok an: --"
+"loadgame/--replay."
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:295
@@ -489,4 +526,8 @@ msgid ""
 "        https://www.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr "Fehlers mellen? Vörslagen? Kiek uns’ Internett-Sied an:\n        https://www.widelands.org/\n\nHopentlik gefallt di deeses Speel!"
+msgstr ""
+"Fehlers mellen? Vörslagen? Kiek uns’ Internett-Sied an:\n"
+"        https://www.widelands.org/\n"
+"\n"
+"Hopentlik gefallt di deeses Speel!"

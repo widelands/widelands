@@ -1,8 +1,9 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
-# 
+#
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Frank Carvalho, 2024
 # GunChleoc, 2014
 # Renata Campos <renata.p.campos@gmail.com>, 2016
 # Willian Francisco Urbano, 2022
@@ -12,13 +13,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Willian Francisco Urbano, 2022\n"
-"Language-Team: Portuguese (Brazil) (http://app.transifex.com/widelands/widelands/language/pt_BR/)\n"
+"Last-Translator: Frank Carvalho, 2024\n"
+"Language-Team: Portuguese (Brazil) (http://app.transifex.com/widelands/"
+"widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt_BR\n"
-"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % "
+"1000000 == 0 ? 1 : 2;\n"
 
 #: ../../data/txts/ABOUT.lua:7
 msgid "Readme"
@@ -53,7 +56,9 @@ msgstr ""
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
-msgstr "Este jogo é gratuito e de Fonte Aberta(Open Source) (FOSS), licenciado sob a GNU General Public License (GPL) V2.0."
+msgstr ""
+"Este jogo é gratuito e de Fonte Aberta(Open Source) (FOSS), licenciado sob a "
+"GNU General Public License (GPL) V2.0."
 
 #: ../../data/txts/LICENSE.lua:18
 #, lua-format
@@ -61,16 +66,22 @@ msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr ""
+"Você pode encontrar mais informações sobre FOSS e GPL visitando a seguinte "
+"página: %s"
 
 #: ../../data/txts/LICENSE.lua:20
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
-msgstr "Você pode encontrar o texto completo da licença lá, bem como mais informações sobre sua filosofia e as implicações legais."
+msgstr ""
+"Você pode encontrar o texto completo da licença lá, bem como mais "
+"informações sobre sua filosofia e as implicações legais."
 
 #: ../../data/txts/LICENSE.lua:22
 msgid "We are also shipping the GPL as a text document with Widelands itself."
-msgstr "Nós também estamos enviando o GPL como documento de texto com o próprio Widelands"
+msgstr ""
+"Nós também estamos enviando o GPL como documento de texto com o próprio "
+"Widelands"
 
 #: ../../data/txts/LICENSE.lua:23
 msgid ""
@@ -82,13 +93,18 @@ msgstr ""
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
-msgstr "No Windows, você pode achar o arquivo \"COPYING.txt\" na pasta onde foi instalado o jogo e na pasta do Widelands no menu iniciar  tem um link para o arquivo."
+msgstr ""
+"No Windows, você pode achar o arquivo \"COPYING.txt\" na pasta onde foi "
+"instalado o jogo e na pasta do Widelands no menu iniciar  tem um link para o "
+"arquivo."
 
 #: ../../data/txts/LICENSE.lua:25
 msgid ""
-"On MacOS, you can find the file called COPYING in the archive you downloaded"
-" from the website."
-msgstr "No MacOS, você pode achar o arquivo \"COPYING\" no arquivo que você baixou do site"
+"On MacOS, you can find the file called COPYING in the archive you downloaded "
+"from the website."
+msgstr ""
+"No MacOS, você pode achar o arquivo \"COPYING\" no arquivo que você baixou "
+"do site"
 
 #: ../../data/txts/LICENSE.lua:27
 msgid "This game comes as-is and without any warranty."
@@ -122,10 +138,10 @@ msgstr "Situação"
 #: ../../data/txts/README.lua:14
 msgid ""
 "Widelands is nearly feature complete and is much fun to play alone and even "
-"more in multiplayer with others. Still, there is always more work to be done"
-" in all areas. If you are interested in contributing – be it by making "
-"graphics, fixing bugs or adding new features, translating the game into your"
-" language or creating new maps – get in touch on our homepage."
+"more in multiplayer with others. Still, there is always more work to be done "
+"in all areas. If you are interested in contributing – be it by making "
+"graphics, fixing bugs or adding new features, translating the game into your "
+"language or creating new maps – get in touch on our homepage."
 msgstr ""
 
 #: ../../data/txts/README.lua:16
@@ -154,7 +170,8 @@ msgstr ""
 
 #: ../../data/txts/README.lua:26
 msgid "Please provide enough background information. Tell us:"
-msgstr "Forneça por favor informações importantes sobre o contexto. Fale o seguinte:"
+msgstr ""
+"Forneça por favor informações importantes sobre o contexto. Fale o seguinte:"
 
 #: ../../data/txts/README.lua:28
 msgid "Detailed steps on how to trigger the bug, if possible."
@@ -345,8 +362,8 @@ msgstr "Ajuda On-Line"
 #, lua-format
 msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
-"Editor, be sure to visit our homepage at %s. You can find online help in our"
-" wiki there."
+"Editor, be sure to visit our homepage at %s. You can find online help in our "
+"wiki there."
 msgstr ""
 
 #: ../../data/txts/help/common_helptexts.lua:19
@@ -386,8 +403,8 @@ msgstr ""
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will be precisely reconstructed for you to watch. Note, however, that even "
-"small changes in the game data files or the Widelands executable can cause a"
-" replay to become incompatible and to ‘go out of sync’. This is similar to "
+"small changes in the game data files or the Widelands executable can cause a "
+"replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
 msgstr ""
@@ -440,8 +457,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:14
 msgid ""
-"Spectator mode, meaning you can see everything, but cannot control any "
-"player"
+"Spectator mode, meaning you can see everything, but cannot control any player"
 msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:16
@@ -450,8 +466,8 @@ msgstr "Configurações do jogador"
 
 #: ../../data/txts/help/multiplayer_help.lua:17
 msgid ""
-"In the middle are the settings for the players. To start a game, each player"
-" must be one of the following:"
+"In the middle are the settings for the players. To start a game, each player "
+"must be one of the following:"
 msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:18
@@ -460,9 +476,8 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:19
 msgid ""
-"Connected to a computer player (the face in the picture as well as the mouse"
-" hover texts indicate the strength of the currently selected computer "
-"player)."
+"Connected to a computer player (the face in the picture as well as the mouse "
+"hover texts indicate the strength of the currently selected computer player)."
 msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:20
@@ -483,8 +498,8 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:23
 msgid ""
-"Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player."
+"Every client connected to a player (who isn’t a spectator) can set the tribe "
+"and the team for that player."
 msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:25
@@ -493,10 +508,10 @@ msgstr "Detalhes do Mapa"
 
 #: ../../data/txts/help/multiplayer_help.lua:26
 msgid ""
-"You can see information about the selected map or savegame on the right-hand"
-" side. A button next to the map name allows the host to change to a "
-"different map. Furthermore, the host is able to set a specific win "
-"condition, and finally can start the game as soon as all players are set up."
+"You can see information about the selected map or savegame on the right-hand "
+"side. A button next to the map name allows the host to change to a different "
+"map. Furthermore, the host is able to set a specific win condition, and "
+"finally can start the game as soon as all players are set up."
 msgstr ""
 
 #: ../../data/txts/tips/amazons.lua:4
@@ -604,8 +619,8 @@ msgstr ""
 
 #: ../../data/txts/tips/crash.lua:7
 msgid ""
-"Widelands is creating an emergency save, so you can continue playing exactly"
-" where the game closed."
+"Widelands is creating an emergency save, so you can continue playing exactly "
+"where the game closed."
 msgstr ""
 
 #. TRANSLATORS: %s = URL to the Widelands website
@@ -618,8 +633,8 @@ msgstr ""
 
 #: ../../data/txts/tips/editor.lua:12
 msgid ""
-"You can select multiple animal types if you hold down Ctrl during selection."
-" If you then click on the map, an instance of one of the selected animal "
+"You can select multiple animal types if you hold down Ctrl during selection. "
+"If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
 msgstr ""
 
@@ -632,8 +647,8 @@ msgstr ""
 #: ../../data/txts/tips/editor.lua:20
 msgid ""
 "Holding down Shift switches the first alternative tool on. This tool is in "
-"most cases the complete opposite of the normal tool (for example deletion of"
-" an object instead of placing one)."
+"most cases the complete opposite of the normal tool (for example deletion of "
+"an object instead of placing one)."
 msgstr ""
 
 #: ../../data/txts/tips/editor.lua:24
@@ -701,13 +716,16 @@ msgstr ""
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
-msgstr "O processo de construção irá apenas começar depois de uma rua ser construida no sítio de construção."
+msgstr ""
+"O processo de construção irá apenas começar depois de uma rua ser construida "
+"no sítio de construção."
 
 #: ../../data/txts/tips/general_game.lua:11
 msgid ""
-"Be sure to send a geologist to survey sites before building a well or a "
-"mine."
-msgstr "Certifique-se de enviar um geólogo para pesquisa antes de construir um poço ou uma mina"
+"Be sure to send a geologist to survey sites before building a well or a mine."
+msgstr ""
+"Certifique-se de enviar um geólogo para pesquisa antes de construir um poço "
+"ou uma mina"
 
 #: ../../data/txts/tips/general_game.lua:15
 msgid ""
@@ -723,7 +741,9 @@ msgstr "Mineradores vão apenas trabalhar se supridos de comida"
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
-msgstr "Divida suas ruas em curtas seções colocando algumas bandeiras. Isso irá aumentar a velocidade da transportação de seus recursos."
+msgstr ""
+"Divida suas ruas em curtas seções colocando algumas bandeiras. Isso irá "
+"aumentar a velocidade da transportação de seus recursos."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/general_game.lua:28
@@ -744,7 +764,9 @@ msgstr ""
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
-msgstr "Use o menu 'configure a economia' para ajustar a quantidade alvo de mercadorias. Ele pode ser acessado através do menu de bandeira."
+msgstr ""
+"Use o menu 'configure a economia' para ajustar a quantidade alvo de "
+"mercadorias. Ele pode ser acessado através do menu de bandeira."
 
 #: ../../data/txts/tips/general_game.lua:40
 msgid ""
@@ -758,9 +780,11 @@ msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:49
 msgid ""
-"Removing a road while holding Ctrl lets you remove all flags up to the first"
-" junction."
-msgstr "Remover uma estrada segurando Ctrl faz com que você remova todas as bandeiras até a primeira junção."
+"Removing a road while holding Ctrl lets you remove all flags up to the first "
+"junction."
+msgstr ""
+"Remover uma estrada segurando Ctrl faz com que você remova todas as "
+"bandeiras até a primeira junção."
 
 #: ../../data/txts/tips/general_game.lua:53
 msgid ""
@@ -772,7 +796,9 @@ msgstr ""
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr "Se você gosta de viver perigosamente, pressionar Ctrl enquanto clica nos botões melhorar, desmantelar ou destruir, vai pular a confirmação"
+msgstr ""
+"Se você gosta de viver perigosamente, pressionar Ctrl enquanto clica nos "
+"botões melhorar, desmantelar ou destruir, vai pular a confirmação"
 
 #: ../../data/txts/tips/general_game.lua:61
 #, lua-format
@@ -829,7 +855,9 @@ msgstr ""
 #: ../../data/txts/tips/general_game.lua:98
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
-msgstr "Mova a visão do mapa usando %1%.  %2% moverá a visão mais rápido, %3% moverá lentamente."
+msgstr ""
+"Mova a visão do mapa usando %1%.  %2% moverá a visão mais rápido, %3% moverá "
+"lentamente."
 
 #: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
@@ -847,8 +875,8 @@ msgstr ""
 #: ../../data/txts/tips/general_game.lua:106
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
-"flag from which they can move by road to a connected warehouse. If there are"
-" no such flags in the vicinity, they will keep wandering around and "
+"flag from which they can move by road to a connected warehouse. If there are "
+"no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
 msgstr ""
 
@@ -856,19 +884,24 @@ msgstr ""
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
-msgstr "Você pode usar 'Page Up e \"Page Down\" para ajudar a velocidade desejada - a velocidade real está já colocada democraticamente."
+msgstr ""
+"Você pode usar 'Page Up e \"Page Down\" para ajudar a velocidade desejada - "
+"a velocidade real está já colocada democraticamente."
 
 #: ../../data/txts/tips/multiplayer.lua:8
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
-msgstr "Você pode usar '/me' no começo de uma mensagem no chat: '/me está cansado' será dito como '-> Nickname está cansado."
+msgstr ""
+"Você pode usar '/me' no começo de uma mensagem no chat: '/me está cansado' "
+"será dito como '-> Nickname está cansado."
 
 #: ../../data/txts/tips/multiplayer.lua:12
 msgid ""
-"Use ‘@name’ at the beginning of a chat message to send it to only one "
-"player."
-msgstr "Use \"@nome\" no começo de uma mensagem no chat para enviá-la apenas pra um jogador."
+"Use ‘@name’ at the beginning of a chat message to send it to only one player."
+msgstr ""
+"Use \"@nome\" no começo de uma mensagem no chat para enviá-la apenas pra um "
+"jogador."
 
 #: ../../data/txts/tips/multiplayer.lua:16
 msgid ""

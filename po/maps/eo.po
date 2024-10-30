@@ -1,17 +1,19 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
-# 
+#
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
+# Raúl Contreras, 2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-02-08 02:24+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: GunChleoc, 2014\n"
-"Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/language/eo/)\n"
+"Last-Translator: Raúl Contreras, 2024\n"
+"Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/"
+"language/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -92,11 +94,11 @@ msgstr ""
 #: ../../data/campaigns/campaigns.lua:52
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and "
-"ambitious sons, and warlord to an army that could match any enemy willing to"
-" rise against the ancient forests. Though at the end of his glorious reign, "
+"ambitious sons, and warlord to an army that could match any enemy willing to "
+"rise against the ancient forests. Though at the end of his glorious reign, "
 "Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
-"warlord – a decision that left his two brothers unsatisfied. The old warlord"
-" knew that. As his father instructed him, Thron left the capital of "
+"warlord – a decision that left his two brothers unsatisfied. The old warlord "
+"knew that. As his father instructed him, Thron left the capital of "
 "Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
 "to the high hills where he buried the corpse of his father. There he swore "
 "to the gods and his father’s spirit that he’d return to re-established "
@@ -145,9 +147,9 @@ msgstr ""
 #: ../../data/campaigns/campaigns.lua:98
 msgid ""
 "When their God lost faith in the Atlanteans and drowned their island, one "
-"woman’s struggle for justice and a second chance for her people would become"
-" the stuff of legends. Leading the remaining Atlanteans into a new future in"
-" a new part of the World, Jundlina became the most powerful human of her "
+"woman’s struggle for justice and a second chance for her people would become "
+"the stuff of legends. Leading the remaining Atlanteans into a new future in "
+"a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
 msgstr ""
 
@@ -208,8 +210,8 @@ msgid ""
 "After losing an important battle against the Barbarians which lead to the "
 "loss of a big part of the Empire’s territory, Lutius leaves Fremil to start "
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
-"destroys it. Only with a lot of luck he manages to beach his damaged ship on"
-" an unknown desert strand and save his people. For now."
+"destroys it. Only with a lot of luck he manages to beach his damaged ship on "
+"an unknown desert strand and save his people. For now."
 msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/elemental:9
@@ -251,10 +253,10 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/elemental:10
 msgid ""
-"In 1362, the quiet, peaceful life of the inhabitants of the Northern Frisian"
-" Islands was disrupted by one of the greatest storm floods in human memory: "
-"Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
-" a sign from the Gods that the Frisian community on the island of Langeness "
+"In 1362, the quiet, peaceful life of the inhabitants of the Northern Frisian "
+"Islands was disrupted by one of the greatest storm floods in human memory: "
+"Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or "
+"a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
 msgstr ""
 
@@ -323,8 +325,8 @@ msgstr ""
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
-"soldiers, how to train them and how to lead them in battle. Scouting will be"
-" also covered."
+"soldiers, how to train them and how to lead them in battle. Scouting will be "
+"also covered."
 msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
@@ -336,6 +338,8 @@ msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports, and how to use ferries and waterways."
 msgstr ""
+"En ĉi tiu lernilo, vi ekkonos marveturadon, kiu temas pri kiel trakti ŝipojn "
+"kaj havenojn, kaj kiel uzi pramojn kaj akvovojojn."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
@@ -343,8 +347,8 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
-"In this tutorial, you will learn what option Widelands offers to adjust your"
-" economy. Recommended for players with some experience."
+"In this tutorial, you will learn what option Widelands offers to adjust your "
+"economy. Recommended for players with some experience."
 msgstr ""
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:8
@@ -396,8 +400,8 @@ msgstr ""
 #: ../../data/maps/Calvisson.wmf/elemental:10
 msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But "
-"the ways to encompass these large territories are long and meandering, so it"
-" is easy to err into the land of the foreign clans."
+"the ways to encompass these large territories are long and meandering, so it "
+"is easy to err into the land of the foreign clans."
 msgstr ""
 
 #: ../../data/maps/Checkmate.wmf/elemental:8
@@ -422,8 +426,8 @@ msgstr ""
 
 #: ../../data/maps/Comet_Island.wmf/elemental:10
 msgid ""
-"A few miles in front of Gerion Coast lies a small unnamed island. Until now,"
-" you have not seen any reason to sail there, but yesterday a big fireball "
+"A few miles in front of Gerion Coast lies a small unnamed island. Until now, "
+"you have not seen any reason to sail there, but yesterday a big fireball "
 "came from the sky and touched down in its center. Is this a sign of the "
 "Gods? You believe it is and you hope that your tribe will find the treasure "
 "of this island before other tribes will follow."
@@ -432,9 +436,9 @@ msgstr ""
 #: ../../data/maps/Comet_Island.wmf/elemental:11
 msgid ""
 "Red player is close to the ores, but has little fertile terrain. Yellow "
-"player has plenty of good land, but must move far from his starting position"
-" to find ores. Blue player takes the middle ground – he has some fertile "
-"land and is not too far away from the resources."
+"player has plenty of good land, but must move far from his starting position "
+"to find ores. Blue player takes the middle ground – he has some fertile land "
+"and is not too far away from the resources."
 msgstr ""
 
 #: ../../data/maps/Crater.wmf/elemental:8
@@ -443,9 +447,11 @@ msgstr "Kratero"
 
 #: ../../data/maps/Crater.wmf/elemental:10
 msgid ""
-"Long after a meteor crashed into a couple of mountains, life blossoms in the"
-" crater. Two tribes are now fighting for the rich resources."
-msgstr "Multe poste ke meteoro faliĝu en paro de montoj, la vivo ekaperadis en la kratero. Du triboj nun batalas pro la abundaj resursoj."
+"Long after a meteor crashed into a couple of mountains, life blossoms in the "
+"crater. Two tribes are now fighting for the rich resources."
+msgstr ""
+"Multe poste ke meteoro faliĝu en paro de montoj, la vivo ekaperadis en la "
+"kratero. Du triboj nun batalas pro la abundaj resursoj."
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
 msgid "Crossing the Horizon"
@@ -468,17 +474,17 @@ msgid ""
 "The jewel of the alps, the dolomites mountain range has been declared a "
 "world heritage site for its pristine beauty. This map is an as-faithful-as-"
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
-"north-east and Canazei in the south-west. If you have to be pitted in a duel"
-" to the death with your enemies, it may as well be in a beautiful place."
+"north-east and Canazei in the south-west. If you have to be pitted in a duel "
+"to the death with your enemies, it may as well be in a beautiful place."
 msgstr ""
 
 #: ../../data/maps/Dolomites.wmf/elemental:11
 msgid ""
-"The mountains have an abundance of flat ground. Unfortunately, most of it is"
-" vertical – use the little building space you have wisely. A fortress at the"
-" mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
-"army – use the terrain to your advantage. Chop all trees and expand wherever"
-" you can – it’s the only way to find all the precious farm spaces."
+"The mountains have an abundance of flat ground. Unfortunately, most of it is "
+"vertical – use the little building space you have wisely. A fortress at the "
+"mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
+"army – use the terrain to your advantage. Chop all trees and expand wherever "
+"you can – it’s the only way to find all the precious farm spaces."
 msgstr ""
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
@@ -553,9 +559,9 @@ msgstr "Fajrludoj"
 #: ../../data/maps/Firegames.wmf/elemental:10
 msgid ""
 "Is this a test by the Gods or an evil plan by someone else, that you and "
-"your tribe woke up on this island among fire and lava? Until now it seems as"
-" if you are alone, but no-one knows what might happen if you met an opposing"
-" tribe?"
+"your tribe woke up on this island among fire and lava? Until now it seems as "
+"if you are alone, but no-one knows what might happen if you met an opposing "
+"tribe?"
 msgstr ""
 
 #: ../../data/maps/Four_Castles.wmf/elemental:8
@@ -603,8 +609,7 @@ msgid ""
 "Your tribe has dwelt on this beautiful and lonely glacier lake for a long "
 "time. No one disturbed you and the resources were sufficient for your whole "
 "tribe, but a few months ago another tribe came over the mountains and "
-"settled down. And you are sure that there is only enough space for one "
-"tribe."
+"settled down. And you are sure that there is only enough space for one tribe."
 msgstr ""
 
 #: ../../data/maps/Golden_Peninsula.wmf/elemental:8
@@ -644,9 +649,9 @@ msgstr ""
 
 #: ../../data/maps/Kings_and_Queens.wmf/elemental:10
 msgid ""
-"An old legend tells that these seven kingdoms, that have flourished for ages"
-" in prosperity, will someday collapse into a devastating war. Has your "
-"latest betrayal been one too many and will the prophecy come true?"
+"An old legend tells that these seven kingdoms, that have flourished for ages "
+"in prosperity, will someday collapse into a devastating war. Has your latest "
+"betrayal been one too many and will the prophecy come true?"
 msgstr ""
 
 #: ../../data/maps/Lake_of_Tranquility.wmf/elemental:8
@@ -672,8 +677,8 @@ msgstr ""
 msgid ""
 "The whimsical Gods didn’t answer our prayers. Instead, the increasing "
 "sunlight heated up the Earth a thousandfold and melted glaciers and people "
-"were plunged into the deep. But now – high in the majestic mountains, on the"
-" last scrap of land – two surviving tribes are sheltering. Even though the "
+"were plunged into the deep. But now – high in the majestic mountains, on the "
+"last scrap of land – two surviving tribes are sheltering. Even though the "
 "Gods showed mercy and the climate thus turned cooler again, the water is "
 "still rising and rising. Onto the last secure place – the highest mountain "
 "range where the amount of gold and the space to live merely suffice for one "
@@ -704,8 +709,8 @@ msgid ""
 "A fair 8-player map with natural geographic features dividing land. The "
 "geographic features are meant to be somewhat realistic with rivers flowing "
 "from glaciers in the mountains through hills and flatlands into the sea. "
-"Gold is a much rarer resource compared to coal and iron. Different resources"
-" are often found at some distance to each other."
+"Gold is a much rarer resource compared to coal and iron. Different resources "
+"are often found at some distance to each other."
 msgstr ""
 
 #: ../../data/maps/Long_long_way.wmf/elemental:8
@@ -724,10 +729,9 @@ msgstr "De insulo al insulo"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:10
 msgid ""
-"A special tournament in Atlantean culture is the so-called ‘Island Hopping’,"
-" where two or more groups try to reach the center island as fast as "
-"possible, to be the first erecting a castle on the top of the central "
-"mountain."
+"A special tournament in Atlantean culture is the so-called ‘Island Hopping’, "
+"where two or more groups try to reach the center island as fast as possible, "
+"to be the first erecting a castle on the top of the central mountain."
 msgstr ""
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:9
@@ -737,8 +741,8 @@ msgstr ""
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:11
 msgid ""
 "Your well established smuggling routes suddenly got busy: two other tribes "
-"have appeared and now a rivalry among smugglers has started. Which team will"
-" be the first to smuggle a certain number of wares?"
+"have appeared and now a rivalry among smugglers has started. Which team will "
+"be the first to smuggle a certain number of wares?"
 msgstr ""
 
 #: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
@@ -749,8 +753,8 @@ msgstr ""
 msgid ""
 "In the vicinity of three major volcanoes, six lovely islands are inviting "
 "settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
+"be discovered. But only by becoming a naval power will your tribe be able to "
+"explore enough resources to compete with its opponents."
 msgstr ""
 
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
@@ -769,11 +773,11 @@ msgstr ""
 
 #: ../../data/maps/No_metal_challenge.wmf/elemental:10
 msgid ""
-"This map is intended as a solo challenge for those very skilled players that"
-" find 1 vs 6 against the AI too easy. Blue player has no metal (except a bit"
-" of iron to kickstart your economy), so you have to rely on the 5% "
-"production of an empty mine. And you’re still 1 vs 6 (though of course you "
-"can remove some AI players to make it a bit easier). Good luck!"
+"This map is intended as a solo challenge for those very skilled players that "
+"find 1 vs 6 against the AI too easy. Blue player has no metal (except a bit "
+"of iron to kickstart your economy), so you have to rely on the 5% production "
+"of an empty mine. And you’re still 1 vs 6 (though of course you can remove "
+"some AI players to make it a bit easier). Good luck!"
 msgstr ""
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
@@ -814,7 +818,9 @@ msgstr "Riverlando"
 msgid ""
 "A mystical land, full of different landscapes, which are all crossed by a "
 "handful of big rivers."
-msgstr "Mistika lando, plena da malsimilaj pejzaĝoj, kaj per ĉiuj pasas aron da grandaj riveroj"
+msgstr ""
+"Mistika lando, plena da malsimilaj pejzaĝoj, kaj per ĉiuj pasas aron da "
+"grandaj riveroj"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
 msgid "Along The River"
@@ -823,8 +829,8 @@ msgstr ""
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
 msgid ""
 "It is the land where the sun is hardly seen during the winter and where "
-"spring floods away any reminiscence of the past. Strange tensions have grown"
-" among its residents and many selfish rulers have taken advantage of the "
+"spring floods away any reminiscence of the past. Strange tensions have grown "
+"among its residents and many selfish rulers have taken advantage of the "
 "chaos. The superstitious people appear to be no obstacle for the "
 "developments of better equipped armies. Tough times are on the brink of "
 "emerging, and you should heed the words of your wise advisors, or fade into "
@@ -883,10 +889,10 @@ msgstr ""
 msgid ""
 "This island once appeared out of the deepest depths of the sea. In those "
 "days, fire rose out of the salty seawater and brought ash, stones and soil "
-"to light. And the fire came nearer and nearer to the sun, while the mountain"
-" grew and grew. Until one day, when the whole fire mountain exploded. "
-"Nowadays only this ring is left from that mighty fire mountain. Do you think"
-" that it is big enough for more than one tribe?"
+"to light. And the fire came nearer and nearer to the sun, while the mountain "
+"grew and grew. Until one day, when the whole fire mountain exploded. "
+"Nowadays only this ring is left from that mighty fire mountain. Do you think "
+"that it is big enough for more than one tribe?"
 msgstr ""
 
 #: ../../data/maps/The_Far_North.wmf/elemental:8
@@ -900,8 +906,8 @@ msgid ""
 "forests, full of big and predatory game, cut across by wetlands and hills "
 "were shrouded in mystery. The ones who had managed to come back mentioned "
 "tremendous buildings, decorated with carvings and gold from majestic "
-"mountain ranges somewhere amongst the wilderness. Dozens of years after only"
-" some crumbly ruins remain of these good old times, covered with moss and "
+"mountain ranges somewhere amongst the wilderness. Dozens of years after only "
+"some crumbly ruins remain of these good old times, covered with moss and "
 "trees. Their shapes give only an idea about the craftsmanship of ancient "
 "constructors. Nobody knows why they (have) disappeared. Nobody knows why. "
 "People say that now nothing is blocking the road to wealth. But many will "
@@ -914,8 +920,8 @@ msgstr ""
 
 #: ../../data/maps/The_Long_Way.wmf/elemental:10
 msgid ""
-"Another strange test by the Gods. To reach the other side, there seems to be"
-" no other way but to occupy the land of your enemies."
+"Another strange test by the Gods. To reach the other side, there seems to be "
+"no other way but to occupy the land of your enemies."
 msgstr ""
 
 #: ../../data/maps/The_Nile.wmf/elemental:8
@@ -940,8 +946,8 @@ msgstr ""
 
 #: ../../data/maps/The_Oasis_Triangle.wmf/elemental:10
 msgid ""
-"There is something mystical like a gray atmosphere around these three oases,"
-" which no one has found out about yet. Perhaps you will be the one, but be "
+"There is something mystical like a gray atmosphere around these three oases, "
+"which no one has found out about yet. Perhaps you will be the one, but be "
 "aware of the others who are searching too!"
 msgstr ""
 
@@ -994,9 +1000,9 @@ msgid ""
 "those that could not produce them. Based on these trades, a very friendly "
 "commerce was common between the four harbors and the people living on the "
 "Craw Islands – until recently, when two of the harbors united to form an "
-"exclusive trade alliance, forcing the other two to do the same. Suddenly, it"
-" seems only a matter of time before the first fights between the harbors "
-"will shatter the peaceful life that has lasted for so long…"
+"exclusive trade alliance, forcing the other two to do the same. Suddenly, it "
+"seems only a matter of time before the first fights between the harbors will "
+"shatter the peaceful life that has lasted for so long…"
 msgstr ""
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
@@ -1008,8 +1014,8 @@ msgid ""
 "When the wind swelled up and the first dunes were formed on these abandoned "
 "twin lagoons, nobody could have expected that two tribes that are "
 "desperately searching for more resources to support their endlessly ongoing "
-"wars, would end up in this forgotten place at the same time and for the same"
-" well-known reason."
+"wars, would end up in this forgotten place at the same time and for the same "
+"well-known reason."
 msgstr ""
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:11
@@ -1026,7 +1032,9 @@ msgstr ""
 msgid ""
 "Many beautiful, green islands await the ones brave enough to pass the "
 "thousand waves, twinkling in the sun."
-msgstr "Pluraj belaj verdaj insuloj atendas la kuraĝulojn kiuj estu sufiĉe kapablaj por trapasi la miloj da marondoj, brilantaj sur la suno."
+msgstr ""
+"Pluraj belaj verdaj insuloj atendas la kuraĝulojn kiuj estu sufiĉe kapablaj "
+"por trapasi la miloj da marondoj, brilantaj sur la suno."
 
 #: ../../data/maps/Twinkling_Waves.wmf/elemental:11
 msgid ""
@@ -1059,16 +1067,16 @@ msgstr ""
 #: ../../data/maps/Wisent_Valley.wmf/elemental:10
 msgid ""
 "It seems as if this magical valley has been inhabited by wisents since the "
-"beginning of days. When your tribe came to this place, you were sure that it"
-" offered enough space for a peaceful life. But can your tribe live in peace "
+"beginning of days. When your tribe came to this place, you were sure that it "
+"offered enough space for a peaceful life. But can your tribe live in peace "
 "with your neighbors?"
 msgstr ""
 
 #: ../../data/maps/Wisent_Valley.wmf/elemental:11
 msgid ""
-"The black player is surrounded in the center with no resources, so there are"
-" three different ways to use this map: without the black player for a normal"
-" 4 players’ map, with a black AI to add a complication to the expansion of "
+"The black player is surrounded in the center with no resources, so there are "
+"three different ways to use this map: without the black player for a normal "
+"4 players’ map, with a black AI to add a complication to the expansion of "
 "the other players, or you can play as a challenge with the black player "
 "against the other 4 (VERY difficult)."
 msgstr ""

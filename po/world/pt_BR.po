@@ -1,9 +1,10 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
-# 
+#
 # Translators:
 # GunChleoc, 2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Frank Carvalho, 2024
 # Leonardo de Araujo Augusto <leonardodearaujoaugusto@gmail.com>, 2018
 # Patrick de Castro <raybackpc@gmail.com>, 2015
 # Rui <xymarior@yandex.com>, 2019
@@ -14,13 +15,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-02 13:54+0000\n"
-"Last-Translator: Rui <xymarior@yandex.com>, 2019\n"
-"Language-Team: Portuguese (Brazil) (http://app.transifex.com/widelands/widelands/language/pt_BR/)\n"
+"Last-Translator: Frank Carvalho, 2024\n"
+"Language-Team: Portuguese (Brazil) (http://app.transifex.com/widelands/"
+"widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt_BR\n"
-"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % "
+"1000000 == 0 ? 1 : 2;\n"
 
 #: ../../data/world/critters/badger/init.lua:137
 msgid "Badger"
@@ -60,7 +63,7 @@ msgstr "Fuinha"
 
 #: ../../data/world/critters/moose/init.lua:7
 msgid "Moose"
-msgstr ""
+msgstr "Alce"
 
 #: ../../data/world/critters/reindeer/init.lua:7
 msgid "Reindeer"

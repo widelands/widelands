@@ -1,24 +1,27 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Marcin S <dzidek1003@o2.pl>, 2021
 # Antoni Szpikowski <szantek2004@gmail.com>, 2021
-# 
+# Leszek Szary, 2024
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
-"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021\n"
+"Last-Translator: Leszek Szary, 2024\n"
 "Language-Team: Polish (https://app.transifex.com/widelands/teams/35159/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pl\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
+"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
+"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/building_spaces.lua:25
@@ -51,7 +54,7 @@ msgstr "Teraz widzimy, gdzie możemy postawić budynki lub flagi."
 #: ../../data/scripting/training_wheels/building_spaces.lua:55
 #: ../../data/scripting/training_wheels/welcome.lua:26
 msgid "Click ‘OK’ to continue."
-msgstr ""
+msgstr "Kliknij ‘OK’ aby kontynuować."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/flags.lua:60
@@ -83,7 +86,7 @@ msgstr ""
 
 #: ../../data/scripting/training_wheels/flags.lua:87
 msgid "Click ‘OK’ when you’re done."
-msgstr ""
+msgstr "Kliknij ‘OK’ kiedy skończysz."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:142
@@ -136,8 +139,8 @@ msgstr ""
 
 #: ../../data/scripting/training_wheels/logs.lua:122
 msgid ""
-"If you hold down the ‘Ctrl’ key while clicking on the second flag, this will"
-" also place more flags on your road if possible."
+"If you hold down the ‘Ctrl’ key while clicking on the second flag, this will "
+"also place more flags on your road if possible."
 msgstr ""
 "Jeśli podczas klikania na drugą flagę przytrzymasz przycisk Ctrl, to "
 "zostanie postawione więcej flag na twojej drodze, jeśli to możliwe."
@@ -149,8 +152,7 @@ msgstr "Kłody"
 
 #: ../../data/scripting/training_wheels/logs.lua:128
 msgid ""
-"You need to supply your tribe with logs. Please build the following "
-"building:"
+"You need to supply your tribe with logs. Please build the following building:"
 msgstr "Musisz zaopatrzyć twoje plemię w kłody. Zbuduj następujący budynek:"
 
 #: ../../data/scripting/training_wheels/logs.lua:138
@@ -165,12 +167,11 @@ msgstr "Drogi"
 #: ../../data/scripting/training_wheels/logs.lua:141
 #: ../../data/scripting/training_wheels/rocks.lua:144
 msgid "Click on the flag in front of the building to start placing a road."
-msgstr ""
+msgstr "Kliknij flagę przed budynkiem, aby rozpocząć budowę drogi."
 
 #: ../../data/scripting/training_wheels/logs.lua:152
-msgid ""
-"Click on the ‘Build road’ button, then and click on the indicated flag."
-msgstr ""
+msgid "Click on the ‘Build road’ button, then and click on the indicated flag."
+msgstr "Kliknij przycisk ‘Buduj drogę’, a następnie kliknij na wskazaną flagę."
 
 #: ../../data/scripting/training_wheels/logs.lua:164
 #: ../../data/scripting/training_wheels/rocks.lua:166
@@ -186,8 +187,8 @@ msgid ""
 "Well done! We will soon start producing logs, which we will need for "
 "building more buildings."
 msgstr ""
-"Świetnie! Wkrótce zaczniemy produkcję kłód, których potrzebujemy, by budować"
-" kolejne budynki."
+"Świetnie! Wkrótce zaczniemy produkcję kłód, których potrzebujemy, by budować "
+"kolejne budynki."
 
 #: ../../data/scripting/training_wheels/objectives.lua:38
 msgid "Open the Objectives window"
@@ -212,9 +213,11 @@ msgstr "Zamykanie tego okna"
 
 #: ../../data/scripting/training_wheels/objectives.lua:48
 msgid ""
-"You can open and close this window by clicking on the ‘Objectives’ button in"
-" the toolbar on the bottom of the screen."
+"You can open and close this window by clicking on the ‘Objectives’ button in "
+"the toolbar on the bottom of the screen."
 msgstr ""
+"Możesz otwierać i zamykać to okno, klikając przycisk ‘Cele’ na pasku "
+"narzędzi u dołu ekranu."
 
 #: ../../data/scripting/training_wheels/objectives.lua:49
 msgid ""
@@ -228,8 +231,7 @@ msgstr ""
 msgid ""
 "While you do that, check the markers to make the road as flat as possible:"
 msgstr ""
-"Robiąc to, sprawdzaj znaczniki, aby poprowadzić drogę jak najbardziej "
-"płasko:"
+"Robiąc to, sprawdzaj znaczniki, aby poprowadzić drogę jak najbardziej płasko:"
 
 #: ../../data/scripting/training_wheels/rocks.lua:123
 msgid ""
@@ -250,8 +252,8 @@ msgid ""
 "The connection between the fields is extremely steep. The speed increase in "
 "one direction is huge while the slowdown in the other is also substantial."
 msgstr ""
-"Połączenie pomiędzy polami jest bardzo strome. Zwiększenie prędkości w jedną"
-" stronę jest bardzo duże, podobnie jak zwolnienie z drugiej."
+"Połączenie pomiędzy polami jest bardzo strome. Zwiększenie prędkości w jedną "
+"stronę jest bardzo duże, podobnie jak zwolnienie z drugiej."
 
 #: ../../data/scripting/training_wheels/rocks.lua:128
 #: ../../data/scripting/training_wheels/rocks.lua:176
@@ -270,6 +272,9 @@ msgid ""
 "the map to guide your road until you reach the flag in front of the target "
 "building."
 msgstr ""
+"Kliknij przycisk ‘Buduj drogę’. Następnie kliknij kolorowe znaczniki na "
+"mapie, aby poprowadzić swoją drogę, aż dotrzesz do flagi przed docelowym "
+"budynkiem."
 
 #: ../../data/scripting/training_wheels/rocks.lua:168
 msgid ""

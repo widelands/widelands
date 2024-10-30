@@ -1,6 +1,6 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
-# 
+#
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
@@ -15,12 +15,14 @@ msgstr ""
 "POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
-"Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
+"Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/"
+"sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sk\n"
-"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n "
+">= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:15
 msgid "Artifacts"
@@ -30,7 +32,9 @@ msgstr "Artefakty"
 msgid ""
 "Search for ancient artifacts. Once all of them are found, the team who owns "
 "most of them will win the game."
-msgstr "Hľadajte starodávne artefakty. Po nájdení všetkých vyhrá tím, ktorý ich vlastní najviac."
+msgstr ""
+"Hľadajte starodávne artefakty. Po nájdení všetkých vyhrá tím, ktorý ich "
+"vlastní najviac."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:21
 msgid "Artifacts owned"
@@ -44,9 +48,12 @@ msgstr "Chýbajú artefakty"
 #, lua-format
 msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
-"bug report on %s and specify your Widelands version and the map you tried to"
-" load."
-msgstr "Táto mapa neobsahuje žiadne artefakty. Takáto situácia by nemala nastať. Prosím, vyplňte hlásenie o chybe na stránke %s a udajte, ktorú verziu hry Widelands ste používali a ktorú mapu ste sa pokúšali načítať."
+"bug report on %s and specify your Widelands version and the map you tried to "
+"load."
+msgstr ""
+"Táto mapa neobsahuje žiadne artefakty. Takáto situácia by nemala nastať. "
+"Prosím, vyplňte hlásenie o chybe na stránke %s a udajte, ktorú verziu hry "
+"Widelands ste používali a ktorú mapu ste sa pokúšali načítať."
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
@@ -122,7 +129,9 @@ msgstr "Zberatelia"
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest score after %s wins the game."
-msgstr "Dostávate body za cenné výrobky vo svojich skladoch. Hráč s najväčším počtom výrobkov po %s vyhráva hru."
+msgstr ""
+"Dostávate body za cenné výrobky vo svojich skladoch. Hráč s najväčším počtom "
+"výrobkov po %s vyhráva hru."
 
 #. TRANSLATORS: Will be inserted into "The player with the highest score after
 #. %s wins the game."
@@ -180,7 +189,9 @@ msgstr "Samovládca"
 msgid ""
 "The tribe or team that can defeat all others wins the game! This means the "
 "opponents do not have any headquarters, ports or warehouses left."
-msgstr "Kmeň alebo tím, ktorý porazí ostatných, vyhráva hru! To znamená, že protivníkom neostanú ústredia, prístavy ani sklady."
+msgstr ""
+"Kmeň alebo tím, ktorý porazí ostatných, vyhráva hru! To znamená, že "
+"protivníkom neostanú ústredia, prístavy ani sklady."
 
 #: ../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
@@ -198,7 +209,9 @@ msgstr "Lovec ústredí"
 msgid ""
 "The tribe or team that can find and destroy all other headquarters wins the "
 "game! Does not work with starting conditions without headquarters."
-msgstr "Kmeň alebo tím, ktorý nájde a zničí všetky ostatné ústredia, vyhráva hru! Nedá sa použiť pri počiatočných podmienkach bez ústredia."
+msgstr ""
+"Kmeň alebo tím, ktorý nájde a zničí všetky ostatné ústredia, vyhráva hru! "
+"Nedá sa použiť pri počiatočných podmienkach bez ústredia."
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:21
 #, lua-format
@@ -256,7 +269,11 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes. If the peaceful mode is selected, the game ends if one "
 "player has more land than any other player could gain."
-msgstr "Každý hráč alebo tím sa snaží získať viac ako polovicu územia na mape. Vyhrá ten hráč alebo tím, ktorý dokáže obrániť túto oblasť po dobu aspoň 20 minút. Ak bol zvolený mier, hra skončí, ak jeden z hráčov má viac územia akoby akýkoľvek iný hráč dokázal získať."
+msgstr ""
+"Každý hráč alebo tím sa snaží získať viac ako polovicu územia na mape. Vyhrá "
+"ten hráč alebo tím, ktorý dokáže obrániť túto oblasť po dobu aspoň 20 minút. "
+"Ak bol zvolený mier, hra skončí, ak jeden z hráčov má viac územia akoby "
+"akýkoľvek iný hráč dokázal získať."
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:58
 msgid "Currently no faction owns more than half of the map’s area."
@@ -274,31 +291,36 @@ msgid ""
 "least 20 minutes, or the one with the most territory after %s, whichever "
 "comes first. If the peaceful mode is selected, the game ends if one player "
 "has more land than any other player could gain."
-msgstr "Každý hráč alebo tím sa snaží získať viac ako polovicu územia na mape. Vyhrá ten hráč alebo tím, ktorý dokáže obrániť túto oblasť po dobu aspoň 20 minút alebo ten, ktorý bude po %s vlastniť najviac územia, čokoľvek sa stane skôr. Ak bol zvolený mier, hra skončí, ak jeden z hráčov má viac územia akoby akýkoľvek iný hráč dokázal získať."
+msgstr ""
+"Každý hráč alebo tím sa snaží získať viac ako polovicu územia na mape. Vyhrá "
+"ten hráč alebo tím, ktorý dokáže obrániť túto oblasť po dobu aspoň 20 minút "
+"alebo ten, ktorý bude po %s vlastniť najviac územia, čokoľvek sa stane skôr. "
+"Ak bol zvolený mier, hra skončí, ak jeden z hráčov má viac územia akoby "
+"akýkoľvek iný hráč dokázal získať."
 
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:357
 msgid "%1% day"
 msgid_plural "%1% days"
-msgstr[0] "%1% deň"
-msgstr[1] "%1% dni"
-msgstr[2] "%1% dní"
-msgstr[3] "%1% dní"
+msgstr[0] "%1% dni"
+msgstr[1] "%1% dňoch"
+msgstr[2] "%1% dňoch"
+msgstr[3] "%1% dňoch"
 
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:358
 msgid "%1% hour"
 msgid_plural "%1% hours"
-msgstr[0] "%1% hodinu"
-msgstr[1] "%1% hodiny"
-msgstr[2] "%1% hodín"
-msgstr[3] "%1% hodín"
+msgstr[0] "%1% hodine"
+msgstr[1] "%1% hodinách"
+msgstr[2] "%1% hodinách"
+msgstr[3] "%1% hodinách"
 
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:359
 msgid "%1% minute"
 msgid_plural "%1% minutes"
-msgstr[0] "%1% minútu"
-msgstr[1] "%1% minúty"
-msgstr[2] "%1% minút"
-msgstr[3] "%1% minút"
+msgstr[0] "%1% minúte"
+msgstr[1] "%1% minútach"
+msgstr[2] "%1% minútach"
+msgstr[3] "%1% minútach"
 
 #. TRANSLATORS: 1 day, 12 hours, and 30 minutes
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:364
@@ -316,7 +338,7 @@ msgstr "%1$s a %2$s"
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:394
 #, lua-format
 msgid "The game will end in %s."
-msgstr "Hra skončí o %s."
+msgstr "Hra skončí po %s."
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:33
 msgid "Congratulations!"
@@ -332,9 +354,11 @@ msgstr "Porazili vás!"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:46
 msgid ""
-"You lost your last warehouse and are therefore defeated. You may continue as"
-" spectator if you want."
-msgstr "Prehrali ste, lebo ste prišli o svoj posledný sklad. Ak chcete, môžete pokračovať ako divák."
+"You lost your last warehouse and are therefore defeated. You may continue as "
+"spectator if you want."
+msgstr ""
+"Prehrali ste, lebo ste prišli o svoj posledný sklad. Ak chcete, môžete "
+"pokračovať ako divák."
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:57
 msgid "You won"
@@ -371,7 +395,10 @@ msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after %s. The one "
 "with the most trees at that point will win the game."
-msgstr "Ako lesný škriatok obľubujete veľké lesy, takže vašou úlohou je dosiahnuť, aby ste mali na svojom území viac stromov ako ostatní hráči. Hra skončí po %s. Hráč s najväčším počtom stromov vyhráva hru."
+msgstr ""
+"Ako lesný škriatok obľubujete veľké lesy, takže vašou úlohou je dosiahnuť, "
+"aby ste mali na svojom území viac stromov ako ostatní hráči. Hra skončí po "
+"%s. Hráč s najväčším počtom stromov vyhráva hru."
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:28
 msgid "Trees owned"

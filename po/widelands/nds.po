@@ -1,6 +1,6 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
-# 
+#
 # Translators:
 # Benedikt Straub <benedikt-straub@web.de>, 2018-2024
 # GunChleoc, 2015
@@ -15,7 +15,8 @@ msgstr ""
 "POT-Creation-Date: 2024-03-02 02:23+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2024\n"
-"Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
+"Language-Team: Low German (http://app.transifex.com/widelands/widelands/"
+"language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -38,7 +39,10 @@ msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
-msgstr "Welke vun dienen Anfangs-Husen sünd nich baut worden, wiel keen Rüümte daar is. Daarum hest du enen Nadeel un sallst di överleggen, of du de Kaart noch eenmal gerecht anfangen wullt."
+msgstr ""
+"Welke vun dienen Anfangs-Husen sünd nich baut worden, wiel keen Rüümte daar "
+"is. Daarum hest du enen Nadeel un sallst di överleggen, of du de Kaart noch "
+"eenmal gerecht anfangen wullt."
 
 #: ../../data/scripting/infrastructure.lua:190
 msgid "Not enough space"
@@ -52,7 +56,9 @@ msgstr "Keene Stenen dicht bi"
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr "In de Naberskupp vun diener Anfangs-Stee gifft dat keene Stenen. Daarum kriggst du mehr Mineraale, um diene Weertskupp uptobauen."
+msgstr ""
+"In de Naberskupp vun diener Anfangs-Stee gifft dat keene Stenen. Daarum "
+"kriggst du mehr Mineraale, um diene Weertskupp uptobauen."
 
 #: ../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
@@ -62,7 +68,9 @@ msgstr "Nich genoog Bomen dicht bi"
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
-msgstr "In de Naberskupp vun diener Anfangs-Stee gifft dat nich genoog Bomen. Daarum kriggst du mehr Mineraale, um diene Weertskupp uptobauen."
+msgstr ""
+"In de Naberskupp vun diener Anfangs-Stee gifft dat nich genoog Bomen. Daarum "
+"kriggst du mehr Mineraale, um diene Weertskupp uptobauen."
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
 #: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:119
@@ -488,9 +496,11 @@ msgstr "Kaart-Quell"
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
 #: ../../src/editor/editorinteractive.cc:371
 msgid ""
-"Set the position that will have the coordinates (0, 0). This will be the "
-"top-left corner of a generated minimap."
-msgstr "Maak de Stee fast, dat de Stee (0|0) ween sall. Dat is de linke boven Eck vun de lütte Kaart."
+"Set the position that will have the coordinates (0, 0). This will be the top-"
+"left corner of a generated minimap."
+msgstr ""
+"Maak de Stee fast, dat de Stee (0|0) ween sall. Dat is de linke boven Eck "
+"vun de lütte Kaart."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:379
@@ -535,8 +545,7 @@ msgstr "Olle Warktüüg-Instellens weerbruken"
 msgid "Hide Building Spaces"
 msgstr "Rüümte tum Bauen verbargen"
 
-#: ../../src/editor/editorinteractive.cc:466
-#: ../../src/ui_fsmenu/options.cc:287
+#: ../../src/editor/editorinteractive.cc:466 ../../src/ui_fsmenu/options.cc:287
 #: ../../src/wui/interactive_gamebase.cc:269
 msgid "Show Building Spaces"
 msgstr "Rüümte tum Bauen wiesen"
@@ -555,9 +564,11 @@ msgstr "Gröttste Rüümte tum Bauen wiesen"
 
 #: ../../src/editor/editorinteractive.cc:477
 msgid ""
-"Toggle whether to show maximum building spaces that will be available if all"
-" immovables (trees, rocks, etc.) are removed"
-msgstr "Of the gröttste Rüümte tum Bauen, wat verföögbaar worden, wenn man all fasten Dingen (Bomen, Stenen un so wieder) wegmaakt, wiest worden sall"
+"Toggle whether to show maximum building spaces that will be available if all "
+"immovables (trees, rocks, etc.) are removed"
+msgstr ""
+"Of the gröttste Rüümte tum Bauen, wat verföögbaar worden, wenn man all "
+"fasten Dingen (Bomen, Stenen un so wieder) wegmaakt, wiest worden sall"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
@@ -609,7 +620,9 @@ msgstr "Formaat word nich unnerstütt"
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
-msgstr "Widelands kunn de Datei »%s« nich laden. Dat Formaat is openbaar nich verdragelk."
+msgstr ""
+"Widelands kunn de Datei »%s« nich laden. Dat Formaat is openbaar nich "
+"verdragelk."
 
 #: ../../src/editor/editorinteractive.cc:611
 msgid "Exit Editor Confirmation"
@@ -656,9 +669,19 @@ msgid ""
 "\n"
 "%1$s\n"
 "\n"
-"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
+"Please report this problem to help us improve Widelands. You will find "
+"related messages in the standard output (stdout.txt on Windows). You are "
+"using version %2$s.\n"
 "Please add this information to your report."
-msgstr "Een Fehler is uptreden. De Fehler-Naricht is:\n\n%1$s\n\nBidde melle deeses Probleem, daarmit wi Widelands beter maken könen. Du finnst mehr Narichten över dat Probleem in de Normaal-Utgaav (unner Windows is dat stdout.txt). Du bruukst Versioon %2$s.\nBidde föög deese Informatioon to de Fehler-Mellen hento."
+msgstr ""
+"Een Fehler is uptreden. De Fehler-Naricht is:\n"
+"\n"
+"%1$s\n"
+"\n"
+"Bidde melle deeses Probleem, daarmit wi Widelands beter maken könen. Du "
+"finnst mehr Narichten över dat Probleem in de Normaal-Utgaav (unner Windows "
+"is dat stdout.txt). Du bruukst Versioon %2$s.\n"
+"Bidde föög deese Informatioon to de Fehler-Mellen hento."
 
 #: ../../src/editor/editorinteractive.cc:1179
 #, c-format
@@ -706,7 +729,14 @@ msgid ""
 "Author: %3$s\n"
 "Description: %4$s\n"
 "Hint: %5$s\n"
-msgstr "Willst du deese Kaart würrelk im Internett publik maken?\n\nNaam: %1$s\nVerwieders-Naam: %2$s\nSchriever: %3$s\nBeschrieven: %4$s\nTipp: %5$s\n"
+msgstr ""
+"Willst du deese Kaart würrelk im Internett publik maken?\n"
+"\n"
+"Naam: %1$s\n"
+"Verwieders-Naam: %2$s\n"
+"Schriever: %3$s\n"
+"Beschrieven: %4$s\n"
+"Tipp: %5$s\n"
 
 #: ../../src/editor/editorinteractive.cc:1455
 msgid "Login Error"
@@ -814,7 +844,8 @@ msgstr "Utköörte Dingen: %s …"
 #. * TRANSLATORS: Help text in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:195
 msgid "Click to select an item. Use the Ctrl key to select multiple items."
-msgstr "Klick de Kaart tum Utkören. Bruuk de Strg-Tast tum Utkören vun mehr Dingen."
+msgstr ""
+"Klick de Kaart tum Utkören. Bruuk de Strg-Tast tum Utkören vun mehr Dingen."
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:198
@@ -1041,8 +1072,8 @@ msgstr "Wiesen"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:250
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:62
 #: ../../src/editor/ui_menus/player_menu.cc:87
-#: ../../src/ui_basic/color_chooser.cc:272
-#: ../../src/ui_basic/messagebox.cc:108 ../../src/ui_basic/text_prompt.cc:46
+#: ../../src/ui_basic/color_chooser.cc:272 ../../src/ui_basic/messagebox.cc:108
+#: ../../src/ui_basic/text_prompt.cc:46
 #: ../../src/ui_fsmenu/addons/login_box.cc:54
 #: ../../src/ui_fsmenu/addons/manager.cc:296
 #: ../../src/ui_fsmenu/addons/packager.cc:134
@@ -1064,8 +1095,8 @@ msgstr "Jau"
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:70
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:860
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:70
-#: ../../src/ui_basic/color_chooser.cc:281
-#: ../../src/ui_basic/messagebox.cc:117 ../../src/ui_basic/text_prompt.cc:55
+#: ../../src/ui_basic/color_chooser.cc:281 ../../src/ui_basic/messagebox.cc:117
+#: ../../src/ui_basic/text_prompt.cc:55
 #: ../../src/ui_fsmenu/addons/contact.cc:55
 #: ../../src/ui_fsmenu/addons/login_box.cc:63
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:190
@@ -1075,8 +1106,7 @@ msgstr "Jau"
 #: ../../src/ui_fsmenu/login_box.cc:46 ../../src/ui_fsmenu/options.cc:91
 #: ../../src/ui_fsmenu/training_wheel_options.cc:108
 #: ../../src/wui/economy_options_window.cc:679
-#: ../../src/wui/game_main_menu_save_game.cc:99
-#: ../../src/wui/pinned_note.cc:67
+#: ../../src/wui/game_main_menu_save_game.cc:99 ../../src/wui/pinned_note.cc:67
 msgid "Cancel"
 msgstr "Ofbreken"
 
@@ -1169,7 +1199,9 @@ msgstr "Deese Kaart is gadelk för:"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:399
 msgid ""
 "Please add suggested team line-ups in the next tab for all selected options"
-msgstr "Bidde giff in de anner Listenwessler Vörslagens för Klottjes för all utköört Instellens an"
+msgstr ""
+"Bidde giff in de anner Listenwessler Vörslagens för Klottjes för all utköört "
+"Instellens an"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:415
 msgid ""
@@ -1193,7 +1225,9 @@ msgstr "Fähren-Reckwiede:"
 msgid ""
 "Enable ferries, waterways, and ferry yards on this map by setting the "
 "maximum length of waterways for ferries"
-msgstr "Verlööv Fähren, Prileen un Fährenwarften up deeser Kaart, indeem du eene hoogste Längde för Fährenprielen sett"
+msgstr ""
+"Verlööv Fähren, Prileen un Fährenwarften up deeser Kaart, indeem du eene "
+"hoogste Längde för Fährenprielen sett"
 
 #. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
@@ -1375,7 +1409,9 @@ msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
 "island or on top of a mountain."
-msgstr "De Kaart is fardig. Bidde kiek na, of de Anfangs-Steden vun de Spelers good sünd un de Lüü nich verdrinken of up ’n Barg fastsitten."
+msgstr ""
+"De Kaart is fardig. Bidde kiek na, of de Anfangs-Steden vun de Spelers good "
+"sünd un de Lüü nich verdrinken of up ’n Barg fastsitten."
 
 #. * TRANSLATORS: This is shown after a random map has been created in the
 #. editor.
@@ -1387,7 +1423,11 @@ msgid ""
 "The map generator could not produce a good-enough map with the provided "
 "settings. This map will probably need extensive editing to be playable. "
 "Consider creating a new map with different parameters."
-msgstr "De Kaartmaker hett dat nich daan kregen, mit de geven Instellens eene gode Kaart to maken. Deese Kaart mutt eerst bannig vööl bewarkt worden, ehr man daar spölen kann. Villicht willst du lever eene neje Kaart mit anner Instellens maken."
+msgstr ""
+"De Kaartmaker hett dat nich daan kregen, mit de geven Instellens eene gode "
+"Kaart to maken. Deese Kaart mutt eerst bannig vööl bewarkt worden, ehr man "
+"daar spölen kann. Villicht willst du lever eene neje Kaart mit anner "
+"Instellens maken."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:726
 msgid "The Widelands Random Map Generator"
@@ -1396,7 +1436,8 @@ msgstr "De Widelands-Tofallskaarten-Maker"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:728
 msgid ""
 "This map was generated automatically by the Widelands Random Map Generator."
-msgstr "Deese Kaart is vum Widelands-Tofallskaarten-Maker automatisk maakt worden."
+msgstr ""
+"Deese Kaart is vum Widelands-Tofallskaarten-Maker automatisk maakt worden."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:736
 #: ../../src/network/gamehost.cc:1663
@@ -1486,9 +1527,11 @@ msgstr "To völe Spelers"
 #. recommended number of players. Choice is made by OK/Abort.
 #: ../../src/editor/ui_menus/player_menu.cc:66
 msgid ""
-"We do not recommend setting more than 8 players except for testing purposes."
-" Are you sure that you want more than 8 players?"
-msgstr "Wi raden di an, dat du nich mehr as 8 Spelers fastsettst, buten tum Testen. Willst du würrelk mehr as 8 Spelers hebben?"
+"We do not recommend setting more than 8 players except for testing purposes. "
+"Are you sure that you want more than 8 players?"
+msgstr ""
+"Wi raden di an, dat du nich mehr as 8 Spelers fastsettst, buten tum Testen. "
+"Willst du würrelk mehr as 8 Spelers hebben?"
 
 #. * TRANSLATORS: Checkbox for: 'We do not recommend setting more than 8
 #. players except
@@ -1571,13 +1614,16 @@ msgstr "Sette de Höcht fast to:"
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease terrain "
 "height"
-msgstr "Klick de Kaart tum Verhogen an; drücke daar de Umschalt-Tast bi tum lütter maken."
+msgstr ""
+"Klick de Kaart tum Verhogen an; drücke daar de Umschalt-Tast bi tum lütter "
+"maken."
 
 #. * TRANSLATORS: Editor set height access key. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:74
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:90
 msgid "Ctrl + Click on the map to set terrain height"
-msgstr "Klick de Kaart an un drücke daar de Strg-Tast bi tum Fastsetten vun de Höcht."
+msgstr ""
+"Klick de Kaart an un drücke daar de Strg-Tast bi tum Fastsetten vun de Höcht."
 
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:62
 msgid "Increase/Decrease amount by:"
@@ -1592,14 +1638,18 @@ msgstr "Sette de Mass fast to:"
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease the "
 "amount of the selected resource"
-msgstr "Klick de Kaart tum Verhogen, of drücke daar de Umschalt-Tast bi tum lütter maken, vun de Mass vun de utköört Mineraal."
+msgstr ""
+"Klick de Kaart tum Verhogen, of drücke daar de Umschalt-Tast bi tum lütter "
+"maken, vun de Mass vun de utköört Mineraal."
 
 #. * TRANSLATORS: Editor set rseources access key. *
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:97
 msgid ""
 "Ctrl + Click on the map to set the amount of the selected resource. This "
 "will replace already set resources."
-msgstr "Klick de Kaart tum an un drücke daar de Strg-Tast bi tum Fastsetten vun de Mass vun de utköört Mineraal. Daar wesen Mineraale warrn utwesselt."
+msgstr ""
+"Klick de Kaart tum an un drücke daar de Strg-Tast bi tum Fastsetten vun de "
+"Mass vun de utköört Mineraal. Daar wesen Mineraale warrn utwesselt."
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:32
 msgid "Random Height Options"
@@ -1619,7 +1669,9 @@ msgstr "Gröttste Höcht:"
 msgid ""
 "Click on the map to set terrain height to a random value within the "
 "specified range"
-msgstr "Klick de Kaart an tum Fastmaken vun de Höcht to eene tofällige Tahl in de utköört Intervall."
+msgstr ""
+"Klick de Kaart an tum Fastmaken vun de Höcht to eene tofällige Tahl in de "
+"utköört Intervall."
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:106
 msgid "Fixed height"
@@ -1669,11 +1721,16 @@ msgstr "Grött ännern"
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:59
 msgid ""
 "Select the new map size, then click the map to split it at the desired "
-"location. When increasing the map size, new columns/rows will be inserted to"
-" the east/south of the selected point. When shrinking the map, the desired "
+"location. When increasing the map size, new columns/rows will be inserted to "
+"the east/south of the selected point. When shrinking the map, the desired "
 "number of columns/rows will be removed from the east/south of the splitting "
 "location."
-msgstr "Köör de neje Kaart-Grött ut, dann klick de Kaart an, um se an de wünsket Stee oftodelen. Wenn de Kaart-Grött verhoogt word, worden neje Striepen of Riegen in de Oost/Süden vun de utköört Stee inföögt. Wenn de Kaart-Grött minnert word, worden Striepen of Riegen, wat to vööl sünd, in de Oost/Süden vun de utköört Stee wegnohmen."
+msgstr ""
+"Köör de neje Kaart-Grött ut, dann klick de Kaart an, um se an de wünsket "
+"Stee oftodelen. Wenn de Kaart-Grött verhoogt word, worden neje Striepen of "
+"Riegen in de Oost/Süden vun de utköört Stee inföögt. Wenn de Kaart-Grött "
+"minnert word, worden Striepen of Riegen, wat to vööl sünd, in de Oost/Süden "
+"vun de utköört Stee wegnohmen."
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
@@ -1689,7 +1746,9 @@ msgstr "%1%: %2%"
 #: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:121
 msgid ""
 "Click to restore, Shift + Click to delete, and Ctrl + Click to pin an item."
-msgstr "Klick an tum Torügghalen, Umschalt + Klick tum Lösken, Strg + Klick tum Faststeken."
+msgstr ""
+"Klick an tum Torügghalen, Umschalt + Klick tum Lösken, Strg + Klick tum "
+"Faststeken."
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:39
 msgid "Tool Size"
@@ -1767,7 +1826,9 @@ msgstr "Speler"
 msgid ""
 "Widelands won't work because we were unable to detect the shading language "
 "version."
-msgstr "Widelands kann nich warken, wiel wi nich utfinnen könen, wat för eene Versioon vun de Shading-Spraak du hest."
+msgstr ""
+"Widelands kann nich warken, wiel wi nich utfinnen könen, wat för eene "
+"Versioon vun de Shading-Spraak du hest."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1777,7 +1838,9 @@ msgstr "Widelands kann nich warken, wiel wi nich utfinnen könen, wat för eene 
 msgid ""
 "There is an unknown problem with reading the information from the graphics "
 "driver."
-msgstr "’t gifft een Probleem, waar wi nix över weten, Informationen vun dienem Bill-Utgaav-Driever to kriegen."
+msgstr ""
+"’t gifft een Probleem, waar wi nix över weten, Informationen vun dienem Bill-"
+"Utgaav-Driever to kriegen."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1785,7 +1848,9 @@ msgstr "’t gifft een Probleem, waar wi nix över weten, Informationen vun dien
 #: ../../src/graphic/gl/initialize.cc:193
 msgid ""
 "Widelands won't work because we were unable to detect the OpenGL version."
-msgstr "Widelands kann nich warken, wiel wi nich utfinnen könen, wat för eene OpenGL-Versioon du hest."
+msgstr ""
+"Widelands kann nich warken, wiel wi nich utfinnen könen, wat för eene OpenGL-"
+"Versioon du hest."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -2057,8 +2122,12 @@ msgstr "Rüümte för Muden sünner Eegner um %1$s vun %2$s funnen"
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
 msgid_plural ""
 "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s of %5$s"
-msgstr[0] "Rüümte för Muden sünner Eegner um %1$s vun %2$s %3$u Stapp %4$s vun %5$s funnen"
-msgstr[1] "Rüümte för Muden sünner Eegner um %1$s vun %2$s %3$u Stappen %4$s vun %5$s funnen"
+msgstr[0] ""
+"Rüümte för Muden sünner Eegner um %1$s vun %2$s %3$u Stapp %4$s vun %5$s "
+"funnen"
+msgstr[1] ""
+"Rüümte för Muden sünner Eegner um %1$s vun %2$s %3$u Stappen %4$s vun %5$s "
+"funnen"
 
 #: ../../src/logic/detected_port_space.cc:101
 #, c-format
@@ -2073,8 +2142,10 @@ msgstr "Rüümte för Muden vun %1$s um %2$s vun %3$s funnen"
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
 msgid_plural ""
 "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s of %6$s"
-msgstr[0] "Rüümte för Muden vun %1$s um %2$s vun %3$s %4$u Stapp %5$s vun %6$s funnen"
-msgstr[1] "Rüümte för Muden vun %1$s um %2$s vun %3$s %4$u Stappen %5$s vun %6$s funnen"
+msgstr[0] ""
+"Rüümte för Muden vun %1$s um %2$s vun %3$s %4$u Stapp %5$s vun %6$s funnen"
+msgstr[1] ""
+"Rüümte för Muden vun %1$s um %2$s vun %3$s %4$u Stappen %5$s vun %6$s funnen"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
 #: ../../src/logic/detected_port_space.cc:120
@@ -2204,9 +2275,15 @@ msgstr "Do fehlt eene Anfangs-Stee"
 #: ../../src/logic/game.cc:622 ../../src/logic/player.cc:259
 #, c-format
 msgid ""
-"Widelands could not start the game, because player %u has no starting position.\n"
-"You can manually add a starting position with the Widelands Editor to fix this problem."
-msgstr "Widelands kunn dat Speel nich laden, wiel Speler %u keene Anfangs-Stee hett.\nDu kannst tum Ofhelpen eene Anfangs-Stee mit de Widelands-Bewarker daartodoon."
+"Widelands could not start the game, because player %u has no starting "
+"position.\n"
+"You can manually add a starting position with the Widelands Editor to fix "
+"this problem."
+msgstr ""
+"Widelands kunn dat Speel nich laden, wiel Speler %u keene Anfangs-Stee "
+"hett.\n"
+"Du kannst tum Ofhelpen eene Anfangs-Stee mit de Widelands-Bewarker "
+"daartodoon."
 
 #: ../../src/logic/game.cc:722
 msgid "Initializing…"
@@ -2222,9 +2299,12 @@ msgstr "Deese Markt hett een nejes Hannel-Anbott bekomen."
 
 #: ../../src/logic/game_data_error.cc:51
 msgid ""
-"This game was saved using an older version of Widelands and cannot be loaded"
-" anymore, or it’s a new version that can’t be handled yet."
-msgstr "Deeses Speel is mit eener ollen Versioon vun Widelands sekert worden un kann nich mehr laden, of dat is eene neje Versioon, wat Widelands noch nich mit klaarword."
+"This game was saved using an older version of Widelands and cannot be loaded "
+"anymore, or it’s a new version that can’t be handled yet."
+msgstr ""
+"Deeses Speel is mit eener ollen Versioon vun Widelands sekert worden un kann "
+"nich mehr laden, of dat is eene neje Versioon, wat Widelands noch nich mit "
+"klaarword."
 
 #: ../../src/logic/generic_save_handler.cc:223
 #: ../../src/logic/generic_save_handler.cc:227
@@ -2545,7 +2625,9 @@ msgstr "Warft sünner Küst"
 msgid ""
 "Your shipyard has not been built close enough to a shore. It will not be "
 "able to build ships."
-msgstr "Diene Warft is nicht dicht genoog bi eener Küst baut worden. Se kann keene Schippen bauen."
+msgstr ""
+"Diene Warft is nicht dicht genoog bi eener Küst baut worden. Se kann keene "
+"Schippen bauen."
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1267
 msgid "Ferry Yard Without Shore"
@@ -2555,7 +2637,9 @@ msgstr "Fährenwarft sünner Küst"
 msgid ""
 "Your ferry yard has not been built close enough to a shore. It will not be "
 "able to build ferries."
-msgstr "Diene Fährenwarft is nicht dicht genoog bi eener Küst baut worden. Se kann keene Fähren bauen."
+msgstr ""
+"Diene Fährenwarft is nicht dicht genoog bi eener Küst baut worden. Se kann "
+"keene Fähren bauen."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Destination Gone"
@@ -2697,8 +2781,7 @@ msgid "Land Ahoy!"
 msgstr "Küst to sehn kregen"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1857
-msgid ""
-"An expedition ship reached a coast and is waiting for further commands."
+msgid "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Een Schipp up Söök hett eene Küst funnen un wacht up dien Gebood."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1910
@@ -3002,7 +3085,9 @@ msgstr "Nich to henkomen"
 msgid ""
 "A map file is invalid:\n"
 "%s"
-msgstr "Eene Kaart-Datei is ungültig:\n%s"
+msgstr ""
+"Eene Kaart-Datei is ungültig:\n"
+"%s"
 
 #: ../../src/logic/objective.h:31
 msgid "This objective has no description."
@@ -3026,8 +3111,7 @@ msgctxt "warehouse"
 msgid "Warehouse %d"
 msgstr "Kraamhuus %d"
 
-#: ../../src/logic/playercommand.cc:2357
-#: ../../src/wlapplication_options.cc:673
+#: ../../src/logic/playercommand.cc:2357 ../../src/wlapplication_options.cc:673
 #: ../../src/wui/game_diplomacy_menu.cc:36
 #: ../../src/wui/interactive_gamebase.cc:248
 msgid "Diplomacy"
@@ -3084,7 +3168,8 @@ msgstr "%1$s hett ’t annohmen, to %2$s sien Klottje bitotreden."
 #: ../../src/logic/playercommand.cc:2442
 #, c-format
 msgid "%1$s has retracted the request to join the team of %2$s."
-msgstr "%1$s hett sien Anfragg, to %2$s sien Klottje bitotreden, torüggtrucken."
+msgstr ""
+"%1$s hett sien Anfragg, to %2$s sien Klottje bitotreden, torüggtrucken."
 
 #: ../../src/logic/playercommand.cc:2444
 #, c-format
@@ -3094,7 +3179,8 @@ msgstr "%1$s hett %2$s verseggt, to sien Klottje bitotreden."
 #: ../../src/logic/playercommand.cc:2447
 #, c-format
 msgid "%1$s has retracted the invitation to %2$s to join their team."
-msgstr "%1$s hett dat Inladen an %2$s, to sien Klottje bitotreden, torüggtrucken."
+msgstr ""
+"%1$s hett dat Inladen an %2$s, to sien Klottje bitotreden, torüggtrucken."
 
 #: ../../src/logic/playercommand.cc:2449
 #, c-format
@@ -3117,11 +3203,22 @@ msgstr "Verschuven"
 #, c-format
 msgid ""
 "The replay has desynced and the game was paused.\n"
-"You are probably watching a replay created with another version of Widelands, which is not supported.\n"
+"You are probably watching a replay created with another version of "
+"Widelands, which is not supported.\n"
 "\n"
-"If you are certain that the replay was created with the same version of Widelands, %1$s, please report this problem as a bug.\n"
-"You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
-msgstr "Dat Upteken hett sik verschuven un dat Speel is anhollt worden.\nDu kiekst wahrschienelk een Upteken an, wat mit eener anner Versioon vun Widelands maakt worden is. Dat word nich unnerstütt.\n\nWenn du di seker büst, dat dat Upteken mit de sülve Versioon vun Widelands, %1$s, maakt worden is, bidde melle deeses Probleem. Du finnst mehr Narichten över dat Probleem in de Normaal-Utgaav (unner Windows is dat stdout.txt). Bidde föög deese Informatioon to de Fehler-Mellen hento."
+"If you are certain that the replay was created with the same version of "
+"Widelands, %1$s, please report this problem as a bug.\n"
+"You will find related messages in the standard output (stdout.txt on "
+"Windows). Please add this information to your report."
+msgstr ""
+"Dat Upteken hett sik verschuven un dat Speel is anhollt worden.\n"
+"Du kiekst wahrschienelk een Upteken an, wat mit eener anner Versioon vun "
+"Widelands maakt worden is. Dat word nich unnerstütt.\n"
+"\n"
+"Wenn du di seker büst, dat dat Upteken mit de sülve Versioon vun Widelands, "
+"%1$s, maakt worden is, bidde melle deeses Probleem. Du finnst mehr Narichten "
+"över dat Probleem in de Normaal-Utgaav (unner Windows is dat stdout.txt). "
+"Bidde föög deese Informatioon to de Fehler-Mellen hento."
 
 #: ../../src/logic/replay_game_controller.cc:102
 msgid "End of Replay"
@@ -3129,9 +3226,11 @@ msgstr "Upteken to Enn"
 
 #: ../../src/logic/replay_game_controller.cc:103
 msgid ""
-"The end of the replay has been reached and the game has been paused. You may"
-" unpause the game and continue watching if you want to."
-msgstr "Dat Upteken is över un dat Speel is anhollt. Wenn du willst, kannst du dat Speel wiederlopen laten un wieder tokieken."
+"The end of the replay has been reached and the game has been paused. You may "
+"unpause the game and continue watching if you want to."
+msgstr ""
+"Dat Upteken is över un dat Speel is anhollt. Wenn du willst, kannst du dat "
+"Speel wiederlopen laten un wieder tokieken."
 
 #: ../../src/logic/save_handler.cc:114
 msgid "Saving game…"
@@ -3253,7 +3352,10 @@ msgid ""
 "The engine received a SIGABRT signal which was most likely triggered by a "
 "corrupted savegame. No solution for this bug has been implemented yet. We "
 "are sorry, but this savegame seems to be broken beyond repair."
-msgstr "Dat Speel hett een SIGABRT-Signaal kregen, wat wull vun eenem kaputten sekert Speel komen is. Deeser Fehler kunn noch nich ofholpen worden. Leider is deeses sekert Speel wull so kaputt, dat dat nich mehr to bruken is."
+msgstr ""
+"Dat Speel hett een SIGABRT-Signaal kregen, wat wull vun eenem kaputten "
+"sekert Speel komen is. Deeser Fehler kunn noch nich ofholpen worden. Leider "
+"is deeses sekert Speel wull so kaputt, dat dat nich mehr to bruken is."
 
 #: ../../src/map_io/s2map.cc:421 ../../src/map_io/widelands_map_loader.cc:196
 msgid "Loading map…"
@@ -3301,17 +3403,19 @@ msgstr "Kaart-Dingen klaarmaken"
 msgid "Preparing game…"
 msgstr "Speel word torechtmaakt …"
 
-#: ../../src/network/gameclient.cc:232
-#: ../../src/network/internet_gaming.cc:104
+#: ../../src/network/gameclient.cc:232 ../../src/network/internet_gaming.cc:104
 msgid "Could not establish connection to host"
 msgstr "Kunn keen Verbinnen mit de Weert maken"
 
 #: ../../src/network/gameclient.cc:233
 msgid ""
 "Widelands could not establish a connection to the given address. Either no "
-"Widelands server was running at the supposed port or the server shut down as"
-" you tried to connect."
-msgstr "Widelands kunn keen Verbinnen mit de angeven Adress maken. Of keen Widelands-Server leep an de angeven Port of de Server weer utknipst as du di verbinnen wullst."
+"Widelands server was running at the supposed port or the server shut down as "
+"you tried to connect."
+msgstr ""
+"Widelands kunn keen Verbinnen mit de angeven Adress maken. Of keen Widelands-"
+"Server leep an de angeven Port of de Server weer utknipst as du di verbinnen "
+"wullst."
 
 #: ../../src/network/gameclient.cc:814
 #, c-format
@@ -3325,14 +3429,18 @@ msgstr[1] "%u Verwiederns-Fehlers funnen:\n"
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
-msgstr "%1$s\n• Weert bruukt »%2$s« – nich funnen"
+msgstr ""
+"%1$s\n"
+"• Weert bruukt »%2$s« – nich funnen"
 
 #: ../../src/network/gameclient.cc:819
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
-msgstr "%1$s\n• »%2$s« up Versioon %3$s installeert, aver Weert bruukt Versioon %4$s"
+msgstr ""
+"%1$s\n"
+"• »%2$s« up Versioon %3$s installeert, aver Weert bruukt Versioon %4$s"
 
 #: ../../src/network/gameclient.cc:990
 msgid "/me ’s file failed md5 checksumming."
@@ -3342,7 +3450,9 @@ msgstr "/me sien Datei hett de falske MD5-Nakiektahl."
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
-msgstr "/me hett de Datei kregen un nakiekt. De MD5-Nakiektahl is richtig, aver ick kann mit de Datei nix anfangen."
+msgstr ""
+"/me hett de Datei kregen un nakiekt. De MD5-Nakiektahl is richtig, aver ick "
+"kann mit de Datei nix anfangen."
 
 #: ../../src/network/gameclient.cc:1353
 msgid "Disconnected"
@@ -3353,7 +3463,9 @@ msgstr "Verbinnung trennt"
 msgid ""
 "The connection with the host was lost for the following reason:\n"
 "%s"
-msgstr "De Verbinnung mit de Weert is daarum trennt worden:\n%s"
+msgstr ""
+"De Verbinnung mit de Weert is daarum trennt worden:\n"
+"%s"
 
 #: ../../src/network/gamehost.cc:118
 msgid "Available host commands are:"
@@ -3367,7 +3479,8 @@ msgstr "/help  –  Wiest deese Hülp"
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:122
 msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
-msgstr "/announce <Naricht>  –  Schickt eene Snack-Naricht as Anslag (Systeem-Snack)"
+msgstr ""
+"/announce <Naricht>  –  Schickt eene Snack-Naricht as Anslag (Systeem-Snack)"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:124
@@ -3443,7 +3556,8 @@ msgstr "Dat Anhollen wurr al dwungen – dat Speel mutt al stillholen."
 
 #: ../../src/network/gamehost.cc:216
 msgid "There is no forced pause - nothing to end."
-msgstr "Dat Speel wurr nich tum Anhollen dwungen – kann keenen Stillstand upheven."
+msgstr ""
+"Dat Speel wurr nich tum Anhollen dwungen – kann keenen Stillstand upheven."
 
 #: ../../src/network/gamehost.cc:225
 msgid "Invalid command! Type /help for a list of commands."
@@ -3456,8 +3570,12 @@ msgstr "Kunn de Server nich berieten!"
 #: ../../src/network/gamehost.cc:355
 msgid ""
 "Widelands could not start hosting a server.\n"
-"This should not happen and there is most likely nothing you can do about it. Please report a bug."
-msgstr "Widelands kunn nich begünnen, eenen Server tu berieten.\nDat dürt nich passeren un du kannst wahrschienelk nix daran ännern. Bidde mell deesen Fehler."
+"This should not happen and there is most likely nothing you can do about it. "
+"Please report a bug."
+msgstr ""
+"Widelands kunn nich begünnen, eenen Server tu berieten.\n"
+"Dat dürt nich passeren un du kannst wahrschienelk nix daran ännern. Bidde "
+"mell deesen Fehler."
 
 #: ../../src/network/gamehost.cc:363
 msgid "Failed to start the server!"
@@ -3467,7 +3585,9 @@ msgstr "Kunn de Server nich anschalten!"
 msgid ""
 "Widelands could not start a server.\n"
 "Probably some other process is already running a server on our port."
-msgstr "Widelands kunn eenen Server nich anschalten.\nWahrschienelk bedrifft een anner Prozess al eenen Server up uns’ Port."
+msgstr ""
+"Widelands kunn eenen Server nich anschalten.\n"
+"Wahrschienelk bedrifft een anner Prozess al eenen Server up uns’ Port."
 
 #: ../../src/network/gamehost.cc:1922
 #, c-format
@@ -3481,7 +3601,10 @@ msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
-msgstr "Widelands kunn sik nich mit de angeven Adress verbinnen.\nOf keen Metaserver leep up de geven Port of\ndiene Internett-Instellens sünd kaputt."
+msgstr ""
+"Widelands kunn sik nich mit de angeven Adress verbinnen.\n"
+"Of keen Metaserver leep up de geven Port of\n"
+"diene Internett-Instellens sünd kaputt."
 
 #: ../../src/network/internet_gaming.cc:168
 msgid "Users marked with IRC will possibly not react to messages."
@@ -3506,7 +3629,9 @@ msgstr "Willkomen bi de Widelands-Metaserver!"
 msgid ""
 "You have been logged in as ‘%s’ since your requested name is already in use "
 "or reserved."
-msgstr "Du büst as »%s« anmellt worden, denn de wünsket Naam is vörmaarkt of al bruukt."
+msgstr ""
+"Du büst as »%s« anmellt worden, denn de wünsket Naam is vörmaarkt of al "
+"bruukt."
 
 #: ../../src/network/internet_gaming.cc:437
 msgid "Our forums can be found at:"
@@ -3533,13 +3658,17 @@ msgid ""
 "Received an unexpected network packet from the metaserver. The metaserver "
 "could be using a different protocol version. If the error persists, try "
 "updating your game."
-msgstr "Hebb een unverwachts Internett-Paket vun de Metaserver kregen. De Metaserver bruukt villicht eene anner Versioon vum Protokoll. Wenn de Fehler wiederhen uptreddt, versöök din Speel tu upfrisken."
+msgstr ""
+"Hebb een unverwachts Internett-Paket vun de Metaserver kregen. De Metaserver "
+"bruukt villicht eene anner Versioon vum Protokoll. Wenn de Fehler wiederhen "
+"uptreddt, versöök din Speel tu upfrisken."
 
 #: ../../src/network/internet_gaming.cc:487
 #, c-format
-msgid ""
-"WARNING: Received a %s command although we are not in CONNECTING state."
-msgstr "ACHTUNG: Hebb een %s-Befehl kregen ofschoonst wi nich in’n CONNECTING-Tostand sünd."
+msgid "WARNING: Received a %s command although we are not in CONNECTING state."
+msgstr ""
+"ACHTUNG: Hebb een %s-Befehl kregen ofschoonst wi nich in’n CONNECTING-"
+"Tostand sünd."
 
 #: ../../src/network/internet_gaming.cc:495
 #, c-format
@@ -3601,12 +3730,15 @@ msgstr "Hebb een unbekannten Befehl vum Metaserver kregen: %s"
 
 #: ../../src/network/internet_gaming.cc:859
 msgid "Message could not be sent: You are not connected to the metaserver!"
-msgstr "De Naricht kunn nich schickt werden, wiel du nich mit de Metaserver verbunnen büst!"
+msgstr ""
+"De Naricht kunn nich schickt werden, wiel du nich mit de Metaserver "
+"verbunnen büst!"
 
 #: ../../src/network/internet_gaming.cc:879
 #: ../../src/network/internet_gaming.cc:887
 msgid "Message could not be sent: Was this supposed to be a private message?"
-msgstr "De Naricht kunn nich schickt werden: Sull dat eene persöönlike Naricht wesen?"
+msgstr ""
+"De Naricht kunn nich schickt werden: Sull dat eene persöönlike Naricht wesen?"
 
 #: ../../src/network/internet_gaming.cc:902
 msgid "Supported admin commands:"
@@ -3622,7 +3754,9 @@ msgstr "/announce <Naricht> – Schickt een Maal eene Systeem-Naricht"
 
 #: ../../src/network/internet_gaming.cc:907
 msgid "/warn <user> <msg> - Send a private system message to the given user"
-msgstr "/warn <Naam> <Naricht> – Schickt de geven Bruker eene persöönlike Systeem-Naricht"
+msgstr ""
+"/warn <Naam> <Naricht> – Schickt de geven Bruker eene persöönlike Systeem-"
+"Naricht"
 
 #: ../../src/network/internet_gaming.cc:910
 msgid "/kick <user|game> - Remove the given user or game from the metaserver"
@@ -3654,7 +3788,8 @@ msgstr "Keen Bruker mit deesem Naam is anmellt."
 
 #: ../../src/network/internet_gaming_messages.cc:29
 msgid "The game no longer exists, maybe it has just been closed."
-msgstr "Deeses Speel gifft ’t nich mehr, villicht is ’t jüüst dichtmaakt worden."
+msgstr ""
+"Deeses Speel gifft ’t nich mehr, villicht is ’t jüüst dichtmaakt worden."
 
 #: ../../src/network/internet_gaming_messages.cc:30
 msgid "Wrong password, please try again."
@@ -3676,7 +3811,9 @@ msgstr "Du büst al anmellt!"
 msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
-msgstr "Dien Verbinnung wurr trennt, wiel du eenen Chef-Befehl sünner Chef-Rechten geven hest. Deese Saak word upschreven un an de Chefs mellt."
+msgstr ""
+"Dien Verbinnung wurr trennt, wiel du eenen Chef-Befehl sünner Chef-Rechten "
+"geven hest. Deese Saak word upschreven un an de Chefs mellt."
 
 #: ../../src/network/internet_gaming_messages.cc:40
 msgid "Connection was closed by the client normally."
@@ -3694,7 +3831,9 @@ msgstr "De Metaserver hett nicht antwoordt."
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
-msgstr "De Verbinnung wurr vun de Metaserver trennt, wiel du up eene PING-Anfraag nich bi Tied antwoordt hest."
+msgstr ""
+"De Verbinnung wurr vun de Metaserver trennt, wiel du up eene PING-Anfraag "
+"nich bi Tied antwoordt hest."
 
 #: ../../src/network/network_gaming_messages.cc:30
 msgid "Client has left the game."
@@ -3763,11 +3902,15 @@ msgstr "Hebb een unerwachtn LAUNCH-Befehl vun de Server kregen."
 
 #: ../../src/network/network_gaming_messages.cc:49
 msgid "Server sent a player update for a player that does not exist."
-msgstr "De Server hett een Speler-Vernejen för een Speler, wat ’t nich gifft, schickt."
+msgstr ""
+"De Server hett een Speler-Vernejen för een Speler, wat ’t nich gifft, "
+"schickt."
 
 #: ../../src/network/network_gaming_messages.cc:51
 msgid "Server sent a user update for a user that does not exist."
-msgstr "De Server hett een Bruker-Vernejen för een Bruker, wat ’t nich gifft, schickt."
+msgstr ""
+"De Server hett een Bruker-Vernejen för een Bruker, wat ’t nich gifft, "
+"schickt."
 
 #: ../../src/network/network_gaming_messages.cc:52
 msgid "Server uses a different protocol version"
@@ -3826,7 +3969,9 @@ msgstr "De Weert hett Speler %s in de Deel schickt!"
 #: ../../src/network/network_gaming_messages.cc:71
 #, c-format
 msgid "WARNING: %1$s uses version: %2$s, while Host uses version: %3$s"
-msgstr "WAHRSCHAU: %1$s bruukt deese Versioon: %2$s. Aver de Weert bruukt Versioon %3$s."
+msgstr ""
+"WAHRSCHAU: %1$s bruukt deese Versioon: %2$s. Aver de Weert bruukt Versioon "
+"%3$s."
 
 #: ../../src/network/network_gaming_messages.cc:72
 #, c-format
@@ -3885,7 +4030,10 @@ msgstr "Kunn de stedenwies Nett nich bruken!"
 msgid ""
 "Widelands was unable to use the local network. Maybe some other process is "
 "already running a server on port %s or your network setup is broken."
-msgstr "Widelands kunn dat stedenwies Nett nich bruken. Wahrschienelk bedrifft een anner Prozess al eenen Server up Port %s of diene Nett-Instellens sünd kaputt."
+msgstr ""
+"Widelands kunn dat stedenwies Nett nich bruken. Wahrschienelk bedrifft een "
+"anner Prozess al eenen Server up Port %s of diene Nett-Instellens sünd "
+"kaputt."
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
@@ -3902,7 +4050,9 @@ msgstr "Schnittstee-Inschuuv-Fehler"
 msgid ""
 "Error when running plugin:\n"
 "%s"
-msgstr "Fehler im Schnittstee-Inschuuv:\n%s"
+msgstr ""
+"Fehler im Schnittstee-Inschuuv:\n"
+"%s"
 
 #: ../../src/ui_basic/color_chooser.cc:253
 msgid "Choose Color…"
@@ -4181,8 +4331,7 @@ msgstr "%1$s<br>(%2$s)"
 #: ../../src/ui_basic/window.cc:101 ../../src/ui_fsmenu/about.cc:41
 #: ../../src/ui_fsmenu/crash_report.cc:71
 #: ../../src/ui_fsmenu/crash_report.cc:161
-#: ../../src/ui_fsmenu/mousewheel_report.cc:74
-#: ../../src/wui/watchwindow.cc:110
+#: ../../src/ui_fsmenu/mousewheel_report.cc:74 ../../src/wui/watchwindow.cc:110
 msgid "Close"
 msgstr "Dichtmaken"
 
@@ -4236,7 +4385,10 @@ msgid ""
 "Unable to submit your enquiry.\n"
 "Error message:\n"
 "%s"
-msgstr "Kann diene Naricht nich schicken.\nFehler-Naricht:\n%s"
+msgstr ""
+"Kann diene Naricht nich schicken.\n"
+"Fehler-Naricht:\n"
+"%s"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:90
 msgid "Sent"
@@ -4247,7 +4399,10 @@ msgid ""
 "Your message has been sent to the Widelands Development Team, and we will "
 "respond as soon as we can. Don’t forget to check your website inbox "
 "frequently."
-msgstr "DIene Naricht is an de Widelands Entwickeln-Klottje schickt worden un wi worden so fix as wi könen antwoorden. Vergeet nich, stüttig in dienen inkomen Narichten up de Internett-Sied natokieken."
+msgstr ""
+"DIene Naricht is an de Widelands Entwickeln-Klottje schickt worden un wi "
+"worden so fix as wi könen antwoorden. Vergeet nich, stüttig in dienen "
+"inkomen Narichten up de Internett-Sied natokieken."
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:37
 msgid "Login"
@@ -4267,7 +4422,10 @@ msgid ""
 "In order to use a registered account, you need an account on the Widelands "
 "website. Please log in at %s and set an online gaming password on your "
 "profile page."
-msgstr "Um di as een vermarkt Bruker antomellen, bruukst du een Konto up de Widelands-Internett-Sied. Bidde mell di up %s an un sett een Passwoort för ’t Spölen över ’t Internett up diener Bruker-Instellens-Sied."
+msgstr ""
+"Um di as een vermarkt Bruker antomellen, bruukst du een Konto up de "
+"Widelands-Internett-Sied. Bidde mell di up %s an un sett een Passwoort för "
+"’t Spölen över ’t Internett up diener Bruker-Instellens-Sied."
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:93
 msgid "Username:"
@@ -4374,7 +4532,9 @@ msgstr "Kapeert un inverstahn"
 msgid ""
 "By ticking this checkbox, you confirm that you have read and agree to the "
 "above terms."
-msgstr "Indeem du deeses Kuntrollkistje markeerst, wiest du ut, dat du de Kondiesjes boven lesen hest un daarmit inverstahn büst."
+msgstr ""
+"Indeem du deeses Kuntrollkistje markeerst, wiest du ut, dat du de Kondiesjes "
+"boven lesen hest un daarmit inverstahn büst."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:271
 msgid "Reset the filters"
@@ -4430,17 +4590,24 @@ msgstr "Warktüüg för Verwiederns-Entwicklers"
 #: ../../src/ui_fsmenu/addons/manager.cc:388
 msgid ""
 "The interactive add-ons packager allows you to create, edit, and delete add-"
-"ons. You can bundle maps designed with the Widelands Map Editor as an add-on"
-" using the graphical interface and share them with other players, without "
+"ons. You can bundle maps designed with the Widelands Map Editor as an add-on "
+"using the graphical interface and share them with other players, without "
 "having to write a single line of code."
-msgstr "De interaktiv Verwiederns-Packer verlöövt di, Verwiederns to maken, to bewarken un wegtodoon. Du kannst Kaarten, wat du mit de Widelands Kaart-Bewarker maakt hest, mit de graphisk Schnittstee as een Verwiedern packen un se mit anner Spelers delen, sünner eene enkelt Rieg Quelltexten schrieven to mutten."
+msgstr ""
+"De interaktiv Verwiederns-Packer verlöövt di, Verwiederns to maken, to "
+"bewarken un wegtodoon. Du kannst Kaarten, wat du mit de Widelands Kaart-"
+"Bewarker maakt hest, mit de graphisk Schnittstee as een Verwiedern packen un "
+"se mit anner Spelers delen, sünner eene enkelt Rieg Quelltexten schrieven to "
+"mutten."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:403
 #, c-format
 msgid ""
 "For more information regarding how to develop and package your own add-ons, "
 "please visit %s."
-msgstr "För mehr Informationen, wo du diene eegenen Verwiederns entwickelst un packst, besöök bidde %s."
+msgstr ""
+"För mehr Informationen, wo du diene eegenen Verwiederns entwickelst un "
+"packst, besöök bidde %s."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:419
 msgid ""
@@ -4449,51 +4616,80 @@ msgid ""
 "terms of the GNU General Public License (GPL) version 2 (the same license "
 "under which Widelands itself is distributed). For more information on the "
 "GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu."
-msgstr "Hier kannst du diene Verwiederns to de Server upladen, um se mit anner Spelers to delen. Wenn du se uplaadst, büst du inverstahn, dien Wark unner de Kondiesjes vun de GNU General Public License (GPL) Versioon 2 (de sülve Lizenz, unner wat Widelands sülvst deelt word) uttodoon. För mehr Informationen över de GPL, kiek bidde im Höövdmenü »Över Widelands« → »Lizenz« an."
+msgstr ""
+"Hier kannst du diene Verwiederns to de Server upladen, um se mit anner "
+"Spelers to delen. Wenn du se uplaadst, büst du inverstahn, dien Wark unner "
+"de Kondiesjes vun de GNU General Public License (GPL) Versioon 2 (de sülve "
+"Lizenz, unner wat Widelands sülvst deelt word) uttodoon. För mehr "
+"Informationen över de GPL, kiek bidde im Höövdmenü »Över Widelands« → "
+"»Lizenz« an."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:426
 msgid ""
-"It is forbidden to upload add-ons containing harmful or malicious content or"
-" spam. By uploading an add-on, you assert that the add-on is of your own "
-"creation or you have the add-on’s author(s) permission to submit it in their"
-" stead."
-msgstr "’t is nich verlöövt, Verwiederns uptoladen, wat slimme of ungode Inhollen of Werbung enthollen. Indeem du een Verwiedern uplaadst, sekerst du to, dat du dat Verwiedern sülven schreven hest of dat de Schriever(s) daarmit inverstahn is/sünd, dat du dat Verwiedern för hüm/se uplaadst."
+"It is forbidden to upload add-ons containing harmful or malicious content or "
+"spam. By uploading an add-on, you assert that the add-on is of your own "
+"creation or you have the add-on’s author(s) permission to submit it in their "
+"stead."
+msgstr ""
+"’t is nich verlöövt, Verwiederns uptoladen, wat slimme of ungode Inhollen of "
+"Werbung enthollen. Indeem du een Verwiedern uplaadst, sekerst du to, dat du "
+"dat Verwiedern sülven schreven hest of dat de Schriever(s) daarmit "
+"inverstahn is/sünd, dat du dat Verwiedern för hüm/se uplaadst."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:432
 msgid ""
-"You are required to have read the add-ons documentation under the link given"
-" further above before submitting content. Since the documentation is subject"
-" to frequent changes, ensure that you have read it recently and that you "
+"You are required to have read the add-ons documentation under the link given "
+"further above before submitting content. Since the documentation is subject "
+"to frequent changes, ensure that you have read it recently and that you "
 "followed all guidelines stated there."
-msgstr "Du muttst vun Nood de Verwiederns-Dokumentatioon unner de Verwies boven lesen hebben, ehr du Inhollen uplaadst. De Dokumentatioon word stüttig ännert, pass also up, dat du se vör körter Tied lesen hest un di na all de Anwiesens daar richt hest."
+msgstr ""
+"Du muttst vun Nood de Verwiederns-Dokumentatioon unner de Verwies boven "
+"lesen hebben, ehr du Inhollen uplaadst. De Dokumentatioon word stüttig "
+"ännert, pass also up, dat du se vör körter Tied lesen hest un di na all de "
+"Anwiesens daar richt hest."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:438
 msgid ""
-"The Widelands Development Team will review your add-on soon after uploading."
-" In case they have further inquiries, they will contact you via a PM on the "
+"The Widelands Development Team will review your add-on soon after uploading. "
+"In case they have further inquiries, they will contact you via a PM on the "
 "Widelands website; therefore please check the inbox of your online user "
 "profile page frequently."
-msgstr "De Widelands Entwicklen-Klottje word dien Verwiedern bold na de Upladen nakieken. Wenn se Fragen hebben, mellen se sik över eene PM up de Widelands-Internett-Sied bi di; kiek also bidde stüttig in de inkomen Narichten up diener Netwark-Brukersied na."
+msgstr ""
+"De Widelands Entwicklen-Klottje word dien Verwiedern bold na de Upladen "
+"nakieken. Wenn se Fragen hebben, mellen se sik över eene PM up de Widelands-"
+"Internett-Sied bi di; kiek also bidde stüttig in de inkomen Narichten up "
+"diener Netwark-Brukersied na."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:468
 #, c-format
 msgid ""
 "Technical problems? Unclear documentation? Advanced needs such as deletion "
-"of an add-on or collaborating with another add-on designer? Please visit our"
-" forums at %s, explain your needs, and the Widelands Development Team will "
-"be happy to help."
-msgstr "Technisk Problemen? Unklare Dokumentatioon? Kumplizeertere Dingen vun Nood, to ’n Bispööl een Verwiedern lösken of mit anner Verwiedern-Schrievers tosamentowarken? Besöök bidde uns’ Forum unner %s, segg uns, wat du bruukst, un de Widelands Entwickeln-Klottje hülpt di geern."
+"of an add-on or collaborating with another add-on designer? Please visit our "
+"forums at %s, explain your needs, and the Widelands Development Team will be "
+"happy to help."
+msgstr ""
+"Technisk Problemen? Unklare Dokumentatioon? Kumplizeertere Dingen vun Nood, "
+"to ’n Bispööl een Verwiedern lösken of mit anner Verwiedern-Schrievers "
+"tosamentowarken? Besöök bidde uns’ Forum unner %s, segg uns, wat du bruukst, "
+"un de Widelands Entwickeln-Klottje hülpt di geern."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:485
 msgid ""
 "Alternatively you can also send a message to the Widelands Development Team "
 "and we’ll try to help you with your enquiry as soon as we can. Only the "
-"server administrators can read messages sent in this way. Since other add-on"
-" designers can usually benefit from others’ questions and answers, please "
-"use this way of communication only if there is a reason why your concern is "
-"not for everyone’s ears. You’ll receive our reply via a PM on your Widelands"
-" website user profile page."
-msgstr "Du kannst Widelands Entwickeln-Klottje ok eene Naricht schicken, un wi hülpen di so fix as wi könen. Blot de Server-Chefen könen Narichtens lesen, wat so schickt worden. För anner Verwiedern-Schrievers is ’t meesttieden nüttelk, wat anner Lüü an Fragens un Antwoordens snacken; um dat bruuk deese Aard, Narichtens to schrieven, blot dann, wenn ’t eenen Grund gifft, waarum diene Sörg nich för elkeen Lüü hör Ohren is. Du kriggst uns’ Antwoord as eene PM up diener Brukersied up de Widelands-Internett-Sied."
+"server administrators can read messages sent in this way. Since other add-on "
+"designers can usually benefit from others’ questions and answers, please use "
+"this way of communication only if there is a reason why your concern is not "
+"for everyone’s ears. You’ll receive our reply via a PM on your Widelands "
+"website user profile page."
+msgstr ""
+"Du kannst Widelands Entwickeln-Klottje ok eene Naricht schicken, un wi "
+"hülpen di so fix as wi könen. Blot de Server-Chefen könen Narichtens lesen, "
+"wat so schickt worden. För anner Verwiedern-Schrievers is ’t meesttieden "
+"nüttelk, wat anner Lüü an Fragens un Antwoordens snacken; um dat bruuk deese "
+"Aard, Narichtens to schrieven, blot dann, wenn ’t eenen Grund gifft, waarum "
+"diene Sörg nich för elkeen Lüü hör Ohren is. Du kriggst uns’ Antwoord as "
+"eene PM up diener Brukersied up de Widelands-Internett-Sied."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:522
 msgid "Development"
@@ -4560,7 +4756,9 @@ msgstr[1] "Willst du deese %u Verwiederns würrelk vernejen?"
 msgid ""
 "\n"
 "• %1$s (%2$s) by %3$s"
-msgstr "\n• %1$s (%2$s) vun %3$s"
+msgstr ""
+"\n"
+"• %1$s (%2$s) vun %3$s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:656
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:413
@@ -4584,7 +4782,9 @@ msgstr "Nich anmellt"
 msgid ""
 "Click to log in. You can then comment and vote on add-ons and upload your "
 "own add-ons."
-msgstr "Klick tum Anmellen. Dann kannst du Verwiederns beweerten, Kommentaren schrieven un diene eegenen Verwiederns upladen."
+msgstr ""
+"Klick tum Anmellen. Dann kannst du Verwiederns beweerten, Kommentaren "
+"schrieven un diene eegenen Verwiederns upladen."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:804
 msgid "Please log in to upload add-ons"
@@ -4630,7 +4830,10 @@ msgid ""
 "Unable to connect to the server.\n"
 "Error message:\n"
 "%s"
-msgstr "Kann sik nich mit de Server verbinnen.\nFehler-Naricht:\n%s"
+msgstr ""
+"Kann sik nich mit de Server verbinnen.\n"
+"Fehler-Naricht:\n"
+"%s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:858
 msgid "Wrong Password"
@@ -4641,7 +4844,9 @@ msgstr "Kennwoord is falsk"
 msgid ""
 "The entered username or password is invalid:\n"
 "%s"
-msgstr "De ingeven Brukernaam of Kennwoord is ungültig:\n%s"
+msgstr ""
+"De ingeven Brukernaam of Kennwoord is ungültig:\n"
+"%s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:956
 #, c-format
@@ -4729,10 +4934,15 @@ msgstr "• »%1$s« bruukt eerst »%2$s« un dann »%3$s«, aver de Rieg is ann
 #: ../../src/ui_fsmenu/addons/manager.cc:1261
 #, c-format
 msgid ""
-"An enabled add-on is defective. No games can be started with the current configuration.\n"
+"An enabled add-on is defective. No games can be started with the current "
+"configuration.\n"
 "Error message:\n"
 "%s"
-msgstr "Een anknipst Verwiedern is kaputt. Mit de stedenwies Instellens kann keen Speel begonnen worden.\nFehler-Naricht:\n%s"
+msgstr ""
+"Een anknipst Verwiedern is kaputt. Mit de stedenwies Instellens kann keen "
+"Speel begonnen worden.\n"
+"Fehler-Naricht:\n"
+"%s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1278
 #, c-format
@@ -4745,21 +4955,27 @@ msgstr[1] "%u Fehlers mit de Ofhangens"
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
-msgstr "Verwiederns mit Fehlers mit de Ofhangens warken villicht nich as se sallen, of Kaarten un Spelen laden dann villicht nich."
+msgstr ""
+"Verwiederns mit Fehlers mit de Ofhangens warken villicht nich as se sallen, "
+"of Kaarten un Spelen laden dann villicht nich."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1394
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
-msgstr "Dat Verwiedern »%1$s« kann nich upladen werden, denn siene Versioon (%2$s) is nich nejer as de Versioon up de Server (%3$s)."
+msgstr ""
+"Dat Verwiedern »%1$s« kann nich upladen werden, denn siene Versioon (%2$s) "
+"is nich nejer as de Versioon up de Server (%3$s)."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1405
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
-msgstr "Dat Verwiedern »%1$s« kann nich upladen werden, denn sien Deel (%2$s) is anners as siene Deel up de Server (%3$s)."
+msgstr ""
+"Dat Verwiedern »%1$s« kann nich upladen werden, denn sien Deel (%2$s) is "
+"anners as siene Deel up de Server (%3$s)."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1416
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:54
@@ -4789,7 +5005,11 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr "Dat Verwiedern »%1$s« kunn nich to de Server upladen worden.\n\nFehler-Naricht:\n%2$s"
+msgstr ""
+"Dat Verwiedern »%1$s« kunn nich to de Server upladen worden.\n"
+"\n"
+"Fehler-Naricht:\n"
+"%2$s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1469
 #, c-format
@@ -4799,20 +5019,33 @@ msgstr "Lade »%s« runner …"
 #: ../../src/ui_fsmenu/addons/manager.cc:1505
 #, c-format
 msgid ""
-"The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
+"The add-on ‘%1$s’ could not be downloaded from the server. Installing/"
+"upgrading this add-on will be skipped.\n"
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr "Dat Verwiedern »%1$s« kunn nich vun de Server runnerladen worden. Dat Installeren/Vernejen vun deeser Verwiedern word översprungen.\n\nFehler:\n%2$s"
+msgstr ""
+"Dat Verwiedern »%1$s« kunn nich vun de Server runnerladen worden. Dat "
+"Installeren/Vernejen vun deeser Verwiedern word översprungen.\n"
+"\n"
+"Fehler:\n"
+"%2$s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1582
 #, c-format
 msgid ""
-"The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations will be skipped.\n"
+"The translations for the add-on ‘%1$s’ could not be downloaded from the "
+"server. Installing/upgrading the translations will be skipped.\n"
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr "De Översettens för dat Verwiedern »%1$s« kunnen nich vun de Server runnerladen worden. Dat Installeren/Vernejen vun de Översettens word översprungen.\n\nFehler-Naricht:\n%2$s"
+msgstr ""
+"De Översettens för dat Verwiedern »%1$s« kunnen nich vun de Server "
+"runnerladen worden. Dat Installeren/Vernejen vun de Översettens word "
+"översprungen.\n"
+"\n"
+"Fehler-Naricht:\n"
+"%2$s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1651
 #, c-format
@@ -4898,7 +5131,10 @@ msgid ""
 "This name is invalid. Reason: %s\n"
 "\n"
 "Please choose a different name."
-msgstr "Deeser Naam is ungültig. Grund: %s\n\nBidde köör een anner Naam."
+msgstr ""
+"Deeser Naam is ungültig. Grund: %s\n"
+"\n"
+"Bidde köör een anner Naam."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:396
 msgid "An add-on with this internal name already exists."
@@ -4908,7 +5144,9 @@ msgstr "Een Verwiedern mit deesem Naam gifft ’t al."
 msgid ""
 "An add-on with this internal name was deleted recently. Please commit your "
 "changes before using this name again."
-msgstr "Een Verwiedern mit deesem Naam is eerst wegdaan worden. Bidde seker diene Ännerns ehr du de Naam weer bruken kannst."
+msgstr ""
+"Een Verwiedern mit deesem Naam is eerst wegdaan worden. Bidde seker diene "
+"Ännerns ehr du de Naam weer bruken kannst."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:427
 msgid "Delete Add-on"
@@ -4925,18 +5163,25 @@ msgid ""
 "Do you really want to delete the local add-on ‘%s’?\n"
 "\n"
 "Note that this add-on can not be downloaded again from the server."
-msgstr "Willst du dat stedenwies Verwiedern »%s« würrelk wegdoon?\n\nDeeses Verwiedern kann nich weer vun de Server runnerladen worden."
+msgstr ""
+"Willst du dat stedenwies Verwiedern »%s« würrelk wegdoon?\n"
+"\n"
+"Deeses Verwiedern kann nich weer vun de Server runnerladen worden."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:451
 #, c-format
 msgid ""
-"If you quit the packager now, all changes to the following %u add-on will be"
-" discarded."
+"If you quit the packager now, all changes to the following %u add-on will be "
+"discarded."
 msgid_plural ""
 "If you quit the packager now, all changes to the following %u add-ons will "
 "be discarded."
-msgstr[0] "Wenn du de Packer nu dichtmaakst, worden all Ännerns to deesem %u Verwiedern wegdaan."
-msgstr[1] "Wenn du de Packer nu dichtmaakst, worden all Ännerns to deesen %u Verwiederns wegdaan."
+msgstr[0] ""
+"Wenn du de Packer nu dichtmaakst, worden all Ännerns to deesem %u Verwiedern "
+"wegdaan."
+msgstr[1] ""
+"Wenn du de Packer nu dichtmaakst, worden all Ännerns to deesen %u "
+"Verwiederns wegdaan."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:460
 #: ../../src/ui_fsmenu/addons/packager.cc:487
@@ -4945,7 +5190,9 @@ msgstr[1] "Wenn du de Packer nu dichtmaakst, worden all Ännerns to deesen %u Ve
 msgid ""
 "%1$s\n"
 "• %2$s"
-msgstr "%1$s\n• %2$s"
+msgstr ""
+"%1$s\n"
+"• %2$s"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:463
 msgid "Quit Packager"
@@ -4971,23 +5218,30 @@ msgstr "Ännerns wegdoon"
 #: ../../src/ui_fsmenu/addons/packager.cc:503
 #, c-format
 msgid "Do you really want to commit all changes to the add-on ‘%s’ to disk?"
-msgstr "Willst du würrelk all Ännerns to de Verwiedern »%s« to de Fastplatt schrieven?"
+msgstr ""
+"Willst du würrelk all Ännerns to de Verwiedern »%s« to de Fastplatt "
+"schrieven?"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:507
 #, c-format
 msgid ""
 "Do you really want to commit all changes to the following %u add-on to disk?"
 msgid_plural ""
-"Do you really want to commit all changes to the following %u add-ons to "
-"disk?"
-msgstr[0] "Willst du würrelk all Ännerns to deesem %u Verwiedern to de Fastplatt schrieven?"
-msgstr[1] "Willst du würrelk all Ännerns to deesen %u Verwiederns to de Fastplatt schrieven?"
+"Do you really want to commit all changes to the following %u add-ons to disk?"
+msgstr[0] ""
+"Willst du würrelk all Ännerns to deesem %u Verwiedern to de Fastplatt "
+"schrieven?"
+msgstr[1] ""
+"Willst du würrelk all Ännerns to deesen %u Verwiederns to de Fastplatt "
+"schrieven?"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:516
 msgid ""
 "Warning: If you manually edited any files in this add-on, your changes may "
 "be overwritten!"
-msgstr "Wahrschau: Wenn du elkeen Datei in deesem Verwiedern sülvst ännert hest, worden diene Ännerns villicht överschrieven!"
+msgstr ""
+"Wahrschau: Wenn du elkeen Datei in deesem Verwiedern sülvst ännert hest, "
+"worden diene Ännerns villicht överschrieven!"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:519
 msgid "Confirm Saving"
@@ -5002,7 +5256,9 @@ msgstr "Ungültig Versioons-Vörutsetten"
 msgid ""
 "The minimum Widelands version ‘%1$s’ may not be newer than the maximum "
 "Widelands version ‘%2$s’. The add-on ‘%3$s’ will not be saved."
-msgstr "De minnste Widelands-Versioon »%1$s« kann nich nejer wesen as de grootste Widelands-Versioon »%2$s«. Dat Verwiedern »%3$s« word nich sekert."
+msgstr ""
+"De minnste Widelands-Versioon »%1$s« kann nich nejer wesen as de grootste "
+"Widelands-Versioon »%2$s«. Dat Verwiedern »%3$s« word nich sekert."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:598
 msgid "Invalid Version"
@@ -5012,7 +5268,8 @@ msgstr "Versioon ungültig"
 #, c-format
 msgid ""
 "‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved."
-msgstr "»%1$s« is keene gültige Versioon. Dat Verwiedern »%2$s« word nich sekert."
+msgstr ""
+"»%1$s« is keene gültige Versioon. Dat Verwiedern »%2$s« word nich sekert."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:612
 msgid "Version Requirement"
@@ -5024,15 +5281,21 @@ msgid ""
 "The add-on ‘%1$s’ does not specify a minimum Widelands version. None of the "
 "contained maps can be loaded with a Widelands version older than %2$s. The "
 "minimum version requirement will automatically be set accordingly."
-msgstr "Dat Verwiedern »%1$s« gifft keene minnste Widelands-Versioon an. Keene vun de enthollen Kaarten kann mit eener Widelands-Versioon oller as %2$s laden worden. De minnste Versioon-Vörutsetten word also daarna sett."
+msgstr ""
+"Dat Verwiedern »%1$s« gifft keene minnste Widelands-Versioon an. Keene vun "
+"de enthollen Kaarten kann mit eener Widelands-Versioon oller as %2$s laden "
+"worden. De minnste Versioon-Vörutsetten word also daarna sett."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:619
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ specifies a minimum Widelands version of %2$s. However, "
-"none of the contained maps can be loaded with a Widelands version older than"
-" %3$s. The version requirement will automatically be changed accordingly."
-msgstr "Dat Verwiedern »%1$s« gifft as minnste Widelands-Versioon %2$s an. Aver keene vun de enthollen Kaarten kann mit eener Widelands-Versioon oller as %3$s laden worden. De minnste Versioon-Vörutsetten word also daarna ännert."
+"none of the contained maps can be loaded with a Widelands version older than "
+"%3$s. The version requirement will automatically be changed accordingly."
+msgstr ""
+"Dat Verwiedern »%1$s« gifft as minnste Widelands-Versioon %2$s an. Aver "
+"keene vun de enthollen Kaarten kann mit eener Widelands-Versioon oller as "
+"%3$s laden worden. De minnste Versioon-Vörutsetten word also daarna ännert."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:641
 msgid "Error Writing Addon"
@@ -5043,7 +5306,9 @@ msgstr "Fehler bi’m Schrieven"
 msgid ""
 "The add-on ‘%1$s’ can not be saved to disk:\n"
 "%2$s"
-msgstr "Dat Verwiedern »%1$s« kunn nich up de Fastplatt sekert worden:\n%2$s"
+msgstr ""
+"Dat Verwiedern »%1$s« kunn nich up de Fastplatt sekert worden:\n"
+"%2$s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:55
 msgid "Invalid filename"
@@ -5081,9 +5346,11 @@ msgstr "Utköört Kaart of Verteeknis wegdoon"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:194
 msgid ""
-"The selected internal directory name is used multiple times. All directories"
-" with the same internal name will also share the same display name."
-msgstr "De utköört Verteeknisnaam word mehr as een Maal bruukt. All Verteeknissen mit deesem Naam hebben ok de sülven upwiest Naam."
+"The selected internal directory name is used multiple times. All directories "
+"with the same internal name will also share the same display name."
+msgstr ""
+"De utköört Verteeknisnaam word mehr as een Maal bruukt. All Verteeknissen "
+"mit deesem Naam hebben ok de sülven upwiest Naam."
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:200
 msgid "Directory Display Name"
@@ -5141,7 +5408,10 @@ msgid ""
 "Directories may not use the extension ‘%s’.\n"
 "\n"
 "Please choose a different name."
-msgstr "Verteeknissen düren nich mit »%s« ennen.\n\nBidde köör een anner Naam."
+msgstr ""
+"Verteeknissen düren nich mit »%s« ennen.\n"
+"\n"
+"Bidde köör een anner Naam."
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:423
 msgid "A directory with this name already exists."
@@ -5192,7 +5462,11 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%s"
-msgstr "De Kommentaar kunn nich wegdaan worden.\n\nFehler-Naricht:\n%s"
+msgstr ""
+"De Kommentaar kunn nich wegdaan worden.\n"
+"\n"
+"Fehler-Naricht:\n"
+"%s"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:159
 msgid "Edit Comment"
@@ -5305,7 +5579,11 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%s"
-msgstr "De Kommentaar kunn nich ofschickt worden.\n\nFehler-Naricht:\n%s"
+msgstr ""
+"De Kommentaar kunn nich ofschickt worden.\n"
+"\n"
+"Fehler-Naricht:\n"
+"%s"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:311
 msgid "Preview:"
@@ -5405,7 +5683,9 @@ msgstr "Nich beweert"
 msgid ""
 "The vote could not be submitted.\n"
 "Error code: %s"
-msgstr "De Beweerten kunn nich ofschickt worden.\nFehler-Naricht: %s"
+msgstr ""
+"De Beweerten kunn nich ofschickt worden.\n"
+"Fehler-Naricht: %s"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:785
 #, c-format
@@ -5512,7 +5792,16 @@ msgid ""
 "%5$s\n"
 "\n"
 "Note that this add-on can not be downloaded again from the server."
-msgstr "Willst du deese Verwiedern würrelk wegdoon?\n\n%1$s\nvun %2$s\nVersioon %3$s\nDeel: %4$s\n%5$s\n\nDeeses Verwiedern kann nich weer vun de Server runnerladen worden."
+msgstr ""
+"Willst du deese Verwiedern würrelk wegdoon?\n"
+"\n"
+"%1$s\n"
+"vun %2$s\n"
+"Versioon %3$s\n"
+"Deel: %4$s\n"
+"%5$s\n"
+"\n"
+"Deeses Verwiedern kann nich weer vun de Server runnerladen worden."
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:53
 #, c-format
@@ -5524,11 +5813,17 @@ msgid ""
 "Version %3$s\n"
 "Category: %4$s\n"
 "%5$s"
-msgstr "Willst du deese Verwiedern würrelk wegdoon?\n\n%1$s\nvun %2$s\nVersioon %3$s\nDeel: %4$s\n%5$s"
+msgstr ""
+"Willst du deese Verwiedern würrelk wegdoon?\n"
+"\n"
+"%1$s\n"
+"vun %2$s\n"
+"Versioon %3$s\n"
+"Deel: %4$s\n"
+"%5$s"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:96
-msgid ""
-"This add-on is known to cause desyncs in multiplayer games and replays."
+msgid "This add-on is known to cause desyncs in multiplayer games and replays."
 msgstr "Deeses Verwiedern maakt Verschuvens in Internett-Spelens un Uptekens."
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:102
@@ -5544,7 +5839,8 @@ msgstr "Bruukt eene Widelands-Versioon nich nejer as %s."
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:106
 #, c-format
 msgid "Requires a Widelands version of at least %1$s and at most %2$s."
-msgstr "Bruukt eene Widelands-Versioon nich oller as %1$s un nich nejer as %2$s."
+msgstr ""
+"Bruukt eene Widelands-Versioon nich oller as %1$s un nich nejer as %2$s."
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:150
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:201
@@ -5627,7 +5923,15 @@ msgid ""
 "Version %4$s\n"
 "Category: %5$s\n"
 "%6$s\n"
-msgstr "Willst du deese Verwiedern würrelk installeren?\n\n%1$s\nvun %2$s\n%3$s\nVersioon %4$s\nDeel: %5$s\n%6$s\n"
+msgstr ""
+"Willst du deese Verwiedern würrelk installeren?\n"
+"\n"
+"%1$s\n"
+"vun %2$s\n"
+"%3$s\n"
+"Versioon %4$s\n"
+"Deel: %5$s\n"
+"%6$s\n"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:432
 #, c-format
@@ -5641,7 +5945,16 @@ msgid ""
 "Available version: %5$s\n"
 "Category: %6$s\n"
 "%7$s"
-msgstr "Willst du deeses Verwiedern würrelk vernejen?\n\n%1$s\nvun %2$s\n%3$s\nInstalleert Versioon: %4$s\nNejste Versioon: %5$s\nDeel: %6$s\n%7$s"
+msgstr ""
+"Willst du deeses Verwiedern würrelk vernejen?\n"
+"\n"
+"%1$s\n"
+"vun %2$s\n"
+"%3$s\n"
+"Installeert Versioon: %4$s\n"
+"Nejste Versioon: %5$s\n"
+"Deel: %6$s\n"
+"%7$s"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:482
 msgid "Verified by the Widelands Development Team"
@@ -5649,9 +5962,12 @@ msgstr "Vun de Widelands Entwickeln-Klottje verifizeert"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:483
 msgid ""
-"This add-on was not checked by the Widelands Development Team yet. We cannot"
-" guarantee that it does not contain harmful or offensive content."
-msgstr "Deese Verwiedern is noch nich vun de Widelands Entwickeln-Klottje nakiekt worden. Wi könen di nich versekern, dat dat nich slimme of ungode Inhollen hett."
+"This add-on was not checked by the Widelands Development Team yet. We cannot "
+"guarantee that it does not contain harmful or offensive content."
+msgstr ""
+"Deese Verwiedern is noch nich vun de Widelands Entwickeln-Klottje nakiekt "
+"worden. Wi könen di nich versekern, dat dat nich slimme of ungode Inhollen "
+"hett."
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:493
 #, c-format
@@ -5698,18 +6014,23 @@ msgstr "Beschrieven"
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:125
 #, c-format
 msgid ""
-"The screenshot ‘%1$s’ for the add-on ‘%2$s’ could not be uploaded to the server.\n"
+"The screenshot ‘%1$s’ for the add-on ‘%2$s’ could not be uploaded to the "
+"server.\n"
 "\n"
 "Error Message:\n"
 "%3$s"
-msgstr "Dat Billschirmfoto »%1$s« för dat Verwiedern »%2$s« kunn nich to de Server upladen worden.\n\nFehler-Naricht:\n%3$s"
+msgstr ""
+"Dat Billschirmfoto »%1$s« för dat Verwiedern »%2$s« kunn nich to de Server "
+"upladen worden.\n"
+"\n"
+"Fehler-Naricht:\n"
+"%3$s"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:33
 msgid "Choose Campaign"
 msgstr "Rutfödderungs-Riege utkören"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:38
-#: ../../src/ui_fsmenu/loadgame.cc:76
+#: ../../src/ui_fsmenu/campaign_select.cc:38 ../../src/ui_fsmenu/loadgame.cc:76
 #: ../../src/ui_fsmenu/scenario_select.cc:105
 #: ../../src/wui/story_message_box.cc:90
 msgid "Return to the main menu"
@@ -5768,7 +6089,12 @@ msgid ""
 "with a description of what was going on in the game and what you did last "
 "before the crash to the Widelands Development Team under %s so we can fix "
 "the problem."
-msgstr "’t süchst so ut, as of Widelands ofstört is, as du dat tolest utföhrt hest. Aver eene Rückspoor för ’t Fehler-Söken is automatisk schrieven worden. Bidde schick de Bericht tosamen mit een Beschrieven, wat in de Speel löss weer un wat du tolest daan hest, ehr dat Speel ofstört is, an de Widelands Entwicklen-Klottje unner %s, daarmit wi dat Probleem ofhelpen könen."
+msgstr ""
+"’t süchst so ut, as of Widelands ofstört is, as du dat tolest utföhrt hest. "
+"Aver eene Rückspoor för ’t Fehler-Söken is automatisk schrieven worden. "
+"Bidde schick de Bericht tosamen mit een Beschrieven, wat in de Speel löss "
+"weer un wat du tolest daan hest, ehr dat Speel ofstört is, an de Widelands "
+"Entwicklen-Klottje unner %s, daarmit wi dat Probleem ofhelpen könen."
 
 #: ../../src/ui_fsmenu/crash_report.cc:142
 msgid "Show details…"
@@ -5859,7 +6185,9 @@ msgid ""
 "Widelands was unable to get the IP address of the server in time. There "
 "seems to be a network problem, either on your side or on the side of the "
 "server.\n"
-msgstr "Widelands kunn de IP-Adress vun de Server nich bi Tied utfinnen. Dat is wull een Probleem mit de Nett vun di of vun de Server.\n"
+msgstr ""
+"Widelands kunn de IP-Adress vun de Server nich bi Tied utfinnen. Dat is wull "
+"een Probleem mit de Nett vun di of vun de Server.\n"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:454
 msgid "Connection Timed Out"
@@ -5918,9 +6246,11 @@ msgstr "Handigtast-Fehler"
 #, c-format
 msgid ""
 "The shortcut you selected (‘%1$s’) is already in use for the following "
-"action: ‘%2$s’. Please select a different shortcut or change the conflicting"
-" shortcut first."
-msgstr "De utköört Handigtast (»%1$s«) word all för dat hier bruukt: »%2$s«. Bidde köör een anner Handigtast ut of änner eerst de anner Handigtast."
+"action: ‘%2$s’. Please select a different shortcut or change the conflicting "
+"shortcut first."
+msgstr ""
+"De utköört Handigtast (»%1$s«) word all för dat hier bruukt: »%2$s«. Bidde "
+"köör een anner Handigtast ut of änner eerst de anner Handigtast."
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/ui_fsmenu/keyboard_options.cc:297
@@ -5950,9 +6280,10 @@ msgid "Configure this game"
 msgstr "Deeses Speel inrichten"
 
 #: ../../src/ui_fsmenu/launch_game.cc:66
-msgid ""
-"An enabled add-on is known to cause desyncs. No replay will be written."
-msgstr "Een anknipst Verwiedern maakt bekennterwies Verschuvens. Keen Upteken word schrieven."
+msgid "An enabled add-on is known to cause desyncs. No replay will be written."
+msgstr ""
+"Een anknipst Verwiedern maakt bekennterwies Verschuvens. Keen Upteken word "
+"schrieven."
 
 #: ../../src/ui_fsmenu/launch_game.cc:90
 msgid "Playing time"
@@ -6036,8 +6367,8 @@ msgstr "De Betrecken tüsken Spelers worden vun de sekert Speel fastleggt"
 
 #: ../../src/ui_fsmenu/launch_game.cc:351
 msgid ""
-"Allow the players to choose their own starting positions at the beginning of"
-" the game"
+"Allow the players to choose their own starting positions at the beginning of "
+"the game"
 msgstr "Spelers hör eegen Anfangs-Steden tum Begünn vun de Speel utkören laten"
 
 #: ../../src/ui_fsmenu/launch_game.cc:370
@@ -6065,7 +6396,10 @@ msgid ""
 "Enable coastal invasions and ship-to-ship battles. This feature is "
 "experimental and may undergo substantial redesign in future versions of "
 "Widelands."
-msgstr "Angriepen up Küstens un Slachten tüsken Schippen anknipsen. Dat is ganz wat nejes un noch nich stevig un kann in tokünftig Versionen vun Widelands noch maal ganz anners umsett worden."
+msgstr ""
+"Angriepen up Küstens un Slachten tüsken Schippen anknipsen. Dat is ganz wat "
+"nejes un noch nich stevig un kann in tokünftig Versionen vun Widelands noch "
+"maal ganz anners umsett worden."
 
 #: ../../src/ui_fsmenu/launch_game.cc:420
 msgid "Player relations are set by the scenario"
@@ -6083,8 +6417,8 @@ msgstr "Spelers verseggen, hör Klottjen midden in de Speel to ännern"
 #: ../../src/ui_fsmenu/launch_game.cc:432
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:506
 #: ../../src/ui_fsmenu/scenariodetails.cc:47
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:283
-#: ../../src/wui/map_tags.cc:66 ../../src/wui/mapdetails.cc:138
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:283 ../../src/wui/map_tags.cc:66
+#: ../../src/wui/mapdetails.cc:138
 msgid "Scenario"
 msgstr "Rutfödderung"
 
@@ -6107,7 +6441,9 @@ msgstr "Dat is een sekert Speel – de Upgaav tum Winnen is also al fastleggt."
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
 "loaded."
-msgstr "Kann mögelk Upgaven tum Winnen nich utfinnen, wiel de Kaart »%s« nich laden worden kunn."
+msgstr ""
+"Kann mögelk Upgaven tum Winnen nich utfinnen, wiel de Kaart »%s« nich laden "
+"worden kunn."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:64
 msgid "Show the help window"
@@ -6128,9 +6464,16 @@ msgstr "Dat sekert Speel is een Verteeknis"
 #: ../../src/ui_fsmenu/launch_mpg.cc:214
 msgid ""
 "WARNING:\n"
-"The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
-"Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
-msgstr "WAHRSCHAU: Du hest een sekert Speel utköört, wat een Verteeknis is. Dat passeert, wenn du de Instellen »nozip« up wahr settst of de sekert Speel sülven utpackst.\nWidelands kann keene Verteeknissen an de Gasten schicken. Bidde köör een anner sekert Speel ut of pack de Inholl vun de Verteeknis in."
+"The saved game you selected is a directory. This happens if you set the "
+"option ‘nozip’ to true or manually unzipped the saved game.\n"
+"Widelands is not able to transfer directory structures to the clients, "
+"please select another saved game or zip the directories’ content."
+msgstr ""
+"WAHRSCHAU: Du hest een sekert Speel utköört, wat een Verteeknis is. Dat "
+"passeert, wenn du de Instellen »nozip« up wahr settst of de sekert Speel "
+"sülven utpackst.\n"
+"Widelands kann keene Verteeknissen an de Gasten schicken. Bidde köör een "
+"anner sekert Speel ut of pack de Inholl vun de Verteeknis in."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:233 ../../src/ui_fsmenu/launch_spg.cc:134
 msgid "File not found"
@@ -6139,16 +6482,27 @@ msgstr "Datei nich funnen"
 #: ../../src/ui_fsmenu/launch_mpg.cc:234 ../../src/ui_fsmenu/launch_spg.cc:135
 #, c-format
 msgid ""
-"Widelands tried to start a game with a file that could not be found at the given path.\n"
+"Widelands tried to start a game with a file that could not be found at the "
+"given path.\n"
 "The file was: %s\n"
-"If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
-msgstr "Widelands wull een Speel begünnen, kunn de Datei daarför aver nich an de angeven Padd finnen.\nDe Datei weer: %s\nWenn dat in eenem Internett-Speel passeert, hett de Weert wull eene Datei utköört, wat du nich hest. De Weert sall di eene sülke Datei egentlik schicken, aver se is villicht noch nich ganz överdragen?!"
+"If this happens in a network game, the host might have selected a file that "
+"you do not own. Normally, such a file should be sent from the host to you, "
+"but perhaps the transfer was not yet finished!?!"
+msgstr ""
+"Widelands wull een Speel begünnen, kunn de Datei daarför aver nich an de "
+"angeven Padd finnen.\n"
+"De Datei weer: %s\n"
+"Wenn dat in eenem Internett-Speel passeert, hett de Weert wull eene Datei "
+"utköört, wat du nich hest. De Weert sall di eene sülke Datei egentlik "
+"schicken, aver se is villicht noch nich ganz överdragen?!"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:275
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
-msgstr "De utköört Datei kann nich funnen worden. Wenn se di nich automatisk överdragen word, informeer bidde de Weert över deeses Probleem."
+msgstr ""
+"De utköört Datei kann nich funnen worden. Wenn se di nich automatisk "
+"överdragen word, informeer bidde de Weert över deeses Probleem."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:322
 #, c-format
@@ -6208,8 +6562,8 @@ msgstr "Spitznaam:"
 #. * TRANSLATORS: This string may contain only English letters, numbers, and @
 #. . + - _ characters
 #. * and must not be "team".
-#: ../../src/ui_fsmenu/login_box.cc:119
-#: ../../src/ui_fsmenu/netsetup_lan.cc:138 ../../src/wlapplication.cc:707
+#: ../../src/ui_fsmenu/login_box.cc:119 ../../src/ui_fsmenu/netsetup_lan.cc:138
+#: ../../src/wlapplication.cc:707
 msgid "nobody"
 msgstr "unbekannt"
 
@@ -6221,7 +6575,9 @@ msgstr "Bidde eenen Spitznaam ingeven!"
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters."
-msgstr "Giff een gültigen Spitznaam in. Deeser Weert düür nix as engelske Bookstavens, Tahlen un de Tekens @ . + - _ enthollen."
+msgstr ""
+"Giff een gültigen Spitznaam in. Deeser Weert düür nix as engelske "
+"Bookstavens, Tahlen un de Tekens @ . + - _ enthollen."
 
 #: ../../src/ui_fsmenu/login_box.cc:228
 msgid "Please enter your password!"
@@ -6233,7 +6589,10 @@ msgid ""
 "Unable to create a Game instance!\n"
 "Error message:\n"
 "%s"
-msgstr "Kann keen Speel begünnen!\nFehler-Naricht:\n%s"
+msgstr ""
+"Kann keen Speel begünnen!\n"
+"Fehler-Naricht:\n"
+"%s"
 
 #: ../../src/ui_fsmenu/main.cc:361
 msgid "Begin a new game"
@@ -6376,7 +6735,8 @@ msgstr "Upteken ankieken …"
 
 #: ../../src/ui_fsmenu/main.cc:495
 msgid "Begin or load a single-player campaign or free game"
-msgstr "Eene Rutfödderung of frejes Speel för eenen Speler begünnen of wiederspölen"
+msgstr ""
+"Eene Rutfödderung of frejes Speel för eenen Speler begünnen of wiederspölen"
 
 #: ../../src/ui_fsmenu/main.cc:498
 msgid "Play with your friends over the internet"
@@ -6430,7 +6790,9 @@ msgstr "Versioon %1$s"
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team • Licensed under the GNU "
 "General Public License V2.0"
-msgstr "(C) %1%-%2% vun de Widelands Entwickeln-Klottje • Vergünnt unner de GNU General Public License V2.0"
+msgstr ""
+"(C) %1%-%2% vun de Widelands Entwickeln-Klottje • Vergünnt unner de GNU "
+"General Public License V2.0"
 
 #: ../../src/ui_fsmenu/main.cc:882
 msgid "Desyncing Add-On Found"
@@ -6438,7 +6800,9 @@ msgstr "Verschuvig Verwiedern funnen"
 
 #: ../../src/ui_fsmenu/main.cc:883
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
-msgstr "Een anknipst Verwiedern maakt bekennterwies Verschuvens. Büst du seker, dat du wiedermaken willst?"
+msgstr ""
+"Een anknipst Verwiedern maakt bekennterwies Verschuvens. Büst du seker, dat "
+"du wiedermaken willst?"
 
 #: ../../src/ui_fsmenu/main.cc:993 ../../src/ui_fsmenu/netsetup_lan.cc:352
 msgid "No tribes found!"
@@ -6446,7 +6810,9 @@ msgstr "Keene Völkers funnen!"
 
 #: ../../src/ui_fsmenu/main.cc:994 ../../src/ui_fsmenu/netsetup_lan.cc:353
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
-msgstr "Keene Völkers sünd in data/tribes/initialization/[volknaam]/init.lua funnen worden."
+msgstr ""
+"Keene Völkers sünd in data/tribes/initialization/[volknaam]/init.lua funnen "
+"worden."
 
 #: ../../src/ui_fsmenu/main.cc:1038
 msgid "Exit Confirmation"
@@ -6507,7 +6873,7 @@ msgstr "Wies all Kaarten"
 
 #: ../../src/ui_fsmenu/mapselect.cc:89
 msgid "Show original map names"
-msgstr "Wies echte Namen vun de Karten"
+msgstr "Wies echte Namen vun de Kaarten"
 
 #: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "Filter by official status"
@@ -6629,7 +6995,9 @@ msgstr "Rollen-Instellens-Probleem"
 msgid ""
 "‘%1$s%2$s’ conflicts with ‘%3$s’. Please select a different combination or "
 "change the conflicting setting first."
-msgstr "»%1$s%2$s« gifft een Probleem mit »%3$s«. Bidde köör wat anner ut of änner eerst de anner Instellen."
+msgstr ""
+"»%1$s%2$s« gifft een Probleem mit »%3$s«. Bidde köör wat anner ut of änner "
+"eerst de anner Instellen."
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:371
 msgid "Reset Scrolling"
@@ -6639,7 +7007,9 @@ msgstr "Rollen torüggsetten"
 msgid ""
 "Reset scroll settings to the defaults recommended for a standard single "
 "wheel mouse"
-msgstr "De Rollen-Instellens up de Normaalweerten torüggsetten, wat för normaale Musen mit eenem Rad anraden worden"
+msgstr ""
+"De Rollen-Instellens up de Normaalweerten torüggsetten, wat för normaale "
+"Musen mit eenem Rad anraden worden"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:381
 msgid "Set for Touchpad"
@@ -6649,7 +7019,10 @@ msgstr "För Tastfeld setten"
 msgid ""
 "Sets ‘Zoom Map’ and ‘Scroll Map’ to the recommended settings for a touchpad "
 "or other pointing device that can scroll horizontally as well as vertically."
-msgstr "Sett »Kaart vergrotern« un »Kaart verschuven« up de Weerten, wat för een Tastfeld un anner Musen mit eenem vertikaal un ok eenem horizontaal Rad anraden worden."
+msgstr ""
+"Sett »Kaart vergrotern« un »Kaart verschuven« up de Weerten, wat för een "
+"Tastfeld un anner Musen mit eenem vertikaal un ok eenem horizontaal Rad "
+"anraden worden."
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:392
 msgid "Apply Scrolling"
@@ -6721,7 +7094,11 @@ msgid ""
 "An SDL bug in some configurations causes horizontal scroll to be inverted. "
 "We try to detect them, but if we got it wrong, you can fix it here. Please "
 "report if you need to turn this on, so that we can improve the detection."
-msgstr "Um eenen Fehler in SDL is dat horizontaal Verschuven of un an falsk herum. Wi versöken, dat uttofinnen, aver wenn wi dat nich henkriegen, kannst du dat hier ofhelpen. Bidde mell uns, wenn du dat anmaken muttst, daarmit wi dat Utfinnen verbetern könen."
+msgstr ""
+"Um eenen Fehler in SDL is dat horizontaal Verschuven of un an falsk herum. "
+"Wi versöken, dat uttofinnen, aver wenn wi dat nich henkriegen, kannst du dat "
+"hier ofhelpen. Bidde mell uns, wenn du dat anmaken muttst, daarmit wi dat "
+"Utfinnen verbetern könen."
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:502
 msgid "Send feedback"
@@ -6736,7 +7113,9 @@ msgstr "Rollen-Instellens-Probleem"
 msgid ""
 "‘%1$s’, ‘%2$s’, or ‘%3$s’ conflicts with the recommended settings. Change "
 "the conflicting setting(s) too?"
-msgstr "»%1$s«, »%2$s« of »%3$s« gifft een Probleem mit de anraadt Instellens. De Instellens, wat Problemen maken, ok ännern?"
+msgstr ""
+"»%1$s«, »%2$s« of »%3$s« gifft een Probleem mit de anraadt Instellens. De "
+"Instellens, wat Problemen maken, ok ännern?"
 
 #: ../../src/ui_fsmenu/mousewheel_report.cc:50
 msgid "Send Feedback for Inverted Horizontal Scrolling"
@@ -6746,10 +7125,13 @@ msgstr "Rückmellen över dat umdreiht horizontaal Verschuven schicken"
 #: ../../src/ui_fsmenu/mousewheel_report.cc:65
 #, c-format
 msgid ""
-"Please help us improve the detection of inverted horizontal scrolling. To do"
-" so, please report at %s that horizontal scroll direction is wrong with your"
-" configuration. Please include the below technical information."
-msgstr "Bidde hülp uns, dat Utfinnen vun umdreiht horizontaal Verschuven to verbetern. Mell daarto bidde unner %s, dat de horizontaal Verschuvens-Richt up dien Systeem falsk is. Bidde föög daar de technisk Informatioon unnen to."
+"Please help us improve the detection of inverted horizontal scrolling. To do "
+"so, please report at %s that horizontal scroll direction is wrong with your "
+"configuration. Please include the below technical information."
+msgstr ""
+"Bidde hülp uns, dat Utfinnen vun umdreiht horizontaal Verschuven to "
+"verbetern. Mell daarto bidde unner %s, dat de horizontaal Verschuvens-Richt "
+"up dien Systeem falsk is. Bidde föög daar de technisk Informatioon unnen to."
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:64
 msgid "Role"
@@ -6763,7 +7145,9 @@ msgstr "Verschedene Speler-Namen"
 msgid ""
 "The player name of the selected slot (%1%) does not match your own (%2%). "
 "Are you sure that you want to occupy this slot?"
-msgstr "De Speler-Naam vun de utköört Stee (%1%) is anners as diener (%2%). Willst du deese Stee würrelk nehmen?"
+msgstr ""
+"De Speler-Naam vun de utköört Stee (%1%) is anners as diener (%2%). Willst "
+"du deese Stee würrelk nehmen?"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:146
 msgid "Spectator"
@@ -6887,7 +7271,10 @@ msgstr "Unbekannt"
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters and must not be \"team\"."
-msgstr "Giff een gültigen Spitznaam in. Deeser Weert düür nix as engelske Bookstavens, Tahlen un de Tekens @ . + - _ enthollen, un dat dör nich »team« wesen."
+msgstr ""
+"Giff een gültigen Spitznaam in. Deeser Weert düür nix as engelske "
+"Bookstavens, Tahlen un de Tekens @ . + - _ enthollen, un dat dör nich »team« "
+"wesen."
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:325
 msgid "Invalid Address"
@@ -6895,7 +7282,9 @@ msgstr "Adress ungültig"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:326
 msgid "The entered hostname or address is invalid and can’t be connected to."
-msgstr "De angeven Weerts-Naam of Adress is ungültig, daar kann man nich mit verbinnen."
+msgstr ""
+"De angeven Weerts-Naam of Adress is ungültig, daar kann man nich mit "
+"verbinnen."
 
 #: ../../src/ui_fsmenu/options.cc:92
 msgid "Apply"
@@ -6951,29 +7340,27 @@ msgstr "Automatisk sekern överspringen wenn inaktiv"
 
 #: ../../src/ui_fsmenu/options.cc:270
 msgid "Compress Widelands data files (maps, replays, and savegames)"
-msgstr "Dateien mit Widelands-Daten (Kaarten, Uptekens un sekert Speelen) spaarsam sekern"
+msgstr ""
+"Dateien mit Widelands-Daten (Kaarten, Uptekens un sekert Speelen) spaarsam "
+"sekern"
 
 #: ../../src/ui_fsmenu/options.cc:278
 msgid "Keep history of sent chat messages in a file"
 msgstr "Histoorje vun sent Snack-Narichtens in eener Datei sekern"
 
-#: ../../src/ui_fsmenu/options.cc:289
-#: ../../src/wui/interactive_gamebase.cc:276
+#: ../../src/ui_fsmenu/options.cc:289 ../../src/wui/interactive_gamebase.cc:276
 msgid "Show Census"
 msgstr "Namen vun Husen wiesen"
 
-#: ../../src/ui_fsmenu/options.cc:291
-#: ../../src/wui/interactive_gamebase.cc:285
+#: ../../src/ui_fsmenu/options.cc:291 ../../src/wui/interactive_gamebase.cc:285
 msgid "Show Status"
 msgstr "Tostand wiesen"
 
-#: ../../src/ui_fsmenu/options.cc:296
-#: ../../src/wui/interactive_gamebase.cc:294
+#: ../../src/ui_fsmenu/options.cc:296 ../../src/wui/interactive_gamebase.cc:294
 msgid "Show Soldier Levels"
 msgstr "Soldaten-Stand wiesen"
 
-#: ../../src/ui_fsmenu/options.cc:298
-#: ../../src/wui/interactive_gamebase.cc:303
+#: ../../src/ui_fsmenu/options.cc:298 ../../src/wui/interactive_gamebase.cc:303
 msgid "Show Buildings"
 msgstr "Husen wiesen"
 
@@ -7009,7 +7396,7 @@ msgstr "Systeemtied in de Infobalken wiesen"
 
 #: ../../src/ui_fsmenu/options.cc:352
 msgid "Allow diagonal scrolling with the numeric keypad"
-msgstr "Diagonales Kart-Verschuven mit de Tahlenblock verlöven"
+msgstr "Diagonales Kaart-Verschuven mit de Tahlenblock verlöven"
 
 #: ../../src/ui_fsmenu/options.cc:357
 msgid "Scroll when the mouse cursor is near the screen edge"
@@ -7104,7 +7491,11 @@ msgid ""
 "usually – but not always – well playable. Seafaring and artifacts are not "
 "supported. Add-ons of the Tribes and Script categories are disabled in "
 "random matches."
-msgstr "De Tofallskaarten-Maker is noch nich perfekt. Up de Kaarten, wat he maakt, kann man meestens – man nich alltieden – good spölen. Seefahrt un künstelk Schatten worden nich unnerstütt. Verwiederns in de Delen Völkers un Schrieven sünd in tofällig Spelen utknipst."
+msgstr ""
+"De Tofallskaarten-Maker is noch nich perfekt. Up de Kaarten, wat he maakt, "
+"kann man meestens – man nich alltieden – good spölen. Seefahrt un künstelk "
+"Schatten worden nich unnerstütt. Verwiederns in de Delen Völkers un "
+"Schrieven sünd in tofällig Spelen utknipst."
 
 #: ../../src/ui_fsmenu/random_game.cc:127
 msgid "Map Generation Error"
@@ -7112,10 +7503,13 @@ msgstr "Fehler bi’m Kaart-Maken"
 
 #: ../../src/ui_fsmenu/random_game.cc:128
 msgid ""
-"The random map generator was unable to generate a suitable map. This happens"
-" occasionally because the generator is still in beta stage. Please try again"
-" with slightly different settings."
-msgstr "De Tofallskaarten-Maker hett dat nich daan kregen, eene gode Kaart to maken. Dat passeert of un an, denn de Tofallskaarten-Maker is noch nich perfekt. Bidde versöök dat noch eenmaal mit een bietje annern Instellens."
+"The random map generator was unable to generate a suitable map. This happens "
+"occasionally because the generator is still in beta stage. Please try again "
+"with slightly different settings."
+msgstr ""
+"De Tofallskaarten-Maker hett dat nich daan kregen, eene gode Kaart to maken. "
+"Dat passeert of un an, denn de Tofallskaarten-Maker is noch nich perfekt. "
+"Bidde versöök dat noch eenmaal mit een bietje annern Instellens."
 
 #: ../../src/ui_fsmenu/scenario_select.cc:47
 msgid "Choose Scenario"
@@ -7362,7 +7756,9 @@ msgstr "Oorderreeg-Angaven --%1$s un --%2$s könen nich tosamen bruukt worden"
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
-msgstr "Oorderreeg-Befehl »%s« is unbekannt.\nVillicht föhlt een »=«?"
+msgstr ""
+"Oorderreeg-Befehl »%s« is unbekannt.\n"
+"Villicht föhlt een »=«?"
 
 #: ../../src/wlapplication.cc:1712
 #, c-format
@@ -7388,12 +7784,27 @@ msgid ""
 "\n"
 "%1$s\n"
 "\n"
-"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
+"Please report this problem to help us improve Widelands. You will find "
+"related messages in the standard output (stdout.txt on Windows). You are "
+"using version %2$s.\n"
 "\n"
 "Please add this information to your report.\n"
 "\n"
-"Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
-msgstr "Bi’m Spölen is een Fehler uptreden. De Fehler seggt:\n\n%1$s\n\nBidde melle deeses Probleem, daarmit wi Widelands beter maken könen. Du finnst wichtige Mellungen in de Normaal-Utgaav (unner Windows is dat stdout.txt). Du bruukst Versioon %2$s.\n\nBidde föög deese Informatioon to de Fehler-Mellen hento.\n\nSall Widelands versöken, dat Speel in deesem Noodfall to sekern? Mennigmaal – aver nich alltieden – kann man dat laden un wiederspölen."
+"Would you like Widelands to attempt to create an emergency savegame? It is "
+"often – though not always – possible to load it and continue playing."
+msgstr ""
+"Bi’m Spölen is een Fehler uptreden. De Fehler seggt:\n"
+"\n"
+"%1$s\n"
+"\n"
+"Bidde melle deeses Probleem, daarmit wi Widelands beter maken könen. Du "
+"finnst wichtige Mellungen in de Normaal-Utgaav (unner Windows is dat stdout."
+"txt). Du bruukst Versioon %2$s.\n"
+"\n"
+"Bidde föög deese Informatioon to de Fehler-Mellen hento.\n"
+"\n"
+"Sall Widelands versöken, dat Speel in deesem Noodfall to sekern? Mennigmaal "
+"– aver nich alltieden – kann man dat laden un wiederspölen."
 
 #: ../../src/wlapplication.cc:1792
 #, c-format
@@ -7402,8 +7813,15 @@ msgid ""
 "\n"
 "%s\n"
 "\n"
-"Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
-msgstr "Dat Speel hett um dat unverwacht ennt:\n\n%s\n\nSall Widelands versöken, dat Speel in deesem Noodfall to sekern? Mennigmaal – aver nich alltieden – kann man dat laden un wiederspölen."
+"Would you like Widelands to attempt to create an emergency savegame? It is "
+"often – though not always – possible to load it and continue playing."
+msgstr ""
+"Dat Speel hett um dat unverwacht ennt:\n"
+"\n"
+"%s\n"
+"\n"
+"Sall Widelands versöken, dat Speel in deesem Noodfall to sekern? Mennigmaal "
+"– aver nich alltieden – kann man dat laden un wiederspölen."
 
 #: ../../src/wlapplication.cc:1826
 msgid "Emergency save failed"
@@ -7412,10 +7830,15 @@ msgstr "Noodfall-Sekern fehlslaan"
 #: ../../src/wlapplication.cc:1827
 #, c-format
 msgid ""
-"We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
+"We are sorry, but Widelands was unable to create an emergency savegame for "
+"the following reason:\n"
 "\n"
 "%s"
-msgstr "Dat dood uns Leid, aver Widelands hett dat nich daan kregen, dat Speel im Noodfall to sekern. Grund:\n\n%s"
+msgstr ""
+"Dat dood uns Leid, aver Widelands hett dat nich daan kregen, dat Speel im "
+"Noodfall to sekern. Grund:\n"
+"\n"
+"%s"
 
 #: ../../src/wlapplication_options.cc:194
 msgid "Warehouse"
@@ -8103,7 +8526,9 @@ msgstr "Klick an"
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr "Sett neje Dingen up de Kaart of verhoogt Kaart-Elementen um de »Verhoge/Minnere«-Weert"
+msgstr ""
+"Sett neje Dingen up de Kaart of verhoogt Kaart-Elementen um de »Verhoge/"
+"Minnere«-Weert"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../src/wlapplication_options.cc:1070
@@ -8114,9 +8539,11 @@ msgstr "Umschalt + Klick"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:1072
 msgid ""
-"Remove elements from the map, or decrease map elements by the value selected"
-" by ‘Increase/Decrease value’"
-msgstr "Maakt Dingen vun de Kaart weg of minnert Kaart-Elementen um de »Verhoge/Minnere«-Weert"
+"Remove elements from the map, or decrease map elements by the value selected "
+"by ‘Increase/Decrease value’"
+msgstr ""
+"Maakt Dingen vun de Kaart weg of minnert Kaart-Elementen um de »Verhoge/"
+"Minnere«-Weert"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../src/wlapplication_options.cc:1075
@@ -8395,7 +8822,9 @@ msgstr "Waren behollen"
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the dismantling time"
-msgstr "Elkeen Waar, wat noch im Huus is, word vun de Baukeerl rutsmieten. Dat Plattrieten düürt dann langer."
+msgstr ""
+"Elkeen Waar, wat noch im Huus is, word vun de Baukeerl rutsmieten. Dat "
+"Plattrieten düürt dann langer."
 
 #: ../../src/wui/actionconfirm.cc:316
 msgid "Enhance building?"
@@ -8415,7 +8844,9 @@ msgstr "Pass up, wenn de Feind in de Naberskupp is!"
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the enhancing time"
-msgstr "Elkeen Waar, wat noch im Huus is, word vun de Baukeerl rutsmieten. Dat Utbauen düürt dann langer."
+msgstr ""
+"Elkeen Waar, wat noch im Huus is, word vun de Baukeerl rutsmieten. Dat "
+"Utbauen düürt dann langer."
 
 #: ../../src/wui/actionconfirm.cc:380
 msgid "Sink the ship?"
@@ -8476,20 +8907,27 @@ msgstr "Tahl vun Soldaten"
 
 #: ../../src/wui/attack_window.cc:383
 msgid "Send less ships. Hold down Ctrl to send no ships"
-msgstr "Minner Schippen schicken. Holl de Strg-Tast drückt, um keene Schippen to schicken"
+msgstr ""
+"Minner Schippen schicken. Holl de Strg-Tast drückt, um keene Schippen to "
+"schicken"
 
 #: ../../src/wui/attack_window.cc:384
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
-msgstr "Minner Soldaten schicken. Holl de Strg-Tast drückt, um keene Soldaten to schicken"
+msgstr ""
+"Minner Soldaten schicken. Holl de Strg-Tast drückt, um keene Soldaten to "
+"schicken"
 
 #: ../../src/wui/attack_window.cc:390
 msgid "Send more ships. Hold down Ctrl to send as many ships as possible"
-msgstr "Mehr Schippen schicken. Holl de Strg-Tast drückt, um so völe Schippen as mögelk to schicken"
+msgstr ""
+"Mehr Schippen schicken. Holl de Strg-Tast drückt, um so völe Schippen as "
+"mögelk to schicken"
 
 #: ../../src/wui/attack_window.cc:391
-msgid ""
-"Send more soldiers. Hold down Ctrl to send as many soldiers as possible"
-msgstr "Mehr Soldaten schicken. Holl de Strg-Tast drückt, um so völe Soldaten as mögelk to schicken"
+msgid "Send more soldiers. Hold down Ctrl to send as many soldiers as possible"
+msgstr ""
+"Mehr Soldaten schicken. Holl de Strg-Tast drückt, um so völe Soldaten as "
+"mögelk to schicken"
 
 #: ../../src/wui/attack_window.cc:396
 msgid "Start attack"
@@ -8517,12 +8955,15 @@ msgstr "Holl de Strg-Tast drückt, um all Soldaten vun de List wegtodoon"
 
 #: ../../src/wui/attack_window.cc:432
 msgid "Hold down Shift to remove all ships up to the one you’re pointing at"
-msgstr "Holl de Umschalt-Tast drückt, um all Schippen bit tu hör, waar du henwiest, vun de List wegtodoon"
+msgstr ""
+"Holl de Umschalt-Tast drückt, um all Schippen bit tu hör, waar du henwiest, "
+"vun de List wegtodoon"
 
 #: ../../src/wui/attack_window.cc:433
-msgid ""
-"Hold down Shift to remove all soldiers up to the one you’re pointing at"
-msgstr "Holl de Umschalt-Tast drückt, um all Soldaten bit tu hüm, waar du henwiest, vun de List wegtodoon"
+msgid "Hold down Shift to remove all soldiers up to the one you’re pointing at"
+msgstr ""
+"Holl de Umschalt-Tast drückt, um all Soldaten bit tu hüm, waar du henwiest, "
+"vun de List wegtodoon"
 
 #: ../../src/wui/attack_window.cc:440
 msgid "Not attacking:"
@@ -8546,11 +8987,15 @@ msgstr "Holl de Strg-Tast drückt, um all Soldaten up de List to setten"
 
 #: ../../src/wui/attack_window.cc:453
 msgid "Hold down Shift to add all ships up to the one you’re pointing at"
-msgstr "Holl de Umschalt-Tast drückt, um all Schippen bit tu hör, waar du henwiest, up de List to setten"
+msgstr ""
+"Holl de Umschalt-Tast drückt, um all Schippen bit tu hör, waar du henwiest, "
+"up de List to setten"
 
 #: ../../src/wui/attack_window.cc:454
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
-msgstr "Holl de Umschalt-Tast drückt, um all Soldaten bit tu hüm, waar du henwiest, up de List to setten"
+msgstr ""
+"Holl de Umschalt-Tast drückt, um all Soldaten bit tu hüm, waar du henwiest, "
+"up de List to setten"
 
 #: ../../src/wui/attack_window.cc:471
 msgid "Destroy target"
@@ -8611,7 +9056,8 @@ msgstr "Anner Huus wiesen"
 msgid ""
 "Buildings will be considered unproductive if their productivity falls below "
 "this percentage"
-msgstr "Husen worden as lege Wöörde tellt, wenn hör Wöörde sünner deese Tahl fällt."
+msgstr ""
+"Husen worden as lege Wöörde tellt, wenn hör Wöörde sünner deese Tahl fällt."
 
 #: ../../src/wui/building_statistics_menu.cc:366
 msgid "Small buildings"
@@ -8775,18 +9221,15 @@ msgstr "Arbeider-Instellens, wat na de Beschicken bruukt worden sallen"
 msgid "Start an expedition from this port after completion"
 msgstr "Begünn eene Söök, nadeem deese Muu beschickt worden is"
 
-#: ../../src/wui/constructionsitewindow.cc:356
-#: ../../src/wui/soldierlist.cc:490
+#: ../../src/wui/constructionsitewindow.cc:356 ../../src/wui/soldierlist.cc:490
 msgid "Prefer rookies"
 msgstr "Snöttbaarten vörtrecken"
 
-#: ../../src/wui/constructionsitewindow.cc:360
-#: ../../src/wui/soldierlist.cc:493
+#: ../../src/wui/constructionsitewindow.cc:360 ../../src/wui/soldierlist.cc:493
 msgid "Prefer heroes"
 msgstr "Helden vörtrecken"
 
-#: ../../src/wui/constructionsitewindow.cc:364
-#: ../../src/wui/soldierlist.cc:496
+#: ../../src/wui/constructionsitewindow.cc:364 ../../src/wui/soldierlist.cc:496
 msgid "No preference"
 msgstr "Nix vörtrecken"
 
@@ -8798,13 +9241,17 @@ msgstr "Instellens, wat na de Beschicken bruukt worden sallen"
 #: ../../src/wui/soldiercapacitycontrol.cc:85
 msgid ""
 "Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"
-msgstr "Tahl vun Steden minnern. Holl de Strg-Tast drückt, um de Tahl up de lüttsten verlöövten Weert to setten"
+msgstr ""
+"Tahl vun Steden minnern. Holl de Strg-Tast drückt, um de Tahl up de lüttsten "
+"verlöövten Weert to setten"
 
 #: ../../src/wui/constructionsitewindow.cc:503
 #: ../../src/wui/soldiercapacitycontrol.cc:94
 msgid ""
 "Increase capacity. Hold down Ctrl to set the capacity to the highest value"
-msgstr "Tahl vun Steden verhoogen. Holl de Strg-Tast drückt, um de Tahl up de grootsten verlöövten Weert to setten"
+msgstr ""
+"Tahl vun Steden verhoogen. Holl de Strg-Tast drückt, um de Tahl up de "
+"grootsten verlöövten Weert to setten"
 
 #: ../../src/wui/economy_options_window.cc:49
 msgid "Economy options"
@@ -8884,7 +9331,9 @@ msgstr "Vörinstellens"
 msgid ""
 "Error loading script for encyclopedia:\n"
 "%s"
-msgstr "Fehler bi’m Laden vun de Schrieven tum Naslaan:\n%s"
+msgstr ""
+"Fehler bi’m Laden vun de Schrieven tum Naslaan:\n"
+"%s"
 
 #: ../../src/wui/encyclopedia_window.cc:235 ../../src/wui/helpwindow.cc:147
 msgid "Broken Link"
@@ -8956,7 +9405,9 @@ msgstr "Bespejer stüren, um dat Gewest uttoförsken"
 msgid ""
 "You need to connect this flag to a scouting building before you can send a "
 "scout here."
-msgstr "Du muttst deese Fahn mit eenem Bespejer-Huus verbinnen, ehr du hier eenen Bespejer henstüren kannst."
+msgstr ""
+"Du muttst deese Fahn mit eenem Bespejer-Huus verbinnen, ehr du hier eenen "
+"Bespejer henstüren kannst."
 
 #: ../../src/wui/fieldaction.cc:493
 msgid "Place a flag"
@@ -9125,8 +9576,7 @@ msgid "Desired number of unemployed ferries:"
 msgstr "Enn-Tahl von arbeidslosen Fähren:"
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wui/game_chat_menu.cc:79
-#: ../../src/wui/interactive_gamebase.cc:138
+#: ../../src/wui/game_chat_menu.cc:79 ../../src/wui/interactive_gamebase.cc:138
 msgid "Script Console"
 msgstr "Ingaav för Schrievens"
 
@@ -9151,7 +9601,9 @@ msgstr "Gast is nich mehr verbunnen"
 msgid ""
 "A player disconnected from the game. An automatic save game has been "
 "created. Do you want to continue playing?"
-msgstr "Een Speler is nich mehr mit de Speel verbunnen. Dat Speel is automatisk sekert worden. Willst du widerspölen?"
+msgstr ""
+"Een Speler is nich mehr mit de Speel verbunnen. Dat Speel is automatisk "
+"sekert worden. Willst du widerspölen?"
 
 #. * TRANSLATORS: Button text
 #: ../../src/wui/game_client_disconnected.cc:87
@@ -9162,7 +9614,9 @@ msgstr "Wiederspölen"
 #: ../../src/wui/game_client_disconnected.cc:89
 msgid ""
 "Replace the disconnected player with the selected AI and continue playing"
-msgstr "De Speler, de nich mehr verbunnen is, mit de utköörten künstelk Speler utwesseln un wiederspölen"
+msgstr ""
+"De Speler, de nich mehr verbunnen is, mit de utköörten künstelk Speler "
+"utwesseln un wiederspölen"
 
 #. * TRANSLATORS: Dropdown tooltip to select the AI difficulty when a player
 #. has
@@ -9274,8 +9728,7 @@ msgstr "Willst du deeses Speel würrelk verlaten?"
 msgid "Error Saving Game!"
 msgstr "Fehler bi’m Sekern vum Speel!"
 
-#: ../../src/wui/game_message_menu.cc:53
-#: ../../src/wui/game_message_menu.cc:607
+#: ../../src/wui/game_message_menu.cc:53 ../../src/wui/game_message_menu.cc:607
 msgid "Messages: Inbox"
 msgstr "Inkomen Narichten"
 
@@ -9621,13 +10074,15 @@ msgstr "Minner de Tahl vun Waren, wat du hier verwahren willst"
 #. option explanation
 #: ../../src/wui/inputqueuedisplay.cc:141
 msgid "Hold down Shift to increase all ware types at the same time"
-msgstr "Holl de Umschalt-Tast drückt, um dat för all Waren up eenmaal to verhoogen"
+msgstr ""
+"Holl de Umschalt-Tast drückt, um dat för all Waren up eenmaal to verhoogen"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
 #: ../../src/wui/inputqueuedisplay.cc:144
 msgid "Hold down Shift to decrease all ware types at the same time"
-msgstr "Holl de Umschalt-Tast drückt, um dat för all Waren up eenmaal to minnern"
+msgstr ""
+"Holl de Umschalt-Tast drückt, um dat för all Waren up eenmaal to minnern"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
@@ -9874,7 +10329,9 @@ msgstr "Arbeidsgewest-Övernannerliggen verbargen"
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
-msgstr "Of Arbeidsgewesten, wat övernanner liggen, wiest worden sallen, wenn du eene Baustee baust"
+msgstr ""
+"Of Arbeidsgewesten, wat övernanner liggen, wiest worden sallen, wenn du eene "
+"Baustee baust"
 
 #: ../../src/wui/interactive_player.cc:487
 #, c-format
@@ -9893,12 +10350,20 @@ msgstr "Falsk Versioon"
 
 #: ../../src/wui/load_or_save_game.cc:147
 msgid ""
-"This replay was created with a different Widelands version. It might be compatible, but will more likely desync or even fail to load.\n"
+"This replay was created with a different Widelands version. It might be "
+"compatible, but will more likely desync or even fail to load.\n"
 "\n"
 "Please do not report any bugs that occur while watching this replay.\n"
 "\n"
 "Do you want to load the replay anyway?"
-msgstr "Deeses Upteken is mit eener annern Versioon vun Widelands maakt worden. Villicht gaht dat doch, aver wahrschienelker word sik dat verschuven of gaar nich eerst laden.\n\nBidde melle keene Fehlers, wat uptreden, as du deeses Upteken ankiekst.\n\nWillst du dat Upteken nu doch ankieken?"
+msgstr ""
+"Deeses Upteken is mit eener annern Versioon vun Widelands maakt worden. "
+"Villicht gaht dat doch, aver wahrschienelker word sik dat verschuven of gaar "
+"nich eerst laden.\n"
+"\n"
+"Bidde melle keene Fehlers, wat uptreden, as du deeses Upteken ankiekst.\n"
+"\n"
+"Willst du dat Upteken nu doch ankieken?"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
 #: ../../src/wui/load_or_save_game.cc:176
@@ -9961,7 +10426,8 @@ msgstr "Nich utgleken"
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../src/wui/map_tags.cc:48
 msgid "Players face different conditions or balancing is not checked"
-msgstr "Spelers hebben unnerschedelke Kondiesesjes of de Utglekenheid is nich nakiekt"
+msgstr ""
+"Spelers hebben unnerschedelke Kondiesesjes of de Utglekenheid is nich nakiekt"
 
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../src/wui/map_tags.cc:53
@@ -9986,7 +10452,9 @@ msgstr "Künstelk Schatten"
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../src/wui/map_tags.cc:63
 msgid "The map contains artifacts for the Artifacts win condition"
-msgstr "Deese Kaart hett künstelk Schatten för de Upgaav tum Winnen »Künstelk Schatten«"
+msgstr ""
+"Deese Kaart hett künstelk Schatten för de Upgaav tum Winnen »Künstelk "
+"Schatten«"
 
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../src/wui/map_tags.cc:68
@@ -10353,7 +10821,9 @@ msgstr[1] "%d Uptekens kunnen nich wegdaan worden."
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
-msgstr "Deese Datei hett de falsk Formaat un kann nich laden worden. Villicht wurr dat mit eener olleren Versioon vun Widelands maakt."
+msgstr ""
+"Deese Datei hett de falsk Formaat un kann nich laden worden. Villicht wurr "
+"dat mit eener olleren Versioon vun Widelands maakt."
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
@@ -10464,7 +10934,9 @@ msgstr "De Datum as deeses Speel sekert wurr"
 msgid ""
 "The filename that the game was saved under followed by the map’s name, or "
 "the map’s name followed by the last objective achieved."
-msgstr "De Datei-Naam vun de sekert Speel un dann de Naam vun de Kaart, of de Naam vun de Kaart un dann de tolest schafft Upgaav."
+msgstr ""
+"De Datei-Naam vun de sekert Speel un dann de Naam vun de Kaart, of de Naam "
+"vun de Kaart un dann de tolest schafft Upgaav."
 
 #. * TRANSLATORS: Tooltip header for the "Mode" column when choosing a
 #. game/replay to
@@ -10533,7 +11005,9 @@ msgstr "De Schipp-Fenster för deeses Schipp wiesen"
 #: ../../src/wui/seafaring_statistics_menu.cc:163
 #, c-format
 msgid "(You can use %s to go to the selected ship and open its window.)"
-msgstr "(Du kannst %s bruken, um to de utköört Schipp to gahn un sien Fenster optomaken.)"
+msgstr ""
+"(Du kannst %s bruken, um to de utköört Schipp to gahn un sien Fenster "
+"optomaken.)"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:178
@@ -10609,12 +11083,15 @@ msgstr "Schippen bi’m Umrüsten wiesen"
 
 #: ../../src/wui/shipwindow.cc:92
 #, c-format
-msgid ""
-"Damaged warships regain %u hitpoint per second when anchored in a port."
+msgid "Damaged warships regain %u hitpoint per second when anchored in a port."
 msgid_plural ""
 "Damaged warships regain %u hitpoints per second when anchored in a port."
-msgstr[0] "Ramponeert Kriegsschippen kriegen %u Gesundheid-Punkt pro Sekünn weer, wenn se in eener Muu vör Anker liggen."
-msgstr[1] "Ramponeert Kriegsschippen kriegen %u Gesundheid-Punkten pro Sekünn weer, wenn se in eener Muu vör Anker liggen."
+msgstr[0] ""
+"Ramponeert Kriegsschippen kriegen %u Gesundheid-Punkt pro Sekünn weer, wenn "
+"se in eener Muu vör Anker liggen."
+msgstr[1] ""
+"Ramponeert Kriegsschippen kriegen %u Gesundheid-Punkten pro Sekünn weer, "
+"wenn se in eener Muu vör Anker liggen."
 
 #: ../../src/wui/shipwindow.cc:117
 msgid "Scout towards the north west"
@@ -10679,9 +11156,9 @@ msgstr "Söök ofbreken"
 
 #: ../../src/wui/shipwindow.cc:279
 msgid ""
-"This expedition can’t be canceled, because the ship has no port to return "
-"to."
-msgstr "Kann de Söök nich ofbreken, wiel de Schipp keene Muu tum Torüggkomen hett."
+"This expedition can’t be canceled, because the ship has no port to return to."
+msgstr ""
+"Kann de Söök nich ofbreken, wiel de Schipp keene Muu tum Torüggkomen hett."
 
 #: ../../src/wui/shipwindow.cc:427 ../../src/wui/shipwindow.cc:432
 #: ../../src/wui/shipwindow.cc:437
@@ -10768,9 +11245,13 @@ msgstr "Eegene Musik im Speel hören"
 msgid ""
 "You can play custom in-game music by placing your own music files in "
 "‘<Widelands Home Directory>/music/custom_XX.*’ (where ‘XX’ are sequential "
-"two-digit numbers starting with 00). Supported file formats are ‘.mp3’ and "
-"‘.ogg’."
-msgstr "Du kannst eegene Musik im Speel hören, wenn du diene Musik-Dateien unner <Widelands-Heemverteeknis/music/custom_XX.*> ofleggst (waar »XX« nau twee Tahlen sünd, wat mit 00 begünnen un all um nau eens groter worden). Unnerstütt Dateiformaaten sünd ».mp3« un ».ogg«."
+"two-digit numbers starting with 00). Supported file formats are ‘.mp3’ and ‘."
+"ogg’."
+msgstr ""
+"Du kannst eegene Musik im Speel hören, wenn du diene Musik-Dateien unner "
+"<Widelands-Heemverteeknis/music/custom_XX.*> ofleggst (waar »XX« nau twee "
+"Tahlen sünd, wat mit 00 begünnen un all um nau eens groter worden). "
+"Unnerstütt Dateiformaaten sünd ».mp3« un ».ogg«."
 
 #: ../../src/wui/sound_options.cc:160
 msgctxt "sound_options"
@@ -10801,7 +11282,9 @@ msgstr "Umgevens-Gedrüüs"
 msgid ""
 "Sound is disabled either due to a problem with the sound driver, or because "
 "it was switched off at the command line."
-msgstr "Dat Gedrüüs is utknipst, wiel de Gedrüüs-Driever een Probleem hett of du dat vun de Oorderreeg so fastleggt hest."
+msgstr ""
+"Dat Gedrüüs is utknipst, wiel de Gedrüüs-Driever een Probleem hett of du dat "
+"vun de Oorderreeg so fastleggt hest."
 
 #. * TRANSLATORS: If this checkbox is ticked, all icons in the stock menu are
 #. drawn with

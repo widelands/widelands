@@ -1,6 +1,6 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
-# 
+#
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
@@ -24,12 +24,15 @@ msgstr ""
 "POT-Creation-Date: 2024-02-08 02:24+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2022-2024\n"
-"Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
+"Language-Team: Russian (http://app.transifex.com/widelands/widelands/"
+"language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:8
@@ -1346,8 +1349,8 @@ msgstr "собирает какао-бобы"
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:74
 msgctxt "amazons_building"
 msgid ""
-"The cocoa farmer working at this cocoa farm has no cleared soil to plant her"
-" seeds."
+"The cocoa farmer working at this cocoa farm has no cleared soil to plant her "
+"seeds."
 msgstr "Фермеру с фермы какао не хватает свободного места под посевы."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -1512,7 +1515,10 @@ msgid ""
 "This gold digger dwelling’s main vein is exhausted. Expect strongly "
 "diminished returns on investment. You should consider dismantling or "
 "destroying it."
-msgstr "Главная золотая жила хижины золотоискателя истощилась. Отныне отдача от затрат на ее использование сильно уменьшится. Быть может, вам стоит разрушить или разобрать это здание."
+msgstr ""
+"Главная золотая жила хижины золотоискателя истощилась. Отныне отдача от "
+"затрат на ее использование сильно уменьшится. Быть может, вам стоит "
+"разрушить или разобрать это здание."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:8
@@ -1548,9 +1554,11 @@ msgstr "Больше нет ни дичи, ни улова"
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:80
 msgctxt "amazons_building"
 msgid ""
-"The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any"
-" game or fish in her work area."
-msgstr "Охотник-собиратель не может найти дичь и рыбу в рабочей области вокруг своей хижины."
+"The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any "
+"game or fish in her work area."
+msgstr ""
+"Охотник-собиратель не может найти дичь и рыбу в рабочей области вокруг своей "
+"хижины."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:8
@@ -1610,7 +1618,10 @@ msgid ""
 "The liana cutter working at this site can’t find any tree in her work area. "
 "You should consider dismantling or destroying the building or building a "
 "jungle preserver’s hut."
-msgstr "Резчица лиан не может найти деревья в рабочей области вокруг своей хижины. Быть может, вам стоит разрушить или разобрать это сооружение или построить рядом хижину защитницы джунглей."
+msgstr ""
+"Резчица лиан не может найти деревья в рабочей области вокруг своей хижины. "
+"Быть может, вам стоит разрушить или разобрать это сооружение или построить "
+"рядом хижину защитницы джунглей."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:8
@@ -1833,7 +1844,9 @@ msgctxt "amazons_building"
 msgid ""
 "The stonecutter working at this stonecutter’s hut can’t find any rocks in "
 "her work area."
-msgstr "Камнетёс из этой каменоломни больше не может найти скалы в своей рабочей области."
+msgstr ""
+"Камнетёс из этой каменоломни больше не может найти скалы в своей рабочей "
+"области."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:8
@@ -1880,9 +1893,12 @@ msgstr "Главная каменная жила истощена"
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:94
 msgctxt "amazons_building"
 msgid ""
-"This stone mine’s main vein is exhausted. Expect strongly diminished returns"
-" on investment. You should consider dismantling or destroying it."
-msgstr "Основная жила гранита в этой шахте истощена. Отныне отдача от затрат на содержание шахты сильно уменьшится. Быть может, вам стоит разобрать или разрушить эту шахту."
+"This stone mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider dismantling or destroying it."
+msgstr ""
+"Основная жила гранита в этой шахте истощена. Отныне отдача от затрат на "
+"содержание шахты сильно уменьшится. Быть может, вам стоит разобрать или "
+"разрушить эту шахту."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:8
@@ -1921,9 +1937,10 @@ msgstr "Вода закончилась"
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:57
 msgctxt "amazons_building"
 msgid ""
-"The carrier working at this water gatherer’s hut can’t find any water in its"
-" vicinity."
-msgstr "Носильщик, работающий у этого колодца, не может найти воду в его окрестности."
+"The carrier working at this water gatherer’s hut can’t find any water in its "
+"vicinity."
+msgstr ""
+"Носильщик, работающий у этого колодца, не может найти воду в его окрестности."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:8
@@ -1973,7 +1990,10 @@ msgid ""
 "The woodcutter working at this woodcutter’s hut can’t find any trees in her "
 "work area. You should consider dismantling or destroying the building or "
 "building a jungle preserver’s hut."
-msgstr "Лесоруб не может найти деревьев в рабочей области вокруг своей хижины. Быть может вам стоит разрушить или разобрать это сооружение, или построить рядом хижину защитницы джунглей."
+msgstr ""
+"Лесоруб не может найти деревьев в рабочей области вокруг своей хижины. Быть "
+"может вам стоит разрушить или разобрать это сооружение, или построить рядом "
+"хижину защитницы джунглей."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:170
@@ -2108,7 +2128,10 @@ msgctxt "atlanteans_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "Главная жила этой угольной шахты истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Быть может, вам стоит разрушить или разобрать её."
+msgstr ""
+"Главная жила этой угольной шахты истощилась. Отныне отдача от затрат на "
+"содержание шахты сильно уменьшится. Быть может, вам стоит разрушить или "
+"разобрать её."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:8
@@ -2135,7 +2158,10 @@ msgctxt "atlanteans_building"
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider dismantling or destroying it."
-msgstr "Главная жила этой кристальной шахты истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Быть может, вам стоит разрушить эту шахту, или разобрать её."
+msgstr ""
+"Главная жила этой кристальной шахты истощилась. Отныне отдача от затрат на "
+"содержание шахты сильно уменьшится. Быть может, вам стоит разрушить эту "
+"шахту, или разобрать её."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:8
@@ -2155,8 +2181,7 @@ msgstr "собирает кукурузу"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:75
 msgctxt "atlanteans_building"
-msgid ""
-"The farmer working at this farm has no cleared soil to plant his seeds."
+msgid "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "У фермера из этой фермы нет почвы пригодной для посева."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -2194,7 +2219,10 @@ msgid ""
 "water where he can breed fish in his work area. Remember that you can only "
 "regenerate your fish resources if there ever were some fish in the vicinity "
 "in the first place."
-msgstr "Рыбовод из этого дома не может найти водоём в своей рабочей области для разведения рыбы. Помните, что для воспроизводства рыбных ресурсов в окрестностях должна быть рыба."
+msgstr ""
+"Рыбовод из этого дома не может найти водоём в своей рабочей области для "
+"разведения рыбы. Помните, что для воспроизводства рыбных ресурсов в "
+"окрестностях должна быть рыба."
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
 msgid "The fishing grounds are full"
@@ -2221,7 +2249,10 @@ msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area. Remember that you can increase the number of existing fish by "
 "building a fish breeder’s house."
-msgstr "Рыболов не может найти рыбу в своей рабочей области вокруг этого дома рыболова. Помните, что поголовье рыбы можно увеличить, если построить дом рыбовода."
+msgstr ""
+"Рыболов не может найти рыбу в своей рабочей области вокруг этого дома "
+"рыболова. Помните, что поголовье рыбы можно увеличить, если построить дом "
+"рыбовода."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:8
@@ -2251,7 +2282,10 @@ msgctxt "atlanteans_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "Главная жила этой золотой шахты истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Быть может, вам стоит разрушить или разобрать её."
+msgstr ""
+"Главная жила этой золотой шахты истощилась. Отныне отдача от затрат на "
+"содержание шахты сильно уменьшится. Быть может, вам стоит разрушить или "
+"разобрать её."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:8
@@ -2300,7 +2334,9 @@ msgctxt "atlanteans_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr "Охотник, работающий здесь, не может найти дичь в рабочей области вокруг своего Дома охотника."
+msgstr ""
+"Охотник, работающий здесь, не может найти дичь в рабочей области вокруг "
+"своего Дома охотника."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:8
@@ -2353,7 +2389,10 @@ msgctxt "atlanteans_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "Главная жила этого железного рудника истощилась. Отныне отдача от затрат на содержание рудника сильно уменьшится. Быть может, вам стоит разрушить этот рудник, или разобрать его."
+msgstr ""
+"Главная жила этого железного рудника истощилась. Отныне отдача от затрат на "
+"содержание рудника сильно уменьшится. Быть может, вам стоит разрушить этот "
+"рудник, или разобрать его."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:8
@@ -2388,9 +2427,10 @@ msgstr "добывает гранит"
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:51
 msgctxt "atlanteans_building"
 msgid ""
-"The stonecutter working at this quarry can’t find any rocks in his work "
-"area."
-msgstr "Камнетёс из этой каменоломни больше не может найти скалы в своей рабочей области."
+"The stonecutter working at this quarry can’t find any rocks in his work area."
+msgstr ""
+"Камнетёс из этой каменоломни больше не может найти скалы в своей рабочей "
+"области."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/sawmill/init.lua:8
@@ -2606,9 +2646,12 @@ msgstr "Дом лесоруба"
 msgctxt "atlanteans_building"
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
-"his work area. You should consider dismantling or destroying the building or"
-" building a forester’s house."
-msgstr "Дровосек не может найти деревьев в рабочей области вокруг этого дома дровосека. Быть может вам стоит разрушить или разобрать это сооружение, или построить рядом дом лесника."
+"his work area. You should consider dismantling or destroying the building or "
+"building a forester’s house."
+msgstr ""
+"Дровосек не может найти деревьев в рабочей области вокруг этого дома "
+"дровосека. Быть может вам стоит разрушить или разобрать это сооружение, или "
+"построить рядом дом лесника."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:8
@@ -2719,7 +2762,10 @@ msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Главная жила этой угольной шахты истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Быть может, вам стоит улучшить эту шахту, разрушить, или разобрать её."
+msgstr ""
+"Главная жила этой угольной шахты истощилась. Отныне отдача от затрат на "
+"содержание шахты сильно уменьшится. Быть может, вам стоит улучшить эту "
+"шахту, разрушить, или разобрать её."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:8
@@ -2739,7 +2785,10 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Главная жила этой угольной шахты истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Эту шахту нельзя улучшить; быть может, вам стоит разрушить или разобрать её."
+msgstr ""
+"Главная жила этой угольной шахты истощилась. Отныне отдача от затрат на "
+"содержание шахты сильно уменьшится. Эту шахту нельзя улучшить; быть может, "
+"вам стоит разрушить или разобрать её."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:8
@@ -2761,8 +2810,7 @@ msgstr "собирает пшеницу"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:94
 msgctxt "barbarians_building"
-msgid ""
-"The farmer working at this farm has no cleared soil to plant his seeds."
+msgid "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "У фермера с этой фермы нет почвы пригодной для посева."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -2782,7 +2830,9 @@ msgctxt "barbarians_building"
 msgid ""
 "The fisher working out of this fisher’s hut can’t find any fish in his work "
 "area."
-msgstr "Рыболов, работающий в этом Домике рыболова не может найти рыбу в своей рабочей области."
+msgstr ""
+"Рыболов, работающий в этом Домике рыболова не может найти рыбу в своей "
+"рабочей области."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/init.lua:8
@@ -2802,7 +2852,10 @@ msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Главная жила этой золотой шахты истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Быть может, вам стоит улучшить эту шахту, разрушить, или разобрать её."
+msgstr ""
+"Главная жила этой золотой шахты истощилась. Отныне отдача от затрат на "
+"содержание шахты сильно уменьшится. Быть может, вам стоит улучшить эту "
+"шахту, разрушить, или разобрать её."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:8
@@ -2822,7 +2875,10 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Главная жила этой золотой шахты истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Эту шахту нельзя улучшить; быть может, вам стоит разрушить или разобрать её."
+msgstr ""
+"Главная жила этой золотой шахты истощилась. Отныне отдача от затрат на "
+"содержание шахты сильно уменьшится. Эту шахту нельзя улучшить; быть может, "
+"вам стоит разрушить или разобрать её."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:8
@@ -2848,7 +2904,10 @@ msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "Главная жила этого гранитного рудника истощилась. Отныне отдача от затрат на содержание рудника сильно уменьшится. Этот рудник нельзя улучшить; быть может, вам стоит разрушить или разобрать его."
+msgstr ""
+"Главная жила этого гранитного рудника истощилась. Отныне отдача от затрат на "
+"содержание рудника сильно уменьшится. Этот рудник нельзя улучшить; быть "
+"может, вам стоит разрушить или разобрать его."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:8
@@ -2886,7 +2945,10 @@ msgid ""
 "The hunter working out of this hunter’s hut can’t find any game in his work "
 "area. Remember that you can build a gamekeeper’s hut to release more game "
 "into the wild."
-msgstr "Охотник не может найти дичь в рабочей области вокруг этой хижины охотника. Не забывайте, что поголовье дичи можно увеличить, если построить хижину егеря."
+msgstr ""
+"Охотник не может найти дичь в рабочей области вокруг этой хижины охотника. "
+"Не забывайте, что поголовье дичи можно увеличить, если построить хижину "
+"егеря."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:8
@@ -2906,7 +2968,10 @@ msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Главная жила этого железного рудника истощилась. Отныне отдача от затрат на содержание рудника сильно уменьшится. Быть может, вам стоит улучшить этот рудник, разрушить или разобрать его."
+msgstr ""
+"Главная жила этого железного рудника истощилась. Отныне отдача от затрат на "
+"содержание рудника сильно уменьшится. Быть может, вам стоит улучшить этот "
+"рудник, разрушить или разобрать его."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:8
@@ -2926,7 +2991,10 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Главная жила этого железного рудника истощилась. Отныне отдача от затрат на содержание рудника сильно уменьшится. Этот рудник нельзя улучшить; быть может, вам стоит разрушить или разобрать его."
+msgstr ""
+"Главная жила этого железного рудника истощилась. Отныне отдача от затрат на "
+"содержание рудника сильно уменьшится. Этот рудник нельзя улучшить; быть "
+"может, вам стоит разрушить или разобрать его."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:8
@@ -2951,7 +3019,10 @@ msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
 "work area. You should consider dismantling or destroying the building or "
 "building a ranger’s hut."
-msgstr "Дровосек, работающий в этой хижине дровосека, не может найти деревьев в своей рабочей области. Быть может вам стоит разрушить или разобрать это сооружение, или построить рядом хижину лесничего."
+msgstr ""
+"Дровосек, работающий в этой хижине дровосека, не может найти деревьев в "
+"своей рабочей области. Быть может вам стоит разрушить или разобрать это "
+"сооружение, или построить рядом хижину лесничего."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:8
@@ -2998,7 +3069,9 @@ msgstr "Каменоломня"
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Камнетёс из этой каменоломни больше не может найти скалы в своей рабочей области."
+msgstr ""
+"Камнетёс из этой каменоломни больше не может найти скалы в своей рабочей "
+"области."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:8
@@ -3184,7 +3257,10 @@ msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Главная жила этой угольной шахты истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Быть может, вам стоит улучшить эту шахту, разрушить, или разобрать её."
+msgstr ""
+"Главная жила этой угольной шахты истощилась. Отныне отдача от затрат на "
+"содержание шахты сильно уменьшится. Быть может, вам стоит улучшить эту "
+"шахту, разрушить, или разобрать её."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:8
@@ -3198,7 +3274,10 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Главная жила этой угольной шахты истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Эту шахту нельзя улучшить; быть может, вам стоит разрушить или разобрать её."
+msgstr ""
+"Главная жила этой угольной шахты истощилась. Отныне отдача от затрат на "
+"содержание шахты сильно уменьшится. Эту шахту нельзя улучшить; быть может, "
+"вам стоит разрушить или разобрать её."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:8
@@ -3220,8 +3299,7 @@ msgstr "Ферма"
 
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:77
 msgctxt "empire_building"
-msgid ""
-"The farmer working at this farm has no cleared soil to plant his seeds."
+msgid "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "У фермера с этой фермы нет почвы пригодной для посева."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -3241,7 +3319,9 @@ msgctxt "empire_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area."
-msgstr "Рыболов, работающий в этом Доме рыболова не может найти рыбу в своей рабочей области."
+msgstr ""
+"Рыболов, работающий в этом Доме рыболова не может найти рыбу в своей рабочей "
+"области."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:8
@@ -3260,7 +3340,10 @@ msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Главная жила этой золотой шахты истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Быть может, вам стоит улучшить эту шахту, разрушить, или разобрать её."
+msgstr ""
+"Главная жила этой золотой шахты истощилась. Отныне отдача от затрат на "
+"содержание шахты сильно уменьшится. Быть может, вам стоит улучшить эту "
+"шахту, разрушить, или разобрать её."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:8
@@ -3274,7 +3357,10 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Главная жила этой золотой шахты истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Эту шахту нельзя улучшить; быть может, вам стоит разрушить или разобрать её."
+msgstr ""
+"Главная жила этой золотой шахты истощилась. Отныне отдача от затрат на "
+"содержание шахты сильно уменьшится. Эту шахту нельзя улучшить; быть может, "
+"вам стоит разрушить или разобрать её."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:8
@@ -3288,7 +3374,9 @@ msgctxt "empire_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr "Охотник, работающий в Доме охотника, не может найти дичь в своей рабочей области."
+msgstr ""
+"Охотник, работающий в Доме охотника, не может найти дичь в своей рабочей "
+"области."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:8
@@ -3307,7 +3395,10 @@ msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Главная жила этого железного рудника истощилась. Отныне отдача от затрат на содержание рудника сильно уменьшится. Быть может, вам стоит улучшить этот рудник, разрушить или разобрать его."
+msgstr ""
+"Главная жила этого железного рудника истощилась. Отныне отдача от затрат на "
+"содержание рудника сильно уменьшится. Быть может, вам стоит улучшить этот "
+"рудник, разрушить или разобрать его."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:8
@@ -3321,7 +3412,10 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Главная жила этого железного рудника истощилась. Отныне отдача от затрат на содержание рудника сильно уменьшится. Этот рудник нельзя улучшить; быть может, вам стоит разрушить или разобрать его."
+msgstr ""
+"Главная жила этого железного рудника истощилась. Отныне отдача от затрат на "
+"содержание рудника сильно уменьшится. Этот рудник нельзя улучшить; быть "
+"может, вам стоит разрушить или разобрать его."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:8
@@ -3333,9 +3427,12 @@ msgstr "Дом дровосека"
 msgctxt "empire_building"
 msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
-"his work area. You should consider dismantling or destroying the building or"
-" building a forester’s house."
-msgstr "Дровосек не может найти деревьев в рабочей области вокруг этого дома дровосека. Быть может вам стоит разрушить или разобрать это сооружение, или построить рядом дом лесника."
+"his work area. You should consider dismantling or destroying the building or "
+"building a forester’s house."
+msgstr ""
+"Дровосек не может найти деревьев в рабочей области вокруг этого дома "
+"дровосека. Быть может вам стоит разрушить или разобрать это сооружение, или "
+"построить рядом дом лесника."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:8
@@ -3367,7 +3464,10 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider enhancing, dismantling or "
 "destroying it."
-msgstr "Главная жила этой мраморной шахты истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Быть может, вам стоит улучшить эту шахту, разрушить, или разобрать её."
+msgstr ""
+"Главная жила этой мраморной шахты истощилась. Отныне отдача от затрат на "
+"содержание шахты сильно уменьшится. Быть может, вам стоит улучшить эту "
+"шахту, разрушить, или разобрать её."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:8
@@ -3381,7 +3481,10 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "Главная жила этой мраморной шахты истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Эту шахту нельзя улучшить; быть может, вам стоит разрушить или разобрать её."
+msgstr ""
+"Главная жила этой мраморной шахты истощилась. Отныне отдача от затрат на "
+"содержание шахты сильно уменьшится. Эту шахту нельзя улучшить; быть может, "
+"вам стоит разрушить или разобрать её."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/mill/init.lua:8
@@ -3420,7 +3523,9 @@ msgstr "добывает мрамор"
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Камнетёс из этой каменоломни больше не может найти скалы в своей рабочей области."
+msgstr ""
+"Камнетёс из этой каменоломни больше не может найти скалы в своей рабочей "
+"области."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:8
@@ -3510,7 +3615,8 @@ msgctxt "empire_building"
 msgid ""
 "The vine farmer working at this vineyard has no cleared soil to plant his "
 "grapevines."
-msgstr "У фермера с этого виноградника нет почвы пригодной для выращивания винограда"
+msgstr ""
+"У фермера с этого виноградника нет почвы пригодной для выращивания винограда"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:8
@@ -3597,7 +3703,11 @@ msgid ""
 "area. Please make sure there is a working clay pit nearby and the aqua farm "
 "is supplied with all needed wares, or consider dismantling or destroying "
 "this building."
-msgstr "Рыболов, работающий на этой акваферме, не может найти зарыбленные пруды в своей рабочей области. Пожалуйста, убедитесь, что поблизости находится рабочий глиняный карьер, а акваферма снабжается всеми необходимыми товарами, либо рассмотрите возможность демонтажа или разрушения этого здания."
+msgstr ""
+"Рыболов, работающий на этой акваферме, не может найти зарыбленные пруды в "
+"своей рабочей области. Пожалуйста, убедитесь, что поблизости находится "
+"рабочий глиняный карьер, а акваферма снабжается всеми необходимыми товарами, "
+"либо рассмотрите возможность демонтажа или разрушения этого здания."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:8
@@ -3677,9 +3787,12 @@ msgstr "Цветы закончились"
 msgctxt "frisians_building"
 msgid ""
 "The beekeeper working at this beekeeper’s house can’t find any flowering "
-"fields or bushes in his work area. You should consider building another farm"
-" or berry farm nearby, or dismantling or destroying this building."
-msgstr "Пасечник, работающий на этой пасеке, не может найти никаких цветущих полей или кустарников в своей рабочей области. Вам стоит построить поблизости какую-нибудь ферму или ягодник; или же разобрать или разрушить это здание."
+"fields or bushes in his work area. You should consider building another farm "
+"or berry farm nearby, or dismantling or destroying this building."
+msgstr ""
+"Пасечник, работающий на этой пасеке, не может найти никаких цветущих полей "
+"или кустарников в своей рабочей области. Вам стоит построить поблизости "
+"какую-нибудь ферму или ягодник; или же разобрать или разрушить это здание."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:8
@@ -3752,9 +3865,13 @@ msgctxt "frisians_building"
 msgid ""
 "The charcoal burner working at this charcoal burner’s house can’t find any "
 "clay ponds in his work area. Please make sure there is a working clay pit "
-"nearby and the charcoal burner’s house is supplied with all needed wares, or"
-" consider dismantling or destroying this building."
-msgstr "Углежог из этого дома не может найти не вычерпанные глинистые пруды в своей рабочей области. Рассмотрите вопрос о выкапывании рядом глиняного карьера для обеспечения этого углежога всем необходимым, либо разобрать или разрушить это строение."
+"nearby and the charcoal burner’s house is supplied with all needed wares, or "
+"consider dismantling or destroying this building."
+msgstr ""
+"Углежог из этого дома не может найти не вычерпанные глинистые пруды в своей "
+"рабочей области. Рассмотрите вопрос о выкапывании рядом глиняного карьера "
+"для обеспечения этого углежога всем необходимым, либо разобрать или "
+"разрушить это строение."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:8
@@ -3788,7 +3905,10 @@ msgid ""
 "The clay digger working at this clay pit can’t find any level ground in his "
 "work area. Consider dismantling this clay pit and rebuilding it somewhere "
 "else."
-msgstr "Землекоп, работающий в этом Глиняном карьере, не может найти ни одного уровня в своей рабочей области. Подумайте о демонтаже этого глиняного карьера и постройке его в другом месте."
+msgstr ""
+"Землекоп, работающий в этом Глиняном карьере, не может найти ни одного "
+"уровня в своей рабочей области. Подумайте о демонтаже этого глиняного "
+"карьера и постройке его в другом месте."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:8
@@ -3801,7 +3921,10 @@ msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Главная жила этой угольной шахты истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Быть может, вам стоит улучшить эту шахту, разрушить, или разобрать её."
+msgstr ""
+"Главная жила этой угольной шахты истощилась. Отныне отдача от затрат на "
+"содержание шахты сильно уменьшится. Быть может, вам стоит улучшить эту "
+"шахту, разрушить, или разобрать её."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:8
@@ -3815,7 +3938,10 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Главная жила этой угольной шахты истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Эту шахту нельзя улучшить; быть может, вам стоит разрушить или разобрать её."
+msgstr ""
+"Главная жила этой угольной шахты истощилась. Отныне отдача от затрат на "
+"содержание шахты сильно уменьшится. Эту шахту нельзя улучшить; быть может, "
+"вам стоит разрушить или разобрать её."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:8
@@ -3842,7 +3968,10 @@ msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
 "berry bushes in his work area. You should consider building another berry "
 "farm, or dismantling or destroying this building."
-msgstr "Собиратель, работающий в этом доме собирателя, не может найти ягодные кусты в своей рабочей области. Рассмотрите вопрос строительства другого ягодника, либо разберите или разрушьте это здание."
+msgstr ""
+"Собиратель, работающий в этом доме собирателя, не может найти ягодные кусты "
+"в своей рабочей области. Рассмотрите вопрос строительства другого ягодника, "
+"либо разберите или разрушьте это здание."
 
 #: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:7
 msgctxt "frisians_building"
@@ -3883,9 +4012,9 @@ msgstr "собирает ячмень"
 
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:95
 msgctxt "frisians_building"
-msgid ""
-"The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr "Фермер, работающий на этой ферме, не может найти почву пригодную для посева."
+msgid "The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr ""
+"Фермер, работающий на этой ферме, не может найти почву пригодную для посева."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:8
@@ -3904,7 +4033,9 @@ msgctxt "frisians_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area."
-msgstr "Рыболов, работающий в этом Доме рыболова, не может найти рыбу в своей рабочей области."
+msgstr ""
+"Рыболов, работающий в этом Доме рыболова, не может найти рыбу в своей "
+"рабочей области."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:8
@@ -3929,7 +4060,10 @@ msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Главная жила этой золотой шахты истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Быть может, вам стоит улучшить эту шахту, разрушить, или разобрать её."
+msgstr ""
+"Главная жила этой золотой шахты истощилась. Отныне отдача от затрат на "
+"содержание шахты сильно уменьшится. Быть может, вам стоит улучшить эту "
+"шахту, разрушить, или разобрать её."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:8
@@ -3943,7 +4077,10 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Главная жила этой золотой шахты истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Эту шахту нельзя улучшить; быть может, вам стоит разрушить или разобрать её."
+msgstr ""
+"Главная жила этой золотой шахты истощилась. Отныне отдача от затрат на "
+"содержание шахты сильно уменьшится. Эту шахту нельзя улучшить; быть может, "
+"вам стоит разрушить или разобрать её."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:8
@@ -3969,7 +4106,9 @@ msgctxt "frisians_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr "Охотник, работающий здесь, не может найти дичь в рабочей области вокруг своего Дома охотника."
+msgstr ""
+"Охотник, работающий здесь, не может найти дичь в рабочей области вокруг "
+"своего Дома охотника."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:8
@@ -3982,7 +4121,10 @@ msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Главная жила этого железного рудника истощилась. Отныне отдача от затрат на содержание рудника сильно уменьшится. Быть может, вам стоит улучшить этот рудник, разрушить или разобрать его."
+msgstr ""
+"Главная жила этого железного рудника истощилась. Отныне отдача от затрат на "
+"содержание рудника сильно уменьшится. Быть может, вам стоит улучшить этот "
+"рудник, разрушить или разобрать его."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:8
@@ -3996,7 +4138,10 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Главная жила этого рудника истощилась. Отныне отдача от затрат на содержание рудника сильно уменьшится. Этот рудник нельзя улучшить; быть может, вам стоит разрушить или разобрать его."
+msgstr ""
+"Главная жила этого рудника истощилась. Отныне отдача от затрат на содержание "
+"рудника сильно уменьшится. Этот рудник нельзя улучшить; быть может, вам "
+"стоит разрушить или разобрать его."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:8
@@ -4020,7 +4165,9 @@ msgstr "Каменоломня"
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Камнетёс из этой каменоломни больше не может найти камня в своей рабочей области."
+msgstr ""
+"Камнетёс из этой каменоломни больше не может найти камня в своей рабочей "
+"области."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:8
@@ -4058,7 +4205,8 @@ msgctxt "frisians_building"
 msgid ""
 "The reed farmer working at this reed farm has no cleared soil to plant his "
 "seeds."
-msgstr "Заготовщик тростника не может найти свободное место для засеивания семян"
+msgstr ""
+"Заготовщик тростника не может найти свободное место для засеивания семян"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:8
@@ -4090,7 +4238,10 @@ msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Главная жила этих каменных копей истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Быть может, вам стоит её улучшить, разрушить или разобрать."
+msgstr ""
+"Главная жила этих каменных копей истощилась. Отныне отдача от затрат на "
+"содержание шахты сильно уменьшится. Быть может, вам стоит её улучшить, "
+"разрушить или разобрать."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:8
@@ -4104,7 +4255,10 @@ msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Главная жила этих каменных копей истощилась. Отныне отдача от затрат на содержание шахты сильно уменьшится. Эту шахту нельзя улучшить; быть может, вам стоит разрушить или разобрать её."
+msgstr ""
+"Главная жила этих каменных копей истощилась. Отныне отдача от затрат на "
+"содержание шахты сильно уменьшится. Эту шахту нельзя улучшить; быть может, "
+"вам стоит разрушить или разобрать её."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:8
@@ -4202,9 +4356,12 @@ msgstr "Дом лесоруба"
 msgctxt "frisians_building"
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
-"his work area. You should consider dismantling or destroying the building or"
-" building a forester’s house."
-msgstr "Лесоруб не может найти деревьев в рабочей области вокруг этого дома лесоруба. Быть может вам стоит разрушить или разобрать это сооружение, или построить рядом дом лесника."
+"his work area. You should consider dismantling or destroying the building or "
+"building a forester’s house."
+msgstr ""
+"Лесоруб не может найти деревьев в рабочей области вокруг этого дома "
+"лесоруба. Быть может вам стоит разрушить или разобрать это сооружение, или "
+"построить рядом дом лесника."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:8
@@ -5534,7 +5691,8 @@ msgstr "Открытие"
 #: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:13
 msgid ""
 "Start the game with three ships on the ocean and only a handful of supplies"
-msgstr "Начать игру с тремя кораблями посреди океана и небольшим количеством ресурсов"
+msgstr ""
+"Начать игру с тремя кораблями посреди океана и небольшим количеством ресурсов"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/fortified_village.lua:11
@@ -5610,7 +5768,9 @@ msgstr "Бедный Гамлет"
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can’t successfully start from this."
-msgstr "Начать игру лишь со складом и просто нулевой экономикой. Внимание: ИИ не может полноценно играть в этом режиме."
+msgstr ""
+"Начать игру лишь со складом и просто нулевой экономикой. Внимание: ИИ не "
+"может полноценно играть в этом режиме."
 
 #: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:46
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
@@ -5624,7 +5784,9 @@ msgstr "Будь осторожен!"
 msgid ""
 "You only have exactly the wares for each tool you will need to start your "
 "economy. Make sure no unneeded tool is created."
-msgstr "Вы начинаете с товарами, которые хватит лишь для изготовления необходимых инструментов. Будьте внимательны, не изготовьте ненужного."
+msgstr ""
+"Вы начинаете с товарами, которые хватит лишь для изготовления необходимых "
+"инструментов. Будьте внимательны, не изготовьте ненужного."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/struggling_outpost.lua:11
@@ -5643,9 +5805,10 @@ msgstr "Колония первопроходцев"
 #: ../../data/tribes/initialization/frisians/starting_conditions/struggling_outpost.lua:13
 msgid ""
 "Start the game with just your headquarters and very few wares for "
-"bootstrapping an economy. Warning: the AI can’t successfully start from "
-"this."
-msgstr "Начать игру лишь со штабом и кучкой товаров для подъема экономики. Внимание: ИИ не может полноценно играть в этом режиме."
+"bootstrapping an economy. Warning: the AI can’t successfully start from this."
+msgstr ""
+"Начать игру лишь со штабом и кучкой товаров для подъема экономики. Внимание: "
+"ИИ не может полноценно играть в этом режиме."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/trading_outpost.lua:11
@@ -5664,9 +5827,10 @@ msgstr "Торговая застава"
 #: ../../data/tribes/initialization/empire/starting_conditions/trading_outpost.lua:13
 #: ../../data/tribes/initialization/frisians/starting_conditions/trading_outpost.lua:13
 msgid ""
-"If this player runs low on important wares, they will be replenished for "
-"free"
-msgstr "Если этому игроку не хватает на необходимые товары, то они будут пополняться бесплатно"
+"If this player runs low on important wares, they will be replenished for free"
+msgstr ""
+"Если этому игроку не хватает на необходимые товары, то они будут пополняться "
+"бесплатно"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/village.lua:11
@@ -5704,7 +5868,10 @@ msgstr "Это племя известно из древнейших леген�
 msgid ""
 "You have only one iron for each tool you will need to start your economy. "
 "Make sure no unneeded tool is created."
-msgstr "Развивать вашу экономику придется, имея тольок по одному куску железа на каждое орудие. Будьте внимательны, чтобы не спустить железо на ненужный инструмент."
+msgstr ""
+"Развивать вашу экономику придется, имея тольок по одному куску железа на "
+"каждое орудие. Будьте внимательны, чтобы не спустить железо на ненужный "
+"инструмент."
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/barbarians/init.lua:12
@@ -8837,7 +9004,7 @@ msgstr "Деревянное копьё"
 #: ../../data/tribes/wares/spider_silk/init.lua:8
 msgctxt "ware"
 msgid "Spider Silk"
-msgstr "Паучий шелк"
+msgstr "Паутина"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spidercloth/init.lua:8

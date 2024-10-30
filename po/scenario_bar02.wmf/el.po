@@ -1,7 +1,8 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
-# 
+#
 # Translators:
+# Alexandros Koutroulis, 2024
 # erimitis, 2018
 # Panos Ioannidis <panos.ioannidis@gmail.com>, 2018,2020
 # Philip Prescott-Decie <presdec@gmail.com>, 2018
@@ -11,8 +12,9 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-03-07 02:19+0000\n"
 "PO-Revision-Date: 2015-02-03 14:36+0000\n"
-"Last-Translator: Panos Ioannidis <panos.ioannidis@gmail.com>, 2018,2020\n"
-"Language-Team: Greek (http://app.transifex.com/widelands/widelands/language/el/)\n"
+"Last-Translator: Alexandros Koutroulis, 2024\n"
+"Language-Team: Greek (http://app.transifex.com/widelands/widelands/language/"
+"el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,7 +25,7 @@ msgstr ""
 #. other occurences.
 #: ../../data/campaigns/bar02.wmf/scripting/starting_conditions.lua:60
 msgid "Ondun"
-msgstr ""
+msgstr "Οντούν"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:18
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:20
@@ -32,7 +34,8 @@ msgstr "Φτιάξτε μια βασική οικονομία"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:21
 msgid "Start collecting basic building materials, and fortify the camp."
-msgstr "Ξεκινήστε τη συλλογή βασικών δομικών υλικών και οχυρώστε το στρατόπεδο."
+msgstr ""
+"Ξεκινήστε τη συλλογή βασικών δομικών υλικών και οχυρώστε το στρατόπεδο."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:22
 msgid "Build a lumberjack’s hut"
@@ -56,7 +59,8 @@ msgstr "Φτιάξτε ένα φυλάκιο στα ανατολικά σύνο�
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "You should eventually also build a reed yard and a lime kiln."
-msgstr "Θα πρέπει τέλος να φτιάξετε επίσης έναν καλαμόκηπο και μια ασβεστοκάμινο."
+msgstr ""
+"Θα πρέπει τέλος να φτιάξετε επίσης έναν καλαμόκηπο και μια ασβεστοκάμινο."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:32
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:34
@@ -65,7 +69,9 @@ msgstr "Δημιουργήστε μια μικρή οικονομία τροφί
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:35
 msgid "Build up a basic food economy to provide your people with food."
-msgstr "Δημιουργήστε μια βασική οικονομία τροφίμων για να παρέχετε στους ανθρώπους σας φαγητό."
+msgstr ""
+"Δημιουργήστε μια βασική οικονομία τροφίμων για να παρέχετε στους ανθρώπους "
+"σας φαγητό."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 msgid "Build a fisher’s hut"
@@ -100,7 +106,9 @@ msgstr "Θυμηθείτε να φτιάξετε ένα βουστάσιο"
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
-msgstr "Καθώς οι δρόμοι σας μακραίνουν και η οικονομία σας μεγαλώνει, θα πρέπει να αξιοποιήσετε τα βόδια σας για να βοηθήσουν στην ταχύτερη μεταφορά των υλικών."
+msgstr ""
+"Καθώς οι δρόμοι σας μακραίνουν και η οικονομία σας μεγαλώνει, θα πρέπει να "
+"αξιοποιήσετε τα βόδια σας για να βοηθήσουν στην ταχύτερη μεταφορά των υλικών."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:55
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:57
@@ -111,7 +119,10 @@ msgstr "Φτιάξτε έναν πύργο"
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr "Φτιάξτε έναν πύργο στα βορειοανατολικά σύνορα της επικράτειάς σας για να αποκτήσετε μεγαλύτερη οπτική εμβέλεια και να προστατέψετε τον λαό σας από ξαφνικές επιθέσεις εχθρών."
+msgstr ""
+"Φτιάξτε έναν πύργο στα βορειοανατολικά σύνορα της επικράτειάς σας για να "
+"αποκτήσετε μεγαλύτερη οπτική εμβέλεια και να προστατέψετε τον λαό σας από "
+"ξαφνικές επιθέσεις εχθρών."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:63
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:65
@@ -122,7 +133,9 @@ msgstr "Εξερευνήστε περαιτέρω"
 msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
-msgstr "Φτιάξτε περισσότερα στρατιωτικά κτίρια για να εξερευνήσετε την περιοχή γύρω από το αρχηγείο σας και να σιγουρέψετε την ασφάλεια του λαού σας."
+msgstr ""
+"Φτιάξτε περισσότερα στρατιωτικά κτίρια για να εξερευνήσετε την περιοχή γύρω "
+"από το αρχηγείο σας και να σιγουρέψετε την ασφάλεια του λαού σας."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:71
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:73
@@ -134,7 +147,10 @@ msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr "Επεκτείνετε την επικράτειά σας στα βουνά, στείλτε γεωλόγους να αναζητήσουν ορυκτά και άνθρακα, και δημιουργήστε μια εξορυκτική οικονομία, με ορυχεία, ταβέρνες, χυτήριο και μεταλλουργείο."
+msgstr ""
+"Επεκτείνετε την επικράτειά σας στα βουνά, στείλτε γεωλόγους να αναζητήσουν "
+"ορυκτά και άνθρακα, και δημιουργήστε μια εξορυκτική οικονομία, με ορυχεία, "
+"ταβέρνες, χυτήριο και μεταλλουργείο."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:79
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:81
@@ -156,24 +172,31 @@ msgstr "Φτιάξτε έναν στρατώνα για εκπαίδευση β�
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:91
 msgid "Build a battle arena and a training camp to the west of the mountains."
-msgstr "Φτιάξτε μια αρένα μάχης και ένα στρατόπεδο εκπαίδευσης στα δυτικά των βουνών."
+msgstr ""
+"Φτιάξτε μια αρένα μάχης και ένα στρατόπεδο εκπαίδευσης στα δυτικά των βουνών."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:92
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:122
 msgid ""
 "Enhance your metal workshop to an ax workshop in order to produce weapons, "
-"and build up a second metal workshop to ensure the production of tools. When"
-" the blacksmith reaches his next level (master blacksmith), you can even "
-"enhance the ax workshop to a war mill, which will produce additional "
-"weapons."
-msgstr "Αναβαθμίστε το μεταλλουργείο σας σε πελεκοποιείο, προκειμένου να παράγετε όπλα, και φτιάξτε ένα δεύτερο μεταλλουργείο για να διασφαλίσετε την παραγωγή εργαλείων. Όταν ο σιδηρουργός φτάσει στο επόμενο επίπεδό του (αρχισιδηρουργός), μπορείτε να αναβαθμίσετε περαιτέρω το πελεκοποιείο σε πολεμικό τόρνο, ο οποίος θα παράγει επιπρόσθετα όπλα."
+"and build up a second metal workshop to ensure the production of tools. When "
+"the blacksmith reaches his next level (master blacksmith), you can even "
+"enhance the ax workshop to a war mill, which will produce additional weapons."
+msgstr ""
+"Αναβαθμίστε το μεταλλουργείο σας σε πελεκοποιείο, προκειμένου να παράγετε "
+"όπλα, και φτιάξτε ένα δεύτερο μεταλλουργείο για να διασφαλίσετε την παραγωγή "
+"εργαλείων. Όταν ο σιδηρουργός φτάσει στο επόμενο επίπεδό του "
+"(αρχισιδηρουργός), μπορείτε να αναβαθμίσετε περαιτέρω το πελεκοποιείο σε "
+"πολεμικό τόρνο, ο οποίος θα παράγει επιπρόσθετα όπλα."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:93
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:130
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
-msgstr "Φτιάξτε ένα κρανοποιείο δυτικά των βουνών, για προμήθεια των στρατιωτών σας με καλύτερη θωράκιση."
+msgstr ""
+"Φτιάξτε ένα κρανοποιείο δυτικά των βουνών, για προμήθεια των στρατιωτών σας "
+"με καλύτερη θωράκιση."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:101
@@ -187,10 +210,14 @@ msgstr "Φτιάξτε μια αποθήκη στα δυτικά των βουν
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:103
 msgid ""
 "Warehouses are similar to your headquarters, with the only difference that "
-"they aren’t defended by soldiers. It is often wise to build a warehouse when"
-" your territory is growing and the paths to your headquarters get longer and"
-" longer."
-msgstr "Οι αποθήκες μοιάζουν με το αρχηγείο σας, με την μόνη διαφορά ότι δεν τις υπερασπίζονται στρατιώτες. Είναι συνετό να φτιάχνετε μια αποθήκη όταν η επικράτειά σας μεγαλώνει και οι διαδρομές προς το αρχηγείο σας όλο και μακραίνουν."
+"they aren’t defended by soldiers. It is often wise to build a warehouse when "
+"your territory is growing and the paths to your headquarters get longer and "
+"longer."
+msgstr ""
+"Οι αποθήκες μοιάζουν με το αρχηγείο σας, με την μόνη διαφορά ότι δεν τις "
+"υπερασπίζονται στρατιώτες. Είναι συνετό να φτιάχνετε μια αποθήκη όταν η "
+"επικράτειά σας μεγαλώνει και οι διαδρομές προς το αρχηγείο σας όλο και "
+"μακραίνουν."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:108
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:110
@@ -201,15 +228,22 @@ msgstr "Φτιάξτε τόπους εκπαίδευσης"
 msgid ""
 "Build a barracks, a battle arena and a training camp to the west of the "
 "mountains."
-msgstr "Φτιάξτε έναν στρατώνα, μια αρένα μάχης και ένα στρατόπεδο εκπαίδευσης στα δυτικά των βουνών."
+msgstr ""
+"Φτιάξτε έναν στρατώνα, μια αρένα μάχης και ένα στρατόπεδο εκπαίδευσης στα "
+"δυτικά των βουνών."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:112
 msgid ""
-"Barracks train basic soldiers while training sites like a training camp or a"
-" battle arena are used for training soldiers in their different attributes. "
+"Barracks train basic soldiers while training sites like a training camp or a "
+"battle arena are used for training soldiers in their different attributes. "
 "These attributes are important in fights and the better a soldier is, the "
 "higher is the chance to win a fight."
-msgstr "Οι στρατώνες εκπαιδεύουν τους βασικούς στρατιώτες, ενώ οι τόποι εκπαίδευσης, όπως ένα στρατόπεδο εκπαίδευσης ή μια αρένα μάχης, χρησιμοποιούνται για την εκπαίδευση των στρατιωτών στις διάφορες ιδιότητές τους. Αυτές είναι σημαντικές στις μάχες, επειδή όσο καλύτερος είναι ένας στρατιώτης, τόσο μεγαλύτερη η πιθανότητα να κερδίσει μια μάχη."
+msgstr ""
+"Οι στρατώνες εκπαιδεύουν τους βασικούς στρατιώτες, ενώ οι τόποι εκπαίδευσης, "
+"όπως ένα στρατόπεδο εκπαίδευσης ή μια αρένα μάχης, χρησιμοποιούνται για την "
+"εκπαίδευση των στρατιωτών στις διάφορες ιδιότητές τους. Αυτές είναι "
+"σημαντικές στις μάχες, επειδή όσο καλύτερος είναι ένας στρατιώτης, τόσο "
+"μεγαλύτερη η πιθανότητα να κερδίσει μια μάχη."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:114
 msgid "The attributes are: health, attack, defense and evade."
@@ -232,15 +266,21 @@ msgstr "Καταστρέψτε τον στρατό του Κάλιταθ"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:138
 msgid "Destroy Kalitath’s army and expand your territory to the east."
-msgstr "Καταστρέψτε τον στρατό του Κάλιταθ και επεκτείνετε την επικράτειά σας προς τα ανατολικά."
+msgstr ""
+"Καταστρέψτε τον στρατό του Κάλιταθ και επεκτείνετε την επικράτειά σας προς "
+"τα ανατολικά."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:139
 msgid ""
 "To attack an enemy, you must click on the door of an adversary’s military "
 "building. A menu will pop up allowing you to select the number of soldiers "
-"that should attack. When you are ready with setting the number, click on the"
-" cross (‘Start Attack’)."
-msgstr "Για επίθεση σε έναν εχθρό, κλικ στην πόρτα ενός εχθρικού στρατιωτικού κτιρίου. Θα αναδυθεί ένα μενού που επιτρέπει την επιλογή του αριθμού στρατιωτών που θα επιτεθούν. Όταν ετοιμαστεί ο αριθμός, κλικ στον σταυρό (\"Έναρξη επίθεσης\")."
+"that should attack. When you are ready with setting the number, click on the "
+"cross (‘Start Attack’)."
+msgstr ""
+"Για επίθεση σε έναν εχθρό, κλικ στην πόρτα ενός εχθρικού στρατιωτικού "
+"κτιρίου. Θα αναδυθεί ένα μενού που επιτρέπει την επιλογή του αριθμού "
+"στρατιωτών που θα επιτεθούν. Όταν ετοιμαστεί ο αριθμός, κλικ στον σταυρό "
+"(\"Έναρξη επίθεσης\")."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:144
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:146
@@ -250,7 +290,9 @@ msgstr "Στρατιωτική προσβολή της πρωτεύουσας"
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:147
 msgid ""
 "Destroy all forces of Thron’s two brothers to liberate the throne-circle."
-msgstr "Καταστρέψτε όλες τις δυνάμεις των δύο αδερφών του Θρον, προς απελευθέρωση του κύκλου του θρόνου."
+msgstr ""
+"Καταστρέψτε όλες τις δυνάμεις των δύο αδερφών του Θρον, προς απελευθέρωση "
+"του κύκλου του θρόνου."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:155
 msgid "Close to Home"
@@ -268,14 +310,20 @@ msgid ""
 "These last days, we came closer to our capital. Many people have already "
 "joined us on our march and set their hopes on me. However, I fear that we "
 "are not strong enough to take up the battle against my brothers."
-msgstr "Αυτές τις τελευταίες ημέρες, πλησιάσαμε στην πρωτεύουσά μας. Πολλοί άνθρωποι έχουν ήδη ενωθεί στην προέλασή μας και εναποθέσει τις ελπίδες τους σε μένα. Παρόλα αυτά, φοβάμαι ότι δεν είμαστε αρκετά δυνατοί να διεξάγουμε μάχη ενάντια στους αδερφούς μου."
+msgstr ""
+"Αυτές τις τελευταίες ημέρες, πλησιάσαμε στην πρωτεύουσά μας. Πολλοί άνθρωποι "
+"έχουν ήδη ενωθεί στην προέλασή μας και εναποθέσει τις ελπίδες τους σε μένα. "
+"Παρόλα αυτά, φοβάμαι ότι δεν είμαστε αρκετά δυνατοί να διεξάγουμε μάχη "
+"ενάντια στους αδερφούς μου."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:161
 msgid ""
 "For now, we are resting at the borders of the old forest and preparing for "
 "the coming days."
-msgstr "Προς το παρόν ξεκουραζόμαστε στα όρια του γέρικου δάσους, προετοιμαζόμενοι για τις επόμενες ημέρες."
+msgstr ""
+"Προς το παρόν ξεκουραζόμαστε στα όρια του γέρικου δάσους, προετοιμαζόμενοι "
+"για τις επόμενες ημέρες."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:167
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:191
@@ -288,11 +336,19 @@ msgstr "Έτερη Κρύα Μέρα"
 msgid ""
 "The news that a patrol brought is not good to hear. Our spies tell us that "
 "the war tribes still rage in battle, but some of the elder soldiers and "
-"tribe leaders seem to grow tired of this senseless war. Kalitath, son of Kun"
-" is the first war leader to leave Al’thunran, thus leaving his side weak and"
-" vulnerable. As my scouts report, he has set foot on the lower grounds "
-"around the capital, securing the outer fortification rings."
-msgstr "Τα νέα που έφερε μία από τις περιπολίες δεν είναι ευχάριστα. Οι κατάσκοποί μας, μας λένε ότι οι πολεμικές φυλές συνεχίζουν να μάχονται, αλλά κάποιοι μεγαλύτεροι σε ηλικία στρατιώτες καθώς και κάποιοι ηγέτες φυλών φαίνεται ότι έχουν αρχίσει να κουράζονται από αυτόν τον δίχως λογική πόλεμο. Ο Kalitath, γιος του Kun είναι ο πρώτος οπλαρχηγός που εγκατέλειψε τον Al'thunran, αφήνοντας την μεριά του αδύναμη και ευάλωτη. Όπως αναφέρουν οι ανιχνευτές μου, έχει στρατοπεδεύσει χαμηλά, γύρω από την πρωτεύουσα, προστατεύοντας την εξωτερική οχύρωση."
+"tribe leaders seem to grow tired of this senseless war. Kalitath, son of Kun "
+"is the first war leader to leave Al’thunran, thus leaving his side weak and "
+"vulnerable. As my scouts report, he has set foot on the lower grounds around "
+"the capital, securing the outer fortification rings."
+msgstr ""
+"Τα νέα που έφερε μία από τις περιπολίες δεν είναι ευχάριστα. Οι κατάσκοποί "
+"μας, μας λένε ότι οι πολεμικές φυλές συνεχίζουν να μάχονται, αλλά κάποιοι "
+"μεγαλύτεροι σε ηλικία στρατιώτες καθώς και κάποιοι ηγέτες φυλών φαίνεται ότι "
+"έχουν αρχίσει να κουράζονται από αυτόν τον δίχως λογική πόλεμο. Ο Kalitath, "
+"γιος του Kun είναι ο πρώτος οπλαρχηγός που εγκατέλειψε τον Al'thunran, "
+"αφήνοντας την μεριά του αδύναμη και ευάλωτη. Όπως αναφέρουν οι ανιχνευτές "
+"μου, έχει στρατοπεδεύσει χαμηλά, γύρω από την πρωτεύουσα, προστατεύοντας την "
+"εξωτερική οχύρωση."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:175
 msgid "Doubts"
@@ -311,7 +367,14 @@ msgid ""
 "generals of our forces and his family never quite liked the thought of "
 "bowing before the banner of Chat’Karuth. Why should he march with "
 "Chat’Karuth’s son to reclaim his heritage and the throne?"
-msgstr "Ο Thron θέλει να πιστεύει ότι ο Kalitath έχει κουραστεί να μάχεται και ότι θα ήθελε να ενώσει τις δυνάμεις του μαζί μας όταν ξεκινήσουμε για να αποκαταστήσουμε τον νόμο και την τάξη στην Al'thunran. Αλλά δεν το νομίζω. Ο Kalitath είναι ο γιος ενός από τους μεγαλύτερους στρατηγούς των δυνάμεών μας και στην οικογένειά του δεν άρεσε ποτέ η ιδέα της υποταγής τον Chat'Karuth. Γιατί λοιπόν να βαδίσει μαζί με τον γιο του Chat'Karuth και να τον βοηθήσει να ξανακερδίσει την κληρονομιά και τον θρόνο του;"
+msgstr ""
+"Ο Thron θέλει να πιστεύει ότι ο Kalitath έχει κουραστεί να μάχεται και ότι "
+"θα ήθελε να ενώσει τις δυνάμεις του μαζί μας όταν ξεκινήσουμε για να "
+"αποκαταστήσουμε τον νόμο και την τάξη στην Al'thunran. Αλλά δεν το νομίζω. Ο "
+"Kalitath είναι ο γιος ενός από τους μεγαλύτερους στρατηγούς των δυνάμεών μας "
+"και στην οικογένειά του δεν άρεσε ποτέ η ιδέα της υποταγής τον Chat'Karuth. "
+"Γιατί λοιπόν να βαδίσει μαζί με τον γιο του Chat'Karuth και να τον βοηθήσει "
+"να ξανακερδίσει την κληρονομιά και τον θρόνο του;"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:183
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:199
@@ -329,10 +392,14 @@ msgstr "Ο Μπόλντρεθ λέει:"
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:186
 msgid ""
-"However, Thron is not willing to listen to my doubts. He seeks to expand our"
-" fortifications to the borders of Kalitath’s territory and to reunite with "
+"However, Thron is not willing to listen to my doubts. He seeks to expand our "
+"fortifications to the borders of Kalitath’s territory and to reunite with "
 "his forces. I have to keep an eye on everything that happens here."
-msgstr "Ωστόσο, ο Thron δεν προτίθεται να ακούσει τις αμφιβολίες μου. Ψάχνει τρόπο για να επεκτείνει την οχύρωσή μας προς τα σύνορα με την περιοχή του Kalitath και να ξαναενωθεί με τις δυνάμεις μας. Πρέπει να έχω τον νου μου σε ό,τι συμβαίνει εδώ."
+msgstr ""
+"Ωστόσο, ο Thron δεν προτίθεται να ακούσει τις αμφιβολίες μου. Ψάχνει τρόπο "
+"για να επεκτείνει την οχύρωσή μας προς τα σύνορα με την περιοχή του Kalitath "
+"και να ξαναενωθεί με τις δυνάμεις μας. Πρέπει να έχω τον νου μου σε ό,τι "
+"συμβαίνει εδώ."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:192
 msgid "Thron is speaking confidently."
@@ -345,9 +412,16 @@ msgid ""
 "have a long and cold winter and so many miles behind us. The fortification "
 "that we erected around Ondun will guarantee us a fast supply of men and "
 "goods, and once Al’thunran is in my hands, the two cities will be linked by "
-"a good and defensible infrastructure. Still, I hope I will not walk alone on"
-" this mission, I hope Kalitath son of Kun will follow my call."
-msgstr "Η πρώτη γραμμή των δυνάμεών μου έχει επεκταθεί έως την άκρη των δασών. Έχουμε έναν μακρύ και κρύο χειμώνα και τόσα πολλά μίλια πίσω μας. Η οχύρωση που ανεγείραμε γύρω από το Ondun θα μας εγγυηθεί την γρήγορη προμήθεια ανδρών και αγαθών, και μόλις το Al'thunran βρεθεί στα χέρια μου, οι δύο πόλεις θα συνδεθούν μέσω μίας καλής υποδομής την οποία θα είναι δυνατόν να προστεύσουμε. Παρ' όλα αυτά, ελπίζω να μην εκστρατεύσω μόνος μου, ελπίζω ότι ο Kalitath, ο γιος του Kun να ακολουθήσει το κάλεσμά μου."
+"a good and defensible infrastructure. Still, I hope I will not walk alone on "
+"this mission, I hope Kalitath son of Kun will follow my call."
+msgstr ""
+"Η πρώτη γραμμή των δυνάμεών μου έχει επεκταθεί έως την άκρη των δασών. "
+"Έχουμε έναν μακρύ και κρύο χειμώνα και τόσα πολλά μίλια πίσω μας. Η οχύρωση "
+"που ανεγείραμε γύρω από το Ondun θα μας εγγυηθεί την γρήγορη προμήθεια "
+"ανδρών και αγαθών, και μόλις το Al'thunran βρεθεί στα χέρια μου, οι δύο "
+"πόλεις θα συνδεθούν μέσω μίας καλής υποδομής την οποία θα είναι δυνατόν να "
+"προστεύσουμε. Παρ' όλα αυτά, ελπίζω να μην εκστρατεύσω μόνος μου, ελπίζω ότι "
+"ο Kalitath, ο γιος του Kun να ακολουθήσει το κάλεσμά μου."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:200
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:218
@@ -362,30 +436,41 @@ msgstr "Ο Θρον λέει:"
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:202
 msgid ""
-"I have sent men to meet with Kalitath in his fortress. He has barricaded the"
-" former main entrance to the capital and is trying to set up a siege ring "
+"I have sent men to meet with Kalitath in his fortress. He has barricaded the "
+"former main entrance to the capital and is trying to set up a siege ring "
 "around Al’thunran. He will not let anyone enter or leave the city while the "
 "ring is intact. Until now, he has not answered any of my messages. But the "
 "time I spend waiting won’t be lost. I will train my soldiers further and "
 "prepare for battle."
-msgstr "Έχω στείλει άντρες για να συναντηθούν με τον Kalitath στο φρούριό του. Έχει οχυρώσει την πρώην κύρια είσοδο στην πρωτεύουσα και προσπαθεί να στήσει έναν πολιορκητικό δακτύλιο γύρω από την Al'thunran. Δεν θα αφήσει κανέναν να μπει ή να βγει από την πόλη όσο παραμένει αυτός ο δακτύλιος. Μέχρι στιγμής, δεν έχει απαντήσει σε κανένα από τα μηνύματά μου. Αλλά ο χρόνος που ξοδεύω περιμένοντας δεν θα πάει χαμένος. Θα εκπαιδεύσω τους στρατιώτες μου ακόμα περισσότερο και θα προετοιμαστώ για μάχη."
+msgstr ""
+"Έχω στείλει άντρες για να συναντηθούν με τον Kalitath στο φρούριό του. Έχει "
+"οχυρώσει την πρώην κύρια είσοδο στην πρωτεύουσα και προσπαθεί να στήσει έναν "
+"πολιορκητικό δακτύλιο γύρω από την Al'thunran. Δεν θα αφήσει κανέναν να μπει "
+"ή να βγει από την πόλη όσο παραμένει αυτός ο δακτύλιος. Μέχρι στιγμής, δεν "
+"έχει απαντήσει σε κανένα από τα μηνύματά μου. Αλλά ο χρόνος που ξοδεύω "
+"περιμένοντας δεν θα πάει χαμένος. Θα εκπαιδεύσω τους στρατιώτες μου ακόμα "
+"περισσότερο και θα προετοιμαστώ για μάχη."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:206
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "Ο Πιστός Σου Σύντροφος"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:207
 msgid "Boldreth shouts out!"
-msgstr ""
+msgstr "O Μπόλντρεθ φωνάζει!"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:209
 msgid ""
-"The BASTARD! Only one man of our frontier patrol came back alive. He carried"
-" a message from Kalitath, telling us that he will punish every move of our "
+"The BASTARD! Only one man of our frontier patrol came back alive. He carried "
+"a message from Kalitath, telling us that he will punish every move of our "
 "troops with their own blood! We cannot accept this behavior. From now on, "
 "there is war between Kalitath and us!"
-msgstr "Τον ΜΠΑΣΤΑΡΔΟ! Μόνο ένας άντρας από την εμπροσθοφυλακή μας γύρισε πίσω ζωντανός. Έφερε ένα μήνυμα από τον Kalitath, το οποίο λέει ότι θα τιμωρήσει κάθε κίνηση των στρατιωτών μας με αίμα! Δεν μπορούμε να αποδεχτούμε αυτήν την συμπεριφορά. Από δω και στο εξής, έχουμε πόλεμο με τον Kalitath!"
+msgstr ""
+"Τον ΜΠΑΣΤΑΡΔΟ! Μόνο ένας άντρας από την εμπροσθοφυλακή μας γύρισε πίσω "
+"ζωντανός. Έφερε ένα μήνυμα από τον Kalitath, το οποίο λέει ότι θα τιμωρήσει "
+"κάθε κίνηση των στρατιωτών μας με αίμα! Δεν μπορούμε να αποδεχτούμε αυτήν "
+"την συμπεριφορά. Από δω και στο εξής, έχουμε πόλεμο με τον Kalitath!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:217
 msgid "Renegade Fortification"
@@ -445,8 +530,8 @@ msgstr ""
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:242
 msgid ""
-"Boldreth is right! We don’t have enough food to survive a long, cold winter."
-" We should start building a well, a fisher’s and a hunter’s hut. And if we "
+"Boldreth is right! We don’t have enough food to survive a long, cold winter. "
+"We should start building a well, a fisher’s and a hunter’s hut. And if we "
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
@@ -485,20 +570,20 @@ msgstr ""
 msgid ""
 "The first fortification Thron ordered has just been completed. At the "
 "moment, he seeks to bring trust and belief to those who live inside the "
-"walls of our new habitat that we named ‘Ondun’, which means ‘those who wait’"
-" in the old tongue. But Thron is not yet satisfied – and I fully understand "
+"walls of our new habitat that we named ‘Ondun’, which means ‘those who wait’ "
+"in the old tongue. But Thron is not yet satisfied – and I fully understand "
 "his fears: the forests are deep, and the frontier to Al’thunran is near. I "
-"am sure that there are a thousand greater dangers out there than the unknown"
-" tracks."
+"am sure that there are a thousand greater dangers out there than the unknown "
+"tracks."
 msgstr ""
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:272
 msgid ""
 "To overlook more of the area around our hall, we should explore further and "
-"set up more guards and scouts to observe the frontier and keep an eye on the"
-" raging wars on our doorstep. THEN we will be prepared once trouble seeks to"
-" capture our woods."
+"set up more guards and scouts to observe the frontier and keep an eye on the "
+"raging wars on our doorstep. THEN we will be prepared once trouble seeks to "
+"capture our woods."
 msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:278
@@ -523,8 +608,8 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:290
 msgid ""
 "I just got informed that our mining economy has started its work. This news "
-"brought a smile to my face – even if the hardest part is still waiting to be"
-" done, now that our smiths will give their best to further ease our lives."
+"brought a smile to my face – even if the hardest part is still waiting to be "
+"done, now that our smiths will give their best to further ease our lives."
 msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:295
@@ -538,8 +623,8 @@ msgid ""
 "strategic problem of that area seems to be that there are two bigger "
 "passages – one north and one south of the central mountain. Those passages "
 "are quite hard to control, and so it seems to me like we have only one "
-"chance to secure the mountains from enemy hands: we must build a fortress to"
-" the east of the mountains!"
+"chance to secure the mountains from enemy hands: we must build a fortress to "
+"the east of the mountains!"
 msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:304
@@ -563,37 +648,37 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:315
 msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
-"there are still a lot of men and women waiting in our hall to get a task, so"
-" they can help our soldiers to prepare for the war to come."
+"there are still a lot of men and women waiting in our hall to get a task, so "
+"they can help our soldiers to prepare for the war to come."
 msgstr ""
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:318
 msgid ""
-"Our geologists found a lot more deposits of iron ore, coal and even gold. We"
-" should enhance our current mines as soon as our miners are more "
-"experienced. We should build up some more mines, a bigger food "
-"infrastructure to always supply our men with sufficient food and a further "
-"processing economy. But that’s still not everything – most of our soldiers "
-"are quite young and neither have a good weapon nor are they well trained. We"
-" should build up training sites to prepare them for their future tasks."
+"Our geologists found a lot more deposits of iron ore, coal and even gold. We "
+"should enhance our current mines as soon as our miners are more experienced. "
+"We should build up some more mines, a bigger food infrastructure to always "
+"supply our men with sufficient food and a further processing economy. But "
+"that’s still not everything – most of our soldiers are quite young and "
+"neither have a good weapon nor are they well trained. We should build up "
+"training sites to prepare them for their future tasks."
 msgstr ""
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:328
 msgid ""
 "My brothers and their soldiers are dead and left fire and destruction "
-"behind. In none of all the ruins could I find any man or woman of the normal"
-" folk, and so I just may hope that they fled from this cruel battleground "
-"and started a better life somewhere else."
+"behind. In none of all the ruins could I find any man or woman of the normal "
+"folk, and so I just may hope that they fled from this cruel battleground and "
+"started a better life somewhere else."
 msgstr ""
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
-"capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s"
-" old beauty again – it was only a few months ago that I wondered whether I "
+"capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s "
+"old beauty again – it was only a few months ago that I wondered whether I "
 "would ever be able to set my feet there again. Now the old town is back in "
 "my hands, and I will not hesitate to rebuild it with all the strength my "
 "people have. I can’t wait to see it again in its old beauty."
@@ -649,4 +734,8 @@ msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
 "to make their work lighter and our transportation more efficient."
-msgstr "Φύλαρχε, θυμήσου τους καημένους τους μεταφορείς: Οι δρόμοι μας γίνονται όλο και μακρύτεροι, και ο φόρτος στους ώμους τους ποτέ ελαφρύτερος. Θα πρέπει να εκθρέψουμε περισσότερα βόδια, για να κάνουμε την εργασία τους ελαφρύτερη και τις μεταφορές μας αποτελεσματικότερες."
+msgstr ""
+"Φύλαρχε, θυμήσου τους καημένους τους μεταφορείς: Οι δρόμοι μας γίνονται όλο "
+"και μακρύτεροι, και ο φόρτος στους ώμους τους ποτέ ελαφρύτερος. Θα πρέπει να "
+"εκθρέψουμε περισσότερα βόδια, για να κάνουμε την εργασία τους ελαφρύτερη και "
+"τις μεταφορές μας αποτελεσματικότερες."

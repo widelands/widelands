@@ -1,16 +1,18 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
-# 
+#
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# Raúl Contreras, 2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-03-07 02:19+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
-"Last-Translator: FIRST AUTHOR <EMAIL@ADDRESS>, 2012\n"
-"Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/language/eo/)\n"
+"Last-Translator: Raúl Contreras, 2024\n"
+"Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/"
+"language/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -192,16 +194,16 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:96
 msgid ""
-"Very good. Your shipyard is finished and your shipwright immediately started"
-" working. For the construction of ships, he needs logs, planks and "
+"Very good. Your shipyard is finished and your shipwright immediately started "
+"working. For the construction of ships, he needs logs, planks and "
 "spidercloth, which will be transported to the shipyard."
 msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:97
 msgid ""
 "The shipwright will take the ware he needs to a free spot at the shoreline "
-"and build a ship there. When the first ship is finished, it will launch onto"
-" the sea, and the shipwright will construct another one."
+"and build a ship there. When the first ship is finished, it will launch onto "
+"the sea, and the shipwright will construct another one."
 msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:98
@@ -339,20 +341,20 @@ msgstr ""
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:165
 msgid ""
 "You can take some additional wares, soldiers, or workers with you on an "
-"expedition. You can define them by filling the empty slots below the primary"
-" wares to build the port."
+"expedition. You can define them by filling the empty slots below the primary "
+"wares to build the port."
 msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:166
 msgid ""
-"Just click on the empty slots and then scroll through the list to choose the"
-" additional item."
+"Just click on the empty slots and then scroll through the list to choose the "
+"additional item."
 msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:167
 msgid ""
-"Now try this out. A small dot in green, yellow, or red tells you whether the"
-" item has arrived, is on its way or is not available respectively."
+"Now try this out. A small dot in green, yellow, or red tells you whether the "
+"item has arrived, is on its way or is not available respectively."
 msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:173
@@ -384,8 +386,8 @@ msgstr ""
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:187
 msgid ""
 "Your expedition ship is ready. It is waiting for your orders in front of "
-"your port. It isn’t transporting wares anymore. Use its buttons to send your"
-" ship in any of the six main directions of the Widelands map. When it has "
+"your port. It isn’t transporting wares anymore. Use its buttons to send your "
+"ship in any of the six main directions of the Widelands map. When it has "
 "reached a coastline, you can make it travel around the coast, where it will "
 "look for suitable places for landing."
 msgstr ""
@@ -457,8 +459,8 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:214
 msgid ""
-"But I want to speak a word of warning. Ports are like headquarters: they can"
-" be attacked by a nearby enemy. While your headquarters has soldiers to "
+"But I want to speak a word of warning. Ports are like headquarters: they can "
+"be attacked by a nearby enemy. While your headquarters has soldiers to "
 "defend it, your newly built port won’t. You should therefore avoid settling "
 "next to an enemy."
 msgstr ""
@@ -530,8 +532,8 @@ msgstr ""
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:247
 msgid ""
 "It will take some time for your shipyard to build some ships. While we’re "
-"waiting for them, there is another way of water-based transport I would like"
-" to teach you."
+"waiting for them, there is another way of water-based transport I would like "
+"to teach you."
 msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:248
@@ -560,13 +562,19 @@ msgid ""
 "only one ware at a time, and no workers (other than the one who rows it and "
 "who never leaves his boat)."
 msgstr ""
+"Jen kie pramoj eniras. Pramoj estas malgrandaj remboatoj, kiuj povas porti "
+"nur unu varon samtempe, kaj neniujn laboristojn (krom la remanto, kiu neniam "
+"forlasas sian boaton)."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:262
 msgid ""
 "Ferries are built in ferry yards, one rowboat costs two logs and one piece "
-"of cloth and is quickly constructed. A ferry yard is a medium-sized building"
-" that needs to be built close to the shore."
+"of cloth and is quickly constructed. A ferry yard is a medium-sized building "
+"that needs to be built close to the shore."
 msgstr ""
+"Pramoj estas konstruitaj en pramfarejoj, unu remboato kostas du trunkojn kaj "
+"unu peco da ŝtofo kaj estas rapide konstruita. Pramfarejo estas mezgranda "
+"konstruaĵo, kiu devas esti konstruita proksime al la marbordo."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:263
 msgid "Let’s build a ferry yard close to the shore before we will continue."
@@ -582,13 +590,15 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:272
 msgid "Ferries are constructed by a ferry yard."
-msgstr ""
+msgstr "Pramoj estas konstruitaj en pramfarejo."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:273
 msgid ""
 "You need to build the ferry yard close to the shore, otherwise it won’t be "
 "able to build ferries there."
 msgstr ""
+"Vi devas konstrui la pramfarejon proksime al la marbordo, alie ĝi ne povos "
+"konstrui pramojn tie."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:281
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:294
@@ -603,6 +613,11 @@ msgid ""
 "road: You click on a flag near the shore, choose ‘Build a waterway’, and "
 "select the path for the waterway just as you would do for a road."
 msgstr ""
+"Male al ŝipoj, kiuj vojaĝas al iu ajn haveno kie ili estas bezonataj, pramoj "
+"havas fiksitajn transportajn vojojn nomatajn akvovojoj. Akvovojo estas "
+"konstruita same kiel vojo: Vi alklakas flagon proksime al la marbordo, "
+"elektas ‘Konstrui akvovojon’, kaj elektas la vojon por la akvovojo same kiel "
+"vi farus por vojo."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:283
 msgid ""
@@ -624,6 +639,8 @@ msgid ""
 "Always keep in mind that ferries do not transport workers. You can use them "
 "to speed up ware transport, but they can never entirely replace roads."
 msgstr ""
+"Ĉiam memoru, ke pramoj ne transportas laboristojn. Vi povas uzi ilin por "
+"rapidigi vartransporton, sed ili neniam povas tute anstataŭi vojojn."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:295
 msgid "Allow me to show you how to build a waterway…"
@@ -673,21 +690,23 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:326
 msgid "About Ferries"
-msgstr ""
+msgstr "Pri pramoj"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:327
 msgid ""
 "Now there are only a few more things I would like you to keep in mind "
 "whenever using ferries."
 msgstr ""
+"Nun estas nur kelkaj pliaj aferoj, kiujn mi volas, ke vi memoru ĉiufoje kiam "
+"vi uzas pramojn."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:328
 msgid ""
-"Never forget that these rowboats are too small to carry workers. You can use"
-" them as shortcuts for ware transport within parts of your territory, but "
-"not to claim regions you can reach neither by road nor by ship. Never cut "
-"all your roads between two places connected by waterways unless you are "
-"certain no worker will ever have to walk there."
+"Never forget that these rowboats are too small to carry workers. You can use "
+"them as shortcuts for ware transport within parts of your territory, but not "
+"to claim regions you can reach neither by road nor by ship. Never cut all "
+"your roads between two places connected by waterways unless you are certain "
+"no worker will ever have to walk there."
 msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:329
@@ -708,20 +727,25 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:338
 msgid "More ferries needed?"
-msgstr ""
+msgstr "Ĉu pli da pramoj bezonatas?"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:339
 msgid ""
-"As you can see, ferries can be produced quite quickly, but you don't need to"
-" worry about wasted materials, because ferry yards normally only produce "
-"them on demand, when there are unserviced waterways."
+"As you can see, ferries can be produced quite quickly, but you don't need to "
+"worry about wasted materials, because ferry yards normally only produce them "
+"on demand, when there are unserviced waterways."
 msgstr ""
+"Kiel vi povas vidi, pramoj povas esti produktitaj sufiĉe rapide, sed vi ne "
+"devas zorgi pri malŝparitaj materialoj, ĉar pramfarejoj kutime produktas "
+"ilin nur laŭbezone, kiam estas neservataj akvovojoj."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:340
 msgid ""
 "As long as a ferry services a waterway, its lifetime is unlimited, but "
 "unemployed ferries will rot away and eventually sink."
 msgstr ""
+"Dum pramo servas akvovojon, ĝia vivdaŭro estas senlima, sed senlaboraj "
+"pramoj malboniĝos kaj fine dronos."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349
@@ -730,7 +754,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
 msgid "You have learnt all there is to learn about ships and ferries!"
-msgstr ""
+msgstr "Vi lernis ĉion, kion estas por lerni pri ŝipoj kaj pramoj!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:351
 msgid ""
@@ -741,6 +765,6 @@ msgstr ""
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:352
 msgid ""
 "As always, you can continue playing and practice a bit more on this map if "
-"you like, or get your captain’s license ready and try out your new skills in"
-" a real game…"
+"you like, or get your captain’s license ready and try out your new skills in "
+"a real game…"
 msgstr ""

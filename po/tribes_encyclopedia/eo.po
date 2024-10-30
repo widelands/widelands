@@ -1,19 +1,21 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
-# 
+#
 # Translators:
 # GunChleoc, 2016
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010-2011
 # GunChleoc, 2014
+# Raúl Contreras, 2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-02-01 02:29+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: GunChleoc, 2016\n"
-"Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/language/eo/)\n"
+"Last-Translator: Raúl Contreras, 2024\n"
+"Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/"
+"language/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -188,8 +190,8 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:105
 msgctxt "amazons_ware"
 msgid ""
-"The Amazons use granite for making some tools as well. It is produced by the"
-" stonecutters and in stone mines."
+"The Amazons use granite for making some tools as well. It is produced by the "
+"stonecutters and in stone mines."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 1
@@ -218,8 +220,8 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:140
 msgctxt "amazons_ware"
 msgid ""
-"This very hard wood is as hard as iron and it is used for several buildings,"
-" tools and weapons. It is cut by a very experienced woodcutter."
+"This very hard wood is as hard as iron and it is used for several buildings, "
+"tools and weapons. It is cut by a very experienced woodcutter."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Rubber
@@ -322,8 +324,8 @@ msgstr ""
 msgctxt "amazons_ware"
 msgid ""
 "Meat is used by the food preserver to prepare rations for the workers "
-"digging for gold dust and granite. It is also consumed at the training sites"
-" (training glade and warriors’ gathering) and for recruiting new soldiers."
+"digging for gold dust and granite. It is also consumed at the training sites "
+"(training glade and warriors’ gathering) and for recruiting new soldiers."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Ration, part 1
@@ -366,8 +368,8 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:292
 msgctxt "amazons_ware"
 msgid ""
-"It is smelted out of gold dust by the furnace and used by the dressmaker and"
-" for special buildings."
+"It is smelted out of gold dust by the furnace and used by the dressmaker and "
+"for special buildings."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Charcoal, part 1
@@ -382,8 +384,8 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:317
 msgctxt "amazons_ware"
 msgid ""
-"Picks are used by stonecutters to cut granite from rocks or mine granite and"
-" quartz in stone mines."
+"Picks are used by stonecutters to cut granite from rocks or mine granite and "
+"quartz in stone mines."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Felling Ax, part 1
@@ -474,8 +476,7 @@ msgstr ""
 msgctxt "amazons_ware"
 msgid ""
 "Kitchen tools are needed for preparing rations, baking cassava bread and "
-"brewing chocolate. Be sure to have a stone carver to produce this basic "
-"tool."
+"brewing chocolate. Be sure to have a stone carver to produce this basic tool."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Needles
@@ -502,9 +503,9 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:435
 msgctxt "amazons_ware"
 msgid ""
-"This spear is the basic weapon in the Amazon military system. It is produced"
-" by the stone carver. In combination with a tunic, it is the equipment to "
-"fit out young soldiers."
+"This spear is the basic weapon in the Amazon military system. It is produced "
+"by the stone carver. In combination with a tunic, it is the equipment to fit "
+"out young soldiers."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 2
@@ -517,8 +518,8 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:451
 msgctxt "amazons_ware"
 msgid ""
-"This spear has a stone spike. It is produced in a stone workshop and used in"
-" a warriors’ gathering – together with food – to train soldiers from attack "
+"This spear has a stone spike. It is produced in a stone workshop and used in "
+"a warriors’ gathering – together with food – to train soldiers from attack "
 "level 0 to attack level 1."
 msgstr ""
 
@@ -559,18 +560,18 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:506
 msgctxt "amazons_ware"
 msgid ""
-"This light wooden armor is a basic piece of armor for the Amazons’ soldiers."
-" It is produced by a dressmaker and used in a training glade – together with"
-" food – to train soldiers from health level 0 to level 1."
+"This light wooden armor is a basic piece of armor for the Amazons’ soldiers. "
+"It is produced by a dressmaker and used in a training glade – together with "
+"food – to train soldiers from health level 0 to level 1."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Wodden Helmet
 #: ../../data/tribes/initialization/amazons/units.lua:517
 msgctxt "amazons_ware"
 msgid ""
-"A wooden helmet is a basic piece of equipment for protecting soldiers. It is"
-" produced by the dressmaker and used to train soldiers from health level 1 "
-"to level 2."
+"A wooden helmet is a basic piece of equipment for protecting soldiers. It is "
+"produced by the dressmaker and used to train soldiers from health level 1 to "
+"level 2."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Warrior's Coat
@@ -603,8 +604,8 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:561
 msgctxt "amazons_ware"
 msgid ""
-"Hero boots! The only suitable footwear for a real hero. They are produced by"
-" the dressmaker and used to train soldiers’ evade from level 2 to level 3."
+"Hero boots! The only suitable footwear for a real hero. They are produced by "
+"the dressmaker and used to train soldiers’ evade from level 2 to level 3."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Carrier
@@ -623,8 +624,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:594
 msgctxt "amazons_worker"
 msgid ""
-"Tapirs help to carry items along busy roads. They are reared in a tapir "
-"farm."
+"Tapirs help to carry items along busy roads. They are reared in a tapir farm."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Tapir Breeder
@@ -1031,8 +1031,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:1222
 #: ../../data/tribes/initialization/amazons/units.lua:1244
-msgid ""
-"Granite is a basic building material and can be dug up by a stone mine."
+msgid "Granite is a basic building material and can be dug up by a stone mine."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
@@ -1087,8 +1086,8 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1275
 msgctxt "amazons_building"
 msgid ""
-"Your workers and soldiers will find shelter here. Also stores your wares and"
-" tools."
+"Your workers and soldiers will find shelter here. Also stores your wares and "
+"tools."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon warehouse: Port
@@ -1198,8 +1197,8 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1329
 msgctxt "amazons_building"
 msgid ""
-"The jungle preserver or jungle master plants one tree between %1$s and %2$s,"
-" depending on how far she has to walk."
+"The jungle preserver or jungle master plants one tree between %1$s and %2$s, "
+"depending on how far she has to walk."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Hunter-
@@ -1288,8 +1287,8 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1376
 msgctxt "amazons_building"
 msgid ""
-"The water gatherer’s hut needs open water within the work area. Your workers"
-" cannot dig up water from the ground!"
+"The water gatherer’s hut needs open water within the work area. Your workers "
+"cannot dig up water from the ground!"
 msgstr ""
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Water Gatherer's
@@ -1370,8 +1369,8 @@ msgstr ""
 msgctxt "amazons_building"
 msgid ""
 "‘My mother taught me to ply the ropes from Liana, how to choose the "
-"strongest cuttings and parts of the harvest, how to trim away flaws. I bless"
-" her wisdom in every length I use.’"
+"strongest cuttings and parts of the harvest, how to trim away flaws. I bless "
+"her wisdom in every length I use.’"
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Rope
@@ -1449,8 +1448,8 @@ msgstr ""
 msgctxt "amazons_building"
 msgid ""
 "If this building is fully supplied and all tools and spears are needed by "
-"the economy, production of one of each tool takes %1$s and one of each spear"
-" takes %2$s on average. If only one kind of tool or spear is needed by the "
+"the economy, production of one of each tool takes %1$s and one of each spear "
+"takes %2$s on average. If only one kind of tool or spear is needed by the "
 "economy, its production takes %3$s on average."
 msgstr ""
 
@@ -1521,8 +1520,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1503
 #, lua-format
 msgctxt "amazons_building"
-msgid ""
-"The chocolate brewery needs %s on average to brew one mug of chocolate."
+msgid "The chocolate brewery needs %s on average to brew one mug of chocolate."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Food Preserver
@@ -1717,7 +1715,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1673
 msgctxt "amazons_building"
 msgid "Builds ferries."
-msgstr ""
+msgstr "Ĝi konstruas pramojn."
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Ferry Yard, part
 #. 1
@@ -1725,6 +1723,8 @@ msgstr ""
 msgctxt "amazons_building"
 msgid "Needs water nearby. Be aware ferries carry wares only, no workers."
 msgstr ""
+"Ĝi bezonas akvon proksime. Atentu, ke pramoj transportas nur varojn, ne "
+"laboristojn."
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Ferry Yard, part
 #. 2
@@ -1865,9 +1865,9 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2267
 msgctxt "building"
 msgid ""
-"A building is being dismantled at this dismantle site, returning some of the"
-" resources that were used during this building’s construction to your "
-"tribe’s stores."
+"A building is being dismantled at this dismantle site, returning some of the "
+"resources that were used during this building’s construction to your tribe’s "
+"stores."
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
@@ -3277,8 +3277,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:268
 #: ../../data/tribes/initialization/empire/units.lua:305
 msgctxt "ware"
-msgid ""
-"Coal is mined in coal mines or produced out of logs by a charcoal kiln."
+msgid "Coal is mined in coal mines or produced out of logs by a charcoal kiln."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Coal, part 2
@@ -3503,8 +3502,8 @@ msgstr ""
 msgctxt "atlanteans_ware"
 msgid ""
 "The long trident is the first trident in the training of soldiers. It is "
-"produced in the weapon smithy and used in the dungeon – together with food –"
-" to train soldiers from attack level 0 to level 1."
+"produced in the weapon smithy and used in the dungeon – together with food – "
+"to train soldiers from attack level 0 to level 1."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Steel Trident
@@ -3512,8 +3511,8 @@ msgstr ""
 msgctxt "atlanteans_ware"
 msgid ""
 "This is the medium trident. It is produced in the weapon smithy and used by "
-"advanced soldiers in the dungeon – together with food – to train from attack"
-" level 1 to level 2."
+"advanced soldiers in the dungeon – together with food – to train from attack "
+"level 1 to level 2."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Double Trident
@@ -3547,8 +3546,8 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:860
 msgctxt "atlanteans_ware"
 msgid ""
-"These advanced shields are used by the best soldiers of the Atlanteans. They"
-" are produced in the armor smithy and used in the labyrinth – together with "
+"These advanced shields are used by the best soldiers of the Atlanteans. They "
+"are produced in the armor smithy and used in the labyrinth – together with "
 "food – to train soldiers from defense level 1 to level 2."
 msgstr ""
 
@@ -3564,8 +3563,8 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:878
 msgctxt "atlanteans_ware"
 msgid ""
-"This thread, made of gold by the gold spinning mill, is used for weaving the"
-" exclusive golden tabard in the weaving mill."
+"This thread, made of gold by the gold spinning mill, is used for weaving the "
+"exclusive golden tabard in the weaving mill."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Golden Tabard
@@ -3573,8 +3572,8 @@ msgstr ""
 msgctxt "atlanteans_ware"
 msgid ""
 "Golden tabards are produced in Atlantean weaving mills out of gold thread. "
-"They are used in the labyrinth – together with food – to train soldiers from"
-" health level 0 to level 1."
+"They are used in the labyrinth – together with food – to train soldiers from "
+"health level 0 to level 1."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Atlantean worker: Carrier
@@ -3593,8 +3592,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:919
 msgctxt "atlanteans_worker"
 msgid ""
-"Horses help to carry items along busy roads. They are reared in a horse "
-"farm."
+"Horses help to carry items along busy roads. They are reared in a horse farm."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Atlantean worker: Horse Breeder
@@ -3984,8 +3982,8 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:1438
 msgctxt "atlanteans_building"
 msgid ""
-"We founded this new colony, now go with Satul and do the best you can do for"
-" your tribe."
+"We founded this new colony, now go with Satul and do the best you can do for "
+"your tribe."
 msgstr ""
 
 #. TRANSLATORS: Note lore_autor for an Atlantean production site: Headquarters
@@ -3998,8 +3996,8 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:1448
 msgctxt "atlanteans_building"
 msgid ""
-"Your workers and soldiers will find shelter here. Also stores your wares and"
-" tools. It will help you to stabilize your economy."
+"Your workers and soldiers will find shelter here. Also stores your wares and "
+"tools. It will help you to stabilize your economy."
 msgstr ""
 
 #. TRANSLATORS: Note lore for an Atlantean production site: Warehouse
@@ -4237,8 +4235,8 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:1547
 msgctxt "atlanteans_building"
 msgid ""
-"‘Take your net and come to the sea<br>In the early morning the moon ya still"
-" see<br>Collect ya catch by net or by spear,<br>and don’t forget to give "
+"‘Take your net and come to the sea<br>In the early morning the moon ya still "
+"see<br>Collect ya catch by net or by spear,<br>and don’t forget to give "
 "Satul his share.’"
 msgstr ""
 
@@ -4277,8 +4275,8 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:1569
 msgctxt "atlanteans_building"
 msgid ""
-"‘Only after the last duck has been shot down<br>Only after the last deer has"
-" been put to death<br>Only after the last fish has been caught<br>Then will "
+"‘Only after the last duck has been shot down<br>Only after the last deer has "
+"been put to death<br>Only after the last fish has been caught<br>Then will "
 "you find that spiders are not to be eaten.’"
 msgstr ""
 
@@ -4413,8 +4411,8 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:1633
 msgctxt "atlanteans_building"
 msgid ""
-"You need to connect this flag to a scout’s house before you can send a scout"
-" here."
+"You need to connect this flag to a scout’s house before you can send a scout "
+"here."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Scout's
@@ -4515,8 +4513,8 @@ msgstr ""
 msgctxt "atlanteans_building"
 msgid ""
 "If this building is fully supplied and all kinds of smoked food are needed "
-"by the economy, production of one smoked fish takes %1$s and one smoked meat"
-" takes %2$s on average. If only one kind of food is needed by the economy, "
+"by the economy, production of one smoked fish takes %1$s and one smoked meat "
+"takes %2$s on average. If only one kind of food is needed by the economy, "
 "production of one smoked fish takes %3$s and one smoked meat takes %4$s on "
 "average."
 msgstr ""
@@ -4555,10 +4553,10 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:1691
 msgctxt "atlanteans_building"
 msgid ""
-"If this building is fully supplied and both kinds of flour are needed by the"
-" economy, production of one sack of each kind of flour takes %1$s on "
-"average. If only one kind of flour is needed by the economy, its production "
-"takes %2$s on average."
+"If this building is fully supplied and both kinds of flour are needed by the "
+"economy, production of one sack of each kind of flour takes %1$s on average. "
+"If only one kind of flour is needed by the economy, its production takes "
+"%2$s on average."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Bakery
@@ -4610,8 +4608,8 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:1715
 msgctxt "atlanteans_building"
 msgid ""
-"Build only if you absolutely must produce some coal, or when you have a very"
-" large amount of logs."
+"Build only if you absolutely must produce some coal, or when you have a very "
+"large amount of logs."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Charcoal Kiln
@@ -4661,8 +4659,8 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:1733
 msgctxt "atlanteans_building"
 msgid ""
-"If this building is fully supplied and all metals are needed by the economy,"
-" production of one iron takes %1$s and one gold takes %2$s on average. If "
+"If this building is fully supplied and all metals are needed by the economy, "
+"production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
 msgstr ""
@@ -4745,8 +4743,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:1766
 msgctxt "atlanteans_building"
 msgid ""
-"Forges shields that are used for training soldiers’ defense in the "
-"labyrinth."
+"Forges shields that are used for training soldiers’ defense in the labyrinth."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Armor Smithy
@@ -4876,11 +4873,11 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:1835
 msgctxt "atlanteans_building"
 msgid ""
-"No, the spiders are not fed with corn. We feed it to fat grasshoppers, which"
-" in turn are digested by our spiders. We put them on a special device to "
-"gain the spider silk once a day. There is no need to spin this again. The "
-"thread can directly be used by the weaving mill. Oh hello, here is one of "
-"our nice spiders … Hey! Why are you running away?"
+"No, the spiders are not fed with corn. We feed it to fat grasshoppers, which "
+"in turn are digested by our spiders. We put them on a special device to gain "
+"the spider silk once a day. There is no need to spin this again. The thread "
+"can directly be used by the weaving mill. Oh hello, here is one of our nice "
+"spiders … Hey! Why are you running away?"
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Spider
@@ -4921,8 +4918,8 @@ msgstr ""
 msgctxt "atlanteans_building"
 msgid ""
 "If this building is fully supplied and all kinds of cloth and tabards are "
-"needed by the economy, production of one of each cloth and tabard takes %1$s"
-" on average. If only one kind of cloth or tabard is needed by the economy, "
+"needed by the economy, production of one of each cloth and tabard takes %1$s "
+"on average. If only one kind of cloth or tabard is needed by the economy, "
 "its production takes %2$s on average."
 msgstr ""
 
@@ -4956,10 +4953,10 @@ msgstr ""
 msgctxt "atlanteans_building"
 msgid ""
 "If this building is fully supplied and all minerals are needed by the "
-"economy, production of one granite takes %1$s, one quartz takes %2$s and one"
-" diamond takes %3$s on average. If only one kind of mineral is needed by the"
-" economy, production of one granite takes %4$s, one quartz takes %5$s and "
-"one diamond takes %6$s on average."
+"economy, production of one granite takes %1$s, one quartz takes %2$s and one "
+"diamond takes %3$s on average. If only one kind of mineral is needed by the "
+"economy, production of one granite takes %4$s, one quartz takes %5$s and one "
+"diamond takes %6$s on average."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Coal Mine
@@ -5207,8 +5204,8 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:1991
 msgctxt "atlanteans_building"
 msgid ""
-"With three soldiers we can achieve an optimal balance between military power"
-" and building cost."
+"With three soldiers we can achieve an optimal balance between military power "
+"and building cost."
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Small
@@ -5271,7 +5268,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2207
 msgctxt "building"
 msgid "Builds ferries."
-msgstr ""
+msgstr "Ĝi konstruas pramojn."
 
 #. TRANSLATORS: Note helptext for an Atlantean production site: Ferry Yard,
 #. part 1
@@ -5288,6 +5285,8 @@ msgstr ""
 msgctxt "building"
 msgid "Needs water nearby. Be aware ferries carry wares only, no workers."
 msgstr ""
+"Ĝi bezonas akvon proksime. Atentu, ke pramoj transportas nur varojn, ne "
+"laboristojn."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:2055
@@ -5873,9 +5872,9 @@ msgstr ""
 msgctxt "barbarians_ware"
 msgid ""
 "Barbarian lumberjacks fell the trees; rangers take care of the supply of "
-"trees. Logs are also used in the metal workshop to build basic tools, and in"
-" the charcoal kiln for the production of coal. The wood hardener refines "
-"logs into blackwood by hardening them with fire."
+"trees. Logs are also used in the metal workshop to build basic tools, and in "
+"the charcoal kiln for the production of coal. The wood hardener refines logs "
+"into blackwood by hardening them with fire."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Blackwood
@@ -5956,16 +5955,16 @@ msgctxt "barbarians_ware"
 msgid ""
 "The Barbarian bakers are best in making this flat and tasty pitta bread. It "
 "is made out of wheat and water following a secret recipe. Pitta bread is "
-"used in the taverns, inns and big inns to prepare rations, snacks and meals."
-" It is also consumed at training sites (training camp and battle arena)."
+"used in the taverns, inns and big inns to prepare rations, snacks and meals. "
+"It is also consumed at training sites (training camp and battle arena)."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Beer
 #: ../../data/tribes/initialization/barbarians/units.lua:215
 msgctxt "barbarians_ware"
 msgid ""
-"Beer is produced in micro breweries and used in inns and big inns to produce"
-" snacks."
+"Beer is produced in micro breweries and used in inns and big inns to produce "
+"snacks."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Strong Beer
@@ -5994,8 +5993,8 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:236
 msgctxt "barbarians_ware"
 msgid ""
-"Rations are produced in a tavern, an inn or a big inn out of fish or meat or"
-" pitta bread."
+"Rations are produced in a tavern, an inn or a big inn out of fish or meat or "
+"pitta bread."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Snack
@@ -6004,7 +6003,9 @@ msgctxt "barbarians_ware"
 msgid ""
 "A bigger morsel than the ration to provide miners in deep mines. It is "
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
-msgstr "Pli granda manĝaĵeto por ebligi ministojn en minegoj. Ĝi estas farata en restoracio aû restoraciego  el fiŝo/viando, flanpano kaj biero."
+msgstr ""
+"Pli granda manĝaĵeto por ebligi ministojn en minegoj. Ĝi estas farata en "
+"restoracio aû restoraciego  el fiŝo/viando, flanpano kaj biero."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Meal
 #: ../../data/tribes/initialization/barbarians/units.lua:255
@@ -6018,9 +6019,8 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:270
 msgctxt "barbarians_ware"
 msgid ""
-"The fires of the Barbarians are usually fed with coal. Consumers are several"
-" buildings: lime kiln, smelting works, ax workshop, war mill, and helm "
-"smithy."
+"The fires of the Barbarians are usually fed with coal. Consumers are several "
+"buildings: lime kiln, smelting works, ax workshop, war mill, and helm smithy."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Iron Ore, part 2
@@ -6068,9 +6068,9 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:347
 msgctxt "barbarians_ware"
 msgid ""
-"Felling axes are used by lumberjacks and produced in the metal workshop (but"
-" cease to be produced by the building if it is enhanced to an ax workshop "
-"and war mill)."
+"Felling axes are used by lumberjacks and produced in the metal workshop (but "
+"cease to be produced by the building if it is enhanced to an ax workshop and "
+"war mill)."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Shovel, part 2
@@ -6117,8 +6117,8 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:457
 msgctxt "ware"
 msgid ""
-"This spear is light enough to be thrown, but heavy enough to kill any animal"
-" in one blow. It is only used by hunters."
+"This spear is light enough to be thrown, but heavy enough to kill any animal "
+"in one blow. It is only used by hunters."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Hunting Spear, part 2
@@ -6142,16 +6142,16 @@ msgstr ""
 msgctxt "barbarians_ware"
 msgid ""
 "Bread paddles are produced in the metal workshop like all other tools (but "
-"cease to be produced by the building if it is enhanced to an ax workshop and"
-" war mill)."
+"cease to be produced by the building if it is enhanced to an ax workshop and "
+"war mill)."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Kitchen Tools
 #: ../../data/tribes/initialization/barbarians/units.lua:435
 msgctxt "barbarians_ware"
 msgid ""
-"Kitchen tools are needed for preparing rations, snacks and meals. Be sure to"
-" have a metal workshop to produce this basic tool (but it ceases to be "
+"Kitchen tools are needed for preparing rations, snacks and meals. Be sure to "
+"have a metal workshop to produce this basic tool (but it ceases to be "
 "produced by the building if it is enhanced to an ax workshop and war mill)."
 msgstr ""
 
@@ -6177,8 +6177,8 @@ msgstr ""
 msgctxt "barbarians_ware"
 msgid ""
 "Young soldiers are proud to learn to fight with this powerful weapon. It is "
-"heavier and sharper than the ordinary ax. It is produced in ax workshops and"
-" war mills. In training camps, it is used – together with food – to train "
+"heavier and sharper than the ordinary ax. It is produced in ax workshops and "
+"war mills. In training camps, it is used – together with food – to train "
 "soldiers from attack level 0 to level 1."
 msgstr ""
 
@@ -6196,9 +6196,8 @@ msgstr ""
 msgctxt "barbarians_ware"
 msgid ""
 "The bronze ax is considered a weapon that is hard to handle. Only skilled "
-"soldiers can use it. It is produced at the war mill and used in the training"
-" camp – together with food – to train soldiers from attack level 2 to level "
-"3."
+"soldiers can use it. It is produced at the war mill and used in the training "
+"camp – together with food – to train soldiers from attack level 2 to level 3."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Battle Ax
@@ -6337,8 +6336,8 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:654
 msgctxt "barbarians_worker"
 msgid ""
-"The gamekeeper makes sure that the natural population of animals never drops"
-" too low."
+"The gamekeeper makes sure that the natural population of animals never drops "
+"too low."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a Barbarian worker: Farmer
@@ -6362,8 +6361,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a Barbarian worker: Master Brewer
 #: ../../data/tribes/initialization/barbarians/units.lua:682
 msgctxt "barbarians_worker"
-msgid ""
-"Produces the finest ales to keep soldiers strong and happy in training."
+msgid "Produces the finest ales to keep soldiers strong and happy in training."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a Barbarian worker: Innkeeper
@@ -6533,8 +6531,8 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1112
 msgctxt "barbarians_building"
 msgid ""
-"Your workers and soldiers will find shelter here. Also stores your wares and"
-" tools."
+"Your workers and soldiers will find shelter here. Also stores your wares and "
+"tools."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a Barbarian warehouse: Port
@@ -6629,8 +6627,8 @@ msgstr ""
 msgctxt "barbarians_building"
 msgid ""
 "‘Take 200 hits to fell a tree and you’re a baby. Take 100 and you’re a "
-"soldier. Take 50 and you’re a hero. Take 20 and soon you will be a honorable"
-" lumberjack.’"
+"soldier. Take 50 and you’re a hero. Take 20 and soon you will be a honorable "
+"lumberjack.’"
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a Barbarian production site:
@@ -6733,9 +6731,11 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1215
 msgctxt "barbarians_building"
 msgid ""
-"‘As silent as a panther,<br> as deft as a weasel,<br> as swift as an "
-"arrow,<br> as deadly as a viper.’"
-msgstr "“Tiel mallaŭa kiel pantero, tiel vigla kiel mustelo, tiel rapida kiel sago, tiel mortiga kiel serpento.”"
+"‘As silent as a panther,<br> as deft as a weasel,<br> as swift as an arrow,"
+"<br> as deadly as a viper.’"
+msgstr ""
+"“Tiel mallaŭa kiel pantero, tiel vigla kiel mustelo, tiel rapida kiel sago, "
+"tiel mortiga kiel serpento.”"
 
 #. TRANSLATORS: Lore author helptext for a Barbarian production site: Hunter's
 #. Hut
@@ -6830,8 +6830,8 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1265
 msgctxt "barbarians_building"
 msgid ""
-"‘Behind the next hill there might be wealth and happiness but also hostility"
-" and doom.<br>He who will not explore it commits the crime of stupidity.’"
+"‘Behind the next hill there might be wealth and happiness but also hostility "
+"and doom.<br>He who will not explore it commits the crime of stupidity.’"
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a Barbarian production site: Scout's
@@ -6921,8 +6921,8 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1313
 msgctxt "barbarians_building"
 msgid ""
-"Ragnald the Child’s answer to the question, what he’s doing in the dirt. His"
-" ‘new stone’ now is an important building material."
+"Ragnald the Child’s answer to the question, what he’s doing in the dirt. His "
+"‘new stone’ now is an important building material."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Lime Kiln
@@ -6978,8 +6978,8 @@ msgstr "Ĝi bakas panon por laboristoj."
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
-"If all needed wares are delivered in time, this building can produce a pitta"
-" bread in %s on average."
+"If all needed wares are delivered in time, this building can produce a pitta "
+"bread in %s on average."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Micro Brewery
@@ -7012,17 +7012,17 @@ msgstr ""
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
-"If all needed wares are delivered in time, this building can produce beer in"
-" about %s on average."
+"If all needed wares are delivered in time, this building can produce beer in "
+"about %s on average."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Brewery
 #: ../../data/tribes/initialization/barbarians/units.lua:1352
 msgctxt "barbarians_building"
 msgid ""
-"‘When the Barbarian was created,<br>this was the first thing that he "
-"stated:<br>“You want me fighting without fear?<br>Then you should create "
-"some beer!”’"
+"‘When the Barbarian was created,<br>this was the first thing that he stated:"
+"<br>“You want me fighting without fear?<br>Then you should create some "
+"beer!”’"
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a Barbarian production site: Brewery
@@ -7094,8 +7094,8 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1385
 msgctxt "building"
 msgid ""
-"Prepares rations for scouts and rations and snacks to feed the miners in the"
-" basic and deep mines."
+"Prepares rations for scouts and rations and snacks to feed the miners in the "
+"basic and deep mines."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Inn
@@ -7126,8 +7126,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1398
 msgctxt "barbarians_building"
 msgid ""
-"Prepares rations for scouts and rations, snacks and meals to feed all "
-"miners."
+"Prepares rations for scouts and rations, snacks and meals to feed all miners."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Big Inn
@@ -7162,8 +7161,8 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1425
 msgctxt "barbarians_building"
 msgid ""
-"‘From inferior looking rubble they form shiny gold and gleaming iron.<br>The"
-" smelters are real magicians among our craftsmen.’"
+"‘From inferior looking rubble they form shiny gold and gleaming iron.<br>The "
+"smelters are real magicians among our craftsmen.’"
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a Barbarian production site: Smelting
@@ -7178,8 +7177,8 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1432
 msgctxt "barbarians_building"
 msgid ""
-"If this building is fully supplied and all metals are needed by the economy,"
-" production of one iron takes %1$s and one gold takes %2$s on average. If "
+"If this building is fully supplied and all metals are needed by the economy, "
+"production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
 msgstr ""
@@ -7285,9 +7284,9 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1479
 msgctxt "barbarians_building"
 msgid ""
-"The Barbarian ax workshop is the intermediate production site in a series of"
-" three buildings. It is enhanced from the metal workshop but doesn’t require"
-" additional qualification for the worker."
+"The Barbarian ax workshop is the intermediate production site in a series of "
+"three buildings. It is enhanced from the metal workshop but doesn’t require "
+"additional qualification for the worker."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Ax
@@ -7415,8 +7414,8 @@ msgstr ""
 msgctxt "barbarians_building"
 msgid ""
 "If this building is fully supplied and all helmets are needed by the "
-"economy, production of one of each helmet takes %1$s on average. If only one"
-" kind of helmet is needed by the economy, production of one helmet takes "
+"economy, production of one of each helmet takes %1$s on average. If only one "
+"kind of helmet is needed by the economy, production of one helmet takes "
 "%2$s, one mask takes %3$s and one warhelm takes %4$s on average."
 msgstr ""
 
@@ -7463,8 +7462,7 @@ msgstr ""
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
-"If the food supply is steady, this mine can produce granite in %s on "
-"average."
+"If the food supply is steady, this mine can produce granite in %s on average."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for production site: Coal Mine, part 1
@@ -7613,7 +7611,9 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
-msgstr "“Eviti” plibonigas ŝanzon de militisto por ne esti frapata de malamiko kaj por tiele postresti sen damaĝo."
+msgstr ""
+"“Eviti” plibonigas ŝanzon de militisto por ne esti frapata de malamiko kaj "
+"por tiele postresti sen damaĝo."
 
 #. TRANSLATORS: Note helptext for a Barbarian training site: Battle Arena
 #. TRANSLATORS: Note helptext for a Barbarian building: Training Camp
@@ -7670,8 +7670,8 @@ msgstr ""
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
-"If all needed wares are delivered in time, a training camp can train one new"
-" soldier in attack and health to the final level in %s on average."
+"If all needed wares are delivered in time, a training camp can train one new "
+"soldier in attack and health to the final level in %s on average."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a Barbarian military site: Sentry
@@ -7679,8 +7679,8 @@ msgstr ""
 msgctxt "barbarians_building"
 msgid ""
 "‘The log cabin was so small that two men could hardly live there. But we "
-"were young and carefree. We just relished our freedom and the responsibility"
-" as an outpost.’"
+"were young and carefree. We just relished our freedom and the responsibility "
+"as an outpost.’"
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a Barbarian military site: Sentry
@@ -7772,8 +7772,8 @@ msgstr ""
 msgctxt "barbarians_building"
 msgid ""
 "‘When I saw the Saxnot for the first time, her majestic dragon head already "
-"looked up to the skies and the master was about to install the square "
-"sail.<br>It was the most noble ship I ever saw.’"
+"looked up to the skies and the master was about to install the square sail."
+"<br>It was the most noble ship I ever saw.’"
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Weaving Mill
@@ -10021,8 +10021,8 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:161
 msgctxt "empire_ware"
 msgid ""
-"Cloth is needed to build several buildings. It is also consumed in the armor"
-" smithy."
+"Cloth is needed to build several buildings. It is also consumed in the armor "
+"smithy."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Empire ware: Fish
@@ -10037,8 +10037,8 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:184
 msgctxt "empire_ware"
 msgid ""
-"Meat can also be obtained as pork from piggeries. It is used in the inns and"
-" taverns to prepare lunch for the miners and is consumed at the training "
+"Meat can also be obtained as pork from piggeries. It is used in the inns and "
+"taverns to prepare lunch for the miners and is consumed at the training "
 "sites (arena, colosseum, training camp)."
 msgstr ""
 
@@ -10046,8 +10046,8 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:196
 msgctxt "empire_ware"
 msgid ""
-"Water is used in the bakery and the brewery. The donkey farm, the sheep farm"
-" and the piggery also need to be supplied with water."
+"Water is used in the bakery and the brewery. The donkey farm, the sheep farm "
+"and the piggery also need to be supplied with water."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Empire ware: Wheat, part 2
@@ -10079,24 +10079,24 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:236
 msgctxt "empire_ware"
 msgid ""
-"This beer is produced in a brewery out of wheat and water. It is consumed by"
-" miners in coal and iron mines."
+"This beer is produced in a brewery out of wheat and water. It is consumed by "
+"miners in coal and iron mines."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Empire ware: Grape
 #: ../../data/tribes/initialization/empire/units.lua:244
 msgctxt "empire_ware"
 msgid ""
-"These grapes are the base for a tasty wine. They are harvested in a vineyard"
-" and processed in a winery."
+"These grapes are the base for a tasty wine. They are harvested in a vineyard "
+"and processed in a winery."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Empire ware: Wine
 #: ../../data/tribes/initialization/empire/units.lua:252
 msgctxt "empire_ware"
 msgid ""
-"This tasty wine is drunk by the miners working the marble and gold mines. It"
-" is produced in a winery."
+"This tasty wine is drunk by the miners working the marble and gold mines. It "
+"is produced in a winery."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Empire ware: Ration, part 2
@@ -10165,16 +10165,15 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:359
 msgctxt "empire_ware"
 msgid ""
-"It is produced by the smelting works. Armor and weapons are embellished with"
-" gold in the armor smithy and the weapon smithy."
+"It is produced by the smelting works. Armor and weapons are embellished with "
+"gold in the armor smithy and the weapon smithy."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Empire ware: Pick
 #: ../../data/tribes/initialization/empire/units.lua:372
 msgctxt "empire_ware"
 msgid ""
-"Picks are used by stonemasons and miners. They are produced by the "
-"toolsmith."
+"Picks are used by stonemasons and miners. They are produced by the toolsmith."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Empire ware: Felling Ax, part 2
@@ -10261,8 +10260,8 @@ msgstr ""
 msgctxt "empire_ware"
 msgid ""
 "This spear has an iron spike. It is produced in a weapon smithy and used in "
-"a training camp – together with food – to train soldiers from attack level 0"
-" to attack level 1."
+"a training camp – together with food – to train soldiers from attack level 0 "
+"to attack level 1."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Empire ware: Advanced Spear
@@ -10298,16 +10297,16 @@ msgctxt "empire_ware"
 msgid ""
 "The helmet is the basic defense of a soldier. It is produced in an armor "
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
-"young soldiers. Helmets are also used in training camps – together with food"
-" – to train soldiers from health level 0 to level 1."
+"young soldiers. Helmets are also used in training camps – together with food "
+"– to train soldiers from health level 0 to level 1."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Empire ware: Armor
 #: ../../data/tribes/initialization/empire/units.lua:569
 msgctxt "empire_ware"
 msgid ""
-"Basic armor for Empire soldiers. It is produced in the armor smithy and used"
-" in the training camp – together with food – to train soldiers from health "
+"Basic armor for Empire soldiers. It is produced in the armor smithy and used "
+"in the training camp – together with food – to train soldiers from health "
 "level 1 to level 2."
 msgstr ""
 
@@ -10353,8 +10352,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:625
 msgctxt "empire_worker"
 msgid ""
-"Breeds cute and helpful donkeys for adding them to the transportation "
-"system."
+"Breeds cute and helpful donkeys for adding them to the transportation system."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Empire worker: Stonemason
@@ -10665,8 +10663,8 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:1203
 msgctxt "empire_building"
 msgid ""
-"Your workers and soldiers will find shelter here. Also stores your wares and"
-" tools."
+"Your workers and soldiers will find shelter here. Also stores your wares and "
+"tools."
 msgstr ""
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
@@ -11014,8 +11012,8 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:1415
 msgctxt "empire_building"
 msgid ""
-"You need to connect this flag to a scout’s house before you can send a scout"
-" here."
+"You need to connect this flag to a scout’s house before you can send a scout "
+"here."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Scout's
@@ -11348,8 +11346,8 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:1651
 msgctxt "empire_building"
 msgid ""
-"If this building is fully supplied and all metals are needed by the economy,"
-" production of one iron takes %1$s and one gold takes %2$s on average. If "
+"If this building is fully supplied and all metals are needed by the economy, "
+"production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
 msgstr ""
@@ -11392,8 +11390,8 @@ msgstr ""
 #. through the cloth."
 #: ../../data/tribes/initialization/empire/units.lua:1683
 msgid ""
-"Hi loricarum vasto sub tegmine gaudent, intexit creber sibimet quas circulus"
-" hærens, atque catenosi crepitant per corpora panni."
+"Hi loricarum vasto sub tegmine gaudent, intexit creber sibimet quas circulus "
+"hærens, atque catenosi crepitant per corpora panni."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for an Empire production site: Armorsmithy
@@ -11429,8 +11427,8 @@ msgctxt "empire_building"
 msgid ""
 "If this building is fully supplied and all kinds of armor and helmets are "
 "needed by the economy, production of one helmet takes %1$s and one of each "
-"kind of armor takes %2$s on average. If only one kind of armor or helmets is"
-" needed by the economy, production of one helmet takes %3$s, while one kind "
+"kind of armor takes %2$s on average. If only one kind of armor or helmets is "
+"needed by the economy, production of one helmet takes %3$s, while one kind "
 "of armor takes %4$s on average."
 msgstr ""
 
@@ -11487,8 +11485,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:1737
 msgctxt "empire_building"
 msgid ""
-"Breeds cute and helpful donkeys for adding them to the transportation "
-"system."
+"Breeds cute and helpful donkeys for adding them to the transportation system."
 msgstr ""
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
@@ -11510,8 +11507,8 @@ msgstr ""
 #. dum agellum suum arat."
 #: ../../data/tribes/initialization/empire/units.lua:1754
 msgid ""
-"Lutius had already removed himself from public affairs, he was living in the"
-" countryside, and the ambassadors of the senate found him while he was "
+"Lutius had already removed himself from public affairs, he was living in the "
+"countryside, and the ambassadors of the senate found him while he was "
 "plowing his land."
 msgstr ""
 
@@ -11644,8 +11641,8 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:1842
 msgctxt "empire_building"
 msgid ""
-"If this building is fully supplied and all spears are needed by the economy,"
-" production of one of each spear takes %1$s on average. If only one kind of "
+"If this building is fully supplied and all spears are needed by the economy, "
+"production of one of each spear takes %1$s on average. If only one kind of "
 "spear is needed by the economy, production of one wooden spear takes %2$s, "
 "one spear, one advanced spear, one heavy spear or one war spear takes %3$s "
 "on average."
@@ -11838,8 +11835,7 @@ msgstr ""
 #. TRANSLATORS: Lore author helptext for an Empire production site: Gold Mine
 #: ../../data/tribes/initialization/empire/units.lua:2000
 msgctxt "empire_building"
-msgid ""
-"Amalea receiving the first geologist report of gold on the small island"
+msgid "Amalea receiving the first geologist report of gold on the small island"
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Gold Mine
@@ -11921,7 +11917,9 @@ msgctxt "empire_building"
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
-msgstr "“Eviti” plibonigas ŝanzon de militisto por ne esti frapata de malamiko kaj por tiele postresti sen damaĝo."
+msgstr ""
+"“Eviti” plibonigas ŝanzon de militisto por ne esti frapata de malamiko kaj "
+"por tiele postresti sen damaĝo."
 
 #. TRANSLATORS: Note helptext for an Empire training site: Arena
 #. TRANSLATORS: Note helptext for an Empire training site: Colosseum
@@ -12097,8 +12095,8 @@ msgstr ""
 #. flumen supra castra."
 #: ../../data/tribes/initialization/empire/units.lua:2176
 msgid ""
-"Two were stationed on the other side of the city than the camp: one over the"
-" river, the other by the river above the camp."
+"Two were stationed on the other side of the city than the camp: one over the "
+"river, the other by the river above the camp."
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for an Empire military site: Outpost
@@ -12215,7 +12213,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:2298
 msgctxt "empire_building"
 msgid "Amalea on the need for ferries after the reconstruction of Fremil"
-msgstr ""
+msgstr "Amalea, pri la bezono de pramoj post la rekonstruo de Fremil."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -13383,10 +13381,10 @@ msgstr[1] ""
 #: ../../data/tribes/initialization/frisians/units.lua:101
 msgctxt "frisians_ware"
 msgid ""
-"Woodcutters fell the trees; foresters take care of the supply of trees. Logs"
-" are also used in the blacksmithy to build basic tools, and in the charcoal "
-"kiln for the production of coal. Smokeries use logs as fuel for smoking meat"
-" and fish."
+"Woodcutters fell the trees; foresters take care of the supply of trees. Logs "
+"are also used in the blacksmithy to build basic tools, and in the charcoal "
+"kiln for the production of coal. Smokeries use logs as fuel for smoking meat "
+"and fish."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a Frisian ware: Granite, part 2
@@ -13433,8 +13431,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a Frisian ware: Cloth
 #: ../../data/tribes/initialization/frisians/units.lua:159
 msgctxt "frisians_ware"
-msgid ""
-"Cloth is needed for ships. It is produced out of reindeer fur and reed."
+msgid "Cloth is needed for ships. It is produced out of reindeer fur and reed."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a Frisian ware: Fruit
@@ -13465,8 +13462,8 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:198
 msgctxt "frisians_ware"
 msgid ""
-"Honey is produced by bees belonging to a beekeeper. It is used to bake honey"
-" bread and brew mead."
+"Honey is produced by bees belonging to a beekeeper. It is used to bake honey "
+"bread and brew mead."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a Frisian ware: Bread
@@ -13601,8 +13598,8 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:379
 msgctxt "frisians_ware"
 msgid ""
-"Discarded weapons and armor can be recycled in a recycling center to produce"
-" new tools, weapon and armor."
+"Discarded weapons and armor can be recycled in a recycling center to produce "
+"new tools, weapon and armor."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a Frisian ware: Old Fur Garment
@@ -13782,8 +13779,8 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:642
 msgctxt "frisians_worker"
 msgid ""
-"Reindeer help to carry items along busy roads. They are reared in a reindeer"
-" farm."
+"Reindeer help to carry items along busy roads. They are reared in a reindeer "
+"farm."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a Frisian worker: Reindeer Breeder
@@ -13965,8 +13962,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a Frisian worker: Master Blacksmith
 #: ../../data/tribes/initialization/frisians/units.lua:868
 msgctxt "frisians_worker"
-msgid ""
-"Produces the best weapons and armor for soldiers and tools for workers."
+msgid "Produces the best weapons and armor for soldiers and tools for workers."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a Frisian worker: Soldier
@@ -14061,8 +14057,8 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1206
 msgid ""
 "When claydiggers dig up earth, they leave holes in the ground. These holes "
-"vanish after a while. Aqua farms can use them as ponds to grow fish in them,"
-" whereas charcoal burners erect their charcoal stacks in them."
+"vanish after a while. Aqua farms can use them as ponds to grow fish in them, "
+"whereas charcoal burners erect their charcoal stacks in them."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a Frisian immovable: Pond
@@ -14140,8 +14136,8 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1538
 msgctxt "frisians_building"
 msgid ""
-"Your workers and soldiers will find shelter here. Also stores your wares and"
-" tools."
+"Your workers and soldiers will find shelter here. Also stores your wares and "
+"tools."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a Frisian warehouse: Port
@@ -14348,8 +14344,7 @@ msgstr ""
 #. TRANSLATORS: Lore helptext for a Frisian production site: Reed Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1653
 msgctxt "frisians_building"
-msgid ""
-"No worse fortune can befall a reed farmer than to see his roof leaking."
+msgid "No worse fortune can befall a reed farmer than to see his roof leaking."
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a Frisian production site: Reed Farm
@@ -14534,8 +14529,8 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1739
 msgctxt "frisians_building"
 msgid ""
-"If my honey tastes bitter, I must have left some bee stings in it. There are"
-" never any bee stings in my honey, therefore, it is not bitter."
+"If my honey tastes bitter, I must have left some bee stings in it. There are "
+"never any bee stings in my honey, therefore, it is not bitter."
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a Frisian production site:
@@ -14556,8 +14551,8 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1745
 msgctxt "frisians_building"
 msgid ""
-"Needs medium-sized fields (barley, wheat, reed, corn or blackroot) or bushes"
-" (berry bushes or grapevines) nearby."
+"Needs medium-sized fields (barley, wheat, reed, corn or blackroot) or bushes "
+"(berry bushes or grapevines) nearby."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a Frisian production site:
@@ -14590,8 +14585,8 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1760
 msgctxt "building"
 msgid ""
-"The aqua farm needs holes in the ground that were dug by a clay pit’s worker"
-" nearby to use as fishing ponds."
+"The aqua farm needs holes in the ground that were dug by a clay pit’s worker "
+"nearby to use as fishing ponds."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Scout's House
@@ -14613,8 +14608,8 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1770
 msgctxt "frisians_building"
 msgid ""
-"You need to connect this flag to a scout’s house before you can send a scout"
-" here."
+"You need to connect this flag to a scout’s house before you can send a scout "
+"here."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Scout's
@@ -14677,8 +14672,8 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1806
 msgctxt "frisians_building"
 msgid ""
-"If this building is fully supplied and all metals are needed by the economy,"
-" production of one iron takes %1$s and one gold takes %2$s on average. If "
+"If this building is fully supplied and all metals are needed by the economy, "
+"production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
 msgstr ""
@@ -14746,9 +14741,8 @@ msgctxt "frisians_building"
 msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
-"tool is needed by the economy, its production takes %2$s on average. Needles"
-" are an exception – in the time to produce one tool two needles are "
-"produced."
+"tool is needed by the economy, its production takes %2$s on average. Needles "
+"are an exception – in the time to produce one tool two needles are produced."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Small Armor
@@ -14756,8 +14750,8 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1839
 msgctxt "frisians_building"
 msgid ""
-"I don’t forge swords because soldiers need ’em, but soldiers get ’em because"
-" I forge ’em."
+"I don’t forge swords because soldiers need ’em, but soldiers get ’em because "
+"I forge ’em."
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a Frisian production site: Small
@@ -14817,19 +14811,19 @@ msgstr ""
 msgctxt "frisians_building"
 msgid ""
 "If this building is fully supplied and all swords and helmets are needed by "
-"the economy, production of one broadsword takes %1$s, one double-edged sword"
-" takes %2$s and one golden helmet takes %3$s on average. If only one kind of"
-" sword or helmet is needed by the economy, production of one broadsword "
-"takes %4$s, one double-edged sword takes %5$s and one golden helmet takes "
-"%6$s on average."
+"the economy, production of one broadsword takes %1$s, one double-edged sword "
+"takes %2$s and one golden helmet takes %3$s on average. If only one kind of "
+"sword or helmet is needed by the economy, production of one broadsword takes "
+"%4$s, one double-edged sword takes %5$s and one golden helmet takes %6$s on "
+"average."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Sewing Room
 #: ../../data/tribes/initialization/frisians/units.lua:1865
 msgctxt "frisians_building"
 msgid ""
-"You soldiers think a good sword is everything, but where would you be if you"
-" had no garments?"
+"You soldiers think a good sword is everything, but where would you be if you "
+"had no garments?"
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a Frisian production site: Sewing
@@ -14979,8 +14973,8 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1936
 msgctxt "frisians_building"
 msgid ""
-"If this building is fully supplied and all breads are needed by the economy,"
-" production of one bread takes %1$s and one honey bread takes %2$s on "
+"If this building is fully supplied and all breads are needed by the economy, "
+"production of one bread takes %1$s and one honey bread takes %2$s on "
 "average. If only one kind of bread is needed by the economy, production of "
 "one bread or one honey bread takes %3$s on average."
 msgstr ""
@@ -15037,8 +15031,8 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1962
 msgctxt "frisians_building"
 msgid ""
-"If this building is fully supplied and all drinks are needed by the economy,"
-" production of one beer takes %1$s and one mead takes %2$s on average. If "
+"If this building is fully supplied and all drinks are needed by the economy, "
+"production of one beer takes %1$s and one mead takes %2$s on average. If "
 "only one kind of drink is needed by the economy, production of one beer or "
 "one mead takes %3$s on average."
 msgstr ""
@@ -15068,8 +15062,8 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1982
 msgctxt "frisians_building"
 msgid ""
-"All I need to be happy is a slice of honey bread with some smoked meat and a"
-" beer."
+"All I need to be happy is a slice of honey bread with some smoked meat and a "
+"beer."
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a Frisian production site: Drinking
@@ -15102,8 +15096,8 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1995
 msgctxt "frisians_building"
 msgid ""
-"You have thirty seconds to learn the basics of swordfighting and how to stay"
-" alive in battle. A third of that time has gone by for the introduction "
+"You have thirty seconds to learn the basics of swordfighting and how to stay "
+"alive in battle. A third of that time has gone by for the introduction "
 "alone! You’d better pay close attention to me in order to make the most of "
 "it. Now here is your new short sword, forged just for you by our best "
 "blacksmiths. Time’s up everyone, now go occupy your sentinels!"
@@ -15139,8 +15133,7 @@ msgstr ""
 #. Farm
 #: ../../data/tribes/initialization/frisians/units.lua:2012
 msgctxt "frisians_building"
-msgid ""
-"The reindeer breeder who first proposed using reindeer fur for clothing"
+msgid "The reindeer breeder who first proposed using reindeer fur for clothing"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Reindeer Farm
@@ -15164,11 +15157,11 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2018
 msgctxt "frisians_building"
 msgid ""
-"If this building is fully supplied and both reindeers and furs are needed by"
-" the economy, production of one reindeer takes %1$s and one fur takes %2$s "
-"on average. If only reindeers are needed by the economy, their production "
-"takes %3$s on average. If only fur is needed by the economy, its production "
-"takes %4$s on average."
+"If this building is fully supplied and both reindeers and furs are needed by "
+"the economy, production of one reindeer takes %1$s and one fur takes %2$s on "
+"average. If only reindeers are needed by the economy, their production takes "
+"%3$s on average. If only fur is needed by the economy, its production takes "
+"%4$s on average."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Farm
@@ -15183,8 +15176,8 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2027
 msgctxt "frisians_building"
 msgid ""
-"A farmer’s reply when asked by his chieftain why he was planting such a "
-"slow-growing grain."
+"A farmer’s reply when asked by his chieftain why he was planting such a slow-"
+"growing grain."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Farm
@@ -15346,8 +15339,8 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2140
 msgctxt "frisians_building"
 msgid ""
-"Trains soldiers in Attack, Defense and Health to the final level. Equips the"
-" soldiers with all necessary weapons and armor parts."
+"Trains soldiers in Attack, Defense and Health to the final level. Equips the "
+"soldiers with all necessary weapons and armor parts."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a Frisian training site: Training Arena
@@ -15398,8 +15391,8 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2220
 msgctxt "frisians_building"
 msgid ""
-"This house may be called a shipyard, but my ships are rather longer than one"
-" yard!"
+"This house may be called a shipyard, but my ships are rather longer than one "
+"yard!"
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a Frisian production site: Shipyard
@@ -15992,8 +15985,8 @@ msgstr ""
 #: ../../data/tribes/scripting/help/building_help.lua:339
 msgid ""
 "This mine will exploit all of its resources down to the deepest level. But "
-"even after having done so, it will still have a %1%%% chance of finding some"
-" more of them."
+"even after having done so, it will still have a %1%%% chance of finding some "
+"more of them."
 msgstr ""
 
 #: ../../data/tribes/scripting/help/building_help.lua:347

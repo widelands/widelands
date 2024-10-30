@@ -1,7 +1,7 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Jaypad <ju-ju@nataju.fr>, 2017
 # zecas <jjorge@free.fr>, 2017
@@ -11,22 +11,23 @@
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
 # C138, 2021
 # Atanase Albaran, 2021
-# Renaud Bouchard, 2022
 # C Jimmy, 2023
-# 
+# Renaud Bouchard, 2024
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-02-01 02:29+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: C Jimmy, 2023\n"
+"Last-Translator: Renaud Bouchard, 2024\n"
 "Language-Team: French (https://app.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % "
+"1000000 == 0 ? 1 : 2;\n"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:45
 msgid "Build your first outpost"
@@ -98,8 +99,8 @@ msgstr ""
 msgid ""
 "Remember that you can access the economy settings by clicking on any flag."
 msgstr ""
-"Souvenez-vous que vous pouvez accéder aux paramètres économiques en cliquant"
-" sur n'importe quel drapeau."
+"Souvenez-vous que vous pouvez accéder aux paramètres économiques en cliquant "
+"sur n'importe quel drapeau."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:82
 msgid "Find a port space on the small island"
@@ -156,9 +157,12 @@ msgstr "Production de tissu"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid ""
-"Now build a sheep farm and use all the wheat to produce at least 50 bales of"
-" wool. Afterwards use the wool to weave cloth in order to build a ship."
+"Now build a sheep farm and use all the wheat to produce at least 50 bales of "
+"wool. Afterwards use the wool to weave cloth in order to build a ship."
 msgstr ""
+"Construisez une bergerie et utilisez tout le blé pour produire au moins 50 "
+"balles de laine. Utilisez ensuite la laine pour tisser de la toile afin de "
+"construire un navire."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
@@ -172,16 +176,16 @@ msgstr "Construisez deux ports d'expédition"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:122
 msgid ""
-"Explore the island in the south. Send an expedition from our port to build a"
-" port there. Afterwards, try to find some mining resources."
+"Explore the island in the south. Send an expedition from our port to build a "
+"port there. Afterwards, try to find some mining resources."
 msgstr ""
 "Explorez l'île au sud. Envoyez une expédition de notre port pour y "
 "construire un port. Ensuite, essayez de trouver des ressources minières."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid ""
-"Send a ship northwards to gather some intelligence about the Barbarians. Try"
-" to build a port on the island and found an outpost."
+"Send a ship northwards to gather some intelligence about the Barbarians. Try "
+"to build a port on the island and found an outpost."
 msgstr ""
 "Envoyez un navire au nord afin de quérir des informations sur les Barbares. "
 "Essayez de construire un port sur l'île et trouvez un avant-poste."
@@ -195,8 +199,7 @@ msgid "Gold Production"
 msgstr "Production d'Or"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:132
-msgid ""
-"Produce at least six bars of gold to be able to colonize your vicinity."
+msgid "Produce at least six bars of gold to be able to colonize your vicinity."
 msgstr ""
 "Produisez au moins six lingots d'or pour pouvoir coloniser votre voisinage."
 
@@ -221,8 +224,7 @@ msgid "Explore Additional Islands and Search for Port Spaces"
 msgstr "Explorez les îles additionnelles et cherchez des zones portuaires"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:150
-msgid ""
-"Discover more land in your vicinity and build as many ports as you can."
+msgid "Discover more land in your vicinity and build as many ports as you can."
 msgstr "Découvrez plus de terres et construisez autant de ports que possible."
 
 #. TRANSLATORS: Objective header
@@ -251,8 +253,8 @@ msgstr "Infrastructure d’entraînement"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:173
 msgid ""
-"Build a training camp, some barracks and an arena or colosseum to train your"
-" soldiers."
+"Build a training camp, some barracks and an arena or colosseum to train your "
+"soldiers."
 msgstr ""
 "Construisez un camp d’entraînement, quelques casernes et une arène ou un "
 "colisée pour entraîner vos soldats."
@@ -276,8 +278,8 @@ msgid ""
 "Finally, we were set towards Fremil again. I couldn’t await the chance to "
 "clear my records of this big defeat by the Barbarians."
 msgstr ""
-"Enfin, nous mettons le cap vers Fremil à nouveau. Je suis impatient de faire"
-" oublier cette grande défaite contre les Barbares."
+"Enfin, nous mettons le cap vers Fremil à nouveau. Je suis impatient de faire "
+"oublier cette grande défaite contre les Barbares."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:188
@@ -307,9 +309,9 @@ msgid ""
 "taking in more and more water. We would be glad to survive this black night "
 "with barely more than our lives."
 msgstr ""
-"Notre navire est gravement endommagé. Le mât est passé par dessus bord et la"
-" coque prend de plus en plus l'eau. Nous serions heureux de survivre à cette"
-" nuit noire et de sauver au moins nos vies."
+"Notre navire est gravement endommagé. Le mât est passé par dessus bord et la "
+"coque prend de plus en plus l'eau. Nous serions heureux de survivre à cette "
+"nuit noire et de sauver au moins nos vies."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:206
 msgid "Shipwrecked Again"
@@ -350,8 +352,8 @@ msgid ""
 "trees. I fear we won’t find the resources we need to build a new ship."
 msgstr ""
 "Pour rendre les choses encore pire , toute la terre que nous pouvons voir "
-"est couverte de rochers et d'arbres. Je crains que nous ne trouvions pas les"
-" ressources nécessaires pour construire un nouveau navire."
+"est couverte de rochers et d'arbres. Je crains que nous ne trouvions pas les "
+"ressources nécessaires pour construire un nouveau navire."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:221
@@ -359,8 +361,8 @@ msgid ""
 "I really don’t know if and how we will get back home. And the war is going "
 "on without us. I hope my fellow soldiers are defending our empire well."
 msgstr ""
-"Je ne sais vraiment pas si et comment nous pourrons rentrer chez nous. Et la"
-" guerre continue sans nous. J'espère que mes braves soldats défendent bien "
+"Je ne sais vraiment pas si et comment nous pourrons rentrer chez nous. Et la "
+"guerre continue sans nous. J'espère que mes braves soldats défendent bien "
 "notre empire."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:227
@@ -375,8 +377,8 @@ msgstr "Saledus regarde nerveusement les environs..."
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:230
 msgid ""
 "Sire, we do not know anything about the island. And I believe we are not "
-"safe either. It would probably be reasonable to build a tower to explore the"
-" island and add some military strength."
+"safe either. It would probably be reasonable to build a tower to explore the "
+"island and add some military strength."
 msgstr ""
 "Sire, nous ne connaissons rien de cette île. Et je ne nous crois pas en "
 "sécurité non plus. Il serait raisonnable de construire une tour pour "
@@ -394,12 +396,12 @@ msgstr "Amalea lève sa main..."
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:239
 msgid ""
 "As we don’t know how many resources we can get, we should be very "
-"restrictive in spending them. Even for military buildings, we should be very"
-" careful."
+"restrictive in spending them. Even for military buildings, we should be very "
+"careful."
 msgstr ""
 "Comme nous ne savons pas combien de ressources nous pourrons extraire, nous "
-"devrons être très restrictifs dans leur utilisation. Même pour les bâtiments"
-" militaires, nous devrions être très attentifs."
+"devrons être très restrictifs dans leur utilisation. Même pour les bâtiments "
+"militaires, nous devrions être très attentifs."
 
 #. TRANSLATORS: Message header - Saledus is advising to save resources
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:246
@@ -414,8 +416,7 @@ msgstr "Saledus acquiesce en signe d'approbation..."
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:249
 msgid ""
 "Sire, Amalea is right about the resources. Therefore I correct myself. We "
-"should only build an outpost as this is the most effective military "
-"building."
+"should only build an outpost as this is the most effective military building."
 msgstr ""
 "Sire, Amalea a raison à propos des ressources. Par conséquent, je me "
 "corrige. Nous devrions seulement construire un poste avancé car c'est le "
@@ -475,15 +476,15 @@ msgid ""
 "I think we should try to reveal some building space by cutting up all the "
 "rocks in a quarry."
 msgstr ""
-"Je pense que nous devrions essayer de libérer de l'espace de construction en"
-" minant tous ces rochers avec une carrière."
+"Je pense que nous devrions essayer de libérer de l'espace de construction en "
+"minant tous ces rochers avec une carrière."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:278
 msgid ""
 "Additionally, this would gain us some granite and some marble to build up "
-"our new world. We can use them as soon as there will finally be enough space"
-" for buildings."
+"our new world. We can use them as soon as there will finally be enough space "
+"for buildings."
 msgstr ""
 "De plus, ceci nous apporterait du granit et du marbre pour construire notre "
 "nouveau monde. Nous pourrons les utiliser dès que nous aurons finalement "
@@ -533,25 +534,25 @@ msgstr "J'ai des choses importantes à dire... D'abord les bonnes nouvelles :"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:306
 msgid ""
-"I noticed that our stonemason has started his work, finally. He will cut the"
-" number of marble columns that we request in our basic economy settings."
+"I noticed that our stonemason has started his work, finally. He will cut the "
+"number of marble columns that we request in our basic economy settings."
 msgstr ""
-"J'ai remarqué que notre tailleur de pierre a commencé son travail, enfin. Il"
-" va tailler les colonnes de marbre demandées par le paramétrage de notre "
+"J'ai remarqué que notre tailleur de pierre a commencé son travail, enfin. Il "
+"va tailler les colonnes de marbre demandées par le paramétrage de notre "
 "économie de base."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:309
 msgid ""
-"But here’s the rub, if we use up all of our marble for columns, we might run"
-" out. So, we should lower the settings for marble columns in the economy "
+"But here’s the rub, if we use up all of our marble for columns, we might run "
+"out. So, we should lower the settings for marble columns in the economy "
 "settings to a smaller amount. I think a reserve of four columns might be "
 "sufficient for the moment being."
 msgstr ""
 "Mais voici le problème, si nous utilisons tout notre marbre pour les "
 "colonnes, nous allons en manquer. Donc, nous devrons baisser l'objectif de "
-"colonnes de marbre dans les réglages économiques vers un nombre plus bas. Je"
-" pense qu'une réserve de quatre colonnes devrait être suffisante pour le "
+"colonnes de marbre dans les réglages économiques vers un nombre plus bas. Je "
+"pense qu'une réserve de quatre colonnes devrait être suffisante pour le "
 "moment."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:317
@@ -579,8 +580,8 @@ msgid ""
 "This is a great step forward in constructing advanced buildings. And we can "
 "think of using some planks to build new ships."
 msgstr ""
-"C'est un grand pas en avant pour construire des bâtiments complexes. Et nous"
-" pouvons penser à utiliser quelques planches pour construire de nouveaux "
+"C'est un grand pas en avant pour construire des bâtiments complexes. Et nous "
+"pouvons penser à utiliser quelques planches pour construire de nouveaux "
 "navires."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:332
@@ -603,8 +604,8 @@ msgstr ""
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:338
 msgid ""
-"The problem is that a port is a building which needs a very special place to"
-" be built. So, while building our economy, we should nevertheless expand "
+"The problem is that a port is a building which needs a very special place to "
+"be built. So, while building our economy, we should nevertheless expand "
 "further to discover the whole island. Let’s try to find such a valuable "
 "construction site."
 msgstr ""
@@ -657,11 +658,11 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:366
 msgid ""
 "To send out an expeditionary ship, we first need a ship. Unfortunately, we "
-"have only five bales of cloth left, which we will need to build the port and"
-" the shipyard."
+"have only five bales of cloth left, which we will need to build the port and "
+"the shipyard."
 msgstr ""
-"Pour envoyer un navire en expédition, nous avons d'abord besoin d'un navire."
-" Malheureusement, nous avons seulement cinq rouleaux de tissu restants, que "
+"Pour envoyer un navire en expédition, nous avons d'abord besoin d'un navire. "
+"Malheureusement, nous avons seulement cinq rouleaux de tissu restants, que "
 "nous allons utiliser pour construire le port et le chantier naval."
 
 #. TRANSLATORS: Amalea
@@ -673,8 +674,8 @@ msgid ""
 msgstr ""
 "Donc, il nous faudra plus de tissu pour construire des navires. Mais il n'y "
 "a pas assez d'espace sur l'île pour développer une économie qui produise du "
-"tissu. De ce fait, nous devons bâtir les matériaux nécessaires les uns après"
-" les autres."
+"tissu. De ce fait, nous devons bâtir les matériaux nécessaires les uns après "
+"les autres."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:372
@@ -685,8 +686,8 @@ msgid ""
 msgstr ""
 "Bon, pensons ceci dans son ensemble. Pour tisser de l'étoffe nous avons "
 "besoin de laine d'une bergerie. La bergerie elle-même aura besoin de blé et "
-"d'eau pour fonctionner. Donc, cherchons un endroit pour un grand bâtiment et"
-" construisez une ferme en premier."
+"d'eau pour fonctionner. Donc, cherchons un endroit pour un grand bâtiment et "
+"construisez une ferme en premier."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:375
@@ -697,10 +698,10 @@ msgid ""
 "our wool for weaving cloth. But for the moment being, let’s start by "
 "producing a reasonable amount of wheat."
 msgstr ""
-"Après avoir produit suffisamment de blé, nous pouvons démanteler la ferme et"
-" construire une bergerie pour produire de la laine. Lorsque la bergerie "
-"commencera à fonctionner, nous pourrions trouver ou libérer de l'espace pour"
-" un bâtiment moyen afin de construire une usine textile et ainsi d'utiliser "
+"Après avoir produit suffisamment de blé, nous pouvons démanteler la ferme et "
+"construire une bergerie pour produire de la laine. Lorsque la bergerie "
+"commencera à fonctionner, nous pourrions trouver ou libérer de l'espace pour "
+"un bâtiment moyen afin de construire une usine textile et ainsi d'utiliser "
 "notre laine pour réaliser des tissus. Mais pour le moment, commençons par "
 "produire une quantité raisonnable de blé."
 
@@ -708,8 +709,8 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:378
 msgid ""
 "I think a stock of 50 sheaves of wheat would be enough for starters. We do "
-"not have a target quantity for wheat, because the farmer does not need other"
-" wares to produce it. All we have to do is watch our stock of wheat grow."
+"not have a target quantity for wheat, because the farmer does not need other "
+"wares to produce it. All we have to do is watch our stock of wheat grow."
 msgstr ""
 "Je pense qu'un stock de 50 gerbes de blé suffirait pour commencer. Nous "
 "n'avons pas de quantité cible pour le blé, car l'agriculteur n'a pas besoin "
@@ -739,8 +740,8 @@ msgid ""
 "Well done so far. We have produced enough wheat. Now dismantle the farm and "
 "build the next building in the production chain."
 msgstr ""
-"Bien joué. Nous avons produit assez de blé. Maintenant démontons la ferme et"
-" construisons le prochain bâtiment de la chaîne de production."
+"Bien joué. Nous avons produit assez de blé. Maintenant démontons la ferme et "
+"construisons le prochain bâtiment de la chaîne de production."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:401
@@ -759,8 +760,8 @@ msgid ""
 "Perhaps it would be a good idea to stop the shipyard’s production until we "
 "have some cloth available in order to not waste any logs or planks."
 msgstr ""
-"Il pourrait être une bonne idée de suspendre la production du chantier naval"
-" jusqu'à ce que nous ayons assez du tissu afin de ne pas gaspiller de tronc "
+"Il pourrait être une bonne idée de suspendre la production du chantier naval "
+"jusqu'à ce que nous ayons assez du tissu afin de ne pas gaspiller de tronc "
 "ni de planche."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:412
@@ -778,15 +779,15 @@ msgid ""
 "Now that we have all resources ready for building a ship, we should explore "
 "the surrounding islands."
 msgstr ""
-"Maintenant que nous avons toutes les ressources prêtes pour bâtir un navire,"
-" nous devrions explorer les îles environnantes."
+"Maintenant que nous avons toutes les ressources prêtes pour bâtir un navire, "
+"nous devrions explorer les îles environnantes."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:418
 msgid ""
-"First, we need to find some more resources to back up our growing economy. I"
-" have spotted an island with some mountains in the south. Perhaps we can "
-"find some valuable resources like iron there."
+"First, we need to find some more resources to back up our growing economy. I "
+"have spotted an island with some mountains in the south. Perhaps we can find "
+"some valuable resources like iron there."
 msgstr ""
 "En premier, nous devons trouver plus de ressources pour soutenir notre "
 "développement économique. J'ai repéré une île avec quelques montagnes au "
@@ -801,9 +802,9 @@ msgstr "Mais l'objectif suivant est encore plus important :"
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:424
 msgid ""
-"I think I have heard the wind carrying some weird but well known sounds from"
-" the north. If I’m not totally wrong, I have heard some Barbarian war drums."
-" So, we should better go and have a look at what is going on up there."
+"I think I have heard the wind carrying some weird but well known sounds from "
+"the north. If I’m not totally wrong, I have heard some Barbarian war drums. "
+"So, we should better go and have a look at what is going on up there."
 msgstr ""
 "Je pense avoir entendu le vent porter des échos étranges mais bien connus "
 "échos du nord. Si je ne me trompe, j'ai ouï quelques tambours de guerre "
@@ -813,8 +814,8 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:427
 msgid ""
 "In any case we should be careful with our ports. To defend them against "
-"possible enemies we should send some soldiers to each new port, until we can"
-" protect them with some military buildings."
+"possible enemies we should send some soldiers to each new port, until we can "
+"protect them with some military buildings."
 msgstr ""
 "Dans tous les cas, nous devons être prudents avec nos ports. Pour les "
 "défendre contre d'éventuels ennemis, nous devrions envoyer des soldats dans "
@@ -837,8 +838,8 @@ msgid ""
 "have any gold left after our port is built."
 msgstr ""
 "Salve Lutius. En parlant à tous nos courageux bâtisseurs, ils m'ont dit "
-"qu'ils devaient utiliser tout l'or restant pour construire le port. Donc, il"
-" ne nous restera plus d’or après la construction de notre port."
+"qu'ils devaient utiliser tout l'or restant pour construire le port. Donc, il "
+"ne nous restera plus d’or après la construction de notre port."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:441
@@ -862,12 +863,12 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:447
 msgid ""
-"I strongly recommend building a production chain for mining and melting some"
-" gold. I think we need a vineyard, a winery, a tavern, a fisher’s house or a"
-" hunter’s house and a smelting works. And the mines themselves of course."
+"I strongly recommend building a production chain for mining and melting some "
+"gold. I think we need a vineyard, a winery, a tavern, a fisher’s house or a "
+"hunter’s house and a smelting works. And the mines themselves of course."
 msgstr ""
-"Je recommande fortement de bâtir une chaîne de production pour la mine et la"
-" fonte de l'or. Je pense qu'il nous faut un vignoble, une cave à vin, une "
+"Je recommande fortement de bâtir une chaîne de production pour la mine et la "
+"fonte de l'or. Je pense qu'il nous faut un vignoble, une cave à vin, une "
 "taverne, une maison de pêcheur ou une maison de chasseur et enfin une "
 "fonderie. Et des mines bien sûr."
 
@@ -879,8 +880,8 @@ msgid ""
 "should perhaps optimize our roads to free up some building sites, or even "
 "dismantle some military buildings to obtain more space for our economy."
 msgstr ""
-"S'il y a des difficultés pour bâtir tout cela, nous devrions penser à ce que"
-" nous avons déjà fait. Nous pouvons enlever tous les rochers. Nous devrions "
+"S'il y a des difficultés pour bâtir tout cela, nous devrions penser à ce que "
+"nous avons déjà fait. Nous pouvons enlever tous les rochers. Nous devrions "
 "aussi optimiser nos routes pour libérer des sites de construction, et même "
 "démanteler quelques bâtiments militaires pour donner plus d'espace à notre "
 "économie."
@@ -914,11 +915,11 @@ msgstr "Amalea est vraiment fière des résultats..."
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:474
 msgid ""
 "Lutius, we have just solved another problem. We managed to melt enough gold "
-"to send out at least three expeditions. Perhaps we might even keep some gold"
-" to make some jewelry."
+"to send out at least three expeditions. Perhaps we might even keep some gold "
+"to make some jewelry."
 msgstr ""
-"Lutius, nous venons juste de résoudre un autre problème. Nous avons réussi à"
-" fondre assez d'or pour affréter au moins trois expéditions. Peut-être que "
+"Lutius, nous venons juste de résoudre un autre problème. Nous avons réussi à "
+"fondre assez d'or pour affréter au moins trois expéditions. Peut-être que "
 "nous pourrons même en garder pour fabriquer de la joaillerie."
 
 #. TRANSLATORS: Amalea
@@ -927,8 +928,8 @@ msgid ""
 "I’m just kidding. Of course we should spare as much gold as we can for "
 "building an arena and other buildings to train our soldiers."
 msgstr ""
-"Je plaisante. Bien sûr nous devrons économiser autant d'or que possible pour"
-" bâtir une arène et autres bâtiments d'entraînement pour nos soldats."
+"Je plaisante. Bien sûr nous devrons économiser autant d'or que possible pour "
+"bâtir une arène et autres bâtiments d'entraînement pour nos soldats."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:483
 msgid "Amalea is Pleased"
@@ -941,15 +942,15 @@ msgstr "Amalea est satisfaite que nous relevions tous nos défis"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:486
 msgid ""
-"Well done so far. Now we will not produce more marble columns than needed. I"
-" really think we will need this economy feature quite often to adjust our "
+"Well done so far. Now we will not produce more marble columns than needed. I "
+"really think we will need this economy feature quite often to adjust our "
 "economy. Remember, our industry will only be working until the given amount "
 "in the economy settings is reached."
 msgstr ""
 "Bien joué jusqu'ici. Maintenant nous ne produirons pas plus de colonnes "
 "marbre que nécessaire. Je pense que nous devrons surveiller l'économie très "
-"souvent pour l'ajuster. Rappelle-toi, notre industrie continuera de produire"
-" jusqu'à ce que les objectifs soient atteints."
+"souvent pour l'ajuster. Rappelle-toi, notre industrie continuera de produire "
+"jusqu'à ce que les objectifs soient atteints."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:489
@@ -984,14 +985,14 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:501
 msgid ""
-"I strongly recommend dismantling most of them to be able to build industrial"
-" buildings. I don’t think there is much danger on this island, but if you "
+"I strongly recommend dismantling most of them to be able to build industrial "
+"buildings. I don’t think there is much danger on this island, but if you "
 "want to be cautious, you can keep some sentries or blockhouses near the "
 "coastline."
 msgstr ""
 "Je recommande fortement d'en démanteler la plupart pour pouvoir construire "
-"des bâtiments productifs. Je ne pense pas qu'il y ait grand danger sur cette"
-" île, mais si tu veux rester prudent, tu peux garder quelques factionnaires "
+"des bâtiments productifs. Je ne pense pas qu'il y ait grand danger sur cette "
+"île, mais si tu veux rester prudent, tu peux garder quelques factionnaires "
 "ou casernes près des côtes."
 
 #. TRANSLATORS: Amalea
@@ -1010,8 +1011,8 @@ msgstr "Amalea attend avec impatience l'exploration..."
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:513
 msgid ""
-"Lutius. We have made so much progress so far. I am glad to hear that we have"
-" many ships now."
+"Lutius. We have made so much progress so far. I am glad to hear that we have "
+"many ships now."
 msgstr ""
 "Lucius. Nous avons tellement progressé depuis. Je suis heureuse d'entendre "
 "que nous avons plusieurs navires maintenant."
@@ -1032,8 +1033,8 @@ msgid ""
 "It would be especially helpful to find more marble, either within fields of "
 "rock or in the mountains to mine it."
 msgstr ""
-"Il serait particulièrement utile de trouver plus de marbre, que ce soit dans"
-" des champs de rochers ou dans les mines des montagnes."
+"Il serait particulièrement utile de trouver plus de marbre, que ce soit dans "
+"des champs de rochers ou dans les mines des montagnes."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:527
 msgid "Amalea is Very Content"
@@ -1047,12 +1048,12 @@ msgstr "Amalea applaudit..."
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:530
 msgid ""
-"Lutius. Well done. Well done. We have discovered all possible port locations"
-" in the complete region. Now we can strengthen our economy and we will "
-"manage to sail home soon."
+"Lutius. Well done. Well done. We have discovered all possible port locations "
+"in the complete region. Now we can strengthen our economy and we will manage "
+"to sail home soon."
 msgstr ""
-"Lutius. Bien joué. Bien joué. Nous avons découvert tous les ports potentiels"
-" de la région. Nous pouvons maintenant renforcer notre économie et nous "
+"Lutius. Bien joué. Bien joué. Nous avons découvert tous les ports potentiels "
+"de la région. Nous pouvons maintenant renforcer notre économie et nous "
 "pourrons rentrer bientôt dans notre patrie."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:536
@@ -1079,8 +1080,8 @@ msgid ""
 msgstr ""
 "Nous avons aussi besoin de tissus pour produire des armures dans notre "
 "forge. C'est indispensable pour construire certains sites d'entraînement "
-"pour nos soldats. Et plus important et imminent encore, nous en avons besoin"
-" pour affréter des expéditions."
+"pour nos soldats. Et plus important et imminent encore, nous en avons besoin "
+"pour affréter des expéditions."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:543
 msgid ""
@@ -1090,10 +1091,10 @@ msgid ""
 "a reserve of six to nine bales giving us two to three expeditions would be "
 "sufficient."
 msgstr ""
-"Par conséquent, je recommande vraiment de surveiller de près nos réserves de"
-" tissu pour s'assurer d'en conserver assez afin de lancer quelques "
-"expéditions. Chacune nécessite trois rouleaux de tissu, une réserve de six à"
-" neuf rouleaux nous permettant deux à trois expéditions devrait suffire."
+"Par conséquent, je recommande vraiment de surveiller de près nos réserves de "
+"tissu pour s'assurer d'en conserver assez afin de lancer quelques "
+"expéditions. Chacune nécessite trois rouleaux de tissu, une réserve de six à "
+"neuf rouleaux nous permettant deux à trois expéditions devrait suffire."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:549
 msgid "Victory is Ours"
@@ -1109,8 +1110,8 @@ msgid ""
 "Sire, finally we have defeated the Barbarians in this region. And "
 "furthermore, we have built a nice colony for our empire."
 msgstr ""
-"Sire, nous avons enfin défait les Barbares de cette région. Et de plus, nous"
-" avons bâti une belle colonie pour notre empire."
+"Sire, nous avons enfin défait les Barbares de cette région. Et de plus, nous "
+"avons bâti une belle colonie pour notre empire."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:554
 msgid "The king will be very pleased with our victory."
@@ -1127,11 +1128,11 @@ msgstr "Saledus est très triste et anxieux..."
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:563
 msgid ""
-"Sire, we are making good progress towards getting home eventually. But there"
-" is one thing I need to talk about:"
+"Sire, we are making good progress towards getting home eventually. But there "
+"is one thing I need to talk about:"
 msgstr ""
-"Sire, nous faisons des progrès vers l'éventuel chemin du retour. Mais il y a"
-" quelque chose dont j'ai besoin de parler :"
+"Sire, nous faisons des progrès vers l'éventuel chemin du retour. Mais il y a "
+"quelque chose dont j'ai besoin de parler :"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:565
 msgid ""
@@ -1154,8 +1155,8 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:569
 msgid ""
-"To ease the search, I have crafted some models of the pieces as you can see."
-" You can give them to our soldiers and sailors to look for them."
+"To ease the search, I have crafted some models of the pieces as you can see. "
+"You can give them to our soldiers and sailors to look for them."
 msgstr ""
 "Pour faciliter les recherches, j'ai fabriqués des modèles des pièces telles "
 "que l'on les voient. Vous pouvez les donner aux soldats et aux marins afin "
@@ -1175,8 +1176,8 @@ msgid ""
 "Sire, we recovered the holy shrine of Neptune. Now we can seek his "
 "protection for our journey."
 msgstr ""
-"Sire, nous avons récupéré le saint autel de Neptune. Nous pouvons maintenant"
-" quérir sa protection pour notre voyage."
+"Sire, nous avons récupéré le saint autel de Neptune. Nous pouvons maintenant "
+"quérir sa protection pour notre voyage."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:582
 msgid ""
@@ -1184,8 +1185,8 @@ msgid ""
 "friendly to our course! Oh great Neptune, save us from the creatures of the "
 "sea! Oh great Neptune, …"
 msgstr ""
-"Oh grand Neptune, protège notre voyage ! Oh grand Neptune, accorde des vents"
-" favorables à nos navires ! Oh grand Neptune, sauvegarde-nous des créatures "
+"Oh grand Neptune, protège notre voyage ! Oh grand Neptune, accorde des vents "
+"favorables à nos navires ! Oh grand Neptune, sauvegarde-nous des créatures "
 "de la mer ! Oh grand Neptune, ..."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:588
@@ -1200,12 +1201,12 @@ msgstr "Saledus semble très inquiet..."
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:591
 msgid ""
 "Sire, we found the ruins of a former Barbarian fortress and village. I’m "
-"somewhat worried that we will have to fight against them before we are ready"
-" to do so."
+"somewhat worried that we will have to fight against them before we are ready "
+"to do so."
 msgstr ""
-"Sire, nous avons trouvé des signes d'une ancienne forteresse et d'un village"
-" barbare. Je suis toutefois inquiet d'avoir à les combattre avant que nous "
-"ne soyons prêt à le faire."
+"Sire, nous avons trouvé des signes d'une ancienne forteresse et d'un village "
+"barbare. Je suis toutefois inquiet d'avoir à les combattre avant que nous ne "
+"soyons prêt à le faire."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:597
 msgid "Train Faster, Train Harder"
@@ -1228,8 +1229,8 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:602
 msgid ""
-"We need a lot of food, a lot of iron and a lot of gold to do so. So, we have"
-" lots of challenges to cope with."
+"We need a lot of food, a lot of iron and a lot of gold to do so. So, we have "
+"lots of challenges to cope with."
 msgstr ""
 "Nous avons besoin de beaucoup de nourriture, de fer et d'or. Cela nous fait "
 "beaucoup de défis à gérer."
@@ -1245,8 +1246,8 @@ msgstr "Saledus avait des inquiétudes quand à la sécurité"
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:611
 msgid ""
-"Sire, we need to train some of our people to serve in your great army. It is"
-" important to increase the number of our soldiers as fast as we can. And we "
+"Sire, we need to train some of our people to serve in your great army. It is "
+"important to increase the number of our soldiers as fast as we can. And we "
 "should train them well to improve their fighting abilities."
 msgstr ""
 "Sire, nous devons entraîner certains de nos hommes pour servir dans notre "
@@ -1257,8 +1258,8 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:613
 msgid ""
 "Therefore, we need to build a full training infrastructure despite the "
-"limited space available. We need some barracks, a training camp and an arena"
-" or a colosseum."
+"limited space available. We need some barracks, a training camp and an arena "
+"or a colosseum."
 msgstr ""
 "Pour cette raison, il nous faut une infrastructure d'entraînement malgré "
 "l'espace limité. Il nous faut des casernes, un camp d'entraînement et une "
@@ -1271,12 +1272,12 @@ msgstr "Le Temps Du Retour"
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:624
 msgid ""
-"Yes my fellow soldiers, we have done it! We have met all the challenges that"
-" were put in front of us. But my heart is still with our home. We shall set "
+"Yes my fellow soldiers, we have done it! We have met all the challenges that "
+"were put in front of us. But my heart is still with our home. We shall set "
 "sail as soon as possible to help defend the Empire from the Barbarian tribe."
 msgstr ""
-"Oui mes braves soldats, nous l'avons fait ! Nous avons relevé tous les défis"
-" s'étant dressé sur notre chemin. Mais mon cœur appartient toujours à notre "
+"Oui mes braves soldats, nous l'avons fait ! Nous avons relevé tous les défis "
+"s'étant dressé sur notre chemin. Mais mon cœur appartient toujours à notre "
 "patrie. Nous devons lever les voiles au plus vite afin d'aider à défendre "
 "l'Empire contre les tribus Barbares."
 
