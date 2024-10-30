@@ -1,6 +1,6 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
-#
+# 
 # Translators:
 # Alexandros Koutroulis, 2024
 # erimitis, 2018
@@ -9,11 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-08 02:24+0000\n"
+"POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: Alexandros Koutroulis, 2024\n"
-"Language-Team: Greek (http://app.transifex.com/widelands/widelands/language/"
-"el/)\n"
+"Language-Team: Greek (http://app.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,9 +27,7 @@ msgstr "Από τη Νέμεση στη Γένεση"
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
-msgstr ""
-"Αφού αποβιβάστηκαν σε ένα μυστήριο νησί κοντά στην Ατλαντίδα, οι "
-"εναπομείναντες Ατλαντίδες αγωνίζονται να φτιάξουν ένα νέο σπίτι για αυτούς."
+msgstr "Αφού αποβιβάστηκαν σε ένα μυστήριο νησί κοντά στην Ατλαντίδα, οι εναπομείναντες Ατλαντίδες αγωνίζονται να φτιάξουν ένα νέο σπίτι για αυτούς."
 
 #: ../../data/campaigns/atl02.wmf/elemental:8
 msgid "Struggling For a New Home Again"
@@ -40,9 +37,7 @@ msgstr "Παλεύοντας Ξανά για ένα Νέο Σπίτι"
 msgid ""
 "After the quick escape from the drowning island, the Atlanteans around "
 "Jundlina are faced with new challenges."
-msgstr ""
-"Μετά την γρήγορη απόδραση από το νησί που καταποντιζόταν, οι Ατλαντίδες γύρω "
-"από την Τζαντλίνα έρχονται αντιμέτωποι με νέες προκλήσεις."
+msgstr "Μετά την γρήγορη απόδραση από το νησί που καταποντιζόταν, οι Ατλαντίδες γύρω από την Τζαντλίνα έρχονται αντιμέτωποι με νέες προκλήσεις."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
@@ -52,9 +47,7 @@ msgstr "Ένα μέρος να αποκαλούμε σπίτι"
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr ""
-"Σε αυτό το σενάριο γίνεται εισαγωγή στα κτίρια ανώτερης παραγωγής, "
-"συμπεριλαμβανομένης της εξόρυξης."
+msgstr "Σε αυτό το σενάριο γίνεται εισαγωγή στα κτίρια ανώτερης παραγωγής, συμπεριλαμβανομένης της εξόρυξης."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
 msgid "This Land is Our Land"
@@ -64,9 +57,7 @@ msgstr "Αυτή η γη είναι η γη μας"
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
-msgstr ""
-"Αυτό το παιχνίδι εκμάθησης εξηγεί τον χειρισμό στρατιωτικών και "
-"εκπαιδευτικών κτιρίων, και εισάγει τις μάχες."
+msgstr "Αυτό το παιχνίδι εκμάθησης εξηγεί τον χειρισμό στρατιωτικών και εκπαιδευτικών κτιρίων, και εισάγει τις μάχες."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:14
@@ -102,11 +93,11 @@ msgstr "Εισαγωγή στους Βάρβαρους."
 #: ../../data/campaigns/campaigns.lua:52
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and "
-"ambitious sons, and warlord to an army that could match any enemy willing to "
-"rise against the ancient forests. Though at the end of his glorious reign, "
+"ambitious sons, and warlord to an army that could match any enemy willing to"
+" rise against the ancient forests. Though at the end of his glorious reign, "
 "Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
-"warlord – a decision that left his two brothers unsatisfied. The old warlord "
-"knew that. As his father instructed him, Thron left the capital of "
+"warlord – a decision that left his two brothers unsatisfied. The old warlord"
+" knew that. As his father instructed him, Thron left the capital of "
 "Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
 "to the high hills where he buried the corpse of his father. There he swore "
 "to the gods and his father’s spirit that he’d return to re-established "
@@ -155,9 +146,9 @@ msgstr ""
 #: ../../data/campaigns/campaigns.lua:98
 msgid ""
 "When their God lost faith in the Atlanteans and drowned their island, one "
-"woman’s struggle for justice and a second chance for her people would become "
-"the stuff of legends. Leading the remaining Atlanteans into a new future in "
-"a new part of the World, Jundlina became the most powerful human of her "
+"woman’s struggle for justice and a second chance for her people would become"
+" the stuff of legends. Leading the remaining Atlanteans into a new future in"
+" a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
 msgstr ""
 
@@ -218,8 +209,8 @@ msgid ""
 "After losing an important battle against the Barbarians which lead to the "
 "loss of a big part of the Empire’s territory, Lutius leaves Fremil to start "
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
-"destroys it. Only with a lot of luck he manages to beach his damaged ship on "
-"an unknown desert strand and save his people. For now."
+"destroys it. Only with a lot of luck he manages to beach his damaged ship on"
+" an unknown desert strand and save his people. For now."
 msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/elemental:9
@@ -242,9 +233,7 @@ msgstr ""
 msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
-msgstr ""
-"Στον δρόμο του επαναπατρισμού για την άμυνα της Αυτοκρατορίας, το πλήρωμα "
-"του Λούτιου αιφνιδιάστηκε από το θέλημα των θεών."
+msgstr "Στον δρόμο του επαναπατρισμού για την άμυνα της Αυτοκρατορίας, το πλήρωμα του Λούτιου αιφνιδιάστηκε από το θέλημα των θεών."
 
 #: ../../data/campaigns/emp04.wmf/elemental:8
 msgid "Surprise, Surprise!"
@@ -263,10 +252,10 @@ msgstr "Ο Μεγάλος Κατακλυσμός"
 
 #: ../../data/campaigns/fri01.wmf/elemental:10
 msgid ""
-"In 1362, the quiet, peaceful life of the inhabitants of the Northern Frisian "
-"Islands was disrupted by one of the greatest storm floods in human memory: "
-"Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or "
-"a sign from the Gods that the Frisian community on the island of Langeness "
+"In 1362, the quiet, peaceful life of the inhabitants of the Northern Frisian"
+" Islands was disrupted by one of the greatest storm floods in human memory: "
+"Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
+" a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
 msgstr ""
 
@@ -274,9 +263,7 @@ msgstr ""
 msgid ""
 "This scenario is set in a historical context, but most of the story line is "
 "fiction."
-msgstr ""
-"Αυτό το σενάριο είναι τοποθετημένο σε ένα ιστορικό πλαίσιο, όμως το "
-"μεγαλύτερο μέρος της πλοκής είναι φανταστικό."
+msgstr "Αυτό το σενάριο είναι τοποθετημένο σε ένα ιστορικό πλαίσιο, όμως το μεγαλύτερο μέρος της πλοκής είναι φανταστικό."
 
 #: ../../data/campaigns/fri02.wmf/elemental:8
 msgid "An Icy Welcome"
@@ -328,9 +315,7 @@ msgstr "Βασικός Χειρισμός"
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
-msgstr ""
-"Σε αυτό το παιχνίδι εκμάθησης θα γνωρίσετε πώς να προσανατολιζόσαστε στο "
-"Widelands, και πώς να κατασκευάζετε κτίρια και δρόμους."
+msgstr "Σε αυτό το παιχνίδι εκμάθησης θα γνωρίσετε πώς να προσανατολιζόσαστε στο Widelands, και πώς να κατασκευάζετε κτίρια και δρόμους."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:8
 msgid "Warfare"
@@ -339,8 +324,8 @@ msgstr "Εχθροπραξίες"
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
-"soldiers, how to train them and how to lead them in battle. Scouting will be "
-"also covered."
+"soldiers, how to train them and how to lead them in battle. Scouting will be"
+" also covered."
 msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
@@ -359,8 +344,8 @@ msgstr "Οικονομία"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
-"In this tutorial, you will learn what option Widelands offers to adjust your "
-"economy. Recommended for players with some experience."
+"In this tutorial, you will learn what option Widelands offers to adjust your"
+" economy. Recommended for players with some experience."
 msgstr ""
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:8
@@ -412,8 +397,8 @@ msgstr ""
 #: ../../data/maps/Calvisson.wmf/elemental:10
 msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But "
-"the ways to encompass these large territories are long and meandering, so it "
-"is easy to err into the land of the foreign clans."
+"the ways to encompass these large territories are long and meandering, so it"
+" is easy to err into the land of the foreign clans."
 msgstr ""
 
 #: ../../data/maps/Checkmate.wmf/elemental:8
@@ -438,8 +423,8 @@ msgstr "Nasenbaer – διορθώσεις από τον king_of_nowhere"
 
 #: ../../data/maps/Comet_Island.wmf/elemental:10
 msgid ""
-"A few miles in front of Gerion Coast lies a small unnamed island. Until now, "
-"you have not seen any reason to sail there, but yesterday a big fireball "
+"A few miles in front of Gerion Coast lies a small unnamed island. Until now,"
+" you have not seen any reason to sail there, but yesterday a big fireball "
 "came from the sky and touched down in its center. Is this a sign of the "
 "Gods? You believe it is and you hope that your tribe will find the treasure "
 "of this island before other tribes will follow."
@@ -448,9 +433,9 @@ msgstr ""
 #: ../../data/maps/Comet_Island.wmf/elemental:11
 msgid ""
 "Red player is close to the ores, but has little fertile terrain. Yellow "
-"player has plenty of good land, but must move far from his starting position "
-"to find ores. Blue player takes the middle ground – he has some fertile land "
-"and is not too far away from the resources."
+"player has plenty of good land, but must move far from his starting position"
+" to find ores. Blue player takes the middle ground – he has some fertile "
+"land and is not too far away from the resources."
 msgstr ""
 
 #: ../../data/maps/Crater.wmf/elemental:8
@@ -459,11 +444,9 @@ msgstr "Κρατήρας"
 
 #: ../../data/maps/Crater.wmf/elemental:10
 msgid ""
-"Long after a meteor crashed into a couple of mountains, life blossoms in the "
-"crater. Two tribes are now fighting for the rich resources."
-msgstr ""
-"Πολύ μετά τη συντριβή ενός μετεωρίτη σε ένα ζεύγος βουνών, η ζωή ακμάζει "
-"εντός του κρατήρα. Τώρα δύο φυλές μάχονται για τους πλούσιους πόρους."
+"Long after a meteor crashed into a couple of mountains, life blossoms in the"
+" crater. Two tribes are now fighting for the rich resources."
+msgstr "Πολύ μετά τη συντριβή ενός μετεωρίτη σε ένα ζεύγος βουνών, η ζωή ακμάζει εντός του κρατήρα. Τώρα δύο φυλές μάχονται για τους πλούσιους πόρους."
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
 msgid "Crossing the Horizon"
@@ -486,17 +469,17 @@ msgid ""
 "The jewel of the alps, the dolomites mountain range has been declared a "
 "world heritage site for its pristine beauty. This map is an as-faithful-as-"
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
-"north-east and Canazei in the south-west. If you have to be pitted in a duel "
-"to the death with your enemies, it may as well be in a beautiful place."
+"north-east and Canazei in the south-west. If you have to be pitted in a duel"
+" to the death with your enemies, it may as well be in a beautiful place."
 msgstr ""
 
 #: ../../data/maps/Dolomites.wmf/elemental:11
 msgid ""
-"The mountains have an abundance of flat ground. Unfortunately, most of it is "
-"vertical – use the little building space you have wisely. A fortress at the "
-"mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
-"army – use the terrain to your advantage. Chop all trees and expand wherever "
-"you can – it’s the only way to find all the precious farm spaces."
+"The mountains have an abundance of flat ground. Unfortunately, most of it is"
+" vertical – use the little building space you have wisely. A fortress at the"
+" mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
+"army – use the terrain to your advantage. Chop all trees and expand wherever"
+" you can – it’s the only way to find all the precious farm spaces."
 msgstr ""
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
@@ -507,9 +490,7 @@ msgstr "Δάση Καλικάντζαρων"
 msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt to take them for themselves."
-msgstr ""
-"Με μια ομορφιά που κόβει την ανάσα, αυτά τα σμαραγδένια εδάφη έχουν δελεάσει "
-"πολλές φυλές σε μια προσπάθεια να τα πάρουν για τον εαυτό τους."
+msgstr "Με μια ομορφιά που κόβει την ανάσα, αυτά τα σμαραγδένια εδάφη έχουν δελεάσει πολλές φυλές σε μια προσπάθεια να τα πάρουν για τον εαυτό τους."
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
@@ -541,9 +522,7 @@ msgstr "Συντροφόπλοια"
 msgid ""
 "Ships are your best fellows. Starting positions are similar, so the map "
 "should be fair."
-msgstr ""
-"Τα πλοία είναι οι καλύτεροί σας σύντροφοι. Οι αρχικές θέσεις είναι "
-"παρόμοιες, ώστε ο χάρτης να είναι δίκαιος."
+msgstr "Τα πλοία είναι οι καλύτεροί σας σύντροφοι. Οι αρχικές θέσεις είναι παρόμοιες, ώστε ο χάρτης να είναι δίκαιος."
 
 #: ../../data/maps/Fellowships.wmf/elemental:11
 msgid ""
@@ -560,9 +539,7 @@ msgstr "Φινλανδικές Λίμνες"
 msgid ""
 "These are the beautiful Finnish lands of lakes, rivers, ancient forests and "
 "mountains. It is up to you to find a way through these lands."
-msgstr ""
-"Αυτά είναι τα όμορφα Φινλανδικά εδάφη από λίμνες, ποτάμια, αρχαία δάση και "
-"βουνά. Επαφίεται σε σας να βρείτε έναν τρόπο να τα διασχίσετε."
+msgstr "Αυτά είναι τα όμορφα Φινλανδικά εδάφη από λίμνες, ποτάμια, αρχαία δάση και βουνά. Επαφίεται σε σας να βρείτε έναν τρόπο να τα διασχίσετε."
 
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:11
 msgid ""
@@ -577,9 +554,9 @@ msgstr "Παιχνίδια με τη φωτιά"
 #: ../../data/maps/Firegames.wmf/elemental:10
 msgid ""
 "Is this a test by the Gods or an evil plan by someone else, that you and "
-"your tribe woke up on this island among fire and lava? Until now it seems as "
-"if you are alone, but no-one knows what might happen if you met an opposing "
-"tribe?"
+"your tribe woke up on this island among fire and lava? Until now it seems as"
+" if you are alone, but no-one knows what might happen if you met an opposing"
+" tribe?"
 msgstr ""
 
 #: ../../data/maps/Four_Castles.wmf/elemental:8
@@ -590,10 +567,7 @@ msgstr "Τέσσερα Κάστρα"
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands…"
-msgstr ""
-"Καλά προστατευμένοι μέσα στα ισχυρά φρούριά τους, τέσσερις πολέμαρχοι που "
-"διψάνε για δύναμη ολοκληρώνουν τα σχέδιά τους να κυριαρχήσουν σε αυτά τα "
-"εδάφη…"
+msgstr "Καλά προστατευμένοι μέσα στα ισχυρά φρούριά τους, τέσσερις πολέμαρχοι που διψάνε για δύναμη ολοκληρώνουν τα σχέδιά τους να κυριαρχήσουν σε αυτά τα εδάφη…"
 
 #: ../../data/maps/Four_Mountains.wmf/elemental:8
 msgid "Four Mountains"
@@ -603,17 +577,13 @@ msgstr "Τέσσερα Βουνά"
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe?"
-msgstr ""
-"Κάθε φυλή είναι περικυκλωμένη από τέσσερα ισχυρά βουνά. Ποιος θα τα "
-"κατακτήσει πρώτος και θα διεκδικήσει τους πόρους για τη δική του φυλή;"
+msgstr "Κάθε φυλή είναι περικυκλωμένη από τέσσερα ισχυρά βουνά. Ποιος θα τα κατακτήσει πρώτος και θα διεκδικήσει τους πόρους για τη δική του φυλή;"
 
 #: ../../data/maps/Four_Mountains.wmf/elemental:11
 msgid ""
 "I: Water can be found along the river. II: Snowmen mark additional water "
 "sources. III: Each mountain contains only one resource."
-msgstr ""
-"I: Νερό μπορεί να βρεθεί κατά μήκος του ποταμού. II: Οι χιονάνθρωποι "
-"σημειώνουν επιπρόσθετες πηγές νερού. III: Κάθε βουνό περιέχει μόνο έναν πόρο."
+msgstr "I: Νερό μπορεί να βρεθεί κατά μήκος του ποταμού. II: Οι χιονάνθρωποι σημειώνουν επιπρόσθετες πηγές νερού. III: Κάθε βουνό περιέχει μόνο έναν πόρο."
 
 #: ../../data/maps/Full_Moon.wmf/elemental:8
 msgid "Full Moon"
@@ -623,9 +593,7 @@ msgstr "Πανσέληνος"
 msgid ""
 "Whether it is the latest solstice, or lunar illness, something moves these "
 "tribes towards their final ordeal."
-msgstr ""
-"Είτε λόγω του τελευταίου ηλιοστασίου, είτε λόγω σεληνιακής πάθησης, κάτι "
-"ωθεί αυτές τις φυλές προς την τελική τους δοκιμασία."
+msgstr "Είτε λόγω του τελευταίου ηλιοστασίου, είτε λόγω σεληνιακής πάθησης, κάτι ωθεί αυτές τις φυλές προς την τελική τους δοκιμασία."
 
 #: ../../data/maps/Glacier_Lake.wmf/elemental:8
 msgid "Glacier Lake"
@@ -636,7 +604,8 @@ msgid ""
 "Your tribe has dwelt on this beautiful and lonely glacier lake for a long "
 "time. No one disturbed you and the resources were sufficient for your whole "
 "tribe, but a few months ago another tribe came over the mountains and "
-"settled down. And you are sure that there is only enough space for one tribe."
+"settled down. And you are sure that there is only enough space for one "
+"tribe."
 msgstr ""
 
 #: ../../data/maps/Golden_Peninsula.wmf/elemental:8
@@ -645,8 +614,7 @@ msgstr "Χρυσή Χερσόνησος"
 
 #: ../../data/maps/Golden_Peninsula.wmf/elemental:10
 msgid "Two empires race for the treasures of a legendary peninsula…"
-msgstr ""
-"Δύο αυτοκρατορίες σε αγώνα δρόμου για τους θησαυρούς μιας μυθικής χερσονήσου…"
+msgstr "Δύο αυτοκρατορίες σε αγώνα δρόμου για τους θησαυρούς μιας μυθικής χερσονήσου…"
 
 #: ../../data/maps/Ice_wars.wmf/elemental:8
 msgid "Ice wars"
@@ -654,9 +622,7 @@ msgstr "Πόλεμοι πάγου"
 
 #: ../../data/maps/Ice_wars.wmf/elemental:10
 msgid "Autumn became winter. Some things are frozen, but not the war."
-msgstr ""
-"Το φθινόπωρο έγινε καλοκαίρι. Κάποια πράγματα είναι παγωμένα, αλλά όχι το "
-"νερό."
+msgstr "Το φθινόπωρο έγινε καλοκαίρι. Κάποια πράγματα είναι παγωμένα, αλλά όχι το νερό."
 
 #: ../../data/maps/Ice_wars.wmf/elemental:11
 msgid "Start positions are clockwise"
@@ -671,10 +637,7 @@ msgid ""
 "For centuries, you’ve lived peacefully side by side with the other tribe on "
 "the neighboring island. This peace seems to come to an end now – your "
 "neighbor has begun to expand."
-msgstr ""
-"Ζήσατε ειρηνικά για αιώνες, πλάι-πλάι με την άλλη φυλή στο γειτονικό νησί. "
-"Αυτή η ειρήνη τώρα φαίνεται να φτάνει στο τέλος της, καθώς ο γείτονάς σας "
-"άρχισε να επεκτείνεται."
+msgstr "Ζήσατε ειρηνικά για αιώνες, πλάι-πλάι με την άλλη φυλή στο γειτονικό νησί. Αυτή η ειρήνη τώρα φαίνεται να φτάνει στο τέλος της, καθώς ο γείτονάς σας άρχισε να επεκτείνεται."
 
 #: ../../data/maps/Kings_and_Queens.wmf/elemental:8
 msgid "Kings and Queens"
@@ -682,9 +645,9 @@ msgstr "Βασιλιάδες και Βασίλισσες"
 
 #: ../../data/maps/Kings_and_Queens.wmf/elemental:10
 msgid ""
-"An old legend tells that these seven kingdoms, that have flourished for ages "
-"in prosperity, will someday collapse into a devastating war. Has your latest "
-"betrayal been one too many and will the prophecy come true?"
+"An old legend tells that these seven kingdoms, that have flourished for ages"
+" in prosperity, will someday collapse into a devastating war. Has your "
+"latest betrayal been one too many and will the prophecy come true?"
 msgstr ""
 
 #: ../../data/maps/Lake_of_Tranquility.wmf/elemental:8
@@ -710,8 +673,8 @@ msgstr ""
 msgid ""
 "The whimsical Gods didn’t answer our prayers. Instead, the increasing "
 "sunlight heated up the Earth a thousandfold and melted glaciers and people "
-"were plunged into the deep. But now – high in the majestic mountains, on the "
-"last scrap of land – two surviving tribes are sheltering. Even though the "
+"were plunged into the deep. But now – high in the majestic mountains, on the"
+" last scrap of land – two surviving tribes are sheltering. Even though the "
 "Gods showed mercy and the climate thus turned cooler again, the water is "
 "still rising and rising. Onto the last secure place – the highest mountain "
 "range where the amount of gold and the space to live merely suffice for one "
@@ -721,8 +684,7 @@ msgstr ""
 
 #: ../../data/maps/Last_Bastion.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
-msgstr ""
-"Μην ξεχάσετε να φροντίσετε τα αποθέματα ξυλείας σας, θα τα χρειαστείτε."
+msgstr "Μην ξεχάσετε να φροντίσετε τα αποθέματα ξυλείας σας, θα τα χρειαστείτε."
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
@@ -743,8 +705,8 @@ msgid ""
 "A fair 8-player map with natural geographic features dividing land. The "
 "geographic features are meant to be somewhat realistic with rivers flowing "
 "from glaciers in the mountains through hills and flatlands into the sea. "
-"Gold is a much rarer resource compared to coal and iron. Different resources "
-"are often found at some distance to each other."
+"Gold is a much rarer resource compared to coal and iron. Different resources"
+" are often found at some distance to each other."
 msgstr ""
 
 #: ../../data/maps/Long_long_way.wmf/elemental:8
@@ -763,9 +725,10 @@ msgstr ""
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:10
 msgid ""
-"A special tournament in Atlantean culture is the so-called ‘Island Hopping’, "
-"where two or more groups try to reach the center island as fast as possible, "
-"to be the first erecting a castle on the top of the central mountain."
+"A special tournament in Atlantean culture is the so-called ‘Island Hopping’,"
+" where two or more groups try to reach the center island as fast as "
+"possible, to be the first erecting a castle on the top of the central "
+"mountain."
 msgstr ""
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:9
@@ -775,8 +738,8 @@ msgstr "Λαθρέμποροι"
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:11
 msgid ""
 "Your well established smuggling routes suddenly got busy: two other tribes "
-"have appeared and now a rivalry among smugglers has started. Which team will "
-"be the first to smuggle a certain number of wares?"
+"have appeared and now a rivalry among smugglers has started. Which team will"
+" be the first to smuggle a certain number of wares?"
 msgstr ""
 
 #: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
@@ -787,8 +750,8 @@ msgstr "Τρίαινα Φωτιάς"
 msgid ""
 "In the vicinity of three major volcanoes, six lovely islands are inviting "
 "settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to "
-"explore enough resources to compete with its opponents."
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
 msgstr ""
 
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
@@ -799,9 +762,7 @@ msgstr "Μυστηριώδης Λαβύρινθος"
 msgid ""
 "There are two big questions in the air: Who created this unbelievably big "
 "maze, and what can be found inside?"
-msgstr ""
-"Δύο μεγάλα ερωτήματα πλανώνται στον αέρα: Ποιος δημιούργησε αυτόν τον "
-"απίστευτα μεγάλο λαβύρινθο, και τι μπορεί να βρεθεί μέσα;"
+msgstr "Δύο μεγάλα ερωτήματα πλανώνται στον αέρα: Ποιος δημιούργησε αυτόν τον απίστευτα μεγάλο λαβύρινθο, και τι μπορεί να βρεθεί μέσα;"
 
 #: ../../data/maps/No_metal_challenge.wmf/elemental:8
 msgid "No metal challenge v2"
@@ -809,11 +770,11 @@ msgstr ""
 
 #: ../../data/maps/No_metal_challenge.wmf/elemental:10
 msgid ""
-"This map is intended as a solo challenge for those very skilled players that "
-"find 1 vs 6 against the AI too easy. Blue player has no metal (except a bit "
-"of iron to kickstart your economy), so you have to rely on the 5% production "
-"of an empty mine. And you’re still 1 vs 6 (though of course you can remove "
-"some AI players to make it a bit easier). Good luck!"
+"This map is intended as a solo challenge for those very skilled players that"
+" find 1 vs 6 against the AI too easy. Blue player has no metal (except a bit"
+" of iron to kickstart your economy), so you have to rely on the 5% "
+"production of an empty mine. And you’re still 1 vs 6 (though of course you "
+"can remove some AI players to make it a bit easier). Good luck!"
 msgstr ""
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
@@ -831,9 +792,7 @@ msgstr ""
 msgid ""
 "There is space for only one stronghold in the centre. Water can be found "
 "everywhere, so there is no need to send out geologists."
-msgstr ""
-"Υπάρχει χώρος μόνο για ένα οχυρό στο κέντρο. Νερό μπορεί να βρεθεί παντού, "
-"ώστε δεν χρειάζεται αποστολή γεωλόγων."
+msgstr "Υπάρχει χώρος μόνο για ένα οχυρό στο κέντρο. Νερό μπορεί να βρεθεί παντού, ώστε δεν χρειάζεται αποστολή γεωλόγων."
 
 #: ../../data/maps/River_Explorers.wmf/elemental:8
 msgid "River Explorers"
@@ -856,9 +815,7 @@ msgstr ""
 msgid ""
 "A mystical land, full of different landscapes, which are all crossed by a "
 "handful of big rivers."
-msgstr ""
-"Μια μυστηριώδη χώρα, γεμάτη από διαφορετικά τοπία, που όλα τους διασχίζονται "
-"από μια χούφτα μεγάλων ποταμών."
+msgstr "Μια μυστηριώδη χώρα, γεμάτη από διαφορετικά τοπία, που όλα τους διασχίζονται από μια χούφτα μεγάλων ποταμών."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
 msgid "Along The River"
@@ -867,8 +824,8 @@ msgstr ""
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
 msgid ""
 "It is the land where the sun is hardly seen during the winter and where "
-"spring floods away any reminiscence of the past. Strange tensions have grown "
-"among its residents and many selfish rulers have taken advantage of the "
+"spring floods away any reminiscence of the past. Strange tensions have grown"
+" among its residents and many selfish rulers have taken advantage of the "
 "chaos. The superstitious people appear to be no obstacle for the "
 "developments of better equipped armies. Tough times are on the brink of "
 "emerging, and you should heed the words of your wise advisors, or fade into "
@@ -927,10 +884,10 @@ msgstr "Η Μεγάλη Λίμνη"
 msgid ""
 "This island once appeared out of the deepest depths of the sea. In those "
 "days, fire rose out of the salty seawater and brought ash, stones and soil "
-"to light. And the fire came nearer and nearer to the sun, while the mountain "
-"grew and grew. Until one day, when the whole fire mountain exploded. "
-"Nowadays only this ring is left from that mighty fire mountain. Do you think "
-"that it is big enough for more than one tribe?"
+"to light. And the fire came nearer and nearer to the sun, while the mountain"
+" grew and grew. Until one day, when the whole fire mountain exploded. "
+"Nowadays only this ring is left from that mighty fire mountain. Do you think"
+" that it is big enough for more than one tribe?"
 msgstr ""
 
 #: ../../data/maps/The_Far_North.wmf/elemental:8
@@ -944,8 +901,8 @@ msgid ""
 "forests, full of big and predatory game, cut across by wetlands and hills "
 "were shrouded in mystery. The ones who had managed to come back mentioned "
 "tremendous buildings, decorated with carvings and gold from majestic "
-"mountain ranges somewhere amongst the wilderness. Dozens of years after only "
-"some crumbly ruins remain of these good old times, covered with moss and "
+"mountain ranges somewhere amongst the wilderness. Dozens of years after only"
+" some crumbly ruins remain of these good old times, covered with moss and "
 "trees. Their shapes give only an idea about the craftsmanship of ancient "
 "constructors. Nobody knows why they (have) disappeared. Nobody knows why. "
 "People say that now nothing is blocking the road to wealth. But many will "
@@ -958,12 +915,9 @@ msgstr "Ο Μακρύς Δρόμος"
 
 #: ../../data/maps/The_Long_Way.wmf/elemental:10
 msgid ""
-"Another strange test by the Gods. To reach the other side, there seems to be "
-"no other way but to occupy the land of your enemies."
-msgstr ""
-"Άλλη μία παράξενη δοκιμασία από τους θεούς. Για να φτάσετε στην άλλη πλευρά, "
-"δεν φαίνεται να υπάρχει άλλος δρόμος παρά η κατάληψη των εδαφών των εχθρών "
-"σας."
+"Another strange test by the Gods. To reach the other side, there seems to be"
+" no other way but to occupy the land of your enemies."
+msgstr "Άλλη μία παράξενη δοκιμασία από τους θεούς. Για να φτάσετε στην άλλη πλευρά, δεν φαίνεται να υπάρχει άλλος δρόμος παρά η κατάληψη των εδαφών των εχθρών σας."
 
 #: ../../data/maps/The_Nile.wmf/elemental:8
 msgid "The Nile"
@@ -973,17 +927,13 @@ msgstr "Ο Νείλος"
 msgid ""
 "The river has always provided food and communication. This time, eight "
 "empires will fight for control over this land."
-msgstr ""
-"Ο ποταμός πάντα προμήθευε φαγητό και επικοινωνία. Αυτήν τη φορά, οκτώ "
-"αυτοκρατορίες θα παλέψουν για τον έλεγχο αυτής της γης."
+msgstr "Ο ποταμός πάντα προμήθευε φαγητό και επικοινωνία. Αυτήν τη φορά, οκτώ αυτοκρατορίες θα παλέψουν για τον έλεγχο αυτής της γης."
 
 #: ../../data/maps/The_Nile.wmf/elemental:11
 msgid ""
 "Use the river wisely. Your opponents will do the same. You will find the "
 "main ore resources deep in the desert."
-msgstr ""
-"Χρησιμοποιείστε τον ποταμό συνετά. Οι αντίπαλοί σας θα κάνουν το ίδιο. Θα "
-"βρείτε τις κύριες πηγές μεταλλεύματος βαθιά στην έρημο."
+msgstr "Χρησιμοποιείστε τον ποταμό συνετά. Οι αντίπαλοί σας θα κάνουν το ίδιο. Θα βρείτε τις κύριες πηγές μεταλλεύματος βαθιά στην έρημο."
 
 #: ../../data/maps/The_Oasis_Triangle.wmf/elemental:8
 msgid "The Oasis Triangle"
@@ -991,13 +941,10 @@ msgstr "Το Τρίγωνο των Οάσεων"
 
 #: ../../data/maps/The_Oasis_Triangle.wmf/elemental:10
 msgid ""
-"There is something mystical like a gray atmosphere around these three oases, "
-"which no one has found out about yet. Perhaps you will be the one, but be "
+"There is something mystical like a gray atmosphere around these three oases,"
+" which no one has found out about yet. Perhaps you will be the one, but be "
 "aware of the others who are searching too!"
-msgstr ""
-"Υπάρχει κάτι το μυστηριώδες σαν γκρίζα ατμόσφαιρα γύρω από αυτές τις τρεις "
-"οάσεις, το οποίο κανένας ακόμη δεν βρήκε. Ίσως εσείς να είστε αυτός, όμως "
-"μην αγνοήσετε και τους άλλους που ψάχνουν επίσης!"
+msgstr "Υπάρχει κάτι το μυστηριώδες σαν γκρίζα ατμόσφαιρα γύρω από αυτές τις τρεις οάσεις, το οποίο κανένας ακόμη δεν βρήκε. Ίσως εσείς να είστε αυτός, όμως μην αγνοήσετε και τους άλλους που ψάχνουν επίσης!"
 
 #: ../../data/maps/The_Pass_Through_the_Mountains.wmf/elemental:8
 msgid "The Pass Through the Mountains"
@@ -1007,9 +954,7 @@ msgstr "Το πέρασμα μέσα από τα βουνά"
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories, unaware of the fact that they are not alone!"
-msgstr ""
-"Δύο πρίγκιπες έχουν αποικίσει αυτήν την ορεινή έκταση. Τώρα επεκτείνουν τις "
-"περιοχές τους, αγνοώντας το γεγονός ότι δεν είναι μόνοι!"
+msgstr "Δύο πρίγκιπες έχουν αποικίσει αυτήν την ορεινή έκταση. Τώρα επεκτείνουν τις περιοχές τους, αγνοώντας το γεγονός ότι δεν είναι μόνοι!"
 
 #: ../../data/maps/The_Thaw.wmf/elemental:8
 msgid "The Thaw"
@@ -1050,9 +995,9 @@ msgid ""
 "those that could not produce them. Based on these trades, a very friendly "
 "commerce was common between the four harbors and the people living on the "
 "Craw Islands – until recently, when two of the harbors united to form an "
-"exclusive trade alliance, forcing the other two to do the same. Suddenly, it "
-"seems only a matter of time before the first fights between the harbors will "
-"shatter the peaceful life that has lasted for so long…"
+"exclusive trade alliance, forcing the other two to do the same. Suddenly, it"
+" seems only a matter of time before the first fights between the harbors "
+"will shatter the peaceful life that has lasted for so long…"
 msgstr ""
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
@@ -1064,8 +1009,8 @@ msgid ""
 "When the wind swelled up and the first dunes were formed on these abandoned "
 "twin lagoons, nobody could have expected that two tribes that are "
 "desperately searching for more resources to support their endlessly ongoing "
-"wars, would end up in this forgotten place at the same time and for the same "
-"well-known reason."
+"wars, would end up in this forgotten place at the same time and for the same"
+" well-known reason."
 msgstr ""
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:11
@@ -1115,16 +1060,16 @@ msgstr "Η Κοιλάδα των Βισσώνων"
 #: ../../data/maps/Wisent_Valley.wmf/elemental:10
 msgid ""
 "It seems as if this magical valley has been inhabited by wisents since the "
-"beginning of days. When your tribe came to this place, you were sure that it "
-"offered enough space for a peaceful life. But can your tribe live in peace "
+"beginning of days. When your tribe came to this place, you were sure that it"
+" offered enough space for a peaceful life. But can your tribe live in peace "
 "with your neighbors?"
 msgstr ""
 
 #: ../../data/maps/Wisent_Valley.wmf/elemental:11
 msgid ""
-"The black player is surrounded in the center with no resources, so there are "
-"three different ways to use this map: without the black player for a normal "
-"4 players’ map, with a black AI to add a complication to the expansion of "
+"The black player is surrounded in the center with no resources, so there are"
+" three different ways to use this map: without the black player for a normal"
+" 4 players’ map, with a black AI to add a complication to the expansion of "
 "the other players, or you can play as a challenge with the black player "
 "against the other 4 (VERY difficult)."
 msgstr ""

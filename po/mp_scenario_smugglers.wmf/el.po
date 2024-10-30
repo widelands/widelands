@@ -1,6 +1,6 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
-#
+# 
 # Translators:
 # Alexandros Koutroulis, 2024
 # erimitis, 2018
@@ -8,11 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-03 14:28+0000\n"
 "Last-Translator: Alexandros Koutroulis, 2024\n"
-"Language-Team: Greek (http://app.transifex.com/widelands/widelands/language/"
-"el/)\n"
+"Language-Team: Greek (http://app.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -54,22 +53,15 @@ msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
 "tunnels on this island, each consisting of a receiving and a sending end."
-msgstr ""
-"Οι Λαθρέμποροι είναι ένας διασκεδαστικός χάρτης για 4 άτομα. Εσύ και ο "
-"συνέταιρός σου ξεκινάτε διαγώνια ο ένας απέναντι από τον άλλο. Υπάρχουν "
-"αρκετά τούνελ διακίνησης λαθραίων στο νησί, καθένα από τα οποία έχει ένα "
-"σημείοαποστολής λαθραίων και ένα σημείο λήψης."
+msgstr "Οι Λαθρέμποροι είναι ένας διασκεδαστικός χάρτης για 4 άτομα. Εσύ και ο συνέταιρός σου ξεκινάτε διαγώνια ο ένας απέναντι από τον άλλο. Υπάρχουν αρκετά τούνελ διακίνησης λαθραίων στο νησί, καθένα από τα οποία έχει ένα σημείοαποστολής λαθραίων και ένα σημείο λήψης."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:10
 msgid ""
-"To establish a smuggling route, you need to build a warehouse on a sending/"
-"receiving spot while your team mate has to build one on the corresponding "
-"receiving/sending spot. A ware is then transported every 10 seconds."
-msgstr ""
-"Για να ανοίξεις μια διαδρομή διακίνησης λαθραίων, θα πρέπει να χτίσεις μια "
-"αποθήκη σε ένα σημείο αποστολής / λήψης, ενώ ο συμπαίκτης σου θα πρέπει να "
-"χτίσει μια αποθήκη στο αντίστοιχο άκρο. Έπειτα, ένα εμπόρευμα θα μεταφέρεται "
-"κάθε 10 δευτερόλεπτα."
+"To establish a smuggling route, you need to build a warehouse on a "
+"sending/receiving spot while your team mate has to build one on the "
+"corresponding receiving/sending spot. A ware is then transported every 10 "
+"seconds."
+msgstr "Για να ανοίξεις μια διαδρομή διακίνησης λαθραίων, θα πρέπει να χτίσεις μια αποθήκη σε ένα σημείο αποστολής / λήψης, ενώ ο συμπαίκτης σου θα πρέπει να χτίσει μια αποθήκη στο αντίστοιχο άκρο. Έπειτα, ένα εμπόρευμα θα μεταφέρεται κάθε 10 δευτερόλεπτα."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:12
@@ -77,10 +69,7 @@ msgstr ""
 msgid ""
 "For harder to defend smuggling routes, you get 2 or 3 points per ware "
 "smuggled. The first team to collect %s wins."
-msgstr ""
-"Οι διαδρομές διακίνησης λαθραίων που είναι δυσκολότερο να προστατέψεις, σού "
-"δίνουν 2 ή 3 πόντους για κάθε λαθραίο εμπόρευμα που διακινήθηκε από αυτές. Η "
-"πρώτη ομάδα που θα συλλέξει %s κερδίζει."
+msgstr "Οι διαδρομές διακίνησης λαθραίων που είναι δυσκολότερο να προστατέψεις, σού δίνουν 2 ή 3 πόντους για κάθε λαθραίο εμπόρευμα που διακινήθηκε από αυτές. Η πρώτη ομάδα που θα συλλέξει %s κερδίζει."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:13
 msgid "A sending spot"
@@ -99,18 +88,13 @@ msgid ""
 "Remember that the map has rotational symmetry. For example, when you have "
 "found a spot to the top-left of your headquarters, the corresponding spot "
 "will be to the bottom-right of the headquarters of your team mate."
-msgstr ""
-"Θυμήσου ότι ο χάρτης είναι συμμετρικός. Για παράδειγμα, όταν βρεις ένα "
-"σημείο, πάνω-αριστερά από το αρχηγείο σου, το αντίστοιχο σημείο θα είναι "
-"κάτω-δεξιά από το αρχηγείο του συμπαίκτη σου."
+msgstr "Θυμήσου ότι ο χάρτης είναι συμμετρικός. Για παράδειγμα, όταν βρεις ένα σημείο, πάνω-αριστερά από το αρχηγείο σου, το αντίστοιχο σημείο θα είναι κάτω-δεξιά από το αρχηγείο του συμπαίκτη σου."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:17
 msgid ""
-"You can see the number of wares traded at any time in the general statistics "
-"menu. Good luck!"
-msgstr ""
-"Μπορείς να δεις τον αριθμό των εμπορευμάτων που έχουν διακινηθεί ανά πάσα "
-"στιγμή, από το μενού γενικών στατιστικών. Καλή επιτυχία!"
+"You can see the number of wares traded at any time in the general statistics"
+" menu. Good luck!"
+msgstr "Μπορείς να δεις τον αριθμό των εμπορευμάτων που έχουν διακινηθεί ανά πάσα στιγμή, από το μενού γενικών στατιστικών. Καλή επιτυχία!"
 
 #. TRANSLATORS: the first 2 parameters are player names, the last parameter is
 #. '<number> points'
@@ -118,9 +102,7 @@ msgstr ""
 msgid ""
 "A new smuggling route from %1$s to %2$s has been established! Every ware "
 "they smuggle there is worth %3$s."
-msgstr ""
-"Μια νέα διαδρομή διακίνησης λαθραίων από τον %1$s στον %2$s έχει ανοιχτεί. "
-"Κάθε εμπόρευμα που διακινούν λαθραία δίνει %3$s."
+msgstr "Μια νέα διαδρομή διακίνησης λαθραίων από τον %1$s στον %2$s έχει ανοιχτεί. Κάθε εμπόρευμα που διακινούν λαθραία δίνει %3$s."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:26
@@ -128,9 +110,7 @@ msgstr ""
 msgid ""
 "Your team has established a new smuggling route. You have the sending "
 "warehouse. Every ware smuggled here is worth %s."
-msgstr ""
-"Η ομάδα σου άνοιξε μια νέα διαδρομή διακίνησης λαθραίων και έχεις την "
-"αποθήκη που στέλνει. Κάθε εμπόρευμα που διακινείται από εδώ, δίνει %s."
+msgstr "Η ομάδα σου άνοιξε μια νέα διαδρομή διακίνησης λαθραίων και έχεις την αποθήκη που στέλνει. Κάθε εμπόρευμα που διακινείται από εδώ, δίνει %s."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:30
@@ -138,16 +118,13 @@ msgstr ""
 msgid ""
 "Your team has established a new smuggling route. You have the receiving "
 "warehouse. Every ware smuggled here is worth %s."
-msgstr ""
-"Η ομάδα σου άνοιξε μια νέα διαδρομή διακίνησης λαθραίων και έχεις την "
-"αποθήκη που παραλαμβάνει. Κάθε εμπόρευμα που διακινείται προς εδώ, δίνει %s."
+msgstr "Η ομάδα σου άνοιξε μια νέα διαδρομή διακίνησης λαθραίων και έχεις την αποθήκη που παραλαμβάνει. Κάθε εμπόρευμα που διακινείται προς εδώ, δίνει %s."
 
 #. TRANSLATORS: the first parameter is '<number> points', the last 2
 #. parameters are player names
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:34
 msgid "The smuggling route worth %1$s from %2$s to %3$s has been broken!"
-msgstr ""
-"Κόπηκε η διαδρομή διακίνησης λαθραίων που έδινε %1$sαπό τον %2$s στον %3$s!"
+msgstr "Κόπηκε η διαδρομή διακίνησης λαθραίων που έδινε %1$sαπό τον %2$s στον %3$s!"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:37
 msgid "Game over!"
@@ -159,6 +136,4 @@ msgstr "Τέλος Παιχνιδιού!"
 msgid ""
 "Game over! %1$s and %2$s have won the game! %3$s and %4$s only managed to "
 "collect %5$s."
-msgstr ""
-"Τέλος παιχνιδιού! Οι %1$s και %2$s κέρδισαν το παιχνίδι! Οι %3$s και %4$s "
-"κατάφεραν μόνο να μαζέψουν %5$s."
+msgstr "Τέλος παιχνιδιού! Οι %1$s και %2$s κέρδισαν το παιχνίδι! Οι %3$s και %4$s κατάφεραν μόνο να μαζέψουν %5$s."

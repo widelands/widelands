@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # Translators:
 # Karl Vest, 2020
 # Pavol Gono, 2024
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (https://app.transifex.com/widelands/teams/35159/sk/)\n"
@@ -18,8 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sk\n"
-"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n "
-">= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
 
 #. TRANSLATORS: Name of a backup autosave
 #: ../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:129
@@ -56,8 +55,8 @@ msgstr "Tehlovýroba"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:36
 msgid ""
-"Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start "
-"producing bricks."
+"Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
+" producing bricks."
 msgstr ""
 "Postavte tehliarsku pec, uhoľnú baňu, kamennú baňu, jamu na hlinu a studňu, "
 "aby sme mohli vyrábať tehly."
@@ -225,14 +224,14 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:116
 msgid ""
-"You can build the port either on the easternmost tip of the island or in the "
-"place where the enemy’s headquarters stood."
+"You can build the port either on the easternmost tip of the island or in the"
+" place where the enemy’s headquarters stood."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:117
 msgid ""
-"If you did not prepare well enough to master this challenge in time, you can "
-"reload the scenario from the backup savegame automatically created for you "
+"If you did not prepare well enough to master this challenge in time, you can"
+" reload the scenario from the backup savegame automatically created for you "
 "shortly before you reached the enemy’s headquarters."
 msgstr ""
 
@@ -254,8 +253,8 @@ msgid ""
 "Welcome to the beautiful isle of Langeness! I am Reebaud, the chieftain of "
 "this pristine island."
 msgstr ""
-"Vitajte na krásnom ostrove Langeness! Som Reebaud, náčelník tohto panenského "
-"ostrova."
+"Vitajte na krásnom ostrove Langeness! Som Reebaud, náčelník tohto panenského"
+" ostrova."
 
 #. TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are
 #. dukedoms
@@ -263,13 +262,13 @@ msgstr ""
 msgid ""
 "My tribe and I have just arrived from the mainland. There were fights with "
 "the Danes in the North, the Schauenburgers and Holsteiners in the East and "
-"South… So I decided to lead my tribe away to start a quiet, peaceful life on "
-"this untouched island."
+"South… So I decided to lead my tribe away to start a quiet, peaceful life on"
+" this untouched island."
 msgstr ""
 "Môj kmeň a ja sme odišli z pevniny a práve sme dorazili. Bojovali sme tam s "
 "Dánmi na severe, so Schauenburgerskými a Holsteinerskými na východe... "
-"rozhodol som sa preto môj kmeň odtiaľ odviesť  a začať tichý a pokojný život "
-"na tomto nedotknutom ostrove."
+"rozhodol som sa preto môj kmeň odtiaľ odviesť  a začať tichý a pokojný život"
+" na tomto nedotknutom ostrove."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:136
 msgid "A new home"
@@ -278,8 +277,8 @@ msgstr "Nový domov"
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:138
 msgid ""
-"This is as good a place as any to start building our new home. First of all, "
-"we must ensure a stable supply of basic building materials."
+"This is as good a place as any to start building our new home. First of all,"
+" we must ensure a stable supply of basic building materials."
 msgstr ""
 "Toto je dobré miesto na budovanie nášho nového domova. Najskôr musíme "
 "zabezpečiť stabilný prísun základných stavebných materiálov."
@@ -321,8 +320,8 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:153
 msgid ""
 "We should start by taking care of our wood production. Trees don’t seem to "
-"grow well on this island; better build at least two houses for foresters and "
-"one for a woodcutter."
+"grow well on this island; better build at least two houses for foresters and"
+" one for a woodcutter."
 msgstr ""
 "Mali by sme začať tým, že sa postaráme o produkciu dreva. Zdá sa, že na "
 "tomto ostrove stromy celkom dobre nerastú. Lepšie bude, keď postavíme dva "
@@ -359,25 +358,25 @@ msgstr ""
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:166
 msgid ""
-"Clay is easy to make: A clay digger working at a clay pit will simply dig up "
-"some earth and mix it with water. Just make sure that he has plenty of space "
-"for digging around his clay pit. It might be a good idea to build some "
-"sentinels to expand."
+"Clay is easy to make: A clay digger working at a clay pit will simply dig up"
+" some earth and mix it with water. Just make sure that he has plenty of "
+"space for digging around his clay pit. It might be a good idea to build some"
+" sentinels to expand."
 msgstr ""
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:169
 msgid ""
 "To burn bricks, the brick kiln needs a fire. We need to use coal as fuel. "
-"Build a coal mine to make sure we don’t run out. No coal means no bricks, no "
-"bricks means no mines, no mines mean no coal… you can see the problem."
+"Build a coal mine to make sure we don’t run out. No coal means no bricks, no"
+" bricks means no mines, no mines mean no coal… you can see the problem."
 msgstr ""
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:172
 msgid ""
-"Also, build a well – nobody likes to drink salt water, and it is no good for "
-"making clay."
+"Also, build a well – nobody likes to drink salt water, and it is no good for"
+" making clay."
 msgstr ""
 "Postav tiež studňu – slaná voda nechutí nikomu a ani na výrobu hliny nie je "
 "dobrá."
@@ -407,8 +406,8 @@ msgstr ""
 msgid ""
 "I noticed we have been short of reed for a while now. Our buildings seem to "
 "need quite a lot of it. We should build another reed farm or two. Reed is "
-"also used for making fishing nets and other tools; therefore, resolving this "
-"shortage should be a priority."
+"also used for making fishing nets and other tools; therefore, resolving this"
+" shortage should be a priority."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:188
@@ -429,9 +428,9 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:194
 msgid ""
 "Our brickmakers have been complaining about a shortage of clay for a while "
-"now. No clay means no bricks can be produced, so this shortage is slowing us "
-"down a lot. It would be better to build one or two more clay pits, and wells "
-"to supply them with water."
+"now. No clay means no bricks can be produced, so this shortage is slowing us"
+" down a lot. It would be better to build one or two more clay pits, and "
+"wells to supply them with water."
 msgstr ""
 
 #. TRANSLATORS: Hauke – no clay
@@ -496,8 +495,8 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:217
 msgid ""
 "Chieftain Reebaud! I bring bad news. The miners are working so hard that "
-"they have no time to prepare their own food. They demand to be supplied with "
-"it."
+"they have no time to prepare their own food. They demand to be supplied with"
+" it."
 msgstr ""
 
 #. TRANSLATORS: Hauke – no rations left
@@ -505,15 +504,15 @@ msgstr ""
 msgid ""
 "We need to build a tavern for preparing rations. To get the raw food, we "
 "have to build a fisher’s house, and as nobody likes raw fish, a smokery to "
-"smoke it. Furthermore, build a berry farm which will plant berry bushes, and "
-"a fruit collector’s house so the bushes will be harvested."
+"smoke it. Furthermore, build a berry farm which will plant berry bushes, and"
+" a fruit collector’s house so the bushes will be harvested."
 msgstr ""
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:223
 msgid ""
-"We should start expanding our territory faster in order to have enough space "
-"for many berry farms, and a longer coastline for fishing."
+"We should start expanding our territory faster in order to have enough space"
+" for many berry farms, and a longer coastline for fishing."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:227
@@ -550,8 +549,8 @@ msgstr ""
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:239
 msgid ""
-"The bakery and brewery should be enhanced as soon as the workers have enough "
-"experience. They can then produce mead, and bread sweetened with honey. "
+"The bakery and brewery should be enhanced as soon as the workers have enough"
+" experience. They can then produce mead, and bread sweetened with honey. "
 "Build a beekeeper’s house next to the berry farm to produce some honey, "
 "which we can store until we need it."
 msgstr ""
@@ -614,8 +613,8 @@ msgstr ""
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:269
 msgid ""
-"I advise to build all those buildings within a short distance of each other, "
-"and to construct two warehouses nearby: One should be set to store only "
+"I advise to build all those buildings within a short distance of each other,"
+" and to construct two warehouses nearby: One should be set to store only "
 "weapons, armor, ores, metal and coal; the other to store building materials."
 msgstr ""
 
@@ -652,8 +651,8 @@ msgstr ""
 #. TRANSLATORS: Reebaud – expand
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:285
 msgid ""
-"Expanding would also provide more space for farming. We could use some extra "
-"barley to recruit more reindeer, as our roads are quite busy."
+"Expanding would also provide more space for farming. We could use some extra"
+" barley to recruit more reindeer, as our roads are quite busy."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:290
@@ -704,8 +703,8 @@ msgstr ""
 #. TRANSLATORS: Reebaud – train soldiers 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:315
 msgid ""
-"Soldiers are trained in basic attack, health and defense by a training camp. "
-"They can learn the finer points in a training arena."
+"Soldiers are trained in basic attack, health and defense by a training camp."
+" They can learn the finer points in a training arena."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:319
@@ -723,8 +722,8 @@ msgstr ""
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:324
 msgid ""
-"They learn to attack with three different swords: The long sword, broadsword "
-"and double-edged sword. The latter two contain gold, and all of them iron. "
+"They learn to attack with three different swords: The long sword, broadsword"
+" and double-edged sword. The latter two contain gold, and all of them iron. "
 "The advanced soldiers are taught to use two swords at once: They keep their "
 "first double-edged sword, and are given various other swords to wield in "
 "their other hand. This makes six steps of attack training."
@@ -757,8 +756,8 @@ msgstr ""
 msgid ""
 "We should build these buildings close to the barracks, since it is, as I "
 "already mentioned earlier, much more efficient to centralize all our "
-"military facilities in one recruiting and training center, than if they were "
-"strewn out over a long distance. Build a third warehouse there which will "
+"military facilities in one recruiting and training center, than if they were"
+" strewn out over a long distance. Build a third warehouse there which will "
 "store only the food needed for training."
 msgstr ""
 
@@ -807,8 +806,8 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:361
 msgid ""
 "Of course I also prefer to keep our soldiers alive, but we can’t save every "
-"life. Soldiers die in battle, that’s just the way things are. You may decide "
-"how long to wait until attacking, but don’t take too long, or the enemies "
+"life. Soldiers die in battle, that’s just the way things are. You may decide"
+" how long to wait until attacking, but don’t take too long, or the enemies "
 "will exploit our weakness."
 msgstr ""
 
@@ -843,9 +842,9 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:377
 msgid ""
 "We can prevent this, or at least make it harder to do, by ordering some "
-"foresters to plant trees at the border. The enemy will have to cut down many "
-"of them to make room for it, so we may be safe until we open the battle at a "
-"time of our choosing."
+"foresters to plant trees at the border. The enemy will have to cut down many"
+" of them to make room for it, so we may be safe until we open the battle at "
+"a time of our choosing."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:380
@@ -868,8 +867,8 @@ msgstr ""
 #. TRANSLATORS: Maukor – enemy defeated 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:389
 msgid ""
-"I pray to God to hear my last words. Let not the false fiend triumph! Punish "
-"them for this ignoble feat!"
+"I pray to God to hear my last words. Let not the false fiend triumph! Punish"
+" them for this ignoble feat!"
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:392
@@ -885,16 +884,16 @@ msgstr ""
 #. TRANSLATORS: Reebaud – enemy defeated 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:395
 msgid ""
-"His God has granted his wish! The ocean is rising! The island is almost flat "
-"– we will all drown!"
+"His God has granted his wish! The ocean is rising! The island is almost flat"
+" – we will all drown!"
 msgstr ""
 
 #. TRANSLATORS: Hauke – rising water
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:401
 msgid ""
 "Despair not, I did espy some hope! The easternmost tip of the island, as "
-"well as the space where the fiends’ headquarters stood, seems well suited to "
-"build a port on. If we manage to construct a ship, and fill it with all we "
+"well as the space where the fiends’ headquarters stood, seems well suited to"
+" build a port on. If we manage to construct a ship, and fill it with all we "
 "need to build a new settlement, we may be able to escape."
 msgstr ""
 
@@ -921,18 +920,18 @@ msgstr ""
 #, lua-format
 msgid ""
 "I almost forgot in this haste – wherever we will land, we’ll need some "
-"construction materials to get started, and soldiers to secure and expand our "
-"new colony. Even after loading the expedition, the ship should have enough "
-"free space for a few wares and workers. On top of that, there should be room "
-"for up to %d soldier, if nobody minds being all crammed together. Let’s send "
-"some building supplies and our best men to the port when it’s completed, to "
-"get ready to embark when we set sail!"
+"construction materials to get started, and soldiers to secure and expand our"
+" new colony. Even after loading the expedition, the ship should have enough "
+"free space for a few wares and workers. On top of that, there should be room"
+" for up to %d soldier, if nobody minds being all crammed together. Let’s "
+"send some building supplies and our best men to the port when it’s "
+"completed, to get ready to embark when we set sail!"
 msgid_plural ""
 "I almost forgot in this haste – wherever we will land, we’ll need some "
-"construction materials to get started, and soldiers to secure and expand our "
-"new colony. Even after loading the expedition, the ship should have enough "
-"free space for a few wares and workers. On top of that, there should be room "
-"for up to %d soldiers, if nobody minds being all crammed together. Let’s "
+"construction materials to get started, and soldiers to secure and expand our"
+" new colony. Even after loading the expedition, the ship should have enough "
+"free space for a few wares and workers. On top of that, there should be room"
+" for up to %d soldiers, if nobody minds being all crammed together. Let’s "
 "send some building supplies and our best men to the port when it’s "
 "completed, to get ready to embark when we set sail!"
 msgstr[0] ""
@@ -942,8 +941,8 @@ msgstr[3] ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
 msgid ""
-"All wares and workers that are loaded onto the expedition as well as some of "
-"the soldiers in the port will be carried over to the next scenario."
+"All wares and workers that are loaded onto the expedition as well as some of"
+" the soldiers in the port will be carried over to the next scenario."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
@@ -969,6 +968,6 @@ msgstr "Blahoželáme"
 #. TRANSLATORS: Reebaud – victory
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:427
 msgid ""
-"You have completed this mission. You may move on to the next scenario now to "
-"help us build a new home, far from the false God’s vengeful reach…"
+"You have completed this mission. You may move on to the next scenario now to"
+" help us build a new home, far from the false God’s vengeful reach…"
 msgstr ""

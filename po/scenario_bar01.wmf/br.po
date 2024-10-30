@@ -1,6 +1,6 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
-#
+# 
 # Translators:
 # Anthony Guéchoum <a.guechoum@proton.me>, 2020
 # Anthony Guéchoum <a.guechoum@proton.me>, 2024
@@ -9,20 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-03 14:30+0000\n"
 "Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2024\n"
-"Language-Team: Breton (http://app.transifex.com/widelands/widelands/language/"
-"br/)\n"
+"Language-Team: Breton (http://app.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: br\n"
-"Plural-Forms: nplurals=5; plural=((n%10 == 1) && (n%100 != 11) && (n%100 !"
-"=71) && (n%100 !=91) ? 0 :(n%10 == 2) && (n%100 != 12) && (n%100 !=72) && (n"
-"%100 !=92) ? 1 :(n%10 ==3 || n%10==4 || n%10==9) && (n%100 < 10 || n% 100 > "
-"19) && (n%100 < 70 || n%100 > 79) && (n%100 < 90 || n%100 > 99) ? 2 :(n != 0 "
-"&& n % 1000000 == 0) ? 3 : 4);\n"
+"Plural-Forms: nplurals=5; plural=((n%10 == 1) && (n%100 != 11) && (n%100 !=71) && (n%100 !=91) ? 0 :(n%10 == 2) && (n%100 != 12) && (n%100 !=72) && (n%100 !=92) ? 1 :(n%10 ==3 || n%10==4 || n%10==9) && (n%100 < 10 || n% 100 > 19) && (n%100 < 70 || n%100 > 79) && (n%100 < 90 || n%100 > 99) ? 2 :(n != 0 && n % 1000000 == 0) ? 3 : 4);\n"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:20
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:22
@@ -73,8 +68,8 @@ msgstr "Savit ur mengleuz glaou hag ur mengleuz houarn."
 msgid ""
 "To do so, place a flag up on the mountain’s flank to the east (on mountain "
 "terrain though, not mountain meadow). When you click on the new flag, you "
-"can send geologists there. Because the flag is on a mountain, the geologists "
-"will search for ores; otherwise, they would search for water. Then build a "
+"can send geologists there. Because the flag is on a mountain, the geologists"
+" will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that they will find, choosing the "
 "appropriate mine to be built:"
 msgstr ""
@@ -177,8 +172,8 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:79
 msgid ""
-"The iron ore your miners dig up is not usable yet – it has to be melted into "
-"iron first."
+"The iron ore your miners dig up is not usable yet – it has to be melted into"
+" iron first."
 msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:84
@@ -211,15 +206,15 @@ msgstr ""
 msgid ""
 "Workers gain experience by successful work. With enough experience, they "
 "become more advanced workers, who are necessary to operate the enhanced "
-"buildings. Do not enhance a building before you have enough advanced workers "
-"to operate the advanced building!"
+"buildings. Do not enhance a building before you have enough advanced workers"
+" to operate the advanced building!"
 msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:91
 msgid ""
 "Such buildings usually have greater demands than the basic kind of that "
-"building – for instance, deep mines need snacks instead of rations. You will "
-"have to enhance your tavern to an inn in order to produce snacks out of "
+"building – for instance, deep mines need snacks instead of rations. You will"
+" have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
 msgstr ""
 
@@ -333,7 +328,8 @@ msgstr ""
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:144
 msgid ""
-"It’s been months, and we are still hiding where the forests are old and dark."
+"It’s been months, and we are still hiding where the forests are old and "
+"dark."
 msgstr ""
 
 #. TRANSLATORS: Thron
@@ -360,8 +356,8 @@ msgstr ""
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:168
 msgid ""
 "My father’s bones rest peacefully in the ground on which he once ended the "
-"senseless spilling of blood that had arisen amongst us. It pains me that his "
-"peace only endured for one generation."
+"senseless spilling of blood that had arisen amongst us. It pains me that his"
+" peace only endured for one generation."
 msgstr ""
 
 #. TRANSLATORS: Thron
@@ -400,11 +396,11 @@ msgstr ""
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:192
 msgid ""
-"The stories they tell about the deeds of our kin are sad to hear. I’ve spent "
-"nights lying awake, restless, more tired than I ever believed one could be. "
-"Yet whenever I close my eyes, I see the fortress my father built consumed by "
-"flames. The Throne Among the Trees, the symbol of unity and peace among our "
-"kin, became the wedge that drives us apart."
+"The stories they tell about the deeds of our kin are sad to hear. I’ve spent"
+" nights lying awake, restless, more tired than I ever believed one could be."
+" Yet whenever I close my eyes, I see the fortress my father built consumed "
+"by flames. The Throne Among the Trees, the symbol of unity and peace among "
+"our kin, became the wedge that drives us apart."
 msgstr ""
 
 #. TRANSLATORS: Thron
@@ -414,8 +410,8 @@ msgid ""
 "hidden out in the forests, trying to escape the war, hate and revenge that "
 "rage among the tribes fighting each other like in olden times, when we were "
 "no more but wild beasts driven and controlled by instincts. None of my "
-"brothers will ever gain and hold control over the wooden throne, none of the "
-"tribes will be strong enough to subdue the other. There will be no end to "
+"brothers will ever gain and hold control over the wooden throne, none of the"
+" tribes will be strong enough to subdue the other. There will be no end to "
 "this slaughter, unless… is this it? As father told me?"
 msgstr ""
 
@@ -443,8 +439,8 @@ msgstr ""
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:217
 msgid ""
-"Perhaps it’s time to make ourselves feel a little more at ease here. Perhaps "
-"it’s time to give those who still live and think united a new home, "
+"Perhaps it’s time to make ourselves feel a little more at ease here. Perhaps"
+" it’s time to give those who still live and think united a new home, "
 "replacing what is now lost to us? Until we can return to the place we once "
 "called our home…"
 msgstr ""
@@ -524,8 +520,8 @@ msgstr ""
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:252
 msgid ""
 "During another sleepless night, I went up to the hill and gazed towards the "
-"north. The fires are still burning, satisfying their hunger upon my father’s "
-"legacy."
+"north. The fires are still burning, satisfying their hunger upon my father’s"
+" legacy."
 msgstr ""
 
 #. TRANSLATORS: Thron
@@ -565,17 +561,17 @@ msgstr ""
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:280
 msgid ""
-"Some time ago, Boldreth came to me. His advice was to move to a place closer "
-"to home – to strike at the first sign of my brothers’ forces wavering."
+"Some time ago, Boldreth came to me. His advice was to move to a place closer"
+" to home – to strike at the first sign of my brothers’ forces wavering."
 msgstr ""
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:283
 msgid ""
 "But when I look over the forests I can still see black smoke rising to the "
-"sky. I know – it is too early yet, and what he hopes for will not happen any "
-"time soon. He might still be right, but I fear the bloodshed that returning "
-"too fast would cause on both sides…"
+"sky. I know – it is too early yet, and what he hopes for will not happen any"
+" time soon. He might still be right, but I fear the bloodshed that returning"
+" too fast would cause on both sides…"
 msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:288
@@ -618,10 +614,10 @@ msgstr ""
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:302
 msgid ""
-"So you want to prepare us for a longer stay in these forests, Thron? Well, I "
-"see the wisdom in doing so, yet my heart is yearning for a glorious return "
-"to Al’thunran. Too long have we waited while our brethren have fought on the "
-"battlefield, and our axes and swords have turned rusty over time."
+"So you want to prepare us for a longer stay in these forests, Thron? Well, I"
+" see the wisdom in doing so, yet my heart is yearning for a glorious return "
+"to Al’thunran. Too long have we waited while our brethren have fought on the"
+" battlefield, and our axes and swords have turned rusty over time."
 msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:308
@@ -643,10 +639,10 @@ msgstr ""
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:318
 msgid ""
-"While it is certainly no worthy task for a warrior, at least it is something "
-"to do! Thron, what would you say about my taking a few of our most restless "
-"warriors and venturing somewhat closer to the great mountain of Kal’mavrath "
-"– maybe we will find some more big rocks to please the old man?"
+"While it is certainly no worthy task for a warrior, at least it is something"
+" to do! Thron, what would you say about my taking a few of our most restless"
+" warriors and venturing somewhat closer to the great mountain of Kal’mavrath"
+" – maybe we will find some more big rocks to please the old man?"
 msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:325
@@ -709,10 +705,10 @@ msgstr ""
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:362
 msgid ""
-"While this is true, we should consider it later, for now other obstacles are "
-"at hand. The miners will definitely demand greater rations for working high "
-"up on the mountain in this bitter cold, and providing these supplies may not "
-"be easy."
+"While this is true, we should consider it later, for now other obstacles are"
+" at hand. The miners will definitely demand greater rations for working high"
+" up on the mountain in this bitter cold, and providing these supplies may "
+"not be easy."
 msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:368
@@ -841,8 +837,8 @@ msgstr ""
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:438
 msgid ""
 "As I just discovered, we are running short on blackwood! We cannot put our "
-"warriors into some crumbling huts, and even less so in times as dangerous as "
-"ours!"
+"warriors into some crumbling huts, and even less so in times as dangerous as"
+" ours!"
 msgstr ""
 
 #. TRANSLATORS: Boldreth
@@ -907,8 +903,8 @@ msgstr ""
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:478
 msgid ""
 "As our realm is getting bigger and bigger, the traffic on the roads is "
-"overwhelming. Our poor carriers are no longer able to transport the goods as "
-"fast as we need them to. I suggest we give them some support by breeding "
+"overwhelming. Our poor carriers are no longer able to transport the goods as"
+" fast as we need them to. I suggest we give them some support by breeding "
 "oxen."
 msgstr ""
 
@@ -940,9 +936,9 @@ msgstr ""
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:493
 msgid ""
-"When I looked around, I saw faithful faces, trusting that I could guide them "
-"through these dark days. Yet before I could speak any words of gratitude or "
-"encouragement, one of my warriors ran into the inn. He had been far out in "
+"When I looked around, I saw faithful faces, trusting that I could guide them"
+" through these dark days. Yet before I could speak any words of gratitude or"
+" encouragement, one of my warriors ran into the inn. He had been far out in "
 "the forest for the past days and I could see how weary he was."
 msgstr ""
 
@@ -976,8 +972,8 @@ msgstr ""
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:508
 msgid ""
 "When I gazed at the horizon, I still saw crimson lights flicker in the "
-"distance. It is incredible with how much passion my brethren fight this war. "
-"I fear the moment I will see Al’thunran again – will there be anything but "
+"distance. It is incredible with how much passion my brethren fight this war."
+" I fear the moment I will see Al’thunran again – will there be anything but "
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
 msgstr ""
 
