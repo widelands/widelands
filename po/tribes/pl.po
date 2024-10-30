@@ -1,13 +1,14 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
-# 
+#
 # Translators:
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006
 # Antoni Szpikowski <szantek2004@gmail.com>, 2021-2022
 # GunChleoc, 2014
-# Wesmania <ikk_pl@yahoo.co.uk>, 2015
-# Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2015
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2016-2017
 # Jacek Wolszczak <shutdownrunner@o2.pl>, 2008
+# Leszek Szary, 2024
 # Marcin S <dzidek1003@o2.pl>, 2021
 # Niektóry <niektory@gmail.com>, 2020
 # Niektóry <niektory@gmail.com>, 2020
@@ -21,13 +22,16 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-02-08 02:24+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021-2022\n"
-"Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
+"Last-Translator: Leszek Szary, 2024\n"
+"Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/"
+"pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pl\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
+"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
+"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:8
@@ -1287,7 +1291,9 @@ msgctxt "amazons_building"
 msgid ""
 "The farmer working at this cassava plantation has no cleared soil to plant "
 "her seeds."
-msgstr "Farmerka pracująca na tej plantacji manioku nie posiada oczyszczonej gleby, by sadzić nasiona."
+msgstr ""
+"Farmerka pracująca na tej plantacji manioku nie posiada oczyszczonej gleby, "
+"by sadzić nasiona."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
@@ -1344,8 +1350,8 @@ msgstr "zbierania kakao"
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:74
 msgctxt "amazons_building"
 msgid ""
-"The cocoa farmer working at this cocoa farm has no cleared soil to plant her"
-" seeds."
+"The cocoa farmer working at this cocoa farm has no cleared soil to plant her "
+"seeds."
 msgstr "Rolnik uprawiający kakao na tej farmie nie ma terenu do obsadzenia."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -1510,7 +1516,9 @@ msgid ""
 "This gold digger dwelling’s main vein is exhausted. Expect strongly "
 "diminished returns on investment. You should consider dismantling or "
 "destroying it."
-msgstr "Główna żyła złota tego kopacza została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ rozbiórkę lub zniszczenie budynku."
+msgstr ""
+"Główna żyła złota tego kopacza została wyczerpana. Spodziewaj się znacznego "
+"spadku produktywności. Rozważ rozbiórkę lub zniszczenie budynku."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:8
@@ -1546,9 +1554,11 @@ msgstr "Brak zwierzyny i ryb"
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:80
 msgctxt "amazons_building"
 msgid ""
-"The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any"
-" game or fish in her work area."
-msgstr "Myśliwy-łowca mieszkający w tej kwaterze nie jest w stanie znaleźć zwierzyny ani ryb na swoim obszarze pracy."
+"The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any "
+"game or fish in her work area."
+msgstr ""
+"Myśliwy-łowca mieszkający w tej kwaterze nie jest w stanie znaleźć zwierzyny "
+"ani ryb na swoim obszarze pracy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:8
@@ -1608,7 +1618,10 @@ msgid ""
 "The liana cutter working at this site can’t find any tree in her work area. "
 "You should consider dismantling or destroying the building or building a "
 "jungle preserver’s hut."
-msgstr "Zbieraczka lian pracująca w tym miejscu nie może znaleźć żadnego drzewa w swoim obszarze roboczym. Powinieneś rozważyć rozbiórkę lub zniszczenie budynku lub wybudowanie chaty strażnika dżungli."
+msgstr ""
+"Zbieraczka lian pracująca w tym miejscu nie może znaleźć żadnego drzewa w "
+"swoim obszarze roboczym. Powinieneś rozważyć rozbiórkę lub zniszczenie "
+"budynku lub wybudowanie chaty strażnika dżungli."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:8
@@ -1831,7 +1844,9 @@ msgctxt "amazons_building"
 msgid ""
 "The stonecutter working at this stonecutter’s hut can’t find any rocks in "
 "her work area."
-msgstr "Kamieniarka pracująca w tej chacie nie może znaleźć żadnych skał w swoim obszarze pracy."
+msgstr ""
+"Kamieniarka pracująca w tej chacie nie może znaleźć żadnych skał w swoim "
+"obszarze pracy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:8
@@ -1842,7 +1857,7 @@ msgstr "Kopalnia kamienia"
 #. TRANSLATORS: Completed/Skipped/Did not start mining because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:51
 msgid "mining"
-msgstr ""
+msgstr "wydobycie"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:64
@@ -1869,18 +1884,20 @@ msgstr "wydobycie kwarcu"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:91
 msgid "No Stones"
-msgstr ""
+msgstr "Brak kamieni"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:92
 msgid "Main Stone Vein Exhausted"
-msgstr ""
+msgstr "Wyczerpano główną żyłę kamienia."
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:94
 msgctxt "amazons_building"
 msgid ""
-"This stone mine’s main vein is exhausted. Expect strongly diminished returns"
-" on investment. You should consider dismantling or destroying it."
-msgstr "Główna żyła kamienia tego kopacza została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ rozbiórkę lub zniszczenie budynku."
+"This stone mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider dismantling or destroying it."
+msgstr ""
+"Główna żyła kamienia tego kopacza została wyczerpana. Spodziewaj się "
+"znacznego spadku produktywności. Rozważ rozbiórkę lub zniszczenie budynku."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:8
@@ -1919,9 +1936,11 @@ msgstr "Nie ma już wody"
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:57
 msgctxt "amazons_building"
 msgid ""
-"The carrier working at this water gatherer’s hut can’t find any water in its"
-" vicinity."
-msgstr "Tragarz pracujący w tej chacie zbieracza wody nie może znaleźć wody w swojej chacie."
+"The carrier working at this water gatherer’s hut can’t find any water in its "
+"vicinity."
+msgstr ""
+"Tragarz pracujący w tej chacie zbieracza wody nie może znaleźć wody w swojej "
+"chacie."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:8
@@ -1971,7 +1990,10 @@ msgid ""
 "The woodcutter working at this woodcutter’s hut can’t find any trees in her "
 "work area. You should consider dismantling or destroying the building or "
 "building a jungle preserver’s hut."
-msgstr "Drwal pracujący w tej chacie drwala nie może znaleźć drzew na swoim obszarze pracy. Rozważ rozbiórkę lub zniszczenie tego budynku, lub budowę chaty leśnika dżungli."
+msgstr ""
+"Drwal pracujący w tej chacie drwala nie może znaleźć drzew na swoim obszarze "
+"pracy. Rozważ rozbiórkę lub zniszczenie tego budynku, lub budowę chaty "
+"leśnika dżungli."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:170
@@ -2106,7 +2128,9 @@ msgctxt "atlanteans_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "Główna żyła węgla tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ rozbiórkę lub zniszczenie kopalni."
+msgstr ""
+"Główna żyła węgla tej kopalni została wyczerpana. Spodziewaj się znacznego "
+"spadku produktywności. Rozważ rozbiórkę lub zniszczenie kopalni."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:8
@@ -2133,7 +2157,9 @@ msgctxt "atlanteans_building"
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider dismantling or destroying it."
-msgstr "Główna żyła kryształów tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ rozbiórkę lub zniszczenie kopalni."
+msgstr ""
+"Główna żyła kryształów tej kopalni została wyczerpana. Spodziewaj się "
+"znacznego spadku produktywności. Rozważ rozbiórkę lub zniszczenie kopalni."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:8
@@ -2153,8 +2179,7 @@ msgstr "zbieranie kukurydzy"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:75
 msgctxt "atlanteans_building"
-msgid ""
-"The farmer working at this farm has no cleared soil to plant his seeds."
+msgid "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "Rolnik pracujący na tej farmie nie ma terenu do obsiania."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -2192,7 +2217,10 @@ msgid ""
 "water where he can breed fish in his work area. Remember that you can only "
 "regenerate your fish resources if there ever were some fish in the vicinity "
 "in the first place."
-msgstr "Hodowca ryb mieszkający w tej chacie hodowcy ryb nie może znaleźć żadnej wody na swoim obszarze pracy. Pamiętaj, że możesz zwiększyć populację ryb tylko, jeśli w zbiorniku były kiedyś jakieś ryby."
+msgstr ""
+"Hodowca ryb mieszkający w tej chacie hodowcy ryb nie może znaleźć żadnej "
+"wody na swoim obszarze pracy. Pamiętaj, że możesz zwiększyć populację ryb "
+"tylko, jeśli w zbiorniku były kiedyś jakieś ryby."
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
 msgid "The fishing grounds are full"
@@ -2219,7 +2247,10 @@ msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area. Remember that you can increase the number of existing fish by "
 "building a fish breeder’s house."
-msgstr "Rybak mieszkający w tym domku rybaka nie może znaleźć żadnych ryb na swoim obszarze pracy. Pamiętaj, że możesz zwiększyć populację ryb budując w okolicy chatę hodowcy ryb."
+msgstr ""
+"Rybak mieszkający w tym domku rybaka nie może znaleźć żadnych ryb na swoim "
+"obszarze pracy. Pamiętaj, że możesz zwiększyć populację ryb budując w "
+"okolicy chatę hodowcy ryb."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:8
@@ -2249,7 +2280,9 @@ msgctxt "atlanteans_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "Główna żyła złota tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ rozbiórkę lub zniszczenie kopalni."
+msgstr ""
+"Główna żyła złota tej kopalni została wyczerpana. Spodziewaj się znacznego "
+"spadku produktywności. Rozważ rozbiórkę lub zniszczenie kopalni."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:8
@@ -2298,7 +2331,9 @@ msgctxt "atlanteans_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr "Myśliwy działający z tej kwatery myśliwego nie jest w stanie znaleźć zwierzyny na swoim obszarze pracy."
+msgstr ""
+"Myśliwy działający z tej kwatery myśliwego nie jest w stanie znaleźć "
+"zwierzyny na swoim obszarze pracy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:8
@@ -2351,7 +2386,9 @@ msgctxt "atlanteans_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "Główna żyła rudy żelaza tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ rozbiórkę lub zniszczenie kopalni."
+msgstr ""
+"Główna żyła rudy żelaza tej kopalni została wyczerpana. Spodziewaj się "
+"znacznego spadku produktywności. Rozważ rozbiórkę lub zniszczenie kopalni."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:8
@@ -2386,9 +2423,10 @@ msgstr "wycinanie kamienia"
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:51
 msgctxt "atlanteans_building"
 msgid ""
-"The stonecutter working at this quarry can’t find any rocks in his work "
-"area."
-msgstr "Kamieniarz pracujący w tym kamieniołomie nie może znaleźć żadnych skał na swoim obszarze pracy."
+"The stonecutter working at this quarry can’t find any rocks in his work area."
+msgstr ""
+"Kamieniarz pracujący w tym kamieniołomie nie może znaleźć żadnych skał na "
+"swoim obszarze pracy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/sawmill/init.lua:8
@@ -2592,7 +2630,8 @@ msgstr "Studnia"
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:60
 msgctxt "atlanteans_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr "Tragarz pracujący przy tej studni nie może znaleźć wody w swojej studni."
+msgstr ""
+"Tragarz pracujący przy tej studni nie może znaleźć wody w swojej studni."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:8
@@ -2604,9 +2643,11 @@ msgstr "Chata drwala"
 msgctxt "atlanteans_building"
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
-"his work area. You should consider dismantling or destroying the building or"
-" building a forester’s house."
-msgstr "Drwal pracujący z tej chaty drwala nie może znaleźć drzew na swoim obszarze pracy. Rozważ rozbiórkę lub zniszczenie tego budynku, lub budowę leśniczówki."
+"his work area. You should consider dismantling or destroying the building or "
+"building a forester’s house."
+msgstr ""
+"Drwal pracujący z tej chaty drwala nie może znaleźć drzew na swoim obszarze "
+"pracy. Rozważ rozbiórkę lub zniszczenie tego budynku, lub budowę leśniczówki."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:8
@@ -2717,7 +2758,9 @@ msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Główna żyła węgla tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
+msgstr ""
+"Główna żyła węgla tej kopalni została wyczerpana. Spodziewaj się znacznego "
+"spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:8
@@ -2737,7 +2780,10 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Główna żyła węgla tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej rozbiórkę lub zniszczenie."
+msgstr ""
+"Główna żyła węgla tej kopalni została wyczerpana. Spodziewaj się znacznego "
+"spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej "
+"rozbiórkę lub zniszczenie."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:8
@@ -2759,8 +2805,7 @@ msgstr "żęcie pszenicy"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:94
 msgctxt "barbarians_building"
-msgid ""
-"The farmer working at this farm has no cleared soil to plant his seeds."
+msgid "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "Rolnik pracujący na tej farmie nie ma terenu do obsiania."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -2780,7 +2825,9 @@ msgctxt "barbarians_building"
 msgid ""
 "The fisher working out of this fisher’s hut can’t find any fish in his work "
 "area."
-msgstr "Rybak mieszkający w tej chacie rybaka nie może znaleźć żadnych ryb na swoim obszarze pracy."
+msgstr ""
+"Rybak mieszkający w tej chacie rybaka nie może znaleźć żadnych ryb na swoim "
+"obszarze pracy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/init.lua:8
@@ -2800,7 +2847,9 @@ msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Główna żyła złota tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
+msgstr ""
+"Główna żyła złota tej kopalni została wyczerpana. Spodziewaj się znacznego "
+"spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:8
@@ -2820,7 +2869,10 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Główna żyła złota tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej rozbiórkę lub zniszczenie."
+msgstr ""
+"Główna żyła złota tej kopalni została wyczerpana. Spodziewaj się znacznego "
+"spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej "
+"rozbiórkę lub zniszczenie."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:8
@@ -2846,7 +2898,10 @@ msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "Główna żyła granitu tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej rozbiórkę lub zniszczenie."
+msgstr ""
+"Główna żyła granitu tej kopalni została wyczerpana. Spodziewaj się znacznego "
+"spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej "
+"rozbiórkę lub zniszczenie."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:8
@@ -2884,7 +2939,10 @@ msgid ""
 "The hunter working out of this hunter’s hut can’t find any game in his work "
 "area. Remember that you can build a gamekeeper’s hut to release more game "
 "into the wild."
-msgstr "Myśliwy działający z tej chaty myśliwego nie jest w stanie znaleźć zwierzyny na swoim obszarze pracy. Pamiętaj, że możesz zbudować w okolicy gajówkę, aby zwiększać populację zwierzyny."
+msgstr ""
+"Myśliwy działający z tej chaty myśliwego nie jest w stanie znaleźć zwierzyny "
+"na swoim obszarze pracy. Pamiętaj, że możesz zbudować w okolicy gajówkę, aby "
+"zwiększać populację zwierzyny."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:8
@@ -2904,7 +2962,10 @@ msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Główna żyła rudy żelaza tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
+msgstr ""
+"Główna żyła rudy żelaza tej kopalni została wyczerpana. Spodziewaj się "
+"znacznego spadku produktywności. Rozważ ulepszenie, rozbiórkę lub "
+"zniszczenie kopalni."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:8
@@ -2924,7 +2985,10 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Główna żyła rudy żelaza tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej rozbiórkę lub zniszczenie."
+msgstr ""
+"Główna żyła rudy żelaza tej kopalni została wyczerpana. Spodziewaj się "
+"znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać - "
+"rozważ jej rozbiórkę lub zniszczenie."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:8
@@ -2949,7 +3013,9 @@ msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
 "work area. You should consider dismantling or destroying the building or "
 "building a ranger’s hut."
-msgstr "Drwal pracujący z tej chaty drwala nie może znaleźć drzew na swoim obszarze pracy. Rozważ rozbiórkę lub zniszczenie tego budynku, lub budowę leśniczówki."
+msgstr ""
+"Drwal pracujący z tej chaty drwala nie może znaleźć drzew na swoim obszarze "
+"pracy. Rozważ rozbiórkę lub zniszczenie tego budynku, lub budowę leśniczówki."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:8
@@ -2996,7 +3062,9 @@ msgstr "Kamieniołom"
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Kamieniarz pracujący w tym kamieniołomie nie może znaleźć żadnych skał na swoim obszarze pracy."
+msgstr ""
+"Kamieniarz pracujący w tym kamieniołomie nie może znaleźć żadnych skał na "
+"swoim obszarze pracy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:8
@@ -3027,7 +3095,9 @@ msgctxt "barbarians_building"
 msgid ""
 "The gardener working at this reed yard has no cleared soil to plant his "
 "seeds."
-msgstr "Ogrodnik pracujący w tej plantacji trzciny nie ma terenu, na którym mógłby sadzić trzcinę."
+msgstr ""
+"Ogrodnik pracujący w tej plantacji trzciny nie ma terenu, na którym mógłby "
+"sadzić trzcinę."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:8
@@ -3098,7 +3168,8 @@ msgstr "Studnia"
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:69
 msgctxt "barbarians_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr "Tragarz pracujący przy tej studni nie może znaleźć wody w swojej studni."
+msgstr ""
+"Tragarz pracujący przy tej studni nie może znaleźć wody w swojej studni."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:8
@@ -3182,7 +3253,9 @@ msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Główna żyła węgla tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
+msgstr ""
+"Główna żyła węgla tej kopalni została wyczerpana. Spodziewaj się znacznego "
+"spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:8
@@ -3196,7 +3269,10 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Główna żyła węgla tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej rozbiórkę lub zniszczenie."
+msgstr ""
+"Główna żyła węgla tej kopalni została wyczerpana. Spodziewaj się znacznego "
+"spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej "
+"rozbiórkę lub zniszczenie."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:8
@@ -3218,8 +3294,7 @@ msgstr "Farma"
 
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:77
 msgctxt "empire_building"
-msgid ""
-"The farmer working at this farm has no cleared soil to plant his seeds."
+msgid "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "Rolnik pracujący na tej farmie nie ma terenu do obsiania."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -3239,7 +3314,9 @@ msgctxt "empire_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area."
-msgstr "Rybak mieszkający w tym domku rybaka nie może znaleźć żadnych ryb na swoim obszarze pracy."
+msgstr ""
+"Rybak mieszkający w tym domku rybaka nie może znaleźć żadnych ryb na swoim "
+"obszarze pracy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:8
@@ -3258,7 +3335,9 @@ msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Główna żyła złota tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
+msgstr ""
+"Główna żyła złota tej kopalni została wyczerpana. Spodziewaj się znacznego "
+"spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:8
@@ -3272,7 +3351,10 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Główna żyła złota tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej rozbiórkę lub zniszczenie."
+msgstr ""
+"Główna żyła złota tej kopalni została wyczerpana. Spodziewaj się znacznego "
+"spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej "
+"rozbiórkę lub zniszczenie."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:8
@@ -3286,7 +3368,9 @@ msgctxt "empire_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr "Myśliwy działający z tej kwatery myśliwego nie jest w stanie znaleźć zwierzyny na swoim obszarze pracy."
+msgstr ""
+"Myśliwy działający z tej kwatery myśliwego nie jest w stanie znaleźć "
+"zwierzyny na swoim obszarze pracy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:8
@@ -3305,7 +3389,10 @@ msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Główna żyła rudy żelaza tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
+msgstr ""
+"Główna żyła rudy żelaza tej kopalni została wyczerpana. Spodziewaj się "
+"znacznego spadku produktywności. Rozważ ulepszenie, rozbiórkę lub "
+"zniszczenie kopalni."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:8
@@ -3319,7 +3406,10 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Główna żyła rudy żelaza tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej rozbiórkę lub zniszczenie."
+msgstr ""
+"Główna żyła rudy żelaza tej kopalni została wyczerpana. Spodziewaj się "
+"znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać - "
+"rozważ jej rozbiórkę lub zniszczenie."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:8
@@ -3331,9 +3421,11 @@ msgstr "Chata drwala"
 msgctxt "empire_building"
 msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
-"his work area. You should consider dismantling or destroying the building or"
-" building a forester’s house."
-msgstr "Drwal pracujący z tej chaty drwala nie może znaleźć drzew na swoim obszarze pracy. Rozważ rozbiórkę lub zniszczenie tego budynku, lub budowę leśniczówki."
+"his work area. You should consider dismantling or destroying the building or "
+"building a forester’s house."
+msgstr ""
+"Drwal pracujący z tej chaty drwala nie może znaleźć drzew na swoim obszarze "
+"pracy. Rozważ rozbiórkę lub zniszczenie tego budynku, lub budowę leśniczówki."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:8
@@ -3365,7 +3457,9 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider enhancing, dismantling or "
 "destroying it."
-msgstr "Główna żyła marmuru tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
+msgstr ""
+"Główna żyła marmuru tej kopalni została wyczerpana. Spodziewaj się znacznego "
+"spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:8
@@ -3379,7 +3473,10 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "Główna żyła marmuru tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej rozbiórkę lub zniszczenie."
+msgstr ""
+"Główna żyła marmuru tej kopalni została wyczerpana. Spodziewaj się znacznego "
+"spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej "
+"rozbiórkę lub zniszczenie."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/mill/init.lua:8
@@ -3418,7 +3515,9 @@ msgstr "wycinanie marmuru"
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Kamieniarz pracujący w tym kamieniołomie nie może znaleźć żadnych skał na swoim obszarze pracy."
+msgstr ""
+"Kamieniarz pracujący w tym kamieniołomie nie może znaleźć żadnych skał na "
+"swoim obszarze pracy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:8
@@ -3560,7 +3659,8 @@ msgstr "Studnia"
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:64
 msgctxt "empire_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr "Tragarz pracujący przy tej studni nie może znaleźć wody w swojej studni."
+msgstr ""
+"Tragarz pracujący przy tej studni nie może znaleźć wody w swojej studni."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/winery/init.lua:8
@@ -3595,7 +3695,11 @@ msgid ""
 "area. Please make sure there is a working clay pit nearby and the aqua farm "
 "is supplied with all needed wares, or consider dismantling or destroying "
 "this building."
-msgstr "Rybak pracujący na tej hodowli ryb nie może znaleźć żadnych stawów z rybami na swoim obszarze pracy. Upewnij się, że w pobliżu działa kopalnia gliny oraz hodowla ryb jest zaopatrzona we wszystkie potrzebne towary, albo rozważ rozbiórkę lub zniszczenie tego budynku."
+msgstr ""
+"Rybak pracujący na tej hodowli ryb nie może znaleźć żadnych stawów z rybami "
+"na swoim obszarze pracy. Upewnij się, że w pobliżu działa kopalnia gliny "
+"oraz hodowla ryb jest zaopatrzona we wszystkie potrzebne towary, albo rozważ "
+"rozbiórkę lub zniszczenie tego budynku."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:8
@@ -3675,9 +3779,13 @@ msgstr "Nie ma już kwiatów"
 msgctxt "frisians_building"
 msgid ""
 "The beekeeper working at this beekeeper’s house can’t find any flowering "
-"fields or bushes in his work area. You should consider building another farm"
-" or berry farm nearby, or dismantling or destroying this building."
-msgstr "Pszczelarz mieszkający w tym domu pszczelarza nie może znaleźć żadnych kwitnących pól lub krzaków na swoim obszarze pracy. Rozważ zbudowanie kolejnej farmy bądź plantacji jagód w pobliżu, albo rozbiórkę lub zniszczenie tego budynku."
+"fields or bushes in his work area. You should consider building another farm "
+"or berry farm nearby, or dismantling or destroying this building."
+msgstr ""
+"Pszczelarz mieszkający w tym domu pszczelarza nie może znaleźć żadnych "
+"kwitnących pól lub krzaków na swoim obszarze pracy. Rozważ zbudowanie "
+"kolejnej farmy bądź plantacji jagód w pobliżu, albo rozbiórkę lub "
+"zniszczenie tego budynku."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:8
@@ -3750,9 +3858,13 @@ msgctxt "frisians_building"
 msgid ""
 "The charcoal burner working at this charcoal burner’s house can’t find any "
 "clay ponds in his work area. Please make sure there is a working clay pit "
-"nearby and the charcoal burner’s house is supplied with all needed wares, or"
-" consider dismantling or destroying this building."
-msgstr "Węglarz mieszkający w tym domu węglarza nie może znaleźć żadnych suchych stawów na swoim obszarze pracy. Upewnij się, że w pobliżu działa kopalnia gliny oraz dom węglarza jest zaopatrzony we wszystkie potrzebne towary, albo rozważ rozbiórkę lub zniszczenie tego budynku. "
+"nearby and the charcoal burner’s house is supplied with all needed wares, or "
+"consider dismantling or destroying this building."
+msgstr ""
+"Węglarz mieszkający w tym domu węglarza nie może znaleźć żadnych suchych "
+"stawów na swoim obszarze pracy. Upewnij się, że w pobliżu działa kopalnia "
+"gliny oraz dom węglarza jest zaopatrzony we wszystkie potrzebne towary, albo "
+"rozważ rozbiórkę lub zniszczenie tego budynku. "
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:8
@@ -3786,7 +3898,10 @@ msgid ""
 "The clay digger working at this clay pit can’t find any level ground in his "
 "work area. Consider dismantling this clay pit and rebuilding it somewhere "
 "else."
-msgstr "Kopacz gliny pracujący w tej kopalni gliny nie może znaleźć równego gruntu na swoim obszarze pracy. Rozważ rozbiórkę tej kopalni gliny i zbudowanie jej w innym miejscu."
+msgstr ""
+"Kopacz gliny pracujący w tej kopalni gliny nie może znaleźć równego gruntu "
+"na swoim obszarze pracy. Rozważ rozbiórkę tej kopalni gliny i zbudowanie jej "
+"w innym miejscu."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:8
@@ -3799,7 +3914,9 @@ msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Główna żyła węgla tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
+msgstr ""
+"Główna żyła węgla tej kopalni została wyczerpana. Spodziewaj się znacznego "
+"spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:8
@@ -3813,7 +3930,10 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Główna żyła węgla tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać – rozważ jej rozbiórkę lub zniszczenie."
+msgstr ""
+"Główna żyła węgla tej kopalni została wyczerpana. Spodziewaj się znacznego "
+"spadku produktywności. Tej kopalni nie można już dalej ulepszać – rozważ jej "
+"rozbiórkę lub zniszczenie."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:8
@@ -3840,7 +3960,10 @@ msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
 "berry bushes in his work area. You should consider building another berry "
 "farm, or dismantling or destroying this building."
-msgstr "Zbieracz owoców mieszkający w tym domu zbieracza owoców nie może znaleźć żadnych krzaków z owocami na swoim obszarze pracy. Rozważ budowę kolejnej plantacji jagód albo rozbiórkę lub zniszczenie tego budynku."
+msgstr ""
+"Zbieracz owoców mieszkający w tym domu zbieracza owoców nie może znaleźć "
+"żadnych krzaków z owocami na swoim obszarze pracy. Rozważ budowę kolejnej "
+"plantacji jagód albo rozbiórkę lub zniszczenie tego budynku."
 
 #: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:7
 msgctxt "frisians_building"
@@ -3881,8 +4004,7 @@ msgstr "żęcie jęczmienia"
 
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:95
 msgctxt "frisians_building"
-msgid ""
-"The farmer working at this farm has no cleared soil to plant his seeds."
+msgid "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "Rolnik pracujący na tej farmie nie ma terenu do obsiania."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -3902,7 +4024,9 @@ msgctxt "frisians_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area."
-msgstr "Rybak mieszkający w tym domku rybaka nie może znaleźć żadnych ryb na swoim obszarze pracy."
+msgstr ""
+"Rybak mieszkający w tym domku rybaka nie może znaleźć żadnych ryb na swoim "
+"obszarze pracy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:8
@@ -3927,7 +4051,9 @@ msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Główna żyła złota tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
+msgstr ""
+"Główna żyła złota tej kopalni została wyczerpana. Spodziewaj się znacznego "
+"spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:8
@@ -3941,7 +4067,10 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Główna żyła złota tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać – rozważ jej rozbiórkę lub zniszczenie."
+msgstr ""
+"Główna żyła złota tej kopalni została wyczerpana. Spodziewaj się znacznego "
+"spadku produktywności. Tej kopalni nie można już dalej ulepszać – rozważ jej "
+"rozbiórkę lub zniszczenie."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:8
@@ -3967,7 +4096,9 @@ msgctxt "frisians_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr "Myśliwy mieszkający w tej kwaterze myśliwego nie jest w stanie znaleźć zwierzyny na swoim obszarze pracy."
+msgstr ""
+"Myśliwy mieszkający w tej kwaterze myśliwego nie jest w stanie znaleźć "
+"zwierzyny na swoim obszarze pracy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:8
@@ -3980,7 +4111,10 @@ msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Główna żyła rudy żelaza tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
+msgstr ""
+"Główna żyła rudy żelaza tej kopalni została wyczerpana. Spodziewaj się "
+"znacznego spadku produktywności. Rozważ ulepszenie, rozbiórkę lub "
+"zniszczenie kopalni."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:8
@@ -3994,7 +4128,10 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Główna żyła rudy żelaza tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać – rozważ jej rozbiórkę lub zniszczenie."
+msgstr ""
+"Główna żyła rudy żelaza tej kopalni została wyczerpana. Spodziewaj się "
+"znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać – "
+"rozważ jej rozbiórkę lub zniszczenie."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:8
@@ -4018,7 +4155,9 @@ msgstr "Kamieniołom"
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Kamieniarz pracujący w tym kamieniołomie nie może znaleźć żadnych skał na swoim obszarze pracy."
+msgstr ""
+"Kamieniarz pracujący w tym kamieniołomie nie może znaleźć żadnych skał na "
+"swoim obszarze pracy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:8
@@ -4056,7 +4195,9 @@ msgctxt "frisians_building"
 msgid ""
 "The reed farmer working at this reed farm has no cleared soil to plant his "
 "seeds."
-msgstr "Plantator trzciny pracujący na tej plantacji trzciny nie ma terenu do obsiania."
+msgstr ""
+"Plantator trzciny pracujący na tej plantacji trzciny nie ma terenu do "
+"obsiania."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:8
@@ -4088,7 +4229,9 @@ msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Główna żyła kamieni tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
+msgstr ""
+"Główna żyła kamieni tej kopalni została wyczerpana. Spodziewaj się znacznego "
+"spadku produktywności. Rozważ ulepszenie, rozbiórkę lub zniszczenie kopalni."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:8
@@ -4102,7 +4245,10 @@ msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Główna żyła kamieni tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać – rozważ jej rozbiórkę lub zniszczenie."
+msgstr ""
+"Główna żyła kamieni tej kopalni została wyczerpana. Spodziewaj się znacznego "
+"spadku produktywności. Tej kopalni nie można już dalej ulepszać – rozważ jej "
+"rozbiórkę lub zniszczenie."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:8
@@ -4188,7 +4334,8 @@ msgstr "Studnia"
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:66
 msgctxt "frisians_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr "Tragarz pracujący przy tej studni nie może znaleźć wody w swojej studni."
+msgstr ""
+"Tragarz pracujący przy tej studni nie może znaleźć wody w swojej studni."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:8
@@ -4200,9 +4347,11 @@ msgstr "Chata drwala"
 msgctxt "frisians_building"
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
-"his work area. You should consider dismantling or destroying the building or"
-" building a forester’s house."
-msgstr "Drwal pracujący z tej chaty drwala nie może znaleźć drzew na swoim obszarze pracy. Rozważ rozbiórkę lub zniszczenie tego budynku, lub budowę leśniczówki."
+"his work area. You should consider dismantling or destroying the building or "
+"building a forester’s house."
+msgstr ""
+"Drwal pracujący z tej chaty drwala nie może znaleźć drzew na swoim obszarze "
+"pracy. Rozważ rozbiórkę lub zniszczenie tego budynku, lub budowę leśniczówki."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:8
@@ -5166,13 +5315,13 @@ msgstr "Brak surowców"
 #: ../../data/tribes/immovables/resi/amazons/stones_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Quartz"
-msgstr ""
+msgstr "Trochę kwarcu"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/amazons/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Quartz"
-msgstr ""
+msgstr "Mnóstwo kwarcu"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/coal_1/init.lua:8
@@ -5608,7 +5757,10 @@ msgstr "Biedna osada"
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can’t successfully start from this."
-msgstr "Zaczniesz grę jedynie z magazynem i niezbędnym minimum towarów potrzebnym do zapoczątkowania gospodarki. Uwaga: SI nie jest w stanie pomyślnie rozpocząć w tych warunkach."
+msgstr ""
+"Zaczniesz grę jedynie z magazynem i niezbędnym minimum towarów potrzebnym do "
+"zapoczątkowania gospodarki. Uwaga: SI nie jest w stanie pomyślnie rozpocząć "
+"w tych warunkach."
 
 #: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:46
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
@@ -5622,7 +5774,10 @@ msgstr "Bądź ostrożny"
 msgid ""
 "You only have exactly the wares for each tool you will need to start your "
 "economy. Make sure no unneeded tool is created."
-msgstr "Posiadasz tylko tyle towarów, ile jest potrzebne do wytworzenia narzędzi potrzebnych do zapoczątkowania gospodarki. Uważaj, żeby nie wytworzyć żadnych zbędnych narzędzi."
+msgstr ""
+"Posiadasz tylko tyle towarów, ile jest potrzebne do wytworzenia narzędzi "
+"potrzebnych do zapoczątkowania gospodarki. Uważaj, żeby nie wytworzyć "
+"żadnych zbędnych narzędzi."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/struggling_outpost.lua:11
@@ -5641,9 +5796,11 @@ msgstr "Podupadła placówka"
 #: ../../data/tribes/initialization/frisians/starting_conditions/struggling_outpost.lua:13
 msgid ""
 "Start the game with just your headquarters and very few wares for "
-"bootstrapping an economy. Warning: the AI can’t successfully start from "
-"this."
-msgstr "Zaczniesz grę jedynie z kwaterą główną i bardzo małą ilością towarów do zapoczątkowania gospodarki. Uwaga: SI nie jest w stanie pomyślnie rozpocząć w tych warunkach."
+"bootstrapping an economy. Warning: the AI can’t successfully start from this."
+msgstr ""
+"Zaczniesz grę jedynie z kwaterą główną i bardzo małą ilością towarów do "
+"zapoczątkowania gospodarki. Uwaga: SI nie jest w stanie pomyślnie rozpocząć "
+"w tych warunkach."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/trading_outpost.lua:11
@@ -5662,9 +5819,10 @@ msgstr "Placówka handlowa"
 #: ../../data/tribes/initialization/empire/starting_conditions/trading_outpost.lua:13
 #: ../../data/tribes/initialization/frisians/starting_conditions/trading_outpost.lua:13
 msgid ""
-"If this player runs low on important wares, they will be replenished for "
-"free"
-msgstr "Jeśli graczowi zabraknie kluczowych towarów, zostaną one za darmo uzupełnione."
+"If this player runs low on important wares, they will be replenished for free"
+msgstr ""
+"Jeśli graczowi zabraknie kluczowych towarów, zostaną one za darmo "
+"uzupełnione."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/village.lua:11
@@ -5693,7 +5851,8 @@ msgstr "Atlantydzi"
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
-msgstr "Plemię to znane jest z najstarszych opowieści. Synowie i córki Atlantydy."
+msgstr ""
+"Plemię to znane jest z najstarszych opowieści. Synowie i córki Atlantydy."
 
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
 #: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
@@ -5702,7 +5861,10 @@ msgstr "Plemię to znane jest z najstarszych opowieści. Synowie i córki Atlant
 msgid ""
 "You have only one iron for each tool you will need to start your economy. "
 "Make sure no unneeded tool is created."
-msgstr "Posiadasz tylko tyle żelaza ile jest niezbędne do wytworzenia narzędzi potrzebnych do zapoczątkowania gospodarki. Uważaj, żeby nie wytwarzać żadnych zbędnych narzędzi."
+msgstr ""
+"Posiadasz tylko tyle żelaza ile jest niezbędne do wytworzenia narzędzi "
+"potrzebnych do zapoczątkowania gospodarki. Uważaj, żeby nie wytwarzać "
+"żadnych zbędnych narzędzi."
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/barbarians/init.lua:12
@@ -6158,7 +6320,7 @@ msgstr "Içana"
 #: ../../data/tribes/ships/amazons/init.lua:174
 msgctxt "shipname"
 msgid "Igapó-Açu"
-msgstr ""
+msgstr "Igapó-Açu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:176
@@ -6386,7 +6548,7 @@ msgstr "Mapari"
 #: ../../data/tribes/ships/amazons/init.lua:250
 msgctxt "shipname"
 msgid "Mapiá"
-msgstr ""
+msgstr "Mapiá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:252
@@ -6770,151 +6932,151 @@ msgstr "Xie"
 #: ../../data/tribes/ships/amazons/init.lua:378
 msgctxt "shipname"
 msgid "Apu Illapu"
-msgstr ""
+msgstr "Apu Illapu"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:380
 msgctxt "shipname"
 msgid "Ayar Cachi"
-msgstr ""
+msgstr "Ayar Cachi"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:382
 msgctxt "shipname"
 msgid "Illapa"
-msgstr ""
+msgstr "Illapa"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:384
 msgctxt "shipname"
 msgid "Inti"
-msgstr ""
+msgstr "Inti"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:386
 msgctxt "shipname"
 msgid "Kuychi"
-msgstr ""
+msgstr "Kuychi"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:388
 msgctxt "shipname"
 msgid "Mama Killa"
-msgstr ""
+msgstr "Mama Killa"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:390
 msgctxt "shipname"
 msgid "Mama Occlo"
-msgstr ""
+msgstr "Mama Occlo"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:392
 msgctxt "shipname"
 msgid "Manco Cápac"
-msgstr ""
+msgstr "Manco Cápac"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:394
 msgctxt "shipname"
 msgid "Pachamama"
-msgstr ""
+msgstr "Pachamama"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:396
 msgctxt "shipname"
 msgid "Quchamama"
-msgstr ""
+msgstr "Quchamama"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:398
 msgctxt "shipname"
 msgid "Sachamama"
-msgstr ""
+msgstr "Sachamama"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:400
 msgctxt "shipname"
 msgid "Viracocha"
-msgstr ""
+msgstr "Viracocha"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:402
 msgctxt "shipname"
 msgid "Yakumama"
-msgstr ""
+msgstr "Yakumama"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:404
 msgctxt "shipname"
 msgid "Atahuallpa"
-msgstr ""
+msgstr "Atahuallpa"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:406
 msgctxt "shipname"
 msgid "Lloqe Yupanki"
-msgstr ""
+msgstr "Lloqe Yupanki"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:408
 msgctxt "shipname"
 msgid "Manqo Qhapaq"
-msgstr ""
+msgstr "Manqo Qhapaq"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:410
 msgctxt "shipname"
 msgid "Mayta Qhapaq"
-msgstr ""
+msgstr "Mayta Qhapaq"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:412
 msgctxt "shipname"
 msgid "Pachakuti"
-msgstr ""
+msgstr "Pachakuti"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:414
 msgctxt "shipname"
 msgid "Qhapaq Yupanki"
-msgstr ""
+msgstr "Qhapaq Yupanki"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:416
 msgctxt "shipname"
 msgid "Thupa"
-msgstr ""
+msgstr "Thupa"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:418
 msgctxt "shipname"
 msgid "Urqon"
-msgstr ""
+msgstr "Urqon"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:420
 msgctxt "shipname"
 msgid "Washkar"
-msgstr ""
+msgstr "Washkar"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:422
 msgctxt "shipname"
 msgid "Wayna Qhapaq"
-msgstr ""
+msgstr "Wayna Qhapaq"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:424
 msgctxt "shipname"
 msgid "Yawar Waqaq"
-msgstr ""
+msgstr "Yawar Waqaq"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:426
 msgctxt "shipname"
 msgid "Zinchi Roqa"
-msgstr ""
+msgstr "Zinchi Roqa"
 
 #. TRANSLATORS: This Amazonian ship is named after the lake in the Andes
 #: ../../data/tribes/ships/amazons/init.lua:428
@@ -6926,7 +7088,7 @@ msgstr ""
 #: ../../data/tribes/ships/amazons/init.lua:430
 msgctxt "shipname"
 msgid "Koricancha"
-msgstr ""
+msgstr "Koricancha"
 
 #. TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:113
@@ -7370,7 +7532,7 @@ msgstr "Hagbard"
 #: ../../data/tribes/ships/barbarians/init.lua:67
 msgctxt "shipname"
 msgid "Hakhor"
-msgstr ""
+msgstr "Hakhor"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:69

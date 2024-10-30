@@ -6,7 +6,8 @@
 # Antoni Szpikowski <szantek2004@gmail.com>, 2021
 # GunChleoc, 2018
 # GunChleoc, 2014
-# Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2016-2017
+# Leszek Szary, 2024
 # Marcin S <dzidek1003@o2.pl>, 2021
 # Niektóry <niektory@gmail.com>, 2020
 # Pawel <pawcio980@gmail.com>, 2022
@@ -16,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-01 02:29+0000\n"
+"POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
-"Last-Translator: Pawel <pawcio980@gmail.com>, 2022\n"
+"Last-Translator: Leszek Szary, 2024\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -116,7 +117,7 @@ msgid ""
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
 "Barbarian will lose 3500×%2%%% = %3% health."
-msgstr ""
+msgstr "Obrona to wartość procentowa odejmowana od wartości ataku. Barbarzyńcy nie mogą trenować tej umiejętności, więc ich poziom obrony jest zawsze równy 0, co oznacza że otrzymywane obrażenia są zawsze zmniejszone o %1%%%. Jeśli atakujący z wartością ataku 3500 punktów uderzy barbarzyńskiego żołnierza, to Barbarzyńca straci 3500×%2%%% = %3% punktów zdrowia."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid "Evade:"
@@ -460,13 +461,13 @@ msgstr "Możesz odesłać konkretnego żołnierza klikając na nim. Inny zajmie 
 msgid ""
 "Let me also describe what the numbers in the status string mean. This string"
 " can contain an arrow and up to three numbers, e.g. ‘↑ 1 (+5) soldier (+2)’."
-msgstr ""
+msgstr "Pozwól mi też wyjaśnić co oznaczają liczby w tekście statusu. Ten tekst może zawierać strzałkę oraz do trzech liczb, np.: ‘↑ 1 (+5) żołnierz (+2)‘."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:198
 msgid ""
 "The arrow shows whether the building is set to prefer heroes (upwards arrow)"
 " or rookies (downwards arrow)."
-msgstr ""
+msgstr "Strzałka pokazuje, czy budynek preferuje bohaterów (strzałka w górę), czy rekrutów (strzałka w dół)."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:199
 msgid ""

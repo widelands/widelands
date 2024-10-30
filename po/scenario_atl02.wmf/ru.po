@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Yuriy Sokolov <lention@mail.ru>, 2023
+# Yuriy Sokolov <lention@mail.ru>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
-"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2023\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/widelands/teams/35159/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -115,7 +115,7 @@ msgstr ""
 "Большая часть наших инструментов погибли вместе с судном. Наши люди не "
 "смогут исполнять свои обязанности без подходящих орудий. По счастью у нас "
 "осталось немного железной руды и достаточное количество угля. Постройте "
-"инструментальную мастерскую,э то необходимое условие для успешного освоения "
+"инструментальную мастерскую, это необходимое условие для успешного освоения "
 "острова. И конечно, не забудьте построить литейную."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:74
@@ -151,7 +151,7 @@ msgid ""
 "carefully. Explore the island by building at least one house for a scout."
 msgstr ""
 "Нет никаких сомнений, мы не одни на острове. Мы не знаем, кто эти иные - "
-"друзья или враги, поэтому должны соблюдать осторожность. Постройтехотя бы "
+"друзья или враги, поэтому должны соблюдать осторожность. Постройте хотя бы "
 "один дом для разведчика и исследуйте остров."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:90
@@ -453,7 +453,7 @@ msgid ""
 " however comes from settlers."
 msgstr ""
 "Но прошлой ночью мы увидели новый остров. Над ним клубился дым. Черный дым "
-"поднимается над огненной горы на севере острова, а серый - очагов "
+"поднимается над огненной горой на севере острова, а серый - над очагами "
 "поселенцев."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:217
@@ -608,8 +608,9 @@ msgid ""
 "but I understand the urgency. We need to build a complete spidercloth "
 "production instantly."
 msgstr ""
-"Да согреет тебя Сатул, Опол. Я хотел отложить производство шёлка, но осознаю"
-" срочность. Нам нужно немедленно наладить полноценное производство шёлка."
+"Да согреет тебя Сатул, Опол. Я хотела отложить производство шёлка, но "
+"осознаю срочность. Нам нужно немедленно наладить полноценное производство "
+"шёлка."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:295
 msgid "Opol Makes A Point"

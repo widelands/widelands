@@ -6,16 +6,16 @@
 # GunChleoc, 2016
 # Jaypad <ju-ju@nataju.fr>, 2015
 # Julien Schneider <schneider.julien@gmail.com>, 2020
-# Renaud Bouchard, 2016-2020
+# Renaud Bouchard, 2016-2020,2024
 # Stephan Lutz <stephan-lutz@gmx.de>, 2021
 # Tubuntu, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-03-04 03:06+0000\n"
+"POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: David D, 2021,2023\n"
+"Last-Translator: Renaud Bouchard, 2016-2020,2024\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -762,7 +762,7 @@ msgstr "Ouvrez la fenêtre de configuration de l'économie."
 msgid ""
 "The window can be accessed by clicking on any flag you own or from warehouse"
 " windows."
-msgstr ""
+msgstr "Cette fenêtre est accessible à partir de n'importe quel drapeau vous appartenant ou depuis la fenêtre de l'entrepôt."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:482
@@ -791,7 +791,7 @@ msgstr "Voici l'icône."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:474
 msgid "The same button is also available in warehouse windows."
-msgstr ""
+msgstr "Le même bouton est aussi disponible dans le fenêtre de l'entrepôt."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:475
 msgid ""
@@ -800,7 +800,7 @@ msgid ""
 "roads, ferries, or ships, so you can have more than one economy if their "
 "flags are not connected by any means of transportation. In that case, your "
 "separate economies can have different settings for wares."
-msgstr ""
+msgstr "Notez que les boutons sont appelés \"Configurer l'Économie de ce drapeau/bâtiment\" pour certaines raisons. Une Économie consiste en l'ensemble des bâtiments et drapeaux connectés par des routes, des traversiers, ou des navires, ainsi vous pouvez avoir plus d'une Économie si leurs drapeaux ne sont connectés en aucune manière pour le transport. Dans ce cas, vos Économie séparées peuvent avoir des réglages différents pour les marchandises."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""

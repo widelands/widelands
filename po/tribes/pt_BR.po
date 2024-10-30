@@ -1,9 +1,10 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
-# 
+#
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Frank Carvalho, 2024
 # GunChleoc, 2014
 # Leonardo de Araujo Augusto <leonardodearaujoaugusto@gmail.com>, 2018
 # Pedro Figliolia <pedroluizf@gmail.com>, 2019
@@ -17,13 +18,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-02-08 02:24+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: PythonLs, 2022\n"
-"Language-Team: Portuguese (Brazil) (http://app.transifex.com/widelands/widelands/language/pt_BR/)\n"
+"Last-Translator: Frank Carvalho, 2024\n"
+"Language-Team: Portuguese (Brazil) (http://app.transifex.com/widelands/"
+"widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt_BR\n"
-"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % "
+"1000000 == 0 ? 1 : 2;\n"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:8
@@ -1340,8 +1343,8 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:74
 msgctxt "amazons_building"
 msgid ""
-"The cocoa farmer working at this cocoa farm has no cleared soil to plant her"
-" seeds."
+"The cocoa farmer working at this cocoa farm has no cleared soil to plant her "
+"seeds."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -1542,8 +1545,8 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:80
 msgctxt "amazons_building"
 msgid ""
-"The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any"
-" game or fish in her work area."
+"The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any "
+"game or fish in her work area."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -1874,8 +1877,8 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:94
 msgctxt "amazons_building"
 msgid ""
-"This stone mine’s main vein is exhausted. Expect strongly diminished returns"
-" on investment. You should consider dismantling or destroying it."
+"This stone mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider dismantling or destroying it."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -1915,8 +1918,8 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:57
 msgctxt "amazons_building"
 msgid ""
-"The carrier working at this water gatherer’s hut can’t find any water in its"
-" vicinity."
+"The carrier working at this water gatherer’s hut can’t find any water in its "
+"vicinity."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -2149,8 +2152,7 @@ msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:75
 msgctxt "atlanteans_building"
-msgid ""
-"The farmer working at this farm has no cleared soil to plant his seeds."
+msgid "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -2329,7 +2331,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:98
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:92
 msgid "No Iron"
-msgstr ""
+msgstr "Não há ferro"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:87
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:88
@@ -2382,8 +2384,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:51
 msgctxt "atlanteans_building"
 msgid ""
-"The stonecutter working at this quarry can’t find any rocks in his work "
-"area."
+"The stonecutter working at this quarry can’t find any rocks in his work area."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -2600,8 +2601,8 @@ msgstr "Casa do Lenhador"
 msgctxt "atlanteans_building"
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
-"his work area. You should consider dismantling or destroying the building or"
-" building a forester’s house."
+"his work area. You should consider dismantling or destroying the building or "
+"building a forester’s house."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -2755,8 +2756,7 @@ msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:94
 msgctxt "barbarians_building"
-msgid ""
-"The farmer working at this farm has no cleared soil to plant his seeds."
+msgid "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -3214,8 +3214,7 @@ msgstr "Fazenda"
 
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:77
 msgctxt "empire_building"
-msgid ""
-"The farmer working at this farm has no cleared soil to plant his seeds."
+msgid "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -3327,8 +3326,8 @@ msgstr "Casa do Lenhador"
 msgctxt "empire_building"
 msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
-"his work area. You should consider dismantling or destroying the building or"
-" building a forester’s house."
+"his work area. You should consider dismantling or destroying the building or "
+"building a forester’s house."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -3671,8 +3670,8 @@ msgstr ""
 msgctxt "frisians_building"
 msgid ""
 "The beekeeper working at this beekeeper’s house can’t find any flowering "
-"fields or bushes in his work area. You should consider building another farm"
-" or berry farm nearby, or dismantling or destroying this building."
+"fields or bushes in his work area. You should consider building another farm "
+"or berry farm nearby, or dismantling or destroying this building."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -3746,8 +3745,8 @@ msgctxt "frisians_building"
 msgid ""
 "The charcoal burner working at this charcoal burner’s house can’t find any "
 "clay ponds in his work area. Please make sure there is a working clay pit "
-"nearby and the charcoal burner’s house is supplied with all needed wares, or"
-" consider dismantling or destroying this building."
+"nearby and the charcoal burner’s house is supplied with all needed wares, or "
+"consider dismantling or destroying this building."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -3877,8 +3876,7 @@ msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:95
 msgctxt "frisians_building"
-msgid ""
-"The farmer working at this farm has no cleared soil to plant his seeds."
+msgid "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -4196,8 +4194,8 @@ msgstr ""
 msgctxt "frisians_building"
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
-"his work area. You should consider dismantling or destroying the building or"
-" building a forester’s house."
+"his work area. You should consider dismantling or destroying the building or "
+"building a forester’s house."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -5528,7 +5526,8 @@ msgstr "Descoberta"
 #: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:13
 msgid ""
 "Start the game with three ships on the ocean and only a handful of supplies"
-msgstr "Inicie o jogo com três navios no oceano e somente um punhado de suprimentos"
+msgstr ""
+"Inicie o jogo com três navios no oceano e somente um punhado de suprimentos"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/fortified_village.lua:11
@@ -5618,7 +5617,9 @@ msgstr "Tenha Cuidado"
 msgid ""
 "You only have exactly the wares for each tool you will need to start your "
 "economy. Make sure no unneeded tool is created."
-msgstr "Você só possui exatamente os objetos que precisa para começar sua economia. Certifique-se de que nenhuma ferramenta desnecessária seja criada."
+msgstr ""
+"Você só possui exatamente os objetos que precisa para começar sua economia. "
+"Certifique-se de que nenhuma ferramenta desnecessária seja criada."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/struggling_outpost.lua:11
@@ -5637,8 +5638,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/starting_conditions/struggling_outpost.lua:13
 msgid ""
 "Start the game with just your headquarters and very few wares for "
-"bootstrapping an economy. Warning: the AI can’t successfully start from "
-"this."
+"bootstrapping an economy. Warning: the AI can’t successfully start from this."
 msgstr ""
 
 #. TRANSLATORS: This is the name of a starting condition
@@ -5658,8 +5658,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/trading_outpost.lua:13
 #: ../../data/tribes/initialization/frisians/starting_conditions/trading_outpost.lua:13
 msgid ""
-"If this player runs low on important wares, they will be replenished for "
-"free"
+"If this player runs low on important wares, they will be replenished for free"
 msgstr ""
 
 #. TRANSLATORS: This is the name of a starting condition

@@ -4,7 +4,8 @@
 # Translators:
 # Antoni Szpikowski <szantek2004@gmail.com>, 2021
 # GunChleoc, 2016
-# Wesmania <ikk_pl@yahoo.co.uk>, 2016
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2016
+# Leszek Szary, 2024
 # Marcin S <dzidek1003@o2.pl>, 2021
 # b439f035459e0f385cf8827d1a76f480_497be4c <c2ca683ad439533996d91e14a0c79e7e_269278>, 2015
 # Niektóry <niektory@gmail.com>, 2020
@@ -13,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-03-04 03:06+0000\n"
+"POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021\n"
+"Last-Translator: Leszek Szary, 2024\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -762,7 +763,7 @@ msgstr "Otwórz okno \"Konfiguruj gospodarkę\"."
 msgid ""
 "The window can be accessed by clicking on any flag you own or from warehouse"
 " windows."
-msgstr ""
+msgstr "Do okna można się dostać klikając na dowolnej posiadanej fladze lub z okna magazynu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:482
@@ -791,7 +792,7 @@ msgstr "To właśnie ta ikona."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:474
 msgid "The same button is also available in warehouse windows."
-msgstr ""
+msgstr "Ten sam przycisk dostępny jest także w oknie magazynu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:475
 msgid ""
@@ -800,7 +801,7 @@ msgid ""
 "roads, ferries, or ships, so you can have more than one economy if their "
 "flags are not connected by any means of transportation. In that case, your "
 "separate economies can have different settings for wares."
-msgstr ""
+msgstr "Należy pamiętać, że przyciski te nie bez powodu nazywane są ‘Konfiguruj gospodarkę tej flagi/budynku’. Gospodarka składa się ze wszystkich budynków i flag połączonych drogami, promami lub statkami, więc możesz mieć więcej niż jedną gospodarkę, jeśli ich flagi nie są połączone żadnym środkiem transportu. W takim przypadku twoje oddzielne gospodarki mogą mieć różne ustawienia dla towarów."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""
@@ -846,14 +847,14 @@ msgid ""
 "the balance between wasteful stockpiling and just-in-time production in your"
 " supply chains is one of most profound challenges of perfecting your "
 "economy. When in doubt, lean towards having some extra reserves."
-msgstr ""
+msgstr "Magazynowanie towarów to miecz obosieczny. Z jednej strony towary znajdujące się w magazynie są przydatne do buforowania tymczasowych wahań w gospodarce, które zwykle występują przez cały czas. Z drugiej strony, wszelkie towary, które leżą w magazynie zamiast zostać przetworzone na coś innego, są marnowane. Znalezienie równowagi pomiędzy marnotrawnym gromadzeniem zapasów, a produkcją na czas w łańcuchach dostaw jest jednym z najpoważniejszych wyzwań w doskonaleniu gospodarki. W razie wątpliwości skłaniaj się ku posiadaniu dodatkowych rezerw."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
 msgid ""
 "To ease the process of switching between different economic situations, you "
 "can save and apply economy profiles at the bottom of the economy options "
 "window. A profile for stockpiling and one for efficiency are preset there."
-msgstr ""
+msgstr "Aby ułatwić proces przełączania pomiędzy różnymi sytuacjami gospodarczymi, możesz zapisać i zastosować profile gospodarcze w dolnej części okna opcji gospodarki. Wstępnie zdefiniowany jest tam profil składowania i profil wydajności."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:508
 msgid ""
@@ -862,7 +863,7 @@ msgid ""
 "need. However, sometimes it can be useful to stockpile a ware in very large "
 "quantities. To achieve this, the economy options window allows you to set "
 "the target of a ware to infinite, so that it will always be produced."
-msgstr ""
+msgstr "W większości przypadków opcje gospodarki są użytecznym narzędziem zapewniającym, że zasoby nie zostaną zmarnowane na produkcję towarów, których twoja gospodarka aktualnie nie potrzebuje. Czasami jednak przydatne może być gromadzenie towarów w bardzo dużych ilościach. Aby to osiągnąć, okno opcji gospodarki umożliwia ustawienie docelowego poziomu towaru na nieskończoność, dzięki czemu będzie on zawsze produkowany."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:509
 msgid ""
@@ -871,7 +872,7 @@ msgid ""
 "regardless of the economy settings. This can be useful to arrange, for "
 "example, that more building materials are produced near the border even if "
 "there are plenty in stock far away in your homeland."
-msgstr ""
+msgstr "Ten sam przycisk można znaleźć także w oknie budynku miejsc produkcyjnych. Tam powoduje on, że tylko w tym jednym miejscu produkcja odbywa się w nieskończoność, niezależnie od ustawień gospodarki. Może to być przydatne, aby na przykład zorganizować produkcję większej ilości materiałów budowlanych w pobliżu granicy, nawet jeśli jest ich dużo w jakimś magazynie daleko w twojej ojczyźnie."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517

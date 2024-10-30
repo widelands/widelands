@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-29 02:23+0000\n"
+"POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -65,27 +65,27 @@ msgstr "Tento tutoriál prejdete pomocou úloh."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Objectives and how to handle them"
-msgstr ""
+msgstr "Úlohy a ako ich zvládnuť"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:55
 msgid "Handling of the ‘Objectives’ window"
-msgstr ""
+msgstr "Narábanie s oknom „Úlohy“"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:56
 msgid ""
 "You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr ""
+msgstr "Kliknutím tlačidla „Úlohy“ v ponuke naspodku obrazovky môžete otvoriť a zatvoriť okno „Úlohy“."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:57
 msgid ""
 "Like most other windows, you can also close the window by right-clicking on "
 "it."
-msgstr ""
+msgstr "Ako väčšinu okien, aj toto sa dá zatvoriť kliknutím pravým tlačidlom myši."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:58
 msgid "You can also minimize windows by middle-clicking on them."
-msgstr ""
+msgstr "Tiež môžete minimalizovať okná kliknutím stredným tlačidlom myši."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:59
 msgid ""
@@ -94,7 +94,7 @@ msgstr "Keď nejakú úlohu splníte, zmizne zo zoznamu."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:61
 msgid "Now please close the ‘Objectives’ window to proceed."
-msgstr ""
+msgstr "Teraz prosím zatvorte okno „Úlohy“, aby sme mohli pokračovať."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:67
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:69
@@ -103,7 +103,7 @@ msgstr "Zobraz stavebné miesta"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:70
 msgid "Activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Aktivujte „Zobraz stavebné miesta“. Dá sa to dvoma spôsobmi:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:71
 #, lua-format
@@ -114,7 +114,7 @@ msgstr "Stlačte %s alebo vyberte „Zobraz stavebné miesta“ v menu „Zobraz
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:72
 msgid "Show the building spaces now."
-msgstr "Zobraz stavebné miesta."
+msgstr "Teraz zapnite zobrazenie stavebných miest."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:92
@@ -287,7 +287,7 @@ msgstr "Pozrime sa, ako prebieha stavba"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:203
 msgid "Click on the construction site to have a look at it."
-msgstr ""
+msgstr "Kliknite na stavenisko, aby sme si ho mohli prezrieť."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:209
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:219
@@ -399,7 +399,7 @@ msgstr "Naučte sa používať minimapu"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:286
 msgid "Try moving around by clicking on the minimap"
-msgstr ""
+msgstr "Skúste sa pohybovať kliknutím na minimapu"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:287
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"

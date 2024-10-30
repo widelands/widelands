@@ -5,6 +5,7 @@
 # 71bb227b8cf018d7f105906a035cd4f5_177f9fb <3f2137a38fe01819bac002829a2d0f0a_883580>, 2020
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Frank Carvalho, 2024
 # Gabriel Ferrari, 2020
 # GunChleoc, 2014
 # GunChleoc, 2014
@@ -15,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-03 14:30+0000\n"
-"Last-Translator: Sara Carreiro, 2021\n"
+"Last-Translator: Frank Carvalho, 2024\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -244,7 +245,7 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr "Maiores e melhores estruturas - incluindo todas as militares - requerem materiais de construção melhores. Elas não podem ser construídas de simples pedaços de madeira - os pedaços devem ser refinados em pau-preto por um endurecedor de madeira primeiro. Sempre lembrar de construir um endurecedor de madeira antes de você ficar sem pau-preto, como sem isso você não pode expandir."
+msgstr "Edifícios maiores e melhores – incluindo todos os militares – exigem melhores materiais de construção. Eles não podem ser construídos com troncos simples – os troncos precisam ser refinados para blackwood por um endurecedor de madeira primeiro. Lembre-se sempre de construir um endurecedor de madeira antes de ficar sem blackwood, pois sem ele você não pode expandir."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid "Build a lime kiln and coal economy"
@@ -293,14 +294,14 @@ msgstr "Construa um forno de calcinação e um poço. Adicionalmente, construa o
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:120
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:122
 msgid "Build a reed yard"
-msgstr ""
+msgstr "Construir um pátio de junco"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:121
 msgid ""
 "The third material necessary for improved buildings is reed, used to cover "
 "roofs. Reed fields are planted by a gardener around his building, the reed "
 "yard."
-msgstr ""
+msgstr "O terceiro material necessário para edifícios melhorados é o junco, usado para cobrir telhados. Campos de junco são plantados por um jardineiro ao redor de seu edifício, o pátio de junco."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
@@ -314,7 +315,7 @@ msgid ""
 "enough to transport goods swiftly. Traffic jams are the consequence. Such "
 "roads therefore employ a second carrier: an ox that helps to carry the "
 "wares. This doubles the transport capacity."
-msgstr ""
+msgstr "Quando as estradas estão sob carga pesada por um longo tempo, um transportador geralmente não é suficiente para transportar mercadorias rapidamente. Os engarrafamentos são a consequência. Essas estradas, portanto, empregam um segundo transportador: um boi que ajuda a carregar as mercadorias. Isso dobra a capacidade de transporte."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131
 msgid "Oxen are bred in cattle farms out of wheat and water."
@@ -325,38 +326,38 @@ msgstr "Os bois de carga são criados nas Criação de bois com recurso a trigo 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:165
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:177
 msgid "The Story Begins"
-msgstr ""
+msgstr "A história começa"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:142
 msgid "Thron sighs…"
-msgstr ""
+msgstr "Thron suspira…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:144
 msgid ""
 "It’s been months, and we are still hiding where the forests are old and "
 "dark."
-msgstr ""
+msgstr "Já se passaram meses e ainda estamos escondidos onde as florestas são velhas e escuras."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:147
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
-msgstr ""
+msgstr "Meus guerreiros caçam durante o dia e ficam acordados à noite – ouvindo os sons do massacre cruel ecoando de longe entre as árvores antigas."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:156
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
-msgstr ""
+msgstr "Podemos ver as chamas furiosas que engolem Al'thunran daqui, a quilômetros de distância."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:159
 msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the war "
 "drums that haunt me even in my nightmares."
-msgstr ""
+msgstr "As luzes vermelhas piscam na escuridão e dançam ao ritmo dos tambores de guerra que me assombram até nos meus pesadelos."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:168
@@ -364,7 +365,7 @@ msgid ""
 "My father’s bones rest peacefully in the ground on which he once ended the "
 "senseless spilling of blood that had arisen amongst us. It pains me that his"
 " peace only endured for one generation."
-msgstr ""
+msgstr "Os ossos do meu pai descansam pacificamente no chão em que ele uma vez pôs fim ao derramamento insensato de sangue que havia surgido entre nós. Dói-me que sua paz tenha durado apenas uma geração."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:171
@@ -373,7 +374,7 @@ msgid ""
 "me in these dark times. He keeps my spirits high and those of my warriors "
 "awake, preventing greed or despair from destroying the bonds between us as "
 "well."
-msgstr ""
+msgstr "Boldreth, meu leal companheiro e amigo, é uma fonte de paz e conforto para mim nestes tempos sombrios. Ele mantém meu espírito alto e o dos meus guerreiros acordado, evitando que a ganância ou o desespero destruam os laços entre nós também."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:180
@@ -381,23 +382,23 @@ msgid ""
 "As father told me, there are times to fight and times to lie and wait, "
 "trying not to fall asleep or die before the right time comes. And so I do "
 "wait."
-msgstr ""
+msgstr "Como meu pai me disse, há momentos para lutar e momentos para mentir e esperar, tentando não adormecer ou morrer antes que a hora certa chegue. E então eu espero."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:186
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:199
 msgid "Thron is Contemplating the War"
-msgstr ""
+msgstr "Thron está contemplando a guerra"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:187
 msgid "Thron is shaking his head…"
-msgstr ""
+msgstr "Thron está balançando a cabeça…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:189
 msgid ""
 "Yet the war goes on. More and more of our brothers and sisters flee the "
 "brutal war raging in the capital beneath the trees."
-msgstr ""
+msgstr "Mas a guerra continua. Mais e mais de nossos irmãos e irmãs fogem da guerra brutal que assola a capital sob as árvores."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:192
@@ -419,18 +420,18 @@ msgid ""
 "brothers will ever gain and hold control over the wooden throne, none of the"
 " tribes will be strong enough to subdue the other. There will be no end to "
 "this slaughter, unless… is this it? As father told me?"
-msgstr ""
+msgstr "Hoje meus caçadores trouxeram homens, mulheres e crianças pequenas diante de mim que se esconderam nas florestas, tentando escapar da guerra, do ódio e da vingança que grassam entre as tribos lutando entre si como nos tempos antigos, quando não éramos mais do que bestas selvagens movidas e controladas por instintos. Nenhum dos meus irmãos jamais ganhará e manterá o controle sobre o trono de madeira, nenhuma das tribos será forte o suficiente para subjugar a outra. Não haverá fim para esta matança, a menos que... é isso? Como meu pai me disse?"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:205
 msgid ""
 "To rise against whoever threatens our very existence, even though it may be "
 "one of your own blood or mind?"
-msgstr ""
+msgstr "Levantar-se contra qualquer um que ameace nossa própria existência, mesmo que seja alguém do seu próprio sangue ou mente?"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:211
 msgid "Thron is Considering the Future"
-msgstr ""
+msgstr "Thron está considerando o futuro"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:214
@@ -449,22 +450,22 @@ msgid ""
 " it’s time to give those who still live and think united a new home, "
 "replacing what is now lost to us? Until we can return to the place we once "
 "called our home…"
-msgstr ""
+msgstr "Talvez seja hora de nos sentirmos um pouco mais à vontade aqui. Talvez seja hora de dar àqueles que ainda vivem e pensam unidos um novo lar, substituindo o que agora está perdido para nós? Até que possamos retornar ao lugar que uma vez chamamos de lar..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:222
 msgid "Somebody Comes up to You"
-msgstr ""
+msgstr "Alguém vem até você"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:223
 msgid "An old man says…"
-msgstr ""
+msgstr "Um velho diz…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:225
 msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days."
-msgstr ""
+msgstr "Salve, chefe. Eu sou Khantrukh e vi muitos invernos passarem. Por favor, permita-me ajudá-lo com meu conselho durante esses dias sombrios."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:228

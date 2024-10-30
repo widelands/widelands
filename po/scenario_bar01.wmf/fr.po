@@ -12,15 +12,15 @@
 # finki boy, 2015
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
 # Julien Schneider <schneider.julien@gmail.com>, 2020
-# Renaud Bouchard, 2016,2019-2020
+# Renaud Bouchard, 2016,2019-2020,2024
 # Tubuntu, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-03 14:30+0000\n"
-"Last-Translator: Renaud Bouchard, 2016,2019-2020\n"
+"Last-Translator: Renaud Bouchard, 2016,2019-2020,2024\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -59,7 +59,7 @@ msgstr "Construisez des bâtiments militaires (comme des guérites ou des barric
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:34
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr "Allez jusqu'aux rochers au nord-est de votre position et construisez y une carrière."
+msgstr "Allez jusqu'aux rochers au nord-est de votre position et construisez une carrière."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:39
 msgid "Start building mines on the mountain"
@@ -81,7 +81,7 @@ msgid ""
 " will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that they will find, choosing the "
 "appropriate mine to be built:"
-msgstr "Pour ce faire, placez un drapeau sur le flanc de la montagne à l'Est (sur le terrain montagneux, pas sur la prairie !). En cliquant sur ce drapeau, vous pourrez y envoyer des géologues. Comme le drapeau se situe sur une montagne, les géologues chercheront du minerai ; sinon ils auraient cherché de l'eau. Construisez ensuite une mine pour chaque type de ressource qu'ils trouveront, en choisissant la mine appropriée :"
+msgstr "Pour ce faire, placez un drapeau sur le flanc de la montagne à l'Est (sur le terrain montagneux, pas sur la prairie !). Quand vous cliquez sur ce nouveau drapeau, vous pourrez y envoyer des géologues. Comme le drapeau se situe sur une montagne, les géologues chercheront du minerai ; sinon, ils auraient cherché de l'eau. Construisez ensuite une mine pour chaque type de ressource qu'ils trouveront, en choisissant la mine appropriée :"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "some coal"
@@ -127,7 +127,7 @@ msgstr "rien n'a été trouvé ici"
 msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
-msgstr "Les mines ne peuvent êtres construites que sur des terrains montagneux. Les endroits adaptés pour des mines sont affichés par des symboles de mine orange."
+msgstr "Les mines ne peuvent êtres construites que sur des terrains montagneux. Les endroits adaptés pour des mines sont représentés par des symboles de mine orange."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:59
 msgid "Provide your miners with food"
@@ -146,7 +146,7 @@ msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr "Un chasseur peut abattre les animaux sauvages, tandis qu'un garde-chasse en préservera la population. La viande est transformée en repas pour vos mineurs dans une taverne."
+msgstr "Un chasseur peut abattre les animaux sauvages, pendant qu'un garde-chasse en préservera la population. La viande est transformée en repas pour vos mineurs dans une taverne."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
@@ -169,7 +169,7 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr "Autres manières de produire de la nourriture – différentes sortes de nourriture – sont les pêcheurs et les fermes. Le blé des fermes doit être mélangé avec l'eau dans une boulangerie avant qu'il ne devienne comestible. Vous pouvez obtenir de l'eau en construisant un puits. Pour une meilleure productivité, construisez le sur un emplacement où les géologues ont trouvé une source."
+msgstr "Autres manières de produire de la nourriture – différentes sortes de nourriture – sont les pêcheurs et les fermes. Le blé des fermes doit être mélangé avec l'eau dans une boulangerie avant qu'il ne devienne comestible. Vous pouvez obtenir de l'eau en construisant un puits. Pour une meilleure productivité, construisez le sur un emplacement où vos géologues ont trouvé une source."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
@@ -209,7 +209,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr "Une mine normale ne peut obtenir que le tiers des ressources du sous-sol. Il faut ensuite l'améliorer en mine profonde pour qu'elle continue à extraire correctement le minerai. Pour améliorer un bâtiment, sélectionnez-le et cliquez sur le bouton approprié dans sa fenêtre d'informations."
+msgstr "Une mine normale ne peut obtenir que le tiers des ressources du sous-sol. Il faut ensuite l'améliorer en mine profonde pour continuer l'extraction correctement. Pour améliorer un bâtiment, sélectionnez-le et cliquez sur le bouton approprié dans la fenêtre qui apparait."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid ""
@@ -217,7 +217,7 @@ msgid ""
 "become more advanced workers, who are necessary to operate the enhanced "
 "buildings. Do not enhance a building before you have enough advanced workers"
 " to operate the advanced building!"
-msgstr "Les ouvriers gagnent de l'expérience en réussissant leur travail. Avec assez d'expérience, ils deviennent des ouvriers qualifiés, qui sont nécessaires pour faire fonctionner les bâtiments améliorés. N'améliorez pas de bâtiment avant d'être sûr que vous pourrez le faire fonctionner avec les ouvriers qualifiés appropriés !"
+msgstr "Les ouvriers gagnent de l'expérience en réussissant leur travail. Avec assez d'expérience, ils deviennent des ouvriers qualifiés, qui sont nécessaires pour faire fonctionner les bâtiments améliorés. N'améliorez pas de bâtiment avant d'être sûr d'avoir assez d'ouvriers qualifiés pour les faire fonctionner !"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:91
 msgid ""
@@ -232,7 +232,7 @@ msgid ""
 "You may of course enhance all mines to deep mines instantly given you have "
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
-msgstr "Vous pouvez bien entendu améliorer toutes les mines vers des mines profondes instantanément à partir du moment où vous avez les ouvriers qualifiés – les grandes mines travaillent un peu plus vite, les plus petites demandent de la nourriture moins coûteuse à produire. Cela dépends de la stratégie que vous préférez."
+msgstr "Vous pouvez bien entendu améliorer toutes les mines vers des mines profondes instantanément à partir du moment où vous avez les ouvriers qualifiés – les grandes mines travaillent un peu plus vite, les plus petites demandent de la nourriture moins coûteuse. Cela dépends de la stratégie que vous préférez."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:97
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:99
@@ -256,14 +256,14 @@ msgstr "Construisez un four à chaux et une économie charbonnière"
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:108
 msgid ""
 "Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine"
-msgstr "Construisez un four à chaux, approvisionné par un puits et proche d'un four à charbon ou une mine de charbon"
+msgstr "Construisez un four à chaux approvisionné par un puits, et proche d'un four à charbon ou d'une mine de charbon"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:109
 msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr "Les meilleurs bâtiments peuvent aussi nécessiter d'autres matériaux améliorés que le bois dur. Un de ceux-ci est la chaux, qui est produite à partir de granite, d'eau et de charbon par un brûleur de chaux."
+msgstr "Les meilleurs bâtiments peuvent aussi nécessiter d'autres matériaux améliorés que le bois dur. Un de ceux-ci est la chaux, qui est produite à partir de granit, d'eau et de charbon par un brûleur de chaux."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:110
 msgid ""
@@ -290,7 +290,7 @@ msgstr "Le charbon peut être obtenu en construisant un four à charbon ou une m
 msgid ""
 "Build a lime kiln and a well. Additionally, build either a charcoal kiln or "
 "a coal mine for coal supply."
-msgstr "Construisez un four à chaux et un puits. Assurez également l'approvisionnement en charbon à l'aide d'un four ou d'une mine."
+msgstr "Construisez un four à chaux et un puits. Assurez également l'approvisionnement en charbon en construisant un four à charbon ou une mine."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:118
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:120
@@ -303,7 +303,7 @@ msgid ""
 "The third material necessary for improved buildings is reed, used to cover "
 "roofs. Reed fields are planted by a gardener around his building, the reed "
 "yard."
-msgstr "Le troisième matériau nécessaire à l'amélioration des bâtiments est le roseau, utilisé pour recouvrir les toitures. Les champs de roseaux sont plantés par un horticulteur autour de son bâtiment, la roselière."
+msgstr "Le troisième matériau nécessaire à l'amélioration des bâtiments est le roseau, utilisé pour couvrir les toitures. Les champs de roseaux sont plantés par un horticulteur autour de son bâtiment, la roselière."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
@@ -339,14 +339,14 @@ msgstr "Thron soupire..."
 msgid ""
 "It’s been months, and we are still hiding where the forests are old and "
 "dark."
-msgstr "Des mois ont passé et nous restons toujours cachés dans la pénombre des vieilles forêts."
+msgstr "Cela fait des mois, et nous restons toujours cachés dans la pénombre des vieilles forêts."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:147
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
-msgstr "Mes guerriers chassent le jour et restent aux aguets la nuit, écoutant le son lointain des cruelles tueries résonnant parmi les arbres antiques."
+msgstr "Mes guerriers chassent le jour et restent aux aguets la nuit – écoutant le son lointain des cruelles tueries résonnant parmi les arbres antiques."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:156
@@ -367,7 +367,7 @@ msgid ""
 "My father’s bones rest peacefully in the ground on which he once ended the "
 "senseless spilling of blood that had arisen amongst us. It pains me that his"
 " peace only endured for one generation."
-msgstr "Les ossements de mon père reposent en paix dans la terre sur laquelle il arrêta le bain de sang insensé qui avait fait rage parmi nous. Cela me peine que cette paix n'ait duré que le temps d'une génération."
+msgstr "Les ossements de mon père reposent en paix dans la terre sur laquelle il mit fin au bain de sang insensé qui avait fait rage parmi nous. Cela me peine que cette paix n'ait duré que le temps d'une génération."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:171
@@ -376,7 +376,7 @@ msgid ""
 "me in these dark times. He keeps my spirits high and those of my warriors "
 "awake, preventing greed or despair from destroying the bonds between us as "
 "well."
-msgstr "Boldreth, mon loyal compagnon et ami est une source de paix et de réconfort en ces temps sombres. Il maintient mon moral et celui de mes guerriers afin que ni l'avarice ni le désespoir ne détruise nos liens."
+msgstr "Boldreth, mon loyal compagnon et ami est une source de paix et de réconfort en ces temps sombres. Il maintient mon moral et celui de mes guerriers éveillés, afin que ni l'avarice ni le désespoir ne détruise nos liens."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:180
@@ -410,7 +410,7 @@ msgid ""
 " Yet whenever I close my eyes, I see the fortress my father built consumed "
 "by flames. The Throne Among the Trees, the symbol of unity and peace among "
 "our kin, became the wedge that drives us apart."
-msgstr "Les histoires qu'ils racontent à propos des faits de mes frères est triste à entendre. J'ai passé des nuits étendu, éveillé, plus las que je n'aurais jamais cru pouvoir être. Mais dès que je ferme les yeux, je vois la forteresse que mon père a bâti dévorée par les flammes. Le Trône Parmi les Arbres, symbole d'unité et de paix entre mes frères, est devenu le seuil de notre séparation."
+msgstr "Les histoires qu'ils racontent à propos des faits de mes frères sont tristes à entendre. J'ai passé des nuits étendu, éveillé, plus las que je n'aurais jamais cru pouvoir être. Mais dès que je ferme les yeux, je vois la forteresse que mon père a bâti dévorée par les flammes. Le Trône Parmi les Arbres, symbole d'unité et de paix entre mes frères, est devenu le seuil de notre séparation."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:202

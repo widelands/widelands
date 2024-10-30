@@ -11,13 +11,14 @@
 # henrique terto de souza <henrique.terto.new@gmail.com>, 2015
 # Leonardo de Araujo Augusto <leonardodearaujoaugusto@gmail.com>, 2018
 # Patrick de Castro <raybackpc@gmail.com>, 2015
+# tiu lau, 2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: 71bb227b8cf018d7f105906a035cd4f5_177f9fb <3f2137a38fe01819bac002829a2d0f0a_883580>, 2020\n"
+"Last-Translator: tiu lau, 2024\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -95,7 +96,7 @@ msgid ""
 "fish breeder makes sure that a school of fish does not go extinct by "
 "breeding more. The smoking happens in a smokery, you will need at least two "
 "of those."
-msgstr ""
+msgstr "Os outros dois produtos alimentares importantes são o peixe e carne defumada. A carne crua é entregue por um caçador. Um pescador tira os peixes do mar, enquanto um criador de peixes garante que um cardume de peixes não seja extinto criando mais. A defumação acontece em uma defumadora, você vai precisar de pelo menos duas delas."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"
@@ -665,18 +666,18 @@ msgstr "Eu estive considerando isso, Sidolus. Eu acho que já é hora. Vamos faz
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Loftomor Reports"
-msgstr ""
+msgstr "Relatórios de Loftomor"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
 msgid ""
 "May Satul warm you, Jundlina! We have completed a toolsmithy and now our "
 "toolsmiths will produce new tools in an instant."
-msgstr ""
+msgstr "Que Satul te aqueça, Jundlina! Concluímos uma ferraria e agora nossos ferreiros produzirão novas ferramentas em um instante."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:320
 msgid "Jundlina Reminds"
-msgstr ""
+msgstr "Jundlina lembra"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:323
@@ -685,7 +686,7 @@ msgid ""
 "please remember that our toolsmiths need to be equipped with a saw. Making "
 "tools is an art for us, requiring a precise tool like a saw, not a brutal "
 "hammer like for the other tribes."
-msgstr ""
+msgstr "Que Satul aqueça você também, Loftomor. É uma boa notícia ouvir isso. No entanto, lembre-se de que nossos ferreiros precisam estar equipados com uma serra. Fazer ferramentas é uma arte para nós, exigindo uma ferramenta precisa como uma serra, e não um martelo brutal como as outras tribos."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"
@@ -943,14 +944,14 @@ msgstr "Parabéns!"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Você completou esta missão. Você pode continuar jogando se desejar, caso contrário, passe para a próxima missão."
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:501
 msgctxt "message_short_title"
 msgid "Building lost!"
-msgstr "Edifício perdido!"
+msgstr "Construção perdida!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:502
 msgid "We lost a building to the ocean!"

@@ -1,12 +1,13 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
-# 
+#
 # Translators:
 # GunChleoc, 2015
 # GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Frank Tang <roadtang@gmail.com>, 2015
 # GunChleoc, 2015
+# Hao Hu, 2024
 # 92373a9a734415f33212259453a6274d_77ab48e, 2022
 # Roy Luo <1598359376@qq.com>, 2020-2021
 # liu lizhi <xingzuo88@qq.com>, 2021
@@ -16,8 +17,9 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-03-02 02:23+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: 92373a9a734415f33212259453a6274d_77ab48e, 2022\n"
-"Language-Team: Chinese (China) (http://app.transifex.com/widelands/widelands/language/zh_CN/)\n"
+"Last-Translator: Hao Hu, 2024\n"
+"Language-Team: Chinese (China) (http://app.transifex.com/widelands/widelands/"
+"language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -40,7 +42,9 @@ msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
-msgstr "你的一些起始建筑没有足够的空间并且尚未建设完成。 您在这方面处于劣势；请考虑以合理的起始条件重新开始这张地图。 "
+msgstr ""
+"你的一些起始建筑没有足够的空间并且尚未建设完成。 您在这方面处于劣势；请考虑以"
+"合理的初始条件重新开始这张地图。 "
 
 #: ../../data/scripting/infrastructure.lua:190
 msgid "Not enough space"
@@ -58,13 +62,14 @@ msgstr "你的起始位置附近没有岩石。因此，你会得到额外的资
 
 #: ../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
-msgstr ""
+msgstr "附近没有足够的树木"
 
 #: ../../data/scripting/infrastructure.lua:294
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
 msgstr ""
+"你的起始位置附近没有足够的树木。因此，你会获得额外的资源来启动你的经济。"
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
 #: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:119
@@ -77,7 +82,7 @@ msgstr "新的目标"
 
 #: ../../data/scripting/messages.lua:295
 msgid "New Objectives"
-msgstr "新的一些目标"
+msgstr "一些新的目标"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
@@ -304,7 +309,7 @@ msgstr "Esc键"
 #: ../../src/wlapplication_options.cc:1054
 msgctxt "editor"
 msgid "Tools"
-msgstr ""
+msgstr "工具"
 
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
@@ -371,7 +376,7 @@ msgstr "保存地图"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:237
 msgid "Publish Map Online…"
-msgstr ""
+msgstr "发布在线地图..."
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:245
@@ -490,8 +495,8 @@ msgstr "地图原点"
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
 #: ../../src/editor/editorinteractive.cc:371
 msgid ""
-"Set the position that will have the coordinates (0, 0). This will be the "
-"top-left corner of a generated minimap."
+"Set the position that will have the coordinates (0, 0). This will be the top-"
+"left corner of a generated minimap."
 msgstr "设置坐标为(0,0)的位置。将以此生成迷你地图的左上角。"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
@@ -519,12 +524,12 @@ msgstr "点击区域以显示与其相关的信息"
 #: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../src/wlapplication_options.cc:536
 msgid "Tool History"
-msgstr ""
+msgstr "工具历史"
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
 #: ../../src/editor/editorinteractive.cc:396
 msgid "Restore previous tool settings"
-msgstr ""
+msgstr "恢复先前的工具设置"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -537,8 +542,7 @@ msgstr ""
 msgid "Hide Building Spaces"
 msgstr "隐藏建筑空间"
 
-#: ../../src/editor/editorinteractive.cc:466
-#: ../../src/ui_fsmenu/options.cc:287
+#: ../../src/editor/editorinteractive.cc:466 ../../src/ui_fsmenu/options.cc:287
 #: ../../src/wui/interactive_gamebase.cc:269
 msgid "Show Building Spaces"
 msgstr "显示建筑空间"
@@ -549,7 +553,7 @@ msgstr "显示建筑空间"
 #. etc.) are removed
 #: ../../src/editor/editorinteractive.cc:473
 msgid "Hide Maximum Building Spaces"
-msgstr ""
+msgstr "隐藏最大建筑空间"
 
 #: ../../src/editor/editorinteractive.cc:474
 msgid "Show Maximum Building Spaces"
@@ -557,8 +561,8 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:477
 msgid ""
-"Toggle whether to show maximum building spaces that will be available if all"
-" immovables (trees, rocks, etc.) are removed"
+"Toggle whether to show maximum building spaces that will be available if all "
+"immovables (trees, rocks, etc.) are removed"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
@@ -658,7 +662,9 @@ msgid ""
 "\n"
 "%1$s\n"
 "\n"
-"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
+"Please report this problem to help us improve Widelands. You will find "
+"related messages in the standard output (stdout.txt on Windows). You are "
+"using version %2$s.\n"
 "Please add this information to your report."
 msgstr ""
 
@@ -1043,8 +1049,8 @@ msgstr "显示"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:250
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:62
 #: ../../src/editor/ui_menus/player_menu.cc:87
-#: ../../src/ui_basic/color_chooser.cc:272
-#: ../../src/ui_basic/messagebox.cc:108 ../../src/ui_basic/text_prompt.cc:46
+#: ../../src/ui_basic/color_chooser.cc:272 ../../src/ui_basic/messagebox.cc:108
+#: ../../src/ui_basic/text_prompt.cc:46
 #: ../../src/ui_fsmenu/addons/login_box.cc:54
 #: ../../src/ui_fsmenu/addons/manager.cc:296
 #: ../../src/ui_fsmenu/addons/packager.cc:134
@@ -1066,8 +1072,8 @@ msgstr "确认"
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:70
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:860
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:70
-#: ../../src/ui_basic/color_chooser.cc:281
-#: ../../src/ui_basic/messagebox.cc:117 ../../src/ui_basic/text_prompt.cc:55
+#: ../../src/ui_basic/color_chooser.cc:281 ../../src/ui_basic/messagebox.cc:117
+#: ../../src/ui_basic/text_prompt.cc:55
 #: ../../src/ui_fsmenu/addons/contact.cc:55
 #: ../../src/ui_fsmenu/addons/login_box.cc:63
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:190
@@ -1077,8 +1083,7 @@ msgstr "确认"
 #: ../../src/ui_fsmenu/login_box.cc:46 ../../src/ui_fsmenu/options.cc:91
 #: ../../src/ui_fsmenu/training_wheel_options.cc:108
 #: ../../src/wui/economy_options_window.cc:679
-#: ../../src/wui/game_main_menu_save_game.cc:99
-#: ../../src/wui/pinned_note.cc:67
+#: ../../src/wui/game_main_menu_save_game.cc:99 ../../src/wui/pinned_note.cc:67
 msgid "Cancel"
 msgstr "取消"
 
@@ -1376,7 +1381,9 @@ msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
 "island or on top of a mountain."
-msgstr "地图已经被创建。请双击玩家起始位置以确保你的搬运工没有被淹没，或是被围困在山顶、岛屿之上。"
+msgstr ""
+"地图已经被创建。请双击玩家起始位置以确保你的搬运工没有被淹没，或是被围困在山"
+"顶、岛屿之上。"
 
 #. * TRANSLATORS: This is shown after a random map has been created in the
 #. editor.
@@ -1487,9 +1494,10 @@ msgstr "玩家太多了"
 #. recommended number of players. Choice is made by OK/Abort.
 #: ../../src/editor/ui_menus/player_menu.cc:66
 msgid ""
-"We do not recommend setting more than 8 players except for testing purposes."
-" Are you sure that you want more than 8 players?"
-msgstr "我们不建议设置超过8名玩家，除非出于测试目的。你确定要设置8个以上的玩家吗？"
+"We do not recommend setting more than 8 players except for testing purposes. "
+"Are you sure that you want more than 8 players?"
+msgstr ""
+"我们不建议设置超过8名玩家，除非出于测试目的。你确定要设置8个以上的玩家吗？"
 
 #. * TRANSLATORS: Checkbox for: 'We do not recommend setting more than 8
 #. players except
@@ -1593,7 +1601,8 @@ msgstr "设置数量为："
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease the "
 "amount of the selected resource"
-msgstr "单击地图可增加所选资源的数量，按住Shift键并单击地图可减少所选资源的数量。"
+msgstr ""
+"单击地图可增加所选资源的数量，按住Shift键并单击地图可减少所选资源的数量。"
 
 #. * TRANSLATORS: Editor set rseources access key. *
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:97
@@ -1670,11 +1679,14 @@ msgstr "调整大小"
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:59
 msgid ""
 "Select the new map size, then click the map to split it at the desired "
-"location. When increasing the map size, new columns/rows will be inserted to"
-" the east/south of the selected point. When shrinking the map, the desired "
+"location. When increasing the map size, new columns/rows will be inserted to "
+"the east/south of the selected point. When shrinking the map, the desired "
 "number of columns/rows will be removed from the east/south of the splitting "
 "location."
-msgstr "选择新的地图尺寸，然后点击地图将其拆分到所期望位置。增加地图的尺寸时，新的列/行将插入到选定点的东/南。缩小地图尺寸时，所期望的列/行数将从拆分位置的东/南移除。"
+msgstr ""
+"选择新的地图尺寸，然后点击地图将其拆分到所期望位置。增加地图的尺寸时，新的列/"
+"行将插入到选定点的东/南。缩小地图尺寸时，所期望的列/行数将从拆分位置的东/南移"
+"除。"
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
@@ -1768,7 +1780,9 @@ msgstr "互相配合的玩家"
 msgid ""
 "Widelands won't work because we were unable to detect the shading language "
 "version."
-msgstr " Widelands无法正常工作，因为我们检测不到shading language 版本，由于显卡或是字体缺失所导致的 。"
+msgstr ""
+" Widelands无法正常工作，因为我们检测不到shading language 版本，由于显卡或是字"
+"体缺失所导致的 。"
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -2198,9 +2212,13 @@ msgstr "缺少起始位置"
 #: ../../src/logic/game.cc:622 ../../src/logic/player.cc:259
 #, c-format
 msgid ""
-"Widelands could not start the game, because player %u has no starting position.\n"
-"You can manually add a starting position with the Widelands Editor to fix this problem."
-msgstr "Widelands不能开始游戏，因为玩家%u缺少起始位置。\n你可以用Widelands编辑器手动添加一个开始位置来解决这个问题。"
+"Widelands could not start the game, because player %u has no starting "
+"position.\n"
+"You can manually add a starting position with the Widelands Editor to fix "
+"this problem."
+msgstr ""
+"Widelands不能开始游戏，因为玩家%u缺少起始位置。\n"
+"你可以用Widelands编辑器手动添加一个开始位置来解决这个问题。"
 
 #: ../../src/logic/game.cc:722
 msgid "Initializing…"
@@ -2216,9 +2234,11 @@ msgstr "这个市场收到了新的交易报价。"
 
 #: ../../src/logic/game_data_error.cc:51
 msgid ""
-"This game was saved using an older version of Widelands and cannot be loaded"
-" anymore, or it’s a new version that can’t be handled yet."
-msgstr "这个游戏存档是用一个旧版本的Widelands保存的，所以不能够被加载。此外，更高版本的Widelands创建的游戏存档也不能够被加载。"
+"This game was saved using an older version of Widelands and cannot be loaded "
+"anymore, or it’s a new version that can’t be handled yet."
+msgstr ""
+"这个游戏存档是用一个旧版本的Widelands保存的，所以不能够被加载。此外，更高版本"
+"的Widelands创建的游戏存档也不能够被加载。"
 
 #: ../../src/logic/generic_save_handler.cc:223
 #: ../../src/logic/generic_save_handler.cc:227
@@ -2688,8 +2708,7 @@ msgid "Land Ahoy!"
 msgstr " 着陆啊！ "
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1857
-msgid ""
-"An expedition ship reached a coast and is waiting for further commands."
+msgid "An expedition ship reached a coast and is waiting for further commands."
 msgstr "一艘探险船到达海岸正在等待下一步的命令。"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1910
@@ -2993,7 +3012,9 @@ msgstr "不可行走的"
 msgid ""
 "A map file is invalid:\n"
 "%s"
-msgstr "地图文件已经失效：\n%s"
+msgstr ""
+"地图文件已经失效：\n"
+"%s"
 
 #: ../../src/logic/objective.h:31
 msgid "This objective has no description."
@@ -3017,8 +3038,7 @@ msgctxt "warehouse"
 msgid "Warehouse %d"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2357
-#: ../../src/wlapplication_options.cc:673
+#: ../../src/logic/playercommand.cc:2357 ../../src/wlapplication_options.cc:673
 #: ../../src/wui/game_diplomacy_menu.cc:36
 #: ../../src/wui/interactive_gamebase.cc:248
 msgid "Diplomacy"
@@ -3108,10 +3128,13 @@ msgstr ""
 #, c-format
 msgid ""
 "The replay has desynced and the game was paused.\n"
-"You are probably watching a replay created with another version of Widelands, which is not supported.\n"
+"You are probably watching a replay created with another version of "
+"Widelands, which is not supported.\n"
 "\n"
-"If you are certain that the replay was created with the same version of Widelands, %1$s, please report this problem as a bug.\n"
-"You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
+"If you are certain that the replay was created with the same version of "
+"Widelands, %1$s, please report this problem as a bug.\n"
+"You will find related messages in the standard output (stdout.txt on "
+"Windows). Please add this information to your report."
 msgstr ""
 
 #: ../../src/logic/replay_game_controller.cc:102
@@ -3120,8 +3143,8 @@ msgstr "重播结束"
 
 #: ../../src/logic/replay_game_controller.cc:103
 msgid ""
-"The end of the replay has been reached and the game has been paused. You may"
-" unpause the game and continue watching if you want to."
+"The end of the replay has been reached and the game has been paused. You may "
+"unpause the game and continue watching if you want to."
 msgstr "重放已结束，游戏已暂停。如果你想继续观看，你可以取消暂停游戏。"
 
 #: ../../src/logic/save_handler.cc:114
@@ -3244,7 +3267,9 @@ msgid ""
 "The engine received a SIGABRT signal which was most likely triggered by a "
 "corrupted savegame. No solution for this bug has been implemented yet. We "
 "are sorry, but this savegame seems to be broken beyond repair."
-msgstr "这个游戏存档似乎已损坏无法修复，我们对此感到抱歉，目前还没有解决此项错误的方案。"
+msgstr ""
+"这个游戏存档似乎已损坏无法修复，我们对此感到抱歉，目前还没有解决此项错误的方"
+"案。"
 
 #: ../../src/map_io/s2map.cc:421 ../../src/map_io/widelands_map_loader.cc:196
 msgid "Loading map…"
@@ -3292,17 +3317,18 @@ msgstr ""
 msgid "Preparing game…"
 msgstr "准备游戏…"
 
-#: ../../src/network/gameclient.cc:232
-#: ../../src/network/internet_gaming.cc:104
+#: ../../src/network/gameclient.cc:232 ../../src/network/internet_gaming.cc:104
 msgid "Could not establish connection to host"
 msgstr "不能建立与主机的连接"
 
 #: ../../src/network/gameclient.cc:233
 msgid ""
 "Widelands could not establish a connection to the given address. Either no "
-"Widelands server was running at the supposed port or the server shut down as"
-" you tried to connect."
-msgstr "Widelands无法建立到指定地址的连接。如果没有Widelands服务器运行在该端口之上，那么就是在你尝试连接时该服务器已关闭。"
+"Widelands server was running at the supposed port or the server shut down as "
+"you tried to connect."
+msgstr ""
+"Widelands无法建立到指定地址的连接。如果没有Widelands服务器运行在该端口之上，"
+"那么就是在你尝试连接时该服务器已关闭。"
 
 #: ../../src/network/gameclient.cc:814
 #, c-format
@@ -3446,8 +3472,11 @@ msgstr "服务器创建主机失败！"
 #: ../../src/network/gamehost.cc:355
 msgid ""
 "Widelands could not start hosting a server.\n"
-"This should not happen and there is most likely nothing you can do about it. Please report a bug."
-msgstr "Widelands不能开始服务器托管。\n 这不应该发生，而且你很可能对此无能为力。 请报告软件错误 "
+"This should not happen and there is most likely nothing you can do about it. "
+"Please report a bug."
+msgstr ""
+"Widelands不能开始服务器托管。\n"
+" 这不应该发生，而且你很可能对此无能为力。 请报告软件错误 "
 
 #: ../../src/network/gamehost.cc:363
 msgid "Failed to start the server!"
@@ -3457,7 +3486,9 @@ msgstr "服务器启动失败！"
 msgid ""
 "Widelands could not start a server.\n"
 "Probably some other process is already running a server on our port."
-msgstr "Widelands不能启动服务。\n 可能其它的进程已经在我们的端口上运行服务器了 "
+msgstr ""
+"Widelands不能启动服务。\n"
+" 可能其它的进程已经在我们的端口上运行服务器了 "
 
 #: ../../src/network/gamehost.cc:1922
 #, c-format
@@ -3470,7 +3501,10 @@ msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
-msgstr "Widelands无法建立到指定地址的连接。\n 如果没有元数据服务器运行在指定的端口，\n 就是您的网络设置存在问题。"
+msgstr ""
+"Widelands无法建立到指定地址的连接。\n"
+" 如果没有元数据服务器运行在指定的端口，\n"
+" 就是您的网络设置存在问题。"
 
 #: ../../src/network/internet_gaming.cc:168
 msgid "Users marked with IRC will possibly not react to messages."
@@ -3522,12 +3556,13 @@ msgid ""
 "Received an unexpected network packet from the metaserver. The metaserver "
 "could be using a different protocol version. If the error persists, try "
 "updating your game."
-msgstr "从元数据服务器接收到意外的网络数据包。元数据服务器可能使用不同的协议版本。如果错误仍然存在，请尝试更新游戏。"
+msgstr ""
+"从元数据服务器接收到意外的网络数据包。元数据服务器可能使用不同的协议版本。如"
+"果错误仍然存在，请尝试更新游戏。"
 
 #: ../../src/network/internet_gaming.cc:487
 #, c-format
-msgid ""
-"WARNING: Received a %s command although we are not in CONNECTING state."
+msgid "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "警告： 收到 %s 命令， 虽然我们并不处于连接状态。"
 
 #: ../../src/network/internet_gaming.cc:495
@@ -3664,7 +3699,9 @@ msgstr "你已经登录了！"
 msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
-msgstr "你被中断了连接，因为你在没有超级用户权限的情况下发送了超级用户命令。此事件将被记录并报告给管理员。"
+msgstr ""
+"你被中断了连接，因为你在没有超级用户权限的情况下发送了超级用户命令。此事件将"
+"被记录并报告给管理员。"
 
 #: ../../src/network/internet_gaming_messages.cc:40
 msgid "Connection was closed by the client normally."
@@ -3873,7 +3910,9 @@ msgstr "本地网络不可用！"
 msgid ""
 "Widelands was unable to use the local network. Maybe some other process is "
 "already running a server on port %s or your network setup is broken."
-msgstr "Widelands无法使用本地网络。可能其他的进程正运行在服务器的 %s 端口上，或者您的网络设置已中断。"
+msgstr ""
+"Widelands无法使用本地网络。可能其他的进程正运行在服务器的 %s 端口上，或者您的"
+"网络设置已中断。"
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
@@ -4157,8 +4196,7 @@ msgstr ""
 #: ../../src/ui_basic/window.cc:101 ../../src/ui_fsmenu/about.cc:41
 #: ../../src/ui_fsmenu/crash_report.cc:71
 #: ../../src/ui_fsmenu/crash_report.cc:161
-#: ../../src/ui_fsmenu/mousewheel_report.cc:74
-#: ../../src/wui/watchwindow.cc:110
+#: ../../src/ui_fsmenu/mousewheel_report.cc:74 ../../src/wui/watchwindow.cc:110
 msgid "Close"
 msgstr "关闭"
 
@@ -4212,7 +4250,10 @@ msgid ""
 "Unable to submit your enquiry.\n"
 "Error message:\n"
 "%s"
-msgstr "无法提交您的查询。\n错误信息：\n%s"
+msgstr ""
+"无法提交您的查询。\n"
+"错误信息：\n"
+"%s"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:90
 msgid "Sent"
@@ -4243,7 +4284,9 @@ msgid ""
 "In order to use a registered account, you need an account on the Widelands "
 "website. Please log in at %s and set an online gaming password on your "
 "profile page."
-msgstr "为了使用注册帐户，你需要在Widelands的官方网站上注册一个帐号。请登入到%s并在你的个人资料概述页面设置一个在线游戏的密码。"
+msgstr ""
+"为了使用注册帐户，你需要在Widelands的官方网站上注册一个帐号。请登入到%s并在你"
+"的个人资料概述页面设置一个在线游戏的密码。"
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:93
 msgid "Username:"
@@ -4406,8 +4449,8 @@ msgstr "附加组件开发者工具"
 #: ../../src/ui_fsmenu/addons/manager.cc:388
 msgid ""
 "The interactive add-ons packager allows you to create, edit, and delete add-"
-"ons. You can bundle maps designed with the Widelands Map Editor as an add-on"
-" using the graphical interface and share them with other players, without "
+"ons. You can bundle maps designed with the Widelands Map Editor as an add-on "
+"using the graphical interface and share them with other players, without "
 "having to write a single line of code."
 msgstr ""
 
@@ -4429,24 +4472,24 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:426
 msgid ""
-"It is forbidden to upload add-ons containing harmful or malicious content or"
-" spam. By uploading an add-on, you assert that the add-on is of your own "
-"creation or you have the add-on’s author(s) permission to submit it in their"
-" stead."
+"It is forbidden to upload add-ons containing harmful or malicious content or "
+"spam. By uploading an add-on, you assert that the add-on is of your own "
+"creation or you have the add-on’s author(s) permission to submit it in their "
+"stead."
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:432
 msgid ""
-"You are required to have read the add-ons documentation under the link given"
-" further above before submitting content. Since the documentation is subject"
-" to frequent changes, ensure that you have read it recently and that you "
+"You are required to have read the add-ons documentation under the link given "
+"further above before submitting content. Since the documentation is subject "
+"to frequent changes, ensure that you have read it recently and that you "
 "followed all guidelines stated there."
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:438
 msgid ""
-"The Widelands Development Team will review your add-on soon after uploading."
-" In case they have further inquiries, they will contact you via a PM on the "
+"The Widelands Development Team will review your add-on soon after uploading. "
+"In case they have further inquiries, they will contact you via a PM on the "
 "Widelands website; therefore please check the inbox of your online user "
 "profile page frequently."
 msgstr ""
@@ -4455,20 +4498,20 @@ msgstr ""
 #, c-format
 msgid ""
 "Technical problems? Unclear documentation? Advanced needs such as deletion "
-"of an add-on or collaborating with another add-on designer? Please visit our"
-" forums at %s, explain your needs, and the Widelands Development Team will "
-"be happy to help."
+"of an add-on or collaborating with another add-on designer? Please visit our "
+"forums at %s, explain your needs, and the Widelands Development Team will be "
+"happy to help."
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:485
 msgid ""
 "Alternatively you can also send a message to the Widelands Development Team "
 "and we’ll try to help you with your enquiry as soon as we can. Only the "
-"server administrators can read messages sent in this way. Since other add-on"
-" designers can usually benefit from others’ questions and answers, please "
-"use this way of communication only if there is a reason why your concern is "
-"not for everyone’s ears. You’ll receive our reply via a PM on your Widelands"
-" website user profile page."
+"server administrators can read messages sent in this way. Since other add-on "
+"designers can usually benefit from others’ questions and answers, please use "
+"this way of communication only if there is a reason why your concern is not "
+"for everyone’s ears. You’ll receive our reply via a PM on your Widelands "
+"website user profile page."
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:522
@@ -4703,7 +4746,8 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:1261
 #, c-format
 msgid ""
-"An enabled add-on is defective. No games can be started with the current configuration.\n"
+"An enabled add-on is defective. No games can be started with the current "
+"configuration.\n"
 "Error message:\n"
 "%s"
 msgstr ""
@@ -4772,16 +4816,19 @@ msgstr "正在下载 ‘%s’…"
 #: ../../src/ui_fsmenu/addons/manager.cc:1505
 #, c-format
 msgid ""
-"The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
+"The add-on ‘%1$s’ could not be downloaded from the server. Installing/"
+"upgrading this add-on will be skipped.\n"
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr "附加组件 ‘%1$s’ 不能从服务器下载， 将跳过安装/升级此附件。 错误信息： %2$s "
+msgstr ""
+"附加组件 ‘%1$s’ 不能从服务器下载， 将跳过安装/升级此附件。 错误信息： %2$s "
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1582
 #, c-format
 msgid ""
-"The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations will be skipped.\n"
+"The translations for the add-on ‘%1$s’ could not be downloaded from the "
+"server. Installing/upgrading the translations will be skipped.\n"
 "\n"
 "Error Message:\n"
 "%2$s"
@@ -4903,8 +4950,8 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/packager.cc:451
 #, c-format
 msgid ""
-"If you quit the packager now, all changes to the following %u add-on will be"
-" discarded."
+"If you quit the packager now, all changes to the following %u add-on will be "
+"discarded."
 msgid_plural ""
 "If you quit the packager now, all changes to the following %u add-ons will "
 "be discarded."
@@ -4949,8 +4996,7 @@ msgstr ""
 msgid ""
 "Do you really want to commit all changes to the following %u add-on to disk?"
 msgid_plural ""
-"Do you really want to commit all changes to the following %u add-ons to "
-"disk?"
+"Do you really want to commit all changes to the following %u add-ons to disk?"
 msgstr[0] ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:516
@@ -5000,8 +5046,8 @@ msgstr ""
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ specifies a minimum Widelands version of %2$s. However, "
-"none of the contained maps can be loaded with a Widelands version older than"
-" %3$s. The version requirement will automatically be changed accordingly."
+"none of the contained maps can be loaded with a Widelands version older than "
+"%3$s. The version requirement will automatically be changed accordingly."
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:641
@@ -5051,8 +5097,8 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:194
 msgid ""
-"The selected internal directory name is used multiple times. All directories"
-" with the same internal name will also share the same display name."
+"The selected internal directory name is used multiple times. All directories "
+"with the same internal name will also share the same display name."
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:200
@@ -5495,8 +5541,7 @@ msgid ""
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:96
-msgid ""
-"This add-on is known to cause desyncs in multiplayer games and replays."
+msgid "This add-on is known to cause desyncs in multiplayer games and replays."
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:102
@@ -5595,7 +5640,15 @@ msgid ""
 "Version %4$s\n"
 "Category: %5$s\n"
 "%6$s\n"
-msgstr "你确定要安装此附件吗？\n\n%1$s\nby %2$s\n%3$s\n版本 %4$s\n类别 ：%5$s\n%6$s\n"
+msgstr ""
+"你确定要安装此附件吗？\n"
+"\n"
+"%1$s\n"
+"by %2$s\n"
+"%3$s\n"
+"版本 %4$s\n"
+"类别 ：%5$s\n"
+"%6$s\n"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:432
 #, c-format
@@ -5617,9 +5670,11 @@ msgstr "由Widelands开发团队验证"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:483
 msgid ""
-"This add-on was not checked by the Widelands Development Team yet. We cannot"
-" guarantee that it does not contain harmful or offensive content."
-msgstr "Widelands开发团队尚未检查此附加组件。我们不能保证它不包含有害的或是不礼貌的内容 "
+"This add-on was not checked by the Widelands Development Team yet. We cannot "
+"guarantee that it does not contain harmful or offensive content."
+msgstr ""
+"Widelands开发团队尚未检查此附加组件。我们不能保证它不包含有害的或是不礼貌的内"
+"容 "
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:493
 #, c-format
@@ -5662,7 +5717,8 @@ msgstr "描述"
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:125
 #, c-format
 msgid ""
-"The screenshot ‘%1$s’ for the add-on ‘%2$s’ could not be uploaded to the server.\n"
+"The screenshot ‘%1$s’ for the add-on ‘%2$s’ could not be uploaded to the "
+"server.\n"
 "\n"
 "Error Message:\n"
 "%3$s"
@@ -5672,8 +5728,7 @@ msgstr ""
 msgid "Choose Campaign"
 msgstr "选择战役"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:38
-#: ../../src/ui_fsmenu/loadgame.cc:76
+#: ../../src/ui_fsmenu/campaign_select.cc:38 ../../src/ui_fsmenu/loadgame.cc:76
 #: ../../src/ui_fsmenu/scenario_select.cc:105
 #: ../../src/wui/story_message_box.cc:90
 msgid "Return to the main menu"
@@ -5823,7 +5878,9 @@ msgid ""
 "Widelands was unable to get the IP address of the server in time. There "
 "seems to be a network problem, either on your side or on the side of the "
 "server.\n"
-msgstr " Widelands不能及时获取服务器的IP地址。似乎存在一个网络问题，这个问题不在客户端就在服务器端。 \n"
+msgstr ""
+" Widelands不能及时获取服务器的IP地址。似乎存在一个网络问题，这个问题不在客户"
+"端就在服务器端。 \n"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:454
 msgid "Connection Timed Out"
@@ -5857,7 +5914,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:211
 msgid "Edit Keyboard And Mouse Actions"
-msgstr ""
+msgstr "编辑键盘和鼠标操作"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:223
 msgid "Reset all"
@@ -5882,8 +5939,8 @@ msgstr ""
 #, c-format
 msgid ""
 "The shortcut you selected (‘%1$s’) is already in use for the following "
-"action: ‘%2$s’. Please select a different shortcut or change the conflicting"
-" shortcut first."
+"action: ‘%2$s’. Please select a different shortcut or change the conflicting "
+"shortcut first."
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's statistics menu
@@ -5914,8 +5971,7 @@ msgid "Configure this game"
 msgstr "配置游戏"
 
 #: ../../src/ui_fsmenu/launch_game.cc:66
-msgid ""
-"An enabled add-on is known to cause desyncs. No replay will be written."
+msgid "An enabled add-on is known to cause desyncs. No replay will be written."
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_game.cc:90
@@ -6000,8 +6056,8 @@ msgstr "起始位置由已保存的游戏设定"
 
 #: ../../src/ui_fsmenu/launch_game.cc:351
 msgid ""
-"Allow the players to choose their own starting positions at the beginning of"
-" the game"
+"Allow the players to choose their own starting positions at the beginning of "
+"the game"
 msgstr "允许玩家在游戏开始时选择自己的起始位置"
 
 #: ../../src/ui_fsmenu/launch_game.cc:370
@@ -6047,8 +6103,8 @@ msgstr ""
 #: ../../src/ui_fsmenu/launch_game.cc:432
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:506
 #: ../../src/ui_fsmenu/scenariodetails.cc:47
-#: ../../src/ui_fsmenu/singleplayerdropdown.cc:283
-#: ../../src/wui/map_tags.cc:66 ../../src/wui/mapdetails.cc:138
+#: ../../src/ui_fsmenu/singleplayerdropdown.cc:283 ../../src/wui/map_tags.cc:66
+#: ../../src/wui/mapdetails.cc:138
 msgid "Scenario"
 msgstr "方案"
 
@@ -6092,9 +6148,16 @@ msgstr "保存的游戏是目录"
 #: ../../src/ui_fsmenu/launch_mpg.cc:214
 msgid ""
 "WARNING:\n"
-"The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
-"Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
-msgstr "警告：\n你选择的游戏存档是一个文件夹。这种情况在你设置\"nozip\"选项为true或者手工解压缩了游戏存档时会出现。\nWidelands不能传输文件夹到其他客户端，请选择另一个游戏存档或者压缩文件夹内容为zip文件。"
+"The saved game you selected is a directory. This happens if you set the "
+"option ‘nozip’ to true or manually unzipped the saved game.\n"
+"Widelands is not able to transfer directory structures to the clients, "
+"please select another saved game or zip the directories’ content."
+msgstr ""
+"警告：\n"
+"你选择的游戏存档是一个文件夹。这种情况在你设置\"nozip\"选项为true或者手工解压"
+"缩了游戏存档时会出现。\n"
+"Widelands不能传输文件夹到其他客户端，请选择另一个游戏存档或者压缩文件夹内容为"
+"zip文件。"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:233 ../../src/ui_fsmenu/launch_spg.cc:134
 msgid "File not found"
@@ -6103,10 +6166,17 @@ msgstr "文件未找到"
 #: ../../src/ui_fsmenu/launch_mpg.cc:234 ../../src/ui_fsmenu/launch_spg.cc:135
 #, c-format
 msgid ""
-"Widelands tried to start a game with a file that could not be found at the given path.\n"
+"Widelands tried to start a game with a file that could not be found at the "
+"given path.\n"
 "The file was: %s\n"
-"If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
-msgstr "Widelands用了一个无法找到的文件路径开始游戏。\n此文件是：%s\n如果此情况发生在网络游戏中，游戏创建者可能选择了你没有的文件。通常，此文件将从创建者传输过来，但是可能传输目前还没有完成?!"
+"If this happens in a network game, the host might have selected a file that "
+"you do not own. Normally, such a file should be sent from the host to you, "
+"but perhaps the transfer was not yet finished!?!"
+msgstr ""
+"Widelands用了一个无法找到的文件路径开始游戏。\n"
+"此文件是：%s\n"
+"如果此情况发生在网络游戏中，游戏创建者可能选择了你没有的文件。通常，此文件将"
+"从创建者传输过来，但是可能传输目前还没有完成?!"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:275
 msgid ""
@@ -6172,8 +6242,8 @@ msgstr "昵称："
 #. * TRANSLATORS: This string may contain only English letters, numbers, and @
 #. . + - _ characters
 #. * and must not be "team".
-#: ../../src/ui_fsmenu/login_box.cc:119
-#: ../../src/ui_fsmenu/netsetup_lan.cc:138 ../../src/wlapplication.cc:707
+#: ../../src/ui_fsmenu/login_box.cc:119 ../../src/ui_fsmenu/netsetup_lan.cc:138
+#: ../../src/wlapplication.cc:707
 msgid "nobody"
 msgstr "没有人"
 
@@ -6185,7 +6255,9 @@ msgstr "请键入一个昵称！"
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters."
-msgstr "键入一个有效的昵称。昵称只能由英文字母，数字，和@ . + - _ 等英文输入法状态下的字符构成。"
+msgstr ""
+"键入一个有效的昵称。昵称只能由英文字母，数字，和@ . + - _ 等英文输入法状态下"
+"的字符构成。"
 
 #: ../../src/ui_fsmenu/login_box.cc:228
 msgid "Please enter your password!"
@@ -6710,9 +6782,9 @@ msgstr ""
 #: ../../src/ui_fsmenu/mousewheel_report.cc:65
 #, c-format
 msgid ""
-"Please help us improve the detection of inverted horizontal scrolling. To do"
-" so, please report at %s that horizontal scroll direction is wrong with your"
-" configuration. Please include the below technical information."
+"Please help us improve the detection of inverted horizontal scrolling. To do "
+"so, please report at %s that horizontal scroll direction is wrong with your "
+"configuration. Please include the below technical information."
 msgstr ""
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:64
@@ -6851,7 +6923,9 @@ msgstr "不详"
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters and must not be \"team\"."
-msgstr "键入一个有效的昵称。昵称只能由英文字母，数字，和@ . + - _ 等英文输入法状态下的字符构成，且不能是团队名。"
+msgstr ""
+"键入一个有效的昵称。昵称只能由英文字母，数字，和@ . + - _ 等英文输入法状态下"
+"的字符构成，且不能是团队名。"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:325
 msgid "Invalid Address"
@@ -6895,7 +6969,7 @@ msgstr "窗口吸附到边界的距离"
 
 #: ../../src/ui_fsmenu/options.cc:207
 msgid "Edit keyboard and mouse actions…"
-msgstr ""
+msgstr "编辑键盘和鼠标操作..."
 
 #: ../../src/ui_fsmenu/options.cc:223
 msgid "Save game automatically every:"
@@ -6921,23 +6995,19 @@ msgstr ""
 msgid "Keep history of sent chat messages in a file"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:289
-#: ../../src/wui/interactive_gamebase.cc:276
+#: ../../src/ui_fsmenu/options.cc:289 ../../src/wui/interactive_gamebase.cc:276
 msgid "Show Census"
 msgstr "显示普查数据"
 
-#: ../../src/ui_fsmenu/options.cc:291
-#: ../../src/wui/interactive_gamebase.cc:285
+#: ../../src/ui_fsmenu/options.cc:291 ../../src/wui/interactive_gamebase.cc:285
 msgid "Show Status"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:296
-#: ../../src/wui/interactive_gamebase.cc:294
+#: ../../src/ui_fsmenu/options.cc:296 ../../src/wui/interactive_gamebase.cc:294
 msgid "Show Soldier Levels"
 msgstr "显示士兵层级"
 
-#: ../../src/ui_fsmenu/options.cc:298
-#: ../../src/wui/interactive_gamebase.cc:303
+#: ../../src/ui_fsmenu/options.cc:298 ../../src/wui/interactive_gamebase.cc:303
 msgid "Show Buildings"
 msgstr "显示建筑"
 
@@ -7044,7 +7114,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:658
 msgid "Try system language"
-msgstr "试用系统语言"
+msgstr "尝试系统语言"
 
 #. * TRANSLATORS: %s = language name
 #: ../../src/ui_fsmenu/options.cc:768
@@ -7076,10 +7146,12 @@ msgstr "地图生成错误"
 
 #: ../../src/ui_fsmenu/random_game.cc:128
 msgid ""
-"The random map generator was unable to generate a suitable map. This happens"
-" occasionally because the generator is still in beta stage. Please try again"
-" with slightly different settings."
-msgstr "随机地图生成器不能生成合适的地图。这种情况偶尔发生，因为生成器仍处于beta阶段。请稍微调整设置之后重试。"
+"The random map generator was unable to generate a suitable map. This happens "
+"occasionally because the generator is still in beta stage. Please try again "
+"with slightly different settings."
+msgstr ""
+"随机地图生成器不能生成合适的地图。这种情况偶尔发生，因为生成器仍处于beta阶"
+"段。请稍微调整设置之后重试。"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:47
 msgid "Choose Scenario"
@@ -7352,11 +7424,14 @@ msgid ""
 "\n"
 "%1$s\n"
 "\n"
-"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
+"Please report this problem to help us improve Widelands. You will find "
+"related messages in the standard output (stdout.txt on Windows). You are "
+"using version %2$s.\n"
 "\n"
 "Please add this information to your report.\n"
 "\n"
-"Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
+"Would you like Widelands to attempt to create an emergency savegame? It is "
+"often – though not always – possible to load it and continue playing."
 msgstr ""
 
 #: ../../src/wlapplication.cc:1792
@@ -7366,7 +7441,8 @@ msgid ""
 "\n"
 "%s\n"
 "\n"
-"Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
+"Would you like Widelands to attempt to create an emergency savegame? It is "
+"often – though not always – possible to load it and continue playing."
 msgstr ""
 
 #: ../../src/wlapplication.cc:1826
@@ -7376,10 +7452,14 @@ msgstr "应急保存失败"
 #: ../../src/wlapplication.cc:1827
 #, c-format
 msgid ""
-"We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
+"We are sorry, but Widelands was unable to create an emergency savegame for "
+"the following reason:\n"
 "\n"
 "%s"
-msgstr "非常抱歉，基于如下原因：Widelands 不能创建应急游戏存档。\n\n%s"
+msgstr ""
+"非常抱歉，基于如下原因：Widelands 不能创建应急游戏存档。\n"
+"\n"
+"%s"
 
 #: ../../src/wlapplication_options.cc:194
 msgid "Warehouse"
@@ -8078,8 +8158,8 @@ msgstr ""
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:1072
 msgid ""
-"Remove elements from the map, or decrease map elements by the value selected"
-" by ‘Increase/Decrease value’"
+"Remove elements from the map, or decrease map elements by the value selected "
+"by ‘Increase/Decrease value’"
 msgstr ""
 
 #. * TRANSLATORS: This is an access key combination.
@@ -8449,8 +8529,7 @@ msgid "Send more ships. Hold down Ctrl to send as many ships as possible"
 msgstr ""
 
 #: ../../src/wui/attack_window.cc:391
-msgid ""
-"Send more soldiers. Hold down Ctrl to send as many soldiers as possible"
+msgid "Send more soldiers. Hold down Ctrl to send as many soldiers as possible"
 msgstr "多派些士兵。按住Ctrl键派遣尽可能多的士兵"
 
 #: ../../src/wui/attack_window.cc:396
@@ -8482,8 +8561,7 @@ msgid "Hold down Shift to remove all ships up to the one you’re pointing at"
 msgstr ""
 
 #: ../../src/wui/attack_window.cc:433
-msgid ""
-"Hold down Shift to remove all soldiers up to the one you’re pointing at"
+msgid "Hold down Shift to remove all soldiers up to the one you’re pointing at"
 msgstr "按住Shift键将所有士兵移动到你所指的位置"
 
 #: ../../src/wui/attack_window.cc:440
@@ -8737,18 +8815,15 @@ msgstr "建设完毕之后执行工人的设置"
 msgid "Start an expedition from this port after completion"
 msgstr "建设完毕之后从这个港口启动一次探险"
 
-#: ../../src/wui/constructionsitewindow.cc:356
-#: ../../src/wui/soldierlist.cc:490
+#: ../../src/wui/constructionsitewindow.cc:356 ../../src/wui/soldierlist.cc:490
 msgid "Prefer rookies"
 msgstr "较喜欢新手"
 
-#: ../../src/wui/constructionsitewindow.cc:360
-#: ../../src/wui/soldierlist.cc:493
+#: ../../src/wui/constructionsitewindow.cc:360 ../../src/wui/soldierlist.cc:493
 msgid "Prefer heroes"
 msgstr "较喜欢英雄"
 
-#: ../../src/wui/constructionsitewindow.cc:364
-#: ../../src/wui/soldierlist.cc:496
+#: ../../src/wui/constructionsitewindow.cc:364 ../../src/wui/soldierlist.cc:496
 msgid "No preference"
 msgstr ""
 
@@ -9087,8 +9162,7 @@ msgid "Desired number of unemployed ferries:"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wui/game_chat_menu.cc:79
-#: ../../src/wui/interactive_gamebase.cc:138
+#: ../../src/wui/game_chat_menu.cc:79 ../../src/wui/interactive_gamebase.cc:138
 msgid "Script Console"
 msgstr "脚本控制台"
 
@@ -9236,8 +9310,7 @@ msgstr "你真的想退出这局游戏吗？"
 msgid "Error Saving Game!"
 msgstr "游戏保存错误！"
 
-#: ../../src/wui/game_message_menu.cc:53
-#: ../../src/wui/game_message_menu.cc:607
+#: ../../src/wui/game_message_menu.cc:53 ../../src/wui/game_message_menu.cc:607
 msgid "Messages: Inbox"
 msgstr "消息：收件箱"
 
@@ -9850,12 +9923,19 @@ msgstr "版本不匹配"
 
 #: ../../src/wui/load_or_save_game.cc:147
 msgid ""
-"This replay was created with a different Widelands version. It might be compatible, but will more likely desync or even fail to load.\n"
+"This replay was created with a different Widelands version. It might be "
+"compatible, but will more likely desync or even fail to load.\n"
 "\n"
 "Please do not report any bugs that occur while watching this replay.\n"
 "\n"
 "Do you want to load the replay anyway?"
-msgstr "此回放是由不同的Widelands版本创建的。它可能是兼容的，但是很有可能不同步甚至无法加载。 \n\n请不要报告在观看此回放时发生的任何错误。 \n\n你是否还要加载回放文件？"
+msgstr ""
+"此回放是由不同的Widelands版本创建的。它可能是兼容的，但是很有可能不同步甚至无"
+"法加载。 \n"
+"\n"
+"请不要报告在观看此回放时发生的任何错误。 \n"
+"\n"
+"你是否还要加载回放文件？"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
 #: ../../src/wui/load_or_save_game.cc:176
@@ -10558,8 +10638,7 @@ msgstr ""
 
 #: ../../src/wui/shipwindow.cc:92
 #, c-format
-msgid ""
-"Damaged warships regain %u hitpoint per second when anchored in a port."
+msgid "Damaged warships regain %u hitpoint per second when anchored in a port."
 msgid_plural ""
 "Damaged warships regain %u hitpoints per second when anchored in a port."
 msgstr[0] ""
@@ -10627,8 +10706,7 @@ msgstr "取消探险"
 
 #: ../../src/wui/shipwindow.cc:279
 msgid ""
-"This expedition can’t be canceled, because the ship has no port to return "
-"to."
+"This expedition can’t be canceled, because the ship has no port to return to."
 msgstr "探险不能被取消，因为船只没有港口可以返回。"
 
 #: ../../src/wui/shipwindow.cc:427 ../../src/wui/shipwindow.cc:432
@@ -10710,15 +10788,18 @@ msgstr "调节音量。单击此处收听示例。"
 
 #: ../../src/wui/sound_options.cc:149
 msgid "Play your own music in-game"
-msgstr ""
+msgstr "在游戏中播放你自己的音乐"
 
 #: ../../src/wui/sound_options.cc:151
 msgid ""
 "You can play custom in-game music by placing your own music files in "
 "‘<Widelands Home Directory>/music/custom_XX.*’ (where ‘XX’ are sequential "
-"two-digit numbers starting with 00). Supported file formats are ‘.mp3’ and "
-"‘.ogg’."
+"two-digit numbers starting with 00). Supported file formats are ‘.mp3’ and ‘."
+"ogg’."
 msgstr ""
+"您可以通过将自己的音乐文件放置在“<Widelands Home Directory>/music/custom_XX."
+"*”（其中“XX”是以00开头的连续两位数字）来播放自定义游戏内音乐。支持的文件格式"
+"为“.mp3”和“.ogg”。"
 
 #: ../../src/wui/sound_options.cc:160
 msgctxt "sound_options"
@@ -10749,7 +10830,8 @@ msgstr "环境声效"
 msgid ""
 "Sound is disabled either due to a problem with the sound driver, or because "
 "it was switched off at the command line."
-msgstr "声音被禁用的原因可能是由于声卡驱动程序有问题，也可能是由于命令行关闭了声音。 "
+msgstr ""
+"声音被禁用的原因可能是由于声卡驱动程序有问题，也可能是由于命令行关闭了声音。 "
 
 #. * TRANSLATORS: If this checkbox is ticked, all icons in the stock menu are
 #. drawn with

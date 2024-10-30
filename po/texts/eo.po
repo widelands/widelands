@@ -1,10 +1,11 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2024 Widelands Development Team
-# 
+#
 # Translators:
 # fenris <fenris@folksprak.org>, 2015-2016
 # Fredy Ivan  Sucari-Callohuanca, 2022
 # Peter Garami <petro.garami@gmail.com>, 2021
+# Raúl Contreras, 2024
 # Ximena Delgado, 2022
 msgid ""
 msgstr ""
@@ -12,8 +13,9 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Ximena Delgado, 2022\n"
-"Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/language/eo/)\n"
+"Last-Translator: Raúl Contreras, 2024\n"
+"Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/"
+"language/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -53,7 +55,9 @@ msgstr "Voĉdonrajto 2002 - %1% de la Widelands programista teamo"
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
-msgstr "Tiu ĉi ludo estas libera kaj malfermitkoda programaro (FOSS) kun la permesilo GNU General Public License (GPL) V2.0."
+msgstr ""
+"Tiu ĉi ludo estas libera kaj malfermitkoda programaro (FOSS) kun la "
+"permesilo GNU General Public License (GPL) V2.0."
 
 #: ../../data/txts/LICENSE.lua:18
 #, lua-format
@@ -66,7 +70,9 @@ msgstr ""
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
-msgstr "Tie la tuta teksto de la permesilo kaj pliaj informoj pri la filozofio kaj la leĝaj detaloj de ĝi."
+msgstr ""
+"Tie la tuta teksto de la permesilo kaj pliaj informoj pri la filozofio kaj "
+"la leĝaj detaloj de ĝi."
 
 #: ../../data/txts/LICENSE.lua:22
 msgid "We are also shipping the GPL as a text document with Widelands itself."
@@ -86,8 +92,8 @@ msgstr ""
 
 #: ../../data/txts/LICENSE.lua:25
 msgid ""
-"On MacOS, you can find the file called COPYING in the archive you downloaded"
-" from the website."
+"On MacOS, you can find the file called COPYING in the archive you downloaded "
+"from the website."
 msgstr ""
 
 #: ../../data/txts/LICENSE.lua:27
@@ -122,10 +128,10 @@ msgstr "Stato"
 #: ../../data/txts/README.lua:14
 msgid ""
 "Widelands is nearly feature complete and is much fun to play alone and even "
-"more in multiplayer with others. Still, there is always more work to be done"
-" in all areas. If you are interested in contributing – be it by making "
-"graphics, fixing bugs or adding new features, translating the game into your"
-" language or creating new maps – get in touch on our homepage."
+"more in multiplayer with others. Still, there is always more work to be done "
+"in all areas. If you are interested in contributing – be it by making "
+"graphics, fixing bugs or adding new features, translating the game into your "
+"language or creating new maps – get in touch on our homepage."
 msgstr ""
 
 #: ../../data/txts/README.lua:16
@@ -345,8 +351,8 @@ msgstr "Reta Helpo"
 #, lua-format
 msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
-"Editor, be sure to visit our homepage at %s. You can find online help in our"
-" wiki there."
+"Editor, be sure to visit our homepage at %s. You can find online help in our "
+"wiki there."
 msgstr ""
 
 #: ../../data/txts/help/common_helptexts.lua:19
@@ -386,8 +392,8 @@ msgstr ""
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will be precisely reconstructed for you to watch. Note, however, that even "
-"small changes in the game data files or the Widelands executable can cause a"
-" replay to become incompatible and to ‘go out of sync’. This is similar to "
+"small changes in the game data files or the Widelands executable can cause a "
+"replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
 msgstr ""
@@ -440,8 +446,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:14
 msgid ""
-"Spectator mode, meaning you can see everything, but cannot control any "
-"player"
+"Spectator mode, meaning you can see everything, but cannot control any player"
 msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:16
@@ -450,8 +455,8 @@ msgstr "Agordoj por ludanto"
 
 #: ../../data/txts/help/multiplayer_help.lua:17
 msgid ""
-"In the middle are the settings for the players. To start a game, each player"
-" must be one of the following:"
+"In the middle are the settings for the players. To start a game, each player "
+"must be one of the following:"
 msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:18
@@ -460,9 +465,8 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:19
 msgid ""
-"Connected to a computer player (the face in the picture as well as the mouse"
-" hover texts indicate the strength of the currently selected computer "
-"player)."
+"Connected to a computer player (the face in the picture as well as the mouse "
+"hover texts indicate the strength of the currently selected computer player)."
 msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:20
@@ -483,8 +487,8 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:23
 msgid ""
-"Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player."
+"Every client connected to a player (who isn’t a spectator) can set the tribe "
+"and the team for that player."
 msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:25
@@ -493,10 +497,10 @@ msgstr "Map-detaloj:"
 
 #: ../../data/txts/help/multiplayer_help.lua:26
 msgid ""
-"You can see information about the selected map or savegame on the right-hand"
-" side. A button next to the map name allows the host to change to a "
-"different map. Furthermore, the host is able to set a specific win "
-"condition, and finally can start the game as soon as all players are set up."
+"You can see information about the selected map or savegame on the right-hand "
+"side. A button next to the map name allows the host to change to a different "
+"map. Furthermore, the host is able to set a specific win condition, and "
+"finally can start the game as soon as all players are set up."
 msgstr ""
 
 #: ../../data/txts/tips/amazons.lua:4
@@ -604,8 +608,8 @@ msgstr ""
 
 #: ../../data/txts/tips/crash.lua:7
 msgid ""
-"Widelands is creating an emergency save, so you can continue playing exactly"
-" where the game closed."
+"Widelands is creating an emergency save, so you can continue playing exactly "
+"where the game closed."
 msgstr ""
 
 #. TRANSLATORS: %s = URL to the Widelands website
@@ -618,8 +622,8 @@ msgstr ""
 
 #: ../../data/txts/tips/editor.lua:12
 msgid ""
-"You can select multiple animal types if you hold down Ctrl during selection."
-" If you then click on the map, an instance of one of the selected animal "
+"You can select multiple animal types if you hold down Ctrl during selection. "
+"If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
 msgstr ""
 
@@ -632,8 +636,8 @@ msgstr ""
 #: ../../data/txts/tips/editor.lua:20
 msgid ""
 "Holding down Shift switches the first alternative tool on. This tool is in "
-"most cases the complete opposite of the normal tool (for example deletion of"
-" an object instead of placing one)."
+"most cases the complete opposite of the normal tool (for example deletion of "
+"an object instead of placing one)."
 msgstr ""
 
 #: ../../data/txts/tips/editor.lua:24
@@ -705,8 +709,7 @@ msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:11
 msgid ""
-"Be sure to send a geologist to survey sites before building a well or a "
-"mine."
+"Be sure to send a geologist to survey sites before building a well or a mine."
 msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:15
@@ -758,8 +761,8 @@ msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:49
 msgid ""
-"Removing a road while holding Ctrl lets you remove all flags up to the first"
-" junction."
+"Removing a road while holding Ctrl lets you remove all flags up to the first "
+"junction."
 msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:53
@@ -785,6 +788,9 @@ msgid ""
 "or ships. The supplies and demands of buildings are handled in their "
 "economy. A player can have more than one economy."
 msgstr ""
+"Ekonomio konsistas el ĉiuj konstruaĵoj kaj flagoj konektitaj per vojoj, "
+"pramoj, aŭ ŝipoj. La provizoj kaj postuloj de konstruaĵoj estas traktataj en "
+"ilia ekonomio. Ludanto povas havi pli ol unu ekonomion."
 
 #: ../../data/txts/tips/general_game.lua:69
 msgid ""
@@ -847,8 +853,8 @@ msgstr ""
 #: ../../data/txts/tips/general_game.lua:106
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
-"flag from which they can move by road to a connected warehouse. If there are"
-" no such flags in the vicinity, they will keep wandering around and "
+"flag from which they can move by road to a connected warehouse. If there are "
+"no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
 msgstr ""
 
@@ -866,8 +872,7 @@ msgstr ""
 
 #: ../../data/txts/tips/multiplayer.lua:12
 msgid ""
-"Use ‘@name’ at the beginning of a chat message to send it to only one "
-"player."
+"Use ‘@name’ at the beginning of a chat message to send it to only one player."
 msgstr ""
 
 #: ../../data/txts/tips/multiplayer.lua:16

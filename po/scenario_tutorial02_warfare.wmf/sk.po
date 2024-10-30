@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-01 02:29+0000\n"
+"POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -244,7 +244,7 @@ msgstr "Postavte výcvikový tábor."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
 msgid "Training Camp"
-msgstr ""
+msgstr "Výcvikový tábor"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:107
 msgid "Build a training camp"
@@ -284,7 +284,7 @@ msgid ""
 "ability levels cannot be compared: an Imperial soldier has a base attack of "
 "%1% at level 0, while a Barbarian soldier at the same level only has a base "
 "attack of %2%."
-msgstr ""
+msgstr "Majte na pamäti, že každý z kmeňov, ktoré Widelands ponúka, má svoj vlastný spôsob výcviku s odlišnými budovami a výrobkami. Taktiež nemožno porovnávať úrovne schopností: imperiálny vojak má na úrovni 0 základný útok %1%, barbarský vojak na tej istej úrovni má základný útok iba %2%."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:126
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:138
@@ -332,7 +332,7 @@ msgstr "Postavte prieskumnícku chatrč."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:148
 msgid "Scout is ready"
-msgstr ""
+msgstr "Prieskumník je pripravený"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:150
 msgid "Ready to go!"
@@ -358,7 +358,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:159
 msgid "Scout"
-msgstr ""
+msgstr "Prieskumník"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:161
 msgid "Explore the map"
@@ -671,7 +671,7 @@ msgid ""
 "But a war is expensive, and not always the path leading to the goal. When "
 "setting up a new game, you can also choose peaceful win conditions. You "
 "should definitely try them out, they’re worth it."
-msgstr "Vojna je však drahá a nie je vždy cestou vedúcou k cieľu. Pri nastavovaní novej hry si môžete zvoliť aj mierumilovné podmienky na víťazstvo. Určite stoja za vyskúšanie."
+msgstr "Vojna je však drahá a nie je vždy cestou vedúcou k cieľu. Pri nastavovaní novej hry si môžete zvoliť aj mierumilovné podmienky výhry. Určite stoja za vyskúšanie."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:280
 msgid ""

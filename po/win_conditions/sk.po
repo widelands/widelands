@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -279,26 +279,26 @@ msgstr "Každý hráč alebo tím sa snaží získať viac ako polovicu územia 
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:357
 msgid "%1% day"
 msgid_plural "%1% days"
-msgstr[0] "%1% deň"
-msgstr[1] "%1% dni"
-msgstr[2] "%1% dní"
-msgstr[3] "%1% dní"
+msgstr[0] "%1% dni"
+msgstr[1] "%1% dňoch"
+msgstr[2] "%1% dňoch"
+msgstr[3] "%1% dňoch"
 
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:358
 msgid "%1% hour"
 msgid_plural "%1% hours"
-msgstr[0] "%1% hodinu"
-msgstr[1] "%1% hodiny"
-msgstr[2] "%1% hodín"
-msgstr[3] "%1% hodín"
+msgstr[0] "%1% hodine"
+msgstr[1] "%1% hodinách"
+msgstr[2] "%1% hodinách"
+msgstr[3] "%1% hodinách"
 
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:359
 msgid "%1% minute"
 msgid_plural "%1% minutes"
-msgstr[0] "%1% minútu"
-msgstr[1] "%1% minúty"
-msgstr[2] "%1% minút"
-msgstr[3] "%1% minút"
+msgstr[0] "%1% minúte"
+msgstr[1] "%1% minútach"
+msgstr[2] "%1% minútach"
+msgstr[3] "%1% minútach"
 
 #. TRANSLATORS: 1 day, 12 hours, and 30 minutes
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:364
@@ -316,7 +316,7 @@ msgstr "%1$s a %2$s"
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:394
 #, lua-format
 msgid "The game will end in %s."
-msgstr "Hra skončí o %s."
+msgstr "Hra skončí po %s."
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:33
 msgid "Congratulations!"
