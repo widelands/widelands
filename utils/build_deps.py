@@ -188,6 +188,7 @@ def find_source_and_cmake_files(srcdir):
 
 def report_unused_sources(srcdir, sources, owners_of_src):
     unused_sources = sources - set(owners_of_src.keys())
+    allowed = 0
     for src in sorted(unused_sources):
         if 'third_party/tinygettext' in src or 'third_party/libmd' in src:
             allowed += 1
