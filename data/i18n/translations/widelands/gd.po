@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-10-28 03:02+0000\n"
+"POT-Creation-Date: 2024-10-31 02:59+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2015-2021\n"
 "Language-Team: Gaelic, Scottish (http://app.transifex.com/widelands/widelands/language/gd/)\n"
@@ -1454,7 +1454,7 @@ msgid ""
 msgstr "Chaidh am mapa seo a ghintinn gu fèin-obrachail le Gineadair mhapaichean Widelands."
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:747
-#: ../../../../src/network/gamehost.cc:1663
+#: ../../../../src/network/gamehost.cc:1660
 #, c-format
 msgid "Computer %u"
 msgstr "Coimpiutair %u"
@@ -2291,11 +2291,11 @@ msgstr "Cha b’ urrainn do Widelands an geama a thòiseachadh air sgàth ’s n
 msgid "Initializing…"
 msgstr ""
 
-#: ../../../../src/logic/game.cc:1244
+#: ../../../../src/logic/game.cc:1242
 msgid "Trade Offer"
 msgstr "Tairgse-mhalairt"
 
-#: ../../../../src/logic/game.cc:1246
+#: ../../../../src/logic/game.cc:1244
 msgid "This market has received a new trade offer."
 msgstr "Fhuair a’ mhargaid seo tairgse airson malart ùr."
 
@@ -3195,11 +3195,11 @@ msgstr ""
 msgid "Team Change Rejected"
 msgstr ""
 
-#: ../../../../src/logic/replay.cc:94
+#: ../../../../src/logic/replay.cc:93
 msgid "Desync"
 msgstr ""
 
-#: ../../../../src/logic/replay.cc:95
+#: ../../../../src/logic/replay.cc:94
 #, c-format
 msgid ""
 "The replay has desynced and the game was paused.\n"
@@ -3405,7 +3405,7 @@ msgid ""
 " you tried to connect."
 msgstr ""
 
-#: ../../../../src/network/gameclient.cc:816
+#: ../../../../src/network/gameclient.cc:817
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
@@ -3414,35 +3414,35 @@ msgstr[1] "Tha %u thuilleadan nach eil a-rèir a chèile:\n"
 msgstr[2] "Tha %u tuilleadain nach eil a-rèir a chèile:\n"
 msgstr[3] "Tha %u tuilleadan nach eil a-rèir a chèile:\n"
 
-#: ../../../../src/network/gameclient.cc:818
+#: ../../../../src/network/gameclient.cc:819
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
 msgstr ""
 
-#: ../../../../src/network/gameclient.cc:821
+#: ../../../../src/network/gameclient.cc:822
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr ""
 
-#: ../../../../src/network/gameclient.cc:992
+#: ../../../../src/network/gameclient.cc:987
 msgid "/me ’s file failed md5 checksumming."
 msgstr "/me, cha choilean am faidhle agad an àireamh dhearbhaidh md5."
 
-#: ../../../../src/network/gameclient.cc:1034
+#: ../../../../src/network/gameclient.cc:1029
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me, dhearbhaich thu am faidhle a fhuair thu. Ged an do shoirbhich leis an àireamh dearbhaidh md5, chan urrainn dhomh am faidhle a làimhseachadh."
 
-#: ../../../../src/network/gameclient.cc:1355
+#: ../../../../src/network/gameclient.cc:1350
 msgid "Disconnected"
 msgstr "Gun cheangal"
 
-#: ../../../../src/network/gameclient.cc:1356
+#: ../../../../src/network/gameclient.cc:1351
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -3564,7 +3564,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Cha b’ urrainn dha Widelands frithealaiche a cur gu dol.\n’S dòcha gu bheil pròiseas eile a’ ruith frithealaiche air a’ phort againn mar-thà."
 
-#: ../../../../src/network/gamehost.cc:1922
+#: ../../../../src/network/gamehost.cc:1919
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3795,12 +3795,12 @@ msgid ""
 "request in time."
 msgstr "Chaidh an ceangal agad ris a’ mheata-fhrithealaiche a bhriseadh oir cha do fhreagair thu do dh’iarrtas PING ri àm."
 
-#: ../../../../src/network/net_addons.cc:861
+#: ../../../../src/network/net_addons.cc:855
 #, c-format
 msgid "Sending metadata for %s"
 msgstr ""
 
-#: ../../../../src/network/net_addons.cc:906
+#: ../../../../src/network/net_addons.cc:897
 #, c-format
 msgid "Uploading %s"
 msgstr ""

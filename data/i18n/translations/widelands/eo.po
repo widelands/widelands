@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-10-28 03:02+0000\n"
+"POT-Creation-Date: 2024-10-31 02:59+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Raúl Contreras, 2024\n"
 "Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/language/eo/)\n"
@@ -1454,7 +1454,7 @@ msgid ""
 msgstr "Ĉi tiu mapo estis aŭtomate generita de la Hazarda Mapgenerilo de Widelands."
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:747
-#: ../../../../src/network/gamehost.cc:1663
+#: ../../../../src/network/gamehost.cc:1660
 #, c-format
 msgid "Computer %u"
 msgstr "Komputilo %u"
@@ -2277,11 +2277,11 @@ msgstr "Widelands ne povis komenci la ludon, ĉar la ludanto %u ne havas komenca
 msgid "Initializing…"
 msgstr "Iniciigante..."
 
-#: ../../../../src/logic/game.cc:1244
+#: ../../../../src/logic/game.cc:1242
 msgid "Trade Offer"
 msgstr "Komerca Oferto"
 
-#: ../../../../src/logic/game.cc:1246
+#: ../../../../src/logic/game.cc:1244
 msgid "This market has received a new trade offer."
 msgstr "Ĉi tiu merkato ricevis novan komercan ofertojn."
 
@@ -2299,45 +2299,45 @@ msgstr "Dosiero sukcese konservita!"
 #: ../../../../src/logic/generic_save_handler.cc:228
 #, c-format
 msgid "Backup file ‘%s’ could not be deleted."
-msgstr ""
+msgstr "La sekurkopio dosiero \"%s\" ne povis esti forigita."
 
 #: ../../../../src/logic/generic_save_handler.cc:232
 #, c-format
 msgid "Directory ‘%s’ could not be created!"
-msgstr ""
+msgstr "La dosierujo \"%s\" ne povis esti kreita!"
 
 #: ../../../../src/logic/generic_save_handler.cc:236
 #, c-format
 msgid "File ‘%s’ could not be removed!"
-msgstr ""
+msgstr "La dosiero \"%s\" ne povis esti forigita!"
 
 #: ../../../../src/logic/generic_save_handler.cc:237
 msgid "Try saving under a different name!"
-msgstr ""
+msgstr "Provu konservi sub alia nomo!"
 
 #: ../../../../src/logic/generic_save_handler.cc:242
 #, c-format
 msgid "Error writing data to file ‘%s’!"
-msgstr ""
+msgstr "Eraro skribante datumojn en la dosieron \"%s\"!"
 
 #: ../../../../src/logic/generic_save_handler.cc:249
 msgid "Saved file may be corrupt!"
-msgstr ""
+msgstr "Konservita dosiero eble estas korupta!"
 
 #: ../../../../src/logic/generic_save_handler.cc:256
 #, c-format
 msgid "File ‘%s’ could not be restored!"
-msgstr ""
+msgstr "La dosiero \"%s\" ne povis esti restarigita!"
 
 #: ../../../../src/logic/generic_save_handler.cc:257
 #, c-format
 msgid "Backup file ‘%s’ will be available for some time."
-msgstr ""
+msgstr "La sekurkopia dosiero \"%s\" estos disponebla dum iom da tempo."
 
 #: ../../../../src/logic/generic_save_handler.cc:266
 #, c-format
 msgid "File ‘%s’ was restored from backup."
-msgstr ""
+msgstr "La dosiero \"%s\" ne povis esti forigita!"
 
 #: ../../../../src/logic/generic_save_handler.cc:273
 msgid "An unexpected error occurred:"
@@ -2360,7 +2360,7 @@ msgstr "Dezerto"
 
 #: ../../../../src/logic/map.h:234
 msgid "No description defined"
-msgstr "Nenia priskribo disponebla"
+msgstr "Neniu priskribo difinita"
 
 #: ../../../../src/logic/map_objects/immovable.cc:509
 #: ../../../../src/logic/map_objects/tribes/constructionsite.cc:169
@@ -3175,11 +3175,11 @@ msgstr ""
 msgid "Team Change Rejected"
 msgstr ""
 
-#: ../../../../src/logic/replay.cc:94
+#: ../../../../src/logic/replay.cc:93
 msgid "Desync"
 msgstr "Malsinkronigi"
 
-#: ../../../../src/logic/replay.cc:95
+#: ../../../../src/logic/replay.cc:94
 #, c-format
 msgid ""
 "The replay has desynced and the game was paused.\n"
@@ -3385,42 +3385,42 @@ msgid ""
 " you tried to connect."
 msgstr ""
 
-#: ../../../../src/network/gameclient.cc:816
+#: ../../../../src/network/gameclient.cc:817
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../../../src/network/gameclient.cc:818
+#: ../../../../src/network/gameclient.cc:819
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
 msgstr ""
 
-#: ../../../../src/network/gameclient.cc:821
+#: ../../../../src/network/gameclient.cc:822
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr ""
 
-#: ../../../../src/network/gameclient.cc:992
+#: ../../../../src/network/gameclient.cc:987
 msgid "/me ’s file failed md5 checksumming."
 msgstr ""
 
-#: ../../../../src/network/gameclient.cc:1034
+#: ../../../../src/network/gameclient.cc:1029
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr ""
 
-#: ../../../../src/network/gameclient.cc:1355
+#: ../../../../src/network/gameclient.cc:1350
 msgid "Disconnected"
 msgstr ""
 
-#: ../../../../src/network/gameclient.cc:1356
+#: ../../../../src/network/gameclient.cc:1351
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -3542,7 +3542,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr ""
 
-#: ../../../../src/network/gamehost.cc:1922
+#: ../../../../src/network/gamehost.cc:1919
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3769,12 +3769,12 @@ msgid ""
 "request in time."
 msgstr ""
 
-#: ../../../../src/network/net_addons.cc:861
+#: ../../../../src/network/net_addons.cc:855
 #, c-format
 msgid "Sending metadata for %s"
 msgstr ""
 
-#: ../../../../src/network/net_addons.cc:906
+#: ../../../../src/network/net_addons.cc:897
 #, c-format
 msgid "Uploading %s"
 msgstr ""
