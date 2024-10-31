@@ -29,9 +29,9 @@
 
 #include "ai/computer_player.h"
 #include "ai/defaultai.h"
+#include "base/crypto.h"
 #include "base/i18n.h"
 #include "base/log.h"
-#include "base/md5.h"
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "build_info.h"
@@ -257,7 +257,7 @@ struct Client {
 	//                  Unify this and replace with PlayerSlot or Widelands::PlayerNumber
 	int16_t usernum;
 	std::string build_id;
-	Md5Checksum syncreport;
+	crypto::MD5Checksum syncreport;
 	bool syncreport_arrived;
 	Time time;  // last time report
 	uint32_t desiredspeed;
@@ -320,7 +320,7 @@ struct GameHostImpl {
 	/// \c true if a syncreport is currently in flight
 	bool syncreport_pending{false};
 	Time syncreport_time{0U};
-	Md5Checksum syncreport;
+	crypto::MD5Checksum syncreport;
 	bool syncreport_arrived{false};
 
 	explicit GameHostImpl(GameHost* const h) : participants(nullptr), chat(h), hp(h), npsb(&hp) {
@@ -613,7 +613,7 @@ void GameHost::run_callback() {
 		init_computer_players();
 		game_->run(d->settings.savegame ? Widelands::Game::StartGameType::kSaveGame :
 		           d->settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
-                                        Widelands::Game::StartGameType::kMap,
+		                                  Widelands::Game::StartGameType::kMap,
 		           script_to_run_, "nethost");
 
 		// if this is an internet game, tell the metaserver that the game is done.
@@ -822,9 +822,9 @@ void GameHost::send(ChatMessage msg) {
 						}
 					}
 				}  // end team is not "no team"
-			}     // end team is not spectator
-		}        // end team message
-	}           // end directed message
+			}  // end team is not spectator
+		}  // end team message
+	}  // end directed message
 
 	// Assemble message packet
 	SendPacket packet;
@@ -1136,10 +1136,7 @@ void GameHost::set_map(const std::string& mapname,
 		std::vector<char> complete(file_->bytes);
 		fr.set_file_pos(FileRead::Pos(0));
 		fr.data_complete(complete.data(), file_->bytes);
-		SimpleMD5Checksum md5sum;
-		md5sum.data(complete.data(), file_->bytes);
-		md5sum.finish_checksum();
-		file_->md5sum = md5sum.get_checksum().str();
+		file_->md5sum = crypto::md5_str(complete.data(), file_->bytes);
 	} else {
 		// reset previously offered map / saved game
 		file_.reset(nullptr);
@@ -2024,8 +2021,8 @@ void GameHost::update_network_speed() {
 		}
 
 		d->networkspeed = (speeds.size() % 2) != 0u ?
-                           speeds.at(speeds.size() / 2) :
-                           (speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
+		                     speeds.at(speeds.size() / 2) :
+		                     (speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
 
 		if (d->networkspeed > std::numeric_limits<uint16_t>::max()) {
 			d->networkspeed = std::numeric_limits<uint16_t>::max();
@@ -2352,7 +2349,7 @@ void GameHost::handle_syncreport(uint32_t const client_num, Client& client, Recv
 		throw DisconnectException("UNEXPECTED_SYNC_REP");
 	}
 	Time time(r.unsigned_32());
-	r.data(client.syncreport.data, 16);
+	r.data(client.syncreport.value.data(), client.syncreport.value.size());
 	client.syncreport_arrived = true;
 	receive_client_time(client_num, time);
 	check_sync_reports();

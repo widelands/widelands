@@ -1142,7 +1142,7 @@ void LuaDescriptions::do_modify_worker(lua_State* L,
 		worker_descr.set_becomes(descrs, luaL_checkstring(L, 5));
 	} else if (property == "target_quantity") {
 		worker_descr.set_default_target_quantity(lua_isnil(L, 5) ? Widelands::kInvalidWare :
-                                                                 luaL_checkuint32(L, 5));
+		                                                           luaL_checkuint32(L, 5));
 	} else if (property == "preciousness") {
 		worker_descr.set_preciousness(luaL_checkstring(L, 5), luaL_checkuint32(L, 6));
 	} else if (property == "programs") {
@@ -1380,8 +1380,8 @@ void LuaDescriptions::do_modify_ware(lua_State* L,
 
 	if (property == "target_quantity") {
 		ware_descr.set_default_target_quantity(luaL_checkstring(L, 5), lua_isnil(L, 6) ?
-                                                                        Widelands::kInvalidWare :
-                                                                        luaL_checkuint32(L, 6));
+		                                                                  Widelands::kInvalidWare :
+		                                                                  luaL_checkuint32(L, 6));
 	} else if (property == "preciousness") {
 		ware_descr.set_preciousness(luaL_checkstring(L, 5), luaL_checkuint32(L, 6));
 	} else {

@@ -7,13 +7,14 @@
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010-2011
 # GunChleoc, 2014
+# Raúl Contreras, 2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-08-03 02:40+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: fenris <fenris@folksprak.org>, 2017\n"
+"Last-Translator: Raúl Contreras, 2024\n"
 "Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/language/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +26,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:8
 msgctxt "amazons_building"
 msgid "Fortification"
-msgstr ""
+msgstr "Fortikaĵo"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:32
@@ -2365,7 +2366,7 @@ msgstr "muelanta skorzoneron."
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Quarry"
-msgstr "Ŝton-minejo"
+msgstr "Ŝtonminejo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:36
@@ -2982,7 +2983,7 @@ msgstr "faranta bieron"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:8
 msgctxt "barbarians_building"
 msgid "Quarry"
-msgstr "Ŝton-minejo"
+msgstr "Ŝtonminejo"
 
 #: ../../../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:62
 msgctxt "barbarians_building"
@@ -3399,7 +3400,7 @@ msgstr "bredanta porkojn"
 #: ../../../../data/tribes/buildings/productionsites/empire/quarry/init.lua:8
 msgctxt "empire_building"
 msgid "Quarry"
-msgstr "Ŝton-minejo"
+msgstr "Ŝtonminejo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/quarry/init.lua:67
@@ -4004,7 +4005,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:8
 msgctxt "frisians_building"
 msgid "Quarry"
-msgstr ""
+msgstr "Ŝtonminejo"
 
 #: ../../../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:62
 msgctxt "frisians_building"
