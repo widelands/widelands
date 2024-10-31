@@ -500,6 +500,16 @@ install (
   COMPONENT CoreVersionFile
 )
 
+# TODO(Nordfriese): Use this consistently in places in code that use various other tests for endianness
+include(TestBigEndian)
+TEST_BIG_ENDIAN(IS_BIG_ENDIAN)
+if(IS_BIG_ENDIAN)
+  message(STATUS "Byte order is big-endian")
+  ADD_DEFINITIONS(-DWORDS_BIGENDIAN)
+else()
+  message(STATUS "Byte order is little-endian")
+endif()
+
 # Installation.
 add_subdirectory(doc)
 add_subdirectory(src)

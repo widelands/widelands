@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-10-05 02:52+0000\n"
+"POT-Creation-Date: 2024-10-31 02:59+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2024\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -666,13 +666,13 @@ msgstr "Valóban ki szeretnél lépni a térképszerkesztőből?"
 #: ../../../../src/logic/addons.cc:48 ../../../../src/ui_basic/dropdown.cc:358
 #: ../../../../src/ui_basic/dropdown.cc:360
 #: ../../../../src/ui_fsmenu/addons/contact.cc:81
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1381
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1392
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1463
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1471
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1519
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1598
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1670
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1382
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1393
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1464
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1472
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1520
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1599
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1671
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:104
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:292
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:565
@@ -1460,7 +1460,7 @@ msgid ""
 msgstr "Ez egy, a Widelands Véletlen Térkép Generátor által automatikusan létrehozott térkép."
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:747
-#: ../../../../src/network/gamehost.cc:1663
+#: ../../../../src/network/gamehost.cc:1660
 #, c-format
 msgid "Computer %u"
 msgstr "%u. számítógép"
@@ -2283,11 +2283,11 @@ msgstr "A Widelands nem tudja elindítani a játékot, mert a %u játékosnak ni
 msgid "Initializing…"
 msgstr "Játék indítása…"
 
-#: ../../../../src/logic/game.cc:1244
+#: ../../../../src/logic/game.cc:1242
 msgid "Trade Offer"
 msgstr "Kereskedelmi ajánlat"
 
-#: ../../../../src/logic/game.cc:1246
+#: ../../../../src/logic/game.cc:1244
 msgid "This market has received a new trade offer."
 msgstr "Ez a piac egy új kereskedelmi ajánlatot kapott."
 
@@ -3181,11 +3181,11 @@ msgstr "Csapatváltás elfogadva"
 msgid "Team Change Rejected"
 msgstr "Csapatváltás elutasítva"
 
-#: ../../../../src/logic/replay.cc:94
+#: ../../../../src/logic/replay.cc:93
 msgid "Desync"
 msgstr "Szinkronizációs hiba"
 
-#: ../../../../src/logic/replay.cc:95
+#: ../../../../src/logic/replay.cc:94
 #, c-format
 msgid ""
 "The replay has desynced and the game was paused.\n"
@@ -3391,42 +3391,42 @@ msgid ""
 " you tried to connect."
 msgstr "A Widelands nem tud kapcsolatot létesíteni a megadott címmel. Vagy nem érhető el Widelands kiszolgáló a(z) %u porton, vagy a kiszolgáló leállt a csatlakozás közben."
 
-#: ../../../../src/network/gameclient.cc:816
+#: ../../../../src/network/gameclient.cc:817
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] "%u bővítményütközés:\n"
 msgstr[1] "%u bővítményütközés:\n"
 
-#: ../../../../src/network/gameclient.cc:818
+#: ../../../../src/network/gameclient.cc:819
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
 msgstr "%1$s\n• a gazdagép által igényelt ‘%2$s’ nem található"
 
-#: ../../../../src/network/gameclient.cc:821
+#: ../../../../src/network/gameclient.cc:822
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n• ‘%2$s’ %3$s verziója van telepítve, de a gazdagép %4$s verziót használ"
 
-#: ../../../../src/network/gameclient.cc:992
+#: ../../../../src/network/gameclient.cc:987
 msgid "/me ’s file failed md5 checksumming."
 msgstr "/me fájljának nem sikerült az md5 ellenőrzése."
 
-#: ../../../../src/network/gameclient.cc:1034
+#: ../../../../src/network/gameclient.cc:1029
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me ellenőrizte a kapott fájlt. Bár az md5 ellenőrzés sikeres volt, a fájl nem kezelhető."
 
-#: ../../../../src/network/gameclient.cc:1355
+#: ../../../../src/network/gameclient.cc:1350
 msgid "Disconnected"
 msgstr "Kapcsolat bontva"
 
-#: ../../../../src/network/gameclient.cc:1356
+#: ../../../../src/network/gameclient.cc:1351
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -3548,7 +3548,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "A Widelands nem tudott kiszolgálót indítani.\nLehet hogy már fut egy folyamat ezen a porton."
 
-#: ../../../../src/network/gamehost.cc:1922
+#: ../../../../src/network/gamehost.cc:1919
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3775,12 +3775,12 @@ msgid ""
 "request in time."
 msgstr "Kapcsolat bontva a metakiszolgáló felől, mert nem válaszoltál időben a PING kérésre."
 
-#: ../../../../src/network/net_addons.cc:861
+#: ../../../../src/network/net_addons.cc:855
 #, c-format
 msgid "Sending metadata for %s"
 msgstr ""
 
-#: ../../../../src/network/net_addons.cc:906
+#: ../../../../src/network/net_addons.cc:897
 #, c-format
 msgid "Uploading %s"
 msgstr ""
@@ -4845,50 +4845,50 @@ msgstr "Böngésző"
 msgid "Browse (%u)"
 msgstr "Böngésző (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1160
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1161
 #, c-format
 msgid "Upgrade all (%u)"
 msgstr "Az összes frissítése (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1163
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1164
 msgid "No upgrades are available for your installed add-ons"
 msgstr "Nincsenek elérhető frissítések a telepített bővítményekhez"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1165
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1166
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
 msgstr[0] "Frissítsd az alábbi %u bővítményt:"
 msgstr[1] "Frissítsd az alábbi %u bővítményt:"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1170
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1171
 #, c-format
 msgid "• %s"
 msgstr "• %s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1206
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1207
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which could not be found"
 msgstr "• a(z) ‘%1$s’ által igényelt ‘%2$s’ nem található"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1211
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1212
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is disabled"
 msgstr "• a(z) ‘%1$s’ által igényelt ‘%2$s’ le van tiltva"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1218
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1219
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
 msgstr "• a(z) ‘%1$s’ által igényelt ‘%2$s’ az igénylő alá van sorolva"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1246
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1247
 #, c-format
 msgid ""
 "• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
 msgstr "• a(z) ‘%1$s’ előbb a(z) ‘%2$s’-t utána a(z) ‘%3$s’-t igényli, de azok rossz sorrendben vannak felsorolva"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1262
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1263
 #, c-format
 msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
@@ -4896,67 +4896,67 @@ msgid ""
 "%s"
 msgstr "Az egyik aktív bővítmény hibás. Nem indítható játék a jelenlegi beállításokkal.\nA hibaüzenet:\n%s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1279
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1280
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
 msgstr[0] "%u függőségi hiba"
 msgstr[1] "%u függőségi hiba"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1281
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1282
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
 msgstr "A bővítmények függőségi hibái hibás működést okozhatnak, vagy meghiúsíthatják a mentett játékok vagy a térképek betöltését."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1382
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1383
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
 msgstr "A(z) „%1$s” bővítményt nem lehet feltölteni, mert a verziója (%2$s) nem újabb, mint a kiszolgálón található (%3$s)."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1393
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1394
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
 msgstr "A(z) „%1$s” bővítményt nem lehet feltölteni, mert más kategóriában van (%2$s), mint a kiszolgálón található (%3$s)."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1404
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1405
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:54
 msgid "Upload"
 msgstr "Feltöltés"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1405
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1406
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
 msgstr "Biztosan fel szeretnéd tölteni a(z) „%s” bővítményt a kiszolgálóra?"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1415
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1416
 #, c-format
 msgid "Uploading ‘%s’…"
 msgstr "„%s” feltöltése…"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1422
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1505
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1567
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1423
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1506
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1568
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1445
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1446
 #, c-format
 msgid "‘%s’"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1453
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1454
 #, c-format
 msgid ""
 "The add-on ‘%s’ may not be uploaded to the server because the following "
 "filenames contained in the add-on are not allowed:"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1457
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1458
 msgid ""
 "Filenames may only contain alphanumeric characters (A-Z, a-z, 0-9) and "
 "simple punctuation (period, hyphen, and underscore; not multiple periods). "
@@ -4964,7 +4964,7 @@ msgid ""
 "exceed 80 characters."
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1472
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1473
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be uploaded to the server.\n"
@@ -4973,12 +4973,12 @@ msgid ""
 "%2$s"
 msgstr "A(z) „%1$s” bővítményt nem sikerült feltölteni a kiszolgálóra.\n\nA hibaüzenet:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1485
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1486
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr "„%s” letöltése…"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1521
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1522
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -4987,7 +4987,7 @@ msgid ""
 "%2$s"
 msgstr "A(z) „%1$s” bővítményt nem sikerült letölteni. A bővítmény telepítése/frissítése kimarad.\n\nHibaüzenet:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1599
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1600
 #, c-format
 msgid ""
 "The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations will be skipped.\n"
@@ -4996,7 +4996,7 @@ msgid ""
 "%2$s"
 msgstr "A(z) „%1$s” bővítmény fordításait nem sikerült letölteni. A bővítmény fordításainak telepítése/frissítése kimarad.\n\nA hibaüzenet:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1671
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1672
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr "Az igényelt %s bővítmény nem található a kiszolgálón."
