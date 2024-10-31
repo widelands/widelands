@@ -317,7 +317,7 @@ msgstr "Montri / Kaŝi"
 
 #: ../../../../src/editor/editorinteractive.cc:145
 msgid "Tool size"
-msgstr "Grandeco de ilo"
+msgstr "Grandeco de la ilo"
 
 #: ../../../../src/editor/editorinteractive.cc:160
 #: ../../../../src/wlapplication_options.cc:476
@@ -408,7 +408,7 @@ msgstr "Hazarda alteco"
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:312
 msgid "Set the terrain height to random values"
-msgstr "Agordas la terenaltecon al hazardaj valoroj"
+msgstr "Agordi la terenaltecon al hazardaj valoroj"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:319
@@ -1655,19 +1655,19 @@ msgstr "Alklaku sur la mapo por pliigi la kvanton de la elektita resurso, aŭ pr
 msgid ""
 "Ctrl + Click on the map to set the amount of the selected resource. This "
 "will replace already set resources."
-msgstr ""
+msgstr "Premu Ctrl dum alklakas sur la mapo por agordi la kvanton de la elektita resurso. Tio anstataŭigos jam agorditajn resursojn."
 
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:32
 msgid "Random Height Options"
-msgstr "Hazardaj alt-agordoj"
+msgstr "Hazardaj altecopcioj"
 
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:53
 msgid "Minimum height:"
-msgstr "Minimuma alto:"
+msgstr "Minimuma alteco:"
 
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:66
 msgid "Maximum height:"
-msgstr "Maksimuma alto:"
+msgstr "Maksimuma alteco:"
 
 #. * TRANSLATORS: Editor random height access key. *
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:84
@@ -1675,11 +1675,11 @@ msgstr "Maksimuma alto:"
 msgid ""
 "Click on the map to set terrain height to a random value within the "
 "specified range"
-msgstr ""
+msgstr "Alklaku sur la mapo por agordi la altecon de la tereno al hazarda valoro ene de la specifita intervalo"
 
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:106
 msgid "Fixed height"
-msgstr "Fiksa alto"
+msgstr "Fiksita alteco"
 
 #. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
 #. italics)
@@ -1689,35 +1689,35 @@ msgstr "Fiksa alto"
 #: ../../../../src/wui/stock_menu.cc:36
 #, c-format
 msgid "%1$s %2$s"
-msgstr ""
+msgstr "%1$s %2$s"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:51
 #, c-format
 msgid "%1$s (removable by e.g. placing roads)"
-msgstr ""
+msgstr "%1$s (forigebla, ekzemple per lokado de vojoj)"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:54
 #, c-format
 msgid "%1$s (needs a small building plot)"
-msgstr ""
+msgstr "%1$s (bezonas malgrandan konstruejon)"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:57
 #, c-format
 msgid "%1$s (needs a medium building plot)"
-msgstr ""
+msgstr "%1$s  (bezonas mezan konstruejon)"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:60
 #, c-format
 msgid "%1$s (needs a big building plot)"
-msgstr ""
+msgstr "%1$s (bezonas grandan konstruejon)"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:101
 msgid "Automatically place the trees which grow best on the terrain"
-msgstr ""
+msgstr "Aŭtomate loki la arbojn, kiuj plej bone kreskas sur la tereno"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:117
 msgid "Automatic Immovable Placement"
-msgstr ""
+msgstr "Aŭtomata Nemoveblaĵa Lokado"
 
 #: ../../../../src/editor/ui_menus/tool_resize_options_menu.cc:34
 msgid "Resize"
@@ -1730,7 +1730,7 @@ msgid ""
 " the east/south of the selected point. When shrinking the map, the desired "
 "number of columns/rows will be removed from the east/south of the splitting "
 "location."
-msgstr ""
+msgstr "Elektu la novan grandecon de la mapo, kaj poste alklaku sur la mapo por dividi ĝin ĉe la dezirata loko. Kiam oni pliigas la grandecon de la mapo, novaj kolumnoj/vicoj estos enmetitaj oriente/sude de la elektita punkto. Kiam vi malpliigas la mapon, la dezirata nombro da kolumnoj/vicoj estos forigita oriente/sude de la dividloko."
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
@@ -1748,27 +1748,27 @@ msgstr "%1%: %2%"
 #: ../../../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:121
 msgid ""
 "Click to restore, Shift + Click to delete, and Ctrl + Click to pin an item."
-msgstr ""
+msgstr "Alklaku por restaŭri, premu Shift dum vi alklakas por forigi, kaj premu Ctrl dum vi alklakas por fiksi elementon."
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:39
 msgid "Tool Size"
-msgstr "Grando de iloj"
+msgstr "Grandeco de la ilo"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:51
 msgid "Size:"
-msgstr ""
+msgstr "Grandeco:"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:64
 msgid "Gaps:"
-msgstr ""
+msgstr "Spacoj:"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:67
 msgid "Radius of the active tool"
-msgstr ""
+msgstr "Radio de la aktiva ilo"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:68
 msgid "Amount of random gaps in the tool’s area"
-msgstr ""
+msgstr "Kvanto de hazardaj spacoj en la areo de la ilo"
 
 #: ../../../../src/game_io/game_loader.cc:69
 #, c-format
@@ -1780,7 +1780,7 @@ msgstr "Ŝargante ludon: %1$s (%2$u/%3$d)"
 #: ../../../../src/map_io/map_saver.cc:100
 #: ../../../../src/map_io/widelands_map_loader.cc:212
 msgid "Elemental data"
-msgstr ""
+msgstr "Elementaj datumoj"
 
 #: ../../../../src/game_io/game_loader.cc:135
 #: ../../../../src/game_io/game_saver.cc:82
@@ -1790,12 +1790,12 @@ msgstr "Ekonomioj"
 #: ../../../../src/game_io/game_loader.cc:142
 #: ../../../../src/game_io/game_saver.cc:89
 msgid "AI"
-msgstr ""
+msgstr "AI"
 
 #: ../../../../src/game_io/game_loader.cc:149
 #: ../../../../src/game_io/game_saver.cc:96
 msgid "Command queue"
-msgstr ""
+msgstr "Komanda vico"
 
 #: ../../../../src/game_io/game_loader.cc:157
 #: ../../../../src/map_io/map_saver.cc:146
@@ -1809,7 +1809,7 @@ msgstr "Mesaĝoj"
 #: ../../../../src/game_io/game_loader.cc:175
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:193
 msgid "Finishing"
-msgstr ""
+msgstr "Finiĝante"
 
 #: ../../../../src/game_io/game_saver.cc:50
 #, c-format
@@ -1818,11 +1818,11 @@ msgstr "Konservante ludon: %1$s (%2$d/%3$d)"
 
 #: ../../../../src/game_io/game_saver.cc:52
 msgid "Autosaving game…"
-msgstr "Aŭtomatkonserva ludon..."
+msgstr "Aŭtomatkonservante ludon..."
 
 #: ../../../../src/game_io/game_saver.cc:103
 msgid "Interactive player"
-msgstr ""
+msgstr "Interaktiva ludanto"
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1831,7 +1831,7 @@ msgstr ""
 msgid ""
 "Widelands won't work because we were unable to detect the shading language "
 "version."
-msgstr ""
+msgstr "Widelands ne funkcios, ĉar ni ne povis detekti la version de la ombradlingvo."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1841,7 +1841,7 @@ msgstr ""
 msgid ""
 "There is an unknown problem with reading the information from the graphics "
 "driver."
-msgstr ""
+msgstr "Estas nekonata problemo dum legado de la informo el la grafikpelilo."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1849,7 +1849,7 @@ msgstr ""
 #: ../../../../src/graphic/gl/initialize.cc:193
 msgid ""
 "Widelands won't work because we were unable to detect the OpenGL version."
-msgstr ""
+msgstr "Widelands ne funkcios, ĉar ni ne povis detekti la version de OpenGL."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -1857,7 +1857,7 @@ msgstr ""
 #: ../../../../src/graphic/gl/initialize.cc:224
 #: ../../../../src/graphic/gl/initialize.cc:244
 msgid "Widelands won’t work because your graphics driver is too old."
-msgstr ""
+msgstr "Widelands ne funkcios, ĉar la grafikpelilo estas tro malnova."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -1865,7 +1865,7 @@ msgstr ""
 #: ../../../../src/graphic/gl/initialize.cc:227
 #, c-format
 msgid "The %1$s version needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "La %1$s versio devas esti versio %2$u.%3$u aŭ pli nova."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -1873,7 +1873,7 @@ msgstr ""
 #: ../../../../src/graphic/gl/initialize.cc:247
 #, c-format
 msgid "The %1$s needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "La %1$s devas esti versio %2$u.%3$u aŭ pli nova."
 
 #: ../../../../src/graphic/gl/initialize.cc:263
 msgid "OpenGL"
@@ -1881,17 +1881,17 @@ msgstr "OpenGL"
 
 #: ../../../../src/graphic/gl/initialize.cc:310
 msgid "Shading Language"
-msgstr ""
+msgstr "Ombradlingvo"
 
 #: ../../../../src/graphic/text/rt_render.cc:1421
 msgid "Copy link to clipboard"
-msgstr ""
+msgstr "Kopii ligilon al poŝo-memoro"
 
 #: ../../../../src/graphic/text_layout.cc:278
 #, c-format
 msgctxt "definitionterm"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces the
@@ -1899,7 +1899,7 @@ msgstr ""
 #: ../../../../src/io/filesystem/illegal_filename_check.cc:69
 msgctxt "illegal_filename_characters"
 msgid "blank space"
-msgstr ""
+msgstr "blanka spaco"
 
 #. * TRANSLATORS: Tooltip entry for characters in illegal filenames.
 #. *  %s is a list of illegal characters
@@ -1907,7 +1907,7 @@ msgstr ""
 #, c-format
 msgctxt "illegal_filename_characters"
 msgid "%s at the start of the filename"
-msgstr ""
+msgstr "%s  je la komenco de la dosiernomo"
 
 #. * TRANSLATORS: Tooltip entry for characters in illegal filenames.
 #. * %s is a list of illegal characters
@@ -1915,14 +1915,14 @@ msgstr ""
 #, c-format
 msgctxt "illegal_filename_characters"
 msgid "%s anywhere in the filename"
-msgstr ""
+msgstr "%s ie ajn en la dosiernomo"
 
 #. * TRANSLATORS: Tooltip header for characters in illegal filenames.
 #. * This is followed by a list of bullet points
 #: ../../../../src/io/filesystem/illegal_filename_check.cc:93
 msgctxt "illegal_filename_characters"
 msgid "The following characters are not allowed:"
-msgstr ""
+msgstr "La sekvaj signoj ne estas permesitaj:"
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -1954,7 +1954,7 @@ msgstr "malŝaltita"
 
 #: ../../../../src/logic/addons.cc:50
 msgid "Tribes"
-msgstr "Gentoj"
+msgstr "Triboj"
 
 #: ../../../../src/logic/addons.cc:52
 msgid "World"
@@ -1966,7 +1966,7 @@ msgstr "Skripto"
 
 #: ../../../../src/logic/addons.cc:56
 msgid "Map Set"
-msgstr ""
+msgstr "Maparo"
 
 #. * TRANSLATORS: Header for campaign name
 #: ../../../../src/logic/addons.cc:61
@@ -1984,16 +1984,16 @@ msgstr "Komenca Kondiĉo"
 
 #: ../../../../src/logic/addons.cc:72
 msgid "UI Plugin"
-msgstr ""
+msgstr "UI Kromaĵo"
 
 #: ../../../../src/logic/addons.cc:112
 #, c-format
 msgid "%1$s.%2$u"
-msgstr ""
+msgstr "%1$s.%2$u"
 
 #: ../../../../src/logic/addons.cc:209
 msgid "No conflicts"
-msgstr ""
+msgstr "Sen konfliktoj"
 
 #: ../../../../src/logic/addons.cc:214
 #, c-format
@@ -2009,15 +2009,15 @@ msgstr "%1$s, %2$s (atendita version %3$s, trovita %4$s)"
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u kromprogramo kun malĝusta versio: %2$s"
+msgstr[1] "%1$u kromprogramoj kun malĝusta versio: %2$s"
 
 #: ../../../../src/logic/addons.cc:239
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Mankas %1$u kromprogramo: %2$s "
+msgstr[1] "Mankas %1$u kromprogramoj: %2$s"
 
 #: ../../../../src/logic/addons.cc:247
 #, c-format
@@ -2032,87 +2032,87 @@ msgstr "%1$s, %2$s (mankas)"
 #: ../../../../src/logic/addons.cc:257
 #, c-format
 msgid "%1$s and %2$s: %3$s"
-msgstr ""
+msgstr "%1$s kaj %2$s: %3$s"
 
 #: ../../../../src/logic/addons.cc:258
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Mankas %u kromprogramo"
+msgstr[1] "Mankas %u kromprogramoj"
 
 #: ../../../../src/logic/addons.cc:260
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u kromprogramo kun malĝusta versio"
+msgstr[1] "%u kromprogramoj kun malĝusta versio"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../../../src/logic/addons.cc:271
 msgid "None"
-msgstr "Nenio"
+msgstr "Neniu"
 
 #: ../../../../src/logic/addons.cc:275
 #, c-format
 msgid "%1$s<br>• %2$s (version %3$s)"
-msgstr ""
+msgstr "%1$s<br>• %2$s (versio %3$s)"
 
 #: ../../../../src/logic/addons.cc:305
 msgid "No game-relevant add-ons in use."
-msgstr ""
+msgstr "Neniuj ludsignifaj kromprogramoj estas uzataj."
 
 #: ../../../../src/logic/addons.cc:310
 #, c-format
 msgid "%u game-relevant add-on in use:"
 msgid_plural "%u game-relevant add-ons in use:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u ludsignifa kromprogramo estas uzataj:"
+msgstr[1] "%u ludsignifaj kromprogramoj estas uzataj:"
 
 #. * TRANSLATORS: "12 steps northwest of Port1"
 #: ../../../../src/logic/detected_port_space.cc:52
 msgid "northwest"
-msgstr ""
+msgstr "nordokcidente"
 
 #. * TRANSLATORS: "12 steps northeast of Port1"
 #: ../../../../src/logic/detected_port_space.cc:56
 msgid "northeast"
-msgstr ""
+msgstr "nordoriente"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../../../src/logic/detected_port_space.cc:60
 msgid "southwest"
-msgstr ""
+msgstr "sudokcidente"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../../../src/logic/detected_port_space.cc:64
 msgid "southeast"
-msgstr ""
+msgstr "sudoriente"
 
 #. * TRANSLATORS: "12 steps north of Port1"
 #: ../../../../src/logic/detected_port_space.cc:68
 msgid "north"
-msgstr ""
+msgstr "norde"
 
 #. * TRANSLATORS: "12 steps south of Port1"
 #: ../../../../src/logic/detected_port_space.cc:72
 msgid "south"
-msgstr ""
+msgstr "sude"
 
 #. * TRANSLATORS: "12 steps west of Port1"
 #: ../../../../src/logic/detected_port_space.cc:76
 msgid "west"
-msgstr ""
+msgstr "okcidente"
 
 #. * TRANSLATORS: "12 steps east of Port1"
 #: ../../../../src/logic/detected_port_space.cc:80
 msgid "east"
-msgstr ""
+msgstr "oriente"
 
 #: ../../../../src/logic/detected_port_space.cc:88
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s"
-msgstr ""
+msgstr "Senposedata havena spaco malkovrita je %1$s de %2$s"
 
 #. * TRANSLATORS: "Unowned port space discovered at 1:11 by Ship2 33 steps
 #. north of
@@ -2122,13 +2122,13 @@ msgstr ""
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
 msgid_plural ""
 "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s of %5$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Senposedata havena spaco malkovrita je %1$s de %2$s, %3$u paŝon %4$s de %5$s"
+msgstr[1] "Senposedata havena spaco malkovrita je %1$s de %2$s, %3$u paŝojn %4$s de %5$s"
 
 #: ../../../../src/logic/detected_port_space.cc:101
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s"
-msgstr ""
+msgstr "Havena spaco de %1$s malkovrita je %2$s de %3$s"
 
 #. * TRANSLATORS: "Port space of Player1 discovered at 2:22 by Ship3 44 steps
 #. north
@@ -2138,63 +2138,63 @@ msgstr ""
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
 msgid_plural ""
 "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s of %6$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Havena spaco de %1$s malkovrita je %2$s de %3$s, %4$u paŝon %5$s de %6$s"
+msgstr[1] "Havena spaco de %1$s malkovrita je %2$s de %3$s, %4$u paŝojn %5$s de %6$s"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
 #: ../../../../src/logic/detected_port_space.cc:120
 msgctxt "direction"
 msgid "NW"
-msgstr ""
+msgstr "NO"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northeast.
 #: ../../../../src/logic/detected_port_space.cc:124
 msgctxt "direction"
 msgid "NE"
-msgstr ""
+msgstr "NE"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southwest.
 #: ../../../../src/logic/detected_port_space.cc:128
 msgctxt "direction"
 msgid "SW"
-msgstr ""
+msgstr "SO"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southeast.
 #: ../../../../src/logic/detected_port_space.cc:132
 msgctxt "direction"
 msgid "SE"
-msgstr ""
+msgstr "SE"
 
 #. * TRANSLATORS: This is an abbreviated direction: North.
 #: ../../../../src/logic/detected_port_space.cc:136
 msgctxt "direction"
 msgid "N"
-msgstr ""
+msgstr "N"
 
 #. * TRANSLATORS: This is an abbreviated direction: South.
 #: ../../../../src/logic/detected_port_space.cc:140
 msgctxt "direction"
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #. * TRANSLATORS: This is an abbreviated direction: West.
 #: ../../../../src/logic/detected_port_space.cc:144
 msgctxt "direction"
 msgid "W"
-msgstr ""
+msgstr "O"
 
 #. * TRANSLATORS: This is an abbreviated direction: East.
 #: ../../../../src/logic/detected_port_space.cc:148
 msgctxt "direction"
 msgid "E"
-msgstr ""
+msgstr "E"
 
 #. * TRANSLATORS: Placeholders are gametime and shipname. Keep this short.
 #: ../../../../src/logic/detected_port_space.cc:157
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s"
-msgstr ""
+msgstr "Senposedata / %1$s / %2$s"
 
 #. * TRANSLATORS: Placeholders are gametime, shipname, and distance direction
 #. port_name.
@@ -2203,7 +2203,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s / %3$u %4$s %5$s"
-msgstr ""
+msgstr "Senposedata / %1$s / %2$s / %3$u %4$s %5$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this
 #. short.
@@ -2211,7 +2211,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s"
-msgstr ""
+msgstr "%1$s / %2$s / %3$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, shipname, and "distance
 #. direction port_name.
@@ -2220,28 +2220,28 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
-msgstr ""
+msgstr "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
 
 #: ../../../../src/logic/editor_game_base.cc:236
 #, c-format
 msgid "Creating player %d…"
-msgstr "Kreanta ludanton %d…"
+msgstr "Kreante ludanton %d…"
 
 #: ../../../../src/logic/editor_game_base.cc:306
 msgid "Postloading world and tribes…"
-msgstr ""
+msgstr "Postŝarĝo de mondo kaj triboj..."
 
 #: ../../../../src/logic/editor_game_base.cc:564
 msgid "Cleaning up for loading: Map objects (1/3)"
-msgstr ""
+msgstr "Purigante por ŝarĝo: Mapobjektoj (1/3)"
 
 #: ../../../../src/logic/editor_game_base.cc:570
 msgid "Cleaning up for loading: Players (2/3)"
-msgstr ""
+msgstr "Purigante por ŝarĝo: Ludantoj (2/3)"
 
 #: ../../../../src/logic/editor_game_base.cc:573
 msgid "Cleaning up for loading: Map (3/3)"
-msgstr ""
+msgstr "Purigante por ŝarĝo: Mapo (3/3)"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
 #: ../../../../src/logic/game.cc:145
@@ -2251,31 +2251,31 @@ msgstr "Neagordita"
 #: ../../../../src/logic/game.cc:246 ../../../../src/logic/game.cc:289
 #: ../../../../src/logic/game.cc:407 ../../../../src/logic/game.cc:462
 msgid "Preloading map…"
-msgstr "Praŝarganta mapon..."
+msgstr "Antaŭŝarĝante mapon…"
 
 #: ../../../../src/logic/game.cc:345
 msgid "Initializing game…"
-msgstr "Inicializante ludon..."
+msgstr "Iniciigante ludon…"
 
 #. * TRANSLATORS: All players (plural)
 #: ../../../../src/logic/game.cc:604
 msgid "Creating player infrastructure…"
-msgstr "Kreanta ludant-instalaĵojn..."
+msgstr "Kreante infrastrukturo de ludanto…"
 
 #: ../../../../src/logic/game.cc:621 ../../../../src/logic/player.cc:258
 msgid "Missing starting position"
-msgstr "Mankas komenc-pozicio"
+msgstr "Mankas komenca pozicio"
 
 #: ../../../../src/logic/game.cc:622 ../../../../src/logic/player.cc:259
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
-msgstr "Widelands ne povis lanĉi la ludon, ĉar ludanto %u ne havas komenc-pozicion.\nVi povas aldoni komenc-pozicion mane per la Widelands-redaktilo por elimini tiun problemon."
+msgstr "Widelands ne povis komenci la ludon, ĉar la ludanto %u ne havas komencan pozicion.\nVi povas mane aldoni komencan pozicion per la redaktilo de Widelands por solvi ĉi tiun problemon."
 
 #: ../../../../src/logic/game.cc:722
 msgid "Initializing…"
-msgstr "Inicializante..."
+msgstr "Iniciigante..."
 
 #: ../../../../src/logic/game.cc:1244
 msgid "Trade Offer"
@@ -2283,18 +2283,18 @@ msgstr "Komerca Oferto"
 
 #: ../../../../src/logic/game.cc:1246
 msgid "This market has received a new trade offer."
-msgstr ""
+msgstr "Ĉi tiu merkato ricevis novan komercan ofertojn."
 
 #: ../../../../src/logic/game_data_error.cc:51
 msgid ""
 "This game was saved using an older version of Widelands and cannot be loaded"
 " anymore, or it’s a new version that can’t be handled yet."
-msgstr ""
+msgstr "Ĉi tiu ludo estis konservita uzante malnovan version de Widelands kaj ne plu povas esti ŝarĝita, aŭ ĝi estas nova versio, kiu ankoraŭ ne povas esti traktita."
 
 #: ../../../../src/logic/generic_save_handler.cc:223
 #: ../../../../src/logic/generic_save_handler.cc:227
 msgid "File successfully saved!"
-msgstr ""
+msgstr "Dosiero sukcese konservita!"
 
 #: ../../../../src/logic/generic_save_handler.cc:228
 #, c-format
