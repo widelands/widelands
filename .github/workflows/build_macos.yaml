@@ -5,6 +5,7 @@ on:
 jobs:
   macos:
     strategy:
+      fail-fast: false
       matrix:
         config: [debug, release]
         compiler: [clang]
