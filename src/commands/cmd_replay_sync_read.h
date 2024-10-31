@@ -19,14 +19,14 @@
 #ifndef WL_COMMANDS_CMD_REPLAY_SYNC_READ_H
 #define WL_COMMANDS_CMD_REPLAY_SYNC_READ_H
 
-#include "base/md5.h"
+#include "base/crypto.h"
 #include "commands/command.h"
 
 namespace Widelands {
 
 class CmdReplaySyncRead : public Command {
 public:
-	CmdReplaySyncRead(const Time& init_duetime, const Md5Checksum& hash)
+	CmdReplaySyncRead(const Time& init_duetime, const crypto::MD5Checksum& hash)
 	   : Command(init_duetime), hash_(hash) {
 	}
 
@@ -37,7 +37,7 @@ public:
 	void execute(Game& game) override;
 
 private:
-	Md5Checksum hash_;
+	crypto::MD5Checksum hash_;
 
 	static const Game* reported_desync_for_;
 };

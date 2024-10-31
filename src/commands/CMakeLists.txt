@@ -114,9 +114,9 @@ wl_library(commands
     queue_cmd_ids.h
   DEPENDS
     base
+    base_crypto
     base_exceptions
     base_macros
-    base_md5
     base_times
     build_info
     economy # TODO(GunChleoc): Circular dependency

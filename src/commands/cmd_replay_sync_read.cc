@@ -35,7 +35,7 @@ void CmdReplaySyncRead::execute(Game& game) {
 		return;
 	}
 
-	const Md5Checksum myhash = game.get_sync_hash();
+	const crypto::MD5Checksum myhash = game.get_sync_hash();
 
 	if (hash_ != myhash) {
 		reported_desync_for_ = &game;

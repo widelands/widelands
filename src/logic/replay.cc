@@ -21,7 +21,6 @@
 #include <memory>
 
 #include "base/log.h"
-#include "base/md5.h"
 #include "base/random.h"
 #include "base/time_string.h"
 #include "base/wexception.h"
@@ -149,8 +148,8 @@ Command* ReplayReader::get_next_command(const Time& time) {
 
 		case pkt_syncreport: {
 			Time duetime(cmdlog_->unsigned_32());
-			Md5Checksum hash;
-			cmdlog_->data(hash.data, sizeof(hash.data));
+			crypto::MD5Checksum hash;
+			cmdlog_->data(hash.value.data(), hash.value.size());
 
 			return new CmdReplaySyncRead(duetime, hash);
 		}
@@ -261,10 +260,10 @@ void ReplayWriter::send_player_command(PlayerCommand* cmd) {
 /**
  * Store a synchronization hash for the current game time in the replay.
  */
-void ReplayWriter::send_sync(const Md5Checksum& hash) {
+void ReplayWriter::send_sync(const crypto::MD5Checksum& hash) {
 	cmdlog_->unsigned_8(pkt_syncreport);
 	cmdlog_->unsigned_32(game_.get_gametime().get());
-	cmdlog_->data(hash.data, sizeof(hash.data));
+	cmdlog_->data(hash.value.data(), hash.value.size());
 	cmdlog_->flush();
 }
 
