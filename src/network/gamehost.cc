@@ -1417,6 +1417,8 @@ void GameHost::set_player_number(uint8_t const number) {
 void GameHost::set_win_condition_script(const std::string& wc) {
 	d->settings.win_condition_script = wc;
 
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kWinCondition));
+
 	// Broadcast changes
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_WIN_CONDITION);

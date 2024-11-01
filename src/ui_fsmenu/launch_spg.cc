@@ -55,7 +55,7 @@ LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
 	}
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 
-	update_win_conditions();
+	update_tags_and_win_conditions();
 	for (auto& pair : game_flag_checkboxes_) {
 		(this->*pair.second.second)();
 	}
