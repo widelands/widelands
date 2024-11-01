@@ -82,29 +82,33 @@ files name.
 
       local str    = "widelands"
       local number = 5
+
       _("This is a string: %1$s"):bformat(str)             -- $s = string
-      _("This is a number: %1$d"):bformat(number)          -- $d = number
+      _("This is a number: %1$d"):bformat(number)          -- $d = number (integer)
 
       -- %1 refers to the first,
       -- %2 to the second placeholder and so on:
-      _("%1$s has %2$d regular tribes"):bformat(str, number)
 
-      -- Not usual, but possible:
-      _("%2$d tribes belong to %1$s."):bformat(str, number)
+      _("%1$s has %2$d regular tribes"):bformat(str, number)
 
       -- Formatting numbers with two digits:
       local first  = 2
       local sec    = 10
       local third  = 5
-      _("%1$02d:%2$02d:%3$02d"):bformat(first, sec, third) -- result: 02:10:05
+
+      _("%1$02d:%2$02d - %3$02d"):bformat(first, sec, third) -- result: 02:10 - 05
 
 
    Together with :doc:`richtext <autogen_auxiliary_richtext>`:
 
    .. code-block:: lua
 
-      p(_("%1$s has won the game with %2$d points!"):bformat(wl.Game().players[2], 367))
+      local winner, points = get_winner(wl.Game().players)
 
+      p(_("%1$s has won the game with %2$d points!"):bformat(winner, points))
+
+   If you need more options look at `LUA string.format <https://www.lua.org/manual/5.1/manual.html#pdf-string.format>`_
+   and the `c++ printf function <https://cplusplus.com/reference/cstdio/printf/>`_ .
 */
 // The 'b' in bformat used to stand for "boost", which we no longer use, but
 // renaming the Lua function would break backwards compatibility.
