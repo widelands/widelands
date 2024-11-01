@@ -71,7 +71,8 @@ protected:
 
 	/// Loads all win conditions that can be played with the map into the selection dropdown.
 	/// Disables the dropdown if the map is a scenario.
-	void update_win_conditions();
+	/// Also loads the selected map's or savegame's tags and checks whether seafaring is available.
+	void update_tags_and_win_conditions();
 	/// Reads the win conditions that are available for the given map tags and adds the entries to
 	/// the
 	/// dropdown.
