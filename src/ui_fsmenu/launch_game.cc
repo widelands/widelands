@@ -457,7 +457,7 @@ bool LaunchGame::init_win_condition_label() {
 /**
  * Fill the dropdown with the available win conditions.
  */
-void LaunchGame::update_win_conditions() {
+void LaunchGame::update_tags_and_win_conditions() {
 	std::set<std::string> tags;
 	if (!settings_.settings().mapfilename.empty()) {
 		Widelands::Map map;

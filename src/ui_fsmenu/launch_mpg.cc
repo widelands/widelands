@@ -227,7 +227,7 @@ void LaunchMPG::clicked_select_savegame() {
 				warning.run<UI::Panel::Returncodes>();
 			}
 		}
-		update_win_conditions();
+		update_tags_and_win_conditions();
 	});
 }
 
@@ -294,7 +294,7 @@ void LaunchMPG::map_changed() {
 		}
 	}
 
-	update_win_conditions();
+	update_tags_and_win_conditions();
 }
 
 /**
