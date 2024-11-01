@@ -107,8 +107,9 @@ files name.
 
       p(_("%1$s has won the game with %2$d points!"):bformat(winner, points))
 
-   If you need more options look at `LUA string.format <https://www.lua.org/manual/5.1/manual.html#pdf-string.format>`_
-   and the `c++ printf function <https://cplusplus.com/reference/cstdio/printf/>`_ .
+   If you need more options look at `LUA string.format
+<https://www.lua.org/manual/5.1/manual.html#pdf-string.format>`_ and the `c++ printf function
+<https://cplusplus.com/reference/cstdio/printf/>`_ .
 */
 // The 'b' in bformat used to stand for "boost", which we no longer use, but
 // renaming the Lua function would break backwards compatibility.
