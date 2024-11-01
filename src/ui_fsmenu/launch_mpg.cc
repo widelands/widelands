@@ -97,8 +97,15 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
 	left_column_box_.add(chat_.get(), UI::Box::Resizing::kFullSize);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
-		if (s.action == NoteGameSettings::Action::kMap) {
+		switch (s.action) {
+		case NoteGameSettings::Action::kMap:
 			map_changed();
+			break;
+		case NoteGameSettings::Action::kWinCondition:
+			last_win_condition_ = settings_.get_win_condition_script();
+			break;
+		default:
+			break;
 		}
 	});
 	update_warn_desyncing_addon();
