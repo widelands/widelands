@@ -72,7 +72,39 @@ files name.
    instead uses our own ``format`` function. This allows for better control of the
    formatting as well as reordering of arguments which is needed for proper localisation.
 
+   Use ``bformat()`` whenever if your string contain values from variables.
+
    :returns: The formatted string.
+
+   ``bformat()`` is used with the global :func:`_(str) function <_>`. Examples:
+
+   .. code-block:: lua
+
+      local str    = "widelands"
+      local number = 5
+      _("This is a string: %1$s"):bformat(str)             -- $s = string
+      _("This is a number: %1$d"):bformat(number)          -- $d = number
+
+      -- %1 refers to the first,
+      -- %2 to the second placeholder and so on:
+      _("%1$s has %2$d regular tribes"):bformat(str, number)
+
+      -- Not usual, but possible:
+      _("%2$d tribes belong to %1$s."):bformat(str, number)
+
+      -- Formatting numbers with two digits:
+      local first  = 2
+      local sec    = 10
+      local third  = 5
+      _("%1$02d:%2$02d:%3$02d"):bformat(first, sec, third) -- result: 02:10:05
+
+
+   Together with :doc:`richtext <autogen_auxiliary_richtext>`:
+
+   .. code-block:: lua
+
+      p(_("%1$s has won the game with %2$d points!"):bformat(wl.Game().players[2], 367))
+
 */
 // The 'b' in bformat used to stand for "boost", which we no longer use, but
 // renaming the Lua function would break backwards compatibility.
