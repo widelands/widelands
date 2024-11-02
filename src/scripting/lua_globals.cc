@@ -310,7 +310,7 @@ static int L__(lua_State* L) {
    .. code-block:: lua
 
       local count = _get_items()                -- count can be 0 or more
-      local text = ""
+      local text  = ""
 
       if count == 0 then
          text = _("You have no item.")          -- Note the _() function
@@ -323,7 +323,7 @@ static int L__(lua_State* L) {
    .. code-block:: lua
 
       local count = _get_items()                -- count can be 0 or more
-      local text = ""
+      local text  = ""
 
       if count == 0 then
          text = _("You have no item.")          -- Note the _() function
@@ -360,7 +360,8 @@ static int L_ngettext(lua_State* L) {
 .. function:: pgettext(msgctxt, msgid)
 
    A wrapper for the pgettext() function, needed for allowing multiple translations of the same
-   string according to context.
+   string according to context. A simple example: The sign ``-`` can have the meaning minus
+   or a hyphen. For another use case see the example below.
 
    :arg msgctxt: a named context for this string for disambiguation
    :type msgctxt: :class:`string`
@@ -368,6 +369,20 @@ static int L_ngettext(lua_State* L) {
    :type msgid: :class:`string`
 
    :returns: The translated string.
+
+   .. code-block:: lua
+
+      local time = _get_time()                         -- can be "" or a time string like "02:34:05"
+      local text = "Time: "
+
+      if time == "" then
+         text = text .. pgettext("no_time_value", "-") -- a translator knows the context
+      else
+         text = text .. time
+      end
+
+      -- Result is either: "Time: -" or "Time: 02:34:05"
+
 */
 static int L_pgettext(lua_State* L) {
 	//  S: msgctxt msgid
