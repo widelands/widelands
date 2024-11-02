@@ -328,7 +328,7 @@ static int L__(lua_State* L) {
       if count == 0 then
          text = _("You have no item.")          -- Note the _() function
       else
-         text = ngettext("You have only $1$d item", "You have %1$d items", count):bformat(count)
+         text = ngettext("You have only %1$d item", "You have %1$d items", count):bformat(count)
       end
 
 */
