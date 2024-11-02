@@ -2377,7 +2377,7 @@ msgstr "%u%% malkonstruita"
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:254
 msgctxt "building"
 msgid "Lost!"
-msgstr "Vi malvenkis!"
+msgstr "Perdita!"
 
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:255
 msgid "Militarysite lost!"
@@ -2388,21 +2388,21 @@ msgstr "Milita konstruaĵo perdita!"
 #. "Success!"
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:297
 msgid "Enemy Defeated!"
-msgstr "Malamiko venkitis!"
+msgstr "Malamiko venkita!"
 
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:297
 msgid "Enemy at site defeated!"
-msgstr "Malamiko venkitis ĉe milita konstruaĵo!"
+msgstr "Malamiko venkita en la loko!"
 
 #. * TRANSLATORS: Militarysite is being attacked
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:757
 msgctxt "building"
 msgid "Attack!"
-msgstr "Ataku!"
+msgstr "Atako!"
 
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:757
 msgid "You are under attack"
-msgstr "Vi estas atakata"
+msgstr "Vi estas sub atako"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
@@ -2410,7 +2410,7 @@ msgstr "Vi estas atakata"
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:456
 #, c-format
 msgid "the economy needs the ware ‘%s’"
-msgstr "la ekonomio bezonas la varon ‘%s’"
+msgstr "la ekonomio bezonas la varon \"%s\""
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn't need the
@@ -2418,7 +2418,7 @@ msgstr "la ekonomio bezonas la varon ‘%s’"
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:463
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
-msgstr "la ekonomio ne bezonas la varon ‘%s’"
+msgstr "la ekonomio ne bezonas la varon \"%s\""
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
@@ -2426,14 +2426,14 @@ msgstr "la ekonomio ne bezonas la varon ‘%s’"
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:476
 #, c-format
 msgid "the economy needs the worker ‘%s’"
-msgstr "la ekonomio bezonas la laboriston ‘%s’"
+msgstr "la ekonomio bezonas la laboriston \"%s\""
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker '%s'
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:485
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
-msgstr "la ekonomio ne bezonas la laboriston ‘%s’"
+msgstr "la ekonomio ne bezonas la laboriston \"%s\""
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
 #. * TRANSLATORS:    %1$i = "3"
@@ -2486,23 +2486,23 @@ msgstr "la laboristoj ne bezonas pli da sperto"
 
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:615
 msgid "the fleet needs a ferry"
-msgstr ""
+msgstr "la floto bezonas pramon"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs
 #. a ship/ferry'.
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:615
 msgid "the fleet needs a ship"
-msgstr ""
+msgstr "la floto bezonas ŝipon"
 
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:622
 msgid "the fleet needs no ferries"
-msgstr "La floto ne bezonas pramojn."
+msgstr "la floto ne bezonas pramojn"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs
 #. no ships/ferries'.
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:622
 msgid "the fleet needs no ships"
-msgstr ""
+msgstr "la floto ne bezonas ŝipojn"
 
 #. * TRANSLATORS: "Did not start working because the economy needs the ware
 #. '%s'"
@@ -2521,19 +2521,19 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1324
 #, c-format
 msgid "Did not start %1$s because %2$s"
-msgstr ""
+msgstr "Ne komencis %1$s pro %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware '%s'"
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:777
 #, c-format
 msgid "Completed %1$s because %2$s"
-msgstr "%1$s estis kompletigita ĉar %2$s"
+msgstr "Kompletigis %1$s pro %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware '%s'"
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:784
 #, c-format
 msgid "Skipped %1$s because %2$s"
-msgstr "%1$s ellasita ĉar %2$s"
+msgstr "Ellasis %1$s pro %2$s"
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
 #. are missing'
@@ -2543,8 +2543,8 @@ msgstr "%1$s ellasita ĉar %2$s"
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
-msgstr[0] "%s mankas"
-msgstr[1] "%s mankas"
+msgstr[0] "Mankas %s"
+msgstr[1] "Mankas %s"
 
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
