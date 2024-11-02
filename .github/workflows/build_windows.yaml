@@ -5,6 +5,7 @@ on:
 jobs:
   windows:
     strategy:
+      fail-fast: false
       matrix:
         config: [Debug, Release]
         arch: [x64, x86]
@@ -39,7 +40,14 @@ jobs:
         cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DOPTION_BUILD_CODECHECK=OFF -DUSE_FLTO_IF_AVAILABLE=OFF -DCMAKE_JOB_POOLS="linking=1" -DCMAKE_JOB_POOL_LINK=linking -DOPTION_BUILD_WINSTATIC=ON -DOPTION_FORCE_EMBEDDED_MINIZIP=ON
         if ((Select-String -Quiet REVDETECT-BROKEN VERSION)) { exit 1 }
         cmake.exe --build .
-        strip -sv ./src/widelands.exe
+        if ("${{ matrix.config }}" -Match "Release") {
+          strip -sv ./src/widelands.exe
+        }
+    - name: Uploading executable
+      uses: actions/upload-artifact@v4
+      with:
+        name: Widelands_exe_${{ matrix.config }}_${{ matrix.arch }}_MinGW
+        path: ${{ github.workspace }}\build\src\widelands.exe
     - name: InnoSetup
       run: |
         cd $env:GITHUB_WORKSPACE
@@ -49,7 +57,6 @@ jobs:
         $env:CONFIGURATION = "${{ matrix.config }}"
         $env:APPVEYOR_BUILD_FOLDER = $env:GITHUB_WORKSPACE
         $env:APPVEYOR_BUILD_VERSION = "Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}"
-        strip.exe -sv .\build\src\widelands.exe
         ISCC.exe /o$env:GITHUB_WORKSPACE /fWidelands-${{ github.sha }}-mingw-${{ matrix.config }}-${{ matrix.arch }} $env:GITHUB_WORKSPACE\utils\windows\innosetup\Widelands.iss
     - name: Uploading installer
       uses: actions/upload-artifact@v4

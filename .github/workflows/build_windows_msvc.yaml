@@ -6,6 +6,7 @@ jobs:
   windows-msvc:
     # inspired by https://github.com/lukka/CppCMakeVcpkgTemplate/blob/main/.github/workflows/hosted-pure-workflow.yml
     strategy:
+      fail-fast: false
       matrix:
         config: [Debug, Release]
         arch: [x64, x86]
@@ -75,6 +76,14 @@ jobs:
         if ("${{ matrix.config }}" -Match "Release") {
           strip -sv ./src/widelands.exe
         }
+    - name: Uploading executable
+      uses: actions/upload-artifact@v4
+      with:
+        name: Widelands_exe_${{ matrix.config }}_${{ matrix.arch }}_MSVC
+        path: |
+          ${{ github.workspace }}\build\src\widelands.exe
+          ${{ github.workspace }}\build\src\widelands.pdb
+        if-no-files-found: ignore
     - name: InnoSetup
       run: |
         cd $env:GITHUB_WORKSPACE
