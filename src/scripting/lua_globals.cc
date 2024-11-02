@@ -72,24 +72,27 @@ files name.
    instead uses our own ``format`` function. This allows for better control of the
    formatting as well as reordering of arguments which is needed for proper localisation.
 
-   Use ``bformat()`` whenever if your string contain values from variables.
+   Use ``bformat()`` whenever your string contains values from variables.
 
    :returns: The formatted string.
 
-   ``bformat()`` is used with the global :func:`_(str) function <_>`. Examples:
+   ``bformat()`` can be used with the global :func:`_(str) function <_>`. Examples:
 
    .. code-block:: lua
 
       local str    = "widelands"
       local number = 5
+      local float  = 3.4
 
-      _("This is a string: %1$s"):bformat(str)             -- $s = string
-      _("This is a number: %1$d"):bformat(number)          -- $d = number (integer)
+      _("This is a string: %1$s"):bformat(str)             -- s = string
+      _("This is a number: %1$d"):bformat(number)          -- d = number (integer)
+      _("This is a number: %1$f"):bformat(float)           -- f = number (float)
 
-      -- %1 refers to the first,
-      -- %2 to the second placeholder and so on:
+      -- %1$ refers to the first,
+      -- %2$ to the second placeholder and so on:
 
-      _("%1$s has %2$d regular tribes"):bformat(str, number)
+      local tribe_name = "Atlanteans"
+      _("The %1$s is one of the tribes in %2$s."):bformat(tribe_name, str)
 
       -- Formatting numbers with two digits:
       local first  = 2
@@ -98,18 +101,14 @@ files name.
 
       _("%1$02d:%2$02d - %3$02d"):bformat(first, sec, third) -- result: 02:10 - 05
 
+      -- Formatting floating point numbers with precision:
+      local float = 10 / 3
 
-   Together with :doc:`richtext <autogen_auxiliary_richtext>`:
+      _("Precision of 2: %1$.2f"):bformat(float)             -- result: Precision of 2: 3.33
 
-   .. code-block:: lua
+   If your variable contains a number you should use :func:`ngettext` or
+   :func:`npgettext` to allow proper translation of plural strings.
 
-      local winner, points = get_winner(wl.Game().players)
-
-      p(_("%1$s has won the game with %2$d points!"):bformat(winner, points))
-
-   If you need more options look at
-   `LUA string.format <https://www.lua.org/manual/5.1/manual.html#pdf-string.format>`_
-   and the `c++ printf function <https://cplusplus.com/reference/cstdio/printf/>`_ .
 */
 // The 'b' in bformat used to stand for "boost", which we no longer use, but
 // renaming the Lua function would break backwards compatibility.
@@ -305,6 +304,33 @@ static int L__(lua_State* L) {
    :type n: An unsigned integer.
 
    :returns: The translated string.
+
+   Example:
+
+   .. code-block:: lua
+
+      local count = _get_items()                -- count can be 0 or more
+      local text = ""
+
+      if count == 0 then
+         text = _("You have no item.")          -- Note the _() function
+      else
+         text = ngettext("You have only one item", "You have a lot of items", count)
+      end
+
+   Probably you want the number in the string:
+
+   .. code-block:: lua
+
+      local count = _get_items()                -- count can be 0 or more
+      local text = ""
+
+      if count == 0 then
+         text = _("You have no item.")          -- Note the _() function
+      else
+         text = ngettext("You have only $1$d item", "You have %1$d items", count):bformat(count)
+      end
+
 */
 static int L_ngettext(lua_State* L) {
 	//  S: msgid msgid_plural n
