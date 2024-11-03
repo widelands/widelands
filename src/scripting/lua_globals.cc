@@ -80,31 +80,32 @@ files name.
 
    .. code-block:: lua
 
-      local str    = "widelands"
-      local number = 5
-      local float  = 3.4
+      local a_str    = _("Widelands")
+      local a_number = 5
+      local a_float  = 3.4
 
-      _("This is a string: %1$s"):bformat(str)             -- s = string
-      _("This is a number: %1$d"):bformat(number)          -- d = number (integer)
-      _("This is a number: %1$f"):bformat(float)           -- f = number (float)
+      _("This is a string: %1$s"):bformat(a_str)             -- s = string
+      _("This is a number: %1$d"):bformat(a_number)          -- d = number (integer)
+      _("This is a number: %1$f"):bformat(a_float)           -- f = number (float)
 
       -- %1$ refers to the first,
       -- %2$ to the second placeholder and so on:
 
-      local tribe_name = "Atlanteans"
-      _("The %1$s is one of the tribes in %2$s."):bformat(tribe_name, str)
+      local tribe_name = _("Atlanteans")
+      _("The %1$s are one of the tribes in %2$s."):bformat(tribe_name, a_str)
 
       -- Formatting numbers with two digits:
-      local first  = 2
-      local sec    = 10
-      local third  = 5
+      local hours   = 2
+      local minutes = 10
+      local seconds = 5
 
-      _("%1$02d:%2$02d - %3$02d"):bformat(first, sec, third) -- result: 02:10 - 05
+      -- TRANSLATORS: A time string (hh:mm:ss) like "10:02:30"
+      _("%1$02d:%2$02d:%3$02d"):bformat(hours, minutes, seconds) -- result: 02:10:05
 
       -- Formatting floating point numbers with precision:
-      local float = 10 / 3
+      local endless = 10 / 3
 
-      _("Precision of 2: %1$.2f"):bformat(float)             -- result: Precision of 2: 3.33
+      _("Precision of 2: %1$.2f"):bformat(endless)           -- result: Precision of 2: 3.33
 
    If your variable contains a number you should use :func:`ngettext` or
    :func:`npgettext` to allow proper translation of plural strings.
@@ -309,16 +310,16 @@ static int L__(lua_State* L) {
 
    .. code-block:: lua
 
-      local count = _get_items()                -- count can be 0 or more
+      local count = _get_items()                 -- count can be 0 or more
       local text  = ""
 
       if count == 0 then
-         text = _("You have no item.")          -- Note the _() function
+         text = _("You have no items.")          -- Note the _() function
       else
          text = ngettext("You have only one item", "You have a lot of items", count)
       end
 
-   Probably you want the number in the string:
+   If you want the number in the string, keep the sentences short:
 
    .. code-block:: lua
 
@@ -326,11 +327,10 @@ static int L__(lua_State* L) {
       local text  = ""
 
       if count == 0 then
-         text = _("You have no item.")          -- Note the _() function
+         text = _("You have no items.")         -- Note the _() function
       else
-         text = ngettext("You have only %1$d item", "You have %1$d items", count):bformat(count)
+         text = ngettext("You have %1$d item", "You have %1$d items", count):bformat(count)
       end
-
 */
 static int L_ngettext(lua_State* L) {
 	//  S: msgid msgid_plural n
@@ -360,8 +360,7 @@ static int L_ngettext(lua_State* L) {
 .. function:: pgettext(msgctxt, msgid)
 
    A wrapper for the pgettext() function, needed for allowing multiple translations of the same
-   string according to context. A simple example: The sign ``-`` can have the meaning minus
-   or a hyphen. For another use case see the example below.
+   string according to context.
 
    :arg msgctxt: a named context for this string for disambiguation
    :type msgctxt: :class:`string`
@@ -369,20 +368,6 @@ static int L_ngettext(lua_State* L) {
    :type msgid: :class:`string`
 
    :returns: The translated string.
-
-   .. code-block:: lua
-
-      local time = _get_time()                         -- can be "" or a time string like "02:34:05"
-      local text = "Time: "
-
-      if time == "" then
-         text = text .. pgettext("no_time_value", "-") -- a translator knows the context
-      else
-         text = text .. time
-      end
-
-      -- Result is either: "Time: -" or "Time: 02:34:05"
-
 */
 static int L_pgettext(lua_State* L) {
 	//  S: msgctxt msgid
