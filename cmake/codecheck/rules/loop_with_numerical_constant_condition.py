@@ -7,6 +7,7 @@ cases that are used in macro definitions (see.
 
 [http://vivekkutal.blogspot.com/2006/03/do-while0.html]): #define
 macro(...) do {...} while (false)
+
 """
 
 error_msg = 'Do not use numerical constants in loop condition! ' \

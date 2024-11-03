@@ -530,7 +530,8 @@ void MainMenu::set_labels() {
 	   UI::PanelStyle::kFsMenu));
 
 	version_.set_text(
-	   /** TRANSLATORS: %1$s = version string and build type  ("Debug" or "Release") */
+	   /** TRANSLATORS: %1$s = version string and build type  ("Debug", "Release", or
+	      "RelWithDebInfo") */
 	   format(_("Version %1$s"), build_ver_details()));
 	copyright_.set_text(
 	   /** TRANSLATORS: Placeholders are the copyright years */
@@ -720,7 +721,7 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 			// Easter egg: Press Ctrl/Shift+Backspace to exchange the background immediately :-)
 			last_image_exchange_time_ -=
 			   (last_image_exchange_time_ > kImageExchangeInterval ? kImageExchangeInterval :
-                                                                  last_image_exchange_time_);
+			                                                         last_image_exchange_time_);
 			return true;
 		}
 	}
@@ -729,8 +730,8 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 
 inline float MainMenu::calc_opacity(const uint32_t time) const {
 	return last_image_ == draw_image_ ?
-             1.f :
-             std::max(0.f, std::min(1.f, static_cast<float>(time - last_image_exchange_time_) /
+	          1.f :
+	          std::max(0.f, std::min(1.f, static_cast<float>(time - last_image_exchange_time_) /
 	                                         kImageExchangeDuration));
 }
 
