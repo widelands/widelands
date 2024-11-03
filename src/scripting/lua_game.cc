@@ -238,8 +238,8 @@ int LuaPlayer::get_lost(lua_State* L) {
 	   get_egbase(L).player_manager()->get_player_end_status(player_number());
 	lua_pushboolean(L, (p != nullptr && (p->result == Widelands::PlayerEndResult::kLost ||
 	                                     p->result == Widelands::PlayerEndResult::kEliminated)) ?
-                         1 :
-                         0);
+	                      1 :
+	                      0);
 	return 1;
 }
 
