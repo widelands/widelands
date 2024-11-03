@@ -79,7 +79,7 @@ jobs:
     - name: Uploading executable
       uses: actions/upload-artifact@v4
       with:
-        name: Widelands_exe_${{ matrix.config }}_${{ matrix.arch }}_MSVC
+        name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Binary Only (MSVC)
         path: |
           ${{ github.workspace }}\build\src\widelands.exe
           ${{ github.workspace }}\build\src\widelands.pdb
