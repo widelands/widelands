@@ -21,6 +21,7 @@
 - Update translations for v1.2.1 (CB #4916 / GH #6556)
 - Replace MD5 checksumming code with `libmd`
 - Fix LaunchMPG map seafaring check for naval warfare
+- Fix anchored ship trying to swim towards buffer-underflow
 
 
 ## Release 1.2
