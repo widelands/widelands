@@ -336,6 +336,9 @@ private:
 					}
 					break;
 				}
+
+				default:
+					NEVER_HERE();
 				}
 
 				MutexLock m(io->result_mutex_);
