@@ -11,3 +11,5 @@ SDL2_image: aom dav1d rav1e libjpeg-turbo libyuv giflib jbigkit lerc libdeflate 
 glew:
 glbinding:
 icu:
+# TODO(hessenfarmer): remove again after libavif package is version higher then 1.1.1
+svt-av1=2.2.1-1:
