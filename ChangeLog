@@ -15,7 +15,7 @@
 - Fix RelWithDebInfo build type
 - Fix out-of-bounds memory access when using `--editor` without filename
 - macos and other CI improvements
-- Temporary fix for macos CI builds
+- Temporary fixes for MinGW and MacOS CI builds
 - Fix for 6444 using mac dylibbundler to packe the .app Bundle
 - Re-add gettext ubuntu package
 - Update translations for v1.2.1 (CB #4916 / GH #6556)
