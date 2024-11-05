@@ -6,6 +6,7 @@ PACMAN_ARGS=$@
 
 URL_MINGW="https://mirror.msys2.org/mingw/$ARCH"
 URL_MSYS="https://mirror.msys2.org/msys/$ARCH"
+VERSIONPINNED = 0
 
 cd $(dirname "$0")
 curl -L "$URL_MINGW" > mingw
@@ -65,10 +66,34 @@ do
   PKG=$(echo $LINE | cut -d ':' -f 1)
   DEPS=($(echo $LINE | cut -d ':' -f 2))
   DEPS+=($PKG)
+  for DEP in ${DEPS[@]}
+  do
+    # Check for fixed version
+    VERSION=$(echo $DEP | cut -d '=' -f 2)
+    if [ "$VERSION" != "$DEP" ]
+    then
+      VERSIONPINNED = 1
+    fi
+    # Check for fixed architecture
+    FIXEDARCH=$(echo $DEP | cut -d '!' -f 1)
+    if [ "$FIXEDARCH" != "$DEP" ]
+    then
+      if [ "$FIXEDARCH" == "$ARCH" ]
+      then
+        DEPS+=$(echo $DEP | cut -d '!' -f 2)
+        DEPS-=($DEP)
+      else
+        DEPS-=($DEP)
+      fi
+    fi
+  done
   if [ "${PKG%%-*}" = "host" ]
   then
     # Host packages should still be supported
     pacman -S $PACMAN_ARGS ${PKG#host-}
+  elif [ VERSIONPINNED -eq 1 ]
+  then
+    install_old_pkg
   else
     pacman -S $PACMAN_ARGS mingw-w64-$ARCH-$PKG || install_old_pkg
   fi
