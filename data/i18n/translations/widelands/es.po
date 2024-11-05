@@ -26,7 +26,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-10-28 03:02+0000\n"
+"POT-Creation-Date: 2024-11-04 03:00+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Puniasterus <puniasterus@gmail.com>, 2024\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
@@ -687,7 +687,7 @@ msgstr "¿Seguro de que deseas salir del editor?"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:485
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:491
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:124
-#: ../../../../src/ui_fsmenu/launch_mpg.cc:320
+#: ../../../../src/ui_fsmenu/launch_mpg.cc:328
 #: ../../../../src/ui_fsmenu/main.cc:294 ../../../../src/wlapplication.cc:1892
 msgid "Error"
 msgstr "Error"
@@ -1468,7 +1468,7 @@ msgid ""
 msgstr "Este mapa fue generado automáticamente por el Generador Aleatorio de Mapas de Widelands."
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:747
-#: ../../../../src/network/gamehost.cc:1663
+#: ../../../../src/network/gamehost.cc:1662
 #, c-format
 msgid "Computer %u"
 msgstr "IA %u"
@@ -2298,11 +2298,11 @@ msgstr "Widelands no pudo empezar el juego porque el jugador %u no tiene posici�
 msgid "Initializing…"
 msgstr "Inicializando…"
 
-#: ../../../../src/logic/game.cc:1244
+#: ../../../../src/logic/game.cc:1242
 msgid "Trade Offer"
 msgstr "Oferta de Negocio"
 
-#: ../../../../src/logic/game.cc:1246
+#: ../../../../src/logic/game.cc:1244
 msgid "This market has received a new trade offer."
 msgstr "Este mercado ha recibido una nueva oferta de negocio."
 
@@ -3199,11 +3199,11 @@ msgstr "Cambio de Equipo Aceptado"
 msgid "Team Change Rejected"
 msgstr "Cambio de Equipo Rechazado"
 
-#: ../../../../src/logic/replay.cc:94
+#: ../../../../src/logic/replay.cc:93
 msgid "Desync"
 msgstr "Desincronización"
 
-#: ../../../../src/logic/replay.cc:95
+#: ../../../../src/logic/replay.cc:94
 #, c-format
 msgid ""
 "The replay has desynced and the game was paused.\n"
@@ -3409,7 +3409,7 @@ msgid ""
 " you tried to connect."
 msgstr ""
 
-#: ../../../../src/network/gameclient.cc:816
+#: ../../../../src/network/gameclient.cc:817
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
@@ -3417,35 +3417,35 @@ msgstr[0] "%u  discrepancia de complementos detectado:\n"
 msgstr[1] "%u discrepancias de complementos detectado:\n"
 msgstr[2] "%u discrepancias de complementos detectado:\n"
 
-#: ../../../../src/network/gameclient.cc:818
+#: ../../../../src/network/gameclient.cc:819
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
 msgstr ""
 
-#: ../../../../src/network/gameclient.cc:821
+#: ../../../../src/network/gameclient.cc:822
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr ""
 
-#: ../../../../src/network/gameclient.cc:992
+#: ../../../../src/network/gameclient.cc:989
 msgid "/me ’s file failed md5 checksumming."
 msgstr "El archivo /me falló en la suma de verificación md5."
 
-#: ../../../../src/network/gameclient.cc:1034
+#: ../../../../src/network/gameclient.cc:1031
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me comprobó el archivo recibido. Aunque la verificación del md5 fue exitosa, no puedo manejar el archivo."
 
-#: ../../../../src/network/gameclient.cc:1355
+#: ../../../../src/network/gameclient.cc:1352
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: ../../../../src/network/gameclient.cc:1356
+#: ../../../../src/network/gameclient.cc:1353
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -3567,7 +3567,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Widelands no pudo iniciar un servidor.\nProbablemente otro proceso ya está ejecutando un servidor en nuestro puerto."
 
-#: ../../../../src/network/gamehost.cc:1922
+#: ../../../../src/network/gamehost.cc:1921
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3796,12 +3796,12 @@ msgid ""
 "request in time."
 msgstr "Has sido desconectado del metaservidor ya que no has respondido a una petición PING a tiempo."
 
-#: ../../../../src/network/net_addons.cc:861
+#: ../../../../src/network/net_addons.cc:855
 #, c-format
 msgid "Sending metadata for %s"
 msgstr ""
 
-#: ../../../../src/network/net_addons.cc:906
+#: ../../../../src/network/net_addons.cc:897
 #, c-format
 msgid "Uploading %s"
 msgstr ""
@@ -6343,7 +6343,7 @@ msgstr "Partida Guardada"
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Esta es una partida guardada – la condición de victoria ya fue establecida."
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:522
+#: ../../../../src/ui_fsmenu/launch_game.cc:523
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -6362,23 +6362,23 @@ msgstr "Por favor selecciona un mapa o una partida guardada."
 msgid "The host has not yet selected a map or saved game."
 msgstr "El servidor aún no ha seleccionado un mapa o una partida guardada."
 
-#: ../../../../src/ui_fsmenu/launch_mpg.cc:213
+#: ../../../../src/ui_fsmenu/launch_mpg.cc:219
 msgid "Saved Game is Directory"
 msgstr "Partida Guardada es un Directorio"
 
-#: ../../../../src/ui_fsmenu/launch_mpg.cc:214
+#: ../../../../src/ui_fsmenu/launch_mpg.cc:220
 msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr "ADVERTENCIA:\nLa partida guardada que has seleccionado es un directorio. Esto ocurre si la opción ‘nozip’ está activada o la partida guardada se descomprimió de forma manual.\nWidelands no puede transferir estructuras de directorios a los clientes, por favor elige otra partida guardada o comprime en zip el contenido del directorio."
 
-#: ../../../../src/ui_fsmenu/launch_mpg.cc:233
+#: ../../../../src/ui_fsmenu/launch_mpg.cc:239
 #: ../../../../src/ui_fsmenu/launch_spg.cc:134
 msgid "File not found"
 msgstr "Archivo no encontrado"
 
-#: ../../../../src/ui_fsmenu/launch_mpg.cc:234
+#: ../../../../src/ui_fsmenu/launch_mpg.cc:240
 #: ../../../../src/ui_fsmenu/launch_spg.cc:135
 #, c-format
 msgid ""
@@ -6387,19 +6387,19 @@ msgid ""
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr "Widelands intentó iniciar una partida con un archivo que no pudo encontrarse en la ruta indicada.\nEl archivo era: %s\nSi esto sucede en una partida en red, el anfitrión puede haber seleccionado un archivo que no posees. Normalmente un archivo así te lo debería enviar el anfitrión, ¿puede ser que la descarga aún no haya finalizado?"
 
-#: ../../../../src/ui_fsmenu/launch_mpg.cc:275
+#: ../../../../src/ui_fsmenu/launch_mpg.cc:281
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr "El archivo seleccionado no se puede encontrar. Si no se transfiere automáticamente, por favor informa al anfitrión sobre este problema."
 
-#: ../../../../src/ui_fsmenu/launch_mpg.cc:322
+#: ../../../../src/ui_fsmenu/launch_mpg.cc:330
 #, c-format
 msgid "Unable to load the win condition script file ‘%s’."
 msgstr "No se puede cargar el archivo de script con las condiciones de victoria '%s'."
 
 #. * TRANSLATORS: This is a heading for a help window
-#: ../../../../src/ui_fsmenu/launch_mpg.cc:449
+#: ../../../../src/ui_fsmenu/launch_mpg.cc:457
 msgid "Multiplayer Game Setup"
 msgstr "Configuración de Partida Multijugador"
 
