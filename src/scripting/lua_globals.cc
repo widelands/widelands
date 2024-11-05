@@ -306,7 +306,7 @@ static int L__(lua_State* L) {
 
    :returns: The translated string.
 
-   Example:
+   Example to demonstrate the use:
 
    .. code-block:: lua
 
@@ -319,7 +319,13 @@ static int L__(lua_State* L) {
          text = ngettext("You have only one item", "You have a lot of items", count)
       end
 
-   If you want the number in the string, keep the sentences short:
+   .. note::
+      The above example doesn’t work for all languages because building singular and plural
+      forms differ widely between languages. Depending on the value of ``count`` some
+      languages have more than one plural form, other languages have other rules for the
+      singular form.
+
+   It’s better to include the variable ``count`` in a short sentence:
 
    .. code-block:: lua
 
