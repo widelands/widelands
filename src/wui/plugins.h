@@ -93,8 +93,12 @@ public:
 
 	bool check_keyboard_shortcut_action(SDL_Keysym code, bool down);
 
-	void set_keyboard_shortcut(const std::string& name, const std::string& action, bool failsafe, bool down) {
-		keyboard_shortcuts_[std::make_pair(shortcut_from_string(name), down)] = CustomKeyboardShortcut(action, failsafe);
+	void set_keyboard_shortcut(const std::string& name,
+	                           const std::string& action,
+	                           bool failsafe,
+	                           bool down) {
+		keyboard_shortcuts_[std::make_pair(shortcut_from_string(name), down)] =
+		   CustomKeyboardShortcut(action, failsafe);
 	}
 
 private:

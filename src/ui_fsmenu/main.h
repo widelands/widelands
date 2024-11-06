@@ -112,7 +112,8 @@ public:
 		return *lua_;
 	}
 
-	void set_lua_shortcut(const std::string& name, const std::string& action, bool failsafe, bool down) {
+	void
+	set_lua_shortcut(const std::string& name, const std::string& action, bool failsafe, bool down) {
 		plugin_actions_->set_keyboard_shortcut(name, action, failsafe, down);
 	}
 
