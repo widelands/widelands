@@ -91,7 +91,7 @@ do
   then
     # Host packages should still be supported
     pacman -S $PACMAN_ARGS ${PKG#host-}
-  elif [ VERSIONPINNED -eq 1 ]
+  elif [ $VERSIONPINNED -eq 1 ]
   then
     install_old_pkg
   else
