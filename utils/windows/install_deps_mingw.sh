@@ -87,7 +87,7 @@ do
       FINALDEPS+=($DEP)
     fi
   done
-  DEPS=($FINALDEPS)
+  DEPS=$FINALDEPS
   if [ "${PKG%%-*}" = "host" ]
   then
     # Host packages should still be supported
