@@ -77,17 +77,29 @@ do
     fi
     # Check for fixed architecture
     FIXEDARCH=$(echo $DEP | cut -d '!' -f 1)
+    echo "========================================"
+    echo "Fixed Architecture $FIXEDARCH extracted from $DEP for $ARCH"
+    echo "========================================"
     if [ "$FIXEDARCH" == "$DEP" ]
     then
       FINALDEPS+=($DEP)
     else
       if [ "$FIXEDARCH" == "$ARCH" ]
       then
+        echo "========================================"
+        echo "Dependency $(echo $DEP | cut -d '!' -f 2) will be added"
+        echo "========================================"
         FINALDEPS+=$(echo $DEP | cut -d '!' -f 2)
       fi
     fi
   done
   DEPS=$FINALDEPS
+  for DEP in ${DEPS[@]}
+  do
+    echo "========================================"
+    echo "Package $PKG has final dependency $DEP"
+    echo "========================================"
+  done
   if [ "${PKG%%-*}" = "host" ]
   then
     # Host packages should still be supported
