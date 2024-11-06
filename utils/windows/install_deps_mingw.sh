@@ -6,7 +6,6 @@ PACMAN_ARGS=$@
 
 URL_MINGW="https://mirror.msys2.org/mingw/$ARCH"
 URL_MSYS="https://mirror.msys2.org/msys/$ARCH"
-VERSIONPINNED=0
 
 cd $(dirname "$0")
 curl -L "$URL_MINGW" > mingw
@@ -67,6 +66,7 @@ do
   DEPS=($(echo $LINE | cut -d ':' -f 2))
   DEPS+=($PKG)
   FINALDEPS=()
+  VERSIONPINNED=0
   for DEP in ${DEPS[@]}
   do
     # Check for fixed version
