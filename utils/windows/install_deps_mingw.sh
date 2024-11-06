@@ -66,6 +66,7 @@ do
   PKG=$(echo $LINE | cut -d ':' -f 1)
   DEPS=($(echo $LINE | cut -d ':' -f 2))
   DEPS+=($PKG)
+  FINALDEPS=()
   for DEP in ${DEPS[@]}
   do
     # Check for fixed version
