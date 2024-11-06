@@ -69,36 +69,26 @@ do
   VERSIONPINNED=0
   for DEP in ${DEPS[@]}
   do
-    # Check for fixed version
-    VERSION=$(echo $DEP | cut -d '=' -f 2)
-    if [ "$VERSION" != "$DEP" ]
-    then
-      VERSIONPINNED=1
-    fi
     # Check for fixed architecture
     FIXEDARCH=$(echo $DEP | cut -d '!' -f 1)
-    echo "========================================"
-    echo "Fixed Architecture $FIXEDARCH extracted from $DEP for $ARCH"
-    echo "========================================"
     if [ "$FIXEDARCH" == "$DEP" ]
     then
       FINALDEPS+=($DEP)
     else
       if [ "$FIXEDARCH" == "$ARCH" ]
       then
-        echo "========================================"
-        echo "Dependency $(echo $DEP | cut -d '!' -f 2) will be added"
-        echo "========================================"
         FINALDEPS+=($(echo $DEP | cut -d '!' -f 2))
       fi
     fi
   done
-  # DEPS=$FINALDEPS
   for DEP in ${FINALDEPS[@]}
   do
-    echo "========================================"
-    echo "Package $PKG has final dependency $DEP"
-    echo "========================================"
+    # Check for fixed version
+    VERSION=$(echo $DEP | cut -d '=' -f 2)
+    if [ "$VERSION" != "$DEP" ]
+    then
+      VERSIONPINNED=1
+    fi
   done
   if [ "${PKG%%-*}" = "host" ]
   then

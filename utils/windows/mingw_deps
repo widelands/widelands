@@ -8,9 +8,8 @@ cmake:      c-ares brotli libunistring libidn2 libpsl libtasn1 p11-kit ca-certif
 asio:
 SDL2_ttf:   vulkan-headers vulkan-loader SDL2 libpng wineditline pcre2 glib2 harfbuzz freetype
 SDL2_mixer: libogg flac lame libvorbis mpg123 opus libsndfile portaudio fluidsynth libmodplug opusfile
+#TODO(hessenfarmer): remove pinned version when LIBAVIF gets updated
 SDL2_image: aom dav1d rav1e libjpeg-turbo libyuv giflib jbigkit lerc libdeflate libtiff libwebp libavif highway lcms2 imath openexr libjxl x86_64!svt-av1=2.2.1-1
 glew:
 glbinding:
 icu:
-# TODO(hessenfarmer): remove again after libavif package is version higher then 1.1.1
-# x86_64!svt-av1=2.2.1-1:
