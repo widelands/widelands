@@ -80,13 +80,13 @@ do
     then
       if [ "$FIXEDARCH" == "$ARCH" ]
       then
-        DEPS+=$(echo $DEP | cut -d '!' -f 2)
-        DEPS-=($DEP)
-      else
-        DEPS-=($DEP)
+        FINALDEPS+=$(echo $DEP | cut -d '!' -f 2)
       fi
+    else
+      FINALDEPS+=($DEP)
     fi
   done
+  DEPS=($FINALDEPS)
   if [ "${PKG%%-*}" = "host" ]
   then
     # Host packages should still be supported
