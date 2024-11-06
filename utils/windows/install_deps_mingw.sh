@@ -15,7 +15,7 @@ install_old_pkg()
 {
   INSTALL_U=()
   INSTALL_S=()
-  for DEP in ${DEPS[@]}
+  for DEP in ${FINALDEPS[@]}
   do
     if [ "${DEP%%-*}" = "host" ]
     then
@@ -93,8 +93,8 @@ do
       fi
     fi
   done
-  DEPS=$FINALDEPS
-  for DEP in ${DEPS[@]}
+  # DEPS=$FINALDEPS
+  for DEP in ${FINALDEPS[@]}
   do
     echo "========================================"
     echo "Package $PKG has final dependency $DEP"
