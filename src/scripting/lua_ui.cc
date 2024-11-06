@@ -3945,6 +3945,7 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
    METHOD(LuaMapView, add_toolbar_plugin),
    METHOD(LuaMapView, update_toolbar),
    METHOD(LuaMapView, set_keyboard_shortcut),
+   METHOD(LuaMapView, set_keyboard_shortcut_release),
    METHOD(LuaMapView, add_plugin_timer),
    {nullptr, nullptr},
 };
@@ -4311,7 +4312,7 @@ int LuaMapView::add_toolbar_plugin(lua_State* L) {
       .. versionadded:: 1.3
 
       Associate a named keyboard shortcut with a piece of code to run when the shortcut is pressed.
-      This replaces any existing action associated with the shortcut.
+      This replaces any existing action associated with pressing the shortcut.
 
       :arg internal_name: The internal name of the keyboard shortcut.
       :type internal_name: :class:`string`
@@ -4321,6 +4322,8 @@ int LuaMapView::add_toolbar_plugin(lua_State* L) {
          is removed. If this is set to :const:`false`, the game will be aborted with no
          error handling instead.
       :type failsafe: :class:`boolean`
+
+      :see also: :meth:`set_keyboard_shortcut_release`
 */
 int LuaMapView::set_keyboard_shortcut(lua_State* L) {
 	std::string name = luaL_checkstring(L, 2);
@@ -4329,7 +4332,38 @@ int LuaMapView::set_keyboard_shortcut(lua_State* L) {
 	if (!shortcut_exists(name)) {
 		report_error(L, "Invalid shortcut name '%s'", name.c_str());
 	}
-	get()->set_lua_shortcut(name, action, failsafe);
+	get()->set_lua_shortcut(name, action, failsafe, true);
+	return 0;
+}
+
+/* RST
+   .. method:: set_keyboard_shortcut_release(internal_name, action[, failsafe=true])
+
+      .. versionadded:: 1.3
+
+      Associate a named keyboard shortcut with a piece of code to run when the shortcut is released
+      after having been previously pressed.
+      This replaces any existing action associated with releasing the shortcut.
+
+      :arg internal_name: The internal name of the keyboard shortcut.
+      :type internal_name: :class:`string`
+      :arg action: The Lua code to run.
+      :type action: :class:`string`
+      :arg failsafe: In event of an error, an error message is shown and the shortcut binding
+         is removed. If this is set to :const:`false`, the game will be aborted with no
+         error handling instead.
+      :type failsafe: :class:`boolean`
+
+      :see also: :meth:`set_keyboard_shortcut`
+*/
+int LuaMapView::set_keyboard_shortcut_release(lua_State* L) {
+	std::string name = luaL_checkstring(L, 2);
+	std::string action = luaL_checkstring(L, 3);
+	bool failsafe = lua_gettop(L) < 4 || luaL_checkboolean(L, 4);
+	if (!shortcut_exists(name)) {
+		report_error(L, "Invalid shortcut name '%s'", name.c_str());
+	}
+	get()->set_lua_shortcut(name, action, failsafe, false);
 	return 0;
 }
 
@@ -4382,6 +4416,7 @@ MainMenu
 const char LuaMainMenu::className[] = "MainMenu";
 const MethodType<LuaMainMenu> LuaMainMenu::Methods[] = {
    METHOD(LuaMainMenu, set_keyboard_shortcut),
+   METHOD(LuaMainMenu, set_keyboard_shortcut_release),
    METHOD(LuaMainMenu, add_plugin_timer),
    {nullptr, nullptr},
 };
@@ -4404,7 +4439,7 @@ void LuaMainMenu::__unpersist(lua_State* L) {
    .. method:: set_keyboard_shortcut(internal_name, action[, failsafe=true])
 
       Associate a named keyboard shortcut with a piece of code to run when the shortcut is pressed.
-      This replaces any existing action associated with the shortcut.
+      This replaces any existing action associated with pressing the shortcut.
 
       :arg internal_name: The internal name of the keyboard shortcut.
       :type internal_name: :class:`string`
@@ -4414,6 +4449,8 @@ void LuaMainMenu::__unpersist(lua_State* L) {
          is removed. If this is set to :const:`false`, the game will be aborted with no
          error handling instead.
       :type failsafe: :class:`boolean`
+
+      :see also: :meth:`set_keyboard_shortcut_release`
 */
 int LuaMainMenu::set_keyboard_shortcut(lua_State* L) {
 	std::string name = luaL_checkstring(L, 2);
@@ -4422,7 +4459,36 @@ int LuaMainMenu::set_keyboard_shortcut(lua_State* L) {
 	if (!shortcut_exists(name)) {
 		report_error(L, "Invalid shortcut name '%s'", name.c_str());
 	}
-	get()->set_lua_shortcut(name, action, failsafe);
+	get()->set_lua_shortcut(name, action, failsafe, true);
+	return 0;
+}
+
+/* RST
+   .. method:: set_keyboard_shortcut_release(internal_name, action[, failsafe=true])
+
+      Associate a named keyboard shortcut with a piece of code to run when the shortcut is released
+      after having been previously pressed.
+      This replaces any existing action associated with releasing the shortcut.
+
+      :arg internal_name: The internal name of the keyboard shortcut.
+      :type internal_name: :class:`string`
+      :arg action: The Lua code to run.
+      :type action: :class:`string`
+      :arg failsafe: In event of an error, an error message is shown and the shortcut binding
+         is removed. If this is set to :const:`false`, the game will be aborted with no
+         error handling instead.
+      :type failsafe: :class:`boolean`
+
+      :see also: :meth:`set_keyboard_shortcut`
+*/
+int LuaMainMenu::set_keyboard_shortcut_release(lua_State* L) {
+	std::string name = luaL_checkstring(L, 2);
+	std::string action = luaL_checkstring(L, 3);
+	bool failsafe = lua_gettop(L) < 4 || luaL_checkboolean(L, 4);
+	if (!shortcut_exists(name)) {
+		report_error(L, "Invalid shortcut name '%s'", name.c_str());
+	}
+	get()->set_lua_shortcut(name, action, failsafe, false);
 	return 0;
 }
 

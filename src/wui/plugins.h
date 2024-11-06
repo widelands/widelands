@@ -91,10 +91,10 @@ public:
 
 	uint32_t remove_timer(const std::string& name, bool all);
 
-	bool check_keyboard_shortcut_action(SDL_Keysym code);
+	bool check_keyboard_shortcut_action(SDL_Keysym code, bool down);
 
-	void set_keyboard_shortcut(const std::string& name, const std::string& action, bool failsafe) {
-		keyboard_shortcuts_[shortcut_from_string(name)] = CustomKeyboardShortcut(action, failsafe);
+	void set_keyboard_shortcut(const std::string& name, const std::string& action, bool failsafe, bool down) {
+		keyboard_shortcuts_[std::make_pair(shortcut_from_string(name), down)] = CustomKeyboardShortcut(action, failsafe);
 	}
 
 private:
@@ -103,7 +103,7 @@ private:
 
 	std::vector<Timer> timers_;
 
-	std::map<KeyboardShortcut, CustomKeyboardShortcut> keyboard_shortcuts_;
+	std::map<std::pair<KeyboardShortcut, bool /*down*/>, CustomKeyboardShortcut> keyboard_shortcuts_;
 };
 
 #endif  // end of include guard: WL_WUI_PLUGINS_H

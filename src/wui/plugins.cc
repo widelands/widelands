@@ -105,9 +105,9 @@ void PluginActions::think() {
 	}
 }
 
-bool PluginActions::check_keyboard_shortcut_action(const SDL_Keysym code) {
+bool PluginActions::check_keyboard_shortcut_action(const SDL_Keysym code, const bool down) {
 	for (auto it = keyboard_shortcuts_.begin(); it != keyboard_shortcuts_.end(); ++it) {
-		if (matches_shortcut(it->first, code)) {
+		if ((it->first.second == down) && matches_shortcut(it->first.first, code)) {
 			if (!plugin_action(it->second.action, it->second.failsafe)) {
 				// In case of an error, remove it from the mapping
 				log_err("Unregistering defective plugin keyboard shortcut");

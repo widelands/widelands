@@ -619,19 +619,19 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 		return true;
 	}
 
-	if (down) {
-		if (splash_state_ != SplashState::kDone) {
-			abort_splashscreen();
-			if (matches_shortcut(KeyboardShortcut::kMainMenuQuit, code)) {
-				// don't initiate quitting in this case
-				return true;
-			}
-		}
-
-		if (plugin_actions_->check_keyboard_shortcut_action(code)) {
+	if (splash_state_ != SplashState::kDone && down) {
+		abort_splashscreen();
+		if (matches_shortcut(KeyboardShortcut::kMainMenuQuit, code)) {
+			// don't initiate quitting in this case
 			return true;
 		}
+	}
 
+	if (plugin_actions_->check_keyboard_shortcut_action(code, down)) {
+		return true;
+	}
+
+	if (down) {
 		auto check_match_shortcut = [this, &code](KeyboardShortcut k, MenuTarget t) {
 			if (matches_shortcut(k, code)) {
 				action(t);
