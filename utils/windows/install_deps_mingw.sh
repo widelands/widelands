@@ -77,14 +77,14 @@ do
     fi
     # Check for fixed architecture
     FIXEDARCH=$(echo $DEP | cut -d '!' -f 1)
-    if [ "$FIXEDARCH" != "$DEP" ]
+    if [ "$FIXEDARCH" == "$DEP" ]
     then
+      FINALDEPS+=($DEP)
+    else
       if [ "$FIXEDARCH" == "$ARCH" ]
       then
         FINALDEPS+=$(echo $DEP | cut -d '!' -f 2)
       fi
-    else
-      FINALDEPS+=($DEP)
     fi
   done
   DEPS=$FINALDEPS
