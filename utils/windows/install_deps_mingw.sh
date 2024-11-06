@@ -89,7 +89,7 @@ do
         echo "========================================"
         echo "Dependency $(echo $DEP | cut -d '!' -f 2) will be added"
         echo "========================================"
-        FINALDEPS+=$(echo $DEP | cut -d '!' -f 2)
+        FINALDEPS+=($(echo $DEP | cut -d '!' -f 2))
       fi
     fi
   done
