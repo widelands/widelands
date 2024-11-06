@@ -656,6 +656,8 @@ void WLApplication::init_mouse_cursor() {
 }
 
 void WLApplication::initialize_g_addons() {
+	init_plugin_shortcuts();
+
 	AddOns::g_addons.clear();
 	if (g_fs->is_directory(kAddOnDir)) {
 		std::set<std::string> found;
@@ -1333,7 +1335,6 @@ bool WLApplication::init_settings() {
 	}
 
 	// Keyboard shortcuts
-	init_plugin_shortcuts();
 	init_shortcuts();
 
 	// Mousewheel options

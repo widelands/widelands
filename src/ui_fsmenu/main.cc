@@ -573,13 +573,13 @@ void MainMenu::abort_splashscreen() {
 
 void MainMenu::think() {
 	UI::Panel::think();
-	plugin_timers_->think();
+	plugin_actions_->think();
 }
 
 void MainMenu::reinit_plugins() {
 	lua_.reset(new LuaFsMenuInterface(this));
-	plugin_timers_.reset(
-	   new PluginTimers(this, [this](const std::string& cmd) { lua_->interpret_string(cmd); }));
+	plugin_actions_.reset(
+	   new PluginActions(this, [this](const std::string& cmd) { lua_->interpret_string(cmd); }));
 
 	for (const auto& pair : AddOns::g_addons) {
 		if (pair.second && pair.first->category == AddOns::AddOnCategory::kUIPlugin) {
@@ -628,7 +628,7 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 			}
 		}
 
-		if (plugin_timers_->check_keyboard_shortcut_action(code)) {
+		if (plugin_actions_->check_keyboard_shortcut_action(code)) {
 			return true;
 		}
 

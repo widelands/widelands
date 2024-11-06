@@ -145,7 +145,9 @@ struct WLApplication {
 
 	void run();
 
-	static void initialize_g_addons();
+	void initialize_g_addons();
+
+	void init_plugin_shortcuts();
 
 	/// \warning true if an external entity wants us to quit
 	[[nodiscard]] bool should_die() const {
@@ -196,8 +198,6 @@ struct WLApplication {
 
 	// Pump SDL events and dispatch them.
 	void handle_input(InputCallback const*);
-
-	void init_plugin_shortcuts();
 
 	static void emergency_save(UI::Panel*,
 	                           Widelands::Game&,

@@ -31,7 +31,7 @@ namespace UI {
 class Panel;
 }  // namespace UI
 
-class PluginTimers {
+class PluginActions {
 public:
 	using RunLuaCommandFn = std::function<void(const std::string&)>;
 
@@ -64,7 +64,7 @@ public:
 		bool failsafe{false};
 	};
 
-	PluginTimers(UI::Panel* p, RunLuaCommandFn lua) : root_panel_(p), lua_(lua) {
+	PluginActions(UI::Panel* p, RunLuaCommandFn lua) : root_panel_(p), lua_(lua) {
 	}
 
 	bool plugin_action(const std::string& action, bool failsafe);

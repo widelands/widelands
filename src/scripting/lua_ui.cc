@@ -4317,8 +4317,9 @@ int LuaMapView::add_toolbar_plugin(lua_State* L) {
       :type internal_name: :class:`string`
       :arg action: The Lua code to run.
       :type action: :class:`string`
-      :arg failsafe: In event of an error, an error message is shown and the timer is removed.
-         If this is set to :const:`false`, the game will be aborted with no error handling instead.
+      :arg failsafe: In event of an error, an error message is shown and the shortcut binding
+         is removed. If this is set to :const:`false`, the game will be aborted with no
+         error handling instead.
       :type failsafe: :class:`boolean`
 */
 int LuaMapView::set_keyboard_shortcut(lua_State* L) {
@@ -4409,8 +4410,9 @@ void LuaMainMenu::__unpersist(lua_State* L) {
       :type internal_name: :class:`string`
       :arg action: The Lua code to run.
       :type action: :class:`string`
-      :arg failsafe: In event of an error, an error message is shown and the timer is removed.
-         If this is set to :const:`false`, the game will be aborted with no error handling instead.
+      :arg failsafe: In event of an error, an error message is shown and the shortcut binding
+         is removed. If this is set to :const:`false`, the game will be aborted with no
+         error handling instead.
       :type failsafe: :class:`boolean`
 */
 int LuaMainMenu::set_keyboard_shortcut(lua_State* L) {
