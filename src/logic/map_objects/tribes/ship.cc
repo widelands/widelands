@@ -1850,7 +1850,8 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			start_task_idle(game, descr().main_animation(), kShipInterval);
 			return;
 		}  // scouting towards a specific direction
-		if (exp_dir_swimmable(expedition_->scouting_direction)) {
+		if (expedition_->scouting_direction != IDLE &&
+		    exp_dir_swimmable(expedition_->scouting_direction)) {
 			// the scouting direction is still free to move
 			state.ivar1 = 1;
 			start_task_move(game, expedition_->scouting_direction, descr().get_sail_anims(), false);
