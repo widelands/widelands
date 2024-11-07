@@ -36,7 +36,7 @@
 
 ;Appveyor environment
 #define BuildFolder GetEnv("APPVEYOR_BUILD_FOLDER")
-#define Version "1.2.1" + GetEnv("PLATFORM")
+#define Version "1.2.1~rc2" + GetEnv("PLATFORM")
 
 [Setup]
 AppName={#Name}
