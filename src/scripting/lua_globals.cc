@@ -306,7 +306,7 @@ static int L__(lua_State* L) {
 
    :returns: The translated string.
 
-   Example to demonstrate the use:
+   Example to show how it works:
 
    .. code-block:: lua
 
@@ -325,18 +325,16 @@ static int L__(lua_State* L) {
       languages have more than one plural form, other languages have other rules for the
       singular form.
 
-   It’s better to include the variable ``count`` in a short sentence:
+   It’s always better to include the variable ``count`` in a short sentence:
 
    .. code-block:: lua
 
       local count = _get_items()                -- count can be 0 or more
       local text  = ""
 
-      if count == 0 then
-         text = _("You have no items.")         -- Note the _() function
-      else
-         text = ngettext("You have %1$d item", "You have %1$d items", count):bformat(count)
-      end
+      text = ngettext("You have %1$d item", "You have %1$d items", count):bformat(count)
+
+   Translators have then technics to apply the correct singular or plural form.
 */
 static int L_ngettext(lua_State* L) {
 	//  S: msgid msgid_plural n
