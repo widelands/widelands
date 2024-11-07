@@ -159,7 +159,8 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
                        UI::PanelStyle::kWui,
                        UI::ButtonStyle::kWuiPrimary),
      quick_navigation_(&map_view_),
-     plugin_timers_(this, [this](const std::string& cmd) { egbase().lua().interpret_string(cmd); }),
+     plugin_actions_(
+        this, [this](const std::string& cmd) { egbase().lua().interpret_string(cmd); }),
      minimap_registry_(the_egbase.is_game()),
      workareas_cache_(nullptr),
      egbase_(the_egbase),
@@ -289,14 +290,15 @@ void InteractiveBase::add_plugin_menu() {
 	plugins_dropdown_.set_image(g_image_cache->get("images/plugin.png"));
 	toolbar()->add(&plugins_dropdown_);
 	plugins_dropdown_.selected.connect(
-	   [this] { plugin_timers_.plugin_action(plugins_dropdown_.get_selected(), true); });
+	   [this] { plugin_actions_.plugin_action(plugins_dropdown_.get_selected(), true); });
 }
 
 void InteractiveBase::add_toolbar_plugin(const std::string& action,
                                          const std::string& icon,
                                          const std::string& label,
-                                         const std::string& tt) {
-	plugins_dropdown_.add(label, action, g_image_cache->get(icon), false, tt);
+                                         const std::string& tt,
+                                         const std::string& hotkey) {
+	plugins_dropdown_.add(label, action, g_image_cache->get(icon), false, tt, hotkey);
 	finalize_toolbar();
 }
 
@@ -957,7 +959,7 @@ void InteractiveBase::think() {
 		it = wanted_building_windows_.erase(it);
 	}
 
-	plugin_timers_.think();
+	plugin_actions_.think();
 }
 
 double InteractiveBase::average_fps() const {
@@ -1843,6 +1845,10 @@ void InteractiveBase::broadcast_cheating_message(const std::string& code,
 }
 
 bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
+	if (plugin_actions_.check_keyboard_shortcut_action(code, down)) {
+		return true;
+	}
+
 	if (quick_navigation_.handle_key(down, code)) {
 		return true;
 	}
