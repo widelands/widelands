@@ -392,7 +392,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 			// TODO(tothxa): Savegame compatibility v1.1
 			warehouse.set_warehouse_name(
 			   packet_version >= 9 ? fr.string() :
-                                  player->pick_warehousename(warehouse.descr().get_isport()));
+			                         player->pick_warehousename(warehouse.descr().get_isport()));
 
 			while (fr.unsigned_8() != 0u) {
 				const DescriptionIndex& id = game.mutable_descriptions()->load_ware(fr.c_string());

@@ -6,6 +6,7 @@ files are correct.
 
 It relies on the established build rule formatting conventions in the
 code base.
+
 """
 
 from collections import defaultdict
@@ -189,7 +190,7 @@ def report_unused_sources(srcdir, sources, owners_of_src):
     unused_sources = sources - set(owners_of_src.keys())
     allowed = 0
     for src in sorted(unused_sources):
-        if 'third_party/tinygettext' in src:
+        if 'third_party/tinygettext' in src or 'third_party/libmd' in src:
             allowed += 1
         else:
             print_error(src, 1, '(CRITICAL) File not mentioned in any build rule.')
