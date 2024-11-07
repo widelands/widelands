@@ -2553,8 +2553,8 @@ msgstr[1] "Mankas %s"
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
-msgstr[0] "%s estis farita"
-msgstr[1] "%s estis faritaj"
+msgstr[0] "%s estis produktita"
+msgstr[1] "%s estis produktitaj"
 
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
@@ -2563,12 +2563,12 @@ msgstr[1] "%s estis faritaj"
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s estis rekrutita"
+msgstr[1] "%s estis rekrutitaj"
 
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1881
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Neniu soldato trovita por ĉi tiu trejnnivelo!"
 
 #. * TRANSLATORS: Success message of a trainingsite '%s' stands for the
 #. description of the
@@ -2593,33 +2593,33 @@ msgstr "%i%%"
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1201
 msgid "Can’t find any more resources!"
-msgstr ""
+msgstr "Ne troveblas pliaj resursoj!"
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1249
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1270
 msgctxt "building"
 msgid "No Shore"
-msgstr ""
+msgstr "Sen Marbordo"
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1250
 msgid "Shipyard Without Shore"
-msgstr ""
+msgstr "Ŝipfarejo Sen Marbordo"
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1251
 msgid ""
 "Your shipyard has not been built close enough to a shore. It will not be "
 "able to build ships."
-msgstr ""
+msgstr "Via ŝipfarejo ne estas konstruita sufiĉe proksime al marbordo. Ĝi ne povos konstrui ŝipojn."
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1271
 msgid "Ferry Yard Without Shore"
-msgstr ""
+msgstr "Pramfarejo Sen Marbordo"
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1272
 msgid ""
 "Your ferry yard has not been built close enough to a shore. It will not be "
 "able to build ferries."
-msgstr "Via pramfarejo ne estis konstruita sufiĉe proksime al marbordo. Ĝi ne povos konstrui pramojn."
+msgstr "Via pramfarejo ne estas konstruita sufiĉe proksime al marbordo. Ĝi ne povos konstrui pramojn."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Destination Gone"
