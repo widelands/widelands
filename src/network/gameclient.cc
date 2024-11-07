@@ -856,6 +856,8 @@ void GameClient::handle_setting_map(RecvPacket& packet) {
 
 	// New map was set, so we clean up the buffer of a previously requested file
 	d->file_.reset(nullptr);
+
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 }
 
 /**
