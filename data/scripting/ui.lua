@@ -22,7 +22,8 @@ include "scripting/coroutine.lua"
 --
 
 -- Sleep until we are done animating.
-function _await_animation()
+function _await_animation(return_immediate)
+   if return_immediate then return end
    local mv = wl.ui.MapView()
    while mv.is_animating do
       sleep(41)
@@ -30,7 +31,10 @@ function _await_animation()
 end
 
 -- RST
--- .. function:: scroll_to_map_pixel(map_pixel)
+-- .. function:: scroll_to_map_pixel(map_pixel[, return_immediate = false])
+--
+--    .. versionchanged:: 1.2.1
+--       Added parameter ``return_immediate``.
 --
 --    Make a nice moving transition to center on the 'map_pixel', which is a table
 --    that must contain 'x' and 'y' keys. The function will return as soon as
@@ -42,6 +46,8 @@ end
 --
 --    :arg map_pixel: pixels to focus on.
 --    :type map_pixel: :class:`table`
+--    :arg return_immediate: Whether to return from the function call immediately, even if the transition is still ongoing.
+--    :type return_immediate: :class:`boolean`
 --
 --    Example:
 --
@@ -61,35 +67,43 @@ end
 --       scroll_to_map_pixel(prior_location)
 --
 
-function scroll_to_map_pixel(map_pixel)
-   _await_animation()
+function scroll_to_map_pixel(map_pixel, return_immediate)
+   _await_animation(return_immediate)
    wl.ui.MapView():scroll_to_map_pixel(map_pixel.x, map_pixel.y)
-   _await_animation()
+   _await_animation(return_immediate)
 end
 
 -- RST
--- .. function:: scroll_to_field(field)
+-- .. function:: scroll_to_field(field[, return_immediate = false])
+--
+--    .. versionchanged:: 1.2.1
+--       Added parameter ``return_immediate``.
 --
 --    Make a nice moving transition to center the 'field' on screen. The
 --    function will return as soon as the transition is completed.
 --
 --    :arg field: Field to center the view on
 --    :type field: :class:`wl.map.Field`
+--    :arg return_immediate: Whether to return from the function call immediately, even if the transition is still ongoing.
+--    :type return_immediate: :class:`boolean`
 --
 --    :returns: the prior center map pixel of the MapView as a table containing
 --       'x' and 'y' keys.
 --
-function scroll_to_field(field)
-   _await_animation()
+function scroll_to_field(field, return_immediate)
+   _await_animation(return_immediate)
    local mv = wl.ui.MapView()
    local center_map_pixel = mv.center_map_pixel
    mv:scroll_to_field(field)
-   _await_animation()
+   _await_animation(return_immediate)
    return center_map_pixel
 end
 
 -- RST
--- .. function:: mouse_to_pixel(x, y)
+-- .. function:: mouse_to_pixel(x, y[, return_immediate = false])
+--
+--    .. versionchanged:: 1.2.1
+--       Added parameter ``return_immediate``.
 --
 --    Make a nice moving transition for the mouse to the given pixels relative
 --    to the top left corner of the screen. The function will return as soon as
@@ -99,15 +113,20 @@ end
 --    :type x: :class:`integer`
 --    :arg y: y position to move the mouse to
 --    :type y: :class:`integer`
+--    :arg return_immediate: Whether to return from the function call immediately, even if the transition is still ongoing.
+--    :type return_immediate: :class:`boolean`
 --
-function mouse_to_pixel(x, y)
-   _await_animation()
+function mouse_to_pixel(x, y, return_immediate)
+   _await_animation(return_immediate)
    wl.ui.MapView():mouse_to_pixel(math.floor(x), math.floor(y))
-   _await_animation()
+   _await_animation(return_immediate)
 end
 
 -- RST
--- .. function:: mouse_to_field(field)
+-- .. function:: mouse_to_field(field[, return_immediate = false])
+--
+--    .. versionchanged:: 1.2.1
+--       Added parameter ``return_immediate``.
 --
 --    Move the mouse on the given field. Makes sure that the field is inside
 --    the current view area by scrolling the view if necessary. The function
@@ -115,9 +134,11 @@ end
 --
 --    :arg field: Field to mouse to
 --    :type field: :class:`wl.map.Field`
+--    :arg return_immediate: Whether to return from the function call immediately, even if the transition is still ongoing.
+--    :type return_immediate: :class:`boolean`
 --
-function mouse_to_field(field)
-   _await_animation()
+function mouse_to_field(field, return_immediate)
+   _await_animation(return_immediate)
    local mv = wl.ui.MapView()
    if not mv:is_visible(field) then
       scroll_to_field(field)
@@ -126,20 +147,25 @@ function mouse_to_field(field)
    end
 
    mv:mouse_to_field(field)
-   _await_animation()
+   _await_animation(return_immediate)
 end
 
 -- RST
--- .. function:: mouse_to_panel(panel)
+-- .. function:: mouse_to_panel(panel[, return_immediate = false])
+--
+--    .. versionchanged:: 1.2.1
+--       Added parameter ``return_immediate``.
 --
 --    Move the mouse to the center of the given ui element. The function will
 --    return as soon as the transition is completed.
 --
 --    :arg panel: Panel to mouse to
 --    :type panel: :class:`wl.ui.Panel`
+--    :arg return_immediate: Whether to return from the function call immediately, even if the transition is still ongoing.
+--    :type return_immediate: :class:`boolean`
 --
-function mouse_to_panel(panel)
-   _await_animation()
+function mouse_to_panel(panel, return_immediate)
+   _await_animation(return_immediate)
    local x, y = wl.ui.MapView():get_descendant_position(panel)
    mouse_to_pixel(x + panel.width / 2, y + panel.height / 2)
 end
