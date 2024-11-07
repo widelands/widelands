@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-11-04 03:00+0000\n"
+"POT-Creation-Date: 2024-11-07 02:53+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -2741,94 +2741,94 @@ msgstr "기다리는 중"
 msgid "An expedition ship sailed around its island without any events."
 msgstr "탐험선이 별 일 없이 섬을 일주했습니다."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1867
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1868
 msgid "Coast Reached"
 msgstr "해안 도착"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1867
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1868
 msgid "Land Ahoy!"
 msgstr "육지 발견!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1868
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1869
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "탐헌선이 해안에 도착해서 향후 명령을 기다리는 중입니다."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1921
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1922
 msgid "New port construction site is gone"
 msgstr "새로운 항구 건설 위치가 사라졌습니다"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1921
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1922
 msgid "Port Lost!"
 msgstr "항구 손실!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1922
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1923
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "물품을 하적하는데 실패해서 탐험을 취소합니다."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1979
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1980
 msgid "No Port Can Be Built"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1979
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1980
 msgid "Port Space Lost!"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1980
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1981
 msgid ""
 "A discovered port build space is not available for building a port anymore."
 msgstr ""
 
 #. * TRANSLATORS: Warship ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2227
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2228
 msgctxt "ship"
 msgid "Warship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2227
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2228
 msgid "Warship Ready"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2228
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2229
 msgid "A warship is waiting for your commands."
 msgstr ""
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2233
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2234
 msgctxt "ship"
 msgid "Expedition"
 msgstr "탐험"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2233
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2234
 msgid "Expedition Ready"
 msgstr "탐험 준비 완료"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2234
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2235
 msgid "An expedition ship is waiting for your commands."
 msgstr "탐험선이 당신의 명령을 기다리고 있습니다."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2408
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2409
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2410
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2411
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2414
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2415
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2417
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2418
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2425
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2426
 #: ../../../../src/wui/seafaring_statistics_menu.cc:271
 msgctxt "ship_state"
 msgid "Warship"
@@ -2840,10 +2840,10 @@ msgstr ""
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2431
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2441
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2447
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2461
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2432
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2442
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2448
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2462
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -2851,7 +2851,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2436
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2437
 #: ../../../../src/wui/seafaring_statistics_menu.cc:261
 msgctxt "ship_state"
 msgid "Empty"
@@ -2859,7 +2859,7 @@ msgstr "비어있음"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2456
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2457
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -2867,7 +2867,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2468
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2469
 #: ../../../../src/wui/seafaring_statistics_menu.cc:265
 msgctxt "ship_state"
 msgid "Waiting"
@@ -2875,14 +2875,14 @@ msgstr "대기하고 있음"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2472
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2473
 #: ../../../../src/wui/seafaring_statistics_menu.cc:267
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "정찰하고 있음"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2476
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2477
 #: ../../../../src/wui/seafaring_statistics_menu.cc:269
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -2891,7 +2891,7 @@ msgstr "항구 공간 발견"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2481
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2482
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "식민지를 짓고 있음"
