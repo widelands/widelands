@@ -4345,6 +4345,8 @@ int LuaMapView::set_keyboard_shortcut(lua_State* L) {
       after having been previously pressed.
       This replaces any existing action associated with releasing the shortcut.
 
+      You don't need this in normal cases. When in doubt, use only meth:`set_keyboard_shortcut`.
+
       :arg internal_name: The internal name of the keyboard shortcut.
       :type internal_name: :class:`string`
       :arg action: The Lua code to run.
@@ -4469,6 +4471,8 @@ int LuaMainMenu::set_keyboard_shortcut(lua_State* L) {
       Associate a named keyboard shortcut with a piece of code to run when the shortcut is released
       after having been previously pressed.
       This replaces any existing action associated with releasing the shortcut.
+
+      You don't need this in normal cases. When in doubt, use only meth:`set_keyboard_shortcut`.
 
       :arg internal_name: The internal name of the keyboard shortcut.
       :type internal_name: :class:`string`
