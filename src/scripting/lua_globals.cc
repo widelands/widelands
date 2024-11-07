@@ -310,31 +310,30 @@ static int L__(lua_State* L) {
 
    .. code-block:: lua
 
-      local count = _get_items()                 -- count can be 0 or more
-      local text  = ""
-
-      if count == 0 then
-         text = _("You have no items.")          -- Note the _() function
-      else
-         text = ngettext("You have only one item", "You have a lot of items", count)
-      end
+      local count = _get_items()                -- count can be 0 or more
+      local text  = ngettext("You have %1$d item", "You have %1$d items", count):bformat(count)
 
    .. note::
-      The above example doesn’t work for all languages because building singular and plural
-      forms differ widely between languages. Depending on the value of ``count`` some
-      languages have more than one plural form, other languages have other rules for the
-      singular form.
-
-   It’s always better to include the variable ``count`` in a short sentence:
+      The singular and plural forms should be identical except for the plural form itself.
+      If you want to special-case the number ``1`` (or any other number),
+      or if you don't want to include the ``count`` variable in the string,
+      do *not* use ``ngettext``, but rather an ``if``-``else``-construct. Example:
 
    .. code-block:: lua
 
-      local count = _get_items()                -- count can be 0 or more
-      local text  = ""
+      local count = _get_items()  -- count can be 0 or more
+      local text
 
-      text = ngettext("You have %1$d item", "You have %1$d items", count):bformat(count)
+      if count == 0 then
+         text = _("You have no items.")
+      elseif count == 1 then
+         text = _("You have only one item.")
+      else
+         text = _("You have a lot of items.")
+      end
 
-   Translators have then technics to apply the correct singular or plural form.
+      -- Note the _() function for translation.
+      -- The arguments to ngettext do not require an additional _() call.
 */
 static int L_ngettext(lua_State* L) {
 	//  S: msgid msgid_plural n
