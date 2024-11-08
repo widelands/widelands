@@ -77,12 +77,11 @@ function MakeDMG {
       if [ $HDI_RESULT -eq 0 ]; then
          return
       fi
-      # EBUSY is error code 16. We only allow that, all others should fail immediately.
-      if [ $HDI_RESULT -ne 16 -o $HDI_TRY -eq $HDI_MAX_TRIES ]; then
+      if [ $HDI_TRY -eq $HDI_MAX_TRIES ]; then
          exit $HDI_RESULT
       fi
       if [ -n "$GITHUB_ACTION" ]; then
-         echo "::warning::hdiutil resource busy error... retrying"
+         echo "::warning::hdiutil try $HDI_TRY error code: ${HDI_RESULT}... retrying"
       fi
       echo "  will retry after 10 seconds..."
       sleep 10
