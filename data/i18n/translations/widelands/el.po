@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-11-04 03:00+0000\n"
+"POT-Creation-Date: 2024-11-07 02:53+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Alexandros Koutroulis, 2024\n"
 "Language-Team: Greek (http://app.transifex.com/widelands/widelands/language/el/)\n"
@@ -2751,94 +2751,94 @@ msgstr "Αναμένει"
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Ένα πλοίο αποστολής περιέπλευσε ένα νησί χωρίς να συμβεί τίποτα."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1867
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1868
 msgid "Coast Reached"
 msgstr "Ακτή Προσαράχθη"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1867
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1868
 msgid "Land Ahoy!"
 msgstr "Βρέθηκε Στεριά!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1868
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1869
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Ένα πλοίο αποστολής έφτασε σε μια ακτή και αναμένει περαιτέρω εντολές."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1921
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1922
 msgid "New port construction site is gone"
 msgstr "Ο χώρος κατασκευής νέου λιμανιού εξαφανίστηκε"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1921
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1922
 msgid "Port Lost!"
 msgstr "Χάθηκε Λιμάνι!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1922
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1923
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Αποτυχία εκφόρτωσης υλικών, η αποστολή ακυρώνεται."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1979
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1980
 msgid "No Port Can Be Built"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1979
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1980
 msgid "Port Space Lost!"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1980
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1981
 msgid ""
 "A discovered port build space is not available for building a port anymore."
 msgstr ""
 
 #. * TRANSLATORS: Warship ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2227
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2228
 msgctxt "ship"
 msgid "Warship"
 msgstr "Πολεμικό Πλοίο"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2227
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2228
 msgid "Warship Ready"
 msgstr "Πολεμικό Πλοίο Έτοιμο"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2228
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2229
 msgid "A warship is waiting for your commands."
 msgstr ""
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2233
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2234
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Αποστολή"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2233
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2234
 msgid "Expedition Ready"
 msgstr "Αποστολή Έτοιμη"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2234
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2235
 msgid "An expedition ship is waiting for your commands."
 msgstr "Ένα πλοίο αποστολής αναμένει εντολές σας."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2408
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2409
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr "Βυθίζεται"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2410
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2411
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr "Πολεμάει"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2414
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2415
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr "Μετατρέπεται Σε Εμπορικό Πλοίο"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2417
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2418
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr "Μετατρέπεται Σε Πολεμικό Πλοίο"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2425
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2426
 #: ../../../../src/wui/seafaring_statistics_menu.cc:271
 msgctxt "ship_state"
 msgid "Warship"
@@ -2850,10 +2850,10 @@ msgstr "Πολεμικό Πλοίο"
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2431
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2441
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2447
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2461
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2432
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2442
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2448
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2462
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -2861,7 +2861,7 @@ msgstr "Πλέει Προς %s"
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2436
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2437
 #: ../../../../src/wui/seafaring_statistics_menu.cc:261
 msgctxt "ship_state"
 msgid "Empty"
@@ -2869,7 +2869,7 @@ msgstr "Άδειο"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2456
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2457
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -2877,7 +2877,7 @@ msgstr "Μεταφέρει προς %s"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2468
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2469
 #: ../../../../src/wui/seafaring_statistics_menu.cc:265
 msgctxt "ship_state"
 msgid "Waiting"
@@ -2885,14 +2885,14 @@ msgstr "Αναμένει"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2472
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2473
 #: ../../../../src/wui/seafaring_statistics_menu.cc:267
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Εξερευνά"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2476
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2477
 #: ../../../../src/wui/seafaring_statistics_menu.cc:269
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -2901,7 +2901,7 @@ msgstr "Βρέθηκε Τόπος Λιμανιού"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2481
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2482
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Ιδρύει Αποικία"

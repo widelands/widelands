@@ -656,6 +656,8 @@ void WLApplication::init_mouse_cursor() {
 }
 
 void WLApplication::initialize_g_addons() {
+	init_plugin_shortcuts();
+
 	AddOns::g_addons.clear();
 	if (g_fs->is_directory(kAddOnDir)) {
 		std::set<std::string> found;
@@ -1385,6 +1387,80 @@ void WLApplication::init_language() {
 	// Set locale corresponding to selected language
 	std::string language = get_config_string("language", "");
 	i18n::set_locale(language);
+}
+
+void WLApplication::init_plugin_shortcuts() {
+	LuaInterface lua;
+	for (const std::string& name : g_fs->list_directory(kAddOnDir)) {
+		std::string path = name;
+		path += FileSystem::file_separator();
+		path += kAddOnKeyboardShortcutsFile;
+		if (g_fs->file_exists(path)) {
+			try {
+				std::unique_ptr<LuaTable> all_definitions(lua.run_script(path));
+				for (const auto& table : all_definitions->array_entries<std::unique_ptr<LuaTable>>()) {
+					std::string internal_name;
+					try {
+						internal_name = table->get_string("internal_name");
+						std::string descname = table->get_string("descname");
+
+						std::set<KeyboardShortcutScope> scopes;
+						std::unique_ptr<LuaTable> scopes_table = table->get_table("scopes");
+						for (const std::string& scope : scopes_table->array_entries<std::string>()) {
+							if (scope == "global") {
+								scopes.insert(KeyboardShortcutScope::kGlobal);
+							} else if (scope == "game") {
+								scopes.insert(KeyboardShortcutScope::kGame);
+							} else if (scope == "editor") {
+								scopes.insert(KeyboardShortcutScope::kEditor);
+							} else if (scope == "main_menu") {
+								scopes.insert(KeyboardShortcutScope::kMainMenu);
+							} else {
+								throw WLWarning("", "Invalid scope '%s'", scope.c_str());
+							}
+						}
+						if (scopes.empty()) {
+							throw WLWarning("", "No scopes");
+						}
+
+						std::string keycode_name = table->get_string("keycode");
+						SDL_Keycode default_shortcut = SDL_GetKeyFromName(keycode_name.c_str());
+						if (default_shortcut == SDLK_UNKNOWN) {
+							throw WLWarning("", "Invalid keycode '%s'", keycode_name.c_str());
+						}
+
+						int default_mods = 0;
+						if (table->has_key("mods")) {
+							std::unique_ptr<LuaTable> mods_table = table->get_table("mods");
+							for (const std::string& mod : mods_table->array_entries<std::string>()) {
+								if (mod == "ctrl" || mod == "control") {
+									default_mods |= KMOD_CTRL;
+								} else if (mod == "shift") {
+									default_mods |= KMOD_SHIFT;
+								} else if (mod == "alt") {
+									default_mods |= KMOD_ALT;
+								} else if (mod == "gui" || mod == "super" || mod == "meta" ||
+								           mod == "cmd" || mod == "command" || mod == "windows") {
+									default_mods |= KMOD_GUI;
+								} else {
+									throw WLWarning("", "Invalid modifier '%s'", mod.c_str());
+								}
+							}
+						}
+
+						create_replace_shortcut(
+						   internal_name, descname, scopes, keysym(default_shortcut, default_mods));
+					} catch (const std::exception& e) {
+						log_err("Error in plugin keyboard shortcut definition in '%s': '%s': %s",
+						        path.c_str(), internal_name.c_str(), e.what());
+					}
+				}
+			} catch (const std::exception& e) {
+				log_err("Error reading plugin keyboard shortcut definitions from '%s': %s",
+				        path.c_str(), e.what());
+			}
+		}
+	}
 }
 
 /**
