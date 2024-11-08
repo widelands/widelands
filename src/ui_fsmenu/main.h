@@ -112,9 +112,14 @@ public:
 		return *lua_;
 	}
 
+	void
+	set_lua_shortcut(const std::string& name, const std::string& action, bool failsafe, bool down) {
+		plugin_actions_->set_keyboard_shortcut(name, action, failsafe, down);
+	}
+
 	void reinit_plugins();
 	void add_plugin_timer(const std::string& action, uint32_t interval, bool failsafe) {
-		plugin_timers_->add_plugin_timer(action, interval, failsafe);
+		plugin_actions_->add_plugin_timer(action, interval, failsafe);
 	}
 
 	// Signal ending immediately from any phase
@@ -129,7 +134,7 @@ private:
 
 	UniqueWindowHandler unique_windows_;
 	std::unique_ptr<LuaFsMenuInterface> lua_;
-	std::unique_ptr<PluginTimers> plugin_timers_;
+	std::unique_ptr<PluginActions> plugin_actions_;
 
 	// Called only from splash screen phase to signal start of fading
 	void end_splashscreen();
