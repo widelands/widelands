@@ -22,6 +22,7 @@
 - Replace MD5 checksumming code with `libmd`
 - Fix LaunchMPG map seafaring check for naval warfare
 - Fix anchored ship trying to swim towards buffer-underflow
+- Fix desync in Discovery/New World starting conditions
 
 
 ## Release 1.2
