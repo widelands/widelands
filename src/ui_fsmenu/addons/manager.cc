@@ -1606,6 +1606,7 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 	}
 	g_fs->fs_unlink(temp_dir);
 
+	WLApplication::get().init_plugin_shortcuts();
 	if (need_to_rebuild_texture_atlas) {
 		g_gr->rebuild_texture_atlas();
 	}

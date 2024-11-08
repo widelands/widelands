@@ -21,14 +21,17 @@
 
 #include <cstdint>
 #include <functional>
+#include <map>
 #include <string>
 #include <vector>
+
+#include "wlapplication_options.h"
 
 namespace UI {
 class Panel;
 }  // namespace UI
 
-class PluginTimers {
+class PluginActions {
 public:
 	using RunLuaCommandFn = std::function<void(const std::string&)>;
 
@@ -52,7 +55,16 @@ public:
 		bool failsafe{false};
 	};
 
-	PluginTimers(UI::Panel* p, RunLuaCommandFn lua) : root_panel_(p), lua_(lua) {
+	struct CustomKeyboardShortcut {
+		CustomKeyboardShortcut() = default;
+		explicit CustomKeyboardShortcut(const std::string& act, bool safe)
+		   : action(act), failsafe(safe) {
+		}
+		std::string action;
+		bool failsafe{false};
+	};
+
+	PluginActions(UI::Panel* p, RunLuaCommandFn lua) : root_panel_(p), lua_(lua) {
 	}
 
 	bool plugin_action(const std::string& action, bool failsafe);
@@ -79,11 +91,23 @@ public:
 
 	uint32_t remove_timer(const std::string& name, bool all);
 
+	bool check_keyboard_shortcut_action(SDL_Keysym code, bool down);
+
+	void set_keyboard_shortcut(const std::string& name,
+	                           const std::string& action,
+	                           bool failsafe,
+	                           bool down) {
+		keyboard_shortcuts_[std::make_pair(shortcut_from_string(name), down)] =
+		   CustomKeyboardShortcut(action, failsafe);
+	}
+
 private:
 	UI::Panel* root_panel_;
 	RunLuaCommandFn lua_;
 
 	std::vector<Timer> timers_;
+
+	std::map<std::pair<KeyboardShortcut, bool /*down*/>, CustomKeyboardShortcut> keyboard_shortcuts_;
 };
 
 #endif  // end of include guard: WL_WUI_PLUGINS_H
