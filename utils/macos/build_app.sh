@@ -57,6 +57,7 @@ function MakeDMG {
 
    find $DESTINATION -name ".?*" -exec rm -v {} \;
    UP=$(dirname $DESTINATION)
+   DMGFILE="$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg"
 
    echo "Copying COPYING"
    cp "$SOURCE_DIR"/COPYING  "$DESTINATION"/COPYING.txt
@@ -73,15 +74,27 @@ function MakeDMG {
    while true; do
       HDI_TRY=$(( ++HDI ))
       hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" \
-              "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg" || HDI_RESULT=$?
+              "$DMGFILE" || HDI_RESULT=$?
       if [ $HDI_RESULT -eq 0 ]; then
+         # NOCOM: simulate error
+         HDI_RESULT=$((2 - HDI_TRY))
+         if [ $HDI_RESULT -eq 0 ]; then
+         # end NOCOM
          return
+         # NOCOM continued
+         else
+           echo "Simulating error code $HDI_RESULT"
+         fi
+         # end NOCOM
       fi
       if [ $HDI_TRY -eq $HDI_MAX_TRIES ]; then
          exit $HDI_RESULT
       fi
       if [ -n "$GITHUB_ACTION" ]; then
          echo "::warning::hdiutil try $HDI_TRY error code: ${HDI_RESULT}... retrying"
+      fi
+      if [ -f "$DMGFILE" ]; then
+        rm "$DMGFILE"
       fi
       echo "  will retry after 10 seconds..."
       sleep 10
