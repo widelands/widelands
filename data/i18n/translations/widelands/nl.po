@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-11-04 03:00+0000\n"
+"POT-Creation-Date: 2024-11-07 02:53+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Alex Rijckaert, 2023-2024\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -2754,94 +2754,94 @@ msgstr "Schip wacht"
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Een expeditieschip is rond zijn eiland gevaren zonder dat er iets is gebeurd."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1867
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1868
 msgid "Coast Reached"
 msgstr "Kust bereikt"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1867
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1868
 msgid "Land Ahoy!"
 msgstr "Land in zicht!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1868
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1869
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Een expeditieschip heeft een kust bereikt en wacht op verdere opdrachten."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1921
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1922
 msgid "New port construction site is gone"
 msgstr "Nieuwe havenlocatie is verdwenen"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1921
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1922
 msgid "Port Lost!"
 msgstr "Haven verloren!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1922
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1923
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Het uitladen van de goederen mislukt, de expeditie is nu geannuleerd."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1979
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1980
 msgid "No Port Can Be Built"
 msgstr "Er kan geen Haven worden gebouwd"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1979
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1980
 msgid "Port Space Lost!"
 msgstr "Havenruimte Verloren!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1980
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1981
 msgid ""
 "A discovered port build space is not available for building a port anymore."
 msgstr "Een ontdekte bouwruimte voor een haven is niet meer beschikbaar om een haven te bouwen."
 
 #. * TRANSLATORS: Warship ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2227
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2228
 msgctxt "ship"
 msgid "Warship"
 msgstr "Oorlogsschip"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2227
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2228
 msgid "Warship Ready"
 msgstr "Oorlogsschip Klaar"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2228
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2229
 msgid "A warship is waiting for your commands."
 msgstr "Een oorlogsschip wacht op je commando's."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2233
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2234
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Expeditie"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2233
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2234
 msgid "Expedition Ready"
 msgstr "Expeditie gereed"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2234
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2235
 msgid "An expedition ship is waiting for your commands."
 msgstr "Een expeditieschip wacht op jouw opdrachten."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2408
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2409
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr "Zinkend"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2410
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2411
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr "Vechten"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2414
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2415
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr "Ombouw tot Transportschip"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2417
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2418
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr "Ombouw tot Oorlogsschip"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2425
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2426
 #: ../../../../src/wui/seafaring_statistics_menu.cc:271
 msgctxt "ship_state"
 msgid "Warship"
@@ -2853,10 +2853,10 @@ msgstr "Oorlogsschip"
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2431
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2441
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2447
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2461
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2432
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2442
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2448
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2462
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -2864,7 +2864,7 @@ msgstr "Zeilen naar %s"
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2436
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2437
 #: ../../../../src/wui/seafaring_statistics_menu.cc:261
 msgctxt "ship_state"
 msgid "Empty"
@@ -2872,7 +2872,7 @@ msgstr "Leeg"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2456
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2457
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -2880,7 +2880,7 @@ msgstr "Verscheping naar %s"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2468
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2469
 #: ../../../../src/wui/seafaring_statistics_menu.cc:265
 msgctxt "ship_state"
 msgid "Waiting"
@@ -2888,14 +2888,14 @@ msgstr "Wacht"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2472
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2473
 #: ../../../../src/wui/seafaring_statistics_menu.cc:267
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Expeditie"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2476
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2477
 #: ../../../../src/wui/seafaring_statistics_menu.cc:269
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -2904,7 +2904,7 @@ msgstr "Havenlocatie Gevonden"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2481
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2482
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Kolonisatie"
