@@ -2366,7 +2366,7 @@ msgstr "muelanta skorzoneron."
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Quarry"
-msgstr "Ŝton-minejo"
+msgstr "Ŝtonminejo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:36
@@ -2983,7 +2983,7 @@ msgstr "faranta bieron"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:8
 msgctxt "barbarians_building"
 msgid "Quarry"
-msgstr "Ŝton-minejo"
+msgstr "Ŝtonminejo"
 
 #: ../../../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:62
 msgctxt "barbarians_building"
@@ -3400,7 +3400,7 @@ msgstr "bredanta porkojn"
 #: ../../../../data/tribes/buildings/productionsites/empire/quarry/init.lua:8
 msgctxt "empire_building"
 msgid "Quarry"
-msgstr "Ŝton-minejo"
+msgstr "Ŝtonminejo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/quarry/init.lua:67
@@ -4005,7 +4005,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:8
 msgctxt "frisians_building"
 msgid "Quarry"
-msgstr ""
+msgstr "Ŝtonminejo"
 
 #: ../../../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:62
 msgctxt "frisians_building"

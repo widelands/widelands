@@ -225,6 +225,7 @@ struct Ship : Bob {
 
 	/// \returns (in expedition mode only!) whether the next field in direction \arg dir is swimmable
 	[[nodiscard]] bool exp_dir_swimmable(Direction dir) const {
+		assert(dir >= FIRST_DIRECTION && dir <= LAST_DIRECTION);
 		return expedition_ != nullptr && expedition_->swimmable[dir - 1];
 	}
 

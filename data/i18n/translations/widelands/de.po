@@ -39,7 +39,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-10-05 02:52+0000\n"
+"POT-Creation-Date: 2024-11-07 02:53+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2024\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
@@ -686,13 +686,13 @@ msgstr "Möchtest du den Editor wirklich verlassen?"
 #: ../../../../src/logic/addons.cc:48 ../../../../src/ui_basic/dropdown.cc:358
 #: ../../../../src/ui_basic/dropdown.cc:360
 #: ../../../../src/ui_fsmenu/addons/contact.cc:81
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1381
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1392
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1463
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1471
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1519
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1598
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1670
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1382
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1393
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1464
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1472
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1520
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1599
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1671
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:104
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:292
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:565
@@ -700,7 +700,7 @@ msgstr "Möchtest du den Editor wirklich verlassen?"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:485
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:491
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:124
-#: ../../../../src/ui_fsmenu/launch_mpg.cc:320
+#: ../../../../src/ui_fsmenu/launch_mpg.cc:328
 #: ../../../../src/ui_fsmenu/main.cc:294 ../../../../src/wlapplication.cc:1892
 msgid "Error"
 msgstr "Fehler"
@@ -1480,7 +1480,7 @@ msgid ""
 msgstr "Diese Karte wurde automatisch durch den Widelands-Zufallskartengenerator generiert."
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:747
-#: ../../../../src/network/gamehost.cc:1663
+#: ../../../../src/network/gamehost.cc:1662
 #, c-format
 msgid "Computer %u"
 msgstr "Computer %u"
@@ -2303,11 +2303,11 @@ msgstr "Widelands konnte das Spiel nicht starten, da Spieler %u keine Ausgangspo
 msgid "Initializing…"
 msgstr "Spiel wird initialisiert …"
 
-#: ../../../../src/logic/game.cc:1244
+#: ../../../../src/logic/game.cc:1242
 msgid "Trade Offer"
 msgstr "Handelsangebot"
 
-#: ../../../../src/logic/game.cc:1246
+#: ../../../../src/logic/game.cc:1244
 msgid "This market has received a new trade offer."
 msgstr "Dieser Markt hat ein neues Handelsangebot erhalten."
 
@@ -2777,94 +2777,94 @@ msgstr "Wartet"
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Ein Expeditionsschiff hat eine Insel ohne besondere Vorfälle umrundet."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1867
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1868
 msgid "Coast Reached"
 msgstr "Küste erreicht"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1867
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1868
 msgid "Land Ahoy!"
 msgstr "Land in Sicht!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1868
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1869
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Ein Expeditionsschiff hat eine Küste erreicht und wartet nun auf weitere Befehle."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1921
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1922
 msgid "New port construction site is gone"
 msgstr "Neue Hafenbaustelle ist verschwunden"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1921
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1922
 msgid "Port Lost!"
 msgstr "Hafen verloren!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1922
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1923
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Warenentladung ist fehlgeschlagen, die Expedition wurde abgebrochen."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1979
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1980
 msgid "No Port Can Be Built"
 msgstr "Hafen kann nicht gebaut werden"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1979
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1980
 msgid "Port Space Lost!"
 msgstr "Hafenbauplatz verloren!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1980
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1981
 msgid ""
 "A discovered port build space is not available for building a port anymore."
 msgstr "Ein entdeckter Hafenbauplatz kann nicht mehr zum Bau eines Hafens verwendet werden."
 
 #. * TRANSLATORS: Warship ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2227
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2228
 msgctxt "ship"
 msgid "Warship"
 msgstr "Kriegsschiff"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2227
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2228
 msgid "Warship Ready"
 msgstr "Kriegsschiff bereit"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2228
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2229
 msgid "A warship is waiting for your commands."
 msgstr "Ein Kriegsschiff wartet auf seine Befehle."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2233
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2234
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Expedition"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2233
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2234
 msgid "Expedition Ready"
 msgstr "Expedition bereit"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2234
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2235
 msgid "An expedition ship is waiting for your commands."
 msgstr "Ein Expeditionsschiff wartet auf seine Befehle."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2408
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2409
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr "Sinkt"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2410
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2411
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr "Kämpft"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2414
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2415
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr "Wird zum Transportschiff umgerüstet"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2417
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2418
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr "Wird zum Kriegsschiff umgerüstet"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2425
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2426
 #: ../../../../src/wui/seafaring_statistics_menu.cc:271
 msgctxt "ship_state"
 msgid "Warship"
@@ -2876,10 +2876,10 @@ msgstr "Kriegsschiff"
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2431
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2441
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2447
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2461
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2432
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2442
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2448
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2462
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -2887,7 +2887,7 @@ msgstr "Fährt nach %s"
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2436
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2437
 #: ../../../../src/wui/seafaring_statistics_menu.cc:261
 msgctxt "ship_state"
 msgid "Empty"
@@ -2895,7 +2895,7 @@ msgstr "Leer"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2456
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2457
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -2903,7 +2903,7 @@ msgstr "Liefert nach %s"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2468
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2469
 #: ../../../../src/wui/seafaring_statistics_menu.cc:265
 msgctxt "ship_state"
 msgid "Waiting"
@@ -2911,14 +2911,14 @@ msgstr "Wartet"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2472
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2473
 #: ../../../../src/wui/seafaring_statistics_menu.cc:267
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Erkundet"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2476
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2477
 #: ../../../../src/wui/seafaring_statistics_menu.cc:269
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -2927,7 +2927,7 @@ msgstr "Hafenbauplatz gefunden"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2481
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2482
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Gründet eine Kolonie"
@@ -3201,11 +3201,11 @@ msgstr "Teamwechsel akzeptiert"
 msgid "Team Change Rejected"
 msgstr "Teamwechsel abgelehnt"
 
-#: ../../../../src/logic/replay.cc:94
+#: ../../../../src/logic/replay.cc:93
 msgid "Desync"
 msgstr "Desynchronisation"
 
-#: ../../../../src/logic/replay.cc:95
+#: ../../../../src/logic/replay.cc:94
 #, c-format
 msgid ""
 "The replay has desynced and the game was paused.\n"
@@ -3411,42 +3411,42 @@ msgid ""
 " you tried to connect."
 msgstr "Widelands konnte keine Verbindung zu der angegebenen Adresse erstellen. Entweder es war kein Widelandsserver am TCP-Port %u erreichbar, oder der Server wurde gerade geschlossen, als du dich anmelden wolltest."
 
-#: ../../../../src/network/gameclient.cc:816
+#: ../../../../src/network/gameclient.cc:817
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] "%u Erweiterungsdiskrepanz erkannt:\n"
 msgstr[1] "%u Erweiterungsdiskrepanzen erkannt:\n"
 
-#: ../../../../src/network/gameclient.cc:818
+#: ../../../../src/network/gameclient.cc:819
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
 msgstr "%1$s\n• „%2$s“ vom Host benötigt aber nicht gefunden"
 
-#: ../../../../src/network/gameclient.cc:821
+#: ../../../../src/network/gameclient.cc:822
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n• „%2$s“ installiert in Version %3$s aber der Host verwendet Version %4$s"
 
-#: ../../../../src/network/gameclient.cc:992
+#: ../../../../src/network/gameclient.cc:989
 msgid "/me ’s file failed md5 checksumming."
 msgstr "/me s Datei hat die Überprüfung mit MD5 nicht bestanden."
 
-#: ../../../../src/network/gameclient.cc:1034
+#: ../../../../src/network/gameclient.cc:1031
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me überprüfte die empfangene Datei. Obwohl das md5-Prüfsummenverfahren erfolgreich durchgeführt wurde, kann ich die Datei nicht verarbeiten."
 
-#: ../../../../src/network/gameclient.cc:1355
+#: ../../../../src/network/gameclient.cc:1352
 msgid "Disconnected"
 msgstr "Verbindung verloren"
 
-#: ../../../../src/network/gameclient.cc:1356
+#: ../../../../src/network/gameclient.cc:1353
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -3568,7 +3568,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Widelands konnte keinen Server starten.\nMöglicherweise lässt bereits ein anderer Prozess einen Server auf unserem Port laufen."
 
-#: ../../../../src/network/gamehost.cc:1922
+#: ../../../../src/network/gamehost.cc:1921
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3795,12 +3795,12 @@ msgid ""
 "request in time."
 msgstr "Du wurdest vom Metaserver getrennt, da du nicht rechtzeitig auf eine PING-Anfrage geantwortet hast."
 
-#: ../../../../src/network/net_addons.cc:861
+#: ../../../../src/network/net_addons.cc:855
 #, c-format
 msgid "Sending metadata for %s"
 msgstr ""
 
-#: ../../../../src/network/net_addons.cc:906
+#: ../../../../src/network/net_addons.cc:897
 #, c-format
 msgid "Uploading %s"
 msgstr ""
@@ -4865,50 +4865,50 @@ msgstr "Durchsuchen"
 msgid "Browse (%u)"
 msgstr "Durchsuchen (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1160
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1161
 #, c-format
 msgid "Upgrade all (%u)"
 msgstr "Alle aktualisieren (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1163
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1164
 msgid "No upgrades are available for your installed add-ons"
 msgstr "Keine Aktualisierungen für installierte Erweiterungen verfügbar"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1165
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1166
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
 msgstr[0] "Aktualisiere die folgende %u Erweiterung:"
 msgstr[1] "Aktualisiere die folgenden %u Erweiterungen:"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1170
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1171
 #, c-format
 msgid "• %s"
 msgstr "• %s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1206
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1207
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which could not be found"
 msgstr "• „%1$s“ benötigt „%2$s“, welche nicht gefunden wurde"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1211
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1212
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is disabled"
 msgstr "• „%1$s“ benötigt „%2$s“, welche deaktiviert ist"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1218
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1219
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
 msgstr "• „%1$s“ benötigt „%2$s“, welche unter der anfordernden Erweiterung aufgeführt ist"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1246
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1247
 #, c-format
 msgid ""
 "• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
 msgstr "• „%1$s“ benötigt zuerst „%2$s“ und dann „%3$s“, aber sie sind in der falschen Reihenfolge aufgeführt"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1262
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1263
 #, c-format
 msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
@@ -4916,67 +4916,67 @@ msgid ""
 "%s"
 msgstr "Eine aktivierte Erweiterung ist defekt. Mit dieser Konfiguration kann kein Spiel gestartet werden.\nFehlermeldung:\n%s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1279
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1280
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
 msgstr[0] "%u Fehler in den Abhängigkeiten"
 msgstr[1] "%u Fehler in den Abhängigkeiten"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1281
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1282
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
 msgstr "Erweiterungen mit Fehlern in den Abhängigkeiten können fehlerhaft funktionieren oder das Laden von Spielen und Karten verhindern."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1382
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1383
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
 msgstr "Die Erweiterung „%1$s“ kann nicht hochgeladen werden, da ihre Version (%2$s) nicht neuer als die auf dem Server vorhandene Version (%3$s) ist."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1393
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1394
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
 msgstr "Die Erweiterung „%1$s“ kann nicht hochgeladen werden, da ihre Kategorie (%2$s) nicht der auf dem Server vorhandenen Kategorie (%3$s) entspricht."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1404
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1405
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:54
 msgid "Upload"
 msgstr "Hochladen"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1405
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1406
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
 msgstr "Möchtest du die Erweiterung „%s“ wirklich hochladen?"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1415
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1416
 #, c-format
 msgid "Uploading ‘%s’…"
 msgstr "Lade „%s“ hoch …"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1422
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1505
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1567
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1423
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1506
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1568
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1445
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1446
 #, c-format
 msgid "‘%s’"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1453
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1454
 #, c-format
 msgid ""
 "The add-on ‘%s’ may not be uploaded to the server because the following "
 "filenames contained in the add-on are not allowed:"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1457
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1458
 msgid ""
 "Filenames may only contain alphanumeric characters (A-Z, a-z, 0-9) and "
 "simple punctuation (period, hyphen, and underscore; not multiple periods). "
@@ -4984,7 +4984,7 @@ msgid ""
 "exceed 80 characters."
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1472
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1473
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be uploaded to the server.\n"
@@ -4993,12 +4993,12 @@ msgid ""
 "%2$s"
 msgstr "Fehler beim Hochladen der Erweiterung „%1$s“.\n\nFehlermeldung:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1485
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1486
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr "Lade „%s“ herunter …"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1521
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1522
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -5007,7 +5007,7 @@ msgid ""
 "%2$s"
 msgstr "Die Erweiterung „%1$s“ konnte nicht heruntergeladen werden. Die Installation/Aktualisierung der Erweiterung wird übersprungen.\n\nFehlermeldung:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1599
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1600
 #, c-format
 msgid ""
 "The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations will be skipped.\n"
@@ -5016,7 +5016,7 @@ msgid ""
 "%2$s"
 msgstr "Die Übersetzungsdateien für die Erweiterung „%1$s“ konnten nicht heruntergeladen werden. Die Installation/Aktualisierung der Erweiterung wird übersprungen.\n\nFehlermeldung:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1671
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1672
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr "Die benötigte Erweiterung „%s“ wurde nicht auf dem Server gefunden."
@@ -6318,7 +6318,7 @@ msgstr "Gesp. Spiel"
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Dies ist ein gespeichertes Spiel – die Siegbedingung wurde bereits festgelegt."
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:522
+#: ../../../../src/ui_fsmenu/launch_game.cc:523
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -6337,23 +6337,23 @@ msgstr "Bitte Karte oder gespeichertes Spiel auswählen."
 msgid "The host has not yet selected a map or saved game."
 msgstr "Der Host hat bisher weder eine Karte noch ein gespeichertes Spiel gewählt."
 
-#: ../../../../src/ui_fsmenu/launch_mpg.cc:213
+#: ../../../../src/ui_fsmenu/launch_mpg.cc:219
 msgid "Saved Game is Directory"
 msgstr "Spielstand ist ein Verzeichnis"
 
-#: ../../../../src/ui_fsmenu/launch_mpg.cc:214
+#: ../../../../src/ui_fsmenu/launch_mpg.cc:220
 msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr "ACHTUNG:\nDer Spielstand, den du ausgewählt hast, ist ein Verzeichnis. Dies kann zum Beispiel passieren, wenn du die Option „nozip“ auf true gesetzt hast oder den Spielstand manuell entpackt hast.\nWidelands ist nicht in der Lage, Verzeichnisstrukturen zu anderen Clients zu versenden. Bitte wähle entweder einen anderen Spielstand oder verpacke den Inhalt des Spielstand-Verzeichnisses in eine zip-Datei."
 
-#: ../../../../src/ui_fsmenu/launch_mpg.cc:233
+#: ../../../../src/ui_fsmenu/launch_mpg.cc:239
 #: ../../../../src/ui_fsmenu/launch_spg.cc:134
 msgid "File not found"
 msgstr "Datei nicht gefunden"
 
-#: ../../../../src/ui_fsmenu/launch_mpg.cc:234
+#: ../../../../src/ui_fsmenu/launch_mpg.cc:240
 #: ../../../../src/ui_fsmenu/launch_spg.cc:135
 #, c-format
 msgid ""
@@ -6362,19 +6362,19 @@ msgid ""
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr "Widelands versuchte, ein Spiel mit einer Datei zu starten, die nicht am angegebenen Pfad gefunden werden konnte.\nDie Datei war: %s\nWenn dies in einem Netzwerk-Spiel geschieht, hat der Host möglicherweise eine Datei ausgewählt, die du nicht besitzt. Normalerweise wird eine solche Datei vom Host zu dir geschickt, aber vielleicht war die Übertragung noch nicht abgeschlossen!?!"
 
-#: ../../../../src/ui_fsmenu/launch_mpg.cc:275
+#: ../../../../src/ui_fsmenu/launch_mpg.cc:281
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr "Die ausgewählte Datei kann nicht gefunden werden. Falls sie nicht automatisch zu dir übertragen wird, mache bitte den Host auf das Problem aufmerksam."
 
-#: ../../../../src/ui_fsmenu/launch_mpg.cc:322
+#: ../../../../src/ui_fsmenu/launch_mpg.cc:330
 #, c-format
 msgid "Unable to load the win condition script file ‘%s’."
 msgstr "Die Siegbedingungsskriptdatei „%s“ kann nicht geladen werden."
 
 #. * TRANSLATORS: This is a heading for a help window
-#: ../../../../src/ui_fsmenu/launch_mpg.cc:449
+#: ../../../../src/ui_fsmenu/launch_mpg.cc:457
 msgid "Multiplayer Game Setup"
 msgstr "Mehrspielereinstellungen"
 
