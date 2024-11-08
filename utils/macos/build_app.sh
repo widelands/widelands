@@ -76,16 +76,7 @@ function MakeDMG {
       hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" \
               "$DMGFILE" || HDI_RESULT=$?
       if [ $HDI_RESULT -eq 0 ]; then
-         # NOCOM: simulate error
-         HDI_RESULT=$((2 - HDI_TRY))
-         if [ $HDI_RESULT -eq 0 ]; then
-         # end NOCOM
          return
-         # NOCOM continued
-         else
-           echo "Simulating error code $HDI_RESULT"
-         fi
-         # end NOCOM
       fi
       if [ $HDI_TRY -eq $HDI_MAX_TRIES ]; then
          exit $HDI_RESULT
