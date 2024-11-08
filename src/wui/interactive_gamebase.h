@@ -162,6 +162,8 @@ private:
 	void toggle_game_paused();
 	// Resets the speed to 1x
 	void reset_gamespeed() const;
+	// Changes the music track
+	void change_music();
 
 	// Main menu on the toolbar
 	UI::Dropdown<MainMenuEntry> mainmenu_;

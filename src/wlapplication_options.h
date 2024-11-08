@@ -218,6 +218,7 @@ enum class KeyboardShortcut : uint16_t {
 
 	kInGame_Begin = kEditor_End + 1,
 	kInGameSoundOptions = kInGame_Begin,
+	kChangeMusic,
 	kInGameSave,  // alias of kCommonSave
 	kInGameLoad,  // alias of kCommonLoad
 	kInGameRestart,
