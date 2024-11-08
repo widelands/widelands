@@ -70,9 +70,9 @@ function MakeDMG {
       HDI_MAX_TRIES=1
    fi
    HDI_TRY=0
-   HDI_RESULT=0
    while true; do
       HDI_TRY=$(( ++HDI ))
+      HDI_RESULT=0
       hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" \
               "$DMGFILE" || HDI_RESULT=$?
       if [ $HDI_RESULT -eq 0 ]; then
@@ -151,7 +151,7 @@ EOF
 	--fix-file "$DESTINATION/Widelands.app/Contents/MacOS/widelands" \
 	--dest-dir "$DESTINATION/Widelands.app/Contents/libs"
 
-   echo "Re-sign libraries with an 'ad-hoc signing' see man codesign"
+   echo "Re-sign libraries with 'ad-hoc signing' see man codesign"
    codesign --sign - --force $DESTINATION/Widelands.app/Contents/libs/*
 
    echo "Stripping binary ..."
