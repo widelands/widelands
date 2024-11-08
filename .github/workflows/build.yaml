@@ -125,9 +125,7 @@ jobs:
 
   dev_release:
     name: Automated development pre-release
-    # NOCOM: allow testing
-    # if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' && always() }}
-    if: ${{ always() }}
+    if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' && always() }}
     needs: [windows, windows-msvc, macos, appimage]
     runs-on: "ubuntu-latest"
     steps:
@@ -184,13 +182,10 @@ jobs:
             exit 1
           fi
       - name: Updating latest pre-release
-        # NOCOM: not for testing
-        if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' && always() }}
         # Creates a new pre-release with the "latest" tag and all gathered artifacts.
         # Because all older artifacts are removed, we have to reupload the missing ones detected in the previous step
-        # NOCOM: extra safety
-        #env:
-        #  GH_TOKEN: "${{ secrets.WIDELANDS_FORMAT_TOKEN }}"
+        env:
+          GH_TOKEN: "${{ secrets.WIDELANDS_FORMAT_TOKEN }}"
         run: |
           gh release delete latest --yes    || echo "No old release to delete"
           git push --delete origin latest   || echo "No latest tag to delete"
