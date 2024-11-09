@@ -682,6 +682,8 @@ public:
 	int mouse_to_pixel(lua_State* L);
 	int add_toolbar_plugin(lua_State* L);
 	int update_toolbar(lua_State* L);
+	int set_keyboard_shortcut(lua_State* L);
+	int set_keyboard_shortcut_release(lua_State* L);
 	int add_plugin_timer(lua_State* L);
 
 	/*
@@ -715,6 +717,8 @@ public:
 	/*
 	 * Lua Methods
 	 */
+	int set_keyboard_shortcut(lua_State* L);
+	int set_keyboard_shortcut_release(lua_State* L);
 	int add_plugin_timer(lua_State* L);
 
 	/*

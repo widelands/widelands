@@ -1,5 +1,6 @@
 # Line format: package[=version]: dependency1[=version] dependency2[=version] ...
 # Host dependencies can be prefixed by host- to load from host arch mirror
+# Packages valid only for one architecture can be prefixed with x86_64 or i686 seperated with an exclamation mark
 # No empty lines, except last one
 host-git:   heimdal libcbor libfido2 openssh perl-Error perl-Authen-SASL perl-Encode-Locale perl-HTTP-Date perl-File-Listing perl-HTML-Tagset perl-Clone perl-IO-HTML perl-LWP-MediaTypes perl-URI perl-HTTP-Message perl-HTML-Parser perl-HTTP-Cookies perl-HTTP-Daemon perl-http-cookiejar perl-HTTP-Negotiate perl-Net-HTTP perl-WWW-RobotRules perl-Try-Tiny perl-libwww perl-TimeDate perl-MailTools perl-IO-Stringy perl-Convert-BinHex perl-MIME-tools perl-Net-SSLeay perl-IO-Socket-SSL perl-Net-SMTP-SSL perl-TermReadKey
 toolchain:  libwinpthread-git gcc-libs zstd zlib binutils headers-git crt-git gmp isl libiconv mpfr mpc windows-default-manifest winpthreads-git gcc gcc-ada gcc-libgfortran gcc-fortran gcc-objc expat gettext host-libtre-git libsystre ncurses bzip2 libffi mpdecimal openssl termcap readline tcl sqlite3 tk xz tzdata python xxhash gdb gdb-multiarch libgccjit libmangle-git make pkgconf tools-git winstorecompat-git
@@ -7,9 +8,8 @@ cmake:      c-ares brotli libunistring libidn2 libpsl libtasn1 p11-kit ca-certif
 asio:
 SDL2_ttf:   vulkan-headers vulkan-loader SDL2 libpng wineditline pcre2 glib2 harfbuzz freetype
 SDL2_mixer: libogg flac lame libvorbis mpg123 opus libsndfile portaudio fluidsynth libmodplug opusfile
-SDL2_image: aom dav1d rav1e libjpeg-turbo libyuv giflib jbigkit lerc libdeflate libtiff libwebp libavif highway lcms2 imath openexr libjxl
+#TODO(hessenfarmer): remove pinned version when LIBAVIF gets updated
+SDL2_image: aom dav1d rav1e libjpeg-turbo libyuv giflib jbigkit lerc libdeflate libtiff libwebp libavif highway lcms2 imath openexr libjxl x86_64!svt-av1=2.2.1-1
 glew:
 glbinding:
 icu:
-# TODO(hessenfarmer): remove again after libavif package is version higher then 1.1.1
-svt-av1=2.2.1-1:

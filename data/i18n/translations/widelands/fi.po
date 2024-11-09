@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-11-07 02:53+0000\n"
+"POT-Creation-Date: 2024-11-09 02:48+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
@@ -304,7 +304,7 @@ msgstr "Esc"
 #. * TRANSLATORS: Title for the tool menu button in the editor
 #. * TRANSLATORS: Heading in the editor keyboard shortcuts help
 #: ../../../../src/editor/editorinteractive.cc:116
-#: ../../../../src/wlapplication_options.cc:1065
+#: ../../../../src/wlapplication_options.cc:1033
 msgctxt "editor"
 msgid "Tools"
 msgstr ""
@@ -325,18 +325,18 @@ msgid "Tool size"
 msgstr "Työkalun koko"
 
 #: ../../../../src/editor/editorinteractive.cc:160
-#: ../../../../src/wlapplication_options.cc:476
+#: ../../../../src/wlapplication_options.cc:453
 msgid "Undo"
 msgstr "Kumoa"
 
 #: ../../../../src/editor/editorinteractive.cc:165
-#: ../../../../src/wlapplication_options.cc:480
+#: ../../../../src/wlapplication_options.cc:457
 msgid "Redo"
 msgstr "Tee uudelleen"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/editor/editorinteractive.cc:177
-#: ../../../../src/wlapplication_options.cc:886
+#: ../../../../src/wlapplication_options.cc:851
 #: ../../../../src/wui/buildingwindow.cc:448
 #: ../../../../src/wui/interactive_player.cc:239
 msgid "Help"
@@ -346,14 +346,14 @@ msgstr "Ohje"
 #: ../../../../src/editor/editorinteractive.cc:212
 #: ../../../../src/editor/ui_menus/main_menu_new_map.cc:40
 #: ../../../../src/ui_fsmenu/main.cc:427
-#: ../../../../src/wlapplication_options.cc:458
+#: ../../../../src/wlapplication_options.cc:436
 msgid "New Map"
 msgstr "Uusi kartta"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../../../src/editor/editorinteractive.cc:221
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:853
-#: ../../../../src/wlapplication_options.cc:463
+#: ../../../../src/wlapplication_options.cc:441
 msgid "New Random Map"
 msgstr "Uusi satunnaisluotu kartta"
 
@@ -362,7 +362,7 @@ msgstr "Uusi satunnaisluotu kartta"
 #: ../../../../src/editor/editorinteractive.cc:229
 #: ../../../../src/editor/ui_menus/main_menu_load_map.cc:34
 #: ../../../../src/ui_fsmenu/main.cc:432
-#: ../../../../src/wlapplication_options.cc:877
+#: ../../../../src/wlapplication_options.cc:842
 msgid "Load Map"
 msgstr "Lataa kartta"
 
@@ -370,7 +370,7 @@ msgstr "Lataa kartta"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/editor/editorinteractive.cc:237
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:53
-#: ../../../../src/wlapplication_options.cc:880
+#: ../../../../src/wlapplication_options.cc:845
 msgid "Save Map"
 msgstr "Tallenna kartta"
 
@@ -383,14 +383,14 @@ msgstr "Julkaise kartta verkkoon..."
 #: ../../../../src/editor/editorinteractive.cc:250
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:227
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:62
-#: ../../../../src/wlapplication_options.cc:472
+#: ../../../../src/wlapplication_options.cc:449
 msgid "Map Options"
 msgstr "Kartta-asetukset"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/editor/editorinteractive.cc:255
-#: ../../../../src/wlapplication_options.cc:883
+#: ../../../../src/wlapplication_options.cc:848
 msgid "Exit Editor"
 msgstr "Poistu editorista"
 
@@ -523,7 +523,7 @@ msgstr "Napsauta maastoa saadaksesi tietoa siitä"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:401
 #: ../../../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
-#: ../../../../src/wlapplication_options.cc:537
+#: ../../../../src/wlapplication_options.cc:512
 msgid "Tool History"
 msgstr "Työkaluhistoria"
 
@@ -661,7 +661,7 @@ msgstr "Karttaa ei ole tallennettu. Haluatko poistua?"
 msgid "Are you sure you wish to exit the editor?"
 msgstr "Oletko varma että haluat poistua muokkaimesta?"
 
-#: ../../../../src/editor/editorinteractive.cc:1283
+#: ../../../../src/editor/editorinteractive.cc:1287
 #: ../../../../src/logic/addons.cc:48 ../../../../src/ui_basic/dropdown.cc:358
 #: ../../../../src/ui_basic/dropdown.cc:360
 #: ../../../../src/ui_fsmenu/addons/contact.cc:81
@@ -671,7 +671,7 @@ msgstr "Oletko varma että haluat poistua muokkaimesta?"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1472
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1520
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1599
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1671
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1672
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:104
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:292
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:565
@@ -680,12 +680,12 @@ msgstr "Oletko varma että haluat poistua muokkaimesta?"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:491
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:328
-#: ../../../../src/ui_fsmenu/main.cc:294 ../../../../src/wlapplication.cc:1892
+#: ../../../../src/ui_fsmenu/main.cc:294 ../../../../src/wlapplication.cc:1968
 msgid "Error"
 msgstr "Virhe"
 
-#: ../../../../src/editor/editorinteractive.cc:1285
-#: ../../../../src/ui_fsmenu/main.cc:278 ../../../../src/wlapplication.cc:1894
+#: ../../../../src/editor/editorinteractive.cc:1289
+#: ../../../../src/ui_fsmenu/main.cc:278 ../../../../src/wlapplication.cc:1970
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -696,13 +696,13 @@ msgid ""
 "Please add this information to your report."
 msgstr "Ilmeni virhe. Virheilmoitus on:\n\n%1$s\n\nIlmoitathan tämän ongelman jotta voimme parantaa Widelands-peliä. Löydät liittyviä selontekoja vakiollisesta ulostulotiedostosta (stdout.txt Windowsissa ja Linuxissa). Käytössäsi on julkaisu %2$s.\nLisääthän nämä tiedot selontekoosi."
 
-#: ../../../../src/editor/editorinteractive.cc:1321
+#: ../../../../src/editor/editorinteractive.cc:1325
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Ladataan karttaa \"%s\"…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../../../src/editor/editorinteractive.cc:1343
+#: ../../../../src/editor/editorinteractive.cc:1347
 #: ../../../../src/editor/ui_menus/main_menu_new_map.cc:115
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:629
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:144
@@ -711,7 +711,7 @@ msgid "No Name"
 msgstr "Ei nimeä"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../../../src/editor/editorinteractive.cc:1346
+#: ../../../../src/editor/editorinteractive.cc:1350
 #: ../../../../src/editor/ui_menus/main_menu_new_map.cc:116
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:630
 #: ../../../../src/logic/map.h:233
@@ -720,20 +720,20 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: ../../../../src/editor/editorinteractive.cc:1370
+#: ../../../../src/editor/editorinteractive.cc:1374
 msgid "Loading world…"
 msgstr "Ladataan maailmaa..."
 
-#: ../../../../src/editor/editorinteractive.cc:1552
+#: ../../../../src/editor/editorinteractive.cc:1556
 #, c-format
 msgid "Tool gaps: %u%%"
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:1575
+#: ../../../../src/editor/editorinteractive.cc:1579
 msgid "Publish Map"
 msgstr "Julkaise kartta"
 
-#: ../../../../src/editor/editorinteractive.cc:1576
+#: ../../../../src/editor/editorinteractive.cc:1580
 #, c-format
 msgid ""
 "Are you certain that you want to publish this map online?\n"
@@ -745,50 +745,50 @@ msgid ""
 "Hint: %5$s\n"
 msgstr "Oletko varma että haluat julkaista tämän kartan verkkoon?\n\nNimi: %1$s\nSisäinen nimi: %2$s\nTekijä: %3$s\nKuvaus: %4$s\nVihje: %5$s\n"
 
-#: ../../../../src/editor/editorinteractive.cc:1600
+#: ../../../../src/editor/editorinteractive.cc:1604
 msgid "Login Error"
 msgstr "Kirjautumisvirhe"
 
-#: ../../../../src/editor/editorinteractive.cc:1605
+#: ../../../../src/editor/editorinteractive.cc:1609
 msgid "Uploading Add-On…"
 msgstr "Lisäosaa ladataan..."
 
-#: ../../../../src/editor/editorinteractive.cc:1606
+#: ../../../../src/editor/editorinteractive.cc:1610
 msgid "Saving map…"
 msgstr "Tallennetaan kartta..."
 
-#: ../../../../src/editor/editorinteractive.cc:1625
+#: ../../../../src/editor/editorinteractive.cc:1629
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:315
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:370
 msgid "Error Saving Map!"
 msgstr "Kartan tallennus epäonnistui!"
 
-#: ../../../../src/editor/editorinteractive.cc:1631
+#: ../../../../src/editor/editorinteractive.cc:1635
 msgid "Packaging add-on…"
 msgstr "Lisäosa pakataan..."
 
-#: ../../../../src/editor/editorinteractive.cc:1682
+#: ../../../../src/editor/editorinteractive.cc:1686
 msgid "Add-On Generation Error"
 msgstr "Lisäosan luontivirhe"
 
-#: ../../../../src/editor/editorinteractive.cc:1683
+#: ../../../../src/editor/editorinteractive.cc:1687
 msgid "The add-on could not be written to the disk."
 msgstr "Lisäosaa ei saatu kirjoitettua levylle."
 
-#: ../../../../src/editor/editorinteractive.cc:1690
+#: ../../../../src/editor/editorinteractive.cc:1694
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:108
 msgid "Uploading…"
 msgstr "Ladataan..."
 
-#: ../../../../src/editor/editorinteractive.cc:1696
+#: ../../../../src/editor/editorinteractive.cc:1700
 msgid "Upload Error"
 msgstr "Latausvirhe"
 
-#: ../../../../src/editor/editorinteractive.cc:1718
+#: ../../../../src/editor/editorinteractive.cc:1722
 msgid "Success"
 msgstr "Onnistui"
 
-#: ../../../../src/editor/editorinteractive.cc:1719
+#: ../../../../src/editor/editorinteractive.cc:1723
 msgid "The add-on was uploaded successfully."
 msgstr "Lisäosa ladattiin onnistuneesti."
 
@@ -1033,7 +1033,7 @@ msgstr "Käytössä olevat laajennukset: %s"
 #: ../../../../src/editor/ui_menus/help.cc:36
 #: ../../../../src/ui_fsmenu/login_box.cc:255
 #: ../../../../src/ui_fsmenu/main.cc:276
-#: ../../../../src/ui_fsmenu/main.cc:1170
+#: ../../../../src/ui_fsmenu/main.cc:1174
 #: ../../../../src/wui/encyclopedia_window.cc:146
 #: ../../../../src/wui/tribal_encyclopedia.cc:55
 msgid "Error!"
@@ -1805,7 +1805,7 @@ msgstr "Komentojono"
 #: ../../../../src/game_io/game_loader.cc:157
 #: ../../../../src/map_io/map_saver.cc:146
 #: ../../../../src/map_io/widelands_map_loader.cc:400
-#: ../../../../src/wlapplication_options.cc:688
+#: ../../../../src/wlapplication_options.cc:657
 #: ../../../../src/wui/interactive_player.cc:229
 #: ../../../../src/wui/interactive_player.cc:497
 msgid "Messages"
@@ -3098,7 +3098,7 @@ msgid "Warehouse %d"
 msgstr "Varastorakennus %d"
 
 #: ../../../../src/logic/playercommand.cc:2358
-#: ../../../../src/wlapplication_options.cc:684
+#: ../../../../src/wlapplication_options.cc:654
 #: ../../../../src/wui/game_diplomacy_menu.cc:36
 #: ../../../../src/wui/interactive_gamebase.cc:250
 msgid "Diplomacy"
@@ -3305,7 +3305,7 @@ msgstr "Skriptaus"
 
 #: ../../../../src/map_io/map_saver.cc:303
 #: ../../../../src/map_io/widelands_map_loader.cc:418
-#: ../../../../src/wlapplication_options.cc:679
+#: ../../../../src/wlapplication_options.cc:650
 #: ../../../../src/wui/game_objectives_menu.cc:30
 #: ../../../../src/wui/interactive_player.cc:218
 #: ../../../../src/wui/interactive_player.cc:486
@@ -3373,7 +3373,7 @@ msgstr ""
 #: ../../../../src/network/gameclient.cc:163
 #: ../../../../src/network/gamehost.cc:561
 #: ../../../../src/ui_fsmenu/launch_spg.cc:174
-#: ../../../../src/wlapplication.cc:906
+#: ../../../../src/wlapplication.cc:908
 msgid "Preparing game…"
 msgstr "Valmistellaan peliä..."
 
@@ -3981,13 +3981,13 @@ msgstr "Paikallisverkon käyttö epäonnistui. Kenties joku muu pitää jo portt
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../../../src/scripting/lua_ui.cc:1215
-#: ../../../../src/scripting/lua_ui.cc:1237 ../../../../src/wui/plugins.cc:43
+#: ../../../../src/scripting/lua_ui.cc:1226
+#: ../../../../src/scripting/lua_ui.cc:1248 ../../../../src/wui/plugins.cc:42
 msgid "Plugin Error"
 msgstr ""
 
-#: ../../../../src/scripting/lua_ui.cc:1216
-#: ../../../../src/scripting/lua_ui.cc:1238 ../../../../src/wui/plugins.cc:43
+#: ../../../../src/scripting/lua_ui.cc:1227
+#: ../../../../src/scripting/lua_ui.cc:1249 ../../../../src/wui/plugins.cc:42
 #, c-format
 msgid ""
 "Error when running plugin:\n"
@@ -4303,7 +4303,7 @@ msgid "Delete the selected text"
 msgstr ""
 
 #: ../../../../src/ui_basic/textinput.cc:386
-#: ../../../../src/wlapplication_options.cc:383
+#: ../../../../src/wlapplication_options.cc:364
 msgid "Select All"
 msgstr "Valitse Kaikki"
 
@@ -4995,7 +4995,7 @@ msgid ""
 "%2$s"
 msgstr "Laajennuksen '%1$s' käännöksiä ei voitu ladata palvelimelta. Käännösten asentaminen/päivittäminen ohitetaan.\n\nVirheviesti:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1672
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1673
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr "Edellytettyä laajennusta '%s' ei löytynyt palvelimelta."
@@ -5983,7 +5983,7 @@ msgid "Help: %s"
 msgstr "Ohje: %s"
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:55
-#: ../../../../src/wlapplication_options.cc:337
+#: ../../../../src/wlapplication_options.cc:320
 msgid "Metaserver Lobby"
 msgstr "Metapalvelimen aula"
 
@@ -6124,7 +6124,7 @@ msgid "General"
 msgstr "Yleistä"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:299
-#: ../../../../src/wlapplication_options.cc:291
+#: ../../../../src/wlapplication_options.cc:277
 msgid "Editor"
 msgstr "Editori"
 
@@ -6132,7 +6132,15 @@ msgstr "Editori"
 msgid "Fastplace"
 msgstr "Pikapaikka"
 
-#: ../../../../src/ui_fsmenu/keyboard_options.cc:305
+#: ../../../../src/ui_fsmenu/keyboard_options.cc:307
+#: ../../../../src/ui_fsmenu/main.cc:515
+#: ../../../../src/wlapplication_options.cc:312
+#: ../../../../src/wlapplication_options.cc:999
+#: ../../../../src/wlapplication_options.cc:1058
+msgid "Add-Ons"
+msgstr "Laajennukset"
+
+#: ../../../../src/ui_fsmenu/keyboard_options.cc:310
 msgid "Mouse Scrolling"
 msgstr "Hiiren vieritys"
 
@@ -6393,7 +6401,7 @@ msgid "Online Game Settings"
 msgstr "Verkkopeliasetukset"
 
 #: ../../../../src/ui_fsmenu/login_box.cc:44
-#: ../../../../src/wlapplication_options.cc:418
+#: ../../../../src/wlapplication_options.cc:396
 #: ../../../../src/wui/economy_options_window.cc:680
 msgid "Save"
 msgstr "Tallenna"
@@ -6411,7 +6419,7 @@ msgstr "Nimimerkki:"
 #. * and must not be "team".
 #: ../../../../src/ui_fsmenu/login_box.cc:119
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:138
-#: ../../../../src/wlapplication.cc:825
+#: ../../../../src/wlapplication.cc:827
 msgid "nobody"
 msgstr "ei kukaan"
 
@@ -6442,13 +6450,13 @@ msgid "Begin a new game"
 msgstr "Aloita uusi peli"
 
 #: ../../../../src/ui_fsmenu/main.cc:369
-#: ../../../../src/wlapplication_options.cc:245
+#: ../../../../src/wlapplication_options.cc:237
 msgid "New Game"
 msgstr "Uusi peli"
 
 #: ../../../../src/ui_fsmenu/main.cc:371
 #: ../../../../src/ui_fsmenu/random_game.cc:29
-#: ../../../../src/wlapplication_options.cc:269
+#: ../../../../src/wlapplication_options.cc:258
 msgid "New Random Game"
 msgstr "Uusi satunnainen peli"
 
@@ -6457,7 +6465,7 @@ msgid "Create a new random match"
 msgstr "Luo uusi satunnaisottelu"
 
 #: ../../../../src/ui_fsmenu/main.cc:374
-#: ../../../../src/wlapplication_options.cc:279
+#: ../../../../src/wlapplication_options.cc:266
 msgid "Campaigns"
 msgstr "Kampanjat"
 
@@ -6466,7 +6474,7 @@ msgid "Play a campaign"
 msgstr "Pelaa kampanjaa"
 
 #: ../../../../src/ui_fsmenu/main.cc:376
-#: ../../../../src/wlapplication_options.cc:274
+#: ../../../../src/wlapplication_options.cc:262
 msgid "Tutorials"
 msgstr "Tutoriaalit"
 
@@ -6477,8 +6485,8 @@ msgstr "Pelaa yhtä aloittelijoiden tutoriaaleistamme"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../../../src/ui_fsmenu/main.cc:379
-#: ../../../../src/wlapplication_options.cc:249
-#: ../../../../src/wlapplication_options.cc:898
+#: ../../../../src/wlapplication_options.cc:241
+#: ../../../../src/wlapplication_options.cc:863
 #: ../../../../src/wui/game_main_menu_save_game.cc:48
 #: ../../../../src/wui/interactive_gamebase.cc:181
 msgid "Load Game"
@@ -6489,7 +6497,7 @@ msgid "Continue a saved game"
 msgstr "Jatka tallennettua peliä"
 
 #: ../../../../src/ui_fsmenu/main.cc:391
-#: ../../../../src/wlapplication_options.cc:316
+#: ../../../../src/wlapplication_options.cc:300
 msgid "Continue Playing"
 msgstr "Jatka pelaamista"
 
@@ -6528,7 +6536,7 @@ msgid "Log in as a registered user"
 msgstr "Kirjaudu rekisteröityneenä käyttäjänä"
 
 #: ../../../../src/ui_fsmenu/main.cc:423
-#: ../../../../src/wlapplication_options.cc:333
+#: ../../../../src/wlapplication_options.cc:316
 msgid "LAN / Direct IP"
 msgstr "LAN / Suora IP-osoite -peli"
 
@@ -6549,13 +6557,13 @@ msgid "Edit an existing map"
 msgstr "Muokkaa olemassaolevaa karttaa"
 
 #: ../../../../src/ui_fsmenu/main.cc:441
-#: ../../../../src/wlapplication_options.cc:311
+#: ../../../../src/wlapplication_options.cc:295
 msgid "Continue Editing"
 msgstr "Jatka muokkaamista"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../../../src/ui_fsmenu/main.cc:463
-#: ../../../../src/wlapplication_options.cc:259
+#: ../../../../src/wlapplication_options.cc:249
 #: ../../../../src/wui/game_main_menu_save_game.cc:46
 #: ../../../../src/wui/interactive_gamebase.cc:167
 msgid "Load Replay"
@@ -6601,18 +6609,13 @@ msgstr "Käynnistä karttaeditori"
 msgid "Watch again a recorded earlier game"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:515
-#: ../../../../src/wlapplication_options.cc:329
-msgid "Add-Ons"
-msgstr "Laajennukset"
-
 #: ../../../../src/ui_fsmenu/main.cc:517
 msgid "Install and manage add-ons"
 msgstr "Asenna ja hallitse laajennuksia"
 
 #: ../../../../src/ui_fsmenu/main.cc:519
 #: ../../../../src/ui_fsmenu/options.cc:87
-#: ../../../../src/wlapplication_options.cc:346
+#: ../../../../src/wlapplication_options.cc:328
 msgid "Options"
 msgstr "Asetukset"
 
@@ -6625,7 +6628,7 @@ msgid "Readme, License, and Credits"
 msgstr "Käyttöohje, Lisenssi ja Tekijätiedot"
 
 #: ../../../../src/ui_fsmenu/main.cc:527
-#: ../../../../src/wlapplication_options.cc:320
+#: ../../../../src/wlapplication_options.cc:304
 msgid "Exit Widelands"
 msgstr "Sulje Widelands"
 
@@ -6648,33 +6651,33 @@ msgid ""
 "General Public License V2.0"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:875
+#: ../../../../src/ui_fsmenu/main.cc:879
 msgid "Click for the main menu"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/main.cc:953
+#: ../../../../src/ui_fsmenu/main.cc:957
 msgid "Desyncing Add-On Found"
 msgstr "Tahdistusvirheitä aiheuttava laajennus havaittu"
 
-#: ../../../../src/ui_fsmenu/main.cc:954
+#: ../../../../src/ui_fsmenu/main.cc:958
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr "Käytössä oleva laajennus tunnetusti aiheuttaa tahdistusvirheitä. Etene omalla vastuullasi."
 
-#: ../../../../src/ui_fsmenu/main.cc:1063
+#: ../../../../src/ui_fsmenu/main.cc:1067
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:352
 msgid "No tribes found!"
 msgstr "Heimoja ei löytynyt!"
 
-#: ../../../../src/ui_fsmenu/main.cc:1064
+#: ../../../../src/ui_fsmenu/main.cc:1068
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:353
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "Heimoja ei löytynyt tiedostosta data/tribes/initialization/[tribename]/init.lua."
 
-#: ../../../../src/ui_fsmenu/main.cc:1107
+#: ../../../../src/ui_fsmenu/main.cc:1111
 msgid "Exit Confirmation"
 msgstr "Poistumisvarmistus"
 
-#: ../../../../src/ui_fsmenu/main.cc:1108
+#: ../../../../src/ui_fsmenu/main.cc:1112
 msgid "Are you sure you wish to exit Widelands?"
 msgstr "Haluatko varmasti poistua Widelandsista?"
 
@@ -7545,77 +7548,77 @@ msgstr "Valitse kaikki"
 msgid "Unmark All"
 msgstr "Poista kaikki valinnat"
 
-#: ../../../../src/wlapplication.cc:956
+#: ../../../../src/wlapplication.cc:958
 msgid "Widelands could not find the last edited map."
 msgstr ""
 
-#: ../../../../src/wlapplication.cc:959
+#: ../../../../src/wlapplication.cc:961
 msgid "No Last Edited Map"
 msgstr ""
 
-#: ../../../../src/wlapplication.cc:989
+#: ../../../../src/wlapplication.cc:991
 msgid "No last saved replay."
 msgstr ""
 
-#: ../../../../src/wlapplication.cc:991
+#: ../../../../src/wlapplication.cc:993
 msgid "No last saved game."
 msgstr ""
 
-#: ../../../../src/wlapplication.cc:1001
+#: ../../../../src/wlapplication.cc:1003
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "Widelands ei löytänyt tiedostoa \"%s\"."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../../../src/wlapplication.cc:1002 ../../../../src/wlapplication.cc:1007
+#: ../../../../src/wlapplication.cc:1004 ../../../../src/wlapplication.cc:1009
 #: ../../../../src/wui/savegameloader.cc:131
 msgid "Error message:"
 msgstr "Virheviesti:"
 
-#: ../../../../src/wlapplication.cc:1003
+#: ../../../../src/wlapplication.cc:1005
 msgid "File system error"
 msgstr "Tiedostojärjestelmävirhe"
 
-#: ../../../../src/wlapplication.cc:1484
+#: ../../../../src/wlapplication.cc:1560
 #, c-format
 msgid "Command line parameter --%s can not use a value"
 msgstr ""
 
-#: ../../../../src/wlapplication.cc:1489
+#: ../../../../src/wlapplication.cc:1565
 #, c-format
 msgid "Empty value of command line parameter --%s"
 msgstr ""
 
-#: ../../../../src/wlapplication.cc:1495
+#: ../../../../src/wlapplication.cc:1571
 #, c-format
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
 msgstr ""
 
-#: ../../../../src/wlapplication.cc:1691
+#: ../../../../src/wlapplication.cc:1767
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Tuntematon kometoriviparametri: %s\nKenties '=' puuttuu?"
 
-#: ../../../../src/wlapplication.cc:1839
+#: ../../../../src/wlapplication.cc:1915
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Tuntematon komentoriviparametri: %s"
 
-#: ../../../../src/wlapplication.cc:1870
+#: ../../../../src/wlapplication.cc:1946
 msgid "Incompatible"
 msgstr "Yhteensopimaton"
 
-#: ../../../../src/wlapplication.cc:1907
+#: ../../../../src/wlapplication.cc:1983
 msgid "Game ended unexpectedly"
 msgstr "Peli päättyi yllättäen"
 
-#: ../../../../src/wlapplication.cc:1907
+#: ../../../../src/wlapplication.cc:1983
 msgid "Unexpected error during the game"
 msgstr "Tuntematon virhe pelin aikana"
 
-#: ../../../../src/wlapplication.cc:1910
+#: ../../../../src/wlapplication.cc:1986
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -7629,7 +7632,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Virhe pelin aikana. Virheviesti on:\n\n%1$s\n\nKerrothan meille tästä vikatilanteesta ja täten autat meitä parantamaan Widelandsia. Ongelmaan liittyvät tulosteet löydät vakiollisesta tulostetiedostosta (stdout.txt Windowsilla ja Linuxilla). Käytössäsi on Widelandsin ohjelmistoversio %2$s.\n\nLiitäthän nämä tiedot selontekoosi mukaan.\n\nHaluatko että Widelands yrittävää hätätallennuksen luomista? Peli on usein – joskaan ei aina – mahdollista ladata takaisin ja jatkaa peliä siitä mihin jäätiin."
 
-#: ../../../../src/wlapplication.cc:1919
+#: ../../../../src/wlapplication.cc:1995
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -7639,11 +7642,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Peli päättyi odottamatta seuraavasta syystä:\n\n%s\n\nHaluatko Widelandsin yrittävän hätätallennuksen luomista? Se on usein – joskaan ei aina – mahdollista ladata ja jatkaa peliä siitä mihin jäätiin."
 
-#: ../../../../src/wlapplication.cc:1953
+#: ../../../../src/wlapplication.cc:2029
 msgid "Emergency save failed"
 msgstr "Hätätallennus epäonnistui"
 
-#: ../../../../src/wlapplication.cc:1954
+#: ../../../../src/wlapplication.cc:2030
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -7651,603 +7654,603 @@ msgid ""
 "%s"
 msgstr "Olemme pahoillamme, mutta Widelands ei onnistunut hätätallennuksen luomisessa seuraavasta syystä:\n\n%s"
 
-#: ../../../../src/wlapplication_options.cc:190
+#: ../../../../src/wlapplication_options.cc:182
 msgid "Warehouse"
 msgstr "Varasto"
 
-#: ../../../../src/wlapplication_options.cc:191
+#: ../../../../src/wlapplication_options.cc:183
 msgid "Port"
 msgstr "Portti"
 
-#: ../../../../src/wlapplication_options.cc:192
+#: ../../../../src/wlapplication_options.cc:184
 msgid "Minor Training Site"
 msgstr "Pieni harjoittelualue"
 
-#: ../../../../src/wlapplication_options.cc:193
+#: ../../../../src/wlapplication_options.cc:185
 msgid "Major Training Site"
 msgstr "Suuri harjoittelualue"
 
-#: ../../../../src/wlapplication_options.cc:194
+#: ../../../../src/wlapplication_options.cc:186
 msgid "Primary Small Military Site"
 msgstr "Ensisijainen pieni sotilasalue"
 
-#: ../../../../src/wlapplication_options.cc:195
+#: ../../../../src/wlapplication_options.cc:187
 msgid "Secondary Small Military Site"
 msgstr "Toissijainen pieni sotilasalue"
 
-#: ../../../../src/wlapplication_options.cc:196
+#: ../../../../src/wlapplication_options.cc:188
 msgid "Primary Medium Military Site"
 msgstr "Ensisijainen keskikokoinen sotilasalue"
 
-#: ../../../../src/wlapplication_options.cc:197
+#: ../../../../src/wlapplication_options.cc:189
 msgid "Secondary Medium Military Site"
 msgstr "Toissijainen keskikokoinen sotilasalue"
 
-#: ../../../../src/wlapplication_options.cc:198
+#: ../../../../src/wlapplication_options.cc:190
 msgid "Tower"
 msgstr "Torni"
 
-#: ../../../../src/wlapplication_options.cc:199
+#: ../../../../src/wlapplication_options.cc:191
 msgid "Fortress"
 msgstr "Linnoitus"
 
-#: ../../../../src/wlapplication_options.cc:200
+#: ../../../../src/wlapplication_options.cc:192
 msgid "Woodcutter’s House"
 msgstr "Puunhakkaajan talo"
 
-#: ../../../../src/wlapplication_options.cc:201
+#: ../../../../src/wlapplication_options.cc:193
 msgid "Forester’s House"
 msgstr "Metsänhoitajan talo"
 
-#: ../../../../src/wlapplication_options.cc:202
+#: ../../../../src/wlapplication_options.cc:194
 msgid "Quarry"
 msgstr "Louhos"
 
-#: ../../../../src/wlapplication_options.cc:203
+#: ../../../../src/wlapplication_options.cc:195
 msgid "Primary Building Materials Industry"
 msgstr "Ensisijainen rakentamisen raaka-aineteollisuus"
 
-#: ../../../../src/wlapplication_options.cc:204
+#: ../../../../src/wlapplication_options.cc:196
 msgid "Secondary Building Materials Industry"
 msgstr "Toissijainen rakentamisen raaka-aineteollisuus"
 
-#: ../../../../src/wlapplication_options.cc:205
+#: ../../../../src/wlapplication_options.cc:197
 msgid "Tertiary Building Materials Industry"
 msgstr "Kolmasarvoinen rakentamisen raaka-aineteollisuus"
 
-#: ../../../../src/wlapplication_options.cc:206
+#: ../../../../src/wlapplication_options.cc:198
 msgid "Fishing"
 msgstr "Kalastus"
 
-#: ../../../../src/wlapplication_options.cc:207
+#: ../../../../src/wlapplication_options.cc:199
 msgid "Hunting"
 msgstr "Metsästys"
 
-#: ../../../../src/wlapplication_options.cc:208
+#: ../../../../src/wlapplication_options.cc:200
 msgid "Fish/Meat Replenishing"
 msgstr "Kalan/lihan täydennys"
 
-#: ../../../../src/wlapplication_options.cc:209
+#: ../../../../src/wlapplication_options.cc:201
 msgid "Well"
 msgstr "Kaivo"
 
-#: ../../../../src/wlapplication_options.cc:210
+#: ../../../../src/wlapplication_options.cc:202
 msgid "Primary Farm"
 msgstr "Ensisijainen maatila"
 
-#: ../../../../src/wlapplication_options.cc:211
+#: ../../../../src/wlapplication_options.cc:203
 msgid "Secondary Farm"
 msgstr "Toissijainen maatila"
 
-#: ../../../../src/wlapplication_options.cc:212
+#: ../../../../src/wlapplication_options.cc:204
 msgid "Mill"
 msgstr "Mylly"
 
-#: ../../../../src/wlapplication_options.cc:213
+#: ../../../../src/wlapplication_options.cc:205
 msgid "Bakery"
 msgstr "Leipomo"
 
-#: ../../../../src/wlapplication_options.cc:214
+#: ../../../../src/wlapplication_options.cc:206
 msgid "Brewery"
 msgstr "Panimo"
 
-#: ../../../../src/wlapplication_options.cc:215
+#: ../../../../src/wlapplication_options.cc:207
 msgid "Smokery"
 msgstr "Savustamo"
 
-#: ../../../../src/wlapplication_options.cc:216
+#: ../../../../src/wlapplication_options.cc:208
 msgid "Tavern"
 msgstr "Kestikievari"
 
-#: ../../../../src/wlapplication_options.cc:217
+#: ../../../../src/wlapplication_options.cc:209
 msgid "Ore Smelting"
 msgstr "Malmin sulattaminen"
 
-#: ../../../../src/wlapplication_options.cc:218
+#: ../../../../src/wlapplication_options.cc:210
 msgid "Tool Smithy"
 msgstr "Työkaluseppä"
 
-#: ../../../../src/wlapplication_options.cc:219
+#: ../../../../src/wlapplication_options.cc:211
 msgid "Weapon Smithy"
 msgstr "Aseentakoja"
 
-#: ../../../../src/wlapplication_options.cc:220
+#: ../../../../src/wlapplication_options.cc:212
 msgid "Armor Smithy"
 msgstr "Suojavarusteiden takoja"
 
-#: ../../../../src/wlapplication_options.cc:221
+#: ../../../../src/wlapplication_options.cc:213
 msgid "Weaving Mill"
 msgstr "Kutomismylly"
 
-#: ../../../../src/wlapplication_options.cc:222
+#: ../../../../src/wlapplication_options.cc:214
 msgid "Shipyard"
 msgstr "Telakka"
 
-#: ../../../../src/wlapplication_options.cc:223
+#: ../../../../src/wlapplication_options.cc:215
 msgid "Ferry Yard"
 msgstr "Lauttatelakka"
 
-#: ../../../../src/wlapplication_options.cc:224
+#: ../../../../src/wlapplication_options.cc:216
 msgid "Scouting"
 msgstr "Tiedustelu"
 
-#: ../../../../src/wlapplication_options.cc:225
+#: ../../../../src/wlapplication_options.cc:217
 msgid "Barracks"
 msgstr "Kasarmi"
 
-#: ../../../../src/wlapplication_options.cc:226
+#: ../../../../src/wlapplication_options.cc:218
 msgid "Second Carrier"
 msgstr "Toinen kuljetustukialus"
 
-#: ../../../../src/wlapplication_options.cc:227
+#: ../../../../src/wlapplication_options.cc:219
 msgid "Charcoal"
 msgstr "Hiili"
 
-#: ../../../../src/wlapplication_options.cc:228
+#: ../../../../src/wlapplication_options.cc:220
 msgid "Stone Mine"
 msgstr "Kivikaivos"
 
-#: ../../../../src/wlapplication_options.cc:229
+#: ../../../../src/wlapplication_options.cc:221
 msgid "Coal Mine"
 msgstr "Hiilikaivos"
 
-#: ../../../../src/wlapplication_options.cc:230
+#: ../../../../src/wlapplication_options.cc:222
 msgid "Iron Mine"
 msgstr "Rautakaivos"
 
-#: ../../../../src/wlapplication_options.cc:231
+#: ../../../../src/wlapplication_options.cc:223
 msgid "Gold Mine"
 msgstr "Kultakaivos"
 
-#: ../../../../src/wlapplication_options.cc:232
+#: ../../../../src/wlapplication_options.cc:224
 msgid "Agricultural Producer"
 msgstr "Maanviljelystuottaja"
 
-#: ../../../../src/wlapplication_options.cc:233
+#: ../../../../src/wlapplication_options.cc:225
 msgid "Primary Agricultural Consumer"
 msgstr "Ensisijainen maanviljelyskuluttaja"
 
-#: ../../../../src/wlapplication_options.cc:234
+#: ../../../../src/wlapplication_options.cc:226
 msgid "Secondary Agricultural Consumer"
 msgstr "Toissijainen maanviljelyskuluttaja"
 
-#: ../../../../src/wlapplication_options.cc:235
+#: ../../../../src/wlapplication_options.cc:227
 msgid "Alternative Industry"
 msgstr "Vaihtoehtoteollisuus"
 
-#: ../../../../src/wlapplication_options.cc:236
+#: ../../../../src/wlapplication_options.cc:228
 msgid "Industry Support"
 msgstr "Teollisuuden tuki"
 
-#: ../../../../src/wlapplication_options.cc:237
+#: ../../../../src/wlapplication_options.cc:229
 msgid "Terraforming"
 msgstr "Maanmuokkaus"
 
-#: ../../../../src/wlapplication_options.cc:254
+#: ../../../../src/wlapplication_options.cc:245
 msgid "Watch Replay"
 msgstr "Katso pelin toisto"
 
-#: ../../../../src/wlapplication_options.cc:264
+#: ../../../../src/wlapplication_options.cc:254
 msgid "Watch Latest Replay"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:283
+#: ../../../../src/wlapplication_options.cc:270
 msgid "Singleplayer"
 msgstr "Yksinpeli"
 
-#: ../../../../src/wlapplication_options.cc:287
+#: ../../../../src/wlapplication_options.cc:274
 msgid "Multiplayer"
 msgstr "Moninpeli"
 
-#: ../../../../src/wlapplication_options.cc:296
+#: ../../../../src/wlapplication_options.cc:281
 msgid "Editor – Load Map"
 msgstr "Editori – Lataa kartta"
 
-#: ../../../../src/wlapplication_options.cc:301
+#: ../../../../src/wlapplication_options.cc:285
 msgid "Editor – New Map"
 msgstr "Editori – Uusi kartta"
 
-#: ../../../../src/wlapplication_options.cc:306
+#: ../../../../src/wlapplication_options.cc:290
 msgid "Editor – New Random Map"
 msgstr "Editori – Uusi satunnainen kartta"
 
-#: ../../../../src/wlapplication_options.cc:324
+#: ../../../../src/wlapplication_options.cc:308
 msgid "About"
 msgstr "Tietoja"
 
-#: ../../../../src/wlapplication_options.cc:341
+#: ../../../../src/wlapplication_options.cc:324
 msgid "Internet Login"
 msgstr "Internet-sisäänkirjautuminen"
 
-#: ../../../../src/wlapplication_options.cc:352
+#: ../../../../src/wlapplication_options.cc:334
 msgid "Toggle Building Spaces"
 msgstr "Kytke rakennuspaikat"
 
-#: ../../../../src/wlapplication_options.cc:357
+#: ../../../../src/wlapplication_options.cc:339
 msgid "Toggle Minimap"
 msgstr "Kytke pienkartta"
 
-#: ../../../../src/wlapplication_options.cc:362
+#: ../../../../src/wlapplication_options.cc:344
 msgid "Encyclopedia"
 msgstr "Opas"
 
-#: ../../../../src/wlapplication_options.cc:367
+#: ../../../../src/wlapplication_options.cc:348
 msgid "Context Menu"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:371
+#: ../../../../src/wlapplication_options.cc:352
 msgid "Cut Text"
 msgstr "Leikkaa tekstiä"
 
-#: ../../../../src/wlapplication_options.cc:375
+#: ../../../../src/wlapplication_options.cc:356
 msgid "Copy Text"
 msgstr "Kopioi tekstiä"
 
-#: ../../../../src/wlapplication_options.cc:379
+#: ../../../../src/wlapplication_options.cc:360
 msgid "Paste Text"
 msgstr "Liitä tekstiä"
 
-#: ../../../../src/wlapplication_options.cc:388
+#: ../../../../src/wlapplication_options.cc:368
 msgid "Delete Item"
 msgstr "Poista kohde"
 
-#: ../../../../src/wlapplication_options.cc:393
+#: ../../../../src/wlapplication_options.cc:373
 msgid "Tooltip Accessibility Mode Key"
 msgstr "Vihjetekstien esteettömyystilan näppäin"
 
-#: ../../../../src/wlapplication_options.cc:398
+#: ../../../../src/wlapplication_options.cc:377
 msgid "Toggle Fullscreen"
 msgstr "Kytke kokoruudun tila"
 
-#: ../../../../src/wlapplication_options.cc:403
+#: ../../../../src/wlapplication_options.cc:381
 msgid "Take Screenshot"
 msgstr "Ota kuvakaappaus"
 
-#: ../../../../src/wlapplication_options.cc:408
+#: ../../../../src/wlapplication_options.cc:386
 msgid "Open the Debug Console (developer tool)"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:413
+#: ../../../../src/wlapplication_options.cc:391
 msgid "Toggle Cheat Mode (developer tool)"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:423
+#: ../../../../src/wlapplication_options.cc:401
 msgid "Load"
 msgstr "Lataa"
 
-#: ../../../../src/wlapplication_options.cc:428
+#: ../../../../src/wlapplication_options.cc:406
 msgid "Exit"
 msgstr "Poistu"
 
-#: ../../../../src/wlapplication_options.cc:433
+#: ../../../../src/wlapplication_options.cc:411
 msgid "Zoom In"
 msgstr "Lähennä"
 
-#: ../../../../src/wlapplication_options.cc:438
+#: ../../../../src/wlapplication_options.cc:416
 msgid "Zoom Out"
 msgstr "Loitonna"
 
-#: ../../../../src/wlapplication_options.cc:443
+#: ../../../../src/wlapplication_options.cc:421
 msgid "Reset Zoom"
 msgstr "Nollaa lähennysloitonnus"
 
-#: ../../../../src/wlapplication_options.cc:448
+#: ../../../../src/wlapplication_options.cc:426
 msgid "Jump to Next Location"
 msgstr "Hyppää seuraavaan kohteeseen"
 
-#: ../../../../src/wlapplication_options.cc:453
+#: ../../../../src/wlapplication_options.cc:431
 msgid "Jump to Previous Location"
 msgstr "Hyppää edelliseen kohteeseen"
 
-#: ../../../../src/wlapplication_options.cc:467
+#: ../../../../src/wlapplication_options.cc:445
 msgid "Publish Map Online"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:484
+#: ../../../../src/wlapplication_options.cc:462
 msgid "Toggle Tools Menu"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:489
+#: ../../../../src/wlapplication_options.cc:467
 msgid "Change Height Tool"
 msgstr "Muuta korkeustyökalua"
 
-#: ../../../../src/wlapplication_options.cc:494
+#: ../../../../src/wlapplication_options.cc:472
 msgid "Random Height Tool"
 msgstr "Satunnainen korkeustyökalu"
 
-#: ../../../../src/wlapplication_options.cc:498
+#: ../../../../src/wlapplication_options.cc:476
 msgid "Terrain Tool"
 msgstr "Maastotyökalu"
 
-#: ../../../../src/wlapplication_options.cc:503
+#: ../../../../src/wlapplication_options.cc:480
 msgid "Immovables Tool"
 msgstr "Ei-liikutettavien kohteiden työkalu"
 
-#: ../../../../src/wlapplication_options.cc:507
+#: ../../../../src/wlapplication_options.cc:484
 msgid "Animals Tool"
 msgstr "Eläintyökalu"
 
-#: ../../../../src/wlapplication_options.cc:511
+#: ../../../../src/wlapplication_options.cc:488
 msgid "Resources Tool"
 msgstr "Raaka-ainetyökalu"
 
-#: ../../../../src/wlapplication_options.cc:516
+#: ../../../../src/wlapplication_options.cc:492
 msgid "Port Spaces Tool"
 msgstr "Satamatilojen työkalu"
 
-#: ../../../../src/wlapplication_options.cc:520
+#: ../../../../src/wlapplication_options.cc:496
 msgid "Info Tool"
 msgstr "Tietotyökalu"
 
-#: ../../../../src/wlapplication_options.cc:524
+#: ../../../../src/wlapplication_options.cc:500
 msgid "Map Origin Tool"
 msgstr "Kartan alkuperäistystyökalu"
 
-#: ../../../../src/wlapplication_options.cc:528
+#: ../../../../src/wlapplication_options.cc:504
 msgid "Map Size Tool"
 msgstr "Karttakoon työkalu"
 
-#: ../../../../src/wlapplication_options.cc:532
+#: ../../../../src/wlapplication_options.cc:508
 msgid "Players Menu"
 msgstr "Pelaajavalikko"
 
-#: ../../../../src/wlapplication_options.cc:542
+#: ../../../../src/wlapplication_options.cc:517
 msgid "Toggle Height Heat Map"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:547
+#: ../../../../src/wlapplication_options.cc:521
 msgid "Toggle Grid"
 msgstr "Kytke ruudukko"
 
-#: ../../../../src/wlapplication_options.cc:552
+#: ../../../../src/wlapplication_options.cc:525
 msgid "Toggle Oceans"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:557
+#: ../../../../src/wlapplication_options.cc:530
 msgid "Toggle Immovables"
 msgstr "Kytke kiinteät esineet"
 
-#: ../../../../src/wlapplication_options.cc:562
+#: ../../../../src/wlapplication_options.cc:535
 msgid "Toggle Animals"
 msgstr "Kytke eläimet"
 
-#: ../../../../src/wlapplication_options.cc:567
+#: ../../../../src/wlapplication_options.cc:540
 msgid "Toggle Resources"
 msgstr "Kytke resurssit"
 
-#: ../../../../src/wlapplication_options.cc:573
+#: ../../../../src/wlapplication_options.cc:546
 msgid "Toggle Maximum Build Spaces"
 msgstr "Kytke suurimmat rakennuspaikat"
 
-#: ../../../../src/wlapplication_options.cc:580
+#: ../../../../src/wlapplication_options.cc:553
 #, c-format
 msgid "Set Toolsize to %d"
 msgstr "Aseta työkalun kooksi %d"
 
-#: ../../../../src/wlapplication_options.cc:599
+#: ../../../../src/wlapplication_options.cc:571
 #, c-format
 msgid "Set Tool Gap to %d%%"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../../../src/wlapplication_options.cc:617
+#: ../../../../src/wlapplication_options.cc:589
 #: ../../../../src/wui/game_options_sound_menu.cc:34
 #: ../../../../src/wui/interactive_gamebase.cc:147
 msgid "Sound Options"
 msgstr "Ääniasetukset"
 
-#: ../../../../src/wlapplication_options.cc:622
+#: ../../../../src/wlapplication_options.cc:594
 msgid "Restart Scenario or Replay"
 msgstr "Aloita tilannekokonaisuus uudelleen alusta tai toista se"
 
-#: ../../../../src/wlapplication_options.cc:627
+#: ../../../../src/wlapplication_options.cc:598
 msgid "Toggle Census"
 msgstr "Kytke väestönlaskenta"
 
-#: ../../../../src/wlapplication_options.cc:632
+#: ../../../../src/wlapplication_options.cc:603
 msgid "Toggle Status Labels"
 msgstr "Kytke tilamääreet"
 
-#: ../../../../src/wlapplication_options.cc:637
+#: ../../../../src/wlapplication_options.cc:608
 msgid "Toggle Soldier Levels"
 msgstr "Kytke sotilaiden tasot"
 
-#: ../../../../src/wlapplication_options.cc:642
+#: ../../../../src/wlapplication_options.cc:613
 msgid "Toggle Buildings Visibility"
 msgstr "Kytke rakennusten näkyvyys"
 
-#: ../../../../src/wlapplication_options.cc:647
+#: ../../../../src/wlapplication_options.cc:618
 msgid "Toggle Overlapping Workareas"
 msgstr "Kytke limittäiset työalueet"
 
-#: ../../../../src/wlapplication_options.cc:652
+#: ../../../../src/wlapplication_options.cc:623
 #: ../../../../src/wui/general_statistics_menu.cc:47
 msgid "General Statistics"
 msgstr "Yleistilastot"
 
-#: ../../../../src/wlapplication_options.cc:656
+#: ../../../../src/wlapplication_options.cc:627
 #: ../../../../src/wui/ware_statistics_menu.cc:105
 msgid "Ware Statistics"
 msgstr "Tuotetilastot"
 
-#: ../../../../src/wlapplication_options.cc:661
+#: ../../../../src/wlapplication_options.cc:632
 #: ../../../../src/wui/building_statistics_menu.cc:52
 msgid "Building Statistics"
 msgstr "Rakennustilastot"
 
-#: ../../../../src/wlapplication_options.cc:665
+#: ../../../../src/wlapplication_options.cc:636
 msgid "Stock Inventory"
 msgstr "Varaston tila"
 
-#: ../../../../src/wlapplication_options.cc:670
+#: ../../../../src/wlapplication_options.cc:641
 #: ../../../../src/wui/soldier_statistics_menu.cc:148
 msgid "Soldier Statistics"
 msgstr "Sotilastilastot"
 
-#: ../../../../src/wlapplication_options.cc:675
+#: ../../../../src/wlapplication_options.cc:646
 msgid "Seafaring Statistics"
 msgstr "Merenkulkutilastot"
 
-#: ../../../../src/wlapplication_options.cc:693
+#: ../../../../src/wlapplication_options.cc:662
 msgid "Decrease Game Speed by 1×"
 msgstr "Vähennä pelinopeutta 1×"
 
-#: ../../../../src/wlapplication_options.cc:698
+#: ../../../../src/wlapplication_options.cc:667
 msgid "Decrease Game Speed by 0.25×"
 msgstr "Vähennä pelinopeutta 0.25×"
 
-#: ../../../../src/wlapplication_options.cc:703
+#: ../../../../src/wlapplication_options.cc:672
 msgid "Decrease Game Speed by 10×"
 msgstr "Vähennä pelinopeutta 10×"
 
-#: ../../../../src/wlapplication_options.cc:708
+#: ../../../../src/wlapplication_options.cc:677
 msgid "Increase Game Speed by 1×"
 msgstr "Lisää pelinopeutta 1×"
 
-#: ../../../../src/wlapplication_options.cc:713
+#: ../../../../src/wlapplication_options.cc:682
 msgid "Increase Game Speed by 0.25×"
 msgstr "Lisää pelinopeutta 0.25×"
 
-#: ../../../../src/wlapplication_options.cc:718
+#: ../../../../src/wlapplication_options.cc:687
 msgid "Increase Game Speed by 10×"
 msgstr "Lisää pelinopeutta 10×"
 
-#: ../../../../src/wlapplication_options.cc:722
+#: ../../../../src/wlapplication_options.cc:691
 msgid "Reset Game Speed"
 msgstr "Nollaa pelinopeus"
 
-#: ../../../../src/wlapplication_options.cc:726
+#: ../../../../src/wlapplication_options.cc:695
 msgid "Pause The Game"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:731
+#: ../../../../src/wlapplication_options.cc:700
 msgid "Scroll to Starting Field"
 msgstr "Rullaa aloitusalueelle"
 
-#: ../../../../src/wlapplication_options.cc:735
+#: ../../../../src/wlapplication_options.cc:703
 #: ../../../../src/wui/game_chat_menu.cc:68
 #: ../../../../src/wui/interactive_gamebase.cc:416
 msgid "Chat"
 msgstr "Keskustelu"
 
-#: ../../../../src/wlapplication_options.cc:740
+#: ../../../../src/wlapplication_options.cc:707
 #: ../../../../src/wui/pinned_note.cc:41
 msgid "Pinned Note"
 msgstr "Kiinnitetty huomautus"
 
-#: ../../../../src/wlapplication_options.cc:745
+#: ../../../../src/wlapplication_options.cc:711
 msgid "Go to Location"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:750
+#: ../../../../src/wlapplication_options.cc:716
 msgid "Show All Messages"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:755
+#: ../../../../src/wlapplication_options.cc:721
 msgid "Show Geologists’ Messages Only"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:760
+#: ../../../../src/wlapplication_options.cc:726
 msgid "Show Economy Messages Only"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:765
+#: ../../../../src/wlapplication_options.cc:731
 msgid "Show Seafaring Messages Only"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:770
+#: ../../../../src/wlapplication_options.cc:736
 msgid "Show Military Messages Only"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:775
+#: ../../../../src/wlapplication_options.cc:741
 msgid "Show Scenario Messages Only"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:780
+#: ../../../../src/wlapplication_options.cc:746
 msgid "Go to Ship"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:785
+#: ../../../../src/wlapplication_options.cc:751
 msgid "Watch Ship"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:790
+#: ../../../../src/wlapplication_options.cc:756
 msgid "Open Ship Window"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:795
+#: ../../../../src/wlapplication_options.cc:761
 msgid "Open Ship Window And Go to Ship"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:800
+#: ../../../../src/wlapplication_options.cc:766
 msgid "Show All Ships"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:805
+#: ../../../../src/wlapplication_options.cc:771
 msgid "Show Idle Ships"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:810
+#: ../../../../src/wlapplication_options.cc:776
 msgid "Show Transport Ships"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:815
+#: ../../../../src/wlapplication_options.cc:781
 msgid "Show Waiting Expeditions"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:820
+#: ../../../../src/wlapplication_options.cc:786
 msgid "Show Scouting Expeditions"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:825
+#: ../../../../src/wlapplication_options.cc:791
 msgid "Show Expeditions with Port Spaces"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:830
+#: ../../../../src/wlapplication_options.cc:796
 msgid "Show Warships"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:835
+#: ../../../../src/wlapplication_options.cc:801
 msgid "Show Ships Being Refitted"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:840
+#: ../../../../src/wlapplication_options.cc:806
 msgid "Toggle Quick Navigation"
 msgstr "Kytke pikanavigointi"
 
-#: ../../../../src/wlapplication_options.cc:847
+#: ../../../../src/wlapplication_options.cc:812
 #, c-format
 msgid "Set Landmark #%d"
 msgstr "Aseta maamerkki #%d"
 
-#: ../../../../src/wlapplication_options.cc:851
+#: ../../../../src/wlapplication_options.cc:816
 #, c-format
 msgid "Go To Landmark #%d"
 msgstr "Mene maamerkille #%d"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../../../src/wlapplication_options.cc:901
+#: ../../../../src/wlapplication_options.cc:866
 #: ../../../../src/wui/game_main_menu_save_game.cc:50
 #: ../../../../src/wui/interactive_gamebase.cc:157
 msgid "Save Game"
@@ -8256,7 +8259,7 @@ msgstr "Tallenna peli"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../../../src/wlapplication_options.cc:904
+#: ../../../../src/wlapplication_options.cc:869
 #: ../../../../src/wui/game_client_disconnected.cc:112
 #: ../../../../src/wui/game_summary.cc:108
 #: ../../../../src/wui/interactive_gamebase.cc:194
@@ -8264,118 +8267,118 @@ msgid "Exit Game"
 msgstr "Poistu pelistä"
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../../../src/wlapplication_options.cc:922
+#: ../../../../src/wlapplication_options.cc:887
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:924
+#: ../../../../src/wlapplication_options.cc:889
 msgid "Move the map"
 msgstr ""
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../../../src/wlapplication_options.cc:926
+#: ../../../../src/wlapplication_options.cc:891
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:928
+#: ../../../../src/wlapplication_options.cc:893
 msgid "Move the map fast"
 msgstr ""
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../../../src/wlapplication_options.cc:930
+#: ../../../../src/wlapplication_options.cc:895
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:932
+#: ../../../../src/wlapplication_options.cc:897
 msgid "Move the map slowly"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:944
+#: ../../../../src/wlapplication_options.cc:909
 msgid "Remember current location"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:947
+#: ../../../../src/wlapplication_options.cc:912
 msgid "Go to previously remembered location"
 msgstr ""
 
 #. * TRANSLATORS: Separator for a list of hotkeys
-#: ../../../../src/wlapplication_options.cc:996
+#: ../../../../src/wlapplication_options.cc:961
 #, c-format
 msgctxt "hotkey"
 msgid "%1$s / %2$s"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1014
-#: ../../../../src/wlapplication_options.cc:1055
+#: ../../../../src/wlapplication_options.cc:979
+#: ../../../../src/wlapplication_options.cc:1023
 msgid "Keyboard Shortcuts"
 msgstr ""
 
 #. * TRANSLATORS: Section heading in "Controls" help
-#: ../../../../src/wlapplication_options.cc:1025
+#: ../../../../src/wlapplication_options.cc:990
 msgid "Message Window"
 msgstr ""
 
 #. * TRANSLATORS: Section heading in "Controls" help
-#: ../../../../src/wlapplication_options.cc:1030
+#: ../../../../src/wlapplication_options.cc:995
 msgid "Ship Statistics"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:1069
+#: ../../../../src/wlapplication_options.cc:1037
 msgid "Change tool size"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1070
+#: ../../../../src/wlapplication_options.cc:1038
 msgid "Change tool gap"
 msgstr ""
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../../../src/wlapplication_options.cc:1075
+#: ../../../../src/wlapplication_options.cc:1043
 msgctxt "hotkey"
 msgid "Click"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:1077
+#: ../../../../src/wlapplication_options.cc:1045
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
 msgstr ""
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../../../src/wlapplication_options.cc:1081
+#: ../../../../src/wlapplication_options.cc:1049
 msgctxt "hotkey"
 msgid "Shift + Click"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:1083
+#: ../../../../src/wlapplication_options.cc:1051
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
 msgstr ""
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../../../src/wlapplication_options.cc:1086
+#: ../../../../src/wlapplication_options.cc:1054
 msgctxt "hotkey"
 msgid "Ctrl + Click"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:1088
+#: ../../../../src/wlapplication_options.cc:1056
 msgid "Set map elements to the value selected by ‘Set Value’"
 msgstr ""
 
 #. * TRANSLATORS: prefix for message window shortcuts in keyboard options
-#: ../../../../src/wlapplication_options.cc:1192
+#: ../../../../src/wlapplication_options.cc:1163
 #, c-format
 msgctxt "hotkey"
 msgid "Messages: %s"
@@ -8383,241 +8386,241 @@ msgstr ""
 
 #. * TRANSLATORS: prefix for seafaring statistics window shortcuts in keyboard
 #. options
-#: ../../../../src/wlapplication_options.cc:1197
+#: ../../../../src/wlapplication_options.cc:1168
 #, c-format
 msgctxt "hotkey"
 msgid "Seafaring: %s"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1390
+#: ../../../../src/wlapplication_options.cc:1366
 msgctxt "hotkey"
 msgid "Shift"
 msgstr "Shift-vaihtonäppäin"
 
-#: ../../../../src/wlapplication_options.cc:1393
+#: ../../../../src/wlapplication_options.cc:1369
 msgctxt "hotkey"
 msgid "Alt"
 msgstr "Alt-näppäin"
 
-#: ../../../../src/wlapplication_options.cc:1397
+#: ../../../../src/wlapplication_options.cc:1373
 msgctxt "hotkey"
 msgid "Cmd"
 msgstr "Cmd-näppäin"
 
-#: ../../../../src/wlapplication_options.cc:1399
+#: ../../../../src/wlapplication_options.cc:1375
 msgctxt "hotkey"
 msgid "GUI"
 msgstr "Graafinen käyttöliittymä (GUI)"
 
-#: ../../../../src/wlapplication_options.cc:1403
+#: ../../../../src/wlapplication_options.cc:1379
 msgctxt "hotkey"
 msgid "Ctrl"
 msgstr "Ctrl-näppäin"
 
-#: ../../../../src/wlapplication_options.cc:1412
+#: ../../../../src/wlapplication_options.cc:1388
 #, c-format
 msgid "%1$s+%2$s"
 msgstr "%1$s+%2$s"
 
-#: ../../../../src/wlapplication_options.cc:1425
+#: ../../../../src/wlapplication_options.cc:1401
 msgctxt "hotkey"
 msgid "Space"
 msgstr "Välilyönti"
 
-#: ../../../../src/wlapplication_options.cc:1427
+#: ../../../../src/wlapplication_options.cc:1403
 msgctxt "hotkey"
 msgid "Enter"
 msgstr "Palautusnäppäin (Enter)"
 
-#: ../../../../src/wlapplication_options.cc:1429
+#: ../../../../src/wlapplication_options.cc:1405
 msgctxt "hotkey"
 msgid "Escape"
 msgstr "Escape -poistumisnäppäin"
 
-#: ../../../../src/wlapplication_options.cc:1431
+#: ../../../../src/wlapplication_options.cc:1407
 msgctxt "hotkey"
 msgid "Tab"
 msgstr "Sarkain (tabulaattori)"
 
-#: ../../../../src/wlapplication_options.cc:1433
+#: ../../../../src/wlapplication_options.cc:1409
 msgctxt "hotkey"
 msgid "Menu"
 msgstr "Valikko"
 
-#: ../../../../src/wlapplication_options.cc:1435
+#: ../../../../src/wlapplication_options.cc:1411
 msgctxt "hotkey"
 msgid "Application"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1437
+#: ../../../../src/wlapplication_options.cc:1413
 msgctxt "hotkey"
 msgid "Pause"
 msgstr "Pause -taukonäppäin"
 
-#: ../../../../src/wlapplication_options.cc:1439
+#: ../../../../src/wlapplication_options.cc:1415
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr "Page Up (sivua ylöspäin -näppäin)"
 
-#: ../../../../src/wlapplication_options.cc:1441
+#: ../../../../src/wlapplication_options.cc:1417
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr "Page Down (sivua alaspäin -näppäin)"
 
-#: ../../../../src/wlapplication_options.cc:1443
+#: ../../../../src/wlapplication_options.cc:1419
 msgctxt "hotkey"
 msgid "Home"
 msgstr "Home-näppäin (koti)"
 
-#: ../../../../src/wlapplication_options.cc:1445
+#: ../../../../src/wlapplication_options.cc:1421
 msgctxt "hotkey"
 msgid "End"
 msgstr "End-näppäin (mene loppuun)"
 
-#: ../../../../src/wlapplication_options.cc:1447
+#: ../../../../src/wlapplication_options.cc:1423
 msgctxt "hotkey"
 msgid "Left Arrow Key"
 msgstr "Vasen nuolinäppäin"
 
-#: ../../../../src/wlapplication_options.cc:1449
+#: ../../../../src/wlapplication_options.cc:1425
 msgctxt "hotkey"
 msgid "Right Arrow Key"
 msgstr "Oikea nuolinäppäin"
 
-#: ../../../../src/wlapplication_options.cc:1451
+#: ../../../../src/wlapplication_options.cc:1427
 msgctxt "hotkey"
 msgid "Up Arrow Key"
 msgstr "Ylös nuolinäppäin"
 
-#: ../../../../src/wlapplication_options.cc:1453
+#: ../../../../src/wlapplication_options.cc:1429
 msgctxt "hotkey"
 msgid "Down Arrow Key"
 msgstr "Alas nuolinäppäin"
 
-#: ../../../../src/wlapplication_options.cc:1455
+#: ../../../../src/wlapplication_options.cc:1431
 msgctxt "hotkey"
 msgid "Insert"
 msgstr "Insert-näppäin (syötä)"
 
-#: ../../../../src/wlapplication_options.cc:1457
+#: ../../../../src/wlapplication_options.cc:1433
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Delete-näppäin (poista)"
 
-#: ../../../../src/wlapplication_options.cc:1459
+#: ../../../../src/wlapplication_options.cc:1435
 msgctxt "hotkey"
 msgid "Backspace"
 msgstr "Askelpalautin"
 
-#: ../../../../src/wlapplication_options.cc:1461
+#: ../../../../src/wlapplication_options.cc:1437
 msgctxt "hotkey"
 msgid "Caps Lock"
 msgstr "Lukitusnäppäin isoille kirjaimille (Caps Lock)"
 
-#: ../../../../src/wlapplication_options.cc:1463
+#: ../../../../src/wlapplication_options.cc:1439
 msgctxt "hotkey"
 msgid "Numpad Lock"
 msgstr "Numeronäppäimistölukitus (Numpad)"
 
-#: ../../../../src/wlapplication_options.cc:1465
+#: ../../../../src/wlapplication_options.cc:1441
 msgctxt "hotkey"
 msgid "Scroll Lock"
 msgstr "Vierityslukitus (Scroll Lock)"
 
-#: ../../../../src/wlapplication_options.cc:1467
+#: ../../../../src/wlapplication_options.cc:1443
 msgctxt "hotkey"
 msgid "Keypad 1"
 msgstr "Numeronäppäimistön 1"
 
-#: ../../../../src/wlapplication_options.cc:1469
+#: ../../../../src/wlapplication_options.cc:1445
 msgctxt "hotkey"
 msgid "Keypad 2"
 msgstr "Numeronäppäimistön 2"
 
-#: ../../../../src/wlapplication_options.cc:1471
+#: ../../../../src/wlapplication_options.cc:1447
 msgctxt "hotkey"
 msgid "Keypad 3"
 msgstr "Numeronäppäimistön 3"
 
-#: ../../../../src/wlapplication_options.cc:1473
+#: ../../../../src/wlapplication_options.cc:1449
 msgctxt "hotkey"
 msgid "Keypad 4"
 msgstr "Numeronäppäimistön 4"
 
-#: ../../../../src/wlapplication_options.cc:1475
+#: ../../../../src/wlapplication_options.cc:1451
 msgctxt "hotkey"
 msgid "Keypad 5"
 msgstr "Numeronäppäimistön 5"
 
-#: ../../../../src/wlapplication_options.cc:1477
+#: ../../../../src/wlapplication_options.cc:1453
 msgctxt "hotkey"
 msgid "Keypad 6"
 msgstr "Numeronäppäimistön 6"
 
-#: ../../../../src/wlapplication_options.cc:1479
+#: ../../../../src/wlapplication_options.cc:1455
 msgctxt "hotkey"
 msgid "Keypad 7"
 msgstr "Numeronäppäimistön 7"
 
-#: ../../../../src/wlapplication_options.cc:1481
+#: ../../../../src/wlapplication_options.cc:1457
 msgctxt "hotkey"
 msgid "Keypad 8"
 msgstr "Numeronäppäimistön 8"
 
-#: ../../../../src/wlapplication_options.cc:1483
+#: ../../../../src/wlapplication_options.cc:1459
 msgctxt "hotkey"
 msgid "Keypad 9"
 msgstr "Numeronäppäimistön 9"
 
-#: ../../../../src/wlapplication_options.cc:1485
+#: ../../../../src/wlapplication_options.cc:1461
 msgctxt "hotkey"
 msgid "Keypad 0"
 msgstr "Numeronäppäimistön 0"
 
-#: ../../../../src/wlapplication_options.cc:1487
+#: ../../../../src/wlapplication_options.cc:1463
 msgctxt "hotkey"
 msgid "Keypad ."
 msgstr "Numeronäppäimistön . (piste)"
 
-#: ../../../../src/wlapplication_options.cc:1489
+#: ../../../../src/wlapplication_options.cc:1465
 msgctxt "hotkey"
 msgid "Keypad +"
 msgstr "Numeronäppäimistön + (plus)"
 
-#: ../../../../src/wlapplication_options.cc:1491
+#: ../../../../src/wlapplication_options.cc:1467
 msgctxt "hotkey"
 msgid "Keypad -"
 msgstr "Numeronäppäimistön - (miinus)"
 
-#: ../../../../src/wlapplication_options.cc:1493
+#: ../../../../src/wlapplication_options.cc:1469
 msgctxt "hotkey"
 msgid "Keypad *"
 msgstr "Numeronäppäimistön * (tähti)"
 
-#: ../../../../src/wlapplication_options.cc:1495
+#: ../../../../src/wlapplication_options.cc:1471
 msgctxt "hotkey"
 msgid "Keypad /"
 msgstr "Numeronäppäimistön /"
 
-#: ../../../../src/wlapplication_options.cc:1497
+#: ../../../../src/wlapplication_options.cc:1473
 msgctxt "hotkey"
 msgid "Keypad Enter"
 msgstr "Numeronäppäimistön palautusnäppäin (Enter)"
 
-#: ../../../../src/wlapplication_options.cc:1506
+#: ../../../../src/wlapplication_options.cc:1482
 msgid "(disabled)"
 msgstr "(pois päältä)"
 
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
 #. * icon indicating a trend. Very little space is available.
-#: ../../../../src/wlapplication_options.cc:1509
+#: ../../../../src/wlapplication_options.cc:1485
 #: ../../../../src/wui/waresdisplay.cc:638
 #, c-format
 msgid "%1$s%2$s"
 msgstr "%1$s%2$s"
 
-#: ../../../../src/wlapplication_options.cc:1534
+#: ../../../../src/wlapplication_options.cc:1541
 #, c-format
 msgid "Fastplace #%i"
 msgstr "Pikapaikka #%i"
@@ -9940,63 +9943,63 @@ msgid "Plugins"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../../../src/wui/interactive_base.cc:322
+#: ../../../../src/wui/interactive_base.cc:324
 msgid "Hide Minimap"
 msgstr "Piilota pienkartta"
 
-#: ../../../../src/wui/interactive_base.cc:322
+#: ../../../../src/wui/interactive_base.cc:324
 msgid "Show Minimap"
 msgstr "Näytä pienkartta"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../../../src/wui/interactive_base.cc:329
+#: ../../../../src/wui/interactive_base.cc:331
 msgid "Hide Quick Navigation"
 msgstr "Piilota pikanavigaatio"
 
-#: ../../../../src/wui/interactive_base.cc:330
+#: ../../../../src/wui/interactive_base.cc:332
 msgid "Show Quick Navigation"
 msgstr "Näytä pikanavigaatio"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../../../src/wui/interactive_base.cc:337
+#: ../../../../src/wui/interactive_base.cc:339
 msgid "Zoom +"
 msgstr "Zoom +"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../../../src/wui/interactive_base.cc:342
+#: ../../../../src/wui/interactive_base.cc:344
 msgid "Reset zoom"
 msgstr "Resetoi suurennus"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../../../src/wui/interactive_base.cc:347
+#: ../../../../src/wui/interactive_base.cc:349
 msgid "Zoom –"
 msgstr "Zoomaa –"
 
-#: ../../../../src/wui/interactive_base.cc:925
+#: ../../../../src/wui/interactive_base.cc:927
 #, c-format
 msgid "Road length: %1$u (%2$u)"
 msgstr "Tien pituus: %1$u (%2$u)"
 
-#: ../../../../src/wui/interactive_base.cc:927
+#: ../../../../src/wui/interactive_base.cc:929
 #, c-format
 msgid "Waterway length: %1$u (%2$u) / %3$u"
 msgstr "Vesireitin pituus: %1$u (%2$u) / %3$u"
 
-#: ../../../../src/wui/interactive_base.cc:932
+#: ../../../../src/wui/interactive_base.cc:934
 #, c-format
 msgid "Road length: %u"
 msgstr "Tien pituus: %u"
 
-#: ../../../../src/wui/interactive_base.cc:935
+#: ../../../../src/wui/interactive_base.cc:937
 #, c-format
 msgid "Waterway length: %1$u / %2$u"
 msgstr "Vesireitin pituus: %1$u / %2$u"
 
-#: ../../../../src/wui/interactive_base.cc:1853
+#: ../../../../src/wui/interactive_base.cc:1859
 msgid "Failed saving screenshot!"
 msgstr "Kuvakaappauksen tallentaminen epäonnistui!"
 
-#: ../../../../src/wui/interactive_base.cc:1857
+#: ../../../../src/wui/interactive_base.cc:1863
 msgid "Screenshot saved"
 msgstr "Kuvakaappaus tallennettu"
 
@@ -10163,7 +10166,7 @@ msgid_plural "%u new messages"
 msgstr[0] "%u uusi viesti"
 msgstr[1] "%u uutta viestiä"
 
-#: ../../../../src/wui/interactive_player.cc:1006
+#: ../../../../src/wui/interactive_player.cc:1010
 msgid "Fastplace Shortcuts"
 msgstr ""
 
