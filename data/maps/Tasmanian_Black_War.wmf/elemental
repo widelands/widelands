@@ -1,0 +1,13 @@
+# Automatically created by Widelands 1.2~git26575 (5372ade@master) Release
+
+[global]
+packet_version="1"
+map_w="240"
+map_h="368"
+nr_players="4"
+name=_"Tasmanian Black War"
+author="Solstice"
+descr=_"Welcome, intruder! You’re like a European conqueror from an early 1800s when they settled the Van Diemen land – later known as Tasmania. Between 1828 and 1832 there was a war called the Black War in which the British Empire eradicated almost the entire Aboriginal population of the Van Diemen land. – The map simulates a scattered British Empire but without any advantages – actually it offers some great disadvantages and you will likely have a hard time conquering Tasmania. During the historical Black War the ratio between Europeans and Aboriginals was around one against ten, but this time they’re armed to the teeth for a rematch."
+hint=_"This map is intended to be played as a single player scenario from the blue player’s starting location. Choose Barbarians for the rival tribes and play as an Empire. If you want to lose, put them all on the same side, but at least I prefer playing every man for himself with a win condition of Territorial Time. This map isn’t suitable for short games and one game will likely take more than ten hours. The AI has great capability on this map. One of the computer players will likely also begin seafaring and competes for the best harbor places on the Tasmanian coastal, so you’ve been warned!"
+tags="artifacts,ffa,seafaring,official"
+addons=
