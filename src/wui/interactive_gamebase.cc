@@ -33,7 +33,6 @@
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
 #include "network/gamehost.h"
-#include "sound/sound_handler.h"
 #include "ui_basic/toolbar_setup.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
@@ -451,11 +450,6 @@ void InteractiveGameBase::toggle_game_paused() {
 	}
 }
 
-void InteractiveGameBase::change_music() {
-	// request soundhandler to change music
-	g_sh->change_music();
-}
-
 bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 	if (InteractiveBase::handle_key(down, code)) {
 		return true;
@@ -544,10 +538,6 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 	}
 	if (matches_shortcut(KeyboardShortcut::kInGameSoundOptions, code)) {
 		menu_windows_.sound_options.toggle();
-		return true;
-	}
-	if (matches_shortcut(KeyboardShortcut::kChangeMusic, code)) {
-		change_music();
 		return true;
 	}
 	if ((chat_provider_ != nullptr) && matches_shortcut(KeyboardShortcut::kInGameChat, code)) {

@@ -136,6 +136,7 @@ enum class KeyboardShortcut : uint16_t {
 	kCommonTooltipAccessibilityMode,
 	kCommonFullscreen,
 	kCommonScreenshot,
+	kCommonChangeMusic,
 	kCommonGeneral_End = kCommonScreenshot,
 
 	// These are only shown in the help in debug builds
@@ -218,7 +219,6 @@ enum class KeyboardShortcut : uint16_t {
 
 	kInGame_Begin = kEditor_End + 1,
 	kInGameSoundOptions = kInGame_Begin,
-	kChangeMusic,
 	kInGameSave,  // alias of kCommonSave
 	kInGameLoad,  // alias of kCommonLoad
 	kInGameRestart,

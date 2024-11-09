@@ -401,6 +401,7 @@ protected:
 
 private:
 	void play_sound_effect(const NoteSound& note) const;
+	void change_music();
 	void resize_chat_overlay();
 	void road_building_add_overlay();
 	void road_building_add_overlay(const Widelands::CoordPath& path,
