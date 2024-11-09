@@ -656,6 +656,8 @@ void WLApplication::init_mouse_cursor() {
 }
 
 void WLApplication::initialize_g_addons() {
+	init_plugin_shortcuts();
+
 	AddOns::g_addons.clear();
 	if (g_fs->is_directory(kAddOnDir)) {
 		std::set<std::string> found;
@@ -765,8 +767,8 @@ static void init_one_player_from_template(unsigned p,
 	const Widelands::TribeBasicInfo t = settings->settings().get_tribeinfo(tribe);
 	for (unsigned i = 0; i < t.initializations.size(); ++i) {
 		if (addon.empty() ?
-             init_script_name == FileSystem::fs_filename(t.initializations[i].script.c_str()) :
-             addon == t.initializations[i].script) {
+		       init_script_name == FileSystem::fs_filename(t.initializations[i].script.c_str()) :
+		       addon == t.initializations[i].script) {
 			settings->set_player_init(p, i);
 			found_init = true;
 			break;
@@ -1387,6 +1389,80 @@ void WLApplication::init_language() {
 	i18n::set_locale(language);
 }
 
+void WLApplication::init_plugin_shortcuts() {
+	LuaInterface lua;
+	for (const std::string& name : g_fs->list_directory(kAddOnDir)) {
+		std::string path = name;
+		path += FileSystem::file_separator();
+		path += kAddOnKeyboardShortcutsFile;
+		if (g_fs->file_exists(path)) {
+			try {
+				std::unique_ptr<LuaTable> all_definitions(lua.run_script(path));
+				for (const auto& table : all_definitions->array_entries<std::unique_ptr<LuaTable>>()) {
+					std::string internal_name;
+					try {
+						internal_name = table->get_string("internal_name");
+						std::string descname = table->get_string("descname");
+
+						std::set<KeyboardShortcutScope> scopes;
+						std::unique_ptr<LuaTable> scopes_table = table->get_table("scopes");
+						for (const std::string& scope : scopes_table->array_entries<std::string>()) {
+							if (scope == "global") {
+								scopes.insert(KeyboardShortcutScope::kGlobal);
+							} else if (scope == "game") {
+								scopes.insert(KeyboardShortcutScope::kGame);
+							} else if (scope == "editor") {
+								scopes.insert(KeyboardShortcutScope::kEditor);
+							} else if (scope == "main_menu") {
+								scopes.insert(KeyboardShortcutScope::kMainMenu);
+							} else {
+								throw WLWarning("", "Invalid scope '%s'", scope.c_str());
+							}
+						}
+						if (scopes.empty()) {
+							throw WLWarning("", "No scopes");
+						}
+
+						std::string keycode_name = table->get_string("keycode");
+						SDL_Keycode default_shortcut = SDL_GetKeyFromName(keycode_name.c_str());
+						if (default_shortcut == SDLK_UNKNOWN) {
+							throw WLWarning("", "Invalid keycode '%s'", keycode_name.c_str());
+						}
+
+						int default_mods = 0;
+						if (table->has_key("mods")) {
+							std::unique_ptr<LuaTable> mods_table = table->get_table("mods");
+							for (const std::string& mod : mods_table->array_entries<std::string>()) {
+								if (mod == "ctrl" || mod == "control") {
+									default_mods |= KMOD_CTRL;
+								} else if (mod == "shift") {
+									default_mods |= KMOD_SHIFT;
+								} else if (mod == "alt") {
+									default_mods |= KMOD_ALT;
+								} else if (mod == "gui" || mod == "super" || mod == "meta" ||
+								           mod == "cmd" || mod == "command" || mod == "windows") {
+									default_mods |= KMOD_GUI;
+								} else {
+									throw WLWarning("", "Invalid modifier '%s'", mod.c_str());
+								}
+							}
+						}
+
+						create_replace_shortcut(
+						   internal_name, descname, scopes, keysym(default_shortcut, default_mods));
+					} catch (const std::exception& e) {
+						log_err("Error in plugin keyboard shortcut definition in '%s': '%s': %s",
+						        path.c_str(), internal_name.c_str(), e.what());
+					}
+				}
+			} catch (const std::exception& e) {
+				log_err("Error reading plugin keyboard shortcut definitions from '%s': %s",
+				        path.c_str(), e.what());
+			}
+		}
+	}
+}
+
 /**
  * Remember the last settings: write them into the config file
  */
@@ -1743,7 +1819,7 @@ void WLApplication::handle_commandline_parameters() {
 		game_type_ = pair.first;
 
 		filename_ = *val;
-		if (filename_.back() == '/') {
+		if (!filename_.empty() && filename_.back() == '/') {
 			// Strip trailing directory separator
 			filename_.erase(filename_.size() - 1);
 		}
@@ -1906,7 +1982,7 @@ void WLApplication::emergency_save(UI::Panel* panel,
 		   panel, UI::WindowStyle::kFsMenu,
 		   ask_for_bug_report ? _("Unexpected error during the game") : _("Game ended unexpectedly"),
 		   ask_for_bug_report ?
-            format(
+		      format(
 		         _("An error occured during the game. The error message is:\n\n%1$s\n\nPlease report "
 		           "this problem to help us improve Widelands. You will find related messages in the "
 		           "standard output (stdout.txt on Windows). You are using version %2$s.\n\n"
@@ -1915,7 +1991,7 @@ void WLApplication::emergency_save(UI::Panel* panel,
 		           "to attempt to create an emergency savegame? It is often – though not always – "
 		           "possible to load it and continue playing."),
 		         error, build_ver_details()) :
-            format(
+		      format(
 		         _("The game ended unexpectedly for the following reason:\n\n%s\n\nWould you like "
 		           "Widelands to attempt to create an emergency savegame? It is often – though not "
 		           "always – possible to load it and continue playing."),

@@ -75,11 +75,6 @@ make_key_blended(const uint64_t program_id, const uint64_t z_value, const uint64
 	return (z_value << 40) | (program_id << 36) | extra_value;
 }
 
-inline void from_item(const RenderQueue::Item& item, FillRectProgram::Arguments* args) {
-	args->color = item.rect_arguments.color;
-	args->destination_rect = item.rect_arguments.destination_rect;
-}
-
 inline void from_item(const RenderQueue::Item& item, BlitProgram::Arguments* args) {
 	args->texture = item.blit_arguments.texture;
 	args->blend = item.blit_arguments.blend;
@@ -110,6 +105,25 @@ std::vector<T> batch_up(const RenderQueue::Program program_id,
 		args.z_value = current_item.z_value;
 		args.blend_mode = current_item.blend_mode;
 		from_item(current_item, &args);
+		++(*index);
+	}
+	return all_args;
+}
+template <>
+std::vector<FillRectProgram::Arguments> batch_up(const RenderQueue::Program program_id,
+                                                 const std::vector<RenderQueue::Item>& items,
+                                                 size_t* index) {
+	std::vector<FillRectProgram::Arguments> all_args;
+	while (*index < items.size()) {
+		const RenderQueue::Item& current_item = items.at(*index);
+		if (current_item.program_id != program_id) {
+			break;
+		}
+		std::vector<FillRectProgram::Arguments> insert_args =
+		   FillRectProgram::make_arguments_for_rect(
+		      current_item.rect_arguments.destination_rect, current_item.z_value,
+		      current_item.rect_arguments.color, current_item.blend_mode);
+		all_args.insert(all_args.end(), insert_args.begin(), insert_args.end());
 		++(*index);
 	}
 	return all_args;
@@ -167,7 +181,7 @@ void RenderQueue::enqueue(const Item& given_item) {
 	case Program::kLine:
 	case Program::kRect:
 	case Program::kTerrainBase:
-	case Program::kTerrainDither:
+	case Program::kTerrainDitherOrHeightHeatMap:
 	case Program::kTerrainWorkarea:
 	case Program::kTerrainGrid:
 	case Program::kTerrainRoad:
@@ -255,11 +269,16 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			++i;
 		} break;
 
-		case Program::kTerrainDither: {
+		case Program::kTerrainDitherOrHeightHeatMap: {
 			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
-			dither_program_->draw(item.terrain_arguments.gametime, *item.terrain_arguments.terrains,
-			                      *item.terrain_arguments.fields_to_draw, item.z_value,
-			                      item.terrain_arguments.player);
+			if (item.terrain_arguments.height_heat_map) {
+				FillRectProgram::instance().draw_height_heat_map_overlays(
+				   *item.terrain_arguments.fields_to_draw, item.z_value);
+			} else {
+				dither_program_->draw(item.terrain_arguments.gametime, *item.terrain_arguments.terrains,
+				                      *item.terrain_arguments.fields_to_draw, item.z_value,
+				                      item.terrain_arguments.player);
+			}
 			++i;
 		} break;
 
@@ -277,7 +296,8 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
 			grid_program_->draw(
 			   item.terrain_arguments.terrains->get(0).get_texture(0).blit_data().texture_id,
-			   *item.terrain_arguments.fields_to_draw, item.z_value);
+			   *item.terrain_arguments.fields_to_draw, item.z_value,
+			   item.terrain_arguments.height_heat_map);
 			++i;
 		} break;
 
