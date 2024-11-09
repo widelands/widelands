@@ -5,6 +5,7 @@
 very compatible in either case.
 
 It's an approximation and can flag false positives in rare cases.
+
 """
 
 error_msg = "Do not use %z, consider using %\"PRIuS\" from log.h."
