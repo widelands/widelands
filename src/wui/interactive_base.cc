@@ -1575,11 +1575,6 @@ void InteractiveBase::play_sound_effect(const NoteSound& note) const {
 	}
 }
 
-// request soundhandler to change music
-void InteractiveBase::change_music() {
-	g_sh->change_music();
-}
-
 // Repositions the chat overlay
 void InteractiveBase::resize_chat_overlay() {
 	chat_overlay_->set_size(get_w() / 2, get_h() - 25 - UI::main_toolbar_button_size());
@@ -1871,8 +1866,10 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 		}
 		return true;
 	}
+
 	if (matches_shortcut(KeyboardShortcut::kCommonChangeMusic, code)) {
-		change_music();
+		// request soundhandler to change music
+		g_sh->change_music();
 		return true;
 	}
 
