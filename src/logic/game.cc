@@ -332,8 +332,8 @@ void Game::init_newgame(const GameSettings& settings) {
 	if (!settings.mapfilename.empty()) {
 		assert(maploader);
 		maploader->load_map_complete(*this, settings.scenario ?
-                                             Widelands::MapLoader::LoadType::kScenario :
-                                             Widelands::MapLoader::LoadType::kGame);
+		                                       Widelands::MapLoader::LoadType::kScenario :
+		                                       Widelands::MapLoader::LoadType::kGame);
 	} else {
 		// Normally the map loader takes care of this, but if the map was
 		// previously created for us we need to call this manually
@@ -965,11 +965,9 @@ void Game::report_desync(int32_t playernumber) {
  *
  * \return the checksum
  */
-Md5Checksum Game::get_sync_hash() const {
-	MD5Checksum<StreamWrite> copy(synchash_);
-
-	copy.finish_checksum();
-	return copy.get_checksum();
+crypto::MD5Checksum Game::get_sync_hash() const {
+	crypto::MD5Checksummer copy(synchash_);
+	return copy.finish_checksum_raw();
 }
 
 /**
