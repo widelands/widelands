@@ -40,9 +40,9 @@
 
 #include <SDL_timer.h>
 
+#include "base/crypto.h"
 #include "base/i18n.h"
 #include "base/math.h"
-#include "base/md5.h"
 #include "base/time_string.h"
 #include "base/warning.h"
 #include "build_info.h"
@@ -132,10 +132,7 @@ void NetAddons::check_checksum(const std::string& path, const std::string& check
 	const size_t bytes = fr.get_size();
 	std::unique_ptr<char[]> complete(new char[bytes]);
 	fr.data_complete(complete.get(), bytes);
-	SimpleMD5Checksum md5sum;
-	md5sum.data(complete.get(), bytes);
-	md5sum.finish_checksum();
-	const std::string md5 = md5sum.get_checksum().str();
+	const std::string md5 = crypto::md5_str(complete.get(), bytes);
 	if (checksum != md5) {
 		throw_warning(format("Downloaded file '%s': Checksum mismatch, found %s, expected %s",
 		                     path.c_str(), md5.c_str(), checksum.c_str()));
@@ -281,10 +278,7 @@ void NetAddons::init(std::string username, std::string password) {
 		data += read_line();
 		data += '\n';
 		check_endofstream();
-		SimpleMD5Checksum md5;
-		md5.data(data.c_str(), data.size());
-		md5.finish_checksum();
-		send = md5.get_checksum().str();
+		send = crypto::md5_str(data.c_str(), data.size());
 		send += "\nENDOFSTREAM\n";
 		write_to_server(send);
 
@@ -865,13 +859,10 @@ void NetAddons::upload_addon(const std::string& name,
 			const size_t bytes = fr.get_size();
 			std::unique_ptr<char[]> complete(new char[bytes]);
 			fr.data_complete(complete.get(), bytes);
-			SimpleMD5Checksum md5sum;
-			md5sum.data(complete.get(), bytes);
-			md5sum.finish_checksum();
 
 			send = file;
 			send += '\n';
-			send += md5sum.get_checksum().str();
+			send += crypto::md5_str(complete.get(), bytes);
 			send += '\n';
 			send += std::to_string(bytes);
 			send += '\n';
@@ -935,13 +926,10 @@ void NetAddons::upload_screenshot(const std::string& addon,
 	const size_t bytes = fr.get_size();
 	std::unique_ptr<char[]> complete(new char[bytes]);
 	fr.data_complete(complete.get(), bytes);
-	SimpleMD5Checksum md5sum;
-	md5sum.data(complete.get(), bytes);
-	md5sum.finish_checksum();
 
 	send += std::to_string(bytes);
 	send += ' ';
-	send += md5sum.get_checksum().str();
+	send += crypto::md5_str(complete.get(), bytes);
 	send += ' ';
 	send += std::to_string(std::count(description.begin(), description.end(), ' '));
 	send += ' ';

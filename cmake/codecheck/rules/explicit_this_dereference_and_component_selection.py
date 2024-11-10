@@ -7,6 +7,7 @@ The explicit use of "this->" is not allowed. But it should not catch
 things like "do_this->now". It should also not catch things like
 "(this->*(action->function))(g, state, action)", which seem to be needed
 in some places.
+
 """
 
 error_msg = 'Do not use this->m_a, use m_a instead.'

@@ -27,6 +27,7 @@ class AllowedTest(RuleTest):
     """Tests allowed code.
 
     The rule checker shouldn't find anything in this test
+
     """
 
     def _do_test(self):
@@ -38,6 +39,7 @@ class ForbiddenTest(RuleTest):
     """Tests forbidden constructs.
 
     The rule checker should find errors in the example code.
+
     """
 
     def _do_test(self):
