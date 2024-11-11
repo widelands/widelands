@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-11-09 02:48+0000\n"
+"POT-Creation-Date: 2024-11-11 02:56+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2015-2016\n"
 "Language-Team: Serbian (http://app.transifex.com/widelands/widelands/language/sr/)\n"
@@ -294,7 +294,7 @@ msgstr ""
 #. * TRANSLATORS: Title for the tool menu button in the editor
 #. * TRANSLATORS: Heading in the editor keyboard shortcuts help
 #: ../../../../src/editor/editorinteractive.cc:116
-#: ../../../../src/wlapplication_options.cc:1033
+#: ../../../../src/wlapplication_options.cc:1037
 msgctxt "editor"
 msgid "Tools"
 msgstr ""
@@ -315,18 +315,18 @@ msgid "Tool size"
 msgstr ""
 
 #: ../../../../src/editor/editorinteractive.cc:160
-#: ../../../../src/wlapplication_options.cc:453
+#: ../../../../src/wlapplication_options.cc:457
 msgid "Undo"
 msgstr ""
 
 #: ../../../../src/editor/editorinteractive.cc:165
-#: ../../../../src/wlapplication_options.cc:457
+#: ../../../../src/wlapplication_options.cc:461
 msgid "Redo"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/editor/editorinteractive.cc:177
-#: ../../../../src/wlapplication_options.cc:851
+#: ../../../../src/wlapplication_options.cc:855
 #: ../../../../src/wui/buildingwindow.cc:448
 #: ../../../../src/wui/interactive_player.cc:239
 msgid "Help"
@@ -336,14 +336,14 @@ msgstr ""
 #: ../../../../src/editor/editorinteractive.cc:212
 #: ../../../../src/editor/ui_menus/main_menu_new_map.cc:40
 #: ../../../../src/ui_fsmenu/main.cc:427
-#: ../../../../src/wlapplication_options.cc:436
+#: ../../../../src/wlapplication_options.cc:440
 msgid "New Map"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../../../src/editor/editorinteractive.cc:221
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:853
-#: ../../../../src/wlapplication_options.cc:441
+#: ../../../../src/wlapplication_options.cc:445
 msgid "New Random Map"
 msgstr ""
 
@@ -352,7 +352,7 @@ msgstr ""
 #: ../../../../src/editor/editorinteractive.cc:229
 #: ../../../../src/editor/ui_menus/main_menu_load_map.cc:34
 #: ../../../../src/ui_fsmenu/main.cc:432
-#: ../../../../src/wlapplication_options.cc:842
+#: ../../../../src/wlapplication_options.cc:846
 msgid "Load Map"
 msgstr ""
 
@@ -360,7 +360,7 @@ msgstr ""
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/editor/editorinteractive.cc:237
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:53
-#: ../../../../src/wlapplication_options.cc:845
+#: ../../../../src/wlapplication_options.cc:849
 msgid "Save Map"
 msgstr ""
 
@@ -373,14 +373,14 @@ msgstr ""
 #: ../../../../src/editor/editorinteractive.cc:250
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:227
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:62
-#: ../../../../src/wlapplication_options.cc:449
+#: ../../../../src/wlapplication_options.cc:453
 msgid "Map Options"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/editor/editorinteractive.cc:255
-#: ../../../../src/wlapplication_options.cc:848
+#: ../../../../src/wlapplication_options.cc:852
 msgid "Exit Editor"
 msgstr ""
 
@@ -513,7 +513,7 @@ msgstr ""
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:401
 #: ../../../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
-#: ../../../../src/wlapplication_options.cc:512
+#: ../../../../src/wlapplication_options.cc:516
 msgid "Tool History"
 msgstr ""
 
@@ -1796,7 +1796,7 @@ msgstr ""
 #: ../../../../src/game_io/game_loader.cc:157
 #: ../../../../src/map_io/map_saver.cc:146
 #: ../../../../src/map_io/widelands_map_loader.cc:400
-#: ../../../../src/wlapplication_options.cc:657
+#: ../../../../src/wlapplication_options.cc:661
 #: ../../../../src/wui/interactive_player.cc:229
 #: ../../../../src/wui/interactive_player.cc:497
 msgid "Messages"
@@ -3099,7 +3099,7 @@ msgid "Warehouse %d"
 msgstr ""
 
 #: ../../../../src/logic/playercommand.cc:2358
-#: ../../../../src/wlapplication_options.cc:654
+#: ../../../../src/wlapplication_options.cc:658
 #: ../../../../src/wui/game_diplomacy_menu.cc:36
 #: ../../../../src/wui/interactive_gamebase.cc:250
 msgid "Diplomacy"
@@ -3306,7 +3306,7 @@ msgstr ""
 
 #: ../../../../src/map_io/map_saver.cc:303
 #: ../../../../src/map_io/widelands_map_loader.cc:418
-#: ../../../../src/wlapplication_options.cc:650
+#: ../../../../src/wlapplication_options.cc:654
 #: ../../../../src/wui/game_objectives_menu.cc:30
 #: ../../../../src/wui/interactive_player.cc:218
 #: ../../../../src/wui/interactive_player.cc:486
@@ -6163,8 +6163,8 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:307
 #: ../../../../src/ui_fsmenu/main.cc:515
 #: ../../../../src/wlapplication_options.cc:312
-#: ../../../../src/wlapplication_options.cc:999
-#: ../../../../src/wlapplication_options.cc:1058
+#: ../../../../src/wlapplication_options.cc:1003
+#: ../../../../src/wlapplication_options.cc:1062
 msgid "Add-Ons"
 msgstr ""
 
@@ -6429,7 +6429,7 @@ msgid "Online Game Settings"
 msgstr ""
 
 #: ../../../../src/ui_fsmenu/login_box.cc:44
-#: ../../../../src/wlapplication_options.cc:396
+#: ../../../../src/wlapplication_options.cc:400
 #: ../../../../src/wui/economy_options_window.cc:680
 msgid "Save"
 msgstr ""
@@ -6514,7 +6514,7 @@ msgstr ""
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../../../src/ui_fsmenu/main.cc:379
 #: ../../../../src/wlapplication_options.cc:241
-#: ../../../../src/wlapplication_options.cc:863
+#: ../../../../src/wlapplication_options.cc:867
 #: ../../../../src/wui/game_main_menu_save_game.cc:48
 #: ../../../../src/wui/interactive_gamebase.cc:181
 msgid "Load Game"
@@ -7954,331 +7954,335 @@ msgstr ""
 msgid "Take Screenshot"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:386
+#: ../../../../src/wlapplication_options.cc:385
+msgid "Change Music"
+msgstr ""
+
+#: ../../../../src/wlapplication_options.cc:390
 msgid "Open the Debug Console (developer tool)"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:391
+#: ../../../../src/wlapplication_options.cc:395
 msgid "Toggle Cheat Mode (developer tool)"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:401
+#: ../../../../src/wlapplication_options.cc:405
 msgid "Load"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:406
+#: ../../../../src/wlapplication_options.cc:410
 msgid "Exit"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:411
+#: ../../../../src/wlapplication_options.cc:415
 msgid "Zoom In"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:416
+#: ../../../../src/wlapplication_options.cc:420
 msgid "Zoom Out"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:421
+#: ../../../../src/wlapplication_options.cc:425
 msgid "Reset Zoom"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:426
+#: ../../../../src/wlapplication_options.cc:430
 msgid "Jump to Next Location"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:431
+#: ../../../../src/wlapplication_options.cc:435
 msgid "Jump to Previous Location"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:445
+#: ../../../../src/wlapplication_options.cc:449
 msgid "Publish Map Online"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:462
+#: ../../../../src/wlapplication_options.cc:466
 msgid "Toggle Tools Menu"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:467
+#: ../../../../src/wlapplication_options.cc:471
 msgid "Change Height Tool"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:472
+#: ../../../../src/wlapplication_options.cc:476
 msgid "Random Height Tool"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:476
+#: ../../../../src/wlapplication_options.cc:480
 msgid "Terrain Tool"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:480
+#: ../../../../src/wlapplication_options.cc:484
 msgid "Immovables Tool"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:484
+#: ../../../../src/wlapplication_options.cc:488
 msgid "Animals Tool"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:488
+#: ../../../../src/wlapplication_options.cc:492
 msgid "Resources Tool"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:492
+#: ../../../../src/wlapplication_options.cc:496
 msgid "Port Spaces Tool"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:496
+#: ../../../../src/wlapplication_options.cc:500
 msgid "Info Tool"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:500
+#: ../../../../src/wlapplication_options.cc:504
 msgid "Map Origin Tool"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:504
+#: ../../../../src/wlapplication_options.cc:508
 msgid "Map Size Tool"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:508
+#: ../../../../src/wlapplication_options.cc:512
 msgid "Players Menu"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:517
+#: ../../../../src/wlapplication_options.cc:521
 msgid "Toggle Height Heat Map"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:521
+#: ../../../../src/wlapplication_options.cc:525
 msgid "Toggle Grid"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:525
+#: ../../../../src/wlapplication_options.cc:529
 msgid "Toggle Oceans"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:530
+#: ../../../../src/wlapplication_options.cc:534
 msgid "Toggle Immovables"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:535
+#: ../../../../src/wlapplication_options.cc:539
 msgid "Toggle Animals"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:540
+#: ../../../../src/wlapplication_options.cc:544
 msgid "Toggle Resources"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:546
+#: ../../../../src/wlapplication_options.cc:550
 msgid "Toggle Maximum Build Spaces"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:553
+#: ../../../../src/wlapplication_options.cc:557
 #, c-format
 msgid "Set Toolsize to %d"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:571
+#: ../../../../src/wlapplication_options.cc:575
 #, c-format
 msgid "Set Tool Gap to %d%%"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../../../src/wlapplication_options.cc:589
+#: ../../../../src/wlapplication_options.cc:593
 #: ../../../../src/wui/game_options_sound_menu.cc:34
 #: ../../../../src/wui/interactive_gamebase.cc:147
 msgid "Sound Options"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:594
+#: ../../../../src/wlapplication_options.cc:598
 msgid "Restart Scenario or Replay"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:598
+#: ../../../../src/wlapplication_options.cc:602
 msgid "Toggle Census"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:603
+#: ../../../../src/wlapplication_options.cc:607
 msgid "Toggle Status Labels"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:608
+#: ../../../../src/wlapplication_options.cc:612
 msgid "Toggle Soldier Levels"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:613
+#: ../../../../src/wlapplication_options.cc:617
 msgid "Toggle Buildings Visibility"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:618
+#: ../../../../src/wlapplication_options.cc:622
 msgid "Toggle Overlapping Workareas"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:623
+#: ../../../../src/wlapplication_options.cc:627
 #: ../../../../src/wui/general_statistics_menu.cc:47
 msgid "General Statistics"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:627
+#: ../../../../src/wlapplication_options.cc:631
 #: ../../../../src/wui/ware_statistics_menu.cc:105
 msgid "Ware Statistics"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:632
+#: ../../../../src/wlapplication_options.cc:636
 #: ../../../../src/wui/building_statistics_menu.cc:52
 msgid "Building Statistics"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:636
+#: ../../../../src/wlapplication_options.cc:640
 msgid "Stock Inventory"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:641
+#: ../../../../src/wlapplication_options.cc:645
 #: ../../../../src/wui/soldier_statistics_menu.cc:148
 msgid "Soldier Statistics"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:646
+#: ../../../../src/wlapplication_options.cc:650
 msgid "Seafaring Statistics"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:662
+#: ../../../../src/wlapplication_options.cc:666
 msgid "Decrease Game Speed by 1×"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:667
+#: ../../../../src/wlapplication_options.cc:671
 msgid "Decrease Game Speed by 0.25×"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:672
+#: ../../../../src/wlapplication_options.cc:676
 msgid "Decrease Game Speed by 10×"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:677
+#: ../../../../src/wlapplication_options.cc:681
 msgid "Increase Game Speed by 1×"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:682
+#: ../../../../src/wlapplication_options.cc:686
 msgid "Increase Game Speed by 0.25×"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:687
+#: ../../../../src/wlapplication_options.cc:691
 msgid "Increase Game Speed by 10×"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:691
+#: ../../../../src/wlapplication_options.cc:695
 msgid "Reset Game Speed"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:695
+#: ../../../../src/wlapplication_options.cc:699
 msgid "Pause The Game"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:700
+#: ../../../../src/wlapplication_options.cc:704
 msgid "Scroll to Starting Field"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:703
+#: ../../../../src/wlapplication_options.cc:707
 #: ../../../../src/wui/game_chat_menu.cc:68
 #: ../../../../src/wui/interactive_gamebase.cc:416
 msgid "Chat"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:707
+#: ../../../../src/wlapplication_options.cc:711
 #: ../../../../src/wui/pinned_note.cc:41
 msgid "Pinned Note"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:711
+#: ../../../../src/wlapplication_options.cc:715
 msgid "Go to Location"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:716
+#: ../../../../src/wlapplication_options.cc:720
 msgid "Show All Messages"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:721
+#: ../../../../src/wlapplication_options.cc:725
 msgid "Show Geologists’ Messages Only"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:726
+#: ../../../../src/wlapplication_options.cc:730
 msgid "Show Economy Messages Only"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:731
+#: ../../../../src/wlapplication_options.cc:735
 msgid "Show Seafaring Messages Only"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:736
+#: ../../../../src/wlapplication_options.cc:740
 msgid "Show Military Messages Only"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:741
+#: ../../../../src/wlapplication_options.cc:745
 msgid "Show Scenario Messages Only"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:746
+#: ../../../../src/wlapplication_options.cc:750
 msgid "Go to Ship"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:751
+#: ../../../../src/wlapplication_options.cc:755
 msgid "Watch Ship"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:756
+#: ../../../../src/wlapplication_options.cc:760
 msgid "Open Ship Window"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:761
+#: ../../../../src/wlapplication_options.cc:765
 msgid "Open Ship Window And Go to Ship"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:766
+#: ../../../../src/wlapplication_options.cc:770
 msgid "Show All Ships"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:771
+#: ../../../../src/wlapplication_options.cc:775
 msgid "Show Idle Ships"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:776
+#: ../../../../src/wlapplication_options.cc:780
 msgid "Show Transport Ships"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:781
+#: ../../../../src/wlapplication_options.cc:785
 msgid "Show Waiting Expeditions"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:786
+#: ../../../../src/wlapplication_options.cc:790
 msgid "Show Scouting Expeditions"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:791
+#: ../../../../src/wlapplication_options.cc:795
 msgid "Show Expeditions with Port Spaces"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:796
+#: ../../../../src/wlapplication_options.cc:800
 msgid "Show Warships"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:801
+#: ../../../../src/wlapplication_options.cc:805
 msgid "Show Ships Being Refitted"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:806
+#: ../../../../src/wlapplication_options.cc:810
 msgid "Toggle Quick Navigation"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:812
+#: ../../../../src/wlapplication_options.cc:816
 #, c-format
 msgid "Set Landmark #%d"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:816
+#: ../../../../src/wlapplication_options.cc:820
 #, c-format
 msgid "Go To Landmark #%d"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../../../src/wlapplication_options.cc:866
+#: ../../../../src/wlapplication_options.cc:870
 #: ../../../../src/wui/game_main_menu_save_game.cc:50
 #: ../../../../src/wui/interactive_gamebase.cc:157
 msgid "Save Game"
@@ -8287,7 +8291,7 @@ msgstr ""
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../../../src/wlapplication_options.cc:869
+#: ../../../../src/wlapplication_options.cc:873
 #: ../../../../src/wui/game_client_disconnected.cc:112
 #: ../../../../src/wui/game_summary.cc:108
 #: ../../../../src/wui/interactive_gamebase.cc:194
@@ -8295,118 +8299,118 @@ msgid "Exit Game"
 msgstr ""
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../../../src/wlapplication_options.cc:887
+#: ../../../../src/wlapplication_options.cc:891
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:889
-msgid "Move the map"
-msgstr ""
-
-#. * TRANSLATORS: This is an access key combination.
-#: ../../../../src/wlapplication_options.cc:891
-msgctxt "hotkey"
-msgid "Ctrl + Arrow keys"
-msgstr ""
-
-#. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:893
-msgid "Move the map fast"
+msgid "Move the map"
 msgstr ""
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:895
 msgctxt "hotkey"
-msgid "Shift + Arrow keys"
+msgid "Ctrl + Arrow keys"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:897
+msgid "Move the map fast"
+msgstr ""
+
+#. * TRANSLATORS: This is an access key combination.
+#: ../../../../src/wlapplication_options.cc:899
+msgctxt "hotkey"
+msgid "Shift + Arrow keys"
+msgstr ""
+
+#. * TRANSLATORS: This is the helptext for an access key combination.
+#: ../../../../src/wlapplication_options.cc:901
 msgid "Move the map slowly"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:909
+#: ../../../../src/wlapplication_options.cc:913
 msgid "Remember current location"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:912
+#: ../../../../src/wlapplication_options.cc:916
 msgid "Go to previously remembered location"
 msgstr ""
 
 #. * TRANSLATORS: Separator for a list of hotkeys
-#: ../../../../src/wlapplication_options.cc:961
+#: ../../../../src/wlapplication_options.cc:965
 #, c-format
 msgctxt "hotkey"
 msgid "%1$s / %2$s"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:979
-#: ../../../../src/wlapplication_options.cc:1023
+#: ../../../../src/wlapplication_options.cc:983
+#: ../../../../src/wlapplication_options.cc:1027
 msgid "Keyboard Shortcuts"
 msgstr ""
 
 #. * TRANSLATORS: Section heading in "Controls" help
-#: ../../../../src/wlapplication_options.cc:990
+#: ../../../../src/wlapplication_options.cc:994
 msgid "Message Window"
 msgstr ""
 
 #. * TRANSLATORS: Section heading in "Controls" help
-#: ../../../../src/wlapplication_options.cc:995
+#: ../../../../src/wlapplication_options.cc:999
 msgid "Ship Statistics"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:1037
+#: ../../../../src/wlapplication_options.cc:1041
 msgid "Change tool size"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1038
+#: ../../../../src/wlapplication_options.cc:1042
 msgid "Change tool gap"
 msgstr ""
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../../../src/wlapplication_options.cc:1043
+#: ../../../../src/wlapplication_options.cc:1047
 msgctxt "hotkey"
 msgid "Click"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:1045
+#: ../../../../src/wlapplication_options.cc:1049
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
 msgstr ""
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../../../src/wlapplication_options.cc:1049
+#: ../../../../src/wlapplication_options.cc:1053
 msgctxt "hotkey"
 msgid "Shift + Click"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:1051
+#: ../../../../src/wlapplication_options.cc:1055
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
 msgstr ""
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../../../src/wlapplication_options.cc:1054
+#: ../../../../src/wlapplication_options.cc:1058
 msgctxt "hotkey"
 msgid "Ctrl + Click"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:1056
+#: ../../../../src/wlapplication_options.cc:1060
 msgid "Set map elements to the value selected by ‘Set Value’"
 msgstr ""
 
 #. * TRANSLATORS: prefix for message window shortcuts in keyboard options
-#: ../../../../src/wlapplication_options.cc:1163
+#: ../../../../src/wlapplication_options.cc:1167
 #, c-format
 msgctxt "hotkey"
 msgid "Messages: %s"
@@ -8414,241 +8418,241 @@ msgstr ""
 
 #. * TRANSLATORS: prefix for seafaring statistics window shortcuts in keyboard
 #. options
-#: ../../../../src/wlapplication_options.cc:1168
+#: ../../../../src/wlapplication_options.cc:1172
 #, c-format
 msgctxt "hotkey"
 msgid "Seafaring: %s"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1366
+#: ../../../../src/wlapplication_options.cc:1370
 msgctxt "hotkey"
 msgid "Shift"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1369
+#: ../../../../src/wlapplication_options.cc:1373
 msgctxt "hotkey"
 msgid "Alt"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1373
+#: ../../../../src/wlapplication_options.cc:1377
 msgctxt "hotkey"
 msgid "Cmd"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1375
+#: ../../../../src/wlapplication_options.cc:1379
 msgctxt "hotkey"
 msgid "GUI"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1379
+#: ../../../../src/wlapplication_options.cc:1383
 msgctxt "hotkey"
 msgid "Ctrl"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1388
+#: ../../../../src/wlapplication_options.cc:1392
 #, c-format
 msgid "%1$s+%2$s"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1401
+#: ../../../../src/wlapplication_options.cc:1405
 msgctxt "hotkey"
 msgid "Space"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1403
+#: ../../../../src/wlapplication_options.cc:1407
 msgctxt "hotkey"
 msgid "Enter"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1405
+#: ../../../../src/wlapplication_options.cc:1409
 msgctxt "hotkey"
 msgid "Escape"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1407
+#: ../../../../src/wlapplication_options.cc:1411
 msgctxt "hotkey"
 msgid "Tab"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1409
+#: ../../../../src/wlapplication_options.cc:1413
 msgctxt "hotkey"
 msgid "Menu"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1411
+#: ../../../../src/wlapplication_options.cc:1415
 msgctxt "hotkey"
 msgid "Application"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1413
+#: ../../../../src/wlapplication_options.cc:1417
 msgctxt "hotkey"
 msgid "Pause"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1415
+#: ../../../../src/wlapplication_options.cc:1419
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1417
+#: ../../../../src/wlapplication_options.cc:1421
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1419
+#: ../../../../src/wlapplication_options.cc:1423
 msgctxt "hotkey"
 msgid "Home"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1421
+#: ../../../../src/wlapplication_options.cc:1425
 msgctxt "hotkey"
 msgid "End"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1423
+#: ../../../../src/wlapplication_options.cc:1427
 msgctxt "hotkey"
 msgid "Left Arrow Key"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1425
+#: ../../../../src/wlapplication_options.cc:1429
 msgctxt "hotkey"
 msgid "Right Arrow Key"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1427
+#: ../../../../src/wlapplication_options.cc:1431
 msgctxt "hotkey"
 msgid "Up Arrow Key"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1429
+#: ../../../../src/wlapplication_options.cc:1433
 msgctxt "hotkey"
 msgid "Down Arrow Key"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1431
+#: ../../../../src/wlapplication_options.cc:1435
 msgctxt "hotkey"
 msgid "Insert"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1433
+#: ../../../../src/wlapplication_options.cc:1437
 msgctxt "hotkey"
 msgid "Delete"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1435
+#: ../../../../src/wlapplication_options.cc:1439
 msgctxt "hotkey"
 msgid "Backspace"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1437
+#: ../../../../src/wlapplication_options.cc:1441
 msgctxt "hotkey"
 msgid "Caps Lock"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1439
+#: ../../../../src/wlapplication_options.cc:1443
 msgctxt "hotkey"
 msgid "Numpad Lock"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1441
+#: ../../../../src/wlapplication_options.cc:1445
 msgctxt "hotkey"
 msgid "Scroll Lock"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1443
+#: ../../../../src/wlapplication_options.cc:1447
 msgctxt "hotkey"
 msgid "Keypad 1"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1445
+#: ../../../../src/wlapplication_options.cc:1449
 msgctxt "hotkey"
 msgid "Keypad 2"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1447
+#: ../../../../src/wlapplication_options.cc:1451
 msgctxt "hotkey"
 msgid "Keypad 3"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1449
+#: ../../../../src/wlapplication_options.cc:1453
 msgctxt "hotkey"
 msgid "Keypad 4"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1451
+#: ../../../../src/wlapplication_options.cc:1455
 msgctxt "hotkey"
 msgid "Keypad 5"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1453
+#: ../../../../src/wlapplication_options.cc:1457
 msgctxt "hotkey"
 msgid "Keypad 6"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1455
+#: ../../../../src/wlapplication_options.cc:1459
 msgctxt "hotkey"
 msgid "Keypad 7"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1457
+#: ../../../../src/wlapplication_options.cc:1461
 msgctxt "hotkey"
 msgid "Keypad 8"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1459
+#: ../../../../src/wlapplication_options.cc:1463
 msgctxt "hotkey"
 msgid "Keypad 9"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1461
+#: ../../../../src/wlapplication_options.cc:1465
 msgctxt "hotkey"
 msgid "Keypad 0"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1463
+#: ../../../../src/wlapplication_options.cc:1467
 msgctxt "hotkey"
 msgid "Keypad ."
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1465
+#: ../../../../src/wlapplication_options.cc:1469
 msgctxt "hotkey"
 msgid "Keypad +"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1467
+#: ../../../../src/wlapplication_options.cc:1471
 msgctxt "hotkey"
 msgid "Keypad -"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1469
+#: ../../../../src/wlapplication_options.cc:1473
 msgctxt "hotkey"
 msgid "Keypad *"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1471
+#: ../../../../src/wlapplication_options.cc:1475
 msgctxt "hotkey"
 msgid "Keypad /"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1473
+#: ../../../../src/wlapplication_options.cc:1477
 msgctxt "hotkey"
 msgid "Keypad Enter"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1482
+#: ../../../../src/wlapplication_options.cc:1486
 msgid "(disabled)"
 msgstr ""
 
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
 #. * icon indicating a trend. Very little space is available.
-#: ../../../../src/wlapplication_options.cc:1485
+#: ../../../../src/wlapplication_options.cc:1489
 #: ../../../../src/wui/waresdisplay.cc:638
 #, c-format
 msgid "%1$s%2$s"
 msgstr ""
 
-#: ../../../../src/wlapplication_options.cc:1541
+#: ../../../../src/wlapplication_options.cc:1545
 #, c-format
 msgid "Fastplace #%i"
 msgstr ""
