@@ -485,8 +485,9 @@ void InfoPanel::think() {
 		message_queue_ = &iplayer_->player().messages();
 
 		// Check for unexpired messages and messages generated during loading the game
-		const Time oldest_to_show(iplayer_->game().get_gametime() -
-		                          Duration(kMessagePreviewMaxLifetime));
+		const uint32_t gametime = iplayer_->game().get_gametime().get();
+		const Time oldest_to_show(
+		   gametime > kMessagePreviewMaxLifetime ? gametime - kMessagePreviewMaxLifetime : 0u);
 		while (last_message_id_->value() > 0 &&
 		       (*message_queue_)[*last_message_id_]->sent() > oldest_to_show) {
 			*last_message_id_ = Widelands::MessageId(last_message_id_->value() - 1);
