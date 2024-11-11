@@ -84,7 +84,7 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 						        message.sent().get(), message.position().x, message.position().y,
 						        static_cast<int>(message.status()), message.body().c_str());
 						// Don't allow in debug builds
-						assert(false);
+						assert(message.allowed_during_game_loading());
 					}
 				}
 				messages->clear();
