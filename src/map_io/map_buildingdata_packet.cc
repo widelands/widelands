@@ -822,6 +822,8 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 			assert(productionsite.input_queues_.empty());
 
 			const BillOfMaterials& curr_wares = pr_descr.input_wares();
+			bool inputs_changed = false;
+
 			for (uint16_t i = 0; i < nr_queues; ++i) {
 				WaresQueue* wq = new WaresQueue(productionsite, INVALID_INDEX, 0);
 				wq->read(fr, game, mol);
@@ -829,21 +831,32 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				DescriptionIndex widx = wq->get_index();
 				if (!game.descriptions().ware_exists(widx)) {
 					delete wq;
+					inputs_changed = true;
 				} else {
-					// Savegame compatibility: check whether queue had size changed
+					// Savegame compatibility: check whether queue had size changed,
+					// or was removed altogether
 					auto it = std::find_if(
 					   curr_wares.begin(), curr_wares.end(), [widx](auto e) { return e.first == widx; });
-					if (it != curr_wares.end()) {
+					if (it == curr_wares.end()) {
+						wq->set_filled(0u);
+						wq->cleanup();
+						delete wq;
+						inputs_changed = true;
+					} else {
 						Quantity new_size = it->second;
 						Quantity old_size = wq->get_max_size();
+						inputs_changed = inputs_changed || (new_size != old_size);
 						if (new_size > old_size) {
 							wq->set_max_size(new_size);
 							if (wq->get_max_fill() == old_size) {
 								wq->set_max_fill(new_size);
 							}
+						} else if (new_size < old_size) {
+							wq->set_filled(std::min(wq->get_filled(), new_size));
+							wq->set_max_size(new_size);
 						}
+						productionsite.input_queues_.push_back(wq);
 					}
-					productionsite.input_queues_.push_back(wq);
 				}
 			}
 			// Savegame compatibility: check for new queues that did not exist in older save file
@@ -855,7 +868,19 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				if (it == productionsite.input_queues_.end()) {
 					WaresQueue* wq = new WaresQueue(productionsite, widx, wa.second);
 					productionsite.input_queues_.push_back(wq);
+					inputs_changed = true;
 				}
+			}
+
+			if (inputs_changed) {
+				productionsite.send_message(
+				   game, Message::Type::kEconomyLoadGame, _("Building's inputs changed!"),
+				   productionsite.descr().icon_filename(), _("Building's inputs changed!"),
+				   format(_("The inputs of %1$s have changed. Please review the current production "
+				            "programs and input settings.\n\nThe game was probably saved with a "
+				            "different Widelands version or with different enabled add-ons."),
+				          productionsite.descr().descname()),
+				   true);
 			}
 
 			nr_queues = fr.unsigned_16();
