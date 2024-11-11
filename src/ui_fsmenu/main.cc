@@ -541,7 +541,8 @@ void MainMenu::set_labels() {
 	   UI::PanelStyle::kFsMenu));
 
 	version_.set_text(
-	   /** TRANSLATORS: %1$s = version string and build type  ("Debug" or "Release") */
+	   /** TRANSLATORS: %1$s = version string and build type  ("Debug", "Release", or
+	      "RelWithDebInfo") */
 	   format(_("Version %1$s"), build_ver_details()));
 	copyright_.set_text(
 	   /** TRANSLATORS: Placeholders are the copyright years */
@@ -583,13 +584,13 @@ void MainMenu::abort_splashscreen() {
 
 void MainMenu::think() {
 	UI::Panel::think();
-	plugin_timers_->think();
+	plugin_actions_->think();
 }
 
 void MainMenu::reinit_plugins() {
 	lua_.reset(new LuaFsMenuInterface(this));
-	plugin_timers_.reset(
-	   new PluginTimers(this, [this](const std::string& cmd) { lua_->interpret_string(cmd); }));
+	plugin_actions_.reset(
+	   new PluginActions(this, [this](const std::string& cmd) { lua_->interpret_string(cmd); }));
 
 	for (const auto& pair : AddOns::g_addons) {
 		if (pair.second && pair.first->category == AddOns::AddOnCategory::kUIPlugin) {
@@ -629,15 +630,19 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 		return true;
 	}
 
-	if (down) {
-		if (splash_state_ != SplashState::kDone) {
-			abort_splashscreen();
-			if (matches_shortcut(KeyboardShortcut::kMainMenuQuit, code)) {
-				// don't initiate quitting in this case
-				return true;
-			}
+	if (splash_state_ != SplashState::kDone && down) {
+		abort_splashscreen();
+		if (matches_shortcut(KeyboardShortcut::kMainMenuQuit, code)) {
+			// don't initiate quitting in this case
+			return true;
 		}
+	}
 
+	if (plugin_actions_->check_keyboard_shortcut_action(code, down)) {
+		return true;
+	}
+
+	if (down) {
 		auto check_match_shortcut = [this, &code](KeyboardShortcut k, MenuTarget t) {
 			if (matches_shortcut(k, code)) {
 				action(t);
@@ -731,7 +736,7 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 			// Easter egg: Press Ctrl/Shift+Backspace to exchange the background immediately :-)
 			last_image_exchange_time_ -=
 			   (last_image_exchange_time_ > kImageExchangeInterval ? kImageExchangeInterval :
-                                                                  last_image_exchange_time_);
+			                                                         last_image_exchange_time_);
 			return true;
 		}
 	}
@@ -740,8 +745,8 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 
 inline float MainMenu::calc_opacity(const uint32_t time) const {
 	return last_image_ == draw_image_ ?
-             1.f :
-             std::max(0.f, std::min(1.f, static_cast<float>(time - last_image_exchange_time_) /
+	          1.f :
+	          std::max(0.f, std::min(1.f, static_cast<float>(time - last_image_exchange_time_) /
 	                                         kImageExchangeDuration));
 }
 

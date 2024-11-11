@@ -481,12 +481,22 @@ void EditorInteractive::rebuild_showhide_menu() {
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether to show maximum
 	 * building spaces that will be available if all immovables (trees, rocks, etc.) are removed */
 	showhidemenu_.add(get_display_flag(dfShowMaximumBuildhelp) ? _("Hide Maximum Building Spaces") :
-                                                                _("Show Maximum Building Spaces"),
+	                                                             _("Show Maximum Building Spaces"),
 	                  ShowHideEntry::kMaximumBuildingSpaces,
 	                  g_image_cache->get("images/wui/menus/toggle_maxbuild.png"), false,
 	                  _("Toggle whether to show maximum building spaces that will be available if "
 	                    "all immovables (trees, rocks, etc.) are removed"),
 	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideMaximumBuildhelp, false));
+
+	showhidemenu_.add(get_display_flag(dfHeightHeatMap) ?
+	                     /** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+	                     the map height heat map is shown */
+	                     _("Disable height heat map") :
+	                     _("Enable height heat map"),
+	                  ShowHideEntry::kHeightHeatMap,
+	                  g_image_cache->get("images/wui/menus/menu_toggle_height_heat_map.png"), false,
+	                  "",
+	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideHeightHeatMap, false));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether the map grid is shown
 	 */
@@ -533,6 +543,9 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 	} break;
 	case ShowHideEntry::kMaximumBuildingSpaces: {
 		toggle_maximum_buildhelp();
+	} break;
+	case ShowHideEntry::kHeightHeatMap: {
+		toggle_height_heat_map();
 	} break;
 	case ShowHideEntry::kGrid: {
 		toggle_grid();
@@ -634,7 +647,7 @@ void EditorInteractive::exit(const bool force) {
 		UI::WLMessageBox mmb(
 		   this, UI::WindowStyle::kWui, need_save_ ? _("Unsaved Map") : _("Exit Editor Confirmation"),
 		   need_save_ ? _("The map has not been saved, do you really want to quit?") :
-                      _("Are you sure you wish to exit the editor?"),
+		                _("Are you sure you wish to exit the editor?"),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (mmb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
 			return;
@@ -702,7 +715,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 
 	const auto& ebase = egbase();
 	auto* fields_to_draw =
-	   map_view()->draw_terrain(ebase, nullptr, Workareas(), get_display_flag(dfShowGrid), &dst);
+	   map_view()->draw_terrain(ebase, nullptr, Workareas(), get_display_flag(dfHeightHeatMap),
+	                            get_display_flag(dfShowGrid), &dst);
 
 	const float scale = 1.f / map_view()->view().zoom;
 	const Time& gametime = ebase.get_gametime();
@@ -820,8 +834,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 				const float scaling =
 				   get_display_flag(dfShowMaximumBuildhelp) &&
 				         ((nodecaps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) ?
-                  0.9f :
-                  1.0f;
+				      0.9f :
+				      1.0f;
 				blit_field_overlay(
 				   &dst, field, overlay->pic, overlay->hotspot, scale / overlay->scale * scaling);
 			}
@@ -964,8 +978,8 @@ void EditorInteractive::update_ocean_overlays() {
 /// Needed to get freehand painting tools (hold down mouse and move to edit).
 void EditorInteractive::set_sel_pos(Widelands::NodeAndTriangle<> const sel) {
 	bool const target_changed = tools_->current().operates_on_triangles() ?
-                                  sel.triangle != get_sel_pos().triangle :
-                                  sel.node != get_sel_pos().node;
+	                               sel.triangle != get_sel_pos().triangle :
+	                               sel.node != get_sel_pos().node;
 	InteractiveBase::set_sel_pos(sel);
 	if (target_changed && is_painting_) {
 		map_clicked(sel, true);
@@ -1007,6 +1021,11 @@ void EditorInteractive::toggle_bobs() {
 	   EditorInteractive::dfShowBobs, !get_display_flag(EditorInteractive::dfShowBobs));
 }
 
+void EditorInteractive::toggle_height_heat_map() {
+	set_display_flag(
+	   EditorInteractive::dfHeightHeatMap, !get_display_flag(EditorInteractive::dfHeightHeatMap));
+}
+
 void EditorInteractive::toggle_grid() {
 	set_display_flag(
 	   EditorInteractive::dfShowGrid, !get_display_flag(EditorInteractive::dfShowGrid));
@@ -1023,6 +1042,10 @@ void EditorInteractive::toggle_oceans() {
 }
 
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
+	if (InteractiveBase::handle_key(down, code)) {
+		return true;
+	}
+
 	if (down) {
 		if (matches_shortcut(KeyboardShortcut::kCommonEncyclopedia, code)) {
 			menu_windows_.help.toggle();
@@ -1102,6 +1125,10 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		}
 		if (matches_shortcut(KeyboardShortcut::kEditorPlayers, code)) {
 			tool_windows_.players.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorShowhideHeightHeatMap, code)) {
+			toggle_height_heat_map();
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kEditorShowhideGrid, code)) {
@@ -1192,7 +1219,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		}
 	}
 
-	return InteractiveBase::handle_key(down, code);
+	return false;
 }
 
 bool EditorInteractive::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {

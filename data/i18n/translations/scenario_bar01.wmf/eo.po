@@ -5,13 +5,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # GunChleoc, 2014
 # GunChleoc, 2014
+# Raúl Contreras, 2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-03 14:30+0000\n"
-"Last-Translator: GunChleoc, 2014\n"
+"Last-Translator: Raúl Contreras, 2024\n"
 "Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/language/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,47 +23,47 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:20
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:22
 msgid "Build two ranger’s huts"
-msgstr ""
+msgstr "Konstruu du arbarulajn kabanojn."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:23
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr ""
+msgstr "Konstruu arbarulan kabanon apud ĉiu lignaĵista kabano."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:24
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr ""
+msgstr "Nature, arboj kreskas malrapide. Por certigi, ke vi havas sufiĉe da trunkoj, vi devas dungi arbarulojn."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:30
 msgid "Expand north-east and build a quarry"
-msgstr ""
+msgstr "Ekspandiĝu nordorienten kaj konstruu ŝtonminejon."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:32
 msgid "Expand north-east to the rocks"
-msgstr ""
+msgstr " Ekspandiĝu nordorienten al la ŝtonoj."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:33
 msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
-msgstr ""
+msgstr "Konstruu militajn konstruaĵojn (kiel sentinelejojn aŭ murojn) por ekspandi vian teritorion."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:34
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr ""
+msgstr "Iru al la rokoj nordoriente de vi kaj konstruu tie ŝtonminejon."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:39
 msgid "Start building mines on the mountain"
-msgstr ""
+msgstr "Komencu konstrui minejojn sur la monto."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:41
 msgid "Build coal and iron mines"
-msgstr ""
+msgstr "Konstruu karbminejojn kaj ferminejojn."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Build a coal mine and an iron mine."
-msgstr ""
+msgstr " Konstruu karbminejon kaj ferminejon."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:43
 msgid ""
@@ -72,11 +73,11 @@ msgid ""
 " will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that they will find, choosing the "
 "appropriate mine to be built:"
-msgstr ""
+msgstr "Por fari tion, metu flagon sur la orienta montoflanko (sed sur monta tereno, ne sur monta herbejo). Kiam vi alklakos la novan flagon, vi povos sendi geologojn tien. Ĉar la flago estas sur la monto, la geologoj serĉos ercojn; alie, ili serĉus akvon. Poste konstruu minejon por ambaŭ specoj de resursoj, kiujn ili trovos, elektante la taŭgan minejon por konstrui:"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "some coal"
-msgstr ""
+msgstr "iom da karbo"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
@@ -84,7 +85,7 @@ msgstr "multe da karbo"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:46
 msgid "some iron"
-msgstr ""
+msgstr "iom da fero"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
@@ -92,7 +93,7 @@ msgstr "multe da fero"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "some gold"
-msgstr ""
+msgstr "iom da oro"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
@@ -100,7 +101,7 @@ msgstr "multe da oro"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:50
 msgid "some granite"
-msgstr ""
+msgstr "iom da granito"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"
@@ -112,46 +113,46 @@ msgstr "akvo"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:53
 msgid "nothing was found here"
-msgstr "nenio estis trivita ĉi tie"
+msgstr "nenio estis trovita ĉi tie"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:54
 msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
-msgstr ""
+msgstr "Minejoj povas esti konstruitaj nur sur monta tereno. Taŭgaj lokoj por minejoj estas montrataj kiel oranĝaj minejosimboloj."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:59
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Provizu viajn ministojn per manĝaĵo."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
-msgstr ""
+msgstr "Konstruu ĉasistan kabanon, ĉasgardistan kabanon kaj tavernon."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:62
 msgid "In order to work, your miners need food."
-msgstr ""
+msgstr "Por labori, viaj ministoj bezonas manĝaĵon."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr ""
+msgstr "Ĉasisto povas ĉasi bestojn, dum ĉasgardisto malhelpas ilian formorton. La viando poste estas prilaborata en taverno en manĝaĵojn por viaj ministoj."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
-msgstr ""
+msgstr "Tio estas nur la unua ekzemplo de varo, kiu devas esti rafinita antaŭ ol ĝi estos uzata en dua konstruaĵo  – aliaj sekvos."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:68
 msgid "Bake bread"
-msgstr ""
+msgstr "Baki panon."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:70
 msgid "Build a well, a farm and a bakery"
-msgstr ""
+msgstr "Konstruu puton, bienon kaj bakejon."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:71
 msgid ""
@@ -160,39 +161,39 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr ""
+msgstr "Aliaj manieroj produkti manĝaĵon – diversaj specoj de manĝaĵo – estas fiŝkaptistoj kaj bienoj. La tritiko de la bienoj devas esti prilaborata kun akvo en bakejo antaŭ ol ĝi fariĝos manĝebla. Vi povas akiri akvon per konstruado de puto. Por plej bona produktiveco, konstruu ĝin en loko, kie viaj geologoj trovis akvofonton."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
-msgstr ""
+msgstr "Rafinu viajn minitajn resursojn."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Build a smelting works"
-msgstr ""
+msgstr "Konstruu fandejon."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:79
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into"
 " iron first."
-msgstr ""
+msgstr "La fera erco, kiun viaj ministoj elfosas, ankoraŭ ne estas uzebla – unue, ĝi devas esti fandita en feron."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:84
 msgid "Enhance buildings and build a micro brewery"
-msgstr ""
+msgstr "Plibonigu la konstruaĵojn kaj konstruu mikrobierfarejon."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:86
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr ""
+msgstr "Plibonigu minejon kaj tavernon, kaj konstruu mikrobierfarejon."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:87
 msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
-msgstr ""
+msgstr "Plibonigu la karbminejon aŭ la ferminejon al profunda minejo, kaj plibonigu la tavernon al gastejo."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:88
 msgid "Also build a micro brewery."
-msgstr ""
+msgstr "Ankaŭ konstruu mikrobierfarejon."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:89
 msgid ""
@@ -200,7 +201,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr ""
+msgstr "Normala minejo povas nur elfosi ĉirkaŭ trionon de ĉiuj resursoj, kiuj kuŝas sub ĝi; poste ĝi devas esti plibonigita al profunda minejo por daŭre funkcii normale. Por plibonigi konstruaĵon, elektu ĝin kaj poste alklaku la taŭgan butonon en la aperanta fenestro."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid ""
@@ -208,7 +209,7 @@ msgid ""
 "become more advanced workers, who are necessary to operate the enhanced "
 "buildings. Do not enhance a building before you have enough advanced workers"
 " to operate the advanced building!"
-msgstr ""
+msgstr "La laboristoj akiras sperton per sukcesa laboro. Kun sufiĉa sperto, ili fariĝas pli progresintaj laboristoj, kiuj estas necesaj por funkciigi la plibonigitajn konstruaĵojn. Ne plibonigu konstruaĵon antaŭ ol vi havas sufiĉe da progresintaj laboristoj por funkciigi la plibonigitan konstruaĵon!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:91
 msgid ""
@@ -216,20 +217,20 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr ""
+msgstr "Tiaj konstruaĵoj kutime havas pli grandajn postulojn ol la bazaj tipoj de tiu konstruaĵo – ekzemple, profundaj minejoj bezonas manĝaĵojn anstataŭ porcioj. Vi devos plibonigi vian tavernon al gastejo por produkti sandviĉojn el pita pano KAJ dua speco de manĝaĵo (viando aŭ fiŝo) KAJ biero."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid ""
 "You may of course enhance all mines to deep mines instantly given you have "
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
-msgstr ""
+msgstr "Kompreneble, vi povas plibonigi ĉiujn minejojn al profundaj minejoj, se vi havas la laboristojn – grandaj minejoj laboras iomete pli rapide, malgrandaj minejoj bezonas malmultekostan manĝaĵon. Estas via decido, kiun strategion vi preferas."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:97
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:99
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:101
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Konstruu lignodurigejon."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:100
 msgid ""
@@ -238,69 +239,69 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr ""
+msgstr "Pli grandaj kaj pli bonaj konstruaĵoj – inkluzive ĉiujn militajn – postulas pli bonajn konstrumaterialojn. Ili ne povas esti konstruitaj el simplaj trunkoj – la trunkoj devas esti rafinitaj en traktita ligno per lignodurigejo unue. Ĉiam memoru konstrui lignodurigejon antaŭ ol vi restas sen traktita ligno, ĉar sen ĝi vi ne povos ekspandiĝi."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid "Build a lime kiln and coal economy"
-msgstr ""
+msgstr "Konstruu kalkfornon kaj karbekonomion."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:108
 msgid ""
 "Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine"
-msgstr ""
+msgstr "Konstruu kalkfornon alimentatan per puto, kaj per karbonigofornon aŭ karbminejon."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:109
 msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr ""
+msgstr "Pli bonaj konstruaĵoj povas ankaŭ postuli aliajn plibonigitajn materialojn krom traktita ligno. Unu el ili estas mortero, kiu estas produktita el granito, akvo kaj karbo en kalkforno."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:110
 msgid ""
 "You can obtain water by building a well upon a water source, which your "
 "geologists can discover when you send them to any flag that is not on a "
 "mountain."
-msgstr ""
+msgstr "Vi povas akiri akvon per konstruado de puto super akvofonto, kiun viaj geologoj povas malkovri kiam vi sendas ilin al iu ajn flago, kiu ne estas sur monto."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:111
 msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
-msgstr ""
+msgstr "Por voki geologon por serĉi akvon, alklaku flagon en la areo, kie vi volas, ke li serĉu, kaj poste alklaku la butonon kun la etikedo \"Sendu geologon por esplori la lokon\"."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
 "Coal can be obtained by building a charcoal kiln or a coal mine. Burning "
 "charcoal out of logs is slow. You should only build a charcoal kiln when no "
 "coal is available."
-msgstr ""
+msgstr "Karbo povas esti akirita per konstruado de aŭ karbonigoforno aŭ karbminejo. Bruligi lignokarbo el trunkoj estas malrapida. Vi devus konstrui karbonigofornon nur kiam karbo ne estas disponebla."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:113
 msgid ""
 "Build a lime kiln and a well. Additionally, build either a charcoal kiln or "
 "a coal mine for coal supply."
-msgstr ""
+msgstr "Konstruu kalkfornon kaj puton. Krome, konstruu aŭ karbonigofornon aŭ karbminejon por karboprovizo."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:118
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:120
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:122
 msgid "Build a reed yard"
-msgstr ""
+msgstr "Konstruu kankultivejon"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:121
 msgid ""
 "The third material necessary for improved buildings is reed, used to cover "
 "roofs. Reed fields are planted by a gardener around his building, the reed "
 "yard."
-msgstr ""
+msgstr "La tria materialo necesa por plibonigitaj konstruaĵoj estas kano, uzata por tegi tegmentojn. La ĝardenisto plantas kanon ĉirkaŭ sia konstruaĵo, formante la kankultivejon."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:127
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:132
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Konstruu bovbienon"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:130
 msgid ""
@@ -308,42 +309,42 @@ msgid ""
 "enough to transport goods swiftly. Traffic jams are the consequence. Such "
 "roads therefore employ a second carrier: an ox that helps to carry the "
 "wares. This doubles the transport capacity."
-msgstr ""
+msgstr "Kiam vojoj estas tre ŝarĝitaj dum longa tempo, unu transportisto ofte ne sufiĉas por rapide transporti varojn. Trafikaj ŝtopiĝoj sekvas. Tial, tiuj vojoj uzas duan transportiston: bovon, kiu helpas porti la varojn. Tio duobligas la transportkapaciton."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:131
 msgid "Oxen are bred in cattle farms out of wheat and water."
-msgstr ""
+msgstr "Bovoj estas bredataj en bovbienoj per tritiko kaj akvo."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:141
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:153
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:165
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:177
 msgid "The Story Begins"
-msgstr ""
+msgstr "La Aventuro Komenciĝas"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:142
 msgid "Thron sighs…"
-msgstr ""
+msgstr "Thron sopiras..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:144
 msgid ""
 "It’s been months, and we are still hiding where the forests are old and "
 "dark."
-msgstr ""
+msgstr "Estas pasintaj monatoj, kaj ni ankoraŭ kaŝiĝas tie, kie la arbaroj estas maljunaj kaj mallumaj."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:147
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
-msgstr ""
+msgstr "Miaj militistoj ĉasas tage kaj restas sendormaj nokte – aŭskultante la sonojn de la kruela buĉado, kiuj eĥas for inter la antikvaj arboj."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:156
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
-msgstr ""
+msgstr "Ni povas vidi la furiozajn flamojn, kiuj englutas Al'thunran de ĉi tie, milojn da mejloj for."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:159
@@ -451,7 +452,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:223
 msgid "An old man says…"
-msgstr ""
+msgstr "Maljuna viro diras…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:225
@@ -479,18 +480,18 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:457
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:468
 msgid "The Advisor"
-msgstr ""
+msgstr "La Konsilanto"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:235
 msgid "Khantrukh notes…"
-msgstr ""
+msgstr "Khantrukh notas..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:237
 msgid ""
 "I see you have already built a quarry and two lumberjack’s huts. That is a "
 "good beginning if we want to stay here longer."
-msgstr ""
+msgstr "Mi vidas, ke vi jam konstruis ŝtonminejon kaj du lignaĵistajn kabanojn. Tio estas bona komenco, se ni volas resti ĉi tie pli longe."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:240
@@ -509,12 +510,12 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:249
 msgid "In the Night"
-msgstr ""
+msgstr "En la Nokto"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:250
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:264
 msgid "Thron says…"
-msgstr ""
+msgstr "Thron diras..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:252
@@ -533,7 +534,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:263
 msgid "At the Tomb"
-msgstr ""
+msgstr "Ĉe la Tombo"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:266
@@ -552,11 +553,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:277
 msgid "The Other Day"
-msgstr ""
+msgstr "La Alia Tago"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:278
 msgid "Thron says thoughtfully…"
-msgstr ""
+msgstr "Thron diras penseme..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:280
@@ -576,11 +577,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:288
 msgid "The Oath"
-msgstr ""
+msgstr "La Ĵuro"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:289
 msgid "Thron looks furious…"
-msgstr ""
+msgstr "Thron aspektas furioza..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:291
@@ -605,11 +606,11 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:435
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:446
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "Via Lojala Kunulo"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:300
 msgid "Brave Boldreth steps to your side…"
-msgstr ""
+msgstr "Kuraĝa Boldreth paŝas al via flanko..."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:302
@@ -618,11 +619,11 @@ msgid ""
 " see the wisdom in doing so, yet my heart is yearning for a glorious return "
 "to Al’thunran. Too long have we waited while our brethren have fought on the"
 " battlefield, and our axes and swords have turned rusty over time."
-msgstr ""
+msgstr "Do vi volas prepari nin por pli longa restado en ĉi tiuj arbaroj, Thron? Bone, mi vidas la saĝecon en fari tion, tamen mia koro sopiras al glora reveno al Al'thunran. Tro longe ni atendis dum niaj fratoj batalis sur la bataloĉejo, kaj niaj hakiloj kaj glavoj rustiĝis kun la tempo."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:308
 msgid "Khantrukh joins in…"
-msgstr ""
+msgstr "Khantrukh aliĝas..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:310
@@ -652,7 +653,7 @@ msgstr ""
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:327
 msgid "Old man? Disrespectful youth!"
-msgstr ""
+msgstr "Maljunulo? Senrespekta junulo!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:333
@@ -775,7 +776,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:406
 msgid "A Beautiful Morning"
-msgstr ""
+msgstr "Bela Mateno"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:407
 msgid "Thron recognizes…"
@@ -897,7 +898,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:475
 msgid "We Need Oxen!"
-msgstr ""
+msgstr "Ni bezonas bovojn!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:478
@@ -918,7 +919,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:487
 msgid "Mission Complete"
-msgstr ""
+msgstr "Misio Plenumita"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:488
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:503
@@ -949,7 +950,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:497
 msgid "Victory"
-msgstr ""
+msgstr "Venko"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:498
 msgid ""
@@ -959,7 +960,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:502
 msgid "One Full Moon Night"
-msgstr ""
+msgstr "Unu Nokto de Plenluno"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:505
@@ -979,7 +980,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:512
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Alia Malvarma Tago"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:513
 msgid "Thron looks worried…"

@@ -76,13 +76,13 @@ For general information about the format, see :ref:`map_object_programs_syntax`.
 Available actions are:
 
 - `animate`_
+- `playsound`_
+- `script`_
 - `transform`_
 - `grow`_
 - `remove`_
 - `seed`_
 - `construct`_
-- `playsound`_
-- `script`_
 */
 
 ImmovableProgram::ImmovableProgram(const std::string& init_name,
@@ -146,9 +146,9 @@ ImmovableProgram::ActAnimate::ActAnimate(const std::vector<std::string>& argumen
 void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) const {
 	immovable.start_animation(game, parameters.animation);
 	immovable.program_step(game, Duration(parameters.duration.get() != 0u ?
-                                            1 + game.logic_rand() % parameters.duration.get() +
+	                                         1 + game.logic_rand() % parameters.duration.get() +
 	                                            game.logic_rand() % parameters.duration.get() :
-                                            0));
+	                                         0));
 }
 
 /* RST

@@ -156,20 +156,20 @@ For general information about the format, see :ref:`map_object_programs_syntax`.
 
 Available actions are:
 
-- `animate`_
+- `return`_
 - `call`_
 - `callworker`_
-- `checksoldier`_
-- `construct`_
-- `consume`_
-- `mine`_
-- `playsound`_
-- `recruit`_
-- `produce`_
-- `return`_
 - `sleep`_
+- `animate`_
+- `consume`_
+- `produce`_
+- `recruit`_
+- `mine`_
+- `checksoldier`_
 - `train`_
+- `playsound`_
 - `script`_
+- `construct`_
 */
 
 ProductionProgram::ActReturn::Condition* create_economy_condition(
@@ -277,8 +277,8 @@ BillOfMaterials ProductionProgram::parse_bill_of_materials(
 		const std::pair<std::string, std::string> produceme = read_key_value_pair(argument, ':', "1");
 
 		const DescriptionIndex index = ww == WareWorker::wwWARE ?
-                                        descriptions.load_ware(produceme.first) :
-                                        descriptions.load_worker(produceme.first);
+		                                  descriptions.load_ware(produceme.first) :
+		                                  descriptions.load_worker(produceme.first);
 
 		result.emplace_back(index, read_positive(produceme.second));
 	}
@@ -524,7 +524,7 @@ ProductionProgram::ActReturn::SiteHas::description(const Descriptions& descripti
 	for (const auto& entry : group.first) {
 		condition_list.at(i++) =
 		   (entry.second == wwWARE ? descriptions.get_ware_descr(entry.first)->descname() :
-                                   descriptions.get_worker_descr(entry.first)->descname());
+		                             descriptions.get_worker_descr(entry.first)->descname());
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
@@ -548,7 +548,7 @@ std::string ProductionProgram::ActReturn::SiteHas::description_negation(
 	for (const auto& entry : group.first) {
 		condition_list.at(i++) =
 		   (entry.second == wwWARE ? descriptions.get_ware_descr(entry.first)->descname() :
-                                   descriptions.get_worker_descr(entry.first)->descname());
+		                             descriptions.get_worker_descr(entry.first)->descname());
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
@@ -1047,6 +1047,33 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 	for (const std::string& bobname : workerprogram->created_bobs()) {
 		descr->add_created_bob(bobname);
 	}
+
+	const DescriptionMaintainer<ImmovableDescr>& all_immovables = descriptions.immovables();
+
+	for (const auto& object_info : workerprogram->needed_named_map_objects()) {
+		// Add needed entities
+		if (object_info.first == MapObjectType::IMMOVABLE) {
+			descr->add_needed_immovable(object_info.second);
+		}
+	}
+	for (const auto& object_info : workerprogram->collected_named_map_objects()) {
+		const MapObjectType mapobjecttype = object_info.first;
+
+		// Add collected entities
+		switch (mapobjecttype) {
+		case MapObjectType::IMMOVABLE: {
+			descr->add_collected_immovable(object_info.second);
+			const Widelands::DescriptionIndex immo_id = all_immovables.get_index(object_info.second);
+			const ImmovableDescr& immovable_descr = all_immovables.get(immo_id);
+			const_cast<ImmovableDescr&>(immovable_descr).add_collected_by(descriptions, descr->name());
+		} break;
+		case MapObjectType::BOB: {
+			descr->add_collected_bob(object_info.second);
+		} break;
+		default:
+			NEVER_HERE();
+		}
+	}
 }
 
 void ProductionProgram::ActCallWorker::execute(Game& game, ProductionSite& ps) const {
@@ -1260,7 +1287,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 			for (const auto& entry : group.first) {
 				ware_list.at(i++) =
 				   (entry.second == wwWARE ? tribe.get_ware_descr(entry.first)->descname() :
-                                         tribe.get_worker_descr(entry.first)->descname());
+				                             tribe.get_worker_descr(entry.first)->descname());
 			}
 			std::string ware_string = i18n::localize_list(ware_list, i18n::ConcatenateWith::OR);
 

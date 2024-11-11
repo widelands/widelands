@@ -90,7 +90,7 @@ class WidelandsTestCase():
         'FAILED':    'FAIL ',
         'TIMED OUT': 'TMOUT',
         'SKIPPED':   'SKIP ',
-        'IGNORING':  ' IGN ',
+        'IGNORED':   ' IGN ',
         'Info':      'Info '
     }
 
@@ -102,6 +102,8 @@ class WidelandsTestCase():
         ' IGN ': warning_color,
         'Info ': info_color
     }
+
+    annotate = [ 'SKIP ', ' IGN ' ]
 
     def __init__(self, test_script, **wlargs):
         self.test_script = test_script
@@ -220,6 +222,13 @@ class WidelandsTestCase():
 
     def out_status(self, status, message):
         # Force writing to main test log immediately
+
+        # On github, also create an annotation for non-fatal problems that would
+        # otherwise go unnoticed
+        if (status in self.annotate) and os.getenv('GITHUB_ACTION'):
+            sys.stdout.write(f'::warning::{self.step_name()}: {message}\n')
+            sys.stdout.flush()
+
         if use_colors and status in self.status_colors.keys():
             color = self.status_colors[status]
             status = colorize(status, color)
