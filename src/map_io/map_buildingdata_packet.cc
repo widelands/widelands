@@ -835,8 +835,8 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				} else {
 					// Savegame compatibility: check whether queue had size changed,
 					// or was removed altogether
-					auto it = std::find_if(curr_wares.begin(), curr_wares.end(),
-					                       [widx] (auto e) { return e.first == widx; });
+					auto it = std::find_if(
+					   curr_wares.begin(), curr_wares.end(), [widx](auto e) { return e.first == widx; });
 					if (it == curr_wares.end()) {
 						wq->set_filled(0u);
 						wq->cleanup();
@@ -864,7 +864,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				DescriptionIndex widx = wa.first;
 				auto it = std::find_if(productionsite.input_queues_.begin(),
 				                       productionsite.input_queues_.end(),
-				                       [widx] (auto e) { return e->get_index() == widx; });
+				                       [widx](auto e) { return e->get_index() == widx; });
 				if (it == productionsite.input_queues_.end()) {
 					WaresQueue* wq = new WaresQueue(productionsite, widx, wa.second);
 					productionsite.input_queues_.push_back(wq);
@@ -873,13 +873,14 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 			}
 
 			if (inputs_changed) {
-				productionsite.send_message(game, Message::Type::kEconomyLoadGame,
-				   _("Building's inputs changed!"), productionsite.descr().icon_filename(),
-				   _("Building's inputs changed!"),
+				productionsite.send_message(
+				   game, Message::Type::kEconomyLoadGame, _("Building's inputs changed!"),
+				   productionsite.descr().icon_filename(), _("Building's inputs changed!"),
 				   format(_("The inputs of %1$s have changed. Please review the current production "
 				            "programs and input settings.\n\nThe game was probably saved with a "
-					         "different Widelands version or with different enabled add-ons."),
-					       productionsite.descr().descname()), true);
+				            "different Widelands version or with different enabled add-ons."),
+				          productionsite.descr().descname()),
+				   true);
 			}
 
 			nr_queues = fr.unsigned_16();

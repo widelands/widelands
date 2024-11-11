@@ -63,7 +63,7 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 
 			if (!messages->empty()) {
 				MutexLock m(MutexLock::ID::kMessages);
-				for (const auto& it: *messages) {
+				for (const auto& it : *messages) {
 					const Message message(*it.second);
 					if (message.allowed_during_game_loading()) {
 						game_loading_messages.emplace_back(message);
@@ -141,7 +141,7 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 			}
 			prof.check_used();
 
-			for (const Message& message: game_loading_messages) {
+			for (const Message& message : game_loading_messages) {
 				messages->add_message(std::unique_ptr<Message>(new Message(message)));
 			}
 		} else {

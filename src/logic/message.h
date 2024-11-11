@@ -35,16 +35,16 @@ struct Message {
 		kGeologists,
 		kScenario,
 		kSeafaring,
-		kEconomy,                           // economy
-		kEconomySiteOccupied,               // economy
-		kWarfare,                           // warfare messages
+		kEconomy,              // economy
+		kEconomySiteOccupied,  // economy
+		kWarfare,              // warfare messages
 		kWarfareSiteDefeated,
 		kWarfareSiteLost,
 		kWarfareUnderAttack,
 		kWarfareEnd = kWarfareUnderAttack,  // end of warfare messages
 		kTradeOfferReceived,
-		kEconomyLoadGame,                   // only this type is allowed in game loading code
-		                                    // must not be used elsewhere
+		kEconomyLoadGame,  // only this type is allowed in game loading code
+		                   // must not be used elsewhere
 	};
 
 	/**
