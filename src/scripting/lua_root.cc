@@ -763,7 +763,8 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          ============================================  =======================================  =============
          Property descriptor                           Values                                   Since version
          ============================================  =======================================  =============
-         :const:`"enhancement"`                        **terrain_name**     (*string*)          1.0
+         :const:`"enhancement"`                        **category**         (*string*),         1.0
+                                                       **terrain_name**     (*string*)
          :const:`"textures"`                           **textures_and_fps** (*table*)           1.1
          ============================================  =======================================  =============
 
