@@ -823,6 +823,12 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 
 			const BillOfMaterials& curr_wares = pr_descr.input_wares();
 			bool inputs_changed = false;
+			unsigned deleted_unknown_types = 0;
+			unsigned deleted_unknown_amount = 0;
+			BillOfMaterials deleted_known;
+			std::vector<std::string> new_inputs;
+			std::vector<std::string> increased;
+			BillOfMaterials decreased;
 
 			for (uint16_t i = 0; i < nr_queues; ++i) {
 				WaresQueue* wq = new WaresQueue(productionsite, INVALID_INDEX, 0);
@@ -830,6 +836,8 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 
 				DescriptionIndex widx = wq->get_index();
 				if (!game.descriptions().ware_exists(widx)) {
+					++deleted_unknown_types;
+					deleted_unknown_amount += wq->get_filled();
 					delete wq;
 					inputs_changed = true;
 				} else {
@@ -838,22 +846,30 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 					auto it = std::find_if(
 					   curr_wares.begin(), curr_wares.end(), [widx](auto e) { return e.first == widx; });
 					if (it == curr_wares.end()) {
+						deleted_known.emplace_back(std::make_pair(widx, wq->get_filled()));
 						wq->set_filled(0u);
 						wq->cleanup();
 						delete wq;
 						inputs_changed = true;
 					} else {
-						Quantity new_size = it->second;
-						Quantity old_size = wq->get_max_size();
+						const Quantity new_size = it->second;
+						const Quantity old_size = wq->get_max_size();
 						inputs_changed = inputs_changed || (new_size != old_size);
 						if (new_size > old_size) {
 							wq->set_max_size(new_size);
 							if (wq->get_max_fill() == old_size) {
 								wq->set_max_fill(new_size);
 							}
+							increased.emplace_back(game.descriptions().get_ware_descr(widx)->descname());
 						} else if (new_size < old_size) {
-							wq->set_filled(std::min(wq->get_filled(), new_size));
+							const Quantity old_filled = wq->get_filled();
+							Quantity lost = 0;
+							if (old_filled > new_size) {
+								lost = old_filled - new_size;
+								wq->set_filled(new_size);
+							}
 							wq->set_max_size(new_size);
+							decreased.emplace_back(std::make_pair(widx, lost));
 						}
 						productionsite.input_queues_.push_back(wq);
 					}
@@ -869,19 +885,103 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 					WaresQueue* wq = new WaresQueue(productionsite, widx, wa.second);
 					productionsite.input_queues_.push_back(wq);
 					inputs_changed = true;
+					new_inputs.emplace_back(game.descriptions().get_ware_descr(widx)->descname());
 				}
 			}
 
+			// Report changes to the player
 			if (inputs_changed) {
-				productionsite.send_message(
-				   game, Message::Type::kEconomyLoadGame, _("Building's inputs changed!"),
-				   productionsite.descr().icon_filename(), _("Building's inputs changed!"),
-				   format(_("The inputs of %1$s have changed. Please review the current production "
-				            "programs and input settings.\n\nThe game was probably saved with a "
-				            "different Widelands version or with different enabled add-ons."),
-				          productionsite.descr().descname()),
-				   true);
+				const std::string title(_("Building’s inputs changed!"));
+
+				// Probably not worth adding graphic/text_layout as a dependency. It would
+				// require specifying the font styles too, but we already get that through
+				// Building::send_message().
+				// TODO(tothxa): The only problem is the hard-coded vspace gap.
+				static const std::string list_heading("<vspace gap=8><p>%s</p>");
+				static const std::string list_entry("<p> • %s</p>");
+
+				/** TRANSLATORS: %s is a building name */
+				std::string body("<p>");
+				body += format(_("The inputs of %s have changed. Please review the current "
+				                          "production programs and input settings."),
+				                        productionsite.descr().descname());
+				body += "</p><p>";
+				body += _("The game was probably saved with a different Widelands version or with "
+				          "different enabled add-ons.");
+				body += "</p>";
+
+				if (!deleted_known.empty() || deleted_unknown_types > 0) {
+					body += format(list_heading, _("Deleted wares:"));
+					for (const WareAmount& deleted : deleted_known) {
+						body += format(list_entry,
+						               format(ngettext("%1$u piece of %2$s", "%1$u pieces of %2$s",
+						                               deleted.second),
+						                      deleted.second,
+						                      game.descriptions().get_ware_descr(deleted.first)->descname()));
+					}
+					if (deleted_unknown_types == 1) {
+						body += format(list_entry,
+						               format(ngettext("%1$u piece of an unknown ware",
+						                               "%1$u pieces of an unknown ware",
+						                               deleted_unknown_amount),
+						                      deleted_unknown_amount));
+					} else if (deleted_unknown_types > 1) {
+						// Uh-oh, ngettext() can't handle this... and it isn't even worth all the
+						// trouble, as it'll practically never be used...
+
+						const std::string amount_fmt(
+						   /** TRANSLATORS: Part of e.g. "3 pieces total of unknown wares of 2 types"
+						                    in the list of deleted wares */
+						   ngettext("%1$u piece total", "%1$u pieces total", deleted_unknown_amount));
+
+						const std::string amount_str(format(amount_fmt, deleted_unknown_amount));
+
+						const std::string types_fmt(
+							/** TRANSLATORS: e.g. "3 pieces total of unknown wares of 2 types"
+							    in the list of deleted wares, but type is actually always more than 1,
+							    so this is only for the sake of languages with multiple plural forms */
+						   ngettext("%1$s of unknown wares of %2$u type",
+					               "%1$s of unknown wares of %2$u types", deleted_unknown_types));
+
+						body += format(list_entry, format(types_fmt, amount_str, deleted_unknown_types));
+					}
+				}
+
+				if (!new_inputs.empty()) {
+					body += format(list_heading, _("New inputs:"));
+					for (const std::string& name : new_inputs) {
+						body += format(list_entry, name);
+					}
+				}
+
+				if (!increased.empty()) {
+					body += format(list_heading, _("The building needs more of:"));
+					for (const std::string& name : increased) {
+						body += format(list_entry, name);
+					}
+				}
+
+				if (!decreased.empty()) {
+					body += format(list_heading, _("The building needs less of:"));
+					for (const WareAmount& wa : decreased) {
+						const std::string& name = game.descriptions().get_ware_descr(wa.first)->descname();
+						if (wa.second == 0) {
+							body += format(list_entry, name);
+						} else {
+							const std::string deleted_fmt(
+							   /** TRANSLATORS: used after "The building needs less of:", e.g.
+							       "iron (2 pieces got deleted)" */
+							   ngettext("%s (%u piece got deleted)", "%s (%u pieces got deleted)", wa.second));
+							body += format(list_entry, format(deleted_fmt, name, wa.second));
+						}
+					}
+				}
+
+				productionsite.send_message(game, Message::Type::kEconomyLoadGame, title,
+				   productionsite.descr().icon_filename(), title, body, true);
 			}
+
+			// === end of report on changed inputs ===
 
 			nr_queues = fr.unsigned_16();
 			for (uint16_t i = 0; i < nr_queues; ++i) {
