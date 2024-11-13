@@ -900,8 +900,8 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				static const std::string list_heading("<vspace gap=8><p>%s</p>");
 				static const std::string list_entry("<p> • %s</p>");
 
-				/** TRANSLATORS: %s is a building name */
 				std::string body("<p>");
+				/** TRANSLATORS: %s is a building name */
 				body += format(_("The inputs of %s have changed. Please review the current "
 				                 "production programs and input settings."),
 				               productionsite.descr().descname());
