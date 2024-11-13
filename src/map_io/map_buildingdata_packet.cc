@@ -903,8 +903,8 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				/** TRANSLATORS: %s is a building name */
 				std::string body("<p>");
 				body += format(_("The inputs of %s have changed. Please review the current "
-				                          "production programs and input settings."),
-				                        productionsite.descr().descname());
+				                 "production programs and input settings."),
+				               productionsite.descr().descname());
 				body += "</p><p>";
 				body += _("The game was probably saved with a different Widelands version or with "
 				          "different enabled add-ons.");
@@ -913,18 +913,17 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				if (!deleted_known.empty() || deleted_unknown_types > 0) {
 					body += format(list_heading, _("Deleted wares:"));
 					for (const WareAmount& deleted : deleted_known) {
-						body += format(list_entry,
-						               format(ngettext("%1$u piece of %2$s", "%1$u pieces of %2$s",
-						                               deleted.second),
-						                      deleted.second,
-						                      game.descriptions().get_ware_descr(deleted.first)->descname()));
+						body += format(
+						   list_entry,
+						   format(ngettext("%1$u piece of %2$s", "%1$u pieces of %2$s", deleted.second),
+						          deleted.second,
+						          game.descriptions().get_ware_descr(deleted.first)->descname()));
 					}
 					if (deleted_unknown_types == 1) {
-						body += format(list_entry,
-						               format(ngettext("%1$u piece of an unknown ware",
-						                               "%1$u pieces of an unknown ware",
-						                               deleted_unknown_amount),
-						                      deleted_unknown_amount));
+						body += format(list_entry, format(ngettext("%1$u piece of an unknown ware",
+						                                           "%1$u pieces of an unknown ware",
+						                                           deleted_unknown_amount),
+						                                  deleted_unknown_amount));
 					} else if (deleted_unknown_types > 1) {
 						// Uh-oh, ngettext() can't handle this... and it isn't even worth all the
 						// trouble, as it'll practically never be used...
@@ -937,11 +936,11 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 						const std::string amount_str(format(amount_fmt, deleted_unknown_amount));
 
 						const std::string types_fmt(
-							/** TRANSLATORS: e.g. "3 pieces total of unknown wares of 2 types"
-							    in the list of deleted wares, but type is actually always more than 1,
-							    so this is only for the sake of languages with multiple plural forms */
+						   /** TRANSLATORS: e.g. "3 pieces total of unknown wares of 2 types"
+						       in the list of deleted wares, but type is actually always more than 1,
+						       so this is only for the sake of languages with multiple plural forms */
 						   ngettext("%1$s of unknown wares of %2$u type",
-					               "%1$s of unknown wares of %2$u types", deleted_unknown_types));
+						            "%1$s of unknown wares of %2$u types", deleted_unknown_types));
 
 						body += format(list_entry, format(types_fmt, amount_str, deleted_unknown_types));
 					}
@@ -964,21 +963,23 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				if (!decreased.empty()) {
 					body += format(list_heading, _("The building needs less of:"));
 					for (const WareAmount& wa : decreased) {
-						const std::string& name = game.descriptions().get_ware_descr(wa.first)->descname();
+						const std::string& name =
+						   game.descriptions().get_ware_descr(wa.first)->descname();
 						if (wa.second == 0) {
 							body += format(list_entry, name);
 						} else {
 							const std::string deleted_fmt(
 							   /** TRANSLATORS: used after "The building needs less of:", e.g.
 							       "iron (2 pieces got deleted)" */
-							   ngettext("%s (%u piece got deleted)", "%s (%u pieces got deleted)", wa.second));
+							   ngettext(
+							      "%s (%u piece got deleted)", "%s (%u pieces got deleted)", wa.second));
 							body += format(list_entry, format(deleted_fmt, name, wa.second));
 						}
 					}
 				}
 
 				productionsite.send_message(game, Message::Type::kEconomyLoadGame, title,
-				   productionsite.descr().icon_filename(), title, body, true);
+				                            productionsite.descr().icon_filename(), title, body, true);
 			}
 
 			// === end of report on changed inputs ===
