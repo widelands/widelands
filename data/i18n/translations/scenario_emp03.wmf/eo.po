@@ -83,15 +83,15 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:82
 msgid "Find a port space on the small island"
-msgstr ""
+msgstr "Trovu havenspacon sur la eta insulo."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:84
 msgid "Port Space"
-msgstr ""
+msgstr "Havenspaco"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:85
 msgid "Search for a port space in order to regain access to the sea."
-msgstr ""
+msgstr "Serĉu havenspacon por reakiri aliron al la maro."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:91
 msgid "Build a port and a shipyard on the Island"
@@ -189,7 +189,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:149
 msgid "Explore Additional Islands and Search for Port Spaces"
-msgstr ""
+msgstr "Esploru pliajn insulojn kaj serĉu havenspacojn."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:150
 msgid ""
@@ -526,6 +526,9 @@ msgid ""
 "military has spotted a space to build a port on. We should start to build a "
 "port quickly."
 msgstr ""
+"Mia sinjoro, hodiaŭ ni multe pli proksimiĝis al fina reveno hejmen. Nia "
+"armeo rimarkis lokon por konstrui havenon. Ni devus rapide komenci konstrui "
+"havenon."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:352
