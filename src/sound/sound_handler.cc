@@ -487,6 +487,14 @@ void SoundHandler::change_music(const std::string& songset_name, int const fadeo
 		start_music(current_songset_);
 	}
 }
+void SoundHandler::set_music_track_enabled(std::string& filename, bool on) {
+    // todo impl.
+}
+bool SoundHandler::is_music_track_enabled(std::string& filename) {
+    return true; // todo impl.
+}
+
+
 bool SoundHandler::use_custom_songset() const {
 	return use_custom_songset_instead_ingame_;
 }

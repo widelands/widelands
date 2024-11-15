@@ -187,9 +187,11 @@ public:
 	void stop_music(int fadeout_ms = kMinimumMusicFade);
 	void change_music(const std::string& songset_name = std::string(),
 	                  int fadeout_ms = kMinimumMusicFade);
+    void set_music_track_enabled(std::string& filename, bool on);
+    bool is_music_track_enabled(std::string& filename);
+
 	void use_custom_songset(bool on);
 	[[nodiscard]] bool use_custom_songset() const;
-
 	[[nodiscard]] const std::string current_songset() const;
 
 	[[nodiscard]] bool is_sound_enabled(SoundType type) const;

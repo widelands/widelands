@@ -242,6 +242,8 @@ wl_library(wui
     game_objectives_menu.h
     game_options_sound_menu.cc
     game_options_sound_menu.h
+    music_player.cpp
+    music_player.h
     game_summary.cc
     game_summary.h
     general_statistics_menu.cc

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2024 by the Widelands Development Team
+ * Copyright (C) 2019-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -15,25 +15,22 @@
  * along with this program; if not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WL_WUI_GAME_OPTIONS_SOUND_MENU_H
-#define WL_WUI_GAME_OPTIONS_SOUND_MENU_H
+#ifndef WL_WUI_MUSIC_PLAYER_H
+#define WL_WUI_MUSIC_PLAYER_H
 
-#include "ui_basic/unique_window.h"
-#include "wui/sound_options.h"
-#include "wui/music_player.h"
+#include "graphic/styles/text_panel_style.h"
+#include "ui_basic/box.h"
+#include "ui_basic/checkbox.h"
 
 /**
- * A window with all sound options.
+ * A box with all sound options.
+ * All changes to the sound settings take effect immediately, but are not saved to config.
  */
-struct GameOptionsSoundMenu : public UI::UniqueWindow {
-	GameOptionsSoundMenu(Panel&, UI::UniqueWindow::Registry&);
-	/// Saves the sound options to config
-	~GameOptionsSoundMenu() override;
+struct MusicPlayer : public UI::Box {
+    MusicPlayer(UI::Panel& parent);
 
-private:
-    UI::Box outer_;
-	SoundOptions sound_options_;
-    MusicPlayer music_player_;
+
 };
 
-#endif  // end of include guard: WL_WUI_GAME_OPTIONS_SOUND_MENU_H
+
+#endif // WL_WUI_MUSIC_PLAYER_H

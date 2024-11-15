@@ -34,7 +34,7 @@ constexpr int kPadding = 4;
 constexpr int kSliderWidth = 200;
 constexpr int kSliderHeight = 16;
 constexpr int kCursorWidth = 28;
-constexpr int kSpacing = 32;
+constexpr int kSpacing = 4;
 
 UI::PanelStyle slider_to_panel_style(UI::SliderStyle style) {
 	return style == UI::SliderStyle::kFsMenu ? UI::PanelStyle::kFsMenu : UI::PanelStyle::kWui;
@@ -195,7 +195,7 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
 	}
 	for (SoundControl* control : controls) {
 		control->set_checkbox_width(max_w);
-	}
+    }
 
 	add(&custom_songset_);
 	custom_songset_.set_state(g_sh->use_custom_songset());

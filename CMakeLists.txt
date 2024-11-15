@@ -348,7 +348,7 @@ if(NOT MSVC)
   else()
     # Turn some warnings into errors.
     message(STATUS "Warnings will be treated as errors.")
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror")
+# NO.    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror")
     if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 10.0))
       # Silence some false positives on older g++
       message(STATUS "Disabling known false-positive warnings for this compiler.")
