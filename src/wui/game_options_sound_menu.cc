@@ -36,10 +36,10 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(Panel& parent, UI::UniqueWindow::Regi
          sound_options_(outer_, UI::SliderStyle::kWuiLight),
          music_player_(outer_) {
 
-    outer_.add(&sound_options_, UI::Box::Resizing::kExpandBoth);
-    outer_.add(&music_player_, UI::Box::Resizing::kExpandBoth);
+    outer_.add(&sound_options_, UI::Box::Resizing::kFullSize);
+    outer_.add(&music_player_, UI::Box::Resizing::kFullSize);
 	sound_options_.set_border(kMargin, kMargin, kMargin, kMargin);
-    music_player_.set_border(kMargin, kMargin, 0, kMargin);
+    music_player_.set_border(kMargin, kMargin, kMargin, kMargin);
 
     set_center_panel(&outer_);
 

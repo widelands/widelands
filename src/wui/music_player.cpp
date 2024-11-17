@@ -22,6 +22,7 @@
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
 #include "graphic/text_layout.h"
+#include "graphic/style_manager.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/multilinetextarea.h"
@@ -44,8 +45,8 @@ public:
     /**
      * @brief SoundControl Creates gui controls to show music tracks in a playlist
      * @param parent The parent panel
-     * @param title The localized test label to display
-     * @param type The type of sound to set the properties for
+     * @param filename The music track filename, for toggling track playback on/off
+     * @param title The title of the music track, to display
      */
     MusicTrackControl(UI::Box* parent,
                  const std::string& filename,
@@ -55,6 +56,7 @@ public:
          filename_(filename) {
 
         set_inner_spacing(kPadding);
+        add(&enable_, UI::Box::Resizing::kFullSize, UI::Align::kRight);
         if (SoundHandler::is_backend_disabled()) {
             enable_.set_enabled(false);
         } else {
@@ -95,27 +97,56 @@ private:
 }
 
 MusicPlayer::MusicPlayer(UI::Panel& parent)
-   : UI::Box(&parent, UI::PanelStyle::kWui, "music_player", 0, 0, UI::Box::Vertical) {
+   : UI::Box(&parent, UI::PanelStyle::kWui, "music_player", 0, 0, UI::Box::Vertical),
+    track_playlist_(this, UI::PanelStyle::kWui, "track_playlist", 0, 0, UI::Box::Vertical),
+    playback_control_(this, UI::PanelStyle::kWui, "playback_control", 0, 0, UI::Box::Horizontal),
+    playstop_button_(&playback_control_, "playstop", 0, 0, 100, 34, UI::ButtonStyle::kWuiSecondary, "Play/Stop"),
+    next_button_(&playback_control_, "next", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, "Next"),
+    shuffle_(&playback_control_, UI::PanelStyle::kFsMenu, "shuffle", Vector2i::zero(), _("Shuffle")) {
 
     set_inner_spacing(kSpacing);
+    track_playlist_.set_max_size(350, 100);
+    track_playlist_.set_inner_spacing(2);
+    track_playlist_.set_force_scrolling(true);
 
-    std::vector<MusicTrackControl*> controls;
+    std::vector<MusicTrackControl*> musicTrackControls;
 
     // todo loop through tracks
-    controls.emplace_back(new MusicTrackControl(this, "filename_00.ogg", "Title of track 1"));
-    controls.emplace_back(new MusicTrackControl(this, "filename_01.ogg", "Title of track 2"));
 
-    log_info("--- INITING MusicTrackControl's: %li", controls.size());
+    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_00.ogg", "Title of track 1"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_01.ogg", "Title of track 2"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_02.ogg", "Title of track 3"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_03.ogg", "Title of track 4"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_04.ogg", "Title of track 5"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_05.ogg", "Title of track 6"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_06.ogg", "Title of track 7"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_07.ogg", "Title of track 8"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_08.ogg", "Title of track 9"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_09.ogg", "Title of track 10"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_10.ogg", "Title of track 11"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_11.ogg", "Title of track 12"));
 
-    int max_w = 0;
-    for (MusicTrackControl* control : controls) {
-        add(control);
-        int w = control->checkbox_width();
-        if (w > max_w) {
-            max_w = w;
-        }
+    log_info("--- INITING MusicTrackControl's: %li", musicTrackControls.size());
+
+    for (MusicTrackControl* control : musicTrackControls) {
+        track_playlist_.add(control);
     }
-    for (MusicTrackControl* control : controls) {
-        control->set_checkbox_width(max_w);
+
+    playback_control_.add(&playstop_button_);
+    playback_control_.add(&next_button_);
+    playback_control_.add_space(kPadding);
+    playback_control_.add(&shuffle_);
+
+    add(&track_playlist_);
+    add(&playback_control_);
+
+}
+
+void MusicPlayer::draw(RenderTarget& dst) {
+    if (get_w() == 0) {
+        // The size hasn't been set yet
+        return;
     }
+    UI::PanelStyleInfo style = *g_style_manager->tabpanel_style(UI::TabPanelStyle::kWuiDark);
+    draw_background(dst, style);
 }

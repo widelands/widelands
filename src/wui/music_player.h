@@ -19,8 +19,10 @@
 #define WL_WUI_MUSIC_PLAYER_H
 
 #include "graphic/styles/text_panel_style.h"
+#include "ui_basic/panel.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/button.h"
 
 /**
  * A box with all sound options.
@@ -28,6 +30,17 @@
  */
 struct MusicPlayer : public UI::Box {
     MusicPlayer(UI::Panel& parent);
+
+private:
+
+    // Drawing and event handlers
+    void draw(RenderTarget&) override;
+
+    UI::Box track_playlist_;
+    UI::Box playback_control_;
+    UI::Button playstop_button_;
+    UI::Button next_button_;
+    UI::Checkbox shuffle_;
 
 
 };
