@@ -365,7 +365,3 @@ wl_library(wui
     wui_waresdisplay
 )
 
-target_sources(wui
-  PRIVATE
-    music_player.cc
-)

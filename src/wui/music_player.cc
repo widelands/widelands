@@ -133,9 +133,9 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
     vbox_track_playlist_.add_inf_space(); // aligns scrollbar to the right
 
     hbox_playback_control_.add(&button_playstop_);
-    hbox_playback_control_.add_space(kPadding);
+    hbox_playback_control_.add_space(kSpacing);
     hbox_playback_control_.add(&button_next_);
-    hbox_playback_control_.add_space(kPadding);
+    hbox_playback_control_.add_space(kSpacing);
     hbox_playback_control_.add(&checkbox_shuffle_);
 
     add(&vbox_track_playlist_);
