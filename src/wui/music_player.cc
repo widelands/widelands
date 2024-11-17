@@ -29,6 +29,8 @@
 #include "ui_basic/slider.h"
 #include "wlapplication_options.h"
 
+using namespace std;
+
 namespace {
 
     constexpr int kSpacing = 4;
@@ -93,13 +95,14 @@ private:
 }
 
 MusicPlayer::MusicPlayer(UI::Panel& parent)
-   : UI::Box(&parent, UI::PanelStyle::kWui, "music_player", 0, 0, UI::Box::Vertical),
-    vbox_track_playlist_(this, UI::PanelStyle::kWui, "track_playlist", 0, 0, UI::Box::Vertical),
-    hbox_playback_control_(this, UI::PanelStyle::kWui, "playback_control", 0, 0, UI::Box::Horizontal),
-    button_playstop_(&hbox_playback_control_, "playstop", 0, 0, 100, 34, UI::ButtonStyle::kWuiSecondary, "Play/Stop"),
-    button_next_(&hbox_playback_control_, "next", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, "Next"),
-    checkbox_shuffle_(&hbox_playback_control_, UI::PanelStyle::kFsMenu, "shuffle", Vector2i::zero(), _("Shuffle")),
-    label_current_track_(this, UI::PanelStyle::kWui, "current_track", UI::FontStyle::kWuiLabel, "Current track title", UI::Align::kLeft) {
+   : UI::Box(&parent, UI::PanelStyle::kWui, "box_music_player", 0, 0, UI::Box::Vertical),
+    vbox_track_playlist_(this, UI::PanelStyle::kWui, "vbox_track_playlist", 0, 0, UI::Box::Vertical),
+    hbox_playback_control_(this, UI::PanelStyle::kWui, "hbox_playback_control", 0, 0, UI::Box::Horizontal),
+    button_playstop_(&hbox_playback_control_, "button_playstop", 0, 0, 100, 34, UI::ButtonStyle::kWuiSecondary, "Play/Stop"),
+    button_next_(&hbox_playback_control_, "button_next", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, "Next"),
+    checkbox_shuffle_(&hbox_playback_control_, UI::PanelStyle::kFsMenu, "button_shuffle", Vector2i::zero(), _("Shuffle")),
+    hbox_current_track_(this, UI::PanelStyle::kWui, "hbox_current_track", 0, 0, UI::Box::Horizontal),
+    label_current_track_(&hbox_current_track_, UI::PanelStyle::kWui, "label_current_track", UI::FontStyle::kWuiLabel, "Current track title", UI::Align::kLeft) {
 
     // layout ui
     set_inner_spacing(kSpacing);
@@ -108,22 +111,26 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
     vbox_track_playlist_.set_min_desired_breadth(370);
     vbox_track_playlist_.set_inner_spacing(2);
     vbox_track_playlist_.set_force_scrolling(true);
+    hbox_current_track_.set_inner_spacing(kSpacing);
 
     std::vector<MusicTrackControl*> musicTrackControls;
 
-    // todo loop through tracks
-    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_00.ogg", "Title of track 1"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_01.ogg", "Title of track 2"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_02.ogg", "Title of track 3"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_03.ogg", "Title of track 4"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_04.ogg", "Title of track 5"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_05.ogg", "Title of track 6"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_06.ogg", "Title of track 7"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_07.ogg", "Title of track 8"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_08.ogg", "Title of track 9"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_09.ogg", "Title of track 10"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_10.ogg", "Title of track 11"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_11.ogg", "Title of track 12"));
+    std::vector<std::tuple<std::string,std::string>> music_data = g_sh->get_music_data();
+    for (auto& data : music_data) {
+        musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, get<0>(data), get<1>(data)));
+    }
+//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_00.ogg", "Title of track 1"));
+//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_01.ogg", "Title of track 2"));
+//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_02.ogg", "Title of track 3"));
+//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_03.ogg", "Title of track 4"));
+//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_04.ogg", "Title of track 5"));
+//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_05.ogg", "Title of track 6"));
+//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_06.ogg", "Title of track 7"));
+//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_07.ogg", "Title of track 8"));
+//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_08.ogg", "Title of track 9"));
+//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_09.ogg", "Title of track 10"));
+//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_10.ogg", "Title of track 11"));
+//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_11.ogg", "Title of track 12"));
 
     log_info("--- INITING MusicTrackControl's: %li", musicTrackControls.size());
 
@@ -139,9 +146,12 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
     hbox_playback_control_.add_space(kSpacing);
     hbox_playback_control_.add(&checkbox_shuffle_);
 
+    hbox_current_track_.add(&label_current_track_);
+
     add(&vbox_track_playlist_);
     add(&hbox_playback_control_);
-    add(&label_current_track_);
+    add(&hbox_current_track_);
+
     // due to a layout bug, adding an empty label at the bottom to prevent clipping the label for current track title.
     UI::Textarea* label_spacer = new UI::Textarea(this, UI::PanelStyle::kWui, "spacer", UI::FontStyle::kWuiLabel, "", UI::Align::kLeft);
     add(label_spacer);

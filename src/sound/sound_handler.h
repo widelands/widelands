@@ -22,6 +22,8 @@
 #include <cassert>
 #include <map>
 #include <memory>
+#include <vector>
+#include <tuple>
 
 #ifndef _MSC_VER
 #include <unistd.h>
@@ -192,6 +194,7 @@ public:
 	                  int fadeout_ms = kMinimumMusicFade);
     void set_music_track_enabled(std::string& filename, bool on);
     bool is_music_track_enabled(std::string& filename);
+    std::vector<std::tuple<std::string,std::string>> get_music_data();
 
 	void use_custom_songset(bool on);
 	[[nodiscard]] bool use_custom_songset() const;

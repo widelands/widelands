@@ -19,6 +19,10 @@
 #ifndef WL_SOUND_SONGSET_H
 #define WL_SOUND_SONGSET_H
 
+#include <vector>
+#include <tuple>
+#include <cassert>
+
 #include <SDL_mixer.h>
 
 #include "io/fileread.h"
@@ -42,10 +46,12 @@ struct Songset {
 	~Songset();
 
     Mix_Music* get_song(uint32_t random = 0);
+    std::vector<std::tuple<std::string,std::string>> get_songdata();
 
 private:
 	void add_songs(const std::vector<std::string>& files);
 	void add_song(const std::string& filename);
+    Mix_Music* load_file(std::string filename);
 
 	/// The filenames of all configured songs
 	std::vector<std::string> songs_;

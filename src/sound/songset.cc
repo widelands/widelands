@@ -18,8 +18,6 @@
 
 #include "sound/songset.h"
 
-#include <cassert>
-
 #include "base/log.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -65,6 +63,20 @@ void Songset::add_song(const std::string& filename) {
 }
 
 /**
+ * Gets info about all music in this songset (no audio data)
+ * \return filename and title of all music in this songset
+ */
+std::vector<std::tuple<std::string,std::string>> Songset::get_songdata() {
+    std::vector<std::tuple<std::string,std::string>> data;
+    for (std::string filename : songs_) {
+        m_ = load_file(filename);
+        std::string title = Mix_GetMusicTitle(m_);
+        data.push_back(make_tuple(filename, title));
+    }
+    return data;
+}
+
+/**
  * Get the audio data for the next song in the songset, or a random song
  * \param random an optional random number for picking the song
  * \return  a pointer to the chosen song; nullptr if none was found
@@ -77,20 +89,28 @@ Mix_Music* Songset::get_song(uint32_t random) {
         return nullptr;
     }
 
-    if (songs_.size() > 1) {
-        if (random != 0) {
-            // Exclude current_song from playing two times in a row
-            current_song_ += 1 + random % (songs_.size() - 1);
-            current_song_ = current_song_ % songs_.size();
-        }
-        else {
-            current_song_ += 1;
-            if (current_song_ >= songs_.size() - 1) {
-                current_song_ = 0; // wrap
-            }
-        }
+    if (random != 0) {
+        // Exclude current_song from playing two times in a row
+        current_song_ += 1 + random % (songs_.size() - 1);
+        current_song_ = current_song_ % songs_.size();
     }
+
     filename = songs_.at(current_song_);
+
+    // current_song is incremented after filename was chosen for two reasons:
+    // 1. so that unshuffled playback starts at 0
+    // 2. to prevent playing same song two times in a row immediately after shuffle is turned off
+    if (++current_song_ >= songs_.size()) {
+        current_song_ = 0; // wrap
+    }
+
+    m_ = load_file(filename);
+    return m_;
+}
+
+
+
+Mix_Music* Songset::load_file(std::string filename) {
 
     // First, close the previous song and remove it from memory
     if (m_ != nullptr) {
