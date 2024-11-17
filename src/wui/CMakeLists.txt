@@ -242,7 +242,7 @@ wl_library(wui
     game_objectives_menu.h
     game_options_sound_menu.cc
     game_options_sound_menu.h
-    music_player.cpp
+    music_player.cc
     music_player.h
     game_summary.cc
     game_summary.h
@@ -363,4 +363,9 @@ wl_library(wui
     wui_mapview_pixelfunctions
     wui_sound_options
     wui_waresdisplay
+)
+
+target_sources(wui
+  PRIVATE
+    music_player.cc
 )
