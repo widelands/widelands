@@ -23,6 +23,7 @@
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/button.h"
+#include "ui_basic/textarea.h"
 
 /**
  * A box with all sound options.
@@ -36,12 +37,12 @@ private:
     // Drawing and event handlers
     void draw(RenderTarget&) override;
 
-    UI::Box track_playlist_;
-    UI::Box playback_control_;
-    UI::Button playstop_button_;
-    UI::Button next_button_;
-    UI::Checkbox shuffle_;
-
+    UI::Box vbox_track_playlist_;
+    UI::Box hbox_playback_control_;
+    UI::Button button_playstop_;
+    UI::Button button_next_;
+    UI::Checkbox checkbox_shuffle_;
+    UI::Textarea label_current_track_;
 
 };
 

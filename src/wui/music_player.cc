@@ -31,10 +31,6 @@
 
 namespace {
 
-    constexpr int kPadding = 4;
-    constexpr int kSliderWidth = 200;
-    constexpr int kSliderHeight = 16;
-    constexpr int kCursorWidth = 28;
     constexpr int kSpacing = 4;
 
 /**
@@ -55,7 +51,7 @@ public:
          enable_(this, panel_style_, "enable", Vector2i::zero(), title),
          filename_(filename) {
 
-        set_inner_spacing(kPadding);
+        set_inner_spacing(kSpacing);
         add(&enable_, UI::Box::Resizing::kFullSize, UI::Align::kRight);
         if (SoundHandler::is_backend_disabled()) {
             enable_.set_enabled(false);
@@ -98,48 +94,56 @@ private:
 
 MusicPlayer::MusicPlayer(UI::Panel& parent)
    : UI::Box(&parent, UI::PanelStyle::kWui, "music_player", 0, 0, UI::Box::Vertical),
-    track_playlist_(this, UI::PanelStyle::kWui, "track_playlist", 0, 0, UI::Box::Vertical),
-    playback_control_(this, UI::PanelStyle::kWui, "playback_control", 0, 0, UI::Box::Horizontal),
-    playstop_button_(&playback_control_, "playstop", 0, 0, 100, 34, UI::ButtonStyle::kWuiSecondary, "Play/Stop"),
-    next_button_(&playback_control_, "next", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, "Next"),
-    shuffle_(&playback_control_, UI::PanelStyle::kFsMenu, "shuffle", Vector2i::zero(), _("Shuffle")) {
+    vbox_track_playlist_(this, UI::PanelStyle::kWui, "track_playlist", 0, 0, UI::Box::Vertical),
+    hbox_playback_control_(this, UI::PanelStyle::kWui, "playback_control", 0, 0, UI::Box::Horizontal),
+    button_playstop_(&hbox_playback_control_, "playstop", 0, 0, 100, 34, UI::ButtonStyle::kWuiSecondary, "Play/Stop"),
+    button_next_(&hbox_playback_control_, "next", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, "Next"),
+    checkbox_shuffle_(&hbox_playback_control_, UI::PanelStyle::kFsMenu, "shuffle", Vector2i::zero(), _("Shuffle")),
+    label_current_track_(this, UI::PanelStyle::kWui, "current_track", UI::FontStyle::kWuiLabel, "Current track title", UI::Align::kLeft) {
 
     set_inner_spacing(kSpacing);
-    track_playlist_.set_max_size(350, 100);
-    track_playlist_.set_inner_spacing(2);
-    track_playlist_.set_force_scrolling(true);
+    set_desired_size(370, 150);
+    vbox_track_playlist_.set_max_size(370, 100);
+    vbox_track_playlist_.set_min_desired_breadth(370);
+    vbox_track_playlist_.set_inner_spacing(2);
+    vbox_track_playlist_.set_force_scrolling(true);
 
     std::vector<MusicTrackControl*> musicTrackControls;
 
     // todo loop through tracks
-
-    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_00.ogg", "Title of track 1"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_01.ogg", "Title of track 2"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_02.ogg", "Title of track 3"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_03.ogg", "Title of track 4"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_04.ogg", "Title of track 5"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_05.ogg", "Title of track 6"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_06.ogg", "Title of track 7"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_07.ogg", "Title of track 8"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_08.ogg", "Title of track 9"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_09.ogg", "Title of track 10"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_10.ogg", "Title of track 11"));
-    musicTrackControls.emplace_back(new MusicTrackControl(&track_playlist_, "filename_11.ogg", "Title of track 12"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_00.ogg", "Title of track 1"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_01.ogg", "Title of track 2"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_02.ogg", "Title of track 3"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_03.ogg", "Title of track 4"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_04.ogg", "Title of track 5"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_05.ogg", "Title of track 6"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_06.ogg", "Title of track 7"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_07.ogg", "Title of track 8"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_08.ogg", "Title of track 9"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_09.ogg", "Title of track 10"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_10.ogg", "Title of track 11"));
+    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_11.ogg", "Title of track 12"));
 
     log_info("--- INITING MusicTrackControl's: %li", musicTrackControls.size());
 
+    vbox_track_playlist_.add_space(2);
     for (MusicTrackControl* control : musicTrackControls) {
-        track_playlist_.add(control);
+        vbox_track_playlist_.add(control);
     }
+    vbox_track_playlist_.add_inf_space(); // aligns scrollbar to the right
 
-    playback_control_.add(&playstop_button_);
-    playback_control_.add(&next_button_);
-    playback_control_.add_space(kPadding);
-    playback_control_.add(&shuffle_);
+    hbox_playback_control_.add(&button_playstop_);
+    hbox_playback_control_.add_space(kPadding);
+    hbox_playback_control_.add(&button_next_);
+    hbox_playback_control_.add_space(kPadding);
+    hbox_playback_control_.add(&checkbox_shuffle_);
 
-    add(&track_playlist_);
-    add(&playback_control_);
-
+    add(&vbox_track_playlist_);
+    add(&hbox_playback_control_);
+    add(&label_current_track_);
+    // due to a layout bug, adding an empty label at the bottom to prevent clipping the label for current track title.
+    UI::Textarea* label_spacer = new UI::Textarea(this, UI::PanelStyle::kWui, "spacer", UI::FontStyle::kWuiLabel, "", UI::Align::kLeft);
+    add(label_spacer);
 }
 
 void MusicPlayer::draw(RenderTarget& dst) {
@@ -149,4 +153,5 @@ void MusicPlayer::draw(RenderTarget& dst) {
     }
     UI::PanelStyleInfo style = *g_style_manager->tabpanel_style(UI::TabPanelStyle::kWuiDark);
     draw_background(dst, style);
+
 }
