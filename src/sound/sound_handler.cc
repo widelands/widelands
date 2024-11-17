@@ -427,14 +427,15 @@ void SoundHandler::start_music(const std::string& songset_name) {
 		return;
 	}
 
-	if (Mix_PlayingMusic() != 0) {
+    if (is_music_playing()) {
 		change_music(songset_name, kMinimumMusicFade);
 	}
 
 	if (songs_.count(songset_name) == 0) {
 		log_err("SoundHandler: songset \"%s\" does not exist!\n", songset_name.c_str());
-	} else {
-		if (Mix_Music* const m = songs_[songset_name]->get_song(rng_.rand())) {
+    } else {
+        uint32_t n = shuffle_ ? rng_.rand() : 0;
+        if (Mix_Music* const m = songs_[songset_name]->get_song(n)) {
 			Mix_FadeInMusic(m, 1, kMinimumMusicFade);
 			current_songset_ = songset_name;
 		} else {
@@ -454,9 +455,32 @@ void SoundHandler::stop_music(int fadeout_ms) {
 		return;
 	}
 
-	if (Mix_PlayingMusic() != 0) {
+    if (is_music_playing()) {
 		Mix_FadeOutMusic(std::max(fadeout_ms, kMinimumMusicFade));
 	}
+}
+
+/**
+ * Resumes music playback
+ */
+void SoundHandler::resume_music() {
+    if (SoundHandler::is_backend_disabled()) {
+        return;
+    }
+
+    if (!is_music_playing()) {
+        start_music(current_songset_);
+    }
+}
+
+bool SoundHandler::is_music_playing() {
+    int is_playing = Mix_PlayingMusic() != 0;
+    log_info("IS_PLAYING? %i", is_playing);
+    return is_playing;
+}
+
+void SoundHandler::set_shuffle(bool on) {
+    shuffle_ = on;
 }
 
 /**
@@ -481,12 +505,13 @@ void SoundHandler::change_music(const std::string& songset_name, int const fadeo
 		}
 	}
 
-	if (Mix_PlayingMusic() != 0) {
+    if (is_music_playing()) {
 		stop_music(fadeout_ms);
 	} else {
 		start_music(current_songset_);
 	}
 }
+
 void SoundHandler::set_music_track_enabled(std::string& filename, bool on) {
     // todo impl.
 }
@@ -542,7 +567,7 @@ void SoundHandler::set_enable_sound(SoundType type, bool const enable) {
 	switch (type) {
 	case SoundType::kMusic:
 		if (enable) {
-			if (Mix_PlayingMusic() == 0) {
+            if (!is_music_playing()) {
 				start_music(current_songset_);
 			}
 		} else {

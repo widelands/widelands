@@ -185,7 +185,10 @@ public:
 
 	void register_songs(const std::string& dir, const std::string& basename);
 	void stop_music(int fadeout_ms = kMinimumMusicFade);
-	void change_music(const std::string& songset_name = std::string(),
+    void resume_music();
+    bool is_music_playing();
+    void set_shuffle(bool on);
+    void change_music(const std::string& songset_name = std::string(),
 	                  int fadeout_ms = kMinimumMusicFade);
     void set_music_track_enabled(std::string& filename, bool on);
     bool is_music_track_enabled(std::string& filename);
@@ -275,6 +278,7 @@ private:
 	 */
 	static bool backend_is_disabled_;
 	bool use_custom_songset_instead_ingame_;
+    bool shuffle_;
 };
 
 extern SoundHandler* g_sh;

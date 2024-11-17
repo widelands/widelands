@@ -101,6 +101,7 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
     checkbox_shuffle_(&hbox_playback_control_, UI::PanelStyle::kFsMenu, "shuffle", Vector2i::zero(), _("Shuffle")),
     label_current_track_(this, UI::PanelStyle::kWui, "current_track", UI::FontStyle::kWuiLabel, "Current track title", UI::Align::kLeft) {
 
+    // layout ui
     set_inner_spacing(kSpacing);
     set_desired_size(370, 150);
     vbox_track_playlist_.set_max_size(370, 100);
@@ -144,6 +145,19 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
     // due to a layout bug, adding an empty label at the bottom to prevent clipping the label for current track title.
     UI::Textarea* label_spacer = new UI::Textarea(this, UI::PanelStyle::kWui, "spacer", UI::FontStyle::kWuiLabel, "", UI::Align::kLeft);
     add(label_spacer);
+
+    // setup event handlers
+    button_playstop_.sigclicked.connect([this]() {
+        if (g_sh->is_music_playing()) {
+            g_sh->stop_music();
+        }
+        else {
+            g_sh->resume_music();
+        }
+    });
+    button_next_.sigclicked.connect([this]() { g_sh->change_music(); });
+    checkbox_shuffle_.changedto.connect([this](bool on) { g_sh->set_shuffle(on); });
+
 }
 
 void MusicPlayer::draw(RenderTarget& dst) {

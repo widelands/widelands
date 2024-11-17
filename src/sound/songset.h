@@ -41,7 +41,7 @@ struct Songset {
 	explicit Songset(const std::string& dir, const std::string& basename);
 	~Songset();
 
-	Mix_Music* get_song(uint32_t random);
+    Mix_Music* get_song(uint32_t random = 0);
 
 private:
 	void add_songs(const std::vector<std::string>& files);
