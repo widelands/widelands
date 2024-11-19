@@ -100,14 +100,14 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:51
 msgid "blue port space icon."
-msgstr ""
+msgstr "Blua ikono de havenspaco"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:52
 msgid ""
 "Port spaces are set by the map designer, so a map will either contain them "
 "or not. They might, however, be hidden under trees or be blocked by "
 "surrounding buildings."
-msgstr ""
+msgstr "Havenspacoj estas difinitaj de la mapfarinto, do mapo aŭ enhavos ilin aŭ ne. Tamen, ili eble estos kaŝitaj sub arboj aŭ blokitaj de ĉirkaŭaj konstruaĵoj."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:53
 msgid ""
@@ -129,14 +129,14 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:63
 msgid "Build a port next to your castle, on the blue port space icon."
-msgstr ""
+msgstr "Konstrui havenon apud via kastelo, sur la blua ikono de havenspaco."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:64
 msgid ""
 "Ports are built like normal buildings, but are only available on blue port "
 "spaces. Just click on a field with the icon and the building menu "
 "automatically offers you to build a port."
-msgstr ""
+msgstr "Havenoj estas konstruitaj kiel normalaj konstruaĵoj, sed ili estas disponeblaj nur sur bluaj havenspacoj. Simple alklaku kampon kun la ikono, kaj la konstrumenuo aŭtomate proponos al vi konstrui havenon."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:65
 msgid ""
@@ -395,7 +395,7 @@ msgstr ""
 msgid ""
 "Once a port space has been found, you can construct a new port with the "
 "button in the center of the ship’s control window."
-msgstr ""
+msgstr "Kiam havenspaco estas trovita, vi povas konstrui novan havenon per la butono en la centro de la kontrolfenestro de la ŝipo."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:189
 msgid ""
@@ -408,7 +408,7 @@ msgstr ""
 msgid ""
 "Search for an island with a mountain, and look for a port space there. "
 "Colonize the island."
-msgstr ""
+msgstr "Serĉu insulon kun monto kaj trovu tie havenspacon. Koloniigu la insulon."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:196
 msgid "Explore"
@@ -431,7 +431,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:202
 msgid "When you have found a suitable port space, build a port there."
-msgstr ""
+msgstr "Kiam vi trovos taŭgan havenspacon, konstruu havenon tie."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:209
 msgid "New colony"
@@ -540,7 +540,7 @@ msgid ""
 "Ships have the advantage that they can carry large quantities of wares and "
 "workers at a time, but unfortunately their destinations are limited to a "
 "handful of spaces suited for a port."
-msgstr ""
+msgstr "Ŝipoj havas la avantaĝon, ke ili povas transporti grandajn kvantojn da varoj kaj laboristoj samtempe, sed bedaŭrinde iliaj cellokoj estas limigitaj al kelkaj lokoj taŭgaj por haveno."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:249
 msgid ""
