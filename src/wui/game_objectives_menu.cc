@@ -57,24 +57,24 @@ GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent,
 void GameObjectivesMenu::think() {
 	//  Adjust the list according to the game state.
 	for (const auto& pair : iplayer_.game().map().objectives()) {
-		const Widelands::Objective& obj = *(pair.second);
-		bool should_show = obj.visible() && !obj.done();
+		const Widelands::Objective* obj = pair.second.get();
+		bool should_show = obj->visible() && !obj->done();
 		uint32_t const list_size = objective_list_.size();
 		for (uint32_t j = 0;; ++j) {
 			if (j == list_size) {  //  the objective is not in our list
 				if (should_show) {
-					objective_list_.add(obj.descname(), obj);
+					objective_list_.add(obj->descname(), obj);
 				}
 				break;
 			}
-			if (&objective_list_[j] == &obj) {  //  the objective is in our list
+			if (objective_list_[j] == obj) {  //  the objective is in our list
 				if (!should_show) {
 					objective_list_.remove(j);
-				} else if (objective_list_[j].descname() != obj.descname() ||
-				           objective_list_[j].descr() != obj.descr()) {
+				} else if (objective_list_[j]->descname() != obj->descname() ||
+				           objective_list_[j]->descr() != obj->descr()) {
 					// Update
 					objective_list_.remove(j);
-					objective_list_.add(obj.descname(), obj);
+					objective_list_.add(obj->descname(), obj);
 				}
 				break;
 			}
@@ -90,7 +90,7 @@ void GameObjectivesMenu::think() {
  * An entry in the objectives menu has been selected
  */
 void GameObjectivesMenu::selected(uint32_t const t) {
-	objective_text_.set_text(t == ListType::no_selection_index() ? "" : objective_list_[t].descr());
+	objective_text_.set_text(t == ListType::no_selection_index() ? "" : objective_list_[t]->descr());
 }
 
 void GameObjectivesMenu::draw(RenderTarget& rt) {

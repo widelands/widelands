@@ -711,11 +711,11 @@ void Options::add_languages_to_list(const std::string& current_locale) {
 				log_err("Could not read locale for: %s\n", localename.c_str());
 				entries.insert(std::make_pair(localename, LanguageEntry(localename, localename)));
 			}  // End read locale from table
-		}     // End scan locales directory
+		}  // End scan locales directory
 	} catch (const LuaError& err) {
 		log_err("Could not read locales information from file: %s\n", err.what());
 		return;  // Nothing more can be done now.
-	}           // End read locales table
+	}  // End read locales table
 
 	find_selected_locale(&selected_locale, current_locale);
 	for (const auto& entry : entries) {
@@ -1010,6 +1010,7 @@ void OptionsCtrl::save_options() {
 	g_mouse_cursor->set_use_sdl(opt_dialog_->get_values().sdl_cursor);
 	i18n::set_locale(opt.language);
 	UI::g_fh->reinitialize_fontset(i18n::get_locale());
+	WLApplication::get().init_plugin_shortcuts();  // To update the descnames
 
 	// Sound options
 	g_sh->save_config();

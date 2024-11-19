@@ -419,10 +419,34 @@ static int L_get_build_id(lua_State* L) {
 	return 1;
 }
 
-// set_textdomain() was deprecated before v1.0, removed in v1.2
-// TODO(tothxa): Remove if the position in kPersistentGlobals can be filled with a new function?
-static int L_set_textdomain(lua_State*) {
-	throw LuaError("set_textdomain() is no longer supported");
+/* Use our own logging function as a replacement for Lua's built-in print(). */
+static int L_print(lua_State* L) {
+	std::string message;
+
+	for (int i = 1; i <= lua_gettop(L); ++i) {
+		if (i > 1) {
+			message += ' ';
+		}
+
+		switch (lua_type(L, i)) {
+		case LUA_TNIL:
+			message += "(nil)";
+			break;
+		case LUA_TBOOLEAN:
+			message += luaL_checkboolean(L, i) ? "true" : "false";
+			break;
+		case LUA_TNUMBER:
+		case LUA_TSTRING:
+			message += luaL_checkstring(L, i);
+			break;
+		default:
+			message += as_string(format("[%s @ %p]", luaL_typename(L, i), lua_topointer(L, i)));
+			break;
+		}
+	}
+
+	do_log(LogType::kLua, Time(), "%s", message.c_str());
+	return 0;
 }
 
 /* RST
@@ -481,19 +505,25 @@ static int L_play_sound(lua_State* L) {
 	return 0;
 }
 
+static int L_deleted_function(lua_State*) {
+	throw LuaError("call to a removed function");
+}
+
+/* Always append new globals to the end, and never remove any list entries.
+ * Otherwise you break savegame compatibility.
+ */
 const static struct luaL_Reg globals[] = {{"_", &L__},
                                           {"get_build_id", &L_get_build_id},
                                           {"include", &L_include},
                                           {"ngettext", &L_ngettext},
                                           {"pgettext", &L_pgettext},
                                           {"npgettext", &L_npgettext},
-                                          // TODO(tothxa): set_textdomain was removed, replace the
-                                          //   next time when a new global function is added?
-                                          {"set_textdomain", &L_set_textdomain},
+                                          {"set_textdomain", &L_deleted_function},
                                           {"push_textdomain", &L_push_textdomain},
                                           {"pop_textdomain", &L_pop_textdomain},
                                           {"ticks", &L_ticks},
                                           {"play_sound", &L_play_sound},
+                                          {"print", &L_print},
                                           {nullptr, nullptr}};
 
 void luaopen_globals(lua_State* L) {

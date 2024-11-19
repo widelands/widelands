@@ -433,7 +433,7 @@ if(OPTION_BUILD_WINSTATIC)
     endif()
   else()
     wl_add_static_libs(SDL_IMG_STATIC_LIBS ${MINGW_SDL_IMG_DEPS})
-    wl_add_static_libs(SDL_MIXER_STATIC_LIBS ssp)
+    wl_add_static_libs(SDL_MIXER_STATIC_LIBS ssp  modplug)
     wl_add_static_libs(SDL_STATIC_LIBS mingw32 dxerr8 zstd ${BROTLI})
   endif(MSVC)
 endif(OPTION_BUILD_WINSTATIC)
@@ -499,6 +499,16 @@ install (
   CONFIGURATIONS Debug;Release;RelWithDebInfo;None
   COMPONENT CoreVersionFile
 )
+
+# TODO(Nordfriese): Use this consistently in places in code that use various other tests for endianness
+include(TestBigEndian)
+TEST_BIG_ENDIAN(IS_BIG_ENDIAN)
+if(IS_BIG_ENDIAN)
+  message(STATUS "Byte order is big-endian")
+  ADD_DEFINITIONS(-DWORDS_BIGENDIAN)
+else()
+  message(STATUS "Byte order is little-endian")
+endif()
 
 # Installation.
 add_subdirectory(doc)
