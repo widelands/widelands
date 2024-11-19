@@ -66,14 +66,8 @@ process_dylibs() {
 	if [[ ! -e $dest ]]; then
 	    cp "$dylib" "$dest"
 	    chmod 644 "$dest"
-	    echo "Adding $dylib"
-	    local sublibs="$(list_dylibs $dylib)"
-	 	for sublib in $(echo $sublibs); do
-           echo "found sublib $sublib for dylib $name in folder $dest"
-	    done
-	    process_dylibs "$sublibs" "$dest"
 	    install_name_tool -id "@rpath/$name" "$dest"
-      process_dylibs "$(list_dylibs "$dest")" "$dest"
+            process_dylibs "$(list_dylibs "$dest")" "$dest"
 	fi
 	install_name_tool -change "$dylib" "@rpath/$name" "$file"
     done
