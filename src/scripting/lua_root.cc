@@ -745,176 +745,214 @@ int LuaDescriptions::new_tribe(lua_State* L) {
       .. table:: ``"resource"``
          :name: resource
          :width: 100%
-         :widths: 40,50,10
+         :widths: 15,25,50,10
          :align: left
 
-         ============================================  =======================================  =============
-         Property descriptor                           Values                                   Since version
-         ============================================  =======================================  =============
-         :const:`"max_amount"`                         **amount**         (*int*)               1.0
-         ============================================  =======================================  =============
+         ============================================  =======================================  =================================================================================  =============
+         Property descriptor                           Values                                   Example                                                                            Since version
+         ============================================  =======================================  =================================================================================  =============
+         :const:`"max_amount"`                         **amount**         (*int*)               ``wl.Descriptions():modify_unit("resource", "resource_coal", "max_amount", 50)``   1.0
+         ============================================  =======================================  =================================================================================  =============
 
       .. table:: ``"terrain"``
          :name: terrain
          :width: 100%
-         :widths: 40,50,10
+         :widths: 15,25,50,10
          :align: left
 
-         ============================================  =======================================  =============
-         Property descriptor                           Values                                   Since version
-         ============================================  =======================================  =============
-         :const:`"enhancement"`                        **terrain_name**     (*string*)          1.0
-         :const:`"textures"`                           **textures_and_fps** (*table*)           1.1
-         ============================================  =======================================  =============
+         ============================================  =======================================  =================================================================================  =============
+         Property descriptor                           Values                                   Example                                                                            Since version
+         ============================================  =======================================  =================================================================================  =============
+         :const:`"enhancement"`                        **category**         (*string*),         ``wl.Descriptions():modify_unit("terrain", "winter_tundra",                        1.0
+                                                       **terrain_name**     (*string*)          "enhancement", "diking", "winter_taiga2")``
+         :const:`"textures"`                           **textures_and_fps** (*table*)           ``wl.Descriptions():modify_unit("terrain", "winter_tundra", "textures",            1.1
+                                                                                                {fps = 10,
+                                                                                                textures = path.list_files(path.dirname(__file__) ..
+                                                                                                "blackland_water/water_??.png" )})``
+         ============================================  =======================================  =================================================================================  =============
 
       .. table:: ``"ware"``
          :name: ware
          :width: 100%
-         :widths: 40,50,10
+         :widths: 15,25,50,10
          :align: left
 
-         ============================================  =======================================  =============
-         Property descriptor                           Values                                   Since version
-         ============================================  =======================================  =============
-         :const:`"target_quantity"`                    **tribe**          (*string*),           1.3
-                                                       **amount**         (*int* or *nil*)
-         :const:`"preciousness"`                       **tribe**          (*string*),           1.3
+         ============================================  =======================================  =================================================================================  =============
+         Property descriptor                           Values                                   Example                                                                            Since version
+         ============================================  =======================================  =================================================================================  =============
+         :const:`"target_quantity"`                    **tribe**          (*string*),           ``wl.Descriptions():modify_unit("ware", "reed",                                    1.3
+                                                       **amount**         (*int* or *nil*)      "target_quantity", "frisians", 20)``
+         :const:`"preciousness"`                       **tribe**          (*string*),           ``wl.Descriptions():modify_unit("ware", "reed", "preciousness", "frisians", 3)``   1.3
                                                        **amount**         (*int*)
-         ============================================  =======================================  =============
+         ============================================  =======================================  =================================================================================  =============
 
       .. table:: ``"worker"``
          :name: worker
          :width: 100%
-         :widths: 40,50,10
+         :widths: 15,25,50,10
          :align: left
 
-         ============================================  =======================================  =============
-         Property descriptor                           Values                                   Since version
-         ============================================  =======================================  =============
-         :const:`"experience"`                         **experience**     (*int*)               1.0
-         :const:`"becomes"`                            **worker_name**    (*string*)            1.0
-         :const:`"programs"`, :const:`"set"`           **program_name**   (*string*),           1.0
-                                                       **actions_table**  (*table*)
-         :const:`"buildcost"`, :const:`"set"`          **ware_name**      (*string*),           1.2
-                                                       **amount**         (*int*)
-         :const:`"buildcost"`, :const:`"remove"`       **ware_name**      (*string*),           1.2
-         :const:`"target_quantity"`                    **amount**         (*int* or *nil*)      1.3
-         :const:`"preciousness"`                       **tribe**          (*string*),           1.3
-                                                       **amount**         (*int*)
-         ============================================  =======================================  =============
+         ============================================  =======================================  =================================================================================  =============
+         Property descriptor                           Values                                   Example                                                                            Since version
+         ============================================  =======================================  =================================================================================  =============
+         :const:`"experience"`                         **experience**     (*int*)               ``wl.Descriptions():modify_unit("worker", "frisians_baker", "experience", 32)``    1.0
+         :const:`"becomes"`                            **worker_name**    (*string*)            ``wl.Descriptions():modify_unit("worker", "frisians_baker",                        1.0
+                                                                                                "becomes", "frisians_baker_chief")``
+         :const:`"programs"`, :const:`"set"`           **program_name**   (*string*),           ``wl.Descriptions():modify_unit("worker", "frisians_baker", "programs", "set",     1.0
+                                                       **actions_table**  (*table*)             "plant_rye", {
+                                                                                                "findspace=size:any radius:2 space",
+                                                                                                "walk=coords",
+                                                                                                "animate=planting duration:6s",
+                                                                                                "plant=attrib:seed_rye",
+                                                                                                "animate=planting duration:6s",
+                                                                                                "return"
+                                                                                                })``
+         :const:`"buildcost"`, :const:`"set"`          **ware_name**      (*string*),           ``wl.Descriptions():modify_unit("worker", "frisians_baker", "buildcost",           1.2
+                                                       **amount**         (*int*)               "set", "basket", 1)``
+         :const:`"buildcost"`, :const:`"remove"`       **ware_name**      (*string*),           ``wl.Descriptions():modify_unit("worker", "frisians_baker", "buildcost",           1.2
+                                                                                                "remove", "bread_paddle")``
+         :const:`"target_quantity"`                    **amount**         (*int* or *nil*)      ``wl.Descriptions():modify_unit("worker", "frisians_baker",                        1.3
+                                                                                                "target_quantity", 5)``
+         :const:`"preciousness"`                       **tribe**          (*string*),           ``wl.Descriptions():modify_unit("worker", "frisians_baker", "preciousness",        1.3
+                                                       **amount**         (*int*)               "frisians", 8)``
+         ============================================  =======================================  =================================================================================  =============
 
       .. table:: ``"building"``
          :name: building
          :width: 100%
-         :widths: 40,50,10
+         :widths: 15,25,50,10
          :align: left
 
-         ==============================================================  =======================================  =============
-         Property descriptor                                             Values                                   Since version
-         ==============================================================  =======================================  =============
-         :const:`"enhancement"`                                          **building_name**  (*string*)            1.1
-         :const:`"buildcost"`, :const:`"remove"`                         **ware_name**      (*string*)            1.1
-         :const:`"buildcost"`, :const:`"set"`                            **ware_name**      (*string*),           1.1
-                                                                         **amount**         (*int*)
-         :const:`"return_on_dismantle"`, :const:`"remove"`               **ware_name**      (*string*)            1.1
-         :const:`"return_on_dismantle"`, :const:`"set"`                  **ware_name**      (*string*),           1.1
-                                                                         **amount**         (*int*)
-         :const:`"enhancement_cost"`, :const:`"remove"`                  **ware_name**      (*string*)            1.1
-         :const:`"enhancement_cost"`, :const:`"set"`                     **ware_name**      (*string*),           1.1
-                                                                         **amount**         (*int*)
-         :const:`"enhancement_return_on_dismantle"`, :const:`"remove"`   **ware_name**      (*string*)            1.1
-         :const:`"enhancement_return_on_dismantle"`, :const:`"set"`      **ware_name**      (*string*),           1.1
-                                                                         **amount**         (*int*)
-         ==============================================================  =======================================  =============
+         ==============================================================  =======================================  =============================================================  =============
+         Property descriptor                                             Values                                   Example                                                        Since version
+         ==============================================================  =======================================  =============================================================  =============
+         :const:`"enhancement"`                                          **building_name**  (*string*)            ``wl.Descriptions():modify_unit("building", "frisians_farm",   1.1
+                                                                                                                  "enhancement", "frisians_farm_big")``
+         :const:`"buildcost"`, :const:`"remove"`                         **ware_name**      (*string*)            ``wl.Descriptions():modify_unit("building", "frisians_farm",   1.1
+                                                                                                                  "buildcost", "remove", "granite")``
+         :const:`"buildcost"`, :const:`"set"`                            **ware_name**      (*string*),           ``wl.Descriptions():modify_unit("building", "frisians_farm",   1.1
+                                                                         **amount**         (*int*)               "buildcost", "set", "brick", 4)``
+         :const:`"return_on_dismantle"`, :const:`"remove"`               **ware_name**      (*string*)            ``wl.Descriptions():modify_unit("building", "frisians_farm",   1.1
+                                                                                                                  "return_on_dismantle", "remove", "granite")``
+         :const:`"return_on_dismantle"`, :const:`"set"`                  **ware_name**      (*string*),           ``wl.Descriptions():modify_unit("building", "frisians_farm",   1.1
+                                                                         **amount**         (*int*)               "return_on_dismantle", "set", "brick", 2)``
+         :const:`"enhancement_cost"`, :const:`"remove"`                  **ware_name**      (*string*)            ``wl.Descriptions():modify_unit("building", "frisians_farm",   1.1
+                                                                                                                  "enhancement_cost", "remove", "granite")``
+         :const:`"enhancement_cost"`, :const:`"set"`                     **ware_name**      (*string*),           ``wl.Descriptions():modify_unit("building", "frisians_farm",   1.1
+                                                                         **amount**         (*int*)               "enhancement_cost", "set", "brick", 4)``
+         :const:`"enhancement_return_on_dismantle"`, :const:`"remove"`   **ware_name**      (*string*)            ``wl.Descriptions():modify_unit("building", "frisians_farm",   1.1
+                                                                                                                  "enhancement_return_on_dismantle", "remove", "brick", 3)``
+         :const:`"enhancement_return_on_dismantle"`, :const:`"set"`      **ware_name**      (*string*),           ``wl.Descriptions():modify_unit("building", "frisians_farm",   1.1
+                                                                         **amount**         (*int*)               "enhancement_return_on_dismantle", "set", "brick", 3)``
+         ==============================================================  =======================================  =============================================================  =============
 
       .. table:: ``"productionsite"``
          :name: productionsite
          :width: 100%
-         :widths: 40,50,10
+         :widths: 15,25,50,10
          :align: left
 
-         ============================================  =======================================  =============
-         Property descriptor                           Values                                   Since version
-         ============================================  =======================================  =============
-         :const:`"input"`, :const:`"add_ware"`         **ware_name**      (*string*),           1.0
-                                                       **amount**         (*int*)
-         :const:`"input"`, :const:`"modify_ware"`      **ware_name**      (*string*),           1.0
-                                                       **new_amount**     (*int*)
-         :const:`"input"`, :const:`"remove_ware"`      **ware_name**      (*string*)            1.0
-         :const:`"input"`, :const:`"add_worker"`       **worker_name**    (*string*),           1.0
-                                                       **amount**         (*int*)
-         :const:`"input"`, :const:`"modify_worker"`    **worker_name**    (*string*),           1.0
-                                                       **new_amount**     (*int*)
-         :const:`"input"`, :const:`"remove_worker"`    **worker_name**    (*string*)            1.0
-         :const:`"programs"`, :const:`"set"`           **program_name**   (*string*),           1.0
-                                                       **program_table**  (*table*)
-         ============================================  =======================================  =============
+         ============================================  =======================================  =================================================================================  =============
+         Property descriptor                           Values                                   Example                                                                            Since version
+         ============================================  =======================================  =================================================================================  =============
+         :const:`"input"`, :const:`"add_ware"`         **ware_name**      (*string*),           ``wl.Descriptions():modify_unit("productionsite", "frisians_bakery", "input",      1.0
+                                                       **amount**         (*int*)               "add_ware", "salt", 4)``
+         :const:`"input"`, :const:`"modify_ware"`      **ware_name**      (*string*),           ``wl.Descriptions():modify_unit("productionsite", "frisians_bakery", "input",      1.0
+                                                       **new_amount**     (*int*)               "modify_ware", "water", 9)``
+         :const:`"input"`, :const:`"remove_ware"`      **ware_name**      (*string*)            ``wl.Descriptions():modify_unit("productionsite", "frisians_bakery", "input",      1.0
+                                                                                                "remove_ware", "barley")``
+         :const:`"input"`, :const:`"add_worker"`       **worker_name**    (*string*),           ``wl.Descriptions():modify_unit("productionsite", "frisians_barracks", "input",    1.0
+                                                       **amount**         (*int*)               "add_worker", "frisians_trainer", 4)``
+         :const:`"input"`, :const:`"modify_worker"`    **worker_name**    (*string*),           ``wl.Descriptions():modify_unit("productionsite", "frisians_barracks", "input",    1.0
+                                                       **new_amount**     (*int*)               "modify_worker", "frisians_carrier", 4)``
+         :const:`"input"`, :const:`"remove_worker"`    **worker_name**    (*string*)            ``wl.Descriptions():modify_unit("productionsite", "frisians_barracks", "input",    1.0
+                                                                                                "remove_worker", "frisians_carrier")``
+         :const:`"programs"`, :const:`"set"`           **program_name**   (*string*),           ``wl.Descriptions():modify_unit("productionsite", "frisians_honey_bread_bakery",   1.0
+                                                       **program_table**  (*table*)             "programs", "set", "main", {
+                                                                                                descname = _("working"), actions = {
+                                                                                                "call=bake_honey",
+                                                                                                "call=bake_normal",
+                                                                                                "return=skipped"
+                                                                                                }})``
+         ============================================  =======================================  =================================================================================  =============
 
       .. table:: ``"trainingsite"``
          :name: trainingsite
          :width: 100%
-         :widths: 40,50,10
+         :widths: 15,25,50,10
          :align: left
 
-         ============================================  =======================================  =============
-         Property descriptor                           Values                                   Since version
-         ============================================  =======================================  =============
-         :const:`"soldier_capacity"`                   **capacity**       (*int*)               1.1
-         :const:`"trainer_patience"`                   **patience**       (*int*)               1.1
-         ============================================  =======================================  =============
+         ============================================  =======================================  ==========================================================================  =============
+         Property descriptor                           Values                                   Example                                                                     Since version
+         ============================================  =======================================  ==========================================================================  =============
+         :const:`"soldier_capacity"`                   **capacity**       (*int*)               ``wl.Descriptions():modify_unit("trainingsite", "frisians_training_arena",  1.1
+                                                                                                "soldier_capacity", 8)``
+         :const:`"trainer_patience"`                   **patience**       (*int*)               ``wl.Descriptions():modify_unit("trainingsite", "frisians_training_arena",  1.1
+                                                                                                "trainer_patience", 12)``
+         ============================================  =======================================  ==========================================================================  =============
 
       .. table:: ``"militarysite"``
          :name: militarysite
          :width: 100%
-         :widths: 40,50,10
+         :widths: 15,25,50,10
          :align: left
 
-         ============================================  =======================================  =============
-         Property descriptor                           Values                                   Since version
-         ============================================  =======================================  =============
-         :const:`"conquers"`                           **radius**         (*int*)               1.1
-         :const:`"heal_per_second"`                    **amount**         (*int*)               1.1
-         :const:`"max_soldiers"`                       **amount**         (*int*)               1.1
-         ============================================  =======================================  =============
+         ============================================  =======================================  ====================================================================  =============
+         Property descriptor                           Values                                   Example                                                               Since version
+         ============================================  =======================================  ====================================================================  =============
+         :const:`"conquers"`                           **radius**         (*int*)               ``wl.Descriptions():modify_unit("militarysite", "frisians_outpost",   1.1
+                                                                                                "conquers", 8)``
+         :const:`"heal_per_second"`                    **amount**         (*int*)               ``wl.Descriptions():modify_unit("militarysite", "frisians_outpost",   1.1
+                                                                                                "heal_per_second", 180)``
+         :const:`"max_soldiers"`                       **amount**         (*int*)               ``wl.Descriptions():modify_unit("militarysite", "frisians_outpost",   1.1
+                                                                                                "max_soldiers", 5)``
+         ============================================  =======================================  ====================================================================  =============
 
       .. table:: ``"warehouse"``
          :name: warehouse
          :width: 100%
-         :widths: 40,50,10
+         :widths: 15,25,50,10
          :align: left
 
-         ============================================  =======================================  =============
-         Property descriptor                           Values                                   Since version
-         ============================================  =======================================  =============
-         :const:`"heal_per_second"`                    **amount**         (*int*)               1.1
-         :const:`"conquers"`                           **radius**         (*int*)               1.1
-         :const:`"max_garrison"`                       **amount**         (*int*)               1.2
-         ============================================  =======================================  =============
+         ============================================  =======================================  ====================================================================  =============
+         Property descriptor                           Values                                   Example                                                               Since version
+         ============================================  =======================================  ====================================================================  =============
+         :const:`"heal_per_second"`                    **amount**         (*int*)               ``wl.Descriptions():modify_unit("warehouse", "frisians_warehouse",    1.1
+                                                                                                "heal_per_second", 220)``
+         :const:`"conquers"`                           **radius**         (*int*)               ``wl.Descriptions():modify_unit("warehouse", "frisians_warehouse",    1.1
+                                                                                                "conquers", 7)``
+         :const:`"max_garrison"`                       **amount**         (*int*)               ``wl.Descriptions():modify_unit("warehouse", "frisians_warehouse",    1.2
+                                                                                                "max_garrison", 10)``
+         ============================================  =======================================  ====================================================================  =============
 
       .. table:: ``"tribe"``
          :name: tribe
          :width: 100%
-         :widths: 40,50,10
+         :widths: 15,25,50,10
          :align: left
 
-         ============================================  =======================================  =============
-         Property descriptor                           Values                                   Since version
-         ============================================  =======================================  =============
-         :const:`"add_ware"`                           **ware_name**       (*string*),          1.0
-                                                       **menu_column**     (*int*),
-                                                       **target_quantity** (*int* or *nil*),
-                                                       **preciousness**    (*int*),
+         ============================================  =======================================  ========================================================================  =============
+         Property descriptor                           Values                                   Example                                                                   Since version
+         ============================================  =======================================  ========================================================================  =============
+         :const:`"add_ware"`                           **ware_name**       (*string*),          ``wl.Descriptions():modify_unit("tribe", "frisians", "add_ware", "rye",   1.0
+                                                       **menu_column**     (*int*),             1, nil,1, { helptexts = { purpose =
+                                                       **target_quantity** (*int* or *nil*),    _("Rye is used to bake bread. It needs to be ground into flour first.")
+                                                       **preciousness**    (*int*),             }})``
                                                        **helptexts**       (*table*)
-         :const:`"add_worker"`                         **worker_name**     (*string*),          1.0
-                                                       **menu_column**     (*int*),
-                                                       **target_quantity** (*int* or *nil*),
-                                                       **preciousness**    (*int* or *nil*),
+         :const:`"add_worker"`                         **worker_name**     (*string*),          ``wl.Descriptions():modify_unit("tribe", "frisians", "add_worker",        1.0
+                                                       **menu_column**     (*int*),             "frisians_miller", 2, nil, nil, { helptexts = { purpose =
+                                                       **target_quantity** (*int* or *nil*),    _("The miller grinds barley and rye into flour.")
+                                                       **preciousness**    (*int* or *nil*),    }})``
                                                        **helptexts**       (*table*)
-         :const:`"add_building"`                       **building_name**   (*string*),          1.0
-                                                       **helptexts**       (*table*)
-         :const:`"add_immovable"`                      **immovable_name**  (*string*),          1.0
-                                                       **helptexts**       (*table*)
-         ============================================  =======================================  =============
+         :const:`"add_building"`                       **building_name**   (*string*),          ``wl.Descriptions():modify_unit("tribe", "frisians", "add_building",      1.0
+                                                       **helptexts**       (*table*)            "frisians_rye_farm", { helptexts = { purpose =
+                                                                                                _("The rye farm sows and harvests rye.")
+                                                                                                }})``
+         :const:`"add_immovable"`                      **immovable_name**  (*string*),          ``wl.Descriptions():modify_unit("tribe", "frisians", "add_immovable",     1.0
+                                                       **helptexts**       (*table*)            "ryefield_small", { helptexts = { purpose =
+                                                                                                _("This rye field is growing.")
+                                                                                                }})``
+         ============================================  =======================================  ========================================================================  =============
 
       Example to add a new worker to an existing tribe; the worker will be appended to the 2nd
       column in the workers displays (stock menu, warehouse window, economy options), and have

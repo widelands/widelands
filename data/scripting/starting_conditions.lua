@@ -39,7 +39,7 @@ include "scripting/ui.lua"
 function sleep_then_goto(player, sleeptime, field)
    run(function()
       sleep(sleeptime)
-      if player.number == wl.Game().interactive_player then scroll_to_field(field) end
+      if player.number == wl.Game().interactive_player then scroll_to_field(field, true) end
    end)
 end
 
