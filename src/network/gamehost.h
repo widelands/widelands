@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2023 by the Widelands Development Team
+ * Copyright (C) 2008-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -169,7 +169,8 @@ private:
 	void handle_changeinit(const Client& client, RecvPacket& r);
 	void handle_changeposition(const Client& client, RecvPacket& r);
 	void handle_nettime(uint32_t client_num, RecvPacket& r);
-	void handle_playercommmand(uint32_t client_num, Client& client, RecvPacket& r);
+	void handle_playercommand(uint32_t client_num, Client& client, RecvPacket& r);
+	void handle_custom_naming_lists(Client& client, RecvPacket& r);
 	void handle_syncreport(uint32_t client_num, Client& client, RecvPacket& r);
 	void handle_chat(Client& client, RecvPacket& r);
 	void handle_speed(Client& client, RecvPacket& r);

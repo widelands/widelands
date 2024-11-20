@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  */
 
 #include "ui_basic/checkbox.h"
+
+#include <cassert>
 
 #include <SDL_mouse.h>
 
@@ -40,10 +42,11 @@ namespace UI {
  */
 Statebox::Statebox(Panel* const parent,
                    PanelStyle s,
+                   const std::string& name,
                    Vector2i const p,
                    const Image* pic,
                    const std::string& tooltip_text)
-   : Panel(parent, s, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
+   : Panel(parent, s, name, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(pic),
      rendered_text_(nullptr) {
@@ -57,16 +60,17 @@ Statebox::Statebox(Panel* const parent,
 
 static inline std::string get_checkbox_graphics(const PanelStyle& s) {
 	return s == PanelStyle::kWui ? "images/ui_basic/checkbox_light.png" :
-                                  "images/ui_basic/checkbox_dark.png";
+	                               "images/ui_basic/checkbox_dark.png";
 }
 
 Statebox::Statebox(Panel* const parent,
                    PanelStyle s,
+                   const std::string& name,
                    Vector2i const p,
                    const std::string& label_text,
                    const std::string& tooltip_text,
                    int width)
-   : Panel(parent, s, p.x, p.y, std::max(width, kStateboxSize), kStateboxSize, tooltip_text),
+   : Panel(parent, s, name, p.x, p.y, std::max(width, kStateboxSize), kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(g_image_cache->get(get_checkbox_graphics(panel_style_))),
      rendered_text_(nullptr),
@@ -86,17 +90,13 @@ void Statebox::layout() {
 		int w = get_w();
 		int h = kStateboxSize;
 		int pic_width = kStateboxSize;
-		if (pic_graphics_ != nullptr) {
-			w = std::max(pic_graphics_->width(), w);
-			h = pic_graphics_->height();
-			pic_width = pic_graphics_->width();
-		}
+		assert((flags_ & Has_Custom_Picture) == 0);
 		rendered_text_ = label_text_.empty() ?
-                          nullptr :
-                          UI::g_fh->render(as_richtext_paragraph(
+		                    nullptr :
+		                    UI::g_fh->render(as_richtext_paragraph(
 		                                        label_text_, panel_style_ == PanelStyle::kFsMenu ?
-                                                              UI::FontStyle::kFsMenuLabel :
-                                                              UI::FontStyle::kWuiLabel),
+		                                                        UI::FontStyle::kFsMenuLabel :
+		                                                        UI::FontStyle::kWuiLabel),
 		                                     text_width(get_w(), pic_width));
 		if (rendered_text_) {
 			w = std::max(rendered_text_->width() + kPadding + pic_width, w);
@@ -122,7 +122,7 @@ void Statebox::set_enabled(bool const enabled) {
 
 	if ((flags_ & Has_Custom_Picture) == 0) {
 		pic_graphics_ = g_image_cache->get(enabled ? get_checkbox_graphics(panel_style_) :
-                                                   "images/ui_basic/checkbox.png");
+		                                             "images/ui_basic/checkbox.png");
 		set_flags(Is_Highlighted, ((flags_ & Is_Highlighted) != 0) && ((flags_ & Is_Enabled) != 0));
 	}
 }
@@ -144,7 +144,7 @@ void Statebox::set_state(bool const on, const bool send_signal) {
 
 std::vector<Recti> Statebox::focus_overlay_rects() {
 	return (flags_ & Has_Custom_Picture) != 0 ? Panel::focus_overlay_rects(1, 1, -1) :
-                                               Panel::focus_overlay_rects();
+	                                            Panel::focus_overlay_rects();
 }
 
 /**

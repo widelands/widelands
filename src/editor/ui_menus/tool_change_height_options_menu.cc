@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,8 +31,17 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
    : EditorToolOptionsMenu(parent, registry, 350, 100, _("Height Tools Options"), increase_tool),
      eia_(parent),
      increase_tool_(increase_tool),
-     box_(this, UI::PanelStyle::kWui, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
+     box_(this,
+          UI::PanelStyle::kWui,
+          "main_box",
+          hmargin(),
+          vmargin(),
+          UI::Box::Vertical,
+          0,
+          0,
+          vspacing()),
      change_by_(&box_,
+                "change_by",
                 0,
                 0,
                 get_inner_w() - 2 * hmargin(),
@@ -45,6 +54,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
                 UI::SpinBox::Units::kNone,
                 UI::SpinBox::Type::kSmall),
      set_to_(&box_,
+             "set_to",
              0,
              0,
              get_inner_w() - 2 * hmargin(),

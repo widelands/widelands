@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2023 by the Widelands Development Team
+ * Copyright (C) 2003-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,8 +30,14 @@ namespace UI {
  * bottom).
  */
 struct IconGrid : public Panel {
-	IconGrid(
-	   Panel* parent, PanelStyle, int32_t x, int32_t y, int32_t cellw, int32_t cellh, int32_t cols);
+	IconGrid(Panel* parent,
+	         PanelStyle,
+	         const std::string& name,
+	         int32_t x,
+	         int32_t y,
+	         int32_t cellw,
+	         int32_t cellh,
+	         int32_t cols);
 
 	Notifications::Signal<int32_t> icon_clicked;
 	Notifications::Signal<int32_t> mouseout;

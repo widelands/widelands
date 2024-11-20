@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2023 by the Widelands Development Team
+ * Copyright (C) 2008-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -86,6 +86,12 @@ public:
 	// Return true if this node should be returned by find_fields()
 	[[nodiscard]] bool accept(const EditorGameBase& map, const FCoords& coord) const {
 		return capsule->accept(map, coord);
+	}
+};
+
+struct FindNodeAlwaysTrue {
+	[[nodiscard]] bool accept(const EditorGameBase&, const FCoords&) const {
+		return true;
 	}
 };
 

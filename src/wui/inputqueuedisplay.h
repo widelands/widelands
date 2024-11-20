@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2023 by the Widelands Development Team
+ * Copyright (C) 2010-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/slider.h"
+#include "ui_basic/textarea.h"
 #include "wui/buildingwindow.h"
 
 namespace UI {
@@ -48,6 +49,7 @@ struct PrioritySlider : public HorizontalSlider {
 	               const uint32_t cursor_size = 20,
 	               const bool enabled = true)
 	   : HorizontalSlider(parent,
+	                      "priority_slider",
 	                      x,
 	                      y,
 	                      w,
@@ -99,6 +101,8 @@ public:
 	                  BuildingWindow::CollapsedState* collapsed);
 
 	~InputQueueDisplay() override = default;
+
+	void set_max_icons(size_t);
 
 protected:
 	void think() override;
@@ -156,13 +160,15 @@ private:
 	UI::Button b_decrease_desired_fill_, b_increase_desired_fill_, b_decrease_real_fill_,
 	   b_increase_real_fill_, collapse_;
 	UI::PrioritySlider priority_;
-	UI::Panel spacer_;
+	UI::Panel spacer_, priority_indicator_;
 	const Widelands::WarePriority* slider_was_moved_;
 
 	BuildingWindow::CollapsedState* collapsed_;  ///< Owned by the window creating the input queue
 
 	size_t nr_icons_;
+	size_t max_icons_;
 	std::vector<UI::Icon*> icons_;
+	UI::Textarea total_fill_;
 
 	int32_t fill_index_at(int32_t, int32_t) const;
 	int32_t fill_index_under_mouse_;

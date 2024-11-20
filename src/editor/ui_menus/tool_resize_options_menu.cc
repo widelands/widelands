@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,15 @@ EditorToolResizeOptionsMenu::EditorToolResizeOptionsMenu(EditorInteractive& pare
                                                          UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 260, 200, _("Resize"), resize_tool),
      resize_tool_(resize_tool),
-     box_(this, UI::PanelStyle::kWui, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
+     box_(this,
+          UI::PanelStyle::kWui,
+          "main_box",
+          hmargin(),
+          vmargin(),
+          UI::Box::Vertical,
+          0,
+          0,
+          vspacing()),
      map_size_box_(box_,
                    UI::PanelStyle::kWui,
                    "tool_resize_map",
@@ -42,6 +50,7 @@ EditorToolResizeOptionsMenu::EditorToolResizeOptionsMenu(EditorInteractive& pare
                    parent.egbase().map().get_height()),
      text_area_(
         &box_,
+        "user_guide",
         0,
         0,
         get_inner_w() - 2 * hmargin(),

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,7 @@ inline ButtonDisableStyle operator|(ButtonDisableStyle a, ButtonDisableStyle b) 
 /// This is simply a button. Override void clicked() to react to the click.
 /// This is all that is needed in most cases, but if there is a need to give a
 /// callback function to the button, there are some templates for that below.
-struct Button : public NamedPanel {
+struct Button : public Panel {
 	enum class VisualState {
 		kRaised,       // Normal raised Button
 		kPermpressed,  // Button will appear pressed
@@ -106,9 +106,7 @@ public:
 	}
 
 	// Expand to fit text
-	// If h == 0, automatically resize for font height and give it a margin.
-	// If w == 0 too, automatically resize for text width too.
-	void expand(int w, int h);
+	void expand();
 
 	bool enabled() const {
 		return enabled_;
@@ -151,6 +149,10 @@ public:
 	Notifications::Signal<> sigmouseout;
 
 protected:
+	void update_template() override;
+
+	bool expand_w_{false};
+	bool expand_h_{false};
 	bool highlighted_;  //  mouse is over the button
 	bool pressed_;      //  mouse is clicked over the button
 	bool enabled_;

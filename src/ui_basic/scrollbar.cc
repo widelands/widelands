@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,13 +41,14 @@ Scrollbar
 Initialize the scrollbar using default values.
 */
 Scrollbar::Scrollbar(Panel* const parent,
+                     const std::string& name,
                      int32_t const x,
                      int32_t const y,
                      uint32_t const w,
                      uint32_t const h,
                      UI::PanelStyle style,
                      bool const horiz)
-   : Panel(parent, style, x, y, w, h),
+   : Panel(parent, style, name, x, y, w, h),
      horizontal_(horiz),
 
      buttonsize_(kSize),
@@ -243,6 +244,8 @@ void Scrollbar::action(Area const area) {
 	case Area::Knob:
 	case Area::None:
 		return;
+	default:
+		NEVER_HERE();
 	}
 
 	pos = static_cast<int32_t>(pos_) + diff;
@@ -269,7 +272,7 @@ void Scrollbar::draw_button(RenderTarget& dst, Area area, const Recti& r) {
 		dst.blitrect_scale(
 		   Rectf(r.origin() + Vector2i((r.w - blit_width) / 2, (r.h - blit_height) / 2), blit_width,
 		         blit_height),
-		   pic, Recti(0, 0, pic->width(), pic->height()), 1., BlendMode::UseAlpha);
+		   pic, pic->rect(), 1., BlendMode::UseAlpha);
 	}
 
 	// Draw border

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # ===- run-clang-tidy.py - Parallel clang-tidy runner ---------*- python -*--===#
 #
@@ -145,6 +145,7 @@ class Cache:
     came from https://github.com/matus-chochlik/ctcache.
 
     No code is copied directly from either.
+
     """
     failed_files_regexp = re.compile(r'^([0-9a-f]{64})\.std(out|err)$')
 
@@ -281,6 +282,7 @@ class Cache:
         Meaning of return values:
 
         found (bool), passed (bool), stdout (string), stderr (string)
+
         """
         if hash in self.passed:
             self.hits += 1
@@ -351,6 +353,7 @@ def pp_hash(file, command, dir):
 
     'command' is the compiler command line for compiling it, and 'directory'
     is the base directory for relative paths in either 'file' or 'command'.
+
     """
     preprocessor_args = []
     pp_args_loaded = shlex.split(command, posix = True)
@@ -494,10 +497,13 @@ def apply_fixes(args, tmpdir):
 
 # List of files with a non-zero return code.
 failed_files = []
+progress_counter = 0
+total_files = 0
 
 def run_tidy(tmpdir, build_path, quiet, queue, lock):
     """Takes filenames out of queue and runs clang-tidy on them."""
     global failed_files
+    global progress_counter
     while True:
         name, command, dir = queue.get()
         hash = None
@@ -538,7 +544,8 @@ def run_tidy(tmpdir, build_path, quiet, queue, lock):
         with lock:
             if tidy_error:
                 failed_files.append(name)
-            sys.stderr.write('\n' + ' '.join(invocation) + '\n')
+            progress_counter += 1
+            sys.stderr.write('\n' + f'{progress_counter}/{total_files}: ' + ' '.join(invocation) + '\n')
             sys.stderr.flush()
             if len(output) > 0:
                 sys.stdout.write(output + '\n')
@@ -737,6 +744,9 @@ def main():
         name = make_absolute(entry['file'], entry['directory'])
         if file_name_re.search(name) and not 'src/third_party' in name:
             files.append((name, entry['command'], entry['directory']))
+
+    global total_files
+    total_files = len(files)
 
     return_code = 0
     lock = threading.Lock()

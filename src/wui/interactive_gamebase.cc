@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2023 by the Widelands Development Team
+ * Copyright (C) 2007-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,6 +36,7 @@
 #include "ui_basic/toolbar_setup.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
+#include "wui/fieldaction.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_client_disconnected.h"
 #include "wui/game_diplomacy_menu.h"
@@ -46,6 +47,7 @@
 #include "wui/info_panel.h"
 #include "wui/interactive_player.h"
 #include "wui/toolbar.h"
+#include "wui/waresdisplay.h"
 #include "wui/watchwindow.h"
 
 namespace {
@@ -85,6 +87,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                    [this](ShowHideEntry t) { showhide_menu_selected(t); }),
      grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png")),
      special_coords_marker_pic_(g_image_cache->get("images/wui/overlays/special.png")),
+     pause_on_inactivity_(get_config_int("pause_game_on_inactivity", 0) * 60 * 1000),
      can_restart_(g.is_replay() || !g.list_of_scenarios().empty()),
      mainmenu_(toolbar(),
                "dropdown_menu_main",
@@ -130,13 +133,12 @@ void InteractiveGameBase::add_main_menu() {
 
 void InteractiveGameBase::rebuild_main_menu() {
 	mainmenu_.clear();
-#ifndef NDEBUG  //  only in debug builds
-	/** TRANSLATORS: An entry in the game's main menu */
-	mainmenu_.add(_("Script Console"), MainMenuEntry::kScriptConsole,
-	              g_image_cache->get("images/wui/menus/lua.png"), false,
-	              /** TRANSLATORS: Tooltip for Script Console in the game's main menu */
-	              "", pgettext("hotkey", "Ctrl+Shift+Space"));
-#endif
+	if (g_allow_script_console) {
+		/** TRANSLATORS: An entry in the game's main menu */
+		mainmenu_.add(_("Script Console"), MainMenuEntry::kScriptConsole,
+		              g_image_cache->get("images/wui/menus/lua.png"), false, "",
+		              shortcut_string_for(KeyboardShortcut::kCommonDebugConsole, false));
+	}
 
 	menu_windows_.sound_options.open_window = [this] {
 		new GameOptionsSoundMenu(*this, menu_windows_.sound_options);
@@ -196,12 +198,11 @@ void InteractiveGameBase::rebuild_main_menu() {
 
 void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 	switch (entry) {
-#ifndef NDEBUG  //  only in debug builds
 	case MainMenuEntry::kScriptConsole: {
+		assert(g_allow_script_console);
 		GameChatMenu::create_script_console(
 		   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
 	} break;
-#endif
 	case MainMenuEntry::kOptions: {
 		menu_windows_.sound_options.toggle();
 	} break;
@@ -223,6 +224,8 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 			new GameExitConfirmBox(*this, *this);
 		}
 	} break;
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -236,7 +239,7 @@ void InteractiveGameBase::handle_restart(const bool force) {
 		GameExitConfirmBox* gecb =
 		   new GameExitConfirmBox(*this, *this, r ? _("Restart Replay") : _("Restart Scenario"),
 		                          r ? _("Are you sure you wish to restart this replay?") :
-                                    _("Are you sure you wish to restart this scenario?"));
+		                              _("Are you sure you wish to restart this scenario?"));
 		gecb->ok.connect([this, next] { game().set_next_game_to_load(next); });
 	}
 }
@@ -278,28 +281,28 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideCensus, false));
 
 	showhidemenu_.add(get_display_flag(dfShowStatistics) ?
-                         /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-                          * building status labels are shown */
-                         _("Hide Status") :
-                         _("Show Status"),
+	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+	                      * building status labels are shown */
+	                     _("Hide Status") :
+	                     _("Show Status"),
 	                  ShowHideEntry::kStatistics,
 	                  g_image_cache->get("images/wui/menus/toggle_statistics.png"), false, "",
 	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideStats, false));
 
 	showhidemenu_.add(get_display_flag(dfShowSoldierLevels) ?
-                         /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-                          * level information is shown above soldiers' heads */
-                         _("Hide Soldier Levels") :
-                         _("Show Soldier Levels"),
+	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+	                      * level information is shown above soldiers' heads */
+	                     _("Hide Soldier Levels") :
+	                     _("Show Soldier Levels"),
 	                  ShowHideEntry::kSoldierLevels,
 	                  g_image_cache->get("images/wui/menus/toggle_soldier_levels.png"), false, "",
 	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideSoldiers, false));
 
 	showhidemenu_.add(get_display_flag(dfShowBuildings) ?
-                         /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-                          * buildings are greyed out */
-                         _("Hide Buildings") :
-                         _("Show Buildings"),
+	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+	                      * buildings are greyed out */
+	                     _("Hide Buildings") :
+	                     _("Show Buildings"),
 	                  ShowHideEntry::kBuildings,
 	                  g_image_cache->get("images/wui/stats/genstats_nrbuildings.png"), false, "",
 	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideBuildings, false));
@@ -327,6 +330,8 @@ void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
 	case ShowHideEntry::kWorkareaOverlap: {
 		set_display_flag(dfShowWorkareaOverlap, !get_display_flag(dfShowWorkareaOverlap));
 	} break;
+	default:
+		NEVER_HERE();
 	}
 	showhidemenu_.toggle();
 }
@@ -382,14 +387,14 @@ void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 	case GameSpeedEntry::kIncrease: {
 		increase_gamespeed((SDL_GetModState() & KMOD_SHIFT) != 0 ? kSpeedSlow :
 		                   (SDL_GetModState() & KMOD_CTRL) != 0  ? kSpeedFast :
-                                                                 kSpeedDefault);
+		                                                           kSpeedDefault);
 		// Keep the window open so that the player can click this multiple times
 		gamespeedmenu_.toggle();
 	} break;
 	case GameSpeedEntry::kDecrease: {
 		decrease_gamespeed((SDL_GetModState() & KMOD_SHIFT) != 0 ? kSpeedSlow :
 		                   (SDL_GetModState() & KMOD_CTRL) != 0  ? kSpeedFast :
-                                                                 kSpeedDefault);
+		                                                           kSpeedDefault);
 		// Keep the window open so that the player can click this multiple times
 		gamespeedmenu_.toggle();
 	} break;
@@ -399,6 +404,8 @@ void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 			gamespeedmenu_.toggle();
 		}
 	} break;
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -517,7 +524,7 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 		if (matches_shortcut(KeyboardShortcut::kCommonLoad, code)) {
 			new GameMainMenuSaveGame(*this, menu_windows_.loadgame,
 			                         game().is_replay() ? GameMainMenuSaveGame::Type::kLoadReplay :
-                                                       GameMainMenuSaveGame::Type::kLoadSavegame);
+			                                              GameMainMenuSaveGame::Type::kLoadSavegame);
 			return true;
 		}
 		if (can_restart_ && matches_shortcut(KeyboardShortcut::kInGameRestart, code)) {
@@ -541,7 +548,13 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 	}
 
 	if (code.sym == SDLK_ESCAPE) {
-		mainmenu_.toggle();
+		if (in_road_building_mode(RoadBuildingType::kRoad) ||
+		    in_road_building_mode(RoadBuildingType::kWaterway)) {
+			abort_build_road();
+		} else {
+			mainmenu_.toggle();
+		}
+
 		return true;
 	}
 
@@ -559,6 +572,19 @@ bool InteractiveGameBase::handle_mousewheel(int32_t x, int32_t y, uint16_t modst
 		increase_gamespeed(kSpeedSlow * change);
 	}
 	return true;
+}
+
+void InteractiveGameBase::think() {
+	InteractiveBase::think();
+
+	if (pause_on_inactivity_ != 0 &&
+	    static_cast<int>(SDL_GetTicks() - UI::Panel::time_of_last_user_activity()) >
+	       pause_on_inactivity_) {
+		Widelands::Game& g = game();
+		if (g.game_controller() != nullptr && !g.game_controller()->is_paused()) {
+			toggle_game_paused();
+		}
+	}
 }
 
 /// \return a pointer to the running \ref Game instance.
@@ -632,7 +658,16 @@ void InteractiveGameBase::set_sel_pos(Widelands::NodeAndTriangle<> const center)
 
 	if (imm->descr().type() == Widelands::MapObjectType::IMMOVABLE) {
 		// Trees, Resource Indicators, fields ...
-		return set_tooltip(imm->descr().descname());
+		Widelands::Buildcost cost;
+		dynamic_cast<Widelands::Immovable&>(*imm).construct_remaining_buildcost(&cost);
+		if (cost.empty()) {
+			return set_tooltip(imm->descr().descname());
+		}
+		return set_tooltip(imm->descr().descname() + "<br>" +
+		                   g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal)
+		                      .header_font()
+		                      .as_font_tag(_("Remaining construction costs:")) +
+		                   "<br>" + waremap_to_richtext(imm->owner().tribe(), cost));
 	}
 	if (upcast(Widelands::ProductionSite, productionsite, imm)) {
 		// No productionsite tips for hostile players
@@ -670,6 +705,11 @@ void InteractiveGameBase::start() {
 		if (game().get_player(pln) != nullptr) {
 			map_view()->scroll_to_field(game().map().get_starting_pos(pln), MapView::Transition::Jump);
 		}
+
+		if (g_allow_script_console) {
+			// Let's warn all users once again
+			broadcast_cheating_message("CAN_CHEAT");
+		}
 	}
 }
 
@@ -677,26 +717,54 @@ void InteractiveGameBase::start() {
  * See if we can reasonably open a ship window at the current selection position.
  * If so, do it and return true; otherwise, return false.
  */
-bool InteractiveGameBase::try_show_ship_window() {
+bool InteractiveGameBase::try_show_ship_windows() {
 	const Widelands::Map& map = game().map();
 	Widelands::Area<Widelands::FCoords> area(map.get_fcoords(get_sel_pos().node), 1);
 
-	if ((area.field->nodecaps() & Widelands::MOVECAPS_SWIM) == 0) {
-		return false;
-	}
-
-	std::vector<Widelands::Bob*> ships;
-	if (map.find_bobs(egbase(), area, &ships, Widelands::FindBobShip()) != 0u) {
-		for (Widelands::Bob* ship : ships) {
+	std::vector<Widelands::Bob*> all_ships;
+	std::vector<Widelands::Ship*> manageable;
+	std::vector<Widelands::Ship*> attackable;
+	if (map.find_bobs(egbase(), area, &all_ships, Widelands::FindBobShip()) != 0u) {
+		for (Widelands::Bob* bob : all_ships) {
+			upcast(Widelands::Ship, ship, bob);
+			assert(ship != nullptr);  // FindBobShip should have returned only ships
 			if (can_see(ship->owner().player_number())) {
-				// FindBobShip should have returned only ships
-				assert(ship->descr().type() == Widelands::MapObjectType::SHIP);
-				show_ship_window(dynamic_cast<Widelands::Ship*>(ship));
-				return true;
+				manageable.push_back(ship);
+			} else if (get_player() != nullptr && get_player()->is_hostile(ship->owner()) &&
+			           ship->can_be_attacked()) {
+				attackable.push_back(ship);
 			}
 		}
 	}
-	return false;
+
+	if (manageable.empty() && attackable.empty()) {
+		return false;  // No ships nearby.
+	}
+
+	if (manageable.size() + attackable.size() == 1) {
+		// Exactly one ship nearby, open its appropriate window.
+		if (attackable.empty()) {
+			show_ship_window(manageable.front());
+		} else {
+			show_attack_window(get_sel_pos().node, attackable.front(), true);
+		}
+		return true;
+	}
+
+	if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+		// Open all applicable windows if Ctrl is held.
+		for (Widelands::Ship* ship : manageable) {
+			show_ship_window(ship);
+		}
+		for (Widelands::Ship* ship : attackable) {
+			show_attack_window(get_sel_pos().node, ship, true);
+		}
+		return true;
+	}
+
+	// Show a selection dialog.
+	show_ship_selection_window(this, &fieldaction_, get_sel_pos().node, manageable, attackable);
+	return true;
 }
 
 void InteractiveGameBase::show_game_summary() {

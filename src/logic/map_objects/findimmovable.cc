@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2023 by the Widelands Development Team
+ * Copyright (C) 2008-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,7 @@
 #include "logic/map_objects/findimmovable.h"
 
 #include "base/macros.h"
+#include "economy/economy.h"
 #include "economy/flag.h"
 #include "logic/map.h"
 #include "logic/map_objects/immovable.h"
@@ -35,6 +36,16 @@ struct FindImmovableAlwaysTrueImpl {
 const FindImmovable& find_immovable_always_true() {
 	static FindImmovable alwaystrue = FindImmovableAlwaysTrueImpl();
 	return alwaystrue;
+}
+
+bool FindImmovableAnd::accept(const BaseImmovable& i) const {
+	return std::all_of(
+	   functors_.begin(), functors_.end(), [&i](const FindImmovable& f) { return f.accept(i); });
+}
+
+bool FindImmovableOr::accept(const BaseImmovable& i) const {
+	return std::any_of(
+	   functors_.begin(), functors_.end(), [&i](const FindImmovable& f) { return f.accept(i); });
 }
 
 bool FindImmovableSize::accept(const BaseImmovable& imm) const {
@@ -55,14 +66,16 @@ bool FindImmovablePlayerImmovable::accept(const BaseImmovable& imm) const {
 }
 
 bool FindImmovablePlayerMilitarySite::accept(const BaseImmovable& imm) const {
-	if (upcast(MilitarySite const, ms, &imm)) {
+	if (imm.descr().type() == MapObjectType::MILITARYSITE) {
+		upcast(MilitarySite const, ms, &imm);
 		return &ms->owner() == &player;
 	}
 	return false;
 }
 
 bool FindImmovableAttackTarget::accept(const BaseImmovable& imm) const {
-	if (upcast(Building const, b, &imm)) {
+	if (imm.descr().type() >= MapObjectType::BUILDING) {
+		upcast(Building const, b, &imm);
 		return b->attack_target() != nullptr;
 	}
 	return false;
@@ -74,25 +87,42 @@ bool FindImmovableAttackTarget::accept(const BaseImmovable& imm) const {
 // msites are visible.
 
 bool FindForeignMilitarysite::accept(const BaseImmovable& imm) const {
-	if (upcast(MilitarySite const, ms, &imm)) {
+	if (imm.descr().type() == MapObjectType::MILITARYSITE) {
+		upcast(MilitarySite const, ms, &imm);
 		return &ms->owner() != &player;
 	}
 	return false;
 }
 
 bool FindImmovableByDescr::accept(const BaseImmovable& baseimm) const {
-	if (upcast(const Immovable, imm, &baseimm)) {
-		if (&imm->descr() == &descr) {
-			return true;
+	return &baseimm.descr() == &descr;
+}
+
+bool FindImmovableByName::accept(const BaseImmovable& baseimm) const {
+	return baseimm.descr().name() == name_;
+}
+
+bool FindImmovableNotReserved::accept(const BaseImmovable& i) const {
+	return !i.is_reserved_by_worker();
+}
+
+bool FindFlagOf::accept(const BaseImmovable& baseimm) const {
+	if (baseimm.descr().type() == MapObjectType::FLAG) {
+		upcast(const Flag, flag, &baseimm);
+		if (Building* building = flag->get_building(); building != nullptr) {
+			if (finder.accept(*building)) {
+				return true;
+			}
 		}
 	}
 	return false;
 }
 
-bool FindFlagOf::accept(const BaseImmovable& baseimm) const {
-	if (upcast(const Flag, flag, &baseimm)) {
-		if (Building* building = flag->get_building()) {
-			if (finder.accept(*building)) {
+bool FindFlagWithPlayersWarehouse::accept(const BaseImmovable& imm) const {
+	if (imm.descr().type() == MapObjectType::FLAG) {
+		upcast(const Flag, flag, &imm);
+		if (flag->get_owner() == &owner_) {
+			if (!flag->economy(wwWORKER).warehouses().empty()) {
 				return true;
 			}
 		}

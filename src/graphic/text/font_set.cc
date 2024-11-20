@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -217,11 +217,11 @@ FontSets::FontSets() {
 				log_err("Could not read locale fontset for: %s\n", localename.c_str());
 				locale_fontsets.insert(std::make_pair(localename, FontSets::Selector::kDefault));
 			}  // End read locale from table
-		}     // End scan locales directory
+		}  // End scan locales directory
 	} catch (const LuaError& err) {
 		log_err("Could not read locales fontset information from file: %s\n", err.what());
 		return;  // Nothing more can be done now.
-	}           // End read locales table
+	}  // End read locales table
 
 	// Check if all selectors have a fontset
 	for (int i = static_cast<int>(FontSets::Selector::kDefault);

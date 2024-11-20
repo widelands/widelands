@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2023 by the Widelands Development Team
+ * Copyright (C) 2021-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,9 +34,9 @@ ContactForm::ContactForm(AddOnsCtrl& ctrl)
                 100,
                 _("Contact Form")),
      ctrl_(ctrl),
-     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     buttons_box_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     message_(new UI::MultilineEditbox(&box_, 0, 0, 400, 200, UI::PanelStyle::kFsMenu)),
+     box_(this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical),
+     buttons_box_(&box_, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal),
+     message_(new UI::MultilineEditbox(&box_, "message", 0, 0, 400, 200, UI::PanelStyle::kFsMenu)),
      ok_(&buttons_box_,
          "ok",
          0,

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2023 by the Widelands Development Team
+ * Copyright (C) 2020-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,15 +18,15 @@
 
 #include "wui/info_panel.h"
 
-#include <iomanip>
 #include <memory>
-#include <sstream>
 
 #include <SDL_timer.h>
 
+#include "base/time_string.h"
 #include "graphic/font_handler.h"
 #include "graphic/text_layout.h"
 #include "logic/message_queue.h"
+#include "logic/playercommand.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/toolbar.h"
@@ -38,6 +38,7 @@ constexpr int16_t kMessagePreviewMaxLifetime = 15 * 1000;  // show messages for 
 MessagePreview::MessagePreview(InfoPanel* i, const std::string& text, const std::string& tooltip)
    : UI::Textarea(i,
                   UI::PanelStyle::kWui,
+                  "message_preview",
                   UI::FontStyle::kWuiGameSpeedAndCoordinates,
                   0,
                   0,
@@ -61,17 +62,22 @@ MessagePreview::MessagePreview(InfoPanel* i, const Widelands::Message* m, Widela
 }
 
 inline bool MessagePreview::message_still_exists() const {
-	return !(id_.operator bool()) || (owner_.message_queue_ == nullptr) ||
-	       (owner_.message_queue_->count(id_.value()) != 0u);
+	return !id_.valid() || (owner_.message_queue_ == nullptr) ||
+	       (owner_.message_queue_->count(id_.value()) != 0u &&
+	        message_->status() != Widelands::Message::Status::kArchived);
 }
 
 void MessagePreview::think() {
+	MutexLock m(MutexLock::ID::kMessages);
+
 	if (!message_still_exists() || SDL_GetTicks() - creation_time_ > kMessagePreviewMaxLifetime) {
 		owner_.pop_message(this);
 	}
 }
 
 void MessagePreview::draw(RenderTarget& r) {
+	MutexLock m(MutexLock::ID::kMessages);
+
 	if (!message_still_exists()) {
 		return;
 	}
@@ -103,12 +109,16 @@ void MessagePreview::draw(RenderTarget& r) {
 bool MessagePreview::handle_mousepress(const uint8_t button, int32_t /* x */, int32_t /* y */) {
 	switch (button) {
 	case SDL_BUTTON_LEFT:  // center view
-		if ((message_ != nullptr) && (message_->position().operator bool())) {
+		if ((message_ != nullptr) && (message_->position().valid())) {
 			owner_.ibase_.map_view()->scroll_to_field(
 			   message_->position(), MapView::Transition::Smooth);
 		}
 		break;
-	case SDL_BUTTON_MIDDLE:  // hide message
+	case SDL_BUTTON_MIDDLE:  // hide and delete message
+		if (owner_.iplayer_ != nullptr && message_ != nullptr) {
+			owner_.iplayer_->game().send_player_command(new Widelands::CmdMessageSetStatusArchived(
+			   owner_.iplayer_->game().get_gametime(), owner_.iplayer_->player_number(), id_));
+		}
 		owner_.pop_message(this);
 		break;
 	case SDL_BUTTON_RIGHT: {  // open message menu
@@ -125,9 +135,9 @@ bool MessagePreview::handle_mousepress(const uint8_t button, int32_t /* x */, in
 }
 
 InfoPanel::InfoPanel(InteractiveBase& ib)
-   : UI::Panel(&ib, UI::PanelStyle::kWui, 0, 0, 0, 0),
+   : UI::Panel(&ib, UI::PanelStyle::kWui, "info_panel", 0, 0, 0, 0),
      ibase_(ib),
-     snap_target_panel_(&ibase_, UI::PanelStyle::kWui, 0, 0, 0, 0),
+     snap_target_panel_(&ibase_, UI::PanelStyle::kWui, "snap_target", 0, 0, 0, 0),
      toggle_mode_(this,
                   "mode",
                   0,
@@ -141,6 +151,7 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
                   UI::ButtonStyle::kWuiMenu),
      text_time_speed_(this,
                       UI::PanelStyle::kWui,
+                      "label_time_speed",
                       UI::FontStyle::kWuiGameSpeedAndCoordinates,
                       0,
                       0,
@@ -150,6 +161,7 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
                       UI::Align::kLeft),
      text_fps_(this,
                UI::PanelStyle::kWui,
+               "label_fps",
                UI::FontStyle::kWuiGameSpeedAndCoordinates,
                0,
                0,
@@ -159,6 +171,7 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
                UI::Align::kLeft),
      text_coords_(this,
                   UI::PanelStyle::kWui,
+                  "label_coords",
                   UI::FontStyle::kWuiGameSpeedAndCoordinates,
                   0,
                   0,
@@ -423,11 +436,7 @@ void InfoPanel::set_speed_string(const std::string& t) {
 void InfoPanel::update_time_speed_string() {
 	std::string realtime;
 	if (draw_real_time_) {
-		std::time_t t = std::time(nullptr);
-		std::tm tm = *std::localtime(&t);
-		std::ostringstream oss("");
-		oss << std::put_time(&tm, "%X");
-		realtime = oss.str();
+		realtime = realtimestring();
 	}
 
 	std::vector<std::string*> non_empty;
@@ -446,14 +455,14 @@ void InfoPanel::update_time_speed_string() {
 		break;
 	case 2:
 		text_time_speed_.set_text(format(
-		   /** TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime · Gamespeed)
+		   /** TRANSLATORS: (Gametime • Realtime) or (Gametime • Gamespeed) or (Realtime • Gamespeed)
 		    */
-		   _("%1$s · %2$s"), *non_empty[0], *non_empty[1]));
+		   _("%1$s • %2$s"), *non_empty[0], *non_empty[1]));
 		break;
 	case 3:
 		text_time_speed_.set_text(format(
-		   /** TRANSLATORS: Gametime · Realtime · Gamespeed */
-		   _("%1$s · %2$s · %3$s"), *non_empty[0], *non_empty[1], *non_empty[2]));
+		   /** TRANSLATORS: Gametime • Realtime • Gamespeed */
+		   _("%1$s • %2$s • %3$s"), *non_empty[0], *non_empty[1], *non_empty[2]));
 		break;
 	default:
 		NEVER_HERE();
@@ -494,11 +503,11 @@ void InfoPanel::think() {
 		if (static_cast<uint8_t>(p->get_z()) < static_cast<uint8_t>(UI::Panel::ZOrder::kInfoPanel) &&
 		    p->get_x() < snap_target_panel_.get_w() &&
 		    (on_top_ ? (p->get_y() < snap_target_panel_.get_y() + snap_target_panel_.get_h()) :
-                     (p->get_y() + p->get_h() > snap_target_panel_.get_y()))) {
+		               (p->get_y() + p->get_h() > snap_target_panel_.get_y()))) {
 			if (UI::Window* w = dynamic_cast<UI::Window*>(p); w != nullptr && !w->moved_by_user()) {
 				w->set_pos(Vector2i(
 				   w->get_x(), on_top_ ? snap_target_panel_.get_y() + snap_target_panel_.get_h() :
-                                     snap_target_panel_.get_y() - w->get_h()));
+				                         snap_target_panel_.get_y() - w->get_h()));
 			}
 		}
 	}
@@ -560,8 +569,8 @@ void InfoPanel::layout() {
 	snap_target_panel_.set_pos(Vector2i(0, toggle_mode_.get_y()));
 	snap_target_panel_.set_size((display_mode_ == UI::ToolbarDisplayMode::kMinimized ||
 	                             display_mode_ == UI::ToolbarDisplayMode::kOnMouse_Hidden) ?
-                                  toggle_mode_.get_w() :
-                                  w,
+	                               toggle_mode_.get_w() :
+	                               w,
 	                            toggle_mode_.get_h());
 }
 
@@ -571,8 +580,8 @@ void InfoPanel::draw(RenderTarget& r) {
 	}
 
 	const int h = display_mode_ == UI::ToolbarDisplayMode::kOnMouse_Hidden ?
-                    kSpacing :
-                    UI::main_toolbar_button_size();
+	                 kSpacing :
+	                 UI::main_toolbar_button_size();
 	r.brighten_rect(Recti(0, on_top_ ? 0 : get_h() - h, get_w(), h), -100);
 
 	r.draw_rect(Recti(0, on_top_ ? h : get_h() - h - 1, get_w(), 1), RGBColor(0, 0, 0));

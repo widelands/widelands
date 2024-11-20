@@ -12,8 +12,10 @@ function _cnt(a)
 end
 
 militarysite_tests = lunit.TestCase("MilitarySite Tests")
+local offset_y = 0
 function militarysite_tests:setup()
-   self.f1 = map:get_field(10,10)
+   self.f1 = map:get_field(6, 5 + offset_y) -- move down, to have remaining bobs on a separate field
+   offset_y = offset_y + 1
 
    self.fortress = player1:place_building("barbarians_fortress", self.f1)
 end
@@ -60,6 +62,13 @@ function militarysite_tests:test_set_soldiers_add_and_remove()
    assert_equal(0, self.fortress:get_soldiers({0,0,0,0}))
    assert_equal(0, self.fortress:get_soldiers({3,0,0,1}))
    assert_equal(1, self.fortress:get_soldiers({3,2,0,1}))
+   -- correct type of bob.descr (inclusive attribute)
+   local soldier_bobs = self.fortress.fields[1].bobs
+   assert_equal(1, #soldier_bobs)
+   assert_equal("barbarians_soldier", soldier_bobs[1].descr.name)
+   assert_equal(3, soldier_bobs[1].health_level)
+   assert_equal("soldier", soldier_bobs[1].descr.type_name)
+   assert_true(soldier_bobs[1].descr.max_health_level > 0)
 end
 
 function militarysite_tests:test_set_soldiers_all_at_once()

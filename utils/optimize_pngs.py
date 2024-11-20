@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 
 """Walk a directory and use command line tools to optimize all png files in
@@ -23,6 +23,7 @@ class Tool:
     """Command line tool for optimizing PNG file.
 
     Searches for the tool and defines its call parameters.
+
     """
 
     def __init__(self, name, options, inplace=False):
@@ -51,6 +52,7 @@ class Tool:
         overwrites the input file.
 
         Otherwise, returns false and does nothing
+
         """
         log('%s:' % (self._name))
         _file_handle1, temp_in = tempfile.mkstemp(self._name, 'png')
@@ -94,6 +96,7 @@ def collect_pngs(directory, prefix):
     """Search for all pngs in the subdir.
 
     Restrict to filename prefix if it is not empty.
+
     """
     pngs = []
     for root, dirs, files in os.walk(directory):

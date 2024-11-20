@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 
 """Simple script to check that the build dependencies in the CMakeLists.txt
@@ -6,6 +6,7 @@ files are correct.
 
 It relies on the established build rule formatting conventions in the
 code base.
+
 """
 
 from collections import defaultdict
@@ -73,7 +74,7 @@ def extract_includes(srcdir, source):
 __USES_INCLUDES = defaultdict(str)
 __USES_INCLUDES['USES_OPENGL'] = r'(<glbinding\/\w+\.h>)|(<GL\/glew\.h>)'
 __USES_INCLUDES['USES_ICU'] = r'<unicode\/.+\.h>'
-__USES_INCLUDES['USES_INTL'] = r'"third_party\/gettext\/gettext\.h"'
+__USES_INCLUDES['USES_TINYGETTEXT'] = r'"third_party\/tinygettext\/include\/tinygettext\/tinygettext\.hpp"'
 __USES_INCLUDES['USES_PNG'] = r'<png\.h>'
 __USES_INCLUDES['USES_SDL2_IMAGE'] = r'<SDL_image\.h>'
 __USES_INCLUDES['USES_SDL2_MIXER'] = r'<SDL_mixer\.h>'
@@ -187,9 +188,13 @@ def find_source_and_cmake_files(srcdir):
 
 def report_unused_sources(srcdir, sources, owners_of_src):
     unused_sources = sources - set(owners_of_src.keys())
+    allowed = 0
     for src in sorted(unused_sources):
-        print_error(src, 1, '(CRITICAL) File not mentioned in any build rule.')
-    return len(unused_sources) != 0
+        if 'third_party/tinygettext' in src or 'third_party/libmd' in src:
+            allowed += 1
+        else:
+            print_error(src, 1, '(CRITICAL) File not mentioned in any build rule.')
+    return len(unused_sources) > allowed
 
 
 def report_unmentioned_or_unnecessary_dependencies(srcdir, target, includes_by_src, uses_includes_by_src, owners_of_src):

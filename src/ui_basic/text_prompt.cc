@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2023 by the Widelands Development Team
+ * Copyright (C) 2021-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,10 +31,10 @@ TextPrompt::TextPrompt(UI::Panel& parent,
                        const std::string& title,
                        const std::string& text)
    : UI::Window(&parent, s, "text_prompt", 0, 0, 0, 0, title),
-     box_(this, panel_style_, 0, 0, UI::Box::Vertical),
-     content_box_(&box_, panel_style_, 0, 0, UI::Box::Vertical),
-     buttonsbox_(&box_, panel_style_, 0, 0, UI::Box::Horizontal),
-     editbox_(*new UI::EditBox(&box_, 0, 0, 200, panel_style_)),
+     box_(this, panel_style_, "main_box", 0, 0, UI::Box::Vertical),
+     content_box_(&box_, panel_style_, "content_box", 0, 0, UI::Box::Vertical),
+     buttonsbox_(&box_, panel_style_, "buttons_box", 0, 0, UI::Box::Horizontal),
+     editbox_(*new UI::EditBox(&box_, "editbox", 0, 0, 200, panel_style_)),
      ok_(&buttonsbox_,
          "ok",
          0,
@@ -58,9 +58,9 @@ TextPrompt::TextPrompt(UI::Panel& parent,
 	buttonsbox_.add(&ok_, UI::Box::Resizing::kExpandBoth);
 
 	box_.add(
-	   new UI::Textarea(&box_, panel_style_,
+	   new UI::Textarea(&box_, panel_style_, "message",
 	                    s == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelHeading :
-                                                       UI::FontStyle::kWuiInfoPanelHeading,
+	                                                    UI::FontStyle::kWuiInfoPanelHeading,
 	                    text),
 	   UI::Box::Resizing::kFullSize);
 	box_.add_space(kSpacing);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,7 @@ MiniMap::View::View(UI::Panel& parent,
                     uint32_t const /* w */,
                     uint32_t const /* h */,
                     InteractiveBase& ibase)
-   : UI::Panel(&parent, UI::PanelStyle::kWui, x, y, 10, 10),
+   : UI::Panel(&parent, UI::PanelStyle::kWui, "minimap_view", x, y, 10, 10),
      ibase_(ibase),
      pic_map_spot_(g_image_cache->get("images/wui/overlays/map_spot.png")),
 

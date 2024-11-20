@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2023 by the Widelands Development Team
+ * Copyright (C) 2022-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 #include "logic/game.h"
 #include "ui_basic/box.h"
 #include "ui_basic/icon.h"
-#include "ui_basic/listselect.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 

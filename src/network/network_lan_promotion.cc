@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2023 by the Widelands Development Team
+ * Copyright (C) 2004-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -117,6 +117,8 @@ LanBase::LanBase(uint16_t port) : socket_v4(io_service), socket_v6(io_service) {
 #endif
 			start_socket(&socket_v6, asio::ip::udp::v6(), port);
 			// No address to store here. There is only one "broadcast" address for IPv6
+			break;
+		default:
 			break;
 		}
 	}
@@ -383,8 +385,8 @@ LanGamePromoter::LanGamePromoter() : LanBase(kWidelandsLanPromotionPort) {
 	memset(&gameinfo, 0, sizeof(gameinfo));
 	strncpy(gameinfo.magic, "GAME", sizeof(gameinfo.magic));
 
-	gameinfo.version = LAN_PROMOTION_PROTOCOL_VERSION;
-	gameinfo.state = LAN_GAME_OPEN;
+	gameinfo.version = kLanPromotionProtocolVersion;
+	gameinfo.state = kLanGameOpen;
 
 	strncpy(gameinfo.gameversion, build_id().c_str(), sizeof(gameinfo.gameversion) - 1);
 	gameinfo.gameversion[sizeof(gameinfo.gameversion) - 1] = '\0';
@@ -394,7 +396,7 @@ LanGamePromoter::LanGamePromoter() : LanBase(kWidelandsLanPromotionPort) {
 }
 
 LanGamePromoter::~LanGamePromoter() {
-	gameinfo.state = LAN_GAME_CLOSED;
+	gameinfo.state = kLanGameClosed;
 
 	// Don't care about errors at this point
 	broadcast(&gameinfo, sizeof(gameinfo), kWidelandsLanDiscoveryPort);
@@ -419,7 +421,7 @@ void LanGamePromoter::run() {
 
 		verb_log_info("Received %s packet from %s", magic, addr.ip.to_string().c_str());
 
-		if ((strncmp(magic, "QUERY", 6) == 0) && magic[6] == LAN_PROMOTION_PROTOCOL_VERSION) {
+		if ((strncmp(magic, "QUERY", 6) == 0) && magic[6] == kLanPromotionProtocolVersion) {
 			if (!send(&gameinfo, sizeof(gameinfo), addr)) {
 				report_network_error();
 			}
@@ -447,7 +449,7 @@ void LanGameFinder::reset() {
 	opengames.clear();
 
 	strncpy(magic, "QUERY", 8);
-	magic[6] = LAN_PROMOTION_PROTOCOL_VERSION;
+	magic[6] = kLanPromotionProtocolVersion;
 
 	if (!broadcast(magic, 8, kWidelandsLanPromotionPort)) {
 		report_network_error();
@@ -465,7 +467,7 @@ void LanGameFinder::run() {
 
 		verb_log_info("Received %s packet from %s", info.magic, addr.ip.to_string().c_str());
 
-		if (strncmp(info.magic, "GAME", 6) != 0 || info.version != LAN_PROMOTION_PROTOCOL_VERSION) {
+		if (strncmp(info.magic, "GAME", 6) != 0 || info.version != kLanPromotionProtocolVersion) {
 			continue;
 		}
 

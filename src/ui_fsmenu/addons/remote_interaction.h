@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2023 by the Widelands Development Team
+ * Copyright (C) 2021-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -142,7 +142,6 @@ private:
 	UI::TabPanel tabs_;
 	UI::Box box_comments_, box_comment_rows_, box_screenies_, box_screenies_buttons_, box_votes_,
 	   voting_stats_;
-	UI::Panel box_comment_rows_placeholder_;
 
 	UI::MultilineTextarea comments_header_;
 	std::list<std::unique_ptr<CommentRow>> comment_rows_;

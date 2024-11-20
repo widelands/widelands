@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -163,8 +163,8 @@ const Buildcost DismantleSite::count_returned_wares(Building* building) {
 		}
 		const BuildingDescr* former_descr = building->owner().tribe().get_building_descr(pair.first);
 		const Buildcost& return_wares = pair.first != first_idx ?
-                                         former_descr->enhancement_returns_on_dismantle() :
-                                         former_descr->returns_on_dismantle();
+		                                   former_descr->enhancement_returns_on_dismantle() :
+		                                   former_descr->returns_on_dismantle();
 
 		for (const auto& ware : return_wares) {
 			// TODO(GunChleoc): Once we have trading, we might want to return all wares again.
@@ -286,7 +286,7 @@ void DismantleSite::draw(const Time& gametime,
 			   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
 		} else {
 			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(), tanim,
-			                    nullptr, kBuildingSilhouetteOpacity);
+			                    nullptr, kImmovableSilhouetteOpacity);
 		}
 	} else {
 		// Draw the construction site marker
@@ -295,7 +295,7 @@ void DismantleSite::draw(const Time& gametime,
 			   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
 		} else {
 			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, nullptr,
-			                    kBuildingSilhouetteOpacity);
+			                    kImmovableSilhouetteOpacity);
 		}
 	}
 
@@ -305,7 +305,7 @@ void DismantleSite::draw(const Time& gametime,
 		                    &player_color, 1.f, 100 - ((get_built_per64k() * 100) >> 16));
 	} else {
 		dst->blit_animation(point_on_dst, coords, scale, building_->get_unoccupied_animation(), tanim,
-		                    nullptr, kBuildingSilhouetteOpacity,
+		                    nullptr, kImmovableSilhouetteOpacity,
 		                    100 - ((get_built_per64k() * 100) >> 16));
 	}
 

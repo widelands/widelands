@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,8 +37,14 @@ const std::string kWidelandsMapExtension = ".wmf";
 const std::string kS2MapExtension1 = ".swd";
 const std::string kS2MapExtension2 = ".wld";
 const std::string kMyMapsDir = "My_Maps";
+const std::string kMyMapsDirFull = kMapsDir + "/" + kMyMapsDir;
 const std::string kDownloadedMapsDir = "Downloaded";
+const std::string kDownloadedMapsDirFull = kMapsDir + "/" + kDownloadedMapsDir;
 const std::string kAddOnMapsDir = "AddOn_Maps";
+const std::string kSinglePlayerScenarioDir = "SP_Scenarios";
+const std::string kSinglePlayerScenarioDirFull = kMapsDir + "/" + kSinglePlayerScenarioDir;
+const std::string kMultiPlayerScenarioDir = "MP_Scenarios";
+const std::string kMultiPlayerScenarioDirFull = kMapsDir + "/" + kMultiPlayerScenarioDir;
 
 /// Filesystem names for temp files holding static data that needs to be accessible via filesystem
 /// Kept in a separate dir to avoid filesystem conflicts
@@ -80,13 +86,23 @@ const std::string kAddOnMainFile = "addon";
 const std::string kAddOnIconFile = "icon.png";
 const std::string kAddOnLocaleDir = "addons_i18n";
 const std::string kAddOnLocaleVersions = "addons_i18n_versions";
+const std::string kAddOnKeyboardShortcutsFile = "shortcuts.lua";
 
 /// Filesystem names for screenshots
 const std::string kScreenshotsDir = "screenshots";
+
+/// Filesystem names for crash reports
+const std::string kCrashDir = "crash";
+const std::string kCrashExtension = ".txt";
+const std::string kOldCrashExtension = ".stale";
+constexpr double kCrashFilesKeepAroundTime = 8 * 7 * 24 * 60 * 60;  // 8 weeks
 
 /// Filesystem names for config
 const std::string kConfigFile = "config";
 
 const std::string kEconomyProfilesDir = "tribes/economy_profiles";
+
+const std::string kCustomShipNamesFile = "ship_names";
+const std::string kCustomWarehouseNamesFile = "warehouse_names";
 
 #endif  // end of include guard: WL_LOGIC_FILESYSTEM_CONSTANTS_H

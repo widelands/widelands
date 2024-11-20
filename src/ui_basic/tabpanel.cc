@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2023 by the Widelands Development Team
+ * Copyright (C) 2003-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,8 +57,7 @@ Tab::Tab(TabPanel* const tab_parent,
          const Image* init_pic,
          const std::string& tooltip_text,
          Panel* const contents)
-   : NamedPanel(
-        tab_parent, s, name, x, 0, kTabPanelButtonHeight, kTabPanelButtonHeight, tooltip_text),
+   : Panel(tab_parent, s, name, x, 0, kTabPanelButtonHeight, kTabPanelButtonHeight, tooltip_text),
      parent(tab_parent),
      id(tab_id),
      pic(init_pic),
@@ -123,9 +122,10 @@ bool Tab::handle_mousepress(uint8_t /*btn*/, int32_t /*x*/, int32_t /*y*/) {
  * Initialize an empty TabPanel. We use width == 0 as an indicator that the size hasn't been set
  * yet.
  */
-TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
+TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style, const std::string& name)
    : Panel(parent,
            style == TabPanelStyle::kFsMenu ? PanelStyle::kFsMenu : PanelStyle::kWui,
+           name,
            0,
            0,
            0,
@@ -438,8 +438,7 @@ void TabPanel::draw(RenderTarget& dst) {
 			dst.blitrect_scale(
 			   Rectf(x + (kTabPanelButtonHeight - picture_width) / 2.f,
 			         (kTabPanelButtonHeight - picture_height) / 2.f, picture_width, picture_height),
-			   tabs_[idx]->pic, Recti(0, 0, tabs_[idx]->pic->width(), tabs_[idx]->pic->height()), 1,
-			   BlendMode::UseAlpha);
+			   tabs_[idx]->pic, tabs_[idx]->pic->rect(), 1.f, BlendMode::UseAlpha);
 		} else if (tabs_[idx]->rendered_title != nullptr) {
 			tabs_[idx]->rendered_title->draw(
 			   dst, Vector2i(x + kTabPanelTextMargin,

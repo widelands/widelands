@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,11 +37,11 @@ struct DirAnimations {
 		animations_[dir - 1] = anim;
 	}
 
-	static DirAnimations null() {
+	[[nodiscard]] static DirAnimations null() {
 		return DirAnimations(0);  // Since real animation IDs are positive, this is safe
 	}
 
-	explicit operator bool() const {
+	[[nodiscard]] bool valid() const {
 		return animations_[0] != 0u;
 	}
 

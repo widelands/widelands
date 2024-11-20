@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 
 """This catches use of the infamous TRUE and FALSE macros that are sometimes

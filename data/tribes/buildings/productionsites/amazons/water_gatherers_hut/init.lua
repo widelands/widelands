@@ -37,9 +37,14 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- obtaining second bucket from hut takes takes 3.6 sec
+            -- time of worker: 8.2-40.6 sec, min+max average 24.4 sec
+            -- min. time total: 8.2 + 20 + 3.6 = 31.8 sec
+            -- max. time total: 40.6 + 20 + 3.6 = 64.2 sec
+            -- avg. time total: 24.4 + 20 + 3.6 = 48 sec
             "sleep=duration:20s",
             "callworker=fetch_water",
-            -- he carries 2 buckets so we need to create one now
+            -- she carries 2 buckets so we need to create one now
             "produce=water",
          }
       },

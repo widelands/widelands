@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2023 by the Widelands Development Team
+ * Copyright (C) 2004-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,6 +52,7 @@ struct Route : public IRoute {
 		return route_.size() - 1;
 	}
 	Flag& get_flag(EditorGameBase&, std::vector<Flag*>::size_type) const;
+	Flag* get_flag_raw(EditorGameBase&, std::vector<Flag*>::size_type) const;
 
 	void trim_start(int32_t count);
 	void truncate(int32_t count);

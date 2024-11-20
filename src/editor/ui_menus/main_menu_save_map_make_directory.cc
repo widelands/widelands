@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,6 +35,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
      dirname_(dirname),
      vbox_(this,
            UI::PanelStyle::kWui,
+           "main_box",
            padding_,
            padding_,
            UI::Box::Vertical,
@@ -43,13 +44,14 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
            padding_ / 2),
      label_(&vbox_,
             UI::PanelStyle::kWui,
+            "label",
             UI::FontStyle::kWuiLabel,
             0,
             0,
             get_inner_w() - 2 * padding_,
             buth_,
             _("Enter Directory Name:")),
-     edit_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, UI::PanelStyle::kWui),
+     edit_(&vbox_, "editbox", 0, 0, get_inner_w() - 2 * padding_, UI::PanelStyle::kWui),
      ok_button_(this,
                 "ok",
                 UI::g_fh->fontset()->is_rtl() ? padding_ : get_inner_w() - butw_ - padding_,
@@ -105,8 +107,8 @@ void MainMenuSaveMapMakeDirectory::edit_changed() {
 	                               ends_with(text, kS2MapExtension2, false);
 	ok_button_.set_enabled(is_legal_filename && !has_map_extension);
 	edit_.set_tooltip(is_legal_filename ?
-                        (has_map_extension ? _("This extension is reserved!") : "") :
-                        illegal_filename_tooltip_);
+	                     (has_map_extension ? _("This extension is reserved!") : "") :
+	                     illegal_filename_tooltip_);
 	dirname_ = text;
 }
 

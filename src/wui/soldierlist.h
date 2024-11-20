@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,9 +26,10 @@ class Panel;
 }  // namespace UI
 
 namespace Widelands {
-class Building;
+class MapObject;
 }  // namespace Widelands
 
-UI::Panel* create_soldier_list(UI::Panel& parent, InteractiveBase&, Widelands::Building& building);
+UI::Panel*
+create_soldier_list(UI::Panel& parent, InteractiveBase&, Widelands::MapObject& building_or_ship);
 
 #endif  // end of include guard: WL_WUI_SOLDIERLIST_H

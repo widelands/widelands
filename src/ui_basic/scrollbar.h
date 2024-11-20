@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,6 +35,7 @@ struct Scrollbar : public Panel {
 
 public:
 	Scrollbar(Panel* parent,
+	          const std::string& name,
 	          int32_t x,
 	          int32_t y,
 	          uint32_t w,

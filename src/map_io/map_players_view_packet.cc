@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2023 by the Widelands Development Team
+ * Copyright (C) 2007-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,11 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 5;
+/* Changelog:
+ * 5: v1.1
+ * 6: Removed obsolete data fields time_triangle_last_surveyed and resource_amounts.
+ */
+constexpr uint16_t kCurrentPacketVersion = 6;
 
 /// Vision values for saveloading. We only care about PreviouslySeen and Revealed states here,
 /// the details about current player objects' vision are reconstructed when loading map object data.
@@ -86,17 +90,6 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 
 				std::set<Player::Field*> seen_fields;
 
-				// TODO(Niektory): Savegame compatibility
-				std::set<MapIndex> revealed_fields = {};
-				if (packet_version <= 4) {
-					const unsigned no_revealed_fields = fr.unsigned_32();
-					for (unsigned i = 0; i < no_revealed_fields; ++i) {
-						const MapIndex revealed_index = fr.unsigned_32();
-						revealed_fields.insert(revealed_index);
-						player->rediscover_node(map, map.get_fcoords(map[revealed_index]));
-					}
-				}
-
 				// Read numerical field infos as combined strings to reduce number of hard disk write
 				// operations
 
@@ -113,42 +106,23 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 				// field.vision
 				parseme = fr.c_string();
 
-				// TODO(Niektory): Savegame compatibility
-				if (packet_version <= 4) {
-					split(field_vector, parseme, {'|'});
-					assert(field_vector.size() == no_of_fields);
-				}
-
 				for (MapIndex m = 0; m < no_of_fields; ++m) {
 					Player::Field& f = player->fields_[m];
 					assert(!f.vision.is_revealed());
 
-					// TODO(Niektory): Savegame compatibility
-					if (packet_version <= 4) {
-						VisibleState saved_vision = static_cast<VisibleState>(stoi(field_vector[m]));
-						if (f.vision == VisibleState::kUnexplored &&
-						    saved_vision == VisibleState::kPreviouslySeen) {
-							f.vision = Vision(VisibleState::kPreviouslySeen);
-						}
-						if (revealed_fields.count(m) != 0u) {
-							f.vision.set_revealed(true);
-							assert(f.vision.is_revealed());
-						}
-					} else {
-						SavedVisionState saved_vision = SavedVisionState(parseme.at(m));
-						if (saved_vision == SavedVisionState::kPreviouslySeen) {
-							assert(!f.vision.is_visible());
-							f.vision = Vision(VisibleState::kPreviouslySeen);
-						} else if (saved_vision == SavedVisionState::kRevealed) {
-							f.vision.set_revealed(true);
-							assert(f.vision.is_revealed());
-						} else if (saved_vision == SavedVisionState::kHidden) {
-							f.vision.set_hidden(true);
-							assert(f.vision.is_hidden());
-						}
+					SavedVisionState saved_vision = SavedVisionState(parseme.at(m));
+					if (saved_vision == SavedVisionState::kPreviouslySeen) {
+						assert(!f.vision.is_visible());
+						f.vision = Vision(VisibleState::kPreviouslySeen);
+					} else if (saved_vision == SavedVisionState::kRevealed) {
+						f.vision.set_revealed(true);
+						assert(f.vision.is_revealed());
+					} else if (saved_vision == SavedVisionState::kHidden) {
+						f.vision.set_hidden(true);
+						assert(f.vision.is_hidden());
 					}
 
-					if (f.vision == VisibleState::kPreviouslySeen) {
+					if (f.vision.state() == VisibleState::kPreviouslySeen) {
 						seen_fields.insert(&f);
 					}
 				}
@@ -161,19 +135,16 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 					continue;
 				}
 
-				// TODO(Nordfriese): Savegame compatibility
-				if (packet_version >= 4) {
-					const size_t additionally_seen = fr.unsigned_32();
-					no_of_seen_fields += additionally_seen;
-					if (additionally_seen > 0) {
-						parseme = fr.c_string();
-						split(field_vector, parseme, {'|'});
-						assert(field_vector.size() == additionally_seen);
-						for (size_t i = 0; i < additionally_seen; ++i) {
-							Player::Field& f = player->fields_[stoi(field_vector[i])];
-							assert(f.vision == VisibleState::kUnexplored);
-							seen_fields.insert(&f);
-						}
+				const size_t additionally_seen = fr.unsigned_32();
+				no_of_seen_fields += additionally_seen;
+				if (additionally_seen > 0) {
+					parseme = fr.c_string();
+					split(field_vector, parseme, {'|'});
+					assert(field_vector.size() == additionally_seen);
+					for (size_t i = 0; i < additionally_seen; ++i) {
+						Player::Field& f = player->fields_[stoi(field_vector[i])];
+						assert(f.vision.state() == VisibleState::kUnexplored);
+						seen_fields.insert(&f);
 					}
 				}
 
@@ -207,37 +178,11 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 				}
 				assert(counter == no_of_seen_fields);
 
-				// Last Surveyed: time|time|time ...
-				parseme = fr.c_string();
-				split(field_vector, parseme, {'|'});
-				assert(field_vector.size() == no_of_seen_fields);
-
-				counter = 0;
-				for (const auto& field : seen_fields) {
-					split(data_vector, field_vector[counter], {'*'});
-					assert(data_vector.size() == 2);
-
-					field->time_triangle_last_surveyed[0] = Time(stoll(data_vector[0]));
-					field->time_triangle_last_surveyed[1] = Time(stoll(data_vector[1]));
-					++counter;
+				// TODO(Nordfriese): Savegame compatibility v1.1
+				if (packet_version < 6) {
+					fr.c_string();  // Was time_triangle_last_surveyed
+					fr.c_string();  // Was resource_amounts
 				}
-				assert(counter == no_of_seen_fields);
-
-				// Resource Amounts: down*right|down*right|down*right| ...
-				parseme = fr.c_string();
-				split(field_vector, parseme, {'|'});
-				assert(field_vector.size() == no_of_seen_fields);
-
-				counter = 0;
-				for (const auto& field : seen_fields) {
-					split(data_vector, field_vector[counter], {'*'});
-					assert(data_vector.size() == 2);
-
-					field->resource_amounts.d = stoi(data_vector[0]);
-					field->resource_amounts.r = stoi(data_vector[1]);
-					++counter;
-				}
-				assert(counter == no_of_seen_fields);
 
 				// Terrains: down*right|down*right|down*right| ...
 				parseme = fr.c_string();
@@ -324,8 +269,8 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 							descr = fr.string();
 							field->constructionsite->was =
 							   descr.empty() ?
-                           nullptr :
-                           descriptions.get_building_descr(descriptions.safe_building_index(descr));
+							      nullptr :
+							      descriptions.get_building_descr(descriptions.safe_building_index(descr));
 
 							for (uint32_t j = fr.unsigned_32(); j != 0u; --j) {
 								field->constructionsite->intermediates.push_back(
@@ -340,141 +285,15 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 				}
 			}
 
-			// Data for kVisible fields is not saveloaded so rediscover it
-			if (packet_version == kCurrentPacketVersion) {
-				iterate_players_existing(p, nr_players, egbase, player) {
-					for (MapIndex m = 0; m < no_of_fields; ++m) {
-						Player::Field& f = player->fields_[m];
-						if (f.vision == VisibleState::kVisible) {
-							player->rediscover_node(map, map.get_fcoords(map[m]));
-						}
+			iterate_players_existing(p, nr_players, egbase, player) {
+				for (MapIndex m = 0; m < no_of_fields; ++m) {
+					Player::Field& f = player->fields_[m];
+					if (f.vision.state() == VisibleState::kVisible) {
+						player->rediscover_node(map, map.get_fcoords(map[m]));
 					}
 				}
 			}
 
-		} else if (packet_version >= 1 && packet_version <= 2) {
-			// TODO(Nordfriese): Savegame compatibility, remove after v1.0
-			for (uint8_t i = fr.unsigned_8(); i != 0u; --i) {
-				Player& player = *egbase.get_player(fr.unsigned_8());
-
-				std::set<MapIndex> revealed_fields = {};
-				for (uint32_t j = fr.unsigned_32(); j != 0u; --j) {
-					revealed_fields.insert(fr.unsigned_32());
-				}
-
-				for (MapIndex m = map.max_index(); m != 0u; --m) {
-					Player::Field& f = player.fields_[m - 1];
-
-					f.owner = fr.unsigned_8();
-
-					VisibleState saved_vision = static_cast<VisibleState>(fr.unsigned_8());
-					if (f.vision == VisibleState::kUnexplored &&
-					    saved_vision == VisibleState::kPreviouslySeen) {
-						f.vision = Vision(VisibleState::kPreviouslySeen);
-					}
-					if (revealed_fields.count(m - 1) != 0u) {
-						f.vision.set_revealed(true);
-					}
-
-					if (f.vision != VisibleState::kPreviouslySeen && packet_version > 1) {
-						continue;
-					}
-
-					f.time_node_last_unseen = Time(fr);
-					f.time_triangle_last_surveyed[0] = Time(fr);
-					f.time_triangle_last_surveyed[1] = Time(fr);
-
-					f.resource_amounts.d = fr.unsigned_8();
-					f.resource_amounts.r = fr.unsigned_8();
-
-					DescriptionIndex terrains_d = static_cast<DescriptionIndex>(fr.unsigned_32());
-					DescriptionIndex terrains_r = static_cast<DescriptionIndex>(fr.unsigned_32());
-					f.terrains.store({terrains_d, terrains_r});
-
-					f.r_e = static_cast<RoadSegment>(fr.unsigned_8());
-					f.r_se = static_cast<RoadSegment>(fr.unsigned_8());
-					f.r_sw = static_cast<RoadSegment>(fr.unsigned_8());
-
-					f.border = (fr.unsigned_8() != 0u);
-					f.border_r = (fr.unsigned_8() != 0u);
-					f.border_br = (fr.unsigned_8() != 0u);
-					f.border_bl = (fr.unsigned_8() != 0u);
-
-					std::string descr = fr.string();
-					if (descr.empty()) {
-						f.map_object_descr = nullptr;
-					} else {
-						const Descriptions& descriptions = egbase.descriptions();
-						// I here assume that no two immovables will have the same internal name
-						if (descr == "flag") {
-							f.map_object_descr = &g_flag_descr;
-						} else if (descr == "portdock") {
-							f.map_object_descr = &g_portdock_descr;
-						} else {
-							std::pair<bool, DescriptionIndex> imm =
-							   descriptions.load_building_or_immovable(descr);
-							if (imm.first) {
-								f.map_object_descr = descriptions.get_building_descr(imm.second);
-							} else {
-								f.map_object_descr = descriptions.get_immovable_descr(imm.second);
-							}
-						}
-
-						if (packet_version > 1) {
-							if (f.map_object_descr->type() == MapObjectType::DISMANTLESITE) {
-								f.set_constructionsite(false);
-								f.dismantlesite.building = descriptions.get_building_descr(
-								   descriptions.safe_building_index(fr.string()));
-								f.dismantlesite.progress = fr.unsigned_32();
-							} else if (f.map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
-								f.set_constructionsite(true);
-								f.constructionsite->becomes = descriptions.get_building_descr(
-								   descriptions.safe_building_index(fr.string()));
-								descr = fr.string();
-								f.constructionsite->was = descr.empty() ?
-                                                     nullptr :
-                                                     descriptions.get_building_descr(
-								                                descriptions.safe_building_index(descr));
-
-								for (uint32_t j = fr.unsigned_32(); j != 0u; --j) {
-									f.constructionsite->intermediates.push_back(
-									   descriptions.get_building_descr(
-									      descriptions.safe_building_index(fr.string())));
-								}
-
-								f.constructionsite->totaltime = Duration(fr);
-								f.constructionsite->completedtime = Duration(fr);
-							}
-						} else {
-							descr = fr.string();
-							if (descr.empty()) {
-								f.set_constructionsite(false);
-								f.dismantlesite.building = nullptr;
-								f.dismantlesite.progress = 0;
-							} else {
-								f.set_constructionsite(true);
-								f.constructionsite->becomes =
-								   descriptions.get_building_descr(descriptions.safe_building_index(descr));
-
-								descr = fr.string();
-								f.constructionsite->was = descr.empty() ?
-                                                     nullptr :
-                                                     descriptions.get_building_descr(
-								                                descriptions.safe_building_index(descr));
-
-								for (uint32_t j = fr.unsigned_32(); j != 0u; --j) {
-									f.constructionsite->intermediates.push_back(
-									   descriptions.get_building_descr(
-									      descriptions.safe_building_index(fr.string())));
-								}
-
-								f.constructionsite->totaltime = Duration(fr);
-								f.constructionsite->completedtime = Duration(fr);
-							}
-						}
-					}
-				}
-			}
 		} else {
 			throw UnhandledVersionError("MapPlayersViewPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -511,10 +330,10 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 				const Player::Field& f = player->fields_[m];
 				oss << static_cast<char>(f.vision.is_revealed() ? SavedVisionState::kRevealed :
 				                         f.vision.is_hidden()   ? SavedVisionState::kHidden :
-				                         f.vision == VisibleState::kPreviouslySeen ?
-                                                            SavedVisionState::kPreviouslySeen :
-                                                            SavedVisionState::kNone);
-				if (f.vision == VisibleState::kPreviouslySeen) {
+				                         f.vision.state() == VisibleState::kPreviouslySeen ?
+				                                                SavedVisionState::kPreviouslySeen :
+				                                                SavedVisionState::kNone);
+				if (f.vision.state() == VisibleState::kPreviouslySeen) {
 					seen_fields.insert(&f);
 					// The data for some of the terrains and edges between PreviouslySeen
 					// and Unexplored fields is stored in an Unexplored field. The data
@@ -522,7 +341,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 					const Coords coords(m % map.get_width(), m / map.get_width());
 					for (const Coords& c : {map.tr_n(coords), map.tl_n(coords), map.l_n(coords)}) {
 						const Player::Field& neighbour = player->fields_[map.get_index(c)];
-						if (neighbour.vision == VisibleState::kUnexplored) {
+						if (neighbour.vision.state() == VisibleState::kUnexplored) {
 							additionally_seen_fields.insert(&neighbour);
 						}
 					}
@@ -531,10 +350,10 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			const Player::Field& f = player->fields_[upper_bound];
 			oss << static_cast<char>(f.vision.is_revealed() ? SavedVisionState::kRevealed :
 			                         f.vision.is_hidden()   ? SavedVisionState::kHidden :
-			                         f.vision == VisibleState::kPreviouslySeen ?
-                                                         SavedVisionState::kPreviouslySeen :
-                                                         SavedVisionState::kNone);
-			if (f.vision == VisibleState::kPreviouslySeen) {
+			                         f.vision.state() == VisibleState::kPreviouslySeen ?
+			                                                SavedVisionState::kPreviouslySeen :
+			                                                SavedVisionState::kNone);
+			if (f.vision.state() == VisibleState::kPreviouslySeen) {
 				seen_fields.insert(&f);
 			}
 			fw.c_string(oss.str());
@@ -589,32 +408,6 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			fw.c_string(oss.str());
 		}
 		{
-			// Last Surveyed
-			std::ostringstream oss("");
-			for (auto it = seen_fields.begin(); it != seen_fields.end();) {
-				oss << (*it)->time_triangle_last_surveyed[0].get() << "*"
-				    << (*it)->time_triangle_last_surveyed[1].get();
-				++it;
-				if (it != seen_fields.end()) {
-					oss << "|";
-				}
-			}
-			fw.c_string(oss.str());
-		}
-		{
-			// Resource Amounts
-			std::ostringstream oss("");
-			for (auto it = seen_fields.begin(); it != seen_fields.end();) {
-				oss << static_cast<unsigned>((*it)->resource_amounts.d) << "*"
-				    << static_cast<unsigned>((*it)->resource_amounts.r);
-				++it;
-				if (it != seen_fields.end()) {
-					oss << "|";
-				}
-			}
-			fw.c_string(oss.str());
-		}
-		{
 			// Terrains
 			std::ostringstream oss("");
 			for (auto it = seen_fields.begin(); it != seen_fields.end();) {
@@ -659,17 +452,21 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 				fw.string(field->map_object_descr->name());
 
 				if (field->map_object_descr->type() == MapObjectType::DISMANTLESITE) {
-					// `building` can only be nullptr in compatibility cases.
-					// Remove the non-null check after v1.0
-					fw.string(field->dismantlesite.building != nullptr ?
-                            field->dismantlesite.building->name() :
-                            "dismantlesite");
-					fw.unsigned_32(field->dismantlesite.progress);
+					if (const BuildingDescr* b = field->dismantlesite.building; b != nullptr) {
+						fw.string(b->name());
+						fw.unsigned_32(field->dismantlesite.progress);
+					} else {
+						// `building` was only supposed to be nullptr in compatibility cases.
+						// Not throw because we may already be doing and emergency save.
+						log_err("Previously seen dismantlesite has no building type");
+						// Let's pretend we didn't have an immovable...
+						fw.string("");
+					}
 				} else if (field->map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
 					fw.string(field->constructionsite->becomes->name());
 					fw.string(field->constructionsite->was != nullptr ?
-                            field->constructionsite->was->name() :
-                            "");
+					             field->constructionsite->was->name() :
+					             "");
 
 					fw.unsigned_32(field->constructionsite->intermediates.size());
 					for (const BuildingDescr* d : field->constructionsite->intermediates) {

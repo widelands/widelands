@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2023 by the Widelands Development Team
+ * Copyright (C) 2012-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,8 +26,12 @@
 
 #include "io/profile.h"
 
+/* Command line options */
+extern bool g_allow_script_console;
+extern bool g_write_syncstreams;
+
 /*
- * Further explanations for all functions and its return values
+ * Further explanations for all functions and their return values
  * can be found in io/profile.cc
  */
 
@@ -102,6 +106,8 @@ enum class KeyboardShortcut : uint16_t {
 	kMainMenuEditorLoad,
 	kMainMenuContinueEditing,
 	kMainMenuReplay,
+	kMainMenuLoadReplay,
+	kMainMenuReplayLast,
 	kMainMenuOptions,
 	kMainMenuAddons,
 	kMainMenuAbout,
@@ -121,6 +127,7 @@ enum class KeyboardShortcut : uint16_t {
 	kCommonZoomIn = kCommonGeneral_Begin,
 	kCommonZoomOut,
 	kCommonZoomReset,
+	kCommonContextMenu,
 	kCommonTextCut,
 	kCommonTextCopy,
 	kCommonTextPaste,
@@ -129,7 +136,8 @@ enum class KeyboardShortcut : uint16_t {
 	kCommonTooltipAccessibilityMode,
 	kCommonFullscreen,
 	kCommonScreenshot,
-	kCommonGeneral_End = kCommonScreenshot,
+	kCommonChangeMusic,
+	kCommonGeneral_End = kCommonChangeMusic,
 
 	// These are only shown in the help in debug builds
 	kCommonDebugConsole,
@@ -153,7 +161,9 @@ enum class KeyboardShortcut : uint16_t {
 	kEditorHelp,               // alias of kCommonEncyclopedia
 	kEditorShowhideBuildhelp,  // alias of kCommonBuildhelp
 	kEditorShowhideMaximumBuildhelp,
+	kEditorShowhideHeightHeatMap,
 	kEditorShowhideGrid,
+	kEditorShowhideOceans,
 	kEditorShowhideImmovables,
 	kEditorShowhideCritters,
 	kEditorShowhideResources,
@@ -292,6 +302,8 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameSeafaringstatsFilterExpWait,
 	kInGameSeafaringstatsFilterExpScout,
 	kInGameSeafaringstatsFilterExpPortspace,
+	kInGameSeafaringstatsFilterWarship,
+	kInGameSeafaringstatsFilterRefitting,
 	kInGameSeafaringstatsGotoShip,
 	kInGameSeafaringstatsWatchShip,
 	kInGameSeafaringstatsOpenShipWindow,
@@ -310,6 +322,14 @@ KeyboardShortcut operator+(const KeyboardShortcut& id, int i);
 KeyboardShortcut& operator++(KeyboardShortcut& id);
 uint16_t operator-(const KeyboardShortcut& a, const KeyboardShortcut& b);
 
+enum class KeyboardShortcutScope {
+	kGlobal,  // special value that intersects with all other scopes
+
+	kMainMenu,
+	kEditor,
+	kGame,
+};
+
 /**
  * Check whether the given shortcut can be used for setting and retrieving the
  * actual key combination.
@@ -322,12 +342,19 @@ uint16_t operator-(const KeyboardShortcut& a, const KeyboardShortcut& b);
  */
 bool is_real(KeyboardShortcut id);
 
-bool is_debug_only(KeyboardShortcut id);
+bool is_developer_tool(KeyboardShortcut id);
 
 /** Check whether a given shortcut is reserved for a fastplace shortcut slot. */
 inline bool is_fastplace(const KeyboardShortcut id) {
 	return id >= KeyboardShortcut::kFastplace_Begin && id <= KeyboardShortcut::kFastplace_End;
 }
+
+void create_replace_shortcut(const std::string& name,
+                             const std::string& descname,
+                             const std::set<KeyboardShortcutScope>& scopes,
+                             SDL_Keysym default_shortcut);
+KeyboardShortcut get_highest_used_keyboard_shortcut();
+std::vector<std::string> get_all_keyboard_shortcut_names();
 
 /**
  * Change a keyboard shortcut.
@@ -387,6 +414,7 @@ std::string to_string(KeyboardShortcut);
 
 /** Get the shortcut ID from an internal shortcut name. Throws an exception for invalid names. */
 KeyboardShortcut shortcut_from_string(const std::string&);
+bool shortcut_exists(const std::string&);
 
 /**
  * Generate a human-readable description of a keyboard shortcut.
@@ -408,6 +436,10 @@ void init_fastplace_default_shortcuts(
 
 /** Clear a shortcut. */
 void unset_shortcut(KeyboardShortcut);
+
+inline SDL_Keysym keysym(const SDL_Keycode c, uint16_t mod = 0) {
+	return SDL_Keysym{SDL_GetScancodeFromKey(c), c, mod, 0};
+}
 
 // Default step sizes for changing value of spinbox, slider, etc. on PgUp/PgDown or Ctrl+mousewheel
 namespace ChangeBigStep {

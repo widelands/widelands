@@ -11,7 +11,8 @@ wl.Descriptions():new_worker_type {
 
    buildcost = {
       amazons_carrier = 1,
-      stone_bowl = 1
+      stone_bowl = 1,
+      firestones = 1,
    },
 
    animation_directory = dirname,

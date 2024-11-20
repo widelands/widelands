@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,8 +23,16 @@
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 
+namespace FsMenu {
+class MainMenu;
+}  // namespace FsMenu
+
+bool is_main_menu(lua_State*);
+FsMenu::MainMenu& get_main_menu(lua_State*);
+
 Widelands::Game& get_game(lua_State*);
 Widelands::EditorGameBase& get_egbase(lua_State*);
+
 Widelands::MapObjectLoader* get_mol(lua_State*);
 Widelands::MapObjectSaver* get_mos(lua_State*);
 

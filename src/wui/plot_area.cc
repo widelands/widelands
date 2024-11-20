@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -109,9 +109,9 @@ std::string get_value_with_unit(Units unit, int value) {
 	case Units::kMinutesGeneric:
 	case Units::kHourGeneric:
 	case Units::kDayGeneric:
+	default:
 		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 std::string get_generic_unit_name(Units unit) {
@@ -128,9 +128,9 @@ std::string get_generic_unit_name(Units unit) {
 	case Units::kMinutesNarrow:
 	case Units::kHourNarrow:
 	case Units::kDayNarrow:
+	default:
 		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 uint32_t ms_to_unit(Units unit, uint32_t ms) {
@@ -144,8 +144,9 @@ uint32_t ms_to_unit(Units unit, uint32_t ms) {
 	case Units::kMinutesGeneric:
 	case Units::kMinutesNarrow:
 		return ms / kMinutes;
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 /**
@@ -317,13 +318,14 @@ void draw_diagram(uint32_t time_ms,
 }  // namespace
 
 WuiPlotArea::WuiPlotArea(UI::Panel* const parent,
+                         const std::string& name,
                          int32_t const x,
                          int32_t const y,
                          int32_t const w,
                          int32_t const h,
                          uint32_t sample_rate,
                          Plotmode plotmode)
-   : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h),
+   : UI::Panel(parent, UI::PanelStyle::kWui, name, x, y, w, h),
      plotmode_(plotmode),
      sample_rate_(sample_rate),
 
@@ -507,7 +509,7 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
 		if (plot.second.showplot) {
 			draw_plot_line(dst,
 			               (plotmode_ == Plotmode::kRelative) ? plot.second.relative_data.get() :
-                                                             plot.second.absolute_data,
+			                                                    plot.second.absolute_data,
 			               highest_scale, sub_, plot.second.plotcolor, yoffset);
 		}
 	}
@@ -626,13 +628,14 @@ void WuiPlotAreaSlider::draw(RenderTarget& dst) {
 }
 
 DifferentialPlotArea::DifferentialPlotArea(UI::Panel* const parent,
+                                           const std::string& name,
                                            int32_t const x,
                                            int32_t const y,
                                            int32_t const w,
                                            int32_t const h,
                                            uint32_t sample_rate,
                                            Plotmode plotmode)
-   : WuiPlotArea(parent, x, y, w, h, sample_rate, plotmode) {
+   : WuiPlotArea(parent, name, x, y, w, h, sample_rate, plotmode) {
 	update();
 }
 

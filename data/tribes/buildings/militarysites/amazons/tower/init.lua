@@ -15,7 +15,8 @@ wl.Descriptions():new_militarysite_type {
       enhancement_cost = {
          ironwood = 1,
          rope = 1,
-         balsa = 2
+         balsa = 2,
+         quartz = 1
       },
       enhancement_return_on_dismantle = {
          ironwood = 1,

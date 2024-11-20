@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2023 by the Widelands Development Team
+ * Copyright (C) 2011-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -87,8 +87,13 @@ void ShippingItem::set_location(Game& game, MapObject* obj) const {
 	}
 	if (worker != nullptr) {
 		worker->set_location(dynamic_cast<PlayerImmovable*>(obj));
-		if (upcast(Building, building, obj)) {
-			worker->set_position(game, building->get_position());
+		if (obj != nullptr && obj->descr().type() == MapObjectType::SHIP) {
+			worker->set_ship_serial(obj->serial());
+		} else {
+			worker->set_ship_serial(0);
+			if (obj != nullptr && obj->descr().type() >= MapObjectType::BUILDING) {
+				worker->set_position(game, dynamic_cast<Building*>(obj)->get_position());
+			}
 		}
 	}
 }

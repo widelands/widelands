@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2023 by the Widelands Development Team
+ * Copyright (C) 2021-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -115,8 +115,8 @@ struct MousewheelHandlerOptions {
 			   default_sign_x_ * (get_mousewheel_option_bool(invert_x_) ? -1 : 1) *
 			   (get_mousewheel_option_bool(MousewheelOptionID::kInvertedXDetected) !=
 			          get_mousewheel_option_bool(MousewheelOptionID::kOverrideInvertedX) ?
-                -1 :
-                1);
+			       -1 :
+			       1);
 		} else {
 			current_sign_x_ = 0;
 		}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,11 +59,14 @@ UI::Checkbox* create_immovable_checkbox(UI::Panel* parent,
 		case Widelands::BaseImmovable::BIG:
 			tooltip = format(_("%1$s (needs a big building plot)"), immovable_descr.descname());
 			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 
 	UI::Checkbox* cb =
-	   new UI::Checkbox(parent, UI::PanelStyle::kWui, Vector2i::zero(), pic, tooltip);
+	   new UI::Checkbox(parent, UI::PanelStyle::kWui, format("checkbox_%s", immovable_descr.name()),
+	                    Vector2i::zero(), pic, tooltip);
 	const int kMinClickableArea = 24;
 	cb->set_desired_size(std::max<int>(pic->width(), kMinClickableArea),
 	                     std::max<int>(pic->height(), kMinClickableArea));
@@ -79,7 +82,7 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 	LuaInterface* lua = &parent.egbase().lua();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::ImmovableDescr, EditorPlaceImmovableTool>(
-	      this, parent.editor_categories(Widelands::MapObjectType::IMMOVABLE),
+	      this, "immovables", parent.editor_categories(Widelands::MapObjectType::IMMOVABLE),
 	      descriptions.immovables(),
 	      [lua](UI::Panel* cb_parent, const Widelands::ImmovableDescr& immovable_descr) {
 		      return create_immovable_checkbox(cb_parent, lua, immovable_descr);
@@ -91,8 +94,8 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 	      },
 	      &tool, {{kAutoTreesIndex, _("Automatic Trees")}}));
 
-	UI::Box* auto_immovables_box =
-	   new UI::Box(&multi_select_menu_->tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
+	UI::Box* auto_immovables_box = new UI::Box(&multi_select_menu_->tabs(), UI::PanelStyle::kWui,
+	                                           "auto_immovables_box", 0, 0, UI::Box::Vertical);
 	auto_trees_button_ = new UI::Button(auto_immovables_box, "auto_trees", 0, 0, 0, 0,
 	                                    UI::ButtonStyle::kWuiSecondary, _("Automatic Trees"),
 	                                    _("Automatically place the trees which "

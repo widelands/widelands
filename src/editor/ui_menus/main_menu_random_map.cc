@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
                                                      const uint32_t h,
                                                      UI::Button& ok_button,
                                                      UI::Button& cancel_button)
-   : UI::Box(&parent, s, kMargin, kMargin, UI::Box::Vertical, 0, 0, kMargin),
+   : UI::Box(&parent, s, "random_map_panel", kMargin, kMargin, UI::Box::Vertical, 0, 0, kMargin),
      label_style_(s == UI::PanelStyle::kWui ? UI::FontStyle::kWuiLabel :
                                               UI::FontStyle::kFsMenuLabel),
      // UI elements
@@ -69,6 +69,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
      map_size_box_(*this, panel_style_, "random_map_menu", 4, w, h),
      max_players_(compute_max_players()),
      players_(this,
+              "players",
               0,
               0,
               inner_w,
@@ -130,6 +131,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
                                UI::ButtonStyle::kFsMenuSecondary),
 
      water_(this,
+            "water",
             0,
             0,
             inner_w,
@@ -143,6 +145,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
             UI::SpinBox::Type::kSmall,
             5),
      land_(this,
+           "land",
            0,
            0,
            inner_w,
@@ -156,6 +159,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
            UI::SpinBox::Type::kSmall,
            5),
      wasteland_(this,
+                "wasteland",
                 0,
                 0,
                 inner_w,
@@ -168,10 +172,19 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
                 UI::SpinBox::Units::kPercent,
                 UI::SpinBox::Type::kSmall,
                 5),
-     mountains_box_(this, panel_style_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
-     mountains_label_(&mountains_box_, panel_style_, label_style_, 0, 0, 0, 0, _("Mountains:")),
+     mountains_box_(this, panel_style_, "mountains_box", 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
+     mountains_label_(&mountains_box_,
+                      panel_style_,
+                      "mountains_label",
+                      label_style_,
+                      0,
+                      0,
+                      0,
+                      0,
+                      _("Mountains:")),
      mountains_(&mountains_box_,
                 panel_style_,
+                "mountains",
                 label_style_,
                 0,
                 0,
@@ -179,18 +192,34 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
                 mountains_label_.get_h(),
                 format(_("%i %%"), mountainsval_),
                 UI::Align::kCenter),
-     island_mode_(this, panel_style_, Vector2i::zero(), _("Island mode")),
+     island_mode_(this, panel_style_, "island_mode", Vector2i::zero(), _("Island mode")),
      // Geeky stuff
-     map_number_and_id_hbox_(this, panel_style_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
+     map_number_and_id_hbox_(
+        this, panel_style_, "id_hbox", 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
      map_number_and_id_vbox_1_(
-        &map_number_and_id_hbox_, panel_style_, 0, 0, UI::Box::Vertical, 0, 0, kMargin),
+        &map_number_and_id_hbox_, panel_style_, "id_vbox1", 0, 0, UI::Box::Vertical, 0, 0, kMargin),
      map_number_and_id_vbox_2_(
-        &map_number_and_id_hbox_, panel_style_, 0, 0, UI::Box::Vertical, 0, 0, kMargin),
-     random_number_hbox_(
-        &map_number_and_id_vbox_2_, panel_style_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
-     map_number_label_(
-        &map_number_and_id_vbox_1_, panel_style_, label_style_, 0, 0, 0, 0, _("Random number:")),
+        &map_number_and_id_hbox_, panel_style_, "id_vbox2", 0, 0, UI::Box::Vertical, 0, 0, kMargin),
+     random_number_hbox_(&map_number_and_id_vbox_2_,
+                         panel_style_,
+                         "seed_hbox",
+                         0,
+                         0,
+                         UI::Box::Horizontal,
+                         0,
+                         0,
+                         kMargin),
+     map_number_label_(&map_number_and_id_vbox_1_,
+                       panel_style_,
+                       "seed_label",
+                       label_style_,
+                       0,
+                       0,
+                       0,
+                       0,
+                       _("Random number:")),
      map_number_edit_(&random_number_hbox_,
+                      "seed_editbox",
                       0,
                       0,
                       inner_w - 2 * kMargin - map_number_label_.get_w(),
@@ -204,9 +233,17 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
                            UI::ButtonStyle::kWuiSecondary,
                            g_image_cache->get("images/ui_fsmenu/random.png"),
                            _("Generate a new random number")),
-     map_id_label_(
-        &map_number_and_id_vbox_1_, panel_style_, label_style_, 0, 0, 0, 0, _("Map ID:")),
+     map_id_label_(&map_number_and_id_vbox_1_,
+                   panel_style_,
+                   "id_label",
+                   label_style_,
+                   0,
+                   0,
+                   0,
+                   0,
+                   _("Map ID:")),
      map_id_edit_(&map_number_and_id_vbox_2_,
+                  "id_editbox",
                   0,
                   0,
                   inner_w - 2 * kMargin - map_id_label_.get_w(),
@@ -216,7 +253,9 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 	set_size(inner_w, 50);  // Prevent assert failures
 
 	generator_.set_enabled(false);
-	generator_.add(_("Default"), nullptr, g_image_cache->get("images/logos/wl-ico-64.png"), true);
+	/** TRANSLATORS: Default Map Generator */
+	generator_.add(pgettext("map_generator", "Default"), nullptr,
+	               g_image_cache->get("images/logos/wl-ico-64.png"), true);
 	for (const auto& addon : AddOns::g_addons) {
 		if (addon.second && addon.first->category == AddOns::AddOnCategory::kMapGenerator) {
 			generator_.add(addon.first->descname(), addon.first, addon.first->icon, false);
@@ -242,7 +281,8 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 
 	// ---------- Worlds ----------
 
-	world_.add(_("Random"), Widelands::Map::kOldWorldNames.size(), nullptr, true);
+	/** TRANSLATORS: Random Climate */
+	world_.add(pgettext("climate", "Random"), Widelands::Map::kOldWorldNames.size(), nullptr, true);
 	for (size_t i = 0; i < Widelands::Map::kOldWorldNames.size(); ++i) {
 		world_.add(Widelands::Map::kOldWorldNames[i].descname(), i);
 	}
@@ -272,11 +312,14 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 
 	// Terrains Distribution
 
-	terrains_distribution_.add(_("Default"), TerrainDistribution::kDefault, nullptr, true);
+	terrains_distribution_.add(/** TRANSLATORS: Default Terrain Distribution */
+	                           pgettext("terrain", "Default"), TerrainDistribution::kDefault,
+	                           nullptr, true);
 	terrains_distribution_.add(_("Alpine"), TerrainDistribution::kAlpine);
 	terrains_distribution_.add(_("Atoll"), TerrainDistribution::kAtoll);
 	terrains_distribution_.add(_("Wasteland"), TerrainDistribution::kWasteland);
-	terrains_distribution_.add(_("Random"), TerrainDistribution::kRandom);
+	/** TRANSLATORS: Random Terrain Distribution */
+	terrains_distribution_.add(pgettext("terrain", "Random"), TerrainDistribution::kRandom);
 
 	select_terrains_distribution();
 	terrains_distribution_.selected.connect([this]() { select_terrains_distribution(); });
@@ -401,6 +444,9 @@ void MainMenuNewRandomMapPanel::button_clicked(MainMenuNewRandomMapPanel::Button
 		}
 		// Make sure that landmass is consistent
 		normalize_landmass(n);
+		break;
+	default:
+		NEVER_HERE();
 	}
 	nr_edit_box_changed();  // Update ID String
 }
@@ -577,7 +623,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	      << "ID = " << map_id_edit_.get_text() << "\n"
 	      << "Generator = "
 	      << (generator_.get_selected() == nullptr ? "default" :
-                                                    generator_.get_selected()->internal_name)
+	                                                 generator_.get_selected()->internal_name)
 	      << "\n";
 
 	map->create_empty_map(egbase, map_info.w, map_info.h, 0, _("No Name"),
@@ -602,6 +648,8 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	case Widelands::UniqueRandomMapInfo::ResourceAmount::raHigh:
 		log_info("Resources:     high\n");
 		break;
+	default:
+		NEVER_HERE();
 	}
 	log_info("Land: %0.2f  Water: %0.2f  Wasteland: %0.2f\n", map_info.landRatio,
 	         map_info.waterRatio, map_info.wastelandRatio);
@@ -609,8 +657,8 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 		log_info("Using Island Mode\n");
 	}
 	log_info("Generator:     %s\n", generator_.get_selected() == nullptr ?
-                                      "default" :
-                                      generator_.get_selected()->internal_name.c_str());
+	                                   "default" :
+	                                   generator_.get_selected()->internal_name.c_str());
 	log_info("\n");
 
 	bool result;
@@ -653,19 +701,19 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 		     editor.*/
 		   _("Random Map"),
 		   result ?
-              /** TRANSLATORS: This is shown after a random map has been created in the editor. */
-              /** TRANSLATORS: You don't need to be literal with your translation, */
-              /** TRANSLATORS: as long as the user understands that he needs to check the player
-                positions.*/
-              _("The map has been generated. Please double-check the player starting positions to "
-              "make sure that your carriers won’t drown, or be stuck on an island or on top of a "
-              "mountain.") :
-              /** TRANSLATORS: This is shown after a random map has been created in the editor. */
-              /** TRANSLATORS: You don't need to be literal with your translation, as long as */
-              /** TRANSLATORS: the user understands that the map's quality is pretty poor.*/
-              _("The map generator could not produce a good-enough map with the provided settings. "
-              "This map will probably need extensive editing to be playable. Consider creating a "
-              "new map with different parameters."),
+		      /** TRANSLATORS: This is shown after a random map has been created in the editor. */
+		      /** TRANSLATORS: You don't need to be literal with your translation, */
+		      /** TRANSLATORS: as long as the user understands that he needs to check the player
+		        positions.*/
+		      _("The map has been generated. Please double-check the player starting positions to "
+		        "make sure that your carriers won’t drown, or be stuck on an island or on top of a "
+		        "mountain.") :
+		      /** TRANSLATORS: This is shown after a random map has been created in the editor. */
+		      /** TRANSLATORS: You don't need to be literal with your translation, as long as */
+		      /** TRANSLATORS: the user understands that the map's quality is pretty poor.*/
+		      _("The map generator could not produce a good-enough map with the provided settings. "
+		        "This map will probably need extensive editing to be playable. Consider creating a "
+		        "new map with different parameters."),
 		   UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
 	} else {
@@ -803,8 +851,8 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
                                            const uint32_t h)
    : UI::UniqueWindow(
         &parent, UI::WindowStyle::kWui, "random_map_menu", &r, 400, 500, _("New Random Map")),
-     box_(this, panel_style_, 0, 0, UI::Box::Vertical),
-     button_box_(&box_, panel_style_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
+     box_(this, panel_style_, "main_box", 0, 0, UI::Box::Vertical),
+     button_box_(&box_, panel_style_, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
      ok_button_(&button_box_,
                 "generate_map",
                 0,

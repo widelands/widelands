@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,8 +55,13 @@ BuildingWindow::BuildingWindow(InteractiveBase& parent,
                                Widelands::Building& b,
                                const Widelands::BuildingDescr& descr,
                                bool avoid_fastclick)
-   : UI::UniqueWindow(
-        &parent, UI::WindowStyle::kWui, "building_window", &reg, Width, 0, b.descr().descname()),
+   : UI::UniqueWindow(&parent,
+                      UI::WindowStyle::kWui,
+                      format("building_window_%u", b.serial()),
+                      &reg,
+                      Width,
+                      0,
+                      b.descr().descname()),
      game_(parent.get_game()),
      is_dying_(false),
      parent_(&parent),
@@ -121,15 +126,16 @@ void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	watch_button_ = nullptr;
 	avoid_fastclick_ = avoid_fastclick;
 
-	vbox_.reset(new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical));
+	vbox_.reset(new UI::Box(this, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical));
 	set_center_panel(vbox_.get());  // Must be set immediately after deleting the old vbox, if any
 
-	tabs_ = new UI::TabPanel(vbox_.get(), UI::TabPanelStyle::kWuiLight);
+	tabs_ = new UI::TabPanel(vbox_.get(), UI::TabPanelStyle::kWuiLight, "tabs");
 	vbox_->add(tabs_, UI::Box::Resizing::kFullSize);
 
 	setup_name_field_editbox(*vbox_);
 
-	capsbuttons_ = new UI::Box(vbox_.get(), UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	capsbuttons_ =
+	   new UI::Box(vbox_.get(), UI::PanelStyle::kWui, "caps_buttons_box", 0, 0, UI::Box::Horizontal);
 	vbox_->add(capsbuttons_, UI::Box::Resizing::kFullSize);
 
 	// actually create buttons on the first call to think(),
@@ -171,7 +177,7 @@ void BuildingWindow::draw(RenderTarget& dst) {
 	dst.blitrect_scale(
 	   Rectf((get_inner_w() - image->width()) / 2.f, (get_inner_h() - image->height()) / 2.f,
 	         image->width(), image->height()),
-	   image, Recti(0, 0, image->width(), image->height()), 0.5, BlendMode::UseAlpha);
+	   image, image->rect(), 0.5, BlendMode::UseAlpha);
 }
 
 /*
@@ -204,7 +210,7 @@ void BuildingWindow::think() {
 		mute_this_->set_pic(
 		   g_image_cache->get(building->mute_messages() ? kImgUnmuteThis : kImgMuteThis));
 		mute_this_->set_tooltip(building->mute_messages() ? _("Muted – click to unmute") :
-                                                          _("Mute this building’s messages"));
+		                                                    _("Mute this building’s messages"));
 		if (building->owner().is_muted(
 		       building->owner().tribe().safe_building_index(building->descr().name()))) {
 			mute_this_->set_enabled(false);
@@ -276,10 +282,10 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			   g_image_cache->get(
 			      (is_stopped ? "images/ui_basic/continue.png" : "images/ui_basic/stop.png")),
 			   is_stopped ?
-               /** TRANSLATORS: Stop/Continue toggle button for production sites. */
-               _("Continue") :
-               /** TRANSLATORS: Stop/Continue toggle button for production sites. */
-               _("Stop"));
+			      /** TRANSLATORS: Stop/Continue toggle button for production sites. */
+			      _("Continue") :
+			      /** TRANSLATORS: Stop/Continue toggle button for production sites. */
+			      _("Stop"));
 			stopbtn->sigclicked.connect([this]() { act_start_stop(); });
 			capsbuttons->add(stopbtn);
 
@@ -289,13 +295,13 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				   productionsite->infinite_production() ? "end_produce_infinite" : "produce_infinite",
 				   0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 				   g_image_cache->get((productionsite->infinite_production() ?
-                                      "images/wui/menus/end_infinity.png" :
-                                      "images/wui/menus/infinity.png")),
+				                          "images/wui/menus/end_infinity.png" :
+				                          "images/wui/menus/infinity.png")),
 				   productionsite->infinite_production() ?
-                  /** TRANSLATORS: Infinite Production toggle button for production sites. */
-                  _("Stop producing indefinitely") :
-                  /** TRANSLATORS: Infinite Production toggle button for production sites. */
-                  _("Produce indefinitely regardless of the economy’s needs"));
+				      /** TRANSLATORS: Infinite Production toggle button for production sites. */
+				      _("Stop producing indefinitely") :
+				      /** TRANSLATORS: Infinite Production toggle button for production sites. */
+				      _("Produce indefinitely regardless of the economy’s needs"));
 				infbtn->sigclicked.connect([this]() { act_produce_infinite(); });
 				capsbuttons->add(infbtn);
 			}
@@ -304,7 +310,8 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			// enhance/destroy/dismantle buttons are fixed in their position
 			// and not subject to the number of buttons on the right of the
 			// panel.
-			UI::Panel* spacer = new UI::Panel(capsbuttons, UI::PanelStyle::kWui, 0, 0, 17, 34);
+			UI::Panel* spacer =
+			   new UI::Panel(capsbuttons, UI::PanelStyle::kWui, "spacer_1", 0, 0, 17, 34);
 			capsbuttons->add(spacer);
 		}  // upcast to productionsite
 
@@ -369,7 +376,8 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		if (requires_destruction_separator && can_see) {
 			// Need this as well as the infinite space from the can_see section
 			// to ensure there is a separation.
-			UI::Panel* spacer = new UI::Panel(capsbuttons, UI::PanelStyle::kWui, 0, 0, 17, 34);
+			UI::Panel* spacer =
+			   new UI::Panel(capsbuttons, UI::PanelStyle::kWui, "spacer_2", 0, 0, 17, 34);
 			capsbuttons->add(spacer);
 			capsbuttons->add_inf_space();
 		}
@@ -629,6 +637,7 @@ Callback for debug window
 ===============
 */
 void BuildingWindow::act_debug() {
+	ibase()->broadcast_cheating_message();
 	show_field_debug(*ibase(), ibase()->egbase().map().get_fcoords(building_position_));
 }
 

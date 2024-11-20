@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 #include <cassert>
 #include <memory>
 
-#include "base/log.h"
 #include "base/math.h"
 #include "base/vector.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -48,14 +47,7 @@ Animation::Animation(const LuaTable& table)
 			sound_effect_ =
 			   SoundHandler::register_fx(SoundType::kAmbient, sound_effects->get_string("path"));
 
-			try {
-				sound_priority_ = math::read_percent_to_int(sound_effects->get_string("priority"));
-			} catch (const std::exception&) {
-				// TODO(GunChleoc): Compatibility, remove try-catch after v1.0
-				log_warn("Animation sound effect priority '%.2f' without percent symbol is deprecated",
-				         sound_effects->get_double("priority"));
-				sound_priority_ = std::round(100 * sound_effects->get_double("priority"));
-			}
+			sound_priority_ = math::read_percent_to_int(sound_effects->get_string("priority"));
 
 			if (sound_effects->has_key<std::string>("allow_multiple")) {
 				sound_allow_multiple_ = sound_effects->get_bool("allow_multiple");
@@ -121,8 +113,8 @@ const Vector2i& Animation::hotspot() const {
 uint32_t Animation::current_frame(uint32_t time) const {
 	if (nr_frames() > 1) {
 		return (play_once_ && time / frametime_ > static_cast<uint32_t>(nr_frames() - 1)) ?
-                static_cast<uint32_t>(nr_frames() - 1) :
-                time / frametime_ % nr_frames();
+		          static_cast<uint32_t>(nr_frames() - 1) :
+		          time / frametime_ % nr_frames();
 	}
 	return 0;
 }

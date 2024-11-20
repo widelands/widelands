@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2023 by the Widelands Development Team
+ * Copyright (C) 2019-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -214,7 +214,7 @@ bool ShippingSchedule::do_remove_port_from_plan(Game& game,
 				sslog("Ship %s is carrying %u items, rerouting to NEW destination %u %s\n",
 				      ship.get_shipname().c_str(), ship.get_nritems(), closest->serial(),
 				      closest->get_warehouse()->get_warehouse_name().c_str());
-				ship_plan.push_back(SchedulingState(closest, false, Duration(dist)));
+				ship_plan.emplace_back(closest, false, Duration(dist));
 				ship.set_destination(game, closest);
 			} else {
 				// PANIC! There are no ports at all left!!
@@ -303,7 +303,7 @@ void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
 		for (ShippingItem& si : ship->items_) {
 			if (si.destination_dock_.serial() == dock->serial()) {
 				sslog("found a shippingitem on %s\n", ship->get_shipname().c_str());
-				si.destination_dock_ = ship->get_destination();
+				si.destination_dock_ = ship->get_destination_port(game);
 			}
 		}
 	}
@@ -311,13 +311,16 @@ void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
 }
 
 void ShippingSchedule::ship_removed(const Game& /* game */, Ship* ship) {
-	auto it = plans_.find(ship);
-	assert(it != plans_.end());
-	plans_.erase(it);
+	if (auto it = plans_.find(ship); it != plans_.end()) {
+		plans_.erase(it);
+	} else if (ship->get_ship_type() != ShipType::kWarship) {  // Warships might not have a schedule.
+		throw wexception(
+		   "Removing ship %s from fleet which did not have a schedule", ship->get_shipname().c_str());
+	}
 
-	auto i = last_actual_duration_recalculation_.find(ship);
-	if (i != last_actual_duration_recalculation_.end()) {
-		last_actual_duration_recalculation_.erase(i);
+	if (auto it = last_actual_duration_recalculation_.find(ship);
+	    it != last_actual_duration_recalculation_.end()) {
+		last_actual_duration_recalculation_.erase(it);
 	}
 
 	// Handling any items that were intended to be transported by this ship
@@ -326,7 +329,11 @@ void ShippingSchedule::ship_removed(const Game& /* game */, Ship* ship) {
 
 void ShippingSchedule::ship_added(Game& game, Ship& s) {
 	sslog("\nShippingSchedule::ship_added (%s)\n", s.get_shipname().c_str());
-	assert(!s.get_destination());
+	if (s.get_ship_type() == ShipType::kWarship) {
+		sslog("Is a warship, won't create a plan.\n\n");
+		return;
+	}
+	assert(s.get_destination_port(game) == nullptr);
 	plans_[&s] = ShipPlan();
 	last_actual_duration_recalculation_[&s] = game.get_gametime();
 	if (fleet_.get_ports().empty()) {
@@ -356,7 +363,7 @@ void ShippingSchedule::ship_added(Game& game, Ship& s) {
 	for (ShippingItem& si : s.items_) {
 		si.destination_dock_ = closest;
 	}
-	plans_[&s].push_back(SchedulingState(closest, false, Duration(dist)));
+	plans_[&s].emplace_back(closest, false, Duration(dist));
 	s.set_destination(game, closest);
 	// Check for closest to make clang-tidy happy
 	sslog("Sent to %u %s\n\n", closest ? closest->serial() : 0,
@@ -374,7 +381,7 @@ void ShippingSchedule::port_added(Game& game, PortDock& dock) {
 	// All ships are most likely panicking because they have
 	// no destination. Send them all to the new port.
 	for (Ship* ship : fleet_.get_ships()) {
-		assert(!ship->get_destination());
+		assert(ship->get_destination_port(game) == nullptr);
 		sslog("Rerouting %s there\n", ship->get_shipname().c_str());
 		ship->set_destination(game, &dock);
 		for (ShippingItem& si : ship->items_) {
@@ -397,7 +404,7 @@ struct ScoredShip {
 	static inline uint64_t calc_score(uint64_t capacity, uint64_t eta, uint64_t detour) {
 		// This needs to use uint64_t because the intermediate results will overflow uint32_t
 		return eta > kHorriblyLongDuration ? 0 :
-                                           capacity * kMinScoreForImmediateAcceptFactor *
+		                                     capacity * kMinScoreForImmediateAcceptFactor *
 		                                        kHorriblyLongDuration * kHorriblyLongDuration /
 		                                        (std::max(eta, kWonderfullyShortDuration) *
 		                                         std::max(detour, kWonderfullyShortDuration));
@@ -616,7 +623,7 @@ void ShippingSchedule::load_on_ship(Game& game,
 		fleet_.get_path(*ppp.start, *ppp.end, path);
 		game.map().calc_cost(path, &d, nullptr);
 		assert(d >= 0);
-		plans_[ship].push_back(SchedulingState(ppp.end, false, Duration(d)));
+		plans_[ship].emplace_back(ppp.end, false, Duration(d));
 	} else {
 		for (SchedulingState& ss : plans_[ship]) {
 			if (ss.dock == ppp.start) {
@@ -984,7 +991,7 @@ Duration ShippingSchedule::update(Game& game) {
 		if (plans_[ship].empty()) {
 			sslog("No orders left, setting to idle\n");
 			ship->set_destination(game, nullptr);
-		} else if (plans_[ship].front().dock != ship->get_destination()) {
+		} else if (plans_[ship].front().dock != ship->get_destination_port(game)) {
 			PortDock* dest = plans_[ship].front().dock.get(game);
 			ship->set_destination(game, dest);
 			sslog("Rerouted to %u %s\n", dest->serial(),
@@ -1083,7 +1090,7 @@ Duration ShippingSchedule::update(Game& game) {
 			      (*closest)->get_warehouse()->get_warehouse_name().c_str());
 			ship->set_destination(game, *closest);
 			plans_[ship].clear();
-			plans_[ship].push_back(SchedulingState(*closest, true, Duration(dist)));
+			plans_[ship].emplace_back(*closest, true, Duration(dist));
 			ports_with_unserviced_expeditions.erase(closest);
 			ships_for_expeditions.pop_front();
 		}
@@ -1217,7 +1224,7 @@ Duration ShippingSchedule::update(Game& game) {
 			      ppp.end->serial(), ppp.end->get_warehouse()->get_warehouse_name().c_str(),
 			      ppp.open_count, take, closest->get_shipname().c_str());
 			plans_[closest].clear();
-			plans_[closest].push_back(SchedulingState(ppp.start, false, Duration(dist)));
+			plans_[closest].emplace_back(ppp.start, false, Duration(dist));
 			plans_[closest].front().load_there[ppp.end] = take;
 			closest->set_destination(game, ppp.start);
 			ppp.open_count -= take;
@@ -1226,7 +1233,7 @@ Duration ShippingSchedule::update(Game& game) {
 			fleet_.get_path(*ppp.start, *ppp.end, path);
 			game.map().calc_cost(path, &dist, nullptr);
 			assert(dist >= 0);
-			plans_[closest].push_back(SchedulingState(ppp.end, false, Duration(dist)));
+			plans_[closest].emplace_back(ppp.end, false, Duration(dist));
 			idle_ships.erase(std::find(idle_ships.begin(), idle_ships.end(), closest));
 			for (PrioritisedPortPair& p : open_pairs) {
 				for (auto it = p.ships.begin(); it != p.ships.end(); ++it) {
@@ -1614,7 +1621,7 @@ Duration ShippingSchedule::update(Game& game) {
 			      closest ? closest->serial() : 0,
 			      closest ? closest->get_warehouse()->get_warehouse_name().c_str() : "");
 		} else {
-			plans_[ship].push_back(SchedulingState(closest, false, Duration(dist)));
+			plans_[ship].emplace_back(closest, false, Duration(dist));
 			ship->set_destination(game, closest);
 			sslog("Sending %s to %u %s\n", ship->get_shipname().c_str(), closest->serial(),
 			      closest->get_warehouse()->get_warehouse_name().c_str());
@@ -1638,7 +1645,7 @@ Duration ShippingSchedule::update(Game& game) {
 void ShippingSchedule::log_general_info(const EditorGameBase& e) const {
 	const Time& t = e.get_gametime();
 	for (const auto& plan : plans_) {
-		log_dbg_time(t, "· %s: carrying %u items (capacity %u)\n",
+		log_dbg_time(t, "• %s: carrying %u items (capacity %u)\n",
 		             plan.first.get(e)->get_shipname().c_str(), plan.first.get(e)->get_nritems(),
 		             plan.first.get(e)->get_capacity());
 		std::map<Serial, uint32_t> dests;
@@ -1656,7 +1663,7 @@ void ShippingSchedule::log_general_info(const EditorGameBase& e) const {
 		}
 		log_dbg_time(t, "  SCHEDULE: %" PRIuS " stations\n", plan.second.size());
 		for (const SchedulingState& ss : plan.second) {
-			log_dbg_time(t, "          · in %u ms at %u\n", ss.duration_from_previous_location.get(),
+			log_dbg_time(t, "          • in %u ms at %u\n", ss.duration_from_previous_location.get(),
 			             ss.dock.serial());
 			log_dbg_time(t, "            load there: ");
 			if (ss.expedition) {

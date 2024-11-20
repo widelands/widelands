@@ -3,11 +3,11 @@ include(CMakeParseArguments)
 macro(_parse_common_args ARGS)
   set(OPTIONS
     THIRD_PARTY  # Is a third party lib. Less warnings, no codecheck.
+    THIRD_PARTY_WITH_INCLUDES
     C_LIBRARY # Pure C library. No CXX flags.
     WIN32 # Windows binary/library.
     USES_ATOMIC
     USES_ICU
-    USES_INTL
     USES_MINIZIP
     USES_OPENGL
     USES_PNG
@@ -15,6 +15,8 @@ macro(_parse_common_args ARGS)
     USES_SDL2_IMAGE
     USES_SDL2_MIXER
     USES_SDL2_TTF
+    USES_STD_FS
+    USES_TINYGETTEXT
     USES_ZLIB
   )
   set(ONE_VALUE_ARG )
@@ -70,7 +72,7 @@ macro(_common_compile_tasks)
     set(TARGET_LINK_FLAGS "-static")
   endif()
 
-  if(ARG_THIRD_PARTY)
+  if(ARG_THIRD_PARTY OR ARG_THIRD_PARTY_WITH_INCLUDES)
     # Disable all warnings for third_party.
     set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} -w")
   else()
@@ -104,15 +106,16 @@ macro(_common_compile_tasks)
 
   if(ARG_USES_MINIZIP)
       if(MINIZIP_STATIC_LIBRARIES)
-          target_link_libraries(${NAME} minizip)
-          message(STATUS "Link ${NAME} with minizip")
+          target_link_libraries(${NAME} ${MINIZIP_LINK_LIBRARIES})
+          message(STATUS "Link ${NAME} with ${MINIZIP_LINK_LIBRARIES}")
       else()
           target_link_libraries(${NAME} third_party_minizip)
           message(STATUS "Link ${NAME} with third_party_minizip")
       endif()
   endif()
 
-  if(ARG_USES_ATOMIC AND NOT APPLE AND ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"))
+  if(ARG_USES_ATOMIC AND CMAKE_SYSTEM MATCHES "Linux"
+     AND ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"))
     # clang on linux needs explicit linkage against standard library atomic
     target_link_libraries(${NAME} atomic)
   endif()
@@ -179,13 +182,14 @@ macro(_common_compile_tasks)
     target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::TTF ${SDL_TTF_STATIC_LIBS})
   endif()
 
-  if (ARG_USES_INTL)
-    # libintl is not used on all systems, so only include it, when we actually
-    # found it.
-    if (Intl_FOUND)
-      wl_include_system_directories(${NAME} ${Intl_INCLUDE_DIRS})
-      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} ${Intl_LIBRARIES})
-    endif()
+  if(ARG_USES_STD_FS)
+    if(NEEDS_EXTERNAL_FILESYSTEM)
+      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} stdc++fs)
+    endif(NEEDS_EXTERNAL_FILESYSTEM)
+  endif()
+
+  if(ARG_USES_TINYGETTEXT)
+    target_link_libraries(${NAME} tinygettext)
   endif()
 
   if(ARG_USES_ICU)
@@ -259,7 +263,7 @@ function(wl_run_codecheck NAME SRC)
         ${OUTPUT_FILE}
       COMMAND
         ${CMAKE_COMMAND}
-        -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
+        -DPython3_EXECUTABLE=${Python3_EXECUTABLE}
         -DWL_SOURCE_CHECKER=${CMAKE_SOURCE_DIR}/cmake/codecheck/CodeCheck.py
         -DSRC=${ABSOLUTE_SRC}
         -DOUTPUT_FILE=${OUTPUT_FILE}

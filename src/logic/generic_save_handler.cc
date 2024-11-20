@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -124,6 +124,8 @@ void GenericSaveHandler::save_file() {
 }
 
 GenericSaveHandler::Error GenericSaveHandler::save() {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
 	MutexLock m(MutexLock::ID::kLua);
 	try {  // everything additionally in one big try block
 		    // to catch any unexpected errors

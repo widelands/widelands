@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
                                  UI::UniqueWindow::Registry& registry,
                                  Registry& map_options_registry)
    : MainMenuLoadOrSaveMap(
-        parent, registry, "save_map_menu", _("Save Map"), false, true, "maps/My_Maps"),
+        parent, registry, "save_map_menu", _("Save Map"), false, true, kMyMapsDirFull),
      map_options_registry_(map_options_registry),
      edit_options_(&map_details_box_,
                    "edit_options",
@@ -62,13 +62,14 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
                    _("Map Options")),
      editbox_label_(&table_footer_box_,
                     UI::PanelStyle::kWui,
+                    "label_filename",
                     UI::FontStyle::kWuiLabel,
                     0,
                     0,
                     0,
                     0,
                     _("Filename:")),
-     editbox_(&table_footer_box_, 0, 0, 0, UI::PanelStyle::kWui),
+     editbox_(&table_footer_box_, "editbox", 0, 0, 0, UI::PanelStyle::kWui),
      make_directory_(&table_footer_box_,
                      "make_directory",
                      0,
@@ -144,8 +145,8 @@ void MainMenuSaveMap::clicked_ok() {
 			std::string::size_type const filename_size = filename.at(0).size();
 			map->set_name(4 <= filename_size &&
 			                    ends_with(filename.at(0), kWidelandsMapExtension, false) ?
-                          filename.at(0).substr(0, filename_size - 4) :
-                          filename.at(0));
+			                 filename.at(0).substr(0, filename_size - 4) :
+			                 filename.at(0));
 		}
 		if (save_map(filename.at(0), !get_config_bool("nozip", false))) {
 			die();

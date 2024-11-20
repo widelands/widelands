@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/mouse_cursor.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game_controller.h"
@@ -48,8 +49,15 @@ MapSelect::MapSelect(MenuCapsule& m,
    : TwoColumnsFullNavigationMenu(m, _("Choose Map")),
      parent_screen_(mpg),
      game_for_preview_(for_preview),
-     checkboxes_(
-        &header_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, 2 * kPadding),
+     checkboxes_(&header_box_,
+                 UI::PanelStyle::kFsMenu,
+                 "checkboxes_box",
+                 0,
+                 0,
+                 UI::Box::Vertical,
+                 0,
+                 0,
+                 2 * kPadding),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
      map_details_(
         &right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, *game_for_preview_),
@@ -59,6 +67,9 @@ MapSelect::MapSelect(MenuCapsule& m,
      basedir_(kMapsDir),
      settings_(settings),
      ctrl_(ctrl) {
+
+	g_mouse_cursor->change_wait(true);
+
 	curdir_ = {basedir_};
 	if (settings_->settings().multiplayer) {
 		back_.set_tooltip(_("Return to the multiplayer game setup"));
@@ -72,13 +83,14 @@ MapSelect::MapSelect(MenuCapsule& m,
 	table_.set_column_compare(1, [this](uint32_t a, uint32_t b) { return compare_mapnames(a, b); });
 	table_.set_column_compare(2, [this](uint32_t a, uint32_t b) { return compare_size(a, b); });
 
-	UI::Box* hbox = new UI::Box(
-	   &checkboxes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
+	UI::Box* hbox = new UI::Box(&checkboxes_, UI::PanelStyle::kFsMenu, "hbox", 0, 0,
+	                            UI::Box::Horizontal, checkbox_space_, get_w());
 
 	show_all_maps_ = new UI::Button(
 	   hbox, "show_all_maps", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Show all maps"));
-	cb_dont_localize_mapnames_ = new UI::Checkbox(
-	   hbox, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show original map names"));
+	cb_dont_localize_mapnames_ =
+	   new UI::Checkbox(hbox, UI::PanelStyle::kFsMenu, "original_map_names", Vector2i::zero(),
+	                    _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
 
 	hbox->add(show_all_maps_, UI::Box::Resizing::kFullSize);
@@ -89,8 +101,8 @@ MapSelect::MapSelect(MenuCapsule& m,
 
 	// Row with dropdowns
 
-	hbox = new UI::Box(
-	   &checkboxes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
+	hbox = new UI::Box(&checkboxes_, UI::PanelStyle::kFsMenu, "tags_box_1", 0, 0,
+	                   UI::Box::Horizontal, checkbox_space_, get_w());
 
 	official_tags_dropdown_ = new UI::Dropdown<std::string>(
 	   hbox, "dropdown_official_tags", 0, 0, 200, 50, 24, "", UI::DropdownType::kTextual,
@@ -138,8 +150,8 @@ MapSelect::MapSelect(MenuCapsule& m,
 
 	// Row with checkboxes
 
-	hbox = new UI::Box(
-	   &checkboxes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
+	hbox = new UI::Box(&checkboxes_, UI::PanelStyle::kFsMenu, "tags_box_2", 0, 0,
+	                   UI::Box::Horizontal, checkbox_space_, get_w());
 	add_tag_checkbox(hbox, "seafaring");
 	add_tag_checkbox(hbox, "ferries");
 	add_tag_checkbox(hbox, "artifacts");
@@ -443,8 +455,8 @@ UI::Checkbox* MapSelect::add_tag_checkbox(UI::Box* box, const std::string& tag) 
 	tags_ordered_.push_back(tag);
 
 	const TagTexts l = localize_tag(tag);
-	UI::Checkbox* cb =
-	   new UI::Checkbox(box, UI::PanelStyle::kFsMenu, Vector2i::zero(), l.displayname);
+	UI::Checkbox* cb = new UI::Checkbox(box, UI::PanelStyle::kFsMenu, format("tag_checkbox_%s", tag),
+	                                    Vector2i::zero(), l.displayname);
 	cb->set_tooltip(l.tooltip);
 
 	box->add(cb, UI::Box::Resizing::kFullSize);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,20 +37,22 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                                        UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(
         &parent, UI::WindowStyle::kWui, "toolsize_menu", &registry, 250, 30, _("Tool Size")),
-     box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, kMargin),
+     box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical, 0, 0, kMargin),
      spinbox_radius_(&box_,
+                     "toolsize",
                      0,
                      0,
                      kSpinboxWidth,
                      kSpinboxUnitW,
                      1,
                      1,
-                     MAX_TOOL_AREA + 1,
+                     kMaxToolArea + 1,
                      UI::PanelStyle::kWui,
                      _("Size:"),
                      UI::SpinBox::Units::kNone,
                      UI::SpinBox::Type::kSmall),
      spinbox_gap_(&box_,
+                  "toolgap",
                   0,
                   0,
                   kSpinboxWidth,
@@ -105,7 +107,7 @@ void EditorToolsizeMenu::set_buttons_enabled(bool enable) {
 	is_updating_ = true;
 	int32_t sbval = radius_ + 1;
 	if (enable) {
-		spinbox_radius_.set_interval(1, MAX_TOOL_AREA + 1);
+		spinbox_radius_.set_interval(1, kMaxToolArea + 1);
 		spinbox_radius_.set_value(sbval);
 
 		spinbox_gap_.set_interval(0, 100);

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 
 """Do not call std::string::find_first_of or std::string::find with a string of

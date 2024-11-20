@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,6 +39,7 @@ protected:
 	 * Text conventions: Sentence case for the 'tooltip_text'
 	 */
 	Slider(Panel* parent,
+	       const std::string& name,
 	       int32_t x,
 	       int32_t y,
 	       uint32_t w,
@@ -139,6 +140,7 @@ protected:
  */
 struct HorizontalSlider : public Slider {
 	HorizontalSlider(Panel* const parent,
+	                 const std::string& name,
 	                 const int32_t x,
 	                 const int32_t y,
 	                 const uint32_t w,
@@ -151,6 +153,7 @@ struct HorizontalSlider : public Slider {
 	                 const uint32_t cursor_size = 20,
 	                 const bool enabled = true)
 	   : Slider(parent,
+	            name,
 	            x,
 	            y,
 	            w,
@@ -179,6 +182,7 @@ protected:
  */
 struct VerticalSlider : public Slider {
 	VerticalSlider(Panel* const parent,
+	               const std::string& name,
 	               const int32_t x,
 	               const int32_t y,
 	               const uint32_t w,
@@ -191,6 +195,7 @@ struct VerticalSlider : public Slider {
 	               const std::string& tooltip_text = std::string(),
 	               const bool enabled = true)
 	   : Slider(parent,
+	            name,
 	            x,
 	            y,
 	            w,
@@ -220,6 +225,7 @@ protected:
  */
 struct DiscreteSlider : public Panel {
 	DiscreteSlider(Panel* parent,
+	               const std::string& name,
 	               int32_t x,
 	               int32_t y,
 	               uint32_t w,

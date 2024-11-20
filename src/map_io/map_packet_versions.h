@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2023 by the Widelands Development Team
+ * Copyright (C) 2020-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +25,10 @@ constexpr uint8_t kCurrentPacketVersionMapObject = 2;
  * Changelog:
  * 8: Release 1.1
  * 9: Added warehouse name.
+ * 10: Added soldier requests to warehouses and portdocks.
+ * 11: Added garrisons.
  */
-constexpr uint16_t kCurrentPacketVersionWarehouseAndExpedition = 9;
+constexpr uint16_t kCurrentPacketVersionWarehouseAndExpedition = 11;
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_PACKET_VERSIONS_H

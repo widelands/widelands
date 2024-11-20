@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -275,6 +275,7 @@ public:
 		HeaderPinnedNote = 13,
 		HeaderShipFleetInterface = 14,
 		HeaderFerryFleetInterface = 15,
+		HeaderNavalInvasionBase = 16,
 	};
 
 	/**

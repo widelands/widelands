@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,15 +80,6 @@ public:
 	};
 	static_assert(sizeof(Terrains) == sizeof(DescriptionIndex) * 2,
 	              "assert(sizeof(Terrains) == sizeof(DescriptionIndex) * 2) failed.");
-	struct Resources {
-		DescriptionIndex d : 4, r : 4;
-	};
-	static_assert(sizeof(Resources) <= sizeof(DescriptionIndex),
-	              "assert(sizeof(Resources) <= sizeof(DescriptionIndex)) failed.");
-	struct ResourceAmounts {
-		ResourceAmount d : 4, r : 4;
-	};
-	static_assert(sizeof(ResourceAmounts) == 1, "assert(sizeof(ResourceAmounts) == 1) failed.");
 
 	Field() : brightness(0), owner_info_and_selections(Widelands::neutral()) {
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2023 by the Widelands Development Team
+ * Copyright (C) 2004-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,10 +74,56 @@ bool Router::find_route(RoutingNode& start,
 
 	while (RoutingNode* current = astar.step()) {
 		if (cost_cutoff >= 0 && (type == wwWARE ? current->mpf_realcost_ware :
-                                                current->mpf_realcost_worker) > cost_cutoff) {
+		                                          current->mpf_realcost_worker) > cost_cutoff) {
 			return false;
 		}
 
+		if (current == &end) {
+			// found our goal
+			if (route != nullptr) {
+				astar.routeto(end, *route);
+			}
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
+ * Find the route to the endpoint from the nearest candidate node from some possibilities
+ *
+ * The calculated route is stored in route if it exists.
+ *
+ * For nodes (Flags) from the same economy, this function should always be
+ * successful.
+ *
+ * \note route will be init()ed before storing the result.
+ *
+ * \param start_nodes possible starting points of the route
+ * \param end endpoint of the route
+ * \param route the calculated route
+ * \param type whether the route is being calculated for a ware or a worker;
+ *        this affects the cost calculations
+ *
+ * \return true if a route has been found, false otherwise
+ */
+bool Router::find_nearest(std::vector<RoutingNode*> start_nodes,
+                          RoutingNode& end,
+                          IRoute* const route,
+                          WareWorker const type,
+                          ITransportCostCalculator& cost_calculator) {
+
+	assert(!start_nodes.empty());
+
+	RouteAStar<AStarEstimator> astar(*this, type, AStarEstimator(cost_calculator, end));
+
+	for (RoutingNode* start : start_nodes) {
+		astar.push(*start);
+	}
+
+	RoutingNode* current = nullptr;
+	while ((current = astar.step()) != nullptr) {
 		if (current == &end) {
 			// found our goal
 			if (route != nullptr) {

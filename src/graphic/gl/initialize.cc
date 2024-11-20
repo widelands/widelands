@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -157,8 +157,8 @@ SDL_GLContext initialize(
 			display_message += "\n\n";
 			display_message +=
 			   (i18n::has_rtl_character(localized_message.c_str()) ?
-                i18n::line2bidi(i18n::make_ligatures(localized_message.c_str()).c_str()) :
-                localized_message);
+			       i18n::line2bidi(i18n::make_ligatures(localized_message.c_str()).c_str()) :
+			       localized_message);
 		}
 
 		log_err("%s\n", display_message.c_str());
@@ -216,7 +216,7 @@ SDL_GLContext initialize(
 			    (major_version == required_major_version && minor_version < required_minor_version)) {
 				show_opengl_error_and_exit(
 				   format("Widelands won’t work because your graphics driver is too old.\n"
-				          "The %u version needs to be version %u.%u or newer.",
+				          "The %s version needs to be version %u.%u or newer.",
 				          name, required_major_version, required_minor_version),
 				   format("%s\n%s",
 				          /** TRANSLATORS: Basic error message when we can't handle the graphics driver.
@@ -224,7 +224,7 @@ SDL_GLContext initialize(
 				          _("Widelands won’t work because your graphics driver is too old."),
 				          /** TRANSLATORS: Basic error message when we can't handle the graphics driver.
 				             Font support is limited here, so do not use advanced typography **/
-				          format(_("The %1$u version needs to be version %2$u.%3$u or newer."),
+				          format(_("The %1$s version needs to be version %2$u.%3$u or newer."),
 				                 descname, required_major_version, required_minor_version)));
 			}
 		} else {
@@ -266,7 +266,7 @@ SDL_GLContext initialize(
 	{                                                                                               \
 		int value;                                                                                   \
 		SDL_GL_GetAttribute(x, &value);                                                              \
-		log_info("Graphics: %s is %d\n", #x, value);                                                 \
+		verb_log_info("Graphics: %s is %d\n", #x, value);                                            \
 	}
 
 	LOG_SDL_GL_ATTRIBUTE(SDL_GL_RED_SIZE)

@@ -1,10 +1,11 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 
 """For standard containers and similar, do not use "something.size() > 0" to
 check whether it contains something.
 
 Just use "!something.empty()".
+
 """
 
 error_msg = 'Do not use a.size() to check for emptiness, use a.empty() instead.'

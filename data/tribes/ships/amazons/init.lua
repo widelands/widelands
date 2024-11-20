@@ -10,6 +10,13 @@ wl.Descriptions():new_ship_type {
    vision_range = 4,
    icon = dirname .. "menu.png",
 
+   hitpoints    = 50000,
+   min_attack   =   100,
+   max_attack   = 10000,
+   defense         =  5,
+   attack_accuracy = 60,
+   heal_per_second = 100,
+
    animation_directory = dirname,
    spritesheets = {
       idle = {
@@ -22,9 +29,9 @@ wl.Descriptions():new_ship_type {
       sinking = {
          hotspot = {73, 49},
          fps = 7,
-         frames = 21,
-         columns = 3,
-         rows = 7
+         frames = 22,
+         columns = 6,
+         rows = 4
       },
       sail = {
          directional = true,

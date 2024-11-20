@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2023 by the Widelands Development Team
+ * Copyright (C) 2003-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,17 +50,17 @@ public:
 	      CLANG_DIAG_ON("-Wunknown-pragmas") bool horizontal = false,
 	   int32_t hgap = 3,
 	   int32_t vgap = 4);
+	~AbstractWaresDisplay() override;
 
 	bool
 	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
-	void handle_mousein(bool inside) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 
 	// Wares may be selected (highlighted)
 	void select_ware(Widelands::DescriptionIndex);
 	void unselect_ware(Widelands::DescriptionIndex);
-	bool ware_selected(Widelands::DescriptionIndex);
+	bool ware_selected(Widelands::DescriptionIndex) const;
 
 	// Wares may be hidden
 	void hide_ware(Widelands::DescriptionIndex);
@@ -106,14 +106,15 @@ protected:
 
 	const Widelands::TribeDescr::WaresOrder& icons_order() const;
 	virtual Vector2i ware_position(Widelands::DescriptionIndex) const;
-	void draw(RenderTarget&) override;
-	virtual void draw_ware(RenderTarget&, Widelands::DescriptionIndex);
-	virtual RGBAColor draw_ware_background_overlay(Widelands::DescriptionIndex) {
+	void draw(RenderTarget& dst) override;
+	void draw_ware_backgrounds(RenderTarget& dst);
+	bool draw_ware_as_selected(Widelands::DescriptionIndex id) const;
+	virtual void draw_ware(RenderTarget& dst, Widelands::DescriptionIndex id);
+	virtual RGBAColor draw_ware_background_overlay(Widelands::DescriptionIndex /*id*/) {
 		return RGBAColor(0, 0, 0, 0);
 	}
 
 private:
-	using WareListVector = std::vector<const Widelands::WareList*>;
 	using WareListSelectionType = std::map<const Widelands::DescriptionIndex, bool>;
 
 	/**
@@ -138,6 +139,13 @@ private:
 	bool horizontal_;
 	int32_t hgap_;
 	int32_t vgap_;
+
+	std::unique_ptr<Texture> background_texture_;
+	bool need_texture_update_{true};
+	std::map<Widelands::DescriptionIndex,
+	         std::pair<RGBAColor, std::shared_ptr<const UI::RenderedText>>>
+	   ware_details_cache_;
+	uint32_t last_ware_details_cache_update_ = 0;
 
 	WaresOrderCoords order_coords_;
 
@@ -171,18 +179,9 @@ public:
 	             Widelands::WareWorker type,
 	             bool selectable);
 
-	~WaresDisplay() override;
-
-	void add_warelist(const Widelands::WareList&);
-	void remove_all_warelists();
-
 protected:
-	uint32_t amount_of(Widelands::DescriptionIndex);
+	virtual uint32_t amount_of(Widelands::DescriptionIndex) = 0;
 	std::string info_for_ware(Widelands::DescriptionIndex) override;
-
-private:
-	using WareListVector = std::vector<const Widelands::WareList*>;
-	WareListVector warelists_;
 };
 
 class StockMenuWaresDisplay : public WaresDisplay {
@@ -191,18 +190,21 @@ public:
 	                      int32_t x,
 	                      int32_t y,
 	                      const Widelands::Player&,
-	                      Widelands::WareWorker type);
+	                      Widelands::WareWorker type,
+	                      bool total);
 
 	void set_solid_icon_backgrounds(const bool s) {
 		solid_icon_backgrounds_ = s;
 	}
 
 protected:
+	uint32_t amount_of(Widelands::DescriptionIndex) override;
 	RGBAColor draw_ware_background_overlay(Widelands::DescriptionIndex) override;
 	std::string info_for_ware(Widelands::DescriptionIndex) override;
 
 	const Widelands::Player& player_;
 	bool solid_icon_backgrounds_{true};
+	bool show_total_stock_;
 };
 
 std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,

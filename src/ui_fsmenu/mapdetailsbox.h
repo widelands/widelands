@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@ public:
 	void update(GameSettingsProvider* settings, Widelands::Map& map);
 	void update_from_savegame(GameSettingsProvider* settings);
 
-	void force_new_dimensions(uint32_t width, uint32_t height);
+	void set_max_size(int w, int h) override;
 
 	// TODO(jmoerschbach): only used by multiplayer screen...
 	void set_map_description_text(const std::string& text);
@@ -44,7 +44,6 @@ private:
 	int padding_;
 
 	UI::Textarea title_;
-	UI::Box title_box_;
 	UI::Box content_box_;
 	UI::Textarea map_name_;
 	UI::MultilineTextarea map_description_;

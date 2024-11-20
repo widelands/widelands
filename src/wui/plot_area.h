@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,6 +51,7 @@ struct WuiPlotArea : public UI::Panel {
 
 	// sample_rate is in in milliseconds
 	WuiPlotArea(UI::Panel* parent,
+	            const std::string& name,
 	            int32_t x,
 	            int32_t y,
 	            int32_t w,
@@ -149,6 +150,7 @@ private:
  */
 struct WuiPlotAreaSlider : public UI::DiscreteSlider {
 	WuiPlotAreaSlider(Panel* const parent,
+	                  const std::string& name,
 	                  WuiPlotArea& plot_area,
 	                  const int32_t x,
 	                  const int32_t y,
@@ -158,6 +160,7 @@ struct WuiPlotAreaSlider : public UI::DiscreteSlider {
 	                  const uint32_t cursor_size = 20,
 	                  const bool enabled = true)
 	   : DiscreteSlider(parent,
+	                    name,
 	                    x,
 	                    y,
 	                    w,
@@ -187,6 +190,7 @@ private:
 struct DifferentialPlotArea : public WuiPlotArea {
 public:
 	DifferentialPlotArea(UI::Panel* parent,
+	                     const std::string& name,
 	                     int32_t x,
 	                     int32_t y,
 	                     int32_t w,

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 """Do not use std::string::replace to replace a signle character in a
 std::string (just assign the desired character to the position)."""

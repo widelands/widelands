@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 #include "wui/economy_options_window.h"
 #include "wui/portdockwaresdisplay.h"
 #include "wui/soldier_statistics_menu.h"
+#include "wui/soldierlist.h"
 #include "wui/waresdisplay.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
@@ -53,6 +54,11 @@ public:
 protected:
 	void draw_ware(RenderTarget& dst, Widelands::DescriptionIndex ware) override;
 
+	uint32_t amount_of(const Widelands::DescriptionIndex ware) override {
+		return (get_type() == Widelands::wwWORKER ? warehouse_.get_workers() : warehouse_.get_wares())
+		   .stock(ware);
+	}
+
 private:
 	Widelands::Warehouse& warehouse_;
 };
@@ -64,7 +70,6 @@ WarehouseWaresDisplay::WarehouseWaresDisplay(UI::Panel* parent,
                                              bool selectable)
    : WaresDisplay(parent, 0, 0, wh.owner().tribe(), type, selectable), warehouse_(wh) {
 	set_inner_size(width, 0);
-	add_warelist(type == Widelands::wwWORKER ? warehouse_.get_workers() : warehouse_.get_wares());
 	if (type == Widelands::wwWORKER) {
 		const std::vector<Widelands::DescriptionIndex>& worker_types_without_cost =
 		   warehouse_.owner().tribe().worker_types_without_cost();
@@ -92,6 +97,8 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionI
 	case Widelands::StockPolicy::kNormal:
 		// don't draw anything for the normal policy
 		return;
+	default:
+		NEVER_HERE();
 	}
 	assert(pic != nullptr);
 
@@ -124,7 +131,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
                                          InteractiveBase& ib,
                                          Widelands::Warehouse& wh,
                                          Widelands::WareWorker type)
-   : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+   : UI::Box(parent, UI::PanelStyle::kWui, "wares_panel", 0, 0, UI::Box::Vertical),
      interactive_base_(ib),
      wh_(wh),
      can_act_(interactive_base_.can_act(wh_.owner().player_number())),
@@ -132,7 +139,8 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
      display_(this, width, wh_, type_, can_act_) {
 	add(&display_, Resizing::kFullSize);
 
-	UI::Box* buttons = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box* buttons =
+	   new UI::Box(this, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal);
 	add(buttons, UI::Box::Resizing::kFullSize);
 	UI::Button* b;
 
@@ -259,7 +267,7 @@ void WarehouseWindow::setup_name_field_editbox(UI::Box& vbox) {
 		return BuildingWindow::setup_name_field_editbox(vbox);
 	}
 
-	UI::EditBox* name_field = new UI::EditBox(&vbox, 0, 0, 0, UI::PanelStyle::kWui);
+	UI::EditBox* name_field = new UI::EditBox(&vbox, "name", 0, 0, 0, UI::PanelStyle::kWui);
 	name_field->set_text(warehouse->get_warehouse_name());
 	name_field->changed.connect([this, name_field]() {
 		Widelands::Warehouse* wh = warehouse_.get(ibase()->egbase());
@@ -290,10 +298,11 @@ void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	   new WarehouseWaresPanel(get_tabs(), Width, *ibase(), *warehouse, Widelands::wwWORKER),
 	   _("Workers"));
 
-	get_tabs()->add(
-	   "soldiers", g_image_cache->get(pic_tab_soldiers),
+	UI::Box* soldiers_box =
+	   new UI::Box(get_tabs(), UI::PanelStyle::kWui, "soldiers_box", 0, 0, UI::Box::Vertical);
+	soldiers_box->add(
 	   new SoldierStatisticsPanel(
-	      *get_tabs(), warehouse->owner(),
+	      *soldiers_box, warehouse->owner(),
 	      [this](uint32_t h, uint32_t a, uint32_t d, uint32_t e) {
 		      uint32_t n = 0;
 		      if (Widelands::Warehouse* wh = warehouse_.get(ibase()->egbase())) {
@@ -307,7 +316,14 @@ void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 		      }
 		      return n;
 	      }),
-	   _("Soldiers"));
+	   UI::Box::Resizing::kFullSize);
+
+	if (warehouse->attack_target()->can_be_attacked()) {
+		soldiers_box->add(
+		   create_soldier_list(*soldiers_box, *ibase(), *warehouse), UI::Box::Resizing::kFullSize);
+	}
+
+	get_tabs()->add("soldiers", g_image_cache->get(pic_tab_soldiers), soldiers_box, _("Soldiers"));
 
 	if (const Widelands::PortDock* pd = warehouse->get_portdock()) {
 		get_tabs()->add("dock_wares", g_image_cache->get(pic_tab_dock_wares),

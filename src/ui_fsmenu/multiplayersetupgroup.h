@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2023 by the Widelands Development Team
+ * Copyright (C) 2010-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,7 +63,7 @@ private:
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
 	UI::Panel* launchgame_;
-	UI::Box clientbox_, playerbox_, scrollable_playerbox_;
+	UI::Box clientbox_, scrollable_clientbox_, playerbox_, scrollable_playerbox_;
 	UI::Textarea clients_, players_;
 	int32_t buth_;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,7 @@
 #include "editor/tools/info_tool.h"
 
 #include "editor/ui_menus/field_info_window.h"
+#include "graphic/style_manager.h"
 #include "wui/unique_window_handler.h"
 
 constexpr int kOffset = 30;
@@ -39,8 +40,13 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 
 	registry.open_window = [this, &parent, &registry, &center, &f, &tf, map]() {
 		// if window reaches bottom right corner, start from top left corner again
-		int a = (parent.get_inner_w() - FieldInfoWindow::total_width) / kOffset;
-		int b = (parent.get_inner_h() - FieldInfoWindow::total_height) / kOffset;
+		const UI::WindowStyleInfo& style = g_style_manager->window_style(UI::WindowStyle::kWui);
+		int a = (parent.get_inner_w() - FieldInfoWindow::kWidth - style.left_border_thickness() -
+		         style.right_border_thickness()) /
+		        kOffset;
+		int b = (parent.get_inner_h() - FieldInfoWindow::kHeight - style.top_border_thickness() -
+		         style.bottom_border_thickness()) /
+		        kOffset;
 		int offset_factor = number_of_open_windows_ % std::min(a, b);
 		int offset = offset_factor * kOffset;
 

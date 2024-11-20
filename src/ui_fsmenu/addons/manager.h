@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2023 by the Widelands Development Team
+ * Copyright (C) 2020-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -84,6 +84,9 @@ public:
 	bool is_remote(const std::string& name) const;
 	void erase_remote(std::shared_ptr<AddOns::AddOnInfo>);
 
+	FsMenu::MainMenu& fsmm() {
+		return fsmm_;
+	}
 	const std::string& username() const {
 		return username_;
 	}

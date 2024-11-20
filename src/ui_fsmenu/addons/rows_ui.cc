@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2023 by the Widelands Development Team
+ * Copyright (C) 2021-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,7 @@ void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const 
 		                       "Category: %4$s\n"
 		                       "%5$s\n\n"
 		                       "Note that this add-on can not be downloaded again from the server.") :
-                           _("Are you certain that you want to uninstall this add-on?\n\n"
+		                     _("Are you certain that you want to uninstall this add-on?\n\n"
 		                       "%1$s\n"
 		                       "by %2$s\n"
 		                       "Version %3$s\n"
@@ -81,6 +81,9 @@ void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const 
 				AddOns::update_ui_theme(AddOns::UpdateThemeAction::kAutodetect);
 				ctrl->get_topmost_forefather().template_directory_changed();
 			}
+			if (info->category == AddOns::AddOnCategory::kUIPlugin) {
+				ctrl->fsmm().reinit_plugins();
+			}
 			return ctrl->rebuild(true);
 		}
 	}
@@ -108,7 +111,7 @@ std::string required_wl_version_and_sync_safety_string(std::shared_ptr<AddOns::A
 		}
 		result += g_style_manager
 		             ->font_style(info->matches_widelands_version() ? UI::FontStyle::kItalic :
-                                                                    UI::FontStyle::kWarning)
+		                                                              UI::FontStyle::kWarning)
 		             .as_font_tag(str);
 	}
 	return result;
@@ -122,6 +125,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                                      bool enabled)
    : UI::Panel(parent,
                UI::PanelStyle::kFsMenu,
+               format("installed_addon_row_%s", info->internal_name),
                0,
                0,
                3 * kRowButtonSize,
@@ -148,12 +152,14 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                                                   "images/ui_basic/checkbox_empty.png"),
                      enabled ? _("Disable") : _("Enable"),
                      UI::Button::VisualState::kFlat),
-     icon_(this, UI::PanelStyle::kFsMenu, info_->icon),
+     icon_(this, UI::PanelStyle::kFsMenu, "icon", info_->icon),
      category_(this,
                UI::PanelStyle::kFsMenu,
+               "category",
                g_image_cache->get(AddOns::kAddOnCategories.at(info->category).icon)),
      version_(this,
               UI::PanelStyle::kFsMenu,
+              "version",
               UI::FontStyle::kFsMenuInfoPanelHeading,
               0,
               0,
@@ -164,6 +170,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
               UI::Align::kCenter),
      txt_(
         this,
+        "description",
         0,
         0,
         24,
@@ -192,14 +199,16 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 			if (pair.first->internal_name == info->internal_name) {
 				pair.second = !pair.second;
 				toggle_enabled_.set_pic(g_image_cache->get(pair.second ?
-                                                          "images/ui_basic/checkbox_checked.png" :
-                                                          "images/ui_basic/checkbox_empty.png"));
+				                                              "images/ui_basic/checkbox_checked.png" :
+				                                              "images/ui_basic/checkbox_empty.png"));
 				toggle_enabled_.set_tooltip(pair.second ? _("Disable") : _("Enable"));
 				if (pair.first->category == AddOns::AddOnCategory::kTheme) {
 					AddOns::update_ui_theme(pair.second ? AddOns::UpdateThemeAction::kEnableArgument :
-                                                     AddOns::UpdateThemeAction::kAutodetect,
+					                                      AddOns::UpdateThemeAction::kAutodetect,
 					                        pair.first->internal_name);
 					get_topmost_forefather().template_directory_changed();
+				} else if (pair.first->category == AddOns::AddOnCategory::kUIPlugin) {
+					ctrl->fsmm().reinit_plugins();
 				}
 				return ctrl->rebuild(true);
 			}
@@ -247,7 +256,7 @@ void InstalledAddOnRow::draw(RenderTarget& r) {
 	UI::Panel::draw(r);
 	r.brighten_rect(Recti(0, 0, get_w(), get_h()), has_focus() ? enabled_ ? -40 : -30 :
 	                                               enabled_    ? -20 :
-                                                                0);
+	                                                             0);
 }
 
 void RemoteAddOnRow::draw(RenderTarget& r) {
@@ -260,7 +269,13 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                                std::shared_ptr<AddOns::AddOnInfo> info,
                                const AddOns::AddOnVersion& installed_version,
                                uint32_t installed_i18n_version)
-   : UI::Panel(parent, UI::PanelStyle::kFsMenu, 0, 0, 3 * kRowButtonSize, 4 * kRowButtonSize),
+   : UI::Panel(parent,
+               UI::PanelStyle::kFsMenu,
+               format("remote_addon_row_%s", info->internal_name),
+               0,
+               0,
+               3 * kRowButtonSize,
+               4 * kRowButtonSize),
      info_(info),
      install_(this,
               "install",
@@ -298,17 +313,23 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                UI::ButtonStyle::kFsMenuSecondary,
                "…",
                _("Comments and Votes")),
-     icon_(this, UI::PanelStyle::kFsMenu, info_->icon),
+     icon_(this, UI::PanelStyle::kFsMenu, "icon", info_->icon),
      category_(this,
                UI::PanelStyle::kFsMenu,
+               "category",
                g_image_cache->get(AddOns::kAddOnCategories.at(info->category).icon)),
      verified_(this,
                UI::PanelStyle::kFsMenu,
+               "verified",
                g_image_cache->get(info->verified ? "images/ui_basic/list_selected.png" :
                                                    "images/ui_basic/stop.png")),
-     quality_(this, UI::PanelStyle::kFsMenu, AddOnQuality::kQualities.at(info->quality)().icon),
+     quality_(this,
+              UI::PanelStyle::kFsMenu,
+              "quality",
+              AddOnQuality::kQualities.at(info->quality)().icon),
      version_(this,
               UI::PanelStyle::kFsMenu,
+              "version",
               UI::FontStyle::kFsMenuInfoPanelHeading,
               0,
               0,
@@ -319,6 +340,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
               UI::Align::kCenter),
      bottom_row_left_(this,
                       UI::PanelStyle::kFsMenu,
+                      "timestamp",
                       UI::FontStyle::kFsTooltip,
                       0,
                       0,
@@ -329,6 +351,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
      bottom_row_right_(
         this,
         UI::PanelStyle::kFsMenu,
+        "statistics",
         UI::FontStyle::kFsTooltip,
         0,
         0,
@@ -337,7 +360,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
         info->internal_name.empty() ?
            "" :
            format(
-              /** TRANSLATORS: Filesize · Download count · Average rating · Number of comments ·
+              /** TRANSLATORS: Filesize • Download count • Average rating • Number of comments •
                  Number of screenshots */
               _("%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"),
               filesize_string(info->total_file_size),
@@ -348,6 +371,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
         UI::Align::kRight),
      txt_(
         this,
+        "description",
         0,
         0,
         24,
@@ -458,28 +482,28 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	   _("Version: %1$s+%2$u"), AddOns::version_to_string(info->version), info->i18n_version));
 	verified_.set_tooltip(
 	   info->internal_name.empty() ?
-         _("Error") :
+	      _("Error") :
 	   info->verified ?
-         _("Verified by the Widelands Development Team") :
-         _("This add-on was not checked by the Widelands Development Team yet. We cannot guarantee "
+	      _("Verified by the Widelands Development Team") :
+	      _("This add-on was not checked by the Widelands Development Team yet. We cannot guarantee "
 	        "that it does not contain harmful or offensive content."));
 	quality_.set_tooltip(info->internal_name.empty() ?
-                           _("Error") :
-                           AddOnQuality::kQualities.at(info->quality)().description);
+	                        _("Error") :
+	                        AddOnQuality::kQualities.at(info->quality)().description);
 	bottom_row_right_.set_tooltip(
 	   info->internal_name.empty() ?
-         "" :
-         format(
+	      "" :
+	      format(
 	         "%s<br>%s<br>%s<br>%s<br>%s",
 	         format(ngettext("Total size: %u byte", "Total size: %u bytes", info->total_file_size),
 	                info->total_file_size),
 	         format(
 	            ngettext("%u download", "%u downloads", info->download_count), info->download_count),
 	         (info->number_of_votes() != 0u ?
-                format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
+	             format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
 	                               "Average rating: %1$.3f (%2$u votes)", info->number_of_votes()),
 	                      info->average_rating(), info->number_of_votes()) :
-                _("No votes yet")),
+	             _("No votes yet")),
 	         format(ngettext("%u comment", "%u comments", info->user_comments.size()),
 	                info->user_comments.size()),
 	         format(ngettext("%u screenshot", "%u screenshots", info->screenshots.size()),

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,13 +21,14 @@
 
 #include <memory>
 
-#include "logic/map_revision.h"
+#include "scripting/logic.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "ui_fsmenu/menu.h"
-#include "wui/mapdata.h"
+#include "wui/plugins.h"
+#include "wui/unique_window_handler.h"
 
 namespace Widelands {
 class Game;
@@ -46,6 +47,7 @@ enum class MenuTarget {
 	kTutorial,
 	kContinueLastsave,
 	kReplay,
+	kReplayLast,
 	kOptions,
 	kAddOns,
 	kAbout,
@@ -100,16 +102,42 @@ public:
 	int16_t calc_desired_window_width(UI::Window::WindowLayoutID);
 	int16_t calc_desired_window_height(UI::Window::WindowLayoutID);
 
-	using MapEntry = std::pair<MapData, Widelands::MapVersion>;
-	static void find_maps(const std::string& directory, std::vector<MapEntry>& results);
-
 	Widelands::Game* create_safe_game(bool show_error = true);
+
+	UniqueWindowHandler& unique_windows() {
+		return unique_windows_;
+	}
+
+	LuaFsMenuInterface& lua() {
+		return *lua_;
+	}
+
+	void
+	set_lua_shortcut(const std::string& name, const std::string& action, bool failsafe, bool down) {
+		plugin_actions_->set_keyboard_shortcut(name, action, failsafe, down);
+	}
+
+	void reinit_plugins();
+	void add_plugin_timer(const std::string& action, uint32_t interval, bool failsafe) {
+		plugin_actions_->add_plugin_timer(action, interval, failsafe);
+	}
+
+	// Signal ending immediately from any phase
+	void abort_splashscreen();
 
 protected:
 	void update_template() override;
 
 private:
 	void layout() override;
+	void think() override;
+
+	UniqueWindowHandler unique_windows_;
+	std::unique_ptr<LuaFsMenuInterface> lua_;
+	std::unique_ptr<PluginActions> plugin_actions_;
+
+	// Called only from splash screen phase to signal start of fading
+	void end_splashscreen();
 
 	Recti box_rect_;
 	uint32_t butw_, buth_;
@@ -119,32 +147,37 @@ private:
 
 	UI::Dropdown<MenuTarget> singleplayer_;
 	UI::Dropdown<MenuTarget> multiplayer_;
-	UI::Button replay_;
+	UI::Dropdown<MenuTarget> replay_;
 	UI::Dropdown<MenuTarget> editor_;
 	UI::Button addons_;
 	UI::Button options_;
 	UI::Button about_;
 	UI::Button exit_;
+	UI::Textarea clock_;
 	UI::Textarea version_;
 	UI::Textarea copyright_;
 
-	std::string filename_for_continue_playing_, filename_for_continue_editing_;
+	std::string filename_for_continue_playing_;
+	std::string filename_for_continue_editing_;
+	std::string filename_for_last_replay_;
 
-	const Image* splashscreen_;
 	const Image* title_image_;
 
 	uint32_t init_time_;
+
+	enum class SplashState { kSplash, kSplashFadeOut, kMenuFadeIn, kDone };
+	SplashState splash_state_{SplashState::kDone};
 
 	std::vector<std::string> images_;
 	uint32_t last_image_exchange_time_{0U};
 	size_t draw_image_{0U};
 	size_t last_image_{0U};
-	Rectf image_pos(const Image&, bool crop = true);
 	Rectf title_pos();
 	float calc_opacity(uint32_t time) const;
 
 	bool visible_{true};
 	void set_button_visibility(bool);
+	bool system_clock_{true};
 
 	void action(MenuTarget);
 	void exit(bool force = false);

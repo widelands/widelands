@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 
 error_msg = "Do not use operator synonyms, e.g. use \"&&\" rather than \"and\"."

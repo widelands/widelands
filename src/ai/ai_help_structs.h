@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2023 by the Widelands Development Team
+ * Copyright (C) 2009-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -478,7 +478,7 @@ struct BuildingObserver {
 		kMine
 	};
 
-	int32_t total_count() const;
+	[[nodiscard]] uint32_t total_count() const;
 	AiModeBuildings aimode_limit_status() const;
 	bool buildable(const Widelands::Player& p) const;
 
@@ -531,12 +531,12 @@ struct BuildingObserver {
 	int16_t initial_preciousness;
 	int16_t max_preciousness;
 	int16_t max_needed_preciousness;
-	int32_t cnt_built;
-	int32_t cnt_under_construction;
-	int32_t cnt_target;           // number of buildings as target
-	int32_t cnt_limit_by_aimode;  // limit imposed by weak or normal AI mode
+	uint32_t cnt_built;
+	uint32_t cnt_under_construction;
+	uint32_t cnt_target;           // number of buildings as target
+	uint32_t cnt_limit_by_aimode;  // limit imposed by weak or normal AI mode
 
-	int32_t cnt_upgrade_pending;  // number of buildings that are to be upgraded
+	uint32_t cnt_upgrade_pending;  // number of buildings that are to be upgraded
 
 	// used to track amount of wares produced by building
 	uint32_t stocklevel_count;
@@ -577,10 +577,14 @@ struct TrainingSiteObserver {
 };
 
 struct WarehouseSiteObserver {
-
 	Widelands::Warehouse* site;
 	BuildingObserver* bo;
-	uint32_t flag_distances_last_update;
+};
+
+struct PortSiteObserver {
+	Widelands::Warehouse* site;
+	BuildingObserver* bo;
+	uint32_t ships_assigned;
 };
 
 struct ShipObserver {
@@ -588,6 +592,11 @@ struct ShipObserver {
 	bool waiting_for_command_ = false;
 	Time last_command_time = Time(0);
 	bool escape_mode = false;
+
+	// Used for warships, stores whether the ship is assigned to a port.
+	// has_destination() cannot be used alone, because newly refitted warships
+	// keep the refitting port as destination.
+	bool guarding = false;
 
 	// direction by which the ship circumvents an island
 	// this is the last circle-island command's direction

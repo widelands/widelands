@@ -1,4 +1,4 @@
-#!/usr/bin/python -tt
+#!/usr/bin/python3 -tt
 
 """Checks that all TRANSLATORS: comments are immediately above the string to be
 translated.
@@ -17,7 +17,7 @@ def evaluate_matches(lines, fn):
     last_translators_comment = ''
     last_translators_comment_line = 0
 
-    translator_tag = re.compile('.*[*/]\s+[TRANSLATOR]{10}.*')
+    translator_tag = re.compile(r'.*[*/]\s+[TRANSLATOR]{10}.*')
 
     for lineno, line in enumerate(lines, 1):
         # Find start of translators' comment

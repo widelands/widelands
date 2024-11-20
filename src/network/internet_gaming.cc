@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2023 by the Widelands Development Team
+ * Copyright (C) 2004-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #include <algorithm>
 #include <memory>
 
+#include "base/crypto.h"
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/random.h"
@@ -31,7 +32,6 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "network/internet_gaming_messages.h"
 #include "network/internet_gaming_protocol.h"
-#include "third_party/sha1/sha1.h"
 
 /// Max length of formatted time string
 const uint8_t kTimeFormatLength = 32;

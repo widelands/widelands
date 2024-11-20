@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2023 by the Widelands Development Team
+ * Copyright (C) 2010-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,8 +44,7 @@ static size_t priority_to_index(const Widelands::WarePriority& priority) {
 	if (priority == Widelands::WarePriority::kVeryHigh) {
 		return 4;
 	}
-	// TODO(Nordfriese): For savegame compatibility. Replace with NEVER_HERE() after v1.0
-	return 1;
+	NEVER_HERE();
 }
 static const Widelands::WarePriority& index_to_priority(const size_t priority) {
 	switch (priority) {
@@ -132,25 +131,25 @@ static inline std::string create_tooltip(const bool increase) {
 	   "<p>%s%s%s</p>",
 	   g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
 	      .as_font_tag(increase ?
-                         /** TRANSLATORS: Button tooltip in in a building's wares input queue */
-                         _("Increase the number of wares you want to be stored here") :
-                         /** TRANSLATORS: Button tooltip in in a building's wares input queue */
-                         _("Decrease the number of wares you want to be stored here")),
+	                      /** TRANSLATORS: Button tooltip in in a building's wares input queue */
+	                      _("Increase the number of wares you want to be stored here") :
+	                      /** TRANSLATORS: Button tooltip in in a building's wares input queue */
+	                      _("Decrease the number of wares you want to be stored here")),
 	   as_listitem(increase ?
-                        /** TRANSLATORS: Button tooltip in in a building's wares input queue -
-                           option explanation */
-                        _("Hold down Shift to increase all ware types at the same time") :
-                        /** TRANSLATORS: Button tooltip in in a building's wares input queue -
-                           option explanation */
-                        _("Hold down Shift to decrease all ware types at the same time"),
+	                  /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+	                     option explanation */
+	                  _("Hold down Shift to increase all ware types at the same time") :
+	                     /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+	                        option explanation */
+	                     _("Hold down Shift to decrease all ware types at the same time"),
 	               UI::FontStyle::kWuiTooltip),
 	   as_listitem(increase ?
-                        /** TRANSLATORS: Button tooltip in in a building's wares input queue -
-                           option explanation */
-                        _("Hold down Ctrl to allow all of this ware") :
-                        /** TRANSLATORS: Button tooltip in in a building's wares input queue -
-                           option explanation */
-                        _("Hold down Ctrl to allow none of this ware"),
+	                  /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+	                     option explanation */
+	                  _("Hold down Ctrl to allow all of this ware") :
+	                     /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+	                        option explanation */
+	                     _("Hold down Ctrl to allow none of this ware"),
 	               UI::FontStyle::kWuiTooltip));
 }
 
@@ -164,7 +163,12 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                                      bool show_only,
                                      bool has_priority,
                                      BuildingWindow::CollapsedState* collapsed)
-   : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+   : UI::Box(parent,
+             UI::PanelStyle::kWui,
+             format("inputqueuedisplay_%u_%u", static_cast<unsigned>(type), ware_or_worker_index),
+             0,
+             0,
+             UI::Box::Horizontal),
      ibase_(interactive_base),
      can_act_(!show_only && ibase_.can_act(building.owner().player_number())),
      show_only_(show_only),
@@ -175,8 +179,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
      queue_(queue),
      settings_(settings),
      max_fill_indicator_(*g_image_cache->get("images/wui/buildings/max_fill_indicator.png")),
-     vbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     hbox_(&vbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     vbox_(this, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical),
+     hbox_(&vbox_, UI::PanelStyle::kWui, "hbox", 0, 0, UI::Box::Horizontal),
      b_decrease_desired_fill_(&hbox_,
                               "decrease_desired",
                               0,
@@ -238,13 +242,22 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                "",
                kButtonSize,
                can_act_ && has_priority_),
-     spacer_(&hbox_, UI::PanelStyle::kWui, 0, 0, priority_.get_w(), priority_.get_h()),
+     spacer_(&hbox_, UI::PanelStyle::kWui, "spacer", 0, 0, priority_.get_w(), priority_.get_h()),
+     priority_indicator_(
+        &hbox_, UI::PanelStyle::kWui, "priority_indicator", 0, 0, kButtonSize / 5, kButtonSize),
      slider_was_moved_(nullptr),
      collapsed_(collapsed),
      nr_icons_(queue_ != nullptr            ? queue_->get_max_size() :
                type_ == Widelands::wwWORKER ? settings_->worker_queues.at(index_).max_fill :
                                               settings_->ware_queues.at(index_).max_fill),
+     max_icons_(nr_icons_),
      icons_(nr_icons_, nullptr),
+     total_fill_(&hbox_,
+                 UI::PanelStyle::kWui,
+                 "total_fill",
+                 UI::FontStyle::kWuiLabel,
+                 std::string(),
+                 UI::Align::kRight),
      fill_index_under_mouse_(-1) {
 
 	assert((queue_ == nullptr) ^ (settings_ == nullptr));
@@ -268,22 +281,22 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	hbox_.add(&b_decrease_desired_fill_);
 
 	for (size_t i = 0; i < nr_icons_; ++i) {
-		icons_[i] = new UI::Icon(&hbox_, UI::PanelStyle::kWui, 0, 0, kButtonSize, kButtonSize,
-		                         type_ == Widelands::wwWARE ?
-                                  building.owner().tribe().get_ware_descr(index_)->icon() :
-                                  building.owner().tribe().get_worker_descr(index_)->icon());
+		icons_[i] = new UI::Icon(
+		   &hbox_, UI::PanelStyle::kWui, format("icon_%u", i), 0, 0, kButtonSize, kButtonSize,
+		   type_ == Widelands::wwWARE ? building.owner().tribe().get_ware_descr(index_)->icon() :
+		                                building.owner().tribe().get_worker_descr(index_)->icon());
 		hbox_.add(icons_[i]);
 	}
-
 	hbox_.add_inf_space();
 	hbox_.add(&b_increase_desired_fill_);
 	hbox_.add(&b_increase_real_fill_);
+	hbox_.add(&total_fill_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	priority_.set_cursor_fixed_height(kButtonSize * 2 / 3);
 
 	// To make sure the fill buttons are aligned even when some queues
 	// have priority buttons and some don't (e.g. in barracks)
-	hbox_.add_space(kButtonSize / 4);
+	hbox_.add(&priority_indicator_);
 	priority_.set_visible(has_priority_);
 	spacer_.set_visible(!has_priority_);
 	hbox_.add(&priority_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -299,7 +312,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	if (can_act_) {
 		collapse_.sigclicked.connect([this]() {
 			*collapsed_ = is_collapsed() ? BuildingWindow::CollapsedState::kExpanded :
-                                        BuildingWindow::CollapsedState::kCollapsed;
+			                               BuildingWindow::CollapsedState::kCollapsed;
 		});
 
 		b_decrease_desired_fill_.sigclicked.connect([this]() {
@@ -347,8 +360,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	set_collapsed();
 
 	set_tooltip(type_ == Widelands::wwWARE ?
-                  building.owner().tribe().get_ware_descr(index_)->descname() :
-                  building.owner().tribe().get_worker_descr(index_)->descname());
+	               building.owner().tribe().get_ware_descr(index_)->descname() :
+	               building.owner().tribe().get_worker_descr(index_)->descname());
 
 	if (nr_icons_ == 0) {
 		// Can happen when this is a dropout queue that has already been emptied.
@@ -420,7 +433,7 @@ bool InputQueueDisplay::handle_mousewheel(int32_t x, int32_t y, uint16_t modstat
 		big_step = true;
 	}
 
-	if (get_mouse_position().x < priority_.get_x() - kButtonSize / 4) {
+	if (get_mouse_position().x < priority_indicator_.get_x()) {
 		// Mouse is over desired fill
 
 		if (big_step) {
@@ -613,14 +626,18 @@ void InputQueueDisplay::set_collapsed() {
 	b_increase_real_fill_.set_visible(!is_collapsed() && ibase_.omnipotent());
 	collapse_.set_tooltip(is_collapsed() ? _("Show controls") : _("Hide controls"));
 	collapse_.set_pic(g_image_cache->get(is_collapsed() ? "images/ui_basic/scrollbar_right.png" :
-                                                         "images/ui_basic/scrollbar_left.png"));
+	                                                      "images/ui_basic/scrollbar_left.png"));
 }
 
 inline Widelands::ProductionsiteSettings::InputQueueSetting*
 InputQueueDisplay::get_setting() const {
 	return settings_ != nullptr ? type_ == Widelands::wwWARE ? &settings_->ware_queues.at(index_) :
-                                                              &settings_->worker_queues.at(index_) :
-                                 nullptr;
+	                                                           &settings_->worker_queues.at(index_) :
+	                              nullptr;
+}
+
+void InputQueueDisplay::set_max_icons(size_t m) {
+	max_icons_ = m;
 }
 
 static const RGBAColor kColorComing(127, 127, 127, 191);
@@ -659,10 +676,12 @@ void InputQueueDisplay::think() {
 	assert(max_fill <= nr_icons_);
 
 	for (unsigned i = 0; i < nr_icons_; ++i) {
-		icons_[i]->set_visible(i < max_fill);
+		icons_[i]->set_visible(i < max_fill && i < max_icons_);
 		icons_[i]->set_grey_out(i >= real_fill);
 		icons_[i]->set_grey_out_color(i < real_fill + nr_coming ? kColorComing : kColorMissing);
 	}
+	total_fill_.set_text(max_fill > max_icons_ ? format_l(_("+%u"), max_fill - max_icons_) :
+	                                             std::string());
 
 	if (has_priority_) {
 		const Widelands::WarePriority& p =                                     // NOLINT
@@ -714,8 +733,8 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 		auto calc_xpos = [this](const size_t fill) {
 			return (fill == 0 ? icons_[0]->get_x() :
 			        fill == nr_icons_ ?
-                             icons_[nr_icons_ - 1]->get_x() + icons_[nr_icons_ - 1]->get_w() :
-                             (icons_[fill - 1]->get_x() + icons_[fill - 1]->get_w() +
+			                    icons_[nr_icons_ - 1]->get_x() + icons_[nr_icons_ - 1]->get_w() :
+			                    (icons_[fill - 1]->get_x() + icons_[fill - 1]->get_w() +
 			                     icons_[fill]->get_x()) /
 			                       2) +
 			       hbox_.get_x() - max_fill_indicator_.width() / 2;
@@ -728,21 +747,20 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 		if (can_act_ && fill_index_under_mouse_ >= 0) {
 			r.blitrect_scale(Rectf(calc_xpos(fill_index_under_mouse_), ypos,
 			                       max_fill_indicator_.width(), max_fill_indicator_.height()),
-			                 &max_fill_indicator_,
-			                 Recti(0, 0, max_fill_indicator_.width(), max_fill_indicator_.height()),
-			                 0.4f, BlendMode::Default);
+			                 &max_fill_indicator_, max_fill_indicator_.rect(), 0.4f,
+			                 BlendMode::Default);
 		}
 	}
 
 	// Draw priority indicator
 	if (has_priority_ && is_collapsed()) {
 		const size_t p = priority_to_index(queue_ != nullptr ? b->get_priority(type_, index_) :
-                                                             get_setting()->priority);
-		const int w = kButtonSize / 5;
-		const int x = hbox_.get_x() + collapse_.get_x() - w;
+		                                                       get_setting()->priority);
+		const int w = priority_indicator_.get_w();
+		// Add kButtonSize / 4 to the position to align it against the collapse button
+		const int x = hbox_.get_x() + priority_indicator_.get_x() + kButtonSize / 4;
 		r.brighten_rect(Recti(x, hbox_.get_y(), w, kButtonSize), -32);
-		r.fill_rect(Recti(x, hbox_.get_y() + (4 - p) * kButtonSize / 5, w, kButtonSize / 5),
-		            kPriorityColors[p], BlendMode::Copy);
+		r.fill_rect(Recti(x, hbox_.get_y() + (4 - p) * w, w, w), kPriorityColors[p], BlendMode::Copy);
 	}
 
 	UI::Box::draw_overlay(r);

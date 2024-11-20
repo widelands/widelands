@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2023 by the Widelands Development Team
+ * Copyright (C) 2008-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -83,24 +83,27 @@ bool CheckStepDefault::allowed(const Map& /* map */,
                                const FCoords& start,
                                const FCoords& end,
                                int32_t /* dir */,
-                               CheckStep::StepId /* id */) const {
+                               CheckStep::StepId id) const {
 	NodeCaps const endcaps = end.field->nodecaps();
 
 	if ((endcaps & movecaps_) != 0) {
 		return true;
 	}
 
-	// Swimming bobs are allowed to move from a water field to a shore field
-	NodeCaps const startcaps = start.field->nodecaps();
+	// Swimming bobs are allowed to move from a water field to a shore field as the last step.
+	if (id != CheckStep::StepId::stepLast || (endcaps & MOVECAPS_WALK) == 0) {
+		return false;
+	}
 
-	return ((endcaps & MOVECAPS_WALK) != 0) && ((startcaps & movecaps_ & MOVECAPS_SWIM) != 0);
+	NodeCaps const startcaps = start.field->nodecaps();
+	return (startcaps & movecaps_ & MOVECAPS_SWIM) != 0;
 }
 
 bool CheckStepDefault::reachable_dest(const Map& map, const FCoords& dest) const {
 	NodeCaps const caps = dest.field->nodecaps();
 
 	if ((caps & movecaps_) == 0) {
-		if (!(((movecaps_ & MOVECAPS_SWIM) != 0) && ((caps & MOVECAPS_WALK) != 0))) {
+		if (((movecaps_ & MOVECAPS_SWIM) == 0) || ((caps & MOVECAPS_WALK) == 0)) {
 			return false;
 		}
 		if (!map.can_reach_by_water(dest)) {
@@ -155,6 +158,8 @@ bool CheckStepFerry::allowed(const Map& map,
 		fd = map.tl_n(from);
 		fr = to;
 		break;
+	default:
+		NEVER_HERE();
 	}
 	const Descriptions& descriptions = egbase_.descriptions();
 	return ((descriptions.get_terrain_descr(fd.field->terrain_d())->get_is() &
@@ -228,8 +233,8 @@ bool CheckStepRoad::allowed(const Map& map,
 
 	// Calculate cost and passability
 	if (((endcaps & movecaps_) == 0) &&
-	    !(((endcaps & MOVECAPS_WALK) != 0) &&
-	      ((player_.get_buildcaps(start) & movecaps_ & MOVECAPS_SWIM) != 0))) {
+	    (((endcaps & MOVECAPS_WALK) == 0) ||
+	     ((player_.get_buildcaps(start) & movecaps_ & MOVECAPS_SWIM) == 0))) {
 		return false;
 	}
 
@@ -251,7 +256,7 @@ bool CheckStepRoad::reachable_dest(const Map& map, const FCoords& dest) const {
 	NodeCaps const caps = dest.field->nodecaps();
 
 	if ((caps & movecaps_) == 0) {
-		if (!(((movecaps_ & MOVECAPS_SWIM) != 0) && ((caps & MOVECAPS_WALK) != 0))) {
+		if (((movecaps_ & MOVECAPS_SWIM) == 0) || ((caps & MOVECAPS_WALK) == 0)) {
 			return false;
 		}
 		if (!map.can_reach_by_water(dest)) {

@@ -1,4 +1,4 @@
-#!/usr/bin/python -tt
+#!/usr/bin/python3 -tt
 
 # QT Creator likes to add __cxx11 to the namespace when autocompleting
 # std::string, which will break clang builds.

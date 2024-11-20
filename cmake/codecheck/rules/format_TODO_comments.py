@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import re
 
@@ -15,38 +15,38 @@ def evaluate_matches(lines, fn):
             errors.append(
                 (fn, lineno+1, "Use \"TODO(username): <msg>\". Do not use\"FIXME\"."))
 
-        elif re.compile('/\s*BUG').search(line):
+        elif re.compile(r'/\s*BUG').search(line):
             errorfound = True
             errors.append(
                 (fn, lineno+1, "Use \"TODO(username): <msg>\". Do not use\"BUG\"."))
 
-        elif re.compile('[*]\s*BUG').search(line):
+        elif re.compile(r'[*]\s*BUG').search(line):
             errorfound = True
             errors.append(
                 (fn, lineno+1, "Use \"TODO(username): <msg>\". Do not use\"BUG\" or put TODOs in Doxygen comments."))
 
         # No dogygen
-        elif line.count('\TODO'):
+        elif line.count(r'\TODO'):
             errorfound = True
             errors.append(
                 (fn, lineno+1, "Use \"TODO(username): <msg>\". Do not put TODOs in Doxygen comments."))
 
-        elif line.count('\todo'):
+        elif line.count(r'\todo'):
             errorfound = True
             errors.append(
                 (fn, lineno+1, "Use \"TODO(username): <msg>\". Do not put TODOs in Doxygen comments."))
 
-        elif re.compile('[*]\s*TODO').search(line):
+        elif re.compile(r'[*]\s*TODO').search(line):
             errorfound = True
             errors.append(
                 (fn, lineno+1, "Use \"TODO(username): <msg>\". Do not put TODOs in Doxygen comments."))
 
-        elif re.compile('///\s*TODO').search(line):
+        elif re.compile(r'///\s*TODO').search(line):
             errorfound = True
             errors.append(
                 (fn, lineno+1, "Use \"TODO(username): <msg>\". Do not put TODOs in Doxygen comments."))
 
-        elif re.compile('//!\s*TODO').search(line):
+        elif re.compile(r'//!\s*TODO').search(line):
             errorfound = True
             errors.append(
                 (fn, lineno+1, "Use \"TODO(username): <msg>\". Do not put TODOs in Doxygen comments."))
@@ -85,8 +85,8 @@ forbidden = [
     '* TODO: This is a todo comment',
     '/// TODO: This is a todo comment',
     '//! TODO: This is a todo comment',
-    '\TODO: This is a todo comment',
-    '\\\todo: This is a todo comment'
+    r'\TODO: This is a todo comment',
+    r'\\\todo: This is a todo comment'
 ]
 
 allowed = [

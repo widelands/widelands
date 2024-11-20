@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2023 by the Widelands Development Team
+ * Copyright (C) 2016-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@ namespace UI {
  */
 class FileViewPanel : public TabPanel {
 public:
-	FileViewPanel(Panel* parent, UI::TabPanelStyle background_style);
+	FileViewPanel(Panel* parent, UI::TabPanelStyle background_style, const std::string& name);
 
 	/// Reads the text for the active tab from 'lua_script' if it hasn't been loaded yet.
 	void load_tab_contents();

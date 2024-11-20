@@ -21,7 +21,7 @@ On how to download Widelands, see https://www.widelands.org/wiki/Download/
 
 ## Compiling
 
-We support compiling Widelands for Linux, Windows under MSys2 and MSVC, and MacOS with GCC >= 7 or Clang/LLVM >= 7, though it might work with other compilers too. We have more detailed documentation available at: https://www.widelands.org/wiki/BuildingWidelands/
+We support compiling Widelands for Linux, Windows under MSys2 and MSVC, and MacOS with GCC >= 8 or Clang/LLVM >= 7, though it might work with other compilers too. We have more detailed documentation available at: https://www.widelands.org/wiki/BuildingWidelands/
 
 
 ### Dependencies
@@ -49,6 +49,7 @@ You can then compile by running our convenience script.
 | --- | --- |
 | `./compile.sh` | Full debug build |
 | `./compile.sh -r -w` | Release build |
+| `./compile.sh -e -w` | Release build with debugging symbols |
 | `./compile.sh -h` | List available options |
 
 When compiling has finished, you can call Widelands with
@@ -99,9 +100,8 @@ Note that CMake options are prefixed with `-D`. These are the available options:
 
 | Name | Values | Default| Function
 | --- | --- | --- | --- |
-| `CMAKE_BUILD_TYPE` | `Debug`/`Release` | `Debug` | Create a release or debug build |
+| `CMAKE_BUILD_TYPE` | `Debug`/`Release`/`RelWithDebInfo` | `Debug` | Create a release or debug build |
 | `OPTION_ASAN` | `ON`/`OFF` | `ON` for Debug builds /`OFF` for Release builds | Use AddressSanitizer. Switching this off only works once. You will have to clear the `build` directory if you want to switch this off again in a later build. |
-| `OPTION_BUILD_TRANSLATIONS` | `ON`/`OFF` | `ON` | Build translations |
 | `OPTION_BUILD_CODECHECK` | `ON`/`OFF` | `ON` | Build codecheck. Only available in Debug builds. |
 | `OPTION_BUILD_WEBSITE_TOOLS` | `ON`/`OFF` | `ON` | Build website-related tools |
 | `OPTION_BUILD_TESTS` | `ON`/`OFF` | `ON` | Build unit tests |
@@ -112,10 +112,11 @@ Note that CMake options are prefixed with `-D`. These are the available options:
 | `OPTION_USE_GLBINDING` | `ON`/`OFF` | `OFF` | Use glbinding instead of GLEW |
 | `OPTION_GLEW_STATIC` | `ON`/`OFF` | `OFF` | Use static GLEW Library |
 | `OPTION_FORCE_EMBEDDED_MINIZIP` | `ON`/`OFF` | `OFF` | Used embedded minizip sources (skip checking for installed minizip library) |
+| `NEEDS_EXTERNAL_FILESYSTEM` | `ON`/`OFF` | Autodetected from compiler version | Whether `std::filesystem` needs to be linked against an extra library |
 
 #### make/ninja targets
 
-You can add targets to the `make` or `ninja` command, e.g. `make lang` to build only the translations. These are the available targets:
+You can add targets to the `make` or `ninja` command, e.g. `make codecheck` to only run the code check suite. These are the available targets:
 
 | Name | Function |
 | --- | --- |
@@ -123,23 +124,14 @@ You can add targets to the `make` or `ninja` command, e.g. `make lang` to build 
 | `codecheck` | Run the codechecks |
 | `doc` | Generate Doxygen documentation. Currently only with Build Type Debug, but this is easily changed if necessary. |
 | `install` | Install into the target dir, this is `/usr/local` per default (you need root privileges!) unless you change it (see CMake options above) |
-| `lang` | Generate the translations |
 
 ## Contributing
 
-We have some instructions on how to use Git to help you if you're new to GitHub: https://www.widelands.org/wiki/GitPrimer/
+We have some instructions on how to use Git to help you if you're new to Git: https://www.widelands.org/wiki/GitPrimer/
 
 ### Code
 
-The master branch and open pull requests will be formatted automatically by a GitHub action that runs `clang-format`. When you push to an open pull request, the formatting changes will be pushed back to the branch after about four minutes. Don't forget to run 'git pull' before you push again. Formatting is only triggered the first time you push *after* you opened the PR.
-
-You need to enable *local and third-party actions* in the Actions tab of your fork's settings to enable automatic formatting. If you disable actions, no formatting will take place on your branches.
-
-In order to ensure that our continuous integration suite will work properly for branches in your fork, it is strongly recommended that you create a personal access token for our formatting action:
-1. Create a Personal Access Token in your **profile** (https://github.com/settings/tokens). Select the scope `Repo → public_repo` for the new token. The token's note does not matter (use e.g. "Widelands Formatting Bot"). Copy the token's hash.
-2. Create a secret in your **widelands fork** (`https://github.com/<username>/widelands/settings/secrets`). The secret must be named `WIDELANDS_FORMAT_TOKEN`. Its value must be the hash of the token you just created.
-
-More information about [Personal Access Tokens may be found here](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token). More information about [secrets may be found here](https://docs.github.com/en/free-pro-team@latest/github/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets).
+The master branch and all issues and pull requests are mirrored bidirectionally between our developer environments on Codeberg and GitHub by bunnybot. Bunnybot also formats the code (C++, Lua, and Python) in all mirrored branches.
 
 We follow the [Google Styleguide](https://google.github.io/styleguide/cppguide.html).
 

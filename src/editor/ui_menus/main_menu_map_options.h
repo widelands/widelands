@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -86,8 +86,6 @@ private:
 
 	std::vector<SuggestedTeamsEntry*> suggested_teams_entries_;
 	UI::Button new_suggested_team_;
-
-	UI::UniqueWindow::Registry& registry_;
 };
 
 struct SuggestedTeamsEntry : public UI::Panel {

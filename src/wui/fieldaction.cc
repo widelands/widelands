@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,6 +28,7 @@
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/pinned_note.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -75,7 +76,14 @@ private:
 };
 
 BuildGrid::BuildGrid(UI::Panel* parent, Widelands::Player* plr, int32_t x, int32_t y, int32_t cols)
-   : UI::IconGrid(parent, UI::PanelStyle::kWui, x, y, kBuildGridCellSize, kBuildGridCellSize, cols),
+   : UI::IconGrid(parent,
+                  UI::PanelStyle::kWui,
+                  "build_grid",
+                  x,
+                  y,
+                  kBuildGridCellSize,
+                  kBuildGridCellSize,
+                  cols),
      plr_(plr) {
 	icon_clicked.connect([this](Widelands::DescriptionIndex i) { click_slot(i); });
 	mouseout.connect([this](Widelands::DescriptionIndex i) { mouseout_slot(i); });
@@ -225,9 +233,9 @@ static const char* const pic_tab_buildhouse[] = {"images/wui/fieldaction/menu_ta
                                                  "images/wui/fieldaction/menu_tab_buildmedium.png",
                                                  "images/wui/fieldaction/menu_tab_buildbig.png",
                                                  "images/wui/fieldaction/menu_tab_buildport.png"};
-static const char* const tooltip_tab_build[] = {_("Build small building"),
-                                                _("Build medium building"), _("Build big building"),
-                                                _("Build port building")};
+static const char* const tooltip_tab_build[] = {
+   gettext_noop("Build small building"), gettext_noop("Build medium building"),
+   gettext_noop("Build big building"), gettext_noop("Build port building")};
 static const char* const name_tab_build[] = {"small", "medium", "big", "port"};
 
 constexpr const char* const kImgTabBuildmine = "images/wui/fieldaction/menu_tab_buildmine.png";
@@ -263,7 +271,7 @@ FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
      player_(plr),
      map_(ib->egbase().map()),
      node_(ib->get_sel_pos().node, &map_[ib->get_sel_pos().node]),
-     tabpanel_(this, UI::TabPanelStyle::kWuiDark),
+     tabpanel_(this, UI::TabPanelStyle::kWuiDark, "tabs"),
 
      is_showing_workarea_overlaps_(ib->get_display_flag(InteractiveBase::dfShowWorkareaOverlap)),
      building_under_mouse_(Widelands::INVALID_INDEX) {
@@ -346,8 +354,8 @@ static bool suited_for_targeting(Widelands::PlayerNumber p,
 
 			const Widelands::BuildingDescr& descr =
 			   mo->descr().type() == Widelands::MapObjectType::CONSTRUCTIONSITE ?
-               dynamic_cast<const Widelands::ConstructionSite&>(*mo).building() :
-               dynamic_cast<const Widelands::Building&>(*mo).descr();
+			      dynamic_cast<const Widelands::ConstructionSite&>(*mo).building() :
+			      dynamic_cast<const Widelands::Building&>(*mo).descr();
 
 			if (i.descr().collected_by().count(descr.name()) != 0u) {
 				upcast(const Widelands::Building, b, mo);
@@ -371,7 +379,8 @@ Add the buttons you normally get when clicking on a field.
 */
 void FieldActionWindow::add_buttons_auto() {
 	UI::Box* buildbox = nullptr;
-	UI::Box& watchbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box& watchbox =
+	   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "watch_box", 0, 0, UI::Box::Horizontal);
 
 	upcast(InteractiveGameBase, igbase, &ibase());
 	upcast(InteractivePlayer, ipl, igbase);
@@ -380,15 +389,15 @@ void FieldActionWindow::add_buttons_auto() {
 		// Target immovables for removal by workers
 		if (upcast(const Widelands::Immovable, mo, map_.get_immovable(node_))) {
 			if (mo->is_marked_for_removal(ipl->player_number())) {
-				UI::Box& box =
-				   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+				UI::Box& box = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "immovable_actions_box",
+				                            0, 0, UI::Box::Horizontal);
 				add_button(&box, "unmark_for_removal", kImgButtonUnmarkRemoval,
 				           &FieldActionWindow::act_unmark_removal,
 				           _("Marked for removal by a worker – click to unmark"));
 				add_tab("target", kImgTabTarget, &box, _("Immovable Actions"));
 			} else if (suited_for_targeting(ipl->player_number(), ipl->egbase(), *mo)) {
-				UI::Box& box =
-				   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+				UI::Box& box = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "immovable_actions_box",
+				                            0, 0, UI::Box::Horizontal);
 				add_button(&box, "mark_for_removal", kImgButtonMarkRemoval,
 				           &FieldActionWindow::act_mark_removal,
 				           _("Mark this immovable for timely removal by a suited worker"));
@@ -406,7 +415,8 @@ void FieldActionWindow::add_buttons_auto() {
 		const bool can_act = igbase != nullptr ? igbase->can_act(owner) : true;
 
 		// The box with road-building buttons
-		buildbox = new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+		buildbox =
+		   new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
 
 		if (upcast(Widelands::Flag, flag, imm)) {
 			// Add flag actions
@@ -504,7 +514,8 @@ void FieldActionWindow::add_buttons_auto() {
 		    !has_ship_fleet &&
 		    (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
 			if (buildbox == nullptr) {
-				buildbox = new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+				buildbox = new UI::Box(
+				   &tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
 			}
 			has_ship_fleet = true;
 			add_button(
@@ -514,7 +525,8 @@ void FieldActionWindow::add_buttons_auto() {
 		           !has_ferry_fleet &&
 		           (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
 			if (buildbox == nullptr) {
-				buildbox = new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+				buildbox = new UI::Box(
+				   &tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
 			}
 			has_ferry_fleet = true;
 			add_button(
@@ -561,8 +573,8 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 	    !brn.field->is_interior(player_->player_number())) {
 		return;
 	}
-	if (!((brn.field->get_immovable() != nullptr) &&
-	      brn.field->get_immovable()->descr().type() == Widelands::MapObjectType::FLAG) &&
+	if (((brn.field->get_immovable() == nullptr) ||
+	     brn.field->get_immovable()->descr().type() != Widelands::MapObjectType::FLAG) &&
 	    ((player_->get_buildcaps(brn) & Widelands::BUILDCAPS_FLAG) == 0)) {
 		return;
 	}
@@ -594,16 +606,16 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 		// TODO(Nordfriese): Use Player::check_can_build to simplify the code
 
 		if (building_descr->get_built_over_immovable() != Widelands::INVALID_INDEX &&
-		    !((node_.field->get_immovable() != nullptr) &&
-		      node_.field->get_immovable()->has_attribute(
-		         building_descr->get_built_over_immovable()))) {
+		    ((node_.field->get_immovable() == nullptr) ||
+		     !node_.field->get_immovable()->has_attribute(
+		        building_descr->get_built_over_immovable()))) {
 			continue;
 		}
 		// Figure out if we can build it here, and in which tab it belongs
 		if (building_descr->get_ismine()) {
 			if (((building_descr->get_built_over_immovable() == Widelands::INVALID_INDEX ?
-                  buildcaps :
-                  max_nodecaps) &
+			         buildcaps :
+			         max_nodecaps) &
 			     Widelands::BUILDCAPS_MINE) == 0) {
 				continue;
 			}
@@ -613,8 +625,8 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 			int32_t size = building_descr->get_size() - Widelands::BaseImmovable::SMALL;
 
 			if (((building_descr->get_built_over_immovable() == Widelands::INVALID_INDEX ?
-                  buildcaps :
-                  max_nodecaps) &
+			         buildcaps :
+			         max_nodecaps) &
 			     Widelands::BUILDCAPS_SIZEMASK) < size + 1) {
 				continue;
 			}
@@ -671,7 +683,8 @@ Buttons used during road building: Set flag here and Abort
 ===============
 */
 void FieldActionWindow::add_buttons_road(bool flag) {
-	UI::Box& buildbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box& buildbox =
+	   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
 
 	if (flag) {
 		add_button(&buildbox, "build_flag", kImgButtonBuildFlag, &FieldActionWindow::act_buildflag,
@@ -697,7 +710,8 @@ void FieldActionWindow::add_buttons_road(bool flag) {
 }
 
 void FieldActionWindow::add_buttons_waterway(bool flag) {
-	UI::Box& buildbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box& buildbox =
+	   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
 
 	if (flag) {
 		add_button(&buildbox, "build_flag", kImgButtonBuildFlag, &FieldActionWindow::act_buildflag,
@@ -783,6 +797,7 @@ Show a debug widow for this field.
 ===============
 */
 void FieldActionWindow::act_debug() {
+	ibase().broadcast_cheating_message();
 	show_field_debug(ibase(), node_);
 }
 
@@ -923,8 +938,8 @@ void FieldActionWindow::act_goto_buildroadstart() {
 		return;
 	}
 	ibase().map_view()->scroll_to_field((SDL_GetModState() & KMOD_CTRL) != 0 ?
-                                          ibase().get_build_road_end() :
-                                          ibase().get_build_road_start(),
+	                                       ibase().get_build_road_end() :
+	                                       ibase().get_build_road_start(),
 	                                    MapView::Transition::Smooth);
 	reset_mouse_and_die();
 }
@@ -1223,4 +1238,144 @@ void show_field_action(InteractiveBase* const ibase,
 		w.add_buttons_auto();
 		return w.init();
 	}
+}
+
+// Ship selection window implementation
+
+class ShipSelectionWindow : public UI::UniqueWindow {
+	static constexpr int kPadding = 4;
+	static constexpr int kListHeight = 200;
+
+	static inline std::string ship_description(const Widelands::Ship* ship, bool hostile) {
+		std::string status;
+		if (ship->get_ship_type() == Widelands::ShipType::kWarship) {
+			status = format(
+			   /** TRANSLATORS: Placeholders are the hitpoints and the attack bonus of the warship. */
+			   pgettext("ship_state", "Warship · HP %1$u%% · AT +%2$u%%"),
+			   100U * ship->get_hitpoints() / ship->descr().max_hitpoints_,
+			   ship->get_sea_attack_soldier_bonus(ship->owner().egbase()));
+		} else if (hostile) {
+			status = pgettext("ship_state", "Enemy Transport Ship");
+		} else if (ship->state_is_expedition()) {
+			status = pgettext("ship_state", "Expedition");
+		} else {
+			status = pgettext("ship_state", "Transport");
+		}
+		return format(_("%1$s (%2$s)"), ship->get_shipname(), status);
+	}
+
+public:
+	ShipSelectionWindow(InteractiveBase* ibase,
+	                    UI::UniqueWindow::Registry* registry,
+	                    const Widelands::Coords& node,
+	                    const std::vector<Widelands::Ship*>& manageable,
+	                    const std::vector<Widelands::Ship*>& attackable)
+	   : UI::UniqueWindow(
+	        ibase, UI::WindowStyle::kWui, "ship_selection", registry, 0, 0, _("Select Ship")),
+	     ibase_(*ibase),
+	     node_(node),
+	     hbox_(this, UI::PanelStyle::kWui, "hbox", 0, 0, UI::Box::Horizontal),
+	     box_manageable_(&hbox_, UI::PanelStyle::kWui, "manageable_box", 0, 0, UI::Box::Vertical),
+	     box_attackable_(&hbox_, UI::PanelStyle::kWui, "attackable_box", 0, 0, UI::Box::Vertical),
+	     list_manageable_(&box_manageable_, "manageable_list", 0, 0, 0, 0, UI::PanelStyle::kWui),
+	     list_attackable_(&box_attackable_, "attackable_list", 0, 0, 0, 0, UI::PanelStyle::kWui) {
+		for (Widelands::Ship* ship : manageable) {
+			list_manageable_.add(ship_description(ship, false), ship, ship->descr().icon());
+		}
+		for (Widelands::Ship* ship : attackable) {
+			list_attackable_.add(ship_description(ship, true), ship, ship->descr().icon());
+		}
+
+		const int listw = std::max(
+		   list_manageable_.calculate_desired_width(), list_attackable_.calculate_desired_width());
+		list_manageable_.set_desired_size(listw, kListHeight);
+		list_attackable_.set_desired_size(listw, kListHeight);
+
+		if (ibase_.get_player() != nullptr) {
+			box_manageable_.add(
+			   new UI::Textarea(&box_manageable_, UI::PanelStyle::kWui, "label_manageable",
+			                    UI::FontStyle::kWuiInfoPanelHeading, _("Own Ships"),
+			                    UI::Align::kCenter),
+			   UI::Box::Resizing::kFullSize);
+			box_manageable_.add_space(kPadding);
+		}
+#ifndef NDEBUG
+		else {
+			assert(attackable.empty());
+		}
+#endif
+		box_manageable_.add(&list_manageable_, UI::Box::Resizing::kExpandBoth);
+
+		box_attackable_.add(new UI::Textarea(&box_attackable_, UI::PanelStyle::kWui,
+		                                     "label_attackable", UI::FontStyle::kWuiInfoPanelHeading,
+		                                     _("Attackable Ships"), UI::Align::kCenter),
+		                    UI::Box::Resizing::kFullSize);
+		box_attackable_.add_space(kPadding);
+		box_attackable_.add(&list_attackable_, UI::Box::Resizing::kExpandBoth);
+
+		hbox_.add(&box_manageable_, UI::Box::Resizing::kFullSize);
+		if (manageable.empty()) {
+			box_manageable_.set_visible(false);
+		} else if (attackable.empty()) {
+			box_attackable_.set_visible(false);
+		} else {
+			hbox_.add_space(kPadding);
+		}
+		hbox_.add(&box_attackable_, UI::Box::Resizing::kFullSize);
+
+		list_manageable_.set_select_with_wheel(false);
+		list_attackable_.set_select_with_wheel(false);
+
+		list_manageable_.selected.connect([this](uint32_t index) { clicked_manageable(index); });
+		list_attackable_.selected.connect([this](uint32_t index) { clicked_attackable(index); });
+		list_manageable_.double_clicked.connect(
+		   [this](uint32_t index) { clicked_manageable(index); });
+		list_attackable_.double_clicked.connect(
+		   [this](uint32_t index) { clicked_attackable(index); });
+
+		set_center_panel(&hbox_);
+		set_fastclick_panel(manageable.empty() ? &list_attackable_ : &list_manageable_);
+		center_to_parent();
+		move_out_of_the_way();
+		warp_mouse_to_fastclick_panel();
+		initialization_complete();
+	}
+
+	void clicked_manageable(uint32_t index) {
+		Widelands::Ship* ship = list_manageable_[index].get(ibase_.egbase());
+		if (ship != nullptr) {
+			ibase_.show_ship_window(ship);
+		}
+		if ((SDL_GetModState() & KMOD_CTRL) == 0) {
+			die();
+		}
+	}
+
+	void clicked_attackable(uint32_t index) {
+		Widelands::Ship* ship = list_attackable_[index].get(ibase_.egbase());
+		if (ship != nullptr) {
+			ibase_.show_attack_window(node_, ship, true);
+		}
+		if ((SDL_GetModState() & KMOD_CTRL) == 0) {
+			die();
+		}
+	}
+
+private:
+	InteractiveBase& ibase_;
+	Widelands::Coords node_;
+
+	UI::Box hbox_;
+	UI::Box box_manageable_;
+	UI::Box box_attackable_;
+	UI::Listselect<Widelands::OPtr<Widelands::Ship>> list_manageable_;
+	UI::Listselect<Widelands::OPtr<Widelands::Ship>> list_attackable_;
+};
+
+void show_ship_selection_window(InteractiveBase* ibase,
+                                UI::UniqueWindow::Registry* registry,
+                                const Widelands::Coords& node,
+                                const std::vector<Widelands::Ship*>& manageable,
+                                const std::vector<Widelands::Ship*>& attackable) {
+	new ShipSelectionWindow(ibase, registry, node, manageable, attackable);
 }

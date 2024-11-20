@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -77,13 +77,13 @@ TerrainAffinity::TerrainAffinity(const LuaTable& table, const std::string& immov
      preferred_humidity_(table.get_int("preferred_humidity")),
      preferred_temperature_(table.get_int("preferred_temperature")),
      pickiness_(table.get_int("pickiness")) {
-	if (!(0 <= preferred_fertility_ && preferred_fertility_ <= 1000)) {
+	if (preferred_fertility_ < 0 || preferred_fertility_ > 1000) {
 		throw GameDataError("%s: preferred_fertility is not in [0, 1000].", immovable_name.c_str());
 	}
-	if (!(0 <= preferred_humidity_ && preferred_humidity_ <= 1000)) {
+	if (preferred_humidity_ < 0 || preferred_humidity_ > 1000) {
 		throw GameDataError("%s: preferred_humidity is not in [0, 1000].", immovable_name.c_str());
 	}
-	if (!(0 <= pickiness_ && pickiness_ < 100)) {
+	if (pickiness_ < 0 || pickiness_ >= 100) {
 		throw GameDataError("%s: pickiness is not in [0, 99].", immovable_name.c_str());
 	}
 	if (preferred_temperature_ < 0) {

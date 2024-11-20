@@ -6,7 +6,7 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../cmake/datadirversion.cmake ${CMAK
 add_custom_target(codecheck)
 add_custom_target(run_build_deps
   COMMAND
-    ${PYTHON_EXECUTABLE}
+    ${Python3_EXECUTABLE}
     ${CMAKE_SOURCE_DIR}/utils/build_deps.py
   COMMENT "Checking CMakeLists.txt files."
 )
@@ -31,7 +31,7 @@ wl_library(build_info
 )
 
 if (WIN32)
-	configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../utils/win32/widelands.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/widelands.rc)
+	configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../utils/windows/widelands.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/widelands.rc)
 	message (STATUS "Configured windows resource file")
 	set(WIN32_ICON_O ${CMAKE_CURRENT_BINARY_DIR}/wl_icon.o)
 	if(MSVC)
@@ -63,7 +63,10 @@ else()
     SRCS
       main.cc
     DEPENDS
+      base
       base_exceptions
+      base_time_string
+      logic_filesystem_constants
       widelands_ball_of_mud
       build_info
   )
@@ -125,6 +128,7 @@ wl_library(widelands_ball_of_mud
     editor
     graphic
     graphic_fonthandler
+    graphic_functions
     graphic_mouse_cursor
     graphic_text
     io_filesystem
@@ -143,6 +147,8 @@ wl_library(widelands_ball_of_mud
     ui_fsmenu
     widelands_options
     wui
+    wui_chat_ui
+    wui_common_mapdetails
 )
 
 wl_library(widelands_options
@@ -161,9 +167,13 @@ wl_library(widelands_options
   USES_SDL2
 )
 
-if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
+if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
+    CMAKE_SYSTEM_NAME MATCHES "NetBSD" OR
+    CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   target_link_libraries(widelands_ball_of_mud ${EXECINFO_LIBRARY})
-endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
+endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
+       CMAKE_SYSTEM_NAME MATCHES "NetBSD" OR
+       CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 
 if (WIN32)
   target_link_libraries(widelands_ball_of_mud wsock32)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2023 by the Widelands Development Team
+ * Copyright (C) 2008-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -93,6 +93,19 @@ public:
 	 */
 	[[nodiscard]] bool reachable_dest(const Map& map, const FCoords& dest) const {
 		return capsule->reachable_dest(map, dest);
+	}
+};
+
+struct CheckStepAlwaysTrue {
+	[[nodiscard]] bool allowed(const Map& /* map */,
+	                           const FCoords& /* start */,
+	                           const FCoords& /* end */,
+	                           int32_t /* dir */,
+	                           CheckStep::StepId /* id */) const {
+		return true;
+	}
+	[[nodiscard]] bool reachable_dest(const Map& /* map */, const FCoords& /* dest */) const {
+		return true;
 	}
 };
 

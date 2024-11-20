@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,10 +32,9 @@ inline int program_result_index(ProgramResult result) {
 		return 1;
 	case ProgramResult::kSkipped:
 		return 2;
-	case ProgramResult::kNone:
+	default:
 		NEVER_HERE();
 	}
-	return 0;
 }
 
 enum class ProgramResultHandlingMethod { kFail, kComplete, kSkip, kContinue, kRepeat };

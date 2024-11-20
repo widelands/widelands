@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 
 """Opening braces need to be at the start of a line, or be preceded by a

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -143,11 +143,13 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
         &parent, UI::WindowStyle::kWui, "building_action_confirm", 0, 0, 200, 120, windowtitle),
      object_(map_object) {
 	const int padding = 6;
-	UI::Box* main_box = new UI::Box(this, UI::PanelStyle::kWui, padding, padding, UI::Box::Vertical);
-	UI::Box* button_box = new UI::Box(main_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box* main_box =
+	   new UI::Box(this, UI::PanelStyle::kWui, "main_box", padding, padding, UI::Box::Vertical);
+	UI::Box* button_box =
+	   new UI::Box(main_box, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal);
 
 	UI::MultilineTextarea* textarea = new UI::MultilineTextarea(
-	   main_box, 0, 0, 200, 74, UI::PanelStyle::kWui, message, UI::Align::kCenter,
+	   main_box, "message", 0, 0, 200, 74, UI::PanelStyle::kWui, message, UI::Align::kCenter,
 	   UI::MultilineTextarea::ScrollMode::kNoScrolling);
 
 	UI::Button* okbtn = new UI::Button(button_box, "ok", 0, 0, 80, 34, UI::ButtonStyle::kWuiMenu,
@@ -166,7 +168,8 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	   UI::g_fh->fontset()->is_rtl() ? cancelbtn : okbtn, UI::Box::Resizing::kFillSpace);
 	main_box->add(textarea);
 	if (!checkbox.empty()) {
-		checkbox_ = new UI::Checkbox(main_box, UI::PanelStyle::kWui, Vector2i(0, 0), checkbox);
+		checkbox_ =
+		   new UI::Checkbox(main_box, UI::PanelStyle::kWui, "checkbox", Vector2i(0, 0), checkbox);
 		// tooltip and initial state will be set by the subclass constructor
 		main_box->add_space(padding);
 		main_box->add(checkbox_, UI::Box::Resizing::kFullSize);
@@ -339,8 +342,8 @@ void EnhanceConfirm::think() {
 	upcast(Widelands::Building, building, object_.get(egbase));
 
 	if ((building == nullptr) || !iaplayer().can_act(building->owner().player_number()) ||
-	    !(still_under_construction_ ||
-	      ((building->get_playercaps() & Widelands::Building::PCap_Enhancable) != 0u))) {
+	    (!still_under_construction_ &&
+	     ((building->get_playercaps() & Widelands::Building::PCap_Enhancable) == 0u))) {
 		die();
 	}
 }
@@ -439,9 +442,9 @@ void ShipCancelExpeditionConfirm::ok() {
 	Widelands::Game& game = iaplayer().game();
 	upcast(Widelands::Ship, ship, object_.get(game));
 
-	if ((ship != nullptr) && iaplayer().can_act(ship->get_owner()->player_number()) &&
-	    ship->get_ship_state() != Widelands::Ship::ShipStates::kTransport &&
-	    ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionColonizing) {
+	if (ship != nullptr && iaplayer().can_act(ship->get_owner()->player_number()) &&
+	    ship->get_ship_state() != Widelands::ShipStates::kTransport &&
+	    ship->get_ship_state() != Widelands::ShipStates::kExpeditionColonizing) {
 		game.send_player_cancel_expedition_ship(*ship);
 	}
 

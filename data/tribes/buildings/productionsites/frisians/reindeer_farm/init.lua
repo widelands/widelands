@@ -63,6 +63,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: 30 + 38.6 + 30 + 38.6 + 30 + 42.2 = 209.4 sec
             "call=recruit_deer",
             "call=make_fur",
             "call=recruit_deer",
@@ -75,6 +76,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start rearing reindeer because ...
          descname = pgettext("frisians_building", "rearing reindeer"),
          actions = {
+            -- time: 15 + 15 = 30 sec
             "return=skipped unless economy needs frisians_reindeer",
             "consume=barley water",
             "sleep=duration:15s",
@@ -86,6 +88,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start producing fur because ...
          descname = pgettext("frisians_building", "producing fur"),
          actions = {
+            -- time: 15 + 20 + 3.6 = 38.6 sec
             "return=skipped unless economy needs fur",
             "consume=barley water",
             "sleep=duration:15s",
@@ -97,6 +100,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start producing fur because ...
          descname = pgettext("frisians_building", "producing fur"),
          actions = {
+            -- time: 15 + 20 + 2 * 3.6 = 42.2 sec
             "return=skipped unless economy needs fur",
             "consume=barley water",
             "sleep=duration:15s",

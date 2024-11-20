@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2023 by the Widelands Development Team
+ * Copyright (C) 2016-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,12 +34,13 @@
 #include "map_io/map_loader.h"
 
 GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
-   : UI::Panel(parent, style, 0, 0, 0, 0),
+   : UI::Panel(parent, style, "game_details", 0, 0, 0, 0),
      mode_(mode),
 
-     main_box_(this, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
-     descr_box_(&main_box_, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
+     main_box_(this, style, "main_box", 0, 0, UI::Box::Vertical, 0, 0, 0),
+     descr_box_(&main_box_, style, "description_box", 0, 0, UI::Box::Vertical, 0, 0, 0),
      name_label_(&main_box_,
+                 "label_name",
                  0,
                  0,
                  0,
@@ -49,6 +50,7 @@ GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
                  UI::Align::kLeft,
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
      descr_(&descr_box_,
+            "description",
             0,
             0,
             UI::Scrollbar::kSize,
@@ -57,8 +59,8 @@ GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
             "",
             UI::Align::kLeft,
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     minimap_icon_(&descr_box_, style, 0, 0, 0, 0, nullptr),
-     button_box_(new UI::Box(&main_box_, style, 0, 0, UI::Box::Vertical)) {
+     minimap_icon_(&descr_box_, style, "minimap", 0, 0, 0, 0, nullptr),
+     button_box_(new UI::Box(&main_box_, style, "buttons_box", 0, 0, UI::Box::Vertical)) {
 	descr_.set_handle_mouse(false);
 	descr_box_.add(&descr_, UI::Box::Resizing::kFullSize);
 	descr_box_.add_space(padding_);
@@ -156,11 +158,11 @@ void GameDetails::show(const SavegameData& gamedata) {
 void GameDetails::show_game_description(const SavegameData& gamedata) {
 	std::string description = as_heading_with_content(
 	   mode_ == Mode::kReplay ?
-            /** TRANSLATORS: The time a replay starts. Shown in the replay loading screen*/
-            _("Start of Replay:") :
-            /** TRANSLATORS: The current time of a savegame. Shown in the game saving and
-               loading screens. */
-            _("Game Time:"),
+	      /** TRANSLATORS: The time a replay starts. Shown in the replay loading screen*/
+	      _("Start of Replay:") :
+	         /** TRANSLATORS: The current time of a savegame. Shown in the game saving and
+	            loading screens. */
+	         _("Game Time:"),
 	   gamedata.gametime, panel_style_);
 
 	description = format("%s%s", description,

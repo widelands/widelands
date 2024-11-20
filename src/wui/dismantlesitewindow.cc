@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,24 +35,29 @@ void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wante
 	assert(dismantle_site != nullptr);
 
 	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
-	UI::Box& box = *new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
-	UI::Box& subbox = *new UI::Box(&box, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
+	UI::Box& box =
+	   *new UI::Box(get_tabs(), UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical);
+	UI::Box& subbox = *new UI::Box(&box, UI::PanelStyle::kWui, "sub_box", 0, 0, UI::Box::Vertical);
 	ensure_box_can_hold_input_queues(subbox);
 
 	// Add the progress bar
-	progress_ = new UI::ProgressBar(&box, UI::PanelStyle::kWui, 0, 0, UI::ProgressBar::DefaultWidth,
-	                                UI::ProgressBar::DefaultHeight, UI::ProgressBar::Horizontal);
+	progress_ = new UI::ProgressBar(&box, UI::PanelStyle::kWui, "progress", 0, 0,
+	                                UI::ProgressBar::DefaultWidth, UI::ProgressBar::DefaultHeight,
+	                                UI::ProgressBar::Horizontal);
 	progress_->set_total(1 << 16);
 	box.add(progress_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	box.add_space(8);
 
 	// Add the wares queue
+	dropout_queues_.reserve(dismantle_site->nr_dropout_waresqueues());
 	for (uint32_t i = 0; i < dismantle_site->nr_dropout_waresqueues(); ++i) {
-		subbox.add(new InputQueueDisplay(&subbox, *ibase(), *dismantle_site,
-		                                 *dismantle_site->get_dropout_waresqueue(i), true, false,
-		                                 priority_collapsed()),
-		           UI::Box::Resizing::kFullSize);
+		InputQueueDisplay* iqd = new InputQueueDisplay(&subbox, *ibase(), *dismantle_site,
+		                                               *dismantle_site->get_dropout_waresqueue(i),
+		                                               true, false, priority_collapsed());
+		iqd->set_max_icons(20);
+		dropout_queues_.push_back(iqd);
+		subbox.add(iqd, UI::Box::Resizing::kFullSize);
 	}
 	for (uint32_t i = 0; i < dismantle_site->nr_consume_waresqueues(); ++i) {
 		subbox.add(new InputQueueDisplay(&subbox, *ibase(), *dismantle_site,
@@ -67,6 +72,22 @@ void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wante
 
 	think();
 	initialization_complete();
+}
+
+void DismantleSiteWindow::draw(RenderTarget& rt) {
+	BuildingWindow::draw(rt);
+
+	for (InputQueueDisplay* iqd : dropout_queues_) {
+		if (iqd->is_visible()) {
+			int x = 0;
+			int y = 0;
+			for (UI::Panel* panel = iqd; panel != this; panel = panel->get_parent()) {
+				x += panel->get_x();
+				y += panel->get_y();
+			}
+			rt.brighten_rect(Recti(x, y, iqd->get_w(), iqd->get_h()), -16);
+		}
+	}
 }
 
 /*

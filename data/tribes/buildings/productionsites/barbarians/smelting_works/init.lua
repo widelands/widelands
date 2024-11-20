@@ -55,6 +55,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: 3 * 68 = 204 sec
             "call=smelt_iron",
             "call=smelt_gold",
             "call=smelt_iron_2",
@@ -65,9 +66,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
          descname = _("smelting iron"),
          actions = {
+            -- time: 29.4 + 35 + 3.6 = 68 sec
             "return=skipped unless economy needs iron",
             "consume=coal iron_ore",
-            "sleep=duration:29s",
+            "sleep=duration:29s400ms",
             "playsound=sound/metal/furnace priority:50% allow_multiple",
             "animate=working duration:35s",
             "playsound=sound/metal/ironping priority:60%",
@@ -78,9 +80,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
          descname = _("smelting iron"),
          actions = {
+            -- time: 29.4 + 35 + 3.6 = 68 sec
             "return=skipped unless economy needs iron",
             "consume=coal iron_ore",
-            "sleep=duration:29s",
+            "sleep=duration:29s400ms",
             "playsound=sound/metal/furnace priority:50% allow_multiple",
             "animate=working duration:35s",
             "playsound=sound/metal/ironping priority:60%",
@@ -91,9 +94,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
          descname = _("smelting gold"),
          actions = {
+            -- time: 29.4 + 35 + 3.6 = 68 sec
             "return=skipped unless economy needs gold",
             "consume=coal gold_ore",
-            "sleep=duration:29s",
+            "sleep=duration:29s400ms",
             "playsound=sound/metal/furnace priority:50% allow_multiple",
             "animate=working duration:35s",
             "playsound=sound/metal/goldping priority:60%",

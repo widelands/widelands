@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,7 +51,7 @@ void open_lua_library(lua_State* L,
 
 }  // namespace
 
-LuaInterface::LuaInterface() {
+LuaInterface::LuaInterface(const bool is_main_menu) {
 	lua_state_ = luaL_newstate();
 
 	// Open the Lua libraries
@@ -83,7 +83,7 @@ LuaInterface::LuaInterface() {
 	lua_setglobal(lua_state_, "hooks");
 
 	// Game tips need this to access hotkeys.
-	LuaUi::luaopen_wlui(lua_state_);
+	LuaUi::luaopen_wlui(lua_state_, !is_main_menu);
 }
 
 LuaInterface::~LuaInterface() {
@@ -91,15 +91,24 @@ LuaInterface::~LuaInterface() {
 }
 
 void LuaInterface::interpret_string(const std::string& cmd) {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
+	MutexLock m(MutexLock::ID::kLua);
 	int rv = luaL_dostring(lua_state_, cmd.c_str());
 	check_return_value_for_errors(lua_state_, rv);
 }
 
 std::unique_ptr<LuaTable> LuaInterface::run_script(const std::string& path) {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
+	MutexLock m(MutexLock::ID::kLua);
 	return ::run_script(lua_state_, g_fs->fix_cross_file(path), g_fs);
 }
 
 std::unique_ptr<LuaTable> LuaInterface::empty_table() {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
+	MutexLock m(MutexLock::ID::kLua);
 	lua_newtable(lua_state_);
 	std::unique_ptr<LuaTable> rv(new LuaTable(lua_state_));
 	lua_pop(lua_state_, 1);

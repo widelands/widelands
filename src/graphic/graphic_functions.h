@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2023 by the Widelands Development Team
+ * Copyright (C) 2020-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,5 +24,7 @@
 #include "graphic/rendertarget.h"
 
 void draw_game_tip(RenderTarget& rt, const Recti& bounds, const std::string&, unsigned opacity = 1);
+
+void draw_splashscreen(RenderTarget& rt, const std::string& footer_message, float opacity = 1.0f);
 
 #endif  // end of include guard: WL_GRAPHIC_GRAPHIC_FUNCTIONS_H

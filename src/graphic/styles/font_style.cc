@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2023 by the Widelands Development Team
+ * Copyright (C) 2018-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,14 +51,14 @@ FontStyleInfo::FontStyleInfo(const FontStyleInfo& other)
 
 const std::string FontStyleInfo::face_to_string() const {
 	switch (face_) {
-	case Face::kSans:
-		return "sans";
 	case Face::kSerif:
 		return "serif";
 	case Face::kCondensed:
 		return "condensed";
+	case Face::kSans:
+	default:
+		return "sans";
 	}
-	return "sans";
 }
 
 FontStyleInfo::Face FontStyleInfo::string_to_face(const std::string& init_face) {

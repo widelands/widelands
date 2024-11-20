@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,10 +34,10 @@
 class FileRead : public StreamRead {
 public:
 	struct Pos {
-		Pos(size_t const p = 0) : pos(p) {  // NOLINT allow implicit conversion
+		explicit Pos(size_t const p = 0) : pos(p) {
 		}
 		/// Returns a special value indicating invalidity.
-		static Pos null() {
+		[[nodiscard]] static Pos null() {
 			return Pos(std::numeric_limits<size_t>::max());
 		}
 
@@ -47,7 +47,7 @@ public:
 		[[nodiscard]] bool is_null() const {
 			return *this == null();
 		}
-		operator size_t() const {  // NOLINT allow implicit conversion
+		[[nodiscard]] size_t value() const {
 			return pos;
 		}
 		Pos& operator++() {

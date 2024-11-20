@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2023 by the Widelands Development Team
+ * Copyright (C) 2020-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -119,48 +119,93 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                       fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuDefault),
                       _("Add-On Manager")),
      fsmm_(fsmm),
-     main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     warn_requirements_(
-        &main_box_, 0, 0, get_w(), get_h() / 12, UI::PanelStyle::kFsMenu, "", UI::Align::kCenter),
-     tabs_placeholder_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, 0, 0),
-     tabs_(this, UI::TabPanelStyle::kFsMenu),
-     installed_addons_outer_wrapper_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     installed_addons_inner_wrapper_(
-        &installed_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     installed_addons_buttons_box_(
-        &installed_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     main_box_(this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical),
+     buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal),
+     warn_requirements_(&main_box_,
+                        "warn_requirements",
+                        0,
+                        0,
+                        get_w(),
+                        get_h() / 12,
+                        UI::PanelStyle::kFsMenu,
+                        "",
+                        UI::Align::kCenter),
+     tabs_placeholder_(&main_box_, UI::PanelStyle::kFsMenu, "tabs_placeholder", 0, 0, 0, 0),
+     tabs_(this, UI::TabPanelStyle::kFsMenu, "tabs"),
+     installed_addons_outer_wrapper_(
+        &tabs_, UI::PanelStyle::kFsMenu, "installed_outer_wrapper_box", 0, 0, UI::Box::Horizontal),
+     installed_addons_inner_wrapper_(&installed_addons_outer_wrapper_,
+                                     UI::PanelStyle::kFsMenu,
+                                     "installed_inner_wrapper_box",
+                                     0,
+                                     0,
+                                     UI::Box::Vertical),
+     installed_addons_buttons_box_(&installed_addons_outer_wrapper_,
+                                   UI::PanelStyle::kFsMenu,
+                                   "installed_buttons_box",
+                                   0,
+                                   0,
+                                   UI::Box::Vertical),
      installed_addons_box_(&installed_addons_inner_wrapper_,
                            UI::PanelStyle::kFsMenu,
+                           "installed_box",
                            0,
                            0,
                            UI::Box::Vertical,
                            kHugeSize,
                            kHugeSize),
-     browse_addons_outer_wrapper_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     browse_addons_inner_wrapper_(
-        &browse_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     browse_addons_buttons_box_(
-        &browse_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     browse_addons_buttons_box_lvbox_(
-        &browse_addons_buttons_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     browse_addons_buttons_box_rvbox_(
-        &browse_addons_buttons_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     browse_addons_buttons_box_category_box_(
-        &browse_addons_buttons_box_lvbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     browse_addons_buttons_box_right_hbox_(
-        &browse_addons_buttons_box_rvbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     browse_addons_outer_wrapper_(
+        &tabs_, UI::PanelStyle::kFsMenu, "browse_outer_wrapper_box", 0, 0, UI::Box::Vertical),
+     browse_addons_inner_wrapper_(&browse_addons_outer_wrapper_,
+                                  UI::PanelStyle::kFsMenu,
+                                  "browse_inner_wrapper_box",
+                                  0,
+                                  0,
+                                  UI::Box::Vertical),
+     browse_addons_buttons_box_(&browse_addons_outer_wrapper_,
+                                UI::PanelStyle::kFsMenu,
+                                "browse_buttons_box",
+                                0,
+                                0,
+                                UI::Box::Horizontal),
+     browse_addons_buttons_box_lvbox_(&browse_addons_buttons_box_,
+                                      UI::PanelStyle::kFsMenu,
+                                      "browse_buttons_left_vbox",
+                                      0,
+                                      0,
+                                      UI::Box::Vertical),
+     browse_addons_buttons_box_rvbox_(&browse_addons_buttons_box_,
+                                      UI::PanelStyle::kFsMenu,
+                                      "browse_buttons_right_vbox",
+                                      0,
+                                      0,
+                                      UI::Box::Vertical),
+     browse_addons_buttons_box_category_box_(&browse_addons_buttons_box_lvbox_,
+                                             UI::PanelStyle::kFsMenu,
+                                             "browse_buttons_category_box",
+                                             0,
+                                             0,
+                                             UI::Box::Horizontal),
+     browse_addons_buttons_box_right_hbox_(&browse_addons_buttons_box_rvbox_,
+                                           UI::PanelStyle::kFsMenu,
+                                           "browse_buttons_hbox",
+                                           0,
+                                           0,
+                                           UI::Box::Horizontal),
      browse_addons_box_(&browse_addons_inner_wrapper_,
                         UI::PanelStyle::kFsMenu,
+                        "browse_box",
                         0,
                         0,
                         UI::Box::Vertical,
                         kHugeSize,
                         kHugeSize),
-     dev_box_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     filter_name_(&browse_addons_buttons_box_rvbox_, 0, 0, 100, UI::PanelStyle::kFsMenu),
+     dev_box_(&tabs_, UI::PanelStyle::kFsMenu, "development_box", 0, 0, UI::Box::Vertical),
+     filter_name_(
+        &browse_addons_buttons_box_rvbox_, "filter_name", 0, 0, 100, UI::PanelStyle::kFsMenu),
      filter_verified_(&browse_addons_buttons_box_right_hbox_,
                       UI::PanelStyle::kFsMenu,
+                      "filter_verified",
                       Vector2i(0, 0),
                       _("Verified only"),
                       _("Show only verified add-ons")),
@@ -210,6 +255,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                         UI::ButtonStyle::kFsMenuSecondary),
      upload_addon_accept_(&dev_box_,
                           UI::PanelStyle::kFsMenu,
+                          "upload_addon_accept",
                           Vector2i(0, 0),
                           _("Understood and confirmed"),
                           _("By ticking this checkbox, you confirm that you have read and agree to "
@@ -314,18 +360,30 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
               /** TRANSLATORS: This button allows the user to send a message to the Widelands
                  Development Team */
               _("Contact us…")),
-     server_name_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kWarning, "", UI::Align::kRight) {
+     server_name_(this,
+                  UI::PanelStyle::kFsMenu,
+                  "server_name",
+                  UI::FontStyle::kWarning,
+                  0,
+                  0,
+                  0,
+                  0,
+                  "",
+                  UI::Align::kRight) {
+
+	installed_addons_box_.set_flag(UI::Panel::pf_unlimited_size, true);
+	browse_addons_box_.set_flag(UI::Panel::pf_unlimited_size, true);
 
 	dev_box_.set_force_scrolling(true);
-	dev_box_.add(
-	   new UI::Textarea(&dev_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
-	                    _("Tools for Add-Ons Developers"), UI::Align::kCenter),
-	   UI::Box::Resizing::kFullSize);
+	dev_box_.add(new UI::Textarea(&dev_box_, UI::PanelStyle::kFsMenu, "label_development",
+	                              UI::FontStyle::kFsMenuInfoPanelHeading,
+	                              _("Tools for Add-Ons Developers"), UI::Align::kCenter),
+	             UI::Box::Resizing::kFullSize);
 	dev_box_.add_space(kRowButtonSize);
 	{
 		UI::MultilineTextarea* m = new UI::MultilineTextarea(
-		   &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft,
-		   UI::MultilineTextarea::ScrollMode::kNoScrolling);
+		   &dev_box_, "message_development", 0, 0, 100, 100, UI::PanelStyle::kFsMenu, "",
+		   UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
 		m->set_style(UI::FontStyle::kFsMenuInfoPanelParagraph);
 		m->set_text(_("The interactive add-ons packager allows you to create, edit, and delete "
 		              "add-ons. You can bundle maps designed with the Widelands Map Editor as an "
@@ -338,7 +396,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 
 	dev_box_.add_space(kRowButtonSize);
 	dev_box_.add(new UI::MultilineTextarea(
-	                &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
+	                &dev_box_, "message_links", 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
 	                format("<rt><p>%1$s</p></rt>",
 	                       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 	                          .as_font_tag(format(
@@ -353,7 +411,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	dev_box_.add_space(kRowButtonSize);
 	dev_box_.add(
 	   new UI::MultilineTextarea(
-	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
+	      &dev_box_, "message_detailed_info", 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
 	      format(
 	         "<rt><p>%s</p><p>%s</p><p>%s</p><p>%s</p></rt>",
 	         g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
@@ -403,7 +461,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	dev_box_.add_space(kRowButtonSize);
 	dev_box_.add(
 	   new UI::MultilineTextarea(
-	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
+	      &dev_box_, "message_contact_public", 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
 	      format("<rt><p>%1$s</p></rt>",
 	             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 	                .as_font_tag(
@@ -420,7 +478,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	dev_box_.add_space(kRowButtonSize);
 	dev_box_.add(
 	   new UI::MultilineTextarea(
-	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
+	      &dev_box_, "message_contact_private", 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
 	      format("<rt><p>%1$s</p></rt>",
 	             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 	                .as_font_tag(
@@ -495,7 +553,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 			}
 			UI::Checkbox* c =
 			   new UI::Checkbox(&browse_addons_buttons_box_category_box_, UI::PanelStyle::kFsMenu,
-			                    Vector2i(0, 0), g_image_cache->get(pair.second.icon),
+			                    format("category_%s", pair.second.internal_name), Vector2i(0, 0),
+			                    g_image_cache->get(pair.second.icon),
 			                    format(_("Toggle category ‘%s’"), pair.second.descname()));
 			filter_category_[pair.first] = c;
 			c->set_state(true);
@@ -593,7 +652,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 			text += '\n';
 			for (const auto& pair : upgrades) {
 				if (pair.second) {
-					text += format(_("\n· %1$s (%2$s) by %3$s"), pair.first->descname(),
+					text += format(_("\n• %1$s (%2$s) by %3$s"), pair.first->descname(),
 					               (pair.first->verified ? _("verified") : _("NOT VERIFIED")),
 					               pair.first->author());
 				}
@@ -925,7 +984,7 @@ void AddOnsCtrl::refresh_remotes(const bool showall) {
 		std::string bug = _("a networking bug");
 		std::string err = format(_("Unable to fetch the list of available add-ons from "
 		                           "the server!<br>Error Message: %s"),
-		                         e.what());
+		                         richtext_escape(e.what()));
 		std::shared_ptr<AddOns::AddOnInfo> i = std::make_shared<AddOns::AddOnInfo>();
 		i->unlocalized_descname = title;
 		i->unlocalized_description = err;
@@ -979,11 +1038,11 @@ bool AddOnsCtrl::matches_filter(std::shared_ptr<AddOns::AddOnInfo> info) {
 void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 	const uint32_t scrollpos_i =
 	   installed_addons_inner_wrapper_.get_scrollbar() != nullptr ?
-         installed_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
-         0;
+	      installed_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
+	      0;
 	const uint32_t scrollpos_b = browse_addons_inner_wrapper_.get_scrollbar() != nullptr ?
-                                   browse_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
-                                   0;
+	                                browse_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
+	                                0;
 	installed_addons_box_.free_children();
 	browse_addons_box_.free_children();
 	installed_addons_box_.clear();
@@ -1061,8 +1120,9 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 				} else {
 					return a->average_rating() > b->average_rating();
 				}
+			default:
+				NEVER_HERE();
 			}
-			NEVER_HERE();
 		});
 	}
 	std::vector<std::string> has_upgrades;
@@ -1097,6 +1157,7 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 	}
 
 	check_enable_move_buttons();
+	server_name_.set_text(net().server_descname());
 	upgrade_all_.set_title(format(_("Upgrade all (%u)"), has_upgrades.size()));
 	upgrade_all_.set_enabled(!has_upgrades.empty());
 	if (has_upgrades.empty()) {
@@ -1107,7 +1168,7 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 		                          has_upgrades.size());
 		for (const std::string& name : has_upgrades) {
 			text += "<br>";
-			text += format(_("· %s"), name);
+			text += format(_("• %s"), name);
 		}
 		upgrade_all_.set_tooltip(text);
 	}
@@ -1143,18 +1204,19 @@ void AddOnsCtrl::update_dependency_errors() {
 			}
 			if (search_result == AddOns::g_addons.end()) {
 				warn_requirements.push_back(
-				   format(_("· ‘%1$s’ requires ‘%2$s’ which could not be found"),
+				   format(_("• ‘%1$s’ requires ‘%2$s’ which could not be found"),
 				          addon->first->descname(), requirement));
 			} else {
-				if (!search_result->second) {
-					warn_requirements.push_back(format(_("· ‘%1$s’ requires ‘%2$s’ which is disabled"),
+				if (!search_result->second &&
+				    AddOns::require_enabled(addon->first->category, search_result->first->category)) {
+					warn_requirements.push_back(format(_("• ‘%1$s’ requires ‘%2$s’ which is disabled"),
 					                                   addon->first->descname(),
 					                                   search_result->first->descname()));
 				}
 				if (too_late &&
 				    AddOns::order_matters(addon->first->category, search_result->first->category)) {
 					warn_requirements.push_back(
-					   format(_("· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"),
+					   format(_("• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"),
 					          addon->first->descname(), search_result->first->descname()));
 				}
 			}
@@ -1182,7 +1244,7 @@ void AddOnsCtrl::update_dependency_errors() {
 					assert(!too_late || next != nullptr);
 					if (too_late && AddOns::order_matters(prev->category, next->category)) {
 						warn_requirements.push_back(format(
-						   _("· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
+						   _("• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
 						     "listed in the wrong order"),
 						   addon->first->descname(), prev->descname(), search_result->first->descname()));
 					}
@@ -1248,7 +1310,6 @@ void AddOnsCtrl::layout() {
 		int w;
 		int h;
 		server_name_.get_desired_size(&w, &h);
-		server_name_.set_size(w, h);
 		server_name_.set_pos(Vector2i(login_button_.get_x() - w - kRowButtonSpacing,
 		                              login_button_.get_y() + (login_button_.get_h() - h) / 2));
 	}
@@ -1275,36 +1336,23 @@ bool AddOnsCtrl::is_remote(const std::string& name) const {
 }
 
 static void install_translation(const std::string& temp_locale_path,
-                                const std::string& addon_name,
-                                const int i18n_version) {
+                                const std::string& addon_name) {
 	assert(g_fs->file_exists(temp_locale_path));
 
-	// NOTE:
-	// gettext expects a directory structure such as
-	// "~/.widelands/addons_i18n/nds/LC_MESSAGES/addon_name.wad.VERSION.mo"
-	// where "nds" is the language abbreviation, VERSION the add-on's i18n version,
-	// and "addon_name.wad" the add-on's name.
-	// If we use a different structure, gettext will not find the translations!
-
 	const std::string temp_filename =
-	   FileSystem::fs_filename(temp_locale_path.c_str());                         // nds.mo.tmp
+	   FileSystem::fs_filename(temp_locale_path.c_str());                         // nds.po.tmp
 	const std::string locale = temp_filename.substr(0, temp_filename.find('.'));  // nds
 
-	const std::string new_locale_dir = kAddOnLocaleDir + FileSystem::file_separator() + locale +
-	                                   FileSystem::file_separator() +
-	                                   "LC_MESSAGES";  // addons_i18n/nds/LC_MESSAGES
+	const std::string new_locale_dir =
+	   kAddOnLocaleDir + FileSystem::file_separator() + addon_name;  // addons_i18n/name.wad
 	g_fs->ensure_directory_exists(new_locale_dir);
 
-	const std::string new_locale_path = new_locale_dir + FileSystem::file_separator() + addon_name +
-	                                    '.' + std::to_string(i18n_version) + ".mo";
+	const std::string new_locale_path = new_locale_dir + FileSystem::file_separator() + locale +
+	                                    ".po";  // addons_i18n/name.wad/nds.po
 
 	assert(!g_fs->is_directory(new_locale_path));
-	// Delete outdated translations if present.
-	for (const std::string& mo : g_fs->list_directory(new_locale_dir)) {
-		if (strncmp(FileSystem::fs_filename(mo.c_str()), addon_name.c_str(), addon_name.size()) ==
-		    0) {
-			g_fs->fs_unlink(mo);
-		}
+	if (g_fs->file_exists(new_locale_path)) {
+		g_fs->fs_unlink(new_locale_path);
 	}
 	assert(!g_fs->file_exists(new_locale_path));
 
@@ -1389,6 +1437,34 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 		rebuild(false);
 	} catch (const OperationCancelledByUserException&) {
 		log_info("upload addon %s cancelled by user", addon->internal_name.c_str());
+	} catch (const AddOns::IllegalFilenamesException& illegal) {
+		log_warn("upload addon %s contains illegal filenames:", addon->internal_name.c_str());
+
+		std::string message;
+		for (const std::string& name : illegal.illegal_names) {
+			log_warn("\t- %s", name.c_str());
+			message += as_listitem(format(_("‘%s’"), name), UI::FontStyle::kFsMenuInfoPanelParagraph);
+		}
+
+		message = format(
+		   "<rt>%1$s</rt>",
+		   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+		      .as_font_tag(format(
+		         "<p>%s</p><vspace gap=%d><p>%s</p><vspace gap=%d><p>%s</p>",
+		         format(_("The add-on ‘%s’ may not be uploaded to the server because the following "
+		                  "filenames contained in the add-on are not allowed:"),
+		                addon->internal_name),
+		         kRowButtonSize, message, kRowButtonSize,
+		         _("Filenames may only contain alphanumeric characters (A-Z, a-z, 0-9) and simple "
+		           "punctuation "
+		           "(period, hyphen, and underscore; not multiple periods). Other characters such as "
+		           "whitespace are not permitted. Filenames may not exceed 80 characters."))));
+
+		w.set_visible(false);
+		UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"), message,
+		                   UI::WLMessageBox::MBoxType::kOk);
+		m.run<UI::Panel::Returncodes>();
+
 	} catch (const std::exception& e) {
 		log_err("upload addon %s: %s", addon->internal_name.c_str(), e.what());
 		w.set_visible(false);
@@ -1502,8 +1578,9 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 		   });
 
 		for (const std::string& n : g_fs->list_directory(temp_dir)) {
-			install_translation(n, remote->internal_name, remote->i18n_version);
+			install_translation(n, remote->internal_name);
 		}
+		i18n::clear_addon_translations_cache(remote->internal_name);
 		for (auto& pair : AddOns::g_addons) {
 			if (pair.first->internal_name == remote->internal_name) {
 				pair.first->i18n_version = remote->i18n_version;
@@ -1529,12 +1606,16 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 	}
 	g_fs->fs_unlink(temp_dir);
 
+	WLApplication::get().init_plugin_shortcuts();
 	if (need_to_rebuild_texture_atlas) {
 		g_gr->rebuild_texture_atlas();
 	}
 	if (enable_theme) {
 		AddOns::update_ui_theme(AddOns::UpdateThemeAction::kEnableArgument, remote->internal_name);
 		get_topmost_forefather().template_directory_changed();
+	}
+	if (remote->category == AddOns::AddOnCategory::kUIPlugin) {
+		fsmm_.reinit_plugins();
 	}
 	rebuild(true);
 }

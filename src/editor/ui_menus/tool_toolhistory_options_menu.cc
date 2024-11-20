@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,8 +45,16 @@ EditorToolhistoryOptionsMenu::EditorToolhistoryOptionsMenu(EditorInteractive& pa
      history_tool_(history_tool),
 
      box_width_(get_inner_w() - 2 * margin_),
-     box_(this, UI::PanelStyle::kWui, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
-     list_(&box_, 0, 0, box_width_, 330, UI::PanelStyle::kWui) {
+     box_(this,
+          UI::PanelStyle::kWui,
+          "main_box",
+          hmargin(),
+          vmargin(),
+          UI::Box::Vertical,
+          0,
+          0,
+          vspacing()),
+     list_(&box_, "history_list", 0, 0, box_width_, 330, UI::PanelStyle::kWui) {
 
 	box_.set_size(100, 20);
 	box_.add(&list_);

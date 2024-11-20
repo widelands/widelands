@@ -46,6 +46,9 @@
 --    :arg create_carriers: If this is :const:`true` carriers are created for
 --       the roads. Otherwise no carriers will be created.
 --    :type create_carriers: :class:`boolean`
+--
+--    Note that this returns ``nil``. If you need the created :class:`~wl.map.Road`
+--    you have to use :meth:`wl.bases.PlayerBase.place_road`
 
 function connected_road(roadtype, p, start, cmd, g_create_carriers)
    create_carriers = true
@@ -65,9 +68,7 @@ function connected_road(roadtype, p, start, cmd, g_create_carriers)
          r = p:place_road(roadtype, start, table.unpack(moves))
          start = r.end_flag
          if create_carriers then
-            if roadtype == "normal" then r:set_workers(p.tribe.carrier, 1)
-            elseif roadtype == "busy" then r:set_workers({[p.tribe.carrier] = 1, [p.tribe.carrier2] = 1})
-            else r:set_workers(p.tribe.ferry, 1) end
+            r:set_workers(r.valid_workers)
          end
          moves = {}
       end
@@ -216,7 +217,8 @@ function is_building(immovable)
    return immovable.descr.type_name == "productionsite" or
       immovable.descr.type_name == "warehouse" or
       immovable.descr.type_name == "militarysite" or
-      immovable.descr.type_name == "trainingsite"
+      immovable.descr.type_name == "trainingsite" or
+      immovable.descr.type_name == "market"
 end
 
 -- RST

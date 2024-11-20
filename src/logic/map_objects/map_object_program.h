@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,8 +26,11 @@
 #include "base/times.h"
 #include "sound/constants.h"
 
+class LuaInterface;
+
 namespace Widelands {
 
+class MapObject;
 class MapObjectDescr;
 
 /// Superclass for Worker, Immovable and Productionsite programs. Includes a program name and
@@ -76,10 +79,9 @@ protected:
 	 * @brief Reads time duration with units from a string
 	 * @param input: A positive integer, followed by 'ms' (milliseconds), 's' (seconds) or 'm'
 	 * (minutes). This can be repeated to form units like '1m20s500ms'.
-	 * @param descr: For error messages
 	 * @return The duration in SDL ticks (milliseconds)
 	 */
-	static Duration read_duration(const std::string& input, const MapObjectDescr& descr);
+	static Duration read_duration(const std::string& input);
 
 	/// Left-hand and right-hand elements of a line in a program, e.g. parsed from "return=skipped
 	/// unless economy needs meal"
@@ -114,9 +116,18 @@ protected:
 		/// Whether the sound can be played by different map objects at the same time
 		bool allow_multiple;
 	};
-	/// Parses the arguments for a play_sound action, e.g. { "sound/smiths/sharpening", "120" }
-	static PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments,
-	                                                const MapObjectDescr& descr);
+	/// Parses the arguments for a playsound action
+	static PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments);
+
+	/// Run script information
+	struct RunScriptParameters {
+		std::string function;  ///< The name of the Lua function to run.
+	};
+	/// Parses the arguments for a script action
+	static RunScriptParameters parse_act_script(const std::vector<std::string>& arguments);
+
+public:
+	static void do_run_script(LuaInterface& lua, MapObject* mo, const std::string& function);
 
 private:
 	const std::string name_;

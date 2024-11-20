@@ -38,6 +38,7 @@ init = {
       {
          log = 6,
          granite = 4,
+         quartz = 1,
          rope = 2,
          amazons_stonecutter = 2,
          amazons_soldier = 1,
@@ -51,6 +52,7 @@ init = {
          amazons_stone_carver = 2,
          amazons_liana_cutter = 2,
          amazons_cassava_farmer = 1,
+         amazons_charcoal_burner = 1,
          amazons_cook = 2,
          amazons_hunter_gatherer = 1,
          amazons_woodcutter = 1,

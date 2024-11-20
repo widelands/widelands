@@ -17,7 +17,7 @@ wl.Descriptions():new_immovable_type {
    animation_directory = dirname,
    animations = {
       idle = {
-         hotspot = { 26, 16 },
+         hotspot = { 36, 49 },
       },
    }
 }

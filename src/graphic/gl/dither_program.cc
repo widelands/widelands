@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,8 +41,10 @@ DitherProgram::DitherProgram() {
 	u_terrain_texture_ = glGetUniformLocation(gl_program_.object(), "u_terrain_texture");
 	u_texture_dimensions_ = glGetUniformLocation(gl_program_.object(), "u_texture_dimensions");
 	u_z_value_ = glGetUniformLocation(gl_program_.object(), "u_z_value");
+}
 
-	dither_mask_.reset(new Texture(load_image_as_sdl_surface("world/pics/edge.png", g_fs), true));
+void DitherProgram::set_dither_mask(const std::string& filepath) {
+	dither_mask_.reset(new Texture(load_image_as_sdl_surface(filepath, g_fs), true));
 
 	Gl::State::instance().bind(GL_TEXTURE0, dither_mask_->blit_data().texture_id);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, static_cast<GLint>(GL_CLAMP_TO_EDGE));
@@ -78,6 +80,8 @@ void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
 		back.dither_texture_x = 0.5;
 		back.dither_texture_y = 0.;
 		break;
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -117,6 +121,8 @@ void DitherProgram::maybe_add_dithering_triangle(
 }
 
 void DitherProgram::gl_draw(int gl_texture, float texture_w, float texture_h, const float z_value) {
+	assert(dither_mask_ != nullptr);
+
 	glUseProgram(gl_program_.object());
 
 	auto& gl_state = Gl::State::instance();
@@ -178,25 +184,25 @@ void DitherProgram::draw(
 		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
 			const Widelands::DescriptionIndex terrain_d =
 			   map != nullptr ? player->fields()[map->get_index(field.fcoords)].terrains.load().d :
-                             field.fcoords.field->terrain_d();
+			                    field.fcoords.field->terrain_d();
 			const Widelands::DescriptionIndex terrain_r =
 			   map != nullptr ? player->fields()[map->get_index(field.fcoords)].terrains.load().r :
-                             field.fcoords.field->terrain_r();
+			                    field.fcoords.field->terrain_r();
 			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, field.brn_index,
 			                             current_index, field.bln_index, terrain_d, terrain_r);
 
 			const Widelands::DescriptionIndex terrain_dd =
 			   map != nullptr ?
-               player->fields()[map->get_index(map->bl_n(field.fcoords))].terrains.load().r :
-               fields_to_draw.at(field.bln_index).fcoords.field->terrain_r();
+			      player->fields()[map->get_index(map->bl_n(field.fcoords))].terrains.load().r :
+			      fields_to_draw.at(field.bln_index).fcoords.field->terrain_r();
 			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, field.bln_index,
 			                             field.brn_index, current_index, terrain_d, terrain_dd);
 
 			if (field.ln_index != FieldsToDraw::kInvalidIndex) {
 				const Widelands::DescriptionIndex terrain_l =
 				   map != nullptr ?
-                  player->fields()[map->get_index(map->l_n(field.fcoords))].terrains.load().r :
-                  fields_to_draw.at(field.ln_index).fcoords.field->terrain_r();
+				      player->fields()[map->get_index(map->l_n(field.fcoords))].terrains.load().r :
+				      fields_to_draw.at(field.ln_index).fcoords.field->terrain_r();
 				maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, current_index,
 				                             field.bln_index, field.brn_index, terrain_d, terrain_l);
 			}
@@ -206,25 +212,25 @@ void DitherProgram::draw(
 		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
 			const Widelands::DescriptionIndex terrain_r =
 			   map != nullptr ? player->fields()[map->get_index(field.fcoords)].terrains.load().r :
-                             field.fcoords.field->terrain_r();
+			                    field.fcoords.field->terrain_r();
 			const Widelands::DescriptionIndex terrain_d =
 			   map != nullptr ? player->fields()[map->get_index(field.fcoords)].terrains.load().d :
-                             field.fcoords.field->terrain_d();
+			                    field.fcoords.field->terrain_d();
 
 			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, current_index,
 			                             field.brn_index, field.rn_index, terrain_r, terrain_d);
 			const Widelands::DescriptionIndex terrain_rr =
 			   map != nullptr ?
-               player->fields()[map->get_index(map->r_n(field.fcoords))].terrains.load().d :
-               fields_to_draw.at(field.rn_index).fcoords.field->terrain_d();
+			      player->fields()[map->get_index(map->r_n(field.fcoords))].terrains.load().d :
+			      fields_to_draw.at(field.rn_index).fcoords.field->terrain_d();
 			maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, field.brn_index,
 			                             field.rn_index, current_index, terrain_r, terrain_rr);
 
 			if (field.trn_index != FieldsToDraw::kInvalidIndex) {
 				const Widelands::DescriptionIndex terrain_u =
 				   map != nullptr ?
-                  player->fields()[map->get_index(map->tr_n(field.fcoords))].terrains.load().d :
-                  fields_to_draw.at(field.trn_index).fcoords.field->terrain_d();
+				      player->fields()[map->get_index(map->tr_n(field.fcoords))].terrains.load().d :
+				      fields_to_draw.at(field.trn_index).fcoords.field->terrain_d();
 				maybe_add_dithering_triangle(gametime, terrains, fields_to_draw, field.rn_index,
 				                             current_index, field.brn_index, terrain_r, terrain_u);
 			}

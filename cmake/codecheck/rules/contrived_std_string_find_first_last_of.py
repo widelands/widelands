@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 
 """Do not call std::string::find_first_of with a single character to find.

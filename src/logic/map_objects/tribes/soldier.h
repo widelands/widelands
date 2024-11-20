@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -199,6 +199,8 @@ enum CombatWalkingDir {
 };
 
 enum CombatFlags {
+	/// No special commands.
+	CF_NONE = 0,
 	/// Soldier will wait enemies at his building flag. Only for defenders.
 	CF_DEFEND_STAYHOME = 1,
 	/// When current health points drop below a fixed percentage, soldier will flee
@@ -317,11 +319,12 @@ public:
 
 	void set_battle(Game&, Battle*);
 
-	void start_task_attack(Game& game, Building&);
+	void start_task_attack(Game& game, Building&, CombatFlags flags);
 	void start_task_defense(Game& game, bool stayhome);
 	void start_task_battle(Game&);
 	void start_task_move_in_battle(Game&, CombatWalkingDir);
 	void start_task_die(Game&);
+	void start_task_naval_invasion(Game& game, const Coords& coords);
 
 	std::pair<std::unique_ptr<SoldierLevelRange>, std::unique_ptr<DirAnimations>>&
 	get_walking_animations_cache() {
@@ -338,6 +341,7 @@ private:
 	void move_in_battle_update(Game&, State&);
 	void die_update(Game&, State&);
 	void die_pop(Game&, State&);
+	void naval_invasion_update(Game&, State&);
 
 	void send_space_signals(Game&);
 	bool stay_home();
@@ -345,13 +349,14 @@ private:
 	// Pop the current task or, if challenged, start the fighting task.
 	void pop_task_or_fight(Game&);
 
-protected:
+public:
 	static Task const taskAttack;
 	static Task const taskDefense;
 	static Task const taskBattle;
 	static Task const taskMoveInBattle;
 	// May be this can be moved this to bob when finished
 	static Task const taskDie;
+	static Task const taskNavalInvasion;
 
 	bool is_evict_allowed() override;
 
@@ -406,6 +411,58 @@ protected:
 public:
 	void do_save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 };
+
+class NavalInvasionBaseDescr : public BobDescr {
+public:
+	NavalInvasionBaseDescr(char const* const init_name, char const* const init_descname)
+	   : BobDescr(init_name,
+	              init_descname,
+	              MapObjectType::NAVAL_INVASION_BASE,
+	              MapObjectDescr::OwnerType::kTribe) {
+	}
+	~NavalInvasionBaseDescr() override = default;
+	[[nodiscard]] Bob& create_object() const override;
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(NavalInvasionBaseDescr);
+};
+
+class NavalInvasionBase : public Bob {
+public:
+	NavalInvasionBase();
+	static NavalInvasionBase* create(EditorGameBase& egbase, Soldier& soldier, const Coords& pos);
+
+	const NavalInvasionBaseDescr& descr() const;
+	void init_auto_task(Game& game) override;
+	void cleanup(EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
+
+	void add_soldier(EditorGameBase& egbase, Soldier* soldier);
+
+	[[nodiscard]] const std::set<OPtr<Soldier>>& get_soldiers() const {
+		return soldiers_;
+	}
+
+	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
+	static Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
+
+private:
+	std::set<OPtr<Soldier>> soldiers_;
+
+	void check_unconquer();
+
+protected:
+	struct Loader : Bob::Loader {
+		Loader() = default;
+
+		void load(FileRead& fr);
+		void load_pointers() override;
+
+	private:
+		std::set<Serial> soldiers_;
+	};
+};
+
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_SOLDIER_H

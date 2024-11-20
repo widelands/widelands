@@ -26,6 +26,7 @@ init = {
          rubber = 2,
          rope = 2,
          granite = 3,
+         quartz = 1,
       },
       workers = {
          amazons_cook = 2,
@@ -42,7 +43,8 @@ init = {
          amazons_jungle_preserver = 1,
          amazons_hunter_gatherer = 1,
          amazons_stonecutter = 1,
-          amazons_dressmaker = 1,
+         amazons_dressmaker = 1,
+         amazons_charcoal_burner = 1,
       },
       soldiers = {
          [{0,0,0,0}] = 2,

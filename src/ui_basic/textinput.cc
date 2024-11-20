@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 
 #include <algorithm>
 
+#include "base/log.h"
 #include "base/utf8.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
@@ -27,6 +28,8 @@
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "graphic/wordwrap.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/scrollbar.h"
 #include "wlapplication_options.h"
@@ -101,9 +104,14 @@ private:
 /**
  * Initialize an editbox that supports multiline strings.
  */
-AbstractTextInputPanel::AbstractTextInputPanel(
-   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const UI::PanelStyle style)
-   : Panel(parent, style, x, y, w, h), d_(new Data(*this)) {
+AbstractTextInputPanel::AbstractTextInputPanel(Panel* parent,
+                                               const std::string& name,
+                                               int32_t x,
+                                               int32_t y,
+                                               uint32_t w,
+                                               uint32_t h,
+                                               const UI::PanelStyle style)
+   : Panel(parent, style, name, x, y, w, h), d_(new Data(*this)) {
 	set_handle_mouse(true);
 	set_can_focus(true);
 	set_thinks(false);
@@ -116,6 +124,7 @@ AbstractTextInputPanel::~AbstractTextInputPanel() {  // NOLINT
 
 AbstractTextInputPanel::Data::Data(AbstractTextInputPanel& init_owner)
    : scrollbar(&init_owner,
+               "scrollbar",
                init_owner.get_w() - Scrollbar::kSize,
                0,
                Scrollbar::kSize,
@@ -139,8 +148,10 @@ AbstractTextInputPanel::Data::Data(AbstractTextInputPanel& init_owner)
 	scrollbar.set_singlestepsize(ww.lineheight());
 }
 
-EditBox::EditBox(Panel* parent, int32_t x, int32_t y, uint32_t w, UI::PanelStyle style)
+EditBox::EditBox(
+   Panel* parent, const std::string& name, int32_t x, int32_t y, uint32_t w, UI::PanelStyle style)
    : AbstractTextInputPanel(parent,
+                            name,
                             x,
                             y,
                             w,
@@ -150,9 +161,14 @@ EditBox::EditBox(Panel* parent, int32_t x, int32_t y, uint32_t w, UI::PanelStyle
 	d_->scrollbar.set_visible(false);
 }
 
-MultilineEditbox::MultilineEditbox(
-   UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
-   : AbstractTextInputPanel(parent, x, y, w, h, style) {
+MultilineEditbox::MultilineEditbox(UI::Panel* parent,
+                                   const std::string& name,
+                                   int32_t x,
+                                   int32_t y,
+                                   uint32_t w,
+                                   uint32_t h,
+                                   UI::PanelStyle style)
+   : AbstractTextInputPanel(parent, name, x, y, w, h, style) {
 }
 
 /**
@@ -185,14 +201,17 @@ void AbstractTextInputPanel::Data::draw(RenderTarget& dst, bool with_caret) {
 	        UI::Align::kLeft, with_caret ? cursor_pos : std::numeric_limits<uint32_t>::max(),
 	        with_caret && mode == Data::Mode::kSelection,
 	        owner.should_expand_selection() ?
-              std::optional<std::pair<int32_t, int32_t>>(std::make_pair(0, owner.get_h())) :
-              std::nullopt,
+	           std::optional<std::pair<int32_t, int32_t>>(std::make_pair(0, owner.get_h())) :
+	           std::nullopt,
 	        start, end, scrollbar.get_scrollpos(), caret_image_path);
 }
 
 void AbstractTextInputPanel::layout() {
+	// Offset snaps the text panel to the start of input. Saved text always displays from beginning
+	d_->scrolloffset = get_h() == 0 ? 0 : get_text().length() / get_h();
 	Panel::layout();
 	d_->scrollbar.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
+	d_->scrollbar.set_size(Scrollbar::kSize, get_inner_h());
 }
 
 /**
@@ -349,6 +368,28 @@ std::pair<uint32_t, uint32_t> AbstractTextInputPanel::Data::paragraph_boundary(u
 	return {start, end};
 }
 
+bool AbstractTextInputPanel::show_default_context_menu(Vector2i pos) {
+	show_context_menu(
+	   pos, {
+	           {_("Cut"), _("Cut the selected text to the clipboard"),
+	            shortcut_string_for(KeyboardShortcut::kCommonTextCut, false), nullptr,
+	            d_->mode == Data::Mode::kSelection, [this]() { handle_cut(); }},
+	           {_("Copy"), _("Copy the selected text to the clipboard"),
+	            shortcut_string_for(KeyboardShortcut::kCommonTextCopy, false), nullptr,
+	            d_->mode == Data::Mode::kSelection, [this]() { handle_copy(); }},
+	           {_("Paste"), _("Paste the clipboard content"),
+	            shortcut_string_for(KeyboardShortcut::kCommonTextPaste, false), nullptr,
+	            SDL_HasClipboardText() != 0, [this]() { handle_paste(); }},
+	           {_("Delete"), _("Delete the selected text"),
+	            shortcut_string_for(keysym(SDLK_DELETE), false), nullptr,
+	            d_->mode == Data::Mode::kSelection, [this]() { delete_selected_text(); }},
+	           {_("Select All"), _("Select the entire text"),
+	            shortcut_string_for(KeyboardShortcut::kCommonSelectAll, false), nullptr, true,
+	            [this]() { handle_select_all(); }},
+	        });
+	return true;
+}
+
 /**
  * The mouse was clicked on this editbox
  */
@@ -383,8 +424,9 @@ bool AbstractTextInputPanel::handle_mousepress(const uint8_t btn, int32_t x, int
 		clicked();
 		return true;
 	}
+
 #if HAS_PRIMARY_SELECTION_BUFFER
-	else if (btn == SDL_BUTTON_MIDDLE) {
+	if (btn == SDL_BUTTON_MIDDLE) {
 		/* Primary buffer is inserted without affecting cursor position, selection, and focus. */
 		const uint32_t old_caret_pos = d_->cursor_pos;
 		const uint32_t old_selection_start = d_->selection_start;
@@ -425,7 +467,7 @@ bool AbstractTextInputPanel::handle_mousepress(const uint8_t btn, int32_t x, int
 	}
 #endif
 
-	return false;
+	return Panel::handle_mousepress(btn, x, y);
 }
 bool AbstractTextInputPanel::handle_mousemove(
    uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
@@ -445,6 +487,7 @@ bool AbstractTextInputPanel::handle_mousewheel(int32_t x, int32_t y, uint16_t mo
 }
 
 void AbstractTextInputPanel::set_caret_to_cursor_pos(int32_t x, int32_t y) {
+	x += d_->scrolloffset;
 	y += d_->scrollbar.get_scrollpos();
 
 	unsigned previous_line_index = d_->ww.offset_of_line_at(y);
@@ -519,35 +562,54 @@ void AbstractTextInputPanel::set_caret_pos(const size_t caret) const {
 	d_->set_cursor_pos(d_->snap_to_char(caret));
 }
 
+void AbstractTextInputPanel::handle_cut() {
+	if (d_->mode == Data::Mode::kSelection) {
+		copy_selected_text();
+		delete_selected_text();
+	}
+}
+
+void AbstractTextInputPanel::handle_copy() {
+	if (d_->mode == Data::Mode::kSelection) {
+		copy_selected_text();
+	}
+}
+
+void AbstractTextInputPanel::handle_paste() {
+	if (SDL_HasClipboardText() != 0) {
+		if (d_->mode == Data::Mode::kSelection) {
+			delete_selected_text();
+		}
+		handle_textinput(SDL_GetClipboardText());
+	}
+}
+
+void AbstractTextInputPanel::handle_select_all() {
+	d_->selection_start = 0;
+	d_->selection_end = d_->text.size();
+	d_->mode = Data::Mode::kSelection;
+	update_primary_selection_buffer();
+}
+
 /**
  * This is called by the UI code whenever a key press or release arrives
  */
 bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
-		if (matches_shortcut(KeyboardShortcut::kCommonTextPaste, code) &&
-		    (SDL_HasClipboardText() != 0u)) {
-			if (d_->mode == Data::Mode::kSelection) {
-				delete_selected_text();
-			}
-			handle_textinput(SDL_GetClipboardText());
+		if (matches_shortcut(KeyboardShortcut::kCommonTextPaste, code)) {
+			handle_paste();
 			return true;
 		}
-		if (matches_shortcut(KeyboardShortcut::kCommonTextCopy, code) &&
-		    d_->mode == Data::Mode::kSelection) {
-			copy_selected_text();
+		if (matches_shortcut(KeyboardShortcut::kCommonTextCopy, code)) {
+			handle_copy();
 			return true;
 		}
-		if (matches_shortcut(KeyboardShortcut::kCommonTextCut, code) &&
-		    d_->mode == Data::Mode::kSelection) {
-			copy_selected_text();
-			delete_selected_text();
+		if (matches_shortcut(KeyboardShortcut::kCommonTextCut, code)) {
+			handle_cut();
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kCommonSelectAll, code)) {
-			d_->selection_start = 0;
-			d_->selection_end = d_->text.size();
-			d_->mode = Data::Mode::kSelection;
-			update_primary_selection_buffer();
+			handle_select_all();
 			return true;
 		}
 
@@ -566,7 +628,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 				}
 				changed();
 			}
-			break;
+			return true;
 
 		case SDLK_BACKSPACE:
 			if (d_->mode == Data::Mode::kSelection) {
@@ -579,7 +641,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 				}
 				changed();
 			}
-			break;
+			return true;
 
 		case SDLK_LEFT: {
 			if (d_->cursor_pos > 0) {
@@ -611,7 +673,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					d_->set_cursor_pos(d_->prev_char(d_->cursor_pos));
 				}
 			}
-			break;
+			return true;
 		}
 
 		case SDLK_RIGHT:
@@ -640,7 +702,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					d_->set_cursor_pos(d_->next_char(d_->cursor_pos));
 				}
 			}
-			break;
+			return true;
 
 		case SDLK_DOWN:
 			if (d_->cursor_pos < d_->text.size()) {
@@ -678,7 +740,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					d_->set_cursor_pos(d_->text.size());
 				}
 			}
-			break;
+			return true;
 
 		case SDLK_UP:
 			if (d_->cursor_pos > 0) {
@@ -713,7 +775,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					d_->set_cursor_pos(0);
 				}
 			}
-			break;
+			return true;
 
 		case SDLK_HOME:
 			if ((code.mod & KMOD_CTRL) != 0) {
@@ -736,7 +798,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 				}
 				d_->set_cursor_pos(d_->ww.line_offset(cursorline));
 			}
-			break;
+			return true;
 
 		case SDLK_END:
 			if ((code.mod & KMOD_CTRL) != 0) {
@@ -769,7 +831,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					d_->set_cursor_pos(d_->text.size());
 				}
 			}
-			break;
+			return true;
 
 		case SDLK_ESCAPE:
 			cancel();
@@ -777,17 +839,16 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 
 		case SDLK_RETURN:
 			if ((code.mod & KMOD_CTRL) != 0) {
-				return false;
+				break;
 			}
 			d_->insert(d_->cursor_pos, "\n");
 			d_->reset_selection();
 			changed();
-			break;
+			return true;
 
 		default:
 			break;
 		}
-		return true;
 	}
 
 	return Panel::handle_key(down, code);
@@ -802,12 +863,10 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 
 			// Save history if active and text is not empty
-			if (history_active_ && !d_->text.empty()) {
-				for (unsigned i = kHistorySize - 1; i > 0; --i) {
-					history_[i] = history_[i - 1];
-				}
-				history_[0] = d_->text;
+			if (history_ != nullptr && !d_->text.empty()) {
+				history_->add_entry(d_->text);
 				history_position_ = -1;
+				history_->clear_tmp();
 			}
 
 			ok();
@@ -815,12 +874,18 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_UP:
 			// Load entry from history if active and text is not empty
-			if (history_active_) {
-				if (history_position_ > static_cast<int>(kHistorySize) - 2) {
-					history_position_ = kHistorySize - 2;
+			if (history_ != nullptr) {
+				if (history_position_ < 0) {
+					history_->set_tmp(d_->text);
 				}
-				if (!history_[++history_position_].empty()) {
-					d_->text = history_[history_position_];
+				++history_position_;
+				if (history_position_ >= history_->current_size()) {
+					history_position_ = history_->current_size() - 1;
+					return true;
+				}
+				const std::string& hist_prev = history_->get_entry(history_position_);
+				if (!hist_prev.empty()) {
+					d_->text = hist_prev;
 					set_caret_pos(d_->text.size());
 					d_->reset_selection();
 					changed();
@@ -831,12 +896,14 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_DOWN:
 			// Load entry from history if active and text is not equivalent to the current one
-			if (history_active_) {
-				if (history_position_ < 1) {
-					history_position_ = 1;
+			if (history_ != nullptr) {
+				--history_position_;
+				if (history_position_ < 0) {
+					history_position_ = -1;
 				}
-				if (history_[--history_position_] != d_->text) {
-					d_->text = history_[history_position_];
+				const std::string& hist_next = history_->get_entry(history_position_);
+				if (hist_next != d_->text) {
+					d_->text = hist_next;
 					set_caret_pos(d_->text.size());
 					d_->reset_selection();
 					changed();
@@ -1095,6 +1162,59 @@ void AbstractTextInputPanel::Data::refresh_ww() {
 
 	int32_t textheight = ww.height();
 	scrollbar.set_steps(textheight - owner.get_h() + 2 * get_style().background().margin());
+}
+
+void EditBoxHistory::add_entry(const std::string& new_entry) {
+	// Avoid duplicates next to each other
+	if (!entries_.empty() && new_entry == entries_.at(0)) {
+		return;
+	}
+	entries_.emplace(entries_.begin(), new_entry);
+	changed_ = true;
+	if (entries_.size() > max_size_) {
+		entries_.pop_back();
+	}
+}
+
+const std::string& EditBoxHistory::get_entry(int16_t position) const {
+	if (position < 0 || position >= static_cast<int>(entries_.size())) {
+		return tmp_;
+	}
+	return entries_.at(position);
+}
+
+void EditBoxHistory::load(const std::string& filename) {
+	FileRead fr;
+	if (fr.try_open(*g_fs, filename)) {
+		entries_.clear();
+		try {
+			char* line;
+			while ((line = fr.read_line()) != nullptr) {
+				add_entry(line);
+			}
+			// Only set it on success to allow next save() to try to fix problem
+			changed_ = false;
+		} catch (const std::exception& e) {
+			log_err(
+			   "Loading %s, line %" PRIuS ": %s", filename.c_str(), entries_.size() + 1, e.what());
+		}
+	}
+}
+
+void EditBoxHistory::save(const std::string& filename) {
+	if (!changed_) {
+		return;
+	}
+	try {
+		FileWrite fw;
+		for (auto it = entries_.rbegin(); it != entries_.rend(); ++it) {
+			fw.print_f("%s\n", it->c_str());
+		}
+		fw.write(*g_fs, filename);
+		changed_ = false;
+	} catch (const std::exception& e) {
+		log_err("Saving %s: %s", filename.c_str(), e.what());
+	}
 }
 
 }  // namespace UI

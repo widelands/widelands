@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2023 by the Widelands Development Team
+ * Copyright (C) 2007-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,9 +29,8 @@
 
 #include <string>
 
+#include "base/crypto.h"
 #include "base/times.h"
-
-struct Md5Checksum;
 
 class StreamRead;
 class StreamWrite;
@@ -67,7 +66,7 @@ public:
 	~ReplayWriter();
 
 	void send_player_command(PlayerCommand*);
-	void send_sync(const Md5Checksum&);
+	void send_sync(const crypto::MD5Checksum& hash);
 
 private:
 	Game& game_;
@@ -84,9 +83,14 @@ struct ReplayfileSavegameExtractor {
 		return temp_file_.empty() ? source_file_ : temp_file_;
 	}
 
+	[[nodiscard]] bool is_replay() const {
+		return is_replay_;
+	}
+
 private:
 	const std::string& source_file_;
 	std::string temp_file_;
+	bool is_replay_{false};
 };
 
 }  // namespace Widelands

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,14 +49,24 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
      host_(host),
      box_(this,
           UI::PanelStyle::kWui,
+          "main_box",
           margin,
           margin,
           UI::Box::Vertical,
           width,
           get_h() - 2 * margin,
           vspacing),
-     box_h_(&box_, UI::PanelStyle::kWui, margin, margin, UI::Box::Horizontal, width, 35, vspacing),
+     box_h_(&box_,
+            UI::PanelStyle::kWui,
+            "hbox",
+            margin,
+            margin,
+            UI::Box::Horizontal,
+            width,
+            35,
+            vspacing),
      text_(&box_,
+           "message",
            0,
            0,
            width,

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,6 +40,9 @@ uint32_t AnimationManager::load(const LuaTable& table,
 	case Animation::Type::kSpritesheet:
 		animations_.push_back(std::unique_ptr<Animation>(
 		   new SpriteSheetAnimation(table, basename, animation_directory)));
+		break;
+	default:
+		NEVER_HERE();
 	}
 	return animations_.size();
 }

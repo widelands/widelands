@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2023 by the Widelands Development Team
+ * Copyright (C) 2011-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,9 +75,10 @@ ChatOverlay::ChatOverlay(UI::Panel* const parent,
                          int32_t const y,
                          int32_t const w,
                          int32_t const h)
-   : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h), m(new Impl(fn)) {
+   : UI::Panel(parent, UI::PanelStyle::kWui, "chat_overlay", x, y, w, h), m(new Impl(fn)) {
 	m->transparent_ = get_config_bool("transparent_chat", true);
 
+	set_z(UI::Panel::ZOrder::kConfirmation);  // above regular windows
 	set_thinks(true);
 }
 

@@ -12,7 +12,8 @@ wl.Descriptions():new_warehouse_type {
 
    buildcost = {
       balsa = 3,
-      granite = 3,
+      granite = 2,
+      quartz = 1,
       log = 4,
       rubber = 3,
       gold = 2,
@@ -39,6 +40,7 @@ wl.Descriptions():new_warehouse_type {
 
    conquers = 5,
    heal_per_second = 170,
+   max_garrison = 20,
 }
 
 pop_textdomain()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2023 by the Widelands Development Team
+ * Copyright (C) 2012-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,5 +36,7 @@ void fill_parameter_vector();
 bool is_parameter(const std::string&);
 const std::vector<std::string> get_all_parameters();
 void show_usage(const std::string&, CmdLineVerbosity verbosity);
+
+bool use_last(const std::string& filename_arg);
 
 #endif  // end of include guard: WL_WLAPPLICATION_MESSAGES_H

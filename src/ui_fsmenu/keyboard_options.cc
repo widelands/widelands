@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2023 by the Widelands Development Team
+ * Copyright (C) 2020-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,7 @@ struct ShortcutChooser : public UI::Window {
 	                to_string(c)),
 	     code_(c),
 	     key(get_shortcut(code_)),
-	     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding) {
+	     box_(this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical, 0, 0, kPadding) {
 		UI::Button* const reset = new UI::Button(
 		   &box_, "reset", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Reset to default"));
 		reset->sigclicked.connect([this, &parent]() {
@@ -70,7 +70,7 @@ struct ShortcutChooser : public UI::Window {
 		   [this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk); });
 
 		UI::MultilineTextarea* const txt = new UI::MultilineTextarea(
-		   &box_, 0, 0, 200, 100, UI::PanelStyle::kFsMenu,
+		   &box_, "label", 0, 0, 200, 100, UI::PanelStyle::kFsMenu,
 		   _("Press the new shortcut or close this window to cancel."), UI::Align::kCenter);
 
 		box_.add(txt, UI::Box::Resizing::kExpandBoth);
@@ -114,11 +114,12 @@ protected:
 	                               const std::string& tribename,
 	                               const std::string& selection,
 	                               const Widelands::TribeDescr* tribe) {
-		UI::Box* hbox = new UI::Box(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal);
+		UI::Box* hbox = new UI::Box(
+		   &box_, UI::PanelStyle::kFsMenu, format("fp_box_%s", tribename), 0, 0, UI::Box::Horizontal);
 		box_.add(hbox, UI::Box::Resizing::kFullSize);
 
 		UI::Icon* icon =
-		   new UI::Icon(hbox, UI::PanelStyle::kFsMenu, 0, 0, height, height,
+		   new UI::Icon(hbox, UI::PanelStyle::kFsMenu, "tribe_icon", 0, 0, height, height,
 		                tribe == nullptr ? nullptr : g_image_cache->get(tribe->basic_info().icon));
 		icon->set_handle_mouse(true);
 		icon->set_tooltip(tribe == nullptr ? tribename : tribe->descname());
@@ -208,8 +209,9 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
                 0,
                 0,
                 _("Edit Keyboard And Mouse Actions")),
-     buttons_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
-     tabs_(this, UI::TabPanelStyle::kFsMenu),
+     buttons_box_(
+        this, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
+     tabs_(this, UI::TabPanelStyle::kFsMenu, "tabs"),
      mousewheel_options_(&tabs_),
      reset_(&buttons_box_,
             "reset",
@@ -242,7 +244,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	                  UI::Box& box, const KeyboardShortcut key) {
 		UI::Button* b = new UI::Button(&box, std::to_string(static_cast<int>(key)), 0, 0, 0, 0,
 		                               UI::ButtonStyle::kFsMenuMenu, generate_title(key));
-		all_keyboard_buttons.emplace(std::make_pair(key, b));
+		all_keyboard_buttons.emplace(key, b);
 		box.add(b, UI::Box::Resizing::kFullSize);
 		box.add_space(kPadding);
 		b->sigclicked.connect([this, b, key, generate_title]() {
@@ -277,17 +279,15 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	auto create_tab = [this, add_key](const std::string& title,
 	                                  const KeyboardShortcut shortcut_start,
 	                                  const KeyboardShortcut shortcut_end) {
-		assert(shortcut_start < shortcut_end);
-		UI::Box* b =
-		   new UI::Box(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
+		assert(shortcut_start <= shortcut_end);
+		UI::Box* b = new UI::Box(
+		   &tabs_, UI::PanelStyle::kFsMenu, "shortcut_box", 0, 0, UI::Box::Vertical, 0, 0, kPadding);
 		b->set_force_scrolling(true);
 		for (KeyboardShortcut k = shortcut_start; k <= shortcut_end; ++k) {
 			if (is_real(k)) {
-#ifdef NDEBUG
-				if (is_debug_only(k)) {
+				if (!g_allow_script_console && is_developer_tool(k)) {
 					continue;
 				}
-#endif
 				add_key(*b, k);
 			}
 		}
@@ -301,6 +301,11 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 
 	const size_t fastplace_tab_index = tabs_.tabs().size();
 	create_tab(_("Fastplace"), KeyboardShortcut::kFastplace_Begin, KeyboardShortcut::kFastplace_End);
+
+	if (const KeyboardShortcut max_shortcut = get_highest_used_keyboard_shortcut();
+	    max_shortcut > KeyboardShortcut::k_End) {
+		create_tab(_("Add-Ons"), KeyboardShortcut::k_End + 1, max_shortcut);
+	}
 
 	tabs_.add("options_scroll", _("Mouse Scrolling"), &mousewheel_options_, "");
 

@@ -1,4 +1,4 @@
-#!/usr/bin/python -tt
+#!/usr/bin/python3 -tt
 
 """This checks for.
 
@@ -7,6 +7,7 @@
 and reports an error. The include should always be from the base dir upwards:
 
 #include "somedir/file.h"
+
 """
 
 import os

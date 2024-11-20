@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -111,7 +111,9 @@ public:
 		kRandom,           // show Random Map window
 		kLoad              // show Load Map window
 	};
-	static void run_editor(UI::Panel* error_message_parent,
+
+	// Returns true on clean exit, false if an exception was caught by the wrapper
+	static bool run_editor(UI::Panel* error_message_parent,
 	                       EditorInteractive::Init,
 	                       const std::string& filename = "",
 	                       const std::string& script_to_run = "");
@@ -210,7 +212,9 @@ private:
 	enum class ShowHideEntry {
 		kBuildingSpaces,
 		kMaximumBuildingSpaces,
+		kHeightHeatMap,
 		kGrid,
+		kOceans,
 		kAnimals,
 		kImmovables,
 		kResources
@@ -244,6 +248,10 @@ private:
 	// Show / hide the bobs in the mapview
 	void toggle_bobs();
 	void toggle_grid();
+	void toggle_height_heat_map();
+	void toggle_oceans();
+
+	void update_ocean_overlays();
 
 	void update_tool_history_window();
 
@@ -305,6 +313,10 @@ private:
 	/// Set to true when tool settings are changed in tool window.
 	/// Set to false when the tool is used with the new settings.
 	bool tool_settings_changed_ = true;
+
+	std::unique_ptr<std::vector<uint32_t>> ocean_overlays_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldTerrainChanged>>
+	   field_terrain_changed_subscriber_;
 };
 
 #endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H

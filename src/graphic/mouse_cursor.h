@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,6 +49,9 @@ public:
 	// Switch between "normal" and "pressed" cursors
 	void change_cursor(bool is_pressed);
 
+	// Switch between "normal" and "wait" cursors
+	void change_wait(bool to_wait);
+
 	// Hide/show the cursor
 	void set_visible(bool visible);
 	[[nodiscard]] bool is_visible() const;
@@ -59,17 +62,21 @@ public:
 private:
 	bool use_sdl_ = false;
 	bool was_pressed_ = false;
+	bool is_wait_ = false;
 	bool visible_ = true;
 
 	// Used when SDL mode is disabled
 	const Image* default_cursor_ = nullptr;
 	const Image* default_cursor_click_ = nullptr;
+	const Image* default_cursor_wait_ = nullptr;
 
 	// Used in SDL mode
 	SDL_Surface* default_cursor_sdl_surface_ = nullptr;
 	SDL_Surface* default_cursor_click_sdl_surface_ = nullptr;
+	SDL_Surface* default_cursor_wait_sdl_surface_ = nullptr;
 	SDL_Cursor* default_cursor_sdl_ = nullptr;
 	SDL_Cursor* default_cursor_click_sdl_ = nullptr;
+	SDL_Cursor* default_cursor_wait_sdl_ = nullptr;
 };
 
 extern MouseCursor* g_mouse_cursor;

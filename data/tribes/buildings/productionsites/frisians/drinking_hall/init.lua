@@ -53,6 +53,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: 37 + 44 = 81 sec
             "call=produce_ration",
             "call=produce_meal",
          }
@@ -61,10 +62,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
          descname = _("preparing a ration"),
          actions = {
-            -- time total: 33
+            -- time: 5.4 + 18 + 10 + 3.6 = 37 sec
             "return=skipped unless economy needs ration",
             "consume=fruit,smoked_fish,smoked_meat",
-            "sleep=duration:5s",
+            "sleep=duration:5s400ms",
             "animate=working duration:18s",
             "sleep=duration:10s",
             "produce=ration"
@@ -74,10 +75,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
          descname = _("preparing a meal"),
          actions = {
-            --time total: 40
+            -- time: 30.4 + 10 + 3.6 = 44 sec
             "return=skipped unless economy needs meal",
             "consume=beer honey_bread smoked_fish,smoked_meat",
-            "animate=working duration:30s",
+            "animate=working duration:30s400ms",
             "sleep=duration:10s",
             "produce=meal"
          }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,7 +67,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 						throw GameDataError("already loaded");
 					}
 					PlayerNumber player_index = fr.unsigned_8();
-					if (!(0 < player_index && player_index <= nr_players)) {
+					if (0 >= player_index || player_index > nr_players) {
 						throw GameDataError("Invalid player number: %i.", player_index);
 					}
 

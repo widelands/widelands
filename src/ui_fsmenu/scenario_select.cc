@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,9 +46,10 @@ ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
    : TwoColumnsFullNavigationMenu(
         fsmm, camp != nullptr ? _("Choose Scenario") : _("Choose Tutorial")),
      is_tutorial_(camp == nullptr),
-     table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     table_(&left_column_box_, "table", 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      subtitle_(&header_box_,
+               "subtitle",
                0,
                0,
                UI::Scrollbar::kSize,
@@ -60,6 +61,7 @@ ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
      scenario_details_(&right_column_content_box_),
      scenario_difficulty_header_(&right_column_content_box_,
                                  UI::PanelStyle::kFsMenu,
+                                 "label_difficulty",
                                  UI::FontStyle::kFsMenuInfoPanelHeading,
                                  0,
                                  0,
@@ -101,7 +103,7 @@ ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
 	right_column_content_box_.add(&scenario_difficulty_, UI::Box::Resizing::kFullSize);
 
 	back_.set_tooltip(is_tutorial_ ? _("Return to the main menu") :
-                                    _("Return to campaign selection"));
+	                                 _("Return to campaign selection"));
 	ok_.set_tooltip(is_tutorial_ ? _("Play this tutorial") : _("Play this scenario"));
 
 	table_.selected.connect([this](unsigned /* value */) { entry_selected(); });

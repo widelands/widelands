@@ -1,4 +1,4 @@
-#!/usr/bin/python -tt
+#!/usr/bin/python3 -tt
 
 """This checks that the include guard is complete and the same style."""
 

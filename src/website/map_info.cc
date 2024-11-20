@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,7 @@
 
 int main(int argc, char** argv) {
 	set_testcase_logging_dir();
-	if (!(2 <= argc && argc <= 3)) {
+	if (argc < 2 || argc > 3) {
 		log_err("Usage: %s <map file>\n", argv[0]);
 		return 1;
 	}
@@ -91,6 +91,11 @@ int main(int argc, char** argv) {
 			json->add_int("nr_players", map->get_nrplayers());
 			json->add_string(
 			   "minimum_required_widelands_version", map->minimum_required_widelands_version());
+
+			JSON::Array* tags_array = json->add_array("tags");
+			for (const std::string& tag : map->get_tags()) {
+				tags_array->add_empty(tag);
+			}
 
 			const std::string world_name =
 			   dynamic_cast<Widelands::WidelandsMapLoader*>(ml.get())->old_world_name();

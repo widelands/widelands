@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,8 +66,8 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
      type_(type),
 
-     main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     info_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     main_box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical),
+     info_box_(&main_box_, UI::PanelStyle::kWui, "info_box", 0, 0, UI::Box::Horizontal),
 
      load_or_save_(&info_box_,
                    igbase().game(),
@@ -76,9 +76,11 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
                    UI::WindowStyle::kWui,
                    false),
 
-     filename_box_(load_or_save_.table_box(), UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     filename_box_(
+        load_or_save_.table_box(), UI::PanelStyle::kWui, "filename_box", 0, 0, UI::Box::Horizontal),
      filename_label_(&filename_box_,
                      UI::PanelStyle::kWui,
+                     "label_filename",
                      UI::FontStyle::kWuiLabel,
                      0,
                      0,
@@ -86,10 +88,11 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
                      0,
                      _("Filename:"),
                      UI::Align::kLeft),
-     filename_editbox_(&filename_box_, 0, 0, 0, UI::PanelStyle::kWui),
+     filename_editbox_(&filename_box_, "filename", 0, 0, 0, UI::PanelStyle::kWui),
 
      buttons_box_(load_or_save_.game_details()->button_box(),
                   UI::PanelStyle::kWui,
+                  "buttons_box",
                   0,
                   0,
                   UI::Box::Horizontal),
@@ -303,7 +306,7 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 	   complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
 	GenericSaveHandler::Error error;
 	{
-		MutexLock m(MutexLock::ID::kLogicFrame, [this]() { stay_responsive(); });
+		MutexLock m(MutexLock::ID::kLogicFrame);
 		error = gsh.save();
 	}
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2023 by the Widelands Development Team
+ * Copyright (C) 2004-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,7 +29,10 @@ struct CmdCallEconomyBalance : public GameLogicCommand {
 	CmdCallEconomyBalance() : GameLogicCommand(Time()) {
 	}  ///< for load and save
 
-	CmdCallEconomyBalance(const Time&, Economy*, uint32_t timerid);
+	CmdCallEconomyBalance(const Time& starttime,
+	                      Flag* representative_flag,
+	                      WareWorker type,
+	                      uint32_t timerid);
 
 	void execute(Game&) override;
 

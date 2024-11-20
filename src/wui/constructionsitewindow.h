@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,6 +85,7 @@ private:
 
 	protected:
 		void draw_ware(RenderTarget& dst, Widelands::DescriptionIndex ware) override;
+		uint32_t amount_of(Widelands::DescriptionIndex) override;
 
 	private:
 		Widelands::WarehouseSettings& settings_;

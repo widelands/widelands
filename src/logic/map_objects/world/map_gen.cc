@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,8 +52,9 @@ MapGenLandResource::get_bob_category(MapGenAreaInfo::Terrain terrain_type) const
 	case MapGenAreaInfo::Terrain::kMountainsMountain:
 	case MapGenAreaInfo::Terrain::kMountainsSnow:
 		return nullptr;
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 MapGenLandResource::MapGenLandResource(const LuaTable& table, MapGenInfo& map_gen_info) {
@@ -117,6 +118,9 @@ MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table,
 		read_terrains("inner_terrains", &terrains1_);
 		read_terrains("outer_terrains", &terrains2_);
 		break;
+
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -147,8 +151,10 @@ size_t MapGenAreaInfo::get_num_terrains(Terrain const terrain_type) const {
 		return terrains2_.size();
 	case MapGenAreaInfo::Terrain::kMountainsSnow:
 		return terrains3_.size();
+
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 DescriptionIndex MapGenAreaInfo::get_terrain(Terrain const terrain_type,
@@ -179,8 +185,10 @@ DescriptionIndex MapGenAreaInfo::get_terrain(Terrain const terrain_type,
 		return terrains2_[index];
 	case MapGenAreaInfo::Terrain::kMountainsSnow:
 		return terrains3_[index];
+
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 uint32_t MapGenInfo::get_sum_land_weight() const {
@@ -231,8 +239,9 @@ size_t MapGenInfo::get_num_areas(MapGenAreaInfo::Area const area_type) const {
 		return mountain_areas_.size();
 	case MapGenAreaInfo::Area::kWasteland:
 		return wasteland_areas_.size();
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 const MapGenAreaInfo& MapGenInfo::get_area(MapGenAreaInfo::Area const area_type,
@@ -246,8 +255,9 @@ const MapGenAreaInfo& MapGenInfo::get_area(MapGenAreaInfo::Area const area_type,
 		return mountain_areas_.at(index);
 	case MapGenAreaInfo::Area::kWasteland:
 		return wasteland_areas_.at(index);
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 const MapGenBobCategory* MapGenInfo::get_bob_category(const std::string& bob_category) const {

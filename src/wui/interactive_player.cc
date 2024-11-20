@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include "base/mutex.h"
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
+#include "graphic/color.h"
 #include "graphic/game_renderer.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/text_layout.h"
@@ -32,6 +33,7 @@
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/productionsite.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message_queue.h"
@@ -65,14 +67,14 @@ namespace {
 float adjusted_field_brightness(const Widelands::FCoords& fcoords,
                                 const Time& gametime,
                                 const Widelands::Player::Field& pf) {
-	if (pf.vision == Widelands::VisibleState::kUnexplored) {
+	if (pf.vision.state() == Widelands::VisibleState::kUnexplored) {
 		return 0.;
 	}
 
 	uint32_t brightness = 144 + fcoords.field->get_brightness();
 	brightness = std::min<uint32_t>(255, (brightness * 255) / 160);
 
-	if (pf.vision == Widelands::VisibleState::kPreviouslySeen) {
+	if (pf.vision.state() == Widelands::VisibleState::kPreviouslySeen) {
 		static const Duration kDecayTimeInMs = Duration(20000);
 		const Duration time_ago = gametime - pf.time_node_last_unseen;
 		if (time_ago < kDecayTimeInMs) {
@@ -84,13 +86,15 @@ float adjusted_field_brightness(const Widelands::FCoords& fcoords,
 	}
 	return brightness / 255.;
 }
+
 // Remove statistics from the text to draw if the player does not match the map object's owner
 InfoToDraw filter_info_to_draw(InfoToDraw info_to_draw,
                                const Widelands::MapObject* object,
                                const Widelands::Player& player) {
 	InfoToDraw result = info_to_draw;
 	const Widelands::Player* owner = object->get_owner();
-	if (owner != nullptr && !player.see_all() && player.is_hostile(*owner)) {
+	if (owner != nullptr && !player.see_all() && player.is_hostile(*owner) &&
+	    object->descr().type() != Widelands::MapObjectType::WAREHOUSE) {
 		result = static_cast<InfoToDraw>(result & ~InfoToDraw::kStatistics);
 	}
 	return result;
@@ -137,7 +141,7 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
 				opacity = 1.0f;
 			} else {
 				player_color = nullptr;
-				opacity = Widelands::kBuildingSilhouetteOpacity;
+				opacity = Widelands::kImmovableSilhouetteOpacity;
 			}
 			if (building->type() == Widelands::MapObjectType::DISMANTLESITE &&
 			    // TODO(Nordfriese): `building` can only be nullptr in savegame
@@ -209,12 +213,13 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	add_statistics_menu();
 
-	add_toolbar_button(
+	toggle_objective_menu_ = add_toolbar_button(
 	   "wui/menus/objectives", "objectives",
 	   as_tooltip_text_with_hotkey(_("Objectives"),
 	                               shortcut_string_for(KeyboardShortcut::kInGameObjectives, true),
 	                               UI::PanelStyle::kWui),
-	   &objectives_, true);
+	   &objectives_, false);
+	toggle_objective_menu_->sigclicked.connect([this]() { do_toggle_objective_menu(); });
 	objectives_.open_window = [this] { new GameObjectivesMenu(*this, objectives_); };
 
 	add_diplomacy_menu();
@@ -244,24 +249,17 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 		node_action(node_and_triangle);
 	});
 
+	add_plugin_menu();
+
 	finalize_toolbar();
 
-#ifndef NDEBUG  //  only in debug builds
-	addCommand(
-	   "switchplayer", [this](const std::vector<std::string>& str) { cmdSwitchPlayer(str); });
-#endif
+	if (g_allow_script_console) {
+		addCommand(
+		   "switchplayer", [this](const std::vector<std::string>& str) { cmdSwitchPlayer(str); });
+	}
 
 	map_options_subscriber_ = Notifications::subscribe<NoteMapOptions>(
 	   [this](const NoteMapOptions& /* note */) { rebuild_statistics_menu(); });
-	shipnotes_subscriber_ =
-	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
-		   if (note.ship->owner().player_number() == player_number() &&
-		       note.action == Widelands::NoteShip::Action::kWaitingForCommand &&
-		       note.ship->get_ship_state() ==
-		          Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
-			   expedition_port_spaces_.emplace(note.ship, note.ship->exp_port_spaces().front());
-		   }
-	   });
 
 	initialization_complete();
 }
@@ -302,8 +300,8 @@ void InteractivePlayer::add_statistics_menu() {
 
 void InteractivePlayer::rebuild_statistics_menu() {
 	const StatisticsMenuEntry last_selection = statisticsmenu_.has_selection() ?
-                                                 statisticsmenu_.get_selected() :
-                                                 StatisticsMenuEntry::kSoldiers;
+	                                              statisticsmenu_.get_selected() :
+	                                              StatisticsMenuEntry::kSoldiers;
 
 	statisticsmenu_.clear();
 
@@ -364,6 +362,8 @@ void InteractivePlayer::statistics_menu_selected(StatisticsMenuEntry entry) {
 			menu_windows_.stats_seafaring.toggle();
 		}
 	} break;
+	default:
+		NEVER_HERE();
 	}
 	statisticsmenu_.toggle();
 }
@@ -375,12 +375,12 @@ void InteractivePlayer::rebuild_showhide_menu() {
 	InteractiveGameBase::rebuild_showhide_menu();
 	showhidemenu_.add(
 	   get_display_flag(dfShowWorkareaOverlap) ?
-          /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
-           * are highlighted */
-          _("Hide Workarea Overlaps") :
-          /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
-           * are highlighted */
-          _("Show Workarea Overlaps"),
+	      /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
+	       * are highlighted */
+	      _("Hide Workarea Overlaps") :
+	       /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
+	        * are highlighted */
+	       _("Show Workarea Overlaps"),
 	   ShowHideEntry::kWorkareaOverlap,
 	   g_image_cache->get("images/wui/menus/show_workarea_overlap.png"), false,
 	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"),
@@ -389,9 +389,32 @@ void InteractivePlayer::rebuild_showhide_menu() {
 	showhidemenu_.select(last_selection);
 }
 
-bool InteractivePlayer::has_expedition_port_space(const Widelands::Coords& coords) const {
-	return std::any_of(expedition_port_spaces_.begin(), expedition_port_spaces_.end(),
-	                   [&coords](const auto& pair) { return pair.second == coords; });
+InteractivePlayer::HasExpeditionPortSpace
+InteractivePlayer::has_expedition_port_space(const Widelands::Coords& coords) const {
+	HasExpeditionPortSpace tmp_rv = HasExpeditionPortSpace::kNone;
+	for (auto serial : player().ships()) {
+		Widelands::Ship* ship = dynamic_cast<Widelands::Ship*>(egbase().objects().get_object(serial));
+		if (ship == nullptr) {
+			continue;
+		}
+		const Widelands::Coords portspace = ship->current_portspace();
+		if (!portspace.valid()) {
+			continue;
+		}
+		// Expeditions can only use the primary port space, show the others faded.
+		// Warships show all seen port spaces the same: either as usable if they are not engaged
+		// or faded otherwise.
+		if (portspace == coords && !ship->has_battle()) {
+			return HasExpeditionPortSpace::kPrimary;
+		}
+		if (ship->sees_portspace(coords)) {
+			if (ship->can_attack()) {
+				return HasExpeditionPortSpace::kPrimary;
+			}
+			tmp_rv = HasExpeditionPortSpace::kOther;
+		}
+	}
+	return tmp_rv;
 }
 
 void InteractivePlayer::draw_immovables_for_visible_field(
@@ -428,14 +451,15 @@ void InteractivePlayer::draw_immovables_for_visible_field(
 }
 
 void InteractivePlayer::think() {
-	InteractiveBase::think();
+	InteractiveGameBase::think();
 
-	if (player().is_picking_custom_starting_position()) {
+	if (player().is_picking_custom_starting_position() &&
+	    !player().local_player_starting_position_is_pending()) {
 		set_sel_picture(
 		   playercolor_image(player().get_playercolor(), "images/players/player_position_menu.png"));
 	}
 
-	if (flag_to_connect_) {
+	if (flag_to_connect_.valid()) {
 		Widelands::Field& field = egbase().map()[flag_to_connect_];
 		if (upcast(Widelands::Flag const, flag, field.get_immovable())) {
 			if (!flag->has_road() && !in_road_building_mode()) {
@@ -458,6 +482,17 @@ void InteractivePlayer::think() {
 		}
 	}
 	{
+		bool const has_objectives = game().map().objectives_count(false, true) > 0;
+		std::string obj_tooltip = has_objectives ? _("Objectives") : _("No current objectives");
+
+		// only allow toggle to open window when there are objectives to show
+		// however, do allow closing the window if there are no objectives
+		toggle_objective_menu_->set_enabled(has_objectives || objectives_.exists());
+		toggle_objective_menu_->set_tooltip(as_tooltip_text_with_hotkey(
+		   obj_tooltip, shortcut_string_for(KeyboardShortcut::kInGameObjectives, true),
+		   UI::PanelStyle::kWui));
+	}
+	{
 		char const* msg_icon = "images/wui/menus/message_old.png";
 		std::string msg_tooltip = _("Messages");
 		if (uint32_t const nr_new_messages =
@@ -471,17 +506,6 @@ void InteractivePlayer::think() {
 		   msg_tooltip, shortcut_string_for(KeyboardShortcut::kInGameMessages, true),
 		   UI::PanelStyle::kWui));
 	}
-
-	// Cleanup found port spaces if the ship sailed on or was destroyed
-	for (auto it = expedition_port_spaces_.begin(); it != expedition_port_spaces_.end(); ++it) {
-		Widelands::Ship* ship = it->first.get(egbase());
-		if ((ship == nullptr) ||
-		    ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
-			expedition_port_spaces_.erase(it);
-			// If another port space also needs removing, we'll take care of it in the next frame
-			return;
-		}
-	}
 }
 
 void InteractivePlayer::draw(RenderTarget& dst) {
@@ -494,7 +518,8 @@ void InteractivePlayer::draw(RenderTarget& dst) {
 	draw_map_view(map_view(), &dst);
 }
 
-constexpr float kBuildhelpOpacity = 0.3f;
+constexpr float kBuildhelpOpacityMedium = 0.6f;
+constexpr float kBuildhelpOpacityWeak = 0.3f;
 
 void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst) {
 	// In-game, selection can never be on triangles or have a radius.
@@ -507,7 +532,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	const Time& gametime = gbase.get_gametime();
 
 	Workareas workareas = get_workarea_overlays(map);
-	FieldsToDraw* fields_to_draw = given_map_view->draw_terrain(gbase, &plr, workareas, false, dst);
+	FieldsToDraw* fields_to_draw =
+	   given_map_view->draw_terrain(gbase, &plr, workareas, false, false, dst);
 	const auto& road_building_s = road_building_steepness_overlays();
 	const bool picking_starting_pos = plr.is_picking_custom_starting_position();
 
@@ -529,8 +555,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			f->road_e = player_field.r_e;
 			f->road_se = player_field.r_se;
 			f->road_sw = player_field.r_sw;
-			f->seeing = player_field.vision;
-			if (player_field.vision == Widelands::VisibleState::kPreviouslySeen) {
+			f->seeing = player_field.vision.state();
+			if (f->seeing == Widelands::VisibleState::kPreviouslySeen) {
 				f->owner = player_field.owner != 0 ? gbase.get_player(player_field.owner) : nullptr;
 				f->is_border = player_field.border;
 			}
@@ -563,18 +589,43 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		}
 
 		// Draw the player starting position overlays.
-		const bool suited_as_starting_pos =
-		   picking_starting_pos && plr.get_starting_position_suitability(f->fcoords);
-		if (suited_as_starting_pos) {
-			for (unsigned p = map.get_nrplayers(); p != 0u; --p) {
-				if (map.get_starting_pos(p) == f->fcoords) {
-					const Image* player_image =
-					   playercolor_image(p - 1, "images/players/player_position.png");
-					static constexpr int kStartingPosHotspotY = 55;
-					blit_field_overlay(dst, *f, player_image,
-					                   Vector2i(player_image->width() / 2, kStartingPosHotspotY), scale);
+		bool suited_as_starting_pos = false;
+		if (picking_starting_pos) {
+			static const std::string icon_filename = "images/players/player_position.png";
+			static constexpr int kStartingPosHotspotY = 55;
+
+			const Image* player_image = nullptr;
+			float icon_scale = 0.7f;
+			float icon_opacity = 1.0f;
+
+			// Not all map starting positions pass the suitability test.
+			// TODO(tothxa): Make the editor at least use the same test. But manual changes would still
+			//               be possible.
+			for (unsigned pn = map.get_nrplayers(); pn != 0u; --pn) {
+				if (map.get_starting_pos(pn) == f->fcoords) {
+					Widelands::Player* p = gbase.get_player(pn);
+					if (p == nullptr || !p->is_picking_custom_starting_position()) {
+						// Should have a HQ if finished picking, no need for the overlay
+						continue;
+					}
+					player_image = playercolor_image(p->get_playercolor(), icon_filename);
+					icon_scale = 1.0f;
+					icon_opacity = p->get_starting_position_suitability(f->fcoords) ?
+					                  kBuildhelpOpacityMedium :
+					                  kBuildhelpOpacityWeak;
 					break;
 				}
+			}
+
+			if (player_image == nullptr && plr.get_starting_position_suitability(f->fcoords)) {
+				player_image = g_image_cache->get(icon_filename);
+			}
+
+			if (player_image != nullptr) {
+				suited_as_starting_pos = true;
+				blit_field_overlay(dst, *f, player_image,
+				                   Vector2i(player_image->width() / 2, kStartingPosHotspotY),
+				                   scale * icon_scale, icon_opacity);
 			}
 		}
 
@@ -593,17 +644,23 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 		if (f->seeing != Widelands::VisibleState::kUnexplored) {
 			// Draw build help.
-			const bool show_port_space = has_expedition_port_space(f->fcoords);
-			if (show_port_space || suited_as_starting_pos || buildhelp()) {
+			const HasExpeditionPortSpace show_port_space = map.is_port_space(f->fcoords) ?
+			                                                  has_expedition_port_space(f->fcoords) :
+			                                                  HasExpeditionPortSpace::kNone;
+			if (show_port_space != HasExpeditionPortSpace::kNone || buildhelp()) {
 				Widelands::NodeCaps caps;
 				Widelands::NodeCaps maxcaps = f->fcoords.field->maxcaps();
 				float opacity =
-				   f->seeing == Widelands::VisibleState::kVisible ? 1.f : kBuildhelpOpacity;
+				   f->seeing == Widelands::VisibleState::kVisible ? 1.f : kBuildhelpOpacityWeak;
 				if (picking_starting_pos) {
-					caps = suited_as_starting_pos || buildhelp() ? f->fcoords.field->nodecaps() :
-                                                              Widelands::CAPS_NONE;
-				} else if (show_port_space) {
+					caps = (show_port_space != HasExpeditionPortSpace::kNone || buildhelp()) ?
+					          f->fcoords.field->nodecaps() :
+					          Widelands::CAPS_NONE;
+				} else if (show_port_space != HasExpeditionPortSpace::kNone) {
 					caps = maxcaps;
+					if (show_port_space == HasExpeditionPortSpace::kOther) {
+						opacity *= kBuildhelpOpacityMedium;
+					}
 				} else {
 					caps = plr.get_buildcaps(f->fcoords);
 					if ((caps & Widelands::BUILDCAPS_SIZEMASK) == 0) {
@@ -611,7 +668,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 						     plr.tribe().buildings_built_over_immovables()) {
 							if (plr.check_can_build(*b, f->fcoords)) {
 								caps = maxcaps;
-								opacity *= 2 * kBuildhelpOpacity;
+								opacity *= kBuildhelpOpacityMedium;
 								break;
 							}
 						}
@@ -619,7 +676,9 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				}
 
 				const auto* overlay = get_buildhelp_overlay(caps, scale);
-				if (overlay != nullptr) {
+				if (overlay != nullptr &&
+				    (!suited_as_starting_pos || (caps & Widelands::BUILDCAPS_PORT) != 0)) {
+					// draw overlay if not a starting pos, but draw port space anyway
 					blit_field_overlay(
 					   dst, *f, overlay->pic, overlay->hotspot, scale / overlay->scale, opacity);
 				}
@@ -734,14 +793,12 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 				return;
 			}
 		}
-		if (show_attack_window(node_and_triangle.node, true) != nullptr) {
+
+		if (!in_road_building_mode() && try_show_ship_windows()) {
 			return;
 		}
-
-		if (!in_road_building_mode()) {
-			if (try_show_ship_window()) {
-				return;
-			}
+		if (show_attack_window(node_and_triangle.node, nullptr, true) != nullptr) {
+			return;
 		}
 
 		// everything else can bring up the temporary dialog
@@ -749,27 +806,84 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 	}
 }
 
-UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& c,
-                                                  const bool fastclick) {
-	const Map& map = egbase().map();
-	if (Widelands::BaseImmovable* immo = map.get_immovable(c)) {
-		if (immo->descr().type() >= Widelands::MapObjectType::BUILDING) {
-			upcast(Building, building, immo);
-			assert(building != nullptr);
-			if (const Widelands::AttackTarget* attack_target = building->attack_target()) {
-				if (player().is_hostile(building->owner()) && attack_target->can_be_attacked()) {
-					UI::UniqueWindow::Registry& registry =
-					   unique_windows().get_registry(format("attack_%d", building->serial()));
-					registry.open_window = [this, &registry, building, &c, fastclick]() {
-						new AttackWindow(*this, registry, *building, c, fastclick);
-					};
-					registry.create();
-					return registry.window;
+UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& coords,
+                                                  Widelands::MapObject* object,
+                                                  bool fastclick) {
+	if (object == nullptr) {
+		// Auto-detect what kind of attack window we need to show.
+		const Map& map = egbase().map();
+
+		for (auto serial : player().ships()) {
+			Widelands::Ship* ship =
+			   dynamic_cast<Widelands::Ship*>(egbase().objects().get_object(serial));
+			if (ship != nullptr && ship->get_ship_type() == Widelands::ShipType::kWarship &&
+			    ship->sees_portspace(coords)) {
+				UI::UniqueWindow::Registry& registry =
+				   unique_windows().get_registry(format("attack_coords_%d_%d", coords.x, coords.y));
+				registry.open_window = [this, &registry, &coords, fastclick]() {
+					new AttackWindow(*this, registry, nullptr, coords, fastclick);
+				};
+				registry.create();
+				return registry.window;
+			}
+		}
+
+		if (Widelands::BaseImmovable* immo = map.get_immovable(coords)) {
+			if (immo->descr().type() >= Widelands::MapObjectType::BUILDING) {
+				upcast(Building, building, immo);
+				assert(building != nullptr);
+				if (const Widelands::AttackTarget* attack_target = building->attack_target();
+				    attack_target != nullptr) {
+					if (player().is_hostile(building->owner()) && attack_target->can_be_attacked()) {
+						object = building;
+					}
 				}
 			}
 		}
+
+		for (Widelands::Bob* bob = map[coords].get_first_bob(); bob != nullptr && object == nullptr;
+		     bob = bob->get_next_bob()) {
+			if (bob->descr().type() == Widelands::MapObjectType::SHIP &&
+			    player().is_hostile(bob->owner()) &&
+			    dynamic_cast<Widelands::Ship*>(bob)->can_be_attacked()) {
+				object = bob;
+			}
+		}
+
+		if (object == nullptr) {
+			return nullptr;
+		}
 	}
-	return nullptr;
+
+	if (object->descr().type() >= Widelands::MapObjectType::BUILDING) {
+		upcast(Widelands::Building, building, object);
+		assert(building != nullptr);
+		assert(player().is_hostile(building->owner()));
+		assert(building->attack_target() != nullptr);
+		assert(building->attack_target()->can_be_attacked());
+
+		UI::UniqueWindow::Registry& registry =
+		   unique_windows().get_registry(format("attack_building_%u", building->serial()));
+		registry.open_window = [this, &registry, building, &coords, fastclick]() {
+			new AttackWindow(*this, registry, building, coords, fastclick);
+		};
+		registry.create();
+		return registry.window;
+	}
+
+	if (object->descr().type() == Widelands::MapObjectType::SHIP) {
+		assert(player().is_hostile(object->owner()));
+		assert(dynamic_cast<Widelands::Ship*>(object)->can_be_attacked());
+		UI::UniqueWindow::Registry& registry =
+		   unique_windows().get_registry(format("attack_ship_%u", object->serial()));
+		registry.open_window = [this, &registry, object, &coords, fastclick]() {
+			new AttackWindow(*this, registry, object, coords, fastclick);
+		};
+		registry.create();
+		return registry.window;
+	}
+
+	throw wexception("Attempting to show attack window for a %s", object->descr().name().c_str());
 }
 
 /**
@@ -786,6 +900,10 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& c,
  * \li Return: write chat message
  */
 bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
+	if (InteractiveGameBase::handle_key(down, code)) {
+		return true;
+	}
+
 	if (down) {
 		if (matches_shortcut(KeyboardShortcut::kCommonEncyclopedia, code)) {
 			encyclopedia_.toggle();
@@ -804,7 +922,10 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kInGameObjectives, code)) {
-			objectives_.toggle();
+			// follow same criteria for enabled state as the toggle
+			if (toggle_objective_menu_->enabled()) {
+				do_toggle_objective_menu();
+			}
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kInGameStatsBuildings, code)) {
@@ -856,7 +977,16 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 		}
 	}
 
-	return InteractiveGameBase::handle_key(down, code);
+	return false;
+}
+
+void InteractivePlayer::do_toggle_objective_menu() {
+	if (game().map().objectives_count(false, true) == 0) {
+		// toggle() would restore minimized windows
+		objectives_.destroy();
+	} else {
+		objectives_.toggle();
+	}
 }
 
 std::string InteractivePlayer::get_fastplace_help() const {
@@ -933,10 +1063,14 @@ bool InteractivePlayer::player_hears_field(const Widelands::Coords& coords) cons
 	const Widelands::Map& map = egbase().map();
 	const Widelands::Player::Field& player_field =
 	   plr.fields()[map.get_index(coords, map.get_width())];
-	return player_field.vision == Widelands::VisibleState::kVisible;
+	return player_field.vision.state() == Widelands::VisibleState::kVisible;
 }
 
 void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
+	if (!g_allow_script_console) {
+		throw wexception("Trying to switch player when the Script Console is disabled.");
+	}
+
 	if (args.size() != 2) {
 		DebugConsole::write("Usage: switchplayer <nr>");
 		return;
@@ -944,13 +1078,17 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
 
 	int const n = stoi(args[1]);
 	if (n < 1 || n > kMaxPlayers || (game().get_player(n) == nullptr)) {
+		broadcast_cheating_message();
 		DebugConsole::write(format("Player #%d does not exist.", n));
 		return;
 	}
 
 	DebugConsole::write(format("Switching from #%d to #%d.", static_cast<int>(player_number_), n));
+	broadcast_cheating_message("SWITCHED_PLAYER", game().get_player(n)->get_name());
+
 	player_number_ = n;
 
+	// TODO(tothxa): All statistics windows need updates, not just these 2
 	if (UI::UniqueWindow* const building_statistics_window = menu_windows_.stats_buildings.window) {
 		dynamic_cast<BuildingStatisticsMenu&>(*building_statistics_window).update();
 	}

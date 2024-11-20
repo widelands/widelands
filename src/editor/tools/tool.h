@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,8 +19,6 @@
 #ifndef WL_EDITOR_TOOLS_TOOL_H
 #define WL_EDITOR_TOOLS_TOOL_H
 
-#define MAX_TOOL_AREA 9
-
 #include "base/macros.h"
 #include "editor/tools/action_args.h"
 #include "editor/tools/tool_conf.h"
@@ -39,6 +37,8 @@ enum class WindowID {
 	Resize,
 	ToolHistory,
 };
+
+constexpr int kMaxToolArea = 9;
 
 constexpr int32_t kAutoTreesIndex = std::numeric_limits<uint16_t>::max() - 4;
 
@@ -62,7 +62,7 @@ public:
 	                     Widelands::Map* map) {
 		return (i == First  ? *this :
 		        i == Second ? second_ :
-                            third_)
+		                      third_)
 		   .handle_click_impl(center, args, map);
 	}
 
@@ -72,7 +72,7 @@ public:
 	                    Widelands::Map* map) {
 		return (i == First  ? *this :
 		        i == Second ? second_ :
-                            third_)
+		                      third_)
 		   .handle_undo_impl(center, args, map);
 	}
 

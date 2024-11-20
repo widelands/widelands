@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,8 +44,8 @@ HelpWindow::HelpWindow(UI::Panel* const parent,
                 width,
                 height,
                 format(_("Help: %s"), caption)),
-     textarea_(
-        new UI::MultilineTextarea(this, 5, 5, width - 10, height - 30, UI::PanelStyle::kFsMenu)) {
+     textarea_(new UI::MultilineTextarea(
+        this, "text", 5, 5, width - 10, height - 30, UI::PanelStyle::kFsMenu)) {
 	int margin = 5;
 
 	// Calculate sizes

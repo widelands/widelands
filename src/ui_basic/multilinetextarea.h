@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #define WL_UI_BASIC_MULTILINETEXTAREA_H
 
 #include <memory>
+#include <optional>
 
 #include "graphic/align.h"
 #include "graphic/styles/font_style.h"
@@ -45,6 +46,7 @@ struct MultilineTextarea : public Panel {
 
 	MultilineTextarea(
 	   Panel* parent,
+	   const std::string& name,
 	   int32_t x,
 	   int32_t y,
 	   uint32_t w,
@@ -58,6 +60,7 @@ struct MultilineTextarea : public Panel {
 		return text_;
 	}
 
+	void get_text_size(int* w, int* h);
 	void set_text(const std::string&);
 	// int instead of uint because of overflow situations
 	int32_t get_eff_w() const {
@@ -92,7 +95,7 @@ private:
 	 */
 	std::string make_richtext();
 	std::string text_;
-	std::string tooltip_before_hyperlink_tooltip_;
+	std::optional<std::string> tooltip_before_hyperlink_tooltip_;
 
 	std::shared_ptr<const UI::RenderedText> rendered_text_;
 	Vector2i render_anchor_;

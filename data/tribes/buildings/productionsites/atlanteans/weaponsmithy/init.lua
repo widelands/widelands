@@ -53,6 +53,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: 54 + 4 * 81 = 378 sec
             "call=produce_trident_light",
             "call=produce_trident_long",
             "call=produce_trident_steel",
@@ -64,10 +65,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a light trident because ...
          descname = _("forging a light trident"),
          actions = {
-            -- time total: 50 + 3.6
+            -- time: 20.4 + 21 + 9 + 3.6 = 54 sec
             "return=skipped unless economy needs trident_light",
             "consume=iron planks",
-            "sleep=duration:20s",
+            "sleep=duration:20s400ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:21s",
             "playsound=sound/smiths/sharpening priority:90%",
@@ -79,10 +80,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a long trident because ...
          descname = _("forging a long trident"),
          actions = {
-            -- time total: 77 + 3.6
+            -- time: 32.4 + 36 + 9 + 3.6 = 81 sec
             "return=skipped unless economy needs trident_long",
             "consume=iron coal planks",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:36s",
             "playsound=sound/smiths/sharpening priority:90%",
@@ -94,10 +95,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a steel trident because ...
          descname = _("forging a steel trident"),
          actions = {
-            -- time total: 77 + 3.6
+            -- time: 32.4 + 36 + 9 + 3.6 = 81 sec
             "return=skipped unless economy needs trident_steel",
             "consume=iron:2 coal planks",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:36s",
             "playsound=sound/smiths/sharpening priority:90%",
@@ -109,10 +110,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a double trident because ...
          descname = _("forging a double trident"),
          actions = {
-            -- time total: 77 + 3.6
+            -- time: 32.4 + 36 + 9 + 3.6 = 81 sec
             "return=skipped unless economy needs trident_double",
             "consume=iron coal:2 planks gold",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:36s",
             "playsound=sound/smiths/sharpening priority:90%",
@@ -124,10 +125,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident because ...
          descname = _("forging a heavy double trident"),
          actions = {
-            -- time total: 77 + 3.6
+            -- time: 32.4 + 36 + 9 + 3.6 = 81 sec
             "return=skipped unless economy needs trident_heavy_double",
             "consume=iron:2 coal:2 planks gold",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:36s",
             "playsound=sound/smiths/sharpening priority:90%",

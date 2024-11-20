@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2023 by the Widelands Development Team
+ * Copyright (C) 2018-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -229,8 +229,8 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 	// Representative animation for collecting global paramaters for the animation set
 	const Animation& representative_animation = g_animation_manager->get_animation(
 	   is_fontier_or_flag_animation ?
-         frontier_or_flag_animation_id :
-         descr->get_animation(is_directional ? animation_name + "_ne" : animation_name, nullptr));
+	      frontier_or_flag_animation_id :
+	      descr->get_animation(is_directional ? animation_name + "_ne" : animation_name, nullptr));
 
 	const int nr_frames = representative_animation.nr_frames();
 

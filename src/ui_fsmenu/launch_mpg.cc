@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,14 +70,15 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
         [&settings](int player_number) {
 	        const GameSettings& s = settings.settings();
 	        return (player_number > 0 && player_number <= static_cast<int>(s.players.size())) ?
-                     &s.players.at(player_number - 1).color :
-                     nullptr;
+	                  &s.players.at(player_number - 1).color :
+	                  nullptr;
         },
         0,
         0,
         0,
         0,
         chat,
+        &g_chat_sent_history,
         UI::PanelStyle::kFsMenu)) {
 
 	help_button_.sigclicked.connect([this]() { help_clicked(); });
@@ -92,14 +93,22 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
 	ok_.set_enabled(settings_.can_launch());
 
 	left_column_box_.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
-	left_column_box_.add_space(kPadding);
-	left_column_box_.add(chat_.get(), UI::Box::Resizing::kExpandBoth);
+	left_column_box_.add_space(8 * kPadding);
+	left_column_box_.add(chat_.get(), UI::Box::Resizing::kFullSize);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
-		if (s.action == NoteGameSettings::Action::kMap) {
+		switch (s.action) {
+		case NoteGameSettings::Action::kMap:
 			map_changed();
+			break;
+		case NoteGameSettings::Action::kWinCondition:
+			last_win_condition_ = settings_.get_win_condition_script();
+			break;
+		default:
+			break;
 		}
 	});
+	update_warn_desyncing_addon();
 	layout();
 	initialization_complete();
 }
@@ -118,13 +127,20 @@ void LaunchMPG::layout() {
 	help_button_.set_size(standard_height_, standard_height_);
 	help_button_.set_pos(Vector2i(get_inner_w() - help_button_.get_w(), 0));
 
-	mpsg_.set_max_size(0, left_column_box_.get_h() / 2);
-
-	mpsg_.force_new_dimensions(
-	   left_column_box_.get_w(), left_column_box_.get_h() / 2, scale_factor * standard_height_);
+	// Reset size to fit left_column_box_, then relayout
+	if (chat_ != nullptr) {
+		chat_->set_desired_size(0, 0);
+	}
+	uint32_t h = left_column_box_.get_h() / 2 - 4 * kPadding;
+	// Assign heights to properly layout the scrollable box
+	mpsg_.force_new_dimensions(left_column_box_.get_w(), h, scale_factor * standard_height_);
+	if (chat_ != nullptr) {
+		chat_->set_desired_size(0, h);
+	}
+	LaunchGame::layout();
 
 	// set focus to chat input
-	if (chat_) {
+	if (chat_ != nullptr) {
 		chat_->focus_edit();
 	}
 }
@@ -142,6 +158,7 @@ void LaunchMPG::win_condition_selected() {
 		   t->has_key("peaceful_mode_allowed") && !t->get_bool("peaceful_mode_allowed");
 		update_peaceful_mode();
 		mpsg_.update_players();
+		layout();
 	}
 }
 
@@ -165,7 +182,6 @@ void LaunchMPG::clicked_select_map_callback(const MapData* map, const bool scena
 	settings_.set_map(map->name, map->filenames.at(0), map->theme, map->background, map->nrplayers);
 
 	map_changed();
-	update_win_conditions();
 }
 
 /**
@@ -211,7 +227,7 @@ void LaunchMPG::clicked_select_savegame() {
 				warning.run<UI::Panel::Returncodes>();
 			}
 		}
-		update_win_conditions();
+		update_tags_and_win_conditions();
 	});
 }
 
@@ -277,6 +293,8 @@ void LaunchMPG::map_changed() {
 			}
 		}
 	}
+
+	update_tags_and_win_conditions();
 }
 
 /**
@@ -304,7 +322,8 @@ void LaunchMPG::refresh() {
 			win_condition_dropdown_.set_tooltip(_(t->get_string("description")));
 			win_condition_duration_.set_visible(t->has_key("configurable_time") &&
 			                                    t->get_bool("configurable_time"));
-			win_condition_duration_.set_value(settings_.get_win_condition_duration());
+			const int32_t duration = settings_.get_win_condition_duration();
+			win_condition_duration_.set_interval(duration, duration, false);
 		} catch (LuaScriptNotExistingError&) {
 			win_condition_dropdown_.set_label(_("Error"));
 			win_condition_dropdown_.set_tooltip(

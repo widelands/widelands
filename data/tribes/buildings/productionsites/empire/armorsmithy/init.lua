@@ -70,6 +70,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: 71 + 81 + 81 + 71 + 81 = 385 sec
             "call=produce_armor_helmet",
             "call=produce_armor",
             "call=produce_armor_chain",
@@ -81,10 +82,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
          descname = _("forging a helmet"),
          actions = {
-            -- time total: 67 + 3.6
+            -- time: 47.4 + 20 + 3.6 = 71 sec
             "return=skipped unless economy needs armor_helmet",
             "consume=iron coal",
-            "sleep=duration:47s",
+            "sleep=duration:47s400ms",
             "animate=working duration:20s",
             "produce=armor_helmet"
          }
@@ -93,10 +94,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor because ...
          descname = _("forging a suit of armor"),
          actions = {
-            -- time total: 77 + 3.6
+            -- time: 32.4 + 45 + 3.6 = 81 sec
             "return=skipped unless economy needs armor",
             "consume=iron coal cloth",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "animate=working duration:45s",
             "produce=armor"
          }
@@ -105,10 +106,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor because ...
          descname = _("forging a suit of chain armor"),
          actions = {
-            -- time total: 77 + 3.6
+            -- time: 32.4 + 45 + 3.6 = 81 sec
             "return=skipped unless economy needs armor_chain",
             "consume=iron:2 coal cloth",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "animate=working duration:45s",
             "produce=armor_chain"
          }
@@ -117,10 +118,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor because ...
          descname = _("forging a suit of gilded armor"),
          actions = {
-            -- time total: 77 + 3.6
+            -- time: 32.4 + 45 + 3.6 = 81 sec
             "return=skipped unless economy needs armor_gilded",
             "consume=iron:2 coal:2 cloth gold",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "animate=working duration:45s",
             "produce=armor_gilded"
          }

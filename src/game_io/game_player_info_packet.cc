@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,8 +34,10 @@ namespace Widelands {
 /* Changelog:
  * Version 30: Release 1.1
  * Version 31: Added warehouse names.
+ * Version 32: Added fleet statistics (in Game::read_statistics),
+ *             naval attack stats, and detected port spaces.
  */
-constexpr uint16_t kCurrentPacketVersion = 31;
+constexpr uint16_t kCurrentPacketVersion = 32;
 
 void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol */) {
 	try {
@@ -91,6 +93,27 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* 
 					player->msites_defeated_ = fr.unsigned_32();
 					player->civil_blds_lost_ = fr.unsigned_32();
 					player->civil_blds_defeated_ = fr.unsigned_32();
+					player->naval_victories_ = packet_version >= 32 ? fr.unsigned_32() : 0;
+					player->naval_losses_ = packet_version >= 32 ? fr.unsigned_32() : 0;
+
+					for (uint32_t j = packet_version >= 32 ? fr.unsigned_32() : 0; j > 0; --j) {
+						std::unique_ptr<DetectedPortSpace> dps(new DetectedPortSpace());
+						dps->set_serial(fr.unsigned_32());
+						dps->coords.x = fr.signed_16();
+						dps->coords.y = fr.signed_16();
+						for (uint32_t k = fr.unsigned_32(); k > 0; --k) {
+							int16_t x = fr.signed_16();
+							int16_t y = fr.signed_16();
+							dps->dockpoints.emplace_back(x, y);
+						}
+						dps->owner = fr.unsigned_8();
+						dps->time_discovered = Time(fr);
+						dps->discovering_ship = fr.string();
+						dps->nearest_portdock = fr.string();
+						dps->direction_from_portdock = static_cast<CompassDir>(fr.unsigned_8());
+						dps->distance_to_portdock = fr.unsigned_32();
+						player->detected_port_spaces_.push_back(std::move(dps));
+					}
 
 					for (size_t j = fr.unsigned_32(); j > 0; --j) {
 						player->muted_building_types_.insert(fr.unsigned_32());
@@ -114,7 +137,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* 
 				manager->add_player_end_status(status, true);
 			}
 
-			game.read_statistics(fr);
+			game.read_statistics(fr, packet_version);
 		} else {
 			throw UnhandledVersionError("GamePlayerInfoPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -167,6 +190,26 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver* /* 
 		fw.unsigned_32(plr->msites_defeated());
 		fw.unsigned_32(plr->civil_blds_lost());
 		fw.unsigned_32(plr->civil_blds_defeated());
+		fw.unsigned_32(plr->naval_victories());
+		fw.unsigned_32(plr->naval_losses());
+
+		fw.unsigned_32(plr->detected_port_spaces_.size());
+		for (const auto& dps : plr->detected_port_spaces_) {
+			fw.unsigned_32(dps->serial);
+			fw.signed_16(dps->coords.x);
+			fw.signed_16(dps->coords.y);
+			fw.unsigned_32(dps->dockpoints.size());
+			for (const Coords& c : dps->dockpoints) {
+				fw.signed_16(c.x);
+				fw.signed_16(c.y);
+			}
+			fw.unsigned_8(dps->owner);
+			dps->time_discovered.save(fw);
+			fw.string(dps->discovering_ship);
+			fw.string(dps->nearest_portdock);
+			fw.unsigned_8(static_cast<uint8_t>(dps->direction_from_portdock));
+			fw.unsigned_32(dps->distance_to_portdock);
+		}
 
 		fw.unsigned_32(plr->muted_building_types_.size());
 		for (const DescriptionIndex& di : plr->muted_building_types_) {

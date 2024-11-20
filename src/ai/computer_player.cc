@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2023 by the Widelands Development Team
+ * Copyright (C) 2004-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,7 @@ struct EmptyAI : ComputerPlayer {
 		   : Implementation(
 		        "empty",
 		        /** TRANSLATORS: This is the name of an AI used in the game setup screens */
-		        _("No AI"),
+		        gettext_noop("No AI"),
 		        "images/ai/ai_empty.png",
 		        Implementation::Type::kEmpty) {
 		}

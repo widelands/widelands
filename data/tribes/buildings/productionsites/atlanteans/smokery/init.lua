@@ -59,6 +59,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: 3 * 68 = 204 sec
             "call=smoke_fish",
             "call=smoke_meat",
             "call=smoke_fish_2",
@@ -68,10 +69,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
          descname = _("smoking meat"),
          actions = {
-            -- time total: 60
+            -- time: 30.8 + 30 + 2 * 3.6 = 68
             "return=skipped unless economy needs smoked_meat",
             "consume=meat:2 log",
-            "animate=working duration:30s",
+            "animate=working duration:30s800ms",
             "sleep=duration:30s",
             "produce=smoked_meat:2"
          }
@@ -81,10 +82,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
          descname = _("smoking fish"),
          actions = {
-            -- time total: 60
+            -- time: 30.8 + 30 + 2 * 3.6 = 68
             "return=skipped unless economy needs smoked_fish",
             "consume=fish:2 log",
-            "animate=working duration:30s",
+            "animate=working duration:30s800ms",
             "sleep=duration:30s",
             "produce=smoked_fish:2"
          }
@@ -93,10 +94,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
          descname = _("smoking fish"),
          actions = {
-            -- time total: 60
+            -- time: 30.8 + 30 + 2 * 3.6 = 68
             "return=skipped unless economy needs smoked_fish",
             "consume=fish:2 log",
-            "animate=working duration:30s",
+            "animate=working duration:30s800ms",
             "sleep=duration:30s",
             "produce=smoked_fish:2"
          }

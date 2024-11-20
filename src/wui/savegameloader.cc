@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,10 +18,13 @@
 
 #include "wui/savegameloader.h"
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/game.h"
 #include "logic/replay.h"
 
 SavegameLoader::SavegameLoader(Widelands::Game& game) : game_(game) {
@@ -45,6 +48,7 @@ void SavegameLoader::load(const std::string& to_be_loaded,
 				load_savegame_from_directory(to_be_loaded, loaded_games);
 				success = true;
 			} catch (...) {
+				// We'll try it as a subdirectory then
 			}
 		}
 		if (!success) {
@@ -57,7 +61,8 @@ void SavegameLoader::load(const std::string& to_be_loaded,
 }
 
 void SavegameLoader::load_savegame_from_directory(const std::string& gamefilename,
-                                                  std::vector<SavegameData>& loaded_games) const {
+                                                  std::vector<SavegameData>& loaded_games,
+                                                  const bool load_for_replay) const {
 	Widelands::ReplayfileSavegameExtractor converter(gamefilename);
 	Widelands::GamePreloadPacket gpdp;
 	SavegameData gamedata(gamefilename);
@@ -65,6 +70,9 @@ void SavegameLoader::load_savegame_from_directory(const std::string& gamefilenam
 	Widelands::GameLoader gl(converter.file(), game_);
 	gl.preload_game(gpdp);
 	gamedata.gametype = gpdp.get_gametype();
+	if (load_for_replay && converter.is_replay()) {
+		gamedata.gametype = GameController::GameType::kReplay;
+	}
 	if (!is_valid_gametype(gamedata)) {
 		return;
 	}
@@ -75,7 +83,8 @@ void SavegameLoader::load_savegame_from_directory(const std::string& gamefilenam
 }
 
 void SavegameLoader::load_savegame_from_file(const std::string& gamefilename,
-                                             std::vector<SavegameData>& loaded_games) const {
+                                             std::vector<SavegameData>& loaded_games,
+                                             const bool load_for_replay) const {
 	Widelands::GamePreloadPacket gpdp;
 	SavegameData gamedata(gamefilename);
 	try {
@@ -83,6 +92,9 @@ void SavegameLoader::load_savegame_from_file(const std::string& gamefilename,
 		Widelands::GameLoader gl(converter.file(), game_);
 		gl.preload_game(gpdp);
 		gamedata.gametype = gpdp.get_gametype();
+		if (load_for_replay && converter.is_replay()) {
+			gamedata.gametype = GameController::GameType::kReplay;
+		}
 		if (!is_valid_gametype(gamedata)) {
 			return;
 		}
@@ -198,10 +210,20 @@ void SavegameLoader::add_sub_dir(const std::string& gamefilename,
 ReplayLoader::ReplayLoader(Widelands::Game& game) : SavegameLoader(game) {
 }
 
-bool ReplayLoader::is_valid_gametype(const SavegameData& /*gamedata*/) const {
-	return true;  // TODO(jmoerschbach): why?? what is the purpose of
-	              // GameController::GameType::kReplay? return gamedata.is_replay(); <-- should be
-	              // this, right?!
+bool ReplayLoader::is_valid_gametype(const SavegameData& gamedata) const {
+	return gamedata.is_replay();
+}
+
+void ReplayLoader::load_savegame_from_directory(const std::string& gamefilename,
+                                                std::vector<SavegameData>& loaded_games,
+                                                const bool /* load_for_replay */) const {
+	SavegameLoader::load_savegame_from_directory(gamefilename, loaded_games, true);
+}
+
+void ReplayLoader::load_savegame_from_file(const std::string& gamefilename,
+                                           std::vector<SavegameData>& loaded_games,
+                                           const bool /* load_for_replay */) const {
+	SavegameLoader::load_savegame_from_file(gamefilename, loaded_games, true);
 }
 
 MultiPlayerLoader::MultiPlayerLoader(Widelands::Game& game) : SavegameLoader(game) {
@@ -224,4 +246,38 @@ EverythingLoader::EverythingLoader(Widelands::Game& game) : SavegameLoader(game)
 
 bool EverythingLoader::is_valid_gametype(const SavegameData& /*gamedata*/) const {
 	return true;
+}
+
+std::optional<SavegameData> newest_saved_game_or_replay(bool find_replay) {
+	std::unique_ptr<Widelands::Game> game = nullptr;
+	try {
+		game.reset(new Widelands::Game());
+	} catch (...) {
+		// We'll just return nothing then
+	}
+	if (game == nullptr) {
+		return std::nullopt;
+	}
+
+	std::vector<SavegameData> games;
+	if (find_replay) {
+		ReplayLoader loader(*game);
+		games = loader.load_files(kReplayDir);
+	} else {
+		SinglePlayerLoader loader(*game);
+		games = loader.load_files(kSaveDir);
+	}
+
+	SavegameData* newest = nullptr;
+	for (SavegameData& data : games) {
+		if (!data.is_directory() &&  // shouldn't these be filtered out already by loader?
+		    (find_replay ? data.is_replay() : data.is_singleplayer()) &&
+		    (newest == nullptr || newest->compare_save_time(data))) {
+			newest = &data;
+		}
+	}
+	if (newest == nullptr) {
+		return std::nullopt;
+	}
+	return *newest;
 }

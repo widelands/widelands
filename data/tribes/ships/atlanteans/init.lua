@@ -27,6 +27,18 @@
 --
 --    **vision_range**: How far the ship can see.
 --
+--    **hitpoints**: Number of hitpoints the ship can have.
+--
+--    **min_attack**: The minimum damage this ship inflicts in a successful attack.
+--
+--    **max_attack**: The maximum damage this ship inflicts in a successful attack.
+--
+--    **defense**: The percentage by which the damage is reduced when hit.
+--
+--    **attack_accuracy**: The percentage of the chance that an attack launched by this ship hits.
+--
+--    **heal_per_second**: The number of hitpoints the ship heals per second when in a dock.
+--
 --    **animations**: A table containing all file animations for this ship.
 --    Ships have an "idle", a "sinking" and a directional "sail" animation.
 --    Animations can either be defined as file animations in this table or as spritesheet animations
@@ -103,6 +115,13 @@ wl.Descriptions():new_ship_type {
    icon = dirname .. "menu.png",
    capacity = 30,
    vision_range = 4,
+
+   hitpoints    = 50000,
+   min_attack   =   100,
+   max_attack   = 10000,
+   defense         =  5,
+   attack_accuracy = 60,
+   heal_per_second = 100,
 
    spritesheets = {
       idle = {

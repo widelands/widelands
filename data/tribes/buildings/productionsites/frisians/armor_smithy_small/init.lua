@@ -77,7 +77,7 @@ wl.Descriptions():new_productionsite_type {
          descname = _("working"),
          actions = {
             -- "return=skipped" causes 10 sec delay
-            -- time total: 58.5 + 58.5 + 68.5 + 58.5 + 10 = 254 sec
+            -- time total: 58 + 58 + 68 + 58 + 10 = 252 sec
             "call=produce_s1",
             "call=produce_s2",
             "call=produce_h",
@@ -89,10 +89,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a short sword because ...
          descname = _("forging a short sword"),
          actions = {
-            -- time: 21.9 + 24 + 9 + 3.6 = 58.5 sec
+            -- time: 21.4 + 24 + 9 + 3.6 = 58 sec
             "return=skipped unless economy needs sword_short",
             "consume=coal iron",
-            "sleep=duration:21s900ms",
+            "sleep=duration:21s400ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:24s",
             "playsound=sound/smiths/sharpening priority:90%",
@@ -104,10 +104,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a long sword because ...
          descname = _("forging a long sword"),
          actions = {
-            -- time: 21.9 + 24 + 9 + 3.6 = 58.5 sec
+            -- time: 21.4 + 24 + 9 + 3.6 = 58 sec
             "return=skipped unless economy needs sword_long",
             "consume=coal iron:2",
-            "sleep=duration:21s900ms",
+            "sleep=duration:21s400ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:24s",
             "playsound=sound/smiths/sharpening priority:90%",
@@ -119,10 +119,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
          descname = _("forging a helmet"),
          actions = {
-            -- time: 27.9 + 37 + 3.6 = 68.5 sec
+            -- time: 27.4 + 37 + 3.6 = 68 sec
             "return=skipped unless economy needs helmet",
             "consume=coal iron",
-            "sleep=duration:27s900ms",
+            "sleep=duration:27s400ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:37s",
             "produce=helmet"

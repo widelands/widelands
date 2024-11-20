@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,6 +52,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
                       kWindowHeight,
                       _("Messages: Inbox")),
      message_body(this,
+                  "body",
                   kPadding,
                   kMessageBodyY,
                   kWindowWidth - 2 * kPadding,
@@ -61,7 +62,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
                   UI::Align::kLeft,
                   UI::MultilineTextarea::ScrollMode::kScrollNormalForced) {
 
-	list = new UI::Table<uintptr_t>(this, kPadding, kButtonSize + 2 * kPadding,
+	list = new UI::Table<uintptr_t>(this, "list", kPadding, kButtonSize + 2 * kPadding,
 	                                kWindowWidth - 2 * kPadding, kTableHeight, UI::PanelStyle::kWui,
 	                                UI::TableRows::kMulti);
 	list->add_column(kWindowWidth - 2 * kPadding - 60 - 60 - 75, _("Title"));
@@ -357,7 +358,7 @@ void GameMessageMenu::selected(uint32_t const t) {
 				game.send_player_command(new Widelands::CmdMessageSetStatusRead(
 				   game.get_gametime(), player.player_number(), id));
 			}
-			centerviewbtn_->set_enabled(bool(message->position()));
+			centerviewbtn_->set_enabled(message->position().valid());
 			message_body.set_text(as_message(message->heading(), message->body()));
 			update_archive_button_tooltip();
 			return;
@@ -447,6 +448,8 @@ void GameMessageMenu::archive_or_restore() {
 			game.send_player_command(new Widelands::CmdMessageSetStatusRead(
 			   game.get_gametime(), plnum, MessageId(selected_record)));
 			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 }
@@ -456,7 +459,7 @@ void GameMessageMenu::center_view() {
 	assert(selection < list->size());
 	if (Message const* const message =
 	       iplayer().player().messages()[MessageId((*list)[selection])]) {
-		assert(message->position());
+		assert(message->position().valid());
 		iplayer().map_view()->scroll_to_field(message->position(), MapView::Transition::Smooth);
 	}
 }
@@ -500,6 +503,9 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 		warfarebtn_->set_perm_pressed(false);
 		scenariobtn_->set_perm_pressed(false);
 		break;
+
+	default:
+		NEVER_HERE();
 	}
 	think();
 }
@@ -587,8 +593,9 @@ std::string GameMessageMenu::display_message_type_icon(const Widelands::Message&
 	case Widelands::Message::Type::kWarfareUnderAttack:
 	case Widelands::Message::Type::kTradeOfferReceived:
 		return "images/wui/messages/message_new.png";
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 void GameMessageMenu::toggle_mode() {
@@ -608,6 +615,8 @@ void GameMessageMenu::toggle_mode() {
 		togglemodebtn_->set_pic(g_image_cache->get("images/wui/messages/message_archived.png"));
 		togglemodebtn_->set_tooltip(_("Show Archive"));
 		break;
+	default:
+		NEVER_HERE();
 	}
 	update_archive_button_tooltip();
 }
@@ -652,6 +661,8 @@ void GameMessageMenu::update_archive_button_tooltip() {
 			button_tooltip = _("Archive selected message");
 		}
 		break;
+	default:
+		NEVER_HERE();
 	}
 	archivebtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   button_tooltip, shortcut_string_for(KeyboardShortcut::kCommonDeleteItem, true),

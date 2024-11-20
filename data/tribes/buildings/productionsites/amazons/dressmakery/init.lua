@@ -57,6 +57,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: 9 * 71 = 639 sec
             "call=produce_tunic",
             "call=produce_helmet_wooden",
             "call=produce_armor_wooden",
@@ -72,9 +73,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because ...
          descname = _("sewing a tunic"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs tunic",
             "consume=rubber rope",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=tunic"
          },
@@ -83,9 +85,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
          descname = _("making a light wooden armor"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs armor_wooden",
             "consume=balsa:2 rope",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=armor_wooden"
          },
@@ -94,9 +97,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
          descname = _("making a wooden helmet"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs helmet_wooden",
             "consume=ironwood rubber",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=helmet_wooden"
          },
@@ -105,9 +109,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
          descname = _("sewing a warrior’s coat"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs warriors_coat",
             "consume=ironwood balsa:2 rubber gold",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=warriors_coat"
          },
@@ -116,9 +121,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
          descname = _("making sturdy boots"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs boots_sturdy",
             "consume=rubber balsa",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=boots_sturdy"
          },
@@ -127,9 +133,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because ...
          descname = _("making swift boots"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs boots_swift",
             "consume=rubber:3",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=boots_swift"
          },
@@ -138,9 +145,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making a fishing net because ...
          descname = _("making hero boots"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs boots_hero",
             "consume=rubber:3 gold",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=boots_hero"
          },
@@ -149,9 +157,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because ...
          descname = _("making a padded vest"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs vest_padded",
             "consume=rubber:2 rope:2",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=vest_padded"
          },
@@ -160,9 +169,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
          descname = _("making a padded protector"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs protector_padded",
             "consume=rubber:2 rope:2 balsa gold",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=protector_padded"
          },

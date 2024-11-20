@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2023 by the Widelands Development Team
+ * Copyright (C) 2021-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,24 +49,47 @@ AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
                 _("Add-Ons Packager")),
      main_menu_(parent),
      ctrl_(ctrl),
-     main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     box_left_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     box_right_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     box_left_buttons_(&box_left_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     box_right_subbox_header_hbox_(&box_right_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     box_right_subbox_header_box_left_(
-        &box_right_subbox_header_hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     box_right_subbox_header_box_right_(
-        &box_right_subbox_header_hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     box_right_addon_specific_(&box_right_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     box_right_bottombox_(&box_right_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     name_(&box_right_subbox_header_box_right_, 0, 0, 100, UI::PanelStyle::kFsMenu),
-     author_(&box_right_subbox_header_box_right_, 0, 0, 100, UI::PanelStyle::kFsMenu),
-     version_(&box_right_subbox_header_box_right_, 0, 0, 100, UI::PanelStyle::kFsMenu),
-     min_wl_version_(&box_right_subbox_header_box_right_, 0, 0, 100, UI::PanelStyle::kFsMenu),
-     max_wl_version_(&box_right_subbox_header_box_right_, 0, 0, 100, UI::PanelStyle::kFsMenu),
-     descr_(*new UI::MultilineEditbox(
-        &box_right_subbox_header_box_right_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu)),
+     main_box_(this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Horizontal),
+     box_left_(&main_box_, UI::PanelStyle::kFsMenu, "left_box", 0, 0, UI::Box::Vertical),
+     box_right_(&main_box_, UI::PanelStyle::kFsMenu, "right_box", 0, 0, UI::Box::Vertical),
+     box_left_buttons_(
+        &box_left_, UI::PanelStyle::kFsMenu, "left_buttons_box", 0, 0, UI::Box::Horizontal),
+     box_right_subbox_header_hbox_(
+        &box_right_, UI::PanelStyle::kFsMenu, "right_subheader_hbox", 0, 0, UI::Box::Horizontal),
+     box_right_subbox_header_box_left_(&box_right_subbox_header_hbox_,
+                                       UI::PanelStyle::kFsMenu,
+                                       "right_subheader_left_box",
+                                       0,
+                                       0,
+                                       UI::Box::Vertical),
+     box_right_subbox_header_box_right_(&box_right_subbox_header_hbox_,
+                                        UI::PanelStyle::kFsMenu,
+                                        "right_subheader_right_box",
+                                        0,
+                                        0,
+                                        UI::Box::Vertical),
+     box_right_addon_specific_(&box_right_,
+                               UI::PanelStyle::kFsMenu,
+                               "right_addon_specific_box",
+                               0,
+                               0,
+                               UI::Box::Horizontal),
+     box_right_bottombox_(
+        &box_right_, UI::PanelStyle::kFsMenu, "right_bottom_box", 0, 0, UI::Box::Horizontal),
+     name_(&box_right_subbox_header_box_right_, "name", 0, 0, 100, UI::PanelStyle::kFsMenu),
+     author_(&box_right_subbox_header_box_right_, "author", 0, 0, 100, UI::PanelStyle::kFsMenu),
+     version_(&box_right_subbox_header_box_right_, "version", 0, 0, 100, UI::PanelStyle::kFsMenu),
+     min_wl_version_(
+        &box_right_subbox_header_box_right_, "min_wl_version", 0, 0, 100, UI::PanelStyle::kFsMenu),
+     max_wl_version_(
+        &box_right_subbox_header_box_right_, "max_wl_version", 0, 0, 100, UI::PanelStyle::kFsMenu),
+     descr_(*new UI::MultilineEditbox(&box_right_subbox_header_box_right_,
+                                      "description",
+                                      0,
+                                      0,
+                                      100,
+                                      100,
+                                      UI::PanelStyle::kFsMenu)),
      addon_new_(&box_left_buttons_,
                 "addon_new",
                 0,
@@ -109,7 +132,7 @@ AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
          kButtonSize,
          UI::ButtonStyle::kFsMenuPrimary,
          _("OK")),
-     addons_(&box_left_, 0, 0, 250, 0, UI::PanelStyle::kFsMenu),
+     addons_(&box_left_, "addons", 0, 0, 250, 0, UI::PanelStyle::kFsMenu),
      progress_window_(this, UI::WindowStyle::kFsMenu, _("Writing Add-Ons…")) {
 	progress_window_.set_visible(false);
 	progress_window_.set_message_1(_("Please be patient while your changes are written."));
@@ -134,36 +157,36 @@ AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
 
 	box_right_subbox_header_box_left_.add_space(kSpacing);
 	box_right_subbox_header_box_left_.add(
-	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
+	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu, "label_name",
 	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Name:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
 	box_right_subbox_header_box_left_.add(
-	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
+	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu, "label_author",
 	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Author:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
 	box_right_subbox_header_box_left_.add(
-	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
+	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu, "label_version",
 	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Version:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
 	box_right_subbox_header_box_left_.add(
 	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
-	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Minimum Widelands Version:"),
-	                    UI::Align::kRight),
+	                    "label_min_wl_version", UI::FontStyle::kFsMenuInfoPanelHeading,
+	                    _("Minimum Widelands Version:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
 	box_right_subbox_header_box_left_.add(
 	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
-	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Maximum Widelands Version:"),
-	                    UI::Align::kRight),
+	                    "label_max_wl_version", UI::FontStyle::kFsMenuInfoPanelHeading,
+	                    _("Maximum Widelands Version:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
 	box_right_subbox_header_box_left_.add(
 	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
-	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Description:"),
-	                    UI::Align::kRight),
+	                    "label_description", UI::FontStyle::kFsMenuInfoPanelHeading,
+	                    _("Description:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 
 	box_right_subbox_header_hbox_.add(
@@ -293,26 +316,25 @@ void AddOnsPackager::addon_selected() {
 		return;
 	}
 
-	box_right_subbox_header_hbox_.set_visible(true);
-
 	update_in_progress_ = true;
+
+	box_right_subbox_header_hbox_.set_visible(true);
 	name_.set_text(selected->get_descname());
 	descr_.set_text(selected->get_description());
 	author_.set_text(selected->get_author());
 	version_.set_text(selected->get_version());
 	min_wl_version_.set_text(selected->get_min_wl_version());
 	max_wl_version_.set_text(selected->get_max_wl_version());
-	update_in_progress_ = false;
 
-	if (addon_boxes_.count(selected->get_category()) == 0) {
-		return;
+	if (auto it = addon_boxes_.find(selected->get_category()); it != addon_boxes_.end()) {
+		AddOnsPackagerBox* box = it->second.get();
+		box_right_addon_specific_.add(box, UI::Box::Resizing::kExpandBoth);
+		box->set_visible(true);
+		box->load_addon(selected);
+		layout();
 	}
 
-	AddOnsPackagerBox* box = addon_boxes_[selected->get_category()].get();
-	box_right_addon_specific_.add(box, UI::Box::Resizing::kExpandBoth);
-	box->set_visible(true);
-	box->load_addon(selected);
-	layout();
+	update_in_progress_ = false;
 }
 
 void AddOnsPackager::current_addon_edited() {
@@ -404,8 +426,8 @@ void AddOnsPackager::clicked_delete_addon() {
 	UI::WLMessageBox m(
 	   get_parent(), UI::WindowStyle::kFsMenu, _("Delete Add-on"),
 	   format(ctrl_.is_remote(name) ?
-                _("Do you really want to delete the add-on ‘%s’?") :
-                _("Do you really want to delete the local add-on ‘%s’?\n\nNote that this "
+	             _("Do you really want to delete the add-on ‘%s’?") :
+	             _("Do you really want to delete the local add-on ‘%s’?\n\nNote that this "
 	               "add-on can not be downloaded again from the server."),
 	          name),
 	   UI::WLMessageBox::MBoxType::kOkCancel);
@@ -435,7 +457,7 @@ void AddOnsPackager::die() {
 		             addons_with_changes_.size()),
 		          addons_with_changes_.size());
 		for (const auto& str : addons_with_changes_) {
-			msg = format(_("%1$s\n· %2$s"), msg, str.first);
+			msg = format(_("%1$s\n• %2$s"), msg, str.first);
 		}
 
 		UI::WLMessageBox m(get_parent(), UI::WindowStyle::kFsMenu, _("Quit Packager"), msg,
@@ -462,7 +484,7 @@ void AddOnsPackager::clicked_discard_changes() {
 		                   addons_with_changes_.size()),
 		          addons_with_changes_.size());
 		for (const auto& str : addons_with_changes_) {
-			msg = format(_("%1$s\n· %2$s"), msg, str.first);
+			msg = format(_("%1$s\n• %2$s"), msg, str.first);
 		}
 	}
 
@@ -487,7 +509,7 @@ void AddOnsPackager::clicked_write_changes() {
 		            addons_with_changes_.size()),
 		   addons_with_changes_.size());
 		for (const auto& str : addons_with_changes_) {
-			msg = format(_("%1$s\n· %2$s"), msg, str.first);
+			msg = format(_("%1$s\n• %2$s"), msg, str.first);
 		}
 	}
 	msg += "\n\n";
@@ -530,7 +552,7 @@ void AddOnsPackager::clicked_write_changes() {
 		addon_selected();
 
 		// Update the global catalogue
-		WLApplication::initialize_g_addons();
+		WLApplication::get().initialize_g_addons();
 
 		progress_window_.set_visible(false);
 	}
@@ -589,12 +611,12 @@ bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
 			UI::WLMessageBox mbox(
 			   get_parent(), UI::WindowStyle::kFsMenu, _("Version Requirement"),
 			   nominal_min.empty() ?
-               format(_("The add-on ‘%1$s’ does not specify a minimum Widelands version. "
+			      format(_("The add-on ‘%1$s’ does not specify a minimum Widelands version. "
 			               "None of the contained maps can be loaded with a Widelands version older "
 			               "than %2$s. "
 			               "The minimum version requirement will automatically be set accordingly."),
 			             addon, AddOns::version_to_string(actual_min)) :
-               format(_("The add-on ‘%1$s’ specifies a minimum Widelands version of %2$s. "
+			      format(_("The add-on ‘%1$s’ specifies a minimum Widelands version of %2$s. "
 			               "However, none of the contained maps can be loaded with a Widelands "
 			               "version older than %3$s. "
 			               "The version requirement will automatically be changed accordingly."),

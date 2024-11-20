@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2023 by the Widelands Development Team
+ * Copyright (C) 2007-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -73,7 +73,6 @@ struct Campaigns {
 
 private:
 	void update_visibility_info();
-	static void update_legacy_campvis();
 
 	std::vector<std::unique_ptr<CampaignData>> campaigns_;
 	std::unordered_set<std::string> solved_scenarios_;

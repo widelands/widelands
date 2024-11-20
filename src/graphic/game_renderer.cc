@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2023 by the Widelands Development Team
+ * Copyright (C) 2010-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,6 +55,7 @@ void draw_terrain(uint32_t gametime,
                   const FieldsToDraw& fields_to_draw,
                   const float scale,
                   const Workareas& workarea,
+                  bool height_heat_map,
                   bool grid,
                   const Widelands::Player* player,
                   RenderTarget* dst) {
@@ -77,11 +78,12 @@ void draw_terrain(uint32_t gametime,
 	i.terrain_arguments.fields_to_draw = &fields_to_draw;
 	i.terrain_arguments.scale = scale;
 	i.terrain_arguments.player = player;
+	i.terrain_arguments.height_heat_map = height_heat_map;
 	RenderQueue::instance().enqueue(i);
 
-	// Enqueue the drawing of the dither layer.
-	i.program_id = RenderQueue::Program::kTerrainDither;
+	// Enqueue the drawing of the dither layer or height heat map layer.
 	i.blend_mode = BlendMode::UseAlpha;
+	i.program_id = RenderQueue::Program::kTerrainDitherOrHeightHeatMap;
 	RenderQueue::instance().enqueue(i);
 
 	if (!workarea.empty()) {

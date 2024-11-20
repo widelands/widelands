@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2023 by the Widelands Development Team
+ * Copyright (C) 2008-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,16 +47,16 @@ EconomyOptionsWindow::EconomyOptionsWindow(Panel* parent,
                                            Widelands::WareWorker type,
                                            bool can_act)
    : UI::Window(parent, UI::WindowStyle::kWui, "economy_options", 0, 0, 0, 0, _("Economy options")),
-     main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     main_box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical),
      ware_serial_(ware_economy->serial()),
      worker_serial_(worker_economy->serial()),
      player_(&ware_economy->owner()),
-     tabpanel_(&main_box_, UI::TabPanelStyle::kWuiDark),
+     tabpanel_(&main_box_, UI::TabPanelStyle::kWuiDark, "tabs"),
      ware_panel_(new EconomyOptionsPanel(
         &tabpanel_, this, ware_serial_, player_, can_act, Widelands::wwWARE, kDesiredWidth)),
      worker_panel_(new EconomyOptionsPanel(
         &tabpanel_, this, worker_serial_, player_, can_act, Widelands::wwWORKER, kDesiredWidth)),
-     dropdown_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     dropdown_box_(&main_box_, UI::PanelStyle::kWui, "dropdown_box", 0, 0, UI::Box::Horizontal),
      dropdown_(&dropdown_box_,
                "economy_profiles",
                0,
@@ -75,7 +75,8 @@ EconomyOptionsWindow::EconomyOptionsWindow(Panel* parent,
 	tabpanel_.add("wares", g_image_cache->get(pic_tab_wares), ware_panel_, _("Wares"));
 	tabpanel_.add("workers", g_image_cache->get(pic_tab_workers), worker_panel_, _("Workers"));
 
-	UI::Box* buttons = new UI::Box(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box* buttons =
+	   new UI::Box(&main_box_, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal);
 	UI::Button* b = new UI::Button(
 	   buttons, "decrease_target_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
 	   g_image_cache->get("images/ui_basic/scrollbar_down_fast.png"), _("Decrease target by 10"));
@@ -226,7 +227,7 @@ std::string EconomyOptionsWindow::localize_profile_name(const std::string& name)
 void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
 	Widelands::Serial* serial = note.old_economy == ware_serial_   ? &ware_serial_ :
 	                            note.old_economy == worker_serial_ ? &worker_serial_ :
-                                                                    nullptr;
+	                                                                 nullptr;
 	if (serial != nullptr) {
 		switch (note.action) {
 		case Widelands::NoteEconomy::Action::kMerged: {
@@ -244,6 +245,8 @@ void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
 			// Make sure that the panels stop thinking first.
 			die();
 			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 }
@@ -320,7 +323,7 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
                                                                bool can_act,
                                                                Widelands::WareWorker type,
                                                                int32_t min_w)
-   : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+   : UI::Box(parent, UI::PanelStyle::kWui, "economy_options_panel", 0, 0, UI::Box::Vertical),
      serial_(serial),
      player_(player),
      type_(type),
@@ -384,7 +387,7 @@ void EconomyOptionsWindow::EconomyOptionsPanel::toggle_infinite() {
 					new_quantity = is_wares ? economy_options_window_->get_predefined_targets()
 					                             .at(kDefaultEconomyProfile)
 					                             .wares.at(index) :
-                                         economy_options_window_->get_predefined_targets()
+					                          economy_options_window_->get_predefined_targets()
 					                             .at(kDefaultEconomyProfile)
 					                             .workers.at(index);
 				} else {
@@ -576,7 +579,7 @@ void EconomyOptionsWindow::SaveProfileWindow::update_save_enabled() {
 	if (text.empty() || text == kDefaultEconomyProfile) {
 		save_.set_enabled(false);
 		save_.set_tooltip(text.empty() ? _("The profile name cannot be empty") :
-                                       _("The default profile cannot be overwritten"));
+		                                 _("The default profile cannot be overwritten"));
 	} else {
 		save_.set_enabled(true);
 		save_.set_tooltip(_("Save the profile under this name"));
@@ -669,11 +672,11 @@ EconomyOptionsWindow::SaveProfileWindow::SaveProfileWindow(UI::Panel* parent,
                 0,
                 _("Save Profile")),
      economy_options_(eco),
-     main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     table_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     table_(&table_box_, 0, 0, 460, 120, UI::PanelStyle::kWui),
-     buttons_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
-     profile_name_(&main_box_, 0, 0, 240, UI::PanelStyle::kWui),
+     main_box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical),
+     table_box_(&main_box_, UI::PanelStyle::kWui, "table_box", 0, 0, UI::Box::Vertical),
+     table_(&table_box_, "table", 0, 0, 460, 120, UI::PanelStyle::kWui),
+     buttons_box_(&main_box_, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal),
+     profile_name_(&main_box_, "profile_name", 0, 0, 240, UI::PanelStyle::kWui),
      save_(&buttons_box_, "save", 0, 0, 80, 34, UI::ButtonStyle::kWuiPrimary, _("Save")),
      cancel_(&buttons_box_, "cancel", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
      delete_(&buttons_box_, "delete", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, _("Delete")) {
@@ -844,6 +847,8 @@ void EconomyOptionsWindow::read_targets() {
 					case Widelands::WareWorker::wwWORKER:
 						t.workers.insert(std::make_pair(wareworker.second, v->get_natural()));
 						break;
+					default:
+						NEVER_HERE();
 					}
 				} catch (const Widelands::GameDataError&) {
 					log_warn("Unknown ware or worker '%s' in economy profile '%s'", name.c_str(),

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,6 +67,7 @@ public:
 	int get_objectives(lua_State* L);
 	int get_defeated(lua_State* L);
 	int get_resigned(lua_State* L);
+	int get_end_result(lua_State* L);
 	int get_messages(lua_State* L);
 	int get_inbox(lua_State* L);
 	int get_color(lua_State* L);

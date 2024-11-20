@@ -2,7 +2,7 @@
 
 expected_lines=(
 "/\*"
-" \* Copyright( \(C\))? 20[0-9][0-9](-20[0-9][0-9])? by the Widelands Development Team"
+" \* Copyright \(C\) 20[0-9][0-9](-20[0-9][0-9])? by the Widelands Development Team"
 " \*"
 " \* This program is free software; you can redistribute it and/or"
 " \* modify it under the terms of the GNU General Public License"

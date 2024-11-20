@@ -213,6 +213,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: 71 + 81 = 152 sec
             "call=produce_shield_steel",
             "call=produce_shield_advanced",
          }
@@ -221,10 +222,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because ...
          descname = _("forging a steel shield"),
          actions = {
-            -- time total: 67 + 3.6
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs shield_steel",
             "consume=iron:2 coal:2",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=shield_steel"
          }
@@ -233,10 +234,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield because ...
          descname = _("forging an advanced shield"),
          actions = {
-            -- time total: 77 + 3.6
+            -- time: 32.4 + 45 + 3.6 = 81 sec
             "return=skipped unless economy needs shield_advanced",
             "consume=iron:2 coal:2 gold",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "animate=working duration:45s",
             "produce=shield_advanced"
          }

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 
 """This catches an opening parenthesis followed by a space or end of line."""

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,8 +53,8 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 			old_world_name_ = s.get_string("world", "");
 			map->set_background_theme(s.get_string(
 			   "theme", old_world_name_.empty() ?
-                        "" :
-                        Map::get_old_world_info_by_old_name(old_world_name_).name.c_str()));
+			               "" :
+			               Map::get_old_world_info_by_old_name(old_world_name_).name.c_str()));
 
 			std::string t = s.get_string("tags", "");
 			if (!t.empty()) {
@@ -76,8 +76,8 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 					   "Ignoring malformed add-on requirement substring '%s'\n", substring.c_str());
 				} else {
 					const std::string version = substring.substr(colonpos + 1);
-					map->required_addons_.push_back(std::make_pair(
-					   substring.substr(0, colonpos), AddOns::string_to_version(version)));
+					map->required_addons_.emplace_back(
+					   substring.substr(0, colonpos), AddOns::string_to_version(version));
 				}
 				if (commapos == std::string::npos) {
 					break;
@@ -125,6 +125,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 				++team_section_id;
 				teamsection_key = format("teams%02i", team_section_id);
 			}
+			map->sanitize_suggested_teams();
 		} else {
 			throw UnhandledVersionError(
 			   "MapElementalPacket", packet_version, kEightPlayersPacketVersion);
@@ -153,7 +154,7 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 	// The packet format itself hasn't changed, so we always want to allow loading maps with <= 8
 	// players.
 	global_section.set_int("packet_version", nr_players <= 8 ? kEightPlayersPacketVersion :
-                                                              kSixteenPlayersPacketVersion);
+	                                                           kSixteenPlayersPacketVersion);
 	global_section.set_int("map_w", map.get_width());
 	global_section.set_int("map_h", map.get_height());
 	global_section.set_int("nr_players", nr_players);

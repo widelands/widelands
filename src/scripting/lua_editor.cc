@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,7 @@ namespace LuaEditor {
 .. currentmodule:: wl.editor
 
 The :mod:`wl.editor` module contains functionality that integrates Lua into the
-editor. This module is not loaded inside the game, that is if wl.editor is
+editor. This module is not loaded inside the game, that is if ``wl.editor`` is
 :const:`nil` the script is run inside a game, else in the editor.
 */
 

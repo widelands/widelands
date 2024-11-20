@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,19 +22,12 @@
 #include <memory>
 
 #include "base/macros.h"
-#include "economy/request.h"
+#include "economy/soldier_request.h"
 #include "logic/map_objects/tribes/building.h"
-#include "logic/map_objects/tribes/requirements.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
-
-// I assume elsewhere, that enum SoldierPreference fits to uint8_t.
-enum class SoldierPreference : uint8_t {
-	kRookies,
-	kHeroes,
-};
 
 class MilitarySiteDescr : public BuildingDescr {
 public:
@@ -98,20 +91,13 @@ public:
 	/// target building.
 	void send_attacker(Soldier&, Building&);
 
-	/// This methods are helper for use at configure this site.
-	void set_requirements(const Requirements&);
-	void clear_requirements();
-	const Requirements& get_requirements() const {
-		return soldier_requirements_;
-	}
-
 	void reinit_after_conqueration(Game&);
 
 	void update_soldier_request(bool i = false);
 
 	void set_soldier_preference(SoldierPreference);
-	SoldierPreference get_soldier_preference() const {
-		return soldier_preference_;
+	[[nodiscard]] SoldierPreference get_soldier_preference() const {
+		return soldier_request_.get_preference();
 	}
 
 	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
@@ -129,9 +115,6 @@ private:
 	bool has_soldier_job(Soldier&);
 	bool military_presence_kept(Game&);
 	void notify_player(Game&, bool discovered = false);
-	bool update_upgrade_requirements();
-	void update_normal_soldier_request();
-	void update_upgrade_soldier_request();
 	bool incorporate_upgraded_soldier(EditorGameBase& egbase, Soldier& s);
 	Soldier* find_least_suited_soldier();
 	bool drop_least_suited_soldier(bool new_soldier_has_arrived, Soldier* newguy);
@@ -181,10 +164,6 @@ private:
 
 	AttackTarget attack_target_;
 	SoldierControl soldier_control_;
-	Requirements soldier_requirements_;  // This is used to grab a bunch of soldiers: Anything goes
-	RequireAttribute soldier_upgrade_requirements_;     // This is used when exchanging soldiers.
-	std::unique_ptr<Request> normal_soldier_request_;   // filling the site
-	std::unique_ptr<Request> upgrade_soldier_request_;  // seeking for better soldiers
 	bool didconquer_{false};
 	Quantity capacity_;
 
@@ -199,11 +178,8 @@ private:
 		bool stayhome;
 	};
 	std::vector<SoldierJob> soldierjobs_;
-	SoldierPreference soldier_preference_;
 	Time next_swap_soldiers_time_{0U};
-	bool soldier_upgrade_try_{
-	   false};  // optimization -- if everybody is zero-level, do not downgrade
-	bool doing_upgrade_request_{false};
+	SoldierRequest soldier_request_;
 
 	static constexpr size_t kNoOfStatisticsStringCases = 4U;
 	std::vector<std::map<std::tuple<int, int, int>, std::string>> statistics_string_cache_{

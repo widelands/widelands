@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 
@@ -12,6 +12,7 @@ end of files and whitespace characters at the end of lines.
 
 After fixing the Lua tabs, this script also executes clang-format over the src
 directory and pyformat over the utils directory.
+
 """
 
 import argparse
@@ -61,6 +62,7 @@ def pyformat_file(filename):
 
     Return True if the new formatting differs from the original.
     Based on pyformat https://github.com/myint/pyformat @ 7293e4d
+
     """
     encoding = autopep8.detect_encoding(filename)
     with autopep8.open_with_encoding(filename,

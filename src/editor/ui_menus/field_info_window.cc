@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2023 by the Widelands Development Team
+ * Copyright (C) 2021-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,15 +39,15 @@ FieldInfoWindow::FieldInfoWindow(EditorInteractive& parent,
                       &registry,
                       x,
                       y,
-                      width,
-                      height,
+                      kWidth,
+                      kHeight,
                       _("Field Information")),
      parent_(parent),
      center_(center),
      f_(f),
      tf_(tf),
      map_(map),
-     multiline_textarea_(this, 0, 0, get_inner_w(), get_inner_h(), UI::PanelStyle::kWui),
+     multiline_textarea_(this, "content", 0, 0, get_inner_w(), get_inner_h(), UI::PanelStyle::kWui),
      lastupdate_(0) {
 
 	update();
@@ -248,7 +248,7 @@ void FieldInfoWindow::add_map_info(std::string& buf) const {
 		const size_t nr_addons = parent_.egbase().enabled_addons().size();
 		if (nr_addons == 0) {
 			/** TRANSLATORS: No add-ons enabled */
-			addons = _("(none)");
+			addons = pgettext("addons", "(none)");
 		} else {
 			for (size_t i = 0; i < nr_addons; ++i) {
 				if (addons.empty()) {

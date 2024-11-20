@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2023 by the Widelands Development Team
+ * Copyright (C) 2021-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -126,18 +126,23 @@ void make_valid_addon_filename(std::string& name,
 AddOnsPackagerBox::AddOnsPackagerBox(FsMenu::MainMenu& mainmenu,
                                      Panel* parent,
                                      uint32_t orientation)
-   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, orientation),
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, "packager_box", 0, 0, orientation),
 
      main_menu_(mainmenu) {
 }
 
 MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* parent)
    : AddOnsPackagerBox(mainmenu, parent, UI::Box::Horizontal),
-     box_dirstruct_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     box_dirstruct_(this, UI::PanelStyle::kFsMenu, "dirstruct_box", 0, 0, UI::Box::Vertical),
 
-     box_maps_list_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     box_buttonsbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     box_dirstruct_displayname_(&box_dirstruct_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     box_maps_list_(this, UI::PanelStyle::kFsMenu, "maps_list_box", 0, 0, UI::Box::Vertical),
+     box_buttonsbox_(this, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Vertical),
+     box_dirstruct_displayname_(&box_dirstruct_,
+                                UI::PanelStyle::kFsMenu,
+                                "dirstruct_displayname_box",
+                                0,
+                                0,
+                                UI::Box::Vertical),
      map_add_(&box_buttonsbox_,
               "map_add",
               0,
@@ -165,10 +170,12 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* 
                  UI::ButtonStyle::kFsMenuSecondary,
                  _("–"),
                  _("Remove selected map or directory")),
-     dirstruct_(&box_dirstruct_, 0, 0, 200, 0, UI::PanelStyle::kFsMenu),
-     my_maps_(&box_maps_list_, 0, 0, 100, 0, UI::PanelStyle::kFsMenu),
-     dirstruct_displayname_(&box_dirstruct_displayname_, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     dirstruct_(&box_dirstruct_, "dirstruct", 0, 0, 200, 0, UI::PanelStyle::kFsMenu),
+     my_maps_(&box_maps_list_, "my_maps", 0, 0, 100, 0, UI::PanelStyle::kFsMenu),
+     dirstruct_displayname_(
+        &box_dirstruct_displayname_, "dirstruct_displayname", 0, 0, 0, UI::PanelStyle::kFsMenu),
      displayname_duplicate_(&box_dirstruct_displayname_,
+                            "displayname_duplicate",
                             0,
                             0,
                             100,
@@ -189,15 +196,15 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* 
 
 	box_dirstruct_displayname_.add(
 	   new UI::Textarea(&box_dirstruct_displayname_, UI::PanelStyle::kFsMenu,
-	                    UI::FontStyle::kFsGameSetupHeadings, _("Directory Display Name"),
-	                    UI::Align::kCenter),
+	                    "label_dirstruct_displayname", UI::FontStyle::kFsGameSetupHeadings,
+	                    _("Directory Display Name"), UI::Align::kCenter),
 	   UI::Box::Resizing::kFullSize);
 	box_dirstruct_displayname_.add_space(kSpacing);
 	box_dirstruct_displayname_.add(&dirstruct_displayname_, UI::Box::Resizing::kFullSize);
 	box_dirstruct_displayname_.add_space(kSpacing);
 	box_dirstruct_displayname_.add(&displayname_duplicate_, UI::Box::Resizing::kFullSize);
 
-	box_dirstruct_.add(new UI::Textarea(&box_dirstruct_, UI::PanelStyle::kFsMenu,
+	box_dirstruct_.add(new UI::Textarea(&box_dirstruct_, UI::PanelStyle::kFsMenu, "label_dirstruct",
 	                                    UI::FontStyle::kFsGameSetupHeadings, _("Directory Tree"),
 	                                    UI::Align::kCenter),
 	                   UI::Box::Resizing::kFullSize);
@@ -206,7 +213,7 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* 
 	box_dirstruct_.add_space(kSpacing);
 	box_dirstruct_.add(&box_dirstruct_displayname_, UI::Box::Resizing::kFullSize);
 	box_maps_list_.add(
-	   new UI::Textarea(&box_maps_list_, UI::PanelStyle::kFsMenu,
+	   new UI::Textarea(&box_maps_list_, UI::PanelStyle::kFsMenu, "label_my_maps",
 	                    UI::FontStyle::kFsGameSetupHeadings, _("My Maps"), UI::Align::kCenter),
 	   UI::Box::Resizing::kFullSize);
 	box_maps_list_.add_space(kSpacing);
@@ -218,7 +225,7 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* 
 	add_space(kSpacing);
 	add(&box_maps_list_, UI::Box::Resizing::kExpandBoth);
 
-	FsMenu::MainMenu::find_maps("maps/My_Maps", maps_list_);
+	find_maps(kMyMapsDirFull, maps_list_);
 
 	my_maps_.selected.connect(
 	   [this](uint32_t /* value */) { map_add_.set_enabled(dirstruct_.selection_index() > 0); });
@@ -260,35 +267,36 @@ void MapsAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 	if (a->get_category() != last_category_) {
 		last_category_ = a->get_category();
 		my_maps_.clear();
-		for (const FsMenu::MainMenu::MapEntry& entry : maps_list_) {
-			if (entry.first.maptype == MapData::MapType::kNormal &&
+		for (const MapEntry& entry : maps_list_) {
+			if (entry.data.maptype == MapData::MapType::kNormal &&
 			    last_category_ == AddOns::AddOnCategory::kCampaign) {
 				// Only include scenarios for campaigns
 				continue;
 			}
 			my_maps_.add(
-			   entry.first.localized_name, entry.first.filenames.at(0), nullptr, false,
-			   format("%s<br>%s<br>%s<br>%s<br>%s<br>%s",
-			          g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
-			             .as_font_tag(entry.first.filenames.at(0)),
-			          format(_("Name: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(entry.first.localized_name)),
-			          format(_("Size: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(
-			                       format(_("%1$u×%2$u"), entry.first.width, entry.first.height))),
-			          format(_("Players: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(std::to_string(entry.first.nrplayers))),
-			          format(_("Minimum Widelands Version: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(entry.first.minimum_required_widelands_version.empty() ?
-                                             _("(none)") :
-                                             entry.first.minimum_required_widelands_version)),
-			          format(_("Description: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(entry.first.description))));
+			   entry.data.localized_name, entry.data.filenames.at(0), nullptr, false,
+			   format(
+			      "%s<br>%s<br>%s<br>%s<br>%s<br>%s",
+			      g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
+			         .as_font_tag(entry.data.filenames.at(0)),
+			      format(_("Name: %s"),
+			             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                .as_font_tag(entry.data.localized_name)),
+			      format(_("Size: %s"),
+			             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                .as_font_tag(format(_("%1$u×%2$u"), entry.data.width, entry.data.height))),
+			      format(_("Players: %s"),
+			             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                .as_font_tag(std::to_string(entry.data.nrplayers))),
+			      format(_("Minimum Widelands Version: %s"),
+			             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                .as_font_tag(entry.data.minimum_required_widelands_version.empty() ?
+			                                /** TRANSLATORS: No minimum required version */
+			                                pgettext("version", "(none)") :
+			                                entry.data.minimum_required_widelands_version)),
+			      format(_("Description: %s"),
+			             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                .as_font_tag(entry.data.description))));
 		}
 	}
 
@@ -429,9 +437,9 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 		UI::WLMessageBox mbox(
 		   &main_menu_, UI::WindowStyle::kFsMenu, _("Delete"),
 		   selected_map.empty() ?
-            format(_("Do you really want to delete the directory ‘%s’ and all its contents?"),
+		      format(_("Do you really want to delete the directory ‘%s’ and all its contents?"),
 		             select.back()) :
-            format(_("Do you really want to delete the map ‘%s’?"), selected_map),
+		      format(_("Do you really want to delete the map ‘%s’?"), selected_map),
 		   UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
 		if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
@@ -449,6 +457,9 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 		}
 		break;
 	}
+
+	default:
+		NEVER_HERE();
 	}
 
 	if (modified_) {
@@ -460,7 +471,7 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* parent)
    : AddOnsPackagerBox(mainmenu, parent, UI::Box::Vertical),
      maps_box_(mainmenu, this),
-     difficulty_hbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     difficulty_hbox_(this, UI::PanelStyle::kFsMenu, "difficulty_hbox", 0, 0, UI::Box::Horizontal),
      tribe_select_(this,
                    "dropdown_tribe",
                    0,
@@ -483,10 +494,11 @@ CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(FsMenu::MainMenu& mainmenu,
                       UI::DropdownType::kPictorial,
                       UI::PanelStyle::kFsMenu,
                       UI::ButtonStyle::kFsMenuSecondary),
-     difficulty_(&difficulty_hbox_, 0, 0, 100, UI::PanelStyle::kFsMenu),
-     short_desc_(&difficulty_hbox_, 0, 0, 50, UI::PanelStyle::kFsMenu),
+     difficulty_(&difficulty_hbox_, "difficulty", 0, 0, 100, UI::PanelStyle::kFsMenu),
+     short_desc_(&difficulty_hbox_, "short_description", 0, 0, 50, UI::PanelStyle::kFsMenu),
      difficulty_label_(&difficulty_hbox_,
                        UI::PanelStyle::kFsMenu,
+                       "label_difficulty",
                        UI::FontStyle::kFsMenuInfoPanelHeading,
                        _("Difficulty:"),
                        UI::Align::kRight) {

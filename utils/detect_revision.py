@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Tries to find out the repository revision of the current working directory
@@ -77,6 +77,7 @@ def check_for_explicit_version():
 
     It then defaults to this version without further trying to find
     which revision we're on
+
     """
     fname = p.join(base_path, 'WL_RELEASE')
     if os.path.exists(fname):

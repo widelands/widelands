@@ -1,4 +1,4 @@
-#!/usr/bin/python -tt
+#!/usr/bin/python3 -tt
 
 """This proggy parses given files for occurences of translatable strings if
 some are found they are output in a xgettext style file."""

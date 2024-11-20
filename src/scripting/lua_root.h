@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,6 +64,8 @@ public:
 	int get_scenario_difficulty(lua_State*);
 	int get_allow_diplomacy(lua_State*);
 	int set_allow_diplomacy(lua_State*);
+	int get_allow_naval_warfare(lua_State*);
+	int set_allow_naval_warfare(lua_State*);
 	int get_interactive_player(lua_State*);
 	int get_win_condition(lua_State*);
 	int get_win_condition_duration(lua_State*);
@@ -173,46 +175,6 @@ public:
 	void do_modify_terrain(lua_State* L, const std::string&, const std::string&);
 	void do_modify_critter(lua_State* L, const std::string&, const std::string&);
 	void do_modify_ship(lua_State* L, const std::string&, const std::string&);
-};
-
-// TODO(GunChleoc): This class is here for saveloading compatibility only. We'll get a SIGABRT from
-// the scripting packet if it's not there.
-class LuaWorld : public LuaRootModuleClass {
-public:
-	LUNA_CLASS_HEAD(LuaWorld);
-	const char* get_modulename() override {
-		return "";
-	}
-	LuaWorld() = default;
-	explicit LuaWorld(lua_State*) {
-	}
-
-	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
-	void __persist(lua_State*) override {
-	}
-	void __unpersist(lua_State*) override {
-	}
-	CLANG_DIAG_RESERVED_IDENTIFIER_ON
-};
-
-// TODO(GunChleoc): This class is here for saveloading compatibility only. We'll get a SIGABRT from
-// the scripting packet if it's not there.
-class LuaTribes : public LuaRootModuleClass {
-public:
-	LUNA_CLASS_HEAD(LuaTribes);
-	const char* get_modulename() override {
-		return "";
-	}
-	LuaTribes() = default;
-	explicit LuaTribes(lua_State*) {
-	}
-
-	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
-	void __persist(lua_State*) override {
-	}
-	void __unpersist(lua_State*) override {
-	}
-	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 };
 
 void luaopen_wlroot(lua_State*, bool in_editor);

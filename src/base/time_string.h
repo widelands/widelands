@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2023 by the Widelands Development Team
+ * Copyright (C) 2008-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,5 +40,7 @@ char* gamestring_with_leading_zeros(uint32_t gametime);
 /// If show_seconds = true, this returns [hhh:]mm:ss instead.
 /// If Time represents more than 999 hours, it wraps around
 std::string gametimestring(uint32_t gametime, bool show_seconds = false);
+
+std::string realtimestring();
 
 #endif  // end of include guard: WL_BASE_TIME_STRING_H

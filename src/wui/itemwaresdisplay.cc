@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2023 by the Widelands Development Team
+ * Copyright (C) 2011-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@ constexpr int kItemHeight = 28;
  * Create an ItemWaresDisplay with no items and zero capacity.
  */
 ItemWaresDisplay::ItemWaresDisplay(Panel* parent, const Widelands::Player& gplayer)
-   : Panel(parent, UI::PanelStyle::kWui, 0, 0, 0, 0), player_(gplayer) {
+   : Panel(parent, UI::PanelStyle::kWui, "item_wares_display", 0, 0, 0, 0), player_(gplayer) {
 	recalc_desired_size();
 }
 
@@ -77,10 +77,10 @@ bool ItemWaresDisplay::handle_mousemove(
    uint8_t /* state */, int32_t x, int32_t y, int32_t /* xdiff */, int32_t /* ydiff */) {
 	const Item* i = at(x, y);
 	set_tooltip(i == nullptr ?
-                  std::string() :
+	               std::string() :
 	            i->type == Widelands::wwWARE ?
-                  player_.egbase().descriptions().get_ware_descr(i->index)->descname() :
-                  player_.egbase().descriptions().get_worker_descr(i->index)->descname());
+	               player_.egbase().descriptions().get_ware_descr(i->index)->descname() :
+	               player_.egbase().descriptions().get_worker_descr(i->index)->descname());
 	return true;
 }
 

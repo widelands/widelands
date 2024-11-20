@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,6 +34,7 @@ namespace UI {
 static constexpr int32_t kRichtextMargin = 2;
 
 MultilineTextarea::MultilineTextarea(Panel* const parent,
+                                     const std::string& name,
                                      const int32_t x,
                                      const int32_t y,
                                      const uint32_t w,
@@ -42,13 +43,14 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
                                      const std::string& text,
                                      const Align align,
                                      MultilineTextarea::ScrollMode scroll_mode)
-   : Panel(parent, style, x, y, w, h),
+   : Panel(parent, style, name, x, y, w, h),
      text_(text),
      render_anchor_(0, 0),
      font_style_(style == UI::PanelStyle::kFsMenu ? FontStyle::kFsMenuLabel : FontStyle::kWuiLabel),
 
      align_(align),
-     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false) {
+     scrollbar_(
+        this, "scrollbar", get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect([this](int32_t a) { scrollpos_changed(a); });
@@ -69,6 +71,16 @@ void MultilineTextarea::set_font_scale(float scale) {
 	font_scale_ = scale;
 	scrollbar_.set_singlestepsize(text_height(font_style(), font_scale_));
 	recompute();
+}
+
+void MultilineTextarea::get_text_size(int* w, int* h) {
+	if (rendered_text_ == nullptr) {
+		*w = 0;
+		*h = 0;
+	} else {
+		*w = rendered_text_->width();
+		*h = rendered_text_->height();
+	}
 }
 
 /**
@@ -94,7 +106,7 @@ void MultilineTextarea::recompute() {
 		int height = 0;
 		if (!text_.empty()) {
 			// Ensure we have a text width. Simply overflow if there is no width available.
-			const int txt_width = std::max(10, get_eff_w() - 2 * kRichtextMargin);
+			const int txt_width = std::max(kRichtextMargin, get_eff_w() - 2 * kRichtextMargin);
 			assert(txt_width > 0);
 
 			if (!is_richtext(text_)) {
@@ -173,6 +185,9 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 		break;
 	case UI::Align::kLeft:
 		anchor = kRichtextMargin;
+		break;
+	default:
+		NEVER_HERE();
 	}
 	render_anchor_ = Vector2i(anchor, 0);
 	rendered_text_->draw(dst, render_anchor_,
@@ -186,7 +201,7 @@ bool MultilineTextarea::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	          x - render_anchor_.x, y - render_anchor_.y + scrollbar_.get_scrollpos());
 }
 bool MultilineTextarea::handle_mousemove(
-   uint8_t /* state */, int32_t x, int32_t y, int32_t /* xdiff */, int32_t /* ydiff */) {
+   uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
 	if (rendered_text_ != nullptr) {
 		const std::string* tt = rendered_text_->get_tooltip(
 		   x - render_anchor_.x, y - render_anchor_.y + scrollbar_.get_scrollpos());
@@ -195,12 +210,15 @@ bool MultilineTextarea::handle_mousemove(
 				tooltip_before_hyperlink_tooltip_ = tooltip();
 			}
 			set_tooltip(*tt);
-			return true;
+			return Panel::handle_mousemove(state, x, y, xdiff, ydiff);
 		}
 	}
 
-	set_tooltip(tooltip_before_hyperlink_tooltip_);
-	return false;
+	if (tooltip_before_hyperlink_tooltip_.has_value()) {
+		set_tooltip(tooltip_before_hyperlink_tooltip_.value());
+		tooltip_before_hyperlink_tooltip_ = std::nullopt;
+	}
+	return Panel::handle_mousemove(state, x, y, xdiff, ydiff);
 }
 
 bool MultilineTextarea::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {

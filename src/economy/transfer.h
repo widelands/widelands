@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2023 by the Widelands Development Team
+ * Copyright (C) 2004-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,6 +57,9 @@ struct Transfer {
 	PlayerImmovable* get_destination(Game& g);
 	[[nodiscard]] uint32_t get_steps_left() const {
 		return route_.get_nrsteps();
+	}
+	[[nodiscard]] uint32_t get_cost_left() const {
+		return route_.get_totalcost();
 	}
 
 	/// Called by the controlled ware or worker

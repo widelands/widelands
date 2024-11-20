@@ -11,7 +11,6 @@ run(function()
    assert_equal("barbarians", player.tribe.name)
 
    local sf = wl.Game().map.player_slots[playernumber].starting_field
-   map = wl.Game().map
 
    -- Headquarters
    place_warehouse(player, "barbarians_headquarters", sf, 0, 0)
@@ -21,7 +20,7 @@ run(function()
 
    -- Other buildings are not OK
    assert_error("Should not be able to place a building that the tribe can't use", function()
-      place_safe_building(player, "empire_port", sf, 11, 509)
+      place_safe_building(player, "empire_port", sf, 11, -3)
    end)
 
    print("# All Tests passed.")

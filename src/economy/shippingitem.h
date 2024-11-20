@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2023 by the Widelands Development Team
+ * Copyright (C) 2011-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,6 +46,10 @@ struct ShippingItem {
 	// worker. It is safe to pass nullptr for 'ware' or 'worker' in case you are
 	// only interested in the ware if it is the one or the other.
 	void get(const EditorGameBase& game, WareInstance** ware, Worker** worker) const;
+
+	[[nodiscard]] Serial get_object_serial() const {
+		return object_.serial();
+	}
 
 	void set_economy(const Game&, Economy* e, WareWorker) const;
 	const PortDock* get_destination(Game&) const;

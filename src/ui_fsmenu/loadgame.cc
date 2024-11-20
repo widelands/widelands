@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,8 +58,8 @@ LoadGame::LoadGame(MenuCapsule& fsmm,
      is_replay_(is_replay) {
 
 	if (is_replay_) {
-		show_filenames_ = new UI::Checkbox(
-		   &header_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Filenames"));
+		show_filenames_ = new UI::Checkbox(&header_box_, UI::PanelStyle::kFsMenu, "show_filenames",
+		                                   Vector2i::zero(), _("Show Filenames"));
 		header_box_.add(show_filenames_, UI::Box::Resizing::kFullSize);
 		header_box_.add_space(5 * kPadding);
 	}
@@ -77,7 +77,7 @@ LoadGame::LoadGame(MenuCapsule& fsmm,
 		ok_.set_tooltip(_("Load this replay"));
 	} else {
 		back_.set_tooltip(gsp.settings().multiplayer ? _("Return to the multiplayer game setup") :
-                                                     _("Return to the single player menu"));
+		                                               _("Return to the single player menu"));
 		ok_.set_tooltip(_("Load this game"));
 	}
 

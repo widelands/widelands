@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,8 +31,8 @@ as_playercolor(const ChatColorForPlayer& fn, const int16_t playern, const std::s
 	return g_style_manager->font_style(UI::FontStyle::kChatPlayername)
 	   .as_font_tag(StyleManager::color_tag(
 	      text, playercolor != nullptr ?
-                  *playercolor :
-                  g_style_manager->font_style(UI::FontStyle::kChatServer).color()));
+	               *playercolor :
+	               g_style_manager->font_style(UI::FontStyle::kChatServer).color()));
 }
 
 std::string sanitize_message(const std::string& given_text) {

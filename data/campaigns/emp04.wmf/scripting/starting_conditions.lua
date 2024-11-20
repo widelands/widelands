@@ -56,43 +56,49 @@ place_building_in_region(p1, "empire_tower", {map:get_field(28, 52)})
 place_building_in_region(p1, "empire_tower", {map:get_field(35, 22)})
 place_building_in_region(p1, "empire_fortress", {map:get_field(31, 33)})
 
-
+-- first place all fixed place buildings
 -- Place farm
 place_building_in_region(p1, "empire_farm1", {map:get_field(20, 14)})
-place_building_in_region(p1, "empire_farm1", sf:region(15))
 
 -- Place fishers_house
 place_building_in_region(p1, "empire_fishers_house", {map:get_field(12, 23)})
 place_building_in_region(p1, "empire_fishers_house", {map:get_field(12, 43)})
 
--- Place well
-place_building_in_region(p1, "empire_well1", sf:region(15))
-place_building_in_region(p1, "empire_well1", sf:region(15))
-
--- Place lumberjacks
-place_building_in_region(p1, "empire_lumberjacks_house1", sf:region(10))
-place_building_in_region(p1, "empire_lumberjacks_house1", sf:region(10))
-place_building_in_region(p1, "empire_lumberjacks_house1", sf:region(10))
+-- place foresters
 place_building_in_region(p1, "empire_foresters_house1", {map:get_field(19, 10)})
 place_building_in_region(p1, "empire_foresters_house1", {map:get_field(19, 18)})
 
--- Mines
+-- place mines
 place_building_in_region(p1, "empire_ironmine", {map:get_field(32, 14)})
 place_building_in_region(p1, "empire_coalmine", {map:get_field(24, 45)})
 place_building_in_region(p1, "empire_coalmine", {map:get_field(31, 48)})
-place_building_in_region(p1, "empire_goldmine", sf:region(25))
 
+-- now place random buildings
 -- Place quarry
-place_building_in_region(p1, "empire_quarry", sf:region(9))
-place_building_in_region(p1, "empire_quarry", sf:region(9))
+place_building_in_region(p1, "empire_quarry", map:get_field(25, 37):region(9))
+place_building_in_region(p1, "empire_quarry", map:get_field(25, 37):region(9))
 
 -- Place build material infrastructure
 place_building_in_region(p1, "empire_sawmill", sf:region(8))
 place_building_in_region(p1, "empire_stonemasons_house", sf:region(8))
 
+-- Place lumberjacks
+place_building_in_region(p1, "empire_lumberjacks_house1", sf:region(10))
+place_building_in_region(p1, "empire_lumberjacks_house1", sf:region(10))
+place_building_in_region(p1, "empire_lumberjacks_house1", sf:region(10))
+
 -- Place metal industry
 place_building_in_region(p1, "empire_armorsmithy", sf:region(10))
 place_building_in_region(p1, "empire_toolsmithy", sf:region(10))
+
+-- Place farm
+place_building_in_region(p1, "empire_farm1", sf:region(15))
+
+-- Place well
+place_building_in_region(p1, "empire_well1", sf:region(15))
+place_building_in_region(p1, "empire_well1", sf:region(15))
+
+-- Place remaining metal industry
 place_building_in_region(p1, "empire_weaponsmithy", sf:region(15))
 place_building_in_region(p1, "empire_smelting_works", sf:region(15))
 
@@ -108,6 +114,8 @@ place_building_in_region(p1, "empire_arena", sf:region(20))
 place_building_in_region(p1, "empire_trainingcamp1", sf:region(20))
 place_building_in_region(p1, "empire_barracks", sf:region(20), {inputs = {empire_recruit = 8}})
 
+-- Mines
+place_building_in_region(p1, "empire_goldmine", sf:region(25))
 
 -- Helper function for placing roads
 function try_place_roads_with_carriers(x, y)

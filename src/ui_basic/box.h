@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2023 by the Widelands Development Team
+ * Copyright (C) 2003-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,6 +42,7 @@ struct Box : public Panel {
 
 	Box(Panel* parent,
 	    PanelStyle,
+	    const std::string& name,
 	    int32_t x,
 	    int32_t y,
 	    uint32_t orientation,
@@ -64,7 +65,7 @@ struct Box : public Panel {
 	void set_min_desired_breadth(uint32_t min);
 	void set_inner_spacing(uint32_t size);
 	/// Sets the maximum dimensions and calls set_desired_size()
-	void set_max_size(int w, int h);
+	virtual void set_max_size(int w, int h);
 
 	// Forget all our entries. Does not delete or even remove them.
 	void clear() {
@@ -86,6 +87,7 @@ private:
 	void get_item_size(uint32_t idx, int* depth, int* breadth);
 	void set_item_size(uint32_t idx, int depth, int breadth);
 	void set_item_pos(uint32_t idx, int32_t pos);
+	bool is_item_visible(uint32_t idx);
 	void scrollbar_moved(int32_t);
 	void update_positions();
 	void on_death(Panel* p) override;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2023 by the Widelands Development Team
+ * Copyright (C) 2008-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,8 @@
 
 #ifndef WL_LOGIC_MAP_OBJECTS_FINDIMMOVABLE_H
 #define WL_LOGIC_MAP_OBJECTS_FINDIMMOVABLE_H
+
+#include <vector>
 
 #include "logic/map_objects/map_object_type.h"
 
@@ -89,6 +91,28 @@ public:
 const FindImmovable& find_immovable_always_true();
 
 // FindImmovable functor
+struct FindImmovableAnd {
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
+
+	void add(FindImmovable f) {
+		functors_.emplace_back(f);
+	}
+
+private:
+	std::vector<FindImmovable> functors_;
+};
+
+struct FindImmovableOr {
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
+
+	void add(FindImmovable f) {
+		functors_.emplace_back(f);
+	}
+
+private:
+	std::vector<FindImmovable> functors_;
+};
+
 struct FindImmovableSize {
 	FindImmovableSize(int32_t const init_min, int32_t const init_max)
 	   : min(init_min), max(init_max) {
@@ -99,6 +123,7 @@ struct FindImmovableSize {
 private:
 	int32_t min, max;
 };
+
 struct FindImmovableType {
 	explicit FindImmovableType(MapObjectType const init_type) : type(init_type) {
 	}
@@ -108,6 +133,7 @@ struct FindImmovableType {
 private:
 	MapObjectType type;
 };
+
 struct FindImmovableAttribute {
 	explicit FindImmovableAttribute(uint32_t const init_attrib) : attrib(init_attrib) {
 	}
@@ -117,28 +143,36 @@ struct FindImmovableAttribute {
 private:
 	int32_t attrib;
 };
+
 struct FindImmovablePlayerImmovable {
 	FindImmovablePlayerImmovable() = default;
 
 	[[nodiscard]] bool accept(const BaseImmovable&) const;
 };
+
 struct FindImmovablePlayerMilitarySite {
 	explicit FindImmovablePlayerMilitarySite(const Player& init_player) : player(init_player) {
 	}
 
 	[[nodiscard]] bool accept(const BaseImmovable&) const;
 
+private:
 	const Player& player;
 };
+
 struct FindImmovableAttackTarget {
 	FindImmovableAttackTarget() = default;
 
 	[[nodiscard]] bool accept(const BaseImmovable&) const;
 };
+
 struct FindForeignMilitarysite {
 	explicit FindForeignMilitarysite(const Player& init_player) : player(init_player) {
 	}
+
 	[[nodiscard]] bool accept(const BaseImmovable&) const;
+
+private:
 	const Player& player;
 };
 
@@ -148,15 +182,42 @@ struct FindImmovableByDescr {
 
 	[[nodiscard]] bool accept(const BaseImmovable&) const;
 
+private:
 	const ImmovableDescr& descr;
 };
+
+struct FindImmovableByName {
+	explicit FindImmovableByName(const std::string& n) : name_(n) {
+	}
+
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
+
+private:
+	const std::string name_;
+};
+
+struct FindImmovableNotReserved {
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
+};
+
 struct FindFlagOf {
 	explicit FindFlagOf(const FindImmovable& init_finder) : finder(init_finder) {
 	}
 
 	[[nodiscard]] bool accept(const BaseImmovable&) const;
 
+private:
 	const FindImmovable finder;
+};
+
+struct FindFlagWithPlayersWarehouse {
+	explicit FindFlagWithPlayersWarehouse(const Player& owner) : owner_(owner) {
+	}
+
+	[[nodiscard]] bool accept(const BaseImmovable& imm) const;
+
+private:
+	const Player& owner_;
 };
 
 }  // namespace Widelands

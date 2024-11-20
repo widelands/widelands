@@ -1,10 +1,11 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 
 """For standard containers and similar, do not use "not something.size()" to
 test if it is empty.
 
 Just use "something.empty()".
+
 """
 
 error_msg = 'Do not use !a.size(), use a.empty() instead.'
