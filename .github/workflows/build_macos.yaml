@@ -10,18 +10,18 @@ jobs:
         config: [debug, release]
         compiler: [clang]
         os: [13, 14, 15]
-        # arch: [x86, arm64]]
         # Check https://github.com/actions/runner-images#available-images
         include:
           - os: 13
-            osname: macOS13 x86
+            osname: macOS13_x86
           # - os: 14-large
-            # osname: macOS14 x86
+            # osname: macOS14_x86
           - os: 14
-            osname: macOS14 arm64
+            osname: macOS14_arm64
           - os: 15
-            osname: macOS15 arm64
-    name: MacOS ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.osname}}
+            osname: macOS15_arm64
+    name: ${{ matrix.osname}} ${{ matrix.config }} 
+    # ${{ matrix.compiler }}
     runs-on: macos-${{ matrix.os }}
     steps:
     - name: Checkout
@@ -45,10 +45,10 @@ jobs:
         DMGPATH="$(pwd)"
         DMGFILE="$(ls *.dmg)"
         echo "DMG file is: $DMGPATH/$DMGFILE"
-        mv "$DMGFILE" "${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}-${{ matrix.osname }}.dmg"
+        mv "$DMGFILE" "${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.osname }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg"
 
     - name: Uploading DMG
       uses: actions/upload-artifact@v4
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.osname }} AppImage
-        path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}-${{ matrix.osname }}.dmg
+        path: "${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.osname }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg"
