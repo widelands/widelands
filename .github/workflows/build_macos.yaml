@@ -37,8 +37,8 @@ jobs:
         # temporary fix for macos-14 arm failures
         brew install --quiet icu4c
     - name: Building
-      # Export for build_app.sh
-      env: |
+      env:
+        # Export for build_app.sh
         MATRIX_OS: ${{ matrix.os }}
       run: |
         mkdir build_wl
