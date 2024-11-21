@@ -2982,14 +2982,14 @@ msgstr "Laboristoj venas"
 #. experienced worker missing.
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:255
 msgid "Expert missing"
-msgstr ""
+msgstr "Spertulo mankas"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. experienced
 #. worker missing. If you need plural forms here, please let us know.
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:260
 msgid "Experts missing"
-msgstr ""
+msgstr "Spertuloj mankas"
 
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:595
 msgid "A new port was added to your economy."
@@ -2997,7 +2997,7 @@ msgstr "Nova haveno aldoniĝis al via ekonomio."
 
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:598
 msgid "A new headquarters was added to your economy."
-msgstr "Nova stabejo aldoniĝis al via ekonomio."
+msgstr "Nova ĉefstabejo aldoniĝis al via ekonomio."
 
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:601
 msgid "A new warehouse was added to your economy."
