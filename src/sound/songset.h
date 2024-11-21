@@ -20,12 +20,16 @@
 #define WL_SOUND_SONGSET_H
 
 #include <vector>
+#include <map>
+#include <algorithm>
 #include <tuple>
 #include <cassert>
 
 #include <SDL_mixer.h>
 
 #include "io/fileread.h"
+
+class Song;
 
 /** A collection of several pieces of music meant for the same situation.
  *
@@ -42,19 +46,26 @@ struct Songset {
 	static constexpr const char* const kCustom = "custom";
 	static constexpr const char* const kMenu = "menu";
 	static constexpr const char* const kIntro = "intro";
-	explicit Songset(const std::string& dir, const std::string& basename);
+    explicit Songset(const std::string& dir, const std::string& basename);
 	~Songset();
 
     Mix_Music* get_song(uint32_t random = 0);
     std::vector<std::tuple<std::string,std::string>> get_songdata();
+    bool is_song_enabled(std::string& filename);
+    void set_song_enabled(std::string& filename, bool on);
 
 private:
-	void add_songs(const std::vector<std::string>& files);
-	void add_song(const std::string& filename);
+    void add_songs(const std::vector<std::string>& files);
+    void add_song(const std::string& filename);
     Mix_Music* load_file(std::string filename);
+    void load_playlist();
+    void init_playlist(std::vector<std::string> files);
+
+    /// A playlist of which songs to play, by filename
+    std::map<std::string, Song*> playlist_;
 
 	/// The filenames of all configured songs
-	std::vector<std::string> songs_;
+    std::vector<std::string> songs_;
 
 	/** Index of the song that is currently playing
 	 * (actually the one that was last started)
@@ -78,5 +89,7 @@ private:
 	 */
 	SDL_RWops* rwops_{nullptr};
 };
+
+
 
 #endif  // end of include guard: WL_SOUND_SONGSET_H

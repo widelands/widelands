@@ -29,8 +29,6 @@
 #include "ui_basic/slider.h"
 #include "wlapplication_options.h"
 
-using namespace std;
-
 namespace {
 
     constexpr int kSpacing = 4;
@@ -117,22 +115,8 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 
     std::vector<std::tuple<std::string,std::string>> music_data = g_sh->get_music_data();
     for (auto& data : music_data) {
-        musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, get<0>(data), get<1>(data)));
+        musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, std::get<0>(data), std::get<1>(data)));
     }
-//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_00.ogg", "Title of track 1"));
-//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_01.ogg", "Title of track 2"));
-//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_02.ogg", "Title of track 3"));
-//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_03.ogg", "Title of track 4"));
-//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_04.ogg", "Title of track 5"));
-//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_05.ogg", "Title of track 6"));
-//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_06.ogg", "Title of track 7"));
-//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_07.ogg", "Title of track 8"));
-//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_08.ogg", "Title of track 9"));
-//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_09.ogg", "Title of track 10"));
-//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_10.ogg", "Title of track 11"));
-//    musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, "filename_11.ogg", "Title of track 12"));
-
-    log_info("--- INITING MusicTrackControl's: %li", musicTrackControls.size());
 
     vbox_track_playlist_.add_space(2);
     for (MusicTrackControl* control : musicTrackControls) {

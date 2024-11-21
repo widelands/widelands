@@ -21,17 +21,79 @@
 #include "base/log.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "wlapplication_options.h"
+
+class Song {
+
+    public:
+
+    Song(std::string filename) {
+        songname = filename;
+    }
+
+    std::string songname;
+    std::string title;
+    bool enabled;
+};
 
 /// Prepare infrastructure for reading song files from disk and register the matching files
 Songset::Songset(const std::string& dir, const std::string& basename) {
 	assert(g_fs);
-	std::vector<std::string> mp3_files = g_fs->get_sequential_files(dir, basename, "mp3");
-	std::vector<std::string> ogg_files = g_fs->get_sequential_files(dir, basename, "ogg");
-	add_songs(mp3_files);
+
+    std::vector<std::string> mp3_files = g_fs->get_sequential_files(dir, basename, "mp3");
+    std::vector<std::string> ogg_files = g_fs->get_sequential_files(dir, basename, "ogg");
+
+    load_playlist();
+
+    if (playlist_.empty()) {
+        init_playlist(mp3_files);
+        init_playlist(ogg_files);
+    }
+
+    add_songs(mp3_files);
 	add_songs(ogg_files);
+
 }
+
+/**
+ * Initializes playlist_ from music files (all enabled by default)
+ * \param files filenames that will be added
+ */
+void Songset::init_playlist(std::vector<std::string> files) {
+    for (std::string f : files) {
+        Song* song = new Song(f);
+        playlist_.emplace(f, song);
+    }
+}
+
+/**
+ * Loads playlist data from config into playlist_
+ */
+void Songset::load_playlist() {
+    try {
+        Section sec = get_config_section("playlist");
+        std::vector<Section::Value> values = sec.get_values();
+        if (values.empty()) {
+            for (Section::Value val : values) {
+                std::string filename = val.get_name();
+                bool value = val.get_bool();
+                Song* song = playlist_[filename];
+                if (song != nullptr) {
+                    song->enabled = value;
+                    song->songname = filename;
+                    m_ = load_file(filename);
+                    std::string title = Mix_GetMusicTitle(m_);
+                    song->title = title;
+                }
+            }
+        }
+    } catch(WException& ex) {
+       log_warn("Failed to load playlist");
+    }
+}
+
 void Songset::add_songs(const std::vector<std::string>& files) {
-	for (const std::string& filename : files) {
+    for (const std::string& filename : files) {
 		assert(!g_fs->is_directory(filename));
 		add_song(filename);
 	}
@@ -61,6 +123,21 @@ void Songset::add_song(const std::string& filename) {
 	songs_.push_back(filename);
 	current_song_ = 0;
 }
+
+/**
+ * Lets the playlist know if a song should be played or not
+ */
+bool Songset::is_song_enabled(std::string& filename) {
+    return playlist_[filename]->enabled;
+}
+
+/**
+ * Toggle wether to play or skip the given song for this songset
+ */
+void Songset::set_song_enabled(std::string& filename, bool on) {
+
+}
+
 
 /**
  * Gets info about all music in this songset (no audio data)
@@ -109,7 +186,11 @@ Mix_Music* Songset::get_song(uint32_t random) {
 }
 
 
-
+/**
+ * Loads a song file from disk
+ * \param filename
+ * \return music data
+ */
 Mix_Music* Songset::load_file(std::string filename) {
 
     // First, close the previous song and remove it from memory
