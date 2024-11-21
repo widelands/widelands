@@ -63,21 +63,27 @@ function MakeDMG {
    cp "$SOURCE_DIR"/COPYING  "$DESTINATION"/COPYING.txt
 
    echo "Creating DMG ..."
+   SUDO=""
    if [ -n "$GITHUB_ACTION" ]; then
       # Sometimes we get resource busy errors in the github actions
       HDI_MAX_TRIES=3
+      # MacOS 13 is the worst
+      if [ "${MATRIX_OS}" = 13 ]; then
+         echo "Running on MacOS 13, run hdiutil as root"
+         SUDO=sudo
+      fi
    else
       HDI_MAX_TRIES=1
    fi
    HDI_TRY=0
    while true; do
       HDI_TRY=$(( ++HDI ))
-      HDI_RESULT=0
-      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" \
-              "$DMGFILE" || HDI_RESULT=$?
-      if [ $HDI_RESULT -eq 0 ]; then
+      if $SUDO hdiutil create -verbose -fs APFS -volname "Widelands $WLVERSION" \
+                       -srcfolder "$DESTINATION" "$DMGFILE"
+      then
          return
       fi
+      HDI_RESULT=$?
       if [ $HDI_TRY -eq $HDI_MAX_TRIES ]; then
          exit $HDI_RESULT
       fi
@@ -87,8 +93,10 @@ function MakeDMG {
       if [ -f "$DMGFILE" ]; then
         rm "$DMGFILE"
       fi
-      echo "  will retry after 10 seconds..."
-      sleep 10
+      # XProtect is one of the possible causes of the resource busy errors
+      sudo pkill -9 XProtect
+      echo "  will retry after 20 seconds..."
+      sleep 20
    done
 }
 
