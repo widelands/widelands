@@ -2821,28 +2821,28 @@ msgstr "Ekspediciŝipo atendas viajn komandojn."
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2409
 msgctxt "ship_state"
 msgid "Sinking"
-msgstr ""
+msgstr "Sinkante"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2411
 msgctxt "ship_state"
 msgid "Fighting"
-msgstr ""
+msgstr "Batalante"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2415
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
-msgstr ""
+msgstr "Rekonvertiĝas al Transporta Ŝipo"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2418
 msgctxt "ship_state"
 msgid "Refitting to Warship"
-msgstr ""
+msgstr "Rekonvertiĝas al Militŝipo"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2426
 #: ../../../../src/wui/seafaring_statistics_menu.cc:271
 msgctxt "ship_state"
 msgid "Warship"
-msgstr ""
+msgstr "Militŝipo"
 
 #. * TRANSLATORS: This is a ship state. The ship is
 #. * currently sailing to a specific destination ship.
@@ -2857,7 +2857,7 @@ msgstr ""
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
-msgstr ""
+msgstr "Navegante al %s"
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
@@ -2865,7 +2865,7 @@ msgstr ""
 #: ../../../../src/wui/seafaring_statistics_menu.cc:261
 msgctxt "ship_state"
 msgid "Empty"
-msgstr ""
+msgstr "Malplena"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
@@ -2873,7 +2873,7 @@ msgstr ""
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
-msgstr ""
+msgstr "Transportante al %s"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
@@ -2904,7 +2904,7 @@ msgstr "Havenspaco Trovita"
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2482
 msgctxt "ship_state"
 msgid "Founding a Colony"
-msgstr "Kreante kolonion"
+msgstr "Fondante Kolonion"
 
 #: ../../../../src/logic/map_objects/tribes/soldier.cc:1544
 #: ../../../../src/logic/map_objects/tribes/soldier.cc:1548
@@ -2982,14 +2982,14 @@ msgstr "Laboristoj venas"
 #. experienced worker missing.
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:255
 msgid "Expert missing"
-msgstr ""
+msgstr "Spertulo mankas"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. experienced
 #. worker missing. If you need plural forms here, please let us know.
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:260
 msgid "Experts missing"
-msgstr ""
+msgstr "Spertuloj mankas"
 
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:595
 msgid "A new port was added to your economy."
@@ -2997,7 +2997,7 @@ msgstr "Nova haveno aldoniĝis al via ekonomio."
 
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:598
 msgid "A new headquarters was added to your economy."
-msgstr "Nova stabejo aldoniĝis al via ekonomio."
+msgstr "Nova ĉefstabejo aldoniĝis al via ekonomio."
 
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:601
 msgid "A new warehouse was added to your economy."
