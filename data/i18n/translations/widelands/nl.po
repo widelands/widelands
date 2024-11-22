@@ -7926,7 +7926,7 @@ msgstr "Maak Schermafbeelding"
 
 #: ../../../../src/wlapplication_options.cc:385
 msgid "Change Music"
-msgstr ""
+msgstr "Verander Muziek"
 
 #: ../../../../src/wlapplication_options.cc:390
 msgid "Open the Debug Console (developer tool)"

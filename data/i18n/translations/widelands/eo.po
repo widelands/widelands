@@ -464,12 +464,12 @@ msgstr "Agordi aŭ ŝanĝi resursojn"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:358
 msgid "Port spaces"
-msgstr "Havenaj spacoj"
+msgstr "Havenspacoj"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:361
 msgid "Add or remove port spaces"
-msgstr "Aldoni aŭ forigi havenajn spacojn"
+msgstr "Aldoni aŭ forigi havenspacojn"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:369
@@ -2112,7 +2112,7 @@ msgstr "oriente"
 #: ../../../../src/logic/detected_port_space.cc:88
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s"
-msgstr "Senposedata havena spaco malkovrita je %1$s de %2$s"
+msgstr "Senposedata havenspaco malkovrita je %1$s de %2$s"
 
 #. * TRANSLATORS: "Unowned port space discovered at 1:11 by Ship2 33 steps
 #. north of
@@ -2123,12 +2123,12 @@ msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
 msgid_plural ""
 "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s of %5$s"
 msgstr[0] "Senposedata havena spaco malkovrita je %1$s de %2$s, %3$u paŝon %4$s de %5$s"
-msgstr[1] "Senposedata havena spaco malkovrita je %1$s de %2$s, %3$u paŝojn %4$s de %5$s"
+msgstr[1] "Senposedata havenspaco malkovrita je %1$s de %2$s, %3$u paŝojn %4$s de %5$s"
 
 #: ../../../../src/logic/detected_port_space.cc:101
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s"
-msgstr "Havena spaco de %1$s malkovrita je %2$s de %3$s"
+msgstr "Havenspaco de %1$s malkovrita je %2$s de %3$s"
 
 #. * TRANSLATORS: "Port space of Player1 discovered at 2:22 by Ship3 44 steps
 #. north
@@ -2139,7 +2139,7 @@ msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
 msgid_plural ""
 "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s of %6$s"
 msgstr[0] "Havena spaco de %1$s malkovrita je %2$s de %3$s, %4$u paŝon %5$s de %6$s"
-msgstr[1] "Havena spaco de %1$s malkovrita je %2$s de %3$s, %4$u paŝojn %5$s de %6$s"
+msgstr[1] "Havenspaco de %1$s malkovrita je %2$s de %3$s, %4$u paŝojn %5$s de %6$s"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
 #: ../../../../src/logic/detected_port_space.cc:120
@@ -2623,122 +2623,122 @@ msgstr "Via pramfarejo ne estas konstruita sufiĉe proksime al marbordo. Ĝi ne 
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Destination Gone"
-msgstr "Cela Loko Malaperis"
+msgstr "Celo Malaperis"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Ship Destination Vanished"
-msgstr ""
+msgstr "Ŝipcelo Malaperis"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:400
 msgid "Your ship’s destination has disappeared."
-msgstr ""
+msgstr "La celo de via ŝipo malaperis."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:427
 msgid "Ship Arrived"
-msgstr ""
+msgstr "Ŝipo Alvenis"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:427
 msgid "Ship Reached Destination"
-msgstr ""
+msgstr "Ŝipo Atingis Celon"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:428
 msgid "Your ship has arrived at its destination."
-msgstr ""
+msgstr "Via ŝipo alvenis al sia celo."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:639
 msgid "A warship arrived at a known port build space."
-msgstr ""
+msgstr "Militŝipo alvenis al konata havenkonstruejo."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:640
 msgid "An expedition ship arrived at a known port build space."
-msgstr ""
+msgstr "Ekspediciŝipo alvenis al konata havenkonstruejo."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:641
 #: ../../../../src/logic/map_objects/tribes/ship.cc:649
 msgid "Port Space"
-msgstr "Taŭga ejo por haveno"
+msgstr "Havenspaco"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:641
 msgid "Port Space Spotted"
-msgstr ""
+msgstr "Havenspaco Observita"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:647
 msgid "A warship found a new port build space."
-msgstr ""
+msgstr "Militŝipo trovis novan havenkonstruejon."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:648
 msgid "An expedition ship found a new port build space."
-msgstr "Ekspedici-ŝipo trovis novan ejon por konstrui havenon."
+msgstr "Ekspediciŝipo trovis novan havenkonstruejon."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:649
 msgid "Port Space Found"
-msgstr "Taŭga ejo por haveno trovita"
+msgstr "Havenspaco Trovita"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:749
 msgid "Enemy Ship"
-msgstr ""
+msgstr "Malamika Ŝipo"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:749
 msgid "Enemy Ship Spotted"
-msgstr ""
+msgstr "Malamika Ŝipo Observita"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:750
 msgid "A warship spotted an enemy ship."
-msgstr ""
+msgstr "Militŝipo observis malamikŝipon."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:780
 #: ../../../../src/logic/map_objects/tribes/ship.cc:799
 msgid "Destination Unreachable"
-msgstr ""
+msgstr "Celo Neatingebla"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:780
 #: ../../../../src/logic/map_objects/tribes/ship.cc:799
 msgid "Ship Destination Unreachable"
-msgstr ""
+msgstr "Ŝipcelo Neatingebla"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:781
 msgid "Your ship could not find a path to its destination."
-msgstr ""
+msgstr "Via ŝipo ne povis trovi vojon al sia celo."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:800
 #, c-format
 msgid "Your ship could not find a path to its destination port ‘%s’."
-msgstr ""
+msgstr "Via ŝipo ne povis trovi vojon al sia cela haveno \"%s\"."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1311
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1569
 msgid "Enemy Ship Attacking"
-msgstr ""
+msgstr "Malamika Ŝipo Atakas"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1311
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1568
 msgid "Naval Attack"
-msgstr ""
+msgstr "Mara Atako"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1312
 #, c-format
 msgid "Your ship ‘%s’ is under attack from an enemy warship."
-msgstr ""
+msgstr "Via ŝipo \"%s\" estas sub atako de malamika militŝipo."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1431
 msgid "Ship Destroyed"
-msgstr ""
+msgstr "Ŝipo Detruita"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1431
 msgid "Ship Sunk"
-msgstr ""
+msgstr "Ŝipo Sinkigita"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1432
 msgid "An enemy ship has destroyed your warship."
-msgstr ""
+msgstr "Malamika ŝipo detruis vian militŝipon."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1570
 msgid "Your coast is under attack from an enemy warship."
-msgstr ""
+msgstr "Via marbordo estas sub atako de malamika militŝipo."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1802
 msgid "Island Circumnavigated"
-msgstr "Insulo ĉirkaŭveturita"
+msgstr "Insulo Ĉirkaŭnavigita"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
@@ -2749,60 +2749,60 @@ msgstr "Atendante"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1803
 msgid "An expedition ship sailed around its island without any events."
-msgstr "Ekspedici-ŝipo veturis ĉirkaŭ insulo sen io ajn okazo."
+msgstr "Ekspediciŝipo navigis ĉirkaŭ sian insulon sen eventoj."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1868
 msgid "Coast Reached"
-msgstr "Bordo atingita"
+msgstr "Marbordo Atingita"
 
 #. * TRANSLATORS: A ship has discovered land
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1868
 msgid "Land Ahoy!"
-msgstr "Tero trovita!"
+msgstr "Teron!"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1869
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
-msgstr "Ekspedici-ŝipo atingis bordon kaj atendas pliajn komandojn."
+msgstr "Ekspediciŝipo atingis marbordon kaj atendas pliajn komandojn."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1922
 msgid "New port construction site is gone"
-msgstr "Nova haven-konstruejo perdiĝis"
+msgstr "La nova havenkonstruejo malaperis"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1922
 msgid "Port Lost!"
-msgstr "Haveno perdita!"
+msgstr "Haveno Perdita!"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1923
 msgid "Unloading of wares failed, expedition is cancelled now."
-msgstr "La malŝarĝado de la varoj fiaskis; la ekspedicio estis ĉesigita."
+msgstr "La malŝarĝado de la varoj malsukcesis; la ekspedicio nun estas nuligita."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1980
 msgid "No Port Can Be Built"
-msgstr ""
+msgstr "Neniu Haveno Povas Esti Konstruita"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1980
 msgid "Port Space Lost!"
-msgstr ""
+msgstr "Havenspaco Perdita!"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1981
 msgid ""
 "A discovered port build space is not available for building a port anymore."
-msgstr ""
+msgstr "Malkovrita havenkonstruejo ne plu disponeblas por konstrui havenon."
 
 #. * TRANSLATORS: Warship ready
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2228
 msgctxt "ship"
 msgid "Warship"
-msgstr ""
+msgstr "Militŝipo"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2228
 msgid "Warship Ready"
-msgstr ""
+msgstr "Militŝipo Preta"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2229
 msgid "A warship is waiting for your commands."
-msgstr ""
+msgstr "Militŝipo atendas viajn komandojn."
 
 #. * TRANSLATORS: Ship expedition ready
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2234
@@ -2812,37 +2812,37 @@ msgstr "Ekspedicio"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2234
 msgid "Expedition Ready"
-msgstr "Ekspedicio preta"
+msgstr "Ekspedicio Preta"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2235
 msgid "An expedition ship is waiting for your commands."
-msgstr "Ekspedici-ŝipo atendas viajn komandojn."
+msgstr "Ekspediciŝipo atendas viajn komandojn."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2409
 msgctxt "ship_state"
 msgid "Sinking"
-msgstr ""
+msgstr "Sinkante"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2411
 msgctxt "ship_state"
 msgid "Fighting"
-msgstr ""
+msgstr "Batalante"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2415
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
-msgstr ""
+msgstr "Rekonvertiĝas al Transporta Ŝipo"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2418
 msgctxt "ship_state"
 msgid "Refitting to Warship"
-msgstr ""
+msgstr "Rekonvertiĝas al Militŝipo"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2426
 #: ../../../../src/wui/seafaring_statistics_menu.cc:271
 msgctxt "ship_state"
 msgid "Warship"
-msgstr ""
+msgstr "Militŝipo"
 
 #. * TRANSLATORS: This is a ship state. The ship is
 #. * currently sailing to a specific destination ship.
@@ -2857,7 +2857,7 @@ msgstr ""
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
-msgstr ""
+msgstr "Navegante al %s"
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
@@ -2865,7 +2865,7 @@ msgstr ""
 #: ../../../../src/wui/seafaring_statistics_menu.cc:261
 msgctxt "ship_state"
 msgid "Empty"
-msgstr ""
+msgstr "Malplena"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
@@ -2873,7 +2873,7 @@ msgstr ""
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
-msgstr ""
+msgstr "Transportante al %s"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
@@ -2896,7 +2896,7 @@ msgstr "Skoltante"
 #: ../../../../src/wui/seafaring_statistics_menu.cc:269
 msgctxt "ship_state"
 msgid "Port Space Found"
-msgstr "Ejo por haveno trovita"
+msgstr "Havenspaco Trovita"
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
@@ -2904,7 +2904,7 @@ msgstr "Ejo por haveno trovita"
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2482
 msgctxt "ship_state"
 msgid "Founding a Colony"
-msgstr "Kreante kolonion"
+msgstr "Fondante Kolonion"
 
 #: ../../../../src/logic/map_objects/tribes/soldier.cc:1544
 #: ../../../../src/logic/map_objects/tribes/soldier.cc:1548
@@ -2982,14 +2982,14 @@ msgstr "Laboristoj venas"
 #. experienced worker missing.
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:255
 msgid "Expert missing"
-msgstr ""
+msgstr "Spertulo mankas"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. experienced
 #. worker missing. If you need plural forms here, please let us know.
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:260
 msgid "Experts missing"
-msgstr ""
+msgstr "Spertuloj mankas"
 
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:595
 msgid "A new port was added to your economy."
@@ -2997,7 +2997,7 @@ msgstr "Nova haveno aldoniĝis al via ekonomio."
 
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:598
 msgid "A new headquarters was added to your economy."
-msgstr "Nova stabejo aldoniĝis al via ekonomio."
+msgstr "Nova ĉefstabejo aldoniĝis al via ekonomio."
 
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:601
 msgid "A new warehouse was added to your economy."
@@ -7995,7 +7995,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:496
 msgid "Port Spaces Tool"
-msgstr ""
+msgstr "Havenspacilo"
 
 #: ../../../../src/wlapplication_options.cc:500
 msgid "Info Tool"
@@ -8223,7 +8223,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:795
 msgid "Show Expeditions with Port Spaces"
-msgstr ""
+msgstr "Montru Ekspediciojn kun Havenspacoj"
 
 #: ../../../../src/wlapplication_options.cc:800
 msgid "Show Warships"
@@ -10887,7 +10887,7 @@ msgstr ""
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../../../src/wui/seafaring_statistics_menu.cc:608
 msgid "Show expeditions that have found a port space or are founding a colony"
-msgstr ""
+msgstr "Montru ekspediciojn, kiuj trovis havenspacon aŭ fondas kolonion."
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../../../src/wui/seafaring_statistics_menu.cc:613

@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
+# Abdu Sharif, 2024
 # GunChleoc, 2018
 # 425467bb0c9da71484550c3c99a0865a_432023a <42ebb87f8d673776150a6c232428c0ac_329642>, 2017-2018
 msgid ""
@@ -10,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
-"Last-Translator: 425467bb0c9da71484550c3c99a0865a_432023a <42ebb87f8d673776150a6c232428c0ac_329642>, 2017-2018\n"
+"Last-Translator: Abdu Sharif, 2024\n"
 "Language-Team: Arabic (http://app.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +31,7 @@ msgstr "إبحث عن الآثار القديمة. عندما يتم إيجاد�
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:21
 msgid "Artifacts owned"
-msgstr ""
+msgstr "آثار مملوكة"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:75
 msgid "No Artifacts"
@@ -56,7 +57,7 @@ msgstr "فريقك وَجَد آثار جديدة."
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:84
 msgid "You found a new artifact."
-msgstr ""
+msgstr "لقد وجدت أثارا جديدة."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../../../data/scripting/win_conditions/artifacts.lua:88
@@ -69,7 +70,7 @@ msgstr "واحد من آثار فريقك سُرق من قِبل الأعداء.
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:90
 msgid "One of your artifacts was stolen by an enemy."
-msgstr ""
+msgstr "قام عدو بسرقة واحدة من آثارك."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../../../data/scripting/win_conditions/artifacts.lua:94
@@ -82,7 +83,7 @@ msgstr "فريقك سَرق آثار من الأعداء."
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:96
 msgid "You stole an artifact from an enemy."
-msgstr ""
+msgstr "لقد سرقت أثرا من عدو."
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:179
 msgid "Overview:"
@@ -120,7 +121,7 @@ msgstr "الجَامع"
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest score after %s wins the game."
-msgstr ""
+msgstr "ستحصل على نقاط على البضائع الثمينة الموجودة في مخازنك. اللاعب الذي لديه أعلى نتيجة بعد '%s' يفوز باللعبة."
 
 #. TRANSLATORS: Will be inserted into "The player with the highest score after
 #. %s wins the game."
@@ -131,7 +132,7 @@ msgstr ""
 #: ../../../../data/scripting/win_conditions/territorial_time.lua:32
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:23
 msgid "the configured time limit"
-msgstr ""
+msgstr "الحد المعد للوقت"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:28
 msgid "Points"
@@ -194,7 +195,7 @@ msgstr "هذه لعبة لانهائية من غير قواعد."
 
 #: ../../../../data/scripting/win_conditions/hq_hunter.lua:16
 msgid "HQ Hunter"
-msgstr ""
+msgstr "صياد المقر الرئيسي"
 
 #: ../../../../data/scripting/win_conditions/hq_hunter.lua:18
 msgid ""
@@ -219,7 +220,7 @@ msgstr "%1$s لديه %2$3.0f%% من الأرض (%3$i من %4$i)."
 #. consistent with the translation of the Win condition.
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:29
 msgid "Territory percentage"
-msgstr ""
+msgstr "نسبة الأرض"
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:235
 msgid "You own more than half of the map’s area."
@@ -266,7 +267,7 @@ msgstr ""
 
 #: ../../../../data/scripting/win_conditions/territorial_lord.lua:58
 msgid "Currently no faction owns more than half of the map’s area."
-msgstr ""
+msgstr "حاليا، لا فئة تمتلك أكثر من نصف مساحة الخريطة."
 
 #: ../../../../data/scripting/win_conditions/territorial_time.lua:21
 msgid "Territorial Time"
@@ -421,4 +422,4 @@ msgstr "الفائز هو %1$s مع %2$s."
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:101
 #, lua-format
 msgid "The winners had %s."
-msgstr ""
+msgstr "الفائزون حصلوا على %s."
