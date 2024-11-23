@@ -214,6 +214,8 @@ public:
 	PortDock* get_portdock() const {
 		return portdock_;
 	}
+
+	std::string info_string(const InfoStringFormat& isf) override;
 	void update_statistics_string(std::string* str) override;
 
 	std::unique_ptr<const BuildingSettings> create_building_settings() const override;

@@ -1510,8 +1510,36 @@ void Warehouse::request_soldier_callback(Game& game,
 	wh.soldier_control_.incorporate_soldier(game, s);
 }
 
+std::string Warehouse::info_string(const InfoStringFormat& isf) {
+	static const std::string hq_fmt = "♔ %s";    // U+2654 white chess king character
+	                                             // "👑" U+1F451 crown character is missing
+	                                             // from our font
+	static const std::string port_fmt = "⚓ %s";  // U+2693 anchor character
+	static const std::string wh_fmt = "⟰ %s";    // U+27F0 upwards quadruple arrow character
+	                                             // (similar to a house)
+	                                             // "📦" U+1F4E6 package character is missing
+	                                             // from our font
+	if (isf == InfoStringFormat::kCensus) {
+		std::string icon_format;
+		if (descr().get_isport()) {
+			icon_format = port_fmt;
+		} else if (!descr().is_buildable()) {
+			icon_format = hq_fmt;
+		} else {
+			icon_format = wh_fmt;
+		}
+		return format(icon_format, richtext_escape(get_warehouse_name()));
+	}
+	return Building::info_string(isf);
+}
+
 void Warehouse::update_statistics_string(std::string* str) {
-	*str = richtext_escape(get_warehouse_name());
+	if (descr().get_conquers() > 0 &&       // Port or HQ
+	    get_desired_soldier_count() > 0) {  // with min garrison
+		*str = soldier_control_.get_status_string(owner().tribe(), get_soldier_preference());
+	} else {
+		str->clear();
+	}
 }
 
 std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() const {
