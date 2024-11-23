@@ -1916,7 +1916,7 @@ void AddOnsCtrl::install_map(std::shared_ptr<AddOns::AddOnInfo> remote) {
 	try {
 		net().download_map(remote->internal_name, temp_file);
 		success = true;
-	} catch (const OperationCancelledByUserException&) {
+	} catch (const AddOns::OperationCancelledByUserException&) {
 		log_info("install map %s cancelled by user", remote->internal_name.c_str());
 	} catch (const std::exception& e) {
 		log_err("install map %s: %s", remote->internal_name.c_str(), e.what());
