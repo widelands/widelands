@@ -909,6 +909,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		rebuild(false);
 	});
 	sort_order_browse_.selected.connect([this]() { rebuild(false); });
+	sort_order_maps_.selected.connect([this]() { rebuild(false); });
 	filter_browse_quality_.selected.connect([this]() {
 		filter_browse_reset_.set_enabled(true);
 		rebuild(false);
