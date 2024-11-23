@@ -3008,19 +3008,19 @@ msgstr "Nova stokejo aldoniĝis al via ekonomio."
 #. * available)
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:689
 msgid "Waterway"
-msgstr ""
+msgstr "Akvovojo"
 
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:690
 msgid "Waterway destroyed"
-msgstr ""
+msgstr "Akvovojo detruita"
 
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:691
 msgid "A waterway had to be destroyed to make room for your new port dock."
-msgstr ""
+msgstr "Akvovojo devis esti detruita por fari lokon por via nova havenmoleo."
 
 #: ../../../../src/logic/map_objects/tribes/worker.cc:1137
 msgid "A geologist found resources."
-msgstr "Geologo trovis krudmaterialojn."
+msgstr "Geologo trovis resursojn."
 
 #: ../../../../src/logic/map_objects/tribes/worker.cc:2120
 #, c-format
