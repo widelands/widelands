@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2024 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Raúl Contreras, 2024
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
+"Last-Translator: Raúl Contreras, 2024\n"
 "Language-Team: Esperanto (https://app.transifex.com/widelands/teams/35159/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,6 +44,8 @@ msgid ""
 "Build a port on the northern shore of the island. The port space is located "
 "under Angadthur’s Headquarters."
 msgstr ""
+"Konstrui havenon ĉe la norda marbordo de la insulo. La havenspaco troviĝas "
+"sub la ĉefsidejo de Angadthur."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:51
 msgid "Pay or Fight"
@@ -97,6 +103,8 @@ msgid ""
 "Only one thing is certain: We must find a port space on the northern coast "
 "of this land belt to launch an expedition and continue sailing North."
 msgstr ""
+"Nur unu afero estas certa: ni devas trovi havenspacon ĉe la norda marbordo "
+"de ĉi tiu tera zono por lanĉi ekspedicion kaj daŭrigi la vojaĝon norden."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:80
@@ -233,7 +241,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:138
 msgid "Port Space Found"
-msgstr ""
+msgstr "Havenspaco Trovita"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:139
 msgid "One step closer to the North"
@@ -248,6 +256,11 @@ msgid ""
 " too much time perfecting our economy – all that matters is that we get to "
 "the North soon."
 msgstr ""
+"Miaj soldatoj raportas, ke ili trovis havenspacon! Nun ni devas konstrui "
+"havenon kaj komenci ekspedicion. Kompreneble, ni unue devos starigi "
+"kompletan marveturan ekonomion, kun ŝipfarejo kaj teksfabriko. Sed ne perdu "
+"tro multe da tempo perfektigante nian ekonomion – gravas nur, ke ni baldaŭ "
+"atingos la Nordon."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:144
 msgid "A Strange Island"
@@ -409,10 +422,12 @@ msgid ""
 "It doesn’t matter. Let’s just find the next port space quickly, so we can "
 "continue our journey."
 msgstr ""
+"Ne gravas. Ni simple trovu la sekvan havenspacon rapide, por ke ni povu "
+"daŭrigi nian vojaĝon."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:212
 msgid "Port space found"
-msgstr ""
+msgstr "Havenspaco trovita"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 5
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:214
@@ -420,6 +435,8 @@ msgid ""
 "We have found a port space on the island. Now we can leave this cold and "
 "bleak ice desert and continue sailing."
 msgstr ""
+"Ni trovis havenspacon sur la insulo. Nun ni povas forlasi ĉi tiun malvarman "
+"kaj malgajan glacian dezerton kaj daŭrigi la vojaĝon."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:218
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:224

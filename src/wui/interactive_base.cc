@@ -1873,6 +1873,12 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 		return true;
 	}
 
+	if (matches_shortcut(KeyboardShortcut::kCommonChangeMusic, code)) {
+		// request soundhandler to change music
+		g_sh->change_music();
+		return true;
+	}
+
 	if (down) {
 		if (matches_shortcut(KeyboardShortcut::kCommonBuildhelp, code)) {
 			toggle_buildhelp();
