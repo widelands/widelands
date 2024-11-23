@@ -746,8 +746,13 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	browse_addons_inner_wrapper_.add(&browse_addons_box_, UI::Box::Resizing::kExpandBoth);
 	maps_inner_wrapper_.add(&maps_box_, UI::Box::Resizing::kExpandBoth);
 	tabs_.add("my", "", &installed_addons_outer_wrapper_, _("Manage your installed add-ons"));
-	tabs_.add("all", "", &browse_addons_outer_wrapper_, _("Browse and install add-ons available on the server"));
-	tabs_.add("maps", "", &maps_outer_wrapper_, format_l(_("Browse and install maps from the widelands.org website maps archive. Like manually downloaded maps, installed website maps are stored in the ‘%s’ directory under the Widelands home directory."), kDownloadedMapsDirFull));
+	tabs_.add("all", "", &browse_addons_outer_wrapper_,
+	          _("Browse and install add-ons available on the server"));
+	tabs_.add("maps", "", &maps_outer_wrapper_,
+	          format_l(_("Browse and install maps from the widelands.org website maps archive. Like "
+	                     "manually downloaded maps, installed website maps are stored in the ‘%s’ "
+	                     "directory under the Widelands home directory."),
+	                   kDownloadedMapsDirFull));
 	tabs_.add("development", _("Development"), &dev_box_, _("Tools for add-on developers"));
 
 	for (auto* so : {&sort_order_browse_, &sort_order_maps_}) {
@@ -1560,7 +1565,8 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 		MapRow* row = new MapRow(&maps_box_, this, a, g_fs->file_exists(map_file_path));
 		maps_box_.add(row, UI::Box::Resizing::kFullSize);
 	}
-	tabs_.tabs()[2]->set_title(index == 0 ? _("Website Maps") : format(_("Website Maps (%u)"), index));
+	tabs_.tabs()[2]->set_title(index == 0 ? _("Website Maps") :
+	                                        format(_("Website Maps (%u)"), index));
 
 	if ((installed_addons_inner_wrapper_.get_scrollbar() != nullptr) && (scrollpos_i != 0u)) {
 		installed_addons_inner_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_i);
