@@ -29,6 +29,7 @@ class Song {
 
     Song(std::string filename) {
         songname = filename;
+        enabled = true;
     }
 
     std::string songname;
@@ -43,11 +44,15 @@ Songset::Songset(const std::string& dir, const std::string& basename) {
     std::vector<std::string> mp3_files = g_fs->get_sequential_files(dir, basename, "mp3");
     std::vector<std::string> ogg_files = g_fs->get_sequential_files(dir, basename, "ogg");
 
-    load_playlist();
+    if (basename == "ingame") {
+        load_playlist();
 
-    if (playlist_.empty()) {
-        init_playlist(mp3_files);
-        init_playlist(ogg_files);
+        if (playlist_.empty()) {
+            init_playlist(mp3_files);
+            init_playlist(ogg_files);
+
+            load_playlist();
+        }
     }
 
     add_songs(mp3_files);
