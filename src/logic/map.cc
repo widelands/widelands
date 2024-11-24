@@ -53,15 +53,30 @@
 
 namespace Widelands {
 
+static std::vector<int32_t> gather_map_field_counts() {
+	std::set<int32_t> counts;
+	for (int32_t x : kMapDimensions) {
+		for (int32_t y : kMapDimensions) {
+			counts.insert(x * y);
+		}
+	}
+	return std::vector<int32_t>(counts.begin(), counts.end());
+}
+const std::vector<int32_t> Map::kMapFieldCounts = gather_map_field_counts();
+
 const std::vector<Map::OldWorldInfo> Map::kOldWorldNames = {
-   /** TRANSLATORS: A world name for the random map generator in the editor */
-   {"summer", "greenland", []() { return _("Summer"); }},
-   /** TRANSLATORS: A world name for the random map generator in the editor */
-   {"winter", "winterland", []() { return _("Winter"); }},
-   /** TRANSLATORS: A world name for the random map generator in the editor */
-   {"wasteland", "blackland", []() { return _("Wasteland"); }},
-   /** TRANSLATORS: A world name for the random map generator in the editor */
-   {"desert", "desert", []() { return _("Desert"); }}};
+   {"summer", "greenland", "world/pics/editor_terrain_category_green.png",
+    /** TRANSLATORS: A world name for the random map generator in the editor */
+    []() { return _("Summer"); }},
+   {"winter", "winterland", "world/pics/editor_terrain_category_winter.png",
+    /** TRANSLATORS: A world name for the random map generator in the editor */
+    []() { return _("Winter"); }},
+   {"wasteland", "blackland", "world/pics/editor_terrain_category_wasteland.png",
+    /** TRANSLATORS: A world name for the random map generator in the editor */
+    []() { return _("Wasteland"); }},
+   {"desert", "desert", "world/pics/editor_terrain_category_desert.png",
+    /** TRANSLATORS: A world name for the random map generator in the editor */
+    []() { return _("Desert"); }}};
 const Map::OldWorldInfo& Map::get_old_world_info_by_old_name(const std::string& old_name) {
 	for (const OldWorldInfo& owi : kOldWorldNames) {
 		if (owi.old_name == old_name) {
