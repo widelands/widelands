@@ -100,6 +100,13 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 	return 1;
 }
 
+static std::string shortcut_string_if_set(const std::string& name, bool rt_escape) {
+	if (name.empty()) {
+		return std::string();
+	}
+	return shortcut_string_for(shortcut_from_string(name), rt_escape);
+}
+
 /*
  * ========================================================================
  *                         MODULE CLASSES
@@ -515,7 +522,7 @@ int LuaPanel::get_child(lua_State* L) {
            user clicks anywhere inside the widget.
          * ``"on_position_changed"``: **Optional**. Callback code to run when the
            widget's position changes.
-         * ``"on_hyperlink"``: **Optional**. New in version 1.3. Callback code to run when
+         * ``"on_hyperlink"``: **Optional**. **New in version 1.3**. Callback code to run when
             the panel is the target of a hyperlink clicked by the user. The hyperlink's action
             argument will be stored in a global variable called ``HYPERLINK_ACTION``.
          * ``"children"``: **Optional**. An array of widget descriptor tables.
@@ -711,7 +718,8 @@ int LuaPanel::get_child(lua_State* L) {
            * ``"min"``: **Mandatory**. The slider's minimum value.
            * ``"max"``: **Mandatory**. The slider's maximum value.
            * ``"cursor_size"``: **Optional**. The size of the slider button in pixels (default 20).
-           * ``"dark"``: **Optional**. Draw the slider darker instead of lighter.
+           * ``"dark"``: **Optional**. Ignored in the main menu.
+             Draw the slider darker instead of lighter (default :const:`false`).
            * ``"on_changed"``: **Optional**. Callback code to run when the slider's value changes.
 
          * ``"discrete_slider"``: A button that can be slid along a horizontal line to change
@@ -720,7 +728,8 @@ int LuaPanel::get_child(lua_State* L) {
            * ``"labels"``: **Mandatory**. Array of strings. Each string defines one slider point.
            * ``"value"``: **Mandatory**. The initially selected value.
            * ``"cursor_size"``: **Optional**. The size of the slider button in pixels (default 20).
-           * ``"dark"``: **Optional**. Draw the slider darker instead of lighter.
+           * ``"dark"``: **Optional**. Ignored in the main menu.
+             Draw the slider darker instead of lighter (default :const:`false`).
            * ``"on_changed"``: **Optional**. Callback code to run when the slider's value changes.
 
          * ``"multilineeditbox"``: A multi-line field where the user can enter text. Properties:
@@ -768,6 +777,8 @@ int LuaPanel::get_child(lua_State* L) {
                **optional** for other types. The icon filepath for the entry.
              * ``"tooltip"``: **Optional**. The entry's tooltip.
              * ``"select"``: **Optional**. Whether to select this entry (default :const:`false`).
+             * ``"hotkey"``: **Optional**. **New in version 1.3**.
+                The internal name of the hotkey for this entry.
 
            * ``"on_selected"``: **Optional**. Callback code to run when the user selects an entry.
 
@@ -791,6 +802,10 @@ int LuaPanel::get_child(lua_State* L) {
              * ``"tooltip"``: **Optional**. The entry's tooltip.
              * ``"select"``: **Optional**. Whether to select this entry (default :const:`false`).
              * ``"indent"``: **Optional**. How many levels to indent the item (default 0).
+             * ``"enable"``: **Optional**. **New in version 1.3**.
+               Whether to enable this entry (default :const:`true`).
+             * ``"hotkey"``: **Optional**. **New in version 1.3**.
+                The internal name of the hotkey for this entry.
 
            * ``"on_selected"``: **Optional**. Callback code to run when the user selects an entry.
            * ``"on_double_clicked"``: **Optional**.
@@ -840,7 +855,8 @@ int LuaPanel::get_child(lua_State* L) {
 
          * ``"tabpanel"``: A panel that allows switching between multiple tabs.
 
-           * ``"dark"``: **Optional**. Whether to use dark appearance (default :const:`false`).
+           * ``"dark"``: **Optional**. Ignored in the main menu.
+             Whether to use dark appearance (default :const:`false`).
            * ``"active"``: **Optional**. The name or index of the initially active tab.
            * ``"tabs"``: **Optional**. The tabs in the tab panel.
              An array of tables with the following keys:
@@ -869,6 +885,12 @@ int LuaPanel::get_child(lua_State* L) {
       Therefore, any callbacks attached to such widgets must not use any functions or variables
       defined at an arbitrary earlier time by your script -
       they may have been deleted by the time the callback is invoked.
+
+      Similarly, in the main menu, a plugin's init script may be called multiple times
+      without resetting the user interface in the mean time. Therefore, the script
+      needs to check whether the elements it intends to add already exist from an
+      earlier invocation using a different Lua context.
+
       Example:
 
       .. code-block:: lua
@@ -974,6 +996,10 @@ int LuaPanel::create_child(lua_State* L) {
 /*
  * C Functions
  */
+static inline UI::PanelStyle panel_style(lua_State* L) {
+	return is_main_menu(L) ? UI::PanelStyle::kFsMenu : UI::PanelStyle::kWui;
+}
+
 static UI::Align get_table_align(lua_State* L,
                                  const char* key,
                                  bool mandatory,
@@ -1080,23 +1106,48 @@ get_table_button_style(lua_State* L,
                        const char* key,
                        bool mandatory,
                        UI::ButtonStyle default_value = UI::ButtonStyle::kWuiSecondary) {
+	const bool mainmenu = is_main_menu(L);
+
 	lua_getfield(L, -1, key);
 	if (!lua_isnil(L, -1)) {
 		std::string str = luaL_checkstring(L, -1);
 		if (str == "primary") {
-			default_value = UI::ButtonStyle::kWuiPrimary;
+			default_value = mainmenu ? UI::ButtonStyle::kFsMenuPrimary : UI::ButtonStyle::kWuiPrimary;
 		} else if (str == "secondary") {
-			default_value = UI::ButtonStyle::kWuiSecondary;
+			default_value =
+			   mainmenu ? UI::ButtonStyle::kFsMenuSecondary : UI::ButtonStyle::kWuiSecondary;
 		} else if (str == "menu") {
-			default_value = UI::ButtonStyle::kWuiMenu;
+			default_value = mainmenu ? UI::ButtonStyle::kFsMenuMenu : UI::ButtonStyle::kWuiMenu;
 		} else {
 			report_error(L, "Unknown button style '%s'", str.c_str());
 		}
 	} else if (mandatory) {
 		report_error(L, "Missing button style: %s", key);
+	} else if (mainmenu) {
+		default_value = UI::ButtonStyle::kFsMenuSecondary;
 	}
 	lua_pop(L, 1);
 	return default_value;
+}
+
+static inline UI::SliderStyle get_slider_style(lua_State* L) {
+	if (is_main_menu(L)) {
+		return UI::SliderStyle::kFsMenu;
+	}
+	if (get_table_boolean(L, "dark", false)) {
+		return UI::SliderStyle::kWuiDark;
+	}
+	return UI::SliderStyle::kWuiLight;
+}
+
+static inline UI::TabPanelStyle get_tab_panel_style(lua_State* L) {
+	if (is_main_menu(L)) {
+		return UI::TabPanelStyle::kFsMenu;
+	}
+	if (get_table_boolean(L, "dark", false)) {
+		return UI::TabPanelStyle::kWuiDark;
+	}
+	return UI::TabPanelStyle::kWuiLight;
 }
 
 static UI::Button::VisualState get_table_button_visual_state(
@@ -1157,6 +1208,29 @@ inline void do_set_global_string<std::string>(lua_State* L, const char* name, st
 template <typename... Args>
 static std::function<void(Args...)>
 create_plugin_action_lambda(lua_State* L, const std::string& cmd, bool is_hyperlink = false) {
+	if (is_main_menu(L)) {
+		FsMenu::MainMenu& fsmm = get_main_menu(L);
+		return [&fsmm, cmd, is_hyperlink](Args... args) {  // do not capture L directly
+			try {
+				if (is_hyperlink) {
+					do_set_global_string(fsmm.lua().L(), "HYPERLINK_ACTION", args...);
+				}
+				fsmm.lua().interpret_string(cmd);
+			} catch (const LuaError& e) {
+				log_err("Lua error in plugin: %s", e.what());
+
+				if (g_fail_on_lua_error) {
+					throw;
+				}
+
+				UI::WLMessageBox m(&fsmm, UI::WindowStyle::kFsMenu, _("Plugin Error"),
+				                   format_l(_("Error when running plugin:\n%s"), e.what()),
+				                   UI::WLMessageBox::MBoxType::kOk);
+				m.run<UI::Panel::Returncodes>();
+			}
+		};
+	}
+
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	return [&egbase, cmd, is_hyperlink](Args... args) {  // do not capture L directly
 		try {
@@ -1300,7 +1374,7 @@ UI::Box* LuaPanel::do_create_child_box(lua_State* L, UI::Panel* parent) {
 	int32_t y = get_table_int(L, "y", false);
 
 	UI::Box* box =
-	   new UI::Box(parent, UI::PanelStyle::kWui, name, x, y, orientation, max_x, max_y, spacing);
+	   new UI::Box(parent, panel_style(L), name, x, y, orientation, max_x, max_y, spacing);
 
 	box->set_scrolling(get_table_boolean(L, "scrolling", false));
 
@@ -1358,10 +1432,9 @@ UI::Panel* LuaPanel::do_create_child_checkbox(lua_State* L, UI::Panel* parent) {
 	UI::Checkbox* checkbox;
 	if (title.empty()) {
 		checkbox = new UI::Checkbox(
-		   parent, UI::PanelStyle::kWui, name, Vector2i(x, y), g_image_cache->get(icon), tooltip);
+		   parent, panel_style(L), name, Vector2i(x, y), g_image_cache->get(icon), tooltip);
 	} else {
-		checkbox =
-		   new UI::Checkbox(parent, UI::PanelStyle::kWui, name, Vector2i(x, y), title, tooltip);
+		checkbox = new UI::Checkbox(parent, panel_style(L), name, Vector2i(x, y), title, tooltip);
 	}
 
 	checkbox->set_state(initial_state, false);
@@ -1377,7 +1450,6 @@ UI::Panel* LuaPanel::do_create_child_discrete_slider(lua_State* L, UI::Panel* pa
 	std::string name = get_table_string(L, "name", true);
 	uint32_t cursor_size = get_table_int(L, "cursor_size", false, 20);
 	uint32_t init_value = get_table_int(L, "value", true);
-	bool dark = get_table_boolean(L, "dark", false);
 
 	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
@@ -1403,8 +1475,7 @@ UI::Panel* LuaPanel::do_create_child_discrete_slider(lua_State* L, UI::Panel* pa
 	}
 
 	UI::DiscreteSlider* slider = new UI::DiscreteSlider(
-	   parent, name, x, y, w, h, labels, init_value,
-	   dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight, tooltip, cursor_size);
+	   parent, name, x, y, w, h, labels, init_value, get_slider_style(L), tooltip, cursor_size);
 
 	if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
 		slider->changed.connect(create_plugin_action_lambda(L, on_changed));
@@ -1430,7 +1501,7 @@ UI::Panel* LuaPanel::do_create_child_dropdown(lua_State* L, UI::Panel* parent) {
 	if (datatype == "string") {
 		DropdownOfString* dd =
 		   new DropdownOfString(parent, name, x, y, w, max_list_items, button_dimension, label, type,
-		                        UI::PanelStyle::kWui, button_style);
+		                        panel_style(L), button_style);
 		dropdown = dd;
 
 		lua_getfield(L, -1, "entries");
@@ -1441,11 +1512,12 @@ UI::Panel* LuaPanel::do_create_child_dropdown(lua_State* L, UI::Panel* parent) {
 				std::string elabel = get_table_string(L, "label", true);
 				std::string value = get_table_string(L, "value", true);
 				std::string etooltip = get_table_string(L, "tooltip", false);
+				std::string ehotkey = get_table_string(L, "hotkey", false);
 				std::string icon = get_table_string(L, "icon", type == UI::DropdownType::kPictorial);
 				bool select = get_table_boolean(L, "select", false);
 
-				dd->add(
-				   elabel, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, etooltip);
+				dd->add(elabel, value, icon.empty() ? nullptr : g_image_cache->get(icon), select,
+				        etooltip, shortcut_string_if_set(ehotkey, false));
 				lua_pop(L, 1);
 			}
 		}
@@ -1476,7 +1548,7 @@ UI::Panel* LuaPanel::do_create_child_editbox(lua_State* L, UI::Panel* parent) {
 	int32_t y = get_table_int(L, "y", false);
 	int32_t w = get_table_int(L, "w", false);
 
-	UI::EditBox* editbox = new UI::EditBox(parent, name, x, y, w, UI::PanelStyle::kWui);
+	UI::EditBox* editbox = new UI::EditBox(parent, name, x, y, w, panel_style(L));
 
 	editbox->set_text(text);
 	editbox->set_password(password);
@@ -1509,7 +1581,7 @@ UI::Panel* LuaPanel::do_create_child_listselect(lua_State* L, UI::Panel* parent)
 	UI::BaseListselect* listselect;
 	if (datatype == "string") {
 		ListselectOfString* ls =
-		   new ListselectOfString(parent, name, x, y, w, h, UI::PanelStyle::kWui, layout);
+		   new ListselectOfString(parent, name, x, y, w, h, panel_style(L), layout);
 		listselect = ls;
 
 		lua_getfield(L, -1, "entries");
@@ -1520,12 +1592,14 @@ UI::Panel* LuaPanel::do_create_child_listselect(lua_State* L, UI::Panel* parent)
 				std::string label = get_table_string(L, "label", true);
 				std::string value = get_table_string(L, "value", true);
 				std::string etooltip = get_table_string(L, "tooltip", false);
+				std::string ehotkey = get_table_string(L, "hotkey", false);
 				std::string icon = get_table_string(L, "icon", false);
 				bool select = get_table_boolean(L, "select", false);
+				bool enable = get_table_boolean(L, "enable", false, true);
 				int32_t indent = get_table_int(L, "indent", false);
 
 				ls->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select,
-				        etooltip, "", indent);
+				        etooltip, shortcut_string_if_set(ehotkey, false), indent, enable);
 				lua_pop(L, 1);
 			}
 		}
@@ -1559,7 +1633,7 @@ UI::Panel* LuaPanel::do_create_child_multilineeditbox(lua_State* L, UI::Panel* p
 	int32_t h = get_table_int(L, "h", false);
 
 	UI::MultilineEditbox* editbox =
-	   new UI::MultilineEditbox(parent, name, x, y, w, h, UI::PanelStyle::kWui);
+	   new UI::MultilineEditbox(parent, name, x, y, w, h, panel_style(L));
 
 	editbox->set_text(text);
 	editbox->set_password(password);
@@ -1601,8 +1675,8 @@ UI::Panel* LuaPanel::do_create_child_multilinetextarea(lua_State* L, UI::Panel* 
 		report_error(L, "Unknown scroll mode '%s'", scroll.c_str());
 	}
 
-	UI::MultilineTextarea* txt = new UI::MultilineTextarea(
-	   parent, name, x, y, w, h, UI::PanelStyle::kWui, text, align, scroll_mode);
+	UI::MultilineTextarea* txt =
+	   new UI::MultilineTextarea(parent, name, x, y, w, h, panel_style(L), text, align, scroll_mode);
 
 	if (std::string font = get_table_string(L, "font", false); !font.empty()) {
 		txt->set_style(g_style_manager->safe_font_style(font));
@@ -1620,7 +1694,7 @@ UI::Panel* LuaPanel::do_create_child_panel(lua_State* L, UI::Panel* parent) {
 	int32_t w = get_table_int(L, "w", false);
 	int32_t h = get_table_int(L, "h", false);
 
-	return new UI::Panel(parent, UI::PanelStyle::kWui, name, x, y, w, h, tooltip);
+	return new UI::Panel(parent, panel_style(L), name, x, y, w, h, tooltip);
 }
 
 UI::Panel* LuaPanel::do_create_child_progressbar(lua_State* L, UI::Panel* parent) {
@@ -1643,7 +1717,7 @@ UI::Panel* LuaPanel::do_create_child_progressbar(lua_State* L, UI::Panel* parent
 	int32_t h = get_table_int(L, "h", false);
 
 	UI::ProgressBar* bar =
-	   new UI::ProgressBar(parent, UI::PanelStyle::kWui, name, x, y, w, h, orientation);
+	   new UI::ProgressBar(parent, panel_style(L), name, x, y, w, h, orientation);
 
 	bar->set_total(total);
 	bar->set_state(state);
@@ -1671,8 +1745,8 @@ void LuaPanel::do_create_child_radiogroup(lua_State* L, UI::Panel* parent, UI::B
 		int32_t ry = get_table_int(L, "y", false);
 
 		UI::Radiobutton* radiobutton;
-		group->add_button(parent, UI::PanelStyle::kWui, name, Vector2i(rx, ry),
-		                  g_image_cache->get(icon), rtooltip, &radiobutton);
+		group->add_button(parent, panel_style(L), name, Vector2i(rx, ry), g_image_cache->get(icon),
+		                  rtooltip, &radiobutton);
 
 		// Box layouting if applicable
 		if (as_box != nullptr) {
@@ -1698,7 +1772,6 @@ UI::Panel* LuaPanel::do_create_child_slider(lua_State* L, UI::Panel* parent) {
 	int32_t val_max = get_table_int(L, "max", true);
 	int32_t val = get_table_int(L, "value", true);
 	uint32_t cursor_size = get_table_int(L, "cursor_size", false, 20);
-	bool dark = get_table_boolean(L, "dark", false);
 
 	if (val_min > val_max) {
 		report_error(L, "Malformed slider value range");
@@ -1716,12 +1789,10 @@ UI::Panel* LuaPanel::do_create_child_slider(lua_State* L, UI::Panel* parent) {
 	UI::Slider* slider;
 	if (orientation == UI::Box::Vertical) {
 		slider = new UI::VerticalSlider(parent, name, x, y, w, h, val_min, val_max, val,
-		                                dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight,
-		                                cursor_size, tooltip);
+		                                get_slider_style(L), cursor_size, tooltip);
 	} else {
-		slider = new UI::HorizontalSlider(
-		   parent, name, x, y, w, h, val_min, val_max, val,
-		   dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight, tooltip, cursor_size);
+		slider = new UI::HorizontalSlider(parent, name, x, y, w, h, val_min, val_max, val,
+		                                  get_slider_style(L), tooltip, cursor_size);
 	}
 
 	if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
@@ -1819,8 +1890,8 @@ UI::Panel* LuaPanel::do_create_child_spinbox(lua_State* L, UI::Panel* parent) {
 	}
 
 	UI::SpinBox* spinbox =
-	   new UI::SpinBox(parent, name, x, y, w, unit_w, val, val_min, val_max, UI::PanelStyle::kWui,
-	                   label, units, sb_type, step_size_small, step_size_big);
+	   new UI::SpinBox(parent, name, x, y, w, unit_w, val, val_min, val_max, panel_style(L), label,
+	                   units, sb_type, step_size_small, step_size_big);
 
 	if (!value_list.empty()) {
 		spinbox->set_value_list(value_list);
@@ -1847,10 +1918,8 @@ UI::Panel* LuaPanel::do_create_child_spinbox(lua_State* L, UI::Panel* parent) {
 
 UI::Panel* LuaPanel::do_create_child_tabpanel(lua_State* L, UI::Panel* parent) {
 	std::string name = get_table_string(L, "name", true);
-	bool dark = get_table_boolean(L, "dark", false);
 
-	UI::TabPanel* tabpanel = new UI::TabPanel(
-	   parent, dark ? UI::TabPanelStyle::kWuiDark : UI::TabPanelStyle::kWuiLight, name);
+	UI::TabPanel* tabpanel = new UI::TabPanel(parent, get_tab_panel_style(L), name);
 
 	lua_getfield(L, -1, "tabs");
 	if (!lua_isnil(L, -1)) {
@@ -1912,7 +1981,7 @@ UI::Panel* LuaPanel::do_create_child_table(lua_State* L, UI::Panel* parent) {
 
 	UI::BaseTable* table;
 	if (datatype == "int") {
-		table = new TableOfInt(parent, name, x, y, w, h, UI::PanelStyle::kWui,
+		table = new TableOfInt(parent, name, x, y, w, h, panel_style(L),
 		                       multiselect ? UI::TableRows::kMulti : UI::TableRows::kSingle);
 	} else {
 		report_error(L, "Unsupported table datatype '%s'", datatype.c_str());
@@ -2004,7 +2073,7 @@ UI::Panel* LuaPanel::do_create_child_textarea(lua_State* L, UI::Panel* parent) {
 	int32_t h = get_table_int(L, "h", false);
 
 	UI::Textarea* txt =
-	   new UI::Textarea(parent, UI::PanelStyle::kWui, name, font, x, y, w, h, text, align);
+	   new UI::Textarea(parent, panel_style(L), name, font, x, y, w, h, text, align);
 
 	txt->set_fixed_width(get_table_int(L, "fixed_width", false));
 
@@ -2012,15 +2081,24 @@ UI::Panel* LuaPanel::do_create_child_textarea(lua_State* L, UI::Panel* parent) {
 }
 
 UI::Panel* LuaPanel::do_create_child_unique_window(lua_State* L, UI::Panel* parent) {
-	if (parent != get_egbase(L).get_ibase()) {
+	if (parent->get_parent() != nullptr) {
 		report_error(L, "Unique windows must be toplevel components");
 	}
 
 	std::string registry = get_table_string(L, "registry", true);
-	UI::UniqueWindow::Registry& reg =
-	   get_egbase(L).get_ibase()->unique_windows().get_registry(registry);
-	if (reg.window != nullptr) {
-		return reg.window;
+	UI::UniqueWindow::Registry* reg;
+	UI::WindowStyle style;
+
+	if (is_main_menu(L)) {
+		reg = &get_main_menu(L).unique_windows().get_registry(registry);
+		style = UI::WindowStyle::kFsMenu;
+	} else {
+		reg = &get_egbase(L).get_ibase()->unique_windows().get_registry(registry);
+		style = UI::WindowStyle::kWui;
+	}
+
+	if (reg->window != nullptr) {
+		return reg->window;
 	}
 
 	std::string name = get_table_string(L, "name", true);
@@ -2031,8 +2109,7 @@ UI::Panel* LuaPanel::do_create_child_unique_window(lua_State* L, UI::Panel* pare
 	int32_t w = get_table_int(L, "w", false);
 	int32_t h = get_table_int(L, "h", false);
 
-	UI::UniqueWindow* window =
-	   new UI::UniqueWindow(parent, UI::WindowStyle::kWui, name, &reg, x, y, w, h, title);
+	UI::UniqueWindow* window = new UI::UniqueWindow(parent, style, name, reg, x, y, w, h, title);
 
 	lua_getfield(L, -1, "content");
 	if (!lua_isnil(L, -1)) {
@@ -2044,7 +2121,7 @@ UI::Panel* LuaPanel::do_create_child_unique_window(lua_State* L, UI::Panel* pare
 }
 
 UI::Panel* LuaPanel::do_create_child_window(lua_State* L, UI::Panel* parent) {
-	if (parent != get_egbase(L).get_ibase()) {
+	if (parent->get_parent() != nullptr) {
 		report_error(L, "Windows must be toplevel components");
 	}
 
@@ -2055,7 +2132,9 @@ UI::Panel* LuaPanel::do_create_child_window(lua_State* L, UI::Panel* parent) {
 
 	std::string name = get_table_string(L, "name", true);
 	std::string title = get_table_string(L, "title", true);
-	UI::Window* window = new UI::Window(parent, UI::WindowStyle::kWui, name, x, y, w, h, title);
+	UI::Window* window =
+	   new UI::Window(parent, is_main_menu(L) ? UI::WindowStyle::kFsMenu : UI::WindowStyle::kWui,
+	                  name, x, y, w, h, title);
 
 	lua_getfield(L, -1, "content");
 	if (!lua_isnil(L, -1)) {
@@ -2807,12 +2886,13 @@ Dropdown
 */
 const char LuaDropdown::className[] = "Dropdown";
 const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
-   METHOD(LuaDropdown, open),   METHOD(LuaDropdown, highlight_item),
+   METHOD(LuaDropdown, open),           METHOD(LuaDropdown, highlight_item),
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
    METHOD(LuaDropdown, indicate_item),
 #endif
-   METHOD(LuaDropdown, select), METHOD(LuaDropdown, add),
-   {nullptr, nullptr},
+   METHOD(LuaDropdown, select),         METHOD(LuaDropdown, add),
+   METHOD(LuaDropdown, get_value_at),   METHOD(LuaDropdown, get_label_at),
+   METHOD(LuaDropdown, get_tooltip_at), {nullptr, nullptr},
 };
 const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
    PROP_RO(LuaDropdown, datatype),    PROP_RO(LuaDropdown, expanded),
@@ -3003,9 +3083,12 @@ int LuaDropdown::select(lua_State* /* L */) {
 }
 
 /* RST
-   .. method:: add(label, value[, icon = nil, tooltip = "", select = false])
+   .. method:: add(label, value[, icon = nil, tooltip = "", select = false, hotkey = nil])
 
       .. versionadded:: 1.2
+
+      .. versionchanged:: 1.3
+         Added parameter ``hotkey``.
 
       Add an entry to the dropdown. Only allowed for dropdowns with supported datatypes.
 
@@ -3019,6 +3102,8 @@ int LuaDropdown::select(lua_State* /* L */) {
       :type tooltip: :class:`string`
       :arg select: Whether to select this entry.
       :type select: :class:`boolean`
+      :arg hotkey: The internal name of the hotkey for this entry.
+      :type hotkey: :class:`string`
 */
 int LuaDropdown::add(lua_State* L) {
 	int top = lua_gettop(L);
@@ -3026,14 +3111,97 @@ int LuaDropdown::add(lua_State* L) {
 	std::string icon = (top >= 4 && !lua_isnil(L, 4)) ? luaL_checkstring(L, 4) : "";
 	std::string tooltip = top >= 5 ? luaL_checkstring(L, 5) : "";
 	bool select = top >= 6 && luaL_checkboolean(L, 6);
+	std::string hotkey = top >= 7 ? luaL_checkstring(L, 7) : "";
 
 	if (upcast(DropdownOfString, dd, get()); dd != nullptr) {
 		std::string value = luaL_checkstring(L, 3);
-		dd->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip);
+		dd->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip,
+		        shortcut_string_if_set(hotkey, false));
 	} else {
 		report_error(L, "add() not allowed for dropdown with unsupported datatype");
 	}
 	return 0;
+}
+
+/* RST
+   .. method:: get_value_at(index)
+
+      .. versionadded:: 1.3
+
+      Get the internal value of the item at the specified position.
+      Only allowed for dropdowns with supported datatypes.
+
+      :arg index: The index to query, starting from ``1``.
+      :type index: :class:`integer`
+      :returns: The entry's internal value.
+      :rtype: This list's :attr:`datatype`
+*/
+int LuaDropdown::get_value_at(lua_State* L) {
+	const uint32_t index = luaL_checkuint32(L, 2);
+	const uint32_t nritems = get()->size();
+	if (index < 1 || index > nritems) {
+		report_error(L, "Index %u out of range for dropdown of size %u", index, nritems);
+	}
+	if (upcast(DropdownOfString, dd, get()); dd != nullptr) {
+		lua_pushstring(L, dd->at(index - 1).value);
+	} else {
+		report_error(L, "get_value_at() not allowed for dropdown with unsupported datatype");
+	}
+	return 1;
+}
+
+/* RST
+   .. method:: get_label_at(index)
+
+      .. versionadded:: 1.3
+
+      Get the user-facing name of the item at the specified position.
+      Only allowed for dropdowns with supported datatypes.
+
+      :arg index: The index to query, starting from ``1``.
+      :type index: :class:`integer`
+      :returns: The entry's display name.
+      :rtype: :class:`string`
+*/
+int LuaDropdown::get_label_at(lua_State* L) {
+	const uint32_t index = luaL_checkuint32(L, 2);
+	const uint32_t nritems = get()->size();
+	if (index < 1 || index > nritems) {
+		report_error(L, "Index %u out of range for dropdown of size %u", index, nritems);
+	}
+	if (upcast(DropdownOfString, dd, get()); dd != nullptr) {
+		lua_pushstring(L, dd->at(index - 1).name);
+	} else {
+		report_error(L, "get_label_at() not allowed for dropdown with unsupported datatype");
+	}
+	return 1;
+}
+
+/* RST
+   .. method:: get_tooltip_at(index)
+
+      .. versionadded:: 1.3
+
+      Get the tooltip of the item at the specified position.
+      Only allowed for dropdowns with supported datatypes.
+
+      :arg index: The index to query, starting from ``1``.
+      :type index: :class:`integer`
+      :returns: The entry's tooltip (may be empty if the item has no tooltip).
+      :rtype: :class:`string`
+*/
+int LuaDropdown::get_tooltip_at(lua_State* L) {
+	const uint32_t index = luaL_checkuint32(L, 2);
+	const uint32_t nritems = get()->size();
+	if (index < 1 || index > nritems) {
+		report_error(L, "Index %u out of range for dropdown of size %u", index, nritems);
+	}
+	if (upcast(DropdownOfString, dd, get()); dd != nullptr) {
+		lua_pushstring(L, dd->at(index - 1).tooltip);
+	} else {
+		report_error(L, "get_tooltip_at() not allowed for dropdown with unsupported datatype");
+	}
+	return 1;
 }
 
 /*
@@ -3056,6 +3224,11 @@ Listselect
 const char LuaListselect::className[] = "Listselect";
 const MethodType<LuaListselect> LuaListselect::Methods[] = {
    METHOD(LuaListselect, add),
+   METHOD(LuaListselect, get_value_at),
+   METHOD(LuaListselect, get_label_at),
+   METHOD(LuaListselect, get_tooltip_at),
+   METHOD(LuaListselect, get_enable_at),
+   METHOD(LuaListselect, get_indent_at),
    {nullptr, nullptr},
 };
 const PropertyType<LuaListselect> LuaListselect::Properties[] = {
@@ -3116,7 +3289,11 @@ int LuaListselect::get_selection(lua_State* L) {
  */
 
 /* RST
-   .. method:: add(label, value[, icon = nil, tooltip = "", select = false, indent = 0])
+   .. method:: add(label, value
+      [, icon = nil, tooltip = "", select = false, indent = 0, enable = true, hotkey = nil])
+
+   .. versionchanged:: 1.3
+      Added ``enable`` and ``hotkey`` parameters.
 
       Add an entry to the list. Only allowed for lists with supported datatypes.
 
@@ -3132,6 +3309,10 @@ int LuaListselect::get_selection(lua_State* L) {
       :type select: :class:`boolean`
       :arg indent: By how many levels to indent this entry.
       :type indent: :class:`int`
+      :arg enable: Whether to enable this entry.
+      :type enable: :class:`boolean`
+      :arg hotkey: The internal name of the hotkey for this entry.
+      :type hotkey: :class:`string`
 */
 int LuaListselect::add(lua_State* L) {
 	int top = lua_gettop(L);
@@ -3140,15 +3321,132 @@ int LuaListselect::add(lua_State* L) {
 	std::string tooltip = top >= 5 ? luaL_checkstring(L, 5) : "";
 	bool select = top >= 6 && luaL_checkboolean(L, 6);
 	uint32_t indent = top >= 7 ? luaL_checkuint32(L, 7) : 0;
+	bool enable = top < 8 || luaL_checkboolean(L, 8);
+	std::string hotkey = top >= 9 ? luaL_checkstring(L, 9) : "";
 
 	if (upcast(ListselectOfString, list, get()); list != nullptr) {
 		std::string value = luaL_checkstring(L, 3);
 		list->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip,
-		          "", indent);
+		          shortcut_string_if_set(hotkey, false), indent, enable);
 	} else {
 		report_error(L, "add() not allowed for listselect with unsupported datatype");
 	}
 	return 0;
+}
+
+/* RST
+   .. method:: get_value_at(index)
+
+      .. versionadded:: 1.3
+
+      Get the internal value of the item at the specified position.
+      Only allowed for lists with supported datatypes.
+
+      :arg index: The index to query, starting from ``1``.
+      :type index: :class:`integer`
+      :returns: The entry's internal value.
+      :rtype: This list's :attr:`datatype`
+*/
+int LuaListselect::get_value_at(lua_State* L) {
+	const uint32_t index = luaL_checkuint32(L, 2);
+	const uint32_t nritems = get()->size();
+	if (index < 1 || index > nritems) {
+		report_error(L, "Index %u out of range for list of size %u", index, nritems);
+	}
+	if (upcast(ListselectOfString, dd, get()); dd != nullptr) {
+		lua_pushstring(L, (*dd)[index - 1]);
+	} else {
+		report_error(L, "get_value_at() not allowed for list with unsupported datatype");
+	}
+	return 1;
+}
+
+/* RST
+   .. method:: get_label_at(index)
+
+      .. versionadded:: 1.3
+
+      Get the user-facing name of the item at the specified position.
+
+      :arg index: The index to query, starting from ``1``.
+      :type index: :class:`integer`
+      :returns: The entry's display name.
+      :rtype: :class:`string`
+*/
+int LuaListselect::get_label_at(lua_State* L) {
+	const uint32_t index = luaL_checkuint32(L, 2);
+	const uint32_t nritems = get()->size();
+	if (index < 1 || index > nritems) {
+		report_error(L, "Index %u out of range for list of size %u", index, nritems);
+	}
+	lua_pushstring(L, get()->at(index - 1).name);
+	return 1;
+}
+
+/* RST
+   .. method:: get_tooltip_at(index)
+
+      .. versionadded:: 1.3
+
+      Get the tooltip of the item at the specified position.
+
+      :arg index: The index to query, starting from ``1``.
+      :type index: :class:`integer`
+      :returns: The entry's tooltip (may be empty if the item has no tooltip).
+      :rtype: :class:`string`
+*/
+int LuaListselect::get_tooltip_at(lua_State* L) {
+	const uint32_t index = luaL_checkuint32(L, 2);
+	const uint32_t nritems = get()->size();
+	if (index < 1 || index > nritems) {
+		report_error(L, "Index %u out of range for list of size %u", index, nritems);
+	}
+	lua_pushstring(L, get()->at(index - 1).tooltip);
+	return 1;
+}
+
+/* RST
+   .. method:: get_enable_at(index)
+
+      .. versionadded:: 1.3
+
+      Get the enable/disable display state of the item at the specified position.
+
+      :arg index: The index to query, starting from ``1``.
+      :type index: :class:`integer`
+      :returns: Whether the entry is marked as enabled.
+      :rtype: :class:`boolean`
+*/
+int LuaListselect::get_enable_at(lua_State* L) {
+	const uint32_t index = luaL_checkuint32(L, 2);
+	const uint32_t nritems = get()->size();
+	if (index < 1 || index > nritems) {
+		report_error(L, "Index %u out of range for list of size %u", index, nritems);
+	}
+	lua_pushboolean(L, static_cast<int>(get()->at(index - 1).enable));
+	return 1;
+}
+
+/* RST
+   .. method:: get_indent_at(index)
+
+      .. versionadded:: 1.3
+
+      Get the indentation level of the item at the specified position.
+
+      :arg index: The index to query, starting from ``1``.
+      :type index: :class:`integer`
+      :returns: The entry's indentation.
+      :rtype: :class:`integer`
+*/
+int LuaListselect::get_indent_at(lua_State* L) {
+	const uint32_t index = luaL_checkuint32(L, 2);
+	const uint32_t nritems = get()->size();
+	if (index < 1 || index > nritems) {
+		report_error(L, "Index %u out of range for list of size %u", index, nritems);
+	}
+	lua_pushinteger(L, get()->at(index - 1).indent);
+	return 1;
 }
 
 /*
@@ -3628,6 +3926,10 @@ MapView
 
    The map view is the main widget and the root of all panels. It is the big
    view of the map that is visible at all times while playing.
+
+   This class may only be accessed in a game or the editor.
+   You can construct as many instances of it as you like,
+   and they will all refer to the same map view.
 */
 const char LuaMapView::className[] = "MapView";
 const MethodType<LuaMapView> LuaMapView::Methods[] = {
@@ -3642,6 +3944,8 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
    METHOD(LuaMapView, mouse_to_pixel),
    METHOD(LuaMapView, add_toolbar_plugin),
    METHOD(LuaMapView, update_toolbar),
+   METHOD(LuaMapView, set_keyboard_shortcut),
+   METHOD(LuaMapView, set_keyboard_shortcut_release),
    METHOD(LuaMapView, add_plugin_timer),
    {nullptr, nullptr},
 };
@@ -3836,7 +4140,7 @@ int LuaMapView::start_road_building(lua_State* L) {
 	me->map_view()->mouse_to_field(starting_field, MapView::Transition::Jump);
 	me->start_build_road(starting_field, me->get_player()->player_number(),
 	                     lua_gettop(L) > 2 && luaL_checkboolean(L, 3) ? RoadBuildingType::kWaterway :
-                                                                       RoadBuildingType::kRoad);
+	                                                                    RoadBuildingType::kRoad);
 
 	return 0;
 }
@@ -3973,9 +4277,12 @@ int LuaMapView::update_toolbar(lua_State* L) {
 }
 
 /* RST
-   .. method:: add_toolbar_plugin(action, icon, name[, tooltip = ""])
+   .. method:: add_toolbar_plugin(action, icon, name[, tooltip = "", hotkey = nil])
 
       .. versionadded:: 1.2
+
+   .. versionchanged:: 1.3
+      Added ``hotkey`` parameter.
 
       Add an entry to the main toolbar's Plugin dropdown.
       This makes the plugin dropdown visible if it was hidden.
@@ -3988,11 +4295,77 @@ int LuaMapView::update_toolbar(lua_State* L) {
       :type name: :class:`string`
       :arg tooltip: Tooltip for the entry.
       :type tooltip: :class:`string`
+      :arg hotkey: The internal name of the hotkey for this entry.
+      :type hotkey: :class:`string`
 */
 int LuaMapView::add_toolbar_plugin(lua_State* L) {
-	get_egbase(L).get_ibase()->add_toolbar_plugin(luaL_checkstring(L, 2), luaL_checkstring(L, 3),
-	                                              luaL_checkstring(L, 4),
-	                                              lua_gettop(L) < 5 ? "" : luaL_checkstring(L, 5));
+	get_egbase(L).get_ibase()->add_toolbar_plugin(
+	   luaL_checkstring(L, 2), luaL_checkstring(L, 3), luaL_checkstring(L, 4),
+	   lua_gettop(L) >= 5 ? luaL_checkstring(L, 5) : "",
+	   lua_gettop(L) >= 6 ? shortcut_string_if_set(luaL_checkstring(L, 6), false) : "");
+	return 0;
+}
+
+/* RST
+   .. method:: set_keyboard_shortcut(internal_name, action[, failsafe=true])
+
+      .. versionadded:: 1.3
+
+      Associate a named keyboard shortcut with a piece of code to run when the shortcut is pressed.
+      This replaces any existing action associated with pressing the shortcut.
+
+      :arg internal_name: The internal name of the keyboard shortcut.
+      :type internal_name: :class:`string`
+      :arg action: The Lua code to run.
+      :type action: :class:`string`
+      :arg failsafe: In event of an error, an error message is shown and the shortcut binding
+         is removed. If this is set to :const:`false`, the game will be aborted with no
+         error handling instead.
+      :type failsafe: :class:`boolean`
+
+      :see also: :meth:`set_keyboard_shortcut_release`
+*/
+int LuaMapView::set_keyboard_shortcut(lua_State* L) {
+	std::string name = luaL_checkstring(L, 2);
+	std::string action = luaL_checkstring(L, 3);
+	bool failsafe = lua_gettop(L) < 4 || luaL_checkboolean(L, 4);
+	if (!shortcut_exists(name)) {
+		report_error(L, "Invalid shortcut name '%s'", name.c_str());
+	}
+	get()->set_lua_shortcut(name, action, failsafe, true);
+	return 0;
+}
+
+/* RST
+   .. method:: set_keyboard_shortcut_release(internal_name, action[, failsafe=true])
+
+      .. versionadded:: 1.3
+
+      Associate a named keyboard shortcut with a piece of code to run when the shortcut is released
+      after having been previously pressed.
+      This replaces any existing action associated with releasing the shortcut.
+
+      You don't need this in normal cases. When in doubt, use only meth:`set_keyboard_shortcut`.
+
+      :arg internal_name: The internal name of the keyboard shortcut.
+      :type internal_name: :class:`string`
+      :arg action: The Lua code to run.
+      :type action: :class:`string`
+      :arg failsafe: In event of an error, an error message is shown and the shortcut binding
+         is removed. If this is set to :const:`false`, the game will be aborted with no
+         error handling instead.
+      :type failsafe: :class:`boolean`
+
+      :see also: :meth:`set_keyboard_shortcut`
+*/
+int LuaMapView::set_keyboard_shortcut_release(lua_State* L) {
+	std::string name = luaL_checkstring(L, 2);
+	std::string action = luaL_checkstring(L, 3);
+	bool failsafe = lua_gettop(L) < 4 || luaL_checkboolean(L, 4);
+	if (!shortcut_exists(name)) {
+		report_error(L, "Invalid shortcut name '%s'", name.c_str());
+	}
+	get()->set_lua_shortcut(name, action, failsafe, false);
 	return 0;
 }
 
@@ -4021,6 +4394,132 @@ int LuaMapView::add_plugin_timer(lua_State* L) {
 	}
 
 	get_egbase(L).get_ibase()->add_plugin_timer(action, interval, failsafe);
+	return 0;
+}
+
+/*
+ * C Functions
+ */
+
+/* RST
+MainMenu
+--------
+
+.. class:: MainMenu
+
+   .. versionadded:: 1.3
+
+   The main menu screen is the main widget and the root of all panels.
+
+   This class may not be accessed in a game or the editor.
+   You can construct as many instances of it as you like,
+   and they will all refer to the same main menu.
+*/
+const char LuaMainMenu::className[] = "MainMenu";
+const MethodType<LuaMainMenu> LuaMainMenu::Methods[] = {
+   METHOD(LuaMainMenu, set_keyboard_shortcut),
+   METHOD(LuaMainMenu, set_keyboard_shortcut_release),
+   METHOD(LuaMainMenu, add_plugin_timer),
+   {nullptr, nullptr},
+};
+const PropertyType<LuaMainMenu> LuaMainMenu::Properties[] = {
+   {nullptr, nullptr, nullptr},
+};
+
+LuaMainMenu::LuaMainMenu(lua_State* L) : LuaPanel(&get_main_menu(L)) {
+}
+
+void LuaMainMenu::__unpersist(lua_State* L) {
+	panel_ = &get_main_menu(L);
+}
+
+/*
+ * Lua Functions
+ */
+
+/* RST
+   .. method:: set_keyboard_shortcut(internal_name, action[, failsafe=true])
+
+      Associate a named keyboard shortcut with a piece of code to run when the shortcut is pressed.
+      This replaces any existing action associated with pressing the shortcut.
+
+      :arg internal_name: The internal name of the keyboard shortcut.
+      :type internal_name: :class:`string`
+      :arg action: The Lua code to run.
+      :type action: :class:`string`
+      :arg failsafe: In event of an error, an error message is shown and the shortcut binding
+         is removed. If this is set to :const:`false`, the game will be aborted with no
+         error handling instead.
+      :type failsafe: :class:`boolean`
+
+      :see also: :meth:`set_keyboard_shortcut_release`
+*/
+int LuaMainMenu::set_keyboard_shortcut(lua_State* L) {
+	std::string name = luaL_checkstring(L, 2);
+	std::string action = luaL_checkstring(L, 3);
+	bool failsafe = lua_gettop(L) < 4 || luaL_checkboolean(L, 4);
+	if (!shortcut_exists(name)) {
+		report_error(L, "Invalid shortcut name '%s'", name.c_str());
+	}
+	get()->set_lua_shortcut(name, action, failsafe, true);
+	return 0;
+}
+
+/* RST
+   .. method:: set_keyboard_shortcut_release(internal_name, action[, failsafe=true])
+
+      Associate a named keyboard shortcut with a piece of code to run when the shortcut is released
+      after having been previously pressed.
+      This replaces any existing action associated with releasing the shortcut.
+
+      You don't need this in normal cases. When in doubt, use only meth:`set_keyboard_shortcut`.
+
+      :arg internal_name: The internal name of the keyboard shortcut.
+      :type internal_name: :class:`string`
+      :arg action: The Lua code to run.
+      :type action: :class:`string`
+      :arg failsafe: In event of an error, an error message is shown and the shortcut binding
+         is removed. If this is set to :const:`false`, the game will be aborted with no
+         error handling instead.
+      :type failsafe: :class:`boolean`
+
+      :see also: :meth:`set_keyboard_shortcut`
+*/
+int LuaMainMenu::set_keyboard_shortcut_release(lua_State* L) {
+	std::string name = luaL_checkstring(L, 2);
+	std::string action = luaL_checkstring(L, 3);
+	bool failsafe = lua_gettop(L) < 4 || luaL_checkboolean(L, 4);
+	if (!shortcut_exists(name)) {
+		report_error(L, "Invalid shortcut name '%s'", name.c_str());
+	}
+	get()->set_lua_shortcut(name, action, failsafe, false);
+	return 0;
+}
+
+/* RST
+   .. method:: add_plugin_timer(action, interval[, failsafe=true])
+
+      Register a piece of code that will be run periodically as long as the main menu is running
+      and its Lua context is not reset.
+
+      :arg action: The Lua code to run.
+      :type action: :class:`string`
+      :arg interval: The interval in milliseconds realtime in which the code will be invoked.
+      :type interval: :class:`int`
+      :arg failsafe: In event of an error, an error message is shown and the timer is removed.
+         If this is set to :const:`false`, the game will be aborted with no error handling instead.
+      :type failsafe: :class:`boolean`
+*/
+int LuaMainMenu::add_plugin_timer(lua_State* L) {
+	std::string action = luaL_checkstring(L, 2);
+	uint32_t interval = luaL_checkuint32(L, 3);
+	bool failsafe = lua_gettop(L) < 4 || luaL_checkboolean(L, 4);
+
+	if (interval == 0) {
+		report_error(L, "Timer interval must be non-zero");
+	}
+
+	get()->add_plugin_timer(action, interval, failsafe);
 	return 0;
 }
 
@@ -4075,6 +4574,44 @@ static int L_get_shortcut(lua_State* L) {
 		lua_pushstring(L, shortcut_string_for(shortcut_from_string(name), true).c_str());
 	} catch (const WException& e) {
 		report_error(L, "Unable to query shortcut for '%s': %s", name.c_str(), e.what());
+	}
+	return 1;
+}
+
+/* RST
+.. method:: shortcut_exists(internal_name)
+
+   .. versionadded:: 1.3
+
+   Check whether the given name belongs to a known keyboard shortcut.
+
+   :arg internal_name: The internal name of the keyboard shortcut.
+   :type internal_name: :class:`string`
+   :returns: Whether the named shortcut exists.
+   :rtype: :class:`boolean`
+*/
+static int L_shortcut_exists(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(shortcut_exists(luaL_checkstring(L, -1))));
+	return 1;
+}
+
+/* RST
+.. method:: get_all_keyboard_shortcut_names()
+
+   .. versionadded:: 1.3
+
+   List the internal names of all known keyboard shortcuts.
+
+   :returns: The names.
+   :rtype: :class:`array` of :class:`string`
+*/
+static int L_get_all_keyboard_shortcut_names(lua_State* L) {
+	lua_newtable(L);
+	int i = 1;
+	for (const std::string& name : get_all_keyboard_shortcut_names()) {
+		lua_pushint32(L, i++);
+		lua_pushstring(L, name.c_str());
+		lua_rawset(L, -3);
 	}
 	return 1;
 }
@@ -4157,8 +4694,11 @@ static int L_show_messagebox(lua_State* L) {
 	std::string text = luaL_checkstring(L, 2);
 	bool allow_cancel = nargs < 3 || luaL_checkboolean(L, 3);
 
+	const bool mainmenu = is_main_menu(L);
 	UI::WLMessageBox m(
-	   get_egbase(L).get_ibase(), UI::WindowStyle::kWui, title, text,
+	   mainmenu ? static_cast<UI::Panel*>(&get_main_menu(L)) :
+	              static_cast<UI::Panel*>(get_egbase(L).get_ibase()),
+	   mainmenu ? UI::WindowStyle::kFsMenu : UI::WindowStyle::kWui, title, text,
 	   allow_cancel ? UI::WLMessageBox::MBoxType::kOkCancel : UI::WLMessageBox::MBoxType::kOk);
 	UI::Panel::Returncodes result;
 	NoteThreadSafeFunction::instantiate(
@@ -4168,16 +4708,19 @@ static int L_show_messagebox(lua_State* L) {
 	return 1;
 }
 
-const static struct luaL_Reg wlui[] = {{"set_user_input_allowed", &L_set_user_input_allowed},
-                                       {"get_user_input_allowed", &L_get_user_input_allowed},
-                                       {"get_shortcut", &L_get_shortcut},
-                                       {"get_ingame_shortcut_help", &L_get_ingame_shortcut_help},
-                                       {"get_fastplace_help", &L_get_fastplace_help},
-                                       {"get_editor_shortcut_help", &L_get_editor_shortcut_help},
-                                       {"show_messagebox", &L_show_messagebox},
-                                       {nullptr, nullptr}};
+const static struct luaL_Reg wlui[] = {
+   {"set_user_input_allowed", &L_set_user_input_allowed},
+   {"get_user_input_allowed", &L_get_user_input_allowed},
+   {"get_shortcut", &L_get_shortcut},
+   {"get_ingame_shortcut_help", &L_get_ingame_shortcut_help},
+   {"get_fastplace_help", &L_get_fastplace_help},
+   {"get_editor_shortcut_help", &L_get_editor_shortcut_help},
+   {"show_messagebox", &L_show_messagebox},
+   {"shortcut_exists", &L_shortcut_exists},
+   {"get_all_keyboard_shortcut_names", &L_get_all_keyboard_shortcut_names},
+   {nullptr, nullptr}};
 
-void luaopen_wlui(lua_State* L) {
+void luaopen_wlui(lua_State* L, const bool game_or_editor) {
 	lua_getglobal(L, "wl");   // S: wl_table
 	lua_pushstring(L, "ui");  // S: wl_table "ui"
 	luaL_newlib(L, wlui);     // S: wl_table "ui" wl.ui_table
@@ -4246,8 +4789,16 @@ void luaopen_wlui(lua_State* L) {
 	add_parent<LuaWindow, LuaPanel>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
-	register_class<LuaMapView>(L, "ui", true);
-	add_parent<LuaMapView, LuaPanel>(L);
-	lua_pop(L, 1);  // Pop the meta table
+	if (game_or_editor) {
+		// Only in game and editor
+		register_class<LuaMapView>(L, "ui", true);
+		add_parent<LuaMapView, LuaPanel>(L);
+		lua_pop(L, 1);  // Pop the meta table
+	} else {
+		// Only in main menu
+		register_class<LuaMainMenu>(L, "ui", true);
+		add_parent<LuaMainMenu, LuaPanel>(L);
+		lua_pop(L, 1);  // Pop the meta table
+	}
 }
 }  // namespace LuaUi

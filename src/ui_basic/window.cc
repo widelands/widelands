@@ -136,22 +136,22 @@ inline const WindowStyleInfo& Window::window_style_info() const {
 }
 inline const FontStyleInfo& Window::title_style() const {
 	return g_style_manager->font_style(window_style_ == WindowStyle::kWui ?
-                                         FontStyle::kWuiWindowTitle :
-                                         FontStyle::kFsMenuWindowTitle);
+	                                      FontStyle::kWuiWindowTitle :
+	                                      FontStyle::kFsMenuWindowTitle);
 }
 
 void Window::update_toolbar_buttons() {
 	button_minimize_->set_pic(g_image_cache->get(is_minimal_ ?
-                                                   window_style_info().button_unminimize() :
-                                                   window_style_info().button_minimize()));
+	                                                window_style_info().button_unminimize() :
+	                                                window_style_info().button_minimize()));
 	button_minimize_->set_tooltip(is_minimal_ ? _("Restore") : _("Minimize"));
 	button_minimize_->set_visual_state(is_minimal_ ? Button::VisualState::kPermpressed :
-                                                    Button::VisualState::kRaised);
+	                                                 Button::VisualState::kRaised);
 	button_pin_->set_pic(g_image_cache->get(pinned_ ? window_style_info().button_unpin() :
-                                                     window_style_info().button_pin()));
+	                                                  window_style_info().button_pin()));
 	button_pin_->set_tooltip(pinned_ ? _("Unpin") : _("Pin"));
 	button_pin_->set_visual_state(pinned_ ? Button::VisualState::kPermpressed :
-                                           Button::VisualState::kRaised);
+	                                        Button::VisualState::kRaised);
 	button_close_->set_enabled(!pinned_);
 }
 
@@ -209,6 +209,30 @@ void Window::layout() {
 	   Vector2i(window_style_info().button_pin_x(), window_style_info().buttons_y()));
 	button_minimize_->set_pos(
 	   Vector2i(window_style_info().button_minimize_x(), window_style_info().buttons_y()));
+}
+
+void Window::update_template() {
+	Panel::update_template();
+
+	const int inw = get_inner_w();
+	const int inh = get_inner_h();
+	const int x = get_x() + get_lborder();
+	const int y = get_y() + get_tborder();
+
+	set_border(
+	   window_style_info().left_border_thickness(), window_style_info().right_border_thickness(),
+	   window_style_info().top_border_thickness(), window_style_info().bottom_border_thickness());
+
+	set_inner_size(inw, inh);
+	set_pos(Vector2i(x - get_lborder(), y - get_tborder()));
+
+	button_close_->set_pic(g_image_cache->get(window_style_info().button_close()));
+	for (Button* b : {button_close_, button_pin_, button_minimize_}) {
+		b->set_size(window_style_info().button_size(), window_style_info().button_size());
+	}
+	update_toolbar_buttons();
+
+	layout();
 }
 
 /**
@@ -405,16 +429,16 @@ void Window::draw(RenderTarget& dst) {
 void Window::draw_border(RenderTarget& dst) {
 	const RGBAColor& focus_color =
 	   ((get_parent() != nullptr) && get_parent()->focused_child() == this) || is_modal() ?
-         window_style_info().window_border_focused() :
-         window_style_info().window_border_unfocused();
+	      window_style_info().window_border_focused() :
+	      window_style_info().window_border_unfocused();
 
 	{  // Top border
 		const int img_len = window_style_info().border_top()->width();
 		const int border_x1 = is_minimal() ? window_style_info().corner_minimal_left()->width() :
-                                           window_style_info().corner_top_left()->width();
+		                                     window_style_info().corner_top_left()->width();
 		const int border_x2 =
 		   get_w() - (is_minimal() ? window_style_info().corner_minimal_right()->width() :
-                                   window_style_info().corner_top_right()->width());
+		                             window_style_info().corner_top_right()->width());
 
 		// Middle
 		int pos = border_x1;

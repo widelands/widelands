@@ -864,10 +864,10 @@ void RemoteInteractionWindow::update_data() {
 
 	voting_stats_summary_.set_text(
 	   info_->number_of_votes() != 0u ?
-         format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
+	      format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
 	                        "Average rating: %1$.3f (%2$u votes)", info_->number_of_votes()),
 	               info_->average_rating(), info_->number_of_votes()) :
-         _("No votes yet"));
+	      _("No votes yet"));
 
 	uint32_t most_votes = 1;
 	for (uint32_t v : info_->votes) {
@@ -885,8 +885,8 @@ void RemoteInteractionWindow::update_data() {
 	text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 	           .as_font_tag(
 	              info_->user_comments.empty() ?
-                    _("No comments yet.") :
-                    format(ngettext("%u comment:", "%u comments:", info_->user_comments.size()),
+	                 _("No comments yet.") :
+	                 format(ngettext("%u comment:", "%u comments:", info_->user_comments.size()),
 	                        info_->user_comments.size()));
 	text += "</p></rt>";
 	comments_header_.set_text(text);
@@ -992,11 +992,17 @@ void RemoteInteractionWindow::login_changed() {
 		write_comment_.set_tooltip(_("Please log in to comment"));
 		own_voting_.set_enabled(false);
 		own_voting_.set_tooltip(_("Please log in to vote"));
-	} else {
+	} else if (ends_with(info_->internal_name, ".wad")) {
 		write_comment_.set_enabled(true);
 		write_comment_.set_tooltip("");
 		own_voting_.set_enabled(true);
 		own_voting_.set_tooltip("");
+	} else {
+		// No i18n markup here, since these are temporary strings
+		write_comment_.set_enabled(false);
+		write_comment_.set_tooltip("Commenting on maps is not yet implemented");
+		own_voting_.set_enabled(false);
+		own_voting_.set_tooltip("Voting on maps is not yet implemented");
 	}
 
 	admin_action_.set_visible(parent_.net().is_admin());

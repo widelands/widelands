@@ -66,12 +66,12 @@ wl_library(base_geometry
     vector.cc
 )
 
-wl_library(base_md5
+wl_library(base_crypto
   SRCS
-    md5.cc
-    md5.h
+    crypto.cc
+    crypto.h
   DEPENDS
-    base_macros
+    third_party_libmd
 )
 
 wl_library(base_random

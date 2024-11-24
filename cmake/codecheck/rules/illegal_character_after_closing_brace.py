@@ -6,6 +6,7 @@
 [^] list. it catches code like "struct {T x}a;", which should be "struct.
 
 {T x} a;". Characters after // are ignored.
+
 """
 
 error_msg = 'Illegal character after closing brace.'

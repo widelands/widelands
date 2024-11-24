@@ -291,9 +291,9 @@ void MapsAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 			      format(_("Minimum Widelands Version: %s"),
 			             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			                .as_font_tag(entry.data.minimum_required_widelands_version.empty() ?
-                                         /** TRANSLATORS: No minimum required version */
-                                         pgettext("version", "(none)") :
-                                         entry.data.minimum_required_widelands_version)),
+			                                /** TRANSLATORS: No minimum required version */
+			                                pgettext("version", "(none)") :
+			                                entry.data.minimum_required_widelands_version)),
 			      format(_("Description: %s"),
 			             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			                .as_font_tag(entry.data.description))));
@@ -437,9 +437,9 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 		UI::WLMessageBox mbox(
 		   &main_menu_, UI::WindowStyle::kFsMenu, _("Delete"),
 		   selected_map.empty() ?
-            format(_("Do you really want to delete the directory ‘%s’ and all its contents?"),
+		      format(_("Do you really want to delete the directory ‘%s’ and all its contents?"),
 		             select.back()) :
-            format(_("Do you really want to delete the map ‘%s’?"), selected_map),
+		      format(_("Do you really want to delete the map ‘%s’?"), selected_map),
 		   UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
 		if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;

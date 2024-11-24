@@ -21,11 +21,14 @@
 
 #include <memory>
 
+#include "scripting/logic.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "ui_fsmenu/menu.h"
+#include "wui/plugins.h"
+#include "wui/unique_window_handler.h"
 
 namespace Widelands {
 class Game;
@@ -101,6 +104,24 @@ public:
 
 	Widelands::Game* create_safe_game(bool show_error = true);
 
+	UniqueWindowHandler& unique_windows() {
+		return unique_windows_;
+	}
+
+	LuaFsMenuInterface& lua() {
+		return *lua_;
+	}
+
+	void
+	set_lua_shortcut(const std::string& name, const std::string& action, bool failsafe, bool down) {
+		plugin_actions_->set_keyboard_shortcut(name, action, failsafe, down);
+	}
+
+	void reinit_plugins();
+	void add_plugin_timer(const std::string& action, uint32_t interval, bool failsafe) {
+		plugin_actions_->add_plugin_timer(action, interval, failsafe);
+	}
+
 	// Signal ending immediately from any phase
 	void abort_splashscreen();
 
@@ -109,6 +130,11 @@ protected:
 
 private:
 	void layout() override;
+	void think() override;
+
+	UniqueWindowHandler unique_windows_;
+	std::unique_ptr<LuaFsMenuInterface> lua_;
+	std::unique_ptr<PluginActions> plugin_actions_;
 
 	// Called only from splash screen phase to signal start of fading
 	void end_splashscreen();

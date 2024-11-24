@@ -50,7 +50,7 @@ private:
 
 	UI::Box objective_box_;
 
-	using ListType = UI::Listselect<const Widelands::Objective&>;
+	using ListType = UI::Listselect<const Widelands::Objective*>;
 	ListType objective_list_;
 	UI::MultilineTextarea objective_text_;
 };

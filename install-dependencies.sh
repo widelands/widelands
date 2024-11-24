@@ -153,8 +153,7 @@ elif [ "$DISTRO" = "mageia" ]; then
 
 elif [ "$DISTRO" = "debian" ]; then
    echo "Installing dependencies for Debian/Ubuntu Linux, Linux Mint..."
-   sudo apt-get install $@ git cmake g++ gcc libasio-dev libglew-dev libpng-dev libsdl2-dev \
-    libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev libminizip-dev
+   sudo apt-get install $@ $(cat "${WL_DIR}"/utils/ubuntu/packages)
 
 elif [ "$DISTRO" = "freebsd" ]; then
    echo "Installing dependencies for FreeBSD..."
@@ -177,9 +176,21 @@ elif [ "$DISTRO" = "msys64" ]; then
 
 elif [ "$DISTRO" = "homebrew" ]; then
    echo "Installing dependencies for Mac Homebrew..."
+   # Workaround to get rid of github workflow annotation warnings about already installed packages.
+   # Alternatively we could use --quiet in the CI.
+   # TODO(tothxa): homebrew developers promised to look into cutting back the annotations,
+   #               we may be able to remove the filtering if they get around to it.
+   INSTALLED="$(brew list)"
+   PKGS=''
    # TODO(k.halfmann): minizip package of brew fails to link dynamically, See also #5620
-   brew install $@ asio git cmake doxygen glew graphviz icu4c jpeg \
-    libogg libpng libvorbis ninja python sdl2 sdl2_image sdl2_mixer sdl2_ttf zlib
+   for PKG in $(cat "${WL_DIR}"/utils/macos/packages) ; do
+      if ! echo "$INSTALLED" | grep -q $PKG ; then
+         PKGS="$PKGS $PKG"
+      else
+         echo "$PKG is already installed, skipping."
+      fi
+   done
+   brew install $@ $PKGS
 
 elif [ "$DISTRO" = "solus" ]; then
    echo "Installing dependencies for Solus..."
@@ -195,9 +206,9 @@ elif [ "$DISTRO" = "void" ]; then
 
 elif [ "$DISTRO" = "vcpkg" ]; then
    echo "Installing dependencies for vcpkg..."
-   vcpkg install --disable-metrics $@ asio gettext[tools] libpng icu glbinding sdl2 sdl2-ttf \
-     sdl2-mixer[core,libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 \
-     harfbuzz opusfile libwebp
+   # The dependencies must be on a single line, because linebreak handling is broken
+   # in the github runner shell...
+   vcpkg install --disable-metrics $@ $(cat "${WL_DIR}"/utils/windows/vcpkg_deps)
 
 elif [ -z "$DISTRO" ]; then
    echo "ERROR. Unable to detect your operating system."
