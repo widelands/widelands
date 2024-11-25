@@ -39,6 +39,7 @@ enum class AddOnCategory {
 	kWorld,
 	kTribes,
 	kScript,
+	kSingleMap,
 	kMaps,
 	kMapGenerator,
 	kCampaign,
@@ -59,6 +60,7 @@ struct AddOnCategoryInfo {
 	std::function<std::string()> descname;
 	std::string icon;
 	bool network_relevant;
+	bool hide;
 };
 
 using AddOnVersion = std::vector<uint32_t>;
@@ -127,6 +129,19 @@ struct AddOnInfo {
 	uint32_t download_count = 0;       ///< Total times downloaded.
 	uint32_t votes[kMaxRating] = {0};  ///< Total number of votes for each of the ratings 1-10.
 	std::map<size_t, AddOnComment> user_comments;
+
+	/* Values specific to kSingleMap add-ons, unused for other types. */
+	std::string unlocalized_map_hint;              ///< Map hint.
+	std::string unlocalized_map_uploader_comment;  ///< Comment by the uploader.
+	std::function<std::string()> map_hint;
+	std::function<std::string()> map_uploader_comment;
+
+	std::string map_file_name;   ///< Map file name (may contain whitespace and special characters).
+	std::string map_world_name;  ///< Map world name (unlocalized).
+	uint16_t map_width;          ///< Map width.
+	uint16_t map_height;         ///< Map height.
+	uint8_t map_nr_players;      ///< Maximum number of players on the map.
+	/* End of kSingleMap-specific section. */
 
 	// Development builds (version 1.x~n) are treated as the next stable version (version 1.x)
 	// `warn_future` enables logging of the match in development versions if the addon requires

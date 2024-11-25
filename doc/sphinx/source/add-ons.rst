@@ -219,7 +219,7 @@ The server keeps a repository of all add-on ``*.mo`` files which are automatical
 Uploading
 ---------
 
-The only supported way to upload an add-on is to use the in-game add-ons manager. Log in with your Widelands website user profile and online gaming password (i.e., the same credentials as for the metaserver), and use the Upload section in the add-ons manager’s third tab. If you previously submitted an add-on with the same name and lower version number, the new upload will be made available as an upgrade. You can upload screenshots for your add-ons in the same way.
+The only supported way to upload an add-on is to use the in-game add-ons manager. Log in with your Widelands website user profile and online gaming password (i.e., the same credentials as for the metaserver), and use the Upload section in the add-ons manager’s last tab. If you previously submitted an add-on with the same name and lower version number, the new upload will be made available as an upgrade. You can upload screenshots for your add-ons in the same way.
 
 When providing an upgrade, always ensure that your modifications are based on the version that was downloaded from the server rather than your original sources, as the maintainers may make minor maintenance modifications to the versions stored there.
 
@@ -230,3 +230,10 @@ By uploading, you agree to publish your creation under the terms of the GNU Gene
 You can only upload upgrades and screenshots for your own add-ons (unless you are a server administrator).
 
 If you run into problems (e.g. the server refuses to accept an upload) or have advanced needs such as deletion of your add-ons or collaborating on someone else’s add-on, you can also ask in the Widelands forum under https://www.widelands.org/forum/topic/5073/.
+
+Website Maps
+------------
+
+Website maps are also made available for download through the add-ons manager. They are not, however, packaged as add-ons, nor stored on the add-ons server, but rather passed through as raw WMF files from the website's archive.
+Downloaded website maps are stored in the ‘maps/Downloaded’ directory under the Widelands home directory, just like manually downloaded maps should be.
+Translations and server database integration (comments, ratings, download counter) are not yet implemented for website maps.

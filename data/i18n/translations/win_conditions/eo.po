@@ -118,7 +118,7 @@ msgstr "Kolektantoj"
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest score after %s wins the game."
-msgstr "Vi ricevas poentojn por altvaloraj varoj en viaj magazenoj. La ludanto kun la plej alta poentaro post %s gajnos la ludon."
+msgstr "Vi ricevas poentojn por altvaloraj varoj en viaj stokejoj. La ludanto kun la plej alta poentaro post %s gajnos la ludon."
 
 #. TRANSLATORS: Will be inserted into "The player with the highest score after
 #. %s wins the game."
@@ -172,7 +172,7 @@ msgstr "Aŭtokrato"
 msgid ""
 "The tribe or team that can defeat all others wins the game! This means the "
 "opponents do not have any headquarters, ports or warehouses left."
-msgstr "La tribo aŭ teamo, kiu povas venki ĉiujn aliajn, gajnas la ludon! Tio signifas, ke la kontraŭuloj ne havas plu ĉefstabejojn, havenojn aŭ magazenojn."
+msgstr "La tribo aŭ teamo, kiu povas venki ĉiujn aliajn, gajnas la ludon! Tio signifas, ke la kontraŭuloj ne havas plu ĉefstabejojn, havenojn aŭ stokejojn."
 
 #: ../../../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
@@ -316,7 +316,7 @@ msgstr "Vi estas venkita!"
 msgid ""
 "You lost your last warehouse and are therefore defeated. You may continue as"
 " spectator if you want."
-msgstr "Vi perdis vian lastan magazenon kaj tial vi malvenkis. Vi povas daŭrigi kiel spektanto, se vi volas."
+msgstr "Vi perdis vian lastan stokejon kaj tial vi malvenkis. Vi povas daŭrigi kiel spektanto, se vi volas."
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:57
 msgid "You won"
