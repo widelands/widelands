@@ -6,6 +6,7 @@
 # David D, 2023
 # C138, 2023
 # Arthinet Balika, 2023
+# Laurent Godard, 2024
 # 
 msgid ""
 msgstr ""
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
-"Last-Translator: Arthinet Balika, 2023\n"
+"Last-Translator: Laurent Godard, 2024\n"
 "Language-Team: French (https://app.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,7 +45,7 @@ msgstr "Trouver Reebaud"
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:34
 msgid "Expand your territory until you meet your old friend Reebaud."
 msgstr ""
-"élargissez votre territoire jusqu'à ce que vous rencontriez votre vieil ami "
+"Elargissez votre territoire jusqu'à ce que vous rencontriez votre vieil ami "
 "Reebaud"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:39
@@ -143,7 +144,7 @@ msgstr ""
 "Le légat et moi n’avons plus affaire l’un à l’autre à présent. J'ai pris en "
 "dégoût son attitude supérieure pendant le voyage, et surtout la manière "
 "dédaigneuse avec laquelle il traitait ses galériens. Il ne semblait pas lui "
-"venir à l'esprit qu'ils étaient des êtres humains comme lui et moi ; ou si "
+"venir à l'esprit qu'ils étaient des êtres humains comme lui et moi ; ou si "
 "c'était le cas, il agissait comme si eux-mêmes étaient responsables de leur "
 "mauvaise fortune. Je ne regrette pas de ne plus le revoir. Il a installé son"
 " camp à une certaine distance du mien afin que nous ne nous gênions pas."
@@ -157,7 +158,7 @@ msgid ""
 "that we will find him soon."
 msgstr ""
 "Mais maintenant que nous sommes devenus si proches, je suis trop impatient "
-"pour rester assis à méditer sur le passé. Vite maintenant ! Allons à la "
+"pour rester assis à méditer sur le passé. Vite maintenant ! Allons à la "
 "recherche de mon ami. Bien que je n'aie encore vu aucun signe d'habitation "
 "humaine par ici, je n'ai aucun doute que nous le retrouverons bientôt."
 
@@ -183,7 +184,7 @@ msgid ""
 "countryside. Perhaps they know where Reebaud can be found?"
 msgstr ""
 "Nos soldats ont aperçu des étrangers – les premiers indigènes de cette "
-"campagne austère. Peut-être savent-ils où se trouve Reebaud ?"
+"campagne austère. Peut-être savent-ils où se trouve Reebaud ?"
 
 #. TRANSLATORS: Claus Lembeck – Amazons 1b
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:100
@@ -192,9 +193,9 @@ msgid ""
 "Henneke. We come in search of my friend Reebaud. May I ask if you know where"
 " we may find him?"
 msgstr ""
-"Paix et salutations, bon peuple ! Je m'appelle Claus Lembeck et voici mon "
+"Paix et salutations, bon peuple ! Je m'appelle Claus Lembeck et voici mon "
 "fils Henneke. Nous venons à la recherche de mon ami Reebaud. Puis-je vous "
-"demander si vous savez où nous pouvons le trouver ?"
+"demander si vous savez où nous pouvons le trouver ?"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:104
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:116
@@ -221,8 +222,8 @@ msgid ""
 "We – Amazons. You – strangers. Land – here – own – we. You – trespassers. "
 "You – enemies. We – you – all – make – dead!"
 msgstr ""
-"Nous – les Amazones. Vous – des étrangers. La terre – ici – nous appartient."
-" Vous – les intrus. Vous – ennemis. Nous – faire – vous– tous – des morts !"
+"Nous – les Amazones. Vous – des étrangers. La terre – ici – à nous. Vous – "
+"les intrus. Vous – ennemis. Nous – faire – vous– tous – des morts !"
 
 #. TRANSLATORS: Henneke Lembeck – Amazons 3
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:118
@@ -264,7 +265,7 @@ msgstr "Rencontré enfin"
 msgid ""
 "At last! These people’s buildings look familiar. It must be Reebaud’s tribe."
 msgstr ""
-"Enfin! Les bâtiments de ces gens semblent familiers. Ce doit être la tribu "
+"Enfin ! Les bâtiments de ces gens semblent familiers. Ce doit être la tribu "
 "de Reebaud."
 
 #. TRANSLATORS: Reebaud – Reebaud 2
@@ -274,7 +275,7 @@ msgid ""
 " be my old friend Claus who meets me so far away from home!"
 msgstr ""
 "Mes yeux me trompent-ils, ou un esprit me joue-t-il des tours ? Ce ne peut "
-"sûrement pas être mon vieil ami Claus qui me rencontre si loin de chez moi !"
+"sûrement pas être mon vieil ami Claus qui me rencontre si loin de chez moi !"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 3
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:138
@@ -297,7 +298,7 @@ msgid ""
 msgstr ""
 "Je suis encouragé que vous vous soyez donné tant de mal pour me rencontrer. "
 "Mais vous n'avez pas fait ça juste pour me parler à nouveau. Qu'est-ce qui "
-"vous dérange ? Tout comme vous m'avez aidé à repousser une invasion "
+"vous dérange ? Tout comme vous m'avez aidé à repousser une invasion "
 "Holstein, je vais maintenant aider mon ami si je le peux."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 5
@@ -312,7 +313,7 @@ msgstr ""
 "En effet, je suis venu vous demander de l'aide. Vous vous souvenez "
 "certainement d'Atterdag, le roi des Danois, qui nous causa bien des "
 "difficultés à nous les Frisons. Vous ne l'avez jamais combattu vous-même, il"
-" était trop méfiant de votre réputation pour vous agresser directement ; "
+" était trop méfiant de votre réputation pour vous agresser directement ; "
 "mais je me suis fait de lui un ennemi juré en aidant souvent ceux qu'il "
 "cherchait à conquérir."
 
@@ -361,7 +362,7 @@ msgid ""
 msgstr ""
 "Si vous étiez arrivé une semaine plus tôt, j'aurais accédé à votre demande "
 "instantanément. Aujourd'hui, cependant, une pointe d'inquiétude est apparue "
-"à l'horizon. Je le dis littéralement ; Des étrangers sont venus de loin et "
+"à l'horizon. Je le dis littéralement ; Des étrangers sont venus de loin et "
 "cherchent à nous chasser et à s'emparer de nos terres comme nous l'avons "
 "fait nous-mêmes, poussés par le besoin, en les enlevant aux gens hostiles "
 "qui vivaient ici. Des barbares belliqueux et un fripon impérial nommé "
@@ -439,7 +440,7 @@ msgstr ""
 "Je crois que nous avons déjà rencontré ces intrus. Il serait inconvenant de "
 "s'asseoir en dégustant des tasses d'hydromel pendant que vous vous battez "
 "pour votre vie. Dans l'esprit de notre amitié, et en l'honneur des hommes de"
-" bien que vous avez perdus, nous combattrons les envahisseurs à vos côtés !"
+" bien que vous avez perdus, nous combattrons les envahisseurs à vos côtés !"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9b
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:189
@@ -452,7 +453,7 @@ msgstr ""
 "Vraiment, il serait très inconvenant de s'asseoir en dégustant des tasses "
 "d'hydromel pendant que vous vous battez pour votre vie. Dans l'esprit de "
 "notre amitié, et en l'honneur des hommes de bien que vous avez perdus, nous "
-"chercherons ces envahisseurs et les combattrons à vos côtés !"
+"chercherons ces envahisseurs et les combattrons à vos côtés !"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud 9c
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:196
@@ -492,8 +493,8 @@ msgid ""
 "Wait a minute, you two. What was this you said? You assaulted and murdered "
 "Murilius, a Proconsule of the Empire?"
 msgstr ""
-"Attendez une minute, vous deux. Qu'est-ce que tu as dit ? Vous avez agressé "
-"et assassiné Murilius, un proconsule de l'Empire ?"
+"Attendez une minute, vous deux. Qu'est-ce que tu as dit ? Vous avez agressé "
+"et assassiné Murilius, un proconsule de l'Empire ?"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:207
@@ -507,7 +508,7 @@ msgstr ""
 "l'Empire. Dire que j'ai été envoyé pour enquêter si Murilius avait négligé "
 "de payer ses impôts par nécessité ou par cupidité, et que je découvre "
 "maintenant que lui et tous ses hommes ont été ignoblement assassinés par des"
-" envahisseurs arrogants !"
+" envahisseurs arrogants !"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:210
@@ -520,7 +521,7 @@ msgid ""
 msgstr ""
 "Par votre acte, vous vous êtes attiré la colère de l'Empire, et je jure par "
 "Jupiter Optimus Maximus que je n'aurai pas de repos jusqu'à ce que vous et "
-"les vôtres mentiez dans votre propre sang. Je n'aurai pitié qu'envers ceux "
+"les vôtres gisiez dans votre propre sang. Je n'aurai pitié qu'envers ceux "
 "qui étaient alors trop jeunes pour avoir participé aux combats, que je "
 "garderai en vie pour remplacer la main d'oeuvre de la galerie qui n'aura pas"
 " survécu au dernier voyage."
@@ -533,8 +534,8 @@ msgid ""
 "deplorable jester with you for?"
 msgstr ""
 "Oh, maintenant j'ai peur. Dites-moi, brave homme, la bêtise est-elle une "
-"condition pour être nommé représentant de l'Empire ? Claus, pourquoi as-tu "
-"amené ce déplorable bouffon avec toi ?"
+"condition pour être nommé représentant de l'Empire ? Claus, pourquoi as-tu "
+"amené ce déplorable bouffon avec toi ?"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 12
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:222
@@ -544,11 +545,11 @@ msgid ""
 "that it is I who brought this trouble to you, the least I can do is to take "
 "responsibility for ridding you of him."
 msgstr ""
-"suis désolé. Il nous a offert un passage sur son navire, et je n'avais aucun"
-" moyen de savoir ni aucune raison de supposer qu'il chercherait une querelle"
-" avec vous. Mais puisque c'est moi qui vous ai causé ce trouble, le moins "
-"que je puisse faire est de prendre la responsabilité de vous débarrasser de "
-"lui."
+"Je suis désolé. Il nous a offert un passage sur son navire, et je n'avais "
+"aucun moyen de savoir ni aucune raison de supposer qu'il chercherait une "
+"querelle avec vous. Mais puisque c'est moi qui vous ai causé ce trouble, le "
+"moins que je puisse faire est de prendre la responsabilité de vous "
+"débarrasser de lui."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:228
 msgid "Something is going on…"
@@ -566,7 +567,7 @@ msgstr ""
 "nord-ouest. Il a haleté à propos de sa tribu attaquée par des étrangers "
 "vicieux, mais il est mort avant de pouvoir nous en dire plus. Son armure et "
 "ses armes semblaient étonnamment familières. Je me demande si la tribu de "
-"Reebaud est en danger ?"
+"Reebaud est en danger ?"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:233
@@ -604,7 +605,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:253
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:262
 msgid "You Have Lost"
-msgstr "Tu as perdu"
+msgstr "Vous avez perdu"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:245
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:254
@@ -775,8 +776,8 @@ msgid ""
 msgstr ""
 "Nos soldats se sont rétablis et vous avez bien dépensé votre temps en "
 "augmentant la force de votre armée. Maintenant, j'irai vers le Sud avec vous"
-" avec tous mes soldats, à l'exception d'une petite garnison pour sauvegarder"
-" mes terres, et nous reconquérirons votre île !"
+" avec tous mes soldats, à l'exception d'une petite garnison pour garder mes "
+"terres, et nous reconquérirons votre île !"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/fri04.wmf/scripting/tribes/empire_port_large/init.lua:8
