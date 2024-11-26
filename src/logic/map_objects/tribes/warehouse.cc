@@ -1480,6 +1480,10 @@ void Warehouse::check_remove_stock(Game& game) {
 		if (get_worker_policy(widx) != StockPolicy::kRemove || (get_workers().stock(widx) == 0u)) {
 			continue;
 		}
+		if (widx == owner().tribe().soldier() &&
+		    get_workers().stock(widx) <= get_desired_soldier_count()) {
+			continue;
+		}
 
 		Worker& worker = launch_worker(game, widx, Requirements());
 		worker.start_task_leavebuilding(game, true);
@@ -1515,7 +1519,7 @@ void Warehouse::request_soldier_callback(Game& game,
 	wh.soldier_control_.incorporate_soldier(game, s);
 }
 
-std::string Warehouse::info_string(const InfoStringFormat& isf) {
+std::string Warehouse::warehouse_census_string() const {
 	// U+2654 white chess king character
 	// "👑" U+1F451 crown character is missing from our font
 	static const std::string hq_fmt = "♔&nbsp;%s&nbsp;♔";
@@ -1526,24 +1530,22 @@ std::string Warehouse::info_string(const InfoStringFormat& isf) {
 	// "📦" U+1F4E6 package character is missing from our font
 	static const std::string wh_fmt = "⟰&nbsp;%s&nbsp;⟰";
 
-	if (isf == InfoStringFormat::kCensus) {
-		std::string icon_format;
-		if (descr().get_isport()) {
-			icon_format = port_fmt;
-		} else if (descr().get_conquers() > 0) {
-			icon_format = hq_fmt;
-		} else {
-			icon_format = wh_fmt;
-		}
-		std::string name = get_warehouse_name();
-		if (name.empty()) {
-			name = descr().descname();
-			// e.g. Temple of Vesta in emp04
-			replace_all(name, " ", " ");
-		}
-		return format(icon_format, richtext_escape(name));
+	std::string icon_format;
+	if (descr().get_isport()) {
+		icon_format = port_fmt;
+	} else if (descr().get_conquers() > 0) {
+		icon_format = hq_fmt;
+	} else {
+		icon_format = wh_fmt;
 	}
-	return Building::info_string(isf);
+	std::string name = get_warehouse_name();
+	if (name.empty()) {
+		name = descr().descname();
+		// See explanation in set_warehouse_name().
+		// Needed because of e.g. Temple of Vesta in emp04
+		replace_all(name, " ", " ");
+	}
+	return format(icon_format, richtext_escape(name));
 }
 
 void Warehouse::update_statistics_string(std::string* str) {
