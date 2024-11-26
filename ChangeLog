@@ -1,5 +1,170 @@
 [TOC]
 
+## Post-1.2.1 until [git a065ca7](https://codeberg.org/wl/widelands/commit/a065ca721cce8427891ba7765148e5be52b9e83f)
+
+### Animations, Icons and Overlays
+
+
+### Sounds and Music
+
+- Added the ability to skip to next music track (CB #4928 / GH #6568)
+
+
+### Tutorials and Campaigns
+
+- bar02: Adjust check for sentry in 'basic economy' objective (GH #6482 / CB #4844)
+- Fix empire 4 starting bug (GH #6508 / CB #4869)
+- atl01: Don't eat sawdust (GH #6521 / CB #4882)
+
+
+### Scripting
+
+- Add Lua function `play_sound` (CB #4791 / GH #6429)
+- New Map Object Program `script=<function>` (CB #4864 / GH #6503)
+- Expose more functions to Lua Dropdown and Listselect API (CB #4848 / GH #6486)
+- Make mapobjects findeable by their name from worker program findobject (CB #4855 / GH #6493)
+- Lua attribute `player.ai_type` (GH #6001 / CB #4412)
+
+
+### Maps
+
+- Remove playername duplicity from Astoria map (CB #4767 / GH #6405)
+
+
+### Add-Ons
+
+- Allow plugins to define hyperlink targets (CB #4794 / GH #6432)
+- Update add-on i18n for tinygettext (CB #4815 / GH #6453)
+- Allow themes to override the dither edge mask (CB #4814 / GH #6452)
+- Ignore hidden files when uploading add-on (CB #4779 / GH #6417)
+- Make add-on upload more robust against long processing times and show better error messages (CB #4799 / GH #6437)
+- Allow changing ware and worker target quantities and preciousness in `modify_unit` (GH #6451 / CB #4813)
+- Check for illegal filenames in add-on before upload (GH #6495 / CB #4857)
+- Plugins in Main Menu (CB #4748 / GH #6386)
+- Show add-ons alpha server name earlier (CB #4911 / GH #6550)
+- Keyboard shortcuts for add-ons (CB #4889 / GH #6528)
+- Add-Ons Website Maps Integration (CB #4692 / GH #6329)
+
+
+### Saveloading
+
+
+### AI
+
+
+### Gameplay
+
+- Fix soldier request for expedition ships (CB #4765 / GH #6403)
+- Economic Districts (CB #4708 / GH #6345)
+
+
+### User Interface
+
+- Prettier long dropout queues (CB #4789 / GH #6427)
+- Add context menus to TextInput and window titlebar (CB #4790 / GH #6428)
+- Message preview archiving enhancements (CB #4735 / GH #6372)
+- Cancel roadbuilding with Esc key (GH #6456 / CB #4818)
+- Ship window improvements (GH #6422 / CB #4784)
+- Dropdown Listselect: horizontal centering of pics (CB #4845 / GH #6483)
+- Make Show/Hide buildings option in game also affect immovables (CB #4861 / GH #6499)
+- Disable objectives button if there are no current objectives (CB #4867 / GH #6506)
+- BuildingStatisticsMenu: fix update spam when minimized (CB #4873 / GH #6512)
+- Listselect: properly clear entry_cache_ (CB #4879 / GH #6518)
+- Listselect: reset/recalculate max_pic_width_ upon clear()/remove() (CB #4846 / GH #6484)
+
+
+### Internationalization
+
+- Improvement in some english texts and localization (CB #4797 / GH #6435)
+- Update paths for `buildcat.py` (GH #6458 / CB #4820)
+- Fix Textdomains for Launch Game Checkboxes (CB #4824 / GH #6462)
+- Validate environment locale settings (CB #4817 / GH #6455)
+
+
+### Help and Documentation
+
+- Update performance helptext for comparable buildings between tribes, medium sites (GH #6460 / CB #4822)
+- Misc documentation fixes (GH #6540 / CB #4901)
+- Documentation fix and examples for `modify_unit` (CB #4932 / GH #6571)
+
+
+### Editor
+
+- Fix regression: immovables show/hide in editor (CB #4870 / GH #6509)
+- Editor Show/Hide option to draw ocean overlays (CB #4821 / GH #6459)
+- Add height heat map mode to editor (CB #4410 / GH #5994)
+
+
+### Graphics Engine
+
+- Show splash screen earlier and reintroduce intro music (GH #6412 / CB #4773)
+- Remove hardcoded window border sizes (CB #4778 / GH #6416)
+- Fix format strings in gl/initialize.cc (CB #4880 / GH #6519)
+- Update window borders on theme change (CB #4885 / GH #6524)
+
+
+### Networking
+
+
+### Build System
+
+- Fix possibility of random failure in template test (CB #4757 / GH #6395)
+- Update vcpkg for sdl2-mixer 2.8.0 (CB #4768 / GH #6406)
+- Clear misc clang-tidy-16 checks (GH #6420 / CB #4782)
+- Replace gettext with tinygettext (CB #4772 / GH #6411)
+- Update i18n.yaml for node.js 20 (CB #4834 / GH #6472)
+- Fix new compiler warning on clang-18 (CB #4827 / GH #6465)
+- Visible option of RelWithDebInfo build type (CB #4903 / GH #6542)
+- Regression test improvements (CB #4876 / GH #6515)
+- Temporary windows build fix (CB #4924 / GH #6564)
+- Mingw dependencies pin architecture (CB #4925 / GH #6565)
+- Add new modplug dependency to sdl2 mixer (GH #6573 / CB #4933)
+- Retry hdiutil with any error code (CB #4927 / GH #6567)
+- Use all workarounds for hdiutil errors from actions/runner-images#7522 (GH #6574 / CB #4934)
+
+
+### Other Issues
+
+- Strip authors from commit messages in dev-release (CB #4762 / GH #6400)
+- Fix use of `push_back()` / `at()=` in preallocated vectors (GH #6464 / CB #4826)
+- Refactor and disallow type conversion operators (GH #6373 / CB #4736)
+- Make some rawstring in codecheck rules (CB #4828 / GH #6466)
+- Remove checking and pinning msvc toolset version in the CI (CB #4858 / GH #6496)
+- Flag: fix `nr_of_roads()` (GH #6514 / CB #4875)
+- Include missing `<cstdint>` (CB #4883 / GH #6522)
+- Remove misplaced, obsolete comment from warehouse.h (GH #6529 / CB #4890)
+- BaseListselect::draw() - code gardening (CB #4847 / GH #6485)
+- Decomission Listselect<Entry&> (CB #4895 / GH #6534)
+- Update compiler versions in CI (CB #4908 / GH #6547)
+- Temporary fix for macos CI builds (CB #4912 / GH #6552)
+- Update macOS versions in the CI (CB #4809 / GH #6447)
+
+
+## Release 1.2.1
+
+- Skip invalid map files in editor Load/Save map window (CB #4795 / GH #6433)
+- Fix memory leaks in main menu Watch Last Replay (CB #4788 / GH #6426)
+- Game setup: Unselect incompatible starting conditions when changing win condition (CB #4777 / GH #6415)
+- Add thread identifier to crash reports (CB #4801 / GH #6439)
+- Check for invalid combination before calling DefaultAI::expedition_management() (CB #4800 / GH #6438)
+- Territorial Lua error fix (CB #4805 / GH #6443)
+- Remove AV1 decoder dependency in mingw-64 (CB #4837 / GH #6474)
+- Patches to support netbsd-pkgsrc (CB #4851 / GH #6489)
+- Keep vcpkg_ref in a repository variable instead of a file (CB #4860 / GH #6498)
+- vcpkg workflow fix for v1.2.1
+- Fix RelWithDebInfo build type (CB #4854 / GH #6492)
+- Fix out-of-bounds memory access when using `--editor` without filename (CB #4894 / GH #6533)
+- MacOS and other CI improvements (CB #4899 / GH #6538)
+- Temporary fixes for MinGW and MacOS CI builds
+- Fix for GH#6444 using mac dylibbundler to packe the .app Bundle (CB #4910 / GH #6549)
+- Re-add gettext ubuntu package
+- Update translations for v1.2.1 (CB #4916 / GH #6556)
+- Replace MD5 checksumming code with `libmd` (CB #4831 / GH #6469)
+- Fix LaunchMPG map seafaring check for naval warfare (CB #4918 / GH #6558)
+- Fix anchored ship trying to swim towards buffer-underflow (CB #4921 / GH #6561)
+- Fix desync in Discovery/New World starting conditions (CB #4926 / GH #6566)
+
+
 ## Release 1.2
 
 ### Animations, Icons and Overlays
