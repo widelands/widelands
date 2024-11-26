@@ -1535,7 +1535,13 @@ std::string Warehouse::info_string(const InfoStringFormat& isf) {
 		} else {
 			icon_format = wh_fmt;
 		}
-		return format(icon_format, richtext_escape(get_warehouse_name()));
+		std::string name = get_warehouse_name();
+		if (name.empty()) {
+			name = descr().descname();
+			// e.g. Temple of Vesta in emp04
+			replace_all(name, " ", " ");
+		}
+		return format(icon_format, richtext_escape(name));
 	}
 	return Building::info_string(isf);
 }
@@ -1546,7 +1552,7 @@ void Warehouse::update_statistics_string(std::string* str) {
 		if (get_desired_soldier_count() > 0) {
 			*str = soldier_control_.get_status_string(owner().tribe(), get_soldier_preference());
 		} else {
-			*str = _("no garrison");
+			*str = "—";
 		}
 	} else {
 		// plain warehouse
