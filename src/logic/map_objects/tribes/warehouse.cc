@@ -1480,6 +1480,10 @@ void Warehouse::check_remove_stock(Game& game) {
 		if (get_worker_policy(widx) != StockPolicy::kRemove || (get_workers().stock(widx) == 0u)) {
 			continue;
 		}
+		if (widx == owner().tribe().soldier() &&
+		    get_workers().stock(widx) <= get_desired_soldier_count()) {
+			continue;
+		}
 
 		Worker& worker = launch_worker(game, widx, Requirements());
 		worker.start_task_leavebuilding(game, true);
