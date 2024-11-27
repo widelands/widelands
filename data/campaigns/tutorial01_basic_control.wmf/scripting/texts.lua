@@ -501,10 +501,10 @@ census_and_statistics_02 = {
 census_and_statistics_hq = {
    title = _("Census and Status"),
    body = (
-      li_object("barbarians_headquarters", _([[You may have noticed, that the census line of the headquarters is different. This is because it’s a special building type, called a warehouse. Warehouses are buildings where your workers can rest until they get assigned to a workplace and where any number of your wares can be stored until they are needed somewhere. So they act like a kind of town centre, and to signify this, they get unique names.]]), plr.color) ..
+      li_object("barbarians_headquarters", _([[You may have noticed that the census line of the headquarters is different. This is because it’s a special building type called a warehouse. Warehouses are buildings where your workers can rest until they get assigned to a workplace and where any number of your wares can be stored until they are needed somewhere. So they act like a kind of town center, and to signify this, they get unique names.]]), plr.color) ..
       p(_([[The small crowns beside the name mark it as your headquarters. As you play Widelands, you will see three kinds of warehouses, marked by little icons:]])) ..
       li_arrow(_([[The headquarters where you usually start the game. It is marked by small crowns: ♔]])) ..
-      li_arrow(_([[Plain warehouses, that simply hold wares and workers, to keep them distributed all over your territory. They are marked by small houses: ⟰]])) ..
+      li_arrow(_([[Plain warehouses that simply hold wares and workers to keep them distributed all over your territory. They are marked by small houses: ⟰]])) ..
       li_arrow(_([[Ports that you’ll use in seafaring. They don’t only store your wares and workers, but can also load them on your ships to send them across the seas. They are marked by small anchors: ⚓]])) ..
       vspace() .. p(_([[All of them are assigned names automatically that match the tribe, but you can change their names to your liking too.]]))
    ),
