@@ -549,20 +549,13 @@ std::string Building::info_string(const InfoStringFormat& format) {
 	case InfoStringFormat::kCensus:
 		if (descr().type() == MapObjectType::CONSTRUCTIONSITE) {
 			upcast(ConstructionSite const, constructionsite, this);
-			assert(constructionsite != nullptr);
-			if (constructionsite != nullptr) {
-				result = constructionsite->building().descname();
-				break;
-			}
+			result = constructionsite->building().descname();
 		} else if (descr().type() == MapObjectType::WAREHOUSE) {
 			upcast(Warehouse const, warehouse, this);
-			assert(warehouse != nullptr);
-			if (warehouse != nullptr) {
-				result = warehouse->warehouse_census_string();
-				break;
-			}
+			result = warehouse->warehouse_census_string();
+		} else {
+			result = descr().descname();
 		}
-		result = descr().descname();
 		break;
 	case InfoStringFormat::kStatistics:
 		result = update_and_get_statistics_string();
