@@ -1395,6 +1395,16 @@ void AddOnsCtrl::refresh_remotes(const bool showall) {
 	}
 
 	progress.step(format(step_message, 100));
+
+	for (auto& pair : cached_browse_rows_) {
+		pair.second->die();
+	}
+	for (auto& pair : cached_map_rows_) {
+		pair.second->die();
+	}
+	cached_browse_rows_.clear();
+	cached_map_rows_.clear();
+
 	rebuild_browse();
 	rebuild_maps();
 }
@@ -1940,6 +1950,7 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 		if (remote != nullptr) {
 			*remote = net().fetch_one_remote(remote->internal_name);
 		}
+		clear_cache_for_browse(remote->internal_name);
 		rebuild_browse();
 	} catch (const OperationCancelledByUserException&) {
 		log_info("upload addon %s cancelled by user", addon->internal_name.c_str());
@@ -2167,9 +2178,12 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 	if (remote->category == AddOns::AddOnCategory::kUIPlugin) {
 		fsmm_.reinit_plugins();
 	}
+
+	clear_cache_for_installed(remote->internal_name);
+	clear_cache_for_browse(remote->internal_name);
+	update_dependency_errors();
 	rebuild_installed();
 	rebuild_browse();
-	update_dependency_errors();
 }
 
 #if 0  // TODO(Nordfriese): Disabled autofix_dependencies for v1.0
