@@ -1518,7 +1518,11 @@ void AddOnsCtrl::rebuild_installed() {
 
 		auto row_it = cached_installed_rows_.find(pair.first->internal_name);
 		if (row_it == cached_installed_rows_.end()) {
-			row_it = cached_installed_rows_.emplace(pair.first->internal_name, new InstalledAddOnRow(&installed_addons_box_, this, pair.first, pair.second)).first;
+			row_it = cached_installed_rows_
+			            .emplace(pair.first->internal_name,
+			                     new InstalledAddOnRow(
+			                        &installed_addons_box_, this, pair.first, pair.second))
+			            .first;
 		}
 
 		installed_addons_box_.add(row_it->second, UI::Box::Resizing::kFullSize);
@@ -1561,7 +1565,8 @@ void AddOnsCtrl::rebuild_browse() {
 			remotes_to_show.emplace_back(a);
 		}
 	}
-	std::sort(remotes_to_show.begin(), remotes_to_show.end(), create_sort_functor(sort_order_browse_.get_selected()));
+	std::sort(remotes_to_show.begin(), remotes_to_show.end(),
+	          create_sort_functor(sort_order_browse_.get_selected()));
 
 	std::vector<std::string> has_upgrades;
 
@@ -1584,8 +1589,10 @@ void AddOnsCtrl::rebuild_browse() {
 				}
 			}
 
-			row_it = cached_browse_rows_.emplace(a->internal_name,
-			   new RemoteAddOnRow(&browse_addons_box_, this, a, installed, installed_i18n)).first;
+			row_it = cached_browse_rows_
+			            .emplace(a->internal_name, new RemoteAddOnRow(&browse_addons_box_, this, a,
+			                                                          installed, installed_i18n))
+			            .first;
 		}
 
 		browse_addons_box_.add(row_it->second, UI::Box::Resizing::kFullSize);
@@ -1638,7 +1645,8 @@ void AddOnsCtrl::rebuild_maps() {
 			maps_to_show.push_back(a);
 		}
 	}
-	std::sort(maps_to_show.begin(), maps_to_show.end(), create_sort_functor(sort_order_maps_.get_selected()));
+	std::sort(maps_to_show.begin(), maps_to_show.end(),
+	          create_sort_functor(sort_order_maps_.get_selected()));
 
 	size_t index = 0;
 	for (const auto& a : maps_to_show) {
@@ -1654,7 +1662,10 @@ void AddOnsCtrl::rebuild_maps() {
 			map_file_path += kDownloadedMapsDir;
 			map_file_path += FileSystem::file_separator() + a->map_file_name;
 
-			row_it = cached_map_rows_.emplace(a->internal_name, new MapRow(&maps_box_, this, a, g_fs->file_exists(map_file_path))).first;
+			row_it = cached_map_rows_
+			            .emplace(a->internal_name,
+			                     new MapRow(&maps_box_, this, a, g_fs->file_exists(map_file_path)))
+			            .first;
 		}
 
 		maps_box_.add(row_it->second, UI::Box::Resizing::kFullSize);
