@@ -4521,35 +4521,35 @@ msgstr "Minnste Qualität"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:353
 msgid "Min Players:"
-msgstr ""
+msgstr "Minnste Spelers:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:366
 msgid "Min Width:"
-msgstr ""
+msgstr "Minnste Breddt:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:379
 msgid "Min Height:"
-msgstr ""
+msgstr "Minnste Höcht:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:392
 msgid "Min Size:"
-msgstr ""
+msgstr "Minnste Grött:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:405
 msgid "Max Players:"
-msgstr ""
+msgstr "Meest Spelers:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:418
 msgid "Max Width:"
-msgstr ""
+msgstr "Gröttste Breddt:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:431
 msgid "Max Height:"
-msgstr ""
+msgstr "Gröttste Höcht:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:444
 msgid "Max Size:"
-msgstr ""
+msgstr "Gröttste Grött:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:454
 msgid "Choose add-on to upload…"
@@ -4691,11 +4691,11 @@ msgstr "Du kannst Widelands Entwickeln-Klottje ok eene Naricht schicken, un wi h
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:748
 msgid "Manage your installed add-ons"
-msgstr ""
+msgstr "Verwalt diene installeerten Verwiederns"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:750
 msgid "Browse and install add-ons available on the server"
-msgstr ""
+msgstr "Bekiek un installeer Verwiederns up de Server"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:752
 #, c-format
@@ -4703,7 +4703,7 @@ msgid ""
 "Browse and install maps from the widelands.org website maps archive. Like "
 "manually downloaded maps, installed website maps are stored in the ‘%s’ "
 "directory under the Widelands home directory."
-msgstr ""
+msgstr "Bekiek un installeer Kaarten vun de widelands.org-Internettsied-Kaart-Sammlung. As Kaarten, wat du vun Hand runnerlaadst, worden installeert Internettsied-Kaarten in de Verteeknis »%s« unner de Widelands-Heemverteeknis sekert."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:756
 msgid "Development"
@@ -4711,7 +4711,7 @@ msgstr "Entwickeln"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:756
 msgid "Tools for add-on developers"
-msgstr ""
+msgstr "Warktüüg för Verwiederns-Entwicklers"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:760
@@ -4759,7 +4759,7 @@ msgstr "Verwiederns na Namen filtern"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:784
 msgid "Filter maps by name"
-msgstr ""
+msgstr "Kaarten na Namen filtern"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:795
 #, c-format
@@ -4769,12 +4769,12 @@ msgstr "Deel »%s« an- of utknipsen"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:811
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:683
 msgid "One World"
-msgstr ""
+msgstr "Eene Welt"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:819
 #, c-format
 msgid "Toggle world ‘%s’"
-msgstr ""
+msgstr "Welt »%s« an- of utknipsen"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1011
 #, c-format
@@ -4913,12 +4913,12 @@ msgstr "Dörsöken (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1569
 msgid "Website Maps"
-msgstr ""
+msgstr "Internettsied-Kaarten"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1570
 #, c-format
 msgid "Website Maps (%u)"
-msgstr ""
+msgstr "Internettsied-Kaarten (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1584
 #, c-format
@@ -5055,7 +5055,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "De Kaart »%1$s« kunn nich vun de Server runnerladen worden.\n\nFehler-Naricht:\n%2$s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1955
 #, c-format
@@ -5784,7 +5784,7 @@ msgid ""
 "%3$s\n"
 "\n"
 "Note that this map can not be downloaded again from the server."
-msgstr ""
+msgstr "Willst du deese Kaart würrelk wegdoon?\n\n%1$s\nvun %2$s\n%3$s\n\nDeese Kaart kann nich weer vun de Server runnerladen worden."
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:54
 #, c-format
@@ -5794,7 +5794,7 @@ msgid ""
 "%1$s\n"
 "by %2$s\n"
 "%3$s"
-msgstr ""
+msgstr "Willst du deese Kaart würrelk wegdoon?\n\n%1$s\nvun %2$s\n%3$s"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:60
 #, c-format
@@ -5844,11 +5844,11 @@ msgstr "Bruukt eene Widelands-Versioon nich oller as %1$s un nich nejer as %2$s.
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:158
 msgid "Hint:"
-msgstr ""
+msgstr "Tipp:"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:165
 msgid "Comment by uploader:"
-msgstr ""
+msgstr "Kommentaar vum Uplaader:"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:206
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:257
@@ -5996,14 +5996,14 @@ msgstr[1] "%u Billschirmfotos"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:678
 #, c-format
 msgid "Size: %1$u×%2$u • Max Players: %3$u • %4$s"
-msgstr ""
+msgstr "Grött: %1$u×%2$u • Meeste Spelers: %3$u • %4$s"
 
 #. * TRANSLATORS: Timestamp · Filesize · Download count · Average rating ·
 #. Number of comments
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:699
 #, c-format
 msgid "%1$s   %2$s   ⬇ %3$u   ★ %4$s   “” %5$u"
-msgstr ""
+msgstr "%1$s   %2$s   ⬇ %3$u   ★ %4$s   “” %5$u"
 
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:41
 #, c-format

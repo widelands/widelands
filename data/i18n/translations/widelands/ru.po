@@ -4,7 +4,7 @@
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
-# Anton Khabarov <2233009@gmail.com>, 2015-2018,2021
+# Anton Khabarov <2233009@gmail.com>, 2015-2018,2021,2024
 # CupIvan <mail@cupivan.ru>, 2019
 # nskdmitry, 2021-2022
 # Максим Дронь <dronmax@gmail.com>, 2015
@@ -27,7 +27,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-11-25 03:06+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2024\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>, 2015-2018,2021,2024\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -598,11 +598,11 @@ msgstr "Показать сетку"
 #. the oceans are shown
 #: ../../../../src/editor/editorinteractive.cc:510
 msgid "Hide Oceans"
-msgstr ""
+msgstr "Скрыть океаны"
 
 #: ../../../../src/editor/editorinteractive.cc:510
 msgid "Show Oceans"
-msgstr ""
+msgstr "Показать океаны"
 
 #: ../../../../src/editor/editorinteractive.cc:513
 msgid ""
@@ -4586,35 +4586,35 @@ msgstr "Низкого качества"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:353
 msgid "Min Players:"
-msgstr ""
+msgstr "Min игроков:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:366
 msgid "Min Width:"
-msgstr ""
+msgstr "Min ширина:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:379
 msgid "Min Height:"
-msgstr ""
+msgstr "Min высота:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:392
 msgid "Min Size:"
-msgstr ""
+msgstr "Min размер:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:405
 msgid "Max Players:"
-msgstr ""
+msgstr "Max игроков:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:418
 msgid "Max Width:"
-msgstr ""
+msgstr "Max ширина:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:431
 msgid "Max Height:"
-msgstr ""
+msgstr "Max высота:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:444
 msgid "Max Size:"
-msgstr ""
+msgstr "Max размер:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:454
 msgid "Choose add-on to upload…"
@@ -4756,7 +4756,7 @@ msgstr "Или же вы можете послать сообщение разр
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:748
 msgid "Manage your installed add-ons"
-msgstr ""
+msgstr "Управление установленными дополнениями"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:750
 msgid "Browse and install add-ons available on the server"
@@ -4776,7 +4776,7 @@ msgstr "Разработка"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:756
 msgid "Tools for add-on developers"
-msgstr ""
+msgstr "Инструменты для разработчиков дополнений"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:760
@@ -4824,7 +4824,7 @@ msgstr "Фильтровать дополнения по названию"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:784
 msgid "Filter maps by name"
-msgstr ""
+msgstr "Фильтровать карты по названию"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:795
 #, c-format
@@ -4834,7 +4834,7 @@ msgstr "Переключить категорию '%s'"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:811
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:683
 msgid "One World"
-msgstr ""
+msgstr "Один мир"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:819
 #, c-format
@@ -5925,11 +5925,11 @@ msgstr "Требуется версия Widelands в диапазоне от%1$s
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:158
 msgid "Hint:"
-msgstr ""
+msgstr "Подсказка:"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:165
 msgid "Comment by uploader:"
-msgstr ""
+msgstr "Комментарий от автора загрузки"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:206
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:257
@@ -6085,7 +6085,7 @@ msgstr[3] "%u снимков"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:678
 #, c-format
 msgid "Size: %1$u×%2$u • Max Players: %3$u • %4$s"
-msgstr ""
+msgstr "Размер: %1$u×%2$u • Max игроков: %3$u • %4$s "
 
 #. * TRANSLATORS: Timestamp · Filesize · Download count · Average rating ·
 #. Number of comments
