@@ -8,6 +8,7 @@ function init_player()
 
    prefilled_buildings(plr,
       {"barbarians_fortress", 32, 62, soldiers = {[{3,5,0,2}] = 8 }},
+      {"barbarians_headquarters", 29, 55},
       {"barbarians_warehouse", 33, 57,
          soldiers = {
             [{0,0,0,0}] = 20, -- needed for training
@@ -66,6 +67,7 @@ function init_player()
    connected_road("normal", plr,map:get_field(38,62).immovable,"l,l|l,bl|tl,tl|tl,tl")
    connected_road("normal", plr,map:get_field(32,63).immovable,"tr,tr|")
    connected_road("normal", plr,map:get_field(25,2).immovable,"tr,tr|tr,tr|tr,tr|tr,tr")
+   connected_road("normal", plr,map:get_field(30,56).immovable,"bl,bl")
 end
 
 run(init_player)

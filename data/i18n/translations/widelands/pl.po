@@ -27,7 +27,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-11-23 02:58+0000\n"
+"POT-Creation-Date: 2024-11-25 03:06+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Leszek Szary, 2024\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
@@ -126,7 +126,7 @@ msgstr "%1$s lub %2$s"
 #: ../../../../data/scripting/richtext.lua:707
 #: ../../../../data/scripting/richtext.lua:712
 #: ../../../../src/base/i18n.cc:343 ../../../../src/base/i18n.cc:352
-#: ../../../../src/logic/addons.cc:236
+#: ../../../../src/logic/addons.cc:242
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
@@ -674,19 +674,20 @@ msgstr "Czy na pewno chcesz wyjść z edytora?"
 #: ../../../../src/logic/addons.cc:48 ../../../../src/ui_basic/dropdown.cc:358
 #: ../../../../src/ui_basic/dropdown.cc:360
 #: ../../../../src/ui_fsmenu/addons/contact.cc:81
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1382
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1393
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1464
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1472
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1520
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1599
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1672
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1808
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1819
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1890
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1898
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1923
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1989
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2068
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2141
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:104
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:292
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:565
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:722
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:485
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:491
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:543
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:549
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:328
 #: ../../../../src/ui_fsmenu/main.cc:294 ../../../../src/wlapplication.cc:1968
@@ -715,7 +716,7 @@ msgstr "Wczytywanie mapy “%s”…"
 #: ../../../../src/editor/ui_menus/main_menu_new_map.cc:115
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:629
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:144
-#: ../../../../src/logic/map.h:232 ../../../../src/wui/mapdata.cc:50
+#: ../../../../src/logic/map.h:237 ../../../../src/wui/mapdata.cc:50
 msgid "No Name"
 msgstr "Bez nazwy"
 
@@ -723,7 +724,7 @@ msgstr "Bez nazwy"
 #: ../../../../src/editor/editorinteractive.cc:1350
 #: ../../../../src/editor/ui_menus/main_menu_new_map.cc:116
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:630
-#: ../../../../src/logic/map.h:233
+#: ../../../../src/logic/map.h:238
 #: ../../../../src/ui_fsmenu/addons/packager.cc:412
 msgctxt "author_name"
 msgid "Unknown"
@@ -985,6 +986,7 @@ msgid "%1%× %2%"
 msgstr "%1%× %2%"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:229
+#: ../../../../src/logic/addons.cc:59
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:159
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:141
 #: ../../../../src/wui/mapdetails.cc:138 ../../../../src/wui/minimap.cc:142
@@ -1094,7 +1096,7 @@ msgstr "Wyświetl"
 #: ../../../../src/ui_basic/messagebox.cc:108
 #: ../../../../src/ui_basic/text_prompt.cc:46
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:54
-#: ../../../../src/ui_fsmenu/addons/manager.cc:296
+#: ../../../../src/ui_fsmenu/addons/manager.cc:518
 #: ../../../../src/ui_fsmenu/addons/packager.cc:134
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:174
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:465
@@ -1182,7 +1184,7 @@ msgid "Add a player to this team"
 msgstr "Dodaj gracza do tej drużyny"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:327
-#: ../../../../src/logic/addons.cc:69
+#: ../../../../src/logic/addons.cc:74
 msgid "Theme"
 msgstr "Motyw"
 
@@ -1205,6 +1207,7 @@ msgstr "Autor:"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:372
 #: ../../../../src/ui_fsmenu/addons/packager.cc:189
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:150
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:77
 msgid "Description:"
 msgstr "Opis:"
@@ -1308,7 +1311,7 @@ msgid "Creating empty map…"
 msgstr "Tworzenie pustej mapy..."
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:63
-#: ../../../../src/logic/addons.cc:59
+#: ../../../../src/logic/addons.cc:63
 msgid "Map Generator"
 msgstr "Generator Map"
 
@@ -1412,7 +1415,7 @@ msgstr "Atol"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:320
-#: ../../../../src/logic/map.cc:62
+#: ../../../../src/logic/map.cc:76
 msgid "Wasteland"
 msgstr "Pustkowia"
 
@@ -1700,8 +1703,9 @@ msgstr "Stała wysokość"
 #. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
 #. italics)
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:47
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:183
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:384
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:236
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:442
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:665
 #: ../../../../src/wui/stock_menu.cc:36
 #, c-format
 msgid "%1$s %2$s"
@@ -1972,56 +1976,56 @@ msgstr "wyłącz"
 msgid "Tribes"
 msgstr "Plemiona"
 
-#: ../../../../src/logic/addons.cc:52
+#: ../../../../src/logic/addons.cc:53
 msgid "World"
 msgstr "Świat"
 
-#: ../../../../src/logic/addons.cc:54
+#: ../../../../src/logic/addons.cc:55
 msgid "Script"
 msgstr "Skrypt"
 
-#: ../../../../src/logic/addons.cc:56
+#: ../../../../src/logic/addons.cc:60
 msgid "Map Set"
 msgstr "Zestaw map"
 
 #. * TRANSLATORS: Header for campaign name
-#: ../../../../src/logic/addons.cc:61
+#: ../../../../src/logic/addons.cc:66
 #: ../../../../src/ui_fsmenu/campaigndetails.cc:48
 msgid "Campaign"
 msgstr "Kampania"
 
-#: ../../../../src/logic/addons.cc:64
+#: ../../../../src/logic/addons.cc:69
 msgid "Win Condition"
 msgstr "Warunek zwycięstwa"
 
-#: ../../../../src/logic/addons.cc:67
+#: ../../../../src/logic/addons.cc:72
 msgid "Starting Condition"
 msgstr "Warunek początkowy"
 
-#: ../../../../src/logic/addons.cc:72
+#: ../../../../src/logic/addons.cc:76
 msgid "UI Plugin"
 msgstr "Plugin UI"
 
-#: ../../../../src/logic/addons.cc:112
+#: ../../../../src/logic/addons.cc:117
 #, c-format
 msgid "%1$s.%2$u"
 msgstr "%1$s.%2$u"
 
-#: ../../../../src/logic/addons.cc:209
+#: ../../../../src/logic/addons.cc:215
 msgid "No conflicts"
 msgstr "Brak konfliktów"
 
-#: ../../../../src/logic/addons.cc:214
+#: ../../../../src/logic/addons.cc:220
 #, c-format
 msgid "%1$s (expected version %2$s, found %3$s)"
 msgstr "%1$s(oczekiwana wersja %2$s, znaleziono %3$s)"
 
-#: ../../../../src/logic/addons.cc:217 ../../../../src/logic/addons.cc:253
+#: ../../../../src/logic/addons.cc:223 ../../../../src/logic/addons.cc:259
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
 msgstr "%1$s, %2$s (oczekiwana wersja %3$s, znaleziono %4$s)"
 
-#: ../../../../src/logic/addons.cc:224
+#: ../../../../src/logic/addons.cc:230
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
@@ -2030,7 +2034,7 @@ msgstr[1] "%1$u dodatki ze złą wersją: %2$s"
 msgstr[2] "%1$u dodatki ze złą wersją: %2$s"
 msgstr[3] "%1$udodatki ze złą wersją: %2$s"
 
-#: ../../../../src/logic/addons.cc:239
+#: ../../../../src/logic/addons.cc:245
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
@@ -2039,22 +2043,22 @@ msgstr[1] "%1$u brakujące dodatki: %2$s"
 msgstr[2] "%1$u brakujące dodatki: %2$s"
 msgstr[3] "%1$u brakujące dodatki: %2$s"
 
-#: ../../../../src/logic/addons.cc:247
+#: ../../../../src/logic/addons.cc:253
 #, c-format
 msgid "%s (missing)"
 msgstr "%s (brakuje)"
 
-#: ../../../../src/logic/addons.cc:249
+#: ../../../../src/logic/addons.cc:255
 #, c-format
 msgid "%1$s, %2$s (missing)"
 msgstr "%1$s, %2$s (brakuje)"
 
-#: ../../../../src/logic/addons.cc:257
+#: ../../../../src/logic/addons.cc:263
 #, c-format
 msgid "%1$s and %2$s: %3$s"
 msgstr "%1$s i %2$s: %3$s"
 
-#: ../../../../src/logic/addons.cc:258
+#: ../../../../src/logic/addons.cc:264
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
@@ -2063,7 +2067,7 @@ msgstr[1] "%u brakujące dodatki"
 msgstr[2] "%u brakujące dodatki"
 msgstr[3] "%u brakujące dodatki"
 
-#: ../../../../src/logic/addons.cc:260
+#: ../../../../src/logic/addons.cc:266
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
@@ -2073,20 +2077,20 @@ msgstr[2] "%u dodatki ze złą wersją"
 msgstr[3] "%u dodatki ze złą wersją"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
-#: ../../../../src/logic/addons.cc:271
+#: ../../../../src/logic/addons.cc:277
 msgid "None"
 msgstr "Brak"
 
-#: ../../../../src/logic/addons.cc:275
+#: ../../../../src/logic/addons.cc:281
 #, c-format
 msgid "%1$s<br>• %2$s (version %3$s)"
 msgstr "%1$s<br>· %2$s (wersja %3$s)"
 
-#: ../../../../src/logic/addons.cc:305
+#: ../../../../src/logic/addons.cc:311
 msgid "No game-relevant add-ons in use."
 msgstr "Dodatek niezwiązany z grą w użyciu"
 
-#: ../../../../src/logic/addons.cc:310
+#: ../../../../src/logic/addons.cc:316
 #, c-format
 msgid "%u game-relevant add-on in use:"
 msgid_plural "%u game-relevant add-ons in use:"
@@ -2374,21 +2378,21 @@ msgid "An unexpected error occurred:"
 msgstr "Wystąpił niespodziewany błąd:"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../../../src/logic/map.cc:58
+#: ../../../../src/logic/map.cc:70
 msgid "Summer"
 msgstr "Lato"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../../../src/logic/map.cc:60
+#: ../../../../src/logic/map.cc:73
 msgid "Winter"
 msgstr "Zima"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../../../src/logic/map.cc:64
+#: ../../../../src/logic/map.cc:79
 msgid "Desert"
 msgstr "Pustynia"
 
-#: ../../../../src/logic/map.h:234
+#: ../../../../src/logic/map.h:239
 msgid "No description defined"
 msgstr "Brak opisu"
 
@@ -3811,12 +3815,12 @@ msgid ""
 "request in time."
 msgstr "Zostałeś rozłączony z metaserwerem, gdyż nie odpowiedziałeś na PING w zadanym czasie."
 
-#: ../../../../src/network/net_addons.cc:855
+#: ../../../../src/network/net_addons.cc:894
 #, c-format
 msgid "Sending metadata for %s"
 msgstr "Wysyłanie metadanych dla %s"
 
-#: ../../../../src/network/net_addons.cc:897
+#: ../../../../src/network/net_addons.cc:936
 #, c-format
 msgid "Uploading %s"
 msgstr "Przesyłanie %s"
@@ -4476,7 +4480,8 @@ msgid "Login"
 msgstr "Logowanie"
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:72
-#: ../../../../src/ui_fsmenu/addons/manager.cc:270
+#: ../../../../src/ui_fsmenu/addons/manager.cc:483
+#: ../../../../src/ui_fsmenu/addons/manager.cc:492
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:182
 #: ../../../../src/ui_fsmenu/training_wheel_options.cc:119
 msgid "Reset"
@@ -4521,135 +4526,169 @@ msgid "%u bytes"
 msgstr "%u bajtów"
 
 #. * TRANSLATORS: This is an add-on code quality rating
-#: ../../../../src/ui_fsmenu/addons/manager.cc:89
+#: ../../../../src/ui_fsmenu/addons/manager.cc:140
 msgctxt "quality"
 msgid "Any"
 msgstr "Brak"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:89
+#: ../../../../src/ui_fsmenu/addons/manager.cc:140
 msgid "Quality not yet evaluated"
 msgstr "Jakość nieoceniona"
 
 #. * TRANSLATORS: This is an add-on code quality rating
-#: ../../../../src/ui_fsmenu/addons/manager.cc:95
+#: ../../../../src/ui_fsmenu/addons/manager.cc:146
 msgctxt "quality"
 msgid "Poor"
 msgstr "Słaba"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:96
+#: ../../../../src/ui_fsmenu/addons/manager.cc:147
 msgid "This add-on may cause major glitches and errors."
 msgstr "Ten dodatek może powodować poważne usterki i błędy."
 
 #. * TRANSLATORS: This is an add-on code quality rating
-#: ../../../../src/ui_fsmenu/addons/manager.cc:102
+#: ../../../../src/ui_fsmenu/addons/manager.cc:153
 msgctxt "quality"
 msgid "Good"
 msgstr "Dobra"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:102
+#: ../../../../src/ui_fsmenu/addons/manager.cc:153
 msgid "This add-on works as advertised."
 msgstr "Ten dodatek działa zgodnie z reklamą."
 
 #. * TRANSLATORS: This is an add-on code quality rating
-#: ../../../../src/ui_fsmenu/addons/manager.cc:107
+#: ../../../../src/ui_fsmenu/addons/manager.cc:158
 msgctxt "quality"
 msgid "Excellent"
 msgstr "Świetna"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:108
+#: ../../../../src/ui_fsmenu/addons/manager.cc:159
 msgid "This add-on has been decorated for its remarkably high quality."
 msgstr "Ten dodatek został oznaczony za jego wyjątkowo wysoką jakość."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:120
+#: ../../../../src/ui_fsmenu/addons/manager.cc:171
 msgid "Add-On Manager"
 msgstr "Menedżer dodatków"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:210
+#: ../../../../src/ui_fsmenu/addons/manager.cc:308
 msgid "Verified only"
 msgstr "Tylko zweryfikowane"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:211
+#: ../../../../src/ui_fsmenu/addons/manager.cc:309
 msgid "Show only verified add-ons"
 msgstr "Pokaż tylko zweryfikowane dodatki"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:219
+#: ../../../../src/ui_fsmenu/addons/manager.cc:317
+#: ../../../../src/ui_fsmenu/addons/manager.cc:328
 msgid "Sort by"
 msgstr "Sortuj"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:230
+#: ../../../../src/ui_fsmenu/addons/manager.cc:339
 msgid "Minimum quality"
 msgstr "Minimalna jakość"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:241
+#: ../../../../src/ui_fsmenu/addons/manager.cc:353
+msgid "Min Players:"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:366
+msgid "Min Width:"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:379
+msgid "Min Height:"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:392
+msgid "Min Size:"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:405
+msgid "Max Players:"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:418
+msgid "Max Width:"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:431
+msgid "Max Height:"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:444
+msgid "Max Size:"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:454
 msgid "Choose add-on to upload…"
 msgstr "Wybierz dodatek do przesłania..."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:252
+#: ../../../../src/ui_fsmenu/addons/manager.cc:465
 msgid "Upload a screenshot…"
 msgstr "Prześlij zrzut ekranu..."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:260
+#: ../../../../src/ui_fsmenu/addons/manager.cc:473
 msgid "Understood and confirmed"
 msgstr "Rozumiem i potwierdzam"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:261
+#: ../../../../src/ui_fsmenu/addons/manager.cc:474
 msgid ""
 "By ticking this checkbox, you confirm that you have read and agree to the "
 "above terms."
 msgstr "Zaznaczając to pole, potwierdzasz, że przeczytałeś i zgadzasz się z powyższymi warunkami."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:271
+#: ../../../../src/ui_fsmenu/addons/manager.cc:484
+#: ../../../../src/ui_fsmenu/addons/manager.cc:493
 msgid "Reset the filters"
 msgstr "Zresetuj filtry"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:287
+#: ../../../../src/ui_fsmenu/addons/manager.cc:509
 msgid "Refresh"
 msgstr "Odśwież"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:288
+#: ../../../../src/ui_fsmenu/addons/manager.cc:510
 msgid "Refresh the list of add-ons available from the server"
 msgstr "Odśwież listę dodatków dostępnych na serwerze"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:305
+#: ../../../../src/ui_fsmenu/addons/manager.cc:527
 msgid "Fix dependencies…"
 msgstr "Napraw zależności"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:306
+#: ../../../../src/ui_fsmenu/addons/manager.cc:528
 msgid "Try to automatically fix the dependency errors"
 msgstr "Spróbuj automatycznie naprawić błędy zależności"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:316
+#: ../../../../src/ui_fsmenu/addons/manager.cc:538
 msgid "Move selected add-on to top"
 msgstr "Przenieś wybrany dodatek na górę"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:325
+#: ../../../../src/ui_fsmenu/addons/manager.cc:547
 msgid "Move selected add-on one step up"
 msgstr "Przenieś wybrany dodatek o jeden stopień w górę"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:334
+#: ../../../../src/ui_fsmenu/addons/manager.cc:556
 msgid "Move selected add-on one step down"
 msgstr "Przenieś wybrany dodatek o jeden stopień w dół"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:343
+#: ../../../../src/ui_fsmenu/addons/manager.cc:565
 msgid "Move selected add-on to bottom"
 msgstr "Przenieś wybrany dodatek na dół"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:351
+#: ../../../../src/ui_fsmenu/addons/manager.cc:573
 msgid "Launch the add-ons packager…"
 msgstr "Uruchom program do pakowania dodatków…"
 
 #. * TRANSLATORS: This button allows the user to send a message to the
 #. Widelands
 #. Development Team
-#: ../../../../src/ui_fsmenu/addons/manager.cc:362
+#: ../../../../src/ui_fsmenu/addons/manager.cc:584
 msgid "Contact us…"
 msgstr "Skontaktuj się z nami…"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:380
+#: ../../../../src/ui_fsmenu/addons/manager.cc:603
 msgid "Tools for Add-Ons Developers"
 msgstr "Narzędzia dla programistów dodatków"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:388
+#: ../../../../src/ui_fsmenu/addons/manager.cc:611
 msgid ""
 "The interactive add-ons packager allows you to create, edit, and delete add-"
 "ons. You can bundle maps designed with the Widelands Map Editor as an add-on"
@@ -4657,14 +4696,14 @@ msgid ""
 "having to write a single line of code."
 msgstr "Interaktywny program do pakowania dodatków umożliwia tworzenie, edytowanie i usuwanie dodatków. Możesz łączyć mapy zaprojektowane w edytorze map Widelands jako dodatek za pomocą interfejsu graficznego i udostępniać je innym graczom bez konieczności pisania ani jednej linii kodu."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:403
+#: ../../../../src/ui_fsmenu/addons/manager.cc:626
 #, c-format
 msgid ""
 "For more information regarding how to develop and package your own add-ons, "
 "please visit %s."
 msgstr "Więcej informacji na temat tworzenia i pakowania własnych dodatków można znaleźć tutaj: %s."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:419
+#: ../../../../src/ui_fsmenu/addons/manager.cc:642
 msgid ""
 "Here, you can upload your add-ons to the server to make them available to "
 "other players. By uploading, you agree to publish your creation under the "
@@ -4673,7 +4712,7 @@ msgid ""
 "GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu."
 msgstr "Tutaj możesz przesłać swoje dodatki na serwer, aby udostępnić je innym graczom. Przesyłając, zgadzasz się opublikować swoje dodatki na warunkach licencji GNU General Public License (GPL) w wersji 2 (tej samej licencji, na której rozpowszechniana jest sama gra Widelands). Więcej informacji na temat GPL można znaleźć w sekcji „Informacje o Widelands” → „Licencja” w menu głównym."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:426
+#: ../../../../src/ui_fsmenu/addons/manager.cc:649
 msgid ""
 "It is forbidden to upload add-ons containing harmful or malicious content or"
 " spam. By uploading an add-on, you assert that the add-on is of your own "
@@ -4681,7 +4720,7 @@ msgid ""
 " stead."
 msgstr "Zabronione jest przesyłanie dodatków zawierających szkodliwe, złośliwe treści lub spam. Przesyłając dodatek, potwierdzasz, że jest on tworem własnym lub masz uprawnienia autora (autorów) dodatku do przesłania go w ich miejsce."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:432
+#: ../../../../src/ui_fsmenu/addons/manager.cc:655
 msgid ""
 "You are required to have read the add-ons documentation under the link given"
 " further above before submitting content. Since the documentation is subject"
@@ -4689,7 +4728,7 @@ msgid ""
 "followed all guidelines stated there."
 msgstr "Przed przesłaniem treści należy zapoznać się z dokumentacją dodatków pod linkiem podanym powyżej. Ponieważ dokumentacja podlega częstym zmianom, upewnij się, że przeczytałeś ją niedawno i że postępowałeś zgodnie ze wszystkimi podanymi tam wytycznymi."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:438
+#: ../../../../src/ui_fsmenu/addons/manager.cc:661
 msgid ""
 "The Widelands Development Team will review your add-on soon after uploading."
 " In case they have further inquiries, they will contact you via a PM on the "
@@ -4697,7 +4736,7 @@ msgid ""
 "profile page frequently."
 msgstr "Zespół programistów Widelands sprawdzi Twój dodatek wkrótce po przesłaniu. Jeśli mają dalsze pytania, skontaktują się z Tobą za pośrednictwem prywatnej wiadomości na stronie internetowej Widelands, dlatego prosimy często sprawdzać skrzynkę odbiorczą na swojej stronie profilu użytkownika online."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:468
+#: ../../../../src/ui_fsmenu/addons/manager.cc:691
 #, c-format
 msgid ""
 "Technical problems? Unclear documentation? Advanced needs such as deletion "
@@ -4706,7 +4745,7 @@ msgid ""
 "be happy to help."
 msgstr "Problemy techniczne? Niejasna dokumentacja? Zaawansowane potrzeby, takie jak usunięcie dodatku lub współpraca z innym projektantem dodatków? Odwiedź nasze fora pod adresem %s, wyjaśnij swoje potrzeby, a zespół programistów Widelands chętnie Ci pomoże."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:485
+#: ../../../../src/ui_fsmenu/addons/manager.cc:708
 msgid ""
 "Alternatively you can also send a message to the Widelands Development Team "
 "and we’ll try to help you with your enquiry as soon as we can. Only the "
@@ -4717,60 +4756,94 @@ msgid ""
 " website user profile page."
 msgstr "Alternatywnie możesz również wysłać wiadomość do zespołu rozwoju Widelands, a my postaramy się jak najszybciej odpowiedzieć na Twoje zapytanie. Tylko administratorzy serwera mogą czytać wysyłane w ten sposób wiadomości. Ponieważ inni projektanci dodatków mogą zwykle skorzystać z pytań i odpowiedzi innych, prosimy o korzystanie z tego sposobu komunikacji tylko wtedy, gdy istnieje powód, dla którego Twoje pytanie nie może zostać zadane na forum publicznym. Otrzymasz naszą odpowiedź w prywatnej wiadomości na swojej stronie profilu użytkownika witryny Widelands."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:522
+#: ../../../../src/ui_fsmenu/addons/manager.cc:748
+msgid "Manage your installed add-ons"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:750
+msgid "Browse and install add-ons available on the server"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:752
+#, c-format
+msgid ""
+"Browse and install maps from the widelands.org website maps archive. Like "
+"manually downloaded maps, installed website maps are stored in the ‘%s’ "
+"directory under the Widelands home directory."
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:756
 msgid "Development"
 msgstr "Rozwój"
 
+#: ../../../../src/ui_fsmenu/addons/manager.cc:756
+msgid "Tools for add-on developers"
+msgstr ""
+
 #. * TRANSLATORS: Sort add-ons alphabetically by name
-#: ../../../../src/ui_fsmenu/addons/manager.cc:525
+#: ../../../../src/ui_fsmenu/addons/manager.cc:760
 msgid "Name"
 msgstr "Nazwa"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
-#: ../../../../src/ui_fsmenu/addons/manager.cc:527
+#: ../../../../src/ui_fsmenu/addons/manager.cc:762
 msgid "Name (descending)"
 msgstr "Nazwa (malejąco)"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../../../src/ui_fsmenu/addons/manager.cc:529
+#: ../../../../src/ui_fsmenu/addons/manager.cc:764
 msgid "Most popular"
 msgstr "Najbardziej popularne"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../../../src/ui_fsmenu/addons/manager.cc:531
+#: ../../../../src/ui_fsmenu/addons/manager.cc:766
 msgid "Least popular"
 msgstr "Najmniej popularne"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../../../src/ui_fsmenu/addons/manager.cc:533
+#: ../../../../src/ui_fsmenu/addons/manager.cc:768
 msgid "Most often downloaded"
 msgstr "Najczęściej pobierany"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../../../src/ui_fsmenu/addons/manager.cc:535
+#: ../../../../src/ui_fsmenu/addons/manager.cc:770
 msgid "Least often downloaded"
 msgstr "Najrzadziej pobierany"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../../../src/ui_fsmenu/addons/manager.cc:537
+#: ../../../../src/ui_fsmenu/addons/manager.cc:772
 msgid "Oldest"
 msgstr "Starszy"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../../../src/ui_fsmenu/addons/manager.cc:539
+#: ../../../../src/ui_fsmenu/addons/manager.cc:774
 msgid "Newest"
 msgstr "Nowszy"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:547
+#: ../../../../src/ui_fsmenu/addons/manager.cc:783
 msgid "Filter add-ons by name"
 msgstr "Filtruj dodatki według nazwy"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:558
+#: ../../../../src/ui_fsmenu/addons/manager.cc:784
+msgid "Filter maps by name"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:795
 #, c-format
 msgid "Toggle category ‘%s’"
 msgstr "Przełącz kategorię ‘%s’"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:649
+#: ../../../../src/ui_fsmenu/addons/manager.cc:811
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:683
+msgid "One World"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:819
+#, c-format
+msgid "Toggle world ‘%s’"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1011
 #, c-format
 msgid "Are you certain that you want to upgrade this %u add-on?"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
@@ -4779,76 +4852,76 @@ msgstr[1] "Czy na pewno chcesz zaktualizować te dodatki: %u?"
 msgstr[2] "Czy na pewno chcesz zaktualizować te dodatki: %u?"
 msgstr[3] "Czy na pewno chcesz zaktualizować te dodatki: %u?"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:655
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1017
 #, c-format
 msgid ""
 "\n"
 "• %1$s (%2$s) by %3$s"
 msgstr "\n· %1$s (%2$s) przez %3$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:656
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:418
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:446
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1018
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:476
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:504
 msgid "NOT VERIFIED"
 msgstr "NIE ZWERYFIKOWANY"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:656
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1018
 msgid "verified"
 msgstr "zweryfikowany"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:660
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1022
 msgid "Upgrade All"
 msgstr "Zaktualizuj wszytko"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:799
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1164
 msgid "Not logged in"
 msgstr "Niezalogowany"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:800
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1165
 msgid ""
 "Click to log in. You can then comment and vote on add-ons and upload your "
 "own add-ons."
 msgstr "Kliknij, aby się zalogować. Następnie będziesz mógł komentować i głosować na dodatki oraz przesyłać własne dodatki."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:804
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1169
 msgid "Please log in to upload add-ons"
 msgstr "Zaloguj się, aby przesłać dodatki"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:806
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1171
 msgid "Please log in to upload content"
 msgstr "Zaloguj się żeby wgrać zawartość"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:808
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1173
 msgid "Please log in to send an enquiry"
 msgstr "Zaloguj się, aby wysłać zapytanie"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:813
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1178
 #, c-format
 msgid "Logged in as %s"
 msgstr "Zalogowano jako %s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:813
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1178
 #, c-format
 msgid "Logged in as %s (admin)"
 msgstr "Zalogowano jako %s (admin)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:814
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1179
 msgid "Click to log out"
 msgstr "Kliknij, by wylogować"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:819
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1184
 msgid "Please tick the confirmation checkbox to upload add-ons"
 msgstr "Zaznacz pole wyboru potwierdzenia, aby przesłać dodatki"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:822
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1187
 msgid "Please tick the confirmation checkbox to upload content"
 msgstr "Zaznacz pole wyboru potwierdzenia, aby przesłać zawartość"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:849
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1214
 msgid "Server Error"
 msgstr "Błąd serwera"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:850
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1215
 #, c-format
 msgid ""
 "Unable to connect to the server.\n"
@@ -4856,67 +4929,76 @@ msgid ""
 "%s"
 msgstr "Nie można połączyć się z serwerem.\nWiadomość o błędzie:\n%s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:858
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1223
 msgid "Wrong Password"
 msgstr "Błędne hasło"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:859
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1224
 #, c-format
 msgid ""
 "The entered username or password is invalid:\n"
 "%s"
 msgstr "Niewłaściwa nazwa użytkownika lub hasło:\n%s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:956
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1340
 #, c-format
 msgid "Fetching add-ons… (%.1f%%)"
 msgstr "Pobieranie dodatków... (%.1f %%)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:959
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1343
 msgid "Connecting to the server…"
 msgstr "Łaczenie z serwerem.."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:982
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1366
 msgid "Server Connection Error"
 msgstr "Błąd połączenia z serwerem"
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
-#: ../../../../src/ui_fsmenu/addons/manager.cc:984
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1368
 msgid "a networking bug"
 msgstr "Błąd sieci"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:985
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1369
 #, c-format
 msgid ""
 "Unable to fetch the list of available add-ons from the server!<br>Error "
 "Message: %s"
 msgstr "Nie można pobrać listy dostępnych dodatków z serwera! <br>Komunikat o błędzie: %s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1071
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1515
 #, c-format
 msgid "Installed (%u)"
 msgstr "Zainstalowano (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1150
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1553
 msgid "Browse"
 msgstr "Przeglądaj"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1150
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1553
 #, c-format
 msgid "Browse (%u)"
 msgstr "Przeglądaj (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1161
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1569
+msgid "Website Maps"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1570
+#, c-format
+msgid "Website Maps (%u)"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1584
 #, c-format
 msgid "Upgrade all (%u)"
 msgstr "Zaktualizuj wszystko (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1164
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1587
 msgid "No upgrades are available for your installed add-ons"
 msgstr "Żadne aktualizacje nie są dostępne dla zainstalowanych dodatków"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1166
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1589
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
@@ -4925,34 +5007,34 @@ msgstr[1] "Zaktualizuj następujące dodatki: %u"
 msgstr[2] "Zaktualizuj następujące dodatki: %u"
 msgstr[3] "Zaktualizuj następujące dodatki: %u"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1171
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1594
 #, c-format
 msgid "• %s"
 msgstr "· %s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1207
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1630
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which could not be found"
 msgstr "· ‘%1$s’ wymaga ‘%2$s’, który nie został znaleziony"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1212
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1635
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is disabled"
 msgstr "· ‘%1$s’ wymaga ‘%2$s’, który jest wyłączony"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1219
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1642
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
 msgstr "· ‘%1$s’ wymaga ‘%2$s’, który jest wypisany niżej następującego dodatku"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1247
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1670
 #, c-format
 msgid ""
 "• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
 msgstr "· ‘%1$s’ wymaga najpierw ‘%2$s’, a potem ‘%3$s’, ale są wymienione w złej kolejności"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1263
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1686
 #, c-format
 msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
@@ -4960,7 +5042,7 @@ msgid ""
 "%s"
 msgstr "Włączony dodatek jest uszkodzony. Przy obecnej konfiguracji nie można uruchomić żadnych gier.\nKomunikat o błędzie:\n%s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1280
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1703
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
@@ -4969,60 +5051,60 @@ msgstr[1] "%u błędy zależności"
 msgstr[2] "%u błędy zależności"
 msgstr[3] "%u błędy zależności"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1282
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1705
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
 msgstr "Dodatki z błędami zależności mogą działać nieprawidłowo lub uniemożliwiać ładowanie gier i map."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1383
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1809
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
 msgstr "Nie można przesłać dodatku '%1$s', ponieważ jego wersja (%2$s) nie jest nowsza niż wersja obecna na serwerze (%3$s)."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1394
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1820
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
 msgstr "Dodatek '%1$s' nie może zostać przesłany, ponieważ jego kategoria (%2$s) nie jest zgodna z kategorią wersji obecnej na serwerze (%3$s)."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1405
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1831
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:54
 msgid "Upload"
 msgstr "Prześlij"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1406
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1832
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
 msgstr "Czy na pewno chcesz przesłać dodatek '%s' na serwer?"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1416
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1842
 #, c-format
 msgid "Uploading ‘%s’…"
 msgstr "Przesyłanie '%s'..."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1423
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1506
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1568
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1849
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1975
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2037
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1446
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1872
 #, c-format
 msgid "‘%s’"
 msgstr "‘%s’"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1454
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1880
 #, c-format
 msgid ""
 "The add-on ‘%s’ may not be uploaded to the server because the following "
 "filenames contained in the add-on are not allowed:"
 msgstr "Dodatek ‘%s’ nie może zostać przesłany na serwer, ponieważ następujące nazwy plików zawarte w dodatku są niedozwolone:"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1458
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1884
 msgid ""
 "Filenames may only contain alphanumeric characters (A-Z, a-z, 0-9) and "
 "simple punctuation (period, hyphen, and underscore; not multiple periods). "
@@ -5030,7 +5112,7 @@ msgid ""
 "exceed 80 characters."
 msgstr "Nazwy plików mogą zawierać wyłącznie znaki alfanumeryczne (A-Z, a-z, 0-9) i proste znaki interpunkcyjne (kropka, myślnik i podkreślenie; nie wielokrotne kropki). Inne znaki, takie jak spacja, nie są dozwolone. Nazwy plików nie mogą zawierać więcej niż 80 znaków."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1473
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1899
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be uploaded to the server.\n"
@@ -5039,12 +5121,21 @@ msgid ""
 "%2$s"
 msgstr "Dodatek '%1$s' nie mógł zostać przesłany na serwer.\n\nKomunikat o błędzie:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1486
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1925
+#, c-format
+msgid ""
+"The map ‘%1$s’ could not be downloaded from the server.\n"
+"\n"
+"Error Message:\n"
+"%2$s"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1955
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr "Pobieranie ‘%s’..."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1522
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1991
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -5053,7 +5144,7 @@ msgid ""
 "%2$s"
 msgstr "Dodatek ‘%1$s’ nie został pobrany z serwera. Instalacja/aktualizacja tego dodatku zostanie pominięta.\n\nKomunikat o błędzie:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1600
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2069
 #, c-format
 msgid ""
 "The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations will be skipped.\n"
@@ -5062,7 +5153,7 @@ msgid ""
 "%2$s"
 msgstr "Tłumaczenia dodatku '%1$s' nie mogły być pobrane z serwera. Instalacja/aktualizacja tłumaczeń zostanie pominięta.\n\nKomunikat o błędzie:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1673
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2142
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr "Wymagany dodatek ’%s’ nie został znaleziony na serwerze."
@@ -5620,8 +5711,8 @@ msgstr "Niesprawdzony"
 
 #. * TRANSLATORS: This add-on has been verified
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:502
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:418
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:446
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:476
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:504
 msgid "Verified"
 msgstr "Zweryfikowane"
 
@@ -5698,7 +5789,8 @@ msgid "Votes (%u)"
 msgstr "Głosy (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:867
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:503
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:561
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:734
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
 msgid_plural "Average rating: %1$.3f (%2$u votes)"
@@ -5708,7 +5800,8 @@ msgstr[2] "Średnia ocena: %1$.3f (%2$u głosów)"
 msgstr[3] "Średnia ocena: %1$.3f (%2$u głosów)"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:870
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:506
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:564
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:737
 msgid "No votes yet"
 msgstr "Brak głosów"
 
@@ -5757,13 +5850,36 @@ msgstr "Zaloguj się, żeby skomentować"
 msgid "Please log in to vote"
 msgstr "Zaloguj się, żeby zagłosować"
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:44
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:143
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:306
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:46
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:196
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:364
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:647
 msgid "Uninstall"
 msgstr "Odinstaluj"
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:46
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:49
+#, c-format
+msgid ""
+"Are you certain that you want to uninstall this map?\n"
+"\n"
+"%1$s\n"
+"by %2$s\n"
+"%3$s\n"
+"\n"
+"Note that this map can not be downloaded again from the server."
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:54
+#, c-format
+msgid ""
+"Are you certain that you want to uninstall this map?\n"
+"\n"
+"%1$s\n"
+"by %2$s\n"
+"%3$s"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:60
 #, c-format
 msgid ""
 "Are you certain that you want to uninstall this add-on?\n"
@@ -5777,7 +5893,7 @@ msgid ""
 "Note that this add-on can not be downloaded again from the server."
 msgstr "Czy na pewno chcesz usunąć ten dodatek?\n\n%1$s\nStworzony przez %2$s\nWersja %3$s\nKategoria %4$s\n%5$s\n\nTen dodatek nie może być pobrany ponownie z serwera."
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:53
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:67
 #, c-format
 msgid ""
 "Are you certain that you want to uninstall this add-on?\n"
@@ -5789,97 +5905,110 @@ msgid ""
 "%5$s"
 msgstr "Czy na pewno chcesz usunąć ten dodatek?\n\n%1$s\nStworzony przez %2$s\nWersja %3$s\nKategoria %4$s\n%5$s"
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:99
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:120
 msgid ""
 "This add-on is known to cause desyncs in multiplayer games and replays."
 msgstr "Ten dodatek może powodować desynchronizację w grach wieloosobowych i powtórkach."
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:105
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:126
 #, c-format
 msgid "Requires a Widelands version of at least %s."
 msgstr "Wymaga Widelands w wersji, co najmniej %s."
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:107
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:128
 #, c-format
 msgid "Requires a Widelands version of at most %s."
 msgstr "Wymaga Widelands w wersji najwyżej %s."
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:109
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:130
 #, c-format
 msgid "Requires a Widelands version of at least %1$s and at most %2$s."
 msgstr "Wymaga Widelands w wersji, co najmniej %1$s i najwyżej %2$s."
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:153
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:204
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:158
+msgid "Hint:"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:165
+msgid "Comment by uploader:"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:206
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:257
 msgid "Disable"
 msgstr "Wyłącz"
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:153
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:204
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:206
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:257
 msgid "Enable"
 msgstr "Włącz"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:169
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:339
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:222
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:397
 #, c-format
 msgid "%1$s+%2$u"
 msgstr "%1$s+%2$u"
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:187
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:388
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:240
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:446
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:669
 #: ../../../../src/wui/constructionsitewindow.cc:139
 #, c-format
 msgid "(%s)"
 msgstr "(%s)"
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:189
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:392
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:242
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:450
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:672
 #, c-format
 msgid "by %s"
 msgstr "przez %s"
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:221
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:479
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:274
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:537
 #, c-format
 msgid "Category: %s"
 msgstr "Kategoria: %s"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:225
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:482
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:278
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:540
 #, c-format
 msgid "Version: %1$s+%2$u"
 msgstr "Wersja: %1$s+%2$u"
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:288
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:408
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:346
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:466
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:638
 msgid "Install"
 msgstr "Instaluj"
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:297
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:435
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:355
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:493
 msgid "Upgrade"
 msgstr "Aktualizuj"
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:315
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:373
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:656
 msgid "Comments and Votes"
 msgstr "Komentarze i głosy"
 
 #. * TRANSLATORS: Filesize • Download count • Average rating • Number of
 #. comments •
 #. Number of screenshots
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:365
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:423
 #, c-format
 msgid "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
 msgstr "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:393
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:451
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:673
 #, c-format
 msgid "by %1$s (uploaded by %2$s)"
 msgstr "przez %1$s (przesłane przez %2$s)"
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:410
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:468
 #, c-format
 msgid ""
 "Are you certain that you want to install this add-on?\n"
@@ -5892,7 +6021,7 @@ msgid ""
 "%6$s\n"
 msgstr "Czy na pewno chcesz zainstalować ten dodatek?\n\n%1$s\nStworzony przez %2$s\n%3$s\nWersja %4$s\nKategoria: %5$s\n%6$s\n"
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:437
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:495
 #, c-format
 msgid ""
 "Are you certain that you want to upgrade this add-on?\n"
@@ -5906,17 +6035,18 @@ msgid ""
 "%7$s"
 msgstr "Czy na pewno chcesz zaktualizować ten dodatek?\n\n%1$s\nStworzony przez %2$s\n%3$s\nZainstalowana wersja: %4$s\nDostępna wersja: %5$s\nKategoria: %6$s\n%7$s"
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:487
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:545
 msgid "Verified by the Widelands Development Team"
 msgstr "Zweryfikowane przez zespół rozwojowy Widelands"
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:488
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:546
 msgid ""
 "This add-on was not checked by the Widelands Development Team yet. We cannot"
 " guarantee that it does not contain harmful or offensive content."
 msgstr "Ten dodatek nie został jeszcze sprawdzony przez zespół programistów Widelands. Nie możemy zagwarantować, że nie zawiera szkodliwych lub obraźliwych treści."
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:498
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:556
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:730
 #, c-format
 msgid "Total size: %u byte"
 msgid_plural "Total size: %u bytes"
@@ -5925,7 +6055,8 @@ msgstr[1] "Łączny rozmiar: %u bajtów"
 msgstr[2] "Łączny rozmiar: %u bajtów"
 msgstr[3] "Łączny rozmiar: %u bajtów"
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:501
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:559
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:732
 #, c-format
 msgid "%u download"
 msgid_plural "%u downloads"
@@ -5934,7 +6065,8 @@ msgstr[1] "%u pobrań"
 msgstr[2] "%u pobrań"
 msgstr[3] "%u pobrań"
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:507
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:565
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:738
 #, c-format
 msgid "%u comment"
 msgid_plural "%u comments"
@@ -5943,7 +6075,7 @@ msgstr[1] "%u komentarzy"
 msgstr[2] "%u komentarze"
 msgstr[3] "%u komentarzy"
 
-#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:509
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:567
 #, c-format
 msgid "%u screenshot"
 msgid_plural "%u screenshots"
@@ -5951,6 +6083,18 @@ msgstr[0] "%u zrzut ekranu"
 msgstr[1] "%u zrzutów ekranu"
 msgstr[2] "%u zrzutów ekranu"
 msgstr[3] "%u zrzutów ekranu"
+
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:678
+#, c-format
+msgid "Size: %1$u×%2$u • Max Players: %3$u • %4$s"
+msgstr ""
+
+#. * TRANSLATORS: Timestamp · Filesize · Download count · Average rating ·
+#. Number of comments
+#: ../../../../src/ui_fsmenu/addons/rows_ui.cc:699
+#, c-format
+msgid "%1$s   %2$s   ⬇ %3$u   ★ %4$s   “” %5$u"
+msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:41
 #, c-format

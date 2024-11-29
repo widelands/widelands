@@ -5,7 +5,7 @@
 # Translators:
 # C138, 2021
 # Renaud Bouchard, 2023
-# David D, 2023
+# Laurent Godard, 2024
 # 
 msgid ""
 msgstr ""
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: David D, 2023\n"
+"Last-Translator: Laurent Godard, 2024\n"
 "Language-Team: French (https://app.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -119,7 +119,7 @@ msgid ""
 "Only one thing is certain: We must find a port space on the northern coast "
 "of this land belt to launch an expedition and continue sailing North."
 msgstr ""
-"Une seule chose est sûre: il faut trouver un espace portuaire sur la côte "
+"Une seule chose est sûre : il faut trouver un espace portuaire sur la côte "
 "nord de cette ceinture terrestre pour lancer une expédition et continuer à "
 "naviguer vers le nord."
 
@@ -177,9 +177,9 @@ msgid ""
 "weeks ago he landed with some of his allies and a large and well-trained "
 "army on my own island, Föhr, and sought to seize it."
 msgstr ""
-"Atterdag! Le roi de l'Empire danois et mon ennemi juré. J'ai souvent aidé "
+"Atterdag ! Le roi de l'Empire danois et mon ennemi juré. J'ai souvent aidé "
 "les ducs du continent alors qu'ils se défendaient contre sa soif de guerre "
-"et de conquête, et la plupart du temps nous l'avons combattu. Mais il y a "
+"et de conquête, et la plupart du temps nous l'avons repoussé. Mais il y a "
 "huit semaines, il a débarqué avec certains de ses alliés et une armée "
 "nombreuse et bien entraînée sur ma propre île, Föhr, et a cherché à s'en "
 "emparer."
@@ -197,7 +197,7 @@ msgstr ""
 "Et je dois faire l'amer constat – il a réussi. Les combats ont duré trente "
 "cinq jours, et chaque matin et soir, un autre navire arrivait du Danemark "
 "avec une autre troupe de soldats. Comment pourrais-je espérer rivaliser avec"
-" de telles oppositions? En fin de compte, je n'ai eu d'autre choix que de "
+" de telles oppositions ? En fin de compte, je n'ai eu d'autre choix que de "
 "m'échapper avec mon fils Henneke et quelques-uns de mes plus proches "
 "disciples alors qu'Atterdag considère maintenant Föhr comme une autre partie"
 " de son empire en pleine croissance."
@@ -205,7 +205,7 @@ msgstr ""
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:106
 msgid "But I will not accept defeat!"
-msgstr "Mais je n'accepterai pas la défaite!"
+msgstr "Mais je n'accepterai pas la défaite !"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:109
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:118
@@ -244,8 +244,8 @@ msgid ""
 msgstr ""
 "Et c'est une telle force que je recherche maintenant. Reebaud, le chef d'une"
 " petite mais forte communauté Frisonne avec qui je me suis un jour lié "
-"d'amitié; sa fierté hautaine et son immense talent au combat sont inégalées "
-"dans toutes les régions du monde connu. Si quelqu'un peut tenir tête à "
+"d'amitié ; sa fierté hautaine et son immense talent au combat sont inégalées"
+" dans toutes les régions du monde connu. Si quelqu'un peut tenir tête à "
 "Atterdag, ce doit être lui."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
@@ -322,11 +322,11 @@ msgid ""
 " too much time perfecting our economy – all that matters is that we get to "
 "the North soon."
 msgstr ""
-"Mes soldats rapportent qu'ils ont trouvé un espace portuaire! Nous devons "
+"Mes soldats rapportent qu'ils ont trouvé un espace portuaire ! Nous devons "
 "maintenant construire un port et démarrer une expédition. Bien sûr, nous "
 "devrons d'abord construire une économie maritime complète, avec un chantier "
-"naval et une usine de tissage. Mais ne perdez pas trop de temps à "
-"perfectionner notre économie - tout ce qui compte, c’est que nous arrivions "
+"naval et une usine de tissage. Mais ne perdons pas trop de temps à "
+"perfectionner notre économie – tout ce qui compte, c’est que nous arrivions "
 "bientôt dans le Nord."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:144
@@ -398,15 +398,15 @@ msgid ""
 "a descendant of the legendary King Ajanthul the First of Atlantis himself. "
 "Be welcome to me, if you will be our friends!"
 msgstr ""
-"Soyez bien accueillis, étrangers! Je suis Angadthur, le roi de cette île "
-"miraculeuse, un descendant du légendaire roi Ajanthul le premier de "
+"Soyez bien accueillis, étrangers ! Je suis Angadthur, le roi de cette île "
+"miraculeuse, un descendant du légendaire roi Ajanthul le Premier de "
 "l'Atlantide lui-même. Soyez les bienvenus chez moi, si vous voulez être nos "
-"amis!"
+"amis !"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:164
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:176
 msgid "Greetings to the King!"
-msgstr "Salutations au roi!"
+msgstr "Salutations au roi !"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 3
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:166
@@ -416,11 +416,11 @@ msgid ""
 "years ago to seek out a new home in the far North. If I may ask, have you "
 "heard of him before, and can you tell us where to find him?"
 msgstr ""
-"Paix, roi Angadthur! Je suis Claus Lembeck, et voici mon fils Henneke. Nous "
-"recherchons mon vieil ami Reebaud, qui a quitté notre pays il y a plusieurs "
-"années pour chercher une nouvelle maison dans le Grand Nord. Si je peux "
+"Paix, roi Angadthur ! Je suis Claus Lembeck, et voici mon fils Henneke. Nous"
+" recherchons mon vieil ami Reebaud, qui a quitté notre pays il y a plusieurs"
+" années pour chercher une nouvelle maison dans le Grand Nord. Si je peux "
 "demander, avez-vous déjà entendu parler de lui et pouvez-vous nous dire où "
-"le trouver?"
+"le trouver ?  "
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:170
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:182
@@ -436,7 +436,7 @@ msgid ""
 " ask?"
 msgstr ""
 "Bien sûr, vous pouvez demander. Demandez ce que vous voulez. Pourquoi "
-"demandez-vous si vous pouvez demander?"
+"demandez-vous si vous pouvez demander ?"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 5
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:178
@@ -446,8 +446,8 @@ msgid ""
 "Reebaud?"
 msgstr ""
 "C’est une figure de style considérée comme polie par notre peuple, c’est "
-"tout. Très bien, je vais bien demander: Savez-vous où nous pouvons trouver "
-"mon ami Reebaud?"
+"tout. Très bien, je vais bien demander : Savez-vous où nous pouvons trouver "
+"mon ami Reebaud ?"
 
 #. TRANSLATORS: Angadthur – Strangers 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:184
@@ -474,7 +474,7 @@ msgid ""
 " do succeed."
 msgstr ""
 "En l'occurrence, mes soldats s'ennuient de ne jamais avoir rien à faire. "
-"Faisons un concours d'armes, d'accord? Vous pouvez envoyer vos soldats "
+"Faisons un concours d'armes, d'accord ? Vous pouvez envoyer vos soldats "
 "essayer de détruire mon palais. Je suis certain que vous n'aurez aucune "
 "chance, c'est pourquoi je promets que je prierai les dieux de bénir votre "
 "voyage si vous réussissez."
@@ -500,7 +500,7 @@ msgstr ""
 "Vous avez dépassé mes meilleurs gardes et brûlé mon palais, ce que je "
 "croyais impossible. Vous devez être très puissant et favorisé par les dieux."
 " Vous avez certainement mérité votre victoire. Je vous félicite et vous "
-"souhaite bonne chance pour votre voyage. Que Satul vous protège!"
+"souhaite bonne chance pour votre voyage. Que Satul vous protège !"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:198
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:204
@@ -520,9 +520,9 @@ msgid ""
 "such a thing even exists. But I doubt anybody could live here; I fear we "
 "will not discover anything useful on this island."
 msgstr ""
-"Nous semblons nous rapprocher du Nord. Un désert de glace! Je ne savais même"
-" pas qu'une telle chose existe. Mais je doute que quiconque puisse vivre "
-"ici; J'ai peur que nous ne découvrons rien d'utile sur cette île."
+"Nous semblons nous rapprocher du Nord. Un désert de glace ! Je ne savais "
+"même pas qu'une telle chose existe. Mais je doute que quiconque puisse vivre"
+" ici ; J'ai peur que nous ne découvrions rien d'utile sur cette île."
 
 #. TRANSLATORS: Claus Lembeck – Port Space 4
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:207
@@ -531,7 +531,7 @@ msgid ""
 "continue our journey."
 msgstr ""
 "Cela n’a pas d’importance. Trouvons rapidement le prochain espace portuaire "
-"pour que nous puissions continuer notre voyage."
+"pour pouvoir continuer notre voyage."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:212
 msgid "Port space found"
@@ -599,8 +599,8 @@ msgid ""
 "don’t want any trouble."
 msgstr ""
 "Salutations, étrangers! Je suis Marcus Caius Iniucundus, un légat de "
-"l'Empire. Est-ce votre île? Nous ne faisons que passer, j'espère que cela ne"
-" vous dérange pas. Nous ne voulons aucun problème."
+"l'Empire. Est-ce votre île ? Nous ne faisons que passer, j'espère que cela "
+"ne vous dérange pas. Nous ne voulons aucun problème."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:245
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:257
@@ -615,11 +615,11 @@ msgid ""
 "getting around a lot. Have you heard news of my old friend Reebaud? I only "
 "know that he is living in the North, can you tell us where to find him?"
 msgstr ""
-"Paix, Sir Iniucundus! Je suis Claus Lembeck, et voici mon fils Henneke. Nous"
-" ne faisons que passer aussi. Vous êtes légat, dites-vous? Vous devez vous "
-"déplacer beaucoup. Avez-vous entendu des nouvelles de mon vieil ami Reebaud?"
-" Je sais seulement qu'il vit dans le Nord, pouvez-vous nous dire où le "
-"trouver?"
+"Paix, Sir Iniucundus ! Je suis Claus Lembeck, et voici mon fils Henneke. "
+"Nous ne faisons que passer aussi. Vous êtes légat, dites-vous ? Vous devez "
+"vous déplacer beaucoup. Avez-vous entendu des nouvelles de mon vieil ami "
+"Reebaud ? Je sais seulement qu'il vit dans le Nord, pouvez-vous nous dire où"
+" le trouver ?"
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 4
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:253
@@ -644,9 +644,9 @@ msgid ""
 "We thank you for your offer! What is the price you demand? And, if you don’t"
 " mind my asking, may I know what business you are employed on?"
 msgstr ""
-"Nous vous remercions pour votre offre! Quel est le prix que vous exigez? Et,"
-" si cela ne vous dérange pas que je vous pose la question, puis-je savoir "
-"dans quel domaine vous travaillez?"
+"Nous vous remercions pour votre offre ! Quel est le prix que vous exigez ? "
+"Et, si cela ne vous dérange pas que je vous pose la question, puis-je savoir"
+" dans quel domaine vous travaillez ?"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:266
 #, lua-format
@@ -678,9 +678,9 @@ msgid ""
 msgstr ""
 "Le but de mon voyage est de rechercher le Proconsule de la Province des "
 "Terres du Nord, qui a négligé de payer ses impôts pendant plusieurs années "
-"consécutives. Ma tâche est de donner à ce Murilius un bon récit, et si je "
-"découvre qu'il n'a pas payé par cupidité plutôt que par nécessité, je dois "
-"le ramener dans la capitale enchaîné. Je dois dire que je suis plutôt "
+"consécutives. Ma tâche est de donner à ce Murilius une bonne réprimande, et "
+"si je découvre qu'il n'a pas payé par cupidité plutôt que par nécessité, je "
+"dois le ramener enchaîné dans la capitale. Je dois dire que je suis plutôt "
 "heureux de me voir confier cette tâche, car j'ai de bonnes chances d'être "
 "nommé Proconsule à sa place si j'y parviens."
 
@@ -726,7 +726,7 @@ msgstr "Victoire"
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:295
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:304
 msgid "Victory!"
-msgstr "Victoire!"
+msgstr "Victoire !"
 
 #. TRANSLATORS: Claus Lembeck – victory
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:297
@@ -736,11 +736,11 @@ msgid ""
 "no news of Reebaud, I am confident that we will find him soon. Then he will "
 "grant us aid, and I will reconquer Föhr from the usurper Atterdag!"
 msgstr ""
-"Nous avons conquis le port! Nous construisons déjà un navire, puis nous nous"
-" rendrons enfin dans le Grand Nord. Bien que nous n'ayons toujours pas eu de"
-" nouvelles de Reebaud, je suis convaincu que nous le retrouverons bientôt. "
-"Alors il nous accordera son aide, et je reconquérirai Föhr de l'usurpateur "
-"Atterdag!"
+"Nous avons conquis le port ! Nous construisons déjà un navire, puis nous "
+"nous rendrons enfin dans le Grand Nord. Bien que nous n'ayons toujours pas "
+"eu de nouvelles de Reebaud, je suis convaincu que nous le retrouverons "
+"bientôt. Alors il nous accordera son aide, et je reconquérirai Föhr de "
+"l'usurpateur Atterdag !"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:299
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:308
@@ -771,7 +771,7 @@ msgstr "Vous avez perdu"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:313
 msgid "Goodbye!"
-msgstr "Au revoir!"
+msgstr "Au revoir !"
 
 #. TRANSLATORS: M. C. Iniucundus – lost
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:315
@@ -812,7 +812,7 @@ msgstr ""
 "Vois maintenant où ta folie nous a mené. L'orage a éclaté et nous sommes "
 "coincés ici depuis que vous avez brulé notre port. Les dieux sont justes – "
 "même si vous semblez être un guerrier plus puissant que nous, ils vous "
-"forcent à rester sur cette ile si longtemps que vous n’accomplirez jamais "
+"forcent à rester sur cette île si longtemps que vous n’accomplirez jamais "
 "l'objectif de votre futile voyage. Désespérez de votre triomphe !"
 
 #. TRANSLATORS: Claus Lembeck – lost
