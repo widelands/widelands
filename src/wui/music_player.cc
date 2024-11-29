@@ -44,12 +44,10 @@ public:
      * @param filename The music track filename, for toggling track playback on/off
      * @param title The title of the music track, to display
      */
-    MusicTrackControl(UI::Box* parent,
-                 const std::string& filename,
-                 const std::string& title)
-       : UI::Box(parent, UI::PanelStyle::kWui, filename, 0, 0, UI::Box::Horizontal),
-         enable_(this, panel_style_, "enable", Vector2i::zero(), title),
-         filename_(filename) {
+    MusicTrackControl(UI::Box* parent, Song* song)
+       : UI::Box(parent, UI::PanelStyle::kWui, song->filename, 0, 0, UI::Box::Horizontal),
+         enable_(this, panel_style_, "enable", Vector2i::zero(), song->title),
+         filename_(song->filename) {
 
         set_inner_spacing(kSpacing);
         add(&enable_, UI::Box::Resizing::kFullSize, UI::Align::kRight);
@@ -57,7 +55,6 @@ public:
             enable_.set_enabled(false);
         } else {
             enable_.set_state(read_state());
-
             enable_.changedto.connect([this](bool on) { write_state(on); });
         }
         set_thinks(false);
@@ -113,9 +110,9 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 
     std::vector<MusicTrackControl*> musicTrackControls;
 
-    std::vector<std::tuple<std::string,std::string>> music_data = g_sh->get_music_data();
-    for (auto& data : music_data) {
-        musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, std::get<0>(data), std::get<1>(data)));
+    std::vector<Song*> music_data = g_sh->get_music_data();
+    for (Song* song : music_data) {
+        musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, song));
     }
 
     vbox_track_playlist_.add_space(2);

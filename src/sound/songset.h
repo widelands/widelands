@@ -20,16 +20,13 @@
 #define WL_SOUND_SONGSET_H
 
 #include <vector>
-#include <map>
-#include <algorithm>
-#include <tuple>
 #include <cassert>
+#include <map>
 
 #include <SDL_mixer.h>
 
 #include "io/fileread.h"
-
-class Song;
+#include "song.h"
 
 /** A collection of several pieces of music meant for the same situation.
  *
@@ -50,22 +47,18 @@ struct Songset {
 	~Songset();
 
     Mix_Music* get_song(uint32_t random = 0);
-    std::vector<std::tuple<std::string,std::string>> get_songdata();
+    std::string get_filename(uint32_t num);
     bool is_song_enabled(std::string& filename);
     void set_song_enabled(std::string& filename, bool on);
+    std::vector<Song*> get_song_data();
 
 private:
-    void add_songs(const std::vector<std::string>& files);
-    void add_song(const std::string& filename);
-    Mix_Music* load_file(std::string filename);
-    void load_playlist();
-    void init_playlist(std::vector<std::string> files);
+    Mix_Music* load_file(std::string& filename);
+    void load_songs();
+    void init_songs(std::vector<std::string> files);
 
-    /// A playlist of which songs to play, by filename
-    std::map<std::string, Song*> playlist_;
-
-	/// The filenames of all configured songs
-    std::vector<std::string> songs_;
+    /// List of song data
+    std::map<std::string, Song*> songs_;
 
 	/** Index of the song that is currently playing
 	 * (actually the one that was last started)

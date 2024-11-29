@@ -22,6 +22,8 @@ wl_library(sound
     songset.h
     sound_handler.cc
     sound_handler.h
+    song.cc
+    song.h
   USES_SDL2
   USES_SDL2_MIXER
   DEPENDS
@@ -34,3 +36,4 @@ wl_library(sound
     sound_constants
     widelands_options
 )
+

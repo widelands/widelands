@@ -519,8 +519,8 @@ bool SoundHandler::is_music_track_enabled(std::string& filename) {
     return songs_[Songset::kIngame]->is_song_enabled(filename);
 }
 
-std::vector<std::tuple<std::string,std::string>> SoundHandler::get_music_data() {
-    return songs_[Songset::kIngame]->get_songdata();
+std::vector<Song*> SoundHandler::get_music_data() {
+    return songs_[Songset::kIngame]->get_song_data();
 }
 
 bool SoundHandler::use_custom_songset() const {
