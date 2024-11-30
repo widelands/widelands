@@ -78,6 +78,24 @@ private:
 	const bool full_upgrade_possible_;
 };
 
+class MapRow : public UI::Panel {
+public:
+	MapRow(Panel*, AddOnsCtrl*, std::shared_ptr<AddOns::AddOnInfo>, bool installed);
+	~MapRow() override = default;
+	void layout() override;
+	void draw(RenderTarget&) override;
+	const std::shared_ptr<AddOns::AddOnInfo> info() const {
+		return info_;
+	}
+
+private:
+	std::shared_ptr<AddOns::AddOnInfo> info_;
+	UI::Icon minimap_;
+	UI::Button install_, uninstall_, interact_;
+	UI::MultilineTextarea txt_;
+	UI::Textarea bottom_row_;
+};
+
 }  // namespace AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_ROWS_UI_H
