@@ -65,8 +65,8 @@ namespace AddOns {
  */
 
 constexpr unsigned kCurrentProtocolVersion = 7;
-static const std::string kCmdList = "2:CMD_LIST";
-static const std::string kCmdInfo = "2:CMD_INFO";
+static const std::string kCmdList = "3:CMD_LIST";
+static const std::string kCmdInfo = "3:CMD_INFO";
 static const std::string kCmdDownload = "1:CMD_DOWNLOAD";
 static const std::string kCmdI18N = "2:CMD_I18N";
 static const std::string kCmdScreenshot = "1:CMD_SCREENSHOT";
@@ -579,9 +579,48 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 		g_fs->fs_unlink(path);
 	}
 
+	if (a.category == AddOnCategory::kSingleMap) {
+		a.map_file_name = read_line();
+
+		a.unlocalized_map_hint = read_line();
+		std::string localized_map_hint = read_line();
+		a.map_hint = [localized_map_hint]() { return localized_map_hint; };
+
+		a.unlocalized_map_uploader_comment = read_line();
+		std::string localized_map_uploader_comment = read_line();
+		a.map_uploader_comment = [localized_map_uploader_comment]() {
+			return localized_map_uploader_comment;
+		};
+
+		a.map_width = math::to_int(read_line());
+		a.map_height = math::to_int(read_line());
+		a.map_nr_players = math::to_int(read_line());
+		a.map_world_name = read_line();
+	}
+
 	check_endofstream();
 	guard.ok();
 	return a;
+}
+
+void NetAddons::download_map(const std::string& name, const std::string& save_as) {
+	check_string_validity(name);
+	init();
+	CrashGuard guard(*this, false);
+
+	std::string send = kCmdDownload;
+	send += ' ';
+	send += name;
+	send += '\n';
+	write_to_server(send);
+
+	const std::string checksum = read_line();
+	const int64_t length = math::to_long(read_line());
+	read_file(length, save_as);
+	check_checksum(save_as, checksum);
+
+	check_endofstream();
+	guard.ok();
 }
 
 void NetAddons::download_addon(const std::string& name,
