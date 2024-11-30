@@ -12,6 +12,7 @@
 # GunChleoc, 2016,2018
 # Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
 # Jaypad <ju-ju@nataju.fr>, 2016
+# Laurent Godard, 2024
 # Olivier <olivier+transifex@migeot.org>, 2021
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net.TLD>, 2008
 # Renaud Bouchard, 2015-2022,2024
@@ -25,7 +26,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-08-15 02:44+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Renaud Bouchard, 2015-2022,2024\n"
+"Last-Translator: Laurent Godard, 2024\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -89,7 +90,7 @@ msgstr "Nous livrons aussi la GPL en tant que document texte avec Widelands."
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr "Sous Linux, vous pouvez trouver le fichier appelé COPYING à la racine du paquet binaire source ou autonome ou dans le répertoire d'installation. (comme ‘%1%’)."
+msgstr "Sous Linux, vous pouvez trouver le fichier appelé COPYING à la racine des paquets sources ou binaires ou dans le répertoire d'installation. (comme ‘%1%’)."
 
 #: ../../../../data/txts/LICENSE.lua:24
 msgid ""
@@ -597,14 +598,14 @@ msgstr "Construisez toujours une maison de sylviculteur et un bûcheron, ainsi v
 msgid ""
 "Atlanteans need spidercloth for many buildings. Build the needed "
 "infrastructure early before you run out."
-msgstr "Les Atlantes ont besoins de tissu de soie d' araignée pour plusieurs bâtiments. Contruisez les infrastructures nécessaire tôt afin de ne pas tomber à court."
+msgstr "Les Atlantes ont besoins de tissu de soie d' araignée pour plusieurs bâtiments. Contruisez les infrastructures nécessaires tôt afin de ne pas tomber à court."
 
 #: ../../../../data/txts/tips/barbarians.lua:4
 #: ../../../../data/txts/tips/empire.lua:4
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "work area, they will stop fishing."
-msgstr "Garder un œil sur vos pêcheurs. Lorsque les ressources de poissons sont épuisés dans la zone de pêche, ils arrêtent automatiquement la pêche."
+msgstr "Gardez un œil sur vos pêcheurs. Lorsque les ressources de poissons sont épuisées dans la zone de pêche, ils arrêtent automatiquement la pêche."
 
 #: ../../../../data/txts/tips/barbarians.lua:8
 msgid ""
@@ -669,13 +670,13 @@ msgstr "Les touches %1% vous permettent directement de définir la tailles de la
 msgid ""
 "%1% behaves like in normal games: It switches if building spaces are shown "
 "on or off."
-msgstr "%1% se comporte comme dans les jeux normaux: il bascule si les espaces de construction sont affichés ou non."
+msgstr "%1% se comporte comme dans les jeux normaux : il bascule si les espaces de construction sont affichés ou non."
 
 #: ../../../../data/txts/tips/editor.lua:36
 msgid ""
 "When placing trees, use the help button to see which trees are more likely "
 "to survive on which terrain."
-msgstr "Quand vous placez des arbres, utilisez le bouton aide pour voir quels sont les arbres qui ont plus de change de survie en fonction du terrain."
+msgstr "Quand vous placez des arbres, utilisez le bouton aide pour voir quels sont les arbres qui ont plus de chance de survie en fonction du terrain."
 
 #: ../../../../data/txts/tips/editor.lua:40
 msgid ""
@@ -687,7 +688,7 @@ msgid ""
 "You can place a medium building on any node where there is a slope no "
 "greater than 1 in the south-east direction and its height difference to all "
 "nodes in a radius of 2 is no greater than 2."
-msgstr "Vous pouvez placer un bâtiment moyen sur n'importe quel point où il n'y a pas de pente plus grande que 1 dans la direction du sud-est et dont la différence d' altitude par rapport à tous les points dans un rayon de 2  n'est pas supérieure à 2."
+msgstr "Vous pouvez placer un bâtiment moyen sur n'importe quel point où il n'y a pas de pente plus grande que 1 dans la direction du sud-est et dont la différence d'altitude par rapport à tous les points dans un rayon de 2  n'est pas supérieure à 2."
 
 #: ../../../../data/txts/tips/editor.lua:48
 msgid ""
@@ -709,7 +710,7 @@ msgid ""
 "To produce bricks, you need granite; to produce granite, you need a quarry "
 "or rock mine; to build those, you need bricks. Take care not to get "
 "deadlocked!"
-msgstr "Pour produire des briques, vous avez besoin de granite; pour produire du granite, vous avez besoin d'une carrière ou une mine de roche; pour construire ceci, vous avez besoin de briques. Ne tombez pas dans l'impasse !"
+msgstr "Pour produire des briques, vous avez besoin de granite; pour produire du granit, vous avez besoin d'une carrière ou une mine de roches; pour construire ceci, vous avez besoin de briques. Ne tombez pas dans l'impasse !"
 
 #: ../../../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."
@@ -762,7 +763,7 @@ msgstr "Utilisez le curseur des priorités dans la fenêtre des constructions po
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
-msgstr "Utilisez le menu 'Configurer l'économie' pour ajuster les quantités ciblés des marchandises. Il peut être accédé via le menu des drapeaux."
+msgstr "Utilisez le menu 'Configurer l'économie' pour ajuster les quantités ciblées des marchandises. Il peut être accédé via le menu des drapeaux."
 
 #: ../../../../data/txts/tips/general_game.lua:40
 msgid ""
@@ -790,7 +791,7 @@ msgstr "Les nouveaux soldats sont recrutés dans les casernes. Leurs capacités 
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr "Si vous aimez vivre dangereusement, appuyez sur « Ctrl » pendant que vous cliquez sur les boutons « Améliorer », « démanteler » ou « détruire » les constructions, ceci passera la confirmation."
+msgstr "Si vous aimez vivre dangereusement, appuyez sur « Ctrl » pendant que vous cliquez sur les boutons « améliorer », « démanteler » ou « détruire » les constructions, ceci passera la confirmation."
 
 #: ../../../../data/txts/tips/general_game.lua:61
 #, lua-format
@@ -802,7 +803,7 @@ msgid ""
 "An economy consists of all buildings and flags connected by roads, ferries, "
 "or ships. The supplies and demands of buildings are handled in their "
 "economy. A player can have more than one economy."
-msgstr "Une économie consiste a relier par des routes, traversiers, vaisseaux tous les bâtiments et drapeaux. Les approvisionnements et demandes des bâtiments sont gérés par cette économie. Un joueur peut disposer de plus d'une économie."
+msgstr "Une économie consiste à relier par des routes, traversiers, vaisseaux tous les bâtiments et drapeaux. Les approvisionnements et demandes des bâtiments sont gérés par cette économie. Un joueur peut disposer de plus d'une économie."
 
 #: ../../../../data/txts/tips/general_game.lua:69
 msgid ""
@@ -892,7 +893,7 @@ msgstr "Utilisez « name » au début d'un message de tchat pour l'envoyer seule
 msgid ""
 "If the game should crash, don’t worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr "Si le jeu devait planter, n'ayez crainte! Le jeu sera sauvé de manière à ce que vous puissiez reprendre juste après."
+msgstr "Si le jeu devait planter, n'ayez crainte ! Le jeu sera sauvé de manière à ce que vous puissiez reprendre juste après."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../../../data/txts/tips/singleplayer.lua:7
@@ -900,4 +901,4 @@ msgstr "Si le jeu devait planter, n'ayez crainte! Le jeu sera sauvé de manière
 msgid ""
 "Are the computer players too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr "Jouer contre l'ordinateur ne suffit plus? Visite notre site internet %s et rencontre d'autres joueurs et joueuses pour des parties en ligne. "
+msgstr "Jouer contre l'ordinateur ne suffit plus ? Visitez notre site internet %s et rencontrez d'autres joueurs et joueuses pour des parties en ligne. "

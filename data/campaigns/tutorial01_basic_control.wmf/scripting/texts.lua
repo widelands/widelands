@@ -498,6 +498,39 @@ census_and_statistics_02 = {
    w = messagebox_w_step(-4)
 }
 
+census_and_statistics_hq = {
+   title = _("Census and Status"),
+   body = (
+      li_object("barbarians_headquarters", _([[You may have noticed that the census line of the headquarters is different. This is because it’s a special building type called a warehouse. Warehouses are buildings where your workers can rest until they get assigned to a workplace and where any number of your wares can be stored until they are needed somewhere. So they act like a kind of town center, and to signify this, they get unique names.]]), plr.color) ..
+      p(_([[The small crowns beside the name mark it as your headquarters. As you play Widelands, you will see three kinds of warehouses, marked by little icons:]])) ..
+      li_arrow(_([[The headquarters where you usually start the game. It is marked by small crowns: ♔]])) ..
+      li_arrow(_([[Plain warehouses that simply hold wares and workers to keep them distributed all over your territory. They are marked by small houses: ⟰]])) ..
+      li_arrow(_([[Ports that you’ll use in seafaring. They don’t only store your wares and workers, but can also load them on your ships to send them across the seas. They are marked by small anchors: ⚓]])) ..
+      vspace() .. p(_([[All of them are assigned names automatically that match the tribe, but you can change their names to your liking too.]]))
+   ),
+   position = "topright",
+   h = messagebox_h_step(4),
+   w = messagebox_w_step(4),
+}
+obj_edit_hq_name = {
+   name = "edit_hq_name",
+   title=_("Change the name of your little village"),
+   number = 1,
+   body = objective_text(_("Change the name of your headquarters"),
+      li_arrow(_([[In order to set a new name for your headquarters, first click on it to open its window.]])) ..
+      li_arrow(_([[You will see an edit box at the top of the window showing the name.]])) ..
+      li_arrow(_([[All you have to do is delete the old name and type in the new one.]])) ..
+      li_arrow(_([[When you’re done, just close the window.]]))
+   )
+}
+
+hq_not_changed = {
+   title = _("Be creative"),
+   body = p(_("I see you closed the window without changing the name. I’m sure you can come up with something. But if you don’t want to, at least delete the old name, please, to show me you’ve found the editbox.")),
+   h = styles.get_size("campaign_message_box_h_min"),
+   w = messagebox_w_step(-2)
+}
+
 -- ========
 -- Messages
 -- ========

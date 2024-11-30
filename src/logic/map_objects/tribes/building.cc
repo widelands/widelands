@@ -547,8 +547,12 @@ std::string Building::info_string(const InfoStringFormat& format) {
 	std::string result;
 	switch (format) {
 	case InfoStringFormat::kCensus:
-		if (upcast(ConstructionSite const, constructionsite, this)) {
+		if (descr().type() == MapObjectType::CONSTRUCTIONSITE) {
+			upcast(ConstructionSite const, constructionsite, this);
 			result = constructionsite->building().descname();
+		} else if (descr().type() == MapObjectType::WAREHOUSE) {
+			upcast(Warehouse const, warehouse, this);
+			result = warehouse->warehouse_census_string();
 		} else {
 			result = descr().descname();
 		}

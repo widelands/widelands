@@ -202,6 +202,26 @@ soldier_capacity = {
    )
 }
 
+hq_soldiers = {
+   position = "topright",
+   title = _("Soldiers in the headquarters"),
+   body = (
+      h1(_("Soldiers in the headquarters")) ..
+      p(_([[Your headquarters has some capabilities of military sites: It conqers some land, and the stored soldiers defend it when attacked. However this also means that the enemy can attack the headquarters itself too. On the other hand, there’s a difference too: you can’t start an attack with the soldiers in your headquarters.]])) ..
+      p(_([[The military capabilities of the headquarters are a big difference from plain warehouses that don’t conquer land, and need nearby military sites for defense. Soldiers stored in plain warehouses don’t participate in any fighting, and plain warehouses can’t be attacked directly.]]))
+   )
+}
+
+hq_status = {
+   position = "topright",
+   title = _("Soldier settings of the headquarters"),
+   body = (
+      h1(_("Soldier settings of the headquarters")) ..
+      p(_([[While all soldiers who happen to be in your headquarters help defending it, they are not permanently assigned to the headquarters, so they can be sent away any time when a military site needs a soldier. Fortunately you can also assign some soldiers to the defense of the headquarters the same way you set soldier capacity and preference for military sites. If you do so, the headquarters will only let surplus soldiers be sent to other buildings, but not soldiers from the assigned garrison.]])) ..
+      p(_([[If you look at the status lines, you can see that your warehouse has nothing in it, but your headquarters has a ‘—’ sign initially. That means that there is no garrison set up to protect the headquarters, though there may still be some soldiers stored there. If you increase the desired number of soldiers to more than zero, then the headquarters will show the same soldier information as military sites in the status. Surplus soldiers are never shown in the status.]]))
+   )
+}
+
 dismantle = {
    position = "topright",
    title = _("Dismantle your sentry"),
