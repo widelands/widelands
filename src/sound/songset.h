@@ -22,6 +22,7 @@
 #include <vector>
 #include <cassert>
 #include <map>
+#include <stdexcept>
 
 #include <SDL_mixer.h>
 
@@ -54,7 +55,7 @@ struct Songset {
 
 private:
     Mix_Music* load_file(std::string& filename);
-    void load_songs();
+    void load_songs(const std::string& basename);
     void init_songs(std::vector<std::string> files);
 
     /// List of song data

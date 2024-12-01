@@ -31,13 +31,15 @@ Songset::Songset(const std::string& dir, const std::string& basename) {
     std::vector<std::string> mp3_files = g_fs->get_sequential_files(dir, basename, "mp3");
     std::vector<std::string> ogg_files = g_fs->get_sequential_files(dir, basename, "ogg");
 
-    load_songs();
+    load_songs(basename);
 
     if (songs_.empty()) {
         init_songs(mp3_files);
         init_songs(ogg_files);
-        load_songs();
+        load_songs(basename);
     }
+
+    current_song_ = 0;
 
 }
 
@@ -52,21 +54,21 @@ void Songset::init_songs(std::vector<std::string> files) {
 }
 
 /// Loads song data from config into memory
-void Songset::load_songs() {
+void Songset::load_songs(const std::string& basename) {
     try {
         Section sec = get_config_section("songs");
         std::vector<Section::Value> values = sec.get_values();
-        if (values.empty()) {
-            for (Section::Value val : values) {
-                std::string filename = val.get_name();
-                bool enabled = val.get_bool();
-                Song* song = new Song(filename);
-                song->enabled = enabled;
-                song->filename = filename;
-                m_ = load_file(filename);
-                std::string title = Mix_GetMusicTitle(m_);
-                song->title = title;
-            }
+        for (Section::Value val : values) {
+            std::string filename = val.get_name();
+            if (!filename.rfind(basename,0)) continue;
+            bool enabled = val.get_bool();
+            Song* song = new Song(filename);
+            song->enabled = enabled;
+            song->filename = filename;
+            m_ = load_file(filename);
+            std::string title = Mix_GetMusicTitle(m_);
+            song->title = title;
+            songs_.emplace(filename, song);
         }
     } catch(WException& ex) {
        log_warn("Failed to load song data from config");
@@ -149,7 +151,7 @@ std::string Songset::get_filename(uint32_t num) {
     for(auto const& entry : songs_) {
         if (i == num) return entry.second->filename;
     }
-    return nullptr;
+    throw std::out_of_range("Songset::get_filename(uint32_t num) parameter out of bounds");
 }
 
 
