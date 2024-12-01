@@ -161,7 +161,7 @@ DefaultAI::DefaultAI(Widelands::Game& ggame, Widelands::PlayerNumber const pid, 
 								   assert(pso.ships_assigned > 0);
 								   --pso.ships_assigned;
 								   verb_log_dbg_time(game().get_gametime(),
-								                     "AI %d: port %s lost guard ship %s, %u remaining",
+								                     "AI %u: port %s lost guard ship %s, %u remaining",
 								                     player_->player_number(),
 								                     pso.site->get_warehouse_name().c_str(),
 								                     so.ship->get_shipname().c_str(), pso.ships_assigned);
@@ -711,7 +711,7 @@ void DefaultAI::late_initialization() {
 		}
 		bo.basic_amount = bh.basic_amount();
 		if (bh.needs_water()) {
-			verb_log_dbg_time(gametime, "AI %d detected coast building: %s", player_number(), bo.name);
+			verb_log_dbg_time(gametime, "AI %u detected coast building: %s", player_number(), bo.name);
 			bo.set_is(BuildingAttribute::kNeedsCoast);
 		}
 		if (bh.is_space_consumer()) {
@@ -769,7 +769,7 @@ void DefaultAI::late_initialization() {
 				if (!bo.is(BuildingAttribute::kBarracks) && bo.ware_outputs.empty()) {
 					bo.set_is(BuildingAttribute::kRecruitment);
 					verb_log_dbg_time(
-					   gametime, "AI %d detected recruitment site: %s", player_number(), bo.name);
+					   gametime, "AI %u detected recruitment site: %s", player_number(), bo.name);
 				}
 			}
 
@@ -782,7 +782,7 @@ void DefaultAI::late_initialization() {
 			// If this is a producer, does it act also as supporter?
 			if (!bo.ware_outputs.empty() && !prod.supported_productionsites().empty()) {
 				verb_log_dbg_time(
-				   gametime, "AI %d detected supporting producer: %s", player_number(), bo.name);
+				   gametime, "AI %u detected supporting producer: %s", player_number(), bo.name);
 				for (const auto& supp : prod.supported_productionsites()) {
 					verb_log_dbg_time(gametime, "  -> %s", supp.c_str());
 				}
@@ -809,14 +809,14 @@ void DefaultAI::late_initialization() {
 				// get the resource needed by the mine
 				const auto& collected_resources = prod.collected_resources();
 				if (collected_resources.size() > 1) {
-					log_warn("AI %d: The mine '%s' will mine multiple resources. The AI can't handle "
+					log_warn("AI %u: The mine '%s' will mine multiple resources. The AI can't handle "
 					         "this and will simply pick the first one from the list.",
 					         player_number(), bo.name);
 				}
 				const auto& first_resource_it = collected_resources.begin();
 				if (first_resource_it == collected_resources.end()) {
 					log_warn(
-					   "AI %d: The mine '%s' does not mine any resources!", player_number(), bo.name);
+					   "AI %u: The mine '%s' does not mine any resources!", player_number(), bo.name);
 					bo.mines = Widelands::INVALID_INDEX;
 				} else {
 					bo.mines = game().descriptions().resource_index(first_resource_it->first);
@@ -904,7 +904,7 @@ void DefaultAI::late_initialization() {
 				for (const auto& attribute : prod.collected_attributes()) {
 					if (attribute.second == Widelands::MapObjectDescr::get_attribute_id("rocks")) {
 						verb_log_dbg_time(
-						   gametime, "AI %d detected quarry: %s", player_number(), bo.name);
+						   gametime, "AI %u detected quarry: %s", player_number(), bo.name);
 						bo.set_is(BuildingAttribute::kNeedsRocks);
 						buildings_immovable_attributes_[attribute.second].insert(
 						   ImmovableAttribute(bo.name, BuildingAttribute::kNeedsRocks));
@@ -914,7 +914,7 @@ void DefaultAI::late_initialization() {
 					    attribute.second == Widelands::MapObjectDescr::get_attribute_id("normal_tree") ||
 					    attribute.second == Widelands::MapObjectDescr::get_attribute_id("tree_balsa")) {
 						verb_log_dbg_time(
-						   gametime, "AI %d detected lumberjack: %s", player_number(), bo.name);
+						   gametime, "AI %u detected lumberjack: %s", player_number(), bo.name);
 						bo.set_is(BuildingAttribute::kLumberjack);
 						buildings_immovable_attributes_[attribute.second].insert(
 						   ImmovableAttribute(bo.name, BuildingAttribute::kLumberjack));
@@ -922,7 +922,7 @@ void DefaultAI::late_initialization() {
 					}
 					if (attribute.second == Widelands::MapObjectDescr::get_attribute_id("ripe_bush")) {
 						verb_log_dbg_time(
-						   gametime, "AI %d detected berry collector: %s", player_number(), bo.name);
+						   gametime, "AI %u detected berry collector: %s", player_number(), bo.name);
 						bo.set_is(BuildingAttribute::kNeedsBerry);
 						buildings_immovable_attributes_[attribute.second].insert(
 						   ImmovableAttribute(bo.name, BuildingAttribute::kNeedsBerry));
@@ -935,13 +935,13 @@ void DefaultAI::late_initialization() {
 
 			// here we identify hunters
 			if (!prod.collected_bobs().empty()) {
-				verb_log_dbg_time(gametime, "AI %d detected hunter: %s", player_number(), bo.name);
+				verb_log_dbg_time(gametime, "AI %u detected hunter: %s", player_number(), bo.name);
 				bo.set_is(BuildingAttribute::kHunter);
 			}
 
 			// fishers
 			if (bh.needs_water() && prod.collected_resources().count("resource_fish") == 1) {
-				verb_log_dbg_time(gametime, "AI %d detected fisher: %s", player_number(), bo.name);
+				verb_log_dbg_time(gametime, "AI %u detected fisher: %s", player_number(), bo.name);
 				bo.set_is(BuildingAttribute::kFisher);
 			}
 
@@ -950,7 +950,7 @@ void DefaultAI::late_initialization() {
 				for (Widelands::DescriptionIndex ware_index : prod.output_ware_types()) {
 					if (tribe_->get_ware_descr(ware_index)->name() == "water" &&
 					    prod.collected_resources().count("resource_water") == 1) {
-						verb_log_dbg_time(gametime, "AI %d detected well: %s", player_number(), bo.name);
+						verb_log_dbg_time(gametime, "AI %u detected well: %s", player_number(), bo.name);
 						bo.set_is(BuildingAttribute::kWell);
 					}
 				}
@@ -959,7 +959,7 @@ void DefaultAI::late_initialization() {
 			bo.requires_supporters = bh.requires_supporters();
 			if (bo.requires_supporters) {
 				verb_log_dbg_time(
-				   gametime, "AI %d: %s strictly requires supporters\n", player_number(), bo.name);
+				   gametime, "AI %u: %s strictly requires supporters\n", player_number(), bo.name);
 			}
 			continue;
 		}
@@ -1037,7 +1037,7 @@ void DefaultAI::late_initialization() {
 		for (const std::string& candidate : prodsite->supported_productionsites()) {
 			for (const Widelands::ProductionSiteDescr* lumberjack : lumberjacks) {
 				if (lumberjack->name() == candidate) {
-					verb_log_dbg_time(gametime, "AI %d detected ranger: %s -> %s", player_number(),
+					verb_log_dbg_time(gametime, "AI %u detected ranger: %s -> %s", player_number(),
 					                  bo.name, lumberjack->name().c_str());
 					bo.set_is(BuildingAttribute::kRanger);
 					rangers_.push_back(bo);
@@ -3209,7 +3209,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	}
 
 	// send the command to construct a new building
-	verb_log_dbg_time(game().get_gametime(), "AI %d builds %s at %d,%d", player_number(),
+	verb_log_dbg_time(game().get_gametime(), "AI %u builds %s at %d,%d", player_number(),
 	                  best_building->desc->name().c_str(), proposed_coords.x, proposed_coords.y);
 	game().send_player_build(player_number(), proposed_coords, best_building->id);
 	blocked_fields.add(proposed_coords, game().get_gametime() + Duration(2 * 60 * 1000));
@@ -7504,7 +7504,7 @@ void DefaultAI::print_stats(const Time& gametime) {
 				btype = "?";
 			}
 
-			verb_log_dbg_time(gametime, " %1s %-30s %5u(%3u%%)  %6u %6u %6d %8s %5d %5d %5u %5u\n",
+			verb_log_dbg_time(gametime, " %1s %-30s %5u(%3u%%)  %6u %6u %6u %8s %5d %5d %5u %5u\n",
 			                  btype.c_str(), bo.name,
 			                  bo.total_count() - bo.cnt_under_construction - bo.unoccupied_count -
 			                     bo.unconnected_count,

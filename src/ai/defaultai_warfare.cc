@@ -620,7 +620,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 	}
 	verb_log_info_time(
 	   gametime,
-	   "%2d: attacking site at %3dx%3d, score %3d, with %2d soldiers, attacking %2u times, after "
+	   "%2u: attacking site at %3dx%3d, score %3d, with %2d soldiers, attacking %2u times, after "
 	   "%5u seconds\n",
 	   player_number(), flag->get_position().x, flag->get_position().y, best_score, a,
 	   enemy_sites[best_target].attack_counter + 1,
@@ -698,13 +698,13 @@ void DefaultAI::count_military_vacant_positions() {
 	if (soldiers_counted < total_soldiers) {
 		int32_t remaining_soldiers = total_soldiers - soldiers_counted;
 		verb_log_dbg_time(game().get_gametime(),
-		                  "AI %d: soldiers: total: %d, associated: %d, difference: %d",
+		                  "AI %u: soldiers: total: %d, associated: %d, difference: %d",
 		                  player_number(), total_soldiers, soldiers_counted, remaining_soldiers);
 		on_stock_ += remaining_soldiers;
 	} else if (soldiers_counted > total_soldiers) {
 		// This shouldn't happen
 		log_warn_time(game().get_gametime(),
-		              "AI %d: soldiers: total: %d, associated: %d, unexpected: %d", player_number(),
+		              "AI %u: soldiers: total: %d, associated: %d, unexpected: %d", player_number(),
 		              total_soldiers, soldiers_counted, soldiers_counted - total_soldiers);
 	}
 
@@ -757,7 +757,7 @@ bool DefaultAI::check_trainingsites(const Time& gametime) {
 	if (tso.bo->total_count() > tso.bo->cnt_limit_by_aimode) {
 		verb_log_warn_time(
 		   gametime,
-		   "AI check_trainingsites: AI player %d: count of %s exceeds an AI limit %u: actual count: "
+		   "AI check_trainingsites: AI player %u: count of %s exceeds an AI limit %u: actual count: "
 		   "%u\n",
 		   player_number(), tso.bo->name, tso.bo->cnt_limit_by_aimode, tso.bo->total_count());
 	}
@@ -1543,6 +1543,6 @@ void DefaultAI::soldier_trained(const Widelands::TrainingSite& site) {
 	}
 
 	verb_log_warn_time(
-	   gametime, "AI %d: soldier_trained(): trainingsite not found\n", player_number());
+	   gametime, "AI %u: soldier_trained(): trainingsite not found\n", player_number());
 }
 }  // namespace AI
