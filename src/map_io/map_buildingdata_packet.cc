@@ -894,8 +894,8 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 
 				std::string body("<p>");
 				/** TRANSLATORS: The first argument is a buiding name, the second is a list of wares */
-				body += format(_("%s: the building's inputs have changed."),
-				               productionsite.descr().descname());
+				body += format(
+				   _("%s: the building's inputs have changed."), productionsite.descr().descname());
 				if (!deleted_wares.empty() || deleted_unknown > 0) {
 					/** TRANSLATORS: Amount and type of space between two sentences */
 					body += pgettext("sentence_separator", " ");
@@ -907,13 +907,13 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 						body += format(
 						   list_entry,
 						   format(ngettext("%1$u piece of %2$s", "%1$u pieces of %2$s", deleted.second),
-						   deleted.second,
-						   game.descriptions().get_ware_descr(deleted.first)->descname()));
+						          deleted.second,
+						          game.descriptions().get_ware_descr(deleted.first)->descname()));
 					}
 					if (deleted_unknown > 0) {
 						body += format(
 						   list_entry, format(ngettext("%1$u piece of an unknown ware",
-							                            "%1$u pieces of unknown wares", deleted_unknown),
+						                               "%1$u pieces of unknown wares", deleted_unknown),
 						                      deleted_unknown));
 					}
 				}
