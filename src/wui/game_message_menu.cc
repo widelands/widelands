@@ -487,7 +487,15 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 		toggle_filter_messages_button(*scenariobtn_, msgtype);
 		break;
 
-	default:
+	case Widelands::Message::Type::kNoMessages:
+	case Widelands::Message::Type::kAllMessages:
+	case Widelands::Message::Type::kGameLogic:
+	case Widelands::Message::Type::kEconomySiteOccupied:
+	case Widelands::Message::Type::kWarfareSiteDefeated:
+	case Widelands::Message::Type::kWarfareSiteLost:
+	case Widelands::Message::Type::kWarfareUnderAttack:
+	case Widelands::Message::Type::kTradeOfferReceived:
+	case Widelands::Message::Type::kEconomyLoadGame:
 		set_filter_messages_tooltips();
 		message_filter_ = Widelands::Message::Type::kAllMessages;
 		geologistsbtn_->set_perm_pressed(false);
@@ -496,6 +504,9 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 		warfarebtn_->set_perm_pressed(false);
 		scenariobtn_->set_perm_pressed(false);
 		break;
+
+	default:
+		NEVER_HERE();
 	}
 	think();
 }
@@ -575,8 +586,17 @@ std::string GameMessageMenu::display_message_type_icon(const Widelands::Message&
 		return "images/wui/menus/objectives.png";
 	case Widelands::Message::Type::kGameLogic:
 		return "images/ui_basic/menu_help.png";
-	default:
+	case Widelands::Message::Type::kNoMessages:
+	case Widelands::Message::Type::kAllMessages:
+	case Widelands::Message::Type::kEconomySiteOccupied:
+	case Widelands::Message::Type::kWarfareSiteDefeated:
+	case Widelands::Message::Type::kWarfareSiteLost:
+	case Widelands::Message::Type::kWarfareUnderAttack:
+	case Widelands::Message::Type::kTradeOfferReceived:
+	case Widelands::Message::Type::kEconomyLoadGame:
 		return "images/wui/messages/message_new.png";
+	default:
+		NEVER_HERE();
 	}
 }
 
