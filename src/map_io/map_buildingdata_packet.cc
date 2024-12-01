@@ -893,8 +893,8 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				static const std::string paragraph_separator("</p><vspace gap=8><p>");
 
 				std::string body("<p>");
-				/** TRANSLATORS: The first argument is a buiding name, the second is a list of wares */
 				body += format(
+				   /** TRANSLATORS: The argument is the buiding name */
 				   _("%s: the building's inputs have changed."), productionsite.descr().descname());
 				if (!deleted_wares.empty() || deleted_unknown > 0) {
 					/** TRANSLATORS: Amount and type of space between two sentences */
