@@ -82,7 +82,10 @@ void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const 
 		// Maps only have this one file and no translations currently
 		g_fs->fs_unlink(kMapsDir + FileSystem::file_separator() + kDownloadedMapsDir +
 		                FileSystem::file_separator() + info->map_file_name);
-		return ctrl->rebuild(true);
+		ctrl->clear_cache_for_map(info->internal_name);
+		ctrl->update_dependency_errors();
+		ctrl->rebuild_maps();
+		return;
 	}
 
 	// Delete the add-on…
@@ -102,10 +105,17 @@ void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const 
 				AddOns::update_ui_theme(AddOns::UpdateThemeAction::kAutodetect);
 				ctrl->get_topmost_forefather().template_directory_changed();
 			}
+
 			if (info->category == AddOns::AddOnCategory::kUIPlugin) {
 				ctrl->fsmm().reinit_plugins();
 			}
-			return ctrl->rebuild(true);
+
+			ctrl->clear_cache_for_installed(info->internal_name);
+			ctrl->clear_cache_for_browse(info->internal_name);
+			ctrl->update_dependency_errors();
+			ctrl->rebuild_installed();
+			ctrl->rebuild_browse();
+			return;
 		}
 	}
 	NEVER_HERE();
@@ -255,6 +265,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 				                                              "images/ui_basic/checkbox_checked.png" :
 				                                              "images/ui_basic/checkbox_empty.png"));
 				toggle_enabled_.set_tooltip(pair.second ? _("Disable") : _("Enable"));
+
 				if (pair.first->category == AddOns::AddOnCategory::kTheme) {
 					AddOns::update_ui_theme(pair.second ? AddOns::UpdateThemeAction::kEnableArgument :
 					                                      AddOns::UpdateThemeAction::kAutodetect,
@@ -263,7 +274,11 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 				} else if (pair.first->category == AddOns::AddOnCategory::kUIPlugin) {
 					ctrl->fsmm().reinit_plugins();
 				}
-				return ctrl->rebuild(true);
+
+				ctrl->clear_cache_for_installed(info->internal_name);
+				ctrl->update_dependency_errors();
+				ctrl->rebuild_installed();
+				return;
 			}
 		}
 		NEVER_HERE();
@@ -481,8 +496,14 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 				return;
 			}
 		}
+
 		ctrl->install_or_upgrade(info_, false);
-		ctrl->rebuild(true);
+
+		ctrl->clear_cache_for_installed(info_->internal_name);
+		ctrl->clear_cache_for_browse(info_->internal_name);
+		ctrl->update_dependency_errors();
+		ctrl->rebuild_installed();
+		ctrl->rebuild_browse();
 	});
 #ifdef NDEBUG
 	install_.set_enabled(info->matches_widelands_version());
@@ -511,7 +532,12 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			}
 		}
 		ctrl->install_or_upgrade(info, !full_upgrade_possible_);
-		ctrl->rebuild(true);
+
+		ctrl->clear_cache_for_installed(info->internal_name);
+		ctrl->clear_cache_for_browse(info->internal_name);
+		ctrl->update_dependency_errors();
+		ctrl->rebuild_installed();
+		ctrl->rebuild_browse();
 	});
 #ifdef NDEBUG
 	upgrade_.set_enabled(info->matches_widelands_version());
@@ -712,7 +738,9 @@ MapRow::MapRow(Panel* parent,
 	install_.sigclicked.connect([ctrl, this]() {
 		// No need to confirm for maps
 		ctrl->install_map(info_);
-		ctrl->rebuild(true);
+
+		ctrl->clear_cache_for_map(info_->internal_name);
+		ctrl->rebuild_maps();
 	});
 #ifdef NDEBUG
 	install_.set_enabled(info->matches_widelands_version());

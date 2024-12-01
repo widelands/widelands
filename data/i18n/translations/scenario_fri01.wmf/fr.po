@@ -5,7 +5,8 @@
 # Translators:
 # zecas <jjorge@free.fr>, 2018
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
-# Renaud Bouchard, 2023
+# Renaud Bouchard, 2021
+# Laurent Godard, 2024
 # 
 msgid ""
 msgstr ""
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Renaud Bouchard, 2023\n"
+"Last-Translator: Laurent Godard, 2024\n"
 "Language-Team: French (https://app.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +29,7 @@ msgstr "La grande tempête (Sauvegarde auto-enregistrée)"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/starting_conditions.lua:8
 msgid "Langeneß"
-msgstr "Langeneß"
+msgstr "Langeness"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:25
 msgid "Build a wood economy and a reed farm"
@@ -185,7 +186,7 @@ msgstr "Explorez plus et découvrez toute l'île."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:96
 msgid "Train your soldiers"
-msgstr "Entraîne vos soldats."
+msgstr "Entraîner vos soldats."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:98
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:309
@@ -207,8 +208,8 @@ msgstr ""
 "Entraîner un soldat au plus haut niveau possible. Les soldats sont entraînés"
 " dans des camps d'entraînement et des arènes d'entraînement. Nous aurons "
 "besoin d'une mine d'or, d'un atelier de tailleur pour coudre de meilleures "
-"armures et d'une grande forge pour de meilleures armes et de meilleurs "
-"casques."
+"armures et d'une grande fabrique d'armures pour de meilleures armes et de "
+"meilleurs casques."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:104
 msgid "Defeat the enemy!"
@@ -254,8 +255,8 @@ msgid ""
 msgstr ""
 "Si vous ne vous êtes pas assez bien préparé pour gagner ce défi dans les "
 "temps, vous pouvez recharger le scénario depuis la partie de sauvegarde "
-"automatiquement crée pour vous juste après avoir atteint les quartiers-"
-"généraux ennemi."
+"automatiquement créée pour vous juste après avoir atteint les quartiers-"
+"généraux ennemis."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:126
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:135
@@ -682,8 +683,8 @@ msgid ""
 "better to be prepared."
 msgstr ""
 "Construire une mine de fer et peut-être une mine d'or. Comme ils ne "
-"produisent que du minerai, nous aurons besoin d'un four pour les fondre. "
-"Construisez aussi un forgeron pour vous assurer que nous ne manquerons pas "
+"produisent que du minerai, nous aurons besoin d'un fourneau pour les fondre."
+" Construisez aussi un forgeron pour vous assurer que nous ne manquerons pas "
 "d'outils – et oui, une petite forge d'armure aussi. Elle produit des casques"
 " ainsi que des épées. J'espère que nous ne rencontrerons pas d'ennemis ici, "
 "mais il vaut mieux être préparé."
@@ -751,7 +752,7 @@ msgid ""
 "wares in the processing buildings."
 msgstr ""
 "Nous devrions également construire d'autres bâtiments connexes à proximité, "
-"comme une fournaise, ainsi que des puits et des fermes pour approvisionner "
+"comme un fourneau, ainsi que des puits et des fermes pour approvisionner "
 "l'élevage de rennes. Cette structure rendra notre économie militaire plus "
 "efficace, car elle réduit le temps d'attente pour les marchandises dans les "
 "bâtiments de transformation."
