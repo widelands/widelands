@@ -74,11 +74,11 @@ msgstr "Stato"
 
 #: ../../../../data/scripting/messages.lua:293
 msgid "New Objective"
-msgstr "Nova Tasko"
+msgstr "Nova tasko"
 
 #: ../../../../data/scripting/messages.lua:295
 msgid "New Objectives"
-msgstr "Novaj Taskoj"
+msgstr "Novaj taskoj"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
@@ -151,7 +151,7 @@ msgstr "Malforta AI"
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../../../src/ai/defaultai.h:125
 msgid "Very Weak AI"
-msgstr "Tre Malforta AI"
+msgstr "Tre malforta AI"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -536,13 +536,13 @@ msgstr "Restarigas la antaŭajn iloagordojn"
 #: ../../../../src/editor/editorinteractive.cc:476
 #: ../../../../src/wui/interactive_gamebase.cc:271
 msgid "Hide Building Spaces"
-msgstr "Kaŝi Eblajn Konstruejojn"
+msgstr "Kaŝi eblajn konstruejojn"
 
 #: ../../../../src/editor/editorinteractive.cc:476
 #: ../../../../src/ui_fsmenu/options.cc:292
 #: ../../../../src/wui/interactive_gamebase.cc:271
 msgid "Show Building Spaces"
-msgstr "Montri Eblajn Konstruejojn"
+msgstr "Montri eblajn konstruejojn"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether to
 #. show maximum
@@ -550,11 +550,11 @@ msgstr "Montri Eblajn Konstruejojn"
 #. etc.) are removed
 #: ../../../../src/editor/editorinteractive.cc:483
 msgid "Hide Maximum Building Spaces"
-msgstr "Kaŝi Maksimumajn Konstruejojn"
+msgstr "Kaŝi maksimumajn konstruejojn"
 
 #: ../../../../src/editor/editorinteractive.cc:484
 msgid "Show Maximum Building Spaces"
-msgstr "Montri Maksimumajn Konstruejojn"
+msgstr "Montri maksimumajn konstruejojn"
 
 #: ../../../../src/editor/editorinteractive.cc:487
 msgid ""
@@ -576,21 +576,21 @@ msgstr "Ŝalti la altecan varmapon"
 #. the map grid is shown
 #: ../../../../src/editor/editorinteractive.cc:503
 msgid "Hide Grid"
-msgstr "Kaŝi Kradon"
+msgstr "Kaŝi kradon"
 
 #: ../../../../src/editor/editorinteractive.cc:503
 msgid "Show Grid"
-msgstr "Montri Kradon"
+msgstr "Montri kradon"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the oceans are shown
 #: ../../../../src/editor/editorinteractive.cc:510
 msgid "Hide Oceans"
-msgstr "Kaŝi Oceanojn"
+msgstr "Kaŝi oceanojn"
 
 #: ../../../../src/editor/editorinteractive.cc:510
 msgid "Show Oceans"
-msgstr "Montri Oceanojn"
+msgstr "Montri oceanojn"
 
 #: ../../../../src/editor/editorinteractive.cc:513
 msgid ""
@@ -603,35 +603,35 @@ msgstr "Montras apartajn akvokorpojn kun malsamkoloraj tavoloj por vidi, kiuj ma
 #. *  (trees, rocks etc.) are shown
 #: ../../../../src/editor/editorinteractive.cc:520
 msgid "Hide Immovables"
-msgstr "Kaŝi Nemoveblaĵojn"
+msgstr "Kaŝi nemoveblaĵojn"
 
 #: ../../../../src/editor/editorinteractive.cc:520
 msgid "Show Immovables"
-msgstr "Montri Nemoveblaĵojn"
+msgstr "Montri nemoveblaĵojn"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
 #: ../../../../src/editor/editorinteractive.cc:525
 msgid "Hide Animals"
-msgstr "Kaŝi Bestojn"
+msgstr "Kaŝi bestojn"
 
 #: ../../../../src/editor/editorinteractive.cc:525
 msgid "Show Animals"
-msgstr "Montri Bestojn"
+msgstr "Montri bestojn"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. resources are shown
 #: ../../../../src/editor/editorinteractive.cc:531
 msgid "Hide Resources"
-msgstr "Kaŝi Resursojn"
+msgstr "Kaŝi resursojn"
 
 #: ../../../../src/editor/editorinteractive.cc:531
 msgid "Show Resources"
-msgstr "Montri Resursojn"
+msgstr "Montri resursojn"
 
 #: ../../../../src/editor/editorinteractive.cc:582
 msgid "Unsupported Format"
-msgstr "Nesubtenata Formato"
+msgstr "Nesubtenata formato"
 
 #: ../../../../src/editor/editorinteractive.cc:583
 #, c-format
@@ -646,7 +646,7 @@ msgstr "Konfirmo de eliro el la redaktilo"
 
 #: ../../../../src/editor/editorinteractive.cc:648
 msgid "Unsaved Map"
-msgstr "Nekonservita Mapo"
+msgstr "Nekonservita mapo"
 
 #: ../../../../src/editor/editorinteractive.cc:649
 msgid "The map has not been saved, do you really want to quit?"
@@ -727,7 +727,7 @@ msgstr "Ilaj interspacoj: %u%%"
 
 #: ../../../../src/editor/editorinteractive.cc:1579
 msgid "Publish Map"
-msgstr "Publikigi Mapon"
+msgstr "Publikigi mapon"
 
 #: ../../../../src/editor/editorinteractive.cc:1580
 #, c-format
@@ -1025,7 +1025,7 @@ msgstr "%1$s; %2$s"
 #: ../../../../src/editor/ui_menus/field_info_window.cc:262
 #, c-format
 msgid "Enabled Add-Ons: %s"
-msgstr "Ŝaltitaj Kromprogramoj: %s"
+msgstr "Ŝaltitaj kromprogramoj: %s"
 
 #: ../../../../src/editor/ui_menus/help.cc:36
 #: ../../../../src/ui_fsmenu/login_box.cc:255
@@ -1042,25 +1042,25 @@ msgstr "Eraro!"
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:217
 #: ../../../../src/wui/mapdata.cc:199
 msgid "My Maps"
-msgstr "Miaj Mapoj"
+msgstr "Miaj mapoj"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
 #: ../../../../src/editor/ui_menus/main_menu_load_map.cc:84
 #: ../../../../src/wui/mapdata.cc:193
 msgid "Multiplayer Scenarios"
-msgstr "Multludantaj Scenaroj"
+msgstr "Multludantaj scenaroj"
 
 #. * TRANSLATORS: Directory name for SP Scenarios in map selection
 #: ../../../../src/editor/ui_menus/main_menu_load_map.cc:86
 #: ../../../../src/wui/mapdata.cc:196
 msgid "Singleplayer Scenarios"
-msgstr "Unuludantaj Scenaroj"
+msgstr "Unuludantaj scenaroj"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
 #: ../../../../src/editor/ui_menus/main_menu_load_map.cc:88
 #: ../../../../src/wui/mapdata.cc:202
 msgid "Downloaded Maps"
-msgstr "Elŝutitaj Mapoj"
+msgstr "Elŝutitaj mapoj"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
 #: ../../../../src/editor/ui_menus/main_menu_load_map.cc:91
@@ -1072,7 +1072,7 @@ msgstr "Nuna dosierujo: %s"
 #. * TRANSLATORS: "Display: Original/Localized map/file names"
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:94
 msgid "Display"
-msgstr ""
+msgstr "Montrilo"
 
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:114
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:250
@@ -1369,7 +1369,7 @@ msgstr "Generas novan hazardan numeron"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:244
 msgid "Map ID:"
-msgstr "Map-identigilo:"
+msgstr "Mapidentigilo:"
 
 #. * TRANSLATORS: Default Map Generator
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:257
@@ -1420,7 +1420,7 @@ msgstr "Kreante hazardan mapon…"
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:736
 #: ../../../../src/ui_fsmenu/main.cc:429
 msgid "Random Map"
-msgstr "Hazarda Mapo"
+msgstr "Hazarda mapo"
 
 #. * TRANSLATORS: This is shown after a random map has been created in the
 #. editor.
@@ -1449,7 +1449,7 @@ msgstr "La mapgenerilo ne povis produkti sufiĉe bonan mapon kun la provizitaj a
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:737
 msgid "The Widelands Random Map Generator"
-msgstr "La Hazarda Mapgenerilo de Widelands"
+msgstr "La hazarda mapgenerilo de Widelands"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:739
 msgid ""
@@ -1469,7 +1469,7 @@ msgstr "Ludanto"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:863
 msgid "Generate Map"
-msgstr "Generi Mapon"
+msgstr "Generi mapon"
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:71
 #: ../../../../src/wui/game_main_menu_save_game.cc:89
@@ -1518,7 +1518,7 @@ msgstr "Mapo konservita"
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:53
 msgid "Enter Directory Name:"
-msgstr "Enigu la Dosierujnomon: "
+msgstr "Enigu la dosierujnomon: "
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:110
 msgid "This extension is reserved!"
@@ -1614,7 +1614,7 @@ msgstr "Agordi la komencan pozicion de ĉi tiu ludanto"
 
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:31
 msgid "Height Tools Options"
-msgstr "Altecilaj Opcioj"
+msgstr "Altecilaj opcioj"
 
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:53
 msgid "Increase/Decrease height by:"
@@ -1721,7 +1721,7 @@ msgstr "Aŭtomate loki la arbojn, kiuj plej bone kreskas sur la tereno"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:117
 msgid "Automatic Immovable Placement"
-msgstr "Aŭtomata Nemoveblaĵa Lokado"
+msgstr "Aŭtomata nemoveblaĵa lokado"
 
 #: ../../../../src/editor/ui_menus/tool_resize_options_menu.cc:34
 msgid "Resize"
@@ -1980,15 +1980,15 @@ msgstr "Kampanjo"
 
 #: ../../../../src/logic/addons.cc:69
 msgid "Win Condition"
-msgstr "Venka Kondiĉo"
+msgstr "Venka kondiĉo"
 
 #: ../../../../src/logic/addons.cc:72
 msgid "Starting Condition"
-msgstr "Komenca Kondiĉo"
+msgstr "Komenca kondiĉo"
 
 #: ../../../../src/logic/addons.cc:76
 msgid "UI Plugin"
-msgstr "UI Kromaĵo"
+msgstr "UI kromaĵo"
 
 #: ../../../../src/logic/addons.cc:117
 #, c-format
@@ -2283,7 +2283,7 @@ msgstr "Iniciigante..."
 
 #: ../../../../src/logic/game.cc:1242
 msgid "Trade Offer"
-msgstr "Komerca Oferto"
+msgstr "Komerca oferto"
 
 #: ../../../../src/logic/game.cc:1244
 msgid "This market has received a new trade offer."
@@ -2603,11 +2603,11 @@ msgstr "Ne troveblas pliaj resursoj!"
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1270
 msgctxt "building"
 msgid "No Shore"
-msgstr "Sen Marbordo"
+msgstr "Sen marbordo"
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1250
 msgid "Shipyard Without Shore"
-msgstr "Ŝipfarejo Sen Marbordo"
+msgstr "Ŝipfarejo sen marbordo"
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1251
 msgid ""
@@ -2617,7 +2617,7 @@ msgstr "Via ŝipfarejo ne estas konstruita sufiĉe proksime al marbordo. Ĝi ne 
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1271
 msgid "Ferry Yard Without Shore"
-msgstr "Pramfarejo Sen Marbordo"
+msgstr "Pramfarejo sen marbordo"
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1272
 msgid ""
@@ -2627,11 +2627,11 @@ msgstr "Via pramfarejo ne estas konstruita sufiĉe proksime al marbordo. Ĝi ne 
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Destination Gone"
-msgstr "Celo Malaperis"
+msgstr "Celo malaperis"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Ship Destination Vanished"
-msgstr "Ŝipcelo Malaperis"
+msgstr "Ŝipcelo malaperis"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:400
 msgid "Your ship’s destination has disappeared."
@@ -2639,11 +2639,11 @@ msgstr "La celo de via ŝipo malaperis."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:427
 msgid "Ship Arrived"
-msgstr "Ŝipo Alvenis"
+msgstr "Ŝipo alvenis"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:427
 msgid "Ship Reached Destination"
-msgstr "Ŝipo Atingis Celon"
+msgstr "Ŝipo atingis celon"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:428
 msgid "Your ship has arrived at its destination."
@@ -2664,7 +2664,7 @@ msgstr "Havenspaco"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:641
 msgid "Port Space Spotted"
-msgstr "Havenspaco Observita"
+msgstr "Havenspaco observita"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:647
 msgid "A warship found a new port build space."
@@ -2676,15 +2676,15 @@ msgstr "Ekspediciŝipo trovis novan havenkonstruejon."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:649
 msgid "Port Space Found"
-msgstr "Havenspaco Trovita"
+msgstr "Havenspaco trovita"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:749
 msgid "Enemy Ship"
-msgstr "Malamika Ŝipo"
+msgstr "Malamika ŝipo"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:749
 msgid "Enemy Ship Spotted"
-msgstr "Malamika Ŝipo Observita"
+msgstr "Malamika ŝipo observita"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:750
 msgid "A warship spotted an enemy ship."
@@ -2693,12 +2693,12 @@ msgstr "Militŝipo observis malamikŝipon."
 #: ../../../../src/logic/map_objects/tribes/ship.cc:780
 #: ../../../../src/logic/map_objects/tribes/ship.cc:799
 msgid "Destination Unreachable"
-msgstr "Celo Neatingebla"
+msgstr "Celo neatingebla"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:780
 #: ../../../../src/logic/map_objects/tribes/ship.cc:799
 msgid "Ship Destination Unreachable"
-msgstr "Ŝipcelo Neatingebla"
+msgstr "Ŝipcelo neatingebla"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:781
 msgid "Your ship could not find a path to its destination."
@@ -2712,12 +2712,12 @@ msgstr "Via ŝipo ne povis trovi vojon al sia cela haveno \"%s\"."
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1311
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1569
 msgid "Enemy Ship Attacking"
-msgstr "Malamika Ŝipo Atakas"
+msgstr "Malamika ŝipo atakas"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1311
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1568
 msgid "Naval Attack"
-msgstr "Mara Atako"
+msgstr "Mara atako"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1312
 #, c-format
@@ -2726,11 +2726,11 @@ msgstr "Via ŝipo \"%s\" estas sub atako de malamika militŝipo."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1431
 msgid "Ship Destroyed"
-msgstr "Ŝipo Detruita"
+msgstr "Ŝipo detruita"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1431
 msgid "Ship Sunk"
-msgstr "Ŝipo Sinkigita"
+msgstr "Ŝipo sinkigita"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1432
 msgid "An enemy ship has destroyed your warship."
@@ -2742,7 +2742,7 @@ msgstr "Via marbordo estas sub atako de malamika militŝipo."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1802
 msgid "Island Circumnavigated"
-msgstr "Insulo Ĉirkaŭnavigita"
+msgstr "Insulo ĉirkaŭnavigita"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
@@ -2757,7 +2757,7 @@ msgstr "Ekspediciŝipo navigis ĉirkaŭ sian insulon sen eventoj."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1868
 msgid "Coast Reached"
-msgstr "Marbordo Atingita"
+msgstr "Marbordo atingita"
 
 #. * TRANSLATORS: A ship has discovered land
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1868
@@ -2775,7 +2775,7 @@ msgstr "La nova havenkonstruejo malaperis"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1922
 msgid "Port Lost!"
-msgstr "Haveno Perdita!"
+msgstr "Haveno perdita!"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1923
 msgid "Unloading of wares failed, expedition is cancelled now."
@@ -2783,11 +2783,11 @@ msgstr "La malŝarĝado de la varoj malsukcesis; la ekspedicio nun estas nuligit
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1980
 msgid "No Port Can Be Built"
-msgstr "Neniu Haveno Povas Esti Konstruita"
+msgstr "Neniu haveno povas esti konstruita"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1980
 msgid "Port Space Lost!"
-msgstr "Havenspaco Perdita!"
+msgstr "Havenspaco perdita!"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1981
 msgid ""
@@ -2802,7 +2802,7 @@ msgstr "Militŝipo"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2228
 msgid "Warship Ready"
-msgstr "Militŝipo Preta"
+msgstr "Militŝipo preta"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2229
 msgid "A warship is waiting for your commands."
@@ -2816,7 +2816,7 @@ msgstr "Ekspedicio"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2234
 msgid "Expedition Ready"
-msgstr "Ekspedicio Preta"
+msgstr "Ekspedicio preta"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2235
 msgid "An expedition ship is waiting for your commands."
@@ -2835,12 +2835,12 @@ msgstr "Batalante"
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2415
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
-msgstr "Rekonvertiĝas al Transporta Ŝipo"
+msgstr "Rekonvertiĝas al transporta ŝipo"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2418
 msgctxt "ship_state"
 msgid "Refitting to Warship"
-msgstr "Rekonvertiĝas al Militŝipo"
+msgstr "Rekonvertiĝas al militŝipo"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2426
 #: ../../../../src/wui/seafaring_statistics_menu.cc:271
@@ -2900,7 +2900,7 @@ msgstr "Skoltante"
 #: ../../../../src/wui/seafaring_statistics_menu.cc:269
 msgctxt "ship_state"
 msgid "Port Space Found"
-msgstr "Havenspaco Trovita"
+msgstr "Havenspaco trovita"
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
@@ -2908,7 +2908,7 @@ msgstr "Havenspaco Trovita"
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2482
 msgctxt "ship_state"
 msgid "Founding a Colony"
-msgstr "Fondante Kolonion"
+msgstr "Fondante kolonion"
 
 #: ../../../../src/logic/map_objects/tribes/soldier.cc:1544
 #: ../../../../src/logic/map_objects/tribes/soldier.cc:1548
@@ -3029,7 +3029,7 @@ msgstr "Geologo trovis resursojn."
 #: ../../../../src/logic/map_objects/tribes/worker.cc:2120
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
-msgstr ""
+msgstr "Via %s ne povas trovi vojon hejmen kaj verŝajne mortos."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
 #: ../../../../src/logic/map_objects/tribes/worker.cc:2125
@@ -3072,7 +3072,7 @@ msgstr "neirebla"
 msgid ""
 "A map file is invalid:\n"
 "%s"
-msgstr ""
+msgstr "Mapdosiero estas nevalida:\n%s"
 
 #: ../../../../src/logic/objective.h:31
 msgid "This objective has no description."
@@ -3088,13 +3088,13 @@ msgstr "Ŝipo %d"
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
-msgstr ""
+msgstr "Haveno %d"
 
 #: ../../../../src/logic/player.cc:2040
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
-msgstr ""
+msgstr "Stokejo %d"
 
 #: ../../../../src/logic/playercommand.cc:2358
 #: ../../../../src/wlapplication_options.cc:658
@@ -3106,15 +3106,15 @@ msgstr "Diplomatio"
 #: ../../../../src/logic/playercommand.cc:2372
 #, c-format
 msgid "%s has resigned and is now a spectator."
-msgstr ""
+msgstr "%s rezignis kaj nun estas spektanto."
 
 #: ../../../../src/logic/playercommand.cc:2372
 msgid "Player Resigned"
-msgstr ""
+msgstr "Ludanto rezignis"
 
 #: ../../../../src/logic/playercommand.cc:2384
 msgid "Player Leaves Team"
-msgstr ""
+msgstr "Ludanto forlasas la teamon"
 
 #: ../../../../src/logic/playercommand.cc:2385
 #, c-format
