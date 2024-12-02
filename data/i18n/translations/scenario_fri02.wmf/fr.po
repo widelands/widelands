@@ -10,6 +10,7 @@
 # C138, 2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2021
 # David D, 2023
+# Laurent Godard, 2024
 # 
 msgid ""
 msgstr ""
@@ -17,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: David D, 2023\n"
+"Last-Translator: Laurent Godard, 2024\n"
 "Language-Team: French (https://app.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -212,8 +213,8 @@ msgstr "Envoie un éclaireur pour espionner l'Empire"
 msgid ""
 "Build a scout’s house near the border to discover the Empire’s secrets."
 msgstr ""
-"Construis une maison des éclaireurs près de la frontière pour découvrir les "
-"secrets de l'Empire."
+"Construisez une maison des éclaireurs près de la frontière pour découvrir "
+"les secrets de l'Empire."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:88
 msgid "Decipher the poem"
@@ -221,7 +222,7 @@ msgstr "Déchiffre le poème"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:90
 msgid "Understand the Poem the Scout has Found in the Empire"
-msgstr "Comprends le Poème que l'Éclaireur a Trouvé dans l'Empire"
+msgstr "Comprendre le Poème que l'Éclaireur a Trouvé dans l'Empire"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:91
@@ -279,7 +280,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:111
 msgid "Conquer every single field that still belongs to Murilius."
-msgstr "Conquiers chaque champ qui appartienne encore à Murilius."
+msgstr "Conquerir chaque champ qui appartienne encore à Murilius."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:116
 msgid "Defeat Murilius and the Barbarians!"
@@ -690,7 +691,7 @@ msgstr "Nous ne sommes pas seuls"
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:290
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:305
 msgid "Salvete peregrini!"
-msgstr "Salvete peregrini!"
+msgstr "Salvete peregrini !"
 
 #. TRANSLATORS: "Be greeted, strangers! I am Proconsule Murilius of the
 #. province 'The Northern Lands'. Name yourselves!". DO NOT TRANSLATE. Reebaud
@@ -1065,8 +1066,8 @@ msgid ""
 "will be very sorry indeed for insulting our tribe thus."
 msgstr ""
 "Nous punirons ce Proconsul autoproclamé pour sa trahison ! Je brûlerai toute"
-" sa colonie et tuerai chaque personne de son royaume. Il sera terriblement "
-"affligé d'avoir insulté ainsi notre tribu."
+" sa colonie et tuerai chaque personne de son royaume. Il va terriblement "
+"regretter d'avoir insulté ainsi notre tribu."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:413
 msgid "Victory"
@@ -1105,7 +1106,7 @@ msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
 msgstr ""
-"Vos ouvriers et soldats trouveront un abri ici. Stocke également vos "
+"Vos ouvriers et soldats trouveront un abri ici et stockeront également vos "
 "marchandises et outils."
 
 #. TRANSLATORS: This is a building name used in lists of buildings

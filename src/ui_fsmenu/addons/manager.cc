@@ -18,6 +18,7 @@
 
 #include "ui_fsmenu/addons/manager.h"
 
+#include <algorithm>
 #include <cstdlib>
 #include <iomanip>
 #include <memory>
@@ -79,6 +80,57 @@ std::string time_string(const std::time_t& time) {
 	}
 	oss << std::put_time(std::localtime(&time), "%c");
 	return oss.str();
+}
+
+static inline std::function<bool(const std::shared_ptr<AddOns::AddOnInfo>,
+                                 const std::shared_ptr<AddOns::AddOnInfo>)>
+create_sort_functor(const AddOnSortingCriteria sort_by) {
+	return [sort_by](const std::shared_ptr<AddOns::AddOnInfo> a,
+	                 const std::shared_ptr<AddOns::AddOnInfo> b) {
+		switch (sort_by) {
+		case AddOnSortingCriteria::kNameABC:
+			return a->descname().compare(b->descname()) < 0;
+		case AddOnSortingCriteria::kNameCBA:
+			return a->descname().compare(b->descname()) > 0;
+
+		case AddOnSortingCriteria::kFewestDownloads:
+			return a->download_count < b->download_count;
+		case AddOnSortingCriteria::kMostDownloads:
+			return a->download_count > b->download_count;
+
+		case AddOnSortingCriteria::kOldest:
+			return a->upload_timestamp < b->upload_timestamp;
+		case AddOnSortingCriteria::kNewest:
+			return a->upload_timestamp > b->upload_timestamp;
+
+		case AddOnSortingCriteria::kLowestRating:
+			if (a->number_of_votes() == 0) {
+				// Add-ons without votes should always end up
+				// below any others when sorting by rating
+				return false;
+			} else if (b->number_of_votes() == 0) {
+				return true;
+			} else if (std::abs(a->average_rating() - b->average_rating()) < 0.01) {
+				// ambiguity – always choose the one with more votes
+				return a->number_of_votes() > b->number_of_votes();
+			} else {
+				return a->average_rating() < b->average_rating();
+			}
+		case AddOnSortingCriteria::kHighestRating:
+			if (a->number_of_votes() == 0) {
+				return false;
+			} else if (b->number_of_votes() == 0) {
+				return true;
+			} else if (std::abs(a->average_rating() - b->average_rating()) < 0.01) {
+				return a->number_of_votes() > b->number_of_votes();
+			} else {
+				return a->average_rating() > b->average_rating();
+			}
+
+		default:
+			NEVER_HERE();
+		}
+	};
 }
 
 const std::map<unsigned, std::function<AddOnQuality()>> AddOnQuality::kQualities = {  // NOLINT
@@ -200,37 +252,199 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                         UI::Box::Vertical,
                         kHugeSize,
                         kHugeSize),
+     maps_outer_wrapper_(
+        &tabs_, UI::PanelStyle::kFsMenu, "maps_outer_wrapper_box", 0, 0, UI::Box::Vertical),
+     maps_inner_wrapper_(&maps_outer_wrapper_,
+                         UI::PanelStyle::kFsMenu,
+                         "maps_inner_wrapper_box",
+                         0,
+                         0,
+                         UI::Box::Vertical),
+     maps_buttons_box_(&maps_outer_wrapper_,
+                       UI::PanelStyle::kFsMenu,
+                       "maps_buttons_box",
+                       0,
+                       0,
+                       UI::Box::Horizontal),
+     maps_box_(&maps_inner_wrapper_,
+               UI::PanelStyle::kFsMenu,
+               "maps_box",
+               0,
+               0,
+               UI::Box::Vertical,
+               kHugeSize,
+               kHugeSize),
+     filter_maps_lvbox_(
+        &maps_buttons_box_, UI::PanelStyle::kFsMenu, "maps_buttons_lvbox", 0, 0, UI::Box::Vertical),
+     filter_maps_rvbox_min_(&maps_buttons_box_,
+                            UI::PanelStyle::kFsMenu,
+                            "maps_buttons_rvbox_min",
+                            0,
+                            0,
+                            UI::Box::Vertical),
+     filter_maps_rvbox_max_(&maps_buttons_box_,
+                            UI::PanelStyle::kFsMenu,
+                            "maps_buttons_rvbox_max",
+                            0,
+                            0,
+                            UI::Box::Vertical),
+     filter_maps_lhbox_(&filter_maps_lvbox_,
+                        UI::PanelStyle::kFsMenu,
+                        "maps_buttons_lhbox",
+                        0,
+                        0,
+                        UI::Box::Horizontal),
      dev_box_(&tabs_, UI::PanelStyle::kFsMenu, "development_box", 0, 0, UI::Box::Vertical),
-     filter_name_(
-        &browse_addons_buttons_box_rvbox_, "filter_name", 0, 0, 100, UI::PanelStyle::kFsMenu),
-     filter_verified_(&browse_addons_buttons_box_right_hbox_,
+     filter_browse_name_(&browse_addons_buttons_box_rvbox_,
+                         "filter_browse_name",
+                         0,
+                         0,
+                         100,
+                         UI::PanelStyle::kFsMenu),
+     filter_maps_name_(&filter_maps_lvbox_, "filter_maps_name", 0, 0, 100, UI::PanelStyle::kFsMenu),
+     filter_browse_verified_(&browse_addons_buttons_box_right_hbox_,
+                             UI::PanelStyle::kFsMenu,
+                             "filter_browse_verified",
+                             Vector2i(0, 0),
+                             _("Verified only"),
+                             _("Show only verified add-ons")),
+     sort_order_browse_(&browse_addons_buttons_box_rvbox_,
+                        "sort_browse",
+                        0,
+                        0,
+                        0,
+                        10,
+                        filter_browse_name_.get_h(),
+                        _("Sort by"),
+                        UI::DropdownType::kTextual,
+                        UI::PanelStyle::kFsMenu,
+                        UI::ButtonStyle::kFsMenuSecondary),
+     sort_order_maps_(&filter_maps_lvbox_,
+                      "sort_maps",
+                      0,
+                      0,
+                      0,
+                      10,
+                      filter_maps_name_.get_h(),
+                      _("Sort by"),
+                      UI::DropdownType::kTextual,
                       UI::PanelStyle::kFsMenu,
-                      "filter_verified",
-                      Vector2i(0, 0),
-                      _("Verified only"),
-                      _("Show only verified add-ons")),
-     sort_order_(&browse_addons_buttons_box_rvbox_,
-                 "sort",
-                 0,
-                 0,
-                 0,
-                 10,
-                 filter_name_.get_h(),
-                 _("Sort by"),
-                 UI::DropdownType::kTextual,
-                 UI::PanelStyle::kFsMenu,
-                 UI::ButtonStyle::kFsMenuSecondary),
-     filter_quality_(&browse_addons_buttons_box_right_hbox_,
-                     "quality",
-                     0,
-                     0,
-                     0,
-                     10,
-                     filter_name_.get_h(),
-                     _("Minimum quality"),
-                     UI::DropdownType::kTextual,
-                     UI::PanelStyle::kFsMenu,
-                     UI::ButtonStyle::kFsMenuSecondary),
+                      UI::ButtonStyle::kFsMenuSecondary),
+     filter_browse_quality_(&browse_addons_buttons_box_right_hbox_,
+                            "quality",
+                            0,
+                            0,
+                            0,
+                            10,
+                            filter_browse_name_.get_h(),
+                            _("Minimum quality"),
+                            UI::DropdownType::kTextual,
+                            UI::PanelStyle::kFsMenu,
+                            UI::ButtonStyle::kFsMenuSecondary),
+     filter_maps_min_players_(&filter_maps_rvbox_min_,
+                              "filter_maps_min_players",
+                              0,
+                              0,
+                              0,
+                              150,
+                              1,
+                              1,
+                              kMaxPlayers,
+                              UI::PanelStyle::kFsMenu,
+                              _("Min Players:"),
+                              UI::SpinBox::Units::kNone,
+                              UI::SpinBox::Type::kSmall),
+     filter_maps_min_w_(&filter_maps_rvbox_min_,
+                        "filter_maps_min_w",
+                        0,
+                        0,
+                        0,
+                        150,
+                        0,
+                        0,
+                        0,
+                        UI::PanelStyle::kFsMenu,
+                        _("Min Width:"),
+                        UI::SpinBox::Units::kNone,
+                        UI::SpinBox::Type::kValueList),
+     filter_maps_min_h_(&filter_maps_rvbox_min_,
+                        "filter_maps_min_h",
+                        0,
+                        0,
+                        0,
+                        150,
+                        0,
+                        0,
+                        0,
+                        UI::PanelStyle::kFsMenu,
+                        _("Min Height:"),
+                        UI::SpinBox::Units::kNone,
+                        UI::SpinBox::Type::kValueList),
+     filter_maps_min_size_(&filter_maps_rvbox_min_,
+                           "filter_maps_min_size",
+                           0,
+                           0,
+                           0,
+                           150,
+                           0,
+                           0,
+                           0,
+                           UI::PanelStyle::kFsMenu,
+                           _("Min Size:"),
+                           UI::SpinBox::Units::kNone,
+                           UI::SpinBox::Type::kValueList),
+     filter_maps_max_players_(&filter_maps_rvbox_max_,
+                              "filter_maps_max_players",
+                              0,
+                              0,
+                              0,
+                              150,
+                              kMaxPlayers,
+                              1,
+                              kMaxPlayers,
+                              UI::PanelStyle::kFsMenu,
+                              _("Max Players:"),
+                              UI::SpinBox::Units::kNone,
+                              UI::SpinBox::Type::kSmall),
+     filter_maps_max_w_(&filter_maps_rvbox_max_,
+                        "filter_maps_max_w",
+                        0,
+                        0,
+                        0,
+                        150,
+                        0,
+                        0,
+                        0,
+                        UI::PanelStyle::kFsMenu,
+                        _("Max Width:"),
+                        UI::SpinBox::Units::kNone,
+                        UI::SpinBox::Type::kValueList),
+     filter_maps_max_h_(&filter_maps_rvbox_max_,
+                        "filter_maps_max_h",
+                        0,
+                        0,
+                        0,
+                        150,
+                        0,
+                        0,
+                        0,
+                        UI::PanelStyle::kFsMenu,
+                        _("Max Height:"),
+                        UI::SpinBox::Units::kNone,
+                        UI::SpinBox::Type::kValueList),
+     filter_maps_max_size_(&filter_maps_rvbox_max_,
+                           "filter_maps_max_size",
+                           0,
+                           0,
+                           0,
+                           150,
+                           0,
+                           0,
+                           0,
+                           UI::PanelStyle::kFsMenu,
+                           _("Max Size:"),
+                           UI::SpinBox::Units::kNone,
+                           UI::SpinBox::Type::kValueList),
      upload_addon_(&dev_box_,
                    "upload_addon",
                    0,
@@ -260,15 +474,24 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                           _("Understood and confirmed"),
                           _("By ticking this checkbox, you confirm that you have read and agree to "
                             "the above terms.")),
-     filter_reset_(&browse_addons_buttons_box_lvbox_,
-                   "f_reset",
-                   0,
-                   0,
-                   24,
-                   24,
-                   UI::ButtonStyle::kFsMenuSecondary,
-                   _("Reset"),
-                   _("Reset the filters")),
+     filter_browse_reset_(&browse_addons_buttons_box_lvbox_,
+                          "f_browse_reset",
+                          0,
+                          0,
+                          24,
+                          24,
+                          UI::ButtonStyle::kFsMenuSecondary,
+                          _("Reset"),
+                          _("Reset the filters")),
+     filter_maps_reset_(&filter_maps_lvbox_,
+                        "f_maps_reset",
+                        0,
+                        0,
+                        24,
+                        24,
+                        UI::ButtonStyle::kFsMenuSecondary,
+                        _("Reset"),
+                        _("Reset the filters")),
      upgrade_all_(&buttons_box_,
                   "upgrade_all",
                   0,
@@ -373,6 +596,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 
 	installed_addons_box_.set_flag(UI::Panel::pf_unlimited_size, true);
 	browse_addons_box_.set_flag(UI::Panel::pf_unlimited_size, true);
+	maps_box_.set_flag(UI::Panel::pf_unlimited_size, true);
 
 	dev_box_.set_force_scrolling(true);
 	dev_box_.add(new UI::Textarea(&dev_box_, UI::PanelStyle::kFsMenu, "label_development",
@@ -515,40 +739,54 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	browse_addons_outer_wrapper_.add_space(2 * kRowButtonSpacing);
 	browse_addons_outer_wrapper_.add(&browse_addons_inner_wrapper_, UI::Box::Resizing::kExpandBoth);
 
+	maps_outer_wrapper_.add(&maps_buttons_box_, UI::Box::Resizing::kFullSize);
+	maps_outer_wrapper_.add_space(2 * kRowButtonSpacing);
+	maps_outer_wrapper_.add(&maps_inner_wrapper_, UI::Box::Resizing::kExpandBoth);
+
 	installed_addons_inner_wrapper_.add(&installed_addons_box_, UI::Box::Resizing::kExpandBoth);
 	browse_addons_inner_wrapper_.add(&browse_addons_box_, UI::Box::Resizing::kExpandBoth);
-	tabs_.add("my", "", &installed_addons_outer_wrapper_);
-	tabs_.add("all", "", &browse_addons_outer_wrapper_);
-	tabs_.add("all", _("Development"), &dev_box_);
+	maps_inner_wrapper_.add(&maps_box_, UI::Box::Resizing::kExpandBoth);
+	tabs_.add("my", "", &installed_addons_outer_wrapper_, _("Manage your installed add-ons"));
+	tabs_.add("all", "", &browse_addons_outer_wrapper_,
+	          _("Browse and install add-ons available on the server"));
+	tabs_.add("maps", "", &maps_outer_wrapper_,
+	          format_l(_("Browse and install maps from the widelands.org website maps archive. Like "
+	                     "manually downloaded maps, installed website maps are stored in the ‘%s’ "
+	                     "directory under the Widelands home directory."),
+	                   kDownloadedMapsDirFull));
+	tabs_.add("development", _("Development"), &dev_box_, _("Tools for add-on developers"));
 
-	/** TRANSLATORS: Sort add-ons alphabetically by name */
-	sort_order_.add(_("Name"), AddOnSortingCriteria::kNameABC);
-	/** TRANSLATORS: Sort add-ons alphabetically by name (inverted) */
-	sort_order_.add(_("Name (descending)"), AddOnSortingCriteria::kNameCBA);
-	/** TRANSLATORS: Sort add-ons by average rating */
-	sort_order_.add(_("Most popular"), AddOnSortingCriteria::kHighestRating, nullptr, true);
-	/** TRANSLATORS: Sort add-ons by average rating */
-	sort_order_.add(_("Least popular"), AddOnSortingCriteria::kLowestRating);
-	/** TRANSLATORS: Sort add-ons by how often they were downloaded */
-	sort_order_.add(_("Most often downloaded"), AddOnSortingCriteria::kMostDownloads);
-	/** TRANSLATORS: Sort add-ons by how often they were downloaded */
-	sort_order_.add(_("Least often downloaded"), AddOnSortingCriteria::kFewestDownloads);
-	/** TRANSLATORS: Sort add-ons by upload date/time */
-	sort_order_.add(_("Oldest"), AddOnSortingCriteria::kOldest);
-	/** TRANSLATORS: Sort add-ons by upload date/time */
-	sort_order_.add(_("Newest"), AddOnSortingCriteria::kNewest);
+	for (auto* so : {&sort_order_browse_, &sort_order_maps_}) {
+		/** TRANSLATORS: Sort add-ons alphabetically by name */
+		so->add(_("Name"), AddOnSortingCriteria::kNameABC);
+		/** TRANSLATORS: Sort add-ons alphabetically by name (inverted) */
+		so->add(_("Name (descending)"), AddOnSortingCriteria::kNameCBA);
+		/** TRANSLATORS: Sort add-ons by average rating */
+		so->add(_("Most popular"), AddOnSortingCriteria::kHighestRating, nullptr, true);
+		/** TRANSLATORS: Sort add-ons by average rating */
+		so->add(_("Least popular"), AddOnSortingCriteria::kLowestRating);
+		/** TRANSLATORS: Sort add-ons by how often they were downloaded */
+		so->add(_("Most often downloaded"), AddOnSortingCriteria::kMostDownloads);
+		/** TRANSLATORS: Sort add-ons by how often they were downloaded */
+		so->add(_("Least often downloaded"), AddOnSortingCriteria::kFewestDownloads);
+		/** TRANSLATORS: Sort add-ons by upload date/time */
+		so->add(_("Oldest"), AddOnSortingCriteria::kOldest);
+		/** TRANSLATORS: Sort add-ons by upload date/time */
+		so->add(_("Newest"), AddOnSortingCriteria::kNewest);
+	}
 
 	for (const auto& pair : AddOnQuality::kQualities) {
 		const AddOnQuality q = pair.second();
-		filter_quality_.add(q.name, pair.first, q.icon, pair.first == 2, q.description);
+		filter_browse_quality_.add(q.name, pair.first, q.icon, pair.first == 2, q.description);
 	}
 
-	filter_verified_.set_state(true);
-	filter_name_.set_tooltip(_("Filter add-ons by name"));
+	filter_browse_verified_.set_state(true);
+	filter_browse_name_.set_tooltip(_("Filter add-ons by name"));
+	filter_maps_name_.set_tooltip(_("Filter maps by name"));
 	{
 		uint8_t index = 0;
 		for (const auto& pair : AddOns::kAddOnCategories) {
-			if (pair.first == AddOns::AddOnCategory::kNone) {
+			if (pair.second.hide) {
 				continue;
 			}
 			UI::Checkbox* c =
@@ -556,9 +794,9 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 			                    format("category_%s", pair.second.internal_name), Vector2i(0, 0),
 			                    g_image_cache->get(pair.second.icon),
 			                    format(_("Toggle category ‘%s’"), pair.second.descname()));
-			filter_category_[pair.first] = c;
+			filter_browse_category_[pair.first] = c;
 			c->set_state(true);
-			c->changed.connect([this, &pair]() { category_filter_changed(pair.first); });
+			c->changed.connect([this, &pair]() { category_filter_browse_changed(pair.first); });
 			c->set_desired_size(kRowButtonSize, kRowButtonSize);
 			if (index > 0) {
 				browse_addons_buttons_box_category_box_.add_space(kRowButtonSpacing);
@@ -568,49 +806,158 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 			++index;
 		}
 	}
+
+	{
+		std::vector<Widelands::Map::OldWorldInfo> worlds = {
+		   {"", "", "world/pics/one_world.png", []() { return _("One World"); }}};
+		worlds.insert(worlds.end(), Widelands::Map::kOldWorldNames.begin(),
+		              Widelands::Map::kOldWorldNames.end());
+		uint8_t index = 0;
+		for (const Widelands::Map::OldWorldInfo& world : worlds) {
+			UI::Checkbox* c = new UI::Checkbox(&filter_maps_lhbox_, UI::PanelStyle::kFsMenu,
+			                                   format("world_%s", world.old_name), Vector2i(0, 0),
+			                                   g_image_cache->get(world.icon),
+			                                   format(_("Toggle world ‘%s’"), world.descname()));
+			filter_maps_world_[world.old_name] = c;
+			c->set_state(true);
+			c->changed.connect([this, world]() { world_filter_maps_changed(world.old_name); });
+			c->set_desired_size(kRowButtonSize, kRowButtonSize);
+			if (index > 0) {
+				filter_maps_lhbox_.add_space(kRowButtonSpacing);
+			}
+			filter_maps_lhbox_.add(c, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+			++index;
+		}
+	}
+
 	browse_addons_buttons_box_right_hbox_.add(
-	   &filter_verified_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	browse_addons_buttons_box_right_hbox_.add(&filter_quality_, UI::Box::Resizing::kExpandBoth);
+	   &filter_browse_verified_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	browse_addons_buttons_box_right_hbox_.add(
+	   &filter_browse_quality_, UI::Box::Resizing::kExpandBoth);
 
 	browse_addons_buttons_box_rvbox_.add(
 	   &browse_addons_buttons_box_right_hbox_, UI::Box::Resizing::kFullSize);
 	browse_addons_buttons_box_rvbox_.add_space(kRowButtonSpacing);
-	browse_addons_buttons_box_rvbox_.add(&filter_name_, UI::Box::Resizing::kFullSize);
+	browse_addons_buttons_box_rvbox_.add(&filter_browse_name_, UI::Box::Resizing::kFullSize);
 	browse_addons_buttons_box_rvbox_.add_space(kRowButtonSpacing);
-	browse_addons_buttons_box_rvbox_.add(&sort_order_, UI::Box::Resizing::kFullSize);
+	browse_addons_buttons_box_rvbox_.add(&sort_order_browse_, UI::Box::Resizing::kFullSize);
 
 	browse_addons_buttons_box_lvbox_.add(
 	   &browse_addons_buttons_box_category_box_, UI::Box::Resizing::kExpandBoth);
 	browse_addons_buttons_box_lvbox_.add_inf_space();
-	browse_addons_buttons_box_lvbox_.add(&filter_reset_, UI::Box::Resizing::kFullSize);
+	browse_addons_buttons_box_lvbox_.add(&filter_browse_reset_, UI::Box::Resizing::kFullSize);
 
 	browse_addons_buttons_box_.add(&browse_addons_buttons_box_lvbox_, UI::Box::Resizing::kFullSize);
 	browse_addons_buttons_box_.add_space(kRowButtonSpacing);
 	browse_addons_buttons_box_.add(
 	   &browse_addons_buttons_box_rvbox_, UI::Box::Resizing::kExpandBoth);
 
-	filter_reset_.set_enabled(false);
-	filter_name_.changed.connect([this]() {
-		filter_reset_.set_enabled(true);
-		rebuild(false);
+	filter_maps_lvbox_.add(&sort_order_maps_, UI::Box::Resizing::kFullSize);
+	filter_maps_lvbox_.add_space(kRowButtonSpacing);
+	filter_maps_lvbox_.add(&filter_maps_lhbox_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	filter_maps_lvbox_.add_space(kRowButtonSpacing);
+	filter_maps_lvbox_.add(&filter_maps_name_, UI::Box::Resizing::kFullSize);
+	filter_maps_lvbox_.add_space(kRowButtonSpacing);
+	filter_maps_lvbox_.add(&filter_maps_reset_, UI::Box::Resizing::kFullSize);
+
+	// Spinboxes and their width requirements...
+	filter_maps_rvbox_min_.set_size(300, 100);
+	filter_maps_rvbox_max_.set_size(300, 100);
+	filter_maps_rvbox_min_.add(&filter_maps_min_players_, UI::Box::Resizing::kFullSize);
+	filter_maps_rvbox_min_.add_space(kRowButtonSpacing);
+	filter_maps_rvbox_min_.add(&filter_maps_min_w_, UI::Box::Resizing::kFullSize);
+	filter_maps_rvbox_min_.add_space(kRowButtonSpacing);
+	filter_maps_rvbox_min_.add(&filter_maps_min_h_, UI::Box::Resizing::kFullSize);
+	filter_maps_rvbox_min_.add_space(kRowButtonSpacing);
+	filter_maps_rvbox_min_.add(&filter_maps_min_size_, UI::Box::Resizing::kFullSize);
+
+	filter_maps_rvbox_max_.add(&filter_maps_max_players_, UI::Box::Resizing::kFullSize);
+	filter_maps_rvbox_max_.add_space(kRowButtonSpacing);
+	filter_maps_rvbox_max_.add(&filter_maps_max_w_, UI::Box::Resizing::kFullSize);
+	filter_maps_rvbox_max_.add_space(kRowButtonSpacing);
+	filter_maps_rvbox_max_.add(&filter_maps_max_h_, UI::Box::Resizing::kFullSize);
+	filter_maps_rvbox_max_.add_space(kRowButtonSpacing);
+	filter_maps_rvbox_max_.add(&filter_maps_max_size_, UI::Box::Resizing::kFullSize);
+
+	maps_buttons_box_.add(&filter_maps_lvbox_, UI::Box::Resizing::kExpandBoth);
+	maps_buttons_box_.add_space(kRowButtonSpacing);
+	maps_buttons_box_.add(&filter_maps_rvbox_min_, UI::Box::Resizing::kFullSize);
+	maps_buttons_box_.add_space(kRowButtonSpacing);
+	maps_buttons_box_.add(&filter_maps_rvbox_max_, UI::Box::Resizing::kFullSize);
+
+	filter_maps_min_w_.set_value_list(Widelands::kMapDimensions);
+	filter_maps_min_h_.set_value_list(Widelands::kMapDimensions);
+	filter_maps_max_w_.set_value_list(Widelands::kMapDimensions);
+	filter_maps_max_h_.set_value_list(Widelands::kMapDimensions);
+	filter_maps_min_size_.set_value_list(Widelands::Map::kMapFieldCounts);
+	filter_maps_max_size_.set_value_list(Widelands::Map::kMapFieldCounts);
+	filter_maps_max_w_.set_value(Widelands::kMapDimensions.size() - 1, false);
+	filter_maps_max_h_.set_value(Widelands::kMapDimensions.size() - 1, false);
+	filter_maps_max_size_.set_value(Widelands::Map::kMapFieldCounts.size() - 1, false);
+
+	filter_browse_reset_.set_enabled(false);
+	filter_maps_reset_.set_enabled(false);
+	filter_browse_name_.changed.connect([this]() {
+		filter_browse_reset_.set_enabled(true);
+		rebuild_browse();
 	});
-	filter_verified_.changed.connect([this]() {
-		filter_reset_.set_enabled(true);
-		rebuild(false);
+	filter_maps_name_.changed.connect([this]() {
+		filter_maps_reset_.set_enabled(true);
+		rebuild_maps();
 	});
-	sort_order_.selected.connect([this]() { rebuild(false); });
-	filter_quality_.selected.connect([this]() {
-		filter_reset_.set_enabled(true);
-		rebuild(false);
+	filter_browse_verified_.changed.connect([this]() {
+		filter_browse_reset_.set_enabled(true);
+		rebuild_browse();
+	});
+	sort_order_browse_.selected.connect([this]() { rebuild_browse(); });
+	sort_order_maps_.selected.connect([this]() { rebuild_maps(); });
+	filter_browse_quality_.selected.connect([this]() {
+		filter_browse_reset_.set_enabled(true);
+		rebuild_browse();
+	});
+
+	filter_maps_min_players_.changed.connect([this]() {
+		filter_maps_reset_.set_enabled(true);
+		rebuild_maps();
+	});
+	filter_maps_min_w_.changed.connect([this]() {
+		filter_maps_reset_.set_enabled(true);
+		rebuild_maps();
+	});
+	filter_maps_min_h_.changed.connect([this]() {
+		filter_maps_reset_.set_enabled(true);
+		rebuild_maps();
+	});
+	filter_maps_min_size_.changed.connect([this]() {
+		filter_maps_reset_.set_enabled(true);
+		rebuild_maps();
+	});
+	filter_maps_max_players_.changed.connect([this]() {
+		filter_maps_reset_.set_enabled(true);
+		rebuild_maps();
+	});
+	filter_maps_max_w_.changed.connect([this]() {
+		filter_maps_reset_.set_enabled(true);
+		rebuild_maps();
+	});
+	filter_maps_max_h_.changed.connect([this]() {
+		filter_maps_reset_.set_enabled(true);
+		rebuild_maps();
+	});
+	filter_maps_max_size_.changed.connect([this]() {
+		filter_maps_reset_.set_enabled(true);
+		rebuild_maps();
 	});
 
 	ok_.sigclicked.connect([this]() { die(); });
 	refresh_.sigclicked.connect([this]() {
 		refresh_remotes(matches_keymod(SDL_GetModState(), KMOD_CTRL));
-		tabs_.activate(1);
+		if (tabs_.active() != 2) {
+			tabs_.activate(1);
+		}
 	});
 	tabs_.sigclicked.connect([this]() {
-		if (tabs_.active() == 1 && remotes_.size() <= 1) {
+		if ((tabs_.active() == 1 || tabs_.active() == 2) && remotes_.size() <= 1) {
 			refresh_remotes(false);
 		}
 	});
@@ -618,26 +965,42 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	autofix_dependencies_.sigclicked.connect([this]() { autofix_dependencies(); });
 #endif
 
-	filter_reset_.sigclicked.connect([this]() {
-		filter_name_.set_text("");
-		filter_verified_.set_state(true, false);
-		filter_quality_.select(2);
-		for (auto& pair : filter_category_) {
+	filter_browse_reset_.sigclicked.connect([this]() {
+		filter_browse_name_.set_text("");
+		filter_browse_verified_.set_state(true, false);
+		filter_browse_quality_.select(2);
+		for (auto& pair : filter_browse_category_) {
 			pair.second->set_state(true, false);
 		}
-		rebuild(false);
-		filter_reset_.set_enabled(false);
+		rebuild_browse();
+		filter_browse_reset_.set_enabled(false);
+	});
+	filter_maps_reset_.sigclicked.connect([this]() {
+		filter_maps_name_.set_text("");
+		filter_maps_min_players_.set_value(1, false);
+		filter_maps_min_w_.set_value(0, false);
+		filter_maps_min_h_.set_value(0, false);
+		filter_maps_min_size_.set_value(0, false);
+		filter_maps_max_players_.set_value(kMaxPlayers, false);
+		filter_maps_max_w_.set_value(Widelands::kMapDimensions.size() - 1, false);
+		filter_maps_max_h_.set_value(Widelands::kMapDimensions.size() - 1, false);
+		filter_maps_max_size_.set_value(Widelands::Map::kMapFieldCounts.size() - 1, false);
+		for (auto& pair : filter_maps_world_) {
+			pair.second->set_state(true, false);
+		}
+		rebuild_maps();
+		filter_maps_reset_.set_enabled(false);
 	});
 	upgrade_all_.sigclicked.connect([this]() {
 		std::vector<std::pair<std::shared_ptr<AddOns::AddOnInfo>, bool /* full upgrade */>> upgrades;
 		bool all_verified = true;
 		size_t nr_full_updates = 0;
-		for (const RemoteAddOnRow* r : browse_) {
-			if (r->upgradeable()) {
-				const bool full_upgrade = r->full_upgrade_possible();
-				upgrades.emplace_back(r->info(), full_upgrade);
+		for (const auto& pair : cached_browse_rows_) {
+			if (pair.second->is_visible() && pair.second->upgradeable()) {
+				const bool full_upgrade = pair.second->full_upgrade_possible();
+				upgrades.emplace_back(pair.second->info(), full_upgrade);
 				if (full_upgrade) {
-					all_verified &= r->info()->verified;
+					all_verified &= pair.second->info()->verified;
 					++nr_full_updates;
 				}
 			}
@@ -666,7 +1029,9 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		for (const auto& pair : upgrades) {
 			install_or_upgrade(pair.first, !pair.second);
 		}
-		rebuild(true);
+		rebuild_installed();
+		rebuild_browse();
+		update_dependency_errors();
 	});
 
 	move_up_.sigclicked.connect([this]() {
@@ -679,7 +1044,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		it = AddOns::g_addons.erase(it);
 		--it;
 		AddOns::g_addons.insert(it, std::make_pair(info, state));
-		rebuild(true);
+		rebuild_installed();
+		update_dependency_errors();
 		focus_installed_addon_row(info);
 	});
 	move_down_.sigclicked.connect([this]() {
@@ -692,7 +1058,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		it = AddOns::g_addons.erase(it);
 		++it;
 		AddOns::g_addons.insert(it, std::make_pair(info, state));
-		rebuild(true);
+		rebuild_installed();
+		update_dependency_errors();
 		focus_installed_addon_row(info);
 	});
 	move_top_.sigclicked.connect([this]() {
@@ -704,7 +1071,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		const bool state = it->second;
 		it = AddOns::g_addons.erase(it);
 		AddOns::g_addons.insert(AddOns::g_addons.begin(), std::make_pair(info, state));
-		rebuild(true);
+		rebuild_installed();
+		update_dependency_errors();
 		focus_installed_addon_row(info);
 	});
 	move_bottom_.sigclicked.connect([this]() {
@@ -716,7 +1084,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		const bool state = it->second;
 		it = AddOns::g_addons.erase(it);
 		AddOns::g_addons.emplace_back(info, state);
-		rebuild(true);
+		rebuild_installed();
+		update_dependency_errors();
 		focus_installed_addon_row(info);
 	});
 
@@ -725,7 +1094,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		a.run<int>();
 
 		// Perhaps add-ons were created or deleted
-		rebuild(true);
+		rebuild_installed();
+		update_dependency_errors();
 	});
 
 	buttons_box_.add_space(kRowButtonSpacing);
@@ -750,18 +1120,24 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	// prevent assert failures
 	installed_addons_box_.set_size(100, 100);
 	browse_addons_box_.set_size(100, 100);
+	maps_box_.set_size(100, 100);
 	installed_addons_inner_wrapper_.set_size(100, 100);
 	browse_addons_inner_wrapper_.set_size(100, 100);
+	maps_inner_wrapper_.set_size(100, 100);
 
 	installed_addons_inner_wrapper_.set_force_scrolling(true);
 	browse_addons_inner_wrapper_.set_force_scrolling(true);
+	maps_inner_wrapper_.set_force_scrolling(true);
 
 	login_button_.sigclicked.connect([this]() { login_button_clicked(); });
 	update_login_button(&login_button_);
 
 	do_not_layout_on_resolution_change();
 	center_to_parent();
-	rebuild(true);
+	rebuild_installed();
+	rebuild_browse();
+	rebuild_maps();
+	update_dependency_errors();
 }
 
 AddOnsCtrl::~AddOnsCtrl() {
@@ -887,7 +1263,7 @@ void AddOnsCtrl::think() {
 }
 
 static bool category_filter_changing = false;
-void AddOnsCtrl::category_filter_changed(const AddOns::AddOnCategory which) {
+void AddOnsCtrl::category_filter_browse_changed(const AddOns::AddOnCategory which) {
 	// protect against recursion
 	if (category_filter_changing) {
 		return;
@@ -897,13 +1273,32 @@ void AddOnsCtrl::category_filter_changed(const AddOns::AddOnCategory which) {
 	// Normal click enables the selected category and disables all others,
 	// Ctrl+Click or Shift+Click disables this behaviour.
 	if ((SDL_GetModState() & (KMOD_CTRL | KMOD_SHIFT)) == 0) {
-		for (auto& pair : filter_category_) {
+		for (auto& pair : filter_browse_category_) {
 			pair.second->set_state(pair.first == which);
 		}
 	}
 
-	filter_reset_.set_enabled(true);
-	rebuild(false);
+	filter_browse_reset_.set_enabled(true);
+	rebuild_browse();
+	category_filter_changing = false;
+}
+void AddOnsCtrl::world_filter_maps_changed(const std::string& which) {
+	// protect against recursion
+	if (category_filter_changing) {
+		return;
+	}
+	category_filter_changing = true;
+
+	// Normal click enables the selected category and disables all others,
+	// Ctrl+Click or Shift+Click disables this behaviour.
+	if ((SDL_GetModState() & (KMOD_CTRL | KMOD_SHIFT)) == 0) {
+		for (auto& pair : filter_maps_world_) {
+			pair.second->set_state(pair.first == which);
+		}
+	}
+
+	filter_maps_reset_.set_enabled(true);
+	rebuild_maps();
 	category_filter_changing = false;
 }
 
@@ -1000,56 +1395,117 @@ void AddOnsCtrl::refresh_remotes(const bool showall) {
 	}
 
 	progress.step(format(step_message, 100));
-	rebuild(false);
+
+	for (auto& pair : cached_browse_rows_) {
+		pair.second->die();
+	}
+	for (auto& pair : cached_map_rows_) {
+		pair.second->die();
+	}
+	cached_browse_rows_.clear();
+	cached_map_rows_.clear();
+
+	rebuild_browse();
+	rebuild_maps();
 }
 
-bool AddOnsCtrl::matches_filter(std::shared_ptr<AddOns::AddOnInfo> info) {
+bool AddOnsCtrl::matches_filter_browse(std::shared_ptr<AddOns::AddOnInfo> info) {
 	if (info->internal_name.empty()) {
 		// always show error messages
 		return true;
 	}
 
-	if (!filter_category_.at(info->category)->get_state()) {
+	if (AddOns::kAddOnCategories.at(info->category).hide) {
+		return false;  // Hidden in the main view
+	}
+
+	if (!filter_browse_category_.at(info->category)->get_state()) {
 		// wrong category
 		return false;
 	}
 
-	if (filter_verified_.get_state() && !info->verified) {
+	if (filter_browse_verified_.get_state() && !info->verified) {
 		// not verified
 		return false;
 	}
 
-	if (filter_quality_.get_selected() > info->quality) {
+	if (filter_browse_quality_.get_selected() > info->quality) {
 		// too low quality
 		return false;
 	}
 
-	if (filter_name_.get_text().empty()) {
+	if (filter_browse_name_.get_text().empty()) {
 		// no text filter given, so we accept it
 		return true;
 	}
 	auto array = {info->descname(), info->author(), info->upload_username, info->internal_name,
 	              info->description()};
 	return std::any_of(array.begin(), array.end(), [this](const std::string& text) {
-		return text.find(filter_name_.get_text()) != std::string::npos;
+		return text.find(filter_browse_name_.get_text()) != std::string::npos;
 	});
 }
 
-void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
+bool AddOnsCtrl::matches_filter_maps(std::shared_ptr<AddOns::AddOnInfo> info) {
+	if (info->category != AddOns::AddOnCategory::kSingleMap) {
+		return false;
+	}
+
+	if (info->map_width < filter_maps_min_w_.get_value()) {
+		return false;
+	}
+	if (info->map_height < filter_maps_min_h_.get_value()) {
+		return false;
+	}
+	if (info->map_nr_players < filter_maps_min_players_.get_value()) {
+		return false;
+	}
+	if (info->map_width * info->map_height < filter_maps_min_size_.get_value()) {
+		return false;
+	}
+	if (info->map_width > filter_maps_max_w_.get_value()) {
+		return false;
+	}
+	if (info->map_height > filter_maps_max_h_.get_value()) {
+		return false;
+	}
+	if (info->map_nr_players > filter_maps_max_players_.get_value()) {
+		return false;
+	}
+	if (info->map_width * info->map_height > filter_maps_max_size_.get_value()) {
+		return false;
+	}
+
+	if (const auto it = filter_maps_world_.find(info->map_world_name);
+	    it != filter_maps_world_.end() && !it->second->get_state()) {
+		// wrong world
+		return false;
+	}
+
+	if (filter_maps_name_.get_text().empty()) {
+		// no text filter given, so we accept it
+		return true;
+	}
+	auto array = {
+	   info->descname(),    info->author(),   info->upload_username,       info->internal_name,
+	   info->description(), info->map_hint(), info->map_uploader_comment()};
+	return std::any_of(array.begin(), array.end(), [this](const std::string& text) {
+		return text.find(filter_maps_name_.get_text()) != std::string::npos;
+	});
+}
+
+void AddOnsCtrl::rebuild_installed() {
 	const uint32_t scrollpos_i =
 	   installed_addons_inner_wrapper_.get_scrollbar() != nullptr ?
 	      installed_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
 	      0;
-	const uint32_t scrollpos_b = browse_addons_inner_wrapper_.get_scrollbar() != nullptr ?
-	                                browse_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
-	                                0;
-	installed_addons_box_.free_children();
-	browse_addons_box_.free_children();
+
 	installed_addons_box_.clear();
-	browse_addons_box_.clear();
-	browse_.clear();
 	assert(installed_addons_box_.get_nritems() == 0);
-	assert(browse_addons_box_.get_nritems() == 0);
+
+	for (auto& pair : cached_installed_rows_) {
+		pair.second->set_visible(false);
+	}
+
 	upload_addon_.clear();
 	upload_screenshot_.clear();
 
@@ -1058,10 +1514,19 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 		if (index > 0) {
 			installed_addons_box_.add_space(kRowButtonSize);
 		}
-		InstalledAddOnRow* i =
-		   new InstalledAddOnRow(&installed_addons_box_, this, pair.first, pair.second);
-		installed_addons_box_.add(i, UI::Box::Resizing::kFullSize);
 		++index;
+
+		auto row_it = cached_installed_rows_.find(pair.first->internal_name);
+		if (row_it == cached_installed_rows_.end()) {
+			row_it = cached_installed_rows_
+			            .emplace(pair.first->internal_name,
+			                     new InstalledAddOnRow(
+			                        &installed_addons_box_, this, pair.first, pair.second))
+			            .first;
+		}
+
+		installed_addons_box_.add(row_it->second, UI::Box::Resizing::kFullSize);
+		row_it->second->set_visible(true);
 
 		upload_addon_.add(
 		   pair.first->internal_name, pair.first, pair.first->icon, false, pair.first->descname());
@@ -1070,94 +1535,79 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 	}
 	tabs_.tabs()[0]->set_title(format(_("Installed (%u)"), index));
 
-	index = 0;
-	std::list<std::shared_ptr<AddOns::AddOnInfo>> remotes_to_show;
-	for (auto& a : remotes_) {
-		if (matches_filter(a)) {
-			remotes_to_show.push_back(a);
-		}
-	}
-	{
-		const AddOnSortingCriteria sort_by = sort_order_.get_selected();
-		remotes_to_show.sort([sort_by](const std::shared_ptr<AddOns::AddOnInfo> a,
-		                               const std::shared_ptr<AddOns::AddOnInfo> b) {
-			switch (sort_by) {
-			case AddOnSortingCriteria::kNameABC:
-				return a->descname().compare(b->descname()) < 0;
-			case AddOnSortingCriteria::kNameCBA:
-				return a->descname().compare(b->descname()) > 0;
-
-			case AddOnSortingCriteria::kFewestDownloads:
-				return a->download_count < b->download_count;
-			case AddOnSortingCriteria::kMostDownloads:
-				return a->download_count > b->download_count;
-
-			case AddOnSortingCriteria::kOldest:
-				return a->upload_timestamp < b->upload_timestamp;
-			case AddOnSortingCriteria::kNewest:
-				return a->upload_timestamp > b->upload_timestamp;
-
-			case AddOnSortingCriteria::kLowestRating:
-				if (a->number_of_votes() == 0) {
-					// Add-ons without votes should always end up
-					// below any others when sorting by rating
-					return false;
-				} else if (b->number_of_votes() == 0) {
-					return true;
-				} else if (std::abs(a->average_rating() - b->average_rating()) < 0.01) {
-					// ambiguity – always choose the one with more votes
-					return a->number_of_votes() > b->number_of_votes();
-				} else {
-					return a->average_rating() < b->average_rating();
-				}
-			case AddOnSortingCriteria::kHighestRating:
-				if (a->number_of_votes() == 0) {
-					return false;
-				} else if (b->number_of_votes() == 0) {
-					return true;
-				} else if (std::abs(a->average_rating() - b->average_rating()) < 0.01) {
-					return a->number_of_votes() > b->number_of_votes();
-				} else {
-					return a->average_rating() > b->average_rating();
-				}
-			default:
-				NEVER_HERE();
-			}
-		});
-	}
-	std::vector<std::string> has_upgrades;
-	for (const auto& a : remotes_to_show) {
-		if (0 < index++) {
-			browse_addons_box_.add_space(kRowButtonSize);
-		}
-		AddOns::AddOnVersion installed;
-		uint32_t installed_i18n = 0;
-		for (const auto& pair : AddOns::g_addons) {
-			if (pair.first->internal_name == a->internal_name) {
-				installed = pair.first->version;
-				installed_i18n = pair.first->i18n_version;
-				break;
-			}
-		}
-		RemoteAddOnRow* r =
-		   new RemoteAddOnRow(&browse_addons_box_, this, a, installed, installed_i18n);
-		browse_addons_box_.add(r, UI::Box::Resizing::kFullSize);
-		if (r->upgradeable()) {
-			has_upgrades.push_back(a->descname());
-		}
-		browse_.push_back(r);
-	}
-	tabs_.tabs()[1]->set_title(index == 0 ? _("Browse") : format(_("Browse (%u)"), index));
-
 	if ((installed_addons_inner_wrapper_.get_scrollbar() != nullptr) && (scrollpos_i != 0u)) {
 		installed_addons_inner_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_i);
 	}
+
+	check_enable_move_buttons();
+
+	layout();
+	initialization_complete();
+}
+
+void AddOnsCtrl::rebuild_browse() {
+	server_name_.set_text(net().server_descname());
+
+	const uint32_t scrollpos_b = browse_addons_inner_wrapper_.get_scrollbar() != nullptr ?
+	                                browse_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
+	                                0;
+
+	browse_addons_box_.clear();
+	assert(browse_addons_box_.get_nritems() == 0);
+
+	for (auto& pair : cached_browse_rows_) {
+		pair.second->set_visible(false);
+	}
+
+	std::vector<std::shared_ptr<AddOns::AddOnInfo>> remotes_to_show;
+	for (auto& a : remotes_) {
+		if (matches_filter_browse(a)) {
+			remotes_to_show.emplace_back(a);
+		}
+	}
+	std::sort(remotes_to_show.begin(), remotes_to_show.end(),
+	          create_sort_functor(sort_order_browse_.get_selected()));
+
+	std::vector<std::string> has_upgrades;
+
+	size_t index = 0;
+	for (const auto& a : remotes_to_show) {
+		if (index > 0) {
+			browse_addons_box_.add_space(kRowButtonSize);
+		}
+		++index;
+
+		auto row_it = cached_browse_rows_.find(a->internal_name);
+		if (row_it == cached_browse_rows_.end()) {
+			AddOns::AddOnVersion installed;
+			uint32_t installed_i18n = 0;
+			for (const auto& pair : AddOns::g_addons) {
+				if (pair.first->internal_name == a->internal_name) {
+					installed = pair.first->version;
+					installed_i18n = pair.first->i18n_version;
+					break;
+				}
+			}
+
+			row_it = cached_browse_rows_
+			            .emplace(a->internal_name, new RemoteAddOnRow(&browse_addons_box_, this, a,
+			                                                          installed, installed_i18n))
+			            .first;
+		}
+
+		browse_addons_box_.add(row_it->second, UI::Box::Resizing::kFullSize);
+		row_it->second->set_visible(true);
+
+		if (row_it->second->upgradeable()) {
+			has_upgrades.push_back(a->descname());
+		}
+	}
+	tabs_.tabs()[1]->set_title(index == 0 ? _("Browse") : format(_("Browse (%u)"), index));
+
 	if ((browse_addons_inner_wrapper_.get_scrollbar() != nullptr) && (scrollpos_b != 0u)) {
 		browse_addons_inner_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_b);
 	}
 
-	check_enable_move_buttons();
-	server_name_.set_text(net().server_descname());
 	upgrade_all_.set_title(format(_("Upgrade all (%u)"), has_upgrades.size()));
 	upgrade_all_.set_enabled(!has_upgrades.empty());
 	if (has_upgrades.empty()) {
@@ -1173,12 +1623,62 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 		upgrade_all_.set_tooltip(text);
 	}
 
-	if (need_to_update_dependency_errors) {
-		update_dependency_errors();
-	} else {
-		layout();
+	layout();
+	initialization_complete();
+}
+
+void AddOnsCtrl::rebuild_maps() {
+	const uint32_t scrollpos_m = maps_inner_wrapper_.get_scrollbar() != nullptr ?
+	                                maps_inner_wrapper_.get_scrollbar()->get_scrollpos() :
+	                                0;
+
+	maps_box_.clear();
+	assert(maps_box_.get_nritems() == 0);
+
+	for (auto& pair : cached_map_rows_) {
+		pair.second->set_visible(false);
 	}
 
+	std::vector<std::shared_ptr<AddOns::AddOnInfo>> maps_to_show;
+	for (auto& a : remotes_) {
+		if (matches_filter_maps(a)) {
+			maps_to_show.push_back(a);
+		}
+	}
+	std::sort(maps_to_show.begin(), maps_to_show.end(),
+	          create_sort_functor(sort_order_maps_.get_selected()));
+
+	size_t index = 0;
+	for (const auto& a : maps_to_show) {
+		if (index > 0) {
+			maps_box_.add_space(kRowButtonSize);
+		}
+		++index;
+
+		auto row_it = cached_map_rows_.find(a->internal_name);
+		if (row_it == cached_map_rows_.end()) {
+			std::string map_file_path = kMapsDir;
+			map_file_path += FileSystem::file_separator();
+			map_file_path += kDownloadedMapsDir;
+			map_file_path += FileSystem::file_separator() + a->map_file_name;
+
+			row_it = cached_map_rows_
+			            .emplace(a->internal_name,
+			                     new MapRow(&maps_box_, this, a, g_fs->file_exists(map_file_path)))
+			            .first;
+		}
+
+		maps_box_.add(row_it->second, UI::Box::Resizing::kFullSize);
+		row_it->second->set_visible(true);
+	}
+	tabs_.tabs()[2]->set_title(index == 0 ? _("Website Maps") :
+	                                        format(_("Website Maps (%u)"), index));
+
+	if ((maps_inner_wrapper_.get_scrollbar() != nullptr) && (scrollpos_m != 0u)) {
+		maps_inner_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_m);
+	}
+
+	layout();
 	initialization_complete();
 }
 
@@ -1287,6 +1787,30 @@ void AddOnsCtrl::update_dependency_errors() {
 	layout();
 }
 
+void AddOnsCtrl::clear_cache_for_installed(const std::string& addon) {
+	const auto it = cached_installed_rows_.find(addon);
+	if (it != cached_installed_rows_.end()) {
+		it->second->die();
+		cached_installed_rows_.erase(it);
+	}
+}
+
+void AddOnsCtrl::clear_cache_for_browse(const std::string& addon) {
+	const auto it = cached_browse_rows_.find(addon);
+	if (it != cached_browse_rows_.end()) {
+		it->second->die();
+		cached_browse_rows_.erase(it);
+	}
+}
+
+void AddOnsCtrl::clear_cache_for_map(const std::string& addon) {
+	const auto it = cached_map_rows_.find(addon);
+	if (it != cached_map_rows_.end()) {
+		it->second->die();
+		cached_map_rows_.erase(it);
+	}
+}
+
 void AddOnsCtrl::layout() {
 	if (!is_minimal()) {
 		main_box_.set_size(get_inner_w(), get_inner_h());
@@ -1304,6 +1828,9 @@ void AddOnsCtrl::layout() {
 		browse_addons_inner_wrapper_.set_max_size(
 		   tabs_placeholder_.get_w(),
 		   tabs_placeholder_.get_h() - 2 * kRowButtonSize - browse_addons_buttons_box_.get_h());
+		maps_inner_wrapper_.set_max_size(
+		   tabs_placeholder_.get_w(),
+		   tabs_placeholder_.get_h() - 2 * kRowButtonSize - maps_buttons_box_.get_h());
 
 		login_button_.set_size(get_inner_w() / 3, login_button_.get_h());
 		login_button_.set_pos(Vector2i(get_inner_w() - login_button_.get_w(), 0));
@@ -1434,7 +1961,8 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 		if (remote != nullptr) {
 			*remote = net().fetch_one_remote(remote->internal_name);
 		}
-		rebuild(false);
+		clear_cache_for_browse(remote->internal_name);
+		rebuild_browse();
 	} catch (const OperationCancelledByUserException&) {
 		log_info("upload addon %s cancelled by user", addon->internal_name.c_str());
 	} catch (const AddOns::IllegalFilenamesException& illegal) {
@@ -1475,6 +2003,50 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
 	}
+}
+
+void AddOnsCtrl::install_map(std::shared_ptr<AddOns::AddOnInfo> remote) {
+	g_fs->ensure_directory_exists(kTempFileDir);
+	std::string temp_file = kTempFileDir + FileSystem::file_separator() + timestring() + ".addon." +
+	                        remote->internal_name + kTempFileExtension;
+	if (g_fs->file_exists(temp_file)) {
+		g_fs->fs_unlink(temp_file);
+	}
+
+	bool success = false;
+	try {
+		net().download_map(remote->internal_name, temp_file);
+		success = true;
+	} catch (const OperationCancelledByUserException&) {
+		log_info("install map %s cancelled by user", remote->internal_name.c_str());
+	} catch (const std::exception& e) {
+		log_err("install map %s: %s", remote->internal_name.c_str(), e.what());
+		UI::WLMessageBox m(
+		   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+		   format(
+		      _("The map ‘%1$s’ could not be downloaded from the server.\n\nError Message:\n%2$s"),
+		      remote->internal_name, e.what()),
+		   UI::WLMessageBox::MBoxType::kOk);
+		m.run<UI::Panel::Returncodes>();
+	}
+
+	if (!success) {
+		g_fs->fs_unlink(temp_file);
+		return;
+	}
+
+	std::string new_path = kMapsDir + FileSystem::file_separator() + kDownloadedMapsDir;
+	g_fs->ensure_directory_exists(new_path);
+	new_path += FileSystem::file_separator();
+	new_path += remote->map_file_name;
+
+	if (g_fs->file_exists(new_path)) {
+		g_fs->fs_unlink(new_path);
+	}
+	g_fs->fs_rename(temp_file, new_path);
+
+	rebuild_maps();
+	update_dependency_errors();
 }
 
 // TODO(Nordfriese): install_or_upgrade() should also (recursively) install the add-on's
@@ -1617,7 +2189,12 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 	if (remote->category == AddOns::AddOnCategory::kUIPlugin) {
 		fsmm_.reinit_plugins();
 	}
-	rebuild(true);
+
+	clear_cache_for_installed(remote->internal_name);
+	clear_cache_for_browse(remote->internal_name);
+	update_dependency_errors();
+	rebuild_installed();
+	rebuild_browse();
 }
 
 #if 0  // TODO(Nordfriese): Disabled autofix_dependencies for v1.0
@@ -1697,7 +2274,9 @@ step1:
 		AddOns::g_addons.push_back(AddOns::AddOnState(pair.second));
 	}
 
-	rebuild(true);
+	rebuild_installed();
+	rebuild_browse();
+	update_dependency_errors();
 }
 #endif
 
