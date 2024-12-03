@@ -9,14 +9,19 @@ jobs:
       matrix:
         config: [debug, release]
         compiler: [clang]
-        arch: [x86, arm64]
+        os: [13, 14, 15]
         # Check https://github.com/actions/runner-images#available-images
         include:
-          - arch: x86
-            os: 12
-          - arch: arm64
-            os: 14
-    name: MacOS ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.arch }}
+          - os: 13
+            osname: macOS13_x86
+          # - os: 14-large
+            # osname: macOS14_x86
+          - os: 14
+            osname: macOS14_arm64
+          - os: 15
+            osname: macOS15_arm64
+    name: ${{ matrix.osname}} ${{ matrix.config }} 
+    # ${{ matrix.compiler }}
     runs-on: macos-${{ matrix.os }}
     steps:
     - name: Checkout
@@ -32,18 +37,21 @@ jobs:
         # temporary fix for macos-14 arm failures
         brew install --quiet icu4c
     - name: Building
+      env:
+        # Export for build_app.sh
+        MATRIX_OS: ${{ matrix.os }}
       run: |
         mkdir build_wl
         cd build_wl/
-        ../utils/macos/build_app.sh "--${{ matrix.config }}" "--${{ matrix.compiler }}"
+        ../utils/macos/build_app.sh "--${{ matrix.config }}" "--${{ matrix.compiler }}" "--no-website"
         grep -v REVDETECT-BROKEN ../build/VERSION
         DMGPATH="$(pwd)"
         DMGFILE="$(ls *.dmg)"
         echo "DMG file is: $DMGPATH/$DMGFILE"
-        mv "$DMGFILE" "${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}-${{ matrix.arch }}.dmg"
+        mv "$DMGFILE" "${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.osname }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg"
 
     - name: Uploading DMG
       uses: actions/upload-artifact@v4
       with:
-        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} MacOS ${{ matrix.os }} ${{ matrix.arch }} AppImage
-        path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}-${{ matrix.arch }}.dmg
+        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.osname }} AppImage
+        path: "${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.osname }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg"

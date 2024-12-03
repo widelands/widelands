@@ -93,8 +93,7 @@ InfoToDraw filter_info_to_draw(InfoToDraw info_to_draw,
                                const Widelands::Player& player) {
 	InfoToDraw result = info_to_draw;
 	const Widelands::Player* owner = object->get_owner();
-	if (owner != nullptr && !player.see_all() && player.is_hostile(*owner) &&
-	    object->descr().type() != Widelands::MapObjectType::WAREHOUSE) {
+	if (owner != nullptr && !player.see_all() && player.is_hostile(*owner)) {
 		result = static_cast<InfoToDraw>(result & ~InfoToDraw::kStatistics);
 	}
 	return result;
