@@ -104,6 +104,7 @@ wl_library(editor
     base_scoped_timer
     build_info
     graphic
+    graphic_color_palette
     graphic_fonthandler
     graphic_mouse_cursor
     graphic_playercolor

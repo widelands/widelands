@@ -559,7 +559,8 @@ void AdminDialog::ok() {
 			break;
 		}
 
-		parent_.rebuild(false);
+		parent_.clear_cache_for_browse(info_->internal_name);
+		parent_.rebuild_browse();
 		die();
 	} catch (const std::exception& e) {
 		UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"), e.what(),
@@ -726,13 +727,15 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 			return;
 		}
 		update_data();
-		parent_.rebuild(false);
+		parent_.clear_cache_for_browse(info_->internal_name);
+		parent_.rebuild_browse();
 	});
 	write_comment_.sigclicked.connect([this]() {
 		CommentEditor m(parent_, info_, nullptr);
 		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 			update_data();
-			parent_.rebuild(false);
+			parent_.clear_cache_for_browse(info_->internal_name);
+			parent_.rebuild_browse();
 		}
 	});
 

@@ -3,13 +3,14 @@
 # 
 # Translators:
 # girdhari rao <girdhariworld@gmail.com>, 2015
+# Habis Muhammed, 2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: girdhari rao <girdhariworld@gmail.com>, 2015\n"
+"Last-Translator: Habis Muhammed, 2024\n"
 "Language-Team: Hindi (http://app.transifex.com/widelands/widelands/language/hi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,7 +20,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:29
 msgid "Ensure the supply of building wares"
-msgstr "इमारत माल की आपूर्ति सुनिश्चित करें।"
+msgstr "निर्माण सामग्री की आपूर्ति पक्का कीजिये"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:31
 msgid "Supply Building Wares"
@@ -35,42 +36,42 @@ msgstr "एक खदान बनाएँ"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Build two woodcutter’s houses"
-msgstr ""
+msgstr "दो लकड़हारे के घर बनाओ"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Build two forester’s houses"
-msgstr ""
+msgstr "दो वनपालों के घर बनाओ"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a sawmill"
-msgstr ""
+msgstr "एक चीरमिल बनाओ"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:42
 msgid "Expand your territory and explore"
-msgstr ""
+msgstr "अपने क्षेत्र का विस्तार करें और खोजें"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:44
 msgid "Expand and Explore"
-msgstr ""
+msgstr "क्षेत्र का विस्तार करें और अन्वेषण करें"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:45
 msgid ""
 "The island is huge and as long as we are not sure that we are alone here, we"
 " cannot relax. Explore and conquer it, this is the only way to protect us "
 "from threats on the island and from Atlantis."
-msgstr ""
+msgstr "यह द्वीप बहुत बड़ा है और जब तक हमें यकीन नहीं हो जाता कि हम यहाँ अकेले हैं, हम चैन से नहीं बैठ सकते। इस द्वीप का अन्वेषण करें और जीतें, यह द्वीप पर मौजूद खतरों और अटलांटिस से होने वाले खतरों से हमारी रक्षा करने का एकमात्र तरीका है।"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:46
 msgid "Build military sites to expand your territory"
-msgstr ""
+msgstr "अपने क्षेत्र का विस्तार करने के लिए सैन्य स्थलों का निर्माण करें"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:52
 msgid "Establish a solid food production"
-msgstr ""
+msgstr "एक स्थिर खाद्य उत्पादन प्रणाली स्थापित कीजिए"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:54
 msgid "Food Production"
-msgstr ""
+msgstr "खाद्य उत्पाद"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:55
 msgid ""
@@ -78,7 +79,7 @@ msgid ""
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr ""
+msgstr "खनिज और सैन्य प्रशिक्षण के लिए भोजन बहुत महत्वपूर्ण है। एक अच्छा कार्यशील भोजन वातावरण स्थापित करने के लिए कम से कम एक खेत, एक ब्लैकरूट खेत और एक । दोनों प्रकार के आटे को कुएँ के पानी के साथ मिलाकर बेकरी में रोटी बनाई जाएगी, इसलिए आप एक बेकरी और एक कुआँ बनाइए।"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:56
 msgid ""
