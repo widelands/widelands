@@ -40,7 +40,7 @@ wl.Descriptions():new_productionsite_type {
 
    inputs = {
       { name = "log", amount = 6 },
-      { name = "spidercloth", amount = 4 },
+      { name = "spider_silk", amount = 4 },
       { name = "iron", amount = 6 }
    },
 
@@ -109,7 +109,7 @@ wl.Descriptions():new_productionsite_type {
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs fishing_net",
-            "consume=spidercloth:2",
+            "consume=spider_silk:2",
             "sleep=duration:32s400ms",
             "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
             "animate=working duration:35s",
@@ -148,7 +148,7 @@ wl.Descriptions():new_productionsite_type {
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs hunting_bow",
-            "consume=log spidercloth",
+            "consume=log spider_silk",
             "sleep=duration:32s400ms",
             "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
             "animate=working duration:35s",
