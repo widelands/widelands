@@ -55,12 +55,13 @@ void Songset::init_songs(std::vector<std::string> files) {
 
 /// Loads song data from config into memory
 void Songset::load_songs(const std::string& basename) {
+    const std::string& path_basename = "music/" + basename;
     try {
         Section sec = get_config_section("songs");
         std::vector<Section::Value> values = sec.get_values();
         for (Section::Value val : values) {
             std::string filename = val.get_name();
-            if (!filename.rfind(basename,0)) continue;
+            if (filename.rfind(path_basename, 0) != 0) continue;
             bool enabled = val.get_bool();
             Song* song = new Song(filename);
             song->enabled = enabled;
@@ -127,7 +128,7 @@ Mix_Music* Songset::get_song(uint32_t random) {
         return nullptr;
     }
 
-    if (random != 0) {
+    if (random != 0 && songs_.size() > 1) {
         // Exclude current_song from playing two times in a row
         current_song_ += 1 + random % (songs_.size() - 1);
         current_song_ = current_song_ % songs_.size();
