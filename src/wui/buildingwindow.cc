@@ -129,10 +129,10 @@ void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	vbox_.reset(new UI::Box(this, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical));
 	set_center_panel(vbox_.get());  // Must be set immediately after deleting the old vbox, if any
 
+	setup_name_field_editbox(*vbox_);
+
 	tabs_ = new UI::TabPanel(vbox_.get(), UI::TabPanelStyle::kWuiLight, "tabs");
 	vbox_->add(tabs_, UI::Box::Resizing::kFullSize);
-
-	setup_name_field_editbox(*vbox_);
 
 	capsbuttons_ =
 	   new UI::Box(vbox_.get(), UI::PanelStyle::kWui, "caps_buttons_box", 0, 0, UI::Box::Horizontal);
