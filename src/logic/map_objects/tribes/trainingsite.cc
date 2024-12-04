@@ -803,17 +803,17 @@ void TrainingSite::drop_stalled_soldiers(Game& /* game */) {
 					//  - is below maximum, and
 					//  - is not in a stalled state
 					// Check done separately for each art.
-					int32_t level = soldier->get_level(upgrade.attribute);
+					const unsigned level = soldier->get_level(upgrade.attribute);
 
 					// Below maximum -check
-					if (level > upgrade.max) {
+					if (static_cast<int32_t>(level) > upgrade.max) {
 						continue;
 					}
 
 					TypeAndLevel train_tl(upgrade.attribute, level);
 					TrainFailCount::iterator tstep = training_failure_count_.find(train_tl);
 					if (tstep == training_failure_count_.end()) {
-						log_warn("TrainingSite::drop_stalled_soldiers: training step %u,%d "
+						log_warn("TrainingSite::drop_stalled_soldiers: training step %u,%u "
 						         "not found in this school!\n",
 						         static_cast<unsigned int>(upgrade.attribute), level);
 						break;

@@ -81,9 +81,9 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 						        "\tposition: (%i, %i)\n"
 						        "\tstatus  : %u\n"
 						        "\tbody    : %s\n",
-						        static_cast<unsigned>(p), static_cast<int>(message.type()), message.title().c_str(),
+						        static_cast<unsigned>(p), static_cast<unsigned>(message.type()), message.title().c_str(),
 						        message.sent().get(), message.position().x, message.position().y,
-						        static_cast<int>(message.status()), message.body().c_str());
+						        static_cast<unsigned>(message.status()), message.body().c_str());
 						// Don't allow in debug builds
 						assert(message.allowed_during_game_loading());
 					}
