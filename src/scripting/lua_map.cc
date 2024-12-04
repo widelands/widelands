@@ -464,7 +464,7 @@ unbox_lua_soldier_description(lua_State* L, int table_index, const Widelands::So
 	soldier_descr.health = luaL_checkuint32(L, -1);
 	lua_pop(L, 1);
 	if (soldier_descr.health > sd.get_max_health_level()) {
-		report_error(L, "health level (%i) > max health level (%u)", soldier_descr.health,
+		report_error(L, "health level (%u) > max health level (%u)", static_cast<unsigned>(soldier_descr.health),
 		             sd.get_max_health_level());
 	}
 
@@ -473,7 +473,7 @@ unbox_lua_soldier_description(lua_State* L, int table_index, const Widelands::So
 	soldier_descr.attack = luaL_checkuint32(L, -1);
 	lua_pop(L, 1);
 	if (soldier_descr.attack > sd.get_max_attack_level()) {
-		report_error(L, "attack level (%i) > max attack level (%u)", soldier_descr.attack,
+		report_error(L, "attack level (%u) > max attack level (%u)", static_cast<unsigned>(soldier_descr.attack),
 		             sd.get_max_attack_level());
 	}
 
@@ -482,7 +482,7 @@ unbox_lua_soldier_description(lua_State* L, int table_index, const Widelands::So
 	soldier_descr.defense = luaL_checkuint32(L, -1);
 	lua_pop(L, 1);
 	if (soldier_descr.defense > sd.get_max_defense_level()) {
-		report_error(L, "defense level (%i) > max defense level (%u)", soldier_descr.defense,
+		report_error(L, "defense level (%u) > max defense level (%u)", static_cast<unsigned>(soldier_descr.defense),
 		             sd.get_max_defense_level());
 	}
 
@@ -491,7 +491,7 @@ unbox_lua_soldier_description(lua_State* L, int table_index, const Widelands::So
 	soldier_descr.evade = luaL_checkuint32(L, -1);
 	lua_pop(L, 1);
 	if (soldier_descr.evade > sd.get_max_evade_level()) {
-		report_error(L, "evade level (%i) > max evade level (%u)", soldier_descr.evade,
+		report_error(L, "evade level (%u) > max evade level (%u)", static_cast<unsigned>(soldier_descr.evade),
 		             sd.get_max_evade_level());
 	}
 
