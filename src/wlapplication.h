@@ -40,6 +40,7 @@
 #include <SDL_keyboard.h>
 
 #include "base/vector.h"
+#include "logic/game.h"
 #include "wlapplication_messages.h"
 
 namespace FsMenu {
@@ -48,9 +49,6 @@ class MainMenu;
 namespace UI {
 class Panel;
 }  // namespace UI
-namespace Widelands {
-class Game;
-}  // namespace Widelands
 
 /** Returns the widelands executable path. */
 std::string get_executable_directory(bool logdir = true);
@@ -254,6 +252,9 @@ private:
 
 	enum class GameType { kNone, kEditor, kReplay, kScenario, kLoadGame, kFromTemplate };
 	GameType game_type_{GameType::kNone};
+
+	/// Difficulty for the game started with --scenario
+	uint32_t scenario_difficulty_{Widelands::kScenarioDifficultyNotSet};
 
 	/// True if left and right mouse button should be swapped
 	bool mouse_swapped_{false};
