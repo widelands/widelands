@@ -314,9 +314,17 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
  * type:\<what\>         (optional, defaults to immovable)
  * Find only objects of this type
  *
+ * name:\<name\>         (optional)
+ * Find only objects of this name
+ *
+ * [no notify]         (optional)
+ * Do not notify the player of the result of the search
+ *
  * iparam1 = radius predicate
  * iparam2 = attribute predicate (if >= 0)
+ * iparam3 = send message on failure (if != 0)
  * sparam1 = type
+ * sparam2 = name
  */
 bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 	CheckStepWalkOn cstep(descr().movecaps(), false);
@@ -327,12 +335,18 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 	if (action.sparam1 == "immovable") {
 		std::vector<ImmovableFound> list;
 		Area<FCoords> area(map.get_fcoords(get_position()), action.iparam1);
-		if (action.iparam2 < 0) {
-			map.find_reachable_immovables(game, area, &list, cstep);
+		if (action.sparam2.empty()) {
+			if (action.iparam2 < 0) {
+				map.find_reachable_immovables(game, area, &list, cstep);
+			} else {
+				map.find_reachable_immovables(
+				   game, area, &list, cstep, FindImmovableAttribute(action.iparam2));
+			}
 		} else {
 			map.find_reachable_immovables(
-			   game, area, &list, cstep, FindImmovableAttribute(action.iparam2));
+			   game, area, &list, cstep, FindImmovableByName(action.sparam2));
 		}
+
 		for (auto it = list.begin(); it != list.end();) {
 			if (it->object->is_reserved_by_worker() ||
 			    !dynamic_cast<Immovable&>(*it->object)
@@ -371,11 +385,16 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 				productionsite->unnotify_player();
 			}
 			std::vector<ImmovableFound> list;
-			if (action.iparam2 < 0) {
-				map.find_reachable_immovables(game, area, &list, cstep);
+			if (action.sparam2.empty()) {
+				if (action.iparam2 < 0) {
+					map.find_reachable_immovables(game, area, &list, cstep);
+				} else {
+					map.find_reachable_immovables(
+					   game, area, &list, cstep, FindImmovableAttribute(action.iparam2));
+				}
 			} else {
 				map.find_reachable_immovables(
-				   game, area, &list, cstep, FindImmovableAttribute(action.iparam2));
+				   game, area, &list, cstep, FindImmovableByName(action.sparam2));
 			}
 
 			for (int idx = list.size() - 1; idx >= 0; idx--) {
@@ -402,10 +421,14 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 				productionsite->unnotify_player();
 			}
 			std::vector<Bob*> list;
-			if (action.iparam2 < 0) {
-				map.find_reachable_bobs(game, area, &list, cstep);
+			if (action.sparam2.empty()) {
+				if (action.iparam2 < 0) {
+					map.find_reachable_bobs(game, area, &list, cstep);
+				} else {
+					map.find_reachable_bobs(game, area, &list, cstep, FindBobAttribute(action.iparam2));
+				}
 			} else {
-				map.find_reachable_bobs(game, area, &list, cstep, FindBobAttribute(action.iparam2));
+				map.find_reachable_bobs(game, area, &list, cstep, FindBobByName(action.sparam2));
 			}
 
 			for (int idx = list.size() - 1; idx >= 0; idx--) {
@@ -1101,8 +1124,8 @@ bool Worker::run_findresources(Game& game, State& state, const Action& /* action
 		const Immovable& ri = game.create_immovable(
 		   position,
 		   t.get_resource_indicator(rdescr, ((rdescr != nullptr) && rdescr->detectable()) ?
-                                             position.field->get_resources_amount() :
-                                             0),
+		                                       position.field->get_resources_amount() :
+		                                       0),
 		   get_owner());
 
 		// Geologist also sends a message notifying the player
@@ -1468,8 +1491,8 @@ void Worker::set_current_experience(const int32_t xp) {
 DescriptionIndex Worker::gain_experience(Game& game) {
 	return (descr().get_needed_experience() == INVALID_INDEX ||
 	        ++current_exp_ < descr().get_needed_experience()) ?
-             INVALID_INDEX :
-             level(game);
+	          INVALID_INDEX :
+	          level(game);
 }
 
 /**
@@ -1694,7 +1717,7 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 			const Path& path = road->get_path();
 			int32_t const index = nextstep == &road->get_flag(RoadBase::FlagStart) ? 0 :
 			                      nextstep == &road->get_flag(RoadBase::FlagEnd) ? path.get_nsteps() :
-                                                                                -1;
+			                                                                       -1;
 
 			if (index >= 0) {
 				if (start_task_movepath(
@@ -2088,8 +2111,8 @@ void Worker::return_update(Game& game, State& state) {
 	// Determine the building's flag and move to it
 
 	Flag& target_flag = location->descr().type() == MapObjectType::FLAG ?
-                          dynamic_cast<Flag&>(*location) :
-                          dynamic_cast<Building&>(*location).base_flag();
+	                       dynamic_cast<Flag&>(*location) :
+	                       dynamic_cast<Building&>(*location).base_flag();
 	if (!start_task_movepath(game, target_flag.get_position(), 15,
 	                         descr().get_right_walk_anims(does_carry_ware(), this))) {
 		molog(game.get_gametime(), "[return]: Failed to return\n");
@@ -2841,8 +2864,8 @@ void Worker::geologist_update(Game& game, State& state) {
 				   array.begin(), array.end(), [&descriptions](const TCoords<FCoords>& t) {
 					   return (descriptions
 					              .get_terrain_descr((t.t == TriangleIndex::D ?
-                                                    t.node.field->terrain_d() :
-                                                    t.node.field->terrain_r()))
+					                                     t.node.field->terrain_d() :
+					                                     t.node.field->terrain_r()))
 					              ->get_is() &
 					           TerrainDescription::Is::kMineable) != 0;
 				   });

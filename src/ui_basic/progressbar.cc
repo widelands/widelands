@@ -75,7 +75,7 @@ void ProgressBar::draw(RenderTarget& dst) {
 
 	const RGBColor& color = fraction <= 0.33f ? progress_style().low_color() :
 	                        fraction <= 0.67f ? progress_style().medium_color() :
-                                               progress_style().high_color();
+	                                            progress_style().high_color();
 
 	// Draw the actual bar
 	if (orientation_ == Horizontal) {

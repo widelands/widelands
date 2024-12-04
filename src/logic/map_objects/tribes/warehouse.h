@@ -214,11 +214,10 @@ public:
 	PortDock* get_portdock() const {
 		return portdock_;
 	}
+
+	std::string warehouse_census_string() const;
 	void update_statistics_string(std::string* str) override;
 
-	// Returns the first matching not completely filled waresqueue of the expedition if this is a
-	// port.
-	// Will throw an exception otherwise or if all queues of this type are full.
 	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
 	// Returns the waresqueue of the expedition if this is a port.

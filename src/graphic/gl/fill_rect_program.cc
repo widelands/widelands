@@ -19,6 +19,7 @@
 #include "graphic/gl/fill_rect_program.h"
 
 #include "base/macros.h"
+#include "base/math.h"
 #include "base/wexception.h"
 
 // static
@@ -34,11 +35,101 @@ FillRectProgram::FillRectProgram() {
 	attr_color_ = glGetAttribLocation(gl_program_.object(), "attr_color");
 }
 
+std::vector<FillRectProgram::Arguments>
+FillRectProgram::make_arguments_for_rect(const Rectf& destination_rect,
+                                         const float z_value,
+                                         const RGBAColor& color,
+                                         const BlendMode blend_mode) {
+	const float r = color.r / 255.f;
+	const float g = color.g / 255.f;
+	const float b = color.b / 255.f;
+	const float a = color.a / 255.f;
+
+	Arguments::Vertex vbr = {
+	   Vector2f(destination_rect.x + destination_rect.w, destination_rect.y + destination_rect.h), r,
+	   g, b, a};
+	Arguments::Vertex vtr = {
+	   Vector2f(destination_rect.x + destination_rect.w, destination_rect.y), r, g, b, a};
+	Arguments::Vertex vbl = {
+	   Vector2f(destination_rect.x, destination_rect.y + destination_rect.h), r, g, b, a};
+	Arguments::Vertex vtl = {Vector2f(destination_rect.x, destination_rect.y), r, g, b, a};
+
+	return {
+	   Arguments{{vbr, vtl, vtr}, z_value, blend_mode},
+	   Arguments{{vbr, vtl, vbl}, z_value, blend_mode},
+	};
+}
+
 void FillRectProgram::draw(const Rectf& destination_rect,
                            const float z_value,
                            const RGBAColor& color,
                            const BlendMode blend_mode) {
-	draw({Arguments{destination_rect, z_value, color, blend_mode}});
+	draw(make_arguments_for_rect(destination_rect, z_value, color, blend_mode));
+}
+
+static inline void assign_color_to_vertex(FillRectProgram::Arguments::Vertex& vertex,
+                                          const float val) {
+	vertex.color_a = 0.9f;
+	vertex.color_g = 0.f;
+
+	// Progression from black via blue and purple to red.
+	vertex.color_r = math::clamp(val * 3.f - 1.f, 0.f, 1.f);
+	vertex.color_b = math::clamp(3.f * (val < 0.5f ? val : (1.f - val)), 0.f, 1.f);
+}
+
+void FillRectProgram::draw_height_heat_map_overlays(const FieldsToDraw& fields_to_draw,
+                                                    const float z_value) {
+	std::vector<Arguments> arguments;
+
+	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
+		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
+		if (field.brn_index == FieldsToDraw::kInvalidIndex) {
+			continue;
+		}
+
+		const FieldsToDraw::Field& field_brn = fields_to_draw.at(field.brn_index);
+
+		float val1 = field.fcoords.field->get_height();
+		float val2 = field_brn.fcoords.field->get_height();
+		val1 /= MAX_FIELD_HEIGHT;
+		val2 /= MAX_FIELD_HEIGHT;
+		assert(val1 >= 0.f && val1 <= 1.f);
+		assert(val2 >= 0.f && val2 <= 1.f);
+
+		Arguments arg;
+		arg.z_value = z_value;
+		arg.blend_mode = BlendMode::Default;
+		arg.triangle[0].point = field.gl_position;
+		arg.triangle[1].point = field_brn.gl_position;
+		assign_color_to_vertex(arg.triangle[0], val1);
+		assign_color_to_vertex(arg.triangle[1], val2);
+
+		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
+			const FieldsToDraw::Field& field_rn = fields_to_draw.at(field.rn_index);
+			float val3 = field_rn.fcoords.field->get_height();
+			val3 /= MAX_FIELD_HEIGHT;
+			assert(val3 >= 0.f && val3 <= 1.f);
+
+			arg.triangle[2].point = field_rn.gl_position;
+			assign_color_to_vertex(arg.triangle[2], val3);
+
+			arguments.push_back(arg);
+		}
+
+		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
+			const FieldsToDraw::Field& field_bln = fields_to_draw.at(field.bln_index);
+			float val3 = field_bln.fcoords.field->get_height();
+			val3 /= MAX_FIELD_HEIGHT;
+			assert(val3 >= 0.f && val3 <= 1.f);
+
+			arg.triangle[2].point = field_bln.gl_position;
+			assign_color_to_vertex(arg.triangle[2], val3);
+
+			arguments.push_back(arg);
+		}
+	}
+
+	draw(arguments);
 }
 
 void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
@@ -96,29 +187,11 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 				break;
 			}
 
-			const float r = current_args.color.r / 255.;
-			const float g = current_args.color.g / 255.;
-			const float b = current_args.color.b / 255.;
-			const float a = current_args.color.a / 255.;
+			for (const Arguments::Vertex& vertex : current_args.triangle) {
+				vertices_.emplace_back(vertex.point.x, vertex.point.y, current_args.z_value,
+				                       vertex.color_r, vertex.color_g, vertex.color_b, vertex.color_a);
+			}
 
-			// First triangle.
-			vertices_.emplace_back(current_args.destination_rect.x, current_args.destination_rect.y,
-			                       current_args.z_value, r, g, b, a);
-			vertices_.emplace_back(current_args.destination_rect.x + current_args.destination_rect.w,
-			                       current_args.destination_rect.y, current_args.z_value, r, g, b, a);
-			vertices_.emplace_back(current_args.destination_rect.x,
-			                       current_args.destination_rect.y + current_args.destination_rect.h,
-			                       current_args.z_value, r, g, b, a);
-
-			// Second triangle.
-			vertices_.emplace_back(current_args.destination_rect.x + current_args.destination_rect.w,
-			                       current_args.destination_rect.y, current_args.z_value, r, g, b, a);
-			vertices_.emplace_back(current_args.destination_rect.x,
-			                       current_args.destination_rect.y + current_args.destination_rect.h,
-			                       current_args.z_value, r, g, b, a);
-			vertices_.emplace_back(current_args.destination_rect.x + current_args.destination_rect.w,
-			                       current_args.destination_rect.y + current_args.destination_rect.h,
-			                       current_args.z_value, r, g, b, a);
 			++i;
 		}
 
