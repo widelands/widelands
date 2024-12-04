@@ -35,6 +35,16 @@ wl_library(graphic_color
   USES_SDL2
 )
 
+wl_library(graphic_color_palette
+  SRCS
+    color_palette.h
+    color_palette.cc
+  DEPENDS
+    base
+    base_exceptions
+    graphic_color
+)
+
 wl_library(graphic_playercolor
   SRCS
     playercolor.cc
