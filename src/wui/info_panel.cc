@@ -483,6 +483,15 @@ void InfoPanel::think() {
 	}
 	if ((iplayer_ != nullptr) && (message_queue_ == nullptr)) {
 		message_queue_ = &iplayer_->player().messages();
+
+		// Check for unexpired messages and messages generated during loading the game
+		const uint32_t gametime = iplayer_->game().get_gametime().get();
+		const Time oldest_to_show(
+		   gametime > kMessagePreviewMaxLifetime ? gametime - kMessagePreviewMaxLifetime : 0u);
+		while (last_message_id_->value() > 0 &&
+		       (*message_queue_)[*last_message_id_]->sent() > oldest_to_show) {
+			*last_message_id_ = Widelands::MessageId(last_message_id_->value() - 1);
+		}
 	}
 
 	while ((message_queue_ != nullptr) &&
