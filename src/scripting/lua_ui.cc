@@ -2986,11 +2986,11 @@ int LuaDropdown::highlight_item(lua_State* L) {
 	unsigned int desired_item = luaL_checkuint32(L, -1);
 	if (desired_item < 1 || desired_item > get()->size()) {
 		report_error(L,
-		             "Attempted to highlight item %d on dropdown '%s'. Available range for this "
-		             "dropdown is 1-%d.",
+		             "Attempted to highlight item %u on dropdown '%s'. Available range for this "
+		             "dropdown is 1-%u.",
 		             desired_item, get()->get_name().c_str(), get()->size());
 	}
-	log_info("Highlighting item %d in dropdown '%s'\n", desired_item, get()->get_name().c_str());
+	log_info("Highlighting item %u in dropdown '%s'\n", desired_item, get()->get_name().c_str());
 	// Open the dropdown
 	get()->set_list_visibility(true);
 
