@@ -136,7 +136,8 @@ enum class KeyboardShortcut : uint16_t {
 	kCommonTooltipAccessibilityMode,
 	kCommonFullscreen,
 	kCommonScreenshot,
-	kCommonGeneral_End = kCommonScreenshot,
+	kCommonChangeMusic,
+	kCommonGeneral_End = kCommonChangeMusic,
 
 	// These are only shown in the help in debug builds
 	kCommonDebugConsole,

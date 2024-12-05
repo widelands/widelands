@@ -1368,7 +1368,7 @@ void InteractiveBase::finish_build_road() {
 	if (road_building_mode_->type == RoadBuildingType::kWaterway &&
 	    length > egbase().map().get_waterway_max_length()) {
 		log_warn_time(egbase().get_gametime(),
-		              "Refusing to finish waterway building: length is %" PRIuS " but limit is %d\n",
+		              "Refusing to finish waterway building: length is %" PRIuS " but limit is %u\n",
 		              length, egbase().map().get_waterway_max_length());
 	} else if (length != 0u) {
 		upcast(Game, g, &egbase());
@@ -1864,6 +1864,12 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			screenshot_failed_ = false;
 		}
+		return true;
+	}
+
+	if (matches_shortcut(KeyboardShortcut::kCommonChangeMusic, code)) {
+		// request soundhandler to change music
+		g_sh->change_music();
 		return true;
 	}
 

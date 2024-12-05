@@ -182,7 +182,7 @@ void SaveHandler::think(Widelands::Game& game) {
 
 		if (!force_skip) {
 			verb_log_info_time(
-			   game.get_gametime(), "Autosave: save took %d ms\n", SDL_GetTicks() - realtime);
+			   game.get_gametime(), "Autosave: save took %u ms\n", SDL_GetTicks() - realtime);
 			game.get_ibase()->log_message(_("Game saved"));
 		}
 	} else {
