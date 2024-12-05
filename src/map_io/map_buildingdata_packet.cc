@@ -899,8 +899,8 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				if (!deleted_wares.empty() || deleted_unknown > 0) {
 					// Translatable strings are not allowed to start or end with whitespace
 					/** TRANSLATORS: Put 2 sentences one after the other. */
-					body = format(pgettext("sentence_separator", "%s %s"),
-					              body, _("The following wares have been deleted:"));
+					body = format(pgettext("sentence_separator", "%s %s"), body,
+					              _("The following wares have been deleted:"));
 					body += paragraph_separator;
 
 					static const std::string list_entry(" • %s</p><p>");  // ugly, but simple
