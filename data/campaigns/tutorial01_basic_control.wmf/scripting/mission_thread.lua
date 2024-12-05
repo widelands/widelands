@@ -51,6 +51,7 @@ function starting_infos()
    -- Welcome and teach objectives
    campaign_message_box(initial_message_01, 200)
    objective_to_explain_objectives = add_campaign_objective(obj_initial_close_objectives_window)
+   sleep(100)
 
    wl.ui.MapView().buttons.objectives:click()
    while not wl.ui.MapView().windows.objectives do sleep(100) end
@@ -356,7 +357,17 @@ function census_and_statistics()
 
    -- Wait for statistics to come on
    while not wl.ui.MapView().statistics do sleep(200) end
-   set_objective_done(o, 5 * wl.Game().desired_speed)
+   set_objective_done(o, 3 * wl.Game().desired_speed)
+
+   local o2 = campaign_message_with_objective(census_and_statistics_hq, obj_edit_hq_name)
+   while sf.immovable.warehousename == hq_original_name do
+      while hq_window() == nil do sleep(100) end
+      while hq_window() ~= nil do sleep(100) end
+      if sf.immovable.warehousename == hq_original_name then
+         campaign_message_box(hq_not_changed)
+      end
+   end
+   set_objective_done(o2, 3 * wl.Game().desired_speed)
 
    if (#plr:get_buildings("barbarians_quarry") < 2) then
       campaign_message_box(census_and_statistics_02, 200)

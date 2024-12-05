@@ -783,6 +783,15 @@ const RoadTextures& TribeDescr::road_textures() const {
 	return road_textures_;
 }
 
+std::string TribeDescr::get_soldiers_format_string(const CapacityStringIndex index,
+                                                   const int number_to_format) const {
+	std::unique_ptr<i18n::GenericTextdomain> td(
+	   AddOns::create_textdomain_for_addon(basic_info().addon, "tribes_encyclopedia"));
+	const int i = static_cast<int>(index);
+	return npgettext(soldier_context_.c_str(), soldier_capacity_strings_sg_[i].c_str(),
+	                 soldier_capacity_strings_pl_[i].c_str(), number_to_format);
+}
+
 /*
 ==============
 Find the best matching indicator for the given amount.
@@ -815,8 +824,8 @@ DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* c
 	}
 
 	if (lowest < amount) {
-		throw GameDataError("Tribe '%s' has no indicators for amount %i of resource '%s' (highest "
-		                    "possible amount is %i)!",
+		throw GameDataError("Tribe '%s' has no indicators for amount %u of resource '%s' (highest "
+		                    "possible amount is %u)!",
 		                    name_.c_str(), amount, res->name().c_str(), lowest);
 	}
 

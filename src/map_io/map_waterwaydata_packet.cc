@@ -69,7 +69,7 @@ void MapWaterwaydataPacket::read(FileSystem& fs,
 					PlayerNumber player_index = fr.unsigned_8();
 					if (0 >= player_index || player_index > nr_players) {
 						throw GameDataError(
-						   "Invalid player number: %i.", static_cast<unsigned int>(player_index));
+						   "Invalid player number: %u.", static_cast<unsigned int>(player_index));
 					}
 
 					ww.set_owner(egbase.get_player(player_index));

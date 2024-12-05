@@ -215,7 +215,7 @@
 --    singular and plural strings. Additionally, it is necessary to specify an ``npgettext`` call for all four types of soldier strings
 --    so as to ensure that all keys appear in the PO files. The ``npgettext`` results (i.e. the translated pluralized strings for an arbitrary constant)
 --    are unused; the actual use is performed later in C++. Their table keys must be prefixed with ``UNUSED_``; the rest of the name is irrelevant.
---    The strings themselves **must not** derivate from the template below in anything other than the name of the soldier.
+--    The strings themselves **must not** deviate from the template below in anything other than the name of the soldier.
 --    Make sure that the unlocalized string constants are exactly identical to the strings in the ``npgettext`` dummy calls.
 --    Example:
 --
@@ -465,20 +465,20 @@ wl.Descriptions():new_tribe {
          },
          {
             name = "spider_silk",
-            default_target_quantity = 10,
+            default_target_quantity = 15,
             preciousness = 11,
             helptexts = {
                -- TRANSLATORS: Helptext for an Atlantean ware: Spider Silk
-               purpose = pgettext("atlanteans_ware", "Spider silk is produced by spiders, which are bred by spider farms. It is processed into spidercloth or tabards in a weaving mill.")
+               purpose = pgettext("atlanteans_ware", "Spider silk is produced by spiders, which are bred by spider farms. It can be processed into spidercloth or tabards in a weaving mill, or used to make tools in the toolsmithy.")
             }
          },
          {
             name = "spidercloth",
-            default_target_quantity = 20,
+            default_target_quantity = 15,
             preciousness = 7,
             helptexts = {
                -- TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
-               purpose = pgettext("atlanteans_ware", "Spidercloth is made out of spider silk in a weaving mill. It is used in the toolsmithy and the shipyard. Also some higher developed buildings need spidercloth for their construction.")
+               purpose = pgettext("atlanteans_ware", "Spidercloth is made out of spider silk in a weaving mill. It is used in the shipyard. Also some higher developed buildings need spidercloth for their construction.")
             }
          },
       },

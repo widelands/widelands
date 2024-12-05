@@ -6,6 +6,7 @@
 # C138, 2023
 # David D, 2023
 # Renaud Bouchard, 2024
+# Laurent Godard, 2024
 # 
 msgid ""
 msgstr ""
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-05-23 02:35+0000\n"
 "PO-Revision-Date: 2023-01-04 20:43+0000\n"
-"Last-Translator: Renaud Bouchard, 2024\n"
+"Last-Translator: Laurent Godard, 2024\n"
 "Language-Team: French (https://app.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -150,7 +151,7 @@ msgstr "Introduction"
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:117
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:127
 msgid "Welcome back!"
-msgstr "Bienvenue!"
+msgstr "Bienvenue !"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:99
@@ -158,7 +159,7 @@ msgid ""
 "Home at last! I cannot put into words the joy I feel at seeing my homelands "
 "again… nor the impatience at being so close and yet so far away."
 msgstr ""
-"Enfin à la maison! Je ne peux pas exprimer avec des mots la joie que je "
+"Enfin à la maison ! Je ne peux pas exprimer avec des mots la joie que je "
 "ressens en revoyant ma patrie... ni l'impatience d'être si proche et "
 "pourtant si loin."
 
@@ -278,7 +279,7 @@ msgstr "Salutations"
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:137
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:151
 msgid "Welcome to Helgoland!"
-msgstr "Bienvenue à Helgoland !"
+msgstr "Bienvenue à Helgoland !"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 5
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:139
@@ -337,7 +338,7 @@ msgstr "Ennemis"
 #. TRANSLATORS: Henneke Lembeck – Introduction 8
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:160
 msgid "Danes! Does Atterdag’s thirst for conquest reach this far then?"
-msgstr "Danes! La soif de conquête d'Atterdag va-t-elle jusque-là ?"
+msgstr "Damne ! La soif de conquête d'Atterdag va-t-elle jusque-là ?"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 9
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:167
@@ -345,9 +346,9 @@ msgid ""
 "It does. I see that you recognize this enemy, and I would be interested in "
 "hearing how you met – though I imagine it will not have gone well for them!"
 msgstr ""
-"Cela fait. Je vois que vous reconnaissez cet ennemi, et je serais intéressé "
-"de savoir comment vous vous êtes rencontrés – même si j'imagine que ça ne "
-"s'est pas bien passé pour eux !"
+"Ci-fait. Je vois que vous reconnaissez cet ennemi, et je serais intéressé de"
+" savoir comment vous vous êtes rencontrés – même si j'imagine que ça ne "
+"s'est pas bien passé pour eux !"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 10
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:174
@@ -358,8 +359,8 @@ msgid ""
 "fact, we were sailing to Föhr to drive the invaders out once and for all "
 "when a storm blew us off our course and to Helgoland."
 msgstr ""
-"Cette hypothèse est fausse, à mon grand chagrin. Par souci de brièveté, je "
-"dirai seulement qu'Atterdag a envahi Föhr avec une force si puissante que "
+"Cette affimartion est fausse, à mon grand chagrin. Par souci de brièveté, je"
+" dirai seulement qu'Atterdag a envahi Föhr avec une force si puissante que "
 "j'ai été contraint de quitter l'île et de demander à Reebaud de m'aider à la"
 " récupérer. En fait, nous naviguions vers Föhr pour chasser les envahisseurs"
 " une fois pour toutes lorsqu'une tempête nous a fait dévier de notre route "
@@ -497,7 +498,7 @@ msgstr ""
 "prendre l'entièreté des basse terres, nous pourrions y tenir des années, à "
 "condition d'avoir stocké suffisamment de marchandises dans les entrepôts en "
 "avance. Bien sûr nous serions coupés des ports et routes commerciales, mais "
-"essayons de ne pas aborder ce point."
+"essayons de ne pas atteindre cette situation."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:226
 msgid "Fortify the narrow"
@@ -586,7 +587,7 @@ msgstr ""
 "forestiers que je ne l'avait pensé. Les Basses-Terres semblent légèrement "
 "plus fertiles, ils serait peut être sage de descendre les maisons des "
 "forestiers et sylviculteurs en bas et déménager quelques fermes vers les "
-"Hautes-Terres. Les fermes, roselières et près arboricoles ne dépendent pas "
+"Hautes-Terres. Les fermes, roselières et prés arboricoles ne dépendent pas "
 "autant d'une terre fertile que les arbres. "
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:255
@@ -607,7 +608,7 @@ msgstr ""
 "l'économie du recrutement et de l'entraînement. Nous avons une production "
 "basique de métal et de nourriture, mais elle s'est développée de manière "
 "désordonnée et ne suffira pas à combler nos besoins. Nous aurons besoin de "
-"plus de sites, plus avancé, pour fournir assez d'armes, d'armures et de "
+"plus de sites, plus avancés, pour fournir assez d'armes, d'armures et de "
 "nourriture à nos soldats. Il va sans dire, une paire de sites d'entraînement"
 " et casernes seront aussi essentiels."
 
@@ -672,8 +673,8 @@ msgid ""
 "I am heartened by your forwardness. Let us all hasten to our separate tasks,"
 " and may fortune smile on us!"
 msgstr ""
-"Votre audace m’enhardis. Hâtons nous vers nos différentes tâches, et que la "
-"fortune nous sourie."
+"Votre audace m’enhardit. Hâtons nous vers nos différentes tâches, et que la "
+"fortune nous sourit."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:283
 msgid "Wood Supply"
@@ -708,8 +709,8 @@ msgid ""
 "Our soldiers have fortified the pass. Surely no enemy will get past them "
 "before we are ready."
 msgstr ""
-"Nos soldats ont fortifié la passe. Nos ennemis les passeront sûrement avant "
-"que nous ne soyons prêts."
+"Nos soldats ont fortifié la passe. Aucun ennemie ne la franchira assurément "
+"avant que nous ne soyons prêts."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:297
 msgid "Uplands Colonized"
@@ -753,9 +754,9 @@ msgid ""
 "beaten them by ourselves. Our town did not even sustain any major damage – "
 "on the contrary, you have expanded it far beyond its former bounds."
 msgstr ""
-"Ils sont vaincus ! Merci, merci pour votre aide. Nous n'y serions jamais "
-"arrivé par nous mêmes. Notre ville n'a même pas subi de dommage majeur – au "
-"contraire, vous avez étendu son territoire bien au delà de ses anciennes "
+"Ils sont vaincus ! Merci, merci pour votre aide. Nous n'y serions jamais "
+"arrivés par nous mêmes. Notre ville n'a même pas subi de dommage majeur – au"
+" contraire, vous avez étendu son territoire bien au delà de ses anciennes "
 "frontières."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 1
@@ -767,10 +768,10 @@ msgid ""
 "or forevermore, you need only ask and we will be yours to command."
 msgstr ""
 "Mon peuple et moi ne pourrons jamais rembourser la dette que nous vous "
-"devons. J'enverrai tous les soldats que vous avez entraînés avec vous vous "
-"aider dans votre quête et libérer votre propre maison. S'il y a autre chose "
-"que nous pouvons faire pour vous, maintenant et à jamais, vous n'avez qu'à "
-"demander et nous serons à vos ordres."
+"devons. J'enverrai tous les soldats que vous avez entraînés avec vous afin "
+"de vous aider dans votre quête et libérer votre propre maison. S'il y a "
+"autre chose que nous pouvons faire pour vous, maintenant et à jamais, vous "
+"n'avez qu'à demander et nous serons à vos ordres."
 
 #. TRANSLATORS: Claus Lembeck – Victory 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:317
@@ -792,12 +793,20 @@ msgid ""
 "that might be useful – any piece of tactical advice – any towns who might "
 "join us – please share this information with us."
 msgstr ""
+"Et je vous remercie du fond du cœur pour votre promesse d’envoyer vos "
+"soldats. Je savais déjà qu’Atterdag était un ennemi redoutable, mais les "
+"forces que nous rencontrons maintenant dépassent tout ce que j’ai vu de "
+"toute ma vie, et elles ne sont qu’une avant-garde ! Nous aurons besoin de "
+"tous les avantages possibles, et même dans ce cas, je ne suis pas aussi sûr "
+"de la victoire qu’avant. Si vous avez entendu parler d’autres choses qui "
+"pourraient être utiles – un conseil tactique – des villes qui pourraient "
+"nous rejoindre – n’hésitez pas à partager ces informations avec nous."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:325
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:335
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:355
 msgid "Know your enemy"
-msgstr "Connaissez votre eenemi"
+msgstr "Connaissez votre ennemi"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:327
@@ -808,6 +817,11 @@ msgid ""
 "stronghold on Föhr has always been their only defence to speak of, so once "
 "you were gone he seized the entire area with ease."
 msgstr ""
+"Je le ferai avec plaisir. En effet, selon mes partenaires commerciaux, la "
+"soif de conquête d’Atterdag est sans limite. Après avoir établi sa présence "
+"sur Föhr, il a également conquis toutes les autres îles des environs. Votre "
+"forteresse de Föhr a toujours été leur seule défense, donc une fois que vous"
+" êtes parti, il a facilement conquis toute la région."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:330
@@ -818,6 +832,12 @@ msgid ""
 "said to have been executed for embezzling a bushel of grain. People are "
 "suffering, and will no doubt gladly join anyone who comes to free them."
 msgstr ""
+"Les habitants sont sous un joug cruel. On sait qu'ils ont coupé tout "
+"commerce et que les habitants sont obligés de donner la moitié de leur "
+"production aux Danois en guise de tribut. La moitié ! On raconte que des "
+"dizaines de personnes ont déjà été exécutées pour avoir détourné un boisseau"
+" de céréales. Les gens souffrent et se joindront sans doute volontiers à "
+"quiconque viendra les libérer."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:337
@@ -827,6 +847,10 @@ msgid ""
 " swear that the pirates were in fact Danish soldiers, and that their ships "
 "belong to the Danish fleet."
 msgstr ""
+"Il y a encore une chose : des navires marchands qui tentaient de naviguer "
+"bien au nord de la zone occupée ont été arraisonnés et coulés par des "
+"pirates. Les survivants jurent cependant que les pirates étaient en fait des"
+" soldats danois et que leurs navires appartenaient à la flotte danoise."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:340
@@ -837,6 +861,12 @@ msgid ""
 "would do that. Clearly he attempts to disguise this fact. Why would he do "
 "that, unless he believes this secret to be of strategical importance?"
 msgstr ""
+"Il s’agit là d’une simple spéculation, mais je crois qu’Atterdag transporte "
+"ses troupes de la capitale danoise vers les îles qu’il conquiert par bateau."
+" La route terrestre est beaucoup plus longue et plus ardue, il n’est donc "
+"pas difficile de comprendre pourquoi il ferait cela. Il essaie clairement de"
+" dissimuler ce fait. Pourquoi ferait-il cela, à moins qu’il ne pense que ce "
+"secret soit d’une importance stratégique ?"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:343
@@ -850,6 +880,15 @@ msgid ""
 "ships, you can seize the islands and build a belt of inconquerable "
 "strongholds that block any enemy ship attempting to pass."
 msgstr ""
+"Je ne sais pas quelle est la proportion de ses soldats échangés entre la "
+"capitale et les îles par bateau, mais leur nombre semble assez important "
+"pour que je vous conseille de mettre un terme à cet échange. Comme vous le "
+"savez, ces deux régions ne sont reliées que par une seule voie maritime, qui"
+" passe par un détroit appelé le Kattegat. Ce détroit est large de quelques "
+"kilomètres et parsemé de minuscules îles. Si vous parvenez à atteindre cet "
+"endroit sans être attaqué par leurs navires, vous pourrez vous emparer des "
+"îles et construire une ceinture de forteresses invincibles qui bloqueront "
+"tout navire ennemi qui tenterait de passer."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:348
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:362
@@ -864,6 +903,11 @@ msgid ""
 " then we’ll raise the people of Föhr and all the other islands in joint "
 "rebellion against the invader!"
 msgstr ""
+"Et si nous parvenons à le bloquer, ils perdront leur principale voie "
+"commerciale ! Nous devons tenter le coup. Nous naviguerons immédiatement "
+"vers le Kattegat pour conquérir le détroit, puis nous soulèverons les "
+"habitants de Föhr et de toutes les autres îles dans une rébellion commune "
+"contre l'envahisseur !"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 6
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:357
@@ -875,6 +919,13 @@ msgid ""
 "to me afterwards. In the meantime, we will use the industry you built for us"
 " to train more soldiers who shall aid you in your subsequent endeavours."
 msgstr ""
+"J'aimerais vous faire une dernière demande. Une demande et une offre. Mes "
+"deux fils, Harke Ockesen et Eschel Ockesen, suivent une formation de soldats"
+" et de commandants. J'apprécierais beaucoup que vous les laissiez vous "
+"accompagner dans votre campagne au Kattegat pour acquérir une certaine "
+"expérience pratique et me les rendre ensuite. En attendant, nous utiliserons"
+" l'industrie que vous avez créée pour nous pour former davantage de soldats "
+"qui vous aideront dans vos efforts ultérieurs."
 
 #. TRANSLATORS: Reebaud – Victory 7
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:364
@@ -883,6 +934,9 @@ msgid ""
 "care of them. You certainly have a knack for assigning your sons the best "
 "teachers."
 msgstr ""
+"Nous serons très heureux de les avoir parmi nous et je vous promets que nous"
+" en prendrons bien soin. Vous avez certainement le don pour confier vos fils"
+" aux meilleurs professeurs."
 
 #. TRANSLATORS: Reebaud – Victory 7
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:367
@@ -890,6 +944,8 @@ msgid ""
 "And thus we part, to meet again soon. Farewell, and may lasting peace bless "
 "all of Helgoland!"
 msgstr ""
+"Et ainsi nous nous séparons, pour nous retrouver bientôt. Adieu, et que la "
+"paix durable bénisse tout Helgoland !"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:368
 msgid "Congratulations"

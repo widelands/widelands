@@ -279,7 +279,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	auto create_tab = [this, add_key](const std::string& title,
 	                                  const KeyboardShortcut shortcut_start,
 	                                  const KeyboardShortcut shortcut_end) {
-		assert(shortcut_start < shortcut_end);
+		assert(shortcut_start <= shortcut_end);
 		UI::Box* b = new UI::Box(
 		   &tabs_, UI::PanelStyle::kFsMenu, "shortcut_box", 0, 0, UI::Box::Vertical, 0, 0, kPadding);
 		b->set_force_scrolling(true);
@@ -301,6 +301,11 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 
 	const size_t fastplace_tab_index = tabs_.tabs().size();
 	create_tab(_("Fastplace"), KeyboardShortcut::kFastplace_Begin, KeyboardShortcut::kFastplace_End);
+
+	if (const KeyboardShortcut max_shortcut = get_highest_used_keyboard_shortcut();
+	    max_shortcut > KeyboardShortcut::k_End) {
+		create_tab(_("Add-Ons"), KeyboardShortcut::k_End + 1, max_shortcut);
+	}
 
 	tabs_.add("options_scroll", _("Mouse Scrolling"), &mousewheel_options_, "");
 

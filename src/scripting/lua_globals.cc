@@ -72,7 +72,44 @@ files name.
    instead uses our own ``format`` function. This allows for better control of the
    formatting as well as reordering of arguments which is needed for proper localisation.
 
+   Use ``bformat()`` whenever your string contains values from variables.
+
    :returns: The formatted string.
+
+   ``bformat()`` can be used with the global :func:`_(str) function <_>`. Examples:
+
+   .. code-block:: lua
+
+      local a_str    = _("Widelands")
+      local a_number = 5
+      local a_float  = 3.4
+
+      _("This is a string: %1$s"):bformat(a_str)             -- s = string
+      _("This is a number: %1$d"):bformat(a_number)          -- d = number (integer)
+      _("This is a number: %1$f"):bformat(a_float)           -- f = number (float)
+
+      -- %1$ refers to the first,
+      -- %2$ to the second placeholder and so on:
+
+      local tribe_name = _("Atlanteans")
+      _("The %1$s are one of the tribes in %2$s."):bformat(tribe_name, a_str)
+
+      -- Formatting numbers with two digits:
+      local hours   = 2
+      local minutes = 10
+      local seconds = 5
+
+      -- TRANSLATORS: A time string (hh:mm:ss) like "10:02:30"
+      _("%1$02d:%2$02d:%3$02d"):bformat(hours, minutes, seconds) -- result: 02:10:05
+
+      -- Formatting floating point numbers with precision:
+      local endless = 10 / 3
+
+      _("Precision of 2: %1$.2f"):bformat(endless)           -- result: Precision of 2: 3.33
+
+   If your variable contains a number you should use :func:`ngettext` or
+   :func:`npgettext` to allow proper translation of plural strings.
+
 */
 // The 'b' in bformat used to stand for "boost", which we no longer use, but
 // renaming the Lua function would break backwards compatibility.
@@ -143,16 +180,16 @@ using TextdomainInfo = std::pair<std::string, bool /* addon */>;
 static std::map<const lua_State*, std::vector<TextdomainInfo>> textdomains;
 
 /* RST
-   .. function:: push_textdomain(domain [, addon=false])
+.. function:: push_textdomain(domain [, addon=false])
 
-      Sets the textdomain for all further calls to :func:`_` until it is reset
-      to the previous value using :func:`pop_textdomain`.
+   Sets the textdomain for all further calls to :func:`_` until it is reset
+   to the previous value using :func:`pop_textdomain`.
 
-      If your script is part of an add-on, the second parameter needs to be `true`.
+   If your script is part of an add-on, the second parameter needs to be `true`.
 
-      :arg domain: The textdomain
-      :type domain: :class:`string`
-      :returns: :const:`nil`
+   :arg domain: The textdomain
+   :type domain: :class:`string`
+   :returns: :const:`nil`
 */
 static int L_push_textdomain(lua_State* L) {
 	textdomains[L].emplace_back(
@@ -161,12 +198,12 @@ static int L_push_textdomain(lua_State* L) {
 }
 
 /* RST
-   .. function:: pop_textdomain()
+.. function:: pop_textdomain()
 
-      Resets the textdomain for calls to :func:`_` to the value it had
-      before the last call to :func:`push_textdomain`.
+   Resets the textdomain for calls to :func:`_` to the value it had
+   before the last call to :func:`push_textdomain`.
 
-      :returns: :const:`nil`
+   :returns: :const:`nil`
 */
 static int L_pop_textdomain(lua_State* L) {
 	textdomains.at(L).pop_back();
@@ -219,21 +256,21 @@ void write_textdomain_stack(FileWrite& fw, const lua_State* L) {
 }
 
 /* RST
-   .. function:: _(str)
+.. function:: _(str)
 
-      This peculiar function is used to translate texts in your scenario into
-      another language. The function takes a single string, grabs the
-      textdomain of your map (which is usually the maps name) and returns the
-      translated string. Make sure that you separate translatable and untranslatable
-      stuff:
+   This peculiar function is used to translate texts in your scenario into
+   another language. The function takes a single string, grabs the
+   textdomain of your map (which is usually the maps name) and returns the
+   translated string. Make sure that you separate translatable and untranslatable
+   stuff:
 
-      .. code-block:: lua
+   .. code-block:: lua
 
-         s = "<p><br>" .. _("Only this should be translated") .. "<br></p>"
+      s = "<p><br>" .. _("Only this should be translated") .. "<br></p>"
 
-      :arg str: text to translate.
-      :type str: :class:`string`
-      :returns: The translated string.
+   :arg str: text to translate.
+   :type str: :class:`string`
+   :returns: The translated string.
 */
 CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
@@ -268,6 +305,35 @@ static int L__(lua_State* L) {
    :type n: An unsigned integer.
 
    :returns: The translated string.
+
+   Example to show how it works:
+
+   .. code-block:: lua
+
+      local count = _get_items()                -- count can be 0 or more
+      local text  = ngettext("You have %1$d item", "You have %1$d items", count):bformat(count)
+
+   .. note::
+      The singular and plural forms should be identical except for the plural form itself.
+      If you want to special-case the number ``1`` (or any other number),
+      or if you don't want to include the ``count`` variable in the string,
+      do *not* use ``ngettext``, but rather an ``if``-``else``-construct. Example:
+
+   .. code-block:: lua
+
+      local count = _get_items()  -- count can be 0 or more
+      local text
+
+      if count == 0 then
+         text = _("You have no items.")
+      elseif count == 1 then
+         text = _("You have only one item.")
+      else
+         text = _("You have a lot of items.")
+      end
+
+      -- Note the _() function for translation.
+      -- The arguments to ngettext do not require an additional _() call.
 */
 static int L_ngettext(lua_State* L) {
 	//  S: msgid msgid_plural n
@@ -369,14 +435,14 @@ static int L_npgettext(lua_State* L) {
 }
 
 /* RST
-   .. function:: include(script)
+.. function:: include(script)
 
-      Includes the script at the given location at the current position in the
-      file. The script can begin with 'map:' to include files from the map.
+   Includes the script at the given location at the current position in the
+   file. The script can begin with 'map:' to include files from the map.
 
-      :type script: :class:`string`
-      :arg script: The filename relative to the root of the data directory.
-      :returns: :const:`nil`
+   :type script: :class:`string`
+   :arg script: The filename relative to the root of the data directory.
+   :returns: :const:`nil`
 */
 static int L_include(lua_State* L) {
 	const std::string script = luaL_checkstring(L, -1);

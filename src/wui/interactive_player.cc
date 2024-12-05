@@ -93,8 +93,7 @@ InfoToDraw filter_info_to_draw(InfoToDraw info_to_draw,
                                const Widelands::Player& player) {
 	InfoToDraw result = info_to_draw;
 	const Widelands::Player* owner = object->get_owner();
-	if (owner != nullptr && !player.see_all() && player.is_hostile(*owner) &&
-	    object->descr().type() != Widelands::MapObjectType::WAREHOUSE) {
+	if (owner != nullptr && !player.see_all() && player.is_hostile(*owner)) {
 		result = static_cast<InfoToDraw>(result & ~InfoToDraw::kStatistics);
 	}
 	return result;
@@ -900,6 +899,10 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& coord
  * \li Return: write chat message
  */
 bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
+	if (InteractiveGameBase::handle_key(down, code)) {
+		return true;
+	}
+
 	if (down) {
 		if (matches_shortcut(KeyboardShortcut::kCommonEncyclopedia, code)) {
 			encyclopedia_.toggle();
@@ -973,7 +976,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 		}
 	}
 
-	return InteractiveGameBase::handle_key(down, code);
+	return false;
 }
 
 void InteractivePlayer::do_toggle_objective_menu() {
