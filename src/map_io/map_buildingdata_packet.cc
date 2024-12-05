@@ -897,11 +897,10 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				   /** TRANSLATORS: The argument is the buiding name */
 				   _("%s: the building's inputs have changed."), productionsite.descr().descname());
 				if (!deleted_wares.empty() || deleted_unknown > 0) {
-					// Using format here to work around translation checkers that don't like
-					// whitespace-only strings
-					/** TRANSLATORS: Append a sentence after an existing sentence */
-					body += format(pgettext("sentence_separator", " %s"),
-					               _("The following wares have been deleted:"));
+					// Translatable strings are not allowed to start or end with whitespace
+					/** TRANSLATORS: Put 2 sentences one after the other. */
+					body = format(pgettext("sentence_separator", "%s %s"),
+					              body, _("The following wares have been deleted:"));
 					body += paragraph_separator;
 
 					static const std::string list_entry(" • %s</p><p>");  // ugly, but simple
