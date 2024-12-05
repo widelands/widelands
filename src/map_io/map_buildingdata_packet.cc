@@ -895,7 +895,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				std::string body("<p>");
 				body += format(
 				   /** TRANSLATORS: The argument is the buiding name */
-				   _("%s: the building's inputs have changed."), productionsite.descr().descname());
+				   _("%s: the building’s inputs have changed."), productionsite.descr().descname());
 				if (!deleted_wares.empty() || deleted_unknown > 0) {
 					body += paragraph_separator;
 					body += _("The following wares have been deleted:");
