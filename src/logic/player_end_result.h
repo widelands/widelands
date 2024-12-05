@@ -19,8 +19,19 @@
 #ifndef WL_LOGIC_PLAYER_END_RESULT_H
 #define WL_LOGIC_PLAYER_END_RESULT_H
 
+#include <cstdint>
+
 namespace Widelands {
-enum class PlayerEndResult : uint8_t { kLost = 0, kWon = 1, kResigned = 2, kUndefined = 255 };
+enum class PlayerEndResult : uint8_t {
+	kLost = 0,        // player determined to have lost, but is tecnically still capable of
+	                  // carrying on if the "continue playing" option is selected
+	                  // e.g. has less X after time limit elapsed
+	kWon = 1,         // player has already won; also able to continue playing
+	kResigned = 2,    // player has voluntarily left the game
+	kEliminated = 3,  // player has been eliminated from the game; they have not only lost,
+	                  // but are also no longer capable of (or allowed to) continue playing
+	kUndefined = 255
+};
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYER_END_RESULT_H

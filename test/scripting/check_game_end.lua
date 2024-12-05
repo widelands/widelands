@@ -4,7 +4,7 @@ include "test/scripting/lunit.lua"
 game = wl.Game()
 mapview = wl.ui.MapView()
 
-local function result_table(winners)
+local function result_table(winners, eliminated)
   local r = {}
 
   for i = 1, #game.players do
@@ -16,6 +16,16 @@ local function result_table(winners)
   else
     for i,w in ipairs(winners) do
       r[w] = 1
+    end
+  end
+
+  if eliminated ~= nil then
+    if type(eliminated) == "number" then
+      r[winners] = 3
+    else
+      for i,w in ipairs(eliminated) do
+        r[w] = 3
+      end
     end
   end
 
@@ -74,7 +84,7 @@ function check_game_ended()
   end
 end
 
-function check_win_condition(winners)
+function check_win_condition(winners, eliminated)
   run(function()
     sleep(1000)
 
@@ -83,7 +93,7 @@ function check_win_condition(winners)
       print("### WARNING: check_win_condition():")
       print("###    For better test coverage, please call with list of expected winners ###")
     else
-      expected = result_table(winners)
+      expected = result_table(winners, eliminated)
     end
 
     -- Schedule check

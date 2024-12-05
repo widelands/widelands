@@ -404,6 +404,7 @@ public:
 	std::list<PendingDiplomacyAction>& pending_diplomacy_actions() {
 		return pending_diplomacy_actions_;
 	}
+	void invalidate_pending_diplomacy_actions(PlayerNumber eliminated);
 
 	[[nodiscard]] bool diplomacy_allowed() const {
 		return diplomacy_allowed_;

@@ -180,9 +180,11 @@ int16_t ParticipantList::get_local_participant_index() const {
 	return -1;
 }
 
-bool ParticipantList::get_participant_defeated(int16_t participant) const {
+Widelands::PlayerEndResult ParticipantList::get_participant_end_result(int16_t participant) const {
 	assert(is_ingame());
-	return participant_to_player(participant)->is_defeated();
+	const auto* pes =
+	   game_->player_manager()->get_player_end_status(participant_to_playerindex(participant) + 1);
+	return (pes == nullptr) ? Widelands::PlayerEndResult::kUndefined : pes->result;
 }
 
 const RGBColor& ParticipantList::get_participant_color(int16_t participant) const {
