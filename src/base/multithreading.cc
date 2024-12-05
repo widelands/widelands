@@ -339,7 +339,7 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 		if (now - start_time > 1000 && now - last_log_time > 1000) {
 			last_log_time = now;
 			if (id_ != ID::kLog) {
-				verb_log_dbg("WARNING: %s locking mutex %s, already waiting for %d ms",
+				verb_log_dbg("WARNING: %s locking mutex %s, already waiting for %u ms",
 				             thread_name(self).c_str(), to_string(id_).c_str(), now - start_time);
 			} else if (g_verbose) {
 				// not including format() for the time info

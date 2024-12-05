@@ -559,7 +559,8 @@ void AdminDialog::ok() {
 			break;
 		}
 
-		parent_.rebuild(false);
+		parent_.clear_cache_for_browse(info_->internal_name);
+		parent_.rebuild_browse();
 		die();
 	} catch (const std::exception& e) {
 		UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"), e.what(),
@@ -726,13 +727,15 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 			return;
 		}
 		update_data();
-		parent_.rebuild(false);
+		parent_.clear_cache_for_browse(info_->internal_name);
+		parent_.rebuild_browse();
 	});
 	write_comment_.sigclicked.connect([this]() {
 		CommentEditor m(parent_, info_, nullptr);
 		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 			update_data();
-			parent_.rebuild(false);
+			parent_.clear_cache_for_browse(info_->internal_name);
+			parent_.rebuild_browse();
 		}
 	});
 
@@ -992,11 +995,17 @@ void RemoteInteractionWindow::login_changed() {
 		write_comment_.set_tooltip(_("Please log in to comment"));
 		own_voting_.set_enabled(false);
 		own_voting_.set_tooltip(_("Please log in to vote"));
-	} else {
+	} else if (ends_with(info_->internal_name, ".wad")) {
 		write_comment_.set_enabled(true);
 		write_comment_.set_tooltip("");
 		own_voting_.set_enabled(true);
 		own_voting_.set_tooltip("");
+	} else {
+		// No i18n markup here, since these are temporary strings
+		write_comment_.set_enabled(false);
+		write_comment_.set_tooltip("Commenting on maps is not yet implemented");
+		own_voting_.set_enabled(false);
+		own_voting_.set_tooltip("Voting on maps is not yet implemented");
 	}
 
 	admin_action_.set_visible(parent_.net().is_admin());

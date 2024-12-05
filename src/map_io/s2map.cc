@@ -216,7 +216,7 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 	}
 	int32_t const size = fr.signed_32();
 	if (size != dw * dh) {
-		throw wexception("expected %u but found %u", dw * dh, size);
+		throw wexception("expected %d but found %d", dw * dh, size);
 	}
 
 	if (dw < width || dh < height) {
@@ -1028,7 +1028,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 					break;
 
 				default:
-					log_warn("S2Map: Unknown immovable %d", static_cast<uint32_t>(codon));
+					log_warn("S2Map: Unknown immovable %u", static_cast<uint32_t>(codon));
 					break;
 				}  // end switch (codon)
 				break;

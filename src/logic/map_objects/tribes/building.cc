@@ -547,8 +547,12 @@ std::string Building::info_string(const InfoStringFormat& format) {
 	std::string result;
 	switch (format) {
 	case InfoStringFormat::kCensus:
-		if (upcast(ConstructionSite const, constructionsite, this)) {
+		if (descr().type() == MapObjectType::CONSTRUCTIONSITE) {
+			upcast(ConstructionSite const, constructionsite, this);
 			result = constructionsite->building().descname();
+		} else if (descr().type() == MapObjectType::WAREHOUSE) {
+			upcast(Warehouse const, warehouse, this);
+			result = warehouse->warehouse_census_string();
 		} else {
 			result = descr().descname();
 		}
@@ -777,9 +781,9 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 	      flag_->get_position().y);
 
 	molog(egbase.get_gametime(), "anim: %s\n", descr().get_animation_name(anim_).c_str());
-	molog(egbase.get_gametime(), "animstart: %i\n", animstart_.get());
+	molog(egbase.get_gametime(), "animstart: %u\n", animstart_.get());
 
-	molog(egbase.get_gametime(), "leave_time: %i\n", leave_time_.get());
+	molog(egbase.get_gametime(), "leave_time: %u\n", leave_time_.get());
 
 	molog(egbase.get_gametime(), "leave_queue.size(): %" PRIuS "\n", leave_queue_.size());
 	FORMAT_WARNINGS_OFF
