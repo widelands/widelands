@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-11-30 03:02+0000\n"
+"POT-Creation-Date: 2024-12-05 03:11+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -284,14 +284,14 @@ msgstr "12월"
 
 #. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
-#: ../../../../src/editor/editorinteractive.cc:101
+#: ../../../../src/editor/editorinteractive.cc:102
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:298
 #: ../../../../src/wui/interactive_gamebase.cc:101
 #: ../../../../src/wui/story_message_box.cc:89
 msgid "Main Menu"
 msgstr "기본 차림표"
 
-#: ../../../../src/editor/editorinteractive.cc:102
+#: ../../../../src/editor/editorinteractive.cc:103
 #: ../../../../src/wui/interactive_gamebase.cc:102
 msgctxt "hotkey"
 msgid "Esc"
@@ -299,7 +299,7 @@ msgstr "Esc"
 
 #. * TRANSLATORS: Title for the tool menu button in the editor
 #. * TRANSLATORS: Heading in the editor keyboard shortcuts help
-#: ../../../../src/editor/editorinteractive.cc:116
+#: ../../../../src/editor/editorinteractive.cc:117
 #: ../../../../src/wlapplication_options.cc:1037
 msgctxt "editor"
 msgid "Tools"
@@ -311,27 +311,27 @@ msgstr ""
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
-#: ../../../../src/editor/editorinteractive.cc:132
+#: ../../../../src/editor/editorinteractive.cc:133
 #: ../../../../src/wui/interactive_gamebase.cc:83
 msgid "Show / Hide"
 msgstr "표시 / 숨김"
 
-#: ../../../../src/editor/editorinteractive.cc:145
+#: ../../../../src/editor/editorinteractive.cc:146
 msgid "Tool size"
 msgstr "도구 크기"
 
-#: ../../../../src/editor/editorinteractive.cc:160
+#: ../../../../src/editor/editorinteractive.cc:161
 #: ../../../../src/wlapplication_options.cc:457
 msgid "Undo"
 msgstr "되돌리기"
 
-#: ../../../../src/editor/editorinteractive.cc:165
+#: ../../../../src/editor/editorinteractive.cc:166
 #: ../../../../src/wlapplication_options.cc:461
 msgid "Redo"
 msgstr "재실행하기"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/editor/editorinteractive.cc:177
+#: ../../../../src/editor/editorinteractive.cc:178
 #: ../../../../src/wlapplication_options.cc:855
 #: ../../../../src/wui/buildingwindow.cc:448
 #: ../../../../src/wui/interactive_player.cc:238
@@ -339,7 +339,7 @@ msgid "Help"
 msgstr "도움말"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../../../src/editor/editorinteractive.cc:212
+#: ../../../../src/editor/editorinteractive.cc:213
 #: ../../../../src/editor/ui_menus/main_menu_new_map.cc:40
 #: ../../../../src/ui_fsmenu/main.cc:427
 #: ../../../../src/wlapplication_options.cc:440
@@ -347,7 +347,7 @@ msgid "New Map"
 msgstr "새로운 지도"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../../../src/editor/editorinteractive.cc:221
+#: ../../../../src/editor/editorinteractive.cc:222
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:853
 #: ../../../../src/wlapplication_options.cc:445
 msgid "New Random Map"
@@ -355,7 +355,7 @@ msgstr "새로운 무작위 지도"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/editor/editorinteractive.cc:229
+#: ../../../../src/editor/editorinteractive.cc:230
 #: ../../../../src/editor/ui_menus/main_menu_load_map.cc:34
 #: ../../../../src/ui_fsmenu/main.cc:432
 #: ../../../../src/wlapplication_options.cc:846
@@ -364,19 +364,19 @@ msgstr "지도 불러오기"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/editor/editorinteractive.cc:237
+#: ../../../../src/editor/editorinteractive.cc:238
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:53
 #: ../../../../src/wlapplication_options.cc:849
 msgid "Save Map"
 msgstr "지도 저장"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../../../src/editor/editorinteractive.cc:242
+#: ../../../../src/editor/editorinteractive.cc:243
 msgid "Publish Map Online…"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../../../src/editor/editorinteractive.cc:250
+#: ../../../../src/editor/editorinteractive.cc:251
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:227
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:62
 #: ../../../../src/wlapplication_options.cc:453
@@ -385,34 +385,34 @@ msgstr "지도 선택사항"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/editor/editorinteractive.cc:255
+#: ../../../../src/editor/editorinteractive.cc:256
 #: ../../../../src/wlapplication_options.cc:852
 msgid "Exit Editor"
 msgstr "편집기 종료"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:299
+#: ../../../../src/editor/editorinteractive.cc:300
 msgid "Change height"
 msgstr "높이 변화"
 
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:302
+#: ../../../../src/editor/editorinteractive.cc:303
 msgid "Change the terrain height"
 msgstr "지형 높이 바꾸기"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:309
+#: ../../../../src/editor/editorinteractive.cc:310
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:98
 msgid "Random height"
 msgstr "무작위 높이"
 
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:312
+#: ../../../../src/editor/editorinteractive.cc:313
 msgid "Set the terrain height to random values"
 msgstr "지형 높이를 아무런 값으로 설정"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:319
+#: ../../../../src/editor/editorinteractive.cc:320
 #: ../../../../src/editor/ui_menus/field_info_window.cc:139
 #: ../../../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:92
 #: ../../../../src/wui/minimap.cc:158
@@ -420,35 +420,35 @@ msgid "Terrain"
 msgstr "지형"
 
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:322
+#: ../../../../src/editor/editorinteractive.cc:323
 msgid "Change the map’s terrain"
 msgstr "지도의 지형 바꾸기"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:330
+#: ../../../../src/editor/editorinteractive.cc:331
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:80
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:169
 msgid "Immovables"
 msgstr "고정물"
 
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:333
+#: ../../../../src/editor/editorinteractive.cc:334
 msgid "Add or remove immovables"
 msgstr "변경되지 않는 항목 추가 또는 제거"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:340
+#: ../../../../src/editor/editorinteractive.cc:341
 #: ../../../../src/editor/ui_menus/tool_place_critter_options_menu.cc:47
 msgid "Animals"
 msgstr "동물"
 
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:343
+#: ../../../../src/editor/editorinteractive.cc:344
 msgid "Add or remove animals"
 msgstr "동물 추가 또는 제거"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:351
+#: ../../../../src/editor/editorinteractive.cc:352
 #: ../../../../src/editor/ui_menus/field_info_window.cc:220
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:114
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:41
@@ -458,73 +458,73 @@ msgid "Resources"
 msgstr "자원"
 
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:354
+#: ../../../../src/editor/editorinteractive.cc:355
 msgid "Set or change resources"
 msgstr "자원을 설정하거나 바꿈"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:358
+#: ../../../../src/editor/editorinteractive.cc:359
 msgid "Port spaces"
 msgstr "항구 공간"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:361
+#: ../../../../src/editor/editorinteractive.cc:362
 msgid "Add or remove port spaces"
 msgstr "항구 공간을 추가하거나 제거"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:369
+#: ../../../../src/editor/editorinteractive.cc:370
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:716
 #: ../../../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "선수"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:372
+#: ../../../../src/editor/editorinteractive.cc:373
 msgid "Set number of players and their names, tribes and starting positions"
 msgstr "선수의 수, 이름, 부족, 시작 위치 설정"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:376
+#: ../../../../src/editor/editorinteractive.cc:377
 msgid "Map origin"
 msgstr "번역확인 -> 지도 출발지"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:379
+#: ../../../../src/editor/editorinteractive.cc:380
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
 msgstr "좌표 (0,0) 위치를 설정하세요. 생성된 약도의 가장 좌상단 구석이 될 예정입니다."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:387
+#: ../../../../src/editor/editorinteractive.cc:388
 msgid "Map size"
 msgstr "지도 크기"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:390
+#: ../../../../src/editor/editorinteractive.cc:391
 msgid "Change the map’s size"
 msgstr "지도 크기 바꿈"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:394
+#: ../../../../src/editor/editorinteractive.cc:395
 msgid "Information"
 msgstr "정보"
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:397
+#: ../../../../src/editor/editorinteractive.cc:398
 msgid "Click on a field to show information about it"
 msgstr "필드에 대한 정보를 표시하려면 필드를 클릭하십시오"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:401
+#: ../../../../src/editor/editorinteractive.cc:402
 #: ../../../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../../../src/wlapplication_options.cc:516
 msgid "Tool History"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:404
+#: ../../../../src/editor/editorinteractive.cc:405
 msgid "Restore previous tool settings"
 msgstr ""
 
@@ -534,12 +534,12 @@ msgstr ""
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#: ../../../../src/editor/editorinteractive.cc:476
+#: ../../../../src/editor/editorinteractive.cc:477
 #: ../../../../src/wui/interactive_gamebase.cc:271
 msgid "Hide Building Spaces"
 msgstr "건물 공간 숨김"
 
-#: ../../../../src/editor/editorinteractive.cc:476
+#: ../../../../src/editor/editorinteractive.cc:477
 #: ../../../../src/ui_fsmenu/options.cc:292
 #: ../../../../src/wui/interactive_gamebase.cc:271
 msgid "Show Building Spaces"
@@ -549,15 +549,15 @@ msgstr "건물 공간 표시"
 #. show maximum
 #. * building spaces that will be available if all immovables (trees, rocks,
 #. etc.) are removed
-#: ../../../../src/editor/editorinteractive.cc:483
+#: ../../../../src/editor/editorinteractive.cc:484
 msgid "Hide Maximum Building Spaces"
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:484
+#: ../../../../src/editor/editorinteractive.cc:485
 msgid "Show Maximum Building Spaces"
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:487
+#: ../../../../src/editor/editorinteractive.cc:488
 msgid ""
 "Toggle whether to show maximum building spaces that will be available if all"
 " immovables (trees, rocks, etc.) are removed"
@@ -565,35 +565,35 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map height heat map is shown
-#: ../../../../src/editor/editorinteractive.cc:494
+#: ../../../../src/editor/editorinteractive.cc:495
 msgid "Disable height heat map"
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:495
+#: ../../../../src/editor/editorinteractive.cc:496
 msgid "Enable height heat map"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
-#: ../../../../src/editor/editorinteractive.cc:503
+#: ../../../../src/editor/editorinteractive.cc:504
 msgid "Hide Grid"
 msgstr "격자를 숨김"
 
-#: ../../../../src/editor/editorinteractive.cc:503
+#: ../../../../src/editor/editorinteractive.cc:504
 msgid "Show Grid"
 msgstr "격자 표시"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the oceans are shown
-#: ../../../../src/editor/editorinteractive.cc:510
+#: ../../../../src/editor/editorinteractive.cc:511
 msgid "Hide Oceans"
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:510
+#: ../../../../src/editor/editorinteractive.cc:511
 msgid "Show Oceans"
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:513
+#: ../../../../src/editor/editorinteractive.cc:514
 msgid ""
 "Display separate water bodies with differently coloured overlays to see "
 "which coasts can be connected by shipping routes"
@@ -602,62 +602,62 @@ msgstr ""
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
 #. *  (trees, rocks etc.) are shown
-#: ../../../../src/editor/editorinteractive.cc:520
+#: ../../../../src/editor/editorinteractive.cc:521
 msgid "Hide Immovables"
 msgstr "부동산 숨김"
 
-#: ../../../../src/editor/editorinteractive.cc:520
+#: ../../../../src/editor/editorinteractive.cc:521
 msgid "Show Immovables"
 msgstr "부동산 표시"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
-#: ../../../../src/editor/editorinteractive.cc:525
+#: ../../../../src/editor/editorinteractive.cc:526
 msgid "Hide Animals"
 msgstr "동물 숨김"
 
-#: ../../../../src/editor/editorinteractive.cc:525
+#: ../../../../src/editor/editorinteractive.cc:526
 msgid "Show Animals"
 msgstr "동물 표시"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. resources are shown
-#: ../../../../src/editor/editorinteractive.cc:531
+#: ../../../../src/editor/editorinteractive.cc:532
 msgid "Hide Resources"
 msgstr "자원 숨김"
 
-#: ../../../../src/editor/editorinteractive.cc:531
+#: ../../../../src/editor/editorinteractive.cc:532
 msgid "Show Resources"
 msgstr "자원 표시"
 
-#: ../../../../src/editor/editorinteractive.cc:582
+#: ../../../../src/editor/editorinteractive.cc:583
 msgid "Unsupported Format"
 msgstr "지원되지 않는 형식"
 
-#: ../../../../src/editor/editorinteractive.cc:583
+#: ../../../../src/editor/editorinteractive.cc:584
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr "와이드랜드는 파일 \"%s\"를 불러올 수 없습니다. 파일 형식이 적합하지 않습니다."
 
-#: ../../../../src/editor/editorinteractive.cc:648
+#: ../../../../src/editor/editorinteractive.cc:649
 msgid "Exit Editor Confirmation"
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:648
+#: ../../../../src/editor/editorinteractive.cc:649
 msgid "Unsaved Map"
 msgstr "저장되지 않은 지도"
 
-#: ../../../../src/editor/editorinteractive.cc:649
+#: ../../../../src/editor/editorinteractive.cc:650
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "지도가 저장되지 않았는데, 종료하기를 원하십니까?"
 
-#: ../../../../src/editor/editorinteractive.cc:650
+#: ../../../../src/editor/editorinteractive.cc:651
 msgid "Are you sure you wish to exit the editor?"
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:1287
+#: ../../../../src/editor/editorinteractive.cc:1274
 #: ../../../../src/logic/addons.cc:48 ../../../../src/ui_basic/dropdown.cc:358
 #: ../../../../src/ui_basic/dropdown.cc:360
 #: ../../../../src/ui_fsmenu/addons/contact.cc:81
@@ -681,7 +681,7 @@ msgstr ""
 msgid "Error"
 msgstr "오류"
 
-#: ../../../../src/editor/editorinteractive.cc:1289
+#: ../../../../src/editor/editorinteractive.cc:1276
 #: ../../../../src/ui_fsmenu/main.cc:278 ../../../../src/wlapplication.cc:1970
 #, c-format
 msgid ""
@@ -693,13 +693,13 @@ msgid ""
 "Please add this information to your report."
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:1325
+#: ../../../../src/editor/editorinteractive.cc:1312
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "지도 “%s”를 불러오고 있음…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../../../src/editor/editorinteractive.cc:1347
+#: ../../../../src/editor/editorinteractive.cc:1334
 #: ../../../../src/editor/ui_menus/main_menu_new_map.cc:115
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:629
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:144
@@ -708,7 +708,7 @@ msgid "No Name"
 msgstr "이름 없음"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../../../src/editor/editorinteractive.cc:1350
+#: ../../../../src/editor/editorinteractive.cc:1337
 #: ../../../../src/editor/ui_menus/main_menu_new_map.cc:116
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:630
 #: ../../../../src/logic/map.h:238
@@ -717,20 +717,20 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: ../../../../src/editor/editorinteractive.cc:1374
+#: ../../../../src/editor/editorinteractive.cc:1361
 msgid "Loading world…"
 msgstr "세계를 불러오고 있음…"
 
-#: ../../../../src/editor/editorinteractive.cc:1556
+#: ../../../../src/editor/editorinteractive.cc:1543
 #, c-format
 msgid "Tool gaps: %u%%"
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:1579
+#: ../../../../src/editor/editorinteractive.cc:1566
 msgid "Publish Map"
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:1580
+#: ../../../../src/editor/editorinteractive.cc:1567
 #, c-format
 msgid ""
 "Are you certain that you want to publish this map online?\n"
@@ -742,50 +742,50 @@ msgid ""
 "Hint: %5$s\n"
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:1604
+#: ../../../../src/editor/editorinteractive.cc:1591
 msgid "Login Error"
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:1609
+#: ../../../../src/editor/editorinteractive.cc:1596
 msgid "Uploading Add-On…"
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:1610
+#: ../../../../src/editor/editorinteractive.cc:1597
 msgid "Saving map…"
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:1629
+#: ../../../../src/editor/editorinteractive.cc:1616
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:315
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:370
 msgid "Error Saving Map!"
 msgstr "지도 저장 오류!"
 
-#: ../../../../src/editor/editorinteractive.cc:1635
+#: ../../../../src/editor/editorinteractive.cc:1622
 msgid "Packaging add-on…"
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:1686
+#: ../../../../src/editor/editorinteractive.cc:1673
 msgid "Add-On Generation Error"
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:1687
+#: ../../../../src/editor/editorinteractive.cc:1674
 msgid "The add-on could not be written to the disk."
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:1694
+#: ../../../../src/editor/editorinteractive.cc:1681
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:108
 msgid "Uploading…"
 msgstr "올려주고 있음…"
 
-#: ../../../../src/editor/editorinteractive.cc:1700
+#: ../../../../src/editor/editorinteractive.cc:1687
 msgid "Upload Error"
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:1722
+#: ../../../../src/editor/editorinteractive.cc:1709
 msgid "Success"
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:1723
+#: ../../../../src/editor/editorinteractive.cc:1710
 msgid "The add-on was uploaded successfully."
 msgstr ""
 
@@ -3210,6 +3210,48 @@ msgstr "저장 실패!"
 #: ../../../../src/wui/game_main_menu_save_game.cc:321
 msgid "Game saved"
 msgstr "게임 저장됨"
+
+#: ../../../../src/map_io/map_buildingdata_packet.cc:887
+msgid "Building’s inputs changed!"
+msgstr ""
+
+#. * TRANSLATORS: The argument is the buiding name
+#: ../../../../src/map_io/map_buildingdata_packet.cc:898
+#, c-format
+msgid "%s: the building's inputs have changed."
+msgstr ""
+
+#. * TRANSLATORS: Amount and type of space between two sentences
+#: ../../../../src/map_io/map_buildingdata_packet.cc:901
+msgctxt "sentence_separator"
+msgid " "
+msgstr ""
+
+#: ../../../../src/map_io/map_buildingdata_packet.cc:902
+msgid "The following wares have been deleted:"
+msgstr ""
+
+#: ../../../../src/map_io/map_buildingdata_packet.cc:909
+#, c-format
+msgid "%1$u piece of %2$s"
+msgid_plural "%1$u pieces of %2$s"
+msgstr[0] ""
+
+#: ../../../../src/map_io/map_buildingdata_packet.cc:915
+#, c-format
+msgid "%1$u piece of an unknown ware"
+msgid_plural "%1$u pieces of unknown wares"
+msgstr[0] ""
+
+#: ../../../../src/map_io/map_buildingdata_packet.cc:921
+msgid ""
+"The game was probably saved with a different Widelands version or with "
+"different enabled add-ons."
+msgstr ""
+
+#: ../../../../src/map_io/map_buildingdata_packet.cc:924
+msgid "Please review the current production programs and input settings."
+msgstr ""
 
 #: ../../../../src/map_io/map_saver.cc:85
 #, c-format
@@ -9648,7 +9690,7 @@ msgid "Error Saving Game!"
 msgstr "놀이를 저장하다 오류 발생!"
 
 #: ../../../../src/wui/game_message_menu.cc:53
-#: ../../../../src/wui/game_message_menu.cc:613
+#: ../../../../src/wui/game_message_menu.cc:615
 msgid "Messages: Inbox"
 msgstr "메시지: 수신함"
 
@@ -9673,7 +9715,7 @@ msgid "Sent"
 msgstr "시간"
 
 #: ../../../../src/wui/game_message_menu.cc:114
-#: ../../../../src/wui/game_message_menu.cc:616
+#: ../../../../src/wui/game_message_menu.cc:618
 msgid "Show Archive"
 msgstr "기록 보기"
 
@@ -9683,40 +9725,40 @@ msgid "Center main mapview on location"
 msgstr "해당 위치의 주 지도시야를 중앙으로"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:534
+#: ../../../../src/wui/game_message_menu.cc:535
 msgid "Show all messages"
 msgstr "모든 메시지 확인"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:546
+#: ../../../../src/wui/game_message_menu.cc:547
 msgid "Show geologists’ messages only"
 msgstr "지질학자의 메시지만 표기"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:551
+#: ../../../../src/wui/game_message_menu.cc:552
 msgid "Show economy messages only"
 msgstr "경제 메시지만 표시"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:556
+#: ../../../../src/wui/game_message_menu.cc:557
 msgid "Show seafaring messages only"
 msgstr "항해 메시지만 표기"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:561
+#: ../../../../src/wui/game_message_menu.cc:562
 msgid "Show warfare messages only"
 msgstr "전투 메시지만 표기"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:566
+#: ../../../../src/wui/game_message_menu.cc:567
 msgid "Show scenario messages only"
 msgstr "시나리오 메시지만 표기"
 
-#: ../../../../src/wui/game_message_menu.cc:606
+#: ../../../../src/wui/game_message_menu.cc:608
 msgid "Messages: Archive"
 msgstr "메시지: 보관함"
 
-#: ../../../../src/wui/game_message_menu.cc:609
+#: ../../../../src/wui/game_message_menu.cc:611
 msgid "Show Inbox"
 msgstr "수신함 확인"
 
@@ -9724,14 +9766,14 @@ msgstr "수신함 확인"
 #. for 1
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
-#: ../../../../src/wui/game_message_menu.cc:641
+#: ../../../../src/wui/game_message_menu.cc:643
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
 msgstr[0] "선택된 %d 메시지 회복"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:646
+#: ../../../../src/wui/game_message_menu.cc:648
 msgid "Restore selected message"
 msgstr "선택된 메시지 회복"
 
@@ -9739,14 +9781,14 @@ msgstr "선택된 메시지 회복"
 #. for 1
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
-#: ../../../../src/wui/game_message_menu.cc:656
+#: ../../../../src/wui/game_message_menu.cc:658
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
 msgstr[0] "선택된 %d 메시지 보관"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:661
+#: ../../../../src/wui/game_message_menu.cc:663
 msgid "Archive selected message"
 msgstr "선택된 메시지 보관"
 
