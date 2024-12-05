@@ -367,7 +367,7 @@ msgstr "Ŝargi mapon"
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:53
 #: ../../../../src/wlapplication_options.cc:849
 msgid "Save Map"
-msgstr "Konservi mapon"
+msgstr "Savi mapon"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../../../src/editor/editorinteractive.cc:242
@@ -646,11 +646,11 @@ msgstr "Konfirmo de eliro el la redaktilo"
 
 #: ../../../../src/editor/editorinteractive.cc:648
 msgid "Unsaved Map"
-msgstr "Nekonservita mapo"
+msgstr "Nesavita mapo"
 
 #: ../../../../src/editor/editorinteractive.cc:649
 msgid "The map has not been saved, do you really want to quit?"
-msgstr "La mapo ne estis konservita; ĉu vi vere volas eliri?"
+msgstr "La mapo ne estas savita, ĉu vi vere volas eliri?"
 
 #: ../../../../src/editor/editorinteractive.cc:650
 msgid "Are you sure you wish to exit the editor?"
@@ -751,13 +751,13 @@ msgstr "Alŝutante kromprogramon…"
 
 #: ../../../../src/editor/editorinteractive.cc:1610
 msgid "Saving map…"
-msgstr "Konservante mapon…"
+msgstr "Savante la mapon…"
 
 #: ../../../../src/editor/editorinteractive.cc:1629
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:315
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:370
 msgid "Error Saving Map!"
-msgstr "Eraro dum konservado de la mapo!"
+msgstr "Eraro dum savado de la mapo!"
 
 #: ../../../../src/editor/editorinteractive.cc:1635
 msgid "Packaging add-on…"
@@ -1510,11 +1510,11 @@ msgstr "Dosiero kun la nomo \"%s\" jam ekzistas. Ĉu anstataŭigi ĝin?"
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:345
 msgid "Saving the map…"
-msgstr "Konservante la mapon..."
+msgstr "Savante la mapon…"
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:363
 msgid "Map saved"
-msgstr "Mapo konservita"
+msgstr "Mapo savita"
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:53
 msgid "Enter Directory Name:"
@@ -1818,11 +1818,11 @@ msgstr "Finiĝante"
 #: ../../../../src/game_io/game_saver.cc:50
 #, c-format
 msgid "Saving game: %1$s (%2$d/%3$d)"
-msgstr "Konservante ludon: %1$s (%2$d/%3$d)"
+msgstr "Savante la ludon: %1$s (%2$d/%3$d)"
 
 #: ../../../../src/game_io/game_saver.cc:52
 msgid "Autosaving game…"
-msgstr "Aŭtomatkonservante ludon..."
+msgstr "Aŭtomatsavante la ludon..."
 
 #: ../../../../src/game_io/game_saver.cc:103
 msgid "Interactive player"
@@ -2293,12 +2293,12 @@ msgstr "Ĉi tiu merkato ricevis novan komercan ofertojn."
 msgid ""
 "This game was saved using an older version of Widelands and cannot be loaded"
 " anymore, or it’s a new version that can’t be handled yet."
-msgstr "Ĉi tiu ludo estis konservita uzante malnovan version de Widelands kaj ne plu povas esti ŝarĝita, aŭ ĝi estas nova versio, kiu ankoraŭ ne povas esti traktita."
+msgstr "Ĉi tiu ludo estis savita uzante malnovan version de Widelands kaj ne plu povas esti ŝargita, aŭ ĝi estas nova versio, kiu ankoraŭ ne povas esti traktata."
 
 #: ../../../../src/logic/generic_save_handler.cc:223
 #: ../../../../src/logic/generic_save_handler.cc:227
 msgid "File successfully saved!"
-msgstr "Dosiero sukcese konservita!"
+msgstr "Dosiero sukcese savita!"
 
 #: ../../../../src/logic/generic_save_handler.cc:228
 #, c-format
@@ -2317,7 +2317,7 @@ msgstr "La dosiero \"%s\" ne povis esti forigita!"
 
 #: ../../../../src/logic/generic_save_handler.cc:237
 msgid "Try saving under a different name!"
-msgstr "Provu konservi sub alia nomo!"
+msgstr "Provu savi sub alia nomo!"
 
 #: ../../../../src/logic/generic_save_handler.cc:242
 #, c-format
@@ -2326,7 +2326,7 @@ msgstr "Eraro skribante datumojn en la dosieron \"%s\"!"
 
 #: ../../../../src/logic/generic_save_handler.cc:249
 msgid "Saved file may be corrupt!"
-msgstr "Konservita dosiero eble estas korupta!"
+msgstr "Savita dosiero eble estas korupta!"
 
 #: ../../../../src/logic/generic_save_handler.cc:256
 #, c-format
@@ -3119,69 +3119,69 @@ msgstr "Ludanto forlasas la teamon"
 #: ../../../../src/logic/playercommand.cc:2385
 #, c-format
 msgid "%1$s has left team %2$u and is now teamless."
-msgstr ""
+msgstr "%1$s forlasis teamon %2$u kaj nun estas senteama."
 
 #: ../../../../src/logic/playercommand.cc:2393
 msgid "Team Joining Request"
-msgstr ""
+msgstr "Teama aliĝo-peto"
 
 #: ../../../../src/logic/playercommand.cc:2394
 msgid "Team Joining Invitation"
-msgstr ""
+msgstr "Teama aliĝo-invito"
 
 #: ../../../../src/logic/playercommand.cc:2396
 #: ../../../../src/wui/game_diplomacy_menu.cc:269
 #, c-format
 msgid "%1$s has requested to join the team of %2$s."
-msgstr ""
+msgstr "%1$s petis aliĝi al la teamo de %2$s."
 
 #: ../../../../src/logic/playercommand.cc:2397
 #: ../../../../src/wui/game_diplomacy_menu.cc:276
 #, c-format
 msgid "%1$s has invited %2$s to join their team."
-msgstr ""
+msgstr "%1$s invitis %2$s aliĝi al sia teamo."
 
 #: ../../../../src/logic/playercommand.cc:2436
 #, c-format
 msgid "%1$s has accepted %2$s into their team."
-msgstr ""
+msgstr "%1$s akceptis %2$s en sian teamon."
 
 #: ../../../../src/logic/playercommand.cc:2438
 #, c-format
 msgid "%1$s has accepted the invitation to join the team of %2$s."
-msgstr ""
+msgstr "%1$s akceptis la inviton por aliĝi al la teamo de %2$s."
 
 #: ../../../../src/logic/playercommand.cc:2443
 #, c-format
 msgid "%1$s has retracted the request to join the team of %2$s."
-msgstr ""
+msgstr "%1$s reprenis la peton por aliĝi al la teamo de %2$s."
 
 #: ../../../../src/logic/playercommand.cc:2445
 #, c-format
 msgid "%1$s has denied %2$s membership in their team."
-msgstr ""
+msgstr "%1$s rifuzis la membrecon de %2$s en sia teamo."
 
 #: ../../../../src/logic/playercommand.cc:2448
 #, c-format
 msgid "%1$s has retracted the invitation to %2$s to join their team."
-msgstr ""
+msgstr "%1$s reprenis la inviton al %2$s por aliĝi al sia teamo."
 
 #: ../../../../src/logic/playercommand.cc:2450
 #, c-format
 msgid "%1$s has rejected the invitation to join the team of %2$s."
-msgstr ""
+msgstr "%1$s rifuzis la inviton por aliĝi al la teamo de %2$s."
 
 #: ../../../../src/logic/playercommand.cc:2454
 msgid "Team Change Accepted"
-msgstr ""
+msgstr "Teama ŝanĝo akceptita"
 
 #: ../../../../src/logic/playercommand.cc:2454
 msgid "Team Change Rejected"
-msgstr ""
+msgstr "Teama ŝanĝo rifuzita"
 
 #: ../../../../src/logic/replay.cc:93
 msgid "Desync"
-msgstr "Malsinkronigi"
+msgstr "Malsinkroniĝi"
 
 #: ../../../../src/logic/replay.cc:94
 #, c-format
@@ -3191,44 +3191,44 @@ msgid ""
 "\n"
 "If you are certain that the replay was created with the same version of Widelands, %1$s, please report this problem as a bug.\n"
 "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
-msgstr ""
+msgstr "La ripeto malsinkroniĝis kaj la ludo estis paŭzita.\nVi verŝajne spektas ripeton kreitan per alia versio de Widelands, kiu ne estas subtenata.\n\nSe vi certas, ke la ripeto estis kreita per la sama versio de Widelands, %1$s, bonvolu raporti ĉi tiun problemon kiel cimon.\nVi trovos rilatajn mesaĝojn en la norma eligo (stdout.txt en Vindozo). Bonvolu aldoni ĉi tiujn informojn al via raporto."
 
 #: ../../../../src/logic/replay_game_controller.cc:102
 msgid "End of Replay"
-msgstr "Fino de Ripeto"
+msgstr "Fino de ripeto"
 
 #: ../../../../src/logic/replay_game_controller.cc:103
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may"
 " unpause the game and continue watching if you want to."
-msgstr ""
+msgstr "La fino de la ripeto estis atingita kaj la ludo estis paŭzita. Vi povas malpaŭzigi la ludon kaj daŭrigi spekti, se vi volas."
 
 #: ../../../../src/logic/save_handler.cc:114
 msgid "Saving game…"
-msgstr "Konservante ludon..."
+msgstr "Savante la ludon..."
 
 #: ../../../../src/logic/save_handler.cc:152
 msgid "Saving skipped"
-msgstr ""
+msgstr "Savado preterlasita"
 
 #: ../../../../src/logic/save_handler.cc:170
 #: ../../../../src/wui/game_main_menu_save_game.cc:338
 msgid "Saving failed!"
-msgstr "Konservado ne sukcesis!"
+msgstr "Savado malsukcesis!"
 
 #: ../../../../src/logic/save_handler.cc:186
 #: ../../../../src/wui/game_main_menu_save_game.cc:321
 msgid "Game saved"
-msgstr "Ludo konservita"
+msgstr "Ludo savita"
 
 #: ../../../../src/map_io/map_saver.cc:85
 #, c-format
 msgid "Saving map: %1$s (%2$d/%3$d)"
-msgstr ""
+msgstr "Savante la mapon: %1$s (%2$d/%3$d)"
 
 #: ../../../../src/map_io/map_saver.cc:87
 msgid "Autosaving map…"
-msgstr "Aŭtomatkonserva mapon..."
+msgstr "Aŭtomatsavante la mapon..."
 
 #: ../../../../src/map_io/map_saver.cc:120
 #: ../../../../src/map_io/widelands_map_loader.cc:237
@@ -3243,12 +3243,12 @@ msgstr "Terenoj"
 #: ../../../../src/map_io/map_saver.cc:134
 #: ../../../../src/map_io/widelands_map_loader.cc:257
 msgid "Starting positions"
-msgstr "Komenc-pozicioj"
+msgstr "Komencaj pozicioj"
 
 #: ../../../../src/map_io/map_saver.cc:162
 #: ../../../../src/map_io/widelands_map_loader.cc:285
 msgid "Map version"
-msgstr "Mapo versio"
+msgstr "Mapversio"
 
 #: ../../../../src/map_io/map_saver.cc:174
 #: ../../../../src/map_io/widelands_map_loader.cc:291
@@ -6438,7 +6438,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:510
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:287
 msgid "Saved Game"
-msgstr "Konservita ludo"
+msgstr "Savita ludo"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:448
 msgid "The game is a saved game – the win condition was set before."
@@ -10881,13 +10881,13 @@ msgstr ""
 #: ../../../../src/wui/savegametable.cc:175
 #: ../../../../src/wui/savegametable.cc:238
 msgid "Save Date"
-msgstr "Konservi daton."
+msgstr "Savi daton"
 
 #: ../../../../src/wui/savegametable.cc:147
 #: ../../../../src/wui/savegametable.cc:175
 #: ../../../../src/wui/savegametable.cc:238
 msgid "The date this game was saved"
-msgstr "La dato je kiu tiu ludo estis konservita"
+msgstr "La dato, kiam ĉi tiu ludo estis savita"
 
 #: ../../../../src/wui/savegametable.cc:149
 #: ../../../../src/wui/savegametable.cc:201
