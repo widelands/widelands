@@ -27,7 +27,7 @@
 #include "scripting/lua_errors.h"
 #include "scripting/lua_game.h"
 #include "scripting/lua_globals.h"
-#include "scripting/lua_map.h"
+#include "scripting/map/lua_field.h"
 
 namespace {
 
