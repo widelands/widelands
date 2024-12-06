@@ -153,7 +153,7 @@ int LuaProductionSite::set_inputs(lua_State* L) {
 		Widelands::InputQueue& iq = ps->inputqueue(sp.first.first, sp.first.second, nullptr);
 		if (sp.second > iq.get_max_size()) {
 			report_error(
-			   L, "Not enough space for %u inputs, only for %i", sp.second, iq.get_max_size());
+			   L, "Not enough space for %u inputs, only for %u", sp.second, iq.get_max_size());
 		}
 		iq.set_filled(sp.second);
 	}

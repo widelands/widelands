@@ -932,7 +932,7 @@ bool ProductionSite::fetch_from_flag(Game& game) {
 void ProductionSite::log_general_info(const EditorGameBase& egbase) const {
 	Building::log_general_info(egbase);
 
-	molog(egbase.get_gametime(), "is_stopped: %u\n", static_cast<int>(is_stopped_));
+	molog(egbase.get_gametime(), "is_stopped: %s\n", is_stopped_ ? "true" : "false");
 	molog(egbase.get_gametime(), "main_worker: %i\n", main_worker_);
 }
 

@@ -246,14 +246,14 @@ int LuaField::get_resource_amount(lua_State* L) {
 }
 int LuaField::set_resource_amount(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	auto c = fcoords(L);
+	Widelands::FCoords c = fcoords(L);
 	Widelands::DescriptionIndex res = c.field->get_resources();
-	auto amount = luaL_checkint32(L, -1);
+	int32_t amount = luaL_checkint32(L, -1);
 	const Widelands::ResourceDescription* res_desc = egbase.descriptions().get_resource_descr(res);
 	Widelands::ResourceAmount max_amount = (res_desc != nullptr) ? res_desc->max_amount() : 0;
 
 	if (amount < 0 || amount > max_amount) {
-		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount,
+		report_error(L, "Illegal amount: %i, must be >= 0 and <= %u", amount,
 		             static_cast<unsigned int>(max_amount));
 	}
 
@@ -283,14 +283,14 @@ int LuaField::get_initial_resource_amount(lua_State* L) {
 }
 int LuaField::set_initial_resource_amount(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	auto c = fcoords(L);
+	Widelands::FCoords c = fcoords(L);
 	Widelands::DescriptionIndex res = c.field->get_resources();
-	auto amount = luaL_checkint32(L, -1);
+	int32_t amount = luaL_checkint32(L, -1);
 	const Widelands::ResourceDescription* res_desc = egbase.descriptions().get_resource_descr(res);
 	Widelands::ResourceAmount max_amount = (res_desc != nullptr) ? res_desc->max_amount() : 0;
 
 	if (amount < 0 || amount > max_amount) {
-		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount,
+		report_error(L, "Illegal amount: %i, must be >= 0 and <= %u", amount,
 		             static_cast<unsigned int>(max_amount));
 	}
 

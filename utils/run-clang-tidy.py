@@ -634,7 +634,7 @@ def main():
                             'which can be applied with clang-apply-replacements.')
     parser.add_argument('-j', type=int, default=0,
                         help='number of tidy instances to be run in parallel.')
-    parser.add_argument('files', nargs='*', default=['.*'],
+    parser.add_argument('-files', nargs='*', default=['.*'],
                         help='files to be processed (regex on path)')
     parser.add_argument('-fix', action='store_true', help='apply fix-its')
     parser.add_argument('-format', action='store_true', help='Reformat code '

@@ -37,6 +37,7 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/map_objects/tribes/bill_of_materials.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/militarysite.h"
@@ -819,15 +820,111 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 
 			uint16_t nr_queues = fr.unsigned_16();
 			assert(productionsite.input_queues_.empty());
+
+			const BillOfMaterials& curr_wares = pr_descr.input_wares();
+			bool inputs_changed = false;
+			BillOfMaterials deleted_wares;
+			unsigned deleted_unknown = 0;
+
 			for (uint16_t i = 0; i < nr_queues; ++i) {
 				WaresQueue* wq = new WaresQueue(productionsite, INVALID_INDEX, 0);
 				wq->read(fr, game, mol);
 
-				if (!game.descriptions().ware_exists(wq->get_index())) {
+				DescriptionIndex widx = wq->get_index();
+				if (!game.descriptions().ware_exists(widx)) {
+					deleted_unknown += wq->get_filled();
 					delete wq;
+					inputs_changed = true;
 				} else {
-					productionsite.input_queues_.push_back(wq);
+					// Savegame compatibility: check whether queue had size changed,
+					// or was removed altogether
+					auto it = std::find_if(
+					   curr_wares.begin(), curr_wares.end(), [widx](auto e) { return e.first == widx; });
+					if (it == curr_wares.end()) {
+						if (wq->get_filled() > 0) {
+							deleted_wares.emplace_back(std::make_pair(widx, wq->get_filled()));
+						}
+						wq->set_filled(0u);
+						wq->cleanup();
+						delete wq;
+						inputs_changed = true;
+					} else {
+						const Quantity new_size = it->second;
+						const Quantity old_size = wq->get_max_size();
+						inputs_changed = inputs_changed || (new_size != old_size);
+						if (new_size > old_size) {
+							wq->set_max_size(new_size);
+							if (wq->get_max_fill() == old_size) {
+								wq->set_max_fill(new_size);
+							}
+						} else if (new_size < old_size) {
+							const Quantity old_filled = wq->get_filled();
+							if (old_filled > new_size) {
+								deleted_wares.emplace_back(std::make_pair(widx, old_filled - new_size));
+								wq->set_filled(new_size);
+							}
+							wq->set_max_size(new_size);
+						}
+						productionsite.input_queues_.push_back(wq);
+					}
 				}
+			}
+			// Savegame compatibility: check for new queues that did not exist in older save file
+			for (WareAmount wa : curr_wares) {
+				DescriptionIndex widx = wa.first;
+				auto it = std::find_if(productionsite.input_queues_.begin(),
+				                       productionsite.input_queues_.end(),
+				                       [widx](auto e) { return e->get_index() == widx; });
+				if (it == productionsite.input_queues_.end()) {
+					WaresQueue* wq = new WaresQueue(productionsite, widx, wa.second);
+					productionsite.input_queues_.push_back(wq);
+					inputs_changed = true;
+				}
+			}
+
+			// Report changes to the player
+			if (inputs_changed) {
+				const std::string title(_("Building’s inputs changed!"));
+
+				// Probably not worth adding graphic/text_layout as a dependency. It would
+				// require specifying the font styles too, but we already get that through
+				// Building::send_message().
+				// TODO(tothxa): The main problem are the hard-coded spacing gaps.
+				static const std::string paragraph_separator("</p><vspace gap=8><p>");
+
+				std::string body("<p>");
+				body += format(
+				   /** TRANSLATORS: The argument is the buiding name */
+				   _("%s: the building’s inputs have changed."), productionsite.descr().descname());
+				if (!deleted_wares.empty() || deleted_unknown > 0) {
+					body += paragraph_separator;
+					body += _("The following wares have been deleted:");
+					body += "</p><p>";
+
+					static const std::string list_entry("<space gap=8>• %s</p><p>");  // ugly, but simple
+					for (const WareAmount& deleted : deleted_wares) {
+						body += format(
+						   list_entry,
+						   format(ngettext("%1$u piece of %2$s", "%1$u pieces of %2$s", deleted.second),
+						          deleted.second,
+						          game.descriptions().get_ware_descr(deleted.first)->descname()));
+					}
+					if (deleted_unknown > 0) {
+						body += format(
+						   list_entry, format(ngettext("%1$u piece of an unknown ware",
+						                               "%1$u pieces of unknown wares", deleted_unknown),
+						                      deleted_unknown));
+					}
+				}
+				body += paragraph_separator;
+				body += _("The game was probably saved with a different Widelands version or with "
+				          "different enabled add-ons.");
+				body += paragraph_separator;
+				body += _("Please review the current production programs and input settings.");
+				body += "</p>";
+
+				productionsite.send_message(game, Message::Type::kEconomyLoadGame, title,
+				                            productionsite.descr().icon_filename(), title, body, true);
 			}
 
 			nr_queues = fr.unsigned_16();

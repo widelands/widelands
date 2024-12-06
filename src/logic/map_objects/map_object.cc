@@ -154,7 +154,7 @@ ObjectManager::~ObjectManager() {
 		log_warn("ObjectManager: ouch! remaining objects\n");
 	}
 
-	verb_log_info("lastserial: %i\n", lastserial_);
+	verb_log_info("lastserial: %u\n", lastserial_);
 }
 
 /**

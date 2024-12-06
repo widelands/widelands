@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2024-11-30 03:02+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
 "Last-Translator: GunChleoc, 2015-2021\n"
 "Language-Team: Gaelic, Scottish (http://app.transifex.com/widelands/widelands/language/gd/)\n"
@@ -483,14 +483,63 @@ msgid ""
 msgstr "Seallaidh an treas àireamh dhut na saighdearan a tha a dhìth. A-mach às an t-ochdnar shaighdearan (1 + 5 + 2) am bu toigh leat fhaighinn ann, ’s dòcha gun do chaochail dithis. Thèid saighdearan ùra a chur ’nan àite a thig on taigh-stòrais ma ghabhas seo dèanamh."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:207
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
+msgid "Soldiers in the headquarters"
+msgstr ""
+
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
+msgid ""
+"Your headquarters has some capabilities of military sites: It conqers some "
+"land, and the stored soldiers defend it when attacked. However this also "
+"means that the enemy can attack the headquarters itself too. On the other "
+"hand, there’s a difference too: you can’t start an attack with the soldiers "
+"in your headquarters."
+msgstr ""
+
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
+msgid ""
+"The military capabilities of the headquarters are a big difference from "
+"plain warehouses that don’t conquer land, and need nearby military sites for"
+" defense. Soldiers stored in plain warehouses don’t participate in any "
+"fighting, and plain warehouses can’t be attacked directly."
+msgstr ""
+
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:217
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
+msgid "Soldier settings of the headquarters"
+msgstr ""
+
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:220
+msgid ""
+"While all soldiers who happen to be in your headquarters help defending it, "
+"they are not permanently assigned to the headquarters, so they can be sent "
+"away any time when a military site needs a soldier. Fortunately you can also"
+" assign some soldiers to the defense of the headquarters the same way you "
+"set soldier capacity and preference for military sites. If you do so, the "
+"headquarters will only let surplus soldiers be sent to other buildings, but "
+"not soldiers from the assigned garrison."
+msgstr ""
+
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:221
+msgid ""
+"If you look at the status lines, you can see that your warehouse has nothing"
+" in it, but your headquarters has a ‘—’ sign initially. That means that "
+"there is no garrison set up to protect the headquarters, though there may "
+"still be some soldiers stored there. If you increase the desired number of "
+"soldiers to more than zero, then the headquarters will show the same soldier"
+" information as military sites in the status. Surplus soldiers are never "
+"shown in the status."
+msgstr ""
+
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your sentry"
 msgstr "Thoir am freiceadan agad às a chèile"
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:229
 msgid "Dismantling military buildings"
 msgstr "A’ toirt togalaichean an airm às a chèile"
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:230
 msgid ""
 "You can only reduce the number of soldiers to one. The last soldier of a "
 "building will never come out (unless this building is attacked). If you want"
@@ -498,7 +547,7 @@ msgid ""
 " building."
 msgstr "Nuair a dh’ìslicheas tu uiread nan saighdearan, bidh aonan air fhàgail ann an-còmhnaidh. Cha dig an saighdear mu dheireadh a-mach às an togalach gu bràth (ach ma thèid ionnsaigh a thoirt air). Ma tha thu ag iarraidh an saighdear agad àiteigin eile, feumaidh tu an togalach a thoirt às a chèile no a mhilleadh."
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:231
 msgid ""
 "However, destroying a military building is always linked with a risk: the "
 "land is still yours, but it is no longer protected. Any enemy that builds "
@@ -509,32 +558,32 @@ msgid ""
 "enemies."
 msgstr "Co-dhiù, tha cunnart an lùib milleadh togalach an airm an-còmhnaidh: ’s ann agadsa a bhios an tìr fhathast ach cha bhi i fo dhìon tuilleadh. ’S urrainn do nàmhaid sam bith a thogas togalaichean an airm aige fhèin an tìr agad a ghabhail os làimh gun strì agus thèid na togalaichean agad ’nan teine an uairsin. A bharrachd air sin, dh’fhaoidte gun dèid cuid dhen tìr agad am falach fo cheò a’ chogaidh. Air adhbhar air sin, cha bu chòir dhut togalach an airm a thoirt às a chèile ach ma tha e domhain san ranntair agad far a bheil e sàbhailte o na nàimhdean."
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:212
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:232
 msgid ""
 "Have you seen your sentry? Since it cannot contain many soldiers and is next"
 " to a stronger barrier, it is rather useless."
 msgstr "Am faca tu am freiceadan agad? O nach eil rùm airson mòran shaighdearan ann ’s on a tha e faisg air taigh-faire a tha nas treasa, chan eil e gu mòran feum dhut idir."
 
 #. TRANSLATORS: 'it' refers to the Barbarian sentry
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:214
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:234
 msgid "Dismantle it."
 msgstr "Thoir às a chèile e."
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:215
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:235
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
 msgstr "Nach gabh thu an cothrom gus eòlas fhaighinn air na roghainnean eile? Is iad roghainn nan seann-ghaisgeach no saighdearan ùra agus an rùm."
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:221
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:241
 msgid "Soldiers, dismissed!"
 msgstr "Dhachaigh leibh, a shaighdearaibh!"
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:223
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:243
 msgid "Dismantle your north-western sentry"
 msgstr "Thoir am freiceadan iar-thuath agad às a chèile"
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:224
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:244
 msgid ""
 "You can control the number of soldiers stationed at a military site with the"
 " arrow buttons. If you want to get even your last soldier out, you will have"
@@ -542,59 +591,59 @@ msgid ""
 "which will make it vulnerable to hostile attacks."
 msgstr "’S urrainn dhut stiùireadh leis na putanan saighde co mheud saighdear a ghabhas còmhnaidh ann an togalach an airm. Ma tha thu airson cuidhteas fhaighinn dhen t-saighdear mu dheireadh, feumaidh tu an togalach a mhilleadh. Co-dhiù, cha dìon e an ranntair agad tuilleadh agus bi thu so-leònta a thaobh ionnsaighean nan nàimhdean."
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:225
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:245
 msgid "Dismantle your sentry in the north-west, next to the barrier."
 msgstr "Thoir am freiceadan agad às a chèile a tha gu iar-thuath ri taobh an taigh-fhaire."
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:231
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:244
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:251
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:264
 msgid "Enhance Your Fortress"
 msgstr "Leasaich an dùn agad"
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:233
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:253
 msgid "Enhancing Buildings"
 msgstr "A’ leasachadh togalach"
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:234
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:254
 msgid ""
 "Well done. Now you know how to draw back your soldiers from the places where"
 " you don’t need them. It is time to tell you how to reinforce your front "
 "line."
 msgstr "Sin thu. Tha fios agad a-nis mar a bheir thu na saighdearan agad air falbh o na h-àiteachan far nach eil feum agad orra. Innsidh mi dhut a-nis mar a chuireas tu foirlionadh gu far a bheil an t-sabaid."
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:235
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:255
 msgid ""
 "Your fortress is already quite strong and conquers a lot of space. But there"
 " is an even bigger building: the citadel."
 msgstr "Tha an dùn agad gu math treun mar-thà agus ceannsaichidh e cnap math de thìr. Ach tha togalach eile ann a tha fiù ’s nas motha: a’ chathair."
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:236
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:256
 msgid ""
 "Citadels can’t be built directly. Instead, you’ll have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
 "fortress, then choose the ‘Enhance to Citadel’ button."
 msgstr "Chan urrainn dhut cathair a thogail gu dìreach. Feumaidh tu dùn a thogail ’na àite an toiseach agus a leasachadh gu cathair an uairsin. Gus seo a dhèanamh, briog air an dùn agus tagh “Leasaich gu cathair” an uairsin."
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:237
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:257
 msgid ""
 "Your soldiers will leave the fortress while the construction is going on. "
 "This means that your fortress will lose its military influence, as I "
 "described above."
 msgstr "Fàgaidh na saighdearan agad an dùn fad ’s a tha an togail a’ dol air adhart. Is ciall dha seo gun caill an dùn a bhuaidh air an ranntair mar a mhìnich mi gu h-àrd."
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:238
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:258
 msgid "Enhance your fortress to a citadel now."
 msgstr "Leasaich an dùn agad gu cathair a-nis."
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:246
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:266
 msgid "Enhance your fortress to a citadel"
 msgstr "Leasaich an dùn agad gu cathair"
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:247
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:267
 msgid "Enhance your fortress to a mighty citadel."
 msgstr "Leasaich an dùn agad gu cathair neartmhor."
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:248
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:268
 msgid ""
 "The citadel can house 12 soldiers, and it is the biggest military building "
 "the Barbarians can build. It also costs a lot of resources and takes a long "
@@ -602,15 +651,15 @@ msgid ""
 "like constricted points or mountains."
 msgstr "’S urrainn do 12 shaighdear còmhnaidh ann an cathair is ’s ise togalach an airm as motha as urrainn dha na Tùsanaich a thogail. Tha i glè chosgail cuideachd is bheir e ùine mhòr gus tè a thogail. Tha i nas fheàrr gus ionadan cudromach a dhìon a leithid àiteachan caola no beanntan."
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:255
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:275
 msgid "Defeat your Enemy"
 msgstr "Cuir ruaig air an nàmhaid agad"
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:257
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:277
 msgid "Defeat the Enemy"
 msgstr "Cuir ruaig air an nàmhaid"
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:258
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:278
 msgid ""
 "Great work, the citadel is finished. But what’s that? A hostile tribe has "
 "settled next to us while the citadel was under construction! Do you see how "
@@ -619,44 +668,44 @@ msgid ""
 "defeat the enemy!"
 msgstr "Abair deagh obair, tha a’ chathair deiseil a-nis. Ach dè tha siud? Thuinich treubh nàimhdeil ri ar taobh fad ’s a bha a’ chathair ’ga togail! Am faic thu mar a thug iad tìr air falbh uainn? Agus tha an coilltear againn air an àite obrach aige a chall. Seo na bha mi a-mach air. Gabhamaid an tìr againn air ais agus cuireamaid ruaig air an nàmhaid!"
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:259
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:270
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:279
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:290
 msgid ""
 "To attack a building, click on its doors, choose the number of soldiers that"
 " you wish to send and click on the ‘Attack’ button."
 msgstr "Gus ionnsaigh a thoirt air togalach, briog air an doras aige, tagh an àireamh de shaighdearan a bu toigh leat cur a-null agus briog air a’ phutan “Thoir ionnsaigh”."
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:259
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:279
 msgid ""
 "Your soldiers will come from all nearby military buildings. Likewise, the "
 "defenders will come from all nearby military buildings of the enemy and "
 "intercept your forces."
 msgstr "Thig na saighdearan agad o gach togalach an airm a tha am fagas. Mar an ceudna, thig luchd-dìona an nàmhad o gach togalach an airm am fagas feuch an cuir iad stad air an fheachd agad."
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:260
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:280
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy their "
 "headquarters."
 msgstr "Thoir ionnsaigh air is buinnig gach togalach an airm aig an nàmhaid is mill am prìomh-àras aige."
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:266
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:286
 msgid "Defeat Your Enemy"
 msgstr "Cuir ruaig air an nàmhaid agad"
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:268
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:288
 msgid "Defeat the enemy tribe"
 msgstr "Cuir ruaig air an treubh nàimhdeil"
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:269
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:289
 msgid "Defeat the nearby enemy."
 msgstr "Cuir ruaig air an nàmhaid am fagas."
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:275
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:277
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:295
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:297
 msgid "Conclusion"
 msgstr "Co-dhùnadh"
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:278
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:298
 msgid ""
 "Thank you for playing this tutorial. I hope you enjoyed it and you learned "
 "how to create and train soldiers, how to control where they go and how to "
@@ -664,14 +713,14 @@ msgid ""
 "Having trained soldiers is a huge advantage."
 msgstr "Tapadh leat airson an t-oideachadh seo a chluiche. Tha mi ’n dòchas gun do chòrd e riut agus gun do dh’ionnsaich thu mar a chruthaicheas tu saighdearan agus mar a bheir thu oideachadh dhaibh, mar a stiùiricheas tu far an dèid iad agus mar a chuireas tu ruaig air nàmhaid. Am faca tu dè cho furasta ’s a rinn thu a’ chùis air an nàmhaid? Is mòr a’ bhuannachd a gheibh thu o oideachadh nan saighdearan."
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:279
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:299
 msgid ""
 "But a war is expensive, and not always the path leading to the goal. When "
 "setting up a new game, you can also choose peaceful win conditions. You "
 "should definitely try them out, they’re worth it."
 msgstr "Ach tha an cogadh cosgail agus chan eil e an rathad as fheàrr dhan t-soirbheachas an-còmhnaidh. Nuair a shuidhicheas tu geama ùr, ’s urrainn dhut cumha buaidhe sìtheil a thaghadh cuideachd. Bu chòir dhut am feuchainn on fhiach iad."
 
-#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:280
+#: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:300
 msgid ""
 "You are now ready to play the campaigns. They will teach you about the "
 "different economies of the tribes. You can also play the remaining "
