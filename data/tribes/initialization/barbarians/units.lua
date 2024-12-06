@@ -1,5 +1,3 @@
-descriptions = wl.Descriptions() -- TODO(matthiakl): only for savegame compatibility with 1.0, do not use.
-
 image_dirname = path.dirname(__file__) .. "images/"
 
 push_textdomain("tribes_encyclopedia")
@@ -1123,6 +1121,15 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("barbarians_building", "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools."),
             -- TRANSLATORS: Note helptext for an Barbarian warehouse: Port
             note = pgettext("barbarians_building", "Similar to the Headquarters a Port can be attacked and destroyed by an enemy. It is recommendable to send soldiers to defend it.")
+         }
+      },
+
+      -- Markets
+      {
+         name = "barbarians_market",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a Barbarian market: Market
+            purpose = pgettext("barbarians_building", "A market enables trading with other tribes.")
          }
       },
 
