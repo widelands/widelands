@@ -47,8 +47,8 @@ struct Message {
 		kWarfareUnderAttack,
 		kWarfareEnd = kWarfareUnderAttack,  // end of warfare messages
 		kTradeOfferReceived,                // trading
-		kEconomyLoadGame,  // only this type is allowed in game loading code
-		                   // must not be used elsewhere
+		kEconomyLoadGame,                   // only this type is allowed in game loading code
+		                                    // must not be used elsewhere
 
 		kTradeOfferAccepted,   // trading
 		kTradeOfferRejected,   // trading
