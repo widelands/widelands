@@ -109,6 +109,7 @@ wl_library(scripting_logic
     base_macros
     economy
     graphic
+    graphic_fonthandler
     io_fileread
     io_filesystem
     io_profile

@@ -32,6 +32,8 @@ run(function()
 
    sleep(100)
 
+   assert_equal(wl.ui.is_rtl(), false)
+
    -- Validate listing dropdowns
    local dropdowns = wl.ui.MapView().dropdowns
    for name,dropdown in pairs(dropdowns) do
