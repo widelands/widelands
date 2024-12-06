@@ -1,0 +1,94 @@
+name: Bug Report
+description: Create a report to help us fix it.
+labels: bug
+
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Describe the Bug
+      description: |
+        A clear and concise description of what the bug is.
+
+        If you post a crash log below, please describe what kind of game you played,
+        what was going on in the game, and what you did last before the game crashed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: To Reproduce
+      description: Steps to reproduce the behavior
+      value: |
+        1. Go to '…'
+        2. Click on '…'
+        3. Scroll down to '…'
+        4. Error: …
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: crashlog
+    attributes:
+      label: Crash Log
+      description: If you report a crash, paste the crash log here.
+      render: text
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain your problem.
+
+  - type: textarea
+    id: replays
+    attributes:
+      label: Replays
+      description: If applicable, include a replay demonstrating the problem or leading to a crash.
+
+  - type: textarea
+    id: savegames
+    attributes:
+      label: Savegames
+      description: If applicable, include a savegame demonstrating the problem or helping to reproduce it.
+
+  - type: input
+    id: os-version
+    attributes:
+      label: Operating System
+      description: The version of the operating system.
+      placeholder: e.g. "Ubuntu 24.04", "Windows 11 64-bit"
+    validations:
+      required: true
+
+  - type: input
+    id: wl-version
+    attributes:
+      label: Widelands Version
+      description: The version of Widelands.
+      placeholder: e.g. "v1.2", "73f9eb5c0b26599b72609f3e27de569f49049269"
+    validations:
+      required: true
+
+  - type: textarea
+    id: addons-versions
+    attributes:
+      label: Enabled Add-Ons
+      description: All enabled add-ons
+      placeholder: e.g. "frisians-economy-ultra.wad", "Frisians Economy Ultra"
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem here.
+
