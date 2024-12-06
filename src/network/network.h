@@ -25,9 +25,9 @@
 
 #include "base/string.h"
 #include "base/wexception.h"
+#include "commands/command.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
-#include "logic/cmd_queue.h"
 #include "network/network_protocol.h"
 
 constexpr size_t kNetworkBufferSize = 512;
@@ -82,25 +82,6 @@ struct NetAddress {
 
 	asio::ip::address ip;
 	uint16_t port;
-};
-
-using SyncReportCallback = std::function<void()>;
-
-/**
- * This non-gamelogic command is used by \ref GameHost and \ref GameClient
- * to schedule taking a synchronization hash.
- */
-struct CmdNetCheckSync : public Widelands::Command {
-	CmdNetCheckSync(const Time& dt, SyncReportCallback);
-
-	void execute(Widelands::Game&) override;
-
-	[[nodiscard]] Widelands::QueueCommandTypes id() const override {
-		return Widelands::QueueCommandTypes::kNetCheckSync;
-	}
-
-private:
-	SyncReportCallback callback_;
 };
 
 /**
