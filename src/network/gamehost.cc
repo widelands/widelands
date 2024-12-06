@@ -1877,10 +1877,10 @@ void GameHost::receive_client_time(uint32_t const number, const Time& time) {
 	}
 
 	client.time = time;
-	verb_log_info("[Host]: Client %i: Time %i", number, time.get());
+	verb_log_info("[Host]: Client %u: Time %u", number, time.get());
 
 	if (d->waiting) {
-		verb_log_info("[Host]: Client %i reports time %i (networktime = %i) during hang", number,
+		verb_log_info("[Host]: Client %u reports time %u (networktime = %u) during hang", number,
 		              time.get(), d->committed_networktime.get());
 		check_hung_clients();
 	}
@@ -1906,7 +1906,7 @@ void GameHost::check_hung_clients() {
 			assert(d->game != nullptr);
 			++nrdelayed;
 			if (delta > Duration(5 * CLIENT_TIMESTAMP_INTERVAL * d->networkspeed / 1000)) {
-				verb_log_info("[Host]: Client %i (%s) hung", i,
+				verb_log_info("[Host]: Client %u (%s) hung", i,
 				              d->settings.users.at(d->clients.at(i).usernum).name.c_str());
 				++nrhung;
 				if (d->clients.at(i).hung_since == 0) {
@@ -2053,7 +2053,7 @@ void GameHost::request_sync_reports() {
 		client.syncreport_arrived = false;
 	}
 
-	verb_log_info("[Host]: Requesting sync reports for time %i", d->syncreport_time.get());
+	verb_log_info("[Host]: Requesting sync reports for time %u", d->syncreport_time.get());
 	d->game->report_sync_request();
 
 	SendPacket packet;
@@ -2084,7 +2084,7 @@ void GameHost::check_sync_reports() {
 	}
 
 	d->syncreport_pending = false;
-	verb_log_info("[Host]: comparing syncreports for time %i", d->syncreport_time.get());
+	verb_log_info("[Host]: comparing syncreports for time %u", d->syncreport_time.get());
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		Client& client = d->clients.at(i);
@@ -2093,7 +2093,7 @@ void GameHost::check_sync_reports() {
 		}
 
 		if (client.syncreport != d->syncreport) {
-			log_err("[Host]: lost synchronization with client %u at time %i!\n"
+			log_err("[Host]: lost synchronization with client %u at time %u!\n"
 			        "I have:     %s\n"
 			        "Client has: %s\n",
 			        i, d->syncreport_time.get(), d->syncreport.str().c_str(),

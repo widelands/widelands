@@ -419,7 +419,7 @@ void GameClient::do_send_player_command(Widelands::PlayerCommand* pc) {
 	// TODO(Klaus Halfmann): should this be an assert?
 	if (pc->sender() == d->settings.playernum + 1)  //  allow command for current player only
 	{
-		verb_log_info("[Client]: enqueue playercommand at time %i\n", d->game->get_gametime().get());
+		verb_log_info("[Client]: enqueue playercommand at time %u\n", d->game->get_gametime().get());
 
 		d->send_player_command(pc);
 
@@ -735,7 +735,7 @@ const std::vector<ChatMessage>& GameClient::get_messages() const {
 void GameClient::send_time() {
 	assert(d->game);
 
-	verb_log_info("[Client]: sending timestamp: %i", d->game->get_gametime().get());
+	verb_log_info("[Client]: sending timestamp: %u", d->game->get_gametime().get());
 
 	SendPacket s;
 	s.unsigned_8(NETCMD_TIME);

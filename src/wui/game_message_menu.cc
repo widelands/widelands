@@ -496,6 +496,7 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 	case Widelands::Message::Type::kWarfareSiteLost:
 	case Widelands::Message::Type::kWarfareUnderAttack:
 	case Widelands::Message::Type::kTradeOfferReceived:
+	case Widelands::Message::Type::kEconomyLoadGame:
 		set_filter_messages_tooltips();
 		message_filter_ = Widelands::Message::Type::kAllMessages;
 		geologistsbtn_->set_perm_pressed(false);
@@ -593,6 +594,7 @@ std::string GameMessageMenu::display_message_type_icon(const Widelands::Message&
 	case Widelands::Message::Type::kWarfareSiteLost:
 	case Widelands::Message::Type::kWarfareUnderAttack:
 	case Widelands::Message::Type::kTradeOfferReceived:
+	case Widelands::Message::Type::kEconomyLoadGame:
 		return "images/wui/messages/message_new.png";
 	default:
 		NEVER_HERE();

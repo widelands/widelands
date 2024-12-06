@@ -464,8 +464,8 @@ unbox_lua_soldier_description(lua_State* L, int table_index, const Widelands::So
 	soldier_descr.health = luaL_checkuint32(L, -1);
 	lua_pop(L, 1);
 	if (soldier_descr.health > sd.get_max_health_level()) {
-		report_error(L, "health level (%i) > max health level (%i)", soldier_descr.health,
-		             sd.get_max_health_level());
+		report_error(L, "health level (%u) > max health level (%u)",
+		             static_cast<unsigned>(soldier_descr.health), sd.get_max_health_level());
 	}
 
 	lua_pushuint32(L, 2);
@@ -473,8 +473,8 @@ unbox_lua_soldier_description(lua_State* L, int table_index, const Widelands::So
 	soldier_descr.attack = luaL_checkuint32(L, -1);
 	lua_pop(L, 1);
 	if (soldier_descr.attack > sd.get_max_attack_level()) {
-		report_error(L, "attack level (%i) > max attack level (%i)", soldier_descr.attack,
-		             sd.get_max_attack_level());
+		report_error(L, "attack level (%u) > max attack level (%u)",
+		             static_cast<unsigned>(soldier_descr.attack), sd.get_max_attack_level());
 	}
 
 	lua_pushuint32(L, 3);
@@ -482,8 +482,8 @@ unbox_lua_soldier_description(lua_State* L, int table_index, const Widelands::So
 	soldier_descr.defense = luaL_checkuint32(L, -1);
 	lua_pop(L, 1);
 	if (soldier_descr.defense > sd.get_max_defense_level()) {
-		report_error(L, "defense level (%i) > max defense level (%i)", soldier_descr.defense,
-		             sd.get_max_defense_level());
+		report_error(L, "defense level (%u) > max defense level (%u)",
+		             static_cast<unsigned>(soldier_descr.defense), sd.get_max_defense_level());
 	}
 
 	lua_pushuint32(L, 4);
@@ -491,8 +491,8 @@ unbox_lua_soldier_description(lua_State* L, int table_index, const Widelands::So
 	soldier_descr.evade = luaL_checkuint32(L, -1);
 	lua_pop(L, 1);
 	if (soldier_descr.evade > sd.get_max_evade_level()) {
-		report_error(L, "evade level (%i) > max evade level (%i)", soldier_descr.evade,
-		             sd.get_max_evade_level());
+		report_error(L, "evade level (%u) > max evade level (%u)",
+		             static_cast<unsigned>(soldier_descr.evade), sd.get_max_evade_level());
 	}
 
 	return soldier_descr;
@@ -6542,7 +6542,7 @@ int LuaProductionSite::set_inputs(lua_State* L) {
 		Widelands::InputQueue& iq = ps->inputqueue(sp.first.first, sp.first.second, nullptr);
 		if (sp.second > iq.get_max_size()) {
 			report_error(
-			   L, "Not enough space for %u inputs, only for %i", sp.second, iq.get_max_size());
+			   L, "Not enough space for %u inputs, only for %u", sp.second, iq.get_max_size());
 		}
 		iq.set_filled(sp.second);
 	}
@@ -8302,14 +8302,14 @@ int LuaField::get_resource_amount(lua_State* L) {
 }
 int LuaField::set_resource_amount(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	auto c = fcoords(L);
+	Widelands::FCoords c = fcoords(L);
 	Widelands::DescriptionIndex res = c.field->get_resources();
-	auto amount = luaL_checkint32(L, -1);
+	int32_t amount = luaL_checkint32(L, -1);
 	const Widelands::ResourceDescription* res_desc = egbase.descriptions().get_resource_descr(res);
 	Widelands::ResourceAmount max_amount = (res_desc != nullptr) ? res_desc->max_amount() : 0;
 
 	if (amount < 0 || amount > max_amount) {
-		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount,
+		report_error(L, "Illegal amount: %i, must be >= 0 and <= %u", amount,
 		             static_cast<unsigned int>(max_amount));
 	}
 
@@ -8339,14 +8339,14 @@ int LuaField::get_initial_resource_amount(lua_State* L) {
 }
 int LuaField::set_initial_resource_amount(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	auto c = fcoords(L);
+	Widelands::FCoords c = fcoords(L);
 	Widelands::DescriptionIndex res = c.field->get_resources();
-	auto amount = luaL_checkint32(L, -1);
+	int32_t amount = luaL_checkint32(L, -1);
 	const Widelands::ResourceDescription* res_desc = egbase.descriptions().get_resource_descr(res);
 	Widelands::ResourceAmount max_amount = (res_desc != nullptr) ? res_desc->max_amount() : 0;
 
 	if (amount < 0 || amount > max_amount) {
-		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount,
+		report_error(L, "Illegal amount: %i, must be >= 0 and <= %u", amount,
 		             static_cast<unsigned int>(max_amount));
 	}
 
