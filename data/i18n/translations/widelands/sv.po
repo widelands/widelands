@@ -8,15 +8,16 @@
 # Frida Bäcklund <frida.sofia.backlund@gmail.com>, 2021
 # Greger Cronquist, 2021
 # GunChleoc, 2014
+# Jan Lindblom <janlindblom@fastmail.fm>, 2024
 # efef6ec5b435a041fce803c7f8af77d2_2341d43, 2018-2020
 # Niklas Nordgren, 2022-2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-11-30 03:02+0000\n"
+"POT-Creation-Date: 2024-12-05 03:11+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Niklas Nordgren, 2022-2023\n"
+"Last-Translator: Jan Lindblom <janlindblom@fastmail.fm>, 2024\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -284,14 +285,14 @@ msgstr "Dec"
 
 #. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
-#: ../../../../src/editor/editorinteractive.cc:101
+#: ../../../../src/editor/editorinteractive.cc:102
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:298
 #: ../../../../src/wui/interactive_gamebase.cc:101
 #: ../../../../src/wui/story_message_box.cc:89
 msgid "Main Menu"
 msgstr "Huvudmeny"
 
-#: ../../../../src/editor/editorinteractive.cc:102
+#: ../../../../src/editor/editorinteractive.cc:103
 #: ../../../../src/wui/interactive_gamebase.cc:102
 msgctxt "hotkey"
 msgid "Esc"
@@ -299,7 +300,7 @@ msgstr "Esc"
 
 #. * TRANSLATORS: Title for the tool menu button in the editor
 #. * TRANSLATORS: Heading in the editor keyboard shortcuts help
-#: ../../../../src/editor/editorinteractive.cc:116
+#: ../../../../src/editor/editorinteractive.cc:117
 #: ../../../../src/wlapplication_options.cc:1037
 msgctxt "editor"
 msgid "Tools"
@@ -311,27 +312,27 @@ msgstr "Redigeringsverktyg"
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
-#: ../../../../src/editor/editorinteractive.cc:132
+#: ../../../../src/editor/editorinteractive.cc:133
 #: ../../../../src/wui/interactive_gamebase.cc:83
 msgid "Show / Hide"
 msgstr "Visa / Dölj"
 
-#: ../../../../src/editor/editorinteractive.cc:145
+#: ../../../../src/editor/editorinteractive.cc:146
 msgid "Tool size"
 msgstr "Verktygsstorlek"
 
-#: ../../../../src/editor/editorinteractive.cc:160
+#: ../../../../src/editor/editorinteractive.cc:161
 #: ../../../../src/wlapplication_options.cc:457
 msgid "Undo"
 msgstr "Ångra"
 
-#: ../../../../src/editor/editorinteractive.cc:165
+#: ../../../../src/editor/editorinteractive.cc:166
 #: ../../../../src/wlapplication_options.cc:461
 msgid "Redo"
 msgstr "Gör om"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/editor/editorinteractive.cc:177
+#: ../../../../src/editor/editorinteractive.cc:178
 #: ../../../../src/wlapplication_options.cc:855
 #: ../../../../src/wui/buildingwindow.cc:448
 #: ../../../../src/wui/interactive_player.cc:238
@@ -339,7 +340,7 @@ msgid "Help"
 msgstr "Hjälp"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../../../src/editor/editorinteractive.cc:212
+#: ../../../../src/editor/editorinteractive.cc:213
 #: ../../../../src/editor/ui_menus/main_menu_new_map.cc:40
 #: ../../../../src/ui_fsmenu/main.cc:427
 #: ../../../../src/wlapplication_options.cc:440
@@ -347,7 +348,7 @@ msgid "New Map"
 msgstr "Ny karta"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../../../src/editor/editorinteractive.cc:221
+#: ../../../../src/editor/editorinteractive.cc:222
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:853
 #: ../../../../src/wlapplication_options.cc:445
 msgid "New Random Map"
@@ -355,7 +356,7 @@ msgstr "Ny slumpmässig karta"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/editor/editorinteractive.cc:229
+#: ../../../../src/editor/editorinteractive.cc:230
 #: ../../../../src/editor/ui_menus/main_menu_load_map.cc:34
 #: ../../../../src/ui_fsmenu/main.cc:432
 #: ../../../../src/wlapplication_options.cc:846
@@ -364,19 +365,19 @@ msgstr "Ladda karta"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/editor/editorinteractive.cc:237
+#: ../../../../src/editor/editorinteractive.cc:238
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:53
 #: ../../../../src/wlapplication_options.cc:849
 msgid "Save Map"
 msgstr "Spara karta"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../../../src/editor/editorinteractive.cc:242
+#: ../../../../src/editor/editorinteractive.cc:243
 msgid "Publish Map Online…"
 msgstr "Publicera karta online..."
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../../../src/editor/editorinteractive.cc:250
+#: ../../../../src/editor/editorinteractive.cc:251
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:227
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:62
 #: ../../../../src/wlapplication_options.cc:453
@@ -385,34 +386,34 @@ msgstr "Inställningar för karta"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/editor/editorinteractive.cc:255
+#: ../../../../src/editor/editorinteractive.cc:256
 #: ../../../../src/wlapplication_options.cc:852
 msgid "Exit Editor"
 msgstr "Stäng kartbyggare"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:299
+#: ../../../../src/editor/editorinteractive.cc:300
 msgid "Change height"
 msgstr "Ändra höjd"
 
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:302
+#: ../../../../src/editor/editorinteractive.cc:303
 msgid "Change the terrain height"
 msgstr "Ändra terränghöjden"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:309
+#: ../../../../src/editor/editorinteractive.cc:310
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:98
 msgid "Random height"
 msgstr "Slumpmässig höjd"
 
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:312
+#: ../../../../src/editor/editorinteractive.cc:313
 msgid "Set the terrain height to random values"
 msgstr "Ändra terränghöjden slumpmässigt"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:319
+#: ../../../../src/editor/editorinteractive.cc:320
 #: ../../../../src/editor/ui_menus/field_info_window.cc:139
 #: ../../../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:92
 #: ../../../../src/wui/minimap.cc:158
@@ -420,35 +421,35 @@ msgid "Terrain"
 msgstr "Terräng"
 
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:322
+#: ../../../../src/editor/editorinteractive.cc:323
 msgid "Change the map’s terrain"
 msgstr "Ändra kartans terräng"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:330
+#: ../../../../src/editor/editorinteractive.cc:331
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:80
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:169
 msgid "Immovables"
 msgstr "Fasta hinder"
 
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:333
+#: ../../../../src/editor/editorinteractive.cc:334
 msgid "Add or remove immovables"
 msgstr "Lägg till eller ta bort fasta föremål"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:340
+#: ../../../../src/editor/editorinteractive.cc:341
 #: ../../../../src/editor/ui_menus/tool_place_critter_options_menu.cc:47
 msgid "Animals"
 msgstr "Djur"
 
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:343
+#: ../../../../src/editor/editorinteractive.cc:344
 msgid "Add or remove animals"
 msgstr "Lägg till eller ta bort djur"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:351
+#: ../../../../src/editor/editorinteractive.cc:352
 #: ../../../../src/editor/ui_menus/field_info_window.cc:220
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:114
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:41
@@ -458,73 +459,73 @@ msgid "Resources"
 msgstr "Resurser"
 
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:354
+#: ../../../../src/editor/editorinteractive.cc:355
 msgid "Set or change resources"
 msgstr "Placera ut eller ändra resurser"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:358
+#: ../../../../src/editor/editorinteractive.cc:359
 msgid "Port spaces"
 msgstr "Hamnplatser"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:361
+#: ../../../../src/editor/editorinteractive.cc:362
 msgid "Add or remove port spaces"
 msgstr "Lägg till eller ta bort hamnplatser"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:369
+#: ../../../../src/editor/editorinteractive.cc:370
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:716
 #: ../../../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "Spelare"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:372
+#: ../../../../src/editor/editorinteractive.cc:373
 msgid "Set number of players and their names, tribes and starting positions"
 msgstr "Ställ in antal spelare och deras namn, stammar och startpositioner"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:376
+#: ../../../../src/editor/editorinteractive.cc:377
 msgid "Map origin"
 msgstr "Kartans origo"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:379
+#: ../../../../src/editor/editorinteractive.cc:380
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
 msgstr "Välj vilken position som ska ha koordinaterna (0, 0). Detta kommer vara det övre vänstra hörnet på en genererad minikarta."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:387
+#: ../../../../src/editor/editorinteractive.cc:388
 msgid "Map size"
 msgstr "Kartstorlek"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:390
+#: ../../../../src/editor/editorinteractive.cc:391
 msgid "Change the map’s size"
 msgstr "Ändra kartans storlek"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:394
+#: ../../../../src/editor/editorinteractive.cc:395
 msgid "Information"
 msgstr "Information"
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:397
+#: ../../../../src/editor/editorinteractive.cc:398
 msgid "Click on a field to show information about it"
 msgstr "Klicka på ett fält för att visa information om det"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../../../src/editor/editorinteractive.cc:401
+#: ../../../../src/editor/editorinteractive.cc:402
 #: ../../../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../../../src/wlapplication_options.cc:516
 msgid "Tool History"
 msgstr "Verktygshistorik"
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
-#: ../../../../src/editor/editorinteractive.cc:404
+#: ../../../../src/editor/editorinteractive.cc:405
 msgid "Restore previous tool settings"
 msgstr "Återskapa föregående verktygsinställningar"
 
@@ -534,12 +535,12 @@ msgstr "Återskapa föregående verktygsinställningar"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#: ../../../../src/editor/editorinteractive.cc:476
+#: ../../../../src/editor/editorinteractive.cc:477
 #: ../../../../src/wui/interactive_gamebase.cc:271
 msgid "Hide Building Spaces"
 msgstr "Dölj byggnadsytor"
 
-#: ../../../../src/editor/editorinteractive.cc:476
+#: ../../../../src/editor/editorinteractive.cc:477
 #: ../../../../src/ui_fsmenu/options.cc:292
 #: ../../../../src/wui/interactive_gamebase.cc:271
 msgid "Show Building Spaces"
@@ -549,15 +550,15 @@ msgstr "Visa byggnadsytor"
 #. show maximum
 #. * building spaces that will be available if all immovables (trees, rocks,
 #. etc.) are removed
-#: ../../../../src/editor/editorinteractive.cc:483
+#: ../../../../src/editor/editorinteractive.cc:484
 msgid "Hide Maximum Building Spaces"
 msgstr "Dölj maximala byggnadsytor"
 
-#: ../../../../src/editor/editorinteractive.cc:484
+#: ../../../../src/editor/editorinteractive.cc:485
 msgid "Show Maximum Building Spaces"
 msgstr "Visa maximala byggnadsytor"
 
-#: ../../../../src/editor/editorinteractive.cc:487
+#: ../../../../src/editor/editorinteractive.cc:488
 msgid ""
 "Toggle whether to show maximum building spaces that will be available if all"
 " immovables (trees, rocks, etc.) are removed"
@@ -565,99 +566,99 @@ msgstr "Växla mellan att visa och dölja maximala byggnadsytor som blir tillgä
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map height heat map is shown
-#: ../../../../src/editor/editorinteractive.cc:494
+#: ../../../../src/editor/editorinteractive.cc:495
 msgid "Disable height heat map"
 msgstr ""
 
-#: ../../../../src/editor/editorinteractive.cc:495
+#: ../../../../src/editor/editorinteractive.cc:496
 msgid "Enable height heat map"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
-#: ../../../../src/editor/editorinteractive.cc:503
+#: ../../../../src/editor/editorinteractive.cc:504
 msgid "Hide Grid"
 msgstr "Dölj rutnät"
 
-#: ../../../../src/editor/editorinteractive.cc:503
+#: ../../../../src/editor/editorinteractive.cc:504
 msgid "Show Grid"
 msgstr "Visa rutnät"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the oceans are shown
-#: ../../../../src/editor/editorinteractive.cc:510
+#: ../../../../src/editor/editorinteractive.cc:511
 msgid "Hide Oceans"
-msgstr ""
+msgstr "Dölj oceaner"
 
-#: ../../../../src/editor/editorinteractive.cc:510
+#: ../../../../src/editor/editorinteractive.cc:511
 msgid "Show Oceans"
-msgstr ""
+msgstr "Visa oceaner"
 
-#: ../../../../src/editor/editorinteractive.cc:513
+#: ../../../../src/editor/editorinteractive.cc:514
 msgid ""
 "Display separate water bodies with differently coloured overlays to see "
 "which coasts can be connected by shipping routes"
-msgstr ""
+msgstr "Visa olika vattenmassor med olikfärgade överlagringar för att se vilka kuster som kan anslutas via fraktvägar"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
 #. *  (trees, rocks etc.) are shown
-#: ../../../../src/editor/editorinteractive.cc:520
+#: ../../../../src/editor/editorinteractive.cc:521
 msgid "Hide Immovables"
 msgstr "Dölj fasta föremål"
 
-#: ../../../../src/editor/editorinteractive.cc:520
+#: ../../../../src/editor/editorinteractive.cc:521
 msgid "Show Immovables"
 msgstr "Visa fasta föremål"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
-#: ../../../../src/editor/editorinteractive.cc:525
+#: ../../../../src/editor/editorinteractive.cc:526
 msgid "Hide Animals"
 msgstr "Dölj djur"
 
-#: ../../../../src/editor/editorinteractive.cc:525
+#: ../../../../src/editor/editorinteractive.cc:526
 msgid "Show Animals"
 msgstr "Visa djur"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. resources are shown
-#: ../../../../src/editor/editorinteractive.cc:531
+#: ../../../../src/editor/editorinteractive.cc:532
 msgid "Hide Resources"
 msgstr "Dölj resurser"
 
-#: ../../../../src/editor/editorinteractive.cc:531
+#: ../../../../src/editor/editorinteractive.cc:532
 msgid "Show Resources"
 msgstr "Visa resurser"
 
-#: ../../../../src/editor/editorinteractive.cc:582
+#: ../../../../src/editor/editorinteractive.cc:583
 msgid "Unsupported Format"
 msgstr "Format som inte stöds"
 
-#: ../../../../src/editor/editorinteractive.cc:583
+#: ../../../../src/editor/editorinteractive.cc:584
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr "Widelands kunde inte ladda filen \"%s\". Filformatet verkar vara inkompatibelt."
 
-#: ../../../../src/editor/editorinteractive.cc:648
+#: ../../../../src/editor/editorinteractive.cc:649
 msgid "Exit Editor Confirmation"
 msgstr "Bekräftelse, lämna redigeraren"
 
-#: ../../../../src/editor/editorinteractive.cc:648
+#: ../../../../src/editor/editorinteractive.cc:649
 msgid "Unsaved Map"
 msgstr "Osparad karta"
 
-#: ../../../../src/editor/editorinteractive.cc:649
+#: ../../../../src/editor/editorinteractive.cc:650
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Kartan är osparad, vill du verkligen avsluta?"
 
-#: ../../../../src/editor/editorinteractive.cc:650
+#: ../../../../src/editor/editorinteractive.cc:651
 msgid "Are you sure you wish to exit the editor?"
 msgstr "Är du säker på att du vill lämna kartredigeraren?"
 
-#: ../../../../src/editor/editorinteractive.cc:1287
+#: ../../../../src/editor/editorinteractive.cc:1274
 #: ../../../../src/logic/addons.cc:48 ../../../../src/ui_basic/dropdown.cc:358
 #: ../../../../src/ui_basic/dropdown.cc:360
 #: ../../../../src/ui_fsmenu/addons/contact.cc:81
@@ -681,7 +682,7 @@ msgstr "Är du säker på att du vill lämna kartredigeraren?"
 msgid "Error"
 msgstr "Fel"
 
-#: ../../../../src/editor/editorinteractive.cc:1289
+#: ../../../../src/editor/editorinteractive.cc:1276
 #: ../../../../src/ui_fsmenu/main.cc:278 ../../../../src/wlapplication.cc:1970
 #, c-format
 msgid ""
@@ -693,13 +694,13 @@ msgid ""
 "Please add this information to your report."
 msgstr "Ett fel har uppstått. Felmeddelandet är:\n\n%1$s\n\nVar vänlig och rapportera detta problem för att hjälpa till att förbättra Widelands. Du kan hitta relaterade meddelanden i standard output (stdout.txt i Windows). Du använder version%2$s.\nVar vänlig och bifoga denna information till din rapport."
 
-#: ../../../../src/editor/editorinteractive.cc:1325
+#: ../../../../src/editor/editorinteractive.cc:1312
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Läser in karta “%s”…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../../../src/editor/editorinteractive.cc:1347
+#: ../../../../src/editor/editorinteractive.cc:1334
 #: ../../../../src/editor/ui_menus/main_menu_new_map.cc:115
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:629
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:144
@@ -708,7 +709,7 @@ msgid "No Name"
 msgstr "Inget namn"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../../../src/editor/editorinteractive.cc:1350
+#: ../../../../src/editor/editorinteractive.cc:1337
 #: ../../../../src/editor/ui_menus/main_menu_new_map.cc:116
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:630
 #: ../../../../src/logic/map.h:238
@@ -717,20 +718,20 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Okänd"
 
-#: ../../../../src/editor/editorinteractive.cc:1374
+#: ../../../../src/editor/editorinteractive.cc:1361
 msgid "Loading world…"
 msgstr "Laddar värld..."
 
-#: ../../../../src/editor/editorinteractive.cc:1556
+#: ../../../../src/editor/editorinteractive.cc:1543
 #, c-format
 msgid "Tool gaps: %u%%"
 msgstr "Verktygsmellanrum: %u%%"
 
-#: ../../../../src/editor/editorinteractive.cc:1579
+#: ../../../../src/editor/editorinteractive.cc:1566
 msgid "Publish Map"
 msgstr "Publicera karta"
 
-#: ../../../../src/editor/editorinteractive.cc:1580
+#: ../../../../src/editor/editorinteractive.cc:1567
 #, c-format
 msgid ""
 "Are you certain that you want to publish this map online?\n"
@@ -742,50 +743,50 @@ msgid ""
 "Hint: %5$s\n"
 msgstr "Är du säker på att du vill publicera denna karta online?\n\nNamn: %1$s\nInternt namn: %2$s\nUpphovsman: %3$s\nBeskrivning: %4$s\nTips: %5$s\n"
 
-#: ../../../../src/editor/editorinteractive.cc:1604
+#: ../../../../src/editor/editorinteractive.cc:1591
 msgid "Login Error"
 msgstr "Fel vid försök till inloggning"
 
-#: ../../../../src/editor/editorinteractive.cc:1609
+#: ../../../../src/editor/editorinteractive.cc:1596
 msgid "Uploading Add-On…"
 msgstr "Laddar upp tillägg..."
 
-#: ../../../../src/editor/editorinteractive.cc:1610
+#: ../../../../src/editor/editorinteractive.cc:1597
 msgid "Saving map…"
 msgstr "Sparar karta..."
 
-#: ../../../../src/editor/editorinteractive.cc:1629
+#: ../../../../src/editor/editorinteractive.cc:1616
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:315
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:370
 msgid "Error Saving Map!"
 msgstr "Fel när kartan skulle sparas!"
 
-#: ../../../../src/editor/editorinteractive.cc:1635
+#: ../../../../src/editor/editorinteractive.cc:1622
 msgid "Packaging add-on…"
 msgstr "Packar tillägg..."
 
-#: ../../../../src/editor/editorinteractive.cc:1686
+#: ../../../../src/editor/editorinteractive.cc:1673
 msgid "Add-On Generation Error"
 msgstr "Fel vid generering av tillägg"
 
-#: ../../../../src/editor/editorinteractive.cc:1687
+#: ../../../../src/editor/editorinteractive.cc:1674
 msgid "The add-on could not be written to the disk."
 msgstr "Tillägget kunde inte sparas på disken."
 
-#: ../../../../src/editor/editorinteractive.cc:1694
+#: ../../../../src/editor/editorinteractive.cc:1681
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:108
 msgid "Uploading…"
 msgstr "Laddar upp..."
 
-#: ../../../../src/editor/editorinteractive.cc:1700
+#: ../../../../src/editor/editorinteractive.cc:1687
 msgid "Upload Error"
 msgstr "Uppladdningsfel"
 
-#: ../../../../src/editor/editorinteractive.cc:1722
+#: ../../../../src/editor/editorinteractive.cc:1709
 msgid "Success"
 msgstr "Lyckad uppladdning"
 
-#: ../../../../src/editor/editorinteractive.cc:1723
+#: ../../../../src/editor/editorinteractive.cc:1710
 msgid "The add-on was uploaded successfully."
 msgstr "Uppladdning av tillägget lyckades."
 
@@ -1016,7 +1017,7 @@ msgstr "Beskrivning: %s"
 #: ../../../../src/editor/ui_menus/field_info_window.cc:251
 msgctxt "addons"
 msgid "(none)"
-msgstr ""
+msgstr "(inga)"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:258
 #, c-format
@@ -1376,19 +1377,19 @@ msgstr "Kart-ID:"
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:257
 msgctxt "map_generator"
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 #. * TRANSLATORS: Random Climate
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:285
 msgctxt "climate"
 msgid "Random"
-msgstr ""
+msgstr "Slumpmässigt"
 
 #. * TRANSLATORS: Default Terrain Distribution
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:316
 msgctxt "terrain"
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:318
 msgid "Alpine"
@@ -1408,7 +1409,7 @@ msgstr "Ödemark"
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:322
 msgctxt "terrain"
 msgid "Random"
-msgstr ""
+msgstr "Slumpmässig"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:633
 msgid "Generating random map…"
@@ -1870,7 +1871,7 @@ msgstr "Widelands fungerar inte eftersom din grafikdrivrutin är för gammal."
 #: ../../../../src/graphic/gl/initialize.cc:227
 #, c-format
 msgid "The %1$s version needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "%1$s-versionen måste vara version %2$u.%3$u eller nyare."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -2061,7 +2062,7 @@ msgstr "Inga"
 #: ../../../../src/logic/addons.cc:281
 #, c-format
 msgid "%1$s<br>• %2$s (version %3$s)"
-msgstr ""
+msgstr "%1$s<br>• %2$s (version %3$s)"
 
 #: ../../../../src/logic/addons.cc:311
 msgid "No game-relevant add-ons in use."
@@ -2077,47 +2078,47 @@ msgstr[1] "%u tillägg relevanta för spelet används."
 #. * TRANSLATORS: "12 steps northwest of Port1"
 #: ../../../../src/logic/detected_port_space.cc:52
 msgid "northwest"
-msgstr ""
+msgstr "nordväst"
 
 #. * TRANSLATORS: "12 steps northeast of Port1"
 #: ../../../../src/logic/detected_port_space.cc:56
 msgid "northeast"
-msgstr ""
+msgstr "nordöst"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../../../src/logic/detected_port_space.cc:60
 msgid "southwest"
-msgstr ""
+msgstr "sydväst"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../../../src/logic/detected_port_space.cc:64
 msgid "southeast"
-msgstr ""
+msgstr "sydöst"
 
 #. * TRANSLATORS: "12 steps north of Port1"
 #: ../../../../src/logic/detected_port_space.cc:68
 msgid "north"
-msgstr ""
+msgstr "norr"
 
 #. * TRANSLATORS: "12 steps south of Port1"
 #: ../../../../src/logic/detected_port_space.cc:72
 msgid "south"
-msgstr ""
+msgstr "söder"
 
 #. * TRANSLATORS: "12 steps west of Port1"
 #: ../../../../src/logic/detected_port_space.cc:76
 msgid "west"
-msgstr ""
+msgstr "väster"
 
 #. * TRANSLATORS: "12 steps east of Port1"
 #: ../../../../src/logic/detected_port_space.cc:80
 msgid "east"
-msgstr ""
+msgstr "öster"
 
 #: ../../../../src/logic/detected_port_space.cc:88
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s"
-msgstr ""
+msgstr "Hamnplats utan ägare upptäckt vid %1$s av %2$s"
 
 #. * TRANSLATORS: "Unowned port space discovered at 1:11 by Ship2 33 steps
 #. north of
@@ -2133,7 +2134,7 @@ msgstr[1] ""
 #: ../../../../src/logic/detected_port_space.cc:101
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s"
-msgstr ""
+msgstr "Hamnplats som tillhör %1$s upptäckt vid %2$s av %3$s"
 
 #. * TRANSLATORS: "Port space of Player1 discovered at 2:22 by Ship3 44 steps
 #. north
@@ -2150,49 +2151,49 @@ msgstr[1] ""
 #: ../../../../src/logic/detected_port_space.cc:120
 msgctxt "direction"
 msgid "NW"
-msgstr ""
+msgstr "NV"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northeast.
 #: ../../../../src/logic/detected_port_space.cc:124
 msgctxt "direction"
 msgid "NE"
-msgstr ""
+msgstr "NÖ"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southwest.
 #: ../../../../src/logic/detected_port_space.cc:128
 msgctxt "direction"
 msgid "SW"
-msgstr ""
+msgstr "SV"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southeast.
 #: ../../../../src/logic/detected_port_space.cc:132
 msgctxt "direction"
 msgid "SE"
-msgstr ""
+msgstr "SÖ"
 
 #. * TRANSLATORS: This is an abbreviated direction: North.
 #: ../../../../src/logic/detected_port_space.cc:136
 msgctxt "direction"
 msgid "N"
-msgstr ""
+msgstr "N"
 
 #. * TRANSLATORS: This is an abbreviated direction: South.
 #: ../../../../src/logic/detected_port_space.cc:140
 msgctxt "direction"
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #. * TRANSLATORS: This is an abbreviated direction: West.
 #: ../../../../src/logic/detected_port_space.cc:144
 msgctxt "direction"
 msgid "W"
-msgstr ""
+msgstr "V"
 
 #. * TRANSLATORS: This is an abbreviated direction: East.
 #: ../../../../src/logic/detected_port_space.cc:148
 msgctxt "direction"
 msgid "E"
-msgstr ""
+msgstr "Ö"
 
 #. * TRANSLATORS: Placeholders are gametime and shipname. Keep this short.
 #: ../../../../src/logic/detected_port_space.cc:157
@@ -3221,6 +3222,50 @@ msgstr "Misslyckades spara"
 #: ../../../../src/wui/game_main_menu_save_game.cc:321
 msgid "Game saved"
 msgstr "Spel sparat"
+
+#: ../../../../src/map_io/map_buildingdata_packet.cc:887
+msgid "Building’s inputs changed!"
+msgstr ""
+
+#. * TRANSLATORS: The argument is the buiding name
+#: ../../../../src/map_io/map_buildingdata_packet.cc:898
+#, c-format
+msgid "%s: the building's inputs have changed."
+msgstr ""
+
+#. * TRANSLATORS: Amount and type of space between two sentences
+#: ../../../../src/map_io/map_buildingdata_packet.cc:901
+msgctxt "sentence_separator"
+msgid " "
+msgstr ""
+
+#: ../../../../src/map_io/map_buildingdata_packet.cc:902
+msgid "The following wares have been deleted:"
+msgstr ""
+
+#: ../../../../src/map_io/map_buildingdata_packet.cc:909
+#, c-format
+msgid "%1$u piece of %2$s"
+msgid_plural "%1$u pieces of %2$s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../../../src/map_io/map_buildingdata_packet.cc:915
+#, c-format
+msgid "%1$u piece of an unknown ware"
+msgid_plural "%1$u pieces of unknown wares"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../../../src/map_io/map_buildingdata_packet.cc:921
+msgid ""
+"The game was probably saved with a different Widelands version or with "
+"different enabled add-ons."
+msgstr ""
+
+#: ../../../../src/map_io/map_buildingdata_packet.cc:924
+msgid "Please review the current production programs and input settings."
+msgstr ""
 
 #: ../../../../src/map_io/map_saver.cc:85
 #, c-format
@@ -9688,7 +9733,7 @@ msgid "Error Saving Game!"
 msgstr "Fel vid sparning av spel!"
 
 #: ../../../../src/wui/game_message_menu.cc:53
-#: ../../../../src/wui/game_message_menu.cc:613
+#: ../../../../src/wui/game_message_menu.cc:615
 msgid "Messages: Inbox"
 msgstr "Meddelande: Inkorg"
 
@@ -9713,7 +9758,7 @@ msgid "Sent"
 msgstr "Skickat"
 
 #: ../../../../src/wui/game_message_menu.cc:114
-#: ../../../../src/wui/game_message_menu.cc:616
+#: ../../../../src/wui/game_message_menu.cc:618
 msgid "Show Archive"
 msgstr "Visa arkiv"
 
@@ -9723,40 +9768,40 @@ msgid "Center main mapview on location"
 msgstr "Centrera kartan på platsen"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:534
+#: ../../../../src/wui/game_message_menu.cc:535
 msgid "Show all messages"
 msgstr "Visa alla meddelanden"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:546
+#: ../../../../src/wui/game_message_menu.cc:547
 msgid "Show geologists’ messages only"
 msgstr "Visa bara geologmeddelanden"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:551
+#: ../../../../src/wui/game_message_menu.cc:552
 msgid "Show economy messages only"
 msgstr "Visa endast ekonomimeddelanden"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:556
+#: ../../../../src/wui/game_message_menu.cc:557
 msgid "Show seafaring messages only"
 msgstr "Visa endast sjöfartsmeddelanden"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:561
+#: ../../../../src/wui/game_message_menu.cc:562
 msgid "Show warfare messages only"
 msgstr "Visa endast krigsmeddelanden"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:566
+#: ../../../../src/wui/game_message_menu.cc:567
 msgid "Show scenario messages only"
 msgstr "Visa endast scenariomeddelanden"
 
-#: ../../../../src/wui/game_message_menu.cc:606
+#: ../../../../src/wui/game_message_menu.cc:608
 msgid "Messages: Archive"
 msgstr "Meddelanden: Arkiv"
 
-#: ../../../../src/wui/game_message_menu.cc:609
+#: ../../../../src/wui/game_message_menu.cc:611
 msgid "Show Inbox"
 msgstr "Visa inkorg"
 
@@ -9764,7 +9809,7 @@ msgstr "Visa inkorg"
 #. for 1
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
-#: ../../../../src/wui/game_message_menu.cc:641
+#: ../../../../src/wui/game_message_menu.cc:643
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
@@ -9772,7 +9817,7 @@ msgstr[0] "Återställ valt %d meddelande"
 msgstr[1] "Återställ valda %d meddelanden"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:646
+#: ../../../../src/wui/game_message_menu.cc:648
 msgid "Restore selected message"
 msgstr "Återställ valt meddelande"
 
@@ -9780,7 +9825,7 @@ msgstr "Återställ valt meddelande"
 #. for 1
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
-#: ../../../../src/wui/game_message_menu.cc:656
+#: ../../../../src/wui/game_message_menu.cc:658
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
@@ -9788,7 +9833,7 @@ msgstr[0] "Arkivera valt %d meddelande"
 msgstr[1] "Arkivera valda %d meddelanden"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:661
+#: ../../../../src/wui/game_message_menu.cc:663
 msgid "Archive selected message"
 msgstr "Arkivera valt meddelande"
 

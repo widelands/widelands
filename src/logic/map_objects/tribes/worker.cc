@@ -857,7 +857,7 @@ bool Worker::run_callobject(Game& game, State& state, const Action& action) {
 			w->reset_tasks(game);  //  TODO(unknown): ask the worker more nicely
 			w->start_task_program(game, action.sparam1);
 		} else {
-			throw wexception("MO(%i): [actObject]: bad bob type %s", serial(),
+			throw wexception("MO(%u): [actObject]: bad bob type %s", serial(),
 			                 to_string(bob->descr().type()).c_str());
 		}
 	} else {

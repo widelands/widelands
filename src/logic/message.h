@@ -39,20 +39,22 @@ struct Message {
 		kScenario,
 
 		kSeafaring,
-
-		kEconomy,  // start of economy section
-		kTradeOfferReceived,
-		kTradeOfferAccepted,
-		kTradeOfferRejected,
-		kTradeOfferRetracted,
-		kTradeComplete,
-		kTradeCancelled,
-		kEconomySiteOccupied,  // end of economy section
-
-		kWarfare,  // everything starting from here is warfare
+		kEconomy,              // economy
+		kEconomySiteOccupied,  // economy
+		kWarfare,              // warfare messages
 		kWarfareSiteDefeated,
 		kWarfareSiteLost,
 		kWarfareUnderAttack,
+		kWarfareEnd = kWarfareUnderAttack,  // end of warfare messages
+		kTradeOfferReceived,                // trading
+		kEconomyLoadGame,  // only this type is allowed in game loading code
+		                   // must not be used elsewhere
+
+		kTradeOfferAccepted,   // trading
+		kTradeOfferRejected,   // trading
+		kTradeOfferRetracted,  // trading
+		kTradeComplete,        // trading
+		kTradeCancelled,       // trading
 	};
 
 	/**
@@ -133,14 +135,20 @@ struct Message {
 	 * Returns the main type for the message's sub type
 	 */
 	[[nodiscard]] Message::Type message_type_category() const {
-		if (type_ >= Widelands::Message::Type::kWarfare) {
+		if (type_ >= Widelands::Message::Type::kWarfare &&
+		    type_ <= Widelands::Message::Type::kWarfareEnd) {
 			return Widelands::Message::Type::kWarfare;
 		}
-		if (type_ >= Widelands::Message::Type::kEconomy &&
-		    type_ <= Widelands::Message::Type::kEconomySiteOccupied) {
+		if (type_ == Widelands::Message::Type::kEconomy ||
+		    type_ == Widelands::Message::Type::kEconomySiteOccupied ||
+		    type_ == Widelands::Message::Type::kEconomyLoadGame) {
 			return Widelands::Message::Type::kEconomy;
 		}
 		return type_;
+	}
+
+	[[nodiscard]] bool allowed_during_game_loading() const {
+		return type_ == Widelands::Message::Type::kEconomyLoadGame;
 	}
 
 private:

@@ -463,20 +463,20 @@ wl.Descriptions():new_tribe {
          },
          {
             name = "spider_silk",
-            default_target_quantity = 10,
+            default_target_quantity = 15,
             preciousness = 11,
             helptexts = {
                -- TRANSLATORS: Helptext for an Atlantean ware: Spider Silk
-               purpose = pgettext("atlanteans_ware", "Spider silk is produced by spiders, which are bred by spider farms. It is processed into spidercloth or tabards in a weaving mill.")
+               purpose = pgettext("atlanteans_ware", "Spider silk is produced by spiders, which are bred by spider farms. It can be processed into spidercloth or tabards in a weaving mill, or used to make tools in the toolsmithy.")
             }
          },
          {
             name = "spidercloth",
-            default_target_quantity = 20,
+            default_target_quantity = 15,
             preciousness = 7,
             helptexts = {
                -- TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
-               purpose = pgettext("atlanteans_ware", "Spidercloth is made out of spider silk in a weaving mill. It is used in the toolsmithy and the shipyard. Also some higher developed buildings need spidercloth for their construction.")
+               purpose = pgettext("atlanteans_ware", "Spidercloth is made out of spider silk in a weaving mill. It is used in the shipyard. Also some higher developed buildings need spidercloth for their construction.")
             }
          },
       },
