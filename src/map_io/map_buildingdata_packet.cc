@@ -889,7 +889,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				// Probably not worth adding graphic/text_layout as a dependency. It would
 				// require specifying the font styles too, but we already get that through
 				// Building::send_message().
-				// TODO(tothxa): The main problem is the hard-coded vspace gap.
+				// TODO(tothxa): The main problem are the hard-coded spacing gaps.
 				static const std::string paragraph_separator("</p><vspace gap=8><p>");
 
 				std::string body("<p>");
@@ -899,9 +899,9 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				if (!deleted_wares.empty() || deleted_unknown > 0) {
 					body += paragraph_separator;
 					body += _("The following wares have been deleted:");
-					body += paragraph_separator;
+					body += "</p><p>";
 
-					static const std::string list_entry(" • %s</p><p>");  // ugly, but simple
+					static const std::string list_entry("<space gap=8>• %s</p><p>");  // ugly, but simple
 					for (const WareAmount& deleted : deleted_wares) {
 						body += format(
 						   list_entry,
