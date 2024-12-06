@@ -635,7 +635,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	log_info("============== Generating Map ==============\n");
 	log_info("ID:            %s\n", map_id_edit_.get_text().c_str());
 	log_info("Random number: %u\n", map_info.mapNumber);
-	log_info("Dimensions:    %d x %d\n", map_info.w, map_info.h);
+	log_info("Dimensions:    %u x %u\n", map_info.w, map_info.h);
 	log_info("Players:       %d\n", map_info.numPlayers);
 	log_info("World:         %s\n", map_info.world_name.c_str());
 	switch (map_info.resource_amount) {

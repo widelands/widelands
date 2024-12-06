@@ -18,6 +18,7 @@
 
 #include "map_io/map_players_messages_packet.h"
 
+#include <cassert>
 #include <memory>
 
 #include "base/log.h"
@@ -31,7 +32,8 @@
 
 namespace Widelands {
 
-constexpr uint32_t kCurrentPacketVersion = 2;
+constexpr uint32_t kCurrentPacketVersion = 2;  // since build-19
+constexpr uint32_t kMinPacketVersion = 2;
 
 constexpr const char* kPlayerDirnameTemplate = "player/%u";
 constexpr const char* kFilenameTemplate = "player/%u/messages";
@@ -56,30 +58,38 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 			continue;
 		}
 		uint32_t packet_version = prof.get_safe_section("global").get_positive("packet_version");
-		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
+		if (kMinPacketVersion <= packet_version && packet_version <= kCurrentPacketVersion) {
 			MessageQueue* messages = player->get_messages();
+			std::vector<Message> game_loading_messages;
 
-			{
-				const auto begin = messages->begin();
-				if (begin != messages->end()) {
-					log_err("ERROR: The message queue for player %u contains a message "
-					        "before any messages have been loaded into it. This is a bug "
-					        "in the savegame loading code. It created a new message and "
-					        "added it to the queue. This is only allowed during "
-					        "simulation, not at load. The following message will be "
-					        "removed when the queue is reset:\n"
-					        "\tstype   : %u\n"
-					        "\ttitle   : %s\n"
-					        "\tsent    : %u\n"
-					        "\tposition: (%i, %i)\n"
-					        "\tstatus  : %u\n"
-					        "\tbody    : %s\n",
-					        p, static_cast<int>(begin->second->type()), begin->second->title().c_str(),
-					        begin->second->sent().get(), begin->second->position().x,
-					        begin->second->position().y, static_cast<int>(begin->second->status()),
-					        begin->second->body().c_str());
-					messages->clear();
+			if (!messages->empty()) {
+				MutexLock m(MutexLock::ID::kMessages);
+				for (const auto& it : *messages) {
+					const Message message(*it.second);
+					if (message.allowed_during_game_loading()) {
+						game_loading_messages.emplace_back(message);
+					} else {
+						log_err("ERROR: The message queue for player %u contains a message "
+						        "before any messages have been loaded into it. This is a bug "
+						        "in the savegame loading code. It created a new message and "
+						        "added it to the queue. This is only allowed during "
+						        "simulation, not at load. The following message will be "
+						        "removed when the queue is reset:\n"
+						        "\tstype   : %u\n"
+						        "\ttitle   : %s\n"
+						        "\tsent    : %u\n"
+						        "\tposition: (%i, %i)\n"
+						        "\tstatus  : %u\n"
+						        "\tbody    : %s\n",
+						        static_cast<unsigned>(p), static_cast<unsigned>(message.type()),
+						        message.title().c_str(), message.sent().get(), message.position().x,
+						        message.position().y, static_cast<unsigned>(message.status()),
+						        message.body().c_str());
+						// Don't allow in debug builds
+						assert(message.allowed_during_game_loading());
+					}
 				}
+				messages->clear();
 			}
 
 			Time previous_message_sent(0);
@@ -119,27 +129,23 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 						assert(mol.is_object_loaded(mo));
 						serial = mo.serial();
 					}
-					// Compatibility code needed for map loading.
-					if (packet_version == 1) {
-						const std::string name = s->get_name();
-						messages->add_message(std::unique_ptr<Message>(new Message(
-						   static_cast<Message::Type>(s->get_natural("type")), sent, name,
-						   "images/wui/fieldaction/menu_build_flag.png", name, s->get_safe_string("body"),
-						   get_coords("position", extent, Coords::null(), s), serial, "", status)));
-					} else {
 
-						messages->add_message(std::unique_ptr<Message>(new Message(
-						   static_cast<Message::Type>(s->get_natural("type")), sent, s->get_name(),
-						   s->get_safe_string("icon"), s->get_safe_string("heading"),
-						   s->get_safe_string("body"), get_coords("position", extent, Coords::null(), s),
-						   serial, std::string(s->get_string("subtype", "")), status)));
-					}
+					messages->add_message(std::unique_ptr<Message>(new Message(
+					   static_cast<Message::Type>(s->get_natural("type")), sent, s->get_name(),
+					   s->get_safe_string("icon"), s->get_safe_string("heading"),
+					   s->get_safe_string("body"), get_coords("position", extent, Coords::null(), s),
+					   serial, std::string(s->get_string("subtype", "")), status)));
+
 					previous_message_sent = sent;
 				} catch (const WException& e) {
 					throw GameDataError("\"%s\": %s", s->get_name(), e.what());
 				}
 			}
 			prof.check_used();
+
+			for (const Message& message : game_loading_messages) {
+				messages->add_message(std::unique_ptr<Message>(new Message(message)));
+			}
 		} else {
 			throw UnhandledVersionError(
 			   "MapPlayersMessagesPacket", packet_version, kCurrentPacketVersion);
