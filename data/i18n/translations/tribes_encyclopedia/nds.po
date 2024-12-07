@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-03 02:40+0000\n"
+"POT-Creation-Date: 2024-12-05 03:11+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2024\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -3190,18 +3190,19 @@ msgstr "Ok de Wapensmee un de Warft bruken Planken, um Dreespitzen un Schippen t
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:472
 msgctxt "atlanteans_ware"
 msgid ""
-"Spider silk is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth or tabards in a weaving mill."
-msgstr "Spinnensied word vun Spinnen produzeert, de in Spinnentüchtereen tücht worden. ’t word in Spinnweelmöhlen to Spinnenstoff of Kluften verarbeidt."
+"Spider silk is produced by spiders, which are bred by spider farms. It can "
+"be processed into spidercloth or tabards in a weaving mill, or used to make "
+"tools in the toolsmithy."
+msgstr "Spinnensied word vun Spinnen produzeert, de in Spinnentüchtereen tücht worden. ’t word in Spinnweelmöhlen to Spinnenstoff of Kluften verarbeidt, of in de Warktüügsmee bruukt, um Warktüüg to maken."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:481
 msgctxt "atlanteans_ware"
 msgid ""
 "Spidercloth is made out of spider silk in a weaving mill. It is used in the "
-"toolsmithy and the shipyard. Also some higher developed buildings need "
-"spidercloth for their construction."
-msgstr "Spinnenstoff word in Spinnweelmöhlen ut Spinnensied maakt. ’t word vun de Warktüügsmee un de Warft bruukt. Eenige grote Husen bruken Spinnenstoff tum bauen."
+"shipyard. Also some higher developed buildings need spidercloth for their "
+"construction."
+msgstr "Spinnenstoff word in Spinnweelmöhlen ut Spinnensied maakt. ’t word vun de Warft bruukt. Eenige grote Husen bruken Spinnenstoff tum Bauen."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fish
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:492

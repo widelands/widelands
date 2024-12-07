@@ -2,14 +2,14 @@
 # Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2023
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-11-30 03:02+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2023\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2024\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -752,75 +752,75 @@ msgid ""
 "workplace and where any number of your wares can be stored until they are "
 "needed somewhere. So they act like a kind of town center, and to signify "
 "this, they get unique names."
-msgstr ""
+msgstr "Du hest villicht markt, dat de Namens-Rieg vun de Raadhuus anners is. Dat is um dat, dat dat een besünner Aard vun Huus is, wat Kraamhuus heet. Kraamhusen sünd Husen, waar diene Arbeiders sik verpuusten könen, bit se eener Warkstee towiesen worden, un waar nettglieks völe Waren verwahrt worden könen, bit se elkeenwaar bruukt worden. Se sünd also eene Aard Stadtmidde, un um dat antowiesen, kriegen se eenzigaardige Namen."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:505
 msgid ""
 "The small crowns beside the name mark it as your headquarters. As you play "
 "Widelands, you will see three kinds of warehouses, marked by little icons:"
-msgstr ""
+msgstr "De lütten Kronen tegen de Naam markeren ’t as dien Raadhuus. As du Widelands spöölst, worst du dree Aarden vun Kraamhusen to sehn kriegen, wat deese lütten Billers hebben:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:506
 msgid ""
 "The headquarters where you usually start the game. It is marked by small "
 "crowns: ♔"
-msgstr ""
+msgstr "Dat Raadhuus, waar du meesttieden dat Speel begünnst. Dat word mit lütten Kronen markeert: ♔"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:507
 msgid ""
 "Plain warehouses that simply hold wares and workers to keep them distributed"
 " all over your territory. They are marked by small houses: ⟰"
-msgstr ""
+msgstr "Normaale Kraamhusen, wat eenfach Waren un Arbeiders verwahren, um se över all dien Gewest verdeelt to hollen. Se worden mit lütten Husen markeert: ⟰"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:508
 msgid ""
 "Ports that you’ll use in seafaring. They don’t only store your wares and "
 "workers, but can also load them on your ships to send them across the seas. "
 "They are marked by small anchors: ⚓"
-msgstr ""
+msgstr "Muden, wat du bi Seefahrt bruken worst. Se verwahren nich blots diene Waren un Arbeiders, sünnern könen se ok up Schippe laden, um se över See to schippern. Se worden mit lütten Ankers markeert: ⚓"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:509
 msgid ""
 "All of them are assigned names automatically that match the tribe, but you "
 "can change their names to your liking too."
-msgstr ""
+msgstr "Se kriegen all automatisk eenen Naam, wat tum Volk passt, aver du kannst de Naam ok to wat ännern, wat di beter gefallt."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
 msgid "Change the name of your little village"
-msgstr ""
+msgstr "Änner de Naam vun dienem lütten Dörp"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:519
 msgid "Change the name of your headquarters"
-msgstr ""
+msgstr "Änner de Naam vun dienem Raadhuus"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid ""
 "In order to set a new name for your headquarters, first click on it to open "
 "its window."
-msgstr ""
+msgstr "Um eenen nejen Naam för dien Raadhuus to setten, klick ’t toeerst an, um sien Fenster uptomaken."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:521
 msgid "You will see an edit box at the top of the window showing the name."
-msgstr ""
+msgstr "Du worst boven im Fenster eene Textkist sehn, wat de Naam wiest."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:522
 msgid "All you have to do is delete the old name and type in the new one."
-msgstr ""
+msgstr "Du muttst blots daarin de ollen Naam lösken un de nejen Naam intippen."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:523
 msgid "When you’re done, just close the window."
-msgstr ""
+msgstr "Wenn du fardig büst, maak eenfach dat Fenster dicht."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:528
 msgid "Be creative"
-msgstr ""
+msgstr "Wees kreativ"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:529
 msgid ""
 "I see you closed the window without changing the name. I’m sure you can come"
 " up with something. But if you don’t want to, at least delete the old name, "
 "please, to show me you’ve found the editbox."
-msgstr ""
+msgstr "Ich seh, dat du dat Fenster dichtmaakt hest, sünner de Naam to ännern. Ick bün wiss, dat du di wat infallen laten kannst. Aver wenn du dat nich willst, löske doch bidde tominnst de ollen Naam, um mi to wiesen, dat du de Textkist funnen hest."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:540
 msgid "Archive all messages in your inbox"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-03 02:40+0000\n"
+"POT-Creation-Date: 2024-12-05 03:11+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Juanjo, 2015-2024\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
@@ -3190,18 +3190,19 @@ msgstr "El taller d’armes i la drassana també utilitzen taulons per produir d
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:472
 msgctxt "atlanteans_ware"
 msgid ""
-"Spider silk is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth or tabards in a weaving mill."
-msgstr "La seda d’aranya la produeixen les aranyes criades en granges. Es transforma en tela de seda d’aranya o tabards en tallers de teixir."
+"Spider silk is produced by spiders, which are bred by spider farms. It can "
+"be processed into spidercloth or tabards in a weaving mill, or used to make "
+"tools in the toolsmithy."
+msgstr "La seda d’aranya la produeixen les aranyes criades en granges. Es transforma en tela de seda d’aranya, en tabards als tallers de teixir o es fa servir per a fer eines als tallers d'eines."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:481
 msgctxt "atlanteans_ware"
 msgid ""
 "Spidercloth is made out of spider silk in a weaving mill. It is used in the "
-"toolsmithy and the shipyard. Also some higher developed buildings need "
-"spidercloth for their construction."
-msgstr "La tela de seda d’aranya es fa a partir de seda d’aranya en els tallers de teixir. L’empra el fabricant d’eines i el fuster de vaixells. També en necessiten alguns edificis per a la seva construcció."
+"shipyard. Also some higher developed buildings need spidercloth for their "
+"construction."
+msgstr "La tela de seda d’aranya es fa a partir de seda d’aranya en els tallers de teixir. L’empra el fuster de vaixells. També en necessiten alguns edificis per a la seva construcció."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fish
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:492
