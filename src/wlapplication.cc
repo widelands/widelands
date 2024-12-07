@@ -776,7 +776,7 @@ static void init_one_player_from_template(unsigned p,
 	}
 	if (!found_init) {
 		throw wexception(
-		   "Invalid starting condition '%s' for player %d", init_script_name.c_str(), p + 1);
+		   "Invalid starting condition '%s' for player %u", init_script_name.c_str(), p + 1);
 	}
 }
 

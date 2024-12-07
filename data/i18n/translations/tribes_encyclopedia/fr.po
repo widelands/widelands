@@ -18,6 +18,7 @@
 # GunChleoc, 2014
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
 # Julien Schneider <schneider.julien@gmail.com>, 2020
+# Laurent Godard, 2024
 # nicolas jardin <niko472006@sfr.fr>, 2016
 # Paulo Paulo <paulletilly@gmail.com>, 2021
 # Renaud Bouchard, 2015
@@ -29,9 +30,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-03 02:40+0000\n"
+"POT-Creation-Date: 2024-12-05 03:11+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Renaud Bouchard, 2016-2022,2024\n"
+"Last-Translator: Laurent Godard, 2024\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1802,7 +1803,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2239
 msgctxt "building"
 msgid "Roads and trees along the shoreline block access to water."
-msgstr ""
+msgstr "Les routes et les arbres le long du rivage bloquent l’accès à l’eau."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Ferry
 #. Yard, part 1
@@ -3122,7 +3123,7 @@ msgstr "Les ouvriers arrivent"
 #: ../../../../data/tribes/initialization/amazons/units.lua:2093
 msgctxt "amazons"
 msgid "Expert missing"
-msgstr ""
+msgstr "Expert manquant"
 
 #. TRANSLATORS: Productivity label on an Amazon building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -3130,7 +3131,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:2095
 msgctxt "amazons"
 msgid "Experts missing"
-msgstr ""
+msgstr "Experts manquants"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
@@ -3213,8 +3214,9 @@ msgstr "La fabrique d'armes et le chantier naval utilisent aussi des planches po
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:472
 msgctxt "atlanteans_ware"
 msgid ""
-"Spider silk is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth or tabards in a weaving mill."
+"Spider silk is produced by spiders, which are bred by spider farms. It can "
+"be processed into spidercloth or tabards in a weaving mill, or used to make "
+"tools in the toolsmithy."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
@@ -3222,9 +3224,9 @@ msgstr ""
 msgctxt "atlanteans_ware"
 msgid ""
 "Spidercloth is made out of spider silk in a weaving mill. It is used in the "
-"toolsmithy and the shipyard. Also some higher developed buildings need "
-"spidercloth for their construction."
-msgstr "L'étoffe en soie d'araignée est fabriquée à partir de soie d'araignée dans un atelier de tissage. Certains bâtiments plus avancés ont aussi besoin d'étoffe en soie  d'araignée pour leur construction."
+"shipyard. Also some higher developed buildings need spidercloth for their "
+"construction."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fish
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:492
@@ -3468,7 +3470,7 @@ msgid ""
 "Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
 "hammer. Make sure you’ve always got some in reserve! They are produced by "
 "the toolsmith."
-msgstr ""
+msgstr "Les géologues, les constructeurs, les armuriers, les frabriquants d'armures et les charpentiers de marine ont tous besoin d'un marteau. Assurez-vous d'en avoir toujours en réserve ! Ils sont fabriqués par le forgeron."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Milking Tongs
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:719
@@ -4036,7 +4038,7 @@ msgstr "Il y a beaucoup de pierres-précieuses ici."
 #: ../../../../data/tribes/initialization/frisians/units.lua:1517
 msgid ""
 "This tree is only planted by the Amazon tribe but can be harvested for logs."
-msgstr ""
+msgstr "Cet arbre est uniquement planté par la tribu amazonienne mais peut être récolté pour son tronc."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean warehouse: Headquarters
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1434
@@ -4056,13 +4058,13 @@ msgctxt "atlanteans_building"
 msgid ""
 "We founded this new colony, now go with Satul and do the best you can do for"
 " your tribe."
-msgstr ""
+msgstr "Nous avons fondé cette nouvelle colonie, maintenant va avec Satul et fais de ton mieux pour ta tribu."
 
 #. TRANSLATORS: Note lore_autor for an Atlantean production site: Headquarters
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1440
 msgctxt "atlanteans_building"
 msgid "Priest of Satul inaugurating you as leader of the Atleantean tribe"
-msgstr ""
+msgstr "Prêtre de Satul vous intronisant comme chef de la tribu des Atlantes"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean warehouse: Warehouse
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1448
@@ -4070,7 +4072,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools. It will help you to stabilize your economy."
-msgstr ""
+msgstr "Vos ouvriers et vos soldats y trouveront refuge. Vous pourrez également y stocker vos marchandises et vos outils. Cela vous aidera à stabiliser votre économie."
 
 #. TRANSLATORS: Note lore for an Atlantean production site: Warehouse
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1451
@@ -4079,13 +4081,13 @@ msgid ""
 "Maybe you think it’s a boring task to store, count and retrieve all this "
 "stuff, but do you really want your carriers to walk all the way to your "
 "Headquarters?"
-msgstr ""
+msgstr "Vous pensez peut-être que c’est une tâche ennuyeuse de stocker, de compter et de récupérer toutes ces choses, mais voulez-vous vraiment que vos transporteurs marchent jusqu’à votre quartier général ?"
 
 #. TRANSLATORS: Note lore_autor for an Atlantean production site: Headquarters
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1454
 msgctxt "atlanteans_building"
 msgid "Head of the warehouse"
-msgstr ""
+msgstr "Chef de l'entrepôt"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean warehouse: Port
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1462
@@ -4109,7 +4111,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This is the building where expeditions will be equipped to boldly go and "
 "find new shores."
-msgstr ""
+msgstr "C'est dans ce bâtiment que les expéditions seront équipées pour partir hardiment à la recherche de nouveaux rivages."
 
 #. TRANSLATORS: Note lore_autor for an Atlantean production site: Port
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1468
@@ -4117,7 +4119,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Ostur, the designer of the new Expedition ship class, during the opening of "
 "a new Port"
-msgstr ""
+msgstr "Ostur, le concepteur de la nouvelle classe de navires d'expédition, lors de l'ouverture d'un nouveau port"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Quarry
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1477
@@ -4137,13 +4139,13 @@ msgctxt "atlanteans_building"
 msgid ""
 "You must not assume Atlanteans will play everything soft, there are hard "
 "times we cannot avoid."
-msgstr ""
+msgstr "Il ne faut pas croire que les Atlantes vont jouer la carte de la douceur, il y a des moments difficiles que nous ne pouvons pas éviter."
 
 #. TRANSLATORS: Note lore_autor for an Atlantean production site: Quarry
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1483
 msgctxt "atlanteans_building"
 msgid "Priest of Satul asked why stones are needed for buildings"
-msgstr ""
+msgstr "Le prêtre de Satul a demandé pourquoi les pierres sont nécessaires pour les bâtiments"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Quarry,
 #. part 1
@@ -4152,7 +4154,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonecutter has to walk."
-msgstr ""
+msgstr "Ce bâtiment peut produire un granit toutes les %1$sà %2$s, suivant la distance que le tailleur de pierre doit parcourir."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Quarry,
 #. part 2
@@ -4180,7 +4182,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2098
 msgctxt "atlanteans_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "En cas de pentes ou d'obstacles sur le chemin, le temps est augmenté."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site:
 #. Woodcutter's House
@@ -4211,14 +4213,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "We want to fell trees in a clean and dignified way, therefore we use saws. "
 "An ax is a tool used by other tribes only."
-msgstr ""
+msgstr "Nous voulons abattre les arbres de manière propre et digne, c'est pourquoi nous utilisons des scies. La hache est un outil utilisé uniquement par les autres tribus."
 
 #. TRANSLATORS: Note lore_autor for an Atlantean production site: Woodcutter's
 #. House
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1502
 msgctxt "atlanteans_building"
 msgid "Atlantean woodcutter asked why saws are used to cut trees"
-msgstr ""
+msgstr "Un bûcheron atlante a demandé pourquoi des scies sont utilisées pour couper les arbres"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Woodcutter's House, part 1
@@ -4227,7 +4229,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the woodcutter has to walk."
-msgstr ""
+msgstr "Ce bâtiment peut produire un tronc toutes les %1$s à %2$s, suivant la distance que le bucheron doit parcourir."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Forester's
 #. House
@@ -4276,7 +4278,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The forester plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr ""
+msgstr "Le garde forestier plante un arbre toutes les %1$sà %2$s, suivant la distance que le tailleur de pierre doit parcourir."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Fisher's
 #. House
@@ -4306,7 +4308,7 @@ msgstr "Construisez une maison de pisciculteur près de la cabane du pêcheur po
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1544
 msgctxt "atlanteans_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Les routes et les arbres le long du rivage bloquent la pêche."
 
 #. TRANSLATORS: Note lore for an Atlantean production site: Fisher's House use
 #. some local fise song as you like
@@ -4332,7 +4334,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr ""
+msgstr "Ce bâtiment peut produire un poisson toutes les %1$s a %2$s, suivant la distance que le pêcheur doit parcourir."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Fish
 #. Breeder's House
@@ -4346,7 +4348,7 @@ msgstr "Élèvez des poissons."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1567
 msgctxt "atlanteans_building"
 msgid "The fish breeder needs open access to the coast."
-msgstr ""
+msgstr "Le pisciculteur a besoin d'un accès libre à la côte."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Fish Breeder's
 #. House
@@ -4397,7 +4399,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1588
 msgctxt "atlanteans_building"
 msgid "Hunter answering a fisher"
-msgstr ""
+msgstr "Un chasseur répond à un pêcheur"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Hunter's House, part 1
@@ -4406,7 +4408,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr ""
+msgstr "Ce bâtiment peut produire une viande toutes les %1$s à %2$s, suivant la distance que le chasseur doit parcourir."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Well
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Well
@@ -4424,19 +4426,19 @@ msgstr "Puise l'eau des profondeurs."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1603
 msgctxt "atlanteans_building"
 msgid "I hope you have checked this spot with a geologist."
-msgstr ""
+msgstr "J'espère que vous avez vérifié cet endroit avec un géologue."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Well
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1605
 msgctxt "atlanteans_building"
 msgid "Well, there is no wellbeing without a well."
-msgstr ""
+msgstr "Eh bien, il n’y a pas de bien-être sans puits."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Well
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1607
 msgctxt "atlanteans_building"
 msgid "Water carrier muttering to himself"
-msgstr ""
+msgstr "Porteur d'eau marmonnant pour lui-même"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Well,
 #. part 1
@@ -4444,7 +4446,7 @@ msgstr ""
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The carrier needs %s to get one bucket full of water."
-msgstr ""
+msgstr "Un porteur d'eau a besoin de %spour obtenir un seau d'eau."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Well,
 #. part 2
@@ -4452,7 +4454,7 @@ msgstr ""
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr ""
+msgstr "Si la ressource en eau s'épuise, le transporteur a besoin en moyenne de %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Gold
 #. Spinning Mill
@@ -4466,7 +4468,7 @@ msgstr "Filez l'or en fil d'or"
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1622
 msgctxt "atlanteans_building"
 msgid "Do not build until you have a steady gold supply."
-msgstr ""
+msgstr "Ne construisez pas tant que vous n’avez pas un approvisionnement en or stable."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Gold Spinning
 #. Mill
@@ -4475,7 +4477,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "No, we can’t spin gold thread from straw. We need real gold. What kind of "
 "fairy tale did you get that idea from?"
-msgstr ""
+msgstr "Non, on ne peut pas filer du fil d’or à partir de paille. Il nous faut de l’or véritable. De quel conte de fées as-tu tiré cette idée ?"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Gold
 #. Spinning Mill
@@ -4510,7 +4512,7 @@ msgstr "Explorez les territoires inconnus"
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1637
 msgctxt "atlanteans_building"
 msgid "Will need fish and bread to have his meal the Atlantean way."
-msgstr ""
+msgstr "Il aura besoin de poisson et de pain pour avoir son repas à la manière atlante."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site:  Scout's House
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1639
@@ -4518,21 +4520,21 @@ msgctxt "atlanteans_building"
 msgid ""
 "You do not see everything from your high towers. Sometimes you need someone "
 "to find out in person, that’s me!"
-msgstr ""
+msgstr "On ne voit pas tout depuis ses tours. Parfois, il faut que quelqu’un le découvre en personne et c’est moi !"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Scout's House
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1641
 msgctxt "atlanteans_building"
 msgid "A scout answering a soldier"
-msgstr ""
+msgstr "Un éclaireur répondant à un soldat"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Scout's
 #. House, part 1
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1644
 msgctxt "atlanteans_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Chaque voyage d'exploration d'un éclaireur prend entre %1$s et %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Sawmill
 #. TRANSLATORS: Purpose helptext for an Empire production site: Sawmill
@@ -4546,7 +4548,7 @@ msgstr "Scie le bois pour en faire des planches."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1658
 msgctxt "atlanteans_building"
 msgid "Will need at least four woodcutters for a constant supply of planks."
-msgstr ""
+msgstr "Il faudra au moins quatre bûcherons pour un approvisionnement constant de planches."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site:  Sawmill
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1660
@@ -4554,21 +4556,21 @@ msgctxt "atlanteans_building"
 msgid ""
 "The design of our sawmills makes operation simple, yet powerful. Patent "
 "pending."
-msgstr ""
+msgstr "La conception de nos scieries rend leur fonctionnement simple mais puissant. Brevet déposé."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Sawmill
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1662
 msgctxt "atlanteans_building"
 msgid "Askadus, Inventor of the vertical axis windmill"
-msgstr ""
+msgstr "Askadus, inventeur du moulin à vent à axe vertical"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Sawmill
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1664
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The sawmill needs %s on average to produce one plank."
-msgstr ""
+msgstr "La scierie à besoin en moyenne de %s pour produire une planche."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Smokery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1671
@@ -4576,7 +4578,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Smokes meat and fish to feed the scouts and miners and to train soldiers in "
 "the dungeon and labyrinth."
-msgstr ""
+msgstr "Viande et poisson fumés pour nourrir les éclaireurs et les mineurs et pour entraîner les soldats dans le donjon et le labyrinthe."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site:  Smokery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1673
