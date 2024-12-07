@@ -8,7 +8,7 @@ on:
 
 jobs:
   delete_old_artifacts:
-    name: Automated development pre-release
+    name: Clean-Up Pre-Release Artifacts
     if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' }}
     runs-on: "ubuntu-latest"
     steps:
@@ -16,7 +16,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 15
-          token: '${{ secrets.WIDELANDS_FORMAT_TOKEN }}'
       - name: Check artifacts
         # This step ensures that we only keep artifacts that were really generated from latest
         # master, not carried over from old runs.
@@ -29,13 +28,14 @@ jobs:
           do
             ARTIFACT_SHA=$(echo "$ARTIFACT" | sed -E 's/Widelands-([0-9a-f]*)-.*/\1/')
             if [ "$ARTIFACT_SHA" = "$GITHUB_SHA" ] ; then
-              MATRIX=$(echo "$ARTIFACT" | sed 's/Widelands-[0-9a-f]*-//')
-              curl -o "$ARTIFACT" "$RELEASE_URL/Widelands-daily-${MATRIX}"
-              curl -o "$ARTIFACT".md5 "$RELEASE_URL/Widelands-daily-${MATRIX}.md5"
+              MATRIX="$(echo "$ARTIFACT" | sed 's/Widelands-[0-9a-f]*-//')"
+              echo "Downloading $RELEASE_URL/Widelands-daily-${MATRIX}"
+              curl -L -o "$ARTIFACT" "$RELEASE_URL/Widelands-daily-${MATRIX}"
+              curl -L -o "$ARTIFACT".md5 "$RELEASE_URL/Widelands-daily-${MATRIX}.md5"
               CHECK_MD5="$(md5sum "${ARTIFACT}" | cut -d ' ' -f 1)"
               OLD_MD5="$(cut -d ' ' -f 1 <"${ARTIFACT}".md5)"
               if [ "$OLD_MD5" != "$CHECK_MD5" ] ; then
-                echo "::error::MD5 checksum mismatch for artifact $ARTIFACT"
+                echo "::error::MD5 checksum mismatch for artifact $ARTIFACT old:<${OLD_MD5}> current:<${CHECK_MD5}>"
                 exit 1
               fi
             else
@@ -50,12 +50,10 @@ jobs:
             FILENAME=$(basename "$ARTIFACT")
             # Move all artifacts to the current folder
             mv "$ARTIFACT" "$FILENAME"
-            mv "$ARTIFACT".md5 "$FILENAME".md5
             # Store original file names
             echo $FILENAME | tee -a artifacts.list
             # Rename artifacts to have a fixed url
             prename 's/Widelands-[0-9a-f]*-/Widelands-daily-/' "$FILENAME" \;
-            prename 's/Widelands-[0-9a-f]*-/Widelands-daily-/' "$FILENAME".md5 \;
           done
           # curl exits 23 because grep will kill it after the first match
           set +e
