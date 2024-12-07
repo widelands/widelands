@@ -50,7 +50,7 @@ jobs:
     - name: Uploading executable
       uses: actions/upload-artifact@v4
       with:
-        name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Binary Only (MinGW)
+        name: Widelands ${{ matrix.config }} Windows ${{ matrix.arch }} Binary Only (MinGW)
         path: ${{ github.workspace }}\${{ env.ARTIFACT_NAME }}.zip
     - name: InnoSetup
       if: matrix.config == 'Release'
@@ -66,6 +66,6 @@ jobs:
     - name: Uploading installer
       uses: actions/upload-artifact@v4
       with:
-        name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Installer (MinGW)
+        name: Widelands ${{ matrix.config }} Windows ${{ matrix.arch }} Installer (MinGW)
         path: ${{ github.workspace }}\${{ env.ARTIFACT_NAME }}.exe
         if-no-files-found: ignore

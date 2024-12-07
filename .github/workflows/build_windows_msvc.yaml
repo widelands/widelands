@@ -85,7 +85,7 @@ jobs:
     - name: Uploading executable
       uses: actions/upload-artifact@v4
       with:
-        name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Binary Only (MSVC)
+        name: Widelands ${{ matrix.config }} Windows ${{ matrix.arch }} Binary Only (MSVC)
         path: ${{ github.workspace }}\${{ env.ARTIFACT_NAME }}.zip
     - name: InnoSetup
       # Disabled because the installer of the mingw build can be used if needed, with the exe
@@ -102,6 +102,6 @@ jobs:
     - name: Uploading installer
       uses: actions/upload-artifact@v4
       with:
-        name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Installer (MSVC)
+        name: Widelands ${{ matrix.config }} Windows ${{ matrix.arch }} Installer (MSVC)
         path: ${{ github.workspace }}\${{ env.ARTIFACT_NAME }}.exe
         if-no-files-found: ignore
