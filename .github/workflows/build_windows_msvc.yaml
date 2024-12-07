@@ -88,6 +88,9 @@ jobs:
         name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Binary Only (MSVC)
         path: ${{ github.workspace }}\${{ env.ARTIFACT_NAME }}.zip
     - name: InnoSetup
+      # Disabled because the installer of the mingw build can be used if needed, with the exe
+      # replaced with the one from the above artifact
+      if: false
       run: |
         cd $env:GITHUB_WORKSPACE
         # Environment variables needed by our InnoSetup script
@@ -101,3 +104,4 @@ jobs:
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Installer (MSVC)
         path: ${{ github.workspace }}\${{ env.ARTIFACT_NAME }}.exe
+        if-no-files-found: ignore
