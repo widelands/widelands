@@ -1,0 +1,94 @@
+name: Clean-Up Pre-Release Artifacts
+on:
+  # This workflow should be run manually after a pre-release was created with a full build
+  # on all platforms (i.e. without skipped jobs). It is only needed when the workflow
+  # definitions have changed in a way that some old artifacts are no longer generated,
+  # e.g. because of dropped runner versions or renamed artifacts.
+  workflow_dispatch:
+
+jobs:
+  delete_old_artifacts:
+    name: Automated development pre-release
+    if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' }}
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 15
+          token: '${{ secrets.WIDELANDS_FORMAT_TOKEN }}'
+      - name: Check artifacts
+        # This step ensures that we only keep artifacts that were really generated from latest
+        # master, not carried over from old runs.
+        run: |
+          RELEASE_URL="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases/download/latest"
+          mkdir Widelands-latest
+          cd Widelands-latest
+          curl -L -O "$RELEASE_URL/artifacts.list"
+          for ARTIFACT in $(cat artifacts.list)
+          do
+            ARTIFACT_SHA=$(echo "$ARTIFACT" | sed -E 's/Widelands-([0-9a-f]*)-.*/\1/')
+            if [ "$ARTIFACT_SHA" = "$GITHUB_SHA" ] ; then
+              MATRIX=$(echo "$ARTIFACT" | sed 's/Widelands-[0-9a-f]*-//')
+              curl -o "$ARTIFACT" "$RELEASE_URL/Widelands-daily-${MATRIX}"
+              curl -o "$ARTIFACT".md5 "$RELEASE_URL/Widelands-daily-${MATRIX}.md5"
+              CHECK_MD5="$(md5sum "${ARTIFACT}" | cut -d ' ' -f 1)"
+              OLD_MD5="$(cut -d ' ' -f 1 <"${ARTIFACT}".md5)"
+              if [ "$OLD_MD5" != "$CHECK_MD5" ] ; then
+                echo "::error::MD5 checksum mismatch for artifact $ARTIFACT"
+                exit 1
+              fi
+            else
+              echo "::notice::Dropping obsolete artifact $ARTIFACT"
+            fi
+          done
+      - name: List and rename artifacts
+        run: |
+          sudo apt-get update
+          sudo apt-get install rename
+          find . -name 'Widelands-*' -type f -print0 | while IFS= read -d '' -r ARTIFACT; do
+            FILENAME=$(basename "$ARTIFACT")
+            # Move all artifacts to the current folder
+            mv "$ARTIFACT" "$FILENAME"
+            mv "$ARTIFACT".md5 "$FILENAME".md5
+            # Store original file names
+            echo $FILENAME | tee -a artifacts.list
+            # Rename artifacts to have a fixed url
+            prename 's/Widelands-[0-9a-f]*-/Widelands-daily-/' "$FILENAME" \;
+            prename 's/Widelands-[0-9a-f]*-/Widelands-daily-/' "$FILENAME".md5 \;
+          done
+          # curl exits 23 because grep will kill it after the first match
+          set +e
+          latest=$(curl -i "https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/master" | grep -m 1 "\"sha\": ")
+          set -e
+          latest=${latest#*: \"}
+          latest=${latest%\",}
+          if [ "$latest" != "$GITHUB_SHA" ]
+          then
+            echo "The master branch ($GITHUB_REF) was updated from '$GITHUB_SHA' to '$latest', cancel"
+            exit 1
+          fi
+      - name: Updating latest pre-release
+        # Re-create the pre-release with the "latest" tag and all kept artifacts.
+        # Because all older artifacts are removed, we have to reupload everything.
+        env:
+          GH_TOKEN: "${{ secrets.WIDELANDS_FORMAT_TOKEN }}"
+        run: |
+          gh release delete latest --yes    || echo "No old release to delete"
+          git push --delete origin latest   || echo "No latest tag to delete"
+          git tag --force latest HEAD
+          git push --tags origin
+
+          echo "These builds are automatically generated from master. " >> release_notes
+          echo "## Latest changes" >> release_notes
+          # Print changelog from last 10 commits, strip Co-authored/Co-committed tags
+          git log --pretty="- %h: %s (%ai) (%an)" --no-decorate HEAD~10..HEAD | sed 's/Co-.*> //' >> release_notes
+          echo "<details><summary>Original filenames</summary><pre>" >> release_notes
+          cat artifacts.list >> release_notes
+          echo "</pre></details>" >> release_notes
+
+          gh release create latest         \
+            --prerelease                   \
+            --notes-file release_notes     \
+            --title "Development Builds"   \
+            Widelands-daily-* artifacts.list
