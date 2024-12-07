@@ -113,17 +113,21 @@
 	::exit(sig);
 }
 
+BacktraceProvider::DefaultAbortGuard::~DefaultAbortGuard() {
+#if defined PRINT_SEGFAULT_BACKTRACE || defined _WIN32
+	signal(SIGABRT, segfault_handler);
+#else
+	signal(SIGABRT, SIG_DFL);
+#endif  // PRINT_SEGFAULT_BACKTRACE || _WIN32
+}
+
 void BacktraceProvider::register_signal_handler() {
-	/* Handle several types of fatal crashes with a useful backtrace on supporting systems.
-	 * We can't handle SIGABRT like this since we have to redirect that one elsewhere to
-	 * suppress non-critical errors from Eris.
-	 */
 #if defined PRINT_SEGFAULT_BACKTRACE || defined _WIN32
 	for (int s : {
 #ifdef SIGBUS
 	        SIGBUS,  // Not available on all systems
 #endif
-	        SIGFPE, SIGILL, SIGSEGV}) {
+	        SIGABRT, SIGFPE, SIGILL, SIGSEGV}) {
 		signal(s, segfault_handler);
 	}
 #endif  // PRINT_SEGFAULT_BACKTRACE || _WIN32

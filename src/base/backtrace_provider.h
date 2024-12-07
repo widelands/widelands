@@ -23,6 +23,11 @@
 
 class BacktraceProvider {
 public:
+	class DefaultAbortGuard {
+	public:
+		~DefaultAbortGuard();
+	};
+
 	static void register_signal_handler();
 	static std::string get_signal_description(int sig);
 };
