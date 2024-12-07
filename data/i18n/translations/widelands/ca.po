@@ -3220,13 +3220,13 @@ msgstr "Partida desada"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:887
 msgid "Building’s inputs changed!"
-msgstr ""
+msgstr "Els elements que pot rebre l'edifici han canviat!"
 
 #. * TRANSLATORS: The argument is the buiding name
 #: ../../../../src/map_io/map_buildingdata_packet.cc:898
 #, c-format
 msgid "%s: the building's inputs have changed."
-msgstr ""
+msgstr "%s: els elements que pot rebre l'edifici han canviat."
 
 #. * TRANSLATORS: Amount and type of space between two sentences
 #: ../../../../src/map_io/map_buildingdata_packet.cc:901
@@ -3236,31 +3236,31 @@ msgstr ""
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:902
 msgid "The following wares have been deleted:"
-msgstr ""
+msgstr "Aquests béns s'han eliminat:"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:909
 #, c-format
 msgid "%1$u piece of %2$s"
 msgid_plural "%1$u pieces of %2$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u unitat de %2$s"
+msgstr[1] "%1$u unitats de %2$s"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:915
 #, c-format
 msgid "%1$u piece of an unknown ware"
 msgid_plural "%1$u pieces of unknown wares"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u unitat d'un bé desconegut"
+msgstr[1] "%1$u unitats de béns desconeguts"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:921
 msgid ""
 "The game was probably saved with a different Widelands version or with "
 "different enabled add-ons."
-msgstr ""
+msgstr "Probablement la partida es va desar amb una versió del Widelands diferent o amb altres complements activats."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:924
 msgid "Please review the current production programs and input settings."
-msgstr ""
+msgstr "Reviseu la producció actual i la configuració dels elements d'entrada."
 
 #: ../../../../src/map_io/map_saver.cc:85
 #, c-format
@@ -4563,35 +4563,35 @@ msgstr "Qualitat mínima"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:354
 msgid "Min Players:"
-msgstr ""
+msgstr "Mín. de jugadors:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:367
 msgid "Min Width:"
-msgstr ""
+msgstr "Amplada mínima:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:380
 msgid "Min Height:"
-msgstr ""
+msgstr "Alçada mínima:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:393
 msgid "Min Size:"
-msgstr ""
+msgstr "Mida mínima:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:406
 msgid "Max Players:"
-msgstr ""
+msgstr "Màx. de jugadors:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:419
 msgid "Max Width:"
-msgstr ""
+msgstr "Amplada màxima:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:432
 msgid "Max Height:"
-msgstr ""
+msgstr "Alçada màxima:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:445
 msgid "Max Size:"
-msgstr ""
+msgstr "Mida màxima:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:455
 msgid "Choose add-on to upload…"
@@ -4733,11 +4733,11 @@ msgstr "Alternativament, podeu enviar un missatge a l’equip de desenvolupament
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:749
 msgid "Manage your installed add-ons"
-msgstr ""
+msgstr "Gestiona els complements instal·lats"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:751
 msgid "Browse and install add-ons available on the server"
-msgstr ""
+msgstr "Busca i instal·la complements disponibles al servidor"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:753
 #, c-format
@@ -4745,7 +4745,7 @@ msgid ""
 "Browse and install maps from the widelands.org website maps archive. Like "
 "manually downloaded maps, installed website maps are stored in the ‘%s’ "
 "directory under the Widelands home directory."
-msgstr ""
+msgstr "Busca i instal·la mapes de l'arxiu de mapes del lloc web widelands.org. Com els mapes descarregats manualment, els mapes instal·lats des del lloc web es desen a la carpeta «%s» del directori base del Widelands."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:757
 msgid "Development"
@@ -4753,7 +4753,7 @@ msgstr "Desenvolupament"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:757
 msgid "Tools for add-on developers"
-msgstr ""
+msgstr "Eines per als desenvolupadors de complements"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:761
@@ -4801,7 +4801,7 @@ msgstr "Filtra els complements per nom"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:785
 msgid "Filter maps by name"
-msgstr ""
+msgstr "Filtra els mapes per nom"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:796
 #, c-format
@@ -4811,12 +4811,12 @@ msgstr "Mostra/Amaga la categoria «%s»"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:812
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:709
 msgid "One World"
-msgstr ""
+msgstr "Un món"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:820
 #, c-format
 msgid "Toggle world ‘%s’"
-msgstr ""
+msgstr "Mostra/Amaga el món «%s»"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1012
 #, c-format
@@ -4976,12 +4976,12 @@ msgstr "• %s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1674
 msgid "Website Maps"
-msgstr ""
+msgstr "Mapes del lloc web"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1675
 #, c-format
 msgid "Website Maps (%u)"
-msgstr ""
+msgstr "Mapes del lloc web (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1707
 #, c-format
@@ -5097,7 +5097,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "El mapa «%1$s» no s'ha pogut descarregar des del servidor.\n\nMissatge d'error:\n%2$s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2058
 #, c-format
@@ -5826,7 +5826,7 @@ msgid ""
 "%3$s\n"
 "\n"
 "Note that this map can not be downloaded again from the server."
-msgstr ""
+msgstr "Esteu segur que voleu desinstal·lar aquest mapa?\n\n%1$s\nde %2$s\n%3$s\n\nTingueu en compte que aquest mapa no es podrà tornar a descarregar des del servidor."
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:54
 #, c-format
@@ -5836,7 +5836,7 @@ msgid ""
 "%1$s\n"
 "by %2$s\n"
 "%3$s"
-msgstr ""
+msgstr "Esteu segur que voleu desinstal·lar aquest mapa?\n\n%1$s\nde %2$s\n%3$s"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:60
 #, c-format
@@ -5886,11 +5886,11 @@ msgstr "Necessita una versió del Widelands entre %1$s i %2$s."
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:168
 msgid "Hint:"
-msgstr ""
+msgstr "Consell:"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:175
 msgid "Comment by uploader:"
-msgstr ""
+msgstr "Comentari de qui l'ha pujat:"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:216
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:267
@@ -6038,14 +6038,14 @@ msgstr[1] "%u captures de pantalla"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:704
 #, c-format
 msgid "Size: %1$u×%2$u • Max Players: %3$u • %4$s"
-msgstr ""
+msgstr "Mida: %1$u×%2$u • Màx. de jugadors: %3$u • %4$s"
 
 #. * TRANSLATORS: Timestamp · Filesize · Download count · Average rating ·
 #. Number of comments
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:725
 #, c-format
 msgid "%1$s   %2$s   ⬇ %3$u   ★ %4$s   “” %5$u"
-msgstr ""
+msgstr "%1$s   %2$s   ⬇ %3$u   ★ %4$s   “” %5$u"
 
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:41
 #, c-format

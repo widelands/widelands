@@ -297,7 +297,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_messages.cc:187
 msgid "Allow diagonal scrolling with the numeric keypad."
-msgstr ""
+msgstr "Umožňiť diagonálne posúvanie pomocou numerickej klávesnice,"
 
 #: ../../../../src/wlapplication_messages.cc:188
 msgid "Display system time in the info panel."

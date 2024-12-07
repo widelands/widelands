@@ -3222,13 +3222,13 @@ msgstr "Dat Speel is sekert worden!"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:887
 msgid "Building’s inputs changed!"
-msgstr ""
+msgstr "Huus-Ingaven ännert!"
 
 #. * TRANSLATORS: The argument is the buiding name
 #: ../../../../src/map_io/map_buildingdata_packet.cc:898
 #, c-format
 msgid "%s: the building's inputs have changed."
-msgstr ""
+msgstr "%s: De Ingaven vum Huus hebben sik ännert."
 
 #. * TRANSLATORS: Amount and type of space between two sentences
 #: ../../../../src/map_io/map_buildingdata_packet.cc:901
@@ -3238,31 +3238,31 @@ msgstr ""
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:902
 msgid "The following wares have been deleted:"
-msgstr ""
+msgstr "Deese Waren sünd lösket worden:"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:909
 #, c-format
 msgid "%1$u piece of %2$s"
 msgid_plural "%1$u pieces of %2$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u Deel %2$s"
+msgstr[1] "%1$u Delen %2$s"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:915
 #, c-format
 msgid "%1$u piece of an unknown ware"
 msgid_plural "%1$u pieces of unknown wares"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u Deel vun eener unbekannten Waar"
+msgstr[1] "%1$u Delen vun unbekannten Waren"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:921
 msgid ""
 "The game was probably saved with a different Widelands version or with "
 "different enabled add-ons."
-msgstr ""
+msgstr "Dat Speel is wull mit eener annern Versioon vun Widelands of mit anner anknipst Verwiederns sekert worden."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:924
 msgid "Please review the current production programs and input settings."
-msgstr ""
+msgstr "Bidde kiek de stedenwies Produzerens-Programmen un Ingaav-Instellens na."
 
 #: ../../../../src/map_io/map_saver.cc:85
 #, c-format

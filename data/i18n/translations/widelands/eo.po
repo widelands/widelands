@@ -3223,13 +3223,13 @@ msgstr "Ludo savita"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:887
 msgid "Building’s inputs changed!"
-msgstr ""
+msgstr "La enigoj de la konstruaĵo ŝanĝiĝis!"
 
 #. * TRANSLATORS: The argument is the buiding name
 #: ../../../../src/map_io/map_buildingdata_packet.cc:898
 #, c-format
 msgid "%s: the building's inputs have changed."
-msgstr ""
+msgstr "%s: La enigoj de la konstruaĵo ŝanĝiĝis."
 
 #. * TRANSLATORS: Amount and type of space between two sentences
 #: ../../../../src/map_io/map_buildingdata_packet.cc:901
