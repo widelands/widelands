@@ -150,7 +150,7 @@ Mix_Music* Songset::get_song(uint32_t random) {
 std::string Songset::get_filename(uint32_t num) {
     uint32_t i = 0;
     for(auto const& entry : songs_) {
-        if (i == num) return entry.second->filename;
+        if (i++ == num) return entry.second->filename;
     }
     throw std::out_of_range("Songset::get_filename(uint32_t num) parameter out of bounds");
 }
