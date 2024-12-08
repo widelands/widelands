@@ -567,7 +567,7 @@ msgid ""
 "Ferries are built in ferry yards, one rowboat costs two logs and one piece "
 "of cloth and is quickly constructed. A ferry yard is a medium-sized building"
 " that needs to be built close to the shore."
-msgstr "Els transbordadors es construeixen en tallers de transbordadors. Fer una embarcació costa dos troncs, una peça de tela i relativament poc temps. Un taller de transbordadors és un edifici mitjà que s’ha de construir prop de la costa."
+msgstr "Els transbordadors es construeixen als tallers de transbordadors. Fer una embarcació costa dos troncs, una peça de tela i relativament poc temps. Un taller de transbordadors és un edifici mitjà que s’ha de construir prop de la costa."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:263
 msgid "Let’s build a ferry yard close to the shore before we will continue."

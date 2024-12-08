@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-03 02:40+0000\n"
+"POT-Creation-Date: 2024-12-05 03:11+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -3200,18 +3200,19 @@ msgstr "Vyhne na zbrane a lodenice ich používajú na výrobu rozličných troj
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:472
 msgctxt "atlanteans_ware"
 msgid ""
-"Spider silk is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth or tabards in a weaving mill."
-msgstr "Pavúčí hodváb produkujú pavúky, ktoré sa chovajú na pavúčích farmách. V tkáčovni sa spracúva na pavúčiu látku alebo kabátce."
+"Spider silk is produced by spiders, which are bred by spider farms. It can "
+"be processed into spidercloth or tabards in a weaving mill, or used to make "
+"tools in the toolsmithy."
+msgstr "Pavúčí hodváb produkujú pavúky, ktoré sa chovajú na pavúčích farmách. V tkáčovni sa spracúva na pavúčiu látku alebo kabátce. Vo vyhni na nástroje sa môže použiť na výrobu nástrojov."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:481
 msgctxt "atlanteans_ware"
 msgid ""
 "Spidercloth is made out of spider silk in a weaving mill. It is used in the "
-"toolsmithy and the shipyard. Also some higher developed buildings need "
-"spidercloth for their construction."
-msgstr "Pavúčia látka sa vyrába z pavúčieho hodvábu v tkáčovni. Používa sa vo vyhni na nástroje a v lodenici. Okrem toho je potrebná pri stavbe niektorých dokonalejších budov."
+"shipyard. Also some higher developed buildings need spidercloth for their "
+"construction."
+msgstr "Pavúčia látka sa vyrába z pavúčieho hodvábu v tkáčovni. Používa sa v lodenici. Okrem toho je potrebná pri stavbe niektorých dokonalejších budov."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fish
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:492

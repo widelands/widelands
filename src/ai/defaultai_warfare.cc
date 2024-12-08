@@ -210,7 +210,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 			if (!is_visible) {
 				if (observer.second.last_time_seen + Duration(20 * 60 * 1000) < gametime) {
 					verb_log_dbg_time(
-					   gametime, "site %d not visible for more than 20 minutes\n", observer.first);
+					   gametime, "site %u not visible for more than 20 minutes\n", observer.first);
 					disappeared_sites.push_back(observer.first);
 				}
 				continue;
@@ -620,10 +620,10 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 	}
 	verb_log_info_time(
 	   gametime,
-	   "%2d: attacking site at %3dx%3d, score %3d, with %2d soldiers, attacking %2d times, after "
-	   "%5d seconds\n",
-	   player_number(), flag->get_position().x, flag->get_position().y, best_score, a,
-	   enemy_sites[best_target].attack_counter + 1,
+	   "%2u: attacking site at %3dx%3d, score %3d, with %2d soldiers, attacking %2u times, after "
+	   "%5u seconds\n",
+	   static_cast<unsigned>(player_number()), flag->get_position().x, flag->get_position().y,
+	   best_score, a, enemy_sites[best_target].attack_counter + 1,
 	   (gametime - enemy_sites[best_target].last_time_attacked).get() / 1000);
 
 	game().send_player_enemyflagaction(*flag, player_number(), attacking_soldiers, true);
@@ -698,14 +698,16 @@ void DefaultAI::count_military_vacant_positions() {
 	if (soldiers_counted < total_soldiers) {
 		int32_t remaining_soldiers = total_soldiers - soldiers_counted;
 		verb_log_dbg_time(game().get_gametime(),
-		                  "AI %d: soldiers: total: %d, associated: %d, difference: %d",
-		                  player_number(), total_soldiers, soldiers_counted, remaining_soldiers);
+		                  "AI %u: soldiers: total: %d, associated: %d, difference: %d",
+		                  static_cast<unsigned>(player_number()), total_soldiers, soldiers_counted,
+		                  remaining_soldiers);
 		on_stock_ += remaining_soldiers;
 	} else if (soldiers_counted > total_soldiers) {
 		// This shouldn't happen
 		log_warn_time(game().get_gametime(),
-		              "AI %d: soldiers: total: %d, associated: %d, unexpected: %d", player_number(),
-		              total_soldiers, soldiers_counted, soldiers_counted - total_soldiers);
+		              "AI %u: soldiers: total: %d, associated: %d, unexpected: %d",
+		              static_cast<unsigned>(player_number()), total_soldiers, soldiers_counted,
+		              soldiers_counted - total_soldiers);
 	}
 
 	vacant_mil_positions_ += understaffed_;
@@ -757,9 +759,10 @@ bool DefaultAI::check_trainingsites(const Time& gametime) {
 	if (tso.bo->total_count() > tso.bo->cnt_limit_by_aimode) {
 		verb_log_warn_time(
 		   gametime,
-		   "AI check_trainingsites: AI player %d: count of %s exceeds an AI limit %d: actual count: "
-		   "%d\n",
-		   player_number(), tso.bo->name, tso.bo->cnt_limit_by_aimode, tso.bo->total_count());
+		   "AI check_trainingsites: AI player %u: count of %s exceeds an AI limit %u: actual count: "
+		   "%u\n",
+		   static_cast<unsigned>(player_number()), tso.bo->name, tso.bo->cnt_limit_by_aimode,
+		   tso.bo->total_count());
 	}
 
 	const Widelands::DescriptionIndex enhancement = ts->descr().enhancement();
@@ -1006,7 +1009,7 @@ bool DefaultAI::check_militarysites(const Time& gametime) {
 
 	// Inform if we are above ai type limit.
 	if (militarysites.front().bo->total_count() > militarysites.front().bo->cnt_limit_by_aimode) {
-		verb_log_warn_time(gametime, "AI check_militarysites: Too many %s: %d, ai limit: %d\n",
+		verb_log_warn_time(gametime, "AI check_militarysites: Too many %s: %u, ai limit: %u\n",
 		                   militarysites.front().bo->name, militarysites.front().bo->total_count(),
 		                   militarysites.front().bo->cnt_limit_by_aimode);
 	}
@@ -1542,7 +1545,7 @@ void DefaultAI::soldier_trained(const Widelands::TrainingSite& site) {
 		}
 	}
 
-	verb_log_warn_time(
-	   gametime, "AI %d: soldier_trained(): trainingsite not found\n", player_number());
+	verb_log_warn_time(gametime, "AI %u: soldier_trained(): trainingsite not found\n",
+	                   static_cast<unsigned>(player_number()));
 }
 }  // namespace AI
