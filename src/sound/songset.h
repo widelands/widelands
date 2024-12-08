@@ -61,8 +61,8 @@ private:
     /// List of song data
     std::map<std::string, Song*> songs_;
 
-	/** Index of the song that is currently playing
-	 * (actually the one that was last started)
+    /** Index of the song that is currently playing
+     *  relative to the playlist of user selected songs.
 	 */
 	uint32_t current_song_;
 

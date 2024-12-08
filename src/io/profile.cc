@@ -284,6 +284,12 @@ std::vector<Section::Value> Section::get_values() {
     return values_;
 }
 
+void Section::mark_values() {
+    for (Section::Value& val : values_) {
+        val.mark_used();
+    }
+}
+
 /**
  * Return the integer value of the given key or throw an exception if a
  * problem arises.
@@ -567,7 +573,7 @@ void Profile::check_used() const {
 		if (!temp_section.is_used()) {
 			error(
 			   "Section [%s] not used (did you spell the name correctly?)", temp_section.get_name());
-		} else {
+        } else {
 			temp_section.check_used();
 		}
 	}

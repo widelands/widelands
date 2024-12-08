@@ -102,6 +102,7 @@ bool Songset::is_song_enabled(std::string& filename) {
  */
 void Songset::set_song_enabled(std::string& filename, bool on) {
     songs_[filename]->enabled = on;
+    set_config_bool("songs", filename, on);
 }
 
 /**

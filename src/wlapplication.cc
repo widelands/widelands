@@ -415,6 +415,10 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_sh->register_songs("music", Songset::kMenu);
 	g_sh->change_music(get_config_bool("play_intro_music", true) ? Songset::kIntro : Songset::kMenu);
 
+    verb_log_info("Loading songsets");
+    g_sh->register_songs("music", Songset::kIngame);
+    g_sh->register_songs("music", Songset::kCustom);
+
 	g_gr = new Graphic();
 	g_gr->initialize(
 	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
@@ -524,10 +528,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	cleanup_temp_files();
 	cleanup_temp_backups();
 
-	verb_log_info("Loading songsets");
-	g_sh->register_songs("music", Songset::kIngame);
-	g_sh->register_songs("music", Songset::kCustom);
-
 	UI::ColorChooser::read_favorites_settings();
 
 	verb_log_info("Initializing Add-Ons");
@@ -539,8 +539,13 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// register it once.
 	UI::Panel::register_click();
 
-	// Make sure we didn't forget to read any global option
-	check_config_used();
+    // Mark playlist config values as used to prevent errors with the options system
+    // for these auto-generated config keys
+    Section* sec = get_config_section_ptr("songs");
+    sec->mark_values();
+
+    // Make sure we didn't forget to read any global option
+    check_config_used();
 
 	// Save configuration now. Otherwise, the UUID and sound options
 	// are not saved, when the game crashes

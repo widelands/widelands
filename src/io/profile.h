@@ -188,6 +188,7 @@ public:
 	Value& create_val_duplicate(char const* name, char const* value);
 
     std::vector<Value> get_values();
+    void mark_values();
 
 private:
 	Profile* profile_;
