@@ -136,6 +136,9 @@ Mix_Music* Songset::get_song(uint32_t random) {
         current_song_ = current_song_ % playlist.size();
     }
 
+    // playlist may have shrunk since last call, check bounds
+    if (current_song_ >= playlist.size()) current_song_ = 0; // forced wrap
+
     auto it = playlist.begin();
     std::advance(it, current_song_);
     filename = it->first;
