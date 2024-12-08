@@ -46,7 +46,7 @@ public:
      */
     MusicTrackControl(UI::Box* parent, Song* song)
        : UI::Box(parent, UI::PanelStyle::kWui, song->filename, 0, 0, UI::Box::Horizontal),
-         enable_(this, panel_style_, "enable", Vector2i::zero(), song->title),
+         enable_(this, panel_style_, "enable", Vector2i::zero(), (song->title != "" ? song->title : "Untitled") ),
          filename_(song->filename) {
 
         set_inner_spacing(kSpacing);
@@ -97,7 +97,7 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
     button_next_(&hbox_playback_control_, "button_next", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, "Next"),
     checkbox_shuffle_(&hbox_playback_control_, UI::PanelStyle::kFsMenu, "button_shuffle", Vector2i::zero(), _("Shuffle")),
     hbox_current_track_(this, UI::PanelStyle::kWui, "hbox_current_track", 0, 0, UI::Box::Horizontal),
-    label_current_track_(&hbox_current_track_, UI::PanelStyle::kWui, "label_current_track", UI::FontStyle::kWuiLabel, "Current track title", UI::Align::kLeft) {
+    label_current_track_(&hbox_current_track_, UI::PanelStyle::kWui, "label_current_track", UI::FontStyle::kWuiLabel, g_sh->current_song(), UI::Align::kLeft) {
 
     // layout ui
     set_inner_spacing(kSpacing);
@@ -146,7 +146,13 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
             g_sh->resume_music();
         }
     });
-    button_next_.sigclicked.connect([this]() { g_sh->change_music(); });
+    button_next_.sigclicked.connect([this]() {
+        g_sh->change_music();
+        // here, change_music is not done updating
+        // current_song so we get the previous song title
+        std::string title = g_sh->current_song();
+        label_current_track_.set_text(title);
+    });
     checkbox_shuffle_.changedto.connect([this](bool on) { g_sh->set_shuffle(on); });
 
 }

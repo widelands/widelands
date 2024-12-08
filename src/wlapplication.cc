@@ -1071,7 +1071,7 @@ bool WLApplication::poll_event(SDL_Event& ev) const {
 			if (g_sh->current_songset() != Songset::kIntro) {
 				g_sh->change_music();
 			}
-		}
+        }
 	} break;
 
 	default:

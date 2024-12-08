@@ -48,7 +48,6 @@ struct Songset {
 	~Songset();
 
     Mix_Music* get_song(uint32_t random = 0);
-    std::string get_filename(uint32_t num);
     bool is_song_enabled(std::string& filename);
     void set_song_enabled(std::string& filename, bool on);
     std::vector<Song*> get_song_data();
@@ -57,6 +56,7 @@ private:
     Mix_Music* load_file(std::string& filename);
     void load_songs(const std::string& basename);
     void init_songs(std::vector<std::string> files);
+    std::map<std::string, Song*> create_playlist();
 
     /// List of song data
     std::map<std::string, Song*> songs_;

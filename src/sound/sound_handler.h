@@ -189,6 +189,7 @@ public:
 	void stop_music(int fadeout_ms = kMinimumMusicFade);
     void resume_music();
     bool is_music_playing();
+    std::string current_song();
     void set_shuffle(bool on);
     void change_music(const std::string& songset_name = std::string(),
 	                  int fadeout_ms = kMinimumMusicFade);
@@ -220,7 +221,8 @@ private:
 	void initialization_error(const char* msg, bool quit_sdl);
 
 	bool play_or_not(SoundType type, FxId fx_id, uint16_t priority, bool allow_multiple);
-	void start_music(const std::string& songset_name);
+    void start_music(const std::string& songset_name);
+    void notify_song_title_changed(const std::string& song_name);
 
 	static void music_finished_callback();
 	static void fx_finished_callback(int32_t channel);
@@ -264,6 +266,9 @@ private:
 	 * if there actually is a song playing \e right \e now.
 	 */
 	std::string current_songset_;
+
+    /// The title of the current (or most recently played) son
+    std::string current_song_;
 
 	/** The random number generator.
 	 * \note The RNG here \e must \e not be the same as the one for the game

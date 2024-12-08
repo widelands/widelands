@@ -438,6 +438,9 @@ void SoundHandler::start_music(const std::string& songset_name) {
         if (Mix_Music* const m = songs_[songset_name]->get_song(n)) {
 			Mix_FadeInMusic(m, 1, kMinimumMusicFade);
 			current_songset_ = songset_name;
+            std::string title = Mix_GetMusicTitle(m);
+            if (title == "") title = "Untitled";
+            current_song_ = title;
 		} else {
 			log_err(
 			   "SoundHandler: songset \"%s\" exists but contains no files!\n", songset_name.c_str());
@@ -475,8 +478,12 @@ void SoundHandler::resume_music() {
 
 bool SoundHandler::is_music_playing() {
     int is_playing = Mix_PlayingMusic() != 0;
-    log_info("IS_PLAYING? %i", is_playing);
+    //log_dbg("IS_PLAYING? %i", is_playing);
     return is_playing;
+}
+
+std::string SoundHandler::current_song() {
+    return current_song_;
 }
 
 void SoundHandler::set_shuffle(bool on) {

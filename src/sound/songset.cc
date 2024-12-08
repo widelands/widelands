@@ -101,7 +101,7 @@ bool Songset::is_song_enabled(std::string& filename) {
  * Toggle wether to play or skip the given song for this songset
  */
 void Songset::set_song_enabled(std::string& filename, bool on) {
-
+    songs_[filename]->enabled = on;
 }
 
 /**
@@ -124,22 +124,26 @@ std::vector<Song*> Songset::get_song_data() {
 Mix_Music* Songset::get_song(uint32_t random) {
     std::string filename;
 
-    if (songs_.empty()) {
+    std::map<std::string, Song*> playlist = create_playlist();
+
+    if (playlist.empty()) {
         return nullptr;
     }
 
-    if (random != 0 && songs_.size() > 1) {
+    if (random != 0 && playlist.size() > 1) {
         // Exclude current_song from playing two times in a row
-        current_song_ += 1 + random % (songs_.size() - 1);
-        current_song_ = current_song_ % songs_.size();
+        current_song_ += 1 + random % (playlist.size() - 1);
+        current_song_ = current_song_ % playlist.size();
     }
 
-    filename = get_filename(current_song_);
+    auto it = playlist.begin();
+    std::advance(it, current_song_);
+    filename = it->first;
 
     // current_song is incremented after filename was chosen for two reasons:
     // 1. so that unshuffled playback starts at 0
     // 2. to prevent playing same song two times in a row immediately after shuffle is turned off
-    if (++current_song_ >= songs_.size()) {
+    if (++current_song_ >= playlist.size()) {
         current_song_ = 0; // wrap
     }
 
@@ -147,14 +151,18 @@ Mix_Music* Songset::get_song(uint32_t random) {
     return m_;
 }
 
-std::string Songset::get_filename(uint32_t num) {
-    uint32_t i = 0;
-    for(auto const& entry : songs_) {
-        if (i++ == num) return entry.second->filename;
-    }
-    throw std::out_of_range("Songset::get_filename(uint32_t num) parameter out of bounds");
-}
+// Create a map that contains only the user-selected songs
+std::map<std::string, Song*> Songset::create_playlist() {
+    std::map<std::string, Song*> p;
 
+    for(auto const& entry : songs_) {
+        Song* s = entry.second;
+        if (s->enabled) {
+            p.emplace(s->filename, s);
+        }
+    }
+    return p;
+}
 
 /**
  * Loads a song file from disk
