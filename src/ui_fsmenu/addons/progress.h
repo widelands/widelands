@@ -19,6 +19,7 @@
 #ifndef WL_UI_FSMENU_ADDONS_PROGRESS_H
 #define WL_UI_FSMENU_ADDONS_PROGRESS_H
 
+#include "network/net_addons.h"
 #include "ui_basic/box.h"
 #include "ui_basic/progressbar.h"
 #include "ui_basic/textarea.h"
@@ -50,6 +51,9 @@ private:
 	UI::Textarea txt1_, txt2_, txt3_;
 	UI::ProgressBar progress_;
 };
+
+AddOns::HangupFn
+create_hangup_function(UI::Panel& parent, UI::WindowStyle style, AddOns::NetAddons& net_addons);
 
 }  // namespace AddOnsUI
 
