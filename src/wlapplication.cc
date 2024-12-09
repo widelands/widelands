@@ -524,9 +524,9 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	cleanup_temp_files();
 	cleanup_temp_backups();
 
-    verb_log_info("Loading songsets");
-    g_sh->register_songs("music", Songset::kIngame);
-    g_sh->register_songs("music", Songset::kCustom);
+	verb_log_info("Loading songsets");
+	g_sh->register_songs("music", Songset::kIngame);
+	g_sh->register_songs("music", Songset::kCustom);
 
 	UI::ColorChooser::read_favorites_settings();
 
