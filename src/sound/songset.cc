@@ -162,7 +162,7 @@ Mix_Music* Songset::get_song(uint32_t random) {
 std::map<std::string, Song> Songset::create_playlist() {
 	std::map<std::string, Song> p;
 
-	for (auto const& entry : songs_) {
+    for (const auto& entry : songs_) {
 		Song s = entry.second;
 		if (s.enabled) {
 			p.emplace(s.filename, s);
