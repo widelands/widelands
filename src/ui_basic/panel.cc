@@ -643,7 +643,7 @@ int Panel::get_inner_w() const {
 	return (w_ == 0 ? 0 : w_ - (lborder_ + rborder_));
 }
 int Panel::get_inner_h() const {
-	if ((h_ == 0 || tborder_ + bborder_ <= h_) == false) {
+    if (!(h_ == 0 || tborder_ + bborder_ <= h_)) {
 		log_dbg("FATAL panel h=%i tborder=%i bborder=%i", h_, tborder_, bborder_);
 	}
 	assert(h_ == 0 || tborder_ + bborder_ <= h_);

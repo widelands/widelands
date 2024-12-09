@@ -50,7 +50,7 @@ public:
 	             panel_style_,
 	             "enable",
 	             Vector2i::zero(),
-	             (song.title != "" ? song.title : "Untitled")),
+                 (song.title.empty() ? "Untitled" : song.title)),
 	     filename_(song.filename) {
 
 		set_inner_spacing(kSpacing);
@@ -62,15 +62,6 @@ public:
 			enable_.changedto.connect([this](bool on) { write_state(on); });
 		}
 		set_thinks(false);
-	}
-
-	int checkbox_width() {
-		enable_.layout();
-		return enable_.get_w();
-	}
-
-	void set_checkbox_width(const int w) {
-		enable_.set_size(w, enable_.get_h());
 	}
 
 private:
@@ -128,10 +119,10 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 	vbox_track_playlist_.set_force_scrolling(true);
 	hbox_current_track_.set_inner_spacing(kSpacing);
 
-	std::vector<MusicTrackControl*> musicTrackControls;
+    std::vector<Song> music_data = g_sh->get_music_data();
+    std::vector<MusicTrackControl*> musicTrackControls;
 
-	std::vector<Song> music_data = g_sh->get_music_data();
-	for (Song song : music_data) {
+    for (const Song& song : music_data) {
 		musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, song));
 	}
 

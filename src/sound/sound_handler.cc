@@ -21,6 +21,7 @@
 #include <memory>
 
 #include <SDL.h>
+#include <SDL_mixer.h>
 #ifdef _WIN32
 #include <windows.h>
 #endif
@@ -439,8 +440,8 @@ void SoundHandler::start_music(const std::string& songset_name) {
 		if (Mix_Music* const m = songs_[songset_name]->get_song(n)) {
 			Mix_FadeInMusic(m, 1, kMinimumMusicFade);
 			current_songset_ = songset_name;
-			std::string title = Mix_GetMusicTitle(m);
-			if (title == "") {
+            std::string title(Mix_GetMusicTitle(m));
+            if (title.empty()) {
 				title = "Untitled";
 			}
 			current_song_ = title;
@@ -466,24 +467,11 @@ void SoundHandler::stop_music(int fadeout_ms) {
 	}
 }
 
-/**
- * Resumes music playback
- */
-void SoundHandler::resume_music() {
-	if (SoundHandler::is_backend_disabled()) {
-		return;
-	}
-
-	if (Mix_PlayingMusic() == 0) {
-		start_music(current_songset_);
-	}
-}
-
 std::string SoundHandler::current_song() {
 	return current_song_;
 }
 
-bool SoundHandler::is_shuffle() {
+bool SoundHandler::is_shuffle() const {
 	return shuffle_;
 }
 
