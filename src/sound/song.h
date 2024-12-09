@@ -23,7 +23,7 @@
 
 struct Song {
 public:
-    Song(const std::string& filename);
+	Song(const std::string& filename);
 	std::string filename;
 	std::string title;
 	bool enabled;

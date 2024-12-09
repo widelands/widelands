@@ -56,9 +56,9 @@ void Songset::load_songs(const std::string& basename) {
 	const std::string& path_basename = "music/" + basename;
 	try {
 		Section sec = get_config_section("songs");
-        std::vector<Section::Value> values = sec.get_values();
-        for (Section::Value& val : values) {
-            const std::string& filename = val.get_name();
+		std::vector<Section::Value> values = sec.get_values();
+		for (Section::Value& val : values) {
+			const std::string& filename = val.get_name();
 			if (filename.rfind(path_basename, 0) != 0)
 				continue;
 			bool enabled = val.get_bool();
