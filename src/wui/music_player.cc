@@ -168,13 +168,6 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 	add(label_spacer);
 
 	// setup event handlers
-	button_playstop_.sigclicked.connect([this]() {
-		if (g_sh->is_music_playing()) {
-			g_sh->stop_music();
-		} else {
-			g_sh->resume_music();
-		}
-	});
 	button_next_.sigclicked.connect([this]() {
 		g_sh->change_music();
 		// here, change_music is not done updating

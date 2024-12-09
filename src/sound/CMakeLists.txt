@@ -18,12 +18,12 @@ wl_library(sound
   SRCS
     fxset.cc
     fxset.h
+    song.cc
+    song.h
     songset.cc
     songset.h
     sound_handler.cc
     sound_handler.h
-    song.cc
-    song.h
   USES_SDL2
   USES_SDL2_MIXER
   DEPENDS

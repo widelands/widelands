@@ -188,7 +188,6 @@ public:
 	void register_songs(const std::string& dir, const std::string& basename);
 	void stop_music(int fadeout_ms = kMinimumMusicFade);
 	void resume_music();
-	bool is_music_playing();
 	std::string current_song();
 	bool is_shuffle();
 	void set_shuffle(bool on);

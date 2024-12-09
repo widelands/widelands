@@ -242,8 +242,6 @@ wl_library(wui
     game_objectives_menu.h
     game_options_sound_menu.cc
     game_options_sound_menu.h
-    music_player.cc
-    music_player.h
     game_summary.cc
     game_summary.h
     general_statistics_menu.cc
@@ -268,6 +266,8 @@ wl_library(wui
     militarysitewindow.h
     minimap.cc
     minimap.h
+    music_player.cc
+    music_player.h
     pinned_note.cc
     pinned_note.h
     plot_area.cc

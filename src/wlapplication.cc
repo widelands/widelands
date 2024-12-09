@@ -415,10 +415,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_sh->register_songs("music", Songset::kMenu);
 	g_sh->change_music(get_config_bool("play_intro_music", true) ? Songset::kIntro : Songset::kMenu);
 
-	verb_log_info("Loading songsets");
-	g_sh->register_songs("music", Songset::kIngame);
-	g_sh->register_songs("music", Songset::kCustom);
-
 	g_gr = new Graphic();
 	g_gr->initialize(
 	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
@@ -527,6 +523,10 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	cleanup_ai_files();
 	cleanup_temp_files();
 	cleanup_temp_backups();
+
+    verb_log_info("Loading songsets");
+    g_sh->register_songs("music", Songset::kIngame);
+    g_sh->register_songs("music", Songset::kCustom);
 
 	UI::ColorChooser::read_favorites_settings();
 
