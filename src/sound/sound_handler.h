@@ -190,6 +190,7 @@ public:
     void resume_music();
     bool is_music_playing();
     std::string current_song();
+    bool is_shuffle();
     void set_shuffle(bool on);
     void change_music(const std::string& songset_name = std::string(),
 	                  int fadeout_ms = kMinimumMusicFade);

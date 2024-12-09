@@ -200,6 +200,7 @@ void SoundHandler::read_config() {
 		   get_config_bool("sound", "enable_" + option.second.name, option.second.enabled);
 	}
 	use_custom_songset_instead_ingame_ = get_config_bool("sound", "custom_ingame_music", false);
+    shuffle_ = get_config_bool("sound", "shuffle", true);
 }
 
 /// Save the current sound options to config cache
@@ -486,8 +487,13 @@ std::string SoundHandler::current_song() {
     return current_song_;
 }
 
+bool SoundHandler::is_shuffle() {
+    return shuffle_;
+}
+
 void SoundHandler::set_shuffle(bool on) {
     shuffle_ = on;
+    set_config_bool("sound", "shuffle", on);
 }
 
 /**

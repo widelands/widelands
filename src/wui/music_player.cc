@@ -154,7 +154,7 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
         label_current_track_.set_text(title);
     });
     checkbox_shuffle_.changedto.connect([this](bool on) { g_sh->set_shuffle(on); });
-
+    checkbox_shuffle_.set_state(g_sh->is_shuffle());
 }
 
 void MusicPlayer::draw(RenderTarget& dst) {
