@@ -20,14 +20,11 @@
 #include <vector>
 
 #include "base/i18n.h"
-#include "graphic/font_handler.h"
 #include "graphic/style_manager.h"
-#include "graphic/text_layout.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/slider.h"
-#include "wlapplication_options.h"
 
 namespace {
 
@@ -157,7 +154,7 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 		std::string title = g_sh->current_song();
 		label_current_track_.set_text(title);
 	});
-	checkbox_shuffle_.changedto.connect([this](bool on) { g_sh->set_shuffle(on); });
+    checkbox_shuffle_.changedto.connect([this](bool on) { g_sh->set_shuffle(on); });
 	checkbox_shuffle_.set_state(g_sh->is_shuffle());
 }
 

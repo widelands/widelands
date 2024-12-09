@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef SONG_H
-#define SONG_H
+#ifndef WL_SOUND_SONG_H
+#define WL_SOUND_SONG_H
 
 #include <string>
 
@@ -30,4 +30,4 @@ public:
 	bool enabled;
 };
 
-#endif  // SONG_H
+#endif  // WL_SOUND_SONG_H

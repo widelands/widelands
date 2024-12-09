@@ -112,8 +112,8 @@ void Songset::set_song_enabled(std::string& filename, bool on) {
  */
 std::vector<Song> Songset::get_song_data() {
 	std::vector<Song> list;
-	for (auto const& entry : songs_) {
-		list.emplace_back(entry.second);
+    for (auto const& entry : songs_) {
+        list.emplace_back(entry.second);
 	}
 	return list;
 }

@@ -18,7 +18,6 @@
 #ifndef WL_WUI_MUSIC_PLAYER_H
 #define WL_WUI_MUSIC_PLAYER_H
 
-#include "graphic/styles/text_panel_style.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"

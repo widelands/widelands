@@ -27,7 +27,7 @@
 #include <SDL_mixer.h>
 
 #include "io/fileread.h"
-#include "song.h"
+#include "sound/song.h"
 
 /** A collection of several pieces of music meant for the same situation.
  *

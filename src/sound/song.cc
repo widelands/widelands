@@ -16,7 +16,7 @@
  *
  */
 
-#include "song.h"
+#include "sound/song.h"
 
 Song::Song() {
     // empty ctor
