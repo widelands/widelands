@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,27 +13,21 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see <https://www.gnu.org/licenses/>.
+ *
  */
 
-#ifndef WL_WUI_GAME_OPTIONS_SOUND_MENU_H
-#define WL_WUI_GAME_OPTIONS_SOUND_MENU_H
+#ifndef WL_SOUND_SONG_H
+#define WL_SOUND_SONG_H
 
-#include "ui_basic/unique_window.h"
-#include "wui/music_player.h"
-#include "wui/sound_options.h"
+#include <string>
 
-/**
- * A window with all sound options.
- */
-struct GameOptionsSoundMenu : public UI::UniqueWindow {
-	GameOptionsSoundMenu(Panel&, UI::UniqueWindow::Registry&);
-	/// Saves the sound options to config
-	~GameOptionsSoundMenu() override;
-
-private:
-	UI::Box outer_;
-	SoundOptions sound_options_;
-	MusicPlayer music_player_;
+struct Song {
+public:
+	Song();
+	explicit Song(const std::string& filename);
+	std::string filename;
+	std::string title;
+	bool enabled;
 };
 
-#endif  // end of include guard: WL_WUI_GAME_OPTIONS_SOUND_MENU_H
+#endif  // WL_SOUND_SONG_H

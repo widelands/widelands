@@ -19,9 +19,15 @@
 #ifndef WL_SOUND_SONGSET_H
 #define WL_SOUND_SONGSET_H
 
+#include <cassert>
+#include <map>
+#include <stdexcept>
+#include <vector>
+
 #include <SDL_mixer.h>
 
 #include "io/fileread.h"
+#include "sound/song.h"
 
 /** A collection of several pieces of music meant for the same situation.
  *
@@ -41,17 +47,22 @@ struct Songset {
 	explicit Songset(const std::string& dir, const std::string& basename);
 	~Songset();
 
-	Mix_Music* get_song(uint32_t random);
+	Mix_Music* get_song(uint32_t random = 0);
+	bool is_song_enabled(std::string& filename);
+	void set_song_enabled(std::string& filename, bool on);
+	std::vector<Song> get_song_data();
 
 private:
-	void add_songs(const std::vector<std::string>& files);
-	void add_song(const std::string& filename);
+	Mix_Music* load_file(const std::string& filename);
+	void load_songs(const std::string& basename);
+	void init_songs(std::vector<std::string> files);
+	std::map<std::string, Song> create_playlist();
 
-	/// The filenames of all configured songs
-	std::vector<std::string> songs_;
+	/// List of song data
+	std::map<std::string, Song> songs_;
 
 	/** Index of the song that is currently playing
-	 * (actually the one that was last started)
+	 *  relative to the playlist of user selected songs.
 	 */
 	uint32_t current_song_;
 
