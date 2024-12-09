@@ -48,7 +48,7 @@ Songset::Songset(const std::string& dir, const std::string& basename) {
  * \param files filenames that will be added
  */
 void Songset::init_songs(std::vector<std::string> files) {
-    for (const std::string& filename : files) {
+	for (const std::string& filename : files) {
 		set_config_bool("songs", filename, true);
 	}
 }
@@ -61,19 +61,19 @@ void Songset::load_songs(const std::string& basename) {
 		std::vector<Section::Value> values = sec.get_values();
 		for (Section::Value& val : values) {
 			const std::string& filename = val.get_name();
-            if (filename.rfind(path_basename, 0) != 0) {
+			if (filename.rfind(path_basename, 0) != 0) {
 				continue;
-            }
+			}
 			bool enabled = val.get_bool();
 			Song song = Song(filename);
 			song.enabled = enabled;
 			song.filename = filename;
-            m_ = load_file(filename);
-            std::string title(Mix_GetMusicTitle(m_));
-            song.title = title;
+			m_ = load_file(filename);
+			std::string title(Mix_GetMusicTitle(m_));
+			song.title = title;
 			songs_.emplace(filename, song);
 		}
-    } catch (WException&) {
+	} catch (WException&) {
 		log_warn("Failed to load song data from config");
 	}
 }
@@ -140,9 +140,9 @@ Mix_Music* Songset::get_song(uint32_t random) {
 	}
 
 	// playlist may have shrunk since last call, check bounds
-    if (current_song_ >= playlist.size()) {
+	if (current_song_ >= playlist.size()) {
 		current_song_ = 0;  // forced wrap
-    }
+	}
 	auto it = playlist.begin();
 	std::advance(it, current_song_);
 	filename = it->first;
