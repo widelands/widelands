@@ -18,9 +18,7 @@
 
 #include "sound/song.h"
 
-Song::Song() {
-	// empty ctor
-}
+Song::Song() = default;
 
 Song::Song(const std::string& file) {
 	filename = file;
