@@ -428,7 +428,7 @@ void SoundHandler::start_music(const std::string& songset_name) {
 		return;
 	}
 
-    if (Mix_PlayingMusic() != 0) {
+	if (Mix_PlayingMusic() != 0) {
 		change_music(songset_name, kMinimumMusicFade);
 	}
 
@@ -440,9 +440,9 @@ void SoundHandler::start_music(const std::string& songset_name) {
 			Mix_FadeInMusic(m, 1, kMinimumMusicFade);
 			current_songset_ = songset_name;
 			std::string title = Mix_GetMusicTitle(m);
-            if (title == "") {
-                title = "Untitled";
-            }
+			if (title == "") {
+				title = "Untitled";
+			}
 			current_song_ = title;
 		} else {
 			log_err(
@@ -461,7 +461,7 @@ void SoundHandler::stop_music(int fadeout_ms) {
 		return;
 	}
 
-    if (Mix_PlayingMusic() != 0) {
+	if (Mix_PlayingMusic() != 0) {
 		Mix_FadeOutMusic(std::max(fadeout_ms, kMinimumMusicFade));
 	}
 }
@@ -474,7 +474,7 @@ void SoundHandler::resume_music() {
 		return;
 	}
 
-    if (Mix_PlayingMusic() == 0) {
+	if (Mix_PlayingMusic() == 0) {
 		start_music(current_songset_);
 	}
 }
@@ -514,7 +514,7 @@ void SoundHandler::change_music(const std::string& songset_name, int const fadeo
 		}
 	}
 
-    if (Mix_PlayingMusic() != 0) {
+	if (Mix_PlayingMusic() != 0) {
 		stop_music(fadeout_ms);
 	} else {
 		start_music(current_songset_);
@@ -579,7 +579,7 @@ void SoundHandler::set_enable_sound(SoundType type, bool const enable) {
 	switch (type) {
 	case SoundType::kMusic:
 		if (enable) {
-            if (Mix_PlayingMusic() == 0) {
+			if (Mix_PlayingMusic() == 0) {
 				start_music(current_songset_);
 			}
 		} else {

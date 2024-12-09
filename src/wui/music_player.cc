@@ -44,14 +44,14 @@ public:
 	 * @param filename The music track filename, for toggling track playback on/off
 	 * @param title The title of the music track, to display
 	 */
-    MusicTrackControl(UI::Box* parent, Song song)
-       : UI::Box(parent, UI::PanelStyle::kWui, song.filename, 0, 0, UI::Box::Horizontal),
+	MusicTrackControl(UI::Box* parent, Song song)
+	   : UI::Box(parent, UI::PanelStyle::kWui, song.filename, 0, 0, UI::Box::Horizontal),
 	     enable_(this,
 	             panel_style_,
 	             "enable",
 	             Vector2i::zero(),
-                 (song.title != "" ? song.title : "Untitled")),
-         filename_(song.filename) {
+	             (song.title != "" ? song.title : "Untitled")),
+	     filename_(song.filename) {
 
 		set_inner_spacing(kSpacing);
 		add(&enable_, UI::Box::Resizing::kFullSize, UI::Align::kRight);
@@ -130,8 +130,8 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 
 	std::vector<MusicTrackControl*> musicTrackControls;
 
-    std::vector<Song> music_data = g_sh->get_music_data();
-    for (Song song : music_data) {
+	std::vector<Song> music_data = g_sh->get_music_data();
+	for (Song song : music_data) {
 		musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, song));
 	}
 
