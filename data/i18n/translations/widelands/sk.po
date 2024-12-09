@@ -3398,7 +3398,7 @@ msgstr "Nahrávanie mapy…"
 
 #: ../../../../src/map_io/s2map.cc:460
 msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr "Bluebyte Settlers II Map. Komentár nie je definovaný!"
+msgstr "Mapa Bluebyte Settlers II. Komentár nie je definovaný!"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:209
 #, c-format
@@ -3427,7 +3427,7 @@ msgstr "Inicializácia mapových objektov"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:435
 msgid "Checking map"
-msgstr ""
+msgstr "Kontrola mapy"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:450
 msgid "Postloading map objects"
@@ -6341,7 +6341,7 @@ msgstr "Stlačte novú klávesovú skratku alebo zrušte akciu zatvorením tohto
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:133
 msgid "(unused)"
-msgstr ""
+msgstr "(nepoužité)"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:211
 msgid "Edit Keyboard And Mouse Actions"
@@ -9240,11 +9240,11 @@ msgstr "Sledovať prieskumníka"
 
 #: ../../../../src/wui/buildingwindow.cc:703
 msgid "Hide work area"
-msgstr "Skryť pracovnú plochu"
+msgstr "Skryť pracovnú oblasť"
 
 #: ../../../../src/wui/buildingwindow.cc:706
 msgid "Show work area"
-msgstr "Zobraziť pracovnú plochu"
+msgstr "Zobraziť pracovnú oblasť"
 
 #: ../../../../src/wui/buildingwindow.cc:731
 #: ../../../../src/wui/constructionsitewindow.cc:304

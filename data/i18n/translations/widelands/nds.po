@@ -3228,7 +3228,7 @@ msgstr "Huus-Ingaven ännert!"
 #: ../../../../src/map_io/map_buildingdata_packet.cc:898
 #, c-format
 msgid "%s: the building’s inputs have changed."
-msgstr ""
+msgstr "%s: De Ingaven vum Huus hebben sik ännert."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:901
 msgid "The following wares have been deleted:"
