@@ -19,8 +19,8 @@
 #define WL_WUI_GAME_OPTIONS_SOUND_MENU_H
 
 #include "ui_basic/unique_window.h"
-#include "wui/sound_options.h"
 #include "wui/music_player.h"
+#include "wui/sound_options.h"
 
 /**
  * A window with all sound options.
@@ -31,9 +31,9 @@ struct GameOptionsSoundMenu : public UI::UniqueWindow {
 	~GameOptionsSoundMenu() override;
 
 private:
-    UI::Box outer_;
+	UI::Box outer_;
 	SoundOptions sound_options_;
-    MusicPlayer music_player_;
+	MusicPlayer music_player_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_OPTIONS_SOUND_MENU_H

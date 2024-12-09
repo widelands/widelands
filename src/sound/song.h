@@ -3,13 +3,12 @@
 
 #include <string>
 
-struct Song
-{
+struct Song {
 public:
-    Song(std::string& filename);
-    std::string filename;
-    std::string title;
-    bool enabled;
+	Song(std::string& filename);
+	std::string filename;
+	std::string title;
+	bool enabled;
 };
 
-#endif // SONG_H
+#endif  // SONG_H

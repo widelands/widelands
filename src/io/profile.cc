@@ -281,13 +281,13 @@ Section::Value& Section::create_val_duplicate(char const* const name, char const
 }
 
 std::vector<Section::Value> Section::get_values() {
-    return values_;
+	return values_;
 }
 
 void Section::mark_values() {
-    for (Section::Value& val : values_) {
-        val.mark_used();
-    }
+	for (Section::Value& val : values_) {
+		val.mark_used();
+	}
 }
 
 /**
@@ -573,7 +573,7 @@ void Profile::check_used() const {
 		if (!temp_section.is_used()) {
 			error(
 			   "Section [%s] not used (did you spell the name correctly?)", temp_section.get_name());
-        } else {
+		} else {
 			temp_section.check_used();
 		}
 	}

@@ -19,10 +19,10 @@
 #define WL_WUI_MUSIC_PLAYER_H
 
 #include "graphic/styles/text_panel_style.h"
-#include "ui_basic/panel.h"
 #include "ui_basic/box.h"
-#include "ui_basic/checkbox.h"
 #include "ui_basic/button.h"
+#include "ui_basic/checkbox.h"
+#include "ui_basic/panel.h"
 #include "ui_basic/textarea.h"
 
 /**
@@ -30,22 +30,19 @@
  * All changes to the sound settings take effect immediately, but are not saved to config.
  */
 struct MusicPlayer : public UI::Box {
-    MusicPlayer(UI::Panel& parent);
+	MusicPlayer(UI::Panel& parent);
 
 private:
+	// Drawing and event handlers
+	void draw(RenderTarget&) override;
 
-    // Drawing and event handlers
-    void draw(RenderTarget&) override;
-
-    UI::Box vbox_track_playlist_;
-    UI::Box hbox_playback_control_;
-    UI::Button button_playstop_;
-    UI::Button button_next_;
-    UI::Checkbox checkbox_shuffle_;
-    UI::Box hbox_current_track_;
-    UI::Textarea label_current_track_;
-
+	UI::Box vbox_track_playlist_;
+	UI::Box hbox_playback_control_;
+	UI::Button button_playstop_;
+	UI::Button button_next_;
+	UI::Checkbox checkbox_shuffle_;
+	UI::Box hbox_current_track_;
+	UI::Textarea label_current_track_;
 };
 
-
-#endif // WL_WUI_MUSIC_PLAYER_H
+#endif  // WL_WUI_MUSIC_PLAYER_H

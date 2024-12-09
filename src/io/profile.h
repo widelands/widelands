@@ -187,8 +187,8 @@ public:
 	/// Create a new Value with the given name and value.
 	Value& create_val_duplicate(char const* name, char const* value);
 
-    std::vector<Value> get_values();
-    void mark_values();
+	std::vector<Value> get_values();
+	void mark_values();
 
 private:
 	Profile* profile_;

@@ -21,8 +21,8 @@
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
-#include "graphic/text_layout.h"
 #include "graphic/style_manager.h"
+#include "graphic/text_layout.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/multilinetextarea.h"
@@ -31,138 +31,166 @@
 
 namespace {
 
-    constexpr int kSpacing = 4;
+constexpr int kSpacing = 4;
 
 /**
  * UI elements to set sound properties for 1 type of sounds.
  */
 class MusicTrackControl : public UI::Box {
 public:
-    /**
-     * @brief SoundControl Creates gui controls to show music tracks in a playlist
-     * @param parent The parent panel
-     * @param filename The music track filename, for toggling track playback on/off
-     * @param title The title of the music track, to display
-     */
-    MusicTrackControl(UI::Box* parent, Song* song)
-       : UI::Box(parent, UI::PanelStyle::kWui, song->filename, 0, 0, UI::Box::Horizontal),
-         enable_(this, panel_style_, "enable", Vector2i::zero(), (song->title != "" ? song->title : "Untitled") ),
-         filename_(song->filename) {
+	/**
+	 * @brief SoundControl Creates gui controls to show music tracks in a playlist
+	 * @param parent The parent panel
+	 * @param filename The music track filename, for toggling track playback on/off
+	 * @param title The title of the music track, to display
+	 */
+	MusicTrackControl(UI::Box* parent, Song* song)
+	   : UI::Box(parent, UI::PanelStyle::kWui, song->filename, 0, 0, UI::Box::Horizontal),
+	     enable_(this,
+	             panel_style_,
+	             "enable",
+	             Vector2i::zero(),
+	             (song->title != "" ? song->title : "Untitled")),
+	     filename_(song->filename) {
 
-        set_inner_spacing(kSpacing);
-        add(&enable_, UI::Box::Resizing::kFullSize, UI::Align::kRight);
-        if (SoundHandler::is_backend_disabled()) {
-            enable_.set_enabled(false);
-        } else {
-            enable_.set_state(read_state());
-            enable_.changedto.connect([this](bool on) { write_state(on); });
-        }
-        set_thinks(false);
-    }
+		set_inner_spacing(kSpacing);
+		add(&enable_, UI::Box::Resizing::kFullSize, UI::Align::kRight);
+		if (SoundHandler::is_backend_disabled()) {
+			enable_.set_enabled(false);
+		} else {
+			enable_.set_state(read_state());
+			enable_.changedto.connect([this](bool on) { write_state(on); });
+		}
+		set_thinks(false);
+	}
 
-    int checkbox_width() {
-        enable_.layout();
-        return enable_.get_w();
-    }
+	int checkbox_width() {
+		enable_.layout();
+		return enable_.get_w();
+	}
 
-    void set_checkbox_width(const int w) {
-        enable_.set_size(w, enable_.get_h());
-    }
+	void set_checkbox_width(const int w) {
+		enable_.set_size(w, enable_.get_h());
+	}
 
 private:
+	void write_state(bool on) {
+		enable_.set_state(on);
+		g_sh->set_music_track_enabled(filename_, on);
+	}
 
-    void write_state(bool on) {
-        enable_.set_state(on);
-        g_sh->set_music_track_enabled(filename_, on);
-    }
+	bool read_state() {
+		return g_sh->is_music_track_enabled(filename_);
+	}
 
-    bool read_state() {
-        return g_sh->is_music_track_enabled(filename_);
-    }
-
-    /// Enable / disable for the music track
-    UI::Checkbox enable_;
-    /// The filename for the music track
-    std::string filename_;
+	/// Enable / disable for the music track
+	UI::Checkbox enable_;
+	/// The filename for the music track
+	std::string filename_;
 };
 
-
-}
+}  // namespace
 
 MusicPlayer::MusicPlayer(UI::Panel& parent)
    : UI::Box(&parent, UI::PanelStyle::kWui, "box_music_player", 0, 0, UI::Box::Vertical),
-    vbox_track_playlist_(this, UI::PanelStyle::kWui, "vbox_track_playlist", 0, 0, UI::Box::Vertical),
-    hbox_playback_control_(this, UI::PanelStyle::kWui, "hbox_playback_control", 0, 0, UI::Box::Horizontal),
-    button_playstop_(&hbox_playback_control_, "button_playstop", 0, 0, 100, 34, UI::ButtonStyle::kWuiSecondary, "Play/Stop"),
-    button_next_(&hbox_playback_control_, "button_next", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, "Next"),
-    checkbox_shuffle_(&hbox_playback_control_, UI::PanelStyle::kFsMenu, "button_shuffle", Vector2i::zero(), _("Shuffle")),
-    hbox_current_track_(this, UI::PanelStyle::kWui, "hbox_current_track", 0, 0, UI::Box::Horizontal),
-    label_current_track_(&hbox_current_track_, UI::PanelStyle::kWui, "label_current_track", UI::FontStyle::kWuiLabel, g_sh->current_song(), UI::Align::kLeft) {
+     vbox_track_playlist_(
+        this, UI::PanelStyle::kWui, "vbox_track_playlist", 0, 0, UI::Box::Vertical),
+     hbox_playback_control_(
+        this, UI::PanelStyle::kWui, "hbox_playback_control", 0, 0, UI::Box::Horizontal),
+     button_playstop_(&hbox_playback_control_,
+                      "button_playstop",
+                      0,
+                      0,
+                      100,
+                      34,
+                      UI::ButtonStyle::kWuiSecondary,
+                      "Play/Stop"),
+     button_next_(&hbox_playback_control_,
+                  "button_next",
+                  0,
+                  0,
+                  80,
+                  34,
+                  UI::ButtonStyle::kWuiSecondary,
+                  "Next"),
+     checkbox_shuffle_(&hbox_playback_control_,
+                       UI::PanelStyle::kFsMenu,
+                       "button_shuffle",
+                       Vector2i::zero(),
+                       _("Shuffle")),
+     hbox_current_track_(
+        this, UI::PanelStyle::kWui, "hbox_current_track", 0, 0, UI::Box::Horizontal),
+     label_current_track_(&hbox_current_track_,
+                          UI::PanelStyle::kWui,
+                          "label_current_track",
+                          UI::FontStyle::kWuiLabel,
+                          g_sh->current_song(),
+                          UI::Align::kLeft) {
 
-    // layout ui
-    set_inner_spacing(kSpacing);
-    set_desired_size(370, 150);
-    vbox_track_playlist_.set_max_size(370, 100);
-    vbox_track_playlist_.set_min_desired_breadth(370);
-    vbox_track_playlist_.set_inner_spacing(2);
-    vbox_track_playlist_.set_force_scrolling(true);
-    hbox_current_track_.set_inner_spacing(kSpacing);
+	// layout ui
+	set_inner_spacing(kSpacing);
+	set_desired_size(370, 150);
+	vbox_track_playlist_.set_max_size(370, 100);
+	vbox_track_playlist_.set_min_desired_breadth(370);
+	vbox_track_playlist_.set_inner_spacing(2);
+	vbox_track_playlist_.set_force_scrolling(true);
+	hbox_current_track_.set_inner_spacing(kSpacing);
 
-    std::vector<MusicTrackControl*> musicTrackControls;
+	std::vector<MusicTrackControl*> musicTrackControls;
 
-    std::vector<Song*> music_data = g_sh->get_music_data();
-    for (Song* song : music_data) {
-        musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, song));
-    }
+	std::vector<Song*> music_data = g_sh->get_music_data();
+	for (Song* song : music_data) {
+		musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, song));
+	}
 
-    vbox_track_playlist_.add_space(2);
-    for (MusicTrackControl* control : musicTrackControls) {
-        vbox_track_playlist_.add(control);
-    }
-    vbox_track_playlist_.add_inf_space(); // aligns scrollbar to the right
+	vbox_track_playlist_.add_space(2);
+	for (MusicTrackControl* control : musicTrackControls) {
+		vbox_track_playlist_.add(control);
+	}
+	vbox_track_playlist_.add_inf_space();  // aligns scrollbar to the right
 
-    hbox_playback_control_.add(&button_playstop_);
-    hbox_playback_control_.add_space(kSpacing);
-    hbox_playback_control_.add(&button_next_);
-    hbox_playback_control_.add_space(kSpacing);
-    hbox_playback_control_.add(&checkbox_shuffle_);
+	hbox_playback_control_.add(&button_playstop_);
+	hbox_playback_control_.add_space(kSpacing);
+	hbox_playback_control_.add(&button_next_);
+	hbox_playback_control_.add_space(kSpacing);
+	hbox_playback_control_.add(&checkbox_shuffle_);
 
-    hbox_current_track_.add(&label_current_track_);
+	hbox_current_track_.add(&label_current_track_);
 
-    add(&vbox_track_playlist_);
-    add(&hbox_playback_control_);
-    add(&hbox_current_track_);
+	add(&vbox_track_playlist_);
+	add(&hbox_playback_control_);
+	add(&hbox_current_track_);
 
-    // due to a layout bug, adding an empty label at the bottom to prevent clipping the label for current track title.
-    UI::Textarea* label_spacer = new UI::Textarea(this, UI::PanelStyle::kWui, "spacer", UI::FontStyle::kWuiLabel, "", UI::Align::kLeft);
-    add(label_spacer);
+	// due to a layout bug, adding an empty label at the bottom to prevent clipping the label for
+	// current track title.
+	UI::Textarea* label_spacer = new UI::Textarea(
+	   this, UI::PanelStyle::kWui, "spacer", UI::FontStyle::kWuiLabel, "", UI::Align::kLeft);
+	add(label_spacer);
 
-    // setup event handlers
-    button_playstop_.sigclicked.connect([this]() {
-        if (g_sh->is_music_playing()) {
-            g_sh->stop_music();
-        }
-        else {
-            g_sh->resume_music();
-        }
-    });
-    button_next_.sigclicked.connect([this]() {
-        g_sh->change_music();
-        // here, change_music is not done updating
-        // current_song so we get the previous song title
-        std::string title = g_sh->current_song();
-        label_current_track_.set_text(title);
-    });
-    checkbox_shuffle_.changedto.connect([this](bool on) { g_sh->set_shuffle(on); });
-    checkbox_shuffle_.set_state(g_sh->is_shuffle());
+	// setup event handlers
+	button_playstop_.sigclicked.connect([this]() {
+		if (g_sh->is_music_playing()) {
+			g_sh->stop_music();
+		} else {
+			g_sh->resume_music();
+		}
+	});
+	button_next_.sigclicked.connect([this]() {
+		g_sh->change_music();
+		// here, change_music is not done updating
+		// current_song so we get the previous song title
+		std::string title = g_sh->current_song();
+		label_current_track_.set_text(title);
+	});
+	checkbox_shuffle_.changedto.connect([this](bool on) { g_sh->set_shuffle(on); });
+	checkbox_shuffle_.set_state(g_sh->is_shuffle());
 }
 
 void MusicPlayer::draw(RenderTarget& dst) {
-    if (get_w() == 0) {
-        // The size hasn't been set yet
-        return;
-    }
-    UI::PanelStyleInfo style = *g_style_manager->tabpanel_style(UI::TabPanelStyle::kWuiDark);
-    draw_background(dst, style);
-
+	if (get_w() == 0) {
+		// The size hasn't been set yet
+		return;
+	}
+	UI::PanelStyleInfo style = *g_style_manager->tabpanel_style(UI::TabPanelStyle::kWuiDark);
+	draw_background(dst, style);
 }

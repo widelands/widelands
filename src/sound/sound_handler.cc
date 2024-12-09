@@ -200,7 +200,7 @@ void SoundHandler::read_config() {
 		   get_config_bool("sound", "enable_" + option.second.name, option.second.enabled);
 	}
 	use_custom_songset_instead_ingame_ = get_config_bool("sound", "custom_ingame_music", false);
-    shuffle_ = get_config_bool("sound", "shuffle", true);
+	shuffle_ = get_config_bool("sound", "shuffle", true);
 }
 
 /// Save the current sound options to config cache
@@ -428,20 +428,21 @@ void SoundHandler::start_music(const std::string& songset_name) {
 		return;
 	}
 
-    if (is_music_playing()) {
+	if (is_music_playing()) {
 		change_music(songset_name, kMinimumMusicFade);
 	}
 
 	if (songs_.count(songset_name) == 0) {
 		log_err("SoundHandler: songset \"%s\" does not exist!\n", songset_name.c_str());
-    } else {
-        uint32_t n = shuffle_ ? rng_.rand() : 0;
-        if (Mix_Music* const m = songs_[songset_name]->get_song(n)) {
+	} else {
+		uint32_t n = shuffle_ ? rng_.rand() : 0;
+		if (Mix_Music* const m = songs_[songset_name]->get_song(n)) {
 			Mix_FadeInMusic(m, 1, kMinimumMusicFade);
 			current_songset_ = songset_name;
-            std::string title = Mix_GetMusicTitle(m);
-            if (title == "") title = "Untitled";
-            current_song_ = title;
+			std::string title = Mix_GetMusicTitle(m);
+			if (title == "")
+				title = "Untitled";
+			current_song_ = title;
 		} else {
 			log_err(
 			   "SoundHandler: songset \"%s\" exists but contains no files!\n", songset_name.c_str());
@@ -459,7 +460,7 @@ void SoundHandler::stop_music(int fadeout_ms) {
 		return;
 	}
 
-    if (is_music_playing()) {
+	if (is_music_playing()) {
 		Mix_FadeOutMusic(std::max(fadeout_ms, kMinimumMusicFade));
 	}
 }
@@ -468,32 +469,32 @@ void SoundHandler::stop_music(int fadeout_ms) {
  * Resumes music playback
  */
 void SoundHandler::resume_music() {
-    if (SoundHandler::is_backend_disabled()) {
-        return;
-    }
+	if (SoundHandler::is_backend_disabled()) {
+		return;
+	}
 
-    if (!is_music_playing()) {
-        start_music(current_songset_);
-    }
+	if (!is_music_playing()) {
+		start_music(current_songset_);
+	}
 }
 
 bool SoundHandler::is_music_playing() {
-    int is_playing = Mix_PlayingMusic() != 0;
-    //log_dbg("IS_PLAYING? %i", is_playing);
-    return is_playing;
+	int is_playing = Mix_PlayingMusic() != 0;
+	// log_dbg("IS_PLAYING? %i", is_playing);
+	return is_playing;
 }
 
 std::string SoundHandler::current_song() {
-    return current_song_;
+	return current_song_;
 }
 
 bool SoundHandler::is_shuffle() {
-    return shuffle_;
+	return shuffle_;
 }
 
 void SoundHandler::set_shuffle(bool on) {
-    shuffle_ = on;
-    set_config_bool("sound", "shuffle", on);
+	shuffle_ = on;
+	set_config_bool("sound", "shuffle", on);
 }
 
 /**
@@ -518,7 +519,7 @@ void SoundHandler::change_music(const std::string& songset_name, int const fadeo
 		}
 	}
 
-    if (is_music_playing()) {
+	if (is_music_playing()) {
 		stop_music(fadeout_ms);
 	} else {
 		start_music(current_songset_);
@@ -526,14 +527,14 @@ void SoundHandler::change_music(const std::string& songset_name, int const fadeo
 }
 
 void SoundHandler::set_music_track_enabled(std::string& filename, bool on) {
-    songs_[Songset::kIngame]->set_song_enabled(filename, on);
+	songs_[Songset::kIngame]->set_song_enabled(filename, on);
 }
 bool SoundHandler::is_music_track_enabled(std::string& filename) {
-    return songs_[Songset::kIngame]->is_song_enabled(filename);
+	return songs_[Songset::kIngame]->is_song_enabled(filename);
 }
 
 std::vector<Song*> SoundHandler::get_music_data() {
-    return songs_[Songset::kIngame]->get_song_data();
+	return songs_[Songset::kIngame]->get_song_data();
 }
 
 bool SoundHandler::use_custom_songset() const {
@@ -583,7 +584,7 @@ void SoundHandler::set_enable_sound(SoundType type, bool const enable) {
 	switch (type) {
 	case SoundType::kMusic:
 		if (enable) {
-            if (!is_music_playing()) {
+			if (!is_music_playing()) {
 				start_music(current_songset_);
 			}
 		} else {

@@ -32,16 +32,16 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(Panel& parent, UI::UniqueWindow::Regi
                       100,
                       100,
                       _("Sound Options")),
-          outer_(this, UI::PanelStyle::kWui, "sound_options_outer_box", 0, 0, UI::Box::Vertical),
-         sound_options_(outer_, UI::SliderStyle::kWuiLight),
-         music_player_(outer_) {
+     outer_(this, UI::PanelStyle::kWui, "sound_options_outer_box", 0, 0, UI::Box::Vertical),
+     sound_options_(outer_, UI::SliderStyle::kWuiLight),
+     music_player_(outer_) {
 
-    outer_.add(&sound_options_, UI::Box::Resizing::kFullSize);
-    outer_.add(&music_player_, UI::Box::Resizing::kFullSize);
+	outer_.add(&sound_options_, UI::Box::Resizing::kFullSize);
+	outer_.add(&music_player_, UI::Box::Resizing::kFullSize);
 	sound_options_.set_border(kMargin, kMargin, kMargin, kMargin);
-    music_player_.set_border(kMargin, kMargin, kMargin, kMargin);
+	music_player_.set_border(kMargin, kMargin, kMargin, kMargin);
 
-    set_center_panel(&outer_);
+	set_center_panel(&outer_);
 
 	if (get_usedefaultpos()) {
 		center_to_parent();
@@ -53,4 +53,3 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(Panel& parent, UI::UniqueWindow::Regi
 GameOptionsSoundMenu::~GameOptionsSoundMenu() {
 	g_sh->save_config();
 }
-

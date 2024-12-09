@@ -195,7 +195,7 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
 	}
 	for (SoundControl* control : controls) {
 		control->set_checkbox_width(max_w);
-    }
+	}
 
 	add(&custom_songset_);
 	custom_songset_.set_state(g_sh->use_custom_songset());
