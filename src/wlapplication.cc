@@ -1653,17 +1653,7 @@ void WLApplication::handle_commandline_parameters() {
 			}
 
 			if (sep_pos != build_id().size() || 0 != text.compare(0, sep_pos, build_id())) {
-				return std::string("Incorrect version string part");
-			}
-
-			text = text.substr(sep_pos + (text.at(sep_pos) == '\r' ? 2 : 1));
-			sep_pos = text.find_first_of("\n\r");
-			if (sep_pos == std::string::npos) {
-				return std::string("Malformed two-liner version string");
-			}
-
-			if (sep_pos != build_type().size() || 0 != text.compare(0, sep_pos, build_type())) {
-				return std::string("Incorrect type string part");
+				return std::string("Incorrect version string");
 			}
 		} catch (const std::exception& e) {
 			return std::string(e.what());

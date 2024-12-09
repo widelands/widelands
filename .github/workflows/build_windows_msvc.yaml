@@ -6,6 +6,7 @@ jobs:
   windows-msvc:
     # inspired by https://github.com/lukka/CppCMakeVcpkgTemplate/blob/main/.github/workflows/hosted-pure-workflow.yml
     strategy:
+      fail-fast: false
       matrix:
         config: [Debug, Release]
         arch: [x64, x86]
@@ -14,6 +15,7 @@ jobs:
     env:
       VCPKG_ROOT: C:\vcpkg
       VCPKG_TARGET_TRIPLET: ${{ matrix.arch }}-windows-static
+      ARTIFACT_NAME: Widelands-${{ github.sha }}-msvc-${{ matrix.config }}-${{ matrix.arch }}
 
     steps:
     - name: Checkout
@@ -75,7 +77,20 @@ jobs:
         if ("${{ matrix.config }}" -Match "Release") {
           strip -sv ./src/widelands.exe
         }
+        cd src
+        C:\"Program Files"\7-Zip\7z.exe a -tzip ..\..\$env:ARTIFACT_NAME.zip widelands.exe
+        if ("${{ matrix.config }}" -Match "Debug") {
+          C:\"Program Files"\7-Zip\7z.exe a -tzip ..\..\$env:ARTIFACT_NAME.zip widelands.pdb
+        }
+    - name: Uploading executable
+      uses: actions/upload-artifact@v4
+      with:
+        name: Widelands ${{ matrix.config }} Windows ${{ matrix.arch }} Binary Only (MSVC)
+        path: ${{ github.workspace }}\${{ env.ARTIFACT_NAME }}.zip
     - name: InnoSetup
+      # Disabled because the installer of the mingw build can be used if needed, with the exe
+      # replaced with the one from the above artifact
+      if: false
       run: |
         cd $env:GITHUB_WORKSPACE
         # Environment variables needed by our InnoSetup script
@@ -83,9 +98,10 @@ jobs:
         $env:CONFIGURATION = "${{ matrix.config }}"
         $env:APPVEYOR_BUILD_FOLDER = $env:GITHUB_WORKSPACE
         $env:APPVEYOR_BUILD_VERSION = "Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}"
-        ISCC.exe /o$env:GITHUB_WORKSPACE /fWidelands-${{ github.sha }}-msvc-${{ matrix.config }}-${{ matrix.arch }} $env:GITHUB_WORKSPACE\utils\windows\innosetup\Widelands.iss
+        ISCC.exe /o$env:GITHUB_WORKSPACE /f$env:ARTIFACT_NAME $env:GITHUB_WORKSPACE\utils\windows\innosetup\Widelands.iss
     - name: Uploading installer
       uses: actions/upload-artifact@v4
       with:
-        name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Installer (MSVC)
-        path: ${{ github.workspace }}\Widelands-${{ github.sha }}-msvc-${{ matrix.config }}-${{ matrix.arch }}.exe
+        name: Widelands ${{ matrix.config }} Windows ${{ matrix.arch }} Installer (MSVC)
+        path: ${{ github.workspace }}\${{ env.ARTIFACT_NAME }}.exe
+        if-no-files-found: ignore
