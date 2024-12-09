@@ -97,14 +97,6 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
         this, UI::PanelStyle::kWui, "vbox_track_playlist", 0, 0, UI::Box::Vertical),
      hbox_playback_control_(
         this, UI::PanelStyle::kWui, "hbox_playback_control", 0, 0, UI::Box::Horizontal),
-     button_playstop_(&hbox_playback_control_,
-                      "button_playstop",
-                      0,
-                      0,
-                      100,
-                      34,
-                      UI::ButtonStyle::kWuiSecondary,
-                      "Play/Stop"),
      button_next_(&hbox_playback_control_,
                   "button_next",
                   0,
@@ -149,7 +141,6 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 	}
 	vbox_track_playlist_.add_inf_space();  // aligns scrollbar to the right
 
-	hbox_playback_control_.add(&button_playstop_);
 	hbox_playback_control_.add_space(kSpacing);
 	hbox_playback_control_.add(&button_next_);
 	hbox_playback_control_.add_space(kSpacing);

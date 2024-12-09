@@ -38,7 +38,6 @@ private:
 
 	UI::Box vbox_track_playlist_;
 	UI::Box hbox_playback_control_;
-	UI::Button button_playstop_;
 	UI::Button button_next_;
 	UI::Checkbox checkbox_shuffle_;
 	UI::Box hbox_current_track_;
