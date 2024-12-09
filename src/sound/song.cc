@@ -18,6 +18,10 @@
 
 #include "song.h"
 
+Song::Song() {
+    // empty ctor
+}
+
 Song::Song(const std::string& file) {
 	filename = file;
 	title = file;

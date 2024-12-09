@@ -62,12 +62,12 @@ void Songset::load_songs(const std::string& basename) {
 			if (filename.rfind(path_basename, 0) != 0)
 				continue;
 			bool enabled = val.get_bool();
-			Song* song = new Song(filename);
-			song->enabled = enabled;
-			song->filename = filename;
+            Song song = Song(filename);
+            song.enabled = enabled;
+            song.filename = filename;
 			m_ = load_file(filename);
 			std::string title = Mix_GetMusicTitle(m_);
-			song->title = title;
+            song.title = title;
 			songs_.emplace(filename, song);
 		}
 	} catch (WException& ex) {
@@ -93,22 +93,22 @@ Songset::~Songset() {
  * Lets the playlist know if a song should be played or not
  */
 bool Songset::is_song_enabled(std::string& filename) {
-	return songs_[filename]->enabled;
+    return songs_[filename].enabled;
 }
 
 /**
  * Toggle whether to play or skip the given song for this songset
  */
 void Songset::set_song_enabled(std::string& filename, bool on) {
-	songs_[filename]->enabled = on;
+    songs_[filename].enabled = on;
 	set_config_bool("songs", filename, on);
 }
 
 /**
  * Return all songs to display in music player
  */
-std::vector<Song*> Songset::get_song_data() {
-	std::vector<Song*> list;
+std::vector<Song> Songset::get_song_data() {
+    std::vector<Song> list;
 	for (auto const& entry : songs_) {
 		list.emplace_back(entry.second);
 	}
@@ -124,7 +124,7 @@ std::vector<Song*> Songset::get_song_data() {
 Mix_Music* Songset::get_song(uint32_t random) {
 	std::string filename;
 
-	std::map<std::string, Song*> playlist = create_playlist();
+    std::map<std::string, Song> playlist = create_playlist();
 
 	if (playlist.empty()) {
 		return nullptr;
@@ -156,13 +156,13 @@ Mix_Music* Songset::get_song(uint32_t random) {
 }
 
 // Create a map that contains only the user-selected songs
-std::map<std::string, Song*> Songset::create_playlist() {
-	std::map<std::string, Song*> p;
+std::map<std::string, Song> Songset::create_playlist() {
+    std::map<std::string, Song> p;
 
 	for (auto const& entry : songs_) {
-		Song* s = entry.second;
-		if (s->enabled) {
-			p.emplace(s->filename, s);
+        Song s = entry.second;
+        if (s.enabled) {
+            p.emplace(s.filename, s);
 		}
 	}
 	return p;
