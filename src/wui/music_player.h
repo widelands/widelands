@@ -29,7 +29,7 @@
  * All changes to the sound settings take effect immediately, but are not saved to config.
  */
 struct MusicPlayer : public UI::Box {
-    explicit MusicPlayer(UI::Panel& parent);
+	explicit MusicPlayer(UI::Panel& parent);
 
 private:
 	// Drawing and event handlers

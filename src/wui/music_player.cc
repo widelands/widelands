@@ -47,7 +47,7 @@ public:
 	             panel_style_,
 	             "enable",
 	             Vector2i::zero(),
-                 (song.title.empty() ? "Untitled" : song.title)),
+	             (song.title.empty() ? "Untitled" : song.title)),
 	     filename_(song.filename) {
 
 		set_inner_spacing(kSpacing);
@@ -116,10 +116,10 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 	vbox_track_playlist_.set_force_scrolling(true);
 	hbox_current_track_.set_inner_spacing(kSpacing);
 
-    std::vector<Song> music_data = g_sh->get_music_data();
-    std::vector<MusicTrackControl*> musicTrackControls;
+	std::vector<Song> music_data = g_sh->get_music_data();
+	std::vector<MusicTrackControl*> musicTrackControls;
 
-    for (const Song& song : music_data) {
+	for (const Song& song : music_data) {
 		musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, song));
 	}
 

@@ -151,141 +151,141 @@ constexpr int kMinimumMusicFade = 250;
 
 class SoundHandler {
 public:
-	SoundHandler();
-	~SoundHandler();
+    SoundHandler();
+    ~SoundHandler();
 
-	void save_config();
-	void load_config();
+    void save_config();
+    void load_config();
 
-	/**
-	 * Returns 'true' if the playing of sounds is disabled due to sound driver problems, or because
-	 * disable_backend() was used.
-	 */
-	inline static bool is_backend_disabled() {
-		return SoundHandler::backend_is_disabled_;
-	}
+    /**
+     * Returns 'true' if the playing of sounds is disabled due to sound driver problems, or because
+     * disable_backend() was used.
+     */
+    inline static bool is_backend_disabled() {
+        return SoundHandler::backend_is_disabled_;
+    }
 
-	/**
-	 * Disables all sound.
-	 */
-	inline static void disable_backend() {
-		SoundHandler::backend_is_disabled_ = true;
-	}
+    /**
+     * Disables all sound.
+     */
+    inline static void disable_backend() {
+        SoundHandler::backend_is_disabled_ = true;
+    }
 
-	// This is static so that we can load the tribes and world without instantiating the sound system
-	static FxId register_fx(SoundType type, const std::string& fx_path);
+    // This is static so that we can load the tribes and world without instantiating the sound system
+    static FxId register_fx(SoundType type, const std::string& fx_path);
 
-	void play_fx(SoundType type,
-	             FxId fx_id,
-	             uint16_t priority = kFxMaximumPriority,
-	             bool allow_multiple = true,
-	             int32_t stereo_position = kStereoCenter,
-	             int distance = 0);
-	// Trigger loading of the sound files for the given effect.
-	void load_fx(SoundType type, FxId id);
-	void remove_fx_set(SoundType type);
+    void play_fx(SoundType type,
+                 FxId fx_id,
+                 uint16_t priority = kFxMaximumPriority,
+                 bool allow_multiple = true,
+                 int32_t stereo_position = kStereoCenter,
+                 int distance = 0);
+    // Trigger loading of the sound files for the given effect.
+    void load_fx(SoundType type, FxId id);
+    void remove_fx_set(SoundType type);
 
-	void register_songs(const std::string& dir, const std::string& basename);
-	void stop_music(int fadeout_ms = kMinimumMusicFade);
-	std::string current_song();
+    void register_songs(const std::string& dir, const std::string& basename);
+    void stop_music(int fadeout_ms = kMinimumMusicFade);
+    std::string current_song();
     [[nodiscard]] bool is_shuffle() const;
-	void set_shuffle(bool on);
-	void change_music(const std::string& songset_name = std::string(),
-	                  int fadeout_ms = kMinimumMusicFade);
-	void set_music_track_enabled(std::string& filename, bool on);
-	bool is_music_track_enabled(std::string& filename);
-	std::vector<Song> get_music_data();
+    void set_shuffle(bool on);
+    void change_music(const std::string& songset_name = std::string(),
+                      int fadeout_ms = kMinimumMusicFade);
+    void set_music_track_enabled(std::string& filename, bool on);
+    bool is_music_track_enabled(std::string& filename);
+    std::vector<Song> get_music_data();
 
-	void use_custom_songset(bool on);
-	[[nodiscard]] bool use_custom_songset() const;
-	[[nodiscard]] const std::string current_songset() const;
+    void use_custom_songset(bool on);
+    [[nodiscard]] bool use_custom_songset() const;
+    [[nodiscard]] const std::string current_songset() const;
 
-	[[nodiscard]] bool is_sound_enabled(SoundType type) const;
-	void set_enable_sound(SoundType type, bool enable);
-	[[nodiscard]] int32_t get_volume(SoundType type) const;
-	void set_volume(SoundType type, int32_t volume);
-	[[nodiscard]] inline bool is_sound_audible(SoundType type) const {
-		return !is_backend_disabled() && is_sound_enabled(type) && get_volume(type) > 0;
-	}
+    [[nodiscard]] bool is_sound_enabled(SoundType type) const;
+    void set_enable_sound(SoundType type, bool enable);
+    [[nodiscard]] int32_t get_volume(SoundType type) const;
+    void set_volume(SoundType type, int32_t volume);
+    [[nodiscard]] inline bool is_sound_audible(SoundType type) const {
+        return !is_backend_disabled() && is_sound_enabled(type) && get_volume(type) > 0;
+    }
 
-	[[nodiscard]] int32_t get_max_volume() const;
+    [[nodiscard]] int32_t get_max_volume() const;
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(SoundHandler);
+    DISALLOW_COPY_AND_ASSIGN(SoundHandler);
 
-	void read_config();
+    void read_config();
 
-	FxId do_register_fx(SoundType type, const std::string& fx_path);
+    FxId do_register_fx(SoundType type, const std::string& fx_path);
 
-	void initialization_error(const char* msg, bool quit_sdl);
+    void initialization_error(const char* msg, bool quit_sdl);
 
-	bool play_or_not(SoundType type, FxId fx_id, uint16_t priority, bool allow_multiple);
-	void start_music(const std::string& songset_name);
-	void notify_song_title_changed(const std::string& song_name);
+    bool play_or_not(SoundType type, FxId fx_id, uint16_t priority, bool allow_multiple);
+    void start_music(const std::string& songset_name);
+    void notify_song_title_changed(const std::string& song_name);
 
-	static void music_finished_callback();
-	static void fx_finished_callback(int32_t channel);
+    static void music_finished_callback();
+    static void fx_finished_callback(int32_t channel);
 
-	void lock_fx();
-	void release_fx_lock();
+    void lock_fx();
+    void release_fx_lock();
 
-	/// Contains options for a sound type or the music
-	struct SoundOptions {
-		explicit SoundOptions(int vol, const std::string& savename) : volume(vol), name(savename) {
-			assert(!savename.empty());
-			assert(vol >= 0);
-			assert(vol <= MIX_MAX_VOLUME);
-		}
+    /// Contains options for a sound type or the music
+    struct SoundOptions {
+        explicit SoundOptions(int vol, const std::string& savename) : volume(vol), name(savename) {
+            assert(!savename.empty());
+            assert(vol >= 0);
+            assert(vol <= MIX_MAX_VOLUME);
+        }
 
-		/// Whether the user wants to hear this type of sound
-		bool enabled{true};
-		/// Volume for sound effects or music (from 0 to get_max_volume())
-		int volume;
-		/// Name for saving
-		const std::string name;
-	};
+        /// Whether the user wants to hear this type of sound
+        bool enabled{true};
+        /// Volume for sound effects or music (from 0 to get_max_volume())
+        int volume;
+        /// Name for saving
+        const std::string name;
+    };
 
-	/// Contains all options for sound types and music
-	std::map<SoundType, SoundOptions> sound_options_;
+    /// Contains all options for sound types and music
+    std::map<SoundType, SoundOptions> sound_options_;
 
-	/// A collection of songsets
-	std::map<std::string, std::unique_ptr<Songset>> songs_;
+    /// A collection of songsets
+    std::map<std::string, std::unique_ptr<Songset>> songs_;
 
-	/// A collection of effect sets
-	std::map<SoundType, std::map<FxId, std::unique_ptr<FXset>>> fxs_;
+    /// A collection of effect sets
+    std::map<SoundType, std::map<FxId, std::unique_ptr<FXset>>> fxs_;
 
-	/// Maps Fx names to identifiers to ensure that we register each effect only once
-	std::map<SoundType, std::map<std::string, FxId>> fx_ids_;
+    /// Maps Fx names to identifiers to ensure that we register each effect only once
+    std::map<SoundType, std::map<std::string, FxId>> fx_ids_;
 
-	/// List of currently playing effects, and the channel each one is on
-	/// Access to this variable is protected through fx_lock_ mutex.
-	std::map<uint32_t, FxId> active_fx_;
+    /// List of currently playing effects, and the channel each one is on
+    /// Access to this variable is protected through fx_lock_ mutex.
+    std::map<uint32_t, FxId> active_fx_;
 
-	/** Which songset we are currently selecting songs from - not regarding
-	 * if there actually is a song playing \e right \e now.
-	 */
-	std::string current_songset_;
+    /** Which songset we are currently selecting songs from - not regarding
+     * if there actually is a song playing \e right \e now.
+     */
+    std::string current_songset_;
 
-	/// The title of the current (or most recently played) son
-	std::string current_song_;
+    /// The title of the current (or most recently played) son
+    std::string current_song_;
 
-	/** The random number generator.
-	 * \note The RNG here \e must \e not be the same as the one for the game
-	 * logic!
-	 */
-	RNG rng_;
+    /** The random number generator.
+     * \note The RNG here \e must \e not be the same as the one for the game
+     * logic!
+     */
+    RNG rng_;
 
-	/// Protects access to active_fx_ between callbacks and main code.
-	SDL_mutex* fx_lock_{nullptr};
+    /// Protects access to active_fx_ between callbacks and main code.
+    SDL_mutex* fx_lock_{nullptr};
 
-	/**
-	 * Can sounds be played?
-	 * true = they mustn't be played, e.g. because hardware is missing or disable_backend() was
-	 * called. false = can be played
-	 */
-	static bool backend_is_disabled_;
-	bool use_custom_songset_instead_ingame_;
-	bool shuffle_;
+    /**
+     * Can sounds be played?
+     * true = they mustn't be played, e.g. because hardware is missing or disable_backend() was
+     * called. false = can be played
+     */
+    static bool backend_is_disabled_;
+    bool use_custom_songset_instead_ingame_;
+    bool shuffle_;
 };
 
 extern SoundHandler* g_sh;
