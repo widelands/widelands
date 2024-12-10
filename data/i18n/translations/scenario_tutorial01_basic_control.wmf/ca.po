@@ -2,14 +2,14 @@
 # Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
-# Juanjo, 2015-2023
+# Juanjo, 2015-2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-11-30 03:02+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Juanjo, 2015-2023\n"
+"Last-Translator: Juanjo, 2015-2024\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -752,75 +752,75 @@ msgid ""
 "workplace and where any number of your wares can be stored until they are "
 "needed somewhere. So they act like a kind of town center, and to signify "
 "this, they get unique names."
-msgstr ""
+msgstr "Potser heu observat que la línia de cens del quarter és diferent. Això és perquè és un edifici especial de tipus magatzem. Els magatzems són edificis on els treballadors poden quedar-se mentre no tinguin un lloc de treball assignat i on els béns es poden emmagatzemar fins que es necessitin en algun lloc. Així que actuen com si fossin centres importants del poblat i, per això, tenen noms propis."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:505
 msgid ""
 "The small crowns beside the name mark it as your headquarters. As you play "
 "Widelands, you will see three kinds of warehouses, marked by little icons:"
-msgstr ""
+msgstr "Les corones petites que hi ha al costat del nom marquen el vostre quarter. Quan jugueu al Widelands, podeu veure tres tipus de magatzem, marcats amb aquestes icones:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:506
 msgid ""
 "The headquarters where you usually start the game. It is marked by small "
 "crowns: ♔"
-msgstr ""
+msgstr "El quarter és el lloc des d'on normalment comença la partida. Es marca amb corones petites: ♔"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:507
 msgid ""
 "Plain warehouses that simply hold wares and workers to keep them distributed"
 " all over your territory. They are marked by small houses: ⟰"
-msgstr ""
+msgstr "Magatzems bàsics que només emmagatzemen béns i treballadors i que permeten distribuir-los per tot el territori. Es marquen amb cases petites: ⟰"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:508
 msgid ""
 "Ports that you’ll use in seafaring. They don’t only store your wares and "
 "workers, but can also load them on your ships to send them across the seas. "
 "They are marked by small anchors: ⚓"
-msgstr ""
+msgstr "Ports que fareu servir per a navegar. No només emmagatzemen béns i treballadors, sinó que a més a més els poden carregar als vaixells i enviar-los a través del mar. Es marquen amb petites àncores: ⚓"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:509
 msgid ""
 "All of them are assigned names automatically that match the tribe, but you "
 "can change their names to your liking too."
-msgstr ""
+msgstr "Tots tenen assignats noms automàticament segons el clan al que pertanyen, però si ho voleu, podeu canviar-los."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
 msgid "Change the name of your little village"
-msgstr ""
+msgstr "Canvieu el nom de la vila"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:519
 msgid "Change the name of your headquarters"
-msgstr ""
+msgstr "Canvia el nom del quarter"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid ""
 "In order to set a new name for your headquarters, first click on it to open "
 "its window."
-msgstr ""
+msgstr "Per tal de posar un nom nou al quarter, feu-hi clic per a obrir la seva finestra."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:521
 msgid "You will see an edit box at the top of the window showing the name."
-msgstr ""
+msgstr "Veureu un quadre d'edició a la part superior de la finestra on s'hi mostra el nom."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:522
 msgid "All you have to do is delete the old name and type in the new one."
-msgstr ""
+msgstr "Només cal que esborreu el nom antic i escriviu el nou."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:523
 msgid "When you’re done, just close the window."
-msgstr ""
+msgstr "Quan hagueu acabat, només cal que tanqueu la finestra."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:528
 msgid "Be creative"
-msgstr ""
+msgstr "Sigueu creatiu"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:529
 msgid ""
 "I see you closed the window without changing the name. I’m sure you can come"
 " up with something. But if you don’t want to, at least delete the old name, "
 "please, to show me you’ve found the editbox."
-msgstr ""
+msgstr "Veig que heu tancat la finestra sense canviar el nom. Estic segur que se us ocorrerà algun nom. Però si no voleu canviar-lo, almenys esborreu el nom antic i així sabré que heu trobat el quadre d'edició."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:540
 msgid "Archive all messages in your inbox"

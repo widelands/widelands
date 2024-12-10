@@ -184,13 +184,13 @@ msgstr "Stavba drevorubačskej chatrče"
 msgid ""
 "First, I’ll left-click on the symbol where I want the lumberjack’s hut to be"
 " built. A window will appear where I can choose between buildings."
-msgstr ""
+msgstr "Najprv kliknem ľavým tlačidlom myši na symbol, kde chcem postaviť drevorubačskú chatrč. Zobrazí sa okno, kde si môžem vybrať medzi budovami."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:123
 msgid ""
 "The lumberjack’s hut is a small building, so I will then go on to select the"
 " small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr ""
+msgstr "Drevorubačská chatrč je malá budova, takže prejdem na kartu malých budov. Potom si vyberiem drevorubačskú chatrč."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:130
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:141
@@ -226,7 +226,7 @@ msgid ""
 "Now watch closely while a builder leaves the headquarters and goes to the "
 "construction site. Also, a carrier will take position in between the two "
 "blue flags and carry wares from one blue flag to the other."
-msgstr "Teraz poriadne sledujte, ako staviteľ opustí ústredie a pôjde ku stavenisku. Okrem toho sa medzi tieto dve modré vlajky postaví nosič a bude prenášať výrobky od jednej modrej vlajky k druhej."
+msgstr "Teraz poriadne sledujte, ako stavbár opustí ústredie a pôjde ku stavenisku. Okrem toho sa medzi tieto dve modré vlajky postaví nosič a bude prenášať výrobky od jednej modrej vlajky k druhej."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:165
 msgid "Build a flag to divide the road to the lumberjack"
@@ -306,11 +306,11 @@ msgid ""
 "This button toggles showing the building’s work area. When the lumberjack "
 "leaves the building to look for trees to fell, he will only look for them "
 "within this area. Let me show you how perfect this spot is."
-msgstr ""
+msgstr "Toto tlačidlo prepína zobrazenie pracovnej oblasti budovy. Keď drevorubač opustí budovu, aby hľadal stromy na výrub, bude ich hľadať iba v tejto oblasti. Dovoľte mi ukázať vám, aké výborné je toto miesto."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:224
 msgid "Close the construction site window when you have seen enough."
-msgstr ""
+msgstr "Keď ste videli dostatočne, zatvorte okno staveniska."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:234
 msgid "Well done! Let’s wait till the hut is finished."
@@ -324,7 +324,7 @@ msgstr "Ak chcete zvýšiť rýchlosť hry, jednoducho stlačte kláves %1$s na 
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:237
 msgid "Change is rapid with %1$s/%2$s and smooth with %3$s/%4$s."
-msgstr ""
+msgstr "Zmena je rýchla použitím %1$s/%2$s a pomalá použitím %3$s/%4$s."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:244
 msgid "The Lumberjack’s Hut is Done"
@@ -479,7 +479,7 @@ msgstr "Kameňolom je malá budova, rovnako ako drevorubačská chatrč. Môžet
 msgid ""
 "Just click on any house symbol next to the rocks, select the small buildings"
 " tab in the window that opens up, then click on the quarry symbol."
-msgstr "Kliknite na hociktorý symbol domu vedľa tých skál. V okne, ktoré sa otvorí, vyberte kartu pre malé budovy a potom kliknite na symbol kameňolomu."
+msgstr "Kliknite na hociktorý symbol domu vedľa tých skál. V okne, ktoré sa otvorí, vyberte kartu malých budov a potom kliknite na symbol kameňolomu."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:342
 msgid "How to Build a Quarry"
@@ -968,7 +968,7 @@ msgid ""
 "Dismantling the quarry: A builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
-msgstr "Rozobratie kameňolomu: staviteľ opustí ústredie a rozoberie kameňolom kúsok po kúsku. Získate tak časť z výrobkov, ktoré ste použili na stavbu."
+msgstr "Rozobratie kameňolomu: stavbár opustí ústredie a rozoberie kameňolom kúsok po kúsku. Získate tak časť z výrobkov, ktoré ste použili na stavbu."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:606
 msgid "Messages Arrived!"

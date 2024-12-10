@@ -305,7 +305,7 @@ msgid ""
 "build a port (your goal is to build a port far away from home, so this is "
 "not surprising), and of course you need a builder, too. When everything is "
 "prepared, a ship will come and pick it up."
-msgstr "Výpravy možno začínať z hociktorého prístavu. Do tohto prístavu sa následne donesú všetky potrebné výrobky. Ide o presne tie isté výrobky, aké vášmu kmeňu treba na stavbu prístavu (čo nie je prekvapujúce vzhľadom na to, že cieľom je niekde ďaleko od domova postaviť prístav). Samozrejme, požiadavkou je i staviteľ. Keď bude všetko pripravené, tovar príde naložiť loď."
+msgstr "Výpravy možno začínať z hociktorého prístavu. Do tohto prístavu sa následne donesú všetky potrebné výrobky. Ide o presne tie isté výrobky, aké vášmu kmeňu treba na stavbu prístavu (čo nie je prekvapujúce vzhľadom na to, že cieľom je niekde ďaleko od domova postaviť prístav). Samozrejme, požiadavkou je i stavbár. Keď bude všetko pripravené, tovar príde naložiť loď."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:151
 msgid ""
@@ -402,7 +402,7 @@ msgid ""
 "The wares will then be unloaded, and the ship will take up the task of "
 "transporting wares once again. The builder will start his work and build a "
 "port."
-msgstr "Loď následne vyloží výrobky a vráti sa späť k prepravnej činnosti. Staviteľ začne pracovať na prístave."
+msgstr "Loď následne vyloží výrobky a vráti sa späť k prepravnej činnosti. Stavbár začne pracovať na prístave."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:190
 msgid ""
