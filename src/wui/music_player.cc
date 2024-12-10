@@ -117,9 +117,9 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 	hbox_current_track_.set_inner_spacing(kSpacing);
 
 	std::vector<Song> music_data = g_sh->get_music_data();
-    const size_t data_size = music_data.size();
-    std::vector<MusicTrackControl*> musicTrackControls;
-    musicTrackControls.reserve(data_size);
+	const size_t data_size = music_data.size();
+	std::vector<MusicTrackControl*> musicTrackControls;
+	musicTrackControls.reserve(data_size);
 
 	for (const Song& song : music_data) {
 		musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, song));
