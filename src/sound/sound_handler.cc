@@ -440,7 +440,11 @@ void SoundHandler::start_music(const std::string& songset_name) {
 		if (Mix_Music* const m = songs_[songset_name]->get_song(n)) {
 			Mix_FadeInMusic(m, 1, kMinimumMusicFade);
 			current_songset_ = songset_name;
-			std::string title(Mix_GetMusicTitle(m));
+#if SDL_MIXER_VERSION_ATLEAST(2, 6, 0)
+            std::string title(Mix_GetMusicTitle(m));
+#else
+            std::string title("");
+#endif
 			if (title.empty()) {
 				title = "Untitled";
 			}
