@@ -154,12 +154,12 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 		std::string title = g_sh->current_song();
 		label_current_track_.set_text(title);
 	});
-    checkbox_shuffle_.changedto.connect([this](bool on) { set_shuffle(on); });
+	checkbox_shuffle_.changedto.connect([this](bool on) { set_shuffle(on); });
 	checkbox_shuffle_.set_state(g_sh->is_shuffle());
 }
 
 void MusicPlayer::set_shuffle(bool on) {
-    g_sh->set_shuffle(on);
+	g_sh->set_shuffle(on);
 }
 
 void MusicPlayer::draw(RenderTarget& dst) {

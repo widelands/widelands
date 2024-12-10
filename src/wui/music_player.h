@@ -34,7 +34,7 @@ struct MusicPlayer : public UI::Box {
 private:
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
-    void set_shuffle(bool on);
+	void set_shuffle(bool on);
 
 	UI::Box vbox_track_playlist_;
 	UI::Box hbox_playback_control_;

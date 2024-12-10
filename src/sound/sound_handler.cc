@@ -443,7 +443,7 @@ void SoundHandler::start_music(const std::string& songset_name) {
 #if SDL_MIXER_VERSION_ATLEAST(2, 6, 0)
 			std::string title(Mix_GetMusicTitle(m));
 #else
-            std::string title;
+			std::string title;
 #endif
 			if (title.empty()) {
 				title = "Untitled";
