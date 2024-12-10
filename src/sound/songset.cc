@@ -70,9 +70,9 @@ void Songset::load_songs(const std::string& basename) {
 			song.filename = filename;
 			m_ = load_file(filename);
 #if SDL_MIXER_VERSION_ATLEAST(2, 6, 0)
-            std::string title(Mix_GetMusicTitle(m_));
+			std::string title(Mix_GetMusicTitle(m_));
 #else
-            std::string title(filename);
+			std::string title(filename);
 #endif
 			song.title = title;
 			songs_.emplace(filename, song);
