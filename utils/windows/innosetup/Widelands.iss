@@ -98,6 +98,7 @@ Source: {#BuildFolder}\data\shaders\*;                           DestDir: {app}\
 Source: {#BuildFolder}\data\ai\*;                                DestDir: {app}\data\ai\;        Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: {#BuildFolder}\data\datadirversion;                      DestDir: {app}\data; Flags: ignoreversion; DestName: datadirversion; Tasks: ; Components: "Widelands"
 Source: {#BuildFolder}\build\src\widelands.exe;   DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
+Source: {#BuildFolder}\build\src\widelands.pdb;   DestDir: {app};            Flags: ignoreversion skipifsourcedoesntexist;                               Components: "Widelands"
 Source: {#BuildFolder}\ChangeLog;                 DestDir: {app};            Flags: ignoreversion; DestName: ChangeLog.txt;                              Components: "Widelands"
 Source: {#BuildFolder}\COPYING;                   DestDir: {app};            Flags: ignoreversion; DestName: COPYING.txt;                                Components: "Widelands"
 Source: {#BuildFolder}\CREDITS;                   DestDir: {app};            Flags: ignoreversion; DestName: CREDITS.txt;                                Components: "Widelands"
