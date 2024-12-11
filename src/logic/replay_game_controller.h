@@ -21,7 +21,7 @@
 
 #include <memory>
 
-#include "logic/cmd_queue.h"
+#include "commands/command.h"
 #include "logic/game_controller.h"
 
 namespace Widelands {
@@ -49,13 +49,6 @@ public:
 	}
 
 private:
-	struct CmdReplayEnd : public Widelands::Command {
-		explicit CmdReplayEnd(const Time& init_duetime) : Widelands::Command(init_duetime) {
-		}
-		void execute(Widelands::Game& game) override;
-		[[nodiscard]] Widelands::QueueCommandTypes id() const override;
-	};
-
 	Widelands::Game& game_;
 	std::unique_ptr<Widelands::ReplayReader> replayreader_;
 	int32_t lastframe_;
