@@ -21,7 +21,7 @@
 #include "sound/sound_handler.h"
 
 namespace {
-constexpr int kMargin = 12;
+constexpr int kMargin = 4;
 }  // namespace
 
 GameOptionsSoundMenu::GameOptionsSoundMenu(Panel& parent, UI::UniqueWindow::Registry& registry)
@@ -32,10 +32,16 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(Panel& parent, UI::UniqueWindow::Regi
                       100,
                       100,
                       _("Sound Options")),
-     sound_options_(*this, UI::SliderStyle::kWuiLight) {
-	sound_options_.set_border(kMargin, kMargin, kMargin, kMargin);
+     outer_(this, UI::PanelStyle::kWui, "sound_options_outer_box", 0, 0, UI::Box::Vertical),
+     sound_options_(outer_, UI::SliderStyle::kWuiLight),
+     music_player_(outer_) {
 
-	set_center_panel(&sound_options_);
+	outer_.add(&sound_options_, UI::Box::Resizing::kFullSize);
+	outer_.add(&music_player_, UI::Box::Resizing::kFullSize);
+	sound_options_.set_border(kMargin, kMargin, kMargin, kMargin);
+	music_player_.set_border(kMargin, kMargin, kMargin, kMargin);
+
+	set_center_panel(&outer_);
 
 	if (get_usedefaultpos()) {
 		center_to_parent();
