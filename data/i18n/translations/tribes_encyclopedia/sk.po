@@ -3203,7 +3203,7 @@ msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It can "
 "be processed into spidercloth or tabards in a weaving mill, or used to make "
 "tools in the toolsmithy."
-msgstr ""
+msgstr "Pavúčí hodváb produkujú pavúky, ktoré sa chovajú na pavúčích farmách. V tkáčovni sa spracúva na pavúčiu látku alebo kabátce. Vo vyhni na nástroje sa môže použiť na výrobu nástrojov."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:481
@@ -3212,7 +3212,7 @@ msgid ""
 "Spidercloth is made out of spider silk in a weaving mill. It is used in the "
 "shipyard. Also some higher developed buildings need spidercloth for their "
 "construction."
-msgstr ""
+msgstr "Pavúčia látka sa vyrába z pavúčieho hodvábu v tkáčovni. Používa sa v lodenici. Okrem toho je potrebná pri stavbe niektorých dokonalejších budov."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fish
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:492
