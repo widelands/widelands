@@ -78,7 +78,7 @@
   <url type="help">https://www.widelands.org/wiki/Game%20Manual/</url>
   <url type="homepage">https://www.widelands.org/</url>
   <url type="translate">https://www.widelands.org/wiki/TranslatingWidelands/</url>
-  <developer_name>The Widelands Development Team</developer_name>
+  <developer id="org.widelands.widelands"><name>The Widelands Development Team</name></developer>
   <content_rating type="oars-1.0">
     <content_attribute id="violence-cartoon">moderate</content_attribute>
     <content_attribute id="violence-fantasy">none</content_attribute>
