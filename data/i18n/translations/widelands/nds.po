@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-12-05 03:11+0000\n"
+"POT-Creation-Date: 2024-12-12 03:09+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2024\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -2589,7 +2589,7 @@ msgstr "(stoppt)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:480
-#: ../../../../src/wui/building_statistics_menu.cc:725
+#: ../../../../src/wui/building_statistics_menu.cc:726
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
@@ -3222,47 +3222,41 @@ msgstr "Dat Speel is sekert worden!"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:887
 msgid "Building’s inputs changed!"
-msgstr ""
+msgstr "Huus-Ingaven ännert!"
 
 #. * TRANSLATORS: The argument is the buiding name
 #: ../../../../src/map_io/map_buildingdata_packet.cc:898
 #, c-format
-msgid "%s: the building's inputs have changed."
-msgstr ""
+msgid "%s: the building’s inputs have changed."
+msgstr "%s: De Ingaven vum Huus hebben sik ännert."
 
-#. * TRANSLATORS: Amount and type of space between two sentences
 #: ../../../../src/map_io/map_buildingdata_packet.cc:901
-msgctxt "sentence_separator"
-msgid " "
-msgstr ""
-
-#: ../../../../src/map_io/map_buildingdata_packet.cc:902
 msgid "The following wares have been deleted:"
-msgstr ""
+msgstr "Deese Waren sünd lösket worden:"
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:909
+#: ../../../../src/map_io/map_buildingdata_packet.cc:908
 #, c-format
 msgid "%1$u piece of %2$s"
 msgid_plural "%1$u pieces of %2$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u Deel %2$s"
+msgstr[1] "%1$u Delen %2$s"
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:915
+#: ../../../../src/map_io/map_buildingdata_packet.cc:914
 #, c-format
 msgid "%1$u piece of an unknown ware"
 msgid_plural "%1$u pieces of unknown wares"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u Deel vun eener unbekannten Waar"
+msgstr[1] "%1$u Delen vun unbekannten Waren"
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:921
+#: ../../../../src/map_io/map_buildingdata_packet.cc:920
 msgid ""
 "The game was probably saved with a different Widelands version or with "
 "different enabled add-ons."
-msgstr ""
+msgstr "Dat Speel is wull mit eener annern Versioon vun Widelands of mit anner anknipst Verwiederns sekert worden."
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:924
+#: ../../../../src/map_io/map_buildingdata_packet.cc:923
 msgid "Please review the current production programs and input settings."
-msgstr ""
+msgstr "Bidde kiek de stedenwies Produzerens-Programmen un Ingaav-Instellens na."
 
 #: ../../../../src/map_io/map_saver.cc:85
 #, c-format
@@ -9078,22 +9072,22 @@ msgstr "Bargwarken"
 msgid "Ports"
 msgstr "Muden"
 
-#: ../../../../src/wui/building_statistics_menu.cc:734
+#: ../../../../src/wui/building_statistics_menu.cc:735
 msgid "Low productivity:"
 msgstr "Lege Wöörde:"
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../../../src/wui/building_statistics_menu.cc:743
-#: ../../../../src/wui/building_statistics_menu.cc:762
-#: ../../../../src/wui/building_statistics_menu.cc:764
+#: ../../../../src/wui/building_statistics_menu.cc:744
+#: ../../../../src/wui/building_statistics_menu.cc:763
+#: ../../../../src/wui/building_statistics_menu.cc:765
 #: ../../../../src/wui/productionsitewindow.cc:233
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../../../src/wui/building_statistics_menu.cc:753
+#: ../../../../src/wui/building_statistics_menu.cc:754
 msgid "Lacking soldiers:"
 msgstr "Soldaten hapern:"
 
