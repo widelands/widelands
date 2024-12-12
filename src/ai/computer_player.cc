@@ -30,7 +30,7 @@ struct EmptyAI : ComputerPlayer {
 	EmptyAI(Widelands::Game& g, const Widelands::PlayerNumber pid) : ComputerPlayer(g, pid) {
 	}
 
-	void think() override {
+	void do_think() override {
 	}
 
 	struct EmptyAIImpl : Implementation {

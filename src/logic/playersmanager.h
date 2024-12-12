@@ -46,6 +46,11 @@ struct PlayerEndStatus {
 	PlayerEndResult result = PlayerEndResult::kUndefined;
 	Time time;
 	std::string info;
+
+	[[nodiscard]] bool cannot_continue() const {
+		return result == Widelands::PlayerEndResult::kEliminated ||
+		       result == Widelands::PlayerEndResult::kResigned;
+	}
 };
 
 class PlayersManager {

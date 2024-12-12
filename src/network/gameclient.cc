@@ -452,6 +452,10 @@ void GameClient::report_result(uint8_t player_nr,
 	pes.result = result;
 	pes.info = info;
 	d->game->player_manager()->add_player_end_status(pes);
+
+	if (pes.cannot_continue()) {
+		d->game->invalidate_pending_diplomacy_actions(pes.player);
+	}
 }
 
 const GameSettings& GameClient::settings() {

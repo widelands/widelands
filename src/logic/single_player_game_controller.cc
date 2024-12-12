@@ -65,13 +65,16 @@ void SinglePlayerGameController::think() {
 	if (use_ai_ && game_.is_loaded()) {
 		const Widelands::PlayerNumber nr_players = game_.map().get_nrplayers();
 		iterate_players_existing(p, nr_players, game_, plr) if (p != local_) {
-
 			if (p > computerplayers_.size()) {
 				computerplayers_.resize(p);
 			}
 			if (computerplayers_[p - 1] == nullptr) {
 				computerplayers_[p - 1] =
 				   AI::ComputerPlayer::get_implementation(plr->get_ai())->instantiate(game_, p);
+				const auto* pes = game_.player_manager()->get_player_end_status(p);
+				if (pes != nullptr && pes->cannot_continue()) {
+					computerplayers_[p - 1]->set_thinking(false);
+				}
 			}
 			computerplayers_[p - 1]->think();
 		}
@@ -122,4 +125,14 @@ void SinglePlayerGameController::report_result(uint8_t p_nr,
 	pes.result = result;
 	pes.info = info;
 	game_.player_manager()->add_player_end_status(pes);
+
+	if (pes.cannot_continue()) {
+		game_.invalidate_pending_diplomacy_actions(pes.player);
+
+		// neuter AI
+		if (p_nr != local_) {
+			assert(computerplayers_[p_nr - 1]->player_number() == p_nr);
+			computerplayers_[p_nr - 1]->set_thinking(false);
+		}
+	}
 }

@@ -49,7 +49,15 @@ struct ComputerPlayer {
 	ComputerPlayer(Widelands::Game&, Widelands::PlayerNumber);
 	virtual ~ComputerPlayer() = default;
 
-	virtual void think() = 0;
+	void think() {
+		(this->*think_impl_)();
+	}
+	void set_thinking(bool t) {
+		think_impl_ = t ? &ComputerPlayer::do_think : &ComputerPlayer::do_no_think;
+	}
+	virtual void do_think() = 0;
+	void do_no_think() {
+	}
 
 	[[nodiscard]] Widelands::Game& game() const {
 		return game_;
@@ -99,6 +107,7 @@ struct ComputerPlayer {
 private:
 	Widelands::Game& game_;
 	Widelands::PlayerNumber const player_number_;
+	void (ComputerPlayer::*think_impl_)() = &ComputerPlayer::do_think;
 
 	DISALLOW_COPY_AND_ASSIGN(ComputerPlayer);
 };
