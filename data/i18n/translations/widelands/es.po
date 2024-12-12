@@ -15,6 +15,7 @@
 # Kiibakun, 2015,2021
 # Kiibakun, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
+# CansecoGPC, 2024
 # Madkat Here, 2015-2017,2020-2021
 # Puniasterus <puniasterus@gmail.com>, 2024
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
@@ -26,9 +27,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-12-07 03:09+0000\n"
+"POT-Creation-Date: 2024-12-12 03:09+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Puniasterus <puniasterus@gmail.com>, 2024\n"
+"Last-Translator: CansecoGPC, 2024\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -579,11 +580,11 @@ msgstr "Alternar entre mostrar el máximo de espacios de construcción que estar
 #. the map height heat map is shown
 #: ../../../../src/editor/editorinteractive.cc:495
 msgid "Disable height heat map"
-msgstr ""
+msgstr "Desactivar el mapa de calor de alturas"
 
 #: ../../../../src/editor/editorinteractive.cc:496
 msgid "Enable height heat map"
-msgstr ""
+msgstr "Activar el mapa de calor de alturas"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
@@ -609,7 +610,7 @@ msgstr "Mostrar océanos"
 msgid ""
 "Display separate water bodies with differently coloured overlays to see "
 "which coasts can be connected by shipping routes"
-msgstr ""
+msgstr "Muestra masas de agua separadas con superposiciones de distintos colores para ver qué costas pueden estar conectadas por rutas marítimas."
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
@@ -1401,7 +1402,7 @@ msgstr "Aleatorio"
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:316
 msgctxt "terrain"
 msgid "Default"
-msgstr ""
+msgstr "Por Defecto"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:318
 msgid "Alpine"
@@ -1421,7 +1422,7 @@ msgstr "Yermo"
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:322
 msgctxt "terrain"
 msgid "Random"
-msgstr ""
+msgstr "Aleatorio"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:633
 msgid "Generating random map…"
@@ -1883,7 +1884,7 @@ msgstr "Widelands no va a funcionar porque el controlador de tu tarjeta gráfica
 #: ../../../../src/graphic/gl/initialize.cc:227
 #, c-format
 msgid "The %1$s version needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "La %1$s versión necesita ser la versión %2$u.%3$u o mas nueva."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -2078,7 +2079,7 @@ msgstr "Ninguno"
 #: ../../../../src/logic/addons.cc:281
 #, c-format
 msgid "%1$s<br>• %2$s (version %3$s)"
-msgstr ""
+msgstr "%1$s<br>• %2$s (versión %3$s)"
 
 #: ../../../../src/logic/addons.cc:311
 msgid "No game-relevant add-ons in use."
@@ -2095,47 +2096,47 @@ msgstr[2] "%u complementos relevantes para el juego en uso:"
 #. * TRANSLATORS: "12 steps northwest of Port1"
 #: ../../../../src/logic/detected_port_space.cc:52
 msgid "northwest"
-msgstr ""
+msgstr "noroeste"
 
 #. * TRANSLATORS: "12 steps northeast of Port1"
 #: ../../../../src/logic/detected_port_space.cc:56
 msgid "northeast"
-msgstr ""
+msgstr "noreste"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../../../src/logic/detected_port_space.cc:60
 msgid "southwest"
-msgstr ""
+msgstr "suroeste"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../../../src/logic/detected_port_space.cc:64
 msgid "southeast"
-msgstr ""
+msgstr "sureste"
 
 #. * TRANSLATORS: "12 steps north of Port1"
 #: ../../../../src/logic/detected_port_space.cc:68
 msgid "north"
-msgstr ""
+msgstr "norte"
 
 #. * TRANSLATORS: "12 steps south of Port1"
 #: ../../../../src/logic/detected_port_space.cc:72
 msgid "south"
-msgstr ""
+msgstr "sur"
 
 #. * TRANSLATORS: "12 steps west of Port1"
 #: ../../../../src/logic/detected_port_space.cc:76
 msgid "west"
-msgstr ""
+msgstr "oeste"
 
 #. * TRANSLATORS: "12 steps east of Port1"
 #: ../../../../src/logic/detected_port_space.cc:80
 msgid "east"
-msgstr ""
+msgstr "este"
 
 #: ../../../../src/logic/detected_port_space.cc:88
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s"
-msgstr ""
+msgstr "Espacio portuario sin dueño descubierto en %1$s por %2$s"
 
 #. * TRANSLATORS: "Unowned port space discovered at 1:11 by Ship2 33 steps
 #. north of
@@ -2145,14 +2146,14 @@ msgstr ""
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
 msgid_plural ""
 "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s of %5$s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Espacio portuario sin dueño descubierto en %1$s por %2$s %3$u paso %4$s de %5$s"
+msgstr[1] "Espacio portuario sin dueño descubierto en %1$s por %2$s %3$u pasos %4$s de %5$s"
+msgstr[2] "Espacio portuario sin dueño descubierto en %1$s por %2$s %3$u pasos %4$s de %5$s"
 
 #: ../../../../src/logic/detected_port_space.cc:101
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s"
-msgstr ""
+msgstr "Espacio portuario de %1$s descubierto en %2$s por %3$s"
 
 #. * TRANSLATORS: "Port space of Player1 discovered at 2:22 by Ship3 44 steps
 #. north
@@ -2162,64 +2163,64 @@ msgstr ""
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
 msgid_plural ""
 "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s of %6$s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Espacio portuario de %1$s descubierto en %2$s por %3$s %4$u paso %5$s de %6$s"
+msgstr[1] "Espacio portuario de %1$s descubierto en %2$s por %3$s %4$u pasos %5$s de %6$s"
+msgstr[2] "Espacio portuario de %1$s descubierto en %2$s por %3$s %4$u pasos %5$s de %6$s"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
 #: ../../../../src/logic/detected_port_space.cc:120
 msgctxt "direction"
 msgid "NW"
-msgstr ""
+msgstr "NO"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northeast.
 #: ../../../../src/logic/detected_port_space.cc:124
 msgctxt "direction"
 msgid "NE"
-msgstr ""
+msgstr "NE"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southwest.
 #: ../../../../src/logic/detected_port_space.cc:128
 msgctxt "direction"
 msgid "SW"
-msgstr ""
+msgstr "SO"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southeast.
 #: ../../../../src/logic/detected_port_space.cc:132
 msgctxt "direction"
 msgid "SE"
-msgstr ""
+msgstr "SE"
 
 #. * TRANSLATORS: This is an abbreviated direction: North.
 #: ../../../../src/logic/detected_port_space.cc:136
 msgctxt "direction"
 msgid "N"
-msgstr ""
+msgstr "N"
 
 #. * TRANSLATORS: This is an abbreviated direction: South.
 #: ../../../../src/logic/detected_port_space.cc:140
 msgctxt "direction"
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #. * TRANSLATORS: This is an abbreviated direction: West.
 #: ../../../../src/logic/detected_port_space.cc:144
 msgctxt "direction"
 msgid "W"
-msgstr ""
+msgstr "O"
 
 #. * TRANSLATORS: This is an abbreviated direction: East.
 #: ../../../../src/logic/detected_port_space.cc:148
 msgctxt "direction"
 msgid "E"
-msgstr ""
+msgstr "E"
 
 #. * TRANSLATORS: Placeholders are gametime and shipname. Keep this short.
 #: ../../../../src/logic/detected_port_space.cc:157
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s"
-msgstr ""
+msgstr "Sin dueño / %1$s / %2$s"
 
 #. * TRANSLATORS: Placeholders are gametime, shipname, and distance direction
 #. port_name.
@@ -2228,7 +2229,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s / %3$u %4$s %5$s"
-msgstr ""
+msgstr "Sin dueño / %1$s / %2$s / %3$u %4$s %5$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this
 #. short.
@@ -2614,7 +2615,7 @@ msgstr "(detenido)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:480
-#: ../../../../src/wui/building_statistics_menu.cc:725
+#: ../../../../src/wui/building_statistics_menu.cc:726
 #, c-format
 msgid "%i%%"
 msgstr "%i %%"
@@ -2651,35 +2652,35 @@ msgstr "Su astillero no se ha construido lo suficientemente cerca de la costa. N
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Destination Gone"
-msgstr ""
+msgstr "Destino Desaparecido"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Ship Destination Vanished"
-msgstr ""
+msgstr "Destino del Barco Desaparecido"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:400
 msgid "Your ship’s destination has disappeared."
-msgstr ""
+msgstr "El destino de tu barco ha desaparecido."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:427
 msgid "Ship Arrived"
-msgstr ""
+msgstr "El Barco ha Llegado"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:427
 msgid "Ship Reached Destination"
-msgstr ""
+msgstr "El Barco Llego a su Destino"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:428
 msgid "Your ship has arrived at its destination."
-msgstr ""
+msgstr "Tu barco ha llegado a su destino."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:639
 msgid "A warship arrived at a known port build space."
-msgstr ""
+msgstr "Un barco de guerra ha llegado a un espacio de construcción de un puerto conocido."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:640
 msgid "An expedition ship arrived at a known port build space."
-msgstr ""
+msgstr "Un barco de exploración ha llegado a un espacio de construcción de un puerto conocido."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:641
 #: ../../../../src/logic/map_objects/tribes/ship.cc:649
@@ -2688,11 +2689,11 @@ msgstr "Espacio para Puerto"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:641
 msgid "Port Space Spotted"
-msgstr ""
+msgstr "Espacio de Puerto Avistado"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:647
 msgid "A warship found a new port build space."
-msgstr ""
+msgstr "Un barco de guerra ha encontrado un nuevo espacio de construcción en el puerto."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:648
 msgid "An expedition ship found a new port build space."
@@ -2704,65 +2705,65 @@ msgstr "Se ha encontrado Espacio para un Puerto"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:749
 msgid "Enemy Ship"
-msgstr ""
+msgstr "Barco Enemigo"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:749
 msgid "Enemy Ship Spotted"
-msgstr ""
+msgstr "Barco Enemigo Avistado"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:750
 msgid "A warship spotted an enemy ship."
-msgstr ""
+msgstr "Un barco de guerra avisto un barco enemigo."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:780
 #: ../../../../src/logic/map_objects/tribes/ship.cc:799
 msgid "Destination Unreachable"
-msgstr ""
+msgstr "Destino Inalcanzable"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:780
 #: ../../../../src/logic/map_objects/tribes/ship.cc:799
 msgid "Ship Destination Unreachable"
-msgstr ""
+msgstr "Destino del Barco Inalcanzable"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:781
 msgid "Your ship could not find a path to its destination."
-msgstr ""
+msgstr "Tu barco no pudo encontrar un camino hacia su destino."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:800
 #, c-format
 msgid "Your ship could not find a path to its destination port ‘%s’."
-msgstr ""
+msgstr "Tu barco no pudo encontrar un camino hacia su puerto destino ‘%s’."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1311
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1569
 msgid "Enemy Ship Attacking"
-msgstr ""
+msgstr "Barco Enemigo Atacando"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1311
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1568
 msgid "Naval Attack"
-msgstr ""
+msgstr "Ataque Naval"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1312
 #, c-format
 msgid "Your ship ‘%s’ is under attack from an enemy warship."
-msgstr ""
+msgstr "Tu barco ‘%s’ esta siendo atacado por un barco de guerra."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1431
 msgid "Ship Destroyed"
-msgstr ""
+msgstr "Barco Destruido"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1431
 msgid "Ship Sunk"
-msgstr ""
+msgstr "Barco Hundido"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1432
 msgid "An enemy ship has destroyed your warship."
-msgstr ""
+msgstr "Un barco enemigo ha destruido tu barco de guerra."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1570
 msgid "Your coast is under attack from an enemy warship."
-msgstr ""
+msgstr "Tu costa esta bajo el asedio de un barco de guerra enemigo."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1802
 msgid "Island Circumnavigated"
@@ -2822,15 +2823,15 @@ msgstr "Un espacio de construcción de puerto descubierto ya no está disponible
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2228
 msgctxt "ship"
 msgid "Warship"
-msgstr ""
+msgstr "Barco de Guerra"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2228
 msgid "Warship Ready"
-msgstr ""
+msgstr "Barco de Guerra Listo"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2229
 msgid "A warship is waiting for your commands."
-msgstr ""
+msgstr "Un barco de guerra espera tus ordenes."
 
 #. * TRANSLATORS: Ship expedition ready
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2234
@@ -2849,28 +2850,28 @@ msgstr "Un barco de expedición espera tus órdenes."
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2409
 msgctxt "ship_state"
 msgid "Sinking"
-msgstr ""
+msgstr "Hundiendose"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2411
 msgctxt "ship_state"
 msgid "Fighting"
-msgstr ""
+msgstr "Luchando"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2415
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
-msgstr ""
+msgstr "Reconvertir a Barco de Transporte"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2418
 msgctxt "ship_state"
 msgid "Refitting to Warship"
-msgstr ""
+msgstr "Reconvertir a Barco de Guerra"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2426
 #: ../../../../src/wui/seafaring_statistics_menu.cc:271
 msgctxt "ship_state"
 msgid "Warship"
-msgstr ""
+msgstr "Barco de Guerra"
 
 #. * TRANSLATORS: This is a ship state. The ship is
 #. * currently sailing to a specific destination ship.
@@ -3247,43 +3248,43 @@ msgstr "Partida guardada"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:887
 msgid "Building’s inputs changed!"
-msgstr ""
+msgstr "¡La entradas del edificio han cambiado!"
 
 #. * TRANSLATORS: The argument is the buiding name
 #: ../../../../src/map_io/map_buildingdata_packet.cc:898
 #, c-format
 msgid "%s: the building’s inputs have changed."
-msgstr ""
+msgstr "%s: las entradas del edificio han cambiado."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:901
 msgid "The following wares have been deleted:"
-msgstr ""
+msgstr "Las siguientes mercancías han sido borradas:"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:908
 #, c-format
 msgid "%1$u piece of %2$s"
 msgid_plural "%1$u pieces of %2$s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1$u pieza de %2$s"
+msgstr[1] "%1$u piezas de %2$s"
+msgstr[2] "%1$u piezas de %2$s"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:914
 #, c-format
 msgid "%1$u piece of an unknown ware"
 msgid_plural "%1$u pieces of unknown wares"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1$u pieza de mercancía"
+msgstr[1] "%1$u piezas de mercancías desconocidas"
+msgstr[2] "%1$u piezas de mercancías desconocidas"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:920
 msgid ""
 "The game was probably saved with a different Widelands version or with "
 "different enabled add-ons."
-msgstr ""
+msgstr "Probablemente la partida se guardó con una versión diferente de Widelands o con diferentes complementos habilitados."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:923
 msgid "Please review the current production programs and input settings."
-msgstr ""
+msgstr "Por favor, revise los programas de producción actuales y los ajustes de entrada."
 
 #: ../../../../src/map_io/map_saver.cc:85
 #, c-format
@@ -3451,7 +3452,7 @@ msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was reachable at the TCP port %u or the server shut down as"
 " you tried to connect."
-msgstr ""
+msgstr "Widelands no pudo establecer una conexión con la dirección dada. O bien no hay ningún servidor Widelands accesible en el puerto TCP %u o el servidor se cerró mientras intentabas conectarte."
 
 #: ../../../../src/network/gameclient.cc:817
 #, c-format
@@ -3466,14 +3467,14 @@ msgstr[2] "%u discrepancias de complementos detectado:\n"
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
-msgstr ""
+msgstr "%1$s\n• ‘%2$s’ requerido por el anfitrión no encontrado"
 
 #: ../../../../src/network/gameclient.cc:822
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
-msgstr ""
+msgstr "%1$s\n• ‘%2$s’ instalado en la versión %3$s pero el anfitrión usa la versión %4$s"
 
 #: ../../../../src/network/gameclient.cc:989
 msgid "/me ’s file failed md5 checksumming."
@@ -3843,12 +3844,12 @@ msgstr "Has sido desconectado del metaservidor ya que no has respondido a una pe
 #: ../../../../src/network/net_addons.cc:894
 #, c-format
 msgid "Sending metadata for %s"
-msgstr ""
+msgstr "Enviando metadatos para %s"
 
 #: ../../../../src/network/net_addons.cc:936
 #, c-format
 msgid "Uploading %s"
-msgstr ""
+msgstr "Subiendo %s"
 
 #: ../../../../src/network/network_gaming_messages.cc:30
 msgid "Client has left the game."
@@ -4147,7 +4148,7 @@ msgstr "Cargando…"
 
 #: ../../../../src/ui_basic/spinbox.cc:151
 msgid "Decrease the value"
-msgstr ""
+msgstr "Disminuir el valor"
 
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
@@ -4160,7 +4161,7 @@ msgstr "Disminuir el valor en %s"
 
 #: ../../../../src/ui_basic/spinbox.cc:164
 msgid "Increase the value"
-msgstr ""
+msgstr "Aumentar el valor"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
@@ -4353,11 +4354,11 @@ msgstr "%1$s<br>(%2$s)"
 
 #: ../../../../src/ui_basic/textinput.cc:374
 msgid "Cut"
-msgstr ""
+msgstr "Cortar"
 
 #: ../../../../src/ui_basic/textinput.cc:374
 msgid "Cut the selected text to the clipboard"
-msgstr ""
+msgstr "Cortar el texto seleccionado en el portapapeles"
 
 #: ../../../../src/ui_basic/textinput.cc:377
 #: ../../../../src/ui_fsmenu/tech_info.cc:238
@@ -4366,19 +4367,19 @@ msgstr "Copiar"
 
 #: ../../../../src/ui_basic/textinput.cc:377
 msgid "Copy the selected text to the clipboard"
-msgstr ""
+msgstr "Copiar el texto seleccionado en el portapapeles"
 
 #: ../../../../src/ui_basic/textinput.cc:380
 msgid "Paste"
-msgstr ""
+msgstr "Pegar"
 
 #: ../../../../src/ui_basic/textinput.cc:380
 msgid "Paste the clipboard content"
-msgstr ""
+msgstr "Pegar el contenido del portapapeles"
 
 #: ../../../../src/ui_basic/textinput.cc:383
 msgid "Delete the selected text"
-msgstr ""
+msgstr "Borrar el texto seleccionado"
 
 #: ../../../../src/ui_basic/textinput.cc:386
 #: ../../../../src/wlapplication_options.cc:364
@@ -4387,7 +4388,7 @@ msgstr "Seleccionar Todo"
 
 #: ../../../../src/ui_basic/textinput.cc:386
 msgid "Select the entire text"
-msgstr ""
+msgstr "Seleccionar todo el texto"
 
 #: ../../../../src/ui_basic/window.cc:80
 #: ../../../../src/ui_basic/window.cc:862
@@ -4422,23 +4423,23 @@ msgstr "Desprender"
 
 #: ../../../../src/ui_basic/window.cc:847
 msgid "Minimize the window"
-msgstr ""
+msgstr "Minimizar la ventana"
 
 #: ../../../../src/ui_basic/window.cc:847
 msgid "Unminimize the window"
-msgstr ""
+msgstr "Desminimizar la ventana"
 
 #: ../../../../src/ui_basic/window.cc:857
 msgid "Pin the window"
-msgstr ""
+msgstr "Fijar la ventana"
 
 #: ../../../../src/ui_basic/window.cc:857
 msgid "Unpin the window"
-msgstr ""
+msgstr "Liberar la ventana"
 
 #: ../../../../src/ui_basic/window.cc:862
 msgid "Close the window"
-msgstr ""
+msgstr "Cerrar la ventana"
 
 #: ../../../../src/ui_fsmenu/about.cc:38 ../../../../src/ui_fsmenu/main.cc:523
 msgid "About Widelands"
@@ -4601,35 +4602,35 @@ msgstr "Calidad mínima"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:354
 msgid "Min Players:"
-msgstr ""
+msgstr "Jugadores Mínimos:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:367
 msgid "Min Width:"
-msgstr ""
+msgstr "Ancho Mínimo:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:380
 msgid "Min Height:"
-msgstr ""
+msgstr "Altura Mínima:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:393
 msgid "Min Size:"
-msgstr ""
+msgstr "Tamaño Mínimo:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:406
 msgid "Max Players:"
-msgstr ""
+msgstr "Jugadores Máximos:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:419
 msgid "Max Width:"
-msgstr ""
+msgstr "Ancho Máximo:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:432
 msgid "Max Height:"
-msgstr ""
+msgstr "Altura Máxima:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:445
 msgid "Max Size:"
-msgstr ""
+msgstr "Tamaño Máximo:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:455
 msgid "Choose add-on to upload…"
@@ -4771,11 +4772,11 @@ msgstr "Alternativamente, también puede enviar un mensaje al equipo de desarrol
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:749
 msgid "Manage your installed add-ons"
-msgstr ""
+msgstr "Administrar tus complementos instalados"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:751
 msgid "Browse and install add-ons available on the server"
-msgstr ""
+msgstr "Examinar e instalar los complementos disponibles en el servidor"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:753
 #, c-format
@@ -4783,7 +4784,7 @@ msgid ""
 "Browse and install maps from the widelands.org website maps archive. Like "
 "manually downloaded maps, installed website maps are stored in the ‘%s’ "
 "directory under the Widelands home directory."
-msgstr ""
+msgstr "Explora e instala mapas del archivo de mapas del sitio web widelands.org. Al igual que los mapas descargados manualmente, los mapas del sitio web instalados se almacenan en el directorio '%s' bajo el directorio de inicio de Widelands."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:757
 msgid "Development"
@@ -4791,7 +4792,7 @@ msgstr "Desarrollo"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:757
 msgid "Tools for add-on developers"
-msgstr ""
+msgstr "Herramientas para desarrolladores de complementos"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:761
@@ -4839,7 +4840,7 @@ msgstr "Filtrar complementos por nombre"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:785
 msgid "Filter maps by name"
-msgstr ""
+msgstr "Filtrar mapas por nombre"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:796
 #, c-format
@@ -4849,12 +4850,12 @@ msgstr "Alternar categoria ‘%s’"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:812
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:709
 msgid "One World"
-msgstr ""
+msgstr "Un Mundo"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:820
 #, c-format
 msgid "Toggle world ‘%s’"
-msgstr ""
+msgstr "Alternar mundo ‘%s’"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1012
 #, c-format
@@ -5016,34 +5017,34 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1674
 msgid "Website Maps"
-msgstr ""
+msgstr "Mapas de la Web"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1675
 #, c-format
 msgid "Website Maps (%u)"
-msgstr ""
+msgstr "Mapas de la Web (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1707
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which could not be found"
-msgstr ""
+msgstr "• ‘%1$s’ requiere ‘%2$s’ que no puede ser encontrado"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1712
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is disabled"
-msgstr ""
+msgstr "• ‘%1$s’ requiere ‘%2$s’ que esta desactivado"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1719
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
-msgstr ""
+msgstr "• ‘%1$s’ requiere ‘%2$s’ que esta listado debajo del complemento requerido"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1747
 #, c-format
 msgid ""
 "• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
-msgstr ""
+msgstr "• ‘%1$s’ requiere primero ‘%2$s’ y entonces ‘%3$s’, pero están listados en el orden incorrecto"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1763
 #, c-format
@@ -5112,7 +5113,7 @@ msgstr ""
 msgid ""
 "The add-on ‘%s’ may not be uploaded to the server because the following "
 "filenames contained in the add-on are not allowed:"
-msgstr ""
+msgstr "El complemento ‘%s’ no puede ser subido al servidor porque los siguientes nombres de fichero contienen caracteres en el complemento que no están permitidos:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1986
 msgid ""
@@ -5120,7 +5121,7 @@ msgid ""
 "simple punctuation (period, hyphen, and underscore; not multiple periods). "
 "Other characters such as whitespace are not permitted. Filenames may not "
 "exceed 80 characters."
-msgstr ""
+msgstr "Los nombres de archivo sólo pueden contener caracteres alfanuméricos (A-Z, a-z, 0-9) y signos de puntuación simples (punto, guión y guión bajo; no varios puntos). No se permiten otros caracteres, como los espacios en blanco. Los nombres de archivo no pueden superar los 80 caracteres."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2001
 #, c-format
@@ -5138,7 +5139,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "El mapa ‘%1$s’ no pudo ser descargado del servidor.\n\nMensaje de Error:\n%2$s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2058
 #, c-format
@@ -5478,7 +5479,7 @@ msgstr "Versión mínima de Widelands: %s"
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:295
 msgctxt "version"
 msgid "(none)"
-msgstr ""
+msgstr "(ninguno)"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:325
 msgid "Top-level directory"
@@ -5872,7 +5873,7 @@ msgid ""
 "%3$s\n"
 "\n"
 "Note that this map can not be downloaded again from the server."
-msgstr ""
+msgstr "¿Estas seguro de querer desinstalar este mapa?\n\n%1$s\npor %2$s\n%3$s\n\nEste mapa no puede ser descargado otra vez del servidor."
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:54
 #, c-format
@@ -5882,7 +5883,7 @@ msgid ""
 "%1$s\n"
 "by %2$s\n"
 "%3$s"
-msgstr ""
+msgstr "¿Estas seguro de querer desinstalar este mapa?\n\n%1$s\npor %2$s\n%3$s"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:60
 #, c-format
@@ -5932,11 +5933,11 @@ msgstr "Necesita una versión de Widelands comprendida entre %1$s y %2$s."
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:168
 msgid "Hint:"
-msgstr ""
+msgstr "Pista:"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:175
 msgid "Comment by uploader:"
-msgstr ""
+msgstr "Comentario del autor:"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:216
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:267
@@ -6088,7 +6089,7 @@ msgstr[2] "%u capturas"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:704
 #, c-format
 msgid "Size: %1$u×%2$u • Max Players: %3$u • %4$s"
-msgstr ""
+msgstr "Tamaño: %1$u×%2$u • Jugadores Máximos: %3$u • %4$s"
 
 #. * TRANSLATORS: Timestamp · Filesize · Download count · Average rating ·
 #. Number of comments
@@ -6154,7 +6155,7 @@ msgstr "Nombre de la Campaña"
 #: ../../../../src/ui_fsmenu/campaigns.cc:45
 msgctxt "difficulty"
 msgid "Default"
-msgstr ""
+msgstr "Por Defecto"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:44
 msgid "Crash Report Details"
@@ -6409,7 +6410,7 @@ msgstr "Prohibir la diplomacia"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:141
 msgid "Enable naval warfare (experimental feature)"
-msgstr ""
+msgstr "Habilitar la guerra naval (función experimental)"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:149
 msgid "Custom starting positions"
@@ -6487,18 +6488,18 @@ msgstr "Proporciona a todos los jugadores una visión permanente de todo el mapa
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:400
 msgid "Naval warfare is set by the scenario"
-msgstr ""
+msgstr "La guerra naval viene determinada por el escenario"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:402
 msgid "Naval warfare is set by the saved game"
-msgstr ""
+msgstr "La guerra naval la establece la partida guardada"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:405
 msgid ""
 "Enable coastal invasions and ship-to-ship battles. This feature is "
 "experimental and may undergo substantial redesign in future versions of "
 "Widelands."
-msgstr ""
+msgstr "Habilitar invasiones costeras y batallas barco contra barco. Esta característica es experimental y puede sufrir un rediseño sustancial en futuras versiones de Widelands."
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:426
 msgid "Player relations are set by the scenario"
@@ -6805,7 +6806,7 @@ msgstr "Mirar la repetición de una partida antigua"
 
 #: ../../../../src/ui_fsmenu/main.cc:472
 msgid "Watch last saved replay"
-msgstr ""
+msgstr "Ver la última repetición guardada"
 
 #: ../../../../src/ui_fsmenu/main.cc:498
 msgid "Single Player…"
@@ -6821,7 +6822,7 @@ msgstr "Editor…"
 
 #: ../../../../src/ui_fsmenu/main.cc:501
 msgid "Watch Replay…"
-msgstr ""
+msgstr "Ver la repetición..."
 
 #: ../../../../src/ui_fsmenu/main.cc:503
 msgid "Begin or load a single-player campaign or free game"
@@ -6837,7 +6838,7 @@ msgstr "Iniciar el editor de mapas"
 
 #: ../../../../src/ui_fsmenu/main.cc:512
 msgid "Watch again a recorded earlier game"
-msgstr ""
+msgstr "Vuelve a ver una partida grabada anterior "
 
 #: ../../../../src/ui_fsmenu/main.cc:517
 msgid "Install and manage add-ons"
@@ -6879,11 +6880,11 @@ msgstr "Versión %1$s"
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team • Licensed under the GNU "
 "General Public License V2.0"
-msgstr ""
+msgstr "(C) %1%-%2% por el Equipo de Desarrollo de Widelands • Licenciado bajo la GNU General Public License V2.0"
 
 #: ../../../../src/ui_fsmenu/main.cc:879
 msgid "Click for the main menu"
-msgstr ""
+msgstr "Haga clic para acceder al menú principal"
 
 #: ../../../../src/ui_fsmenu/main.cc:957
 msgid "Desyncing Add-On Found"
@@ -7368,7 +7369,7 @@ msgstr "Tamaño de Ventana"
 #. * TRANSLATORS: short description for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:155
 msgid "Let the system draw the mouse cursor"
-msgstr ""
+msgstr "Dejar que el sistema dibuje el cursor del ratón"
 
 #. * TRANSLATORS: tooltip text for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:157
@@ -7377,7 +7378,7 @@ msgid ""
 "and the cursor appears frozen during long operations. Disable it only if the"
 " cursor doesn’t appear right, or if you want it to be visible in screenshots"
 " or screencasts."
-msgstr ""
+msgstr "En caso de duda, déjelo activado. Cuando está desactivada, las actualizaciones del cursor pueden ser lentas y el cursor aparece congelado durante operaciones largas. Desactívalo sólo si el cursor no aparece bien, o si quieres que sea visible en capturas o grabaciones de pantalla."
 
 #: ../../../../src/ui_fsmenu/options.cc:166
 msgid "Accessibility mode for tooltips"
@@ -7780,19 +7781,19 @@ msgstr "Desmarcar todo"
 
 #: ../../../../src/wlapplication.cc:958
 msgid "Widelands could not find the last edited map."
-msgstr ""
+msgstr "Widelands no pudo encontrar el último mapa editado."
 
 #: ../../../../src/wlapplication.cc:961
 msgid "No Last Edited Map"
-msgstr ""
+msgstr "Sin Último Mapa Editado"
 
 #: ../../../../src/wlapplication.cc:991
 msgid "No last saved replay."
-msgstr ""
+msgstr "Sin última repetición guardada."
 
 #: ../../../../src/wlapplication.cc:993
 msgid "No last saved game."
-msgstr ""
+msgstr "Sin última partida guardada."
 
 #: ../../../../src/wlapplication.cc:1003
 #, c-format
@@ -7812,17 +7813,17 @@ msgstr "Error del sistema de archivos"
 #: ../../../../src/wlapplication.cc:1560
 #, c-format
 msgid "Command line parameter --%s can not use a value"
-msgstr ""
+msgstr "El parámetro de la linea de comandos --%s no puede usar un valor"
 
 #: ../../../../src/wlapplication.cc:1565
 #, c-format
 msgid "Empty value of command line parameter --%s"
-msgstr ""
+msgstr "Valor vació del parámetro de la linea de comandos --%s"
 
 #: ../../../../src/wlapplication.cc:1571
 #, c-format
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
-msgstr ""
+msgstr "Parámetros de linea de comandos --%1$s y --%2$s no se pueden combinar"
 
 #: ../../../../src/wlapplication.cc:1767
 #, c-format
@@ -8082,7 +8083,7 @@ msgstr "Ver Repetición"
 
 #: ../../../../src/wlapplication_options.cc:254
 msgid "Watch Latest Replay"
-msgstr ""
+msgstr "Ver la Última Repetición"
 
 #: ../../../../src/wlapplication_options.cc:270
 msgid "Singleplayer"
@@ -8126,7 +8127,7 @@ msgstr "Enciclopedia"
 
 #: ../../../../src/wlapplication_options.cc:348
 msgid "Context Menu"
-msgstr ""
+msgstr "Menú de Contexto"
 
 #: ../../../../src/wlapplication_options.cc:352
 msgid "Cut Text"
@@ -8158,7 +8159,7 @@ msgstr "Tomar Captura de Pantalla"
 
 #: ../../../../src/wlapplication_options.cc:385
 msgid "Change Music"
-msgstr ""
+msgstr "Cambiar Música"
 
 #: ../../../../src/wlapplication_options.cc:390
 msgid "Open the Debug Console (developer tool)"
@@ -8250,7 +8251,7 @@ msgstr "Menú de Jugadores"
 
 #: ../../../../src/wlapplication_options.cc:521
 msgid "Toggle Height Heat Map"
-msgstr ""
+msgstr "Alternar Mapa de Calor de Alturas"
 
 #: ../../../../src/wlapplication_options.cc:525
 msgid "Toggle Grid"
@@ -8258,7 +8259,7 @@ msgstr "Alternar Cuadrícula"
 
 #: ../../../../src/wlapplication_options.cc:529
 msgid "Toggle Oceans"
-msgstr ""
+msgstr "Alternar Océanos"
 
 #: ../../../../src/wlapplication_options.cc:534
 msgid "Toggle Immovables"
@@ -8462,11 +8463,11 @@ msgstr "Mostrar Expediciones con Espacios Portuarios"
 
 #: ../../../../src/wlapplication_options.cc:800
 msgid "Show Warships"
-msgstr ""
+msgstr "Muestra los Barcos de Guerra"
 
 #: ../../../../src/wlapplication_options.cc:805
 msgid "Show Ships Being Refitted"
-msgstr ""
+msgstr "Muestra Barcos Siendo Reconvertidos"
 
 #: ../../../../src/wlapplication_options.cc:810
 msgid "Toggle Quick Navigation"
@@ -8684,7 +8685,7 @@ msgstr "Menú"
 #: ../../../../src/wlapplication_options.cc:1415
 msgctxt "hotkey"
 msgid "Application"
-msgstr ""
+msgstr "Aplicación"
 
 #: ../../../../src/wlapplication_options.cc:1417
 msgctxt "hotkey"
@@ -8943,9 +8944,9 @@ msgstr "Ataque"
 #, c-format
 msgid "%u ship"
 msgid_plural "%u ships"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%u barco"
+msgstr[1] "%u barcos"
+msgstr[2] "%u barcos"
 
 #. * TRANSLATORS: Number of soldiers that should attack. Used in the attack
 #. window.
@@ -8960,7 +8961,7 @@ msgstr[2] "%u soldados"
 
 #: ../../../../src/wui/attack_window.cc:376
 msgid "Number of ships"
-msgstr ""
+msgstr "Número de barcos"
 
 #: ../../../../src/wui/attack_window.cc:376
 msgid "Number of soldiers"
@@ -8968,7 +8969,7 @@ msgstr "Número de soldados"
 
 #: ../../../../src/wui/attack_window.cc:383
 msgid "Send less ships. Hold down Ctrl to send no ships"
-msgstr ""
+msgstr "Enviar menos barcos. Mantenga pulsada la tecla Ctrl para no enviar barcos."
 
 #: ../../../../src/wui/attack_window.cc:384
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
@@ -8976,7 +8977,7 @@ msgstr "Envía menos soldados. Mantén presionado Ctrl para no enviar soldados"
 
 #: ../../../../src/wui/attack_window.cc:390
 msgid "Send more ships. Hold down Ctrl to send as many ships as possible"
-msgstr ""
+msgstr "Enviar mas barcos. Mantenga pulsada la tecla Ctrl para enviar tantos barcos como sea posible."
 
 #: ../../../../src/wui/attack_window.cc:391
 msgid ""
@@ -8993,7 +8994,7 @@ msgstr "Atacantes:"
 
 #: ../../../../src/wui/attack_window.cc:424
 msgid "Click on a ship to remove her from the list of attackers"
-msgstr ""
+msgstr "Haz clic en un barco para eliminarlo de la lista de atacantes"
 
 #: ../../../../src/wui/attack_window.cc:425
 msgid "Click on a soldier to remove him from the list of attackers"
@@ -9001,7 +9002,7 @@ msgstr "Haz clic en un soldado para removerlo de la lista de atacantes"
 
 #: ../../../../src/wui/attack_window.cc:427
 msgid "Hold down Ctrl to remove all ships from the list"
-msgstr ""
+msgstr "Mantén pulsada la tecla Ctrl para eliminar todos los barcos de la lista."
 
 #: ../../../../src/wui/attack_window.cc:428
 msgid "Hold down Ctrl to remove all soldiers from the list"
@@ -9009,7 +9010,7 @@ msgstr "Mantén presionado Ctrl para remover a todos los soldados de la lista"
 
 #: ../../../../src/wui/attack_window.cc:432
 msgid "Hold down Shift to remove all ships up to the one you’re pointing at"
-msgstr ""
+msgstr "Mantén pulsado Shift para eliminar todos los barcos hasta el que estás apuntando"
 
 #: ../../../../src/wui/attack_window.cc:433
 msgid ""
@@ -9022,7 +9023,7 @@ msgstr "No atacando:"
 
 #: ../../../../src/wui/attack_window.cc:446
 msgid "Click on a ship to add her to the list of attackers"
-msgstr ""
+msgstr "Haz clic en un barco para añadirlo a la lista de atacantes"
 
 #: ../../../../src/wui/attack_window.cc:447
 msgid "Click on a soldier to add him to the list of attackers"
@@ -9030,7 +9031,7 @@ msgstr "Haz clic en un soldado para añadirlo a la lista de atacantes"
 
 #: ../../../../src/wui/attack_window.cc:449
 msgid "Hold down Ctrl to add all ships to the list"
-msgstr ""
+msgstr "Mantén pulsada la tecla Ctrl para añadir todos los barcos a la lista."
 
 #: ../../../../src/wui/attack_window.cc:450
 msgid "Hold down Ctrl to add all soldiers to the list"
@@ -9038,7 +9039,7 @@ msgstr "Mantén presionado Ctrl para añadir todos los soldados a la lista"
 
 #: ../../../../src/wui/attack_window.cc:453
 msgid "Hold down Shift to add all ships up to the one you’re pointing at"
-msgstr ""
+msgstr "Mantén pulsado Shift para añadir todos los barcos hasta el que estás apuntando"
 
 #: ../../../../src/wui/attack_window.cc:454
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
@@ -9066,7 +9067,7 @@ msgstr "Centrar vista en esto"
 #: ../../../../src/wui/attack_window.cc:630
 #, c-format
 msgid "%1$s  HP: %2$u/%3$u  AT: +%4$u%%"
-msgstr ""
+msgstr "%1$s  PG: %2$u/%3$u  AT: +%4$u%%"
 
 #: ../../../../src/wui/attack_window.cc:635
 #: ../../../../src/wui/soldierlist.cc:558
@@ -9128,22 +9129,22 @@ msgstr "Minas"
 msgid "Ports"
 msgstr "Puertos"
 
-#: ../../../../src/wui/building_statistics_menu.cc:734
+#: ../../../../src/wui/building_statistics_menu.cc:735
 msgid "Low productivity:"
 msgstr "Baja productividad:"
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../../../src/wui/building_statistics_menu.cc:743
-#: ../../../../src/wui/building_statistics_menu.cc:762
-#: ../../../../src/wui/building_statistics_menu.cc:764
+#: ../../../../src/wui/building_statistics_menu.cc:744
+#: ../../../../src/wui/building_statistics_menu.cc:763
+#: ../../../../src/wui/building_statistics_menu.cc:765
 #: ../../../../src/wui/productionsitewindow.cc:233
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../../../src/wui/building_statistics_menu.cc:753
+#: ../../../../src/wui/building_statistics_menu.cc:754
 msgid "Lacking soldiers:"
 msgstr "Soldados faltantes:"
 
@@ -9284,7 +9285,7 @@ msgstr "Preferir héroes"
 #: ../../../../src/wui/constructionsitewindow.cc:366
 #: ../../../../src/wui/soldierlist.cc:496
 msgid "No preference"
-msgstr ""
+msgstr "Sin preferencia"
 
 #: ../../../../src/wui/constructionsitewindow.cc:397
 msgid "Settings to apply after construction"
@@ -9543,22 +9544,22 @@ msgstr "Trazar vías navegables"
 #, c-format
 msgctxt "ship_state"
 msgid "Warship · HP %1$u%% · AT +%2$u%%"
-msgstr ""
+msgstr "Barco de guerra · PG %1$u%% · AT +%2$u%%"
 
 #: ../../../../src/wui/fieldaction.cc:1258
 msgctxt "ship_state"
 msgid "Enemy Transport Ship"
-msgstr ""
+msgstr "Barco de Transporte Enemigo"
 
 #: ../../../../src/wui/fieldaction.cc:1260
 msgctxt "ship_state"
 msgid "Expedition"
-msgstr ""
+msgstr "Expedición"
 
 #: ../../../../src/wui/fieldaction.cc:1262
 msgctxt "ship_state"
 msgid "Transport"
-msgstr ""
+msgstr "Transporte"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
 #: ../../../../src/wui/fieldaction.cc:1264
@@ -9570,15 +9571,15 @@ msgstr "%1$s (%2$s)"
 
 #: ../../../../src/wui/fieldaction.cc:1274
 msgid "Select Ship"
-msgstr ""
+msgstr "Selecciona Barco"
 
 #: ../../../../src/wui/fieldaction.cc:1297
 msgid "Own Ships"
-msgstr ""
+msgstr "Barcos Propios"
 
 #: ../../../../src/wui/fieldaction.cc:1311
 msgid "Attackable Ships"
-msgstr ""
+msgstr "Barcos Atacables"
 
 #: ../../../../src/wui/fleet_options_window.cc:94
 msgid "Ferry Fleet Options"
@@ -10026,11 +10027,11 @@ msgstr "Productividad"
 
 #: ../../../../src/wui/general_statistics_menu.cc:185
 msgid "Warships lost"
-msgstr ""
+msgstr "Barcos de guerra perdidos"
 
 #: ../../../../src/wui/general_statistics_menu.cc:194
 msgid "Warships defeated"
-msgstr ""
+msgstr "Barcos de guerra derrotados"
 
 #: ../../../../src/wui/general_statistics_menu.cc:203
 msgid "Casualties"
@@ -10397,7 +10398,7 @@ msgstr "Alterna la indicación de áreas de trabajo sobrepuestas al situar sitio
 
 #: ../../../../src/wui/interactive_player.cc:485
 msgid "No current objectives"
-msgstr ""
+msgstr "Sin objetivos"
 
 #: ../../../../src/wui/interactive_player.cc:501
 #, c-format
@@ -11099,15 +11100,15 @@ msgstr "Navegando"
 #: ../../../../src/wui/seafaring_statistics_menu.cc:273
 msgctxt "ship_state"
 msgid "Being Refitted"
-msgstr ""
+msgstr "Siendo Reconvertido"
 
 #: ../../../../src/wui/seafaring_statistics_menu.cc:434
 #, c-format
 msgid "Seafaring Statistics (%u Ship)"
 msgid_plural "Seafaring Statistics (%u Ships)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Estadísticas de Navegación (%u Barco)"
+msgstr[1] "Estadísticas de Navegación (%u Barcos)"
+msgstr[2] "Estadísticas de Navegación (%u Barcos)"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../../../src/wui/seafaring_statistics_menu.cc:578
@@ -11142,12 +11143,12 @@ msgstr "Mostrar expediciones que han encontrado un espacio para puerto o estan f
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../../../src/wui/seafaring_statistics_menu.cc:613
 msgid "Show warships"
-msgstr ""
+msgstr "Mostrar barcos de guerra"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../../../src/wui/seafaring_statistics_menu.cc:618
 msgid "Show ships being refitted"
-msgstr ""
+msgstr "Mostrar barcos siendo reconvertidos"
 
 #: ../../../../src/wui/shipwindow.cc:92
 #, c-format
@@ -11155,9 +11156,9 @@ msgid ""
 "Damaged warships regain %u hitpoint per second when anchored in a port."
 msgid_plural ""
 "Damaged warships regain %u hitpoints per second when anchored in a port."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Los barcos de guerra dañados recuperan %u punto de golpe por segundo cuando están anclados en un puerto."
+msgstr[1] "Los barcos de guerra dañados recuperan %u puntos de golpe por segundo cuando están anclados en un puerto."
+msgstr[2] "Los barcos de guerra dañados recuperan %u puntos de golpe por segundo cuando están anclados en un puerto."
 
 #: ../../../../src/wui/shipwindow.cc:117
 msgid "Scout towards the north west"
@@ -11181,7 +11182,7 @@ msgstr "Construir un puerto en la posición actual"
 
 #: ../../../../src/wui/shipwindow.cc:141
 msgid "Anchor at the current location"
-msgstr ""
+msgstr "Ancla en el lugar actual"
 
 #: ../../../../src/wui/shipwindow.cc:146
 msgid "Scout towards the east"
@@ -11201,7 +11202,7 @@ msgstr "Explorador hacia el sudeste"
 
 #: ../../../../src/wui/shipwindow.cc:168
 msgid "Destination"
-msgstr ""
+msgstr "Destino"
 
 #: ../../../../src/wui/shipwindow.cc:179
 msgid "Sink the ship"
@@ -11230,7 +11231,7 @@ msgstr "Esta expedición no puede ser cancelada, porque el barco no tiene un pue
 #: ../../../../src/wui/shipwindow.cc:364
 msgctxt "destination"
 msgid "(none)"
-msgstr ""
+msgstr "(ninguno)"
 
 #: ../../../../src/wui/shipwindow.cc:429 ../../../../src/wui/shipwindow.cc:434
 #: ../../../../src/wui/shipwindow.cc:439
@@ -11244,16 +11245,16 @@ msgstr "Ir al destino"
 
 #: ../../../../src/wui/shipwindow.cc:471
 msgid "Refit to transport ship"
-msgstr ""
+msgstr "Reconvertir a barco de transporte"
 
 #: ../../../../src/wui/shipwindow.cc:472
 msgid "Refit to warship"
-msgstr ""
+msgstr "Reconvertir a barco de guerra"
 
 #: ../../../../src/wui/shipwindow.cc:494
 #, c-format
 msgid "HP: %1$u/%2$u"
-msgstr ""
+msgstr "PG: %1$u/%2$u"
 
 #: ../../../../src/wui/soldier_statistics_menu.cc:89
 #: ../../../../src/wui/soldier_statistics_menu.cc:182
@@ -11323,14 +11324,14 @@ msgstr "Puedes reproducir música personalizada en el juego colocando tus propio
 
 #: ../../../../src/wui/sound_options.cc:161
 msgid "Play the intro music at startup"
-msgstr ""
+msgstr "Reproducir la música de introducción en el arranque"
 
 #: ../../../../src/wui/sound_options.cc:163
 msgid ""
 "Whether to play the intro music when Widelands is started. The splashscreen "
 "is only closed automatically when the intro music ends, but can be skipped "
 "by a keypress or a mouse click."
-msgstr ""
+msgstr "Determinar si se reproduce la música de introducción cuando se inicia Widelands. La pantalla de inicio sólo se cierra automáticamente cuando termina la música de introducción, pero puede saltarse pulsando una tecla o haciendo clic con el ratón."
 
 #: ../../../../src/wui/sound_options.cc:172
 msgctxt "sound_options"

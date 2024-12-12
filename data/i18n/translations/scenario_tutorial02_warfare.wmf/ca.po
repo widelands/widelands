@@ -493,7 +493,7 @@ msgid ""
 "means that the enemy can attack the headquarters itself too. On the other "
 "hand, there’s a difference too: you can’t start an attack with the soldiers "
 "in your headquarters."
-msgstr ""
+msgstr "El quarter té algunes habilitats dels llocs militars: conquereix part de terreny i els soldats que hi hagi a dins defensen l'edifici quan l'ataquen. No obstant, això també significa que els enemics poden atacar-lo. També hi ha una diferència: no podeu atacar amb els soldats del quarter."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid ""
@@ -501,7 +501,7 @@ msgid ""
 "plain warehouses that don’t conquer land, and need nearby military sites for"
 " defense. Soldiers stored in plain warehouses don’t participate in any "
 "fighting, and plain warehouses can’t be attacked directly."
-msgstr ""
+msgstr "Les capacitats militars del quarter tenen una gran diferència dels magatzems normals que no conquereixen terreny i que necessiten tenir llocs militars a prop per a defensar-los. Els soldats que estan a dins dels magatzems no participen a les lluites i als magatzems tampoc se'ls pot atacar directament."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:217
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
@@ -517,7 +517,7 @@ msgid ""
 "set soldier capacity and preference for military sites. If you do so, the "
 "headquarters will only let surplus soldiers be sent to other buildings, but "
 "not soldiers from the assigned garrison."
-msgstr ""
+msgstr "Els soldats que estan al quarter us ajudaran a defensar-lo. Però aneu amb compte perquè no s'hi quedaran assignats de manera permanent. Se n'aniran si algun lloc militar necessita un soldat. Afortunadament, també podeu assignar soldats a la defensa del quarter de la mateixa manera que establiu la capacitat de soldats i la preferència dels llocs militars. Si ho feu, el quarter només deixarà que s'enviïn a altres edificis els soldats que sobrin, però no els que estan assignats a la defensa del quarter."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:221
 msgid ""
@@ -528,7 +528,7 @@ msgid ""
 "soldiers to more than zero, then the headquarters will show the same soldier"
 " information as military sites in the status. Surplus soldiers are never "
 "shown in the status."
-msgstr ""
+msgstr "Si mireu les línies d'estat, podreu veure que el magatzem no té res, però el quarter té un signe «—» a l'inici. Això vol dir que no té soldats assignats per a protegir el quarter, encara que n'hi ha alguns a dins. Si augmenteu el nombre desitjat de soldats, al quarter es mostrarà la mateixa informació de soldats que a les línies d'estat dels llocs militars. Els soldats que sobrin no es mostraran mai a l'estat."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your sentry"
