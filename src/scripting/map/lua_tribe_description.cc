@@ -145,8 +145,7 @@ int LuaTribeDescription::get_carriers(lua_State* L) {
 */
 
 int LuaTribeDescription::get_carrier(lua_State* L) {
-	log_warn(
-	   "Attribute `wl.map.TribeDescription.carrier` is deprecated, use `carriers[1]` instead");
+	log_warn("Attribute `wl.map.TribeDescription.carrier` is deprecated, use `carriers[1]` instead");
 	lua_pushstring(L, get_egbase(L).descriptions().get_worker_descr(get()->carriers()[0])->name());
 	return 1;
 }
