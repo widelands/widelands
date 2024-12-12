@@ -47,6 +47,10 @@ struct ShippingItem {
 	// only interested in the ware if it is the one or the other.
 	void get(const EditorGameBase& game, WareInstance** ware, Worker** worker) const;
 
+	[[nodiscard]] Serial get_object_serial() const {
+		return object_.serial();
+	}
+
 	void set_economy(const Game&, Economy* e, WareWorker) const;
 	const PortDock* get_destination(Game&) const;
 

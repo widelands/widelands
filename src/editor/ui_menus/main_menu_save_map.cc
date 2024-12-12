@@ -50,7 +50,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
                                  UI::UniqueWindow::Registry& registry,
                                  Registry& map_options_registry)
    : MainMenuLoadOrSaveMap(
-        parent, registry, "save_map_menu", _("Save Map"), false, true, "maps/My_Maps"),
+        parent, registry, "save_map_menu", _("Save Map"), false, true, kMyMapsDirFull),
      map_options_registry_(map_options_registry),
      edit_options_(&map_details_box_,
                    "edit_options",
@@ -145,8 +145,8 @@ void MainMenuSaveMap::clicked_ok() {
 			std::string::size_type const filename_size = filename.at(0).size();
 			map->set_name(4 <= filename_size &&
 			                    ends_with(filename.at(0), kWidelandsMapExtension, false) ?
-                          filename.at(0).substr(0, filename_size - 4) :
-                          filename.at(0));
+			                 filename.at(0).substr(0, filename_size - 4) :
+			                 filename.at(0));
 		}
 		if (save_map(filename.at(0), !get_config_bool("nozip", false))) {
 			die();

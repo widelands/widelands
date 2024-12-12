@@ -215,7 +215,7 @@
 --    singular and plural strings. Additionally, it is necessary to specify an ``npgettext`` call for all four types of soldier strings
 --    so as to ensure that all keys appear in the PO files. The ``npgettext`` results (i.e. the translated pluralized strings for an arbitrary constant)
 --    are unused; the actual use is performed later in C++. Their table keys must be prefixed with ``UNUSED_``; the rest of the name is irrelevant.
---    The strings themselves **must not** derivate from the template below in anything other than the name of the soldier.
+--    The strings themselves **must not** deviate from the template below in anything other than the name of the soldier.
 --    Make sure that the unlocalized string constants are exactly identical to the strings in the ``npgettext`` dummy calls.
 --    Example:
 --
@@ -465,20 +465,20 @@ wl.Descriptions():new_tribe {
          },
          {
             name = "spider_silk",
-            default_target_quantity = 10,
+            default_target_quantity = 15,
             preciousness = 11,
             helptexts = {
                -- TRANSLATORS: Helptext for an Atlantean ware: Spider Silk
-               purpose = pgettext("atlanteans_ware", "Spider silk is produced by spiders, which are bred by spider farms. It is processed into spidercloth in a weaving mill.")
+               purpose = pgettext("atlanteans_ware", "Spider silk is produced by spiders, which are bred by spider farms. It can be processed into spidercloth or tabards in a weaving mill, or used to make tools in the toolsmithy.")
             }
          },
          {
             name = "spidercloth",
-            default_target_quantity = 20,
+            default_target_quantity = 15,
             preciousness = 7,
             helptexts = {
                -- TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
-               purpose = pgettext("atlanteans_ware", "Spidercloth is made out of spider silk in a weaving mill. It is used in the toolsmithy and the shipyard. Also some higher developed buildings need spidercloth for their construction.")
+               purpose = pgettext("atlanteans_ware", "Spidercloth is made out of spider silk in a weaving mill. It is used in the shipyard. Also some higher developed buildings need spidercloth for their construction.")
             }
          },
       },
@@ -706,7 +706,7 @@ wl.Descriptions():new_tribe {
                   -- TRANSLATORS: Helptext for an Atlantean ware: Hammer, part 1
                   pgettext("ware", "The hammer is an essential tool."),
                   -- TRANSLATORS: Helptext for an Atlantean ware: Hammer, part 2
-                  pgettext("atlanteans_ware", "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make sure you’ve always got some in reserve! They are produced by the toolsmith.")
+                  pgettext("atlanteans_ware", "Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a hammer. Make sure you’ve always got some in reserve! They are produced by the toolsmith.")
                }
             }
          },
@@ -1659,7 +1659,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an Atlantean production site:  Sawmill
             lore = pgettext("atlanteans_building", "The design of our sawmills makes operation simple, yet powerful. Patent pending."),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site:  Sawmill
-            lore_author = pgettext("atlanteans_building", "Askadus, Inventor of the vertical axis windmill")
+            lore_author = pgettext("atlanteans_building", "Askadus, Inventor of the vertical axis windmill"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Sawmill
+            performance = pgettext("atlanteans_building", "The sawmill needs %s on average to produce one plank."):bformat(format_seconds(40))
          }
       },
       {
@@ -1703,7 +1705,9 @@ wl.Descriptions():new_tribe {
                                                    "It is more nutritious than that paper-like bread you find elsewhere. And it is needed for the personal rite "..
                                                    "of preparing one’s meal. May Satul bless you."),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Bakery
-            lore_author = pgettext("atlanteans_building", "Head of the bakers’ guild")
+            lore_author = pgettext("atlanteans_building", "Head of the bakers’ guild"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Bakery
+            performance = pgettext("atlanteans_building", "If all needed wares are delivered in time, this building can produce one bread in %s on average."):bformat(format_seconds(36))
          }
       },
       {
@@ -1716,8 +1720,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an Atlantean production site: Charcoal Kiln
             lore = pgettext("atlanteans_building", "We must admit that this business is not really the Atlantean way, but in times of need we do what’s necessary."),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Charcoal Kiln
-            lore_author = pgettext("atlanteans_building", "A black voice from inside the charcoal kiln")
-
+            lore_author = pgettext("atlanteans_building", "A black voice from inside the charcoal kiln"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Charcoal Kiln
+            performance = pgettext("atlanteans_building", "The charcoal kiln needs %s on average to produce one coal."):bformat(format_minutes_seconds(2, 4))
          }
       },
       {
@@ -1783,7 +1788,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an Atlantean production site: Barracks
             lore = pgettext("atlanteans_building", "See these fine silk tabards and those sharp tridents? This is your way to defend your tribe!"),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Barracks
-            lore_author = pgettext("atlanteans_building", "Recruiting poster")
+            lore_author = pgettext("atlanteans_building", "Recruiting poster"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Barracks
+            performance = pgettext("atlanteans_building", "The barracks need %s on average to recruit one soldier."):bformat(format_seconds(30))
          }
       },
 
@@ -2057,7 +2064,13 @@ wl.Descriptions():new_tribe {
                                           [[Steadily steadily steadily steadily<br>]] ..
                                           [[bring the wares ashore.’]]),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Ferry Yard
-            lore_author = pgettext("atlanteans_building", "Traditional song of the ferrymen")
+            lore_author = pgettext("atlanteans_building", "Traditional song of the ferrymen"),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Ferry Yard, part 1
+               pgettext("atlanteans_building", "This building can produce one ferry between %1$s and %2$s, depending on how far the shipwright has to walk."):bformat(format_seconds(37), format_seconds(59)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Ferry Yard, part 2
+               pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -2078,6 +2091,12 @@ wl.Descriptions():new_tribe {
                                           [[we praise Satul the best we wish.’]]),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Shipyard -- not directly stolen from the wellerman song
             lore_author = pgettext("atlanteans_building", "Transcript from oral tradition"),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Shipyard, part 1
+               pgettext("atlanteans_building", "This building can produce one ship between %1$s and %2$s, depending on how far the shipwright has to walk."):bformat(format_minutes_seconds(18, 3), format_minutes_seconds(24, 46)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Shipyard, part 2
+               pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
 

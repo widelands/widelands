@@ -22,8 +22,8 @@ wl_library(base
     string.h
     string.cc
   USES_ATOMIC
-  USES_INTL
   USES_SDL2
+  USES_TINYGETTEXT
   DEPENDS
     base_exceptions
     base_macros
@@ -32,7 +32,6 @@ wl_library(base
     io_filesystem
     logic_filesystem_constants
     notifications
-    third_party_gettext
 )
 
 wl_library(base_macros
@@ -63,12 +62,12 @@ wl_library(base_geometry
     vector.cc
 )
 
-wl_library(base_md5
+wl_library(base_crypto
   SRCS
-    md5.cc
-    md5.h
+    crypto.cc
+    crypto.h
   DEPENDS
-    base_macros
+    third_party_libmd
 )
 
 wl_library(base_random

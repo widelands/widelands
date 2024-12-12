@@ -17,24 +17,40 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 1
+    - name: Get vcpkg_ref
+      if: ${{ vars.VCPKG_REF == '' }}
+      # PRs from forked repos can't access repo variables (nor variables from the forked repo),
+      # but can restore caches from master
+      uses: actions/cache/restore@v4
+      with:
+        path: vcpkg_ref
+        key: vcpkg_ref-invalid-to-use-latest
+        # Never fall back to unspecified vcpkg version
+        fail-on-cache-miss: true
+        restore-keys: |
+          vcpkg_ref-
     - name: Checkout vcpkg
       id: prepare
       run: |
-        read REF TOOLSET < .github/scripts/vcpkg_ref
+        REF=${{ vars.VCPKG_REF }}
+        if [ -z "$REF" -a -f vcpkg_ref ] ; then
+          REF="$(cat vcpkg_ref)"
+        fi
         cd ${{ env.VCPKG_ROOT }}
         # REF can be empty, a commit hash or a pull request
+        echo "Checking out '$REF'"
         [ -n "$REF" ] && git fetch
         git checkout $REF || git pull origin $REF
-        echo "vcpkg_key=${{ hashFiles( './install-dependencies.sh' ) }}-${REF}" >> $GITHUB_OUTPUT
-        echo "toolset=${TOOLSET}" >> $GITHUB_OUTPUT
+        echo "vcpkg_key=vcpkg_cache-${{ hashFiles( 'utils/windows/vcpkg_deps' ) }}-${REF}" >> $GITHUB_OUTPUT
       shell: bash
     - name: Restore vcpkg and its artifacts.
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
-        path: ${{ env.VCPKG_ROOT }}\installed
+        # Explicit path here because env is overridden by msvc-dev-cmd
+        path: C:\vcpkg\installed
         key: |
           ${{ steps.prepare.outputs.vcpkg_key }}-${{ matrix.arch }}
     - name: Installing dependencies
@@ -47,15 +63,13 @@ jobs:
       uses: ilammy/msvc-dev-cmd@v1
       with:
         arch: ${{ matrix.arch }}
-        # Check https://github.com/actions/runner-images/blob/main/images/win/toolsets/toolset-2022.json for installed versions
-        toolset: ${{ steps.prepare.outputs.toolset }}
     - name: Compiler
       env:
         VCPKG_ROOT: C:\vcpkg
       run: |
         mkdir $env:GITHUB_WORKSPACE\build
         cd $env:GITHUB_WORKSPACE\build
-        cmake.exe -G "NMake Makefiles" .. -DVCPKG_TARGET_TRIPLET=${{ env.VCPKG_TARGET_TRIPLET }} -DCMAKE_TOOLCHAIN_FILE="${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake" -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WINSTATIC=ON -DOPTION_USE_GLBINDING=ON -DOPTION_FORCE_EMBEDDED_MINIZIP=ON
+        cmake.exe -G "NMake Makefiles" .. -DVCPKG_TARGET_TRIPLET=${{ env.VCPKG_TARGET_TRIPLET }} -DCMAKE_TOOLCHAIN_FILE="${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake" -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WINSTATIC=ON -DOPTION_USE_GLBINDING=ON -DOPTION_FORCE_EMBEDDED_MINIZIP=ON
         if ((Select-String -Quiet REVDETECT-BROKEN VERSION)) { exit 1 }
         nmake
         if ("${{ matrix.config }}" -Match "Release") {
@@ -71,7 +85,7 @@ jobs:
         $env:APPVEYOR_BUILD_VERSION = "Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}"
         ISCC.exe /o$env:GITHUB_WORKSPACE /fWidelands-${{ github.sha }}-msvc-${{ matrix.config }}-${{ matrix.arch }} $env:GITHUB_WORKSPACE\utils\windows\innosetup\Widelands.iss
     - name: Uploading installer
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Installer (MSVC)
         path: ${{ github.workspace }}\Widelands-${{ github.sha }}-msvc-${{ matrix.config }}-${{ matrix.arch }}.exe

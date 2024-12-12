@@ -74,7 +74,7 @@ Textarea::Textarea(Panel* parent,
 
 inline const FontStyleInfo& Textarea::font_style() const {
 	return font_style_override_ != nullptr ? *font_style_override_ :
-                                            g_style_manager->font_style(font_style_);
+	                                         g_style_manager->font_style(font_style_);
 }
 
 void Textarea::set_style(const FontStyle style) {
@@ -104,7 +104,8 @@ void Textarea::update() {
 	FontStyleInfo scaled_style(font_style());
 	scaled_style.set_size(std::max(g_style_manager->minimum_font_size(),
 	                               static_cast<int>(std::ceil(scaled_style.size() * font_scale_))));
-	rendered_text_ = autofit_text(richtext_escape(text_), scaled_style, fixed_width_);
+	rendered_text_ =
+	   autofit_text(is_richtext(text_) ? text_ : richtext_escape(text_), scaled_style, fixed_width_);
 
 	if (layoutmode_ == LayoutMode::AutoMove) {
 		expand();
@@ -148,7 +149,7 @@ void Textarea::draw(RenderTarget& dst) {
 		Align alignment = mirror_alignment(align_, i18n::has_rtl_character(text_.c_str(), 20));
 		Vector2i anchor((alignment == Align::kCenter)    ? get_w() / 2 :
 		                (alignment == UI::Align::kRight) ? get_w() :
-                                                         0,
+		                                                   0,
 		                0);
 		rendered_text_->draw(dst, anchor, alignment);
 	}
@@ -171,6 +172,8 @@ void Textarea::collapse() {
 		break;
 	case UI::Align::kLeft:
 		break;
+	default:
+		NEVER_HERE();
 	}
 
 	set_pos(Vector2i(x, y));
@@ -198,6 +201,8 @@ void Textarea::expand() {
 		break;
 	case UI::Align::kLeft:
 		break;
+	default:
+		NEVER_HERE();
 	}
 
 	set_pos(Vector2i(x, y));

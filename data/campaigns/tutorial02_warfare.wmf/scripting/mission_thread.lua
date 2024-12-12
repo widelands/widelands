@@ -63,6 +63,9 @@ function military_buildings()
       not scouting_done do sleep(3000) end
    campaign_message_box(heroes_rookies)
    campaign_message_box(soldier_capacity)
+   campaign_message_box(hq_soldiers)
+   campaign_message_box(hq_status)
+
    local o = campaign_message_with_objective(dismantle, obj_dismantle)
 
    while #plr:get_buildings("barbarians_sentry") > 1 do sleep(200) end

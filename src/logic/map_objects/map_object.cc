@@ -154,7 +154,7 @@ ObjectManager::~ObjectManager() {
 		log_warn("ObjectManager: ouch! remaining objects\n");
 	}
 
-	verb_log_info("lastserial: %i\n", lastserial_);
+	verb_log_info("lastserial: %u\n", lastserial_);
 }
 
 /**
@@ -262,12 +262,6 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                                const std::string& init_descname,
                                const LuaTable& table)
    : MapObjectDescr(init_type, init_name, init_descname) {
-	if (table.has_key("helptext_script")) {
-		// TODO(GunChleoc): Compatibility - remove after v1.0
-		log_warn("Helptexts script for %s is obsolete - please move strings to "
-		         "tribes/initializations/<tribename>/units.lua",
-		         name().c_str());
-	}
 
 	bool has_animations = false;
 	const std::string animation_directory(
@@ -295,11 +289,6 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 		}
 	}
 	check_representative_image();
-
-	// TODO(GunChleoc): Compatibility, remove after v1.0
-	if (table.has_key("attributes")) {
-		throw GameDataError("Attributes need to be defined in 'register.lua' now");
-	}
 }
 MapObjectDescr::~MapObjectDescr() {
 	anims_.clear();
@@ -629,7 +618,7 @@ void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
 
 const Image* MapObject::representative_image() const {
 	return descr().representative_image(get_owner() != nullptr ? &get_owner()->get_playercolor() :
-                                                                nullptr);
+	                                                             nullptr);
 }
 
 /**

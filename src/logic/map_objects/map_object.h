@@ -275,6 +275,7 @@ public:
 		HeaderPinnedNote = 13,
 		HeaderShipFleetInterface = 14,
 		HeaderFerryFleetInterface = 15,
+		HeaderNavalInvasionBase = 16,
 	};
 
 	/**

@@ -3,9 +3,14 @@
 Themes
 ======
 
-A theme defines the appearance and style of Widelands' user interface.
+A theme defines the appearance and style of :doc:`Widelands' user interface <autogen_wl_ui>`.
+Especially some widgets defined with :meth:`~wl.ui.Panel.create_child` need some of the
+styles of themes.
 
-A theme's directory needs to use the following directory structure:
+When working with :doc:`richtext <autogen_auxiliary_richtext>` it is recommended to use the
+theme styles. Look at :doc:`autogen_styles` to access the styles within richtext.
+
+The following directory structure is recommended for a theme's directory:
 
 * base_directory/
     * init.lua
@@ -15,6 +20,12 @@ A theme's directory needs to use the following directory structure:
             * background.png
             * bottom.png
             * close.png
+            * corner_bottom_left.png
+            * corner_bottom_right.png
+            * corner_minimal_left.png
+            * corner_minimal_right.png
+            * corner_top_left.png
+            * corner_top_right.png
             * left.png
             * maximize.png
             * minimize.png
@@ -28,6 +39,12 @@ A theme's directory needs to use the following directory structure:
             * background.png
             * bottom.png
             * close.png
+            * corner_bottom_left.png
+            * corner_bottom_right.png
+            * corner_minimal_left.png
+            * corner_minimal_right.png
+            * corner_top_left.png
+            * corner_top_right.png
             * left.png
             * maximize.png
             * minimize.png
@@ -66,6 +83,9 @@ The names of all files and directories in ``loadscreens`` as well as the names `
 are hardcoded, except for the names and amounts of the image files in ``loadscreens/mainmenu`` and
 in the subdirectories of ``loadscreens/gameloading/``. These directories may contain any number of
 images. Supported image formats are JPG (large, photographic pictures) and PNG (all other images).
+
+The paths for the images in ``wui/`` and ``fsmenu/`` are specified in the ``init.lua``
+and may differ from the recommended structure.
 
 Required Files
 --------------
@@ -114,6 +134,19 @@ If any of the above images or directories is missing, a fallback image will be u
     * **windows/maximize.png** is used as the icon for the unminimize button in a minimized window's top-left corner.
     * **windows/background.png** is used as the window background. The image is tiled to fit the window's width and height.
     * **windows/top.png**, **windows/bottom.png**, **windows/left.png**, and **windows/right.png** are used as the window's upper, lower, left, and right border respectively. The images are tiled to fit the window's length.
+    * **windows/corner_bottom_left.png**, **windows/corner_bottom_right.png**, **windows/corner_top_left.png**, and **windows/corner_top_right.png** are used as the window's border's corners.
+    * **windows/corner_minimal_left.png** and **windows/corner_minimal_right.png** are used as the window's corners when the window is minimized.
+
+    A window consists of a main panel surrounded on all four sides by a border, with corners where borders meet.
+    The main panel is tiled with the ``background.png`` image.
+    Each border is tiled with the respective ``{top,left,right,bottom}.png`` image.
+    The four corner images ``corner_{top,bottom}_{left,right}.png`` are drawn only once each.
+
+    A minimized window consists only of the two corners ``windows/corner_minimal_{left,right}.png`` with the ``top.png`` border image tiled between them to fit the width.
+
+    The thicknesses of the borders are determined by the height of the upper and lower border images and the width of the left and right border images respectively.
+    The corner images are aligned to the corners of the resulting outer rectangle. Because of this, the corner images can be bigger than the respective borders
+    to create fixed transitions to the main border images, but should not be smaller, as that would create gaps in the drawn window borders.
 
 **images/**
     This directory may contain replacement images for any image file located under the data directory's ``images`` directory.
@@ -141,9 +174,17 @@ This Lua script returns a table with descriptions for all UI elements. The table
 * **tables** (table): Style definitons for `tables`_
 * **wareinfo** (table): Style definitons for `ware statistics`_ windows
 * **fonts** (table): Style definitons for all `fonts`_ commonly used in Widelands
-* **paragraphs** (table): Style definitons for all `paragraph styles`_ commonly used in Widelands .. versionadded:: 1.2
-* **colors** (table): Style definitons for RGB `colors`_ .. versionadded:: 1.2
-* **styled_sizes** (table): Definitons for UI element `sizes`_ and text spacing .. versionadded:: 1.2
+* **paragraphs** (table): Style definitons for all `paragraph styles`_ commonly used in Widelands
+
+  .. versionadded:: 1.2
+
+* **colors** (table): Style definitons for RGB `colors`_
+
+  .. versionadded:: 1.2
+
+* **styled_sizes** (table): Definitons for UI element `sizes`_ and text spacing
+
+  .. versionadded:: 1.2
 
 RGB colors are arrays with three entries representing the red, green, and blue components (in this order).
 RGBA colors are arrays with four entries representing the red, green, blue, and alpha components (in this order).
@@ -166,11 +207,16 @@ The ``windows`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/
 * **window_border_focused** (RGBA): The color to blend over the border of the window if it has focus.
 * **window_border_unfocused** (RGBA): The color to blend over the border of the window if it does not have focus.
 * **background**, **border_top**, **border_bottom**, **border_right**, **border_left**, **button_close**, **button_pin**, **button_unpin**, **button_minimize**, **button_unminimize** (strings): The paths to the corresponding icons. See above for the recommended directory structure.
+* **button_spacing** (int) (*optional*, default ``1``): The spacing around the window titlebar buttons. Introduced in version 1.3.
 
 buttons
 ~~~~~~~
 
-The ``buttons`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu buttons respectively. Each subtable contains three sub-subtables ``primary``, ``secondary``, and `menu`` for the three button types. Each sub-subtable contains two sub-sub-subtables ``enabled`` and ``disabled`` for the button's enabled and disabled variant. Each of these contains a key ``font`` with a :ref:`font definition table<theme_fonts>` and a table ``background`` with the keys ``image``, typically pointing to the button background image as described above, and an RGB color ``color`` which will be blended with the image.
+.. image:: images/themes/buttons.png
+   :align: right
+   :alt: Buttons appearance
+
+The ``buttons`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu buttons respectively. Each subtable contains three sub-subtables ``primary``, ``secondary``, and ``menu`` for the three button types. Each sub-subtable contains two sub-sub-subtables ``enabled`` and ``disabled`` for the button's enabled and disabled variant. Each of these contains a key ``font`` with a :ref:`font definition table<theme_fonts>` and a table ``background`` with the keys ``image``, typically pointing to the button background image as described above, and an RGB color ``color`` which will be blended with the image.
 
 sliders
 ~~~~~~~
@@ -187,7 +233,7 @@ editboxes
 
 The ``editboxes`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu editboxes respectively. Each subtable contains tables ``background`` and ``font`` like for `buttons`_. The ``background`` table requires an additional argument ``margin`` of type ``int`` which will be used for the editbox's padding.
 
-dropdowns
+Dropdowns
 ~~~~~~~~~
 
 The ``dropdowns`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu dropdowns respectively, each of which contains a single sub-subtable ``menu``. Each sub-subtable contains tables ``image`` and ``color`` like for the backgrounds of `buttons`_.
@@ -237,13 +283,33 @@ Optionally the following boolean values may be set: **bold**, **italic**, **unde
 
 Some of the above style tables define custom fonts. Additionally, there is a ``fonts`` table which defines fonts used in many places in Widelands:
 
+.. image:: images/themes/fonts_styles.png
+   :align: right
+   :alt: fonts and themes
+
+wui
+
+* **wui_window_title**: Window titles (game and editor)
+* **wui_message_heading**: Headings for in-game inbox messages
+* **wui_message_paragraph**: Text of in-game inbox messages
+* **wui_info_panel_heading**: Headings for info texts (game and editor)
+* **wui_info_panel_paragraph**: Info texts (game and editor)
+* **label_wui**: Normal labels (game and editor)
+* **tooltip_header_wui**: Tooltip headings (game and editor)
+* **tooltip_wui**: Tooltips (game and editor)
+* **tooltip_hotkey_wui**: Hotkey tooltips (game and editor)
+* **wui_game_speed_and_coordinates**: Time, speed and coordinates strings in the game/editor info panel
+* **wui_attack_box_slider_label**: The label over the in-game attack dialog's slider
+* **game_summary_title**: Heading in the end-of-game-summary screen
 * **chat_message**: Basic chat messages
 * **chat_timestamp**: Timestamps for chat messages
 * **chat_whisper**: Whispered chat messages
 * **chat_playername**: The name of the player who sent a chat message
 * **chat_server**: Chat messages sent by the server
-* **fsmenu_intro**: Previously used in the splashscreen. Currently unused.
-* **italic**: Italic texts (main menu only)
+
+fs
+
+* **fs_window_title**: Window titles (main menu only)
 * **fsmenu_gametip**: Tips shown on the loading screens
 * **fsmenu_info_panel_heading**: Headings for info texts (main menu only)
 * **fsmenu_info_panel_paragraph**: Info texts (main menu only)
@@ -252,26 +318,22 @@ Some of the above style tables define custom fonts. Additionally, there is a ``f
 * **fsmenu_game_setup_superuser**: Administrators in the internet lobby's list of users
 * **fsmenu_game_setup_irc_client**: IRC clients in the internet lobby's list of users
 * **fsmenu_translation_info**: Translation statistics in the main menu's options window
-* **fs_window_title**: Window titles (main menu only)
-* **wui_window_title**: Window titles (game and editor)
 * **label_fs**: Normal labels (main menu only)
-* **label_wui**: Normal labels (game and editor)
+* **tooltip_header_fs**: Tooltip headings (main menu only)
 * **tooltip_fs**: Tooltips (main menu only)
 * **tooltip_hotkey_fs**: Hotkey tooltips (main menu only)
-* **tooltip_header_fs**: Tooltip headings (main menu only)
-* **tooltip_wui**: Tooltips (game and editor)
-* **tooltip_hotkey_wui**: Hotkey tooltips (game and editor)
-* **tooltip_header_wui**: Tooltip headings (game and editor)
-* **game_summary_title**: Heading in the end-of-game-summary screen
+* **fsmenu_intro**: Previously used in the splashscreen. Currently unused.
+* **italic**: Italic texts (main menu only)
+
+global
+
 * **warning**: Warnings and errors
 * **disabled**: Greyed-out items
-* **wui_attack_box_slider_label**: The label over the in-game attack dialog's slider
-* **wui_info_panel_heading**: Headings for info texts (game and editor)
-* **wui_info_panel_paragraph**: Info texts (game and editor)
-* **wui_message_heading**: Headings for in-game inbox messages
-* **wui_message_paragraph**: Text of in-game inbox messages
-* **wui_game_speed_and_coordinates**: Time, speed and coordinates strings in the game/editor info panel
-* **unknown**: Used when a Lua script requests a font style not included in this list .. versionadded:: 1.2
+* **unknown**: Used when a Lua script requests a font style not included in this list
+
+  .. versionadded:: 1.2
+
+.. _theme_paragraphs:
 
 paragraph styles
 ~~~~~~~~~~~~~~~~
@@ -312,6 +374,8 @@ The ``paragraphs`` table defines paragraph styles used mostly by the help texts 
 * **wui_lore_author**: Used for the lore author texts in the Encyclopedia
 * **unknown**: Used when a Lua script requests a paragraph style not included in this list
 
+.. _theme_colors:
+
 colors
 ~~~~~~
 
@@ -346,6 +410,8 @@ The ``colors`` table contains subtables of RGB colors:
 * **campaign_fri_ketelsen**: Text color for Ketelsen's speech box titles in the Frisian campaign
 * **map_river_advisor**: Text color for the advisor's speech box titles in the Along the River SP scenario
 * **unknown**: Used when a Lua script requests a color not included in this list
+
+.. _theme_sizes:
 
 sizes
 ~~~~~

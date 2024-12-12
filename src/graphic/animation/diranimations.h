@@ -37,11 +37,11 @@ struct DirAnimations {
 		animations_[dir - 1] = anim;
 	}
 
-	static DirAnimations null() {
+	[[nodiscard]] static DirAnimations null() {
 		return DirAnimations(0);  // Since real animation IDs are positive, this is safe
 	}
 
-	explicit operator bool() const {
+	[[nodiscard]] bool valid() const {
 		return animations_[0] != 0u;
 	}
 

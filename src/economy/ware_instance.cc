@@ -105,17 +105,24 @@ void IdleWareSupply::set_economy(Economy* const e) {
  */
 PlayerImmovable* IdleWareSupply::get_position(Game& game) {
 	MapObject* const loc = ware_.get_location(game);
+	assert(loc != nullptr);
 
-	if (upcast(PlayerImmovable, playerimmovable, loc)) {
-		return playerimmovable;
+	if (loc->descr().type() > MapObjectType::IMMOVABLE) {
+		if (upcast(PlayerImmovable, playerimmovable, loc); playerimmovable != nullptr) {
+			return playerimmovable;
+		}
 	}
 
-	if (upcast(Worker, worker, loc)) {
-		return worker->get_location(game);
+	if (loc->descr().type() >= MapObjectType::WORKER) {
+		if (upcast(Worker, worker, loc); worker != nullptr) {
+			return worker->get_location(game);
+		}
 	}
 
-	if (upcast(Ship, ship, loc)) {
-		if (PortDock* pd = ship->get_destination()) {
+	if (loc->descr().type() == MapObjectType::SHIP) {
+		upcast(Ship, ship, loc);
+		assert(ship != nullptr);
+		if (PortDock* pd = ship->get_destination_port(game); pd != nullptr) {
 			return pd;
 		}
 		return ship->get_fleet()->get_arbitrary_dock();
@@ -368,8 +375,8 @@ void WareInstance::update(Game& game) {
 			flag->call_carrier(game, *this,
 			                   (dynamic_cast<Building const*>(nextstep) != nullptr) &&
 			                         &nextstep->base_flag() != location ?
-                               &nextstep->base_flag() :
-                               nextstep);
+			                      &nextstep->base_flag() :
+			                      nextstep);
 		} else if (upcast(PortDock, pd, location)) {
 			pd->update_shippingitem(game, *this);
 		} else {
@@ -512,7 +519,7 @@ void WareInstance::cancel_moving() {
  */
 PlayerImmovable* WareInstance::get_next_move_step(Game& game) {
 	return transfer_ != nullptr ? dynamic_cast<PlayerImmovable*>(transfer_nextstep_.get(game)) :
-                                 nullptr;
+	                              nullptr;
 }
 
 void WareInstance::log_general_info(const EditorGameBase& egbase) const {

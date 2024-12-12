@@ -75,6 +75,8 @@ wl_library(scripting_lua_interface
     scripting_logic
     scripting_lua_table
     scripting_luna
+    sound
+    note_sound
 )
 
 wl_library(scripting_logic
@@ -107,6 +109,7 @@ wl_library(scripting_logic
     base_macros
     economy
     graphic
+    graphic_fonthandler
     io_fileread
     io_filesystem
     io_profile
@@ -129,6 +132,7 @@ wl_library(scripting_logic
     scripting_luna
     third_party_eris
     ui_basic
+    ui_fsmenu
     widelands_options
     wui
     wui_mapview_pixelfunctions

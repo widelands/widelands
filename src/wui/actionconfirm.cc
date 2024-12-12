@@ -342,8 +342,8 @@ void EnhanceConfirm::think() {
 	upcast(Widelands::Building, building, object_.get(egbase));
 
 	if ((building == nullptr) || !iaplayer().can_act(building->owner().player_number()) ||
-	    !(still_under_construction_ ||
-	      ((building->get_playercaps() & Widelands::Building::PCap_Enhancable) != 0u))) {
+	    (!still_under_construction_ &&
+	     ((building->get_playercaps() & Widelands::Building::PCap_Enhancable) == 0u))) {
 		die();
 	}
 }
@@ -442,9 +442,9 @@ void ShipCancelExpeditionConfirm::ok() {
 	Widelands::Game& game = iaplayer().game();
 	upcast(Widelands::Ship, ship, object_.get(game));
 
-	if ((ship != nullptr) && iaplayer().can_act(ship->get_owner()->player_number()) &&
-	    ship->get_ship_state() != Widelands::Ship::ShipStates::kTransport &&
-	    ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionColonizing) {
+	if (ship != nullptr && iaplayer().can_act(ship->get_owner()->player_number()) &&
+	    ship->get_ship_state() != Widelands::ShipStates::kTransport &&
+	    ship->get_ship_state() != Widelands::ShipStates::kExpeditionColonizing) {
 		game.send_player_cancel_expedition_ship(*ship);
 	}
 

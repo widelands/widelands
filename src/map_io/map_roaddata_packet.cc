@@ -67,8 +67,9 @@ void MapRoaddataPacket::read(FileSystem& fs,
 						throw GameDataError("already loaded");
 					}
 					PlayerNumber player_index = fr.unsigned_8();
-					if (!(0 < player_index && player_index <= nr_players)) {
-						throw GameDataError("Invalid player number: %i.", player_index);
+					if (0 >= player_index || player_index > nr_players) {
+						throw GameDataError(
+						   "Invalid player number: %u.", static_cast<unsigned int>(player_index));
 					}
 
 					road.set_owner(egbase.get_player(player_index));

@@ -16,4 +16,23 @@
  *
  */
 
-// Dummy file as cmake cannot handle header only libraries :(.
+#include "logic/widelands.h"
+
+#include "base/wexception.h"
+
+namespace Widelands {
+
+std::string soldier_preference_icon(const SoldierPreference p) {
+	switch (p) {
+	case SoldierPreference::kHeroes:
+		return "↑";
+	case SoldierPreference::kRookies:
+		return "↓";
+	case SoldierPreference::kAny:
+		return "=";
+	default:
+		NEVER_HERE();
+	}
+}
+
+}  // namespace Widelands

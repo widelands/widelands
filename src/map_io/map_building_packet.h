@@ -21,8 +21,6 @@
 
 #include "map_io/map_data_packet.h"
 
-class FileRead;
-
 namespace Widelands {
 
 class Building;
@@ -34,9 +32,6 @@ class Building;
 struct MapBuildingPacket {
 	void read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&);
 	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);
-
-protected:
-	void read_priorities(Building&, FileRead&);
 };
 }  // namespace Widelands
 

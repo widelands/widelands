@@ -93,9 +93,10 @@ struct NoteGameSettings {
 	CAN_BE_SENT_AS_NOTE(NoteId::GameSettings)
 
 	enum class Action {
-		kUser,    // A client has picked a different player slot / become a spectator
-		kPlayer,  // A player slot has changed its status (type, tribe etc.)
-		kMap      // A new map/savegame was selected
+		kUser,          // A client has picked a different player slot / become a spectator
+		kPlayer,        // A player slot has changed its status (type, tribe etc.)
+		kMap,           // A new map/savegame was selected
+		kWinCondition,  // A new win condition was selected
 	};
 
 	Action action;
@@ -117,6 +118,8 @@ struct GameSettings {
 		kCustomStartingPositions = 1 << 1,  ///< Players may choose their own starting positions.
 		kFogless = 1 << 2,                  ///< The entire map is always visible.
 		kForbidDiplomacy = 1 << 3,          ///< Players may not change their alliances.
+		kAllowNavalWarfare = 1 << 4,        ///< Allow naval warfare (experimental in v1.2);
+		                                    ///< TODO(Nordfriese): Enable by default in v1.3
 	};
 
 	GameSettings() {

@@ -68,6 +68,8 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 
 	add_diplomacy_menu();
 
+	add_plugin_menu();
+
 	finalize_toolbar();
 
 	// Setup all screen elements
@@ -94,8 +96,8 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 
 	const Widelands::Game& the_game = game();
 	const Widelands::Map& map = the_game.map();
-	auto* fields_to_draw =
-	   given_map_view->draw_terrain(the_game, nullptr, get_workarea_overlays(map), false, dst);
+	auto* fields_to_draw = given_map_view->draw_terrain(
+	   the_game, nullptr, get_workarea_overlays(map), false, false, dst);
 	const float scale = 1.f / given_map_view->view().zoom;
 	const Time& gametime = the_game.get_gametime();
 
@@ -204,7 +206,7 @@ void InteractiveSpectator::node_action(const Widelands::NodeAndTriangle<>& node_
 		return;
 	}
 
-	if (try_show_ship_window()) {
+	if (try_show_ship_windows()) {
 		return;
 	}
 

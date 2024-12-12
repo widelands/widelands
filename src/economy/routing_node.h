@@ -19,6 +19,7 @@
 #ifndef WL_ECONOMY_ROUTING_NODE_H
 #define WL_ECONOMY_ROUTING_NODE_H
 
+#include "base/wexception.h"
 #include "logic/cookie_priority_queue.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands_geometry.h"
@@ -86,12 +87,14 @@ public:
 		case wwWORKER:
 			mpf_cycle_worker = 0;
 			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 
 	[[nodiscard]] int32_t cost(WareWorker which) const {
 		return (which == wwWARE) ? mpf_realcost_ware + mpf_estimate_ware :
-                                 mpf_realcost_worker + mpf_estimate_worker;
+		                           mpf_realcost_worker + mpf_estimate_worker;
 	}
 	Queue::Cookie& cookie(WareWorker which) {
 		return which == wwWARE ? mpf_cookie_ware : mpf_cookie_worker;

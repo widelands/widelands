@@ -67,6 +67,7 @@ public:
 	int get_objectives(lua_State* L);
 	int get_defeated(lua_State* L);
 	int get_resigned(lua_State* L);
+	int get_end_result(lua_State* L);
 	int get_messages(lua_State* L);
 	int get_inbox(lua_State* L);
 	int get_color(lua_State* L);
@@ -79,6 +80,7 @@ public:
 	int set_allow_additional_expedition_items(lua_State* L);
 	int get_hidden_from_general_statistics(lua_State* L);
 	int set_hidden_from_general_statistics(lua_State* L);
+	int get_ai_type(lua_State* L);
 
 	/*
 	 * Lua methods

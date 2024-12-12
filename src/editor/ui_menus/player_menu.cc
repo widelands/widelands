@@ -207,8 +207,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 		plr_tribe->select(
 		   (p <= map.get_nrplayers() &&
 		    Widelands::tribe_exists(map.get_scenario_player_tribe(p), parent.egbase().all_tribes())) ?
-            map.get_scenario_player_tribe(p) :
-            "");
+		      map.get_scenario_player_tribe(p) :
+		      "");
 		plr_tribe->selected.connect([this, p]() { player_tribe_clicked(p - 1); });
 
 		// Starting position
@@ -336,7 +336,7 @@ void EditorPlayerMenu::set_starting_pos_clicked(size_t row) {
 	EditorInteractive& menu = eia();
 	//  jump to the current node
 	Widelands::Map* map = menu.egbase().mutable_map();
-	if (Widelands::Coords const sp = map->get_starting_pos(row)) {
+	if (Widelands::Coords const sp = map->get_starting_pos(row); sp.valid()) {
 		menu.map_view()->scroll_to_field(sp, MapView::Transition::Smooth);
 	}
 
