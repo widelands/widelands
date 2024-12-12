@@ -56,7 +56,7 @@ const PropertyType<LuaTrainingSite> LuaTrainingSite::Properties[] = {
 
 // documented in parent class
 int LuaTrainingSite::get_max_soldiers(lua_State* L) {
-	lua_pushuint32(L, get(L, get_egbase(L))->soldier_control()->soldier_capacity());
+	lua_pushuint32(L, get(L, get_egbase(L))->soldier_control()->max_soldier_capacity());
 	return 1;
 }
 

@@ -99,6 +99,24 @@ int LuaWarehouse::get_expedition_in_progress(lua_State* L) {
 	return 0;
 }
 
+/* RST
+   .. attribute:: warehousename
+
+   .. versionadded:: 1.2
+
+   (RW) The name of the warehouse as :class:`string`.
+*/
+int LuaWarehouse::get_warehousename(lua_State* L) {
+	Widelands::Warehouse* wh = get(L, get_egbase(L));
+	lua_pushstring(L, wh->get_warehouse_name().c_str());
+	return 1;
+}
+int LuaWarehouse::set_warehousename(lua_State* L) {
+	Widelands::Warehouse* wh = get(L, get_egbase(L));
+	wh->set_warehouse_name(luaL_checkstring(L, -1));
+	return 0;
+}
+
 /*
  ==========================================================
  LUA METHODS
@@ -418,26 +436,6 @@ int LuaWarehouse::get_soldiers(lua_State* L) {
 int LuaWarehouse::set_soldiers(lua_State* L) {
 	Widelands::Warehouse* wh = get(L, get_egbase(L));
 	return do_set_soldiers(L, wh->get_position(), wh->mutable_soldier_control(), wh->get_owner());
-}
-
-/* RST
-   .. attribute:: warehousename
-
-   .. versionadded:: 1.2
-
-   (RW) The name of the warehouse as :class:`string`.
-
-
-*/
-int LuaWarehouse::get_warehousename(lua_State* L) {
-	Widelands::Warehouse* wh = get(L, get_egbase(L));
-	lua_pushstring(L, wh->get_warehouse_name().c_str());
-	return 1;
-}
-int LuaWarehouse::set_warehousename(lua_State* L) {
-	Widelands::Warehouse* wh = get(L, get_egbase(L));
-	wh->set_warehouse_name(luaL_checkstring(L, -1));
-	return 0;
 }
 
 /* RST

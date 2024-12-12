@@ -57,26 +57,8 @@ const PropertyType<LuaMilitarySite> LuaMilitarySite::Properties[] = {
 
 // documented in parent class
 int LuaMilitarySite::get_max_soldiers(lua_State* L) {
-	lua_pushuint32(L, get(L, get_egbase(L))->soldier_control()->soldier_capacity());
+	lua_pushuint32(L, get(L, get_egbase(L))->soldier_control()->max_soldier_capacity());
 	return 1;
-}
-
-/*
- ==========================================================
- LUA METHODS
- ==========================================================
- */
-
-// documented in parent class
-int LuaMilitarySite::get_soldiers(lua_State* L) {
-	Widelands::MilitarySite* ms = get(L, get_egbase(L));
-	return do_get_soldiers(L, *ms->soldier_control(), ms->owner().tribe());
-}
-
-// documented in parent class
-int LuaMilitarySite::set_soldiers(lua_State* L) {
-	Widelands::MilitarySite* ms = get(L, get_egbase(L));
-	return do_set_soldiers(L, ms->get_position(), ms->mutable_soldier_control(), ms->get_owner());
 }
 
 /* RST
@@ -112,6 +94,24 @@ int LuaMilitarySite::set_soldier_preference(lua_State* L) {
 		report_error(L, "%s", e.what());
 	}
 	return 0;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+// documented in parent class
+int LuaMilitarySite::get_soldiers(lua_State* L) {
+	Widelands::MilitarySite* ms = get(L, get_egbase(L));
+	return do_get_soldiers(L, *ms->soldier_control(), ms->owner().tribe());
+}
+
+// documented in parent class
+int LuaMilitarySite::set_soldiers(lua_State* L) {
+	Widelands::MilitarySite* ms = get(L, get_egbase(L));
+	return do_set_soldiers(L, ms->get_position(), ms->mutable_soldier_control(), ms->get_owner());
 }
 
 /*

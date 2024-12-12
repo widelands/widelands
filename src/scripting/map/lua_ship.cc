@@ -81,7 +81,7 @@ int LuaShip::get_debug_worker_economy(lua_State* L) {
    .. attribute:: destination
 
       (RO) Either :const:`nil` if there is no current destination, otherwise
-      the :class:`PortDock` or :class:`Ship`.
+      the :class:`PortDock`, :class:`Ship`, or :class:`PinnedNote`.
 */
 // UNTESTED
 int LuaShip::get_destination(lua_State* L) {
@@ -185,6 +185,14 @@ int LuaShip::get_type(lua_State* L) {
 	return 1;
 }
 
+/* RST
+   .. attribute:: scouting_direction
+
+      (RW) The direction into which this ship is currently scouting, if any.
+
+      Possible values are :const:`"ne"`, :const:`"e"`, :const:`"se"`, :const:`"sw"`,
+      :const:`"w"`, :const:`"nw"`, and :const:`nil`.
+*/
 int LuaShip::get_scouting_direction(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	if (egbase.is_game()) {

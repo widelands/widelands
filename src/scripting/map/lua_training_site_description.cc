@@ -58,7 +58,7 @@ const PropertyType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Prope
 /* RST
    .. attribute:: max_attack
 
-      (RO) The number of attack points that a soldier can train.
+      (RO) The number of attack levels that a soldier can train.
 */
 int LuaTrainingSiteDescription::get_max_attack(lua_State* L) {
 	const Widelands::TrainingSiteDescr* descr = get();
@@ -73,7 +73,7 @@ int LuaTrainingSiteDescription::get_max_attack(lua_State* L) {
 /* RST
    .. attribute:: max_defense
 
-      (RO) The number of defense points that a soldier can train.
+      (RO) The number of defense levels that a soldier can train.
 */
 int LuaTrainingSiteDescription::get_max_defense(lua_State* L) {
 	const Widelands::TrainingSiteDescr* descr = get();
@@ -88,7 +88,7 @@ int LuaTrainingSiteDescription::get_max_defense(lua_State* L) {
 /* RST
    .. attribute:: max_evade
 
-      (RO) The number of evade points that a soldier can train.
+      (RO) The number of evade levels that a soldier can train.
 */
 int LuaTrainingSiteDescription::get_max_evade(lua_State* L) {
 	const Widelands::TrainingSiteDescr* descr = get();
@@ -103,7 +103,7 @@ int LuaTrainingSiteDescription::get_max_evade(lua_State* L) {
 /* RST
    .. attribute:: max_health
 
-      (RO) The number of health points that a soldier can train.
+      (RO) The number of health levels that a soldier can train.
 */
 int LuaTrainingSiteDescription::get_max_health(lua_State* L) {
 	const Widelands::TrainingSiteDescr* descr = get();
@@ -128,7 +128,7 @@ int LuaTrainingSiteDescription::get_max_number_of_soldiers(lua_State* L) {
 /* RST
    .. attribute:: min_attack
 
-      (RO) The number of attack points that a soldier starts training with.
+      (RO) The number of attack levels that a soldier starts training with.
 */
 int LuaTrainingSiteDescription::get_min_attack(lua_State* L) {
 	const Widelands::TrainingSiteDescr* descr = get();
@@ -143,7 +143,7 @@ int LuaTrainingSiteDescription::get_min_attack(lua_State* L) {
 /* RST
    .. attribute:: min_defense
 
-      (RO) The number of defense points that a soldier starts training with.
+      (RO) The number of defense levels that a soldier starts training with.
 */
 int LuaTrainingSiteDescription::get_min_defense(lua_State* L) {
 	const Widelands::TrainingSiteDescr* descr = get();
@@ -158,7 +158,7 @@ int LuaTrainingSiteDescription::get_min_defense(lua_State* L) {
 /* RST
    .. attribute:: min_evade
 
-      (RO) The number of evade points that a soldier starts training with.
+      (RO) The number of evade levels that a soldier starts training with.
 */
 int LuaTrainingSiteDescription::get_min_evade(lua_State* L) {
 	const Widelands::TrainingSiteDescr* descr = get();
@@ -173,7 +173,7 @@ int LuaTrainingSiteDescription::get_min_evade(lua_State* L) {
 /* RST
    .. attribute:: min_health
 
-      (RO) The number of health points that a soldier starts training with.
+      (RO) The number of health levels that a soldier starts training with.
 */
 int LuaTrainingSiteDescription::get_min_health(lua_State* L) {
 	const Widelands::TrainingSiteDescr* descr = get();
