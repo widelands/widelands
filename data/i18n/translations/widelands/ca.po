@@ -3226,7 +3226,7 @@ msgstr "Els elements que pot rebre l'edifici han canviat!"
 #: ../../../../src/map_io/map_buildingdata_packet.cc:898
 #, c-format
 msgid "%s: the building’s inputs have changed."
-msgstr ""
+msgstr "%s: els elements que pot rebre l'edifici han canviat."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:901
 msgid "The following wares have been deleted:"

@@ -6440,7 +6440,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:141
 msgid "Enable naval warfare (experimental feature)"
-msgstr ""
+msgstr "Umožnit námořní vojenství (volba v zkušebním provozu)"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:149
 msgid "Custom starting positions"
@@ -6518,11 +6518,11 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:400
 msgid "Naval warfare is set by the scenario"
-msgstr ""
+msgstr "Námořní vojenství určeno nastavením scénáře"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:402
 msgid "Naval warfare is set by the saved game"
-msgstr ""
+msgstr "Námořní vojenství určeno nastavením uložené hry"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:405
 msgid ""
