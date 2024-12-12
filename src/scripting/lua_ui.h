@@ -83,6 +83,7 @@ public:
 	 * Properties
 	 */
 	int get_name(lua_State* L);
+	int get_parent(lua_State* L);
 	int get_children(lua_State* L);
 	int get_buttons(lua_State* L);
 	int get_dropdowns(lua_State* L);
@@ -108,12 +109,16 @@ public:
 #endif
 	int create_child(lua_State* L);
 	int get_child(lua_State* L);
+	int layout(lua_State* L);
 	int die(lua_State* L);
 	int force_redraw(lua_State* L);
 
 	/*
 	 * C Methods
 	 */
+	UI::Panel* get() {
+		return panel_;
+	}
 	static UI::Panel* do_create_child(lua_State* L, UI::Panel* parent, UI::Box* as_box);
 	static UI::Box* do_create_child_box(lua_State* L, UI::Panel* parent);
 	static UI::Panel* do_create_child_button(lua_State* L, UI::Panel* parent);
@@ -134,6 +139,52 @@ public:
 	static UI::Panel* do_create_child_textarea(lua_State* L, UI::Panel* parent);
 	static UI::Panel* do_create_child_unique_window(lua_State* L, UI::Panel* parent);
 	static UI::Panel* do_create_child_window(lua_State* L, UI::Panel* parent);
+};
+
+class LuaBox : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaBox);
+
+	LuaBox() = default;
+	explicit LuaBox(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaBox(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaBox() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_orientation(lua_State* L);
+	int get_no_of_items(lua_State* L);
+	int get_scrolling(lua_State* L);
+	int set_scrolling(lua_State* L);
+	int get_force_scrolling(lua_State* L);
+	int set_force_scrolling(lua_State* L);
+	int get_inner_spacing(lua_State* L);
+	int set_inner_spacing(lua_State* L);
+	int get_min_desired_breadth(lua_State* L);
+	int set_min_desired_breadth(lua_State* L);
+	int get_max_width(lua_State* L);
+	int set_max_width(lua_State* L);
+	int get_max_height(lua_State* L);
+	int set_max_height(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+	int clear(lua_State* L);
+	int get_index(lua_State* L);
+	int is_space(lua_State* L);
+	int get_resizing(lua_State* L);
+	int get_align(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	UI::Box* get() {
+		return dynamic_cast<UI::Box*>(panel_);
+	}
 };
 
 class LuaButton : public LuaPanel {
@@ -445,6 +496,7 @@ public:
 	int get_expanded(lua_State* L);
 	int get_no_of_items(lua_State* L);
 	int get_selection(lua_State* L);
+	int get_listselect(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -453,6 +505,7 @@ public:
 	int highlight_item(lua_State* L);
 	int indicate_item(lua_State* L);
 	int select(lua_State* L);
+	int clear(lua_State* L);
 	int add(lua_State* L);
 	int get_value_at(lua_State* L);
 	int get_label_at(lua_State* L);
@@ -483,10 +536,13 @@ public:
 	int get_datatype(lua_State* L);
 	int get_no_of_items(lua_State* L);
 	int get_selection(lua_State* L);
+	int get_linked_dropdown(lua_State* L);
 
 	/*
 	 * Lua Methods
 	 */
+	int select(lua_State* L);
+	int clear(lua_State* L);
 	int add(lua_State* L);
 	int get_value_at(lua_State* L);
 	int get_label_at(lua_State* L);
