@@ -3193,7 +3193,7 @@ msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It can "
 "be processed into spidercloth or tabards in a weaving mill, or used to make "
 "tools in the toolsmithy."
-msgstr ""
+msgstr "La seda d’aranya la produeixen les aranyes criades en granges. Es transforma en tela de seda d’aranya, en tabards als tallers de teixir o es fa servir per a fer eines als tallers d'eines."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:481
@@ -3202,7 +3202,7 @@ msgid ""
 "Spidercloth is made out of spider silk in a weaving mill. It is used in the "
 "shipyard. Also some higher developed buildings need spidercloth for their "
 "construction."
-msgstr ""
+msgstr "La tela de seda d’aranya es fa a partir de seda d’aranya en els tallers de teixir. L’empra el fuster de vaixells. També en necessiten alguns edificis per a la seva construcció."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fish
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:492

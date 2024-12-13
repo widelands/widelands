@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-12-05 03:11+0000\n"
+"POT-Creation-Date: 2024-12-12 03:09+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -1128,7 +1128,7 @@ msgstr "Názvy súborov"
 
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:144
 msgid "Map names"
-msgstr ""
+msgstr "Názvy máp"
 
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:144
 msgid "Original map names"
@@ -2612,7 +2612,7 @@ msgstr "(zastavené)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:480
-#: ../../../../src/wui/building_statistics_menu.cc:725
+#: ../../../../src/wui/building_statistics_menu.cc:726
 #, c-format
 msgid "%i%%"
 msgstr "%i %%"
@@ -3250,20 +3250,14 @@ msgstr ""
 #. * TRANSLATORS: The argument is the buiding name
 #: ../../../../src/map_io/map_buildingdata_packet.cc:898
 #, c-format
-msgid "%s: the building's inputs have changed."
+msgid "%s: the building’s inputs have changed."
 msgstr ""
 
-#. * TRANSLATORS: Amount and type of space between two sentences
 #: ../../../../src/map_io/map_buildingdata_packet.cc:901
-msgctxt "sentence_separator"
-msgid " "
-msgstr ""
-
-#: ../../../../src/map_io/map_buildingdata_packet.cc:902
 msgid "The following wares have been deleted:"
 msgstr ""
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:909
+#: ../../../../src/map_io/map_buildingdata_packet.cc:908
 #, c-format
 msgid "%1$u piece of %2$s"
 msgid_plural "%1$u pieces of %2$s"
@@ -3272,7 +3266,7 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:915
+#: ../../../../src/map_io/map_buildingdata_packet.cc:914
 #, c-format
 msgid "%1$u piece of an unknown ware"
 msgid_plural "%1$u pieces of unknown wares"
@@ -3281,13 +3275,13 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:921
+#: ../../../../src/map_io/map_buildingdata_packet.cc:920
 msgid ""
 "The game was probably saved with a different Widelands version or with "
 "different enabled add-ons."
 msgstr ""
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:924
+#: ../../../../src/map_io/map_buildingdata_packet.cc:923
 msgid "Please review the current production programs and input settings."
 msgstr ""
 
@@ -3404,7 +3398,7 @@ msgstr "Nahrávanie mapy…"
 
 #: ../../../../src/map_io/s2map.cc:460
 msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr "Bluebyte Settlers II Map. Komentár nie je definovaný!"
+msgstr "Mapa Bluebyte Settlers II. Komentár nie je definovaný!"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:209
 #, c-format
@@ -3433,7 +3427,7 @@ msgstr "Inicializácia mapových objektov"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:435
 msgid "Checking map"
-msgstr ""
+msgstr "Kontrola mapy"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:450
 msgid "Postloading map objects"
@@ -4614,7 +4608,7 @@ msgstr "Ukázať iba overené doplnky"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:318
 #: ../../../../src/ui_fsmenu/addons/manager.cc:329
 msgid "Sort by"
-msgstr ""
+msgstr "Zoradiť podľa"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:340
 msgid "Minimum quality"
@@ -4622,35 +4616,35 @@ msgstr "Minimálna kvalita"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:354
 msgid "Min Players:"
-msgstr ""
+msgstr "Min hráči:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:367
 msgid "Min Width:"
-msgstr ""
+msgstr "Min šírka:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:380
 msgid "Min Height:"
-msgstr ""
+msgstr "Min výška:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:393
 msgid "Min Size:"
-msgstr ""
+msgstr "Min veľkosť:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:406
 msgid "Max Players:"
-msgstr ""
+msgstr "Max hráči:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:419
 msgid "Max Width:"
-msgstr ""
+msgstr "Max šírka:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:432
 msgid "Max Height:"
-msgstr ""
+msgstr "Max výška:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:445
 msgid "Max Size:"
-msgstr ""
+msgstr "Max veľkosť:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:455
 msgid "Choose add-on to upload…"
@@ -4981,7 +4975,7 @@ msgstr "Nahrávanie doplnkov… (%.1f%%)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1354
 msgid "Connecting to the server…"
-msgstr ""
+msgstr "Pripájanie sa na server…"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1377
 msgid "Server Connection Error"
@@ -5039,12 +5033,12 @@ msgstr "• %s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1674
 msgid "Website Maps"
-msgstr ""
+msgstr "Mapy webstránky"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1675
 #, c-format
 msgid "Website Maps (%u)"
-msgstr ""
+msgstr "Mapy webstránky (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1707
 #, c-format
@@ -6347,7 +6341,7 @@ msgstr "Stlačte novú klávesovú skratku alebo zrušte akciu zatvorením tohto
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:133
 msgid "(unused)"
-msgstr ""
+msgstr "(nepoužité)"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:211
 msgid "Edit Keyboard And Mouse Actions"
@@ -7509,7 +7503,7 @@ msgstr "Zobraziť systémový čas v informačnom paneli"
 
 #: ../../../../src/ui_fsmenu/options.cc:357
 msgid "Allow diagonal scrolling with the numeric keypad"
-msgstr ""
+msgstr "Umožňiť diagonálne posúvanie pomocou numerickej klávesnice"
 
 #: ../../../../src/ui_fsmenu/options.cc:362
 msgid "Scroll when the mouse cursor is near the screen edge"
@@ -9163,22 +9157,22 @@ msgstr "Bane"
 msgid "Ports"
 msgstr "Prístavy"
 
-#: ../../../../src/wui/building_statistics_menu.cc:734
+#: ../../../../src/wui/building_statistics_menu.cc:735
 msgid "Low productivity:"
 msgstr "Nízka produktivita:"
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../../../src/wui/building_statistics_menu.cc:743
-#: ../../../../src/wui/building_statistics_menu.cc:762
-#: ../../../../src/wui/building_statistics_menu.cc:764
+#: ../../../../src/wui/building_statistics_menu.cc:744
+#: ../../../../src/wui/building_statistics_menu.cc:763
+#: ../../../../src/wui/building_statistics_menu.cc:765
 #: ../../../../src/wui/productionsitewindow.cc:233
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../../../src/wui/building_statistics_menu.cc:753
+#: ../../../../src/wui/building_statistics_menu.cc:754
 msgid "Lacking soldiers:"
 msgstr "Chýbajúci vojaci:"
 
@@ -9246,11 +9240,11 @@ msgstr "Sledovať prieskumníka"
 
 #: ../../../../src/wui/buildingwindow.cc:703
 msgid "Hide work area"
-msgstr "Skryť pracovnú plochu"
+msgstr "Skryť pracovnú oblasť"
 
 #: ../../../../src/wui/buildingwindow.cc:706
 msgid "Show work area"
-msgstr "Zobraziť pracovnú plochu"
+msgstr "Zobraziť pracovnú oblasť"
 
 #: ../../../../src/wui/buildingwindow.cc:731
 #: ../../../../src/wui/constructionsitewindow.cc:304
@@ -9768,7 +9762,7 @@ msgstr "Tím %u"
 #: ../../../../src/wui/game_diplomacy_menu.cc:207
 #, c-format
 msgid "Won at %s"
-msgstr ""
+msgstr "Vyhral o %s"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:210
 #, c-format
