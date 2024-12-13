@@ -151,8 +151,8 @@ int LuaListselect::clear(lua_State* /* L */) {
    .. method:: add(label, value
       [, icon = nil, tooltip = "", select = false, indent = 0, enable = true, hotkey = nil])
 
-   .. versionchanged:: 1.3
-      Added ``enable`` and ``hotkey`` parameters.
+      .. versionchanged:: 1.3
+         Added ``enable`` and ``hotkey`` parameters.
 
       Add an entry to the list. Only allowed for lists with supported datatypes.
 
