@@ -160,17 +160,20 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
 		// Show map information
 		const std::string authors_heading =
 		   (mapdata.authors.get_number() == 1) ?
-            /** TRANSLATORS: Label in map details if there is 1 author */
-            _("Author") :
-            /** TRANSLATORS: Label in map details if there is more than 1 author. If you need plural
-               forms here, please let us know. */
-               _("Authors");
+		      /** TRANSLATORS: Label in map details if there is 1 author */
+		      _("Author") :
+		      /** TRANSLATORS: Label in map details if there is more than 1 author. If you need plural
+		         forms here, please let us know. */
+		         _("Authors");
 		std::string description = as_heading(authors_heading, style_);
 		description += as_content(mapdata.authors.get_names(), style_);
 
-		std::vector<std::string> tags;
-		for (const auto& tag : mapdata.tags) {
-			tags.push_back(localize_tag(tag).displayname);
+		std::vector<std::string> tags(mapdata.tags.size());
+		{
+			size_t i = 0;
+			for (const auto& tag : mapdata.tags) {
+				tags.at(i++) = localize_tag(tag).displayname;
+			}
 		}
 		std::sort(tags.begin(), tags.end());
 		description += as_heading(_("Tags"), style_);

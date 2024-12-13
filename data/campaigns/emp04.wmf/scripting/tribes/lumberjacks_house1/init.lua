@@ -36,8 +36,9 @@ wl.Descriptions():new_productionsite_type {
       main = {
          descname = pgettext("empire_building", "felling trees"),
          actions = {
-            "sleep=duration:6m40s",
-            "callworker=harvest"
+            "sleep=duration:6m30s",
+            "callworker=harvest",
+            "return=failed"
          }
       },
    },

@@ -21,7 +21,6 @@
 #include <memory>
 
 #include "base/log.h"
-#include "base/md5.h"
 #include "base/random.h"
 #include "base/time_string.h"
 #include "base/wexception.h"
@@ -60,7 +59,7 @@ enum { pkt_end = 2, pkt_playercommand = 3, pkt_syncreport = 4 };
 
 class CmdReplaySyncRead : public Command {
 public:
-	CmdReplaySyncRead(const Time& init_duetime, const Md5Checksum& hash)
+	CmdReplaySyncRead(const Time& init_duetime, crypto::MD5Checksum hash)
 	   : Command(init_duetime), hash_(hash) {
 	}
 
@@ -74,7 +73,7 @@ public:
 			return;
 		}
 
-		const Md5Checksum myhash = game.get_sync_hash();
+		const crypto::MD5Checksum myhash = game.get_sync_hash();
 
 		if (hash_ != myhash) {
 			reported_desync_for_ = &game;
@@ -106,7 +105,7 @@ public:
 	}
 
 private:
-	Md5Checksum hash_;
+	crypto::MD5Checksum hash_;
 
 	static const Game* reported_desync_for_;
 };
@@ -151,6 +150,7 @@ ReplayReader::ReplayReader(Game& game, const std::string& filename) : replaytime
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
 		game.set_win_condition_displayname(gpdp.get_win_condition());
+		game.set_win_condition_duration(gpdp.get_win_condition_duration());
 		gl.load_game();
 		game.postload_addons();
 
@@ -204,15 +204,15 @@ Command* ReplayReader::get_next_command(const Time& time) {
 
 		case pkt_syncreport: {
 			Time duetime(cmdlog_->unsigned_32());
-			Md5Checksum hash;
-			cmdlog_->data(hash.data, sizeof(hash.data));
+			crypto::MD5Checksum hash;
+			cmdlog_->data(hash.value.data(), hash.value.size());
 
 			return new CmdReplaySyncRead(duetime, hash);
 		}
 
 		case pkt_end: {
 			Time endtime(cmdlog_->unsigned_32());
-			log_err_time(time, "REPLAY: End of replay (gametime: %u)\n", endtime.get());
+			verb_log_info_time(time, "REPLAY: End of replay (gametime: %u)\n", endtime.get());
 			delete cmdlog_;
 			cmdlog_ = nullptr;
 			return nullptr;
@@ -338,10 +338,10 @@ void ReplayWriter::send_player_command(PlayerCommand* cmd) {
 /**
  * Store a synchronization hash for the current game time in the replay.
  */
-void ReplayWriter::send_sync(const Md5Checksum& hash) {
+void ReplayWriter::send_sync(const crypto::MD5Checksum& hash) {
 	cmdlog_->unsigned_8(pkt_syncreport);
 	cmdlog_->unsigned_32(game_.get_gametime().get());
-	cmdlog_->data(hash.data, sizeof(hash.data));
+	cmdlog_->data(hash.value.data(), hash.value.size());
 	cmdlog_->flush();
 }
 
@@ -358,6 +358,8 @@ ReplayfileSavegameExtractor::ReplayfileSavegameExtractor(const std::string& game
 	if (magic != kReplayMagic) {
 		throw wexception("%s not a valid replay file", source_file_.c_str());
 	}
+
+	is_replay_ = true;
 
 	const uint8_t packet_version = fr.unsigned_8();
 	if (packet_version != kCurrentPacketVersion) {

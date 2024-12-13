@@ -49,8 +49,8 @@ struct ProductionProgram : public MapObjectProgram {
 	struct Action {
 		struct TrainingParameters {
 			TrainingParameters() = default;
-			static TrainingParameters parse(const std::vector<std::string>& arguments,
-			                                const std::string& action_name);
+			TrainingParameters(const std::vector<std::string>& arguments,
+			                   const std::string& action_name);
 
 			TrainingAttribute attribute{TrainingAttribute::kTotal};
 			unsigned level{INVALID_INDEX};
@@ -342,8 +342,7 @@ struct ProductionProgram : public MapObjectProgram {
 	///
 	/// Blocks the execution of the program for the specified duration.
 	struct ActSleep : public Action {
-		explicit ActSleep(const std::vector<std::string>& arguments,
-		                  const ProductionSiteDescr& psite);
+		explicit ActSleep(const std::vector<std::string>& arguments);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
@@ -527,12 +526,28 @@ struct ProductionProgram : public MapObjectProgram {
 	/// Plays the specified sound effect with the specified priority. Whether the
 	/// sound effect is actually played is determined by the sound handler.
 	struct ActPlaySound : public Action {
-		explicit ActPlaySound(const std::vector<std::string>& arguments,
-		                      const ProductionSiteDescr& descr);
+		explicit ActPlaySound(const std::vector<std::string>& arguments);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
 		PlaySoundParameters parameters;
+	};
+
+	/// Runs a Lua script.
+	///
+	/// Parameter syntax:
+	///    parameters ::= function
+	/// Parameter semantics:
+	///    function:
+	///       The name of the function to call.
+	///
+	/// Invokes the specified Lua function with this productionsite as the argument.
+	struct ActRunScript : public Action {
+		explicit ActRunScript(const std::vector<std::string>& arguments);
+		void execute(Game&, ProductionSite&) const override;
+
+	private:
+		RunScriptParameters parameters;
 	};
 
 	/// Sends a building worker to construct at an immovable.

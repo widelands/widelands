@@ -25,7 +25,6 @@
 #include <SDL_timer.h>
 
 #include "base/i18n.h"
-#include "base/log.h"
 #include "build_info.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -34,7 +33,10 @@
 #include "logic/game_data_error.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
+#include "scripting/map/lua_field.h"
 #include "scripting/report_error.h"
+#include "sound/note_sound.h"
+#include "sound/sound_handler.h"
 
 namespace LuaGlobals {
 
@@ -70,7 +72,44 @@ files name.
    instead uses our own ``format`` function. This allows for better control of the
    formatting as well as reordering of arguments which is needed for proper localisation.
 
+   Use ``bformat()`` whenever your string contains values from variables.
+
    :returns: The formatted string.
+
+   ``bformat()`` can be used with the global :func:`_(str) function <_>`. Examples:
+
+   .. code-block:: lua
+
+      local a_str    = _("Widelands")
+      local a_number = 5
+      local a_float  = 3.4
+
+      _("This is a string: %1$s"):bformat(a_str)             -- s = string
+      _("This is a number: %1$d"):bformat(a_number)          -- d = number (integer)
+      _("This is a number: %1$f"):bformat(a_float)           -- f = number (float)
+
+      -- %1$ refers to the first,
+      -- %2$ to the second placeholder and so on:
+
+      local tribe_name = _("Atlanteans")
+      _("The %1$s are one of the tribes in %2$s."):bformat(tribe_name, a_str)
+
+      -- Formatting numbers with two digits:
+      local hours   = 2
+      local minutes = 10
+      local seconds = 5
+
+      -- TRANSLATORS: A time string (hh:mm:ss) like "10:02:30"
+      _("%1$02d:%2$02d:%3$02d"):bformat(hours, minutes, seconds) -- result: 02:10:05
+
+      -- Formatting floating point numbers with precision:
+      local endless = 10 / 3
+
+      _("Precision of 2: %1$.2f"):bformat(endless)           -- result: Precision of 2: 3.33
+
+   If your variable contains a number you should use :func:`ngettext` or
+   :func:`npgettext` to allow proper translation of plural strings.
+
 */
 // The 'b' in bformat used to stand for "boost", which we no longer use, but
 // renaming the Lua function would break backwards compatibility.
@@ -141,45 +180,34 @@ using TextdomainInfo = std::pair<std::string, bool /* addon */>;
 static std::map<const lua_State*, std::vector<TextdomainInfo>> textdomains;
 
 /* RST
-   .. function:: push_textdomain(domain [, addon=false])
+.. function:: push_textdomain(domain [, addon=false])
 
-      Sets the textdomain for all further calls to :func:`_` until it is reset
-      to the previous value using :func:`pop_textdomain`.
+   Sets the textdomain for all further calls to :func:`_` until it is reset
+   to the previous value using :func:`pop_textdomain`.
 
-      If your script is part of an add-on, the second parameter needs to be `true`.
+   If your script is part of an add-on, the second parameter needs to be `true`.
 
-      :arg domain: The textdomain
-      :type domain: :class:`string`
-      :returns: :const:`nil`
+   :arg domain: The textdomain
+   :type domain: :class:`string`
+   :returns: :const:`nil`
 */
 static int L_push_textdomain(lua_State* L) {
-	textdomains[L].push_back(
-	   std::make_pair(luaL_checkstring(L, 1), lua_gettop(L) > 1 && luaL_checkboolean(L, 2)));
+	textdomains[L].emplace_back(
+	   luaL_checkstring(L, 1), lua_gettop(L) > 1 && luaL_checkboolean(L, 2));
 	return 0;
 }
 
 /* RST
-   .. function:: pop_textdomain()
+.. function:: pop_textdomain()
 
-      Resets the textdomain for calls to :func:`_` to the value it had
-      before the last call to :func:`push_textdomain`.
+   Resets the textdomain for calls to :func:`_` to the value it had
+   before the last call to :func:`push_textdomain`.
 
-      :returns: :const:`nil`
+   :returns: :const:`nil`
 */
 static int L_pop_textdomain(lua_State* L) {
 	textdomains.at(L).pop_back();
 	return 0;
-}
-
-/* RST
-   .. function:: set_textdomain(domain)
-
-      DEPRECATED. Use `push_textdomain(domain)` instead.
-*/
-// TODO(Nordfriese): Delete after v1.0
-static int L_set_textdomain(lua_State* L) {
-	log_warn("set_textdomain is deprecated, use push_textdomain instead");
-	return L_push_textdomain(L);
 }
 
 static const TextdomainInfo* current_textdomain(const lua_State* L) {
@@ -202,7 +230,7 @@ void read_textdomain_stack(FileRead& fr, const lua_State* L) {
 			for (size_t i = fr.unsigned_32(); i > 0u; --i) {
 				const std::string str = fr.string();
 				const bool a = fr.unsigned_8() != 0u;
-				textdomains[L].push_back(std::make_pair(str, a));
+				textdomains[L].emplace_back(str, a);
 			}
 		} else {
 			throw Widelands::UnhandledVersionError(
@@ -228,21 +256,21 @@ void write_textdomain_stack(FileWrite& fw, const lua_State* L) {
 }
 
 /* RST
-   .. function:: _(str)
+.. function:: _(str)
 
-      This peculiar function is used to translate texts in your scenario into
-      another language. The function takes a single string, grabs the
-      textdomain of your map (which is usually the maps name) and returns the
-      translated string. Make sure that you separate translatable and untranslatable
-      stuff:
+   This peculiar function is used to translate texts in your scenario into
+   another language. The function takes a single string, grabs the
+   textdomain of your map (which is usually the maps name) and returns the
+   translated string. Make sure that you separate translatable and untranslatable
+   stuff:
 
-      .. code-block:: lua
+   .. code-block:: lua
 
-         s = "<p><br>" .. _("Only this should be translated") .. "<br></p>"
+      s = "<p><br>" .. _("Only this should be translated") .. "<br></p>"
 
-      :arg str: text to translate.
-      :type str: :class:`string`
-      :returns: The translated string.
+   :arg str: text to translate.
+   :type str: :class:`string`
+   :returns: The translated string.
 */
 CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
@@ -277,6 +305,35 @@ static int L__(lua_State* L) {
    :type n: An unsigned integer.
 
    :returns: The translated string.
+
+   Example to show how it works:
+
+   .. code-block:: lua
+
+      local count = _get_items()                -- count can be 0 or more
+      local text  = ngettext("You have %1$d item", "You have %1$d items", count):bformat(count)
+
+   .. note::
+      The singular and plural forms should be identical except for the plural form itself.
+      If you want to special-case the number ``1`` (or any other number),
+      or if you don't want to include the ``count`` variable in the string,
+      do *not* use ``ngettext``, but rather an ``if``-``else``-construct. Example:
+
+   .. code-block:: lua
+
+      local count = _get_items()  -- count can be 0 or more
+      local text
+
+      if count == 0 then
+         text = _("You have no items.")
+      elseif count == 1 then
+         text = _("You have only one item.")
+      else
+         text = _("You have a lot of items.")
+      end
+
+      -- Note the _() function for translation.
+      -- The arguments to ngettext do not require an additional _() call.
 */
 static int L_ngettext(lua_State* L) {
 	//  S: msgid msgid_plural n
@@ -378,14 +435,14 @@ static int L_npgettext(lua_State* L) {
 }
 
 /* RST
-   .. function:: include(script)
+.. function:: include(script)
 
-      Includes the script at the given location at the current position in the
-      file. The script can begin with 'map:' to include files from the map.
+   Includes the script at the given location at the current position in the
+   file. The script can begin with 'map:' to include files from the map.
 
-      :type script: :class:`string`
-      :arg script: The filename relative to the root of the data directory.
-      :returns: :const:`nil`
+   :type script: :class:`string`
+   :arg script: The filename relative to the root of the data directory.
+   :returns: :const:`nil`
 */
 static int L_include(lua_State* L) {
 	const std::string script = luaL_checkstring(L, -1);
@@ -428,16 +485,111 @@ static int L_get_build_id(lua_State* L) {
 	return 1;
 }
 
+/* Use our own logging function as a replacement for Lua's built-in print(). */
+static int L_print(lua_State* L) {
+	std::string message;
+
+	for (int i = 1; i <= lua_gettop(L); ++i) {
+		if (i > 1) {
+			message += ' ';
+		}
+
+		switch (lua_type(L, i)) {
+		case LUA_TNIL:
+			message += "(nil)";
+			break;
+		case LUA_TBOOLEAN:
+			message += luaL_checkboolean(L, i) ? "true" : "false";
+			break;
+		case LUA_TNUMBER:
+		case LUA_TSTRING:
+			message += luaL_checkstring(L, i);
+			break;
+		default:
+			message += as_string(format("[%s @ %p]", luaL_typename(L, i), lua_topointer(L, i)));
+			break;
+		}
+	}
+
+	do_log(LogType::kLua, Time(), "%s", message.c_str());
+	return 0;
+}
+
+/* RST
+.. function:: play_sound(file[, priority = 100, allow_multiple = true, field = nil])
+
+   .. versionadded:: 1.3
+
+   Play a sound effect.
+
+   See :ref:`the playsound program <map_object_programs_playsound>` for information
+   on how the file has to be provided and the meaning of the optional arguments.
+   Only ``.ogg`` files are supported.
+
+   If a field is provided, the sound is played in stereo,
+   and only if the player can hear sounds on the given field.
+
+   The volume of the sound and whether the sound will be played at all are determined
+   by the user's settings for ambient sounds.
+
+   :arg file: The path and basename of the sound effect to play
+      (without the .ogg filename extension and the optional ``_??`` numbering).
+   :type file: :class:`string`
+   :arg priority: The priority of the sound in percent.
+   :type priority: :class:`number`
+   :arg allow_multiple: Whether the sound may be played
+      even when another instance of it is already playing.
+   :type allow_multiple: :class:`boolean`
+   :arg field: The map position of the sound, if any.
+   :type field: :class:`wl.map.Field`
+*/
+static int L_play_sound(lua_State* L) {
+	const int nargs = lua_gettop(L);
+	if (nargs < 1 || nargs > 4) {
+		report_error(L, "Wrong number of arguments");
+	}
+
+	const FxId fx = SoundHandler::register_fx(SoundType::kAmbient, luaL_checkstring(L, 1));
+
+	const int32_t priority =
+	   nargs < 2 ? kFxMaximumPriority : static_cast<int32_t>(luaL_checknumber(L, 2) * 100);
+	if (priority < kFxPriorityLowest || priority > kFxMaximumPriority) {
+		report_error(L, "Priority %f%% is out of bounds %f..%f", priority / 100.0,
+		             kFxPriorityLowest / 100.0, kFxMaximumPriority / 100.0);
+	}
+
+	const bool allow_multiple = nargs < 3 || luaL_checkboolean(L, 3);
+
+	if (nargs < 4 || lua_isnil(L, 4)) {
+		g_sh->play_fx(SoundType::kAmbient, fx, priority, allow_multiple);
+	} else {
+		LuaMaps::LuaField* coords = *get_user_class<LuaMaps::LuaField>(L, 4);
+		Notifications::publish(
+		   NoteSound(SoundType::kAmbient, fx, coords->coords(), priority, allow_multiple));
+	}
+
+	return 0;
+}
+
+static int L_deleted_function(lua_State*) {
+	throw LuaError("call to a removed function");
+}
+
+/* Always append new globals to the end, and never remove any list entries.
+ * Otherwise you break savegame compatibility.
+ */
 const static struct luaL_Reg globals[] = {{"_", &L__},
                                           {"get_build_id", &L_get_build_id},
                                           {"include", &L_include},
                                           {"ngettext", &L_ngettext},
                                           {"pgettext", &L_pgettext},
                                           {"npgettext", &L_npgettext},
-                                          {"set_textdomain", &L_set_textdomain},
+                                          {"set_textdomain", &L_deleted_function},
                                           {"push_textdomain", &L_push_textdomain},
                                           {"pop_textdomain", &L_pop_textdomain},
                                           {"ticks", &L_ticks},
+                                          {"play_sound", &L_play_sound},
+                                          {"print", &L_print},
                                           {nullptr, nullptr}};
 
 void luaopen_globals(lua_State* L) {

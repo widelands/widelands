@@ -6,7 +6,7 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
   push:
-    branches: [ master ]
+    branches: [ master, protected/* ]
 
 jobs:
   changes:
@@ -23,12 +23,12 @@ jobs:
       appimage: ${{ steps.changed_files.outputs.appimage }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       if: github.ref == 'refs/heads/master'
       with:
         fetch-depth: 1
     - name: Check for changed files
-      uses: dorny/paths-filter@v2
+      uses: dorny/paths-filter@v3
       id: changed_files
       with:
         # groups to check for changed files (as string, yaml anchors are resolved by the tool)
@@ -45,23 +45,28 @@ jobs:
               - *src_cmake_dependencies
               - 'data/**'
               - 'po/**'
+            - &ubuntu_dependencies
+              - *src_cmake_dependencies
+              - 'utils/ubuntu/packages'
           codecheck:
-            - *src_cmake_dependencies
+            - *ubuntu_dependencies
             - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_codecheck.yaml'
           clang_tidy:
-            - *src_cmake_dependencies
+            - *ubuntu_dependencies
             - 'utils/check_clang_tidy_results.py'
             - 'utils/run-clang-tidy.py'
             - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_clang_tidy.yaml'
           test_suite:
-            - *src_cmake_dependencies
+            - *ubuntu_dependencies
             - 'data/**' # TODO(aDiscoverer) list what needs to be checked
             - 'regression_test.py'
             - 'test/**'
             - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_testsuite.yaml'
+          # TODO(tothxa): utils/windows/** has some files that are only relevant to one of
+          #               msvc or mingw, they shouldn't trigger rebuilding the other
           inst_windows_msvc:
             - *installer
             # doc/** maybe for some installers TODO(unknown)
@@ -79,94 +84,35 @@ jobs:
             - '.github/workflows/build_macos.yaml' # calls install-dependencies.sh
           appimage:
             - *installer
+            - 'utils/ubuntu/packages'
             - 'xdg/org.widelands.Widelands.*'
             - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_appimage.yaml'
 
-  # This job runs multiple smaller checks where having several jobs would be overkill.
-  misc_sanity_checks:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 1
-    - name: Validate JSON files
-      run: |
-        python3 utils/validate_json.py data/txts/
-        python3 utils/update_authors.py
-    - name: Check for missing copyright headers
-      run: |
-        pushd src
-        ../utils/find_missing_copyright_headers.sh
-        popd
-    - name: Check for superfluous includes and forward declarations
-      run: |
-        pushd src
-        ../utils/find_unused_includes.py
-        popd
-
-  codecheck:
+  pre-build_checks:
     needs: [changes]
-    if: needs.changes.outputs.codecheck == 'true'
-    uses: ./.github/workflows/build_codecheck.yaml
-
-  documentation:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 1
-    - name: Installing python
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.x
-    - name: Generate documentation
-      run: |
-        cd doc/sphinx
-        pip install -r requirements.txt
-        mkdir source/_static
-        ./extract_rst.py
-        sphinx-build -W -b json -d build/doctrees source build/json
-
-  clang_tidy:
-    needs: [changes]
-    if: needs.changes.outputs.clang_tidy == 'true'
-    uses: ./.github/workflows/build_clang_tidy.yaml
-
-  lua_style:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 1
-    - name: Prepare documentation examples for parsing
-      run: |
-        pushd doc/sphinx
-        ./extract_rst.py
-        popd
-    - name: Run Lua style checker
-      run: ./utils/lua_style_checker.py
+    uses: ./.github/workflows/pre-build_checks.yaml
+    with:
+      clang_tidy: ${{ needs.changes.outputs.clang_tidy }}
+      codecheck: ${{ needs.changes.outputs.codecheck }}
 
   testsuite:
-    needs: [changes, clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    needs: [changes, pre-build_checks]
     if: needs.changes.outputs.run_test_suite == 'true'
     uses: ./.github/workflows/build_testsuite.yaml
 
   windows-msvc:
-    needs: [changes, clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    needs: [changes, pre-build_checks]
     if: needs.changes.outputs.inst_windows_msvc == 'true'
     uses: ./.github/workflows/build_windows_msvc.yaml
 
   windows:
-    needs: [changes, clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    needs: [changes, pre-build_checks]
     if: needs.changes.outputs.inst_windows == 'true'
     uses: ./.github/workflows/build_windows.yaml
 
   macos:
-    needs: [changes, clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    needs: [changes, pre-build_checks]
     if: needs.changes.outputs.inst_macos == 'true'
     uses: ./.github/workflows/build_macos.yaml
 
@@ -174,28 +120,8 @@ jobs:
     if: >
       github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' &&
       needs.changes.outputs.appimage == 'true'
-    needs: [changes, clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    needs: [changes, pre-build_checks]
     uses: ./.github/workflows/build_appimage.yaml
-
-  # Dummy check for PRs that all required status checks have either passed or were skipped
-  # (see https://github.com/actions/runner/issues/952 and https://github.com/orgs/community/discussions/9141)
-  summary:
-    name: CI Results Summary
-    # "changes" has to be included in needs here too, because all others are skipped if it fails
-    needs: [changes, testsuite, windows, windows-msvc, macos, appimage]
-    if: always() # to check if dependencies have failed or passed
-    runs-on: "ubuntu-latest"
-    steps:
-    - name: Check for failed jobs
-      if: >-
-        contains(needs.*.result, 'failure') ||
-        contains(needs.*.result, 'cancelled')
-      run: |
-        echo "A job failed or was cancelled!"
-        exit 1
-    - name: No step skipped  # Optional, just gives info
-      if: "! contains(needs.*.result, 'skipped')"
-      run: true
 
   dev_release:
     name: Automated development pre-release
@@ -204,12 +130,12 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 15
           token: '${{ secrets.WIDELANDS_FORMAT_TOKEN }}'
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
       - name: Check missing artifacts
         # This step ensures that the development release always contains an artifact for every platform.
         # artifacts.list lists all attachments of the pre-release. In case a build step failed, we detect
@@ -223,8 +149,10 @@ jobs:
           do
             [ "${ARTIFACT%%-*}" != "Widelands" ] && continue
             MATRIX=$(echo $ARTIFACT | sed 's/Widelands-[0-9a-f]*-//' -)
-            ls ../Widelands*/Widelands*${MATRIX} || \
+            if ! ls ../Widelands*/Widelands*${MATRIX} ; then
+              echo "::warning::Falling back to old artifact $ARTIFACT"
               curl -L -o $ARTIFACT "$RELEASE_URL/Widelands-daily-${MATRIX}"
+            fi
           done
       - name: List and rename artifacts
         run: |
@@ -268,8 +196,8 @@ jobs:
 
           echo "These builds are automatically generated from master. " >> release_notes
           echo "## Latest changes" >> release_notes
-          # Print changelog from last 10 commits
-          git log --pretty="- %h: %s (%an)" --no-decorate HEAD~10..HEAD >> release_notes
+          # Print changelog from last 10 commits, strip Co-authored/Co-committed tags
+          git log --pretty="- %h: %s (%ai) (%an)" --no-decorate HEAD~10..HEAD | sed 's/Co-.*> //' >> release_notes
           echo "<details><summary>Original filenames</summary><pre>" >> release_notes
           cat artifacts.list >> release_notes
           echo "</pre></details>" >> release_notes

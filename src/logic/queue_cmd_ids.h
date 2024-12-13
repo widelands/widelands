@@ -76,7 +76,7 @@ enum class QueueCommandTypes : uint8_t {
 
 	kEvictWorker,
 
-	kMilitarysiteSetSoldierPreference,
+	kSetSoldierPreference,
 	kProposeTrade,
 	kBuildWaterway,  // 28
 
@@ -98,7 +98,10 @@ enum class QueueCommandTypes : uint8_t {
 	kLuaCoroutine,
 	kCalculateStatistics,
 	kExpeditionConfig,
-	kPickCustomStartingPosition,  // 135
+	kPickCustomStartingPosition,
+	kShipRefit,
+	kWarshipCommand,
+	kShipSetDestination,  // 138
 
 	kCallEconomyBalance = 200,
 	kDeleteMessage,

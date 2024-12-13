@@ -1,6 +1,171 @@
 [TOC]
 
-## Post-1.1 until [git 301d672](https://codeberg.org/wl/widelands/commit/301d6725e2d5477eb1d0dde4d8a580fbdafc4374)
+## Post-1.2.1 until [git a065ca7](https://codeberg.org/wl/widelands/commit/a065ca721cce8427891ba7765148e5be52b9e83f)
+
+### Animations, Icons and Overlays
+
+
+### Sounds and Music
+
+- Added the ability to skip to next music track (CB #4928 / GH #6568)
+
+
+### Tutorials and Campaigns
+
+- bar02: Adjust check for sentry in 'basic economy' objective (GH #6482 / CB #4844)
+- Fix empire 4 starting bug (GH #6508 / CB #4869)
+- atl01: Don't eat sawdust (GH #6521 / CB #4882)
+
+
+### Scripting
+
+- Add Lua function `play_sound` (CB #4791 / GH #6429)
+- New Map Object Program `script=<function>` (CB #4864 / GH #6503)
+- Expose more functions to Lua Dropdown and Listselect API (CB #4848 / GH #6486)
+- Make mapobjects findeable by their name from worker program findobject (CB #4855 / GH #6493)
+- Lua attribute `player.ai_type` (GH #6001 / CB #4412)
+
+
+### Maps
+
+- Remove playername duplicity from Astoria map (CB #4767 / GH #6405)
+
+
+### Add-Ons
+
+- Allow plugins to define hyperlink targets (CB #4794 / GH #6432)
+- Update add-on i18n for tinygettext (CB #4815 / GH #6453)
+- Allow themes to override the dither edge mask (CB #4814 / GH #6452)
+- Ignore hidden files when uploading add-on (CB #4779 / GH #6417)
+- Make add-on upload more robust against long processing times and show better error messages (CB #4799 / GH #6437)
+- Allow changing ware and worker target quantities and preciousness in `modify_unit` (GH #6451 / CB #4813)
+- Check for illegal filenames in add-on before upload (GH #6495 / CB #4857)
+- Plugins in Main Menu (CB #4748 / GH #6386)
+- Show add-ons alpha server name earlier (CB #4911 / GH #6550)
+- Keyboard shortcuts for add-ons (CB #4889 / GH #6528)
+- Add-Ons Website Maps Integration (CB #4692 / GH #6329)
+
+
+### Saveloading
+
+
+### AI
+
+
+### Gameplay
+
+- Fix soldier request for expedition ships (CB #4765 / GH #6403)
+- Economic Districts (CB #4708 / GH #6345)
+
+
+### User Interface
+
+- Prettier long dropout queues (CB #4789 / GH #6427)
+- Add context menus to TextInput and window titlebar (CB #4790 / GH #6428)
+- Message preview archiving enhancements (CB #4735 / GH #6372)
+- Cancel roadbuilding with Esc key (GH #6456 / CB #4818)
+- Ship window improvements (GH #6422 / CB #4784)
+- Dropdown Listselect: horizontal centering of pics (CB #4845 / GH #6483)
+- Make Show/Hide buildings option in game also affect immovables (CB #4861 / GH #6499)
+- Disable objectives button if there are no current objectives (CB #4867 / GH #6506)
+- BuildingStatisticsMenu: fix update spam when minimized (CB #4873 / GH #6512)
+- Listselect: properly clear entry_cache_ (CB #4879 / GH #6518)
+- Listselect: reset/recalculate max_pic_width_ upon clear()/remove() (CB #4846 / GH #6484)
+
+
+### Internationalization
+
+- Improvement in some english texts and localization (CB #4797 / GH #6435)
+- Update paths for `buildcat.py` (GH #6458 / CB #4820)
+- Fix Textdomains for Launch Game Checkboxes (CB #4824 / GH #6462)
+- Validate environment locale settings (CB #4817 / GH #6455)
+
+
+### Help and Documentation
+
+- Update performance helptext for comparable buildings between tribes, medium sites (GH #6460 / CB #4822)
+- Misc documentation fixes (GH #6540 / CB #4901)
+- Documentation fix and examples for `modify_unit` (CB #4932 / GH #6571)
+
+
+### Editor
+
+- Fix regression: immovables show/hide in editor (CB #4870 / GH #6509)
+- Editor Show/Hide option to draw ocean overlays (CB #4821 / GH #6459)
+- Add height heat map mode to editor (CB #4410 / GH #5994)
+
+
+### Graphics Engine
+
+- Show splash screen earlier and reintroduce intro music (GH #6412 / CB #4773)
+- Remove hardcoded window border sizes (CB #4778 / GH #6416)
+- Fix format strings in gl/initialize.cc (CB #4880 / GH #6519)
+- Update window borders on theme change (CB #4885 / GH #6524)
+
+
+### Networking
+
+
+### Build System
+
+- Fix possibility of random failure in template test (CB #4757 / GH #6395)
+- Update vcpkg for sdl2-mixer 2.8.0 (CB #4768 / GH #6406)
+- Clear misc clang-tidy-16 checks (GH #6420 / CB #4782)
+- Replace gettext with tinygettext (CB #4772 / GH #6411)
+- Update i18n.yaml for node.js 20 (CB #4834 / GH #6472)
+- Fix new compiler warning on clang-18 (CB #4827 / GH #6465)
+- Visible option of RelWithDebInfo build type (CB #4903 / GH #6542)
+- Regression test improvements (CB #4876 / GH #6515)
+- Temporary windows build fix (CB #4924 / GH #6564)
+- Mingw dependencies pin architecture (CB #4925 / GH #6565)
+- Add new modplug dependency to sdl2 mixer (GH #6573 / CB #4933)
+- Retry hdiutil with any error code (CB #4927 / GH #6567)
+- Use all workarounds for hdiutil errors from actions/runner-images#7522 (GH #6574 / CB #4934)
+
+
+### Other Issues
+
+- Strip authors from commit messages in dev-release (CB #4762 / GH #6400)
+- Fix use of `push_back()` / `at()=` in preallocated vectors (GH #6464 / CB #4826)
+- Refactor and disallow type conversion operators (GH #6373 / CB #4736)
+- Make some rawstring in codecheck rules (CB #4828 / GH #6466)
+- Remove checking and pinning msvc toolset version in the CI (CB #4858 / GH #6496)
+- Flag: fix `nr_of_roads()` (GH #6514 / CB #4875)
+- Include missing `<cstdint>` (CB #4883 / GH #6522)
+- Remove misplaced, obsolete comment from warehouse.h (GH #6529 / CB #4890)
+- BaseListselect::draw() - code gardening (CB #4847 / GH #6485)
+- Decomission Listselect<Entry&> (CB #4895 / GH #6534)
+- Update compiler versions in CI (CB #4908 / GH #6547)
+- Temporary fix for macos CI builds (CB #4912 / GH #6552)
+- Update macOS versions in the CI (CB #4809 / GH #6447)
+
+
+## Release 1.2.1
+
+- Skip invalid map files in editor Load/Save map window (CB #4795 / GH #6433)
+- Fix memory leaks in main menu Watch Last Replay (CB #4788 / GH #6426)
+- Game setup: Unselect incompatible starting conditions when changing win condition (CB #4777 / GH #6415)
+- Add thread identifier to crash reports (CB #4801 / GH #6439)
+- Check for invalid combination before calling DefaultAI::expedition_management() (CB #4800 / GH #6438)
+- Territorial Lua error fix (CB #4805 / GH #6443)
+- Remove AV1 decoder dependency in mingw-64 (CB #4837 / GH #6474)
+- Patches to support netbsd-pkgsrc (CB #4851 / GH #6489)
+- Keep vcpkg_ref in a repository variable instead of a file (CB #4860 / GH #6498)
+- vcpkg workflow fix for v1.2.1
+- Fix RelWithDebInfo build type (CB #4854 / GH #6492)
+- Fix out-of-bounds memory access when using `--editor` without filename (CB #4894 / GH #6533)
+- MacOS and other CI improvements (CB #4899 / GH #6538)
+- Temporary fixes for MinGW and MacOS CI builds
+- Fix for GH#6444 using mac dylibbundler to packe the .app Bundle (CB #4910 / GH #6549)
+- Re-add gettext ubuntu package
+- Update translations for v1.2.1 (CB #4916 / GH #6556)
+- Replace MD5 checksumming code with `libmd` (CB #4831 / GH #6469)
+- Fix LaunchMPG map seafaring check for naval warfare (CB #4918 / GH #6558)
+- Fix anchored ship trying to swim towards buffer-underflow (CB #4921 / GH #6561)
+- Fix desync in Discovery/New World starting conditions (CB #4926 / GH #6566)
+
+
+## Release 1.2
 
 ### Animations, Icons and Overlays
 
@@ -13,10 +178,8 @@
 - More playercolour for amazon ship (#6109)
 - Add high resolution images for most tribe immovables (#6137)
 - High resolution images of basic wares from blender models (CB #4576 / GH #6235)
-
-
-### Sounds and Music
-
+- Bigger `menu.png` for Amazon ship (#6143)
+- Optimize images with PNGQuant (CB #4754 / GH #6392)
 
 
 ### Tutorials and Campaigns
@@ -27,6 +190,10 @@
 - Carry over ship names in Atlantean campaign (#5781)
 - Tutorial 01 fixes (#5909)
 - Fix Food Production objective in first atlantean campaign (#6081)
+- Fix changed tab name in encyclopedia tutorial (CB #4707 / GH #6344)
+- Fix building window name and translation regressions in emp04 and tut01 (GH #6380 / CB #4743)
+- Make open building window checks in campaigns saveloading resistant and other campaign fixes (CB #4747 / GH #6385)
+- Campaign consistency fixes (CB #4755 / GH #6393)
 
 
 ### Scripting
@@ -49,6 +216,7 @@
     - Add function `LuaWorker::evict`
     - Add property `LuaMapObject.exists`
     - Expose worker buildcost to `modify_unit`
+- UI Plugins (#5872, CB #4420 / GH #6030)
 - Lua UI API Extensions (#5933)
     - Read+Write access to most properties of all kinds of UI elements at runtime
     - Add support for checkboxes, radio groups, unique windows, spinboxes, sliders (all three flavours), progress bars, editboxes and multiline editboxes
@@ -57,12 +225,16 @@
 - Win condition artifacts minor fix (#6042)
 - Implement `walk=<direction>` in worker programs (CB #4467 / GH #6149)
 - Pass correct parameter to lua_typename() (CB #4646 / GH #6282)
+- Add Lua APIs for Missing Bob Types (#6125): `PinnedNote`, `NavalInvasionBase`, `ShipFleetYardInterface`, `FerryFleetYardInterface`
+- Clarify use of spinbox parameters from Lua (CB #4734 / GH #6371)
+- Fix icons on dropdowns in Lua API (CB #4742 / GH #6379)
 
 
 ### Maps
 
 - Map Required Widelands Version Check (#5884)
 - Add a building plot to unusable port island on Calvisson (#6084)
+- Remove unwinnable-with-autocrat hint from map Crossing The Horizon
 
 
 ### Add-Ons
@@ -76,7 +248,6 @@
 - Fix add-ons admin dialog Enter key handling (#5763)
 - Turn unguaranteed add-on dependency check assert into a conditional (#5829)
 - Add-Ons Packager: Compute Minimum Widelands Version For Maps (#5905)
-- UI Plugins (#5872)
 - Do not hide Add-On comment text during layout (#6032)
 - Fix false positives in add-ons packager change detection (#6033)
 - Add missing `richtext_escape` for add-ons error message (#6049)
@@ -101,6 +272,10 @@
 - Fix double cleanup for direct loading of invalid replay (#6098)
 - Reinitialize forester cache when reloading (#6105)
 - Do not save partially initialized window (GH #6223 / CB #4564)
+- Save and load garrison settings (#5983)
+- Remove v1.0 compatibility code (CB #4615 / GH #6276)
+- Allow loading last savegame/replay/edited map from the command line (CB #4470 / GH #6153)
+- Remove invalid NavalInvasionBase cleanup assert (CB #4723 / GH #6360)
 
 
 ### AI
@@ -108,6 +283,9 @@
 - Small AI Fixes (#5683)
 - AI Diplomacy (#5774)
 - Make AI supplycheck non recursive and more efficient (#5866)
+- Navalwarfare AI (CB #4441 / GH #6083)
+- Fix integer overflow in AI ship utilisation calculation (CB #4713 / GH #6350)
+- Make AI set port garrison according to soldier availability (GH #6351 / CB #4714)
 
 
 ### Gameplay
@@ -143,6 +321,43 @@
 - Add quartz to the Amazon economy (CB #4512 / GH #6170)
 - Amazon starting conditions: Fix input quantities in stone workshop (GH #6178 / CB #4520)
 - Cancel battles only when players negotiate real truce (CB #4574 / GH #6233)
+- Fix evicting of secondary workers (CB #4657 / GH #6294)
+- Increase amount of coal in Amazon starting conditions (CB #4681 / GH #6318)
+- Make Amazons poor hamlet more forgiving with tools (CB #4554 / GH #6211)
+- Naval warfare baseplate implementation
+- Naval Warfare: Healing (#5795)
+- Naval Warfare: Onboard Soldiers Attack Bonus  (#5796)
+- Naval Warfare: Invasion Strategy (#5847)
+- Naval Warfare: Coastal Invasion (#5859)
+- Naval Warfare: Invasion Enhancements (#5869)
+- Naval Warfare: Better Invasion End Detection (#5887)
+- Naval Warfare: Make detected portspaces addressable for expeditions (#5929)
+- Garrisons for Warehouses and Warships (#5930)
+- Position attacking warships 2 nodes west of the defender (#5947)
+- Fix Warship Soldiers Capacity & Requesting Issues (#5953)
+- Fix stacking order of new ship battles (#5962)
+- Make `Game::random_location()` Normalize Coords (#5976)
+- Don't detect portspace under own port (#5974)
+- Fail safely when ship destination dock is unreachable (#5972)
+- Fix soldier request deletion when ship is destroyed (#5989)
+- Forbid soldiers boarding ships on high sea (#6006)
+- Update expedition swimmable directions on every field (#6018)
+- Forbid ships from sailing through too-narrow straits (#6013)
+- Reroute ships on the way to port-under-construction upon port completion (#6045)
+- Misc Naval Warfare Segfault/Assert Fixes (#6066)
+    - Fix assert failure during soldier swapping on a warship with maximal soldier capacity
+    - Transport ships skip updating warship soldier requests and kickouts
+- Make `SoldierList` robust against map object removal (#6087)
+- Make AttackPanel/Window robust against object deletion (#6123)
+- Fix naval battle stacking in complex situations (#6071)
+- Stop ship battles when ship is destroyed (#6099)
+- Garrisoned soldiers shouldn't count towards economy target (#6086)
+- Invasion soldiers conquer portspace for the duration of the invasion (#6115)
+- Warships don't detect own ports as portspaces (#6088)
+- Guard against invalid ship battle situations (#6140)
+- Track warship soldier requests (#6122)
+- Initialise `Game::naval_warfare_allowed_` as `false` (CB #4749 / GH #6387)
+- Fix replay desync with timed win conditions
 
 
 ### User Interface
@@ -261,15 +476,45 @@
 - Ask for more information when reporting crashes (CB #4592 / GH #6252)
 - Fix end status text sorting in game summary window (CB #4539 / GH #6197)
 - Fix size assert for very large panels (CB #4652 / GH #6289)
+- Refactor technical info box to handle long lines better (CB #4662 / GH #6299)
+- Allow sending expeditions and warships to specific ports, ships, and notes (#5786)
+- Send message when ship arrives at player-specified destination (#5832)
+- Naval Warfare: Attack UI Refactoring (#5885)
+- Naval Warfare: Attack Anything in Range (#5908)
+- Naval Warfare: Show fleet strength in general statistics (#5926)
+- Disambiguate selectable ship click targets (#5938)
+- Don't refresh inexistent soldier box in warehouse csite window (#5968)
+- Forbid spectators setting ship destination (#6010)
+- Redesign ship healthbar/bonus rendering to fix overflow-hang (#6039)
+- Warship soldier capacity setting enhancements (#6044)
+    - Allow changing soldier capacity and preference while refitting to warship.
+    - Turn "click soldier to send away" info texts into tooltips to make windows narrower.
+- Forbid changing soldier capacity in replays (#6053)
+- Misc sea-fighting-related UI tweaks (#6142)
+    - The attack window now uses bigger icons for ships to display the health bar properly, and also draws ship icons as background.
+    - Clicking and dragging on an empty part of the soldier list drags the window now.
+    - The ship window shows the warship's health.
+    - Fixes the bug with filtering the ship destination dropdown.
+    - Sinking ships show their status text as "Sinking" and their health as zero.
+    - Added an assert so if a very weird, very rare GL race condition is encountered in a debug build we might get a helpful backtrace of all threads.
+- Make naval warfare a game flag, disabled by default (CB #4547 / GH #6205)
+- Don't send "known portspace" messages for ship underway to destination (CB #4655 / GH #6292)
+- Show total number of ships in seafaring stats menu (CB #4685 / GH #6322)
+- Fix duplicated setting name for replay shortcuts (CB #4721 / GH #6358)
+- Fix deadlock in mutex responsiveness code (CB #4726 / GH #6363)
+- Use unique names for map object windows (CB #4737 / GH #6374)
+- Speed up Wares Display Drawing (GH #6382 / CB #4744)
 
 
 ### Internationalization
 
-- String Fixes (#5710, #5782, #5999)
+- String Fixes (#5710, #5782, #5999, CB #4697 / GH #6334)
 - Capitalisation of tribe names (#5910, #5913, #5916)
 - Keep PO and POT files in sync in translations updates (#6027)
 - Translations update CI: Commit pure translations separately (#6064)
 - Make spinbox current value and change-by value translatable separately (CB #4612 / GH #6273)
+- Don't assemble partial string for detected portspace tooltip (CB #4718 / GH #6355)
+- Turn confusing translators comment into helpful (CB #4728 / GH #6364)
 
 
 ### Help and Documentation
@@ -292,6 +537,12 @@
 - Doc for lua function update_toolbar() matches code (CB #4594 / GH #6254)
 - Extend documentation about attributes of units (GH #6195 / CB #4537)
 - Documentation: place_road() needs a flag, not a field (GH #6262 / CB #4601)
+- Fix documentation of the objectives lua interface (CB #4613 / GH #6274)
+- Lua doc: explain `wl.Game().real_speed` a bit better (CB #4665 / GH #6302)
+- Lua styles documentation (CB #4704 / GH #6341)
+- Add images to theme documentation for fonts and buttons (CB #4695 / GH #6332)
+- Lua doc about playernumber fixed (CB #4535 / GH #6193)
+- Turn function mentions into links in richtext.lua examples section (CB #4738 / GH #6375)
 
 
 ### Editor
@@ -308,6 +559,7 @@
 - Z-Order Map Options Window Above Save Map Window (#5956)
 - Editor Tool Random Gap (#5864)
 - Select info tool after opening history window (#6002)
+- Sanitize suggested teams lineups (CB #4673 / GH #6310)
 
 
 ### Graphics Engine
@@ -342,6 +594,7 @@
 - Game Chat Accessibility Tweaks (#6127)
 - Sanitize network game player names more thoroughly (#6132)
 - Fix calling emergency save from GameHost::disconnect_client() (CB #4597 / GH #6258)
+- Set timeout for add-ons network I/O (CB #4739 / GH #6376)
 
 
 ### Build System
@@ -352,7 +605,7 @@
 - Fix Clang15 Compiler Warnings (#5629)
 - Replace `sprintf` with `snprintf` (#5651)
 - Switch to C++17 (#5672)
-- CI enhancements (#5682, #5750, #5759. #5761, #5772, #5794, #5799, #5831, #5837, #5845)
+- CI enhancements (#5682, #5750, #5759. #5761, #5772, #5794, #5799, #5831, #5837, #5845, GH #6352 / CB #4715)
 - Fix more clang-tidy checks (#5679, #5689, #5696, #5684, #5695, #5693, #5690, #5694, #5692, #5685, #5688, #5698, #5697, #5686, #5699, #5687, #5691, #5681, #5709)
 - Fix member initializer ambiguity regression
 - Added sharpyuv as new SDL_Image extra lib (#5756)
@@ -400,6 +653,12 @@
 - New Msys dependencies (GH #6281 / CB #4645)
 - Update `download_asio.sh` to asio version 1.28.0 (CB #4616 / GH #6277)
 - MinGW dependency system (CB #4653 / GH #6290)
+- Skip CI workflows where nothing changed (CB #4644 / GH #6257, CB #4672 / GH #6309, GH #6320 / CB #4683)
+- Speed up all_tribes tests in the testsuite (GH #6353 / CB #4716)
+- Update MacOS CI (CB #4719 / GH #6356)
+- Regression tests for start and win conditions, fix race regressions (CB #4524 / GH #6182)
+- Add gettext tools to vcpkg dependencies (GH #6389 / CB #4751)
+- Suppress unsafe buffer usage warning on Clang (CB #4770 / GH #6408)
 
 
 ### Other Issues
@@ -423,6 +682,13 @@
 - Add `.editorconfig` for automatic indentation in many editors (CB #4415 / GH #6019)
 - Update copyright end year to 2024
 - Fix title in test of `string_bformat.lua` of `lua_testsuite.wmf` (CB #4647 / GH #6283)
+- Logic exception handling fixes (#6053): Forward logic thread exceptions to main thread's handler
+- Fix some segfaults related to `Map::calc_distance` (#6135)
+- Deadlock-related improvements (#6139)
+    - Detect and break deadlocks
+    - Refactor NoteThreadSafeFunction handling
+- Correct naval warfare rebasing artifacts (CB #4699)
+- Refactor commandline handling (CB #4471 / GH #6154)
 
 
 ## Release 1.1

@@ -38,7 +38,6 @@
 #include "build_info.h"
 #include "economy/economy.h"
 #include "economy/portdock.h"
-#include "editor/editorinteractive.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
 #include "io/fileread.h"
@@ -145,6 +144,7 @@ Game::Game()
      /** TRANSLATORS: Win condition for this game has not been set. */
      win_condition_displayname_(_("Not set")) {
 	Economy::initialize_serial();
+	DetectedPortSpace::initialize_serial();
 }
 
 Game::~Game() {  // NOLINT
@@ -220,34 +220,6 @@ void Game::postload_addons_before_loading() {
 	postload_addons();
 }
 
-// TODO(Nordfriese): Needed for v1.0 savegame compatibility, remove after v1.1
-void Game::check_legacy_addons_desync_magic() {
-	bool needed = false;
-	for (const auto& a : enabled_addons()) {
-		if (a->category == AddOns::AddOnCategory::kWorld ||
-		    a->category == AddOns::AddOnCategory::kTribes) {
-			needed = true;
-			break;
-		}
-	}
-	if (!needed) {
-		postload_addons();
-		return;
-	}
-
-	did_postload_addons_before_loading_ = true;
-	did_postload_addons_ = false;
-
-	delete_world_and_tribes();
-	descriptions();
-
-	// Cyclic dependency. Can and must be gotten rid of when fixing the above TO-DO.
-	EditorInteractive::load_world_units(nullptr, *this);
-	load_all_tribes();
-
-	postload_addons();
-}
-
 bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_scenarios,
                                        const std::string& script_to_run) {
 	full_cleanup();
@@ -283,7 +255,7 @@ bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_sce
 		std::string tribe = map().get_scenario_player_tribe(p);
 		if (tribe.empty()) {
 			verb_log_info_time(
-			   get_gametime(), "Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
+			   get_gametime(), "Setting random tribe for Player %u\n", static_cast<unsigned int>(p));
 			const DescriptionIndex random = RNG::static_rand(descriptions().nr_tribes());
 			tribe = descriptions().get_tribe_descr(random)->name();
 		}
@@ -360,8 +332,8 @@ void Game::init_newgame(const GameSettings& settings) {
 	if (!settings.mapfilename.empty()) {
 		assert(maploader);
 		maploader->load_map_complete(*this, settings.scenario ?
-                                             Widelands::MapLoader::LoadType::kScenario :
-                                             Widelands::MapLoader::LoadType::kGame);
+		                                       Widelands::MapLoader::LoadType::kScenario :
+		                                       Widelands::MapLoader::LoadType::kGame);
 	} else {
 		// Normally the map loader takes care of this, but if the map was
 		// previously created for us we need to call this manually
@@ -373,11 +345,11 @@ void Game::init_newgame(const GameSettings& settings) {
 		Notifications::publish(UI::NoteLoadingMessage(_("Initializing game…")));
 		if ((settings.flags & GameSettings::Flags::kPeaceful) != 0) {
 			for (uint32_t i = 1; i < settings.players.size(); ++i) {
-				if (Player* p1 = get_player(i)) {
+				if (Player* first = get_player(i); first != nullptr) {
 					for (uint32_t j = i + 1; j <= settings.players.size(); ++j) {
-						if (Player* p2 = get_player(j)) {
-							p1->set_attack_forbidden(j, true);
-							p2->set_attack_forbidden(i, true);
+						if (Player* second = get_player(j); second != nullptr) {
+							first->set_attack_forbidden(j, true);
+							second->set_attack_forbidden(i, true);
 						}
 					}
 				}
@@ -406,7 +378,8 @@ void Game::init_newgame(const GameSettings& settings) {
 			}
 		}
 
-		diplomacy_allowed_ &= ((settings.flags & GameSettings::Flags::kForbidDiplomacy) == 0);
+		diplomacy_allowed_ = ((settings.flags & GameSettings::Flags::kForbidDiplomacy) == 0);
+		naval_warfare_allowed_ = ((settings.flags & GameSettings::Flags::kAllowNavalWarfare) != 0);
 		win_condition_duration_ = settings.win_condition_duration;
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		table->do_not_warn_about_unaccessed_keys();
@@ -644,7 +617,7 @@ bool Game::run(StartGameType const start_game_type,
 			training_wheels_wanted_ = false;
 #endif
 			iterate_players_existing_novar(p, nr_players, *this) {
-				if (!map().get_starting_pos(p)) {
+				if (!map().get_starting_pos(p).valid()) {
 					throw WLWarning(_("Missing starting position"),
 					                _("Widelands could not start the game, because player %u has "
 					                  "no starting position.\n"
@@ -756,7 +729,7 @@ bool Game::run(StartGameType const start_game_type,
 		;
 #endif
 
-	g_sh->change_music(Songset::kIngame, 1000);
+	g_sh->change_music(Songset::kIngame);
 
 	state_ = gs_running;
 
@@ -778,8 +751,6 @@ bool Game::run(StartGameType const start_game_type,
 	get_ibase()->run<UI::Panel::Returncodes>();
 
 	state_ = gs_ending;
-
-	g_sh->change_music(Songset::kMenu, 1000);
 
 	cleanup_objects();
 	delete_pending_player_commands();
@@ -892,6 +863,7 @@ void Game::cleanup_for_load() {
 
 	pending_diplomacy_actions_.clear();
 	diplomacy_allowed_ = true;
+	naval_warfare_allowed_ = false;
 
 	// Statistics
 	general_stats_.clear();
@@ -910,6 +882,7 @@ void Game::full_cleanup() {
 	replay_filename_.clear();
 	forester_cache_.clear();
 	Economy::initialize_serial();
+	DetectedPortSpace::initialize_serial();
 
 	if (has_loader_ui()) {
 		remove_loader_ui();
@@ -992,11 +965,9 @@ void Game::report_desync(int32_t playernumber) {
  *
  * \return the checksum
  */
-Md5Checksum Game::get_sync_hash() const {
-	MD5Checksum<StreamWrite> copy(synchash_);
-
-	copy.finish_checksum();
-	return copy.get_checksum();
+crypto::MD5Checksum Game::get_sync_hash() const {
+	crypto::MD5Checksummer copy(synchash_);
+	return copy.finish_checksum_raw();
 }
 
 /**
@@ -1084,10 +1055,9 @@ void Game::send_player_toggle_infinite_production(Building& building) {
 	   new CmdToggleInfiniteProduction(get_gametime(), building.owner().player_number(), building));
 }
 
-void Game::send_player_militarysite_set_soldier_preference(Building& building,
-                                                           SoldierPreference my_preference) {
-	send_player_command(new CmdMilitarySiteSetSoldierPreference(
-	   get_gametime(), building.owner().player_number(), building, my_preference));
+void Game::send_player_set_soldier_preference(MapObject& mo, SoldierPreference my_preference) {
+	send_player_command(
+	   new CmdSetSoldierPreference(get_gametime(), mo.owner().player_number(), mo, my_preference));
 }
 
 void Game::send_player_start_or_cancel_expedition(Building& building) {
@@ -1133,7 +1103,7 @@ void Game::send_player_change_training_options(TrainingSite& ts,
 	   new CmdChangeTrainingOptions(get_gametime(), ts.owner().player_number(), ts, attr, val));
 }
 
-void Game::send_player_drop_soldier(Building& b, int32_t const ser) {
+void Game::send_player_drop_soldier(MapObject& b, int32_t const ser) {
 	assert(ser != -1);
 	send_player_command(new CmdDropSoldier(get_gametime(), b.owner().player_number(), b, ser));
 }
@@ -1171,9 +1141,31 @@ void Game::send_player_ship_explore_island(const Ship& ship, IslandExploreDirect
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
+void Game::send_player_ship_set_destination(const Ship& ship, const MapObject* dest) {
+	send_player_command(new CmdShipSetDestination(get_gametime(), ship.get_owner()->player_number(),
+	                                              ship.serial(),
+	                                              dest == nullptr ? 0 : dest->serial()));
+}
+void Game::send_player_ship_set_destination(const Ship& ship, const DetectedPortSpace& dest) {
+	send_player_command(new CmdShipSetDestination(
+	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), dest));
+}
+
 void Game::send_player_sink_ship(const Ship& ship) {
 	send_player_command(
 	   new CmdShipSink(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
+}
+
+void Game::send_player_refit_ship(const Ship& ship, const ShipType t) {
+	send_player_command(
+	   new CmdShipRefit(get_gametime(), ship.get_owner()->player_number(), ship.serial(), t));
+}
+
+void Game::send_player_warship_command(const Ship& ship,
+                                       const WarshipCommand cmd,
+                                       const std::vector<uint32_t>& parameters) {
+	send_player_command(new CmdWarshipCommand(
+	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), cmd, parameters));
 }
 
 void Game::send_player_cancel_expedition_ship(const Ship& ship) {
@@ -1316,6 +1308,9 @@ void Game::set_win_condition_displayname(const std::string& name) {
 int32_t Game::get_win_condition_duration() const {
 	return win_condition_duration_;
 }
+void Game::set_win_condition_duration(int32_t d) {
+	win_condition_duration_ = d;
+}
 
 /**
  * Sample global statistics for the game.
@@ -1325,6 +1320,9 @@ void Game::sample_statistics() {
 	PlayerNumber const nr_plrs = map().get_nrplayers();
 	std::vector<uint32_t> land_size;
 	std::vector<uint32_t> nr_buildings;
+	std::vector<uint32_t> nr_ships;
+	std::vector<uint32_t> nr_naval_victories;
+	std::vector<uint32_t> nr_naval_losses;
 	std::vector<uint32_t> nr_casualties;
 	std::vector<uint32_t> nr_kills;
 	std::vector<uint32_t> nr_msites_lost;
@@ -1339,6 +1337,9 @@ void Game::sample_statistics() {
 	std::vector<uint32_t> custom_statistic;
 	land_size.resize(nr_plrs);
 	nr_buildings.resize(nr_plrs);
+	nr_ships.resize(nr_plrs);
+	nr_naval_victories.resize(nr_plrs);
+	nr_naval_losses.resize(nr_plrs);
 	nr_casualties.resize(nr_plrs);
 	nr_kills.resize(nr_plrs);
 	nr_msites_lost.resize(nr_plrs);
@@ -1419,10 +1420,15 @@ void Game::sample_statistics() {
 					wostock += economy.second->stock_ware_or_worker(worker_index);
 				}
 				break;
+			default:
+				NEVER_HERE();
 			}
 		}
 		nr_wares[p - 1] = wastock;
 		nr_workers[p - 1] = wostock;
+		nr_ships[p - 1] = plr->ships().size();
+		nr_naval_victories[p - 1] = plr->naval_victories();
+		nr_naval_losses[p - 1] = plr->naval_losses();
 		nr_casualties[p - 1] = plr->casualties();
 		nr_kills[p - 1] = plr->kills();
 		nr_msites_lost[p - 1] = plr->msites_lost();
@@ -1456,6 +1462,9 @@ void Game::sample_statistics() {
 	for (uint32_t i = 0; i < map().get_nrplayers(); ++i) {
 		general_stats_[i].land_size.push_back(land_size[i]);
 		general_stats_[i].nr_buildings.push_back(nr_buildings[i]);
+		general_stats_[i].nr_ships.push_back(nr_ships[i]);
+		general_stats_[i].nr_naval_victories.push_back(nr_naval_victories[i]);
+		general_stats_[i].nr_naval_losses.push_back(nr_naval_losses[i]);
 		general_stats_[i].nr_casualties.push_back(nr_casualties[i]);
 		general_stats_[i].nr_kills.push_back(nr_kills[i]);
 		general_stats_[i].nr_msites_lost.push_back(nr_msites_lost[i]);
@@ -1478,8 +1487,9 @@ void Game::sample_statistics() {
  * Read statistics data from a file.
  *
  * \param fr file to read from
+ * \param packet_version from GamePlayerInfoPacket in game_io/game_player_info_packet.cc
  */
-void Game::read_statistics(FileRead& fr) {
+void Game::read_statistics(FileRead& fr, uint16_t packet_version) {
 	fr.unsigned_32();  // used to be last stats update time
 
 	// Read general statistics
@@ -1493,6 +1503,9 @@ void Game::read_statistics(FileRead& fr) {
 		general_stats_[p - 1].nr_buildings.resize(entries);
 		general_stats_[p - 1].nr_wares.resize(entries);
 		general_stats_[p - 1].productivity.resize(entries);
+		general_stats_[p - 1].nr_ships.resize(entries);
+		general_stats_[p - 1].nr_naval_victories.resize(entries);
+		general_stats_[p - 1].nr_naval_losses.resize(entries);
 		general_stats_[p - 1].nr_casualties.resize(entries);
 		general_stats_[p - 1].nr_kills.resize(entries);
 		general_stats_[p - 1].nr_msites_lost.resize(entries);
@@ -1518,6 +1531,10 @@ void Game::read_statistics(FileRead& fr) {
 		general_stats_[p - 1].nr_civil_blds_defeated[j] = fr.unsigned_32();
 		general_stats_[p - 1].miltary_strength[j] = fr.unsigned_32();
 		general_stats_[p - 1].custom_statistic[j] = fr.unsigned_32();
+		// TODO(Nordfriese): Savegame compatibility v1.1
+		general_stats_[p - 1].nr_ships[j] = packet_version >= 32 ? fr.unsigned_32() : 0;
+		general_stats_[p - 1].nr_naval_victories[j] = packet_version >= 32 ? fr.unsigned_32() : 0;
+		general_stats_[p - 1].nr_naval_losses[j] = packet_version >= 32 ? fr.unsigned_32() : 0;
 	}
 }
 
@@ -1553,6 +1570,9 @@ void Game::write_statistics(FileWrite& fw) {
 		fw.unsigned_32(general_stats_[p - 1].nr_civil_blds_defeated[j]);
 		fw.unsigned_32(general_stats_[p - 1].miltary_strength[j]);
 		fw.unsigned_32(general_stats_[p - 1].custom_statistic[j]);
+		fw.unsigned_32(general_stats_[p - 1].nr_ships[j]);
+		fw.unsigned_32(general_stats_[p - 1].nr_naval_victories[j]);
+		fw.unsigned_32(general_stats_[p - 1].nr_naval_losses[j]);
 	}
 }
 }  // namespace Widelands

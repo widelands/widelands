@@ -32,7 +32,7 @@ Widelands::NodeCaps set_starting_pos_tool_nodecaps(const Widelands::FCoords& c,
 	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
 	for (Widelands::PlayerNumber p = 1, last = current_player_ - 1;; ++p) {
 		for (; p <= last; ++p) {
-			if (Widelands::Coords const sp = map.get_starting_pos(p)) {
+			if (Widelands::Coords const sp = map.get_starting_pos(p); sp.valid()) {
 				if (map.calc_distance(sp, c) < Widelands::kMinSpaceAroundPlayers) {
 					return Widelands::NodeCaps::CAPS_NONE;
 				}

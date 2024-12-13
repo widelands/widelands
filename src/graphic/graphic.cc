@@ -86,7 +86,7 @@ void Graphic::initialize(const TraceGl& trace_gl,
 		throw wexception("SDL_GL_LoadLibrary failed: %s", SDL_GetError());
 	}
 
-	log_info("Graphics: Try to set Videomode %ux%u\n", window_mode_width_, window_mode_height_);
+	log_info("Graphics: Try to set Videomode %dx%d\n", window_mode_width_, window_mode_height_);
 	uint32_t window_flags = SDL_WINDOW_OPENGL;
 #ifdef RESIZABLE_WINDOW
 	window_flags |= SDL_WINDOW_RESIZABLE;
@@ -132,8 +132,7 @@ void Graphic::initialize(const TraceGl& trace_gl,
 			log_warn("Couldn't get display mode for display #%d: %s\n", i, SDL_GetError());
 		}
 	}
-	verb_log_info("**** END GRAPHICS REPORT ****\n");
-	rebuild_texture_atlas();
+	log_info("**** END GRAPHICS REPORT ****\n");
 }
 
 void Graphic::rebuild_texture_atlas() const {
@@ -142,6 +141,7 @@ void Graphic::rebuild_texture_atlas() const {
 	auto texture_atlases = build_texture_atlas(max_texture_size_, &textures_in_atlas);
 	g_image_cache->fill_with_texture_atlases(
 	   std::move(texture_atlases), std::move(textures_in_atlas));
+	verb_log_info("Texture atlas rebuilt");
 }
 
 Graphic::~Graphic() {

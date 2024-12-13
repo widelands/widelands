@@ -48,6 +48,7 @@ enum class MapObjectType : uint8_t {
 	PINNED_NOTE,                 // Bob -- Pinned Note
 	SHIP_FLEET_YARD_INTERFACE,   // Bob -- Ship Fleet Yard Interface
 	FERRY_FLEET_YARD_INTERFACE,  // Bob -- Ferry Fleet Yard Interface
+	NAVAL_INVASION_BASE,         // Bob -- Naval Invasion Base
 
 	// everything below is at least a BaseImmovable
 	IMMOVABLE = 30,

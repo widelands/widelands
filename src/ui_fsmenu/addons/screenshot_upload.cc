@@ -113,7 +113,8 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
 			ctrl.net().upload_screenshot(info->internal_name, sel, description_.get_text());
 			if (remote != nullptr) {
 				*remote = ctrl.net().fetch_one_remote(remote->internal_name);
-				ctrl.rebuild(false);
+				ctrl.clear_cache_for_browse(remote->internal_name);
+				ctrl.rebuild_browse();
 			}
 			die();
 		} catch (const std::exception& e) {

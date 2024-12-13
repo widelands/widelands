@@ -148,7 +148,7 @@ function build_food_environment()
    while not check_for_buildings(p1, {
       atlanteans_farm = 1,
       atlanteans_blackroot_farm = 1,
-      atlanteans_sawmill = 1,
+      atlanteans_mill = 1,
       atlanteans_well = 1,
       atlanteans_bakery = 1,
       atlanteans_hunters_house = 1,

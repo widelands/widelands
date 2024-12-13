@@ -63,9 +63,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
          descname = pgettext("empire_building", "baking bread"),
          actions = {
+            -- time total: 20.4 + 10 + 3.6 = 34 sec
             "return=skipped unless economy needs empire_bread",
             "consume=flour water",
-            "sleep=duration:20s",
+            "sleep=duration:20s400ms",
             "animate=working duration:10s",
             "produce=empire_bread"
          }

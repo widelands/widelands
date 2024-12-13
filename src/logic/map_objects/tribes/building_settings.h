@@ -87,7 +87,7 @@ struct MilitarysiteSettings : public BuildingSettings {
 
 	const uint32_t max_capacity;
 	uint32_t desired_capacity;
-	bool prefer_heroes;
+	SoldierPreference soldier_preference;
 };
 
 struct TrainingsiteSettings : public ProductionsiteSettings {
@@ -114,6 +114,9 @@ struct WarehouseSettings : public BuildingSettings {
 	std::map<DescriptionIndex, StockPolicy> worker_preferences;
 	const bool launch_expedition_allowed;
 	bool launch_expedition{false};
+	uint32_t desired_capacity{0U};
+	const uint32_t max_garrison;
+	SoldierPreference soldier_preference{SoldierPreference::kAny};
 };
 
 }  // namespace Widelands
