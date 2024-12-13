@@ -32,10 +32,10 @@
 #include "scripting/ui/lua_slider.h"
 #include "scripting/ui/lua_spin_box.h"
 #include "scripting/ui/lua_tab.h"
-#include "scripting/ui/lua_table.h"
 #include "scripting/ui/lua_tab_panel.h"
-#include "scripting/ui/lua_textarea.h"
+#include "scripting/ui/lua_table.h"
 #include "scripting/ui/lua_text_input_panel.h"
+#include "scripting/ui/lua_textarea.h"
 #include "scripting/ui/lua_window.h"
 
 namespace LuaUi {
