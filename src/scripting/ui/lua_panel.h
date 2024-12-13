@@ -23,8 +23,8 @@
 #include "ui_basic/panel.h"
 
 namespace UI {
-class Box;
-}
+struct Box;
+}  // namespace UI
 
 namespace LuaUi {
 

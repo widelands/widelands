@@ -24,7 +24,7 @@
 
 namespace UI {
 class Panel;
-}
+}  // namespace UI
 
 namespace LuaUi {
 
@@ -43,6 +43,7 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel);
 std::string shortcut_string_if_set(const std::string& name, bool rt_escape);
 
 void luaopen_wlui(lua_State*, bool game_or_editor);
+
 }  // namespace LuaUi
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_UI_H
