@@ -162,5 +162,5 @@ HeaderFilterRegex:
   # It's better to list them, because the sources may be in e.g.
   #   /home/user/src/widelands/
   # TODO(tothxa): figure out which multiline format works...
-  'src/((ai|base|chat|economy|editor|game_io|graphic|io|logic|map_io|network|notifications|scripting|sound|ui_basic|ui_fsmenu|website|wui)/|[a-z_]+\.h)'
+  'src/((ai|base|chat|commands|economy|editor|game_io|graphic|io|logic|map_io|network|notifications|scripting|sound|ui_basic|ui_fsmenu|website|wui)/|[a-z_]+\.h)'
 FormatStyle:     none

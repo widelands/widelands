@@ -21,7 +21,7 @@
 #include <memory>
 
 #include "base/log.h"
-#include "logic/cmd_luacoroutine.h"
+#include "commands/cmd_luacoroutine.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/map_objects/descriptions.h"
