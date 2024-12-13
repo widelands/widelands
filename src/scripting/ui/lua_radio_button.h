@@ -16,33 +16,44 @@
  *
  */
 
-#ifndef WL_SCRIPTING_LUA_UI_H
-#define WL_SCRIPTING_LUA_UI_H
+#ifndef WL_SCRIPTING_UI_LUA_RADIO_BUTTON_H
+#define WL_SCRIPTING_UI_LUA_RADIO_BUTTON_H
 
-#include "scripting/lua.h"
-#include "scripting/luna.h"
-
-namespace UI {
-class Panel;
-}
+#include "scripting/ui/lua_panel.h"
+#include "ui_basic/radiobutton.h"
 
 namespace LuaUi {
 
-/*
- * Base class for all classes in wl.ui
- */
-class LuaUiModuleClass : public LunaClass {
+class LuaRadioButton : public LuaPanel {
 public:
-	const char* get_modulename() override {
-		return "ui";
+	LUNA_CLASS_HEAD(LuaRadioButton);
+
+	LuaRadioButton() = default;
+	explicit LuaRadioButton(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaRadioButton(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaRadioButton() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_state(lua_State* L);
+	int set_state(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+	int set_enabled(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	UI::Radiobutton* get() {
+		return dynamic_cast<UI::Radiobutton*>(panel_);
 	}
 };
 
-int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel);
-
-std::string shortcut_string_if_set(const std::string& name, bool rt_escape);
-
-void luaopen_wlui(lua_State*, bool game_or_editor);
 }  // namespace LuaUi
 
-#endif  // end of include guard: WL_SCRIPTING_LUA_UI_H
+#endif  // end of include guard: WL_SCRIPTING_UI_LUA_RADIO_BUTTON_H

@@ -16,33 +16,43 @@
  *
  */
 
-#ifndef WL_SCRIPTING_LUA_UI_H
-#define WL_SCRIPTING_LUA_UI_H
+#ifndef WL_SCRIPTING_UI_LUA_TAB_H
+#define WL_SCRIPTING_UI_LUA_TAB_H
 
-#include "scripting/lua.h"
-#include "scripting/luna.h"
-
-namespace UI {
-class Panel;
-}
+#include "scripting/ui/lua_panel.h"
+#include "ui_basic/tabpanel.h"
 
 namespace LuaUi {
 
-/*
- * Base class for all classes in wl.ui
- */
-class LuaUiModuleClass : public LunaClass {
+class LuaTab : public LuaPanel {
 public:
-	const char* get_modulename() override {
-		return "ui";
+	LUNA_CLASS_HEAD(LuaTab);
+
+	LuaTab() = default;
+	explicit LuaTab(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaTab(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaTab() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_active(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+	int click(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	UI::Tab* get() {
+		return dynamic_cast<UI::Tab*>(panel_);
 	}
 };
 
-int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel);
-
-std::string shortcut_string_if_set(const std::string& name, bool rt_escape);
-
-void luaopen_wlui(lua_State*, bool game_or_editor);
 }  // namespace LuaUi
 
-#endif  // end of include guard: WL_SCRIPTING_LUA_UI_H
+#endif  // end of include guard: WL_SCRIPTING_UI_LUA_TAB_H
