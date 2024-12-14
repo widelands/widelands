@@ -16,34 +16,43 @@
  *
  */
 
-#ifndef WL_SCRIPTING_LUA_UI_H
-#define WL_SCRIPTING_LUA_UI_H
+#ifndef WL_SCRIPTING_UI_LUA_MULTILINE_TEXTAREA_H
+#define WL_SCRIPTING_UI_LUA_MULTILINE_TEXTAREA_H
 
-#include "scripting/lua.h"
-#include "scripting/luna.h"
-
-namespace UI {
-class Panel;
-}  // namespace UI
+#include "scripting/ui/lua_panel.h"
+#include "ui_basic/multilinetextarea.h"
 
 namespace LuaUi {
 
-/*
- * Base class for all classes in wl.ui
- */
-class LuaUiModuleClass : public LunaClass {
+class LuaMultilineTextarea : public LuaPanel {
 public:
-	const char* get_modulename() override {
-		return "ui";
+	LUNA_CLASS_HEAD(LuaMultilineTextarea);
+
+	LuaMultilineTextarea() = default;
+	explicit LuaMultilineTextarea(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaMultilineTextarea(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaMultilineTextarea() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_text(lua_State* L);
+	int set_text(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+
+	/*
+	 * C Methods
+	 */
+	UI::MultilineTextarea* get() {
+		return dynamic_cast<UI::MultilineTextarea*>(panel_);
 	}
 };
 
-int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel);
-
-std::string shortcut_string_if_set(const std::string& name, bool rt_escape);
-
-void luaopen_wlui(lua_State*, bool game_or_editor);
-
 }  // namespace LuaUi
 
-#endif  // end of include guard: WL_SCRIPTING_LUA_UI_H
+#endif  // end of include guard: WL_SCRIPTING_UI_LUA_MULTILINE_TEXTAREA_H

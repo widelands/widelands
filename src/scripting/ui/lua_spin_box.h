@@ -16,34 +16,46 @@
  *
  */
 
-#ifndef WL_SCRIPTING_LUA_UI_H
-#define WL_SCRIPTING_LUA_UI_H
+#ifndef WL_SCRIPTING_UI_LUA_SPIN_BOX_H
+#define WL_SCRIPTING_UI_LUA_SPIN_BOX_H
 
-#include "scripting/lua.h"
-#include "scripting/luna.h"
-
-namespace UI {
-class Panel;
-}  // namespace UI
+#include "scripting/ui/lua_panel.h"
+#include "ui_basic/spinbox.h"
 
 namespace LuaUi {
 
-/*
- * Base class for all classes in wl.ui
- */
-class LuaUiModuleClass : public LunaClass {
+class LuaSpinBox : public LuaPanel {
 public:
-	const char* get_modulename() override {
-		return "ui";
+	LUNA_CLASS_HEAD(LuaSpinBox);
+
+	LuaSpinBox() = default;
+	explicit LuaSpinBox(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaSpinBox(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaSpinBox() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_value(lua_State* L);
+	int set_value(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+	int set_unit_width(lua_State* L);
+	int set_interval(lua_State* L);
+	int add_replacement(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	UI::SpinBox* get() {
+		return dynamic_cast<UI::SpinBox*>(panel_);
 	}
 };
 
-int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel);
-
-std::string shortcut_string_if_set(const std::string& name, bool rt_escape);
-
-void luaopen_wlui(lua_State*, bool game_or_editor);
-
 }  // namespace LuaUi
 
-#endif  // end of include guard: WL_SCRIPTING_LUA_UI_H
+#endif  // end of include guard: WL_SCRIPTING_UI_LUA_SPIN_BOX_H
