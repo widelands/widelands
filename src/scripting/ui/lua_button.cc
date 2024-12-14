@@ -91,7 +91,7 @@ int LuaButton::set_enabled(lua_State* L) {
       Use :meth:`click` to release the button.
 */
 int LuaButton::press(lua_State* /* L */) {
-	log_info("Pressing button '%s'\n", get()->get_name().c_str());
+	verb_log_info("Pressing button '%s'\n", get()->get_name().c_str());
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
 	return 0;
@@ -103,7 +103,7 @@ int LuaButton::press(lua_State* /* L */) {
       it.
 */
 int LuaButton::click(lua_State* /* L */) {
-	log_info("Clicking button '%s'\n", get()->get_name().c_str());
+	verb_log_info("Clicking button '%s'\n", get()->get_name().c_str());
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
 	get()->handle_mouserelease(SDL_BUTTON_LEFT, 1, 1);

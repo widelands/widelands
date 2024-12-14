@@ -135,7 +135,7 @@ int LuaDropdown::get_listselect(lua_State* L) {
       Open this dropdown menu.
 */
 int LuaDropdown::open(lua_State* /* L */) {
-	log_info("Opening dropdown '%s'\n", get()->get_name().c_str());
+	verb_log_info("Opening dropdown '%s'\n", get()->get_name().c_str());
 	get()->set_list_visibility(true);
 	return 0;
 }
@@ -156,7 +156,7 @@ int LuaDropdown::highlight_item(lua_State* L) {
 		             "dropdown is 1-%u.",
 		             desired_item, get()->get_name().c_str(), get()->size());
 	}
-	log_info("Highlighting item %u in dropdown '%s'\n", desired_item, get()->get_name().c_str());
+	verb_log_info("Highlighting item %u in dropdown '%s'\n", desired_item, get()->get_name().c_str());
 	// Open the dropdown
 	get()->set_list_visibility(true);
 
@@ -207,7 +207,7 @@ int LuaDropdown::indicate_item(lua_State* L) {
 		             "dropdown is 1-%d.",
 		             desired_item, get()->get_name().c_str(), get()->size());
 	}
-	log_info(
+	verb_log_info(
 	   "Indicating item %" PRIuS " in dropdown '%s'\n", desired_item, get()->get_name().c_str());
 
 	int x = panel_->get_x() + panel_->get_w();
@@ -238,7 +238,7 @@ int LuaDropdown::indicate_item(lua_State* L) {
       Selects the currently highlighted item in this dropdown.
 */
 int LuaDropdown::select(lua_State* /* L */) {
-	log_info("Selecting current item in dropdown '%s'\n", get()->get_name().c_str());
+	verb_log_info("Selecting current item in dropdown '%s'\n", get()->get_name().c_str());
 	SDL_Keysym code;
 	code.sym = SDLK_RETURN;
 	code.scancode = SDL_SCANCODE_RETURN;

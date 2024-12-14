@@ -113,7 +113,7 @@ int LuaWindow::set_minimal(lua_State* L) {
       not use it any longer.
 */
 int LuaWindow::close(lua_State* /* L */) {
-	log_info("Closing window '%s'\n", get()->get_name().c_str());
+	verb_log_info("Closing window '%s'\n", get()->get_name().c_str());
 	panel_->die();
 	panel_ = nullptr;
 	return 0;

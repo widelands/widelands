@@ -63,7 +63,7 @@ int LuaTab::get_active(lua_State* L) {
       Click this tab making it the active one.
 */
 int LuaTab::click(lua_State* /* L */) {
-	log_info("Clicking tab '%s'\n", get()->get_name().c_str());
+	verb_log_info("Clicking tab '%s'\n", get()->get_name().c_str());
 	get()->activate();
 	return 0;
 }
