@@ -1803,7 +1803,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an Atlantean production site: Horse Farm
             lore = pgettext("atlanteans_building", "I walk all day just back and forth. I need? I need … I need a horse!"),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Horse Farm
-            lore_author = pgettext("atlanteans_building", "Busy carrier murmuring to himself")
+            lore_author = pgettext("atlanteans_building", "Busy carrier murmuring to himself"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Horse Farm
+            performance = pgettext("atlanteans_building", "If all needed wares are delivered in time, this building can produce a horse in %s on average."):bformat(format_seconds(30))
          }
       },
       {

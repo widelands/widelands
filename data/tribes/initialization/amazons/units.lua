@@ -1546,7 +1546,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Tapir Farm
             purpose = pgettext("amazons_building", "Breeds tapirs for adding them to the transportation system."),
             -- TRANSLATORS: Note helptext for an Amazon production site: Tapir Farm
-            note = pgettext ("amazons_building", "Tapirs help to prevent traffic jams on highly used roads.")
+            note = pgettext ("amazons_building", "Tapirs help to prevent traffic jams on highly used roads."),
+            -- TRANSLATORS: Performance helptext for an Amazon production site: Tapir Farm
+            performance = pgettext("amazons_building", "If all needed wares are delivered in time, this building can produce a tapir in %s on average."):bformat(format_seconds(30))
          }
       },
       {

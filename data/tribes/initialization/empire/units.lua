@@ -1740,7 +1740,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Donkey Farm
             lore_author = pgettext("empire_building", "A donkey breeder during a shortage of wheat"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Donkey Farm
-            purpose = pgettext("empire_building", "Breeds cute and helpful donkeys for adding them to the transportation system.")
+            purpose = pgettext("empire_building", "Breeds cute and helpful donkeys for adding them to the transportation system."),
+            -- TRANSLATORS: Performance helptext for an Empire production site: Donkey Farm
+            performance = pgettext("empire_building", "If all needed wares are delivered in time, this building can produce a donkey in %s on average."):bformat(format_seconds(30))
          }
       },
       {
