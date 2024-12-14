@@ -138,6 +138,9 @@ struct BaseListselect : public Panel {
 	void set_linked_dropdown(UI::BaseDropdown* d) {
 		linked_dropdown_ = d;
 	}
+	[[nodiscard]] UI::BaseDropdown* get_linked_dropdown() {
+		return linked_dropdown_;
+	}
 
 	struct EntryRecord {
 		explicit EntryRecord(const std::string& init_name,

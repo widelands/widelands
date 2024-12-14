@@ -383,7 +383,7 @@ msgid ""
 "This file contains an initial savegame and all commands that were issued by "
 "all players, such as building a road or attacking an enemy. The filename "
 "will tell you the time you started the game."
-msgstr ""
+msgstr "Widelands zaznamenáva každú hru, ktorú hráte, v súbore záznamu s príponu .wry. Tento súbor obsahuje začiatočný stav hry a všetky povely, ktoré vydali hráči, ako napríklad stavba cesty alebo útok na nepriateľa. Názov súboru vám prezradí čas, kedy ste začali hru."
 
 #: ../../../../data/txts/help/common_helptexts.lua:31
 msgid ""

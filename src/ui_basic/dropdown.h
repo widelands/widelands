@@ -164,6 +164,10 @@ public:
 	/// entries.
 	void set_autoexpand_display_button();
 
+	[[nodiscard]] UI::BaseListselect* get_list() {
+		return list_;
+	}
+
 	void notify_list_deleted() {
 		list_ = nullptr;
 	}

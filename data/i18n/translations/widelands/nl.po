@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-12-05 03:11+0000\n"
+"POT-Creation-Date: 2024-12-14 03:03+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Alex Rijckaert, 2023-2024\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -679,12 +679,12 @@ msgstr "Weet je zeker dat je de editor wilt afsluiten?"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:575
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:125
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:328
-#: ../../../../src/ui_fsmenu/main.cc:294 ../../../../src/wlapplication.cc:1968
+#: ../../../../src/ui_fsmenu/main.cc:294 ../../../../src/wlapplication.cc:1958
 msgid "Error"
 msgstr "Fout"
 
 #: ../../../../src/editor/editorinteractive.cc:1276
-#: ../../../../src/ui_fsmenu/main.cc:278 ../../../../src/wlapplication.cc:1970
+#: ../../../../src/ui_fsmenu/main.cc:278 ../../../../src/wlapplication.cc:1960
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -2593,7 +2593,7 @@ msgstr "(gestopt)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:480
-#: ../../../../src/wui/building_statistics_menu.cc:725
+#: ../../../../src/wui/building_statistics_menu.cc:726
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
@@ -3226,47 +3226,41 @@ msgstr "Het spel is opgeslagen"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:887
 msgid "Building’s inputs changed!"
-msgstr ""
+msgstr "De invoer van het gebouw is veranderd!"
 
 #. * TRANSLATORS: The argument is the buiding name
 #: ../../../../src/map_io/map_buildingdata_packet.cc:898
 #, c-format
-msgid "%s: the building's inputs have changed."
-msgstr ""
+msgid "%s: the building’s inputs have changed."
+msgstr "%s: de invoer van het gebouw is veranderd."
 
-#. * TRANSLATORS: Amount and type of space between two sentences
 #: ../../../../src/map_io/map_buildingdata_packet.cc:901
-msgctxt "sentence_separator"
-msgid " "
-msgstr ""
-
-#: ../../../../src/map_io/map_buildingdata_packet.cc:902
 msgid "The following wares have been deleted:"
-msgstr ""
+msgstr "De volgende waren zijn verwijderd:"
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:909
+#: ../../../../src/map_io/map_buildingdata_packet.cc:908
 #, c-format
 msgid "%1$u piece of %2$s"
 msgid_plural "%1$u pieces of %2$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u stuk van %2$s"
+msgstr[1] "%1$u stukken van%2$s"
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:915
+#: ../../../../src/map_io/map_buildingdata_packet.cc:914
 #, c-format
 msgid "%1$u piece of an unknown ware"
 msgid_plural "%1$u pieces of unknown wares"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u stuk van een onbekend waren"
+msgstr[1] "%1$u stukken van onbekende waren"
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:921
+#: ../../../../src/map_io/map_buildingdata_packet.cc:920
 msgid ""
 "The game was probably saved with a different Widelands version or with "
 "different enabled add-ons."
-msgstr ""
+msgstr "Het spel is waarschijnlijk opgeslagen met een andere Widelands-versie of met andere ingeschakelde add-ons."
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:924
+#: ../../../../src/map_io/map_buildingdata_packet.cc:923
 msgid "Please review the current production programs and input settings."
-msgstr ""
+msgstr "Controleer de huidige productieprogramma's en invoerinstellingen."
 
 #: ../../../../src/map_io/map_saver.cc:85
 #, c-format
@@ -4023,17 +4017,17 @@ msgstr "Widelands kon het lokale netwerk niet gebruiken. Misschien voert een and
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../../../src/scripting/lua_game.cc:1405
+#: ../../../../src/scripting/lua_game.cc:1407
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../../../src/scripting/lua_ui.cc:1226
-#: ../../../../src/scripting/lua_ui.cc:1248 ../../../../src/wui/plugins.cc:42
+#: ../../../../src/scripting/lua_ui.cc:1265
+#: ../../../../src/scripting/lua_ui.cc:1287 ../../../../src/wui/plugins.cc:42
 msgid "Plugin Error"
 msgstr "Fout in plugin"
 
-#: ../../../../src/scripting/lua_ui.cc:1227
-#: ../../../../src/scripting/lua_ui.cc:1249 ../../../../src/wui/plugins.cc:42
+#: ../../../../src/scripting/lua_ui.cc:1266
+#: ../../../../src/scripting/lua_ui.cc:1288 ../../../../src/wui/plugins.cc:42
 #, c-format
 msgid ""
 "Error when running plugin:\n"
@@ -4108,7 +4102,7 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Niet Gekozen"
 
-#: ../../../../src/ui_basic/dropdown.h:479
+#: ../../../../src/ui_basic/dropdown.h:483
 msgid "No matches"
 msgstr "Geen overeenkomsten"
 
@@ -4569,35 +4563,35 @@ msgstr "Minimale kwaliteit"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:354
 msgid "Min Players:"
-msgstr ""
+msgstr "Min. Spelers:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:367
 msgid "Min Width:"
-msgstr ""
+msgstr "Min. Breedte:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:380
 msgid "Min Height:"
-msgstr ""
+msgstr "Min. Hoogte:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:393
 msgid "Min Size:"
-msgstr ""
+msgstr "Min. Grootte:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:406
 msgid "Max Players:"
-msgstr ""
+msgstr "Max. Spelers:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:419
 msgid "Max Width:"
-msgstr ""
+msgstr "Max. Breedte:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:432
 msgid "Max Height:"
-msgstr ""
+msgstr "Max. Hoogte:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:445
 msgid "Max Size:"
-msgstr ""
+msgstr "Max. Grootte:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:455
 msgid "Choose add-on to upload…"
@@ -4739,11 +4733,11 @@ msgstr "U kunt ook een bericht sturen naar het Widelands Development Team en dan
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:749
 msgid "Manage your installed add-ons"
-msgstr ""
+msgstr "Uw geïnstalleerde add-ons beheren"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:751
 msgid "Browse and install add-ons available on the server"
-msgstr ""
+msgstr "Bladeren door add-ons die beschikbaar zijn op de server en deze installeren"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:753
 #, c-format
@@ -4751,7 +4745,7 @@ msgid ""
 "Browse and install maps from the widelands.org website maps archive. Like "
 "manually downloaded maps, installed website maps are stored in the ‘%s’ "
 "directory under the Widelands home directory."
-msgstr ""
+msgstr "Blader door kaarten uit het widelands.org website kaartenarchief en installeer ze. Net als handmatig gedownloade kaarten, worden geïnstalleerde websitemaps opgeslagen in de map ‘%s’ onder de homedirectory van Widelands."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:757
 msgid "Development"
@@ -4759,7 +4753,7 @@ msgstr "Ontwikkeling"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:757
 msgid "Tools for add-on developers"
-msgstr ""
+msgstr "Tools voor add-on-ontwikkelaars"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:761
@@ -4807,7 +4801,7 @@ msgstr "Selecteer Uitbereidingen op Naam"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:785
 msgid "Filter maps by name"
-msgstr ""
+msgstr "Filter kaarten op naam"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:796
 #, c-format
@@ -4817,12 +4811,12 @@ msgstr "Wissel catagorie '%s'"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:812
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:709
 msgid "One World"
-msgstr ""
+msgstr "Eén Wereld"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:820
 #, c-format
 msgid "Toggle world ‘%s’"
-msgstr ""
+msgstr "Wissel Wereld ‘%s’"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1012
 #, c-format
@@ -4982,12 +4976,12 @@ msgstr "• %s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1674
 msgid "Website Maps"
-msgstr ""
+msgstr "Website Kaarten"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1675
 #, c-format
 msgid "Website Maps (%u)"
-msgstr ""
+msgstr "Website Kaarten (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1707
 #, c-format
@@ -5103,7 +5097,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "De kaart ‘%1$s’ kon niet worden gedownload van de server.\n\nFoutbericht:\n%2$s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2058
 #, c-format
@@ -5832,7 +5826,7 @@ msgid ""
 "%3$s\n"
 "\n"
 "Note that this map can not be downloaded again from the server."
-msgstr ""
+msgstr "Weet je zeker dat je deze kaart wilt verwijderen?\n\n%1$s\ndoor %2$s\n%3$s\n\nMerk op dat deze kaart niet opnieuw kan worden gedownload van de server."
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:54
 #, c-format
@@ -5842,7 +5836,7 @@ msgid ""
 "%1$s\n"
 "by %2$s\n"
 "%3$s"
-msgstr ""
+msgstr "Weet je zeker dat je deze kaart wilt verwijderen?\n\n%1$s\ndoor %2$s\n%3$s"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:60
 #, c-format
@@ -5892,11 +5886,11 @@ msgstr "Heeft een Widelands versie nodig van tenminste %1$s en maximaal %2$s."
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:168
 msgid "Hint:"
-msgstr ""
+msgstr "Hint:"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:175
 msgid "Comment by uploader:"
-msgstr ""
+msgstr "Commentaar van uploader:"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:216
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:267
@@ -6044,14 +6038,14 @@ msgstr[1] "%u schermafbeeldingen"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:704
 #, c-format
 msgid "Size: %1$u×%2$u • Max Players: %3$u • %4$s"
-msgstr ""
+msgstr "Grootte: %1$u×%2$u • Max. Spelers: %3$u • %4$s"
 
 #. * TRANSLATORS: Timestamp · Filesize · Download count · Average rating ·
 #. Number of comments
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:725
 #, c-format
 msgid "%1$s   %2$s   ⬇ %3$u   ★ %4$s   “” %5$u"
-msgstr ""
+msgstr "%1$s   %2$s   ⬇ %3$u   ★ %4$s   “” %5$u"
 
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:41
 #, c-format
@@ -7780,31 +7774,31 @@ msgstr "Lege waarde van commandoregelparameter --%s"
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
 msgstr "Commandoregel parameters --%1$s en --%2$s kunnen niet worden gecombineerd"
 
-#: ../../../../src/wlapplication.cc:1767
+#: ../../../../src/wlapplication.cc:1757
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Onbekende opdracht regel parameter: %s\nMisschien ontbreekt er een '=' ?"
 
-#: ../../../../src/wlapplication.cc:1915
+#: ../../../../src/wlapplication.cc:1905
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Onbekende opdracht regel parameter:  %s"
 
-#: ../../../../src/wlapplication.cc:1946
+#: ../../../../src/wlapplication.cc:1936
 msgid "Incompatible"
 msgstr "Onverenigbaar"
 
-#: ../../../../src/wlapplication.cc:1983
+#: ../../../../src/wlapplication.cc:1973
 msgid "Game ended unexpectedly"
 msgstr "Spel eindigde onverwacht"
 
-#: ../../../../src/wlapplication.cc:1983
+#: ../../../../src/wlapplication.cc:1973
 msgid "Unexpected error during the game"
 msgstr "Onverwachte fout gedurende dit spel"
 
-#: ../../../../src/wlapplication.cc:1986
+#: ../../../../src/wlapplication.cc:1976
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -7818,7 +7812,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Er is een fout opgetreden tijdens het spel. De foutmelding is:\n\n%1$s\n\nMeld dit probleem om ons te helpen Widelands te verbeteren. U vindt gerelateerde berichten in de standaarduitvoer (stdout.txt onder Windows). U gebruikt versie %2$s.\n\nVoeg deze informatie toe aan uw rapport.\n\nWil je dat Widelands probeert een nood savegame te maken? Het is vaak – maar niet altijd – mogelijk om deze te laden en verder te spelen."
 
-#: ../../../../src/wlapplication.cc:1995
+#: ../../../../src/wlapplication.cc:1985
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -7828,11 +7822,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Het spel stopte onverwacht om de volgende reden:\n\n%s\n\nWil je dat Widelands een poging doet om als noodoplossing het spel te bewaren? Het is vaak – maar niet altijd – mogelijk om het weer te laden en verder te spelen."
 
-#: ../../../../src/wlapplication.cc:2029
+#: ../../../../src/wlapplication.cc:2019
 msgid "Emergency save failed"
 msgstr "Noodprocedure Spelbewaren faalde"
 
-#: ../../../../src/wlapplication.cc:2030
+#: ../../../../src/wlapplication.cc:2020
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -9082,22 +9076,22 @@ msgstr "Mijnen"
 msgid "Ports"
 msgstr "Havens"
 
-#: ../../../../src/wui/building_statistics_menu.cc:734
+#: ../../../../src/wui/building_statistics_menu.cc:735
 msgid "Low productivity:"
 msgstr "Lage productiviteit:"
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../../../src/wui/building_statistics_menu.cc:743
-#: ../../../../src/wui/building_statistics_menu.cc:762
-#: ../../../../src/wui/building_statistics_menu.cc:764
+#: ../../../../src/wui/building_statistics_menu.cc:744
+#: ../../../../src/wui/building_statistics_menu.cc:763
+#: ../../../../src/wui/building_statistics_menu.cc:765
 #: ../../../../src/wui/productionsitewindow.cc:233
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../../../src/wui/building_statistics_menu.cc:753
+#: ../../../../src/wui/building_statistics_menu.cc:754
 msgid "Lacking soldiers:"
 msgstr "Ontbrekende soldaten:"
 

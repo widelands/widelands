@@ -24,12 +24,14 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "graphic/font_handler.h"
 #include "graphic/style_manager.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
 #include "scripting/globals.h"
-#include "scripting/lua_map.h"
 #include "scripting/luna.h"
+#include "scripting/map/lua_field.h"
+#include "scripting/map/lua_flag.h"
 #include "ui_basic/messagebox.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
@@ -67,19 +69,20 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 	// TODO(Nordfriese): This trial-and-error approach is inefficient and extremely ugly,
 	// use a virtual function call similar to Widelands::MapObjectDescr::type.
 #define TRY_TO_LUA(PanelType, LuaType)                                                             \
-	if (upcast(UI::PanelType, temp_##PanelType, panel)) {                                           \
+	if (upcast(UI::PanelType, temp_##PanelType, panel); temp_##PanelType != nullptr) {              \
 		to_lua<LuaType>(L, new LuaType(temp_##PanelType));                                           \
 	}
 
 	// clang-format off
 	TRY_TO_LUA(Window, LuaWindow)
+	else TRY_TO_LUA(Box, LuaBox)
 	else TRY_TO_LUA(Button, LuaButton)
 	else TRY_TO_LUA(Checkbox, LuaCheckbox)
 	else TRY_TO_LUA(Radiobutton, LuaRadioButton)
 	else TRY_TO_LUA(ProgressBar, LuaProgressBar)
 	else TRY_TO_LUA(SpinBox, LuaSpinBox)
 	else TRY_TO_LUA(Slider, LuaSlider)
-	else if (upcast(UI::DiscreteSlider, temp_DiscreteSlider, panel)) {
+	else if (upcast(UI::DiscreteSlider, temp_DiscreteSlider, panel); temp_DiscreteSlider != nullptr) {
 		// Discrete sliders are wrapped, so we pass the actual slider through.
 		to_lua<LuaSlider>(L, new LuaSlider(&temp_DiscreteSlider->get_slider()));
 	}
@@ -91,7 +94,13 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 	else TRY_TO_LUA(BaseDropdown, LuaDropdown)
 	else TRY_TO_LUA(BaseListselect, LuaListselect)
 	else TRY_TO_LUA(BaseTable, LuaTable)
-	else {
+	else if (!is_main_menu(L) && panel == get_egbase(L).get_ibase()) {
+		to_lua<LuaMapView>(L, new LuaMapView(L));
+	} else if (upcast(MapView, temp_MapView, panel); temp_MapView != nullptr) {
+		to_lua<LuaMapView>(L, new LuaMapView(temp_MapView));
+	} else if (upcast(FsMenu::MainMenu, temp_MainMenu, panel); temp_MainMenu != nullptr) {
+		to_lua<LuaMainMenu>(L, new LuaMainMenu(temp_MainMenu));
+	} else {
 		to_lua<LuaPanel>(L, new LuaPanel(panel));
 	}
 	// clang-format on
@@ -132,7 +141,8 @@ const PropertyType<LuaPanel> LuaPanel::Properties[] = {
    PROP_RO(LuaPanel, children),   PROP_RO(LuaPanel, buttons), PROP_RO(LuaPanel, dropdowns),
    PROP_RO(LuaPanel, tabs),       PROP_RO(LuaPanel, windows), PROP_RW(LuaPanel, position_x),
    PROP_RW(LuaPanel, position_y), PROP_RW(LuaPanel, width),   PROP_RW(LuaPanel, height),
-   PROP_RW(LuaPanel, visible),    PROP_RO(LuaPanel, name),    {nullptr, nullptr, nullptr},
+   PROP_RW(LuaPanel, visible),    PROP_RO(LuaPanel, name),    PROP_RO(LuaPanel, parent),
+   {nullptr, nullptr, nullptr},
 };
 const MethodType<LuaPanel> LuaPanel::Methods[] = {
    METHOD(LuaPanel, get_descendant_position),
@@ -141,6 +151,7 @@ const MethodType<LuaPanel> LuaPanel::Methods[] = {
 #endif
    METHOD(LuaPanel, get_child),
    METHOD(LuaPanel, create_child),
+   METHOD(LuaPanel, layout),
    METHOD(LuaPanel, die),
    METHOD(LuaPanel, force_redraw),
    {nullptr, nullptr},
@@ -180,6 +191,22 @@ static void put_all_visible_panels_into_table(lua_State* L, UI::Panel* g) {
 */
 int LuaPanel::get_name(lua_State* L) {
 	lua_pushstring(L, panel_->get_name());
+	return 1;
+}
+
+/* RST
+   .. attribute:: parent
+
+      .. versionadded:: 1.3
+
+      (RO) The direct parent panel of this panel, or ``nil`` for a top-level panel.
+*/
+int LuaPanel::get_parent(lua_State* L) {
+	if (UI::Panel* parent = panel_->get_parent(); parent != nullptr) {
+		upcasted_panel_to_lua(L, parent);
+	} else {
+		lua_pushnil(L);
+	}
 	return 1;
 }
 
@@ -429,6 +456,18 @@ int LuaPanel::indicate(lua_State* L) {
 	return 2;
 }
 #endif
+
+/* RST
+   .. method:: layout()
+
+      .. versionadded:: 1.3
+
+      Force this panel and all its descendants to recompute their layout now.
+*/
+int LuaPanel::layout(lua_State* /* L */) {
+	panel_->layout();
+	return 0;
+}
 
 /* RST
    .. method:: die()
@@ -2146,6 +2185,276 @@ UI::Panel* LuaPanel::do_create_child_window(lua_State* L, UI::Panel* parent) {
 }
 
 /* RST
+Box
+---
+
+.. class:: Box
+
+   .. versionadded:: 1.3
+
+   This represents a box that dynamically layouts its child components.
+*/
+const char LuaBox::className[] = "Box";
+const MethodType<LuaBox> LuaBox::Methods[] = {
+   METHOD(LuaBox, clear),        METHOD(LuaBox, get_index), METHOD(LuaBox, is_space),
+   METHOD(LuaBox, get_resizing), METHOD(LuaBox, get_align), {nullptr, nullptr},
+};
+const PropertyType<LuaBox> LuaBox::Properties[] = {
+   PROP_RO(LuaBox, orientation),   PROP_RO(LuaBox, no_of_items),
+   PROP_RW(LuaBox, scrolling),     PROP_RW(LuaBox, force_scrolling),
+   PROP_RW(LuaBox, inner_spacing), PROP_RW(LuaBox, min_desired_breadth),
+   PROP_RW(LuaBox, max_width),     PROP_RW(LuaBox, max_height),
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ * Properties
+ */
+
+/* RST
+   .. attribute:: orientation
+
+      (RO) The box's layouting direction: ``"vertical"`` or ``"horizontal"``.
+*/
+int LuaBox::get_orientation(lua_State* L) {
+	lua_pushstring(L, get()->get_orientation() == UI::Box::Horizontal ? "horizontal" : "vertical");
+	return 1;
+}
+
+/* RST
+   .. attribute:: no_of_items
+
+      (RO) The number of items currently layouted by this box.
+
+      An item can be either a panel which is a direct child of the box, or a space.
+      A child of the box is not necessarily represented by an item.
+*/
+int LuaBox::get_no_of_items(lua_State* L) {
+	lua_pushinteger(L, get()->get_nritems());
+	return 1;
+}
+
+/* RST
+   .. attribute:: scrolling
+
+      (RW) Whether the box may scroll when its content is larger than the box.
+*/
+int LuaBox::get_scrolling(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(get()->is_scrolling()));
+	return 1;
+}
+int LuaBox::set_scrolling(lua_State* L) {
+	get()->set_scrolling(luaL_checkboolean(L, -1));
+	return 0;
+}
+
+/* RST
+   .. attribute:: force_scrolling
+
+      (RW) Whether the box will always show a scrollbar even if its content fits in the box.
+*/
+int LuaBox::get_force_scrolling(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(get()->is_force_scrolling()));
+	return 1;
+}
+int LuaBox::set_force_scrolling(lua_State* L) {
+	get()->set_force_scrolling(luaL_checkboolean(L, -1));
+	return 0;
+}
+
+/* RST
+   .. attribute:: inner_spacing
+
+      (RW) The spacing between items.
+*/
+int LuaBox::get_inner_spacing(lua_State* L) {
+	lua_pushinteger(L, get()->get_inner_spacing());
+	return 1;
+}
+int LuaBox::set_inner_spacing(lua_State* L) {
+	get()->set_inner_spacing(luaL_checkuint32(L, 2));
+	return 0;
+}
+
+/* RST
+   .. attribute:: min_desired_breadth
+
+      (RW) The minimum size of the box in the direction
+      orthogonal to the primary layouting direction.
+*/
+int LuaBox::get_min_desired_breadth(lua_State* L) {
+	lua_pushinteger(L, get()->get_min_desired_breadth());
+	return 1;
+}
+int LuaBox::set_min_desired_breadth(lua_State* L) {
+	get()->set_min_desired_breadth(luaL_checkuint32(L, 2));
+	return 0;
+}
+
+/* RST
+   .. attribute:: max_width
+
+      (RW) The maximum width of the box.
+*/
+int LuaBox::get_max_width(lua_State* L) {
+	lua_pushinteger(L, get()->get_max_x());
+	return 1;
+}
+int LuaBox::set_max_width(lua_State* L) {
+	get()->set_max_size(luaL_checkuint32(L, 2), get()->get_max_y());
+	return 0;
+}
+
+/* RST
+   .. attribute:: max_height
+
+      (RW) The maximum height of the box.
+*/
+int LuaBox::get_max_height(lua_State* L) {
+	lua_pushinteger(L, get()->get_max_y());
+	return 1;
+}
+int LuaBox::set_max_height(lua_State* L) {
+	get()->set_max_size(get()->get_max_x(), luaL_checkuint32(L, 2));
+	return 0;
+}
+
+/*
+ * Lua Functions
+ */
+/* RST
+   .. method:: clear()
+
+      Remove all items from the box's layouting. This does not delete the child items.
+*/
+int LuaBox::clear(lua_State* /* L */) {
+	get()->clear();
+	return 0;
+}
+
+/* RST
+   .. method:: get_index(panel)
+
+      Return the index of the given panel in the box,
+      or ``nil`` if the box does not layout this panel.
+
+      :arg index: The panel to query.
+      :type index: :class:`Panel`
+      :returns: The item's index, starting from ``1``.
+      :rtype: :class:`integer`
+*/
+int LuaBox::get_index(lua_State* L) {
+	LuaPanel* panel = *get_base_user_class<LuaPanel>(L, 2);
+	const UI::Box* box = get();
+
+	for (int i = 0; i < box->get_nritems(); ++i) {
+		if (box->at(i).type == UI::Box::Item::Type::ItemPanel &&
+		    box->at(i).u.panel.panel == panel->get()) {
+			lua_pushinteger(L, i + 1);
+			return 1;
+		}
+	}
+
+	lua_pushnil(L);
+	return 1;
+}
+
+/* RST
+   .. method:: is_space(index)
+
+      Check whether the item at the given index is a spacer or a child panel.
+
+      :arg index: The index to query, starting from ``1``.
+      :type index: :class:`integer`
+      :returns: Whether the item is a space.
+      :rtype: :class:`boolean`
+*/
+int LuaBox::is_space(lua_State* L) {
+	const int index = luaL_checkint32(L, 2);
+	if (index < 1 || index > get()->get_nritems()) {
+		report_error(L, "Index %d out of range 1..%d", index, get()->get_nritems());
+	}
+	lua_pushboolean(L, static_cast<int>(get()->at(index).type == UI::Box::Item::Type::ItemSpace));
+	return 1;
+}
+
+/* RST
+   .. method:: get_resizing(index)
+
+      Get the resizing strategy for the item at the given index.
+
+      The result is one of ``"align"``, ``"fullsize"``, ``"fillspace"``, and ``"expandboth"``.
+      For fixed-size spaces, this is always ``"align"``.
+      For infinite spaces, this is always ``"fillspace"``.
+
+      :arg index: The index to query, starting from ``1``.
+      :type index: :class:`integer`
+      :returns: The resizing strategy.
+      :rtype: :class:`string`
+*/
+int LuaBox::get_resizing(lua_State* L) {
+	const int index = luaL_checkint32(L, 2);
+	if (index < 1 || index > get()->get_nritems()) {
+		report_error(L, "Index %d out of range 1..%d", index, get()->get_nritems());
+	}
+
+	const auto& item = get()->at(index - 1);
+	if (item.type == UI::Box::Item::Type::ItemPanel && item.u.panel.fullsize) {
+		lua_pushstring(L, item.fillspace ? "expandboth" : "fullsize");
+	} else {
+		lua_pushstring(L, item.fillspace ? "fillspace" : "align");
+	}
+
+	return 1;
+}
+
+/* RST
+   .. method:: get_align(index)
+
+      Get the alignment for the item at the given index.
+
+      The result is one of ``"left"``, ``"center"``, and ``"right"``.
+      This function may not be called for spacers.
+
+      :arg index: The index to query, starting from ``1``.
+      :type index: :class:`integer`
+      :returns: The item alignment.
+      :rtype: :class:`string`
+*/
+int LuaBox::get_align(lua_State* L) {
+	const int index = luaL_checkint32(L, 2);
+	if (index < 1 || index > get()->get_nritems()) {
+		report_error(L, "Index %d out of range 1..%d", index, get()->get_nritems());
+	}
+
+	const auto& item = get()->at(index - 1);
+	if (item.type != UI::Box::Item::Type::ItemPanel) {
+		report_error(L, "Index %d is a space", index);
+	}
+
+	switch (item.u.panel.align) {
+	case UI::Align::kCenter:
+		lua_pushstring(L, "center");
+		break;
+	case UI::Align::kLeft:
+		lua_pushstring(L, "left");
+		break;
+	case UI::Align::kRight:
+		lua_pushstring(L, "right");
+		break;
+	default:
+		report_error(
+		   L, "Index %d: Invalid alignment %d", index, static_cast<int>(item.u.panel.align));
+	}
+
+	return 1;
+}
+
+/*
+ * C Functions
+ */
+
+/* RST
 Button
 ------
 
@@ -2809,7 +3118,7 @@ int LuaTextInputPanel::set_text(lua_State* L) {
       (RO) The text currently selected by the user (may be empty).
 */
 int LuaTextInputPanel::get_selected_text(lua_State* L) {
-	lua_pushstring(L, get()->get_selected_text().c_str());
+	lua_pushstring(L, get()->has_selection() ? get()->get_selected_text().c_str() : "");
 	return 1;
 }
 
@@ -2886,18 +3195,23 @@ Dropdown
 */
 const char LuaDropdown::className[] = "Dropdown";
 const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
-   METHOD(LuaDropdown, open),           METHOD(LuaDropdown, highlight_item),
+   METHOD(LuaDropdown, open),
+   METHOD(LuaDropdown, highlight_item),
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
    METHOD(LuaDropdown, indicate_item),
 #endif
-   METHOD(LuaDropdown, select),         METHOD(LuaDropdown, add),
-   METHOD(LuaDropdown, get_value_at),   METHOD(LuaDropdown, get_label_at),
-   METHOD(LuaDropdown, get_tooltip_at), {nullptr, nullptr},
+   METHOD(LuaDropdown, select),
+   METHOD(LuaDropdown, clear),
+   METHOD(LuaDropdown, add),
+   METHOD(LuaDropdown, get_value_at),
+   METHOD(LuaDropdown, get_label_at),
+   METHOD(LuaDropdown, get_tooltip_at),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
    PROP_RO(LuaDropdown, datatype),    PROP_RO(LuaDropdown, expanded),
    PROP_RO(LuaDropdown, no_of_items), PROP_RO(LuaDropdown, selection),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaDropdown, listselect),  {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -2957,6 +3271,18 @@ int LuaDropdown::get_selection(lua_State* L) {
 	} else {
 		lua_pushnil(L);
 	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: listselect
+
+      .. versionadded:: 1.3
+
+      (RO) This links to the :class:`Listselect` representing the dropdown's list of items.
+*/
+int LuaDropdown::get_listselect(lua_State* L) {
+	to_lua<LuaListselect>(L, new LuaListselect(get()->get_list()));
 	return 1;
 }
 
@@ -3079,6 +3405,22 @@ int LuaDropdown::select(lua_State* /* L */) {
 	code.mod = KMOD_NONE;
 	code.unused = 0;
 	get()->handle_key(true, code);
+	return 0;
+}
+
+/* RST
+   .. method:: clear()
+
+      .. versionadded:: 1.3
+
+      Remove all entries from the dropdown. Only allowed for dropdowns with supported datatypes.
+*/
+int LuaDropdown::clear(lua_State* L) {
+	if (upcast(DropdownOfString, dd, get()); dd != nullptr) {
+		dd->clear();
+	} else {
+		report_error(L, "clear() not allowed for dropdown with unsupported datatype");
+	}
 	return 0;
 }
 
@@ -3223,6 +3565,8 @@ Listselect
 */
 const char LuaListselect::className[] = "Listselect";
 const MethodType<LuaListselect> LuaListselect::Methods[] = {
+   METHOD(LuaListselect, select),
+   METHOD(LuaListselect, clear),
    METHOD(LuaListselect, add),
    METHOD(LuaListselect, get_value_at),
    METHOD(LuaListselect, get_label_at),
@@ -3232,9 +3576,8 @@ const MethodType<LuaListselect> LuaListselect::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaListselect> LuaListselect::Properties[] = {
-   PROP_RO(LuaListselect, datatype),
-   PROP_RO(LuaListselect, no_of_items),
-   PROP_RO(LuaListselect, selection),
+   PROP_RO(LuaListselect, datatype),  PROP_RO(LuaListselect, no_of_items),
+   PROP_RO(LuaListselect, selection), PROP_RO(LuaListselect, linked_dropdown),
    {nullptr, nullptr, nullptr},
 };
 
@@ -3284,9 +3627,52 @@ int LuaListselect::get_selection(lua_State* L) {
 	return 1;
 }
 
+/* RST
+   .. attribute:: linked_dropdown
+
+      .. versionadded:: 1.3
+
+      (RO) If this listselect represents the list component of a dropdown,
+      this links to the :class:`Dropdown`. Otherwise this is ``nil``.
+*/
+int LuaListselect::get_linked_dropdown(lua_State* L) {
+	if (UI::BaseDropdown* dd = get()->get_linked_dropdown(); dd != nullptr) {
+		to_lua<LuaDropdown>(L, new LuaDropdown(dd));
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
 /*
  * Lua Functions
  */
+/* RST
+   .. method:: select(index)
+
+      .. versionadded:: 1.3
+
+      Select the item with the given index.
+
+      :arg index: The index to select, starting from ``1``.
+      :type index: :class:`int`
+*/
+int LuaListselect::select(lua_State* L) {
+	get()->select(luaL_checkuint32(L, 2) - 1);
+	return 0;
+}
+
+/* RST
+   .. method:: clear()
+
+      .. versionadded:: 1.3
+
+      Remove all entries from the listselect.
+*/
+int LuaListselect::clear(lua_State* /* L */) {
+	get()->clear();
+	return 0;
+}
 
 /* RST
    .. method:: add(label, value
@@ -4708,6 +5094,58 @@ static int L_show_messagebox(lua_State* L) {
 	return 1;
 }
 
+/* RST
+.. method:: is_rtl()
+
+   .. versionadded:: 1.3
+
+   Returns whether the current locale uses right-to-left text.
+
+   :returns: Whether the text flow is right-to-left.
+   :rtype: :class:`boolean`
+*/
+static int L_is_rtl(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(UI::g_fh->fontset()->is_rtl()));
+	return 1;
+}
+
+/* RST
+.. method:: get_clipboard()
+
+   .. versionadded:: 1.3
+
+   Returns the current content of the system-wide clipboard.
+
+   This may be empty if the clipboard is currently empty or does not contain text data.
+
+   :returns: The clipboard content.
+   :rtype: :class:`string`
+*/
+static int L_get_clipboard(lua_State* L) {
+	lua_pushstring(L, SDL_HasClipboardText() != 0 ? SDL_GetClipboardText() : "");
+	return 1;
+}
+
+/* RST
+.. method:: set_clipboard(text)
+
+   .. versionadded:: 1.3
+
+   Set the content of the system-wide clipboard.
+
+   :arg text: Text to set.
+   :type text: :class:`string`
+*/
+static int L_set_clipboard(lua_State* L) {
+	SDL_SetClipboardText(luaL_checkstring(L, 1));
+	return 0;
+}
+
+// TODO(Nordfriese): We do not currently expose the primary selection buffer because it is
+// only available if we compile with a sufficiently recent SDL version. Once this becomes the
+// standard for all deployments, add the primary buffer bindings
+// (HAS_PRIMARY_SELECTION_BUFFER, SDL_SetPrimarySelectionText, SDL_GetPrimarySelectionText) here.
+
 const static struct luaL_Reg wlui[] = {
    {"set_user_input_allowed", &L_set_user_input_allowed},
    {"get_user_input_allowed", &L_get_user_input_allowed},
@@ -4718,6 +5156,9 @@ const static struct luaL_Reg wlui[] = {
    {"show_messagebox", &L_show_messagebox},
    {"shortcut_exists", &L_shortcut_exists},
    {"get_all_keyboard_shortcut_names", &L_get_all_keyboard_shortcut_names},
+   {"is_rtl", &L_is_rtl},
+   {"get_clipboard", &L_get_clipboard},
+   {"set_clipboard", &L_set_clipboard},
    {nullptr, nullptr}};
 
 void luaopen_wlui(lua_State* L, const bool game_or_editor) {
@@ -4728,6 +5169,10 @@ void luaopen_wlui(lua_State* L, const bool game_or_editor) {
 	lua_pop(L, 1);            // S:
 
 	register_class<LuaPanel>(L, "ui");
+
+	register_class<LuaBox>(L, "ui", true);
+	add_parent<LuaBox, LuaPanel>(L);
+	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaButton>(L, "ui", true);
 	add_parent<LuaButton, LuaPanel>(L);
