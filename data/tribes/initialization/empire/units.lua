@@ -1826,7 +1826,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Weaving Mill
             lore_author = pgettext("empire_building", "Motto of the Weavers’ Guild"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Weaving Mill
-            purpose = pgettext("empire_building", "Weaves cloth out of wool.")
+            purpose = pgettext("empire_building", "Weaves cloth out of wool."),
+            -- TRANSLATORS: Performance helptext for an Empire production site: Weaving Mill
+            performance = pgettext("empire_building", "The weaving mill needs %s on average to produce one cloth."):bformat(format_seconds(44))
          }
       },
       {
