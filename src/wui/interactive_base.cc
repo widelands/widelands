@@ -71,6 +71,7 @@
 #include "wui/game_objectives_menu.h"
 #include "wui/info_panel.h"
 #include "wui/mapviewpixelfunctions.h"
+#include "wui/marketwindow.h"
 #include "wui/militarysitewindow.h"
 #include "wui/minimap.h"
 #include "wui/seafaring_statistics_menu.h"
@@ -1780,7 +1781,12 @@ UI::UniqueWindow* InteractiveBase::show_building_window(const Widelands::Coords&
 			                    avoid_fastclick, workarea_preview_wanted);
 		};
 		break;
-	// TODO(sirver,trading): Add UI for market.
+	case Widelands::MapObjectType::MARKET:
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
+			new MarketWindow(*this, registry, *dynamic_cast<Widelands::Market*>(building),
+			                 avoid_fastclick, workarea_preview_wanted);
+		};
+		break;
 	default:
 		log_err_time(egbase().get_gametime(), "Unable to show window for building '%s', type '%s'.\n",
 		             building->descr().name().c_str(), to_string(building->descr().type()).c_str());

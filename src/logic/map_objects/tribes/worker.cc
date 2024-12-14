@@ -3446,6 +3446,9 @@ const Bob::Task* Worker::Loader::get_task(const std::string& name) {
 	if (name == "fugitive") {
 		return &taskFugitive;
 	}
+	if (name == "carry_trade_item") {
+		return &taskCarryTradeItem;
+	}
 	if (name == "geologist") {
 		return &taskGeologist;
 	}
