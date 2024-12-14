@@ -156,7 +156,8 @@ int LuaDropdown::highlight_item(lua_State* L) {
 		             "dropdown is 1-%u.",
 		             desired_item, get()->get_name().c_str(), get()->size());
 	}
-	verb_log_info("Highlighting item %u in dropdown '%s'\n", desired_item, get()->get_name().c_str());
+	verb_log_info(
+	   "Highlighting item %u in dropdown '%s'\n", desired_item, get()->get_name().c_str());
 	// Open the dropdown
 	get()->set_list_visibility(true);
 
