@@ -27,10 +27,7 @@ UI::PanelStyle panel_style(lua_State* L) {
 	return is_main_menu(L) ? UI::PanelStyle::kFsMenu : UI::PanelStyle::kWui;
 }
 
-UI::Align get_table_align(lua_State* L,
-                                 const char* key,
-                                 bool mandatory,
-                                 UI::Align default_value) {
+UI::Align get_table_align(lua_State* L, const char* key, bool mandatory, UI::Align default_value) {
 	lua_getfield(L, -1, key);
 	if (!lua_isnil(L, -1)) {
 		std::string str = luaL_checkstring(L, -1);
@@ -50,11 +47,10 @@ UI::Align get_table_align(lua_State* L,
 	return default_value;
 }
 
-UI::Box::Resizing
-get_table_box_resizing(lua_State* L,
-                       const char* key,
-                       bool mandatory,
-                       UI::Box::Resizing default_value) {
+UI::Box::Resizing get_table_box_resizing(lua_State* L,
+                                         const char* key,
+                                         bool mandatory,
+                                         UI::Box::Resizing default_value) {
 	lua_getfield(L, -1, key);
 	if (!lua_isnil(L, -1)) {
 		std::string str = luaL_checkstring(L, -1);
@@ -76,11 +72,10 @@ get_table_box_resizing(lua_State* L,
 	return default_value;
 }
 
-UI::DropdownType
-get_table_dropdown_type(lua_State* L,
-                        const char* key,
-                        bool mandatory,
-                        UI::DropdownType default_value) {
+UI::DropdownType get_table_dropdown_type(lua_State* L,
+                                         const char* key,
+                                         bool mandatory,
+                                         UI::DropdownType default_value) {
 	lua_getfield(L, -1, key);
 	if (!lua_isnil(L, -1)) {
 		std::string str = luaL_checkstring(L, -1);
@@ -104,11 +99,10 @@ get_table_dropdown_type(lua_State* L,
 	return default_value;
 }
 
-UI::ListselectLayout
-get_table_listselect_layout(lua_State* L,
-                            const char* key,
-                            bool mandatory,
-                            UI::ListselectLayout default_value) {
+UI::ListselectLayout get_table_listselect_layout(lua_State* L,
+                                                 const char* key,
+                                                 bool mandatory,
+                                                 UI::ListselectLayout default_value) {
 	lua_getfield(L, -1, key);
 	if (!lua_isnil(L, -1)) {
 		std::string str = luaL_checkstring(L, -1);
@@ -128,11 +122,10 @@ get_table_listselect_layout(lua_State* L,
 	return default_value;
 }
 
-UI::ButtonStyle
-get_table_button_style(lua_State* L,
-                       const char* key,
-                       bool mandatory,
-                       UI::ButtonStyle default_value) {
+UI::ButtonStyle get_table_button_style(lua_State* L,
+                                       const char* key,
+                                       bool mandatory,
+                                       UI::ButtonStyle default_value) {
 	const bool mainmenu = is_main_menu(L);
 
 	lua_getfield(L, -1, key);
@@ -177,11 +170,10 @@ UI::TabPanelStyle get_tab_panel_style(lua_State* L) {
 	return UI::TabPanelStyle::kWuiLight;
 }
 
-UI::Button::VisualState get_table_button_visual_state(
-   lua_State* L,
-   const char* key,
-   bool mandatory,
-   UI::Button::VisualState default_value) {
+UI::Button::VisualState get_table_button_visual_state(lua_State* L,
+                                                      const char* key,
+                                                      bool mandatory,
+                                                      UI::Button::VisualState default_value) {
 	lua_getfield(L, -1, key);
 	if (!lua_isnil(L, -1)) {
 		std::string str = luaL_checkstring(L, -1);
@@ -202,9 +194,9 @@ UI::Button::VisualState get_table_button_visual_state(
 }
 
 unsigned get_table_button_box_orientation(lua_State* L,
-                                                 const char* key,
-                                                 bool mandatory,
-                                                 unsigned default_value) {
+                                          const char* key,
+                                          bool mandatory,
+                                          unsigned default_value) {
 	lua_getfield(L, -1, key);
 	if (!lua_isnil(L, -1)) {
 		std::string str = luaL_checkstring(L, -1);

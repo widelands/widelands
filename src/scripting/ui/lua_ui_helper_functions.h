@@ -29,9 +29,9 @@ namespace LuaUi {
 
 UI::PanelStyle panel_style(lua_State* L);
 UI::Align get_table_align(lua_State* L,
-                                 const char* key,
-                                 bool mandatory,
-                                 UI::Align default_value = UI::Align::kCenter);
+                          const char* key,
+                          bool mandatory,
+                          UI::Align default_value = UI::Align::kCenter);
 UI::Box::Resizing
 get_table_box_resizing(lua_State* L,
                        const char* key,
@@ -60,9 +60,9 @@ UI::Button::VisualState get_table_button_visual_state(
    bool mandatory,
    UI::Button::VisualState default_value = UI::Button::VisualState::kRaised);
 unsigned get_table_button_box_orientation(lua_State* L,
-                                                 const char* key,
-                                                 bool mandatory,
-                                                 unsigned default_value = UI::Box::Vertical);
+                                          const char* key,
+                                          bool mandatory,
+                                          unsigned default_value = UI::Box::Vertical);
 
 template <typename... Args>
 static inline void do_set_global_string(lua_State*, const char*, Args...) {
