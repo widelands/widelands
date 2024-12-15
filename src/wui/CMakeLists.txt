@@ -266,6 +266,8 @@ wl_library(wui
     militarysitewindow.h
     minimap.cc
     minimap.h
+    music_player.cc
+    music_player.h
     pinned_note.cc
     pinned_note.h
     plot_area.cc
@@ -362,3 +364,4 @@ wl_library(wui
     wui_sound_options
     wui_waresdisplay
 )
+

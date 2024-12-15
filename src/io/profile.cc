@@ -280,6 +280,16 @@ Section::Value& Section::create_val_duplicate(char const* const name, char const
 	return values_.back();
 }
 
+std::vector<Section::Value> Section::get_values() {
+	return values_;
+}
+
+void Section::mark_values() {
+	for (Section::Value& val : values_) {
+		val.mark_used();
+	}
+}
+
 /**
  * Return the integer value of the given key or throw an exception if a
  * problem arises.
