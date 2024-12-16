@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-12-14 03:03+0000\n"
+"POT-Creation-Date: 2024-12-16 03:14+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2015\n"
 "Language-Team: Hebrew (http://app.transifex.com/widelands/widelands/language/he/)\n"
@@ -4028,13 +4028,15 @@ msgstr ""
 msgid "%1% (%2%)"
 msgstr ""
 
-#: ../../../../src/scripting/lua_ui.cc:1265
-#: ../../../../src/scripting/lua_ui.cc:1287 ../../../../src/wui/plugins.cc:42
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:63
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:85
+#: ../../../../src/wui/plugins.cc:42
 msgid "Plugin Error"
 msgstr ""
 
-#: ../../../../src/scripting/lua_ui.cc:1266
-#: ../../../../src/scripting/lua_ui.cc:1288 ../../../../src/wui/plugins.cc:42
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:64
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:86
+#: ../../../../src/wui/plugins.cc:42
 #, c-format
 msgid ""
 "Error when running plugin:\n"
