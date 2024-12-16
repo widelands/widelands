@@ -30,9 +30,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-03 02:40+0000\n"
+"POT-Creation-Date: 2024-12-05 03:11+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Laurent Godard, 2024\n"
+"Last-Translator: Renaud Bouchard, 2016-2022,2024\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1836,7 +1836,7 @@ msgstr "Construit des bateaux destinés a la colonisation de nouveaux territoire
 #: ../../../../data/tribes/initialization/frisians/units.lua:2237
 msgctxt "building"
 msgid "Needs wide open water nearby."
-msgstr ""
+msgstr "Nécessite grandes eaux ouvertes aux alentours."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Shipyard,
 #. part 1
@@ -3214,18 +3214,19 @@ msgstr "La fabrique d'armes et le chantier naval utilisent aussi des planches po
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:472
 msgctxt "atlanteans_ware"
 msgid ""
-"Spider silk is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth or tabards in a weaving mill."
-msgstr "La soie d'araignée est produite par des araignées élevées dans des fermes d'élevage. Elle est ensuite transformée en toile d'araignée ou en tabards dans une usine de tissage."
+"Spider silk is produced by spiders, which are bred by spider farms. It can "
+"be processed into spidercloth or tabards in a weaving mill, or used to make "
+"tools in the toolsmithy."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:481
 msgctxt "atlanteans_ware"
 msgid ""
 "Spidercloth is made out of spider silk in a weaving mill. It is used in the "
-"toolsmithy and the shipyard. Also some higher developed buildings need "
-"spidercloth for their construction."
-msgstr "L'étoffe en soie d'araignée est fabriquée à partir de soie d'araignée dans un atelier de tissage. Certains bâtiments plus avancés ont aussi besoin d'étoffe en soie  d'araignée pour leur construction."
+"shipyard. Also some higher developed buildings need spidercloth for their "
+"construction."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fish
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:492
@@ -4268,7 +4269,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1524
 msgctxt "atlanteans_building"
 msgid "Prophecy of the foresters’ guild"
-msgstr ""
+msgstr "Prophétie de la guilde des forestiers "
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Forester's House, part 1
@@ -4324,7 +4325,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1552
 msgctxt "atlanteans_building"
 msgid "A song from the fishers’ guild"
-msgstr ""
+msgstr "Une chanson de la guilde des pêcheurs"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Fisher's House, part 1
@@ -4633,7 +4634,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1691
 msgctxt "atlanteans_building"
 msgid "Miller arguing with a sawyer"
-msgstr ""
+msgstr "Meunier discutant avec un scieur."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Mill
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1693
@@ -4655,7 +4656,7 @@ msgstr "Cuit le pain pour nourrir les éclaireurs, les mineurs et entraîner les
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1702
 msgctxt "atlanteans_building"
 msgid "Will need cornmeal and blackroot flour."
-msgstr ""
+msgstr "Nécessitera de la semoule de maîs et de la farine de racine noire."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site:  Bakery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1704
@@ -4671,7 +4672,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1708
 msgctxt "atlanteans_building"
 msgid "Head of the bakers’ guild"
-msgstr ""
+msgstr "Chef de la guilde des boulangers"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Bakery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1710
@@ -4720,7 +4721,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1723
 msgctxt "atlanteans_building"
 msgid "A black voice from inside the charcoal kiln"
-msgstr ""
+msgstr "Une voix grave venant de l'intérieur du four à charbon."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Charcoal Kiln
@@ -4755,7 +4756,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1736
 msgctxt "atlanteans_building"
 msgid "A member of the smelters’ guild"
-msgstr ""
+msgstr "Un membre de la guilde des fondeurs"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Smelting Works
@@ -4783,14 +4784,14 @@ msgstr "Forge tous les outils dont vos ouvriers ont besoin."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1747
 msgctxt "atlanteans_building"
 msgid "People’s power working for the benefit of all"
-msgstr ""
+msgstr "Le pouvoir populaire travaille au bénéfice de tous"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Toolsmithy
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1749
 msgctxt "atlanteans_building"
 msgid "Faded sign found on top of this building"
-msgstr ""
+msgstr "Pancarte décolorée au sommet de ce bâtiment"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Toolsmithy
@@ -4817,7 +4818,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "You hear that sound of metal strident? The weapon smith just forged a "
 "trident!"
-msgstr ""
+msgstr "Avez vous entendu ce son de métal strident ? Le forgeron d'armes vient juste de forger un trident !"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Weapon
 #. Smithy
@@ -4827,7 +4828,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1778
 msgctxt "atlanteans_building"
 msgid "Atlantean nursery rhyme"
-msgstr ""
+msgstr "Comptine Atlante"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Weapon
 #. Smithy
@@ -4889,7 +4890,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1791
 msgctxt "atlanteans_building"
 msgid "Recruiting poster"
-msgstr ""
+msgstr "Affiche de recrutement"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Barracks
@@ -4911,14 +4912,14 @@ msgstr "Élève de forts chevaux Atlantes pour les ajouter au système de transp
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1804
 msgctxt "atlanteans_building"
 msgid "I walk all day just back and forth. I need? I need … I need a horse!"
-msgstr ""
+msgstr "Je vais et reviens toute la journée. J'ai besoin ? J'ai besoin... J'ai besoin d'un cheval !"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Horse
 #. Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1806
 msgctxt "atlanteans_building"
 msgid "Busy carrier murmuring to himself"
-msgstr ""
+msgstr "Transporteur occupé murmure pour lui-même."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1813
@@ -4936,7 +4937,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1817
 msgctxt "atlanteans_building"
 msgid "Atlantean harvesting song"
-msgstr ""
+msgstr "Chant de récolte atlante"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1819
@@ -4964,7 +4965,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1831
 msgctxt "atlanteans_building"
 msgid "Blackroot farmer asked by a foreigner"
-msgstr ""
+msgstr "Un fermier de racines noires interrogé par un étranger"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Blackroot Farm
@@ -4997,7 +4998,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1846
 msgctxt "atlanteans_building"
 msgid "A spider breeder showing his farm"
-msgstr ""
+msgstr "Un éleveur d'araignées faisant visiter sa ferme"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weaving
 #. Mill
@@ -5022,7 +5023,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1859
 msgctxt "atlanteans_building"
 msgid "Part of the silkweavers’ song"
-msgstr ""
+msgstr "Une partie de la chanson des tisserands de soie"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Weaving
 #. Mill
@@ -5041,7 +5042,7 @@ msgstr ""
 msgctxt "atlanteans_building"
 msgid ""
 "Carves precious (and normal) stones out of the rock in mountain terrain."
-msgstr ""
+msgstr "Taille de précieuses, (et normales,) pierres de la roche dans les terrains montagneux. "
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Crystal Mine
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1872
@@ -5057,7 +5058,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1875
 msgctxt "atlanteans_building"
 msgid "First part of the Atlantean almanach on architecture"
-msgstr ""
+msgstr "Première partie de l'almanach atlante sur l'architecture"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Crystal
 #. Mine
@@ -5109,7 +5110,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1907
 msgctxt "atlanteans_building"
 msgid "Song from the miners’ guild"
-msgstr ""
+msgstr "Chanson de la guilde des mineurs"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Coal
 #. Mine
@@ -5186,7 +5187,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1923
 msgctxt "atlanteans_building"
 msgid "Miner’s prayer"
-msgstr ""
+msgstr "Prière des mineurs"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Gold
 #. Mine
@@ -5225,7 +5226,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1942
 msgctxt "atlanteans_building"
 msgid "Engraving on the entrance to the dungeon"
-msgstr ""
+msgstr "Gravure sur l'entrée du donjon"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean training site: Labyrinth,
 #. part 1
@@ -5297,7 +5298,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1974
 msgctxt "atlanteans_building"
 msgid "Officer visiting a remote guardhouse"
-msgstr ""
+msgstr "Officier visitant un poste de garde éloigné. "
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Guardhall
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1985
@@ -5310,7 +5311,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1987
 msgctxt "atlanteans_building"
 msgid "Scribbling on the wall of a guardhall"
-msgstr ""
+msgstr "Gribouillage sur le mur de la salle de garde"
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Small Tower
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1998
@@ -5325,7 +5326,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2000
 msgctxt "atlanteans_building"
 msgid "Notes on the building instructions"
-msgstr ""
+msgstr "Notes sur les instructions de construction"
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Tower
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2012
@@ -5449,7 +5450,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2093
 msgctxt "atlanteans_building"
 msgid "Transcript from oral tradition"
-msgstr ""
+msgstr "Transcrit depuis une tradition orale"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Shipyard, part 1
@@ -5943,7 +5944,7 @@ msgstr "Les ouvriers arrivent"
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2292
 msgctxt "atlanteans"
 msgid "Expert missing"
-msgstr ""
+msgstr "Expert manquant"
 
 #. TRANSLATORS: Productivity label on an Atlantean building if there is more
 #. than 1 experienced worker missing. If you need plural forms here, please
@@ -5951,7 +5952,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2294
 msgctxt "atlanteans"
 msgid "Experts missing"
-msgstr ""
+msgstr "Experts manquants"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -10103,7 +10104,7 @@ msgstr "Les ouvriers arrivent"
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2598
 msgctxt "barbarians"
 msgid "Expert missing"
-msgstr ""
+msgstr "Expert manquant"
 
 #. TRANSLATORS: Productivity label on a Barbarian building if there is more
 #. than 1 experienced worker missing. If you need plural forms here, please
@@ -10111,7 +10112,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2600
 msgctxt "barbarians"
 msgid "Experts missing"
-msgstr ""
+msgstr "Experts manquants"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -10758,7 +10759,7 @@ msgstr "Omnes viæ ducunt Fremilem."
 #. "Omnes viæ ducunt Fremilem."
 #: ../../../../data/tribes/initialization/empire/units.lua:1154
 msgid "All roads lead to Fremil."
-msgstr ""
+msgstr "Toutes les routes mènent à Fremil."
 
 #. TRANSLATORS: Lore author helptext for an Empire warehouse: Headquarters
 #: ../../../../data/tribes/initialization/empire/units.lua:1158
@@ -10857,7 +10858,7 @@ msgstr "Navigare necesse est."
 #. "Navigare necesse est."
 #: ../../../../data/tribes/initialization/empire/units.lua:1217
 msgid "To sail is necessary."
-msgstr ""
+msgstr "Naviguer est nécessaire"
 
 #. TRANSLATORS: Lore author helptext for an Empire warehouse: Port
 #: ../../../../data/tribes/initialization/empire/units.lua:1221
@@ -11016,14 +11017,14 @@ msgstr "Vivat, crescat, floreat!"
 #. "Vivat, crescat, floreat!"
 #: ../../../../data/tribes/initialization/empire/units.lua:1301
 msgid "Live, grow, and bloom!"
-msgstr ""
+msgstr "Vivre, grandir, et fleurir !"
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Forester's
 #. House
 #: ../../../../data/tribes/initialization/empire/units.lua:1304
 msgctxt "empire_building"
 msgid "Blessing from the god Silvanus"
-msgstr ""
+msgstr " \nBénédiction du dieu Silvain"
 
 #. TRANSLATORS: Note helptext for an Empire production site: Forester's House
 #: ../../../../data/tribes/initialization/empire/units.lua:1308
@@ -11152,7 +11153,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1867
 msgctxt "empire_building"
 msgid "Imperial proverb"
-msgstr ""
+msgstr "Proverbe Impérial"
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Well, part
 #. 1
@@ -11220,7 +11221,7 @@ msgstr "Mens agitat molem."
 #. "Mens agitat molem."
 #: ../../../../data/tribes/initialization/empire/units.lua:1439
 msgid "The mind moves boulders."
-msgstr ""
+msgstr "L'esprit déplace des montagnes."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site:
 #. Stonemason's House
