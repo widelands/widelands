@@ -2066,7 +2066,9 @@ wl.Descriptions():new_tribe {
                pgettext("empire_building", "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.")
             },
             -- TRANSLATORS: Note helptext for an Empire training site: Arena
-            note = pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.")
+            note = pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came."),
+            -- TRANSLATORS: Performance helptext for an Empire training site: Arena
+            performance = pgettext("empire_building", "If all needed wares are delivered in time, an arena can train one soldier first level in evade in %s on average."):bformat(format_seconds(35))
          }
       },
       {
@@ -2091,7 +2093,9 @@ wl.Descriptions():new_tribe {
                pgettext("empire_building", "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.")
             },
             -- TRANSLATORS: Note helptext for an Empire training site: Colosseum
-            note = pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.")
+            note = pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came."),
+            -- TRANSLATORS: Performance helptext for an Empire training site: Colosseum
+            performance = pgettext("empire_building", "If all needed wares are delivered in time, a colosseum can train one soldier one level in evade in %s on average."):bformat(format_seconds(35))
          }
       },
       {
@@ -2118,7 +2122,9 @@ wl.Descriptions():new_tribe {
                pgettext("empire_building", "Equips the soldiers with all necessary weapons and armor parts.")
             },
             -- TRANSLATORS: Note helptext for an Empire training site: Training Camp
-            note = pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.")
+            note = pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came."),
+            -- TRANSLATORS: Performance helptext for an Empire training site: Training Camp
+            performance = pgettext("empire_building", "If all needed wares are delivered in time, a training camp can train one soldier one level in attack or health in %s on average."):bformat(format_seconds(35))
          }
       },
 
