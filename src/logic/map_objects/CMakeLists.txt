@@ -89,6 +89,8 @@ wl_library(logic_map_objects
     tribes/market.h
     tribes/militarysite.cc
     tribes/militarysite.h
+    tribes/naval_invasion_base.cc
+    tribes/naval_invasion_base.h
     tribes/partially_finished_building.cc
     tribes/partially_finished_building.h
     tribes/production_program.cc
@@ -126,6 +128,31 @@ wl_library(logic_map_objects
     tribes/worker_descr.h
     tribes/worker_program.cc
     tribes/worker_program.h
+    tribes/worker_tasks/buildingwork.cc
+    tribes/worker_tasks/carrier_road.cc
+    tribes/worker_tasks/carrier_transport.cc
+    tribes/worker_tasks/carrytradeitem.cc
+    tribes/worker_tasks/dropoff.cc
+    tribes/worker_tasks/ferry_row.cc
+    tribes/worker_tasks/ferry_unemployed.cc
+    tribes/worker_tasks/fetchfromflag.cc
+    tribes/worker_tasks/fugitive.cc
+    tribes/worker_tasks/geologist.cc
+    tribes/worker_tasks/gowarehouse.cc
+    tribes/worker_tasks/leavebuilding.cc
+    tribes/worker_tasks/program.cc
+    tribes/worker_tasks/releaserecruit.cc
+    tribes/worker_tasks/return.cc
+    tribes/worker_tasks/scout.cc
+    tribes/worker_tasks/shipping.cc
+    tribes/worker_tasks/soldier_attack.cc
+    tribes/worker_tasks/soldier_battle.cc
+    tribes/worker_tasks/soldier_defense.cc
+    tribes/worker_tasks/soldier_die.cc
+    tribes/worker_tasks/soldier_moveinbattle.cc
+    tribes/worker_tasks/soldier_navalinvasion.cc
+    tribes/worker_tasks/transfer.cc
+    tribes/worker_tasks/waitforcapacity.cc
     walkingdir.cc
     walkingdir.h
     world/critter.cc
