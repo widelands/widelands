@@ -128,6 +128,25 @@ wl_library(logic_map_objects
     tribes/worker_descr.h
     tribes/worker_program.cc
     tribes/worker_program.h
+    tribes/worker_programs/animate.cc
+    tribes/worker_programs/breed.cc
+    tribes/worker_programs/callobject.cc
+    tribes/worker_programs/construct.cc
+    tribes/worker_programs/createbob.cc
+    tribes/worker_programs/createware.cc
+    tribes/worker_programs/findobject.cc
+    tribes/worker_programs/findresources.cc
+    tribes/worker_programs/findspace.cc
+    tribes/worker_programs/mine.cc
+    tribes/worker_programs/plant.cc
+    tribes/worker_programs/playsound.cc
+    tribes/worker_programs/removeobject.cc
+    tribes/worker_programs/repeatsearch.cc
+    tribes/worker_programs/return.cc
+    tribes/worker_programs/scout.cc
+    tribes/worker_programs/script.cc
+    tribes/worker_programs/terraform.cc
+    tribes/worker_programs/walk.cc
     tribes/worker_tasks/buildingwork.cc
     tribes/worker_tasks/carrier_road.cc
     tribes/worker_tasks/carrier_transport.cc
