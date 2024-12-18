@@ -106,4 +106,3 @@ void Worker::update_task_carry_trade_item(Game& game) {
 }
 
 }  // namespace Widelands
-

@@ -239,4 +239,3 @@ void Worker::cancel_task_transfer(Game& game) {
 }
 
 }  // namespace Widelands
-

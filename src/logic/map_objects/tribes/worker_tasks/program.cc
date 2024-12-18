@@ -89,4 +89,3 @@ void Worker::set_program_objvar(Game& game, State& state, MapObject* obj) {
 }
 
 }  // namespace Widelands
-

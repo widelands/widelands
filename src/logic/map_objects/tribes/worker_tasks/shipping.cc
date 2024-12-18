@@ -105,4 +105,3 @@ void Worker::shipping_update(Game& game, State& state) {
 }
 
 }  // namespace Widelands
-

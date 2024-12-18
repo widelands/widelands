@@ -38,4 +38,3 @@ void Worker::releaserecruit_update(Game& game, State& /* state */) {
 }
 
 }  // namespace Widelands
-

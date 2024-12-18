@@ -126,4 +126,3 @@ void Worker::return_update(Game& game, State& state) {
 }
 
 }  // namespace Widelands
-

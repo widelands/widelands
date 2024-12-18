@@ -27,7 +27,8 @@
 
 namespace Widelands {
 
-static NavalInvasionBaseDescr g_naval_invasion_base_descr("naval_invasion_base", "Naval Invasion Base");
+static NavalInvasionBaseDescr g_naval_invasion_base_descr("naval_invasion_base",
+                                                          "Naval Invasion Base");
 
 const NavalInvasionBaseDescr& NavalInvasionBase::descr() const {
 	return g_naval_invasion_base_descr;

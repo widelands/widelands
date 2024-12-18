@@ -126,4 +126,3 @@ void Worker::gowarehouse_pop(Game& /* game */, State& /* state */) {
 }
 
 }  // namespace Widelands
-

@@ -89,9 +89,9 @@ void Worker::check_visible_sites(const Map& map, const Player& player) {
  * @param found_sites list of miliar sites to consider.
  */
 void Worker::scout_add_sites(Game& game,
-                       const Map& map,
-                       const Player& player,
-                       const std::vector<ImmovableFound>& found_sites) {
+                             const Map& map,
+                             const Player& player,
+                             const std::vector<ImmovableFound>& found_sites) {
 
 	// If there are many enemy sites, push a random walk request into queue every third finding.
 	uint32_t haveabreak = 3;
@@ -378,4 +378,3 @@ void Worker::scout_update(Game& game, State& state) {
 }
 
 }  // namespace Widelands
-

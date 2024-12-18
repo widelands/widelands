@@ -160,4 +160,3 @@ void Worker::geologist_update(Game& game, State& state) {
 }
 
 }  // namespace Widelands
-

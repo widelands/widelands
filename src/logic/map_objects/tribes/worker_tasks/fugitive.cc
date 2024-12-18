@@ -138,4 +138,3 @@ void Worker::fugitive_update(Game& game, State& state) {
 }
 
 }  // namespace Widelands
-

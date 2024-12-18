@@ -91,4 +91,3 @@ void Worker::update_task_buildingwork(Game& game) {
 }
 
 }  // namespace Widelands
-

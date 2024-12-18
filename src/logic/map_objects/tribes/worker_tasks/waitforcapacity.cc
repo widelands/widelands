@@ -90,4 +90,3 @@ bool Worker::wakeup_flag_capacity(Game& game, Flag& flag) {
 }
 
 }  // namespace Widelands
-

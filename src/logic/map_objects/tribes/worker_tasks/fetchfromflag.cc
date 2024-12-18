@@ -129,4 +129,3 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 }
 
 }  // namespace Widelands
-

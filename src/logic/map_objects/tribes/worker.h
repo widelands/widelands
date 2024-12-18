@@ -290,9 +290,9 @@ private:
 	void prepare_scouts_worklist(const Map& map, const Coords& hutpos);
 	void check_visible_sites(const Map& map, const Player& player);
 	void scout_add_sites(Game& game,
-	               const Map& map,
-	               const Player& player,
-	               const std::vector<ImmovableFound>& found_sites);
+	                     const Map& map,
+	                     const Player& player,
+	                     const std::vector<ImmovableFound>& found_sites);
 	bool scout_random_walk(Game& game, const Map& map, const State& state);
 	bool scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceToScout& scoutat);
 

@@ -125,4 +125,3 @@ bool Worker::wakeup_leave_building(Game& game, Building& building) {
 }
 
 }  // namespace Widelands
-

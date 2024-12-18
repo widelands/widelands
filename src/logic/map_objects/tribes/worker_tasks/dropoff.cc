@@ -107,4 +107,3 @@ void Worker::dropoff_update(Game& game, State& /* state */) {
 }
 
 }  // namespace Widelands
-
