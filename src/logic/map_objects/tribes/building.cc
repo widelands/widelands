@@ -157,7 +157,8 @@ void BuildingDescr::set_enhancement(Descriptions& descriptions, LuaTable& enhanc
 	   Buildcost(enhancement_table.get_table("enhancement_return_on_dismantle"), descriptions));
 
 	if (enhancement_table.has_key("base_animation")) {
-		enhanced_building->enhancement_base_image_ = enhanced_building->get_animation(enhancement_table.get_string("base_animation"), nullptr);
+		enhanced_building->enhancement_base_image_ =
+		   enhanced_building->get_animation(enhancement_table.get_string("base_animation"), nullptr);
 	} else {
 		enhanced_building->enhancement_base_image_ = 0;
 	}

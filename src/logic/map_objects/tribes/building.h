@@ -220,7 +220,8 @@ private:
 	AI::BuildingHints hints_;                // hints (knowledge) for computer players
 	DescriptionIndex built_over_immovable_;  // can be built only on nodes where an immovable with
 	                                         // this attribute stands
-	uint32_t enhancement_base_image_{0};  // The override base image when enhancing to this building, if any.
+	uint32_t enhancement_base_image_{
+	   0};  // The override base image when enhancing to this building, if any.
 
 	std::string owning_tribe_;
 
