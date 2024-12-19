@@ -109,7 +109,11 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	} else if (was != nullptr) {
 		//  First pic in first series, but there was another building here before –
 		//  get its most fitting picture and draw it instead
-		animation_id = was->get_unoccupied_animation();
+		if (becomes->get_enhancement_base_image() != 0) {
+			animation_id = becomes->get_enhancement_base_image();
+		} else {
+			animation_id = was->get_unoccupied_animation();
+		}
 		time =
 		   Time(kFrameLength * (g_animation_manager->get_animation(animation_id).nr_frames() - 1));
 	}

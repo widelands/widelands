@@ -156,6 +156,13 @@ void BuildingDescr::set_enhancement(Descriptions& descriptions, LuaTable& enhanc
 	   Buildcost(enhancement_table.get_table("enhancement_cost"), descriptions),
 	   Buildcost(enhancement_table.get_table("enhancement_return_on_dismantle"), descriptions));
 
+	if (enhancement_table.has_key("base_animation")) {
+		enhanced_building->enhancement_base_image_ =
+		   enhanced_building->get_animation(enhancement_table.get_string("base_animation"), nullptr);
+	} else {
+		enhanced_building->enhancement_base_image_ = 0;
+	}
+
 	// Merge the enhancements workarea info into this building's workarea info
 	for (const auto& area : enhanced_building->workarea_info_) {
 		std::set<std::string>& strs = workarea_info_[area.first];
