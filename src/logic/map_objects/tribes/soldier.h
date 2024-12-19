@@ -218,6 +218,9 @@ class Soldier : public Worker {
 public:
 	enum class InfoMode { kWalkingAround, kInBuilding };
 
+	static constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
+	static constexpr int kPortSpaceRadius = 2;
+
 	explicit Soldier(const SoldierDescr&);
 
 	bool init(EditorGameBase&) override;
@@ -410,57 +413,6 @@ protected:
 
 public:
 	void do_save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
-};
-
-class NavalInvasionBaseDescr : public BobDescr {
-public:
-	NavalInvasionBaseDescr(char const* const init_name, char const* const init_descname)
-	   : BobDescr(init_name,
-	              init_descname,
-	              MapObjectType::NAVAL_INVASION_BASE,
-	              MapObjectDescr::OwnerType::kTribe) {
-	}
-	~NavalInvasionBaseDescr() override = default;
-	[[nodiscard]] Bob& create_object() const override;
-
-private:
-	DISALLOW_COPY_AND_ASSIGN(NavalInvasionBaseDescr);
-};
-
-class NavalInvasionBase : public Bob {
-public:
-	NavalInvasionBase();
-	static NavalInvasionBase* create(EditorGameBase& egbase, Soldier& soldier, const Coords& pos);
-
-	const NavalInvasionBaseDescr& descr() const;
-	void init_auto_task(Game& game) override;
-	void cleanup(EditorGameBase&) override;
-	void log_general_info(const EditorGameBase&) const override;
-
-	void add_soldier(EditorGameBase& egbase, Soldier* soldier);
-
-	[[nodiscard]] const std::set<OPtr<Soldier>>& get_soldiers() const {
-		return soldiers_;
-	}
-
-	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
-	static Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
-
-private:
-	std::set<OPtr<Soldier>> soldiers_;
-
-	void check_unconquer();
-
-protected:
-	struct Loader : Bob::Loader {
-		Loader() = default;
-
-		void load(FileRead& fr);
-		void load_pointers() override;
-
-	private:
-		std::set<Serial> soldiers_;
-	};
 };
 
 }  // namespace Widelands
