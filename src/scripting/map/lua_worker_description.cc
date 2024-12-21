@@ -103,7 +103,7 @@ int LuaWorkerDescription::get_promoted_from(lua_State* L) {
 		   L, egbase.descriptions().get_worker_descr(promoted_from));
 	}
 	lua_pushnil(L);
-	return 0;
+	return 1;
 }
 
 /* RST

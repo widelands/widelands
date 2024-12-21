@@ -520,7 +520,7 @@ void TribeDescr::load_workers(const LuaTable& table, Descriptions& descriptions)
 				// Add helptexts
 				load_helptexts(worker_descr, *worker_table);
 
-				// Register at enhanced building
+				// Register at promoted woker
 				const DescriptionIndex& becomes = worker_descr->becomes();
 				if (becomes != INVALID_INDEX) {
 					descriptions.get_mutable_worker_descr(becomes)->set_promoted_from(workerindex);

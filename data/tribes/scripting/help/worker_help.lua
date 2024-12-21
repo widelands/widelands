@@ -163,7 +163,7 @@ function worker_help_string(tribe, worker_description)
 
    result = result .. worker_help_employers_string(worker_description)
 
-   -- TODO(GunChleoc): Add "enhanced from" info in one_tribe branch
+   -- TODO(hessenfarmer): make this work for more then 2 promotion steps
    local becomes_description = worker_description.becomes
    local promoted_from_description = worker_description.promoted_from
    if (promoted_from_description) then
