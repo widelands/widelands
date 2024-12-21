@@ -32,7 +32,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-12-05 03:11+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Renaud Bouchard, 2016-2022,2024\n"
+"Last-Translator: Laurent Godard, 2024\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1772,7 +1772,7 @@ msgstr "Construit des traversiers."
 #: ../../../../data/tribes/initialization/amazons/units.lua:1684
 msgctxt "amazons_building"
 msgid "Needs water nearby. Be aware ferries carry wares only, no workers."
-msgstr ""
+msgstr "Besoin d'eau à proximité. Attention, les transporteurs ne peuvent prendre en charge que les marchandises, pas les ouvriers."
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Ferry Yard, part
 #. 2
