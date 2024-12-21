@@ -376,7 +376,7 @@ msgstr "Étrangers"
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:152
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:233
 msgid "Who are they?"
-msgstr "Qui sont-ils?"
+msgstr "Qui sont-ils ?"
 
 #. TRANSLATORS: Henneke Lembeck – Strangers 1
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:154
@@ -389,7 +389,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:158
 msgid "Who are you?"
-msgstr "Qui es-tu?"
+msgstr "Qui es-tu ?"
 
 #. TRANSLATORS: Angadthur – Strangers 2
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:160
