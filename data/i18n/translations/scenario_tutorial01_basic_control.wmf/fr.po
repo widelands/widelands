@@ -777,7 +777,7 @@ msgstr ""
 msgid ""
 "The headquarters where you usually start the game. It is marked by small "
 "crowns: ♔"
-msgstr ""
+msgstr "Les quartiers-généraux sont l'endroit où vous commencez habituellement le jeu. Il est marqué par de petites couronnes : ♔"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:507
 msgid ""

@@ -81,6 +81,7 @@ wl_library(scripting_lua_interface
 
 wl_library(scripting_logic
   SRCS
+    eris.h
     factory.cc
     factory.h
     globals.cc
@@ -187,7 +188,47 @@ wl_library(scripting_logic
     map/lua_worker.h
     persistence.cc
     persistence.h
-    eris.h
+    ui/lua_box.cc
+    ui/lua_box.h
+    ui/lua_button.cc
+    ui/lua_button.h
+    ui/lua_checkbox.cc
+    ui/lua_checkbox.h
+    ui/lua_dropdown.cc
+    ui/lua_dropdown.h
+    ui/lua_listselect.cc
+    ui/lua_listselect.h
+    ui/lua_main_menu.cc
+    ui/lua_main_menu.h
+    ui/lua_map_view.cc
+    ui/lua_map_view.h
+    ui/lua_multiline_textarea.cc
+    ui/lua_multiline_textarea.h
+    ui/lua_panel.cc
+    ui/lua_panel.h
+    ui/lua_panel_create_child.cc
+    ui/lua_progress_bar.cc
+    ui/lua_progress_bar.h
+    ui/lua_radio_button.cc
+    ui/lua_radio_button.h
+    ui/lua_slider.cc
+    ui/lua_slider.h
+    ui/lua_spin_box.cc
+    ui/lua_spin_box.h
+    ui/lua_tab.cc
+    ui/lua_tab.h
+    ui/lua_table.cc
+    ui/lua_table.h
+    ui/lua_tab_panel.cc
+    ui/lua_tab_panel.h
+    ui/lua_textarea.cc
+    ui/lua_textarea.h
+    ui/lua_text_input_panel.cc
+    ui/lua_text_input_panel.h
+    ui/lua_ui_helper_functions.cc
+    ui/lua_ui_helper_functions.h
+    ui/lua_window.cc
+    ui/lua_window.h
   USES_SDL2
   DEPENDS
     base
