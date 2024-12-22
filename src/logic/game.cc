@@ -36,6 +36,52 @@
 #include "base/time_string.h"
 #include "base/warning.h"
 #include "build_info.h"
+#include "commands/cmd_attack.h"
+#include "commands/cmd_build_building.h"
+#include "commands/cmd_build_flag.h"
+#include "commands/cmd_build_road.h"
+#include "commands/cmd_build_waterway.h"
+#include "commands/cmd_building_name.h"
+#include "commands/cmd_bulldoze.h"
+#include "commands/cmd_calculate_statistics.h"
+#include "commands/cmd_call_economy_balance.h"
+#include "commands/cmd_change_soldier_capacity.h"
+#include "commands/cmd_change_training_options.h"
+#include "commands/cmd_delete_message.h"
+#include "commands/cmd_diplomacy.h"
+#include "commands/cmd_dismantle_building.h"
+#include "commands/cmd_drop_soldier.h"
+#include "commands/cmd_enhance_building.h"
+#include "commands/cmd_evict_worker.h"
+#include "commands/cmd_expedition_config.h"
+#include "commands/cmd_flag_action.h"
+#include "commands/cmd_fleet_targets.h"
+#include "commands/cmd_incorporate.h"
+#include "commands/cmd_luacoroutine.h"
+#include "commands/cmd_luascript.h"
+#include "commands/cmd_mark_map_object_for_removal.h"
+#include "commands/cmd_pick_custom_starting_position.h"
+#include "commands/cmd_pinned_note.h"
+#include "commands/cmd_propose_trade.h"
+#include "commands/cmd_queue.h"
+#include "commands/cmd_set_input_max_fill.h"
+#include "commands/cmd_set_soldier_preference.h"
+#include "commands/cmd_set_stock_policy.h"
+#include "commands/cmd_set_ware_priority.h"
+#include "commands/cmd_set_ware_target_quantity.h"
+#include "commands/cmd_set_worker_target_quantity.h"
+#include "commands/cmd_ship_cancel_expedition.h"
+#include "commands/cmd_ship_construct_port.h"
+#include "commands/cmd_ship_explore_island.h"
+#include "commands/cmd_ship_refit.h"
+#include "commands/cmd_ship_scout_direction.h"
+#include "commands/cmd_ship_set_destination.h"
+#include "commands/cmd_ship_sink.h"
+#include "commands/cmd_start_or_cancel_expedition.h"
+#include "commands/cmd_start_stop_building.h"
+#include "commands/cmd_toggle_infinite_production.h"
+#include "commands/cmd_toggle_mute_messages.h"
+#include "commands/cmd_warship_command.h"
 #include "economy/economy.h"
 #include "economy/portdock.h"
 #include "game_io/game_loader.h"
@@ -45,9 +91,6 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
 #include "logic/addons.h"
-#include "logic/cmd_calculate_statistics.h"
-#include "logic/cmd_luacoroutine.h"
-#include "logic/cmd_luascript.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game_settings.h"
 #include "logic/map_objects/tribes/carrier.h"
@@ -59,7 +102,6 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
-#include "logic/playercommand.h"
 #include "logic/replay.h"
 #include "logic/replay_game_controller.h"
 #include "logic/single_player_game_controller.h"
@@ -1024,9 +1066,11 @@ void Game::send_player_dismantle(PlayerImmovable& pi, bool keep_wares) {
 	   new CmdDismantleBuilding(get_gametime(), pi.owner().player_number(), pi, keep_wares));
 }
 
-void Game::send_player_build(int32_t const pid, const Coords& coords, DescriptionIndex const id) {
+void Game::send_player_build_building(int32_t const pid,
+                                      const Coords& coords,
+                                      DescriptionIndex const id) {
 	assert(descriptions().building_exists(id));
-	send_player_command(new CmdBuild(get_gametime(), pid, coords, id));
+	send_player_command(new CmdBuildBuilding(get_gametime(), pid, coords, id));
 }
 
 void Game::send_player_build_flag(int32_t const pid, const Coords& coords) {
@@ -1113,14 +1157,14 @@ void Game::send_player_change_soldier_capacity(Building& b, int32_t const val) {
 	   new CmdChangeSoldierCapacity(get_gametime(), b.owner().player_number(), b, val));
 }
 
-void Game::send_player_enemyflagaction(const Flag& flag,
-                                       PlayerNumber const who_attacks,
-                                       const std::vector<Serial>& soldiers,
-                                       const bool allow_conquer) {
+void Game::send_player_attack(const Flag& flag,
+                              PlayerNumber const who_attacks,
+                              const std::vector<Serial>& soldiers,
+                              const bool allow_conquer) {
 	for (Widelands::Coords& coords : flag.get_building()->get_positions(*this)) {
 		if (player(who_attacks).is_seeing(Map::get_index(coords, map().get_width()))) {
 			send_player_command(
-			   new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers, allow_conquer));
+			   new CmdAttack(get_gametime(), who_attacks, flag, soldiers, allow_conquer));
 			break;
 		}
 	}
@@ -1214,8 +1258,8 @@ void Game::send_player_pinned_note(
 	send_player_command(new CmdPinnedNote(get_gametime(), p, text, pos, rgb, del));
 }
 
-void Game::send_player_ship_port_name(PlayerNumber p, Serial s, const std::string& name) {
-	send_player_command(new CmdShipPortName(get_gametime(), p, s, name));
+void Game::send_player_building_name(PlayerNumber p, Serial s, const std::string& name) {
+	send_player_command(new CmdBuildingName(get_gametime(), p, s, name));
 }
 
 void Game::send_player_fleet_targets(PlayerNumber p, Serial i, Quantity q) {

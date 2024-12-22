@@ -7,6 +7,7 @@ Here's a brief overview of what each directory contains:
 | ai | Computer Players |
 | base | Basic functionality, like i18n, vector classes, logger, macros |
 | chat | Chat backend |
+| commands | Synchronized game logic events |
 | economy | Economy component of the game logic |
 | editor | The Widelands map editor |
 | game_io | Game saveloading |
