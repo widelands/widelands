@@ -55,11 +55,12 @@ constexpr int kFleeingUnitsCap = 500;
 // Goes through the list and removes all workers that are no longer in the
 // game.
 void remove_no_longer_existing_workers(Game& game, std::vector<OPtr<Worker>>* workers) {
-	for (std::vector<OPtr<Worker>>::iterator i = workers->begin(); i != workers->end(); ++i) {
+	std::vector<OPtr<Worker>>::iterator i = workers->begin();
+	while (i != workers->end()) {
 		if (i->get(game) == nullptr) {
-			workers->erase(i);
-			remove_no_longer_existing_workers(game, workers);
-			return;
+			i = workers->erase(i);
+		} else {
+			++i;
 		}
 	}
 }
@@ -90,27 +91,22 @@ void Warehouse::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) con
 		return;
 	}
 
-	DescriptionIndex const soldier_index = owner->tribe().soldier();
-	Requirements noreq;
-
-	if (warehouse_->count_workers(game, soldier_index, noreq, Match::kCompatible) == 0u) {
+	if (warehouse_->count_all_soldiers() == 0u) {
 		return;
 	}
 
-	Soldier& defender =
-	   dynamic_cast<Soldier&>(warehouse_->launch_worker(game, soldier_index, noreq));
+	Requirements noreq;
+	Soldier& defender = warehouse_->launch_soldier(game, noreq);
 	defender.start_task_defense(game, false);
 }
 
 AttackTarget::AttackResult Warehouse::AttackTarget::attack(Soldier* enemy) const {
 	Player* owner = warehouse_->get_owner();
 	Game& game = dynamic_cast<Game&>(owner->egbase());
-	DescriptionIndex const soldier_index = owner->tribe().soldier();
 	Requirements noreq;
 
-	if (warehouse_->count_workers(game, soldier_index, noreq, Match::kCompatible) != 0u) {
-		Soldier& defender =
-		   dynamic_cast<Soldier&>(warehouse_->launch_worker(game, soldier_index, noreq));
+	if (warehouse_->count_all_soldiers() != 0u) {
+		Soldier& defender = warehouse_->launch_soldier(game, noreq);
 		defender.start_task_defense(game, true);
 		enemy->send_signal(game, "sleep");
 		return AttackTarget::AttackResult::DefenderLaunched;
@@ -344,13 +340,9 @@ WarehouseDescr::WarehouseDescr(const std::string& init_descname,
 
 std::vector<Soldier*> Warehouse::SoldierControl::present_soldiers() const {
 	std::vector<Soldier*> rv;
-	DescriptionIndex const soldier_index = warehouse_->owner().tribe().soldier();
-	IncorporatedWorkers::const_iterator sidx = warehouse_->incorporated_workers_.find(soldier_index);
-
-	if (sidx != warehouse_->incorporated_workers_.end()) {
-		const WorkerList& soldiers = sidx->second;
-		for (OPtr<Worker> temp_soldier : soldiers) {
-			rv.push_back(dynamic_cast<Soldier*>(temp_soldier.get(warehouse_->get_owner()->egbase())));
+	if (!warehouse_->incorporated_soldiers_.empty()) {
+		for (OPtr<Soldier> temp_soldier : warehouse_->incorporated_soldiers_) {
+			rv.push_back(temp_soldier.get(warehouse_->get_owner()->egbase()));
 		}
 	}
 	return rv;
@@ -396,20 +388,21 @@ void Warehouse::SoldierControl::drop_soldier(Soldier& /* soldier */) {
 }
 
 int Warehouse::SoldierControl::outcorporate_soldier(Soldier& soldier) {
-	DescriptionIndex const soldier_index = warehouse_->owner().tribe().soldier();
-	if (warehouse_->incorporated_workers_.count(soldier_index) != 0u) {
-		WorkerList& soldiers = warehouse_->incorporated_workers_[soldier_index];
-
-		WorkerList::iterator i = std::find(soldiers.begin(), soldiers.end(), &soldier);
-
-		soldiers.erase(i);
-		warehouse_->supply_->remove_workers(soldier_index, 1);
-	}
+	if (!warehouse_->incorporated_soldiers_.empty()) {
+		SoldierList::iterator i = std::find(warehouse_->incorporated_soldiers_.begin(),
+		                                    warehouse_->incorporated_soldiers_.end(), &soldier);
+		if (i != warehouse_->incorporated_soldiers_.end()) {
+			warehouse_->incorporated_soldiers_.erase(i);
+			warehouse_->supply_->remove_workers(warehouse_->owner().tribe().soldier(), 1);
+		}
 #ifndef NDEBUG
-	else {
-		throw wexception("outcorporate_soldier: soldier not in this warehouse!");
-	}
+		else {
+			throw wexception("outcorporate_soldier: soldier not in this warehouse!");
+		}
+	} else {
+		throw wexception("outcorporate_soldier: no soldiers in this warehouse!");
 #endif
+	}
 	return 0;
 }
 
@@ -779,6 +772,7 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 		}
 	}
 	incorporated_workers_.clear();
+	incorporated_soldiers_.clear();
 
 	while (!planned_workers_.empty()) {
 		planned_workers_.back().cleanup();
@@ -838,20 +832,17 @@ void Warehouse::act(Game& game, uint32_t const data) {
 	if (next_military_act_ <= gametime) {
 		DescriptionIndex const soldier_index = owner().tribe().soldier();
 
-		if (incorporated_workers_.count(soldier_index) != 0u) {
-			WorkerList& soldiers = incorporated_workers_[soldier_index];
-
+		if (!incorporated_soldiers_.empty()) {
 			unsigned total_heal = descr().get_heal_per_second();
 			// Using an explicit iterator, as we plan to erase some
 			// of those guys
-			for (WorkerList::iterator it = soldiers.begin(); it != soldiers.end(); ++it) {
-				// This is a safe cast: we know only soldiers can land in this
-				// slot in the incorporated array
-				Soldier* soldier = dynamic_cast<Soldier*>(it->get(game));
+			for (SoldierList::iterator it = incorporated_soldiers_.begin();
+			     it != incorporated_soldiers_.end(); ++it) {
+				Soldier* soldier = it->get(game);
 
 				//  Soldier dead ...
 				if ((soldier == nullptr) || soldier->get_current_health() == 0) {
-					it = soldiers.erase(it);
+					it = incorporated_soldiers_.erase(it);
 					supply_->remove_workers(soldier_index, 1);
 					continue;
 				}
@@ -933,6 +924,10 @@ PlayerImmovable::Workers Warehouse::get_incorporated_workers() {
 			all_workers.push_back(worker.get(get_owner()->egbase()));
 		}
 	}
+	// Soldiers are stored separately
+	for (OPtr<Soldier> soldier : incorporated_soldiers_) {
+		all_workers.push_back(soldier.get(get_owner()->egbase()));
+	}
 	return all_workers;
 }
 
@@ -980,6 +975,10 @@ Quantity Warehouse::count_workers(const Game& game,
                                   DescriptionIndex worker_id,
                                   const Requirements& req,
                                   Match exact) {
+	if (worker_id == owner().tribe().soldier()) {
+		return count_soldiers(game, req);
+	}
+
 	Quantity sum = 0;
 
 	do {
@@ -1005,9 +1004,26 @@ Quantity Warehouse::count_workers(const Game& game,
 	return sum;
 }
 
+Quantity Warehouse::count_soldiers(const Game& game, const Requirements& req) {
+	Quantity sum = incorporated_soldiers_.size();
+	assert(sum == supply_->stock_workers(owner().tribe().soldier()));
+
+	for (OPtr<Soldier> soldier : incorporated_soldiers_) {
+		if (!req.check(*soldier.get(game))) {
+			// This soldier doesn't match the requirements
+			--sum;
+		}
+	}
+
+	return sum;
+}
+
 /// Start a worker of a given type. The worker will
 /// be assigned a job by the caller.
 Worker& Warehouse::launch_worker(Game& game, DescriptionIndex worker_id, const Requirements& req) {
+	if (worker_id == owner().tribe().soldier()) {
+		return launch_soldier(game, req);
+	}
 	do {
 		if (supply_->stock_workers(worker_id) != 0u) {
 			uint32_t unincorporated = supply_->stock_workers(worker_id);
@@ -1058,6 +1074,43 @@ Worker& Warehouse::launch_worker(Game& game, DescriptionIndex worker_id, const R
 	throw wexception("Warehouse::launch_worker: worker does not actually exist");
 }
 
+Soldier& Warehouse::launch_soldier(Game& game, const Requirements& req) {
+	if (incorporated_soldiers_.empty()) {
+		throw wexception("Warehouse::launch_soldier: no stored soldiers");
+	}
+
+	// counterpart to remove_no_longer_existing_workers()
+	// TODO(tothxa): let's see first if we need it...
+	std::vector<OPtr<Soldier>>::iterator i = incorporated_soldiers_.begin();
+	while (i != incorporated_soldiers_.end()) {
+		if (i->get(game) == nullptr) {
+			throw wexception("Warehouse::launch_soldier: a soldier got deleted from the game");
+			// i = incorporated_soldiers_.erase(i);
+		} else {
+			++i;
+		}
+	}
+
+	const DescriptionIndex soldier_index = owner().tribe().soldier();
+	assert(incorporated_soldiers_.size() == supply_->stock_workers(soldier_index));
+
+	std::vector<OPtr<Soldier>>::iterator soldier_it = incorporated_soldiers_.begin();
+	while (soldier_it != incorporated_soldiers_.end()) {
+		Soldier* soldier = soldier_it->get(game);
+
+		if (req.check(*soldier)) {
+			soldier->reset_tasks(game);   //  forget everything you did
+			soldier->set_location(this);  //  back in a economy
+			incorporated_soldiers_.erase(soldier_it);
+			supply_->remove_workers(soldier_index, 1);
+			return *soldier;
+		}
+		++soldier_it;
+	}
+
+	throw wexception("Warehouse::launch_soldier: no stored soldier met the requirements");
+}
+
 void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 	assert(w != nullptr);
 	assert(w->get_owner() == get_owner());
@@ -1083,11 +1136,15 @@ void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 		return;
 	}
 
-	// Incorporate the worker
-	if (incorporated_workers_.count(worker_index) == 0u) {
-		incorporated_workers_[worker_index] = WorkerList();
+	if (worker_index == owner().tribe().soldier()) {
+		incorporate_soldier_inner(dynamic_cast<Soldier*>(w));
+	} else {
+		// Incorporate the worker
+		if (incorporated_workers_.count(worker_index) == 0u) {
+			incorporated_workers_[worker_index] = WorkerList();
+		}
+		incorporated_workers_[worker_index].emplace_back(w);
 	}
-	incorporated_workers_[worker_index].emplace_back(w);
 
 	w->set_location(nullptr);  //  no longer in an economy
 
@@ -1096,6 +1153,11 @@ void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 		w->reset_tasks(*game);
 		w->start_task_idle(*game, 0, -1);
 	}
+}
+
+void Warehouse::incorporate_soldier_inner(Soldier* soldier) {
+	// TODO(tothxa): keep them sorted by level
+	incorporated_soldiers_.emplace_back(soldier);
 }
 
 /// Create an instance of a ware and make sure it gets

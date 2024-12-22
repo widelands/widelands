@@ -180,7 +180,13 @@ public:
 	bool fetch_from_flag(Game&) override;
 
 	Quantity count_workers(const Game&, DescriptionIndex worker, const Requirements&, Match);
+	Quantity count_soldiers(const Game&, const Requirements&);
+	Quantity count_all_soldiers() {
+		return incorporated_soldiers_.size();
+	}
+
 	Worker& launch_worker(Game&, DescriptionIndex worker, const Requirements&);
+	Soldier& launch_soldier(Game&, const Requirements&);
 
 	// Adds the worker to the inventory. Takes ownership and might delete
 	// 'worker'.
@@ -330,6 +336,17 @@ private:
 	using WorkerList = std::vector<OPtr<Worker>>;
 	using IncorporatedWorkers = std::map<DescriptionIndex, WorkerList>;
 	IncorporatedWorkers incorporated_workers_;
+
+	// TODO(tothxa): won't this clash with struct SoldierList in wui/soldierlist.cc?
+	//               this is class Warehouse namespace, isn't it?
+	using SoldierList = std::vector<OPtr<Soldier>>;
+
+	// We keep soldiers separately, always sorted by level
+	SoldierList incorporated_soldiers_;
+
+	// Called by incorporate_worker() for soldiers. This handles keeping them sorted.
+	void incorporate_soldier_inner(Soldier* soldier);
+
 	std::vector<Time> next_worker_without_cost_spawn_;
 	Time next_military_act_{0U};
 	Time next_stock_remove_act_{0U};

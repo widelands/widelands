@@ -421,6 +421,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 
 			// TODO(sirver,trading): Pull out and reuse this for market workers.
 			assert(warehouse.incorporated_workers_.empty());
+			assert(warehouse.incorporated_soldiers_.empty());
 			{
 				uint16_t const nrworkers = fr.unsigned_16();
 				for (uint16_t i = 0; i < nrworkers; ++i) {
@@ -429,10 +430,14 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 					try {
 						Worker& worker = mol.get<Worker>(worker_serial);
 						const DescriptionIndex& worker_index = tribe.worker_index(worker.descr().name());
-						if (warehouse.incorporated_workers_.count(worker_index) == 0u) {
-							warehouse.incorporated_workers_[worker_index] = Warehouse::WorkerList();
+						if (worker_index == warehouse.owner().tribe().soldier()) {
+							warehouse.incorporate_soldier_inner(dynamic_cast<Soldier*>(&worker));
+						} else {
+							if (warehouse.incorporated_workers_.count(worker_index) == 0u) {
+								warehouse.incorporated_workers_[worker_index] = Warehouse::WorkerList();
+							}
+							warehouse.incorporated_workers_[worker_index].emplace_back(&worker);
 						}
-						warehouse.incorporated_workers_[worker_index].emplace_back(&worker);
 					} catch (const WException& e) {
 						throw GameDataError(
 						   "incorporated worker #%u (%u): %s", i, worker_serial, e.what());
@@ -1322,6 +1327,8 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 	for (const auto& cwt : warehouse.incorporated_workers_) {
 		nworkers += cwt.second.size();
 	}
+	// Soldiers were moved to incorporated_soldiers_ in v1.3
+	nworkers += warehouse.incorporated_soldiers_.size();
 
 	fw.unsigned_16(nworkers);
 	using TWorkerMap = std::map<uint32_t, const Worker*>;
@@ -1332,6 +1339,11 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 			assert(mos.is_object_known(w));
 			workermap.insert(std::make_pair(mos.get_object_file_index(w), &w));
 		}
+	}
+	for (const OPtr<Soldier>& temp_soldier : warehouse.incorporated_soldiers_) {
+		const Soldier& s = *temp_soldier.get(game);
+		assert(mos.is_object_known(s));
+		workermap.insert(std::make_pair(mos.get_object_file_index(s), &s));
 	}
 
 	for (const auto& temp_worker : workermap) {
