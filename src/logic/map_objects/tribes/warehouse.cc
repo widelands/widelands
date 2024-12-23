@@ -1174,10 +1174,12 @@ Soldier& Warehouse::launch_soldier(Game& game, const Requirements& req, const bo
 			end = -1;
 			step = -1;
 		}
-		if (get_soldier_preference() == pref) {
-			i += step * soldier_control_.soldier_capacity();
-		} else {
-			end -= step * soldier_control_.soldier_capacity();
+		if (get_soldier_preference() != SoldierPreference::kAny) {
+			if (get_soldier_preference() == pref) {
+				i += step * soldier_control_.soldier_capacity();
+			} else {
+				end -= step * soldier_control_.soldier_capacity();
+			}
 		}
 		while (i != end) {
 			if (req.check(*incorporated_soldiers_.at(i).get(game))) {
