@@ -164,7 +164,7 @@ public:
 	}
 	void switch_heroes();
 
-	bool get_requesting_weak_trainees() {
+	bool get_requesting_weak_trainees() const {
 		return requesting_weak_trainees_;
 	}
 

@@ -1114,9 +1114,8 @@ Soldier& Warehouse::launch_soldier(Game& game,
 		if (it->get(game) == nullptr) {
 			throw wexception("Warehouse::launch_soldier: a soldier got deleted from the game");
 			// it = incorporated_soldiers_.erase(it);
-		} else {
-			++it;
-		}
+		}  // else
+		++it;
 	}
 
 	const DescriptionIndex soldier_index = owner().tribe().soldier();
@@ -1134,7 +1133,7 @@ Soldier& Warehouse::launch_soldier(Game& game,
 	}
 
 	// Can't mix forward and reverse iterators, so we use indices :(
-	int i = incorporated_soldiers_.size();
+	int i = 0;
 	int end = incorporated_soldiers_.size();
 
 	if (defender) {
@@ -1263,7 +1262,6 @@ void Warehouse::incorporate_soldier_inner(EditorGameBase& egbase, Soldier* soldi
 		++it;
 	}
 	incorporated_soldiers_.emplace(it, soldier);
-	return;
 }
 
 /// Create an instance of a ware and make sure it gets
