@@ -328,7 +328,8 @@ Worker& WarehouseSupply::launch_worker(Game& game, const Request& req) {
 			}
 		} else if (req.target().descr().type() == MapObjectType::TRAININGSITE) {
 			if (upcast(TrainingSite, ts, &req.target()); ts != nullptr) {
-				pref = ts->get_requesting_weak_trainees() ? SoldierPreference::kRookies : SoldierPreference::kHeroes;
+				pref = ts->get_requesting_weak_trainees() ? SoldierPreference::kRookies :
+				                                            SoldierPreference::kHeroes;
 			}
 		}
 		return warehouse_->launch_soldier(game, req.get_requirements(), false, pref);
@@ -1098,8 +1099,10 @@ Worker& Warehouse::launch_worker(Game& game, DescriptionIndex worker_id, const R
 	throw wexception("Warehouse::launch_worker: worker does not actually exist");
 }
 
-Soldier& Warehouse::launch_soldier(Game& game, const Requirements& req, const bool defender,
-   const SoldierPreference pref) {
+Soldier& Warehouse::launch_soldier(Game& game,
+                                   const Requirements& req,
+                                   const bool defender,
+                                   const SoldierPreference pref) {
 	if (incorporated_soldiers_.empty()) {
 		throw wexception("Warehouse::launch_soldier: no stored soldiers");
 	}
@@ -1124,8 +1127,8 @@ Soldier& Warehouse::launch_soldier(Game& game, const Requirements& req, const bo
 	if (!soldiers_are_sorted_) {
 		std::sort(incorporated_soldiers_.begin(), incorporated_soldiers_.end(),
 		          [&game](OPtr<Soldier> a, OPtr<Soldier> b) {
-		             // We're sorting in decreasing order
-		             return a.get(game)->get_total_level() < b.get(game)->get_total_level();
+			          // We're sorting in decreasing order
+			          return a.get(game)->get_total_level() < b.get(game)->get_total_level();
 		          });
 		soldiers_are_sorted_ = true;
 	}
@@ -1170,7 +1173,7 @@ Soldier& Warehouse::launch_soldier(Game& game, const Requirements& req, const bo
 			i = 0;
 			end = incorporated_soldiers_.size();
 		} else {
-		   i = incorporated_soldiers_.size() - 1;
+			i = incorporated_soldiers_.size() - 1;
 			end = -1;
 			step = -1;
 		}

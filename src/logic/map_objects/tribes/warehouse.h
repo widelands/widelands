@@ -186,8 +186,10 @@ public:
 	}
 
 	Worker& launch_worker(Game&, DescriptionIndex worker, const Requirements&);
-	Soldier& launch_soldier(Game&, const Requirements&, bool defender = false,
-	   SoldierPreference pref = SoldierPreference::kAny);
+	Soldier& launch_soldier(Game&,
+	                        const Requirements&,
+	                        bool defender = false,
+	                        SoldierPreference pref = SoldierPreference::kAny);
 
 	// Adds the worker to the inventory. Takes ownership and might delete
 	// 'worker'.
