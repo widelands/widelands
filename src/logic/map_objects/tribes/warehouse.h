@@ -186,7 +186,8 @@ public:
 	}
 
 	Worker& launch_worker(Game&, DescriptionIndex worker, const Requirements&);
-	Soldier& launch_soldier(Game&, const Requirements&);
+	Soldier& launch_soldier(Game&, const Requirements&, bool defender = false,
+	   SoldierPreference pref = SoldierPreference::kAny);
 
 	// Adds the worker to the inventory. Takes ownership and might delete
 	// 'worker'.
@@ -345,7 +346,12 @@ private:
 	SoldierList incorporated_soldiers_;
 
 	// Called by incorporate_worker() for soldiers. This handles keeping them sorted.
-	void incorporate_soldier_inner(Soldier* soldier);
+	void incorporate_soldier_inner(EditorGameBase& egbase, Soldier* soldier);
+
+	// TODO(tothxa): savegame compatibility with v1.2 or keep for safety?
+	// Flag for launch_soldier() whether it needs to sort them first.
+	// Adding soldiers on game loading in map_io/map_buildingdata_packet.cc sets it to false.
+	bool soldiers_are_sorted_{true};
 
 	std::vector<Time> next_worker_without_cost_spawn_;
 	Time next_military_act_{0U};

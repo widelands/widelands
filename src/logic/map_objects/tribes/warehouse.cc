@@ -18,6 +18,7 @@
 
 #include "logic/map_objects/tribes/warehouse.h"
 
+#include <algorithm>
 #include <memory>
 
 #include "base/log.h"
@@ -38,8 +39,10 @@
 #include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/carrier.h"
+#include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/requirements.h"
 #include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/message_queue.h"
@@ -67,6 +70,8 @@ void remove_no_longer_existing_workers(Game& game, std::vector<OPtr<Worker>>* wo
 
 }  // namespace
 
+constexpr unsigned kDefendersKeptInside = 2;
+
 bool Warehouse::AttackTarget::can_be_attacked() const {
 	return warehouse_->descr().get_conquers() > 0;
 }
@@ -91,12 +96,12 @@ void Warehouse::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) con
 		return;
 	}
 
-	if (warehouse_->count_all_soldiers() == 0u) {
+	if (warehouse_->count_all_soldiers() <= kDefendersKeptInside) {
 		return;
 	}
 
 	Requirements noreq;
-	Soldier& defender = warehouse_->launch_soldier(game, noreq);
+	Soldier& defender = warehouse_->launch_soldier(game, noreq, true);
 	defender.start_task_defense(game, false);
 }
 
@@ -106,7 +111,7 @@ AttackTarget::AttackResult Warehouse::AttackTarget::attack(Soldier* enemy) const
 	Requirements noreq;
 
 	if (warehouse_->count_all_soldiers() != 0u) {
-		Soldier& defender = warehouse_->launch_soldier(game, noreq);
+		Soldier& defender = warehouse_->launch_soldier(game, noreq, true);
 		defender.start_task_defense(game, true);
 		enemy->send_signal(game, "sleep");
 		return AttackTarget::AttackResult::DefenderLaunched;
@@ -309,6 +314,25 @@ WareInstance& WarehouseSupply::launch_ware(Game& game, const Request& req) {
 
 /// Launch a ware as worker.
 Worker& WarehouseSupply::launch_worker(Game& game, const Request& req) {
+	if (req.get_index() == warehouse_->owner().tribe().soldier()) {
+		SoldierPreference pref = SoldierPreference::kAny;
+		if (req.target().descr().type() == MapObjectType::MILITARYSITE) {
+			if (upcast(MilitarySite, ms, &req.target()); ms != nullptr) {
+				pref = ms->get_soldier_preference();
+			}
+		} else if (req.target().descr().type() == MapObjectType::WAREHOUSE) {
+			if (upcast(Warehouse, owh, &req.target()); owh != nullptr) {
+				// TODO(tothxa): Warship requests are from the current port, but the ship's preference
+				//               may be different from the port's. How can we tell them apart?
+				pref = owh->get_soldier_preference();
+			}
+		} else if (req.target().descr().type() == MapObjectType::TRAININGSITE) {
+			if (upcast(TrainingSite, ts, &req.target()); ts != nullptr) {
+				pref = ts->get_requesting_weak_trainees() ? SoldierPreference::kRookies : SoldierPreference::kHeroes;
+			}
+		}
+		return warehouse_->launch_soldier(game, req.get_requirements(), false, pref);
+	}
 	return warehouse_->launch_worker(game, req.get_index(), req.get_requirements());
 }
 
@@ -1074,41 +1098,107 @@ Worker& Warehouse::launch_worker(Game& game, DescriptionIndex worker_id, const R
 	throw wexception("Warehouse::launch_worker: worker does not actually exist");
 }
 
-Soldier& Warehouse::launch_soldier(Game& game, const Requirements& req) {
+Soldier& Warehouse::launch_soldier(Game& game, const Requirements& req, const bool defender,
+   const SoldierPreference pref) {
 	if (incorporated_soldiers_.empty()) {
 		throw wexception("Warehouse::launch_soldier: no stored soldiers");
 	}
 
 	// counterpart to remove_no_longer_existing_workers()
 	// TODO(tothxa): let's see first if we need it...
-	std::vector<OPtr<Soldier>>::iterator i = incorporated_soldiers_.begin();
-	while (i != incorporated_soldiers_.end()) {
-		if (i->get(game) == nullptr) {
+	std::vector<OPtr<Soldier>>::iterator it = incorporated_soldiers_.begin();
+	while (it != incorporated_soldiers_.end()) {
+		if (it->get(game) == nullptr) {
 			throw wexception("Warehouse::launch_soldier: a soldier got deleted from the game");
-			// i = incorporated_soldiers_.erase(i);
+			// it = incorporated_soldiers_.erase(it);
 		} else {
-			++i;
+			++it;
 		}
 	}
 
 	const DescriptionIndex soldier_index = owner().tribe().soldier();
 	assert(incorporated_soldiers_.size() == supply_->stock_workers(soldier_index));
 
-	std::vector<OPtr<Soldier>>::iterator soldier_it = incorporated_soldiers_.begin();
-	while (soldier_it != incorporated_soldiers_.end()) {
-		Soldier* soldier = soldier_it->get(game);
-
-		if (req.check(*soldier)) {
-			soldier->reset_tasks(game);   //  forget everything you did
-			soldier->set_location(this);  //  back in a economy
-			incorporated_soldiers_.erase(soldier_it);
-			supply_->remove_workers(soldier_index, 1);
-			return *soldier;
-		}
-		++soldier_it;
+	// TODO(tothxa): savegame compatibility with v1.2 or keep for safety?
+	// Make sure incorporated_soldiers_ is sorted after loading a game.
+	if (!soldiers_are_sorted_) {
+		std::sort(incorporated_soldiers_.begin(), incorporated_soldiers_.end(),
+		          [&game](OPtr<Soldier> a, OPtr<Soldier> b) {
+		             // We're sorting in decreasing order
+		             return a.get(game)->get_total_level() < b.get(game)->get_total_level();
+		          });
+		soldiers_are_sorted_ = true;
 	}
 
-	throw wexception("Warehouse::launch_soldier: no stored soldier met the requirements");
+	// Can't mix forward and reverse iterators, so we use indices :(
+	int i = incorporated_soldiers_.size();
+	int end = incorporated_soldiers_.size();
+
+	if (defender) {
+		// TODO(tothxa): This saves the strongest soldiers for the final battle.
+		//               Should it be the most preferred soldiers instead?
+		if (incorporated_soldiers_.size() > kDefendersKeptInside) {
+			i = kDefendersKeptInside;
+
+			// Try to send a fully healed soldier, fall back to highest remaining health
+			unsigned best_health = 0;
+			int best_health_index = -1;
+			Soldier* s = nullptr;
+			while (i < end) {
+				s = incorporated_soldiers_.at(i).get(game);
+				if (s->get_current_health() == s->get_max_health()) {
+					break;
+				}
+				if (s->get_current_health() > best_health) {
+					best_health = s->get_current_health();
+					best_health_index = i;
+				}
+				++i;
+			}
+			if (i == end) {
+				i = best_health_index;
+			}
+
+		} else {
+			i = incorporated_soldiers_.size() - 1;
+		}
+	} else {
+		assert(incorporated_soldiers_.size() > soldier_control_.soldier_capacity());
+		int step = 1;
+
+		if (pref == SoldierPreference::kHeroes) {
+			i = 0;
+			end = incorporated_soldiers_.size();
+		} else {
+		   i = incorporated_soldiers_.size() - 1;
+			end = -1;
+			step = -1;
+		}
+		if (get_soldier_preference() == pref) {
+			i += step * soldier_control_.soldier_capacity();
+		} else {
+			end -= step * soldier_control_.soldier_capacity();
+		}
+		while (i != end) {
+			if (req.check(*incorporated_soldiers_.at(i).get(game))) {
+				break;
+			}
+			i += step;
+		}
+	}
+
+	if (i == end) {
+		throw wexception("Warehouse::launch_soldier: no stored soldier met the requirements");
+	}
+
+	Soldier* soldier = incorporated_soldiers_.at(i).get(game);
+	soldier->reset_tasks(game);   //  forget everything you did
+	soldier->set_location(this);  //  back in a economy
+	it = incorporated_soldiers_.begin();
+	it += i;
+	incorporated_soldiers_.erase(it);
+	supply_->remove_workers(soldier_index, 1);
+	return *soldier;
 }
 
 void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
@@ -1137,7 +1227,7 @@ void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 	}
 
 	if (worker_index == owner().tribe().soldier()) {
-		incorporate_soldier_inner(dynamic_cast<Soldier*>(w));
+		incorporate_soldier_inner(egbase, dynamic_cast<Soldier*>(w));
 	} else {
 		// Incorporate the worker
 		if (incorporated_workers_.count(worker_index) == 0u) {
@@ -1155,9 +1245,20 @@ void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 	}
 }
 
-void Warehouse::incorporate_soldier_inner(Soldier* soldier) {
-	// TODO(tothxa): keep them sorted by level
-	incorporated_soldiers_.emplace_back(soldier);
+void Warehouse::incorporate_soldier_inner(EditorGameBase& egbase, Soldier* soldier) {
+	const unsigned total_level = soldier->get_total_level();
+	if (total_level == 0 || incorporated_soldiers_.empty()) {
+		incorporated_soldiers_.emplace_back(soldier);
+		return;
+	}
+
+	// Keep them sorted by total level
+	auto it = incorporated_soldiers_.begin();
+	while (it != incorporated_soldiers_.end() && it->get(egbase)->get_total_level() > total_level) {
+		++it;
+	}
+	incorporated_soldiers_.emplace(it, soldier);
+	return;
 }
 
 /// Create an instance of a ware and make sure it gets

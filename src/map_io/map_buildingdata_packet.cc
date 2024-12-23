@@ -431,7 +431,12 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 						Worker& worker = mol.get<Worker>(worker_serial);
 						const DescriptionIndex& worker_index = tribe.worker_index(worker.descr().name());
 						if (worker_index == warehouse.owner().tribe().soldier()) {
-							warehouse.incorporate_soldier_inner(dynamic_cast<Soldier*>(&worker));
+							// TODO(tothxa): savegame compatibility with v1.2 or keep for safety?
+							// Even though the Soldier object exists, we can't get it back from the
+							// stored ObjectPointer until the game is fully loaded, so we can't use
+							// Warehouse::incorporate_soldier_inner() to sort the soldiers on loading.
+							warehouse.incorporated_soldiers_.emplace_back(dynamic_cast<Soldier*>(&worker));
+							warehouse.soldiers_are_sorted_ = false;
 						} else {
 							if (warehouse.incorporated_workers_.count(worker_index) == 0u) {
 								warehouse.incorporated_workers_[worker_index] = Warehouse::WorkerList();
