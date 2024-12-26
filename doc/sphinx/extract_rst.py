@@ -21,8 +21,8 @@ cpp_pairs = (
     ('src/scripting/lua_bases.cc', 'autogen_wl_bases.rst'),
     ('src/scripting/lua_editor.cc', 'autogen_wl_editor.rst'),
     ('doc/sphinx/source/autogen_temp_lua_map.cc', 'autogen_wl_map.rst'),
+    ('doc/sphinx/source/autogen_temp_lua_ui.cc', 'autogen_wl_ui.rst'),
     ('src/scripting/lua_game.cc', 'autogen_wl_game.rst'),
-    ('src/scripting/lua_ui.cc', 'autogen_wl_ui.rst'),
     ('src/scripting/lua_globals.cc', 'autogen_globals.rst'),
     ('src/scripting/lua_path.cc', 'autogen_path.rst'),
     ('src/scripting/lua_styles.cc', 'autogen_styles.rst'),
@@ -161,6 +161,28 @@ _concat_files('doc/sphinx/source/autogen_temp_lua_map.cc', (
 	'src/scripting/map/lua_military_site.cc',
 	'src/scripting/map/lua_construction_site.cc',
 	'src/scripting/map/lua_dismantle_site.cc',
+))
+_concat_files('doc/sphinx/source/autogen_temp_lua_ui.cc', (
+	'src/scripting/lua_ui.cc',
+	'src/scripting/ui/lua_panel.cc',
+	'src/scripting/ui/lua_window.cc',
+	'src/scripting/ui/lua_map_view.cc',
+	'src/scripting/ui/lua_main_menu.cc',
+	'src/scripting/ui/lua_box.cc',
+	'src/scripting/ui/lua_textarea.cc',
+	'src/scripting/ui/lua_multiline_textarea.cc',
+	'src/scripting/ui/lua_button.cc',
+	'src/scripting/ui/lua_checkbox.cc',
+	'src/scripting/ui/lua_radio_button.cc',
+	'src/scripting/ui/lua_dropdown.cc',
+	'src/scripting/ui/lua_listselect.cc',
+	'src/scripting/ui/lua_spin_box.cc',
+	'src/scripting/ui/lua_slider.cc',
+	'src/scripting/ui/lua_text_input_panel.cc',
+	'src/scripting/ui/lua_table.cc',
+	'src/scripting/ui/lua_tab_panel.cc',
+	'src/scripting/ui/lua_tab.cc',
+	'src/scripting/ui/lua_progress_bar.cc',
 ))
 
 

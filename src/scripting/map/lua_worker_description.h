@@ -46,6 +46,8 @@ public:
 	 * Properties
 	 */
 	int get_becomes(lua_State*);
+	int get_promoted(lua_State*);
+	int get_promoted_from(lua_State*);
 	int get_buildcost(lua_State*);
 	int get_employers(lua_State*);
 	int get_buildable(lua_State*);
