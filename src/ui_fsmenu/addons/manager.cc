@@ -1614,7 +1614,7 @@ void AddOnsCtrl::rebuild_browse() {
 	}
 
 	if (current_i18n_version_ < net().websitemaps_i18n_version()) {
-		has_upgrades.push_back(_("Translations for website maps"));
+		has_upgrades.emplace_back(_("Translations for website maps"));
 	}
 
 	upgrade_all_.set_title(format(_("Upgrade all (%u)"), has_upgrades.size()));
