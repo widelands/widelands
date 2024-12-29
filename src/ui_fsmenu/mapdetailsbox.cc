@@ -18,6 +18,8 @@
 
 #include "ui_fsmenu/mapdetailsbox.h"
 
+#include <memory>
+
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
