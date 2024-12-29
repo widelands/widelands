@@ -2073,8 +2073,8 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 	bool need_to_rebuild_texture_atlas = false;
 	bool enable_theme = false;
 	if (!only_translations) {
-		std::string temp_dir = kTempFileDir + FileSystem::file_separator() + timestring() + ".addon." +
-			                   remote->internal_name + kTempFileExtension;
+		std::string temp_dir = kTempFileDir + FileSystem::file_separator() + timestring() +
+		                       ".addon." + remote->internal_name + kTempFileExtension;
 		if (g_fs->file_exists(temp_dir)) {
 			g_fs->fs_unlink(temp_dir);
 		}
@@ -2159,8 +2159,11 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 	rebuild_browse();
 }
 
-bool AddOnsCtrl::install_translations(const std::string& name, uint32_t new_i18n_version, ProgressIndicatorWindow& progress) {
-	std::string temp_dir = kTempFileDir + FileSystem::file_separator() + timestring() + ".addoni18n." + name + kTempFileExtension;
+bool AddOnsCtrl::install_translations(const std::string& name,
+                                      uint32_t new_i18n_version,
+                                      ProgressIndicatorWindow& progress) {
+	std::string temp_dir = kTempFileDir + FileSystem::file_separator() + timestring() +
+	                       ".addoni18n." + name + kTempFileExtension;
 	assert(!g_fs->file_exists(temp_dir));
 	g_fs->ensure_directory_exists(temp_dir);
 	bool success = false;
