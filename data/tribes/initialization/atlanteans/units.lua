@@ -1810,9 +1810,9 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("atlanteans_building", "Atlantean harvesting song"),
             performance = {
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Farm, part 1
-               pgettext("atlanteans_building", "The farmer needs %1% on average to sow and harvest a sheaf of corn."):bformat(format_minutes_seconds(1, 4)),
+               pgettext("atlanteans_building", "The farmer sows and harvests one sheaf of corn between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(57), format_minutes_seconds(1, 12)),
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Farm, part 2
-               pgettext("atlanteans_building", "It is possible to decrease time to %1$s on average, if you leave %2$s near the flag free and other fields of work area occupied, e.g. by roads and buildings."):bformat(format_seconds(56), ngettext("%d field", "%d fields", 5):bformat(5))
+               pgettext("atlanteans_building", "The farm needs at least %s to achieve 100%% productivity."):bformat(ngettext("%d growing field", "%d growing fields", 6):bformat(6))
             }
          }
       },

@@ -47,8 +47,15 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
-            -- std time total (free all fields except road): 34.186 + 30.186 = 64.372 sec
-            -- ideal time total (free 5 nearest fields): 29.92 + 25.92 = 55.84 sec
+            -- longest possible transition from tiny to ripe field:
+            --   2 * (30 + 45 + 50) = 250 sec
+            --   see data/tribes/immovables/cornfield/ and src/logic/map_objects/immovable_program.cc - ImmovableProgram::ActAnimate::execute()
+            -- how much fields is needed for reliable 100% productivity: 6
+            --   with 5 fields, this inequation is not fulfilled:
+            --   (250 + 55.84 - (6 + 2.2 * 1.8 + 10)) / 55.84 < 5
+            -- min. time total (free 5 nearest fields):  29.92 + 25.92 = 55.84 sec
+            -- min. time total (free 6 nearest fields):  30.4  + 26.4  = 56.8  sec
+            -- max. time total (free 6 furthest fields): 38.2  + 34.2  = 72.4  sec
             "call=plant",
             "call=harvest",
          }
@@ -57,9 +64,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
          descname = _("planting corn"),
          actions = {
-            -- time of worker: std case 24.186 sec, ideal case 19.92 sec
-            -- std time: 24.186 + 10 = 34.186 sec
-            -- ideal time: 19.92 + 10 = 29.92 sec
+            -- time of worker: 20.4-28.2 sec, min. time for 5 fields 19.92 sec
+            -- min. time (5 fields): 19.92 + 10 = 29.92 sec
+            -- min. time:            20.4  + 10 = 30.4  sec
+            -- max. time:            28.2  + 10 = 38.2  sec
             "callworker=plant",
             "sleep=duration:10s"
          }
@@ -68,9 +76,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
          descname = _("harvesting corn"),
          actions = {
-            -- time of worker: std case 26.186 sec, ideal case 21.92 sec
-            -- std time: 26.186 + 4 = 30.186 sec
-            -- ideal time: 21.92 + 4 = 25.92 sec
+            -- time of worker: 22.4-30.2 sec, min. time for 5 fields 21.92 sec
+            -- min. time (5 fields): 21.92 + 4 = 25.92 sec
+            -- min. time:            22.4  + 4 = 26.4  sec
+            -- max. time:            30.2  + 4 = 34.2  sec
             "callworker=harvest",
             "sleep=duration:4s"
          }
