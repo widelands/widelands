@@ -1527,8 +1527,12 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("barbarians_building", "Line from the harvesting song ‘The Wealth of the Fields’"),
             -- TRANSLATORS: Purpose helptext for production site: Farm
             purpose = pgettext("building", "Sows and harvests wheat."),
-            -- TRANSLATORS: Performance helptext for production site: Farm
-            performance = pgettext("barbarians_building", "The farmer needs %1% on average to sow and harvest a sheaf of wheat."):bformat(format_minutes_seconds(1, 40))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Farm, part 1
+               pgettext("barbarians_building", "The farmer sows and harvests one sheaf of wheat between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(57), format_minutes_seconds(1, 12)),
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Farm, part 2
+               pgettext("barbarians_building", "The farm needs at least %s to achieve 100%% productivity."):bformat(ngettext("%d growing field", "%d growing fields", 6):bformat(6))
+            }
          }
       },
       {
