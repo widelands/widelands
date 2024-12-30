@@ -156,7 +156,7 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
 				}
 				map.emplace(dir, anim_name);
 			}
-			walk_name_.emplace(std::make_pair(std::move(range), map));
+			walk_name_.emplace(std::move(range), map);
 		}
 	}
 }
@@ -168,7 +168,7 @@ SoldierDescr::BattleAttribute::BattleAttribute(std::unique_ptr<LuaTable> table) 
 		maximum = table->get_int("maximum");
 		if (base > maximum) {
 			throw GameDataError(
-			   "Base %d is greater than maximum %d for a soldier's battle attribute.", base, maximum);
+			   "Base %u is greater than maximum %u for a soldier's battle attribute.", base, maximum);
 		}
 	} else {
 		maximum = base;
@@ -431,8 +431,9 @@ uint32_t Soldier::get_level(TrainingAttribute const at) const {
 		return evade_level_;
 	case TrainingAttribute::kTotal:
 		return health_level_ + attack_level_ + defense_level_ + evade_level_;
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 int32_t Soldier::get_training_attribute(TrainingAttribute const attr) const {
@@ -447,8 +448,9 @@ int32_t Soldier::get_training_attribute(TrainingAttribute const attr) const {
 		return evade_level_;
 	case TrainingAttribute::kTotal:
 		return health_level_ + attack_level_ + defense_level_ + evade_level_;
+	default:
+		return Worker::get_training_attribute(attr);
 	}
-	return Worker::get_training_attribute(attr);
 }
 
 unsigned Soldier::get_max_health() const {
@@ -473,7 +475,7 @@ unsigned Soldier::get_evade() const {
 
 //  Unsignedness ensures that we can only heal, not hurt through this method.
 void Soldier::heal(const unsigned health) {
-	molog(owner().egbase().get_gametime(), "[soldier] healing (%d+)%d/%d\n", health, current_health_,
+	molog(owner().egbase().get_gametime(), "[soldier] healing (%u+)%u/%u\n", health, current_health_,
 	      get_max_health());
 	assert(health);
 	assert(current_health_ < get_max_health());
@@ -487,7 +489,7 @@ void Soldier::heal(const unsigned health) {
 void Soldier::damage(const unsigned value) {
 	assert(current_health_ > 0);
 
-	molog(owner().egbase().get_gametime(), "[soldier] damage %d(-%d)/%d\n", current_health_, value,
+	molog(owner().egbase().get_gametime(), "[soldier] damage %u(-%u)/%u\n", current_health_, value,
 	      get_max_health());
 	if (current_health_ < value) {
 		current_health_ = 0;
@@ -540,6 +542,8 @@ Vector2f Soldier::calc_drawpos(const EditorGameBase& game,
 		break;
 	case CD_NONE:
 		break;
+	default:
+		NEVER_HERE();
 	}
 
 	if (moving) {
@@ -633,6 +637,9 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 		if (draw_health_bar) {
 			draw_position.y -= 5 * scale;
 		}
+		break;
+	default:
+		NEVER_HERE();
 	}
 
 	if (draw_health_bar) {
@@ -682,11 +689,12 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 
 	// Draw level info in building windows, or if kSoldierLevels is on.
 	if (draw_mode == InfoMode::kInBuilding || ((info_to_draw & InfoToDraw::kSoldierLevels) != 0)) {
-		const auto draw_level_image = [icon_size, scale, &draw_position, dst](
+		const Recti src_rect(0, 0, icon_size, icon_size);
+		const auto draw_level_image = [icon_size, scale, &draw_position, dst, &src_rect](
 		                                 const Vector2i& offset, const Image* image) {
 			dst->blitrect_scale(
 			   Rectf(draw_position + offset * icon_size * scale, icon_size * scale, icon_size * scale),
-			   image, Recti(0, 0, icon_size, icon_size), 1.f, BlendMode::UseAlpha);
+			   image, src_rect, 1.f, BlendMode::UseAlpha);
 		};
 
 		draw_level_image(Vector2i(-1, -2), get_attack_level_pic());
@@ -835,7 +843,7 @@ void Soldier::start_task_attack(Game& game, Building& building, CombatFlags flag
 	if (get_retreat_health() > get_current_health()) {
 		set_retreat_health(get_current_health());
 	}
-	molog(game.get_gametime(), "[attack] starting, retreat health: %d\n", get_retreat_health());
+	molog(game.get_gametime(), "[attack] starting, retreat health: %u\n", get_retreat_health());
 }
 
 void Soldier::attack_update(Game& game, State& state) {
@@ -1016,7 +1024,7 @@ void Soldier::attack_update(Game& game, State& state) {
 	if (enemy == nullptr || consider_retreat) {
 		// Injured soldiers will try to return to safe site at home.
 		if (consider_retreat) {
-			molog(game.get_gametime(), " [attack] badly injured (%d), retreating...\n",
+			molog(game.get_gametime(), " [attack] badly injured (%u), retreating...\n",
 			      get_current_health());
 			state.coords = Coords::null();
 			state.objvar1 = nullptr;
@@ -1024,7 +1032,7 @@ void Soldier::attack_update(Game& game, State& state) {
 		// The old militarysite gets replaced by a new one, so if "enemy" is not
 		// valid anymore, we either "conquered" the new building, or it was
 		// destroyed.
-		if (state.coords) {
+		if (state.coords.valid()) {
 			BaseImmovable* const newimm = map[state.coords].get_immovable();
 			upcast(MilitarySite, newsite, newimm);
 			if ((newsite != nullptr) && (&newsite->owner() == &owner())) {
@@ -1074,8 +1082,8 @@ void Soldier::attack_update(Game& game, State& state) {
 	//  give the enemy soldier some time to act
 	schedule_act(game, Duration(enemy->attack_target()->attack(this) ==
 	                                  AttackTarget::AttackResult::DefenderLaunched ?
-                                  1000 :
-                                  10));
+	                               1000 :
+	                               10));
 }
 
 void Soldier::attack_pop(Game& game, State& /* state */) {
@@ -1142,7 +1150,7 @@ void Soldier::start_task_defense(Game& game, bool stayhome) {
 			set_retreat_health(get_current_health());
 		}
 	}
-	molog(game.get_gametime(), "[defense] retreat health set: %d\n", get_retreat_health());
+	molog(game.get_gametime(), "[defense] retreat health set: %u\n", get_retreat_health());
 }
 
 struct SoldierDistance {
@@ -1245,7 +1253,7 @@ void Soldier::defense_update(Game& game, State& state) {
 	if (soldiers.empty() || (get_current_health() < get_retreat_health())) {
 		if (get_current_health() < get_retreat_health()) {
 			assert(state.ivar1 & CF_RETREAT_WHEN_INJURED);
-			molog(game.get_gametime(), "[defense] I am heavily injured (%d)!\n", get_current_health());
+			molog(game.get_gametime(), "[defense] I am heavily injured (%u)!\n", get_current_health());
 		} else {
 			molog(game.get_gametime(), "[defense] no enemy soldiers found, ending task\n");
 		}
@@ -1350,12 +1358,13 @@ void Soldier::start_task_move_in_battle(Game& game, CombatWalkingDir dir) {
 	case CD_NONE:
 	case CD_COMBAT_E:
 	case CD_COMBAT_W:
-		throw GameDataError("bad direction '%d'", dir);
+	default:
+		throw GameDataError("bad direction '%u'", dir);
 	}
 
 	const Map& map = game.map();
 	const Duration tdelta = Duration(map.calc_cost(get_position(), mapdir)) / 2;
-	molog(game.get_gametime(), "[move_in_battle] dir: (%d) tdelta: (%d)\n", dir, tdelta.get());
+	molog(game.get_gametime(), "[move_in_battle] dir: (%u) tdelta: (%u)\n", dir, tdelta.get());
 	combat_walking_ = dir;
 	combat_walkstart_ = game.get_gametime();
 	combat_walkend_ = combat_walkstart_ + tdelta;
@@ -1383,6 +1392,8 @@ void Soldier::move_in_battle_update(Game& game, State& /* state */) {
 		case CD_COMBAT_E:
 			combat_walking_ = CD_NONE;
 			break;
+		default:
+			NEVER_HERE();
 		}
 		return pop_task(game);
 	}
@@ -1544,7 +1555,7 @@ void Soldier::battle_update(Game& game, State& /* state */) {
 			assert(battle_ == opponent.get_battle());
 
 			if (opponent.is_walking()) {
-				molog(game.get_gametime(), "[battle]: Opponent '%d' is walking, sleeping\n",
+				molog(game.get_gametime(), "[battle]: Opponent '%u' is walking, sleeping\n",
 				      opponent.serial());
 				// We should be woken up by our opponent, but add a timeout anyway for robustness
 				return start_task_idle(game, descr().get_animation("idle", this), 5000);
@@ -1955,16 +1966,16 @@ void Soldier::send_space_signals(Game& game) {
 void Soldier::log_general_info(const EditorGameBase& egbase) const {
 	Worker::log_general_info(egbase);
 	molog(egbase.get_gametime(), "[Soldier]\n");
-	molog(egbase.get_gametime(), "Levels: %d/%d/%d/%d\n", health_level_, attack_level_,
+	molog(egbase.get_gametime(), "Levels: %u/%u/%u/%u\n", health_level_, attack_level_,
 	      defense_level_, evade_level_);
-	molog(egbase.get_gametime(), "Health:   %d/%d\n", current_health_, get_max_health());
-	molog(egbase.get_gametime(), "Retreat:  %d\n", retreat_health_);
-	molog(egbase.get_gametime(), "Attack:   %d-%d\n", get_min_attack(), get_max_attack());
-	molog(egbase.get_gametime(), "Defense:  %d%%\n", get_defense());
-	molog(egbase.get_gametime(), "Evade:    %d%%\n", get_evade());
+	molog(egbase.get_gametime(), "Health:   %u/%u\n", current_health_, get_max_health());
+	molog(egbase.get_gametime(), "Retreat:  %u\n", retreat_health_);
+	molog(egbase.get_gametime(), "Attack:   %u-%u\n", get_min_attack(), get_max_attack());
+	molog(egbase.get_gametime(), "Defense:  %u%%\n", get_defense());
+	molog(egbase.get_gametime(), "Evade:    %u%%\n", get_evade());
 	molog(egbase.get_gametime(), "CombatWalkingDir:   %i\n", combat_walking_);
-	molog(egbase.get_gametime(), "CombatWalkingStart: %i\n", combat_walkstart_.get());
-	molog(egbase.get_gametime(), "CombatWalkEnd:      %i\n", combat_walkend_.get());
+	molog(egbase.get_gametime(), "CombatWalkingStart: %u\n", combat_walkstart_.get());
+	molog(egbase.get_gametime(), "CombatWalkEnd:      %u\n", combat_walkend_.get());
 	molog(egbase.get_gametime(), "HasBattle:   %s\n", battle_ != nullptr ? "yes" : "no");
 	if (battle_ != nullptr) {
 		molog(egbase.get_gametime(), "BattleSerial: %u\n", battle_->serial());

@@ -70,8 +70,8 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
         [&settings](int player_number) {
 	        const GameSettings& s = settings.settings();
 	        return (player_number > 0 && player_number <= static_cast<int>(s.players.size())) ?
-                     &s.players.at(player_number - 1).color :
-                     nullptr;
+	                  &s.players.at(player_number - 1).color :
+	                  nullptr;
         },
         0,
         0,
@@ -97,8 +97,15 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
 	left_column_box_.add(chat_.get(), UI::Box::Resizing::kFullSize);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
-		if (s.action == NoteGameSettings::Action::kMap) {
+		switch (s.action) {
+		case NoteGameSettings::Action::kMap:
 			map_changed();
+			break;
+		case NoteGameSettings::Action::kWinCondition:
+			last_win_condition_ = settings_.get_win_condition_script();
+			break;
+		default:
+			break;
 		}
 	});
 	update_warn_desyncing_addon();
@@ -175,7 +182,6 @@ void LaunchMPG::clicked_select_map_callback(const MapData* map, const bool scena
 	settings_.set_map(map->name, map->filenames.at(0), map->theme, map->background, map->nrplayers);
 
 	map_changed();
-	update_win_conditions();
 }
 
 /**
@@ -221,7 +227,7 @@ void LaunchMPG::clicked_select_savegame() {
 				warning.run<UI::Panel::Returncodes>();
 			}
 		}
-		update_win_conditions();
+		update_tags_and_win_conditions();
 	});
 }
 
@@ -287,6 +293,8 @@ void LaunchMPG::map_changed() {
 			}
 		}
 	}
+
+	update_tags_and_win_conditions();
 }
 
 /**

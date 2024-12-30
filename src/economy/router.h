@@ -20,6 +20,7 @@
 
 #include <cstdint>
 #include <functional>
+#include <vector>
 
 #include "logic/map_objects/tribes/wareworker.h"
 
@@ -43,6 +44,11 @@ struct Router {
 	                WareWorker type,
 	                int32_t cost_cutoff,
 	                ITransportCostCalculator& cost_calculator);
+	bool find_nearest(std::vector<RoutingNode*> start_nodes,
+	                  RoutingNode& end,
+	                  IRoute* route,
+	                  WareWorker type,
+	                  ITransportCostCalculator& cost_calculator);
 	uint32_t assign_cycle();
 
 private:

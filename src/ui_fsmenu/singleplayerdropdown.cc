@@ -119,8 +119,8 @@ void SinglePlayerTribeDropdown::rebuild() {
 void SinglePlayerTribeDropdown::selection_action() {
 	const PlayerSettings& player_settings = settings_->settings().players[id_];
 	dropdown_.set_disable_style(player_settings.state == PlayerSettings::State::kShared ?
-                                  UI::ButtonDisableStyle::kPermpressed :
-                                  UI::ButtonDisableStyle::kFlat);
+	                               UI::ButtonDisableStyle::kPermpressed :
+	                               UI::ButtonDisableStyle::kFlat);
 	if (dropdown_.has_selection()) {
 		if (player_settings.state == PlayerSettings::State::kShared) {
 			settings_->set_player_shared(id_, stoul(dropdown_.get_selected()));
@@ -311,6 +311,7 @@ void SinglePlayerStartTypeDropdown::fill() {
 		}
 	}
 
+	int first_added = -1;
 	for (size_t i = 0; i < tribeinfo.initializations.size(); ++i) {
 		const Widelands::TribeBasicInfo::Initialization& addme = tribeinfo.initializations[i];
 		bool matches_tags = true;
@@ -324,7 +325,15 @@ void SinglePlayerStartTypeDropdown::fill() {
 		    (addme.incompatible_win_conditions.count(settings_->get_win_condition_script()) == 0u)) {
 			dropdown_.add(_(addme.descname), i, nullptr, i == player_setting.initialization_index,
 			              _(addme.tooltip));
+			if (first_added < 0) {
+				first_added = i;
+			}
 		}
+	}
+
+	if (!dropdown_.has_selection() && first_added >= 0) {
+		dropdown_.select(first_added);
+		selection_action();
 	}
 }
 

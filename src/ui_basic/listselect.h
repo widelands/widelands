@@ -57,7 +57,7 @@ struct BaseListselect : public Panel {
 	Notifications::Signal<uint32_t> selected;
 	Notifications::Signal<uint32_t> double_clicked;
 
-	void clear();
+	virtual void clear();
 	void sort(uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
 	/**
 	 * Text conventions: Title Case for the 'name', Sentence case for the 'tooltip_text'
@@ -68,7 +68,8 @@ struct BaseListselect : public Panel {
 	         bool select_this,
 	         const std::string& tooltip_text,
 	         const std::string& hotkey,
-	         unsigned indent);
+	         unsigned indent,
+	         bool enable);
 
 	void remove(uint32_t);
 	void remove(const char* str);
@@ -93,7 +94,8 @@ struct BaseListselect : public Panel {
 		return selection_;
 	}
 
-	void select(uint32_t i);
+	enum class SnapSelectionToEnabled { kNo, kUp, kDown };
+	void select(uint32_t i, SnapSelectionToEnabled snap = SnapSelectionToEnabled::kNo);
 	bool has_selection() const;
 
 	uint32_t get_selected() const;
@@ -134,14 +136,11 @@ struct BaseListselect : public Panel {
 	void scroll_to_selection();
 
 	void set_linked_dropdown(UI::BaseDropdown* d) {
-		linked_dropdown = d;
+		linked_dropdown_ = d;
 	}
-
-private:
-	static const int32_t ms_darken_value = -20;
-
-	void set_scrollpos(int32_t);
-	Recti get_highlight_rect(const std::string& text, int x, int y);
+	[[nodiscard]] UI::BaseDropdown* get_linked_dropdown() {
+		return linked_dropdown_;
+	}
 
 	struct EntryRecord {
 		explicit EntryRecord(const std::string& init_name,
@@ -150,6 +149,7 @@ private:
 		                     const std::string& tooltip_text,
 		                     const std::string& hotkey_text,
 		                     unsigned indent,
+		                     bool enable,
 		                     const UI::TableStyleInfo& style);
 		~EntryRecord();
 
@@ -160,9 +160,21 @@ private:
 		const Align name_alignment;
 		const Align hotkey_alignment;
 		const unsigned indent;
+		const bool enable;
 		std::shared_ptr<const UI::RenderedText> rendered_name;
 		std::shared_ptr<const UI::RenderedText> rendered_hotkey;
 	};
+
+	const EntryRecord& at(size_t index) const {
+		assert(index < entry_records_.size());
+		return *entry_records_.at(index);
+	}
+
+private:
+	static const int32_t ms_darken_value = -20;
+
+	void set_scrollpos(int32_t);
+	Recti get_highlight_rect(const std::string& text, int x, int y);
 
 	int max_pic_width_;
 	int widest_text_{0};
@@ -185,10 +197,18 @@ private:
 	std::string current_tooltip_;
 	bool select_with_wheel_{true};
 
-	UI::BaseDropdown* linked_dropdown{nullptr};
+	UI::BaseDropdown* linked_dropdown_{nullptr};
 };
 
 template <typename Entry> struct Listselect : public BaseListselect {
+	/**
+	 * Listselect<Entry&> is no longer permitted. Allowing references as
+	 * template parameter is not a good idea (e.g. STL containers don't
+	 * allow it). You should use pointers instead because they are more
+	 * explicit, and that was how Listselect<Entry&> worked internally.
+	 */
+	static_assert(!std::is_reference<Entry>::value, "Listselect does not accept reference types!");
+
 	Listselect(Panel* parent,
 	           const std::string& name,
 	           int32_t x,
@@ -200,16 +220,22 @@ template <typename Entry> struct Listselect : public BaseListselect {
 	   : BaseListselect(parent, name, x, y, w, h, style, selection_mode) {
 	}
 
+	void clear() override {
+		entry_cache_.clear();
+		BaseListselect::clear();
+	}
+
 	void add(const std::string& name,
 	         Entry value,
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
 	         const std::string& tooltip_text = std::string(),
 	         const std::string& hotkey = std::string(),
-	         const unsigned indent = 0) {
+	         const unsigned indent = 0,
+	         const bool enable = true) {
 		entry_cache_.push_back(value);
 		BaseListselect::add(
-		   name, entry_cache_.size() - 1, pic, select_this, tooltip_text, hotkey, indent);
+		   name, entry_cache_.size() - 1, pic, select_this, tooltip_text, hotkey, indent, enable);
 	}
 
 	const Entry& operator[](uint32_t const i) const {
@@ -222,46 +248,6 @@ template <typename Entry> struct Listselect : public BaseListselect {
 
 private:
 	std::deque<Entry> entry_cache_;
-};
-
-/**
- * This template specialization is for backwards compatibility and convenience
- * only. Allowing references as template parameter is not a good idea
- * (e.g. STL containers don't allow it), you should really use pointers instead
- * because they are more explicit, and that's what this specialization does
- * internally.
- */
-template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> {
-	using Base = Listselect<Entry*>;
-
-	Listselect(Panel* parent,
-	           const std::string& name,
-	           int32_t x,
-	           int32_t y,
-	           uint32_t w,
-	           uint32_t h,
-	           UI::PanelStyle style,
-	           ListselectLayout selection_mode = ListselectLayout::kPlain)
-	   : Base(parent, name, x, y, w, h, style, selection_mode) {
-	}
-
-	void add(const std::string& name,
-	         Entry& value,
-	         const Image* pic = nullptr,
-	         const bool select_this = false,
-	         const std::string& tooltip_text = std::string(),
-	         const std::string& hotkey = std::string(),
-	         const unsigned indent = 0) {
-		Base::add(name, &value, pic, select_this, tooltip_text, hotkey, indent);
-	}
-
-	Entry& operator[](uint32_t const i) const {
-		return *Base::operator[](i);
-	}
-
-	Entry& get_selected() const {
-		return *Base::get_selected();
-	}
 };
 }  // namespace UI
 

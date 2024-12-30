@@ -215,7 +215,7 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 	if (immovable != INVALID_INDEX) {
 		// Remember that we're building on top of an immovable so we can put it back if the building
 		// gets removed
-		b.old_buildings_.push_back(std::make_pair(immovable, false));
+		b.old_buildings_.emplace_back(immovable, false);
 	}
 	for (const auto& pair : former_buildings) {
 		b.old_buildings_.push_back(pair);
@@ -230,9 +230,9 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 
 bool BuildingDescr::suitability(const Map& /* map */, const FCoords& fc) const {
 	return ((mine_ ? fc.field->nodecaps() & Widelands::BUILDCAPS_MINE :
-                    static_cast<int>(
+	                 static_cast<int>(
 	                    size_ <= ((built_over_immovable_ == INVALID_INDEX ? fc.field->nodecaps() :
-                                                                           fc.field->maxcaps()) &
+	                                                                        fc.field->maxcaps()) &
 	                              Widelands::BUILDCAPS_SIZEMASK))) != 0) &&
 	       (built_over_immovable_ == INVALID_INDEX ||
 	        ((fc.field->get_immovable() != nullptr) &&
@@ -359,6 +359,9 @@ bool Building::get_passable() const {
 }
 
 Flag& Building::base_flag() {
+	return *flag_;
+}
+const Flag& Building::base_flag() const {
 	return *flag_;
 }
 
@@ -544,8 +547,12 @@ std::string Building::info_string(const InfoStringFormat& format) {
 	std::string result;
 	switch (format) {
 	case InfoStringFormat::kCensus:
-		if (upcast(ConstructionSite const, constructionsite, this)) {
+		if (descr().type() == MapObjectType::CONSTRUCTIONSITE) {
+			upcast(ConstructionSite const, constructionsite, this);
 			result = constructionsite->building().descname();
+		} else if (descr().type() == MapObjectType::WAREHOUSE) {
+			upcast(Warehouse const, warehouse, this);
+			result = warehouse->warehouse_census_string();
 		} else {
 			result = descr().descname();
 		}
@@ -558,6 +565,8 @@ std::string Building::info_string(const InfoStringFormat& format) {
 			result = productionsite->production_result();
 		}
 		break;
+	default:
+		NEVER_HERE();
 	}
 	return result;
 }
@@ -611,7 +620,7 @@ bool Building::leave_check_and_wait(Game& game, Worker& w) {
 		schedule_act(game, leave_time_ - time);
 	}
 
-	leave_queue_.push_back(&w);
+	leave_queue_.emplace_back(&w);
 	return false;
 }
 
@@ -700,7 +709,7 @@ void Building::draw(const Time& gametime,
 			                    &get_owner()->get_playercolor());
 		} else {
 			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(), t,
-			                    nullptr, kBuildingSilhouetteOpacity);
+			                    nullptr, kImmovableSilhouetteOpacity);
 		}
 	}
 
@@ -708,7 +717,7 @@ void Building::draw(const Time& gametime,
 		dst->blit_animation(point_on_dst, coords, scale, anim_, t, &get_owner()->get_playercolor());
 	} else {
 		dst->blit_animation(
-		   point_on_dst, coords, scale, anim_, t, nullptr, kBuildingSilhouetteOpacity);
+		   point_on_dst, coords, scale, anim_, t, nullptr, kImmovableSilhouetteOpacity);
 	}
 
 	//  door animation?
@@ -727,8 +736,8 @@ void Building::draw_info(const InfoToDraw info_to_draw,
                          const float scale,
                          RenderTarget* dst) {
 	const std::string statistics_string = (info_to_draw & InfoToDraw::kStatistics) != 0 ?
-                                            info_string(InfoStringFormat::kStatistics) :
-                                            "";
+	                                         info_string(InfoStringFormat::kStatistics) :
+	                                         "";
 	do_draw_info(info_to_draw, info_string(InfoStringFormat::kCensus), statistics_string,
 	             point_on_dst, scale, dst);
 }
@@ -772,9 +781,9 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 	      flag_->get_position().y);
 
 	molog(egbase.get_gametime(), "anim: %s\n", descr().get_animation_name(anim_).c_str());
-	molog(egbase.get_gametime(), "animstart: %i\n", animstart_.get());
+	molog(egbase.get_gametime(), "animstart: %u\n", animstart_.get());
 
-	molog(egbase.get_gametime(), "leave_time: %i\n", leave_time_.get());
+	molog(egbase.get_gametime(), "leave_time: %u\n", leave_time_.get());
 
 	molog(egbase.get_gametime(), "leave_queue.size(): %" PRIuS "\n", leave_queue_.size());
 	FORMAT_WARNINGS_OFF

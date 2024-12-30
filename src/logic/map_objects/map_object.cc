@@ -154,7 +154,7 @@ ObjectManager::~ObjectManager() {
 		log_warn("ObjectManager: ouch! remaining objects\n");
 	}
 
-	verb_log_info("lastserial: %i\n", lastserial_);
+	verb_log_info("lastserial: %u\n", lastserial_);
 }
 
 /**
@@ -618,7 +618,7 @@ void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
 
 const Image* MapObject::representative_image() const {
 	return descr().representative_image(get_owner() != nullptr ? &get_owner()->get_playercolor() :
-                                                                nullptr);
+	                                                             nullptr);
 }
 
 /**

@@ -24,6 +24,7 @@
 #include "economy/flag.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game_controller.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message.h"
 #include "logic/objective.h"
@@ -32,7 +33,8 @@
 #include "logic/player_end_result.h"
 #include "logic/playersmanager.h"
 #include "scripting/globals.h"
-#include "scripting/lua_map.h"
+#include "scripting/map/lua_field.h"
+#include "scripting/map/lua_tribe_description.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/story_message_box.h"
@@ -123,6 +125,7 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
    PROP_RO(LuaPlayer, objectives),
    PROP_RO(LuaPlayer, defeated),
    PROP_RO(LuaPlayer, resigned),
+   PROP_RO(LuaPlayer, end_result),
    PROP_RO(LuaPlayer, messages),
    PROP_RO(LuaPlayer, inbox),
    PROP_RO(LuaPlayer, color),
@@ -131,6 +134,7 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
    PROP_RW(LuaPlayer, see_all),
    PROP_RW(LuaPlayer, allow_additional_expedition_items),
    PROP_RW(LuaPlayer, hidden_from_general_statistics),
+   PROP_RO(LuaPlayer, ai_type),
    {nullptr, nullptr, nullptr},
 };
 
@@ -217,6 +221,21 @@ int LuaPlayer::get_resigned(lua_State* L) {
 	const Widelands::PlayerEndStatus* p =
 	   get_egbase(L).player_manager()->get_player_end_status(player_number());
 	lua_pushboolean(L, p != nullptr && p->result == Widelands::PlayerEndResult::kResigned ? 1 : 0);
+	return 1;
+}
+
+/* RST
+   .. attribute:: end_result
+
+      .. versionadded:: 1.2
+
+      (RO) This player's end status: :const:`0`: lost, :const:`1`: won, :const:`2`: resigned,
+           :const:`255`: end status is not set
+*/
+int LuaPlayer::get_end_result(lua_State* L) {
+	const Widelands::PlayerEndStatus* p =
+	   get_egbase(L).player_manager()->get_player_end_status(player_number());
+	lua_pushinteger(L, static_cast<int>(p->result));
 	return 1;
 }
 
@@ -348,6 +367,24 @@ int LuaPlayer::get_hidden_from_general_statistics(lua_State* L) {
 int LuaPlayer::set_hidden_from_general_statistics(lua_State* L) {
 	get(L, get_egbase(L)).set_hidden_from_general_statistics(luaL_checkboolean(L, -1));
 	return 0;
+}
+
+/* RST
+   .. attribute:: ai_type
+
+      .. versionadded:: 1.2
+
+      (RO) Type of the AI controlling this player
+      ("normal", "weak", "very_weak", "empty"; "" if human controlled only)
+
+      This information is reliable for multi player games. For single player games,
+      the value for an ai player may also be "random" or even "".
+*/
+int LuaPlayer::get_ai_type(lua_State* L) {
+	Widelands::Game& game = get_game(L);
+	const Widelands::Player& p = get(L, game);
+	lua_pushstring(L, p.get_ai());
+	return 1;
 }
 
 /*
@@ -761,7 +798,7 @@ int LuaPlayer::hide_fields(lua_State* L) {
 	const Widelands::HideOrRevealFieldMode mode =
 	   (state == "permanent")  ? Widelands::HideOrRevealFieldMode::kHide :
 	   (state == "explorable") ? Widelands::HideOrRevealFieldMode::kUnexplore :
-                                Widelands::HideOrRevealFieldMode::kUnreveal;
+	                             Widelands::HideOrRevealFieldMode::kUnreveal;
 	if (mode == Widelands::HideOrRevealFieldMode::kUnreveal && state != "seen") {
 		report_error(L, "'%s' is no valid parameter for hide_fields!", state.c_str());
 	}
@@ -1518,6 +1555,8 @@ int LuaInboxMessage::get_status(lua_State* L) {
 	case Widelands::Message::Status::kArchived:
 		lua_pushstring(L, "archived");
 		break;
+	default:
+		NEVER_HERE();
 	}
 	return 1;
 }

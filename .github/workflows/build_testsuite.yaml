@@ -9,15 +9,15 @@ jobs:
       matrix:
         # We test the two newest and the two oldest versions of each of the two compilers
         config: [Debug, Release]
-        os: [ubuntu-22.04]
-        compiler: [clang-15, clang-14, g++-12, g++-11]
+        os: [ubuntu-24.04]
+        compiler: [clang-18, clang-17, g++-14, g++-13]
         include:
           # Some compilers need an older ubuntu version to run correctly
-          - compiler: g++-7
-            os: ubuntu-20.04
+          - compiler: g++-9
+            os: ubuntu-22.04
             config: Debug
-          - compiler: g++-7
-            os: ubuntu-20.04
+          - compiler: g++-9
+            os: ubuntu-22.04
             config: Release
           - compiler: g++-8
             os: ubuntu-20.04
@@ -66,7 +66,7 @@ jobs:
         fi
         mkdir build
         pushd build
-        cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="ON" -DOPTION_BUILD_CODECHECK="OFF"
+        cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="ON" -DOPTION_BUILD_CODECHECK="OFF"
         grep -v REVDETECT-BROKEN VERSION
         make -k -j$(nproc) VERBOSE=1
     - name: Make install/uninstall
@@ -86,10 +86,4 @@ jobs:
         build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf || [ $? -eq 2 ]
     - name: Testsuite
       run: |
-        # regression_test.py
-        TIMEOUT=""
-        if [ "${{ matrix.config }}" = "Debug" ]
-        then
-          TIMEOUT="-t 20"
-        fi
-        ./regression_test.py -b build/src/widelands $TIMEOUT
+        ./regression_test.py

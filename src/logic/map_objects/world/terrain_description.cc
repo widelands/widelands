@@ -96,6 +96,8 @@ TerrainDescription::Type::Type(TerrainDescription::Is init_is) : is(init_is) {
 		descname = _("unwalkable");
 		icon = g_image_cache->get("images/wui/editor/terrain_unwalkable.png");
 		break;
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -131,10 +133,10 @@ TerrainDescription::TerrainDescription(const LuaTable& table,
 		}
 	}
 
-	if (!(0 < fertility_ && fertility_ < 1000)) {
+	if (fertility_ <= 0 || fertility_ >= 1000) {
 		throw GameDataError("%s: fertility is not in (0, 1000).", name_.c_str());
 	}
-	if (!(0 < humidity_ && humidity_ < 1000)) {
+	if (humidity_ <= 0 || humidity_ >= 1000) {
 		throw GameDataError("%s: humidity is not in (0, 1000).", name_.c_str());
 	}
 	if (temperature_ < 0) {
@@ -148,8 +150,8 @@ TerrainDescription::TerrainDescription(const LuaTable& table,
 
 	const std::string default_resource(table.get_string("default_resource"));
 	default_resource_index_ = !default_resource.empty() ?
-                                descriptions.load_resource(default_resource) :
-                                Widelands::INVALID_INDEX;
+	                             descriptions.load_resource(default_resource) :
+	                             Widelands::INVALID_INDEX;
 
 	if (default_resource_amount_ > 0 && !is_resource_valid(default_resource_index_)) {
 		throw GameDataError("Default resource is not in valid resources.\n");

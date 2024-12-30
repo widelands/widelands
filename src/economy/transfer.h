@@ -58,6 +58,9 @@ struct Transfer {
 	[[nodiscard]] uint32_t get_steps_left() const {
 		return route_.get_nrsteps();
 	}
+	[[nodiscard]] uint32_t get_cost_left() const {
+		return route_.get_totalcost();
+	}
 
 	/// Called by the controlled ware or worker
 	PlayerImmovable* get_next_step(PlayerImmovable*, bool& psuccess);

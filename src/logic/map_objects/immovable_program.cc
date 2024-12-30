@@ -76,12 +76,13 @@ For general information about the format, see :ref:`map_object_programs_syntax`.
 Available actions are:
 
 - `animate`_
+- `playsound`_
+- `script`_
 - `transform`_
 - `grow`_
 - `remove`_
 - `seed`_
 - `construct`_
-- `playsound`_
 */
 
 ImmovableProgram::ImmovableProgram(const std::string& init_name,
@@ -111,6 +112,8 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 				   std::unique_ptr<Action>(new ActSeed(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "playsound") {
 				actions_.push_back(std::unique_ptr<Action>(new ActPlaySound(parseinput.arguments)));
+			} else if (parseinput.name == "script") {
+				actions_.push_back(std::unique_ptr<Action>(new ActRunScript(parseinput.arguments)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActConstruct(parseinput.arguments, immovable)));
@@ -143,9 +146,9 @@ ImmovableProgram::ActAnimate::ActAnimate(const std::vector<std::string>& argumen
 void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) const {
 	immovable.start_animation(game, parameters.animation);
 	immovable.program_step(game, Duration(parameters.duration.get() != 0u ?
-                                            1 + game.logic_rand() % parameters.duration.get() +
+	                                         1 + game.logic_rand() % parameters.duration.get() +
 	                                            game.logic_rand() % parameters.duration.get() :
-                                            0));
+	                                         0));
 }
 
 /* RST
@@ -166,6 +169,21 @@ void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) c
 	Notifications::publish(NoteSound(SoundType::kAmbient, parameters.fx, immovable.get_position(),
 	                                 parameters.priority, parameters.allow_multiple));
 	immovable.program_step(game);
+}
+
+/* RST
+
+script
+------
+Runs a Lua function. See :ref:`map_object_programs_script`.
+*/
+ImmovableProgram::ActRunScript::ActRunScript(const std::vector<std::string>& arguments)
+   : parameters(MapObjectProgram::parse_act_script(arguments)) {
+}
+
+void ImmovableProgram::ActRunScript::execute(Game& game, Immovable& immovable) const {
+	MapObjectProgram::do_run_script(game.lua(), &immovable, parameters.function);
+	return immovable.program_step(game);
 }
 
 /* RST

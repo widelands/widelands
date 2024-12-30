@@ -121,6 +121,9 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 			break;
 		case AiType::kVeryWeak:
 			general_score = -1;
+			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 
@@ -207,7 +210,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 			if (!is_visible) {
 				if (observer.second.last_time_seen + Duration(20 * 60 * 1000) < gametime) {
 					verb_log_dbg_time(
-					   gametime, "site %d not visible for more than 20 minutes\n", observer.first);
+					   gametime, "site %u not visible for more than 20 minutes\n", observer.first);
 					disappeared_sites.push_back(observer.first);
 				}
 				continue;
@@ -326,21 +329,21 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 				inputs[5] = (observer.second.attack_soldiers_competency > 25) ? 4 : 0;
 				inputs[6] = (2 * observer.second.defenders_strength >
 				             3 * observer.second.attack_soldiers_strength) ?
-                           -6 :
-                           0;
+				               -6 :
+				               0;
 				inputs[7] = (3 * observer.second.defenders_strength >
 				             2 * observer.second.attack_soldiers_strength) ?
-                           -3 :
-                           0;
+				               -3 :
+				               0;
 				inputs[8] = (soldier_status_ == SoldiersStatus::kBadShortage ||
 				             soldier_status_ == SoldiersStatus::kShortage) ?
-                           -2 :
-                           0;
+				               -2 :
+				               0;
 				inputs[96] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -2 : 0;
 				inputs[9] = (soldier_status_ == SoldiersStatus::kBadShortage ||
 				             soldier_status_ == SoldiersStatus::kShortage) ?
-                           -3 :
-                           0;
+				               -3 :
+				               0;
 				inputs[10] = (observer.second.mines_nearby == ExtendedBool::kTrue) ? 3 : -1;
 				inputs[11] = (observer.second.mines_nearby == ExtendedBool::kTrue) ? 2 : 0;
 				inputs[12] = (owner_number == persistent_data->last_attacked_player) ? 2 : -2;
@@ -349,28 +352,28 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 				inputs[15] = (strong_enough) ? 3 : -3;
 				inputs[16] = (player_statistics.get_player_power(pn) >
 				              player_statistics.get_old_player_power(pn)) ?
-                            2 :
-                            -2;
+				                2 :
+				                -2;
 				inputs[17] = (player_statistics.get_player_power(pn) >
 				              player_statistics.get_old60_player_power(pn)) ?
-                            3 :
-                            -3;
+				                3 :
+				                -3;
 				inputs[18] = (player_statistics.get_visible_enemies_power(gametime) >
 				              player_statistics.get_old_visible_enemies_power(gametime)) ?
-                            -1 :
-                            1;
+				                -1 :
+				                1;
 				inputs[19] = (player_statistics.get_visible_enemies_power(gametime) >
 				              player_statistics.get_old_visible_enemies_power(gametime)) ?
-                            -3 :
-                            3;
+				                -3 :
+				                3;
 				inputs[20] = (player_statistics.get_player_power(owner_number) >
 				              player_statistics.get_old_player_power(owner_number)) ?
-                            -2 :
-                            2;
+				                -2 :
+				                2;
 				inputs[21] = (player_statistics.get_player_power(owner_number) >
 				              player_statistics.get_old_player_power(owner_number)) ?
-                            -1 :
-                            1;
+				                -1 :
+				                1;
 				inputs[22] = (my_to_enemy_power_ratio > 80) ? 2 : -2;
 				inputs[23] = (my_to_enemy_power_ratio > 90) ? 2 : -2;
 				inputs[24] = (my_to_enemy_power_ratio > 110) ? 2 : -2;
@@ -381,12 +384,12 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 				inputs[29] = general_score;
 				inputs[30] = ((mines_per_type[iron_resource_id].in_construction +
 				               mines_per_type[iron_resource_id].finished) > 0) ?
-                            1 :
-                            -1;
+				                1 :
+				                -1;
 				inputs[31] = (player_statistics.get_player_power(pn) >
 				              player_statistics.get_old60_player_power(pn) + 5) ?
-                            2 :
-                            -2;
+				                2 :
+				                -2;
 				inputs[32] = soldier_trained_log.count(gametime);
 				inputs[33] = soldier_trained_log.count(gametime) / 2;
 				inputs[34] = general_score * 2;
@@ -449,18 +452,18 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 				inputs[82] = -1;
 				inputs[83] = (soldier_status_ == SoldiersStatus::kBadShortage ||
 				              soldier_status_ == SoldiersStatus::kShortage) ?
-                            -3 :
-                            1;
+				                -3 :
+				                1;
 				inputs[84] = (soldier_status_ == SoldiersStatus::kBadShortage ||
 				              soldier_status_ == SoldiersStatus::kShortage) ?
-                            -4 :
-                            1;
+				                -4 :
+				                1;
 				inputs[85] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -2 : 1;
 				inputs[86] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -4 : 1;
 				inputs[87] = (soldier_status_ == SoldiersStatus::kBadShortage ||
 				              soldier_status_ == SoldiersStatus::kShortage) ?
-                            -2 :
-                            1;
+				                -2 :
+				                1;
 				inputs[88] = (observer.second.attack_soldiers_strength < 2) ? -3 : 0;
 				inputs[89] = (observer.second.attack_soldiers_strength < 4) ? -2 : 0;
 				inputs[90] = (observer.second.attack_soldiers_strength < 5) ? -3 : 0;
@@ -479,16 +482,16 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 				inputs[105] = (observer.second.enemy_military_presence_in_region > 15) ? -6 : -2;
 				inputs[106] = (observer.second.attack_soldiers_strength >
 				               2 * observer.second.enemy_military_presence_in_region) ?
-                             1 :
-                             -1;
+				                 1 :
+				                 -1;
 				inputs[107] = (observer.second.attack_soldiers_strength >
 				               3 * observer.second.enemy_military_presence_in_region) ?
-                             3 :
-                             0;
+				                 3 :
+				                 0;
 				inputs[108] = (observer.second.attack_soldiers_strength >
 				               4 * observer.second.enemy_military_presence_in_region) ?
-                             6 :
-                             0;
+				                 6 :
+				                 0;
 				inputs[109] =
 				   (observer.second.attack_soldiers_strength - observer.second.defenders_strength) *
 				   std::abs(management_data.get_military_number_at(116)) / 15;
@@ -617,10 +620,10 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 	}
 	verb_log_info_time(
 	   gametime,
-	   "%2d: attacking site at %3dx%3d, score %3d, with %2d soldiers, attacking %2d times, after "
-	   "%5d seconds\n",
-	   player_number(), flag->get_position().x, flag->get_position().y, best_score, a,
-	   enemy_sites[best_target].attack_counter + 1,
+	   "%2u: attacking site at %3dx%3d, score %3d, with %2d soldiers, attacking %2u times, after "
+	   "%5u seconds\n",
+	   static_cast<unsigned>(player_number()), flag->get_position().x, flag->get_position().y,
+	   best_score, a, enemy_sites[best_target].attack_counter + 1,
 	   (gametime - enemy_sites[best_target].last_time_attacked).get() / 1000);
 
 	game().send_player_enemyflagaction(*flag, player_number(), attacking_soldiers, true);
@@ -695,14 +698,16 @@ void DefaultAI::count_military_vacant_positions() {
 	if (soldiers_counted < total_soldiers) {
 		int32_t remaining_soldiers = total_soldiers - soldiers_counted;
 		verb_log_dbg_time(game().get_gametime(),
-		                  "AI %d: soldiers: total: %d, associated: %d, difference: %d",
-		                  player_number(), total_soldiers, soldiers_counted, remaining_soldiers);
+		                  "AI %u: soldiers: total: %d, associated: %d, difference: %d",
+		                  static_cast<unsigned>(player_number()), total_soldiers, soldiers_counted,
+		                  remaining_soldiers);
 		on_stock_ += remaining_soldiers;
 	} else if (soldiers_counted > total_soldiers) {
 		// This shouldn't happen
 		log_warn_time(game().get_gametime(),
-		              "AI %d: soldiers: total: %d, associated: %d, unexpected: %d", player_number(),
-		              total_soldiers, soldiers_counted, soldiers_counted - total_soldiers);
+		              "AI %u: soldiers: total: %d, associated: %d, unexpected: %d",
+		              static_cast<unsigned>(player_number()), total_soldiers, soldiers_counted,
+		              soldiers_counted - total_soldiers);
 	}
 
 	vacant_mil_positions_ += understaffed_;
@@ -754,9 +759,10 @@ bool DefaultAI::check_trainingsites(const Time& gametime) {
 	if (tso.bo->total_count() > tso.bo->cnt_limit_by_aimode) {
 		verb_log_warn_time(
 		   gametime,
-		   "AI check_trainingsites: AI player %d: count of %s exceeds an AI limit %d: actual count: "
-		   "%d\n",
-		   player_number(), tso.bo->name, tso.bo->cnt_limit_by_aimode, tso.bo->total_count());
+		   "AI check_trainingsites: AI player %u: count of %s exceeds an AI limit %u: actual count: "
+		   "%u\n",
+		   static_cast<unsigned>(player_number()), tso.bo->name, tso.bo->cnt_limit_by_aimode,
+		   tso.bo->total_count());
 	}
 
 	const Widelands::DescriptionIndex enhancement = ts->descr().enhancement();
@@ -873,34 +879,34 @@ bool DefaultAI::check_trainingsites(const Time& gametime) {
 			inputs[0] = -shortage;
 			inputs[1] = (player_statistics.get_visible_enemies_power(gametime) >
 			             player_statistics.get_old_visible_enemies_power(gametime)) ?
-                        1 :
-                        0;
+			               1 :
+			               0;
 			inputs[2] = (mines_.size() > 2) ? 1 : 0;
 			inputs[3] = (mines_per_type[iron_resource_id].total_count() == 0) ? -1 : 0;
 			inputs[4] = (player_statistics.get_player_power(pn) * 2 >
 			             player_statistics.get_visible_enemies_power(gametime)) ?
-                        -1 :
-                        0;
+			               -1 :
+			               0;
 			inputs[5] = (player_statistics.get_player_power(pn) * 2 >
 			             player_statistics.get_enemies_average_power()) ?
-                        -1 :
-                        0;
+			               -1 :
+			               0;
 			inputs[6] = (player_statistics.get_player_power(pn) >
 			             player_statistics.get_visible_enemies_power(gametime)) ?
-                        -1 :
-                        1;
+			               -1 :
+			               1;
 			inputs[7] = (player_statistics.get_player_power(pn) >
 			             player_statistics.get_enemies_average_power()) ?
-                        -1 :
-                        1;
+			               -1 :
+			               1;
 			inputs[8] = (player_statistics.get_player_power(pn) * 2 >
 			             player_statistics.get_visible_enemies_power(gametime)) ?
-                        -1 :
-                        1;
+			               -1 :
+			               1;
 			inputs[9] = (player_statistics.get_player_power(pn) * 2 >
 			             player_statistics.get_enemies_average_power()) ?
-                        -1 :
-                        1;
+			               -1 :
+			               1;
 			inputs[10] = (3 - shortage) * 1;
 			inputs[11] = (3 - shortage) * 2;
 			inputs[12] = +1;
@@ -909,46 +915,46 @@ bool DefaultAI::check_trainingsites(const Time& gametime) {
 			inputs[15] = -2;
 			inputs[16] = (player_statistics.get_player_power(pn) <
 			              player_statistics.get_old60_player_power(pn)) ?
-                         1 :
-                         0;
+			                1 :
+			                0;
 			inputs[17] =
 			   (player_statistics.get_player_power(pn) < player_statistics.get_old_player_power(pn)) ?
-               1 :
-               0;
+			      1 :
+			      0;
 			inputs[18] = (player_statistics.get_player_power(pn) <
 			              player_statistics.get_old60_player_power(pn) + 4) ?
-                         1 :
-                         0;
+			                1 :
+			                0;
 			inputs[19] = (player_statistics.get_player_power(pn) <
 			              player_statistics.get_old_player_power(pn) + 1) ?
-                         1 :
-                         0;
+			                1 :
+			                0;
 			inputs[20] = (player_statistics.get_player_power(pn) <
 			              player_statistics.get_old60_player_power(pn) + 4) ?
-                         0 :
-                         1;
+			                0 :
+			                1;
 			inputs[21] = (player_statistics.get_player_power(pn) <
 			              player_statistics.get_old_player_power(pn) + 2) ?
-                         0 :
-                         1;
+			                0 :
+			                1;
 
 			if (player_statistics.any_enemy_seen_lately(gametime)) {
 				inputs[20] = (player_statistics.get_player_power(pn) <
 				              player_statistics.get_old60_player_power(pn) + 4) ?
-                            0 :
-                            1;
+				                0 :
+				                1;
 				inputs[21] = (player_statistics.get_player_power(pn) <
 				              player_statistics.get_old_player_power(pn) + 2) ?
-                            0 :
-                            1;
+				                0 :
+				                1;
 				inputs[22] = (player_statistics.get_player_power(pn) <
 				              player_statistics.get_old60_player_power(pn) + 4) ?
-                            1 :
-                            0;
+				                1 :
+				                0;
 				inputs[23] = (player_statistics.get_player_power(pn) <
 				              player_statistics.get_old_player_power(pn) + 2) ?
-                            1 :
-                            0;
+				                1 :
+				                0;
 			}
 			inputs[24] = (shortage < 2) ? 1 : 0;
 			inputs[25] = (shortage < 1) ? 1 : 0;
@@ -1003,7 +1009,7 @@ bool DefaultAI::check_militarysites(const Time& gametime) {
 
 	// Inform if we are above ai type limit.
 	if (militarysites.front().bo->total_count() > militarysites.front().bo->cnt_limit_by_aimode) {
-		verb_log_warn_time(gametime, "AI check_militarysites: Too many %s: %d, ai limit: %d\n",
+		verb_log_warn_time(gametime, "AI check_militarysites: Too many %s: %u, ai limit: %u\n",
 		                   militarysites.front().bo->name, militarysites.front().bo->total_count(),
 		                   militarysites.front().bo->cnt_limit_by_aimode);
 	}
@@ -1052,16 +1058,16 @@ bool DefaultAI::check_militarysites(const Time& gametime) {
 	dismantle_score -= 3 * management_data.neuron_pool[13].get_result_safe(
 	                          bf.enemy_owned_land_nearby / 10, kAbsValue);
 	dismantle_score -= (bf.enemy_owned_land_nearby > 0) ?
-                         std::abs(management_data.get_military_number_at(77)) :
-                         -std::abs(management_data.get_military_number_at(77));
+	                      std::abs(management_data.get_military_number_at(77)) :
+	                      -std::abs(management_data.get_military_number_at(77));
 	dismantle_score -=
 	   management_data.neuron_pool[14].get_result_safe(bf.unowned_land_nearby / 10, kAbsValue);
 	dismantle_score -= (bf.unowned_land_nearby > 0) ?
-                         std::abs(management_data.get_military_number_at(99)) :
-                         -std::abs(management_data.get_military_number_at(99));
+	                      std::abs(management_data.get_military_number_at(99)) :
+	                      -std::abs(management_data.get_military_number_at(99));
 	dismantle_score -= (bf.portspace_nearby == ExtendedBool::kTrue) ?
-                         std::abs(management_data.get_military_number_at(91)) :
-                         0;
+	                      std::abs(management_data.get_military_number_at(91)) :
+	                      0;
 
 	dismantle_score +=
 	   management_data.neuron_pool[28].get_result_safe(bf.area_military_capacity, kAbsValue);
@@ -1261,64 +1267,64 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
 	inputs[35] =
 	   (!player_statistics.any_enemy_seen_lately(gametime) &&
 	    (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land())) ?
-         2 :
-         0;
+	      2 :
+	      0;
 	inputs[36] =
 	   (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	         (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land() * 2) ?
-         1 :
-         0;
+	      1 :
+	      0;
 	inputs[37] =
 	   (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	         (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land() / 2) ?
-         1 :
-         0;
+	      1 :
+	      0;
 
 	inputs[38] = (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	                   (player_statistics.get_player_land(pn) <
 	                    player_statistics.get_old_player_land(pn) * 105 / 100) ?
-                   2 :
-                   0;
+	                2 :
+	                0;
 	inputs[39] = (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	                   (player_statistics.get_player_land(pn) <
 	                    player_statistics.get_old_player_land(pn) + 110) ?
-                   3 :
-                   0;
+	                3 :
+	                0;
 
 	inputs[40] =
 	   (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn)) ? 1 :
-                                                                                                0;
+	                                                                                             0;
 	inputs[41] =
 	   (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn)) ? 1 :
-                                                                                                0;
+	                                                                                             0;
 	inputs[42] = (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	                   (player_statistics.get_player_power(pn) <
 	                    player_statistics.get_old60_player_power(pn)) ?
-                   1 :
-                   0;
+	                1 :
+	                0;
 	inputs[43] = (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	                   (player_statistics.get_player_power(pn) >
 	                    player_statistics.get_old60_player_power(pn)) ?
-                   1 :
-                   0;
+	                1 :
+	                0;
 
 	inputs[44] =
 	   (player_statistics.get_player_land(pn) < player_statistics.get_enemies_average_land()) ? 1 :
-                                                                                               0;
+	                                                                                            0;
 	inputs[45] =
 	   (player_statistics.get_player_land(pn) > player_statistics.get_enemies_average_land()) ? 1 :
-                                                                                               0;
+	                                                                                            0;
 
 	inputs[46] =
 	   (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	         (player_statistics.get_player_land(pn) < player_statistics.get_enemies_average_land()) ?
-         2 :
-         0;
+	      2 :
+	      0;
 	inputs[47] =
 	   (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	         (player_statistics.get_player_land(pn) > player_statistics.get_enemies_average_land()) ?
-         2 :
-         0;
+	      2 :
+	      0;
 
 	inputs[48] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -3 : 0;
 	inputs[49] = (soldier_status_ == SoldiersStatus::kShortage) ? -2 : 0;
@@ -1326,13 +1332,13 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
 	inputs[50] = (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	                   (player_statistics.get_player_land(pn) <
 	                    player_statistics.get_old_player_land(pn) * 110 / 100) ?
-                   1 :
-                   0;
+	                1 :
+	                0;
 	inputs[51] = (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	                   (player_statistics.get_player_land(pn) <
 	                    player_statistics.get_old_player_land(pn) * 105 / 100) ?
-                   2 :
-                   0;
+	                2 :
+	                0;
 
 	inputs[52] =
 	   (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land()) ? 1 : 0;
@@ -1340,27 +1346,27 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
 	   (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land()) ? 3 : 0;
 	inputs[54] =
 	   (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land() * 2) ? 2 :
-                                                                                               0;
+	                                                                                            0;
 	inputs[55] =
 	   (player_statistics.get_player_land(pn) < player_statistics.get_enemies_max_land() / 2) ? 2 :
-                                                                                               0;
+	                                                                                            0;
 	inputs[56] =
 	   !player_statistics.any_enemy_seen_lately(gametime) && (spots_ < kSpotsTooLittle) ? +2 : 0;
 	inputs[57] =
 	   player_statistics.any_enemy_seen_lately(gametime) && (spots_ < kSpotsTooLittle) ? +2 : 0;
 	inputs[58] = ((mines_per_type[iron_resource_id].in_construction +
 	               mines_per_type[iron_resource_id].finished) == 0) ?
-                   +3 :
-                   0;
+	                +3 :
+	                0;
 	inputs[59] = ((mines_per_type[iron_resource_id].in_construction +
 	               mines_per_type[iron_resource_id].finished) == 0) ?
-                   +1 :
-                   0;
+	                +1 :
+	                0;
 	inputs[60] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? -2 : 0;
 	inputs[61] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy ||
 	              expansion_type.get_expansion_type() == ExpansionMode::kBoth) ?
-                   -4 :
-                   0;
+	                -4 :
+	                0;
 	inputs[62] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -3 : 0;
 	inputs[63] = (soldier_status_ == SoldiersStatus::kShortage) ? -2 : 0;
 
@@ -1379,38 +1385,38 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
 	inputs[76] = (gametime < Time(45 * 60 * 1000)) ? (size - 1) * -3 : 0;
 	inputs[77] =
 	   (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 2) ?
-         1 :
-         0;
+	      1 :
+	      0;
 	inputs[78] =
 	   (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn) + 5) ?
-         1 :
-         0;
+	      1 :
+	      0;
 	inputs[79] =
 	   (player_statistics.get_player_power(pn) < player_statistics.get_old60_player_power(pn) + 10) ?
-         1 :
-         0;
+	      1 :
+	      0;
 	inputs[80] =
 	   (player_statistics.get_player_power(pn) > player_statistics.get_old60_player_power(pn) + 20) ?
-         1 :
-         0;
+	      1 :
+	      0;
 	if (!player_statistics.any_enemy_seen_lately(gametime)) {
 		inputs[81] = (player_statistics.get_player_land(pn) * 130 / 100 <
 		              player_statistics.get_old60_player_land(pn)) ?
-                      2 :
-                      0;
+		                2 :
+		                0;
 		inputs[82] = (player_statistics.get_old60_player_land(pn) * 130 / 100 <
 		              player_statistics.get_player_land(pn)) ?
-                      0 :
-                      2;
+		                0 :
+		                2;
 	} else {
 		inputs[83] = (player_statistics.get_player_land(pn) * 130 / 100 <
 		              player_statistics.get_old60_player_land(pn)) ?
-                      2 :
-                      0;
+		                2 :
+		                0;
 		inputs[84] = (player_statistics.get_old60_player_land(pn) * 130 / 100 <
 		              player_statistics.get_player_land(pn)) ?
-                      0 :
-                      2;
+		                0 :
+		                2;
 	}
 	inputs[85] = -1 * static_cast<int32_t>(msites_in_constr());
 	inputs[86] = -1 * static_cast<int32_t>(msites_in_constr()) / 2;
@@ -1421,22 +1427,22 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
 	inputs[91] = -static_cast<int32_t>(msites_in_constr()) / 4;
 	inputs[92] = (player_statistics.get_player_land(pn) <
 	              player_statistics.get_old_player_land(pn) * 130 / 100) ?
-                   2 :
-                   0;
+	                2 :
+	                0;
 	inputs[93] = (player_statistics.get_player_land(pn) <
 	              player_statistics.get_old_player_land(pn) * 140 / 100) ?
-                   2 :
-                   0;
+	                2 :
+	                0;
 	inputs[94] = (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	                   (player_statistics.get_player_land(pn) <
 	                    player_statistics.get_old_player_land(pn) * 120 / 100) ?
-                   2 :
-                   0;
+	                2 :
+	                0;
 	inputs[95] = (!player_statistics.any_enemy_seen_lately(gametime)) &&
 	                   (player_statistics.get_player_land(pn) <
 	                    player_statistics.get_old_player_land(pn) * 140 / 100) ?
-                   2 :
-                   0;
+	                2 :
+	                0;
 	if (msites_built() > 5) {
 		inputs[96] = -1 * static_cast<int32_t>(msites_in_constr());
 		inputs[97] = -1 * static_cast<int32_t>(msites_in_constr()) / 2;
@@ -1448,8 +1454,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
 	inputs[102] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? -4 : 0;
 	inputs[104] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy ||
 	               expansion_type.get_expansion_type() == ExpansionMode::kBoth) ?
-                    -3 :
-                    0;
+	                 -3 :
+	                 0;
 	inputs[105] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? -1 : 0;
 	inputs[106] = stocked_wood_level < 25 ? -1 * (size - 1) : 0;
 	inputs[107] = stocked_wood_level < 25 ? -3 * (size - 1) : 0;
@@ -1539,7 +1545,7 @@ void DefaultAI::soldier_trained(const Widelands::TrainingSite& site) {
 		}
 	}
 
-	verb_log_warn_time(
-	   gametime, "AI %d: soldier_trained(): trainingsite not found\n", player_number());
+	verb_log_warn_time(gametime, "AI %u: soldier_trained(): trainingsite not found\n",
+	                   static_cast<unsigned>(player_number()));
 }
 }  // namespace AI

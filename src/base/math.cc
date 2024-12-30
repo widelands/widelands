@@ -30,7 +30,7 @@ namespace math {
 		try {                                                                                        \
 			return function(str);                                                                     \
 		} catch (...) {                                                                              \
-			throw WLWarning("", "Expected a " #type ", received: %s", str.c_str());                   \
+			throw WLWarning("", "Expected a " #type ", received: '%s'", str.c_str());                 \
 		}                                                                                            \
 	}
 
@@ -50,7 +50,7 @@ unsigned read_percent_to_int(const std::string& input) {
 		                  // (\\d{1,2}) here, which is match[2].
 		                  (match[2].str().empty()     ? 0U :
 		                   match[2].str().size() == 1 ? 10U * std::stoul(match[2]) :
-                                                      std::stoul(match[2]));
+		                                                std::stoul(match[2]));
 
 		if (result > k100PercentAsInt) {
 			throw wexception(

@@ -83,8 +83,8 @@ bool CheckStepRoadAI::reachable_dest(const Widelands::Map& map,
 	Widelands::NodeCaps const caps = dest.field->nodecaps();
 
 	if ((caps & movecaps) == 0) {
-		if (!(((movecaps & Widelands::MOVECAPS_SWIM) != 0) &&
-		      ((caps & Widelands::MOVECAPS_WALK) != 0))) {
+		if (((movecaps & Widelands::MOVECAPS_SWIM) == 0) ||
+		    ((caps & Widelands::MOVECAPS_WALK) == 0)) {
 			return false;
 		}
 		if (!map.can_reach_by_water(dest)) {
@@ -301,7 +301,7 @@ NearFlag::NearFlag() {
 }
 
 void EventTimeQueue::push(const Time& production_time, const uint32_t additional_id) {
-	queue.push_front(std::make_pair(production_time, additional_id));
+	queue.emplace_front(production_time, additional_id);
 }
 
 // Return count of entries in log (deque), if id is provided, it counts corresponding
@@ -584,7 +584,7 @@ void ManagementData::review(const Time& gametime,
 
 	verb_log_dbg_time(gametime,
 	                  "AIPARSE %2d reviewing sc: %5d Pr.p: %d (Bonuses:Te:%s I:%s Tr:%s, "
-	                  "Scores:Land:%5d+%4d Str:%4d PS:%4d, Att:%4d, Sh:%d, FinMns:%d\n",
+	                  "Scores:Land:%5d+%4d Str:%4d PS:%4u, Att:%4d, Sh:%d, FinMns:%d\n",
 	                  pn, score, primary_parent, (best_player_bonus) ? "Y" : "N",
 	                  (iron_mine_bonus) ? "Y" : "N", (training_bonus) ? "Y" : "N", land_score,
 	                  territory_growth_bonus, strength_score, ps_sites_score,
@@ -630,8 +630,8 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
 		// Child inherits DNA with probability 1/kSecondParentProbability from main parent
 		DnaParent dna_donor = (RNG::static_rand(kSecondParentProbability) > 0) ?
-                               DnaParent::kPrimary :
-                               DnaParent::kSecondary;
+		                         DnaParent::kPrimary :
+		                         DnaParent::kSecondary;
 
 		switch (dna_donor) {
 		case DnaParent::kPrimary:
@@ -640,6 +640,8 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 		case DnaParent::kSecondary:
 			set_military_number_at(i, AI_military_numbers_P2[i]);
 			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 
@@ -649,8 +651,8 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 
 	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
 		const DnaParent dna_donor = (RNG::static_rand(kSecondParentProbability) > 0) ?
-                                     DnaParent::kPrimary :
-                                     DnaParent::kSecondary;
+		                               DnaParent::kPrimary :
+		                               DnaParent::kSecondary;
 
 		switch (dna_donor) {
 		case DnaParent::kPrimary:
@@ -661,13 +663,15 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 			persistent_data->neuron_weights.push_back(input_weights_P2[i]);
 			persistent_data->neuron_functs.push_back(input_func_P2[i]);
 			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 
 	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kFNeuronPoolSize; ++i) {
 		const DnaParent dna_donor = (RNG::static_rand(kSecondParentProbability) > 0) ?
-                                     DnaParent::kPrimary :
-                                     DnaParent::kSecondary;
+		                               DnaParent::kPrimary :
+		                               DnaParent::kSecondary;
 		switch (dna_donor) {
 		case DnaParent::kPrimary:
 			persistent_data->f_neurons.push_back(f_neurons_P1[i]);
@@ -675,6 +679,8 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 		case DnaParent::kSecondary:
 			persistent_data->f_neurons.push_back(f_neurons_P2[i]);
 			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 
@@ -1162,8 +1168,8 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
 	const int my_team_sc =
 	   me_alone ? 0 : get_team_average_score(this_player_team, this_player_number);
 	const int other_team_sc = other_alone ?
-                                get_diplo_score(pn) - static_cast<int>(RNG::static_rand(10)) :
-                                get_team_average_score(other_tn, pn);
+	                             get_diplo_score(pn) - static_cast<int>(RNG::static_rand(10)) :
+	                             get_team_average_score(other_tn, pn);
 	const std::string myts_s = me_alone ? "" : format(" with team score %d", my_team_sc);
 	const std::string ots_s = other_alone ? "" : format(" and team score %d", other_team_sc);
 
@@ -1178,7 +1184,7 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
 				invite = true;  // Will fall through
 			} else {
 				verb_log_dbg_time(gametime,
-				                  "AI Diplomacy: Player(%d)%s cannot invite player (%d) with "
+				                  "AI Diplomacy: Player(%u)%s cannot invite player (%u) with "
 				                  "diploscore %d\n",
 				                  static_cast<unsigned int>(this_player_number), myts_s.c_str(),
 				                  static_cast<unsigned int>(pn), get_diplo_score(pn));
@@ -1187,7 +1193,7 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
 		} else {  // Other has team, or own team is less desirable than other player alone
 			verb_log_dbg_time(
 			   gametime,
-			   "AI Diplomacy: Player(%d)%s requests to join player (%d) with diploscore %d%s\n",
+			   "AI Diplomacy: Player(%u)%s requests to join player (%u) with diploscore %d%s\n",
 			   static_cast<unsigned int>(this_player_number), myts_s.c_str(),
 			   static_cast<unsigned int>(pn), get_diplo_score(pn), ots_s.c_str());
 			game.send_player_diplomacy(this_player_number, Widelands::DiplomacyAction::kJoin, pn);
@@ -1197,7 +1203,7 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
 	} else {  // Own team is more desirable, or everyone else is teamed up against us
 		if (other_alone) {
 			verb_log_dbg_time(gametime,
-			                  "AI Diplomacy: Player(%d)%s declines to invite player (%d) with "
+			                  "AI Diplomacy: Player(%u)%s declines to invite player (%u) with "
 			                  "diploscore %d\n",
 			                  static_cast<unsigned int>(this_player_number), myts_s.c_str(),
 			                  static_cast<unsigned int>(pn), get_diplo_score(pn));
@@ -1210,7 +1216,7 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
 
 	if (invite) {
 		verb_log_dbg_time(
-		   gametime, "AI Diplomacy: Player(%d)%s invites player (%d) to join with diploscore %d%s\n",
+		   gametime, "AI Diplomacy: Player(%u)%s invites player (%u) to join with diploscore %d%s\n",
 		   static_cast<unsigned int>(this_player_number), myts_s.c_str(),
 		   static_cast<unsigned int>(pn), get_diplo_score(pn), ots_s.c_str());
 		game.send_player_diplomacy(this_player_number, Widelands::DiplomacyAction::kInvite, pn);

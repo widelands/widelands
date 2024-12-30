@@ -2,7 +2,7 @@
 
 set -e
 
-USAGE="See compile.sh"
+# Command line parameters will be passed to compile.sh, check its help for usage
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SOURCE_DIR=$DIR/../../
@@ -31,12 +31,12 @@ if ! which python > /dev/null; then
       echo "No python executable found!"
    fi
 fi
-WLVERSION=`$PYTHON $DIR/../detect_revision.py`
+WLVERSION=$("$PYTHON" "$DIR"/../detect_revision.py)
 
 DESTINATION="WidelandsRelease"
 
-if [[ -f $SOURCE_DIR/WL_RELEASE ]]; then
-   WLVERSION="$(cat $SOURCE_DIR/WL_RELEASE)"
+if [[ -f "$SOURCE_DIR"/WL_RELEASE ]]; then
+   WLVERSION="$(cat "$SOURCE_DIR"/WL_RELEASE)"
 fi
 
 WLVERSION="${WLVERSION//\//\~}"  # Fix problems with slashes in branch names
@@ -57,25 +57,61 @@ function MakeDMG {
 
    find $DESTINATION -name ".?*" -exec rm -v {} \;
    UP=$(dirname $DESTINATION)
+   DMGFILE="$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg"
 
    echo "Copying COPYING"
-   cp $SOURCE_DIR/COPYING  $DESTINATION/COPYING.txt
+   cp "$SOURCE_DIR"/COPYING  "$DESTINATION"/COPYING.txt
 
    echo "Creating DMG ..."
-   hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg"
+   SUDO=""
+   if [ -n "$GITHUB_ACTION" ]; then
+      # Sometimes we get resource busy errors in the github actions
+      HDI_MAX_TRIES=3
+      # MacOS 13 is the worst
+      if [ "${MATRIX_OS}" = 13 ]; then
+         echo "Running on MacOS 13, run hdiutil as root"
+         SUDO=sudo
+      fi
+   else
+      HDI_MAX_TRIES=1
+   fi
+   HDI_TRY=0
+   while true; do
+      HDI_TRY=$(( ++HDI ))
+      HDI_RESULT=0
+      $SUDO hdiutil create -verbose -fs APFS -volname "Widelands $WLVERSION" \
+                    -srcfolder "$DESTINATION" "$DMGFILE" \
+         || HDI_RESULT=$?
+      if [ $HDI_RESULT -eq 0 ]; then
+         return
+      fi
+      if [ $HDI_TRY -eq $HDI_MAX_TRIES ]; then
+         exit $HDI_RESULT
+      fi
+      if [ -n "$GITHUB_ACTION" ]; then
+         echo "::warning::hdiutil MacOS $MATRIX_OS $TYPE try $HDI_TRY error code: ${HDI_RESULT}... retrying"
+      fi
+      if [ -f "$DMGFILE" ]; then
+        rm "$DMGFILE"
+      fi
+      # XProtect is one of the possible causes of the resource busy errors
+      sudo pkill -9 XProtect
+      echo "  will retry after 20 seconds..."
+      sleep 20
+   done
 }
 
 function MakeAppPackage {
    echo "Making $DESTINATION/Widelands.app now."
-   rm -Rf $DESTINATION/
+   rm -Rf "$DESTINATION"
 
-   mkdir $DESTINATION/
-   mkdir $DESTINATION/Widelands.app/
-   mkdir $DESTINATION/Widelands.app/Contents/
-   mkdir $DESTINATION/Widelands.app/Contents/Resources/
-   mkdir $DESTINATION/Widelands.app/Contents/MacOS/
-   cp $SOURCE_DIR/data/images/logos/widelands.icns $DESTINATION/Widelands.app/Contents/Resources/widelands.icns
-   ln -s /Applications $DESTINATION/Applications
+   mkdir "$DESTINATION"
+   mkdir "$DESTINATION"/Widelands.app
+   mkdir "$DESTINATION"/Widelands.app/Contents
+   mkdir "$DESTINATION"/Widelands.app/Contents/Resources
+   mkdir "$DESTINATION"/Widelands.app/Contents/MacOS
+   cp "$SOURCE_DIR"/data/images/logos/widelands.icns "$DESTINATION"/Widelands.app/Contents/Resources/widelands.icns
+   ln -s /Applications "$DESTINATION"/Applications
 
    cat > $DESTINATION/Widelands.app/Contents/Info.plist << EOF
 {
@@ -93,26 +129,29 @@ function MakeAppPackage {
 EOF
 
    echo "Copying data files ..."
-   rsync -Ca $SOURCE_DIR/data $DESTINATION/Widelands.app/Contents/MacOS/
-
-   echo "Copying locales ..."
-   rsync -Ca $SOURCE_DIR/build/locale $DESTINATION/Widelands.app/Contents/MacOS/data/
+   rsync -Ca "$SOURCE_DIR"/data "$DESTINATION"/Widelands.app/Contents/MacOS/
 
    echo "Copying binary ..."
-   cp -a $SOURCE_DIR/widelands $DESTINATION/Widelands.app/Contents/MacOS/
+   cp -a "$SOURCE_DIR"/widelands $DESTINATION/Widelands.app/Contents/MacOS/
 
    # Locate ASAN Library by asking llvm (nice trick by SirVer I suppose)
    ASANLIB=$(echo "int main(void){return 0;}" | xcrun clang -fsanitize=address \
        -xc -o/dev/null -v - 2>&1 |   tr ' ' '\n' | grep libclang_rt.asan_osx_dynamic.dylib)
 
-   ASANPATH=`dirname $ASANLIB`
+   ASANPATH=$(dirname "$ASANLIB")
 
    echo "Copying and fixing dynamic libraries... "
-   $SOURCE_DIR/utils/macos/bundle-dylibs.sh \
-      -l ../libs \
-      $DESTINATION/Widelands.app
+   # $SOURCE_DIR/utils/macos/bundle-dylibs.sh \
+   #  -l ../libs \
+   #  $DESTINATION/Widelands.app
 
-   echo "Re-sign libraries with an 'ad-hoc signing' see man codesign"
+   # Alternative Tool to use
+   dylibbundler --overwrite-dir --bundle-deps --no-codesign \
+	--search-path "$ASANPATH" \
+	--fix-file "$DESTINATION/Widelands.app/Contents/MacOS/widelands" \
+	--dest-dir "$DESTINATION/Widelands.app/Contents/libs"
+
+   echo "Re-sign libraries with 'ad-hoc signing' see man codesign"
    codesign --sign - --force $DESTINATION/Widelands.app/Contents/libs/*
 
    echo "Stripping binary ..."
@@ -121,21 +160,22 @@ EOF
 
 function BuildWidelands() {
    PREFIX_PATH=$(brew --prefix)
+   # TODO(tothxa): I don't think this is actually needed, as brew isn't used in this script
    eval "$($PREFIX_PATH/bin/brew shellenv)"
    export CMAKE_PREFIX_PATH="${PREFIX_PATH}/opt/icu4c"
 
    echo "FIXED ICU Issue $CMAKE_PREFIX_PATH"
 
-   pushd $SOURCE_DIR
+   pushd "$SOURCE_DIR"
    ./compile.sh \
       -DCMAKE_OSX_DEPLOYMENT_TARGET:STRING="$OSX_MIN_VERSION" \
       -DCMAKE_OSX_SYSROOT:PATH="$SDK_DIRECTORY" \
-      $@
+      "$@"
    popd
 
    echo "Done building."
 }
 
-BuildWidelands $@
+BuildWidelands "$@"
 MakeAppPackage
 MakeDMG

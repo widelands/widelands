@@ -517,6 +517,8 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 		pop_task(game);
 		schedule_destroy(game);
 		return;
+	default:
+		NEVER_HERE();
 	}
 	// if the real update function failed (e.g. nothing to transport), the ship goes idle
 	ship_update_idle(game, state);
@@ -600,7 +602,7 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 				}
 			}
 
-			if (closest_target) {
+			if (closest_target.valid()) {
 				molog(game.get_gametime(), "Closest target en route is (%i,%i)\n", closest_target.x,
 				      closest_target.y);
 				if (start_task_movepath(game, closest_target, 0, descr().get_sail_anims())) {
@@ -627,23 +629,23 @@ bool Ship::is_suitable_portspace(const Coords& coords) const {
 		return false;
 	}
 	return ship_type_ == ShipType::kWarship ? suited_as_invasion_portspace(coords) :
-                                             can_build_port_here(coords);
+	                                          can_build_port_here(coords);
 }
 
 void Ship::send_known_portspace_message(Game& game) {
 	const std::string& icon_filename =
 	   ship_type_ == ShipType::kWarship ? descr().icon_filename() : kPortspaceIconFile;
 	const std::string message_body = ship_type_ == ShipType::kWarship ?
-                                       _("A warship arrived at a known port build space.") :
-                                       _("An expedition ship arrived at a known port build space.");
+	                                    _("A warship arrived at a known port build space.") :
+	                                    _("An expedition ship arrived at a known port build space.");
 	send_message(game, _("Port Space"), _("Port Space Spotted"), message_body, icon_filename);
 }
 void Ship::send_new_portspace_message(Game& game) {
 	const std::string& icon_filename =
 	   ship_type_ == ShipType::kWarship ? descr().icon_filename() : kPortspaceIconFile;
 	const std::string message_body = ship_type_ == ShipType::kWarship ?
-                                       _("A warship found a new port build space.") :
-                                       _("An expedition ship found a new port build space.");
+	                                    _("A warship found a new port build space.") :
+	                                    _("An expedition ship found a new port build space.");
 	send_message(game, _("Port Space"), _("Port Space Found"), message_body, icon_filename);
 }
 
@@ -700,8 +702,8 @@ bool Ship::update_seen_portspaces(Game& game, const bool report_known, const boo
 
 	if (stopped) {
 		set_ship_state_and_notify(ship_type_ == ShipType::kWarship ?
-                                   ShipStates::kExpeditionWaiting :
-                                   ShipStates::kExpeditionPortspaceFound,
+		                             ShipStates::kExpeditionWaiting :
+		                             ShipStates::kExpeditionPortspaceFound,
 		                          NoteShip::Action::kWaitingForCommand);
 	} else if (changed) {
 		// TODO(tothxa): Is this still needed now that InteractivePlayer doesn't cache it?
@@ -832,7 +834,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 
 			if (map->calc_distance(position, dest->get_position()) <=
 			    (dest->descr().type() == MapObjectType::SHIP ? kNearDestinationShipRadius :
-                                                            kNearDestinationNoteRadius)) {
+			                                                   kNearDestinationNoteRadius)) {
 				// Already there, idle and await further orders.
 				start_task_idle(game, descr().main_animation(), 250);
 				return true;
@@ -897,6 +899,11 @@ void Ship::erase_warship_soldier_request() {
 }
 
 void Ship::update_warship_soldier_request(bool create) {
+	if (ship_type_ != ShipType::kWarship || is_refitting()) {
+		erase_warship_soldier_request();
+		return;
+	}
+
 	const EditorGameBase& egbase = owner().egbase();
 	PortDock* dock = requestdock_.get(egbase);
 
@@ -979,7 +986,7 @@ bool Ship::remember_detected_portspace(const Coords& coords) {
 	}
 
 	// Find the main direction from the nearest own port to the portspace.
-	if (static_cast<bool>(nearest_dock)) {
+	if (nearest_dock.valid()) {
 		dps->nearest_portdock =
 		   dynamic_cast<const Warehouse&>(*map[nearest_dock].get_immovable()).get_warehouse_name();
 		dps->direction_from_portdock =
@@ -1134,7 +1141,7 @@ bool Ship::is_on_destination_dock() const {
 }
 
 uint32_t Ship::min_warship_soldier_capacity() const {
-	return is_on_destination_dock() ? 0U : get_nritems();
+	return (ship_type_ != ShipType::kWarship || is_on_destination_dock()) ? 0U : get_nritems();
 }
 
 std::vector<Soldier*> Ship::onboard_soldiers() const {
@@ -1207,8 +1214,8 @@ void Ship::kickout_superfluous_soldiers(Game& game) {
 			}
 			unsigned soldier_level = soldier->get_total_level();
 			if (worst_fit == nullptr || (get_soldier_preference() == SoldierPreference::kRookies ?
-                                         soldier_level >= worst_fit_level :
-                                         soldier_level <= worst_fit_level)) {
+			                                soldier_level >= worst_fit_level :
+			                                soldier_level <= worst_fit_level)) {
 				worst_fit = &si;
 				worst_fit_level = soldier_level;
 			}
@@ -1262,9 +1269,10 @@ void Ship::warship_command(Game& game,
 			             false);
 		}
 		return;
-	}
 
-	throw wexception("Invalid warship command %d", static_cast<int>(cmd));
+	default:
+		throw wexception("Invalid warship command %d", static_cast<int>(cmd));
+	}
 }
 
 void Ship::start_battle(Game& game, Battle new_battle, bool immediately) {
@@ -1275,7 +1283,7 @@ void Ship::start_battle(Game& game, Battle new_battle, bool immediately) {
 
 	Ship* enemy_ship = new_battle.opponent.get(game);
 	if (enemy_ship == nullptr) {
-		if (!static_cast<bool>(new_battle.attack_coords)) {
+		if (!new_battle.attack_coords.valid()) {
 			molog(game.get_gametime(), "start_battle: no enemy found");
 			return;
 		}
@@ -1333,14 +1341,14 @@ void Ship::battle_update(Game& game) {
 	Battle& current_battle = battles_.back();
 	Ship* target_ship = current_battle.opponent.get(game);
 	if ((target_ship == nullptr || target_ship->state_is_sinking()) &&
-	    !static_cast<bool>(current_battle.attack_coords)) {
+	    !current_battle.attack_coords.valid()) {
 		molog(game.get_gametime(), "[battle] Enemy disappeared, cancel");
 		battles_.pop_back();
 		start_task_idle(game, descr().main_animation(), 100);
 		return;
 	}
 
-	assert((target_ship != nullptr) ^ static_cast<bool>(current_battle.attack_coords));
+	assert((target_ship != nullptr) ^ current_battle.attack_coords.valid());
 	assert(target_ship != nullptr || current_battle.is_first);
 	const Map& map = game.map();
 
@@ -1506,7 +1514,7 @@ void Ship::battle_update(Game& game) {
 			// For ports, skip the first round to allow defense warships to approach.
 			molog(game.get_gametime(), "[battle] Enemy in range");
 			set_phase(target_ship != nullptr ? Battle::Phase::kAttackersTurn :
-                                            Battle::Phase::kAttackerAttacking);
+			                                   Battle::Phase::kAttackerAttacking);
 			return start_task_idle(game, descr().main_animation(), 100);
 		}
 
@@ -1667,6 +1675,9 @@ void Ship::battle_update(Game& game) {
 		start_task_idle(game, descr().main_animation(),
 		                kAttackAnimationDuration);  // TODO(Nordfriese): proper animation
 		return;
+
+	default:
+		NEVER_HERE();
 	}
 
 	NEVER_HERE();
@@ -1839,7 +1850,8 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			start_task_idle(game, descr().main_animation(), kShipInterval);
 			return;
 		}  // scouting towards a specific direction
-		if (exp_dir_swimmable(expedition_->scouting_direction)) {
+		if (expedition_->scouting_direction != IDLE &&
+		    exp_dir_swimmable(expedition_->scouting_direction)) {
 			// the scouting direction is still free to move
 			state.ivar1 = 1;
 			start_task_move(game, expedition_->scouting_direction, descr().get_sail_anims(), false);
@@ -1861,7 +1873,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 	}
 	case ShipStates::kExpeditionColonizing: {
 		const Coords portspace = current_portspace();
-		assert(static_cast<bool>(portspace));
+		assert(portspace.valid());
 		upcast(ConstructionSite, cs, map[portspace].get_immovable());
 		// some safety checks that we have identified the correct csite
 		if ((cs != nullptr) && cs->get_owner() == get_owner() && cs->get_built_per64k() == 0 &&
@@ -1939,8 +1951,10 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 	}
 	case ShipStates::kSinkRequest:
 	case ShipStates::kSinkAnimation:
-		break;
+	default:
+		NEVER_HERE();
 	}
+
 	NEVER_HERE();
 }
 
@@ -1955,7 +1969,7 @@ bool Ship::check_port_space_still_available(Game& game) {
 	assert(expedition_);
 	const Coords portspace = current_portspace();
 	// recheck ownership before setting the csite
-	if (!static_cast<bool>(portspace)) {
+	if (!portspace.valid()) {
 		log_warn_time(
 		   game.get_gametime(), "Expedition list of seen port spaces is unexpectedly empty!\n");
 		return false;
@@ -2230,8 +2244,18 @@ void Ship::exp_scouting_direction(Game& game, WalkingDir scouting_direction) {
 	assert(expedition_ != nullptr);
 	destination_object_ = nullptr;
 	destination_coords_ = nullptr;
-	set_ship_state_and_notify(
-	   ShipStates::kExpeditionScouting, NoteShip::Action::kDestinationChanged);
+	if (scouting_direction == WalkingDir::IDLE) {
+		if (ship_type_ == ShipType::kTransport && !expedition_->seen_port_buildspaces.empty()) {
+			set_ship_state_and_notify(
+			   ShipStates::kExpeditionPortspaceFound, NoteShip::Action::kWaitingForCommand);
+		} else {
+			set_ship_state_and_notify(
+			   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
+		}
+	} else {
+		set_ship_state_and_notify(
+		   ShipStates::kExpeditionScouting, NoteShip::Action::kDestinationChanged);
+	}
 	expedition_->scouting_direction = scouting_direction;
 	expedition_->island_exploration = false;
 	set_destination(game, nullptr);
@@ -2393,6 +2417,8 @@ void Ship::draw(const EditorGameBase& egbase,
 			case ShipType::kWarship:
 				statistics_string = pgettext("ship_state", "Refitting to Warship");
 				break;
+			default:
+				NEVER_HERE();
 			}
 		} else {
 			if (ship_type_ == ShipType::kWarship) {
@@ -2458,6 +2484,8 @@ void Ship::draw(const EditorGameBase& egbase,
 				case (ShipStates::kSinkRequest):
 				case (ShipStates::kSinkAnimation):
 					break;
+				default:
+					NEVER_HERE();
 				}
 			}
 		}
@@ -2497,7 +2525,7 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 	uint32_t health_to_show = hitpoints_;
 	if (has_battle() &&
 	    battles_.back().phase == (battles_.back().is_first ? Battle::Phase::kDefenderAttacking :
-                                                            Battle::Phase::kAttackerAttacking)) {
+	                                                         Battle::Phase::kAttackerAttacking)) {
 		uint32_t pending_damage =
 		   battles_.back().pending_damage *
 		   (owner().egbase().get_gametime() - battles_.back().time_of_last_action).get() /
@@ -2566,19 +2594,19 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	molog(egbase.get_gametime(), "Ship belongs to fleet %u\nlastdock: %s\nrequestdock: %s\n",
 	      fleet_ != nullptr ? fleet_->serial() : 0,
 	      (lastdock_.is_set() ?
-             format("%u (%s at %3dx%3d)", lastdock_.serial(),
+	          format("%u (%s at %3dx%3d)", lastdock_.serial(),
 	                 lastdock_.get(egbase)->get_warehouse()->get_warehouse_name().c_str(),
 	                 lastdock_.get(egbase)->get_positions(egbase)[0].x,
 	                 lastdock_.get(egbase)->get_positions(egbase)[0].y)
 	             .c_str() :
-             "-"),
+	          "-"),
 	      (requestdock_.is_set() ?
-             format("%u (%s at %3dx%3d)", requestdock_.serial(),
+	          format("%u (%s at %3dx%3d)", requestdock_.serial(),
 	                 requestdock_.get(egbase)->get_warehouse()->get_warehouse_name().c_str(),
 	                 requestdock_.get(egbase)->get_positions(egbase)[0].x,
 	                 requestdock_.get(egbase)->get_positions(egbase)[0].y)
 	             .c_str() :
-             "-"));
+	          "-"));
 	if (const PortDock* dock = get_destination_port(egbase); dock != nullptr) {
 		molog(egbase.get_gametime(), "Has destination port %u (%3dx%3d) %s\n", dock->serial(),
 		      dock->get_positions(egbase)[0].x, dock->get_positions(egbase)[0].y,
@@ -2611,12 +2639,12 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 		molog(egbase.get_gametime(), "  * %u (%s), destination: %s\n", shipping_item.object_.serial(),
 		      shipping_item.object_.get(egbase)->descr().name().c_str(),
 		      (shipping_item.destination_dock_.is_set()) ?
-               format("%u (%d x %d)", shipping_item.destination_dock_.serial(),
+		         format("%u (%d x %d)", shipping_item.destination_dock_.serial(),
 		                shipping_item.destination_dock_.get(egbase)->get_positions(egbase)[0].x,
 		                shipping_item.destination_dock_.get(egbase)->get_positions(egbase)[0].y)
 
 		            .c_str() :
-               "-");
+		         "-");
 	}
 }
 
@@ -2787,8 +2815,8 @@ void Ship::Loader::load_pointers() {
 		ship.destination_object_ = nullptr;
 	}
 	ship.destination_coords_ = destination_coords_ == 0U ?
-                                 nullptr :
-                                 &ship.owner().get_detected_port_space(destination_coords_);
+	                              nullptr :
+	                              &ship.owner().get_detected_port_space(destination_coords_);
 
 	for (Serial serial : expedition_attack_target_serials_) {
 		if (serial != 0) {

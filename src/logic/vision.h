@@ -19,6 +19,8 @@
 #ifndef WL_LOGIC_VISION_H
 #define WL_LOGIC_VISION_H
 
+#include "base/wexception.h"
+
 namespace Widelands {
 
 enum class HideOrRevealFieldMode { kReveal, kUnreveal, kHide, kUnexplore };
@@ -60,6 +62,8 @@ public:
 			// kVisible initializes to the "visible by teammates" state
 			value_ = 2;
 			break;
+		default:
+			NEVER_HERE();
 		}
 		override_ = static_cast<uint8_t>(Override::kNoOverride);
 	}
@@ -75,6 +79,8 @@ public:
 			// kVisible initializes to the "visible by teammates" state
 			value_ = 2;
 			break;
+		default:
+			NEVER_HERE();
 		}
 		override_ = static_cast<uint8_t>(Override::kNoOverride);
 		return *this;
@@ -83,7 +89,7 @@ public:
 	[[nodiscard]] uint16_t value() const {
 		return value_;
 	}
-	operator VisibleState() const {  // NOLINT allow implicit conversion
+	[[nodiscard]] VisibleState state() const {
 		switch (static_cast<Override>(override_)) {
 		case Override::kHidden:
 			return VisibleState::kUnexplored;
@@ -101,11 +107,11 @@ public:
 		}
 	}
 
-	bool operator==(const Vision other) const {
+	[[nodiscard]] bool operator==(const Vision other) const {
 		return value_ == other.value_ && override_ == other.override_;
 	}
 
-	bool operator!=(const Vision other) const {
+	[[nodiscard]] bool operator!=(const Vision other) const {
 		return value_ != other.value_ || override_ != other.override_;
 	}
 

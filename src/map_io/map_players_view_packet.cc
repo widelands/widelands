@@ -74,7 +74,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 		if (packet_version >= 3 && packet_version <= kCurrentPacketVersion) {
 			const PlayerNumber nr_players = fr.unsigned_8();
 			if (map.get_nrplayers() != nr_players) {
-				throw wexception("Wrong number of players. Expected %d but read %d from packet\n",
+				throw wexception("Wrong number of players. Expected %u but read %u from packet\n",
 				                 static_cast<unsigned>(map.get_nrplayers()),
 				                 static_cast<unsigned>(nr_players));
 			}
@@ -83,7 +83,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 			iterate_players_existing(p, nr_players, egbase, player) {
 				const unsigned player_no_from_packet = fr.unsigned_8();
 				if (p != player_no_from_packet) {
-					throw wexception("Wrong player number. Expected %d but read %d from packet\n",
+					throw wexception("Wrong player number. Expected %u but read %u from packet\n",
 					                 static_cast<unsigned>(p),
 					                 static_cast<unsigned>(player_no_from_packet));
 				}
@@ -122,7 +122,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 						assert(f.vision.is_hidden());
 					}
 
-					if (f.vision == VisibleState::kPreviouslySeen) {
+					if (f.vision.state() == VisibleState::kPreviouslySeen) {
 						seen_fields.insert(&f);
 					}
 				}
@@ -143,14 +143,14 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 					assert(field_vector.size() == additionally_seen);
 					for (size_t i = 0; i < additionally_seen; ++i) {
 						Player::Field& f = player->fields_[stoi(field_vector[i])];
-						assert(f.vision == VisibleState::kUnexplored);
+						assert(f.vision.state() == VisibleState::kUnexplored);
 						seen_fields.insert(&f);
 					}
 				}
 
 				if (seen_fields.size() != no_of_seen_fields) {
 					throw wexception("Read %" PRIuS
-					                 " unseen fields but detected %d when the packet was written\n",
+					                 " unseen fields but detected %u when the packet was written\n",
 					                 seen_fields.size(), static_cast<unsigned>(no_of_seen_fields));
 				}
 
@@ -269,8 +269,8 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 							descr = fr.string();
 							field->constructionsite->was =
 							   descr.empty() ?
-                           nullptr :
-                           descriptions.get_building_descr(descriptions.safe_building_index(descr));
+							      nullptr :
+							      descriptions.get_building_descr(descriptions.safe_building_index(descr));
 
 							for (uint32_t j = fr.unsigned_32(); j != 0u; --j) {
 								field->constructionsite->intermediates.push_back(
@@ -288,7 +288,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 			iterate_players_existing(p, nr_players, egbase, player) {
 				for (MapIndex m = 0; m < no_of_fields; ++m) {
 					Player::Field& f = player->fields_[m];
-					if (f.vision == VisibleState::kVisible) {
+					if (f.vision.state() == VisibleState::kVisible) {
 						player->rediscover_node(map, map.get_fcoords(map[m]));
 					}
 				}
@@ -330,10 +330,10 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 				const Player::Field& f = player->fields_[m];
 				oss << static_cast<char>(f.vision.is_revealed() ? SavedVisionState::kRevealed :
 				                         f.vision.is_hidden()   ? SavedVisionState::kHidden :
-				                         f.vision == VisibleState::kPreviouslySeen ?
-                                                            SavedVisionState::kPreviouslySeen :
-                                                            SavedVisionState::kNone);
-				if (f.vision == VisibleState::kPreviouslySeen) {
+				                         f.vision.state() == VisibleState::kPreviouslySeen ?
+				                                                SavedVisionState::kPreviouslySeen :
+				                                                SavedVisionState::kNone);
+				if (f.vision.state() == VisibleState::kPreviouslySeen) {
 					seen_fields.insert(&f);
 					// The data for some of the terrains and edges between PreviouslySeen
 					// and Unexplored fields is stored in an Unexplored field. The data
@@ -341,7 +341,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 					const Coords coords(m % map.get_width(), m / map.get_width());
 					for (const Coords& c : {map.tr_n(coords), map.tl_n(coords), map.l_n(coords)}) {
 						const Player::Field& neighbour = player->fields_[map.get_index(c)];
-						if (neighbour.vision == VisibleState::kUnexplored) {
+						if (neighbour.vision.state() == VisibleState::kUnexplored) {
 							additionally_seen_fields.insert(&neighbour);
 						}
 					}
@@ -350,10 +350,10 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			const Player::Field& f = player->fields_[upper_bound];
 			oss << static_cast<char>(f.vision.is_revealed() ? SavedVisionState::kRevealed :
 			                         f.vision.is_hidden()   ? SavedVisionState::kHidden :
-			                         f.vision == VisibleState::kPreviouslySeen ?
-                                                         SavedVisionState::kPreviouslySeen :
-                                                         SavedVisionState::kNone);
-			if (f.vision == VisibleState::kPreviouslySeen) {
+			                         f.vision.state() == VisibleState::kPreviouslySeen ?
+			                                                SavedVisionState::kPreviouslySeen :
+			                                                SavedVisionState::kNone);
+			if (f.vision.state() == VisibleState::kPreviouslySeen) {
 				seen_fields.insert(&f);
 			}
 			fw.c_string(oss.str());
@@ -465,8 +465,8 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 				} else if (field->map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
 					fw.string(field->constructionsite->becomes->name());
 					fw.string(field->constructionsite->was != nullptr ?
-                            field->constructionsite->was->name() :
-                            "");
+					             field->constructionsite->was->name() :
+					             "");
 
 					fw.unsigned_32(field->constructionsite->intermediates.size());
 					for (const BuildingDescr* d : field->constructionsite->intermediates) {

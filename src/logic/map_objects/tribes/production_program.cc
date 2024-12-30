@@ -156,19 +156,20 @@ For general information about the format, see :ref:`map_object_programs_syntax`.
 
 Available actions are:
 
-- `animate`_
+- `return`_
 - `call`_
 - `callworker`_
-- `checksoldier`_
-- `construct`_
-- `consume`_
-- `mine`_
-- `playsound`_
-- `recruit`_
-- `produce`_
-- `return`_
 - `sleep`_
+- `animate`_
+- `consume`_
+- `produce`_
+- `recruit`_
+- `mine`_
+- `checksoldier`_
 - `train`_
+- `playsound`_
+- `script`_
+- `construct`_
 */
 
 ProductionProgram::ActReturn::Condition* create_economy_condition(
@@ -186,8 +187,9 @@ ProductionProgram::ActReturn::Condition* create_economy_condition(
 			descr.worker_demand_checks()->insert(wareworker.second);
 			return new ProductionProgram::ActReturn::EconomyNeedsWorker(wareworker.second);
 		}
+		default:
+			NEVER_HERE();
 		}
-		NEVER_HERE();
 	} catch (const GameDataError& e) {
 		throw GameDataError("economy condition: %s", e.what());
 	}
@@ -260,7 +262,7 @@ ProductionProgram::parse_ware_type_groups(std::vector<std::string>::const_iterat
 			ware_worker_names.insert(std::make_pair(item_index, type));
 		}
 		// Add set
-		result.push_back(std::make_pair(ware_worker_names, amount));
+		result.emplace_back(ware_worker_names, amount);
 	}
 	if (result.empty()) {
 		throw GameDataError("No wares or workers found");
@@ -275,10 +277,10 @@ BillOfMaterials ProductionProgram::parse_bill_of_materials(
 		const std::pair<std::string, std::string> produceme = read_key_value_pair(argument, ':', "1");
 
 		const DescriptionIndex index = ww == WareWorker::wwWARE ?
-                                        descriptions.load_ware(produceme.first) :
-                                        descriptions.load_worker(produceme.first);
+		                                  descriptions.load_ware(produceme.first) :
+		                                  descriptions.load_worker(produceme.first);
 
-		result.push_back(std::make_pair(index, read_positive(produceme.second)));
+		result.emplace_back(index, read_positive(produceme.second));
 	}
 	return result;
 }
@@ -443,7 +445,8 @@ ProductionProgram::ActReturn::Negation::description_negation(const Descriptions&
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWare::evaluate(const ProductionSite& ps) const {
-	return ps.infinite_production() || ps.get_economy(wwWARE)->needs_ware_or_worker(ware_type);
+	return ps.infinite_production() ||
+	       ps.get_economy(wwWARE)->needs_ware_or_worker(ware_type, &ps.base_flag());
 }
 std::string ProductionProgram::ActReturn::EconomyNeedsWare::description(
    const Descriptions& descriptions) const {
@@ -463,7 +466,8 @@ std::string ProductionProgram::ActReturn::EconomyNeedsWare::description_negation
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWorker::evaluate(const ProductionSite& ps) const {
-	return ps.infinite_production() || ps.get_economy(wwWORKER)->needs_ware_or_worker(worker_type);
+	return ps.infinite_production() ||
+	       ps.get_economy(wwWORKER)->needs_ware_or_worker(worker_type, &ps.base_flag());
 }
 std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description(
    const Descriptions& descriptions) const {
@@ -515,11 +519,12 @@ bool ProductionProgram::ActReturn::SiteHas::evaluate(const ProductionSite& ps) c
 
 std::string
 ProductionProgram::ActReturn::SiteHas::description(const Descriptions& descriptions) const {
-	std::vector<std::string> condition_list;
+	std::vector<std::string> condition_list(group.first.size());
+	size_t i = 0;
 	for (const auto& entry : group.first) {
-		condition_list.push_back(entry.second == wwWARE ?
-                                  descriptions.get_ware_descr(entry.first)->descname() :
-                                  descriptions.get_worker_descr(entry.first)->descname());
+		condition_list.at(i++) =
+		   (entry.second == wwWARE ? descriptions.get_ware_descr(entry.first)->descname() :
+		                             descriptions.get_worker_descr(entry.first)->descname());
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
@@ -538,11 +543,12 @@ ProductionProgram::ActReturn::SiteHas::description(const Descriptions& descripti
 
 std::string ProductionProgram::ActReturn::SiteHas::description_negation(
    const Descriptions& descriptions) const {
-	std::vector<std::string> condition_list;
+	std::vector<std::string> condition_list(group.first.size());
+	size_t i = 0;
 	for (const auto& entry : group.first) {
-		condition_list.push_back(entry.second == wwWARE ?
-                                  descriptions.get_ware_descr(entry.first)->descname() :
-                                  descriptions.get_worker_descr(entry.first)->descname());
+		condition_list.at(i++) =
+		   (entry.second == wwWARE ? descriptions.get_ware_descr(entry.first)->descname() :
+		                             descriptions.get_worker_descr(entry.first)->descname());
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
@@ -770,16 +776,15 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 			   /** TRANSLATORS: "Completed working because the economy needs the ware '%s'" */
 			   _("Completed %1$s because %2$s"), ps.top_state().program->descname(), condition_string);
 		} break;
-		case ProgramResult::kSkipped: {
+		case ProgramResult::kSkipped:
+		case ProgramResult::kNone: {
+			// TODO(GunChleoc): kNone same as kSkipped - is this on purpose?
 			result_string = format(
 			   /** TRANSLATORS: "Skipped working because the economy needs the ware '%s'" */
 			   _("Skipped %1$s because %2$s"), ps.top_state().program->descname(), condition_string);
 		} break;
-		case ProgramResult::kNone: {
-			// TODO(GunChleoc): Same as skipped - is this on purpose?
-			result_string = format(
-			   _("Skipped %1$s because %2$s"), ps.top_state().program->descname(), condition_string);
-		}
+		default:
+			NEVER_HERE();
 		}
 		if (ps.production_result() != ps.descr().out_of_resource_heading() ||
 		    ps.descr().out_of_resource_heading().empty()) {
@@ -924,6 +929,8 @@ void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
 		ps.program_timer_ = true;
 		ps.program_time_ = ps.schedule_act(game, Duration(10));
 		break;
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -1039,6 +1046,33 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 	}
 	for (const std::string& bobname : workerprogram->created_bobs()) {
 		descr->add_created_bob(bobname);
+	}
+
+	const DescriptionMaintainer<ImmovableDescr>& all_immovables = descriptions.immovables();
+
+	for (const auto& object_info : workerprogram->needed_named_map_objects()) {
+		// Add needed entities
+		if (object_info.first == MapObjectType::IMMOVABLE) {
+			descr->add_needed_immovable(object_info.second);
+		}
+	}
+	for (const auto& object_info : workerprogram->collected_named_map_objects()) {
+		const MapObjectType mapobjecttype = object_info.first;
+
+		// Add collected entities
+		switch (mapobjecttype) {
+		case MapObjectType::IMMOVABLE: {
+			descr->add_collected_immovable(object_info.second);
+			const Widelands::DescriptionIndex immo_id = all_immovables.get_index(object_info.second);
+			const ImmovableDescr& immovable_descr = all_immovables.get(immo_id);
+			const_cast<ImmovableDescr&>(immovable_descr).add_collected_by(descriptions, descr->name());
+		} break;
+		case MapObjectType::BOB: {
+			descr->add_collected_bob(object_info.second);
+		} break;
+		default:
+			NEVER_HERE();
+		}
 	}
 }
 
@@ -1248,11 +1282,12 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 		for (const auto& group : l_groups) {
 			assert(!group.first.empty());
 
-			std::vector<std::string> ware_list;
+			std::vector<std::string> ware_list(group.first.size());
+			size_t i = 0;
 			for (const auto& entry : group.first) {
-				ware_list.push_back(entry.second == wwWARE ?
-                                   tribe.get_ware_descr(entry.first)->descname() :
-                                   tribe.get_worker_descr(entry.first)->descname());
+				ware_list.at(i++) =
+				   (entry.second == wwWARE ? tribe.get_ware_descr(entry.first)->descname() :
+				                             tribe.get_worker_descr(entry.first)->descname());
 			}
 			std::string ware_string = i18n::localize_list(ware_list, i18n::ConcatenateWith::OR);
 
@@ -1741,7 +1776,7 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 		ps.set_production_result(ts->descr().no_soldier_to_train_message());
 		return ps.program_end(game, ProgramResult::kSkipped);
 	}
-	ps.molog(game.get_gametime(), "  Checking soldier (%u) level %d)\n",
+	ps.molog(game.get_gametime(), "  Checking soldier (%u) level %u)\n",
 	         static_cast<unsigned int>(training_.attribute), training_.level);
 
 	const std::vector<Soldier*>::const_iterator soldiers_end = soldiers.end();
@@ -1834,7 +1869,7 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 	const unsigned current_level = ts.checked_soldier_training().level;
 	assert(current_level != INVALID_INDEX);
 
-	ps.molog(game.get_gametime(), "  Training soldier's %u (%d to %d)",
+	ps.molog(game.get_gametime(), "  Training soldier's %u (%u to %u)",
 	         static_cast<unsigned int>(training_.attribute), current_level, training_.level);
 
 	assert(current_level < training_.level);
@@ -1874,6 +1909,8 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 				break;
 			case TrainingAttribute::kTotal:
 				throw wexception("'total' training attribute can't be trained");
+			default:
+				NEVER_HERE();
 			}
 		} catch (...) {
 			throw wexception("Fail training soldier!!");
@@ -1903,6 +1940,20 @@ ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& ar
 void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) const {
 	Notifications::publish(NoteSound(SoundType::kAmbient, parameters.fx, ps.position_,
 	                                 parameters.priority, parameters.allow_multiple));
+	return ps.program_step(game);
+}
+
+/* RST
+script
+------
+Runs a Lua function. See :ref:`map_object_programs_script`.
+*/
+ProductionProgram::ActRunScript::ActRunScript(const std::vector<std::string>& arguments)
+   : parameters(MapObjectProgram::parse_act_script(arguments)) {
+}
+
+void ProductionProgram::ActRunScript::execute(Game& game, ProductionSite& ps) const {
+	MapObjectProgram::do_run_script(game.lua(), &ps, parameters.function);
 	return ps.program_step(game);
 }
 
@@ -2170,6 +2221,9 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 			} else if (parseinput.name == "playsound") {
 				actions_.push_back(
 				   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(parseinput.arguments)));
+			} else if (parseinput.name == "script") {
+				actions_.push_back(
+				   std::unique_ptr<ProductionProgram::Action>(new ActRunScript(parseinput.arguments)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActConstruct(parseinput.arguments, name(), building, descriptions)));

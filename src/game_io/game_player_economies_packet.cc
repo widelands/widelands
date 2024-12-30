@@ -137,8 +137,8 @@ void GamePlayerEconomiesPacket::write(FileSystem& fs, Game& game, MapObjectSaver
 			// ships are special and have their own economy (which will not have a
 			// flag), therefore we have to special case them.
 			if (!write_expedition_ship_economy(economy.second.get(), map, &fw, mos)) {
-				throw GameDataError("Player %d: economy %d has no representative flag or ship",
-				                    player->player_number(), economy.first);
+				throw GameDataError("Player %u: economy %u has no representative flag or ship",
+				                    static_cast<unsigned>(player->player_number()), economy.first);
 			}
 		}
 	}

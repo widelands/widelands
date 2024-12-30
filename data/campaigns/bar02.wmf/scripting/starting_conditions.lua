@@ -56,6 +56,8 @@ hq:set_workers{
    barbarians_stonemason = 2,
 }
 hq:set_soldiers({0,0,0,0}, 45)
+-- TRANSLATORS: The name of the starting village. Keep it consistent with the other occurences.
+hq.warehousename = _("Ondun")
 
 -- =======================================================================
 --                                 Player 2

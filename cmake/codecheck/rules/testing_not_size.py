@@ -5,6 +5,7 @@
 test if it is empty.
 
 Just use "something.empty()".
+
 """
 
 error_msg = 'Do not use !a.size(), use a.empty() instead.'

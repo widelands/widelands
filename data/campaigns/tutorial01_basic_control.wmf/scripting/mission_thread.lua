@@ -51,6 +51,7 @@ function starting_infos()
    -- Welcome and teach objectives
    campaign_message_box(initial_message_01, 200)
    objective_to_explain_objectives = add_campaign_objective(obj_initial_close_objectives_window)
+   sleep(100)
 
    wl.ui.MapView().buttons.objectives:click()
    while not wl.ui.MapView().windows.objectives do sleep(100) end
@@ -99,6 +100,9 @@ function build_lumberjack()
    click_on_panel(wl.ui.MapView().windows.field_action.buttons.barbarians_lumberjacks_hut)
 
    sleep(500)
+
+   -- We will need this for its window
+   first_lumberjack_field.immovable.destruction_blocked = true
 
    if wl.ui.MapView().is_building_road then
       campaign_message_box(lumberjack_message_03a)
@@ -151,22 +155,21 @@ function build_lumberjack()
    scroll_to_field(first_lumberjack_field)
    mouse_to_field(first_lumberjack_field)
 
-   while not wl.ui.MapView().windows.building_window do sleep(100) end
+   while lumberjack_window() == nil do sleep(100) end
    -- demonstrate work area button
    blocker = UserInputDisabler:new()
    sleep(1000)
    campaign_message_box(lumberjack_message_07b, 1000)
-   click_on_panel(wl.ui.MapView().windows.building_window.buttons.workarea)
+   click_on_panel(lumberjack_window().buttons.workarea)
    blocker:lift_blocks()
-
-   while wl.ui.MapView().windows.building_window do sleep(100) end
    set_objective_done(o)
-   sleep(3000)
+
+   sleep(10*1000) -- let the player experiment a bit with the window
 
    campaign_message_box(lumberjack_message_08)
    show_item_from_dropdown("dropdown_menu_gamespeed", 1)
 
-   sleep(20*1000) -- let the player experiment a bit with the window
+   sleep(20*1000) -- let the player experiment with the gamespeed even if the building is ready
 
    while #plr:get_buildings("barbarians_lumberjacks_hut") < 1 do sleep(300) end
 
@@ -354,7 +357,17 @@ function census_and_statistics()
 
    -- Wait for statistics to come on
    while not wl.ui.MapView().statistics do sleep(200) end
-   set_objective_done(o, 5 * wl.Game().desired_speed)
+   set_objective_done(o, 3 * wl.Game().desired_speed)
+
+   local o2 = campaign_message_with_objective(census_and_statistics_hq, obj_edit_hq_name)
+   while sf.immovable.warehousename == hq_original_name do
+      while hq_window() == nil do sleep(100) end
+      while hq_window() ~= nil do sleep(100) end
+      if sf.immovable.warehousename == hq_original_name then
+         campaign_message_box(hq_not_changed)
+      end
+   end
+   set_objective_done(o2, 3 * wl.Game().desired_speed)
 
    if (#plr:get_buildings("barbarians_quarry") < 2) then
       campaign_message_box(census_and_statistics_02, 200)

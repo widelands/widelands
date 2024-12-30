@@ -76,7 +76,7 @@ BillOfMaterials deserialize_bill_of_materials(StreamRead* des) {
 	for (int i = 0; i < count; ++i) {
 		const auto index = des->unsigned_8();
 		const auto amount = des->unsigned_32();
-		bill.push_back(std::make_pair(index, amount));
+		bill.emplace_back(index, amount);
 	}
 	return bill;
 }
@@ -184,7 +184,7 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdWarshipCommand(des);
 
 	default:
-		throw wexception("PlayerCommand::deserialize(): Encountered invalid command id: %d",
+		throw wexception("PlayerCommand::deserialize(): Encountered invalid command id: %u",
 		                 static_cast<unsigned>(command_id));
 	}
 }
@@ -1085,9 +1085,9 @@ CmdShipScoutDirection::CmdShipScoutDirection(StreamRead& des)
 void CmdShipScoutDirection::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
-		if (!(ship->get_ship_state() == Widelands::ShipStates::kExpeditionWaiting ||
-		      ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound ||
-		      ship->get_ship_state() == Widelands::ShipStates::kExpeditionScouting)) {
+		if (ship->get_ship_state() != Widelands::ShipStates::kExpeditionWaiting &&
+		    ship->get_ship_state() != Widelands::ShipStates::kExpeditionPortspaceFound &&
+		    ship->get_ship_state() != Widelands::ShipStates::kExpeditionScouting) {
 			log_warn_time(
 			   game.get_gametime(),
 			   " %1d:ship on %3dx%3d received scout command but not in "
@@ -1207,9 +1207,9 @@ CmdShipExploreIsland::CmdShipExploreIsland(StreamRead& des)
 void CmdShipExploreIsland::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
-		if (!(ship->get_ship_state() == Widelands::ShipStates::kExpeditionWaiting ||
-		      ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound ||
-		      ship->get_ship_state() == Widelands::ShipStates::kExpeditionScouting)) {
+		if (ship->get_ship_state() != Widelands::ShipStates::kExpeditionWaiting &&
+		    ship->get_ship_state() != Widelands::ShipStates::kExpeditionPortspaceFound &&
+		    ship->get_ship_state() != Widelands::ShipStates::kExpeditionScouting) {
 			log_warn_time(
 			   game.get_gametime(),
 			   " %1d:ship on %3dx%3d received explore island command "
@@ -1531,8 +1531,9 @@ void CmdSetInputMaxFill::execute(Game& game) {
 						}
 					}
 					NEVER_HERE();
+				default:
+					NEVER_HERE();
 				}
-				NEVER_HERE();
 			}
 		}
 	} else if (upcast(Building, b, mo)) {
@@ -2037,7 +2038,7 @@ void PlayerMessageCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectL
 		if (packet_version == kCurrentPacketVersionPlayerMessageCommand) {
 			PlayerCommand::read(fr, egbase, mol);
 			message_id_ = MessageId(fr.unsigned_32());
-			if (!static_cast<bool>(message_id_)) {
+			if (!message_id_.valid()) {
 				verb_log_warn("PlayerMessageCommand (player %u): message ID is null", sender());
 			}
 		} else {
@@ -2390,10 +2391,10 @@ void CmdDiplomacy::execute(Game& game) {
 	case DiplomacyAction::kInvite:
 		broadcast_message(
 		   action_ == DiplomacyAction::kJoin ? _("Team Joining Request") :
-                                             _("Team Joining Invitation"),
+		                                       _("Team Joining Invitation"),
 		   format(action_ == DiplomacyAction::kJoin ?
-                   _("%1$s has requested to join the team of %2$s.") :
-                   _("%1$s has invited %2$s to join their team."),
+		             _("%1$s has requested to join the team of %2$s.") :
+		             _("%1$s has invited %2$s to join their team."),
 		          sending_player.get_name(), game.get_safe_player(other_player_)->get_name()));
 		game.pending_diplomacy_actions().emplace_back(sender(), action_, other_player_);
 		// If other_player_ is the interactive player, the IBase
@@ -2413,14 +2414,14 @@ void CmdDiplomacy::execute(Game& game) {
 			std::swap(other_player_, cmd_sender);
 			retract = true;
 			action_ = (action_ == DiplomacyAction::kRetractJoin) ? DiplomacyAction::kRefuseJoin :
-                                                                DiplomacyAction::kRefuseInvite;
+			                                                       DiplomacyAction::kRefuseInvite;
 		}
 		assert(other_player_ != cmd_sender);
 
 		const DiplomacyAction original_action =
 		   (action_ == DiplomacyAction::kAcceptJoin || action_ == DiplomacyAction::kRefuseJoin) ?
-            DiplomacyAction::kJoin :
-            DiplomacyAction::kInvite;
+		      DiplomacyAction::kJoin :
+		      DiplomacyAction::kInvite;
 		for (auto it = game.pending_diplomacy_actions().begin();
 		     it != game.pending_diplomacy_actions().end(); ++it) {
 			// Note that in the response the numbers of the two players
@@ -2485,6 +2486,9 @@ void CmdDiplomacy::execute(Game& game) {
 		// If we found nothing, perhaps the command had been sent twice. Ignore.
 		break;
 	}
+
+	default:
+		NEVER_HERE();
 	}
 }
 

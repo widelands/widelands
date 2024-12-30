@@ -284,6 +284,7 @@ bool LaunchGame::should_write_replay() const {
 }
 
 void LaunchGame::update_advanced_options() {
+	i18n::Textdomain td("widelands");
 	const bool show = toggle_advanced_options_.style() == UI::Button::VisualState::kPermpressed;
 	advanced_options_box_.set_visible(show);
 	toggle_advanced_options_.set_title(show ? _("Show fewer options") : _("Show more options"));
@@ -291,6 +292,7 @@ void LaunchGame::update_advanced_options() {
 }
 
 void LaunchGame::update_peaceful_mode() {
+	i18n::Textdomain td("widelands");
 	UI::Checkbox* checkbox = game_flag_checkboxes_.at(GameSettings::Flags::kPeaceful).first;
 	bool forbidden =
 	   peaceful_mode_forbidden_ || settings_.settings().scenario || settings_.settings().savegame;
@@ -312,6 +314,7 @@ void LaunchGame::update_peaceful_mode() {
 }
 
 void LaunchGame::update_custom_starting_positions() {
+	i18n::Textdomain td("widelands");
 	UI::Checkbox* checkbox =
 	   game_flag_checkboxes_.at(GameSettings::Flags::kCustomStartingPositions).first;
 	const GameSettings& settings = settings_.settings();
@@ -353,6 +356,7 @@ void LaunchGame::update_custom_starting_positions() {
 }
 
 void LaunchGame::update_fogless() {
+	i18n::Textdomain td("widelands");
 	UI::Checkbox* checkbox = game_flag_checkboxes_.at(GameSettings::Flags::kFogless).first;
 	const GameSettings& settings = settings_.settings();
 	const bool forbidden = settings.scenario || settings.savegame;
@@ -376,6 +380,7 @@ void LaunchGame::update_fogless() {
 }
 
 void LaunchGame::update_naval_warfare() {
+	i18n::Textdomain td("widelands");
 	UI::Checkbox* checkbox = game_flag_checkboxes_.at(GameSettings::Flags::kAllowNavalWarfare).first;
 	const GameSettings& settings = settings_.settings();
 	const bool forbidden = settings.scenario || settings.savegame || !map_is_seafaring_;
@@ -403,6 +408,7 @@ void LaunchGame::update_naval_warfare() {
 }
 
 void LaunchGame::update_forbid_diplomacy() {
+	i18n::Textdomain td("widelands");
 	UI::Checkbox* checkbox = game_flag_checkboxes_.at(GameSettings::Flags::kForbidDiplomacy).first;
 	const GameSettings& settings = settings_.settings();
 	const bool forbidden = settings.scenario || settings.savegame;
@@ -426,6 +432,7 @@ void LaunchGame::update_forbid_diplomacy() {
 }
 
 bool LaunchGame::init_win_condition_label() {
+	i18n::Textdomain td("widelands");
 	win_condition_duration_.set_visible(false);
 	if (settings_.settings().scenario) {
 		win_condition_dropdown_.set_enabled(false);
@@ -450,19 +457,20 @@ bool LaunchGame::init_win_condition_label() {
 /**
  * Fill the dropdown with the available win conditions.
  */
-void LaunchGame::update_win_conditions() {
-	if (!init_win_condition_label()) {
-		std::set<std::string> tags;
-		if (!settings_.settings().mapfilename.empty()) {
-			Widelands::Map map;
-			std::unique_ptr<Widelands::MapLoader> ml =
-			   map.get_correct_loader(settings_.settings().mapfilename);
-			if (ml != nullptr) {
-				ml->preload_map(true, nullptr);
-				tags = map.get_tags();
-			}
+void LaunchGame::update_tags_and_win_conditions() {
+	std::set<std::string> tags;
+	if (!settings_.settings().mapfilename.empty()) {
+		Widelands::Map map;
+		std::unique_ptr<Widelands::MapLoader> ml =
+		   map.get_correct_loader(settings_.settings().mapfilename);
+		if (ml != nullptr) {
+			ml->preload_map(true, nullptr);
+			tags = map.get_tags();
 		}
-		map_is_seafaring_ = tags.count("seafaring") != 0;
+	}
+	map_is_seafaring_ = tags.count("seafaring") != 0;
+
+	if (!init_win_condition_label()) {
 		load_win_conditions(tags);
 	}
 }

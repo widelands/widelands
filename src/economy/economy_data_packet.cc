@@ -37,7 +37,7 @@ void EconomyDataPacket::read(FileRead& fr) {
 			const Serial saved_serial = fr.unsigned_32();
 			if (eco_->serial_ != saved_serial) {
 				throw GameDataError(
-				   "Representative flag/ship has economy serial %d, but the data packet has %d",
+				   "Representative flag/ship has economy serial %u, but the data packet has %u",
 				   eco_->serial_, saved_serial);
 			}
 			Economy* other_eco = nullptr;
@@ -118,6 +118,8 @@ void EconomyDataPacket::read(FileRead& fr) {
 							         type_name, tribe.name().c_str());
 						}
 						break;
+					default:
+						NEVER_HERE();
 					}
 				}
 			} catch (const WException& e) {

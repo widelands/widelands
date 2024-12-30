@@ -59,6 +59,8 @@ UI::Checkbox* create_immovable_checkbox(UI::Panel* parent,
 		case Widelands::BaseImmovable::BIG:
 			tooltip = format(_("%1$s (needs a big building plot)"), immovable_descr.descname());
 			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 

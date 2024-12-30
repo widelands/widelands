@@ -105,6 +105,7 @@ wl_library(logic_map_objects
     tribes/shipstates.h
     tribes/soldier.cc
     tribes/soldier.h
+    tribes/soldiercontrol.cc
     tribes/soldiercontrol.h
     tribes/training_attribute.h
     tribes/trainingsite.cc
@@ -175,6 +176,8 @@ wl_library(logic_map_objects
     map_io
     note_sound
     notifications
+    scripting_logic
+    scripting_lua_interface
     scripting_lua_table
     sound_constants
     sound

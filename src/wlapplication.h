@@ -145,7 +145,9 @@ struct WLApplication {
 
 	void run();
 
-	static void initialize_g_addons();
+	void initialize_g_addons();
+
+	void init_plugin_shortcuts();
 
 	/// \warning true if an external entity wants us to quit
 	[[nodiscard]] bool should_die() const {
@@ -210,8 +212,10 @@ private:
 	WLApplication(int argc, char const* const* argv);
 
 	bool poll_event(SDL_Event&) const;
+	void handle_window_event(SDL_Event& ev);
 
 	bool init_settings();
+	void init_filesystems();
 	void init_language();
 	void shutdown_settings();
 
@@ -221,6 +225,8 @@ private:
 	void handle_commandline_parameters();
 	bool check_commandline_flag(const std::string& opt);
 	OptionalParameter get_commandline_option_value(const std::string& opt, bool allow_empty = false);
+
+	void init_mouse_cursor();
 
 	void setup_homedir();
 

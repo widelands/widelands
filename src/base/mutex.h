@@ -42,6 +42,7 @@ public:
 	enum class ID : uint32_t {
 		kNone,  ///< Does not represent a valid ID.
 
+		kMutexInternal,        ///< For internal use by the mutex locking logic only.
 		kLogicFrame,           ///< The game logic progression.
 		kObjects,              ///< MapObjects are being modified.
 		kCommands,             ///< The game's command queue is being modified.
