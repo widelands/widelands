@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-03 02:40+0000\n"
+"POT-Creation-Date: 2024-12-23 02:56+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Alex Rijckaert, 2023-2024\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -3194,18 +3194,19 @@ msgstr "De wapensmederij en de scheepswerf gebruiken ook planken om de verschill
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:472
 msgctxt "atlanteans_ware"
 msgid ""
-"Spider silk is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth or tabards in a weaving mill."
-msgstr "Spinnenzijde wordt geproduceerd door spinnen, die worden gekweekt in spinnenkwekerijen. In een weverij wordt het verwerkt tot spinnendoek of tabbaard."
+"Spider silk is produced by spiders, which are bred by spider farms. It can "
+"be processed into spidercloth or tabards in a weaving mill, or used to make "
+"tools in the toolsmithy."
+msgstr "Spinnenzijde wordt geproduceerd door spinnen, die worden gekweekt in spinnenkwekerijen. Het kan worden verwerkt tot spinnendoek of tabbaarden in een weverij, of worden gebruikt om gereedschap van te maken in de gereedschapsmakerij."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:481
 msgctxt "atlanteans_ware"
 msgid ""
 "Spidercloth is made out of spider silk in a weaving mill. It is used in the "
-"toolsmithy and the shipyard. Also some higher developed buildings need "
-"spidercloth for their construction."
-msgstr "Spinnendoek wordt gemaakt van spinnendraad in een weverij. Het wordt gebruik in de werktuigsmederij en de scheepswerf. Ook sommige hoger ontwikkelde gebouwen hebben spinnendoek nodig voor hun constructie."
+"shipyard. Also some higher developed buildings need spidercloth for their "
+"construction."
+msgstr "Spinnendoek wordt gemaakt van spinnenzijde in een weverij. Het wordt gebruikt op de scheepswerf. Ook sommige hoger ontwikkelde gebouwen hebben spinnendoek nodig voor hun constructie."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fish
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:492
@@ -16372,7 +16373,7 @@ msgid "Workers use:"
 msgstr "Werkers gebruiken:"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:710
-#: ../../../../data/tribes/scripting/help/worker_help.lua:169
+#: ../../../../data/tribes/scripting/help/worker_help.lua:179
 msgid "Experience levels"
 msgstr "Ervaringsniveaus"
 
@@ -16781,67 +16782,67 @@ msgid "Worker uses"
 msgstr "Werker gebruikt"
 
 #. TRANSLATORS: Soldier levels
-#: ../../../../data/tribes/scripting/help/worker_help.lua:175
+#: ../../../../data/tribes/scripting/help/worker_help.lua:185
 msgid "Levels"
 msgstr "Niveaus"
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:177
+#: ../../../../data/tribes/scripting/help/worker_help.lua:187
 msgid "Health"
 msgstr "Levenspunten"
 
 #. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
-#: ../../../../data/tribes/scripting/help/worker_help.lua:181
+#: ../../../../data/tribes/scripting/help/worker_help.lua:191
 msgid "Starts at %1% points."
 msgstr "Begint op %1% punten."
 
 #. TRANSLATORS: Soldier health / attack defense / evade points
-#: ../../../../data/tribes/scripting/help/worker_help.lua:184
-#: ../../../../data/tribes/scripting/help/worker_help.lua:195
+#: ../../../../data/tribes/scripting/help/worker_help.lua:194
+#: ../../../../data/tribes/scripting/help/worker_help.lua:205
 msgid "Increased by %1% point for each level."
 msgid_plural "Increased by %1% points for each level."
 msgstr[0] "Stijgt met %1%punt voor elk niveau."
 msgstr[1] "Stijgt met %1% punten voor elk niveau."
 
 #. TRANSLATORS: Soldier health / attack defense / evade level
-#: ../../../../data/tribes/scripting/help/worker_help.lua:187
 #: ../../../../data/tribes/scripting/help/worker_help.lua:197
 #: ../../../../data/tribes/scripting/help/worker_help.lua:207
-#: ../../../../data/tribes/scripting/help/worker_help.lua:222
+#: ../../../../data/tribes/scripting/help/worker_help.lua:217
+#: ../../../../data/tribes/scripting/help/worker_help.lua:232
 msgid "The maximum level is %1%."
 msgid_plural "The maximum level is %1%."
 msgstr[0] "Het maximumniveau is %1%."
 msgstr[1] "Het maximumniveau is %1%."
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:189
+#: ../../../../data/tribes/scripting/help/worker_help.lua:199
 msgid "Attack"
 msgstr "Aanval"
 
 #. TRANSLATORS: Points are 4 digit numbers.
-#: ../../../../data/tribes/scripting/help/worker_help.lua:192
+#: ../../../../data/tribes/scripting/help/worker_help.lua:202
 msgid "A random value between %1% and %2% points is added to each attack."
 msgstr "Een random aantal punten tussen %1% en %2% wordt toegevoegd aan elke aanval."
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:199
+#: ../../../../data/tribes/scripting/help/worker_help.lua:209
 msgid "Defense"
 msgstr "Verdediging"
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:203
-#: ../../../../data/tribes/scripting/help/worker_help.lua:211
-#: ../../../../data/tribes/scripting/help/worker_help.lua:218
+#: ../../../../data/tribes/scripting/help/worker_help.lua:213
+#: ../../../../data/tribes/scripting/help/worker_help.lua:221
+#: ../../../../data/tribes/scripting/help/worker_help.lua:228
 #, lua-format
 msgid "Starts at %d%%."
 msgstr "Begint op %d%%."
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:205
-#: ../../../../data/tribes/scripting/help/worker_help.lua:220
+#: ../../../../data/tribes/scripting/help/worker_help.lua:215
+#: ../../../../data/tribes/scripting/help/worker_help.lua:230
 #, lua-format
 msgid "Increased by %d%% for each level."
 msgstr "Stijgt met %d%% voor elk niveau."
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:212
+#: ../../../../data/tribes/scripting/help/worker_help.lua:222
 msgid "This soldier cannot be trained in defense."
 msgstr "Deze soldaat kan niet worden getraind in verdediging."
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:215
+#: ../../../../data/tribes/scripting/help/worker_help.lua:225
 msgid "Evade"
 msgstr "Ontwijken"

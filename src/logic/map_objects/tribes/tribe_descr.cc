@@ -499,7 +499,7 @@ void TribeDescr::load_workers(const LuaTable& table, Descriptions& descriptions)
 			try {
 				DescriptionIndex workerindex = descriptions.load_worker(workername);
 				if (has_worker(workerindex)) {
-					throw GameDataError("Duplicate definition of worker");
+					throw GameDataError("Duplicate definition of worker '%s'", workername.c_str());
 				}
 
 				// Set default_target_quantity and preciousness (both optional)
@@ -519,6 +519,12 @@ void TribeDescr::load_workers(const LuaTable& table, Descriptions& descriptions)
 
 				// Add helptexts
 				load_helptexts(worker_descr, *worker_table);
+
+				// Register at promoted worker
+				const DescriptionIndex& becomes = worker_descr->becomes();
+				if (becomes != INVALID_INDEX) {
+					descriptions.get_mutable_worker_descr(becomes)->set_promoted_from(workerindex);
+				}
 
 				// Add to tribe
 				workers_.insert(workerindex);
@@ -824,8 +830,8 @@ DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* c
 	}
 
 	if (lowest < amount) {
-		throw GameDataError("Tribe '%s' has no indicators for amount %i of resource '%s' (highest "
-		                    "possible amount is %i)!",
+		throw GameDataError("Tribe '%s' has no indicators for amount %u of resource '%s' (highest "
+		                    "possible amount is %u)!",
 		                    name_.c_str(), amount, res->name().c_str(), lowest);
 	}
 

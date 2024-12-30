@@ -776,7 +776,7 @@ static void init_one_player_from_template(unsigned p,
 	}
 	if (!found_init) {
 		throw wexception(
-		   "Invalid starting condition '%s' for player %d", init_script_name.c_str(), p + 1);
+		   "Invalid starting condition '%s' for player %u", init_script_name.c_str(), p + 1);
 	}
 }
 
@@ -1655,17 +1655,7 @@ void WLApplication::handle_commandline_parameters() {
 			}
 
 			if (sep_pos != build_id().size() || 0 != text.compare(0, sep_pos, build_id())) {
-				return std::string("Incorrect version string part");
-			}
-
-			text = text.substr(sep_pos + (text.at(sep_pos) == '\r' ? 2 : 1));
-			sep_pos = text.find_first_of("\n\r");
-			if (sep_pos == std::string::npos) {
-				return std::string("Malformed two-liner version string");
-			}
-
-			if (sep_pos != build_type().size() || 0 != text.compare(0, sep_pos, build_type())) {
-				return std::string("Incorrect type string part");
+				return std::string("Incorrect version string");
 			}
 		} catch (const std::exception& e) {
 			return std::string(e.what());

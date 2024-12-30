@@ -44,6 +44,7 @@ struct MessageQueue {
 	~MessageQueue() = default;
 
 	//  Make some selected inherited members public.
+	//  Exporting begin() and end() this way allows iterating through all of messages_.
 	//  TODO(sirver): This is weird design. Instead pass out a const ref& to
 	//  'messages_'?
 	[[nodiscard]] MessageMap::const_iterator begin() const {
@@ -51,6 +52,11 @@ struct MessageQueue {
 	}
 	[[nodiscard]] MessageMap::const_iterator end() const {
 		return messages_.end();
+	}
+	[[nodiscard]] bool empty() const {
+		MutexLock m(MutexLock::ID::kMessages);
+		assert_counts();
+		return messages_.empty();
 	}
 	[[nodiscard]] size_t count(uint32_t const i) const {
 		MutexLock m(MutexLock::ID::kMessages);
@@ -63,7 +69,7 @@ struct MessageQueue {
 		MutexLock m(MutexLock::ID::kMessages);
 		assert_counts();
 		const auto it = messages_.find(MessageId(id));
-		return it != end() ? it->second.get() : nullptr;
+		return it != messages_.end() ? it->second.get() : nullptr;
 	}
 
 	/// \returns the number of messages with the given status.
@@ -163,10 +169,12 @@ private:
 	uint32_t counts_[3];
 
 	void assert_counts() const {
+#ifndef NDEBUG
 		MutexLock m(MutexLock::ID::kMessages);
 		assert(messages_.size() == counts_[static_cast<int>(Message::Status::kNew)] +
 		                              counts_[static_cast<int>(Message::Status::kRead)] +
 		                              counts_[static_cast<int>(Message::Status::kArchived)]);
+#endif
 	}
 
 	DISALLOW_COPY_AND_ASSIGN(MessageQueue);

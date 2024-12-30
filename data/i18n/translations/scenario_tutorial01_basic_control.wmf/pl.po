@@ -8,10 +8,11 @@
 # GunChleoc, 2014
 # Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2015
 # Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2016-2017
+# Leszek Szary, 2024
 # Marcin S <dzidek1003@o2.pl>, 2021
 # Michał Łysiak, 2022
 # Niektóry <niektory@gmail.com>, 2020
-# Robert Wolniak <robert.wolniak@gmail.com>, 2024
+# Robert Wolniak <robert.wolniak@tuta.io>, 2024
 # tombox <wptom@wp.pl>, 2015-2016,2018-2019
 # tombox <wptom@wp.pl>, 2015
 # tombox <wptom@wp.pl>, 2020
@@ -21,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-11-30 03:02+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Robert Wolniak <robert.wolniak@gmail.com>, 2024\n"
+"Last-Translator: Leszek Szary, 2024\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -764,75 +765,75 @@ msgid ""
 "workplace and where any number of your wares can be stored until they are "
 "needed somewhere. So they act like a kind of town center, and to signify "
 "this, they get unique names."
-msgstr ""
+msgstr "Być może zauważyłeś, że linia spisu kwater głównych jest inna. Jest tak, ponieważ jest to specjalny typ budynku zwany magazynem. Magazyny to budynki, w których pracownicy mogą odpoczywać, dopóki nie zostaną przydzieleni do miejsca pracy i gdzie można przechowywać dowolną liczbę towarów, dopóki nie będą potrzebne w jakimś miejscu. Działają więc jak rodzaj centrum miasta i aby to zaznaczyć, otrzymują unikalne nazwy."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:505
 msgid ""
 "The small crowns beside the name mark it as your headquarters. As you play "
 "Widelands, you will see three kinds of warehouses, marked by little icons:"
-msgstr ""
+msgstr "Małe korony obok nazwy oznaczają, że jest to twoja kwatera główna. Podczas gry w Widelands zobaczysz trzy rodzaje magazynów, oznaczone małymi ikonami:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:506
 msgid ""
 "The headquarters where you usually start the game. It is marked by small "
 "crowns: ♔"
-msgstr ""
+msgstr "Kwatera główna, z którą zazwyczaj rozpoczynasz grę. Oznaczona jest małymi koronami: ♔"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:507
 msgid ""
 "Plain warehouses that simply hold wares and workers to keep them distributed"
 " all over your territory. They are marked by small houses: ⟰"
-msgstr ""
+msgstr "Zwykłe magazyny, które po prostu przechowują towary i pracowników, którzy rozprowadzają je po całym terytorium. Oznaczone są małymi domami: ⟰"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:508
 msgid ""
 "Ports that you’ll use in seafaring. They don’t only store your wares and "
 "workers, but can also load them on your ships to send them across the seas. "
 "They are marked by small anchors: ⚓"
-msgstr ""
+msgstr "Porty, z których będziesz korzystać w żeglarstwie. Nie tylko przechowują twoje towary i pracowników, ale mogą również ładować je na twoje statki, aby wysłać je przez morza. Są oznaczone małymi kotwicami: ⚓"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:509
 msgid ""
 "All of them are assigned names automatically that match the tribe, but you "
 "can change their names to your liking too."
-msgstr ""
+msgstr "Każdemu z nich automatycznie przypisane są nazwy pasujące do plemienia, ale możesz także zmienić ich nazwy według własnych upodobań."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
 msgid "Change the name of your little village"
-msgstr ""
+msgstr "Zmień nazwę swojej małej wioski"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:519
 msgid "Change the name of your headquarters"
-msgstr ""
+msgstr "Zmień nazwę swojej kwatery głównej"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid ""
 "In order to set a new name for your headquarters, first click on it to open "
 "its window."
-msgstr ""
+msgstr "Aby nadać nową nazwę swojej kwaterze głównej, najpierw kliknij na nią, aby otworzyć jej okno."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:521
 msgid "You will see an edit box at the top of the window showing the name."
-msgstr ""
+msgstr "W górnej części okna zobaczysz pole edycji wyświetlające nazwę."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:522
 msgid "All you have to do is delete the old name and type in the new one."
-msgstr ""
+msgstr "Wystarczy, że usuniesz starą nazwę i wpiszesz nową."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:523
 msgid "When you’re done, just close the window."
-msgstr ""
+msgstr "Gdy skończysz, po prostu zamknij okno."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:528
 msgid "Be creative"
-msgstr ""
+msgstr "Bądź kreatywny"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:529
 msgid ""
 "I see you closed the window without changing the name. I’m sure you can come"
 " up with something. But if you don’t want to, at least delete the old name, "
 "please, to show me you’ve found the editbox."
-msgstr ""
+msgstr "Widzę, że zamknąłeś okno bez zmiany nazwy. Jestem pewien, że potrafisz coś wymyślić. Ale jeśli nie chcesz, usuń przynajmniej starą nazwę, aby pokazać mi, że znalazłeś pole edycji."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:540
 msgid "Archive all messages in your inbox"

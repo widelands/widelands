@@ -115,8 +115,8 @@ bool DefaultAI::marine_main_decisions(const Time& /* gametime */) {
 			// In very rare situation, we might have non-seafaring map but there is a shipyard
 			verb_log_dbg_time(
 			   game().get_gametime(),
-			   "AI %d: we have a shipyard in a non seafaring economy, dismantling it...\n",
-			   player_number());
+			   "AI %u: we have a shipyard in a non seafaring economy, dismantling it...\n",
+			   static_cast<unsigned>(player_number()));
 			if (!sy_obs.site->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
 				game().send_player_dismantle(*sy_obs.site, true);
 			} else {
@@ -222,10 +222,10 @@ void DefaultAI::evaluate_fleet() {
 	if (tradeship_refit_needed) {
 		// This shouldn't happen... except when a new port is built from land
 		verb_log_dbg_time(game().get_gametime(),
-		                  "AI %d backfit needed: %u ports, %" PRIuS
+		                  "AI %u backfit needed: %u ports, %" PRIuS
 		                  " ships total: %u expeditions, %u tradeships, %u warships",
-		                  player_number(), ports_count, allships.size(), expeditions_in_progress,
-		                  tradeships_count, warships_count);
+		                  static_cast<unsigned>(player_number()), ports_count, allships.size(),
+		                  expeditions_in_progress, tradeships_count, warships_count);
 	}
 }
 
@@ -253,8 +253,8 @@ void DefaultAI::manage_shipyards() {
 			}
 		}
 		if (dismantle) {
-			verb_log_dbg_time(
-			   game().get_gametime(), "AI %d: Dismantling shipyard in second fleet", player_number());
+			verb_log_dbg_time(game().get_gametime(), "AI %u: Dismantling shipyard in second fleet",
+			                  static_cast<unsigned>(player_number()));
 			if (!sy_obs.site->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
 				game().send_player_dismantle(*sy_obs.site, true);
 			} else {
@@ -275,8 +275,8 @@ void DefaultAI::manage_shipyards() {
 		}
 
 		if (update_ships_target) {
-			verb_log_dbg_time(game().get_gametime(), "AI %d: setting ships target to %u",
-			                  player_number(), fleet_target);
+			verb_log_dbg_time(game().get_gametime(), "AI %u: setting ships target to %u",
+			                  static_cast<unsigned>(player_number()), fleet_target);
 			game().send_player_fleet_targets(
 			   player_number(), yard_interfaces.front()->serial(), fleet_target);
 			update_ships_target = false;
@@ -306,17 +306,18 @@ void DefaultAI::manage_shipyards() {
 				}
 			}
 			if (ports_count > 0 && shipyard_stocked && stopped && sy_obs.site->can_start_working()) {
-				verb_log_dbg_time(game().get_gametime(), "AI %d: Starting shipyard.", player_number());
+				verb_log_dbg_time(game().get_gametime(), "AI %u: Starting shipyard.",
+				                  static_cast<unsigned>(player_number()));
 				game().send_player_start_stop_building(*sy_obs.site);
 			} else if (!stopped && (!shipyard_stocked || ports_count == 0)) {
-				verb_log_dbg_time(game().get_gametime(), "AI %d: Stopping shipyard %s.",
-				                  player_number(),
+				verb_log_dbg_time(game().get_gametime(), "AI %u: Stopping shipyard %s.",
+				                  static_cast<unsigned>(player_number()),
 				                  (ports_count == 0) ? "without port" : "with poor supply");
 				game().send_player_start_stop_building(*sy_obs.site);
 			}
 		} else {  // basic economy not established
-			verb_log_warn_time(
-			   game().get_gametime(), "AI %d: Shipyard found in weak economy!", player_number());
+			verb_log_warn_time(game().get_gametime(), "AI %u: Shipyard found in weak economy!",
+			                   static_cast<unsigned>(player_number()));
 			// give back all wares and stop
 			for (uint32_t k = 0; k < sy_obs.bo->inputs.size(); ++k) {
 				game().send_player_set_input_max_fill(
@@ -338,8 +339,8 @@ void DefaultAI::manage_ports() {
 	for (PortSiteObserver& p_obs : portsites) {
 		if (p_obs.site == nullptr) {
 			// Race condition?
-			log_warn_time(
-			   game().get_gametime(), "AI %d: manage_ports(): Invalid port", player_number());
+			log_warn_time(game().get_gametime(), "AI %u: manage_ports(): Invalid port",
+			              static_cast<unsigned>(player_number()));
 			continue;
 		}
 
@@ -354,8 +355,9 @@ void DefaultAI::manage_ports() {
 			//                  implemented)
 			//                * Be more careful with placing buildings near portspaces. AIs often fail
 			//                  to escape from starting island if it has only one portspace.
-			verb_log_dbg_time(game().get_gametime(), "AI %d: Dismantling port %s in second fleet",
-			                  player_number(), p_obs.site->get_warehouse_name().c_str());
+			verb_log_dbg_time(game().get_gametime(), "AI %u: Dismantling port %s in second fleet",
+			                  static_cast<unsigned>(player_number()),
+			                  p_obs.site->get_warehouse_name().c_str());
 			game().send_player_dismantle(*p_obs.site, true);
 			continue;
 		}
@@ -412,10 +414,11 @@ void DefaultAI::manage_ports() {
 			game().send_player_set_soldier_preference(
 			   *p_obs.site, Widelands::SoldierPreference::kHeroes);
 			verb_log_dbg_time(game().get_gametime(),
-			                  "AI %d: Set garrison for port %s, desired garrison %d, actual garrison "
-			                  "%d, change value %d\n",
-			                  player_number(), p_obs.site->get_warehouse_name().c_str(),
-			                  desired_garrison, p_obs.site->get_desired_soldier_count(), change_value);
+			                  "AI %u: Set garrison for port %s, desired garrison %u, actual garrison "
+			                  "%u, change value %d\n",
+			                  static_cast<unsigned>(player_number()),
+			                  p_obs.site->get_warehouse_name().c_str(), desired_garrison,
+			                  p_obs.site->get_desired_soldier_count(), change_value);
 			game().send_player_change_soldier_capacity(*p_obs.site, change_value);
 		}
 		// Warships assign themselves
@@ -429,8 +432,8 @@ bool DefaultAI::check_ships(const Time& gametime) {
 		for (ShipObserver& so : allships) {
 			// Sink ships if we can't use them.
 			verb_log_dbg_time(game().get_gametime(),
-			                  "AI %d: Sinking unexpected ship %s on non-seafaring map.",
-			                  player_number(), so.ship->get_shipname().c_str());
+			                  "AI %u: Sinking unexpected ship %s on non-seafaring map.",
+			                  static_cast<unsigned>(player_number()), so.ship->get_shipname().c_str());
 			game().send_player_sink_ship(*so.ship);
 		}
 
@@ -448,8 +451,8 @@ bool DefaultAI::check_ships(const Time& gametime) {
 	for (ShipObserver& so : allships) {
 
 		if (so.ship == nullptr) {  // good old paranoia
-			log_warn_time(
-			   game().get_gametime(), "AI %d: check_ships(): Invalid ship", player_number());
+			log_warn_time(game().get_gametime(), "AI %u: check_ships(): Invalid ship",
+			              static_cast<unsigned>(player_number()));
 			continue;
 		}
 
@@ -457,8 +460,8 @@ bool DefaultAI::check_ships(const Time& gametime) {
 		// TODO(tothxa): Make the AI handle multiple fleets. Then this can be removed.
 		if (fleet != nullptr && so.ship->get_fleet() != nullptr &&
 		    so.ship->get_fleet()->serial() != fleet->serial()) {
-			verb_log_dbg_time(game().get_gametime(), "AI %d: Sinking ship %s in second fleet",
-			                  player_number(), so.ship->get_shipname().c_str());
+			verb_log_dbg_time(game().get_gametime(), "AI %u: Sinking ship %s in second fleet",
+			                  static_cast<unsigned>(player_number()), so.ship->get_shipname().c_str());
 			game().send_player_sink_ship(*so.ship);
 			continue;
 		}
@@ -472,8 +475,9 @@ bool DefaultAI::check_ships(const Time& gametime) {
 		} else {
 			if (!so.ship->is_refitting()) {
 				if (warship_needed && !so.ship->state_is_expedition()) {
-					verb_log_dbg_time(gametime, "AI %d: Refit ship %s to warship",
-					                  player_->player_number(), so.ship->get_shipname().c_str());
+					verb_log_dbg_time(gametime, "AI %u: Refit ship %s to warship",
+					                  static_cast<unsigned>(player_number()),
+					                  so.ship->get_shipname().c_str());
 					game().send_player_refit_ship(*so.ship, Widelands::ShipType::kWarship);
 					// transport ships remember soldier capacity
 					if (so.ship->get_warship_soldier_capacity() > 0) {
@@ -525,7 +529,7 @@ bool DefaultAI::check_ships(const Time& gametime) {
 				if (!so.guarding) {
 					verb_log_warn_time(
 					   gametime,
-					   "AI %1d: last command for ship %s at %3dx%3d was %3d seconds ago, something "
+					   "AI %1u: last command for ship %s at %3dx%3d was %3u seconds ago, something "
 					   "wrong here?...\n",
 					   player_number(), so.ship->get_shipname().c_str(), so.ship->get_position().x,
 					   so.ship->get_position().y, (gametime - so.last_command_time).get() / 1000);
@@ -574,9 +578,10 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			    (average_util > persistent_data->ships_utilization && average_util > tmp_util) ||
 			    // ..._util < 0 is prevented by uint type
 			    tmp_util > 10000 || average_util > 10000) {
-				log_warn_time(
-				   gametime, "AI %d: Ship utilisation calculation error: old: %u current: %u new: %u",
-				   player_number(), persistent_data->ships_utilization, tmp_util, average_util);
+				log_warn_time(gametime,
+				              "AI %u: Ship utilisation calculation error: old: %u current: %u new: %u",
+				              static_cast<unsigned>(player_number()),
+				              persistent_data->ships_utilization, tmp_util, average_util);
 			}
 
 			// Now we can safely assign new value back to uint16_t
@@ -592,10 +597,11 @@ bool DefaultAI::check_ships(const Time& gametime) {
 		const uint32_t diff =
 		   counted_more ? counted_ships - allships.size() : allships.size() - counted_ships;
 		log_warn_time(gametime,
-		              "AI %d check_ships(): Accounting error: allships = %" PRIuS
+		              "AI %u check_ships(): Accounting error: allships = %" PRIuS
 		              " %s counted = %u (%u tradeships, %u expeditions, %u warships), difference: %u",
-		              player_number(), allships.size(), counted_more ? "<" : ">", counted_ships,
-		              tradeships_count, expeditions_in_progress, warships_count, diff);
+		              static_cast<unsigned>(player_number()), allships.size(),
+		              counted_more ? "<" : ">", counted_ships, tradeships_count,
+		              expeditions_in_progress, warships_count, diff);
 	}
 
 	return true;
@@ -716,7 +722,8 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 	// We will dereference this all over this function. Let's check at least once.
 	if (so.ship == nullptr) {  // Should only happen in race conditions.
-		log_warn_time(gametime, "AI %d: expedition_management(): Invalid expedition ship.", pn);
+		log_warn_time(gametime, "AI %u: expedition_management(): Invalid expedition ship.",
+		              static_cast<unsigned>(pn));
 		return;
 	}
 
@@ -745,9 +752,9 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 		// we score the place (value max == 8)
 		const uint8_t spot_score = spot_scoring(portspace) * 2;
-		verb_log_dbg_time(gametime, "%d: %s at %3dx%3d: PORTSPACE found, we valued it: %d\n", pn,
-		                  so.ship->get_shipname().c_str(), so.ship->get_position().x,
-		                  so.ship->get_position().y, spot_score);
+		verb_log_dbg_time(gametime, "%u: %s at %3dx%3d: PORTSPACE found, we valued it: %d\n",
+		                  static_cast<unsigned>(pn), so.ship->get_shipname().c_str(),
+		                  so.ship->get_position().x, so.ship->get_position().y, spot_score);
 
 		// we make a decision based on the score value and random and basic economy status
 		if (RNG::static_rand(8) < spot_score) {
@@ -816,8 +823,9 @@ void DefaultAI::warship_management(ShipObserver& so) {
 			// We only backfit if we find an idle warship. Trade ships shouldn't disappear anyway, so
 			// backfit requests should be extremely rare.
 
-			verb_log_dbg_time(gametime, "AI %d: Refit warship %s to trade ship",
-			                  player_->player_number(), so.ship->get_shipname().c_str());
+			verb_log_dbg_time(gametime, "AI %u: Refit warship %s to trade ship",
+			                  static_cast<unsigned>(player_->player_number()),
+			                  so.ship->get_shipname().c_str());
 			game().send_player_refit_ship(*so.ship, Widelands::ShipType::kTransport);
 			tradeship_refit_needed = false;
 			--warships_count;
@@ -827,17 +835,18 @@ void DefaultAI::warship_management(ShipObserver& so) {
 			return;
 		}
 
-		verb_log_dbg_time(gametime, "AI %d: Warship %s is looking for assignment.",
-		                  player_->player_number(), so.ship->get_shipname().c_str());
+		verb_log_dbg_time(gametime, "AI %u: Warship %s is looking for assignment.",
+		                  static_cast<unsigned>(player_->player_number()),
+		                  so.ship->get_shipname().c_str());
 		PortSiteObserver* picked_port = nullptr;
 		Widelands::Quantity picked_port_guard_ships = kWarshipsPerPort + 1;
 		// TODO(tothxa): Should also consider distance to avoid unnecessary travel and
 		//               reshuffling on game loading.
 
 		for (PortSiteObserver& p_obs : portsites) {
-			verb_log_dbg_time(gametime, "AI %d: Port %s has %d ships assigned",
-			                  player_->player_number(), p_obs.site->get_warehouse_name().c_str(),
-			                  p_obs.ships_assigned);
+			verb_log_dbg_time(gametime, "AI %u: Port %s has %u ships assigned",
+			                  static_cast<unsigned>(player_->player_number()),
+			                  p_obs.site->get_warehouse_name().c_str(), p_obs.ships_assigned);
 			if (p_obs.ships_assigned < picked_port_guard_ships) {
 				picked_port = &p_obs;
 				picked_port_guard_ships = p_obs.ships_assigned;
@@ -850,8 +859,9 @@ void DefaultAI::warship_management(ShipObserver& so) {
 		if (picked_port != nullptr && picked_port_guard_ships < kWarshipsPerPort) {
 			assert(picked_port_guard_ships == picked_port->ships_assigned);
 
-			verb_log_dbg_time(gametime, "AI %d: Assigning warship %s to port %s",
-			                  player_->player_number(), so.ship->get_shipname().c_str(),
+			verb_log_dbg_time(gametime, "AI %u: Assigning warship %s to port %s",
+			                  static_cast<unsigned>(player_->player_number()),
+			                  so.ship->get_shipname().c_str(),
 			                  picked_port->site->get_warehouse_name().c_str());
 			game().send_player_ship_set_destination(*so.ship, picked_port->site->get_portdock());
 			++(picked_port->ships_assigned);
@@ -866,19 +876,20 @@ void DefaultAI::warship_management(ShipObserver& so) {
 			}
 #endif
 			if (portsites.empty()) {
-				log_dbg_time(gametime, "AI %d: no more ports left, no action for warship %s",
-				             player_->player_number(), so.ship->get_shipname().c_str());
+				log_dbg_time(gametime, "AI %u: no more ports left, no action for warship %s",
+				             static_cast<unsigned>(player_->player_number()),
+				             so.ship->get_shipname().c_str());
 			} else if (so.ship->has_destination()) {
-				log_dbg_time(gametime,
-				             "AI %d: all ports have enough guard ships, no action for warship %s",
-				             player_->player_number(), so.ship->get_shipname().c_str());
+				log_dbg_time(
+				   gametime, "AI %u: all ports have enough guard ships, no action for warship %s",
+				   static_cast<unsigned>(player_->player_number()), so.ship->get_shipname().c_str());
 			} else {
 				// `portsites.front()` is likely the oldest port with the most infrastructure. (or not)
 				// TODO(tothxa): But the whole guarding ship business needs proper AI handling.
-				log_dbg_time(gametime,
-				             "AI %d: all ports have enough guard ships, warship %s retreats to %s",
-				             player_->player_number(), so.ship->get_shipname().c_str(),
-				             portsites.front().site->get_warehouse_name().c_str());
+				log_dbg_time(
+				   gametime, "AI %u: all ports have enough guard ships, warship %s retreats to %s",
+				   static_cast<unsigned>(player_->player_number()), so.ship->get_shipname().c_str(),
+				   portsites.front().site->get_warehouse_name().c_str());
 				game().send_player_ship_set_destination(
 				   *so.ship, portsites.front().site->get_portdock());
 				// Not an assignment, so not setting `so.guarding`, and not increasing
@@ -889,7 +900,8 @@ void DefaultAI::warship_management(ShipObserver& so) {
 	} else if (so.ship->get_destination_port(game()) == nullptr) {
 		// Clearing the destination when it disappears (is destroyed) is handled by the ship logic,
 		// but we have to do our own accounting.
-		verb_log_dbg_time(gametime, "AI %d: Warship %s lost guarded port", player_->player_number(),
+		verb_log_dbg_time(gametime, "AI %u: Warship %s lost guarded port",
+		                  static_cast<unsigned>(player_->player_number()),
 		                  so.ship->get_shipname().c_str());
 		so.guarding = false;
 
