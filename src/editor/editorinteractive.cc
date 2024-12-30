@@ -1580,6 +1580,7 @@ void EditorInteractive::publish_map() {
 
 	/* Ask the user to log in. */
 	AddOns::NetAddons net;
+	net.set_hangup_fn(AddOnsUI::create_hangup_function(*this, UI::WindowStyle::kWui, net));
 	AddOnsUI::AddOnsLoginBox login(*this, UI::WindowStyle::kWui);
 	if (login.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 		return;
