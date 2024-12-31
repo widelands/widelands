@@ -50,7 +50,7 @@ wl.Descriptions():new_productionsite_type {
             -- longest possible transition from tiny to ripe field:
             --   2 * (30 + 45 + 50) = 250 sec
             --   see data/tribes/immovables/cornfield/ and src/logic/map_objects/immovable_program.cc - ImmovableProgram::ActAnimate::execute()
-            -- how much fields is needed for reliable 100% productivity: 6
+            -- how many fields are needed for reliable 100% productivity: 6
             --   with 5 fields, this inequation is not fulfilled:
             --   (250 + 55.84 - (6 + 2.2 * 1.8 + 10)) / 55.84 < 5
             -- min. time total (free 5 nearest fields):  29.92 + 25.92 = 55.84 sec
