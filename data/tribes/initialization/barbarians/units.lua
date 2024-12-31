@@ -1530,7 +1530,7 @@ wl.Descriptions():new_tribe {
             performance = {
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Farm, part 1
                pgettext("barbarians_building", "The farmer sows and harvests one sheaf of wheat between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(57), format_minutes_seconds(1, 12)),
-               -- TRANSLATORS: Performance helptext for a Barbarian production site: Farm, part 2
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Farm, part 2; %s is replaced by 'N growing fields'
                pgettext("barbarians_building", "The farm needs at least %s to achieve 100%% productivity."):bformat(ngettext("%d growing field", "%d growing fields", 6):bformat(6))
             }
          }
