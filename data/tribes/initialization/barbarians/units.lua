@@ -1302,8 +1302,12 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("barbarians_building", "Cultivates reed that serves two different purposes for the Barbarian tribe."),
             -- TRANSLATORS: Note helptext for a Barbarian production site: Reed Yard
             note = pgettext("barbarians_building", "Reed is the traditional material for roofing, and it is woven into the extremely durable cloth that they use for their ships’ sails."),
-            -- TRANSLATORS: Performance helptext for a Barbarian production site: Reed Yard
-            performance = pgettext("barbarians_building", "A reed yard can produce a sheaf of reed in about %s on average."):bformat(format_minutes_seconds(1, 5))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Reed Yard, part 1
+               pgettext("barbarians_building", "The gardener sows and harvests one sheaf of reed between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(56), format_minutes(1)),
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Reed Yard, part 2; %s is replaced by 'N growing fields'
+               pgettext("barbarians_building", "The reed yard needs at least %s to achieve 100%% productivity."):bformat(ngettext("%d growing field", "%d growing fields", 4):bformat(4))
+            }
          }
       },
       {
