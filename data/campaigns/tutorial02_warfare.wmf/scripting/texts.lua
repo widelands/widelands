@@ -207,7 +207,7 @@ hq_soldiers = {
    title = _("Soldiers in the headquarters"),
    body = (
       h1(_("Soldiers in the headquarters")) ..
-      p(_([[Your headquarters has some capabilities of military sites: It conquers some land, and the stored soldiers defend it when attacked. However this also means that the enemy can attack the headquarters itself too. On the other hand, there’s a difference too: you can’t start an attack with the soldiers in your headquarters.]])) ..
+      p(_([[Your headquarters has some capabilities of military sites: It conquers some land, the enemy can attack it directly, and the stored soldiers defend it and its surroundings when attacked. On the other hand, there’s a difference too: you can’t start an attack with the soldiers in your headquarters.]])) ..
       p(_([[The military capabilities of the headquarters are a big difference from plain warehouses that don’t conquer land, and need nearby military sites for defense. Soldiers stored in plain warehouses don’t participate in any fighting, and plain warehouses can’t be attacked directly.]]))
    )
 }
