@@ -50,6 +50,12 @@ public:
 
 	void set_max_fill(Quantity q) override;
 
+	std::vector<Worker*>& workers_in_queue() {
+		return workers_;
+	}
+
+	bool remove_if_present(Worker& worker);
+
 	/**
 	 * Extracts the first worker from the queue and returns it
 	 * without removing it from the game.

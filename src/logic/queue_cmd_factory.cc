@@ -78,6 +78,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdSetSoldierPreference();
 	case QueueCommandTypes::kProposeTrade:
 		return *new CmdProposeTrade();
+	case QueueCommandTypes::kTradeAction:
+		return *new CmdTradeAction();
 	case QueueCommandTypes::kShipSink:
 		return *new CmdShipSink();
 	case QueueCommandTypes::kShipCancelExpedition:

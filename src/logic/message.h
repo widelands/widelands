@@ -31,9 +31,13 @@ struct Message {
 	enum class Type : uint8_t {
 		kNoMessages,
 		kAllMessages,
+
 		kGameLogic,
+
 		kGeologists,
+
 		kScenario,
+
 		kSeafaring,
 		kEconomy,              // economy
 		kEconomySiteOccupied,  // economy
@@ -42,9 +46,15 @@ struct Message {
 		kWarfareSiteLost,
 		kWarfareUnderAttack,
 		kWarfareEnd = kWarfareUnderAttack,  // end of warfare messages
-		kTradeOfferReceived,
-		kEconomyLoadGame,  // only this type is allowed in game loading code
-		                   // must not be used elsewhere
+		kTradeOfferReceived,                // trading
+		kEconomyLoadGame,                   // only this type is allowed in game loading code
+		                                    // must not be used elsewhere
+
+		kTradeOfferAccepted,   // trading
+		kTradeOfferRejected,   // trading
+		kTradeOfferRetracted,  // trading
+		kTradeComplete,        // trading
+		kTradeCancelled,       // trading
 	};
 
 	/**
