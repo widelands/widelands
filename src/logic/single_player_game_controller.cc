@@ -21,9 +21,9 @@
 #include <SDL_timer.h>
 
 #include "ai/computer_player.h"
+#include "commands/command.h"
 #include "logic/game.h"
 #include "logic/player.h"
-#include "logic/playercommand.h"
 #include "logic/playersmanager.h"
 #include "wlapplication_options.h"
 

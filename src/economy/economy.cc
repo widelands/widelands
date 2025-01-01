@@ -24,7 +24,7 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
-#include "economy/cmd_call_economy_balance.h"
+#include "commands/cmd_call_economy_balance.h"
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "economy/route.h"
