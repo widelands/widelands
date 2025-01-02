@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # fenris <fenris@folksprak.org>, 2014
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-12-16 03:14+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Raúl Contreras, 2024-2025\n"
 "Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/language/eo/)\n"
@@ -3291,7 +3291,7 @@ msgstr "Mapversio"
 #: ../../../../src/map_io/map_saver.cc:174
 #: ../../../../src/map_io/widelands_map_loader.cc:291
 msgid "Building restrictions"
-msgstr ""
+msgstr "Konstruaĵaj limitigoj"
 
 #: ../../../../src/map_io/map_saver.cc:199
 #: ../../../../src/map_io/widelands_map_loader.cc:316
@@ -3302,7 +3302,7 @@ msgstr "Flagoj"
 #: ../../../../src/map_io/map_saver.cc:206
 #: ../../../../src/map_io/widelands_map_loader.cc:323
 msgid "Roads and waterways"
-msgstr ""
+msgstr "Vojoj kaj akvovojoj"
 
 #: ../../../../src/map_io/map_saver.cc:228
 #: ../../../../src/map_io/widelands_map_loader.cc:253
