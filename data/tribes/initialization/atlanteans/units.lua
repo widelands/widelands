@@ -1833,8 +1833,12 @@ wl.Descriptions():new_tribe {
                      "It’s not spinach, it’s not a carrot, it’s … a secret."),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Blackroot Farm
             lore_author = pgettext("atlanteans_building", "Blackroot farmer asked by a foreigner"),
-            -- TRANSLATORS: Performance helptext for an Atlantean production site: Blackroot Farm
-            performance = pgettext("atlanteans_building", "The blackroot farmer needs %1% on average to sow and harvest a bundle of blackroot."):bformat(format_minutes_seconds(1, 20))
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Blackroot Farm, part 1
+               pgettext("atlanteans_building", "The blackroot farmer sows and harvests one bundle of blackroot between %1$s and %2$s, depending on how far he has to walk."):bformat(format_minutes_seconds(1, 1), format_minutes_seconds(1, 20)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Blackroot Farm, part 2; %s is replaced by 'N growing fields'
+               pgettext("atlanteans_building", "The blackroot farm needs at least %s to achieve 100%% productivity."):bformat(ngettext("%d growing field", "%d growing fields", 5):bformat(5))
+            }
          }
       },
       {

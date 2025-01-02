@@ -17,6 +17,14 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       plant = {
+         -- steps from building to field: 2-6
+         -- avg. step in ideal case (free 4 nearest fields): (4*2)/4 = 2
+         -- avg. step in ideal case (free 5 nearest fields): (4*2+1*3)/5 = 2.2
+         -- avg. step in worst case (free 5 furthest fields):  (2*4+2*5+1*6)/5 = 4.8
+         -- avg. step in std case (free all fields except road): (4*2+4*3+2*4+2*5+1*6)/13 = 3.385
+         -- min. worker time (4 fields): 2 * 2   * 1.8 + 9 + 9 = 25.2  sec
+         -- min. worker time:            2 * 2.2 * 1.8 + 9 + 9 = 25.92 sec
+         -- max. worker time:            2 * 4.8 * 1.8 + 9 + 9 = 35.28 sec
          "findspace=size:any radius:2",
          "walk=coords",
          "animate=planting duration:9s",
@@ -25,6 +33,9 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       harvest = {
+         -- min. worker time (4 fields): 2 * 2   * 1.8 + 10 + 4 = 21.2  sec
+         -- min. worker time:            2 * 2.2 * 1.8 + 10 + 4 = 21.92 sec
+         -- max. worker time:            2 * 4.8 * 1.8 + 10 + 4 = 31.28 sec
          "findobject=attrib:ripe_blackroot radius:2",
          "walk=object",
          "animate=harvesting duration:10s",
