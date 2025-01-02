@@ -1547,7 +1547,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Vineyard
             lore_author = pgettext("empire_building", "A proud vine farmer boasting"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Vineyard
-            purpose = pgettext("empire_building", "Plants grapevines and harvests grapes.")
+            purpose = pgettext("empire_building", "Plants grapevines and harvests grapes."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Vineyard, part 1
+               pgettext("empire_building", "The vine farmer sows and harvests one basket of grapes in %s on average."):bformat(format_seconds(50)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Vineyard, part 2; %s is replaced by 'N growing fields'
+               pgettext("empire_building", "The vineyard needs %s to achieve 100%% productivity."):bformat(ngettext("%d growing field", "%d growing fields", 5):bformat(5))
+            }
          }
       },
       {
