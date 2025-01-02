@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # fenris <fenris@folksprak.org>, 2014
@@ -7,15 +7,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Peter Garami <petro.garami@gmail.com>, 2021
-# Raúl Contreras, 2024
+# Raúl Contreras, 2024-2025
 # Ximena Delgado, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-12-16 03:14+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Raúl Contreras, 2024\n"
+"Last-Translator: Raúl Contreras, 2024-2025\n"
 "Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/language/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3223,41 +3223,41 @@ msgstr "Ludo savita"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:887
 msgid "Building’s inputs changed!"
-msgstr "La enigoj de la konstruaĵo ŝanĝiĝis!"
+msgstr "La enigaĵoj de la konstruaĵo ŝanĝiĝis!"
 
 #. * TRANSLATORS: The argument is the buiding name
 #: ../../../../src/map_io/map_buildingdata_packet.cc:898
 #, c-format
 msgid "%s: the building’s inputs have changed."
-msgstr ""
+msgstr "%s: La enigoj de la konstruaĵo ŝanĝiĝis."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:901
 msgid "The following wares have been deleted:"
-msgstr ""
+msgstr "La sekvaj varoj estis forigitaj:"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:908
 #, c-format
 msgid "%1$u piece of %2$s"
 msgid_plural "%1$u pieces of %2$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u peco de %2$s"
+msgstr[1] "%1$u pecoj de %2$s"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:914
 #, c-format
 msgid "%1$u piece of an unknown ware"
 msgid_plural "%1$u pieces of unknown wares"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u peco de nekonata varo."
+msgstr[1] "%1$u pecoj de nekonataj varoj."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:920
 msgid ""
 "The game was probably saved with a different Widelands version or with "
 "different enabled add-ons."
-msgstr ""
+msgstr "La ludo verŝajne estis konservita per alia versio de Widelands aŭ kun aliaj aktivigitaj aldonaĵoj."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:923
 msgid "Please review the current production programs and input settings."
-msgstr ""
+msgstr "Bonvolu revizii la nunajn produktadajn programojn kaj enigaĵajn agordojn."
 
 #: ../../../../src/map_io/map_saver.cc:85
 #, c-format
@@ -3291,7 +3291,7 @@ msgstr "Mapversio"
 #: ../../../../src/map_io/map_saver.cc:174
 #: ../../../../src/map_io/widelands_map_loader.cc:291
 msgid "Building restrictions"
-msgstr ""
+msgstr "Konstruaĵaj limitigoj"
 
 #: ../../../../src/map_io/map_saver.cc:199
 #: ../../../../src/map_io/widelands_map_loader.cc:316
@@ -3302,7 +3302,7 @@ msgstr "Flagoj"
 #: ../../../../src/map_io/map_saver.cc:206
 #: ../../../../src/map_io/widelands_map_loader.cc:323
 msgid "Roads and waterways"
-msgstr ""
+msgstr "Vojoj kaj akvovojoj"
 
 #: ../../../../src/map_io/map_saver.cc:228
 #: ../../../../src/map_io/widelands_map_loader.cc:253
