@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2024 by the Widelands Development Team
+ * Copyright (C) 2010-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -412,6 +412,13 @@ bool InputQueueDisplay::handle_mousemove(
    uint8_t /*state*/, const int32_t x, const int32_t y, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	fill_index_under_mouse_ = fill_index_at(x, y);
 	return true;
+}
+
+void InputQueueDisplay::handle_mousein(bool inside) {
+	if (!inside) {
+		fill_index_under_mouse_ = -1;
+	}
+	UI::Box::handle_mousein(inside);
 }
 
 bool InputQueueDisplay::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {

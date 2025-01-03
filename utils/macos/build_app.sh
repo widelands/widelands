@@ -78,17 +78,18 @@ function MakeDMG {
    HDI_TRY=0
    while true; do
       HDI_TRY=$(( ++HDI ))
-      if $SUDO hdiutil create -verbose -fs APFS -volname "Widelands $WLVERSION" \
-                       -srcfolder "$DESTINATION" "$DMGFILE"
-      then
+      HDI_RESULT=0
+      $SUDO hdiutil create -verbose -fs APFS -volname "Widelands $WLVERSION" \
+                    -srcfolder "$DESTINATION" "$DMGFILE" \
+         || HDI_RESULT=$?
+      if [ $HDI_RESULT -eq 0 ]; then
          return
       fi
-      HDI_RESULT=$?
       if [ $HDI_TRY -eq $HDI_MAX_TRIES ]; then
          exit $HDI_RESULT
       fi
       if [ -n "$GITHUB_ACTION" ]; then
-         echo "::warning::hdiutil try $HDI_TRY error code: ${HDI_RESULT}... retrying"
+         echo "::warning::hdiutil MacOS $MATRIX_OS $TYPE try $HDI_TRY error code: ${HDI_RESULT}... retrying"
       fi
       if [ -f "$DMGFILE" ]; then
         rm "$DMGFILE"
@@ -159,7 +160,8 @@ EOF
 
 function BuildWidelands() {
    PREFIX_PATH=$(brew --prefix)
-   eval "$("$PREFIX_PATH/bin/brew shellenv")"
+   # TODO(tothxa): I don't think this is actually needed, as brew isn't used in this script
+   eval "$($PREFIX_PATH/bin/brew shellenv)"
    export CMAKE_PREFIX_PATH="${PREFIX_PATH}/opt/icu4c"
 
    echo "FIXED ICU Issue $CMAKE_PREFIX_PATH"
