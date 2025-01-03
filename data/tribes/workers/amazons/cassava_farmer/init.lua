@@ -16,6 +16,14 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       plant = {
+         -- steps from building to field: 2-7
+         -- avg. step in ideal case (free 5 nearest fields): (4*2+1*3)/5 = 2.2
+         -- avg. step in ideal case (free 6 nearest fields): (4*2+2*3)/6 = 2.333
+         -- avg. step in worst case (free 6 furthest fields):  (2*5+3*6+1*7)/6 = 5.833
+         -- avg. step in std case (free all fields except road): (4*2+8*3+8*4+6*5+3*6+1*7)/30 = 3.967
+         -- min. worker time (5 fields): 2 * 2.2   * 1.8 + 6 + 6 = 19.92 sec
+         -- min. worker time:            2 * 2.333 * 1.8 + 6 + 6 = 20.4  sec
+         -- max. worker time:            2 * 5.833 * 1.8 + 6 + 6 = 33    sec
          "findspace=size:any radius:3 space",
          "walk=coords",
          "animate=dig duration:6s",
@@ -24,6 +32,9 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       harvest = {
+         -- min. worker time (5 fields): 2 * 2.2   * 1.8 + 8 + 6 = 21.92 sec
+         -- min. worker time:            2 * 2.333 * 1.8 + 8 + 6 = 22.4  sec
+         -- max. worker time:            2 * 5.833 * 1.8 + 8 + 6 = 35    sec
          "findobject=attrib:ripe_cassava radius:3",
          "walk=object",
          "animate=planting_harvesting duration:8s",
