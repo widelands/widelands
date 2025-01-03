@@ -17,6 +17,14 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       plant = {
+         -- steps from building to field: 2-6
+         -- avg. step in ideal case (free 5 nearest fields): (4*2+1*3)/5 = 2.2
+         -- avg. step in ideal case (free 6 nearest fields): (4*2+2*3)/6 = 2.333
+         -- avg. step in worst case (free 6 furthest fields):  (1*3+2*4+2*5+1*6)/6 = 4.5
+         -- avg. step in std case (free all fields except road): (4*2+4*3+2*4+2*5+1*6)/13 = 3.385
+         -- min. worker time (5 fields): 2 * 2.2   * 1.8 + 6 + 6 = 19.92 sec
+         -- min. worker time:            2 * 2.333 * 1.8 + 6 + 6 = 20.4  sec
+         -- max. worker time:            2 * 4.5   * 1.8 + 6 + 6 = 28.2  sec
          "findspace=size:any radius:2 space",
          "walk=coords",
          "animate=plant duration:6s",
@@ -25,6 +33,9 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       harvest = {
+         -- min. worker time (5 fields): 2 * 2.2   * 1.8 + 10 + 4 = 21.92 sec
+         -- min. worker time:            2 * 2.333 * 1.8 + 10 + 4 = 22.4  sec
+         -- max. worker time:            2 * 4.5   * 1.8 + 10 + 4 = 30.2  sec
          "findobject=attrib:ripe_wheat radius:2",
          "walk=object",
          "playsound=sound/farm/scythe priority:70% allow_multiple",
