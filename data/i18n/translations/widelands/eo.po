@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-01-04 02:53+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Raúl Contreras, 2024-2025\n"
 "Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/language/eo/)\n"
@@ -493,7 +493,7 @@ msgstr "Origino de la mapo"
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
-msgstr "Agordu la pozicion, kiu havos la koordinatojn (0, 0). Ĉi tiu estos la supra-maldekstra angulo de la generita minimapo."
+msgstr "Agordu la pozicion, kiu havos la koordinatojn (0, 0). Ĉi tiu estos la supra-maldekstra angulo de la generita mapeto."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:388
@@ -3320,11 +3320,11 @@ msgstr "Flagdetaloj"
 
 #: ../../../../src/map_io/map_saver.cc:255
 msgid "Road and waterway details"
-msgstr ""
+msgstr "Vojaj kaj akvovojaj detaloj"
 
 #: ../../../../src/map_io/map_saver.cc:272
 msgid "Building details"
-msgstr ""
+msgstr "Konstruaĵa detaloj"
 
 #: ../../../../src/map_io/map_saver.cc:280
 msgid "Territory"
@@ -3333,12 +3333,12 @@ msgstr "Teritorio"
 #: ../../../../src/map_io/map_saver.cc:287
 #: ../../../../src/map_io/widelands_map_loader.cc:390
 msgid "Vision"
-msgstr "Vizio"
+msgstr "Vido"
 
 #: ../../../../src/map_io/map_saver.cc:296
 #: ../../../../src/map_io/widelands_map_loader.cc:425
 msgid "Scripting"
-msgstr "Skripta"
+msgstr "Skriptado"
 
 #: ../../../../src/map_io/map_saver.cc:303
 #: ../../../../src/map_io/widelands_map_loader.cc:418
@@ -3363,21 +3363,21 @@ msgid ""
 "The engine received a SIGABRT signal which was most likely triggered by a "
 "corrupted savegame. No solution for this bug has been implemented yet. We "
 "are sorry, but this savegame seems to be broken beyond repair."
-msgstr ""
+msgstr "La motoro ricevis signalon SIGABRT, kiu plej verŝajne estis kaŭzita de difektita konservita ludo. Ankoraŭ ne estas solvo por ĉi tiu eraro. Ni bedaŭras, sed ĉi tiu konservita ludo ŝajnas esti neripareble difektita."
 
 #: ../../../../src/map_io/s2map.cc:422
 #: ../../../../src/map_io/widelands_map_loader.cc:196
 msgid "Loading map…"
-msgstr "Ŝarganta mapon…"
+msgstr "Ŝargante mapon…"
 
 #: ../../../../src/map_io/s2map.cc:460
 msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr "Mapo de \"Bluebyte Setlantoj II\". Nenia komento estas difinita!"
+msgstr "Bluebyte Settlers II Mapo. Neniu komento difinita!"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:209
 #, c-format
 msgid "Loading map: %1$s (%2$u/%3$d)"
-msgstr ""
+msgstr "Ŝargante mapon: %1$s (%2$u/%3$d)"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:304
 msgid "Territories"
@@ -3385,19 +3385,19 @@ msgstr "Teritorioj"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:344
 msgid "Initializing flags"
-msgstr "Inicializante flagojn"
+msgstr "Iniciatante flagojn"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:351
 msgid "Initializing roads and waterways"
-msgstr "Inicializante vojojn kaj akvovojojn"
+msgstr "Iniciatante vojojn kaj akvovojojn"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:364
 msgid "Initializing buildings"
-msgstr "Inicializante konstruaĵojn"
+msgstr "Iniciatante konstruaĵojn"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:371
 msgid "Initializing map objects"
-msgstr "Inicializante mapobjektoj"
+msgstr "Iniciatante mapobjektojn"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:435
 msgid "Checking map"
@@ -10102,15 +10102,15 @@ msgstr ""
 msgid "Add ware"
 msgstr ""
 
-#: ../../../../src/wui/inputqueuedisplay.cc:627
+#: ../../../../src/wui/inputqueuedisplay.cc:634
 msgid "Hide controls"
 msgstr ""
 
-#: ../../../../src/wui/inputqueuedisplay.cc:627
+#: ../../../../src/wui/inputqueuedisplay.cc:634
 msgid "Show controls"
 msgstr ""
 
-#: ../../../../src/wui/inputqueuedisplay.cc:683
+#: ../../../../src/wui/inputqueuedisplay.cc:690
 #, c-format
 msgid "+%u"
 msgstr ""
