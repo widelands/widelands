@@ -33,9 +33,12 @@ class Soldier;
 
 class SoldierRequest : public Request {
 public:
-	SoldierRequest(PlayerImmovable& target, DescriptionIndex di, CallbackFn cb, WareWorker ww, SoldierPreference pref) :
-	   Request(target, di, cb, ww),
-	   preference_(pref) {
+	SoldierRequest(PlayerImmovable& target,
+	               DescriptionIndex di,
+	               CallbackFn cb,
+	               WareWorker ww,
+	               SoldierPreference pref)
+	   : Request(target, di, cb, ww), preference_(pref) {
 	}
 
 	SoldierPreference get_preference() const {

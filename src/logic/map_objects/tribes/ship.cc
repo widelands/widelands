@@ -930,8 +930,9 @@ void Ship::update_warship_soldier_request(bool create) {
 	// Create a new request manager at the current port.
 	dock = lastdock_.get(owner().egbase());
 	if (dock == nullptr) {
-		throw wexception("Ship %s attempts to create warship soldier request manager while not in dock",
-		                 get_shipname().c_str());
+		throw wexception(
+		   "Ship %s attempts to create warship soldier request manager while not in dock",
+		   get_shipname().c_str());
 	}
 	molog(egbase.get_gametime(), "Creating new soldier request manager at %s",
 	      dock->get_warehouse()->get_warehouse_name().c_str());

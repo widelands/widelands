@@ -1074,7 +1074,8 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 			// TODO(tothxa): update if preference is changed to manual
 			if (trainingsite.soldier_request_ != nullptr) {
 				trainingsite.soldier_request_->set_preference(trainingsite.requesting_weak_trainees_ ?
-				   SoldierPreference::kRookies : SoldierPreference::kHeroes);
+				                                                 SoldierPreference::kRookies :
+				                                                 SoldierPreference::kHeroes);
 			}
 
 			trainingsite.repeated_layoff_inc_ = 0 < (somebits & 4);

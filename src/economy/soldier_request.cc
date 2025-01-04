@@ -30,7 +30,8 @@
 namespace Widelands {
 
 void SoldierRequestManager::create_request() {
-	request_.reset(new SoldierRequest(target_, target_.owner().tribe().soldier(), callback_, wwWORKER, preference_));
+	request_.reset(new SoldierRequest(
+	   target_, target_.owner().tribe().soldier(), callback_, wwWORKER, preference_));
 	request_->set_exact_match(true);
 }
 
