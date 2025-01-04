@@ -135,7 +135,8 @@ void SoldierRequestManager::read(FileRead& fr, Game& game, MapObjectLoader& mol)
 				request_->read(fr, game, mol);
 			}
 		} else {
-			throw UnhandledVersionError("SoldierRequestManager", packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(
+			   "SoldierRequestManager", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
 		throw wexception("soldier request: %s", e.what());

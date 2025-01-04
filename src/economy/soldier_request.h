@@ -37,10 +37,10 @@ public:
 	using StationedSoldiersFn = std::function<std::vector<Soldier*>()>;
 
 	SoldierRequestManager(PlayerImmovable& target,
-	               SoldierPreference pref,
-	               Request::CallbackFn callback,
-	               DesiredCapacityFn dcfn,
-	               StationedSoldiersFn ssfn)
+	                      SoldierPreference pref,
+	                      Request::CallbackFn callback,
+	                      DesiredCapacityFn dcfn,
+	                      StationedSoldiersFn ssfn)
 	   : target_(target),
 	     preference_(pref),
 	     callback_(callback),

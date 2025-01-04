@@ -63,7 +63,8 @@ std::vector<Soldier*> MilitarySite::SoldierControl::stationed_soldiers() const {
 std::vector<Soldier*> MilitarySite::SoldierControl::associated_soldiers() const {
 	std::vector<Soldier*> soldiers = stationed_soldiers();
 	if (military_site_->soldier_request_manager_.get_request() != nullptr) {
-		for (const Transfer* t : military_site_->soldier_request_manager_.get_request()->get_transfers()) {
+		for (const Transfer* t :
+		     military_site_->soldier_request_manager_.get_request()->get_transfers()) {
 			Soldier& s = dynamic_cast<Soldier&>(*t->get_worker());
 			soldiers.push_back(&s);
 		}

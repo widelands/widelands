@@ -535,7 +535,8 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 						// TODO(Nordfriese): The ship can only fail to exist in a pre-v1.2
 						// development version. Require its existence after v1.2.
 						if (!mol.is_object_known(ship_serial)) {
-							log_warn("Reading soldier request manager for nonexistent ship %u", ship_serial);
+							log_warn(
+							   "Reading soldier request manager for nonexistent ship %u", ship_serial);
 							SoldierRequestManager srm(
 							   warehouse, SoldierPreference::kHeroes, Ship::warship_soldier_callback,
 							   []() { return 0U; }, []() { return std::vector<Widelands::Soldier*>(); });
@@ -544,13 +545,15 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 						}
 
 						Ship* ship = &mol.get<Ship>(ship_serial);
-						assert(warehouse.portdock_->warship_soldier_request_managers_.count(ship->serial()) == 0);
+						assert(warehouse.portdock_->warship_soldier_request_managers_.count(
+						          ship->serial()) == 0);
 						SoldierRequestManager* srm = new SoldierRequestManager(
 						   warehouse, SoldierPreference::kHeroes, Ship::warship_soldier_callback,
 						   [ship]() { return ship->get_warship_soldier_capacity(); },
 						   [ship]() { return ship->onboard_soldiers(); });
 						srm->read(fr, game, mol);
-						warehouse.portdock_->warship_soldier_request_managers_.emplace(ship->serial(), srm);
+						warehouse.portdock_->warship_soldier_request_managers_.emplace(
+						   ship->serial(), srm);
 					}
 				}
 			}

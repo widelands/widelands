@@ -1160,7 +1160,8 @@ std::vector<Soldier*> Ship::associated_soldiers() const {
 	std::vector<Soldier*> result = onboard_soldiers();
 
 	if (PortDock* dock = requestdock_.get(owner().egbase()); dock != nullptr) {
-		if (const SoldierRequestManager* srm = dock->get_warship_request_manager(serial()); srm != nullptr) {
+		if (const SoldierRequestManager* srm = dock->get_warship_request_manager(serial());
+		    srm != nullptr) {
 			if (const Request* request = srm->get_request(); request != nullptr) {
 				for (const Transfer* t : request->get_transfers()) {
 					Soldier& s = dynamic_cast<Soldier&>(*t->get_worker());

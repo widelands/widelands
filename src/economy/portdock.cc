@@ -465,7 +465,8 @@ SoldierRequestManager* PortDock::get_warship_request_manager(Serial ship) const 
 	return nullptr;
 }
 
-SoldierRequestManager& PortDock::create_warship_request_manager(Ship* ship, SoldierPreference pref) {
+SoldierRequestManager& PortDock::create_warship_request_manager(Ship* ship,
+                                                                SoldierPreference pref) {
 	assert(warship_soldier_request_managers_.count(ship->serial()) == 0);
 	SoldierRequestManager* srm = new SoldierRequestManager(
 	   *get_warehouse(), pref, Ship::warship_soldier_callback,
