@@ -491,7 +491,7 @@ msgid ""
 "land, the enemy can attack it directly, and the stored soldiers defend it "
 "and its surroundings when attacked. On the other hand, there’s a difference "
 "too: you can’t start an attack with the soldiers in your headquarters."
-msgstr ""
+msgstr "Dien Raadhuus kann ok wat vun de Dingen, wat Soldateree-Boen könen: ’t nimmt wat Land in, de Feind kann dat Raadhuus sülvst angriepen, un de Soldaten daarin verteidigen ’t un sien Umgeven, wenn ’t angriepen word. Up de anner Kant is ok wat anners: Du kannst mit de Soldaten in dienem Raadhuus keenen Angriff begünnen."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid ""
