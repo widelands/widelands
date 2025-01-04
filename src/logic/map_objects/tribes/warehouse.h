@@ -245,7 +245,7 @@ public:
 
 	void set_soldier_preference(SoldierPreference);
 	[[nodiscard]] SoldierPreference get_soldier_preference() const {
-		return soldier_request_.get_preference();
+		return soldier_request_manager_.get_preference();
 	}
 
 	void log_general_info(const EditorGameBase&) const override;
@@ -326,7 +326,7 @@ private:
 	Quantity desired_soldier_count_{0U};
 	AttackTarget attack_target_;
 	SoldierControl soldier_control_;
-	SoldierRequest soldier_request_;
+	SoldierRequestManager soldier_request_manager_;
 	Time next_swap_soldiers_time_{0U};
 
 	WarehouseSupply* supply_;

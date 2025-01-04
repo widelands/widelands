@@ -29,18 +29,18 @@
 
 namespace Widelands {
 
-void SoldierRequest::create_request() {
+void SoldierRequestManager::create_request() {
 	request_.reset(new Request(target_, target_.owner().tribe().soldier(), callback_, wwWORKER));
 	request_->set_exact_match(true);
 }
 
-void SoldierRequest::set_economy(Economy* const e, WareWorker type) {
+void SoldierRequestManager::set_economy(Economy* const e, WareWorker type) {
 	if (type == wwWORKER && request_ != nullptr) {
 		request_->set_economy(e);
 	}
 }
 
-void SoldierRequest::update() {
+void SoldierRequestManager::update() {
 	const Quantity target = get_desired_capacity_();
 	const std::vector<Soldier*> stationed = get_stationed_soldiers_();
 	const Quantity current = stationed.size();
@@ -124,7 +124,7 @@ void SoldierRequest::update() {
 
 constexpr uint16_t kCurrentPacketVersion = 1;
 
-void SoldierRequest::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
+void SoldierRequestManager::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
@@ -135,14 +135,14 @@ void SoldierRequest::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 				request_->read(fr, game, mol);
 			}
 		} else {
-			throw UnhandledVersionError("SoldierRequest", packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("SoldierRequestManager", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
 		throw wexception("soldier request: %s", e.what());
 	}
 }
 
-void SoldierRequest::write(FileWrite& fw, Game& game, MapObjectSaver& mos) const {
+void SoldierRequestManager::write(FileWrite& fw, Game& game, MapObjectSaver& mos) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	fw.unsigned_8(static_cast<uint8_t>(preference_));

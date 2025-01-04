@@ -31,12 +31,12 @@ namespace Widelands {
 
 class Soldier;
 
-class SoldierRequest {
+class SoldierRequestManager {
 public:
 	using DesiredCapacityFn = std::function<Quantity()>;
 	using StationedSoldiersFn = std::function<std::vector<Soldier*>()>;
 
-	SoldierRequest(PlayerImmovable& target,
+	SoldierRequestManager(PlayerImmovable& target,
 	               SoldierPreference pref,
 	               Request::CallbackFn callback,
 	               DesiredCapacityFn dcfn,
@@ -84,7 +84,7 @@ private:
 	DesiredCapacityFn get_desired_capacity_;
 	StationedSoldiersFn get_stationed_soldiers_;
 
-	DISALLOW_COPY_AND_ASSIGN(SoldierRequest);
+	DISALLOW_COPY_AND_ASSIGN(SoldierRequestManager);
 };
 
 }  // namespace Widelands

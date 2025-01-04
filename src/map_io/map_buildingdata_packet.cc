@@ -535,22 +535,22 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 						// TODO(Nordfriese): The ship can only fail to exist in a pre-v1.2
 						// development version. Require its existence after v1.2.
 						if (!mol.is_object_known(ship_serial)) {
-							log_warn("Reading soldier request for nonexistent ship %u", ship_serial);
-							SoldierRequest req(
+							log_warn("Reading soldier request manager for nonexistent ship %u", ship_serial);
+							SoldierRequestManager srm(
 							   warehouse, SoldierPreference::kHeroes, Ship::warship_soldier_callback,
 							   []() { return 0U; }, []() { return std::vector<Widelands::Soldier*>(); });
-							req.read(fr, game, mol);
+							srm.read(fr, game, mol);
 							continue;
 						}
 
 						Ship* ship = &mol.get<Ship>(ship_serial);
-						assert(warehouse.portdock_->warship_soldier_requests_.count(ship->serial()) == 0);
-						SoldierRequest* req = new SoldierRequest(
+						assert(warehouse.portdock_->warship_soldier_request_managers_.count(ship->serial()) == 0);
+						SoldierRequestManager* srm = new SoldierRequestManager(
 						   warehouse, SoldierPreference::kHeroes, Ship::warship_soldier_callback,
 						   [ship]() { return ship->get_warship_soldier_capacity(); },
 						   [ship]() { return ship->onboard_soldiers(); });
-						req->read(fr, game, mol);
-						warehouse.portdock_->warship_soldier_requests_.emplace(ship->serial(), req);
+						srm->read(fr, game, mol);
+						warehouse.portdock_->warship_soldier_request_managers_.emplace(ship->serial(), srm);
 					}
 				}
 			}
@@ -573,7 +573,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 			// TODO(tothxa): Savegame compatibility v1.1
 			if (packet_version >= 10) {
 				warehouse.next_swap_soldiers_time_ = Time(fr);
-				warehouse.soldier_request_.read(fr, game, mol);
+				warehouse.soldier_request_manager_.read(fr, game, mol);
 				warehouse.desired_soldier_count_ = packet_version >= 11 ? fr.unsigned_32() : 0;
 			}
 		} else {
@@ -647,7 +647,7 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
 
 			// TODO(tothxa): Savegame compatibility v1.1
 			if (packet_version >= 8) {
-				militarysite.soldier_request_.read(fr, game, mol);
+				militarysite.soldier_request_manager_.read(fr, game, mol);
 			}
 
 		} else {
@@ -1393,15 +1393,15 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 			warehouse.portdock_->expedition_bootstrap()->save(fw, game, mos);
 		}
 
-		fw.unsigned_32(warehouse.portdock_->warship_soldier_requests_.size());
-		for (const auto& pair : warehouse.portdock_->warship_soldier_requests_) {
+		fw.unsigned_32(warehouse.portdock_->warship_soldier_request_managers_.size());
+		for (const auto& pair : warehouse.portdock_->warship_soldier_request_managers_) {
 			fw.unsigned_32(mos.get_object_file_index(*game.objects().get_object(pair.first)));
 			pair.second->write(fw, game, mos);
 		}
 	}
 
 	warehouse.next_swap_soldiers_time_.save(fw);
-	warehouse.soldier_request_.write(fw, game, mos);
+	warehouse.soldier_request_manager_.write(fw, game, mos);
 	fw.unsigned_32(warehouse.desired_soldier_count_);
 }
 
@@ -1423,7 +1423,7 @@ void MapBuildingdataPacket::write_militarysite(const MilitarySite& militarysite,
 		fw.unsigned_8(pair.second ? 1 : 0);
 	}
 
-	militarysite.soldier_request_.write(fw, game, mos);
+	militarysite.soldier_request_manager_.write(fw, game, mos);
 }
 
 void MapBuildingdataPacket::write_productionsite(const ProductionSite& productionsite,

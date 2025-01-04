@@ -381,7 +381,7 @@ std::vector<Soldier*> Warehouse::SoldierControl::stationed_soldiers() const {
 
 std::vector<Soldier*> Warehouse::SoldierControl::associated_soldiers() const {
 	std::vector<Soldier*> soldiers = stationed_soldiers();
-	Request* sr = warehouse_->soldier_request_.get_request();
+	Request* sr = warehouse_->soldier_request_manager_.get_request();
 	if (sr != nullptr) {
 		for (const Transfer* t : sr->get_transfers()) {
 			Soldier& s = dynamic_cast<Soldier&>(*t->get_worker());
@@ -440,7 +440,7 @@ Warehouse::Warehouse(const WarehouseDescr& warehouse_descr)
    : Building(warehouse_descr),
      attack_target_(this),
      soldier_control_(this),
-     soldier_request_(
+     soldier_request_manager_(
         *this,
         SoldierPreference::kAny /* no exchange by default */,
         Warehouse::request_soldier_callback,
@@ -883,7 +883,7 @@ void Warehouse::act(Game& game, uint32_t const data) {
 
 	if (gametime > next_swap_soldiers_time_) {
 		next_swap_soldiers_time_ = gametime + kSoldierSwapTime;
-		soldier_request_.update();
+		soldier_request_manager_.update();
 	}
 
 	if (next_stock_remove_act_ <= gametime) {
@@ -918,7 +918,7 @@ void Warehouse::set_economy(Economy* const e, WareWorker type) {
 	}
 	supply_->set_economy(e, type);
 	Building::set_economy(e, type);
-	soldier_request_.set_economy(e, type);
+	soldier_request_manager_.set_economy(e, type);
 
 	for (const PlannedWorkers& pw : planned_workers_) {
 		for (Request* req : pw.requests) {
@@ -1666,12 +1666,12 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type, const
 
 void Warehouse::set_desired_soldier_count(Quantity q) {
 	desired_soldier_count_ = q;
-	soldier_request_.update();
+	soldier_request_manager_.update();
 }
 
 void Warehouse::set_soldier_preference(SoldierPreference p) {
-	soldier_request_.set_preference(p);
-	soldier_request_.update();
+	soldier_request_manager_.set_preference(p);
+	soldier_request_manager_.update();
 }
 
 void Warehouse::request_soldier_callback(Game& game,
