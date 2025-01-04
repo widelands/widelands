@@ -41,7 +41,7 @@ public:
 	   : Request(target, di, cb, ww), preference_(pref) {
 	}
 
-	SoldierPreference get_preference() const {
+	[[nodiscard]] SoldierPreference get_preference() const {
 		return preference_;
 	}
 	void set_preference(SoldierPreference pref) {
