@@ -30,7 +30,7 @@
 namespace Widelands {
 
 void SoldierRequestManager::create_request() {
-	request_.reset(new Request(target_, target_.owner().tribe().soldier(), callback_, wwWORKER));
+	request_.reset(new SoldierRequest(target_, target_.owner().tribe().soldier(), callback_, wwWORKER, preference_));
 	request_->set_exact_match(true);
 }
 
@@ -59,6 +59,7 @@ void SoldierRequestManager::update() {
 
 		request_->set_requirements(Requirements());
 		request_->set_count(target - current);
+		request_->set_preference(preference_);
 		if (Economy* economy = request_->get_economy(); economy != nullptr) {
 			economy->rebalance_supply();
 		}
@@ -117,6 +118,7 @@ void SoldierRequestManager::update() {
 
 	request_->set_count(1);
 	request_->set_requirements(RequireAttribute(TrainingAttribute::kTotal, rmin, rmax));
+	request_->set_preference(preference_);
 	if (Economy* economy = request_->get_economy(); economy != nullptr) {
 		economy->rebalance_supply();
 	}
@@ -133,6 +135,7 @@ void SoldierRequestManager::read(FileRead& fr, Game& game, MapObjectLoader& mol)
 			if (fr.unsigned_8() != 0) {
 				create_request();
 				request_->read(fr, game, mol);
+				request_->set_preference(preference_);
 			}
 		} else {
 			throw UnhandledVersionError(

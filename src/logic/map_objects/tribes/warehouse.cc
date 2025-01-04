@@ -316,21 +316,8 @@ WareInstance& WarehouseSupply::launch_ware(Game& game, const Request& req) {
 Worker& WarehouseSupply::launch_worker(Game& game, const Request& req) {
 	if (req.get_index() == warehouse_->owner().tribe().soldier()) {
 		SoldierPreference pref = SoldierPreference::kAny;
-		if (req.target().descr().type() == MapObjectType::MILITARYSITE) {
-			if (upcast(MilitarySite, ms, &req.target()); ms != nullptr) {
-				pref = ms->get_soldier_preference();
-			}
-		} else if (req.target().descr().type() == MapObjectType::WAREHOUSE) {
-			if (upcast(Warehouse, owh, &req.target()); owh != nullptr) {
-				// TODO(tothxa): Warship requests are from the current port, but the ship's preference
-				//               may be different from the port's. How can we tell them apart?
-				pref = owh->get_soldier_preference();
-			}
-		} else if (req.target().descr().type() == MapObjectType::TRAININGSITE) {
-			if (upcast(TrainingSite, ts, &req.target()); ts != nullptr) {
-				pref = ts->get_requesting_weak_trainees() ? SoldierPreference::kRookies :
-				                                            SoldierPreference::kHeroes;
-			}
+		if (upcast(const SoldierRequest, sr, &req); sr != nullptr) {
+			pref = sr->get_preference();
 		}
 		return warehouse_->launch_soldier(game, req.get_requirements(), false, pref);
 	}

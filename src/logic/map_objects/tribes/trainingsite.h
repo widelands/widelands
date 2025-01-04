@@ -219,7 +219,7 @@ private:
 
 	SoldierControl soldier_control_;
 	/// Open requests for soldiers. The soldiers can be under way or unavailable
-	Request* soldier_request_{nullptr};
+	SoldierRequest* soldier_request_{nullptr};
 
 	/** The soldiers currently at the training site*/
 	std::vector<Soldier*> soldiers_;

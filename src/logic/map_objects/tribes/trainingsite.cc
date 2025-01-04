@@ -632,8 +632,9 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			recent_capacity_increase_ = false;
 		}
 
-		soldier_request_ = new Request(
-		   *this, owner().tribe().soldier(), TrainingSite::request_soldier_callback, wwWORKER);
+		soldier_request_ = new SoldierRequest(
+		   *this, owner().tribe().soldier(), TrainingSite::request_soldier_callback, wwWORKER,
+		   requesting_weak_trainees_ ? SoldierPreference::kRookies : SoldierPreference::kHeroes);
 
 		RequireOr r;
 

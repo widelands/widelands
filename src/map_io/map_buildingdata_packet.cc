@@ -1007,8 +1007,10 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 			delete trainingsite.soldier_request_;
 			trainingsite.soldier_request_ = nullptr;
 			if (fr.unsigned_8() != 0u) {
+				// Preference is set below
 				trainingsite.soldier_request_ =
-				   new Request(trainingsite, 0, TrainingSite::request_soldier_callback, wwWORKER);
+				   new SoldierRequest(trainingsite, 0, TrainingSite::request_soldier_callback, wwWORKER,
+				                      SoldierPreference::kAny);
 				trainingsite.soldier_request_->read(fr, game, mol);
 			}
 
@@ -1068,6 +1070,13 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 			uint8_t somebits = fr.unsigned_8();
 			trainingsite.latest_trainee_was_kickout_ = 0 < (somebits & 1);
 			trainingsite.requesting_weak_trainees_ = 0 < (somebits & 2);
+
+			// TODO(tothxa): update if preference is changed to manual
+			if (trainingsite.soldier_request_ != nullptr) {
+				trainingsite.soldier_request_->set_preference(trainingsite.requesting_weak_trainees_ ?
+				   SoldierPreference::kRookies : SoldierPreference::kHeroes);
+			}
+
 			trainingsite.repeated_layoff_inc_ = 0 < (somebits & 4);
 			trainingsite.recent_capacity_increase_ = 0 < (somebits & 8);
 			assert(16 > somebits);
