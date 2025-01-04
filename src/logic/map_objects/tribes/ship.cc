@@ -891,7 +891,7 @@ void Ship::set_soldier_preference(SoldierPreference pref) {
 void Ship::erase_warship_soldier_request_manager() {
 	const EditorGameBase& egbase = owner().egbase();
 	if (PortDock* dock = requestdock_.get(egbase); dock != nullptr) {
-		molog(egbase.get_gametime(), "Erasing soldier request at %s",
+		molog(egbase.get_gametime(), "Erasing soldier request manager at %s",
 		      dock->get_warehouse()->get_warehouse_name().c_str());
 		dock->erase_warship_request_manager(serial());
 	}
@@ -908,8 +908,8 @@ void Ship::update_warship_soldier_request(bool create) {
 	PortDock* dock = requestdock_.get(egbase);
 
 	if (dock != nullptr) {
-		// We should already have a request
-		molog(egbase.get_gametime(), "Updating existing soldier request at %s",
+		// We should already have a request manager
+		molog(egbase.get_gametime(), "Updating existing soldier request manager at %s",
 		      dock->get_warehouse()->get_warehouse_name().c_str());
 		SoldierRequestManager* srm = dock->get_warship_request_manager(serial());
 		if (srm == nullptr) {
@@ -927,17 +927,17 @@ void Ship::update_warship_soldier_request(bool create) {
 		return;
 	}
 
-	// Create a new request at the current port.
+	// Create a new request manager at the current port.
 	dock = lastdock_.get(owner().egbase());
 	if (dock == nullptr) {
-		throw wexception("Ship %s attempts to create warship soldier request while not in dock",
+		throw wexception("Ship %s attempts to create warship soldier request manager while not in dock",
 		                 get_shipname().c_str());
 	}
-	molog(egbase.get_gametime(), "Creating new soldier request at %s",
+	molog(egbase.get_gametime(), "Creating new soldier request manager at %s",
 	      dock->get_warehouse()->get_warehouse_name().c_str());
 	if (get_position().field->get_immovable() != dock) {
 		throw wexception(
-		   "Ship %s attempts to create warship soldier request while not on request dock %s",
+		   "Ship %s attempts to create warship soldier request manager while not on request dock %s",
 		   get_shipname().c_str(), dock->get_warehouse()->get_warehouse_name().c_str());
 	}
 
