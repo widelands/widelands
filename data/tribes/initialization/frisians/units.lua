@@ -2038,7 +2038,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Farm
             purpose = pgettext("building", "Sows and harvests barley."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Farm
-            note = pgettext("frisians_building", "The farm needs free space within the work area to plant seeds.")
+            note = pgettext("frisians_building", "The farm needs free space within the work area to plant seeds."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Farm, part 1
+               pgettext("frisians_building", "The farmer sows and harvests one sheaf of barley between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(52), format_minutess(1)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Farm, part 2; %s is replaced by 'N growing fields'
+               pgettext("frisians_building", "The farm needs at least %s to achieve 100%% productivity."):bformat(ngettext("%d growing field", "%d growing fields", 13):bformat(13))
+            }
          }
       },
       {
