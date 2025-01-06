@@ -209,7 +209,11 @@ void GameMainMenuSaveGame::ok() {
 		if (gamedata->is_directory()) {
 			load_or_save_.change_directory_to(gamedata->filename);
 			curdir_ = gamedata->filename;
-			filename_editbox_.focus();
+			if (type_ == Type::kSave) {
+				filename_editbox_.focus();
+			} else {
+				load_or_save_.table().focus();
+			}
 			return;
 		}
 		if (type_ == Type::kLoadSavegame || type_ == Type::kLoadReplay) {
