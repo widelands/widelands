@@ -109,8 +109,8 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	main_box_.set_inner_spacing(padding_);
 
 	if (type_ == Type::kLoadReplay) {
-		show_filenames_ = new UI::Checkbox(&main_box_, UI::PanelStyle::kWui, "show_filenames",
-		                                   Vector2i::zero(), _("Show Filenames"));
+		show_filenames_ = new UI::Checkbox(
+		   &main_box_, UI::PanelStyle::kWui, "show_filenames", Vector2i::zero(), _("Show Filenames"));
 		main_box_.add(show_filenames_, UI::Box::Resizing::kFullSize);
 		main_box_.add_space(padding_);
 
