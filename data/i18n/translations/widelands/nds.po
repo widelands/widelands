@@ -7874,11 +7874,11 @@ msgstr "Schanz"
 
 #: ../../../../src/wlapplication_options.cc:192
 msgid "Woodcutter’s House"
-msgstr "Boomslageree"
+msgstr "Boomslagerhuus"
 
 #: ../../../../src/wlapplication_options.cc:193
 msgid "Forester’s House"
-msgstr "Förster-Huus"
+msgstr "Försterhuus"
 
 #: ../../../../src/wlapplication_options.cc:194
 msgid "Quarry"
@@ -9403,7 +9403,7 @@ msgstr "Bespejer stüren, um dat Gewest uttoförsken"
 msgid ""
 "You need to connect this flag to a scouting building before you can send a "
 "scout here."
-msgstr "Du muttst deese Fahn mit eenem Bespejer-Huus verbinnen, ehr du hier eenen Bespejer henstüren kannst."
+msgstr "Du muttst deese Fahn mit eenem Bespejerhuus verbinnen, ehr du hier eenen Bespejer henstüren kannst."
 
 #: ../../../../src/wui/fieldaction.cc:493
 msgid "Place a flag"
