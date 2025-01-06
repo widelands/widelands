@@ -1723,8 +1723,12 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("building", "Plants berry bushes in the surrounding area."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Berry Farm
             note = pgettext("frisians_building", "The berry farm needs free space within the work area to plant the bushes."),
-            -- TRANSLATORS: Performance helptext for a Frisian production site: Berry Farm
-            performance = pgettext("frisians_building", "The berry farmer pauses %s before going to work again."):bformat(format_seconds(21))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Berry Farm, part 1
+               pgettext("frisians_building", "The berry farmer plants one bush between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(33), format_seconds(51)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Berry Farm, part 2
+               pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1738,8 +1742,12 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("building", "Collects berries from nearby bushes."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Fruit Collector's House
             note = pgettext("frisians_building", "The fruit collector needs bushes full of berries within the work area."),
-            -- TRANSLATORS: Performance helptext for a Frisian production site: Fruit Collector's House
-            performance = pgettext("frisians_building", "The fruit collector pauses %s before going to work again."):bformat(format_seconds(21))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Fruit Collector's House, part 1
+               pgettext("frisians_building", "The fruit collector harvests one bush between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(37), format_minutes_seconds(1, 2)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Fruit Collector's House, part 2
+               pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
