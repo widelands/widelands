@@ -175,7 +175,8 @@ void GameMainMenuSaveGame::entry_selected() {
 	if (load_or_save_.has_selection()) {
 		std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
 		if (!gamedata->is_directory()) {
-			filename_editbox_.set_text(FileSystem::filename_without_ext(gamedata->filename.c_str()), false);
+			filename_editbox_.set_text(
+			   FileSystem::filename_without_ext(gamedata->filename.c_str()), false);
 		}
 	}
 }
