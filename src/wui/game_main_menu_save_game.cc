@@ -107,6 +107,17 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
 	main_box_.add_space(padding_);
 	main_box_.set_inner_spacing(padding_);
+
+	if (type_ == Type::kLoadReplay) {
+		show_filenames_ = new UI::Checkbox(&main_box_, UI::PanelStyle::kWui, "show_filenames",
+		                                   Vector2i::zero(), _("Show Filenames"));
+		main_box_.add(show_filenames_, UI::Box::Resizing::kFullSize);
+		main_box_.add_space(padding_);
+
+		show_filenames_->changed.connect([this]() { toggle_filenames(); });
+		show_filenames_->set_state(get_config_bool("display_replay_filenames", true));
+	}
+
 	main_box_.add(&info_box_, UI::Box::Resizing::kExpandBoth);
 
 	info_box_.set_inner_spacing(padding_);
@@ -141,7 +152,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	load_or_save_.table().double_clicked.connect([this](unsigned /* index */) { ok(); });
 	load_or_save_.table().cancel.connect([this]() { die(); });
 
-	load_or_save_.fill_table();
+	fill_table();
 	load_or_save_.select_by_name(parent.game().save_handler().get_cur_filename());
 
 	center_to_parent();
@@ -197,6 +208,29 @@ void GameMainMenuSaveGame::reset_editbox_or_die(const std::string& current_filen
 		filename_editbox_.set_text(current_filename, false);
 		load_or_save_.select_by_name(current_filename);
 	}
+}
+
+void GameMainMenuSaveGame::toggle_filenames() {
+	// TODO(Nordfriese): Duplicated code with FsMenu::LoadGame
+
+	showing_filenames_ = show_filenames_->get_state();
+	set_config_bool("display_replay_filenames", showing_filenames_);
+
+	// Remember selection
+	const std::set<uint32_t> selected = load_or_save_.table().selections();
+	// Fill table again
+	fill_table();
+
+	// Restore selection items
+	for (const uint32_t selectme : selected) {
+		load_or_save_.table().multiselect(selectme, true);
+	}
+	entry_selected();
+}
+
+void GameMainMenuSaveGame::fill_table() {
+	load_or_save_.set_show_filenames(showing_filenames_);
+	load_or_save_.fill_table();
 }
 
 void GameMainMenuSaveGame::ok() {
