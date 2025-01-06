@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
@@ -7,15 +7,15 @@
 # Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
 # Miroslav Remák <Unknown>, 2014
-# Pavol Gono, 2024
+# Pavol Gono, 2024-2025
 # Viliam Molo, 2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-12-16 03:14+0000\n"
+"POT-Creation-Date: 2025-01-04 02:53+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Pavol Gono, 2024\n"
+"Last-Translator: Pavol Gono, 2024-2025\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -7450,7 +7450,7 @@ msgstr "Komprimovať údajové súbory Widelands (mapy, záznamy a uložené hry
 
 #: ../../../../src/ui_fsmenu/options.cc:283
 msgid "Keep history of sent chat messages in a file"
-msgstr ""
+msgstr "Ponechať v súbore históriu odoslaných chatových správ"
 
 #: ../../../../src/ui_fsmenu/options.cc:294
 #: ../../../../src/wui/interactive_gamebase.cc:278
@@ -8565,12 +8565,12 @@ msgstr "Pomalé posúvanie mapy"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:913
 msgid "Remember current location"
-msgstr ""
+msgstr "Zapamätať si aktuálnu pozíciu"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:916
 msgid "Go to previously remembered location"
-msgstr ""
+msgstr "Prejsť na predtým zapamätanú pozíciu"
 
 #. * TRANSLATORS: Separator for a list of hotkeys
 #: ../../../../src/wlapplication_options.cc:965
@@ -10194,15 +10194,15 @@ msgstr ""
 msgid "Add ware"
 msgstr ""
 
-#: ../../../../src/wui/inputqueuedisplay.cc:627
+#: ../../../../src/wui/inputqueuedisplay.cc:634
 msgid "Hide controls"
 msgstr "Skryť ovládanie"
 
-#: ../../../../src/wui/inputqueuedisplay.cc:627
+#: ../../../../src/wui/inputqueuedisplay.cc:634
 msgid "Show controls"
 msgstr "Zobraziť ovládanie"
 
-#: ../../../../src/wui/inputqueuedisplay.cc:683
+#: ../../../../src/wui/inputqueuedisplay.cc:690
 #, c-format
 msgid "+%u"
 msgstr "+%u"
