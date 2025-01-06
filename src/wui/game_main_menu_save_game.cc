@@ -175,7 +175,7 @@ void GameMainMenuSaveGame::entry_selected() {
 	if (load_or_save_.has_selection()) {
 		std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
 		if (!gamedata->is_directory()) {
-			filename_editbox_.set_text(FileSystem::filename_without_ext(gamedata->filename.c_str()));
+			filename_editbox_.set_text(FileSystem::filename_without_ext(gamedata->filename.c_str()), false);
 		}
 	}
 }
@@ -193,7 +193,7 @@ void GameMainMenuSaveGame::reset_editbox_or_die(const std::string& current_filen
 	if (filename_editbox_.get_text() == current_filename) {
 		die();
 	} else {
-		filename_editbox_.set_text(current_filename);
+		filename_editbox_.set_text(current_filename, false);
 		load_or_save_.select_by_name(current_filename);
 	}
 }
