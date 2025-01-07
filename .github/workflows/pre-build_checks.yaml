@@ -59,11 +59,7 @@ jobs:
       run: |
         cd doc/sphinx
         mkdir source/_static
-        # Build for user testing
-        ./make.py html -graphs
-        # Test building for the homepage
-        # DISABLED FOR TESTING # sphinx-build -W -b json -d build/doctrees source build/json
-        # Create a downloadable workflow artifact for testing
+        ./make.py dirhtml -graphs
         mv build widelands-doc-${{ github.sha }}
         zip -r ${{ github.workspace }}/Widelands-${{ github.sha }}-Developer-Documentation.zip widelands-doc-${{ github.sha }}
     - name: Upload artifact
