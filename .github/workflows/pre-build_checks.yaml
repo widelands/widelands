@@ -56,7 +56,7 @@ jobs:
     - name: Install sphinx and graphviz
       run: |
         sudo apt-get update
-        sudo apt-get install python3-sphinx graphviz
+        sudo apt-get install python3-sphinx python3-sphinxcontrib.serializinghtml graphviz
     - name: Generate documentation
       run: |
         cd doc/sphinx
