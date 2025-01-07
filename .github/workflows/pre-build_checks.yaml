@@ -59,8 +59,8 @@ jobs:
       run: |
         cd doc/sphinx
         mkdir source/_static
-        ./make.py dirhtml -graphs
-        mv build widelands-doc-${{ github.sha }}
+        ./make.py html -graphs
+        mv build/html widelands-doc-${{ github.sha }}
         zip -r ${{ github.workspace }}/Widelands-${{ github.sha }}-Developer-Documentation.zip widelands-doc-${{ github.sha }}
     - name: Upload artifact
       uses: actions/upload-artifact@v4
