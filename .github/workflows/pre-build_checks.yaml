@@ -45,9 +45,7 @@ jobs:
         python3 utils/test/check_template_test_coverage.py
 
   documentation:
-    # TODO(tothxa): ubuntu-22.04 has ancient version of sphinx, revert when -latest becomes -24.04
-    # runs-on: ubuntu-latest
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v4
