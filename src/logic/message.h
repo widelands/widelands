@@ -166,13 +166,11 @@ private:
 };
 
 [[nodiscard]] inline bool is_trade_message(const Message::Type type) {
-	return
-		type == Message::Type::kTradeOfferReceived ||
-		type == Message::Type::kTradeOfferAccepted ||
-		type == Message::Type::kTradeOfferRejected ||
-		type == Message::Type::kTradeOfferRetracted ||
-		type == Message::Type::kTradeComplete ||
-		type == Message::Type::kTradeCancelled;
+	return type == Message::Type::kTradeOfferReceived ||
+	       type == Message::Type::kTradeOfferAccepted ||
+	       type == Message::Type::kTradeOfferRejected ||
+	       type == Message::Type::kTradeOfferRetracted || type == Message::Type::kTradeComplete ||
+	       type == Message::Type::kTradeCancelled;
 }
 
 }  // namespace Widelands

@@ -409,7 +409,8 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 
 		UI::Box* box = new UI::Box(&trades_box_offers_, UI::PanelStyle::kWui,
 		                           format("offer_%u", trade_id), 0, 0, UI::Box::Horizontal);
-		UI::Box* buttons = new UI::Box(box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Horizontal);
+		UI::Box* buttons =
+		   new UI::Box(box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Horizontal);
 
 		UI::Dropdown<Widelands::Serial>* select_market = new UI::Dropdown<Widelands::Serial>(
 		   buttons, "select", 0, 0, 2 * kButtonWidth + kSpacing, 8, kRowSize, std::string(),
