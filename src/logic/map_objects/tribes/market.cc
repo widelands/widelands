@@ -21,6 +21,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "economy/flag.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/productionsite.h"
@@ -83,8 +84,9 @@ void Market::TradeOrder::cleanup() {
 
 	while (carriers_queue_->get_filled() > 0) {
 		Worker* worker = carriers_queue_->extract_worker();
-		worker->set_location(nullptr);
+		worker->set_location(&market->base_flag());
 		worker->reset_tasks(*game);
+		worker->start_task_return(*game, true);
 	}
 
 	carriers_queue_->cleanup();
