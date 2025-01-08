@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # fenris <fenris@folksprak.org>, 2014
@@ -7,15 +7,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Peter Garami <petro.garami@gmail.com>, 2021
-# Raúl Contreras, 2024
+# Raúl Contreras, 2024-2025
 # Ximena Delgado, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-12-16 03:14+0000\n"
+"POT-Creation-Date: 2025-01-04 02:53+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Raúl Contreras, 2024\n"
+"Last-Translator: Raúl Contreras, 2024-2025\n"
 "Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/language/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -493,7 +493,7 @@ msgstr "Origino de la mapo"
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
-msgstr "Agordu la pozicion, kiu havos la koordinatojn (0, 0). Ĉi tiu estos la supra-maldekstra angulo de la generita minimapo."
+msgstr "Agordu la pozicion, kiu havos la koordinatojn (0, 0). Ĉi tiu estos la supra-maldekstra angulo de la generita mapeto."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:388
@@ -3223,41 +3223,41 @@ msgstr "Ludo savita"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:887
 msgid "Building’s inputs changed!"
-msgstr "La enigoj de la konstruaĵo ŝanĝiĝis!"
+msgstr "La enigaĵoj de la konstruaĵo ŝanĝiĝis!"
 
 #. * TRANSLATORS: The argument is the buiding name
 #: ../../../../src/map_io/map_buildingdata_packet.cc:898
 #, c-format
 msgid "%s: the building’s inputs have changed."
-msgstr ""
+msgstr "%s: La enigoj de la konstruaĵo ŝanĝiĝis."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:901
 msgid "The following wares have been deleted:"
-msgstr ""
+msgstr "La sekvaj varoj estis forigitaj:"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:908
 #, c-format
 msgid "%1$u piece of %2$s"
 msgid_plural "%1$u pieces of %2$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u peco de %2$s"
+msgstr[1] "%1$u pecoj de %2$s"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:914
 #, c-format
 msgid "%1$u piece of an unknown ware"
 msgid_plural "%1$u pieces of unknown wares"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u peco de nekonata varo."
+msgstr[1] "%1$u pecoj de nekonataj varoj."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:920
 msgid ""
 "The game was probably saved with a different Widelands version or with "
 "different enabled add-ons."
-msgstr ""
+msgstr "La ludo verŝajne estis konservita per alia versio de Widelands aŭ kun aliaj aktivigitaj aldonaĵoj."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:923
 msgid "Please review the current production programs and input settings."
-msgstr ""
+msgstr "Bonvolu revizii la nunajn produktadajn programojn kaj enigaĵajn agordojn."
 
 #: ../../../../src/map_io/map_saver.cc:85
 #, c-format
@@ -3291,7 +3291,7 @@ msgstr "Mapversio"
 #: ../../../../src/map_io/map_saver.cc:174
 #: ../../../../src/map_io/widelands_map_loader.cc:291
 msgid "Building restrictions"
-msgstr ""
+msgstr "Konstruaĵaj limitigoj"
 
 #: ../../../../src/map_io/map_saver.cc:199
 #: ../../../../src/map_io/widelands_map_loader.cc:316
@@ -3302,7 +3302,7 @@ msgstr "Flagoj"
 #: ../../../../src/map_io/map_saver.cc:206
 #: ../../../../src/map_io/widelands_map_loader.cc:323
 msgid "Roads and waterways"
-msgstr ""
+msgstr "Vojoj kaj akvovojoj"
 
 #: ../../../../src/map_io/map_saver.cc:228
 #: ../../../../src/map_io/widelands_map_loader.cc:253
@@ -3320,11 +3320,11 @@ msgstr "Flagdetaloj"
 
 #: ../../../../src/map_io/map_saver.cc:255
 msgid "Road and waterway details"
-msgstr ""
+msgstr "Vojaj kaj akvovojaj detaloj"
 
 #: ../../../../src/map_io/map_saver.cc:272
 msgid "Building details"
-msgstr ""
+msgstr "Konstruaĵa detaloj"
 
 #: ../../../../src/map_io/map_saver.cc:280
 msgid "Territory"
@@ -3333,12 +3333,12 @@ msgstr "Teritorio"
 #: ../../../../src/map_io/map_saver.cc:287
 #: ../../../../src/map_io/widelands_map_loader.cc:390
 msgid "Vision"
-msgstr "Vizio"
+msgstr "Vido"
 
 #: ../../../../src/map_io/map_saver.cc:296
 #: ../../../../src/map_io/widelands_map_loader.cc:425
 msgid "Scripting"
-msgstr "Skripta"
+msgstr "Skriptado"
 
 #: ../../../../src/map_io/map_saver.cc:303
 #: ../../../../src/map_io/widelands_map_loader.cc:418
@@ -3363,21 +3363,21 @@ msgid ""
 "The engine received a SIGABRT signal which was most likely triggered by a "
 "corrupted savegame. No solution for this bug has been implemented yet. We "
 "are sorry, but this savegame seems to be broken beyond repair."
-msgstr ""
+msgstr "La motoro ricevis signalon SIGABRT, kiu plej verŝajne estis kaŭzita de difektita konservita ludo. Ankoraŭ ne estas solvo por ĉi tiu eraro. Ni bedaŭras, sed ĉi tiu konservita ludo ŝajnas esti neripareble difektita."
 
 #: ../../../../src/map_io/s2map.cc:422
 #: ../../../../src/map_io/widelands_map_loader.cc:196
 msgid "Loading map…"
-msgstr "Ŝarganta mapon…"
+msgstr "Ŝargante mapon…"
 
 #: ../../../../src/map_io/s2map.cc:460
 msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr "Mapo de \"Bluebyte Setlantoj II\". Nenia komento estas difinita!"
+msgstr "Bluebyte Settlers II Mapo. Neniu komento difinita!"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:209
 #, c-format
 msgid "Loading map: %1$s (%2$u/%3$d)"
-msgstr ""
+msgstr "Ŝargante mapon: %1$s (%2$u/%3$d)"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:304
 msgid "Territories"
@@ -3385,39 +3385,39 @@ msgstr "Teritorioj"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:344
 msgid "Initializing flags"
-msgstr "Inicializante flagojn"
+msgstr "Iniciatante flagojn"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:351
 msgid "Initializing roads and waterways"
-msgstr "Inicializante vojojn kaj akvovojojn"
+msgstr "Iniciatante vojojn kaj akvovojojn"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:364
 msgid "Initializing buildings"
-msgstr "Inicializante konstruaĵojn"
+msgstr "Iniciatante konstruaĵojn"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:371
 msgid "Initializing map objects"
-msgstr "Inicializante mapobjektoj"
+msgstr "Iniciatante mapobjektojn"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:435
 msgid "Checking map"
-msgstr ""
+msgstr "Kontrolante mapon"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:450
 msgid "Postloading map objects"
-msgstr ""
+msgstr "Postŝargante mapobjektojn"
 
 #: ../../../../src/network/gameclient.cc:163
 #: ../../../../src/network/gamehost.cc:561
 #: ../../../../src/ui_fsmenu/launch_spg.cc:174
 #: ../../../../src/wlapplication.cc:908
 msgid "Preparing game…"
-msgstr ""
+msgstr "Preparante ludon…"
 
 #: ../../../../src/network/gameclient.cc:233
 #: ../../../../src/network/internet_gaming.cc:104
 msgid "Could not establish connection to host"
-msgstr ""
+msgstr "Ne povis establi konekton al gastiganto"
 
 #: ../../../../src/network/gameclient.cc:234
 #, c-format
@@ -3425,14 +3425,14 @@ msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was reachable at the TCP port %u or the server shut down as"
 " you tried to connect."
-msgstr ""
+msgstr "Widelands ne povis establi konekton al la indikita adreso. Aŭ neniu Widelands-servilo estis atingebla ĉe la TCP-haveno %u, aŭ la servilo malŝaltiĝis dum vi provis konektiĝi."
 
 #: ../../../../src/network/gameclient.cc:817
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Detektita %u aldonaĵa nesinkrono:\n"
+msgstr[1] "Detektitaj %u aldonaĵaj nesinkronoj:\n"
 
 #: ../../../../src/network/gameclient.cc:819
 #, c-format
@@ -10102,15 +10102,15 @@ msgstr ""
 msgid "Add ware"
 msgstr ""
 
-#: ../../../../src/wui/inputqueuedisplay.cc:627
+#: ../../../../src/wui/inputqueuedisplay.cc:634
 msgid "Hide controls"
 msgstr ""
 
-#: ../../../../src/wui/inputqueuedisplay.cc:627
+#: ../../../../src/wui/inputqueuedisplay.cc:634
 msgid "Show controls"
 msgstr ""
 
-#: ../../../../src/wui/inputqueuedisplay.cc:683
+#: ../../../../src/wui/inputqueuedisplay.cc:690
 #, c-format
 msgid "+%u"
 msgstr ""
