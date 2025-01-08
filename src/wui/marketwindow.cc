@@ -69,7 +69,7 @@ public:
 	              _("Batches:"),
 	              UI::SpinBox::Units::kNone,
 	              UI::SpinBox::Type::kBig),
-	     ok_(&buttons_box_,
+	     ok_(this,
 	         "ok",
 	         0,
 	         0,
@@ -115,9 +115,6 @@ public:
 		buttons_box_.add(b, UI::Box::Resizing::kFullSize);
 		buttons_box_.add_inf_space();
 
-		buttons_box_.add(&ok_, UI::Box::Resizing::kExpandBoth);
-		buttons_box_.add_inf_space();
-
 		b->set_repeating(true);
 		b = new UI::Button(&buttons_box_, "increase", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
 		                   g_image_cache->get("images/ui_basic/scrollbar_up.png"),
@@ -141,6 +138,8 @@ public:
 		add(&buttons_box_, UI::Box::Resizing::kExpandBoth);
 		add_space(kSpacing);
 		add(&batches_, UI::Box::Resizing::kFullSize);
+		add_space(kSpacing);
+		add(&ok_, UI::Box::Resizing::kFullSize);
 		add_space(kSpacing);
 
 		rebuild();

@@ -164,6 +164,17 @@ private:
 	Widelands::Serial serial_;  // serial to map object
 	Status status_;
 };
+
+[[nodiscard]] inline bool is_trade_message(const Message::Type type) {
+	return
+		type == Message::Type::kTradeOfferReceived ||
+		type == Message::Type::kTradeOfferAccepted ||
+		type == Message::Type::kTradeOfferRejected ||
+		type == Message::Type::kTradeOfferRetracted ||
+		type == Message::Type::kTradeComplete ||
+		type == Message::Type::kTradeCancelled;
+}
+
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MESSAGE_H

@@ -409,7 +409,7 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 
 		UI::Box* box = new UI::Box(&trades_box_offers_, UI::PanelStyle::kWui,
 		                           format("offer_%u", trade_id), 0, 0, UI::Box::Horizontal);
-		UI::Box* buttons = new UI::Box(box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Vertical);
+		UI::Box* buttons = new UI::Box(box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Horizontal);
 
 		UI::Dropdown<Widelands::Serial>* select_market = new UI::Dropdown<Widelands::Serial>(
 		   buttons, "select", 0, 0, 2 * kButtonWidth + kSpacing, 8, kRowSize, std::string(),
@@ -418,8 +418,8 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 
 		std::multimap<uint32_t, const Widelands::Market*> markets =
 		   iplayer_->player().get_markets(other_market->get_position());
-		for (auto it = markets.rbegin(); it != markets.rend(); ++it) {
-			const bool first = it == markets.rbegin();
+		for (auto it = markets.begin(); it != markets.end(); ++it) {
+			const bool first = it == markets.begin();
 			select_market->add(first ? format_l(_("%s (closest)"), it->second->get_market_name()) :
 			                           it->second->get_market_name(),
 			                   it->second->serial(), it->second->descr().icon(), first,
@@ -450,11 +450,11 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 			   iplayer_->player_number(), trade_id, Widelands::TradeAction::kReject, 0);
 		});
 
-		buttons->add(select_market, UI::Box::Resizing::kAlign, UI::Align::kRight);
+		buttons->add(select_market, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		buttons->add_space(kSpacing);
-		buttons->add(yes, UI::Box::Resizing::kAlign, UI::Align::kRight);
+		buttons->add(no, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		buttons->add_space(kSpacing);
-		buttons->add(no, UI::Box::Resizing::kAlign, UI::Align::kRight);
+		buttons->add(yes, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 		std::string infotext("<rt><p>");
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading,
