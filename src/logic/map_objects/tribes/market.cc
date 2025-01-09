@@ -64,6 +64,11 @@ bool Market::init(EditorGameBase& egbase) {
 	carrier_request_.reset(
 	   new Request(*this, descr().local_carrier, Market::carrier_callback, wwWORKER));
 
+	if (upcast(Game, game, &egbase); game != nullptr) {
+		send_message(*game, Message::Type::kTrading, descr().descname(), descr().icon_filename(),
+			         descr().descname(), _("A new market was added to your economy."), true);
+	}
+
 	return true;
 }
 
