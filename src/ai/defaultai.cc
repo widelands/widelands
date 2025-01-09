@@ -3374,12 +3374,25 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 		return;
 	}
 
+	const EconomyObserver* arbitrary_economy = nullptr;
+	for (EconomyObserver* observer : economies) {
+		if (observer->economy.type() == Widelands::wwWARE && !observer->flags.empty()) {
+			if (arbitrary_economy == nullptr || observer->flags.size() > arbitrary_economy->flags.size()) {
+				arbitrary_economy = observer;
+			}
+		}
+	}
+	if (arbitrary_economy == nullptr) {
+		verb_log_dbg("AI %u: no economies, cannot review trade offers", static_cast<unsigned>(player_number()));
+		return;
+	}
+
 	for (Widelands::TradeID trade_id : offers) {
 		const Widelands::TradeAgreement& offer = game().get_trade(trade_id);
 		assert(offer.trade.receiving_player == player_number());
 
-		int send_preciousness = 0;
-		int receive_preciousness = 0;
+		int32_t send_preciousness = 0;
+		int32_t receive_preciousness = 0;
 		for (const auto& pair : offer.trade.items_to_send) {
 			// This is what the other player sends to us.
 			receive_preciousness += pair.second * game()
@@ -3387,7 +3400,7 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 			                                         .get_ware_descr(pair.first)
 			                                         ->ai_hints()
 			                                         .preciousness(tribe_->name());
-			receive_preciousness -= calculate_stocklevel(pair.first, WareWorker::kWare);
+			receive_preciousness += static_cast<int32_t>(arbitrary_economy->economy.target_quantity(pair.first).permanent) - static_cast<int32_t>(calculate_stocklevel(pair.first, WareWorker::kWare));
 		}
 		for (const auto& pair : offer.trade.items_to_receive) {
 			// This is what the other player receives from us.
@@ -3396,7 +3409,7 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 			                                      .get_ware_descr(pair.first)
 			                                      ->ai_hints()
 			                                      .preciousness(tribe_->name());
-			send_preciousness += calculate_stocklevel(pair.first, WareWorker::kWare);
+			send_preciousness += static_cast<int32_t>(calculate_stocklevel(pair.first, WareWorker::kWare)) - static_cast<int32_t>(arbitrary_economy->economy.target_quantity(pair.first).permanent);
 		}
 
 		if (receive_preciousness > send_preciousness) {
