@@ -76,8 +76,7 @@ public:
 	         0,
 	         0,
 	         UI::ButtonStyle::kWuiPrimary,
-	         _("Propose"),
-	         _("Propose the configured trade to the selected player")) {
+	         _("Propose")) {
 		set_size(400, 100);  // guard against SpinBox asserts
 
 		iterate_players_existing(
@@ -147,8 +146,7 @@ public:
 
 	void think() override {
 		UI::Box::think();
-		ok_.set_enabled(player_.has_selection() && offer_->anything_selected() &&
-		                demand_->anything_selected());
+		update_ok_button();
 	}
 
 private:
@@ -168,7 +166,7 @@ private:
 
 		offer_->set_zero();
 		demand_->set_zero();
-		ok_.set_enabled(false);
+		update_ok_button();
 	}
 
 	void change(int delta) {
@@ -180,8 +178,42 @@ private:
 		offer_->set_other(player_.has_selection() ? &player_.get_selected()->tribe() : nullptr);
 		demand_->set_other(player_.has_selection() ? &player_.get_selected()->tribe() : nullptr);
 
-		ok_.set_enabled(player_.has_selection() && offer_->anything_selected() &&
-		                demand_->anything_selected());
+		update_ok_button();
+	}
+
+	void update_ok_button() {
+		if (!player_.has_selection()) {
+			ok_.set_enabled(false);
+			ok_.set_tooltip(_("Please select the player you want to trade with."));
+			return;
+		}
+
+		if (!offer_->anything_selected() || !demand_->anything_selected()) {
+			ok_.set_enabled(false);
+			ok_.set_tooltip(_("Please select the wares you want to send and receive."));
+			return;
+		}
+
+		const Widelands::BillOfMaterials b1 = offer_->get_selection();
+		const Widelands::BillOfMaterials b2 = demand_->get_selection();
+		std::set<Widelands::DescriptionIndex> set1;
+		std::vector<std::string> conflicts;
+		for (const Widelands::WareAmount& w1 : b1) {
+			set1.insert(w1.first);
+		}
+		for (const Widelands::WareAmount& w2 : b2) {
+			if (set1.count(w2.first) != 0) {
+				conflicts.emplace_back(iplayer_.egbase().descriptions().get_ware_descr(w2.first)->descname());
+			}
+		}
+		if (!conflicts.empty()) {
+			ok_.set_enabled(false);
+			ok_.set_tooltip(format(_("You cannot both send and receive the same ware type (%s)."), i18n::localize_list(conflicts, i18n::ConcatenateWith::AND)));
+			return;
+		}
+
+		ok_.set_enabled(true);
+		ok_.set_tooltip(_("Propose the configured trade to the selected player"));
 	}
 
 	InteractivePlayer& iplayer_;
