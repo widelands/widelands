@@ -3393,7 +3393,7 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 		const Widelands::TradeAgreement& offer = game().get_trade(trade_id);
 		assert(offer.trade.receiving_player == player_number());
 
-		int32_t send_preciousness = 0;
+		int32_t send_cost = 0;
 		int32_t receive_preciousness = 0;
 		for (const auto& pair : offer.trade.items_to_send) {
 			// This is what the other player sends to us.
@@ -3402,23 +3402,25 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 			                                         .get_ware_descr(pair.first)
 			                                         ->ai_hints()
 			                                         .preciousness(tribe_->name());
-			receive_preciousness +=
-			   static_cast<int32_t>(arbitrary_economy->economy.target_quantity(pair.first).permanent) -
-			   static_cast<int32_t>(calculate_stocklevel(pair.first, WareWorker::kWare));
+			// Bonus if we want to stockpile this ware.
+			receive_preciousness += arbitrary_economy->economy.target_quantity(pair.first).permanent;
+			// Malus if we already have lots of it.
+			receive_preciousness -= calculate_stocklevel(pair.first, WareWorker::kWare);
 		}
 		for (const auto& pair : offer.trade.items_to_receive) {
-			// This is what the other player receives from us.
-			send_preciousness += pair.second * game()
+			// This is what we pay to the other player.
+			send_cost += pair.second * game()
 			                                      .descriptions()
 			                                      .get_ware_descr(pair.first)
 			                                      ->ai_hints()
 			                                      .preciousness(tribe_->name());
-			send_preciousness +=
-			   static_cast<int32_t>(calculate_stocklevel(pair.first, WareWorker::kWare)) -
-			   static_cast<int32_t>(arbitrary_economy->economy.target_quantity(pair.first).permanent);
+			// Malus if we want to stockpile this ware.
+			send_cost += arbitrary_economy->economy.target_quantity(pair.first).permanent;
+			// Bonus if we have lots of it to spare.
+			send_cost -= calculate_stocklevel(pair.first, WareWorker::kWare);
 		}
 
-		if (receive_preciousness > send_preciousness) {
+		if (receive_preciousness > send_cost) {
 			// The trade is advantageous, accept.
 			std::multimap<uint32_t, const Widelands::Market*> candidates =
 			   game()
