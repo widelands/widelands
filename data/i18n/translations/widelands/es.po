@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007,2009
@@ -27,7 +27,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-12-16 03:14+0000\n"
+"POT-Creation-Date: 2025-01-09 03:20+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: CansecoGPC, 2024\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
@@ -1157,7 +1157,7 @@ msgid "Click player to remove"
 msgstr "Clic en jugador para removerlo"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:61
-#: ../../../../src/ui_basic/textinput.cc:383
+#: ../../../../src/ui_basic/textinput.cc:385
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:438
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:67
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:90
@@ -1518,7 +1518,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "Error al crear directorio ‘%s’."
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:313
-#: ../../../../src/wui/game_main_menu_save_game.cc:286
+#: ../../../../src/wui/game_main_menu_save_game.cc:325
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Un archivo con el nombre \"%s\" ya existe. ¿Deseas sobrescribirlo?"
@@ -3237,12 +3237,12 @@ msgid "Saving skipped"
 msgstr "Guardado omitido"
 
 #: ../../../../src/logic/save_handler.cc:170
-#: ../../../../src/wui/game_main_menu_save_game.cc:338
+#: ../../../../src/wui/game_main_menu_save_game.cc:377
 msgid "Saving failed!"
 msgstr "¡El guardado ha fallado!"
 
 #: ../../../../src/logic/save_handler.cc:186
-#: ../../../../src/wui/game_main_menu_save_game.cc:321
+#: ../../../../src/wui/game_main_menu_save_game.cc:360
 msgid "Game saved"
 msgstr "Partida guardada"
 
@@ -4354,41 +4354,41 @@ msgstr "Haga click para ordenar por esta columna"
 msgid "%1$s<br>(%2$s)"
 msgstr "%1$s<br>(%2$s)"
 
-#: ../../../../src/ui_basic/textinput.cc:374
+#: ../../../../src/ui_basic/textinput.cc:376
 msgid "Cut"
 msgstr "Cortar"
 
-#: ../../../../src/ui_basic/textinput.cc:374
+#: ../../../../src/ui_basic/textinput.cc:376
 msgid "Cut the selected text to the clipboard"
 msgstr "Cortar el texto seleccionado en el portapapeles"
 
-#: ../../../../src/ui_basic/textinput.cc:377
+#: ../../../../src/ui_basic/textinput.cc:379
 #: ../../../../src/ui_fsmenu/tech_info.cc:238
 msgid "Copy"
 msgstr "Copiar"
 
-#: ../../../../src/ui_basic/textinput.cc:377
+#: ../../../../src/ui_basic/textinput.cc:379
 msgid "Copy the selected text to the clipboard"
 msgstr "Copiar el texto seleccionado en el portapapeles"
 
-#: ../../../../src/ui_basic/textinput.cc:380
+#: ../../../../src/ui_basic/textinput.cc:382
 msgid "Paste"
 msgstr "Pegar"
 
-#: ../../../../src/ui_basic/textinput.cc:380
+#: ../../../../src/ui_basic/textinput.cc:382
 msgid "Paste the clipboard content"
 msgstr "Pegar el contenido del portapapeles"
 
-#: ../../../../src/ui_basic/textinput.cc:383
+#: ../../../../src/ui_basic/textinput.cc:385
 msgid "Delete the selected text"
 msgstr "Borrar el texto seleccionado"
 
-#: ../../../../src/ui_basic/textinput.cc:386
+#: ../../../../src/ui_basic/textinput.cc:388
 #: ../../../../src/wlapplication_options.cc:364
 msgid "Select All"
 msgstr "Seleccionar Todo"
 
-#: ../../../../src/ui_basic/textinput.cc:386
+#: ../../../../src/ui_basic/textinput.cc:388
 msgid "Select the entire text"
 msgstr "Seleccionar todo el texto"
 
@@ -6607,6 +6607,7 @@ msgid "Choose Replay"
 msgstr "Elegir repetición"
 
 #: ../../../../src/ui_fsmenu/loadgame.cc:62
+#: ../../../../src/wui/game_main_menu_save_game.cc:113
 msgid "Show Filenames"
 msgstr "Mostrar los nombres de archivos"
 
@@ -9777,8 +9778,8 @@ msgstr "Confirmación de Salida"
 msgid "Are you sure you wish to exit this game?"
 msgstr "¿Seguro que quieres salir de la partida?"
 
-#: ../../../../src/wui/game_main_menu_save_game.cc:288
-#: ../../../../src/wui/game_main_menu_save_game.cc:328
+#: ../../../../src/wui/game_main_menu_save_game.cc:327
+#: ../../../../src/wui/game_main_menu_save_game.cc:367
 msgid "Error Saving Game!"
 msgstr "¡Error guardando el partido!"
 
@@ -10162,15 +10163,15 @@ msgstr "Eliminar producto"
 msgid "Add ware"
 msgstr "Añadir producto"
 
-#: ../../../../src/wui/inputqueuedisplay.cc:627
+#: ../../../../src/wui/inputqueuedisplay.cc:634
 msgid "Hide controls"
 msgstr "Ocultar controles"
 
-#: ../../../../src/wui/inputqueuedisplay.cc:627
+#: ../../../../src/wui/inputqueuedisplay.cc:634
 msgid "Show controls"
 msgstr "Mostrar controles"
 
-#: ../../../../src/wui/inputqueuedisplay.cc:683
+#: ../../../../src/wui/inputqueuedisplay.cc:690
 #, c-format
 msgid "+%u"
 msgstr ""
