@@ -4819,19 +4819,19 @@ msgstr "Čučoriedkový krík (maličký)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/currant_black/medium/init.lua:9
 msgid "Black Currant (medium)"
-msgstr "Čierne ríbezľe (stredné)"
+msgstr "Čierne ríbezle (stredné)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/currant_black/ripe/init.lua:9
 msgid "Black Currant (ripe)"
-msgstr "Čierne ríbezľe (zrelé)"
+msgstr "Čierne ríbezle (zrelé)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/currant_black/small/init.lua:9
 msgid "Black Currant (small)"
-msgstr "Čierne ríbezľe (malé)"
+msgstr "Čierne ríbezle (malé)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/currant_black/tiny/init.lua:9
 msgid "Black Currant (tiny)"
-msgstr "Čierne ríbezľe (maličké)"
+msgstr "Čierne ríbezle (maličké)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/currant_red/medium/init.lua:9
 msgid "Red Currant (medium)"
@@ -4851,19 +4851,19 @@ msgstr "Červené ríbezle (maličké)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/desert_hackberry/medium/init.lua:9
 msgid "Desert Hackberry (medium)"
-msgstr "Brusnice (stredné)"
+msgstr "Púštny brestovec (stredný)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/desert_hackberry/ripe/init.lua:9
 msgid "Desert Hackberry (ripe)"
-msgstr "Brusnice (zrelé)"
+msgstr "Púštny brestovec (zrelý)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/desert_hackberry/small/init.lua:9
 msgid "Desert Hackberry (small)"
-msgstr "Brusnice (malé)"
+msgstr "Púštny brestovec (malý)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/desert_hackberry/tiny/init.lua:9
 msgid "Desert Hackberry (tiny)"
-msgstr "Brusnice (maličké)"
+msgstr "Púštny brestovec (maličký)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/juniper/medium/init.lua:9
 msgid "Juniper (medium)"
