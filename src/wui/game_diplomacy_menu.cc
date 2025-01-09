@@ -177,12 +177,12 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 	actions_hbox_.add_space(kSpacing);
 	actions_hbox_.add(&actions_vbox_no_, UI::Box::Resizing::kFullSize);
 
-	trades_tabs_.add("active", _("Trade Offers"), &trades_box_offers_,
+	trades_tabs_.add("active", "", &trades_box_offers_,
 	                 _("Trade offers you have received from other players"));
-	trades_tabs_.add("active", _("Proposed Trades"), &trades_box_proposed_,
+	trades_tabs_.add("active", "", &trades_box_proposed_,
 	                 _("Trades you have proposed to other players"));
 	trades_tabs_.add(
-	   "active", _("Active Trades"), &trades_box_active_, _("Your active trade agreements"));
+	   "active", "", &trades_box_active_, _("Your active trade agreements"));
 
 	diplomacy_box_.add(&hbox_, UI::Box::Resizing::kExpandBoth);
 	diplomacy_box_.add_space(kSpacing);
@@ -385,6 +385,8 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 		return;
 	}
 
+	trades_tabs_.tabs()[0]->set_title(format(_("Trade Offers (%u)"), trades.size()));
+
 	cached_trades_offers_ = trades;
 	trades_box_offers_.delete_all_children();
 
@@ -508,6 +510,8 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 		return;
 	}
 
+	trades_tabs_.tabs()[1]->set_title(format(_("Proposed Trades (%u)"), trades.size()));
+
 	cached_trades_proposed_ = trades;
 	trades_box_proposed_.delete_all_children();
 
@@ -610,6 +614,8 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 	if (!always && trades == cached_trades_active_) {
 		return;
 	}
+
+	trades_tabs_.tabs()[2]->set_title(format(_("Active Trades (%u)"), trades.size()));
 
 	cached_trades_active_ = trades;
 	trades_box_active_.delete_all_children();
