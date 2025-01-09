@@ -2228,7 +2228,7 @@ CmdProposeTrade::CmdProposeTrade(StreamRead& des) : PlayerCommand(Time(0), des.u
 
 void CmdProposeTrade::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
-	ser.unsigned_32(trade_.initiator.serial());
+	ser.unsigned_32(initiator_);
 	ser.unsigned_8(trade_.receiving_player);
 	serialize_bill_of_materials(trade_.items_to_send, &ser);
 	serialize_bill_of_materials(trade_.items_to_receive, &ser);
