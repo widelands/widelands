@@ -3410,10 +3410,10 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 		for (const auto& pair : offer.trade.items_to_receive) {
 			// This is what we pay to the other player.
 			send_cost += pair.second * game()
-			                                      .descriptions()
-			                                      .get_ware_descr(pair.first)
-			                                      ->ai_hints()
-			                                      .preciousness(tribe_->name());
+			                              .descriptions()
+			                              .get_ware_descr(pair.first)
+			                              ->ai_hints()
+			                              .preciousness(tribe_->name());
 			// Malus if we want to stockpile this ware.
 			send_cost += arbitrary_economy->economy.target_quantity(pair.first).permanent;
 			// Bonus if we have lots of it to spare.
