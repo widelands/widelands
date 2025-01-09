@@ -97,6 +97,10 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	                              kPadding, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                              g_image_cache->get("images/wui/menus/objectives.png"));
 
+	tradingbtn_ = new UI::Button(this, "filter_trading_messages", 6 * kPadding + kButtonSize,
+	                             kPadding, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+	                             g_image_cache->get("images/wui/menus/statistics_stock.png"));
+
 	message_filter_ = Widelands::Message::Type::kAllMessages;
 	set_filter_messages_tooltips();
 	// End: Buttons for message types
@@ -150,6 +154,8 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	   [this]() { filter_messages(Widelands::Message::Type::kWarfare); });
 	scenariobtn_->sigclicked.connect(
 	   [this]() { filter_messages(Widelands::Message::Type::kScenario); });
+	tradingbtn_->sigclicked.connect(
+	   [this]() { filter_messages(Widelands::Message::Type::kTrading); });
 	list->selected.connect([this](uint32_t a) { selected(a); });
 	list->double_clicked.connect([this](uint32_t a) { double_clicked(a); });
 	archivebtn_->sigclicked.connect([this]() { archive_or_restore(); });
@@ -422,6 +428,10 @@ bool GameMessageMenu::handle_key(bool down, SDL_Keysym code) {
 			filter_messages(Widelands::Message::Type::kScenario);
 			return true;
 		}
+		if (matches_shortcut(KeyboardShortcut::kInGameMessagesFilterTrading, code)) {
+			filter_messages(Widelands::Message::Type::kTrading);
+			return true;
+		}
 	}
 
 	return UI::UniqueWindow::handle_key(down, code);
@@ -486,6 +496,9 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 	case Widelands::Message::Type::kScenario:
 		toggle_filter_messages_button(*scenariobtn_, msgtype);
 		break;
+	case Widelands::Message::Type::kTrading:
+		toggle_filter_messages_button(*tradingbtn_, msgtype);
+		break;
 
 	case Widelands::Message::Type::kNoMessages:
 	case Widelands::Message::Type::kAllMessages:
@@ -508,6 +521,7 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 		seafaringbtn_->set_perm_pressed(false);
 		warfarebtn_->set_perm_pressed(false);
 		scenariobtn_->set_perm_pressed(false);
+		tradingbtn_->set_perm_pressed(false);
 		break;
 
 	default:
@@ -531,6 +545,7 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 		seafaringbtn_->set_perm_pressed(false);
 		warfarebtn_->set_perm_pressed(false);
 		scenariobtn_->set_perm_pressed(false);
+		tradingbtn_->set_perm_pressed(false);
 		button.set_perm_pressed(true);
 		message_filter_ = msgtype;
 
@@ -572,6 +587,11 @@ void GameMessageMenu::set_filter_messages_tooltips() {
 	   _("Show scenario messages only"),
 	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterScenario, true),
 	   UI::PanelStyle::kWui));
+	tradingbtn_->set_tooltip(as_tooltip_text_with_hotkey(
+	   /** TRANSLATORS: Tooltip in the messages window */
+	   _("Show trading messages only"),
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterTrading, true),
+	   UI::PanelStyle::kWui));
 }
 
 /**
@@ -582,13 +602,15 @@ std::string GameMessageMenu::display_message_type_icon(const Widelands::Message&
 	case Widelands::Message::Type::kGeologists:
 		return "images/wui/fieldaction/menu_geologist.png";
 	case Widelands::Message::Type::kEconomy:
+		return "images/wui/stats/genstats_nrwares.png";
+	case Widelands::Message::Type::kTrading:
 	case Widelands::Message::Type::kTradeOfferReceived:
 	case Widelands::Message::Type::kTradeOfferAccepted:
 	case Widelands::Message::Type::kTradeOfferRejected:
 	case Widelands::Message::Type::kTradeOfferRetracted:
 	case Widelands::Message::Type::kTradeComplete:
 	case Widelands::Message::Type::kTradeCancelled:
-		return "images/wui/stats/genstats_nrwares.png";
+		return "images/wui/menus/statistics_stock.png";
 	case Widelands::Message::Type::kSeafaring:
 		return "images/wui/buildings/start_expedition.png";
 	case Widelands::Message::Type::kWarfare:

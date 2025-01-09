@@ -3387,6 +3387,7 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 			                                         .get_ware_descr(pair.first)
 			                                         ->ai_hints()
 			                                         .preciousness(tribe_->name());
+			receive_preciousness -= calculate_stocklevel(pair.first, WareWorker::kWare);
 		}
 		for (const auto& pair : offer.trade.items_to_receive) {
 			// This is what the other player receives from us.
@@ -3395,6 +3396,7 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 			                                      .get_ware_descr(pair.first)
 			                                      ->ai_hints()
 			                                      .preciousness(tribe_->name());
+			send_preciousness += calculate_stocklevel(pair.first, WareWorker::kWare);
 		}
 
 		if (receive_preciousness > send_preciousness) {

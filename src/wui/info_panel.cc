@@ -113,7 +113,7 @@ bool MessagePreview::handle_mousepress(const uint8_t button, int32_t /* x */, in
 			if (message_->position().valid()) {
 				owner_.ibase_.map_view()->scroll_to_field(
 				   message_->position(), MapView::Transition::Smooth);
-			} else if (owner_.iplayer_ != nullptr && Widelands::is_trade_message(message_->type())) {
+			} else if (owner_.iplayer_ != nullptr && message_->message_type_category() == Widelands::Message::Type::kTrading) {
 				owner_.iplayer_->diplomacy_.create();
 			}
 		}

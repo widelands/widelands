@@ -535,7 +535,7 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 
 		UI::Box* box = new UI::Box(&trades_box_proposed_, UI::PanelStyle::kWui,
 		                           format("proposal_%u", trade_id), 0, 0, UI::Box::Horizontal);
-		UI::Box* buttons = new UI::Box(box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Vertical);
+		UI::Box* buttons = new UI::Box(box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Horizontal);
 
 		UI::Button* go_to = new UI::Button(
 		   buttons, "go_to", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
@@ -552,9 +552,9 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 			   iplayer_->player_number(), trade_id, Widelands::TradeAction::kRetract, 0);
 		});
 
-		buttons->add(go_to, UI::Box::Resizing::kAlign, UI::Align::kRight);
+		buttons->add(cancel, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		buttons->add_space(kSpacing);
-		buttons->add(cancel, UI::Box::Resizing::kAlign, UI::Align::kRight);
+		buttons->add(go_to, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 		std::string infotext("<rt><p>");
 		infotext += as_font_tag(
@@ -647,7 +647,7 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 
 		UI::Box* box = new UI::Box(&trades_box_active_, UI::PanelStyle::kWui,
 		                           format("active_%u", trade_id), 0, 0, UI::Box::Horizontal);
-		UI::Box* buttons = new UI::Box(box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Vertical);
+		UI::Box* buttons = new UI::Box(box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Horizontal);
 
 		UI::Button* go_to = new UI::Button(
 		   buttons, "go_to", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
@@ -665,9 +665,9 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 			   iplayer_->player_number(), trade_id, Widelands::TradeAction::kCancel, 0);
 		});
 
-		buttons->add(go_to, UI::Box::Resizing::kAlign, UI::Align::kRight);
+		buttons->add(cancel, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		buttons->add_space(kSpacing);
-		buttons->add(cancel, UI::Box::Resizing::kAlign, UI::Align::kRight);
+		buttons->add(go_to, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 		std::string infotext("<rt><p>");
 		infotext += as_font_tag(

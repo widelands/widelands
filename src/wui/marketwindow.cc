@@ -62,7 +62,7 @@ public:
 	              0,
 	              400,
 	              250,
-	              10,
+	              1,
 	              1,
 	              100,
 	              UI::PanelStyle::kWui,
@@ -100,35 +100,35 @@ public:
 		             &hbox_, iplayer.player().tribe(), _("You demand:"), kSpacing, &demand_),
 		          UI::Box::Resizing::kExpandBoth);
 
-		buttons_box_.add_inf_space();
+		buttons_box_.add_space(kSpacing);
 		UI::Button* b = new UI::Button(
 		   &buttons_box_, "decrease_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
 		   g_image_cache->get("images/ui_basic/scrollbar_down_fast.png"), _("Decrease amount by 10"));
 		b->sigclicked.connect([this] { change(-10); });
-		buttons_box_.add(b, UI::Box::Resizing::kFullSize);
-		buttons_box_.add_inf_space();
+		buttons_box_.add(b, UI::Box::Resizing::kExpandBoth);
+		buttons_box_.add_space(kSpacing);
 		b->set_repeating(true);
 		b = new UI::Button(&buttons_box_, "decrease", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
 		                   g_image_cache->get("images/ui_basic/scrollbar_down.png"),
 		                   _("Decrease amount"));
 		b->sigclicked.connect([this] { change(-1); });
-		buttons_box_.add(b, UI::Box::Resizing::kFullSize);
-		buttons_box_.add_inf_space();
+		buttons_box_.add(b, UI::Box::Resizing::kExpandBoth);
+		buttons_box_.add_space(kSpacing);
 
 		b->set_repeating(true);
 		b = new UI::Button(&buttons_box_, "increase", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
 		                   g_image_cache->get("images/ui_basic/scrollbar_up.png"),
 		                   _("Increase amount"));
 		b->sigclicked.connect([this] { change(1); });
-		buttons_box_.add(b, UI::Box::Resizing::kFullSize);
-		buttons_box_.add_inf_space();
+		buttons_box_.add(b, UI::Box::Resizing::kExpandBoth);
+		buttons_box_.add_space(kSpacing);
 		b->set_repeating(true);
 		b = new UI::Button(
 		   &buttons_box_, "increase_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
 		   g_image_cache->get("images/ui_basic/scrollbar_up_fast.png"), _("Increase amount by 10"));
 		b->sigclicked.connect([this] { change(10); });
-		buttons_box_.add(b, UI::Box::Resizing::kFullSize);
-		buttons_box_.add_inf_space();
+		buttons_box_.add(b, UI::Box::Resizing::kExpandBoth);
+		buttons_box_.add_space(kSpacing);
 		b->set_repeating(true);
 
 		add(&player_, UI::Box::Resizing::kFullSize);

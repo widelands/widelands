@@ -90,6 +90,7 @@ private:
 	UI::Button* seafaringbtn_;
 	UI::Button* warfarebtn_;
 	UI::Button* scenariobtn_;
+	UI::Button* tradingbtn_;
 	Widelands::Message::Type message_filter_;
 };
 
