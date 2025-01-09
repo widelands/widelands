@@ -29,6 +29,7 @@
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/battle.h"
+#include "logic/map_objects/tribes/naval_invasion_base.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/worker.h"
