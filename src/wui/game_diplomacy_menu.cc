@@ -177,12 +177,11 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 	actions_hbox_.add_space(kSpacing);
 	actions_hbox_.add(&actions_vbox_no_, UI::Box::Resizing::kFullSize);
 
-	trades_tabs_.add("active", "", &trades_box_offers_,
-	                 _("Trade offers you have received from other players"));
-	trades_tabs_.add("active", "", &trades_box_proposed_,
-	                 _("Trades you have proposed to other players"));
 	trades_tabs_.add(
-	   "active", "", &trades_box_active_, _("Your active trade agreements"));
+	   "active", "", &trades_box_offers_, _("Trade offers you have received from other players"));
+	trades_tabs_.add(
+	   "active", "", &trades_box_proposed_, _("Trades you have proposed to other players"));
+	trades_tabs_.add("active", "", &trades_box_active_, _("Your active trade agreements"));
 
 	diplomacy_box_.add(&hbox_, UI::Box::Resizing::kExpandBoth);
 	diplomacy_box_.add_space(kSpacing);
@@ -539,7 +538,8 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 
 		UI::Box* box = new UI::Box(&trades_box_proposed_, UI::PanelStyle::kWui,
 		                           format("proposal_%u", trade_id), 0, 0, UI::Box::Horizontal);
-		UI::Box* buttons = new UI::Box(box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Horizontal);
+		UI::Box* buttons =
+		   new UI::Box(box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Horizontal);
 
 		UI::Button* go_to = new UI::Button(
 		   buttons, "go_to", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
@@ -653,7 +653,8 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 
 		UI::Box* box = new UI::Box(&trades_box_active_, UI::PanelStyle::kWui,
 		                           format("active_%u", trade_id), 0, 0, UI::Box::Horizontal);
-		UI::Box* buttons = new UI::Box(box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Horizontal);
+		UI::Box* buttons =
+		   new UI::Box(box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Horizontal);
 
 		UI::Button* go_to = new UI::Button(
 		   buttons, "go_to", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,

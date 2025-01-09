@@ -69,14 +69,7 @@ public:
 	              _("Batches:"),
 	              UI::SpinBox::Units::kNone,
 	              UI::SpinBox::Type::kBig),
-	     ok_(this,
-	         "ok",
-	         0,
-	         0,
-	         0,
-	         0,
-	         UI::ButtonStyle::kWuiPrimary,
-	         _("Propose")) {
+	     ok_(this, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("Propose")) {
 		set_size(400, 100);  // guard against SpinBox asserts
 
 		iterate_players_existing(
@@ -203,12 +196,14 @@ private:
 		}
 		for (const Widelands::WareAmount& w2 : b2) {
 			if (set1.count(w2.first) != 0) {
-				conflicts.emplace_back(iplayer_.egbase().descriptions().get_ware_descr(w2.first)->descname());
+				conflicts.emplace_back(
+				   iplayer_.egbase().descriptions().get_ware_descr(w2.first)->descname());
 			}
 		}
 		if (!conflicts.empty()) {
 			ok_.set_enabled(false);
-			ok_.set_tooltip(format(_("You cannot both send and receive the same ware type (%s)."), i18n::localize_list(conflicts, i18n::ConcatenateWith::AND)));
+			ok_.set_tooltip(format(_("You cannot both send and receive the same ware type (%s)."),
+			                       i18n::localize_list(conflicts, i18n::ConcatenateWith::AND)));
 			return;
 		}
 

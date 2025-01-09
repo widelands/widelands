@@ -66,7 +66,7 @@ bool Market::init(EditorGameBase& egbase) {
 
 	if (upcast(Game, game, &egbase); game != nullptr) {
 		send_message(*game, Message::Type::kTrading, descr().descname(), descr().icon_filename(),
-			         descr().descname(), _("A new market was added to your economy."), true);
+		             descr().descname(), _("A new market was added to your economy."), true);
 	}
 
 	return true;
