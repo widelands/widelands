@@ -285,7 +285,7 @@ msgstr "Vergeet nich, dat alle Völker in Widelands anners öven un anner Boen u
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:126
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:138
 msgid "Scout’s Hut"
-msgstr "Bespejer-Huus"
+msgstr "Bespejerkaat"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:128
 msgid "Explore Your Surroundings"
@@ -306,15 +306,15 @@ msgstr "Du kannst natürelk versöken, tofällig rumtostromern, aver dat is gefa
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 msgid "We will need a scout’s hut to start exploring. It is a small building."
-msgstr "Wi bruken een Bespejer-Huus, um daarmit to begünnen. Dat is een lüttes Huus."
+msgstr "Wi bruken eene Bespejerkaat, um daarmit to begünnen. Dat is een lüttes Huus."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:132
 msgid "Build a scout’s hut."
-msgstr "Bau een Bespejer-Huus."
+msgstr "Bau eene Bespejerkaat."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:140
 msgid "Build a scout’s hut"
-msgstr "Bau een Bespejer-Huus"
+msgstr "Bau eene Bespejerkaat"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:141
 msgid ""
@@ -324,7 +324,7 @@ msgstr "’t is good to weten, wat in diener Umgeven is. Een Bespejer försket u
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:142
 msgid "Build a Scout’s Hut."
-msgstr "Bau een Bespejer-Huus."
+msgstr "Bau eene Bespejerkaat."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:148
 msgid "Scout is ready"
@@ -338,7 +338,7 @@ msgstr "Laat uns gahn!"
 msgid ""
 "Well done! Your scout’s hut has been built. While our scout is moving in, "
 "let’s learn a little bit more about him."
-msgstr "Hunnert! Dien Bespejer-Huus is kumpleet. As uns’ Bespejer kummt, laat uns een bietje mehr över hüm lehren."
+msgstr "Hunnert! Diene Bespejerkaat is kumpleet. As uns’ Bespejer kummt, laat uns een bietje mehr över hüm lehren."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:152
 msgid ""
@@ -663,7 +663,7 @@ msgid ""
 "they took away a part of our land? And our lumberjack has now lost his place"
 " of work. This is what I was talking about. Let’s take our land back and "
 "defeat the enemy!"
-msgstr "Hunnert, de Kasteel is beschickt. Aver wat is dat? Een Feind hett sik tegen uns daallaten as de Kasteel baut wurr! Süchst du, dat se eenen Part vun uns’ Land ofgrapst hebben? Un uns’ Boomhauer hett nu keen Huus mehr. Dat hebb ick meent. Laat uns uns’ Land torügghalen un de Feind manntjen!"
+msgstr "Hunnert, de Kasteel is beschickt. Aver wat is dat? Een Feind hett sik tegen uns daallaten as de Kasteel baut wurr! Süchst du, dat se eenen Part vun uns’ Land ofgrapst hebben? Un uns’ Boomhauer hett nu keene Kaat mehr. Dat hebb ick meent. Laat uns uns’ Land torügghalen un de Feind manntjen!"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:279
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:290
