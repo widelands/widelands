@@ -76,32 +76,32 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	list->focus();
 
 	// Buttons for message types
-	filter_box_ = new UI::Box(this, UI::PanelStyle::kWui, "filter_box", kPadding, kPadding, UI::Box::Horizontal, 0, 0, kPadding);
+	filter_box_ = new UI::Box(this, UI::PanelStyle::kWui, "filter_box", kPadding, kPadding,
+	                          UI::Box::Horizontal, 0, 0, kPadding);
 
-	geologistsbtn_ = new UI::Button(filter_box_, "filter_geologists_messages", 0, 0,
-	                                kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+	geologistsbtn_ = new UI::Button(filter_box_, "filter_geologists_messages", 0, 0, kButtonSize,
+	                                kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                                g_image_cache->get("images/wui/fieldaction/menu_geologist.png"));
 
-	economybtn_ = new UI::Button(filter_box_, "filter_economy_messages", 0,
-	                             0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+	economybtn_ = new UI::Button(filter_box_, "filter_economy_messages", 0, 0, kButtonSize,
+	                             kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                             g_image_cache->get("images/wui/stats/genstats_nrwares.png"));
 
-	seafaringbtn_ =
-	   new UI::Button(filter_box_, "filter_seafaring_messages", 0, 0,
-	                  kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
-	                  g_image_cache->get("images/wui/buildings/start_expedition.png"));
+	seafaringbtn_ = new UI::Button(filter_box_, "filter_seafaring_messages", 0, 0, kButtonSize,
+	                               kButtonSize, UI::ButtonStyle::kWuiSecondary,
+	                               g_image_cache->get("images/wui/buildings/start_expedition.png"));
 
-	warfarebtn_ = new UI::Button(filter_box_, "filter_warfare_messages", 0,
-	                             0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+	warfarebtn_ = new UI::Button(filter_box_, "filter_warfare_messages", 0, 0, kButtonSize,
+	                             kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                             g_image_cache->get("images/wui/messages/messages_warfare.png"));
 
-	scenariobtn_ = new UI::Button(filter_box_, "filter_scenario_messages", 0,
-	                              0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+	scenariobtn_ = new UI::Button(filter_box_, "filter_scenario_messages", 0, 0, kButtonSize,
+	                              kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                              g_image_cache->get("images/wui/menus/objectives.png"));
 
-	diplomacybtn_ = new UI::Button(filter_box_, "filter_diplomacy_messages", 0,
-	                             0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
-	                             g_image_cache->get("images/wui/menus/statistics_stock.png"));
+	diplomacybtn_ = new UI::Button(filter_box_, "filter_diplomacy_messages", 0, 0, kButtonSize,
+	                               kButtonSize, UI::ButtonStyle::kWuiSecondary,
+	                               g_image_cache->get("images/wui/menus/statistics_stock.png"));
 
 	filter_box_->add(geologistsbtn_);
 	filter_box_->add(economybtn_);
