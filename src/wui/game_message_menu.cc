@@ -110,6 +110,13 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	filter_box_->add(scenariobtn_);
 	filter_box_->add(diplomacybtn_);
 
+	{
+		int w;
+		int h;
+		filter_box_->get_desired_size(&w, &h);
+		filter_box_->set_size(w, h);
+	}
+
 	message_filter_ = Widelands::Message::Type::kAllMessages;
 	set_filter_messages_tooltips();
 	// End: Buttons for message types
