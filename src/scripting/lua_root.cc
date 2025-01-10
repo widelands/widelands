@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1176,13 +1176,14 @@ void LuaDescriptions::do_modify_worker(lua_State* L,
                                        const std::string& property) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
-	Widelands::WorkerDescr& worker_descr =
-	   *descrs.get_mutable_worker_descr(descrs.load_worker(unit_name));
+	const Widelands::DescriptionIndex workerindex = descrs.load_worker(unit_name);
+	Widelands::WorkerDescr& worker_descr = *descrs.get_mutable_worker_descr(workerindex);
 
 	if (property == "experience") {
 		worker_descr.set_needed_experience(luaL_checkuint32(L, 5));
 	} else if (property == "becomes") {
 		worker_descr.set_becomes(descrs, luaL_checkstring(L, 5));
+		descrs.get_mutable_worker_descr(worker_descr.becomes())->set_promoted_from(workerindex);
 	} else if (property == "target_quantity") {
 		worker_descr.set_default_target_quantity(lua_isnil(L, 5) ? Widelands::kInvalidWare :
 		                                                           luaL_checkuint32(L, 5));

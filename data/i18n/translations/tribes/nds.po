@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2024
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2025
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # GunChleoc, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-03 02:40+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2024\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2157,7 +2157,7 @@ msgstr "Fährenwarft"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Fish Breeder’s House"
-msgstr "Fisstüchteree"
+msgstr "Fisstüchterhuus"
 
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:51
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:56
@@ -2182,7 +2182,7 @@ msgid ""
 "water where he can breed fish in his work area. Remember that you can only "
 "regenerate your fish resources if there ever were some fish in the vicinity "
 "in the first place."
-msgstr "De Fiss-Tüchter dat warkt bi deese Fisstüchteree hett keene Fiske tum Tüchten. Du kannst de Fiske blot dann vermehren, wenn daar jemaals welke weren."
+msgstr "De Fisstüchter dat warkt bi deesem Fisstüchterhuus hett keene Fiske tum Tüchten. Du kannst de Fiske blot dann vermehren, wenn daar jemaals welke weren."
 
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
 msgid "The fishing grounds are full"
@@ -2192,7 +2192,7 @@ msgstr "De Fiskeree-Water sünd vull"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Fisher’s House"
-msgstr "Fiskeree"
+msgstr "Fiskerhuus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start fishing because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:42
@@ -2209,13 +2209,13 @@ msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area. Remember that you can increase the number of existing fish by "
 "building a fish breeder’s house."
-msgstr "De Fisker dat warkt bi deese Fiskeree hett keene Fiske tum Fangen. Du kannst de Fiske vermehren, wenn du een Fisstüchteree baust."
+msgstr "De Fisker dat warkt bi deesem Fiskerhuus hett keene Fiske tum Fangen. Du kannst de Fiske vermehren, wenn du een Fisstüchterhuus baust."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Forester’s House"
-msgstr "Förster-Huus"
+msgstr "Försterhuus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:8
@@ -2396,7 +2396,7 @@ msgstr "Bomen körttosagen"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Scout’s House"
-msgstr "Bespejeree"
+msgstr "Bespejerhuus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:8
@@ -2560,7 +2560,7 @@ msgstr "Spinnweelmöhlen"
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:63
 msgid "weaving spidercloth"
-msgstr "Spinnenstoff"
+msgstr "Spinnenstoff to spinnen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:76
@@ -2588,7 +2588,7 @@ msgstr "De Arbeider, de bi deese Well warkt, hett keen Water in de Quell mehr."
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Woodcutter’s House"
-msgstr "Boomsaageree"
+msgstr "Boomsaagerhuus"
 
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:52
 msgctxt "atlanteans_building"
@@ -2596,7 +2596,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "De Boomsaager dat warkt bi deese Boomsaageree hett keene Bomen tum Saagen. Överlegg di, of du dat Huus plattrieten of ofbrannen willst, of bau een Försterhuus."
+msgstr "De Boomsaager dat warkt bi deesem Boomsaagerhuus hett keene Bomen tum Saagen. Överlegg di, of du dat Huus plattrieten of ofbrannen willst, of bau een Försterhuus."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:8
@@ -2763,20 +2763,20 @@ msgstr "Fährenwarft"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:8
 msgctxt "barbarians_building"
 msgid "Fisher’s Hut"
-msgstr "Fisker-Huus"
+msgstr "Fiskerkaat"
 
 #: ../../../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:67
 msgctxt "barbarians_building"
 msgid ""
 "The fisher working out of this fisher’s hut can’t find any fish in his work "
 "area."
-msgstr "De Fisker dat warkt bi deese Fiskeree hett keene Fiske tum Fangen."
+msgstr "De Fisker dat warkt bi deese Fiskerkaat hett keene Fiske tum Fangen."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/init.lua:8
 msgctxt "barbarians_building"
 msgid "Gamekeeper’s Hut"
-msgstr "Deertentüchteree"
+msgstr "Deertentüchterkaat"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:8
@@ -2865,7 +2865,7 @@ msgstr "eenen Kriegshelm to smeden"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:8
 msgctxt "barbarians_building"
 msgid "Hunter’s Hut"
-msgstr "Jaggthütt"
+msgstr "Jaggtkaat"
 
 #. TRANSLATORS: "game" means animals that you can hunt
 #: ../../../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:74
@@ -2874,7 +2874,7 @@ msgid ""
 "The hunter working out of this hunter’s hut can’t find any game in his work "
 "area. Remember that you can build a gamekeeper’s hut to release more game "
 "into the wild."
-msgstr "De Jäger, de bi deese Jaggthuus warkt, hett keene Deerten tum Jagen. Du kannst neje Deerten tüchten, wenn du een Deertentüchteree baust."
+msgstr "De Jäger, de bi deese Jaggtkaat warkt, hett keene Deerten tum Jagen. Du kannst neje Deerten tüchten, wenn du eene Deertentüchterkaat baust."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:8
@@ -2931,7 +2931,7 @@ msgstr "Mörtel to mengen"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:8
 msgctxt "barbarians_building"
 msgid "Lumberjack’s Hut"
-msgstr "Boomhauer-Huus"
+msgstr "Boomhauerkaat"
 
 #: ../../../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:64
 msgctxt "barbarians_building"
@@ -2939,7 +2939,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
 "work area. You should consider dismantling or destroying the building or "
 "building a ranger’s hut."
-msgstr "De Boomhauer dat warkt bi deese Boomhaueree hett keene Bomen tum Ofslaan. Överlegg di, of du dat Huus plattrieten of ofbrannen willst, of bau een Boomplanteree."
+msgstr "De Boomhauer dat warkt bi deeser Boomhauerkaat hett keene Bomen tum Ofslaan. Överlegg di, of du de Kaat plattrieten of ofbrannen willst, of bau eene Boomplanterkaat."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:8
@@ -2980,19 +2980,19 @@ msgstr "Beer to broen"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:8
 msgctxt "barbarians_building"
 msgid "Quarry"
-msgstr "Flintslagerhuus"
+msgstr "Flintslagerkaat"
 
 #: ../../../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:62
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "De Flintslager, de bi deese Flintslagerhuus warkt, hett keene Stenen tum Ofboen."
+msgstr "De Flintslager, de bi deeser Flintslagerkaat warkt, hett keene Stenen tum Ofboen."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:8
 msgctxt "barbarians_building"
 msgid "Ranger’s Hut"
-msgstr "Boomplanteree"
+msgstr "Boomplanterkaat"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:8
@@ -3023,7 +3023,7 @@ msgstr "De Gaardner dat warkt bi deese Reitplanteree hett keen Meedland wo he wa
 #: ../../../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:8
 msgctxt "barbarians_building"
 msgid "Scout’s Hut"
-msgstr "Bespejer-Huus"
+msgstr "Bespejerkaat"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:8
@@ -3222,20 +3222,20 @@ msgstr "Fährenwarft"
 #: ../../../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:8
 msgctxt "empire_building"
 msgid "Fisher’s House"
-msgstr "Fiskeree"
+msgstr "Fiskerhuus"
 
 #: ../../../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:58
 msgctxt "empire_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area."
-msgstr "De Fisker dat warkt bi deese Fiskeree hett keene Fiske tum Fangen."
+msgstr "De Fisker dat warkt bi deesem Fiskerhuus hett keene Fiske tum Fangen."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:8
 msgctxt "empire_building"
 msgid "Forester’s House"
-msgstr "Förster-Huus"
+msgstr "Försterhuus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:8
@@ -3315,7 +3315,7 @@ msgstr "De Ader vun deese Iesen-Bargwark is leeg. De Mine produzeert vun nu an v
 #: ../../../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:8
 msgctxt "empire_building"
 msgid "Lumberjack’s House"
-msgstr "Boomhaueree"
+msgstr "Boomhauerhuus"
 
 #: ../../../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:55
 msgctxt "empire_building"
@@ -3323,7 +3323,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "De Boomhauer dat warkt bi deese Boomhaueree hett keene Bomen tum Ofslaan. Överlegg di, of du dat Huus plattrieten of ofbrannen willst, of bau een Försterhuus."
+msgstr "De Boomhauer dat warkt bi deesem Boomhauerhuus hett keene Bomen tum Ofslaan. Överlegg di, of du dat Huus plattrieten of ofbrannen willst, of bau een Försterhuus."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:8
@@ -3420,7 +3420,7 @@ msgstr "Saagmöhlen"
 #: ../../../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:8
 msgctxt "empire_building"
 msgid "Scout’s House"
-msgstr "Bespejeree"
+msgstr "Bespejerhuus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/sheepfarm/init.lua:8
@@ -3835,7 +3835,7 @@ msgstr "De Früchtenpottjer dat warkt bi deese Früchtenpottjeree hett keene Bus
 #: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Diker’s House"
-msgstr "Diekbauer-Huus"
+msgstr "Diekbauerhuus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start diking because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:62
@@ -3885,14 +3885,14 @@ msgstr "Fährenwarft"
 #: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:8
 msgctxt "frisians_building"
 msgid "Fisher’s House"
-msgstr "Fiskeree"
+msgstr "Fiskerhuus"
 
 #: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:65
 msgctxt "frisians_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area."
-msgstr "De Fisker dat warkt bi deese Fiskeree hett keene Fiske tum Fangen."
+msgstr "De Fisker dat warkt bi deesem Fiskerhuus hett keene Fiske tum Fangen."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:8
@@ -4098,7 +4098,7 @@ msgstr "De Ader vun deese Stenen-Bargwark is leeg. De Mine produzeert vun nu an 
 #: ../../../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:8
 msgctxt "frisians_building"
 msgid "Scout’s House"
-msgstr "Bespejeree"
+msgstr "Bespejerhuus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/sewing_room/init.lua:8
@@ -4184,7 +4184,7 @@ msgstr "De Arbeider, de bi deese Well warkt, hett keen Water in de Quell mehr."
 #: ../../../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:8
 msgctxt "frisians_building"
 msgid "Woodcutter’s House"
-msgstr "Boomslageree"
+msgstr "Boomslagerhuus"
 
 #: ../../../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:62
 msgctxt "frisians_building"
@@ -4192,7 +4192,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "De Boomslager dat warkt bi deese Boomslageree hett keene Bomen tum Ofslaan. Överlegg di, of du dat Huus plattrieten of ofbrannen willst, of bau een Försterhuus."
+msgstr "De Boomslager dat warkt bi deesem Boomslagerhuus hett keene Bomen tum Ofslaan. Överlegg di, of du dat Huus plattrieten of ofbrannen willst, of bau een Försterhuus."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:8

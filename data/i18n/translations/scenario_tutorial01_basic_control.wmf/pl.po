@@ -12,7 +12,7 @@
 # Marcin S <dzidek1003@o2.pl>, 2021
 # Michał Łysiak, 2022
 # Niektóry <niektory@gmail.com>, 2020
-# Robert Wolniak <robert.wolniak@gmail.com>, 2024
+# Robert Wolniak <robert.wolniak@tuta.io>, 2024
 # tombox <wptom@wp.pl>, 2015-2016,2018-2019
 # tombox <wptom@wp.pl>, 2015
 # tombox <wptom@wp.pl>, 2020

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -140,7 +140,7 @@ int LuaBuildingDescription::get_enhanced_from(lua_State* L) {
 		   L, egbase.descriptions().get_building_descr(enhanced_from));
 	}
 	lua_pushnil(L);
-	return 0;
+	return 1;
 }
 
 /* RST
