@@ -503,7 +503,7 @@ CancelTradeConfirm::CancelTradeConfirm(InteractivePlayer& parent, Widelands::Tra
 }
 
 /**
- * Make sure the player is still in the game.
+ * Make sure the trade still exists.
  */
 void CancelTradeConfirm::think() {
 	if (!iaplayer().game().has_trade(trade_id_)) {

@@ -76,30 +76,39 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	list->focus();
 
 	// Buttons for message types
-	geologistsbtn_ = new UI::Button(this, "filter_geologists_messages", kPadding, kPadding,
+	filter_box_ = new UI::Box(this, UI::PanelStyle::kWui, "filter_box", kPadding, kPadding, UI::Box::Horizontal, 0, 0, kPadding);
+
+	geologistsbtn_ = new UI::Button(filter_box_, "filter_geologists_messages", 0, 0,
 	                                kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                                g_image_cache->get("images/wui/fieldaction/menu_geologist.png"));
 
-	economybtn_ = new UI::Button(this, "filter_economy_messages", 2 * kPadding + kButtonSize,
-	                             kPadding, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+	economybtn_ = new UI::Button(filter_box_, "filter_economy_messages", 0,
+	                             0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                             g_image_cache->get("images/wui/stats/genstats_nrwares.png"));
 
 	seafaringbtn_ =
-	   new UI::Button(this, "filter_seafaring_messages", 3 * kPadding + 2 * kButtonSize, kPadding,
+	   new UI::Button(filter_box_, "filter_seafaring_messages", 0, 0,
 	                  kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                  g_image_cache->get("images/wui/buildings/start_expedition.png"));
 
-	warfarebtn_ = new UI::Button(this, "filter_warfare_messages", 4 * kPadding + 3 * kButtonSize,
-	                             kPadding, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+	warfarebtn_ = new UI::Button(filter_box_, "filter_warfare_messages", 0,
+	                             0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                             g_image_cache->get("images/wui/messages/messages_warfare.png"));
 
-	scenariobtn_ = new UI::Button(this, "filter_scenario_messages", 5 * kPadding + 4 * kButtonSize,
-	                              kPadding, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+	scenariobtn_ = new UI::Button(filter_box_, "filter_scenario_messages", 0,
+	                              0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                              g_image_cache->get("images/wui/menus/objectives.png"));
 
-	tradingbtn_ = new UI::Button(this, "filter_trading_messages", 6 * kPadding + kButtonSize,
-	                             kPadding, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+	diplomacybtn_ = new UI::Button(filter_box_, "filter_diplomacy_messages", 0,
+	                             0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                             g_image_cache->get("images/wui/menus/statistics_stock.png"));
+
+	filter_box_->add(geologistsbtn_);
+	filter_box_->add(economybtn_);
+	filter_box_->add(seafaringbtn_);
+	filter_box_->add(warfarebtn_);
+	filter_box_->add(scenariobtn_);
+	filter_box_->add(diplomacybtn_);
 
 	message_filter_ = Widelands::Message::Type::kAllMessages;
 	set_filter_messages_tooltips();
@@ -154,8 +163,8 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	   [this]() { filter_messages(Widelands::Message::Type::kWarfare); });
 	scenariobtn_->sigclicked.connect(
 	   [this]() { filter_messages(Widelands::Message::Type::kScenario); });
-	tradingbtn_->sigclicked.connect(
-	   [this]() { filter_messages(Widelands::Message::Type::kTrading); });
+	diplomacybtn_->sigclicked.connect(
+	   [this]() { filter_messages(Widelands::Message::Type::kDiplomacy); });
 	list->selected.connect([this](uint32_t a) { selected(a); });
 	list->double_clicked.connect([this](uint32_t a) { double_clicked(a); });
 	archivebtn_->sigclicked.connect([this]() { archive_or_restore(); });
@@ -428,8 +437,8 @@ bool GameMessageMenu::handle_key(bool down, SDL_Keysym code) {
 			filter_messages(Widelands::Message::Type::kScenario);
 			return true;
 		}
-		if (matches_shortcut(KeyboardShortcut::kInGameMessagesFilterTrading, code)) {
-			filter_messages(Widelands::Message::Type::kTrading);
+		if (matches_shortcut(KeyboardShortcut::kInGameMessagesFilterDiplomacy, code)) {
+			filter_messages(Widelands::Message::Type::kDiplomacy);
 			return true;
 		}
 	}
@@ -496,8 +505,8 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 	case Widelands::Message::Type::kScenario:
 		toggle_filter_messages_button(*scenariobtn_, msgtype);
 		break;
-	case Widelands::Message::Type::kTrading:
-		toggle_filter_messages_button(*tradingbtn_, msgtype);
+	case Widelands::Message::Type::kDiplomacy:
+		toggle_filter_messages_button(*diplomacybtn_, msgtype);
 		break;
 
 	case Widelands::Message::Type::kNoMessages:
@@ -521,7 +530,7 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 		seafaringbtn_->set_perm_pressed(false);
 		warfarebtn_->set_perm_pressed(false);
 		scenariobtn_->set_perm_pressed(false);
-		tradingbtn_->set_perm_pressed(false);
+		diplomacybtn_->set_perm_pressed(false);
 		break;
 
 	default:
@@ -545,7 +554,7 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 		seafaringbtn_->set_perm_pressed(false);
 		warfarebtn_->set_perm_pressed(false);
 		scenariobtn_->set_perm_pressed(false);
-		tradingbtn_->set_perm_pressed(false);
+		diplomacybtn_->set_perm_pressed(false);
 		button.set_perm_pressed(true);
 		message_filter_ = msgtype;
 
@@ -587,10 +596,10 @@ void GameMessageMenu::set_filter_messages_tooltips() {
 	   _("Show scenario messages only"),
 	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterScenario, true),
 	   UI::PanelStyle::kWui));
-	tradingbtn_->set_tooltip(as_tooltip_text_with_hotkey(
+	diplomacybtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show trading messages only"),
-	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterTrading, true),
+	   _("Show diplomacy messages only"),
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterDiplomacy, true),
 	   UI::PanelStyle::kWui));
 }
 
@@ -603,7 +612,7 @@ std::string GameMessageMenu::display_message_type_icon(const Widelands::Message&
 		return "images/wui/fieldaction/menu_geologist.png";
 	case Widelands::Message::Type::kEconomy:
 		return "images/wui/stats/genstats_nrwares.png";
-	case Widelands::Message::Type::kTrading:
+	case Widelands::Message::Type::kDiplomacy:
 	case Widelands::Message::Type::kTradeOfferReceived:
 	case Widelands::Message::Type::kTradeOfferAccepted:
 	case Widelands::Message::Type::kTradeOfferRejected:

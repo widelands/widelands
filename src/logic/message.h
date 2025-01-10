@@ -47,7 +47,8 @@ struct Message {
 		kWarfareUnderAttack,
 		kWarfareEnd = kWarfareUnderAttack,  // end of warfare messages
 
-		kTradingBegin,
+		kDiplomacyBegin,
+		kDiplomacy = kDiplomacyBegin,
 		kTrading,
 		kTradeOfferReceived,
 		kTradeOfferAccepted,
@@ -55,7 +56,7 @@ struct Message {
 		kTradeOfferRetracted,
 		kTradeComplete,
 		kTradeCancelled,
-		kTradingEnd = kTradeCancelled,
+		kDiplomacyEnd = kTradeCancelled,
 
 		kEconomyLoadGame = 255,  // Only this type is allowed in game loading code,
 		                         // must not be used elsewhere.
@@ -143,9 +144,9 @@ struct Message {
 		    type_ <= Widelands::Message::Type::kWarfareEnd) {
 			return Widelands::Message::Type::kWarfare;
 		}
-		if (type_ >= Widelands::Message::Type::kTradingBegin &&
-		    type_ <= Widelands::Message::Type::kTradingEnd) {
-			return Widelands::Message::Type::kTrading;
+		if (type_ >= Widelands::Message::Type::kDiplomacyBegin &&
+		    type_ <= Widelands::Message::Type::kDiplomacyEnd) {
+			return Widelands::Message::Type::kDiplomacy;
 		}
 		if (type_ == Widelands::Message::Type::kEconomy ||
 		    type_ == Widelands::Message::Type::kEconomySiteOccupied ||
