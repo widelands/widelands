@@ -1803,7 +1803,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an Atlantean production site: Horse Farm
             lore = pgettext("atlanteans_building", "I walk all day just back and forth. I need? I need … I need a horse!"),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Horse Farm
-            lore_author = pgettext("atlanteans_building", "Busy carrier murmuring to himself")
+            lore_author = pgettext("atlanteans_building", "Busy carrier murmuring to himself"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Horse Farm
+            performance = pgettext("atlanteans_building", "If all needed wares are delivered in time, this building can produce a horse in %s on average."):bformat(format_seconds(30))
          }
       },
       {
@@ -1936,10 +1938,12 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Purpose helptext for an Atlantean training site: Dungeon, part 2
                pgettext("atlanteans_building", "Equips the soldiers with all necessary weapons and armor parts.")
             },
-            -- TRANSLATORS: Lore helptext for an Atlantean production site: Dungeon
+            -- TRANSLATORS: Lore helptext for an Atlantean training site: Dungeon
             lore = pgettext("atlanteans_building", "Make our enemies feel the pain, so enter here to gain your train!"),
-            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Dungeon
-            lore_author = pgettext("atlanteans_building", "Engraving on the entrance to the dungeon")
+            -- TRANSLATORS: Lore author helptext for an Atlantean training site: Dungeon
+            lore_author = pgettext("atlanteans_building", "Engraving on the entrance to the dungeon"),
+            -- TRANSLATORS: Performance helptext for an Atlantean training site: Dungeon
+            performance = pgettext("atlanteans_building", "If all needed wares are delivered in time, a dungeon can train one soldier one level in attack in %s on average."):bformat(format_seconds(35))
     }
       },
       {
@@ -1951,11 +1955,13 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Purpose helptext for an Atlantean training site: Labyrinth, part 2
                pgettext("atlanteans_building", "Equips the soldiers with all necessary weapons and armor parts.")
             },
-            -- TRANSLATORS: Lore helptext for an Atlantean production site: Labyrinth
+            -- TRANSLATORS: Lore helptext for an Atlantean training site: Labyrinth
             lore = pgettext("atlanteans_building", "Our enemies claim: we have a ruddy twisted way to fight. "..
            "Check the way we train, in this labyrinth they may be right."),
-            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Labyrinth
-            lore_author = pgettext("atlanteans_building", "Atlantean hero after first contact with a real enemy")
+            -- TRANSLATORS: Lore author helptext for an Atlantean training site: Labyrinth
+            lore_author = pgettext("atlanteans_building", "Atlantean hero after first contact with a real enemy"),
+            -- TRANSLATORS: Performance helptext for an Atlantean training site: Labyrinth
+            performance = pgettext("atlanteans_building", "If all needed wares are delivered in time, a labyrinth can train one soldier one level in defense, evade or health in %s on average."):bformat(format_seconds(35))
          }
       },
 
