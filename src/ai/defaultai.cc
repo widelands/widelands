@@ -28,6 +28,7 @@
 #include "base/macros.h"
 #include "base/time_string.h"
 #include "base/wexception.h"
+#include "commands/cmd_set_ware_target_quantity.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/road.h"
@@ -49,7 +50,6 @@
 #include "logic/maphollowregion.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
-#include "logic/playercommand.h"
 
 namespace AI {
 
@@ -3219,7 +3219,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	verb_log_dbg_time(game().get_gametime(), "AI %u builds %s at %d,%d",
 	                  static_cast<unsigned>(player_number()), best_building->desc->name().c_str(),
 	                  proposed_coords.x, proposed_coords.y);
-	game().send_player_build(player_number(), proposed_coords, best_building->id);
+	game().send_player_build_building(player_number(), proposed_coords, best_building->id);
 	blocked_fields.add(proposed_coords, game().get_gametime() + Duration(2 * 60 * 1000));
 
 	// resetting new_building_overdue
