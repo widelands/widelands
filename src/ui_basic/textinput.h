@@ -37,7 +37,7 @@ public:
 	Notifications::Signal<> changed;
 	Notifications::Signal<> cancel;
 
-	void set_text(const std::string&);
+	void set_text(const std::string&, bool send_signal = true);
 	[[nodiscard]] const std::string& get_text() const;
 
 	void focus(bool topcaller = true) override;
