@@ -1868,7 +1868,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Empire production site: Marble Mine
             purpose = pgettext("empire_building", "Carves marble and granite out of the rock in mountain terrain."),
             -- TRANSLATORS: Performance helptext for an Empire production site: Marble Mine
-            performance = pgettext("empire_building", "If the food supply is steady, this mine can produce marble in %1$s and granite in %2$s on average."):bformat(format_seconds(37), format_seconds(37))
+            performance = pgettext("empire_building", "If the food supply is steady and both types of stone are needed by the economy, this mine can produce one granite and one marble in %1$s on average. If only one kind is needed, then its production takes %2$s on average, and one of the other kind is produced in %3$s."):bformat(format_minutes_seconds(1, 1), format_seconds(48), format_minutes_seconds(1, 36))
          }
       },
       {
@@ -1891,7 +1891,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Empire production site: Deep Marble Mine
             purpose = pgettext("empire_building", "Carves marble and granite out of the rock in mountain terrain."),
             -- TRANSLATORS: Performance helptext for an Empire production site: Deep Marble Mine
-            performance = pgettext("empire_building", "If the food supply is steady, this mine can produce marble in %1$s and granite in %2$s on average."):bformat(format_seconds(32), format_seconds(48))
+            performance = pgettext("empire_building", "If the food supply is steady and both types of stone are needed by the economy, this mine can produce one granite and one marble in %1$s on average. If only one kind is needed, then its production takes %2$s on average, and one of the other kind is produced in %3$s."):bformat(format_seconds(46), format_seconds(32), format_minutes_seconds(1, 36))
          }
       },
       {
