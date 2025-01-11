@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
-# Alex Rijckaert, 2023-2024
+# Alex Rijckaert, 2023-2025
 # CrisiusXIII <chris@cborn.nl>, 2021
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-11-30 03:02+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
-"Last-Translator: Alex Rijckaert, 2023-2024\n"
+"Last-Translator: Alex Rijckaert, 2023-2025\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -495,12 +495,11 @@ msgstr "Soldaten in het hoofdkwartier"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
 msgid ""
-"Your headquarters has some capabilities of military sites: It conqers some "
-"land, and the stored soldiers defend it when attacked. However this also "
-"means that the enemy can attack the headquarters itself too. On the other "
-"hand, there’s a difference too: you can’t start an attack with the soldiers "
-"in your headquarters."
-msgstr "Je hoofdkwartier heeft enkele mogelijkheden van militaire locaties: het omvat wat land en de opgeslagen soldaten verdedigen het als het wordt aangevallen. Dit betekent echter ook dat de vijand het hoofdkwartier zelf kan aanvallen. Aan de andere kant is er ook een verschil: je kunt geen aanval starten met de soldaten in je hoofdkwartier."
+"Your headquarters has some capabilities of military sites: It conquers some "
+"land, the enemy can attack it directly, and the stored soldiers defend it "
+"and its surroundings when attacked. On the other hand, there’s a difference "
+"too: you can’t start an attack with the soldiers in your headquarters."
+msgstr "Je hoofdkwartier heeft een aantal mogelijkheden van militaire locaties: het verovert wat land, de vijand kan het direct aanvallen en de opgeslagen soldaten verdedigen het hoofdkwartier en de omgeving als het wordt aangevallen. Aan de andere kant is er ook een verschil: je kunt geen aanval starten met de soldaten in je hoofdkwartier."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid ""
