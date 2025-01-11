@@ -414,6 +414,13 @@ bool InputQueueDisplay::handle_mousemove(
 	return true;
 }
 
+void InputQueueDisplay::handle_mousein(bool inside) {
+	if (!inside) {
+		fill_index_under_mouse_ = -1;
+	}
+	UI::Box::handle_mousein(inside);
+}
+
 bool InputQueueDisplay::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	if (show_only_ || !can_act_) {
 		return false;
