@@ -41,7 +41,7 @@ wl.Descriptions():new_militarysite_type {
 
    max_soldiers = 1,
    heal_per_second = 60, -- very low -> smallest building
-   conquers = 5,
+   conquers = 6,
    prefer_heroes = false,
 
    messages = {
