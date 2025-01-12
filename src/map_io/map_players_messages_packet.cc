@@ -33,7 +33,6 @@
 namespace Widelands {
 
 constexpr uint32_t kCurrentPacketVersion = 2;  // since build-19
-constexpr uint32_t kMinPacketVersion = 2;
 
 constexpr const char* kPlayerDirnameTemplate = "player/%u";
 constexpr const char* kFilenameTemplate = "player/%u/messages";
@@ -58,7 +57,8 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 			continue;
 		}
 		uint32_t packet_version = prof.get_safe_section("global").get_positive("packet_version");
-		if (kMinPacketVersion <= packet_version && packet_version <= kCurrentPacketVersion) {
+		// Compatibility for all packet versions must be kept indefinitely!
+		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
 			MessageQueue* messages = player->get_messages();
 			std::vector<Message> game_loading_messages;
 
