@@ -1443,7 +1443,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Empire production site: Stonemason's House
             purpose = pgettext("empire_building", "Carves marble columns out of marble."),
             -- TRANSLATORS: Performance helptext for an Empire production site: Stonemason’s House
-            performance = pgettext("empire_building", "The stonemason needs %s on average to produce one marble column"):bformat(format_minutes_seconds(1, 36))
+            performance = pgettext("empire_building", "The stonemason needs %s on average to produce one marble column."):bformat(format_minutes_seconds(1, 36))
          }
       },
       {
