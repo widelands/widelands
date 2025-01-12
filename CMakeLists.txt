@@ -44,6 +44,9 @@ include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 if(POLICY CMP0148)
   cmake_policy(SET CMP0148 NEW)
 endif(POLICY CMP0148)
+if(POLICY CMP0177)  # Added in CMake 3.31
+  cmake_policy(SET CMP0177 NEW)
+endif(POLICY CMP0177)
 
 IF(USE_XDG AND NOT APPLE AND NOT WIN32)
   ADD_DEFINITIONS(-DUSE_XDG)
