@@ -19,7 +19,7 @@ wl.Descriptions():new_militarysite_type {
    return_on_dismantle = {
       planks = 1,
       granite = 2,
-      marble_column = 1
+      marble = 1
    },
 
    animation_directory = dirname,

@@ -11,12 +11,14 @@ wl.Descriptions():new_productionsite_type {
 
    buildcost = {
       log = 1,
-      planks = 2,
-      granite = 2
+      planks = 3,
+      granite = 2,
+      marble = 1,
    },
    return_on_dismantle = {
+      log = 1,
       planks = 1,
-      granite = 1
+      granite = 1,
    },
 
    animation_directory = dirname,

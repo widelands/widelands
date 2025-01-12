@@ -11,9 +11,8 @@ wl.Descriptions():new_warehouse_type {
 
    return_on_dismantle = {
       planks = 1,
-      granite = 2,
+      granite = 1,
       marble = 2,
-      marble_column = 1
    },
 
    animation_directory = dirname,

@@ -18,8 +18,7 @@ wl.Descriptions():new_productionsite_type {
    return_on_dismantle = {
       log = 1,
       granite = 1,
-      marble = 1,
-      marble_column = 2
+      marble = 2,
    },
 
    animation_directory = dirname,
