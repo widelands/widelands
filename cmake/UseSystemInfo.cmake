@@ -20,7 +20,7 @@ endfunction (system_info)
 
 function (sw_vers varname)
   # query operating system for information
-  exec_program (sw_vers OUTPUT_VARIABLE _vers)
+  execute_process (COMMAND sw_vers OUTPUT_VARIABLE _vers)
   # split multi-line into various fields
   string (REPLACE "\n" ";" _vers "${_vers}")
   string (REPLACE ":" ";" _vers "${_vers}")
