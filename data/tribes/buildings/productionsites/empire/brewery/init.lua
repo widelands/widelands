@@ -10,8 +10,8 @@ wl.Descriptions():new_productionsite_type {
    size = "medium",
 
    buildcost = {
-      log = 1,
-      planks = 3,
+      log = 2,
+      planks = 2,
       granite = 2,
       marble = 1,
    },
