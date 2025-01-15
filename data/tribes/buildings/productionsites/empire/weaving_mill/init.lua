@@ -11,13 +11,13 @@ wl.Descriptions():new_productionsite_type {
 
    buildcost = {
       log = 3,
-      granite = 2,
+      planks = 1,
+      granite = 1,
       marble = 2,
-      marble_column = 2,
+      marble_column = 1,
    },
    return_on_dismantle = {
-      log = 1,
-      granite = 1,
+      log = 2,
       marble = 2,
    },
 
