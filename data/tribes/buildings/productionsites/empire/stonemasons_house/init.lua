@@ -48,7 +48,7 @@ wl.Descriptions():new_productionsite_type {
    },
 
    inputs = {
-      { name = "marble", amount = 6 }
+      { name = "marble", amount = 4 }
    },
 
    programs = {
