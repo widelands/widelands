@@ -13,11 +13,11 @@ wl.Descriptions():new_productionsite_type {
       planks = 2,
       granite = 1,
       marble = 2,
-      marble_column = 1,
+      marble_column = 1
    },
    return_on_dismantle = {
       planks = 1,
-      marble = 2,
+      marble = 2
    },
 
    animation_directory = dirname,
