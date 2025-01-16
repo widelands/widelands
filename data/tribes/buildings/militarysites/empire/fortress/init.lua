@@ -19,7 +19,8 @@ wl.Descriptions():new_militarysite_type {
       },
       enhancement_return_on_dismantle = {
          planks = 2,
-         marble = 4,
+         marble_column = 2,
+         marble = 2,
          granite = 1
       }
    },
@@ -34,8 +35,9 @@ wl.Descriptions():new_militarysite_type {
    return_on_dismantle = {
       planks = 2,
       log = 1,
-      granite = 4,
-      marble = 2,
+      granite = 5,
+      marble = 1,
+      marble_column = 1
    },
 
    animation_directory = dirname,
