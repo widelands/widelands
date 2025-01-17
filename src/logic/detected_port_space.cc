@@ -26,7 +26,8 @@
 
 namespace Widelands {
 
-DetectedPortSpace::DetectedPortSpace(Game& game) : serial(game.generate_detectedportspace_serial()) {
+DetectedPortSpace::DetectedPortSpace(Game& game)
+   : serial(game.generate_detectedportspace_serial()) {
 }
 
 void DetectedPortSpace::set_serial(Game& game, Serial s) {
