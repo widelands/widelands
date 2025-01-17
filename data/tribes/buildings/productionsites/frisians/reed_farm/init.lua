@@ -57,7 +57,7 @@ wl.Descriptions():new_productionsite_type {
             --   see data/tribes/immovables/reedfield/ and src/logic/map_objects/immovable_program.cc - ImmovableProgram::ActAnimate::execute()
             -- how many fields are needed for 100% productivity in worst case (nearest fields, longest field transition):
             --   1 + (180 - (2.333 * 1.8 + 18)) / 54.8 = 3.880
-            -- calculation of productivity with 3 farms:
+            -- calculation of productivity with 3 fields:
             --   irwinhall(6, scale=1/6).cdf(3/3.880) = 0.991
             --   using SciPy 1.14+
             -- min. time total (free 3 nearest fields):  29.4 + 25.4 = 54.8 sec

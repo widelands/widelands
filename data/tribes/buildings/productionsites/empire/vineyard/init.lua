@@ -53,10 +53,10 @@ wl.Descriptions():new_productionsite_type {
             --   see data/tribes/immovables/grapevine/ and src/logic/map_objects/immovable_program.cc - ImmovableProgram::ActAnimate::execute()
             -- how many fields are needed for 100% productivity in worst case (nearest fields, longest field transition):
             --   1 + (180 - (5 + 2.5 * 1.8 + 5)) / 48 = 4.448
-            -- calculation of productivity with 4 farms:
+            -- calculation of productivity with 4 fields:
             --   irwinhall(8, scale=1/8).cdf(4/4.448) = 0.999996
             --   using SciPy 1.14+
-            -- calculation of productivity with 3 farms:
+            -- calculation of productivity with 3 fields:
             --   irwinhall(6, scale=1/6).cdf(3/4.543) = 0.911
             -- min. time total (free 4 nearest fields):  24   + 24   = 48   sec
             -- max. time total (free 4 furthest fields): 25.8 + 25.8 = 51.6 sec

@@ -54,7 +54,7 @@ wl.Descriptions():new_productionsite_type {
             --   see data/tribes/immovables/wheatfield/ and src/logic/map_objects/immovable_program.cc - ImmovableProgram::ActAnimate::execute()
             -- how many fields are needed for 100% productivity in worst case (nearest fields, longest field transition):
             --   1 + (250 - (6 + 2 * 1.8 + 10)) / 54.4 = 5.235
-            -- calculation of productivity with 4 farms:
+            -- calculation of productivity with 4 fields:
             --   irwinhall(8, scale=1/8).cdf(4/5.235) = 0.996
             --   using SciPy 1.14+
             -- min. time total (free 4 nearest fields):  29.2 + 25.2 = 54.4 sec
