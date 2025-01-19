@@ -10,7 +10,7 @@ jobs:
   mirror:
     if: github.repository == 'widelands/widelands'
     name: Synchronizing Launchpad trunk with GitHub master
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
     - name: Setting up bazaar
       run: |
