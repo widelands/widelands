@@ -118,7 +118,7 @@ std::string Market::market_census_string() const {
 void Market::update_statistics_string(std::string* str) {
 	const unsigned nr_trades = trade_orders_.size();
 	*str = StyleManager::color_tag(format(ngettext("%u trade", "%u trades", nr_trades), nr_trades),
-	                             g_style_manager->building_statistics_style().neutral_color());
+	                               g_style_manager->building_statistics_style().neutral_color());
 }
 
 void Market::remove_worker(Worker& worker) {
@@ -233,8 +233,7 @@ void Market::cancel_trade(Game& game,
 
 		if (send_msg) {
 			send_message(
-			   game,
-			   Message::Type::kTrading,
+			   game, Message::Type::kTrading,
 			   reached_regular_end ? _("Trade Complete") : _("Trade Cancelled"),
 			   descr().icon_filename(),
 			   reached_regular_end ? _("Trade agreement complete") : _("Trade agreement cancelled"),

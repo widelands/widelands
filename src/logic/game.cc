@@ -1312,8 +1312,8 @@ void Game::reject_trade(const TradeID trade_id) {
 	Market* initiator = trade.initiator.get(*this);
 	if (initiator != nullptr) {
 		initiator->send_message(
-		   *this, Message::Type::kTrading, _("Trade Rejected"),
-		   initiator->descr().icon_filename(), _("Trade offer rejected"),
+		   *this, Message::Type::kTrading, _("Trade Rejected"), initiator->descr().icon_filename(),
+		   _("Trade offer rejected"),
 		   format_l(_("%1$s has rejected your trade offer at %2$s."),
 		            player(trade.receiving_player).get_name(), initiator->get_market_name()),
 		   false);
@@ -1334,13 +1334,12 @@ void Game::retract_trade(const TradeID trade_id) {
 	Market* initiator = trade.initiator.get(*this);
 
 	get_safe_player(trade.receiving_player)
-	   ->add_message(
-	      *this, std::unique_ptr<Message>(new Message(
-	                Message::Type::kTrading, get_gametime(), _("Trade Retracted"),
-	                // TODO(Nordfriese): Use receiver's own tribe's market here
-	                initiator->descr().icon_filename(), _("Trade offer retracted"),
-	                format_l(_("The trade offer by %s has been retracted."),
-	                         initiator->owner().get_name()))));
+	   ->add_message(*this, std::unique_ptr<Message>(new Message(
+	                           Message::Type::kTrading, get_gametime(), _("Trade Retracted"),
+	                           // TODO(Nordfriese): Use receiver's own tribe's market here
+	                           initiator->descr().icon_filename(), _("Trade offer retracted"),
+	                           format_l(_("The trade offer by %s has been retracted."),
+	                                    initiator->owner().get_name()))));
 
 	trade_agreements_.erase(it);
 }
@@ -1359,7 +1358,8 @@ void Game::cancel_trade(TradeID trade_id, bool reached_regular_end, const Player
 
 	Market* initiator = trade.initiator.get(*this);
 	if (initiator != nullptr) {
-		initiator->cancel_trade(*this, trade_id, reached_regular_end, reached_regular_end || canceller != initiator->get_owner());
+		initiator->cancel_trade(*this, trade_id, reached_regular_end,
+		                        reached_regular_end || canceller != initiator->get_owner());
 	}
 
 	Market* receiver = it->second.receiver.get(*this);

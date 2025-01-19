@@ -35,17 +35,17 @@ struct TradeInstance {
 		kRunning = 1,
 	};
 
-	State state {State::kProposed};
+	State state{State::kProposed};
 
-	PlayerNumber sending_player {0};
-	PlayerNumber receiving_player {0};
+	PlayerNumber sending_player{0};
+	PlayerNumber receiving_player{0};
 
 	OPtr<Market> initiator;
 	OPtr<Market> receiver;
 
 	BillOfMaterials items_to_send;
 	BillOfMaterials items_to_receive;
-	int num_batches {0};
+	int num_batches{0};
 };
 
 enum class TradeAction : uint8_t {

@@ -347,8 +347,7 @@ public:
 		infotext += "<p>";
 		infotext += as_font_tag(
 		   UI::FontStyle::kWuiInfoPanelHeading, can_act_ ? _("You send:") : _("Player sends:"));
-		for (const auto& pair :
-		     is_receiver ? agreement.items_to_receive : agreement.items_to_send) {
+		for (const auto& pair : is_receiver ? agreement.items_to_receive : agreement.items_to_send) {
 			infotext += as_listitem(
 			   format_l(_("%1$i× %2$s"), pair.second,
 			            ibase_.egbase().descriptions().get_ware_descr(pair.first)->descname()),
@@ -360,8 +359,7 @@ public:
 		infotext += "<p>";
 		infotext += as_font_tag(
 		   UI::FontStyle::kWuiInfoPanelHeading, can_act_ ? _("You receive:") : _("Player receives:"));
-		for (const auto& pair :
-		     is_receiver ? agreement.items_to_send : agreement.items_to_receive) {
+		for (const auto& pair : is_receiver ? agreement.items_to_send : agreement.items_to_receive) {
 			infotext += as_listitem(
 			   format_l(_("%1$i× %2$s"), pair.second,
 			            ibase_.egbase().descriptions().get_ware_descr(pair.first)->descname()),

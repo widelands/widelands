@@ -3423,9 +3423,7 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 		if (receive_preciousness > send_cost) {
 			// The trade is advantageous, accept.
 			std::multimap<uint32_t, const Widelands::Market*> candidates =
-			   game()
-			      .player(player_number())
-			      .get_markets(offer.initiator.get(game())->get_position());
+			   game().player(player_number()).get_markets(offer.initiator.get(game())->get_position());
 			if (candidates.empty()) {
 				verb_log_dbg("AI %u: no market to accept trade #%u",
 				             static_cast<unsigned>(player_number()), trade_id);

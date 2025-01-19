@@ -463,9 +463,9 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 		                        format_l(_("Trade offer from %s"), other_market->owner().get_name()));
 
 		infotext += "</p><p>";
-		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
-		                        format_l(ngettext("%d batch", "%d batches", trade.num_batches),
-		                                 trade.num_batches));
+		infotext += as_font_tag(
+		   UI::FontStyle::kWuiInfoPanelParagraph,
+		   format_l(ngettext("%d batch", "%d batches", trade.num_batches), trade.num_batches));
 
 		infotext += "</p>";
 		infotext += as_vspace(kSpacing);
@@ -529,8 +529,7 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 	MutexLock m(MutexLock::ID::kObjects);
 	for (Widelands::TradeID trade_id : trades) {
 		const Widelands::TradeInstance& trade = iplayer_->game().get_trade(trade_id);
-		const Widelands::Player& other_player =
-		   iplayer_->egbase().player(trade.receiving_player);
+		const Widelands::Player& other_player = iplayer_->egbase().player(trade.receiving_player);
 		const Widelands::Market* market = trade.initiator.get(iplayer_->egbase());
 		if (market == nullptr) {
 			continue;
@@ -569,9 +568,9 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 		      other_player.get_name()));
 
 		infotext += "</p><p>";
-		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
-		                        format_l(ngettext("%d batch", "%d batches", trade.num_batches),
-		                                 trade.num_batches));
+		infotext += as_font_tag(
+		   UI::FontStyle::kWuiInfoPanelParagraph,
+		   format_l(ngettext("%d batch", "%d batches", trade.num_batches), trade.num_batches));
 
 		infotext += "</p>";
 		infotext += as_vspace(kSpacing);
@@ -685,9 +684,9 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		      other_market->owner().get_name()));
 
 		infotext += "</p><p>";
-		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
-		                        format_l(ngettext("%d batch", "%d batches", trade.num_batches),
-		                                 trade.num_batches));
+		infotext += as_font_tag(
+		   UI::FontStyle::kWuiInfoPanelParagraph,
+		   format_l(ngettext("%d batch", "%d batches", trade.num_batches), trade.num_batches));
 
 		infotext += "</p><p>";
 		infotext += as_font_tag(
@@ -704,8 +703,7 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		infotext += as_vspace(kSpacing);
 		infotext += "<p>";
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, _("You send:"));
-		for (const auto& pair :
-		     is_receiver ? trade.items_to_receive : trade.items_to_send) {
+		for (const auto& pair : is_receiver ? trade.items_to_receive : trade.items_to_send) {
 			infotext += as_listitem(
 			   format_l(_("%1$i× %2$s"), pair.second,
 			            iplayer_->egbase().descriptions().get_ware_descr(pair.first)->descname()),
@@ -716,8 +714,7 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		infotext += as_vspace(kSpacing);
 		infotext += "<p>";
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, _("You receive:"));
-		for (const auto& pair :
-		     is_receiver ? trade.items_to_send : trade.items_to_receive) {
+		for (const auto& pair : is_receiver ? trade.items_to_send : trade.items_to_receive) {
 			infotext += as_listitem(
 			   format_l(_("%1$i× %2$s"), pair.second,
 			            iplayer_->egbase().descriptions().get_ware_descr(pair.first)->descname()),

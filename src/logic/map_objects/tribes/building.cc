@@ -588,7 +588,8 @@ std::string Building::info_string(const InfoStringFormat& format) {
 	return result;
 }
 
-std::string Building::named_building_census_string(const std::string& icon_fmt, std::string name) const {
+std::string Building::named_building_census_string(const std::string& icon_fmt,
+                                                   std::string name) const {
 	if (name.empty()) {
 		name = descr().descname();
 		// See explanation in set_warehouse_name().
