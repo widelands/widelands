@@ -1359,7 +1359,7 @@ void Game::cancel_trade(TradeID trade_id, bool reached_regular_end, const Player
 
 	Market* initiator = trade.initiator.get(*this);
 	if (initiator != nullptr) {
-		initiator->cancel_trade(*this, trade_id, reached_regular_end, reached_regular_end);
+		initiator->cancel_trade(*this, trade_id, reached_regular_end, reached_regular_end || canceller != initiator->get_owner());
 	}
 
 	Market* receiver = it->second.receiver.get(*this);
