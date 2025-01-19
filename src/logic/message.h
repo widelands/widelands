@@ -50,13 +50,7 @@ struct Message {
 		kDiplomacyBegin,
 		kDiplomacy = kDiplomacyBegin,
 		kTrading,
-		kTradeOfferReceived,
-		kTradeOfferAccepted,
-		kTradeOfferRejected,
-		kTradeOfferRetracted,
-		kTradeComplete,
-		kTradeCancelled,
-		kDiplomacyEnd = kTradeCancelled,
+		kDiplomacyEnd = kTrading,
 
 		kEconomyLoadGame = 255,  // Only this type is allowed in game loading code,
 		                         // must not be used elsewhere.

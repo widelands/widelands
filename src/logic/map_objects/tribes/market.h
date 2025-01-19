@@ -85,6 +85,7 @@ public:
 		return market_name_;
 	}
 	void set_market_name(const std::string& name);
+	std::string market_census_string() const;
 
 	[[nodiscard]] const std::deque<DescriptionIndex>& pending_dropout_wares() const {
 		return pending_dropout_wares_;

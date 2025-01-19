@@ -1256,7 +1256,7 @@ TradeID Game::propose_trade(const Trade& trade) {
 
 	get_safe_player(trade.receiving_player)
 	   ->add_message(*this, std::unique_ptr<Message>(new Message(
-	                           Message::Type::kTradeOfferReceived, get_gametime(), _("Trade Offer"),
+	                           Message::Type::kTrading, get_gametime(), _("Trade Offer"),
 	                           // TODO(Nordfriese): Use receiver's own tribe's market here
 	                           initiator->descr().icon_filename(), _("New trade offer received"),
 	                           format_l(_("You have received a new trade offer from %s."),
@@ -1292,7 +1292,7 @@ void Game::accept_trade(const TradeID trade_id, Market& receiver) {
 	initiator->new_trade(trade_id, trade.items_to_send, trade.num_batches, &receiver);
 	receiver.new_trade(trade_id, trade.items_to_receive, trade.num_batches, trade.initiator);
 
-	initiator->send_message(*this, Message::Type::kTradeOfferAccepted, _("Trade Accepted"),
+	initiator->send_message(*this, Message::Type::kTrading, _("Trade Accepted"),
 	                        initiator->descr().icon_filename(), _("Trade offer accepted"),
 	                        format_l(_("%1$s has accepted your trade offer at %2$s."),
 	                                 receiver.owner().get_name(), initiator->get_market_name()),
@@ -1311,7 +1311,7 @@ void Game::reject_trade(const TradeID trade_id) {
 	Market* initiator = trade.initiator.get(*this);
 	if (initiator != nullptr) {
 		initiator->send_message(
-		   *this, Message::Type::kTradeOfferRejected, _("Trade Rejected"),
+		   *this, Message::Type::kTrading, _("Trade Rejected"),
 		   initiator->descr().icon_filename(), _("Trade offer rejected"),
 		   format_l(_("%1$s has rejected your trade offer at %2$s."),
 		            player(trade.receiving_player).get_name(), initiator->get_market_name()),
@@ -1335,7 +1335,7 @@ void Game::retract_trade(const TradeID trade_id) {
 	get_safe_player(trade.receiving_player)
 	   ->add_message(
 	      *this, std::unique_ptr<Message>(new Message(
-	                Message::Type::kTradeOfferRetracted, get_gametime(), _("Trade Retracted"),
+	                Message::Type::kTrading, get_gametime(), _("Trade Retracted"),
 	                // TODO(Nordfriese): Use receiver's own tribe's market here
 	                initiator->descr().icon_filename(), _("Trade offer retracted"),
 	                format_l(_("The trade offer by %s has been retracted."),

@@ -22,7 +22,7 @@
 
 #include "base/i18n.h"
 #include "economy/flag.h"
-#include "graphic/text_layout.h"
+#include "graphic/style_manager.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/player.h"
@@ -110,8 +110,14 @@ void Market::TradeOrder::cleanup() {
 	}
 }
 
+std::string Market::market_census_string() const {
+	return named_building_census_string("⇵", get_market_name());
+}
+
 void Market::update_statistics_string(std::string* str) {
-	*str = richtext_escape(get_market_name());
+	const unsigned nr_trades = trade_orders_.size();
+	*str = StyleManager::color_tag(format(ngettext("%u trade", "%u trades", nr_trades), nr_trades),
+	                             g_style_manager->building_statistics_style().neutral_color());
 }
 
 void Market::remove_worker(Worker& worker) {
@@ -227,7 +233,7 @@ void Market::cancel_trade(Game& game,
 		if (send_msg) {
 			send_message(
 			   game,
-			   reached_regular_end ? Message::Type::kTradeComplete : Message::Type::kTradeCancelled,
+			   Message::Type::kTrading,
 			   reached_regular_end ? _("Trade Complete") : _("Trade Cancelled"),
 			   descr().icon_filename(),
 			   reached_regular_end ? _("Trade agreement complete") : _("Trade agreement cancelled"),

@@ -520,12 +520,7 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 	case Widelands::Message::Type::kAllMessages:
 	case Widelands::Message::Type::kGameLogic:
 	case Widelands::Message::Type::kEconomySiteOccupied:
-	case Widelands::Message::Type::kTradeOfferReceived:
-	case Widelands::Message::Type::kTradeOfferAccepted:
-	case Widelands::Message::Type::kTradeOfferRejected:
-	case Widelands::Message::Type::kTradeOfferRetracted:
-	case Widelands::Message::Type::kTradeComplete:
-	case Widelands::Message::Type::kTradeCancelled:
+	case Widelands::Message::Type::kTrading:
 	case Widelands::Message::Type::kWarfareSiteDefeated:
 	case Widelands::Message::Type::kWarfareSiteLost:
 	case Widelands::Message::Type::kWarfareUnderAttack:
@@ -620,12 +615,7 @@ std::string GameMessageMenu::display_message_type_icon(const Widelands::Message&
 	case Widelands::Message::Type::kEconomy:
 		return "images/wui/stats/genstats_nrwares.png";
 	case Widelands::Message::Type::kDiplomacy:
-	case Widelands::Message::Type::kTradeOfferReceived:
-	case Widelands::Message::Type::kTradeOfferAccepted:
-	case Widelands::Message::Type::kTradeOfferRejected:
-	case Widelands::Message::Type::kTradeOfferRetracted:
-	case Widelands::Message::Type::kTradeComplete:
-	case Widelands::Message::Type::kTradeCancelled:
+	case Widelands::Message::Type::kTrading:
 		return "images/wui/menus/statistics_stock.png";
 	case Widelands::Message::Type::kSeafaring:
 		return "images/wui/buildings/start_expedition.png";
