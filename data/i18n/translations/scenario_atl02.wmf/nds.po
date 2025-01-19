@@ -173,7 +173,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:98
 msgid "Build a spider farm and a weaving mill"
-msgstr "Bau eene Spinnentüchteree un eene Spinnweelmöhlen"
+msgstr "Bau eene Spinnentüchteree un eenen Weevstohl"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:100
 msgid "Spidercloth Production"
@@ -197,7 +197,7 @@ msgid ""
 "mill."
 msgstr ""
 "Daarna mutten wi nödig eene Buurderee bauen, denn se bruukt Spinnenstoff tum"
-" Beschicken. Wi bruken ok eene Spinnentüchteree un Spinnweelmöhlen."
+" Beschicken. Wi bruken ok eene Spinnentüchteree un eenen Weevstohl."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:107
 msgid "Build a trading post"
@@ -586,9 +586,9 @@ msgid ""
 "most perilous case, for as you know, spidercloth is needed for many "
 "buildings."
 msgstr ""
-"%s, Satuul sall Jo warmen. As de hoogste vun all de Spinners breng ick "
-"slimme Narichten. Ick hebb jüüst markt, dat Spinnenstoff knapp word. Dat is "
-"bannig gefahrelk, denn as Jo weetst bruukt man Spinnenstoff för völe Husen."
+"%s, Satuul sall Jo warmen. As de hoogste vun all de Wevers breng ick slimme "
+"Narichten. Ick hebb jüüst markt, dat Spinnenstoff knapp word. Dat is bannig "
+"gefahrelk, denn as Jo weetst bruukt man Spinnenstoff för völe Husen."
 
 #. TRANSLATORS: Opol
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:276
@@ -662,10 +662,10 @@ msgid ""
 " finest cloth and some tabards soon. Maybe we can build a gold spinning mill"
 " later on to make better tabards as well."
 msgstr ""
-"%s, Satuul sall Jo warmen! De Spinnweelmöhlen un Spinnentüchteree sünd "
-"fardig un de Spinners könen weer warken. Ick verspreck, dat wi bold de "
-"besten Stoff un ok een paar Kluften levern worden. Villicht könen wi later "
-"ok eene Goldspinneree bauen, um noch betere Kluften maken to könen."
+"%s, Satuul sall Jo warmen! De Weevstohl un Spinnentüchteree sünd fardig un "
+"de Wevers könen weer warken. Ick verspreck, dat wi bold de besten Stoff un "
+"ok een paar Kluften levern worden. Villicht könen wi later ok eene "
+"Goldspinneree bauen, um noch betere Kluften maken to könen."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
@@ -682,7 +682,7 @@ msgid ""
 "Satul warm you and the weavers’ guild!"
 msgstr ""
 "Dat sünd bannig gode Narichten, Öpoll. Jo dürst nu torügg an Jo Arbeid gahn,"
-" un Satuul sall Jo un all de Spinners warmen!"
+" un Satuul sall Jo un all de Wevers warmen!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:336
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:351
