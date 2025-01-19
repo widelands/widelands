@@ -147,7 +147,7 @@ msgid ""
 " wool. Afterwards use the wool to weave cloth in order to build a ship."
 msgstr ""
 "Nu bau eene Schaaptüchteree un bruuk all de Weit, um tominnst 50 Ballen "
-"Wulle to produzeren. Spinn daarna ut de Wulle Stoff, um een Schipp to bauen."
+"Wulle to produzeren. Weev daarna ut de Wulle Stoff, um een Schipp to bauen."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
@@ -686,9 +686,8 @@ msgstr ""
 "Wenn wi genoog Weit produzeert hebben, könen wi de Buurderee plattrieten un "
 "eene Schaaptüchteree bauen, um Wulle to produzeren. Wenn de Schaaptüchteree "
 "mit de Warken begünnt, könen wi Rüümte för een middelgrotes Huus finnen of "
-"freeimaken un daar eene Spinnweelmöhlen bauen, um Stoff ut uns’ Wulle to "
-"maken. Aver nu laat uns daarmit anfangen, eenen goden Bült vun Weit to "
-"sammeln."
+"freeimaken un daar eenen Weevstohl bauen, um Stoff ut uns’ Wulle to maken. "
+"Aver nu laat uns daarmit anfangen, eenen goden Bült vun Weit to sammeln."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:378
@@ -1047,7 +1046,7 @@ msgid ""
 "taking to the sea again. However, I thought it would be helpful to remind "
 "you that ship production is not the only industry that needs cloth."
 msgstr ""
-"Salve Lutius. Uns’ Spinnweelmöhlen is nu beschickt. Nu sünd wi bannig dicht "
+"Salve Lutius. Uns’ Weevstohl is nu beschickt. Nu sünd wi bannig dicht "
 "daarbi, weer to schippern. Aver ick gloov, ’t is good, wenn du nich "
 "vergettst, dat wi Stoff nich blot för Schippen bruken."
 

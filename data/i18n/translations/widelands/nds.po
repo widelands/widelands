@@ -3514,7 +3514,7 @@ msgstr "Falsk Gebruuk, dat sall heten: /warn <Naam> <Grund>"
 #: ../../../../src/network/gamehost.cc:176
 #, c-format
 msgid "The client %s could not be found."
-msgstr "De Gast %s kunn nich funnen werden."
+msgstr "De Gast %s kunn nich funnen worden."
 
 #: ../../../../src/network/gamehost.cc:163
 msgid "Wrong use, should be: /kick <name> <reason>"
@@ -3693,7 +3693,7 @@ msgstr "%s hett de Deel verlaten"
 
 #: ../../../../src/network/internet_gaming.cc:666
 msgid "Chat message could not be sent."
-msgstr "De Snack-Naricht kunn nich schickt werden."
+msgstr "De Snack-Naricht kunn nich schickt worden."
 
 #: ../../../../src/network/internet_gaming.cc:674
 msgid "Command could not be executed."
@@ -3715,12 +3715,12 @@ msgstr "Hebb een unbekannten Befehl vum Metaserver kregen: %s"
 
 #: ../../../../src/network/internet_gaming.cc:859
 msgid "Message could not be sent: You are not connected to the metaserver!"
-msgstr "De Naricht kunn nich schickt werden, wiel du nich mit de Metaserver verbunnen büst!"
+msgstr "De Naricht kunn nich schickt worden, wiel du nich mit de Metaserver verbunnen büst!"
 
 #: ../../../../src/network/internet_gaming.cc:879
 #: ../../../../src/network/internet_gaming.cc:887
 msgid "Message could not be sent: Was this supposed to be a private message?"
-msgstr "De Naricht kunn nich schickt werden: Sull dat eene persöönlike Naricht wesen?"
+msgstr "De Naricht kunn nich schickt worden: Sull dat eene persöönlike Naricht wesen?"
 
 #: ../../../../src/network/internet_gaming.cc:902
 msgid "Supported admin commands:"
@@ -5029,14 +5029,14 @@ msgstr "Verwiederns mit Fehlers mit de Ofhangens warken villicht nich as se sall
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
-msgstr "Dat Verwiedern »%1$s« kann nich upladen werden, denn siene Versioon (%2$s) is nich nejer as de Versioon up de Server (%3$s)."
+msgstr "Dat Verwiedern »%1$s« kann nich upladen worden, denn siene Versioon (%2$s) is nich nejer as de Versioon up de Server (%3$s)."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1921
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
-msgstr "Dat Verwiedern »%1$s« kann nich upladen werden, denn sien Deel (%2$s) is anners as siene Deel up de Server (%3$s)."
+msgstr "Dat Verwiedern »%1$s« kann nich upladen worden, denn sien Deel (%2$s) is anners as siene Deel up de Server (%3$s)."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1932
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:54
@@ -7959,7 +7959,7 @@ msgstr "Panzersmee"
 
 #: ../../../../src/wlapplication_options.cc:213
 msgid "Weaving Mill"
-msgstr "Spinnweelmöhlen"
+msgstr "Weevstohl"
 
 #: ../../../../src/wlapplication_options.cc:214
 msgid "Shipyard"
