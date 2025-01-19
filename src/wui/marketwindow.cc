@@ -148,11 +148,12 @@ private:
 			return;
 		}
 
-		Widelands::Trade trade;
+		Widelands::TradeInstance trade;
 		trade.items_to_send = offer_->get_selection();
 		trade.items_to_receive = demand_->get_selection();
 		trade.num_batches = batches_.get_value();
 		trade.initiator = market_;
+		trade.sending_player = iplayer_.player_number();
 		trade.receiving_player = player_.get_selected()->player_number();
 
 		iplayer_.game().send_player_propose_trade(trade);
@@ -315,8 +316,8 @@ public:
 		if (other_market == nullptr) {
 			return;
 		}
-		const Widelands::TradeAgreement& agreement = ibase_.game().get_trade(trade_id_);
-		const bool is_receiver = agreement.trade.initiator == other_market;
+		const Widelands::TradeInstance& agreement = ibase_.game().get_trade(trade_id_);
+		const bool is_receiver = agreement.initiator == other_market;
 
 		std::string infotext("<rt><p>");
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading,
@@ -347,7 +348,7 @@ public:
 		infotext += as_font_tag(
 		   UI::FontStyle::kWuiInfoPanelHeading, can_act_ ? _("You send:") : _("Player sends:"));
 		for (const auto& pair :
-		     is_receiver ? agreement.trade.items_to_receive : agreement.trade.items_to_send) {
+		     is_receiver ? agreement.items_to_receive : agreement.items_to_send) {
 			infotext += as_listitem(
 			   format_l(_("%1$i× %2$s"), pair.second,
 			            ibase_.egbase().descriptions().get_ware_descr(pair.first)->descname()),
@@ -360,7 +361,7 @@ public:
 		infotext += as_font_tag(
 		   UI::FontStyle::kWuiInfoPanelHeading, can_act_ ? _("You receive:") : _("Player receives:"));
 		for (const auto& pair :
-		     is_receiver ? agreement.trade.items_to_send : agreement.trade.items_to_receive) {
+		     is_receiver ? agreement.items_to_send : agreement.items_to_receive) {
 			infotext += as_listitem(
 			   format_l(_("%1$i× %2$s"), pair.second,
 			            ibase_.egbase().descriptions().get_ware_descr(pair.first)->descname()),

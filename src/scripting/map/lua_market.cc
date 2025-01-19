@@ -106,18 +106,22 @@ int LuaMarket::propose_trade(lua_State* L) {
 	if (lua_gettop(L) != 5) {
 		report_error(L, "Takes 4 arguments.");
 	}
+
+	Widelands::TradeInstance trade;
 	Widelands::Game& game = get_game(L);
 	Widelands::Market* self = get(L, game);
-	Widelands::Player& other_player = (*get_user_class<LuaGame::LuaPlayer>(L, 2))->get(L, game);
-	const int num_batches = luaL_checkinteger(L, 3);
 
-	const Widelands::BillOfMaterials items_to_send =
+	trade.initiator = self;
+	trade.sending_player = self->owner().player_number();
+	trade.receiving_player = (*get_user_class<LuaGame::LuaPlayer>(L, 2))->get(L, game).player_number();
+
+	trade.num_batches = luaL_checkinteger(L, 3);
+	trade.items_to_send =
 	   parse_wares_as_bill_of_material(L, 4, self->owner().tribe());
-	const Widelands::BillOfMaterials items_to_receive =
+	trade.items_to_receive =
 	   parse_wares_as_bill_of_material(L, 5, self->owner().tribe());
-	const Widelands::TradeID trade_id = game.propose_trade(Widelands::Trade{
-	   items_to_send, items_to_receive, num_batches, self, other_player.player_number()});
 
+	const Widelands::TradeID trade_id = game.propose_trade(trade);
 	lua_pushint32(L, trade_id);
 	return 1;
 }

@@ -2187,7 +2187,7 @@ void CmdSetStockPolicy::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSa
 }
 
 // CmdProposeTrade
-CmdProposeTrade::CmdProposeTrade(const Time& time, PlayerNumber pn, const Trade& trade)
+CmdProposeTrade::CmdProposeTrade(const Time& time, PlayerNumber pn, const TradeInstance& trade)
    : PlayerCommand(time, pn), trade_(trade), initiator_(trade.initiator.serial()) {
 }
 
@@ -2219,7 +2219,9 @@ void CmdProposeTrade::execute(Game& game) {
 }
 
 CmdProposeTrade::CmdProposeTrade(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+	trade_.state = static_cast<TradeInstance::State>(des.unsigned_8());
 	initiator_ = des.unsigned_32();
+	trade_.sending_player = des.unsigned_8();
 	trade_.receiving_player = des.unsigned_8();
 	trade_.items_to_send = deserialize_bill_of_materials(&des);
 	trade_.items_to_receive = deserialize_bill_of_materials(&des);
@@ -2228,7 +2230,9 @@ CmdProposeTrade::CmdProposeTrade(StreamRead& des) : PlayerCommand(Time(0), des.u
 
 void CmdProposeTrade::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
+	ser.unsigned_8(static_cast<uint8_t>(trade_.state));
 	ser.unsigned_32(initiator_);
+	ser.unsigned_8(trade_.sending_player);
 	ser.unsigned_8(trade_.receiving_player);
 	serialize_bill_of_materials(trade_.items_to_send, &ser);
 	serialize_bill_of_materials(trade_.items_to_receive, &ser);
@@ -2243,10 +2247,13 @@ void CmdProposeTrade::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader
 		if (packet_version == kCurrentPacketVersionCmdProposeTrade) {
 			PlayerCommand::read(fr, egbase, mol);
 
+			trade_.state = static_cast<TradeInstance::State>(fr.unsigned_8());
+
 			Serial s = fr.unsigned_32();
 			trade_.initiator = s == 0 ? nullptr : &mol.get<Market>(s);
 			initiator_ = trade_.initiator.serial();
 
+			trade_.sending_player = fr.unsigned_8();
 			trade_.receiving_player = fr.unsigned_8();
 			trade_.items_to_send = deserialize_bill_of_materials(&fr);
 			trade_.items_to_receive = deserialize_bill_of_materials(&fr);
@@ -2263,7 +2270,9 @@ void CmdProposeTrade::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader
 void CmdProposeTrade::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	fw.unsigned_8(kCurrentPacketVersionCmdProposeTrade);
 	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_8(static_cast<uint8_t>(trade_.state));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(initiator_)));
+	fw.unsigned_8(trade_.sending_player);
 	fw.unsigned_8(trade_.receiving_player);
 	serialize_bill_of_materials(trade_.items_to_send, &fw);
 	serialize_bill_of_materials(trade_.items_to_receive, &fw);

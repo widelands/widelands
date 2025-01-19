@@ -1188,7 +1188,7 @@ void Game::send_player_diplomacy(PlayerNumber p1, DiplomacyAction a, PlayerNumbe
 	send_player_command(new CmdDiplomacy(get_gametime(), p1, a, p2));
 }
 
-void Game::send_player_propose_trade(const Trade& trade) {
+void Game::send_player_propose_trade(const TradeInstance& trade) {
 	Market* object = trade.initiator.get(*this);
 	assert(object != nullptr);
 	send_player_command(
@@ -1232,7 +1232,7 @@ void Game::send_player_fleet_targets(PlayerNumber p, Serial i, Quantity q) {
 	send_player_command(new CmdFleetTargets(get_gametime(), p, i, q));
 }
 
-TradeID Game::propose_trade(const Trade& trade) {
+TradeID Game::propose_trade(TradeInstance trade) {
 	MutexLock m(MutexLock::ID::kObjects);
 	const TradeID id = next_trade_agreement_id_++;
 
@@ -1245,14 +1245,15 @@ TradeID Game::propose_trade(const Trade& trade) {
 		if (it == trade_agreements_.end()) {
 			return;
 		}
-		if (it->second.state == TradeAgreement::State::kProposed) {
+		if (it->second.state == TradeInstance::State::kProposed) {
 			retract_trade(id);
 		} else {
 			cancel_trade(id, false, initiating_player);
 		}
 	});
 
-	trade_agreements_[id] = TradeAgreement{TradeAgreement::State::kProposed, trade, 0U};
+	trade.state = TradeInstance::State::kProposed;
+	trade_agreements_[id] = trade;
 
 	get_safe_player(trade.receiving_player)
 	   ->add_message(*this, std::unique_ptr<Message>(new Message(
@@ -1269,11 +1270,11 @@ void Game::accept_trade(const TradeID trade_id, Market& receiver) {
 	MutexLock m(MutexLock::ID::kObjects);
 
 	auto it = trade_agreements_.find(trade_id);
-	if (it == trade_agreements_.end() || it->second.state != TradeAgreement::State::kProposed) {
+	if (it == trade_agreements_.end() || it->second.state != TradeInstance::State::kProposed) {
 		return;
 	}
 
-	const Trade& trade = it->second.trade;
+	const TradeInstance& trade = it->second;
 	Market* initiator = trade.initiator.get(*this);
 	if (initiator == nullptr) {
 		trade_agreements_.erase(it);
@@ -1287,7 +1288,7 @@ void Game::accept_trade(const TradeID trade_id, Market& receiver) {
 		cancel_trade(trade_id, false, receiving_player);
 	});
 	it->second.receiver = &receiver;
-	it->second.state = TradeAgreement::State::kRunning;
+	it->second.state = TradeInstance::State::kRunning;
 
 	initiator->new_trade(trade_id, trade.items_to_send, trade.num_batches, &receiver);
 	receiver.new_trade(trade_id, trade.items_to_receive, trade.num_batches, trade.initiator);
@@ -1303,11 +1304,11 @@ void Game::reject_trade(const TradeID trade_id) {
 	MutexLock m(MutexLock::ID::kObjects);
 
 	auto it = trade_agreements_.find(trade_id);
-	if (it == trade_agreements_.end() || it->second.state != TradeAgreement::State::kProposed) {
+	if (it == trade_agreements_.end() || it->second.state != TradeInstance::State::kProposed) {
 		return;
 	}
 
-	const Trade& trade = it->second.trade;
+	const TradeInstance& trade = it->second;
 	Market* initiator = trade.initiator.get(*this);
 	if (initiator != nullptr) {
 		initiator->send_message(
@@ -1325,11 +1326,11 @@ void Game::retract_trade(const TradeID trade_id) {
 	MutexLock m(MutexLock::ID::kObjects);
 
 	auto it = trade_agreements_.find(trade_id);
-	if (it == trade_agreements_.end() || it->second.state != TradeAgreement::State::kProposed) {
+	if (it == trade_agreements_.end() || it->second.state != TradeInstance::State::kProposed) {
 		return;
 	}
 
-	const Trade& trade = it->second.trade;
+	const TradeInstance& trade = it->second;
 	Market* initiator = trade.initiator.get(*this);
 
 	get_safe_player(trade.receiving_player)
@@ -1354,7 +1355,7 @@ void Game::cancel_trade(TradeID trade_id, bool reached_regular_end, const Player
 	if (it == trade_agreements_.end()) {
 		return;
 	}
-	const auto& trade = it->second.trade;
+	const TradeInstance& trade = it->second;
 
 	Market* initiator = trade.initiator.get(*this);
 	if (initiator != nullptr) {
@@ -1372,8 +1373,8 @@ void Game::cancel_trade(TradeID trade_id, bool reached_regular_end, const Player
 std::vector<TradeID> Game::find_trade_offers(PlayerNumber receiver) const {
 	std::vector<TradeID> result;
 	for (const auto& pair : trade_agreements_) {
-		if (pair.second.state == TradeAgreement::State::kProposed &&
-		    pair.second.trade.receiving_player == receiver) {
+		if (pair.second.state == TradeInstance::State::kProposed &&
+		    pair.second.receiving_player == receiver) {
 			result.push_back(pair.first);
 		}
 	}
@@ -1383,8 +1384,8 @@ std::vector<TradeID> Game::find_trade_offers(PlayerNumber receiver) const {
 std::vector<TradeID> Game::find_trade_proposals(PlayerNumber initiator) const {
 	std::vector<TradeID> result;
 	for (const auto& pair : trade_agreements_) {
-		if (pair.second.state == TradeAgreement::State::kProposed) {
-			if (Market* market = pair.second.trade.initiator.get(*this);
+		if (pair.second.state == TradeInstance::State::kProposed) {
+			if (Market* market = pair.second.initiator.get(*this);
 			    market != nullptr && market->owner().player_number() == initiator) {
 				result.push_back(pair.first);
 			}
@@ -1396,9 +1397,9 @@ std::vector<TradeID> Game::find_trade_proposals(PlayerNumber initiator) const {
 std::vector<TradeID> Game::find_active_trades(PlayerNumber player) const {
 	std::vector<TradeID> result;
 	for (const auto& pair : trade_agreements_) {
-		if (pair.second.state == TradeAgreement::State::kRunning) {
-			if (pair.second.trade.receiving_player != player) {
-				if (Market* market = pair.second.trade.initiator.get(*this);
+		if (pair.second.state == TradeInstance::State::kRunning) {
+			if (pair.second.receiving_player != player) {
+				if (Market* market = pair.second.initiator.get(*this);
 				    market == nullptr || market->owner().player_number() != player) {
 					continue;
 				}

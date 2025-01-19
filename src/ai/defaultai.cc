@@ -3390,12 +3390,12 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 	}
 
 	for (Widelands::TradeID trade_id : offers) {
-		const Widelands::TradeAgreement& offer = game().get_trade(trade_id);
-		assert(offer.trade.receiving_player == player_number());
+		const Widelands::TradeInstance& offer = game().get_trade(trade_id);
+		assert(offer.receiving_player == player_number());
 
 		int32_t send_cost = 0;
 		int32_t receive_preciousness = 0;
-		for (const auto& pair : offer.trade.items_to_send) {
+		for (const auto& pair : offer.items_to_send) {
 			// This is what the other player sends to us.
 			receive_preciousness += pair.second * game()
 			                                         .descriptions()
@@ -3407,7 +3407,7 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 			// Malus if we already have lots of it.
 			receive_preciousness -= calculate_stocklevel(pair.first, WareWorker::kWare);
 		}
-		for (const auto& pair : offer.trade.items_to_receive) {
+		for (const auto& pair : offer.items_to_receive) {
 			// This is what we pay to the other player.
 			send_cost += pair.second * game()
 			                              .descriptions()
@@ -3425,7 +3425,7 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 			std::multimap<uint32_t, const Widelands::Market*> candidates =
 			   game()
 			      .player(player_number())
-			      .get_markets(offer.trade.initiator.get(game())->get_position());
+			      .get_markets(offer.initiator.get(game())->get_position());
 			if (candidates.empty()) {
 				verb_log_dbg("AI %u: no market to accept trade #%u",
 				             static_cast<unsigned>(player_number()), trade_id);

@@ -29,23 +29,23 @@ namespace Widelands {
 
 class Market;
 
-struct Trade {
-	BillOfMaterials items_to_send;
-	BillOfMaterials items_to_receive;
-	int num_batches;
-	OPtr<Market> initiator;
-	PlayerNumber receiving_player;
-};
-
-struct TradeAgreement {
+struct TradeInstance {
 	enum class State : uint8_t {
 		kProposed = 0,
 		kRunning = 1,
 	};
 
-	State state;
-	Trade trade;
+	State state {State::kProposed};
+
+	PlayerNumber sending_player {0};
+	PlayerNumber receiving_player {0};
+
+	OPtr<Market> initiator;
 	OPtr<Market> receiver;
+
+	BillOfMaterials items_to_send;
+	BillOfMaterials items_to_receive;
+	int num_batches {0};
 };
 
 enum class TradeAction : uint8_t {

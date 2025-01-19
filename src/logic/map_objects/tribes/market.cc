@@ -111,7 +111,8 @@ void Market::TradeOrder::cleanup() {
 }
 
 std::string Market::market_census_string() const {
-	return named_building_census_string("⇵", get_market_name());
+	static const std::string fmt = "⇵&nbsp;%s&nbsp;⇵";
+	return named_building_census_string(fmt, get_market_name());
 }
 
 void Market::update_statistics_string(std::string* str) {

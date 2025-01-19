@@ -451,7 +451,7 @@ void LuaGame::push_trade(lua_State* L, Widelands::TradeID id) {
 		return;
 	}
 
-	const Widelands::TradeAgreement& trade = game.get_trade(id);
+	const Widelands::TradeInstance& trade = game.get_trade(id);
 	lua_newtable(L);
 
 	lua_pushstring(L, "trade_id");
@@ -460,11 +460,11 @@ void LuaGame::push_trade(lua_State* L, Widelands::TradeID id) {
 
 	lua_pushstring(L, "state");
 	lua_pushstring(
-	   L, trade.state == Widelands::TradeAgreement::State::kRunning ? "running" : "proposed");
+	   L, trade.state == Widelands::TradeInstance::State::kRunning ? "running" : "proposed");
 	lua_rawset(L, -3);
 
 	lua_pushstring(L, "initiator");
-	if (LuaMaps::upcasted_map_object_to_lua(L, trade.trade.initiator.get(game)) == 0) {
+	if (LuaMaps::upcasted_map_object_to_lua(L, trade.initiator.get(game)) == 0) {
 		lua_pushnil(L);
 	}
 	lua_rawset(L, -3);
@@ -476,16 +476,16 @@ void LuaGame::push_trade(lua_State* L, Widelands::TradeID id) {
 	lua_rawset(L, -3);
 
 	lua_pushstring(L, "receiving_player");
-	lua_pushuint32(L, trade.trade.receiving_player);
+	lua_pushuint32(L, trade.receiving_player);
 	lua_rawset(L, -3);
 
 	lua_pushstring(L, "num_batches");
-	lua_pushint32(L, trade.trade.num_batches);
+	lua_pushint32(L, trade.num_batches);
 	lua_rawset(L, -3);
 
 	lua_pushstring(L, "items_to_send");
 	lua_newtable(L);
-	for (const auto& ware_amount : trade.trade.items_to_send) {
+	for (const auto& ware_amount : trade.items_to_send) {
 		lua_pushstring(L, game.descriptions().get_ware_descr(ware_amount.first)->name().c_str());
 		lua_pushuint32(L, ware_amount.second);
 		lua_rawset(L, -3);
@@ -494,7 +494,7 @@ void LuaGame::push_trade(lua_State* L, Widelands::TradeID id) {
 
 	lua_pushstring(L, "items_to_receive");
 	lua_newtable(L);
-	for (const auto& ware_amount : trade.trade.items_to_receive) {
+	for (const auto& ware_amount : trade.items_to_receive) {
 		lua_pushstring(L, game.descriptions().get_ware_descr(ware_amount.first)->name().c_str());
 		lua_pushuint32(L, ware_amount.second);
 		lua_rawset(L, -3);

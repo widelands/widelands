@@ -929,7 +929,7 @@ private:
 };
 
 struct CmdProposeTrade : PlayerCommand {
-	CmdProposeTrade(const Time& time, PlayerNumber pn, const Trade& trade);
+	CmdProposeTrade(const Time& time, PlayerNumber pn, const TradeInstance& trade);
 
 	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kProposeTrade;
@@ -947,7 +947,7 @@ struct CmdProposeTrade : PlayerCommand {
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 private:
-	Trade trade_;
+	TradeInstance trade_;
 	Serial initiator_;
 };
 
