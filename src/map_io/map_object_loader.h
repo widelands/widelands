@@ -93,6 +93,20 @@ private:
 	std::vector<MapObject*> schedule_destroy_;
 	std::vector<Bob*> schedule_act_;
 };
+
+// Returns the serial number of the object with the given "object_index" as
+// registered by the mol. If object_index is zero (because the object that was
+// saved to the file did no longer exist on saving) zero will be returned. That
+// means that get_object will always return nullptr and all upcasts will fail -
+// so the commands will never do anything when executed.
+template <typename T>
+inline Serial get_object_serial_or_zero(uint32_t object_index, MapObjectLoader& mol) {
+	if (!object_index) {
+		return 0;
+	}
+	return mol.get<T>(object_index).serial();
+}
+
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_OBJECT_LOADER_H
