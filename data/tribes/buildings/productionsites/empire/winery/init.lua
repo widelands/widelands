@@ -10,12 +10,13 @@ wl.Descriptions():new_productionsite_type {
    size = "medium",
 
    buildcost = {
-      planks = 1,
-      granite = 1,
+      planks = 2,
+      granite = 2,
       marble = 2,
-      marble_column = 1
+      marble_column = 2
    },
    return_on_dismantle = {
+      planks = 1,
       granite = 1,
       marble = 1,
       marble_column = 1
