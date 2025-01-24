@@ -39,6 +39,7 @@
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/ship.h"
@@ -548,6 +549,11 @@ void DefaultAI::think() {
 			   gametime + kDiplomacyInterval + Duration(RNG::static_rand(30) * 1000),
 			   SchedulerTaskId::kDiplomacy);
 			break;
+		case SchedulerTaskId::kTrading:
+			trading_actions(gametime);
+			set_taskpool_task_time(gametime + kTradingInterval + Duration(RNG::static_rand(30) * 1000),
+			                       SchedulerTaskId::kTrading);
+			break;
 		default:
 			NEVER_HERE();
 		}
@@ -1023,10 +1029,22 @@ void DefaultAI::late_initialization() {
 			continue;
 		}
 
+		if (bld.type() == Widelands::MapObjectType::MARKET) {
+			bo.type = BuildingObserver::Type::kMarket;
+			continue;
+		}
+
 		if (bld.type() == Widelands::MapObjectType::CONSTRUCTIONSITE) {
 			bo.type = BuildingObserver::Type::kConstructionsite;
 			continue;
 		}
+
+		if (bld.type() == Widelands::MapObjectType::DISMANTLESITE) {
+			continue;
+		}
+
+		throw wexception(
+		   "AI does not support buildings of type %s", Widelands::to_string(bld.type()).c_str());
 	}
 
 	// Forester/Ranger
@@ -1154,6 +1172,10 @@ void DefaultAI::late_initialization() {
 	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(10 * 1000)),
 	                                                   SchedulerTaskId::kWarehouseFlagDist, 5,
 	                                                   "flag warehouse Update"));
+
+	taskPool.push_back(
+	   std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(10 * 60 * 1000)),
+	                                   SchedulerTaskId::kTrading, 5, "Trading tasks"));
 
 	if (game().diplomacy_allowed()) {
 		// don't do any diplomacy for the first 10 + x minutes to avoid click races for allies,
@@ -3055,6 +3077,11 @@ bool DefaultAI::construct_building(const Time& gametime) {
 				if ((bf->unowned_land_nearby != 0u) || (bf->enemy_owned_land_nearby != 0u)) {
 					prio -= 15;
 				}
+			} else if (bo.type == BuildingObserver::Type::kMarket) {
+				// TODO(Nordfriese): Make an intelligent decision here
+				if (bo.new_building == BuildingNecessity::kForced) {
+					prio += 200;
+				}
 			}
 
 			// think of space consuming buildings nearby like farms or vineyards
@@ -3335,6 +3362,86 @@ void DefaultAI::check_flag_distances(const Time& gametime) {
 
 	// Now let do some lazy pruning - remove the flags that were not updated for long
 	flag_warehouse_distance.remove_old_flag(gametime);
+}
+
+void DefaultAI::trading_actions(const Time& /*gametime*/) {
+	// TODO(Nordfriese): Rewrite this ultra-simplistic logic to account for actual preciousness of
+	// wares for us instead of static preciousness, and diplomatic relation to the offering player.
+	// TODO(Nordfriese): Implement actual handling of market buildings.
+
+	const std::vector<Widelands::TradeID> offers = game().find_trade_offers(player_number());
+	if (offers.empty()) {
+		return;
+	}
+
+	const EconomyObserver* arbitrary_economy = nullptr;
+	for (EconomyObserver* observer : economies) {
+		if (observer->economy.type() == Widelands::wwWARE && !observer->flags.empty()) {
+			if (arbitrary_economy == nullptr ||
+			    observer->flags.size() > arbitrary_economy->flags.size()) {
+				arbitrary_economy = observer;
+			}
+		}
+	}
+	if (arbitrary_economy == nullptr) {
+		verb_log_dbg(
+		   "AI %u: no economies, cannot review trade offers", static_cast<unsigned>(player_number()));
+		return;
+	}
+
+	for (Widelands::TradeID trade_id : offers) {
+		const Widelands::TradeInstance& offer = game().get_trade(trade_id);
+		assert(offer.receiving_player == player_number());
+
+		int32_t send_cost = 0;
+		int32_t receive_preciousness = 0;
+		for (const auto& pair : offer.items_to_send) {
+			// This is what the other player sends to us.
+			receive_preciousness += pair.second * game()
+			                                         .descriptions()
+			                                         .get_ware_descr(pair.first)
+			                                         ->ai_hints()
+			                                         .preciousness(tribe_->name());
+			// Bonus if we want to stockpile this ware.
+			receive_preciousness += arbitrary_economy->economy.target_quantity(pair.first).permanent;
+			// Malus if we already have lots of it.
+			receive_preciousness -= calculate_stocklevel(pair.first, WareWorker::kWare);
+		}
+		for (const auto& pair : offer.items_to_receive) {
+			// This is what we pay to the other player.
+			send_cost += pair.second * game()
+			                              .descriptions()
+			                              .get_ware_descr(pair.first)
+			                              ->ai_hints()
+			                              .preciousness(tribe_->name());
+			// Malus if we want to stockpile this ware.
+			send_cost += arbitrary_economy->economy.target_quantity(pair.first).permanent;
+			// Bonus if we have lots of it to spare.
+			send_cost -= calculate_stocklevel(pair.first, WareWorker::kWare);
+		}
+
+		if (receive_preciousness > send_cost) {
+			// The trade is advantageous, accept.
+			std::multimap<uint32_t, const Widelands::Market*> candidates =
+			   game().player(player_number()).get_markets(offer.initiator.get(game())->get_position());
+			if (candidates.empty()) {
+				verb_log_dbg("AI %u: no market to accept trade #%u",
+				             static_cast<unsigned>(player_number()), trade_id);
+			} else {
+				const Widelands::Market* select = candidates.begin()->second;
+				verb_log_dbg("AI %u: accepting trade #%u at %s", static_cast<unsigned>(player_number()),
+				             trade_id, select->get_market_name().c_str());
+				game().send_player_trade_action(
+				   player_number(), trade_id, Widelands::TradeAction::kAccept, select->serial());
+			}
+		} else {
+			// The trade is not advantageous, reject.
+			verb_log_dbg(
+			   "AI %u: rejecting trade #%u", static_cast<unsigned>(player_number()), trade_id);
+			game().send_player_trade_action(
+			   player_number(), trade_id, Widelands::TradeAction::kReject, 0);
+		}
+	}
 }
 
 // Dealing with diplomacy actions
@@ -8085,7 +8192,8 @@ void DefaultAI::pre_calculating_needness_of_buildings(const Time& gametime) {
 
 		} else if (bo.type == BuildingObserver::Type::kMilitarysite) {
 			bo.new_building = check_building_necessity(bo, gametime);
-		} else if (bo.type == BuildingObserver::Type::kTrainingsite) {
+		} else if (bo.type == BuildingObserver::Type::kTrainingsite ||
+		           bo.type == BuildingObserver::Type::kMarket) {
 			bo.new_building = check_building_necessity(bo, PerfEvaluation::kForConstruction, gametime);
 		} else if (bo.type == BuildingObserver::Type::kWarehouse) {
 			bo.new_building = check_warehouse_necessity(bo, gametime);

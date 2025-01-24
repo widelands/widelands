@@ -31,7 +31,6 @@
 #include "economy/ship_fleet.h"
 #include "economy/warehousesupply.h"
 #include "economy/wares_queue.h"
-#include "graphic/text_layout.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/findbob.h"
@@ -556,7 +555,9 @@ bool Warehouse::init(EditorGameBase& egbase) {
 	Player* player = get_owner();
 
 	init_containers(*player);
-	warehouse_name_ = player->pick_warehousename(descr().get_isport());
+	warehouse_name_ =
+	   player->pick_warehousename(descr().get_isport() ? Player::WarehouseNameType::kPort :
+	                                                     Player::WarehouseNameType::kWarehouse);
 
 	set_seeing(true);
 
@@ -1534,14 +1535,8 @@ std::string Warehouse::warehouse_census_string() const {
 	} else {
 		icon_format = wh_fmt;
 	}
-	std::string name = get_warehouse_name();
-	if (name.empty()) {
-		name = descr().descname();
-		// See explanation in set_warehouse_name().
-		// Needed because of e.g. Temple of Vesta in emp04
-		replace_all(name, " ", " ");
-	}
-	return format(icon_format, richtext_escape(name));
+
+	return named_building_census_string(icon_format, get_warehouse_name());
 }
 
 void Warehouse::update_statistics_string(std::string* str) {

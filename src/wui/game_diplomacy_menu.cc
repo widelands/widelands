@@ -20,9 +20,12 @@
 
 #include "base/time_string.h"
 #include "graphic/font_handler.h"
+#include "graphic/text_layout.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
+#include "ui_basic/multilinetextarea.h"
 #include "wui/actionconfirm.h"
 #include "wui/interactive_player.h"
 
@@ -50,7 +53,14 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
      actions_vbox_yes_(
         &actions_hbox_, UI::PanelStyle::kWui, "actions_yes_vbox", 0, 0, UI::Box::Vertical),
      actions_vbox_no_(
-        &actions_hbox_, UI::PanelStyle::kWui, "actions_no_vbox", 0, 0, UI::Box::Vertical) {
+        &actions_hbox_, UI::PanelStyle::kWui, "actions_no_vbox", 0, 0, UI::Box::Vertical),
+     trades_tabs_(&diplomacy_box_, UI::TabPanelStyle::kWuiLight, "trades"),
+     trades_box_offers_(
+        &trades_tabs_, UI::PanelStyle::kWui, "trades_offers", 0, 0, UI::Box::Vertical),
+     trades_box_proposed_(
+        &trades_tabs_, UI::PanelStyle::kWui, "trades_proposed", 0, 0, UI::Box::Vertical),
+     trades_box_active_(
+        &trades_tabs_, UI::PanelStyle::kWui, "trades_active", 0, 0, UI::Box::Vertical) {
 
 	const bool rtl = UI::g_fh->fontset()->is_rtl();
 	const bool show_all_players =
@@ -167,15 +177,43 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 	actions_hbox_.add_space(kSpacing);
 	actions_hbox_.add(&actions_vbox_no_, UI::Box::Resizing::kFullSize);
 
+	trades_tabs_.add(
+	   "active", "", &trades_box_offers_, _("Trade offers you have received from other players"));
+	trades_tabs_.add(
+	   "active", "", &trades_box_proposed_, _("Trades you have proposed to other players"));
+	trades_tabs_.add("active", "", &trades_box_active_, _("Your active trade agreements"));
+
 	diplomacy_box_.add(&hbox_, UI::Box::Resizing::kExpandBoth);
 	diplomacy_box_.add_space(kSpacing);
 	diplomacy_box_.add(&actions_hbox_, UI::Box::Resizing::kExpandBoth);
 
-	update_diplomacy_details();
+	if (iplayer_ != nullptr) {
+		diplomacy_box_.add_space(kSpacing);
+		diplomacy_box_.add(&trades_tabs_, UI::Box::Resizing::kExpandBoth);
+	} else {
+		trades_tabs_.set_visible(false);
+	}
+
+	update(true);
 	set_center_panel(&diplomacy_box_);
 	if (get_usedefaultpos()) {
 		center_to_parent();
 	}
+	initialization_complete();
+}
+
+void GameDiplomacyMenu::update(bool always) {
+	update_diplomacy_details();
+
+	if (iplayer_ != nullptr) {
+		update_trades_offers(always);
+		update_trades_proposed(always);
+		update_trades_active(always);
+	}
+}
+
+void GameDiplomacyMenu::think() {
+	update(false);
 	initialization_complete();
 }
 
@@ -248,10 +286,7 @@ void GameDiplomacyMenu::update_diplomacy_details() {
 	cached_diplomacy_actions_ = new_list;
 
 	for (UI::Box* box : {&actions_vbox_descr_, &actions_vbox_yes_, &actions_vbox_no_}) {
-		while (box->get_first_child() != nullptr) {
-			delete box->get_first_child();
-		}
-		box->clear();
+		box->delete_all_children();
 	}
 	unsigned index = 0;
 	for (const Widelands::Game::PendingDiplomacyAction& pda : cached_diplomacy_actions_) {
@@ -339,11 +374,364 @@ void GameDiplomacyMenu::update_diplomacy_details() {
 
 		++index;
 	}
-	initialization_complete();
 }
 
-void GameDiplomacyMenu::think() {
-	update_diplomacy_details();
+void GameDiplomacyMenu::update_trades_offers(bool always) {
+	const std::vector<Widelands::TradeID> trades =
+	   iplayer_->game().find_trade_offers(iplayer_->player_number());
+
+	if (!always && trades == cached_trades_offers_) {
+		return;
+	}
+
+	trades_tabs_.tabs()[0]->set_title(format(_("Trade Offers (%u)"), trades.size()));
+
+	cached_trades_offers_ = trades;
+	trades_box_offers_.delete_all_children();
+
+	if (trades.empty()) {
+		UI::MultilineTextarea* txt = new UI::MultilineTextarea(
+		   &trades_box_offers_, "text", 0, 0, 0, 0, UI::PanelStyle::kWui, std::string(),
+		   UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
+		   UI::MultilineTextarea::ScrollMode::kNoScrolling);
+		txt->set_style(UI::FontStyle::kWuiInfoPanelParagraph);
+		txt->set_text(_("Nobody has offered you any trades at the moment."));
+		trades_box_offers_.add(txt, UI::Box::Resizing::kFullSize);
+		return;
+	}
+
+	MutexLock m(MutexLock::ID::kObjects);
+	for (Widelands::TradeID trade_id : trades) {
+		const Widelands::TradeInstance& trade = iplayer_->game().get_trade(trade_id);
+		const Widelands::Market* other_market = trade.initiator.get(iplayer_->egbase());
+		if (other_market == nullptr) {
+			continue;
+		}
+
+		UI::Box* box = new UI::Box(&trades_box_offers_, UI::PanelStyle::kWui,
+		                           format("offer_%u", trade_id), 0, 0, UI::Box::Horizontal);
+		UI::Box* buttons =
+		   new UI::Box(box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Horizontal);
+
+		UI::Dropdown<Widelands::Serial>* select_market = new UI::Dropdown<Widelands::Serial>(
+		   buttons, "select", 0, 0, 2 * kButtonWidth + kSpacing, 8, kRowSize, std::string(),
+		   UI::DropdownType::kTextual, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
+		select_market->set_tooltip(_("Market to accept the trade at"));
+
+		std::multimap<uint32_t, const Widelands::Market*> markets =
+		   iplayer_->player().get_markets(other_market->get_position());
+		for (auto it = markets.begin(); it != markets.end(); ++it) {
+			const bool first = it == markets.begin();
+			select_market->add(first ? format_l(_("%s (closest)"), it->second->get_market_name()) :
+			                           it->second->get_market_name(),
+			                   it->second->serial(), it->second->descr().icon(), first,
+			                   format_l(ngettext("%1$s (distance: %2$u field)",
+			                                     "%1$s (distance: %2$u fields)", it->first),
+			                            it->second->get_market_name(), it->first));
+		}
+
+		UI::Button* yes = new UI::Button(
+		   buttons, "yes", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
+		   g_image_cache->get("images/wui/menu_okay.png"), _("Accept this trade offer"));
+		UI::Button* no = new UI::Button(
+		   buttons, "no", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
+		   g_image_cache->get("images/wui/menu_abort.png"), _("Reject this trade offer"));
+
+		if (select_market->empty()) {
+			yes->set_enabled(false);
+			yes->set_tooltip(_("Build a market to accept trade offers."));
+		} else {
+			yes->sigclicked.connect([this, trade_id, select_market]() {
+				iplayer_->game().send_player_trade_action(iplayer_->player_number(), trade_id,
+				                                          Widelands::TradeAction::kAccept,
+				                                          select_market->get_selected());
+			});
+		}
+		no->sigclicked.connect([this, trade_id]() {
+			iplayer_->game().send_player_trade_action(
+			   iplayer_->player_number(), trade_id, Widelands::TradeAction::kReject, 0);
+		});
+
+		buttons->add(select_market, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		buttons->add_space(kSpacing);
+		buttons->add(no, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		buttons->add_space(kSpacing);
+		buttons->add(yes, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+
+		std::string infotext("<rt><p>");
+		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading,
+		                        format_l(_("Trade offer from %s"), other_market->owner().get_name()));
+
+		infotext += "</p><p>";
+		infotext += as_font_tag(
+		   UI::FontStyle::kWuiInfoPanelParagraph,
+		   format_l(ngettext("%d batch", "%d batches", trade.num_batches), trade.num_batches));
+
+		infotext += "</p>";
+		infotext += as_vspace(kSpacing);
+		infotext += "<p>";
+		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, _("You send:"));
+		for (const auto& pair : trade.items_to_receive) {
+			infotext += as_listitem(
+			   format_l(_("%1$i× %2$s"), pair.second,
+			            iplayer_->egbase().descriptions().get_ware_descr(pair.first)->descname()),
+			   UI::FontStyle::kWuiInfoPanelParagraph);
+		}
+
+		infotext += "</p>";
+		infotext += as_vspace(kSpacing);
+		infotext += "<p>";
+		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, _("You receive:"));
+		for (const auto& pair : trade.items_to_send) {
+			infotext += as_listitem(
+			   format_l(_("%1$i× %2$s"), pair.second,
+			            iplayer_->egbase().descriptions().get_ware_descr(pair.first)->descname()),
+			   UI::FontStyle::kWuiInfoPanelParagraph);
+		}
+		infotext += "</p></rt>";
+
+		box->add(new UI::MultilineTextarea(
+		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui, infotext,
+		            UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
+		            UI::MultilineTextarea::ScrollMode::kNoScrolling),
+		         UI::Box::Resizing::kExpandBoth);
+		box->add_space(kSpacing);
+		box->add(buttons, UI::Box::Resizing::kAlign, UI::Align::kTop);
+		trades_box_offers_.add(box, UI::Box::Resizing::kExpandBoth);
+		trades_box_offers_.add_space(kSpacing);
+	}
+}
+
+void GameDiplomacyMenu::update_trades_proposed(bool always) {
+	const std::vector<Widelands::TradeID> trades =
+	   iplayer_->game().find_trade_proposals(iplayer_->player_number());
+	if (!always && trades == cached_trades_proposed_) {
+		return;
+	}
+
+	trades_tabs_.tabs()[1]->set_title(format(_("Proposed Trades (%u)"), trades.size()));
+
+	cached_trades_proposed_ = trades;
+	trades_box_proposed_.delete_all_children();
+
+	if (trades.empty()) {
+		UI::MultilineTextarea* txt = new UI::MultilineTextarea(
+		   &trades_box_proposed_, "text", 0, 0, 0, 0, UI::PanelStyle::kWui, std::string(),
+		   UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
+		   UI::MultilineTextarea::ScrollMode::kNoScrolling);
+		txt->set_style(UI::FontStyle::kWuiInfoPanelParagraph);
+		txt->set_text(_("There are no pending trade proposals at the moment. You can propose a new "
+		                "trade from a market."));
+		trades_box_proposed_.add(txt, UI::Box::Resizing::kFullSize);
+		return;
+	}
+
+	MutexLock m(MutexLock::ID::kObjects);
+	for (Widelands::TradeID trade_id : trades) {
+		const Widelands::TradeInstance& trade = iplayer_->game().get_trade(trade_id);
+		const Widelands::Player& other_player = iplayer_->egbase().player(trade.receiving_player);
+		const Widelands::Market* market = trade.initiator.get(iplayer_->egbase());
+		if (market == nullptr) {
+			continue;
+		}
+
+		UI::Box* box = new UI::Box(&trades_box_proposed_, UI::PanelStyle::kWui,
+		                           format("proposal_%u", trade_id), 0, 0, UI::Box::Horizontal);
+		UI::Box* buttons =
+		   new UI::Box(box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Horizontal);
+
+		UI::Button* go_to = new UI::Button(
+		   buttons, "go_to", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
+		   g_image_cache->get("images/wui/menus/goto.png"), _("Center view on this market"));
+		UI::Button* cancel = new UI::Button(
+		   buttons, "cancel", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
+		   g_image_cache->get("images/wui/menu_abort.png"), _("Retract this trade offer"));
+
+		go_to->sigclicked.connect([this, market]() {
+			iplayer_->map_view()->scroll_to_field(market->get_position(), MapView::Transition::Smooth);
+		});
+		cancel->sigclicked.connect([this, trade_id]() {
+			iplayer_->game().send_player_trade_action(
+			   iplayer_->player_number(), trade_id, Widelands::TradeAction::kRetract, 0);
+		});
+
+		buttons->add(cancel, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		buttons->add_space(kSpacing);
+		buttons->add(go_to, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+
+		std::string infotext("<rt><p>");
+		infotext += as_font_tag(
+		   UI::FontStyle::kWuiInfoPanelHeading,
+		   format_l(
+		      /** TRANSLATORS: "From" is the market's name, and "to" is the receiving player's name */
+		      _("Trade offer from %1$s to %2$s"), market->get_market_name(),
+		      other_player.get_name()));
+
+		infotext += "</p><p>";
+		infotext += as_font_tag(
+		   UI::FontStyle::kWuiInfoPanelParagraph,
+		   format_l(ngettext("%d batch", "%d batches", trade.num_batches), trade.num_batches));
+
+		infotext += "</p>";
+		infotext += as_vspace(kSpacing);
+		infotext += "<p>";
+		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, _("You send:"));
+		for (const auto& pair : trade.items_to_send) {
+			infotext += as_listitem(
+			   format_l(_("%1$i× %2$s"), pair.second,
+			            iplayer_->egbase().descriptions().get_ware_descr(pair.first)->descname()),
+			   UI::FontStyle::kWuiInfoPanelParagraph);
+		}
+
+		infotext += "</p>";
+		infotext += as_vspace(kSpacing);
+		infotext += "<p>";
+		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, _("You receive:"));
+		for (const auto& pair : trade.items_to_receive) {
+			infotext += as_listitem(
+			   format_l(_("%1$i× %2$s"), pair.second,
+			            iplayer_->egbase().descriptions().get_ware_descr(pair.first)->descname()),
+			   UI::FontStyle::kWuiInfoPanelParagraph);
+		}
+		infotext += "</p></rt>";
+
+		box->add(new UI::MultilineTextarea(
+		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui, infotext,
+		            UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
+		            UI::MultilineTextarea::ScrollMode::kNoScrolling),
+		         UI::Box::Resizing::kExpandBoth);
+		box->add_space(kSpacing);
+		box->add(buttons, UI::Box::Resizing::kAlign, UI::Align::kTop);
+		trades_box_proposed_.add(box, UI::Box::Resizing::kExpandBoth);
+		trades_box_proposed_.add_space(kSpacing);
+	}
+}
+
+void GameDiplomacyMenu::update_trades_active(bool always) {
+	const std::vector<Widelands::TradeID> trades =
+	   iplayer_->game().find_active_trades(iplayer_->player_number());
+	if (!always && trades == cached_trades_active_) {
+		return;
+	}
+
+	trades_tabs_.tabs()[2]->set_title(format(_("Active Trades (%u)"), trades.size()));
+
+	cached_trades_active_ = trades;
+	trades_box_active_.delete_all_children();
+
+	if (trades.empty()) {
+		UI::MultilineTextarea* txt = new UI::MultilineTextarea(
+		   &trades_box_active_, "text", 0, 0, 0, 0, UI::PanelStyle::kWui, std::string(),
+		   UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
+		   UI::MultilineTextarea::ScrollMode::kNoScrolling);
+		txt->set_style(UI::FontStyle::kWuiInfoPanelParagraph);
+		txt->set_text(_("There are no active trade agreements at the moment."));
+		trades_box_active_.add(txt, UI::Box::Resizing::kFullSize);
+		return;
+	}
+
+	MutexLock m(MutexLock::ID::kObjects);
+	for (Widelands::TradeID trade_id : trades) {
+		const Widelands::TradeInstance& trade = iplayer_->game().get_trade(trade_id);
+
+		const Widelands::Market* own_market = trade.initiator.get(iplayer_->egbase());
+		const Widelands::Market* other_market = trade.receiver.get(iplayer_->egbase());
+
+		if (own_market == nullptr || other_market == nullptr) {
+			continue;
+		}
+
+		bool is_receiver = false;
+		if (trade.receiving_player == iplayer_->player_number()) {
+			std::swap(own_market, other_market);
+			is_receiver = true;
+		}
+
+		const int batches_sent = own_market->trade_orders().at(trade_id).num_shipped_batches;
+		assert(batches_sent == other_market->trade_orders().at(trade_id).num_shipped_batches);
+
+		UI::Box* box = new UI::Box(&trades_box_active_, UI::PanelStyle::kWui,
+		                           format("active_%u", trade_id), 0, 0, UI::Box::Horizontal);
+		UI::Box* buttons =
+		   new UI::Box(box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Horizontal);
+
+		UI::Button* go_to = new UI::Button(
+		   buttons, "go_to", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
+		   g_image_cache->get("images/wui/menus/goto.png"), _("Center view on this market"));
+		UI::Button* cancel = new UI::Button(
+		   buttons, "cancel", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
+		   g_image_cache->get("images/wui/menu_abort.png"), _("Cancel this trade agreement"));
+
+		go_to->sigclicked.connect([this, own_market]() {
+			iplayer_->map_view()->scroll_to_field(
+			   own_market->get_position(), MapView::Transition::Smooth);
+		});
+		cancel->sigclicked.connect([this, trade_id]() {
+			iplayer_->game().send_player_trade_action(
+			   iplayer_->player_number(), trade_id, Widelands::TradeAction::kCancel, 0);
+		});
+
+		buttons->add(cancel, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		buttons->add_space(kSpacing);
+		buttons->add(go_to, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+
+		std::string infotext("<rt><p>");
+		infotext += as_font_tag(
+		   UI::FontStyle::kWuiInfoPanelHeading,
+		   format_l(
+		      /** TRANSLATORS: "At" is the market's name, and "with" is the receiving player's name */
+		      _("Trade agreement at %1$s with %2$s"), own_market->get_market_name(),
+		      other_market->owner().get_name()));
+
+		infotext += "</p><p>";
+		infotext += as_font_tag(
+		   UI::FontStyle::kWuiInfoPanelParagraph,
+		   format_l(ngettext("%d batch", "%d batches", trade.num_batches), trade.num_batches));
+
+		infotext += "</p><p>";
+		infotext += as_font_tag(
+		   UI::FontStyle::kWuiInfoPanelParagraph,
+		   format_l(ngettext("%d batch sent", "%d batches sent", batches_sent), batches_sent));
+
+		infotext += "</p><p>";
+		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
+		                        format_l(ngettext("%d batch remaining", "%d batches remaining",
+		                                          trade.num_batches - batches_sent),
+		                                 trade.num_batches - batches_sent));
+
+		infotext += "</p>";
+		infotext += as_vspace(kSpacing);
+		infotext += "<p>";
+		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, _("You send:"));
+		for (const auto& pair : is_receiver ? trade.items_to_receive : trade.items_to_send) {
+			infotext += as_listitem(
+			   format_l(_("%1$i× %2$s"), pair.second,
+			            iplayer_->egbase().descriptions().get_ware_descr(pair.first)->descname()),
+			   UI::FontStyle::kWuiInfoPanelParagraph);
+		}
+
+		infotext += "</p>";
+		infotext += as_vspace(kSpacing);
+		infotext += "<p>";
+		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, _("You receive:"));
+		for (const auto& pair : is_receiver ? trade.items_to_send : trade.items_to_receive) {
+			infotext += as_listitem(
+			   format_l(_("%1$i× %2$s"), pair.second,
+			            iplayer_->egbase().descriptions().get_ware_descr(pair.first)->descname()),
+			   UI::FontStyle::kWuiInfoPanelParagraph);
+		}
+		infotext += "</p></rt>";
+
+		box->add(new UI::MultilineTextarea(
+		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui, infotext,
+		            UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
+		            UI::MultilineTextarea::ScrollMode::kNoScrolling),
+		         UI::Box::Resizing::kExpandBoth);
+		box->add_space(kSpacing);
+		box->add(buttons, UI::Box::Resizing::kAlign, UI::Align::kTop);
+		trades_box_active_.add(box, UI::Box::Resizing::kExpandBoth);
+		trades_box_active_.add_space(kSpacing);
+	}
 }
 
 void GameDiplomacyMenu::draw(RenderTarget& rt) {

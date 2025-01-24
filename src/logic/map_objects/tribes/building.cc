@@ -38,6 +38,7 @@
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
@@ -547,28 +548,55 @@ std::string Building::info_string(const InfoStringFormat& format) {
 	std::string result;
 	switch (format) {
 	case InfoStringFormat::kCensus:
-		if (descr().type() == MapObjectType::CONSTRUCTIONSITE) {
+		switch (descr().type()) {
+		case MapObjectType::CONSTRUCTIONSITE: {
 			upcast(ConstructionSite const, constructionsite, this);
 			result = constructionsite->building().descname();
-		} else if (descr().type() == MapObjectType::WAREHOUSE) {
+		} break;
+
+		case MapObjectType::WAREHOUSE: {
 			upcast(Warehouse const, warehouse, this);
 			result = warehouse->warehouse_census_string();
-		} else {
+		} break;
+
+		case MapObjectType::MARKET: {
+			upcast(Market const, market, this);
+			result = market->market_census_string();
+		} break;
+
+		default:
 			result = descr().descname();
+			break;
 		}
+
 		break;
+
 	case InfoStringFormat::kStatistics:
 		result = update_and_get_statistics_string();
 		break;
+
 	case InfoStringFormat::kTooltip:
 		if (upcast(ProductionSite const, productionsite, this)) {
 			result = productionsite->production_result();
 		}
 		break;
+
 	default:
 		NEVER_HERE();
 	}
+
 	return result;
+}
+
+std::string Building::named_building_census_string(const std::string& icon_fmt,
+                                                   std::string name) const {
+	if (name.empty()) {
+		name = descr().descname();
+		// See explanation in set_warehouse_name().
+		// Needed because of e.g. Temple of Vesta in emp04
+		replace_all(name, " ", " ");
+	}
+	return format(icon_fmt, richtext_escape(name));
 }
 
 InputQueue& Building::inputqueue(DescriptionIndex const wi,

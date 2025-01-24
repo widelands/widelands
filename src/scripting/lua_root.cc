@@ -27,6 +27,7 @@
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/production_program.h"
 #include "logic/map_objects/tribes/trainingsite.h"
@@ -87,15 +88,23 @@ const char LuaGame::className[] = "Game";
 const MethodType<LuaGame> LuaGame::Methods[] = {
    METHOD(LuaGame, launch_coroutine),
    METHOD(LuaGame, save),
+   METHOD(LuaGame, get_trade),
    {nullptr, nullptr},
 };
 const PropertyType<LuaGame> LuaGame::Properties[] = {
-   PROP_RO(LuaGame, real_speed),         PROP_RO(LuaGame, time),
-   PROP_RW(LuaGame, desired_speed),      PROP_RW(LuaGame, allow_saving),
-   PROP_RO(LuaGame, last_save_time),     PROP_RO(LuaGame, type),
-   PROP_RO(LuaGame, interactive_player), PROP_RO(LuaGame, scenario_difficulty),
-   PROP_RO(LuaGame, win_condition),      PROP_RO(LuaGame, win_condition_duration),
-   PROP_RW(LuaGame, allow_diplomacy),    PROP_RW(LuaGame, allow_naval_warfare),
+   PROP_RO(LuaGame, real_speed),
+   PROP_RO(LuaGame, time),
+   PROP_RW(LuaGame, desired_speed),
+   PROP_RW(LuaGame, allow_saving),
+   PROP_RO(LuaGame, last_save_time),
+   PROP_RO(LuaGame, type),
+   PROP_RO(LuaGame, interactive_player),
+   PROP_RO(LuaGame, scenario_difficulty),
+   PROP_RO(LuaGame, win_condition),
+   PROP_RO(LuaGame, win_condition_duration),
+   PROP_RW(LuaGame, allow_diplomacy),
+   PROP_RW(LuaGame, allow_naval_warfare),
+   PROP_RO(LuaGame, trades),
    {nullptr, nullptr, nullptr},
 };
 
@@ -302,6 +311,47 @@ int LuaGame::set_allow_naval_warfare(lua_State* L) {
 	return 0;
 }
 
+/* RST
+   .. attribute:: trades
+
+      .. versionadded:: 1.3
+
+      (RO) An :class:`array` of all proposed trade offers and ongoing trade agreements.
+
+      Each trade agreement is a :class:`table` with the following properties:
+
+      - **id** (:class:`integer`): The unique identifier for this trade.
+      - **state** (:class:`string`): Either ``"proposed"`` or ``"running"``.
+      - **initiator** (:class:`wl.map.Market`): The market that initiated this trade.
+      - **receiver** (:class:`wl.map.Market`): The market that receives this trade,
+         or :const:`nil` if the trade has not been accepted yet.
+      - **receiving_player** (:class:`integer`): The :attr:`wl.game.Player.number`
+         of the player who receives the trade.
+      - **items_to_send** (:class:`table`): A table of ware names to amounts of wares to send.
+      - **items_to_receive** (:class:`table`): A table of ware names to amounts of wares to receive.
+      - **num_batches** (:class:`integer`): The number of ware batches to exchange.
+
+      :see also: :meth:`get_trade`
+      :see also: :meth:`wl.map.Market.propose_trade`
+      :see also: :meth:`wl.map.Market.accept_trade`
+      :see also: :meth:`wl.game.Player.cancel_trade`
+      :see also: :meth:`wl.game.Player.reject_trade`
+      :see also: :meth:`wl.game.Player.retract_trade`
+*/
+int LuaGame::get_trades(lua_State* L) {
+	Widelands::Game& game = get_game(L);
+	lua_newtable(L);
+
+	unsigned index = 1;
+	for (const auto& pair : game.all_trade_agreements()) {
+		lua_pushuint32(L, index++);
+		push_trade(L, pair.first);
+		lua_rawset(L, -3);
+	}
+
+	return 1;
+}
+
 /*
  ==========================================================
  LUA METHODS
@@ -366,11 +416,91 @@ int LuaGame::save(lua_State* L) {
 	return 0;
 }
 
+/* RST
+   .. method:: get_trade(id)
+
+      .. versionadded:: 1.3
+
+      Get a table containing information about the trade proposal or agreement with the
+      provided unique ID.
+
+      See :attr:`trades` for information on the table structure.
+
+      If no trade with the provided ID exists, :const:`nil` is returned.
+
+      :arg id: Unique ID of the trade to look up.
+      :type id: :class:`integer`
+
+      :see also: :attr:`trades`
+*/
+int LuaGame::get_trade(lua_State* L) {
+	push_trade(L, luaL_checkinteger(L, 2));
+	return 1;
+}
+
 /*
  ==========================================================
  C METHODS
  ==========================================================
  */
+
+void LuaGame::push_trade(lua_State* L, Widelands::TradeID id) {
+	Widelands::Game& game = get_game(L);
+	if (!game.has_trade(id)) {
+		lua_pushnil(L);
+		return;
+	}
+
+	const Widelands::TradeInstance& trade = game.get_trade(id);
+	lua_newtable(L);
+
+	lua_pushstring(L, "trade_id");
+	lua_pushuint32(L, id);
+	lua_rawset(L, -3);
+
+	lua_pushstring(L, "state");
+	lua_pushstring(
+	   L, trade.state == Widelands::TradeInstance::State::kRunning ? "running" : "proposed");
+	lua_rawset(L, -3);
+
+	lua_pushstring(L, "initiator");
+	if (LuaMaps::upcasted_map_object_to_lua(L, trade.initiator.get(game)) == 0) {
+		lua_pushnil(L);
+	}
+	lua_rawset(L, -3);
+
+	lua_pushstring(L, "receiver");
+	if (LuaMaps::upcasted_map_object_to_lua(L, trade.receiver.get(game)) == 0) {
+		lua_pushnil(L);
+	}
+	lua_rawset(L, -3);
+
+	lua_pushstring(L, "receiving_player");
+	lua_pushuint32(L, trade.receiving_player);
+	lua_rawset(L, -3);
+
+	lua_pushstring(L, "num_batches");
+	lua_pushint32(L, trade.num_batches);
+	lua_rawset(L, -3);
+
+	lua_pushstring(L, "items_to_send");
+	lua_newtable(L);
+	for (const auto& ware_amount : trade.items_to_send) {
+		lua_pushstring(L, game.descriptions().get_ware_descr(ware_amount.first)->name().c_str());
+		lua_pushuint32(L, ware_amount.second);
+		lua_rawset(L, -3);
+	}
+	lua_rawset(L, -3);
+
+	lua_pushstring(L, "items_to_receive");
+	lua_newtable(L);
+	for (const auto& ware_amount : trade.items_to_receive) {
+		lua_pushstring(L, game.descriptions().get_ware_descr(ware_amount.first)->name().c_str());
+		lua_pushuint32(L, ware_amount.second);
+		lua_rawset(L, -3);
+	}
+	lua_rawset(L, -3);
+}
 
 /* RST
 Editor

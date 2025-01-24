@@ -19,32 +19,40 @@
 #ifndef WL_LOGIC_TRADE_AGREEMENT_H
 #define WL_LOGIC_TRADE_AGREEMENT_H
 
+#include <cstdint>
+#include <limits>
+
 #include "logic/map_objects/tribes/bill_of_materials.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 
-// TODO(sirver,trading): Document everything in here.
+class Market;
 
-// Maximum number of a single ware that can be contained in a trade batch.
-constexpr int kMaxPerItemTradeBatchSize = 15;
-
-struct Trade {
-	BillOfMaterials items_to_send;
-	BillOfMaterials items_to_receive;
-	int num_batches;
-	Serial initiator;
-	Serial receiver;
-};
-
-// TODO(sirver,trading): This class should probably be private to 'Game'.
-struct TradeAgreement {
-	enum class State {
-		kProposed,
-		kRunning,
+struct TradeInstance {
+	enum class State : uint8_t {
+		kProposed = 0,
+		kRunning = 1,
 	};
 
-	State state;
-	Trade trade;
+	State state{State::kProposed};
+
+	PlayerNumber sending_player{0};
+	PlayerNumber receiving_player{0};
+
+	OPtr<Market> initiator;
+	OPtr<Market> receiver;
+
+	BillOfMaterials items_to_send;
+	BillOfMaterials items_to_receive;
+	int num_batches{0};
+};
+
+enum class TradeAction : uint8_t {
+	kCancel = 0,
+	kAccept = 1,
+	kReject = 2,
+	kRetract = 3,
 };
 
 }  // namespace Widelands
