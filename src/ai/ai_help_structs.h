@@ -462,8 +462,8 @@ using FlagOPtr = Widelands::OPtr<Widelands::Flag>;
 struct EconomyObserver {
 	explicit EconomyObserver(const Widelands::Economy& e);
 
-	const Widelands::Serial economy_serial;
-	const Widelands::WareWorker economy_type;
+	Widelands::Serial economy_serial;    // should be const, but then deque.erase() doesn't work
+	Widelands::WareWorker economy_type;  // should be const, but then deque.erase() doesn't work
 	std::deque<FlagOPtr> flags;
 	Time dismantle_grace_time;
 	Time fields_block_last_time;
