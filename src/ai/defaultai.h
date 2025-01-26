@@ -282,7 +282,7 @@ private:
 	void consider_ally_sites(Widelands::FCoords, BuildableField&);
 	void consider_own_msites(Widelands::FCoords, BuildableField&, bool&);
 
-	EconomyObserver* get_economy_observer(Widelands::Economy&);
+	EconomyObserver* get_economy_observer(const Widelands::Economy& economy);
 	uint8_t count_buildings_with_attribute(BuildingAttribute);
 	uint32_t count_productionsites_without_buildings();
 	BuildingObserver& get_building_observer(char const*);
@@ -306,7 +306,7 @@ private:
 	template <typename T> void check_range(T, T, const char*);
 
 	// Remove a member from std::deque
-	template <typename T> bool remove_from_dqueue(std::deque<T const*>&, T const*);
+	template <typename T> bool remove_from_dqueue(std::deque<T>&, T);
 
 	// finding and owner
 	Widelands::PlayerNumber get_land_owner(const Widelands::Map&, uint32_t) const;
@@ -350,7 +350,7 @@ private:
 	std::deque<MineableField*> mineable_fields;
 	std::deque<Widelands::Flag const*> new_flags;
 	std::deque<Widelands::Road const*> roads;
-	std::deque<EconomyObserver*> economies;
+	std::deque<EconomyObserver*> economies_;
 	std::deque<ProductionSiteObserver> productionsites;
 	std::deque<ProductionSiteObserver> mines_;
 	std::deque<ProductionSiteObserver> shipyardsites;

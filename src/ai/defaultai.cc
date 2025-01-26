@@ -214,9 +214,9 @@ DefaultAI::~DefaultAI() {
 		mineable_fields.pop_back();
 	}
 
-	while (!economies.empty()) {
-		delete economies.back();
-		economies.pop_back();
+	while (!economies_.empty()) {
+		delete economies_.back();
+		economies_.pop_back();
 	}
 }
 
@@ -361,9 +361,7 @@ void DefaultAI::think() {
 			   gametime + kMinMFCheckInterval, SchedulerTaskId::kMineableFieldsCheck);
 			break;
 		case SchedulerTaskId::kRoadCheck:
-			if (check_economies()) {  // is a must
-				return;
-			}
+			check_economies();  // economies must be consistent
 			set_taskpool_task_time(gametime + Duration(1000), SchedulerTaskId::kRoadCheck);
 			// testing 5 roads
 			{
@@ -391,9 +389,7 @@ void DefaultAI::think() {
 			set_taskpool_task_time(gametime + Duration(10000), SchedulerTaskId::kProductionsitesStats);
 			break;
 		case SchedulerTaskId::kConstructBuilding:
-			if (check_economies()) {  // economies must be consistent
-				return;
-			}
+			check_economies();  // economies must be consistent
 			if (gametime < Time(15000)) {  // More frequent at the beginning of game
 				set_taskpool_task_time(gametime + Duration(2000), SchedulerTaskId::kConstructBuilding);
 			} else {
@@ -404,9 +400,7 @@ void DefaultAI::think() {
 			}
 			break;
 		case SchedulerTaskId::kCheckProductionsites:
-			if (check_economies()) {  // economies must be consistent
-				return;
-			}
+			check_economies();  // economies must be consistent
 			{
 				set_taskpool_task_time(
 				   gametime + Duration(15000), SchedulerTaskId::kCheckProductionsites);
@@ -438,9 +432,7 @@ void DefaultAI::think() {
 			}
 			break;
 		case SchedulerTaskId::kCheckMines:
-			if (check_economies()) {  // economies must be consistent
-				return;
-			}
+			check_economies();  // economies must be consistent
 			set_taskpool_task_time(gametime + Duration(15000), SchedulerTaskId::kCheckMines);
 			// checking 3 mines if possible
 			{
@@ -475,16 +467,12 @@ void DefaultAI::think() {
 			   gametime + Duration(25 * 1000), SchedulerTaskId::kCountMilitaryVacant);
 			break;
 		case SchedulerTaskId::kWareReview:
-			if (check_economies()) {  // economies must be consistent
-				return;
-			}
+			check_economies();  // economies must be consistent
 			set_taskpool_task_time(gametime + Duration(15 * 60 * 1000), SchedulerTaskId::kWareReview);
 			review_wares_targets(gametime);
 			break;
 		case SchedulerTaskId::kPrintStats:
-			if (check_economies()) {  // economies must be consistent
-				return;
-			}
+			check_economies();  // economies must be consistent
 			set_taskpool_task_time(gametime + Duration(10 * 60 * 1000), SchedulerTaskId::kPrintStats);
 			print_stats(gametime);
 			break;
@@ -3663,60 +3651,75 @@ bool DefaultAI::improve_roads(const Time& gametime) {
 		}
 	}
 	// now we rotate economies and flags to get one flag to go on with
-	if (economies.empty()) {
-		check_economies();
+	if (economies_.empty()) {
 		return false;
 	}
 
-	if (economies.size() >= 2) {  // rotating economies
-		economies.push_back(economies.front());
-		economies.pop_front();
+	// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
+	//                   ferries
+	// TODO(tothxa): it has to be done in create_shortcut_road(), then here we can probably
+	//               allow both kinds of economies
+	if (economies_.size() >= 2) {  // rotating economies
+		Widelands::Serial first_econ = economies_.front()->economy_serial;
+		do {
+			economies_.push_back(economies_.front());
+			economies_.pop_front();
+		} while(economies_.front()->economy_type != Widelands::wwWORKER &&
+		        economies_.front()->economy_serial != first_econ);
+		assert(economies_.front()->economy_type == Widelands::wwWORKER);
 	}
 
-	EconomyObserver* eco = economies.front();
+	EconomyObserver* eco = economies_.front();
 	if (eco->flags.empty()) {
-		check_economies();
-		return false;
+		// check_economies() was already called before improve_roads(),
+		// and it is supposed to remove economies without flags
+		throw(wexception("AI: improve_roads(): found economy observer without flags"));
 	}
+
 	if (eco->flags.size() > 1) {
-		eco->flags.push_back(eco->flags.front());
+		eco->flags.emplace_back(eco->flags.front());
 		eco->flags.pop_front();
 	}
 
-	const Widelands::Flag& flag = *eco->flags.front();
+	Widelands::Flag* flag = eco->flags.front().get(game());
+	if (flag == nullptr) {
+		// check_economies() should have removed it
+		log_warn("AI: improve_roads(): found inexistent flag in economy observer");
+		return false;
+	}
 
 	// now we test if it is dead end flag, if yes, destroying it
-	if (flag.is_dead_end() && flag.current_wares() == 0) {
-		game().send_player_bulldoze(*const_cast<Widelands::Flag*>(&flag));
+	if (flag->is_dead_end() && flag->current_wares() == 0) {
+		game().send_player_bulldoze(*flag);
 		eco->flags.pop_front();
 		return true;
 	}
 
 	bool is_warehouse = false;
-	if (Widelands::Building* b = flag.get_building()) {
+	if (Widelands::Building* b = flag->get_building(); b != nullptr) {
 		BuildingObserver& bo = get_building_observer(b->descr().name().c_str());
 		if (bo.type == BuildingObserver::Type::kWarehouse) {
 			is_warehouse = true;
 		}
 	}
-	const uint32_t flag_coords_hash = flag.get_position().hash();
+	const uint32_t flag_coords_hash = flag->get_position().hash();
 
 	if (flag_warehouse_distance.is_road_prohibited(flag_coords_hash, gametime)) {
 		return false;
 	}
-	// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
-	// ferries
-	const bool needs_warehouse = flag.get_economy(Widelands::wwWORKER)->warehouses().empty();
+
+	const Widelands::Economy* economy = player_->get_economy(eco->economy_serial);
+	const bool needs_warehouse = (economy != nullptr) && economy->warehouses().empty();
 
 	// when deciding if we attempt to build a road from here we use probability
 	uint16_t probability_score = 0;
-	if (flag.nr_of_roadbases() == 1) {
+	if (flag->nr_of_roadbases() == 1) {
 		probability_score += 20;
 	}
-	if (is_warehouse && flag.nr_of_roadbases() <= 3) {
+	if (is_warehouse && flag->nr_of_roadbases() <= 3) {
 		probability_score += 20;
 	}
-	probability_score += flag.current_wares() * 5;
+	probability_score += flag->current_wares() * 5;
 	if (needs_warehouse) {
 		probability_score += 500;
 	}
@@ -3726,7 +3729,7 @@ bool DefaultAI::improve_roads(const Time& gametime) {
 	}
 
 	if (RNG::static_rand(200) < probability_score) {
-		create_shortcut_road(flag, 14, gametime);
+		create_shortcut_road(*flag, 14, gametime);
 		return true;
 	}
 
@@ -4170,7 +4173,7 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 
 		// If it last attempt we also destroy the flag (with a building if any attached)
 		if (last_attempt_) {
-			remove_from_dqueue<Widelands::Flag>(eco->flags, &flag);
+			remove_from_dqueue<FlagOPtr>(eco->flags, FlagOPtr(const_cast<Widelands::Flag*>(&flag)));
 			game().send_player_bulldoze(*const_cast<Widelands::Flag*>(&flag));
 			dead_ends_check_ = true;
 			return true;
@@ -4260,44 +4263,92 @@ void DefaultAI::collect_nearflags(std::map<uint32_t, NearFlag>& nearflags,
  * \returns true, if something was changed.
  */
 bool DefaultAI::check_economies() {
+	// Small optimisation: New observers may get created at the end of economies_,
+	// but we don't need to re-check the flags we assign to them.
+	const Widelands::Serial last_old_serial = economies_.empty() ? 0 : economies_.back()->economy_serial;
+	assert(last_old_serial != 0 || economies_.empty());
+	Widelands::Serial previous_serial = 0;
+
+	size_t eco_size = economies_.size();
+
 	while (!new_flags.empty()) {
-		const Widelands::Flag& flag = *new_flags.front();
+		const Widelands::Flag* flag = new_flags.front();
+		const FlagOPtr flag_optr(const_cast<Widelands::Flag*>(flag));
 		new_flags.pop_front();
-		// TODO(Nordfriese): Someone must urgently update the code since the big economy splitting for
-		// the ferries
-		get_economy_observer(flag.economy(Widelands::wwWORKER))->flags.push_back(&flag);
+		get_economy_observer(flag->economy(Widelands::wwWORKER))->flags.push_back(flag_optr);
+		get_economy_observer(flag->economy(Widelands::wwWARE))->flags.push_back(flag_optr);
 	}
 
-	size_t eco_size = economies.size();
-	for (std::deque<EconomyObserver*>::iterator obs_iter = economies.begin();
-	     obs_iter != economies.end(); ++obs_iter) {
-		// check if any flag has changed its economy
-		std::deque<Widelands::Flag const*>& fl = (*obs_iter)->flags;
+	bool economies_changed = eco_size != economies_.size();
+	eco_size = economies_.size();
 
-		for (std::deque<Widelands::Flag const*>::iterator j = fl.begin(); j != fl.end();) {
-			if (&(*obs_iter)->economy != &(*j)->economy(Widelands::wwWORKER)) {
+	std::deque<EconomyObserver*>::iterator obs_iter = economies_.begin();
+	while (obs_iter != economies_.end() && previous_serial != last_old_serial) {
+		std::deque<FlagOPtr>& obs_flags = (*obs_iter)->flags;
+		const Widelands::WareWorker eco_type = (*obs_iter)->economy_type;
+		previous_serial = (*obs_iter)->economy_serial;
+		assert(previous_serial != 0);
+		const Widelands::Economy* eco = player_->get_economy(previous_serial);
+
+		if (eco == nullptr) {
+			// Economy is gone, reassign remaining flags to observers of their current economies.
+			while (!obs_flags.empty()) {
+				const Widelands::Flag* flag = obs_flags.front().get(game());
+				if (flag != nullptr) {
+					get_economy_observer(flag->economy(eco_type))->flags.emplace_back(obs_flags.front());
+				}
+				obs_flags.pop_front();
+			}
+
+			delete *obs_iter;
+			obs_iter = economies_.erase(obs_iter);
+			continue;
+		}
+
+		// check if any flag has changed its economy
+		auto fl_iter = obs_flags.begin();
+		while (fl_iter != obs_flags.end()) {
+			const Widelands::Flag* flag = fl_iter->get(game());
+			if (flag == nullptr) {
+				fl_iter = obs_flags.erase(fl_iter);
+				continue;
+			}
+
+			const Widelands::Economy* flag_eco = flag->get_economy(eco_type);
+			assert(flag_eco != nullptr);
+
+			if (eco->serial() != flag_eco->serial()) {
 				// the flag belongs to other economy so we must assign it there
-				get_economy_observer((*j)->economy(Widelands::wwWORKER))->flags.push_back(*j);
+				get_economy_observer(*flag_eco)->flags.push_back(*fl_iter);
+
 				// and erase from this economy's observer
-				j = fl.erase(j);
-				if (eco_size != economies.size()) {
-					// economies was modified, so obs_iter is invalid now.
-					return true;
+				fl_iter = obs_flags.erase(fl_iter);
+
+				if (eco_size != economies_.size()) {
+					economies_changed = true;
+					eco_size = economies_.size();
+
+					// economies_ was modified, but the new economy observer was pushed to the back,
+					// so obs_iter should still be valid.
+					// We can still process the remaining flags, fl_iter was already incremented by
+					// erase().
 				}
 			} else {
-				++j;
+				++fl_iter;
 			}
 		}
 
-		// if there are no more flags in this economy,
-		// we no longer need it's observer
-		if ((*obs_iter)->flags.empty()) {
+		if (obs_flags.empty()) {
+			// If there are no more flags in this economy, we no longer need its observer.
 			delete *obs_iter;
-			economies.erase(obs_iter);
-			return true;
+			obs_iter = economies_.erase(obs_iter);
+			economies_changed = true;
+			eco_size = economies_.size();
+		} else {
+			++obs_iter;
 		}
 	}
-	return false;
+	return economies_changed;
 }
 
 /**
@@ -6421,15 +6472,15 @@ void DefaultAI::consider_productionsite_influence(BuildableField& field,
 }
 
 /// \returns the economy observer containing \arg economy
-EconomyObserver* DefaultAI::get_economy_observer(Widelands::Economy& economy) {
-	for (EconomyObserver* eco : economies) {
-		if (&eco->economy == &economy) {
+EconomyObserver* DefaultAI::get_economy_observer(const Widelands::Economy& economy) {
+	for (EconomyObserver* eco : economies_) {
+		if (eco->economy_serial == economy.serial()) {
 			return eco;
 		}
 	}
 
-	economies.push_front(new EconomyObserver(economy));
-	return economies.front();
+	economies_.emplace_back(new EconomyObserver(economy));
+	return economies_.back();
 }
 
 // counts buildings with the BuildingAttribute
@@ -6549,23 +6600,39 @@ void DefaultAI::gain_immovable(Widelands::PlayerImmovable& pi, const bool found_
 void DefaultAI::lose_immovable(const Widelands::PlayerImmovable& pi) {
 	if (upcast(Widelands::Building const, building, &pi)) {
 		lose_building(*building);
+
 	} else if (upcast(Widelands::Flag const, flag, &pi)) {
 		// Flag to be removed can be:
-		// 1. In one of our economies
-		for (EconomyObserver* eco_obs : economies) {
-			if (remove_from_dqueue<Widelands::Flag>(eco_obs->flags, flag)) {
+
+		//  - In new flags to be processed yet
+		if (remove_from_dqueue<Widelands::Flag const*>(new_flags, flag)) {
+			return;
+		}
+
+		//  - In one of our ware economies, and one of our worker economies
+		const FlagOPtr flag_optr(const_cast<Widelands::Flag*>(flag));
+		bool found_ware_eco = false;
+		bool found_worker_eco = false;
+
+		for (EconomyObserver* eco_obs : economies_) {
+			if (remove_from_dqueue<FlagOPtr>(eco_obs->flags, flag_optr)) {
+				if (eco_obs->economy_type == Widelands::wwWARE) {
+					assert(!found_ware_eco);
+					found_ware_eco = true;
+				} else {
+					assert(eco_obs->economy_type == Widelands::wwWORKER);
+					assert(!found_worker_eco);
+					found_worker_eco = true;
+				}
+			}
+
+			if (found_ware_eco && found_worker_eco) {
 				return;
 			}
 		}
 
-		// 2. in new flags to be processed yet
-		if (remove_from_dqueue<Widelands::Flag>(new_flags, flag)) {
-			return;
-		}
-
-		// 3. Or in neither of them
 	} else if (upcast(Widelands::Road const, road, &pi)) {
-		remove_from_dqueue<Widelands::Road>(roads, road);
+		remove_from_dqueue<Widelands::Road const*>(roads, road);
 	}
 }
 
@@ -7327,8 +7394,8 @@ void DefaultAI::review_wares_targets(const Time& gametime) {
 	const uint16_t multiplier =
 	   std::max<uint16_t>((static_cast<uint16_t>(productionsites.size()) + num_ports * 5) / 5, 10);
 
-	for (EconomyObserver* observer : economies) {
-		if (observer->economy.type() != Widelands::wwWARE) {
+	for (EconomyObserver* observer : economies_) {
+		if (observer->economy_type != Widelands::wwWARE) {
 			// Don't set ware target quantities for worker economies
 			continue;
 		}
@@ -7354,7 +7421,7 @@ void DefaultAI::review_wares_targets(const Time& gametime) {
 			assert(new_target > 1);
 
 			game().send_player_command(new Widelands::CmdSetWareTargetQuantity(
-			   gametime, player_number(), observer->economy.serial(), id, new_target));
+			   gametime, player_number(), observer->economy_serial, id, new_target));
 		}
 	}
 }
@@ -7582,7 +7649,7 @@ template <typename T> void DefaultAI::check_range(T value, T upper_range, const 
 }
 
 template <typename T>
-bool DefaultAI::remove_from_dqueue(std::deque<T const*>& dq, T const* member) {
+bool DefaultAI::remove_from_dqueue(std::deque<T>& dq, T member) {
 	for (auto it = dq.begin(); it != dq.end(); ++it) {
 		if (*it == member) {
 			it = dq.erase(it);

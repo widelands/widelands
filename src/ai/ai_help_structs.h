@@ -457,11 +457,14 @@ struct MineableField {
 	int32_t same_mine_fields_nearby{0};
 };
 
-struct EconomyObserver {
-	explicit EconomyObserver(Widelands::Economy& e);
+using FlagOPtr = Widelands::OPtr<Widelands::Flag>;
 
-	Widelands::Economy& economy;
-	std::deque<Widelands::Flag const*> flags;
+struct EconomyObserver {
+	explicit EconomyObserver(const Widelands::Economy& e);
+
+	const Widelands::Serial economy_serial;
+	const Widelands::WareWorker economy_type;
+	std::deque<FlagOPtr> flags;
 	Time dismantle_grace_time;
 	Time fields_block_last_time;
 };
