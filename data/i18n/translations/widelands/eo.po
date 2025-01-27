@@ -3431,36 +3431,36 @@ msgstr "Widelands ne povis establi konekton al la indikita adreso. Aŭ neniu Wid
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
-msgstr[0] "Detektita %u aldonaĵa nesinkrono:\n"
-msgstr[1] "Detektitaj %u aldonaĵaj nesinkronoj:\n"
+msgstr[0] "%u kromprograma malkongruo detektita:\n"
+msgstr[1] "%u kromprogramaj malkongruoj detektitaj:\n"
 
 #: ../../../../src/network/gameclient.cc:819
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
-msgstr ""
+msgstr "%1$s\n• ‘%2$s’ bezonata de gastiganto ne trovita"
 
 #: ../../../../src/network/gameclient.cc:822
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
-msgstr ""
+msgstr "%1$s\n• ‘%2$s’ instalita ĉe versio %3$s sed la gastiganto uzas version %4$s"
 
 #: ../../../../src/network/gameclient.cc:989
 msgid "/me ’s file failed md5 checksumming."
-msgstr ""
+msgstr "La dosiero de /me malsukcesis ĉe la MD5-kontrolsumado."
 
 #: ../../../../src/network/gameclient.cc:1031
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
-msgstr ""
+msgstr "/me analizis la ricevitan dosieron. Kvankam la MD5-kontrolsumado sukcesis, mi ne povas prilabori la dosieron."
 
 #: ../../../../src/network/gameclient.cc:1352
 msgid "Disconnected"
-msgstr ""
+msgstr "Malkonektita"
 
 #: ../../../../src/network/gameclient.cc:1353
 #, c-format
@@ -4403,7 +4403,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/about.cc:38 ../../../../src/ui_fsmenu/main.cc:523
 msgid "About Widelands"
-msgstr ""
+msgstr "Pri Widelands"
 
 #: ../../../../src/ui_fsmenu/about.cc:49 ../../../../src/ui_fsmenu/about.cc:54
 msgid "Lua Error"
@@ -4517,7 +4517,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:148
 msgid "This add-on may cause major glitches and errors."
-msgstr ""
+msgstr "Ĉi tiu kromprogramo povas kaŭzi gravajn paneojn kaj erarojn."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../../../src/ui_fsmenu/addons/manager.cc:154
@@ -4527,7 +4527,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:154
 msgid "This add-on works as advertised."
-msgstr ""
+msgstr "Ĉi tiu kromprogramo funkcias kiel anoncite."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../../../src/ui_fsmenu/addons/manager.cc:159
@@ -4537,11 +4537,11 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:160
 msgid "This add-on has been decorated for its remarkably high quality."
-msgstr ""
+msgstr "Ĉi tiu kromprogramo estis honorita pro sia rimarkinde alta kvalito."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:172
 msgid "Add-On Manager"
-msgstr ""
+msgstr "Kromprograma Administrilo"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:309
 msgid "Verified only"
@@ -4549,7 +4549,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:310
 msgid "Show only verified add-ons"
-msgstr ""
+msgstr "Montri nur aprobitajn kromprogramojn"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:318
 #: ../../../../src/ui_fsmenu/addons/manager.cc:329
@@ -4594,7 +4594,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:455
 msgid "Choose add-on to upload…"
-msgstr ""
+msgstr "Elektu kromprogramon por alŝuti…"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:466
 msgid "Upload a screenshot…"
@@ -4621,7 +4621,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:511
 msgid "Refresh the list of add-ons available from the server"
-msgstr ""
+msgstr "Ĝisdatigu la liston de kromprogramoj disponeblaj ĉe la servilo"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:528
 msgid "Fix dependencies…"
@@ -4633,23 +4633,23 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:539
 msgid "Move selected add-on to top"
-msgstr ""
+msgstr "Movu la elektitan kromprogramon al la supro."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:548
 msgid "Move selected add-on one step up"
-msgstr ""
+msgstr "Movu la elektitan kromprogramon unu paŝon supren"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:557
 msgid "Move selected add-on one step down"
-msgstr ""
+msgstr "Movu la elektitan kromprogramon unu paŝon malsupren"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:566
 msgid "Move selected add-on to bottom"
-msgstr ""
+msgstr "Movu la elektitan kromprogramon al la malsupro"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:574
 msgid "Launch the add-ons packager…"
-msgstr ""
+msgstr "Lanĉu la kromprograman pakaĵilon…"
 
 #. * TRANSLATORS: This button allows the user to send a message to the
 #. Widelands
@@ -4660,7 +4660,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:604
 msgid "Tools for Add-Ons Developers"
-msgstr ""
+msgstr "Iloj por Kromprogramaj Programistoj"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:612
 msgid ""
@@ -4668,14 +4668,14 @@ msgid ""
 "ons. You can bundle maps designed with the Widelands Map Editor as an add-on"
 " using the graphical interface and share them with other players, without "
 "having to write a single line of code."
-msgstr ""
+msgstr "La interaga kromprograma pakaĵilo permesas al vi krei, redakti, kaj forigi kromprogramojn. Vi povas kunigi mapojn desegnitajn per la Mapredaktilo de Widelands kiel kromprogramon, uzante la grafikan interfacon, kaj kundividi ilin kun aliaj ludantoj, sen devi skribi eĉ unu linion da kodo."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:627
 #, c-format
 msgid ""
 "For more information regarding how to develop and package your own add-ons, "
 "please visit %s."
-msgstr ""
+msgstr "Por pliaj informoj pri kiel disvolvi kaj paki viajn proprajn kromprogramojn, bonvolu viziti %s."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:643
 msgid ""
@@ -4684,7 +4684,7 @@ msgid ""
 "terms of the GNU General Public License (GPL) version 2 (the same license "
 "under which Widelands itself is distributed). For more information on the "
 "GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu."
-msgstr ""
+msgstr "Ĉi tie vi povas alŝuti viajn kromprogramojn al la servilo por igi ilin disponeblaj al aliaj ludantoj. Per alŝuto, vi konsentas publikigi vian kreitaĵon laŭ la kondiĉoj de la GNU-General Public License (GPL) versio 2 (la sama permesilo laŭ kiu Widelands mem estas distribuita). Por pliaj informoj pri la GPL, bonvolu konsulti 'Pri Widelands' → 'Permesilo' en la ĉefa menuo."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:650
 msgid ""
@@ -4692,7 +4692,7 @@ msgid ""
 " spam. By uploading an add-on, you assert that the add-on is of your own "
 "creation or you have the add-on’s author(s) permission to submit it in their"
 " stead."
-msgstr ""
+msgstr "Estas malpermesite alŝuti kromprogramojn, kiuj enhavas damaĝan aŭ malican enhavon aŭ spamon. Per alŝuto de kromprogramo, vi asertas, ke la kromprogramo estas via propra kreitaĵo aŭ ke vi havas la permeson de la aŭtoro(j) por sendi ĝin anstataŭ ili."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:656
 msgid ""
@@ -4700,7 +4700,7 @@ msgid ""
 " further above before submitting content. Since the documentation is subject"
 " to frequent changes, ensure that you have read it recently and that you "
 "followed all guidelines stated there."
-msgstr ""
+msgstr "Vi devas esti leginta la dokumentaron pri kromprogramoj sub la supre donita ligilo antaŭ ol sendi enhavon. Ĉar la dokumentaro estas ofte ŝanĝata, certigu, ke vi legas ĝin lastatempe kaj ke vi sekvas ĉiujn tie indikitajn gvidliniojn."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:662
 msgid ""
@@ -4708,7 +4708,7 @@ msgid ""
 " In case they have further inquiries, they will contact you via a PM on the "
 "Widelands website; therefore please check the inbox of your online user "
 "profile page frequently."
-msgstr ""
+msgstr "La Disvolva Teamo de Widelands revizios vian kromprogramon baldaŭ post la alŝuto. Se ili havas pliajn demandojn, ili kontaktos vin per privata mesaĝo en la retejo de Widelands; do bonvolu ofte kontroli la enirkeston de via reta uzantprofilo."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:692
 #, c-format
@@ -4717,7 +4717,7 @@ msgid ""
 "of an add-on or collaborating with another add-on designer? Please visit our"
 " forums at %s, explain your needs, and the Widelands Development Team will "
 "be happy to help."
-msgstr ""
+msgstr "Teknikaj problemoj? Nekomprenebla dokumentaro? Pli altnivelaj bezonoj kiel forigo de kromprogramo aŭ kunlaboro kun alia kromprograma projektisto? Bonvolu viziti niajn forumojn ĉe %s, klarigu viajn bezonojn, kaj la Disvolva Teamo de Widelands volonte helpos vin."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:709
 msgid ""
@@ -4728,15 +4728,15 @@ msgid ""
 "use this way of communication only if there is a reason why your concern is "
 "not for everyone’s ears. You’ll receive our reply via a PM on your Widelands"
 " website user profile page."
-msgstr ""
+msgstr "Alternative, vi ankaŭ povas sendi mesaĝon al la Disvolva Teamo de Widelands, kaj ni provos helpi vin kun via demando kiel eble plej baldaŭ. Nur la servilaj administrantoj povas legi mesaĝojn senditajn per ĉi tiu maniero. Ĉar aliaj kromprogramaj projektistoj ofte povas profiti de demandoj kaj respondoj de aliaj, bonvolu uzi ĉi tiun komunikmanieron nur se ekzistas kialo, ke via afero ne estas por ĉiuj oreloj. Vi ricevos nian respondon per privata mesaĝo en la uzantprofilo de la retejo de Widelands."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:749
 msgid "Manage your installed add-ons"
-msgstr ""
+msgstr "Administru viajn instalitajn kromprogramojn"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:751
 msgid "Browse and install add-ons available on the server"
-msgstr ""
+msgstr "Foliumu kaj instalu kromprogramojn disponeblajn ĉe la servilo"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:753
 #, c-format
@@ -4752,7 +4752,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:757
 msgid "Tools for add-on developers"
-msgstr ""
+msgstr "Iloj por kromprogramaj programistoj"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:761
@@ -5128,7 +5128,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:49
 msgid "Add-Ons Packager"
-msgstr ""
+msgstr "Kromprograma pakaĵilo"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:101
 msgid "New add-on"
@@ -5238,8 +5238,8 @@ msgid ""
 msgid_plural ""
 "If you quit the packager now, all changes to the following %u add-ons will "
 "be discarded."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Se vi eliras la pakaĵilon nun, ĉiuj ŝanĝoj al la jena %u kromprogramo estos forĵetitaj."
+msgstr[1] "Se vi eliras la pakaĵilon nun, ĉiuj ŝanĝoj al la jenaj %u kromprogramoj estos forĵetitaj."
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:460
 #: ../../../../src/ui_fsmenu/addons/packager.cc:487
@@ -5252,7 +5252,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:463
 msgid "Quit Packager"
-msgstr ""
+msgstr "Eliru la pakaĵilon"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:478
 #, c-format
@@ -6805,7 +6805,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/main.cc:525
 msgid "Readme, License, and Credits"
-msgstr ""
+msgstr "Legu min, Permesilo, kaj Meritoj"
 
 #: ../../../../src/ui_fsmenu/main.cc:527
 #: ../../../../src/wlapplication_options.cc:304
@@ -6829,7 +6829,7 @@ msgstr ""
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team • Licensed under the GNU "
 "General Public License V2.0"
-msgstr ""
+msgstr "(C) %1%-%2% fare de la Disvolva Teamo de Widelands • Permesigita laŭ la GNU-General Public License V2.0"
 
 #: ../../../../src/ui_fsmenu/main.cc:879
 msgid "Click for the main menu"
@@ -8056,7 +8056,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:308
 msgid "About"
-msgstr ""
+msgstr "Pri"
 
 #: ../../../../src/wlapplication_options.cc:324
 msgid "Internet Login"
