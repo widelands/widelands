@@ -3672,7 +3672,7 @@ bool DefaultAI::improve_roads(const Time& gametime) {
 	if (eco.flags.empty()) {
 		// check_economies() was already called before improve_roads(),
 		// and it is supposed to remove economies without flags
-		throw(wexception("AI: improve_roads(): found economy observer without flags"));
+		throw wexception("AI: improve_roads(): found economy observer without flags");
 	}
 
 	if (eco.flags.size() > 1) {
@@ -4284,9 +4284,9 @@ bool DefaultAI::check_economies() {
 
 	std::deque<EconomyObserver>::iterator obs_iter = economies_.begin();
 	while (obs_iter != economies_.end() && previous_serial != last_old_serial) {
-		std::deque<FlagOPtr>& obs_flags = (*obs_iter).flags;
-		const Widelands::WareWorker eco_type = (*obs_iter).economy_type;
-		previous_serial = (*obs_iter).economy_serial;
+		std::deque<FlagOPtr>& obs_flags = obs_iter->flags;
+		const Widelands::WareWorker eco_type = obs_iter->economy_type;
+		previous_serial = obs_iter->economy_serial;
 		assert(previous_serial != 0);
 		const Widelands::Economy* eco = player_->get_economy(previous_serial);
 
