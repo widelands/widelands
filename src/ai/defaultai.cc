@@ -388,7 +388,7 @@ void DefaultAI::think() {
 			set_taskpool_task_time(gametime + Duration(10000), SchedulerTaskId::kProductionsitesStats);
 			break;
 		case SchedulerTaskId::kConstructBuilding:
-			check_economies();  // economies must be consistent
+			check_economies();             // economies must be consistent
 			if (gametime < Time(15000)) {  // More frequent at the beginning of game
 				set_taskpool_task_time(gametime + Duration(2000), SchedulerTaskId::kConstructBuilding);
 			} else {
@@ -3663,8 +3663,8 @@ bool DefaultAI::improve_roads(const Time& gametime) {
 		do {
 			economies_.push_back(economies_.front());
 			economies_.pop_front();
-		} while(economies_.front().economy_type != Widelands::wwWORKER &&
-		        economies_.front().economy_serial != first_econ);
+		} while (economies_.front().economy_type != Widelands::wwWORKER &&
+		         economies_.front().economy_serial != first_econ);
 		assert(economies_.front().economy_type == Widelands::wwWORKER);
 	}
 
@@ -4264,7 +4264,8 @@ void DefaultAI::collect_nearflags(std::map<uint32_t, NearFlag>& nearflags,
 bool DefaultAI::check_economies() {
 	// Small optimisation: New observers may get created at the end of economies_,
 	// but we don't need to re-check the flags we assign to them.
-	const Widelands::Serial last_old_serial = economies_.empty() ? 0 : economies_.back().economy_serial;
+	const Widelands::Serial last_old_serial =
+	   economies_.empty() ? 0 : economies_.back().economy_serial;
 	assert(last_old_serial != 0 || economies_.empty());
 	Widelands::Serial previous_serial = 0;
 
@@ -7645,8 +7646,7 @@ template <typename T> void DefaultAI::check_range(T value, T upper_range, const 
 	}
 }
 
-template <typename T>
-bool DefaultAI::remove_from_dqueue(std::deque<T>& dq, T member) {
+template <typename T> bool DefaultAI::remove_from_dqueue(std::deque<T>& dq, T member) {
 	for (auto it = dq.begin(); it != dq.end(); ++it) {
 		if (*it == member) {
 			it = dq.erase(it);
