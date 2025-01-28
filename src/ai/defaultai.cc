@@ -3661,7 +3661,7 @@ bool DefaultAI::improve_roads(const Time& gametime) {
 	if (economies_.size() >= 2) {  // rotating economies
 		Widelands::Serial first_econ = economies_.front().economy_serial;
 		do {
-			economies_.push_back(economies_.front());
+			economies_.emplace_back(economies_.front());
 			economies_.pop_front();
 		} while (economies_.front().economy_type != Widelands::wwWORKER &&
 		         economies_.front().economy_serial != first_econ);
@@ -3672,7 +3672,8 @@ bool DefaultAI::improve_roads(const Time& gametime) {
 	if (eco.flags.empty()) {
 		// check_economies() was already called before improve_roads(),
 		// and it is supposed to remove economies without flags
-		throw wexception("AI: improve_roads(): found economy observer without flags");
+		throw wexception("AI %u: improve_roads(): economy observer (%u) without flags",
+		                 static_cast<unsigned>(player_number()), eco.economy_serial);
 	}
 
 	if (eco.flags.size() > 1) {
@@ -3683,8 +3684,8 @@ bool DefaultAI::improve_roads(const Time& gametime) {
 	Widelands::Flag* flag = eco.flags.front().get(game());
 	if (flag == nullptr) {
 		// check_economies() should have removed it
-		log_warn("AI: improve_roads(): found inexistent flag in economy observer");
-		return false;
+		throw wexception("AI %u: improve_roads(): inexistent flag in economy observer (%u)",
+		                 static_cast<unsigned>(player_number()), eco.economy_serial);
 	}
 
 	// now we test if it is dead end flag, if yes, destroying it
@@ -4265,9 +4266,9 @@ bool DefaultAI::check_economies() {
 	// Small optimisation: New observers may get created at the end of economies_,
 	// but we don't need to re-check the flags we assign to them.
 	const Widelands::Serial last_old_serial =
-	   economies_.empty() ? 0 : economies_.back().economy_serial;
-	assert(last_old_serial != 0 || economies_.empty());
-	Widelands::Serial previous_serial = 0;
+	   economies_.empty() ? Widelands::kInvalidSerial : economies_.back().economy_serial;
+	assert(last_old_serial != Widelands::kInvalidSerial || economies_.empty());
+	Widelands::Serial previous_serial = Widelands::kInvalidSerial;
 
 	size_t eco_size = economies_.size();
 
@@ -4287,7 +4288,7 @@ bool DefaultAI::check_economies() {
 		std::deque<FlagOPtr>& obs_flags = obs_iter->flags;
 		const Widelands::WareWorker eco_type = obs_iter->economy_type;
 		previous_serial = obs_iter->economy_serial;
-		assert(previous_serial != 0);
+		assert(previous_serial != Widelands::kInvalidSerial);
 		const Widelands::Economy* eco = player_->get_economy(previous_serial);
 
 		if (eco == nullptr) {
