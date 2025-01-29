@@ -3912,7 +3912,7 @@ void DefaultAI::rotate_flags() {
 
 	if (flags.empty()) {
 		throw wexception("AI %u: economy (%u) without flags", static_cast<unsigned>(player_number()),
-		   current_economy_);
+		                 current_economy_);
 	}
 
 	if (eco_obs.current_flag_serial == Widelands::kInvalidSerial) {
@@ -3965,8 +3965,7 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 
 	// this should not happen, but if the economy has a warehouse and a dismantle
 	// grace time set, we must 'zero' the dismantle grace time
-	if (!flag_eco.warehouses().empty() &&
-	    eco_obs.dismantle_grace_time.is_valid()) {
+	if (!flag_eco.warehouses().empty() && eco_obs.dismantle_grace_time.is_valid()) {
 		eco_obs.dismantle_grace_time = Time();
 	}
 
@@ -3974,8 +3973,7 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 	// and this is a flag belonging to a building/constructionsite
 	// such economy must get dismantle grace time (if not set yet)
 	// end sometimes extended checkradius
-	if (flag_eco.warehouses().empty() &&
-	    (flag.get_building() != nullptr)) {
+	if (flag_eco.warehouses().empty() && (flag.get_building() != nullptr)) {
 
 		// occupied military buildings get special treatment
 		// (extended grace time + longer radius)
@@ -4090,8 +4088,8 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 			}
 
 			// This is a candidate, sending all necessary info to RoadCandidates
-			const bool is_different_economy = (player_immovable->get_economy(Widelands::wwWORKER) !=
-			                                   &flag_eco);
+			const bool is_different_economy =
+			   (player_immovable->get_economy(Widelands::wwWORKER) != &flag_eco);
 			const uint16_t air_distance = map.calc_distance(flag.get_position(), reachable_coords);
 
 			if (!flag_candidates.has_candidate(reachable_coords_hash) &&
