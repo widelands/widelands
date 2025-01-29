@@ -341,7 +341,10 @@ MineableField::MineableField(const Widelands::FCoords& fc)
 }
 
 EconomyObserver::EconomyObserver(const Widelands::Economy& e)
-   : economy_serial(e.serial()), economy_type(e.type()), nr_flags(e.get_nrflags()), fields_block_last_time(Time(0)) {
+   : economy_serial(e.serial()),
+     economy_type(e.type()),
+     nr_flags(e.get_nrflags()),
+     fields_block_last_time(Time(0)) {
 }
 
 uint32_t BuildingObserver::total_count() const {
