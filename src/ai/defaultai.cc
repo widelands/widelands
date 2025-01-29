@@ -3887,10 +3887,11 @@ EconomyObserver* DefaultAI::rotate_economies_and_flags() {
 
 		} else if (g_verbose && economies_.size() > 2) {  // 1 ware + 1 worker
 			// The later economies may get less attention, but it doesn't happen often
-			verb_log_dbg_time(game().get_gametime(),
-		                     "AI %u: last checked economy was removed, restarting from first of %"
-			                  PRIuS " economies",
-		                     static_cast<unsigned>(player_number()), economies_.size());
+			verb_log_dbg_time(
+			   game().get_gametime(),
+			   "AI %u: last checked economy was removed, restarting from first of %" PRIuS
+			   " economies",
+			   static_cast<unsigned>(player_number()), economies_.size());
 		}
 
 		// Next part handles wrap-around if needed
