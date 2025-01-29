@@ -465,8 +465,8 @@ struct EconomyObserver {
 	const Widelands::Serial economy_serial;
 	const Widelands::WareWorker economy_type;
 
-	Widelands::Serial current_flag_serial{Widelands::kInvalidSerial};
 	size_t current_flag_index{0};
+	size_t nr_flags;
 
 	Time dismantle_grace_time;
 	Time fields_block_last_time;

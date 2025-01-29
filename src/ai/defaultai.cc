@@ -3650,14 +3650,13 @@ bool DefaultAI::improve_roads(const Time& gametime) {
 	if (economies_.empty()) {
 		return false;
 	}
-	rotate_economies();
+	EconomyObserver* eco_obs = rotate_economies_and_flags();
+	if (eco_obs == nullptr) {
+		return false;
+	}
 
-	EconomyObserver& eco_obs = economies_.at(current_economy_);
-	Widelands::Economy* economy = player_->get_economy(current_economy_);
-
-	rotate_flags();
-
-	Widelands::Flag* flag = economy->flags().at(eco_obs.current_flag_index);
+	Widelands::Economy* economy = player_->get_economy(eco_obs->economy_serial);
+	Widelands::Flag* flag = economy->flags().at(eco_obs->current_flag_index);
 
 	// now we test if it is dead end flag, if yes, destroying it
 	if (flag->is_dead_end() && flag->current_wares() == 0) {
@@ -3858,82 +3857,67 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 	return alternative_path + wares_on_road <= road_length + 12;
 }
 
-// Update next economy for improving roads
-void DefaultAI::rotate_economies() {
-	if (economies_.empty()) {
-		return;
-	}
-
-	// We have at least one worker and one ware economy.
-
-	auto eco_it = economies_.begin();
-
-	// Try to start where we left off
-	if (current_economy_ != Widelands::kInvalidSerial) {
-		eco_it = economies_.find(current_economy_);
-		if (eco_it != economies_.end()) {
-			++eco_it;
-		} else {
-			// Previous economy got removed, let's find the next nearest serial
-			eco_it = economies_.begin();
-			while (eco_it != economies_.end() && eco_it->first < current_economy_) {
-				++eco_it;
-			}
-		}
-
-		// Handle wraparound
-		if (eco_it == economies_.end()) {
-			eco_it = economies_.begin();
-		}
-	}
-
+namespace {
+inline bool economy_ok_for_roads(const EconomyObserver& obs) {
 	// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
 	//                   ferries
 	// TODO(tothxa): Make sure it's a worker economy until create_shortcut_road() can handle
 	//               waterways and ware economies
-	while (eco_it->second.economy_type != Widelands::wwWORKER && eco_it != economies_.end()) {
-		++eco_it;
+	// Apparently expedition ships have economies without flags
+	return obs.nr_flags > 0 && obs.economy_type == Widelands::wwWORKER;
+}
+}  // namespace
+
+EconomyObserver* DefaultAI::rotate_economies_and_flags() {
+	// Update next economy for improving roads
+	if (economies_.empty()) {
+		return nullptr;
 	}
+
+	// We have at least one worker and one ware economy.
+
+	// Try to start where we left off
+	auto eco_it = economies_.find(current_economy_);
+
+	if (current_economy_ != Widelands::kInvalidSerial) {
+		if (eco_it == economies_.end()) {
+			// TODO(tothxa): maybe we don't have to overcomplicate it if it doesn't happen too often
+			verb_log_dbg_time(game().get_gametime(),
+			                  "AI %u: last checked economy was removed, restarting from first",
+			                  static_cast<unsigned>(player_number()));
+		} else {
+			do {
+				++eco_it;
+			} while (eco_it != economies_.end() && !economy_ok_for_roads(eco_it->second));
+		}
+		// Next part handles wrap-around if needed
+	}
+
 	if (eco_it == economies_.end()) {
-		throw wexception("AI %u only has ware economies", static_cast<unsigned>(player_number()));
+		eco_it = economies_.begin();
+		while (eco_it != economies_.end() && !economy_ok_for_roads(eco_it->second) &&
+		       // it's convenient that kInvalidSerial is uint32 max
+		       eco_it->first < current_economy_) {
+			++eco_it;
+		}
+	}
+
+	if (eco_it == economies_.end() || !economy_ok_for_roads(eco_it->second)) {
+		// May happen with discovery or new world start conditions?
+		current_economy_ = Widelands::kInvalidSerial;
+		return nullptr;
 	}
 
 	assert(eco_it->first == eco_it->second.economy_serial);
 	current_economy_ = eco_it->first;
-}
 
-// Update next flag within the current economy to consider for improving connectivity
-// It would be more elegant if this were a member of EconomyObserver, but here we can
-//	access player_.
-void DefaultAI::rotate_flags() {
-	EconomyObserver& eco_obs = economies_.at(current_economy_);
-	const Widelands::Economy* economy = player_->get_economy(current_economy_);
-	const Widelands::Economy::Flags& flags = const_cast<Widelands::Economy*>(economy)->flags();
-
-	if (flags.empty()) {
-		throw wexception("AI %u: economy (%u) without flags", static_cast<unsigned>(player_number()),
-		                 current_economy_);
+	// Update next flag within the current economy to consider for improving connectivity
+	++eco_it->second.current_flag_index;
+	if (eco_it->second.current_flag_index >= eco_it->second.nr_flags) {
+		eco_it->second.current_flag_index = 0;
 	}
 
-	if (eco_obs.current_flag_serial == Widelands::kInvalidSerial) {
-		// First time
-		eco_obs.current_flag_index = 0;
-
-	} else if (eco_obs.current_flag_index < flags.size() &&
-	           flags.at(eco_obs.current_flag_index)->serial() == eco_obs.current_flag_serial) {
-		// We can continue where we left off
-		eco_obs.current_flag_index = (eco_obs.current_flag_index + 1) % flags.size();
-
-	} else {
-		// Earlier or current flags changed, we have to do it the hard way
-		size_t i = 0;
-		while (i < flags.size() && flags.at(i)->serial() != eco_obs.current_flag_serial) {
-			++i;
-		}
-		eco_obs.current_flag_index = (i + 1) % flags.size();
-	}
-
-	eco_obs.current_flag_serial = flags.at(eco_obs.current_flag_index)->serial();
+	return &eco_it->second;
 }
 
 // Trying to connect the flag to another one, be it from own economy
@@ -4308,13 +4292,15 @@ void DefaultAI::collect_nearflags(std::map<uint32_t, NearFlag>& nearflags,
  * \returns true, if something was changed.
  */
 void DefaultAI::check_economies() {
-	// Remove obsolete observers
+	// Remove obsolete observers and update number of flags for the rest
 	auto obs_it = economies_.begin();
 	while (obs_it != economies_.end()) {
 		assert(obs_it->first == obs_it->second.economy_serial);
-		if (player_->get_economy(obs_it->first) == nullptr) {
+		const Widelands::Economy* eco = player_->get_economy(obs_it->first);
+		if (eco == nullptr) {
 			obs_it = economies_.erase(obs_it);
 		} else {
+			obs_it->second.nr_flags = eco->get_nrflags();
 			++obs_it;
 		}
 	}

@@ -248,8 +248,7 @@ private:
 	void diplomacy_actions(const Time&);
 	FlagWarehouseDistances flag_warehouse_distance;
 
-	void rotate_economies();
-	void rotate_flags();
+	EconomyObserver* rotate_economies_and_flags();
 
 	void check_economies();
 	bool check_productionsites(const Time&);
