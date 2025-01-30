@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016,2018
@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-12-07 03:09+0000\n"
+"POT-Creation-Date: 2025-01-09 03:20+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Ondřej Itřech, 2020-2021,2024\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -680,12 +680,12 @@ msgstr "Opravdu chceš opustit editor?"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:575
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:125
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:328
-#: ../../../../src/ui_fsmenu/main.cc:294 ../../../../src/wlapplication.cc:1968
+#: ../../../../src/ui_fsmenu/main.cc:294 ../../../../src/wlapplication.cc:1958
 msgid "Error"
 msgstr "Chyba"
 
 #: ../../../../src/editor/editorinteractive.cc:1276
-#: ../../../../src/ui_fsmenu/main.cc:278 ../../../../src/wlapplication.cc:1970
+#: ../../../../src/ui_fsmenu/main.cc:278 ../../../../src/wlapplication.cc:1960
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -1147,7 +1147,7 @@ msgid "Click player to remove"
 msgstr "Klikni na hráče pro odebrání"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:61
-#: ../../../../src/ui_basic/textinput.cc:383
+#: ../../../../src/ui_basic/textinput.cc:385
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:438
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:67
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:90
@@ -1509,7 +1509,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "Nastala chyba při vytváření adresáře ‘%s’."
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:313
-#: ../../../../src/wui/game_main_menu_save_game.cc:286
+#: ../../../../src/wui/game_main_menu_save_game.cc:325
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Soubor s názvem \"%s\" již existuje. Chceš ho přepsat?"
@@ -2616,7 +2616,7 @@ msgstr "(zastaveno)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:480
-#: ../../../../src/wui/building_statistics_menu.cc:725
+#: ../../../../src/wui/building_statistics_menu.cc:726
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
@@ -3238,12 +3238,12 @@ msgid "Saving skipped"
 msgstr "Ukládání přeskočeno"
 
 #: ../../../../src/logic/save_handler.cc:170
-#: ../../../../src/wui/game_main_menu_save_game.cc:338
+#: ../../../../src/wui/game_main_menu_save_game.cc:377
 msgid "Saving failed!"
 msgstr "Ukládání selhalo!"
 
 #: ../../../../src/logic/save_handler.cc:186
-#: ../../../../src/wui/game_main_menu_save_game.cc:321
+#: ../../../../src/wui/game_main_menu_save_game.cc:360
 msgid "Game saved"
 msgstr "Hra uložena"
 
@@ -4050,17 +4050,19 @@ msgstr "Hru Widelands nelze na této místní síti spustit. Možná na portu %s
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../../../src/scripting/lua_game.cc:1405
+#: ../../../../src/scripting/lua_game.cc:1407
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../../../src/scripting/lua_ui.cc:1226
-#: ../../../../src/scripting/lua_ui.cc:1248 ../../../../src/wui/plugins.cc:42
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:63
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:85
+#: ../../../../src/wui/plugins.cc:42
 msgid "Plugin Error"
 msgstr ""
 
-#: ../../../../src/scripting/lua_ui.cc:1227
-#: ../../../../src/scripting/lua_ui.cc:1249 ../../../../src/wui/plugins.cc:42
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:64
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:86
+#: ../../../../src/wui/plugins.cc:42
 #, c-format
 msgid ""
 "Error when running plugin:\n"
@@ -4135,7 +4137,7 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Nevybráno"
 
-#: ../../../../src/ui_basic/dropdown.h:479
+#: ../../../../src/ui_basic/dropdown.h:483
 msgid "No matches"
 msgstr "Žádná shoda"
 
@@ -4370,41 +4372,41 @@ msgstr ""
 msgid "%1$s<br>(%2$s)"
 msgstr ""
 
-#: ../../../../src/ui_basic/textinput.cc:374
+#: ../../../../src/ui_basic/textinput.cc:376
 msgid "Cut"
 msgstr ""
 
-#: ../../../../src/ui_basic/textinput.cc:374
+#: ../../../../src/ui_basic/textinput.cc:376
 msgid "Cut the selected text to the clipboard"
 msgstr ""
 
-#: ../../../../src/ui_basic/textinput.cc:377
+#: ../../../../src/ui_basic/textinput.cc:379
 #: ../../../../src/ui_fsmenu/tech_info.cc:238
 msgid "Copy"
 msgstr "Kopírovat"
 
-#: ../../../../src/ui_basic/textinput.cc:377
+#: ../../../../src/ui_basic/textinput.cc:379
 msgid "Copy the selected text to the clipboard"
 msgstr ""
 
-#: ../../../../src/ui_basic/textinput.cc:380
+#: ../../../../src/ui_basic/textinput.cc:382
 msgid "Paste"
 msgstr ""
 
-#: ../../../../src/ui_basic/textinput.cc:380
+#: ../../../../src/ui_basic/textinput.cc:382
 msgid "Paste the clipboard content"
 msgstr ""
 
-#: ../../../../src/ui_basic/textinput.cc:383
+#: ../../../../src/ui_basic/textinput.cc:385
 msgid "Delete the selected text"
 msgstr ""
 
-#: ../../../../src/ui_basic/textinput.cc:386
+#: ../../../../src/ui_basic/textinput.cc:388
 #: ../../../../src/wlapplication_options.cc:364
 msgid "Select All"
 msgstr "Vybrat vše"
 
-#: ../../../../src/ui_basic/textinput.cc:386
+#: ../../../../src/ui_basic/textinput.cc:388
 msgid "Select the entire text"
 msgstr ""
 
@@ -6440,7 +6442,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:141
 msgid "Enable naval warfare (experimental feature)"
-msgstr ""
+msgstr "Umožnit námořní vojenství (volba v zkušebním provozu)"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:149
 msgid "Custom starting positions"
@@ -6518,11 +6520,11 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:400
 msgid "Naval warfare is set by the scenario"
-msgstr ""
+msgstr "Námořní vojenství určeno nastavením scénáře"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:402
 msgid "Naval warfare is set by the saved game"
-msgstr ""
+msgstr "Námořní vojenství určeno nastavením uložené hry"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:405
 msgid ""
@@ -6635,6 +6637,7 @@ msgid "Choose Replay"
 msgstr "Vybrat záznam"
 
 #: ../../../../src/ui_fsmenu/loadgame.cc:62
+#: ../../../../src/wui/game_main_menu_save_game.cc:113
 msgid "Show Filenames"
 msgstr "Zobraz názvy souborů"
 
@@ -7855,31 +7858,31 @@ msgstr ""
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
 msgstr ""
 
-#: ../../../../src/wlapplication.cc:1767
+#: ../../../../src/wlapplication.cc:1757
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Neznámý parameter: %s\nMožná chybí '='?"
 
-#: ../../../../src/wlapplication.cc:1915
+#: ../../../../src/wlapplication.cc:1905
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Neznámý parameter: %s"
 
-#: ../../../../src/wlapplication.cc:1946
+#: ../../../../src/wlapplication.cc:1936
 msgid "Incompatible"
 msgstr "Nekompatibilní"
 
-#: ../../../../src/wlapplication.cc:1983
+#: ../../../../src/wlapplication.cc:1973
 msgid "Game ended unexpectedly"
 msgstr "Hra byla neočekávaně ukončena"
 
-#: ../../../../src/wlapplication.cc:1983
+#: ../../../../src/wlapplication.cc:1973
 msgid "Unexpected error during the game"
 msgstr "V průběhu hry se vyskytla neočekávaná chyba"
 
-#: ../../../../src/wlapplication.cc:1986
+#: ../../../../src/wlapplication.cc:1976
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -7893,7 +7896,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../../../src/wlapplication.cc:1995
+#: ../../../../src/wlapplication.cc:1985
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -7903,11 +7906,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Hra byla neočekávaně ukončena:\n\n%s\n\nMá být proveden pokus o nouzové uložení hry? Nouzové uložení nemusí být vždy úspěšné."
 
-#: ../../../../src/wlapplication.cc:2029
+#: ../../../../src/wlapplication.cc:2019
 msgid "Emergency save failed"
 msgstr "Nouzové ukládání selhalo"
 
-#: ../../../../src/wlapplication.cc:2030
+#: ../../../../src/wlapplication.cc:2020
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -9161,22 +9164,22 @@ msgstr "Doly"
 msgid "Ports"
 msgstr "Přístavy"
 
-#: ../../../../src/wui/building_statistics_menu.cc:734
+#: ../../../../src/wui/building_statistics_menu.cc:735
 msgid "Low productivity:"
 msgstr "Nízká produktivita:"
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../../../src/wui/building_statistics_menu.cc:743
-#: ../../../../src/wui/building_statistics_menu.cc:762
-#: ../../../../src/wui/building_statistics_menu.cc:764
+#: ../../../../src/wui/building_statistics_menu.cc:744
+#: ../../../../src/wui/building_statistics_menu.cc:763
+#: ../../../../src/wui/building_statistics_menu.cc:765
 #: ../../../../src/wui/productionsitewindow.cc:233
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../../../src/wui/building_statistics_menu.cc:753
+#: ../../../../src/wui/building_statistics_menu.cc:754
 msgid "Lacking soldiers:"
 msgstr "Chybějící vojáci:"
 
@@ -9807,8 +9810,8 @@ msgstr "Potvrzení opuštění hry"
 msgid "Are you sure you wish to exit this game?"
 msgstr "Opravdu chceš opustit tuto hru?"
 
-#: ../../../../src/wui/game_main_menu_save_game.cc:288
-#: ../../../../src/wui/game_main_menu_save_game.cc:328
+#: ../../../../src/wui/game_main_menu_save_game.cc:327
+#: ../../../../src/wui/game_main_menu_save_game.cc:367
 msgid "Error Saving Game!"
 msgstr "Chyba ukládání hry!"
 
@@ -10196,15 +10199,15 @@ msgstr "Odebrat surovinu"
 msgid "Add ware"
 msgstr "Přidat surovinu"
 
-#: ../../../../src/wui/inputqueuedisplay.cc:627
+#: ../../../../src/wui/inputqueuedisplay.cc:634
 msgid "Hide controls"
 msgstr "Skrýt nastavení"
 
-#: ../../../../src/wui/inputqueuedisplay.cc:627
+#: ../../../../src/wui/inputqueuedisplay.cc:634
 msgid "Show controls"
 msgstr "Zobrazit nastavení"
 
-#: ../../../../src/wui/inputqueuedisplay.cc:683
+#: ../../../../src/wui/inputqueuedisplay.cc:690
 #, c-format
 msgid "+%u"
 msgstr ""

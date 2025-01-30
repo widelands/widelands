@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 #include "base/math.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/map_object.h"
+#include "scripting/lua_interface.h"
 #include "scripting/lua_map.h"
 #include "sound/sound_handler.h"
 

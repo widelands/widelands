@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
@@ -25,9 +25,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-12-07 03:09+0000\n"
+"POT-Creation-Date: 2025-01-09 03:20+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Anton Khabarov <2233009@gmail.com>, 2015-2018,2021,2024\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2024\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -578,11 +578,11 @@ msgstr "Включите, чтобы увидеть какого максима�
 #. the map height heat map is shown
 #: ../../../../src/editor/editorinteractive.cc:495
 msgid "Disable height heat map"
-msgstr ""
+msgstr "Отключить тепловую карту высоты"
 
 #: ../../../../src/editor/editorinteractive.cc:496
 msgid "Enable height heat map"
-msgstr ""
+msgstr "Включить тепловую карту высоты"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
@@ -608,7 +608,7 @@ msgstr "Показать океаны"
 msgid ""
 "Display separate water bodies with differently coloured overlays to see "
 "which coasts can be connected by shipping routes"
-msgstr ""
+msgstr "Выделить отдельные водоемы разными цветами, чтобы увидеть, какие точки на берегу могут быть связаны водными путями"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
@@ -688,12 +688,12 @@ msgstr "Вы уверены, что хотите выйти из редакто�
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:575
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:125
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:328
-#: ../../../../src/ui_fsmenu/main.cc:294 ../../../../src/wlapplication.cc:1968
+#: ../../../../src/ui_fsmenu/main.cc:294 ../../../../src/wlapplication.cc:1958
 msgid "Error"
 msgstr "Ошибка"
 
 #: ../../../../src/editor/editorinteractive.cc:1276
-#: ../../../../src/ui_fsmenu/main.cc:278 ../../../../src/wlapplication.cc:1970
+#: ../../../../src/ui_fsmenu/main.cc:278 ../../../../src/wlapplication.cc:1960
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -1155,7 +1155,7 @@ msgid "Click player to remove"
 msgstr "Щёлкните игрока для удаления"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:61
-#: ../../../../src/ui_basic/textinput.cc:383
+#: ../../../../src/ui_basic/textinput.cc:385
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:438
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:67
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:90
@@ -1517,7 +1517,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "Ошибка при создании каталога ‘%s’."
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:313
-#: ../../../../src/wui/game_main_menu_save_game.cc:286
+#: ../../../../src/wui/game_main_menu_save_game.cc:325
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Файл с названием «%s» уже существует. Перезаписать?"
@@ -1883,7 +1883,7 @@ msgstr "Widelands не будет работать, потому что ваш �
 #: ../../../../src/graphic/gl/initialize.cc:227
 #, c-format
 msgid "The %1$s version needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "Версия %1$s требует версию %2$u.%3$u или новее."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -2624,7 +2624,7 @@ msgstr "(остановлено)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:480
-#: ../../../../src/wui/building_statistics_menu.cc:725
+#: ../../../../src/wui/building_statistics_menu.cc:726
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
@@ -3246,56 +3246,56 @@ msgid "Saving skipped"
 msgstr "Сохранение игры пропущено"
 
 #: ../../../../src/logic/save_handler.cc:170
-#: ../../../../src/wui/game_main_menu_save_game.cc:338
+#: ../../../../src/wui/game_main_menu_save_game.cc:377
 msgid "Saving failed!"
 msgstr "Ошибки при сохранении игры!"
 
 #: ../../../../src/logic/save_handler.cc:186
-#: ../../../../src/wui/game_main_menu_save_game.cc:321
+#: ../../../../src/wui/game_main_menu_save_game.cc:360
 msgid "Game saved"
 msgstr "Игра сохранена"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:887
 msgid "Building’s inputs changed!"
-msgstr ""
+msgstr "Входные данные здания изменились!"
 
 #. * TRANSLATORS: The argument is the buiding name
 #: ../../../../src/map_io/map_buildingdata_packet.cc:898
 #, c-format
 msgid "%s: the building’s inputs have changed."
-msgstr ""
+msgstr "%s: входные данные здания изменились."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:901
 msgid "The following wares have been deleted:"
-msgstr ""
+msgstr "Следующие товары были удалены:"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:908
 #, c-format
 msgid "%1$u piece of %2$s"
 msgid_plural "%1$u pieces of %2$s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1$u кусок %2$s"
+msgstr[1] "%1$u куска %2$s"
+msgstr[2] "%1$u кусков %2$s"
+msgstr[3] "%1$u кусков %2$s"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:914
 #, c-format
 msgid "%1$u piece of an unknown ware"
 msgid_plural "%1$u pieces of unknown wares"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1$u кусок неизвестного товара"
+msgstr[1] "%1$u куска неизвестного товара"
+msgstr[2] "%1$u кусков неизвестного товара"
+msgstr[3] "%1$uкусков неизвестного товара"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:920
 msgid ""
 "The game was probably saved with a different Widelands version or with "
 "different enabled add-ons."
-msgstr ""
+msgstr "Вероятно, игра была сохранена в другой версии Widelands или с другими включенными дополнениями."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:923
 msgid "Please review the current production programs and input settings."
-msgstr ""
+msgstr "Пожалуйста, ознакомьтесь с текущими производственными программами и настройками ввода."
 
 #: ../../../../src/map_io/map_saver.cc:85
 #, c-format
@@ -4058,17 +4058,19 @@ msgstr "Widelands не удалось использовать локальну�
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../../../src/scripting/lua_game.cc:1405
+#: ../../../../src/scripting/lua_game.cc:1407
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../../../src/scripting/lua_ui.cc:1226
-#: ../../../../src/scripting/lua_ui.cc:1248 ../../../../src/wui/plugins.cc:42
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:63
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:85
+#: ../../../../src/wui/plugins.cc:42
 msgid "Plugin Error"
 msgstr "Ошибка плагина"
 
-#: ../../../../src/scripting/lua_ui.cc:1227
-#: ../../../../src/scripting/lua_ui.cc:1249 ../../../../src/wui/plugins.cc:42
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:64
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:86
+#: ../../../../src/wui/plugins.cc:42
 #, c-format
 msgid ""
 "Error when running plugin:\n"
@@ -4143,7 +4145,7 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Не выбрано"
 
-#: ../../../../src/ui_basic/dropdown.h:479
+#: ../../../../src/ui_basic/dropdown.h:483
 msgid "No matches"
 msgstr "Совпадений нет"
 
@@ -4378,41 +4380,41 @@ msgstr "Нажмите, чтобы отсортировать по этому с
 msgid "%1$s<br>(%2$s)"
 msgstr "%1$s<br>(%2$s)"
 
-#: ../../../../src/ui_basic/textinput.cc:374
+#: ../../../../src/ui_basic/textinput.cc:376
 msgid "Cut"
 msgstr "вырезать"
 
-#: ../../../../src/ui_basic/textinput.cc:374
+#: ../../../../src/ui_basic/textinput.cc:376
 msgid "Cut the selected text to the clipboard"
 msgstr "Вырезать выделенный текст в буфер обмена"
 
-#: ../../../../src/ui_basic/textinput.cc:377
+#: ../../../../src/ui_basic/textinput.cc:379
 #: ../../../../src/ui_fsmenu/tech_info.cc:238
 msgid "Copy"
 msgstr "Копировать"
 
-#: ../../../../src/ui_basic/textinput.cc:377
+#: ../../../../src/ui_basic/textinput.cc:379
 msgid "Copy the selected text to the clipboard"
 msgstr "Скопировать выделенный текст в буфер обмена"
 
-#: ../../../../src/ui_basic/textinput.cc:380
+#: ../../../../src/ui_basic/textinput.cc:382
 msgid "Paste"
 msgstr "Вставить"
 
-#: ../../../../src/ui_basic/textinput.cc:380
+#: ../../../../src/ui_basic/textinput.cc:382
 msgid "Paste the clipboard content"
 msgstr "Вставить содержимое буфера"
 
-#: ../../../../src/ui_basic/textinput.cc:383
+#: ../../../../src/ui_basic/textinput.cc:385
 msgid "Delete the selected text"
 msgstr "Удалить выделенный текст"
 
-#: ../../../../src/ui_basic/textinput.cc:386
+#: ../../../../src/ui_basic/textinput.cc:388
 #: ../../../../src/wlapplication_options.cc:364
 msgid "Select All"
 msgstr "Выбрать все"
 
-#: ../../../../src/ui_basic/textinput.cc:386
+#: ../../../../src/ui_basic/textinput.cc:388
 msgid "Select the entire text"
 msgstr "Выделить весь текст"
 
@@ -4802,7 +4804,7 @@ msgstr "Управление установленными дополнениям
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:751
 msgid "Browse and install add-ons available on the server"
-msgstr ""
+msgstr "Просмотрите и установите дополнения, доступные на сервере"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:753
 #, c-format
@@ -4810,7 +4812,7 @@ msgid ""
 "Browse and install maps from the widelands.org website maps archive. Like "
 "manually downloaded maps, installed website maps are stored in the ‘%s’ "
 "directory under the Widelands home directory."
-msgstr ""
+msgstr "Просматривайте и устанавливайте карты из коллекции карт на сайте widelands.org. Как и карты, загруженные вручную, карты, установленные с сайта, хранятся в каталоге в домашнем каталоге Widelands, в подкаталоге %s."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:757
 msgid "Development"
@@ -4881,7 +4883,7 @@ msgstr "Один мир"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:820
 #, c-format
 msgid "Toggle world ‘%s’"
-msgstr ""
+msgstr "Переключить мир ‘%s’"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1012
 #, c-format
@@ -6643,6 +6645,7 @@ msgid "Choose Replay"
 msgstr "Выбрать повтор"
 
 #: ../../../../src/ui_fsmenu/loadgame.cc:62
+#: ../../../../src/wui/game_main_menu_save_game.cc:113
 msgid "Show Filenames"
 msgstr "Показывать имена файлов"
 
@@ -7863,31 +7866,31 @@ msgstr "Не указан параметр командной строки - %s"
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
 msgstr "Параметры командной строки %1$s и %2$s нельзя использовать вместе"
 
-#: ../../../../src/wlapplication.cc:1767
+#: ../../../../src/wlapplication.cc:1757
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Неизвестный параметр командной строки: %s\nМожет, пропущен знак \"=\"?"
 
-#: ../../../../src/wlapplication.cc:1915
+#: ../../../../src/wlapplication.cc:1905
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Задан неизвестный параметр командной строки: %s"
 
-#: ../../../../src/wlapplication.cc:1946
+#: ../../../../src/wlapplication.cc:1936
 msgid "Incompatible"
 msgstr "Несовместимо"
 
-#: ../../../../src/wlapplication.cc:1983
+#: ../../../../src/wlapplication.cc:1973
 msgid "Game ended unexpectedly"
 msgstr "Неожиданный конец игры"
 
-#: ../../../../src/wlapplication.cc:1983
+#: ../../../../src/wlapplication.cc:1973
 msgid "Unexpected error during the game"
 msgstr "Неожиданная ошибка во время игры"
 
-#: ../../../../src/wlapplication.cc:1986
+#: ../../../../src/wlapplication.cc:1976
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -7901,7 +7904,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Во время игры произошла ошибка. Сообщение об ошибке:\n\n%1$s\n\nПожалуйста, сообщите об этой проблеме, чтобы помочь нам улучшить Widelands. Вы найдете соответствующие сообщения в стандартном выводе (stdout.txt в Windows). Вы используете версию %2$s.\n\nПожалуйста, добавьте эту информацию в свой отчет.\n\nХотели бы вы, чтобы Widelands попытался создать автосохранение? Часто – хотя и не всегда – можно загрузить его и продолжить играть."
 
-#: ../../../../src/wlapplication.cc:1995
+#: ../../../../src/wlapplication.cc:1985
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -7911,11 +7914,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Игра неожиданно завершилась по следующей причине:\n\n%s.\n\nХотели бы вы, чтобы Widelands попытался создать автосохранение? Часто – хотя и не всегда – можно загрузить его и продолжить играть."
 
-#: ../../../../src/wlapplication.cc:2029
+#: ../../../../src/wlapplication.cc:2019
 msgid "Emergency save failed"
 msgstr "Автосохранение завершилось с ошибкой"
 
-#: ../../../../src/wlapplication.cc:2030
+#: ../../../../src/wlapplication.cc:2020
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -9169,22 +9172,22 @@ msgstr "Шахты"
 msgid "Ports"
 msgstr "Порты"
 
-#: ../../../../src/wui/building_statistics_menu.cc:734
+#: ../../../../src/wui/building_statistics_menu.cc:735
 msgid "Low productivity:"
 msgstr "Низкая производительность: "
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../../../src/wui/building_statistics_menu.cc:743
-#: ../../../../src/wui/building_statistics_menu.cc:762
-#: ../../../../src/wui/building_statistics_menu.cc:764
+#: ../../../../src/wui/building_statistics_menu.cc:744
+#: ../../../../src/wui/building_statistics_menu.cc:763
+#: ../../../../src/wui/building_statistics_menu.cc:765
 #: ../../../../src/wui/productionsitewindow.cc:233
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../../../src/wui/building_statistics_menu.cc:753
+#: ../../../../src/wui/building_statistics_menu.cc:754
 msgid "Lacking soldiers:"
 msgstr "Не хватает солдат:"
 
@@ -9815,8 +9818,8 @@ msgstr "Подтверждение выхода из игры"
 msgid "Are you sure you wish to exit this game?"
 msgstr "Вы действительно хотите покинуть эту игру?"
 
-#: ../../../../src/wui/game_main_menu_save_game.cc:288
-#: ../../../../src/wui/game_main_menu_save_game.cc:328
+#: ../../../../src/wui/game_main_menu_save_game.cc:327
+#: ../../../../src/wui/game_main_menu_save_game.cc:367
 msgid "Error Saving Game!"
 msgstr "Ошибка при сохранении игры!"
 
@@ -10204,15 +10207,15 @@ msgstr "Убрать товар"
 msgid "Add ware"
 msgstr "Добавить товар"
 
-#: ../../../../src/wui/inputqueuedisplay.cc:627
+#: ../../../../src/wui/inputqueuedisplay.cc:634
 msgid "Hide controls"
 msgstr "Скрыть панель"
 
-#: ../../../../src/wui/inputqueuedisplay.cc:627
+#: ../../../../src/wui/inputqueuedisplay.cc:634
 msgid "Show controls"
 msgstr "Показать панель"
 
-#: ../../../../src/wui/inputqueuedisplay.cc:683
+#: ../../../../src/wui/inputqueuedisplay.cc:690
 #, c-format
 msgid "+%u"
 msgstr "+%u"

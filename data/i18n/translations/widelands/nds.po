@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2024
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2025
 # GunChleoc, 2015
 # GunChleoc, 2016,2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-12-07 03:09+0000\n"
+"POT-Creation-Date: 2025-01-09 03:20+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2024\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -675,12 +675,12 @@ msgstr "Willst du de Bewarker würrelk verlaten?"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:575
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:125
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:328
-#: ../../../../src/ui_fsmenu/main.cc:294 ../../../../src/wlapplication.cc:1968
+#: ../../../../src/ui_fsmenu/main.cc:294 ../../../../src/wlapplication.cc:1958
 msgid "Error"
 msgstr "Fehler"
 
 #: ../../../../src/editor/editorinteractive.cc:1276
-#: ../../../../src/ui_fsmenu/main.cc:278 ../../../../src/wlapplication.cc:1970
+#: ../../../../src/ui_fsmenu/main.cc:278 ../../../../src/wlapplication.cc:1960
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -1142,7 +1142,7 @@ msgid "Click player to remove"
 msgstr "Speler tum wegdoon anklicken"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:61
-#: ../../../../src/ui_basic/textinput.cc:383
+#: ../../../../src/ui_basic/textinput.cc:385
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:438
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:67
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:90
@@ -1502,7 +1502,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "Kunn dat Verteeknis »%s« nich maken."
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:313
-#: ../../../../src/wui/game_main_menu_save_game.cc:286
+#: ../../../../src/wui/game_main_menu_save_game.cc:325
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Eene Datei mit de Naam »%s« gifft ’t al. Överschrieven?"
@@ -2589,7 +2589,7 @@ msgstr "(stoppt)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:480
-#: ../../../../src/wui/building_statistics_menu.cc:725
+#: ../../../../src/wui/building_statistics_menu.cc:726
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
@@ -3211,12 +3211,12 @@ msgid "Saving skipped"
 msgstr "Sekern översprungen"
 
 #: ../../../../src/logic/save_handler.cc:170
-#: ../../../../src/wui/game_main_menu_save_game.cc:338
+#: ../../../../src/wui/game_main_menu_save_game.cc:377
 msgid "Saving failed!"
 msgstr "Sekern is fehlslaan!"
 
 #: ../../../../src/logic/save_handler.cc:186
-#: ../../../../src/wui/game_main_menu_save_game.cc:321
+#: ../../../../src/wui/game_main_menu_save_game.cc:360
 msgid "Game saved"
 msgstr "Dat Speel is sekert worden!"
 
@@ -3514,7 +3514,7 @@ msgstr "Falsk Gebruuk, dat sall heten: /warn <Naam> <Grund>"
 #: ../../../../src/network/gamehost.cc:176
 #, c-format
 msgid "The client %s could not be found."
-msgstr "De Gast %s kunn nich funnen werden."
+msgstr "De Gast %s kunn nich funnen worden."
 
 #: ../../../../src/network/gamehost.cc:163
 msgid "Wrong use, should be: /kick <name> <reason>"
@@ -3693,7 +3693,7 @@ msgstr "%s hett de Deel verlaten"
 
 #: ../../../../src/network/internet_gaming.cc:666
 msgid "Chat message could not be sent."
-msgstr "De Snack-Naricht kunn nich schickt werden."
+msgstr "De Snack-Naricht kunn nich schickt worden."
 
 #: ../../../../src/network/internet_gaming.cc:674
 msgid "Command could not be executed."
@@ -3715,12 +3715,12 @@ msgstr "Hebb een unbekannten Befehl vum Metaserver kregen: %s"
 
 #: ../../../../src/network/internet_gaming.cc:859
 msgid "Message could not be sent: You are not connected to the metaserver!"
-msgstr "De Naricht kunn nich schickt werden, wiel du nich mit de Metaserver verbunnen büst!"
+msgstr "De Naricht kunn nich schickt worden, wiel du nich mit de Metaserver verbunnen büst!"
 
 #: ../../../../src/network/internet_gaming.cc:879
 #: ../../../../src/network/internet_gaming.cc:887
 msgid "Message could not be sent: Was this supposed to be a private message?"
-msgstr "De Naricht kunn nich schickt werden: Sull dat eene persöönlike Naricht wesen?"
+msgstr "De Naricht kunn nich schickt worden: Sull dat eene persöönlike Naricht wesen?"
 
 #: ../../../../src/network/internet_gaming.cc:902
 msgid "Supported admin commands:"
@@ -4013,17 +4013,19 @@ msgstr "Widelands kunn dat stedenwies Nett nich bruken. Wahrschienelk bedrifft e
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../../../src/scripting/lua_game.cc:1405
+#: ../../../../src/scripting/lua_game.cc:1407
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../../../src/scripting/lua_ui.cc:1226
-#: ../../../../src/scripting/lua_ui.cc:1248 ../../../../src/wui/plugins.cc:42
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:63
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:85
+#: ../../../../src/wui/plugins.cc:42
 msgid "Plugin Error"
 msgstr "Schnittstee-Inschuuv-Fehler"
 
-#: ../../../../src/scripting/lua_ui.cc:1227
-#: ../../../../src/scripting/lua_ui.cc:1249 ../../../../src/wui/plugins.cc:42
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:64
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:86
+#: ../../../../src/wui/plugins.cc:42
 #, c-format
 msgid ""
 "Error when running plugin:\n"
@@ -4098,7 +4100,7 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Nich utköort"
 
-#: ../../../../src/ui_basic/dropdown.h:479
+#: ../../../../src/ui_basic/dropdown.h:483
 msgid "No matches"
 msgstr "Nix funnen"
 
@@ -4309,41 +4311,41 @@ msgstr "Klick tum Sorteren na deeser Striep"
 msgid "%1$s<br>(%2$s)"
 msgstr "%1$s<br>(%2$s)"
 
-#: ../../../../src/ui_basic/textinput.cc:374
+#: ../../../../src/ui_basic/textinput.cc:376
 msgid "Cut"
 msgstr "Utsnieden"
 
-#: ../../../../src/ui_basic/textinput.cc:374
+#: ../../../../src/ui_basic/textinput.cc:376
 msgid "Cut the selected text to the clipboard"
 msgstr "De utköört Text utsnieden"
 
-#: ../../../../src/ui_basic/textinput.cc:377
+#: ../../../../src/ui_basic/textinput.cc:379
 #: ../../../../src/ui_fsmenu/tech_info.cc:238
 msgid "Copy"
 msgstr "Koperen"
 
-#: ../../../../src/ui_basic/textinput.cc:377
+#: ../../../../src/ui_basic/textinput.cc:379
 msgid "Copy the selected text to the clipboard"
 msgstr "De utköört Text koperen"
 
-#: ../../../../src/ui_basic/textinput.cc:380
+#: ../../../../src/ui_basic/textinput.cc:382
 msgid "Paste"
 msgstr "Infögen"
 
-#: ../../../../src/ui_basic/textinput.cc:380
+#: ../../../../src/ui_basic/textinput.cc:382
 msgid "Paste the clipboard content"
 msgstr "De kopeert of utsniedt Text infögen"
 
-#: ../../../../src/ui_basic/textinput.cc:383
+#: ../../../../src/ui_basic/textinput.cc:385
 msgid "Delete the selected text"
 msgstr "De utköört Text lösken"
 
-#: ../../../../src/ui_basic/textinput.cc:386
+#: ../../../../src/ui_basic/textinput.cc:388
 #: ../../../../src/wlapplication_options.cc:364
 msgid "Select All"
 msgstr "All utkören"
 
-#: ../../../../src/ui_basic/textinput.cc:386
+#: ../../../../src/ui_basic/textinput.cc:388
 msgid "Select the entire text"
 msgstr "De hele Text utkören"
 
@@ -5027,14 +5029,14 @@ msgstr "Verwiederns mit Fehlers mit de Ofhangens warken villicht nich as se sall
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
-msgstr "Dat Verwiedern »%1$s« kann nich upladen werden, denn siene Versioon (%2$s) is nich nejer as de Versioon up de Server (%3$s)."
+msgstr "Dat Verwiedern »%1$s« kann nich upladen worden, denn siene Versioon (%2$s) is nich nejer as de Versioon up de Server (%3$s)."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1921
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
-msgstr "Dat Verwiedern »%1$s« kann nich upladen werden, denn sien Deel (%2$s) is anners as siene Deel up de Server (%3$s)."
+msgstr "Dat Verwiedern »%1$s« kann nich upladen worden, denn sien Deel (%2$s) is anners as siene Deel up de Server (%3$s)."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1932
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:54
@@ -6550,6 +6552,7 @@ msgid "Choose Replay"
 msgstr "Upteken utkören"
 
 #: ../../../../src/ui_fsmenu/loadgame.cc:62
+#: ../../../../src/wui/game_main_menu_save_game.cc:113
 msgid "Show Filenames"
 msgstr "Wies Namen vun de Dateien"
 
@@ -7770,31 +7773,31 @@ msgstr "Leger Weert för Oorderreeg-Angaav --%s"
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
 msgstr "Oorderreeg-Angaven --%1$s un --%2$s könen nich tosamen bruukt worden"
 
-#: ../../../../src/wlapplication.cc:1767
+#: ../../../../src/wlapplication.cc:1757
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Oorderreeg-Befehl »%s« is unbekannt.\nVillicht föhlt een »=«?"
 
-#: ../../../../src/wlapplication.cc:1915
+#: ../../../../src/wlapplication.cc:1905
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Oorderreeg-Befehl »%s« is unbekannt"
 
-#: ../../../../src/wlapplication.cc:1946
+#: ../../../../src/wlapplication.cc:1936
 msgid "Incompatible"
 msgstr "Nich verdragelk"
 
-#: ../../../../src/wlapplication.cc:1983
+#: ../../../../src/wlapplication.cc:1973
 msgid "Game ended unexpectedly"
 msgstr "Speel ennt unverwacht"
 
-#: ../../../../src/wlapplication.cc:1983
+#: ../../../../src/wlapplication.cc:1973
 msgid "Unexpected error during the game"
 msgstr "Unverwachter Fehler bi’m Spölen"
 
-#: ../../../../src/wlapplication.cc:1986
+#: ../../../../src/wlapplication.cc:1976
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -7808,7 +7811,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Bi’m Spölen is een Fehler uptreden. De Fehler seggt:\n\n%1$s\n\nBidde melle deeses Probleem, daarmit wi Widelands beter maken könen. Du finnst wichtige Mellungen in de Normaal-Utgaav (unner Windows is dat stdout.txt). Du bruukst Versioon %2$s.\n\nBidde föög deese Informatioon to de Fehler-Mellen hento.\n\nSall Widelands versöken, dat Speel in deesem Noodfall to sekern? Mennigmaal – aver nich alltieden – kann man dat laden un wiederspölen."
 
-#: ../../../../src/wlapplication.cc:1995
+#: ../../../../src/wlapplication.cc:1985
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -7818,11 +7821,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Dat Speel hett um dat unverwacht ennt:\n\n%s\n\nSall Widelands versöken, dat Speel in deesem Noodfall to sekern? Mennigmaal – aver nich alltieden – kann man dat laden un wiederspölen."
 
-#: ../../../../src/wlapplication.cc:2029
+#: ../../../../src/wlapplication.cc:2019
 msgid "Emergency save failed"
 msgstr "Noodfall-Sekern fehlslaan"
 
-#: ../../../../src/wlapplication.cc:2030
+#: ../../../../src/wlapplication.cc:2020
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -7872,11 +7875,11 @@ msgstr "Schanz"
 
 #: ../../../../src/wlapplication_options.cc:192
 msgid "Woodcutter’s House"
-msgstr "Boomslageree"
+msgstr "Boomslagerhuus"
 
 #: ../../../../src/wlapplication_options.cc:193
 msgid "Forester’s House"
-msgstr "Förster-Huus"
+msgstr "Försterhuus"
 
 #: ../../../../src/wlapplication_options.cc:194
 msgid "Quarry"
@@ -7956,7 +7959,7 @@ msgstr "Panzersmee"
 
 #: ../../../../src/wlapplication_options.cc:213
 msgid "Weaving Mill"
-msgstr "Spinnweelmöhlen"
+msgstr "Weevstohl"
 
 #: ../../../../src/wlapplication_options.cc:214
 msgid "Shipyard"
@@ -9072,22 +9075,22 @@ msgstr "Bargwarken"
 msgid "Ports"
 msgstr "Muden"
 
-#: ../../../../src/wui/building_statistics_menu.cc:734
+#: ../../../../src/wui/building_statistics_menu.cc:735
 msgid "Low productivity:"
 msgstr "Lege Wöörde:"
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../../../src/wui/building_statistics_menu.cc:743
-#: ../../../../src/wui/building_statistics_menu.cc:762
-#: ../../../../src/wui/building_statistics_menu.cc:764
+#: ../../../../src/wui/building_statistics_menu.cc:744
+#: ../../../../src/wui/building_statistics_menu.cc:763
+#: ../../../../src/wui/building_statistics_menu.cc:765
 #: ../../../../src/wui/productionsitewindow.cc:233
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../../../src/wui/building_statistics_menu.cc:753
+#: ../../../../src/wui/building_statistics_menu.cc:754
 msgid "Lacking soldiers:"
 msgstr "Soldaten hapern:"
 
@@ -9401,7 +9404,7 @@ msgstr "Bespejer stüren, um dat Gewest uttoförsken"
 msgid ""
 "You need to connect this flag to a scouting building before you can send a "
 "scout here."
-msgstr "Du muttst deese Fahn mit eenem Bespejer-Huus verbinnen, ehr du hier eenen Bespejer henstüren kannst."
+msgstr "Du muttst deese Fahn mit eenem Bespejerhuus verbinnen, ehr du hier eenen Bespejer henstüren kannst."
 
 #: ../../../../src/wui/fieldaction.cc:493
 msgid "Place a flag"
@@ -9718,8 +9721,8 @@ msgstr "Speel würrelk verlaten?"
 msgid "Are you sure you wish to exit this game?"
 msgstr "Willst du deeses Speel würrelk verlaten?"
 
-#: ../../../../src/wui/game_main_menu_save_game.cc:288
-#: ../../../../src/wui/game_main_menu_save_game.cc:328
+#: ../../../../src/wui/game_main_menu_save_game.cc:327
+#: ../../../../src/wui/game_main_menu_save_game.cc:367
 msgid "Error Saving Game!"
 msgstr "Fehler bi’m Sekern vum Speel!"
 
@@ -10099,15 +10102,15 @@ msgstr "Waar wegdoon"
 msgid "Add ware"
 msgstr "Waar hentofögen"
 
-#: ../../../../src/wui/inputqueuedisplay.cc:627
+#: ../../../../src/wui/inputqueuedisplay.cc:634
 msgid "Hide controls"
 msgstr "Stüren verbargen"
 
-#: ../../../../src/wui/inputqueuedisplay.cc:627
+#: ../../../../src/wui/inputqueuedisplay.cc:634
 msgid "Show controls"
 msgstr "Stüren wiesen"
 
-#: ../../../../src/wui/inputqueuedisplay.cc:683
+#: ../../../../src/wui/inputqueuedisplay.cc:690
 #, c-format
 msgid "+%u"
 msgstr "+%u"
@@ -11211,7 +11214,7 @@ msgstr "Utwieken: %u"
 
 #: ../../../../src/wui/soldier_statistics_menu.cc:241
 msgid "By Attribute"
-msgstr "Na Egenskupp"
+msgstr "Na Eegenskupp"
 
 #: ../../../../src/wui/soldier_statistics_menu.cc:255
 #, c-format

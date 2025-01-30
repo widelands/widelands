@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # fenris <fenris@folksprak.org>, 2014
@@ -7,15 +7,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Peter Garami <petro.garami@gmail.com>, 2021
-# Raúl Contreras, 2024
+# Raúl Contreras, 2024-2025
 # Ximena Delgado, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-12-07 03:09+0000\n"
+"POT-Creation-Date: 2025-01-09 03:20+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Raúl Contreras, 2024\n"
+"Last-Translator: Raúl Contreras, 2024-2025\n"
 "Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/language/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -493,7 +493,7 @@ msgstr "Origino de la mapo"
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
-msgstr "Agordu la pozicion, kiu havos la koordinatojn (0, 0). Ĉi tiu estos la supra-maldekstra angulo de la generita minimapo."
+msgstr "Agordu la pozicion, kiu havos la koordinatojn (0, 0). Ĉi tiu estos la supra-maldekstra angulo de la generita mapeto."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:388
@@ -676,12 +676,12 @@ msgstr "Ĉu vi certas, ke vi volas eliri el la redaktilo?"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:575
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:125
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:328
-#: ../../../../src/ui_fsmenu/main.cc:294 ../../../../src/wlapplication.cc:1968
+#: ../../../../src/ui_fsmenu/main.cc:294 ../../../../src/wlapplication.cc:1958
 msgid "Error"
 msgstr "Eraro"
 
 #: ../../../../src/editor/editorinteractive.cc:1276
-#: ../../../../src/ui_fsmenu/main.cc:278 ../../../../src/wlapplication.cc:1970
+#: ../../../../src/ui_fsmenu/main.cc:278 ../../../../src/wlapplication.cc:1960
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -1143,7 +1143,7 @@ msgid "Click player to remove"
 msgstr "Alklaku ludanton por forigi"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:61
-#: ../../../../src/ui_basic/textinput.cc:383
+#: ../../../../src/ui_basic/textinput.cc:385
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:438
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:67
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:90
@@ -1503,7 +1503,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "Eraro dum kreado de la dosierujo \"%s\"."
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:313
-#: ../../../../src/wui/game_main_menu_save_game.cc:286
+#: ../../../../src/wui/game_main_menu_save_game.cc:325
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Dosiero kun la nomo \"%s\" jam ekzistas. Ĉu anstataŭigi ĝin?"
@@ -2590,7 +2590,7 @@ msgstr "(haltigita)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:480
-#: ../../../../src/wui/building_statistics_menu.cc:725
+#: ../../../../src/wui/building_statistics_menu.cc:726
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
@@ -3212,52 +3212,52 @@ msgid "Saving skipped"
 msgstr "Savado preterlasita"
 
 #: ../../../../src/logic/save_handler.cc:170
-#: ../../../../src/wui/game_main_menu_save_game.cc:338
+#: ../../../../src/wui/game_main_menu_save_game.cc:377
 msgid "Saving failed!"
 msgstr "Savado malsukcesis!"
 
 #: ../../../../src/logic/save_handler.cc:186
-#: ../../../../src/wui/game_main_menu_save_game.cc:321
+#: ../../../../src/wui/game_main_menu_save_game.cc:360
 msgid "Game saved"
 msgstr "Ludo savita"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:887
 msgid "Building’s inputs changed!"
-msgstr "La enigoj de la konstruaĵo ŝanĝiĝis!"
+msgstr "La enigaĵoj de la konstruaĵo ŝanĝiĝis!"
 
 #. * TRANSLATORS: The argument is the buiding name
 #: ../../../../src/map_io/map_buildingdata_packet.cc:898
 #, c-format
 msgid "%s: the building’s inputs have changed."
-msgstr ""
+msgstr "%s: La enigoj de la konstruaĵo ŝanĝiĝis."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:901
 msgid "The following wares have been deleted:"
-msgstr ""
+msgstr "La sekvaj varoj estis forigitaj:"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:908
 #, c-format
 msgid "%1$u piece of %2$s"
 msgid_plural "%1$u pieces of %2$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u peco de %2$s"
+msgstr[1] "%1$u pecoj de %2$s"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:914
 #, c-format
 msgid "%1$u piece of an unknown ware"
 msgid_plural "%1$u pieces of unknown wares"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u peco de nekonata varo."
+msgstr[1] "%1$u pecoj de nekonataj varoj."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:920
 msgid ""
 "The game was probably saved with a different Widelands version or with "
 "different enabled add-ons."
-msgstr ""
+msgstr "La ludo verŝajne estis konservita per alia versio de Widelands aŭ kun aliaj aktivigitaj aldonaĵoj."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:923
 msgid "Please review the current production programs and input settings."
-msgstr ""
+msgstr "Bonvolu revizii la nunajn produktadajn programojn kaj enigaĵajn agordojn."
 
 #: ../../../../src/map_io/map_saver.cc:85
 #, c-format
@@ -3291,7 +3291,7 @@ msgstr "Mapversio"
 #: ../../../../src/map_io/map_saver.cc:174
 #: ../../../../src/map_io/widelands_map_loader.cc:291
 msgid "Building restrictions"
-msgstr ""
+msgstr "Konstruaĵaj limitigoj"
 
 #: ../../../../src/map_io/map_saver.cc:199
 #: ../../../../src/map_io/widelands_map_loader.cc:316
@@ -3302,7 +3302,7 @@ msgstr "Flagoj"
 #: ../../../../src/map_io/map_saver.cc:206
 #: ../../../../src/map_io/widelands_map_loader.cc:323
 msgid "Roads and waterways"
-msgstr ""
+msgstr "Vojoj kaj akvovojoj"
 
 #: ../../../../src/map_io/map_saver.cc:228
 #: ../../../../src/map_io/widelands_map_loader.cc:253
@@ -3320,11 +3320,11 @@ msgstr "Flagdetaloj"
 
 #: ../../../../src/map_io/map_saver.cc:255
 msgid "Road and waterway details"
-msgstr ""
+msgstr "Vojaj kaj akvovojaj detaloj"
 
 #: ../../../../src/map_io/map_saver.cc:272
 msgid "Building details"
-msgstr ""
+msgstr "Konstruaĵa detaloj"
 
 #: ../../../../src/map_io/map_saver.cc:280
 msgid "Territory"
@@ -3333,12 +3333,12 @@ msgstr "Teritorio"
 #: ../../../../src/map_io/map_saver.cc:287
 #: ../../../../src/map_io/widelands_map_loader.cc:390
 msgid "Vision"
-msgstr "Vizio"
+msgstr "Vido"
 
 #: ../../../../src/map_io/map_saver.cc:296
 #: ../../../../src/map_io/widelands_map_loader.cc:425
 msgid "Scripting"
-msgstr "Skripta"
+msgstr "Skriptado"
 
 #: ../../../../src/map_io/map_saver.cc:303
 #: ../../../../src/map_io/widelands_map_loader.cc:418
@@ -3363,21 +3363,21 @@ msgid ""
 "The engine received a SIGABRT signal which was most likely triggered by a "
 "corrupted savegame. No solution for this bug has been implemented yet. We "
 "are sorry, but this savegame seems to be broken beyond repair."
-msgstr ""
+msgstr "La motoro ricevis signalon SIGABRT, kiu plej verŝajne estis kaŭzita de difektita konservita ludo. Ankoraŭ ne estas solvo por ĉi tiu eraro. Ni bedaŭras, sed ĉi tiu konservita ludo ŝajnas esti neripareble difektita."
 
 #: ../../../../src/map_io/s2map.cc:422
 #: ../../../../src/map_io/widelands_map_loader.cc:196
 msgid "Loading map…"
-msgstr "Ŝarganta mapon…"
+msgstr "Ŝargante mapon…"
 
 #: ../../../../src/map_io/s2map.cc:460
 msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr "Mapo de \"Bluebyte Setlantoj II\". Nenia komento estas difinita!"
+msgstr "Bluebyte Settlers II Mapo. Neniu komento difinita!"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:209
 #, c-format
 msgid "Loading map: %1$s (%2$u/%3$d)"
-msgstr ""
+msgstr "Ŝargante mapon: %1$s (%2$u/%3$d)"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:304
 msgid "Territories"
@@ -3385,39 +3385,39 @@ msgstr "Teritorioj"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:344
 msgid "Initializing flags"
-msgstr "Inicializante flagojn"
+msgstr "Iniciatante flagojn"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:351
 msgid "Initializing roads and waterways"
-msgstr "Inicializante vojojn kaj akvovojojn"
+msgstr "Iniciatante vojojn kaj akvovojojn"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:364
 msgid "Initializing buildings"
-msgstr "Inicializante konstruaĵojn"
+msgstr "Iniciatante konstruaĵojn"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:371
 msgid "Initializing map objects"
-msgstr "Inicializante mapobjektoj"
+msgstr "Iniciatante mapobjektojn"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:435
 msgid "Checking map"
-msgstr ""
+msgstr "Kontrolante mapon"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:450
 msgid "Postloading map objects"
-msgstr ""
+msgstr "Postŝargante mapobjektojn"
 
 #: ../../../../src/network/gameclient.cc:163
 #: ../../../../src/network/gamehost.cc:561
 #: ../../../../src/ui_fsmenu/launch_spg.cc:174
 #: ../../../../src/wlapplication.cc:908
 msgid "Preparing game…"
-msgstr ""
+msgstr "Preparante ludon…"
 
 #: ../../../../src/network/gameclient.cc:233
 #: ../../../../src/network/internet_gaming.cc:104
 msgid "Could not establish connection to host"
-msgstr ""
+msgstr "Ne povis establi konekton al gastiganto"
 
 #: ../../../../src/network/gameclient.cc:234
 #, c-format
@@ -3425,42 +3425,42 @@ msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was reachable at the TCP port %u or the server shut down as"
 " you tried to connect."
-msgstr ""
+msgstr "Widelands ne povis establi konekton al la indikita adreso. Aŭ neniu Widelands-servilo estis atingebla ĉe la TCP-haveno %u, aŭ la servilo malŝaltiĝis dum vi provis konektiĝi."
 
 #: ../../../../src/network/gameclient.cc:817
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u kromprograma malkongruo detektita:\n"
+msgstr[1] "%u kromprogramaj malkongruoj detektitaj:\n"
 
 #: ../../../../src/network/gameclient.cc:819
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
-msgstr ""
+msgstr "%1$s\n• ‘%2$s’ bezonata de gastiganto ne trovita"
 
 #: ../../../../src/network/gameclient.cc:822
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
-msgstr ""
+msgstr "%1$s\n• ‘%2$s’ instalita ĉe versio %3$s sed la gastiganto uzas version %4$s"
 
 #: ../../../../src/network/gameclient.cc:989
 msgid "/me ’s file failed md5 checksumming."
-msgstr ""
+msgstr "La dosiero de /me malsukcesis ĉe la MD5-kontrolsumado."
 
 #: ../../../../src/network/gameclient.cc:1031
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
-msgstr ""
+msgstr "/me analizis la ricevitan dosieron. Kvankam la MD5-kontrolsumado sukcesis, mi ne povas prilabori la dosieron."
 
 #: ../../../../src/network/gameclient.cc:1352
 msgid "Disconnected"
-msgstr ""
+msgstr "Malkonektita"
 
 #: ../../../../src/network/gameclient.cc:1353
 #, c-format
@@ -4014,17 +4014,19 @@ msgstr ""
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../../../src/scripting/lua_game.cc:1405
+#: ../../../../src/scripting/lua_game.cc:1407
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../../../src/scripting/lua_ui.cc:1226
-#: ../../../../src/scripting/lua_ui.cc:1248 ../../../../src/wui/plugins.cc:42
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:63
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:85
+#: ../../../../src/wui/plugins.cc:42
 msgid "Plugin Error"
 msgstr ""
 
-#: ../../../../src/scripting/lua_ui.cc:1227
-#: ../../../../src/scripting/lua_ui.cc:1249 ../../../../src/wui/plugins.cc:42
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:64
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:86
+#: ../../../../src/wui/plugins.cc:42
 #, c-format
 msgid ""
 "Error when running plugin:\n"
@@ -4099,7 +4101,7 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr ""
 
-#: ../../../../src/ui_basic/dropdown.h:479
+#: ../../../../src/ui_basic/dropdown.h:483
 msgid "No matches"
 msgstr ""
 
@@ -4310,41 +4312,41 @@ msgstr ""
 msgid "%1$s<br>(%2$s)"
 msgstr ""
 
-#: ../../../../src/ui_basic/textinput.cc:374
+#: ../../../../src/ui_basic/textinput.cc:376
 msgid "Cut"
 msgstr ""
 
-#: ../../../../src/ui_basic/textinput.cc:374
+#: ../../../../src/ui_basic/textinput.cc:376
 msgid "Cut the selected text to the clipboard"
 msgstr ""
 
-#: ../../../../src/ui_basic/textinput.cc:377
+#: ../../../../src/ui_basic/textinput.cc:379
 #: ../../../../src/ui_fsmenu/tech_info.cc:238
 msgid "Copy"
 msgstr ""
 
-#: ../../../../src/ui_basic/textinput.cc:377
+#: ../../../../src/ui_basic/textinput.cc:379
 msgid "Copy the selected text to the clipboard"
 msgstr ""
 
-#: ../../../../src/ui_basic/textinput.cc:380
+#: ../../../../src/ui_basic/textinput.cc:382
 msgid "Paste"
 msgstr ""
 
-#: ../../../../src/ui_basic/textinput.cc:380
+#: ../../../../src/ui_basic/textinput.cc:382
 msgid "Paste the clipboard content"
 msgstr ""
 
-#: ../../../../src/ui_basic/textinput.cc:383
+#: ../../../../src/ui_basic/textinput.cc:385
 msgid "Delete the selected text"
 msgstr ""
 
-#: ../../../../src/ui_basic/textinput.cc:386
+#: ../../../../src/ui_basic/textinput.cc:388
 #: ../../../../src/wlapplication_options.cc:364
 msgid "Select All"
 msgstr ""
 
-#: ../../../../src/ui_basic/textinput.cc:386
+#: ../../../../src/ui_basic/textinput.cc:388
 msgid "Select the entire text"
 msgstr ""
 
@@ -4401,7 +4403,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/about.cc:38 ../../../../src/ui_fsmenu/main.cc:523
 msgid "About Widelands"
-msgstr ""
+msgstr "Pri Widelands"
 
 #: ../../../../src/ui_fsmenu/about.cc:49 ../../../../src/ui_fsmenu/about.cc:54
 msgid "Lua Error"
@@ -4515,7 +4517,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:148
 msgid "This add-on may cause major glitches and errors."
-msgstr ""
+msgstr "Ĉi tiu kromprogramo povas kaŭzi gravajn paneojn kaj erarojn."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../../../src/ui_fsmenu/addons/manager.cc:154
@@ -4525,7 +4527,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:154
 msgid "This add-on works as advertised."
-msgstr ""
+msgstr "Ĉi tiu kromprogramo funkcias kiel anoncite."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../../../src/ui_fsmenu/addons/manager.cc:159
@@ -4535,11 +4537,11 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:160
 msgid "This add-on has been decorated for its remarkably high quality."
-msgstr ""
+msgstr "Ĉi tiu kromprogramo estis honorita pro sia rimarkinde alta kvalito."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:172
 msgid "Add-On Manager"
-msgstr ""
+msgstr "Kromprograma Administrilo"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:309
 msgid "Verified only"
@@ -4547,7 +4549,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:310
 msgid "Show only verified add-ons"
-msgstr ""
+msgstr "Montri nur aprobitajn kromprogramojn"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:318
 #: ../../../../src/ui_fsmenu/addons/manager.cc:329
@@ -4592,7 +4594,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:455
 msgid "Choose add-on to upload…"
-msgstr ""
+msgstr "Elektu kromprogramon por alŝuti…"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:466
 msgid "Upload a screenshot…"
@@ -4619,7 +4621,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:511
 msgid "Refresh the list of add-ons available from the server"
-msgstr ""
+msgstr "Ĝisdatigu la liston de kromprogramoj disponeblaj ĉe la servilo"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:528
 msgid "Fix dependencies…"
@@ -4631,23 +4633,23 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:539
 msgid "Move selected add-on to top"
-msgstr ""
+msgstr "Movu la elektitan kromprogramon al la supro."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:548
 msgid "Move selected add-on one step up"
-msgstr ""
+msgstr "Movu la elektitan kromprogramon unu paŝon supren"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:557
 msgid "Move selected add-on one step down"
-msgstr ""
+msgstr "Movu la elektitan kromprogramon unu paŝon malsupren"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:566
 msgid "Move selected add-on to bottom"
-msgstr ""
+msgstr "Movu la elektitan kromprogramon al la malsupro"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:574
 msgid "Launch the add-ons packager…"
-msgstr ""
+msgstr "Lanĉu la kromprograman pakaĵilon…"
 
 #. * TRANSLATORS: This button allows the user to send a message to the
 #. Widelands
@@ -4658,7 +4660,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:604
 msgid "Tools for Add-Ons Developers"
-msgstr ""
+msgstr "Iloj por Kromprogramaj Programistoj"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:612
 msgid ""
@@ -4666,14 +4668,14 @@ msgid ""
 "ons. You can bundle maps designed with the Widelands Map Editor as an add-on"
 " using the graphical interface and share them with other players, without "
 "having to write a single line of code."
-msgstr ""
+msgstr "La interaga kromprograma pakaĵilo permesas al vi krei, redakti, kaj forigi kromprogramojn. Vi povas kunigi mapojn desegnitajn per la Mapredaktilo de Widelands kiel kromprogramon, uzante la grafikan interfacon, kaj kundividi ilin kun aliaj ludantoj, sen devi skribi eĉ unu linion da kodo."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:627
 #, c-format
 msgid ""
 "For more information regarding how to develop and package your own add-ons, "
 "please visit %s."
-msgstr ""
+msgstr "Por pliaj informoj pri kiel disvolvi kaj paki viajn proprajn kromprogramojn, bonvolu viziti %s."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:643
 msgid ""
@@ -4682,7 +4684,7 @@ msgid ""
 "terms of the GNU General Public License (GPL) version 2 (the same license "
 "under which Widelands itself is distributed). For more information on the "
 "GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu."
-msgstr ""
+msgstr "Ĉi tie vi povas alŝuti viajn kromprogramojn al la servilo por igi ilin disponeblaj al aliaj ludantoj. Per alŝuto, vi konsentas publikigi vian kreitaĵon laŭ la kondiĉoj de la GNU-General Public License (GPL) versio 2 (la sama permesilo laŭ kiu Widelands mem estas distribuita). Por pliaj informoj pri la GPL, bonvolu konsulti 'Pri Widelands' → 'Permesilo' en la ĉefa menuo."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:650
 msgid ""
@@ -4690,7 +4692,7 @@ msgid ""
 " spam. By uploading an add-on, you assert that the add-on is of your own "
 "creation or you have the add-on’s author(s) permission to submit it in their"
 " stead."
-msgstr ""
+msgstr "Estas malpermesite alŝuti kromprogramojn, kiuj enhavas damaĝan aŭ malican enhavon aŭ spamon. Per alŝuto de kromprogramo, vi asertas, ke la kromprogramo estas via propra kreitaĵo aŭ ke vi havas la permeson de la aŭtoro(j) por sendi ĝin anstataŭ ili."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:656
 msgid ""
@@ -4698,7 +4700,7 @@ msgid ""
 " further above before submitting content. Since the documentation is subject"
 " to frequent changes, ensure that you have read it recently and that you "
 "followed all guidelines stated there."
-msgstr ""
+msgstr "Vi devas esti leginta la dokumentaron pri kromprogramoj sub la supre donita ligilo antaŭ ol sendi enhavon. Ĉar la dokumentaro estas ofte ŝanĝata, certigu, ke vi legas ĝin lastatempe kaj ke vi sekvas ĉiujn tie indikitajn gvidliniojn."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:662
 msgid ""
@@ -4706,7 +4708,7 @@ msgid ""
 " In case they have further inquiries, they will contact you via a PM on the "
 "Widelands website; therefore please check the inbox of your online user "
 "profile page frequently."
-msgstr ""
+msgstr "La Disvolva Teamo de Widelands revizios vian kromprogramon baldaŭ post la alŝuto. Se ili havas pliajn demandojn, ili kontaktos vin per privata mesaĝo en la retejo de Widelands; do bonvolu ofte kontroli la enirkeston de via reta uzantprofilo."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:692
 #, c-format
@@ -4715,7 +4717,7 @@ msgid ""
 "of an add-on or collaborating with another add-on designer? Please visit our"
 " forums at %s, explain your needs, and the Widelands Development Team will "
 "be happy to help."
-msgstr ""
+msgstr "Teknikaj problemoj? Nekomprenebla dokumentaro? Pli altnivelaj bezonoj kiel forigo de kromprogramo aŭ kunlaboro kun alia kromprograma projektisto? Bonvolu viziti niajn forumojn ĉe %s, klarigu viajn bezonojn, kaj la Disvolva Teamo de Widelands volonte helpos vin."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:709
 msgid ""
@@ -4726,15 +4728,15 @@ msgid ""
 "use this way of communication only if there is a reason why your concern is "
 "not for everyone’s ears. You’ll receive our reply via a PM on your Widelands"
 " website user profile page."
-msgstr ""
+msgstr "Alternative, vi ankaŭ povas sendi mesaĝon al la Disvolva Teamo de Widelands, kaj ni provos helpi vin kun via demando kiel eble plej baldaŭ. Nur la servilaj administrantoj povas legi mesaĝojn senditajn per ĉi tiu maniero. Ĉar aliaj kromprogramaj projektistoj ofte povas profiti de demandoj kaj respondoj de aliaj, bonvolu uzi ĉi tiun komunikmanieron nur se ekzistas kialo, ke via afero ne estas por ĉiuj oreloj. Vi ricevos nian respondon per privata mesaĝo en la uzantprofilo de la retejo de Widelands."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:749
 msgid "Manage your installed add-ons"
-msgstr ""
+msgstr "Administru viajn instalitajn kromprogramojn"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:751
 msgid "Browse and install add-ons available on the server"
-msgstr ""
+msgstr "Foliumu kaj instalu kromprogramojn disponeblajn ĉe la servilo"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:753
 #, c-format
@@ -4750,7 +4752,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:757
 msgid "Tools for add-on developers"
-msgstr ""
+msgstr "Iloj por kromprogramaj programistoj"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:761
@@ -4794,7 +4796,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:784
 msgid "Filter add-ons by name"
-msgstr ""
+msgstr "Filtru kromprogramojn laŭ nomo"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:785
 msgid "Filter maps by name"
@@ -4819,8 +4821,8 @@ msgstr ""
 #, c-format
 msgid "Are you certain that you want to upgrade this %u add-on?"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ĉu vi certas, ke vi volas ĝisdatigi tiun %u kromprogramon?"
+msgstr[1] "Ĉu vi certas, ke vi volas ĝisdatigi tiujn %u kromprogramojn?"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1018
 #, c-format
@@ -4851,11 +4853,11 @@ msgstr ""
 msgid ""
 "Click to log in. You can then comment and vote on add-ons and upload your "
 "own add-ons."
-msgstr ""
+msgstr "Alklaku por ensaluti. Poste vi povas komenti kaj voĉdoni pri kromprogramoj kaj alŝuti viajn proprajn kromprogramojn."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1180
 msgid "Please log in to upload add-ons"
-msgstr ""
+msgstr "Bonvolu ensaluti por alŝuti kromprogramojn"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1182
 msgid "Please log in to upload content"
@@ -4881,7 +4883,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1195
 msgid "Please tick the confirmation checkbox to upload add-ons"
-msgstr ""
+msgstr "Bonvolu marki la konfirmokeston por alŝuti kromprogramojn"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1198
 msgid "Please tick the confirmation checkbox to upload content"
@@ -4913,7 +4915,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1351
 #, c-format
 msgid "Fetching add-ons… (%.1f%%)"
-msgstr ""
+msgstr "Alŝutas kromprogramojn… (%.1f%%)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1354
 msgid "Connecting to the server…"
@@ -4934,7 +4936,7 @@ msgstr ""
 msgid ""
 "Unable to fetch the list of available add-ons from the server!<br>Error "
 "Message: %s"
-msgstr ""
+msgstr "Ne eblas akiri la liston de disponeblaj kromprogramoj el la servilo!<br>Erarmesaĝo: %s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1536
 #, c-format
@@ -4957,14 +4959,14 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1614
 msgid "No upgrades are available for your installed add-ons"
-msgstr ""
+msgstr "Neniuj ĝisdatigoj disponeblas por viaj instalitaj kromprogramoj"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1616
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ĝisdatigu la jenan %u kromprogramon:"
+msgstr[1] "Ĝisdatigu la jenajn %u kromprogramojn:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1621
 #, c-format
@@ -4993,7 +4995,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1719
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
-msgstr ""
+msgstr "• \"%1$s\" bezonas \"%2$s\", kiu estas listigita sub la postulanta kromprogramo"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1747
 #, c-format
@@ -5008,7 +5010,7 @@ msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
 "Error message:\n"
 "%s"
-msgstr ""
+msgstr "Aktivigita kromprogramo estas difekta. Neniuj ludoj povas esti komencitaj kun la nuna agordo.\nErarmesaĝo:\n%s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1780
 #, c-format
@@ -5021,21 +5023,21 @@ msgstr[1] ""
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
-msgstr ""
+msgstr "Kromprogramoj kun dependecaj eraroj povas funkcii malĝuste aŭ malhelpi ludojn kaj mapojn ŝargiĝi."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1910
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
-msgstr ""
+msgstr "La kromprogramo \"%1$s\" ne povas esti alŝutita, ĉar ĝia versio (%2$s) ne estas pli nova ol la versio ĉeestanta en la servilo (%3$s)."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1921
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
-msgstr ""
+msgstr "La kromprogramo \"%1$s\" ne povas esti alŝutita, ĉar ĝia kategorio (%2$s) ne estas pli nova ol la versio ĉeestanta en la servilo (%3$s)."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1932
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:54
@@ -5045,7 +5047,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1933
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
-msgstr ""
+msgstr "Ĉu vi vere volas alŝuti la kromprogramon \"%s\" al la servilo?"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1943
 #, c-format
@@ -5068,7 +5070,7 @@ msgstr ""
 msgid ""
 "The add-on ‘%s’ may not be uploaded to the server because the following "
 "filenames contained in the add-on are not allowed:"
-msgstr ""
+msgstr "La kromprogramo \"%s\" eble ne povas esti alŝutita al la servilo, ĉar la jenaj dosiernomoj enhavitaj en la kromprogramo estas malpermesitaj:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1986
 msgid ""
@@ -5085,7 +5087,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "La kromprogramo \"%1$s\" ne povis esti alŝutita al la servilo. \n\nErarmesaĝo:\n%2$s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2027
 #, c-format
@@ -5126,7 +5128,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:49
 msgid "Add-Ons Packager"
-msgstr ""
+msgstr "Kromprograma pakaĵilo"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:101
 msgid "New add-on"
@@ -5236,8 +5238,8 @@ msgid ""
 msgid_plural ""
 "If you quit the packager now, all changes to the following %u add-ons will "
 "be discarded."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Se vi eliras la pakaĵilon nun, ĉiuj ŝanĝoj al la jena %u kromprogramo estos forĵetitaj."
+msgstr[1] "Se vi eliras la pakaĵilon nun, ĉiuj ŝanĝoj al la jenaj %u kromprogramoj estos forĵetitaj."
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:460
 #: ../../../../src/ui_fsmenu/addons/packager.cc:487
@@ -5250,7 +5252,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:463
 msgid "Quit Packager"
-msgstr ""
+msgstr "Eliru la pakaĵilon"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:478
 #, c-format
@@ -6551,6 +6553,7 @@ msgid "Choose Replay"
 msgstr ""
 
 #: ../../../../src/ui_fsmenu/loadgame.cc:62
+#: ../../../../src/wui/game_main_menu_save_game.cc:113
 msgid "Show Filenames"
 msgstr "Montri dosier-nomojn"
 
@@ -6802,7 +6805,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/main.cc:525
 msgid "Readme, License, and Credits"
-msgstr ""
+msgstr "Legu min, Permesilo, kaj Meritoj"
 
 #: ../../../../src/ui_fsmenu/main.cc:527
 #: ../../../../src/wlapplication_options.cc:304
@@ -6826,7 +6829,7 @@ msgstr ""
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team • Licensed under the GNU "
 "General Public License V2.0"
-msgstr ""
+msgstr "(C) %1%-%2% fare de la Disvolva Teamo de Widelands • Permesigita laŭ la GNU-General Public License V2.0"
 
 #: ../../../../src/ui_fsmenu/main.cc:879
 msgid "Click for the main menu"
@@ -7771,31 +7774,31 @@ msgstr ""
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
 msgstr ""
 
-#: ../../../../src/wlapplication.cc:1767
+#: ../../../../src/wlapplication.cc:1757
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../../../src/wlapplication.cc:1915
+#: ../../../../src/wlapplication.cc:1905
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../../../src/wlapplication.cc:1946
+#: ../../../../src/wlapplication.cc:1936
 msgid "Incompatible"
 msgstr ""
 
-#: ../../../../src/wlapplication.cc:1983
+#: ../../../../src/wlapplication.cc:1973
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../../../src/wlapplication.cc:1983
+#: ../../../../src/wlapplication.cc:1973
 msgid "Unexpected error during the game"
 msgstr ""
 
-#: ../../../../src/wlapplication.cc:1986
+#: ../../../../src/wlapplication.cc:1976
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -7809,7 +7812,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../../../src/wlapplication.cc:1995
+#: ../../../../src/wlapplication.cc:1985
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -7819,11 +7822,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../../../src/wlapplication.cc:2029
+#: ../../../../src/wlapplication.cc:2019
 msgid "Emergency save failed"
 msgstr ""
 
-#: ../../../../src/wlapplication.cc:2030
+#: ../../../../src/wlapplication.cc:2020
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -8053,7 +8056,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:308
 msgid "About"
-msgstr ""
+msgstr "Pri"
 
 #: ../../../../src/wlapplication_options.cc:324
 msgid "Internet Login"
@@ -9073,22 +9076,22 @@ msgstr ""
 msgid "Ports"
 msgstr ""
 
-#: ../../../../src/wui/building_statistics_menu.cc:734
+#: ../../../../src/wui/building_statistics_menu.cc:735
 msgid "Low productivity:"
 msgstr ""
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../../../src/wui/building_statistics_menu.cc:743
-#: ../../../../src/wui/building_statistics_menu.cc:762
-#: ../../../../src/wui/building_statistics_menu.cc:764
+#: ../../../../src/wui/building_statistics_menu.cc:744
+#: ../../../../src/wui/building_statistics_menu.cc:763
+#: ../../../../src/wui/building_statistics_menu.cc:765
 #: ../../../../src/wui/productionsitewindow.cc:233
 msgid "%1%/%2%"
 msgstr ""
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../../../src/wui/building_statistics_menu.cc:753
+#: ../../../../src/wui/building_statistics_menu.cc:754
 msgid "Lacking soldiers:"
 msgstr ""
 
@@ -9719,8 +9722,8 @@ msgstr ""
 msgid "Are you sure you wish to exit this game?"
 msgstr ""
 
-#: ../../../../src/wui/game_main_menu_save_game.cc:288
-#: ../../../../src/wui/game_main_menu_save_game.cc:328
+#: ../../../../src/wui/game_main_menu_save_game.cc:327
+#: ../../../../src/wui/game_main_menu_save_game.cc:367
 msgid "Error Saving Game!"
 msgstr ""
 
@@ -10100,15 +10103,15 @@ msgstr ""
 msgid "Add ware"
 msgstr ""
 
-#: ../../../../src/wui/inputqueuedisplay.cc:627
+#: ../../../../src/wui/inputqueuedisplay.cc:634
 msgid "Hide controls"
 msgstr ""
 
-#: ../../../../src/wui/inputqueuedisplay.cc:627
+#: ../../../../src/wui/inputqueuedisplay.cc:634
 msgid "Show controls"
 msgstr ""
 
-#: ../../../../src/wui/inputqueuedisplay.cc:683
+#: ../../../../src/wui/inputqueuedisplay.cc:690
 #, c-format
 msgid "+%u"
 msgstr ""

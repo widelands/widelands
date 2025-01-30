@@ -1,10 +1,10 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # adrien vigneron <adrien.v@ml1.net>, 2019
 # Atanase Albaran, 2021
-# David D, 2018,2021,2023
+# David D, 2018,2021,2023-2024
 # xXxLolimixXx <e.osmaaane@gmail.com>, 2015
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
@@ -12,7 +12,7 @@
 # Jaypad <ju-ju@nataju.fr>, 2015
 # Julien Schneider <schneider.julien@gmail.com>, 2020
 # nicolas jardin <niko472006@sfr.fr>, 2016
-# Renaud Bouchard, 2015-2023
+# Renaud Bouchard, 2015-2024
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020,2022
 # syl_, 2016
 # zecas <jjorge@free.fr>, 2020
@@ -20,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-11-30 03:02+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: David D, 2018,2021,2023\n"
+"Last-Translator: David D, 2018,2021,2023-2024\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -765,19 +765,19 @@ msgid ""
 "workplace and where any number of your wares can be stored until they are "
 "needed somewhere. So they act like a kind of town center, and to signify "
 "this, they get unique names."
-msgstr ""
+msgstr "Vous avez peut-être remarqué que la ligne de recensement du quartier général est différente, car il s’agit d’un type spécial de bâtiment appelé entrepôt. Les entrepôts sont des bâtiments où vos travailleurs peuvent se reposer jusqu’à ce qu’ils soient affectés à un lieu de travail et où n’importe quel nombre de vos marchandises peuvent être stockées jusqu’à ce qu’elles soient nécessaires quelque part. Ils agissent donc comme une sorte de centre-ville, et pour signifier cela, ils ont des noms uniques."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:505
 msgid ""
 "The small crowns beside the name mark it as your headquarters. As you play "
 "Widelands, you will see three kinds of warehouses, marked by little icons:"
-msgstr ""
+msgstr "Les petites couronnes à côté du nom indiquent que c’est votre quartier général. Lorsque vous jouez à Widelands, vous verrez trois sortes d’entrepôts, marqués par de petites icônes :"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:506
 msgid ""
 "The headquarters where you usually start the game. It is marked by small "
 "crowns: ♔"
-msgstr ""
+msgstr "Les quartiers-généraux sont l'endroit où vous commencez habituellement le jeu. Il est marqué par de petites couronnes : ♔"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:507
 msgid ""
@@ -800,33 +800,33 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
 msgid "Change the name of your little village"
-msgstr ""
+msgstr "Changez le nom de votre petit village"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:519
 msgid "Change the name of your headquarters"
-msgstr ""
+msgstr "Changez le nom de vos quartiers-généraux"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid ""
 "In order to set a new name for your headquarters, first click on it to open "
 "its window."
-msgstr ""
+msgstr "Pour donner un nouveau nom à vos quartiers-généraux, cliquez dessus pour ouvrir sa fenêtre."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:521
 msgid "You will see an edit box at the top of the window showing the name."
-msgstr ""
+msgstr "Vous verrez une boîte d'édition vous montrant le nom en haut de la fenêtre."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:522
 msgid "All you have to do is delete the old name and type in the new one."
-msgstr ""
+msgstr "Tout ce que vous avez à faire est d'effacer l'ancien nom et entrer le nouveau."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:523
 msgid "When you’re done, just close the window."
-msgstr ""
+msgstr "Quand vous avez fini, fermez la fenêtre."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:528
 msgid "Be creative"
-msgstr ""
+msgstr "Soyez créatif"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:529
 msgid ""

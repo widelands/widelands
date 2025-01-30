@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2024 by the Widelands Development Team
+ * Copyright (C) 2016-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -223,7 +223,7 @@ std::string GameDetails::show_minimap(const SavegameData& gamedata) {
 		} else {
 			try {
 				Widelands::ReplayfileSavegameExtractor converter(last_game_);
-				Widelands::Game game_for_render;
+				Widelands::EditorGameBase game_for_render(nullptr);
 				std::unique_ptr<Widelands::MapLoader> ml(
 				   game_for_render.mutable_map()->get_correct_loader(converter.file()));
 				if (ml != nullptr &&

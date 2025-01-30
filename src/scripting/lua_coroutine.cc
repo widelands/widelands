@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,7 @@
 #include "scripting/lua_errors.h"
 #include "scripting/lua_game.h"
 #include "scripting/lua_globals.h"
-#include "scripting/lua_map.h"
+#include "scripting/map/lua_field.h"
 
 namespace {
 

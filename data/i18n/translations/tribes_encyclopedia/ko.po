@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2018
@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-12-05 03:11+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: tamanegi, 2018\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -16352,7 +16352,7 @@ msgid "Workers use:"
 msgstr "일꾼들이 사용:"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:710
-#: ../../../../data/tribes/scripting/help/worker_help.lua:169
+#: ../../../../data/tribes/scripting/help/worker_help.lua:179
 msgid "Experience levels"
 msgstr "경험 수준"
 
@@ -16759,65 +16759,65 @@ msgid "Worker uses"
 msgstr "일꾼이 사용함"
 
 #. TRANSLATORS: Soldier levels
-#: ../../../../data/tribes/scripting/help/worker_help.lua:175
+#: ../../../../data/tribes/scripting/help/worker_help.lua:185
 msgid "Levels"
 msgstr "수준"
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:177
+#: ../../../../data/tribes/scripting/help/worker_help.lua:187
 msgid "Health"
 msgstr "체력"
 
 #. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
-#: ../../../../data/tribes/scripting/help/worker_help.lua:181
+#: ../../../../data/tribes/scripting/help/worker_help.lua:191
 msgid "Starts at %1% points."
 msgstr "%1% 포인트에서 시작합니다."
 
 #. TRANSLATORS: Soldier health / attack defense / evade points
-#: ../../../../data/tribes/scripting/help/worker_help.lua:184
-#: ../../../../data/tribes/scripting/help/worker_help.lua:195
+#: ../../../../data/tribes/scripting/help/worker_help.lua:194
+#: ../../../../data/tribes/scripting/help/worker_help.lua:205
 msgid "Increased by %1% point for each level."
 msgid_plural "Increased by %1% points for each level."
 msgstr[0] "각 수준마다 %1% 점씩 증가합니다."
 
 #. TRANSLATORS: Soldier health / attack defense / evade level
-#: ../../../../data/tribes/scripting/help/worker_help.lua:187
 #: ../../../../data/tribes/scripting/help/worker_help.lua:197
 #: ../../../../data/tribes/scripting/help/worker_help.lua:207
-#: ../../../../data/tribes/scripting/help/worker_help.lua:222
+#: ../../../../data/tribes/scripting/help/worker_help.lua:217
+#: ../../../../data/tribes/scripting/help/worker_help.lua:232
 msgid "The maximum level is %1%."
 msgid_plural "The maximum level is %1%."
 msgstr[0] "으뜸 수준은 %1% 입니다."
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:189
+#: ../../../../data/tribes/scripting/help/worker_help.lua:199
 msgid "Attack"
 msgstr "공격력"
 
 #. TRANSLATORS: Points are 4 digit numbers.
-#: ../../../../data/tribes/scripting/help/worker_help.lua:192
+#: ../../../../data/tribes/scripting/help/worker_help.lua:202
 msgid "A random value between %1% and %2% points is added to each attack."
 msgstr "매 공격마다 %1% 과 %2% 포인트 사이의 무작위 값으로 결정됩니다."
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:199
+#: ../../../../data/tribes/scripting/help/worker_help.lua:209
 msgid "Defense"
 msgstr "방어력"
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:203
-#: ../../../../data/tribes/scripting/help/worker_help.lua:211
-#: ../../../../data/tribes/scripting/help/worker_help.lua:218
+#: ../../../../data/tribes/scripting/help/worker_help.lua:213
+#: ../../../../data/tribes/scripting/help/worker_help.lua:221
+#: ../../../../data/tribes/scripting/help/worker_help.lua:228
 #, lua-format
 msgid "Starts at %d%%."
 msgstr "%d%% 에서 시작합니다."
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:205
-#: ../../../../data/tribes/scripting/help/worker_help.lua:220
+#: ../../../../data/tribes/scripting/help/worker_help.lua:215
+#: ../../../../data/tribes/scripting/help/worker_help.lua:230
 #, lua-format
 msgid "Increased by %d%% for each level."
 msgstr "각 수준마다 %d%% 씩 증가합니다."
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:212
+#: ../../../../data/tribes/scripting/help/worker_help.lua:222
 msgid "This soldier cannot be trained in defense."
 msgstr "이 군인은 방어력 훈련을 할 수 없습니다."
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:215
+#: ../../../../data/tribes/scripting/help/worker_help.lua:225
 msgid "Evade"
 msgstr "회피력"

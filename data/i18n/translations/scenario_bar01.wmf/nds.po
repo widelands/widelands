@@ -1,15 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2022
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2022,2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:30+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022,2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,21 +20,21 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:20
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:22
 msgid "Build two ranger’s huts"
-msgstr "Bau twee Boomplantereen"
+msgstr "Bau twee Boomplanterkaten"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:23
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr "Bau tegen elkeen Boomhauer-Huus eene Boomplanteree."
+msgstr "Bau tegen elkeen Boomhauerkaat eene Boomplanterkaat."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:24
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr "Bomen wassen natürelk langsaam. Um genoog Boomstammen to hebben, mutt du Boomplantereen bauen."
+msgstr "Bomen wassen natürelk langsaam. Um genoog Boomstammen to hebben, mutt du Boomplanterkaten bauen."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:30
 msgid "Expand north-east and build a quarry"
-msgstr "Vergroter dien Gewest na Noordoost un bau een Flinthauerhuus"
+msgstr "Vergroter dien Gewest na Noordoost un bau eene Flinthauerkaat"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:32
 msgid "Expand north-east to the rocks"
@@ -48,7 +48,7 @@ msgstr "Bau Soldateree-Boen (to ’n Bispööl Wachters-Kamers un Uppassen), um 
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:34
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr "Lang to de Stenen im Noordoosten hen un bau daar een Flintslagerhuus."
+msgstr "Lang to de Stenen im Noordoosten hen un bau daar eene Flinthauerkaat."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:39
 msgid "Start building mines on the mountain"
@@ -124,7 +124,7 @@ msgstr "Spiesen för de Bargwarkskeerls"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
-msgstr "Bau eene Jaggthütt, eene Deertentüchteree un eene Kneipe"
+msgstr "Bau eene Jaggtkaat, eene Deertentüchterkaat un eene Kneipe"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:62
 msgid "In order to work, your miners need food."
@@ -432,7 +432,7 @@ msgid ""
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr "As de Dagen vörbigahn, kummt mi Boldreth mehr un mehr rumrieten vör. Miene Kameraden verlesen hör Mood as de kolle Tied nahder kummt, un wi leven immer noch in nix as Kaaten un Brattsen. Ick harr nooit vörhatt, so lang in de Wildernis to blieven – aver ick hett ok nooit docht, dat se sik so lang mit deesem unnützen Krieg befaten."
+msgstr "As de Dagen vörbigahn, kummt mi Boldreth mehr un mehr rumrieten vör. Miene Kameraden verlesen hör Mood as de kolle Tied nahder kummt, un wi leven immer noch in nix as Katen un Brattsen. Ick harr nooit vörhatt, so lang in de Wildernis to blieven – aver ick hett ok nooit docht, dat se sik so lang mit deesem unnützen Krieg befaten."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:217
@@ -488,7 +488,7 @@ msgstr "Kantruusk bemarkt …"
 msgid ""
 "I see you have already built a quarry and two lumberjack’s huts. That is a "
 "good beginning if we want to stay here longer."
-msgstr "Ick seh, dat du al een Flintslagerhuus un twee Boomhauer-Husen baut hest. Dat is een goder Anfang, wenn wi hier langer blieven wullen."
+msgstr "Ick seh, dat du al eene Flintslagerkaat un twee Boomhauerkaten baut hest. Dat is een goder Anfang, wenn wi hier langer blieven wullen."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:240
@@ -503,7 +503,7 @@ msgstr "Aver vergeet nooit – deese Walden sünd uns’ Arve, vun uns’ Vörol
 msgid ""
 "So, in order to replace the trees we chop down, we should build some "
 "ranger’s huts, preferably close to the lumberjack’s huts."
-msgstr "Also mutten wi, um de vun uns umkappten Bomen uttowesseln, een paar Boomplantereen bauen, besünners geern tegen de Boomhauer-Husen."
+msgstr "Also mutten wi, um de vun uns umkappten Bomen uttowesseln, een paar Boomplanterkaten bauen, besünners geern tegen de Boomhauerkaten."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:249
 msgid "In the Night"

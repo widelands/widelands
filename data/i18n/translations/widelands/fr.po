@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # adrien vigneron <adrien.v@ml1.net>, 2015-2016
@@ -31,9 +31,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-12-07 03:09+0000\n"
+"POT-Creation-Date: 2025-01-09 03:20+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Laurent Godard, 2024\n"
+"Last-Translator: Renaud Bouchard, 2015-2024\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -487,7 +487,7 @@ msgstr "Espaces portuaire"
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:362
 msgid "Add or remove port spaces"
-msgstr "Ajoutez ou enlevez des espace portuaire"
+msgstr "Ajoutez ou enlevez des espaces portuaires"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:370
@@ -694,12 +694,12 @@ msgstr "Êtes vous sûr de vouloir quitter l'éditeur ?"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:575
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:125
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:328
-#: ../../../../src/ui_fsmenu/main.cc:294 ../../../../src/wlapplication.cc:1968
+#: ../../../../src/ui_fsmenu/main.cc:294 ../../../../src/wlapplication.cc:1958
 msgid "Error"
 msgstr "Erreur"
 
 #: ../../../../src/editor/editorinteractive.cc:1276
-#: ../../../../src/ui_fsmenu/main.cc:278 ../../../../src/wlapplication.cc:1970
+#: ../../../../src/ui_fsmenu/main.cc:278 ../../../../src/wlapplication.cc:1960
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -1161,7 +1161,7 @@ msgid "Click player to remove"
 msgstr "Cliquez sur un joueur pour le retirer"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:61
-#: ../../../../src/ui_basic/textinput.cc:383
+#: ../../../../src/ui_basic/textinput.cc:385
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:438
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:67
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:90
@@ -1452,7 +1452,7 @@ msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
 "island or on top of a mountain."
-msgstr "La carte a été généré. Veuillez vérifier les positions de départ des joueurs pour vous assurer que vos porteurs ne se noieront pas, ne seront pas coincés sur une île ou au sommet d'une montagne."
+msgstr "La carte a été généré. Veuillez vérifier les positions de départ des joueurs pour vous assurer que vos porteurs ne se noieront pas, ou ne seront pas coincés sur une île ou au sommet d'une montagne."
 
 #. * TRANSLATORS: This is shown after a random map has been created in the
 #. editor.
@@ -1522,7 +1522,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "Erreur pendant la création du répertoire ‘%s’."
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:313
-#: ../../../../src/wui/game_main_menu_save_game.cc:286
+#: ../../../../src/wui/game_main_menu_save_game.cc:325
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Un fichier nommé '%s' existe déjà. L'écraser ?"
@@ -2512,7 +2512,7 @@ msgstr "un ouvrier a besoin d'expérience"
 #. need no experience'.
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:586
 msgid "the workers need no experience"
-msgstr "l'ouvrier n'a pas besoin d'expérience"
+msgstr "Les ouvriers n'ont pas besoin d'expérience"
 
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:615
 msgid "the fleet needs a ferry"
@@ -2619,7 +2619,7 @@ msgstr "(arrêté)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:480
-#: ../../../../src/wui/building_statistics_menu.cc:725
+#: ../../../../src/wui/building_statistics_menu.cc:726
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
@@ -3241,54 +3241,54 @@ msgid "Saving skipped"
 msgstr "Sauvegarde ignorée"
 
 #: ../../../../src/logic/save_handler.cc:170
-#: ../../../../src/wui/game_main_menu_save_game.cc:338
+#: ../../../../src/wui/game_main_menu_save_game.cc:377
 msgid "Saving failed!"
 msgstr "La sauvegarde a échoué !"
 
 #: ../../../../src/logic/save_handler.cc:186
-#: ../../../../src/wui/game_main_menu_save_game.cc:321
+#: ../../../../src/wui/game_main_menu_save_game.cc:360
 msgid "Game saved"
 msgstr "Jeu sauvegardé"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:887
 msgid "Building’s inputs changed!"
-msgstr ""
+msgstr "Entrées des constructions changées !"
 
 #. * TRANSLATORS: The argument is the buiding name
 #: ../../../../src/map_io/map_buildingdata_packet.cc:898
 #, c-format
 msgid "%s: the building’s inputs have changed."
-msgstr ""
+msgstr "%s: Les entrées des constructions ont changé !"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:901
 msgid "The following wares have been deleted:"
-msgstr ""
+msgstr "Les marchandises suivantes ont été supprimé :"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:908
 #, c-format
 msgid "%1$u piece of %2$s"
 msgid_plural "%1$u pieces of %2$s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1$u morceau de %2$s"
+msgstr[1] "%1$u morceaux de %2$s"
+msgstr[2] "%1$u morceaux de %2$s"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:914
 #, c-format
 msgid "%1$u piece of an unknown ware"
 msgid_plural "%1$u pieces of unknown wares"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1$u morceau de marchandise inconnue"
+msgstr[1] "%1$u morceaux de marchandises inconnues"
+msgstr[2] "%1$u morceaux de marchandises inconnues"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:920
 msgid ""
 "The game was probably saved with a different Widelands version or with "
 "different enabled add-ons."
-msgstr ""
+msgstr "Le jeu a probablement été sauvegardé avec une version différente de Widelands ou avec différents modules activés."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:923
 msgid "Please review the current production programs and input settings."
-msgstr ""
+msgstr "Revoyez s'il vous plaît les programmes de production existant ainsi que la configuration des entrées."
 
 #: ../../../../src/map_io/map_saver.cc:85
 #, c-format
@@ -3891,7 +3891,7 @@ msgstr "Expulsé par l'hôte: %s"
 #: ../../../../src/network/network_gaming_messages.cc:39
 #, c-format
 msgid "Client sent malformed commands: %s"
-msgstr "Le client a envoyé des commandes malformé : %s"
+msgstr "Le client a envoyé des commandes malformés : %s"
 
 #: ../../../../src/network/network_gaming_messages.cc:41
 #, c-format
@@ -4048,17 +4048,19 @@ msgstr "Widelands n'a pas été capable d'utiliser le réseau local. Peut être 
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../../../src/scripting/lua_game.cc:1405
+#: ../../../../src/scripting/lua_game.cc:1407
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../../../src/scripting/lua_ui.cc:1226
-#: ../../../../src/scripting/lua_ui.cc:1248 ../../../../src/wui/plugins.cc:42
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:63
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:85
+#: ../../../../src/wui/plugins.cc:42
 msgid "Plugin Error"
 msgstr "Erreur de plug-in"
 
-#: ../../../../src/scripting/lua_ui.cc:1227
-#: ../../../../src/scripting/lua_ui.cc:1249 ../../../../src/wui/plugins.cc:42
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:64
+#: ../../../../src/scripting/ui/lua_panel_create_child.cc:86
+#: ../../../../src/wui/plugins.cc:42
 #, c-format
 msgid ""
 "Error when running plugin:\n"
@@ -4133,7 +4135,7 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Non sélectionné"
 
-#: ../../../../src/ui_basic/dropdown.h:479
+#: ../../../../src/ui_basic/dropdown.h:483
 msgid "No matches"
 msgstr "Aucunes correspondances"
 
@@ -4356,41 +4358,41 @@ msgstr "Cliquez pour trier via cette colonne"
 msgid "%1$s<br>(%2$s)"
 msgstr "%1$s<br>(%2$s)"
 
-#: ../../../../src/ui_basic/textinput.cc:374
+#: ../../../../src/ui_basic/textinput.cc:376
 msgid "Cut"
 msgstr "Couper"
 
-#: ../../../../src/ui_basic/textinput.cc:374
+#: ../../../../src/ui_basic/textinput.cc:376
 msgid "Cut the selected text to the clipboard"
 msgstr "Couper le texte sélectionné dans le presse-papiers"
 
-#: ../../../../src/ui_basic/textinput.cc:377
+#: ../../../../src/ui_basic/textinput.cc:379
 #: ../../../../src/ui_fsmenu/tech_info.cc:238
 msgid "Copy"
 msgstr "Copier"
 
-#: ../../../../src/ui_basic/textinput.cc:377
+#: ../../../../src/ui_basic/textinput.cc:379
 msgid "Copy the selected text to the clipboard"
 msgstr "Copierle texte sélectionné dans le presse-papiers"
 
-#: ../../../../src/ui_basic/textinput.cc:380
+#: ../../../../src/ui_basic/textinput.cc:382
 msgid "Paste"
 msgstr "Coller"
 
-#: ../../../../src/ui_basic/textinput.cc:380
+#: ../../../../src/ui_basic/textinput.cc:382
 msgid "Paste the clipboard content"
 msgstr "Coller le contenu du presse-papiers"
 
-#: ../../../../src/ui_basic/textinput.cc:383
+#: ../../../../src/ui_basic/textinput.cc:385
 msgid "Delete the selected text"
 msgstr "Supprimer le texte sélectionné"
 
-#: ../../../../src/ui_basic/textinput.cc:386
+#: ../../../../src/ui_basic/textinput.cc:388
 #: ../../../../src/wlapplication_options.cc:364
 msgid "Select All"
 msgstr "Sélectionner tout"
 
-#: ../../../../src/ui_basic/textinput.cc:386
+#: ../../../../src/ui_basic/textinput.cc:388
 msgid "Select the entire text"
 msgstr "Sélectionner le texte entier"
 
@@ -4606,35 +4608,35 @@ msgstr "Qualité minimum"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:354
 msgid "Min Players:"
-msgstr ""
+msgstr "Joueurs Min :"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:367
 msgid "Min Width:"
-msgstr ""
+msgstr "Largeur Min :"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:380
 msgid "Min Height:"
-msgstr ""
+msgstr "Hauteur Min :"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:393
 msgid "Min Size:"
-msgstr ""
+msgstr "Taille Min :"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:406
 msgid "Max Players:"
-msgstr ""
+msgstr "Joueurs Max :"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:419
 msgid "Max Width:"
-msgstr ""
+msgstr "Largeur Max :"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:432
 msgid "Max Height:"
-msgstr ""
+msgstr "Hauteur Max :"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:445
 msgid "Max Size:"
-msgstr ""
+msgstr "Taille Max :"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:455
 msgid "Choose add-on to upload…"
@@ -4776,11 +4778,11 @@ msgstr "Alternativement, vous pouvez également envoyer un message à l'équipe 
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:749
 msgid "Manage your installed add-ons"
-msgstr ""
+msgstr "Gérer vos modules installés"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:751
 msgid "Browse and install add-ons available on the server"
-msgstr ""
+msgstr "Parcourez et installez des modules disponibles sur le serveur"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:753
 #, c-format
@@ -4788,7 +4790,7 @@ msgid ""
 "Browse and install maps from the widelands.org website maps archive. Like "
 "manually downloaded maps, installed website maps are stored in the ‘%s’ "
 "directory under the Widelands home directory."
-msgstr ""
+msgstr "Parcourez et installez des cartes depuis les archives du site widelands.org. Comme les cartes téléchargées manuellement, les cartes installées par le site web seront stockées dans le répertoire ‘%s’ dans le répertoire d'installation de Widelands."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:757
 msgid "Development"
@@ -4796,7 +4798,7 @@ msgstr "Développement "
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:757
 msgid "Tools for add-on developers"
-msgstr ""
+msgstr "Outils pour développeurs de module"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:761
@@ -4844,7 +4846,7 @@ msgstr "Filtrer les modules complémentaires par nom"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:785
 msgid "Filter maps by name"
-msgstr ""
+msgstr "Filtrer les cartes par nom"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:796
 #, c-format
@@ -4854,12 +4856,12 @@ msgstr "Dés/activer la catégorie ‘%s’"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:812
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:709
 msgid "One World"
-msgstr ""
+msgstr "Un monde"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:820
 #, c-format
 msgid "Toggle world ‘%s’"
-msgstr ""
+msgstr "Basculer monde ‘%s’"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1012
 #, c-format
@@ -4974,7 +4976,7 @@ msgstr "Erreur de connexion au serveur"
 #. Error <br> by %s"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1379
 msgid "a networking bug"
-msgstr "une erreur à l& mise en réseau"
+msgstr "une erreur à la mise en réseau"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1380
 #, c-format
@@ -5021,12 +5023,12 @@ msgstr "• %s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1674
 msgid "Website Maps"
-msgstr ""
+msgstr "Cartes du site Web"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1675
 #, c-format
 msgid "Website Maps (%u)"
-msgstr ""
+msgstr "Cartes du site Web (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1707
 #, c-format
@@ -5143,7 +5145,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "La carte ‘%1$s’ n'a pas pu être téléchargé depuis le serveur.\n\nMessage d'erreur:\n%2$s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2058
 #, c-format
@@ -5877,7 +5879,7 @@ msgid ""
 "%3$s\n"
 "\n"
 "Note that this map can not be downloaded again from the server."
-msgstr ""
+msgstr "Êtes vous certain de vouloir désinstaller cette carte ?\n\n%1$s\npar %2$s\n%3$s\n\nNote that this map can not be downloaded again from the server."
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:54
 #, c-format
@@ -5887,7 +5889,7 @@ msgid ""
 "%1$s\n"
 "by %2$s\n"
 "%3$s"
-msgstr ""
+msgstr "Êtes vous certain de vouloir désinstaller cette carte ?\n\n%1$s\npar %2$s\n%3$s"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:60
 #, c-format
@@ -5937,11 +5939,11 @@ msgstr "Nécessite une version de Widelands d’au moins %1$s et d'au plus %2$s.
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:168
 msgid "Hint:"
-msgstr ""
+msgstr "Astuce :"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:175
 msgid "Comment by uploader:"
-msgstr ""
+msgstr "Commentaire de l'uploader :"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:216
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:267
@@ -5997,7 +5999,7 @@ msgstr "Installation"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:370
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:514
 msgid "Upgrade"
-msgstr "Mises à jour"
+msgstr "Mises à niveau"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:388
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:682
@@ -6093,14 +6095,14 @@ msgstr[2] "%u captures d'écrans"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:704
 #, c-format
 msgid "Size: %1$u×%2$u • Max Players: %3$u • %4$s"
-msgstr ""
+msgstr "Taille : %1$u×%2$u • Joueurs Max : %3$u • %4$s"
 
 #. * TRANSLATORS: Timestamp · Filesize · Download count · Average rating ·
 #. Number of comments
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:725
 #, c-format
 msgid "%1$s   %2$s   ⬇ %3$u   ★ %4$s   “” %5$u"
-msgstr ""
+msgstr "%1$s   %2$s   ⬇ %3$u   ★ %4$s   “” %5$u"
 
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:41
 #, c-format
@@ -6568,7 +6570,7 @@ msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
-msgstr "ATTENTION :\nLa sauvegarde que vous avez sélectionné est un répertoire. Cela arrive si vous avez activé l'option 'nozip' ou si vous avez manuellement dézippé la sauvegarde.\nWidelands n'est pas capable de transférer la structure d'un répertoire aux clients, veuillez sélectionner une autre sauvegarde ou Zipper le contenu des répertoires."
+msgstr "ATTENTION :\nLa sauvegarde que vous avez sélectionné est un répertoire. Cela arrive si vous configurez l'option 'nozip' sur \"true\" ou si vous avez manuellement dézippé la sauvegarde.\nWidelands n'est pas capable de transférer la structure d'un répertoire aux clients, veuillez sélectionner une autre sauvegarde ou zipper le contenu des répertoires."
 
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:239
 #: ../../../../src/ui_fsmenu/launch_spg.cc:134
@@ -6609,6 +6611,7 @@ msgid "Choose Replay"
 msgstr "Choisir le  replay"
 
 #: ../../../../src/ui_fsmenu/loadgame.cc:62
+#: ../../../../src/wui/game_main_menu_save_game.cc:113
 msgid "Show Filenames"
 msgstr "Afficher les noms des fichiers"
 
@@ -7348,7 +7351,7 @@ msgstr "Inconnu"
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters and must not be \"team\"."
-msgstr "Entrez un pseudo valide. Cette valeur peut contenir des lettres anglaises seulement ainsi que des nombres, les caractères @ . + - _ et ne doit pas être \"team\". (équipe)"
+msgstr "Entrez un pseudo valide. Cette valeur peut seulement contenir des lettres anglaises, des nombres, les caractères @ . + - _ et ne doit pas être \"team\". (équipe)"
 
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:325
 msgid "Invalid Address"
@@ -7829,31 +7832,31 @@ msgstr "Valeur du paramètre de la ligne de commande --%s vide"
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
 msgstr "Les paramètres de la ligne de commande --%1$s et --%2$s ne peuvent êtres combinés"
 
-#: ../../../../src/wlapplication.cc:1767
+#: ../../../../src/wlapplication.cc:1757
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Paramètre de ligne de commande inconnu: %s\nIl manque peut être '=' ?"
 
-#: ../../../../src/wlapplication.cc:1915
+#: ../../../../src/wlapplication.cc:1905
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Paramètre de ligne de commande inconnu: %s"
 
-#: ../../../../src/wlapplication.cc:1946
+#: ../../../../src/wlapplication.cc:1936
 msgid "Incompatible"
 msgstr "Incompatible"
 
-#: ../../../../src/wlapplication.cc:1983
+#: ../../../../src/wlapplication.cc:1973
 msgid "Game ended unexpectedly"
 msgstr "Le jeu s'est terminé inopinément "
 
-#: ../../../../src/wlapplication.cc:1983
+#: ../../../../src/wlapplication.cc:1973
 msgid "Unexpected error during the game"
 msgstr "Erreur inattendue pendant le jeu"
 
-#: ../../../../src/wlapplication.cc:1986
+#: ../../../../src/wlapplication.cc:1976
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -7867,7 +7870,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Une erreur est survenue. Le message d'erreur est :\n\n%1$s\n\nS'il vous plait, reportez nous ce problème pour nous aider à améliorer Widelands. Vous trouverez les messages relatifs dans la sortie standard (stdout.txt sur windows). Vous utilisez la version %2$s.\nAjoutez cette information à ce rapport s'il vous plait.\n\nVoulez vous que Widelands essaye de créer une sauvegarde d'urgence ? Il est souvent – si ce n'est tout le temps – possible de la recharger et de continuer à jouer."
 
-#: ../../../../src/wlapplication.cc:1995
+#: ../../../../src/wlapplication.cc:1985
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -7877,11 +7880,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Le jeu s'est terminé de manière innopinée pour la raison suivante:\n\n%s\n\nVoulez-vous que Widelands essaye de créer un sauvegarde d'urgence ? La plupart du temps – mais pas toujours – il est possible de la charger et de continuer à jouer."
 
-#: ../../../../src/wlapplication.cc:2029
+#: ../../../../src/wlapplication.cc:2019
 msgid "Emergency save failed"
 msgstr "La sauvegarde d'urgence a échoué"
 
-#: ../../../../src/wlapplication.cc:2030
+#: ../../../../src/wlapplication.cc:2020
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -8027,7 +8030,7 @@ msgstr "Chantier de traversiers"
 
 #: ../../../../src/wlapplication_options.cc:216
 msgid "Scouting"
-msgstr "Exploration"
+msgstr "Reconnaissance"
 
 #: ../../../../src/wlapplication_options.cc:217
 msgid "Barracks"
@@ -9133,22 +9136,22 @@ msgstr "Mines"
 msgid "Ports"
 msgstr "Ports"
 
-#: ../../../../src/wui/building_statistics_menu.cc:734
+#: ../../../../src/wui/building_statistics_menu.cc:735
 msgid "Low productivity:"
 msgstr "Productivité faible :"
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../../../src/wui/building_statistics_menu.cc:743
-#: ../../../../src/wui/building_statistics_menu.cc:762
-#: ../../../../src/wui/building_statistics_menu.cc:764
+#: ../../../../src/wui/building_statistics_menu.cc:744
+#: ../../../../src/wui/building_statistics_menu.cc:763
+#: ../../../../src/wui/building_statistics_menu.cc:765
 #: ../../../../src/wui/productionsitewindow.cc:233
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../../../src/wui/building_statistics_menu.cc:753
+#: ../../../../src/wui/building_statistics_menu.cc:754
 msgid "Lacking soldiers:"
 msgstr "Soldats manquants:"
 
@@ -9779,8 +9782,8 @@ msgstr "Confirmation de la sortie du jeu"
 msgid "Are you sure you wish to exit this game?"
 msgstr "Êtes vous sur de vouloir quitter cette partie ?"
 
-#: ../../../../src/wui/game_main_menu_save_game.cc:288
-#: ../../../../src/wui/game_main_menu_save_game.cc:328
+#: ../../../../src/wui/game_main_menu_save_game.cc:327
+#: ../../../../src/wui/game_main_menu_save_game.cc:367
 msgid "Error Saving Game!"
 msgstr "Erreur pendant la sauvegarde du jeu !"
 
@@ -10164,15 +10167,15 @@ msgstr "Enlever marchandise"
 msgid "Add ware"
 msgstr "Ajouter marchandise"
 
-#: ../../../../src/wui/inputqueuedisplay.cc:627
+#: ../../../../src/wui/inputqueuedisplay.cc:634
 msgid "Hide controls"
 msgstr "Cacher les contrôles"
 
-#: ../../../../src/wui/inputqueuedisplay.cc:627
+#: ../../../../src/wui/inputqueuedisplay.cc:634
 msgid "Show controls"
 msgstr "Afficher les contrôles"
 
-#: ../../../../src/wui/inputqueuedisplay.cc:683
+#: ../../../../src/wui/inputqueuedisplay.cc:690
 #, c-format
 msgid "+%u"
 msgstr "+%u"
