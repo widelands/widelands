@@ -4796,7 +4796,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:784
 msgid "Filter add-ons by name"
-msgstr ""
+msgstr "Filtru kromprogramojn laŭ nomo"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:785
 msgid "Filter maps by name"
@@ -4821,8 +4821,8 @@ msgstr ""
 #, c-format
 msgid "Are you certain that you want to upgrade this %u add-on?"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ĉu vi certas, ke vi volas ĝisdatigi tiun %u kromprogramon?"
+msgstr[1] "Ĉu vi certas, ke vi volas ĝisdatigi tiujn %u kromprogramojn?"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1018
 #, c-format
@@ -4853,11 +4853,11 @@ msgstr ""
 msgid ""
 "Click to log in. You can then comment and vote on add-ons and upload your "
 "own add-ons."
-msgstr ""
+msgstr "Alklaku por ensaluti. Poste vi povas komenti kaj voĉdoni pri kromprogramoj kaj alŝuti viajn proprajn kromprogramojn."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1180
 msgid "Please log in to upload add-ons"
-msgstr ""
+msgstr "Bonvolu ensaluti por alŝuti kromprogramojn"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1182
 msgid "Please log in to upload content"
@@ -4883,7 +4883,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1195
 msgid "Please tick the confirmation checkbox to upload add-ons"
-msgstr ""
+msgstr "Bonvolu marki la konfirmokeston por alŝuti kromprogramojn"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1198
 msgid "Please tick the confirmation checkbox to upload content"
@@ -4915,7 +4915,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1351
 #, c-format
 msgid "Fetching add-ons… (%.1f%%)"
-msgstr ""
+msgstr "Alŝutas kromprogramojn… (%.1f%%)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1354
 msgid "Connecting to the server…"
@@ -4936,7 +4936,7 @@ msgstr ""
 msgid ""
 "Unable to fetch the list of available add-ons from the server!<br>Error "
 "Message: %s"
-msgstr ""
+msgstr "Ne eblas akiri la liston de disponeblaj kromprogramoj el la servilo!<br>Erarmesaĝo: %s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1536
 #, c-format
@@ -4959,14 +4959,14 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1614
 msgid "No upgrades are available for your installed add-ons"
-msgstr ""
+msgstr "Neniuj ĝisdatigoj disponeblas por viaj instalitaj kromprogramoj"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1616
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ĝisdatigu la jenan %u kromprogramon:"
+msgstr[1] "Ĝisdatigu la jenajn %u kromprogramojn:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1621
 #, c-format
@@ -4995,7 +4995,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1719
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
-msgstr ""
+msgstr "• \"%1$s\" bezonas \"%2$s\", kiu estas listigita sub la postulanta kromprogramo"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1747
 #, c-format
@@ -5010,7 +5010,7 @@ msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
 "Error message:\n"
 "%s"
-msgstr ""
+msgstr "Aktivigita kromprogramo estas difekta. Neniuj ludoj povas esti komencitaj kun la nuna agordo.\nErarmesaĝo:\n%s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1780
 #, c-format
@@ -5023,21 +5023,21 @@ msgstr[1] ""
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
-msgstr ""
+msgstr "Kromprogramoj kun dependecaj eraroj povas funkcii malĝuste aŭ malhelpi ludojn kaj mapojn ŝargiĝi."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1910
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
-msgstr ""
+msgstr "La kromprogramo \"%1$s\" ne povas esti alŝutita, ĉar ĝia versio (%2$s) ne estas pli nova ol la versio ĉeestanta en la servilo (%3$s)."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1921
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
-msgstr ""
+msgstr "La kromprogramo \"%1$s\" ne povas esti alŝutita, ĉar ĝia kategorio (%2$s) ne estas pli nova ol la versio ĉeestanta en la servilo (%3$s)."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1932
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:54
@@ -5047,7 +5047,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1933
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
-msgstr ""
+msgstr "Ĉu vi vere volas alŝuti la kromprogramon \"%s\" al la servilo?"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1943
 #, c-format
@@ -5070,7 +5070,7 @@ msgstr ""
 msgid ""
 "The add-on ‘%s’ may not be uploaded to the server because the following "
 "filenames contained in the add-on are not allowed:"
-msgstr ""
+msgstr "La kromprogramo \"%s\" eble ne povas esti alŝutita al la servilo, ĉar la jenaj dosiernomoj enhavitaj en la kromprogramo estas malpermesitaj:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1986
 msgid ""
@@ -5087,7 +5087,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "La kromprogramo \"%1$s\" ne povis esti alŝutita al la servilo. \n\nErarmesaĝo:\n%2$s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2027
 #, c-format
