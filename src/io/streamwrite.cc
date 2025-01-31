@@ -22,8 +22,24 @@
 
 #include "base/wexception.h"
 
+#if defined(__EMSCRIPTEN__)
+#include <emscripten.h>
+EM_ASYNC_JS(void, __sync_em_fs, (), {
+    // clang-format off
+    // The following code is not C++ code, but JavaScript code.
+    await new Promise((resolve, reject) => FS.syncfs(err => {
+        if (err) reject(err);
+        resolve();
+    }));
+    // (normally you would do something with the fetch here)
+});
+#endif
+
 void StreamWrite::flush() {
 	// no-op as default implementation
+#if defined( __EMSCRIPTEN__ ) // but say js to store changes in indexeddb
+	__sync_em_fs();
+#endif
 }
 
 void StreamWrite::print_f(char const* const fmt, ...) {
