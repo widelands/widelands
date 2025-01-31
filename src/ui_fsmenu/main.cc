@@ -421,7 +421,7 @@ void MainMenu::set_labels() {
 	                 _("Log in as a registered user"),
 	                 shortcut_string_for(KeyboardShortcut::kMainMenuLogin, false));
 #if !defined(__EMSCRIPTEN__)
-	//not supported in wasm build
+	// not supported in wasm build
 	multiplayer_.add(_("LAN / Direct IP"), MenuTarget::kLan, nullptr, false,
 	                 _("Play a private online game"),
 	                 shortcut_string_for(KeyboardShortcut::kMainMenuLAN, false));

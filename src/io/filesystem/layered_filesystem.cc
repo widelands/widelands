@@ -28,7 +28,7 @@
 #if defined(__EMSCRIPTEN__)
 #include <emscripten.h>
 EM_ASYNC_JS(void, __resync_em_fs, (), {
-    // clang-format off
+	// clang-format off
     // The following code is not C++ code, but JavaScript code.
     await new Promise((resolve, reject) => FS.syncfs(err => {
         if (err) reject(err);
