@@ -254,7 +254,7 @@ SDL_GLContext initialize(
 		}
 	};
 	const char* const opengl_version_string = reinterpret_cast<const char*>(glGetString(GL_VERSION));
-#if defined(__EMSCRIPTEN__) //skip check webgl version anyway it's webgl2
+#if defined(__EMSCRIPTEN__)  // skip check webgl version anyway it's webgl2
 	log_info("Graphics: OpenGL: Version \"%s\"\n", opengl_version_string);
 #else
 	if (opengl_version_string == nullptr) {
@@ -305,7 +305,7 @@ SDL_GLContext initialize(
 
 	const char* const shading_language_version_string =
 	   reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
-#if defined(__EMSCRIPTEN__) //skip check glsl version anyway it's 300 es
+#if defined(__EMSCRIPTEN__)  // skip check glsl version anyway it's 300 es
 	log_info("Graphics: OpenGL: ShadingLanguage: \"%s\"\n", shading_language_version_string);
 #else
 	if (shading_language_version_string == nullptr) {
