@@ -310,10 +310,13 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                             keysym(SDLK_a),
                                                             "mainmenu_addons",
                                                             gettext_noop("Add-Ons"))},
+#if !defined(__EMSCRIPTEN__)
+   //not supported in wasm build
    {KeyboardShortcut::kMainMenuLAN, KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
                                                          keysym(SDLK_p),
                                                          "mainmenu_lan",
                                                          gettext_noop("LAN / Direct IP"))},
+#endif
    {KeyboardShortcut::kMainMenuLobby, KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
                                                            keysym(SDLK_j),
                                                            "mainmenu_lobby",

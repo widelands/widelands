@@ -25,6 +25,19 @@
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/streamread.h"
 
+#if defined(__EMSCRIPTEN__)
+#include <emscripten.h>
+EM_ASYNC_JS(void, __resync_em_fs, (), {
+    // clang-format off
+    // The following code is not C++ code, but JavaScript code.
+    await new Promise((resolve, reject) => FS.syncfs(err => {
+        if (err) reject(err);
+        resolve();
+    }));
+    // (normally you would do something with the fetch here)
+});
+#endif
+
 LayeredFileSystem* g_fs;
 LayeredFileSystem::LayeredFileSystem() : home_(nullptr) {
 }
@@ -272,12 +285,18 @@ void LayeredFileSystem::fs_unlink(const std::string& file) {
 
 	if (home_ && home_->is_writable() && home_->file_exists(file)) {
 		home_->fs_unlink(file);
+#if defined(__EMSCRIPTEN__)
+		__resync_em_fs();
+#endif
 		return;
 	}
 
 	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it) {
 		if ((*it)->is_writable() && (*it)->file_exists(file)) {
 			(*it)->fs_unlink(file);
+#if defined(__EMSCRIPTEN__)
+			__resync_em_fs();
+#endif
 			return;
 		}
 	}
@@ -289,11 +308,17 @@ void LayeredFileSystem::fs_rename(const std::string& old_name, const std::string
 	}
 	if (home_ && home_->is_writable() && home_->file_exists(old_name)) {
 		home_->fs_rename(old_name, new_name);
+#if defined(__EMSCRIPTEN__)
+		__resync_em_fs();
+#endif
 		return;
 	}
 	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it) {
 		if ((*it)->is_writable() && (*it)->file_exists(old_name)) {
 			(*it)->fs_rename(old_name, new_name);
+#if defined(__EMSCRIPTEN__)
+			__resync_em_fs();
+#endif
 			return;
 		}
 	}

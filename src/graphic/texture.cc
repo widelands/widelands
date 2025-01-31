@@ -217,7 +217,9 @@ void Texture::lock() {
 	pixels_.reset(new uint8_t[4ULL * width() * height()]);
 
 	Gl::State::instance().bind(GL_TEXTURE0, blit_data_.texture_id);
+#if !defined(__EMSCRIPTEN__)
 	glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels_.get());
+#endif
 }
 
 void Texture::unlock(UnlockMode mode) {
