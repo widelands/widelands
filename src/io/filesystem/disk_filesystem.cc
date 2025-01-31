@@ -533,6 +533,7 @@ struct RealFSStreamWrite : public StreamWrite {
 	}
 
 	~RealFSStreamWrite() override {
+		StreamWrite::flush();
 		fclose(file_);
 	}
 
