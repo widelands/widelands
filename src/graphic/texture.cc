@@ -218,6 +218,7 @@ void Texture::lock() {
 
 	Gl::State::instance().bind(GL_TEXTURE0, blit_data_.texture_id);
 #if !defined(__EMSCRIPTEN__)
+	// and skip glGetTexImage another not supported extension
 	glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels_.get());
 #endif
 }
