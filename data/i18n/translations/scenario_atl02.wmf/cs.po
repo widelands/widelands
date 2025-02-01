@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Ondřej Itřech, 2025
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
+"Last-Translator: Ondřej Itřech, 2025\n"
 "Language-Team: Czech (https://app.transifex.com/widelands/teams/35159/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +33,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:687
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:735
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundlina"
 
 #. TRANSLATORS: To be used in placeholders for switching texts according to
 #. current leader
@@ -47,35 +51,39 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:568
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:637
 msgid "Sidolus"
-msgstr ""
+msgstr "Sidolus"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:49
 msgid "Find a place to build a port"
-msgstr ""
+msgstr "Najdi místo na stavbu přístavu"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:51
 msgid "Find Portspace"
-msgstr ""
+msgstr "Najdi místo pro přístav"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:52
 msgid ""
 "To set foot on this island, we must first find a building space where a port"
 " can be built. Explore the nearby coast line to find such a building plot."
 msgstr ""
+"Abychom se mohli vylodit, potřebujeme nejprve najít místo, kde lze postavit "
+"přístav. Prozkoumej přilehlé pobřeží a najdi takové stavební místo."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:53
 msgid ""
 "After the port is built we should cancel the other ship’s expedition, to "
 "unload its wares as well."
 msgstr ""
+"Až bude přístav postavený, měli bychom zrušit zbylé výpravy a vyložit i "
+"jejich zboží."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:58
 msgid "Ensure the supply of construction materials"
-msgstr ""
+msgstr "Zajisti dostatečný přísun stavebního materiálu"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:60
 msgid "Establish Basic Production Chain"
-msgstr ""
+msgstr "Vybuduj základní produkční řetězec"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:61
 msgid ""
@@ -83,14 +91,17 @@ msgid ""
 " might or might not be needed depending on how fast the trees are growing "
 "around us. Find the balance."
 msgstr ""
+"Budeme potřebovat minimálně lom, pár dřevorubců a pilu. Lesníci mohou, ale "
+"také nemusí být potřeba, záleží jak rychle v našem okolí porostou stromy. "
+"Zkus najít optimální řešení."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:66
 msgid "Build tools quickly"
-msgstr ""
+msgstr "Rychle vyrob nástroje"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:68
 msgid "Make New Tools"
-msgstr ""
+msgstr "Vyrob nové nástroje"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:69
 msgid ""
@@ -100,14 +111,18 @@ msgid ""
 "prerequisite for success on the island. Don’t forget to build a smelting "
 "works as well."
 msgstr ""
+"Většinu našich nástrojů jsme ztratili při lodním neštěstí. Naši lidé si "
+"nebudou moci plnit své povinnosti bez řádných nástrojů. Naštěstí máme stále "
+"nějakou tu železnou rudu a spoustu uhlí. Postavit kovárnu je předpokladem "
+"úspěchu na tomto ostrově. Nezapomeň postavit také slévárnu."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:74
 msgid "Search the mountains for resources"
-msgstr ""
+msgstr "Prozkoumej zdroje dostupné v přilehlých horách"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:76
 msgid "Build Mines"
-msgstr ""
+msgstr "Postav doly"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:77
 msgid ""
@@ -115,14 +130,17 @@ msgid ""
 "be replenished soon. Explore the mountains and build at least one mine of "
 "each type to mine coal, iron and gold."
 msgstr ""
+"Když nyní můžeme znovu vyrábět nástroje, měli bychom brzy doplnit zásoby "
+"nerostných zdrojů. Prozkoumej hory a za každý typ dolu postav alespoň jeden,"
+" abychom mohli těžit uhlí, železo a zlato."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:82
 msgid "Explore the surroundings"
-msgstr ""
+msgstr "Prozkoumej okolí"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:84
 msgid "Explore Your Surroundings"
-msgstr ""
+msgstr "Prozkoumej své okolí"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:85
 msgid ""
@@ -130,14 +148,17 @@ msgid ""
 "the others on this island are friends or foes, so we need to tread "
 "carefully. Explore the island by building at least one house for a scout."
 msgstr ""
+"Můžeme si být jistí, že na tomto ostrově nejsme sami. Nevíme, zda tu "
+"narazíme na přátele, nebo nepřátele, takže musíme postupovat opatrně. "
+"Prozkoumej ostrov tak, že postavíš alespoň jeden domek průzkumníka."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:90
 msgid "Expand your territory"
-msgstr ""
+msgstr "Rozšiř své území"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:92
 msgid "Expand Territory"
-msgstr ""
+msgstr "Rozšiř území"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:93
 msgid ""
@@ -145,14 +166,17 @@ msgid ""
 "Expand our territory by building military buildings. Build some guardhouses "
 "and at least one tower for its larger view range."
 msgstr ""
+"Naše osídlení se rozrůstá, pro stavbu všech budov budeme potřebovat více "
+"místa. Rozšiř naše území stavbou vojenských budov. Postav několik strážnic a"
+" nejméně jednu věž pro lepší rozhled."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:98
 msgid "Build a spider farm and a weaving mill"
-msgstr ""
+msgstr "Postav pavoučí farmu a tkalcovnu"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:100
 msgid "Spidercloth Production"
-msgstr ""
+msgstr "Výroba pavoučí látky"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:101
 msgid ""
@@ -161,6 +185,9 @@ msgid ""
 "all buildings that consume spidercloth, not forgetting the construction "
 "sites."
 msgstr ""
+"Nutně potřebujeme pavoučí látku, už nám dochází. Je proto nezbytné ušetřit "
+"každý kus, který nám ještě zbývá. Sniž dodávky do všech budov, které pavoučí"
+" látku spotřebovávají, a nezapomeň ani na staveniště."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:102
 msgid ""
@@ -168,30 +195,35 @@ msgid ""
 "spidercloth to be built. Additionally, we need a spider farm and a weaving "
 "mill."
 msgstr ""
+"Konečně budeme muset za těchto okolností postavit ještě statek a na jeho "
+"stavbu pavoučí látku potřebujeme. Dále třeba postavit pavoučí farmu a "
+"tkalcovnu."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:107
 msgid "Build a trading post"
-msgstr ""
+msgstr "Postav tržnici"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:109
 msgid "Upgrade Scout’s House To Trading Post"
-msgstr ""
+msgstr "Vylepši domek průzkumníka na tržnici"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:110
 msgid ""
 "To be able to pay the tributes to Kalitath, and to maintain contact with "
 "Jundlina, we need to enhance our scout’s house to a trading post."
 msgstr ""
+"Abychom mohli platit příspěvky Kalitathovi a udrželi si tak přístup k "
+"Jundlině, musíme vylepšit náš domek průzkumníka na tržnici."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:115
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:128
 msgid "Pay all tributes to Kalitath"
-msgstr ""
+msgstr "Splať Kalitathovi všechny příspěvky "
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:117
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:130
 msgid "Send Trader To Kalitath"
-msgstr ""
+msgstr "Pošli ke Kalitathovi obchodníka"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:118
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:131
@@ -199,63 +231,67 @@ msgid ""
 "We need to send the wares to Kalitath with our trader. He will pick them up "
 "as soon as a batch is ready in his trading post."
 msgstr ""
+"Musíme to zboží poslat po obchodníkovi. Vyzvedne ho jakmile bude dodávka k "
+"dispozici na jeho tržnici."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:119
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:132
 msgid "The following batches need to be delivered:"
-msgstr ""
+msgstr "Je třeba doručit následující dodávky:"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:120
 msgid "Five batches of five logs each."
-msgstr ""
+msgstr "Pět dodávek po pěti kládách."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:121
 msgid "Four batches of four lumps of coal each."
-msgstr ""
+msgstr "Čtyři dodávky po čtyřech hroudách uhlí."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:122
 msgid "Three batches of three iron bars each."
-msgstr ""
+msgstr "Tři dodávky po třech železných prutech."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:123
 msgid "Two batches of two gold bars each."
-msgstr ""
+msgstr "Dvě dodávky po dvou zlatých cihlách."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:133
 msgid "Ten batches of five logs each."
-msgstr ""
+msgstr "Deset dodávek po pěti kládách."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:134
 msgid "Eight batches of four lumps of coal each."
-msgstr ""
+msgstr "Osm dodávek po čtyřech hroudách uhlí."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:135
 msgid "Six batches of three iron bars each."
-msgstr ""
+msgstr "Šest dodávek po třech železných prutech."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:136
 msgid "Four batches of two gold bars each."
-msgstr ""
+msgstr "Čtyři dodávky po dvou zlatých cihlách."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:141
 msgid "Defeat Maletus"
-msgstr ""
+msgstr "Poraž Maletuse"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:143
 msgid "Defeat Imperial Leader Maletus"
-msgstr ""
+msgstr "Poraž císařského místodržícího Maletuse"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:144
 msgid "We need to finish the Empire off to have a chance to build a new home."
 msgstr ""
+"Musíme se vypořádat s císařstvím, abychom měli šanci vybudovat si tu nový "
+"domov."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:149
 msgid "Build a temple to worship Satul"
-msgstr ""
+msgstr "Postav chrám na uctívání Satula"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:151
 msgid "Build Temple For Satul"
-msgstr ""
+msgstr "Postav chrám pro Satula"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:152
 msgid ""
@@ -263,47 +299,53 @@ msgid ""
 " he might show these Barbarians his might and our princess might come back "
 "to her senses."
 msgstr ""
+"Musíme postavit Satulovi chrám, abychom ho mohli správně uctívat. Bude tak "
+"moci ukázat těm barbarům svou moc a naší princezně by se tím mohl vrátit "
+"zdravý rozum."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:153
 msgid ""
 "And we need to have a scout’s house to not lose track of what is going on at"
 " the Barbarians’ territory."
 msgstr ""
+"A budeme potřebovat domek průzkumníka, abychom neztratili přehled o tom, co "
+"se děje na barbarském území."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:158
 msgid "Worship Satul and consecrate priestesses"
-msgstr ""
+msgstr "Uctívej Satula a vysvěť kněžky"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:160
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:542
 msgid "Worship Satul"
-msgstr ""
+msgstr "Uctívej Satula"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:161
 msgid "Now we need to worship Satul and consecrate at least two priestesses."
-msgstr ""
+msgstr "Nyní musíme vzývat Satula a vysvětit alespoň dvě kněžky."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:166
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:168
 msgid "Defeat Kalitath"
-msgstr ""
+msgstr "Poraž Kalitatha"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:169
 msgid ""
 "Now it’s time to finish off this annoying Barbarian. He has molested us far "
 "too long now."
 msgstr ""
+"Teď je čas skoncovat s tím otravným barbarem. Naobtěžoval se nás už příliš."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:178
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:740
 msgid "Defeated!"
-msgstr ""
+msgstr "Porážka!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:179
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:741
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:752
 msgid "Sidolus has bad news…"
-msgstr ""
+msgstr "Sidolus má špatnou novinu..."
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:181
@@ -312,12 +354,15 @@ msgid ""
 "couldn’t protect us from the enemy. They have destroyed our last warehouse. "
 "Thus we have lost this battle and our people is doomed!"
 msgstr ""
+"Oh ne, Jundlino. Nevím jak se to vůbec mohlo stát, ale Satulovi se "
+"nepodařilo ochránit nás před našimi nepřáteli. Zničili i náš poslední sklad."
+" Tím jsme prohráli tuto bitvu a náš lid je zatracen!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:182
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:744
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:755
 msgid "You Have Lost"
-msgstr ""
+msgstr "Prohrál(a) jsi"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:183
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:745
@@ -326,14 +371,16 @@ msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"Tvá výprava selhala a nelze pokračovat v cestě. Snad budeš mít při svém "
+"dalším pokusu více štěstí. Klikni na OK pro návrat do hlavní nabídky."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:191
 msgid "The Princess’s Memoir"
-msgstr ""
+msgstr "Princezniny paměti"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:192
 msgid "Jundlina writes her diary"
-msgstr ""
+msgstr "Jundlina píše svůj deník"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:194
@@ -342,6 +389,9 @@ msgid ""
 "ships and make our escape, but the currents of the sinking island tested our"
 " new ships and their design."
 msgstr ""
+"Náš útěk z toho prokletého ostrova byl těsný. Podařilo se nám nalodit se na "
+"3 lodě a uprchnout, ale víry potápějícího se ostrova prověřily naše nové "
+"lodě a jejich konstrukci."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:197
@@ -350,6 +400,9 @@ msgid ""
 "without much planning and so one of our ships ended up carrying most of the "
 "heavy wares in our possession."
 msgstr ""
+"A jedna tímto testem neprošla. Poslední dny nakládky probíhaly ve zmatku a "
+"bez řádného plánu, a tak se stalo, že jedna z našich lodí nesla většinu "
+"těžkého zboží z našich zásob."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:200
@@ -358,6 +411,9 @@ msgid ""
 "was pulled below the sea level by Lutas’ forces and we lost most men and all"
 " wares it carried."
 msgstr ""
+"Velká váha v kombinaci se silnými proudy byla pro tuto loď příliš a byla "
+"Lutasovou silou stažena pod mořskou hladinu. Tím jsme přišli o většinu "
+"posádky a všechno zboží, které nesla."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:203
@@ -366,14 +422,17 @@ msgid ""
 "well, but they persisted. We escaped the island and began our smooth sailing"
 " to other coasts."
 msgstr ""
+"Všichni jsme měli vážně obavy. Očekávali jsme, že i zbylé lodě půjdou ke "
+"dnu, ale vydržely. Unikli jsme ostrovu a započali klidnou plavbu k novým "
+"břehům."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:207
 msgid "New Hope"
-msgstr ""
+msgstr "Nová naděje"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:208
 msgid "Jundlina continues"
-msgstr ""
+msgstr "Jundlina pokračuje"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:210
@@ -381,6 +440,8 @@ msgid ""
 "Many weeks have passed and we did only see small islands not suitable for "
 "habitation and without any sign of being blessed by Satul, the fire god."
 msgstr ""
+"Mnoho týdnů uplynulo a my naráželi pouze na malé ostrovy nevhodné k osídlení"
+" a bez známek přízně Satula, boha ohně."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:213
@@ -389,14 +450,17 @@ msgid ""
 "The black comes from the fiery mountain in the north of the island, the grey"
 " however comes from settlers."
 msgstr ""
+"Poslední noci jsme ale spatřili nový ostrov. Viděli jsme jak se nad ním "
+"vznáší kouř. Černý vycházející z ohnivé hory na severu ostrova, ale i šedý "
+"pocházející z osídlení."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:217
 msgid "Planning For The Future"
-msgstr ""
+msgstr "Plány do budoucna"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:218
 msgid "Jundlina concludes"
-msgstr ""
+msgstr "Jundlininy závěry"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:220
@@ -405,6 +469,9 @@ msgid ""
 "do not know if the people there are friends or foes. We do not even know "
 "what tribe they might be from."
 msgstr ""
+"Jisté je, že minimálně východní část ostrova je osídlena. Nelze říci, zda "
+"jde o lid přátelský, nebo nepřátelský. Nevíme ani, o jaký kmen by se mohlo "
+"jednat."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:223
@@ -413,6 +480,8 @@ msgid ""
 "ship of ours has sailed as far as we did for centuries. I can only hope they"
 " are friendly."
 msgstr ""
+"Co víme jistě, nemohou to být Atlanťané, protože žádné z našich lodí nepluly"
+" po celá staletí tak daleko. Můžeme jen doufat, že budou přátelští."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:226
@@ -422,16 +491,20 @@ msgid ""
 "sail any further, and we must attempt to settle on this island as close as "
 "possible to our current position."
 msgstr ""
+"Nezbývá nám mnoho vody, zásoby jídla se tenčí. S třetí lodí jsme ztratili "
+"nástroje a většinu stavebního materiálu. Nemůžeme si dovolit plout dále a "
+"musíme se pokusit usadit na tomto ostrově, tak blízko naší současné pozice, "
+"jak jen to bude možné."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:234
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:242
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:250
 msgid "Jundlina Gives Orders"
-msgstr ""
+msgstr "Jundlina dává příkazy"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:235
 msgid "Jundlina decides"
-msgstr ""
+msgstr "Jundlina rozhoduje"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:237
@@ -440,10 +513,13 @@ msgid ""
 "plenty of iron ore, so a toolsmithy and a smelting works will quickly "
 "provide us with good tools."
 msgstr ""
+"Jelikož jsme založili přístav, můžeme začít plánovat naše osídlení. Stále "
+"máme dostatek železné rudy, takže kovárna a slévárna nám rychle poskytnou "
+"dostatek kvalitních nástrojů."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:243
 msgid "Jundlina demands"
-msgstr ""
+msgstr "Jundlina požaduje"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:245
@@ -452,10 +528,12 @@ msgid ""
 "of trees, we might not even need foresters. But we need stone, that much is "
 "certain!"
 msgstr ""
+"Nicméně musíme se také postarat o stavební materiál. Na ostrově je spousta "
+"stromů, možná nebude třeba ani lesníků. Ale potřebujeme kámen, to je jisté!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:251
 msgid "Jundlina orders"
-msgstr ""
+msgstr "Jundlina nakazuje"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:253
@@ -464,6 +542,9 @@ msgid ""
 "careful. We should build at least one tower so that we can see potential "
 "enemies before they see us."
 msgstr ""
+"Prozkoumejme tento ostrov a rozšiřme naše území. Ale musíme být opatrní. "
+"Měli bychom postavit alespoň jednu věž tak, abychom viděli našeho "
+"potenciálního nepřítele dříve, než on uvidí nás."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:256
@@ -838,6 +919,12 @@ msgid ""
 "Barbarian any more, I want you to ensure we have a scout out there to gather"
 " information."
 msgstr ""
+"Nechť tě Satul hřeje, Loftomore. Jde o opravdu dobrý nápad. Úkoluji tě tedy "
+"stavbou chrámu, abychom mohli vzdát úctu našemu Bohu. Než budeme připraveni "
+"požádat o Satulovu moc, neměli bychom spouštět pohled z naší princezny a "
+"toho barbara. Protože bychom měli pozastavit naše dodávky, abychom už "
+"neplýtvali zdroji na ty barbary, chci, abys  zajistil průzkumníka, který "
+"bude sbírat informace."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:536
 msgid "Temple Completed"
@@ -996,10 +1083,12 @@ msgid ""
 "First you need to upgrade our scout’s house to a trading post. Then you need"
 " to send the demanded tributes of gold, iron, coal, and logs."
 msgstr ""
+"Nejprve potřebuješ vylepšit domek průzkumníka na tržnici. Pak musíš poslat "
+"požadované příspěvky zlata, železa, uhlí a klád."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:630
 msgid "Trading Post Built"
-msgstr ""
+msgstr "Tržnice je hotova"
 
 #. TRANSLATORS: Loftomor
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:633
@@ -1007,6 +1096,8 @@ msgid ""
 "Sidolus, may Satul warm you! We have finished the new trading post. I hope "
 "this will allow Jundlina to return to us soon."
 msgstr ""
+"Nechť tě Satul hřeje, Sidole! Naše nová tržnice je hotova. Doufám, že se nám"
+" tak Jundlina vrátí brzy."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:636
 msgid "Sidolus Agrees"
@@ -1240,13 +1331,13 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trader/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Trader"
-msgstr ""
+msgstr "Obchodník"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Trading Post"
-msgstr ""
+msgstr "Tržnice"
 
 #. TRANSLATORS: Completed/Skipped/Did not start trading because ...
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/init.lua:35
@@ -1255,7 +1346,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/init.lua:69
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/init.lua:81
 msgid "trading"
-msgstr ""
+msgstr "obchodování"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/barbarians_trade_pole/init.lua:8
@@ -1324,7 +1415,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:37
 msgctxt "atlanteans_worker"
 msgid "A trader is a scout who needs a horse to transport the wares."
-msgstr ""
+msgstr "Obchodník je průzkumník, který dostal koně na přepravu zboží."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean worker: Satul's Initiate
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:43
