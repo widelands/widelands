@@ -21,6 +21,7 @@
 #include <memory>
 
 #include <SDL.h>
+#include <SDL_mixer.h>
 #ifdef _WIN32
 #include <windows.h>
 #endif
@@ -200,6 +201,7 @@ void SoundHandler::read_config() {
 		   get_config_bool("sound", "enable_" + option.second.name, option.second.enabled);
 	}
 	use_custom_songset_instead_ingame_ = get_config_bool("sound", "custom_ingame_music", false);
+	shuffle_ = get_config_bool("sound", "shuffle", true);
 }
 
 /// Save the current sound options to config cache
@@ -434,9 +436,19 @@ void SoundHandler::start_music(const std::string& songset_name) {
 	if (songs_.count(songset_name) == 0) {
 		log_err("SoundHandler: songset \"%s\" does not exist!\n", songset_name.c_str());
 	} else {
-		if (Mix_Music* const m = songs_[songset_name]->get_song(rng_.rand())) {
+		uint32_t n = shuffle_ ? rng_.rand() : 0;
+		if (Mix_Music* const m = songs_[songset_name]->get_song(n)) {
 			Mix_FadeInMusic(m, 1, kMinimumMusicFade);
 			current_songset_ = songset_name;
+#if SDL_MIXER_VERSION_ATLEAST(2, 6, 0)
+			std::string title(Mix_GetMusicTitle(m));
+#else
+			std::string title;
+#endif
+			if (title.empty()) {
+				title = "Untitled";
+			}
+			current_song_ = title;
 		} else {
 			log_err(
 			   "SoundHandler: songset \"%s\" exists but contains no files!\n", songset_name.c_str());
@@ -457,6 +469,19 @@ void SoundHandler::stop_music(int fadeout_ms) {
 	if (Mix_PlayingMusic() != 0) {
 		Mix_FadeOutMusic(std::max(fadeout_ms, kMinimumMusicFade));
 	}
+}
+
+std::string SoundHandler::current_song() {
+	return current_song_;
+}
+
+bool SoundHandler::is_shuffle() const {
+	return shuffle_;
+}
+
+void SoundHandler::set_shuffle(bool on) {
+	shuffle_ = on;
+	set_config_bool("sound", "shuffle", on);
 }
 
 /**
@@ -487,6 +512,18 @@ void SoundHandler::change_music(const std::string& songset_name, int const fadeo
 		start_music(current_songset_);
 	}
 }
+
+void SoundHandler::set_music_track_enabled(std::string& filename, bool on) {
+	songs_[Songset::kIngame]->set_song_enabled(filename, on);
+}
+bool SoundHandler::is_music_track_enabled(std::string& filename) {
+	return songs_[Songset::kIngame]->is_song_enabled(filename);
+}
+
+std::vector<Song> SoundHandler::get_music_data() {
+	return songs_[Songset::kIngame]->get_song_data();
+}
+
 bool SoundHandler::use_custom_songset() const {
 	return use_custom_songset_instead_ingame_;
 }
