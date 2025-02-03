@@ -141,6 +141,10 @@ public:
 	}
 	void add_flag(Flag&);
 	void remove_flag(Flag&);
+	using Flags = std::vector<Flag*>;
+	const Flags& flags() {
+		return flags_;
+	}
 
 	// Returns an arbitrary flag or nullptr if this is an economy without flags
 	// (i.e. an Expedition ship).
@@ -269,7 +273,6 @@ private:
 
 	Player& owner_;
 
-	using Flags = std::vector<Flag*>;
 	Flags flags_;
 	WareList wares_or_workers_;  ///< virtual storage with all wares/workers in this Economy
 	std::vector<Warehouse*> warehouses_;
