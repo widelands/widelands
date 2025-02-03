@@ -33,7 +33,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:687
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:735
 msgid "Jundlina"
-msgstr "Jundlina"
+msgstr "Jundlino"
 
 #. TRANSLATORS: To be used in placeholders for switching texts according to
 #. current leader
@@ -51,7 +51,7 @@ msgstr "Jundlina"
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:568
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:637
 msgid "Sidolus"
-msgstr "Sidolus"
+msgstr "Sidole"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:49
 msgid "Find a place to build a port"
@@ -553,6 +553,9 @@ msgid ""
 "When we no longer need a building, we will dismantle it instead of burning "
 "it down."
 msgstr ""
+"Při spotřebě kamene a dalších cenných surovin musíme jednat s rozmyslem. "
+"Pokud už některou z budov nebudeme potřebovat, musíme ji rozebrat namísto "
+"zničení."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:259
@@ -560,12 +563,15 @@ msgid ""
 "This will take more time, but we can reuse some of its materials. Also, I "
 "want a scout deployed and exploring at all times."
 msgstr ""
+"Zabere to nějaký čas, ale takto získané suroviny můžeme znovu použít. Dále "
+"chci, abychom měli neustále v terénu průzkumníka, který bude monitorovat "
+"okolí."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:270
 msgid "Opol Reports Serious Shortages"
-msgstr ""
+msgstr "Opol informuje o závažných nedostatcích surovin"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:273
@@ -576,18 +582,22 @@ msgid ""
 "most perilous case, for as you know, spidercloth is needed for many "
 "buildings."
 msgstr ""
+"Nechť Vás Satul hřeje, %s.  Jako vrchní tkadlec cechu musím Vám sdělit "
+"špatnou zprávu. Právě jsem zjistil, že nám dochází pavoučí látka. To je "
+"velmi závažná skutečnost. Jak jistě víte, pavoučí látku potřebujeme na "
+"stavbu mnoha budov."
 
 #. TRANSLATORS: Opol
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:276
 msgid "We should build up a spidercloth production urgently."
-msgstr ""
+msgstr "Je třeba neodkladně zajistit výrobu pavoučí látky."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:280
 #, lua-format
 msgid "%s Replies"
-msgstr ""
+msgstr "Co odpovíš %s"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:283
@@ -596,10 +606,13 @@ msgid ""
 "but I understand the urgency. We need to build a complete spidercloth "
 "production instantly."
 msgstr ""
+"Nechť Satul hřeje i tebe, Opole. Mým záměrem bylo výrobu pavoučí látky ještě"
+" trochu pozdržet, ale rozumím naléhavosti situace. Musíme postavit všechny "
+"pro výrobu pavoučí látky podstatné budovy a to okamžitě."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:295
 msgid "Opol Makes A Point"
-msgstr ""
+msgstr "Opol má pravdu"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:298
@@ -610,13 +623,18 @@ msgid ""
 "needing spidercloth for completion, not completing one in time will result "
 "in a crisis that can never be resolved."
 msgstr ""
+"Odpusťte %s! Zdá se, že jsme narazili na další ještě naléhavější problém. "
+"Obávám se, že jsme stále nepostavili statek, aby byla zajištěna potrava pro "
+"pavouky. Tato budova potřebuje na své dokončení pavoučí látku, pokud se nám "
+"nepodaří dokončit alespoň jeden statek včas, může to způsobit neřešitelnou "
+"krizi."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:302
 #, lua-format
 msgid "%s Acknowledges"
-msgstr ""
+msgstr "Rozhodni %s"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:305
@@ -624,12 +642,14 @@ msgid ""
 "I see the risk, Opol. Thank you for reporting. We will build a farm "
 "immediately."
 msgstr ""
+"Vidím to nebezpečí, Opole. Děkuji ti za upozornění. Postavíme statek "
+"okamžitě."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:317
 msgid "Opol Reports Success"
-msgstr ""
+msgstr "Opol informuje o zdárném vývoji"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:320
@@ -640,6 +660,10 @@ msgid ""
 " finest cloth and some tabards soon. Maybe we can build a gold spinning mill"
 " later on to make better tabards as well."
 msgstr ""
+"%s, nechť Vás Satul hřeje! Tkalcovna a pavoučí farma jsou hotovy a "
+"tklacovský cech se může opět pustit do práce. Slibuji Vám, že budeme již "
+"brzy dodávat nejjemnější látky a tabardy. Možná bychom později mohli "
+"postavit i přádelnu zlata, abychom mohli šít i kvalitnější tabardy."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
@@ -647,7 +671,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:390
 #, lua-format
 msgid "%s Cheers"
-msgstr ""
+msgstr "Raduj se %s"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:327
@@ -655,11 +679,13 @@ msgid ""
 "This is good news indeed, Opol. You may go back to your work now, and may "
 "Satul warm you and the weavers’ guild!"
 msgstr ""
+"To je opravdu dobrá zpráva, Opole. Můžeš se nyní vrátit ke své práci a nechť"
+" Satul hřeje tebe i všechny členy tvého cechu!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:336
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:351
 msgid "Sidolus Reports Foreign Inhabitants"
-msgstr ""
+msgstr "Sidolova zpráva o cizincích"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:339
@@ -669,11 +695,13 @@ msgid ""
 "land governed by foreigners, but we do not yet know what to expect from "
 "them."
 msgstr ""
+"Nechť Vás Satul hřeje, Jundlino. Nesu znepokojivou novinu. Zemi cizinců již "
+"máme nadohled, přitom stále nevíme, co od nich můžeme čekat."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:342
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:357
 msgid "Jundlina Is Concerned"
-msgstr ""
+msgstr "Jundlina je znepokojena"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:345
@@ -681,6 +709,8 @@ msgid ""
 "Sidolus, I agree this is very concerning. We need to find out more. "
 "Hopefully our scout will get us some information soon."
 msgstr ""
+"Souhlasím Sidole, to je velmi znepokojivé. Musíme získat více informací. "
+"Doufejme, že se co nevidět dozvíme něco od našeho průzkumníka."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:360
@@ -688,10 +718,12 @@ msgid ""
 "Sidolus, I agree this is very concerning. We need to find out more. We "
 "definitely need to send out a scout to gather some information."
 msgstr ""
+"Souhlasím Sidole, to je velmi znepokojivé. Musíme získat více informací. "
+"Abychom se něco dozvěděli, není jiné cesty než vyslat průzkumníka, "
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:366
 msgid "Allies?"
-msgstr ""
+msgstr "Spojenci?"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:369
@@ -700,10 +732,13 @@ msgid ""
 " are in big trouble as they are at war with a mighty tribe in the north. "
 "They ask us for support."
 msgstr ""
+"Nechť Vás Satul hřeje, Jundlino. Podařilo se nám navázat spojení s cizinci. "
+"Nachází se ve velkých nesnázích, protože jsou ve válce s mocným kmenem ze "
+"severu. Źádají nás o podporu."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:372
 msgid "Jundlina Is Cautious"
-msgstr ""
+msgstr "Jundlina je ostražitá"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:375
@@ -712,10 +747,13 @@ msgid ""
 "see what we can do for them. However we should improve our own military "
 "strength to become independent of others."
 msgstr ""
+"Sidole, jelikož můžeme potřebovat jakéhokoli spojence, měli bychom jim "
+"pomoci. Uvidíme, co bude v našich silách pro ně udělat. I tak musíme "
+"zapracovat na naší vlastní vojenské síle, abychom byli nezávislí."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:383
 msgid "Building Material Ensured"
-msgstr ""
+msgstr "Stavební materiál zajištěn"
 
 #. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:386
@@ -723,6 +761,8 @@ msgstr ""
 msgid ""
 "May Satul warm you, %s! We have finished our supply of building materials."
 msgstr ""
+"Nechť Vás Satul hřeje, %s! Dodávky stavebního materiálu jsou nyní "
+"zabezpečeny."
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:393
@@ -731,10 +771,13 @@ msgid ""
 "sophisticated buildings to enlarge our economy. Please advise whenever you "
 "feel we are missing necessary buildings."
 msgstr ""
+"To je vskutku dobrá zpráva, Loftomore. Nyní můžeme zvážit stavbu "
+"komplikovanějších budov, aby naše hospodářství lépe prosperovalo. Dej prosím"
+" vědět, jakmile budeš mít pocit, že nám nějaké důležité budovy chybí."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:404
 msgid "Tool Supply Ensured"
-msgstr ""
+msgstr "Výroba nástrojů zajištěna"
 
 #. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:407
@@ -743,13 +786,15 @@ msgid ""
 "%s, may Satul warm you! We have made some progress in building up our tool "
 "industry."
 msgstr ""
+"%s, nechť Vás Satul hřeje! Učinili jsme výrazný posun v zabezpečení výroby "
+"nástrojů."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:411
 #, lua-format
 msgid "%s Enchanted"
-msgstr ""
+msgstr "Raduj se %s"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:414
@@ -758,10 +803,13 @@ msgid ""
 "buildings we are going to build in our new home. But now we should really "
 "look to get some resources from the mountains."
 msgstr ""
+"To je Loftomore skutečně výborná zpráva. To nám umožní zajistit provoz všech"
+" budov, které v tomto našem novém domově postavíme. Nyní ale opravdu "
+"potřebujeme začít těžbu v horách."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:426
 msgid "Mining Established"
-msgstr ""
+msgstr "Těžba běží"
 
 #. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:429
@@ -770,13 +818,15 @@ msgid ""
 "%s, may Satul warm you! Another issue solved. We have found some resources "
 "and built a mine of each type."
 msgstr ""
+"%s, nechť Vás Satul hřeje! Další krok je splněn. Nalezli jsme potřebné "
+"zdroje surovin a postavili všechny typy dolů."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:433
 #, lua-format
 msgid "%s Is Excited"
-msgstr ""
+msgstr "Více nadšení %s"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:436
@@ -785,11 +835,14 @@ msgid ""
 "But now we need to ensure we can feed them. We need to build up bakeries and"
 " smokeries and all buildings to supply them."
 msgstr ""
+"Dobrá práce, Loftomore, dobrá práce. Nechť Satul hřeje naše silné a statečné"
+" horníky. Však nyní je třeba zajistit jim dostatek jídla. Musíme postavit "
+"pekárny a udírny a všechny budovy, kterých je třeba pro jejich zásobování."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:445
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:484
 msgid "Tribute Delivered"
-msgstr ""
+msgstr "Příspěvky dodány"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:448
@@ -798,6 +851,8 @@ msgid ""
 "May Satul warm you, Kalitath! We have delivered all the wares you demanded. "
 "Now we expect our princess to return home."
 msgstr ""
+"Nechť Vás Satul hřeje, Kalitathe! Dodali jsme všechno zboží jak bylo "
+"požadováno. Nyní čekáme, že se naše princezna bude moci vrátit domů."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:451
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:475
@@ -824,6 +879,8 @@ msgid ""
 "May Satul warm you, Kalitath! We have defeated the troops of the Empire in "
 "the north. Now we expect our princess to return home."
 msgstr ""
+"Nechť Vás Satul hřeje, Kalitathe! Porazili jsme vojska severního císařství. "
+"Nyní čekáme, že se naše princezna bude moci vrátit domů."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:478
@@ -890,6 +947,9 @@ msgid ""
 " this Barbarian. But I will never worship any Barbarian god. I can’t imagine"
 " how we could change her mind though."
 msgstr ""
+"Nechť Satul zahřeje nás všechny. Naše princezna se v barbarském zajetí zcela"
+" pomýlila. Ale já nikdy nebudu moci uctívat žádného barbarského boha. "
+"Nevidím způsob jak ji přivést zpátky k rozumu."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:520
 msgid "Attracting Satul’s Help"

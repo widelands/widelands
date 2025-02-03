@@ -1644,13 +1644,13 @@ msgstr "Pěstuje kakao, které je potřeba na vaření čokoládových nápojů.
 #: ../../../../data/tribes/initialization/amazons/units.lua:1567
 msgctxt "amazons_building"
 msgid "Chocolate is essential for training Amazon soldiers."
-msgstr ""
+msgstr "Čokoláda je nenahraditelná při výcviku amazonských bojovnic."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stone Mine
 #: ../../../../data/tribes/initialization/amazons/units.lua:1576
 msgctxt "amazons_building"
 msgid "Digs granite and quartz out of the ground in mountain terrain."
-msgstr ""
+msgstr "Těží žulu a křemen ze skal v horském terénu."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Stone Mine
 #: ../../../../data/tribes/initialization/amazons/units.lua:1578
@@ -1758,7 +1758,7 @@ msgstr "Staví přívozy."
 #: ../../../../data/tribes/initialization/amazons/units.lua:1684
 msgctxt "amazons_building"
 msgid "Needs water nearby. Be aware ferries carry wares only, no workers."
-msgstr ""
+msgstr "Potřebuje ve svém okolí vodní plochu. Nezapomeň, že přívozy převáží pouze zboží, žádné pracovníky."
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Ferry Yard, part
 #. 2
@@ -1789,7 +1789,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2239
 msgctxt "building"
 msgid "Roads and trees along the shoreline block access to water."
-msgstr ""
+msgstr "Cesty a stromy podél pobřeží brání v přístupu k vodě."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Ferry
 #. Yard, part 1
@@ -1798,7 +1798,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Tato budova může vyrobit jeden přívoz v rozmezí mezi %1$s a %2$s, záleží jak dlouhou cestu musí stavitelka lodí urazit."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Shipyard
 #: ../../../../data/tribes/initialization/amazons/units.lua:1700
@@ -1822,7 +1822,7 @@ msgstr "Staví lodě, které se užívají pro zámořskou kolonizaci a na obcho
 #: ../../../../data/tribes/initialization/frisians/units.lua:2237
 msgctxt "building"
 msgid "Needs wide open water nearby."
-msgstr ""
+msgstr "Musí stát poblíž otevřené vodní plochy."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Shipyard,
 #. part 1
@@ -1831,7 +1831,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Tato budova může vyrobit jednu loď v rozmezí mezi %1$s a %2$s, záleží jak dlouhou cestu musí stavitelka lodí urazit."
 
 #. TRANSLATORS: Lore helptext for an Amazon building: Construction Site
 #. TRANSLATORS: Lore helptext for an Atlantean building: Construction Site
@@ -3207,7 +3207,7 @@ msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It can "
 "be processed into spidercloth or tabards in a weaving mill, or used to make "
 "tools in the toolsmithy."
-msgstr ""
+msgstr "Pavoučí hedvábí vyrábí pavouci, kteří jsou chováni na pavoučích farmách. Může být zpracováno na pavoučí látku či tabardy v tkalcovně, nebo použito na výrobu nástrojů v kovárně."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:481
@@ -3216,7 +3216,7 @@ msgid ""
 "Spidercloth is made out of spider silk in a weaving mill. It is used in the "
 "shipyard. Also some higher developed buildings need spidercloth for their "
 "construction."
-msgstr ""
+msgstr "Pavoučí látka se vyrábí z pavoučího hedvábí v tkalcovně. Používá se v loděnici. Je potřeba také na stavbu některých pokročilejších budov."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fish
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:492
@@ -3460,7 +3460,7 @@ msgid ""
 "Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
 "hammer. Make sure you’ve always got some in reserve! They are produced by "
 "the toolsmith."
-msgstr ""
+msgstr "Geologové, stavitelé, zbrojíři, platnéři a stavitelé lodí, všichni potřebují kladivo. Postarej se o to, aby bylo vždy nějaké v zásobě! Vyrábí je kovář."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Milking Tongs
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:719
@@ -4028,7 +4028,7 @@ msgstr "Zde je bohaté naleziště drahého kamení."
 #: ../../../../data/tribes/initialization/frisians/units.lua:1517
 msgid ""
 "This tree is only planted by the Amazon tribe but can be harvested for logs."
-msgstr ""
+msgstr "Toto je strom vysazovaný kmenem Amazonek, i tak ho lze pokácet na dřevo."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean warehouse: Headquarters
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1434
@@ -4144,7 +4144,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonecutter has to walk."
-msgstr ""
+msgstr "Tato budova může produkovat kvádr žuly v rozmezí mezi %1$s a %2$s, záleží jak dlouhou cestu musí kameník urazit."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Quarry,
 #. part 2
@@ -4172,7 +4172,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2098
 msgctxt "atlanteans_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "V případě nerovného terénu a překážek v cestě může potřebný čas ještě vzrůst."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site:
 #. Woodcutter's House
@@ -4524,7 +4524,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1644
 msgctxt "atlanteans_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Průzkumníkovi zabere jedna výprava něco mezi %1$s a %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Sawmill
 #. TRANSLATORS: Purpose helptext for an Empire production site: Sawmill
@@ -4888,7 +4888,7 @@ msgstr ""
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "Kasárna potřebují v průměru %s na nábor jednoho vojáka."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Horse Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1802
@@ -5109,7 +5109,7 @@ msgstr ""
 msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Pokud je stabilní přísun jídla, může tento důl vytěžit v průměru jednu hroudu uhlí za %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Iron Mine
@@ -5141,7 +5141,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
-msgstr ""
+msgstr "Pokud je stabilní přísun jídla, může tento důl vytěžit v průměru jednu železnou rudu za %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Gold Mine
@@ -5187,7 +5187,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
-msgstr ""
+msgstr "Pokud je stabilní přísun jídla, může tento důl vytěžit v průměru jednu zlatou rudu za %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean training site: Dungeon, part
 #. 1
@@ -5411,7 +5411,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Tato budova může vyrobit jeden přívoz v rozmezí mezi %1$s a %2$s, záleží jak dlouhou cestu musí stavitel lodí urazit."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Shipyard
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Shipyard
@@ -5449,7 +5449,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Tato budova může vyrobit jednu loď v rozmezí mezi %1$s a %2$s, záleží jak dlouhou cestu musí stavitel lodí urazit."
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2130
@@ -6978,7 +6978,7 @@ msgstr "Chat'Karuth<br>při příležitosti slavnostní přísahy první skupiny
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1272
 msgctxt "barbarians_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Průzkumníkovi zabere jedna výprava něco mezi %1$s a %2$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Wood Hardener
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1284
@@ -7472,7 +7472,7 @@ msgstr "Poskytují rekrutům vybavení a trénují je na vojáky."
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "Kasárna potřebují v průměru %s na nábor jednoho vojáka."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Cattle Farm
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1511
@@ -7649,7 +7649,7 @@ msgstr "Dřevo vás doma zahřeje a dobře hoří, ale pokud jde o práci se že
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Pokud je stabilní přísun jídla, může tento důl vytěžit v průměru jednu hroudu uhlí za %s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Iron Mine
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Deep Iron Mine
@@ -7922,7 +7922,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Tato budova může vyrobit jeden přívoz v rozmezí mezi %1$s a %2$s, záleží jak dlouhou cestu musí stavitel lodí urazit."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Shipyard
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1826
@@ -7940,7 +7940,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Tato budova může vyrobit jednu loď v rozmezí mezi %1$s a %2$s, záleží jak dlouhou cestu musí stavitel lodí urazit."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Weaving Mill
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1850
@@ -8701,1369 +8701,1369 @@ msgstr "H’ylandet"
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2130
 msgctxt "warehousename"
 msgid "H’rdal"
-msgstr ""
+msgstr "H’rdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2132
 msgctxt "warehousename"
 msgid "Hustadvik"
-msgstr ""
+msgstr "Hustadvik"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2134
 msgctxt "warehousename"
 msgid "H’valer"
-msgstr ""
+msgstr "H’valer"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2136
 msgctxt "warehousename"
 msgid "Hyll’stad"
-msgstr ""
+msgstr "Hyll’stad"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2138
 msgctxt "warehousename"
 msgid "Ib’stad"
-msgstr ""
+msgstr "Ib’stad"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2140
 msgctxt "warehousename"
 msgid "Ind’rey"
-msgstr ""
+msgstr "Ind’rey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2142
 msgctxt "warehousename"
 msgid "Ind’re"
-msgstr ""
+msgstr "Ind’re"
 
 #. TRANSLATORS: This Barbarian warehouse is named after a barbarian town.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2144
 msgctxt "warehousename"
 msgid "Ir Kal’Tur"
-msgstr ""
+msgstr "Ir Kal’Tur"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2146
 msgctxt "warehousename"
 msgid "Iv’land"
-msgstr ""
+msgstr "Iv’land"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2148
 msgctxt "warehousename"
 msgid "J’vnaker"
-msgstr ""
+msgstr "J’vnaker"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2150
 msgctxt "warehousename"
 msgid "K’fjord"
-msgstr ""
+msgstr "K’fjord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2152
 msgctxt "warehousename"
 msgid "Kar’sjok"
-msgstr ""
+msgstr "Kar’sjok"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2154
 msgctxt "warehousename"
 msgid "Karls’y"
-msgstr ""
+msgstr "Karls’y"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2156
 msgctxt "warehousename"
 msgid "Karm’y"
-msgstr ""
+msgstr "Karm’y"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2158
 msgctxt "warehousename"
 msgid "Kot’keino"
-msgstr ""
+msgstr "Kot’keino"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2160
 msgctxt "warehousename"
 msgid "K’nn"
-msgstr ""
+msgstr "K’nn"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2162
 msgctxt "warehousename"
 msgid "Kl’pp"
-msgstr ""
+msgstr "Kl’pp"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2164
 msgctxt "warehousename"
 msgid "K’ngsberg"
-msgstr ""
+msgstr "K’ngsberg"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2166
 msgctxt "warehousename"
 msgid "K’ngsvinger"
-msgstr ""
+msgstr "K’ngsvinger"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2168
 msgctxt "warehousename"
 msgid "Krag’re"
-msgstr ""
+msgstr "Krag’re"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2170
 msgctxt "warehousename"
 msgid "Kr’dsherad"
-msgstr ""
+msgstr "Kr’dsherad"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2172
 msgctxt "warehousename"
 msgid "Kvæfjord"
-msgstr ""
+msgstr "Kvæfjord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2174
 msgctxt "warehousename"
 msgid "Kvæn’ngen"
-msgstr ""
+msgstr "Kvæn’ngen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2176
 msgctxt "warehousename"
 msgid "Kvam"
-msgstr ""
+msgstr "Kvam"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2178
 msgctxt "warehousename"
 msgid "Kvin’sdal"
-msgstr ""
+msgstr "Kvin’sdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2180
 msgctxt "warehousename"
 msgid "Kvin’Herad"
-msgstr ""
+msgstr "Kvin’Herad"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2182
 msgctxt "warehousename"
 msgid "Kvit’seid"
-msgstr ""
+msgstr "Kvit’seid"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2184
 msgctxt "warehousename"
 msgid "Kvit’Sey"
-msgstr ""
+msgstr "Kvit’Sey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2186
 msgctxt "warehousename"
 msgid "Lærdal"
-msgstr ""
+msgstr "Lærdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2188
 msgctxt "warehousename"
 msgid "Larvik"
-msgstr ""
+msgstr "Larvik"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2190
 msgctxt "warehousename"
 msgid "Lav’ngen"
-msgstr ""
+msgstr "Lav’ngen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2192
 msgctxt "warehousename"
 msgid "L’besby"
-msgstr ""
+msgstr "L’besby"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2194
 msgctxt "warehousename"
 msgid "L’rfjord"
-msgstr ""
+msgstr "L’rfjord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2196
 msgctxt "warehousename"
 msgid "L’ka"
-msgstr ""
+msgstr "L’ka"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2198
 msgctxt "warehousename"
 msgid "L’sja"
-msgstr ""
+msgstr "L’sja"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2200
 msgctxt "warehousename"
 msgid "L’vanger"
-msgstr ""
+msgstr "L’vanger"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2202
 msgctxt "warehousename"
 msgid "Lier"
-msgstr ""
+msgstr "Lier"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2204
 msgctxt "warehousename"
 msgid "L’rne"
-msgstr ""
+msgstr "L’rne"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2206
 msgctxt "warehousename"
 msgid "Lil’hammer"
-msgstr ""
+msgstr "Lil’hammer"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2208
 msgctxt "warehousename"
 msgid "Lil’sand"
-msgstr ""
+msgstr "Lil’sand"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2210
 msgctxt "warehousename"
 msgid "Lil’strom"
-msgstr ""
+msgstr "Lil’strom"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2212
 msgctxt "warehousename"
 msgid "Lind’snes"
-msgstr ""
+msgstr "Lind’snes"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2214
 msgctxt "warehousename"
 msgid "L’dingen"
-msgstr ""
+msgstr "L’dingen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2216
 msgctxt "warehousename"
 msgid "Lom"
-msgstr ""
+msgstr "Lom"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2218
 msgctxt "warehousename"
 msgid "Loppa"
-msgstr ""
+msgstr "Loppa"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2220
 msgctxt "warehousename"
 msgid "Lar’nskog"
-msgstr ""
+msgstr "Lar’nskog"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2222
 msgctxt "warehousename"
 msgid "L’ten"
-msgstr ""
+msgstr "L’ten"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2224
 msgctxt "warehousename"
 msgid "Lund"
-msgstr ""
+msgstr "Lund"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2226
 msgctxt "warehousename"
 msgid "Lunner"
-msgstr ""
+msgstr "Lunner"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2228
 msgctxt "warehousename"
 msgid "L’rey"
-msgstr ""
+msgstr "L’rey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2230
 msgctxt "warehousename"
 msgid "L’ster"
-msgstr ""
+msgstr "L’ster"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2232
 msgctxt "warehousename"
 msgid "L’ngdal"
-msgstr ""
+msgstr "L’ngdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2234
 msgctxt "warehousename"
 msgid "L’ngen"
-msgstr ""
+msgstr "L’ngen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2236
 msgctxt "warehousename"
 msgid "Mal’Selv"
-msgstr ""
+msgstr "Mal’Selv"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2238
 msgctxt "warehousename"
 msgid "Mal’vik"
-msgstr ""
+msgstr "Mal’vik"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2240
 msgctxt "warehousename"
 msgid "Mar’ker"
-msgstr ""
+msgstr "Mar’ker"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2242
 msgctxt "warehousename"
 msgid "Mas’fjordn"
-msgstr ""
+msgstr "Mas’fjordn"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2244
 msgctxt "warehousename"
 msgid "Mos’y"
-msgstr ""
+msgstr "Mos’y"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2246
 msgctxt "warehousename"
 msgid "M’lhus"
-msgstr ""
+msgstr "M’lhus"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2248
 msgctxt "warehousename"
 msgid "M’ley"
-msgstr ""
+msgstr "M’ley"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2250
 msgctxt "warehousename"
 msgid "Mer’ker"
-msgstr ""
+msgstr "Mer’ker"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2252
 msgctxt "warehousename"
 msgid "Midt’re"
-msgstr ""
+msgstr "Midt’re"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2254
 msgctxt "warehousename"
 msgid "Midt’lemark"
-msgstr ""
+msgstr "Midt’lemark"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2256
 msgctxt "warehousename"
 msgid "Mod’al’en"
-msgstr ""
+msgstr "Mod’al’en"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2258
 msgctxt "warehousename"
 msgid "Modum"
-msgstr ""
+msgstr "Modum"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2260
 msgctxt "warehousename"
 msgid "M’lde"
-msgstr ""
+msgstr "M’lde"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2262
 msgctxt "warehousename"
 msgid "Mos’kenes"
-msgstr ""
+msgstr "Mos’kenes"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2264
 msgctxt "warehousename"
 msgid "Mos’s"
-msgstr ""
+msgstr "Mos’s"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2266
 msgctxt "warehousename"
 msgid "Næreysund"
-msgstr ""
+msgstr "Næreysund"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2268
 msgctxt "warehousename"
 msgid "Namsos"
-msgstr ""
+msgstr "Namsos"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2270
 msgctxt "warehousename"
 msgid "Nams’skogan"
-msgstr ""
+msgstr "Nams’skogan"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2272
 msgctxt "warehousename"
 msgid "Nan’stad"
-msgstr ""
+msgstr "Nan’stad"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2274
 msgctxt "warehousename"
 msgid "Nar’vik"
-msgstr ""
+msgstr "Nar’vik"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2276
 msgctxt "warehousename"
 msgid "Nes"
-msgstr ""
+msgstr "Nes"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2278
 msgctxt "warehousename"
 msgid "N’sbyen"
-msgstr ""
+msgstr "N’sbyen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2280
 msgctxt "warehousename"
 msgid "Nesna"
-msgstr ""
+msgstr "Nesna"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2282
 msgctxt "warehousename"
 msgid "Nesod’n"
-msgstr ""
+msgstr "Nesod’n"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2284
 msgctxt "warehousename"
 msgid "Nes’by"
-msgstr ""
+msgstr "Nes’by"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2286
 msgctxt "warehousename"
 msgid "Nis’dal"
-msgstr ""
+msgstr "Nis’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2288
 msgctxt "warehousename"
 msgid "Nit’dal"
-msgstr ""
+msgstr "Nit’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2290
 msgctxt "warehousename"
 msgid "Nome"
-msgstr ""
+msgstr "Nome"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2292
 msgctxt "warehousename"
 msgid "Nord’Aurdal"
-msgstr ""
+msgstr "Nord’Aurdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2294
 msgctxt "warehousename"
 msgid "Nord’fron"
-msgstr ""
+msgstr "Nord’fron"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2296
 msgctxt "warehousename"
 msgid "Nord’kapp"
-msgstr ""
+msgstr "Nord’kapp"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2298
 msgctxt "warehousename"
 msgid "Nord’odal"
-msgstr ""
+msgstr "Nord’odal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2300
 msgctxt "warehousename"
 msgid "Nord’Reisa"
-msgstr ""
+msgstr "Nord’Reisa"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2302
 msgctxt "warehousename"
 msgid "Nord’re"
-msgstr ""
+msgstr "Nord’re"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2304
 msgctxt "warehousename"
 msgid "No’re"
-msgstr ""
+msgstr "No’re"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2306
 msgctxt "warehousename"
 msgid "Notod’n"
-msgstr ""
+msgstr "Notod’n"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2308
 msgctxt "warehousename"
 msgid "Ok’snes"
-msgstr ""
+msgstr "Ok’snes"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2310
 msgctxt "warehousename"
 msgid "Omli"
-msgstr ""
+msgstr "Omli"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2312
 msgctxt "warehousename"
 msgid "Omot"
-msgstr ""
+msgstr "Omot"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2314
 msgctxt "warehousename"
 msgid "Op’dal"
-msgstr ""
+msgstr "Op’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2316
 msgctxt "warehousename"
 msgid "Or’kland"
-msgstr ""
+msgstr "Or’kland"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2318
 msgctxt "warehousename"
 msgid "Or’land"
-msgstr ""
+msgstr "Or’land"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2320
 msgctxt "warehousename"
 msgid "Or’sta"
-msgstr ""
+msgstr "Or’sta"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2322
 msgctxt "warehousename"
 msgid "Osen"
-msgstr ""
+msgstr "Osen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2324
 msgctxt "warehousename"
 msgid "Os"
-msgstr ""
+msgstr "Os"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2326
 msgctxt "warehousename"
 msgid "Os’lo"
-msgstr ""
+msgstr "Os’lo"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2328
 msgctxt "warehousename"
 msgid "Ost’rey"
-msgstr ""
+msgstr "Ost’rey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2330
 msgctxt "warehousename"
 msgid "Ost’re"
-msgstr ""
+msgstr "Ost’re"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2332
 msgctxt "warehousename"
 msgid "Ov’rhala"
-msgstr ""
+msgstr "Ov’rhala"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2334
 msgctxt "warehousename"
 msgid "Ov’re"
-msgstr ""
+msgstr "Ov’re"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2336
 msgctxt "warehousename"
 msgid "Pors’nger"
-msgstr ""
+msgstr "Pors’nger"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2338
 msgctxt "warehousename"
 msgid "Pors’grun"
-msgstr ""
+msgstr "Pors’grun"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2340
 msgctxt "warehousename"
 msgid "Rode"
-msgstr ""
+msgstr "Rode"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2342
 msgctxt "warehousename"
 msgid "Ræl’ngen"
-msgstr ""
+msgstr "Ræl’ngen"
 
 #. TRANSLATORS: This Barbarian warehouse is named after a barbarian town.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2344
 msgctxt "warehousename"
 msgid "Rænt"
-msgstr ""
+msgstr "Rænt"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2346
 msgctxt "warehousename"
 msgid "Rak’stad"
-msgstr ""
+msgstr "Rak’stad"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2348
 msgctxt "warehousename"
 msgid "Rana"
-msgstr ""
+msgstr "Rana"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2350
 msgctxt "warehousename"
 msgid "Rand’berg"
-msgstr ""
+msgstr "Rand’berg"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2352
 msgctxt "warehousename"
 msgid "Rauma"
-msgstr ""
+msgstr "Rauma"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2354
 msgctxt "warehousename"
 msgid "Ren’dlen"
-msgstr ""
+msgstr "Ren’dlen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2356
 msgctxt "warehousename"
 msgid "Ren’bu"
-msgstr ""
+msgstr "Ren’bu"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2358
 msgctxt "warehousename"
 msgid "Rin’dal"
-msgstr ""
+msgstr "Rin’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2360
 msgctxt "warehousename"
 msgid "Rin’gbu"
-msgstr ""
+msgstr "Rin’gbu"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2362
 msgctxt "warehousename"
 msgid "Rin’grike"
-msgstr ""
+msgstr "Rin’grike"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2364
 msgctxt "warehousename"
 msgid "Rin’gsker"
-msgstr ""
+msgstr "Rin’gsker"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2366
 msgctxt "warehousename"
 msgid "Ris’r"
-msgstr ""
+msgstr "Ris’r"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2368
 msgctxt "warehousename"
 msgid "R’dey"
-msgstr ""
+msgstr "R’dey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2370
 msgctxt "warehousename"
 msgid "Rol’Lag"
-msgstr ""
+msgstr "Rol’Lag"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2372
 msgctxt "warehousename"
 msgid "R’ros"
-msgstr ""
+msgstr "R’ros"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2374
 msgctxt "warehousename"
 msgid "Rest"
-msgstr ""
+msgstr "Rest"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2376
 msgctxt "warehousename"
 msgid "Reyr’Vik"
-msgstr ""
+msgstr "Reyr’Vik"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2378
 msgctxt "warehousename"
 msgid "Sal’ngen"
-msgstr ""
+msgstr "Sal’ngen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2380
 msgctxt "warehousename"
 msgid "Sal’tdal"
-msgstr ""
+msgstr "Sal’tdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2382
 msgctxt "warehousename"
 msgid "Samn’nger"
-msgstr ""
+msgstr "Samn’nger"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2384
 msgctxt "warehousename"
 msgid "Sand’fjord"
-msgstr ""
+msgstr "Sand’fjord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2386
 msgctxt "warehousename"
 msgid "Sand’e"
-msgstr ""
+msgstr "Sand’e"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2388
 msgctxt "warehousename"
 msgid "Sand’nes"
-msgstr ""
+msgstr "Sand’nes"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2390
 msgctxt "warehousename"
 msgid "Sarpsb’rg"
-msgstr ""
+msgstr "Sarpsb’rg"
 
 #. TRANSLATORS: This Barbarian warehouse is named after a barbarian town.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2392
 msgctxt "warehousename"
 msgid "Sars’tun"
-msgstr ""
+msgstr "Sars’tun"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2394
 msgctxt "warehousename"
 msgid "Sauda"
-msgstr ""
+msgstr "Sauda"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2396
 msgctxt "warehousename"
 msgid "Sel’bu"
-msgstr ""
+msgstr "Sel’bu"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2398
 msgctxt "warehousename"
 msgid "Sel’jord"
-msgstr ""
+msgstr "Sel’jord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2400
 msgctxt "warehousename"
 msgid "Sel"
-msgstr ""
+msgstr "Sel"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2402
 msgctxt "warehousename"
 msgid "Sen’ja"
-msgstr ""
+msgstr "Sen’ja"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2404
 msgctxt "warehousename"
 msgid "Sig’dal"
-msgstr ""
+msgstr "Sig’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2406
 msgctxt "warehousename"
 msgid "Sil’jan"
-msgstr ""
+msgstr "Sil’jan"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2408
 msgctxt "warehousename"
 msgid "Sir’dal"
-msgstr ""
+msgstr "Sir’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2410
 msgctxt "warehousename"
 msgid "Skaun"
-msgstr ""
+msgstr "Skaun"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2412
 msgctxt "warehousename"
 msgid "Skien"
-msgstr ""
+msgstr "Skien"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2414
 msgctxt "warehousename"
 msgid "Skipt’vet"
-msgstr ""
+msgstr "Skipt’vet"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2416
 msgctxt "warehousename"
 msgid "Skjok"
-msgstr ""
+msgstr "Skjok"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2418
 msgctxt "warehousename"
 msgid "Skjer’vey"
-msgstr ""
+msgstr "Skjer’vey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2420
 msgctxt "warehousename"
 msgid "Smola"
-msgstr ""
+msgstr "Smola"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2422
 msgctxt "warehousename"
 msgid "Snosa"
-msgstr ""
+msgstr "Snosa"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2424
 msgctxt "warehousename"
 msgid "Sog’ndal"
-msgstr ""
+msgstr "Sog’ndal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2426
 msgctxt "warehousename"
 msgid "Sok’ndal"
-msgstr ""
+msgstr "Sok’ndal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2428
 msgctxt "warehousename"
 msgid "Sola"
-msgstr ""
+msgstr "Sola"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2430
 msgctxt "warehousename"
 msgid "Sol’nd"
-msgstr ""
+msgstr "Sol’nd"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2432
 msgctxt "warehousename"
 msgid "Som’na"
-msgstr ""
+msgstr "Som’na"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2434
 msgctxt "warehousename"
 msgid "Son’dre"
-msgstr ""
+msgstr "Son’dre"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2436
 msgctxt "warehousename"
 msgid "Sor’aur’dal"
-msgstr ""
+msgstr "Sor’aur’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2438
 msgctxt "warehousename"
 msgid "Sor’fold"
-msgstr ""
+msgstr "Sor’fold"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2440
 msgctxt "warehousename"
 msgid "Sor’fron"
-msgstr ""
+msgstr "Sor’fron"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2442
 msgctxt "warehousename"
 msgid "Sor’dal"
-msgstr ""
+msgstr "Sor’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2444
 msgctxt "warehousename"
 msgid "Sor’reisa"
-msgstr ""
+msgstr "Sor’reisa"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2446
 msgctxt "warehousename"
 msgid "Sor’tland"
-msgstr ""
+msgstr "Sor’tland"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2448
 msgctxt "warehousename"
 msgid "Sor’var’nger"
-msgstr ""
+msgstr "Sor’var’nger"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2450
 msgctxt "warehousename"
 msgid "Stad"
-msgstr ""
+msgstr "Stad"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2452
 msgctxt "warehousename"
 msgid "Stange"
-msgstr ""
+msgstr "Stange"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2454
 msgctxt "warehousename"
 msgid "Stav’nger"
-msgstr ""
+msgstr "Stav’nger"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2456
 msgctxt "warehousename"
 msgid "St’gen"
-msgstr ""
+msgstr "St’gen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2458
 msgctxt "warehousename"
 msgid "St’nkjer"
-msgstr ""
+msgstr "St’nkjer"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2460
 msgctxt "warehousename"
 msgid "Stjor’dal"
-msgstr ""
+msgstr "Stjor’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2462
 msgctxt "warehousename"
 msgid "Stord"
-msgstr ""
+msgstr "Stord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2464
 msgctxt "warehousename"
 msgid "Stor’Elvdal"
-msgstr ""
+msgstr "Stor’Elvdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2466
 msgctxt "warehousename"
 msgid "Stor’Fjord"
-msgstr ""
+msgstr "Stor’Fjord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2468
 msgctxt "warehousename"
 msgid "Stranda"
-msgstr ""
+msgstr "Stranda"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2470
 msgctxt "warehousename"
 msgid "Strand"
-msgstr ""
+msgstr "Strand"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2472
 msgctxt "warehousename"
 msgid "Stryn"
-msgstr ""
+msgstr "Stryn"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2474
 msgctxt "warehousename"
 msgid "Sula"
-msgstr ""
+msgstr "Sula"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2476
 msgctxt "warehousename"
 msgid "Suldal"
-msgstr ""
+msgstr "Suldal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2478
 msgctxt "warehousename"
 msgid "Sun’dal"
-msgstr ""
+msgstr "Sun’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2480
 msgctxt "warehousename"
 msgid "Sun’fjord"
-msgstr ""
+msgstr "Sun’fjord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2482
 msgctxt "warehousename"
 msgid "Surn’dal"
-msgstr ""
+msgstr "Surn’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2484
 msgctxt "warehousename"
 msgid "Sveio"
-msgstr ""
+msgstr "Sveio"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2486
 msgctxt "warehousename"
 msgid "Syk’lven"
-msgstr ""
+msgstr "Syk’lven"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2488
 msgctxt "warehousename"
 msgid "Tana"
-msgstr ""
+msgstr "Tana"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2490
 msgctxt "warehousename"
 msgid "Thronsand"
-msgstr ""
+msgstr "Thronsand"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2492
 msgctxt "warehousename"
 msgid "Thronsund"
-msgstr ""
+msgstr "Thronsund"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2494
 msgctxt "warehousename"
 msgid "Time"
-msgstr ""
+msgstr "Time"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2496
 msgctxt "warehousename"
 msgid "T’ngvol"
-msgstr ""
+msgstr "T’ngvol"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2498
 msgctxt "warehousename"
 msgid "Ti’n"
-msgstr ""
+msgstr "Ti’n"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2500
 msgctxt "warehousename"
 msgid "Tjeld’sund"
-msgstr ""
+msgstr "Tjeld’sund"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2502
 msgctxt "warehousename"
 msgid "Toke"
-msgstr ""
+msgstr "Toke"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2504
 msgctxt "warehousename"
 msgid "Tolga"
-msgstr ""
+msgstr "Tolga"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2506
 msgctxt "warehousename"
 msgid "Tonsberg"
-msgstr ""
+msgstr "Tonsberg"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2508
 msgctxt "warehousename"
 msgid "Træna"
-msgstr ""
+msgstr "Træna"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2510
 msgctxt "warehousename"
 msgid "Tromso"
-msgstr ""
+msgstr "Tromso"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2512
 msgctxt "warehousename"
 msgid "Tr’ndheim"
-msgstr ""
+msgstr "Tr’ndheim"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2514
 msgctxt "warehousename"
 msgid "Tr’sil"
-msgstr ""
+msgstr "Tr’sil"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2516
 msgctxt "warehousename"
 msgid "Tved’strand"
-msgstr ""
+msgstr "Tved’strand"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2518
 msgctxt "warehousename"
 msgid "T’dal"
-msgstr ""
+msgstr "T’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2520
 msgctxt "warehousename"
 msgid "Tynset"
-msgstr ""
+msgstr "Tynset"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2522
 msgctxt "warehousename"
 msgid "Tys’nes"
-msgstr ""
+msgstr "Tys’nes"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2524
 msgctxt "warehousename"
 msgid "Tys’vær"
-msgstr ""
+msgstr "Tys’vær"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2526
 msgctxt "warehousename"
 msgid "Ul’nsaker"
-msgstr ""
+msgstr "Ul’nsaker"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2528
 msgctxt "warehousename"
 msgid "Ul’nsvang"
-msgstr ""
+msgstr "Ul’nsvang"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2530
 msgctxt "warehousename"
 msgid "Ul’stein"
-msgstr ""
+msgstr "Ul’stein"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2532
 msgctxt "warehousename"
 msgid "Ul’vik"
-msgstr ""
+msgstr "Ul’vik"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2534
 msgctxt "warehousename"
 msgid "Uts’ra"
-msgstr ""
+msgstr "Uts’ra"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2536
 msgctxt "warehousename"
 msgid "Vadso"
-msgstr ""
+msgstr "Vadso"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2538
 msgctxt "warehousename"
 msgid "Værey"
-msgstr ""
+msgstr "Værey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2540
 msgctxt "warehousename"
 msgid "Vogo"
-msgstr ""
+msgstr "Vogo"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2542
 msgctxt "warehousename"
 msgid "V’gan"
-msgstr ""
+msgstr "V’gan"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2544
 msgctxt "warehousename"
 msgid "V’ksdal"
-msgstr ""
+msgstr "V’ksdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2546
 msgctxt "warehousename"
 msgid "V’ler"
-msgstr ""
+msgstr "V’ler"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2548
 msgctxt "warehousename"
 msgid "Vale"
-msgstr ""
+msgstr "Vale"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2550
 msgctxt "warehousename"
 msgid "Vang"
-msgstr ""
+msgstr "Vang"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2552
 msgctxt "warehousename"
 msgid "Van’lven"
-msgstr ""
+msgstr "Van’lven"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2554
 msgctxt "warehousename"
 msgid "Vardo"
-msgstr ""
+msgstr "Vardo"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2556
 msgctxt "warehousename"
 msgid "Vef’sn"
-msgstr ""
+msgstr "Vef’sn"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2558
 msgctxt "warehousename"
 msgid "Vega"
-msgstr ""
+msgstr "Vega"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2560
 msgctxt "warehousename"
 msgid "Veg’rshei"
-msgstr ""
+msgstr "Veg’rshei"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2562
 msgctxt "warehousename"
 msgid "Ven’Sla"
-msgstr ""
+msgstr "Ven’Sla"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2564
 msgctxt "warehousename"
 msgid "Ver’dal"
-msgstr ""
+msgstr "Ver’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2566
 msgctxt "warehousename"
 msgid "V’stby"
-msgstr ""
+msgstr "V’stby"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2568
 msgctxt "warehousename"
 msgid "V’stnes"
-msgstr ""
+msgstr "V’stnes"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2570
 msgctxt "warehousename"
 msgid "V’stre"
-msgstr ""
+msgstr "V’stre"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2572
 msgctxt "warehousename"
 msgid "V’stvogey"
-msgstr ""
+msgstr "V’stvogey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2574
 msgctxt "warehousename"
 msgid "Vev’lstad"
-msgstr ""
+msgstr "Vev’lstad"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2576
 msgctxt "warehousename"
 msgid "Vik"
-msgstr ""
+msgstr "Vik"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2578
 msgctxt "warehousename"
 msgid "Vind’fjord"
-msgstr ""
+msgstr "Vind’fjord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2580
 msgctxt "warehousename"
 msgid "Vin’je"
-msgstr ""
+msgstr "Vin’je"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2582
 msgctxt "warehousename"
 msgid "V’lda"
-msgstr ""
+msgstr "V’lda"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2584
 msgctxt "warehousename"
 msgid "Vos"
-msgstr ""
+msgstr "Vos"
 
 #. TRANSLATORS: Productivity label on a Barbarian building if there is 1
 #. worker missing
@@ -10098,7 +10098,7 @@ msgstr "Pracovníci jsou na cestě"
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2598
 msgctxt "barbarians"
 msgid "Expert missing"
-msgstr ""
+msgstr "Chybí zkušený pracovník"
 
 #. TRANSLATORS: Productivity label on a Barbarian building if there is more
 #. than 1 experienced worker missing. If you need plural forms here, please
@@ -10106,7 +10106,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2600
 msgctxt "barbarians"
 msgid "Experts missing"
-msgstr ""
+msgstr "Chybí zkušení pracovníci"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -10114,20 +10114,20 @@ msgstr ""
 msgctxt "barbarians_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% voják (+%2%)"
+msgstr[1] "%1% vojáci (+%2%)"
+msgstr[2] "%1% vojáků (+%2%)"
+msgstr[3] "%1% vojáků (+%2%)"
 
 #. TRANSLATORS: Number of Barbarian soldiers stationed at a militarysite.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2616
 msgctxt "barbarians_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% voják"
+msgstr[1] "%1% vojáci"
+msgstr[2] "%1% vojáků"
+msgstr[3] "%1% vojáků"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -10136,10 +10136,10 @@ msgstr[3] ""
 msgctxt "barbarians_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) voják (+%3%)"
+msgstr[1] "%1%(+%2%) vojáci (+%3%)"
+msgstr[2] "%1%(+%2%) vojáků (+%3%)"
+msgstr[3] "%1%(+%2%) vojáků (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -10147,16 +10147,16 @@ msgstr[3] ""
 msgctxt "barbarians_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) voják"
+msgstr[1] "%1%(+%2%) vojáci"
+msgstr[2] "%1%(+%2%) vojáků"
+msgstr[3] "%1%(+%2%) vojáků"
 
 #. TRANSLATORS: Format string for a latin quote and its translation
 #: ../../../../data/tribes/initialization/empire/units.lua:12
 msgctxt "empire_lore"
 msgid "‘%1%’<br>(%2%)"
-msgstr ""
+msgstr "‘%1%’<br>(%2%)"
 
 #. TRANSLATORS: Helptext for an Empire ware: Granite, part 2
 #: ../../../../data/tribes/initialization/empire/units.lua:115
@@ -10750,20 +10750,20 @@ msgstr "Zde je velké ložisko mramoru."
 #. "All roads lead to Fremil."
 #: ../../../../data/tribes/initialization/empire/units.lua:1150
 msgid "Omnes viæ ducunt Fremilem."
-msgstr ""
+msgstr "Omnes viæ ducunt Fremilem."
 
 #. TRANSLATORS: Lore helptext for an Empire warehouse: Headquarters
 #. Translation for the adapted classical Latin quote:
 #. "Omnes viæ ducunt Fremilem."
 #: ../../../../data/tribes/initialization/empire/units.lua:1154
 msgid "All roads lead to Fremil."
-msgstr ""
+msgstr "Všechny cesty vedou do Fremilu."
 
 #. TRANSLATORS: Lore author helptext for an Empire warehouse: Headquarters
 #: ../../../../data/tribes/initialization/empire/units.lua:1158
 msgctxt "empire_building"
 msgid "Proverb signifying the glory of the Empire and its capital"
-msgstr ""
+msgstr "Přísloví vyzdvihující věhlas Císařství a jeho hlavního města"
 
 #. TRANSLATORS: Purpose helptext for an Empire warehouse: Headquarters
 #: ../../../../data/tribes/initialization/empire/units.lua:1161
@@ -10961,7 +10961,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:2351
 msgctxt "empire_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "V případě nerovného terénu a překážek v cestě může potřebný čas ještě vzrůst."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11203,7 +11203,7 @@ msgstr "Než bude možné poslat na toto místo průzkumníka, je třeba napojit
 #: ../../../../data/tribes/initialization/empire/units.lua:1420
 msgctxt "empire_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Průzkumníkovi zabere jedna výprava něco mezi %1$s a %2$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11661,7 +11661,7 @@ msgstr "Poskytují rekrutům vybavení a trénují je na vojáky."
 #, lua-format
 msgctxt "empire_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "Kasárna potřebují v průměru %s na nábor jednoho vojáka."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11887,7 +11887,7 @@ msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce marble in %1$s and "
 "granite in %2$s on average."
-msgstr ""
+msgstr "Pokud je stabilní přísun jídla, může tento důl vytěžit v průměru jeden kvádr mramoru za %1$s a jeden kvádr žuly za %2$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11942,7 +11942,7 @@ msgstr ""
 msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Pokud je stabilní přísun jídla, může tento důl vytěžit v průměru jednu hroudu uhlí za %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11998,7 +11998,7 @@ msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
-msgstr ""
+msgstr "Pokud je stabilní přísun jídla, může tento důl vytěžit v průměru jednu železnou rudu za %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12052,7 +12052,7 @@ msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
-msgstr ""
+msgstr "Pokud je stabilní přísun jídla, může tento důl vytěžit v průměru jednu zlatou rudu za %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12426,7 +12426,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Tato budova může vyrobit jeden přívoz v rozmezí mezi %1$s a %2$s, záleží jak dlouhou cestu musí stavitel lodí urazit."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12456,1069 +12456,1069 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Tato budova může vyrobit jednu loď v rozmezí mezi %1$s a %2$s, záleží jak dlouhou cestu musí stavitel lodí urazit."
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2383
 msgctxt "warehousename"
 msgid "Abila"
-msgstr ""
+msgstr "Abila"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2385
 msgctxt "warehousename"
 msgid "Ad Flexum"
-msgstr ""
+msgstr "Ad Flexum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2387
 msgctxt "warehousename"
 msgid "Aelia Capitolina"
-msgstr ""
+msgstr "Aelia Capitolina"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2389
 msgctxt "warehousename"
 msgid "Aeminium"
-msgstr ""
+msgstr "Aeminium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2391
 msgctxt "warehousename"
 msgid "Aequum"
-msgstr ""
+msgstr "Aequum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2393
 msgctxt "warehousename"
 msgid "Ala"
-msgstr ""
+msgstr "Ala"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2395
 msgctxt "warehousename"
 msgid "Albanianis"
-msgstr ""
+msgstr "Albanianis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2397
 msgctxt "warehousename"
 msgid "Ambianum"
-msgstr ""
+msgstr "Ambianum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2399
 msgctxt "warehousename"
 msgid "Andautonia"
-msgstr ""
+msgstr "Andautonia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2401
 msgctxt "warehousename"
 msgid "Apulum"
-msgstr ""
+msgstr "Apulum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2403
 msgctxt "warehousename"
 msgid "Aquæ Granni"
-msgstr ""
+msgstr "Aquæ Granni"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2405
 msgctxt "warehousename"
 msgid "Aquæ Helveticæ"
-msgstr ""
+msgstr "Aquæ Helveticæ"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2407
 msgctxt "warehousename"
 msgid "Aquæ Mattiacorum"
-msgstr ""
+msgstr "Aquæ Mattiacorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2409
 msgctxt "warehousename"
 msgid "Aquæ Sulis"
-msgstr ""
+msgstr "Aquæ Sulis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2411
 msgctxt "warehousename"
 msgid "Aquileia"
-msgstr ""
+msgstr "Aquileia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2413
 msgctxt "warehousename"
 msgid "Aquincum"
-msgstr ""
+msgstr "Aquincum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2415
 msgctxt "warehousename"
 msgid "Aræ Flaviæ"
-msgstr ""
+msgstr "Aræ Flaviæ"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2417
 msgctxt "warehousename"
 msgid "Argentoratum"
-msgstr ""
+msgstr "Argentoratum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2419
 msgctxt "warehousename"
 msgid "Ariminum"
-msgstr ""
+msgstr "Ariminum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2421
 msgctxt "warehousename"
 msgid "Ascrivium"
-msgstr ""
+msgstr "Ascrivium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2423
 msgctxt "warehousename"
 msgid "Asturica Augusta"
-msgstr ""
+msgstr "Asturica Augusta"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2425
 msgctxt "warehousename"
 msgid "Atuatuca Tungrorum"
-msgstr ""
+msgstr "Atuatuca Tungrorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2427
 msgctxt "warehousename"
 msgid "Augusta Raurica"
-msgstr ""
+msgstr "Augusta Raurica"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2429
 msgctxt "warehousename"
 msgid "Augusta Taurinorum"
-msgstr ""
+msgstr "Augusta Taurinorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2431
 msgctxt "warehousename"
 msgid "Augusta Treverorum"
-msgstr ""
+msgstr "Augusta Treverorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2433
 msgctxt "warehousename"
 msgid "Augusta Vindelicorum"
-msgstr ""
+msgstr "Augusta Vindelicorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2435
 msgctxt "warehousename"
 msgid "Aurelia Aquensis"
-msgstr ""
+msgstr "Aurelia Aquensis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2437
 msgctxt "warehousename"
 msgid "Aventicum"
-msgstr ""
+msgstr "Aventicum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2439
 msgctxt "warehousename"
 msgid "Belum"
-msgstr ""
+msgstr "Belum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2441
 msgctxt "warehousename"
 msgid "Biriciana"
-msgstr ""
+msgstr "Biriciana"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2443
 msgctxt "warehousename"
 msgid "Blestium"
-msgstr ""
+msgstr "Blestium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2445
 msgctxt "warehousename"
 msgid "Bonames"
-msgstr ""
+msgstr "Bonames"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2447
 msgctxt "warehousename"
 msgid "Bonna"
-msgstr ""
+msgstr "Bonna"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2449
 msgctxt "warehousename"
 msgid "Bononia"
-msgstr ""
+msgstr "Bononia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2451
 msgctxt "warehousename"
 msgid "Borbetomagus"
-msgstr ""
+msgstr "Borbetomagus"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2453
 msgctxt "warehousename"
 msgid "Bovium"
-msgstr ""
+msgstr "Bovium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2455
 msgctxt "warehousename"
 msgid "Bracara Augusta"
-msgstr ""
+msgstr "Bracara Augusta"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2457
 msgctxt "warehousename"
 msgid "Brigantium"
-msgstr ""
+msgstr "Brigantium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2459
 msgctxt "warehousename"
 msgid "Burgodunum"
-msgstr ""
+msgstr "Burgodunum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2461
 msgctxt "warehousename"
 msgid "Cæsaraugusta"
-msgstr ""
+msgstr "Cæsaraugusta"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2463
 msgctxt "warehousename"
 msgid "Cæsarea"
-msgstr ""
+msgstr "Cæsarea"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2465
 msgctxt "warehousename"
 msgid "Cæsaromagus"
-msgstr ""
+msgstr "Cæsaromagus"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2467
 msgctxt "warehousename"
 msgid "Calisia"
-msgstr ""
+msgstr "Calisia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2469
 msgctxt "warehousename"
 msgid "Calleva Atrebatum"
-msgstr ""
+msgstr "Calleva Atrebatum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2471
 msgctxt "warehousename"
 msgid "Camulodunum"
-msgstr ""
+msgstr "Camulodunum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2473
 msgctxt "warehousename"
 msgid "Carnuntum"
-msgstr ""
+msgstr "Carnuntum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2475
 msgctxt "warehousename"
 msgid "Castra Batavar"
-msgstr ""
+msgstr "Castra Batavar"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2477
 msgctxt "warehousename"
 msgid "Castra Legionis"
-msgstr ""
+msgstr "Castra Legionis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2479
 msgctxt "warehousename"
 msgid "Castra Regina"
-msgstr ""
+msgstr "Castra Regina"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2481
 msgctxt "warehousename"
 msgid "Castra Vetera"
-msgstr ""
+msgstr "Castra Vetera"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2483
 msgctxt "warehousename"
 msgid "Cibalæ"
-msgstr ""
+msgstr "Cibalæ"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2485
 msgctxt "warehousename"
 msgid "Clausentum"
-msgstr ""
+msgstr "Clausentum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2487
 msgctxt "warehousename"
 msgid "Colonia Agrippina"
-msgstr ""
+msgstr "Colonia Agrippina"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2489
 msgctxt "warehousename"
 msgid "Colonia Narbo Martius"
-msgstr ""
+msgstr "Colonia Narbo Martius"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2491
 msgctxt "warehousename"
 msgid "Colonia Ulpia Traiana"
-msgstr ""
+msgstr "Colonia Ulpia Traiana"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2493
 msgctxt "warehousename"
 msgid "Comagenis"
-msgstr ""
+msgstr "Comagenis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2495
 msgctxt "warehousename"
 msgid "Complutum"
-msgstr ""
+msgstr "Complutum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2497
 msgctxt "warehousename"
 msgid "Concangis"
-msgstr ""
+msgstr "Concangis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2499
 msgctxt "warehousename"
 msgid "Condate"
-msgstr ""
+msgstr "Condate"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2501
 msgctxt "warehousename"
 msgid "Confloenta"
-msgstr ""
+msgstr "Confloenta"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2503
 msgctxt "warehousename"
 msgid "Constantinopolis"
-msgstr ""
+msgstr "Constantinopolis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2505
 msgctxt "warehousename"
 msgid "Coria"
-msgstr ""
+msgstr "Coria"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2507
 msgctxt "warehousename"
 msgid "Corinium Dobunnorum"
-msgstr ""
+msgstr "Corinium Dobunnorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2509
 msgctxt "warehousename"
 msgid "Coriovallum"
-msgstr ""
+msgstr "Coriovallum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2511
 msgctxt "warehousename"
 msgid "Cosa"
-msgstr ""
+msgstr "Cosa"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2513
 msgctxt "warehousename"
 msgid "Curia Rætorum"
-msgstr ""
+msgstr "Curia Rætorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2515
 msgctxt "warehousename"
 msgid "Danum"
-msgstr ""
+msgstr "Danum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2517
 msgctxt "warehousename"
 msgid "Deva Victrix"
-msgstr ""
+msgstr "Deva Victrix"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2519
 msgctxt "warehousename"
 msgid "Divodurum"
-msgstr ""
+msgstr "Divodurum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2521
 msgctxt "warehousename"
 msgid "Dubris"
-msgstr ""
+msgstr "Dubris"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2523
 msgctxt "warehousename"
 msgid "Durnovaria"
-msgstr ""
+msgstr "Durnovaria"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2525
 msgctxt "warehousename"
 msgid "Durocobrivis"
-msgstr ""
+msgstr "Durocobrivis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2527
 msgctxt "warehousename"
 msgid "Durocornovium"
-msgstr ""
+msgstr "Durocornovium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2529
 msgctxt "warehousename"
 msgid "Duroliponte"
-msgstr ""
+msgstr "Duroliponte"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2531
 msgctxt "warehousename"
 msgid "Durovigutum"
-msgstr ""
+msgstr "Durovigutum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2533
 msgctxt "warehousename"
 msgid "Eboracum"
-msgstr ""
+msgstr "Eboracum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2535
 msgctxt "warehousename"
 msgid "Emerita Augusta"
-msgstr ""
+msgstr "Emerita Augusta"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2537
 msgctxt "warehousename"
 msgid "Florentia"
-msgstr ""
+msgstr "Florentia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2539
 msgctxt "warehousename"
 msgid "Forum Hadriani"
-msgstr ""
+msgstr "Forum Hadriani"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2541
 msgctxt "warehousename"
 msgid "Forum Livii"
-msgstr ""
+msgstr "Forum Livii"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2543
 msgctxt "warehousename"
 msgid "Gerulata"
-msgstr ""
+msgstr "Gerulata"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2545
 msgctxt "warehousename"
 msgid "Gerunda"
-msgstr ""
+msgstr "Gerunda"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2547
 msgctxt "warehousename"
 msgid "Gesoriacum"
-msgstr ""
+msgstr "Gesoriacum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2549
 msgctxt "warehousename"
 msgid "Gorsium"
-msgstr ""
+msgstr "Gorsium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2551
 msgctxt "warehousename"
 msgid "Hadrianopolis"
-msgstr ""
+msgstr "Hadrianopolis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2553
 msgctxt "warehousename"
 msgid "Isca Augusta"
-msgstr ""
+msgstr "Isca Augusta"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2555
 msgctxt "warehousename"
 msgid "Isca Dumnoniorum"
-msgstr ""
+msgstr "Isca Dumnoniorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2557
 msgctxt "warehousename"
 msgid "Italica"
-msgstr ""
+msgstr "Italica"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2559
 msgctxt "warehousename"
 msgid "Iulia Aemona"
-msgstr ""
+msgstr "Iulia Aemona"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2561
 msgctxt "warehousename"
 msgid "Iulia Romula Hispalis"
-msgstr ""
+msgstr "Iulia Romula Hispalis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2563
 msgctxt "warehousename"
 msgid "Iuvavum"
-msgstr ""
+msgstr "Iuvavum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2565
 msgctxt "warehousename"
 msgid "Lactodurum"
-msgstr ""
+msgstr "Lactodurum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2567
 msgctxt "warehousename"
 msgid "Lagentium"
-msgstr ""
+msgstr "Lagentium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2569
 msgctxt "warehousename"
 msgid "Lauri"
-msgstr ""
+msgstr "Lauri"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2571
 msgctxt "warehousename"
 msgid "Lentia"
-msgstr ""
+msgstr "Lentia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2573
 msgctxt "warehousename"
 msgid "Letocetum"
-msgstr ""
+msgstr "Letocetum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2575
 msgctxt "warehousename"
 msgid "Lindinis"
-msgstr ""
+msgstr "Lindinis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2577
 msgctxt "warehousename"
 msgid "Lindum Colonia"
-msgstr ""
+msgstr "Lindum Colonia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2579
 msgctxt "warehousename"
 msgid "Londinium"
-msgstr ""
+msgstr "Londinium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2581
 msgctxt "warehousename"
 msgid "Lopodunum"
-msgstr ""
+msgstr "Lopodunum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2583
 msgctxt "warehousename"
 msgid "Lousonna"
-msgstr ""
+msgstr "Lousonna"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2585
 msgctxt "warehousename"
 msgid "Lucus Augusta"
-msgstr ""
+msgstr "Lucus Augusta"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2587
 msgctxt "warehousename"
 msgid "Lugdunum"
-msgstr ""
+msgstr "Lugdunum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2589
 msgctxt "warehousename"
 msgid "Lugdunum Batavorum"
-msgstr ""
+msgstr "Lugdunum Batavorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2591
 msgctxt "warehousename"
 msgid "Luguvalium"
-msgstr ""
+msgstr "Luguvalium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2593
 msgctxt "warehousename"
 msgid "Lutetia Parisiorum"
-msgstr ""
+msgstr "Lutetia Parisiorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2595
 msgctxt "warehousename"
 msgid "Mamucium"
-msgstr ""
+msgstr "Mamucium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2597
 msgctxt "warehousename"
 msgid "Marsonia"
-msgstr ""
+msgstr "Marsonia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2599
 msgctxt "warehousename"
 msgid "Massa"
-msgstr ""
+msgstr "Massa"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2601
 msgctxt "warehousename"
 msgid "Matilo"
-msgstr ""
+msgstr "Matilo"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2603
 msgctxt "warehousename"
 msgid "Mediolanum"
-msgstr ""
+msgstr "Mediolanum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2605
 msgctxt "warehousename"
 msgid "Modoetia"
-msgstr ""
+msgstr "Modoetia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2607
 msgctxt "warehousename"
 msgid "Mogontiacum"
-msgstr ""
+msgstr "Mogontiacum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2609
 msgctxt "warehousename"
 msgid "Moridunum"
-msgstr ""
+msgstr "Moridunum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2611
 msgctxt "warehousename"
 msgid "Mursa"
-msgstr ""
+msgstr "Mursa"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2613
 msgctxt "warehousename"
 msgid "Naissus"
-msgstr ""
+msgstr "Naissus"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2615
 msgctxt "warehousename"
 msgid "Nemausus"
-msgstr ""
+msgstr "Nemausus"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2617
 msgctxt "warehousename"
 msgid "Nicopolis ad Istrum"
-msgstr ""
+msgstr "Nicopolis ad Istrum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2619
 msgctxt "warehousename"
 msgid "Nicopolis ad Nestum"
-msgstr ""
+msgstr "Nicopolis ad Nestum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2621
 msgctxt "warehousename"
 msgid "Nida"
-msgstr ""
+msgstr "Nida"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2623
 msgctxt "warehousename"
 msgid "Nigrum Pullum"
-msgstr ""
+msgstr "Nigrum Pullum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2625
 msgctxt "warehousename"
 msgid "Norba Cæsarina"
-msgstr ""
+msgstr "Norba Cæsarina"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2627
 msgctxt "warehousename"
 msgid "Novæ"
-msgstr ""
+msgstr "Novæ"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2629
 msgctxt "warehousename"
 msgid "Novæsium"
-msgstr ""
+msgstr "Novæsium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2631
 msgctxt "warehousename"
 msgid "Noviodunum"
-msgstr ""
+msgstr "Noviodunum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2633
 msgctxt "warehousename"
 msgid "Noviomagus"
-msgstr ""
+msgstr "Noviomagus"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2635
 msgctxt "warehousename"
 msgid "Olicana"
-msgstr ""
+msgstr "Olicana"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2637
 msgctxt "warehousename"
 msgid "Ovilava"
-msgstr ""
+msgstr "Ovilava"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2639
 msgctxt "warehousename"
 msgid "Palma"
-msgstr ""
+msgstr "Palma"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2641
 msgctxt "warehousename"
 msgid "Partiscum"
-msgstr ""
+msgstr "Partiscum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2643
 msgctxt "warehousename"
 msgid "Pistoria"
-msgstr ""
+msgstr "Pistoria"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2645
 msgctxt "warehousename"
 msgid "Placentia"
-msgstr ""
+msgstr "Placentia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2647
 msgctxt "warehousename"
 msgid "Poetovium"
-msgstr ""
+msgstr "Poetovium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2649
 msgctxt "warehousename"
 msgid "Pomaria"
-msgstr ""
+msgstr "Pomaria"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2651
 msgctxt "warehousename"
 msgid "Pompælo"
-msgstr ""
+msgstr "Pompælo"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2653
 msgctxt "warehousename"
 msgid "Pompeii"
-msgstr ""
+msgstr "Pompeii"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2655
 msgctxt "warehousename"
 msgid "Pons Aelius"
-msgstr ""
+msgstr "Pons Aelius"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2657
 msgctxt "warehousename"
 msgid "Pons Drusi"
-msgstr ""
+msgstr "Pons Drusi"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2659
 msgctxt "warehousename"
 msgid "Portus Lemanis"
-msgstr ""
+msgstr "Portus Lemanis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2661
 msgctxt "warehousename"
 msgid "Prætorium Agrippinæ"
-msgstr ""
+msgstr "Prætorium Agrippinæ"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2663
 msgctxt "warehousename"
 msgid "Ragusium"
-msgstr ""
+msgstr "Ragusium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2665
 msgctxt "warehousename"
 msgid "Ratæ Corieltauvorum"
-msgstr ""
+msgstr "Ratæ Corieltauvorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2667
 msgctxt "warehousename"
 msgid "Regium Lepidi"
-msgstr ""
+msgstr "Regium Lepidi"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2669
 msgctxt "warehousename"
 msgid "Regulbium"
-msgstr ""
+msgstr "Regulbium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2671
 msgctxt "warehousename"
 msgid "Rigomagus"
-msgstr ""
+msgstr "Rigomagus"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2673
 msgctxt "warehousename"
 msgid "Roma"
-msgstr ""
+msgstr "Roma"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2675
 msgctxt "warehousename"
 msgid "Rutupiæ"
-msgstr ""
+msgstr "Rutupiæ"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2677
 msgctxt "warehousename"
 msgid "Salernum"
-msgstr ""
+msgstr "Salernum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2679
 msgctxt "warehousename"
 msgid "Salona"
-msgstr ""
+msgstr "Salona"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2681
 msgctxt "warehousename"
 msgid "Savaria"
-msgstr ""
+msgstr "Savaria"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2683
 msgctxt "warehousename"
 msgid "Scalabis"
-msgstr ""
+msgstr "Scalabis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2685
 msgctxt "warehousename"
 msgid "Singidunum"
-msgstr ""
+msgstr "Singidunum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2687
 msgctxt "warehousename"
 msgid "Sirmium"
-msgstr ""
+msgstr "Sirmium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2689
 msgctxt "warehousename"
 msgid "Siscia"
-msgstr ""
+msgstr "Siscia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2691
 msgctxt "warehousename"
 msgid "Sopiane"
-msgstr ""
+msgstr "Sopiane"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2693
 msgctxt "warehousename"
 msgid "Sorviodurum"
-msgstr ""
+msgstr "Sorviodurum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2695
 msgctxt "warehousename"
 msgid "Sostra"
-msgstr ""
+msgstr "Sostra"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2697
 msgctxt "warehousename"
 msgid "Storgosia"
-msgstr ""
+msgstr "Storgosia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2699
 msgctxt "warehousename"
 msgid "Sumelocenna"
-msgstr ""
+msgstr "Sumelocenna"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2701
 msgctxt "warehousename"
 msgid "Tarraco"
-msgstr ""
+msgstr "Tarraco"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2703
 msgctxt "warehousename"
 msgid "Theranda"
-msgstr ""
+msgstr "Theranda"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2705
 msgctxt "warehousename"
 msgid "Tibiscum"
-msgstr ""
+msgstr "Tibiscum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2707
 msgctxt "warehousename"
 msgid "Traiectum"
-msgstr ""
+msgstr "Traiectum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2709
 msgctxt "warehousename"
 msgid "Traiectum ad Mosam"
-msgstr ""
+msgstr "Traiectum ad Mosam"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2711
 msgctxt "warehousename"
 msgid "Traiectum ad Nicrem"
-msgstr ""
+msgstr "Traiectum ad Nicrem"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2713
 msgctxt "warehousename"
 msgid "Turicum"
-msgstr ""
+msgstr "Turicum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2715
 msgctxt "warehousename"
 msgid "Urbs Aurelianorum"
-msgstr ""
+msgstr "Urbs Aurelianorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2717
 msgctxt "warehousename"
 msgid "Valentia Edetanorum"
-msgstr ""
+msgstr "Valentia Edetanorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2719
 msgctxt "warehousename"
 msgid "Venetiæ"
-msgstr ""
+msgstr "Venetiæ"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2721
 msgctxt "warehousename"
 msgid "Venta Belgarum"
-msgstr ""
+msgstr "Venta Belgarum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2723
 msgctxt "warehousename"
 msgid "Venta Silurum"
-msgstr ""
+msgstr "Venta Silurum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2725
 msgctxt "warehousename"
 msgid "Verulamium"
-msgstr ""
+msgstr "Verulamium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2727
 msgctxt "warehousename"
 msgid "Vesontio"
-msgstr ""
+msgstr "Vesontio"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2729
 msgctxt "warehousename"
 msgid "Viminacium"
-msgstr ""
+msgstr "Viminacium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2731
 msgctxt "warehousename"
 msgid "Vindobona"
-msgstr ""
+msgstr "Vindobona"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2733
 msgctxt "warehousename"
 msgid "Vindonissa"
-msgstr ""
+msgstr "Vindonissa"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2735
 msgctxt "warehousename"
 msgid "Vinovia"
-msgstr ""
+msgstr "Vinovia"
 
 #. TRANSLATORS: Productivity label on an Empire building if there is 1 worker
 #. missing
@@ -13553,7 +13553,7 @@ msgstr "Pracovníci jsou na cestě"
 #: ../../../../data/tribes/initialization/empire/units.lua:2749
 msgctxt "empire"
 msgid "Expert missing"
-msgstr ""
+msgstr "Chybí zkušený pracovník"
 
 #. TRANSLATORS: Productivity label on an Empire building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -13561,7 +13561,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:2751
 msgctxt "empire"
 msgid "Experts missing"
-msgstr ""
+msgstr "Chybí zkušení pracovníci"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
@@ -13569,20 +13569,20 @@ msgstr ""
 msgctxt "empire_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% voják (+%2%)"
+msgstr[1] "%1% vojáci (+%2%)"
+msgstr[2] "%1% vojáků (+%2%)"
+msgstr[3] "%1% vojáků (+%2%)"
 
 #. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
 #: ../../../../data/tribes/initialization/empire/units.lua:2767
 msgctxt "empire_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% voják"
+msgstr[1] "%1% vojáci"
+msgstr[2] "%1% vojáků"
+msgstr[3] "%1% vojáků"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -13591,10 +13591,10 @@ msgstr[3] ""
 msgctxt "empire_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) voják (+%3%)"
+msgstr[1] "%1%(+%2%) vojáci (+%3%)"
+msgstr[2] "%1%(+%2%) vojáků (+%3%)"
+msgstr[3] "%1%(+%2%) vojáků (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -13602,10 +13602,10 @@ msgstr[3] ""
 msgctxt "empire_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) voják"
+msgstr[1] "%1%(+%2%) vojáci"
+msgstr[2] "%1%(+%2%) vojáků"
+msgstr[3] "%1%(+%2%) vojáků"
 
 #. TRANSLATORS: Helptext for a Frisian ware: Log, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:101
@@ -14084,7 +14084,7 @@ msgstr "Pracuje v loděnici na stavbě nových lodí."
 #: ../../../../data/tribes/initialization/frisians/units.lua:729
 msgctxt "frisians_worker"
 msgid "Constructs breakwaters to gain new land from the sea."
-msgstr ""
+msgstr "Staví vlnolamy, které umožňují získávat zem na úkor moře."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Fisher
 #: ../../../../data/tribes/initialization/frisians/units.lua:739
@@ -14324,7 +14324,7 @@ msgstr "Milíř, který byl postaven v této jámě, je připraven na sběr uhl�
 #. TRANSLATORS: Helptext for a Frisian immovable: Dike
 #: ../../../../data/tribes/initialization/frisians/units.lua:1241
 msgid "A breakwater erected by a diker to gain new land from the sea."
-msgstr ""
+msgstr "Vlnolam postavený hrázdným, aby bylo možné získat novou zem na úkor moře."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Diker's House
 #: ../../../../data/tribes/initialization/frisians/units.lua:1243
@@ -14332,7 +14332,7 @@ msgid ""
 "You can manually remove the dike when the land is sufficiently secured to "
 "prevent wasting resources. To do so, build a flag, road, or building in its "
 "place."
-msgstr ""
+msgstr "Pokud už je země v okolí vlnolamu dostatečně vysušena, můžeš vlnolam manuálně odstranit stavbou vlajky, cesty, nebo budovy na jeho místě, aby nedocházelo k zbytečnému plýtvání surovinami."
 
 #. TRANSLATORS: Helptext for a Frisian immovable: Reed Field
 #: ../../../../data/tribes/initialization/frisians/units.lua:1264
@@ -14571,7 +14571,7 @@ msgstr "Domek rybáře potřebuje ve své pracovní oblasti vodní plochu, ve kt
 #: ../../../../data/tribes/initialization/frisians/units.lua:1639
 msgctxt "frisians_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Cesty a stromy podél pobřeží brání v rybaření."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Fisher's
 #. House, part 1
@@ -14860,7 +14860,7 @@ msgstr "Než bude možné poslat na toto místo průzkumníka, je třeba napojit
 #: ../../../../data/tribes/initialization/frisians/units.lua:1779
 msgctxt "frisians_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Průzkumníkovi zabere jedna výprava něco mezi %1$s a %2$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Brick Kiln
 #: ../../../../data/tribes/initialization/frisians/units.lua:1791
@@ -15364,7 +15364,7 @@ msgstr "Poskytují rekrutům vybavení a trénují je na vojáky."
 #, lua-format
 msgctxt "frisians_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "Kasárna potřebují v průměru %s na nábor jednoho vojáka."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Reindeer Farm
 #: ../../../../data/tribes/initialization/frisians/units.lua:2014
@@ -15441,7 +15441,7 @@ msgstr "Statek potřebuje ve své pracovní oblasti volný prostor, na kterém l
 #: ../../../../data/tribes/initialization/frisians/units.lua:2042
 msgctxt "frisians_building"
 msgid "Constructs breakwaters nearby to gain new land from the sea."
-msgstr ""
+msgstr "Staví ve svém okolí vlnolamy, které umožňují získávat novou zem na úkor moře."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Diker's House
 #: ../../../../data/tribes/initialization/frisians/units.lua:2044
@@ -15451,7 +15451,7 @@ msgid ""
 "times. You can manually remove breakwaters when the land is sufficiently "
 "secured to prevent wasting resources; to do so, build a flag, road, or "
 "building in the dike’s place."
-msgstr ""
+msgstr "Hrázdný vysouší zemi v okolí vlnolamu, který několikrát přestavuje. Pokud už je země v okolí vlnolamu dostatečně vysušena, můžeš vlnolam manuálně odstranit stavbou vlajky, cesty, nebo budovy na jeho místě, aby nedocházelo k zbytečnému plýtvání surovinami."
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Rock Mine
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Deep Rock Mine
@@ -15468,7 +15468,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the rock mine can produce granite in %s on "
 "average."
-msgstr ""
+msgstr "Pokud je stabilní přísun jídla, může tento důl na kámen vytěžit v průměru jeden kvádr žuly za %s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Deep Rock
 #. Mine
@@ -15478,7 +15478,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep rock mine can produce granite in %s "
 "on average."
-msgstr ""
+msgstr "Pokud je stabilní přísun jídla, může tento hlubinný důl na kámen vytěžit v průměru jeden kvádr žuly za %s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Coal Mine
 #: ../../../../data/tribes/initialization/frisians/units.lua:2073
@@ -15487,7 +15487,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the coal mine can produce coal in %s on "
 "average."
-msgstr ""
+msgstr "Pokud je stabilní přísun jídla, může tento důl na uhlí vytěžit v průměru jednu hroudu uhlí za %s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Deep Coal
 #. Mine
@@ -15497,7 +15497,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep coal mine can produce coal in %s on "
 "average."
-msgstr ""
+msgstr "Pokud je stabilní přísun jídla, může tento hlubinný důl na uhlí vytěžit v průměru jednu hroudu uhlí za %s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Iron Mine
 #: ../../../../data/tribes/initialization/frisians/units.lua:2091
@@ -15516,7 +15516,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep iron mine can produce iron ore in %s "
 "on average."
-msgstr ""
+msgstr "Pokud je stabilní přísun jídla, může tento hlubinný důl na železo vytěžit v průměru jednu železnou rudu za %s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Gold Mine
 #: ../../../../data/tribes/initialization/frisians/units.lua:2109
@@ -15535,7 +15535,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep gold mine can produce gold ore in %s "
 "on average."
-msgstr ""
+msgstr "Pokud je stabilní přísun jídla, může tento hlubinný důl na zlato vytěžit v průměru jednu zlatou rudu za %s."
 
 #. TRANSLATORS: Lore helptext for a Frisian training site: Training Camp
 #: ../../../../data/tribes/initialization/frisians/units.lua:2127
@@ -15639,7 +15639,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Tato budova může vyrobit jeden přívoz v rozmezí mezi %1$s a %2$s, záleží jak dlouhou cestu musí stavitel lodí urazit."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Shipyard
 #: ../../../../data/tribes/initialization/frisians/units.lua:2230
@@ -15664,7 +15664,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Tato budova může vyrobit jednu loď v rozmezí mezi %1$s a %2$s, záleží jak dlouhou cestu musí stavitel lodí urazit."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Weaving Mill
 #: ../../../../data/tribes/initialization/frisians/units.lua:2253
@@ -16185,20 +16185,20 @@ msgstr ""
 msgctxt "frisians_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% voják (+%2%)"
+msgstr[1] "%1% vojáci (+%2%)"
+msgstr[2] "%1% vojáků (+%2%)"
+msgstr[3] "%1% vojáků (+%2%)"
 
 #. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
 #: ../../../../data/tribes/initialization/frisians/units.lua:2446
 msgctxt "frisians_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% voják"
+msgstr[1] "%1% vojáci"
+msgstr[2] "%1% vojáků"
+msgstr[3] "%1% vojáků"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -16207,10 +16207,10 @@ msgstr[3] ""
 msgctxt "frisians_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) voják (+%3%)"
+msgstr[1] "%1%(+%2%) vojáci (+%3%)"
+msgstr[2] "%1%(+%2%) vojáků (+%3%)"
+msgstr[3] "%1%(+%2%) vojáků (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -16218,10 +16218,10 @@ msgstr[3] ""
 msgctxt "frisians_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) voják"
+msgstr[1] "%1%(+%2%) vojáci"
+msgstr[2] "%1%(+%2%) vojáků"
+msgstr[3] "%1%(+%2%) vojáků"
 
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
