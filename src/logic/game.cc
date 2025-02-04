@@ -1295,6 +1295,16 @@ void Game::cancel_trade(int trade_id) {
 	trade_agreements_.erase(trade_id);
 }
 
+void Game::invalidate_pending_diplomacy_actions(PlayerNumber eliminated) {
+	std::list<PendingDiplomacyAction>::iterator it = pending_diplomacy_actions_.begin();
+	while (it != pending_diplomacy_actions_.end()) {
+		if ((it->action == DiplomacyAction::kJoin || it->action == DiplomacyAction::kInvite) &&
+		    (it->sender == eliminated || it->other == eliminated)) {
+			it = pending_diplomacy_actions_.erase(it);
+		}
+	}
+}
+
 LuaGameInterface& Game::lua() {
 	return dynamic_cast<LuaGameInterface&>(EditorGameBase::lua());
 }

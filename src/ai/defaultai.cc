@@ -50,6 +50,7 @@
 #include "logic/mapregion.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
+#include "logic/playersmanager.h"
 
 namespace AI {
 
@@ -225,7 +226,7 @@ DefaultAI::~DefaultAI() {
  *
  * General behaviour is defined here.
  */
-void DefaultAI::think() {
+void DefaultAI::do_think() {
 	const Time& gametime = game().get_gametime();
 
 	if (next_ai_think_ > gametime) {
@@ -3343,7 +3344,6 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 	const Widelands::PlayerNumber mypn = player_number();
 	const Widelands::Player* me = game().get_player(mypn);
 	const Widelands::TeamNumber mytn = me->team_number();
-	const bool me_def = me->is_defeated();
 	const bool me_alone = player_statistics.get_is_alone(mypn);
 
 	// TODO(tothxa): detect and handle team changes since last stats update
@@ -3359,15 +3359,13 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 	int32_t planned_other_score = kNoScore;
 	std::string planned_log_append_text;
 
-	// If we are defeated or the last one in a team, then leave team, but check pending requests
-	// first.
-	// If alone, we may accept requests to join and cancel leaving.
-	// If defeated, just clean up by rejecting everything.
-	if (me->team_number() != 0 && (me_alone || me_def)) {
+	// If we are the last one in a team, then leave team, but check pending requests first --
+	// we may accept requests to join and cancel leaving.
+	if (me->team_number() != 0 && me_alone) {
 		planned_action = Widelands::DiplomacyAction::kLeaveTeam;
-		plan_priority = me_alone ? 0 : std::numeric_limits<int32_t>::max();
+		plan_priority = 0;
 		if (g_verbose) {
-			planned_log_append_text = me_alone ? " as last one" : " as defeated";
+			planned_log_append_text = " as last one";
 			/* verb_ */ log_dbg_time(gametime,
 			                         "AI Diplomacy: Player(%u) plans to leave team with priority %d",
 			                         static_cast<unsigned int>(mypn), plan_priority);
@@ -3432,11 +3430,10 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			// We may still decide to stay if a strong enough player wants to join
 			const bool plan_to_leave = planned_action == Widelands::DiplomacyAction::kLeaveTeam;
 
-			// consider only if we are not defeated and if not resulting in a team win
-			bool accept =
-			   !me_def && player_statistics.members_in_team(
+			// consider only if not resulting in a team win
+			bool accept = player_statistics.members_in_team(
 			                 pda.action == Widelands::DiplomacyAction::kInvite ? other_tn : mytn) <
-			                 player_statistics.players_active() - 1;
+			              player_statistics.players_active() - 1;
 
 			// accept if diploscore high, else accept only 50%
 			accept =
@@ -6978,7 +6975,6 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 
 	// Collecting statistics and saving them in player_statistics object
 	const Widelands::Player* me = game().get_player(pn);
-	const bool me_def = me->is_defeated();
 
 	const uint32_t vsize = genstats.at(pn - 1).miltary_strength.size();
 	uint32_t me_strength = 0;
@@ -6989,7 +6985,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 	uint32_t me_old60_land = 0;
 	uint32_t me_cass = 0;
 	uint32_t me_buildings = 0;
-	if (vsize > 0 && !me_def) {
+	if (vsize > 0) {
 		me_strength = genstats.at(pn - 1).miltary_strength.back();
 		me_land = genstats.at(pn - 1).land_size.back();
 		me_cass = genstats.at(pn - 1).nr_casualties.back();
@@ -7014,8 +7010,10 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 	for (Widelands::PlayerNumber j = 1; j <= nr_players; ++j) {
 		const Widelands::Player* this_player = game().get_player(j);
 		if (this_player != nullptr) {
-			bool player_def = this_player->is_defeated();
-			if (player_def || me_def) {
+			const auto* pes =
+			   game().player_manager()->get_player_end_status(this_player->player_number());
+			bool player_def = (pes != nullptr && pes->cannot_continue());
+			if (player_def) {
 				// setting all AI Player stats to zero and diploscore to -20
 				player_statistics.add(pn, j, me->team_number(), this_player->team_number(), 0, 0, 0, 0,
 				                      0, 0, 0, -20, 0, player_def);

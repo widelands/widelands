@@ -66,14 +66,15 @@ public:
 	int get_allowed_buildings(lua_State* L);
 	int get_objectives(lua_State* L);
 	int get_defeated(lua_State* L);
+	int get_lost(lua_State* L);
 	int get_resigned(lua_State* L);
 	int get_end_result(lua_State* L);
 	int get_messages(lua_State* L);
 	int get_inbox(lua_State* L);
 	int get_color(lua_State* L);
 	int get_team(lua_State* L);
-	int get_tribe(lua_State* L);
 	int set_team(lua_State* L);
+	int get_tribe(lua_State* L);
 	int get_see_all(lua_State* L);
 	int set_see_all(lua_State* L);
 	int get_allow_additional_expedition_items(lua_State* L);
@@ -105,6 +106,8 @@ public:
 	int get_ships(lua_State* L);
 	int get_buildings(lua_State* L);
 	int get_constructionsites(lua_State* L);
+	int get_buildings_of_type(lua_State* L);
+	int get_constructionsites_of_type(lua_State* L);
 	int get_suitability(lua_State* L);
 	int allow_workers(lua_State* L);
 	int switchplayer(lua_State* L);
@@ -121,6 +124,8 @@ private:
 	                         std::vector<Widelands::DescriptionIndex>&);
 	int allow_forbid_buildings(lua_State* L, bool);
 	int do_get_buildings(lua_State* L, bool);
+	int do_get_buildings(lua_State* L, bool, bool, const std::vector<Widelands::DescriptionIndex>&);
+	int do_get_buildings_of_type(lua_State* L, bool);
 };
 
 class LuaObjective : public LuaGameModuleClass {

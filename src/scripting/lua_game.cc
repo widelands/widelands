@@ -111,6 +111,8 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, get_ships),
    METHOD(LuaPlayer, get_buildings),
    METHOD(LuaPlayer, get_constructionsites),
+   METHOD(LuaPlayer, get_buildings_of_type),
+   METHOD(LuaPlayer, get_constructionsites_of_type),
    METHOD(LuaPlayer, get_suitability),
    METHOD(LuaPlayer, allow_workers),
    METHOD(LuaPlayer, switchplayer),
@@ -124,6 +126,7 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
    PROP_RO(LuaPlayer, allowed_buildings),
    PROP_RO(LuaPlayer, objectives),
    PROP_RO(LuaPlayer, defeated),
+   PROP_RO(LuaPlayer, lost),
    PROP_RO(LuaPlayer, resigned),
    PROP_RO(LuaPlayer, end_result),
    PROP_RO(LuaPlayer, messages),
@@ -203,10 +206,43 @@ int LuaPlayer::get_objectives(lua_State* L) {
 /* RST
    .. attribute:: defeated
 
-      (RO) :const:`true` if this player was defeated, :const:`false` otherwise
+      .. deprecated:: 1.3 Caution: misleading name! You may be looking for :attr:`lost` instead.
+         To check the player's warehouses, it is preferred to use :meth:`get_buildings_of_type`.
+
+      (RO) :const:`true` if this player has no warehouses left, :const:`false` otherwise.
 */
 int LuaPlayer::get_defeated(lua_State* L) {
-	lua_pushboolean(L, static_cast<int>(get(L, get_egbase(L)).is_defeated()));
+	lua_pushstring(L, "warehouse");
+	get_buildings_of_type(L);
+
+	lua_pushnil(L);
+	while (lua_next(L, -2) != 0) {
+		lua_pushnil(L);
+		if (lua_next(L, -2) != 0) {
+			lua_pushboolean(L, 0);
+			return 1;
+		}
+		lua_pop(L, 1);
+	}
+	lua_pushboolean(L, 1);
+	return 1;
+}
+
+/* RST
+   .. attribute:: lost
+
+      .. versionadded:: 1.3
+
+      (RO) :const:`true` if this player has already lost (including full elimination),
+      as previously determined by win conditions; :const:`false` otherwise
+*/
+int LuaPlayer::get_lost(lua_State* L) {
+	const Widelands::PlayerEndStatus* p =
+	   get_egbase(L).player_manager()->get_player_end_status(player_number());
+	lua_pushboolean(L, (p != nullptr && (p->result == Widelands::PlayerEndResult::kLost ||
+	                                     p->result == Widelands::PlayerEndResult::kEliminated)) ?
+	                      1 :
+	                      0);
 	return 1;
 }
 
@@ -235,7 +271,8 @@ int LuaPlayer::get_resigned(lua_State* L) {
 int LuaPlayer::get_end_result(lua_State* L) {
 	const Widelands::PlayerEndStatus* p =
 	   get_egbase(L).player_manager()->get_player_end_status(player_number());
-	lua_pushinteger(L, static_cast<int>(p->result));
+	lua_pushinteger(
+	   L, static_cast<int>((p == nullptr) ? Widelands::PlayerEndResult::kUndefined : p->result));
 	return 1;
 }
 
@@ -994,6 +1031,43 @@ int LuaPlayer::get_constructionsites(lua_State* L) {
 }
 
 /* RST
+   .. method:: get_buildings_of_type(which)
+
+      Fetches information about the all of the player's buildings that match the
+      :attr:`wl.map.MapObjectDescription.type_name` specified by **which**, returned
+      as a :class:`table` of ``{name=array_of_buildings}`` pairs. For instance, asking
+      for `warehouse` will yield warehouses, headquarters and ports.
+
+      :arg which: A building type from the list of
+         :attr:`~wl.map.MapObjectDescription.type_name`
+      :type which: :class:`string`
+      :returns: Information about the player's buildings,
+         see :class:`wl.map.Building`.
+      :rtype: :class:`table`
+*/
+int LuaPlayer::get_buildings_of_type(lua_State* L) {
+	return do_get_buildings_of_type(L, false);
+}
+
+/* RST
+   .. method:: get_constructionsites_of_type(which)
+
+      Fetches information about the all of the player's constructionsites that match the
+      :attr:`wl.map.MapObjectDescription.type_name` specified by **which**, returned
+      as a :class:`table` of ``{name=array_of_buildings}`` pairs.
+
+      :arg which: A building type from the list of
+         :attr:`~wl.map.MapObjectDescription.type_name`
+      :type which: :class:`string`
+      :returns: Information about the player's constructionsites,
+         see :class:`wl.map.ConstructionSite`.
+      :rtype: :class:`table`
+*/
+int LuaPlayer::get_constructionsites_of_type(lua_State* L) {
+	return do_get_buildings_of_type(L, true);
+}
+
+/* RST
    .. method:: get_suitability(building, field)
 
       Returns whether this building type can be placed on this field. This
@@ -1230,9 +1304,6 @@ int LuaPlayer::allow_forbid_buildings(lua_State* L, bool allow) {
 }
 
 int LuaPlayer::do_get_buildings(lua_State* L, const bool csites) {
-	Widelands::EditorGameBase& egbase = get_egbase(L);
-	Widelands::Player& p = get(L, egbase);
-
 	// if only one string, convert to array so that we can use
 	// parse_building_list
 	bool return_array = true;
@@ -1249,7 +1320,17 @@ int LuaPlayer::do_get_buildings(lua_State* L, const bool csites) {
 	}
 
 	std::vector<Widelands::DescriptionIndex> houses;
-	parse_building_list(L, p.tribe(), houses);
+	parse_building_list(L, get(L, get_egbase(L)).tribe(), houses);
+
+	return do_get_buildings(L, csites, return_array, houses);
+}
+
+int LuaPlayer::do_get_buildings(lua_State* L,
+                                const bool csites,
+                                const bool return_array,
+                                const std::vector<Widelands::DescriptionIndex>& houses) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Player& p = get(L, egbase);
 
 	lua_newtable(L);
 
@@ -1278,6 +1359,35 @@ int LuaPlayer::do_get_buildings(lua_State* L, const bool csites) {
 		}
 	}
 	return 1;
+}
+
+int LuaPlayer::do_get_buildings_of_type(lua_State* L, const bool csites) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+
+	const std::string type_name = luaL_checkstring(L, -1);
+	std::vector<Widelands::DescriptionIndex> houses;
+
+	if (type_name == to_string(Widelands::MapObjectType::MILITARYSITE)) {
+		// special case: can conquer other tribes' milsites
+		const Widelands::Descriptions& descriptions = egbase.descriptions();
+		for (size_t i = 0; i < descriptions.nr_buildings(); ++i) {
+			const Widelands::DescriptionIndex& building_index =
+			   static_cast<Widelands::DescriptionIndex>(i);
+			if (descriptions.get_building_descr(building_index)->type() ==
+			    Widelands::MapObjectType::MILITARYSITE) {
+				houses.push_back(building_index);
+			}
+		}
+	} else {
+		const Widelands::TribeDescr& tribe_descr = get(L, egbase).tribe();
+		for (Widelands::DescriptionIndex building_index : tribe_descr.buildings()) {
+			if (to_string(tribe_descr.get_building_descr(building_index)->type()) == type_name) {
+				houses.push_back(building_index);
+			}
+		}
+	}
+
+	return do_get_buildings(L, csites, true, houses);
 }
 
 /* RST
@@ -1642,7 +1752,9 @@ const Widelands::Message& LuaInboxMessage::get(lua_State* L, Widelands::Game& ga
 
    :arg plr: The Player to report results for.
    :type plr: :class:`~wl.game.Player`
-   :arg result: The player result (0: lost, 1: won, 2: resigned)
+   :arg result: The player result (0: lost, 1: won, 2: resigned, 3: eliminated). If 0 or 1,
+       the player is able to carry on when the "continue playing" option is selected. Set
+       this to 3 for a loss in which the player is eliminated and cannot continue playing.
    :type result: :class:`integer`
    :arg info: A string containing extra data for this particular win
       condition. Likely one wants to use :meth:`make_extra_data` for this.

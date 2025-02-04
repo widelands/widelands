@@ -74,7 +74,7 @@ struct DefaultAI : ComputerPlayer {
 
 	DefaultAI(Widelands::Game&, Widelands::PlayerNumber, AiType);
 	~DefaultAI() override;
-	void think() override;
+	void do_think() override;
 
 	enum class WalkSearch : uint8_t { kAnyPlayer, kOtherPlayers, kEnemy };
 	enum class WoodPolicy : uint8_t { kDismantleRangers, kStopRangers, kAllowRangers };

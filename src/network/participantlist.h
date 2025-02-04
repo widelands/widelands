@@ -21,6 +21,7 @@
 
 #include <string>
 
+#include "logic/player_end_result.h"
 #include "logic/widelands.h"
 #include "notifications/signal.h"
 
@@ -146,13 +147,47 @@ public:
 	const std::string& get_participant_name(int16_t participant) const;
 
 	/**
-	 * Returns whether the player used by the participant is defeated or still playing.
+	 * Returns whether the player used by the participant has already won.
+	 * For spectators, the result is undefined.
+	 * @warning Must only be called when ingame.
+	 * @param participant The index of the participant to get data about.
+	 * @return Whether the participant has won.
+	 */
+	bool get_participant_victorious(int16_t participant) const {
+		Widelands::PlayerEndResult p = get_participant_end_result(participant);
+		return p == Widelands::PlayerEndResult::kWon;
+	}
+
+	/**
+	 * Returns whether the player used by the participant has already lost or resigned.
 	 * For spectators, the result is undefined.
 	 * @warning Must only be called when ingame.
 	 * @param participant The index of the participant to get data about.
 	 * @return Whether the participant has been defeated.
 	 */
-	bool get_participant_defeated(int16_t participant) const;
+	bool get_participant_defeated(int16_t participant) const {
+		Widelands::PlayerEndResult p = get_participant_end_result(participant);
+		switch (p) {
+		case Widelands::PlayerEndResult::kLost:
+		case Widelands::PlayerEndResult::kResigned:
+		case Widelands::PlayerEndResult::kEliminated:
+			return true;
+		case Widelands::PlayerEndResult::kWon:
+		case Widelands::PlayerEndResult::kUndefined:
+			return false;
+		default:
+			NEVER_HERE();
+		}
+	}
+
+	/**
+	 * Fetches the PlayerEndResult of the player belonging to the given participant index.
+	 * \c participant might refer to a human or AI, but it must be a player, not a spectator.
+	 * @note This method must only be used while in a game.
+	 * @param participant The index to fetch the data for.
+	 * @return PlayerEndResult of the Player corresponding to the given participant.
+	 */
+	Widelands::PlayerEndResult get_participant_end_result(int16_t participant) const;
 
 	/**
 	 * Returns the color of the player used by the participant.

@@ -81,8 +81,8 @@ win_conditions__initially_without_warehouse = {}
 function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
    for idx,p in ipairs(plrs) do
       if win_conditions__initially_without_warehouse[p.number] == nil then
-         win_conditions__initially_without_warehouse[p.number] = p.defeated
-      elseif (p.defeated and not win_conditions__initially_without_warehouse[p.number]) or p.resigned then
+         win_conditions__initially_without_warehouse[p.number] = has_no_warehouse(p)
+      elseif (has_no_warehouse(p) and not win_conditions__initially_without_warehouse[p.number]) or p.resigned then
          if not p.resigned then p:send_to_inbox(heading, msg) end
          local fields_to_destroy = {}
          -- first sink all ships a player still has
@@ -104,17 +104,15 @@ function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
          for i,f in ipairs(fields_to_destroy) do
             if f.immovable then
                f.immovable:destroy()
-               -- add some delay to the destruction for dramaturgical reason
-               sleep(400)
             end
          end
          p.see_all = 1
          if (wc_name and wc_ver) and not p.resigned then
-            wl.game.report_result(p, 0, make_extra_data(p, wc_name, wc_ver))
+            wl.game.report_result(p, 3, make_extra_data(p, wc_name, wc_ver))
          end
          table.remove(plrs, idx)
          break
-      elseif not p.defeated then
+      elseif not has_no_warehouse(p) then
          win_conditions__initially_without_warehouse[p.number] = false
       end
    end
@@ -227,7 +225,7 @@ function count_owned_valuable_fields_for_all_players(players, attribute)
 
    -- Insert points for all players who are still in the game, and 0 points for defeated players.
    for idx,plr in ipairs(players) do
-      if (plr.defeated) or (all_plrpoints[plr.number] == nil) then
+      if (has_no_warehouse(plr)) or (all_plrpoints[plr.number] == nil) then
          owned_fields[plr.number] = 0
       else
          owned_fields[plr.number] = all_plrpoints[plr.number]
@@ -433,4 +431,15 @@ function notification_remaining_time(max_time, remaining_time)
       if ((remaining_time ~= 0) and (remaining_time % 10 == 0)) then show_popup = true end
    end
    return remaining_time, show_popup
+end
+
+-- =======================================================================
+--                             PRIVATE FUNCTIONS
+-- =======================================================================
+
+function has_no_warehouse(p)
+   for name,arr in pairs(p:get_buildings_of_type("warehouse")) do
+      if (#arr > 0) then return false end
+   end
+   return true;
 end
