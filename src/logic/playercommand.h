@@ -929,7 +929,7 @@ private:
 };
 
 struct CmdProposeTrade : PlayerCommand {
-	CmdProposeTrade(const Time& time, PlayerNumber pn, const Trade& trade);
+	CmdProposeTrade(const Time& time, PlayerNumber pn, const TradeInstance& trade);
 
 	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kProposeTrade;
@@ -947,7 +947,33 @@ struct CmdProposeTrade : PlayerCommand {
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 private:
-	Trade trade_;
+	TradeInstance trade_;
+	Serial initiator_;
+};
+
+struct CmdTradeAction : PlayerCommand {
+	CmdTradeAction(
+	   const Time& time, PlayerNumber pn, TradeID trade_id, TradeAction action, Serial accepter);
+
+	[[nodiscard]] QueueCommandTypes id() const override {
+		return QueueCommandTypes::kTradeAction;
+	}
+
+	void execute(Game& game) override;
+
+	// Network (de-)serialization
+	explicit CmdTradeAction(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	// Savegame functions
+	CmdTradeAction();
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	TradeID trade_id_{0U};
+	TradeAction action_{TradeAction::kCancel};
+	Serial accepter_{0U};
 };
 
 struct CmdToggleMuteMessages : PlayerCommand {

@@ -65,7 +65,7 @@ Serial get_object_serial_or_zero(uint32_t object_index, MapObjectLoader& mol) {
 void serialize_bill_of_materials(const BillOfMaterials& bill, StreamWrite* ser) {
 	ser->unsigned_32(bill.size());
 	for (const WareAmount& amount : bill) {
-		ser->unsigned_8(amount.first);
+		ser->unsigned_32(amount.first);
 		ser->unsigned_32(amount.second);
 	}
 }
@@ -74,7 +74,7 @@ BillOfMaterials deserialize_bill_of_materials(StreamRead* des) {
 	BillOfMaterials bill;
 	const int count = des->unsigned_32();
 	for (int i = 0; i < count; ++i) {
-		const auto index = des->unsigned_8();
+		const auto index = des->unsigned_32();
 		const auto amount = des->unsigned_32();
 		bill.emplace_back(index, amount);
 	}
@@ -149,6 +149,10 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdSetSoldierPreference(des);
 	case QueueCommandTypes::kToggleMuteMessages:
 		return new CmdToggleMuteMessages(des);
+	case QueueCommandTypes::kProposeTrade:
+		return new CmdProposeTrade(des);
+	case QueueCommandTypes::kTradeAction:
+		return new CmdTradeAction(des);
 
 	case QueueCommandTypes::kStartOrCancelExpedition:
 		return new CmdStartOrCancelExpedition(des);
@@ -2182,8 +2186,9 @@ void CmdSetStockPolicy::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSa
 	fw.unsigned_8(static_cast<uint8_t>(policy_));
 }
 
-CmdProposeTrade::CmdProposeTrade(const Time& time, PlayerNumber pn, const Trade& trade)
-   : PlayerCommand(time, pn), trade_(trade) {
+// CmdProposeTrade
+CmdProposeTrade::CmdProposeTrade(const Time& time, PlayerNumber pn, const TradeInstance& trade)
+   : PlayerCommand(time, pn), trade_(trade), initiator_(trade.initiator.serial()) {
 }
 
 CmdProposeTrade::CmdProposeTrade() = default;
@@ -2194,10 +2199,8 @@ void CmdProposeTrade::execute(Game& game) {
 		return;
 	}
 
-	Market* initiator = dynamic_cast<Market*>(game.objects().get_object(trade_.initiator));
+	Market* initiator = dynamic_cast<Market*>(game.objects().get_object(initiator_));
 	if (initiator == nullptr) {
-		log_warn_time(
-		   game.get_gametime(), "CmdProposeTrade: initiator vanished or is not a market.\n");
 		return;
 	}
 	if (&initiator->owner() != plr) {
@@ -2205,52 +2208,149 @@ void CmdProposeTrade::execute(Game& game) {
 		              sender(), initiator->owner().player_number());
 		return;
 	}
-	Market* receiver = dynamic_cast<Market*>(game.objects().get_object(trade_.receiver));
-	if (receiver == nullptr) {
+	if (sender() == trade_.receiving_player) {
 		log_warn_time(
-		   game.get_gametime(), "CmdProposeTrade: receiver vanished or is not a market.\n");
-		return;
-	}
-	if (initiator->get_owner() == receiver->get_owner()) {
-		log_warn_time(
-		   game.get_gametime(), "CmdProposeTrade: Sending and receiving player are the same.\n");
+		   game.get_gametime(), "CmdProposeTrade: sender and recipient are the same %u\n", sender());
 		return;
 	}
 
-	// TODO(sirver,trading): Maybe check connectivity between markets here and
-	// report errors.
+	trade_.initiator = initiator;
 	game.propose_trade(trade_);
 }
 
 CmdProposeTrade::CmdProposeTrade(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
-	trade_.initiator = des.unsigned_32();
-	trade_.receiver = des.unsigned_32();
+	trade_.state = static_cast<TradeInstance::State>(des.unsigned_8());
+	initiator_ = des.unsigned_32();
+	trade_.sending_player = des.unsigned_8();
+	trade_.receiving_player = des.unsigned_8();
 	trade_.items_to_send = deserialize_bill_of_materials(&des);
 	trade_.items_to_receive = deserialize_bill_of_materials(&des);
-	trade_.num_batches = des.signed_32();
+	trade_.num_batches = des.unsigned_32();
 }
 
 void CmdProposeTrade::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
-	ser.unsigned_32(trade_.initiator);
-	ser.unsigned_32(trade_.receiver);
+	ser.unsigned_8(static_cast<uint8_t>(trade_.state));
+	ser.unsigned_32(initiator_);
+	ser.unsigned_8(trade_.sending_player);
+	ser.unsigned_8(trade_.receiving_player);
 	serialize_bill_of_materials(trade_.items_to_send, &ser);
 	serialize_bill_of_materials(trade_.items_to_receive, &ser);
-	ser.signed_32(trade_.num_batches);
+	ser.unsigned_32(trade_.num_batches);
 }
 
-void CmdProposeTrade::read(FileRead& /* fr */,
-                           EditorGameBase& /* egbase */,
-                           MapObjectLoader& /* mol */) {
-	// TODO(sirver,trading): Implement this.
-	NEVER_HERE();
+constexpr uint8_t kCurrentPacketVersionCmdProposeTrade = 1;
+
+void CmdProposeTrade::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdProposeTrade) {
+			PlayerCommand::read(fr, egbase, mol);
+
+			trade_.state = static_cast<TradeInstance::State>(fr.unsigned_8());
+
+			Serial s = fr.unsigned_32();
+			trade_.initiator = s == 0 ? nullptr : &mol.get<Market>(s);
+			initiator_ = trade_.initiator.serial();
+
+			trade_.sending_player = fr.unsigned_8();
+			trade_.receiving_player = fr.unsigned_8();
+			trade_.items_to_send = deserialize_bill_of_materials(&fr);
+			trade_.items_to_receive = deserialize_bill_of_materials(&fr);
+			trade_.num_batches = fr.unsigned_32();
+		} else {
+			throw UnhandledVersionError(
+			   "CmdProposeTrade", packet_version, kCurrentPacketVersionCmdProposeTrade);
+		}
+	} catch (const std::exception& e) {
+		throw GameDataError("Cmd_ProposeTrade: %s", e.what());
+	}
 }
 
-void CmdProposeTrade::write(FileWrite& /* fw */,
-                            EditorGameBase& /* egbase */,
-                            MapObjectSaver& /* mos */) {
-	// TODO(sirver,trading): Implement this.
-	NEVER_HERE();
+void CmdProposeTrade::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersionCmdProposeTrade);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_8(static_cast<uint8_t>(trade_.state));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(initiator_)));
+	fw.unsigned_8(trade_.sending_player);
+	fw.unsigned_8(trade_.receiving_player);
+	serialize_bill_of_materials(trade_.items_to_send, &fw);
+	serialize_bill_of_materials(trade_.items_to_receive, &fw);
+	fw.unsigned_32(trade_.num_batches);
+}
+
+// CmdTradeAction
+CmdTradeAction::CmdTradeAction(
+   const Time& time, PlayerNumber pn, TradeID trade_id, TradeAction action, Serial accepter)
+   : PlayerCommand(time, pn), trade_id_(trade_id), action_(action), accepter_(accepter) {
+}
+
+CmdTradeAction::CmdTradeAction() = default;
+
+void CmdTradeAction::execute(Game& game) {
+	switch (action_) {
+	case TradeAction::kCancel:
+		game.cancel_trade(trade_id_, false, game.get_player(sender()));
+		break;
+
+	case TradeAction::kRetract:
+		game.retract_trade(trade_id_);
+		break;
+
+	case TradeAction::kReject:
+		game.reject_trade(trade_id_);
+		break;
+
+	case TradeAction::kAccept:
+		if (Market* market = dynamic_cast<Market*>(game.objects().get_object(accepter_));
+		    market != nullptr) {
+			game.accept_trade(trade_id_, *market);
+		}
+		break;
+
+	default:
+		throw wexception("CmdTradeAction: unrecognized action %u", static_cast<uint8_t>(action_));
+	}
+}
+
+CmdTradeAction::CmdTradeAction(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+	trade_id_ = des.unsigned_32();
+	action_ = static_cast<TradeAction>(des.unsigned_8());
+	accepter_ = des.unsigned_32();
+}
+
+void CmdTradeAction::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.unsigned_32(trade_id_);
+	ser.unsigned_8(static_cast<uint8_t>(action_));
+	ser.unsigned_32(accepter_);
+}
+
+constexpr uint8_t kCurrentPacketVersionCmdTradeAction = 1;
+
+void CmdTradeAction::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdTradeAction) {
+			PlayerCommand::read(fr, egbase, mol);
+			trade_id_ = fr.unsigned_32();
+			action_ = static_cast<TradeAction>(fr.unsigned_8());
+			accepter_ = fr.unsigned_32();
+		} else {
+			throw UnhandledVersionError(
+			   "CmdTradeAction", packet_version, kCurrentPacketVersionCmdTradeAction);
+		}
+	} catch (const std::exception& e) {
+		throw GameDataError("Cmd_TradeAction: %s", e.what());
+	}
+}
+
+void CmdTradeAction::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersionCmdTradeAction);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_32(trade_id_);
+	fw.unsigned_8(static_cast<uint8_t>(action_));
+	fw.unsigned_32(accepter_);
 }
 
 // CmdToggleMuteMessages
@@ -2355,8 +2455,8 @@ void CmdDiplomacy::execute(Game& game) {
 	auto broadcast_message = [&game](const std::string& heading, const std::string& text) {
 		iterate_players_existing(p, game.map().get_nrplayers(), game, player) {
 			player->add_message(game, std::unique_ptr<Message>(new Message(
-			                             Message::Type::kScenario, game.get_gametime(), _("Diplomacy"),
-			                             "images/players/team.png", heading, text)));
+			                             Message::Type::kDiplomacy, game.get_gametime(),
+			                             _("Diplomacy"), "images/players/team.png", heading, text)));
 		}
 		if (upcast(InteractiveSpectator, is, game.get_ibase())) {
 			is->log_message(heading, text);
@@ -2619,6 +2719,10 @@ void CmdShipPortName::execute(Game& game) {
 
 	case MapObjectType::WAREHOUSE:
 		dynamic_cast<Warehouse&>(*mo).set_warehouse_name(name_);
+		return;
+
+	case MapObjectType::MARKET:
+		dynamic_cast<Market&>(*mo).set_market_name(name_);
 		return;
 
 	default:
