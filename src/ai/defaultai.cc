@@ -3376,7 +3376,8 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 
 	const Widelands::Economy* arbitrary_economy = nullptr;
 	for (const auto& economy : player_->economies()) {
-		if (economy.second->type() == Widelands::wwWARE && economy.second->get_arbitrary_flag() != nullptr) {
+		if (economy.second->type() == Widelands::wwWARE &&
+		    economy.second->get_arbitrary_flag() != nullptr) {
 			if (arbitrary_economy == nullptr ||
 			    economy.second->get_nrflags() > arbitrary_economy->get_nrflags()) {
 				arbitrary_economy = economy.second.get();
