@@ -117,34 +117,72 @@ endif()
 
 find_package (Python3 REQUIRED)
 
-find_package(OpenGL REQUIRED)
-find_package(PNG 1.6 REQUIRED)
+if (${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
+  set(USE_FLAGS "-pthread \
+  --use-port=sdl2 \
+  --use-port=sdl2_image:formats=png,jpg --use-port=libpng --use-port=libjpeg \
+  --use-port=sdl2_mixer -sSDL2_MIXER_FORMATS=ogg \
+  --use-port=sdl2_ttf \
+  --use-port=zlib \
+  -sNO_DISABLE_EXCEPTION_CATCHING")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${USE_FLAGS}")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${USE_FLAGS}")
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${USE_FLAGS} \
+  -sASYNCIFY -sASYNCIFY_STACK_SIZE=32768 \
+  -sALLOW_MEMORY_GROWTH -sINITIAL_MEMORY=128mb -sMEMORY_GROWTH_LINEAR_STEP=32mb \
+  -sENVIRONMENT=web,worker \
+  -lidbfs.js \
+  -Wno-pthreads-mem-growth")
+else()
+  find_package(OpenGL REQUIRED)
+  find_package(PNG 1.6 REQUIRED)
 
-find_package(SDL2 REQUIRED)
-find_package(SDL2_image REQUIRED)
-find_package(SDL2_mixer REQUIRED)
-find_package(SDL2_ttf REQUIRED)
-find_package(ZLIB REQUIRED)
+  find_package(SDL2 REQUIRED)
+  find_package(SDL2_image REQUIRED)
+  find_package(SDL2_mixer REQUIRED)
+  find_package(SDL2_ttf REQUIRED)
+  find_package(ZLIB REQUIRED)
+endif()
+
 if(${CMAKE_VERSION} VERSION_LESS 3.9.0)
     find_package(ICU_old REQUIRED)
 else()
+  if (${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --use-port=icu")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --use-port=icu")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --use-port=icu")
+  else()
     find_package(ICU REQUIRED COMPONENTS uc dt)
+  endif()
 endif()
 if(OPTION_USE_GLBINDING)
+  if (${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
+    message(FATAL_ERROR "glbinding not supported in emscripten sdk")
+  endif()
   find_package(glbinding REQUIRED)
 else()
-  find_package(GLEW REQUIRED)
+  if (${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2")
+  else()
+    find_package(GLEW REQUIRED)
+  endif()
 endif()
 
 # Check that Asio is installed. Asio does not have (or need) a Find… CMake Module, so we "only" need to check if the header exists.
 if(NOT asio_location OR asio_location STREQUAL "")
   unset(asio_location CACHE)
+  if (${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
+    set(asio_location "/src/asio/asio/include")
+    include_directories(${asio_location})
+  endif()
+
   find_path(asio_location "asio.hpp")
   if(asio_location)
     message(STATUS "Found Asio in '${asio_location}'.")
   else()
     message(FATAL_ERROR "Could NOT find Asio (missing: asio.hpp). Please run:\n./install-dependencies.sh\nwhich will attempt to install all missing dependencies automatically, or provide further instructions if this not supported on your system.")
   endif()
+
 endif()
 add_definitions(-DASIO_STANDALONE)
 
