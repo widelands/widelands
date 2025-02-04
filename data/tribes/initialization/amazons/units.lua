@@ -82,18 +82,6 @@ wl.Descriptions():new_tribe {
       {
          -- Building Materials
          {
-            name = "log",
-            preciousness = 24,
-            helptexts = {
-               purpose = {
-                  -- TRANSLATORS: Helptext for an Amazon ware: Log, part 1
-                  pgettext("ware", "Logs are an important basic building material. They are produced by felling trees."),
-                  -- TRANSLATORS: Helptext for an Amazon ware: Log, part 2
-                  pgettext("amazons_ware", "Amazon woodcutters fell trees and jungle preservers will plant them. The resulting logs are used by the stone carver. The charcoal kiln also needs logs to produce charcoal.")
-               }
-            }
-         },
-         {
             name = "granite",
             default_target_quantity = 20,
             preciousness = 7,
@@ -107,15 +95,14 @@ wl.Descriptions():new_tribe {
             }
          },
          {
-            name = "quartz",
-            default_target_quantity = 25,
-            preciousness = 15,
+            name = "log",
+            preciousness = 24,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an Amazon ware: Quartz, part 1
-                  pgettext("ware", "Amazons use quartz for sharp tools and weapons."),
-                  -- TRANSLATORS: Helptext for an Amazon ware: Quartz, part 2
-                  pgettext("amazons_ware", "It is also a building material for some advanced buildings. It is produced in stone mines."),
+                  -- TRANSLATORS: Helptext for an Amazon ware: Log, part 1
+                  pgettext("ware", "Logs are an important basic building material. They are produced by felling trees."),
+                  -- TRANSLATORS: Helptext for an Amazon ware: Log, part 2
+                  pgettext("amazons_ware", "Amazon woodcutters fell trees and jungle preservers will plant them. The resulting logs are used by the stone carver. The charcoal kiln also needs logs to produce charcoal.")
                }
             }
          },
@@ -268,6 +255,19 @@ wl.Descriptions():new_tribe {
       {
          -- Mining
          {
+            name = "quartz",
+            default_target_quantity = 25,
+            preciousness = 15,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an Amazon ware: Quartz, part 1
+                  pgettext("ware", "Amazons use quartz for sharp tools, weapons, and armor."),
+                  -- TRANSLATORS: Helptext for an Amazon ware: Quartz, part 2
+                  pgettext("amazons_ware", "It is also a building material for some advanced buildings. It is produced in stone mines."),
+               }
+            }
+         },
+         {
             name = "gold_dust",
             default_target_quantity = 15,
             preciousness = 2,
@@ -300,7 +300,7 @@ wl.Descriptions():new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an Amazon ware: Charcoal, part 1
-                  pgettext("amazons_ware", "Charcoal is produced out of logs by a charcoal burner. The Amazons use charcoal for drying their food and for smelting gold.")
+                  pgettext("amazons_ware", "Charcoal is produced out of logs by a charcoal burner or out of rare trees by a charcoal master. The Amazons use charcoal for drying their food and for smelting gold.")
                }
             }
          },
@@ -720,6 +720,13 @@ wl.Descriptions():new_tribe {
             helptexts = {
                -- TRANSLATORS: Helptext for an Amazon worker: Charcoal Burner
                purpose = pgettext("amazons_worker", "Burns logs to produce charcoal.")
+            }
+         },
+         {
+            name = "amazons_charcoal_master",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an Amazon worker: Charcoal Master
+               purpose = pgettext("amazons_worker", "Burns rare trees to produce charcoal more efficiently.")
             }
          },
          {
@@ -1392,9 +1399,13 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("amazons_building", "Harvests rare trees in the surrounding area. Delivers ironwood, balsa and rubber."),
             performance = {
                -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Cutter's Hut, part 1
-               pgettext("amazons_building", "This building can produce one rare wood between %1$s and %2$s, depending on how far the woodcutter has to walk. If all kinds of rare tree are available within her work area, then one of each kind is produced between %3$s and %4$s."):bformat(format_seconds(47), format_minutes_seconds(1, 27), format_minutes_seconds(2, 22), format_minutes_seconds(4, 20)),
+               pgettext("amazons_building", "This building can produce one rare wood between %1$s and %2$s, depending on how far the woodcutter has to walk."):bformat(format_seconds(47), format_minutes_seconds(1, 27)),
                -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Cutter's Hut, part 2
-               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
+               pgettext("amazons_building", "If all kinds of rare tree are needed by the economy and available within the work area, then one of each kind is produced between %1$s and %2$s."):bformat(format_minutes_seconds(2, 22), format_minutes_seconds(4, 20)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Cutter's Hut, part 3
+               pgettext("amazons_building", "If only one kind of rare tree is needed by the economy and all kinds are available within the work area, then one of the needed kind is produced between %1$s and %2$s, and one of each of the other kinds is produced between %3$s and %4$s."):bformat(format_minutes_seconds(1, 19), format_minutes_seconds(2, 25), format_minutes_seconds(3, 56), format_minutes_seconds(7, 14)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Cutter's Hut, part 4
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the times are increased.")
             }
          }
       },
@@ -1490,7 +1501,20 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Charcoal Kiln
             purpose = pgettext("amazons_building", "Burns logs into charcoal."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Charcoal Kiln
-            performance = pgettext("amazons_building", "The charcoal kiln needs %s on average to produce one lump of coal."):bformat(format_minutes_seconds(2, 4))
+            performance = pgettext("amazons_building", "The charcoal kiln needs %s on average to produce one lump of coal."):bformat(format_minutes_seconds(1,44))
+         }
+      },
+      {
+         name = "amazons_rare_tree_kiln",
+         helptexts = {
+            -- TRANSLATORS: Lore helptext for an Amazon production site: Rare Tree Kiln
+            lore = pgettext("amazons_building", "‘You think you've mastered the art of burning charcoal. But the best charcoal is that which can only be made from rubber when placed in the hottest fire of ironwood. What you've learnt so far, my girl, is barely enough to start learning how to ignite ironwood. You have to start slowly, with the gentle flames of a balsa fire…’"),
+            -- TRANSLATORS: Lore author helptext for an Amazon production site: Rare Tree Kiln
+            lore_author = pgettext("amazons_building", "Mistress Blackwood, teaching an apprentice"),
+            -- TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree Kiln
+            purpose = pgettext("amazons_building", "Burns rare trees into charcoal."),
+            -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Kiln
+            performance = pgettext("amazons_building", "If fully supplied, the rare tree kiln needs %s on average to produce one lump of coal."):bformat(format_minutes_seconds(1,4))
          }
       },
       {
