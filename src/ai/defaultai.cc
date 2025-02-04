@@ -3374,12 +3374,12 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 		return;
 	}
 
-	const EconomyObserver* arbitrary_economy = nullptr;
-	for (EconomyObserver* observer : economies) {
-		if (observer->economy.type() == Widelands::wwWARE && !observer->flags.empty()) {
+	const Widelands::Economy* arbitrary_economy = nullptr;
+	for (const auto& economy : player_->economies()) {
+		if (economy.second->type() == Widelands::wwWARE && economy.second->get_arbitrary_flag() != nullptr) {
 			if (arbitrary_economy == nullptr ||
-			    observer->flags.size() > arbitrary_economy->flags.size()) {
-				arbitrary_economy = observer;
+			    economy.second->get_nrflags() > arbitrary_economy->get_nrflags()) {
+				arbitrary_economy = economy.second.get();
 			}
 		}
 	}
@@ -3403,7 +3403,7 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 			                                         ->ai_hints()
 			                                         .preciousness(tribe_->name());
 			// Bonus if we want to stockpile this ware.
-			receive_preciousness += arbitrary_economy->economy.target_quantity(pair.first).permanent;
+			receive_preciousness += arbitrary_economy->target_quantity(pair.first).permanent;
 			// Malus if we already have lots of it.
 			receive_preciousness -= calculate_stocklevel(pair.first, WareWorker::kWare);
 		}
@@ -3415,7 +3415,7 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 			                              ->ai_hints()
 			                              .preciousness(tribe_->name());
 			// Malus if we want to stockpile this ware.
-			send_cost += arbitrary_economy->economy.target_quantity(pair.first).permanent;
+			send_cost += arbitrary_economy->target_quantity(pair.first).permanent;
 			// Bonus if we have lots of it to spare.
 			send_cost -= calculate_stocklevel(pair.first, WareWorker::kWare);
 		}

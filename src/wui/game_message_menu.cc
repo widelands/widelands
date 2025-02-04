@@ -101,7 +101,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 
 	diplomacybtn_ = new UI::Button(filter_box_, "filter_diplomacy_messages", 0, 0, kButtonSize,
 	                               kButtonSize, UI::ButtonStyle::kWuiSecondary,
-	                               g_image_cache->get("images/wui/menus/statistics_stock.png"));
+	                               g_image_cache->get("images/wui/menus/diplomacy.png"));
 
 	filter_box_->add(geologistsbtn_);
 	filter_box_->add(economybtn_);
@@ -616,7 +616,7 @@ std::string GameMessageMenu::display_message_type_icon(const Widelands::Message&
 		return "images/wui/stats/genstats_nrwares.png";
 	case Widelands::Message::Type::kDiplomacy:
 	case Widelands::Message::Type::kTrading:
-		return "images/wui/menus/statistics_stock.png";
+		return "images/wui/menus/diplomacy.png";
 	case Widelands::Message::Type::kSeafaring:
 		return "images/wui/buildings/start_expedition.png";
 	case Widelands::Message::Type::kWarfare:
