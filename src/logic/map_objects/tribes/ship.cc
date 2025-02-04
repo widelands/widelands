@@ -955,7 +955,7 @@ void Ship::update_warship_soldier_request(bool create) {
 }
 
 bool Ship::remember_detected_portspace(const Coords& coords) {
-	const EditorGameBase& egbase = owner().egbase();
+	EditorGameBase& egbase = get_owner()->egbase();
 	const Map& map = egbase.map();
 	PlayerNumber space_owner = map[coords].get_owned_by();
 
@@ -964,7 +964,7 @@ bool Ship::remember_detected_portspace(const Coords& coords) {
 		return false;
 	}
 
-	std::unique_ptr<DetectedPortSpace> dps(new DetectedPortSpace());
+	std::unique_ptr<DetectedPortSpace> dps(new DetectedPortSpace(dynamic_cast<Game&>(egbase)));
 	dps->coords = coords;
 	dps->owner = space_owner;
 	dps->time_discovered = egbase.get_gametime();

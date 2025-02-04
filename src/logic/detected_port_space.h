@@ -30,11 +30,11 @@
 
 namespace Widelands {
 class EditorGameBase;
+class Game;
 
 struct DetectedPortSpace {
-	DetectedPortSpace();
-	static void initialize_serial();
-	void set_serial(Serial s);
+	explicit DetectedPortSpace(Game& game);
+	void set_serial(Game& game, Serial s);
 
 	Serial serial;
 	Coords coords;

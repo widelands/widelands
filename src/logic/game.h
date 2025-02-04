@@ -334,6 +334,11 @@ public:
 		scenario_difficulty_ = d;
 	}
 
+	[[nodiscard]] Serial generate_economy_serial();
+	[[nodiscard]] Serial generate_detectedportspace_serial();
+	void notify_economy_serial(Serial serial);
+	void notify_detectedportspace_serial(Serial serial);
+
 	// Statistics
 	const GeneralStatsVector& get_general_statistics() const {
 		return general_stats_;
@@ -495,6 +500,8 @@ private:
 	int next_trade_agreement_id_ = 1;
 	// Maps from trade agreement id to the agreement.
 	std::map<int, TradeAgreement> trade_agreements_;
+	Serial last_economy_serial_ = 0;
+	Serial last_detectedportspace_serial_ = 0;
 
 	std::list<PendingDiplomacyAction> pending_diplomacy_actions_;
 	bool diplomacy_allowed_{true};

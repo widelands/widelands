@@ -143,8 +143,8 @@ Game::Game()
      cmdqueue_(*this),
      /** TRANSLATORS: Win condition for this game has not been set. */
      win_condition_displayname_(_("Not set")) {
-	Economy::initialize_serial();
-	DetectedPortSpace::initialize_serial();
+	last_economy_serial_ = 0;
+	last_detectedportspace_serial_ = 0;
 }
 
 Game::~Game() {  // NOLINT
@@ -881,8 +881,8 @@ void Game::full_cleanup() {
 	list_of_scenarios_.clear();
 	replay_filename_.clear();
 	forester_cache_.clear();
-	Economy::initialize_serial();
-	DetectedPortSpace::initialize_serial();
+	last_economy_serial_ = 0;
+	last_detectedportspace_serial_ = 0;
 
 	if (has_loader_ui()) {
 		remove_loader_ui();
@@ -1310,6 +1310,19 @@ int32_t Game::get_win_condition_duration() const {
 }
 void Game::set_win_condition_duration(int32_t d) {
 	win_condition_duration_ = d;
+}
+
+Serial Game::generate_economy_serial() {
+	return last_economy_serial_++;
+}
+Serial Game::generate_detectedportspace_serial() {
+	return last_detectedportspace_serial_++;
+}
+void Game::notify_economy_serial(Serial serial) {
+	last_economy_serial_ = std::max(last_economy_serial_, serial + 1);
+}
+void Game::notify_detectedportspace_serial(Serial serial) {
+	last_detectedportspace_serial_ = std::max(last_detectedportspace_serial_, serial + 1);
 }
 
 /**
