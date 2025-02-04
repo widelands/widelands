@@ -80,6 +80,8 @@ public:
 
 	void add_worker(Worker&) override;
 
+	void notify_worker_evicted(Game& game, Worker& worker) override;
+
 private:
 	void request_builder(Game&);
 
