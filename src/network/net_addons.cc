@@ -22,6 +22,7 @@
 #include <csignal>
 #include <cstdlib>
 #include <cstring>
+#include <deque>
 #include <list>
 #include <memory>
 
@@ -201,6 +202,189 @@ void NetAddons::set_timeouts(bool suppress_timeout) {
 #endif
 }
 
+static std::set<AsyncIOWrapper*> living_async_wrappers;
+
+struct AsyncIOWrapper {
+public:
+	explicit AsyncIOWrapper(HangupFn fn)
+	   : queue_mutex_(MutexLock::create_custom_mutex()),
+	     result_mutex_(MutexLock::create_custom_mutex()),
+	     hangup_fn_(fn),
+	     thread_(AsyncIOWrapper::run, this) {
+		MutexLock m(MutexLock::ID::kLog);
+		living_async_wrappers.insert(this);
+	}
+
+	int write(const int socket, const char* buffer, const size_t length) {
+		return read_write_impl(socket, buffer, length);
+	}
+
+	int read(const int socket, char* buffer, const size_t length) {
+		return read_write_impl(socket, buffer, length);
+	}
+
+	std::string read_line(const int socket) {
+		std::string result;
+		read_write_impl(socket, &result, 0);
+		return result;
+	}
+
+	void detach() {
+		verb_log_info("Detaching async network IO wrapper");
+		alive_ = false;
+	}
+
+private:
+	struct QueuedCommand {
+		enum class Type { kWrite, kRead, kReadLine };
+
+		QueuedCommand(const int socket, const char* buffer, const size_t length)
+		   : socket_(socket), length_(length), type_(Type::kWrite) {
+			buffer_.write = buffer;
+		}
+		QueuedCommand(const int socket, char* buffer, const size_t length)
+		   : socket_(socket), length_(length), type_(Type::kRead) {
+			buffer_.read = buffer;
+		}
+		QueuedCommand(const int socket, std::string* buffer, const size_t length)
+		   : socket_(socket), length_(length), type_(Type::kReadLine) {
+			buffer_.read_line = buffer;
+		}
+
+		QueuedCommand() = default;
+
+		size_t id_{0U};
+		int socket_{0};
+		union {
+			const char* write;
+			char* read;
+			std::string* read_line;
+		} buffer_;
+		size_t length_{0U};
+		Type type_{Type::kWrite};
+	};
+
+	template <typename BufferType /* `const char*` for write; `char*` or `std::string*` for read */>
+	int read_write_impl(const int socket, BufferType buffer, const size_t length) {
+		const size_t id = ++cmd_id_counter_;
+
+		{
+			MutexLock m(queue_mutex_);
+			queue_.emplace_back(socket, buffer, length);
+			queue_.back().id_ = id;
+		}
+
+		const uint32_t start_time = SDL_GetTicks();
+		for (;;) {
+			{
+				MutexLock m(result_mutex_);
+				auto it = return_values_.find(id);
+				if (it != return_values_.end()) {
+					int result = it->second;
+					return_values_.erase(it);
+					hangup_fn_(SDL_GetTicks() - start_time, true);
+					return result;
+				}
+			}
+
+			hangup_fn_(SDL_GetTicks() - start_time, false);
+			SDL_Delay(1);
+		}
+	}
+
+	static void run(AsyncIOWrapper* io) {  // Runs in the separate thread `io->thread_`.
+		while (io->alive_) {
+			QueuedCommand cmd;
+			{
+				MutexLock m(io->queue_mutex_);
+				if (!io->queue_.empty()) {
+					cmd = io->queue_.front();
+					assert(cmd.id_ != 0);
+					io->queue_.pop_front();
+				}
+			}
+
+			if (cmd.id_ != 0) {
+				assert(io->return_values_.count(cmd.id_) == 0);
+				int result;
+				switch (cmd.type_) {
+				case QueuedCommand::Type::kWrite:
+					result = portable_write(cmd.socket_, cmd.buffer_.write, cmd.length_);
+					break;
+
+				case QueuedCommand::Type::kRead: {
+					std::unique_ptr<char[]> temp_buffer(new char[cmd.length_]);
+					result = portable_read(cmd.socket_, temp_buffer.get(), cmd.length_);
+					if (io->alive_) {
+						memcpy(cmd.buffer_.read, temp_buffer.get(), cmd.length_);
+					}
+					break;
+				}
+
+				case QueuedCommand::Type::kReadLine: {
+					std::string temp_readout;
+					char c;
+					for (;;) {
+						result = portable_read(cmd.socket_, &c, 1);
+						if (result != 1 || c == '\n') {
+							break;
+						}
+						temp_readout += c;
+					}
+					if (io->alive_) {
+						*cmd.buffer_.read_line = temp_readout;
+					}
+					break;
+				}
+
+				default:
+					NEVER_HERE();
+				}
+
+				MutexLock m(io->result_mutex_);
+				io->return_values_.emplace(cmd.id_, result);
+			} else {
+				SDL_Delay(1);
+			}
+		}
+
+		verb_log_info("Async network IO thread ending");
+		io->thread_.detach();
+		MutexLock m(MutexLock::ID::kLog);
+		living_async_wrappers.erase(io);
+		delete io;
+	}
+
+	const MutexLock::ID queue_mutex_;
+	const MutexLock::ID result_mutex_;
+	HangupFn hangup_fn_;
+	volatile bool alive_{true};
+
+	size_t cmd_id_counter_{0U};
+	std::deque<QueuedCommand> queue_;
+	std::map<size_t, int> return_values_;
+
+	std::thread thread_;
+};
+
+void cleanup_abandoned_hung_threads() {
+	const uint32_t start = SDL_GetTicks();
+	constexpr uint32_t kKillTimeout = 5000;
+	do {
+		if (living_async_wrappers.empty()) {
+			return;
+		}
+		SDL_Delay(1);
+	} while (SDL_GetTicks() - start < kKillTimeout);
+
+	// This is called during shutdown, the logger might no longer exist
+	std::cout << "FATAL: Unable to clean up " << living_async_wrappers.size()
+	          << " hung network threads, killing Widelands.\n";
+
+	// TODO(Nordfriese): There must be a better way to interrupt a blocked read() call...
+	std::terminate();
+}
+
 void NetAddons::init(std::string username, std::string password) {
 	if (initialized_) {
 		// already initialized
@@ -208,6 +392,10 @@ void NetAddons::init(std::string username, std::string password) {
 	}
 	if (network_active_) {
 		throw_warning("Network is already active during init");
+	}
+
+	if (async_io_wrapper_ == nullptr) {
+		async_io_wrapper_ = new AsyncIOWrapper(hangup_fn_);
 	}
 
 #ifdef SIGPIPE
@@ -300,6 +488,12 @@ void NetAddons::quit_connection() {
 		return;
 	}
 	initialized_ = false;
+
+	if (async_io_wrapper_ != nullptr) {
+		async_io_wrapper_->detach();
+		async_io_wrapper_ = nullptr;
+	}
+
 #ifdef _WIN32
 	closesocket(client_socket_);
 #else
@@ -309,6 +503,14 @@ void NetAddons::quit_connection() {
 #ifdef SIGPIPE
 	signal(SIGPIPE, SIG_DFL);
 #endif
+}
+
+void NetAddons::interrupt() {
+	if (async_io_wrapper_ != nullptr) {
+		async_io_wrapper_->detach();
+		async_io_wrapper_ = nullptr;
+	}
+	throw OperationCancelledByUserException();
 }
 
 NetAddons::~NetAddons() {
@@ -328,7 +530,7 @@ inline void NetAddons::write_to_server(const std::string& send) {
 	write_to_server(send.c_str(), send.size());
 }
 void NetAddons::write_to_server(const char* send, const size_t length) {
-	if (portable_write(client_socket_, send, length) >= 0) {
+	if (async_io_wrapper_->write(client_socket_, send, length) >= 0) {
 		SDL_Delay(50);  // Give the send buffer time to clear up before sending more data.
 		return;
 	}
@@ -357,19 +559,7 @@ void NetAddons::write_to_server(const char* send, const size_t length) {
 }
 
 std::string NetAddons::read_line() const {
-	std::string line;
-	char c;
-	int n;
-	for (;;) {
-		n = portable_read(client_socket_, &c, 1);
-		if (n < 1) {
-			throw_warning(format("Connection interrupted (%s)", strerror(errno)));
-		}
-		if (n != 1 || c == '\n') {
-			break;
-		}
-		line += c;
-	}
+	std::string line = async_io_wrapper_->read_line(client_socket_);
 
 	if (contains(line, "WL", false) && contains(line, "Protocol", false) &&
 	    contains(line, "Exception", false)) {
@@ -387,7 +577,7 @@ void NetAddons::read_file(const int64_t length, const std::string& out) const {
 	std::unique_ptr<char[]> buffer(new char[length]);
 	int64_t nr_bytes_read = 0;
 	do {
-		int64_t l = portable_read(client_socket_, buffer.get(), length - nr_bytes_read);
+		int64_t l = async_io_wrapper_->read(client_socket_, buffer.get(), length - nr_bytes_read);
 		if (l < 1) {
 			throw_warning("Connection interrupted");
 		}
@@ -664,7 +854,8 @@ void NetAddons::download_addon(const std::string& name,
 			int64_t nr_bytes_read = 0;
 			do {
 				progress(relative_path, progress_state);
-				int64_t l = portable_read(client_socket_, buffer.get(), length - nr_bytes_read);
+				int64_t l =
+				   async_io_wrapper_->read(client_socket_, buffer.get(), length - nr_bytes_read);
 				if (l < 1) {
 					throw_warning("Connection interrupted");
 				}
