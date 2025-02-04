@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Log Merger, 2022
+# Guybrush88 <erpizzo@alice.it>, 2025
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
-"Last-Translator: Log Merger, 2022\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2025\n"
 "Language-Team: Italian (https://app.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,7 +34,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:687
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:735
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundlina"
 
 #. TRANSLATORS: To be used in placeholders for switching texts according to
 #. current leader
@@ -51,15 +52,15 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:568
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:637
 msgid "Sidolus"
-msgstr ""
+msgstr "Sidolus"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:49
 msgid "Find a place to build a port"
-msgstr ""
+msgstr "Trova un luogo in cui costruire un porto"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:51
 msgid "Find Portspace"
-msgstr ""
+msgstr "Trova lo spazio per un porto"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:52
 msgid ""
@@ -75,11 +76,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:58
 msgid "Ensure the supply of construction materials"
-msgstr ""
+msgstr "Assicura il rifornimento di materiali da costruzione"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:60
 msgid "Establish Basic Production Chain"
-msgstr ""
+msgstr "Stabilisci una catena produttiva di base"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:61
 msgid ""
@@ -90,11 +91,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:66
 msgid "Build tools quickly"
-msgstr ""
+msgstr "Costruisci rapidamente gli strumenti"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:68
 msgid "Make New Tools"
-msgstr ""
+msgstr "Crea nuovi strumenti"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:69
 msgid ""
@@ -107,11 +108,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:74
 msgid "Search the mountains for resources"
-msgstr ""
+msgstr "Controlla le montagne per trovare delle risorse"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:76
 msgid "Build Mines"
-msgstr ""
+msgstr "Costruisci delle miniere"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:77
 msgid ""
@@ -122,11 +123,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:82
 msgid "Explore the surroundings"
-msgstr ""
+msgstr "Esplora i dintorni"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:84
 msgid "Explore Your Surroundings"
-msgstr ""
+msgstr "Esplora i tuoi dintorni"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:85
 msgid ""
@@ -137,11 +138,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:90
 msgid "Expand your territory"
-msgstr ""
+msgstr "Espandi il tuo territorio"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:92
 msgid "Expand Territory"
-msgstr ""
+msgstr "Espandi il territorio"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:93
 msgid ""
@@ -193,12 +194,12 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:115
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:128
 msgid "Pay all tributes to Kalitath"
-msgstr ""
+msgstr "Paga tutti i tributi a Kalitath"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:117
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:130
 msgid "Send Trader To Kalitath"
-msgstr ""
+msgstr "Manda un commerciante da Kalitath"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:118
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:131
@@ -210,7 +211,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:119
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:132
 msgid "The following batches need to be delivered:"
-msgstr ""
+msgstr "Devono essere consegnati i seguenti carichi:"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:120
 msgid "Five batches of five logs each."
@@ -246,11 +247,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:141
 msgid "Defeat Maletus"
-msgstr ""
+msgstr "Sconfiggi Maletus"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:143
 msgid "Defeat Imperial Leader Maletus"
-msgstr ""
+msgstr "Sconfiggi il capo imperiale Maletus"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:144
 msgid "We need to finish the Empire off to have a chance to build a new home."
@@ -258,11 +259,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:149
 msgid "Build a temple to worship Satul"
-msgstr ""
+msgstr "Costruisci un tempio per venerare Satul"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:151
 msgid "Build Temple For Satul"
-msgstr ""
+msgstr "Costruisci un tempio per Satul"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:152
 msgid ""
@@ -284,16 +285,16 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:160
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:542
 msgid "Worship Satul"
-msgstr ""
+msgstr "Venera Satul"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:161
 msgid "Now we need to worship Satul and consecrate at least two priestesses."
-msgstr ""
+msgstr "Ora dobbiamo venerare Satul e consacrare almeno due sacerdotesse."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:166
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:168
 msgid "Defeat Kalitath"
-msgstr ""
+msgstr "Sconfiggi Kalitath"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:169
 msgid ""
@@ -304,13 +305,13 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:178
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:740
 msgid "Defeated!"
-msgstr ""
+msgstr "Sconfitto!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:179
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:741
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:752
 msgid "Sidolus has bad news…"
-msgstr ""
+msgstr "Sidolus ha cattive notizie..."
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:181
@@ -324,7 +325,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:744
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:755
 msgid "You Have Lost"
-msgstr ""
+msgstr "Hai perso"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:183
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:745
@@ -336,11 +337,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:191
 msgid "The Princess’s Memoir"
-msgstr ""
+msgstr "Il diario della Principessa"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:192
 msgid "Jundlina writes her diary"
-msgstr ""
+msgstr "Jundlina scrive il suo diario"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:194
@@ -376,11 +377,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:207
 msgid "New Hope"
-msgstr ""
+msgstr "Nuova speranza"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:208
 msgid "Jundlina continues"
-msgstr ""
+msgstr "Jundlina continua"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:210
@@ -399,11 +400,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:217
 msgid "Planning For The Future"
-msgstr ""
+msgstr "Pianificando il futuro"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:218
 msgid "Jundlina concludes"
-msgstr ""
+msgstr "Jundlina conclude"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:220
@@ -434,11 +435,11 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:242
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:250
 msgid "Jundlina Gives Orders"
-msgstr ""
+msgstr "Jundlina dà ordini"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:235
 msgid "Jundlina decides"
-msgstr ""
+msgstr "Jundlina decide"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:237
@@ -450,7 +451,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:243
 msgid "Jundlina demands"
-msgstr ""
+msgstr "Jundlina esige"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:245
@@ -462,7 +463,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:251
 msgid "Jundlina orders"
-msgstr ""
+msgstr "Jundlina ordina"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:253
@@ -494,7 +495,7 @@ msgstr ""
 #. or Sidolus)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:270
 msgid "Opol Reports Serious Shortages"
-msgstr ""
+msgstr "Opol segnala gravi carenze"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:273
@@ -520,7 +521,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:280
 #, lua-format
 msgid "%s Replies"
-msgstr ""
+msgstr "%s risponde"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:283
@@ -532,7 +533,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:295
 msgid "Opol Makes A Point"
-msgstr ""
+msgstr "Opol dice una cosa importante"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:298
@@ -549,7 +550,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:302
 #, lua-format
 msgid "%s Acknowledges"
-msgstr ""
+msgstr "%s lo riconosce"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:305
@@ -562,7 +563,7 @@ msgstr ""
 #. or Sidolus)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:317
 msgid "Opol Reports Success"
-msgstr ""
+msgstr "Opol riporta il successo"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:320
@@ -585,7 +586,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:390
 #, lua-format
 msgid "%s Cheers"
-msgstr ""
+msgstr "%s esulta"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:327
@@ -611,7 +612,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:342
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:357
 msgid "Jundlina Is Concerned"
-msgstr ""
+msgstr "Jundlina è preoccupata"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:345
@@ -629,7 +630,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:366
 msgid "Allies?"
-msgstr ""
+msgstr "Alleati?"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:369
@@ -641,7 +642,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:372
 msgid "Jundlina Is Cautious"
-msgstr ""
+msgstr "Jundlina è cauta"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:375
@@ -687,7 +688,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:411
 #, lua-format
 msgid "%s Enchanted"
-msgstr ""
+msgstr "%s incantato/a"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:414
@@ -714,7 +715,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:433
 #, lua-format
 msgid "%s Is Excited"
-msgstr ""
+msgstr "%s è emozionato/a"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:436
@@ -727,7 +728,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:445
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:484
 msgid "Tribute Delivered"
-msgstr ""
+msgstr "Tributo consegnato"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:448
@@ -740,7 +741,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:451
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:475
 msgid "Kalitath Appreciates Efforts"
-msgstr ""
+msgstr "Kalitath apprezza gli sforzi"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:454
@@ -753,7 +754,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:460
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:469
 msgid "Empire Defeated"
-msgstr ""
+msgstr "Impero sconfitto"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:463
@@ -773,7 +774,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:493
 msgid "Kalitath Acknowledges"
-msgstr ""
+msgstr "Kalitath lo riconosce"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:496
@@ -785,7 +786,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:499
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:573
 msgid "Jundlina Explains"
-msgstr ""
+msgstr "Jundlina spiega"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:502
@@ -802,7 +803,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:505
 msgid "Kalitath Demands"
-msgstr ""
+msgstr "Kalitath esige"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:508
@@ -815,11 +816,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:514
 msgid "Heretics!"
-msgstr ""
+msgstr "Eretici!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:515
 msgid "Sidolus is very sad"
-msgstr ""
+msgstr "Sidolus è molto triste"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:517
@@ -831,7 +832,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:520
 msgid "Attracting Satul’s Help"
-msgstr ""
+msgstr "Attirare l'aiuto di Satul"
 
 #. TRANSLATORS: Loftomor
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:523
@@ -845,7 +846,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:526
 msgid "Build Temple"
-msgstr ""
+msgstr "Costruisci un tempio"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:529
@@ -860,7 +861,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:536
 msgid "Temple Completed"
-msgstr ""
+msgstr "Tempio completato"
 
 #. TRANSLATORS: Loftomor
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:539
@@ -885,7 +886,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:552
 msgid "May Satul Warm Us"
-msgstr ""
+msgstr "Possa Satul riscaldarci"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:555
@@ -897,7 +898,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:561
 msgid "Jundlina Arrives"
-msgstr ""
+msgstr "Jundlina arriva"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:564
@@ -911,7 +912,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:567
 msgid "Sidolus Relieved"
-msgstr ""
+msgstr "Sidolus sollevato"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:570
@@ -933,7 +934,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:584
 msgid "Jundlina Is Relieved"
-msgstr ""
+msgstr "Jundlina è sollevata"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:587
@@ -951,7 +952,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:591
 msgid "Congratulations"
-msgstr ""
+msgstr "Congratulazioni"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:592
 msgid ""
@@ -963,7 +964,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:598
 msgid "Tribute Demand"
-msgstr ""
+msgstr "Pretesa di tributo"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:601
@@ -990,11 +991,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:611
 msgid "Pitfall!"
-msgstr ""
+msgstr "Trappola!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:612
 msgid "Sidolus is upset"
-msgstr ""
+msgstr "Sidolus è arrabbiato"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:614
@@ -1006,7 +1007,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:617
 msgid "Jundlina Concedes"
-msgstr ""
+msgstr "Jundlina lo ammette"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:620
@@ -1036,7 +1037,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:636
 msgid "Sidolus Agrees"
-msgstr ""
+msgstr "Sidolus è d'accordo"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:639
@@ -1054,7 +1055,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:648
 msgid "Urgent Tribute Demand"
-msgstr ""
+msgstr "Pretesa urgente di tributo"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:651
@@ -1077,11 +1078,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:660
 msgid "Blackmail!"
-msgstr ""
+msgstr "Ricatto!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:661
 msgid "Sidolus is concerned"
-msgstr ""
+msgstr "Sidolus è preoccupato"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:663
@@ -1099,7 +1100,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:673
 msgid "Tribute Started"
-msgstr ""
+msgstr "Tributo iniziato"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:676
@@ -1125,7 +1126,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:686
 msgid "Be Vigilant!"
-msgstr ""
+msgstr "Sii vigile!"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:689
@@ -1143,7 +1144,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:695
 msgid "Keep Delivering"
-msgstr ""
+msgstr "Continua a consegnare"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:698
@@ -1168,7 +1169,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:710
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:722
 msgid "Traitors"
-msgstr ""
+msgstr "Traditori"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:713
@@ -1194,7 +1195,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:734
 msgid "Jundlina’s Suicide"
-msgstr ""
+msgstr "Il suicidio di Jundlina"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:737
@@ -1214,7 +1215,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:751
 msgid "Kalitath Defeated"
-msgstr ""
+msgstr "Kalitath sconfitto"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:754
@@ -1229,19 +1230,19 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_initiate/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Satul’s Initiate"
-msgstr ""
+msgstr "La neofita di Satul"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_priestess/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Priestess"
-msgstr ""
+msgstr "Sacerdotessa"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Scout’s House"
-msgstr ""
+msgstr "Casa dello scout"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:65
@@ -1253,7 +1254,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_temple_of_satul/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Temple of Satul"
-msgstr ""
+msgstr "Tempio di Satul"
 
 #. TRANSLATORS: Completed/Skipped/Did not start consecrating priestess because
 #. ...
@@ -1266,7 +1267,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trader/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Trader"
-msgstr ""
+msgstr "Commerciante"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/init.lua:8
@@ -1293,31 +1294,31 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/coin_copper/init.lua:8
 msgctxt "ware"
 msgid "Copper Coin"
-msgstr ""
+msgstr "Moneta di rame"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/coin_gold/init.lua:8
 msgctxt "ware"
 msgid "Gold Coin"
-msgstr ""
+msgstr "Moneta d'oro"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/coin_silver/init.lua:8
 msgctxt "ware"
 msgid "Silver Coin"
-msgstr ""
+msgstr "Moneta d'argento"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/coin_wood/init.lua:8
 msgctxt "ware"
 msgid "Wood Coin"
-msgstr ""
+msgstr "Moneta di legno"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean market site: Trading post
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:12
 msgctxt "atlanteans_building"
 msgid "Allows sharing goods with other players."
-msgstr ""
+msgstr "Permette di condividere beni con altri giocatori."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:18
 msgctxt "atlanteans_building"
@@ -1331,7 +1332,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:20
 msgctxt "building"
 msgid "Explores unknown territory."
-msgstr ""
+msgstr "Esplora territori sconosciuti"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Temple of
 #. Satul
@@ -1356,7 +1357,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:43
 msgctxt "atlanteans_worker"
 msgid "Takes care of the Temple of Satul."
-msgstr ""
+msgstr "Si prende cura del Tempio di Satul"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:44
 msgctxt "atlanteans_worker"
@@ -1369,7 +1370,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:50
 msgctxt "atlanteans_worker"
 msgid "Worships Satul."
-msgstr ""
+msgstr "Venera Satul."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:51
 msgctxt "atlanteans_worker"

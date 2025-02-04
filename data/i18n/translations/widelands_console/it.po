@@ -9,14 +9,14 @@
 # Filippo Montano, 2020
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
-# Guybrush88 <erpizzo@alice.it>, 2015,2021
+# Guybrush88 <erpizzo@alice.it>, 2015,2021,2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015,2021\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015,2021,2025\n"
 "Language-Team: Italian (http://app.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,14 +28,14 @@ msgstr ""
 #: ../../../../src/wlapplication_messages.cc:52
 #, c-format
 msgid "%1$s|%2$s"
-msgstr ""
+msgstr "%1$s|%2$s"
 
 #: ../../../../src/wlapplication_messages.cc:55
 #: ../../../../src/wlapplication_messages.cc:87
 #: ../../../../src/wlapplication_messages.cc:92
 #: ../../../../src/wlapplication_messages.cc:113
 msgid "FILENAME"
-msgstr ""
+msgstr "NOME DEL FILE"
 
 #. * TRANSLATORS: Used instead of a file name indicating last savegame, replay
 #. or map.
@@ -43,26 +43,26 @@ msgstr ""
 #. punctuation marks
 #: ../../../../src/wlapplication_messages.cc:60
 msgid "last"
-msgstr ""
+msgstr "ultimo/a"
 
 #: ../../../../src/wlapplication_messages.cc:66
 msgid "Usage:"
-msgstr ""
+msgstr "Utilizzo:"
 
 #: ../../../../src/wlapplication_messages.cc:66
 msgid "widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr ""
+msgstr "widelands <option0>=<value0> ... <optionN>=<valueN>"
 
 #: ../../../../src/wlapplication_messages.cc:67
 msgid "widelands <save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "widelands <save.wgf>/<replay.wry>"
 
 #: ../../../../src/wlapplication_messages.cc:69
 #: ../../../../src/wlapplication_messages.cc:71
 #: ../../../../src/wlapplication_messages.cc:76
 #: ../../../../src/wlapplication_messages.cc:237
 msgid "DIRNAME"
-msgstr ""
+msgstr "NOME DELLA DIRECTORY"
 
 #: ../../../../src/wlapplication_messages.cc:69
 msgid "Options:"
@@ -85,13 +85,13 @@ msgstr ""
 
 #: ../../../../src/wlapplication_messages.cc:81
 msgid "Use the specified locale."
-msgstr ""
+msgstr "Utilizza la lingua specificata."
 
 #. * TRANSLATORS: The … is not used on purpose to increase readability on
 #. monospaced terminals
 #: ../../../../src/wlapplication_messages.cc:81
 msgid "[de_DE|sv_SE|...]"
-msgstr ""
+msgstr "[de_DE|sv_SE|...]"
 
 #: ../../../../src/wlapplication_messages.cc:83
 msgid ""
@@ -184,7 +184,7 @@ msgstr ""
 #: ../../../../src/wlapplication_messages.cc:242
 #: ../../../../src/wlapplication_messages.cc:252
 msgid "n"
-msgstr ""
+msgstr "n"
 
 #: ../../../../src/wlapplication_messages.cc:128
 msgid ""
@@ -204,7 +204,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_messages.cc:139
 msgid "Game options:"
-msgstr ""
+msgstr "Opzioni di gioco:"
 
 #: ../../../../src/wlapplication_messages.cc:139
 msgid "Note: New values will be written to the config file."
@@ -288,7 +288,7 @@ msgstr ""
 #: ../../../../src/wlapplication_messages.cc:202
 #: ../../../../src/wlapplication_messages.cc:205
 msgid "[...]"
-msgstr ""
+msgstr "[...]"
 
 #: ../../../../src/wlapplication_messages.cc:183
 msgid "Scroll when the mouse cursor is near the screen edge."
@@ -324,7 +324,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_messages.cc:194
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #: ../../../../src/wlapplication_messages.cc:195
 msgid "Connect to a different metaserver for internet gaming."
@@ -345,7 +345,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_messages.cc:201
 msgid "Name of map author."
-msgstr ""
+msgstr "Nome dell'autore della mappa."
 
 #: ../../../../src/wlapplication_messages.cc:202
 msgid "The last host connected to."
@@ -400,7 +400,7 @@ msgstr "x"
 #. * TRANSLATORS: `x` references a window width placeholder
 #: ../../../../src/wlapplication_messages.cc:225
 msgid "Width `x` of the window in pixel."
-msgstr ""
+msgstr "Larghezza `x` della finestra in pixel."
 
 #. * TRANSLATORS: A placeholder for window height
 #: ../../../../src/wlapplication_messages.cc:228
@@ -410,7 +410,7 @@ msgstr "y"
 #. * TRANSLATORS: `y` references a window height placeholder
 #: ../../../../src/wlapplication_messages.cc:230
 msgid "Height `y` of the window in pixel."
-msgstr ""
+msgstr "Altezza `y` della finestra in pixel."
 
 #: ../../../../src/wlapplication_messages.cc:232
 msgid ""
@@ -462,7 +462,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_messages.cc:258
 msgid "Others:"
-msgstr ""
+msgstr "Altri:"
 
 #: ../../../../src/wlapplication_messages.cc:260
 msgid ""
@@ -476,7 +476,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_messages.cc:264
 msgid "Show this help."
-msgstr ""
+msgstr "Mostra questo aiuto."
 
 #: ../../../../src/wlapplication_messages.cc:265
 msgid "Show this help with all available config options."
@@ -484,7 +484,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_messages.cc:266
 msgid "<save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "<save.wgf>/<replay.wry>"
 
 #: ../../../../src/wlapplication_messages.cc:267
 msgid ""
@@ -497,7 +497,7 @@ msgstr ""
 #: ../../../../src/wlapplication_messages.cc:302
 #, c-format
 msgid "This is Widelands version %s"
-msgstr ""
+msgstr "Questa è la versione %s di Wideland"
 
 #: ../../../../src/wlapplication_messages.cc:360
 msgid ""
