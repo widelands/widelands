@@ -68,6 +68,8 @@ struct WLMessageBox : public Window {
 	/// Handle keypresses
 	bool handle_key(bool down, SDL_Keysym code) override;
 
+	void think() override;
+
 protected:
 	virtual void clicked_ok();
 	virtual void clicked_back();
@@ -76,7 +78,10 @@ private:
 	MBoxType type_;
 	std::unique_ptr<Button> ok_button_, cancel_button_;
 	std::unique_ptr<MultilineTextarea> textarea_;
+	uint32_t start_time_;
 };
 }  // namespace UI
+
+extern unsigned g_message_box_timeout;
 
 #endif  // end of include guard: WL_UI_BASIC_MESSAGEBOX_H
