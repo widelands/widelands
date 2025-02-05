@@ -192,7 +192,7 @@ elif [ "$DISTRO" = "homebrew" ]; then
    done
    if [ -z "$PKGS" ]; then
        echo
-       echo "All dependencies already installed! Nothing to do ..."
+       echo "All dependencies already installed! Nothing to do."
    else
        brew install $@ $PKGS
    fi
