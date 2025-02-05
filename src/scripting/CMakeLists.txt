@@ -240,7 +240,7 @@ wl_library(scripting_logic
     io_filesystem
     io_profile
     logic
-    logic_commands
+    commands
     logic_constants
     logic_filesystem_constants
     logic_game_controller

@@ -334,7 +334,7 @@ wl_library(wui
     io_profile
     logic
     logic_constants
-    logic_commands
+    commands
     logic_exceptions
     logic_filesystem_constants
     logic_game_controller
