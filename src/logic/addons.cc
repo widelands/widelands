@@ -96,6 +96,9 @@ i18n::GenericTextdomain* create_textdomain_for_addon(std::string addon, const st
 
 i18n::GenericTextdomain* create_textdomain_for_map(std::string mapfilename) {
 	if (mapfilename.compare(0, kAddOnDir.size(), kAddOnDir) != 0) {
+		if (mapfilename.compare(0, kDownloadedMapsDirFull.size(), kDownloadedMapsDirFull) == 0) {
+			return new i18n::AddOnTextdomain("websitemaps");
+		}
 		return new i18n::Textdomain("maps");
 	}
 
