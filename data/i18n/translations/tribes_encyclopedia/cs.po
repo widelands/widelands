@@ -218,7 +218,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Balsa wood is an important building material. It is also used to make light "
 "armor. Balsa trees are cut by an experienced woodcutter."
-msgstr "Balsa, míněno balsové dřevo, je důležitým stavebním materiálem. Vyrábí se z ní také lehká zbroj. Balzovník umí pokácet jen zkušená dřevorubkyně."
+msgstr "Balza, míněno balzové dřevo, je důležitým stavebním materiálem. Vyrábí se z ní také lehká zbroj. Balzovník umí pokácet jen zkušená dřevorubkyně."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Ironwood
 #: ../../../../data/tribes/initialization/amazons/units.lua:140
@@ -657,7 +657,7 @@ msgstr "Kácí stromy."
 #: ../../../../data/tribes/initialization/amazons/units.lua:625
 msgctxt "amazons_worker"
 msgid "Harvests special trees: ironwood, rubber and balsa."
-msgstr "Kácí a sklízí vzácné dřeviny na železné dřevo, kaučuk a balsu."
+msgstr "Kácí a sklízí vzácné dřeviny na železné dřevo, kaučuk a balzu."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Jungle Preserver
 #: ../../../../data/tribes/initialization/amazons/units.lua:632
@@ -669,7 +669,7 @@ msgstr "Vysazuje stromy."
 #: ../../../../data/tribes/initialization/amazons/units.lua:639
 msgctxt "amazons_worker"
 msgid "Plants special trees: ironwood, rubber and balsa."
-msgstr "Sází vzácné dřeviny na železné dřevo, kaučuk a balsu."
+msgstr "Sází vzácné dřeviny na železné dřevo, kaučuk a balzu."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Liana Cutter
 #: ../../../../data/tribes/initialization/amazons/units.lua:646
@@ -1330,7 +1330,7 @@ msgctxt "amazons_building"
 msgid ""
 "Harvests rare trees in the surrounding area. Delivers ironwood, balsa and "
 "rubber."
-msgstr "Těží vzácné dřeviny ve svém okolí. Zabezpečuje železné dřevo, balsu a kaučuk."
+msgstr "Těží vzácné dřeviny ve svém okolí. Zabezpečuje železné dřevo, balzu a kaučuk."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree
 #. Cutter's Hut, part 1
@@ -1441,7 +1441,7 @@ msgctxt "amazons_building"
 msgid ""
 "Plants rare trees which are needed by the Amazons, like balsa, rubber and "
 "ironwood."
-msgstr "Vysazuje vzácné dřeviny, které Amazonky potřebují na produkci balsy, kaučuku a železného dřeva."
+msgstr "Vysazuje vzácné dřeviny, které Amazonky potřebují na produkci balzy, kaučuku a železného dřeva."
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Rare Tree
 #. Plantation
@@ -1590,7 +1590,7 @@ msgstr "Dává vybavení pro rekrut a trénuje nové bojovnice."
 #, lua-format
 msgctxt "amazons_building"
 msgid "The initiation site needs %s on average to recruit one soldier."
-msgstr "Iniciační tábor potřebuje v průměru %s na výcvik jedné bojovnice."
+msgstr "Iniciační tábor potřebuje v průměru %s na nábor jedné bojovnice."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Gardening
 #. Center
@@ -16860,10 +16860,10 @@ msgstr[3] "Zvýšeno o %1% bodů za každou další úroveň."
 #: ../../../../data/tribes/scripting/help/worker_help.lua:232
 msgid "The maximum level is %1%."
 msgid_plural "The maximum level is %1%."
-msgstr[0] "Maximální úroveň je %1%."
-msgstr[1] "Maximální úroveň je %1%."
-msgstr[2] "Maximální úroveň je %1%."
-msgstr[3] "Maximální úroveň je %1%."
+msgstr[0] "Nejvyšší úroveň, které lze dosáhnout, je %1%."
+msgstr[1] "Nejvyšší úroveň, které lze dosáhnout, je %1%."
+msgstr[2] "Nejvyšší úroveň, které lze dosáhnout, je %1%."
+msgstr[3] "Nejvyšší úroveň, které lze dosáhnout, je %1%."
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:199
 msgid "Attack"

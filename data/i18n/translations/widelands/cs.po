@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-09 03:20+0000\n"
+"POT-Creation-Date: 2025-02-06 02:52+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Ondřej Itřech, 2020-2021,2024-2025\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -600,7 +600,7 @@ msgstr "Zobrazit moře"
 msgid ""
 "Display separate water bodies with differently coloured overlays to see "
 "which coasts can be connected by shipping routes"
-msgstr ""
+msgstr "Barevně odliší oddělené vodní plochy, aby bylo zřejmé, která pobřeží lze propojit námořní trasou."
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
@@ -664,14 +664,14 @@ msgstr "Opravdu chceš opustit editor?"
 #: ../../../../src/logic/addons.cc:48 ../../../../src/ui_basic/dropdown.cc:358
 #: ../../../../src/ui_basic/dropdown.cc:360
 #: ../../../../src/ui_fsmenu/addons/contact.cc:81
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1909
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1920
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1992
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2000
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2025
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2092
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2171
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2249
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1910
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1921
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1993
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2001
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2026
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2093
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2172
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2250
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:104
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:292
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:566
@@ -743,15 +743,15 @@ msgid ""
 "Author: %3$s\n"
 "Description: %4$s\n"
 "Hint: %5$s\n"
-msgstr ""
+msgstr "Opravdu chceš uveřejnit tuto mapu online?\n\nJméno: %1$s\nInterní pojmenování: %2$s\nAutor: %3$s\nPopis: %4$s\nDalší poznámky: %5$s\n"
 
 #: ../../../../src/editor/editorinteractive.cc:1591
 msgid "Login Error"
-msgstr ""
+msgstr "Chyba přihlášení"
 
 #: ../../../../src/editor/editorinteractive.cc:1596
 msgid "Uploading Add-On…"
-msgstr ""
+msgstr "Nahrávání rozšíření..."
 
 #: ../../../../src/editor/editorinteractive.cc:1597
 msgid "Saving map…"
@@ -765,15 +765,15 @@ msgstr "Chyba při ukládání mapy!"
 
 #: ../../../../src/editor/editorinteractive.cc:1622
 msgid "Packaging add-on…"
-msgstr ""
+msgstr "Balení rozšíření..."
 
 #: ../../../../src/editor/editorinteractive.cc:1673
 msgid "Add-On Generation Error"
-msgstr ""
+msgstr "Chyba vytváření rozšíření"
 
 #: ../../../../src/editor/editorinteractive.cc:1674
 msgid "The add-on could not be written to the disk."
-msgstr ""
+msgstr "Rozšíření nemohlo být zapsáno na disk."
 
 #: ../../../../src/editor/editorinteractive.cc:1681
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:108
@@ -782,15 +782,15 @@ msgstr "Nahrávám..."
 
 #: ../../../../src/editor/editorinteractive.cc:1687
 msgid "Upload Error"
-msgstr ""
+msgstr "Chyba nahrávání"
 
 #: ../../../../src/editor/editorinteractive.cc:1709
 msgid "Success"
-msgstr ""
+msgstr "Úspěšně nahráno"
 
 #: ../../../../src/editor/editorinteractive.cc:1710
 msgid "The add-on was uploaded successfully."
-msgstr ""
+msgstr "Rozšíření bylo úspěšně nahráno."
 
 #: ../../../../src/editor/map_generator.cc:754
 msgid "Random Player"
@@ -1204,7 +1204,7 @@ msgstr "Popis:"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:378
 msgid "Hint (optional):"
-msgstr "Nápověda (volitelné):"
+msgstr "Další poznámky (volitelné):"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:389
 msgid "Tags:"
@@ -1901,7 +1901,7 @@ msgstr "Zkopírovat odkaz do schránky"
 #, c-format
 msgctxt "definitionterm"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces the
@@ -4974,56 +4974,56 @@ msgid ""
 "%s"
 msgstr "Vložené uživatelské jméno nebo heslo jsou nesprávné:\n%s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1351
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1352
 #, c-format
 msgid "Fetching add-ons… (%.1f%%)"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1354
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1355
 msgid "Connecting to the server…"
 msgstr "Připojuji se k serveru..."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1377
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1378
 msgid "Server Connection Error"
 msgstr "Chyba připojení k serveru"
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1379
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1380
 msgid "a networking bug"
 msgstr "chyba síťového připojení"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1380
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1381
 #, c-format
 msgid ""
 "Unable to fetch the list of available add-ons from the server!<br>Error "
 "Message: %s"
 msgstr "Seznam rozšíření dostupných na tomto serveru není přístupný!<br>Chybová zpráva: %s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1536
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1537
 #, c-format
 msgid "Installed (%u)"
 msgstr "Instalováno (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1605
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1606
 msgid "Browse"
 msgstr "Procházet"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1605
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1606
 #, c-format
 msgid "Browse (%u)"
 msgstr "Procházet (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1611
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1612
 #, c-format
 msgid "Upgrade all (%u)"
 msgstr "Aktualizovat vše (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1614
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1615
 msgid "No upgrades are available for your installed add-ons"
 msgstr "Pro nainstalovaná rozšíření nejsou k dispozici žádné aktualizace"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1616
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1617
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
@@ -5032,43 +5032,43 @@ msgstr[1] "Aktualizovat tato %u rozšíření:"
 msgstr[2] "Aktualizovat těchto %u rozšíření:"
 msgstr[3] "Aktualizovat těchto %u rozšíření:"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1621
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1622
 #, c-format
 msgid "• %s"
 msgstr "• %s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1674
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1675
 msgid "Website Maps"
 msgstr "Internetové mapy"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1675
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1676
 #, c-format
 msgid "Website Maps (%u)"
 msgstr "Internetové mapy (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1707
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1708
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which could not be found"
 msgstr "• „%1$s“ vyžaduje rozšíření „%2$s“, které nelze nalézt"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1712
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1713
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is disabled"
 msgstr "• „%1$s“ vyžaduje rozšíření „%2$s“, které je vypnuto."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1719
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1720
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
 msgstr "• „%1$s“ vyžaduje rozšíření „%2$s“, to je v seznamu až pod požadovaným rozšířením"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1747
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1748
 #, c-format
 msgid ""
 "• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
 msgstr "• „%1$s“ vyžaduje nejprve rozšíření „%2$s“ a pak „%3$s“, ale v seznamu jsou uvedena ve špatném pořadí"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1763
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1764
 #, c-format
 msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
@@ -5076,7 +5076,7 @@ msgid ""
 "%s"
 msgstr "Zapnuté rozšíření je poškozené. Se současným nastavením nelze spustit žádnou hru.\nChybová zpráva:\n%s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1780
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1781
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
@@ -5085,60 +5085,60 @@ msgstr[1] "%u chyby závislostí"
 msgstr[2] "%u chyb závislostí"
 msgstr[3] "%u chyb závislostí"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1782
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1783
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
 msgstr "Rozšíření, která způsobují chyby závislostí, nemusí pracovat správně nebo mohou bránit načtení her nebo map."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1910
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1911
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
 msgstr "Rozšíření \"%1$s\" nemůže být nahráno, protože verze (%2$s) je starší než verze dostupná na serveru (%3$s)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1921
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1922
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
 msgstr "Rozšíření \"%1$s\" nemůže být nahráno, protože kategorie této verze (%2$s) není stejná jako kategorie verze dostupné na serveru (%3$s)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1932
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1933
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:54
 msgid "Upload"
 msgstr "Nahrát"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1933
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1934
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
 msgstr "Opravdu chceš nahrát rozšíření „%s“ na server?"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1943
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1944
 #, c-format
 msgid "Uploading ‘%s’…"
 msgstr "Nahrávám „%s“..."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1950
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2078
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2140
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1951
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2079
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2141
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1974
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1975
 #, c-format
 msgid "‘%s’"
 msgstr "‘%s’"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1982
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1983
 #, c-format
 msgid ""
 "The add-on ‘%s’ may not be uploaded to the server because the following "
 "filenames contained in the add-on are not allowed:"
 msgstr "Rozšíření ‘%s’ nelze nahrát na server, protože obsahuje následující nepovolené názvy souborů:"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1986
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1987
 msgid ""
 "Filenames may only contain alphanumeric characters (A-Z, a-z, 0-9) and "
 "simple punctuation (period, hyphen, and underscore; not multiple periods). "
@@ -5146,7 +5146,7 @@ msgid ""
 "exceed 80 characters."
 msgstr "Názvy souborů mohou obsahovat pouze základní písmena a čísla (A-Z, a-z, 0-9) a základní interpunkci (jednoduchou tečku, pomlčku a podtržítko). Další znaky jako třeba mezera nejsou povoleny. Názvy souborů nesmí mít více než 80 znaků."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2001
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2002
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be uploaded to the server.\n"
@@ -5155,7 +5155,7 @@ msgid ""
 "%2$s"
 msgstr "Rozšíření '%1$s' nemohlo být nahráno na server.\n\nChybová zpráva:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2027
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2028
 #, c-format
 msgid ""
 "The map ‘%1$s’ could not be downloaded from the server.\n"
@@ -5164,12 +5164,12 @@ msgid ""
 "%2$s"
 msgstr "Mapu ‘%1$s’ nelze ze servru stáhnout.\n\nChybová zpráva:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2058
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2059
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr "Stahuji „%s“…"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2094
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2095
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -5178,7 +5178,7 @@ msgid ""
 "%2$s"
 msgstr "Rozšíření „%1$s“ se nepodařilo ze serveru stáhnout. Instalace/aktualizace tohoto rozšíření bude přeskočena.\n\nChybové hlášení:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2172
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2173
 #, c-format
 msgid ""
 "The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations will be skipped.\n"
@@ -5187,7 +5187,7 @@ msgid ""
 "%2$s"
 msgstr "Soubory s překladem k rozšíření „%1$s“ se nepodařilo ze serveru stáhnout. Instalace/aktualizace překladu pro toto rozšíření bude přeskočena.\n\nChybové hlášení:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2250
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2251
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr "Požadované rozšíření „%s“ nelze na serveru nalézt."
@@ -5448,17 +5448,17 @@ msgstr "*"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:163
 msgid "Create subdirectory"
-msgstr "Vytvořit novou podadresář"
+msgstr "Vytvořit novou složku"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:172
 msgid "Remove selected map or directory"
-msgstr "Odstranit vybranou mapu nebo adresář"
+msgstr "Odstranit vybranou mapu nebo složku"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:194
 msgid ""
 "The selected internal directory name is used multiple times. All directories"
 " with the same internal name will also share the same display name."
-msgstr "Zvolené jméno vnitřního adresáře je používáno vícekrát. Všechny adresáře se stejným vnitřním jménem budou zobrazeny se stejným jménem."
+msgstr "Zvolené interní jméno adresáře je použito vícekrát. Všechny adresáře se stejným interním jménem se budou zobrazovat se stejným jménem."
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:200
 msgid "Directory Display Name"
@@ -5479,7 +5479,7 @@ msgstr "Název: %s"
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:112
 #, c-format
 msgid "Size: %s"
-msgstr "Velikost: %s"
+msgstr "Rozměr: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:287
 #: ../../../../src/ui_fsmenu/main.cc:454
@@ -6657,7 +6657,7 @@ msgstr "Návrat do nabídky hry jednoho hráče"
 
 #: ../../../../src/ui_fsmenu/loadgame.cc:81
 msgid "Load this game"
-msgstr "Nahrát hru"
+msgstr "Načíst tuto hru"
 
 #: ../../../../src/ui_fsmenu/login_box.cc:37
 #: ../../../../src/ui_fsmenu/main.cc:420
@@ -6754,7 +6754,7 @@ msgstr "Hrát jeden ze začátečnických tutoriálů"
 #: ../../../../src/wui/game_main_menu_save_game.cc:48
 #: ../../../../src/wui/interactive_gamebase.cc:181
 msgid "Load Game"
-msgstr "Nahrát hru"
+msgstr "Načíst hru"
 
 #: ../../../../src/ui_fsmenu/main.cc:380
 msgid "Continue a saved game"
@@ -6976,7 +6976,7 @@ msgstr "Podrobnosti scénáře"
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:132
 #, c-format
 msgid "Hint: %s"
-msgstr "Nápověda: %s"
+msgstr "Doplňující informace: %s"
 
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:170
 msgid "No map selected"
@@ -8619,7 +8619,7 @@ msgstr "Klik"
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr "V závislosti na zvolený nástroj umístit prvek na mapu, nebo zvýšit počet prvků o hodnotu naszavenou v parametru \"Zvýšit/Snížit hodnotu\" nástroje."
+msgstr "Dle zvoleného nástroje umístit odpovídající prvek na mapu, nebo zvýšit počet prvků o hodnotu naszavenou v parametru \"Zvýšit/Snížit hodnotu\" nástroje."
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:1053
@@ -8632,7 +8632,7 @@ msgstr "Shift + klik"
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
-msgstr "V závislosti na zvolený nástroj odebrat prvek z mapy, nebo snížit počet prvků o hodnotu naszavenou v parametru \"Zvýšit/Snížit hodnotu\" nástroje."
+msgstr "Dle zvoleného nástroje odebrat odpovídající prvek z mapy, nebo snížit počet prvků o hodnotu naszavenou v parametru \"Zvýšit/Snížit hodnotu\" nástroje."
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:1058
@@ -11517,7 +11517,7 @@ msgstr "Navýšit o 10 surovin"
 
 #: ../../../../src/wui/warehousewindow.cc:197
 msgid "Configure this building’s economy"
-msgstr "Nastavit hospodaření této budovy"
+msgstr "Nastavení hospodářství této budovy"
 
 #: ../../../../src/wui/warehousewindow.cc:331
 msgid "Wares waiting to be shipped"

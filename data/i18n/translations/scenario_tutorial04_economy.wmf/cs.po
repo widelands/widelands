@@ -798,7 +798,7 @@ msgid ""
 "roads, ferries, or ships, so you can have more than one economy if their "
 "flags are not connected by any means of transportation. In that case, your "
 "separate economies can have different settings for wares."
-msgstr ""
+msgstr "To, že je tlačítko pojmenováno \"Nastavení hospodářství této vlajky/budovy\" má svůj důvod. Hospodářství se skládá z vlajek a budov, spojených cestami, přívozy nebo loďmi, takže lze mít více než jedno hospodářství, pokud všechny vlajky nejsou propojeny některým ze způsobů přepravy. V takovém případě mohou mít různá hospodářství také různá nastavení surovin."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""
