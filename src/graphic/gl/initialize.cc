@@ -261,7 +261,7 @@ SDL_GLContext initialize(
 		handle_unreadable_opengl_version();
 	}
 	log_info("Graphics: OpenGL: Version \"%s\"\n", opengl_version_string);
-#ifndef __EMSCRIPTEN__)  // skip check webgl version anyway it's webgl2
+#ifndef __EMSCRIPTEN__  // skip check webgl version anyway it's webgl2
 	check_version(
 	   opengl_version_string, "OpenGL", _("OpenGL"), 2, 1, handle_unreadable_opengl_version);
 #endif
