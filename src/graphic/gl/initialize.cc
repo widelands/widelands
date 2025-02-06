@@ -261,7 +261,7 @@ SDL_GLContext initialize(
 		handle_unreadable_opengl_version();
 	}
 	log_info("Graphics: OpenGL: Version \"%s\"\n", opengl_version_string);
-#if !defined(__EMSCRIPTEN__)  // skip check webgl version anyway it's webgl2
+#ifndef __EMSCRIPTEN__)  // skip check webgl version anyway it's webgl2
 	check_version(
 	   opengl_version_string, "OpenGL", _("OpenGL"), 2, 1, handle_unreadable_opengl_version);
 #endif
@@ -313,7 +313,7 @@ SDL_GLContext initialize(
 		handle_unreadable_opengl_shading_language();
 	}
 	log_info("Graphics: OpenGL: ShadingLanguage: \"%s\"\n", shading_language_version_string);
-#if !defined(__EMSCRIPTEN__)  // skip check glsl version anyway it's 300 es
+#ifndef __EMSCRIPTEN__  // skip check glsl version anyway it's 300 es
 	check_version(shading_language_version_string, "Shading Language", _("Shading Language"), 1, 20,
 	              handle_unreadable_opengl_shading_language);
 	// also skip glDrawBuffer isn't actually part of GLES2.0, just an extension

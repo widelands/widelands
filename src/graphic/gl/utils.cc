@@ -144,7 +144,7 @@ Program::~Program() {
 }
 
 void Program::build(const std::string& program_name) {
-#if !defined(__EMSCRIPTEN__)
+#ifndef __EMSCRIPTEN__
 	std::string fragment_shader_source = read_file("shaders/" + program_name + ".fp");
 	std::string vertex_shader_source = read_file("shaders/" + program_name + ".vp");
 #else
