@@ -1262,6 +1262,7 @@ TradeID Game::propose_trade(TradeInstance trade) {
 	                           initiator->descr().icon_filename(), _("New trade offer received"),
 	                           format_l(_("You have received a new trade offer from %s."),
 	                                    initiator->owner().get_name()))));
+	Notifications::publish(NoteTradeChanged(id, NoteTradeChanged::Action::kProposed));
 
 	return id;
 }
@@ -1298,6 +1299,7 @@ void Game::accept_trade(const TradeID trade_id, Market& receiver) {
 	                        format_l(_("%1$s has accepted your trade offer at %2$s."),
 	                                 receiver.owner().get_name(), initiator->get_market_name()),
 	                        false);
+	Notifications::publish(NoteTradeChanged(trade_id, NoteTradeChanged::Action::kAccepted));
 }
 
 void Game::reject_trade(const TradeID trade_id) {
@@ -1320,6 +1322,7 @@ void Game::reject_trade(const TradeID trade_id) {
 	}
 
 	trade_agreements_.erase(it);
+	Notifications::publish(NoteTradeChanged(trade_id, NoteTradeChanged::Action::kRejected));
 }
 
 void Game::retract_trade(const TradeID trade_id) {
@@ -1342,6 +1345,7 @@ void Game::retract_trade(const TradeID trade_id) {
 	                                    initiator->owner().get_name()))));
 
 	trade_agreements_.erase(it);
+	Notifications::publish(NoteTradeChanged(trade_id, NoteTradeChanged::Action::kRetracted));
 }
 
 void Game::cancel_trade(TradeID trade_id, bool reached_regular_end, const Player* canceller) {
@@ -1368,6 +1372,7 @@ void Game::cancel_trade(TradeID trade_id, bool reached_regular_end, const Player
 		                       reached_regular_end || canceller != receiver->get_owner());
 	}
 	trade_agreements_.erase(trade_id);
+	Notifications::publish(NoteTradeChanged(trade_id, reached_regular_end ? NoteTradeChanged::Action::kCompleted : NoteTradeChanged::Action::kCancelled));
 }
 
 std::vector<TradeID> Game::find_trade_offers(PlayerNumber receiver) const {
@@ -1398,13 +1403,9 @@ std::vector<TradeID> Game::find_active_trades(PlayerNumber player) const {
 	std::vector<TradeID> result;
 	for (const auto& pair : trade_agreements_) {
 		if (pair.second.state == TradeInstance::State::kRunning) {
-			if (pair.second.receiving_player != player) {
-				if (Market* market = pair.second.initiator.get(*this);
-				    market == nullptr || market->owner().player_number() != player) {
-					continue;
-				}
+			if (pair.second.receiving_player == player || pair.second.sending_player == player) {
+				result.push_back(pair.first);
 			}
-			result.push_back(pair.first);
 		}
 	}
 	return result;

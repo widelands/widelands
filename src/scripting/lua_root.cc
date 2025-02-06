@@ -325,6 +325,8 @@ int LuaGame::set_allow_naval_warfare(lua_State* L) {
       - **initiator** (:class:`wl.map.Market`): The market that initiated this trade.
       - **receiver** (:class:`wl.map.Market`): The market that receives this trade,
          or :const:`nil` if the trade has not been accepted yet.
+      - **sending_player** (:class:`integer`): The :attr:`wl.game.Player.number`
+         of the player who initiated the trade.
       - **receiving_player** (:class:`integer`): The :attr:`wl.game.Player.number`
          of the player who receives the trade.
       - **items_to_send** (:class:`table`): A table of ware names to amounts of wares to send.
@@ -473,6 +475,10 @@ void LuaGame::push_trade(lua_State* L, Widelands::TradeID id) {
 	if (LuaMaps::upcasted_map_object_to_lua(L, trade.receiver.get(game)) == 0) {
 		lua_pushnil(L);
 	}
+	lua_rawset(L, -3);
+
+	lua_pushstring(L, "sending_player");
+	lua_pushuint32(L, trade.sending_player);
 	lua_rawset(L, -3);
 
 	lua_pushstring(L, "receiving_player");

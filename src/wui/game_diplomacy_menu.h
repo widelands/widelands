@@ -19,6 +19,8 @@
 #ifndef WL_WUI_GAME_DIPLOMACY_MENU_H
 #define WL_WUI_GAME_DIPLOMACY_MENU_H
 
+#include <memory>
+
 #include "logic/game.h"
 #include "ui_basic/box.h"
 #include "ui_basic/icon.h"
@@ -67,6 +69,9 @@ private:
 	std::vector<Widelands::TradeID> cached_trades_offers_;
 	std::vector<Widelands::TradeID> cached_trades_proposed_;
 	std::vector<Widelands::TradeID> cached_trades_active_;
+	bool needs_update_{false};
+
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteTradeChanged>> trade_changed_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_DIPLOMACY_MENU_H

@@ -19,7 +19,6 @@
 #include "wui/marketwindow.h"
 
 #include "graphic/font_handler.h"
-#include "graphic/text_layout.h"
 #include "ui_basic/box.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
@@ -302,13 +301,13 @@ public:
 		nextupdate_ = ibase_.egbase().get_gametime() + kUpdateTimeInGametimeMs;
 		MutexLock m(MutexLock::ID::kObjects);
 
-		Widelands::Market* market = market_.get(ibase_.egbase());
-		if (market == nullptr) {
+		Widelands::Market* own_market = market_.get(ibase_.egbase());
+		if (own_market == nullptr) {
 			return;
 		}
 
-		const auto trade = market->trade_orders().find(trade_id_);
-		if (trade == market->trade_orders().end()) {
+		const auto trade = own_market->trade_orders().find(trade_id_);
+		if (trade == own_market->trade_orders().end()) {
 			return;
 		}
 
@@ -316,58 +315,9 @@ public:
 		if (other_market == nullptr) {
 			return;
 		}
+
 		const Widelands::TradeInstance& agreement = ibase_.game().get_trade(trade_id_);
-		const bool is_receiver = agreement.initiator == other_market;
-
-		std::string infotext("<rt><p>");
-		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading,
-		                        format_l(_("Trade with %s"), other_market->owner().get_name()));
-
-		infotext += "</p><p>";
-		infotext += as_font_tag(
-		   UI::FontStyle::kWuiInfoPanelParagraph,
-		   format_l(ngettext("%d batch total", "%d batches total", trade->second.initial_num_batches),
-		            trade->second.initial_num_batches));
-
-		infotext += "</p><p>";
-		infotext += as_font_tag(
-		   UI::FontStyle::kWuiInfoPanelParagraph,
-		   format_l(ngettext("%d batch sent", "%d batches sent", trade->second.num_shipped_batches),
-		            trade->second.num_shipped_batches));
-
-		infotext += "</p><p>";
-		infotext += as_font_tag(
-		   UI::FontStyle::kWuiInfoPanelParagraph,
-		   format_l(ngettext("%d batch remaining", "%d batches remaining",
-		                     trade->second.initial_num_batches - trade->second.num_shipped_batches),
-		            trade->second.initial_num_batches - trade->second.num_shipped_batches));
-
-		infotext += "</p>";
-		infotext += as_vspace(kSpacing);
-		infotext += "<p>";
-		infotext += as_font_tag(
-		   UI::FontStyle::kWuiInfoPanelHeading, can_act_ ? _("You send:") : _("Player sends:"));
-		for (const auto& pair : is_receiver ? agreement.items_to_receive : agreement.items_to_send) {
-			infotext += as_listitem(
-			   format_l(_("%1$i× %2$s"), pair.second,
-			            ibase_.egbase().descriptions().get_ware_descr(pair.first)->descname()),
-			   UI::FontStyle::kWuiInfoPanelParagraph);
-		}
-
-		infotext += "</p>";
-		infotext += as_vspace(kSpacing);
-		infotext += "<p>";
-		infotext += as_font_tag(
-		   UI::FontStyle::kWuiInfoPanelHeading, can_act_ ? _("You receive:") : _("Player receives:"));
-		for (const auto& pair : is_receiver ? agreement.items_to_send : agreement.items_to_receive) {
-			infotext += as_listitem(
-			   format_l(_("%1$i× %2$s"), pair.second,
-			            ibase_.egbase().descriptions().get_ware_descr(pair.first)->descname()),
-			   UI::FontStyle::kWuiInfoPanelParagraph);
-		}
-
-		infotext += "</p></rt>";
-		info_.set_text(infotext);
+		info_.set_text(agreement.format_richtext(ibase_.egbase(), own_market->owner().player_number(), can_act_, own_market, other_market, trade->second.num_shipped_batches));
 	}
 
 private:
@@ -430,7 +380,7 @@ void MarketWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 		   new TradeAgreementTab(*get_tabs(), *ibase(), *market, pair.first,
 		                         ibase()->can_act(market->owner().player_number()),
 		                         priority_collapsed()),
-		   _("Propose Trade"));
+		   _("Active Trade"));
 	}
 
 	think();

@@ -20,7 +20,6 @@
 
 #include "base/time_string.h"
 #include "graphic/font_handler.h"
-#include "graphic/text_layout.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/market.h"
 #include "logic/player.h"
@@ -187,6 +186,9 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 	diplomacy_box_.add_space(kSpacing);
 	diplomacy_box_.add(&actions_hbox_, UI::Box::Resizing::kExpandBoth);
 
+	trade_changed_subscriber_ = Notifications::subscribe<Widelands::NoteTradeChanged>(
+	   [this](const Widelands::NoteTradeChanged& /*note*/) { needs_update_ = true; });
+
 	if (iplayer_ != nullptr) {
 		diplomacy_box_.add_space(kSpacing);
 		diplomacy_box_.add(&trades_tabs_, UI::Box::Resizing::kExpandBoth);
@@ -213,7 +215,8 @@ void GameDiplomacyMenu::update(bool always) {
 }
 
 void GameDiplomacyMenu::think() {
-	update(false);
+	update(needs_update_);
+	needs_update_ = false;
 	initialization_complete();
 }
 
@@ -458,40 +461,8 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 		buttons->add_space(kSpacing);
 		buttons->add(yes, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-		std::string infotext("<rt><p>");
-		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading,
-		                        format_l(_("Trade offer from %s"), other_market->owner().get_name()));
-
-		infotext += "</p><p>";
-		infotext += as_font_tag(
-		   UI::FontStyle::kWuiInfoPanelParagraph,
-		   format_l(ngettext("%d batch", "%d batches", trade.num_batches), trade.num_batches));
-
-		infotext += "</p>";
-		infotext += as_vspace(kSpacing);
-		infotext += "<p>";
-		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, _("You send:"));
-		for (const auto& pair : trade.items_to_receive) {
-			infotext += as_listitem(
-			   format_l(_("%1$i× %2$s"), pair.second,
-			            iplayer_->egbase().descriptions().get_ware_descr(pair.first)->descname()),
-			   UI::FontStyle::kWuiInfoPanelParagraph);
-		}
-
-		infotext += "</p>";
-		infotext += as_vspace(kSpacing);
-		infotext += "<p>";
-		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, _("You receive:"));
-		for (const auto& pair : trade.items_to_send) {
-			infotext += as_listitem(
-			   format_l(_("%1$i× %2$s"), pair.second,
-			            iplayer_->egbase().descriptions().get_ware_descr(pair.first)->descname()),
-			   UI::FontStyle::kWuiInfoPanelParagraph);
-		}
-		infotext += "</p></rt>";
-
 		box->add(new UI::MultilineTextarea(
-		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui, infotext,
+		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui, trade.format_richtext(igbase_.egbase(), iplayer_->player_number(), true, nullptr, other_market, 0),
 		            UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
 		            UI::MultilineTextarea::ScrollMode::kNoScrolling),
 		         UI::Box::Resizing::kExpandBoth);
@@ -529,9 +500,8 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 	MutexLock m(MutexLock::ID::kObjects);
 	for (Widelands::TradeID trade_id : trades) {
 		const Widelands::TradeInstance& trade = iplayer_->game().get_trade(trade_id);
-		const Widelands::Player& other_player = iplayer_->egbase().player(trade.receiving_player);
-		const Widelands::Market* market = trade.initiator.get(iplayer_->egbase());
-		if (market == nullptr) {
+		const Widelands::Market* own_market = trade.initiator.get(iplayer_->egbase());
+		if (own_market == nullptr) {
 			continue;
 		}
 
@@ -547,8 +517,8 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 		   buttons, "cancel", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
 		   g_image_cache->get("images/wui/menu_abort.png"), _("Retract this trade offer"));
 
-		go_to->sigclicked.connect([this, market]() {
-			iplayer_->map_view()->scroll_to_field(market->get_position(), MapView::Transition::Smooth);
+		go_to->sigclicked.connect([this, own_market]() {
+			iplayer_->map_view()->scroll_to_field(own_market->get_position(), MapView::Transition::Smooth);
 		});
 		cancel->sigclicked.connect([this, trade_id]() {
 			iplayer_->game().send_player_trade_action(
@@ -559,44 +529,8 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 		buttons->add_space(kSpacing);
 		buttons->add(go_to, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-		std::string infotext("<rt><p>");
-		infotext += as_font_tag(
-		   UI::FontStyle::kWuiInfoPanelHeading,
-		   format_l(
-		      /** TRANSLATORS: "From" is the market's name, and "to" is the receiving player's name */
-		      _("Trade offer from %1$s to %2$s"), market->get_market_name(),
-		      other_player.get_name()));
-
-		infotext += "</p><p>";
-		infotext += as_font_tag(
-		   UI::FontStyle::kWuiInfoPanelParagraph,
-		   format_l(ngettext("%d batch", "%d batches", trade.num_batches), trade.num_batches));
-
-		infotext += "</p>";
-		infotext += as_vspace(kSpacing);
-		infotext += "<p>";
-		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, _("You send:"));
-		for (const auto& pair : trade.items_to_send) {
-			infotext += as_listitem(
-			   format_l(_("%1$i× %2$s"), pair.second,
-			            iplayer_->egbase().descriptions().get_ware_descr(pair.first)->descname()),
-			   UI::FontStyle::kWuiInfoPanelParagraph);
-		}
-
-		infotext += "</p>";
-		infotext += as_vspace(kSpacing);
-		infotext += "<p>";
-		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, _("You receive:"));
-		for (const auto& pair : trade.items_to_receive) {
-			infotext += as_listitem(
-			   format_l(_("%1$i× %2$s"), pair.second,
-			            iplayer_->egbase().descriptions().get_ware_descr(pair.first)->descname()),
-			   UI::FontStyle::kWuiInfoPanelParagraph);
-		}
-		infotext += "</p></rt>";
-
 		box->add(new UI::MultilineTextarea(
-		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui, infotext,
+		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui, trade.format_richtext(igbase_.egbase(), iplayer_->player_number(), true, own_market, nullptr, 0),
 		            UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
 		            UI::MultilineTextarea::ScrollMode::kNoScrolling),
 		         UI::Box::Resizing::kExpandBoth);
@@ -641,10 +575,8 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 			continue;
 		}
 
-		bool is_receiver = false;
 		if (trade.receiving_player == iplayer_->player_number()) {
 			std::swap(own_market, other_market);
-			is_receiver = true;
 		}
 
 		const int batches_sent = own_market->trade_orders().at(trade_id).num_shipped_batches;
@@ -675,55 +607,8 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		buttons->add_space(kSpacing);
 		buttons->add(go_to, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-		std::string infotext("<rt><p>");
-		infotext += as_font_tag(
-		   UI::FontStyle::kWuiInfoPanelHeading,
-		   format_l(
-		      /** TRANSLATORS: "At" is the market's name, and "with" is the receiving player's name */
-		      _("Trade agreement at %1$s with %2$s"), own_market->get_market_name(),
-		      other_market->owner().get_name()));
-
-		infotext += "</p><p>";
-		infotext += as_font_tag(
-		   UI::FontStyle::kWuiInfoPanelParagraph,
-		   format_l(ngettext("%d batch", "%d batches", trade.num_batches), trade.num_batches));
-
-		infotext += "</p><p>";
-		infotext += as_font_tag(
-		   UI::FontStyle::kWuiInfoPanelParagraph,
-		   format_l(ngettext("%d batch sent", "%d batches sent", batches_sent), batches_sent));
-
-		infotext += "</p><p>";
-		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
-		                        format_l(ngettext("%d batch remaining", "%d batches remaining",
-		                                          trade.num_batches - batches_sent),
-		                                 trade.num_batches - batches_sent));
-
-		infotext += "</p>";
-		infotext += as_vspace(kSpacing);
-		infotext += "<p>";
-		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, _("You send:"));
-		for (const auto& pair : is_receiver ? trade.items_to_receive : trade.items_to_send) {
-			infotext += as_listitem(
-			   format_l(_("%1$i× %2$s"), pair.second,
-			            iplayer_->egbase().descriptions().get_ware_descr(pair.first)->descname()),
-			   UI::FontStyle::kWuiInfoPanelParagraph);
-		}
-
-		infotext += "</p>";
-		infotext += as_vspace(kSpacing);
-		infotext += "<p>";
-		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, _("You receive:"));
-		for (const auto& pair : is_receiver ? trade.items_to_send : trade.items_to_receive) {
-			infotext += as_listitem(
-			   format_l(_("%1$i× %2$s"), pair.second,
-			            iplayer_->egbase().descriptions().get_ware_descr(pair.first)->descname()),
-			   UI::FontStyle::kWuiInfoPanelParagraph);
-		}
-		infotext += "</p></rt>";
-
 		box->add(new UI::MultilineTextarea(
-		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui, infotext,
+		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui, trade.format_richtext(igbase_.egbase(), iplayer_->player_number(), true, own_market, other_market, batches_sent),
 		            UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
 		            UI::MultilineTextarea::ScrollMode::kNoScrolling),
 		         UI::Box::Resizing::kExpandBoth);
