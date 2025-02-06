@@ -22,7 +22,7 @@
 
 #include "base/wexception.h"
 
-#if defined(__EMSCRIPTEN__)
+#ifdef __EMSCRIPTEN__
 #include <emscripten.h>
 EM_ASYNC_JS(void, __sync_em_fs, (), {
 	// clang-format off
@@ -37,7 +37,7 @@ EM_ASYNC_JS(void, __sync_em_fs, (), {
 
 void StreamWrite::flush() {
 	// no-op as default implementation
-#if defined( __EMSCRIPTEN__ ) // but say js to store changes in indexeddb
+#ifdef __EMSCRIPTEN__ // but say js to store changes in indexeddb
 	__sync_em_fs();
 #endif
 }
