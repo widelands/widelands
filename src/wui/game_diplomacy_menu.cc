@@ -462,7 +462,9 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 		buttons->add(yes, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 		box->add(new UI::MultilineTextarea(
-		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui, trade.format_richtext(igbase_.egbase(), iplayer_->player_number(), true, nullptr, other_market, 0),
+		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui,
+		            trade.format_richtext(
+		               igbase_.egbase(), iplayer_->player_number(), true, nullptr, other_market, 0),
 		            UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
 		            UI::MultilineTextarea::ScrollMode::kNoScrolling),
 		         UI::Box::Resizing::kExpandBoth);
@@ -518,7 +520,8 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 		   g_image_cache->get("images/wui/menu_abort.png"), _("Retract this trade offer"));
 
 		go_to->sigclicked.connect([this, own_market]() {
-			iplayer_->map_view()->scroll_to_field(own_market->get_position(), MapView::Transition::Smooth);
+			iplayer_->map_view()->scroll_to_field(
+			   own_market->get_position(), MapView::Transition::Smooth);
 		});
 		cancel->sigclicked.connect([this, trade_id]() {
 			iplayer_->game().send_player_trade_action(
@@ -530,7 +533,9 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 		buttons->add(go_to, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 		box->add(new UI::MultilineTextarea(
-		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui, trade.format_richtext(igbase_.egbase(), iplayer_->player_number(), true, own_market, nullptr, 0),
+		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui,
+		            trade.format_richtext(
+		               igbase_.egbase(), iplayer_->player_number(), true, own_market, nullptr, 0),
 		            UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
 		            UI::MultilineTextarea::ScrollMode::kNoScrolling),
 		         UI::Box::Resizing::kExpandBoth);
@@ -608,7 +613,9 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		buttons->add(go_to, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 		box->add(new UI::MultilineTextarea(
-		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui, trade.format_richtext(igbase_.egbase(), iplayer_->player_number(), true, own_market, other_market, batches_sent),
+		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui,
+		            trade.format_richtext(igbase_.egbase(), iplayer_->player_number(), true,
+		                                  own_market, other_market, batches_sent),
 		            UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
 		            UI::MultilineTextarea::ScrollMode::kNoScrolling),
 		         UI::Box::Resizing::kExpandBoth);

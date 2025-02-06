@@ -317,7 +317,9 @@ public:
 		}
 
 		const Widelands::TradeInstance& agreement = ibase_.game().get_trade(trade_id_);
-		info_.set_text(agreement.format_richtext(ibase_.egbase(), own_market->owner().player_number(), can_act_, own_market, other_market, trade->second.num_shipped_batches));
+		info_.set_text(agreement.format_richtext(ibase_.egbase(), own_market->owner().player_number(),
+		                                         can_act_, own_market, other_market,
+		                                         trade->second.num_shipped_batches));
 	}
 
 private:

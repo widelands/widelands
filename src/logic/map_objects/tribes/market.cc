@@ -453,7 +453,12 @@ void Market::log_general_info(const EditorGameBase& egbase) const {
 	}
 }
 
-std::string TradeInstance::format_richtext(const EditorGameBase& egbase, const PlayerNumber iplayer, const bool can_act, const Widelands::Market* own_market, const Widelands::Market* other_market, const int batches_sent) const {
+std::string TradeInstance::format_richtext(const EditorGameBase& egbase,
+                                           const PlayerNumber iplayer,
+                                           const bool can_act,
+                                           const Widelands::Market* own_market,
+                                           const Widelands::Market* other_market,
+                                           const int batches_sent) const {
 	constexpr int16_t kSpacing = 4;
 	assert((iplayer == receiving_player) ^ (iplayer == sending_player));
 	const bool is_receiver = iplayer == receiving_player;
@@ -463,9 +468,9 @@ std::string TradeInstance::format_richtext(const EditorGameBase& egbase, const P
 		infotext += as_font_tag(
 		   UI::FontStyle::kWuiInfoPanelHeading,
 		   format_l(
-			  /** TRANSLATORS: "At" is the market's name, and "with" is the receiving player's name */
-			  _("Trade agreement at %1$s with %2$s"), own_market->get_market_name(),
-			  other_market->owner().get_name()));
+		      /** TRANSLATORS: "At" is the market's name, and "with" is the receiving player's name */
+		      _("Trade agreement at %1$s with %2$s"), own_market->get_market_name(),
+		      other_market->owner().get_name()));
 	} else if (is_receiver) {  // Offered trade
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading,
 		                        format_l(_("Trade offer from %s"), other_market->owner().get_name()));
@@ -479,43 +484,45 @@ std::string TradeInstance::format_richtext(const EditorGameBase& egbase, const P
 	}
 
 	infotext += "</p><p>";
-	infotext += as_font_tag(
-	   UI::FontStyle::kWuiInfoPanelParagraph,
-	   format_l(ngettext("%d batch", "%d batches", num_batches), num_batches));
+	infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
+	                        format_l(ngettext("%d batch", "%d batches", num_batches), num_batches));
 
 	if (state == State::kRunning) {
 		infotext += "</p><p>";
-		infotext += as_font_tag(
-		   UI::FontStyle::kWuiInfoPanelParagraph,
-		   format_l(ngettext("%d batch delivered", "%d batches delivered", batches_sent), batches_sent));
+		infotext +=
+		   as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
+		               format_l(ngettext("%d batch delivered", "%d batches delivered", batches_sent),
+		                        batches_sent));
 
 		infotext += "</p><p>";
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
-			                    format_l(ngettext("%d batch remaining", "%d batches remaining",
-			                                      num_batches - batches_sent),
-			                             num_batches - batches_sent));
+		                        format_l(ngettext("%d batch remaining", "%d batches remaining",
+		                                          num_batches - batches_sent),
+		                                 num_batches - batches_sent));
 	}
 
 	infotext += "</p>";
 	infotext += as_vspace(kSpacing);
 	infotext += "<p>";
-	infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, can_act ? _("You send:") : _("Player sends:"));
+	infotext += as_font_tag(
+	   UI::FontStyle::kWuiInfoPanelHeading, can_act ? _("You send:") : _("Player sends:"));
 	for (const auto& pair : is_receiver ? items_to_receive : items_to_send) {
-		infotext += as_listitem(
-		   format_l(_("%1$i× %2$s"), pair.second,
-		            egbase.descriptions().get_ware_descr(pair.first)->descname()),
-		   UI::FontStyle::kWuiInfoPanelParagraph);
+		infotext +=
+		   as_listitem(format_l(_("%1$i× %2$s"), pair.second,
+		                        egbase.descriptions().get_ware_descr(pair.first)->descname()),
+		               UI::FontStyle::kWuiInfoPanelParagraph);
 	}
 
 	infotext += "</p>";
 	infotext += as_vspace(kSpacing);
 	infotext += "<p>";
-	infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, can_act ? _("You receive:") : _("Player receives:"));
+	infotext += as_font_tag(
+	   UI::FontStyle::kWuiInfoPanelHeading, can_act ? _("You receive:") : _("Player receives:"));
 	for (const auto& pair : is_receiver ? items_to_send : items_to_receive) {
-		infotext += as_listitem(
-		   format_l(_("%1$i× %2$s"), pair.second,
-		            egbase.descriptions().get_ware_descr(pair.first)->descname()),
-		   UI::FontStyle::kWuiInfoPanelParagraph);
+		infotext +=
+		   as_listitem(format_l(_("%1$i× %2$s"), pair.second,
+		                        egbase.descriptions().get_ware_descr(pair.first)->descname()),
+		               UI::FontStyle::kWuiInfoPanelParagraph);
 	}
 	infotext += "</p></rt>";
 

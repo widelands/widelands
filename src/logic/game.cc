@@ -1372,7 +1372,9 @@ void Game::cancel_trade(TradeID trade_id, bool reached_regular_end, const Player
 		                       reached_regular_end || canceller != receiver->get_owner());
 	}
 	trade_agreements_.erase(trade_id);
-	Notifications::publish(NoteTradeChanged(trade_id, reached_regular_end ? NoteTradeChanged::Action::kCompleted : NoteTradeChanged::Action::kCancelled));
+	Notifications::publish(NoteTradeChanged(trade_id, reached_regular_end ?
+	                                                     NoteTradeChanged::Action::kCompleted :
+	                                                     NoteTradeChanged::Action::kCancelled));
 }
 
 std::vector<TradeID> Game::find_trade_offers(PlayerNumber receiver) const {

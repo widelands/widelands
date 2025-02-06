@@ -50,7 +50,12 @@ struct TradeInstance {
 	BillOfMaterials items_to_receive;
 	int num_batches{0};
 
-	[[nodiscard]] std::string format_richtext(const EditorGameBase& egbase, PlayerNumber iplayer, bool can_act, const Widelands::Market* own_market, const Widelands::Market* other_market, int batches_sent) const;
+	[[nodiscard]] std::string format_richtext(const EditorGameBase& egbase,
+	                                          PlayerNumber iplayer,
+	                                          bool can_act,
+	                                          const Widelands::Market* own_market,
+	                                          const Widelands::Market* other_market,
+	                                          int batches_sent) const;
 };
 
 enum class TradeAction : uint8_t {
@@ -63,13 +68,20 @@ enum class TradeAction : uint8_t {
 struct NoteTradeChanged {
 	CAN_BE_SENT_AS_NOTE(NoteId::TradeChanged)
 
-	enum class Action { kProposed, kAccepted, kRejected, kRetracted, kCancelled, kCompleted, kWareArrived };
+	enum class Action {
+		kProposed,
+		kAccepted,
+		kRejected,
+		kRetracted,
+		kCancelled,
+		kCompleted,
+		kWareArrived
+	};
 
 	TradeID id;
 	Action action;
 
-	NoteTradeChanged(TradeID init_id, Action a)
-	   : id(init_id), action(a) {
+	NoteTradeChanged(TradeID init_id, Action a) : id(init_id), action(a) {
 	}
 };
 

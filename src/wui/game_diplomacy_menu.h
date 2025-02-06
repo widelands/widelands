@@ -71,7 +71,8 @@ private:
 	std::vector<Widelands::TradeID> cached_trades_active_;
 	bool needs_update_{false};
 
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteTradeChanged>> trade_changed_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteTradeChanged>>
+	   trade_changed_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_DIPLOMACY_MENU_H
