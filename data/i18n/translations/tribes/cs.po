@@ -1615,7 +1615,7 @@ msgstr "Chata na těžbu vzácných dřevin"
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:42
 msgid "harvesting balsa"
-msgstr "sklízení balsy"
+msgstr "sklízení balzy"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
@@ -8234,7 +8234,7 @@ msgstr "Válečná sekera"
 #: ../../../../data/tribes/wares/balsa/init.lua:8
 msgctxt "ware"
 msgid "Balsa"
-msgstr "Balsa"
+msgstr "Balza"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/barley/init.lua:8

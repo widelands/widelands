@@ -766,32 +766,32 @@ msgstr "Možná ti neuniklo, že popis hlavní budovy je trochu odlišný. To je
 msgid ""
 "The small crowns beside the name mark it as your headquarters. As you play "
 "Widelands, you will see three kinds of warehouses, marked by little icons:"
-msgstr ""
+msgstr "Malá koruna vedle jména je značkou pro hlavní budovu. V průběhu hry se můžeš setkat s třemi druhy skladů, mají tyto značky:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:506
 msgid ""
 "The headquarters where you usually start the game. It is marked by small "
 "crowns: ♔"
-msgstr ""
+msgstr "Hlavní budova, s kterou obvykle zahajuješ hru, je označena malou korunou: ♔"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:507
 msgid ""
 "Plain warehouses that simply hold wares and workers to keep them distributed"
 " all over your territory. They are marked by small houses: ⟰"
-msgstr ""
+msgstr "Obyčejný sklad jednoduše uchovává suroviny a pracovníky tak, aby byli k dispozici v různých částech tvého území. Ten je označen malým domkem: ⟰"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:508
 msgid ""
 "Ports that you’ll use in seafaring. They don’t only store your wares and "
 "workers, but can also load them on your ships to send them across the seas. "
 "They are marked by small anchors: ⚓"
-msgstr ""
+msgstr "Přístav, který lze využít na mořeplavbu, suroviny a pracovníky pouze neuchovává, ale může je také nalodit a poslat přes moře. Ten je označen malou kotvou: ⚓"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:509
 msgid ""
 "All of them are assigned names automatically that match the tribe, but you "
 "can change their names to your liking too."
-msgstr ""
+msgstr "Všem skladům je podle kmene automaticky přiděleno jméno, to ale může být libovolně změno."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
 msgid "Change the name of your little village"

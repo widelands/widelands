@@ -600,7 +600,7 @@ msgstr "Zobrazit moře"
 msgid ""
 "Display separate water bodies with differently coloured overlays to see "
 "which coasts can be connected by shipping routes"
-msgstr ""
+msgstr "Barevně odliší oddělené vodní plochy, aby bylo zřejmé, která pobřeží lze propojit námořní trasou."
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
@@ -743,15 +743,15 @@ msgid ""
 "Author: %3$s\n"
 "Description: %4$s\n"
 "Hint: %5$s\n"
-msgstr ""
+msgstr "Opravdu chceš uveřejnit tuto mapu online?\n\nJméno: %1$s\nInterní pojmenování: %2$s\nAutor: %3$s\nPopis: %4$s\nDalší poznámky: %5$s\n"
 
 #: ../../../../src/editor/editorinteractive.cc:1591
 msgid "Login Error"
-msgstr ""
+msgstr "Chyba přihlášení"
 
 #: ../../../../src/editor/editorinteractive.cc:1596
 msgid "Uploading Add-On…"
-msgstr ""
+msgstr "Nahrávání rozšíření..."
 
 #: ../../../../src/editor/editorinteractive.cc:1597
 msgid "Saving map…"
@@ -765,15 +765,15 @@ msgstr "Chyba při ukládání mapy!"
 
 #: ../../../../src/editor/editorinteractive.cc:1622
 msgid "Packaging add-on…"
-msgstr ""
+msgstr "Balení rozšíření..."
 
 #: ../../../../src/editor/editorinteractive.cc:1673
 msgid "Add-On Generation Error"
-msgstr ""
+msgstr "Chyba vytváření rozšíření"
 
 #: ../../../../src/editor/editorinteractive.cc:1674
 msgid "The add-on could not be written to the disk."
-msgstr ""
+msgstr "Rozšíření nemohlo být zapsáno na disk."
 
 #: ../../../../src/editor/editorinteractive.cc:1681
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:108
@@ -782,15 +782,15 @@ msgstr "Nahrávám..."
 
 #: ../../../../src/editor/editorinteractive.cc:1687
 msgid "Upload Error"
-msgstr ""
+msgstr "Chyba nahrávání"
 
 #: ../../../../src/editor/editorinteractive.cc:1709
 msgid "Success"
-msgstr ""
+msgstr "Úspěšně nahráno"
 
 #: ../../../../src/editor/editorinteractive.cc:1710
 msgid "The add-on was uploaded successfully."
-msgstr ""
+msgstr "Rozšíření bylo úspěšně nahráno."
 
 #: ../../../../src/editor/map_generator.cc:754
 msgid "Random Player"
@@ -1204,7 +1204,7 @@ msgstr "Popis:"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:378
 msgid "Hint (optional):"
-msgstr "Nápověda (volitelné):"
+msgstr "Další poznámky (volitelné):"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:389
 msgid "Tags:"
@@ -1901,7 +1901,7 @@ msgstr "Zkopírovat odkaz do schránky"
 #, c-format
 msgctxt "definitionterm"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces the
@@ -5448,17 +5448,17 @@ msgstr "*"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:163
 msgid "Create subdirectory"
-msgstr "Vytvořit novou podadresář"
+msgstr "Vytvořit novou složku"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:172
 msgid "Remove selected map or directory"
-msgstr "Odstranit vybranou mapu nebo adresář"
+msgstr "Odstranit vybranou mapu nebo složku"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:194
 msgid ""
 "The selected internal directory name is used multiple times. All directories"
 " with the same internal name will also share the same display name."
-msgstr "Zvolené jméno vnitřního adresáře je používáno vícekrát. Všechny adresáře se stejným vnitřním jménem budou zobrazeny se stejným jménem."
+msgstr "Zvolené interní jméno adresáře je použito vícekrát. Všechny adresáře se stejným interním jménem se budou zobrazovat se stejným jménem."
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:200
 msgid "Directory Display Name"
@@ -5479,7 +5479,7 @@ msgstr "Název: %s"
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:112
 #, c-format
 msgid "Size: %s"
-msgstr "Velikost: %s"
+msgstr "Rozměr: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:287
 #: ../../../../src/ui_fsmenu/main.cc:454
@@ -6657,7 +6657,7 @@ msgstr "Návrat do nabídky hry jednoho hráče"
 
 #: ../../../../src/ui_fsmenu/loadgame.cc:81
 msgid "Load this game"
-msgstr "Nahrát hru"
+msgstr "Načíst tuto hru"
 
 #: ../../../../src/ui_fsmenu/login_box.cc:37
 #: ../../../../src/ui_fsmenu/main.cc:420
@@ -6754,7 +6754,7 @@ msgstr "Hrát jeden ze začátečnických tutoriálů"
 #: ../../../../src/wui/game_main_menu_save_game.cc:48
 #: ../../../../src/wui/interactive_gamebase.cc:181
 msgid "Load Game"
-msgstr "Nahrát hru"
+msgstr "Načíst hru"
 
 #: ../../../../src/ui_fsmenu/main.cc:380
 msgid "Continue a saved game"
@@ -6976,7 +6976,7 @@ msgstr "Podrobnosti scénáře"
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:132
 #, c-format
 msgid "Hint: %s"
-msgstr "Nápověda: %s"
+msgstr "Doplňující informace: %s"
 
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:170
 msgid "No map selected"
@@ -8619,7 +8619,7 @@ msgstr "Klik"
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr "V závislosti na zvolený nástroj umístit prvek na mapu, nebo zvýšit počet prvků o hodnotu naszavenou v parametru \"Zvýšit/Snížit hodnotu\" nástroje."
+msgstr "Dle zvoleného nástroje umístit odpovídající prvek na mapu, nebo zvýšit počet prvků o hodnotu naszavenou v parametru \"Zvýšit/Snížit hodnotu\" nástroje."
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:1053
@@ -8632,7 +8632,7 @@ msgstr "Shift + klik"
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
-msgstr "V závislosti na zvolený nástroj odebrat prvek z mapy, nebo snížit počet prvků o hodnotu naszavenou v parametru \"Zvýšit/Snížit hodnotu\" nástroje."
+msgstr "Dle zvoleného nástroje odebrat odpovídající prvek z mapy, nebo snížit počet prvků o hodnotu naszavenou v parametru \"Zvýšit/Snížit hodnotu\" nástroje."
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:1058
@@ -11517,7 +11517,7 @@ msgstr "Navýšit o 10 surovin"
 
 #: ../../../../src/wui/warehousewindow.cc:197
 msgid "Configure this building’s economy"
-msgstr "Nastavit hospodaření této budovy"
+msgstr "Nastavení hospodářství této budovy"
 
 #: ../../../../src/wui/warehousewindow.cc:331
 msgid "Wares waiting to be shipped"
