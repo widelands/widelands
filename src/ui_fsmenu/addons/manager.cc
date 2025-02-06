@@ -1303,8 +1303,9 @@ void AddOnsCtrl::world_filter_maps_changed(const std::string& which) {
 }
 
 void AddOnsCtrl::check_enable_move_buttons() {
-	const bool enable_move_buttons =
-	   tabs_.active() == 0 && installed_addons_box_.focused_child() != nullptr;
+	const bool enable_move_buttons = tabs_.active() == 0 &&
+	                                 installed_addons_box_.focused_child() != nullptr &&
+	                                 !AddOns::g_addons.empty();
 	for (UI::Button* b : {&move_top_, &move_up_, &move_down_, &move_bottom_}) {
 		b->set_enabled(enable_move_buttons);
 	}
