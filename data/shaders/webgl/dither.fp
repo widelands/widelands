@@ -20,5 +20,5 @@ void main() {
 			vec2(1. - MARGIN, 1. - MARGIN));
 	vec4 clr = texture2D(u_terrain_texture, var_texture_offset + u_texture_dimensions * texture_fract);
 	gl_FragColor = vec4(clr.rgb * var_brightness,
-			1. - texture2D(u_dither_texture, var_dither_texture_position).a);
+			1. - texture2D(u_dither_texture, var_dither_texture_position).rgb);
 }
