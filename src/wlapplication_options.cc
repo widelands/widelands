@@ -31,6 +31,20 @@
 #include "io/filesystem/disk_filesystem.h"
 #include "logic/filesystem_constants.h"
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+EM_ASYNC_JS(void, __sync_em_fs_config, (), {
+	// clang-format off
+    // The following code is not C++ code, but JavaScript code.
+	console.log(`fs::__sync_em_fs_config`);
+    await new Promise((resolve, reject) => FS.syncfs(err => {
+        if (err) reject(err);
+        resolve();
+    }));
+    // (normally you would do something with the fetch here)
+});
+#endif
+
 bool g_allow_script_console = false;
 bool g_write_syncstreams = false;
 
@@ -310,7 +324,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                             keysym(SDLK_a),
                                                             "mainmenu_addons",
                                                             gettext_noop("Add-Ons"))},
-#if !defined(__EMSCRIPTEN__)
+#ifndef __EMSCRIPTEN__
    // not supported in wasm build
    {KeyboardShortcut::kMainMenuLAN, KeyboardShortcutInfo({KeyboardShortcutScope::kMainMenu},
                                                          keysym(SDLK_p),
@@ -1704,6 +1718,9 @@ void write_config() {
 	assert(config_dir != nullptr);
 	try {  //  overwrite the old config file
 		g_options.write(kConfigFile.c_str(), true, *config_dir);
+#ifdef __EMSCRIPTEN__
+      __sync_em_fs_config();
+#endif
 	} catch (const std::exception& e) {
 		log_warn("could not save configuration: %s\n", e.what());
 	} catch (...) {
