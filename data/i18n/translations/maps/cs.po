@@ -7,14 +7,14 @@
 # Matej Svrcek <mmatej@yahoo.com>, 2015
 # Zlopez <michal.konecny@psmail.xyz>, 2021-2022
 # Milan Fašina <matrix17@seznam.cz>, 2016-2018
-# af24e571988b09e5b46468ac89010e87_d1b4333, 2020-2021
+# Ondřej Itřech, 2020-2021,2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Zlopez <michal.konecny@psmail.xyz>, 2021-2022\n"
+"Last-Translator: Ondřej Itřech, 2020-2021,2025\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,13 +34,13 @@ msgstr "Po přistání na tajemném ostrově blízko Atlantidy se zbývající A
 
 #: ../../../../data/campaigns/atl02.wmf/elemental:8
 msgid "Struggling For a New Home Again"
-msgstr ""
+msgstr "V nesnázích za novým domovem"
 
 #: ../../../../data/campaigns/atl02.wmf/elemental:10
 msgid ""
 "After the quick escape from the drowning island, the Atlanteans around "
 "Jundlina are faced with new challenges."
-msgstr ""
+msgstr "Po rychlém útěku z potápějícího se ostrova, čelí Atlanťané stojící při Jundlině novým výzvám."
 
 #: ../../../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
@@ -214,7 +214,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr ""
+msgstr "Po prohrané bitvě s barbary, která vedla ke ztrátě velké části území císařství, Lutius opouští Fremil, aby začal nový život. Ale osud zavedl jeho loď do velké bouře, která ji téměř zničila. Pouze díky velkému štěstí dokázal navést svou loď na písečnou pláž neznámého ostrova a zachránit svou družinu. Alespoň prozatím."
 
 #: ../../../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
@@ -247,7 +247,7 @@ msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the Empire."
-msgstr ""
+msgstr "Poté, co se Lutius a jeho družina vrátí domů, setkává se s hospodářstvím v troskách. Náprava hospodářských výpadků a nedostatků dostává nejvyšší prioritu, aby Císařství získalo zpět svou zašlou slávu."
 
 #: ../../../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
@@ -291,7 +291,7 @@ msgstr "Rýbaud a jeho kmen vedou šťastný život v severních končinách. Al
 
 #: ../../../../data/campaigns/fri04.wmf/elemental:8
 msgid "Two Friends Reunited"
-msgstr ""
+msgstr "Opětovné setkání dvou přátel"
 
 #: ../../../../data/campaigns/fri04.wmf/elemental:10
 msgid ""
@@ -301,7 +301,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri05.wmf/elemental:8
 msgid "Reconquest"
-msgstr ""
+msgstr "Znovudobytí"
 
 #: ../../../../data/campaigns/fri05.wmf/elemental:10
 msgid ""

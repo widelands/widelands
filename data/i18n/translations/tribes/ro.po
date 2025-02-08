@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
+# Dominic Iastrebschi, 2025
 # Tarța Vasile-Florin <florin13t@gmail.com>, 2015
 # Tarța Vasile-Florin <florin13t@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-03 02:40+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Tarța Vasile-Florin <florin13t@gmail.com>, 2016\n"
+"Last-Translator: Dominic Iastrebschi, 2025\n"
 "Language-Team: Romanian (http://app.transifex.com/widelands/widelands/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:8
 msgctxt "amazons_building"
 msgid "Fortification"
-msgstr ""
+msgstr "Fortificație"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:32
@@ -58,7 +59,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:8
 msgctxt "amazons_building"
 msgid "Fortress"
-msgstr ""
+msgstr "Cetate"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:62
@@ -94,7 +95,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:8
 msgctxt "amazons_building"
 msgid "Observation Tower"
-msgstr ""
+msgstr "Turn de observație"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:30
@@ -130,7 +131,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:8
 msgctxt "amazons_building"
 msgid "Patrol Post"
-msgstr ""
+msgstr "Post de patrulare"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:39
@@ -166,7 +167,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/amazons/tower/init.lua:8
 msgctxt "amazons_building"
 msgid "Tower"
-msgstr ""
+msgstr "Turn"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/tower/init.lua:59
@@ -346,7 +347,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Guardhouse"
-msgstr ""
+msgstr "Corp de gardă"
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:40
@@ -8246,13 +8247,13 @@ msgstr ""
 #: ../../../../data/tribes/wares/beer/init.lua:8
 msgctxt "ware"
 msgid "Beer"
-msgstr ""
+msgstr "Bere"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/beer_strong/init.lua:8
 msgctxt "ware"
 msgid "Strong Beer"
-msgstr ""
+msgstr "Bere tare"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/blackroot/init.lua:8
@@ -8294,49 +8295,49 @@ msgstr ""
 #: ../../../../data/tribes/wares/bread_amazons/init.lua:8
 msgctxt "ware"
 msgid "Bread"
-msgstr ""
+msgstr "Pâine"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/bread_atlanteans/init.lua:8
 msgctxt "atlanteans_ware"
 msgid "Bread"
-msgstr ""
+msgstr "Pâine"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/bread_barbarians/init.lua:8
 msgctxt "barbarians_ware"
 msgid "Pitta Bread"
-msgstr ""
+msgstr "Pita"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/bread_empire/init.lua:8
 msgctxt "empire_ware"
 msgid "Bread"
-msgstr ""
+msgstr "Pâine"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/bread_frisians/init.lua:8
 msgctxt "frisians_ware"
 msgid "Bread"
-msgstr ""
+msgstr "Pâine"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/bread_paddle/init.lua:8
 msgctxt "ware"
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Paletă de pâine"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/brick/init.lua:8
 msgctxt "ware"
 msgid "Brick"
-msgstr ""
+msgstr "Cărămidă"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/buckets/init.lua:8
 msgctxt "ware"
 msgid "Buckets"
-msgstr ""
+msgstr "Găleți"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/cassavaroot/init.lua:8
@@ -8354,49 +8355,49 @@ msgstr ""
 #: ../../../../data/tribes/wares/chocolate/init.lua:8
 msgctxt "ware"
 msgid "Chocolate"
-msgstr ""
+msgstr "Ciocolată"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/clay/init.lua:8
 msgctxt "ware"
 msgid "Clay"
-msgstr ""
+msgstr "Argilă"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/cloth/init.lua:8
 msgctxt "ware"
 msgid "Cloth"
-msgstr ""
+msgstr "Pânză"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/coal/init.lua:8
 msgctxt "ware"
 msgid "Coal"
-msgstr ""
+msgstr "Cărbune"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/cocoa_beans/init.lua:8
 msgctxt "ware"
 msgid "Cocoa Beans"
-msgstr ""
+msgstr "Boabe de cacao"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/corn/init.lua:8
 msgctxt "ware"
 msgid "Corn"
-msgstr ""
+msgstr "Porumb"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/cornmeal/init.lua:8
 msgctxt "ware"
 msgid "Cornmeal"
-msgstr ""
+msgstr "Făină de porumb"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/diamond/init.lua:8
 msgctxt "ware"
 msgid "Diamond"
-msgstr ""
+msgstr "Diamant"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/felling_ax/init.lua:8
@@ -8420,7 +8421,7 @@ msgstr ""
 #: ../../../../data/tribes/wares/fish/init.lua:8
 msgctxt "ware"
 msgid "Fish"
-msgstr ""
+msgstr "Pește"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/fishing_net/init.lua:8
@@ -8444,7 +8445,7 @@ msgstr ""
 #: ../../../../data/tribes/wares/fruit/init.lua:8
 msgctxt "ware"
 msgid "Fruit"
-msgstr ""
+msgstr "Fruct"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/fur/init.lua:8
@@ -8480,7 +8481,7 @@ msgstr ""
 #: ../../../../data/tribes/wares/gold/init.lua:8
 msgctxt "ware"
 msgid "Gold"
-msgstr ""
+msgstr "Aur"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/gold_dust/init.lua:8
@@ -8528,7 +8529,7 @@ msgstr ""
 #: ../../../../data/tribes/wares/helmet/init.lua:8
 msgctxt "ware"
 msgid "Helmet"
-msgstr ""
+msgstr "Cască"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/helmet_golden/init.lua:8
@@ -8540,7 +8541,7 @@ msgstr ""
 #: ../../../../data/tribes/wares/helmet_mask/init.lua:8
 msgctxt "ware"
 msgid "Mask"
-msgstr ""
+msgstr "Mască"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/helmet_warhelm/init.lua:8
@@ -8558,43 +8559,43 @@ msgstr ""
 #: ../../../../data/tribes/wares/honey/init.lua:8
 msgctxt "ware"
 msgid "Honey"
-msgstr ""
+msgstr "Miere"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/honey_bread/init.lua:8
 msgctxt "frisians_ware"
 msgid "Honey Bread"
-msgstr ""
+msgstr "Pâine de miere"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/hook_pole/init.lua:8
 msgctxt "ware"
 msgid "Hook Pole"
-msgstr ""
+msgstr "Cange"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/hunting_bow/init.lua:8
 msgctxt "ware"
 msgid "Hunting Bow"
-msgstr ""
+msgstr "Arc de vânătoare"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/hunting_spear/init.lua:8
 msgctxt "ware"
 msgid "Hunting Spear"
-msgstr ""
+msgstr "Suliță de vânătoare"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/iron/init.lua:8
 msgctxt "ware"
 msgid "Iron"
-msgstr ""
+msgstr "Fier"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/iron_ore/init.lua:8
 msgctxt "ware"
 msgid "Iron Ore"
-msgstr ""
+msgstr "Minereu de fier"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/ironwood/init.lua:8
@@ -8655,7 +8656,7 @@ msgstr ""
 #: ../../../../data/tribes/wares/meat/init.lua:8
 msgctxt "ware"
 msgid "Meat"
-msgstr ""
+msgstr "Carne"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/milking_tongs/init.lua:8
@@ -8758,7 +8759,7 @@ msgstr ""
 #: ../../../../data/tribes/wares/shovel/init.lua:8
 msgctxt "ware"
 msgid "Shovel"
-msgstr ""
+msgstr "Lopată"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/smoked_fish/init.lua:8
@@ -8926,37 +8927,37 @@ msgstr ""
 #: ../../../../data/tribes/wares/water/init.lua:8
 msgctxt "ware"
 msgid "Water"
-msgstr ""
+msgstr "Apă"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/wheat/init.lua:8
 msgctxt "ware"
 msgid "Wheat"
-msgstr ""
+msgstr "Grâu"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/wine/init.lua:8
 msgctxt "ware"
 msgid "Wine"
-msgstr ""
+msgstr "Vin"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/wool/init.lua:8
 msgctxt "ware"
 msgid "Wool"
-msgstr ""
+msgstr "Lână"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/amazons/builder/init.lua:8
 msgctxt "amazons_worker"
 msgid "Builder"
-msgstr ""
+msgstr "Constructor"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/amazons/carrier/init.lua:8
 msgctxt "amazons_worker"
 msgid "Carrier"
-msgstr ""
+msgstr "Purtător"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/amazons/cassava_farmer/init.lua:8
@@ -8974,7 +8975,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/amazons/cocoa_farmer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Cocoa Farmer"
-msgstr ""
+msgstr "Fermier de cacao"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/amazons/cook/init.lua:8
@@ -9040,7 +9041,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/amazons/scout/init.lua:8
 msgctxt "amazons_worker"
 msgid "Scout"
-msgstr ""
+msgstr "Cercetaș"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/amazons/shipwright/init.lua:8
@@ -9052,7 +9053,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/amazons/soldier/init.lua:20
 msgctxt "amazons_worker"
 msgid "Soldier"
-msgstr ""
+msgstr "Soldat"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/amazons/stone_carver/init.lua:8
@@ -9082,7 +9083,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/amazons/trainer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Trainer"
-msgstr ""
+msgstr "Antrenor"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/amazons/wilderness_keeper/init.lua:8
@@ -9094,7 +9095,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/amazons/woodcutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Woodcutter"
-msgstr ""
+msgstr "Tăietor de lemne"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/amazons/woodcutter_master/init.lua:8
@@ -9166,7 +9167,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/atlanteans/baker/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Baker"
-msgstr ""
+msgstr "Brutar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/blackroot_farmer/init.lua:8
@@ -9178,7 +9179,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/atlanteans/builder/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Builder"
-msgstr ""
+msgstr "Constructor"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/carrier/init.lua:76
@@ -9196,7 +9197,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/atlanteans/farmer/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Farmer"
-msgstr ""
+msgstr "Fermier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/ferry/init.lua:8
@@ -9214,7 +9215,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/atlanteans/fisher/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Fisher"
-msgstr ""
+msgstr "Pescar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/forester/init.lua:8
@@ -9232,19 +9233,19 @@ msgstr ""
 #: ../../../../data/tribes/workers/atlanteans/horse/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Horse"
-msgstr ""
+msgstr "Cal"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/horsebreeder/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Horse Breeder"
-msgstr "Sursa necesară"
+msgstr "Crescător de cai"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/hunter/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Hunter"
-msgstr ""
+msgstr "Vânător"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/miller/init.lua:8
@@ -9256,7 +9257,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/atlanteans/miner/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Miner"
-msgstr ""
+msgstr "Miner"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/recruit/init.lua:8
@@ -9298,7 +9299,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/atlanteans/soldier/init.lua:474
 msgctxt "atlanteans_worker"
 msgid "Soldier"
-msgstr ""
+msgstr "Soldat"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/spiderbreeder/init.lua:8
@@ -9400,7 +9401,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/barbarians/farmer/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Farmer"
-msgstr ""
+msgstr "Fermier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/ferry/init.lua:8
@@ -9412,7 +9413,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/barbarians/fisher/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Fisher"
-msgstr ""
+msgstr "Pescar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/gamekeeper/init.lua:8
@@ -9466,7 +9467,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/barbarians/miner/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Miner"
-msgstr ""
+msgstr "Miner"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/miner_chief/init.lua:8
@@ -9520,7 +9521,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/barbarians/soldier/init.lua:107
 msgctxt "barbarians_worker"
 msgid "Soldier"
-msgstr ""
+msgstr "Soldat"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/stonemason/init.lua:8
@@ -9586,7 +9587,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/empire/donkey/init.lua:8
 msgctxt "empire_worker"
 msgid "Donkey"
-msgstr ""
+msgstr "Măgar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/donkeybreeder/init.lua:8
@@ -9598,7 +9599,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/empire/farmer/init.lua:8
 msgctxt "empire_worker"
 msgid "Farmer"
-msgstr ""
+msgstr "Fermier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/ferry/init.lua:8
@@ -9610,25 +9611,25 @@ msgstr ""
 #: ../../../../data/tribes/workers/empire/fisher/init.lua:8
 msgctxt "empire_worker"
 msgid "Fisher"
-msgstr ""
+msgstr "Pescar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/forester/init.lua:8
 msgctxt "empire_worker"
 msgid "Forester"
-msgstr ""
+msgstr "Pădurar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/geologist/init.lua:8
 msgctxt "empire_worker"
 msgid "Geologist"
-msgstr ""
+msgstr "Geolog"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/hunter/init.lua:8
 msgctxt "empire_worker"
 msgid "Hunter"
-msgstr ""
+msgstr "Vânător"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/innkeeper/init.lua:8
@@ -9652,7 +9653,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/empire/miner/init.lua:8
 msgctxt "empire_worker"
 msgid "Miner"
-msgstr ""
+msgstr "Miner"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/miner_master/init.lua:8
@@ -9700,7 +9701,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/empire/soldier/init.lua:107
 msgctxt "empire_worker"
 msgid "Soldier"
-msgstr ""
+msgstr "Soldat"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/stonemason/init.lua:8
@@ -9718,7 +9719,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/empire/trainer/init.lua:8
 msgctxt "empire_worker"
 msgid "Trainer"
-msgstr ""
+msgstr "Antrenor"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/vinefarmer/init.lua:8
@@ -9748,7 +9749,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/frisians/baker/init.lua:8
 msgctxt "frisians_worker"
 msgid "Baker"
-msgstr ""
+msgstr "Brutar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/baker_master/init.lua:8
@@ -9850,7 +9851,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/frisians/forester/init.lua:8
 msgctxt "frisians_worker"
 msgid "Forester"
-msgstr ""
+msgstr "Pădurar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/fruit_collector/init.lua:8
@@ -9880,7 +9881,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/frisians/miner/init.lua:8
 msgctxt "frisians_worker"
 msgid "Miner"
-msgstr ""
+msgstr "Miner"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/miner_master/init.lua:8
@@ -9946,7 +9947,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/frisians/soldier/init.lua:628
 msgctxt "frisians_worker"
 msgid "Soldier"
-msgstr ""
+msgstr "Soldat"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/stonemason/init.lua:8
@@ -9958,10 +9959,10 @@ msgstr ""
 #: ../../../../data/tribes/workers/frisians/trainer/init.lua:8
 msgctxt "frisians_worker"
 msgid "Trainer"
-msgstr ""
+msgstr "Antrenor"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/woodcutter/init.lua:8
 msgctxt "frisians_worker"
 msgid "Woodcutter"
-msgstr ""
+msgstr "Tăietor de lemne"
