@@ -27,7 +27,6 @@
 #include "graphic/game_renderer.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/text_layout.h"
-#include "logic/cmd_queue.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
@@ -971,7 +970,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 		const Widelands::DescriptionIndex fastplace = egbase().descriptions().building_index(
 		   matching_fastplace_shortcut(code, player().tribe().name()));
 		if (player().tribe().has_building(fastplace)) {
-			game().send_player_build(player_number(), get_sel_pos().node, fastplace);
+			game().send_player_build_building(player_number(), get_sel_pos().node, fastplace);
 			set_flag_to_connect(game().map().br_n(get_sel_pos().node));
 		}
 	}

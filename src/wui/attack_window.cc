@@ -188,7 +188,7 @@ std::vector<Widelands::OPtr<Widelands::Bob>> AttackWindow::get_max_attackers() {
 		}
 
 		// Player can't see any part of the building, so it can't be attacked
-		// This is the same check as done later on in send_player_enemyflagaction()
+		// This is the same check as done later on in send_player_attack()
 		if (!sees) {
 			return result_vector;
 		}
@@ -520,8 +520,8 @@ void AttackWindow::act_attack() {
 
 		iplayer_.map_view()->mouse_to_field(target_coordinates_, MapView::Transition::Jump);
 	} else if (Widelands::Building* building = get_building(); building != nullptr) {
-		iplayer_.game().send_player_enemyflagaction(building->base_flag(), iplayer_.player_number(),
-		                                            attack_panel_.soldiers(), get_allow_conquer());
+		iplayer_.game().send_player_attack(building->base_flag(), iplayer_.player_number(),
+		                                   attack_panel_.soldiers(), get_allow_conquer());
 		iplayer_.map_view()->mouse_to_field(building->get_position(), MapView::Transition::Jump);
 	} else if (Widelands::Ship* ship = get_ship(); ship != nullptr) {
 		for (Widelands::Serial serial : attack_panel_.soldiers()) {

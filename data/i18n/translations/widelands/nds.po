@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-09 03:20+0000\n"
+"POT-Creation-Date: 2025-02-06 02:52+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -659,14 +659,14 @@ msgstr "Willst du de Bewarker würrelk verlaten?"
 #: ../../../../src/logic/addons.cc:48 ../../../../src/ui_basic/dropdown.cc:358
 #: ../../../../src/ui_basic/dropdown.cc:360
 #: ../../../../src/ui_fsmenu/addons/contact.cc:81
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1909
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1920
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1992
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2000
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2025
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2092
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2171
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2249
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1910
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1921
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1993
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2001
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2026
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2093
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2172
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2250
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:104
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:292
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:566
@@ -3514,7 +3514,7 @@ msgstr "Falsk Gebruuk, dat sall heten: /warn <Naam> <Grund>"
 #: ../../../../src/network/gamehost.cc:176
 #, c-format
 msgid "The client %s could not be found."
-msgstr "De Gast %s kunn nich funnen werden."
+msgstr "De Gast %s kunn nich funnen worden."
 
 #: ../../../../src/network/gamehost.cc:163
 msgid "Wrong use, should be: /kick <name> <reason>"
@@ -3693,7 +3693,7 @@ msgstr "%s hett de Deel verlaten"
 
 #: ../../../../src/network/internet_gaming.cc:666
 msgid "Chat message could not be sent."
-msgstr "De Snack-Naricht kunn nich schickt werden."
+msgstr "De Snack-Naricht kunn nich schickt worden."
 
 #: ../../../../src/network/internet_gaming.cc:674
 msgid "Command could not be executed."
@@ -3715,12 +3715,12 @@ msgstr "Hebb een unbekannten Befehl vum Metaserver kregen: %s"
 
 #: ../../../../src/network/internet_gaming.cc:859
 msgid "Message could not be sent: You are not connected to the metaserver!"
-msgstr "De Naricht kunn nich schickt werden, wiel du nich mit de Metaserver verbunnen büst!"
+msgstr "De Naricht kunn nich schickt worden, wiel du nich mit de Metaserver verbunnen büst!"
 
 #: ../../../../src/network/internet_gaming.cc:879
 #: ../../../../src/network/internet_gaming.cc:887
 msgid "Message could not be sent: Was this supposed to be a private message?"
-msgstr "De Naricht kunn nich schickt werden: Sull dat eene persöönlike Naricht wesen?"
+msgstr "De Naricht kunn nich schickt worden: Sull dat eene persöönlike Naricht wesen?"
 
 #: ../../../../src/network/internet_gaming.cc:902
 msgid "Supported admin commands:"
@@ -4911,99 +4911,99 @@ msgid ""
 "%s"
 msgstr "De ingeven Brukernaam of Kennwoord is ungültig:\n%s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1351
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1352
 #, c-format
 msgid "Fetching add-ons… (%.1f%%)"
 msgstr "Haalt Verwiederns … (%.1f%%)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1354
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1355
 msgid "Connecting to the server…"
 msgstr "Mit de Server verbinnen …"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1377
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1378
 msgid "Server Connection Error"
 msgstr "Fehler bi’m Verbinnen mit de Server"
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1379
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1380
 msgid "a networking bug"
 msgstr "eenem Netwark-Wrocker"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1380
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1381
 #, c-format
 msgid ""
 "Unable to fetch the list of available add-ons from the server!<br>Error "
 "Message: %s"
 msgstr "Kann de LIst vun Verwiederns nich vun de Server halen!<br>Fehler: %s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1536
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1537
 #, c-format
 msgid "Installed (%u)"
 msgstr "Installeert (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1605
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1606
 msgid "Browse"
 msgstr "Dörsöken"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1605
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1606
 #, c-format
 msgid "Browse (%u)"
 msgstr "Dörsöken (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1611
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1612
 #, c-format
 msgid "Upgrade all (%u)"
 msgstr "All vernejen (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1614
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1615
 msgid "No upgrades are available for your installed add-ons"
 msgstr "För diene installeerten Verwiederns gifft dat keene Vernejens"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1616
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1617
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
 msgstr[0] "Deeses %u Verwiedern vernejen:"
 msgstr[1] "Deese %u Verwiederns vernejen:"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1621
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1622
 #, c-format
 msgid "• %s"
 msgstr "• %s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1674
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1675
 msgid "Website Maps"
 msgstr "Internettsied-Kaarten"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1675
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1676
 #, c-format
 msgid "Website Maps (%u)"
 msgstr "Internettsied-Kaarten (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1707
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1708
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which could not be found"
 msgstr "• »%1$s« bruukt »%2$s« wat nich funnen worden kann"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1712
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1713
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is disabled"
 msgstr "• »%1$s« bruukt »%2$s« wat utknipst is"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1719
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1720
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
 msgstr "• »%1$s« bruukt »%2$s« wat unner de anner list is"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1747
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1748
 #, c-format
 msgid ""
 "• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
 msgstr "• »%1$s« bruukt eerst »%2$s« un dann »%3$s«, aver de Rieg is annersrum"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1763
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1764
 #, c-format
 msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
@@ -5011,67 +5011,67 @@ msgid ""
 "%s"
 msgstr "Een anknipst Verwiedern is kaputt. Mit de stedenwies Instellens kann keen Speel begonnen worden.\nFehler-Naricht:\n%s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1780
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1781
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
 msgstr[0] "%u Fehler mit de Ofhangens"
 msgstr[1] "%u Fehlers mit de Ofhangens"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1782
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1783
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
 msgstr "Verwiederns mit Fehlers mit de Ofhangens warken villicht nich as se sallen, of Kaarten un Spelen laden dann villicht nich."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1910
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1911
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
-msgstr "Dat Verwiedern »%1$s« kann nich upladen werden, denn siene Versioon (%2$s) is nich nejer as de Versioon up de Server (%3$s)."
+msgstr "Dat Verwiedern »%1$s« kann nich upladen worden, denn siene Versioon (%2$s) is nich nejer as de Versioon up de Server (%3$s)."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1921
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1922
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
-msgstr "Dat Verwiedern »%1$s« kann nich upladen werden, denn sien Deel (%2$s) is anners as siene Deel up de Server (%3$s)."
+msgstr "Dat Verwiedern »%1$s« kann nich upladen worden, denn sien Deel (%2$s) is anners as siene Deel up de Server (%3$s)."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1932
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1933
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:54
 msgid "Upload"
 msgstr "Upladen"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1933
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1934
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
 msgstr "Willst du dat Verwiedern »%s« würrelk to de Server upladen?"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1943
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1944
 #, c-format
 msgid "Uploading ‘%s’…"
 msgstr "Lade »%s« up …"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1950
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2078
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2140
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1951
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2079
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2141
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1974
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1975
 #, c-format
 msgid "‘%s’"
 msgstr "»%s«"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1982
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1983
 #, c-format
 msgid ""
 "The add-on ‘%s’ may not be uploaded to the server because the following "
 "filenames contained in the add-on are not allowed:"
 msgstr "Dat Verwiedern »%s« düür nich to de Server upladen worden, denn deese Dateinaamen, wat daar enthollen sünd, sünd nich verlöövt:"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1986
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1987
 msgid ""
 "Filenames may only contain alphanumeric characters (A-Z, a-z, 0-9) and "
 "simple punctuation (period, hyphen, and underscore; not multiple periods). "
@@ -5079,7 +5079,7 @@ msgid ""
 "exceed 80 characters."
 msgstr "Dateinaamen düren nix as alphanumeriske Bookstavens (A-Z, a-z, 0-9) un slichte Satztekens (Punkt, Binnestreek un Unnerstreek; nich mehr as een Punkt) enhollen. Anner Bookstavens, to’n Bispööl Leegtekens, sünd nich verlöövt. Dateinaamen düren nich langer as 80 Bookstavens wesen."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2001
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2002
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be uploaded to the server.\n"
@@ -5088,7 +5088,7 @@ msgid ""
 "%2$s"
 msgstr "Dat Verwiedern »%1$s« kunn nich to de Server upladen worden.\n\nFehler-Naricht:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2027
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2028
 #, c-format
 msgid ""
 "The map ‘%1$s’ could not be downloaded from the server.\n"
@@ -5097,12 +5097,12 @@ msgid ""
 "%2$s"
 msgstr "De Kaart »%1$s« kunn nich vun de Server runnerladen worden.\n\nFehler-Naricht:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2058
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2059
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr "Lade »%s« runner …"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2094
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2095
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -5111,7 +5111,7 @@ msgid ""
 "%2$s"
 msgstr "Dat Verwiedern »%1$s« kunn nich vun de Server runnerladen worden. Dat Installeren/Vernejen vun deeser Verwiedern word översprungen.\n\nFehler:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2172
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2173
 #, c-format
 msgid ""
 "The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations will be skipped.\n"
@@ -5120,7 +5120,7 @@ msgid ""
 "%2$s"
 msgstr "De Översettens för dat Verwiedern »%1$s« kunnen nich vun de Server runnerladen worden. Dat Installeren/Vernejen vun de Översettens word översprungen.\n\nFehler-Naricht:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2250
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2251
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr "De bruukt Verwiedern »%s« gifft dat up de Server nich."
@@ -7959,7 +7959,7 @@ msgstr "Panzersmee"
 
 #: ../../../../src/wlapplication_options.cc:213
 msgid "Weaving Mill"
-msgstr "Spinnweelmöhlen"
+msgstr "Weevstohl"
 
 #: ../../../../src/wlapplication_options.cc:214
 msgid "Shipyard"

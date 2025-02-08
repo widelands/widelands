@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # Bananasoft <bananasoftservice@yahoo.it>, 2015
@@ -12,7 +12,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
-# Guybrush88 <erpizzo@alice.it>, 2015-2017,2019,2021-2022
+# Guybrush88 <erpizzo@alice.it>, 2015-2017,2019,2021-2022,2025
 # Log Merger, 2022
 # Luigi Lain <lainluigi86@tiscali.it>, 2015-2016
 # Mat V <enthusedquill6@gmail.com>, 2016
@@ -21,9 +21,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-12-23 02:56+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Log Merger, 2022\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015-2017,2019,2021-2022,2025\n"
 "Language-Team: Italian (http://app.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -11392,7 +11392,7 @@ msgstr ""
 #. "In vino veritas."
 #: ../../../../data/tribes/initialization/empire/units.lua:1564
 msgid "In wine there is truth."
-msgstr ""
+msgstr "Nel vino c'è la verità"
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Winery
 #. TRANSLATORS: Lore author helptext for an Empire production site: Piggery
@@ -11405,7 +11405,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1940
 msgctxt "empire_building"
 msgid "Excerpt from the Encyclopædia Imperica"
-msgstr ""
+msgstr "Estratto dall'Encyclopædia Imperica"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Winery
 #: ../../../../data/tribes/initialization/empire/units.lua:1569
@@ -11426,7 +11426,7 @@ msgstr ""
 #. "Esse oportet ut vivas, non vivere ut edas."
 #: ../../../../data/tribes/initialization/empire/units.lua:1583
 msgid "We eat to live, not live to eat."
-msgstr ""
+msgstr "Noi mangiamo per vivere, non viviamo per mangiare."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Tavern
 #: ../../../../data/tribes/initialization/empire/units.lua:1586
@@ -11669,7 +11669,7 @@ msgstr ""
 #. "Asinus stramen mavult quam aurum."
 #: ../../../../data/tribes/initialization/empire/units.lua:1738
 msgid "A donkey prefers straw to gold."
-msgstr ""
+msgstr "Un asino preferisce la paglia all'oro."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Donkey
 #. Farm
@@ -11714,7 +11714,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1764
 msgctxt "empire_building"
 msgid "History of the Empire, Part VII"
-msgstr ""
+msgstr "Storia dell'Impero, Parte 7"
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Farm
 #: ../../../../data/tribes/initialization/empire/units.lua:1768
@@ -11762,7 +11762,7 @@ msgstr ""
 #. "Conari agnum eripere lupo."
 #: ../../../../data/tribes/initialization/empire/units.lua:1803
 msgid "Try to rescue a lamb from a wolf."
-msgstr ""
+msgstr "Prova a salvare un agnello da un lupo."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Sheep Farm
 #: ../../../../data/tribes/initialization/empire/units.lua:1806
@@ -15132,7 +15132,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1910
 msgctxt "frisians_building"
 msgid "A smoker explaining his profession"
-msgstr ""
+msgstr "Un affumicatore che spiega la sua professione"
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Smokery
 #: ../../../../data/tribes/initialization/frisians/units.lua:1912
@@ -15161,7 +15161,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1923
 msgctxt "frisians_building"
 msgid "A baker"
-msgstr ""
+msgstr "Un fornaio"
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Bakery
 #: ../../../../data/tribes/initialization/frisians/units.lua:1925
@@ -15340,7 +15340,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2001
 msgctxt "frisians_building"
 msgid "A trainer greeting the new recruits"
-msgstr ""
+msgstr "Un addestratore che saluta le nuove reclute"
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Barracks
 #: ../../../../data/tribes/initialization/frisians/units.lua:2003
@@ -15542,7 +15542,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2142
 msgctxt "frisians_building"
 msgid "A trainer training a soldier"
-msgstr ""
+msgstr "Un addestratore che addestra un soldato"
 
 #. TRANSLATORS: Purpose helptext for a Frisian training site: Training Camp
 #: ../../../../data/tribes/initialization/frisians/units.lua:2131
@@ -16174,18 +16174,18 @@ msgstr ""
 msgctxt "frisians_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1% soldato (+%2%)"
+msgstr[1] "%1% soldati (+%2%)"
+msgstr[2] "%1% soldati (+%2%)"
 
 #. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
 #: ../../../../data/tribes/initialization/frisians/units.lua:2446
 msgctxt "frisians_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1% soldato"
+msgstr[1] "%1% soldati"
+msgstr[2] "%1% soldati"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -16321,7 +16321,7 @@ msgstr "Dipendenze"
 #. help, containing size info, buildcost etc.
 #: ../../../../data/tribes/scripting/help/building_help.lua:479
 msgid "Building requirements"
-msgstr ""
+msgstr "Requisiti per la costruzione"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:495
 msgid ""
@@ -16412,7 +16412,7 @@ msgstr "Produzione"
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:741
 msgid "Health improvement:"
-msgstr ""
+msgstr "Miglioramento della salute"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:742
 #: ../../../../data/tribes/scripting/help/building_help.lua:749

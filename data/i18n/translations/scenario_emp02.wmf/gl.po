@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
-# Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2010-2011
+# Adrián Chaves Fernández <adrian@chaves.gal>, 2010-2011
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
 # GunChleoc, 2015
 # GunChleoc, 2016

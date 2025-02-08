@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-09 03:20+0000\n"
+"POT-Creation-Date: 2025-02-06 02:52+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Juanjo, 2015-2024\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
@@ -657,14 +657,14 @@ msgstr "Esteu segur que voleu sortir de l'editor?"
 #: ../../../../src/logic/addons.cc:48 ../../../../src/ui_basic/dropdown.cc:358
 #: ../../../../src/ui_basic/dropdown.cc:360
 #: ../../../../src/ui_fsmenu/addons/contact.cc:81
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1909
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1920
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1992
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2000
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2025
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2092
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2171
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2249
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1910
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1921
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1993
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2001
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2026
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2093
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2172
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2250
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:104
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:292
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:566
@@ -4909,99 +4909,99 @@ msgid ""
 "%s"
 msgstr "El nom d’usuari o la contrasenya no són vàlids:\n%s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1351
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1352
 #, c-format
 msgid "Fetching add-ons… (%.1f%%)"
 msgstr "Es carreguen els complements… (%.1f%%)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1354
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1355
 msgid "Connecting to the server…"
 msgstr "Es connecta al servidor…"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1377
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1378
 msgid "Server Connection Error"
 msgstr "S’ha produït un error de connexió amb el servidor."
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1379
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1380
 msgid "a networking bug"
 msgstr "un error de la xarxa"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1380
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1381
 #, c-format
 msgid ""
 "Unable to fetch the list of available add-ons from the server!<br>Error "
 "Message: %s"
 msgstr "No es pot aconseguir la llista de complements disponibles del servidor. <br> Missatge d’error: %s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1536
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1537
 #, c-format
 msgid "Installed (%u)"
 msgstr "Instal·lat (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1605
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1606
 msgid "Browse"
 msgstr "Navega"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1605
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1606
 #, c-format
 msgid "Browse (%u)"
 msgstr "Navega (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1611
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1612
 #, c-format
 msgid "Upgrade all (%u)"
 msgstr "Actualitza’ls tots (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1614
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1615
 msgid "No upgrades are available for your installed add-ons"
 msgstr "No hi ha actualitzacions disponibles pels complements que teniu instal·lats."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1616
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1617
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
 msgstr[0] "Actualitzeu %u complement:"
 msgstr[1] "Actualitzeu els següents %u complements:"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1621
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1622
 #, c-format
 msgid "• %s"
 msgstr "• %s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1674
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1675
 msgid "Website Maps"
 msgstr "Mapes del lloc web"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1675
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1676
 #, c-format
 msgid "Website Maps (%u)"
 msgstr "Mapes del lloc web (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1707
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1708
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which could not be found"
 msgstr "• «%1$s» necessita «%2$s», però no s'ha trobat"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1712
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1713
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is disabled"
 msgstr "• «%1$s» necessita «%2$s», però està desactivat"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1719
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1720
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
 msgstr "• «%1$s» necessita «%2$s», ja que està més avall com a complement necessari"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1747
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1748
 #, c-format
 msgid ""
 "• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
 msgstr "• «%1$s» necessita primer «%2$s» i després «%3$s», però estan a la llista en un ordre incorrecte"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1763
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1764
 #, c-format
 msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
@@ -5009,67 +5009,67 @@ msgid ""
 "%s"
 msgstr "Un complement actiu és defectuós. No es poden iniciar partides amb la configuració actual.\nMissatge d’error:\n%s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1780
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1781
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
 msgstr[0] "%u error de dependències"
 msgstr[1] "%u errors de dependències"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1782
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1783
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
 msgstr "Els complements amb errors de dependències poden funcionar incorrectament o que no es puguin carregar algunes partides i mapes."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1910
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1911
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
 msgstr "El complement «%1$s» no es pot pujar perquè la versió (%2$s) no és posterior que la versió que hi ha al servidor (%3$s)."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1921
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1922
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
 msgstr "El complement «%1$s» no es pot pujar perquè la categoria (%2$s) no coincideix amb la categoria de la versió que hi ha al servidor (%3$s)."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1932
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1933
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:54
 msgid "Upload"
 msgstr "Puja"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1933
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1934
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
 msgstr "Voleu pujar el complement «%s» al servidor?"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1943
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1944
 #, c-format
 msgid "Uploading ‘%s’…"
 msgstr "«%s» es va carregant…"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1950
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2078
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2140
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1951
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2079
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2141
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1974
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1975
 #, c-format
 msgid "‘%s’"
 msgstr "«%s»"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1982
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1983
 #, c-format
 msgid ""
 "The add-on ‘%s’ may not be uploaded to the server because the following "
 "filenames contained in the add-on are not allowed:"
 msgstr "El complement «%s» potser no s'ha carregat al servidor perquè aquests fitxers no estan permesos:"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1986
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1987
 msgid ""
 "Filenames may only contain alphanumeric characters (A-Z, a-z, 0-9) and "
 "simple punctuation (period, hyphen, and underscore; not multiple periods). "
@@ -5077,7 +5077,7 @@ msgid ""
 "exceed 80 characters."
 msgstr "Els fitxers només poden contenir caràcters alfanumèrics (A-Z, a-z, 0-9) i signes de puntuació simple(punt, guió i ratlla baixa, però no es permeten punts suspensius). Altres caràcters com els espais no es permeten. Els noms dels fitxers no poden excedir els 80 caràcters."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2001
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2002
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be uploaded to the server.\n"
@@ -5086,7 +5086,7 @@ msgid ""
 "%2$s"
 msgstr "El complement «%1$s» no s’ha pogut pujar al servidor.\n\nMissatge d’error:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2027
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2028
 #, c-format
 msgid ""
 "The map ‘%1$s’ could not be downloaded from the server.\n"
@@ -5095,12 +5095,12 @@ msgid ""
 "%2$s"
 msgstr "El mapa «%1$s» no s'ha pogut descarregar des del servidor.\n\nMissatge d'error:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2058
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2059
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr "Es baixa «%s»…"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2094
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2095
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -5109,7 +5109,7 @@ msgid ""
 "%2$s"
 msgstr "El complement «%1$s» no es pot baixar del servidor. Es saltarà la instal·lació/actualització d’aquest complement.\n\nMissatge d’error:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2172
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2173
 #, c-format
 msgid ""
 "The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations will be skipped.\n"
@@ -5118,7 +5118,7 @@ msgid ""
 "%2$s"
 msgstr "Les traduccions del complement «%1$s» no s’han pogut baixar del servidor. Es saltarà la instal·lació/actualització de les traduccions .\n\nMissatge d’error:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2250
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2251
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr "El complement necessari «%s» no es pot trobar al servidor."

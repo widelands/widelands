@@ -33,7 +33,6 @@
 namespace Widelands {
 
 constexpr uint32_t kCurrentPacketVersion = 2;  // since build-19
-constexpr uint32_t kMinPacketVersion = 2;
 
 constexpr const char* kPlayerDirnameTemplate = "player/%u";
 constexpr const char* kFilenameTemplate = "player/%u/messages";
@@ -58,7 +57,9 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 			continue;
 		}
 		uint32_t packet_version = prof.get_safe_section("global").get_positive("packet_version");
-		if (kMinPacketVersion <= packet_version && packet_version <= kCurrentPacketVersion) {
+		// Compatibility for all packet versions must be kept indefinitely for map loading!
+		// Some older map files contain player message packets.
+		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
 			MessageQueue* messages = player->get_messages();
 			std::vector<Message> game_loading_messages;
 
@@ -130,11 +131,19 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 						serial = mo.serial();
 					}
 
-					messages->add_message(std::unique_ptr<Message>(new Message(
-					   static_cast<Message::Type>(s->get_natural("type")), sent, s->get_name(),
-					   s->get_safe_string("icon"), s->get_safe_string("heading"),
-					   s->get_safe_string("body"), get_coords("position", extent, Coords::null(), s),
-					   serial, std::string(s->get_string("subtype", "")), status)));
+					if (packet_version == 1) {
+						const std::string name = s->get_name();
+						messages->add_message(std::unique_ptr<Message>(new Message(
+						   static_cast<Message::Type>(s->get_natural("type")), sent, name,
+						   "images/wui/fieldaction/menu_build_flag.png", name, s->get_safe_string("body"),
+						   get_coords("position", extent, Coords::null(), s), serial, "", status)));
+					} else {
+						messages->add_message(std::unique_ptr<Message>(new Message(
+						   static_cast<Message::Type>(s->get_natural("type")), sent, s->get_name(),
+						   s->get_safe_string("icon"), s->get_safe_string("heading"),
+						   s->get_safe_string("body"), get_coords("position", extent, Coords::null(), s),
+						   serial, std::string(s->get_string("subtype", "")), status)));
+					}
 
 					previous_message_sent = sent;
 				} catch (const WException& e) {
