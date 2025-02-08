@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 
 struct Song {
 public:
-	Song();
+	Song() = default;
 	explicit Song(const std::string& filename);
 	std::string filename;
 	std::string title;

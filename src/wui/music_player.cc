@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2024 by the Widelands Development Team
+ * Copyright (C) 2019-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +47,7 @@ public:
 	             panel_style_,
 	             "enable",
 	             Vector2i::zero(),
-	             (song.title.empty() ? "Untitled" : song.title)),
+	             (song.title.empty() ? _("Untitled") : song.title)),
 	     filename_(song.filename) {
 
 		set_inner_spacing(kSpacing);
@@ -92,7 +92,7 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
                   80,
                   34,
                   UI::ButtonStyle::kWuiSecondary,
-                  "Next"),
+                  _("Next")),
      checkbox_shuffle_(&hbox_playback_control_,
                        UI::PanelStyle::kFsMenu,
                        "button_shuffle",
@@ -118,15 +118,15 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 
 	std::vector<Song> music_data = g_sh->get_music_data();
 	const size_t data_size = music_data.size();
-	std::vector<MusicTrackControl*> musicTrackControls;
-	musicTrackControls.reserve(data_size);
+	std::vector<MusicTrackControl*> music_track_controls;
+	music_track_controls.reserve(data_size);
 
 	for (const Song& song : music_data) {
-		musicTrackControls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, song));
+		music_track_controls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, song));
 	}
 
 	vbox_track_playlist_.add_space(2);
-	for (MusicTrackControl* control : musicTrackControls) {
+	for (MusicTrackControl* control : music_track_controls) {
 		vbox_track_playlist_.add(control);
 	}
 	vbox_track_playlist_.add_inf_space();  // aligns scrollbar to the right

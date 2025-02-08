@@ -437,7 +437,7 @@ void SoundHandler::start_music(const std::string& songset_name) {
 		log_err("SoundHandler: songset \"%s\" does not exist!\n", songset_name.c_str());
 	} else {
 		uint32_t n = shuffle_ ? rng_.rand() : 0;
-		if (Mix_Music* const m = songs_[songset_name]->get_song(n)) {
+		if (Mix_Music* const m = songs_[songset_name]->get_song(n); m != nullptr) {
 			Mix_FadeInMusic(m, 1, kMinimumMusicFade);
 			current_songset_ = songset_name;
 #if SDL_MIXER_VERSION_ATLEAST(2, 6, 0)
@@ -446,7 +446,7 @@ void SoundHandler::start_music(const std::string& songset_name) {
 			std::string title;
 #endif
 			if (title.empty()) {
-				title = "Untitled";
+				title = _("Untitled");
 			}
 			current_song_ = title;
 		} else {
