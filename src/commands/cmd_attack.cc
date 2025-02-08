@@ -98,7 +98,7 @@ void CmdAttack::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol)
 			throw UnhandledVersionError("CmdAttack", packet_version, kCurrentPacketVersionCmdAttack);
 		}
 	} catch (const WException& e) {
-		throw GameDataError("enemy flag action: %s", e.what());
+		throw GameDataError("Attack: %s", e.what());
 	}
 }
 

@@ -70,7 +70,7 @@ void CmdExpeditionConfig::read(FileRead& fr, EditorGameBase& egbase, MapObjectLo
 			   "CmdExpeditionConfig", packet_version, kCurrentPacketVersionCmdExpeditionConfig);
 		}
 	} catch (const WException& e) {
-		throw GameDataError("enhance building: %s", e.what());
+		throw GameDataError("Expedition config: %s", e.what());
 	}
 }
 void CmdExpeditionConfig::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {

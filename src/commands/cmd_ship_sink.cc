@@ -57,7 +57,7 @@ void CmdShipSink::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mo
 			   "CmdShipSink", packet_version, kCurrentPacketVersionCmdShipSink);
 		}
 	} catch (const WException& e) {
-		throw GameDataError("Ship explore: %s", e.what());
+		throw GameDataError("Ship sink: %s", e.what());
 	}
 }
 void CmdShipSink::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {

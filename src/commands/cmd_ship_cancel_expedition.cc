@@ -58,7 +58,7 @@ void CmdShipCancelExpedition::read(FileRead& fr, EditorGameBase& egbase, MapObje
 			   "CmdShipCancelExpedition", packet_version, kCurrentPacketVersionShipCancelExpedition);
 		}
 	} catch (const WException& e) {
-		throw GameDataError("Ship explore: %s", e.what());
+		throw GameDataError("Ship cancel expedition: %s", e.what());
 	}
 }
 void CmdShipCancelExpedition::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
