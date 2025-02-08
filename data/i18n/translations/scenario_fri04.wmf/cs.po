@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Ondřej Itřech, 2025
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
+"Last-Translator: Ondřej Itřech, 2025\n"
 "Language-Team: Czech (https://app.transifex.com/widelands/teams/35159/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,7 +22,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../../../data/campaigns/fri04.wmf/scripting/init.lua:28
 msgid "Note"
-msgstr ""
+msgstr "Upozornění"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/init.lua:29
 msgid ""
@@ -26,69 +30,77 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Vypadá to, že předchozí mise není splněna. I tak můžeš hrát tento scénář, "
+"ale budeš v nevýhodě. Doporučuji ti, nejprve dokončit předchozí scénář a "
+"poté začít tuto misi od začátku."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:31
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:33
 msgid "Find Reebaud"
-msgstr ""
+msgstr "Najdi Rýbauda"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:34
 msgid "Expand your territory until you meet your old friend Reebaud."
 msgstr ""
+"Rozšiřuj své území tak dlouho, dokud nenarazíš na svého starého přítele "
+"Rýbauda."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:39
 msgid "Defeat the strangers"
-msgstr ""
+msgstr "Poraž cizince"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:41
 msgid "Defeat the Strangers"
-msgstr ""
+msgstr "Poraž cizince"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:42
 msgid "Defeat the hostile tribe."
-msgstr ""
+msgstr "Poraž nepřátelský kmen"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:47
 msgid "Defeat the Empire"
-msgstr ""
+msgstr "Poraž císařství"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:49
 msgid "Defeat the Imperial Legate"
-msgstr ""
+msgstr "Poraž císařského legáta"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:50
 msgid "Defeat Marcus Caius Iniucundus."
-msgstr ""
+msgstr "Poraž císařského zmocněnce Marca Caia Obávaného."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:55
 msgid "Recruit & train"
-msgstr ""
+msgstr "Rekrutuj a cvič"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:57
 msgid "Recruit And Train Your Soldiers"
-msgstr ""
+msgstr "Rektutuj a cvič své vojáky"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:58
 msgid ""
 "Train your soldiers while you are waiting for Reebaud to proclaim his "
 "soldiers battle-ready."
 msgstr ""
+"Mezitím, co budeš čekat na Rýbauda, než povolá své vojáky k boji, tak ty "
+"vycvič ty své."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:59
 msgid "You have one hour to train as many soldiers as you can."
 msgstr ""
+"Máš hodinu na to, abys vycvičil tolik vojáků, kolik jen budeš schopný."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:68
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:77
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:83
 msgid "Welcome Back!"
-msgstr ""
+msgstr "Vítej zpět!"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:69
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:78
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:84
 msgid "Arrived at last"
-msgstr ""
+msgstr "Konečně na místě"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:71
@@ -97,6 +109,9 @@ msgid ""
 "just in time; it caught us while we were on sea and we were all certain our "
 "ship was about to split and sink, and none of us would see our home again."
 msgstr ""
+"Marcus Caius Obávaný měl pravdu s tou bouří. Vypluli jsme právě včas. Bouře "
+"nás zastihla na moři a všichni jsme si byli jistí, že se naše lodě rozlámou "
+"a potopí a že nikdo z nás znovu nespatří svůj domov."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:74
@@ -106,6 +121,10 @@ msgid ""
 "could continue sailing. Finally, we arrived as far North as it is possible "
 "to go by ship."
 msgstr ""
+"Ale Bůh byl milosrdný a naše nespočetné modlitby ho pohnuly tak, že nás "
+"ušetřil. Museli jsme se vylodit na pustém, neobydleném pobřeží a opravit "
+"loď, abychom mohli pokračovat v plavbě. Nakonec jsme se dostali tak daleko "
+"na sever, kam až loď může doplout."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:80
@@ -136,12 +155,12 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:227
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:237
 msgid "Strangers"
-msgstr ""
+msgstr "Cizinci"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:92
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:98
 msgid "Who are they?"
-msgstr ""
+msgstr "Co jsou zač?"
 
 #. TRANSLATORS: Henneke Lembeck – Amazons 1a
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:94
@@ -149,6 +168,8 @@ msgid ""
 "Our soldiers have sighted strangers – the first natives in this bleak "
 "countryside. Perhaps they know where Reebaud can be found?"
 msgstr ""
+"Naši vojáci zahlédli nějaké cizince, první místní obyvatelstvo v této "
+"opuštěné krajině. Možná by mohli vědět, kde Rýbauda najít."
 
 #. TRANSLATORS: Claus Lembeck – Amazons 1b
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:100
@@ -157,11 +178,14 @@ msgid ""
 "Henneke. We come in search of my friend Reebaud. May I ask if you know where"
 " we may find him?"
 msgstr ""
+"Mír s Vámi, zdravím Vás dobří lidé! Já jsem Klaus Lemmek a toto je můj syn "
+"Hennek. Přicházíme ve snaze najít našeho přítele Rýbauda. Mohu-li se Vás "
+"zeptat, nevíte, kde bychom ho mohli najít?"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:104
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:116
 msgid "Enemies"
-msgstr ""
+msgstr "Nepřátelé"
 
 #. TRANSLATORS: Claus Lembeck – Amazons 1c
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:106
@@ -169,10 +193,12 @@ msgid ""
 "Our soldiers have sighted strangers. These must be the intruders Reebaud "
 "mentioned."
 msgstr ""
+"Naši vojáci zpozorovali neznámé cizince. Musí to být ti narušitelé, o "
+"kterých se zmínil Rýbaud."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:110
 msgid "Trespassers"
-msgstr ""
+msgstr "Nezvaní návštěvníci"
 
 #. TRANSLATORS: Linthesilea – Amazons 2. She does not speak this language
 #. well, but she does manage to convey her meaning.
@@ -181,11 +207,13 @@ msgid ""
 "We – Amazons. You – strangers. Land – here – own – we. You – trespassers. "
 "You – enemies. We – you – all – make – dead!"
 msgstr ""
+"My – Amazonky. Vy – cizinec. Země – zde – patřit – naše. Vy – nechtít. Vy – "
+"nepřítel. My – vy – všichni – udělat – mrtví!"
 
 #. TRANSLATORS: Henneke Lembeck – Amazons 3
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:118
 msgid "Not the friendliest of people…"
-msgstr ""
+msgstr "Nejedná se zrovna o nejpohostinnější lid..."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:123
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:129
@@ -200,7 +228,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:186
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:193
 msgid "An Old Friend"
-msgstr ""
+msgstr "Starý přítel"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:124
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:130
@@ -215,13 +243,14 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:187
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:194
 msgid "Met up at last"
-msgstr ""
+msgstr "Konečně se setkáváme"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:126
 msgid ""
 "At last! These people’s buildings look familiar. It must be Reebaud’s tribe."
 msgstr ""
+"No konečně! Budovy těchto lidí působí povědomě. To musí být Rýbaudův kmen."
 
 #. TRANSLATORS: Reebaud – Reebaud 2
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:132
@@ -229,6 +258,8 @@ msgid ""
 "Do my eyes deceive me, or is a spirit playing tricks on me? Surely it cannot"
 " be my old friend Claus who meets me so far away from home!"
 msgstr ""
+"Nešálí mě zrak nebo si ze mě někdo dělá blázny? Tohle přece nemůže být můj "
+"starý přítel Klaus, co by v těchto vzdálených končinách mohl pohledávat!"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 3
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:138
@@ -237,6 +268,9 @@ msgid ""
 "and I journeyed this far to seek you out. I cannot say how glad I am to have"
 " found you at last."
 msgstr ""
+"Ne, to není klam ani přelud, jsem to opravdu já, Klaus Lemmek! Já a můj syn "
+"Hennek jsme vážili tu cestu, abychom tě našli. Ani nemám slov na to, abych "
+"vyjádřil, jak jsem rád, že jsem tě konečně našel."
 
 #. TRANSLATORS: Reebaud – Reebaud 4
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:144
@@ -356,13 +390,13 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:213
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:219
 msgid "An Old Enemy"
-msgstr ""
+msgstr "Starý nepřítel"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:202
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:214
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:220
 msgid "Treason"
-msgstr ""
+msgstr "Zrada"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:204
@@ -370,6 +404,8 @@ msgid ""
 "Wait a minute, you two. What was this you said? You assaulted and murdered "
 "Murilius, a Proconsule of the Empire?"
 msgstr ""
+"No moment, moment. Co jsi to říkal? Že jsi napadl a zavraždil Murilia, "
+"císařského prokonsula?"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:207
@@ -379,6 +415,10 @@ msgid ""
 "neglected to pay his taxes from need or greed, and that I now discovered "
 "that he and all his men were foully murdered by arrogant invaders!"
 msgstr ""
+"To je zcela neslýchané. Já jsem Marcus Caius Obávaný, pověřený legát "
+"císařství. Jen to pomyšlení, že jsem byl vyslán, abych vyšetřil, zda "
+"Murilius neplatí tribut, protože má trampoty nebo z vlastní lakoty. A "
+"zjišťuji, že on i všichni jeho muži byli mrzce pobiti drzými vetřelci!"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:210
@@ -423,11 +463,11 @@ msgstr ""
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:233
 msgid "We must hurry."
-msgstr ""
+msgstr "Musíme si pospíšit."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:238
 msgid "We are too late"
-msgstr ""
+msgstr "Máme zpoždění"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:240
@@ -436,6 +476,10 @@ msgid ""
 "something about his tribe being attacked and vanquished by vicous strangers."
 " With his last breath he told us his leader’s name: Reebaud."
 msgstr ""
+"Poblíž naší severozápadní hranice jsme dnes narazili na zraněného vojáka. "
+"Popadaje dech vykládal, jak byl jeho kmen napaden a přemožen krutými "
+"cizinci. Se svým posledním dechem nám sdělil, že vůdce jeho kmene se "
+"jmenoval Rýbaud. "
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:243
@@ -444,12 +488,15 @@ msgid ""
 "hours before we could meet him. There is no hope in this world for any of "
 "us."
 msgstr ""
+"Přišli jsme pozdě. Měli jsme Rýbauda na dosah, ale byl poražen jen několik "
+"hodin předtím, než jsme se s ním mohli setkat. Veškeré naše naděje jsou tak "
+"v troskách."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:244
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:253
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:262
 msgid "You Have Lost"
-msgstr ""
+msgstr "Prohrál(a) jsi"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:245
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:254
@@ -458,16 +505,18 @@ msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"Tvá výprava selhala a hra tak pro tebe končí. Snad budeš mít při svém dalším"
+" pokusu více štěstí. Klikni na OK pro návrat do hlavní nabídky."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:249
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:258
 msgid "Defeat"
-msgstr ""
+msgstr "Porážka"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:250
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:259
 msgid "We have lost"
-msgstr ""
+msgstr "Prohráli jsme"
 
 #. TRANSLATORS: Reebaud – Reebaud defeated 2
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:252
@@ -491,11 +540,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:267
 msgid "Expansion"
-msgstr ""
+msgstr "Rozšíření území"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:268
 msgid "We are being cut off"
-msgstr ""
+msgstr "Byli jsme odříznuti"
 
 #. TRANSLATORS: Henneke Lembeck – Empire expands
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:270
@@ -519,11 +568,11 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:295
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:304
 msgid "Victory"
-msgstr ""
+msgstr "Vítězství"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:278
 msgid "Intruders defeated"
-msgstr ""
+msgstr "Vetřelci poraženi"
 
 #. TRANSLATORS: Claus Lembeck – Victory over Amazons
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:280
@@ -531,10 +580,12 @@ msgid ""
 "These intruders were not as strong as they thought. They will trouble you no"
 " more."
 msgstr ""
+"Tito vetřelci nebyli tak silní, jak si o sobě mysleli. Už nás nebudou "
+"obtěžovat."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:284
 msgid "Strangers defeated"
-msgstr ""
+msgstr "Cizinci poraženi"
 
 #. TRANSLATORS: Claus Lembeck – Victory over Amazons
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:286
@@ -542,21 +593,25 @@ msgid ""
 "These strangers were not as strong as they thought. Whoever they were, they "
 "will trouble us no more."
 msgstr ""
+"Tito cizinci nebyli tak silní, jak si o sobě mysleli. Ať to byl kdokoli, už "
+"nás nebudou obtěžovat."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:290
 msgid "Legate defeated"
-msgstr ""
+msgstr "Legát poražen"
 
 #. TRANSLATORS: Reebaud – Victory over Empire
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:292
 msgid ""
 "Attempting to take me on is the last mistake you ever made, foolish legate."
 msgstr ""
+"Tvá snaha zahrávat si se mnou je poslední chybou, kterou jsi kdy udělal, "
+"domýšlivý legáte."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:296
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:305
 msgid "We have won"
-msgstr ""
+msgstr "Vyhráli jsme"
 
 #. TRANSLATORS: Reebaud – Victory
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:298
@@ -569,7 +624,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:299
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:308
 msgid "Congratulations"
-msgstr ""
+msgstr "Gratuluji"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:300
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:309
@@ -577,6 +632,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Mise je splněna. Jestli chceš, můžeš pokračovat ve hře, nebo se přesuň k "
+"další misi."
 
 #. TRANSLATORS: Reebaud – Victory
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:307
@@ -591,7 +648,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/tribes/empire_port_large/init.lua:8
 msgctxt "empire_building"
 msgid "Port"
-msgstr ""
+msgstr "Přístav"
 
 #. TRANSLATORS: Purpose helptext for an Empire warehouse: Port
 #: ../../../../data/campaigns/fri04.wmf/scripting/tribes/init.lua:9
@@ -600,3 +657,5 @@ msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
 msgstr ""
+"Slouží jako základna pro zámořské plavby a obchod. Také skladuje suroviny, "
+"nástroje a poskytuje přístřeší vojákům."
