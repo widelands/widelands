@@ -355,7 +355,7 @@ void MarketWindow::setup_name_field_editbox(UI::Box& vbox) {
 			return;
 		}
 		if (Widelands::Game* game = ibase()->get_game(); game != nullptr) {
-			game->send_player_ship_port_name(
+			game->send_player_building_name(
 			   mkt->owner().player_number(), mkt->serial(), name_field->get_text());
 		} else {
 			mkt->set_market_name(name_field->get_text());
