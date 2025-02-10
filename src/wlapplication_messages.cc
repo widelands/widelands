@@ -117,6 +117,7 @@ void fill_parameter_vector() {
 	    false},
 	   /// Misc
 	   {"", "nosound", "", _("Start the game with sound disabled."), false},
+	   {"", "shuffle", "", _("Start the game with shuffle mode for playback of songs"), true},
 	   /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
 	   /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
 	   /** TRANSLATORS: * marks the default value */
