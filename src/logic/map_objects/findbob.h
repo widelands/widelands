@@ -65,7 +65,7 @@ struct FindBobSoldierAttackingPlayer : public FindBob {
 	FindBobSoldierAttackingPlayer(Game& g, Player& p) : player(p), game(g) {
 	}
 
-	[[nodiscard]] bool accept(Bob* const bob) const override;
+	[[nodiscard]] bool accept(Bob* bob) const override;
 
 private:
 	Player& player;
