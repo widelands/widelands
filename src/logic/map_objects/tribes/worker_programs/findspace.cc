@@ -49,10 +49,10 @@ namespace Widelands {
  * all foresters notice this at the same moment, also in network play. I hope this is okay.
  *
  */
- // TODO(Nordfriese): Revisit the above assumptions since we now have two official tribes with
- // buildings that can always change the terrain.
- // TODO(Nordfriese): Check inhowfar this logic can be adapted for immovables other than the
- // standard trees, such as bushes and Amazon rare trees. (Maybe using multiple named caches?)
+// TODO(Nordfriese): Revisit the above assumptions since we now have two official tribes with
+// buildings that can always change the terrain.
+// TODO(Nordfriese): Check inhowfar this logic can be adapted for immovables other than the
+// standard trees, such as bushes and Amazon rare trees. (Maybe using multiple named caches?)
 int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map, Game& game) {
 
 	std::vector<int16_t>& forester_cache = game.forester_cache_;
