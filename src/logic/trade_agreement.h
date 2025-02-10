@@ -50,12 +50,10 @@ struct TradeInstance {
 	BillOfMaterials items_to_receive;
 	int num_batches{0};
 
-	[[nodiscard]] std::string format_richtext(const EditorGameBase& egbase,
+	[[nodiscard]] std::string format_richtext(TradeID id,
+	                                          const EditorGameBase& egbase,
 	                                          PlayerNumber iplayer,
-	                                          bool can_act,
-	                                          const Widelands::Market* own_market,
-	                                          const Widelands::Market* other_market,
-	                                          int batches_sent) const;
+	                                          bool can_act) const;
 };
 
 enum class TradeAction : uint8_t {

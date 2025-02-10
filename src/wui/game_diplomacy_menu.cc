@@ -464,7 +464,7 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 		box->add(new UI::MultilineTextarea(
 		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui,
 		            trade.format_richtext(
-		               igbase_.egbase(), iplayer_->player_number(), true, nullptr, other_market, 0),
+		               trade_id, igbase_.egbase(), iplayer_->player_number(), true),
 		            UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
 		            UI::MultilineTextarea::ScrollMode::kNoScrolling),
 		         UI::Box::Resizing::kExpandBoth);
@@ -535,7 +535,7 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 		box->add(new UI::MultilineTextarea(
 		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui,
 		            trade.format_richtext(
-		               igbase_.egbase(), iplayer_->player_number(), true, own_market, nullptr, 0),
+		               trade_id, igbase_.egbase(), iplayer_->player_number(), true),
 		            UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
 		            UI::MultilineTextarea::ScrollMode::kNoScrolling),
 		         UI::Box::Resizing::kExpandBoth);
@@ -614,8 +614,7 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 
 		box->add(new UI::MultilineTextarea(
 		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui,
-		            trade.format_richtext(igbase_.egbase(), iplayer_->player_number(), true,
-		                                  own_market, other_market, batches_sent),
+		            trade.format_richtext(trade_id, igbase_.egbase(), iplayer_->player_number(), true),
 		            UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
 		            UI::MultilineTextarea::ScrollMode::kNoScrolling),
 		         UI::Box::Resizing::kExpandBoth);

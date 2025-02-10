@@ -453,18 +453,23 @@ void Market::log_general_info(const EditorGameBase& egbase) const {
 	}
 }
 
-std::string TradeInstance::format_richtext(const EditorGameBase& egbase,
+std::string TradeInstance::format_richtext(const TradeID id,
+                                           const EditorGameBase& egbase,
                                            const PlayerNumber iplayer,
-                                           const bool can_act,
-                                           const Widelands::Market* own_market,
-                                           const Widelands::Market* other_market,
-                                           const int batches_sent) const {
+                                           const bool can_act) const {
 	constexpr int16_t kSpacing = 4;
 	assert((iplayer == receiving_player) ^ (iplayer == sending_player));
 	const bool is_receiver = iplayer == receiving_player;
 
+	Widelands::Market* own_market = initiator.get(egbase);
+	Widelands::Market* other_market = receiver.get(egbase);
+
 	std::string infotext("<rt><p>");
 	if (state == State::kRunning) {  // Active trade
+		if (own_market == nullptr || other_market == nullptr) {
+			return std::string();
+		}
+
 		infotext += as_font_tag(
 		   UI::FontStyle::kWuiInfoPanelHeading,
 		   format_l(
@@ -472,9 +477,17 @@ std::string TradeInstance::format_richtext(const EditorGameBase& egbase,
 		      _("Trade agreement at %1$s with %2$s"), own_market->get_market_name(),
 		      other_market->owner().get_name()));
 	} else if (is_receiver) {  // Offered trade
+		if (other_market == nullptr) {
+			return std::string();
+		}
+
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelHeading,
 		                        format_l(_("Trade offer from %s"), other_market->owner().get_name()));
 	} else {  // Proposed trade
+		if (own_market == nullptr) {
+			return std::string();
+		}
+
 		infotext += as_font_tag(
 		   UI::FontStyle::kWuiInfoPanelHeading,
 		   format_l(
@@ -488,17 +501,22 @@ std::string TradeInstance::format_richtext(const EditorGameBase& egbase,
 	                        format_l(ngettext("%d batch", "%d batches", num_batches), num_batches));
 
 	if (state == State::kRunning) {
+		const auto trade = own_market->trade_orders().find(id);
+		if (trade == own_market->trade_orders().end()) {
+			return std::string();
+		}
+
 		infotext += "</p><p>";
 		infotext +=
 		   as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
-		               format_l(ngettext("%d batch delivered", "%d batches delivered", batches_sent),
-		                        batches_sent));
+		               format_l(ngettext("%d batch delivered", "%d batches delivered", trade->second.num_shipped_batches),
+		                        trade->second.num_shipped_batches));
 
 		infotext += "</p><p>";
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
 		                        format_l(ngettext("%d batch remaining", "%d batches remaining",
-		                                          num_batches - batches_sent),
-		                                 num_batches - batches_sent));
+		                                          num_batches - trade->second.num_shipped_batches),
+		                                 num_batches - trade->second.num_shipped_batches));
 	}
 
 	infotext += "</p>";

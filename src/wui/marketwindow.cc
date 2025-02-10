@@ -306,20 +306,9 @@ public:
 			return;
 		}
 
-		const auto trade = own_market->trade_orders().find(trade_id_);
-		if (trade == own_market->trade_orders().end()) {
-			return;
-		}
-
-		Widelands::Market* other_market = trade->second.other_side.get(ibase_.egbase());
-		if (other_market == nullptr) {
-			return;
-		}
-
 		const Widelands::TradeInstance& agreement = ibase_.game().get_trade(trade_id_);
-		info_.set_text(agreement.format_richtext(ibase_.egbase(), own_market->owner().player_number(),
-		                                         can_act_, own_market, other_market,
-		                                         trade->second.num_shipped_batches));
+		info_.set_text(agreement.format_richtext(trade_id_, ibase_.egbase(), own_market->owner().player_number(),
+		                                         can_act_));
 	}
 
 private:
