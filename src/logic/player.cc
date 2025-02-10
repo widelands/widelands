@@ -30,6 +30,9 @@
 #include "base/string.h"
 #include "base/warning.h"
 #include "base/wexception.h"
+#include "commands/cmd_delete_message.h"
+#include "commands/cmd_luacoroutine.h"
+#include "commands/cmd_pick_custom_starting_position.h"
 #include "economy/economy.h"
 #include "economy/expedition_bootstrap.h"
 #include "economy/flag.h"
@@ -37,8 +40,6 @@
 #include "economy/waterway.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/cmd_delete_message.h"
-#include "logic/cmd_luacoroutine.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
@@ -48,13 +49,13 @@
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/mapregion.h"
-#include "logic/playercommand.h"
 #include "scripting/lua_table.h"
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
@@ -1304,12 +1305,10 @@ uint32_t Player::find_attack_soldiers(const Flag& flag,
 	return count;
 }
 
-// TODO(unknown): Clean this mess up. The only action we really have right now is
-// to attack, so pretending we have more types is pointless.
-void Player::enemyflagaction(const Flag& flag,
-                             PlayerNumber const attacker,
-                             const std::vector<Widelands::Soldier*>& soldiers,
-                             const bool allow_conquer) {
+void Player::attack(const Flag& flag,
+                    PlayerNumber const attacker,
+                    const std::vector<Widelands::Soldier*>& soldiers,
+                    const bool allow_conquer) {
 	if (attacker != player_number()) {
 		log_warn_time(egbase().get_gametime(), "Player (%d) is not the sender of an attack (%d)\n",
 		              attacker, player_number());
@@ -1335,7 +1334,7 @@ void Player::enemyflagaction(const Flag& flag,
 								parameters_vector.push_back(temp_attacker->serial());
 							} else {
 								verb_log_warn_time(egbase().get_gametime(),
-								                   "Player(%u)::enemyflagaction: Not sending soldier %u "
+								                   "Player(%u)::attack: Not sending soldier %u "
 								                   "because his warship has vanished\n",
 								                   player_number(), temp_attacker->serial());
 							}
@@ -1346,7 +1345,7 @@ void Player::enemyflagaction(const Flag& flag,
 							// The soldier may not be in a militarysite anymore if he was kicked out
 							// in the short delay between sending and executing a playercommand
 							verb_log_warn_time(egbase().get_gametime(),
-							                   "Player(%u)::enemyflagaction: Not sending soldier %u "
+							                   "Player(%u)::attack: Not sending soldier %u "
 							                   "because he left the building\n",
 							                   player_number(), temp_attacker->serial());
 						}
