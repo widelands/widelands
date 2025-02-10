@@ -1230,6 +1230,16 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_market",
          helptexts = {
+            lore = latin_lore(
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Good contracts make good friends."
+               _("Clara pacta, boni amici."),
+               -- TRANSLATORS: Lore helptext for an Empire market: Market
+               --    Translation for the classical Latin quote:
+               --    "Clara pacta, boni amici."
+               _("Good contracts make good friends.")
+            ),
             -- TRANSLATORS: Purpose helptext for an Empire market: Market
             purpose = pgettext("empire_building", "A market enables trading with other tribes.")
          }

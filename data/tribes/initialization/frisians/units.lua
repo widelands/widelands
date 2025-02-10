@@ -1550,6 +1550,10 @@ wl.Descriptions():new_tribe {
       {
          name = "frisians_market",
          helptexts = {
+            -- TRANSLATORS: Lore helptext for a Frisian market: Market
+            lore = pgettext("frisians_building", "Tradecraft is the fine art of getting others to give you the wares that you want in exchange for wares you don’t want; excuse me, I mean, for wares you convince them to think that they need."),
+            -- TRANSLATORS: Lore author helptext for a Frisian market: Market
+            lore_author = pgettext("frisians_building", "A trader explaining his diplomacy"),
             -- TRANSLATORS: Purpose helptext for a Frisian market: Market
             purpose = pgettext("frisians_building", "A market enables trading with other tribes.")
          }

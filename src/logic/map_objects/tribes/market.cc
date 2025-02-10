@@ -463,6 +463,9 @@ std::string TradeInstance::format_richtext(const TradeID id,
 
 	Widelands::Market* own_market = initiator.get(egbase);
 	Widelands::Market* other_market = receiver.get(egbase);
+	if (is_receiver) {
+		std::swap(own_market, other_market);
+	}
 
 	std::string infotext("<rt><p>");
 	if (state == State::kRunning) {  // Active trade
