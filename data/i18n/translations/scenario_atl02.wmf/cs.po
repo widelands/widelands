@@ -857,7 +857,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:451
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:475
 msgid "Kalitath Appreciates Efforts"
-msgstr ""
+msgstr "Kalitath oceňuje snahu"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:454
@@ -866,11 +866,14 @@ msgid ""
 "However don’t forget to help us defeat the troops of Maletus. Afterwards we "
 "might talk about your princess."
 msgstr ""
+"To je výborná zpráva, Sidole. Cením si práce tvého lidu. Ale nezapomínej, že"
+" nám ještě musíš pomoci porazit Maletusovy jednotky. Pak se můžeme bavit o "
+"princezně."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:460
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:469
 msgid "Empire Defeated"
-msgstr ""
+msgstr "Císařství je poraženo"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:463
@@ -889,10 +892,13 @@ msgid ""
 "However don’t forget to fulfill your tribute within time. Afterwards we "
 "might talk about your princess."
 msgstr ""
+"To je výborná zpráva, Sidole. Cením si schopností tvého lidu. Ale "
+"nezapomínej, že nám ještě musíš doručit zbylé příspěvky. Pak se můžeme bavit"
+" o princezně."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:493
 msgid "Kalitath Acknowledges"
-msgstr ""
+msgstr "Kalitathova slova uznání"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:496
@@ -900,11 +906,13 @@ msgid ""
 "Sidolus, we appreciate this. But your princess and I already made plans for "
 "our common future on this island. She will explain it to you."
 msgstr ""
+"Velmi si toho cením, Sidole. Ale princezna a já už máme na tomto ostrově "
+"naplánovanou naši společnou budoucnost. Poví ti o tom sama."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:499
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:573
 msgid "Jundlina Explains"
-msgstr ""
+msgstr "Jundlina vysvětluje"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:502
@@ -918,10 +926,18 @@ msgid ""
 "Barbarians. This includes learning about their gods and preparing to worship"
 " them."
 msgstr ""
+"Sidole, během svého pobytu s barbary jsem se naučila mnoho o jejich "
+"pohostinnost i odvaze. Opravdu to ve mě zanechalo hluboký dojem a jejich "
+"bojovníci i božstva si jak vidno vedli velmi dobře v boji proti císařství. "
+"Obzvlášť vůdce Kalitath je výborný hostitel a já začala uvažovat o "
+"sjednocení našich kmenů, abychom tu na tomto ostrově mohli do budoucna žít v"
+" míru. Chtěla bych, abys náš lid připravil na svatbu a mírové soužití s "
+"barbary. To obnáší seznámení se s místním božstvem a přípravu na jeho "
+"uctívání."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:505
 msgid "Kalitath Demands"
-msgstr ""
+msgstr "Kalitath žádá"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:508
@@ -931,14 +947,19 @@ msgid ""
 "So we will simply take your military buildings with our forces. Naturally "
 "you won’t have the right to do the same, for the sake of your princess."
 msgstr ""
+"Sidole, nyní následuj příkazů své princezny. Mezitím se rozhodneme, zda pro "
+"naši společnou budoucnost nevyužijeme nějakou část z vámi dobytého území. "
+"Proto zatím jednoduše převezmeme vaše vojenské budovy našimi vojenskými "
+"silami. Samozřejmě do našich vojenských budov nikdo z vás, pro blaho vaší "
+"princezny, vstupovat nesmí."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:514
 msgid "Heretics!"
-msgstr ""
+msgstr "Kacíři!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:515
 msgid "Sidolus is very sad"
-msgstr ""
+msgstr "Sidolus je zarmoucen"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:517
@@ -953,7 +974,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:520
 msgid "Attracting Satul’s Help"
-msgstr ""
+msgstr "Volání k Satulovi o pomoc"
 
 #. TRANSLATORS: Loftomor
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:523
@@ -964,10 +985,15 @@ msgid ""
 "some priestesses, who might beg Satul to show his powers to the Barbarians "
 "and our princess."
 msgstr ""
+"Souhlasím s Vámi, Sidole, nepokloníme se žádnému jinému bohu, pouze "
+"Satulovi. Ale možná budeme za těchto okolností potřebovat boží pomoc. Proto "
+"navrhuji postavit chrám a uctívat Satula vybranými oběťmi. Sučasně bychom "
+"měli vysvětit několik kněžek, které budou orodovat u Satula, aby dal "
+"barbarům a naší princezně pocítit svou moc."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:526
 msgid "Build Temple"
-msgstr ""
+msgstr "Postav chrám"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:529
@@ -988,7 +1014,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:536
 msgid "Temple Completed"
-msgstr ""
+msgstr "Chrám dokončen"
 
 #. TRANSLATORS: Loftomor
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:539

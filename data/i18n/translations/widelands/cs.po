@@ -1994,7 +1994,7 @@ msgstr "Počáteční nastavení"
 
 #: ../../../../src/logic/addons.cc:76
 msgid "UI Plugin"
-msgstr ""
+msgstr "Zásuvný modul uživatelského rozhraní"
 
 #: ../../../../src/logic/addons.cc:117
 #, c-format
@@ -3217,7 +3217,7 @@ msgid ""
 "\n"
 "If you are certain that the replay was created with the same version of Widelands, %1$s, please report this problem as a bug.\n"
 "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
-msgstr ""
+msgstr "Záznam byl desynchronizován a hra byla pozastavena.\nPravděpodobně sledujete záznam vytvořený v jiné verzi Widelands, což není podporováno.\n\nPokud jste si jisti, že záznam byl vytvořen ve stejné verzi Widelands, %1$s, nahlaste prosím tento problém jako chybu.\nZprávy týkající se tohoto problému uvidíte na standardním výstupu (stdout.txt ve Windows). Prosím přiložte tuto informaci k nahlášené chybě."
 
 #: ../../../../src/logic/replay_game_controller.cc:102
 msgid "End of Replay"
@@ -3471,14 +3471,14 @@ msgstr[3] "Bylo zjištěno %u nesouladů v rámci vybraných rozšíření:\n"
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
-msgstr ""
+msgstr "%1$s\n• ‘%2$s’ požadováno hostitelem a nebylo nalezeno"
 
 #: ../../../../src/network/gameclient.cc:822
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
-msgstr ""
+msgstr "%1$s\n• ‘%2$s’ instalováno ve verzi %3$s, ale hostitel používá  %4$s"
 
 #: ../../../../src/network/gameclient.cc:989
 msgid "/me ’s file failed md5 checksumming."
@@ -3547,7 +3547,7 @@ msgstr "Špatné použití, mělo by být: /warn <name> <reason>"
 #: ../../../../src/network/gamehost.cc:176
 #, c-format
 msgid "The client %s could not be found."
-msgstr "Klient %s nebyl nalezen."
+msgstr "Uživatel %s nebyl nalezen."
 
 #: ../../../../src/network/gamehost.cc:163
 msgid "Wrong use, should be: /kick <name> <reason>"
@@ -3831,7 +3831,7 @@ msgstr "Byl jsi odpojen, protože jsi poslal superuser příkaz bez superuser op
 
 #: ../../../../src/network/internet_gaming_messages.cc:40
 msgid "Connection was closed by the client normally."
-msgstr "Spojení bylo klientem ukončeno normálně."
+msgstr "Spojení bylo uživatelem normálně ukončeno."
 
 #: ../../../../src/network/internet_gaming_messages.cc:41
 msgid "The connection to the metaserver was lost."
@@ -3859,11 +3859,11 @@ msgstr "Nahrávání %s"
 
 #: ../../../../src/network/network_gaming_messages.cc:30
 msgid "Client has left the game."
-msgstr "Klient opustil hru."
+msgstr "Uživatel opustil hru."
 
 #: ../../../../src/network/network_gaming_messages.cc:31
 msgid "Client crashed and performed an emergency save."
-msgstr "Klient spadl a provedl nouzové uložení hry."
+msgstr "Uživatel spadl a provedl nouzové uložení hry."
 
 #: ../../../../src/network/network_gaming_messages.cc:32
 msgid "Connection was lost."
@@ -3883,7 +3883,7 @@ msgstr "Došlo k pádu serveru a nouzovému uložení hry."
 
 #: ../../../../src/network/network_gaming_messages.cc:37
 msgid "Client and host have become desynchronized."
-msgstr "Mezi klientem a hostitelem došlo k desynchronizaci."
+msgstr "Mezi uživatelem a hostitelem došlo k desynchronizaci."
 
 #: ../../../../src/network/network_gaming_messages.cc:38
 #, c-format
@@ -3893,7 +3893,7 @@ msgstr "Vyhozen hostitelem: %s"
 #: ../../../../src/network/network_gaming_messages.cc:39
 #, c-format
 msgid "Client sent malformed commands: %s"
-msgstr "Klient poslal poškozené příkazy: %s"
+msgstr "Uživatel poslal poškozené příkazy: %s"
 
 #: ../../../../src/network/network_gaming_messages.cc:41
 #, c-format
@@ -3941,15 +3941,15 @@ msgstr "Přišel příkaz číslo %s, který je v tomto stavu zakázán."
 
 #: ../../../../src/network/network_gaming_messages.cc:56
 msgid "Client reports time to host that is running backwards."
-msgstr "Klient hlásí hostiteli čas, který běží pozpátku."
+msgstr "Uživatel hlásí hostiteli čas, který nemá dopřednou kontinuitu."
 
 #: ../../../../src/network/network_gaming_messages.cc:58
 msgid "Client simulates beyond the game time allowed by the host."
-msgstr "Hra klienta překračuje čas nastavený hostitelem."
+msgstr "Hra uživatele překračuje čas stanovený hostitelem."
 
 #: ../../../../src/network/network_gaming_messages.cc:59
 msgid "Client did not submit sync report in time."
-msgstr "Klient neposlal synchronizační zprávu v limitu."
+msgstr "Uživatel neposlal synchronizační zprávu v limitu."
 
 #: ../../../../src/network/network_gaming_messages.cc:60
 msgid "The game has already started."
@@ -3957,27 +3957,27 @@ msgstr "Hra již začala."
 
 #: ../../../../src/network/network_gaming_messages.cc:61
 msgid "Client has no access to other player’s settings."
-msgstr "Klient nemá přístup k nastavením ostatních hráčů."
+msgstr "Uživatel nemá přístup k nastavením ostatních hráčů."
 
 #: ../../../../src/network/network_gaming_messages.cc:62
 msgid "Client has no access to server settings."
-msgstr "Klient nemá přístup k nastavením serveru."
+msgstr "Uživatel nemá přístup k nastavením serveru."
 
 #: ../../../../src/network/network_gaming_messages.cc:64
 msgid "Client sent TIME command even though game is not running."
-msgstr "Klient poslal příkaz TIME přestože hra neběží."
+msgstr "Uživatel poslal příkaz TIME přestože hra neběží."
 
 #: ../../../../src/network/network_gaming_messages.cc:65
 msgid "Client sent a PLAYERCOMMAND for another player."
-msgstr "Klient odeslal PLAYERCOMMAND za jiného hráče."
+msgstr "Uživatel odeslal PLAYERCOMMAND za jiného hráče."
 
 #: ../../../../src/network/network_gaming_messages.cc:66
 msgid "Client sent unexpected synchronization report."
-msgstr "Klient poslal neočekávanou synchronizační zprávu."
+msgstr "Uživatel poslal neočekávanou synchronizační zprávu."
 
 #: ../../../../src/network/network_gaming_messages.cc:68
 msgid "Client requests file although none is available to send."
-msgstr "Klient požaduje soubor, přestože žádný není k dispozici."
+msgstr "Uživatel požaduje soubor, přestože žádný není k dispozici."
 
 #: ../../../../src/network/network_gaming_messages.cc:69
 #, c-format
@@ -4012,29 +4012,29 @@ msgstr "\"%s\" prohrává hru a pokračuje pouze jako přihlížející."
 #: ../../../../src/network/network_gaming_messages.cc:76
 #, c-format
 msgid "Client %1$s did not answer for more than %2$s."
-msgstr "Klient %1$s neodpověděl více než %2$s."
+msgstr "Uživatel %1$s neodpověděl více než %2$s."
 
 #: ../../../../src/network/network_gaming_messages.cc:77
 #, c-format
 msgid "Client %s has cheating features enabled!"
-msgstr ""
+msgstr "Uživatel %s má aktivní prostředky k cheatování!"
 
 #: ../../../../src/network/network_gaming_messages.cc:78
 #, c-format
 msgid "Client %s is cheating!"
-msgstr "%s obchází pravidla použitím cheatu."
+msgstr "Uživatel %s cheatuje!"
 
 #. * TRANSLATORS: %1 and %2 are user and player names
 #: ../../../../src/network/network_gaming_messages.cc:80
 #, c-format
 msgid "Cheating: Client %1$s now controls %2$s"
-msgstr ""
+msgstr "Cheating: Uživatel %1$s nyní kontroluje hráče %2$s"
 
 #. * TRANSLATORS: %1 and %2 are user and player names
 #: ../../../../src/network/network_gaming_messages.cc:82
 #, c-format
 msgid "Client %1$s is cheating, acting as %2$s!"
-msgstr ""
+msgstr "Uživatel %1$s cheatuje, vydává se za hráče %2$s!"
 
 #: ../../../../src/network/network_lan_promotion.cc:359
 msgid "Failed to use the local network!"
@@ -4058,7 +4058,7 @@ msgstr "%1% (%2%)"
 #: ../../../../src/scripting/ui/lua_panel_create_child.cc:85
 #: ../../../../src/wui/plugins.cc:42
 msgid "Plugin Error"
-msgstr ""
+msgstr "Chyba zásuvného modulu"
 
 #: ../../../../src/scripting/ui/lua_panel_create_child.cc:64
 #: ../../../../src/scripting/ui/lua_panel_create_child.cc:86
@@ -4067,7 +4067,7 @@ msgstr ""
 msgid ""
 "Error when running plugin:\n"
 "%s"
-msgstr ""
+msgstr "Chyba v zásuvném modulu:\n%s"
 
 #: ../../../../src/ui_basic/color_chooser.cc:259
 msgid "Choose Color…"
@@ -4977,7 +4977,7 @@ msgstr "Vložené uživatelské jméno nebo heslo jsou nesprávné:\n%s"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1352
 #, c-format
 msgid "Fetching add-ons… (%.1f%%)"
-msgstr ""
+msgstr "Načítají se rozšíření… (%.1f%%)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1355
 msgid "Connecting to the server…"
@@ -6191,7 +6191,7 @@ msgstr "Výchozí"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:44
 msgid "Crash Report Details"
-msgstr ""
+msgstr "Detaily zprávy o pádu"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:62
 #: ../../../../src/ui_fsmenu/crash_report.cc:149
@@ -6206,16 +6206,16 @@ msgstr "Zkopírovat odkaz"
 #: ../../../../src/ui_fsmenu/crash_report.cc:68
 #: ../../../../src/ui_fsmenu/crash_report.cc:156
 msgid "Copy report"
-msgstr ""
+msgstr "Zkopírovat zprávu"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:69
 #: ../../../../src/ui_fsmenu/crash_report.cc:156
 msgid "Copy the full report to the clipboard"
-msgstr ""
+msgstr "Zkopírovat celou zprávu do schránky"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:98
 msgid "Crash Report"
-msgstr ""
+msgstr "Zpráva o pádu"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:132
 #, c-format
@@ -6233,7 +6233,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:142
 msgid "View the detailed crash report"
-msgstr ""
+msgstr "Podívat se na detailní zprávu o pádu"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:159
 msgid "Remind me later"
@@ -6252,7 +6252,7 @@ msgstr "Lobby metaserveru"
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:65
 msgid "Clients online:"
-msgstr "Klienti online:"
+msgstr "Uživatelé online:"
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:89
 msgid "Open Games:"
@@ -6596,7 +6596,7 @@ msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
-msgstr "VAROVÁNÍ:\nVybraná uložená hra je adresář. K tomu mohlo dojít tak, že byla aktivována volba \"nozip\", nebo byla uložená hra ručně rozbalena.\nWidelands neumí odesílat rozbalené adresáře ke klientům, prosím zvol jinou uloženou hru, nebo obsah adresáře zabal."
+msgstr "VAROVÁNÍ:\nVybraná uložená hra je adresář. K tomu mohlo dojít tak, že byla aktivována volba \"nozip\", nebo byla uložená hra ručně rozbalena.\nWidelands neumí uživatelům odesílat rozbalené adresáře, prosím zvol jinou uloženou hru, nebo obsah adresáře zabal."
 
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:239
 #: ../../../../src/ui_fsmenu/launch_spg.cc:134
@@ -7333,7 +7333,7 @@ msgstr "Tým %d"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:706
 msgid "Clients"
-msgstr "Klienti"
+msgstr "Uživatelé"
 
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:35
 msgid "Begin LAN Game"
