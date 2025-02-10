@@ -510,10 +510,10 @@ std::string TradeInstance::format_richtext(const TradeID id,
 		}
 
 		infotext += "</p><p>";
-		infotext +=
-		   as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
-		               format_l(ngettext("%d batch delivered", "%d batches delivered", trade->second.num_shipped_batches),
-		                        trade->second.num_shipped_batches));
+		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
+		                        format_l(ngettext("%d batch delivered", "%d batches delivered",
+		                                          trade->second.num_shipped_batches),
+		                                 trade->second.num_shipped_batches));
 
 		infotext += "</p><p>";
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,

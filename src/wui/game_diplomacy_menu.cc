@@ -461,13 +461,13 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 		buttons->add_space(kSpacing);
 		buttons->add(yes, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-		box->add(new UI::MultilineTextarea(
-		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui,
-		            trade.format_richtext(
-		               trade_id, igbase_.egbase(), iplayer_->player_number(), true),
-		            UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
-		            UI::MultilineTextarea::ScrollMode::kNoScrolling),
-		         UI::Box::Resizing::kExpandBoth);
+		box->add(
+		   new UI::MultilineTextarea(
+		      box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui,
+		      trade.format_richtext(trade_id, igbase_.egbase(), iplayer_->player_number(), true),
+		      UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
+		      UI::MultilineTextarea::ScrollMode::kNoScrolling),
+		   UI::Box::Resizing::kExpandBoth);
 		box->add_space(kSpacing);
 		box->add(buttons, UI::Box::Resizing::kAlign, UI::Align::kTop);
 		trades_box_offers_.add(box, UI::Box::Resizing::kExpandBoth);
@@ -532,13 +532,13 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 		buttons->add_space(kSpacing);
 		buttons->add(go_to, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-		box->add(new UI::MultilineTextarea(
-		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui,
-		            trade.format_richtext(
-		               trade_id, igbase_.egbase(), iplayer_->player_number(), true),
-		            UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
-		            UI::MultilineTextarea::ScrollMode::kNoScrolling),
-		         UI::Box::Resizing::kExpandBoth);
+		box->add(
+		   new UI::MultilineTextarea(
+		      box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui,
+		      trade.format_richtext(trade_id, igbase_.egbase(), iplayer_->player_number(), true),
+		      UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
+		      UI::MultilineTextarea::ScrollMode::kNoScrolling),
+		   UI::Box::Resizing::kExpandBoth);
 		box->add_space(kSpacing);
 		box->add(buttons, UI::Box::Resizing::kAlign, UI::Align::kTop);
 		trades_box_proposed_.add(box, UI::Box::Resizing::kExpandBoth);
@@ -612,12 +612,13 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		buttons->add_space(kSpacing);
 		buttons->add(go_to, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-		box->add(new UI::MultilineTextarea(
-		            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui,
-		            trade.format_richtext(trade_id, igbase_.egbase(), iplayer_->player_number(), true),
-		            UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
-		            UI::MultilineTextarea::ScrollMode::kNoScrolling),
-		         UI::Box::Resizing::kExpandBoth);
+		box->add(
+		   new UI::MultilineTextarea(
+		      box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui,
+		      trade.format_richtext(trade_id, igbase_.egbase(), iplayer_->player_number(), true),
+		      UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
+		      UI::MultilineTextarea::ScrollMode::kNoScrolling),
+		   UI::Box::Resizing::kExpandBoth);
 		box->add_space(kSpacing);
 		box->add(buttons, UI::Box::Resizing::kAlign, UI::Align::kTop);
 		trades_box_active_.add(box, UI::Box::Resizing::kExpandBoth);
