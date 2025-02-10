@@ -27,7 +27,7 @@ namespace Widelands {
 /**
  * Breed on the current coordinates for resource increase, go home.
  *
- * Syntax in conffile: breed=\<resource\> \<area\>
+ * Syntax in luafile: breed=\<resource\> radius:\<radius\>
  *
  * \param g
  * \param state

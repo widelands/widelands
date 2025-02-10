@@ -23,6 +23,7 @@
 
 namespace Widelands {
 
+class Game;
 class Player;
 
 struct FindBobAttribute : public FindBob {
@@ -45,6 +46,7 @@ struct FindBobEnemySoldier : public FindBob {
 
 	bool accept(Bob*) const override;
 
+private:
 	Player* player;
 };
 
@@ -54,6 +56,20 @@ struct FindBobShip : FindBob {
 
 struct FindBobCritter : FindBob {
 	bool accept(Bob* bob) const override;
+};
+
+/**
+ * Accept Bob when is a Soldier alive that is attacking the Player.
+ */
+struct FindBobSoldierAttackingPlayer : public FindBob {
+	FindBobSoldierAttackingPlayer(Game& g, Player& p) : player(p), game(g) {
+	}
+
+	[[nodiscard]] bool accept(Bob* const bob) const override;
+
+private:
+	Player& player;
+	Game& game;
 };
 
 }  // namespace Widelands

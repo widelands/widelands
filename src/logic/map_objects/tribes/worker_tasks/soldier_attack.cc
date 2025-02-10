@@ -29,17 +29,6 @@
 
 namespace Widelands {
 
-struct FindNodeOwned {
-	explicit FindNodeOwned(PlayerNumber owner) : owner_(owner) {
-	}
-	[[nodiscard]] bool accept(const EditorGameBase& /* egbase */, const FCoords& coords) const {
-		return (coords.field->get_owned_by() == owner_);
-	}
-
-private:
-	PlayerNumber owner_;
-};
-
 /**
  * Leave our home building and single-mindedly try to attack
  * and conquer the given building.

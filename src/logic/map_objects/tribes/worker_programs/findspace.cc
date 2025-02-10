@@ -49,6 +49,10 @@ namespace Widelands {
  * all foresters notice this at the same moment, also in network play. I hope this is okay.
  *
  */
+ // TODO(Nordfriese): Revisit the above assumptions since we now have two official tribes with
+ // buildings that can always change the terrain.
+ // TODO(Nordfriese): Check inhowfar this logic can be adapted for immovables other than the
+ // standard trees, such as bushes and Amazon rare trees. (Maybe using multiple named caches?)
 int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map, Game& game) {
 
 	std::vector<int16_t>& forester_cache = game.forester_cache_;
@@ -134,54 +138,6 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
  * iparam4 = whether the "breed" flag is set
  * sparam1 = Resource
  */
-// TODO(unknown): This is an embarrasingly ugly hack to make bug #1796611 happen less
-// often. But it gives no passability guarantee (that workers will not
-// get locked in). For example one farmer may call findspace and then,
-// before he plants anything, another farmer may call findspace, which
-// may find a space without considering that the first farmer will plant
-// something. Together they can cause a passability problem. This code
-// will also allow blocking the shoreline if it is next to the worker's
-// location. Also, the gap of 2 nodes between 2 farms will be blocked,
-// because both are next to their farm. The only real solution that I can
-// think of for this kind of bugs is to only allow unwalkable objects to
-// be placed on a node if ALL neighbouring nodes are passable. This must
-// of course be checked at the moment when the object is placed and not,
-// as in this case, only before a worker starts walking there to place an
-// object. But that would make it very difficult to find space for things
-// like farm fileds. So our only option seems to be to keep all farm
-// fields, trees, rocks and such on triangles and keep the nodes
-// passable. See code structure issue #1096824.
-//
-// If landbased_ is false, the behaviour is modified to instead accept the node
-// only if *at least one* adjacent triangle has MOVECAPS_SWIM.
-struct FindNodeSpace {
-	explicit FindNodeSpace(bool land) : landbased_(land) {
-	}
-
-	[[nodiscard]] bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
-		if ((coords.field->nodecaps() & MOVECAPS_WALK) == 0) {
-			return false;
-		}
-
-		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-			FCoords const neighb = egbase.map().get_neighbour(coords, dir);
-			if (landbased_) {
-				if ((neighb.field->maxcaps() & MOVECAPS_WALK) == 0) {
-					return false;
-				}
-			} else {
-				if ((neighb.field->nodecaps() & MOVECAPS_SWIM) != 0) {
-					return true;
-				}
-			}
-		}
-		return landbased_;
-	}
-
-private:
-	bool landbased_;
-};
-
 bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	std::vector<Coords> list;
 	const Map& map = game.map();

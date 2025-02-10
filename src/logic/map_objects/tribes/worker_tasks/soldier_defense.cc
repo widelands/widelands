@@ -21,28 +21,10 @@
 #include "economy/flag.h"
 #include "logic/map_objects/findbob.h"
 #include "logic/map_objects/tribes/battle.h"
+#include "logic/map_objects/tribes/soldier_distance.h"
 #include "logic/player.h"
 
 namespace Widelands {
-
-/**
- * Accept Bob when is a Soldier alive that is attacking the Player.
- */
-struct FindBobSoldierAttackingPlayer : public FindBob {
-	FindBobSoldierAttackingPlayer(Game& g, Player& p) : player(p), game(g) {
-	}
-
-	bool accept(Bob* const bob) const override {
-		if (upcast(Soldier, soldier, bob)) {
-			return (soldier->get_current_health() != 0u) &&
-			       soldier->is_attacking_player(game, player) && soldier->owner().is_hostile(player);
-		}
-		return false;
-	}
-
-	Player& player;
-	Game& game;
-};
 
 /**
  * Soldiers with this task go out of his buildings. They will
@@ -85,21 +67,6 @@ void Soldier::start_task_defense(Game& game, bool stayhome) {
 	}
 	molog(game.get_gametime(), "[defense] retreat health set: %u\n", get_retreat_health());
 }
-
-struct SoldierDistance {
-	Soldier* s;
-	int dist;
-
-	SoldierDistance(Soldier* a, int d) : dist(d) {
-		s = a;
-	}
-
-	struct Greater {
-		bool operator()(const SoldierDistance& a, const SoldierDistance& b) {
-			return (a.dist > b.dist);
-		}
-	};
-};
 
 void Soldier::defense_update(Game& game, State& state) {
 	std::string signal = get_signal();
