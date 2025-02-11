@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-02-06 02:52+0000\n"
+"POT-Creation-Date: 2025-02-10 02:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Matevž Jekovec <matevz.jekovec@gmail.com>, 2020-2021\n"
 "Language-Team: Slovenian (http://app.transifex.com/widelands/widelands/language/sl/)\n"
@@ -64,7 +64,7 @@ msgstr ""
 
 #: ../../../../data/scripting/messages.lua:66
 #: ../../../../data/scripting/messages.lua:68
-#: ../../../../src/wui/game_message_menu.cc:70
+#: ../../../../src/wui/game_message_menu.cc:71
 #: ../../../../src/wui/game_summary.cc:119
 msgid "Status"
 msgstr "Stanje"
@@ -278,6 +278,113 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Dec"
 
+#: ../../../../src/commands/cmd_diplomacy.cc:42
+#: ../../../../src/wlapplication_options.cc:658
+#: ../../../../src/wui/game_diplomacy_menu.cc:36
+#: ../../../../src/wui/interactive_gamebase.cc:250
+msgid "Diplomacy"
+msgstr ""
+
+#: ../../../../src/commands/cmd_diplomacy.cc:56
+#, c-format
+msgid "%s has resigned and is now a spectator."
+msgstr ""
+
+#: ../../../../src/commands/cmd_diplomacy.cc:56
+msgid "Player Resigned"
+msgstr ""
+
+#: ../../../../src/commands/cmd_diplomacy.cc:68
+msgid "Player Leaves Team"
+msgstr ""
+
+#: ../../../../src/commands/cmd_diplomacy.cc:69
+#, c-format
+msgid "%1$s has left team %2$u and is now teamless."
+msgstr ""
+
+#: ../../../../src/commands/cmd_diplomacy.cc:77
+msgid "Team Joining Request"
+msgstr ""
+
+#: ../../../../src/commands/cmd_diplomacy.cc:78
+msgid "Team Joining Invitation"
+msgstr ""
+
+#: ../../../../src/commands/cmd_diplomacy.cc:80
+#: ../../../../src/wui/game_diplomacy_menu.cc:269
+#, c-format
+msgid "%1$s has requested to join the team of %2$s."
+msgstr ""
+
+#: ../../../../src/commands/cmd_diplomacy.cc:81
+#: ../../../../src/wui/game_diplomacy_menu.cc:276
+#, c-format
+msgid "%1$s has invited %2$s to join their team."
+msgstr ""
+
+#: ../../../../src/commands/cmd_diplomacy.cc:120
+#, c-format
+msgid "%1$s has accepted %2$s into their team."
+msgstr ""
+
+#: ../../../../src/commands/cmd_diplomacy.cc:122
+#, c-format
+msgid "%1$s has accepted the invitation to join the team of %2$s."
+msgstr ""
+
+#: ../../../../src/commands/cmd_diplomacy.cc:127
+#, c-format
+msgid "%1$s has retracted the request to join the team of %2$s."
+msgstr ""
+
+#: ../../../../src/commands/cmd_diplomacy.cc:129
+#, c-format
+msgid "%1$s has denied %2$s membership in their team."
+msgstr ""
+
+#: ../../../../src/commands/cmd_diplomacy.cc:132
+#, c-format
+msgid "%1$s has retracted the invitation to %2$s to join their team."
+msgstr ""
+
+#: ../../../../src/commands/cmd_diplomacy.cc:134
+#, c-format
+msgid "%1$s has rejected the invitation to join the team of %2$s."
+msgstr ""
+
+#: ../../../../src/commands/cmd_diplomacy.cc:138
+msgid "Team Change Accepted"
+msgstr ""
+
+#: ../../../../src/commands/cmd_diplomacy.cc:138
+msgid "Team Change Rejected"
+msgstr ""
+
+#: ../../../../src/commands/cmd_replay_end.cc:33
+msgid "End of Replay"
+msgstr "Konec posnetka"
+
+#: ../../../../src/commands/cmd_replay_end.cc:34
+msgid ""
+"The end of the replay has been reached and the game has been paused. You may"
+" unpause the game and continue watching if you want to."
+msgstr "Igra je v premoru, ker se je počasni posnetek iztekel. Po želji lahko nadaljujete z ogledom posnetka."
+
+#: ../../../../src/commands/cmd_replay_sync_read.cc:55
+msgid "Desync"
+msgstr ""
+
+#: ../../../../src/commands/cmd_replay_sync_read.cc:56
+#, c-format
+msgid ""
+"The replay has desynced and the game was paused.\n"
+"You are probably watching a replay created with another version of Widelands, which is not supported.\n"
+"\n"
+"If you are certain that the replay was created with the same version of Widelands, %1$s, please report this problem as a bug.\n"
+"You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
+msgstr ""
+
 #. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
 #: ../../../../src/editor/editorinteractive.cc:102
@@ -330,7 +437,7 @@ msgstr "Uveljavi"
 #: ../../../../src/editor/editorinteractive.cc:178
 #: ../../../../src/wlapplication_options.cc:855
 #: ../../../../src/wui/buildingwindow.cc:448
-#: ../../../../src/wui/interactive_player.cc:238
+#: ../../../../src/wui/interactive_player.cc:237
 msgid "Help"
 msgstr "Pomoč"
 
@@ -1113,7 +1220,7 @@ msgstr "V redu"
 #: ../../../../src/ui_fsmenu/login_box.cc:46
 #: ../../../../src/ui_fsmenu/options.cc:91
 #: ../../../../src/ui_fsmenu/training_wheel_options.cc:108
-#: ../../../../src/wui/economy_options_window.cc:681
+#: ../../../../src/wui/economy_options_window.cc:683
 #: ../../../../src/wui/game_main_menu_save_game.cc:99
 #: ../../../../src/wui/pinned_note.cc:67
 msgid "Cancel"
@@ -1144,7 +1251,7 @@ msgstr "Kliknite na igralca za njegovo odstranitev"
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:438
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:67
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:90
-#: ../../../../src/wui/economy_options_window.cc:682
+#: ../../../../src/wui/economy_options_window.cc:684
 #: ../../../../src/wui/load_or_save_game.cc:59
 #: ../../../../src/wui/pinned_note.cc:59
 msgid "Delete"
@@ -1804,8 +1911,8 @@ msgstr "Čakalna vrsta ukazov"
 #: ../../../../src/map_io/map_saver.cc:146
 #: ../../../../src/map_io/widelands_map_loader.cc:400
 #: ../../../../src/wlapplication_options.cc:661
-#: ../../../../src/wui/interactive_player.cc:228
-#: ../../../../src/wui/interactive_player.cc:496
+#: ../../../../src/wui/interactive_player.cc:227
+#: ../../../../src/wui/interactive_player.cc:495
 msgid "Messages"
 msgstr "Sporočila"
 
@@ -2261,44 +2368,44 @@ msgid "Cleaning up for loading: Map (3/3)"
 msgstr "Čiščenje pred nalaganjem: Zemljevid (3/3)"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
-#: ../../../../src/logic/game.cc:145
+#: ../../../../src/logic/game.cc:187
 msgid "Not set"
 msgstr "Ni nastavljeno"
 
-#: ../../../../src/logic/game.cc:246 ../../../../src/logic/game.cc:289
-#: ../../../../src/logic/game.cc:407 ../../../../src/logic/game.cc:462
+#: ../../../../src/logic/game.cc:288 ../../../../src/logic/game.cc:331
+#: ../../../../src/logic/game.cc:449 ../../../../src/logic/game.cc:504
 msgid "Preloading map…"
 msgstr "Prednalaganje zemljevida ..."
 
-#: ../../../../src/logic/game.cc:345
+#: ../../../../src/logic/game.cc:387
 msgid "Initializing game…"
 msgstr "Inicializacija igre ..."
 
 #. * TRANSLATORS: All players (plural)
-#: ../../../../src/logic/game.cc:604
+#: ../../../../src/logic/game.cc:646
 msgid "Creating player infrastructure…"
 msgstr "Ustvarjanje infrastrukture igralca ..."
 
-#: ../../../../src/logic/game.cc:621 ../../../../src/logic/player.cc:258
+#: ../../../../src/logic/game.cc:663 ../../../../src/logic/player.cc:259
 msgid "Missing starting position"
 msgstr "Manjka začetni položaj"
 
-#: ../../../../src/logic/game.cc:622 ../../../../src/logic/player.cc:259
+#: ../../../../src/logic/game.cc:664 ../../../../src/logic/player.cc:260
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands ne more začeti igre, kjer igralec %u nima začetnega položaja.\nLahko ročno dodate začetni položaj z Widelandsovim urejevalnikom, kar bo rešilo težavo."
 
-#: ../../../../src/logic/game.cc:722
+#: ../../../../src/logic/game.cc:764
 msgid "Initializing…"
 msgstr ""
 
-#: ../../../../src/logic/game.cc:1242
+#: ../../../../src/logic/game.cc:1286
 msgid "Trade Offer"
 msgstr "Ponudba"
 
-#: ../../../../src/logic/game.cc:1244
+#: ../../../../src/logic/game.cc:1288
 msgid "This market has received a new trade offer."
 msgstr "Trg je dobil novo ponudbo."
 
@@ -2862,7 +2969,7 @@ msgid "Refitting to Warship"
 msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2426
-#: ../../../../src/wui/seafaring_statistics_menu.cc:271
+#: ../../../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
 msgstr ""
@@ -2885,7 +2992,7 @@ msgstr ""
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2437
-#: ../../../../src/wui/seafaring_statistics_menu.cc:261
+#: ../../../../src/wui/seafaring_statistics_menu.cc:260
 msgctxt "ship_state"
 msgid "Empty"
 msgstr "Prazna"
@@ -2901,7 +3008,7 @@ msgstr ""
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2469
-#: ../../../../src/wui/seafaring_statistics_menu.cc:265
+#: ../../../../src/wui/seafaring_statistics_menu.cc:264
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "Čakanje"
@@ -2909,14 +3016,14 @@ msgstr "Čakanje"
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2473
-#: ../../../../src/wui/seafaring_statistics_menu.cc:267
+#: ../../../../src/wui/seafaring_statistics_menu.cc:266
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Izvidnica"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2477
-#: ../../../../src/wui/seafaring_statistics_menu.cc:269
+#: ../../../../src/wui/seafaring_statistics_menu.cc:268
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "Najden prostor v pristanišču"
@@ -2947,9 +3054,9 @@ msgstr "Ladje"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:173
-#: ../../../../src/wui/economy_options_window.cc:75
+#: ../../../../src/wui/economy_options_window.cc:77
 #: ../../../../src/wui/general_statistics_menu.cc:165
-#: ../../../../src/wui/interactive_player.cc:330
+#: ../../../../src/wui/interactive_player.cc:329
 #: ../../../../src/wui/productionsitewindow.cc:90
 #: ../../../../src/wui/warehousewindow.cc:295
 msgid "Wares"
@@ -2959,7 +3066,7 @@ msgstr "Dobrine"
 #. worker. If you
 #. need plural forms here, please let us know.
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:180
-#: ../../../../src/wui/economy_options_window.cc:76
+#: ../../../../src/wui/economy_options_window.cc:78
 #: ../../../../src/wui/general_statistics_menu.cc:156
 #: ../../../../src/wui/productionsitewindow.cc:110
 #: ../../../../src/wui/warehousewindow.cc:299
@@ -2971,7 +3078,7 @@ msgstr "Delavci"
 #: ../../../../src/map_io/map_saver.cc:219
 #: ../../../../src/map_io/widelands_map_loader.cc:336
 #: ../../../../src/wui/general_statistics_menu.cc:161
-#: ../../../../src/wui/interactive_player.cc:325
+#: ../../../../src/wui/interactive_player.cc:324
 #: ../../../../src/wui/minimap.cc:202
 msgid "Buildings"
 msgstr "Zgradbe"
@@ -3097,130 +3204,23 @@ msgstr "Datoteka z zemljevidom je neveljavna:\n%s"
 msgid "This objective has no description."
 msgstr "Ta cilj nima opisa."
 
-#: ../../../../src/logic/player.cc:2023
+#: ../../../../src/logic/player.cc:2022
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
 msgstr "Ladja %d"
 
-#: ../../../../src/logic/player.cc:2040
+#: ../../../../src/logic/player.cc:2039
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
 msgstr ""
 
-#: ../../../../src/logic/player.cc:2040
+#: ../../../../src/logic/player.cc:2039
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
 msgstr ""
-
-#: ../../../../src/logic/playercommand.cc:2358
-#: ../../../../src/wlapplication_options.cc:658
-#: ../../../../src/wui/game_diplomacy_menu.cc:36
-#: ../../../../src/wui/interactive_gamebase.cc:250
-msgid "Diplomacy"
-msgstr ""
-
-#: ../../../../src/logic/playercommand.cc:2372
-#, c-format
-msgid "%s has resigned and is now a spectator."
-msgstr ""
-
-#: ../../../../src/logic/playercommand.cc:2372
-msgid "Player Resigned"
-msgstr ""
-
-#: ../../../../src/logic/playercommand.cc:2384
-msgid "Player Leaves Team"
-msgstr ""
-
-#: ../../../../src/logic/playercommand.cc:2385
-#, c-format
-msgid "%1$s has left team %2$u and is now teamless."
-msgstr ""
-
-#: ../../../../src/logic/playercommand.cc:2393
-msgid "Team Joining Request"
-msgstr ""
-
-#: ../../../../src/logic/playercommand.cc:2394
-msgid "Team Joining Invitation"
-msgstr ""
-
-#: ../../../../src/logic/playercommand.cc:2396
-#: ../../../../src/wui/game_diplomacy_menu.cc:269
-#, c-format
-msgid "%1$s has requested to join the team of %2$s."
-msgstr ""
-
-#: ../../../../src/logic/playercommand.cc:2397
-#: ../../../../src/wui/game_diplomacy_menu.cc:276
-#, c-format
-msgid "%1$s has invited %2$s to join their team."
-msgstr ""
-
-#: ../../../../src/logic/playercommand.cc:2436
-#, c-format
-msgid "%1$s has accepted %2$s into their team."
-msgstr ""
-
-#: ../../../../src/logic/playercommand.cc:2438
-#, c-format
-msgid "%1$s has accepted the invitation to join the team of %2$s."
-msgstr ""
-
-#: ../../../../src/logic/playercommand.cc:2443
-#, c-format
-msgid "%1$s has retracted the request to join the team of %2$s."
-msgstr ""
-
-#: ../../../../src/logic/playercommand.cc:2445
-#, c-format
-msgid "%1$s has denied %2$s membership in their team."
-msgstr ""
-
-#: ../../../../src/logic/playercommand.cc:2448
-#, c-format
-msgid "%1$s has retracted the invitation to %2$s to join their team."
-msgstr ""
-
-#: ../../../../src/logic/playercommand.cc:2450
-#, c-format
-msgid "%1$s has rejected the invitation to join the team of %2$s."
-msgstr ""
-
-#: ../../../../src/logic/playercommand.cc:2454
-msgid "Team Change Accepted"
-msgstr ""
-
-#: ../../../../src/logic/playercommand.cc:2454
-msgid "Team Change Rejected"
-msgstr ""
-
-#: ../../../../src/logic/replay.cc:93
-msgid "Desync"
-msgstr ""
-
-#: ../../../../src/logic/replay.cc:94
-#, c-format
-msgid ""
-"The replay has desynced and the game was paused.\n"
-"You are probably watching a replay created with another version of Widelands, which is not supported.\n"
-"\n"
-"If you are certain that the replay was created with the same version of Widelands, %1$s, please report this problem as a bug.\n"
-"You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
-msgstr ""
-
-#: ../../../../src/logic/replay_game_controller.cc:102
-msgid "End of Replay"
-msgstr "Konec posnetka"
-
-#: ../../../../src/logic/replay_game_controller.cc:103
-msgid ""
-"The end of the replay has been reached and the game has been paused. You may"
-" unpause the game and continue watching if you want to."
-msgstr "Igra je v premoru, ker se je počasni posnetek iztekel. Po želji lahko nadaljujete z ogledom posnetka."
 
 #: ../../../../src/logic/save_handler.cc:114
 msgid "Saving game…"
@@ -3367,8 +3367,8 @@ msgstr "Potek dogodkov"
 #: ../../../../src/map_io/widelands_map_loader.cc:418
 #: ../../../../src/wlapplication_options.cc:654
 #: ../../../../src/wui/game_objectives_menu.cc:30
-#: ../../../../src/wui/interactive_player.cc:217
-#: ../../../../src/wui/interactive_player.cc:485
+#: ../../../../src/wui/interactive_player.cc:216
+#: ../../../../src/wui/interactive_player.cc:484
 msgid "Objectives"
 msgstr "Cilji"
 
@@ -3483,11 +3483,11 @@ msgid ""
 "not handle the file."
 msgstr "/me sem preveril sprejeto datoteko. Čeprav se vsota md5 ujema, z datoteko ne znam rokovati."
 
-#: ../../../../src/network/gameclient.cc:1352
+#: ../../../../src/network/gameclient.cc:1353
 msgid "Disconnected"
 msgstr ""
 
-#: ../../../../src/network/gameclient.cc:1353
+#: ../../../../src/network/gameclient.cc:1354
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -6375,7 +6375,7 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:297
-#: ../../../../src/wui/interactive_player.cc:335
+#: ../../../../src/wui/interactive_player.cc:334
 msgid "General"
 msgstr "Splošno"
 
@@ -6659,7 +6659,7 @@ msgstr "Nastavitve omrežne igre"
 
 #: ../../../../src/ui_fsmenu/login_box.cc:44
 #: ../../../../src/wlapplication_options.cc:400
-#: ../../../../src/wui/economy_options_window.cc:680
+#: ../../../../src/wui/economy_options_window.cc:682
 msgid "Save"
 msgstr "Shrani"
 
@@ -7474,7 +7474,7 @@ msgstr "Prikaži zgradbe"
 #. workarea overlaps
 #. * are highlighted
 #: ../../../../src/ui_fsmenu/options.cc:308
-#: ../../../../src/wui/interactive_player.cc:382
+#: ../../../../src/wui/interactive_player.cc:381
 msgid "Show Workarea Overlaps"
 msgstr "Pokaži prekrivanje delovišč"
 
@@ -9218,7 +9218,7 @@ msgid "Enhance to %s"
 msgstr "Nadgradi na %s"
 
 #: ../../../../src/wui/buildingwindow.cc:331
-#: ../../../../src/wui/fieldaction.cc:107
+#: ../../../../src/wui/fieldaction.cc:106
 msgid "Construction costs:"
 msgstr "Cena gradnje:"
 
@@ -9331,76 +9331,76 @@ msgid ""
 "Increase capacity. Hold down Ctrl to set the capacity to the highest value"
 msgstr "Povečaj zmogljivost. Držite Ctrl, da nastavite najvišjo možno zmogljivost."
 
-#: ../../../../src/wui/economy_options_window.cc:49
+#: ../../../../src/wui/economy_options_window.cc:51
 msgid "Economy options"
 msgstr "Možnosti ekonomije"
 
-#: ../../../../src/wui/economy_options_window.cc:82
+#: ../../../../src/wui/economy_options_window.cc:84
 msgid "Decrease target by 10"
 msgstr "Zmanjšaj cilj za 10"
 
-#: ../../../../src/wui/economy_options_window.cc:90
+#: ../../../../src/wui/economy_options_window.cc:92
 msgid "Decrease target"
 msgstr "Zmanjšaj cilj"
 
-#: ../../../../src/wui/economy_options_window.cc:99
+#: ../../../../src/wui/economy_options_window.cc:101
 msgid "Toggle infinite target"
 msgstr "Preklopi neskončen cilj"
 
-#: ../../../../src/wui/economy_options_window.cc:107
+#: ../../../../src/wui/economy_options_window.cc:109
 msgid "Increase target"
 msgstr "Povečaj cilj"
 
-#: ../../../../src/wui/economy_options_window.cc:115
+#: ../../../../src/wui/economy_options_window.cc:117
 msgid "Increase target by 10"
 msgstr "Povečaj cilj za 10"
 
-#: ../../../../src/wui/economy_options_window.cc:121
+#: ../../../../src/wui/economy_options_window.cc:123
 msgid "Profile to apply to the selected items"
 msgstr "Profil za izbrane postavke"
 
-#: ../../../../src/wui/economy_options_window.cc:132
+#: ../../../../src/wui/economy_options_window.cc:134
 msgid "Save target settings"
 msgstr "Shrani nastavitve cilja"
 
 #. * TRANSLATORS: Infinite number of wares or workers
-#: ../../../../src/wui/economy_options_window.cc:311
+#: ../../../../src/wui/economy_options_window.cc:313
 msgid "∞"
 msgstr "∞"
 
-#: ../../../../src/wui/economy_options_window.cc:581
+#: ../../../../src/wui/economy_options_window.cc:583
 msgid "The profile name cannot be empty"
 msgstr "Ime profila ne more biti prazno"
 
-#: ../../../../src/wui/economy_options_window.cc:582
+#: ../../../../src/wui/economy_options_window.cc:584
 msgid "The default profile cannot be overwritten"
 msgstr "Privzet profil ne more biti prepisan"
 
-#: ../../../../src/wui/economy_options_window.cc:585
+#: ../../../../src/wui/economy_options_window.cc:587
 msgid "Save the profile under this name"
 msgstr "Shrani profil pod tem imenom"
 
-#: ../../../../src/wui/economy_options_window.cc:597
+#: ../../../../src/wui/economy_options_window.cc:599
 msgid "The predefined profiles cannot be deleted"
 msgstr "Prednastavljeni profili ne morejo biti zbrisani"
 
-#: ../../../../src/wui/economy_options_window.cc:600
+#: ../../../../src/wui/economy_options_window.cc:602
 msgid "Delete the selected profiles"
 msgstr "Zbriši izbran profil"
 
-#: ../../../../src/wui/economy_options_window.cc:622
+#: ../../../../src/wui/economy_options_window.cc:624
 msgid "Overwrite?"
 msgstr "Prepišem?"
 
-#: ../../../../src/wui/economy_options_window.cc:623
+#: ../../../../src/wui/economy_options_window.cc:625
 msgid "A profile with this name already exists. Do you wish to replace it?"
 msgstr "Profil s tem imenom že obstaja. Ali ga želite zamenjati?"
 
-#: ../../../../src/wui/economy_options_window.cc:673
+#: ../../../../src/wui/economy_options_window.cc:675
 msgid "Save Profile"
 msgstr "Shrani profil"
 
-#: ../../../../src/wui/economy_options_window.cc:683
+#: ../../../../src/wui/economy_options_window.cc:685
 msgid "Existing Profiles"
 msgstr "Obstoječi profili"
 
@@ -9421,148 +9421,148 @@ msgstr ""
 msgid "This hyperlink seems to be broken."
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:237
+#: ../../../../src/wui/fieldaction.cc:236
 msgid "Build medium building"
 msgstr "Zgradi srednjo zgradbo"
 
-#: ../../../../src/wui/fieldaction.cc:237
+#: ../../../../src/wui/fieldaction.cc:236
 msgid "Build small building"
 msgstr "Zgradi majhno zgradbo"
 
-#: ../../../../src/wui/fieldaction.cc:238
+#: ../../../../src/wui/fieldaction.cc:237
 msgid "Build big building"
 msgstr "Zgradi veliko zgradbo"
 
-#: ../../../../src/wui/fieldaction.cc:238
+#: ../../../../src/wui/fieldaction.cc:237
 msgid "Build port building"
 msgstr "Zgradi pristaniško zgradbo"
 
-#: ../../../../src/wui/fieldaction.cc:270
+#: ../../../../src/wui/fieldaction.cc:269
 msgid "Action"
 msgstr "Dejanje"
 
-#: ../../../../src/wui/fieldaction.cc:396
+#: ../../../../src/wui/fieldaction.cc:395
 msgid "Marked for removal by a worker – click to unmark"
 msgstr "Delavec je to označil za odstranitev – kliknite za odznačitev"
 
-#: ../../../../src/wui/fieldaction.cc:397
-#: ../../../../src/wui/fieldaction.cc:404
+#: ../../../../src/wui/fieldaction.cc:396
+#: ../../../../src/wui/fieldaction.cc:403
 msgid "Immovable Actions"
 msgstr "Nepremična dejanja"
 
-#: ../../../../src/wui/fieldaction.cc:403
+#: ../../../../src/wui/fieldaction.cc:402
 msgid "Mark this immovable for timely removal by a suited worker"
 msgstr "Označi to nepremičnino za stalno odstranitev s strani ustreznega delavca"
 
-#: ../../../../src/wui/fieldaction.cc:425
-#: ../../../../src/wui/fieldaction.cc:556
+#: ../../../../src/wui/fieldaction.cc:424
+#: ../../../../src/wui/fieldaction.cc:555
 msgid "Build road"
 msgstr "Zgradi cesto"
 
-#: ../../../../src/wui/fieldaction.cc:429
+#: ../../../../src/wui/fieldaction.cc:428
 msgid "Build waterway"
 msgstr "Zgradi vodno pot"
 
-#: ../../../../src/wui/fieldaction.cc:437
+#: ../../../../src/wui/fieldaction.cc:436
 msgid "Destroy this flag"
 msgstr "Uniči to zastavo"
 
-#: ../../../../src/wui/fieldaction.cc:444
+#: ../../../../src/wui/fieldaction.cc:443
 msgid "Configure this flag’s economy"
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:447
+#: ../../../../src/wui/fieldaction.cc:446
 msgid "Send geologist to explore site"
 msgstr "Pošlji geologa, da razišče področje"
 
-#: ../../../../src/wui/fieldaction.cc:453
-#: ../../../../src/wui/fieldaction.cc:473
+#: ../../../../src/wui/fieldaction.cc:452
+#: ../../../../src/wui/fieldaction.cc:472
 msgid "Send scout to explore surroundings"
 msgstr ""
 
 #. * TRANSLATORS: This string is used only when the name of the tribe’s scout
 #. house/hut is unknown.
-#: ../../../../src/wui/fieldaction.cc:465
+#: ../../../../src/wui/fieldaction.cc:464
 msgid ""
 "You need to connect this flag to a scouting building before you can send a "
 "scout here."
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:493
+#: ../../../../src/wui/fieldaction.cc:492
 msgid "Place a flag"
 msgstr "Postavi zastavo"
 
-#: ../../../../src/wui/fieldaction.cc:498
+#: ../../../../src/wui/fieldaction.cc:497
 msgid "Destroy a road"
 msgstr "Uniči cesto"
 
-#: ../../../../src/wui/fieldaction.cc:503
+#: ../../../../src/wui/fieldaction.cc:502
 msgid "Destroy a waterway"
 msgstr "Uniči vodno pot"
 
-#: ../../../../src/wui/fieldaction.cc:523
+#: ../../../../src/wui/fieldaction.cc:522
 msgid "Configure this ocean’s ship fleet"
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:534
+#: ../../../../src/wui/fieldaction.cc:533
 msgid "Configure this ocean’s ferry fleet"
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:541
+#: ../../../../src/wui/fieldaction.cc:540
 msgid "Watch field in a separate window"
 msgstr "Opazuj polje v ločenem oknu"
 
-#: ../../../../src/wui/fieldaction.cc:546
+#: ../../../../src/wui/fieldaction.cc:545
 msgid "Pinned note"
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:551
+#: ../../../../src/wui/fieldaction.cc:550
 msgid "Show debug window"
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:559
+#: ../../../../src/wui/fieldaction.cc:558
 #: ../../../../src/wui/watchwindow.cc:85
 msgid "Watch"
 msgstr "Opazuj"
 
-#: ../../../../src/wui/fieldaction.cc:676
+#: ../../../../src/wui/fieldaction.cc:675
 msgid "Build mines"
 msgstr "Gradi rudnike"
 
-#: ../../../../src/wui/fieldaction.cc:691
-#: ../../../../src/wui/fieldaction.cc:718
+#: ../../../../src/wui/fieldaction.cc:690
+#: ../../../../src/wui/fieldaction.cc:717
 msgid "Build flag"
 msgstr "Postavi zastavo"
 
-#: ../../../../src/wui/fieldaction.cc:695
+#: ../../../../src/wui/fieldaction.cc:694
 msgid "Cancel road"
 msgstr "Prekliči cesto"
 
-#: ../../../../src/wui/fieldaction.cc:697
+#: ../../../../src/wui/fieldaction.cc:696
 msgid "Go to road"
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:705
+#: ../../../../src/wui/fieldaction.cc:704
 msgid "Cancel road and start building waterway"
 msgstr "Prekliči cesto in začni graditi vodno pot"
 
-#: ../../../../src/wui/fieldaction.cc:709
+#: ../../../../src/wui/fieldaction.cc:708
 msgid "Build roads"
 msgstr "Gradi ceste"
 
-#: ../../../../src/wui/fieldaction.cc:722
+#: ../../../../src/wui/fieldaction.cc:721
 msgid "Cancel waterway"
 msgstr "Prekliči vodno pot"
 
-#: ../../../../src/wui/fieldaction.cc:724
+#: ../../../../src/wui/fieldaction.cc:723
 msgid "Go to waterway"
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:727
+#: ../../../../src/wui/fieldaction.cc:726
 msgid "Cancel waterway and start building road"
 msgstr "Prekliči vodno pot in začni s cesto"
 
-#: ../../../../src/wui/fieldaction.cc:730
+#: ../../../../src/wui/fieldaction.cc:729
 msgid "Build waterways"
 msgstr "Zgradi vodne poti"
 
@@ -9808,16 +9808,16 @@ msgstr "Ali ste prepričani, da želiti zapustiti igro?"
 msgid "Error Saving Game!"
 msgstr "Napaka pri shranjevanju igre!"
 
-#: ../../../../src/wui/game_message_menu.cc:53
-#: ../../../../src/wui/game_message_menu.cc:615
+#: ../../../../src/wui/game_message_menu.cc:54
+#: ../../../../src/wui/game_message_menu.cc:616
 msgid "Messages: Inbox"
 msgstr "Sporočila: Prejeto"
 
-#: ../../../../src/wui/game_message_menu.cc:68
+#: ../../../../src/wui/game_message_menu.cc:69
 msgid "Title"
 msgstr "Naslov"
 
-#: ../../../../src/wui/game_message_menu.cc:69
+#: ../../../../src/wui/game_message_menu.cc:70
 msgctxt "message"
 msgid "Type"
 msgstr "Tip"
@@ -9828,56 +9828,56 @@ msgstr "Tip"
 #. * TRANSLATORS: This is used in the game messages menu - please open an
 #. issue if you need more
 #. * space.
-#: ../../../../src/wui/game_message_menu.cc:75
+#: ../../../../src/wui/game_message_menu.cc:76
 msgctxt "message"
 msgid "Sent"
 msgstr "Poslano ob"
 
-#: ../../../../src/wui/game_message_menu.cc:114
-#: ../../../../src/wui/game_message_menu.cc:618
+#: ../../../../src/wui/game_message_menu.cc:115
+#: ../../../../src/wui/game_message_menu.cc:619
 msgid "Show Archive"
 msgstr "Pokaži arhiv"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:122
+#: ../../../../src/wui/game_message_menu.cc:123
 msgid "Center main mapview on location"
 msgstr "Glavni pogled na lokacijo"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:535
+#: ../../../../src/wui/game_message_menu.cc:536
 msgid "Show all messages"
 msgstr "Pokaži vsa sporočila"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:547
+#: ../../../../src/wui/game_message_menu.cc:548
 msgid "Show geologists’ messages only"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:552
+#: ../../../../src/wui/game_message_menu.cc:553
 msgid "Show economy messages only"
 msgstr "Pokaži sporočila gospodarstva"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:557
+#: ../../../../src/wui/game_message_menu.cc:558
 msgid "Show seafaring messages only"
 msgstr "Pokaži sporočila pomorstva"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:562
+#: ../../../../src/wui/game_message_menu.cc:563
 msgid "Show warfare messages only"
 msgstr "Pokaži sporočila vojske"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:567
+#: ../../../../src/wui/game_message_menu.cc:568
 msgid "Show scenario messages only"
 msgstr "Pokaži sporočila scenarija"
 
-#: ../../../../src/wui/game_message_menu.cc:608
+#: ../../../../src/wui/game_message_menu.cc:609
 msgid "Messages: Archive"
 msgstr "Sporočila: Arhivirano"
 
-#: ../../../../src/wui/game_message_menu.cc:611
+#: ../../../../src/wui/game_message_menu.cc:612
 msgid "Show Inbox"
 msgstr "Pokaži prejeta sporočila"
 
@@ -9885,7 +9885,7 @@ msgstr "Pokaži prejeta sporočila"
 #. for 1
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
-#: ../../../../src/wui/game_message_menu.cc:643
+#: ../../../../src/wui/game_message_menu.cc:644
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
@@ -9895,7 +9895,7 @@ msgstr[2] "Obnovi %d izbrana sporočila"
 msgstr[3] "Obnovi %d izbranih sporočil"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:648
+#: ../../../../src/wui/game_message_menu.cc:649
 msgid "Restore selected message"
 msgstr "Obnovi izbrano sporočilo"
 
@@ -9903,7 +9903,7 @@ msgstr "Obnovi izbrano sporočilo"
 #. for 1
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
-#: ../../../../src/wui/game_message_menu.cc:658
+#: ../../../../src/wui/game_message_menu.cc:659
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
@@ -9913,7 +9913,7 @@ msgstr[2] "Arhiviraj %d izbrana sporočila"
 msgstr[3] "Arhiviraj %d izbranih sporočil"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../../../src/wui/game_message_menu.cc:663
+#: ../../../../src/wui/game_message_menu.cc:664
 msgid "Archive selected message"
 msgstr "Arhiviraj izbrano sporočilo"
 
@@ -10206,73 +10206,73 @@ msgid "+%u"
 msgstr ""
 
 #. * TRANSLATORS: Title for the map view menu button in the game
-#: ../../../../src/wui/interactive_base.cc:144
+#: ../../../../src/wui/interactive_base.cc:143
 msgid "Map View"
 msgstr "Pogled zemljevida"
 
 #. * TRANSLATORS: Title for the plugins menu button in the game
-#: ../../../../src/wui/interactive_base.cc:157
+#: ../../../../src/wui/interactive_base.cc:156
 msgid "Plugins"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../../../src/wui/interactive_base.cc:324
+#: ../../../../src/wui/interactive_base.cc:323
 msgid "Hide Minimap"
 msgstr "Skrij mali zemljevid"
 
-#: ../../../../src/wui/interactive_base.cc:324
+#: ../../../../src/wui/interactive_base.cc:323
 msgid "Show Minimap"
 msgstr "Pokaži mali zemljevid"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../../../src/wui/interactive_base.cc:331
+#: ../../../../src/wui/interactive_base.cc:330
 msgid "Hide Quick Navigation"
 msgstr ""
 
-#: ../../../../src/wui/interactive_base.cc:332
+#: ../../../../src/wui/interactive_base.cc:331
 msgid "Show Quick Navigation"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../../../src/wui/interactive_base.cc:339
+#: ../../../../src/wui/interactive_base.cc:338
 msgid "Zoom +"
 msgstr "Približaj"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../../../src/wui/interactive_base.cc:344
+#: ../../../../src/wui/interactive_base.cc:343
 msgid "Reset zoom"
 msgstr "Ponastavi povečavo"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../../../src/wui/interactive_base.cc:349
+#: ../../../../src/wui/interactive_base.cc:348
 msgid "Zoom –"
 msgstr ""
 
-#: ../../../../src/wui/interactive_base.cc:927
+#: ../../../../src/wui/interactive_base.cc:926
 #, c-format
 msgid "Road length: %1$u (%2$u)"
 msgstr ""
 
-#: ../../../../src/wui/interactive_base.cc:929
+#: ../../../../src/wui/interactive_base.cc:928
 #, c-format
 msgid "Waterway length: %1$u (%2$u) / %3$u"
 msgstr ""
 
-#: ../../../../src/wui/interactive_base.cc:934
+#: ../../../../src/wui/interactive_base.cc:933
 #, c-format
 msgid "Road length: %u"
 msgstr ""
 
-#: ../../../../src/wui/interactive_base.cc:937
+#: ../../../../src/wui/interactive_base.cc:936
 #, c-format
 msgid "Waterway length: %1$u / %2$u"
 msgstr ""
 
-#: ../../../../src/wui/interactive_base.cc:1859
+#: ../../../../src/wui/interactive_base.cc:1858
 msgid "Failed saving screenshot!"
 msgstr ""
 
-#: ../../../../src/wui/interactive_base.cc:1863
+#: ../../../../src/wui/interactive_base.cc:1862
 msgid "Screenshot saved"
 msgstr ""
 
@@ -10388,27 +10388,27 @@ msgid "Remaining construction costs:"
 msgstr ""
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
-#: ../../../../src/wui/interactive_player.cc:188
+#: ../../../../src/wui/interactive_player.cc:187
 #: ../../../../src/wui/interactive_spectator.cc:48
 msgid "Statistics"
 msgstr "Statistika"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
-#: ../../../../src/wui/interactive_player.cc:309
+#: ../../../../src/wui/interactive_player.cc:308
 #: ../../../../src/wui/map_tags.cc:51
 msgid "Seafaring"
 msgstr "Pomorstvo"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../../../src/wui/interactive_player.cc:315
+#: ../../../../src/wui/interactive_player.cc:314
 #: ../../../../src/wui/militarysitewindow.cc:40
 #: ../../../../src/wui/warehousewindow.cc:326
 msgid "Soldiers"
 msgstr "Vojaki"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../../../src/wui/interactive_player.cc:320
+#: ../../../../src/wui/interactive_player.cc:319
 #: ../../../../src/wui/stock_menu.cc:40
 #: ../../../../src/wui/ware_statistics_menu.cc:152
 #: ../../../../src/wui/waresdisplay.cc:84
@@ -10418,21 +10418,21 @@ msgstr "Zaloga"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../../../src/wui/interactive_player.cc:379
+#: ../../../../src/wui/interactive_player.cc:378
 msgid "Hide Workarea Overlaps"
 msgstr "Skrij prekrivanje delovišč"
 
-#: ../../../../src/wui/interactive_player.cc:385
+#: ../../../../src/wui/interactive_player.cc:384
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
 msgstr "Ko postavljate gradbišče, pokaži/skrij prekrivanja delovišč"
 
-#: ../../../../src/wui/interactive_player.cc:485
+#: ../../../../src/wui/interactive_player.cc:484
 msgid "No current objectives"
 msgstr ""
 
-#: ../../../../src/wui/interactive_player.cc:501
+#: ../../../../src/wui/interactive_player.cc:500
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -10441,7 +10441,7 @@ msgstr[1] "%u novo sporočilo"
 msgstr[2] "%u novi sporočili"
 msgstr[3] "%u nova sporočila"
 
-#: ../../../../src/wui/interactive_player.cc:1009
+#: ../../../../src/wui/interactive_player.cc:1008
 msgid "Fastplace Shortcuts"
 msgstr ""
 
@@ -11101,48 +11101,48 @@ msgid "Map name (start of replay)"
 msgstr "Ime zamljevida (začetek posnetka)"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
-#: ../../../../src/wui/seafaring_statistics_menu.cc:137
+#: ../../../../src/wui/seafaring_statistics_menu.cc:136
 msgid "Watch the selected ship"
 msgstr "Opazuj izbrano ladjo"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
-#: ../../../../src/wui/seafaring_statistics_menu.cc:153
+#: ../../../../src/wui/seafaring_statistics_menu.cc:152
 msgid "Open the selected ship’s window"
 msgstr "Odpri okno izbrane ladje"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window, placeholder is a
 #. hotkey
-#: ../../../../src/wui/seafaring_statistics_menu.cc:163
+#: ../../../../src/wui/seafaring_statistics_menu.cc:162
 #, c-format
 msgid "(You can use %s to go to the selected ship and open its window.)"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
-#: ../../../../src/wui/seafaring_statistics_menu.cc:178
+#: ../../../../src/wui/seafaring_statistics_menu.cc:177
 msgid "Center the map on the selected ship"
 msgstr "Sredina pogleda na izbrano ladjo"
 
-#: ../../../../src/wui/seafaring_statistics_menu.cc:225
+#: ../../../../src/wui/seafaring_statistics_menu.cc:224
 msgctxt "ship"
 msgid "Name"
 msgstr "Ime"
 
-#: ../../../../src/wui/seafaring_statistics_menu.cc:226
+#: ../../../../src/wui/seafaring_statistics_menu.cc:225
 msgctxt "ship"
 msgid "Status"
 msgstr "Stanje"
 
-#: ../../../../src/wui/seafaring_statistics_menu.cc:263
+#: ../../../../src/wui/seafaring_statistics_menu.cc:262
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Prevažanje"
 
-#: ../../../../src/wui/seafaring_statistics_menu.cc:273
+#: ../../../../src/wui/seafaring_statistics_menu.cc:272
 msgctxt "ship_state"
 msgid "Being Refitted"
 msgstr ""
 
-#: ../../../../src/wui/seafaring_statistics_menu.cc:434
+#: ../../../../src/wui/seafaring_statistics_menu.cc:433
 #, c-format
 msgid "Seafaring Statistics (%u Ship)"
 msgid_plural "Seafaring Statistics (%u Ships)"
@@ -11152,42 +11152,42 @@ msgstr[2] ""
 msgstr[3] ""
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../../../src/wui/seafaring_statistics_menu.cc:578
+#: ../../../../src/wui/seafaring_statistics_menu.cc:577
 msgid "Show all ships"
 msgstr "Pokaži vse ladje"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../../../src/wui/seafaring_statistics_menu.cc:588
+#: ../../../../src/wui/seafaring_statistics_menu.cc:587
 msgid "Show empty ships"
 msgstr "Prikaži prazne ladje"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../../../src/wui/seafaring_statistics_menu.cc:593
+#: ../../../../src/wui/seafaring_statistics_menu.cc:592
 msgid "Show ships shipping wares and workers"
 msgstr "Pokaži ladje, ki dostavljajo blago in delavce"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../../../src/wui/seafaring_statistics_menu.cc:598
+#: ../../../../src/wui/seafaring_statistics_menu.cc:597
 msgid "Show waiting expeditions"
 msgstr "Pokaži čakajoče odprave"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../../../src/wui/seafaring_statistics_menu.cc:603
+#: ../../../../src/wui/seafaring_statistics_menu.cc:602
 msgid "Show scouting expeditions"
 msgstr "Pokaži izvidniške odprave"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../../../src/wui/seafaring_statistics_menu.cc:608
+#: ../../../../src/wui/seafaring_statistics_menu.cc:607
 msgid "Show expeditions that have found a port space or are founding a colony"
 msgstr "Pokaži odprave, ki so našle prostor v pristanišču ali ustanavljajo kolonijo"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../../../src/wui/seafaring_statistics_menu.cc:613
+#: ../../../../src/wui/seafaring_statistics_menu.cc:612
 msgid "Show warships"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../../../src/wui/seafaring_statistics_menu.cc:618
+#: ../../../../src/wui/seafaring_statistics_menu.cc:617
 msgid "Show ships being refitted"
 msgstr ""
 
