@@ -510,7 +510,8 @@ std::string TradeInstance::format_richtext(const TradeID id,
 		}
 
 		assert(other_market->trade_orders().count(id) == 1);
-		assert(trade->second.num_shipped_batches == other_market->trade_orders().at(id).num_shipped_batches);
+		assert(trade->second.num_shipped_batches ==
+		       other_market->trade_orders().at(id).num_shipped_batches);
 
 		infotext += "</p><p>";
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
