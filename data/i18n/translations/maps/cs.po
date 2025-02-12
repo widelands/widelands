@@ -297,7 +297,7 @@ msgstr "Opětovné setkání dvou přátel"
 msgid ""
 "Claus and Henneke Lembeck have reached the North at last. But will they be "
 "able to convince Reebaud to send them aid?"
-msgstr ""
+msgstr "Klaus a Hennek Lemmek konečně dorazili na sever. Ale podaří se jim přesvědčit Rýbauda, aby jim poskytl pomoc?"
 
 #: ../../../../data/campaigns/fri05.wmf/elemental:8
 msgid "Reconquest"
@@ -308,7 +308,7 @@ msgid ""
 "Back in Northern Frisia at last, Claus, Henneke, and Reebaud are preparing "
 "for battle against the invaders. They must gather allies and plan their "
 "strategy, but the foe is never far away…"
-msgstr ""
+msgstr "Konečně zpátky v severním Frísku, Klaus, Hennek a Rýbaud se připravují na bitvu proti nezvaným hostům. Musí si obstarat spojence a naplánovat svou strategii, ale nepřítel nikdy nespí..."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"

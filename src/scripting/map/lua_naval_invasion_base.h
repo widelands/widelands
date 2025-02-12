@@ -19,7 +19,7 @@
 #ifndef WL_SCRIPTING_MAP_LUA_NAVAL_INVASION_BASE_H
 #define WL_SCRIPTING_MAP_LUA_NAVAL_INVASION_BASE_H
 
-#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/naval_invasion_base.h"
 #include "scripting/map/lua_bob.h"
 
 namespace LuaMaps {
