@@ -584,9 +584,6 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 			std::swap(own_market, other_market);
 		}
 
-		const int batches_sent = own_market->trade_orders().at(trade_id).num_shipped_batches;
-		assert(batches_sent == other_market->trade_orders().at(trade_id).num_shipped_batches);
-
 		UI::Box* box = new UI::Box(&trades_box_active_, UI::PanelStyle::kWui,
 		                           format("active_%u", trade_id), 0, 0, UI::Box::Horizontal);
 		UI::Box* buttons =
