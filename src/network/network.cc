@@ -81,14 +81,6 @@ bool NetAddress::is_valid() const {
 	return port != 0 && !ip.is_unspecified();
 }
 
-CmdNetCheckSync::CmdNetCheckSync(const Time& dt, SyncReportCallback cb)
-   : Command(dt), callback_(std::move(cb)) {
-}
-
-void CmdNetCheckSync::execute(Widelands::Game& /* game */) {
-	callback_();
-}
-
 NetworkTime::NetworkTime() {
 	reset(Time(0));
 }

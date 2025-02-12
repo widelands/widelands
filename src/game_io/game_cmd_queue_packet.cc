@@ -20,12 +20,12 @@
 
 #include "base/macros.h"
 #include "base/mutex.h"
+#include "commands/cmd_queue.h"
+#include "commands/command.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/cmd_queue.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
-#include "logic/queue_cmd_factory.h"
 
 namespace Widelands {
 
@@ -58,8 +58,8 @@ void GameCmdQueuePacket::read(FileSystem& fs, Game& game, MapObjectLoader* const
 				item.category = fr.signed_32();
 				item.serial = fr.unsigned_32();
 
-				GameLogicCommand& cmd = QueueCmdFactory::create_correct_queue_command(
-				   static_cast<QueueCommandTypes>(packet_id));
+				GameLogicCommand& cmd =
+				   create_correct_queue_command(static_cast<QueueCommandTypes>(packet_id));
 				cmd.read(fr, game, *ol);
 
 				item.cmd = &cmd;
