@@ -20,6 +20,7 @@
 
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
@@ -43,6 +44,10 @@ void CmdBuildingName::execute(Game& game) {
 
 	case MapObjectType::WAREHOUSE:
 		dynamic_cast<Warehouse&>(*mo).set_warehouse_name(name_);
+		return;
+
+	case MapObjectType::MARKET:
+		dynamic_cast<Market&>(*mo).set_market_name(name_);
 		return;
 
 	default:

@@ -39,8 +39,8 @@ void CmdDiplomacy::execute(Game& game) {
 	auto broadcast_message = [&game](const std::string& heading, const std::string& text) {
 		iterate_players_existing(p, game.map().get_nrplayers(), game, player) {
 			player->add_message(game, std::unique_ptr<Message>(new Message(
-			                             Message::Type::kScenario, game.get_gametime(), _("Diplomacy"),
-			                             "images/players/team.png", heading, text)));
+			                             Message::Type::kDiplomacy, game.get_gametime(),
+			                             _("Diplomacy"), "images/players/team.png", heading, text)));
 		}
 		if (upcast(InteractiveSpectator, is, game.get_ibase())) {
 			is->log_message(heading, text);
