@@ -214,9 +214,6 @@ public:
 
 	[[nodiscard]] bool same_district(const PlayerImmovable& p1, const PlayerImmovable& p2) const;
 
-protected:
-	static Serial last_economy_serial_;
-
 private:
 	// This structs is to store distance from supply to request(or), but to allow unambiguous
 	// sorting if distances are the same, we use also serial number of provider and type of provider

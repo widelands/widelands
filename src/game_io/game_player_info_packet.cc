@@ -97,8 +97,8 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* 
 					player->naval_losses_ = packet_version >= 32 ? fr.unsigned_32() : 0;
 
 					for (uint32_t j = packet_version >= 32 ? fr.unsigned_32() : 0; j > 0; --j) {
-						std::unique_ptr<DetectedPortSpace> dps(new DetectedPortSpace());
-						dps->set_serial(fr.unsigned_32());
+						std::unique_ptr<DetectedPortSpace> dps(new DetectedPortSpace(game));
+						dps->set_serial(game, fr.unsigned_32());
 						dps->coords.x = fr.signed_16();
 						dps->coords.y = fr.signed_16();
 						for (uint32_t k = fr.unsigned_32(); k > 0; --k) {
