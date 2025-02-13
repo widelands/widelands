@@ -142,7 +142,7 @@ void PortDock::set_economy(Economy* e, WareWorker type) {
 		expedition_bootstrap_->set_economy(e, type);
 	}
 
-	for (auto& pair : warship_soldier_requests_) {
+	for (auto& pair : warship_soldier_request_managers_) {
 		pair.second->set_economy(e, type);
 	}
 }
@@ -457,31 +457,32 @@ void PortDock::cancel_expedition(Game& game) {
 	expedition_cancelling_ = false;
 }
 
-SoldierRequest* PortDock::get_warship_request(Serial ship) const {
-	auto it = warship_soldier_requests_.find(ship);
-	if (it != warship_soldier_requests_.end()) {
+SoldierRequestManager* PortDock::get_warship_request_manager(Serial ship) const {
+	auto it = warship_soldier_request_managers_.find(ship);
+	if (it != warship_soldier_request_managers_.end()) {
 		return it->second.get();
 	}
 	return nullptr;
 }
 
-SoldierRequest& PortDock::create_warship_request(Ship* ship, SoldierPreference pref) {
-	assert(warship_soldier_requests_.count(ship->serial()) == 0);
-	SoldierRequest* req = new SoldierRequest(
+SoldierRequestManager& PortDock::create_warship_request_manager(Ship* ship,
+                                                                SoldierPreference pref) {
+	assert(warship_soldier_request_managers_.count(ship->serial()) == 0);
+	SoldierRequestManager* srm = new SoldierRequestManager(
 	   *get_warehouse(), pref, Ship::warship_soldier_callback,
 	   [ship]() { return ship->get_warship_soldier_capacity(); },
 	   [ship]() { return ship->onboard_soldiers(); });
-	warship_soldier_requests_.emplace(ship->serial(), req);
-	return *req;
+	warship_soldier_request_managers_.emplace(ship->serial(), srm);
+	return *srm;
 }
 
-void PortDock::erase_warship_request(Serial ship) {
-	warship_soldier_requests_.erase(ship);
+void PortDock::erase_warship_request_manager(Serial ship) {
+	warship_soldier_request_managers_.erase(ship);
 }
 
 Ship* PortDock::find_ship_for_warship_request(const EditorGameBase& egbase,
                                               const Request& req) const {
-	for (const auto& pair : warship_soldier_requests_) {
+	for (const auto& pair : warship_soldier_request_managers_) {
 		if (pair.second->get_request() == &req) {
 			return dynamic_cast<Ship*>(egbase.objects().get_object(pair.first));
 		}
