@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-02-10 02:54+0000\n"
+"POT-Creation-Date: 2025-02-13 02:53+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -2180,46 +2180,46 @@ msgstr[0] "%u speelwichtigs Verwiedern anknipst:"
 msgstr[1] "%u speelwichtig Verwiederns anknipst:"
 
 #. * TRANSLATORS: "12 steps northwest of Port1"
-#: ../../../../src/logic/detected_port_space.cc:52
+#: ../../../../src/logic/detected_port_space.cc:47
 msgid "northwest"
 msgstr "noordwestelk"
 
 #. * TRANSLATORS: "12 steps northeast of Port1"
-#: ../../../../src/logic/detected_port_space.cc:56
+#: ../../../../src/logic/detected_port_space.cc:51
 msgid "northeast"
 msgstr "noordoostelk"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
-#: ../../../../src/logic/detected_port_space.cc:60
+#: ../../../../src/logic/detected_port_space.cc:55
 msgid "southwest"
 msgstr "südwestelk"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
-#: ../../../../src/logic/detected_port_space.cc:64
+#: ../../../../src/logic/detected_port_space.cc:59
 msgid "southeast"
 msgstr "südoostelk"
 
 #. * TRANSLATORS: "12 steps north of Port1"
-#: ../../../../src/logic/detected_port_space.cc:68
+#: ../../../../src/logic/detected_port_space.cc:63
 msgid "north"
 msgstr "noordelk"
 
 #. * TRANSLATORS: "12 steps south of Port1"
-#: ../../../../src/logic/detected_port_space.cc:72
+#: ../../../../src/logic/detected_port_space.cc:67
 msgid "south"
 msgstr "südelk"
 
 #. * TRANSLATORS: "12 steps west of Port1"
-#: ../../../../src/logic/detected_port_space.cc:76
+#: ../../../../src/logic/detected_port_space.cc:71
 msgid "west"
 msgstr "westelk"
 
 #. * TRANSLATORS: "12 steps east of Port1"
-#: ../../../../src/logic/detected_port_space.cc:80
+#: ../../../../src/logic/detected_port_space.cc:75
 msgid "east"
 msgstr "oostelk"
 
-#: ../../../../src/logic/detected_port_space.cc:88
+#: ../../../../src/logic/detected_port_space.cc:83
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s"
 msgstr "Rüümte för Muden sünner Eegner um %1$s vun %2$s funnen"
@@ -2227,7 +2227,7 @@ msgstr "Rüümte för Muden sünner Eegner um %1$s vun %2$s funnen"
 #. * TRANSLATORS: "Unowned port space discovered at 1:11 by Ship2 33 steps
 #. north of
 #. Port5"
-#: ../../../../src/logic/detected_port_space.cc:94
+#: ../../../../src/logic/detected_port_space.cc:89
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
 msgid_plural ""
@@ -2235,7 +2235,7 @@ msgid_plural ""
 msgstr[0] "Rüümte för Muden sünner Eegner um %1$s vun %2$s %3$u Stapp %4$s vun %5$s funnen"
 msgstr[1] "Rüümte för Muden sünner Eegner um %1$s vun %2$s %3$u Stappen %4$s vun %5$s funnen"
 
-#: ../../../../src/logic/detected_port_space.cc:101
+#: ../../../../src/logic/detected_port_space.cc:96
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s"
 msgstr "Rüümte för Muden vun %1$s um %2$s vun %3$s funnen"
@@ -2243,7 +2243,7 @@ msgstr "Rüümte för Muden vun %1$s um %2$s vun %3$s funnen"
 #. * TRANSLATORS: "Port space of Player1 discovered at 2:22 by Ship3 44 steps
 #. north
 #. of Port6"
-#: ../../../../src/logic/detected_port_space.cc:108
+#: ../../../../src/logic/detected_port_space.cc:103
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
 msgid_plural ""
@@ -2252,55 +2252,55 @@ msgstr[0] "Rüümte för Muden vun %1$s um %2$s vun %3$s %4$u Stapp %5$s vun %6$
 msgstr[1] "Rüümte för Muden vun %1$s um %2$s vun %3$s %4$u Stappen %5$s vun %6$s funnen"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
-#: ../../../../src/logic/detected_port_space.cc:120
+#: ../../../../src/logic/detected_port_space.cc:115
 msgctxt "direction"
 msgid "NW"
 msgstr "NW"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northeast.
-#: ../../../../src/logic/detected_port_space.cc:124
+#: ../../../../src/logic/detected_port_space.cc:119
 msgctxt "direction"
 msgid "NE"
 msgstr "NO"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southwest.
-#: ../../../../src/logic/detected_port_space.cc:128
+#: ../../../../src/logic/detected_port_space.cc:123
 msgctxt "direction"
 msgid "SW"
 msgstr "SW"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southeast.
-#: ../../../../src/logic/detected_port_space.cc:132
+#: ../../../../src/logic/detected_port_space.cc:127
 msgctxt "direction"
 msgid "SE"
 msgstr "SO"
 
 #. * TRANSLATORS: This is an abbreviated direction: North.
-#: ../../../../src/logic/detected_port_space.cc:136
+#: ../../../../src/logic/detected_port_space.cc:131
 msgctxt "direction"
 msgid "N"
 msgstr "N"
 
 #. * TRANSLATORS: This is an abbreviated direction: South.
-#: ../../../../src/logic/detected_port_space.cc:140
+#: ../../../../src/logic/detected_port_space.cc:135
 msgctxt "direction"
 msgid "S"
 msgstr "S"
 
 #. * TRANSLATORS: This is an abbreviated direction: West.
-#: ../../../../src/logic/detected_port_space.cc:144
+#: ../../../../src/logic/detected_port_space.cc:139
 msgctxt "direction"
 msgid "W"
 msgstr "W"
 
 #. * TRANSLATORS: This is an abbreviated direction: East.
-#: ../../../../src/logic/detected_port_space.cc:148
+#: ../../../../src/logic/detected_port_space.cc:143
 msgctxt "direction"
 msgid "E"
 msgstr "O"
 
 #. * TRANSLATORS: Placeholders are gametime and shipname. Keep this short.
-#: ../../../../src/logic/detected_port_space.cc:157
+#: ../../../../src/logic/detected_port_space.cc:152
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s"
@@ -2309,7 +2309,7 @@ msgstr "Sünner Eegner / %1$s / %2$s"
 #. * TRANSLATORS: Placeholders are gametime, shipname, and distance direction
 #. port_name.
 #. *  Keep this short.
-#: ../../../../src/logic/detected_port_space.cc:162
+#: ../../../../src/logic/detected_port_space.cc:157
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s / %3$u %4$s %5$s"
@@ -2317,7 +2317,7 @@ msgstr "Sünner Eegner / %1$s / %2$s / %3$u %4$s %5$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this
 #. short.
-#: ../../../../src/logic/detected_port_space.cc:168
+#: ../../../../src/logic/detected_port_space.cc:163
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s"
@@ -2326,7 +2326,7 @@ msgstr "%1$s / %2$s / %3$s"
 #. * TRANSLATORS: Placeholders are owner, gametime, shipname, and "distance
 #. direction port_name.
 #. *  Keep this short.
-#: ../../../../src/logic/detected_port_space.cc:174
+#: ../../../../src/logic/detected_port_space.cc:169
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
@@ -3016,11 +3016,6 @@ msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Sett een nejes Dörp up"
 
-#: ../../../../src/logic/map_objects/tribes/soldier.cc:1544
-#: ../../../../src/logic/map_objects/tribes/soldier.cc:1548
-msgid "Logic error"
-msgstr "Fehler in de Logik"
-
 #. * TRANSLATORS: Example: Loading Barbarians: Buildings (2/6)
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:160
 msgid "Loading %1%: %2% (%3%/%4%)"
@@ -3128,25 +3123,30 @@ msgstr "Priel verneelt"
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr "Een Priel is verneelt worden, daarmit diene neje Muu baut worden kunn."
 
-#: ../../../../src/logic/map_objects/tribes/worker.cc:1137
+#: ../../../../src/logic/map_objects/tribes/worker_programs/findresources.cc:58
 msgid "A geologist found resources."
 msgstr "Een Schattsöker hett Mineraale funnen."
 
-#: ../../../../src/logic/map_objects/tribes/worker.cc:2120
+#: ../../../../src/logic/map_objects/tribes/worker_tasks/return.cc:115
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr "Dien %s kann keenen Weg na Huus finnen un word wull doodgahn."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../../../src/logic/map_objects/tribes/worker.cc:2125
+#: ../../../../src/logic/map_objects/tribes/worker_tasks/return.cc:120
 #: ../../../../src/wui/productionsitewindow.cc:107
 #: ../../../../src/wui/productionsitewindow.cc:124
 msgid "Worker"
 msgstr "Arbeider"
 
-#: ../../../../src/logic/map_objects/tribes/worker.cc:2126
+#: ../../../../src/logic/map_objects/tribes/worker_tasks/return.cc:121
 msgid "Worker got lost!"
 msgstr "Fehlgahner Arbeider!"
+
+#: ../../../../src/logic/map_objects/tribes/worker_tasks/soldier_battle.cc:158
+#: ../../../../src/logic/map_objects/tribes/worker_tasks/soldier_battle.cc:162
+msgid "Logic error"
+msgstr "Fehler in de Logik"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../../../src/logic/map_objects/world/terrain_description.cc:71
