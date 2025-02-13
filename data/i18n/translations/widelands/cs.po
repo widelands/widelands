@@ -140,22 +140,22 @@ msgstr "„%s“"
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:380
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:206
 msgid "No AI"
-msgstr "Bez UI"
+msgstr "Bez AI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../../../src/ai/defaultai.h:95
 msgid "Normal AI"
-msgstr "Normální UI"
+msgstr "Normální AI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../../../src/ai/defaultai.h:110
 msgid "Weak AI"
-msgstr "Slabá UI"
+msgstr "Slabá AI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../../../src/ai/defaultai.h:125
 msgid "Very Weak AI"
-msgstr "Velmi slabá UI"
+msgstr "Velmi slabá AI"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -935,7 +935,7 @@ msgstr "Zvíře: %1$s"
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:95
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:100
 msgid "Automatic Trees"
-msgstr ""
+msgstr "Automatické umístění stromů"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../../../src/editor/tools/place_immovable_tool.cc:148
@@ -1126,7 +1126,7 @@ msgstr "Popis: %s"
 #: ../../../../src/editor/ui_menus/field_info_window.cc:251
 msgctxt "addons"
 msgid "(none)"
-msgstr ""
+msgstr "(žádné)"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:258
 #, c-format
@@ -1326,16 +1326,16 @@ msgstr "Tato mapa umožňuje:"
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:399
 msgid ""
 "Please add suggested team line-ups in the next tab for all selected options"
-msgstr ""
+msgstr "Prosím výběrem možností zvol zda mapa podporuje uvedená rozvržení týmů"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:415
 msgid ""
 "Mark whether the starting positions provide equal conditions for each player"
-msgstr ""
+msgstr "Označ zda výchozí pozice hráčů jsou pro všechny hráče stejně výhodné"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:420
 msgid "Set the theme for the game loadscreens"
-msgstr ""
+msgstr "Nastaví úvodní obrazovku při zahájení hry podle motivu"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:421
 msgctxt "map_theme"
@@ -1907,7 +1907,7 @@ msgstr "Hospodářství"
 #: ../../../../src/game_io/game_loader.cc:142
 #: ../../../../src/game_io/game_saver.cc:89
 msgid "AI"
-msgstr "UI"
+msgstr "AI"
 
 #: ../../../../src/game_io/game_loader.cc:149
 #: ../../../../src/game_io/game_saver.cc:96
@@ -2784,11 +2784,11 @@ msgstr "Tvá loď dorazila do cíle své plavby."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:639
 msgid "A warship arrived at a known port build space."
-msgstr ""
+msgstr "Válečná loď dorazila k objevenému místu pro přístav."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:640
 msgid "An expedition ship arrived at a known port build space."
-msgstr ""
+msgstr "Výprava dorazila k objevenému místu pro přístav."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:641
 #: ../../../../src/logic/map_objects/tribes/ship.cc:649
@@ -4875,7 +4875,7 @@ msgstr "Jeden svět"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:820
 #, c-format
 msgid "Toggle world ‘%s’"
-msgstr ""
+msgstr "Změnit svět ‘%s’"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1012
 #, c-format
@@ -6229,7 +6229,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:142
 msgid "Show details…"
-msgstr ""
+msgstr "Zobrazit podrobnosti..."
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:142
 msgid "View the detailed crash report"
@@ -7283,7 +7283,7 @@ msgstr "Tým"
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:178
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:179
 msgid "Random AI"
-msgstr "Náhodná UI"
+msgstr "Náhodná AI"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:351
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:353
@@ -7411,7 +7411,7 @@ msgid ""
 "and the cursor appears frozen during long operations. Disable it only if the"
 " cursor doesn’t appear right, or if you want it to be visible in screenshots"
 " or screencasts."
-msgstr "V případě nejasností ponechat aktivní. Pokud je volba neaktivní kurzor může být pomalejší a v případě náročnějších operací může zamrzat. Deaktivat pouze pokud se kurzor nezobrazuje správně nebo má-li být vidět na snímcích obrazovky."
+msgstr "V případě nejasností ponechat aktivní. Pokud je volba neaktivní kurzor může být pomalejší a v případě náročnějších operací může zamrzat. Deaktivovat pouze pokud se kurzor nezobrazuje správně nebo má-li být vidět na snímcích nebo záznamech obrazovky."
 
 #: ../../../../src/ui_fsmenu/options.cc:166
 msgid "Accessibility mode for tooltips"
@@ -7607,7 +7607,7 @@ msgid ""
 "usually – but not always – well playable. Seafaring and artifacts are not "
 "supported. Add-ons of the Tribes and Script categories are disabled in "
 "random matches."
-msgstr ""
+msgstr "Generátor náhodných map je stále ještě v beta verzi. Takto generované mapy jsou většinou – ale ne vždy – hratelné. Mořeplavba a artefakty nejsou podporovány. Rozšíření kmenů a skriptů jsou v náhodných hrách vypnuty."
 
 #: ../../../../src/ui_fsmenu/random_game.cc:127
 msgid "Map Generation Error"
@@ -7846,17 +7846,17 @@ msgstr "Chyba systému souborů"
 #: ../../../../src/wlapplication.cc:1560
 #, c-format
 msgid "Command line parameter --%s can not use a value"
-msgstr ""
+msgstr "Nepoužitelná hodnota parametru příkazového řádku --%s"
 
 #: ../../../../src/wlapplication.cc:1565
 #, c-format
 msgid "Empty value of command line parameter --%s"
-msgstr ""
+msgstr "Prázdná hodnota parametru příkazového řádku --%s"
 
 #: ../../../../src/wlapplication.cc:1571
 #, c-format
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
-msgstr ""
+msgstr "Parametry příkazového řádku --%1$s a --%2$s nelze kombinovat"
 
 #: ../../../../src/wlapplication.cc:1757
 #, c-format
@@ -7894,7 +7894,7 @@ msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
-msgstr ""
+msgstr "V průběhu hry se vyskytla chyba. Chybová hláška:\n\n%1$s\n\nProsím nahlas tento problém, aby mohl být odstraněn. Doprovodné informace lze nalézt ve standardním výstupu (stdout.txt pro Windows). Používáš verzi %2$s.\n\nProsím uveď tuto informaci v hlášení.\n\nPřeješ si, aby se hra Widelands pokusila o nouzové uložení? Často (bohužel ne vždy) je pak možné hru nově nahrát a pokračovat v ní."
 
 #: ../../../../src/wlapplication.cc:1985
 #, c-format
@@ -8329,7 +8329,7 @@ msgstr "Volby zvuku"
 
 #: ../../../../src/wlapplication_options.cc:598
 msgid "Restart Scenario or Replay"
-msgstr ""
+msgstr "Restartovat scénář, nebo záznam hry"
 
 #: ../../../../src/wlapplication_options.cc:602
 msgid "Toggle Census"
@@ -9703,14 +9703,14 @@ msgstr "Pokračovat ve hře"
 #: ../../../../src/wui/game_client_disconnected.cc:89
 msgid ""
 "Replace the disconnected player with the selected AI and continue playing"
-msgstr "Nahradit odpojeného hráče vybranou UI a pokračovat ve hře"
+msgstr "Nahradit odpojeného hráče vybranou AI a pokračovat ve hře"
 
 #. * TRANSLATORS: Dropdown tooltip to select the AI difficulty when a player
 #. has
 #. disconnected from a game
 #: ../../../../src/wui/game_client_disconnected.cc:99
 msgid "AI for the disconnected player"
-msgstr "UI místo odpojeného hráče"
+msgstr "AI místo odpojeného hráče"
 
 #. * TRANSLATORS: Dropdown selection. Parameter is the name of the AI that
 #. will be used as replacement for a disconnected player

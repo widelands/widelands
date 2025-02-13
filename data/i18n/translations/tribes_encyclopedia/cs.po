@@ -3126,7 +3126,7 @@ msgctxt "amazons_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% bojovnice (+%2%)"
-msgstr[1] "%1% bojovnic (+%2%)"
+msgstr[1] "%1% bojovnice (+%2%)"
 msgstr[2] "%1% bojovnic (+%2%)"
 msgstr[3] "%1% bojovnic (+%2%)"
 
@@ -3136,7 +3136,7 @@ msgctxt "amazons_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
 msgstr[0] "%1% bojovnice"
-msgstr[1] "%1% bojovnic"
+msgstr[1] "%1% bojovnice"
 msgstr[2] "%1% bojovnic"
 msgstr[3] "%1% bojovnic"
 
@@ -3148,7 +3148,7 @@ msgctxt "amazons_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) bojovnice (+%3%)"
-msgstr[1] "%1%(+%2%) bojovnic (+%3%)"
+msgstr[1] "%1%(+%2%) bojovnice (+%3%)"
 msgstr[2] "%1%(+%2%) bojovnic (+%3%)"
 msgstr[3] "%1%(+%2%) bojovnic (+%3%)"
 
@@ -3159,7 +3159,7 @@ msgctxt "amazons_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) bojovnice"
-msgstr[1] "%1%(+%2%) bojovnic"
+msgstr[1] "%1%(+%2%) bojovnice"
 msgstr[2] "%1%(+%2%) bojovnic"
 msgstr[3] "%1%(+%2%) bojovnic"
 
@@ -5170,14 +5170,14 @@ msgid ""
 "‘Way down here in these golden grounds<br>with stones above us the thousand "
 "pounds<br>I dig in the dust until I see the spark;<br>The golden ore I find "
 "in the dark.’"
-msgstr ""
+msgstr "‘Tu země zlatá jen sestup níže,<br> já pod kamením ohromné tíže,<br>pro jasný záblesk v prachu kopu,<br>už ve tmě vidím zlata stopu.’"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Gold
 #. Mine
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1923
 msgctxt "atlanteans_building"
 msgid "Miner’s prayer"
-msgstr ""
+msgstr "hornická říkanka"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Gold
 #. Mine
@@ -5210,13 +5210,13 @@ msgstr "Poskytuje vojákům všechny potřebné zbraně a zbroj."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1940
 msgctxt "atlanteans_building"
 msgid "Make our enemies feel the pain, so enter here to gain your train!"
-msgstr ""
+msgstr "Ať nepřítele bolest svírá, jak vycvičí tě tato díra!"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Dungeon
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1942
 msgctxt "atlanteans_building"
 msgid "Engraving on the entrance to the dungeon"
-msgstr ""
+msgstr "vstupní rytina zdravící návštěvníky kobek"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean training site: Labyrinth,
 #. part 1
@@ -5281,27 +5281,27 @@ msgctxt "atlanteans_building"
 msgid ""
 "Hey soldier, even if this is the smallest of our military buildings you "
 "still must not sleep all day!"
-msgstr ""
+msgstr "Haló vojáku, i když je toto naše nejmenší vojenská budova, tak to není důvod k tomu, abys tu celý den prospal!"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Guardhouse
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1974
 msgctxt "atlanteans_building"
 msgid "Officer visiting a remote guardhouse"
-msgstr ""
+msgstr "důstojník na návštěvě odlehlé strážnice"
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Guardhall
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1985
 msgctxt "atlanteans_building"
 msgid "In this hall we praise the fight, Satul will warm us day and night."
-msgstr ""
+msgstr "V této strážnici velebíme boj, naplňuj nás Satul vřelou horlivostí dnem i nocí."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Guardhall
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1987
 msgctxt "atlanteans_building"
 msgid "Scribbling on the wall of a guardhall"
-msgstr ""
+msgstr "ručně psaný nápis na stěně velké strážnice"
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Small Tower
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1998
@@ -5309,14 +5309,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "With three soldiers we can achieve an optimal balance between military power"
 " and building cost."
-msgstr ""
+msgstr "Tříčlenná posádka umožňuje dosažení optimální rovnováhy mezi vojenskou silou a náklady na provoz."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Small
 #. Tower
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2000
 msgctxt "atlanteans_building"
 msgid "Notes on the building instructions"
-msgstr ""
+msgstr "poznámky k popisu budovy"
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Tower
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2012
@@ -5324,13 +5324,13 @@ msgctxt "atlanteans_building"
 msgid ""
 "All the other tribes envy us for our towers, elegant outside, comfortable "
 "inside, still perfect for defense."
-msgstr ""
+msgstr "Všechny kmeny nám závidí naše věže, elegantní vzhled ani pohodlný interiér neubírají nic na jejich vynikajících obranných vlastnostech. "
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Tower
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2014
 msgctxt "atlanteans_building"
 msgid "Soldier handing over his duties to a younger one"
-msgstr ""
+msgstr "zasloužilý voják předává službu nově příchozímu"
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: High Tower
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2027
@@ -5338,14 +5338,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "Beware our mighty high towers! From the topmost spot we can see wide into "
 "the lands and spot the enemy far away."
-msgstr ""
+msgstr "Střežte se našich mohutných věží! Z jejich vrcholků je máme rozhled do široké krajiny a nepřítele vidíme na hony daleko."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: High
 #. Tower
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2030
 msgctxt "atlanteans_building"
 msgid "Soldier showing off a High Tower"
-msgstr ""
+msgstr "voják provázející vysokou věží"
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Castle
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2043
@@ -5353,13 +5353,13 @@ msgctxt "atlanteans_building"
 msgid ""
 "Sometimes even we Atlanteans need to use brute force, but we always play it "
 "wisely."
-msgstr ""
+msgstr "Občas jsme i my Atlanťané nuceni použít hrubou sílu, ale nikdy neztrácíme mentální sebekontrolu."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Castle
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2045
 msgctxt "atlanteans_building"
 msgid "‘Wisdom of the Fight’ by the warriors’ guild"
-msgstr ""
+msgstr "‘Umění boje’ zásady družiny bojovníků"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for production site: Ferry Yard
@@ -5387,7 +5387,7 @@ msgstr "Staví přívozy."
 #: ../../../../data/tribes/initialization/frisians/units.lua:2214
 msgctxt "building"
 msgid "Needs water nearby. Be aware ferries carry wares only, no workers."
-msgstr ""
+msgstr "Potřebuje ve svém okolí vodní plochu. Nezapomeň, že přívozy převáží pouze zboží, žádné pracovníky."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Ferry Yard
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2062
@@ -5402,7 +5402,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2067
 msgctxt "atlanteans_building"
 msgid "Traditional song of the ferrymen"
-msgstr ""
+msgstr "tradiční píseň převozníků"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Ferry
 #. Yard, part 1
@@ -5440,7 +5440,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2093
 msgctxt "atlanteans_building"
 msgid "Transcript from oral tradition"
-msgstr ""
+msgstr "přepis lidové slovesnosti"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Shipyard, part 1
@@ -10820,20 +10820,20 @@ msgstr "Hlavní budova ve vraku lodi je tvou klíčovou budovou."
 #. "Who gives promptly, gives twice, who gives late, gives nothing."
 #: ../../../../data/tribes/initialization/empire/units.lua:1194
 msgid "Bis dat, qui cito dat, nil dat, qui munera tardat."
-msgstr ""
+msgstr "Bis dat, qui cito dat, nil dat, qui munera tardat."
 
 #. TRANSLATORS: Lore helptext for an Empire warehouse: Warehouse
 #. Translation for the classical Latin quote:
 #. "Bis dat, qui cito dat, nil dat, qui munera tardat."
 #: ../../../../data/tribes/initialization/empire/units.lua:1198
 msgid "Who gives promptly, gives twice, who gives late, gives nothing."
-msgstr ""
+msgstr "Dvakrát dává, kdo dává rychle, kdo odkládá, jako by nedal."
 
 #. TRANSLATORS: Lore author helptext for an Empire warehouse: Warehouse
 #: ../../../../data/tribes/initialization/empire/units.lua:1201
 msgctxt "empire_building"
 msgid "Proverb written over the doors of a warehouse"
-msgstr ""
+msgstr "přísloví napsané nad dveřmi skladu"
 
 #. TRANSLATORS: Purpose helptext for an Empire warehouse: Warehouse
 #: ../../../../data/tribes/initialization/empire/units.lua:1203
