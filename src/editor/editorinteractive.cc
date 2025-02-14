@@ -1264,6 +1264,9 @@ bool EditorInteractive::run_editor(UI::Panel* error_message_parent,
 		        "  FATAL EXCEPTION in editor: %s\n"
 		        "##############################\n",
 		        e.what());
+		if (g_fail_on_errors) {
+			abort();
+		}
 		if (error_message_parent == nullptr) {
 			return false;
 		}
