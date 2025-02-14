@@ -48,6 +48,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
          descname = pgettext("barbarians_building", "rearing cattle"),
          actions = {
+            -- time total: 15 + 15 = 30 sec
             "return=skipped unless economy needs barbarians_ox",
             "consume=wheat water",
             "sleep=duration:15s",
