@@ -4502,7 +4502,7 @@ msgstr "Prozkoumává neznámá území."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1637
 msgctxt "atlanteans_building"
 msgid "Will need fish and bread to have his meal the Atlantean way."
-msgstr ""
+msgstr "Bude potřebovat uzenou rybu a chléb, aby se najedl toho, co mají Atlanťané rádi."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site:  Scout's House
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1639
@@ -4510,14 +4510,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "You do not see everything from your high towers. Sometimes you need someone "
 "to find out in person, that’s me!"
-msgstr ""
+msgstr "Z tvé vysoké věže není vidět všechno. Občas je potřeba udělat průzkum osobně přímo v terénu, to dělám já!"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Scout's House
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1641
 msgctxt "atlanteans_building"
 msgid "A scout answering a soldier"
-msgstr ""
+msgstr "průzkumník odpovídá vojákovi"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Scout's
 #. House, part 1
@@ -4538,7 +4538,7 @@ msgstr "Řeže klády na prkna."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1658
 msgctxt "atlanteans_building"
 msgid "Will need at least four woodcutters for a constant supply of planks."
-msgstr ""
+msgstr "Aby byla zajištěna nepřetržitá výroba prken, musí být budova zásobena alespoň čtyřmi dřevorubci."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site:  Sawmill
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1660
@@ -4568,7 +4568,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Smokes meat and fish to feed the scouts and miners and to train soldiers in "
 "the dungeon and labyrinth."
-msgstr ""
+msgstr "Udí maso a ryby, aby posloužily jako potrava průzkumníkům, horníkům a vojákům při výcviku v kobkách a labyrintu."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site:  Smokery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1673
@@ -4576,14 +4576,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "We are using pure logs, no other ingredients! Which drunken foreigner hath "
 "told you that myth?"
-msgstr ""
+msgstr "Používáme pouze dřevo, žádné další přísady! Ten opilý cizinec, co ti vykládal tuto báchorku, určitě blouznil z něčeho jiného."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Smokery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1675
 msgctxt "atlanteans_building"
 msgid "A Smoker answering a passer-by"
-msgstr ""
+msgstr "uzenář odpovídá kolemjdoucímu"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Smokery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1677
@@ -4646,7 +4646,7 @@ msgstr "Peče chléb pro průzkumníky, horníky a vojáky ve výcviku."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1702
 msgctxt "atlanteans_building"
 msgid "Will need cornmeal and blackroot flour."
-msgstr ""
+msgstr "Spotřebovává kukuřičnou mouku a drcený rozrazil."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site:  Bakery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1704
@@ -4696,7 +4696,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Build only if you absolutely must produce some coal, or when you have a very"
 " large amount of logs."
-msgstr ""
+msgstr "Stavba se vyplatí, pouze pokud se opravdu nedostává uhlí nebo pokud je k dispozici velmi velké množství klád."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Charcoal Kiln
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1721
@@ -4704,14 +4704,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "We must admit that this business is not really the Atlantean way, but in "
 "times of need we do what’s necessary."
-msgstr ""
+msgstr "Připouštím, že tímto bychom se my Atlanťané určitě neuživili, ale v dobách nouze se nám i toto bude hodit."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Charcoal Kiln
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1723
 msgctxt "atlanteans_building"
 msgid "A black voice from inside the charcoal kiln"
-msgstr ""
+msgstr "tajemný hlas  vycházející z milíře na dřevěné uhlí"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Charcoal Kiln
@@ -5231,14 +5231,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "Our enemies claim: we have a ruddy twisted way to fight. Check the way we "
 "train, in this labyrinth they may be right."
-msgstr ""
+msgstr "Nepřátelé říkají, že náš způsob boje je velmi hrubý a zvrhlý. Tak ať se podívají na naše cvitiště, kdyby to řekli o našem výcviku v labirintu, možná by měli pravdu."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Labyrinth
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1958
 msgctxt "atlanteans_building"
 msgid "Atlantean hero after first contact with a real enemy"
-msgstr ""
+msgstr "atlantský hrdina po svém prvním střetu se skutečným protivníkem"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean military site: Guardhouse
 #. TRANSLATORS: Purpose helptext for an Atlantean military site: Guardhall
@@ -10783,21 +10783,21 @@ msgstr "Hlavní budova je tvou klíčovou budovou."
 #. "A shipwreck that is common to all is a consolation."
 #: ../../../../data/tribes/initialization/empire/units.lua:1173
 msgid "Commune naufragium omnibus est consolatio."
-msgstr ""
+msgstr "Commune naufragium omnibus est consolatio."
 
 #. TRANSLATORS: Lore helptext for an Empire warehouse: Headquarters Shipwreck
 #. Translation for the classical Latin quote:
 #. "Commune naufragium omnibus est consolatio."
 #: ../../../../data/tribes/initialization/empire/units.lua:1177
 msgid "A shipwreck that is common to all is a consolation."
-msgstr ""
+msgstr "Naše sdílení vraku (neštěstí) nám budiž útěchou."
 
 #. TRANSLATORS: Lore author helptext for an Empire warehouse: Headquarters
 #. Shipwreck
 #: ../../../../data/tribes/initialization/empire/units.lua:1180
 msgctxt "empire_building"
 msgid "Lutius after stranding on an uncharted island"
-msgstr ""
+msgstr "Lutius po ztroskotání na v mapách nezakresleném ostrově"
 
 #. TRANSLATORS: Purpose helptext for an Empire warehouse: Headquarters
 #. Shipwreck
@@ -10849,14 +10849,14 @@ msgstr "Tady najdou tví dělníci a vojáci přístřeší. Také se zde uchov�
 #. "To sail is necessary."
 #: ../../../../data/tribes/initialization/empire/units.lua:1213
 msgid "Navigare necesse est."
-msgstr ""
+msgstr "Navigare necesse est, (vivere non necesse)."
 
 #. TRANSLATORS: Lore helptext for an Empire warehouse: Port
 #. Translation for the classical Latin quote:
 #. "Navigare necesse est."
 #: ../../../../data/tribes/initialization/empire/units.lua:1217
 msgid "To sail is necessary."
-msgstr ""
+msgstr "Plouti jest nutno, (žíti není nutno)."
 
 #. TRANSLATORS: Lore author helptext for an Empire warehouse: Port
 #: ../../../../data/tribes/initialization/empire/units.lua:1221
@@ -10864,7 +10864,7 @@ msgctxt "empire_building"
 msgid ""
 "Admiral Litus Marius Exsiccatus, sending out the fleet to break the naval "
 "blockade during the First Atlantean War"
-msgstr ""
+msgstr "admirál Litus Marius Exsiccatus, vysílá své loďstvo, aby prolomilo námořní blokádu v průběhu První atlantské války"
 
 #. TRANSLATORS: Purpose helptext for an Empire warehouse: Port
 #: ../../../../data/tribes/initialization/empire/units.lua:1225
@@ -10889,7 +10889,7 @@ msgstr "Na přístav, stejně jako na hlavní budovu, může nepřítel zaútoč
 #. destroyed."
 #: ../../../../data/tribes/initialization/empire/units.lua:1239
 msgid "Non relinquetur hic lapis super lapidem qui non destruatur."
-msgstr ""
+msgstr "Non relinquetur hic lapis super lapidem qui non destruatur."
 
 #. TRANSLATORS: Lore helptext for an Empire production site: Quarry
 #. Translation for the classical Latin quote:
@@ -10898,13 +10898,13 @@ msgstr ""
 msgid ""
 "There shall not be left here a stone upon a stone that shall not be "
 "destroyed."
-msgstr ""
+msgstr "Tu nezůstane kámen na kameni, všecko bude rozmetáno."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Quarry
 #: ../../../../data/tribes/initialization/empire/units.lua:1246
 msgctxt "empire_building"
 msgid "An enthusiastic stonemason arriving to a new quarry"
-msgstr ""
+msgstr "kameník plný nadšení obydlil nový lom (Mt 24:2)"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Quarry
 #: ../../../../data/tribes/initialization/empire/units.lua:1248
@@ -11081,7 +11081,7 @@ msgstr "Domek rybáře potřebuje ve své pracovní oblasti vodní plochu, ve kt
 #: ../../../../data/tribes/initialization/empire/units.lua:1338
 msgctxt "empire_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Cesty a stromy podél pobřeží brání v rybaření."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Fisher's
 #. House, part 1
@@ -11098,21 +11098,21 @@ msgstr "Tato budova může vyprodukovat jednu rybu za %1$s až %2$s, záleží n
 #. "The hunter lies in ambush for the game."
 #: ../../../../data/tribes/initialization/empire/units.lua:1355
 msgid "Venator venatus insidiatur."
-msgstr ""
+msgstr "Venator venatus insidiatur."
 
 #. TRANSLATORS: Lore helptext for an Empire production site: Hunter's House
 #. Translation for the Latin quote:
 #. "Venator venatus insidiatur."
 #: ../../../../data/tribes/initialization/empire/units.lua:1359
 msgid "The hunter lies in ambush for the game."
-msgstr ""
+msgstr "Lovec nastrahuje past na zvěř. "
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Hunter's
 #. House
 #: ../../../../data/tribes/initialization/empire/units.lua:1362
 msgctxt "empire_building"
 msgid "Caption on an imperial relief showing a hunter"
-msgstr ""
+msgstr "nápis na císařské plastice zobrazující lovce"
 
 #. TRANSLATORS: Note helptext for an Empire production site: Hunter's House
 #: ../../../../data/tribes/initialization/empire/units.lua:1366
@@ -11151,7 +11151,7 @@ msgstr "Nejlépe chutná voda přímo u pramene."
 #: ../../../../data/tribes/initialization/empire/units.lua:1867
 msgctxt "empire_building"
 msgid "Imperial proverb"
-msgstr "Císařské přísloví"
+msgstr "císařské přísloví"
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Well, part
 #. 1
@@ -11175,21 +11175,21 @@ msgstr "Pokud je vodní zdroj vyčerpán, nosič potřebuje v průměru %s."
 #. "Chat’Karuth at the gates!"
 #: ../../../../data/tribes/initialization/empire/units.lua:1407
 msgid "Ciatkaruthus ante portas!"
-msgstr ""
+msgstr "Ciatkaruthus ante portas!"
 
 #. TRANSLATORS: Lore helptext for an Empire production site: Scout's House
 #. Translation for the adapted classical Latin quote:
 #. "Ciatkaruthus ante portas!"
 #: ../../../../data/tribes/initialization/empire/units.lua:1411
 msgid "Chat’Karuth at the gates!"
-msgstr ""
+msgstr "Chat'Karuth je před branami!"
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Scout's
 #. House
 #: ../../../../data/tribes/initialization/empire/units.lua:1414
 msgctxt "empire_building"
 msgid "A belated scout’s report"
-msgstr ""
+msgstr "opožděné hlášení průzkumníka"
 
 #: ../../../../data/tribes/initialization/empire/units.lua:1415
 msgctxt "empire_building"
@@ -11241,20 +11241,20 @@ msgstr "Řeže mramorové sloupy z mramoru."
 #. "The saw does nothing except when moved by art."
 #: ../../../../data/tribes/initialization/empire/units.lua:1454
 msgid "Nihil agit serra nisi mota ab arte."
-msgstr ""
+msgstr "Nihil agit serra nisi mota ab arte."
 
 #. TRANSLATORS: Lore helptext for an Empire production site: Sawmill
 #. Translation for the classical Latin quote:
 #. "Nihil agit serra nisi mota ab arte."
 #: ../../../../data/tribes/initialization/empire/units.lua:1458
 msgid "The saw does nothing except when moved by art."
-msgstr ""
+msgstr "Pila sama neudělá nic není-li poháněna umem."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Sawmill
 #: ../../../../data/tribes/initialization/empire/units.lua:1461
 msgctxt "empire_building"
 msgid "Motto of the Carpenters’ Guild"
-msgstr ""
+msgstr "motto tesařského cechu"
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Sawmill
 #: ../../../../data/tribes/initialization/empire/units.lua:1465
@@ -11302,20 +11302,20 @@ msgstr "Mlynář potřebuje na semletí pšenice na pytel mouky v průměru %1%.
 #. "There’s not this much flour in your sack."
 #: ../../../../data/tribes/initialization/empire/units.lua:1496
 msgid "Non est de sacco tanta farina tuo."
-msgstr ""
+msgstr "Non est de sacco tanta farina tuo."
 
 #. TRANSLATORS: Lore helptext for an Empire production site: Bakery
 #. Translation for the classical Latin quote:
 #. "Non est de sacco tanta farina tuo."
 #: ../../../../data/tribes/initialization/empire/units.lua:1500
 msgid "There’s not this much flour in your sack."
-msgstr ""
+msgstr "Tolik mouky nemůže být z tvého pytle."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Bakery
 #: ../../../../data/tribes/initialization/empire/units.lua:1503
 msgctxt "empire_building"
 msgid "A baker accusing another of theft"
-msgstr ""
+msgstr "pekař obviňuje druhého z krádeže"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Bakery
 #: ../../../../data/tribes/initialization/empire/units.lua:1505
@@ -11335,7 +11335,7 @@ msgstr "Pekař potřebuje na upečení bochníku chleba v průměru %1%."
 #. "Now it’s time to drink! Now it’s time to dance freely!"
 #: ../../../../data/tribes/initialization/empire/units.lua:1517
 msgid "Nunc est bibendum, nunc pede libero pulsanda tellus!"
-msgstr ""
+msgstr "Nunc est bibendum, nunc pede libero pulsanda tellus!"
 
 #. TRANSLATORS: Lore helptext for an Empire production site: Empire Brewery.
 #. Translation for the classical Latin quote:
@@ -11343,13 +11343,13 @@ msgstr ""
 #. Literal translation of the second half is "stomp the earth with free feet"
 #: ../../../../data/tribes/initialization/empire/units.lua:1522
 msgid "Now it’s time to drink! Now it’s time to dance freely!"
-msgstr ""
+msgstr "Nastal čas loknout si! Nastal čas k radostnému tanci!"
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Brewery
 #: ../../../../data/tribes/initialization/empire/units.lua:1525
 msgctxt "empire_building"
 msgid "Imperial drinking song"
-msgstr ""
+msgstr "císařská hodovní píseň"
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Brewery
 #: ../../../../data/tribes/initialization/empire/units.lua:1529
@@ -11363,7 +11363,7 @@ msgstr "Sládek potřebuje na uvaření várky piva v průměru %1%."
 #. "Good wine needs no bush." (meaning no advertising)
 #: ../../../../data/tribes/initialization/empire/units.lua:1539
 msgid "Vino vendibili hedera non opus est."
-msgstr ""
+msgstr "Vino vendibili hedera non opus est."
 
 #. TRANSLATORS: Lore helptext for an Empire production site: Vineyard
 #. Translation for the classical Latin quote:
@@ -11372,13 +11372,13 @@ msgstr ""
 #. by places selling wine
 #: ../../../../data/tribes/initialization/empire/units.lua:1545
 msgid "Good wine needs no bush."
-msgstr ""
+msgstr "Dobré víno není třeba nikomu nutit."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Vineyard
 #: ../../../../data/tribes/initialization/empire/units.lua:1548
 msgctxt "empire_building"
 msgid "A proud vine farmer boasting"
-msgstr ""
+msgstr "pyšný vinař se vychvaluje"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Vineyard
 #: ../../../../data/tribes/initialization/empire/units.lua:1550
@@ -11453,20 +11453,20 @@ msgstr "Hostinský potřebuje na přípravu malé svačiny v průměru %1%."
 #. "A meal full of dishes restrains your mind."
 #: ../../../../data/tribes/initialization/empire/units.lua:1600
 msgid "In cena dapibus plena te mente refrena."
-msgstr ""
+msgstr "In cena dapibus plena te mente refrena."
 
 #. TRANSLATORS: Lore helptext for an Empire production site: Inn
 #. Translation for the classical Latin quote:
 #. "In cena dapibus plena te mente refrena."
 #: ../../../../data/tribes/initialization/empire/units.lua:1604
 msgid "A meal full of dishes restrains your mind."
-msgstr ""
+msgstr "Jídlo s mnoha chody, plní mysl svody."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Inn
 #: ../../../../data/tribes/initialization/empire/units.lua:1607
 msgctxt "empire_building"
 msgid "Warning from a master miner to an apprentice"
-msgstr ""
+msgstr "mistr horník varuje učně"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Inn
 #: ../../../../data/tribes/initialization/empire/units.lua:1609
@@ -11492,21 +11492,21 @@ msgstr "Pokud je budova dobře zásobována a hospodářství potřebuje oba dru
 #. "Are they to be marked with chalk or charcoal?"
 #: ../../../../data/tribes/initialization/empire/units.lua:1621
 msgid "Creta an carbone notandi?"
-msgstr ""
+msgstr "Creta an carbone notandi?"
 
 #. TRANSLATORS: Lore helptext for an Empire production site: Charcoal Kiln
 #. Translation for the classical Latin quote:
 #. "Creta an carbone notandi?"
 #: ../../../../data/tribes/initialization/empire/units.lua:1625
 msgid "Are they to be marked with chalk or charcoal?"
-msgstr ""
+msgstr "Označit křídou, nebo uhlím?"
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Charcoal
 #. Kiln
 #: ../../../../data/tribes/initialization/empire/units.lua:1629
 msgctxt "empire_building"
 msgid "Imperial proverb meaning to judge whether they are good or bad"
-msgstr ""
+msgstr "císařské přísloví tázající se, zda je něco dobré, nebo špatné"
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Charcoal
 #. Kiln
@@ -11522,21 +11522,21 @@ msgstr "Milíř potřebuje na výrobu jednoho kusu uhlí v průměru %s."
 #. "I see that iron was produced from the same darkness as gold."
 #: ../../../../data/tribes/initialization/empire/units.lua:1644
 msgid "Video ferrum ex isdem tenebris esse prolatum, quibus aurum."
-msgstr ""
+msgstr "Video ferrum ex isdem tenebris esse prolatum, quibus aurum."
 
 #. TRANSLATORS: Lore helptext for an Empire production site: Smelting Works
 #. Translation for the classical Latin quote:
 #. "Video ferrum ex isdem tenebris esse prolatum, quibus aurum."
 #: ../../../../data/tribes/initialization/empire/units.lua:1648
 msgid "I see that iron was produced from the same darkness as gold."
-msgstr ""
+msgstr "Vidím, že železo vzniká ze stejné temnoty jako zlato."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Smelting
 #. Works
 #: ../../../../data/tribes/initialization/empire/units.lua:1651
 msgctxt "empire_building"
 msgid "Amalea after inspecting a smelting works"
-msgstr ""
+msgstr "Amalea po své inspekci ve slévárně"
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Smelting
 #. Works
@@ -11589,7 +11589,7 @@ msgstr "Pokud je budova dobře zásobována a hospodářství potřebuje všechn
 msgid ""
 "Hi loricarum vasto sub tegmine gaudent, intexit creber sibimet quas circulus"
 " hærens, atque catenosi crepitant per corpora panni."
-msgstr ""
+msgstr "Hi loricarum vasto sub tegmine gaudent, intexit creber sibimet quas circulus hærens, atque catenosi crepitant per corpora panni."
 
 #. TRANSLATORS: Lore helptext for an Empire production site: Armorsmithy
 #. Translation for the classical Latin quote:
@@ -11600,14 +11600,14 @@ msgstr ""
 msgid ""
 "They enjoy their great armors under their capes, tightly woven from rings, "
 "rattling through the cloth."
-msgstr ""
+msgstr "Ze své výborné, pod pláštěm skryté, zbroje, z hustě spletených kroužků, chřestících skrze látku, mají velké potěšení."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site:
 #. Armorsmithy
 #: ../../../../data/tribes/initialization/empire/units.lua:1697
 msgctxt "empire_building"
 msgid "An armorsmith teaching an apprentice"
-msgstr ""
+msgstr "platnéř školící učně"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Armor Smithy
 #: ../../../../data/tribes/initialization/empire/units.lua:1699
@@ -11703,7 +11703,7 @@ msgstr "Chová roztomilé a nápomocné osly pro posílení přepravního systé
 msgid ""
 "Lutius iam a publicis negotiis se removerat, ruri vivebat et senatus legati "
 "eum invenerunt dum agellum suum arat."
-msgstr ""
+msgstr "Lutius iam a publicis negotiis se removerat, ruri vivebat et senatus legati eum invenerunt dum agellum suum arat."
 
 #. TRANSLATORS: Lore helptext for an Empire production site: Farm
 #. Translation for the adapted classical Latin quote:
@@ -11715,13 +11715,13 @@ msgid ""
 "Lutius had already removed himself from public affairs, he was living in the"
 " countryside, and the ambassadors of the senate found him while he was "
 "plowing his land."
-msgstr ""
+msgstr "Lutius se již dříve stáhl z veřejného života, žil na venkově a velvyslanec senátu ho nalezl, když zrovna oral svá pole."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Farm
 #: ../../../../data/tribes/initialization/empire/units.lua:1764
 msgctxt "empire_building"
 msgid "History of the Empire, Part VII"
-msgstr ""
+msgstr "Dějiny Císařství, část VII"
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Farm
 #: ../../../../data/tribes/initialization/empire/units.lua:1768
@@ -11735,14 +11735,14 @@ msgstr "Sedlák potřebuje v průměru %1% na výsev a sklizeň pšenice."
 #. "What does the pig really have other than meat?"
 #: ../../../../data/tribes/initialization/empire/units.lua:1778
 msgid "Sus vero quid habet præter escam?"
-msgstr ""
+msgstr "Sus vero quid habet præter escam?"
 
 #. TRANSLATORS: Lore helptext for an Empire production site: Piggery
 #. Translation for the classical Latin quote:
 #. "Sus vero quid habet præter escam?"
 #: ../../../../data/tribes/initialization/empire/units.lua:1782
 msgid "What does the pig really have other than meat?"
-msgstr ""
+msgstr "Co jiného může nabídnou prase než své maso?"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Piggery
 #: ../../../../data/tribes/initialization/empire/units.lua:1787
@@ -11817,21 +11817,21 @@ msgstr "Tká látku z vlny."
 #. "The fire keeps its heat even in the iron."
 #: ../../../../data/tribes/initialization/empire/units.lua:1837
 msgid "Ignis calorem suum etiam in ferro tenet."
-msgstr ""
+msgstr "Ignis calorem suum etiam in ferro tenet."
 
 #. TRANSLATORS: Lore helptext for an Empire production site: Weapon Smithy
 #. Translation for the classical Latin quote:
 #. "Ignis calorem suum etiam in ferro tenet."
 #: ../../../../data/tribes/initialization/empire/units.lua:1841
 msgid "The fire keeps its heat even in the iron."
-msgstr ""
+msgstr "Ani železo neučiní oheň méně horkým."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Weapon
 #. Smithy
 #: ../../../../data/tribes/initialization/empire/units.lua:1844
 msgctxt "empire_building"
 msgid "Motto of the Weaponsmiths’ Guild"
-msgstr ""
+msgstr "motto cechu zbrojířů"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Weapon Smithy
 #: ../../../../data/tribes/initialization/empire/units.lua:1846
@@ -11859,14 +11859,14 @@ msgstr "Pokud je budova dobře zásobována a hospodářství potřebuje všechn
 #. "He who hurts writes in the wind, he who is hurt in marble."
 #: ../../../../data/tribes/initialization/empire/units.lua:1860
 msgid "In vento scribit lædens, in marmore læsus."
-msgstr ""
+msgstr "In vento scribit lædens, in marmore læsus."
 
 #. TRANSLATORS: Lore helptext for an Empire production site: Marble Mine
 #. Translation for the classical Latin quote:
 #. "In vento scribit lædens, in marmore læsus."
 #: ../../../../data/tribes/initialization/empire/units.lua:1864
 msgid "He who hurts writes in the wind, he who is hurt in marble."
-msgstr ""
+msgstr "Ten, kdo ubližuje, tesá do větru, ten, komu je ubližováno, do mramoru."
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Marble Mine
 #. TRANSLATORS: Purpose helptext for an Empire production site: Deep Marble
@@ -11909,7 +11909,7 @@ msgstr "Našel město z cihel a když ho opouštěl, bylo z mramoru."
 #: ../../../../data/tribes/initialization/empire/units.lua:1889
 msgctxt "empire_building"
 msgid "History of the Empire, Part VI on the return of Lutius to Fremil"
-msgstr "Historie Císařství, část VI popisující návrat Lutia do Fremilu"
+msgstr "Dějiny Císařství, část VI popisující návrat Lutia do Fremilu"
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11920,7 +11920,7 @@ msgstr "Historie Císařství, část VI popisující návrat Lutia do Fremilu"
 msgid ""
 "Carbo de mortuo reviviscit, de nigro in ruborem vertitur, favillas generat, "
 "et dum resolvitur, cinerea."
-msgstr ""
+msgstr "Carbo de mortuo reviviscit, de nigro in ruborem vertitur, favillas generat, et dum resolvitur, cinerea."
 
 #. TRANSLATORS: Lore helptext for an Empire production site: Coal Mine
 #. Translation for the classical Latin quote:
@@ -11954,7 +11954,7 @@ msgstr "Pokud je stabilní přísun jídla, může tento důl vytěžit v prům�
 msgid ""
 "Non enim est una species ignis: nam diversum est carbo et flamma, et lux "
 "specie, cum unumquodque horum sit ignis."
-msgstr ""
+msgstr "Non enim est una species ignis: nam diversum est carbo et flamma, et lux specie, cum unumquodque horum sit ignis."
 
 #. TRANSLATORS: Lore helptext for an Empire production site: Deep Coal Mine
 #. Translation for the classical Latin quote:
@@ -12006,21 +12006,21 @@ msgstr "Pokud je stabilní přísun jídla, může tento důl vytěžit v prům�
 #. "By constant use an iron ring is worn away."
 #: ../../../../data/tribes/initialization/empire/units.lua:1975
 msgid "Ferreus assiduo consumitur annulus usu."
-msgstr ""
+msgstr "Ferreus assiduo consumitur annulus usu."
 
 #. TRANSLATORS: Lore helptext for an Empire production site: Deep Iron Mine
 #. Translation for the classical Latin quote:
 #. "Ferreus assiduo consumitur annulus usu."
 #: ../../../../data/tribes/initialization/empire/units.lua:1979
 msgid "By constant use an iron ring is worn away."
-msgstr ""
+msgstr "Neustálým nošením se i železný prsten obnosí."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Deep Iron
 #. Mine
 #: ../../../../data/tribes/initialization/empire/units.lua:1983
 msgctxt "empire_building"
 msgid "Amalea on the importance of always looking for more resources"
-msgstr ""
+msgstr "Amalea zdůrazňuje důležitost neustálého hledání nových nerostných zdrojů"
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12028,21 +12028,21 @@ msgstr ""
 #. "Gold discovered and all the better for being so."
 #: ../../../../data/tribes/initialization/empire/units.lua:1998
 msgid "Aurum irrepertum et sic melius situm."
-msgstr ""
+msgstr "Aurum irrepertum et sic melius situm."
 
 #. TRANSLATORS: Lore helptext for an Empire production site: Gold Mine
 #. Translation for the classical Latin quote:
 #. "Aurum irrepertum et sic melius situm."
 #: ../../../../data/tribes/initialization/empire/units.lua:2002
 msgid "Gold discovered and all the better for being so."
-msgstr ""
+msgstr "Zlato dosud neobjevené je to nejlépe umístěné (chráněné, nejvíce cenné)."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Gold Mine
 #: ../../../../data/tribes/initialization/empire/units.lua:2006
 msgctxt "empire_building"
 msgid ""
 "Amalea receiving the first geologist report of gold on the small island"
-msgstr ""
+msgstr "Amalea dostává první zprávu od geologa o zlatě na malém ostrově"
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Gold Mine
 #: ../../../../data/tribes/initialization/empire/units.lua:2011
@@ -12086,7 +12086,7 @@ msgstr "generál Trepidus Egenus Attenuatus motivující vojáky"
 msgid ""
 "Qui dabat olim […] omnia, nunc se continet atque duas tantum res anxius "
 "optat, panem et circenses."
-msgstr ""
+msgstr "Qui dabat olim […] omnia, nunc se continet atque duas tantum res anxius optat, panem et circenses."
 
 #. TRANSLATORS: Lore helptext for an Empire training site: Arena
 #. Translation for the classical Latin quote:
@@ -12097,13 +12097,13 @@ msgstr ""
 msgid ""
 "[The People of the Empire] who once handed out all [power], now restrains "
 "itself and anxiously hopes for just two things: bread and games."
-msgstr ""
+msgstr "[Císařský lid] předav kdysi věci své veškeré [správy], nyní s málem spokojen jest, v úzkostné naději vyhlídku věcí dvou, chleba a her, chovaje."
 
 #. TRANSLATORS: Lore author helptext for an Empire training site: Arena
 #: ../../../../data/tribes/initialization/empire/units.lua:2057
 msgctxt "empire_building"
 msgid "History of the Empire, Part X – the decline"
-msgstr ""
+msgstr "Dějiny Císařství, část X – Úpadek"
 
 #. TRANSLATORS: Purpose helptext for an Empire training site: Arena, part 1
 #. TRANSLATORS: Purpose helptext for an Empire training site: Colosseum, part
@@ -12291,7 +12291,7 @@ msgstr "Saledus varující Lutia, že strážnice neposkytují Limes odpovídaj�
 msgid ""
 "Binæ contra urbem a castris station erant, una ultra flumen, altera eis "
 "flumen supra castra."
-msgstr ""
+msgstr "Binæ contra urbem a castris station erant, una ultra flumen, altera eis flumen supra castra."
 
 #. TRANSLATORS: Lore helptext for an Empire military site: Outpost
 #. Translation for the classical Latin quote:
@@ -12301,14 +12301,14 @@ msgstr ""
 msgid ""
 "Two were stationed on the other side of the city than the camp: one over the"
 " river, the other by the river above the camp."
-msgstr ""
+msgstr "Dvě stály na opačné straně města než ležel tábor: jedna nad řekou a druhá při řece nad táborem."
 
 #. TRANSLATORS: Lore author helptext for an Empire military site: Outpost
 #: ../../../../data/tribes/initialization/empire/units.lua:2187
 msgctxt "empire_building"
 msgid ""
 "History of the Empire, Part III, preparation for the battle of Uliginosium"
-msgstr ""
+msgstr "Dějiny Císařství, část III, přípravy na bitvu u Uliginosia"
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12383,20 +12383,20 @@ msgstr "Saledus v hádce s Amaleou"
 #. "Furthermore, I think that Al’thunran must be destroyed!"
 #: ../../../../data/tribes/initialization/empire/units.lua:2271
 msgid "Ceterum autem censeo Althunranam esse delendam!"
-msgstr ""
+msgstr "Ceterum autem censeo Althunranam esse delendam!"
 
 #. TRANSLATORS: Lore helptext for an Empire military site: Castle
 #. Translation for the adapted classical Latin quote:
 #. "Ceterum autem censeo Althunranam esse delendam!"
 #: ../../../../data/tribes/initialization/empire/units.lua:2275
 msgid "Furthermore, I think that Al’thunran must be destroyed!"
-msgstr ""
+msgstr "Co víc, domnívám se, že Al’thunran musí být zničen!"
 
 #. TRANSLATORS: Lore author helptext for an Empire military site: Castle
 #: ../../../../data/tribes/initialization/empire/units.lua:2279
 msgctxt "empire_building"
 msgid "Saledus in the Senate, urging final victory over the Barbarians"
-msgstr ""
+msgstr "Saledus v senátu prosazuje konečné vítězství nad Barbary"
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.

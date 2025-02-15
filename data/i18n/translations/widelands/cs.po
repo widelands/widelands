@@ -2617,23 +2617,23 @@ msgstr "dělníci nepotřebuje další zkušenosti"
 
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:615
 msgid "the fleet needs a ferry"
-msgstr ""
+msgstr "hospodářství potřebuje další přívoz"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs
 #. a ship/ferry'.
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:615
 msgid "the fleet needs a ship"
-msgstr ""
+msgstr "loďstvo třeba rozšířit"
 
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:622
 msgid "the fleet needs no ferries"
-msgstr ""
+msgstr "hospodářství nepotřebuje další přívozy"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs
 #. no ships/ferries'.
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:622
 msgid "the fleet needs no ships"
-msgstr ""
+msgstr "loďstvo je kompletní"
 
 #. * TRANSLATORS: "Did not start working because the economy needs the ware
 #. '%s'"
@@ -3850,7 +3850,7 @@ msgstr "Byl jsi odhlášen z metaserveru, protože jsi včas neodpověděl na ž
 #: ../../../../src/network/net_addons.cc:894
 #, c-format
 msgid "Sending metadata for %s"
-msgstr ""
+msgstr "Odesílání metadat o %s"
 
 #: ../../../../src/network/net_addons.cc:936
 #, c-format
@@ -4143,11 +4143,11 @@ msgstr "Žádná shoda"
 
 #: ../../../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
-msgstr "Prosím počkejte..."
+msgstr "Prosím o strpení..."
 
 #: ../../../../src/ui_basic/panel.cc:467
 msgid "Game ending – please wait…"
-msgstr "Hra se ukončuje – prosím počkejte..."
+msgstr "Hra se ukončuje – prosím o strpení..."
 
 #: ../../../../src/ui_basic/progresswindow.cc:83
 #: ../../../../src/wlapplication.cc:488
@@ -4654,7 +4654,7 @@ msgstr "Max. rozměr:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:455
 msgid "Choose add-on to upload…"
-msgstr "Zvolte rozšíření k nahrání..."
+msgstr "Zvol rozšíření k nahrání..."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:466
 msgid "Upload a screenshot…"
@@ -4804,7 +4804,7 @@ msgid ""
 "Browse and install maps from the widelands.org website maps archive. Like "
 "manually downloaded maps, installed website maps are stored in the ‘%s’ "
 "directory under the Widelands home directory."
-msgstr ""
+msgstr "Umožňuje procházet a stahovat mapy z archivu map na stránce widelands.org. Stejně jako ručně stažené mapy, tak jsou i takto nainstalované mapy uloženy do složky \"%s\" v hlavním adresáři Widelands."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:757
 msgid "Development"
@@ -6225,7 +6225,7 @@ msgid ""
 "with a description of what was going on in the game and what you did last "
 "before the crash to the Widelands Development Team under %s so we can fix "
 "the problem."
-msgstr ""
+msgstr "Vypadá to, že při posledním spuštění Widelands došlo k pádu a byl vygenerován automatický záznam pro možné pozdější vyřešení problému. Prosíme o předání této zprávy společně s popisem, co bylo poslední prováděnou aktivitou a jak hra reagovala, týmu vývojářů Widelands na %s, aby mohl být problém vyřešen."
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:142
 msgid "Show details…"
@@ -6454,11 +6454,11 @@ msgstr "Uložit záznam hry"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:167
 msgid "Change map…"
-msgstr "Změnit mapu…"
+msgstr "Vybrat mapu…"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:177
 msgid "Change saved game…"
-msgstr "Změnit uloženou hru…"
+msgstr "Vybrat uloženou hru…"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:204
 msgid "Start game"
@@ -6672,7 +6672,7 @@ msgstr "Uložit"
 
 #: ../../../../src/ui_fsmenu/login_box.cc:53
 msgid "Log in to a registered account."
-msgstr "Přihlaste se k registrovanému účtu."
+msgstr "Přihlásit se k registrovanému účtu."
 
 #: ../../../../src/ui_fsmenu/login_box.cc:58
 msgid "Nickname:"
@@ -8196,11 +8196,11 @@ msgstr "Změnit hudbu"
 
 #: ../../../../src/wlapplication_options.cc:390
 msgid "Open the Debug Console (developer tool)"
-msgstr ""
+msgstr "Otevřít ladící konzoli (vývojářstý nástroj)"
 
 #: ../../../../src/wlapplication_options.cc:395
 msgid "Toggle Cheat Mode (developer tool)"
-msgstr ""
+msgstr "Přepnout Cheat mode (vývojářský nástroj)"
 
 #: ../../../../src/wlapplication_options.cc:405
 msgid "Load"
@@ -9509,11 +9509,11 @@ msgstr "Zničit vodní cestu"
 
 #: ../../../../src/wui/fieldaction.cc:522
 msgid "Configure this ocean’s ship fleet"
-msgstr ""
+msgstr "Nastavit velikost loďstva"
 
 #: ../../../../src/wui/fieldaction.cc:533
 msgid "Configure this ocean’s ferry fleet"
-msgstr ""
+msgstr "Nastavit počet přívozů"
 
 #: ../../../../src/wui/fieldaction.cc:540
 msgid "Watch field in a separate window"
