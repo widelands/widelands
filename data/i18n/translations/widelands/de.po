@@ -25,7 +25,7 @@
 # Raymond Vetter, 2016,2018
 # SevyRide, 2015
 # Simon Heimberg, 2023
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2024
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2025
 # The Widelands development team <widelands-public@Alists.sf.net>, 2010
 # Thomas Ho <tomohnetom@web.de>, 2021
 # Tino Miegel <tino.miegel@gmail.com>, 2018
@@ -39,9 +39,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-02-10 02:54+0000\n"
+"POT-Creation-Date: 2025-02-13 02:53+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2024\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2025\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -699,11 +699,11 @@ msgstr "Die Anzeige der maximalen Bauhilfe, die verfügbar wäre, wenn alle unbe
 #. the map height heat map is shown
 #: ../../../../src/editor/editorinteractive.cc:495
 msgid "Disable height heat map"
-msgstr ""
+msgstr "Höhenkarte anzeigen"
 
 #: ../../../../src/editor/editorinteractive.cc:496
 msgid "Enable height heat map"
-msgstr ""
+msgstr "Höhenkarte ausblenden"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
@@ -719,17 +719,17 @@ msgstr "Gitter anzeigen"
 #. the oceans are shown
 #: ../../../../src/editor/editorinteractive.cc:511
 msgid "Hide Oceans"
-msgstr ""
+msgstr "Ozeane ausblenden"
 
 #: ../../../../src/editor/editorinteractive.cc:511
 msgid "Show Oceans"
-msgstr ""
+msgstr "Ozeane anzeigen"
 
 #: ../../../../src/editor/editorinteractive.cc:514
 msgid ""
 "Display separate water bodies with differently coloured overlays to see "
 "which coasts can be connected by shipping routes"
-msgstr ""
+msgstr "Zeige separate Wasserflächen mit unterschiedlicher farbiger Hervorhebung, um zu sehen welche Küsten durch Schiffsrouten verbunden werden können"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
@@ -2002,7 +2002,7 @@ msgstr "Widelands wird nicht laufen, weil der Grafiktreiber zu alt ist."
 #: ../../../../src/graphic/gl/initialize.cc:227
 #, c-format
 msgid "The %1$s version needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "Die „%1$s“-Version muss Version %2$u.%3$u oder höher sein."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -2207,46 +2207,46 @@ msgstr[0] "%u spielrelevante Erweiterung in Gebrauch:"
 msgstr[1] "%u spielrelevante Erweiterungen in Gebrauch:"
 
 #. * TRANSLATORS: "12 steps northwest of Port1"
-#: ../../../../src/logic/detected_port_space.cc:52
+#: ../../../../src/logic/detected_port_space.cc:47
 msgid "northwest"
 msgstr "nordwestlich"
 
 #. * TRANSLATORS: "12 steps northeast of Port1"
-#: ../../../../src/logic/detected_port_space.cc:56
+#: ../../../../src/logic/detected_port_space.cc:51
 msgid "northeast"
 msgstr "nordöstlich"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
-#: ../../../../src/logic/detected_port_space.cc:60
+#: ../../../../src/logic/detected_port_space.cc:55
 msgid "southwest"
 msgstr "südwestlich"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
-#: ../../../../src/logic/detected_port_space.cc:64
+#: ../../../../src/logic/detected_port_space.cc:59
 msgid "southeast"
 msgstr "südöstlich"
 
 #. * TRANSLATORS: "12 steps north of Port1"
-#: ../../../../src/logic/detected_port_space.cc:68
+#: ../../../../src/logic/detected_port_space.cc:63
 msgid "north"
 msgstr "nördlich"
 
 #. * TRANSLATORS: "12 steps south of Port1"
-#: ../../../../src/logic/detected_port_space.cc:72
+#: ../../../../src/logic/detected_port_space.cc:67
 msgid "south"
 msgstr "südlich"
 
 #. * TRANSLATORS: "12 steps west of Port1"
-#: ../../../../src/logic/detected_port_space.cc:76
+#: ../../../../src/logic/detected_port_space.cc:71
 msgid "west"
 msgstr "westlich"
 
 #. * TRANSLATORS: "12 steps east of Port1"
-#: ../../../../src/logic/detected_port_space.cc:80
+#: ../../../../src/logic/detected_port_space.cc:75
 msgid "east"
 msgstr "östlich"
 
-#: ../../../../src/logic/detected_port_space.cc:88
+#: ../../../../src/logic/detected_port_space.cc:83
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s"
 msgstr "Herrenloser Hafenbauplatz bei %1$s durch %2$s entdeckt"
@@ -2254,7 +2254,7 @@ msgstr "Herrenloser Hafenbauplatz bei %1$s durch %2$s entdeckt"
 #. * TRANSLATORS: "Unowned port space discovered at 1:11 by Ship2 33 steps
 #. north of
 #. Port5"
-#: ../../../../src/logic/detected_port_space.cc:94
+#: ../../../../src/logic/detected_port_space.cc:89
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
 msgid_plural ""
@@ -2262,7 +2262,7 @@ msgid_plural ""
 msgstr[0] "Herrenloser Hafenbauplatz bei%1$s,%3$u Feld %4$s von %5$s, durch %2$sentdeckt"
 msgstr[1] "Herrenloser Hafenbauplatz bei %1$s, %3$u Felder %4$s von %5$s, durch %2$s entdeckt"
 
-#: ../../../../src/logic/detected_port_space.cc:101
+#: ../../../../src/logic/detected_port_space.cc:96
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s"
 msgstr "Hafenbauplatz von %1$s bei %2$s durch %3$s entdeckt"
@@ -2270,7 +2270,7 @@ msgstr "Hafenbauplatz von %1$s bei %2$s durch %3$s entdeckt"
 #. * TRANSLATORS: "Port space of Player1 discovered at 2:22 by Ship3 44 steps
 #. north
 #. of Port6"
-#: ../../../../src/logic/detected_port_space.cc:108
+#: ../../../../src/logic/detected_port_space.cc:103
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
 msgid_plural ""
@@ -2279,55 +2279,55 @@ msgstr[0] "Hafenbauplatz von %1$s bei %2$s, %4$u Feld %5$s von %6$s, durch %3$s 
 msgstr[1] "Hafenbauplatz von %1$s bei %2$s, %4$u Felder %5$s von %6$s, durch  %3$s entdeckt"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
-#: ../../../../src/logic/detected_port_space.cc:120
+#: ../../../../src/logic/detected_port_space.cc:115
 msgctxt "direction"
 msgid "NW"
 msgstr "NW"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northeast.
-#: ../../../../src/logic/detected_port_space.cc:124
+#: ../../../../src/logic/detected_port_space.cc:119
 msgctxt "direction"
 msgid "NE"
 msgstr "NO"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southwest.
-#: ../../../../src/logic/detected_port_space.cc:128
+#: ../../../../src/logic/detected_port_space.cc:123
 msgctxt "direction"
 msgid "SW"
 msgstr "SW"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southeast.
-#: ../../../../src/logic/detected_port_space.cc:132
+#: ../../../../src/logic/detected_port_space.cc:127
 msgctxt "direction"
 msgid "SE"
 msgstr "SO"
 
 #. * TRANSLATORS: This is an abbreviated direction: North.
-#: ../../../../src/logic/detected_port_space.cc:136
+#: ../../../../src/logic/detected_port_space.cc:131
 msgctxt "direction"
 msgid "N"
 msgstr "N"
 
 #. * TRANSLATORS: This is an abbreviated direction: South.
-#: ../../../../src/logic/detected_port_space.cc:140
+#: ../../../../src/logic/detected_port_space.cc:135
 msgctxt "direction"
 msgid "S"
 msgstr "S"
 
 #. * TRANSLATORS: This is an abbreviated direction: West.
-#: ../../../../src/logic/detected_port_space.cc:144
+#: ../../../../src/logic/detected_port_space.cc:139
 msgctxt "direction"
 msgid "W"
 msgstr "W"
 
 #. * TRANSLATORS: This is an abbreviated direction: East.
-#: ../../../../src/logic/detected_port_space.cc:148
+#: ../../../../src/logic/detected_port_space.cc:143
 msgctxt "direction"
 msgid "E"
 msgstr "O"
 
 #. * TRANSLATORS: Placeholders are gametime and shipname. Keep this short.
-#: ../../../../src/logic/detected_port_space.cc:157
+#: ../../../../src/logic/detected_port_space.cc:152
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s"
@@ -2336,7 +2336,7 @@ msgstr "Herrenlos / %1$s / %2$s"
 #. * TRANSLATORS: Placeholders are gametime, shipname, and distance direction
 #. port_name.
 #. *  Keep this short.
-#: ../../../../src/logic/detected_port_space.cc:162
+#: ../../../../src/logic/detected_port_space.cc:157
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s / %3$u %4$s %5$s"
@@ -2344,7 +2344,7 @@ msgstr "Herrenlos / %1$s / %2$s / %3$u %4$s %5$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this
 #. short.
-#: ../../../../src/logic/detected_port_space.cc:168
+#: ../../../../src/logic/detected_port_space.cc:163
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s"
@@ -2353,7 +2353,7 @@ msgstr "%1$s / %2$s / %3$s"
 #. * TRANSLATORS: Placeholders are owner, gametime, shipname, and "distance
 #. direction port_name.
 #. *  Keep this short.
-#: ../../../../src/logic/detected_port_space.cc:174
+#: ../../../../src/logic/detected_port_space.cc:169
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
@@ -3043,11 +3043,6 @@ msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Gründet eine Kolonie"
 
-#: ../../../../src/logic/map_objects/tribes/soldier.cc:1544
-#: ../../../../src/logic/map_objects/tribes/soldier.cc:1548
-msgid "Logic error"
-msgstr "Logikfehler"
-
 #. * TRANSLATORS: Example: Loading Barbarians: Buildings (2/6)
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:160
 msgid "Loading %1%: %2% (%3%/%4%)"
@@ -3155,25 +3150,30 @@ msgstr "Wasserweg zerstört"
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr "Ein Wasserweg musste zerstört werden, um Platz für dein neues Hafendock zu schaffen."
 
-#: ../../../../src/logic/map_objects/tribes/worker.cc:1137
+#: ../../../../src/logic/map_objects/tribes/worker_programs/findresources.cc:58
 msgid "A geologist found resources."
 msgstr "Ein Geologe hat Rohstoffe entdeckt."
 
-#: ../../../../src/logic/map_objects/tribes/worker.cc:2120
+#: ../../../../src/logic/map_objects/tribes/worker_tasks/return.cc:115
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr "Dein %s findet keinen Weg nach Hause und wird wahrscheinlich sterben."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../../../src/logic/map_objects/tribes/worker.cc:2125
+#: ../../../../src/logic/map_objects/tribes/worker_tasks/return.cc:120
 #: ../../../../src/wui/productionsitewindow.cc:107
 #: ../../../../src/wui/productionsitewindow.cc:124
 msgid "Worker"
 msgstr "Arbeiter"
 
-#: ../../../../src/logic/map_objects/tribes/worker.cc:2126
+#: ../../../../src/logic/map_objects/tribes/worker_tasks/return.cc:121
 msgid "Worker got lost!"
 msgstr "Ein Arbeiter ging verloren!"
+
+#: ../../../../src/logic/map_objects/tribes/worker_tasks/soldier_battle.cc:158
+#: ../../../../src/logic/map_objects/tribes/worker_tasks/soldier_battle.cc:162
+msgid "Logic error"
+msgstr "Logikfehler"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../../../src/logic/map_objects/world/terrain_description.cc:71
@@ -3249,41 +3249,41 @@ msgstr "Spiel gespeichert"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:887
 msgid "Building’s inputs changed!"
-msgstr ""
+msgstr "Geänderter Gebäudewareneingang!"
 
 #. * TRANSLATORS: The argument is the buiding name
 #: ../../../../src/map_io/map_buildingdata_packet.cc:898
 #, c-format
 msgid "%s: the building’s inputs have changed."
-msgstr ""
+msgstr "%s: der Wareneingang des Gebäudes hat sich geändert."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:901
 msgid "The following wares have been deleted:"
-msgstr ""
+msgstr "Die folgenden Waren wurden gelöscht:"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:908
 #, c-format
 msgid "%1$u piece of %2$s"
 msgid_plural "%1$u pieces of %2$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u Ware %2$s"
+msgstr[1] "%1$u Waren %2$s"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:914
 #, c-format
 msgid "%1$u piece of an unknown ware"
 msgid_plural "%1$u pieces of unknown wares"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u unbekannte Ware"
+msgstr[1] "%1$u unbekannte Waren"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:920
 msgid ""
 "The game was probably saved with a different Widelands version or with "
 "different enabled add-ons."
-msgstr ""
+msgstr "Das Spiel wurde wahrscheinlich mir einer unterschiedlichen Version von Widelands oder mit unterschiedlichen aktivierten Erweiterungen gespeichert."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:923
 msgid "Please review the current production programs and input settings."
-msgstr ""
+msgstr "Bitte überprüfe die aktuellen Produktionszyklen und Wareneingangseinstellungen."
 
 #: ../../../../src/map_io/map_saver.cc:85
 #, c-format
@@ -3840,12 +3840,12 @@ msgstr "Du wurdest vom Metaserver getrennt, da du nicht rechtzeitig auf eine PIN
 #: ../../../../src/network/net_addons.cc:894
 #, c-format
 msgid "Sending metadata for %s"
-msgstr ""
+msgstr "Sende Metadaten für%s"
 
 #: ../../../../src/network/net_addons.cc:936
 #, c-format
 msgid "Uploading %s"
-msgstr ""
+msgstr "Lade „%s“ hoch"
 
 #: ../../../../src/network/network_gaming_messages.cc:30
 msgid "Client has left the game."
@@ -4588,35 +4588,35 @@ msgstr "Mindestqualität"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:354
 msgid "Min Players:"
-msgstr ""
+msgstr "Mindestspielerzahl:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:367
 msgid "Min Width:"
-msgstr ""
+msgstr "Mindestbreite:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:380
 msgid "Min Height:"
-msgstr ""
+msgstr "Mindesthöhe:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:393
 msgid "Min Size:"
-msgstr ""
+msgstr "Mindestgröße:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:406
 msgid "Max Players:"
-msgstr ""
+msgstr "Höchstspielerzahl:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:419
 msgid "Max Width:"
-msgstr ""
+msgstr "Höchstbreite:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:432
 msgid "Max Height:"
-msgstr ""
+msgstr "Höchsthöhe:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:445
 msgid "Max Size:"
-msgstr ""
+msgstr "Höchstgröße:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:455
 msgid "Choose add-on to upload…"
@@ -4758,11 +4758,11 @@ msgstr "Du kannst auch eine Nachricht an das Widelands-Entwicklungsteam senden u
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:749
 msgid "Manage your installed add-ons"
-msgstr ""
+msgstr "Verwalte deine installierten Erweiterungen"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:751
 msgid "Browse and install add-ons available on the server"
-msgstr ""
+msgstr "Durchsuche und installiere auf dem Server verfügbare Erweiterungen"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:753
 #, c-format
@@ -4770,7 +4770,7 @@ msgid ""
 "Browse and install maps from the widelands.org website maps archive. Like "
 "manually downloaded maps, installed website maps are stored in the ‘%s’ "
 "directory under the Widelands home directory."
-msgstr ""
+msgstr "Durchsuche und installiere Karten aus dem Kartenarchiv der widelands.org Homepage. Wie manuell heruntergeladene Karten, werden die Homepage-Karten auch im Verzeichnis „%s” unter dem Widelands Hauptverzeichnis gespeichert."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:757
 msgid "Development"
@@ -4778,7 +4778,7 @@ msgstr "Entwicklung"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:757
 msgid "Tools for add-on developers"
-msgstr ""
+msgstr "Werkzeuge für Erweiterungsentwickler"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:761
@@ -4826,7 +4826,7 @@ msgstr "Filtere Erweiterungen nach Namen"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:785
 msgid "Filter maps by name"
-msgstr ""
+msgstr "Filtere Karten nach Namen"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:796
 #, c-format
@@ -4836,12 +4836,12 @@ msgstr "Kategorie „%s“ umschalten"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:812
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:709
 msgid "One World"
-msgstr ""
+msgstr "Vereinte Welt"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:820
 #, c-format
 msgid "Toggle world ‘%s’"
-msgstr ""
+msgstr "Welt „%s“ umschalten"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1012
 #, c-format
@@ -5001,12 +5001,12 @@ msgstr "• %s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1675
 msgid "Website Maps"
-msgstr ""
+msgstr "Homepage Karten"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1676
 #, c-format
 msgid "Website Maps (%u)"
-msgstr ""
+msgstr "Homepage Karten (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1708
 #, c-format
@@ -5089,14 +5089,14 @@ msgstr "%1% / %2%"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1975
 #, c-format
 msgid "‘%s’"
-msgstr ""
+msgstr "„%s“"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1983
 #, c-format
 msgid ""
 "The add-on ‘%s’ may not be uploaded to the server because the following "
 "filenames contained in the add-on are not allowed:"
-msgstr ""
+msgstr "Die Erweiterung „%s” kann nicht auf den Server hochgeladen werden, da die folgenden Dateinamen in der Erweiterung nicht erlaubt sind:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1987
 msgid ""
@@ -5104,7 +5104,7 @@ msgid ""
 "simple punctuation (period, hyphen, and underscore; not multiple periods). "
 "Other characters such as whitespace are not permitted. Filenames may not "
 "exceed 80 characters."
-msgstr ""
+msgstr "Dateinamen dürfen nur alphanumerische Zeichen (A-Z, a-z, 0-9) und einfache Interpunktionen (Punkt, Bindestrich, und Unterstrich; aber keine Mehrfachpunkte) enthalten. Andere Zeichen wie etwa Leerzeichen sind nicht erlaubt. Dateinamen dürfen nicht länger sein als 80 Zeichen."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2002
 #, c-format
@@ -5122,7 +5122,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "Die Karte „%1$s“ konnte nicht heruntergeladen werden.\n\nFehlermeldung:\n%2$s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2059
 #, c-format
@@ -5851,7 +5851,7 @@ msgid ""
 "%3$s\n"
 "\n"
 "Note that this map can not be downloaded again from the server."
-msgstr ""
+msgstr "Möchtest du wirklich diese Karte deinstallieren?\n\n%1$s\nvon %2$s\n%3$s\n\nBedenke, dass diese Karte nicht erneut vom Server geladen werden kann."
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:54
 #, c-format
@@ -5861,7 +5861,7 @@ msgid ""
 "%1$s\n"
 "by %2$s\n"
 "%3$s"
-msgstr ""
+msgstr "Möchtest du wirklich diese Karte deinstallieren?\n\n%1$s\nvon %2$s\n%3$s"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:60
 #, c-format
@@ -5911,11 +5911,11 @@ msgstr "Benötigt mindestens Widelands Version %1$s und nicht höher als %2$s."
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:168
 msgid "Hint:"
-msgstr ""
+msgstr "Hinweis:"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:175
 msgid "Comment by uploader:"
-msgstr ""
+msgstr "Kommentar des Bereitstellers:"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:216
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:267
@@ -6063,14 +6063,14 @@ msgstr[1] "%u Bildschirmfotos"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:704
 #, c-format
 msgid "Size: %1$u×%2$u • Max Players: %3$u • %4$s"
-msgstr ""
+msgstr "Größe: %1$u×%2$u • Höchstspielerzahl: %3$u • %4$s"
 
 #. * TRANSLATORS: Timestamp · Filesize · Download count · Average rating ·
 #. Number of comments
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:725
 #, c-format
 msgid "%1$s   %2$s   ⬇ %3$u   ★ %4$s   “” %5$u"
-msgstr ""
+msgstr "%1$s   %2$s   ⬇ %3$u   ★ %4$s   “” %5$u"
 
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:41
 #, c-format
@@ -8134,7 +8134,7 @@ msgstr "Bildschirmfoto erstellen"
 
 #: ../../../../src/wlapplication_options.cc:385
 msgid "Change Music"
-msgstr ""
+msgstr "Musik wechseln"
 
 #: ../../../../src/wlapplication_options.cc:390
 msgid "Open the Debug Console (developer tool)"
@@ -8226,7 +8226,7 @@ msgstr "Spielermenü"
 
 #: ../../../../src/wlapplication_options.cc:521
 msgid "Toggle Height Heat Map"
-msgstr ""
+msgstr "Höhenkarte an-/ausschalten"
 
 #: ../../../../src/wlapplication_options.cc:525
 msgid "Toggle Grid"
@@ -8234,7 +8234,7 @@ msgstr "Gitternetz an-/ausschalten"
 
 #: ../../../../src/wlapplication_options.cc:529
 msgid "Toggle Oceans"
-msgstr ""
+msgstr "Ozeane an-/ausschalten"
 
 #: ../../../../src/wlapplication_options.cc:534
 msgid "Toggle Immovables"
@@ -10367,7 +10367,7 @@ msgstr "Schalte die Anzeige von überlappenden Arbeitsbereichen bei der Platzier
 
 #: ../../../../src/wui/interactive_player.cc:484
 msgid "No current objectives"
-msgstr ""
+msgstr "Keine aktuellen Aufgaben"
 
 #: ../../../../src/wui/interactive_player.cc:500
 #, c-format

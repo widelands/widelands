@@ -41,15 +41,8 @@ namespace Widelands {
 
 constexpr uint32_t kTryImportThreshold = 8;  // straight line distance in nodes count
 
-Serial Economy::last_economy_serial_ = 0;
-
-void Economy::initialize_serial() {
-	verb_log_info("Initializing economy serial\n");
-	last_economy_serial_ = 0;
-}
-
 Economy::Economy(Player& player, WareWorker wwtype)
-   : Economy(player, last_economy_serial_++, wwtype) {
+   : Economy(player, dynamic_cast<Game&>(player.egbase()).generate_economy_serial(), wwtype) {
 }
 
 Economy::Economy(Player& player, Serial init_serial, WareWorker wwtype)
@@ -58,7 +51,7 @@ Economy::Economy(Player& player, Serial init_serial, WareWorker wwtype)
      type_(wwtype),
      request_timerid_(0),
      options_window_(nullptr) {
-	last_economy_serial_ = std::max(last_economy_serial_, serial_ + 1);
+	dynamic_cast<Game&>(player.egbase()).notify_economy_serial(serial_);
 	const TribeDescr& tribe = player.tribe();
 	DescriptionIndex const nr_wares_or_workers = wwtype == wwWARE ?
 	                                                player.egbase().descriptions().nr_wares() :

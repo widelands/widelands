@@ -746,7 +746,7 @@ msgid ""
 "In addition to the buildings’ census, you can also activate status labels on"
 " them. This will display information about the productivity of buildings or "
 "the progress of construction sites."
-msgstr "Kromě popisů budov můžeš také nechat zobrazit popisy jejich stav. Dojde tak k zobrazení informace o produktivitě u každé budovy, nebo informace o průběhu stavby u každého staveniště."
+msgstr "Kromě popisů budov můžeš také nechat zobrazit popisy jejich stavu. Dojde tak k zobrazení informace o produktivitě u každé budovy, nebo informace o průběhu stavby u každého staveniště."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:494
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."

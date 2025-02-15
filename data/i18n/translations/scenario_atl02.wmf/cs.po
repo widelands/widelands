@@ -1022,6 +1022,8 @@ msgid ""
 "May Satul warm you, Sidolus! My builders just completed the temple for "
 "Satul. Now we can start worshipping him and consecrating our priestesses."
 msgstr ""
+"Nechť Vás Satul hřeje, Sidole! Mí stavaři právě dokončili Satulův chrám. "
+"Nyní můžeme začít s modlitbami a zasvěcením kněžek."
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:545
@@ -1031,10 +1033,15 @@ msgid ""
 "for satisfying sacrifices. And don’t forget that the initiates who will "
 "serve Satul to become his priestesses need golden tabards and diamonds."
 msgstr ""
+"Nechť tě Satul hřeje, Loftomore. Budiž ti velký dík za stavbu tohoto "
+"skvostného chrámu. Nyní bude třeba naplnit ho jídlem a tím nejcennějším "
+"zbožím, abychom mohli nabídnout vhodnou oběť. A nezapomeň, že adeptky, které"
+" budou sloužit Satulovi, aby se staly jeho kněžkami, potřebují zlaté tabardy"
+" a diamanty."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:552
 msgid "May Satul Warm Us"
-msgstr ""
+msgstr "Budiž nám dopřána Satulova vřelost"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:555
@@ -1043,10 +1050,13 @@ msgid ""
 "for Satul’s pleasure. May he warm us and show his might to our princess and "
 "this barbaric tribe."
 msgstr ""
+"Naše kněžky byly zasvěceny a k Satulově libosti jsme obětovali nejvybranější"
+" zboží. Kéž nás poctí svou vřelostí a ukáže svou moc naší princezně i tomu "
+"barbarskému kmeni."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:561
 msgid "Jundlina Arrives"
-msgstr ""
+msgstr "Jundlina přijíždí"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:564
@@ -1060,7 +1070,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:567
 msgid "Sidolus Relieved"
-msgstr ""
+msgstr "Sidolovi se ulevilo"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:570
@@ -1082,7 +1092,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:584
 msgid "Jundlina Is Relieved"
-msgstr ""
+msgstr "Jundlina cítí úlevu"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:587
@@ -1090,6 +1100,9 @@ msgid ""
 "Praise Satul, we have founded a new home. I deeply regret I was weak in my "
 "belief. May Satul guide me better in the future."
 msgstr ""
+"Chvála Satulovi, založili jsme nový domov. Upřímně a hluboce lituji, že jsem"
+" byla slabá ve své víře. Kéž by Satul vedl mé další kroky už jen po dobrých "
+"cestách."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:590
@@ -1097,10 +1110,12 @@ msgid ""
 "Now it is time to celebrate but I expect we can’t relax long. We need to "
 "build up our society and our capability to explore the seas again."
 msgstr ""
+"Nyní můžeme slavit, ale nesmíme zahálet dlouho. Musíme dále rozvíjet naše "
+"společenství a znovu vybudovat prostředky pro prozkoumávání okolních moří."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:591
 msgid "Congratulations"
-msgstr ""
+msgstr "Gratuluji"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:592
 msgid ""
@@ -1365,7 +1380,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:751
 msgid "Kalitath Defeated"
-msgstr ""
+msgstr "Kalitath poražen"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:754
@@ -1375,43 +1390,47 @@ msgid ""
 "princess perished with him. Thus, we have lost this battle and our people is"
 " doomed!"
 msgstr ""
+"Oh ne. Nevím jak se to vůbec mohlo stát, ale Satulovi se nepodařilo ochránit"
+" naše spojence před jejich nepřáteli. Ztratili svůj poslední sklad a s ním "
+"zmizela i naše princezna. Tím jsme tuto bitvu prohráli a náš lid je "
+"zatracen!"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_initiate/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Satul’s Initiate"
-msgstr ""
+msgstr "Satulova chrámová adeptka"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_priestess/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Priestess"
-msgstr ""
+msgstr "Kněžka"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Scout’s House"
-msgstr ""
+msgstr "Domek průzkumníka"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:65
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:76
 msgid "scouting"
-msgstr ""
+msgstr "prozkoumávání"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_temple_of_satul/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Temple of Satul"
-msgstr ""
+msgstr "Satulův chrám"
 
 #. TRANSLATORS: Completed/Skipped/Did not start consecrating priestess because
 #. ...
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_temple_of_satul/init.lua:54
 msgctxt "atlanteans_building"
 msgid "consecrating priestess"
-msgstr ""
+msgstr "zasvěcování kněžky"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trader/init.lua:8
@@ -1438,37 +1457,37 @@ msgstr "obchodování"
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/barbarians_trade_pole/init.lua:8
 msgctxt "immovable"
 msgid "Trade Pole"
-msgstr ""
+msgstr "Předávkový kůl"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/coin_copper/init.lua:8
 msgctxt "ware"
 msgid "Copper Coin"
-msgstr ""
+msgstr "Měďák"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/coin_gold/init.lua:8
 msgctxt "ware"
 msgid "Gold Coin"
-msgstr ""
+msgstr "Zlaťák"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/coin_silver/init.lua:8
 msgctxt "ware"
 msgid "Silver Coin"
-msgstr ""
+msgstr "Stříbrňák"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/coin_wood/init.lua:8
 msgctxt "ware"
 msgid "Wood Coin"
-msgstr ""
+msgstr "Dřevěná mince"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean market site: Trading post
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:12
 msgctxt "atlanteans_building"
 msgid "Allows sharing goods with other players."
-msgstr ""
+msgstr "Umožňuje sdílení surovin s jinými hráči."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:18
 msgctxt "atlanteans_building"
@@ -1476,13 +1495,15 @@ msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
 msgstr ""
+"Než bude možné poslat na toto místo průzkumníka, je třeba napojit tuto "
+"vlajku na domek průzkumníka."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Scout's
 #. House
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:20
 msgctxt "building"
 msgid "Explores unknown territory."
-msgstr ""
+msgstr "Prozkoumává neznámá území."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Temple of
 #. Satul
@@ -1490,13 +1511,13 @@ msgstr ""
 msgctxt "atlanteans_building"
 msgid ""
 "A big and expensive temple to worship Satul and consecrate priestesses."
-msgstr ""
+msgstr "Velký a nákladný chrám určený k uctívání Satula a zasvěcování kněžek."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean worker: Trader
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:36
 msgctxt "atlanteans_worker"
 msgid "Transports wares to share with other players."
-msgstr ""
+msgstr "Převáží zboží poskytnuté jiným hráčům."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:37
 msgctxt "atlanteans_worker"
@@ -1507,7 +1528,7 @@ msgstr "Obchodník je průzkumník, který dostal koně na přepravu zboží."
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:43
 msgctxt "atlanteans_worker"
 msgid "Takes care of the Temple of Satul."
-msgstr ""
+msgstr "Stará se o Satulův chrám."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:44
 msgctxt "atlanteans_worker"
@@ -1515,39 +1536,41 @@ msgid ""
 "Initiates take care of the Temple of Satul while they are learning to become"
 " priestesses."
 msgstr ""
+"Chrámové adeptky se starají o Satulův chrám v průběhu toho, co jsou "
+"zasvěcovány na kněžky."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean worker: Priestess
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:50
 msgctxt "atlanteans_worker"
 msgid "Worships Satul."
-msgstr ""
+msgstr "Uctívá a vzývá Satula."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:51
 msgctxt "atlanteans_worker"
 msgid "Priestesses are needed to make Satul show his might."
-msgstr ""
+msgstr "Kněžky jsou potřeba k tomu, aby se mohla projevit Satulova moc."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean ware: Wooden Coin
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:64
 msgctxt "atlanteans_ware"
 msgid "A wooden coin, received as reward for delivering five logs."
-msgstr ""
+msgstr "Dřevěná mince je odměnou za doručení pěti klád."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean ware: Copper Coin
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:73
 msgctxt "atlanteans_building"
 msgid ""
 "A coin made of copper, received as reward for delivering four lumps of coal."
-msgstr ""
+msgstr "Měďák je odměnou za doručení čtyř hrud uhlí."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean ware: Silver Coin
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:82
 msgctxt "atlanteans_building"
 msgid "A silver coin, received as reward for delivering three iron ingots."
-msgstr ""
+msgstr "Stříbrňák je odměnou za doručení tří prutů železa."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean ware: Golden Coin
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:91
 msgctxt "atlanteans_building"
 msgid "A golden coin, received as reward for delivering two bars of gold."
-msgstr ""
+msgstr "Zlaťák je odměnou za doručení dvou zlatých cihel."
