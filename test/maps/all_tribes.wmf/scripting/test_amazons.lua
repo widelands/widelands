@@ -66,6 +66,18 @@ local function init_warehouses(player, sf, total_previous_buildings)
    return count_buildings(player, total_previous_buildings, 5)
 end
 
+local function init_markets(player, sf, total_previous_buildings)
+   print("============================================")
+   print("Markets")
+   print("--------------------------------------------")
+
+   -- Market
+   building = place_market(player, "amazons_market", sf, 26, 59)
+   connected_road("normal", player, building.flag, "bl,bl")
+
+   return count_buildings(player, total_previous_buildings, 1)
+end
+
 local function init_shipconstruction(player, sf, total_previous_buildings)
    print("============================================")
    print("Ships and ferries")
@@ -401,6 +413,7 @@ function init_amazons(player)
    total_buildings = init_food_and_transport(player, sf, total_buildings)
    total_buildings = init_tools_and_training(player, sf, total_buildings)
    total_buildings = init_mines(player, sf, total_buildings)
+   total_buildings = init_markets(player, sf, total_buildings)
 
    -- Construction
    player:place_building("amazons_training_glade", get_safe_field(sf, -2, 3), true, true)
@@ -412,7 +425,7 @@ end
 -- Run the tests
 run(function()
    local playernumber = 5
-   local expected_number_of_buildings = 123
+   local expected_number_of_buildings = 124
 
    print("Placing buildings for Player 5")
    init_amazons(game.players[playernumber])

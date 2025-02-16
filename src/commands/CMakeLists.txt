@@ -106,6 +106,8 @@ wl_library(commands
     cmd_toggle_infinite_production.h
     cmd_toggle_mute_messages.cc
     cmd_toggle_mute_messages.h
+    cmd_trade_action.cc
+    cmd_trade_action.h
     cmd_warship_command.cc
     cmd_warship_command.h
     command.cc

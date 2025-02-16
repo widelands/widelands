@@ -1404,7 +1404,7 @@ void ProductionProgram::ActProduce::execute(Game& game, ProductionSite& ps) cons
 			   /** TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal": */
 			   /** TRANSLATORS:    %1$i = "2" */
 			   /** TRANSLATORS:    %2$s = "Coal" */
-			   _("%1$ix %2$s"), static_cast<unsigned int>(item_pair.second), ware_descname);
+			   _("%1$i× %2$s"), static_cast<unsigned int>(item_pair.second), ware_descname);
 		}
 		ware_descnames.push_back(ware_descname);
 	}

@@ -25,6 +25,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warelist.h"
 #include "logic/map_objects/tribes/wareworker.h"
+#include "ui_basic/box.h"
 #include "ui_basic/textarea.h"
 
 using WaresOrderCoords = std::map<Widelands::DescriptionIndex, Widelands::Coords>;
@@ -60,41 +61,46 @@ public:
 	// Wares may be selected (highlighted)
 	void select_ware(Widelands::DescriptionIndex);
 	void unselect_ware(Widelands::DescriptionIndex);
-	bool ware_selected(Widelands::DescriptionIndex) const;
+	[[nodiscard]] bool ware_selected(Widelands::DescriptionIndex) const;
 
 	// Wares may be hidden
-	void hide_ware(Widelands::DescriptionIndex);
-	bool is_ware_hidden(Widelands::DescriptionIndex) const;
+	void set_hidden(Widelands::DescriptionIndex, bool hide);
+	[[nodiscard]] bool is_ware_hidden(Widelands::DescriptionIndex) const;
 
 	Widelands::DescriptionIndex ware_at_point(int32_t x, int32_t y) const;
 	Widelands::WareWorker get_type() const {
 		return type_;
 	}
 
-	int32_t get_hgap() const {
+	[[nodiscard]] int32_t get_hgap() const {
 		return hgap_;
 	}
-	int32_t get_vgap() const {
+	[[nodiscard]] int32_t get_vgap() const {
 		return vgap_;
 	}
 	void set_hgap(int32_t, bool = true);
 	void set_vgap(int32_t, bool = true);
 
-	Widelands::Extent get_extent() const;
+	[[nodiscard]] Widelands::Extent get_extent() const;
 
-	const WaresOrderCoords& icons_order_coords() const;
-	Widelands::DescriptionIndex ware_at_coords(int16_t x, int16_t y) const;
-	uint16_t column_length(int16_t) const;
+	[[nodiscard]] const WaresOrderCoords& icons_order_coords() const;
+	[[nodiscard]] Widelands::DescriptionIndex ware_at_coords(int16_t x, int16_t y) const;
+	[[nodiscard]] uint16_t column_length(int16_t) const;
 
 	void set_min_free_vertical_space(int32_t s) {
 		min_free_vertical_space_ = s;
 	}
-	int32_t get_min_free_vertical_space() const {
+	[[nodiscard]] int32_t get_min_free_vertical_space() const {
 		return min_free_vertical_space_;
 	}
 
-	static inline int32_t calc_hgap(int32_t columns, int32_t total_w, int32_t min = 3) {
+	[[nodiscard]] static inline int32_t
+	calc_hgap(int32_t columns, int32_t total_w, int32_t min = 3) {
 		return std::max(min, (total_w - columns * kWareMenuPicWidth) / (columns - 1));
+	}
+
+	[[nodiscard]] const Widelands::TribeDescr& tribe() const {
+		return tribe_;
 	}
 
 protected:
@@ -205,6 +211,30 @@ protected:
 	const Widelands::Player& player_;
 	bool solid_icon_backgrounds_{true};
 	bool show_total_stock_;
+};
+
+class TradeProposalWaresDisplay : public WaresDisplay {
+public:
+	static UI::Box& create(UI::Panel* parent,
+	                       const Widelands::TribeDescr& tribe,
+	                       const std::string& heading,
+	                       int spacing,
+	                       TradeProposalWaresDisplay** result_pointer);
+
+	[[nodiscard]] Widelands::BillOfMaterials get_selection() const;
+	[[nodiscard]] bool anything_selected() const;
+
+	void set_other(const Widelands::TribeDescr* other);
+	void set_zero();
+	void change(int delta);
+
+protected:
+	void draw(RenderTarget& dst) override;
+	uint32_t amount_of(Widelands::DescriptionIndex) override;
+
+private:
+	TradeProposalWaresDisplay(UI::Panel* parent, const Widelands::TribeDescr& tribe);
+	std::map<Widelands::DescriptionIndex, int> config_;
 };
 
 std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
