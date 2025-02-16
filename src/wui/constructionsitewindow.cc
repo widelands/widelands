@@ -388,6 +388,10 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		}
 		settings_box->add_space(8);
 	} break;
+	case Widelands::MapObjectType::MARKET: {
+		// Nothing to do currently.
+		nothing_added = true;
+	} break;
 	default:
 		NEVER_HERE();
 	}

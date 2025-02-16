@@ -98,6 +98,12 @@ function place_militarysite(player, buildingname, starting_field, x, y)
    return building
 end
 
+-- Place an empty market
+function place_market(player, buildingname, starting_field, x, y)
+   local building = place_safe_building(player, buildingname, starting_field, x, y)
+   return building
+end
+
 -- Add a warehouse that has everything in it
 function place_warehouse(player, buildingname, starting_field, x, y)
    local building = place_safe_building(player, buildingname, starting_field, x, y)

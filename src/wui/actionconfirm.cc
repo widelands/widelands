@@ -134,6 +134,19 @@ struct ResignConfirm : public ActionConfirm {
 	void ok() override;
 };
 
+/**
+ * Confirmation dialog box for cancelling a trade.
+ */
+struct CancelTradeConfirm : public ActionConfirm {
+	explicit CancelTradeConfirm(InteractivePlayer& parent, Widelands::TradeID trade_id);
+
+	void think() override;
+	void ok() override;
+
+private:
+	Widelands::TradeID trade_id_;
+};
+
 ActionConfirm::ActionConfirm(InteractivePlayer& parent,
                              const std::string& windowtitle,
                              const std::string& message,
@@ -480,6 +493,34 @@ void ResignConfirm::ok() {
 }
 
 /**
+ * Create the panels for confirmation.
+ */
+CancelTradeConfirm::CancelTradeConfirm(InteractivePlayer& parent, Widelands::TradeID trade_id)
+   : ActionConfirm(
+        parent, _("Cancel?"), _("Do you really want to cancel this trade agreement?"), nullptr),
+     trade_id_(trade_id) {
+	// Nothing special to do
+}
+
+/**
+ * Make sure the trade still exists.
+ */
+void CancelTradeConfirm::think() {
+	if (!iaplayer().game().has_trade(trade_id_)) {
+		die();
+	}
+}
+
+/**
+ * The "Ok" button was clicked, so issue the command for cancelling the trade.
+ */
+void CancelTradeConfirm::ok() {
+	iaplayer().game().send_player_trade_action(
+	   iaplayer().player_number(), trade_id_, Widelands::TradeAction::kCancel, 0);
+	die();
+}
+
+/**
  * Create a BulldozeConfirm window.
  * No further action is required by the caller: any action necessary to actually
  * bulldoze the building if the user confirms is taken automatically.
@@ -546,4 +587,8 @@ void show_ship_cancel_expedition_confirm(InteractivePlayer& player, Widelands::S
 
 void show_resign_confirm(InteractivePlayer& player) {
 	new ResignConfirm(player);
+}
+
+void show_cancel_trade_confirm(InteractivePlayer& player, Widelands::TradeID trade_id) {
+	new CancelTradeConfirm(player, trade_id);
 }

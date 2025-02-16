@@ -413,6 +413,9 @@ protected:
 	void
 	draw_info(InfoToDraw info_to_draw, const Vector2f& point_on_dst, float scale, RenderTarget* dst);
 
+	[[nodiscard]] std::string named_building_census_string(const std::string& icon_fmt,
+	                                                       std::string name) const;
+
 	void set_seeing(bool see);
 	void set_attack_target(AttackTarget* new_attack_target);
 	void set_soldier_control(SoldierControl* new_soldier_control);
