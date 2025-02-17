@@ -3468,7 +3468,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Milking tongs are used by the spider breeder to milk the spiders. They are "
 "produced by the toolsmith."
-msgstr "Pavoučí kleště používá chovatel pavouků na získávání pavoučích vláken. Vyrábí je kovář."
+msgstr "Pavoučí kleště používá chovatelka pavouků na získávání pavoučích vláken. Vyrábí je kovář."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fishing Net
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:728
@@ -4048,13 +4048,13 @@ msgctxt "atlanteans_building"
 msgid ""
 "We founded this new colony, now go with Satul and do the best you can do for"
 " your tribe."
-msgstr "Založily jsme tuto novou kolonii, nyní následuj Satul a pro svůj kmen vykonej to nejlepší co zmůžeš."
+msgstr "Založili jsme tuto novou kolonii, nyní nechť Satul vede kroky tvé, žádná tvá oběť pro tento kmen není příliš velká."
 
 #. TRANSLATORS: Note lore_autor for an Atlantean production site: Headquarters
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1440
 msgctxt "atlanteans_building"
 msgid "Priest of Satul inaugurating you as leader of the Atleantean tribe"
-msgstr "Kněz Satul tě pověřil vedením Atlantského kmene"
+msgstr "Satulův kněz tě pověřuje vedením tohoto atlantského kmene"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean warehouse: Warehouse
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1448
@@ -4101,7 +4101,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This is the building where expeditions will be equipped to boldly go and "
 "find new shores."
-msgstr "V této budově se vybaví neohrožené výpravy ke hledání nových břehů."
+msgstr "Toto je budova, kde výpravy získávají potřebné prostředky, aby se mohly neohroženě vydat za objevy nových břehů."
 
 #. TRANSLATORS: Note lore_autor for an Atlantean production site: Port
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1468
@@ -4129,13 +4129,13 @@ msgctxt "atlanteans_building"
 msgid ""
 "You must not assume Atlanteans will play everything soft, there are hard "
 "times we cannot avoid."
-msgstr "Nemůžeš očekávat, že Atlanťané budou ve všem ustupovat - nevyhnutelně přichází těžké časy."
+msgstr "Nesmíš předpokládat, že Atlanťané projdou vším hladce, občas přijdou těžké časy, tomu se nelze vyhnout."
 
 #. TRANSLATORS: Note lore_autor for an Atlantean production site: Quarry
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1483
 msgctxt "atlanteans_building"
 msgid "Priest of Satul asked why stones are needed for buildings"
-msgstr "Kněz Satul se ptal proč je na stavbu budov potřeba kámen"
+msgstr "Satulův kněz je dotazován, proč je na stavbu budov potřeba kamene"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Quarry,
 #. part 1
@@ -4210,7 +4210,7 @@ msgstr "Chceme kácet stromy čistě a důstojně a proto používáme pily. Sek
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1502
 msgctxt "atlanteans_building"
 msgid "Atlantean woodcutter asked why saws are used to cut trees"
-msgstr "Atlantský dřevorubec se ptal proč se na kácení stromů používají pily."
+msgstr "atlantský dřevorubec je tázán, proč se na kácení stromů používají pily"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Woodcutter's House, part 1
@@ -4252,14 +4252,14 @@ msgid ""
 "‘Only after the last tree has been cut<br>Only after the last forest was "
 "devastated<br>Only after the last piece of green has become bare "
 "soil<br>Then will you find that nature needs to be cared for.’"
-msgstr ""
+msgstr "‘Až bude zničený poslední les,<br>až bude pokácený poslední strom,<br>až z posledního kousku trávy bude pustá země,<br>pak teprve pochopí, že o přírodu se musí pečovat.’"
 
 #. TRANSLATORS: Note lore_autor for an Atlantean production site: Forester's
 #. House
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1524
 msgctxt "atlanteans_building"
 msgid "Prophecy of the foresters’ guild"
-msgstr "Heslo cechu lesníků"
+msgstr "proroctví cechu lesníků"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Forester's House, part 1
@@ -4308,14 +4308,14 @@ msgid ""
 "‘Take your net and come to the sea<br>In the early morning the moon ya still"
 " see<br>Collect ya catch by net or by spear,<br>and don’t forget to give "
 "Satul his share.’"
-msgstr ""
+msgstr "‘Síť vezmi svou, pospěš cestou k moři<br>zrána, kdy se měsíc do vlnek noří,<br>co uvízne v tvých sítích si vem,<br>nezapomeň vzdát dík Satulovi dílem.’"
 
 #. TRANSLATORS: Note lore_autor for an Atlantean production site: Fisher's
 #. House
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1552
 msgctxt "atlanteans_building"
 msgid "A song from the fishers’ guild"
-msgstr "Píseň cechu rybářů"
+msgstr "píseň cechu rybářů"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Fisher's House, part 1
@@ -4355,7 +4355,7 @@ msgstr "Až nebude ryba na tvém háčku,<br>až zastřelí i poslední kačku,<
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1574
 msgctxt "atlanteans_building"
 msgid "Prophecy of the fish breeders"
-msgstr "Proroctví porybného"
+msgstr "proroctví porybného"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Hunter's
 #. House
@@ -4389,7 +4389,7 @@ msgstr "Někdy se octneme v oblasti bez ryb, takže musíme lovit. Zvěř se mno
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1588
 msgctxt "atlanteans_building"
 msgid "Hunter answering a fisher"
-msgstr "Lovec odpovídá rybáři"
+msgstr "lovec odpovídá rybáři"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Hunter's House, part 1
@@ -4474,7 +4474,7 @@ msgstr "Ne, nemůžeme příst zlatou přízi ze slámy. Potřebujeme opravdové
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1626
 msgctxt "atlanteans_building"
 msgid "Painted on a gold spinning mill without supplies"
-msgstr ""
+msgstr "nápis na přádelně zlata, které se nedostává zásob"
 
 #. TRANSLATORS: Special helptext for an Atlantean production site: Scout's
 #. House without road connection
@@ -4546,14 +4546,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "The design of our sawmills makes operation simple, yet powerful. Patent "
 "pending."
-msgstr ""
+msgstr "Originální návrh konstrukce provoz našich pil velmi zjednodušil, přesto jsou stále velmi výkonné. Očekává se schválení patentu."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Sawmill
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1662
 msgctxt "atlanteans_building"
 msgid "Askadus, Inventor of the vertical axis windmill"
-msgstr ""
+msgstr "Askandus, vynálezce větrného mlýna se svislou hřídelí"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Sawmill
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1664
@@ -4618,13 +4618,13 @@ msgctxt "atlanteans_building"
 msgid ""
 "We invented this vertical axis design first, the sawmill just copied our "
 "ideas but never acknowledged our claim."
-msgstr ""
+msgstr "My jsme vymysleli toto vylepšení se svislou hřídelí jako první, pila jen převzala náš návrh, ale nikdy neuznala naše zásluhy."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Mill
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1691
 msgctxt "atlanteans_building"
 msgid "Miller arguing with a sawyer"
-msgstr ""
+msgstr "mlynář v hádce s dělníkem na pile"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Mill
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1693
@@ -4656,13 +4656,13 @@ msgid ""
 "recipe was inherited for generations. It is more nutritious than that paper-"
 "like bread you find elsewhere. And it is needed for the personal rite of "
 "preparing one’s meal. May Satul bless you."
-msgstr ""
+msgstr "Náš chléb nelze srovnat s ničím, co vyrábí ostatní kmeny. Naše receptura se dědí po generace. Je výživově daleko více vydatný, než ten slámový chléb, který lze nejít kdekoliv jinde. A je nezbytnou součástí osobního obřadu přípravy vlastního jídla. Satul požehnej."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Bakery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1708
 msgctxt "atlanteans_building"
 msgid "Head of the bakers’ guild"
-msgstr ""
+msgstr "cechmistr cechu pekařů"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Bakery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1710
@@ -4746,7 +4746,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1736
 msgctxt "atlanteans_building"
 msgid "A member of the smelters’ guild"
-msgstr ""
+msgstr "tovaryš cechu slévačů"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Smelting Works
@@ -4774,14 +4774,14 @@ msgstr "Ková všechny nástroje, které dělníci potřebují."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1747
 msgctxt "atlanteans_building"
 msgid "People’s power working for the benefit of all"
-msgstr ""
+msgstr "Tvůrčí síla lidu ve službě lidem všem"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Toolsmithy
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1749
 msgctxt "atlanteans_building"
 msgid "Faded sign found on top of this building"
-msgstr ""
+msgstr "vybledlý nápis na horní části budovy"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Toolsmithy
@@ -4818,7 +4818,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1778
 msgctxt "atlanteans_building"
 msgid "Atlantean nursery rhyme"
-msgstr ""
+msgstr "atlantská říkanka"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Weapon
 #. Smithy
@@ -4873,14 +4873,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "See these fine silk tabards and those sharp tridents? This is your way to "
 "defend your tribe!"
-msgstr ""
+msgstr "Vidíš tyto jemné hedvábné umě s pílí tkané tabardy a tyto ostré nezlomné strach budící trojzubce? To je tvůj způsob, jak bránit svůj kmen!"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Barracks
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1791
 msgctxt "atlanteans_building"
 msgid "Recruiting poster"
-msgstr ""
+msgstr "náborová vývěska"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Barracks
@@ -4902,14 +4902,14 @@ msgstr "Chová silné atlantské koně pro posílení přepravního systému."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1804
 msgctxt "atlanteans_building"
 msgid "I walk all day just back and forth. I need? I need … I need a horse!"
-msgstr ""
+msgstr "Celý den jen chodím tam a zpět. Potřebuji? Potřebuji... Potřebuji koně!"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Horse
 #. Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1806
 msgctxt "atlanteans_building"
 msgid "Busy carrier murmuring to himself"
-msgstr ""
+msgstr "zaneprázdněný nosič brblající si sám pro sebe"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1813
@@ -4921,13 +4921,13 @@ msgstr "Seje a sklízí kukuřici."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1815
 msgctxt "atlanteans_building"
 msgid "I use my feet, I use my arm, I’m caring for this farm!"
-msgstr ""
+msgstr "Ruce, nohy, prostě zcela, jak statek žádá, ženec dělá!"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1817
 msgctxt "atlanteans_building"
 msgid "Atlantean harvesting song"
-msgstr ""
+msgstr "atlantská píseň ženců"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1819
@@ -4948,14 +4948,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "The secret of Atlantean health and strength is hidden in these roots. It’s "
 "not spinach, it’s not a carrot, it’s … a secret."
-msgstr ""
+msgstr "Tajemství dobrého zdraví a síly Atlanťanů se skrývá v tomto kořeni. Není to ani špenát, není to ani mrkev, je to... tajemství."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Blackroot Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1831
 msgctxt "atlanteans_building"
 msgid "Blackroot farmer asked by a foreigner"
-msgstr ""
+msgstr "pěstitel rozrazilu je dotazován cizincem"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Blackroot Farm
@@ -4981,14 +4981,14 @@ msgid ""
 "gain the spider silk once a day. There is no need to spin this again. The "
 "thread can directly be used by the weaving mill. Oh hello, here is one of "
 "our nice spiders … Hey! Why are you running away?"
-msgstr ""
+msgstr "Ne, opravdu tu nekrmíme naše pavouky kukuřicí. Tu spásají naše tlusté kobylky, které jsou následně potravou pro naše pavouky. Jednou denně je dáváme na náš speciální přístroj, abychom získali pavoučí hedvábí. To už není třeba příst. Vlákno může jít přímo na zpracování do tkalcovny. Ah pěkně vítám, tady je jeden z našich krásných pavouků.. No copak! Kam to utíkáš?"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Spider
 #. Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1846
 msgctxt "atlanteans_building"
 msgid "A spider breeder showing his farm"
-msgstr ""
+msgstr "chovatelka pavouků ukazuje svou farmu"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weaving
 #. Mill
@@ -5041,14 +5041,14 @@ msgid ""
 "Only the pure, white stones Diamond and Quartz will enlighten our people. "
 "Thus, every major building will need them so the inhabitants may worship "
 "Satul to warm them."
-msgstr ""
+msgstr "Pouze čisté, bílé diamantové a křemenné kameny dokáží povznést náš lid. Pročež jsou potřeba ke stavbě každé důležité budovy, aby její obyvatelé mohli uctívat Satula a být jím potěšeni."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Crystal
 #. Mine
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1875
 msgctxt "atlanteans_building"
 msgid "First part of the Atlantean almanach on architecture"
-msgstr ""
+msgstr "citát z první části Atlantského almanachu architektury"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Crystal
 #. Mine
@@ -5090,7 +5090,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "‘Way down here in this deep mine<br>where the sun it dare not shine,<br>I "
 "sweat and toil till day is done,<br>but I’ll be back with morning come.’"
-msgstr ""
+msgstr "‘Tu cesta dolů do hluboké sloje,<br>kde nikdy slunce svitu není,<br>tu do dne konce lopota je moje,<br>zas budu zpět za rozednění.’"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:  Coal
 #. Mine
@@ -5100,7 +5100,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1907
 msgctxt "atlanteans_building"
 msgid "Song from the miners’ guild"
-msgstr ""
+msgstr "píseň cechu horníků"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Coal
 #. Mine
@@ -5433,7 +5433,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "‘Soon may the wellerman come,<br>to bring us bread and smoked fish.<br>We "
 "set sail for a faraway shore<br>we praise Satul the best we wish.’"
-msgstr ""
+msgstr "‘Brzy připlují wellermani,<br>přivezou chléb a uzenou rybu.<br>Dáme se na dalekou plavbu<br>buď poctěn Satul, ať se vše vydaří.’"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Shipyard -- not directly stolen from the wellerman song
@@ -10763,7 +10763,7 @@ msgstr "Všechny cesty vedou do Fremilu."
 #: ../../../../data/tribes/initialization/empire/units.lua:1158
 msgctxt "empire_building"
 msgid "Proverb signifying the glory of the Empire and its capital"
-msgstr "Přísloví vyzdvihující věhlas Císařství a jeho hlavního města"
+msgstr "přísloví vyzdvihující věhlas Císařství a jeho hlavního města"
 
 #. TRANSLATORS: Purpose helptext for an Empire warehouse: Headquarters
 #: ../../../../data/tribes/initialization/empire/units.lua:1161
@@ -11248,7 +11248,7 @@ msgstr "Nihil agit serra nisi mota ab arte."
 #. "Nihil agit serra nisi mota ab arte."
 #: ../../../../data/tribes/initialization/empire/units.lua:1458
 msgid "The saw does nothing except when moved by art."
-msgstr "Pila sama neudělá nic není-li poháněna umem."
+msgstr "Pila sama neudělá nic, není-li poháněna umem."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Sawmill
 #: ../../../../data/tribes/initialization/empire/units.lua:1461
@@ -11568,7 +11568,7 @@ msgstr "Každý svého štěstí strůjcem."
 #: ../../../../data/tribes/initialization/empire/units.lua:1672
 msgctxt "empire_building"
 msgid "Imperial proverb quoted in a toolsmith's advertising"
-msgstr "Císařské přísloví použité k propagaci kovárny"
+msgstr "císařské přísloví použité k propagaci kovárny"
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Toolsmithy
 #: ../../../../data/tribes/initialization/empire/units.lua:1676
@@ -11775,7 +11775,7 @@ msgstr "Zkus vyrvat ovci vlkovi ze chřtánu."
 #: ../../../../data/tribes/initialization/empire/units.lua:1806
 msgctxt "empire_building"
 msgid "Imperial proverb for trying the impossible"
-msgstr "Císařské přísloví vyjadřující snahu o nemožné"
+msgstr "císařské přísloví vyjadřující snahu o nemožné"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Sheep Farm
 #: ../../../../data/tribes/initialization/empire/units.lua:1808
@@ -11931,7 +11931,7 @@ msgstr "Carbo de mortuo reviviscit, de nigro in ruborem vertitur, favillas gener
 msgid ""
 "Coal is revived from the dead, it turns from black to red, creates embers, "
 "and as it falls apart, it becomes ashes."
-msgstr ""
+msgstr "Uhlí to, co je mrtvé, oživuje, černou v červenou proměňuje, když žhavé uhlíky v prach se mění."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Coal Mine
 #. TRANSLATORS: Performance helptext for an Empire production site: Deep Coal
@@ -11965,7 +11965,7 @@ msgstr "Non enim est una species ignis: nam diversum est carbo et flamma, et lux
 msgid ""
 "For there are more types of fire: for coal and flame are different, and the "
 "type that gives light, all of them are fire."
-msgstr ""
+msgstr "Však máme druhů ohně vícero: ježto uhlí a plamen různými jsou, když různá světla vyzařují, obé lze ohněm označiti."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11986,7 +11986,7 @@ msgstr "Železo železem se ostří."
 #: ../../../../data/tribes/initialization/empire/units.lua:1961
 msgctxt "empire_building"
 msgid "A proverb that is vehemently disputed by iron miners"
-msgstr "přísloví které je vehementně zpochybňováno horníky těžícími železnou rudu"
+msgstr "přísloví, které je vehementně zpochybňováno horníky těžícími železnou rudu"
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Iron Mine
 #. TRANSLATORS: Performance helptext for an Empire production site: Deep Iron

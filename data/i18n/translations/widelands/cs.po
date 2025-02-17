@@ -11361,7 +11361,7 @@ msgstr "Změna hlasitosti. Kliknutí spustí ukázku."
 
 #: ../../../../src/wui/sound_options.cc:150
 msgid "Play your own music in-game"
-msgstr "Přehraj ve hře vlastní muziku"
+msgstr "Přehrávat během hry vlastní hudbu"
 
 #: ../../../../src/wui/sound_options.cc:152
 msgid ""
