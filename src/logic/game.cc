@@ -1435,7 +1435,9 @@ std::vector<TradeID> Game::find_trade_offers(PlayerNumber receiver, Coords accep
 			} else {
 				MutexLock m(MutexLock::ID::kObjects);
 				Market* initiator = pair.second.initiator.get(*this);
-				if (initiator != nullptr && map().findpath(map().br_n(accept_at), map().br_n(initiator->get_position()), 0, unused, CheckStepDefault(MOVECAPS_WALK), 0, 0, wwWORKER) >= 0) {
+				if (initiator != nullptr &&
+				    map().findpath(map().br_n(accept_at), map().br_n(initiator->get_position()), 0,
+				                   unused, CheckStepDefault(MOVECAPS_WALK), 0, 0, wwWORKER) >= 0) {
 					result.push_back(pair.first);
 				}
 			}
@@ -1444,13 +1446,14 @@ std::vector<TradeID> Game::find_trade_offers(PlayerNumber receiver, Coords accep
 	return result;
 }
 
-std::vector<TradeID> Game::find_trade_proposals(PlayerNumber initiator, Serial market_filter) const {
+std::vector<TradeID> Game::find_trade_proposals(PlayerNumber initiator,
+                                                Serial market_filter) const {
 	std::vector<TradeID> result;
 	for (const auto& pair : trade_agreements_) {
 		if (pair.second.state == TradeInstance::State::kProposed) {
 			if (market_filter == 0 || pair.second.initiator.serial() == market_filter) {
 				if (Market* market = pair.second.initiator.get(*this);
-					market != nullptr && market->owner().player_number() == initiator) {
+				    market != nullptr && market->owner().player_number() == initiator) {
 					result.push_back(pair.first);
 				}
 			}

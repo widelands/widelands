@@ -403,8 +403,10 @@ public:
 	[[nodiscard]] const std::map<TradeID, TradeInstance>& all_trade_agreements() const {
 		return trade_agreements_;
 	}
-	[[nodiscard]] std::vector<TradeID> find_trade_offers(PlayerNumber receiver, Coords accept_at = Coords::null()) const;
-	[[nodiscard]] std::vector<TradeID> find_trade_proposals(PlayerNumber initiator, Serial market_filter = 0) const;
+	[[nodiscard]] std::vector<TradeID> find_trade_offers(PlayerNumber receiver,
+	                                                     Coords accept_at = Coords::null()) const;
+	[[nodiscard]] std::vector<TradeID> find_trade_proposals(PlayerNumber initiator,
+	                                                        Serial market_filter = 0) const;
 	[[nodiscard]] std::vector<TradeID> find_active_trades(PlayerNumber player) const;
 
 	struct PendingDiplomacyAction {
