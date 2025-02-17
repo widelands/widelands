@@ -9310,7 +9310,7 @@ msgstr "Voják"
 #: ../../../../data/tribes/workers/atlanteans/spiderbreeder/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Spider Breeder"
-msgstr "Chovatel pavouků"
+msgstr "Chovatelka pavouků"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/stonecutter/init.lua:8
