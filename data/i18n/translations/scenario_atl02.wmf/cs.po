@@ -354,7 +354,7 @@ msgid ""
 "couldn’t protect us from the enemy. They have destroyed our last warehouse. "
 "Thus we have lost this battle and our people is doomed!"
 msgstr ""
-"Oh ne, Jundlino. Nevím jak se to vůbec mohlo stát, ale Satulovi se "
+"Oh ne, Jundlino. Nevím, jak se to vůbec mohlo stát, ale Satulovi se "
 "nepodařilo ochránit nás před našimi nepřáteli. Zničili i náš poslední sklad."
 " Tím jsme prohráli tuto bitvu a náš lid je zatracen!"
 
@@ -1067,6 +1067,12 @@ msgid ""
 "would have meant servitude forever. And this is not what Atlanteans are made"
 " for."
 msgstr ""
+"Nechť tě Satul hřeje, Sidole. Přála bych si, abys mi mohl odpustit mé "
+"bezbožné jednání. Síla božího znamení a strach, který jsem měla možnost "
+"spatřit v barbarských tvářích, mi znovu otevřel oči a ukázal pravdu. Mýlila "
+"jsem se, když jsem věřila v klidné spolužití v míru, protože by to pro nás "
+"znamenalo podřídit se navždy. A něco takového pro nás Atlanťany nepřipadá v "
+"úvahu."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:567
 msgid "Sidolus Relieved"
@@ -1079,6 +1085,9 @@ msgid ""
 "trust you, as much as you will trust and be faithful to Satul. How come the "
 "Barbarians let you go?"
 msgstr ""
+"Nechť tě Satul hřeje, Jundlino. Jsem velmi rád, že jsi opět zde. Doufám, že "
+"ti opět můžeme věřit, stejně jako že opět budeš oddána Satulovi. Jak to, že "
+"tě barbaři propustili?"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:576
@@ -1089,6 +1098,11 @@ msgid ""
 "issue now and forever on this island. There is no other way to live here in "
 "peace than to defeat them."
 msgstr ""
+"Oni mě nepropustili, Sidole. Potkala jsem našeho průzkumníka a podařilo se "
+"mu mě nepozorovaně přivést zpět. Stalo se to poté, co jsem zjistila, že mě "
+"stále drží jako rukojmího, když jsem vyjádřila své pochyby o naší původní "
+"dohodě. Takže musíme tuto barbarskou otázku na tomto ostrově nyní vyřešit, "
+"jednou provždy. Není jiné cesty, jak tu žít v míru, než je porazit."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:584
 msgid "Jundlina Is Relieved"
@@ -1122,10 +1136,12 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Mise je splněna. Jestli chceš, můžeš pokračovat ve hře, nebo se přesuň k "
+"další misi."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:598
 msgid "Tribute Demand"
-msgstr ""
+msgstr "Požadované příspěvky"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:601
@@ -1134,6 +1150,9 @@ msgid ""
 "really on our side, you should send us some gold and a couple of other wares"
 " on a regular basis."
 msgstr ""
+"Cizinci, potřebujeme se přesvědčit o vašich dobrých záměrech. Pokud jste "
+"opravdu na naší straně, měli byste nám jako pravidelný dar zasílat něco "
+"zlata a nějaké další zboží."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:604
@@ -1142,6 +1161,9 @@ msgid ""
 "real weapons like our axes, and not the sort of toothpicks you use. So feel "
 "free to send us 25 logs, 16 lumps of coal, 9 iron ingots and 4 gold bars."
 msgstr ""
+"Potřebujeme pouze zboží, které lze využít na výrobu zbraní. A tím myslím "
+"skutečné zbraně jako naše sekery a ne ta párátka, co používáte vy. Rádi od "
+"vás přijmeme 25 klád, 16 hrud uhlí, 9 prutů železa a 4 cihly zlata."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:607
@@ -1149,14 +1171,16 @@ msgid ""
 "Oh, and I almost forgot this one. We demand to have your princess in our "
 "headquarters as well to coordinate our war plannings."
 msgstr ""
+"Ó a na toto bych málem zapomněl. Budme potřebovat vaší princeznu v naší "
+"hlavní budově, abychom mohli lépe řídit a plánovat naše válečné akce."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:611
 msgid "Pitfall!"
-msgstr ""
+msgstr "Léčka!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:612
 msgid "Sidolus is upset"
-msgstr ""
+msgstr "Sidolus se zlobí"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:614
@@ -1165,10 +1189,14 @@ msgid ""
 "is a trap to keep you as a hostage. And the demand itself is really an "
 "insult. I strongly recommend to decline this unsubstantiated claim."
 msgstr ""
+"Nechť tě Satul hřeje, Jundlino! Toto jednání je vskutku barbarské! Obávám "
+"se, že je to past, aby tě mohli držet jako rukojmí. A ty požadavky jsou "
+"opravdovou urážkou. Důrazně doporučuji zamítnout tyto neopodstatněné "
+"požadavky."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:617
 msgid "Jundlina Concedes"
-msgstr ""
+msgstr "Jundlina se podřizuje"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:620
@@ -1177,6 +1205,8 @@ msgid ""
 "obey this demand. It is your obligation now to run our small people until I "
 "come back."
 msgstr ""
+"Souhlasím s tebou, Sidole. Ale myslím, že nemáme příliš na výběr, takže jim "
+"budeme muset vyjít vstříc. Než se vrátím, jsi pověřen vést náš lid."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:623
@@ -1202,7 +1232,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:636
 msgid "Sidolus Agrees"
-msgstr ""
+msgstr "Sidolus souhlasí"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:639
@@ -1210,6 +1240,8 @@ msgid ""
 "Well done, Loftomor, well done. May Satul warm our princess and our whole "
 "people. Now we need to begin sending goods to this Barbarian."
 msgstr ""
+"Dobrá práce, Loftomore, dobrá práce. Nechť je Satul vroucný k naší princezně"
+" i celému našemu lidu. Teď je potřeba začít posílat barbarům zboží."
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:642
@@ -1217,10 +1249,12 @@ msgid ""
 "I think we should start with the deliveries we could afford the easiest. But"
 " we need to find more metals for sure."
 msgstr ""
+"Bude nejlepší začít se zásilkami zboží, které pro nás představují nejmenší "
+"výdaje. Ale i tak je jisté, že budeme muset najít více zdrojů kovu."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:648
 msgid "Urgent Tribute Demand"
-msgstr ""
+msgstr "Naléhavá potřeba příspěvků"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:651
@@ -1228,6 +1262,8 @@ msgid ""
 "Strangers, we haven’t received any help yet. If you are really on our side, "
 "you should start sending some wares urgently."
 msgstr ""
+"Cizinci, zatím jsme stále neobdrželi žádnou pomoc. Pokud jste opravdu na "
+"naší straně, měli byste urychleně začít posílat nějaké zboží."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:654
@@ -1235,19 +1271,21 @@ msgid ""
 "As we are facing great losses due to your laziness, you shall now send us "
 "twice the previous amount of each ware."
 msgstr ""
+"Jelikož jsme kvůli vašemu zahálení utrpěli velké ztráty, měli byste nám nyní"
+" poslat dvakrát tolik zboží než bylo původně požadováno."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:657
 msgid "I am sure you do not want to break our alliance… do you?"
-msgstr ""
+msgstr "Řekl bych, že nechcete vypovědět naše spojenectví... nebo snad ano?"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:660
 msgid "Blackmail!"
-msgstr ""
+msgstr "Vydírání!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:661
 msgid "Sidolus is concerned"
-msgstr ""
+msgstr "Sidolus je znepokojen"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:663
@@ -1255,6 +1293,8 @@ msgid ""
 "May Satul warm us all. Our so-called ally is blackmailing us, and we can’t "
 "punish him for his insult as he has our princess at his hands."
 msgstr ""
+"Buď nám všem Satul vroucný. Náš takzvaný spojenec se snaží nás vydírat a my "
+"si tuto potupu musíme nechat líbit, protože má v rukou naši princeznu."
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:666
@@ -1262,10 +1302,12 @@ msgid ""
 "Our only chance is to double our efforts and start delivering something "
 "soon."
 msgstr ""
+"Naší jedinou možností je zdvojnásobit naše usílí a doručit nějaké zásilky "
+"opravdu brzy."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:673
 msgid "Tribute Started"
-msgstr ""
+msgstr "Zahájeno zasílání příspěvků"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:676
@@ -1273,6 +1315,8 @@ msgid ""
 "Strangers, we have received the first batch of wares. So we may finally "
 "trust you."
 msgstr ""
+"Cizinci, obdrželi jsme první zásilku zboží. Snad vám nakonec přeci jen "
+"budeme moci věřit."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:679
@@ -1281,6 +1325,9 @@ msgid ""
 "significant help from your side we might lose the war despite any help in "
 "terms of wares you might provide."
 msgstr ""
+"Ale náš nepřítel na severu je velmi silný. Obávám se, že bez vaší výraznější"
+" pomoci můžeme tuto válku prohrát a to i navzdory jakékoli materiální "
+"pomoci, jakou nám můžete poskytnout."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:682
@@ -1288,10 +1335,12 @@ msgid ""
 "They name themselves an Empire, and their leader is called Maletus. I want "
 "you to train your soldiers and help us defeat his lousy Empire."
 msgstr ""
+"Nazývají se Císařství a jejich vůdce se jmenuje Maletus. Žádám vás, abyste "
+"vytrénovali nějaké vojáky a pomohli nám porazit to jeho mizerné Císařství."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:686
 msgid "Be Vigilant!"
-msgstr ""
+msgstr "Buď ostražitý!"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:689
@@ -1299,6 +1348,8 @@ msgid ""
 "May Satul warm you, Sidolus. Our ally now trusts us to some extent, but we "
 "shouldn’t trust them too much."
 msgstr ""
+"Budiž ti Satul vroucný, Sidole. Náš spojenec nám nyní do určité míry věří, "
+"ale my bychom mu až tak věřit neměli."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:692
@@ -1306,22 +1357,26 @@ msgid ""
 "So I want you to defeat this Empire, but ensure that we will become and "
 "remain strong enough to enforce the respect we deserve."
 msgstr ""
+"Chci, abys porazil Císařství, ale zajisti, abychom si vybudovali a udrželi "
+"dostatečnou vojenskou sílu na to, abychom si mohli vynutit respekt, jaký "
+"zasluhujeme."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:695
 msgid "Keep Delivering"
-msgstr ""
+msgstr "Pokračuj v dodávkách"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:698
 msgid ""
 "Strangers, I almost forgot to mention, but it should have been clear anyway."
 msgstr ""
+"Cizinci, málem bych zapomněl zmínit, ale i tak se to rozumí samo sebou."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:701
 msgid ""
 "We are in urgent need of your supply, so hurry up with your deliveries."
-msgstr ""
+msgstr "Urychleně potřebujeme vaše dodávky, tak pospěšte s doručením."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:704
@@ -1330,11 +1385,14 @@ msgid ""
 "assume you are just playing along with us. So keep an eye on the time as we "
 "will not give any further warning."
 msgstr ""
+"Pokud se vám nepodaří doručit vše v průběhu následujících tří a půl hodiny, "
+"budeme předpokládat, že se nás jen snažíte oklamat. Takže si kontrolujte "
+"čas, protože více vás již nebudeme upozorňovat."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:710
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:722
 msgid "Traitors"
-msgstr ""
+msgstr "Zrádci"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:713
@@ -1342,6 +1400,8 @@ msgid ""
 "Strangers, we still haven’t received any help. We are deeply insulted by "
 "your treachery."
 msgstr ""
+"Cizinci, stále jsme neobdrželi žádnou pomoc. Vaše proradné chování je pro "
+"nás velkou urážkou."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:716
@@ -1350,6 +1410,8 @@ msgid ""
 "At least your princess will make a reasonable slave, if we survive the "
 "battle with our enemy."
 msgstr ""
+"Alespoň vaše princezna nám přijde vhod jako otrokyně, pokud uspějeme v bitvě"
+" nad naším nepřítelem."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:725
@@ -1357,10 +1419,12 @@ msgid ""
 "Strangers, you did not deliver the help we needed in time. We are deeply "
 "insulted by your treachery."
 msgstr ""
+"Cizinci, nedodali jste nám požadovanou pomoc včas. Vaše proradné chování je "
+"pro nás velkou urážkou."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:734
 msgid "Jundlina’s Suicide"
-msgstr ""
+msgstr "Jundlinina sebevražda"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:737
@@ -1369,6 +1433,9 @@ msgid ""
 "have prepared myself for this eventuality and will rather die from the "
 "poison I carry with me than be your slave. May Satul avenge my sacrifice."
 msgstr ""
+"Barbaři, já jsem atlantskou princeznou, nikdy nepůjdu do otroctví. Pro tento"
+" případ jsem se vybavila a raději pozřu jed, který jsem si s sebou vzala, "
+"než bych se stala vaší otrokyní. Ať Satul pomstí mou oběť."
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:743
@@ -1377,6 +1444,9 @@ msgid ""
 "protect us from the enemy. We have lost our noble princess. Thus, we have "
 "lost this battle and our people is doomed!"
 msgstr ""
+"Oh ne. Nevím, jak se to vůbec mohlo stát, ale Satulovi se nepodařilo "
+"ochránit nás před našimi nepřáteli. Ztratili jsme naši vznešenou princeznu. "
+"Tím jsme prohráli tuto bitvu a náš lid je zatracen!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:751
 msgid "Kalitath Defeated"
@@ -1390,9 +1460,9 @@ msgid ""
 "princess perished with him. Thus, we have lost this battle and our people is"
 " doomed!"
 msgstr ""
-"Oh ne. Nevím jak se to vůbec mohlo stát, ale Satulovi se nepodařilo ochránit"
-" naše spojence před jejich nepřáteli. Ztratili svůj poslední sklad a s ním "
-"zmizela i naše princezna. Tím jsme tuto bitvu prohráli a náš lid je "
+"Oh ne. Nevím, jak se to vůbec mohlo stát, ale Satulovi se nepodařilo "
+"ochránit naše spojence před jejich nepřáteli. Ztratili svůj poslední sklad a"
+" s ním zmizela i naše princezna. Tím jsme tuto bitvu prohráli a náš lid je "
 "zatracen!"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
