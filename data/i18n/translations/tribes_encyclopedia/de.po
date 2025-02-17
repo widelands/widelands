@@ -20,7 +20,7 @@
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
 # Simon Heimberg, 2023
 # Simon Heimberg, 2023
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2024
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2025
 # Venatrix, 2015
 # Elisabeth Jäger, 2015-2016
 # Hybrid Dog, 2015
@@ -34,7 +34,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2024\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2025\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1814,7 +1814,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann eine Fähre zwischen %1$s und %2$s bauen, je nachdem, wie weit die Schiffbauerin laufen muss."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Shipyard
 #: ../../../../data/tribes/initialization/amazons/units.lua:1700
@@ -1847,7 +1847,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann ein Schiff zwischen %1$s und %2$s bauen, je nachdem, wie weit die Schiffbauerin laufen muss."
 
 #. TRANSLATORS: Lore helptext for an Amazon building: Construction Site
 #. TRANSLATORS: Lore helptext for an Atlantean building: Construction Site
@@ -3215,7 +3215,7 @@ msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It can "
 "be processed into spidercloth or tabards in a weaving mill, or used to make "
 "tools in the toolsmithy."
-msgstr ""
+msgstr "Spinnenseide wird von Spinnen hergestellt, die in Spinnenzuchten gezüchtet werden. Sie kann in einer Weberei zu Spinnenstoff oder Wappenröcken weiterverarbeitet, oder in der Werkzeugmacherei zur Herstellung von Werkzeugen benutzt werden."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:481
@@ -3224,7 +3224,7 @@ msgid ""
 "Spidercloth is made out of spider silk in a weaving mill. It is used in the "
 "shipyard. Also some higher developed buildings need spidercloth for their "
 "construction."
-msgstr ""
+msgstr "Spinnenstoff wird aus Spinnenseide in einer Weberei hergestellt. Er wird von der Werft verwendet. Einige fortgeschrittenere Gebäude brauchen ebenfalls Spinnenstoff für den Bau."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fish
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:492
@@ -5419,7 +5419,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann eine Fähre zwischen %1$s und %2$s bauen, je nachdem, wie weit der Schiffbauer laufen muss."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Shipyard
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Shipyard
@@ -5457,7 +5457,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann ein Schiff zwischen %1$s und %2$s bauen, je nachdem, wie weit der Schiffbauer laufen muss."
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2130
@@ -7922,7 +7922,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann eine Fähre zwischen %1$s und %2$s bauen, je nachdem, wie weit der Schiffbauer laufen muss."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Shipyard
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1826
@@ -7940,7 +7940,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann ein Schiff zwischen %1$s und %2$s bauen, je nachdem, wie weit der Schiffbauer laufen muss."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Weaving Mill
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1850
@@ -12418,7 +12418,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann eine Fähre zwischen %1$s und %2$s bauen, je nachdem, wie weit der Schiffbauer laufen muss."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12448,7 +12448,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann ein Schiff zwischen %1$s und %2$s bauen, je nachdem, wie weit der Schiffbauer laufen muss."
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2383
@@ -14680,7 +14680,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one coal between %1$s and %2$s, depending on how "
 "far the charcoal burner has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann ein Stück Kohle zwischen %1$s und %2$s produzieren, je nachdem, wie weit der Köhler laufen muss."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Berry Farm
 #: ../../../../data/tribes/initialization/frisians/units.lua:1713
@@ -15623,7 +15623,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann eine Fähre zwischen %1$s und %2$s bauen, je nachdem, wie weit der Schiffbauer laufen muss."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Shipyard
 #: ../../../../data/tribes/initialization/frisians/units.lua:2230
@@ -15648,7 +15648,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann ein Schiff zwischen %1$s und %2$s bauen, je nachdem, wie weit der Schiffbauer laufen muss."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Weaving Mill
 #: ../../../../data/tribes/initialization/frisians/units.lua:2253

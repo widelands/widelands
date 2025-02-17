@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-02-10 02:54+0000\n"
+"POT-Creation-Date: 2025-02-13 02:53+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Ondřej Itřech, 2020-2021,2024-2025\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -140,22 +140,22 @@ msgstr "„%s“"
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:380
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:206
 msgid "No AI"
-msgstr "Bez UI"
+msgstr "Bez AI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../../../src/ai/defaultai.h:95
 msgid "Normal AI"
-msgstr "Normální UI"
+msgstr "Normální AI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../../../src/ai/defaultai.h:110
 msgid "Weak AI"
-msgstr "Slabá UI"
+msgstr "Slabá AI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../../../src/ai/defaultai.h:125
 msgid "Very Weak AI"
-msgstr "Velmi slabá UI"
+msgstr "Velmi slabá AI"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -935,7 +935,7 @@ msgstr "Zvíře: %1$s"
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:95
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:100
 msgid "Automatic Trees"
-msgstr ""
+msgstr "Automatické umístění stromů"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../../../src/editor/tools/place_immovable_tool.cc:148
@@ -1126,7 +1126,7 @@ msgstr "Popis: %s"
 #: ../../../../src/editor/ui_menus/field_info_window.cc:251
 msgctxt "addons"
 msgid "(none)"
-msgstr ""
+msgstr "(žádné)"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:258
 #, c-format
@@ -1326,16 +1326,16 @@ msgstr "Tato mapa umožňuje:"
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:399
 msgid ""
 "Please add suggested team line-ups in the next tab for all selected options"
-msgstr ""
+msgstr "Prosím výběrem možností zvol zda mapa podporuje uvedená rozvržení týmů"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:415
 msgid ""
 "Mark whether the starting positions provide equal conditions for each player"
-msgstr ""
+msgstr "Označ zda výchozí pozice hráčů jsou pro všechny hráče stejně výhodné"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:420
 msgid "Set the theme for the game loadscreens"
-msgstr ""
+msgstr "Nastaví úvodní obrazovku při zahájení hry podle motivu"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:421
 msgctxt "map_theme"
@@ -1907,7 +1907,7 @@ msgstr "Hospodářství"
 #: ../../../../src/game_io/game_loader.cc:142
 #: ../../../../src/game_io/game_saver.cc:89
 msgid "AI"
-msgstr "UI"
+msgstr "AI"
 
 #: ../../../../src/game_io/game_loader.cc:149
 #: ../../../../src/game_io/game_saver.cc:96
@@ -2197,46 +2197,46 @@ msgstr[2] "Použito %u hru ovlivňujících rozšíření:"
 msgstr[3] "Použito %u hru ovlivňujících rozšíření:"
 
 #. * TRANSLATORS: "12 steps northwest of Port1"
-#: ../../../../src/logic/detected_port_space.cc:52
+#: ../../../../src/logic/detected_port_space.cc:47
 msgid "northwest"
 msgstr "severozápadně"
 
 #. * TRANSLATORS: "12 steps northeast of Port1"
-#: ../../../../src/logic/detected_port_space.cc:56
+#: ../../../../src/logic/detected_port_space.cc:51
 msgid "northeast"
 msgstr "severovýchodně"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
-#: ../../../../src/logic/detected_port_space.cc:60
+#: ../../../../src/logic/detected_port_space.cc:55
 msgid "southwest"
 msgstr "jihozápadně"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
-#: ../../../../src/logic/detected_port_space.cc:64
+#: ../../../../src/logic/detected_port_space.cc:59
 msgid "southeast"
 msgstr "jihovýchodně"
 
 #. * TRANSLATORS: "12 steps north of Port1"
-#: ../../../../src/logic/detected_port_space.cc:68
+#: ../../../../src/logic/detected_port_space.cc:63
 msgid "north"
 msgstr "severně"
 
 #. * TRANSLATORS: "12 steps south of Port1"
-#: ../../../../src/logic/detected_port_space.cc:72
+#: ../../../../src/logic/detected_port_space.cc:67
 msgid "south"
 msgstr "jižně"
 
 #. * TRANSLATORS: "12 steps west of Port1"
-#: ../../../../src/logic/detected_port_space.cc:76
+#: ../../../../src/logic/detected_port_space.cc:71
 msgid "west"
 msgstr "západně"
 
 #. * TRANSLATORS: "12 steps east of Port1"
-#: ../../../../src/logic/detected_port_space.cc:80
+#: ../../../../src/logic/detected_port_space.cc:75
 msgid "east"
 msgstr "východně"
 
-#: ../../../../src/logic/detected_port_space.cc:88
+#: ../../../../src/logic/detected_port_space.cc:83
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s"
 msgstr "V %1$s byl lodí %2$s objeven neobsazený přístav"
@@ -2244,7 +2244,7 @@ msgstr "V %1$s byl lodí %2$s objeven neobsazený přístav"
 #. * TRANSLATORS: "Unowned port space discovered at 1:11 by Ship2 33 steps
 #. north of
 #. Port5"
-#: ../../../../src/logic/detected_port_space.cc:94
+#: ../../../../src/logic/detected_port_space.cc:89
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
 msgid_plural ""
@@ -2254,7 +2254,7 @@ msgstr[1] "V %1$s byl lodí %2$s %3$u kroky %4$s od %5$s objeven neobsazený př
 msgstr[2] "V %1$s byl lodí %2$s %3$u kroků %4$s od %5$s objeven neobsazený přístav"
 msgstr[3] "V %1$s byl lodí %2$s %3$u kroků %4$s od %5$s objeven neobsazený přístav"
 
-#: ../../../../src/logic/detected_port_space.cc:101
+#: ../../../../src/logic/detected_port_space.cc:96
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s"
 msgstr "V %2$s byl lodí %3$s objeven přístav patřící hráči %1$s."
@@ -2262,7 +2262,7 @@ msgstr "V %2$s byl lodí %3$s objeven přístav patřící hráči %1$s."
 #. * TRANSLATORS: "Port space of Player1 discovered at 2:22 by Ship3 44 steps
 #. north
 #. of Port6"
-#: ../../../../src/logic/detected_port_space.cc:108
+#: ../../../../src/logic/detected_port_space.cc:103
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
 msgid_plural ""
@@ -2273,55 +2273,55 @@ msgstr[2] "V %2$s byl lodí %3$s %4$u kroků %5$s od %6$s objeven přístav pat�
 msgstr[3] "V %2$s byl lodí %3$s %4$u kroků %5$s od %6$s objeven přístav patřící hráči %1$s"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
-#: ../../../../src/logic/detected_port_space.cc:120
+#: ../../../../src/logic/detected_port_space.cc:115
 msgctxt "direction"
 msgid "NW"
 msgstr "SZ"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northeast.
-#: ../../../../src/logic/detected_port_space.cc:124
+#: ../../../../src/logic/detected_port_space.cc:119
 msgctxt "direction"
 msgid "NE"
 msgstr "SV"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southwest.
-#: ../../../../src/logic/detected_port_space.cc:128
+#: ../../../../src/logic/detected_port_space.cc:123
 msgctxt "direction"
 msgid "SW"
 msgstr "JZ"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southeast.
-#: ../../../../src/logic/detected_port_space.cc:132
+#: ../../../../src/logic/detected_port_space.cc:127
 msgctxt "direction"
 msgid "SE"
 msgstr "JV"
 
 #. * TRANSLATORS: This is an abbreviated direction: North.
-#: ../../../../src/logic/detected_port_space.cc:136
+#: ../../../../src/logic/detected_port_space.cc:131
 msgctxt "direction"
 msgid "N"
 msgstr "S"
 
 #. * TRANSLATORS: This is an abbreviated direction: South.
-#: ../../../../src/logic/detected_port_space.cc:140
+#: ../../../../src/logic/detected_port_space.cc:135
 msgctxt "direction"
 msgid "S"
 msgstr "J"
 
 #. * TRANSLATORS: This is an abbreviated direction: West.
-#: ../../../../src/logic/detected_port_space.cc:144
+#: ../../../../src/logic/detected_port_space.cc:139
 msgctxt "direction"
 msgid "W"
 msgstr "Z"
 
 #. * TRANSLATORS: This is an abbreviated direction: East.
-#: ../../../../src/logic/detected_port_space.cc:148
+#: ../../../../src/logic/detected_port_space.cc:143
 msgctxt "direction"
 msgid "E"
 msgstr "V"
 
 #. * TRANSLATORS: Placeholders are gametime and shipname. Keep this short.
-#: ../../../../src/logic/detected_port_space.cc:157
+#: ../../../../src/logic/detected_port_space.cc:152
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s"
@@ -2330,7 +2330,7 @@ msgstr "Nevlastněná / %1$s / %2$s"
 #. * TRANSLATORS: Placeholders are gametime, shipname, and distance direction
 #. port_name.
 #. *  Keep this short.
-#: ../../../../src/logic/detected_port_space.cc:162
+#: ../../../../src/logic/detected_port_space.cc:157
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s / %3$u %4$s %5$s"
@@ -2338,7 +2338,7 @@ msgstr "Nevlastněná / %1$s / %2$s / %3$u %4$s %5$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this
 #. short.
-#: ../../../../src/logic/detected_port_space.cc:168
+#: ../../../../src/logic/detected_port_space.cc:163
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s"
@@ -2347,7 +2347,7 @@ msgstr "%1$s / %2$s / %3$s"
 #. * TRANSLATORS: Placeholders are owner, gametime, shipname, and "distance
 #. direction port_name.
 #. *  Keep this short.
-#: ../../../../src/logic/detected_port_space.cc:174
+#: ../../../../src/logic/detected_port_space.cc:169
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
@@ -2617,23 +2617,23 @@ msgstr "dělníci nepotřebuje další zkušenosti"
 
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:615
 msgid "the fleet needs a ferry"
-msgstr ""
+msgstr "hospodářství potřebuje další přívoz"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs
 #. a ship/ferry'.
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:615
 msgid "the fleet needs a ship"
-msgstr ""
+msgstr "loďstvo třeba rozšířit"
 
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:622
 msgid "the fleet needs no ferries"
-msgstr ""
+msgstr "hospodářství nepotřebuje další přívozy"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs
 #. no ships/ferries'.
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:622
 msgid "the fleet needs no ships"
-msgstr ""
+msgstr "loďstvo je kompletní"
 
 #. * TRANSLATORS: "Did not start working because the economy needs the ware
 #. '%s'"
@@ -2784,11 +2784,11 @@ msgstr "Tvá loď dorazila do cíle své plavby."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:639
 msgid "A warship arrived at a known port build space."
-msgstr ""
+msgstr "Válečná loď dorazila k objevenému místu pro přístav."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:640
 msgid "An expedition ship arrived at a known port build space."
-msgstr ""
+msgstr "Výprava dorazila k objevenému místu pro přístav."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:641
 #: ../../../../src/logic/map_objects/tribes/ship.cc:649
@@ -3043,11 +3043,6 @@ msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Zakládání kolonie"
 
-#: ../../../../src/logic/map_objects/tribes/soldier.cc:1544
-#: ../../../../src/logic/map_objects/tribes/soldier.cc:1548
-msgid "Logic error"
-msgstr "Logická chyba"
-
 #. * TRANSLATORS: Example: Loading Barbarians: Buildings (2/6)
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:160
 msgid "Loading %1%: %2% (%3%/%4%)"
@@ -3155,25 +3150,30 @@ msgstr "Vodní cesta byla zrušena"
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr "Vodní cesta musí být zrušena pro vytvoření místa pro nový přístavní dok."
 
-#: ../../../../src/logic/map_objects/tribes/worker.cc:1137
+#: ../../../../src/logic/map_objects/tribes/worker_programs/findresources.cc:58
 msgid "A geologist found resources."
 msgstr "Objeveny nové suroviny."
 
-#: ../../../../src/logic/map_objects/tribes/worker.cc:2120
+#: ../../../../src/logic/map_objects/tribes/worker_tasks/return.cc:115
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr "%s nemůže najít cestu domů a pravděpodobně zemře."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../../../src/logic/map_objects/tribes/worker.cc:2125
+#: ../../../../src/logic/map_objects/tribes/worker_tasks/return.cc:120
 #: ../../../../src/wui/productionsitewindow.cc:107
 #: ../../../../src/wui/productionsitewindow.cc:124
 msgid "Worker"
 msgstr "Dělník"
 
-#: ../../../../src/logic/map_objects/tribes/worker.cc:2126
+#: ../../../../src/logic/map_objects/tribes/worker_tasks/return.cc:121
 msgid "Worker got lost!"
 msgstr "Dělník se ztratil!"
+
+#: ../../../../src/logic/map_objects/tribes/worker_tasks/soldier_battle.cc:158
+#: ../../../../src/logic/map_objects/tribes/worker_tasks/soldier_battle.cc:162
+msgid "Logic error"
+msgstr "Logická chyba"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../../../src/logic/map_objects/world/terrain_description.cc:71
@@ -3850,7 +3850,7 @@ msgstr "Byl jsi odhlášen z metaserveru, protože jsi včas neodpověděl na ž
 #: ../../../../src/network/net_addons.cc:894
 #, c-format
 msgid "Sending metadata for %s"
-msgstr ""
+msgstr "Odesílání metadat o %s"
 
 #: ../../../../src/network/net_addons.cc:936
 #, c-format
@@ -4143,11 +4143,11 @@ msgstr "Žádná shoda"
 
 #: ../../../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
-msgstr "Prosím počkejte..."
+msgstr "Prosím o strpení..."
 
 #: ../../../../src/ui_basic/panel.cc:467
 msgid "Game ending – please wait…"
-msgstr "Hra se ukončuje – prosím počkejte..."
+msgstr "Hra se ukončuje – prosím o strpení..."
 
 #: ../../../../src/ui_basic/progresswindow.cc:83
 #: ../../../../src/wlapplication.cc:488
@@ -4654,7 +4654,7 @@ msgstr "Max. rozměr:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:455
 msgid "Choose add-on to upload…"
-msgstr "Zvolte rozšíření k nahrání..."
+msgstr "Zvol rozšíření k nahrání..."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:466
 msgid "Upload a screenshot…"
@@ -4804,7 +4804,7 @@ msgid ""
 "Browse and install maps from the widelands.org website maps archive. Like "
 "manually downloaded maps, installed website maps are stored in the ‘%s’ "
 "directory under the Widelands home directory."
-msgstr ""
+msgstr "Umožňuje procházet a stahovat mapy z archivu map na stránce widelands.org. Stejně jako ručně stažené mapy, tak jsou i takto nainstalované mapy uloženy do složky \"%s\" v hlavním adresáři Widelands."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:757
 msgid "Development"
@@ -4875,7 +4875,7 @@ msgstr "Jeden svět"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:820
 #, c-format
 msgid "Toggle world ‘%s’"
-msgstr ""
+msgstr "Změnit svět ‘%s’"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1012
 #, c-format
@@ -6225,11 +6225,11 @@ msgid ""
 "with a description of what was going on in the game and what you did last "
 "before the crash to the Widelands Development Team under %s so we can fix "
 "the problem."
-msgstr ""
+msgstr "Vypadá to, že při posledním spuštění Widelands došlo k pádu a byl vygenerován automatický záznam pro možné pozdější vyřešení problému. Prosíme o předání této zprávy společně s popisem, co bylo poslední prováděnou aktivitou a jak hra reagovala, týmu vývojářů Widelands na %s, aby mohl být problém vyřešen."
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:142
 msgid "Show details…"
-msgstr ""
+msgstr "Zobrazit podrobnosti..."
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:142
 msgid "View the detailed crash report"
@@ -6454,11 +6454,11 @@ msgstr "Uložit záznam hry"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:167
 msgid "Change map…"
-msgstr "Změnit mapu…"
+msgstr "Vybrat mapu…"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:177
 msgid "Change saved game…"
-msgstr "Změnit uloženou hru…"
+msgstr "Vybrat uloženou hru…"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:204
 msgid "Start game"
@@ -6672,7 +6672,7 @@ msgstr "Uložit"
 
 #: ../../../../src/ui_fsmenu/login_box.cc:53
 msgid "Log in to a registered account."
-msgstr "Přihlaste se k registrovanému účtu."
+msgstr "Přihlásit se k registrovanému účtu."
 
 #: ../../../../src/ui_fsmenu/login_box.cc:58
 msgid "Nickname:"
@@ -7283,7 +7283,7 @@ msgstr "Tým"
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:178
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:179
 msgid "Random AI"
-msgstr "Náhodná UI"
+msgstr "Náhodná AI"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:351
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:353
@@ -7411,7 +7411,7 @@ msgid ""
 "and the cursor appears frozen during long operations. Disable it only if the"
 " cursor doesn’t appear right, or if you want it to be visible in screenshots"
 " or screencasts."
-msgstr "V případě nejasností ponechat aktivní. Pokud je volba neaktivní kurzor může být pomalejší a v případě náročnějších operací může zamrzat. Deaktivat pouze pokud se kurzor nezobrazuje správně nebo má-li být vidět na snímcích obrazovky."
+msgstr "V případě nejasností ponechat aktivní. Pokud je volba neaktivní kurzor může být pomalejší a v případě náročnějších operací může zamrzat. Deaktivovat pouze pokud se kurzor nezobrazuje správně nebo má-li být vidět na snímcích nebo záznamech obrazovky."
 
 #: ../../../../src/ui_fsmenu/options.cc:166
 msgid "Accessibility mode for tooltips"
@@ -7607,7 +7607,7 @@ msgid ""
 "usually – but not always – well playable. Seafaring and artifacts are not "
 "supported. Add-ons of the Tribes and Script categories are disabled in "
 "random matches."
-msgstr ""
+msgstr "Generátor náhodných map je stále ještě v beta verzi. Takto generované mapy jsou většinou – ale ne vždy – hratelné. Mořeplavba a artefakty nejsou podporovány. Rozšíření kmenů a skriptů jsou v náhodných hrách vypnuty."
 
 #: ../../../../src/ui_fsmenu/random_game.cc:127
 msgid "Map Generation Error"
@@ -7846,17 +7846,17 @@ msgstr "Chyba systému souborů"
 #: ../../../../src/wlapplication.cc:1560
 #, c-format
 msgid "Command line parameter --%s can not use a value"
-msgstr ""
+msgstr "Nepoužitelná hodnota parametru příkazového řádku --%s"
 
 #: ../../../../src/wlapplication.cc:1565
 #, c-format
 msgid "Empty value of command line parameter --%s"
-msgstr ""
+msgstr "Prázdná hodnota parametru příkazového řádku --%s"
 
 #: ../../../../src/wlapplication.cc:1571
 #, c-format
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
-msgstr ""
+msgstr "Parametry příkazového řádku --%1$s a --%2$s nelze kombinovat"
 
 #: ../../../../src/wlapplication.cc:1757
 #, c-format
@@ -7894,7 +7894,7 @@ msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
-msgstr ""
+msgstr "V průběhu hry se vyskytla chyba. Chybová hláška:\n\n%1$s\n\nProsím nahlas tento problém, aby mohl být odstraněn. Doprovodné informace lze nalézt ve standardním výstupu (stdout.txt pro Windows). Používáš verzi %2$s.\n\nProsím uveď tuto informaci v hlášení.\n\nPřeješ si, aby se hra Widelands pokusila o nouzové uložení? Často (bohužel ne vždy) je pak možné hru nově nahrát a pokračovat v ní."
 
 #: ../../../../src/wlapplication.cc:1985
 #, c-format
@@ -8196,11 +8196,11 @@ msgstr "Změnit hudbu"
 
 #: ../../../../src/wlapplication_options.cc:390
 msgid "Open the Debug Console (developer tool)"
-msgstr ""
+msgstr "Otevřít ladící konzoli (vývojářstý nástroj)"
 
 #: ../../../../src/wlapplication_options.cc:395
 msgid "Toggle Cheat Mode (developer tool)"
-msgstr ""
+msgstr "Přepnout Cheat mode (vývojářský nástroj)"
 
 #: ../../../../src/wlapplication_options.cc:405
 msgid "Load"
@@ -8329,7 +8329,7 @@ msgstr "Volby zvuku"
 
 #: ../../../../src/wlapplication_options.cc:598
 msgid "Restart Scenario or Replay"
-msgstr ""
+msgstr "Restartovat scénář, nebo záznam hry"
 
 #: ../../../../src/wlapplication_options.cc:602
 msgid "Toggle Census"
@@ -9509,11 +9509,11 @@ msgstr "Zničit vodní cestu"
 
 #: ../../../../src/wui/fieldaction.cc:522
 msgid "Configure this ocean’s ship fleet"
-msgstr ""
+msgstr "Nastavit velikost loďstva"
 
 #: ../../../../src/wui/fieldaction.cc:533
 msgid "Configure this ocean’s ferry fleet"
-msgstr ""
+msgstr "Nastavit počet přívozů"
 
 #: ../../../../src/wui/fieldaction.cc:540
 msgid "Watch field in a separate window"
@@ -9703,14 +9703,14 @@ msgstr "Pokračovat ve hře"
 #: ../../../../src/wui/game_client_disconnected.cc:89
 msgid ""
 "Replace the disconnected player with the selected AI and continue playing"
-msgstr "Nahradit odpojeného hráče vybranou UI a pokračovat ve hře"
+msgstr "Nahradit odpojeného hráče vybranou AI a pokračovat ve hře"
 
 #. * TRANSLATORS: Dropdown tooltip to select the AI difficulty when a player
 #. has
 #. disconnected from a game
 #: ../../../../src/wui/game_client_disconnected.cc:99
 msgid "AI for the disconnected player"
-msgstr "UI místo odpojeného hráče"
+msgstr "AI místo odpojeného hráče"
 
 #. * TRANSLATORS: Dropdown selection. Parameter is the name of the AI that
 #. will be used as replacement for a disconnected player
@@ -11361,7 +11361,7 @@ msgstr "Změna hlasitosti. Kliknutí spustí ukázku."
 
 #: ../../../../src/wui/sound_options.cc:150
 msgid "Play your own music in-game"
-msgstr "Přehraj ve hře vlastní muziku"
+msgstr "Přehrávat během hry vlastní hudbu"
 
 #: ../../../../src/wui/sound_options.cc:152
 msgid ""

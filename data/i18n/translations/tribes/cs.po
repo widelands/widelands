@@ -3672,7 +3672,7 @@ msgid ""
 "The beekeeper working at this beekeeper’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr "Včelař pracující na tomto včelařském domku nenašel žádnéý keř či pole v pracovní oblasti. Zvažte stavbu dalšího statku či sadu  v okolí, nebo rzebrání či zboření této budovy."
+msgstr "Včelař pracující v tomto včelařském domku nenašel žádný keř ani pole ve své pracovní oblasti. Zvaž stavbu dalšího statku či sadu v okolí, nebo rozebrání či zboření této budovy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:8
@@ -5603,7 +5603,7 @@ msgstr "Král cizinec"
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can’t successfully start from this."
-msgstr "Začni hru jen se skladem a nejzákladnějším minimem pro rozběh hospodářství. Pozor: UI za těchto podmínek nedokáže úspěšně zahájit hru."
+msgstr "Začni hru jen se skladem a nejzákladnějším minimem pro rozběh hospodářství. Pozor: AI za těchto podmínek nedokáže úspěšně zahájit hru."
 
 #: ../../../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:46
 #: ../../../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
@@ -5638,7 +5638,7 @@ msgid ""
 "Start the game with just your headquarters and very few wares for "
 "bootstrapping an economy. Warning: the AI can’t successfully start from "
 "this."
-msgstr "Začni hru jen s hlavní budovou a velmi málo surovinami pro rozběh hospodářství. Pozor: UI za těchto podmínek nedokáže úspěšně zahájit hru."
+msgstr "Začni hru jen s hlavní budovou a velmi málo surovinami pro rozběh hospodářství. Pozor: AI za těchto podmínek nedokáže úspěšně zahájit hru."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../../../data/tribes/initialization/amazons/starting_conditions/trading_outpost.lua:11
@@ -9310,7 +9310,7 @@ msgstr "Voják"
 #: ../../../../data/tribes/workers/atlanteans/spiderbreeder/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Spider Breeder"
-msgstr "Chovatel pavouků"
+msgstr "Chovatelka pavouků"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/stonecutter/init.lua:8
