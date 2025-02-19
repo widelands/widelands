@@ -66,12 +66,12 @@ def main():
         update_file(filename, regex, replace)
 
         filename = os.path.join(
-            base_path, 'utils/win32/innosetup/Widelands.iss')
+            base_path, 'utils/windows/innosetup/Widelands.iss')
         regex = re.compile(
             '(#define Copyright \"Widelands Development Team 2001\-)(\d\d\d\d)(\")')
         update_file(filename, regex, replace)
 
-        filename = os.path.join(base_path, 'utils/win32/widelands.rc.cmake')
+        filename = os.path.join(base_path, 'utils/windows/widelands.rc.cmake')
         update_file(filename, regex_header, repl_header)
 
         filename = os.path.join(base_path, 'debian/copyright')

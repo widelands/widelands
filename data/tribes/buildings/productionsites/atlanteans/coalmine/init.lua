@@ -52,10 +52,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
          descname = _("mining coal"),
          actions = {
-            -- time total: 105 + 7 x 3.6
+            -- time total: 37.8 + 7 * (10 + 3.6) = 133 sec
             "return=skipped unless economy needs coal",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "sleep=duration:35s",
+            "sleep=duration:37s800ms",
             -- after having the food the miners are working 7 times
             -- each cycle lasts 10 seconds for mining and producing coal
             -- and 3.6 seconds to deliver the coal to the flag

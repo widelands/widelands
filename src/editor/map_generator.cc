@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -95,14 +95,14 @@ void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
 
 	// Set bob according to bob area
 
-	if (set_immovable && ((num = bobCategory->num_immovables()) != 0u)) {
+	if (num = bobCategory->num_immovables(); set_immovable && num != 0u) {
 		egbase_.create_immovable_with_name(
 		   fc, bobCategory->get_immovable(static_cast<size_t>(rng.rand() / (kMaxElevation / num))),
 		   nullptr /* owner */, nullptr /* former_building_descr */
 		);
 	}
 
-	if (set_moveable && ((num = bobCategory->num_critters()) != 0u)) {
+	if (num = bobCategory->num_critters(); set_moveable && num != 0u) {
 		egbase_.create_critter(fc, egbase_.descriptions().critter_index(bobCategory->get_critter(
 		                              static_cast<size_t>(rng.rand() / (kMaxElevation / num)))));
 	}
@@ -206,10 +206,10 @@ uint8_t MapGenerator::make_node_elevation(double const elevation, const Coords& 
 	double const land_fac = map_info_.landRatio;
 
 	uint8_t res_h = elevation < water_fac ?
-                      water_h :
+	                   water_h :
 	                elevation < water_fac + land_fac ?
-                      water_h + 1 + ((elevation - water_fac) / land_fac) * (mount_h - water_h) :
-                      mount_h + ((elevation - water_fac - land_fac) / (1 - water_fac - land_fac)) *
+	                   water_h + 1 + ((elevation - water_fac) / land_fac) * (mount_h - water_h) :
+	                   mount_h + ((elevation - water_fac - land_fac) / (1 - water_fac - land_fac)) *
 	                                (summit_h - mount_h);
 
 	//  Handle Map Border in island mode
@@ -574,8 +574,8 @@ DescriptionIndex MapGenerator::figure_out_terrain(const uint32_t* random2,
 	} else if (isDesert) {
 		atp = MapGenAreaInfo::Area::kWasteland;
 		ttp = ttp == MapGenAreaInfo::Terrain::kLandCoast || isDesertOuter ?
-               MapGenAreaInfo::Terrain::kWastelandOuter :
-               MapGenAreaInfo::Terrain::kWastelandInner;
+		         MapGenAreaInfo::Terrain::kWastelandOuter :
+		         MapGenAreaInfo::Terrain::kWastelandInner;
 	}
 
 	// Return terrain type

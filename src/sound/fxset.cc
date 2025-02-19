@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -102,8 +102,8 @@ void FXset::load_sound_file(const std::string& path) {
 		return;
 	}
 
-	if (Mix_Chunk* const m =
-	       Mix_LoadWAV_RW(SDL_RWFromMem(fr.data(fr.get_size(), 0), fr.get_size()), 1)) {
+	if (Mix_Chunk* const m = Mix_LoadWAV_RW(
+	       SDL_RWFromMem(fr.data(fr.get_size(), FileRead::Pos(0)), fr.get_size()), 1)) {
 		// Append a sound effect to the end of the fxset
 		assert(m);
 		fxs_.push_back(m);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #include <memory>
 
 #include "build_info.h"
+#include "graphic/mouse_cursor.h"
 #include "logic/filesystem_constants.h"
 #include "ui_basic/messagebox.h"
 
@@ -60,6 +61,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
      curdir_(basedir_),
      game_(g) {
 
+	g_mouse_cursor->change_wait(true);
+
 	switch (filetype_) {
 	case FileType::kReplay:
 		table_ = new SavegameTableReplay(table_box_, style, localize_autosave);
@@ -83,6 +86,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 		savegame_deleter_.reset(new SavegameDeleter(parent, ws));
 		savegame_loader_.reset(new EverythingLoader(g));
 		break;
+	default:
+		NEVER_HERE();
 	}
 
 	table_->set_column_compare(
@@ -172,18 +177,18 @@ void LoadOrSaveGame::set_tooltips_of_buttons(size_t nr_of_selected_items) const 
 	if (nr_of_selected_items == 1) {
 		delete_->set_tooltip(
 		   filetype_ == FileType::kReplay ?
-            /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
-            _("Delete this replay") :
-            /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
-            _("Delete this game"));
+		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
+		      _("Delete this replay") :
+		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
+		      _("Delete this game"));
 	} else if (nr_of_selected_items > 1) {
 		delete_->set_tooltip(filetype_ == FileType::kReplay ?
-                                 /** TRANSLATORS: Tooltip for the delete button. The user has
-                                    selected multiple files */
-                                 _("Delete these replays") :
-                                 /** TRANSLATORS: Tooltip for the delete button. The user has
-                                    selected multiple files */
-                                 _("Delete these games"));
+		                        /** TRANSLATORS: Tooltip for the delete button. The user has
+		                           selected multiple files */
+		                        _("Delete these replays") :
+		                           /** TRANSLATORS: Tooltip for the delete button. The user has
+		                              selected multiple files */
+		                           _("Delete these games"));
 	} else {
 		delete_->set_tooltip("");
 	}

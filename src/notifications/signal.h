@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2023 by the Widelands Development Team
+ * Copyright (C) 2021-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,6 +78,8 @@ public:
 		case SubscriberPosition::kFront:
 			all_subscribers_.emplace_front(s, callback);
 			break;
+		default:
+			NEVER_HERE();
 		}
 		return std::unique_ptr<SignalSubscriber>(s);
 	}

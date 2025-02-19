@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -237,7 +237,9 @@ private:
 	// Get a lua value of the specific type. See template specializations.
 	template <typename T> T get_value() const;
 
-	MutexLock mutex_lock_;
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock objects_lock_;
+	MutexLock lua_lock_;
 	lua_State* L_;
 	mutable std::set<std::string> accessed_keys_;
 	bool warn_about_unaccessed_keys_{true};

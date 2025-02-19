@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,8 @@
 
 #ifndef WL_IO_MACHDEP_H
 #define WL_IO_MACHDEP_H
+
+#include <cstring>
 
 #include <SDL_endian.h>
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2023 by the Widelands Development Team
+ * Copyright (C) 2008-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,9 @@
 #include <memory>
 
 #include "base/log.h"
+#include "commands/cmd_set_ware_target_quantity.h"
+#include "commands/cmd_set_worker_target_quantity.h"
+#include "economy/flag.h"
 #include "graphic/font_handler.h"
 #include "graphic/style_manager.h"
 #include "io/profile.h"
@@ -29,7 +32,6 @@
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/player.h"
-#include "logic/playercommand.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 #include "ui_basic/messagebox.h"
@@ -227,7 +229,7 @@ std::string EconomyOptionsWindow::localize_profile_name(const std::string& name)
 void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
 	Widelands::Serial* serial = note.old_economy == ware_serial_   ? &ware_serial_ :
 	                            note.old_economy == worker_serial_ ? &worker_serial_ :
-                                                                    nullptr;
+	                                                                 nullptr;
 	if (serial != nullptr) {
 		switch (note.action) {
 		case Widelands::NoteEconomy::Action::kMerged: {
@@ -245,6 +247,8 @@ void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
 			// Make sure that the panels stop thinking first.
 			die();
 			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 }
@@ -385,7 +389,7 @@ void EconomyOptionsWindow::EconomyOptionsPanel::toggle_infinite() {
 					new_quantity = is_wares ? economy_options_window_->get_predefined_targets()
 					                             .at(kDefaultEconomyProfile)
 					                             .wares.at(index) :
-                                         economy_options_window_->get_predefined_targets()
+					                          economy_options_window_->get_predefined_targets()
 					                             .at(kDefaultEconomyProfile)
 					                             .workers.at(index);
 				} else {
@@ -577,7 +581,7 @@ void EconomyOptionsWindow::SaveProfileWindow::update_save_enabled() {
 	if (text.empty() || text == kDefaultEconomyProfile) {
 		save_.set_enabled(false);
 		save_.set_tooltip(text.empty() ? _("The profile name cannot be empty") :
-                                       _("The default profile cannot be overwritten"));
+		                                 _("The default profile cannot be overwritten"));
 	} else {
 		save_.set_enabled(true);
 		save_.set_tooltip(_("Save the profile under this name"));
@@ -845,6 +849,8 @@ void EconomyOptionsWindow::read_targets() {
 					case Widelands::WareWorker::wwWORKER:
 						t.workers.insert(std::make_pair(wareworker.second, v->get_natural()));
 						break;
+					default:
+						NEVER_HERE();
 					}
 				} catch (const Widelands::GameDataError&) {
 					log_warn("Unknown ware or worker '%s' in economy profile '%s'", name.c_str(),

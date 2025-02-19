@@ -459,7 +459,7 @@ obj_open_economy_settings = {
    number = 1,
    body = objective_text(_("Open the ‘Configure economy’ window"),
       li(_([[Open the ‘Configure economy’ window.]])) ..
-      li_arrow(_([[The window can be accessed by clicking on any flag you own.]]))
+      li_arrow(_([[The window can be accessed by clicking on any flag you own or from warehouse windows.]]))
    )
 }
 economy_settings1 = {
@@ -470,7 +470,9 @@ economy_settings1 = {
          p(_([[I’ve shown you our stock window, where you could see which wares are at the warehouses. You remember?]])) ..
          p(_([[Now I’ll tell you how you can determine how many wares you want to have. The window for this purpose can be accessed via any flag and is called ‘Configure economy’.]])), plr.color) ..
       -- Yup, that's indeed the correct icon
-      li_image("images/wui/stats/genstats_nrwares.png", _([[This is the icon.]]))
+      li_image("images/wui/stats/genstats_nrwares.png", _([[This is the icon.]])) ..
+      p(_([[The same button is also available in warehouse windows.]])) ..
+      p(_([[Note that the buttons are called ‘Configure this flag’s/building’s economy’ for a reason. An economy consists of all buildings and flags connected by roads, ferries, or ships, so you can have more than one economy if their flags are not connected by any means of transportation. In that case, your separate economies can have different settings for wares.]]))
    ),
    h = messagebox_h_step(-1),
 }

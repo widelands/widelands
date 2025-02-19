@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,7 @@
  */
 
 #include <iostream>
+#include <sstream>
 #include <typeinfo>
 
 #ifdef _MSC_VER
@@ -33,6 +34,7 @@
 #include <execinfo.h>
 #endif
 
+#include "base/multithreading.h"
 #include "base/time_string.h"
 #include "base/wexception.h"
 #include "build_info.h"
@@ -60,24 +62,42 @@ static void segfault_handler(const int sig) {
 	   << std::endl
 	   << "##############################" << std::endl;
 
-	const std::string timestr = timestring();
 	std::string filename;
 	if (WLApplication::segfault_backtrace_dir.empty()) {
 		filename = "./widelands_crash_report_";
-		filename += timestr;
 	} else {
 		filename = WLApplication::segfault_backtrace_dir;
 		filename += "/";
-		filename += timestr;
 	}
+
+	const std::string timestr = timestring();
+	filename += timestr;
+
+	std::string thread_name;
+	if (is_initializer_thread()) {
+		filename += "_ui";
+		thread_name = "UI thread";
+	} else if (is_logic_thread()) {
+		filename += "_logic";
+		thread_name = "logic thread";
+	} else {
+		std::ostringstream thread_id;
+		thread_id << std::this_thread::get_id();
+		filename += "_";
+		filename += thread_id.str();
+		thread_name = "thread " + thread_id.str();
+	}
+
 	filename += kCrashExtension;
+
 	FILE* file = fopen(filename.c_str(), "w+");
 	if (file == nullptr) {
 		std::cout << "The crash report could not be saved to a file." << std::endl << std::endl;
 	} else {
 		fprintf /* NOLINT codecheck */ (
-		   file, "Crash report for Widelands %s at %s, signal %d (%s)\n\n**** BEGIN BACKTRACE ****\n",
-		   build_ver_details().c_str(), timestr.c_str(), sig, strsignal(sig));
+		   file,
+		   "Crash report for Widelands %s %s at %s, signal %d (%s)\n\n**** BEGIN BACKTRACE ****\n",
+		   build_ver_details().c_str(), thread_name.c_str(), timestr.c_str(), sig, strsignal(sig));
 		fflush(file);
 		backtrace_symbols_fd(array, size, fileno(file));
 		fflush(file);

@@ -1,7 +1,5 @@
 wl_library(economy
   SRCS
-    cmd_call_economy_balance.cc
-    cmd_call_economy_balance.h
     economy.cc
     economy.h
     economy_data_packet.cc
@@ -38,6 +36,8 @@ wl_library(economy
     shippingitem.h
     shipping_schedule.cc
     shipping_schedule.h
+    soldier_request.cc
+    soldier_request.h
     supply.h
     supply_list.cc
     supply_list.h
@@ -66,7 +66,7 @@ wl_library(economy
     io_fileread
     io_stream
     logic
-    logic_commands
+    commands
     logic_constants
     logic_exceptions
     logic_map

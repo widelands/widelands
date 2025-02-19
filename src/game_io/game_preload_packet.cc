@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,6 +37,10 @@
 
 namespace Widelands {
 
+/* Changelog:
+ * 9: v1.1
+ * 10: Added configurable win condition duration
+ */
 constexpr uint16_t kCurrentPacketVersion = 10;
 constexpr const char* kMinimapFilename = "minimap.png";
 
@@ -56,13 +60,12 @@ void GamePreloadPacket::read(FileSystem& fs, Game& /* game */, MapObjectLoader* 
 		Section& s = prof.get_safe_section("global");
 		int32_t const packet_version = s.get_int("packet_version");
 
-		if (packet_version >= 6 && packet_version <= kCurrentPacketVersion) {
+		if (packet_version >= 9 && packet_version <= kCurrentPacketVersion) {
 			gametime_ = Time(s.get_safe_int("gametime"));
 			mapname_ = s.get_safe_string("mapname");
 
 			background_ = s.get_safe_string("background");
-			// TODO(Nordfriese): Savegame compatibility
-			background_theme_ = (packet_version < 7 ? "" : s.get_safe_string("theme"));
+			background_theme_ = s.get_safe_string("theme");
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0. `kCurrentPacketVersion` will
        // then need to be increased, and the minimum version for the following two values updated
        // accordingly.
@@ -73,9 +76,9 @@ void GamePreloadPacket::read(FileSystem& fs, Game& /* game */, MapObjectLoader* 
 #endif
 			player_nr_ = s.get_safe_int("player_nr");
 			win_condition_ = s.get_safe_string("win_condition");
-			// TODO(Nordfriese): Savegame compatibility
+			// TODO(Nordfriese): Savegame compatibility v1.1
 			win_condition_duration_ = (packet_version < 10 ? kDefaultWinConditionDuration :
-                                                          s.get_safe_int("win_condition_duration"));
+			                                                 s.get_safe_int("win_condition_duration"));
 			number_of_players_ = s.get_safe_int("player_amount");
 			version_ = s.get_safe_string("widelands_version");
 			if (fs.file_exists(kMinimapFilename)) {
@@ -94,8 +97,8 @@ void GamePreloadPacket::read(FileSystem& fs, Game& /* game */, MapObjectLoader* 
 					   "Ignoring malformed add-on requirement substring '%s'\n", substring.c_str());
 				} else {
 					const std::string version = substring.substr(colonpos + 1);
-					required_addons_.push_back(std::make_pair(
-					   substring.substr(0, colonpos), AddOns::string_to_version(version)));
+					required_addons_.emplace_back(
+					   substring.substr(0, colonpos), AddOns::string_to_version(version));
 				}
 				if (commapos == std::string::npos) {
 					break;
@@ -143,8 +146,8 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const 
 	s.set_int("win_condition_duration", game.get_win_condition_duration());
 	s.set_int("savetimestamp", static_cast<uint32_t>(time(nullptr)));
 	s.set_int("gametype", static_cast<int32_t>(game.game_controller() != nullptr ?
-                                                 game.game_controller()->get_game_type() :
-                                                 GameController::GameType::kReplay));
+	                                              game.game_controller()->get_game_type() :
+	                                              GameController::GameType::kReplay));
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	s.set_string("active_training_wheel", game.active_training_wheel());
 	s.set_bool("training_wheels", game.training_wheels_wanted());

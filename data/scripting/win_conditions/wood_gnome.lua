@@ -97,7 +97,7 @@ local r = {
          -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
          msg = msg ..  h3(_("The winner is %1$s with %2$s.")):bformat(points[#points][1].name, trees)
       else
-         -- TRNANSLATORS: %s = x tree(s)
+         -- TRANSLATORS: %s = x tree(s)
          msg = msg .. h3(_("The winners had %s.")):bformat(trees)
          -- TODO maybe, create list of winners and show as %$1s: The winners are %$1s with %$2s.
       end

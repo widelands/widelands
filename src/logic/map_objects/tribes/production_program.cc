@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "base/log.h"
 #include "base/macros.h"
 #include "base/math.h"
 #include "base/wexception.h"
@@ -157,19 +156,20 @@ For general information about the format, see :ref:`map_object_programs_syntax`.
 
 Available actions are:
 
-- `animate`_
+- `return`_
 - `call`_
 - `callworker`_
-- `checksoldier`_
-- `construct`_
-- `consume`_
-- `mine`_
-- `playsound`_
-- `recruit`_
-- `produce`_
-- `return`_
 - `sleep`_
+- `animate`_
+- `consume`_
+- `produce`_
+- `recruit`_
+- `mine`_
+- `checksoldier`_
 - `train`_
+- `playsound`_
+- `script`_
+- `construct`_
 */
 
 ProductionProgram::ActReturn::Condition* create_economy_condition(
@@ -187,30 +187,12 @@ ProductionProgram::ActReturn::Condition* create_economy_condition(
 			descr.worker_demand_checks()->insert(wareworker.second);
 			return new ProductionProgram::ActReturn::EconomyNeedsWorker(wareworker.second);
 		}
+		default:
+			NEVER_HERE();
 		}
-		NEVER_HERE();
 	} catch (const GameDataError& e) {
 		throw GameDataError("economy condition: %s", e.what());
 	}
-}
-
-// TODO(GunChleoc): Incorporate this into TrainingParameters constructor when we drop compatibility
-// after v1.0
-TrainingAttribute parse_training_attribute(const std::string& argument) {
-	if (argument == "health") {
-		return TrainingAttribute::kHealth;
-	}
-	if (argument == "attack") {
-		return TrainingAttribute::kAttack;
-	}
-	if (argument == "defense") {
-		return TrainingAttribute::kDefense;
-	}
-	if (argument == "evade") {
-		return TrainingAttribute::kEvade;
-	}
-	throw GameDataError(
-	   "Expected health|attack|defense|evade after 'soldier' but found '%s'", argument.c_str());
 }
 }  // namespace
 
@@ -280,7 +262,7 @@ ProductionProgram::parse_ware_type_groups(std::vector<std::string>::const_iterat
 			ware_worker_names.insert(std::make_pair(item_index, type));
 		}
 		// Add set
-		result.push_back(std::make_pair(ware_worker_names, amount));
+		result.emplace_back(ware_worker_names, amount);
 	}
 	if (result.empty()) {
 		throw GameDataError("No wares or workers found");
@@ -295,31 +277,40 @@ BillOfMaterials ProductionProgram::parse_bill_of_materials(
 		const std::pair<std::string, std::string> produceme = read_key_value_pair(argument, ':', "1");
 
 		const DescriptionIndex index = ww == WareWorker::wwWARE ?
-                                        descriptions.load_ware(produceme.first) :
-                                        descriptions.load_worker(produceme.first);
+		                                  descriptions.load_ware(produceme.first) :
+		                                  descriptions.load_worker(produceme.first);
 
-		result.push_back(std::make_pair(index, read_positive(produceme.second)));
+		result.emplace_back(index, read_positive(produceme.second));
 	}
 	return result;
 }
 
-ProductionProgram::Action::TrainingParameters
-ProductionProgram::Action::TrainingParameters::parse(const std::vector<std::string>& arguments,
-                                                     const std::string& action_name) {
-	ProductionProgram::Action::TrainingParameters result;
+ProductionProgram::Action::TrainingParameters::TrainingParameters(
+   const std::vector<std::string>& arguments, const std::string& action_name) {
 	for (const std::string& argument : arguments) {
 		const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
 		if (item.first == "soldier") {
-			result.attribute = parse_training_attribute(item.second);
+			if (item.second == "health") {
+				attribute = TrainingAttribute::kHealth;
+			} else if (item.second == "attack") {
+				attribute = TrainingAttribute::kAttack;
+			} else if (item.second == "defense") {
+				attribute = TrainingAttribute::kDefense;
+			} else if (item.second == "evade") {
+				attribute = TrainingAttribute::kEvade;
+			} else {
+				throw GameDataError(
+				   "Expected health|attack|defense|evade after 'soldier' but found '%s'",
+				   argument.c_str());
+			}
 		} else if (item.first == "level") {
-			result.level = read_int(item.second, 0);
+			level = read_int(item.second, 0);
 		} else {
 			throw GameDataError(
 			   "Unknown argument '%s'. Usage: %s=soldier:attack|defense|evade|health level:<number>",
 			   item.first.c_str(), action_name.c_str());
 		}
 	}
-	return result;
 }
 
 /* RST
@@ -454,7 +445,8 @@ ProductionProgram::ActReturn::Negation::description_negation(const Descriptions&
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWare::evaluate(const ProductionSite& ps) const {
-	return ps.infinite_production() || ps.get_economy(wwWARE)->needs_ware_or_worker(ware_type);
+	return ps.infinite_production() ||
+	       ps.get_economy(wwWARE)->needs_ware_or_worker(ware_type, &ps.base_flag());
 }
 std::string ProductionProgram::ActReturn::EconomyNeedsWare::description(
    const Descriptions& descriptions) const {
@@ -474,7 +466,8 @@ std::string ProductionProgram::ActReturn::EconomyNeedsWare::description_negation
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWorker::evaluate(const ProductionSite& ps) const {
-	return ps.infinite_production() || ps.get_economy(wwWORKER)->needs_ware_or_worker(worker_type);
+	return ps.infinite_production() ||
+	       ps.get_economy(wwWORKER)->needs_ware_or_worker(worker_type, &ps.base_flag());
 }
 std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description(
    const Descriptions& descriptions) const {
@@ -526,11 +519,12 @@ bool ProductionProgram::ActReturn::SiteHas::evaluate(const ProductionSite& ps) c
 
 std::string
 ProductionProgram::ActReturn::SiteHas::description(const Descriptions& descriptions) const {
-	std::vector<std::string> condition_list;
+	std::vector<std::string> condition_list(group.first.size());
+	size_t i = 0;
 	for (const auto& entry : group.first) {
-		condition_list.push_back(entry.second == wwWARE ?
-                                  descriptions.get_ware_descr(entry.first)->descname() :
-                                  descriptions.get_worker_descr(entry.first)->descname());
+		condition_list.at(i++) =
+		   (entry.second == wwWARE ? descriptions.get_ware_descr(entry.first)->descname() :
+		                             descriptions.get_worker_descr(entry.first)->descname());
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
@@ -549,11 +543,12 @@ ProductionProgram::ActReturn::SiteHas::description(const Descriptions& descripti
 
 std::string ProductionProgram::ActReturn::SiteHas::description_negation(
    const Descriptions& descriptions) const {
-	std::vector<std::string> condition_list;
+	std::vector<std::string> condition_list(group.first.size());
+	size_t i = 0;
 	for (const auto& entry : group.first) {
-		condition_list.push_back(entry.second == wwWARE ?
-                                  descriptions.get_ware_descr(entry.first)->descname() :
-                                  descriptions.get_worker_descr(entry.first)->descname());
+		condition_list.at(i++) =
+		   (entry.second == wwWARE ? descriptions.get_ware_descr(entry.first)->descname() :
+		                             descriptions.get_worker_descr(entry.first)->descname());
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
@@ -781,16 +776,15 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 			   /** TRANSLATORS: "Completed working because the economy needs the ware '%s'" */
 			   _("Completed %1$s because %2$s"), ps.top_state().program->descname(), condition_string);
 		} break;
-		case ProgramResult::kSkipped: {
+		case ProgramResult::kSkipped:
+		case ProgramResult::kNone: {
+			// TODO(GunChleoc): kNone same as kSkipped - is this on purpose?
 			result_string = format(
 			   /** TRANSLATORS: "Skipped working because the economy needs the ware '%s'" */
 			   _("Skipped %1$s because %2$s"), ps.top_state().program->descname(), condition_string);
 		} break;
-		case ProgramResult::kNone: {
-			// TODO(GunChleoc): Same as skipped - is this on purpose?
-			result_string = format(
-			   _("Skipped %1$s because %2$s"), ps.top_state().program->descname(), condition_string);
-		}
+		default:
+			NEVER_HERE();
 		}
 		if (ps.production_result() != ps.descr().out_of_resource_heading() ||
 		    ps.descr().out_of_resource_heading().empty()) {
@@ -935,6 +929,8 @@ void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
 		ps.program_timer_ = true;
 		ps.program_time_ = ps.schedule_act(game, Duration(10));
 		break;
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -1051,6 +1047,33 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 	for (const std::string& bobname : workerprogram->created_bobs()) {
 		descr->add_created_bob(bobname);
 	}
+
+	const DescriptionMaintainer<ImmovableDescr>& all_immovables = descriptions.immovables();
+
+	for (const auto& object_info : workerprogram->needed_named_map_objects()) {
+		// Add needed entities
+		if (object_info.first == MapObjectType::IMMOVABLE) {
+			descr->add_needed_immovable(object_info.second);
+		}
+	}
+	for (const auto& object_info : workerprogram->collected_named_map_objects()) {
+		const MapObjectType mapobjecttype = object_info.first;
+
+		// Add collected entities
+		switch (mapobjecttype) {
+		case MapObjectType::IMMOVABLE: {
+			descr->add_collected_immovable(object_info.second);
+			const Widelands::DescriptionIndex immo_id = all_immovables.get_index(object_info.second);
+			const ImmovableDescr& immovable_descr = all_immovables.get(immo_id);
+			const_cast<ImmovableDescr&>(immovable_descr).add_collected_by(descriptions, descr->name());
+		} break;
+		case MapObjectType::BOB: {
+			descr->add_collected_bob(object_info.second);
+		} break;
+		default:
+			NEVER_HERE();
+		}
+	}
 }
 
 void ProductionProgram::ActCallWorker::execute(Game& game, ProductionSite& ps) const {
@@ -1100,20 +1123,13 @@ Blocks the execution of the program for the specified duration. Example:
          "callworker=scout"
       }
 */
-ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments,
-                                      const ProductionSiteDescr& psite) {
+ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments) {
 	if (arguments.size() != 1) {
 		throw GameDataError("Usage: sleep=duration:<duration>");
 	}
 	const std::pair<std::string, std::string> item = read_key_value_pair(arguments.front(), ':');
 	if (item.first == "duration") {
-		duration_ = read_duration(item.second, psite);
-	} else if (item.second.empty()) {
-		// TODO(GunChleoc): Compatibility, remove after v1.0
-		duration_ = read_duration(item.first, psite);
-		log_warn("'sleep' program without parameter name is deprecated, please use "
-		         "'sleep=duration:<duration>' in %s\n",
-		         psite.name().c_str());
+		duration_ = read_duration(item.second);
 	} else {
 		throw GameDataError(
 		   "Unknown argument '%s'. Usage: duration:<duration>", arguments.front().c_str());
@@ -1266,11 +1282,12 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 		for (const auto& group : l_groups) {
 			assert(!group.first.empty());
 
-			std::vector<std::string> ware_list;
+			std::vector<std::string> ware_list(group.first.size());
+			size_t i = 0;
 			for (const auto& entry : group.first) {
-				ware_list.push_back(entry.second == wwWARE ?
-                                   tribe.get_ware_descr(entry.first)->descname() :
-                                   tribe.get_worker_descr(entry.first)->descname());
+				ware_list.at(i++) =
+				   (entry.second == wwWARE ? tribe.get_ware_descr(entry.first)->descname() :
+				                             tribe.get_worker_descr(entry.first)->descname());
 			}
 			std::string ware_string = i18n::localize_list(ware_list, i18n::ConcatenateWith::OR);
 
@@ -1545,42 +1562,27 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 	}
 	experience_chance_ = 0U;
 
-	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
-		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
-		log_warn("Using old syntax in %s. Please use 'mine=<resource name> radius:<number> "
-		         "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>] [no_notify]'",
-		         descr->name().c_str());
-		resource_ = descriptions.load_resource(arguments.front());
-		workarea_ = read_positive(arguments.at(1));
-		max_resources_ = read_positive(arguments.at(2)) * 100U;
-		depleted_chance_ = read_positive(arguments.at(3)) * 100U;
-		if (arguments.size() == 5) {
-			experience_chance_ = read_positive(arguments.at(4)) * 100U;
-		}
-	} else {
-		for (const std::string& argument : arguments) {
-			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
-			if (item.second.empty()) {
-				// The safeguard is for the case that someone creates a resource called "no_notify"
-				if (item.first == "no_notify" && resource_ != INVALID_INDEX) {
-					notify_on_failure_ = false;
-				} else {
-					resource_ = descriptions.load_resource(item.first);
-				}
-			} else if (item.first == "radius") {
-				workarea_ = read_positive(item.second);
-			} else if (item.first == "yield") {
-				max_resources_ = math::read_percent_to_int(item.second);
-			} else if (item.first == "when_empty") {
-				depleted_chance_ = math::read_percent_to_int(item.second);
-			} else if (item.first == "experience_on_fail") {
-				experience_chance_ = math::read_percent_to_int(item.second);
+	for (const std::string& argument : arguments) {
+		const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+		if (item.second.empty()) {
+			// The safeguard is for the case that someone creates a resource called "no_notify"
+			if (item.first == "no_notify" && resource_ != INVALID_INDEX) {
+				notify_on_failure_ = false;
 			} else {
-				throw GameDataError(
-				   "Unknown argument '%s'. Usage: mine=<resource name> radius:<number> "
-				   "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]",
-				   item.first.c_str());
+				resource_ = descriptions.load_resource(item.first);
 			}
+		} else if (item.first == "radius") {
+			workarea_ = read_positive(item.second);
+		} else if (item.first == "yield") {
+			max_resources_ = math::read_percent_to_int(item.second);
+		} else if (item.first == "when_empty") {
+			depleted_chance_ = math::read_percent_to_int(item.second);
+		} else if (item.first == "experience_on_fail") {
+			experience_chance_ = math::read_percent_to_int(item.second);
+		} else {
+			throw GameDataError("Unknown argument '%s'. Usage: mine=<resource name> radius:<number> "
+			                    "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]",
+			                    item.first.c_str());
 		}
 	}
 
@@ -1755,24 +1757,11 @@ ProductionProgram::ActCheckSoldier::ActCheckSoldier(const std::vector<std::strin
 		                    "only available to trainingsites.",
 		                    descr.name().c_str());
 	}
-	if (arguments.size() != 2 && arguments.size() != 3) {
+	if (arguments.size() != 2) {
 		throw GameDataError("Usage: checksoldier=soldier:attack|defense|evade|health level:<number>");
 	}
 
-	if (arguments.size() == 3) {
-		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
-		log_warn("Using old syntax in %s. Please use "
-		         "'checksoldier=soldier:attack|defense|evade|health level:<number>'\n",
-		         descr.name().c_str());
-
-		if (arguments.front() != "soldier") {
-			throw GameDataError("Expected 'soldier' but found '%s'", arguments.front().c_str());
-		}
-		training_.attribute = parse_training_attribute(arguments.at(1));
-		training_.level = read_int(arguments.at(2), 0);
-	} else {
-		training_ = TrainingParameters::parse(arguments, "checksoldier");
-	}
+	training_ = TrainingParameters(arguments, "checksoldier");
 }
 
 void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps) const {
@@ -1787,7 +1776,7 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 		ps.set_production_result(ts->descr().no_soldier_to_train_message());
 		return ps.program_end(game, ProgramResult::kSkipped);
 	}
-	ps.molog(game.get_gametime(), "  Checking soldier (%u) level %d)\n",
+	ps.molog(game.get_gametime(), "  Checking soldier (%u) level %u)\n",
 	         static_cast<unsigned int>(training_.attribute), training_.level);
 
 	const std::vector<Soldier*>::const_iterator soldiers_end = soldiers.end();
@@ -1863,25 +1852,11 @@ ProductionProgram::ActTrain::ActTrain(const std::vector<std::string>& arguments,
 		                    descr.name().c_str());
 	}
 
-	if (arguments.size() != 2 && arguments.size() != 4) {
+	if (arguments.size() != 2) {
 		throw GameDataError("Usage: train=soldier:attack|defense|evade|health level:<number>");
 	}
 
-	if (arguments.size() == 4) {
-		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
-		log_warn("Using old syntax in %s. Please use train=soldier:attack|defense|evade|health "
-		         "level:<number>\n",
-		         descr.name().c_str());
-
-		if (arguments.front() != "soldier") {
-			throw GameDataError("Expected 'soldier' but found '%s'", arguments.front().c_str());
-		}
-
-		training_.attribute = parse_training_attribute(arguments.at(1));
-		training_.level = read_positive(arguments.at(3));
-	} else {
-		training_ = TrainingParameters::parse(arguments, "train");
-	}
+	training_ = TrainingParameters(arguments, "train");
 }
 
 void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const {
@@ -1894,7 +1869,7 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 	const unsigned current_level = ts.checked_soldier_training().level;
 	assert(current_level != INVALID_INDEX);
 
-	ps.molog(game.get_gametime(), "  Training soldier's %u (%d to %d)",
+	ps.molog(game.get_gametime(), "  Training soldier's %u (%u to %u)",
 	         static_cast<unsigned int>(training_.attribute), current_level, training_.level);
 
 	assert(current_level < training_.level);
@@ -1934,6 +1909,8 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 				break;
 			case TrainingAttribute::kTotal:
 				throw wexception("'total' training attribute can't be trained");
+			default:
+				NEVER_HERE();
 			}
 		} catch (...) {
 			throw wexception("Fail training soldier!!");
@@ -1956,14 +1933,27 @@ playsound
 ---------
 Plays a sound effect. See :ref:`map_object_programs_playsound`.
 */
-ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments,
-                                              const ProductionSiteDescr& descr)
-   : parameters(MapObjectProgram::parse_act_play_sound(arguments, descr)) {
+ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments)
+   : parameters(MapObjectProgram::parse_act_play_sound(arguments)) {
 }
 
 void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) const {
 	Notifications::publish(NoteSound(SoundType::kAmbient, parameters.fx, ps.position_,
 	                                 parameters.priority, parameters.allow_multiple));
+	return ps.program_step(game);
+}
+
+/* RST
+script
+------
+Runs a Lua function. See :ref:`map_object_programs_script`.
+*/
+ProductionProgram::ActRunScript::ActRunScript(const std::vector<std::string>& arguments)
+   : parameters(MapObjectProgram::parse_act_script(arguments)) {
+}
+
+void ProductionProgram::ActRunScript::execute(Game& game, ProductionSite& ps) const {
+	MapObjectProgram::do_run_script(game.lua(), &ps, parameters.function);
 	return ps.program_step(game);
 }
 
@@ -2012,28 +2002,18 @@ ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& ar
 		   "Usage: construct=<immovable_name> worker:<program_name> radius:<number>");
 	}
 
-	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
-		// TODO(GunChleoc): Compatibility, remove this argument option after v1.0
-		log_warn("'construct' program without parameter names is deprecated, please use "
-		         "'construct=<immovable_name> worker:<program_name> radius:<number>' in %s\n",
-		         descr->name().c_str());
-		objectname = arguments.at(0);
-		workerprogram = arguments.at(1);
-		radius = read_positive(arguments.at(2));
-	} else {
-		for (const std::string& argument : arguments) {
-			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
-			if (item.first == "worker") {
-				workerprogram = item.second;
-			} else if (item.first == "radius") {
-				radius = read_positive(item.second);
-			} else if (item.second.empty()) {
-				objectname = item.first;
-			} else {
-				throw GameDataError("Unknown parameter '%s'. Usage: construct=<immovable_name> "
-				                    "worker:<program_name> radius:<number>",
-				                    item.first.c_str());
-			}
+	for (const std::string& argument : arguments) {
+		const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+		if (item.first == "worker") {
+			workerprogram = item.second;
+		} else if (item.first == "radius") {
+			radius = read_positive(item.second);
+		} else if (item.second.empty()) {
+			objectname = item.first;
+		} else {
+			throw GameDataError("Unknown parameter '%s'. Usage: construct=<immovable_name> "
+			                    "worker:<program_name> radius:<number>",
+			                    item.first.c_str());
 		}
 	}
 
@@ -2212,8 +2192,8 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				actions_.push_back(
 				   std::unique_ptr<ProductionProgram::Action>(new ActCall(parseinput.arguments)));
 			} else if (parseinput.name == "sleep") {
-				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActSleep(parseinput.arguments, *building)));
+				actions_.push_back(
+				   std::unique_ptr<ProductionProgram::Action>(new ActSleep(parseinput.arguments)));
 			} else if (parseinput.name == "animate") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActAnimate(parseinput.arguments, building)));
@@ -2239,8 +2219,11 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActTrain(parseinput.arguments, *building)));
 			} else if (parseinput.name == "playsound") {
-				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActPlaySound(parseinput.arguments, *building)));
+				actions_.push_back(
+				   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(parseinput.arguments)));
+			} else if (parseinput.name == "script") {
+				actions_.push_back(
+				   std::unique_ptr<ProductionProgram::Action>(new ActRunScript(parseinput.arguments)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActConstruct(parseinput.arguments, name(), building, descriptions)));

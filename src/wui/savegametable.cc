@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -224,7 +224,7 @@ void SavegameTableReplay::create_valid_entry(UI::Table<uintptr_t const>::EntryRe
 void SavegameTableReplay::set_show_filenames(bool show_filenames) {
 	show_filenames_ = show_filenames;
 	set_column_tooltip(2, show_filenames ? _("Filename: Map name (start of replay)") :
-                                          _("Map name (start of replay)"));
+	                                       _("Map name (start of replay)"));
 }
 
 SavegameTableMultiplayer::SavegameTableMultiplayer(UI::Panel* parent,

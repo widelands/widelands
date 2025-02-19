@@ -1,5 +1,5 @@
 execute_process (
-  COMMAND ${PYTHON_EXECUTABLE} ./utils/detect_revision.py
+  COMMAND ${Python3_EXECUTABLE} ./utils/detect_revision.py
   OUTPUT_VARIABLE WL_VERSION
   RESULT_VARIABLE RES_REVDETECT
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}

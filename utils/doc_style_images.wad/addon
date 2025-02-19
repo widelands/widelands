@@ -1,0 +1,10 @@
+[global]
+name="UI: Style images"
+description="Display images of used styles"
+author="kaputtnik"
+version="0.1"
+category="ui_plugin"
+requires=
+min_wl_version="1.2"
+max_wl_version=
+sync_safe="true"

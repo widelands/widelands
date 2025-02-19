@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,6 +35,7 @@
 #include "wui/debugconsole.h"
 #include "wui/mapview.h"
 #include "wui/minimap.h"
+#include "wui/plugins.h"
 #include "wui/quicknavigation.h"
 
 class InfoPanel;
@@ -71,19 +72,21 @@ public:
 	// Available Display Flags
 	// a new flag also needs its corresponding checkbox in options
 	enum {
-		dfShowCensus = 1,              ///< show census report on buildings
-		dfShowStatistics = 2,          ///< show statistics report on buildings
-		dfShowSoldierLevels = 4,       ///< show level information above soldiers
-		dfShowWorkareaOverlap = 8,     ///< highlight overlapping workareas when placing
-		                               //   a constructionsite
-		dfDebug = 16,                  ///< general debugging info
-		dfShowBuildings = 32,          ///<
-		dfShowBuildhelp = 64,          ///< show size of building spaces
-		dfShowMaximumBuildhelp = 128,  ///< show max size of building spaces
-		dfShowGrid = 256,              ///<
-		dfShowImmovables = 512,        ///< show trees, rocks etc.
-		dfShowBobs = 1024,             ///< show animals
-		dfShowResources = 2048,        ///< show water, coal etc. in editor
+		dfShowCensus = 1 << 0,            ///< show census report on buildings
+		dfShowStatistics = 1 << 1,        ///< show statistics report on buildings
+		dfShowSoldierLevels = 1 << 2,     ///< show level information above soldiers
+		dfShowWorkareaOverlap = 1 << 3,   ///< highlight overlapping workareas when placing
+		                                  //   a constructionsite
+		dfDebug = 1 << 4,                 ///< general debugging info
+		dfShowBuildings = 1 << 5,         ///<
+		dfShowBuildhelp = 1 << 6,         ///< show size of building spaces
+		dfShowMaximumBuildhelp = 1 << 7,  ///< show max size of building spaces
+		dfShowGrid = 1 << 8,              ///<
+		dfShowImmovables = 1 << 9,        ///< show trees, rocks etc.
+		dfShowBobs = 1 << 10,             ///< show animals
+		dfShowResources = 1 << 11,        ///< show water, coal etc. in editor
+		dfShowOceans = 1 << 12,           ///< show oceans/fleets in editor
+		dfHeightHeatMap = 1 << 13,        ///< color triangles and edges by height
 	};
 	static constexpr int32_t kDefaultDisplayFlags =
 	   dfShowSoldierLevels | dfShowBuildings | dfShowWorkareaOverlap;
@@ -213,6 +216,11 @@ public:
 	                                       bool avoid_fastclick,
 	                                       bool workarea_preview_wanted);
 	UI::UniqueWindow& show_ship_window(Widelands::Ship* ship);
+	virtual UI::Window* show_attack_window(const Widelands::Coords& /* coords */,
+	                                       Widelands::MapObject* /* object */,
+	                                       bool /* fastclick */) {
+		NEVER_HERE();  // Overridden in InteractivePlayer
+	}
 
 	MapView* map_view() {
 		return &map_view_;
@@ -246,6 +254,20 @@ public:
 		return true;
 	}
 
+	void add_toolbar_plugin(const std::string& action,
+	                        const std::string& icon,
+	                        const std::string& label,
+	                        const std::string& tt,
+	                        const std::string& hotkey);
+	void add_plugin_timer(const std::string& action, uint32_t interval, bool failsafe) {
+		plugin_actions_.add_plugin_timer(action, interval, failsafe);
+	}
+
+	void
+	set_lua_shortcut(const std::string& name, const std::string& action, bool failsafe, bool down) {
+		plugin_actions_.set_keyboard_shortcut(name, action, failsafe, down);
+	}
+
 	UI::Box* toolbar();
 	// Sets the toolbar's position to the bottom middle and configures its background images
 	void finalize_toolbar();
@@ -264,6 +286,8 @@ protected:
 	void rebuild_mapview_menu();
 	// Takes the appropriate action when an item in the mapviewmenu_ is selected
 	void mapview_menu_selected(MapviewMenuEntry entry);
+
+	void add_plugin_menu();
 
 	/// Adds a toolbar button to the toolbar
 	/// \param image_basename:      File path for button image starting from 'images' and without
@@ -444,7 +468,9 @@ private:
 
 	// Map View menu on the toolbar
 	UI::Dropdown<MapviewMenuEntry> mapviewmenu_;
+	UI::Dropdown<std::string> plugins_dropdown_;
 	QuickNavigation quick_navigation_;
+	PluginActions plugin_actions_;
 
 public:
 	MiniMap::Registry minimap_registry_;

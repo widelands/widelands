@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2023 by the Widelands Development Team
+ * Copyright (C) 2011-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,6 +31,7 @@ struct BaseRouteAStar {
 	BaseRouteAStar(Router& router, WareWorker type);
 
 	void routeto(RoutingNode& to, IRoute& route);
+	RoutingNode& route_start(RoutingNode& to);
 
 protected:
 	RoutingNode::Queue open_;
@@ -127,6 +128,8 @@ void RouteAStar<Est_>::push(RoutingNode& node, int32_t cost, RoutingNode* backli
 			open_.decrease_key(&node);
 		}
 	} break;
+	default:
+		NEVER_HERE();
 	}
 }
 

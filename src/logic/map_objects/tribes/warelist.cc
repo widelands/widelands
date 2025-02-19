@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@ namespace Widelands {
 WareList::~WareList() {
 	for (uint32_t id = 0; id < wares_.size(); ++id) {
 		if (wares_[id] != 0u) {
-			log_warn("WareList: %i items of %i left.\n", wares_[id], id);
+			log_warn("WareList: %u items of %u left.\n", wares_[id], id);
 		}
 	}
 }

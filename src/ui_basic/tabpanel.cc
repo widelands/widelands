@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2023 by the Widelands Development Team
+ * Copyright (C) 2003-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -438,8 +438,7 @@ void TabPanel::draw(RenderTarget& dst) {
 			dst.blitrect_scale(
 			   Rectf(x + (kTabPanelButtonHeight - picture_width) / 2.f,
 			         (kTabPanelButtonHeight - picture_height) / 2.f, picture_width, picture_height),
-			   tabs_[idx]->pic, Recti(0, 0, tabs_[idx]->pic->width(), tabs_[idx]->pic->height()), 1,
-			   BlendMode::UseAlpha);
+			   tabs_[idx]->pic, tabs_[idx]->pic->rect(), 1.f, BlendMode::UseAlpha);
 		} else if (tabs_[idx]->rendered_title != nullptr) {
 			tabs_[idx]->rendered_title->draw(
 			   dst, Vector2i(x + kTabPanelTextMargin,

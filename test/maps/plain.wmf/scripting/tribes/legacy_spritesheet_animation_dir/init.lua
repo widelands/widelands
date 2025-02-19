@@ -48,7 +48,7 @@ wl.Descriptions():new_productionsite_type {
          -- These won't be played in the test suite, just testing the table structure.
          sound_effect = {
             path = "sound/hammering/hammering",
-            priority = 64
+            priority = "25%"
          },
          representative_frame = 3
       }

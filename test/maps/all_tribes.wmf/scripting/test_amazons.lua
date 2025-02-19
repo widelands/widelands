@@ -16,28 +16,28 @@ local function init_militarysites(player, sf, total_previous_buildings)
 
    place_militarysite(player, "amazons_patrol_post", sf, 25, 8)
    place_militarysite(player, "amazons_patrol_post", sf, 24, -1)
-   place_militarysite(player, "amazons_patrol_post", sf, 19, 500)
+   place_militarysite(player, "amazons_patrol_post", sf, 19, -12)
 
-   place_militarysite(player, "amazons_patrol_post", sf, 16, 499)
-   place_militarysite(player, "amazons_patrol_post", sf, 15, 495)
-   place_militarysite(player, "amazons_patrol_post", sf, 24, 501)
+   place_militarysite(player, "amazons_patrol_post", sf, 16, -13)
+   place_militarysite(player, "amazons_patrol_post", sf, 15, -17)
+   place_militarysite(player, "amazons_patrol_post", sf, 24, -11)
 
-   place_militarysite(player, "amazons_treetop_sentry", sf, 0, 496)
+   place_militarysite(player, "amazons_treetop_sentry", sf, 0, -16)
 
    -- Military medium
-   place_militarysite(player, "amazons_warriors_dwelling", sf, 9, 499)
+   place_militarysite(player, "amazons_warriors_dwelling", sf, 9, -13)
    place_militarysite(player, "amazons_warriors_dwelling", sf, 6, 28)
 
-   place_militarysite(player, "amazons_tower", sf, 509, 23)
-   place_militarysite(player, "amazons_tower", sf, 505, 494)
+   place_militarysite(player, "amazons_tower", sf, -3, 23)
+   place_militarysite(player, "amazons_tower", sf, -7, -18)
 
-   place_militarysite(player, "amazons_observation_tower", sf, 491, 23)
+   place_militarysite(player, "amazons_observation_tower", sf, -21, 23)
    place_militarysite(player, "amazons_observation_tower", sf, 23, 12)
 
    -- Military big
-   place_militarysite(player, "amazons_fortification", sf, 503, 500)
+   place_militarysite(player, "amazons_fortification", sf, -9, -12)
    place_militarysite(player, "amazons_fortification", sf, 11, 28)
-   place_militarysite(player, "amazons_fortification", sf, 507, 26)
+   place_militarysite(player, "amazons_fortification", sf, -5, 26)
 
    return count_buildings(player, total_previous_buildings, 30)
 end
@@ -49,18 +49,18 @@ local function init_warehouses(player, sf, total_previous_buildings)
    print("--------------------------------------------")
 
    -- Ports and warehouses
-   place_warehouse(player, "amazons_port", sf, 11, 509)
+   place_warehouse(player, "amazons_port", sf, 11, -3)
    building = place_warehouse(player, "amazons_port", sf, 18, 13)
    connected_road("normal", player, building.flag, "br,bl,bl|br,bl")
 
-   building = place_warehouse(player, "amazons_warehouse", sf, 498, 501)
+   building = place_warehouse(player, "amazons_warehouse", sf, -14, -11)
    connected_road("normal", player, building.flag, "r,br,r")
 
    building = place_warehouse(player, "amazons_warehouse", sf, 24, 10)
    connected_road("normal", player, building.flag, "tr,tr|tr,tr|tl,tr")
    connected_road("normal", player, building.flag, "bl,bl|bl,bl|bl,bl|bl,bl")
 
-   building = place_warehouse(player, "amazons_warehouse", sf, 11, 495)
+   building = place_warehouse(player, "amazons_warehouse", sf, 11, -17)
    connected_road("normal", player, building.flag, "br,br,br|br,br|br,br|br,br")
 
    return count_buildings(player, total_previous_buildings, 5)
@@ -73,7 +73,7 @@ local function init_shipconstruction(player, sf, total_previous_buildings)
 
    -- Shipyards and ferry yards
    building = place_safe_building(player, "amazons_shipyard", sf, 15, 18)
-   building = place_safe_building(player, "amazons_shipyard", sf, 8, 510)
+   building = place_safe_building(player, "amazons_shipyard", sf, 8, -2)
    connected_road("normal", player, building.flag, "bl,br")
 
    building = place_safe_building(player, "amazons_ferry_yard", sf, 8, 13)
@@ -85,10 +85,10 @@ local function init_shipconstruction(player, sf, total_previous_buildings)
    -- Waterway
    connected_road("normal", player, building.flag, "bl,bl")
 
-   local flag = get_safe_field(player, sf, 17, 2).immovable
+   local flag = get_safe_field(sf, 17, 2).immovable
    assert_not_nil(flag)
    connected_road("waterway", player, flag, "bl,br,br,br,br,br,br,br")
-   flag = get_safe_field(player, sf, 20, 10).immovable
+   flag = get_safe_field(sf, 20, 10).immovable
    assert_not_nil(flag)
    connected_road("busy", player, flag, "bl,bl,bl,bl")
 
@@ -102,58 +102,58 @@ local function init_buildingmaterials(player, sf, total_previous_buildings)
 
    -- Building materials small
    -- (near rocks)
-   building = place_safe_building(player, "amazons_stonecutters_hut", sf, 508, 502)
+   building = place_safe_building(player, "amazons_stonecutters_hut", sf, -4, -10)
    connected_road("normal", player, building.flag, "r,r,r")
    connected_road("normal", player, building.flag, "br,br|br,br,r")
 
-   building = place_safe_building(player, "amazons_stonecutters_hut", sf, 511, 502)
+   building = place_safe_building(player, "amazons_stonecutters_hut", sf, -1, -10)
    connected_road("normal", player, building.flag, "r,r,r")
    connected_road("normal", player, building.flag, "br,br|br,br|br,bl|br,br|bl,br")
 
    -- (near trees)
-   building = place_safe_building(player, "amazons_woodcutters_hut", sf, 2, 502)
+   building = place_safe_building(player, "amazons_woodcutters_hut", sf, 2, -10)
    connected_road("normal", player, building.flag, "r,r")
 
-   building = place_safe_building(player, "amazons_jungle_preservers_hut", sf, 4, 502)
+   building = place_safe_building(player, "amazons_jungle_preservers_hut", sf, 4, -10)
    connected_road("normal", player, building.flag, "tr,tr")
 
-   building = place_safe_building(player, "amazons_woodcutters_hut", sf, 5, 500)
+   building = place_safe_building(player, "amazons_woodcutters_hut", sf, 5, -12)
    connected_road("normal", player, building.flag, "tr,tl")
 
-   building = place_safe_building(player, "amazons_jungle_preservers_hut", sf, 5, 498)
+   building = place_safe_building(player, "amazons_jungle_preservers_hut", sf, 5, -14)
    connected_road("normal", player, building.flag, "r,r")
 
-   building = place_safe_building(player, "amazons_liana_cutters_hut", sf, 7, 498)
+   building = place_safe_building(player, "amazons_liana_cutters_hut", sf, 7, -14)
    connected_road("normal", player, building.flag, "tr,r")
 
-   building = place_safe_building(player, "amazons_rare_tree_cutters_hut", sf, 9, 497)
+   building = place_safe_building(player, "amazons_rare_tree_cutters_hut", sf, 9, -15)
    connected_road("normal", player, building.flag, "tr,tr,r")
 
    -- Building materials medium
-   building = place_safe_building(player, "amazons_rope_weaver_booth", sf, 7, 502)
+   building = place_safe_building(player, "amazons_rope_weaver_booth", sf, 7, -10)
    connected_road("normal", player, building.flag, "l,l,l")
    connected_road("normal", player, building.flag, "tr,tl|tl,tr")
 
-   building = place_safe_building(player, "amazons_rope_weaver_booth", sf, 3, 505)
+   building = place_safe_building(player, "amazons_rope_weaver_booth", sf, 3, -7)
    connected_road("normal", player, building.flag, "tr,tr,tr")
    connected_road("normal", player, building.flag, "l,bl")
 
-   building = place_safe_building(player, "amazons_rare_tree_plantation", sf, 511, 506)
+   building = place_safe_building(player, "amazons_rare_tree_plantation", sf, -1, -6)
    connected_road("normal", player, building.flag, "r,r")
 
-   building = place_safe_building(player, "amazons_rare_tree_plantation", sf, 508, 505)
+   building = place_safe_building(player, "amazons_rare_tree_plantation", sf, -4, -7)
    connected_road("normal", player, building.flag, "tr,r")
 
-   building = place_safe_building(player, "amazons_charcoal_kiln", sf, 511, 509)
+   building = place_safe_building(player, "amazons_charcoal_kiln", sf, -1, -3)
    connected_road("normal", player, building.flag, "tr,tr,tl")
    connected_road("normal", player, building.flag, "bl,bl,br")
 
-   building = place_safe_building(player, "amazons_charcoal_kiln", sf, 4, 508)
+   building = place_safe_building(player, "amazons_charcoal_kiln", sf, 4, -4)
    connected_road("normal", player, building.flag, "tr,tr|tl,tr|tl,tl")
    connected_road("normal", player, building.flag, "l,l,l")
 
-   building = place_safe_building(player, "amazons_gardening_center", sf, 1, 508)
-   building = place_safe_building(player, "amazons_gardening_center", sf, 508, 0)
+   building = place_safe_building(player, "amazons_gardening_center", sf, 1, -4)
+   building = place_safe_building(player, "amazons_gardening_center", sf, -4, 0)
 
    return count_buildings(player, total_previous_buildings, 16)
 end
@@ -164,9 +164,9 @@ local function init_food_and_transport(player, sf, total_previous_buildings)
    print("--------------------------------------------")
 
    -- Food and transport small
-   building = place_safe_building(player, "amazons_water_gatherers_hut", sf, 504, 0)
+   building = place_safe_building(player, "amazons_water_gatherers_hut", sf, -8, 0)
    building = place_safe_building(player, "amazons_wilderness_keepers_tent", sf, 4, 0)
-   building = place_safe_building(player, "amazons_wilderness_keepers_tent", sf, 510, 11)
+   building = place_safe_building(player, "amazons_wilderness_keepers_tent", sf, -2, 11)
 
    -- (near water)
    building = place_safe_building(player, "amazons_water_gatherers_hut", sf, 3, 3)
@@ -182,20 +182,20 @@ local function init_food_and_transport(player, sf, total_previous_buildings)
    connected_road("normal", player, building.flag, "bl,bl,bl|bl,bl")
 
    -- (near animals)
-   building = place_safe_building(player, "amazons_hunter_gatherers_hut", sf, 506, 502)
+   building = place_safe_building(player, "amazons_hunter_gatherers_hut", sf, -6, -10)
    connected_road("normal", player, building.flag, "r,r")
 
-   building = place_safe_building(player, "amazons_hunter_gatherers_hut", sf, 504, 502)
+   building = place_safe_building(player, "amazons_hunter_gatherers_hut", sf, -8, -10)
    connected_road("normal", player, building.flag, "r,r")
 
-   building = place_safe_building(player, "amazons_hunter_gatherers_hut", sf, 502, 502)
+   building = place_safe_building(player, "amazons_hunter_gatherers_hut", sf, -10, -10)
    connected_road("normal", player, building.flag, "r,r")
 
-   building = place_safe_building(player, "amazons_hunter_gatherers_hut", sf, 500, 502)
+   building = place_safe_building(player, "amazons_hunter_gatherers_hut", sf, -12, -10)
    connected_road("normal", player, building.flag, "r,r")
 
    -- Food and transport medium
-   building = place_safe_building(player, "amazons_cassava_root_cooker", sf, 510, 14)
+   building = place_safe_building(player, "amazons_cassava_root_cooker", sf, -2, 14)
    connected_road("normal", player, building.flag, "tr,tl,tl")
 
    building = place_safe_building(player, "amazons_cassava_root_cooker", sf, 0, 18)
@@ -213,39 +213,39 @@ local function init_food_and_transport(player, sf, total_previous_buildings)
    building = place_safe_building(player, "amazons_chocolate_brewery", sf, 9, 26)
    connected_road("normal", player, building.flag, "l,l")
 
-   building = place_safe_building(player, "amazons_cassava_root_cooker", sf, 503, 22)
+   building = place_safe_building(player, "amazons_cassava_root_cooker", sf, -9, 22)
    connected_road("normal", player, building.flag, "r,tr,tr")
 
-   building = place_safe_building(player, "amazons_food_preserver", sf, 501, 22)
+   building = place_safe_building(player, "amazons_food_preserver", sf, -11, 22)
    connected_road("normal", player, building.flag, "r,r")
 
-   building = place_safe_building(player, "amazons_chocolate_brewery", sf, 499, 22)
+   building = place_safe_building(player, "amazons_chocolate_brewery", sf, -13, 22)
    connected_road("normal", player, building.flag, "r,r")
 
-   building = place_safe_building(player, "amazons_cassava_root_cooker", sf, 497, 22)
+   building = place_safe_building(player, "amazons_cassava_root_cooker", sf, -15, 22)
    connected_road("normal", player, building.flag, "r,r")
 
-   building = place_safe_building(player, "amazons_food_preserver", sf, 495, 22)
+   building = place_safe_building(player, "amazons_food_preserver", sf, -17, 22)
    connected_road("normal", player, building.flag, "r,r")
 
-   building = place_safe_building(player, "amazons_chocolate_brewery", sf, 493, 22)
+   building = place_safe_building(player, "amazons_chocolate_brewery", sf, -19, 22)
    connected_road("normal", player, building.flag, "r,r")
 
 
    -- Food and transport big
-   building = place_safe_building(player, "amazons_cassava_plantation", sf, 505, 20)
+   building = place_safe_building(player, "amazons_cassava_plantation", sf, -7, 20)
    connected_road("normal", player, building.flag, "tr,tr|tr,tr")
 
-   building = place_safe_building(player, "amazons_cassava_plantation", sf, 507, 16)
+   building = place_safe_building(player, "amazons_cassava_plantation", sf, -5, 16)
    connected_road("normal", player, building.flag, "tr,tr|tl,tr")
 
-   building = place_safe_building(player, "amazons_cassava_plantation", sf, 509, 21)
+   building = place_safe_building(player, "amazons_cassava_plantation", sf, -3, 21)
    connected_road("normal", player, building.flag, "tr,tr|tr,tr")
 
-   building = place_safe_building(player, "amazons_cassava_plantation", sf, 511, 17)
+   building = place_safe_building(player, "amazons_cassava_plantation", sf, -1, 17)
    connected_road("normal", player, building.flag, "tr,tr|tr,tr")
 
-   building = place_safe_building(player, "amazons_cocoa_farm", sf, 511, 25)
+   building = place_safe_building(player, "amazons_cocoa_farm", sf, -1, 25)
    connected_road("normal", player, building.flag, "tr,tr|tr,tr")
 
    building = place_safe_building(player, "amazons_cocoa_farm", sf, 1, 21)
@@ -276,49 +276,49 @@ local function init_tools_and_training(player, sf, total_previous_buildings)
    print("--------------------------------------------")
 
    -- Tools, weapons and training sites medium
-   building = place_safe_building(player, "amazons_furnace", sf, 506, 12)
-   building = place_safe_building(player, "amazons_furnace", sf, 508, 12)
+   building = place_safe_building(player, "amazons_furnace", sf, -6, 12)
+   building = place_safe_building(player, "amazons_furnace", sf, -4, 12)
 
-   building = place_safe_building(player, "amazons_stone_workshop", sf, 496, 18)
+   building = place_safe_building(player, "amazons_stone_workshop", sf, -16, 18)
    connected_road("normal", player, building.flag, "tr,tr")
 
-   building = place_safe_building(player, "amazons_stone_workshop", sf, 497, 16)
+   building = place_safe_building(player, "amazons_stone_workshop", sf, -15, 16)
    connected_road("normal", player, building.flag, "tr,tr")
 
-   building = place_safe_building(player, "amazons_dressmakery", sf, 498, 18)
+   building = place_safe_building(player, "amazons_dressmakery", sf, -14, 18)
    connected_road("normal", player, building.flag, "tr,tr")
 
-   building = place_safe_building(player, "amazons_dressmakery", sf, 499, 16)
+   building = place_safe_building(player, "amazons_dressmakery", sf, -13, 16)
    connected_road("normal", player, building.flag, "tr,tr")
 
-   building = place_safe_building(player, "amazons_dressmakery", sf, 500, 18)
+   building = place_safe_building(player, "amazons_dressmakery", sf, -12, 18)
    connected_road("normal", player, building.flag, "tr,tr")
 
-   building = place_safe_building(player, "amazons_dressmakery", sf, 501, 16)
+   building = place_safe_building(player, "amazons_dressmakery", sf, -11, 16)
    connected_road("normal", player, building.flag, "tr,tr")
 
-   building = place_safe_building(player, "amazons_initiation_site", sf, 502, 18)
+   building = place_safe_building(player, "amazons_initiation_site", sf, -10, 18)
    connected_road("normal", player, building.flag, "tr,tr")
 
-   building = place_safe_building(player, "amazons_initiation_site", sf, 503, 16)
+   building = place_safe_building(player, "amazons_initiation_site", sf, -9, 16)
    connected_road("normal", player, building.flag, "tr,tr")
 
-   building = place_safe_building(player, "amazons_warriors_gathering", sf, 495, 507)
+   building = place_safe_building(player, "amazons_warriors_gathering", sf, -17, -5)
    connected_road("normal", player, building.flag, "bl,bl,l")
    connected_road("normal", player, building.flag, "tr,tr,tl,tr")
 
-   building = place_safe_building(player, "amazons_warriors_gathering", sf, 496, 503)
+   building = place_safe_building(player, "amazons_warriors_gathering", sf, -16, -9)
    connected_road("normal", player, building.flag, "tr,r,tr")
 
-   building = place_safe_building(player, "amazons_warriors_gathering", sf, 496, -1)
+   building = place_safe_building(player, "amazons_warriors_gathering", sf, -16, -1)
    connected_road("normal", player, building.flag, "tr,r|tr,r")
 
    -- Tools, weapons and training sites big
-   building = place_safe_building(player, "amazons_training_glade", sf, 493, 509)
+   building = place_safe_building(player, "amazons_training_glade", sf, -19, -3)
    connected_road("normal", player, building.flag, "br,br|r,r")
 
-   building = place_safe_building(player, "amazons_training_glade", sf, 502, 509)
-   building = place_safe_building(player, "amazons_training_glade", sf, 502, 506)
+   building = place_safe_building(player, "amazons_training_glade", sf, -10, -3)
+   building = place_safe_building(player, "amazons_training_glade", sf, -10, -6)
    connected_road("normal", player, building.flag, "br,bl,bl")
 
    return count_buildings(player, total_previous_buildings, 16)
@@ -330,54 +330,54 @@ local function init_mines(player, sf, total_previous_buildings)
    print("--------------------------------------------")
 
    -- Mines
-   building = place_safe_building(player, "amazons_stonemine", sf, 504, 4)
+   building = place_safe_building(player, "amazons_stonemine", sf, -8, 4)
    connected_road("normal", player, building.flag, "tr,tr|tr,tr")
    connected_road("normal", player, building.flag, "br,r")
 
-   building = place_safe_building(player, "amazons_stonemine", sf, 506, 5)
+   building = place_safe_building(player, "amazons_stonemine", sf, -6, 5)
    connected_road("normal", player, building.flag, "tr,tr,tr|tr,tr")
 
-   building = place_safe_building(player, "amazons_stonemine", sf, 505, 8)
+   building = place_safe_building(player, "amazons_stonemine", sf, -7, 8)
    connected_road("normal", player, building.flag, "tr,tr,tl")
 
-   building = place_safe_building(player, "amazons_stonemine", sf, 503, 8)
+   building = place_safe_building(player, "amazons_stonemine", sf, -9, 8)
    connected_road("normal", player, building.flag, "r,r")
 
-   building = place_safe_building(player, "amazons_stonemine", sf, 500, 1)
+   building = place_safe_building(player, "amazons_stonemine", sf, -12, 1)
    connected_road("normal", player, building.flag, "tr,tr|tr,tr")
 
-   building = place_safe_building(player, "amazons_stonemine", sf, 498, 2)
+   building = place_safe_building(player, "amazons_stonemine", sf, -14, 2)
    connected_road("normal", player, building.flag, "tr,r")
 
-   building = place_safe_building(player, "amazons_stonemine", sf, 497, 3)
+   building = place_safe_building(player, "amazons_stonemine", sf, -15, 3)
    connected_road("normal", player, building.flag, "r,tr")
 
-   building = place_safe_building(player, "amazons_stonemine", sf, 502, 3)
+   building = place_safe_building(player, "amazons_stonemine", sf, -10, 3)
    connected_road("normal", player, building.flag, "l,tl,tl")
 
-   building = place_safe_building(player, "amazons_gold_digger_dwelling", sf, 501, 8)
+   building = place_safe_building(player, "amazons_gold_digger_dwelling", sf, -11, 8)
    connected_road("normal", player, building.flag, "r,r")
 
-   building = place_safe_building(player, "amazons_gold_digger_dwelling", sf, 499, 8)
+   building = place_safe_building(player, "amazons_gold_digger_dwelling", sf, -13, 8)
    connected_road("normal", player, building.flag, "r,r")
 
-   building = place_safe_building(player, "amazons_gold_digger_dwelling", sf, 497, 8)
+   building = place_safe_building(player, "amazons_gold_digger_dwelling", sf, -15, 8)
    connected_road("normal", player, building.flag, "r,r")
 
-   building = place_safe_building(player, "amazons_gold_digger_dwelling", sf, 500, 12)
+   building = place_safe_building(player, "amazons_gold_digger_dwelling", sf, -12, 12)
    connected_road("normal", player, building.flag, "tr,tr,tr,tl")
    connected_road("normal", player, building.flag, "br,bl")
 
-   building = place_safe_building(player, "amazons_gold_digger_dwelling", sf, 495, 8)
+   building = place_safe_building(player, "amazons_gold_digger_dwelling", sf, -17, 8)
    connected_road("normal", player, building.flag, "r,r")
 
-   building = place_safe_building(player, "amazons_gold_digger_dwelling", sf, 493, 8)
+   building = place_safe_building(player, "amazons_gold_digger_dwelling", sf, -19, 8)
    connected_road("normal", player, building.flag, "r,r")
 
-   building = place_safe_building(player, "amazons_gold_digger_dwelling", sf, 495, 4)
+   building = place_safe_building(player, "amazons_gold_digger_dwelling", sf, -17, 4)
    connected_road("normal", player, building.flag, "r,tr")
 
-   building = place_safe_building(player, "amazons_gold_digger_dwelling", sf, 493, 4)
+   building = place_safe_building(player, "amazons_gold_digger_dwelling", sf, -19, 4)
    connected_road("normal", player, building.flag, "r,r")
    connected_road("normal", player, building.flag, "l,l,tl")
 
@@ -390,7 +390,6 @@ function init_amazons(player)
    assert_equal("amazons", player.tribe.name)
 
    local sf = wl.Game().map.player_slots[player.number].starting_field
-   map = wl.Game().map
 
    -- Headquarters
    place_warehouse(player, "amazons_headquarters", sf, 0, 0)
@@ -404,7 +403,7 @@ function init_amazons(player)
    total_buildings = init_mines(player, sf, total_buildings)
 
    -- Construction
-   player:place_building("amazons_training_glade", map:get_field((sf.x + 510) % 512, (sf.y + 3) % 512), true, true)
+   player:place_building("amazons_training_glade", get_safe_field(sf, -2, 3), true, true)
 
    -- Test ships
    place_player_ship(player.number)
