@@ -359,7 +359,6 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		                UI::Box::Horizontal);
 		settings_box->add(&soldier_preference_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		// TODO(Nordfriese): Use box layout
-		constexpr int kButtonSize = 32;
 		Panel& soldier_preference_panel =
 		   *new Panel(&soldier_preference_box, UI::PanelStyle::kWui, "soldier_preference_panel", 0, 0,
 		              kButtonSize * 3, kButtonSize);
