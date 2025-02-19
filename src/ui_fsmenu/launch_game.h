@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,6 +51,7 @@ public:
 	void update_custom_starting_positions();
 	void update_fogless();
 	void update_forbid_diplomacy();
+	void update_naval_warfare();
 
 protected:
 	std::unique_ptr<LuaInterface> lua_;
@@ -70,7 +71,8 @@ protected:
 
 	/// Loads all win conditions that can be played with the map into the selection dropdown.
 	/// Disables the dropdown if the map is a scenario.
-	void update_win_conditions();
+	/// Also loads the selected map's or savegame's tags and checks whether seafaring is available.
+	void update_tags_and_win_conditions();
 	/// Reads the win conditions that are available for the given map tags and adds the entries to
 	/// the
 	/// dropdown.
@@ -108,6 +110,7 @@ protected:
 	GameController* ctrl_;
 
 	bool peaceful_mode_forbidden_{false};
+	bool map_is_seafaring_{false};
 
 private:
 	void add_all_widgets();

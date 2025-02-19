@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2023 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -79,14 +79,6 @@ bool NetAddress::is_ipv6() const {
 
 bool NetAddress::is_valid() const {
 	return port != 0 && !ip.is_unspecified();
-}
-
-CmdNetCheckSync::CmdNetCheckSync(const Time& dt, SyncReportCallback cb)
-   : Command(dt), callback_(std::move(cb)) {
-}
-
-void CmdNetCheckSync::execute(Widelands::Game& /* game */) {
-	callback_();
 }
 
 NetworkTime::NetworkTime() {

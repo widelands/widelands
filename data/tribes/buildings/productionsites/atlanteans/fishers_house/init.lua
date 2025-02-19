@@ -41,6 +41,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
          descname = _("fishing"),
          actions = {
+            -- time of worker: 16.7-45.5 sec, min+max average 31.1 sec
+            -- min. time total: 16.7 + 9.5 = 26.2 sec
+            -- max. time total: 45.5 + 9.5 = 55 sec
+            -- avg. time total: 31.1 + 9.5 = 40.6 sec
             "callworker=fish",
             "sleep=duration:9s500ms"
          }

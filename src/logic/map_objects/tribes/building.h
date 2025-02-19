@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,7 @@ namespace Widelands {
 class InputQueue;
 class Request;
 
-constexpr float kBuildingSilhouetteOpacity = 0.3f;
+constexpr Duration kSoldierSwapTime(20000);
 
 /* The value 'true' means that the DescriptionIndex is a normal building, as
  * happens e.g. when enhancing a building. The value 'false' means that the
@@ -262,6 +262,7 @@ public:
 	bool get_passable() const override;
 
 	Flag& base_flag() override;
+	const Flag& base_flag() const override;
 	virtual uint32_t get_playercaps() const;
 
 	virtual Coords get_position() const {
@@ -277,6 +278,8 @@ public:
 
 	PositionList get_positions(const EditorGameBase&) const override;
 
+	// Don't make this virtual for performance reasons. See implementation for examples
+	// of handling special cases.
 	std::string info_string(const InfoStringFormat& format);
 
 	// Return the overlay string that is displayed on the map view when enabled

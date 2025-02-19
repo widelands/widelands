@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2023 by the Widelands Development Team
+ * Copyright (C) 2016-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 
 #include "base/string.h"
 #include "graphic/image_cache.h"
+#include "graphic/style_manager.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 
@@ -56,4 +57,38 @@ const Image* playercolor_image(const RGBColor& clr, const std::string& image_fil
 
 const Image* playercolor_image(int player_number, const std::string& image_filename) {
 	return playercolor_image(kPlayerColors[player_number], image_filename);
+}
+
+std::pair<const Image*, float>
+playercolor_image(const RGBColor& clr, const std::string& image_filename, const float scale) {
+	const uint8_t mipmap_bitset = g_image_cache->get_mipmap_bitset(image_filename);
+
+	if (mipmap_bitset == 0) {  // No mipmaps
+		return {playercolor_image(clr, image_filename), 1.f};
+	}
+
+	// Logic is the same as in InteractiveBase::get_buildhelp_overlay
+	int best_s = -1;
+	for (int s = ImageCache::kScalesCount - 1; s >= 0; --s) {
+		if ((mipmap_bitset & (1 << s)) == 0) {
+			// No mipmap at this scale
+			continue;
+		}
+
+		if (best_s < 0) {
+			best_s = s;
+			continue;
+		}
+
+		if (ImageCache::kScales[s].first < scale) {
+			break;
+		}
+
+		best_s = s;
+	}
+
+	assert(best_s >= 0);
+	std::string resolved = image_filename;
+	resolved.insert(resolved.rfind('.'), ImageCache::kScales[best_s].second);
+	return {playercolor_image(clr, resolved), ImageCache::kScales[best_s].first};
 }

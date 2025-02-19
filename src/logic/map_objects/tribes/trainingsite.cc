@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -109,7 +109,7 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 				if (from_checksoldier.level >= checkme.level) {
 					throw GameDataError(
 					   "Trainingsite '%s' is trying to train a soldier attribute from level "
-					   "%d to %d, but the 'checksoldier' action's level must be lower "
+					   "%u to %u, but the 'checksoldier' action's level must be lower "
 					   "than the 'train' action's level in program '%s'",
 					   name().c_str(), from_checksoldier.level, checkme.level, program.first.c_str());
 				}
@@ -132,8 +132,7 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 		no_soldier_to_train_message_ = items_table->get_string("no_soldier");
 		no_soldier_for_training_level_message_ = items_table->get_string("no_soldier_for_level");
 	} else {
-		// TODO(GunChleoc): API compatibility - require this after v1.0
-		log_warn("Training site '%s' is lacking its 'messages' table", name().c_str());
+		throw GameDataError("Training site '%s' is lacking its 'messages' table", name().c_str());
 	}
 }
 
@@ -160,10 +159,9 @@ unsigned TrainingSiteDescr::get_min_level(const TrainingAttribute at) const {
 		return min_defense_;
 	case TrainingAttribute::kEvade:
 		return min_evade_;
-	case TrainingAttribute::kTotal:
+	default:
 		throw wexception("Unknown attribute value!");
 	}
-	NEVER_HERE();
 }
 
 /**
@@ -182,10 +180,9 @@ unsigned TrainingSiteDescr::get_max_level(const TrainingAttribute at) const {
 		return max_defense_;
 	case TrainingAttribute::kEvade:
 		return max_evade_;
-	case TrainingAttribute::kTotal:
+	default:
 		throw wexception("Unknown attribute value!");
 	}
-	NEVER_HERE();
 }
 
 /**
@@ -236,10 +233,9 @@ void TrainingSiteDescr::update_level(TrainingAttribute attrib,
 		max_evade_ = std::max(max_evade_, to_level);
 		train_evade_ = true;
 		return;
-	case TrainingAttribute::kTotal:
+	default:
 		throw wexception("Unknown attribute value!");
 	}
-	NEVER_HERE();
 }
 
 // TODO(sirver): This SoldierControl looks very similar to te one in
@@ -807,17 +803,17 @@ void TrainingSite::drop_stalled_soldiers(Game& /* game */) {
 					//  - is below maximum, and
 					//  - is not in a stalled state
 					// Check done separately for each art.
-					int32_t level = soldier->get_level(upgrade.attribute);
+					const unsigned level = soldier->get_level(upgrade.attribute);
 
 					// Below maximum -check
-					if (level > upgrade.max) {
+					if (static_cast<int32_t>(level) > upgrade.max) {
 						continue;
 					}
 
 					TypeAndLevel train_tl(upgrade.attribute, level);
 					TrainFailCount::iterator tstep = training_failure_count_.find(train_tl);
 					if (tstep == training_failure_count_.end()) {
-						log_warn("TrainingSite::drop_stalled_soldiers: training step %d,%d "
+						log_warn("TrainingSite::drop_stalled_soldiers: training step %u,%u "
 						         "not found in this school!\n",
 						         static_cast<unsigned int>(upgrade.attribute), level);
 						break;

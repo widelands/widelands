@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,7 +46,7 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                      kSpinboxUnitW,
                      1,
                      1,
-                     MAX_TOOL_AREA + 1,
+                     kMaxToolArea + 1,
                      UI::PanelStyle::kWui,
                      _("Size:"),
                      UI::SpinBox::Units::kNone,
@@ -107,7 +107,7 @@ void EditorToolsizeMenu::set_buttons_enabled(bool enable) {
 	is_updating_ = true;
 	int32_t sbval = radius_ + 1;
 	if (enable) {
-		spinbox_radius_.set_interval(1, MAX_TOOL_AREA + 1);
+		spinbox_radius_.set_interval(1, kMaxToolArea + 1);
 		spinbox_radius_.set_value(sbval);
 
 		spinbox_gap_.set_interval(0, 100);

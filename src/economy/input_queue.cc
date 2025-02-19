@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2023 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -178,6 +178,8 @@ void InputQueue::write(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 		fw.unsigned_8(1);
 		fw.c_string(owner().tribe().get_worker_descr(index_)->name().c_str());
 		break;
+	default:
+		NEVER_HERE();
 	}
 	fw.signed_32(max_size_);
 	fw.signed_32(max_fill_);

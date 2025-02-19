@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2023 by the Widelands Development Team
+ * Copyright (C) 2005-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,7 +74,7 @@ SoundHandler::SoundHandler()
 	SDL_version sdl_version;
 	SDL_GetVersion(&sdl_version);
 	log_info("**** SOUND REPORT ****\n");
-	log_info("SDL version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
+	log_info("SDL version: %u.%u.%u\n", static_cast<unsigned int>(sdl_version.major),
 	         static_cast<unsigned int>(sdl_version.minor),
 	         static_cast<unsigned int>(sdl_version.patch));
 
@@ -86,7 +86,7 @@ SoundHandler::SoundHandler()
 	}
 
 	SDL_MIXER_VERSION(&sdl_version)
-	log_info("SDL_mixer version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
+	log_info("SDL_mixer version: %u.%u.%u\n", static_cast<unsigned int>(sdl_version.major),
 	         static_cast<unsigned int>(sdl_version.minor),
 	         static_cast<unsigned int>(sdl_version.patch));
 

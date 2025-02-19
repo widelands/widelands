@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2023 by the Widelands Development Team
+ * Copyright (C) 2011-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,6 +45,14 @@ bool FindBobShip::accept(Bob* bob) const {
 
 bool FindBobCritter::accept(Bob* bob) const {
 	return bob->descr().type() == MapObjectType::CRITTER;
+}
+
+bool FindBobSoldierAttackingPlayer::accept(Bob* const bob) const {
+	if (upcast(Soldier, soldier, bob)) {
+		return (soldier->get_current_health() != 0u) && soldier->is_attacking_player(game, player) &&
+		       soldier->owner().is_hostile(player);
+	}
+	return false;
 }
 
 }  // namespace Widelands

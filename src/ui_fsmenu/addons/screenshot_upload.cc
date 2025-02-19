@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2023 by the Widelands Development Team
+ * Copyright (C) 2021-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -113,7 +113,8 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
 			ctrl.net().upload_screenshot(info->internal_name, sel, description_.get_text());
 			if (remote != nullptr) {
 				*remote = ctrl.net().fetch_one_remote(remote->internal_name);
-				ctrl.rebuild(false);
+				ctrl.clear_cache_for_browse(remote->internal_name);
+				ctrl.rebuild_browse();
 			}
 			die();
 		} catch (const std::exception& e) {

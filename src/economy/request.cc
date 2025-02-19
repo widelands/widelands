@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,7 +81,7 @@ Request::Request(PlayerImmovable& init_target,
 
 Request::~Request() {
 	// Remove from the economy
-	if (is_open() && (economy_ != nullptr)) {
+	if (economy_ != nullptr) {
 		economy_->remove_request(*this);
 	}
 
@@ -125,6 +125,8 @@ void Request::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 					                    target_.owner().tribe().name().c_str(), wareworker_name.c_str());
 				}
 			} break;
+			default:
+				NEVER_HERE();
 			}
 
 			// Overwrite initial economy because our WareWorker type may have changed
@@ -174,9 +176,7 @@ void Request::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 				}
 			}
 			requirements_.read(fr, game, mol);
-			if (is_open()) {
-				economy_->add_request(*this);
-			}
+			economy_->add_request(*this);
 		} else {
 			throw UnhandledVersionError("Request", packet_version, kCurrentPacketVersion);
 		}
@@ -203,6 +203,8 @@ void Request::write(FileWrite& fw, Game& game, MapObjectSaver& mos) const {
 		assert(game.descriptions().worker_exists(index_));
 		fw.c_string(game.descriptions().get_worker_descr(index_)->name());
 		break;
+	default:
+		NEVER_HERE();
 	}
 
 	fw.unsigned_32(count_);
@@ -238,7 +240,7 @@ Flag& Request::target_flag() const {
  */
 Time Request::get_base_required_time(const EditorGameBase& egbase, uint32_t const nr) const {
 	if (count_ <= nr) {
-		if (!(count_ == 1 && nr == 1)) {
+		if (count_ != 1 || nr != 1) {
 			log_warn_time(egbase.get_gametime(),
 			              "Request::get_base_required_time: WARNING nr = %u but count is %u, "
 			              "which is not allowed according to the comment for this function\n",
@@ -281,7 +283,7 @@ uint32_t Request::get_priority(const int32_t cost) const {
 	assert(cost >= 0);
 	const WarePriority& priority =
 	   (target_building_ != nullptr ? target_building_->get_priority(get_type(), get_index()) :
-                                     WarePriority::kNormal);
+	                                  WarePriority::kNormal);
 
 	// Don't allow evicted workers to go straight back inside (bug #4809)
 	const Time& cur_time = economy_->owner().egbase().get_gametime();
@@ -303,7 +305,7 @@ uint32_t Request::get_priority(const int32_t cost) const {
 	}
 
 	const uint32_t req_time = (target_constructionsite_ != nullptr ? get_required_time().get() :
-                                                                    get_last_request_time().get());
+	                                                                 get_last_request_time().get());
 	return
 	   // Linear scaling of request priority depending on
 	   // the building's user-specified ware priority.
@@ -353,11 +355,11 @@ uint32_t Request::get_normalized_transfer_priority() const {
  */
 void Request::set_economy(Economy* const e) {
 	if (economy_ != e) {
-		if ((economy_ != nullptr) && is_open()) {
+		if (economy_ != nullptr) {
 			economy_->remove_request(*this);
 		}
 		economy_ = e;
-		if ((economy_ != nullptr) && is_open()) {
+		if (economy_ != nullptr) {
 			economy_->add_request(*this);
 		}
 	}
@@ -367,8 +369,6 @@ void Request::set_economy(Economy* const e) {
  * Change the number of wares we need.
  */
 void Request::set_count(uint32_t const count) {
-	bool const wasopen = is_open();
-
 	count_ = count;
 
 	// Cancel unneeded transfers. This should be more clever about which
@@ -376,15 +376,6 @@ void Request::set_count(uint32_t const count) {
 	// normal play anyway
 	while (count_ < transfers_.size()) {
 		cancel_transfer(transfers_.size() - 1);
-	}
-
-	// Update the economy
-	if (economy_ != nullptr) {
-		if (wasopen && !is_open()) {
-			economy_->remove_request(*this);
-		} else if (!wasopen && is_open()) {
-			economy_->add_request(*this);
-		}
 	}
 }
 
@@ -443,12 +434,11 @@ void Request::start_transfer(Game& game, Supply& supp) {
 		t = new Transfer(game, *this, ware);
 		break;
 	}
+	default:
+		NEVER_HERE();
 	}
 
 	transfers_.push_back(t);
-	if (!is_open()) {
-		economy_->remove_request(*this);
-	}
 }
 
 /**
@@ -484,16 +474,10 @@ void Request::transfer_finish(Game& game, Transfer& t) {
  * Re-open the request.
  */
 void Request::transfer_fail(Game& /* game */, Transfer& t) {
-	bool const wasopen = is_open();
-
 	t.worker_ = nullptr;
 	t.ware_ = nullptr;
 
 	remove_transfer(find_transfer(t));
-
-	if (!wasopen) {
-		economy_->add_request(*this);
-	}
 }
 
 /// Cancel the transfer with the given index.

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,8 +74,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 
 	uint32_t frame_index =
 	   totaltime.get() != 0u ?
-         std::min(completedtime.get() * total_frames / totaltime.get(), total_frames - 1) :
-         0;
+	      std::min(completedtime.get() * total_frames / totaltime.get(), total_frames - 1) :
+	      0;
 	uint32_t animation_index = 0;
 	while (frame_index >= animations[animation_index].second) {
 		frame_index -= animations[animation_index].second;
@@ -91,7 +91,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		opacity = 1.0f;
 	} else {
 		player_color_to_draw = nullptr;
-		opacity = kBuildingSilhouetteOpacity;
+		opacity = kImmovableSilhouetteOpacity;
 	}
 
 	// Initialize variable to make checks happy
@@ -299,7 +299,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 		// Put the real building in place
 		Game& game = dynamic_cast<Game&>(egbase);
 		DescriptionIndex becomes_idx = owner().tribe().building_index(building_->name());
-		old_buildings_.push_back(std::make_pair(becomes_idx, true));
+		old_buildings_.emplace_back(becomes_idx, true);
 		Building& b = building_->create(egbase, get_owner(), position_, false, false, old_buildings_);
 		if (Worker* const builder = builder_.get(egbase)) {
 			builder->reset_tasks(game);
@@ -349,8 +349,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 				if (ms->desired_capacity != b.soldier_control()->soldier_capacity()) {
 					b.mutable_soldier_control()->set_soldier_capacity(ms->desired_capacity);
 				}
-				dynamic_cast<MilitarySite&>(b).set_soldier_preference(
-				   ms->prefer_heroes ? SoldierPreference::kHeroes : SoldierPreference::kRookies);
+				dynamic_cast<MilitarySite&>(b).set_soldier_preference(ms->soldier_preference);
 			} else if (upcast(WarehouseSettings, ws, settings_.get())) {
 				Warehouse& site = dynamic_cast<Warehouse&>(b);
 				for (const auto& pair : ws->ware_preferences) {
@@ -362,6 +361,8 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 				if (ws->launch_expedition) {
 					get_owner()->start_or_cancel_expedition(site);
 				}
+				site.mutable_soldier_control()->set_soldier_capacity(ws->desired_capacity);
+				site.set_soldier_preference(ws->soldier_preference);
 			} else {
 				NEVER_HERE();
 			}
@@ -399,8 +400,7 @@ void ConstructionSite::enhance(const EditorGameBase& egbase) {
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 
 	info_.intermediates.push_back(building_);
-	old_buildings_.push_back(
-	   std::make_pair(owner().tribe().building_index(building_->name()), true));
+	old_buildings_.emplace_back(owner().tribe().building_index(building_->name()), true);
 	building_ = owner().tribe().get_building_descr(building_->enhancement());
 	assert(building_);
 	info_.becomes = building_;
@@ -463,6 +463,8 @@ void ConstructionSite::enhance(const EditorGameBase& egbase) {
 			new_settings->worker_preferences[pair.first] = pair.second;
 		}
 		new_settings->launch_expedition = ws->launch_expedition && building_->get_isport();
+		new_settings->desired_capacity = ws->desired_capacity;
+		new_settings->soldier_preference = ws->soldier_preference;
 	} break;
 	case Widelands::MapObjectType::TRAININGSITE: {
 		upcast(const TrainingSiteDescr, td, building_);
@@ -531,7 +533,7 @@ void ConstructionSite::enhance(const EditorGameBase& egbase) {
 		new_settings->desired_capacity = std::max<uint32_t>(
 		   1,
 		   new_desired_capacity(ms->max_capacity, ms->desired_capacity, new_settings->max_capacity));
-		new_settings->prefer_heroes = ms->prefer_heroes;
+		new_settings->soldier_preference = ms->soldier_preference;
 	} break;
 	default:
 		// TODO(Nordfriese): Add support for markets when trading is implemented
@@ -732,7 +734,7 @@ void ConstructionSite::draw(const Time& gametime,
 			   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
 		} else {
 			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(), tanim,
-			                    nullptr, kBuildingSilhouetteOpacity);
+			                    nullptr, kImmovableSilhouetteOpacity);
 		}
 	} else {
 		// Draw the construction site marker
@@ -741,7 +743,7 @@ void ConstructionSite::draw(const Time& gametime,
 			   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
 		} else {
 			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, nullptr,
-			                    kBuildingSilhouetteOpacity);
+			                    kImmovableSilhouetteOpacity);
 		}
 	}
 

@@ -10,7 +10,7 @@ wl.Descriptions():new_carrier_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   ware_hotspot = { -2, 13 },
+   ware_hotspot = { -2, 21 },
 
    spritesheets = {
       idle = {

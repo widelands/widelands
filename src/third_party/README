@@ -7,3 +7,17 @@ Changes
 Eris:
 - removed luac.c. It defined a main() function which could hide our own main()
   eris was linked in.
+
+Tinygettext:
+- Not using the base repository but the fork at `https://github.com/SuperTux/tinygettext`
+  (commit 3a90f67ea59e5b792d634ed159526b040b2ce268 2024-02-16 20:24:54 UTC)
+- Added ig and krl to list of languages in language.cpp
+- CMakeLists: Removed version check
+
+libmd:
+- Based of commit d5b8e853989a73f8fff9dc4e00dccd0b691b84f9 (2024-02-21);
+  heavily customised to embed it into our portable codebase and avoid name collisions with various system headers and libraries.
+- Converted all files to C++, moved them into the "libmd" namespace, and renamed the include guards.
+- Included some of the files that are normally generated semi-automatically.
+- Removed file input functions specific to POSIX.
+- Removed support for MD2, MD4, and RipeMD160.

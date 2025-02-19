@@ -9,6 +9,7 @@ wl_library(wui_sound_options
     graphic_text_layout
     sound
     ui_basic
+    widelands_options
 )
 
 wl_library(wui_chat_ui
@@ -54,6 +55,17 @@ wl_library(wui_mapview_pixelfunctions
     wui_mapview_pixelconstants
 )
 
+wl_library(wui_common_plugins
+  SRCS
+    plugins.h
+    plugins.cc
+  DEPENDS
+    base
+    ui_basic
+    widelands_options
+  USES_SDL2
+)
+
 wl_library(wui_common_suggested_teams
   SRCS
     suggested_teams_box.cc
@@ -89,6 +101,7 @@ wl_library(wui_common_gamedetails
     graphic
     graphic_image_io
     graphic_minimap_renderer
+    graphic_mouse_cursor
     graphic_styles
     graphic_surface
     graphic_text_layout
@@ -321,7 +334,7 @@ wl_library(wui
     io_profile
     logic
     logic_constants
-    logic_commands
+    commands
     logic_exceptions
     logic_filesystem_constants
     logic_game_controller
@@ -343,6 +356,7 @@ wl_library(wui
     widelands_options
     wui_chat_ui
     wui_common_gamedetails
+    wui_common_plugins
     wui_mapview
     wui_mapview_pixelfunctions
     wui_sound_options

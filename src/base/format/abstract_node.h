@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2023 by the Widelands Development Team
+ * Copyright (C) 2021-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,8 @@
 
 #ifndef WL_BASE_FORMAT_ABSTRACT_NODE_H
 #define WL_BASE_FORMAT_ABSTRACT_NODE_H
+
+#include <cstdint>
 
 namespace format_impl {
 

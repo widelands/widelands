@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -69,6 +69,20 @@ void UniqueWindow::Registry::toggle() {
 	} else {
 		open_window();
 	}
+}
+
+/**
+ * Does the window exist? (may be open or minimal)
+ */
+bool UniqueWindow::Registry::exists() const {
+	return window != nullptr;
+}
+
+/**
+ * Is the window open? (not minimal)
+ */
+bool UniqueWindow::Registry::is_open() const {
+	return window != nullptr && !window->is_minimal();
 }
 
 /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@ public:
 		   : minimap_layers(MiniMapLayer::Terrain | MiniMapLayer::Flag | MiniMapLayer::Road |
 		                    MiniMapLayer::Building | MiniMapLayer::Ship | MiniMapLayer::Attack |
 		                    (is_game ? MiniMapLayer::Owner | MiniMapLayer::Traffic :
-                                     MiniMapLayer::StartingPositions | MiniMapLayer::Artifacts)) {
+		                               MiniMapLayer::StartingPositions | MiniMapLayer::Artifacts)) {
 		}
 
 		MiniMap* get_window() const {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -89,6 +89,14 @@ public:
 	                    Recti source_rect,
 	                    float opacity,
 	                    BlendMode blend_mode);
+
+	// Draws 'image' centered in this rendertarget, as large as possible without upscaling,
+	// with or without cropping the image. Shorthand for using blitrect_scale() with
+	// 'destination_rect' calculated automatically using UI::fit_image().
+	void blit_fit(const Image* image,
+	              bool crop,
+	              float opacity = 1.0f,
+	              BlendMode blend_mode = BlendMode::UseAlpha);
 
 	// Like blitrect_scale. See MonochromeBlitProgram for details. Takes by
 	// value on purpose.

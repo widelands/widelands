@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-"""strcasecmp isn't available on win32."""
+"""strcasecmp isn't available on windows."""
 
 error_msg = 'Do not use strcasecmp/strncasecmp. Use iequals instead.'
 
