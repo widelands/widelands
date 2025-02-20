@@ -499,7 +499,7 @@ msgid ""
 "that everybody is working well together. Now, there are other pressing "
 "matters. I called Colionder, my personal cook, before me to get his help "
 "with sorting some things out."
-msgstr "Infrastruktura je vybudována a strávila jsem několik dní ujišťováním se, že vše pracuje, tak jak má. Nyní vyvstaly další naléhavé problémy. Předvolala jsem Coliondera, svého osobního kuchaře, aby mi s nimi pomohl."
+msgstr "Infrastruktura je vybudována a strávila jsem několik dní ujišťováním se, že vše pracuje, tak jak má. Nyní vyvstaly další naléhavé problémy. Předvolala jsem Coliondera, svého osobního kuchaře, aby mi pomohl dát věci do pořádku."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:220
 msgid "Colionder Arrives"
@@ -666,14 +666,14 @@ msgstr "Uvažovala jsem nad tím, Sidole. Myslím, že čas nadešel. Od teď je
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Loftomor Reports"
-msgstr "Lofotomorské zprávy"
+msgstr "Loftomor informuje"
 
 #. TRANSLATORS: Loftomor
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:317
 msgid ""
 "May Satul warm you, Jundlina! We have completed a toolsmithy and now our "
 "toolsmiths will produce new tools in an instant."
-msgstr "Nechť vás Satul vřele zří, Jundlino! Dokončili jsme stavbu kovárny, takže kovář v mžiku oka vyrobí nové nástroje."
+msgstr "Satulova vroucnost s vámi, Jundlino! Dokončili jsme stavbu dílny, takže se náš nástrojář ihned pustí do výroby nových nástrojů."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:320
 msgid "Jundlina Reminds"
@@ -686,7 +686,7 @@ msgid ""
 "please remember that our toolsmiths need to be equipped with a saw. Making "
 "tools is an art for us, requiring a precise tool like a saw, not a brutal "
 "hammer like for the other tribes."
-msgstr "Loftomore, i tobě přejeme Satulovu přízeň.  Vyslechli jsme dobré zprávy.  Pamatuj však, že naši kováři potřebují také pilu. Vyýroba nástrojů je pro nás umění, na které vyžadujeme elegentní nástroje, jako je pila, a ne jen nějaké sprosté kladivo, co by třeba stačilo dalším kmenům."
+msgstr "Satulova vroucnost i s tebou, Loftomore. Tuto výbornou novinu velmi ráda slyším. Pamatuj však, že naši nástrojáři potřebují pilu. Výroba nástrojů je pro nás uměním, které vyžaduje jemný nástroj, jako je pila, a ne nějaké hrubé kladivo, které je používáno jinými kmeny."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"
@@ -746,7 +746,7 @@ msgid ""
 " shall get your buildings. But note that I will not tolerate any rogue "
 "soldier; if similar things happen again, I will make you responsible for "
 "them. Dismissed."
-msgstr "Nebojím se nákladů ani práce, pokud to udrží tvé lidi na uzdě. Dostaneš své budovy. Ale pamatuj si, že nebudu tolerovat žádné hrubé vojáky. Bude-li se něco podobného ještě opakovat, poneseš za to plnou zodpovědnost. Jdi."
+msgstr "Nebojím se nákladů ani práce, pokud to udrží tvé lidi na uzdě. Dostaneš své budovy. Ale pamatuj si, že nebudu tolerovat žádné hrubé vojáky. Mělo by se něco podobného ještě opakovat, poneseš za to plnou zodpovědnost. Jdi."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:370
 msgid "Jundlina Received a Letter"
@@ -760,7 +760,7 @@ msgid ""
 "will start its work soon. I am looking forward to tomorrow; I am very "
 "interested in how our soldiers are trained, and I wonder if the additional "
 "workload will keep them from bullying the civilian population."
-msgstr "Dostala jsem pozvání od Sidola. Zítra bude první den výcviku v nově dokončeném labyrintu. Kobky jsou také dokončeny a brzy se v nich začne trénovat. Nemůžu se dočkat zítřka. Způsob výcviku našich vojáků mě velmi zajímá. Jsem zvědavá, jestli jim další výcvik vyžene z hlavy to šikanování civilního obyvatelstva."
+msgstr "Dostala jsem pozvání od Sidola. Zítra bude první den výcviku v nově dokončeném labyrintu. Kobky jsou také dokončeny a brzy se v nich začne trénovat. Nemůžu se dočkat zítřka. Způsob výcviku našich vojáků mě velmi zajímá. Jsem zvědavá, jestli jim další výcvik vyžene z hlavy to bavení se ponižováním civilního obyvatelstva."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:379
 msgid "Jundlina Considers the Economy"
@@ -780,7 +780,7 @@ msgid ""
 "Another way to take load from our roads is to build warehouses. We have "
 "claimed the mountain now, it seems a good idea to have a warehouse on the "
 "plateau to avoid having to transport everything up and down the slopes."
-msgstr "Dalším způsobem, jak ulehčit dopravě, je postavit sklad. Když jsme nyní zabrali horu, zdá se být rozumné, postavit sklad na plošině a vyhnout se tak tomu, aby se muselo vše přepravovat nahoru a dolů po strmých svazích."
+msgstr "Dalším způsobem jak ulehčit dopravě je postavit sklad. Když jsme nyní zabrali horu, zdá se být rozumné, postavit sklad na plošině a vyhnout se tak tomu, aby se muselo vše přepravovat nahoru a dolů po strmých svazích."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:397
 msgid "A Dangerous Discovery"

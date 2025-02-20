@@ -661,11 +661,11 @@ msgstr "Zobrazit stavební místa"
 #. etc.) are removed
 #: ../../../../src/editor/editorinteractive.cc:484
 msgid "Hide Maximum Building Spaces"
-msgstr "Skrýt největší stavební místa"
+msgstr "Skrýt největší možná stavební místa"
 
 #: ../../../../src/editor/editorinteractive.cc:485
 msgid "Show Maximum Building Spaces"
-msgstr "Zobrazit největší stavební místa"
+msgstr "Zobrazit největší možná stavební místa"
 
 #: ../../../../src/editor/editorinteractive.cc:488
 msgid ""
@@ -801,7 +801,7 @@ msgid ""
 "\n"
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
 "Please add this information to your report."
-msgstr "Došlo k chybě. Chybové hlášení je:\n\n%1$s\n\nPomožte nám vylepšit Widelands tím, že chybu nahlásíte. Ve standartním výstupu  (na Windows je to stdout.txt) najdete propojené zprrávy.Používáte verzi %2$s.\nPřidejte prosím tuto informaci do vaší zprávy."
+msgstr "V průběhu hry se vyskytla chyba. Chybová hláška:\n\n%1$s\n\nProsím nahlaste tento problém, aby mohl být odstraněn. Doprovodné informace lze nalézt ve standardizovaném výstupu (stdout.txt pro Windows). Používáte verzi %2$s.\nProsím uveďte tuto informaci v hlášení."
 
 #: ../../../../src/editor/editorinteractive.cc:1312
 #, c-format
@@ -909,7 +909,7 @@ msgstr "Náhodný hráč"
 #: ../../../../src/editor/tools/increase_height_tool.cc:62
 #, c-format
 msgid "Height: inc./dec. %1$d, set to %2$d"
-msgstr "Výška: změněno o %1$d, nastaveno na  %2$d"
+msgstr "Výška: změnit o %1$d, nastavit na  %2$d"
 
 #. * TRANSLATORS: An entry in the tool history list. Inc. and dec. stand for
 #. increase and
@@ -917,13 +917,13 @@ msgstr "Výška: změněno o %1$d, nastaveno na  %2$d"
 #: ../../../../src/editor/tools/increase_resources_tool.cc:85
 #, c-format
 msgid "%1$s: inc./dec. %2$d, set to %3$d"
-msgstr "%1$s: změnněno o %2$d, nastaveno na %3$d"
+msgstr "%1$s: změnit o %2$d, nastavit na %3$d"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../../../src/editor/tools/noise_height_tool.cc:78
 #, c-format
 msgid "Noise height: %1$d–%2$d"
-msgstr ""
+msgstr "Výškové rozpětí: %1$d–%2$d"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../../../src/editor/tools/place_critter_tool.cc:127
@@ -1816,17 +1816,17 @@ msgstr "%1$s (lze odstranit např. stavbou cesty)"
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:54
 #, c-format
 msgid "%1$s (needs a small building plot)"
-msgstr "%1$s (potřebuje malé stavední místo)"
+msgstr "%1$s (potřebuje malé stavební místo)"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:57
 #, c-format
 msgid "%1$s (needs a medium building plot)"
-msgstr "%1$s (potřebuje středně velké stavední místo)"
+msgstr "%1$s (potřebuje středně velké stavební místo)"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:60
 #, c-format
 msgid "%1$s (needs a big building plot)"
-msgstr "%1$s (potřebuje velké stavední místo)"
+msgstr "%1$s (potřebuje velké stavební místo)"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:101
 msgid "Automatically place the trees which grow best on the terrain"
@@ -1865,7 +1865,7 @@ msgstr "%1%: %2%"
 #: ../../../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:121
 msgid ""
 "Click to restore, Shift + Click to delete, and Ctrl + Click to pin an item."
-msgstr ""
+msgstr "Kliknutím obnovíš nastavení nástroje, Shift+kliknutí smaže zápis a Ctrl+kliknutí připne zápis"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:39
 msgid "Tool Size"
@@ -2382,7 +2382,7 @@ msgstr "Nenastaveno"
 #: ../../../../src/logic/game.cc:288 ../../../../src/logic/game.cc:331
 #: ../../../../src/logic/game.cc:449 ../../../../src/logic/game.cc:504
 msgid "Preloading map…"
-msgstr "Přednahrání mapy…"
+msgstr "Přednahrávání mapy…"
 
 #: ../../../../src/logic/game.cc:387
 msgid "Initializing game…"
@@ -2607,13 +2607,13 @@ msgstr "surovina „%s“ není skladem"
 #. experience'.
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:580
 msgid "a worker needs experience"
-msgstr "dělník potřebuje zkušenosti"
+msgstr "pracovník potřebuje zkušenosti"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:586
 msgid "the workers need no experience"
-msgstr "dělníci nepotřebuje další zkušenosti"
+msgstr "pracovníci nepotřebují další zkušenosti"
 
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:615
 msgid "the fleet needs a ferry"
@@ -3287,7 +3287,7 @@ msgstr "Hra byla pravděpodobně uložena v jiné verzi Widelands nebo s jinými
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:923
 msgid "Please review the current production programs and input settings."
-msgstr ""
+msgstr "Prosím zkontroluj aktuální výrobní program a nastavení vstupů."
 
 #: ../../../../src/map_io/map_saver.cc:85
 #, c-format
@@ -3455,7 +3455,7 @@ msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was reachable at the TCP port %u or the server shut down as"
 " you tried to connect."
-msgstr ""
+msgstr "Hra Widelands nemohla navázat spojení se zadanou adresou. Buďto není na síťovém portu TCP %u dostupný žádný Widelands server, nebo byl v době pokusu o připojení nedostupný."
 
 #: ../../../../src/network/gameclient.cc:817
 #, c-format
@@ -3781,7 +3781,7 @@ msgstr "/kick <user|game> - Vyřadí vybraného hráče nebo hru z metaserveru"
 
 #: ../../../../src/network/internet_gaming.cc:912
 msgid "/ban <user> - Ban a user for 24 hours from the metaserver"
-msgstr "/ban <user> - Na následujících 24 hodin zamezí uživateli v přístupu na meteserver"
+msgstr "/ban <user> - Na následujících 24 hodin zamezí uživateli v přístupu na metaserver"
 
 #: ../../../../src/network/internet_gaming.cc:991
 msgid "Conversion error"
@@ -4511,7 +4511,7 @@ msgstr "Vaše zpráva byla odeslána vývojářskému týmu Widelands, budeme se
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:37
 msgid "Login"
-msgstr "Login"
+msgstr "Přihlášení"
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:72
 #: ../../../../src/ui_fsmenu/addons/manager.cc:484
@@ -4768,7 +4768,7 @@ msgid ""
 " In case they have further inquiries, they will contact you via a PM on the "
 "Widelands website; therefore please check the inbox of your online user "
 "profile page frequently."
-msgstr "Vývojářsky tým Widelands zkontroluje tvé rozšíření brzy po jeho nahraní. Pokud budou mít další požadavky, budou tě kontaktovat pomocí soukromé zprávy na webu Widelands, proto prosím průběžně kontroluj příchozí zprávy na svém uživatelském profilu."
+msgstr "Vývojářský tým Widelands zkontroluje tvé rozšíření brzy po jeho nahrání. Pokud bude třeba, bude tě kontaktovat pomocí soukromé zprávy na webu Widelands, proto si prosím průběžně kontroluj příchozí zprávy na svém uživatelském účtu."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:692
 #, c-format
@@ -4796,7 +4796,7 @@ msgstr "Spravovat instalovaná rozšíření"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:751
 msgid "Browse and install add-ons available on the server"
-msgstr "Procházet a instalovat rozšíření dostupná na servru"
+msgstr "Procházet a instalovat rozšíření dostupná na serveru"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:753
 #, c-format
@@ -5162,7 +5162,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr "Mapu ‘%1$s’ nelze ze servru stáhnout.\n\nChybová zpráva:\n%2$s"
+msgstr "Mapu ‘%1$s’ nelze ze serveru stáhnout.\n\nChybová zpráva:\n%2$s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2059
 #, c-format
@@ -5407,7 +5407,7 @@ msgid ""
 "The add-on ‘%1$s’ specifies a minimum Widelands version of %2$s. However, "
 "none of the contained maps can be loaded with a Widelands version older than"
 " %3$s. The version requirement will automatically be changed accordingly."
-msgstr "Rozšíření ‘%1$s’ požaduje minimálě Widelands verzi %2$s. Ale žádná z obsažených map nemůže být spuštěna ve verzi starší než %3$s. Požadovaná verze bude proto automaticky přenastavena."
+msgstr "Rozšíření ‘%1$s’ požaduje minimálně Widelands verzi %2$s. Ale žádná z obsažených map nemůže být spuštěna ve verzi starší než %3$s. Požadovaná verze bude proto automaticky přenastavena."
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:641
 msgid "Error Writing Addon"
@@ -5901,7 +5901,7 @@ msgid ""
 "%3$s\n"
 "\n"
 "Note that this map can not be downloaded again from the server."
-msgstr "Opravdu chceš odinstalovat tuto mapu?\n\n%1$s\nod %2$s\n%3$s\n\nTuto mapu není možné ze servru znovu stáhnout."
+msgstr "Opravdu chceš odinstalovat tuto mapu?\n\n%1$s\nod %2$s\n%3$s\n\nTuto mapu není možné ze serveru znovu stáhnout."
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:54
 #, c-format
@@ -7210,7 +7210,7 @@ msgid ""
 "An SDL bug in some configurations causes horizontal scroll to be inverted. "
 "We try to detect them, but if we got it wrong, you can fix it here. Please "
 "report if you need to turn this on, so that we can improve the detection."
-msgstr ""
+msgstr "Chyba SDL v nastavení způsobuje převrácení vodorovného skrolování. Snažíme se ji odhalit, ale pokud se nám to nepodaří, můžete problém opravit zde. Prosím nahlaste, pokud máte s tímto problém, abychom mohli vylepšit detekci."
 
 #: ../../../../src/ui_fsmenu/mousewheel_options.cc:502
 msgid "Send feedback"
@@ -7225,7 +7225,7 @@ msgstr "Konflikt v nastavení posunů"
 msgid ""
 "‘%1$s’, ‘%2$s’, or ‘%3$s’ conflicts with the recommended settings. Change "
 "the conflicting setting(s) too?"
-msgstr ""
+msgstr "‘%1$s’, ‘%2$s’, nebo ‘%3$s’ je v konfliktu s doporučeným nastavením. Má se změnit i toto konfliktní nastavení?"
 
 #: ../../../../src/ui_fsmenu/mousewheel_report.cc:50
 msgid "Send Feedback for Inverted Horizontal Scrolling"
@@ -7238,7 +7238,7 @@ msgid ""
 "Please help us improve the detection of inverted horizontal scrolling. To do"
 " so, please report at %s that horizontal scroll direction is wrong with your"
 " configuration. Please include the below technical information."
-msgstr ""
+msgstr "Prosím, pomozte nám vylepšit detekci převráceného vodorovného skrolování. Problém se špatným směrem vodorovného skrolování za daného uživatelského nastavení lze nahlásit na %s. Prosím připojte níže uvedené technické informace."
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:64
 msgid "Role"
@@ -7863,12 +7863,12 @@ msgstr "Parametry příkazového řádku --%1$s a --%2$s nelze kombinovat"
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
-msgstr "Neznámý parameter: %s\nMožná chybí '='?"
+msgstr "Neznámý parametr: %s\nMožná chybí \"=\"?"
 
 #: ../../../../src/wlapplication.cc:1905
 #, c-format
 msgid "Unknown command line parameter: %s"
-msgstr "Neznámý parameter: %s"
+msgstr "Neznámý parametr: %s"
 
 #: ../../../../src/wlapplication.cc:1936
 msgid "Incompatible"
@@ -8160,7 +8160,7 @@ msgstr "Encyklopedie"
 
 #: ../../../../src/wlapplication_options.cc:348
 msgid "Context Menu"
-msgstr ""
+msgstr "Související nabídka"
 
 #: ../../../../src/wlapplication_options.cc:352
 msgid "Cut Text"
@@ -8196,11 +8196,11 @@ msgstr "Změnit hudbu"
 
 #: ../../../../src/wlapplication_options.cc:390
 msgid "Open the Debug Console (developer tool)"
-msgstr "Otevřít ladící konzoli (vývojářstý nástroj)"
+msgstr "Otevřít ladící konzoli (vývojářský nástroj)"
 
 #: ../../../../src/wlapplication_options.cc:395
 msgid "Toggle Cheat Mode (developer tool)"
-msgstr "Přepnout Cheat mode (vývojářský nástroj)"
+msgstr "Přepnout cheatovací mód (vývojářský nástroj)"
 
 #: ../../../../src/wlapplication_options.cc:405
 msgid "Load"
@@ -8619,7 +8619,7 @@ msgstr "Klik"
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr "Dle zvoleného nástroje umístit odpovídající prvek na mapu, nebo zvýšit počet prvků o hodnotu naszavenou v parametru \"Zvýšit/Snížit hodnotu\" nástroje."
+msgstr "Dle zvoleného nástroje umístit odpovídající prvek na mapu, nebo zvýšit počet prvků o hodnotu nastavenou v parametru \"Zvýšit/Snížit hodnotu\" nástroje."
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:1053
@@ -8632,7 +8632,7 @@ msgstr "Shift + klik"
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
-msgstr "Dle zvoleného nástroje odebrat odpovídající prvek z mapy, nebo snížit počet prvků o hodnotu naszavenou v parametru \"Zvýšit/Snížit hodnotu\" nástroje."
+msgstr "Dle zvoleného nástroje odebrat odpovídající prvek z mapy, nebo snížit počet prvků o hodnotu nastavenou v parametru \"Zvýšit/Snížit hodnotu\" nástroje."
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:1058
@@ -9004,7 +9004,7 @@ msgstr "Počet vojáků"
 
 #: ../../../../src/wui/attack_window.cc:383
 msgid "Send less ships. Hold down Ctrl to send no ships"
-msgstr "Poslat méně lodí. Přisoučasném přidržení Ctrl budou odebrány všechny lodě."
+msgstr "Poslat méně lodí. Při současném přidržení Ctrl budou odebrány všechny lodě."
 
 #: ../../../../src/wui/attack_window.cc:384
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
@@ -10437,7 +10437,7 @@ msgstr "Přepínání zobrazení překryvů pracovních oblastí při umisťová
 
 #: ../../../../src/wui/interactive_player.cc:484
 msgid "No current objectives"
-msgstr "Źádné aktivní úkoly"
+msgstr "Žádné aktivní úkoly"
 
 #: ../../../../src/wui/interactive_player.cc:500
 #, c-format
@@ -10561,7 +10561,7 @@ msgstr "Součástí mapy je dějová linie nebo je mapa jinak upravena skriptem"
 #. * TRANSLATORS: This is a map tag
 #: ../../../../src/wui/map_tags.cc:71
 msgid "Free for all"
-msgstr "Free for all"
+msgstr "Všichni proti všem"
 
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../../../src/wui/map_tags.cc:73
@@ -10688,7 +10688,7 @@ msgstr "Cesty"
 
 #: ../../../../src/wui/minimap.cc:226
 msgid "High Traffic"
-msgstr ""
+msgstr "Vytížené cesty"
 
 #: ../../../../src/wui/minimap.cc:237
 msgid "Attacks"

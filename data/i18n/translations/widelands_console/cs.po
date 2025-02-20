@@ -165,7 +165,7 @@ msgstr "[ano*|ne]"
 
 #: ../../../../src/wlapplication_messages.cc:124
 msgid "Play the intro music at startup and show splash image until it ends."
-msgstr ""
+msgstr "Zobrazit úvodní obrazovku a přehrát úvodní znělku v plné délce."
 
 #: ../../../../src/wlapplication_messages.cc:125
 msgid "Force Widelands to crash when a Lua error occurs."
@@ -201,7 +201,7 @@ msgstr "Průběžně upravuje rychlost hry podle zpoždění AI. Používá se p
 
 #: ../../../../src/wlapplication_messages.cc:137
 msgid "Enable the Script Console and Cheating Mode."
-msgstr ""
+msgstr "Aktivuje skriptovací konzoli a cheatovací mód."
 
 #: ../../../../src/wlapplication_messages.cc:139
 msgid "Game options:"
@@ -492,7 +492,7 @@ msgid ""
 "Load the given savegame or replay directly. Useful for .wgf/.wry file "
 "extension association. Does not work with other options. Also see "
 "--loadgame/--replay."
-msgstr ""
+msgstr "Rovnou načíst zavolenou uloženou hru nebo záznam. Praktické ve spojení s příponami .wgf/.wrpl. Nepodporuje jiné varianty. Podobné příkazy --loadgame/--replay."
 
 #. * TRANSLATORS: %s = version information
 #: ../../../../src/wlapplication_messages.cc:302

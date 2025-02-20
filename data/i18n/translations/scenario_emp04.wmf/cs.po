@@ -47,8 +47,8 @@ msgid ""
 "Remember to check the messages and the building status labels for "
 "unproductive buildings."
 msgstr ""
-"Nezapomínej kontrolovat zprávy a stav budov, aby jsi odhalil neproduktivní "
-"budovy."
+"Nezapomínej kontrolovat neproduktivní budovy pomocí zpráv a popisků stavů "
+"budov."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:53
 msgid "Clear all unnecessary roads"
@@ -168,7 +168,7 @@ msgstr "Jednej s Julií a získej technologii"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:123
 msgid "Diplomacy: Trade or War"
-msgstr "Diplomacie: obchod nebo válka"
+msgstr "Diplomacie: obchod, nebo válka"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:124
 msgid ""
@@ -206,7 +206,8 @@ msgid ""
 "To prevent waste of goods, reduce the soldiers to be trained to one per "
 "site."
 msgstr ""
-"Abys zabránil plýtvání surovinami, omez počet vojáků na cvičišti na jednoho."
+"Aby se zabránilo plýtvání surovinami, omez počet vojáků na cvičišti tak, že "
+"budou trénováni po jednom."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:136
 msgid ""
@@ -214,8 +215,9 @@ msgid ""
 "Make sure you don’t have your half trained soldiers garrisoned in a military"
 " building."
 msgstr ""
-"Cvičiště bude pro trénink vždy preferovat nejvhodnějšího vojáka. Ujisti se, "
-"že tvoji zpola vycvičení vojáci nejsou umístěni ve vojenských stavbách."
+"Cvičiště bude pro výcvik vždy preferovat nejvhodnějšího dostupného vojáka. "
+"Ujisti se, že tvoji zpola vycvičení vojáci nejsou umístěni ve vojenských "
+"budovách."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:142
 msgid "Produce at least 10 tools"
@@ -236,7 +238,7 @@ msgid ""
 "Remember that you can control the production amount in the economy settings."
 msgstr ""
 "Nezapomeň, že v nastavení hospodářství lze určovat vyráběná množství "
-"nástrojů."
+"nástrojů i většiny surovin."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:152
 msgid "Recruit new soldiers"
@@ -665,7 +667,7 @@ msgid ""
 "Until we have found the plans, the only option for our farms is to destroy "
 "them."
 msgstr ""
-"Než se nám podaří získat informace ke způsobu stavby, máme jedinou možnost, "
+"Než se nám podaří získat informace ke způsobu stavby, máme jedinou možnost "
 "jak s nimi nakládat a to zbořit je."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:349
@@ -953,8 +955,8 @@ msgid ""
 "Brother, I think this is a rather fair offer. And some good will from any of"
 " our gods could be very helpful as well."
 msgstr ""
-"Bratře, tohle se zdá jako rozumná nabídka. A nějaká ta přízeň božstva nemusí"
-" být také úplně k zahození."
+"Bratře, zdá se to být rozumná nabídka. A nějaká ta přízeň božstva nemusí být"
+" také úplně k zahození."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:466
@@ -996,8 +998,8 @@ msgid ""
 "Furthermore, we will have to live with the guilt of destroying a temple of "
 "an Empire goddess on our souls."
 msgstr ""
-"Navíc naše duše tíží pocit viny, s kterým se nyní budeme muset naučit žít, "
-"za to, že jsme zničili chrám císařské bohyně."
+"Navíc budeme muset žít s vnitřním pocitem viny za to, že jsme zničili chrám "
+"císařské bohyně."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:483
 msgid "Amalea is Very Content"
@@ -1355,7 +1357,7 @@ msgid ""
 "could defeat the little monastery in an instant."
 msgstr ""
 "Pane, pokud potřebujeme ty stavební a výrobní postupy tak bezvýhradně, proč "
-"si je nevybojovat? Takový malý klášter dobudeme hned."
+"si je nevybojovat? Takový malý klášter máme dobytý ráz na ráz."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:636
@@ -1418,10 +1420,10 @@ msgid ""
 "make any deals with the Barbarians either, so, we better keep our soldiers "
 "in good mood and train them adequately."
 msgstr ""
-"Pane, připouštím, že jsme si s velkou pravděpodobností naběhli a rozhněvali "
-"si božstvo, ale v boji často účel světí prostředky. A s Barbary moc "
-"vyjednávat nepůjde, proto by bylo lepší udržovat naše vojáky v dobré náladě "
-"a dobře je výcvičit."
+"Pane, připouštím, že jsme si s velkou pravděpodobností naběhli a poštvali si"
+" božstvo, ale v boji často účel světí prostředky. A s Barbary moc vyjednávat"
+" nepůjde, proto bude lepší udržovat naše vojáky v dobré náladě a dobře je "
+"vycvičit."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:669
 msgid "Saledus asks for a stronger army…"
@@ -1702,7 +1704,7 @@ msgstr "Statek"
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:42
 msgctxt "empire_building"
 msgid "working"
-msgstr "pracuje"
+msgstr "vyrábění"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:49
 msgctxt "empire_building"
@@ -1883,7 +1885,7 @@ msgstr "Výcvikový tábor"
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:84
 msgctxt "empire_building"
 msgid "sleeping"
-msgstr "spí"
+msgstr "podřimování"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:91
 msgctxt "empire_building"

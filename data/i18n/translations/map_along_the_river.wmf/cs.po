@@ -171,7 +171,7 @@ msgstr "Poraž Hjalmara"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:81
 msgid "Defeat the Armies of Hjalmar"
-msgstr "Poraž vojsko Hlajmara"
+msgstr "Poraž vojsko Hjalmara"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:82
 msgid ""
@@ -284,7 +284,7 @@ msgid ""
 " our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
-"Pane, přestože se naši vojáci dokáží bezestrachu postavit jakémukoli "
+"Pane, přestože se naši vojáci dokáží beze strachu postavit jakémukoli "
 "nepříteli, nepřítel na severu je stále silnější než celé naše vojsko. Měli "
 "bychom se vyhnout konfliktu do doby, než ho budeme schopni porazit."
 
@@ -471,7 +471,7 @@ msgid ""
 "mighty enemy in front of us."
 msgstr ""
 "Pane, po našich útocích se piráti snaží reorganizovat s piráty z dalších "
-"kmenů. Mohli by tak získat zpět velkou čás své již ztacené síly. Naše "
+"kmenů. Mohli by tak získat zpět velkou část své již ztracené síly. Naše "
 "ubývající zdroje by mohly být problémem proti tak silnému nepříteli."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
@@ -546,7 +546,7 @@ msgid ""
 "Sire, our scout has returned to our territory, and he has shown us the road "
 "through the swamps towards Hjalmar."
 msgstr ""
-"Pane, náš průzkumník se vrátil zpět a ukázal nám cestu srkz bažinu směrem k "
+"Pane, náš průzkumník se vrátil zpět a ukázal nám cestu skrz bažinu směrem k "
 "Hjalmarovi."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:142

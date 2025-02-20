@@ -60,7 +60,7 @@ msgstr "Tato země je naše země"
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
-msgstr "Tento tutoriál vysvětluje zacházení s vojenskými budovami a cvičišti a také vás uvede do tajů boje."
+msgstr "Tento tutoriál vysvětluje zacházení s vojenskými budovami, cvičišti a podíváme se i na boj."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:14
@@ -153,7 +153,7 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr "Když bůh Atlanťanů ztratil víru v jejich skutky a potopil jejich ostrov, boj jedné ženy za spravedlnost a druhou šanci pro její lid se stal námětem legend. V době, kdy vedla poslední Atlanťany vstříc nové budoucnosti neznámými končinami, stala se Jundlina nejmocnějším člověkem své doby. Avšak tohle jí stálo mnoho, její lidskost a duši."
+msgstr "Když bůh Atlanťanů ztratil víru v jejich skutky a potopil jejich ostrov, boj jedné ženy za spravedlnost a druhou šanci pro její lid se stal námětem legend. V době, kdy vedla poslední Atlanťany vstříc nové budoucnosti neznámými končinami, stala se Jundlina nejmocnější lidskou bytostí své doby. To vše za cenu velkých obětí, její lidskosti a duše."
 
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../../../data/campaigns/campaigns.lua:108
@@ -287,7 +287,7 @@ msgid ""
 "Reebaud and his tribe are living happily in the North. Meanwhile, the "
 "countries they have left behind are all but peaceful, and an old friend is "
 "in desperate need for their help…"
-msgstr "Rýbaud a jeho kmen vedou šťastný život v severních končinách. Ale život v zemích, které opustili, je všechno, jen ne pokojný a starý přítel zoufale potřebuje jeho pomoc…"
+msgstr "Rýbaud a jeho kmen vedou šťastný život v severních končinách. Ale život v zemích, které opustili, je všechno jen ne pokojný a starý přítel zoufale potřebuje jeho pomoc…"
 
 #: ../../../../data/campaigns/fri04.wmf/elemental:8
 msgid "Two Friends Reunited"
@@ -402,7 +402,7 @@ msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But "
 "the ways to encompass these large territories are long and meandering, so it"
 " is easy to err into the land of the foreign clans."
-msgstr "Je velkým štěstím usadit se zde na této členité pevnině. Ale abychom si ji podmanili, budeme muset překonat dlouhou a strastiplnou cestu. Může se lehce stát, že nás dovede k území cizích kmenů."
+msgstr "Je velkým štěstím usadit se zde, na této krásné členité pevnině. Ale abychom si ji podmanili, budeme muset překonat dlouhou a strastiplnou cestu. Může se lehce stát, že nás dovede na území cizích kmenů."
 
 #: ../../../../data/maps/Checkmate.wmf/elemental:8
 msgid "Checkmate"
@@ -413,7 +413,7 @@ msgid ""
 "Whether just one of nature’s strangest features or the creation of a mad "
 "(and game-hungry) god, this weird battleground awaits two opponents for "
 "another confrontation."
-msgstr "Ať už se jedná o jeden z nejzvláštnějších výstřelků přírody nebo výtvor šíleného (ale hravého) boha, toto podivné bojiště očekává dva soupeře, aby na něm změřili své síly."
+msgstr "Ať už se jedná o jeden z nejzvláštnějších výstřelků přírody, nebo výtvor šíleného (ale hravého) boha, toto podivné bojiště očekává dva soupeře, aby na něm změřili své síly."
 
 #: ../../../../data/maps/Comet_Island.wmf/elemental:8
 msgid "Comet Island"
@@ -431,7 +431,7 @@ msgid ""
 "came from the sky and touched down in its center. Is this a sign of the "
 "Gods? You believe it is and you hope that your tribe will find the treasure "
 "of this island before other tribes will follow."
-msgstr "Několik mil od pobřeží Gerionu leží malý, nepojmenovaný ostrov. Dosud neexistoval důvod, proč se tam vypravit - až do včerejška, kdy se z oblohy snesla obrovská ohnivá koule a dopadla doprostřed ostrova. Je to snad znamení bohů? Věříš, že ano, a doufáš, že na tomto ostrově tvůj kmen nalezne tento poklad dříve, než jej objeví ostatní."
+msgstr "Několik mil od pobřeží Gerionu leží malý, nepojmenovaný ostrov. Dosud neexistoval důvod, proč se tam vypravit - až do včerejška, kdy se z oblohy snesla obrovská ohnivá koule a dopadla doprostřed ostrova. Je to snad znamení bohů? Věříš že ano a doufáš, že na tomto ostrově tvůj kmen nalezne tento poklad dříve, než jej objeví ostatní."
 
 #: ../../../../data/maps/Comet_Island.wmf/elemental:11
 msgid ""
@@ -449,7 +449,7 @@ msgstr "Kráter"
 msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the"
 " crater. Two tribes are now fighting for the rich resources."
-msgstr "Před dávnými dobami spadl do pohoří meteor. Nyní se kráter opět zelená a dva kmeny bojují o jeho bohaté nerostné bohatství."
+msgstr "Před dávnými dobami spadl do pohoří meteor. Nyní se kráter opět zabydluje a dva kmeny bojují o nerostné bohatství."
 
 #: ../../../../data/maps/Crossing_the_Horizon.wmf/elemental:8
 msgid "Crossing the Horizon"
@@ -519,7 +519,7 @@ msgstr "Velká mapa Evropy. Modrý = Švédsko, Červený = Itálie, Žlutý = �
 
 #: ../../../../data/maps/Fellowships.wmf/elemental:8
 msgid "Fellowships"
-msgstr "Přátelství na moři"
+msgstr "Družnost"
 
 #: ../../../../data/maps/Fellowships.wmf/elemental:10
 msgid ""
@@ -701,7 +701,7 @@ msgstr "Čtyři kmeny bojují o nadvládu v nehostinné oblasti. Suroviny jsou r
 
 #: ../../../../data/maps/Lesser_Ring.wmf/elemental:8
 msgid "Lesser Ring 1.2"
-msgstr "Malý kruh 1.2"
+msgstr "Nepodstatný kruh 1.2"
 
 #: ../../../../data/maps/Lesser_Ring.wmf/elemental:10
 msgid ""
@@ -867,7 +867,7 @@ msgid ""
 "It smells like swamp, it looks like swamp and it is a swamp. But it is the "
 "place you were born and where you’ve lived your whole life. If you don’t "
 "want to lose it, defend it!"
-msgstr "Páchne to jako bažina, vypadá to jako bažina a je to bažina. Ale je to také místo, kde ses narodil a prožil celý svůj život. A pokud ho nechceš ztratit, musíš ho bránit!"
+msgstr "Páchne to jako bažina, vypadá to jako bažina a je to bažina. Ale je to místo, kde ses narodil a prožil celý svůj život. A pokud ho nechceš ztratit, musíš ho bránit!"
 
 #: ../../../../data/maps/Swamp_Monks.wmf/elemental:8
 msgid "Swamp Monks"
@@ -957,7 +957,7 @@ msgstr "Horský průsmyk"
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories, unaware of the fact that they are not alone!"
-msgstr "Dva princové se usadili na odvrácených stranách tohoto pohoří. Nyní rozšiřují svá území a ani jeden z nich netuší, že v této krajině nejsou sami!"
+msgstr "Dva princi se usadili na odvrácených stranách tohoto pohoří. Nyní rozšiřují svá území a ani jeden z nich netuší, že v této krajině nejsou sami!"
 
 #: ../../../../data/maps/The_Thaw.wmf/elemental:8
 msgid "The Thaw"
