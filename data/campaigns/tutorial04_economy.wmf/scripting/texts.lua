@@ -560,13 +560,186 @@ warehouse_preference_settings = {
    h = messagebox_h_step(2),
 }
 
+trading_1 = {
+   position = "bottomright",
+   title = _("Trading"),
+   body = (
+      p(_([[Great. We now have enough marble columns so that in case of an aggressor, we can build up our fortifications. However, it turns out that there is indeed a tribe of Frisians living in this wasteland, and they’re peaceful. They have asked to trade with us.]])) ..
+      p(_([[Since Widelands is all about building up rather than burning down, trading is a much better way to interact with other tribes than to invade their land. So let’s trade.]]))
+   ),
+   h = messagebox_h_step(1),
+}
+
+trading_2 = {
+   position = "bottomright",
+   title = _("Trading"),
+   body = (
+      p(_([[Trades are conducted via markets. Once you have a market, you and the other player negotiate about which wares you wish to exchange with each other, and how many of them. But I’ll walk you through the process step by step. First, you need to build a market.]]))
+   ),
+   h = messagebox_h_step(1),
+}
+
+obj_build_market = {
+   name = "build_market",
+   title = _("Build a market"),
+   number = 1,
+   body = objective_text(_("Build a market"),
+      li(_([[Build a market near the wasteland.]])) ..
+      li_arrow(_([[The market is a big building.]]))
+   )
+}
+
+trading_3 = {
+   field = donkeyfarm_field,
+   position = "bottomright",
+   title = _("Trading"),
+   body = (
+      p(_([[Within your territory, wares are carried around by carriers. But trades can happen across long distances, much too far for your carriers to walk. So we employ a caravan of donkeys to carry our wares instead.]])) ..
+      p(_([[Donkeys are bred in a donkey farm. In this scenario, you already have one here.]])) ..
+      p(_([[Besides carrying trade wares, donkeys are also used to help out on busy roads: When a road receives a lot of traffic, its carrier requests a donkey to assist with the work, so twice as many wares can be transported in the same time.]]))
+   ),
+   h = messagebox_h_step(1),
+}
+
+trading_4 = {
+   position = "bottomright",
+   title = _("Trading"),
+   body = (
+      p(_([[The market is now complete, and we can start creating a trade proposal for the Frisians. This is done from the market’s window. Let me just open it for you.]]))
+   ),
+   h = messagebox_h_step(1),
+}
+
+trading_5 = {
+   position = "bottomright",
+   title = _("Trading"),
+   body = (
+      p(_([[As you can see, the market window contains three tabs. The first tab is the most interesting to us right now: Here you can configure and propose a new trade.]])) ..
+      p(_([[The second tab lists trades that you have previously proposed from this market. It is currently empty, since you did not propose any trades yet.]])) ..
+      p(_([[The third tab lists trade offers that you received from other players, and allows you to accept or reject them. This, too, is empty, since the Frisians are waiting for you to make the first move.]]))
+   ),
+   h = messagebox_h_step(1),
+}
+
+trading_6 = {
+   position = "bottomright",
+   title = _("Trading"),
+   body = (
+      p(_([[Proposing a trade is straightforward. The first step is to select the player you want to trade with from the dropdown. In this case, there is only one other player, and he is automatically preselected for you.]]))
+   ),
+   h = messagebox_h_step(1),
+}
+
+trading_7 = {
+   position = "bottomright",
+   title = _("Trading"),
+   body = (
+      p(_([[Next, you select the wares you want to send and receive respectively from the large double panel in the center of the market window.]])) ..
+      p(_([[When you trade with another tribe, not all wares can be exchanged. Every tribe has their own economy, and they use different wares. For instance, Frisians don’t drink wine and can’t build houses with marble; and your Imperial tribe can’t build houses out of Frisian brick and doesn’t eat their smoked fish. The panel only shows wares that you and your prospective trading partner can both use.]])) ..
+      p(_([[Select the wares in the panel and use the arrow buttons below it to increase or decrease the amount of the wares to exchange.]]))
+   ),
+   h = messagebox_h_step(1),
+}
+
+trading_8 = {
+   position = "bottomright",
+   title = _("Trading"),
+   body = (
+      p(_([[Lastly, select how many batches of the selected wares will be exchanged. You can also set the trade to run indefinitely using the Infinity icon.]])) ..
+      p(_([[When you have configured everything, click the ‘Propose’ button to send the trade offer to the other player. He can then decide whether to accept or reject your proposal.]])) ..
+      p(_([[Try it out!]]))
+   ),
+   h = messagebox_h_step(1),
+}
+
+obj_propose_trade = {
+   name = "propose_trade",
+   title = _("Propose a trade"),
+   number = 1,
+   body = objective_text(_("Propose a trade"),
+      li(_([[Offer the Frisians a trade.]])) ..
+      li_arrow(_([[The Frisians will only accept a trade that is advantageous to them; that is, they will not give away more wares than they receive.]]))
+   )
+}
+
+trading_rejected = {
+   position = "bottomright",
+   title = _("Trade Rejected"),
+   body = (
+      p(_([[The Frisians have rejected your trade offer. They will not accept a trade that may be disadvantageous to them. Send them a new trade proposal.]]))
+   ),
+   h = messagebox_h_step(1),
+}
+
+trading_9 = {
+   position = "bottomright",
+   title = _("Trade Accepted"),
+   body = (
+      p(_([[Well done! The Frisians have accepted your trade offer. Did you notice that the market window now has a new tab? It has one such tab for every active trade at this market. The tab shows more details about the running trade, and also allows you to cancel it at any time.]])) ..
+      p(_([[Soon you will see a caravan of your donkeys leaving the market to bring wares to the Frisians, and a caravan of their reindeer bringing you wares in exchange.]]))
+   ),
+   h = messagebox_h_step(1),
+}
+
+trading_10 = {
+   position = "bottomright",
+   title = _("Trade Offered"),
+   body = (
+      p(_([[Now the Frisians have offered you a trade as well. You can find a list of all trade offers and proposals as well as running trades in the Diplomacy window. Open it via the button from the main toolbar.]]))
+   ),
+   h = messagebox_h_step(1),
+}
+
+obj_open_diplomacy = {
+   name = "open_diplomacy",
+   title=_("Open the diplomacy window"),
+   number = 1,
+   body = objective_text(_("Open the diplomacy window"),
+      p(_([[The diplomacy window gives you an overview over all your trades, trade offers, and trade proposals.]])) ..
+      li_image("images/wui/menus/diplomacy.png", _([[You can open it via this button from the main toolbar.]])) ..
+      li_arrow(_([[You can also use the hotkey ‘%s’ to access this window quickly.]]):bformat(wl.ui.get_shortcut("game_diplomacy")))
+   )
+}
+
+trading_11 = {
+   position = "bottomright",
+   title = _("The Diplomacy Window"),
+   body = (
+      p(_([[In the top half of the diplomacy window, you can see all players and their teams. Here you can invite other players to join your team or request to join theirs. But being in a team is not required for trading.]])) ..
+      p(_([[We are more interested in the bottom half of the window. Here you can see your offered, proposed, and active trades.]])) ..
+      p(_([[Right now, you have one trade offer – the one the Frisians just sent you. Review it, then use the buttons next to it to either accept or reject it.]])) ..
+      p(_([[If you wish to accept a trade, you need to select from the dropdown which market you want to use for this trade, as you can have multiple markets. You can also manage the offer directly from the window of the market where you want to accept the trade.]]))
+   ),
+   h = messagebox_h_step(1),
+}
+
+obj_decide_trade_offer = {
+   name = "decide_trade_offer",
+   title = _("Decide about the trade offer"),
+   number = 1,
+   body = objective_text(_("Decide about the trade offer"),
+      li(_([[Accept or reject the Frisians’ trade offer.]])) ..
+      li_arrow(_([[You can do so either from the Diplomacy window or from the market’s window.]]))
+   )
+}
+
+trading_12 = {
+   position = "bottomright",
+   title = _("Trading"),
+   body = (
+      p(_([[Well done! That’s all there is to it really; now you know how to send and manage trade proposals and offers.]])) ..
+      p(_([[You can have any number of active trades, and with any number of players; at the same market or across many, as you prefer.]])) ..
+      p(_([[To truly master the art of trading, just remember this: The value of any ware depends highly on the circumstances, and also on the tribe.]])) ..
+      p(_([[For example, Frisian miners will happily accept any meal, regardless of whether it was produced cheaply by an Imperial Inn or at a much higher cost in the Frisian Drinking Hall. On the other hand, Frisians can burn charcoal much more efficiently than the Empire. Therefore, trading Imperial meals against Frisian coal is a trade from which both parties can benefit greatly.]])) ..
+      p(_([[As you gain more experience with the different tribes of Widelands, you will gain a thorough understanding of the relative cost and value of each ware for each tribe. This knowledge is invaluable when deciding about trades.]]))
+   ),
+   h = messagebox_h_step(1),
+}
+
 conclusion = {
-   title = _("Borders Secured"),
+   title = _("Congratulations"),
    body =
-      h1(_([[We’re safe now]])) ..
-      li_object("empire_fortress",
-         p(_([[Great. We now have enough marble columns so that in case of an aggressor, we can build up our fortifications. But I do not think that that will be necessary. So far, no enemy has shown up.]])) ..
-         p(_([[I hope I could teach you how you can control the economy in Widelands. There are many options and they can be confusing at first. Even if you’ve only understood a few concepts, you mustn’t give up. Try them out in some games, become familiar with them and experience the possibilities. Then, return to this tutorial and learn the rest!]])), plr.color) ..
+      p(_([[This concludes our tutorial! I hope I could teach you how you can control the economy in Widelands. There are many options and they can be confusing at first. Even if you’ve only understood a few concepts, you mustn’t give up. Try them out in some games, become familiar with them and experience the possibilities. Then, return to this tutorial and learn the rest!]])) ..
       p([[]]) ..
       p(_([[This was the last tutorial I had prepared for you. I’ve now taught you everything I know. There are still secrets hidden in this world even I don’t know about. I will now search for a quiet place to spend my sunset years. If you have still questions, the Widelands community will surely help you. You can find it at:]])) ..
       h1(p("align=center", u("widelands.org"))),
