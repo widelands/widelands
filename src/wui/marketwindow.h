@@ -32,11 +32,17 @@ struct MarketWindow : public BuildingWindow {
 	             bool avoid_fastclick,
 	             bool workarea_preview_wanted);
 
+	void update_proposals_tooltip(uint32_t count);
+	void update_offers_tooltip(uint32_t count);
+
 private:
 	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
 	void setup_name_field_editbox(UI::Box& vbox) override;
 
 	Widelands::OPtr<Widelands::Market> market_;
+
+	UI::Tab* tab_proposals_ = nullptr;
+	UI::Tab* tab_offers_ = nullptr;
 
 	DISALLOW_COPY_AND_ASSIGN(MarketWindow);
 };
