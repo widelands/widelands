@@ -26,9 +26,19 @@ wl.Descriptions():new_market_type {
    local_carrier = "frisians_carrier",
    trade_carrier = "frisians_reindeer",
 
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = {50, 69},
+         hotspot = {90, 95},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      },
+      build = {
+         hotspot = {90, 95},
+         frames = 3,
+         columns = 3,
+         rows = 1
       }
    },
 
