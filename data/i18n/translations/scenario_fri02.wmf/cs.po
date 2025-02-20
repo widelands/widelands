@@ -24,7 +24,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../../../data/campaigns/fri02.wmf/scripting/init.lua:33
 msgid "Note"
-msgstr "Poznámka"
+msgstr "Upozornění"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/init.lua:34
 msgid ""
@@ -122,7 +122,7 @@ msgstr "Rozhodni se, zda chceš spolupracovat s Císařstvím."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:60
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
-msgstr "Nahromaď suroviny pro dar nebo znič Císařský sklad"
+msgstr "Nahromaď suroviny jako dar, nebo znič Císařský sklad"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:61
 msgid ""
@@ -134,51 +134,51 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "30 × Log"
-msgstr "30 × kláda"
+msgstr "30 klád"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:63
 msgid "40 × Granite"
-msgstr "40 × žula"
+msgstr "40 kvádrů žuly"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:64
 msgid "30 × Fish"
-msgstr "30 × ryba"
+msgstr "30 ryb"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:65
 msgid "30 × Beer"
-msgstr "30 × pivo"
+msgstr "30 piv"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:66
 msgid "150 × Water"
-msgstr "150 × voda"
+msgstr "150 kýblů vody"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:67
 msgid "40 × Ration"
-msgstr "40 × malá svačina"
+msgstr "40 malých svačin"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:68
 msgid "10 × Meal"
-msgstr "10 × jídlo"
+msgstr "10 jídel"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:69
 msgid "30 × Coal"
-msgstr "30 × uhlí"
+msgstr "30 hrud uhlí"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:70
 msgid "40 × Iron Ore"
-msgstr "40 × železná ruda"
+msgstr "40 valounů železné rudy"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:71
 msgid "20 × Iron"
-msgstr "20 × železo"
+msgstr "20 prutů železa"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:72
 msgid "20 × Gold Ore"
-msgstr "20 × zlatá ruda"
+msgstr "20 valounů zlaté rudy"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:73
 msgid "10 × Gold"
-msgstr "10 × zlato"
+msgstr "10 prutů zlata"
 
 #. TRANSLATORS: Continues from "Decide whether you want to work with Murilius
 #. against the Barbarians. If so, fill his warehouse with these wares: [list
@@ -190,8 +190,7 @@ msgid ""
 "over."
 msgstr ""
 "V opačném případě znič sklad. Tím ale riskuješ, že se Murilius stane tvým "
-"nepřítelem. Mezitím ti zakázal rozšiřovat tvé území, dokud mu zboží nebude "
-"předáno."
+"nepřítelem. Zakázal ti rozšiřovat své území, dokud mu zboží nebude předáno."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:80
 msgid "Spy on Murilius"
@@ -213,7 +212,7 @@ msgstr "Dešifruj báseň"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:90
 msgid "Understand the Poem the Scout has Found in the Empire"
-msgstr "Pochop báseň, kterou tvůj průzkumný špeh našel v Císařství"
+msgstr "Pochop báseň, kterou tvůj průzkumný špeh zachytil v Císařství"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:91

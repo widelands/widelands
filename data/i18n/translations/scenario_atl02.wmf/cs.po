@@ -113,7 +113,7 @@ msgid ""
 msgstr ""
 "Většinu našich nástrojů jsme ztratili při lodním neštěstí. Naši lidé si "
 "nebudou moci plnit své povinnosti bez řádných nástrojů. Naštěstí máme stále "
-"nějakou tu železnou rudu a spoustu uhlí. Postavit kovárnu je předpokladem "
+"nějakou tu železnou rudu a spoustu uhlí. Postavit dílnu je předpokladem "
 "úspěchu na tomto ostrově. Nezapomeň postavit také slévárnu."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:74
@@ -273,11 +273,11 @@ msgstr "Čtyři dodávky po dvou zlatých cihlách."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:141
 msgid "Defeat Maletus"
-msgstr "Poraž Maletuse"
+msgstr "Poraž Maleta"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:143
 msgid "Defeat Imperial Leader Maletus"
-msgstr "Poraž císařského místodržícího Maletuse"
+msgstr "Poraž císařského místodržícího Maleta"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:144
 msgid "We need to finish the Empire off to have a chance to build a new home."
@@ -514,7 +514,7 @@ msgid ""
 "provide us with good tools."
 msgstr ""
 "Jelikož jsme založili přístav, můžeme začít plánovat naše osídlení. Stále "
-"máme dostatek železné rudy, takže kovárna a slévárna nám rychle poskytnou "
+"máme dostatek železné rudy, takže dílna a slévárna nám rychle poskytnou "
 "dostatek kvalitních nástrojů."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:243
@@ -660,8 +660,8 @@ msgid ""
 " finest cloth and some tabards soon. Maybe we can build a gold spinning mill"
 " later on to make better tabards as well."
 msgstr ""
-"%s, nechť Vás Satul hřeje! Tkalcovna a pavoučí farma jsou hotovy a "
-"tklacovský cech se může opět pustit do práce. Slibuji Vám, že budeme již "
+"%s, vroucnost Satulova s Vámi! Tkalcovna a pavoučí farma jsou hotovy a "
+"tkalcovský cech se může opět pustit do práce. Slibuji Vám, že budeme již "
 "brzy dodávat nejjemnější látky a tabardy. Možná bychom později mohli "
 "postavit i přádelnu zlata, abychom mohli šít i kvalitnější tabardy."
 
@@ -695,8 +695,8 @@ msgid ""
 "land governed by foreigners, but we do not yet know what to expect from "
 "them."
 msgstr ""
-"Nechť Vás Satul hřeje, Jundlino. Nesu znepokojivou novinu. Zemi cizinců již "
-"máme nadohled, přitom stále nevíme, co od nich můžeme čekat."
+"Satulova vroucnost s Vámi, Jundlino. Nesu znepokojivou novinu. Zemi cizinců "
+"již máme na dohled, přitom stále nevíme, co od nich můžeme čekat."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:342
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:357
@@ -732,9 +732,9 @@ msgid ""
 " are in big trouble as they are at war with a mighty tribe in the north. "
 "They ask us for support."
 msgstr ""
-"Nechť Vás Satul hřeje, Jundlino. Podařilo se nám navázat spojení s cizinci. "
-"Nachází se ve velkých nesnázích, protože jsou ve válce s mocným kmenem ze "
-"severu. Źádají nás o podporu."
+"Satulova vroucnost s Vámi, Jundlino. Podařilo se nám navázat spojení s "
+"cizinci. Nachází se ve velkých nesnázích, protože jsou ve válce s mocným "
+"kmenem ze severu. Žádají nás o podporu."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:372
 msgid "Jundlina Is Cautious"
@@ -867,7 +867,7 @@ msgid ""
 "might talk about your princess."
 msgstr ""
 "To je výborná zpráva, Sidole. Cením si práce tvého lidu. Ale nezapomínej, že"
-" nám ještě musíš pomoci porazit Maletusovy jednotky. Pak se můžeme bavit o "
+" nám ještě musíš pomoci porazit Maletovy jednotky. Pak se můžeme bavit o "
 "princezně."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:460
@@ -987,7 +987,7 @@ msgid ""
 msgstr ""
 "Souhlasím s Vámi, Sidole, nepokloníme se žádnému jinému bohu, pouze "
 "Satulovi. Ale možná budeme za těchto okolností potřebovat boží pomoc. Proto "
-"navrhuji postavit chrám a uctívat Satula vybranými oběťmi. Sučasně bychom "
+"navrhuji postavit chrám a uctívat Satula vybranými oběťmi. Současně bychom "
 "měli vysvětit několik kněžek, které budou orodovat u Satula, aby dal "
 "barbarům a naší princezně pocítit svou moc."
 
@@ -1085,9 +1085,9 @@ msgid ""
 "trust you, as much as you will trust and be faithful to Satul. How come the "
 "Barbarians let you go?"
 msgstr ""
-"Nechť tě Satul hřeje, Jundlino. Jsem velmi rád, že jsi opět zde. Doufám, že "
-"ti opět můžeme věřit, stejně jako že opět budeš oddána Satulovi. Jak to, že "
-"tě barbaři propustili?"
+"Vroucnost Satulova s Vámi, Jundlino. Jsem velmi rád, že jste opět zde. "
+"Doufám, že vám opět můžeme věřit, stejně jako že opět budte oddána Satulovi."
+" Jak to, že vás barbaři propustili?"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:576
@@ -1171,7 +1171,7 @@ msgid ""
 "Oh, and I almost forgot this one. We demand to have your princess in our "
 "headquarters as well to coordinate our war plannings."
 msgstr ""
-"Ó a na toto bych málem zapomněl. Budme potřebovat vaší princeznu v naší "
+"Ó a na toto bych málem zapomněl. Budeme potřebovat vaši princeznu v naší "
 "hlavní budově, abychom mohli lépe řídit a plánovat naše válečné akce."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:611
@@ -1189,9 +1189,9 @@ msgid ""
 "is a trap to keep you as a hostage. And the demand itself is really an "
 "insult. I strongly recommend to decline this unsubstantiated claim."
 msgstr ""
-"Nechť tě Satul hřeje, Jundlino! Toto jednání je vskutku barbarské! Obávám "
-"se, že je to past, aby tě mohli držet jako rukojmí. A ty požadavky jsou "
-"opravdovou urážkou. Důrazně doporučuji zamítnout tyto neopodstatněné "
+"Satulova vroucnost s vámi, Jundlino! Toto jednání je vskutku barbarské! "
+"Obávám se, že je to past, aby vás mohli držet jako rukojmí. A ty požadavky "
+"jsou opravdovou urážkou. Důrazně doporučuji zamítnout tyto neopodstatněné "
 "požadavky."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:617
@@ -1302,7 +1302,7 @@ msgid ""
 "Our only chance is to double our efforts and start delivering something "
 "soon."
 msgstr ""
-"Naší jedinou možností je zdvojnásobit naše usílí a doručit nějaké zásilky "
+"Naší jedinou možností je zdvojnásobit své úsilí a doručit nějaké zásilky "
 "opravdu brzy."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:673
