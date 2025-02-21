@@ -752,6 +752,9 @@ void ConstructionSite::draw(const Time& gametime,
 	info_.completedtime = kConstructionsiteStepTime * work_completed_;
 
 	if (working_) {
+		if (builder_ == nullptr) {
+			work_steptime_ = gametime + kConstructionsiteStepTime;
+		}
 		// This assert causes a race condition with multithreaded logic/drawing code
 		// assert(work_steptime_ <=
 		//       Time((info_.completedtime + kConstructionsiteStepTime).get() + gametime.get()));
