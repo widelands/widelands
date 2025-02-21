@@ -62,6 +62,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding tapir because ...
          descname = pgettext("amazons_building", "breeding tapir"),
          actions = {
+            -- time total: 15 + 15 = 30 sec
             "return=skipped unless economy needs amazons_tapir",
             "consume=cassavaroot water",
             "sleep=duration:15s",

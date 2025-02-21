@@ -1740,7 +1740,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Donkey Farm
             lore_author = pgettext("empire_building", "A donkey breeder during a shortage of wheat"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Donkey Farm
-            purpose = pgettext("empire_building", "Breeds cute and helpful donkeys for adding them to the transportation system.")
+            purpose = pgettext("empire_building", "Breeds cute and helpful donkeys for adding them to the transportation system."),
+            -- TRANSLATORS: Performance helptext for an Empire production site: Donkey Farm
+            performance = pgettext("empire_building", "If all needed wares are delivered in time, this building can produce a donkey in %s on average."):bformat(format_seconds(30))
          }
       },
       {
@@ -1824,7 +1826,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Weaving Mill
             lore_author = pgettext("empire_building", "Motto of the Weavers’ Guild"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Weaving Mill
-            purpose = pgettext("empire_building", "Weaves cloth out of wool.")
+            purpose = pgettext("empire_building", "Weaves cloth out of wool."),
+            -- TRANSLATORS: Performance helptext for an Empire production site: Weaving Mill
+            performance = pgettext("empire_building", "The weaving mill needs %s on average to produce one cloth."):bformat(format_seconds(44))
          }
       },
       {
@@ -2062,7 +2066,9 @@ wl.Descriptions():new_tribe {
                pgettext("empire_building", "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.")
             },
             -- TRANSLATORS: Note helptext for an Empire training site: Arena
-            note = pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.")
+            note = pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came."),
+            -- TRANSLATORS: Performance helptext for an Empire training site: Arena
+            performance = pgettext("empire_building", "If all needed wares are delivered in time, an arena can train one soldier first level in evade in %s on average."):bformat(format_seconds(35))
          }
       },
       {
@@ -2087,7 +2093,9 @@ wl.Descriptions():new_tribe {
                pgettext("empire_building", "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.")
             },
             -- TRANSLATORS: Note helptext for an Empire training site: Colosseum
-            note = pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.")
+            note = pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came."),
+            -- TRANSLATORS: Performance helptext for an Empire training site: Colosseum
+            performance = pgettext("empire_building", "If all needed wares are delivered in time, a colosseum can train one soldier one level in evade in %s on average."):bformat(format_seconds(35))
          }
       },
       {
@@ -2114,7 +2122,9 @@ wl.Descriptions():new_tribe {
                pgettext("empire_building", "Equips the soldiers with all necessary weapons and armor parts.")
             },
             -- TRANSLATORS: Note helptext for an Empire training site: Training Camp
-            note = pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.")
+            note = pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came."),
+            -- TRANSLATORS: Performance helptext for an Empire training site: Training Camp
+            performance = pgettext("empire_building", "If all needed wares are delivered in time, a training camp can train one soldier one level in attack or health in %s on average."):bformat(format_seconds(35))
          }
       },
 
