@@ -1786,7 +1786,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Empire production site: Piggery
             purpose = pgettext("empire_building", "Breeds pigs for their meat."),
             -- TRANSLATORS: Performance helptext for an Empire production site: Piggery
-            performance = pgettext("empire_building", "The pig breeder needs %1% on average to raise and slaughter a pig."):bformat(format_minutes(1))
+            performance = pgettext("empire_building", "The pig breeder needs %1% on average to raise and slaughter a pig, producing 2 portions of meat."):bformat(format_seconds(52))
          }
       },
       {
