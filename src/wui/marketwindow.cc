@@ -71,15 +71,15 @@ public:
 	              _("Batches:"),
 	              UI::SpinBox::Units::kNone,
 	              UI::SpinBox::Type::kBig),
-     infinite_(&batches_box_,
-                      "toggle_infinite",
-                      0,
-                      0,
-                      34,
-                      34,
-                      UI::ButtonStyle::kWuiSecondary,
-                      g_image_cache->get(kIconInfinity),
-                      _("Toggle indefinite trade")),
+	     infinite_(&batches_box_,
+	               "toggle_infinite",
+	               0,
+	               0,
+	               34,
+	               34,
+	               UI::ButtonStyle::kWuiSecondary,
+	               g_image_cache->get(kIconInfinity),
+	               _("Toggle indefinite trade")),
 	     ok_(this, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("Propose")) {
 		set_size(400, 100);  // guard against SpinBox asserts
 
@@ -176,7 +176,9 @@ private:
 		Widelands::TradeInstance trade;
 		trade.items_to_send = offer_->get_selection();
 		trade.items_to_receive = demand_->get_selection();
-		trade.num_batches = infinite_.style() == UI::Button::VisualState::kPermpressed ? Widelands::kInfiniteTrade : batches_.get_value();
+		trade.num_batches = infinite_.style() == UI::Button::VisualState::kPermpressed ?
+		                       Widelands::kInfiniteTrade :
+		                       batches_.get_value();
 		trade.initiator = market_;
 		trade.sending_player = iplayer_.player_number();
 		trade.receiving_player = player_.get_selected()->player_number();

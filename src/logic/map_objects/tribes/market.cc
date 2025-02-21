@@ -501,8 +501,9 @@ std::string TradeInstance::format_richtext(const TradeID id,
 
 	infotext += "</p><p>";
 	if (num_batches != kInfiniteTrade) {
-		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
-			                    format_l(ngettext("%d batch", "%d batches", num_batches), num_batches));
+		infotext +=
+		   as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
+		               format_l(ngettext("%d batch", "%d batches", num_batches), num_batches));
 	} else {
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph, _("Trade runs indefinitely"));
 	}
@@ -522,9 +523,9 @@ std::string TradeInstance::format_richtext(const TradeID id,
 		if (num_batches != kInfiniteTrade) {
 			infotext += "</p><p>";
 			infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
-				                    format_l(ngettext("%d batch remaining", "%d batches remaining",
-				                                      num_batches - trade->second.num_shipped_batches),
-				                             num_batches - trade->second.num_shipped_batches));
+			                        format_l(ngettext("%d batch remaining", "%d batches remaining",
+			                                          num_batches - trade->second.num_shipped_batches),
+			                                 num_batches - trade->second.num_shipped_batches));
 		}
 	}
 
