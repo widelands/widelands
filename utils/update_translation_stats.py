@@ -49,46 +49,48 @@ def generate_translation_stats(po_dir, output_file):
 
     # We get errors for non-po files in the base po dir, so we have to walk
     # the subdirs.
+    subdirs = []
     for subdir in sorted(os.listdir(po_dir), key=str.lower):
         subdir = os.path.join(po_dir, subdir)
-        if not os.path.isdir(subdir):
-            continue
+        if os.path.isdir(subdir):
+            subdirs.append(subdir)
 
-        sys.stdout.write('.')
-        sys.stdout.flush()
+    def joinrow(a_row):
+        return ', '.join(v for v in a_row.values() if v is not None)
 
-        try:
-            stats_output = subprocess.check_output(
-                ['pocount', '--csv', subdir],
-                encoding='utf-8',
-                stderr=subprocess.STDOUT,
-            )
-            if 'ERROR' in stats_output:
-                print('\nError running pocount:\n' + stats_output +
-                      '\nAborted creating translation statistics.')
-                return 1
-
-        except subprocess.CalledProcessError:
-            print('Failed to run pocount:\n  FILE: ' + po_dir +
-                  '\n  ' + stats_output.split('\n', 1)[1])
-            return 1
+    if True:  # TODO(aDiscoverer) delete, just kept for code review
+        proc = subprocess.Popen(
+            ['pocount', '--csv'] + subdirs,
+            encoding='utf-8',
+            stderr=subprocess.STDOUT,
+            stdout=subprocess.PIPE,
+        )
 
         COLUMNS = {
             'filename': 'Filename',
             'total': 'Total Source Words',
             'translated': 'Translated Source Words'
         }
-        result = csv.DictReader(csv.StringIO(stats_output), dialect='unix', skipinitialspace=True)
+        result = csv.DictReader(proc.stdout, dialect='unix', skipinitialspace=True)
         missing_cols = set(COLUMNS.values()) - set(result.fieldnames)
         if missing_cols:
             sys.exit(
                 'Column(s) "{}" not found in output of pocount'.format('", "'.join(missing_cols)))
 
         # Now do the actual counting for the current textdomain
+        l1_row = l2_row = {}  # last rows, for error message
+        one_locale = ''  # to report progress
         for row in result:
             po_filename = row[COLUMNS['filename']]
+
             if po_filename.endswith('.po'):
                 locale = regex_po.match(po_filename).group(1)
+                if one_locale == '' or one_locale == locale:
+                    # once for each directory, always the same locale
+                    sys.stdout.write('.')
+                    sys.stdout.flush()
+                    if not one_locale:
+                        one_locale = locale
                 entry = locale_stats[locale]
                 entry.total += int(row[COLUMNS['total']])
                 entry.translated += int(row[COLUMNS['translated']])
@@ -99,6 +101,18 @@ def generate_translation_stats(po_dir, output_file):
                         c_total=row[COLUMNS['total']], line=result.line_num))
                     sys.exit(1)
                 locale_stats[locale] = entry
+            elif 'ERROR' in next(iter(row.values())):
+                print('\nError running pocount:\n  ' + joinrow(l2_row) +
+                      '\n  ' + joinrow(l1_row) + '\n  ' + joinrow(row) +
+                      '\nAborted creating translation statistics.')
+                return 1
+            l2_row = l1_row
+            l1_row = row
+        proc.wait(1)
+        if proc.returncode != 0:
+            print('Failed to run pocount:\n  FILES: ' + ' '.join(subdirs[0:2]) +
+                  ' ...\n  ' + joinrow(l2_row) + '\n  ' + joinrow(l1_row))
+            return 1
 
     print('\n\nLocale\tTotal\tTranslated')
     print('------\t-----\t----------')
