@@ -1,0 +1,23 @@
+# Automatically created by Widelands 1.2~git26575 (5372ade@master) Release
+
+[global]
+packet_version="1"
+map_w="192"
+map_h="192"
+nr_players="6"
+name=_"Egyptian Mandala v1.2"
+author="fk, kaputtnik"
+descr=_"They hardly had time to prepare themselves when they embarked for this island. According to your explorers, however, things will not go as easily as you were told earlier. You should expect fierce opposition. Expand your base and be the first to reach the ring of power."
+hint=
+theme="desert"
+tags="2teams,3teams,ffa,seafaring,unbalanced,official"
+addons=
+
+[teams00]
+team1="0,1,2"
+team2="3,4,5"
+
+[teams01]
+team1="0,1"
+team2="2,3"
+team3="4,5"
