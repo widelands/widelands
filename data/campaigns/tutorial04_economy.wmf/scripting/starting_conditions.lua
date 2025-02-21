@@ -4,6 +4,9 @@
 
 plr:forbid_buildings{"empire_scouts_house"} -- otherwise, player could scout the wasteland
 
+plr:set_attack_forbidden(2, true)
+plr2:set_attack_forbidden(1, true)
+
 function init_player()
    -- a headquarters without helms, spears, ores and coal
    prefilled_buildings(plr, { "empire_headquarters", sf.x, sf.y,
@@ -66,7 +69,7 @@ function init_player()
       {"empire_quarry",89,38},
       {"empire_sawmill",91,53},
       {"empire_stonemasons_house",92,50},
-      {"empire_donkeyfarm",96,58},
+      {"empire_donkeyfarm", donkeyfarm_field.x, donkeyfarm_field.y},
       {"empire_farm",88,48},
       {"empire_farm",91,38},
       {"empire_farm",94,39},
