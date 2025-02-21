@@ -500,8 +500,12 @@ std::string TradeInstance::format_richtext(const TradeID id,
 	}
 
 	infotext += "</p><p>";
-	infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
-	                        format_l(ngettext("%d batch", "%d batches", num_batches), num_batches));
+	if (num_batches != kInfiniteTrade) {
+		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
+			                    format_l(ngettext("%d batch", "%d batches", num_batches), num_batches));
+	} else {
+		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph, _("Trade runs indefinitely"));
+	}
 
 	if (state == State::kRunning) {
 		const auto trade = own_market->trade_orders().find(id);
@@ -509,21 +513,19 @@ std::string TradeInstance::format_richtext(const TradeID id,
 			return std::string();
 		}
 
-		assert(other_market->trade_orders().count(id) == 1);
-		assert(trade->second.num_shipped_batches ==
-		       other_market->trade_orders().at(id).num_shipped_batches);
-
 		infotext += "</p><p>";
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
 		                        format_l(ngettext("%d batch delivered", "%d batches delivered",
 		                                          trade->second.num_shipped_batches),
 		                                 trade->second.num_shipped_batches));
 
-		infotext += "</p><p>";
-		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
-		                        format_l(ngettext("%d batch remaining", "%d batches remaining",
-		                                          num_batches - trade->second.num_shipped_batches),
-		                                 num_batches - trade->second.num_shipped_batches));
+		if (num_batches != kInfiniteTrade) {
+			infotext += "</p><p>";
+			infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
+				                    format_l(ngettext("%d batch remaining", "%d batches remaining",
+				                                      num_batches - trade->second.num_shipped_batches),
+				                             num_batches - trade->second.num_shipped_batches));
+		}
 	}
 
 	infotext += "</p>";

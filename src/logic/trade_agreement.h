@@ -32,6 +32,8 @@ namespace Widelands {
 class EditorGameBase;
 class Market;
 
+constexpr int kInfiniteTrade = -1;
+
 struct TradeInstance {
 	enum class State : uint8_t {
 		kProposed = 0,
