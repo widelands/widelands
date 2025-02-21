@@ -102,6 +102,7 @@ protected:
 	Time work_steptime_{0U};       // time when next step is completed
 	uint32_t work_completed_{0U};  // how many steps have we done so far?
 	uint32_t work_steps_{0U};      // how many steps (= wares) until we're done?
+	Duration last_remaining_time_{30000};  // time remaining to complete in the last draw cycle 
 };
 }  // namespace Widelands
 

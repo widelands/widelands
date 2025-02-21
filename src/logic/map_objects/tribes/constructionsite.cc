@@ -670,6 +670,9 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool /*succ
 
 			working_ = true;
 			work_steptime_ = game.get_gametime() + kConstructionsiteStepTime;
+			// reinitialize build progress to avoid weird graphic effects 
+			// if the worker might be evicted between 2 steps
+			last_remaining_time_ = kConstructionsiteStepTime;
 
 			worker.start_task_idle(
 			   game, worker.descr().get_animation("work", &worker), kConstructionsiteStepTime.get());
@@ -752,8 +755,12 @@ void ConstructionSite::draw(const Time& gametime,
 	info_.completedtime = kConstructionsiteStepTime * work_completed_;
 
 	if (working_) {
-		if (builder_ == nullptr) {
-			work_steptime_ += work_steptime_ - gametime;
+		if (builder_ != nullptr) {
+			// if we have a builder remember the current progress
+			last_remaining_time_ = work_steptime_ - gametime;
+		} else {
+			// with the builder evicted keep the progress by pushing the foressen finishing time. 
+			work_steptime_ = gametime + last_remaining_time_;
 		}
 		// This assert causes a race condition with multithreaded logic/drawing code
 		// assert(work_steptime_ <=

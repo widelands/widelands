@@ -225,6 +225,5 @@ void PartiallyFinishedBuilding::notify_worker_evicted(Game& game, Worker& worker
 	Building::notify_worker_evicted(game, worker);
 	builder_ = nullptr;
 	request_builder(game);
-	// problem remaining with above code: construction goes on
 }
 }  // namespace Widelands
