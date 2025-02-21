@@ -136,6 +136,7 @@ class WidelandsTestCase():
                     f'--homedir={self.run_dir}',
                     '--nosound',
                     '--fail-on-lua-error',
+                    '--fail-on-errors',
                     '--language=en' ]
             args += [ f'--{key}={value}' for key, value in wlargs.items() ]
 
