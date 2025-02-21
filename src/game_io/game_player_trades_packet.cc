@@ -56,7 +56,7 @@ void GamePlayerTradesPacket::read(FileSystem& fs, Game& game, MapObjectLoader* m
 				serial = fr.unsigned_32();
 				trade.initiator = serial == 0 ? nullptr : &mol->get<Market>(serial);
 
-				trade.num_batches = fr.unsigned_32();
+				trade.num_batches = fr.signed_32();
 				trade.sending_player = fr.unsigned_8();
 				trade.receiving_player = fr.unsigned_8();
 
@@ -96,7 +96,7 @@ void GamePlayerTradesPacket::write(FileSystem& fs, Game& game, MapObjectSaver* c
 			fw.unsigned_32(mos->get_object_file_index_or_zero(pair.second.receiver.get(game)));
 		}
 		fw.unsigned_32(mos->get_object_file_index_or_zero(pair.second.initiator.get(game)));
-		fw.unsigned_32(pair.second.num_batches);
+		fw.signed_32(pair.second.num_batches);
 		fw.unsigned_8(pair.second.sending_player);
 		fw.unsigned_8(pair.second.receiving_player);
 		fw.unsigned_32(pair.second.items_to_send.size());
