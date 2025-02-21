@@ -41,6 +41,7 @@ namespace AddOnsUI {
 
 class InstalledAddOnRow;
 class MapRow;
+class ProgressIndicatorWindow;
 class RemoteAddOnRow;
 
 constexpr int16_t kRowButtonSize = 32;
@@ -90,6 +91,10 @@ public:
 	void install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo>, bool only_translations);
 	void upload_addon(std::shared_ptr<AddOns::AddOnInfo>);
 	void install_map(std::shared_ptr<AddOns::AddOnInfo>);
+	bool install_translations(const std::string& name,
+	                          uint32_t new_i18n_version,
+	                          ProgressIndicatorWindow& progress);
+	void install_websitemaps_translations_if_needed();
 
 	bool handle_key(bool, SDL_Keysym) override;
 
@@ -171,6 +176,7 @@ private:
 	bool matches_filter_maps(std::shared_ptr<AddOns::AddOnInfo>);
 
 	std::string username_, password_;
+	uint32_t current_i18n_version_{0U};
 };
 
 }  // namespace AddOnsUI
