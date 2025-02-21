@@ -539,13 +539,13 @@ msgstr "Sběračky lián sklízí liány z blízkých stromů, aniž by stromy b
 msgid ""
 "Water is life for the Amazons. Water gatherers perform an important service "
 "to their tribe."
-msgstr "Voda je pro amazonky život. Sběračky vody vykonávají pro svůj kmen důležitou službu."
+msgstr "Voda představuje pro Amazonky život. Sběračky vody vykonávají pro svůj kmen důležitou službu."
 
 #: ../../../../data/txts/tips/amazons.lua:28
 msgid ""
 "Panning for gold requires a steady stream of water, better sourced as close "
 "as possible for efficiency and freshness."
-msgstr "Rýžování zlata potřebuje tekoucí vodu, kvůli výkonnosti je nejlépe ji mít co nejblíže."
+msgstr "Rýžování zlata potřebuje neustálý přísun vody, pro udržení výkonnosti je nejlepším řešením čerpat ji co nejblíže."
 
 #: ../../../../data/txts/tips/amazons.lua:32
 msgid ""
