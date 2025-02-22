@@ -224,7 +224,14 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool /*success
 	}
 
 	// Check if one step has completed
-	if (game.get_gametime() >= workstep_completiontime_ && working_) {
+	if (working_) {
+		if (game.get_gametime() < workstep_completiontime_) {
+			worker.start_task_idle(game, worker.descr().get_animation("work", &worker),
+			                       (workstep_completiontime_ - game.get_gametime()).get());
+			return true;
+		}
+		// TODO(hessenfarmer): cause "demolition sounds" to be played -
+		// perhaps dependent on kind of dismantled building?
 		++work_completed_;
 
 		for (WaresQueue* wq : consume_wares_) {
@@ -296,6 +303,21 @@ void DismantleSite::draw(const Time& gametime,
 		} else {
 			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, nullptr,
 			                    kImmovableSilhouetteOpacity);
+		}
+	}
+
+	if (working_) {
+		if (builder_ != nullptr) {
+			// if we have a builder remember the current progress
+			// check that gametime is not greater then the envisaged completion time
+			if (gametime > workstep_completiontime_) {
+				last_remaining_time_ = Duration(0U);
+			} else{
+				last_remaining_time_ = workstep_completiontime_ - gametime;
+			}
+		} else {
+			// with the builder evicted keep the progress by pushing the foressen finishing time.
+			workstep_completiontime_ = gametime + last_remaining_time_;
 		}
 	}
 

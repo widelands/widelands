@@ -455,7 +455,7 @@ void ConstructionSiteWindow::evict_builder() {
 		Widelands::Worker* builder = workers.front();
 		game_->send_player_evict_worker(*builder);
 	} else {
-		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+		NEVER_HERE();
 	}
 }
 
