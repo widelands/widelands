@@ -63,7 +63,7 @@ constexpr uint16_t kCurrentPacketVersion = 9;
 // Building type package versions
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
 constexpr uint16_t kCurrentPacketVersionConstructionsite = 5;
-constexpr uint16_t kCurrentPacketPFBuilding = 2;
+constexpr uint16_t kCurrentPacketPFBuilding = 3;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 8;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 11;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 7;
@@ -73,6 +73,7 @@ constexpr uint16_t kCurrentPacketVersionTrainingsite = 7;
  * Dismantlesite: v1.1 = 1
  * Constructionsite: v1.1 = 5
  * PFBuilding: v1.1 = 2
+ * - 2 -> 3: added evict worker
  * Militarysite: v1.1 = 7
  * - 7 -> 8: Refactored soldier request handling
  * Productionsite: v1.1 = 9
@@ -260,7 +261,7 @@ void MapBuildingdataPacket::read_partially_finished_building(PartiallyFinishedBu
                                                              MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketPFBuilding) {
+		if (packet_version >= 2 && packet_version <= kCurrentPacketPFBuilding) {
 			const TribeDescr& tribe = pfb.owner().tribe();
 			pfb.building_ = tribe.get_building_descr(tribe.safe_building_index(fr.c_string()));
 
@@ -305,6 +306,9 @@ void MapBuildingdataPacket::read_partially_finished_building(PartiallyFinishedBu
 			pfb.workstep_completiontime_ = Time(fr);
 			pfb.work_completed_ = fr.unsigned_32();
 			pfb.work_steps_ = fr.unsigned_32();
+			if (packet_version == kCurrentPacketPFBuilding) {
+				pfb.last_remaining_time_ = Duration(fr);
+			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Partially Finished Building",
 			                            packet_version, kCurrentPacketPFBuilding);
@@ -1246,6 +1250,7 @@ void MapBuildingdataPacket::write_partially_finished_building(const PartiallyFin
 	pfb.workstep_completiontime_.save(fw);
 	fw.unsigned_32(pfb.work_completed_);
 	fw.unsigned_32(pfb.work_steps_);
+	pfb.last_remaining_time_.save(fw);
 }
 
 void MapBuildingdataPacket::write_constructionsite(const ConstructionSite& constructionsite,
