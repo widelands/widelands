@@ -166,7 +166,7 @@ uint32_t PartiallyFinishedBuilding::get_built_per64k() const {
 
 	uint32_t ts = build_step_time().get();
 	if (working_) {
-		thisstep = ts - (work_steptime_.get() - time);
+		thisstep = ts - (workstep_completiontime_.get() - time);
 		// The check below is necessary because we drive construction via
 		// the construction worker in get_building_work(), and there can be
 		// a small delay between the worker completing his job and requesting

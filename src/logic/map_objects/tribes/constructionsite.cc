@@ -607,9 +607,9 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool /*succ
 
 	// Check if one step has completed
 	if (working_) {
-		if (game.get_gametime() < work_steptime_) {
+		if (game.get_gametime() < workstep_completiontime_) {
 			worker.start_task_idle(game, worker.descr().get_animation("work", &worker),
-			                       (work_steptime_ - game.get_gametime()).get());
+			                       (workstep_completiontime_ - game.get_gametime()).get());
 			builder_idle_ = false;
 			return true;
 		}
@@ -669,7 +669,7 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool /*succ
 			get_owner()->ware_consumed(wq->get_index(), 1);
 
 			working_ = true;
-			work_steptime_ = game.get_gametime() + kConstructionsiteStepTime;
+			workstep_completiontime_ = game.get_gametime() + kConstructionsiteStepTime;
 			// reinitialize build progress to avoid weird graphic effects
 			// if the worker might be evicted between 2 steps
 			last_remaining_time_ = kConstructionsiteStepTime;
@@ -758,19 +758,19 @@ void ConstructionSite::draw(const Time& gametime,
 		if (builder_ != nullptr) {
 			// if we have a builder remember the current progress
 			// check that gametime is not greater then the envisaged completion time
-			if (gametime > work_steptime_) {
+			if (gametime > workstep_completiontime_) {
 				last_remaining_time_ = Duration(0U);
 			} else{
-				last_remaining_time_ = work_steptime_ - gametime;
+				last_remaining_time_ = workstep_completiontime_ - gametime;
 			}
 		} else {
 			// with the builder evicted keep the progress by pushing the foressen finishing time.
-			work_steptime_ = gametime + last_remaining_time_;
+			workstep_completiontime_ = gametime + last_remaining_time_;
 		}
 		// This assert causes a race condition with multithreaded logic/drawing code
-		// assert(work_steptime_ <=
+		// assert(workstep_completiontime_ <=
 		//       Time((info_.completedtime + kConstructionsiteStepTime).get() + gametime.get()));
-		info_.completedtime += gametime + kConstructionsiteStepTime - work_steptime_;
+		info_.completedtime += gametime + kConstructionsiteStepTime - workstep_completiontime_;
 	}
 
 	info_.draw(point_on_dst, coords, scale, (info_to_draw & InfoToDraw::kShowBuildings) != 0,

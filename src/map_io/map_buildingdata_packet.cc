@@ -302,7 +302,7 @@ void MapBuildingdataPacket::read_partially_finished_building(PartiallyFinishedBu
 			}
 
 			pfb.working_ = (fr.unsigned_8() != 0u);
-			pfb.work_steptime_ = Time(fr);
+			pfb.workstep_completiontime_ = Time(fr);
 			pfb.work_completed_ = fr.unsigned_32();
 			pfb.work_steps_ = fr.unsigned_32();
 		} else {
@@ -1243,7 +1243,7 @@ void MapBuildingdataPacket::write_partially_finished_building(const PartiallyFin
 	}
 
 	fw.unsigned_8(static_cast<uint8_t>(pfb.working_));
-	pfb.work_steptime_.save(fw);
+	pfb.workstep_completiontime_.save(fw);
 	fw.unsigned_32(pfb.work_completed_);
 	fw.unsigned_32(pfb.work_steps_);
 }
