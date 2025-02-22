@@ -294,8 +294,10 @@ public:
 	/// the Request is passed for disambiguation. This may be nullptr, e.g. when we want
 	/// to get info about a queue. Currently disambiguation is used only by warehouse
 	/// code because expedition bootstraps may have multiple queues for the same item.
-	virtual InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id);
-	virtual bool can_change_max_fill(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id);
+	virtual InputQueue&
+	inputqueue(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id);
+	virtual bool
+	can_change_max_fill(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id);
 
 	virtual bool burn_on_destroy();
 	void destroy(EditorGameBase&) override;

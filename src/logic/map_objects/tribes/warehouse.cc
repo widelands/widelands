@@ -1488,11 +1488,15 @@ void Warehouse::check_remove_stock(Game& game) {
 	}
 }
 
-InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type, const Request* r, uint32_t disambiguator_id) {
+InputQueue& Warehouse::inputqueue(DescriptionIndex index,
+                                  WareWorker type,
+                                  const Request* r,
+                                  uint32_t disambiguator_id) {
 	assert(portdock_ != nullptr);
 	assert(portdock_->expedition_bootstrap() != nullptr);
-	return r != nullptr ? portdock_->expedition_bootstrap()->inputqueue(*r) :
-	                      portdock_->expedition_bootstrap()->inputqueue(index, type, false, disambiguator_id);
+	return r != nullptr ?
+	          portdock_->expedition_bootstrap()->inputqueue(*r) :
+	          portdock_->expedition_bootstrap()->inputqueue(index, type, false, disambiguator_id);
 }
 
 void Warehouse::set_desired_soldier_count(Quantity q) {

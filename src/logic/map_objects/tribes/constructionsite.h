@@ -99,7 +99,8 @@ public:
 		return info_;
 	}
 
-	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id) override;
+	InputQueue&
+	inputqueue(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id) override;
 
 	void set_building(const BuildingDescr&) override;
 	const BuildingDescr& building() const {

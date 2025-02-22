@@ -234,8 +234,9 @@ int LuaProductionSite::get_priority(lua_State* L) {
 	lua_pushstring(
 	   L, priority_to_string(
 	         get(L, get_egbase(L))
-	            ->get_priority(Widelands::wwWARE, get_egbase(L).descriptions().safe_ware_index(
-	                                                 luaL_checkstring(L, 2)), 0)));
+	            ->get_priority(Widelands::wwWARE,
+	                           get_egbase(L).descriptions().safe_ware_index(luaL_checkstring(L, 2)),
+	                           0)));
 	return 1;
 }
 int LuaProductionSite::set_priority(lua_State* L) {

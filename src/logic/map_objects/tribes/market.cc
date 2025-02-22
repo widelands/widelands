@@ -359,7 +359,10 @@ void Market::launch_batch(const TradeID trade_id, Game* game) {
 	}
 }
 
-InputQueue& Market::inputqueue(const DescriptionIndex index, const WareWorker ware_worker, const Request* r, const uint32_t disambiguator_id) {
+InputQueue& Market::inputqueue(const DescriptionIndex index,
+                               const WareWorker ware_worker,
+                               const Request* r,
+                               const uint32_t disambiguator_id) {
 	std::pair<InputQueue*, TradeID> pair = find_inputqueue(index, ware_worker, r, disambiguator_id);
 	if (pair.first != nullptr) {
 		return *pair.first;
@@ -369,7 +372,10 @@ InputQueue& Market::inputqueue(const DescriptionIndex index, const WareWorker wa
 	return Building::inputqueue(index, ware_worker, r, disambiguator_id);
 }
 
-std::pair<InputQueue*, TradeID> Market::find_inputqueue(const DescriptionIndex index, const WareWorker ware_worker, const Request* r, const uint32_t disambiguator_id) {
+std::pair<InputQueue*, TradeID> Market::find_inputqueue(const DescriptionIndex index,
+                                                        const WareWorker ware_worker,
+                                                        const Request* r,
+                                                        const uint32_t disambiguator_id) {
 	if (r != nullptr) {
 		for (auto& pair : trade_orders_) {
 			if (ware_worker == wwWARE) {
@@ -399,10 +405,15 @@ std::pair<InputQueue*, TradeID> Market::find_inputqueue(const DescriptionIndex i
 	return {nullptr, kInvalidTrade};
 }
 
-bool Market::can_change_max_fill(const DescriptionIndex index, const WareWorker ware_worker, const Request* r, const uint32_t disambiguator_id) {
-	const std::pair<InputQueue*, TradeID> pair = find_inputqueue(index, ware_worker, r, disambiguator_id);
+bool Market::can_change_max_fill(const DescriptionIndex index,
+                                 const WareWorker ware_worker,
+                                 const Request* r,
+                                 const uint32_t disambiguator_id) {
+	const std::pair<InputQueue*, TradeID> pair =
+	   find_inputqueue(index, ware_worker, r, disambiguator_id);
 	const auto order = trade_orders_.find(pair.second);
-	return order != trade_orders_.end() && order->second.paused && Building::can_change_max_fill(index, ware_worker, r, disambiguator_id);
+	return order != trade_orders_.end() && order->second.paused &&
+	       Building::can_change_max_fill(index, ware_worker, r, disambiguator_id);
 }
 
 uint32_t Market::get_priority_disambiguator_id(const Request* req) const {
@@ -456,15 +467,22 @@ void Market::set_paused(Game& game, const TradeID id, const bool pause) {
 
 	if (Market* other = trade_order->second.other_side.get(game); other != nullptr) {
 		if (pause) {
-			other->send_message(game, Message::Type::kTrading, _("Trade Paused"), other->descr().icon_filename(),
-				_("Trade agreement paused"), format_l(_("%1$s paused the trade with you at %2$s."), other->owner().get_name(), other->get_market_name()), true);
+			other->send_message(game, Message::Type::kTrading, _("Trade Paused"),
+			                    other->descr().icon_filename(), _("Trade agreement paused"),
+			                    format_l(_("%1$s paused the trade with you at %2$s."),
+			                             other->owner().get_name(), other->get_market_name()),
+			                    true);
 		} else {
-			other->send_message(game, Message::Type::kTrading, _("Trade Resumed"), other->descr().icon_filename(),
-				_("Trade agreement resumed"), format_l(_("%1$s resumed the trade with you at %2$s."), other->owner().get_name(), other->get_market_name()), true);
+			other->send_message(game, Message::Type::kTrading, _("Trade Resumed"),
+			                    other->descr().icon_filename(), _("Trade agreement resumed"),
+			                    format_l(_("%1$s resumed the trade with you at %2$s."),
+			                             other->owner().get_name(), other->get_market_name()),
+			                    true);
 		}
 	}
 
-	Notifications::publish(NoteTradeChanged(id, pause ? NoteTradeChanged::Action::kPaused : NoteTradeChanged::Action::kUnpaused));
+	Notifications::publish(NoteTradeChanged(
+	   id, pause ? NoteTradeChanged::Action::kPaused : NoteTradeChanged::Action::kUnpaused));
 
 	if (!pause) {
 		try_launching_batch(&game);
@@ -474,7 +492,8 @@ void Market::set_paused(Game& game, const TradeID id, const bool pause) {
 InputQueue* Market::find_overfull_input_queue() {
 	for (auto& order : trade_orders_) {
 		for (auto& pair : order.second.wares_queues_) {
-			if (pair.second->get_type() == wwWARE && pair.second->get_filled() > pair.second->get_max_fill()) {
+			if (pair.second->get_type() == wwWARE &&
+			    pair.second->get_filled() > pair.second->get_max_fill()) {
 				return pair.second.get();
 			}
 		}
@@ -653,11 +672,16 @@ std::string TradeInstance::format_richtext(const TradeID id,
 
 		if (trade->second.paused) {
 			infotext += "</p><p>";
-			infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph, can_act ? _("Paused by you") : format_l(_("Paused by %s"), own_market->owner().get_name()));
+			infotext +=
+			   as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
+			               can_act ? _("Paused by you") :
+			                         format_l(_("Paused by %s"), own_market->owner().get_name()));
 		}
-		if (const auto other_trade = other_market->trade_orders().find(id); other_trade != other_market->trade_orders().end() && other_trade->second.paused) {
+		if (const auto other_trade = other_market->trade_orders().find(id);
+		    other_trade != other_market->trade_orders().end() && other_trade->second.paused) {
 			infotext += "</p><p>";
-			infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph, format_l(_("Paused by %s"), other_market->owner().get_name()));
+			infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
+			                        format_l(_("Paused by %s"), other_market->owner().get_name()));
 		}
 	}
 

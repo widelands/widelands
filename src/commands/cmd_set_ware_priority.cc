@@ -107,14 +107,13 @@ void CmdSetWarePriority::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 	}
 }
 
-CmdSetWarePriority::CmdSetWarePriority(StreamRead& des)
-   : PlayerCommand(Time(0), des.unsigned_8()) {
-     serial_ = des.unsigned_32();
-     type_ = WareWorker(des.unsigned_8());
-     index_ = des.signed_32();
-     priority_ = WarePriority(des);
-     is_constructionsite_setting_ = (des.unsigned_8() != 0u);
-     disambiguator_id_ = des.unsigned_32();
+CmdSetWarePriority::CmdSetWarePriority(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+	serial_ = des.unsigned_32();
+	type_ = WareWorker(des.unsigned_8());
+	index_ = des.signed_32();
+	priority_ = WarePriority(des);
+	is_constructionsite_setting_ = (des.unsigned_8() != 0u);
+	disambiguator_id_ = des.unsigned_32();
 }
 
 void CmdSetWarePriority::serialize(StreamWrite& ser) {

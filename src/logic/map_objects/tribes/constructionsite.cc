@@ -333,7 +333,8 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 					b.set_priority(wwWARE, pair.first, pair.second.priority, 0);
 				}
 				for (const auto& pair : ps->worker_queues) {
-					b.inputqueue(pair.first, wwWORKER, nullptr, 0).set_max_fill(pair.second.desired_fill);
+					b.inputqueue(pair.first, wwWORKER, nullptr, 0)
+					   .set_max_fill(pair.second.desired_fill);
 					b.set_priority(wwWORKER, pair.first, pair.second.priority, 0);
 				}
 				if (upcast(TrainingsiteSettings, ts, ps)) {

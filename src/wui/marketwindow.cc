@@ -258,19 +258,21 @@ public:
 		add_space(kSpacing);
 
 		const Widelands::Market::TradeOrder& order = market.trade_orders().at(trade_id_);
-		InputQueueDisplay* iqd = new InputQueueDisplay(this, ibase, market, *order.carriers_queue_, false, false, collapsed, trade_id_);
+		InputQueueDisplay* iqd = new InputQueueDisplay(
+		   this, ibase, market, *order.carriers_queue_, false, false, collapsed, trade_id_);
 		input_queues_.push_back(iqd);
 		add(iqd, UI::Box::Resizing::kFullSize);
 		for (const auto& pair : order.wares_queues_) {
-			iqd = new InputQueueDisplay(this, ibase, market, *pair.second, false, true, collapsed, trade_id_);
+			iqd = new InputQueueDisplay(
+			   this, ibase, market, *pair.second, false, true, collapsed, trade_id_);
 			input_queues_.push_back(iqd);
 			add_space(kSpacing);
 			add(iqd, UI::Box::Resizing::kFullSize);
 		}
 
 		if (can_act) {
-			button_pause_ =
-			   new UI::Button(this, "toggle_pause", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, std::string());
+			button_pause_ = new UI::Button(
+			   this, "toggle_pause", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, std::string());
 			button_pause_->sigclicked.connect([this]() {
 				upcast(InteractivePlayer, ipl, &ibase_);
 				assert(ipl != nullptr);
@@ -282,8 +284,11 @@ public:
 					return;
 				}
 
-				game.send_player_trade_action(
-				   ipl->player_number(), trade_id_, own_market->is_paused(trade_id_) ? Widelands::TradeAction::kResume : Widelands::TradeAction::kPause, own_market->serial());
+				game.send_player_trade_action(ipl->player_number(), trade_id_,
+				                              own_market->is_paused(trade_id_) ?
+				                                 Widelands::TradeAction::kResume :
+				                                 Widelands::TradeAction::kPause,
+				                              own_market->serial());
 			});
 
 			UI::Button* cancel =
@@ -343,7 +348,10 @@ private:
 				const bool can_resume = market.can_resume(trade_id_);
 				button_pause_->set_enabled(can_resume);
 				button_pause_->set_title(_("Resume"));
-				button_pause_->set_tooltip(can_resume ? _("Resume this paused trade") : _("You need to set all queues to their maximum capacity before you can resume this paused trade."));
+				button_pause_->set_tooltip(can_resume ?
+				                              _("Resume this paused trade") :
+				                              _("You need to set all queues to their maximum capacity "
+				                                "before you can resume this paused trade."));
 			} else {
 				button_pause_->set_title(_("Pause"));
 				button_pause_->set_tooltip(_("Pause this trade"));
@@ -352,7 +360,8 @@ private:
 		}
 
 		for (InputQueueDisplay* iqd : input_queues_) {
-			iqd->set_lock_desired_fill(!paused, _("You need to pause the trade before you can change the queue capacity."));
+			iqd->set_lock_desired_fill(
+			   !paused, _("You need to pause the trade before you can change the queue capacity."));
 		}
 	}
 

@@ -606,7 +606,10 @@ InputQueue& Building::inputqueue(DescriptionIndex const wi,
 	throw wexception("%s (%u) has no InputQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
-bool Building::can_change_max_fill(DescriptionIndex /* di */, WareWorker /* ww */, const Request* /* r */, uint32_t /* disambiguator_id */) {
+bool Building::can_change_max_fill(DescriptionIndex /* di */,
+                                   WareWorker /* ww */,
+                                   const Request* /* r */,
+                                   uint32_t /* disambiguator_id */) {
 	return true;
 }
 

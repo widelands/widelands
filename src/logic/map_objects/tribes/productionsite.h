@@ -393,7 +393,8 @@ public:
 		production_result_ = text;
 	}
 
-	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id) override;
+	InputQueue&
+	inputqueue(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id) override;
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;

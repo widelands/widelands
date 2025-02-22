@@ -2133,7 +2133,8 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 	}
 
 	for (Buildcost::const_iterator it = remaining.begin(); it != remaining.end(); ++it) {
-		WaresQueue& thiswq = dynamic_cast<WaresQueue&>(psite.inputqueue(it->first, wwWARE, nullptr, 0));
+		WaresQueue& thiswq =
+		   dynamic_cast<WaresQueue&>(psite.inputqueue(it->first, wwWARE, nullptr, 0));
 		if (thiswq.get_filled() > 0) {
 			wq = &thiswq;
 			break;
