@@ -305,6 +305,10 @@ bool Market::is_ready_to_launch_batch(const TradeID trade_id) const {
 	const auto& trade_order = it->second;
 	assert(!trade_order.fulfilled());
 
+	if (trade_order.paused) {
+		return false;
+	}
+
 	// Do we have all necessary carriers and wares for a batch?
 	if (static_cast<int>(trade_order.carriers_queue_->get_filled()) <
 	    trade_order.num_wares_per_batch()) {
@@ -369,6 +373,36 @@ InputQueue& Market::inputqueue(DescriptionIndex index, WareWorker ware_worker, c
 
 	// The parent will throw an exception.
 	return Building::inputqueue(index, ware_worker, r);
+}
+
+bool Market::is_paused(const TradeID id) const {
+	const auto trade_order = trade_orders_.find(id);
+	return trade_order != trade_orders_.end() && trade_order->second.paused;
+}
+
+void Market::set_paused(Game& game, const TradeID id, const bool pause) {
+	auto trade_order = trade_orders_.find(id);
+	if (trade_order == trade_orders_.end() || trade_order->second.paused == pause) {
+		return;
+	}
+
+	trade_order->second.paused = pause;
+
+	if (Market* other = trade_order->second.other_side.get(game); other != nullptr) {
+		if (pause) {
+			other->send_message(game, Message::Type::kTrading, _("Trade Paused"), other->descr().icon_filename(),
+				_("Trade agreement paused"), format_l(_("%1$s paused the trade with you at %2$s."), other->owner().get_name(), other->get_market_name()), true);
+		} else {
+			other->send_message(game, Message::Type::kTrading, _("Trade Resumed"), other->descr().icon_filename(),
+				_("Trade agreement resumed"), format_l(_("%1$s resumed the trade with you at %2$s."), other->owner().get_name(), other->get_market_name()), true);
+		}
+	}
+
+	Notifications::publish(NoteTradeChanged(id, pause ? NoteTradeChanged::Action::kPaused : NoteTradeChanged::Action::kUnpaused));
+
+	if (!pause) {
+		try_launching_batch(&game);
+	}
 }
 
 bool Market::fetch_from_flag(Game& game) {
@@ -509,10 +543,6 @@ std::string TradeInstance::format_richtext(const TradeID id,
 			return std::string();
 		}
 
-		assert(other_market->trade_orders().count(id) == 1);
-		assert(trade->second.num_shipped_batches ==
-		       other_market->trade_orders().at(id).num_shipped_batches);
-
 		infotext += "</p><p>";
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
 		                        format_l(ngettext("%d batch delivered", "%d batches delivered",
@@ -524,6 +554,15 @@ std::string TradeInstance::format_richtext(const TradeID id,
 		                        format_l(ngettext("%d batch remaining", "%d batches remaining",
 		                                          num_batches - trade->second.num_shipped_batches),
 		                                 num_batches - trade->second.num_shipped_batches));
+
+		if (trade->second.paused) {
+			infotext += "</p><p>";
+			infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph, can_act ? _("Paused by you") : format_l(_("Paused by %s"), own_market->owner().get_name()));
+		}
+		if (const auto other_trade = other_market->trade_orders().find(id); other_trade != other_market->trade_orders().end() && other_trade->second.paused) {
+			infotext += "</p><p>";
+			infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph, format_l(_("Paused by %s"), other_market->owner().get_name()));
+		}
 	}
 
 	infotext += "</p>";

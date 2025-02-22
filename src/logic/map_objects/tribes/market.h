@@ -52,6 +52,7 @@ public:
 		int initial_num_batches{0};
 		int num_shipped_batches{0};
 		OPtr<Market> other_side{nullptr};
+		bool paused{false};
 
 		int received_traded_wares_in_this_batch{0};
 
@@ -106,6 +107,9 @@ public:
 	[[nodiscard]] const std::map<TradeID, TradeOrder>& trade_orders() const {
 		return trade_orders_;
 	}
+
+	[[nodiscard]] bool is_paused(TradeID id) const;
+	void set_paused(Game& game, TradeID id, bool pause);
 
 	static void carrier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 	static void

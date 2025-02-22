@@ -620,6 +620,7 @@ void MapBuildingdataPacket::read_market(Market& market,
 				trade.initial_num_batches = fr.unsigned_32();
 				trade.num_shipped_batches = fr.unsigned_32();
 				trade.received_traded_wares_in_this_batch = fr.unsigned_32();
+				trade.paused = fr.unsigned_8() != 0;
 
 				for (size_t j = fr.unsigned_32(); j > 0; --j) {
 					const std::string warename(fr.string());
@@ -1491,6 +1492,7 @@ void MapBuildingdataPacket::write_market(const Market& market,
 		fw.unsigned_32(order.second.initial_num_batches);
 		fw.unsigned_32(order.second.num_shipped_batches);
 		fw.unsigned_32(order.second.received_traded_wares_in_this_batch);
+		fw.unsigned_8(order.second.paused ? 1 : 0);
 
 		fw.unsigned_32(order.second.items.size());
 		for (const auto& ware_amount : order.second.items) {

@@ -269,6 +269,24 @@ public:
 		}
 
 		if (can_act) {
+			button_pause_ =
+			   new UI::Button(this, "toggle_pause", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, std::string());
+			update_pause_button_text(market);
+			button_pause_->sigclicked.connect([this]() {
+				upcast(InteractivePlayer, ipl, &ibase_);
+				assert(ipl != nullptr);
+				Widelands::Game& game = ipl->game();
+
+				MutexLock m(MutexLock::ID::kObjects);
+				Widelands::Market* own_market = market_.get(game);
+				if (own_market == nullptr) {
+					return;
+				}
+
+				game.send_player_trade_action(
+				   ipl->player_number(), trade_id_, own_market->is_paused(trade_id_) ? Widelands::TradeAction::kResume : Widelands::TradeAction::kPause, own_market->serial());
+			});
+
 			UI::Button* cancel =
 			   new UI::Button(this, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel"),
 			                  _("Cancel this trade"));
@@ -283,6 +301,9 @@ public:
 					show_cancel_trade_confirm(*ipl, trade_id_);
 				}
 			});
+
+			add_space(kSpacing);
+			add(button_pause_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			add_space(kSpacing);
 			add(cancel, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		}
@@ -309,9 +330,19 @@ public:
 		const Widelands::TradeInstance& agreement = ibase_.game().get_trade(trade_id_);
 		info_.set_text(agreement.format_richtext(
 		   trade_id_, ibase_.egbase(), own_market->owner().player_number(), can_act_));
+		update_pause_button_text(*own_market);
 	}
 
 private:
+	void update_pause_button_text(const Widelands::Market& market) {
+		if (button_pause_ != nullptr) {
+			const bool paused = market.is_paused(trade_id_);
+			button_pause_->set_title(paused ? _("Resume") : _("Pause"));
+			button_pause_->set_tooltip(paused ? _("Resume this paused trade") : _("Pause this trade"));
+			button_pause_->expand();
+		}
+	}
+
 	InteractiveBase& ibase_;
 	Widelands::OPtr<Widelands::Market> market_;
 	Widelands::TradeID trade_id_;
@@ -319,6 +350,7 @@ private:
 
 	Time nextupdate_;
 	UI::MultilineTextarea info_;
+	UI::Button* button_pause_{nullptr};
 };
 
 MarketWindow::MarketWindow(InteractiveBase& parent,
