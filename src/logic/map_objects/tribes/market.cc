@@ -418,7 +418,7 @@ bool Market::can_change_max_fill(const DescriptionIndex index,
 
 uint32_t Market::get_priority_disambiguator_id(const Request* req) const {
 	if (req != nullptr) {
-		for (auto& pair : trade_orders_) {
+		for (const auto& pair : trade_orders_) {
 			for (const auto& queue : pair.second.wares_queues_) {
 				if (queue.second->matches(*req)) {
 					return pair.first;
@@ -444,7 +444,7 @@ bool Market::can_resume(const TradeID id) const {
 	}
 
 	const TradeOrder& order = trade_orders_.at(id);
-	for (auto& pair : order.wares_queues_) {
+	for (const auto& pair : order.wares_queues_) {
 		if (pair.second->get_max_fill() < pair.second->get_max_size()) {
 			return false;
 		}
