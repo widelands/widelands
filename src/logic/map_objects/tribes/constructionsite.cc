@@ -760,7 +760,7 @@ void ConstructionSite::draw(const Time& gametime,
 			// check that gametime is not greater then the envisaged completion time
 			if (gametime > workstep_completiontime_) {
 				last_remaining_time_ = Duration(0U);
-			} else{
+			} else {
 				last_remaining_time_ = workstep_completiontime_ - gametime;
 			}
 		} else {
