@@ -378,6 +378,21 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	// Do not call think() yet, it might deadlock
 }
 
+void InputQueueDisplay::set_lock_desired_fill(bool lock, const std::string& reason) {
+	lock_desired_fill_ = lock;
+
+	b_decrease_desired_fill_.set_enabled(can_act_ && !lock);
+	b_increase_desired_fill_.set_enabled(can_act_ && !lock);
+
+	if (lock) {
+		b_decrease_desired_fill_.set_tooltip(reason);
+		b_increase_desired_fill_.set_tooltip(reason);
+	} else {
+		b_decrease_desired_fill_.set_tooltip(create_tooltip(false));
+		b_increase_desired_fill_.set_tooltip(create_tooltip(true));
+	}
+}
+
 void InputQueueDisplay::recurse(const std::function<void(InputQueueDisplay&)>& functor) {
 	for (UI::Panel* p = get_parent()->get_first_child(); p != nullptr; p = p->get_next_sibling()) {
 		if (upcast(InputQueueDisplay, i, p)) {
@@ -512,6 +527,10 @@ void InputQueueDisplay::set_priority(const Widelands::WarePriority& priority) {
 }
 
 void InputQueueDisplay::clicked_desired_fill(const int8_t delta) {
+	if (lock_desired_fill_) {
+		return;
+	}
+
 	assert(delta == 1 || delta == -1);
 	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::Building* b = building_.get(ibase_.egbase());
@@ -543,7 +562,7 @@ void InputQueueDisplay::clicked_desired_fill(const int8_t delta) {
 }
 
 void InputQueueDisplay::change_desired_fill(const int8_t delta) {
-	if (delta == 0) {
+	if (delta == 0 || lock_desired_fill_) {
 		return;
 	}
 	MutexLock m(MutexLock::ID::kObjects);
@@ -581,6 +600,10 @@ void InputQueueDisplay::change_desired_fill(const int8_t delta) {
 }
 
 void InputQueueDisplay::set_desired_fill(unsigned new_fill) {
+	if (lock_desired_fill_) {
+		return;
+	}
+
 	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::Building* b = building_.get(ibase_.egbase());
 	if (b == nullptr) {
@@ -757,7 +780,7 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 		                 (icons_[0]->get_h() - max_fill_indicator_.height()) / 2;
 		r.blit(Vector2i(calc_xpos(desired_fill), ypos), &max_fill_indicator_);
 
-		if (can_act_ && fill_index_under_mouse_ >= 0) {
+		if (can_act_ && !lock_desired_fill_ && fill_index_under_mouse_ >= 0) {
 			r.blitrect_scale(Rectf(calc_xpos(fill_index_under_mouse_), ypos,
 			                       max_fill_indicator_.width(), max_fill_indicator_.height()),
 			                 &max_fill_indicator_, max_fill_indicator_.rect(), 0.4f,

@@ -106,6 +106,8 @@ public:
 
 	void set_max_icons(size_t);
 
+	void set_lock_desired_fill(bool lock, const std::string& reason);
+
 protected:
 	void think() override;
 	void draw(RenderTarget&) override;
@@ -168,6 +170,7 @@ private:
 	UI::PrioritySlider priority_;
 	UI::Panel spacer_, priority_indicator_;
 	const Widelands::WarePriority* slider_was_moved_;
+	bool lock_desired_fill_{false};
 
 	BuildingWindow::CollapsedState* collapsed_;  ///< Owned by the window creating the input queue
 

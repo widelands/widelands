@@ -75,7 +75,7 @@ void CmdSetInputMaxFill::execute(Game& game) {
 			}
 		}
 	} else if (upcast(Building, b, mo)) {
-		if (b->owner().player_number() == sender()) {
+		if (b->owner().player_number() == sender() && b->can_change_max_fill(index_, type_, nullptr, disambiguator_id_)) {
 			b->inputqueue(index_, type_, nullptr, disambiguator_id_).set_max_fill(max_fill_);
 			if (upcast(Warehouse, wh, b)) {
 				if (PortDock* p = wh->get_portdock()) {

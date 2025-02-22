@@ -258,20 +258,19 @@ public:
 		add_space(kSpacing);
 
 		const Widelands::Market::TradeOrder& order = market.trade_orders().at(trade_id_);
-		// TODO(Nordfriese): Implement controls for those
-		add(
-		   new InputQueueDisplay(this, ibase, market, *order.carriers_queue_, false, false, collapsed, trade_id_),
-		   UI::Box::Resizing::kFullSize);
+		InputQueueDisplay* iqd = new InputQueueDisplay(this, ibase, market, *order.carriers_queue_, false, false, collapsed, trade_id_);
+		input_queues_.push_back(iqd);
+		add(iqd, UI::Box::Resizing::kFullSize);
 		for (const auto& pair : order.wares_queues_) {
+			iqd = new InputQueueDisplay(this, ibase, market, *pair.second, false, true, collapsed, trade_id_);
+			input_queues_.push_back(iqd);
 			add_space(kSpacing);
-			add(new InputQueueDisplay(this, ibase, market, *pair.second, false, true, collapsed, trade_id_),
-			    UI::Box::Resizing::kFullSize);
+			add(iqd, UI::Box::Resizing::kFullSize);
 		}
 
 		if (can_act) {
 			button_pause_ =
 			   new UI::Button(this, "toggle_pause", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, std::string());
-			update_pause_button_text(market);
 			button_pause_->sigclicked.connect([this]() {
 				upcast(InteractivePlayer, ipl, &ibase_);
 				assert(ipl != nullptr);
@@ -309,6 +308,8 @@ public:
 		}
 
 		add_space(kSpacing);
+
+		update_paused(market);
 		think();
 	}
 
@@ -330,16 +331,28 @@ public:
 		const Widelands::TradeInstance& agreement = ibase_.game().get_trade(trade_id_);
 		info_.set_text(agreement.format_richtext(
 		   trade_id_, ibase_.egbase(), own_market->owner().player_number(), can_act_));
-		update_pause_button_text(*own_market);
+		update_paused(*own_market);
 	}
 
 private:
-	void update_pause_button_text(const Widelands::Market& market) {
+	void update_paused(const Widelands::Market& market) {
+		const bool paused = market.is_paused(trade_id_);
+
 		if (button_pause_ != nullptr) {
-			const bool paused = market.is_paused(trade_id_);
-			button_pause_->set_title(paused ? _("Resume") : _("Pause"));
-			button_pause_->set_tooltip(paused ? _("Resume this paused trade") : _("Pause this trade"));
+			if (paused) {
+				const bool can_resume = market.can_resume(trade_id_);
+				button_pause_->set_enabled(can_resume);
+				button_pause_->set_title(_("Resume"));
+				button_pause_->set_tooltip(can_resume ? _("Resume this paused trade") : _("You need to set all queues to their maximum capacity before you can resume this paused trade."));
+			} else {
+				button_pause_->set_title(_("Pause"));
+				button_pause_->set_tooltip(_("Pause this trade"));
+			}
 			button_pause_->expand();
+		}
+
+		for (InputQueueDisplay* iqd : input_queues_) {
+			iqd->set_lock_desired_fill(!paused, _("You need to pause the trade before you can change the queue capacity."));
 		}
 	}
 
@@ -351,6 +364,7 @@ private:
 	Time nextupdate_;
 	UI::MultilineTextarea info_;
 	UI::Button* button_pause_{nullptr};
+	std::vector<InputQueueDisplay*> input_queues_;
 };
 
 MarketWindow::MarketWindow(InteractiveBase& parent,

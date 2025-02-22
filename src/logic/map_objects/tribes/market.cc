@@ -360,16 +360,26 @@ void Market::launch_batch(const TradeID trade_id, Game* game) {
 }
 
 InputQueue& Market::inputqueue(const DescriptionIndex index, const WareWorker ware_worker, const Request* r, const uint32_t disambiguator_id) {
+	std::pair<InputQueue*, TradeID> pair = find_inputqueue(index, ware_worker, r, disambiguator_id);
+	if (pair.first != nullptr) {
+		return *pair.first;
+	}
+
+	// The parent will throw an exception.
+	return Building::inputqueue(index, ware_worker, r, disambiguator_id);
+}
+
+std::pair<InputQueue*, TradeID> Market::find_inputqueue(const DescriptionIndex index, const WareWorker ware_worker, const Request* r, const uint32_t disambiguator_id) {
 	if (r != nullptr) {
 		for (auto& pair : trade_orders_) {
 			if (ware_worker == wwWARE) {
 				auto it = pair.second.wares_queues_.find(index);
 				if (it != pair.second.wares_queues_.end() && it->second->matches(*r)) {
 					assert(it->second->get_index() == index);
-					return *it->second;
+					return {it->second.get(), pair.first};
 				}
 			} else if (pair.second.carriers_queue_->matches(*r)) {
-				return *pair.second.carriers_queue_;
+				return {pair.second.carriers_queue_.get(), pair.first};
 			}
 		}
 	} else {
@@ -378,16 +388,21 @@ InputQueue& Market::inputqueue(const DescriptionIndex index, const WareWorker wa
 				auto it = pair->second.wares_queues_.find(index);
 				if (it != pair->second.wares_queues_.end()) {
 					assert(it->second->get_index() == index);
-					return *it->second;
+					return {it->second.get(), pair->first};
 				}
 			} else if (pair->second.carriers_queue_->get_index() == index) {
-				return *pair->second.carriers_queue_;
+				return {pair->second.carriers_queue_.get(), pair->first};
 			}
 		}
 	}
 
-	// The parent will throw an exception.
-	return Building::inputqueue(index, ware_worker, r, disambiguator_id);
+	return {nullptr, kInvalidTrade};
+}
+
+bool Market::can_change_max_fill(const DescriptionIndex index, const WareWorker ware_worker, const Request* r, const uint32_t disambiguator_id) {
+	const std::pair<InputQueue*, TradeID> pair = find_inputqueue(index, ware_worker, r, disambiguator_id);
+	const auto order = trade_orders_.find(pair.second);
+	return order != trade_orders_.end() && order->second.paused && Building::can_change_max_fill(index, ware_worker, r, disambiguator_id);
 }
 
 uint32_t Market::get_priority_disambiguator_id(const Request* req) const {
@@ -412,9 +427,28 @@ bool Market::is_paused(const TradeID id) const {
 	return trade_order != trade_orders_.end() && trade_order->second.paused;
 }
 
+bool Market::can_resume(const TradeID id) const {
+	if (!is_paused(id)) {
+		return false;
+	}
+
+	const TradeOrder& order = trade_orders_.at(id);
+	for (auto& pair : order.wares_queues_) {
+		if (pair.second->get_max_fill() < pair.second->get_max_size()) {
+			return false;
+		}
+	}
+	return order.carriers_queue_->get_max_fill() >= order.carriers_queue_->get_max_size();
+}
+
 void Market::set_paused(Game& game, const TradeID id, const bool pause) {
 	auto trade_order = trade_orders_.find(id);
 	if (trade_order == trade_orders_.end() || trade_order->second.paused == pause) {
+		return;
+	}
+
+	if (!pause && !can_resume(id)) {
+		molog(game.get_gametime(), "Attempt to resume but cannot resume");
 		return;
 	}
 

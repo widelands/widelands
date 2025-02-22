@@ -99,6 +99,7 @@ public:
 	void cancel_trade(Game& game, TradeID trade_id, bool reached_regular_end, bool send_msg);
 
 	[[nodiscard]] InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id) override;
+	[[nodiscard]] bool can_change_max_fill(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id) override;
 	void cleanup(EditorGameBase&) override;
 
 	void inputqueue_max_fill_changed() override;
@@ -112,8 +113,9 @@ public:
 
 	[[nodiscard]] uint32_t get_priority_disambiguator_id(const Request* req) const override;
 
-	[[nodiscard]] bool is_paused(TradeID id) const;
 	void set_paused(Game& game, TradeID id, bool pause);
+	[[nodiscard]] bool is_paused(TradeID id) const;
+	[[nodiscard]] bool can_resume(TradeID id) const;
 
 	static void carrier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 	static void
@@ -123,6 +125,7 @@ private:
 	[[nodiscard]] bool is_ready_to_launch_batch(TradeID trade_id) const;
 	void launch_batch(TradeID trade_id, Game* game);
 
+	std::pair<InputQueue*, TradeID> find_inputqueue(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id);
 	[[nodiscard]] InputQueue* find_overfull_input_queue();
 
 	std::string market_name_;
