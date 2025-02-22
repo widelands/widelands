@@ -726,7 +726,7 @@ void InputQueueDisplay::think() {
 	                                             std::string());
 
 	if (has_priority_) {
-		const Widelands::WarePriority& p = queue_ != nullptr ?
+		const Widelands::WarePriority& p = queue_ != nullptr ?  // NOLINT
 		                                      b->get_priority(type_, index_, disambiguator_id_) :
 		                                      get_setting()->priority;
 		// The purpose of this check is to prevent the slider from snapping back directly after
