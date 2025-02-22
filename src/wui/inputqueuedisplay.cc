@@ -95,7 +95,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                                      Widelands::InputQueue& queue,
                                      bool show_only,
                                      bool has_priority,
-                                     BuildingWindow::CollapsedState* collapsed)
+                                     BuildingWindow::CollapsedState* collapsed,
+                                     uint32_t disambiguator_id)
    : InputQueueDisplay(parent,
                        interactive_base,
                        building,
@@ -105,14 +106,16 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                        nullptr,
                        show_only,
                        has_priority,
-                       collapsed) {
+                       collapsed,
+                       disambiguator_id) {
 }
 InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                                      InteractiveBase& interactive_base,
                                      Widelands::ConstructionSite& constructionsite,
                                      Widelands::WareWorker type,
                                      Widelands::DescriptionIndex ware_or_worker_index,
-                                     BuildingWindow::CollapsedState* collapsed)
+                                     BuildingWindow::CollapsedState* collapsed,
+                                     uint32_t disambiguator_id)
    : InputQueueDisplay(
         parent,
         interactive_base,
@@ -123,7 +126,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
         dynamic_cast<Widelands::ProductionsiteSettings*>(constructionsite.get_settings()),
         false,
         true,
-        collapsed) {
+        collapsed,
+        disambiguator_id) {
 }
 
 static inline std::string create_tooltip(const bool increase) {
@@ -162,7 +166,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                                      Widelands::ProductionsiteSettings* settings,
                                      bool show_only,
                                      bool has_priority,
-                                     BuildingWindow::CollapsedState* collapsed)
+                                     BuildingWindow::CollapsedState* collapsed,
+                                     uint32_t disambiguator_id)
    : UI::Box(parent,
              UI::PanelStyle::kWui,
              format("inputqueuedisplay_%u_%u", static_cast<unsigned>(type), ware_or_worker_index),
@@ -178,6 +183,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
      index_(ware_or_worker_index),
      queue_(queue),
      settings_(settings),
+     disambiguator_id_(disambiguator_id),
      max_fill_indicator_(*g_image_cache->get("images/wui/buildings/max_fill_indicator.png")),
      vbox_(this, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical),
      hbox_(&vbox_, UI::PanelStyle::kWui, "hbox", 0, 0, UI::Box::Horizontal),
@@ -236,7 +242,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                4,
                has_priority_ ? priority_to_index(settings_ != nullptr ?
                                                     settings_->ware_queues.at(index_).priority :
-                                                    building.get_priority(type_, index_)) :
+                                                    building.get_priority(type_, index_, disambiguator_id_)) :
                                2,
                UI::SliderStyle::kWuiLight,
                "",
@@ -490,15 +496,15 @@ void InputQueueDisplay::set_priority(const Widelands::WarePriority& priority) {
 	}
 
 	if (!can_act_ || !has_priority_ ||
-	    priority == (queue_ != nullptr ? b->get_priority(type_, index_) : get_setting()->priority)) {
+	    priority == (queue_ != nullptr ? b->get_priority(type_, index_, disambiguator_id_) : get_setting()->priority)) {
 		return;
 	}
 
 	if (Widelands::Game* game = ibase_.get_game()) {
-		game->send_player_set_ware_priority(*b, type_, index_, priority, settings_ != nullptr);
+		game->send_player_set_ware_priority(*b, type_, index_, priority, settings_ != nullptr, disambiguator_id_);
 	} else {
 		if (queue_ != nullptr) {
-			b->set_priority(type_, index_, priority);
+			b->set_priority(type_, index_, priority, disambiguator_id_);
 		} else {
 			get_setting()->priority = priority;
 		}
@@ -526,7 +532,7 @@ void InputQueueDisplay::clicked_desired_fill(const int8_t delta) {
 	const unsigned new_fill = ctrl_down ? delta < 0 ? 0 : max_fill : desired_fill + delta;
 
 	if (Widelands::Game* game = ibase_.get_game()) {
-		game->send_player_set_input_max_fill(*b, index_, type_, new_fill, settings_ != nullptr);
+		game->send_player_set_input_max_fill(*b, index_, type_, new_fill, settings_ != nullptr, disambiguator_id_);
 	} else {
 		if (queue_ != nullptr) {
 			queue_->set_max_fill(new_fill);
@@ -564,7 +570,7 @@ void InputQueueDisplay::change_desired_fill(const int8_t delta) {
 	}
 
 	if (Widelands::Game* game = ibase_.get_game()) {
-		game->send_player_set_input_max_fill(*b, index_, type_, desired_fill, settings_ != nullptr);
+		game->send_player_set_input_max_fill(*b, index_, type_, desired_fill, settings_ != nullptr, disambiguator_id_);
 	} else {
 		if (queue_ != nullptr) {
 			queue_->set_max_fill(desired_fill);
@@ -592,7 +598,7 @@ void InputQueueDisplay::set_desired_fill(unsigned new_fill) {
 	}
 
 	if (Widelands::Game* game = ibase_.get_game()) {
-		game->send_player_set_input_max_fill(*b, index_, type_, new_fill, settings_ != nullptr);
+		game->send_player_set_input_max_fill(*b, index_, type_, new_fill, settings_ != nullptr, disambiguator_id_);
 	} else {
 		if (queue_ != nullptr) {
 			queue_->set_max_fill(new_fill);
@@ -692,7 +698,7 @@ void InputQueueDisplay::think() {
 
 	if (has_priority_) {
 		const Widelands::WarePriority& p =                                     // NOLINT
-		   queue_ ? b->get_priority(type_, index_) : get_setting()->priority;  // NOLINT
+		   queue_ ? b->get_priority(type_, index_, disambiguator_id_) : get_setting()->priority;  // NOLINT
 		// The purpose of this check is to prevent the slider from snapping back directly after
 		// the user dragged it, because the playercommand is not executed immediately of course
 		if ((slider_was_moved_ == nullptr) || *slider_was_moved_ == p) {
@@ -761,7 +767,7 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 
 	// Draw priority indicator
 	if (has_priority_ && is_collapsed()) {
-		const size_t p = priority_to_index(queue_ != nullptr ? b->get_priority(type_, index_) :
+		const size_t p = priority_to_index(queue_ != nullptr ? b->get_priority(type_, index_, disambiguator_id_) :
 		                                                       get_setting()->priority);
 		const int w = priority_indicator_.get_w();
 		// Add kButtonSize / 4 to the position to align it against the collapse button

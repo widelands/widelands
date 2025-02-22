@@ -260,11 +260,11 @@ public:
 		const Widelands::Market::TradeOrder& order = market.trade_orders().at(trade_id_);
 		// TODO(Nordfriese): Implement controls for those
 		add(
-		   new InputQueueDisplay(this, ibase, market, *order.carriers_queue_, true, false, collapsed),
+		   new InputQueueDisplay(this, ibase, market, *order.carriers_queue_, false, false, collapsed, trade_id_),
 		   UI::Box::Resizing::kFullSize);
 		for (const auto& pair : order.wares_queues_) {
 			add_space(kSpacing);
-			add(new InputQueueDisplay(this, ibase, market, *pair.second, true, true, collapsed),
+			add(new InputQueueDisplay(this, ibase, market, *pair.second, false, true, collapsed, trade_id_),
 			    UI::Box::Resizing::kFullSize);
 		}
 

@@ -91,14 +91,16 @@ public:
 	                  Widelands::InputQueue& queue,
 	                  bool show_only,
 	                  bool has_priority,
-	                  BuildingWindow::CollapsedState* collapsed);
+	                  BuildingWindow::CollapsedState* collapsed,
+	                  uint32_t disambiguator_id = 0);
 	// For constructionsite settings
 	InputQueueDisplay(UI::Panel* parent,
 	                  InteractiveBase& interactive_base,
 	                  Widelands::ConstructionSite& constructionsite,
 	                  Widelands::WareWorker type,
 	                  Widelands::DescriptionIndex ware_or_worker_index,
-	                  BuildingWindow::CollapsedState* collapsed);
+	                  BuildingWindow::CollapsedState* collapsed,
+	                  uint32_t disambiguator_id = 0);
 
 	~InputQueueDisplay() override = default;
 
@@ -124,7 +126,8 @@ private:
 	                  Widelands::ProductionsiteSettings* settings,
 	                  bool show_only,
 	                  bool has_priority,
-	                  BuildingWindow::CollapsedState* collapsed);
+	                  BuildingWindow::CollapsedState* collapsed,
+	                  uint32_t disambiguator_id);
 
 	InteractiveBase& ibase_;
 	bool can_act_, show_only_, has_priority_;
@@ -139,6 +142,8 @@ private:
 	Widelands::ProductionsiteSettings* settings_;
 
 	Widelands::ProductionsiteSettings::InputQueueSetting* get_setting() const;
+
+	uint32_t disambiguator_id_;
 
 	// Run a function on this InputQueueDisplay and all its siblings
 	void recurse(const std::function<void(InputQueueDisplay&)>&);

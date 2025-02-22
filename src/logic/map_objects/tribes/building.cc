@@ -601,7 +601,8 @@ std::string Building::named_building_census_string(const std::string& icon_fmt,
 
 InputQueue& Building::inputqueue(DescriptionIndex const wi,
                                  WareWorker const /* type */,
-                                 const Request* /* req */) {
+                                 const Request* /* req */,
+                                 uint32_t /* disambiguator_id */) {
 	throw wexception("%s (%u) has no InputQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
@@ -770,10 +771,15 @@ void Building::draw_info(const InfoToDraw info_to_draw,
 	             point_on_dst, scale, dst);
 }
 
+uint32_t Building::get_priority_disambiguator_id(const Request* /*req*/) const {
+	return 0;
+}
+
 const WarePriority& Building::get_priority(const WareWorker type,
-                                           const DescriptionIndex ware_index) const {
+                                           const DescriptionIndex ware_index,
+                                           const uint32_t disambiguator_id) const {
 	if (type == wwWARE) {
-		const auto it = ware_priorities_.find(ware_index);
+		const auto it = ware_priorities_.find({ware_index, disambiguator_id});
 		if (it != ware_priorities_.end()) {
 			return it->second;
 		}
@@ -787,13 +793,15 @@ const WarePriority& Building::get_priority(const WareWorker type,
  */
 void Building::set_priority(const WareWorker type,
                             const DescriptionIndex ware_index,
-                            const WarePriority& new_priority) {
+                            const WarePriority& new_priority,
+                            const uint32_t disambiguator_id) {
 	if (type == wwWARE) {
 		// WarePriority is not default-constructible, so no [] access :(
-		if (ware_priorities_.count(ware_index) != 0u) {
-			ware_priorities_.at(ware_index) = new_priority;
+		std::pair<DescriptionIndex, uint32_t> key(ware_index, disambiguator_id);
+		if (ware_priorities_.count(key) != 0u) {
+			ware_priorities_.at(key) = new_priority;
 		} else {
-			ware_priorities_.emplace(ware_index, new_priority);
+			ware_priorities_.emplace(key, new_priority);
 		}
 	}
 }

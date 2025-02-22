@@ -98,8 +98,10 @@ public:
 	               OPtr<Market> other_side);
 	void cancel_trade(Game& game, TradeID trade_id, bool reached_regular_end, bool send_msg);
 
-	[[nodiscard]] InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
+	[[nodiscard]] InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id) override;
 	void cleanup(EditorGameBase&) override;
+
+	void inputqueue_max_fill_changed() override;
 
 	void try_launching_batch(Game* game);
 	void traded_ware_arrived(TradeID trade_id, DescriptionIndex ware_index, Game* game);
@@ -107,6 +109,8 @@ public:
 	[[nodiscard]] const std::map<TradeID, TradeOrder>& trade_orders() const {
 		return trade_orders_;
 	}
+
+	[[nodiscard]] uint32_t get_priority_disambiguator_id(const Request* req) const override;
 
 	[[nodiscard]] bool is_paused(TradeID id) const;
 	void set_paused(Game& game, TradeID id, bool pause);
@@ -118,6 +122,8 @@ public:
 private:
 	[[nodiscard]] bool is_ready_to_launch_batch(TradeID trade_id) const;
 	void launch_batch(TradeID trade_id, Game* game);
+
+	[[nodiscard]] InputQueue* find_overfull_input_queue();
 
 	std::string market_name_;
 	std::map<TradeID, TradeOrder> trade_orders_;

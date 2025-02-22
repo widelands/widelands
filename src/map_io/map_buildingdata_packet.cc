@@ -61,7 +61,7 @@
 namespace Widelands {
 
 // Overall package version
-constexpr uint16_t kCurrentPacketVersion = 9;
+constexpr uint16_t kCurrentPacketVersion = 10;
 
 // Building type package versions
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
@@ -74,6 +74,7 @@ constexpr uint16_t kCurrentPacketVersionTrainingsite = 7;
 
 /* Packet versions changelog:
  * Overall: v1.1 = 9
+ * - 10: Added priority disambiguator id
  * Dismantlesite: v1.1 = 1
  * Constructionsite: v1.1 = 5
  * PFBuilding: v1.1 = 2
@@ -103,6 +104,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
+		// TODO(Nordfriese): Savegame compatibility v1.2
 		if (packet_version <= kCurrentPacketVersion && packet_version >= 9) {
 			while (!fr.end_of_file()) {
 				Serial const serial = fr.unsigned_32();
@@ -159,8 +161,9 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 
 					for (size_t i = fr.unsigned_32(); i != 0u; --i) {
 						const std::string warename(fr.string());
+						const uint32_t disambiguator_id = packet_version >= 10 ? fr.unsigned_32() : 0;
 						building.set_priority(
-						   wwWARE, egbase.descriptions().ware_index(warename), WarePriority(fr));
+						   wwWARE, egbase.descriptions().ware_index(warename), WarePriority(fr), disambiguator_id);
 					}
 
 					if (uint32_t const leaver_serial = fr.unsigned_32()) {
@@ -1220,7 +1223,8 @@ void MapBuildingdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 
 			fw.unsigned_32(building->ware_priorities_.size());
 			for (const auto& pair : building->ware_priorities_) {
-				fw.string(egbase.descriptions().get_ware_descr(pair.first)->name());
+				fw.string(egbase.descriptions().get_ware_descr(pair.first.first)->name());
+				fw.unsigned_32(pair.first.second);
 				pair.second.write(fw);
 			}
 

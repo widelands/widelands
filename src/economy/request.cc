@@ -282,7 +282,7 @@ constexpr Duration kBlacklistDurationAfterEvict(18000);
 uint32_t Request::get_priority(const int32_t cost) const {
 	assert(cost >= 0);
 	const WarePriority& priority =
-	   (target_building_ != nullptr ? target_building_->get_priority(get_type(), get_index()) :
+	   (target_building_ != nullptr ? target_building_->get_priority(get_type(), get_index(), target_building_->get_priority_disambiguator_id(this)) :
 	                                  WarePriority::kNormal);
 
 	// Don't allow evicted workers to go straight back inside (bug #4809)
@@ -338,7 +338,7 @@ uint32_t Request::get_normalized_transfer_priority() const {
 	// High               4096                 12
 	// VeryHigh         2^32-1                 16
 
-	const WarePriority& priority = target_building_->get_priority(get_type(), get_index());
+	const WarePriority& priority = target_building_->get_priority(get_type(), get_index(), target_building_->get_priority_disambiguator_id(this));
 	if (WarePriority::kVeryHigh <= priority) {
 		return Flag::kMaxTransferPriority;
 	}

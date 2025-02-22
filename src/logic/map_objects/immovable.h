@@ -393,6 +393,8 @@ struct PlayerImmovable : public BaseImmovable {
 	/*@{*/
 	virtual void receive_ware(Game&, DescriptionIndex ware);
 	virtual void receive_worker(Game&, Worker& worker);
+	virtual void inputqueue_max_fill_changed() {
+	}
 	/*@}*/
 
 	void set_owner(Player*) override;

@@ -222,7 +222,7 @@ public:
 
 	// Returns the waresqueue of the expedition if this is a port.
 	// Will throw an exception otherwise.
-	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id) override;
 
 	[[nodiscard]] const std::string& get_warehouse_name() const {
 		return warehouse_name_;

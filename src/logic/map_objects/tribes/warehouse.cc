@@ -562,7 +562,7 @@ bool Warehouse::init(EditorGameBase& egbase) {
 	set_seeing(true);
 
 	// Garrisons should be treated as more important than militarysites
-	set_priority(wwWORKER, player->tribe().soldier(), WarePriority::kHigh);
+	set_priority(wwWORKER, player->tribe().soldier(), WarePriority::kHigh, 0);
 
 	// Even though technically, a warehouse might be completely empty,
 	// we let warehouse see always for simplicity's sake (since there's
@@ -1488,11 +1488,11 @@ void Warehouse::check_remove_stock(Game& game) {
 	}
 }
 
-InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type, const Request* r) {
+InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type, const Request* r, uint32_t disambiguator_id) {
 	assert(portdock_ != nullptr);
 	assert(portdock_->expedition_bootstrap() != nullptr);
 	return r != nullptr ? portdock_->expedition_bootstrap()->inputqueue(*r) :
-	                      portdock_->expedition_bootstrap()->inputqueue(index, type, false);
+	                      portdock_->expedition_bootstrap()->inputqueue(index, type, false, disambiguator_id);
 }
 
 void Warehouse::set_desired_soldier_count(Quantity q) {

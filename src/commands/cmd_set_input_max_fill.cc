@@ -34,13 +34,15 @@ CmdSetInputMaxFill::CmdSetInputMaxFill(const Time& init_duetime,
                                        const DescriptionIndex index,
                                        const WareWorker type,
                                        const uint32_t max_fill,
-                                       bool cs_setting)
+                                       bool cs_setting,
+                                       uint32_t disambiguator_id)
    : PlayerCommand(init_duetime, init_sender),
      serial_(imm.serial()),
      index_(index),
      type_(type),
      max_fill_(max_fill),
-     is_constructionsite_setting_(cs_setting) {
+     is_constructionsite_setting_(cs_setting),
+     disambiguator_id_(disambiguator_id) {
 }
 
 void CmdSetInputMaxFill::execute(Game& game) {
@@ -74,7 +76,7 @@ void CmdSetInputMaxFill::execute(Game& game) {
 		}
 	} else if (upcast(Building, b, mo)) {
 		if (b->owner().player_number() == sender()) {
-			b->inputqueue(index_, type_, nullptr).set_max_fill(max_fill_);
+			b->inputqueue(index_, type_, nullptr, disambiguator_id_).set_max_fill(max_fill_);
 			if (upcast(Warehouse, wh, b)) {
 				if (PortDock* p = wh->get_portdock()) {
 					// Update in case the expedition was ready previously and now lacks a ware again
@@ -85,7 +87,12 @@ void CmdSetInputMaxFill::execute(Game& game) {
 	}
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdSetInputMaxFill = 3;
+/**
+ * Changelog:
+ * 3 - v1.2
+ * 4 - Added disambiguator ID
+ */
+constexpr uint16_t kCurrentPacketVersionCmdSetInputMaxFill = 4;
 
 void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersionCmdSetInputMaxFill);
@@ -97,12 +104,14 @@ void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 	fw.unsigned_8(type_ == wwWARE ? 0 : 1);
 	fw.unsigned_32(max_fill_);
 	fw.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
+	fw.unsigned_32(disambiguator_id_);
 }
 
 void CmdSetInputMaxFill::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdSetInputMaxFill) {
+		// TODO(Nordfriese): Savegame compatibility v1.2
+		if (packet_version >= 3 && packet_version <= kCurrentPacketVersionCmdSetInputMaxFill) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
 			index_ = fr.signed_32();
@@ -113,6 +122,7 @@ void CmdSetInputMaxFill::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 			}
 			max_fill_ = fr.unsigned_32();
 			is_constructionsite_setting_ = (fr.unsigned_8() != 0u);
+			disambiguator_id_ = (packet_version >= 4) ? fr.unsigned_32() : 0;
 		} else {
 			throw UnhandledVersionError(
 			   "CmdSetInputMaxFill", packet_version, kCurrentPacketVersionCmdSetInputMaxFill);
@@ -132,6 +142,7 @@ CmdSetInputMaxFill::CmdSetInputMaxFill(StreamRead& des) : PlayerCommand(Time(0),
 	}
 	max_fill_ = des.unsigned_32();
 	is_constructionsite_setting_ = (des.unsigned_8() != 0u);
+	disambiguator_id_ = des.unsigned_32();
 }
 
 void CmdSetInputMaxFill::serialize(StreamWrite& ser) {
@@ -141,6 +152,7 @@ void CmdSetInputMaxFill::serialize(StreamWrite& ser) {
 	ser.unsigned_8(type_ == wwWARE ? 0 : 1);
 	ser.unsigned_32(max_fill_);
 	ser.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
+	ser.unsigned_32(disambiguator_id_);
 }
 
 }  // namespace Widelands

@@ -181,7 +181,7 @@ void ExpeditionBootstrap::cleanup(EditorGameBase& /* egbase */) {
 }
 
 InputQueue&
-ExpeditionBootstrap::inputqueue(DescriptionIndex index, WareWorker type, bool additional) const {
+ExpeditionBootstrap::inputqueue(DescriptionIndex index, WareWorker type, bool additional, uint32_t /* disambiguator_id */) const {
 	for (const auto& iq : queues_) {
 		if (iq.first->get_index() == index && iq.first->get_type() == type &&
 		    iq.second == additional) {
