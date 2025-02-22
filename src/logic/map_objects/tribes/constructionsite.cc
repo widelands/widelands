@@ -757,7 +757,12 @@ void ConstructionSite::draw(const Time& gametime,
 	if (working_) {
 		if (builder_ != nullptr) {
 			// if we have a builder remember the current progress
-			last_remaining_time_ = work_steptime_ - gametime;
+			// check that gametime is not greater then the envisaged completion time
+			if (gametime > work_steptime_) {
+				last_remaining_time_ = Duration(0U);
+			} else{
+				last_remaining_time_ = work_steptime_ - gametime;
+			}
 		} else {
 			// with the builder evicted keep the progress by pushing the foressen finishing time. 
 			work_steptime_ = gametime + last_remaining_time_;
