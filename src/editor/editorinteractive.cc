@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,6 +50,7 @@
 #include "editor/ui_menus/tool_set_terrain_options_menu.h"
 #include "editor/ui_menus/tool_toolhistory_options_menu.h"
 #include "editor/ui_menus/toolsize_menu.h"
+#include "graphic/color_palette.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/playercolor.h"
 #include "graphic/text_layout.h"
@@ -481,7 +482,7 @@ void EditorInteractive::rebuild_showhide_menu() {
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether to show maximum
 	 * building spaces that will be available if all immovables (trees, rocks, etc.) are removed */
 	showhidemenu_.add(get_display_flag(dfShowMaximumBuildhelp) ? _("Hide Maximum Building Spaces") :
-                                                                _("Show Maximum Building Spaces"),
+	                                                             _("Show Maximum Building Spaces"),
 	                  ShowHideEntry::kMaximumBuildingSpaces,
 	                  g_image_cache->get("images/wui/menus/toggle_maxbuild.png"), false,
 	                  _("Toggle whether to show maximum building spaces that will be available if "
@@ -489,10 +490,10 @@ void EditorInteractive::rebuild_showhide_menu() {
 	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideMaximumBuildhelp, false));
 
 	showhidemenu_.add(get_display_flag(dfHeightHeatMap) ?
-                        /** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
-                        the map height heat map is shown */
-                        _("Disable height heat map") :
-                        _("Enable height heat map"),
+	                     /** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+	                     the map height heat map is shown */
+	                     _("Disable height heat map") :
+	                     _("Enable height heat map"),
 	                  ShowHideEntry::kHeightHeatMap,
 	                  g_image_cache->get("images/wui/menus/menu_toggle_height_heat_map.png"), false,
 	                  "",
@@ -647,7 +648,7 @@ void EditorInteractive::exit(const bool force) {
 		UI::WLMessageBox mmb(
 		   this, UI::WindowStyle::kWui, need_save_ ? _("Unsaved Map") : _("Exit Editor Confirmation"),
 		   need_save_ ? _("The map has not been saved, do you really want to quit?") :
-                      _("Are you sure you wish to exit the editor?"),
+		                _("Are you sure you wish to exit the editor?"),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (mmb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
 			return;
@@ -834,8 +835,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 				const float scaling =
 				   get_display_flag(dfShowMaximumBuildhelp) &&
 				         ((nodecaps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) ?
-                  0.9f :
-                  1.0f;
+				      0.9f :
+				      1.0f;
 				blit_field_overlay(
 				   &dst, field, overlay->pic, overlay->hotspot, scale / overlay->scale * scaling);
 			}
@@ -843,13 +844,14 @@ void EditorInteractive::draw(RenderTarget& dst) {
 
 		// Show ocean overlay.
 		if (show_oceans) {
-			uint32_t value = ocean_overlays_->at(map.get_index(field.fcoords));
-			if (value != 0) {
-				auto it = ocean_overlays_cache.find(value);
+			const unsigned ocean_number = ocean_overlays_->at(map.get_index(field.fcoords));
+			if (ocean_number != 0) {
+				auto it = ocean_overlays_cache.find(ocean_number);
 				if (it == ocean_overlays_cache.end()) {
 					it = ocean_overlays_cache
-					        .emplace(value, playercolor_image(
-					                           RGBColor(value), "images/wui/overlays/ocean.png", scale))
+					        .emplace(
+					           ocean_number, playercolor_image(kOceanColors.at(ocean_number - 1),
+					                                           "images/wui/overlays/ocean.png", scale))
 					        .first;
 				}
 				blit_field_overlay(
@@ -919,8 +921,7 @@ void EditorInteractive::update_ocean_overlays() {
 	const Widelands::FindNodeAlwaysTrue functor;
 	const size_t nr_fields = map.max_index();
 
-	static std::vector<uint32_t> kOceanColors;
-	unsigned nr_oceans = 0;
+	unsigned last_ocean = 0;
 	ocean_overlays_.reset(new std::vector<uint32_t>(nr_fields, 0));
 
 	for (size_t index = 0; index < nr_fields; ++index) {
@@ -934,22 +935,7 @@ void EditorInteractive::update_ocean_overlays() {
 		}
 
 		// New ocean found.
-		++nr_oceans;
-
-		constexpr uint32_t kAlpha = 0xff000000;
-		if (kOceanColors.size() < nr_oceans) {
-			uint32_t color;
-			do {
-				const int rg = (RNG::static_rand() % 0x10000);
-				// Cap Blue to Green minus 50 or Red for visibility on blue water terrains.
-				const int bmax = std::max<int>((rg & 0xff) - 50, (rg & 0xff00) >> 8);
-				const int b = bmax > 0 ? (RNG::static_rand() % bmax) : 0;
-				color = kAlpha | (rg << 8) | b;
-			} while (std::find(kOceanColors.begin(), kOceanColors.end(), color) != kOceanColors.end());
-			kOceanColors.emplace_back(color);
-			assert(nr_oceans == kOceanColors.size());
-		}
-		const uint32_t this_ocean_color = kOceanColors.at(nr_oceans - 1);
+		++last_ocean;
 
 		std::vector<Widelands::Coords> ocean_fields;
 		map.find_reachable_fields(egbase(),
@@ -960,26 +946,27 @@ void EditorInteractive::update_ocean_overlays() {
 		// Store and validate the fields.
 		for (const Widelands::Coords& coords : ocean_fields) {
 			size_t i = map.get_index(coords);
-			if (ocean_overlays_->at(i) != 0 && ocean_overlays_->at(i) != this_ocean_color) {
-				throw wexception("Field #%" PRIuS " (%dx%d) belongs to two oceans #%08x and #%08x!", i,
-				                 coords.x, coords.y, ocean_overlays_->at(i), this_ocean_color);
+			if (ocean_overlays_->at(i) != 0 && ocean_overlays_->at(i) != last_ocean) {
+				throw wexception("Field #%" PRIuS " (%dx%d) belongs to two oceans #%u and #%u!", i,
+				                 coords.x, coords.y, ocean_overlays_->at(i), last_ocean);
 			}
-			ocean_overlays_->at(i) = this_ocean_color;
+			ocean_overlays_->at(i) = last_ocean;
 		}
 
-		if (ocean_overlays_->at(index) != this_ocean_color) {
-			throw wexception("Field #%" PRIuS " does not belong to its own ocean #%08x of size %" PRIuS
+		if (ocean_overlays_->at(index) != last_ocean) {
+			throw wexception("Field #%" PRIuS " does not belong to its own ocean #%u of size %" PRIuS
 			                 "!",
-			                 index, this_ocean_color, ocean_fields.size());
+			                 index, last_ocean, ocean_fields.size());
 		}
 	}
+	verb_log_dbg("Map has %u oceans.", last_ocean);
 }
 
 /// Needed to get freehand painting tools (hold down mouse and move to edit).
 void EditorInteractive::set_sel_pos(Widelands::NodeAndTriangle<> const sel) {
 	bool const target_changed = tools_->current().operates_on_triangles() ?
-                                  sel.triangle != get_sel_pos().triangle :
-                                  sel.node != get_sel_pos().node;
+	                               sel.triangle != get_sel_pos().triangle :
+	                               sel.node != get_sel_pos().node;
 	InteractiveBase::set_sel_pos(sel);
 	if (target_changed && is_painting_) {
 		map_clicked(sel, true);
@@ -1042,6 +1029,10 @@ void EditorInteractive::toggle_oceans() {
 }
 
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
+	if (InteractiveBase::handle_key(down, code)) {
+		return true;
+	}
+
 	if (down) {
 		if (matches_shortcut(KeyboardShortcut::kCommonEncyclopedia, code)) {
 			menu_windows_.help.toggle();
@@ -1215,7 +1206,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		}
 	}
 
-	return InteractiveBase::handle_key(down, code);
+	return false;
 }
 
 bool EditorInteractive::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {

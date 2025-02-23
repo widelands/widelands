@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2024 by the Widelands Development Team
+ * Copyright (C) 2011-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -461,15 +461,15 @@ void ShipWindow::think() {
 	btn_refit_->set_visible(!ibase_.egbase().is_game() || ibase_.game().naval_warfare_allowed());
 
 	btn_refit_->set_pic(g_image_cache->get(ship->get_ship_type() == Widelands::ShipType::kWarship ?
-                                             kImgRefitTransport :
-                                             kImgRefitWarship));
+	                                          kImgRefitTransport :
+	                                          kImgRefitWarship));
 	btn_refit_->set_enabled(can_act &&
 	                        ship->can_refit(ship->get_ship_type() == Widelands::ShipType::kWarship ?
-                                              Widelands::ShipType::kTransport :
-                                              Widelands::ShipType::kWarship));
+	                                           Widelands::ShipType::kTransport :
+	                                           Widelands::ShipType::kWarship));
 	btn_refit_->set_tooltip(ship->get_ship_type() == Widelands::ShipType::kWarship ?
-                              _("Refit to transport ship") :
-                              _("Refit to warship"));
+	                           _("Refit to transport ship") :
+	                           _("Refit to warship"));
 	btn_stay_->set_enabled(can_act);
 
 	display_->clear();
@@ -546,7 +546,7 @@ void ShipWindow::act_rename() {
 		return;
 	}
 	if (Widelands::Game* game = ibase_.get_game()) {
-		game->send_player_ship_port_name(
+		game->send_player_building_name(
 		   ship->owner().player_number(), ship->serial(), name_field_->get_text());
 	} else {
 		ship->set_shipname(name_field_->get_text());
@@ -610,8 +610,8 @@ void ShipWindow::act_refit() {
 		return;
 	}
 	const Widelands::ShipType t = ship->get_ship_type() == Widelands::ShipType::kWarship ?
-                                    Widelands::ShipType::kTransport :
-                                    Widelands::ShipType::kWarship;
+	                                 Widelands::ShipType::kTransport :
+	                                 Widelands::ShipType::kWarship;
 	if (Widelands::Game* game = ibase_.get_game(); game != nullptr) {
 		game->send_player_refit_ship(*ship, t);
 	} else {

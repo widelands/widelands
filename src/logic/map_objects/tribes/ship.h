@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2024 by the Widelands Development Team
+ * Copyright (C) 2010-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -236,6 +236,7 @@ struct Ship : Bob {
 
 	/// \returns (in expedition mode only!) whether the next field in direction \arg dir is swimmable
 	[[nodiscard]] bool exp_dir_swimmable(Direction dir) const {
+		assert(dir >= FIRST_DIRECTION && dir <= LAST_DIRECTION);
 		return expedition_ != nullptr && expedition_->swimmable[dir - 1];
 	}
 

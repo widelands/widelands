@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,7 @@ unsigned read_percent_to_int(const std::string& input) {
 		                  // (\\d{1,2}) here, which is match[2].
 		                  (match[2].str().empty()     ? 0U :
 		                   match[2].str().size() == 1 ? 10U * std::stoul(match[2]) :
-                                                      std::stoul(match[2]));
+		                                                std::stoul(match[2]));
 
 		if (result > k100PercentAsInt) {
 			throw wexception(

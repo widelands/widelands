@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024 by the Widelands Development Team
+ * Copyright (C) 2021-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -594,8 +594,8 @@ void MousewheelOptionsDialog::set_touchpad() {
 	settings_.zoom_dir_ = (speed_box_.conflicts(KMOD_CTRL, SD::kHorizontal) ||
 	                       toolsize_box_.conflicts(KMOD_CTRL, SD::kHorizontal) ||
 	                       toolgap_box_.conflicts(KMOD_CTRL, SD::kHorizontal)) ?
-                            SD::kVertical :
-                            SD::kAny;
+	                         SD::kVertical :
+	                         SD::kAny;
 	zoom_box_.update_sel();
 	apply_settings();
 	update_settings();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -137,6 +137,9 @@ struct BaseListselect : public Panel {
 
 	void set_linked_dropdown(UI::BaseDropdown* d) {
 		linked_dropdown_ = d;
+	}
+	[[nodiscard]] UI::BaseDropdown* get_linked_dropdown() {
+		return linked_dropdown_;
 	}
 
 	struct EntryRecord {

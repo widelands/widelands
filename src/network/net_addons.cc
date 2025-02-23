@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2024 by the Widelands Development Team
+ * Copyright (C) 2020-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,9 +40,9 @@
 
 #include <SDL_timer.h>
 
+#include "base/crypto.h"
 #include "base/i18n.h"
 #include "base/math.h"
-#include "base/md5.h"
 #include "base/time_string.h"
 #include "base/warning.h"
 #include "build_info.h"
@@ -65,8 +65,8 @@ namespace AddOns {
  */
 
 constexpr unsigned kCurrentProtocolVersion = 7;
-static const std::string kCmdList = "2:CMD_LIST";
-static const std::string kCmdInfo = "2:CMD_INFO";
+static const std::string kCmdList = "3:CMD_LIST";
+static const std::string kCmdInfo = "3:CMD_INFO";
 static const std::string kCmdDownload = "1:CMD_DOWNLOAD";
 static const std::string kCmdI18N = "2:CMD_I18N";
 static const std::string kCmdScreenshot = "1:CMD_SCREENSHOT";
@@ -132,10 +132,7 @@ void NetAddons::check_checksum(const std::string& path, const std::string& check
 	const size_t bytes = fr.get_size();
 	std::unique_ptr<char[]> complete(new char[bytes]);
 	fr.data_complete(complete.get(), bytes);
-	SimpleMD5Checksum md5sum;
-	md5sum.data(complete.get(), bytes);
-	md5sum.finish_checksum();
-	const std::string md5 = md5sum.get_checksum().str();
+	const std::string md5 = crypto::md5_str(complete.get(), bytes);
 	if (checksum != md5) {
 		throw_warning(format("Downloaded file '%s': Checksum mismatch, found %s, expected %s",
 		                     path.c_str(), md5.c_str(), checksum.c_str()));
@@ -281,10 +278,7 @@ void NetAddons::init(std::string username, std::string password) {
 		data += read_line();
 		data += '\n';
 		check_endofstream();
-		SimpleMD5Checksum md5;
-		md5.data(data.c_str(), data.size());
-		md5.finish_checksum();
-		send = md5.get_checksum().str();
+		send = crypto::md5_str(data.c_str(), data.size());
 		send += "\nENDOFSTREAM\n";
 		write_to_server(send);
 
@@ -585,9 +579,48 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 		g_fs->fs_unlink(path);
 	}
 
+	if (a.category == AddOnCategory::kSingleMap) {
+		a.map_file_name = read_line();
+
+		a.unlocalized_map_hint = read_line();
+		std::string localized_map_hint = read_line();
+		a.map_hint = [localized_map_hint]() { return localized_map_hint; };
+
+		a.unlocalized_map_uploader_comment = read_line();
+		std::string localized_map_uploader_comment = read_line();
+		a.map_uploader_comment = [localized_map_uploader_comment]() {
+			return localized_map_uploader_comment;
+		};
+
+		a.map_width = math::to_int(read_line());
+		a.map_height = math::to_int(read_line());
+		a.map_nr_players = math::to_int(read_line());
+		a.map_world_name = read_line();
+	}
+
 	check_endofstream();
 	guard.ok();
 	return a;
+}
+
+void NetAddons::download_map(const std::string& name, const std::string& save_as) {
+	check_string_validity(name);
+	init();
+	CrashGuard guard(*this, false);
+
+	std::string send = kCmdDownload;
+	send += ' ';
+	send += name;
+	send += '\n';
+	write_to_server(send);
+
+	const std::string checksum = read_line();
+	const int64_t length = math::to_long(read_line());
+	read_file(length, save_as);
+	check_checksum(save_as, checksum);
+
+	check_endofstream();
+	guard.ok();
 }
 
 void NetAddons::download_addon(const std::string& name,
@@ -865,13 +898,10 @@ void NetAddons::upload_addon(const std::string& name,
 			const size_t bytes = fr.get_size();
 			std::unique_ptr<char[]> complete(new char[bytes]);
 			fr.data_complete(complete.get(), bytes);
-			SimpleMD5Checksum md5sum;
-			md5sum.data(complete.get(), bytes);
-			md5sum.finish_checksum();
 
 			send = file;
 			send += '\n';
-			send += md5sum.get_checksum().str();
+			send += crypto::md5_str(complete.get(), bytes);
 			send += '\n';
 			send += std::to_string(bytes);
 			send += '\n';
@@ -935,13 +965,10 @@ void NetAddons::upload_screenshot(const std::string& addon,
 	const size_t bytes = fr.get_size();
 	std::unique_ptr<char[]> complete(new char[bytes]);
 	fr.data_complete(complete.get(), bytes);
-	SimpleMD5Checksum md5sum;
-	md5sum.data(complete.get(), bytes);
-	md5sum.finish_checksum();
 
 	send += std::to_string(bytes);
 	send += ' ';
-	send += md5sum.get_checksum().str();
+	send += crypto::md5_str(complete.get(), bytes);
 	send += ' ';
 	send += std::to_string(std::count(description.begin(), description.end(), ' '));
 	send += ' ';

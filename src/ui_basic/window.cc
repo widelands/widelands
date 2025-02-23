@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -136,22 +136,22 @@ inline const WindowStyleInfo& Window::window_style_info() const {
 }
 inline const FontStyleInfo& Window::title_style() const {
 	return g_style_manager->font_style(window_style_ == WindowStyle::kWui ?
-                                         FontStyle::kWuiWindowTitle :
-                                         FontStyle::kFsMenuWindowTitle);
+	                                      FontStyle::kWuiWindowTitle :
+	                                      FontStyle::kFsMenuWindowTitle);
 }
 
 void Window::update_toolbar_buttons() {
 	button_minimize_->set_pic(g_image_cache->get(is_minimal_ ?
-                                                   window_style_info().button_unminimize() :
-                                                   window_style_info().button_minimize()));
+	                                                window_style_info().button_unminimize() :
+	                                                window_style_info().button_minimize()));
 	button_minimize_->set_tooltip(is_minimal_ ? _("Restore") : _("Minimize"));
 	button_minimize_->set_visual_state(is_minimal_ ? Button::VisualState::kPermpressed :
-                                                    Button::VisualState::kRaised);
+	                                                 Button::VisualState::kRaised);
 	button_pin_->set_pic(g_image_cache->get(pinned_ ? window_style_info().button_unpin() :
-                                                     window_style_info().button_pin()));
+	                                                  window_style_info().button_pin()));
 	button_pin_->set_tooltip(pinned_ ? _("Unpin") : _("Pin"));
 	button_pin_->set_visual_state(pinned_ ? Button::VisualState::kPermpressed :
-                                           Button::VisualState::kRaised);
+	                                        Button::VisualState::kRaised);
 	button_close_->set_enabled(!pinned_);
 }
 
@@ -429,16 +429,16 @@ void Window::draw(RenderTarget& dst) {
 void Window::draw_border(RenderTarget& dst) {
 	const RGBAColor& focus_color =
 	   ((get_parent() != nullptr) && get_parent()->focused_child() == this) || is_modal() ?
-         window_style_info().window_border_focused() :
-         window_style_info().window_border_unfocused();
+	      window_style_info().window_border_focused() :
+	      window_style_info().window_border_unfocused();
 
 	{  // Top border
 		const int img_len = window_style_info().border_top()->width();
 		const int border_x1 = is_minimal() ? window_style_info().corner_minimal_left()->width() :
-                                           window_style_info().corner_top_left()->width();
+		                                     window_style_info().corner_top_left()->width();
 		const int border_x2 =
 		   get_w() - (is_minimal() ? window_style_info().corner_minimal_right()->width() :
-                                   window_style_info().corner_top_right()->width());
+		                             window_style_info().corner_top_right()->width());
 
 		// Middle
 		int pos = border_x1;

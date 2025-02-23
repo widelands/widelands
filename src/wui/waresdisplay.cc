@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2024 by the Widelands Development Team
+ * Copyright (C) 2003-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -155,9 +155,9 @@ bool AbstractWaresDisplay::handle_mousemove(
 	curware_.set_fixed_width(get_inner_w());
 
 	curware_.set_text(index != Widelands::INVALID_INDEX ?
-                        (type_ == Widelands::wwWORKER ? tribe_.get_worker_descr(index)->descname() :
-                                                        tribe_.get_ware_descr(index)->descname()) :
-                        "");
+	                     (type_ == Widelands::wwWORKER ? tribe_.get_worker_descr(index)->descname() :
+	                                                     tribe_.get_ware_descr(index)->descname()) :
+	                     "");
 	if (selection_anchor_ != Widelands::INVALID_INDEX) {
 		// Ensure mouse button is still pressed as some
 		// mouse release events do not reach us
@@ -468,7 +468,7 @@ void AbstractWaresDisplay::draw_ware_backgrounds(RenderTarget& dst) {
 
 				const UI::WareInfoStyleInfo& style =
 				   draw_selected ? g_style_manager->ware_info_style(UI::WareInfoStyle::kHighlight) :
-                               g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
+				                   g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
 
 				if (update) {
 					ware_details_cache_[id].second =
@@ -488,7 +488,7 @@ void AbstractWaresDisplay::draw_ware_backgrounds(RenderTarget& dst) {
 				}
 
 				const Image* icon = type_ == Widelands::wwWARE ? tribe_.get_ware_descr(id)->icon() :
-                                                             tribe_.get_worker_descr(id)->icon();
+				                                                 tribe_.get_worker_descr(id)->icon();
 				background_texture_->blit(
 				   Rectf(p.x + (w - kWareMenuPicWidth) / 2.f, p.y + 1, icon->width(), icon->height()),
 				   *icon, Rectf(0, 0, icon->width(), icon->height()), 1.f, BlendMode::Default);
@@ -499,8 +499,8 @@ void AbstractWaresDisplay::draw_ware_backgrounds(RenderTarget& dst) {
 			if (!hidden_[id]) {
 				const UI::WareInfoStyleInfo& style =
 				   draw_ware_as_selected(id) ?
-                  g_style_manager->ware_info_style(UI::WareInfoStyle::kHighlight) :
-                  g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
+				      g_style_manager->ware_info_style(UI::WareInfoStyle::kHighlight) :
+				      g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
 				ware_details_cache_[id].second =
 				   UI::g_fh->render(as_richtext_paragraph(info_for_ware(id), style.info_font()));
 			}
@@ -522,7 +522,7 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 
 	const UI::WareInfoStyleInfo& style =
 	   draw_selected ? g_style_manager->ware_info_style(UI::WareInfoStyle::kHighlight) :
-                      g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
+	                   g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
 
 	uint16_t w = style.icon_background_image()->width();
 
@@ -612,8 +612,8 @@ std::string StockMenuWaresDisplay::info_for_ware(const Widelands::DescriptionInd
 
 	// Indicate trend over the last 5 minutes
 	const std::vector<uint32_t>& history = get_type() == Widelands::wwWARE ?
-                                             *player_.get_ware_stock_statistics(di) :
-                                             *player_.get_worker_stock_statistics(di);
+	                                          *player_.get_ware_stock_statistics(di) :
+	                                          *player_.get_worker_stock_statistics(di);
 	const size_t nr_entries = history.size();
 
 	if (nr_entries == 0u) {
@@ -624,15 +624,15 @@ std::string StockMenuWaresDisplay::info_for_ware(const Widelands::DescriptionInd
 	const size_t kSampleEntriesForTrend = 5 * 60 * 1000 / Widelands::kStatisticsSampleTime.get();
 	const uint32_t last_amount =
 	   history[nr_entries < kSampleEntriesForTrend ? nr_entries - 1 :
-                                                    nr_entries - kSampleEntriesForTrend];
+	                                                 nr_entries - kSampleEntriesForTrend];
 
 	const UI::BuildingStatisticsStyleInfo& colors = g_style_manager->building_statistics_style();
 	const std::string indicator =
 	   current_amount < last_amount ?
-         StyleManager::color_tag(_("↓"), colors.alternative_low_color()) :
+	      StyleManager::color_tag(_("↓"), colors.alternative_low_color()) :
 	   current_amount > last_amount ?
-         StyleManager::color_tag(_("↑"), colors.alternative_high_color()) :
-         StyleManager::color_tag(_("="), colors.alternative_medium_color());
+	      StyleManager::color_tag(_("↑"), colors.alternative_high_color()) :
+	      StyleManager::color_tag(_("="), colors.alternative_medium_color());
 	/** TRANSLATORS: The first placeholder is the stock amount of a ware/worker, and the second is an
 	 * icon indicating a trend. Very little space is available. */
 	return format(_("%1$s%2$s"), text, indicator);
@@ -658,7 +658,7 @@ StockMenuWaresDisplay::draw_ware_background_overlay(const Widelands::Description
 	const RGBColor& color =
 	   amount < target ? g_style_manager->building_statistics_style().alternative_low_color() :
 	   amount > target ? g_style_manager->building_statistics_style().alternative_high_color() :
-                        g_style_manager->building_statistics_style().alternative_medium_color();
+	                     g_style_manager->building_statistics_style().alternative_medium_color();
 	return RGBAColor(color.r, color.g, color.b, 160);
 }
 
@@ -697,7 +697,7 @@ uint32_t StockMenuWaresDisplay::amount_of(const Widelands::DescriptionIndex ware
 			} else {
 				for (const Widelands::Warehouse* warehouse : economy.second->warehouses()) {
 					totalstock += (get_type() == Widelands::wwWARE ? warehouse->get_wares() :
-                                                                warehouse->get_workers())
+					                                                 warehouse->get_workers())
 					                 .stock(ware);
 				}
 			}

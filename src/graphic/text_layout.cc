@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -157,8 +157,8 @@ std::string as_message(const std::string& heading, const std::string& body) {
 	   format("<rt><p>%s<br></p><vspace gap=6>%s</rt>",
 	          as_font_tag(UI::FontStyle::kWuiMessageHeading, heading),
 	          (is_paragraph(body) || is_div(body) ?
-                 body :
-                 format("<p>%s</p>", as_font_tag(UI::FontStyle::kWuiMessageParagraph, body)))));
+	              body :
+	              format("<p>%s</p>", as_font_tag(UI::FontStyle::kWuiMessageParagraph, body)))));
 }
 
 std::string
@@ -241,10 +241,10 @@ std::string as_tooltip_text_with_hotkey(const std::string& text,
                                         const UI::PanelStyle style) {
 	return format("<rt><p>%s %s</p></rt>",
 	              as_font_tag(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltip :
-                                                             UI::FontStyle::kFsTooltip,
+	                                                          UI::FontStyle::kFsTooltip,
 	                          text),
 	              as_font_tag(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltipHotkey :
-                                                             UI::FontStyle::kFsTooltipHotkey,
+	                                                          UI::FontStyle::kFsTooltipHotkey,
 	                          "(" + hotkey + ")"));
 }
 

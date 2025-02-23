@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2024 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -94,7 +94,7 @@ public:
 
 	[[nodiscard]] int32_t cost(WareWorker which) const {
 		return (which == wwWARE) ? mpf_realcost_ware + mpf_estimate_ware :
-                                 mpf_realcost_worker + mpf_estimate_worker;
+		                           mpf_realcost_worker + mpf_estimate_worker;
 	}
 	Queue::Cookie& cookie(WareWorker which) {
 		return which == wwWARE ? mpf_cookie_ware : mpf_cookie_worker;

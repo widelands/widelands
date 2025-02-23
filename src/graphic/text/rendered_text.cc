@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2024 by the Widelands Development Team
+ * Copyright (C) 2017-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -311,8 +311,8 @@ void RenderedText::blit_cropped(RenderTarget& dst,
 
 	dst.blitrect(
 	   Vector2i(cropped_left > 0 ?
-                  position.x + region.x - (align == UI::Align::kRight ? region.w : region.w / 2) :
-                  blit_point.x,
+	               position.x + region.x - (align == UI::Align::kRight ? region.w : region.w / 2) :
+	               blit_point.x,
 	            blit_point.y),
 	   rect.image(), Recti(cropped_left > 0 ? cropped_left : 0, region.y, blit_width, region.h));
 }

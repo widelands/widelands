@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,6 @@
 #include "economy/road.h"
 #include "economy/waterway.h"
 #include "graphic/style_manager.h"
-#include "logic/cmd_queue.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/ship.h"
@@ -354,8 +353,8 @@ static bool suited_for_targeting(Widelands::PlayerNumber p,
 
 			const Widelands::BuildingDescr& descr =
 			   mo->descr().type() == Widelands::MapObjectType::CONSTRUCTIONSITE ?
-               dynamic_cast<const Widelands::ConstructionSite&>(*mo).building() :
-               dynamic_cast<const Widelands::Building&>(*mo).descr();
+			      dynamic_cast<const Widelands::ConstructionSite&>(*mo).building() :
+			      dynamic_cast<const Widelands::Building&>(*mo).descr();
 
 			if (i.descr().collected_by().count(descr.name()) != 0u) {
 				upcast(const Widelands::Building, b, mo);
@@ -614,8 +613,8 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 		// Figure out if we can build it here, and in which tab it belongs
 		if (building_descr->get_ismine()) {
 			if (((building_descr->get_built_over_immovable() == Widelands::INVALID_INDEX ?
-                  buildcaps :
-                  max_nodecaps) &
+			         buildcaps :
+			         max_nodecaps) &
 			     Widelands::BUILDCAPS_MINE) == 0) {
 				continue;
 			}
@@ -625,8 +624,8 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 			int32_t size = building_descr->get_size() - Widelands::BaseImmovable::SMALL;
 
 			if (((building_descr->get_built_over_immovable() == Widelands::INVALID_INDEX ?
-                  buildcaps :
-                  max_nodecaps) &
+			         buildcaps :
+			         max_nodecaps) &
 			     Widelands::BUILDCAPS_SIZEMASK) < size + 1) {
 				continue;
 			}
@@ -938,8 +937,8 @@ void FieldActionWindow::act_goto_buildroadstart() {
 		return;
 	}
 	ibase().map_view()->scroll_to_field((SDL_GetModState() & KMOD_CTRL) != 0 ?
-                                          ibase().get_build_road_end() :
-                                          ibase().get_build_road_start(),
+	                                       ibase().get_build_road_end() :
+	                                       ibase().get_build_road_start(),
 	                                    MapView::Transition::Smooth);
 	reset_mouse_and_die();
 }
@@ -998,7 +997,8 @@ void FieldActionWindow::act_build(Widelands::DescriptionIndex idx) {
 	upcast(Game, game, &ibase().egbase());
 	upcast(InteractivePlayer, iaplayer, &ibase());
 
-	game->send_player_build(iaplayer->player_number(), node_, Widelands::DescriptionIndex(idx));
+	game->send_player_build_building(
+	   iaplayer->player_number(), node_, Widelands::DescriptionIndex(idx));
 	iaplayer->set_flag_to_connect(game->map().br_n(node_));
 	reset_mouse_and_die();
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2024 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
-#include "economy/cmd_call_economy_balance.h"
+#include "commands/cmd_call_economy_balance.h"
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "economy/route.h"
@@ -41,15 +41,8 @@ namespace Widelands {
 
 constexpr uint32_t kTryImportThreshold = 8;  // straight line distance in nodes count
 
-Serial Economy::last_economy_serial_ = 0;
-
-void Economy::initialize_serial() {
-	verb_log_info("Initializing economy serial\n");
-	last_economy_serial_ = 0;
-}
-
 Economy::Economy(Player& player, WareWorker wwtype)
-   : Economy(player, last_economy_serial_++, wwtype) {
+   : Economy(player, dynamic_cast<Game&>(player.egbase()).generate_economy_serial(), wwtype) {
 }
 
 Economy::Economy(Player& player, Serial init_serial, WareWorker wwtype)
@@ -58,11 +51,11 @@ Economy::Economy(Player& player, Serial init_serial, WareWorker wwtype)
      type_(wwtype),
      request_timerid_(0),
      options_window_(nullptr) {
-	last_economy_serial_ = std::max(last_economy_serial_, serial_ + 1);
+	dynamic_cast<Game&>(player.egbase()).notify_economy_serial(serial_);
 	const TribeDescr& tribe = player.tribe();
 	DescriptionIndex const nr_wares_or_workers = wwtype == wwWARE ?
-                                                   player.egbase().descriptions().nr_wares() :
-                                                   player.egbase().descriptions().nr_workers();
+	                                                player.egbase().descriptions().nr_wares() :
+	                                                player.egbase().descriptions().nr_workers();
 	wares_or_workers_.set_nrwares(nr_wares_or_workers);
 
 	target_quantities_ = new TargetQuantity[nr_wares_or_workers];
@@ -539,7 +532,7 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type,
 		Quantity quantity_district = 0;
 		for (const Warehouse* wh : warehouses_) {
 			Quantity stock = type_ == wwWARE ? wh->get_wares().stock(ware_or_worker_type) :
-                                            wh->get_workers().stock(ware_or_worker_type);
+			                                   wh->get_workers().stock(ware_or_worker_type);
 			if (is_soldier) {
 				Quantity garrison = wh->get_desired_soldier_count();
 				if (garrison >= stock) {
@@ -552,8 +545,8 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type,
 
 			if (flag != nullptr) {
 				const StockPolicy policy = type() == wwWARE ?
-                                          wh->get_ware_policy(ware_or_worker_type) :
-                                          wh->get_worker_policy(ware_or_worker_type);
+				                              wh->get_ware_policy(ware_or_worker_type) :
+				                              wh->get_worker_policy(ware_or_worker_type);
 				if (flag->get_district_center(type()) == wh->base_flag().get_district_center(type())) {
 					quantity_district += stock;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2024 by the Widelands Development Team
+ * Copyright (C) 2022-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -298,8 +298,8 @@ void GameDiplomacyMenu::update_diplomacy_details() {
 				iplayer_->game().send_player_diplomacy(
 				   pda.sender,
 				   pda.action == Widelands::DiplomacyAction::kInvite ?
-                  Widelands::DiplomacyAction::kRetractInvite :
-                  Widelands::DiplomacyAction::kRetractJoin,
+				      Widelands::DiplomacyAction::kRetractInvite :
+				      Widelands::DiplomacyAction::kRetractJoin,
 				   pda.other);
 			});
 			actions_vbox_no_.add(b);
@@ -318,16 +318,16 @@ void GameDiplomacyMenu::update_diplomacy_details() {
 				iplayer_->game().send_player_diplomacy(
 				   pda.other,
 				   pda.action == Widelands::DiplomacyAction::kInvite ?
-                  Widelands::DiplomacyAction::kAcceptInvite :
-                  Widelands::DiplomacyAction::kAcceptJoin,
+				      Widelands::DiplomacyAction::kAcceptInvite :
+				      Widelands::DiplomacyAction::kAcceptJoin,
 				   pda.sender);
 			});
 			b2->sigclicked.connect([this, pda]() {
 				iplayer_->game().send_player_diplomacy(
 				   pda.other,
 				   pda.action == Widelands::DiplomacyAction::kInvite ?
-                  Widelands::DiplomacyAction::kRefuseInvite :
-                  Widelands::DiplomacyAction::kRefuseJoin,
+				      Widelands::DiplomacyAction::kRefuseInvite :
+				      Widelands::DiplomacyAction::kRefuseJoin,
 				   pda.sender);
 			});
 			actions_vbox_yes_.add(b1);

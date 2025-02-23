@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -199,9 +199,9 @@ SoldierPanel::SoldierPanel(UI::Panel& parent,
 		icon.cache_health = 0;
 		icon.cache_level = 0;
 		icon.cache_is_present = is_ship_ ?
-                                 (std::find(onboard_soldiers.begin(), onboard_soldiers.end(),
+		                           (std::find(onboard_soldiers.begin(), onboard_soldiers.end(),
 		                                      soldier) != onboard_soldiers.end()) :
-                                 building->is_present(*soldier);
+		                           building->is_present(*soldier);
 		icons_.push_back(icon);
 
 		if (++col >= cols_) {
@@ -333,7 +333,7 @@ void SoldierPanel::think() {
 		uint32_t health = soldier->get_current_health();
 		bool present = is_ship_ ? (std::find(onboard_soldiers.begin(), onboard_soldiers.end(),
 		                                     soldier) != onboard_soldiers.end()) :
-                                building->is_present(*soldier);
+		                          building->is_present(*soldier);
 
 		if (health != icon.cache_health || level != icon.cache_level ||
 		    present != icon.cache_is_present) {
@@ -503,7 +503,7 @@ SoldierList::SoldierList(UI::Panel& parent,
 		soldier_preference_.set_state(
 		   static_cast<uint8_t>(ms != nullptr ? ms->get_soldier_preference() :
 		                        wh != nullptr ? wh->get_soldier_preference() :
-                                              ship->get_soldier_preference()),
+		                                        ship->get_soldier_preference()),
 		   false);
 		if (can_act) {
 			soldier_preference_.changedto.connect([this](int32_t a) { set_soldier_preference(a); });
@@ -585,10 +585,10 @@ bool SoldierList::can_eject() const {
 	const Widelands::Ship* ship = is_ship ? soldierpanel_.get_ship() : nullptr;
 
 	uint32_t const capacity_min = is_ship ? ship->min_warship_soldier_capacity() :
-                                           building->soldier_control()->min_soldier_capacity();
+	                                        building->soldier_control()->min_soldier_capacity();
 	bool over_min =
 	   capacity_min < (is_ship ? ship->onboard_soldiers().size() :
-                                building->soldier_control()->present_soldiers().size());
+	                             building->soldier_control()->present_soldiers().size());
 
 	return over_min;
 }

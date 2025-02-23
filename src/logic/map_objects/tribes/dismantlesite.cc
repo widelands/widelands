@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -163,8 +163,8 @@ const Buildcost DismantleSite::count_returned_wares(Building* building) {
 		}
 		const BuildingDescr* former_descr = building->owner().tribe().get_building_descr(pair.first);
 		const Buildcost& return_wares = pair.first != first_idx ?
-                                         former_descr->enhancement_returns_on_dismantle() :
-                                         former_descr->returns_on_dismantle();
+		                                   former_descr->enhancement_returns_on_dismantle() :
+		                                   former_descr->returns_on_dismantle();
 
 		for (const auto& ware : return_wares) {
 			// TODO(GunChleoc): Once we have trading, we might want to return all wares again.

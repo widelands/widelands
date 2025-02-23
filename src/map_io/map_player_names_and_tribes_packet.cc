@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -108,8 +108,8 @@ void MapPlayerNamesAndTribesPacket::write(FileSystem& fs,
 		// Only read by multiplayer loadgame, transfered over from the GamePlayerInfoPacket
 		s.set_int("team", egbase.get_player(p) != nullptr ? egbase.get_player(p)->team_number() : 0);
 		s.set_bool("random", egbase.get_player(p) != nullptr ?
-                              egbase.get_player(p)->has_random_tribe() :
-                              false);
+		                        egbase.get_player(p)->has_random_tribe() :
+		                        false);
 	}
 
 	prof.write("player_names", false, fs);

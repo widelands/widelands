@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,12 @@
 
 #include "base/time_string.h"
 #include "base/wexception.h"
+#include "commands/cmd_message_set_status_archived.h"
+#include "commands/cmd_message_set_status_read.h"
 #include "graphic/text_layout.h"
 #include "logic/game_data_error.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
-#include "logic/playercommand.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 
@@ -495,6 +496,7 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 	case Widelands::Message::Type::kWarfareSiteLost:
 	case Widelands::Message::Type::kWarfareUnderAttack:
 	case Widelands::Message::Type::kTradeOfferReceived:
+	case Widelands::Message::Type::kEconomyLoadGame:
 		set_filter_messages_tooltips();
 		message_filter_ = Widelands::Message::Type::kAllMessages;
 		geologistsbtn_->set_perm_pressed(false);
@@ -592,6 +594,7 @@ std::string GameMessageMenu::display_message_type_icon(const Widelands::Message&
 	case Widelands::Message::Type::kWarfareSiteLost:
 	case Widelands::Message::Type::kWarfareUnderAttack:
 	case Widelands::Message::Type::kTradeOfferReceived:
+	case Widelands::Message::Type::kEconomyLoadGame:
 		return "images/wui/messages/message_new.png";
 	default:
 		NEVER_HERE();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -129,10 +129,10 @@ void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	vbox_.reset(new UI::Box(this, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical));
 	set_center_panel(vbox_.get());  // Must be set immediately after deleting the old vbox, if any
 
+	setup_name_field_editbox(*vbox_);
+
 	tabs_ = new UI::TabPanel(vbox_.get(), UI::TabPanelStyle::kWuiLight, "tabs");
 	vbox_->add(tabs_, UI::Box::Resizing::kFullSize);
-
-	setup_name_field_editbox(*vbox_);
 
 	capsbuttons_ =
 	   new UI::Box(vbox_.get(), UI::PanelStyle::kWui, "caps_buttons_box", 0, 0, UI::Box::Horizontal);
@@ -210,7 +210,7 @@ void BuildingWindow::think() {
 		mute_this_->set_pic(
 		   g_image_cache->get(building->mute_messages() ? kImgUnmuteThis : kImgMuteThis));
 		mute_this_->set_tooltip(building->mute_messages() ? _("Muted – click to unmute") :
-                                                          _("Mute this building’s messages"));
+		                                                    _("Mute this building’s messages"));
 		if (building->owner().is_muted(
 		       building->owner().tribe().safe_building_index(building->descr().name()))) {
 			mute_this_->set_enabled(false);
@@ -282,10 +282,10 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			   g_image_cache->get(
 			      (is_stopped ? "images/ui_basic/continue.png" : "images/ui_basic/stop.png")),
 			   is_stopped ?
-               /** TRANSLATORS: Stop/Continue toggle button for production sites. */
-               _("Continue") :
-               /** TRANSLATORS: Stop/Continue toggle button for production sites. */
-               _("Stop"));
+			      /** TRANSLATORS: Stop/Continue toggle button for production sites. */
+			      _("Continue") :
+			      /** TRANSLATORS: Stop/Continue toggle button for production sites. */
+			      _("Stop"));
 			stopbtn->sigclicked.connect([this]() { act_start_stop(); });
 			capsbuttons->add(stopbtn);
 
@@ -295,13 +295,13 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				   productionsite->infinite_production() ? "end_produce_infinite" : "produce_infinite",
 				   0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 				   g_image_cache->get((productionsite->infinite_production() ?
-                                      "images/wui/menus/end_infinity.png" :
-                                      "images/wui/menus/infinity.png")),
+				                          "images/wui/menus/end_infinity.png" :
+				                          "images/wui/menus/infinity.png")),
 				   productionsite->infinite_production() ?
-                  /** TRANSLATORS: Infinite Production toggle button for production sites. */
-                  _("Stop producing indefinitely") :
-                  /** TRANSLATORS: Infinite Production toggle button for production sites. */
-                  _("Produce indefinitely regardless of the economy’s needs"));
+				      /** TRANSLATORS: Infinite Production toggle button for production sites. */
+				      _("Stop producing indefinitely") :
+				      /** TRANSLATORS: Infinite Production toggle button for production sites. */
+				      _("Produce indefinitely regardless of the economy’s needs"));
 				infbtn->sigclicked.connect([this]() { act_produce_infinite(); });
 				capsbuttons->add(infbtn);
 			}

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # Alex Rijckaert, 2023-2024
@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-03 02:40+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Alex Rijckaert, 2023-2024\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -1457,7 +1457,7 @@ msgctxt "amazons_building"
 msgid ""
 "The jungle master plants one tree between %1$s and %2$s, depending on how "
 "far she has to walk."
-msgstr ""
+msgstr "De junglemeester plant een boom tussen 1%1$s en 2%2$s , afhankelijk van hoe ver zij moet lopen."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stone Workshop
 #: ../../../../data/tribes/initialization/amazons/units.lua:1469
@@ -1539,7 +1539,7 @@ msgctxt "amazons_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce one "
 "bread in %s on average."
-msgstr ""
+msgstr "Als alle benodigde waren op tijd worden geleverd, kan dit gebouw gemiddeld één brood in 1%s produceren."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Chocolate
 #. Brewery
@@ -1796,7 +1796,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Dit gebouw kan één veerboot tussen 1%1$s en 2%2$s opleveren, afhankelijk van hoe ver de scheepstimmerman moet lopen."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Shipyard
 #: ../../../../data/tribes/initialization/amazons/units.lua:1700
@@ -1829,7 +1829,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Dit gebouw kan één schip produceren tussen 1%1$s en 2%2$s , afhankelijk van hoe ver de scheepstimmerman moet lopen."
 
 #. TRANSLATORS: Lore helptext for an Amazon building: Construction Site
 #. TRANSLATORS: Lore helptext for an Atlantean building: Construction Site
@@ -3194,18 +3194,19 @@ msgstr "De wapensmederij en de scheepswerf gebruiken ook planken om de verschill
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:472
 msgctxt "atlanteans_ware"
 msgid ""
-"Spider silk is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth or tabards in a weaving mill."
-msgstr "Spinnenzijde wordt geproduceerd door spinnen, die worden gekweekt in spinnenkwekerijen. In een weverij wordt het verwerkt tot spinnendoek of tabbaard."
+"Spider silk is produced by spiders, which are bred by spider farms. It can "
+"be processed into spidercloth or tabards in a weaving mill, or used to make "
+"tools in the toolsmithy."
+msgstr "Spinnenzijde wordt geproduceerd door spinnen, die worden gekweekt in spinnenkwekerijen. Het kan worden verwerkt tot spinnendoek of tabbaarden in een weverij, of worden gebruikt om gereedschap van te maken in de gereedschapsmakerij."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:481
 msgctxt "atlanteans_ware"
 msgid ""
 "Spidercloth is made out of spider silk in a weaving mill. It is used in the "
-"toolsmithy and the shipyard. Also some higher developed buildings need "
-"spidercloth for their construction."
-msgstr "Spinnendoek wordt gemaakt van spinnendraad in een weverij. Het wordt gebruik in de werktuigsmederij en de scheepswerf. Ook sommige hoger ontwikkelde gebouwen hebben spinnendoek nodig voor hun constructie."
+"shipyard. Also some higher developed buildings need spidercloth for their "
+"construction."
+msgstr "Spinnendoek wordt gemaakt van spinnenzijde in een weverij. Het wordt gebruikt op de scheepswerf. Ook sommige hoger ontwikkelde gebouwen hebben spinnendoek nodig voor hun constructie."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fish
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:492
@@ -4549,7 +4550,7 @@ msgstr "Askadus, uitvinder van de windmolen met verticale as"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The sawmill needs %s on average to produce one plank."
-msgstr ""
+msgstr "De zagerij heeft gemiddeld %s nodig om één plank te produceren."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Smokery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1671
@@ -4660,7 +4661,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce one "
 "bread in %s on average."
-msgstr ""
+msgstr "Als alle benodigde waren op tijd worden geleverd, kan dit gebouw gemiddeld één brood in %s produceren."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Charcoal
 #. Kiln
@@ -4708,7 +4709,7 @@ msgstr "Een zwarte stem vanuit de houtskooloven"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "De houtskoolmeiler heeft gemiddeld %s nodig om een stuk kool te produceren."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Smelting
 #. Works
@@ -4877,7 +4878,7 @@ msgstr "Affiche voor werving"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "De kazerne heeft gemiddeld %s nodig om een soldaat te rekruteren."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Horse Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1802
@@ -5400,7 +5401,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Dit gebouw kan één veerboot tussen 1%1$s en 2%2$s opleveren, afhankelijk van hoe ver de scheepstimmerman moet lopen."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Shipyard
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Shipyard
@@ -5438,7 +5439,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Dit gebouw kan één schip produceren tussen 1%1$s en 2%2$s , afhankelijk van hoe ver de scheepstimmerman moet lopen."
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2130
@@ -6993,7 +6994,7 @@ msgstr "Hardt boomstammen uit tot rozenhout, waarmee robuuste gebouwen worden ge
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The wood hardener needs %s on average to produce one blackwood."
-msgstr ""
+msgstr "De houtverharder heeft gemiddeld %s nodig om één zwarthout te produceren."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Reed Yard
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1298
@@ -7285,7 +7286,7 @@ msgstr "Lied van de houtskoolbranders"
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "De houtskoolmeiler heeft gemiddeld %s nodig om een stuk kool te produceren."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Smelting Works
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1429
@@ -7903,7 +7904,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Dit gebouw kan één veerboot tussen 1%1$s en 2%2$s opleveren, afhankelijk van hoe ver de scheepstimmerman moet lopen."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Shipyard
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1826
@@ -7921,7 +7922,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Dit gebouw kan één schip produceren tussen 1%1$s en 2%2$s , afhankelijk van hoe ver de scheepstimmerman moet lopen."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Weaving Mill
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1850
@@ -11234,7 +11235,7 @@ msgstr "Motto van het Timmerliedengilde"
 #, lua-format
 msgctxt "empire_building"
 msgid "The sawmill needs %s on average to produce one plank."
-msgstr ""
+msgstr "De zagerij heeft gemiddeld %s nodig om één plank te produceren."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11487,7 +11488,7 @@ msgstr "Keizerlijk spreekwoord dat betekent beoordelen of ze goed of slecht zijn
 #, lua-format
 msgctxt "empire_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "De houtskoolmeiler heeft gemiddeld %s nodig om een stuk kool te produceren."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11634,7 +11635,7 @@ msgstr "Voorziet rekruten van uitrusting en leidt ze op als soldaten."
 #, lua-format
 msgctxt "empire_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "De kazerne heeft gemiddeld %s nodig om een soldaat te rekruteren."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12399,7 +12400,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Dit gebouw kan één veerboot tussen 1%1$s en 2%2$s opleveren, afhankelijk van hoe ver de scheepstimmerman moet lopen."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12429,7 +12430,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Dit gebouw kan één schip produceren tussen 1%1$s en 2%2$s, afhankelijk van hoe ver de scheepstimmerman moet lopen."
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2383
@@ -14661,7 +14662,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one coal between %1$s and %2$s, depending on how "
 "far the charcoal burner has to walk."
-msgstr ""
+msgstr "Dit gebouw kan één steenkool tussen %1$s en %2$s, produceren, afhankelijk van hoe ver de houtskoolbrander moet lopen."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Berry Farm
 #: ../../../../data/tribes/initialization/frisians/units.lua:1713
@@ -15604,7 +15605,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Dit gebouw kan één veerboot tussen 1%1$s en 2%2$s opleveren, afhankelijk van hoe ver de scheepstimmerman moet lopen."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Shipyard
 #: ../../../../data/tribes/initialization/frisians/units.lua:2230
@@ -15629,7 +15630,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Dit gebouw kan één schip produceren tussen 1%1$s en 2%2$s, afhankelijk van hoe ver de scheepstimmerman moet lopen."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Weaving Mill
 #: ../../../../data/tribes/initialization/frisians/units.lua:2253
@@ -16372,7 +16373,7 @@ msgid "Workers use:"
 msgstr "Werkers gebruiken:"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:710
-#: ../../../../data/tribes/scripting/help/worker_help.lua:169
+#: ../../../../data/tribes/scripting/help/worker_help.lua:179
 msgid "Experience levels"
 msgstr "Ervaringsniveaus"
 
@@ -16781,67 +16782,67 @@ msgid "Worker uses"
 msgstr "Werker gebruikt"
 
 #. TRANSLATORS: Soldier levels
-#: ../../../../data/tribes/scripting/help/worker_help.lua:175
+#: ../../../../data/tribes/scripting/help/worker_help.lua:185
 msgid "Levels"
 msgstr "Niveaus"
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:177
+#: ../../../../data/tribes/scripting/help/worker_help.lua:187
 msgid "Health"
 msgstr "Levenspunten"
 
 #. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
-#: ../../../../data/tribes/scripting/help/worker_help.lua:181
+#: ../../../../data/tribes/scripting/help/worker_help.lua:191
 msgid "Starts at %1% points."
 msgstr "Begint op %1% punten."
 
 #. TRANSLATORS: Soldier health / attack defense / evade points
-#: ../../../../data/tribes/scripting/help/worker_help.lua:184
-#: ../../../../data/tribes/scripting/help/worker_help.lua:195
+#: ../../../../data/tribes/scripting/help/worker_help.lua:194
+#: ../../../../data/tribes/scripting/help/worker_help.lua:205
 msgid "Increased by %1% point for each level."
 msgid_plural "Increased by %1% points for each level."
 msgstr[0] "Stijgt met %1%punt voor elk niveau."
 msgstr[1] "Stijgt met %1% punten voor elk niveau."
 
 #. TRANSLATORS: Soldier health / attack defense / evade level
-#: ../../../../data/tribes/scripting/help/worker_help.lua:187
 #: ../../../../data/tribes/scripting/help/worker_help.lua:197
 #: ../../../../data/tribes/scripting/help/worker_help.lua:207
-#: ../../../../data/tribes/scripting/help/worker_help.lua:222
+#: ../../../../data/tribes/scripting/help/worker_help.lua:217
+#: ../../../../data/tribes/scripting/help/worker_help.lua:232
 msgid "The maximum level is %1%."
 msgid_plural "The maximum level is %1%."
 msgstr[0] "Het maximumniveau is %1%."
 msgstr[1] "Het maximumniveau is %1%."
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:189
+#: ../../../../data/tribes/scripting/help/worker_help.lua:199
 msgid "Attack"
 msgstr "Aanval"
 
 #. TRANSLATORS: Points are 4 digit numbers.
-#: ../../../../data/tribes/scripting/help/worker_help.lua:192
+#: ../../../../data/tribes/scripting/help/worker_help.lua:202
 msgid "A random value between %1% and %2% points is added to each attack."
 msgstr "Een random aantal punten tussen %1% en %2% wordt toegevoegd aan elke aanval."
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:199
+#: ../../../../data/tribes/scripting/help/worker_help.lua:209
 msgid "Defense"
 msgstr "Verdediging"
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:203
-#: ../../../../data/tribes/scripting/help/worker_help.lua:211
-#: ../../../../data/tribes/scripting/help/worker_help.lua:218
+#: ../../../../data/tribes/scripting/help/worker_help.lua:213
+#: ../../../../data/tribes/scripting/help/worker_help.lua:221
+#: ../../../../data/tribes/scripting/help/worker_help.lua:228
 #, lua-format
 msgid "Starts at %d%%."
 msgstr "Begint op %d%%."
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:205
-#: ../../../../data/tribes/scripting/help/worker_help.lua:220
+#: ../../../../data/tribes/scripting/help/worker_help.lua:215
+#: ../../../../data/tribes/scripting/help/worker_help.lua:230
 #, lua-format
 msgid "Increased by %d%% for each level."
 msgstr "Stijgt met %d%% voor elk niveau."
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:212
+#: ../../../../data/tribes/scripting/help/worker_help.lua:222
 msgid "This soldier cannot be trained in defense."
 msgstr "Deze soldaat kan niet worden getraind in verdediging."
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:215
+#: ../../../../data/tribes/scripting/help/worker_help.lua:225
 msgid "Evade"
 msgstr "Ontwijken"

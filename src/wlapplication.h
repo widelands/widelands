@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -145,7 +145,9 @@ struct WLApplication {
 
 	void run();
 
-	static void initialize_g_addons();
+	void initialize_g_addons();
+
+	void init_plugin_shortcuts();
 
 	/// \warning true if an external entity wants us to quit
 	[[nodiscard]] bool should_die() const {

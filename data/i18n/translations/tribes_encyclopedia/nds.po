@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2024
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2025
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # GunChleoc, 2014-2016
@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-03 02:40+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2024\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1174,7 +1174,7 @@ msgstr "Kappt Bomen in de Naberskupp un maakt daarut Boomstammen."
 #: ../../../../data/tribes/initialization/amazons/units.lua:1311
 msgctxt "amazons_building"
 msgid "The woodcutter’s hut needs trees to fell within the work area."
-msgstr "De Boomslageree bruukt Bomen tum Umkappen in de Arbeidsgewest."
+msgstr "De Boomslagerske-Kaat bruukt Bomen tum Umkappen in de Arbeidsgewest."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site:
 #. Woodcutter's Hut, part 1
@@ -3190,18 +3190,19 @@ msgstr "Ok de Wapensmee un de Warft bruken Planken, um Dreespitzen un Schippen t
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:472
 msgctxt "atlanteans_ware"
 msgid ""
-"Spider silk is produced by spiders, which are bred by spider farms. It is "
-"processed into spidercloth or tabards in a weaving mill."
-msgstr "Spinnensied word vun Spinnen produzeert, de in Spinnentüchtereen tücht worden. ’t word in Spinnweelmöhlen to Spinnenstoff of Kluften verarbeidt."
+"Spider silk is produced by spiders, which are bred by spider farms. It can "
+"be processed into spidercloth or tabards in a weaving mill, or used to make "
+"tools in the toolsmithy."
+msgstr "Spinnensied word vun Spinnen produzeert, de in Spinnentüchtereen tücht worden. ’t word in eenem Weevstohl to Spinnenstoff of Kluften verarbeidt, of in de Warktüügsmee bruukt, um Warktüüg to maken."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:481
 msgctxt "atlanteans_ware"
 msgid ""
 "Spidercloth is made out of spider silk in a weaving mill. It is used in the "
-"toolsmithy and the shipyard. Also some higher developed buildings need "
-"spidercloth for their construction."
-msgstr "Spinnenstoff word in Spinnweelmöhlen ut Spinnensied maakt. ’t word vun de Warktüügsmee un de Warft bruukt. Eenige grote Husen bruken Spinnenstoff tum bauen."
+"shipyard. Also some higher developed buildings need spidercloth for their "
+"construction."
+msgstr "Spinnenstoff word in eenem Weevstohl ut Spinnensied maakt. ’t word vun de Warft bruukt. Eenige grote Husen bruken Spinnenstoff tum Bauen."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fish
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:492
@@ -3605,7 +3606,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving mill."
-msgstr "Eene Kluft un een Lütter Dreespitz sünd de Utrüstung för neje Soldaten. Kluften worden in Spinnweelmöhlen produzeert."
+msgstr "Eene Kluft un een Lütter Dreespitz sünd de Utrüstung för neje Soldaten. Kluften worden in eenem Weevstohl produzeert."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Gold Thread
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:878
@@ -3613,7 +3614,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "This thread, made of gold by the gold spinning mill, is used for weaving the"
 " exclusive golden tabard in the weaving mill."
-msgstr "Deese Wulle, de in de Goldspinneree ut Gold maakt word, bruukt man, um de düre Goldene Kluft in de Spinnweelmöhlen to weven."
+msgstr "Deese Wulle, de in de Goldspinneree ut Gold maakt word, bruukt man, um de düre Goldene Kluft in de Weevstohl to weven."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Golden Tabard
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:887
@@ -3622,7 +3623,7 @@ msgid ""
 "Golden tabards are produced in Atlantean weaving mills out of gold thread. "
 "They are used in the labyrinth – together with food – to train soldiers from"
 " health level 0 to level 1."
-msgstr "Goldene Kluften worden in Atlantisken Spinnweelmöhlen ut Goldwulle produzeert. Se worden in Dwaalwegen – tosamen mit Spiesen – bruukt, um Soldaten vun Gesundheid-Stand 0 up Stand 1 uttobilden."
+msgstr "Goldene Kluften worden im Atlantisken Weevstohl ut Goldwulle produzeert. Se worden in Dwaalwegen – tosamen mit Spiesen – bruukt, um Soldaten vun Gesundheid-Stand 0 up Stand 1 uttobilden."
 
 #. TRANSLATORS: Helptext for an Atlantean worker: Carrier
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:903
@@ -4180,7 +4181,7 @@ msgstr "Kappt Bomen in de Naberskupp un maakt daarut Boomstammen."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1498
 msgctxt "atlanteans_building"
 msgid "The woodcutter’s house needs trees to fell within the work area."
-msgstr "De Boomsaageree bruukt Bomen tum Umsaagen in de Arbeidsgewest."
+msgstr "Dat Boomsaagerhuus bruukt Bomen tum Umsaagen in de Arbeidsgewest."
 
 #. TRANSLATORS: Note lore for an Atlantean production site: Woodcutter's House
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1500
@@ -4228,7 +4229,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The forester’s house needs free space within the work area to plant the "
 "trees."
-msgstr "Dat Förster-Huus bruukt freje Rüümte in de Arbeidsgewest, waar Bomen plant worden könen."
+msgstr "Dat Försterhuus bruukt freje Rüümte in de Arbeidsgewest, waar Bomen plant worden könen."
 
 #. TRANSLATORS: Note lore for an Atlantean production site: Forester's House
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1519
@@ -4260,14 +4261,14 @@ msgstr "De Förster plant eenen Boom in %1$s bit %2$s, je nadeem, wo wied he lop
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1537
 msgctxt "atlanteans_building"
 msgid "Fishes on the coast near the fisher’s house."
-msgstr "Fiskt an de Küst in de Naberskupp vun de Fiskeree."
+msgstr "Fisket an de Küst in de Naberskupp vun de Fiskerhuus."
 
 #. TRANSLATORS: Note helptext for an Atlantean production site: Fisher's
 #. House, part 1
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1540
 msgctxt "atlanteans_building"
 msgid "The fisher’s house needs water full of fish within the work area."
-msgstr "De Fiskeree bruukt Water mit Fisken in de Arbeidsgewest."
+msgstr "Dat Fiskerhuus bruukt Water mit Fisken in de Arbeidsgewest."
 
 #. TRANSLATORS: Note helptext for an Atlantean production site: Fisher's
 #. House, part 2
@@ -4276,7 +4277,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Build a fish breeder’s house close to the fisher’s house to make sure that "
 "you don’t run out of fish."
-msgstr "Bau eene Fisstüchteree in de Naberskupp vun de Fiskeree, daarmit de Fiss nich knapp word."
+msgstr "Bau een Fisstüchterhuus in de Naberskupp vun de Fiskerhuus, daarmit de Fiss nich knapp word."
 
 #. TRANSLATORS: Note helptext for an Atlantean production site: Fisher's
 #. House, part 3
@@ -4468,7 +4469,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
-msgstr "Du muttst deese Fahn mit eener Bespejeree verbinnen, ehr du hier eenen Bespejer henstüren kannst."
+msgstr "Du muttst deese Fahn mit eenem Bespejerhuus verbinnen, ehr du hier eenen Bespejer henstüren kannst."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Scout's
 #. House
@@ -4966,7 +4967,7 @@ msgid ""
 "gain the spider silk once a day. There is no need to spin this again. The "
 "thread can directly be used by the weaving mill. Oh hello, here is one of "
 "our nice spiders … Hey! Why are you running away?"
-msgstr "Nee, wi föden de Spinnen nich mit Mais. Wi föden de Mais to fetten Grashüppers, wat dann vun de Spinnen eten worden. Wi setten se een Maal am Dag up een besünner Gereedskupp, um de Spinnensied to arnten. Se mutt dann nich noch maal spunnen worden; de Gaarn kann stracks vun de Spinnweelmöhlen bruukt worden. Ach moin, hier is man eene vun uns’ nüten Spinnen … Ahoi! Um wat löppst du weg?"
+msgstr "Nee, wi föden de Spinnen nich mit Mais. Wi föden de Mais to fetten Grashüppers, wat dann vun de Spinnen eten worden. Wi setten se een Maal am Dag up een besünner Gereedskupp, um de Spinnensied to arnten. Se mutt dann nich noch maal spunnen worden; de Gaarn kann stracks vun de Weevstohl bruukt worden. Ach moin, hier is man eene vun uns’ nüten Spinnen … Ahoi! Um wat löppst du weg?"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Spider
 #. Farm
@@ -4982,7 +4983,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Weaves spidercloth for buildings and ships’ sails, and tabards to equip and "
 "train the soldiers."
-msgstr "Spinnt Spinnenstoff för Husen un Seils, un Kluften, um Soldaten uttorüsten un to lehren."
+msgstr "Weevt Spinnenstoff för Husen un Seils, un Kluften, um Soldaten uttorüsten un to lehren."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Weaving Mill
 #. -- listen to that song please
@@ -5969,7 +5970,7 @@ msgstr[1] "%1%(+%2%) Soldaten"
 #: ../../../../data/tribes/initialization/barbarians/units.lua:102
 msgctxt "barbarians_ware"
 msgid "The Barbarians produce granite blocks in quarries and granite mines."
-msgstr "De Willen Lüü produzeren Blocken vun Flint in Flintslagerhusen un Flint-Bargwarken."
+msgstr "De Willen Lüü produzeren Blocken vun Flint in Flintslagerkaten un Flint-Bargwarken."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Log, part 2
 #: ../../../../data/tribes/initialization/barbarians/units.lua:114
@@ -6693,7 +6694,7 @@ msgstr "Sleit Flint ut Stenen in de Naberskupp."
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1140
 msgctxt "barbarians_building"
 msgid "The quarry needs rocks to cut within the work area."
-msgstr "Dat Flintslagerhuus bruukt Stenen tum Slaan in de Arbeidsgewest."
+msgstr "De Flintslagerkaat bruukt Stenen tum Slaan in de Arbeidsgewest."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Quarry,
 #. part 1
@@ -6702,7 +6703,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonemason has to walk."
-msgstr "Dat Huus bruukt %1$s bit %2$s, um eenen Block Flint to produzeren, je nadeem, wo wied de Flintslager lopen mutt."
+msgstr "Deese Kaat bruukt %1$s bit %2$s, um eenen Block Flint to produzeren, je nadeem, wo wied de Flintslager lopen mutt."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Quarry,
 #. part 2
@@ -6754,7 +6755,7 @@ msgstr "Krumta, de Diskler vun Schatt-Karut"
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1159
 msgctxt "barbarians_building"
 msgid "The lumberjack’s hut needs trees to fell within the work area."
-msgstr "Dat Boomhauer-Huus bruukt Bomen tum Umkappen in de Arbeidsgewest."
+msgstr "De Boomhauerkaat bruukt Bomen tum Umkappen in de Arbeidsgewest."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site:
 #. Lumberjack_s Hut
@@ -6763,7 +6764,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the lumberjack has to walk."
-msgstr "Dat Huus bruukt %1$s bit %2$s, um eenen Boomstamm to produzeren, je nadeem, wo wied de Boomhauer lopen mutt."
+msgstr "Deese Kaat bruukt %1$s bit %2$s, um eenen Boomstamm to produzeren, je nadeem, wo wied de Boomhauer lopen mutt."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Ranger's Hut
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1173
@@ -6785,7 +6786,7 @@ msgstr "Schatt-Karut im Gespreek mit eenem Boomplanter"
 msgctxt "barbarians_building"
 msgid ""
 "The ranger’s hut needs free space within the work area to plant the trees."
-msgstr "De Boomplanteree bruukt freje Rüümte in de Arbeidsgewest, waar Bomen plant worden könen."
+msgstr "De Boomplanterkaat bruukt freje Rüümte in de Arbeidsgewest, waar Bomen plant worden könen."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Ranger's
 #. Hut, part 1
@@ -6815,13 +6816,13 @@ msgstr "Wat Wille Fiskers faaktieden seggen;<br>daarna gifft dat faak eene düll
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1196
 msgctxt "barbarians_building"
 msgid "Fishes on the coast near the fisher’s hut."
-msgstr "Fiskt an de Küst in de Naberskupp vun de Fisker-Huus."
+msgstr "Fisket an de Küst in de Naberskupp vun de Fiskerkaat."
 
 #. TRANSLATORS: Note helptext for production site: Fisher's Hut, part 1
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1199
 msgctxt "barbarians_building"
 msgid "The fisher’s hut needs water full of fish within the work area."
-msgstr "Dat Fisker-Huus bruukt Water mit Fisken in de Arbeidsgewest."
+msgstr "De Fiskerkaat bruukt Water mit Fisken in de Arbeidsgewest."
 
 #. TRANSLATORS: Note helptext for production site: Fisher's Hut, part 2
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1201
@@ -6836,7 +6837,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr "Dat Huus bruukt %1$s bit %2$s, um eenen Fiss to produzeren, je nadeem, wo wied de Fisker lopen mutt."
+msgstr "Deese Kaat bruukt %1$s bit %2$s, um eenen Fiss to produzeren, je nadeem, wo wied de Fisker lopen mutt."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Hunter's Hut
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1215
@@ -6857,7 +6858,7 @@ msgstr "»De Künst, to Jagen«"
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1221
 msgctxt "barbarians_building"
 msgid "The hunter’s hut needs animals to hunt within the work area."
-msgstr "De Jaggthütt bruukt Deerten tum Jagen in de Arbeidsgewest."
+msgstr "De Jaggtkaat bruukt Deerten tum Jagen in de Arbeidsgewest."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Hunter's
 #. Hut, part 1
@@ -6866,7 +6867,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr "Dat Huus bruukt %1$s bit %2$s, um een Fleesk to produzeren, je nadeem, wo wied de Jäger lopen mutt."
+msgstr "Deese Kaat bruukt %1$s bit %2$s, um een Fleesk to produzeren, je nadeem, wo wied de Jäger lopen mutt."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Gamekeeper's
 #. Hut
@@ -6933,7 +6934,7 @@ msgctxt "barbarians_building"
 msgid ""
 "You need to connect this flag to a scout’s hut before you can send a scout "
 "here."
-msgstr "Du muttst deese Fahn mit eenem Bespejer-Huus verbinnen, ehr du hier eenen Bespejer henstüren kannst."
+msgstr "Du muttst deese Fahn mit eener Bespejerkaat verbinnen, ehr du hier eenen Bespejer henstüren kannst."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Scout's Hut
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1265
@@ -7056,7 +7057,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The lime kiln’s output will only go to construction sites that need it. "
 "Those are predominantly houses that work with fire, and some military sites."
-msgstr "Waren vun eener Kalkbranneree gahen blot to Bausteden, de Mörtel bruken. Dat sünd vör all Husen, de mit Füür abreiden, un een paar Soldateree-Boen."
+msgstr "Waren vun eener Kalkbranneree gahen blot to Bausteden, de Mörtel bruken. Dat sünd vör all Husen, de mit Füür arbeiden, un een paar Soldateree-Boen."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Lime
 #. Kiln
@@ -7121,7 +7122,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Produces beer of the lower grade. This beer is a vital component of the "
 "snacks that inns and big inns prepare for miners in deep mines."
-msgstr "Maakt jentigs Beer. Deeses Beer word för de Spiesen bruukt, de Weertshusen un Weertshusen för Bargwarkskeerls in deepen Bargwarken torechtmaken."
+msgstr "Maakt jentigs Beer. Deeses Beer word för de Spiesen bruukt, de Kröög un Weertshusen för Bargwarkskeerls in deepen Bargwarken torechtmaken."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Micro
 #. Brewery
@@ -7940,7 +7941,7 @@ msgstr "Khantarakh, »De modeerne Wille Weertskupp«, <br>9. Kohhuud »Seefahrt 
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1855
 msgctxt "barbarians_building"
 msgid "Weaves cloth out of reed."
-msgstr "Spinnt Stoff ut Reit."
+msgstr "Weevt Stoff ut Reit."
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1886
@@ -10158,7 +10159,7 @@ msgstr "Se worden ok in de Wapensmee bruukt."
 #: ../../../../data/tribes/initialization/empire/units.lua:152
 msgctxt "empire_ware"
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
-msgstr "Wulle is dat Fell vun Schapen. Spinnweelmöhlen maken daarut Stoff."
+msgstr "Wulle is dat Fell vun Schapen. Een Weevstohl maakt daarut Stoff."
 
 #. TRANSLATORS: Helptext for an Empire ware: Cloth
 #: ../../../../data/tribes/initialization/empire/units.lua:161
@@ -10960,7 +10961,7 @@ msgstr "Een Lastendrager to eenem fehlgahn Boomhauer"
 #: ../../../../data/tribes/initialization/empire/units.lua:1281
 msgctxt "empire_building"
 msgid "The lumberjack’s house needs trees to fell within the work area."
-msgstr "De Boomhaueree bruukt Bomen tum Umslaan in de Arbeidsgewest."
+msgstr "Dat Boomhauerhuus bruukt Bomen tum Umslaan in de Arbeidsgewest."
 
 #. TRANSLATORS: Performance helptext for an Empire production site:
 #. Lumberjack's House
@@ -10999,7 +11000,7 @@ msgctxt "empire_building"
 msgid ""
 "The forester’s house needs free space within the work area to plant the "
 "trees."
-msgstr "Dat Förster-Huus bruukt freje Rüümte in de Arbeidsgewest, waar Bomen plant worden könen."
+msgstr "Dat Försterhuus bruukt freje Rüümte in de Arbeidsgewest, waar Bomen plant worden könen."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Forester's
 #. House, part 1
@@ -11036,14 +11037,14 @@ msgstr "Een Fisker kritiseert de Chef vun de Fiskers-Vereen"
 #: ../../../../data/tribes/initialization/empire/units.lua:1333
 msgctxt "empire_building"
 msgid "Fishes on the coast near the fisher’s house."
-msgstr "Fiskt an de Küst in de Naberskupp vun de Fiskeree."
+msgstr "Fisket an de Küst in de Naberskupp vun de Fiskerhuus."
 
 #. TRANSLATORS: Note helptext for an Empire production site: Fisher's House,
 #. part 1
 #: ../../../../data/tribes/initialization/empire/units.lua:1336
 msgctxt "empire_building"
 msgid "The fisher’s house needs water full of fish within the work area."
-msgstr "De Fiskeree bruukt Water mit Fisken in de Arbeidsgewest."
+msgstr "Dat Fiskerhuus bruukt Water mit Fisken in de Arbeidsgewest."
 
 #. TRANSLATORS: Note helptext for an Empire production site: Fisher's House,
 #. part 2
@@ -11165,7 +11166,7 @@ msgctxt "empire_building"
 msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
-msgstr "Du muttst deese Fahn mit eener Bespejeree verbinnen, ehr du hier eenen Bespejer henstüren kannst."
+msgstr "Du muttst deese Fahn mit eenem Bespejerhuus verbinnen, ehr du hier eenen Bespejer henstüren kannst."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Scout's
 #. House, part 1
@@ -11778,7 +11779,7 @@ msgstr "Motto vun de Wever-Vereen"
 #: ../../../../data/tribes/initialization/empire/units.lua:1827
 msgctxt "empire_building"
 msgid "Weaves cloth out of wool."
-msgstr "Spinnt Stoff ut Wulle."
+msgstr "Weevt Stoff ut Wulle."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -13696,7 +13697,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fish is a very important food resource for the Frisians. It is fished from "
 "the shore or reared in aqua farms."
-msgstr "Fiss is eene bannig wichtige Spies för de Fresen. ’t word vun de Waterkant fiskt of in Fissbuurdereen tücht."
+msgstr "Fiss is eene bannig wichtige Spies för de Fresen. ’t word vun de Waterkant fisket of in Fissbuurdereen tücht."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Meat, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:254
@@ -14434,7 +14435,7 @@ msgstr "Een hääsbesiger Boomslager"
 #: ../../../../data/tribes/initialization/frisians/units.lua:1581
 msgctxt "frisians_building"
 msgid "The woodcutter’s house needs trees to fell within the work area."
-msgstr "De Boomslageree bruukt Bomen tum Umkappen in de Arbeidsgewest."
+msgstr "Dat Boomslagerhuus bruukt Bomen tum Umkappen in de Arbeidsgewest."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site:
 #. Woodcutter's House, part 1
@@ -14466,7 +14467,7 @@ msgctxt "frisians_building"
 msgid ""
 "The forester’s house needs free space within the work area to plant the "
 "trees."
-msgstr "Dat Förster-Huus bruukt freje Rüümte in de Arbeidsgewest, waar Bomen plant worden könen."
+msgstr "Dat Försterhuus bruukt freje Rüümte in de Arbeidsgewest, waar Bomen plant worden könen."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Forester's
 #. House, part 1
@@ -14518,14 +14519,14 @@ msgstr "Een Jäger bewunnert eenen Fisker"
 #: ../../../../data/tribes/initialization/frisians/units.lua:1634
 msgctxt "frisians_building"
 msgid "Fishes on the coast near the fisher’s house."
-msgstr "Fiskt an de Küst in de Naberskupp vun de Fiskeree."
+msgstr "Fisket an de Küst in de Naberskupp vun de Fiskerhuus."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Fisher's House,
 #. part 1
 #: ../../../../data/tribes/initialization/frisians/units.lua:1637
 msgctxt "frisians_building"
 msgid "The fisher’s house needs water full of fish within the work area."
-msgstr "De Fiskeree bruukt Water mit Fisken in de Arbeidsgewest."
+msgstr "Dat Fiskerhuus bruukt Water mit Fisken in de Arbeidsgewest."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Fisher's House,
 #. part 2
@@ -14814,7 +14815,7 @@ msgctxt "frisians_building"
 msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
-msgstr "Du muttst deese Fahn mit eener Bespejeree verbinnen, ehr du hier eenen Bespejer henstüren kannst."
+msgstr "Du muttst deese Fahn mit eenem Bespejerhuus verbinnen, ehr du hier eenen Bespejer henstüren kannst."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Scout's
 #. House, part 1
@@ -15654,7 +15655,7 @@ msgstr "Naiht Stoff för de Seils vun Schipp ut Reit un Sneeihirsken-Fell."
 #, lua-format
 msgctxt "frisians_building"
 msgid "The weaving mill needs %s on average to produce one piece of cloth."
-msgstr "De Spinnweelmöhlen bruukt dör de Bank %s um een Stück Stoff to produzeren."
+msgstr "De Weevstohl bruukt dör de Bank %s um een Stück Stoff to produzeren."
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
@@ -16368,7 +16369,7 @@ msgid "Workers use:"
 msgstr "Arbeiders bruken:"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:710
-#: ../../../../data/tribes/scripting/help/worker_help.lua:169
+#: ../../../../data/tribes/scripting/help/worker_help.lua:179
 msgid "Experience levels"
 msgstr "Erfahrung-Stannen"
 
@@ -16777,67 +16778,67 @@ msgid "Worker uses"
 msgstr "Arbeider bruukt"
 
 #. TRANSLATORS: Soldier levels
-#: ../../../../data/tribes/scripting/help/worker_help.lua:175
+#: ../../../../data/tribes/scripting/help/worker_help.lua:185
 msgid "Levels"
 msgstr "Stannen"
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:177
+#: ../../../../data/tribes/scripting/help/worker_help.lua:187
 msgid "Health"
 msgstr "Gesundheid"
 
 #. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
-#: ../../../../data/tribes/scripting/help/worker_help.lua:181
+#: ../../../../data/tribes/scripting/help/worker_help.lua:191
 msgid "Starts at %1% points."
 msgstr "Hett am Anfang %1% Punkten."
 
 #. TRANSLATORS: Soldier health / attack defense / evade points
-#: ../../../../data/tribes/scripting/help/worker_help.lua:184
-#: ../../../../data/tribes/scripting/help/worker_help.lua:195
+#: ../../../../data/tribes/scripting/help/worker_help.lua:194
+#: ../../../../data/tribes/scripting/help/worker_help.lua:205
 msgid "Increased by %1% point for each level."
 msgid_plural "Increased by %1% points for each level."
 msgstr[0] "Um %1% Punkt för elkeen Stand verhoogt."
 msgstr[1] "Um %1% Punkten för elkeen Stand verhoogt."
 
 #. TRANSLATORS: Soldier health / attack defense / evade level
-#: ../../../../data/tribes/scripting/help/worker_help.lua:187
 #: ../../../../data/tribes/scripting/help/worker_help.lua:197
 #: ../../../../data/tribes/scripting/help/worker_help.lua:207
-#: ../../../../data/tribes/scripting/help/worker_help.lua:222
+#: ../../../../data/tribes/scripting/help/worker_help.lua:217
+#: ../../../../data/tribes/scripting/help/worker_help.lua:232
 msgid "The maximum level is %1%."
 msgid_plural "The maximum level is %1%."
 msgstr[0] "De hoogste Stand is %1%."
 msgstr[1] "De hoogste Stand is %1%."
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:189
+#: ../../../../data/tribes/scripting/help/worker_help.lua:199
 msgid "Attack"
 msgstr "Angriff"
 
 #. TRANSLATORS: Points are 4 digit numbers.
-#: ../../../../data/tribes/scripting/help/worker_help.lua:192
+#: ../../../../data/tribes/scripting/help/worker_help.lua:202
 msgid "A random value between %1% and %2% points is added to each attack."
 msgstr "Een tofälliger Weert tüsken %1% un %2% Punkten word to elkeen Angriff daartodaan."
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:199
+#: ../../../../data/tribes/scripting/help/worker_help.lua:209
 msgid "Defense"
 msgstr "Verteidigung"
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:203
-#: ../../../../data/tribes/scripting/help/worker_help.lua:211
-#: ../../../../data/tribes/scripting/help/worker_help.lua:218
+#: ../../../../data/tribes/scripting/help/worker_help.lua:213
+#: ../../../../data/tribes/scripting/help/worker_help.lua:221
+#: ../../../../data/tribes/scripting/help/worker_help.lua:228
 #, lua-format
 msgid "Starts at %d%%."
 msgstr "Hett am Anfang %d%%."
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:205
-#: ../../../../data/tribes/scripting/help/worker_help.lua:220
+#: ../../../../data/tribes/scripting/help/worker_help.lua:215
+#: ../../../../data/tribes/scripting/help/worker_help.lua:230
 #, lua-format
 msgid "Increased by %d%% for each level."
 msgstr "Word mit elkeen Stand um %d%% verhoogt."
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:212
+#: ../../../../data/tribes/scripting/help/worker_help.lua:222
 msgid "This soldier cannot be trained in defense."
 msgstr "Deese Soldat kann keene Verteidigung lehren."
 
-#: ../../../../data/tribes/scripting/help/worker_help.lua:215
+#: ../../../../data/tribes/scripting/help/worker_help.lua:225
 msgid "Evade"
 msgstr "Utwieken"

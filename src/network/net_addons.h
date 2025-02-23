@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2024 by the Widelands Development Team
+ * Copyright (C) 2020-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,6 +51,7 @@ struct NetAddons {
 	// Downloads the add-on with the given name (e.g. "cool_feature.wad")
 	// from the server and downloads it to the given canonical location.
 	void download_addon(const std::string& name, const std::string& save_as, const CallbackFn&);
+	void download_map(const std::string& name, const std::string& save_as);
 
 	// Requests the PO files for the given add-on (cool_feature.wad) from the server and
 	// downloads them into the given temporary location (e.g. ~/.widelands/temp/some_dir).

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -475,10 +475,10 @@ public:
 	uint32_t find_attack_soldiers(const Flag&,
 	                              std::vector<Soldier*>* soldiers = nullptr,
 	                              uint32_t nr_wanted = std::numeric_limits<uint32_t>::max());
-	void enemyflagaction(const Flag&,
-	                     PlayerNumber attacker,
-	                     const std::vector<Widelands::Soldier*>&,
-	                     bool allow_conquer);
+	void attack(const Flag&,
+	            PlayerNumber attacker,
+	            const std::vector<Widelands::Soldier*>&,
+	            bool allow_conquer);
 
 	uint32_t casualties() const {
 		return casualties_;

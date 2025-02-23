@@ -44,6 +44,12 @@ include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 if(POLICY CMP0148)
   cmake_policy(SET CMP0148 NEW)
 endif(POLICY CMP0148)
+if(POLICY CMP0153)
+  cmake_policy(SET CMP0153 NEW)
+endif(POLICY CMP0153)
+if(POLICY CMP0177)  # Added in CMake 3.31
+  cmake_policy(SET CMP0177 NEW)
+endif(POLICY CMP0177)
 
 IF(USE_XDG AND NOT APPLE AND NOT WIN32)
   ADD_DEFINITIONS(-DUSE_XDG)
@@ -404,7 +410,7 @@ IF (WIN32)
       set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
       message (STATUS "Enabled large address awareness on mingw32")
       message (WARNING "mingw compiler for 32 bit is deprecated, consider switching to 64-bit!")
-      set(MINGW_SDL_IMG_DEPS webp webpdemux webpdecoder jbig deflate Lerc jxl hwy avif aom rav1e yuv dav1d sharpyuv ntdll)
+      set(MINGW_SDL_IMG_DEPS webp webpdemux webpdecoder jbig deflate Lerc jxl hwy avif aom yuv dav1d sharpyuv ntdll)
     else (CMAKE_SIZEOF_VOID_P EQUAL 4)
       message (STATUS "Detected mingw32-w64")
       set(MINGW_SDL_IMG_DEPS webp webpdemux webpdecoder jbig deflate Lerc jxl hwy avif aom rav1e yuv dav1d SvtAv1Enc sharpyuv ntdll)
@@ -433,7 +439,7 @@ if(OPTION_BUILD_WINSTATIC)
     endif()
   else()
     wl_add_static_libs(SDL_IMG_STATIC_LIBS ${MINGW_SDL_IMG_DEPS})
-    wl_add_static_libs(SDL_MIXER_STATIC_LIBS ssp)
+    wl_add_static_libs(SDL_MIXER_STATIC_LIBS ssp  modplug)
     wl_add_static_libs(SDL_STATIC_LIBS mingw32 dxerr8 zstd ${BROTLI})
   endif(MSVC)
 endif(OPTION_BUILD_WINSTATIC)
@@ -499,6 +505,16 @@ install (
   CONFIGURATIONS Debug;Release;RelWithDebInfo;None
   COMPONENT CoreVersionFile
 )
+
+# TODO(Nordfriese): Use this consistently in places in code that use various other tests for endianness
+include(TestBigEndian)
+TEST_BIG_ENDIAN(IS_BIG_ENDIAN)
+if(IS_BIG_ENDIAN)
+  message(STATUS "Byte order is big-endian")
+  ADD_DEFINITIONS(-DWORDS_BIGENDIAN)
+else()
+  message(STATUS "Byte order is little-endian")
+endif()
 
 # Installation.
 add_subdirectory(doc)

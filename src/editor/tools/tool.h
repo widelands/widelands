@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,7 +62,7 @@ public:
 	                     Widelands::Map* map) {
 		return (i == First  ? *this :
 		        i == Second ? second_ :
-                            third_)
+		                      third_)
 		   .handle_click_impl(center, args, map);
 	}
 
@@ -72,7 +72,7 @@ public:
 	                    Widelands::Map* map) {
 		return (i == First  ? *this :
 		        i == Second ? second_ :
-                            third_)
+		                      third_)
 		   .handle_undo_impl(center, args, map);
 	}
 

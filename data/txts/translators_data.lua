@@ -680,11 +680,11 @@ function translators() return {
       entries = {
          {
             members = {
-               "Mister Pi ",
-               "Nasenbaer ",
-               "Ole ",
-               "tando ",
+               "Mister Pi",
+               "Nasenbaer",
                "Nordfriese",
+               "Ole",
+               "tando",
             },
          },
       },

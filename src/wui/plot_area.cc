@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -509,7 +509,7 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
 		if (plot.second.showplot) {
 			draw_plot_line(dst,
 			               (plotmode_ == Plotmode::kRelative) ? plot.second.relative_data.get() :
-                                                             plot.second.absolute_data,
+			                                                    plot.second.absolute_data,
 			               highest_scale, sub_, plot.second.plotcolor, yoffset);
 		}
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2024 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,7 +52,7 @@ private:
 	uint32_t state1{0U};
 };
 
-#define SIMPLE_RAND(x) (((x) >> 8) ^ rng_sbox[(x)&0xff])
+#define SIMPLE_RAND(x) (((x) >> 8) ^ rng_sbox[(x) & 0xff])
 
 /// Generates a random UUID, looking like "550e8400-e29b-11d4-a716-446655440000".
 /// This does not use logic_rand(), but instead a thread local random number

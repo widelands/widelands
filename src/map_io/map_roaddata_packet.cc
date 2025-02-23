@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,7 +68,8 @@ void MapRoaddataPacket::read(FileSystem& fs,
 					}
 					PlayerNumber player_index = fr.unsigned_8();
 					if (0 >= player_index || player_index > nr_players) {
-						throw GameDataError("Invalid player number: %i.", player_index);
+						throw GameDataError(
+						   "Invalid player number: %u.", static_cast<unsigned int>(player_index));
 					}
 
 					road.set_owner(egbase.get_player(player_index));

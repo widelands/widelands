@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -283,7 +283,7 @@ uint32_t Request::get_priority(const int32_t cost) const {
 	assert(cost >= 0);
 	const WarePriority& priority =
 	   (target_building_ != nullptr ? target_building_->get_priority(get_type(), get_index()) :
-                                     WarePriority::kNormal);
+	                                  WarePriority::kNormal);
 
 	// Don't allow evicted workers to go straight back inside (bug #4809)
 	const Time& cur_time = economy_->owner().egbase().get_gametime();
@@ -305,7 +305,7 @@ uint32_t Request::get_priority(const int32_t cost) const {
 	}
 
 	const uint32_t req_time = (target_constructionsite_ != nullptr ? get_required_time().get() :
-                                                                    get_last_request_time().get());
+	                                                                 get_last_request_time().get());
 	return
 	   // Linear scaling of request priority depending on
 	   // the building's user-specified ware priority.

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -216,7 +216,7 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 	}
 	int32_t const size = fr.signed_32();
 	if (size != dw * dh) {
-		throw wexception("expected %u but found %u", dw * dh, size);
+		throw wexception("expected %d but found %d", dw * dh, size);
 	}
 
 	if (dw < width || dh < height) {
@@ -1028,7 +1028,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 					break;
 
 				default:
-					log_warn("S2Map: Unknown immovable %d", static_cast<uint32_t>(codon));
+					log_warn("S2Map: Unknown immovable %u", static_cast<uint32_t>(codon));
 					break;
 				}  // end switch (codon)
 				break;
@@ -1038,7 +1038,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 				place_immovable(location, bobname);
 			}
 		}  // end for x
-	}     // end for y
+	}  // end for y
 	//  WORKAROUND:
 	//  Unfortunately the Widelands engine is not completely compatible with
 	//  the Settlers 2; space for buildings is defined differently. To allow

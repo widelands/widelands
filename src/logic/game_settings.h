@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2024 by the Widelands Development Team
+ * Copyright (C) 2008-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -93,9 +93,10 @@ struct NoteGameSettings {
 	CAN_BE_SENT_AS_NOTE(NoteId::GameSettings)
 
 	enum class Action {
-		kUser,    // A client has picked a different player slot / become a spectator
-		kPlayer,  // A player slot has changed its status (type, tribe etc.)
-		kMap      // A new map/savegame was selected
+		kUser,          // A client has picked a different player slot / become a spectator
+		kPlayer,        // A player slot has changed its status (type, tribe etc.)
+		kMap,           // A new map/savegame was selected
+		kWinCondition,  // A new win condition was selected
 	};
 
 	Action action;

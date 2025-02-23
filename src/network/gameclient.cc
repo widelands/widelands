@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2024 by the Widelands Development Team
+ * Copyright (C) 2008-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "build_info.h"
+#include "commands/cmd_net_check_sync.h"
 #include "config.h"
 #include "game_io/game_loader.h"
 #include "io/fileread.h"
@@ -36,7 +37,6 @@
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
-#include "logic/playercommand.h"
 #include "logic/playersmanager.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/constants.h"
@@ -194,7 +194,7 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 
 	game->run(settings.savegame ? Widelands::Game::StartGameType::kSaveGame :
 	          settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
-                                 Widelands::Game::StartGameType::kMap,
+	                              Widelands::Game::StartGameType::kMap,
 	          "", format("netclient_%d", static_cast<int>(settings.usernum)));
 
 	// if this is an internet game, tell the metaserver that the game is done.
@@ -419,7 +419,7 @@ void GameClient::do_send_player_command(Widelands::PlayerCommand* pc) {
 	// TODO(Klaus Halfmann): should this be an assert?
 	if (pc->sender() == d->settings.playernum + 1)  //  allow command for current player only
 	{
-		verb_log_info("[Client]: enqueue playercommand at time %i\n", d->game->get_gametime().get());
+		verb_log_info("[Client]: enqueue playercommand at time %u\n", d->game->get_gametime().get());
 
 		d->send_player_command(pc);
 
@@ -735,7 +735,7 @@ const std::vector<ChatMessage>& GameClient::get_messages() const {
 void GameClient::send_time() {
 	assert(d->game);
 
-	verb_log_info("[Client]: sending timestamp: %i", d->game->get_gametime().get());
+	verb_log_info("[Client]: sending timestamp: %u", d->game->get_gametime().get());
 
 	SendPacket s;
 	s.unsigned_8(NETCMD_TIME);
@@ -749,10 +749,11 @@ void GameClient::send_time() {
 void GameClient::sync_report_callback() {
 	assert(d->net != nullptr);
 	if (d->net->is_connected()) {
+		crypto::MD5Checksum md5sum = d->game->get_sync_hash();
 		SendPacket s;
 		s.unsigned_8(NETCMD_SYNCREPORT);
 		s.unsigned_32(d->game->get_gametime().get());
-		s.data(d->game->get_sync_hash().data, 16);
+		s.data(md5sum.value.data(), md5sum.value.size());
 		d->net->send(s);
 	}
 }
@@ -855,6 +856,8 @@ void GameClient::handle_setting_map(RecvPacket& packet) {
 
 	// New map was set, so we clean up the buffer of a previously requested file
 	d->file_.reset(nullptr);
+
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 }
 
 /**
@@ -864,7 +867,7 @@ void GameClient::handle_setting_map(RecvPacket& packet) {
 void GameClient::handle_new_file(RecvPacket& packet) {
 	std::string path = g_fs->FileSystem::fix_cross_file(packet.string());
 	uint32_t bytes = packet.unsigned_32();
-	std::string md5 = packet.string();
+	std::string expected_md5 = packet.string();
 
 	// Check whether the file or a file with that name already exists
 	if (g_fs->file_exists(path)) {
@@ -881,11 +884,8 @@ void GameClient::handle_new_file(RecvPacket& packet) {
 				}
 				fr.data_complete(complete.get(), bytes);
 				// TODO(Klaus Halfmann): compute MD5 on the fly in FileRead...
-				SimpleMD5Checksum md5sum;
-				md5sum.data(complete.get(), bytes);
-				md5sum.finish_checksum();
-				std::string localmd5 = md5sum.get_checksum().str();
-				if (localmd5 == md5) {
+				std::string localmd5 = crypto::md5_str(complete.get(), bytes);
+				if (localmd5 == expected_md5) {
 					// everything is alright we now have the file.
 					return;
 				}
@@ -911,7 +911,7 @@ void GameClient::handle_new_file(RecvPacket& packet) {
 	d->file_.reset(new NetTransferFile());
 	d->file_->bytes = bytes;
 	d->file_->filename = path;
-	d->file_->md5sum = md5;
+	d->file_->md5sum = expected_md5;
 	size_t position = path.rfind(FileSystem::file_separator(), path.size() - 2);
 	if (position != std::string::npos) {
 		path.resize(position);
@@ -977,10 +977,7 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 		std::unique_ptr<char[]> complete(new char[d->file_->bytes]);
 
 		fr.data_complete(complete.get(), d->file_->bytes);
-		SimpleMD5Checksum md5sum;
-		md5sum.data(complete.get(), d->file_->bytes);
-		md5sum.finish_checksum();
-		std::string localmd5 = md5sum.get_checksum().str();
+		std::string localmd5 = crypto::md5_str(complete.get(), d->file_->bytes);
 		if (localmd5 != d->file_->md5sum) {
 			// Something went wrong! We have to rerequest the file.
 			s.reset();
@@ -1119,7 +1116,8 @@ void GameClient::handle_syncrequest(RecvPacket& packet) {
 	}
 	const Time time(packet.unsigned_32());
 	d->time.receive(time);
-	d->game->enqueue_command(new CmdNetCheckSync(time, [this] { sync_report_callback(); }));
+	d->game->enqueue_command(
+	   new Widelands::CmdNetCheckSync(time, [this] { sync_report_callback(); }));
 	d->game->report_sync_request();
 }
 
@@ -1345,17 +1343,17 @@ void GameClient::disconnect(const std::string& reason,
 			if (reason == "KICKED" || reason == "SERVER_LEFT" || reason == "SERVER_CRASHED") {
 				throw WLWarning("", "%s",
 				                arg.empty() ? NetworkGamingMessages::get_message(reason).c_str() :
-                                          NetworkGamingMessages::get_message(reason, arg).c_str());
+				                              NetworkGamingMessages::get_message(reason, arg).c_str());
 			}
 			throw wexception("%s", arg.empty() ?
-                                   NetworkGamingMessages::get_message(reason).c_str() :
-                                   NetworkGamingMessages::get_message(reason, arg).c_str());
+			                          NetworkGamingMessages::get_message(reason).c_str() :
+			                          NetworkGamingMessages::get_message(reason, arg).c_str());
 		}
 		capsule_.menu().show_messagebox(
 		   _("Disconnected"),
 		   format(_("The connection with the host was lost for the following reason:\n%s"),
 		          (arg.empty() ? NetworkGamingMessages::get_message(reason) :
-                               NetworkGamingMessages::get_message(reason, arg))));
+		                         NetworkGamingMessages::get_message(reason, arg))));
 	}
 
 	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a

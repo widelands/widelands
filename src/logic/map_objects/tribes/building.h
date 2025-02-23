@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -278,6 +278,8 @@ public:
 
 	PositionList get_positions(const EditorGameBase&) const override;
 
+	// Don't make this virtual for performance reasons. See implementation for examples
+	// of handling special cases.
 	std::string info_string(const InfoStringFormat& format);
 
 	// Return the overlay string that is displayed on the map view when enabled

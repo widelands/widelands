@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2024 by the Widelands Development Team
+ * Copyright (C) 2020-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -327,7 +327,7 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 
 	const uint32_t sleeptime = has_priority             ? kMutexPriorityLockInterval :
 	                           (id_ == ID::kLogicFrame) ? kMutexLogicFrameLockInterval :
-                                                         kMutexNormalLockInterval;
+	                                                      kMutexNormalLockInterval;
 	if (!has_priority && record.current_owner != self) {
 		SDL_Delay(sleeptime);
 	}
@@ -339,7 +339,7 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 		if (now - start_time > 1000 && now - last_log_time > 1000) {
 			last_log_time = now;
 			if (id_ != ID::kLog) {
-				verb_log_dbg("WARNING: %s locking mutex %s, already waiting for %d ms",
+				verb_log_dbg("WARNING: %s locking mutex %s, already waiting for %u ms",
 				             thread_name(self).c_str(), to_string(id_).c_str(), now - start_time);
 			} else if (g_verbose) {
 				// not including format() for the time info

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,6 +30,9 @@
 #include "base/string.h"
 #include "base/warning.h"
 #include "base/wexception.h"
+#include "commands/cmd_delete_message.h"
+#include "commands/cmd_luacoroutine.h"
+#include "commands/cmd_pick_custom_starting_position.h"
 #include "economy/economy.h"
 #include "economy/expedition_bootstrap.h"
 #include "economy/flag.h"
@@ -37,8 +40,6 @@
 #include "economy/waterway.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/cmd_delete_message.h"
-#include "logic/cmd_luacoroutine.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
@@ -48,13 +49,13 @@
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/mapregion.h"
-#include "logic/playercommand.h"
 #include "scripting/lua_table.h"
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
@@ -691,7 +692,7 @@ Waterway* Player::build_waterway(const Path& path) {
 	if (path.get_nsteps() > map.get_waterway_max_length()) {
 		log_warn_time(
 		   egbase().get_gametime(),
-		   "%d: Refused to build a waterway because it is too long. Permitted length %d, actual "
+		   "%u: Refused to build a waterway because it is too long. Permitted length %u, actual "
 		   "length %" PRIuS ".",
 		   static_cast<unsigned int>(player_number()), map.get_waterway_max_length(),
 		   path.get_nsteps());
@@ -713,17 +714,17 @@ Waterway* Player::build_waterway(const Path& path) {
 				}
 				if (!CheckStepFerry(egbase()).reachable_dest(map, fc)) {
 					log_warn_time(egbase().get_gametime(),
-					              "%i: building waterway aborted, unreachable for ferries\n",
+					              "%u: building waterway aborted, unreachable for ferries\n",
 					              static_cast<unsigned int>(player_number()));
 					return nullptr;
 				}
 			}
 			return &Waterway::create(egbase(), *start, *end, path);
 		}
-		log_warn_time(egbase().get_gametime(), "%i: building waterway aborted, missing end flag\n",
+		log_warn_time(egbase().get_gametime(), "%u: building waterway aborted, missing end flag\n",
 		              static_cast<unsigned int>(player_number()));
 	} else {
-		log_warn_time(egbase().get_gametime(), "%i: building waterway aborted, missing start flag\n",
+		log_warn_time(egbase().get_gametime(), "%u: building waterway aborted, missing start flag\n",
 		              static_cast<unsigned int>(player_number()));
 	}
 	return nullptr;
@@ -820,8 +821,8 @@ bool Player::check_can_build(const BuildingDescr& descr, const FCoords& fc) cons
 	}
 
 	const NodeCaps buildcaps = descr.get_built_over_immovable() == INVALID_INDEX ?
-                                 get_buildcaps(fc) :
-                                 map.get_max_nodecaps(egbase(), fc);
+	                              get_buildcaps(fc) :
+	                              map.get_max_nodecaps(egbase(), fc);
 	if (descr.get_ismine()) {
 		if ((buildcaps & BUILDCAPS_MINE) == 0) {
 			return false;
@@ -923,8 +924,8 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 					if (RoadBase* const primary_road = flag->get_roadbase(primary_road_id)) {
 						Flag& primary_start = primary_road->get_flag(RoadBase::FlagStart);
 						Flag& primary_other = flag == &primary_start ?
-                                           primary_road->get_flag(RoadBase::FlagEnd) :
-                                           primary_start;
+						                         primary_road->get_flag(RoadBase::FlagEnd) :
+						                         primary_start;
 						primary_road->destroy(egbase());
 						verb_log_info_time(egbase().get_gametime(),
 						                   "destroying road/waterway from (%i, %i) going in dir %u\n",
@@ -1304,12 +1305,10 @@ uint32_t Player::find_attack_soldiers(const Flag& flag,
 	return count;
 }
 
-// TODO(unknown): Clean this mess up. The only action we really have right now is
-// to attack, so pretending we have more types is pointless.
-void Player::enemyflagaction(const Flag& flag,
-                             PlayerNumber const attacker,
-                             const std::vector<Widelands::Soldier*>& soldiers,
-                             const bool allow_conquer) {
+void Player::attack(const Flag& flag,
+                    PlayerNumber const attacker,
+                    const std::vector<Widelands::Soldier*>& soldiers,
+                    const bool allow_conquer) {
 	if (attacker != player_number()) {
 		log_warn_time(egbase().get_gametime(), "Player (%d) is not the sender of an attack (%d)\n",
 		              attacker, player_number());
@@ -1335,7 +1334,7 @@ void Player::enemyflagaction(const Flag& flag,
 								parameters_vector.push_back(temp_attacker->serial());
 							} else {
 								verb_log_warn_time(egbase().get_gametime(),
-								                   "Player(%u)::enemyflagaction: Not sending soldier %u "
+								                   "Player(%u)::attack: Not sending soldier %u "
 								                   "because his warship has vanished\n",
 								                   player_number(), temp_attacker->serial());
 							}
@@ -1346,7 +1345,7 @@ void Player::enemyflagaction(const Flag& flag,
 							// The soldier may not be in a militarysite anymore if he was kicked out
 							// in the short delay between sending and executing a playercommand
 							verb_log_warn_time(egbase().get_gametime(),
-							                   "Player(%u)::enemyflagaction: Not sending soldier %u "
+							                   "Player(%u)::attack: Not sending soldier %u "
 							                   "because he left the building\n",
 							                   player_number(), temp_attacker->serial());
 						}
@@ -2025,8 +2024,8 @@ std::string Player::pick_shipname() {
 
 	const size_t index =
 	   egbase().is_game() ?
-         (dynamic_cast<Game&>(egbase()).logic_rand() % remaining_shipnames_.size()) :
-         RNG::static_rand(remaining_shipnames_.size());
+	      (dynamic_cast<Game&>(egbase()).logic_rand() % remaining_shipnames_.size()) :
+	      RNG::static_rand(remaining_shipnames_.size());
 	std::string new_name = remaining_shipnames_.at(index);
 	remaining_shipnames_.at(index) = remaining_shipnames_.back();
 	remaining_shipnames_.pop_back();
@@ -2043,8 +2042,8 @@ std::string Player::pick_warehousename(bool port) {
 
 	const size_t index =
 	   egbase().is_game() ?
-         (dynamic_cast<Game&>(egbase()).logic_rand() % remaining_warehousenames_.size()) :
-         RNG::static_rand(remaining_warehousenames_.size());
+	      (dynamic_cast<Game&>(egbase()).logic_rand() % remaining_warehousenames_.size()) :
+	      RNG::static_rand(remaining_warehousenames_.size());
 	std::string new_name = remaining_warehousenames_.at(index);
 	remaining_warehousenames_.at(index) = remaining_warehousenames_.back();
 	remaining_warehousenames_.pop_back();

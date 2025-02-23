@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -142,9 +142,9 @@ SDL_GLContext initialize(
 	} else
 #endif
 	   if (err != GLEW_OK) {
-		log_err("glewInit returns %i\nYour OpenGL installation must be __very__ broken. %s\n", err,
+		log_err("glewInit returns %u\nYour OpenGL installation must be __very__ broken. %s\n", err,
 		        glewGetErrorString(err));
-		throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
+		throw wexception("glewInit returns %u: Broken OpenGL installation.", err);
 	}
 #endif
 
@@ -157,8 +157,8 @@ SDL_GLContext initialize(
 			display_message += "\n\n";
 			display_message +=
 			   (i18n::has_rtl_character(localized_message.c_str()) ?
-                i18n::line2bidi(i18n::make_ligatures(localized_message.c_str()).c_str()) :
-                localized_message);
+			       i18n::line2bidi(i18n::make_ligatures(localized_message.c_str()).c_str()) :
+			       localized_message);
 		}
 
 		log_err("%s\n", display_message.c_str());
@@ -299,7 +299,7 @@ SDL_GLContext initialize(
 	   "Graphics: OpenGL: Double buffering %s\n", (glBool == GL_TRUE) ? "enabled" : "disabled");
 
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, max_texture_size);
-	log_info("Graphics: OpenGL: Max texture size: %u\n", *max_texture_size);
+	log_info("Graphics: OpenGL: Max texture size: %d\n", *max_texture_size);
 
 	const char* const shading_language_version_string =
 	   reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));

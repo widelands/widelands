@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2024 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,7 +74,7 @@ bool Router::find_route(RoutingNode& start,
 
 	while (RoutingNode* current = astar.step()) {
 		if (cost_cutoff >= 0 && (type == wwWARE ? current->mpf_realcost_ware :
-                                                current->mpf_realcost_worker) > cost_cutoff) {
+		                                          current->mpf_realcost_worker) > cost_cutoff) {
 			return false;
 		}
 

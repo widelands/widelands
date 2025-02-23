@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2024 by the Widelands Development Team
+ * Copyright (C) 2019-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -404,7 +404,7 @@ struct ScoredShip {
 	static inline uint64_t calc_score(uint64_t capacity, uint64_t eta, uint64_t detour) {
 		// This needs to use uint64_t because the intermediate results will overflow uint32_t
 		return eta > kHorriblyLongDuration ? 0 :
-                                           capacity * kMinScoreForImmediateAcceptFactor *
+		                                     capacity * kMinScoreForImmediateAcceptFactor *
 		                                        kHorriblyLongDuration * kHorriblyLongDuration /
 		                                        (std::max(eta, kWonderfullyShortDuration) *
 		                                         std::max(detour, kWonderfullyShortDuration));
@@ -902,7 +902,7 @@ Duration ShippingSchedule::update(Game& game) {
 							pair_it->second.second = 0;
 							erase = true;
 						}
-						sslog("Iteration: Iteration: planned_capacity reduced by %d (ship %s)\n",
+						sslog("Iteration: Iteration: planned_capacity reduced by %u (ship %s)\n",
 						      reducedby, pair_it->first.get(game)->get_shipname().c_str());
 						for (uint32_t i = reducedby; i != 0u; --i) {
 							assert(*std::prev(arrival_times.end()) == last_arrival);

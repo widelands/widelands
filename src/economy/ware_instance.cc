@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2024 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -375,8 +375,8 @@ void WareInstance::update(Game& game) {
 			flag->call_carrier(game, *this,
 			                   (dynamic_cast<Building const*>(nextstep) != nullptr) &&
 			                         &nextstep->base_flag() != location ?
-                               &nextstep->base_flag() :
-                               nextstep);
+			                      &nextstep->base_flag() :
+			                      nextstep);
 		} else if (upcast(PortDock, pd, location)) {
 			pd->update_shippingitem(game, *this);
 		} else {
@@ -519,7 +519,7 @@ void WareInstance::cancel_moving() {
  */
 PlayerImmovable* WareInstance::get_next_move_step(Game& game) {
 	return transfer_ != nullptr ? dynamic_cast<PlayerImmovable*>(transfer_nextstep_.get(game)) :
-                                 nullptr;
+	                              nullptr;
 }
 
 void WareInstance::log_general_info(const EditorGameBase& egbase) const {

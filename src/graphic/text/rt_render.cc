@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1016,8 +1016,8 @@ public:
 	              bool use_playercolor)
 	   : RenderNode(c, ns),
 	     image_(use_playercolor ?
-                  playercolor_image(color, image_filename) :
-                  g_image_cache->get(image_filename, true, ImageCache::kDefaultScaleIndex)),
+	               playercolor_image(color, image_filename) :
+	               g_image_cache->get(image_filename, true, ImageCache::kDefaultScaleIndex)),
 	     filename_(image_filename),
 	     scale_(scale),
 	     color_(color),

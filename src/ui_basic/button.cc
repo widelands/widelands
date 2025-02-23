@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -407,7 +407,7 @@ void Button::set_disable_style(UI::ButtonDisableStyle input_style) {
 
 void Button::set_perm_pressed(bool pressed) {
 	set_visual_state(pressed ? UI::Button::VisualState::kPermpressed :
-                              UI::Button::VisualState::kRaised);
+	                           UI::Button::VisualState::kRaised);
 }
 
 void Button::set_style(UI::ButtonStyle bstyle) {

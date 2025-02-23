@@ -186,9 +186,16 @@ elif [ "$DISTRO" = "homebrew" ]; then
    for PKG in $(cat "${WL_DIR}"/utils/macos/packages) ; do
       if ! echo "$INSTALLED" | grep -q $PKG ; then
          PKGS="$PKGS $PKG"
+      else
+         echo "$PKG is already installed, skipping."
       fi
    done
-   brew install $@ $PKGS
+   if [ -z "$PKGS" ]; then
+       echo
+       echo "All dependencies already installed! Nothing to do."
+   else
+       brew install $@ $PKGS
+   fi
 
 elif [ "$DISTRO" = "solus" ]; then
    echo "Installing dependencies for Solus..."

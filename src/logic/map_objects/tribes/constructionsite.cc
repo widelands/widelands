@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,8 +74,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 
 	uint32_t frame_index =
 	   totaltime.get() != 0u ?
-         std::min(completedtime.get() * total_frames / totaltime.get(), total_frames - 1) :
-         0;
+	      std::min(completedtime.get() * total_frames / totaltime.get(), total_frames - 1) :
+	      0;
 	uint32_t animation_index = 0;
 	while (frame_index >= animations[animation_index].second) {
 		frame_index -= animations[animation_index].second;

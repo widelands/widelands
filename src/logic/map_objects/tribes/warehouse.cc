@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -380,7 +380,7 @@ Quantity Warehouse::SoldierControl::min_soldier_capacity() const {
 
 Quantity Warehouse::SoldierControl::max_soldier_capacity() const {
 	return warehouse_->attack_target()->can_be_attacked() ? warehouse_->descr().get_max_garrison() :
-                                                           0;
+	                                                        0;
 }
 
 Quantity Warehouse::SoldierControl::soldier_capacity() const {
@@ -628,6 +628,11 @@ bool Warehouse::init(EditorGameBase& egbase) {
 void Warehouse::set_warehouse_name(const std::string& name) {
 	warehouse_name_ = name;
 	get_owner()->reserve_warehousename(name);
+
+	// Line breaks mess up the type icons in the census strings and push the garrison strings
+	// down where they're covered by the flag, so we replace spaces with non-breaking ones.
+	// The names will be richtext escaped for safety, so we can't use "&nbsp;".
+	replace_all(warehouse_name_, " ", " ");
 }
 
 void Warehouse::init_containers(const Player& player) {
@@ -1486,7 +1491,7 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type, const
 	assert(portdock_ != nullptr);
 	assert(portdock_->expedition_bootstrap() != nullptr);
 	return r != nullptr ? portdock_->expedition_bootstrap()->inputqueue(*r) :
-                         portdock_->expedition_bootstrap()->inputqueue(index, type, false);
+	                      portdock_->expedition_bootstrap()->inputqueue(index, type, false);
 }
 
 void Warehouse::set_desired_soldier_count(Quantity q) {
@@ -1510,8 +1515,47 @@ void Warehouse::request_soldier_callback(Game& game,
 	wh.soldier_control_.incorporate_soldier(game, s);
 }
 
+std::string Warehouse::warehouse_census_string() const {
+	// U+2654 white chess king character
+	// "👑" U+1F451 crown character is missing from our font
+	static const std::string hq_fmt = "♔&nbsp;%s&nbsp;♔";
+
+	static const std::string port_fmt = "⚓&nbsp;%s&nbsp;⚓";  // U+2693 anchor character
+
+	// U+27F0 upwards quadruple arrow character (similar to a house)
+	// "📦" U+1F4E6 package character is missing from our font
+	static const std::string wh_fmt = "⟰&nbsp;%s&nbsp;⟰";
+
+	std::string icon_format;
+	if (descr().get_isport()) {
+		icon_format = port_fmt;
+	} else if (descr().get_conquers() > 0) {
+		icon_format = hq_fmt;
+	} else {
+		icon_format = wh_fmt;
+	}
+	std::string name = get_warehouse_name();
+	if (name.empty()) {
+		name = descr().descname();
+		// See explanation in set_warehouse_name().
+		// Needed because of e.g. Temple of Vesta in emp04
+		replace_all(name, " ", " ");
+	}
+	return format(icon_format, richtext_escape(name));
+}
+
 void Warehouse::update_statistics_string(std::string* str) {
-	*str = richtext_escape(get_warehouse_name());
+	if (descr().get_conquers() > 0) {
+		// Port or HQ
+		if (get_desired_soldier_count() > 0) {
+			*str = soldier_control_.get_status_string(owner().tribe(), get_soldier_preference());
+		} else {
+			*str = "—";
+		}
+	} else {
+		// plain warehouse
+		str->clear();
+	}
 }
 
 std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() const {
