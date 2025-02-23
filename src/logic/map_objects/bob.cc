@@ -387,6 +387,20 @@ void Bob::start_task_idle(Game& game, uint32_t const anim, int32_t const timeout
 	top_state().ivar3 = offset.y;
 }
 
+void Bob::start_or_replace_task_idle(Game& game, uint32_t anim, int32_t timeout, Vector2i offset) {
+	assert(timeout < 0 || timeout > 0);
+
+	State* state = get_state(taskIdle);
+	if (state == nullptr) {
+		return start_task_idle(game, anim, timeout, offset);
+	}
+
+	set_animation(game, anim);
+	state->ivar1 = timeout;
+	state->ivar2 = offset.x;
+	state->ivar3 = offset.y;
+}
+
 void Bob::idle_update(Game& game, State& state) {
 	if ((state.ivar1 == 0) || !get_signal().empty()) {
 		return pop_task(game);

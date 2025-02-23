@@ -1468,7 +1468,7 @@ void Ship::battle_update(Game& game) {
 			fight();
 			set_phase(Battle::Phase::kDefenderAttacking);
 			start_task_idle(game, descr().get_animation(current_battle.pending_damage > 0 ? "atk_ok_e" : "atk_fail_e", this), kAttackAnimationDuration);
-			target_ship->start_task_idle(game, target_ship->descr().get_animation(current_battle.pending_damage > 0 ? "eva_fail_w" : "eva_ok_w", target_ship), kAttackAnimationDuration);
+			target_ship->start_or_replace_task_idle(game, target_ship->descr().get_animation(current_battle.pending_damage > 0 ? "eva_fail_w" : "eva_ok_w", target_ship), kAttackAnimationDuration);
 			return;
 
 		case Battle::Phase::kAttackerMovingTowardsOpponent: {
@@ -1678,7 +1678,7 @@ void Ship::battle_update(Game& game) {
 		set_phase(Battle::Phase::kAttackerAttacking);
 		start_task_idle(game, descr().get_animation(current_battle.pending_damage > 0 ? "atk_ok_w" : "atk_fail_w", this), kAttackAnimationDuration);
 		if (target_ship != nullptr) {
-			target_ship->start_task_idle(game, target_ship->descr().get_animation(current_battle.pending_damage > 0 ? "eva_fail_e" : "eva_ok_e", target_ship), kAttackAnimationDuration);
+			target_ship->start_or_replace_task_idle(game, target_ship->descr().get_animation(current_battle.pending_damage > 0 ? "eva_fail_e" : "eva_ok_e", target_ship), kAttackAnimationDuration);
 		}
 		return;
 
