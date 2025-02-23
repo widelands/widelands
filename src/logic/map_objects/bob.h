@@ -263,7 +263,10 @@ public:
 	// TODO(feature-Hasi50): correct (?) Send a signal that may switch to some other \ref Task
 	void send_signal(Game&, char const*);
 	void start_task_idle(Game&, uint32_t anim, int32_t timeout, Vector2i offset = Vector2i::zero());
-	void start_or_replace_task_idle(Game&, uint32_t anim, int32_t timeout, Vector2i offset = Vector2i::zero());
+	void start_or_replace_task_idle(Game&,
+	                                uint32_t anim,
+	                                int32_t timeout,
+	                                Vector2i offset = Vector2i::zero());
 	[[nodiscard]] bool is_idle() const;
 
 	/// This can fail (and return false). Therefore the caller must check the

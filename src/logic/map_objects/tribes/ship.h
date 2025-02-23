@@ -152,7 +152,8 @@ struct Ship : Bob {
 		return descr().get_animation(ship_type_ == ShipType::kWarship ? "warship" : "idle", this);
 	}
 	[[nodiscard]] inline const DirAnimations& get_sail_anims() const {
-		return ship_type_ == ShipType::kWarship ? descr().get_sail_anims_warship() : descr().get_sail_anims_transport();
+		return ship_type_ == ShipType::kWarship ? descr().get_sail_anims_warship() :
+		                                          descr().get_sail_anims_transport();
 	}
 
 	void start_task_ship(Game&);

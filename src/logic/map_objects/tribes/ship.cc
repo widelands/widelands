@@ -190,8 +190,9 @@ ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
 	assign_directional_animation(&sail_anims_transport_, "sail");
 	assign_directional_animation(&sail_anims_warship_, "sail_warship");
 
-	for (const char* anim : {"idle", "warship", "sinking", "sinking_warship",
-			"atk_ok_w", "atk_fail_w", "eva_ok_w", "eva_fail_w", "atk_ok_e", "atk_fail_e", "eva_ok_e", "eva_fail_e"}) {
+	for (const char* anim :
+	     {"idle", "warship", "sinking", "sinking_warship", "atk_ok_w", "atk_fail_w", "eva_ok_w",
+	      "eva_fail_w", "atk_ok_e", "atk_fail_e", "eva_ok_e", "eva_fail_e"}) {
 		if (!is_animation_known(anim)) {
 			throw GameDataError("Ship %s has no '%s' anim", name().c_str(), anim);
 		}
@@ -514,7 +515,10 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 		break;
 	case ShipStates::kSinkRequest:
 		ship_state_ = ShipStates::kSinkAnimation;
-		start_task_idle(game, descr().get_animation(ship_type_ == ShipType::kWarship ? "sinking_warship" : "sinking", this), kSinkAnimationDuration);
+		start_task_idle(game,
+		                descr().get_animation(
+		                   ship_type_ == ShipType::kWarship ? "sinking_warship" : "sinking", this),
+		                kSinkAnimationDuration);
 		return;
 	case ShipStates::kSinkAnimation:
 		// The sink animation has been played, so finally remove the ship from the map
@@ -773,8 +777,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			return true;
 		}
 
-		if (start_task_movepath(
-		       game, destination_coords_->dockpoints.front(), 0, get_sail_anims())) {
+		if (start_task_movepath(game, destination_coords_->dockpoints.front(), 0, get_sail_anims())) {
 			return true;
 		}
 
@@ -1458,8 +1461,7 @@ void Ship::battle_update(Game& game) {
 			molog(game.get_gametime(), "[battle] Defender's turn ends");
 			bool won = damage(Battle::Phase::kAttackersTurn);
 			// Make sure we will idle until the enemy ship is truly gone, so we won't attack again
-			start_task_idle(
-			   game, idle_animation(), won ? (kSinkAnimationDuration + 1000) : 100);
+			start_task_idle(game, idle_animation(), won ? (kSinkAnimationDuration + 1000) : 100);
 			return;
 		}
 
@@ -1467,8 +1469,15 @@ void Ship::battle_update(Game& game) {
 			molog(game.get_gametime(), "[battle] Defender's turn begins");
 			fight();
 			set_phase(Battle::Phase::kDefenderAttacking);
-			start_task_idle(game, descr().get_animation(current_battle.pending_damage > 0 ? "atk_ok_e" : "atk_fail_e", this), kAttackAnimationDuration);
-			target_ship->start_or_replace_task_idle(game, target_ship->descr().get_animation(current_battle.pending_damage > 0 ? "eva_fail_w" : "eva_ok_w", target_ship), kAttackAnimationDuration);
+			start_task_idle(game,
+			                descr().get_animation(
+			                   current_battle.pending_damage > 0 ? "atk_ok_e" : "atk_fail_e", this),
+			                kAttackAnimationDuration);
+			target_ship->start_or_replace_task_idle(
+			   game,
+			   target_ship->descr().get_animation(
+			      current_battle.pending_damage > 0 ? "eva_fail_w" : "eva_ok_w", target_ship),
+			   kAttackAnimationDuration);
 			return;
 
 		case Battle::Phase::kAttackerMovingTowardsOpponent: {
@@ -1518,7 +1527,7 @@ void Ship::battle_update(Game& game) {
 			// For ports, skip the first round to allow defense warships to approach.
 			molog(game.get_gametime(), "[battle] Enemy in range");
 			set_phase(target_ship != nullptr ? Battle::Phase::kAttackersTurn :
-                                            Battle::Phase::kAttackerAttacking);
+			                                   Battle::Phase::kAttackerAttacking);
 			return start_task_idle(game, idle_animation(), 100);
 		}
 
@@ -1676,9 +1685,16 @@ void Ship::battle_update(Game& game) {
 		molog(game.get_gametime(), "[battle] Attacker's turn begins");
 		fight();
 		set_phase(Battle::Phase::kAttackerAttacking);
-		start_task_idle(game, descr().get_animation(current_battle.pending_damage > 0 ? "atk_ok_w" : "atk_fail_w", this), kAttackAnimationDuration);
+		start_task_idle(
+		   game,
+		   descr().get_animation(current_battle.pending_damage > 0 ? "atk_ok_w" : "atk_fail_w", this),
+		   kAttackAnimationDuration);
 		if (target_ship != nullptr) {
-			target_ship->start_or_replace_task_idle(game, target_ship->descr().get_animation(current_battle.pending_damage > 0 ? "eva_fail_e" : "eva_ok_e", target_ship), kAttackAnimationDuration);
+			target_ship->start_or_replace_task_idle(
+			   game,
+			   target_ship->descr().get_animation(
+			      current_battle.pending_damage > 0 ? "eva_fail_e" : "eva_ok_e", target_ship),
+			   kAttackAnimationDuration);
 		}
 		return;
 
@@ -1827,8 +1843,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 					} while (!exp_dir_swimmable(expedition_->scouting_direction));
 				}
 				state.ivar1 = 1;
-				return start_task_move(
-				   game, expedition_->scouting_direction, get_sail_anims(), false);
+				return start_task_move(game, expedition_->scouting_direction, get_sail_anims(), false);
 			}
 			// The ship got the command to scout around an island, but is not close to any island
 			// Most likely the command was send as the ship was on an exploration and just leaving
