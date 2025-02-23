@@ -31,6 +31,7 @@ wl.Descriptions():new_ship_type {
          frames = 21,
          columns = 7,
          rows = 3,
+         play_once = true,
          hotspot = {88, 141}
       },
       sail = {
@@ -54,6 +55,7 @@ wl.Descriptions():new_ship_type {
          frames = 21,
          columns = 7,
          rows = 3,
+         play_once = true,
          hotspot = {88, 141}
       },
       sail_warship = {
@@ -63,6 +65,74 @@ wl.Descriptions():new_ship_type {
          rows = 4,
          directional = true,
          hotspot = {146, 153}
+      },
+
+      atk_ok_w = {
+         fps = 10,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         play_once = true,
+         hotspot = {79, 210}
+      },
+      atk_ok_e = {
+         fps = 10,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         play_once = true,
+         hotspot = {159, 215}
+      },
+      atk_fail_w = {
+         fps = 10,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         play_once = true,
+         hotspot = {79, 214}
+      },
+      atk_fail_e = {
+         fps = 10,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         play_once = true,
+         hotspot = {146, 217}
+      },
+
+      eva_fail_w = {
+         fps = 10,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         play_once = true,
+         hotspot = {78, 142}
+      },
+      eva_fail_e = {
+         fps = 10,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         play_once = true,
+         hotspot = {63, 144}
+      },
+      eva_ok_w = {
+         basename = "warship",
+         fps = 10,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         play_once = true,
+         hotspot = {58, 142}
+      },
+      eva_ok_e = {
+         basename = "warship",
+         fps = 10,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         play_once = true,
+         hotspot = {58, 142}
       },
    },
 
