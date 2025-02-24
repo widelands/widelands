@@ -226,21 +226,21 @@ void PartiallyFinishedBuilding::add_worker(Worker& worker) {
 	if (working_) {  // previously a builder had been evicted, we've just got a replacement
 		workstep_completiontime_ = owner().egbase().get_gametime() + last_remaining_time_;
 	} else {
-+		// We clear the walking animation because if the builder got evicted while waiting for
-+		// materials, then ConstructionSite::get_building_work() doesn't do it if there're still
-+		// no materials.
-+		worker.set_animation(owner().egbase(), worker.descr().get_animation("idle", &worker));
-}
-
-void PartiallyFinishedBuilding::notify_worker_evicted(Game& game, Worker& worker) {
-	Building::notify_worker_evicted(game, worker);
-	builder_ = nullptr;
-	const Time& gametime = game.get_gametime();
-	if (gametime < workstep_completiontime_) {
-		last_remaining_time_ = workstep_completiontime_ - gametime;
-	} else {
-		last_remaining_time_ = Duration(0);
+		+     // We clear the walking animation because if the builder got evicted while waiting for
+		   +  // materials, then ConstructionSite::get_building_work() doesn't do it if there're still
+		   +  // no materials.
+		   +worker.set_animation(owner().egbase(), worker.descr().get_animation("idle", &worker));
 	}
-	request_builder(game);
-}
+
+	void PartiallyFinishedBuilding::notify_worker_evicted(Game & game, Worker & worker) {
+		Building::notify_worker_evicted(game, worker);
+		builder_ = nullptr;
+		const Time& gametime = game.get_gametime();
+		if (gametime < workstep_completiontime_) {
+			last_remaining_time_ = workstep_completiontime_ - gametime;
+		} else {
+			last_remaining_time_ = Duration(0);
+		}
+		request_builder(game);
+	}
 }  // namespace Widelands
