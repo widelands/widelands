@@ -225,7 +225,11 @@ void PartiallyFinishedBuilding::add_worker(Worker& worker) {
 	set_seeing(true);
 	if (working_) {  // previously a builder had been evicted, we've just got a replacement
 		workstep_completiontime_ = owner().egbase().get_gametime() + last_remaining_time_;
-	}
+	} else {
++		// We clear the walking animation because if the builder got evicted while waiting for
++		// materials, then ConstructionSite::get_building_work() doesn't do it if there're still
++		// no materials.
++		worker.set_animation(owner().egbase(), worker.descr().get_animation("idle", &worker));
 }
 
 void PartiallyFinishedBuilding::notify_worker_evicted(Game& game, Worker& worker) {
