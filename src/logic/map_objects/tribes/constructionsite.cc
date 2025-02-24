@@ -72,10 +72,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	}
 	push_animation(becomes, &animations, &total_frames);
 
-	uint32_t frame_index =
-	   totaltime.get() != 0u ?
-	      std::min(completedtime.get() * total_frames / totaltime.get(), total_frames - 1) :
-	      0;
+	uint32_t frame_index = std::min(((progress_64k * total_frames) >> 16), total_frames - 1);
 	uint32_t animation_index = 0;
 	while (frame_index >= animations[animation_index].second) {
 		frame_index -= animations[animation_index].second;
@@ -119,17 +116,14 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	}
 
 	// Now blit a segment of the current construction phase from the bottom.
-	int percent = 100 * completedtime.get() * total_frames;
-	if (totaltime.get() != 0u) {
-		percent /= totaltime.get();
-	}
+	uint32_t percent = ((progress_64k * 100 * total_frames) >> 16);
 	percent -= 100 * frame_index;
 	for (uint32_t i = 0; i < animation_index; ++i) {
 		percent -= 100 * animations[i].second;
 	}
 	dst->blit_animation(point_on_dst, coords, scale, animations[animation_index].first, anim_time,
 	                    player_color_to_draw, opacity,
-	                    /* fix a race condition in drawing code: */ std::min(percent, 100));
+	                    /* fix a race condition in drawing code: */ std::min(percent, 100U));
 }
 
 /**
@@ -670,9 +664,6 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool /*succ
 
 			working_ = true;
 			workstep_completiontime_ = game.get_gametime() + kConstructionsiteStepTime;
-			// reinitialize build progress to avoid weird graphic effects
-			// if the worker might be evicted between 2 steps
-			last_remaining_time_ = kConstructionsiteStepTime;
 
 			worker.start_task_idle(
 			   game, worker.descr().get_animation("work", &worker), kConstructionsiteStepTime.get());
@@ -751,28 +742,7 @@ void ConstructionSite::draw(const Time& gametime,
 	}
 
 	// Draw the partially finished building
-	info_.totaltime = kConstructionsiteStepTime * work_steps_;
-	info_.completedtime = kConstructionsiteStepTime * work_completed_;
-
-	if (working_) {
-		if (builder_ != nullptr) {
-			// if we have a builder remember the current progress
-			// check that gametime is not greater then the envisaged completion time
-			if (gametime > workstep_completiontime_) {
-				last_remaining_time_ = Duration(0U);
-			} else {
-				last_remaining_time_ = workstep_completiontime_ - gametime;
-			}
-		} else {
-			// with the builder evicted keep the progress by pushing the foressen finishing time.
-			workstep_completiontime_ = gametime + last_remaining_time_;
-		}
-		// This assert causes a race condition with multithreaded logic/drawing code
-		// assert(workstep_completiontime_ <=
-		//       Time((info_.completedtime + kConstructionsiteStepTime).get() + gametime.get()));
-		info_.completedtime += gametime + kConstructionsiteStepTime - workstep_completiontime_;
-	}
-
+	info_.progress_64k = get_built_per64k();
 	info_.draw(point_on_dst, coords, scale, (info_to_draw & InfoToDraw::kShowBuildings) != 0,
 	           player_color, dst);
 

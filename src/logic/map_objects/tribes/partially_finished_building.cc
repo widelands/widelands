@@ -166,7 +166,11 @@ uint32_t PartiallyFinishedBuilding::get_built_per64k() const {
 
 	uint32_t ts = build_step_time().get();
 	if (working_) {
-		thisstep = ts - (workstep_completiontime_.get() - time);
+		if (builder_ != nullptr) {
+			thisstep = ts - (workstep_completiontime_.get() - time);
+		} else {
+			thisstep = ts - last_remaining_time_.get();
+		}
 		// The check below is necessary because we drive construction via
 		// the construction worker in get_building_work(), and there can be
 		// a small delay between the worker completing his job and requesting
@@ -219,11 +223,20 @@ PartiallyFinishedBuilding is an exception.
 void PartiallyFinishedBuilding::add_worker(Worker& worker) {
 	Building::add_worker(worker);
 	set_seeing(true);
+	if (working_) {  // previously a builder had been evicted, we've just got a replacement
+		workstep_completiontime_ = owner().egbase().get_gametime() + last_remaining_time_;
+	}
 }
 
 void PartiallyFinishedBuilding::notify_worker_evicted(Game& game, Worker& worker) {
 	Building::notify_worker_evicted(game, worker);
 	builder_ = nullptr;
+	const Time& gametime = game.get_gametime();
+	if (gametime < workstep_completiontime_) {
+		last_remaining_time_ = workstep_completiontime_ - gametime;
+	} else {
+		last_remaining_time_ = Duration(0);
+	}
 	request_builder(game);
 }
 }  // namespace Widelands

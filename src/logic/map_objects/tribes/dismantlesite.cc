@@ -306,21 +306,6 @@ void DismantleSite::draw(const Time& gametime,
 		}
 	}
 
-	if (working_) {
-		if (builder_ != nullptr) {
-			// if we have a builder remember the current progress
-			// check that gametime is not greater then the envisaged completion time
-			if (gametime > workstep_completiontime_) {
-				last_remaining_time_ = Duration(0U);
-			} else {
-				last_remaining_time_ = workstep_completiontime_ - gametime;
-			}
-		} else {
-			// with the builder evicted keep the progress by pushing the foressen finishing time.
-			workstep_completiontime_ = gametime + last_remaining_time_;
-		}
-	}
-
 	// Blit bottom part of the animation according to dismantle progress
 	if ((info_to_draw & InfoToDraw::kShowBuildings) != 0) {
 		dst->blit_animation(point_on_dst, coords, scale, building_->get_unoccupied_animation(), tanim,

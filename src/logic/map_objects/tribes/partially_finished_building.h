@@ -98,7 +98,7 @@ protected:
 	                       // (dismantlesites)
 	Wares dropout_wares_;  // additional items to drop out immediately
 
-	bool working_{false};                  // true if the builder is currently working
+	bool working_{false};                  // true if the work has been started (stays true if the builder is evicted)
 	Time workstep_completiontime_{0U};     // time when next step is completed
 	uint32_t work_completed_{0U};          // how many steps have we done so far?
 	uint32_t work_steps_{0U};              // how many steps (= wares) until we're done?
