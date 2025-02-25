@@ -231,16 +231,17 @@ void PartiallyFinishedBuilding::add_worker(Worker& worker) {
 		   +  // no materials.
 		   +worker.set_animation(owner().egbase(), worker.descr().get_animation("idle", &worker));
 	}
+}
 
-	void PartiallyFinishedBuilding::notify_worker_evicted(Game & game, Worker & worker) {
-		Building::notify_worker_evicted(game, worker);
-		builder_ = nullptr;
-		const Time& gametime = game.get_gametime();
-		if (gametime < workstep_completiontime_) {
-			last_remaining_time_ = workstep_completiontime_ - gametime;
-		} else {
-			last_remaining_time_ = Duration(0);
-		}
-		request_builder(game);
+void PartiallyFinishedBuilding::notify_worker_evicted(Game & game, Worker & worker) {
+	Building::notify_worker_evicted(game, worker);
+	builder_ = nullptr;
+	const Time& gametime = game.get_gametime();
+	if (gametime < workstep_completiontime_) {
+		last_remaining_time_ = workstep_completiontime_ - gametime;
+	} else {
+		last_remaining_time_ = Duration(0);
 	}
+	request_builder(game);
+}
 }  // namespace Widelands
