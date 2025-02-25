@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -224,7 +224,7 @@ const std::string& AbstractTextInputPanel::get_text() const {
 /**
  * Replace the currently stored text with something else.
  */
-void AbstractTextInputPanel::set_text(const std::string& text) {
+void AbstractTextInputPanel::set_text(const std::string& text, bool send_signal) {
 	if (text == d_->text) {
 		return;
 	}
@@ -238,7 +238,9 @@ void AbstractTextInputPanel::set_text(const std::string& text) {
 	d_->update();
 	scroll_cursor_into_view();
 
-	changed();
+	if (send_signal) {
+		changed();
+	}
 }
 
 /**

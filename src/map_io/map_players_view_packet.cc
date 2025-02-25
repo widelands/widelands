@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2024 by the Widelands Development Team
+ * Copyright (C) 2007-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,8 +40,9 @@ namespace Widelands {
 /* Changelog:
  * 5: v1.1
  * 6: Removed obsolete data fields time_triangle_last_surveyed and resource_amounts.
+ * 7: changes ConstructionsiteInfoPacket
  */
-constexpr uint16_t kCurrentPacketVersion = 6;
+constexpr uint16_t kCurrentPacketVersion = 7;
 
 /// Vision values for saveloading. We only care about PreviouslySeen and Revealed states here,
 /// the details about current player objects' vision are reconstructed when loading map object data.
@@ -277,9 +278,13 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 								   descriptions.get_building_descr(
 								      descriptions.safe_building_index(fr.string())));
 							}
-
-							field->constructionsite->totaltime = Duration(fr);
-							field->constructionsite->completedtime = Duration(fr);
+							if (packet_version >= 7 && packet_version <= kCurrentPacketVersion) {
+								field->constructionsite->progress_64k = fr.unsigned_32();
+							} else {
+								uint32_t totaltime = fr.unsigned_32();
+								uint32_t completedtime = fr.unsigned_32();
+								field->constructionsite->progress_64k = (completedtime << 16) / totaltime;
+							}
 						}
 					}
 				}
@@ -473,8 +478,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 						fw.string(d->name());
 					}
 
-					field->constructionsite->totaltime.save(fw);
-					field->constructionsite->completedtime.save(fw);
+					fw.unsigned_32(field->constructionsite->progress_64k);
 				}
 			} else {
 				fw.string("");

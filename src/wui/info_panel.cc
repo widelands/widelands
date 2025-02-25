@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2024 by the Widelands Development Team
+ * Copyright (C) 2020-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,10 +23,10 @@
 #include <SDL_timer.h>
 
 #include "base/time_string.h"
+#include "commands/cmd_message_set_status_archived.h"
 #include "graphic/font_handler.h"
 #include "graphic/text_layout.h"
 #include "logic/message_queue.h"
-#include "logic/playercommand.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/toolbar.h"

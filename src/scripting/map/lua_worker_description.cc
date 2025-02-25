@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,8 @@ const MethodType<LuaWorkerDescription> LuaWorkerDescription::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaWorkerDescription> LuaWorkerDescription::Properties[] = {
-   PROP_RO(LuaWorkerDescription, becomes),           PROP_RO(LuaWorkerDescription, buildcost),
+   PROP_RO(LuaWorkerDescription, becomes),           PROP_RO(LuaWorkerDescription, promoted),
+   PROP_RO(LuaWorkerDescription, promoted_from),     PROP_RO(LuaWorkerDescription, buildcost),
    PROP_RO(LuaWorkerDescription, employers),         PROP_RO(LuaWorkerDescription, buildable),
    PROP_RO(LuaWorkerDescription, needed_experience), {nullptr, nullptr, nullptr},
 };
@@ -75,6 +76,34 @@ int LuaWorkerDescription::get_becomes(lua_State* L) {
 	}
 	return to_lua<LuaWorkerDescription>(
 	   L, new LuaWorkerDescription(get_egbase(L).descriptions().get_worker_descr(becomes_index)));
+}
+
+/* RST
+   .. attribute:: promoted
+
+      (RO) :const:`true` if the worker is promoted from another worker.
+*/
+int LuaWorkerDescription::get_promoted(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(get()->is_promoted()));
+	return 1;
+}
+
+/* RST
+   .. attribute:: promoted_from
+
+      (RO) The :class:`WorkerDescription` that this worker was promoted from
+      or :const:`nil` if it is not a promoted woker.
+*/
+int LuaWorkerDescription::get_promoted_from(lua_State* L) {
+	if (get()->is_promoted()) {
+		const Widelands::DescriptionIndex& promoted_from = get()->promoted_from();
+		Widelands::EditorGameBase& egbase = get_egbase(L);
+		assert(egbase.descriptions().worker_exists(promoted_from));
+		return upcasted_map_object_descr_to_lua(
+		   L, egbase.descriptions().get_worker_descr(promoted_from));
+	}
+	lua_pushnil(L);
+	return 1;
 }
 
 /* RST

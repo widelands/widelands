@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,6 @@
 #include "economy/road.h"
 #include "economy/waterway.h"
 #include "graphic/style_manager.h"
-#include "logic/cmd_queue.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/ship.h"
@@ -998,7 +997,8 @@ void FieldActionWindow::act_build(Widelands::DescriptionIndex idx) {
 	upcast(Game, game, &ibase().egbase());
 	upcast(InteractivePlayer, iaplayer, &ibase());
 
-	game->send_player_build(iaplayer->player_number(), node_, Widelands::DescriptionIndex(idx));
+	game->send_player_build_building(
+	   iaplayer->player_number(), node_, Widelands::DescriptionIndex(idx));
 	iaplayer->set_flag_to_connect(game->map().br_n(node_));
 	reset_mouse_and_die();
 }

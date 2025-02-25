@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2024 by the Widelands Development Team
+ * Copyright (C) 2010-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -111,6 +111,7 @@ protected:
 	bool handle_mousepress(uint8_t, int32_t, int32_t) override;
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
+	void handle_mousein(bool inside) override;
 
 private:
 	// Common constructor

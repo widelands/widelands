@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,12 @@
 
 #include "base/time_string.h"
 #include "base/wexception.h"
+#include "commands/cmd_message_set_status_archived.h"
+#include "commands/cmd_message_set_status_read.h"
 #include "graphic/text_layout.h"
 #include "logic/game_data_error.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
-#include "logic/playercommand.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 

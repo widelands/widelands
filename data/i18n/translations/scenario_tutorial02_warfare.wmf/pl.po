@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006
@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-11-30 03:02+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
 "Last-Translator: Leszek Szary, 2024\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
@@ -497,12 +497,11 @@ msgstr "Żołnierze w kwaterze głównej"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
 msgid ""
-"Your headquarters has some capabilities of military sites: It conqers some "
-"land, and the stored soldiers defend it when attacked. However this also "
-"means that the enemy can attack the headquarters itself too. On the other "
-"hand, there’s a difference too: you can’t start an attack with the soldiers "
-"in your headquarters."
-msgstr "Twoja kwatera główna ma pewne możliwości obiektów wojskowych: podbija część terenu, a zgromadzeni żołnierze bronią jej, gdy jest atakowana. Oznacza to jednak również, że wróg może zaatakować także samą kwaterę główną. Z drugiej strony jest też różnica: nie możesz rozpocząć ataku, żołnierzami zgromadzonymi w swojej kwaterze głównej."
+"Your headquarters has some capabilities of military sites: It conquers some "
+"land, the enemy can attack it directly, and the stored soldiers defend it "
+"and its surroundings when attacked. On the other hand, there’s a difference "
+"too: you can’t start an attack with the soldiers in your headquarters."
+msgstr ""
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid ""

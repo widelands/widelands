@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2024 by the Widelands Development Team
+ * Copyright (C) 2008-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,11 @@
 #ifndef WL_NETWORK_BUFFEREDCONNECTION_H
 #define WL_NETWORK_BUFFEREDCONNECTION_H
 
+#include <deque>
 #include <map>
 #include <memory>
 #include <mutex>
+#include <queue>
 #include <thread>
 
 #include "network/network.h"
