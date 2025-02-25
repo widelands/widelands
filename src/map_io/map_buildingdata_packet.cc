@@ -306,7 +306,7 @@ void MapBuildingdataPacket::read_partially_finished_building(PartiallyFinishedBu
 			pfb.workstep_completiontime_ = Time(fr);
 			pfb.work_completed_ = fr.unsigned_32();
 			pfb.work_steps_ = fr.unsigned_32();
-			if (packet_version == kCurrentPacketPFBuilding) {
+			if (packet_version >= 3) {
 				pfb.last_remaining_time_ = Duration(fr);
 			}
 		} else {
