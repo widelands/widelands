@@ -233,7 +233,7 @@ void PartiallyFinishedBuilding::add_worker(Worker& worker) {
 	}
 }
 
-void PartiallyFinishedBuilding::notify_worker_evicted(Game & game, Worker & worker) {
+void PartiallyFinishedBuilding::notify_worker_evicted(Game& game, Worker& worker) {
 	Building::notify_worker_evicted(game, worker);
 	builder_ = nullptr;
 	const Time& gametime = game.get_gametime();
