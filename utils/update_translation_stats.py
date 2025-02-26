@@ -46,65 +46,65 @@ def generate_translation_stats(po_dir, output_file):
     # Regex to extract the locale from the po filenames.
     regex_po = re.compile(r'/\S+/(\w+)\.po')
 
-    if True:  # TODO(aDiscoverer) delete, just kept for code review
-        proc = subprocess.Popen(
-            ['pocount', '--csv', po_dir],
-            encoding='utf-8',
-            stderr=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-        )
+    proc = subprocess.Popen(
+        ['pocount', '--csv', po_dir],
+        encoding='utf-8',
+        stderr=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+    )
 
-        COLUMNS = {
-            'filename': 'Filename',
-            'total': 'Total Source Words',
-            'translated': 'Translated Source Words'
-        }
+    COLUMNS = {
+        'filename': 'Filename',
+        'total': 'Total Source Words',
+        'translated': 'Translated Source Words'
+    }
 
-        result = csv.DictReader(proc.stdout, dialect='unix', skipinitialspace=True)
-        missing_cols = set(COLUMNS.values()) - set(result.fieldnames)
-        if missing_cols:
-            sys.exit(
-                'Column(s) "{}" not found in output of pocount'.format('", "'.join(missing_cols)))
+    result = csv.DictReader(proc.stdout, dialect='unix', skipinitialspace=True)
+    missing_cols = set(COLUMNS.values()) - set(result.fieldnames)
+    if missing_cols:
+        sys.exit(
+            'Column(s) "{}" not found in output of pocount'.format('", "'.join(missing_cols)))
 
-        # Now do the actual counting
-        lastdir = ''
-        for row in result:
-            po_filename = row[COLUMNS['filename']]
-            po_dirname = os.path.dirname(po_filename)
-            if po_dirname != lastdir:
-                sys.stdout.write('Processing ' + os.path.basename(po_dirname) + '...\n')
-                sys.stdout.flush()
-                lastdir = po_dirname
-            name_match = regex_po.fullmatch(po_filename)
-            if name_match:
-                locale = name_match.group(1)
-                entry = locale_stats[locale]
-                entry.total += int(row[COLUMNS['total']])
-                entry.translated += int(row[COLUMNS['translated']])
-                if entry.translated > entry.total:
-                    print(('Error! Translated {entry.translated} ({c_translated}) is bigger than ' +
-                           'the total of {entry.total} ({c_total}) on line {line}\n').format(
-                        entry=entry, c_translated=row[COLUMNS['translated']],
-                        c_total=row[COLUMNS['total']], line=result.line_num))
-                    sys.exit(1)
-                locale_stats[locale] = entry
-            elif not po_filename.endswith('.pot'):
-                print('\nUnexpected line in pocount output:\n  ' + row[COLUMNS['filename']] +
-                      '\nAborted creating translation statistics.')
-                return 1
-
-        has_error = False
-        for line in proc.stderr.read().splitlines():
-            if not has_error:
-                print('\npocount stderr:')
-            print(line)
-            has_error = True
-
-        proc.wait(1)
-        if has_error or proc.returncode != 0:
-            print('\nError running pocount, return code:', proc.returncode)
+    ### Now do the actual counting
+    lastdir = ''
+    for row in result:
+        po_filename = row[COLUMNS['filename']]
+        po_dirname = os.path.dirname(po_filename)
+        if po_dirname != lastdir:
+            sys.stdout.write('Processing ' + os.path.basename(po_dirname) + '...\n')
+            sys.stdout.flush()
+            lastdir = po_dirname
+        name_match = regex_po.fullmatch(po_filename)
+        if name_match:
+            locale = name_match.group(1)
+            entry = locale_stats[locale]
+            entry.total += int(row[COLUMNS['total']])
+            entry.translated += int(row[COLUMNS['translated']])
+            if entry.translated > entry.total:
+                print(('Error! Translated {entry.translated} ({c_translated}) is bigger than ' +
+                       'the total of {entry.total} ({c_total}) on line {line}\n').format(
+                    entry=entry, c_translated=row[COLUMNS['translated']],
+                    c_total=row[COLUMNS['total']], line=result.line_num))
+                sys.exit(1)
+            locale_stats[locale] = entry
+        elif not po_filename.endswith('.pot'):
+            print('\nUnexpected line in pocount output:\n  ' + row[COLUMNS['filename']] +
+                  '\nAborted creating translation statistics.')
             return 1
 
+    has_error = False
+    for line in proc.stderr.read().splitlines():
+        if not has_error:
+            print('\npocount stderr:')
+        print(line)
+        has_error = True
+
+    proc.wait(1)
+    if has_error or proc.returncode != 0:
+        print('\nError running pocount, return code:', proc.returncode)
+        return 1
+
+    ### Counting done, start output
     print('\n\nLocale\tTotal\tTranslated')
     print('------\t-----\t----------')
 
