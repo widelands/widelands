@@ -9,7 +9,6 @@ You will need to have the Translate Toolkit installed:
 http://toolkit.translatehouse.org/
 
 For Debian-based Linux: sudo apt-get install translate-toolkit
-
 """
 
 from collections import defaultdict
@@ -42,53 +41,43 @@ class TranslationStats:
 def generate_translation_stats(po_dir, output_file):
     locale_stats = defaultdict(TranslationStats)
 
-    sys.stdout.write('Fetching translation stats ')
+    sys.stdout.write('Fetching translation stats...\n')
 
     # Regex to extract the locale from the po filenames.
     regex_po = re.compile(r'/\S+/(\w+)\.po')
 
-    # We get errors for non-po files in the base po dir, so we have to walk
-    # the subdirs.
-    for subdir in sorted(os.listdir(po_dir), key=str.lower):
-        subdir = os.path.join(po_dir, subdir)
-        if not os.path.isdir(subdir):
-            continue
-
-        sys.stdout.write('.')
-        sys.stdout.flush()
-
-        try:
-            stats_output = subprocess.check_output(
-                ['pocount', '--csv', subdir],
-                encoding='utf-8',
-                stderr=subprocess.STDOUT,
-            )
-            if 'ERROR' in stats_output:
-                print('\nError running pocount:\n' + stats_output +
-                      '\nAborted creating translation statistics.')
-                return 1
-
-        except subprocess.CalledProcessError:
-            print('Failed to run pocount:\n  FILE: ' + po_dir +
-                  '\n  ' + stats_output.split('\n', 1)[1])
-            return 1
+    if True:  # TODO(aDiscoverer) delete, just kept for code review
+        proc = subprocess.Popen(
+            ['pocount', '--csv', po_dir],
+            encoding='utf-8',
+            stderr=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+        )
 
         COLUMNS = {
             'filename': 'Filename',
             'total': 'Total Source Words',
             'translated': 'Translated Source Words'
         }
-        result = csv.DictReader(csv.StringIO(stats_output), dialect='unix', skipinitialspace=True)
+
+        result = csv.DictReader(proc.stdout, dialect='unix', skipinitialspace=True)
         missing_cols = set(COLUMNS.values()) - set(result.fieldnames)
         if missing_cols:
             sys.exit(
                 'Column(s) "{}" not found in output of pocount'.format('", "'.join(missing_cols)))
 
-        # Now do the actual counting for the current textdomain
+        # Now do the actual counting
+        lastdir = ''
         for row in result:
             po_filename = row[COLUMNS['filename']]
-            if po_filename.endswith('.po'):
-                locale = regex_po.match(po_filename).group(1)
+            po_dirname = os.path.dirname(po_filename)
+            if po_dirname != lastdir:
+                sys.stdout.write('Processing ' + os.path.basename(po_dirname) + '...\n')
+                sys.stdout.flush()
+                lastdir = po_dirname
+            name_match = regex_po.fullmatch(po_filename)
+            if name_match:
+                locale = name_match.group(1)
                 entry = locale_stats[locale]
                 entry.total += int(row[COLUMNS['total']])
                 entry.translated += int(row[COLUMNS['translated']])
@@ -99,6 +88,22 @@ def generate_translation_stats(po_dir, output_file):
                         c_total=row[COLUMNS['total']], line=result.line_num))
                     sys.exit(1)
                 locale_stats[locale] = entry
+            elif not po_filename.endswith('.pot'):
+                print('\nUnexpected line in pocount output:\n  ' + row[COLUMNS['filename']] +
+                      '\nAborted creating translation statistics.')
+                return 1
+
+        has_error = False
+        for line in proc.stderr.read().splitlines():
+            if not has_error:
+                print('\npocount stderr:')
+            print(line)
+            has_error = True
+
+        proc.wait(1)
+        if has_error or proc.returncode != 0:
+            print('\nError running pocount, return code:', proc.returncode)
+            return 1
 
     print('\n\nLocale\tTotal\tTranslated')
     print('------\t-----\t----------')
