@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2024 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,6 +52,10 @@ void Route::init(int32_t totalcost) {
 Flag& Route::get_flag(EditorGameBase& egbase, std::vector<Flag*>::size_type const idx) const {
 	assert(idx < route_.size());
 	return *route_[idx].get(egbase);
+}
+Flag* Route::get_flag_raw(EditorGameBase& egbase, std::vector<Flag*>::size_type const idx) const {
+	assert(idx < route_.size());
+	return route_[idx].get(egbase);
 }
 
 /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2024 by the Widelands Development Team
+ * Copyright (C) 2010-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -394,8 +394,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Whether the client who is running the UI is allowed to change the tribe for this player slot.
 	bool has_tribe_access() const {
 		return settings_->settings().players[id_].state == PlayerSettings::State::kShared ?
-                settings_->can_change_player_init(id_) :
-                settings_->can_change_player_tribe(id_);
+		          settings_->can_change_player_init(id_) :
+		          settings_->can_change_player_tribe(id_);
 	}
 
 	/// This will update the game settings for the tribe or shared_in with the value
@@ -407,8 +407,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		const PlayerSettings& player_settings = settings_->settings().players[id_];
 		tribe_selection_locked_ = true;
 		tribes_dropdown_.set_disable_style(player_settings.state == PlayerSettings::State::kShared ?
-                                            UI::ButtonDisableStyle::kPermpressed :
-                                            UI::ButtonDisableStyle::kFlat);
+		                                      UI::ButtonDisableStyle::kPermpressed :
+		                                      UI::ButtonDisableStyle::kFlat);
 		if (tribes_dropdown_.has_selection()) {
 			if (player_settings.state == PlayerSettings::State::kShared) {
 				n->set_player_shared(id_, stoul(tribes_dropdown_.get_selected()));
@@ -520,6 +520,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					tags = map.get_tags();
 				}
 			}
+			int first_added = -1;
 			for (size_t i = 0; i < tribeinfo.initializations.size(); ++i) {
 				const Widelands::TribeBasicInfo::Initialization& addme = tribeinfo.initializations[i];
 				bool matches_tags = true;
@@ -533,7 +534,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				                        settings_->get_win_condition_script()) == 0u)) {
 					init_dropdown_.add(_(addme.descname), i, nullptr,
 					                   i == player_setting.initialization_index, _(addme.tooltip));
+					if (first_added < 0) {
+						first_added = i;
+					}
 				}
+			}
+			if (!init_dropdown_.has_selection() && first_added >= 0) {
+				init_dropdown_.select(first_added);
+				set_init();
 			}
 		}
 

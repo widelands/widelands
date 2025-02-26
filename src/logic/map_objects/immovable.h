@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,6 +45,8 @@ struct ImmovableAction;
 struct ImmovableActionData;
 struct ImmovableProgram;
 struct PlayerImmovable;
+
+constexpr float kImmovableSilhouetteOpacity = 0.3f;
 
 struct NoteImmovable {
 	CAN_BE_SENT_AS_NOTE(NoteId::Immovable)
@@ -358,6 +360,7 @@ struct PlayerImmovable : public BaseImmovable {
 	}
 
 	virtual Flag& base_flag() = 0;
+	virtual const Flag& base_flag() const = 0;
 
 	virtual void set_economy(Economy*, WareWorker);
 

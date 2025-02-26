@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -164,8 +164,13 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                  UI::PanelStyle::kFsMenu,
                  "sdl_cursor",
                  Vector2i::zero(),
-                 _("Use system mouse cursor"),
-                 "",
+                 /** TRANSLATORS: short description for the sdl_cursor option */
+                 _("Let the system draw the mouse cursor"),
+                 /** TRANSLATORS: tooltip text for the sdl_cursor option */
+                 _("If in doubt, leave this enabled. When disabled, cursor updates may be slow "
+                   "and the cursor appears frozen during long operations. Disable it only if "
+                   "the cursor doesn’t appear right, or if you want it to be visible in "
+                   "screenshots or screencasts."),
                  0),
      tooltip_accessibility_mode_(&box_interface_,
                                  UI::PanelStyle::kFsMenu,
@@ -711,15 +716,17 @@ void Options::add_languages_to_list(const std::string& current_locale) {
 
 		// We start with the locale directory so we can pick up locales
 		// that don't have a configuration file yet.
-		std::unique_ptr<FileSystem> fs(&FileSystem::create(i18n::get_localedir()));
+		std::unique_ptr<FileSystem> fs(&FileSystem::create(i18n::get_localedir() + "/widelands"));
 		FilenameSet files = fs->list_directory(".");
 
-		for (const std::string& localename : files) {  // Begin scan locales directory
+		for (std::string localename : files) {  // Begin scan locales directory
 			const char* path = localename.c_str();
 			if ((strcmp(FileSystem::fs_filename(path), ".") == 0) ||
-			    (strcmp(FileSystem::fs_filename(path), "..") == 0) || !fs->is_directory(path)) {
+			    (strcmp(FileSystem::fs_filename(path), "..") == 0) ||
+			    FileSystem::filename_ext(path) != ".po") {
 				continue;
 			}
+			localename = FileSystem::filename_without_ext(path);
 
 			try {  // Begin read locale from table
 				std::unique_ptr<LuaTable> table = all_locales->get_table(localename);
@@ -739,11 +746,11 @@ void Options::add_languages_to_list(const std::string& current_locale) {
 				log_err("Could not read locale for: %s\n", localename.c_str());
 				entries.insert(std::make_pair(localename, LanguageEntry(localename, localename)));
 			}  // End read locale from table
-		}     // End scan locales directory
+		}  // End scan locales directory
 	} catch (const LuaError& err) {
 		log_err("Could not read locales information from file: %s\n", err.what());
 		return;  // Nothing more can be done now.
-	}           // End read locales table
+	}  // End read locales table
 
 	find_selected_locale(&selected_locale, current_locale);
 	for (const auto& entry : entries) {
@@ -1044,6 +1051,7 @@ void OptionsCtrl::save_options() {
 	g_mouse_cursor->set_use_sdl(opt_dialog_->get_values().sdl_cursor);
 	i18n::set_locale(opt.language);
 	UI::g_fh->reinitialize_fontset(i18n::get_locale());
+	WLApplication::get().init_plugin_shortcuts();  // To update the descnames
 
 	// Sound options
 	g_sh->save_config();

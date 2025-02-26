@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -143,7 +143,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 							   "ware type '%s' was declared multiple times", ware_or_worker_name.c_str());
 						}
 					}
-					input_wares_.push_back(WareAmount(wareworker.second, amount));
+					input_wares_.emplace_back(wareworker.second, amount);
 				} break;
 				case WareWorker::wwWORKER: {
 					for (const auto& temp_inputs : input_workers()) {
@@ -152,8 +152,10 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 							                    ware_or_worker_name.c_str());
 						}
 					}
-					input_workers_.push_back(WareAmount(wareworker.second, amount));
+					input_workers_.emplace_back(wareworker.second, amount);
 				} break;
+				default:
+					NEVER_HERE();
 				}
 			} catch (const std::exception& e) {
 				throw GameDataError(
@@ -368,8 +370,8 @@ void ProductionSite::update_statistics_string(std::string* s) {
 	if (nr_xp_requests > 0) {
 		*s = StyleManager::color_tag(
 		   (nr_xp_requests == 1 ?
-             owner().tribe().get_productionsite_experienced_worker_missing_string() :
-             owner().tribe().get_productionsite_experienced_workers_missing_string()),
+		       owner().tribe().get_productionsite_experienced_worker_missing_string() :
+		       owner().tribe().get_productionsite_experienced_workers_missing_string()),
 		   g_style_manager->building_statistics_style().low_color());
 		return;
 	}
@@ -377,7 +379,7 @@ void ProductionSite::update_statistics_string(std::string* s) {
 	if (nr_requests > 0) {
 		*s = StyleManager::color_tag(
 		   (nr_requests == 1 ? owner().tribe().get_productionsite_worker_missing_string() :
-                             owner().tribe().get_productionsite_workers_missing_string()),
+		                       owner().tribe().get_productionsite_workers_missing_string()),
 		   g_style_manager->building_statistics_style().low_color());
 		return;
 	}
@@ -385,7 +387,7 @@ void ProductionSite::update_statistics_string(std::string* s) {
 	if (nr_coming > 0) {
 		*s = StyleManager::color_tag(
 		   (nr_coming == 1 ? owner().tribe().get_productionsite_worker_coming_string() :
-                           owner().tribe().get_productionsite_workers_coming_string()),
+		                     owner().tribe().get_productionsite_workers_coming_string()),
 		   g_style_manager->building_statistics_style().medium_color());
 		return;
 	}
@@ -460,8 +462,8 @@ InputQueue& ProductionSite::inputqueue(DescriptionIndex const wi,
 	throw wexception("%s (%u) has no InputQueue for %s %u: %s", descr().name().c_str(), serial(),
 	                 type == WareWorker::wwWARE ? "ware" : "worker", wi,
 	                 type == WareWorker::wwWARE ?
-                       owner().tribe().get_ware_descr(wi)->name().c_str() :
-                       owner().tribe().get_worker_descr(wi)->name().c_str());
+	                    owner().tribe().get_ware_descr(wi)->name().c_str() :
+	                    owner().tribe().get_worker_descr(wi)->name().c_str());
 }
 
 /**
@@ -478,7 +480,7 @@ void ProductionSite::format_statistics_string() {
 	   format(_("%i%%"), percent),
 	   (percent < 33) ? g_style_manager->building_statistics_style().low_color() :
 	   (percent < 66) ? g_style_manager->building_statistics_style().medium_color() :
-                       g_style_manager->building_statistics_style().high_color());
+	                    g_style_manager->building_statistics_style().high_color());
 
 	if (0 < percent && percent < 100) {
 		RGBColor color = g_style_manager->building_statistics_style().high_color();
@@ -581,6 +583,8 @@ void ProductionSite::set_economy(Economy* const e, WareWorker type) {
  * Cleanup after a production site is removed
  */
 void ProductionSite::cleanup(EditorGameBase& egbase) {
+	field_terrain_changed_subscriber_.reset();
+
 	for (uint32_t i = descr().nr_working_positions(); i != 0u;) {
 		--i;
 		delete working_positions_.at(i).worker_request;
@@ -928,7 +932,7 @@ bool ProductionSite::fetch_from_flag(Game& game) {
 void ProductionSite::log_general_info(const EditorGameBase& egbase) const {
 	Building::log_general_info(egbase);
 
-	molog(egbase.get_gametime(), "is_stopped: %u\n", static_cast<int>(is_stopped_));
+	molog(egbase.get_gametime(), "is_stopped: %s\n", is_stopped_ ? "true" : "false");
 	molog(egbase.get_gametime(), "main_worker: %i\n", main_worker_);
 }
 
@@ -1168,6 +1172,8 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 	case ProgramResult::kNone:
 		failed_skipped_programs_.erase(program_name);
 		break;
+	default:
+		NEVER_HERE();
 	}
 
 	program_timer_ = true;

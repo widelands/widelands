@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -140,7 +140,7 @@ UI::Dropdown<Widelands::PlayerNumber>* SuggestedTeamsEntry::create_dropdown(size
 		}
 		if (dd_index >= team_.size()) {
 			assert(dd_index == team_.size());
-			team_.push_back(Widelands::SuggestedTeam());
+			team_.emplace_back();
 			buttons_.emplace_back();
 		}
 		team_[dd_index].push_back(player);
@@ -363,7 +363,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	main_box_.add_space(indent_);
 
 	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, "label_author",
-	                               UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_, _("Authors:")));
+	                               UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_, _("Author:")));
 	main_box_.add(&author_);
 	main_box_.add_space(indent_);
 

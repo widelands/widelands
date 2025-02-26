@@ -63,6 +63,7 @@ else()
     SRCS
       main.cc
     DEPENDS
+      base
       base_exceptions
       base_time_string
       logic_filesystem_constants
@@ -87,6 +88,7 @@ add_subdirectory(third_party)
 add_subdirectory(ai)
 add_subdirectory(base)
 add_subdirectory(chat)
+add_subdirectory(commands)
 add_subdirectory(economy)
 add_subdirectory(editor)
 add_subdirectory(game_io)
@@ -127,6 +129,7 @@ wl_library(widelands_ball_of_mud
     editor
     graphic
     graphic_fonthandler
+    graphic_functions
     graphic_mouse_cursor
     graphic_text
     io_filesystem
@@ -146,6 +149,7 @@ wl_library(widelands_ball_of_mud
     widelands_options
     wui
     wui_chat_ui
+    wui_common_mapdetails
 )
 
 wl_library(widelands_options
@@ -164,9 +168,13 @@ wl_library(widelands_options
   USES_SDL2
 )
 
-if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
+if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
+    CMAKE_SYSTEM_NAME MATCHES "NetBSD" OR
+    CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   target_link_libraries(widelands_ball_of_mud ${EXECINFO_LIBRARY})
-endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
+endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
+       CMAKE_SYSTEM_NAME MATCHES "NetBSD" OR
+       CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 
 if (WIN32)
   target_link_libraries(widelands_ball_of_mud wsock32)

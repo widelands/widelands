@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024 by the Widelands Development Team
+ * Copyright (C) 2021-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -559,7 +559,8 @@ void AdminDialog::ok() {
 			break;
 		}
 
-		parent_.rebuild(false);
+		parent_.clear_cache_for_browse(info_->internal_name);
+		parent_.rebuild_browse();
 		die();
 	} catch (const std::exception& e) {
 		UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"), e.what(),
@@ -726,13 +727,15 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 			return;
 		}
 		update_data();
-		parent_.rebuild(false);
+		parent_.clear_cache_for_browse(info_->internal_name);
+		parent_.rebuild_browse();
 	});
 	write_comment_.sigclicked.connect([this]() {
 		CommentEditor m(parent_, info_, nullptr);
 		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 			update_data();
-			parent_.rebuild(false);
+			parent_.clear_cache_for_browse(info_->internal_name);
+			parent_.rebuild_browse();
 		}
 	});
 
@@ -864,10 +867,10 @@ void RemoteInteractionWindow::update_data() {
 
 	voting_stats_summary_.set_text(
 	   info_->number_of_votes() != 0u ?
-         format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
+	      format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
 	                        "Average rating: %1$.3f (%2$u votes)", info_->number_of_votes()),
 	               info_->average_rating(), info_->number_of_votes()) :
-         _("No votes yet"));
+	      _("No votes yet"));
 
 	uint32_t most_votes = 1;
 	for (uint32_t v : info_->votes) {
@@ -885,8 +888,8 @@ void RemoteInteractionWindow::update_data() {
 	text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 	           .as_font_tag(
 	              info_->user_comments.empty() ?
-                    _("No comments yet.") :
-                    format(ngettext("%u comment:", "%u comments:", info_->user_comments.size()),
+	                 _("No comments yet.") :
+	                 format(ngettext("%u comment:", "%u comments:", info_->user_comments.size()),
 	                        info_->user_comments.size()));
 	text += "</p></rt>";
 	comments_header_.set_text(text);
@@ -992,11 +995,17 @@ void RemoteInteractionWindow::login_changed() {
 		write_comment_.set_tooltip(_("Please log in to comment"));
 		own_voting_.set_enabled(false);
 		own_voting_.set_tooltip(_("Please log in to vote"));
-	} else {
+	} else if (ends_with(info_->internal_name, ".wad")) {
 		write_comment_.set_enabled(true);
 		write_comment_.set_tooltip("");
 		own_voting_.set_enabled(true);
 		own_voting_.set_tooltip("");
+	} else {
+		// No i18n markup here, since these are temporary strings
+		write_comment_.set_enabled(false);
+		write_comment_.set_tooltip("Commenting on maps is not yet implemented");
+		own_voting_.set_enabled(false);
+		own_voting_.set_tooltip("Voting on maps is not yet implemented");
 	}
 
 	admin_action_.set_visible(parent_.net().is_admin());

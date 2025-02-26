@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2024 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -290,8 +290,9 @@ int16_t BuildingHints::get_ai_limit(const AiType ai_type) const {
 		return weak_ai_limit_;
 	case AiType::kNormal:
 		return normal_ai_limit_;
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 /// Returns the preciousness of the ware, or kInvalidWare if the tribe doesn't use the ware.

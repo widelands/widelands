@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,15 +22,23 @@
 #include "base/rect.h"
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
+#include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
 
 class FillRectProgram {
 public:
 	struct Arguments {
-		Rectf destination_rect;
-		float z_value;
-		RGBAColor color;
-		BlendMode blend_mode;
+		struct Vertex {
+			Vector2f point{Vector2f::zero()};
+			float color_r{0.f};
+			float color_g{0.f};
+			float color_b{0.f};
+			float color_a{0.f};
+		};
+
+		Vertex triangle[3];
+		float z_value{0.f};
+		BlendMode blend_mode{BlendMode::UseAlpha};
 	};
 
 	// Returns the (singleton) instance of this class.
@@ -41,7 +49,14 @@ public:
 	void
 	draw(const Rectf& destination_rect, float z_value, const RGBAColor& color, BlendMode blend_mode);
 
+	void draw_height_heat_map_overlays(const FieldsToDraw& fields_to_draw, float z_value);
+
 	void draw(const std::vector<Arguments>& arguments);
+
+	static std::vector<Arguments> make_arguments_for_rect(const Rectf& destination_rect,
+	                                                      float z_value,
+	                                                      const RGBAColor& color,
+	                                                      BlendMode blend_mode);
 
 private:
 	FillRectProgram();

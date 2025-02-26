@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2024 by the Widelands Development Team
+ * Copyright (C) 2005-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -134,7 +134,7 @@
  * stop_music() (or change_music()) we just start the fadeout. The
  * callback then tells us when the audio has actually stopped and we can start
  * the next music. To differentiate between the two states we can just take a
- * peek with Mix_MusicPlaying() if there is music running. To make sure that
+ * peek with Mix_PlayingMusic() if there is music running. To make sure that
  * nothing bad happens, that check is not only required in change_music()
  * but also in start_music(), which causes the seemingly recursive call to
  * change_music() from inside start_music(). It really is not recursive, trust
@@ -196,6 +196,9 @@ public:
 	void set_enable_sound(SoundType type, bool enable);
 	[[nodiscard]] int32_t get_volume(SoundType type) const;
 	void set_volume(SoundType type, int32_t volume);
+	[[nodiscard]] inline bool is_sound_audible(SoundType type) const {
+		return !is_backend_disabled() && is_sound_enabled(type) && get_volume(type) > 0;
+	}
 
 	[[nodiscard]] int32_t get_max_volume() const;
 

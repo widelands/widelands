@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2024 by the Widelands Development Team
+ * Copyright (C) 2015-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -127,7 +127,7 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::SuggestedTeamLineup>& 
 					lineup_box_->add(player_icon);
 					player_icons_.push_back(player_icon);
 				}  // Players in team
-			}     // Teams in lineup
+			}  // Teams in lineup
 			++lineup_counter;
 		}  // All lineups
 

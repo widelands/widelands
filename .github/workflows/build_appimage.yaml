@@ -15,7 +15,7 @@ jobs:
       CXX: '${{ matrix.compiler }}'
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Installing dependencies
       run: sh ./.github/scripts/install_deps.sh
     - name: Compile
@@ -41,7 +41,7 @@ jobs:
         chmod +x linuxdeploy-x86_64.AppImage
         ./linuxdeploy-x86_64.AppImage --executable AppDir/usr/bin/widelands --desktop-file xdg/org.widelands.Widelands.desktop --appdir AppDir --output appimage
     - name: Upload Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} Linux AppImage
         path: ${{ github.workspace }}/Widelands-${{ env.VERSION }}-x86_64.AppImage

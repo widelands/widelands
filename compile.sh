@@ -45,11 +45,6 @@ print_help () {
     echo "-w or --no-website    Omit building of website binaries."
     echo "+w or --with-website  Enable building of website binaries."
     echo " "
-    echo "-t or --no-translations"
-    echo "                      Omit building translations."
-    echo "+t or --with-translations"
-    echo "                      Enable building translations."
-    echo " "
     echo "-s or --skip-tests    Skip linking and executing the tests."
     echo "+s or --do-tests      Link and execute the tests."
     echo " "
@@ -79,6 +74,7 @@ print_help () {
     echo "                      a debug build will be created."
     echo "-d or --debug         Create a debug build. This is the default,"
     echo "                      unless overridden locally."
+    echo "-e or --rel-with-dbg  Create a release build with debugging symbols."
     echo " "
     if which g++ >/dev/null; then # gcc specific
     echo "-c or --no-cross-opt  Do not use cross compile unit optimization,"
@@ -122,7 +118,6 @@ print_help () {
 
 ## Options to control the build.
 BUILD_WEBSITE="ON"
-BUILD_TRANSLATIONS="ON"
 BUILD_TESTS="ON"
 BUILD_TYPE="Debug"
 USE_FLTO="yes"
@@ -235,12 +230,11 @@ do
       fi
     shift
     ;;
-    -t|--no-translations)
-      BUILD_TRANSLATIONS="OFF"
-    shift
-    ;;
-    +t|--with-translations)
-      BUILD_TRANSLATIONS="ON"
+    -e|--rel-with-dbg)
+      BUILD_TYPE="RelWithDebInfo"
+      if [ "${USE_ASAN}" = "default" ]; then
+        USE_ASAN="OFF"
+      fi
     shift
     ;;
     -c|--no-cross-opt)
@@ -419,16 +413,6 @@ else
   CMD_ADD "--no-website"
 fi
 echo " "
-if [ $BUILD_TRANSLATIONS = "ON" ]; then
-  echo "Translations will be built."
-  echo "You can use -t or --no-translations to omit building them."
-  CMD_ADD "--with-translations"
-else
-  echo "Translations will not be built."
-  echo "You can use +t or --with-translations to build them."
-  CMD_ADD "--no-translations"
-fi
-echo " "
 if [ $BUILD_TESTS = "ON" ]; then
   echo "Tests will be built."
   echo "You can use -s or --skip-tests to omit building them."
@@ -444,9 +428,12 @@ echo " "
 if [ $BUILD_TYPE = "Release" ]; then
   echo "Creating a Release build. Use -d to create a Debug build."
   CMD_ADD "--release"
-else
+elif [ $BUILD_TYPE = "Debug" ]; then
   echo "Creating a Debug build. Use -r to create a Release build."
   CMD_ADD "--debug"
+elif [ $BUILD_TYPE = "RelWithDebInfo" ]; then
+  echo "Creating a RelWithDebInfo build."
+  CMD_ADD "--rel-with-dbg"
 fi
 echo " "
 if [ $USE_ASAN = "ON" ]; then
@@ -537,19 +524,11 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     fi
   }
 
-  # Check if directories / links already exists and create / update them if needed.
-  prepare_directories_and_links () {
-    test -d build/locale || $RUN mkdir -p build/locale
-    test -e data/locale || $RUN ln -s ../build/locale data/locale
-    return 0
-  }
-
   # Compile Widelands
   compile_widelands () {
     $RUN cmake $GENERATOR .. $EXTRA_OPTS                       \
                -DCMAKE_BUILD_TYPE=$BUILD_TYPE                  \
                -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE     \
-               -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS \
                -DOPTION_BUILD_TESTS=$BUILD_TESTS               \
                -DOPTION_ASAN=$USE_ASAN                         \
                -DOPTION_TSAN=$USE_TSAN                         \
@@ -643,7 +622,6 @@ END_SCRIPT
 set -e
 basic_check
 set_buildtool
-prepare_directories_and_links
 
 # Dependency check doesn't work with ninja, so we do it manually here
 if [ $BUILD_TYPE = "Debug" -a \( $buildtool = "ninja" -o $buildtool = "ninja-build" \) ]; then
@@ -670,13 +648,10 @@ echo "# with the following settings:                            #"
 echo "#                                                         #"
 if [ $BUILD_TYPE = "Release" ]; then
   echo "# - Release build                                         #"
-else
+elif [ $BUILD_TYPE = "Debug" ]; then
   echo "# - Debug build                                           #"
-fi
-if [ $BUILD_TRANSLATIONS = "ON" ]; then
-  echo "# - Translations                                          #"
-else
-  echo "# - No translations                                       #"
+elif [ $BUILD_TYPE = "RelWithDebInfo" ]; then
+  echo "# - RelWithDebInfo build                                  #"
 fi
 if [ $BUILD_TESTS = "ON" ]; then
   echo "# - Tests                                                 #"

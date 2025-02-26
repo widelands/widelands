@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -87,7 +87,7 @@ void Graphic::initialize(const TraceGl& trace_gl,
 		throw wexception("SDL_GL_LoadLibrary failed: %s", SDL_GetError());
 	}
 
-	log_info("Graphics: Try to set Videomode %ux%u\n", window_mode_width_, window_mode_height_);
+	log_info("Graphics: Try to set Videomode %dx%d\n", window_mode_width_, window_mode_height_);
 
 	if (display < 0 || display >= SDL_GetNumVideoDisplays()) {
 		// Find the display, the mouse pointer is on.
@@ -146,8 +146,7 @@ void Graphic::initialize(const TraceGl& trace_gl,
 			log_warn("Couldn't get display mode for display #%d: %s\n", i, SDL_GetError());
 		}
 	}
-	verb_log_info("**** END GRAPHICS REPORT ****\n");
-	rebuild_texture_atlas();
+	log_info("**** END GRAPHICS REPORT ****\n");
 }
 
 void Graphic::rebuild_texture_atlas() const {
@@ -156,6 +155,7 @@ void Graphic::rebuild_texture_atlas() const {
 	auto texture_atlases = build_texture_atlas(max_texture_size_, &textures_in_atlas);
 	g_image_cache->fill_with_texture_atlases(
 	   std::move(texture_atlases), std::move(textures_in_atlas));
+	verb_log_info("Texture atlas rebuilt");
 }
 
 Graphic::~Graphic() {

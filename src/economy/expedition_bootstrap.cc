@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -118,12 +118,15 @@ void ExpeditionBootstrap::cancel(Game& game) {
 		case wwWARE:
 			warehouse->insert_wares(iq.first->get_index(), iq.first->get_filled());
 			break;
-		case wwWORKER:
+		case wwWORKER: {
 			WorkersQueue& wq = dynamic_cast<WorkersQueue&>(*iq.first);
 			while (wq.get_filled() > 0) {
 				warehouse->incorporate_worker(game, wq.extract_worker());
 			}
 			break;
+		}
+		default:
+			NEVER_HERE();
 		}
 		iq.first->cleanup();
 	}
@@ -273,6 +276,8 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares(Game& game,
 			}
 			break;
 		}
+		default:
+			NEVER_HERE();
 		}
 	}
 
@@ -349,11 +354,11 @@ void ExpeditionBootstrap::load(
 		}
 		// Append worker queues to the end
 		for (InputQueue* wq : wqs) {
-			queues_.emplace_back(std::make_pair(std::unique_ptr<InputQueue>(wq), false));
+			queues_.emplace_back(std::unique_ptr<InputQueue>(wq), false);
 		}
 		for (InputQueue* wq : additional_queues) {
 			assert(wq->get_max_size() == 1);
-			queues_.emplace_back(std::make_pair(std::unique_ptr<InputQueue>(wq), true));
+			queues_.emplace_back(std::unique_ptr<InputQueue>(wq), true);
 		}
 	} catch (const GameDataError& e) {
 		throw GameDataError("loading ExpeditionBootstrap: %s", e.what());

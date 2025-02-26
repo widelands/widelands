@@ -2,7 +2,7 @@ Core functionality
 ==================
 
 The core functionality contains some global functions and the module :mod:`wl`
-which are implemented in C++ and provide the glue between Lua and Widelands. 
+which are implemented in C++ and provide the glue between Lua and Widelands.
 
 .. toctree::
    :maxdepth: 3
@@ -15,5 +15,6 @@ which are implemented in C++ and provide the glue between Lua and Widelands.
    autogen_wl_game
    autogen_wl_map
    autogen_wl_ui
+   autogen_styles
 
 

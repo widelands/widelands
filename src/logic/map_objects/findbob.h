@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2024 by the Widelands Development Team
+ * Copyright (C) 2011-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 
 namespace Widelands {
 
+class Game;
 class Player;
 
 struct FindBobAttribute : public FindBob {
@@ -45,6 +46,7 @@ struct FindBobEnemySoldier : public FindBob {
 
 	bool accept(Bob*) const override;
 
+private:
 	Player* player;
 };
 
@@ -54,6 +56,20 @@ struct FindBobShip : FindBob {
 
 struct FindBobCritter : FindBob {
 	bool accept(Bob* bob) const override;
+};
+
+/**
+ * Accept Bob when is a Soldier alive that is attacking the Player.
+ */
+struct FindBobSoldierAttackingPlayer : public FindBob {
+	FindBobSoldierAttackingPlayer(Game& g, Player& p) : player(p), game(g) {
+	}
+
+	[[nodiscard]] bool accept(Bob* bob) const override;
+
+private:
+	Player& player;
+	Game& game;
 };
 
 }  // namespace Widelands

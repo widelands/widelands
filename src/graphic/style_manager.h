@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2024 by the Widelands Development Team
+ * Copyright (C) 2017-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,6 +41,9 @@ void set_template_dir(std::string);
 inline bool is_using_default_theme() {
 	return template_dir() == kDefaultTemplate;
 }
+
+extern const std::string kSplashImage;
+extern const std::string kFallbackImage;
 
 namespace UI {
 

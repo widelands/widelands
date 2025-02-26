@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,15 +53,30 @@
 
 namespace Widelands {
 
+static std::vector<int32_t> gather_map_field_counts() {
+	std::set<int32_t> counts;
+	for (int32_t x : kMapDimensions) {
+		for (int32_t y : kMapDimensions) {
+			counts.insert(x * y);
+		}
+	}
+	return std::vector<int32_t>(counts.begin(), counts.end());
+}
+const std::vector<int32_t> Map::kMapFieldCounts = gather_map_field_counts();
+
 const std::vector<Map::OldWorldInfo> Map::kOldWorldNames = {
-   /** TRANSLATORS: A world name for the random map generator in the editor */
-   {"summer", "greenland", []() { return _("Summer"); }},
-   /** TRANSLATORS: A world name for the random map generator in the editor */
-   {"winter", "winterland", []() { return _("Winter"); }},
-   /** TRANSLATORS: A world name for the random map generator in the editor */
-   {"wasteland", "blackland", []() { return _("Wasteland"); }},
-   /** TRANSLATORS: A world name for the random map generator in the editor */
-   {"desert", "desert", []() { return _("Desert"); }}};
+   {"summer", "greenland", "world/pics/editor_terrain_category_green.png",
+    /** TRANSLATORS: A world name for the random map generator in the editor */
+    []() { return _("Summer"); }},
+   {"winter", "winterland", "world/pics/editor_terrain_category_winter.png",
+    /** TRANSLATORS: A world name for the random map generator in the editor */
+    []() { return _("Winter"); }},
+   {"wasteland", "blackland", "world/pics/editor_terrain_category_wasteland.png",
+    /** TRANSLATORS: A world name for the random map generator in the editor */
+    []() { return _("Wasteland"); }},
+   {"desert", "desert", "world/pics/editor_terrain_category_desert.png",
+    /** TRANSLATORS: A world name for the random map generator in the editor */
+    []() { return _("Desert"); }}};
 const Map::OldWorldInfo& Map::get_old_world_info_by_old_name(const std::string& old_name) {
 	for (const OldWorldInfo& owi : kOldWorldNames) {
 		if (owi.old_name == old_name) {
@@ -98,7 +113,7 @@ FieldData::FieldData(const Field& field)
 FindCritterByClass::Class FindCritterByClass::classof(const CritterDescr& cd) {
 	return cd.is_herbivore() ? cd.is_carnivore() ? Class::Neither : Class::Herbivore :
 	       cd.is_carnivore() ? Class::Carnivore :
-                              Class::Neither;
+	                           Class::Neither;
 }
 bool FindCritterByClass::accept(Bob* b) const {
 	if (upcast(const Critter, c, b)) {
@@ -628,14 +643,14 @@ static inline int32_t resize_coordinates_conversion(const int32_t old_coord,
 	if (split_point > new_dimension) {
 		// shrink, origin deleted
 		return (old_coord >= split_point || old_coord < split_point - new_dimension) ?
-                kInvalidCoords :
-                old_coord - split_point + new_dimension;
+		          kInvalidCoords :
+		          old_coord - split_point + new_dimension;
 	}
 	// shrink, origin preserved
 	return old_coord < split_point ? old_coord :
 	       old_coord < split_point + old_dimension - new_dimension ?
-                                    kInvalidCoords :
-                                    old_coord + new_dimension - old_dimension;
+	                                 kInvalidCoords :
+	                                 old_coord + new_dimension - old_dimension;
 }
 
 void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, const int32_t h) {
@@ -685,7 +700,7 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 	// Now modify our starting positions and port spaces
 
 	for (Coords& c : starting_pos_) {
-		if (c) {  // only if set (c != Coords::null())
+		if (c.valid()) {  // only if set (c != Coords::null())
 			const int16_t x = resize_coordinates_conversion(c.x, split.x, width_, w);
 			const int16_t y = resize_coordinates_conversion(c.y, split.y, height_, h);
 			assert((x >= 0 && x < w) || x == kInvalidCoords);
@@ -1845,18 +1860,19 @@ bool Map::is_cycle_connected(const FCoords& start, const std::vector<WalkingDir>
 	return true;
 }
 
+static constexpr WalkingDir kPortSpaceWalkingDirs[16] = {
+   WALK_NE, WALK_NE, WALK_NE, WALK_NW, WALK_NW, WALK_W, WALK_W, WALK_W,
+   WALK_SW, WALK_SW, WALK_SW, WALK_SE, WALK_SE, WALK_E, WALK_E, WALK_E};
+
 /**
  * Returns a list of portdock fields (if any) that a port built at \p c should have.
  */
 std::vector<Coords> Map::find_portdock(const Coords& c, bool force) const {
-	static const WalkingDir cycledirs[16] = {WALK_NE, WALK_NE, WALK_NE, WALK_NW, WALK_NW, WALK_W,
-	                                         WALK_W,  WALK_W,  WALK_SW, WALK_SW, WALK_SW, WALK_SE,
-	                                         WALK_SE, WALK_E,  WALK_E,  WALK_E};
 	const FCoords start = br_n(br_n(get_fcoords(c)));
 	const Widelands::PlayerNumber owner = start.field->get_owned_by();
 	FCoords f = start;
 	std::vector<Coords> portdock;
-	for (uint32_t i = 0; i < 16; ++i) {
+	for (WalkingDir next_direction : kPortSpaceWalkingDirs) {
 		if (force) {
 			if ((f.field->maxcaps() & MOVECAPS_SWIM) != 0) {
 				return {f};
@@ -1890,12 +1906,31 @@ std::vector<Coords> Map::find_portdock(const Coords& c, bool force) const {
 			}
 		}
 
-		if (i < 15) {
-			f = get_neighbour(f, cycledirs[i]);
-		}
+		f = get_neighbour(f, next_direction);
 	}
 
 	return portdock;
+}
+
+/**
+ * Finds a port space field where a port, if built, could have the provided coords in its portdock.
+ * Returns Coords::null() if no such port space exists.
+ */
+Coords Map::find_portspace_for_dockpoint(Coords dockpoint) const {
+	if (port_spaces_.empty()) {
+		return Coords::null();
+	}
+
+	dockpoint = tl_n(tl_n(dockpoint));
+	for (WalkingDir next_direction : kPortSpaceWalkingDirs) {
+		if (is_port_space(dockpoint)) {
+			return dockpoint;
+		}
+
+		dockpoint = get_neighbour(dockpoint, get_backward_dir(next_direction));
+	}
+
+	return Coords::null();
 }
 
 bool Map::is_port_space_allowed(const EditorGameBase& egbase, const FCoords& fc) const {
@@ -1935,7 +1970,7 @@ bool Map::set_port_space(const EditorGameBase& egbase,
  * Calculate the (Manhattan) distance from a to b
  * a and b are expected to be normalized!
  */
-uint32_t Map::calc_distance(const Coords& a, const Coords& b) const {
+uint32_t Map::calc_distance(const Coords a, const Coords b) const {
 	uint32_t dist;
 	int32_t dy;
 
@@ -2312,13 +2347,13 @@ int32_t Map::findpath(Coords instart,
 			if (!checkstep.allowed(*this, cur, neighb, *direction,
 			                       neighb == end ? CheckStep::stepLast :
 			                       cur == start  ? CheckStep::stepFirst :
-                                                CheckStep::stepNormal)) {
+			                                       CheckStep::stepNormal)) {
 				continue;
 			}
 
 			// Calculate cost
 			cost = curpf->real_cost + ((flags & fpBidiCost) != 0u ? calc_bidi_cost(cur, *direction) :
-                                                                 calc_cost(cur, *direction));
+			                                                        calc_cost(cur, *direction));
 
 			// If required (indicated by caps_sensitivity) we increase the path costs
 			// if the path is just crossing a field with building capabilities
@@ -2560,11 +2595,11 @@ uint32_t Map::set_height(const EditorGameBase& egbase,
 		do {
 			changed = false;
 			height_interval.min = height_interval.min < max_field_height_diff() ?
-                                  0 :
-                                  height_interval.min - max_field_height_diff();
+			                         0 :
+			                         height_interval.min - max_field_height_diff();
 			height_interval.max = height_interval.max < MAX_FIELD_HEIGHT - max_field_height_diff() ?
-                                  height_interval.max + max_field_height_diff() :
-                                  MAX_FIELD_HEIGHT;
+			                         height_interval.max + max_field_height_diff() :
+			                         MAX_FIELD_HEIGHT;
 			do {
 				if (mr.location().field->height < height_interval.min) {
 					mr.location().field->height = height_interval.min;

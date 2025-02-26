@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024 by the Widelands Development Team
+ * Copyright (C) 2021-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,7 +60,7 @@ TextPrompt::TextPrompt(UI::Panel& parent,
 	box_.add(
 	   new UI::Textarea(&box_, panel_style_, "message",
 	                    s == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelHeading :
-                                                       UI::FontStyle::kWuiInfoPanelHeading,
+	                                                    UI::FontStyle::kWuiInfoPanelHeading,
 	                    text),
 	   UI::Box::Resizing::kFullSize);
 	box_.add_space(kSpacing);

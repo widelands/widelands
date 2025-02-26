@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024 by the Widelands Development Team
+ * Copyright (C) 2021-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,8 +56,9 @@ std::string to_string(const AbstractNode::ArgType t) {
 		return "pointer";
 	case AbstractNode::ArgType::kNullptr:
 		return "nullptr";
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 // Parser implementation

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2024 by the Widelands Development Team
+ * Copyright (C) 2010-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/slider.h"
+#include "ui_basic/textarea.h"
 #include "wui/buildingwindow.h"
 
 namespace UI {
@@ -101,6 +102,8 @@ public:
 
 	~InputQueueDisplay() override = default;
 
+	void set_max_icons(size_t);
+
 protected:
 	void think() override;
 	void draw(RenderTarget&) override;
@@ -108,6 +111,7 @@ protected:
 	bool handle_mousepress(uint8_t, int32_t, int32_t) override;
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
+	void handle_mousein(bool inside) override;
 
 private:
 	// Common constructor
@@ -163,7 +167,9 @@ private:
 	BuildingWindow::CollapsedState* collapsed_;  ///< Owned by the window creating the input queue
 
 	size_t nr_icons_;
+	size_t max_icons_;
 	std::vector<UI::Icon*> icons_;
+	UI::Textarea total_fill_;
 
 	int32_t fill_index_at(int32_t, int32_t) const;
 	int32_t fill_index_under_mouse_;

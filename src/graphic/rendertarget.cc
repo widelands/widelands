@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -210,6 +210,14 @@ void RenderTarget::blitrect_scale(Rectf destination_rect,
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
 		surface_->blit(destination_rect, *image, source_rect, opacity, blend_mode);
 	}
+}
+
+void RenderTarget::blit_fit(const Image* image,
+                            const bool crop,
+                            const float opacity,
+                            const BlendMode blend_mode) {
+	const Rectf dest_r = UI::fit_image(image->width(), image->height(), width(), height(), crop);
+	blitrect_scale(dest_r, image, image->rect(), opacity, blend_mode);
 }
 
 void RenderTarget::blitrect_scale_monochrome(Rectf destination_rect,

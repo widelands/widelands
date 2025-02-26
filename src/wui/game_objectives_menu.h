@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,7 @@ private:
 
 	UI::Box objective_box_;
 
-	using ListType = UI::Listselect<const Widelands::Objective&>;
+	using ListType = UI::Listselect<const Widelands::Objective*>;
 	ListType objective_list_;
 	UI::MultilineTextarea objective_text_;
 };

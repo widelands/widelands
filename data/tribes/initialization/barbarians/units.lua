@@ -1286,7 +1286,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a Barbarian production site: Wood Hardener
             lore_author = pgettext("barbarians_building", "Legend about a quarrel between the brothers Harthor and Manthor,<br>Manthor is said to be the inventor of blackwood"),
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Wood Hardener
-            purpose = pgettext("barbarians_building", "Hardens logs by fire into blackwood, which is used to construct robust buildings.")
+            purpose = pgettext("barbarians_building", "Hardens logs by fire into blackwood, which is used to construct robust buildings."),
+            -- TRANSLATORS: Performance helptext for a Barbarian production site: Wood Hardener
+            performance = pgettext("barbarians_building", "The wood hardener needs %s on average to produce one blackwood."):bformat(format_minutes_seconds(1, 11))
          }
       },
       {
@@ -1415,7 +1417,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a Barbarian production site: Charcoal Kiln
             lore_author = pgettext("barbarians_building", "Song of the charcoal burners"),
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Charcoal Kiln
-            purpose = pgettext("building", "Burns logs into charcoal.")
+            purpose = pgettext("building", "Burns logs into charcoal."),
+            -- TRANSLATORS: Performance helptext for a Barbarian production site: Charcoal Kiln
+            performance = pgettext("barbarians_building", "The charcoal kiln needs %s on average to produce one coal."):bformat(format_minutes_seconds(2, 4))
          }
       },
       {
@@ -1806,6 +1810,12 @@ wl.Descriptions():new_tribe {
                pgettext("building", "Needs water nearby. Be aware ferries carry wares only, no workers."),
                -- TRANSLATORS: Note helptext for a Barbarian production site: Ferry Yard, part 2
                pgettext("building", "Roads and trees along the shoreline block access to water."),
+            },
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Ferry Yard, part 1
+               pgettext("barbarians_building", "This building can produce one ferry between %1$s and %2$s, depending on how far the shipwright has to walk."):bformat(format_seconds(37), format_seconds(59)),
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Ferry Yard, part 2
+               pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },
@@ -1824,6 +1834,12 @@ wl.Descriptions():new_tribe {
                pgettext("building", "Needs wide open water nearby."),
                -- TRANSLATORS: Note helptext for a Barbarian production site: Shipyard, part 2
                pgettext("building", "Roads and trees along the shoreline block access to water."),
+            },
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Shipyard, part 1
+               pgettext("barbarians_building", "This building can produce one ship between %1$s and %2$s, depending on how far the shipwright has to walk."):bformat(format_minutes_seconds(18, 3), format_minutes_seconds(24, 46)),
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Shipyard, part 2
+               pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },

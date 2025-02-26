@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2024 by the Widelands Development Team
+ * Copyright (C) 2019-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/slider.h"
+#include "wlapplication_options.h"
 
 namespace {
 
@@ -151,6 +152,17 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
            _("You can play custom in-game music by placing your own music files in "
              "‘<Widelands Home Directory>/music/custom_XX.*’ (where ‘XX’ are sequential "
              "two-digit numbers starting with 00). Supported file formats are ‘.mp3’ and ‘.ogg’.")),
+        0),
+     play_intro_music_(
+        this,
+        panel_style_,
+        "play_intro_music",
+        {0, 0},
+        _("Play the intro music at startup"),
+        richtext_escape(
+           _("Whether to play the intro music when Widelands is started. The splashscreen is only "
+             "closed automatically when the intro music ends, but can be skipped by a keypress or "
+             "a mouse click.")),
         0) {
 
 	set_inner_spacing(kSpacing);
@@ -188,6 +200,11 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
 	add(&custom_songset_);
 	custom_songset_.set_state(g_sh->use_custom_songset());
 	custom_songset_.changedto.connect([](bool state) { g_sh->use_custom_songset(state); });
+
+	add(&play_intro_music_);
+	play_intro_music_.set_state(get_config_bool("play_intro_music", true));
+	play_intro_music_.changedto.connect(
+	   [](bool state) { set_config_bool("play_intro_music", state); });
 
 	// TODO(GunChleoc): There's a bug (probably somewhere in Box, triggered in combination with
 	// Window::set_center_panel) that will hide the bottom SoundControl in GameOptionsSoundMenu if

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2024 by the Widelands Development Team
+ * Copyright (C) 2008-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,13 +29,14 @@
 
 #include "ai/computer_player.h"
 #include "ai/defaultai.h"
+#include "base/crypto.h"
 #include "base/i18n.h"
 #include "base/log.h"
-#include "base/md5.h"
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "chat/chat.h"
+#include "commands/cmd_net_check_sync.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
 #include "io/fileread.h"
@@ -44,7 +45,6 @@
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
-#include "logic/playercommand.h"
 #include "logic/playersmanager.h"
 #include "network/constants.h"
 #include "network/host_game_settings_provider.h"
@@ -257,7 +257,7 @@ struct Client {
 	//                  Unify this and replace with PlayerSlot or Widelands::PlayerNumber
 	int16_t usernum;
 	std::string build_id;
-	Md5Checksum syncreport;
+	crypto::MD5Checksum syncreport;
 	bool syncreport_arrived;
 	Time time;  // last time report
 	uint32_t desiredspeed;
@@ -320,7 +320,7 @@ struct GameHostImpl {
 	/// \c true if a syncreport is currently in flight
 	bool syncreport_pending{false};
 	Time syncreport_time{0U};
-	Md5Checksum syncreport;
+	crypto::MD5Checksum syncreport;
 	bool syncreport_arrived{false};
 
 	explicit GameHostImpl(GameHost* const h) : participants(nullptr), chat(h), hp(h), npsb(&hp) {
@@ -436,7 +436,7 @@ void GameHost::replace_client_with_ai(uint8_t playernumber, const std::string& a
 	// Inform all players about the change
 	// Has to be done at first in this method since the calls later on overwrite players[].name
 	send_system_message_code("CLIENT_X_REPLACED_WITH", d->settings.players.at(playernumber).name,
-	                         AI::ComputerPlayer::get_implementation(ai)->descname);
+	                         i18n::translate(AI::ComputerPlayer::get_implementation(ai)->descname));
 	set_player_ai(playernumber, ai, false);
 	d->game->get_player(playernumber + 1)->set_ai(ai);
 	// Activate the ai
@@ -613,7 +613,7 @@ void GameHost::run_callback() {
 		init_computer_players();
 		game_->run(d->settings.savegame ? Widelands::Game::StartGameType::kSaveGame :
 		           d->settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
-                                        Widelands::Game::StartGameType::kMap,
+		                                  Widelands::Game::StartGameType::kMap,
 		           script_to_run_, "nethost");
 
 		// if this is an internet game, tell the metaserver that the game is done.
@@ -822,9 +822,9 @@ void GameHost::send(ChatMessage msg) {
 						}
 					}
 				}  // end team is not "no team"
-			}     // end team is not spectator
-		}        // end team message
-	}           // end directed message
+			}  // end team is not spectator
+		}  // end team message
+	}  // end directed message
 
 	// Assemble message packet
 	SendPacket packet;
@@ -1134,12 +1134,9 @@ void GameHost::set_map(const std::string& mapname,
 			leftparts -= readout;
 		}
 		std::vector<char> complete(file_->bytes);
-		fr.set_file_pos(0);
+		fr.set_file_pos(FileRead::Pos(0));
 		fr.data_complete(complete.data(), file_->bytes);
-		SimpleMD5Checksum md5sum;
-		md5sum.data(complete.data(), file_->bytes);
-		md5sum.finish_checksum();
-		file_->md5sum = md5sum.get_checksum().str();
+		file_->md5sum = crypto::md5_str(complete.data(), file_->bytes);
 	} else {
 		// reset previously offered map / saved game
 		file_.reset(nullptr);
@@ -1419,6 +1416,8 @@ void GameHost::set_player_number(uint8_t const number) {
 
 void GameHost::set_win_condition_script(const std::string& wc) {
 	d->settings.win_condition_script = wc;
+
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kWinCondition));
 
 	// Broadcast changes
 	SendPacket packet;
@@ -1878,10 +1877,10 @@ void GameHost::receive_client_time(uint32_t const number, const Time& time) {
 	}
 
 	client.time = time;
-	verb_log_info("[Host]: Client %i: Time %i", number, time.get());
+	verb_log_info("[Host]: Client %u: Time %u", number, time.get());
 
 	if (d->waiting) {
-		verb_log_info("[Host]: Client %i reports time %i (networktime = %i) during hang", number,
+		verb_log_info("[Host]: Client %u reports time %u (networktime = %u) during hang", number,
 		              time.get(), d->committed_networktime.get());
 		check_hung_clients();
 	}
@@ -1907,7 +1906,7 @@ void GameHost::check_hung_clients() {
 			assert(d->game != nullptr);
 			++nrdelayed;
 			if (delta > Duration(5 * CLIENT_TIMESTAMP_INTERVAL * d->networkspeed / 1000)) {
-				verb_log_info("[Host]: Client %i (%s) hung", i,
+				verb_log_info("[Host]: Client %u (%s) hung", i,
 				              d->settings.users.at(d->clients.at(i).usernum).name.c_str());
 				++nrhung;
 				if (d->clients.at(i).hung_since == 0) {
@@ -2024,8 +2023,8 @@ void GameHost::update_network_speed() {
 		}
 
 		d->networkspeed = (speeds.size() % 2) != 0u ?
-                           speeds.at(speeds.size() / 2) :
-                           (speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
+		                     speeds.at(speeds.size() / 2) :
+		                     (speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
 
 		if (d->networkspeed > std::numeric_limits<uint16_t>::max()) {
 			d->networkspeed = std::numeric_limits<uint16_t>::max();
@@ -2054,7 +2053,7 @@ void GameHost::request_sync_reports() {
 		client.syncreport_arrived = false;
 	}
 
-	verb_log_info("[Host]: Requesting sync reports for time %i", d->syncreport_time.get());
+	verb_log_info("[Host]: Requesting sync reports for time %u", d->syncreport_time.get());
 	d->game->report_sync_request();
 
 	SendPacket packet;
@@ -2063,7 +2062,7 @@ void GameHost::request_sync_reports() {
 	broadcast(packet);
 
 	d->game->enqueue_command(
-	   new CmdNetCheckSync(d->syncreport_time, [this] { sync_report_callback(); }));
+	   new Widelands::CmdNetCheckSync(d->syncreport_time, [this] { sync_report_callback(); }));
 
 	committed_network_time(d->syncreport_time);
 }
@@ -2085,7 +2084,7 @@ void GameHost::check_sync_reports() {
 	}
 
 	d->syncreport_pending = false;
-	verb_log_info("[Host]: comparing syncreports for time %i", d->syncreport_time.get());
+	verb_log_info("[Host]: comparing syncreports for time %u", d->syncreport_time.get());
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		Client& client = d->clients.at(i);
@@ -2094,7 +2093,7 @@ void GameHost::check_sync_reports() {
 		}
 
 		if (client.syncreport != d->syncreport) {
-			log_err("[Host]: lost synchronization with client %u at time %i!\n"
+			log_err("[Host]: lost synchronization with client %u at time %u!\n"
 			        "I have:     %s\n"
 			        "Client has: %s\n",
 			        i, d->syncreport_time.get(), d->syncreport.str().c_str(),
@@ -2352,7 +2351,7 @@ void GameHost::handle_syncreport(uint32_t const client_num, Client& client, Recv
 		throw DisconnectException("UNEXPECTED_SYNC_REP");
 	}
 	Time time(r.unsigned_32());
-	r.data(client.syncreport.data, 16);
+	r.data(client.syncreport.value.data(), client.syncreport.value.size());
 	client.syncreport_arrived = true;
 	receive_client_time(client_num, time);
 	check_sync_reports();
