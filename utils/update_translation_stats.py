@@ -9,6 +9,7 @@ You will need to have the Translate Toolkit installed:
 http://toolkit.translatehouse.org/
 
 For Debian-based Linux: sudo apt-get install translate-toolkit
+
 """
 
 from collections import defaultdict
