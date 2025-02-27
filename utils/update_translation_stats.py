@@ -42,17 +42,25 @@ class TranslationStats:
 def generate_translation_stats(po_dir, output_file):
     locale_stats = defaultdict(TranslationStats)
 
-    sys.stdout.write('Fetching translation stats...\n')
+    print('Running pocount...')
+
+    proc = subprocess.run(
+        ['pocount', '--csv', po_dir],
+        text=True, encoding='utf-8', capture_output=True
+    )
+
+    if len(proc.stderr) > 0:
+        print('\npocount stderr:')
+        print(proc.stderr)
+
+    if proc.returncode != 0 or len(proc.stderr) > 0:
+        print('\nError running pocount, return code:', proc.returncode)
+        return 1
+
+    print('pocount finished, processing translation stats...')
 
     # Regex to extract the locale from the po filenames.
     regex_po = re.compile(r'/\S+/(\w+)\.po')
-
-    proc = subprocess.Popen(
-        ['pocount', '--csv', po_dir],
-        encoding='utf-8',
-        stderr=subprocess.PIPE,
-        stdout=subprocess.PIPE,
-    )
 
     COLUMNS = {
         'filename': 'Filename',
@@ -60,21 +68,15 @@ def generate_translation_stats(po_dir, output_file):
         'translated': 'Translated Source Words'
     }
 
-    result = csv.DictReader(proc.stdout, dialect='unix', skipinitialspace=True)
+    result = csv.DictReader(csv.StringIO(proc.stdout), dialect='unix', skipinitialspace=True)
     missing_cols = set(COLUMNS.values()) - set(result.fieldnames)
     if missing_cols:
         sys.exit(
             'Column(s) "{}" not found in output of pocount'.format('", "'.join(missing_cols)))
 
     ### Now do the actual counting
-    lastdir = ''
     for row in result:
         po_filename = row[COLUMNS['filename']]
-        po_dirname = os.path.dirname(po_filename)
-        if po_dirname != lastdir:
-            sys.stdout.write('Processing ' + os.path.basename(po_dirname) + '...\n')
-            sys.stdout.flush()
-            lastdir = po_dirname
         name_match = regex_po.fullmatch(po_filename)
         if name_match:
             locale = name_match.group(1)
@@ -93,20 +95,8 @@ def generate_translation_stats(po_dir, output_file):
                   '\nAborted creating translation statistics.')
             return 1
 
-    has_error = False
-    for line in proc.stderr.read().splitlines():
-        if not has_error:
-            print('\npocount stderr:')
-        print(line)
-        has_error = True
-
-    proc.wait(1)
-    if has_error or proc.returncode != 0:
-        print('\nError running pocount, return code:', proc.returncode)
-        return 1
-
     ### Counting done, start output
-    print('\n\nLocale\tTotal\tTranslated')
+    print('\nLocale\tTotal\tTranslated')
     print('------\t-----\t----------')
 
     # The total goes in a [global] section and is identical for all locales
