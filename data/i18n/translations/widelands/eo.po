@@ -3467,11 +3467,11 @@ msgstr "Malkonektita"
 msgid ""
 "The connection with the host was lost for the following reason:\n"
 "%s"
-msgstr ""
+msgstr "La konekto kun la gastiganto estis perdita pro la jena kialo:\n%s"
 
 #: ../../../../src/network/gamehost.cc:118
 msgid "Available host commands are:"
-msgstr ""
+msgstr "Disponeblaj gastigantaj komandoj estas:"
 
 #. * TRANSLATORS: Available host command
 #: ../../../../src/network/gamehost.cc:120
@@ -3486,30 +3486,30 @@ msgstr "/announce <msg> - Sendas mesaĝon kiel avizon (sistema babilado)"
 #. * TRANSLATORS: Available host command
 #: ../../../../src/network/gamehost.cc:124
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
-msgstr "/warn <nomo> <kaŭzo> - Avertas la uzanton <nomo> pro <kaŭzo>"
+msgstr "/warn <name> <reason> - Avertas la uzanton <name> pro <reason>"
 
 #. * TRANSLATORS: Available host command
 #: ../../../../src/network/gamehost.cc:126
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
-msgstr "/kick <nomo> <kaŭzo> - Elpuŝas la uzanton <nomo> pro <kaŭzo>"
+msgstr "/kick <name> <reason> - Elpelas la uzanton <name> pro <reason>"
 
 #. * TRANSLATORS: Available host command
 #: ../../../../src/network/gamehost.cc:128
 msgid "/forcePause            -  Force the game to pause."
-msgstr "/forcePause - Eldevigas lud-paŭzon"
+msgstr "/forcePause            -  Devige paŭzigas la ludon."
 
 #. * TRANSLATORS: Available host command
 #: ../../../../src/network/gamehost.cc:130
 msgid "/endForcedPause        -  Return game to normal speed."
-msgstr "/endForcedPause - Reagordas la ludon al regulara rapido."
+msgstr "/endForcedPause        -  Revenigas la ludon al normala rapido."
 
 #: ../../../../src/network/gamehost.cc:136
 msgid "Wrong use, should be: /announce <message>"
-msgstr "Malĝusta uzado, devus esti: /announce <mesaĝo>"
+msgstr "Malĝusta uzo, devus esti: /announce <message>"
 
 #: ../../../../src/network/gamehost.cc:148
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr "Malĝusta uzado, devus esti: /warn <nomo> <kaŭzo>"
+msgstr "Malĝusta uzo, devus esti: /warn <name> <reason>"
 
 #: ../../../../src/network/gamehost.cc:152
 #: ../../../../src/network/gamehost.cc:176
@@ -3519,21 +3519,21 @@ msgstr "La kliento %s ne povis esti trovita."
 
 #: ../../../../src/network/gamehost.cc:163
 msgid "Wrong use, should be: /kick <name> <reason>"
-msgstr "Malĝusta uzado, devus esti: /kick <nomo> <kaŭzo>"
+msgstr "Malĝusta uzo, devus esti: /kick <name> <reason>"
 
 #: ../../../../src/network/gamehost.cc:174
 msgid "You can not kick yourself!"
-msgstr "Vi ne povas elpuŝi vin mem!"
+msgstr "Vi ne povas elpeli vin mem!"
 
 #: ../../../../src/network/gamehost.cc:179
 #, c-format
 msgid "Are you sure you want to kick %s?"
-msgstr "Ĉu vi certas, ke vi volas elpuŝi na %s?"
+msgstr "Ĉu vi certas, ke vi volas elpeli %s?"
 
 #: ../../../../src/network/gamehost.cc:180
 #, c-format
 msgid "The stated reason was: %s"
-msgstr "La kaŭzo estis: %s"
+msgstr "La indikita kialo estis: %s"
 
 #: ../../../../src/network/gamehost.cc:181
 #, c-format
@@ -3542,145 +3542,145 @@ msgstr "Se jes, tajpu: /ack_kick %s"
 
 #: ../../../../src/network/gamehost.cc:189
 msgid "Kick acknowledgement cancelled: No name given!"
-msgstr ""
+msgstr "Elpela konfirmo nuligita: neniu nomo donita!"
 
 #: ../../../../src/network/gamehost.cc:191
 msgid "Wrong use, should be: /ack_kick <name>"
-msgstr ""
+msgstr "Malĝusta uzo, devus esti: /ack_kick <name>"
 
 #: ../../../../src/network/gamehost.cc:197
 msgid "Kick acknowledgement cancelled: Wrong name given!"
-msgstr ""
+msgstr "Elpela konfirmo nuligita: malĝusta nomo donita!"
 
 #: ../../../../src/network/gamehost.cc:206
 msgid "Pause was already forced - game should be paused."
-msgstr ""
+msgstr "Paŭzo jam estis devigita – la ludo devus esti paŭzita."
 
 #: ../../../../src/network/gamehost.cc:216
 msgid "There is no forced pause - nothing to end."
-msgstr ""
+msgstr "Ne estas devigita paŭzo – nenio finiĝos."
 
 #: ../../../../src/network/gamehost.cc:225
 msgid "Invalid command! Type /help for a list of commands."
-msgstr ""
+msgstr "Nevalida komando! Tajpu /help por listo de komandoj."
 
 #: ../../../../src/network/gamehost.cc:354
 msgid "Failed to host the server!"
-msgstr ""
+msgstr "Malsukcesis gastigi la servilon!"
 
 #: ../../../../src/network/gamehost.cc:355
 msgid ""
 "Widelands could not start hosting a server.\n"
 "This should not happen and there is most likely nothing you can do about it. Please report a bug."
-msgstr ""
+msgstr "Widelands ne povis komenci gastigi servilon.\nTio ne devus okazi, kaj plej verŝajne vi povas fari nenion pri tio. Bonvolu raporti cimon."
 
 #: ../../../../src/network/gamehost.cc:363
 msgid "Failed to start the server!"
-msgstr ""
+msgstr "Malsukcesis lanĉi la servilon!"
 
 #: ../../../../src/network/gamehost.cc:364
 msgid ""
 "Widelands could not start a server.\n"
 "Probably some other process is already running a server on our port."
-msgstr ""
+msgstr "Widelands ne povis lanĉi servilon.\nVerŝajne alia procezo jam funkciigas servilon en nia haveno."
 
 #: ../../../../src/network/gamehost.cc:1921
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%li sekundo"
+msgstr[1] "%li sekundoj"
 
 #: ../../../../src/network/internet_gaming.cc:105
 msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
-msgstr ""
+msgstr "Widelands ne povis starigi konekton al la donita adreso.\nAŭ ne funkciis metaservilo ĉe la supozata haveno, aŭ \nvia retagordo estas misfunkcia."
 
 #: ../../../../src/network/internet_gaming.cc:168
 msgid "Users marked with IRC will possibly not react to messages."
-msgstr ""
+msgstr "Uzantoj markitaj per IRC eble ne reagos al mesaĝoj."
 
 #: ../../../../src/network/internet_gaming.cc:206
 msgid "Successfully reconnected to the metaserver!"
-msgstr ""
+msgstr "Sukcese rekonektiĝis al la metaservilo!"
 
 #: ../../../../src/network/internet_gaming.cc:329
 #: ../../../../src/network/network_gaming_messages.cc:40
 #, c-format
 msgid "Something went wrong: %s"
-msgstr "Io fuŝis: %s"
+msgstr "Io misiris: %s"
 
 #: ../../../../src/network/internet_gaming.cc:421
 msgid "Welcome to the Widelands Metaserver!"
-msgstr ""
+msgstr "Bonvenon al la Widelands-Metaservilo!"
 
 #: ../../../../src/network/internet_gaming.cc:425
 #, c-format
 msgid ""
 "You have been logged in as ‘%s’ since your requested name is already in use "
 "or reserved."
-msgstr ""
+msgstr "Vi ensalutis kiel \"%s\", ĉar via petita nomo jam estas uzata aŭ rezervita."
 
 #: ../../../../src/network/internet_gaming.cc:437
 msgid "Our forums can be found at:"
-msgstr ""
+msgstr "Niaj forumoj troveblas ĉe:"
 
 #: ../../../../src/network/internet_gaming.cc:439
 msgid "For reporting bugs, visit:"
-msgstr ""
+msgstr "Por raporti cimojn, vizitu:"
 
 #: ../../../../src/network/internet_gaming.cc:462
 msgid "Mixed up"
-msgstr ""
+msgstr "Miksita"
 
 #: ../../../../src/network/internet_gaming.cc:462
 msgid "The metaserver sent a strange ERROR during connection"
-msgstr ""
+msgstr "La metaservilo sendis strangan ERARON dum la konekto"
 
 #: ../../../../src/network/internet_gaming.cc:476
 msgid "Unexpected packet"
-msgstr ""
+msgstr "Neatendita pakaĵo"
 
 #: ../../../../src/network/internet_gaming.cc:477
 msgid ""
 "Received an unexpected network packet from the metaserver. The metaserver "
 "could be using a different protocol version. If the error persists, try "
 "updating your game."
-msgstr ""
+msgstr "Ricevis neatenditan retan pakaĵon de la metaservilo. La metaservilo eble uzas alian protokolversion. Se la eraro daŭras, provu ĝisdatigi vian ludon."
 
 #: ../../../../src/network/internet_gaming.cc:487
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
-msgstr ""
+msgstr "AVERTO: Ricevis komandon \"%s\" kvankam ni ne estas en la KONEKTA stato."
 
 #: ../../../../src/network/internet_gaming.cc:495
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "La servila tempa diferenco estas %d sekundo."
+msgstr[1] "La servila tempa diferenco estas %d sekundoj."
 
 #: ../../../../src/network/internet_gaming.cc:509
 #, c-format
 msgid "Invalid chat message type \"%s\"."
-msgstr ""
+msgstr "Nevalida babila mesaĝtipo \"%s\"."
 
 #: ../../../../src/network/internet_gaming.cc:509
 msgid "Invalid message type"
-msgstr ""
+msgstr "Nevalida mesaĝtipo"
 
 #: ../../../../src/network/internet_gaming.cc:549
 #, c-format
 msgid "The game %s is now available"
-msgstr ""
+msgstr "La ludo %s nun disponeblas"
 
 #: ../../../../src/network/internet_gaming.cc:559
 #, c-format
 msgid "The game %s has been closed"
-msgstr ""
+msgstr "La ludo %s estis fermita"
 
 #: ../../../../src/network/internet_gaming.cc:598
 #, c-format
