@@ -53,6 +53,7 @@ public:
 	// 'Gl::initialize'.
 	enum class TraceGl { kNo, kYes };
 	void initialize(const TraceGl& trace_gl,
+	                int display,
 	                int window_mode_w,
 	                int window_mode_height,
 	                bool fullscreen,
@@ -68,12 +69,13 @@ public:
 	[[nodiscard]] int get_window_mode_xres() const;
 	[[nodiscard]] int get_window_mode_yres() const;
 
+	[[nodiscard]] int get_display() const;
 	[[nodiscard]] bool maximized() const;
-	void set_maximized(bool);
+	void set_maximized(bool, int to_display = -1);
 
 	// Changes the window to be fullscreen or not.
 	[[nodiscard]] bool fullscreen() const;
-	void set_fullscreen(bool);
+	void set_fullscreen(bool, int to_display = -1);
 
 	RenderTarget* get_render_target();
 	void refresh();
@@ -87,6 +89,9 @@ public:
 	void screenshot(const std::string& fname);
 
 private:
+	[[nodiscard]] int get_display_at(int x, int y) const;
+	void move_to_display(int display);
+
 	// Set the window size. Use this instead of calling SDL_SetWindowSize directly.
 	void set_window_size(int w, int h);
 
