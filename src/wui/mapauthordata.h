@@ -36,11 +36,17 @@ struct MapAuthorData {
 
 	void set_authors(const std::string& author_list) {
 		std::vector<std::string> authors;
+
 		{
 			i18n::Textdomain td("maps");
 			const std::string loc_author_list = _(author_list);
 			split(authors, loc_author_list, {','});
 		}
+
+		for (std::string& author : authors) {
+			trim(author);
+		}
+
 		names_ = i18n::localize_list(authors, i18n::ConcatenateWith::AMPERSAND);
 		number_ = authors.size();
 	}

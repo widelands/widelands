@@ -39,6 +39,9 @@ struct DismantleSiteWindow : public BuildingWindow {
 	void think() override;
 	void draw(RenderTarget& rt) override;
 
+protected:
+	void evict_builder();
+
 private:
 	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
 
