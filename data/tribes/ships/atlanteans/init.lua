@@ -111,6 +111,17 @@ push_textdomain("tribes")
 
 local dirname = path.dirname(__file__)
 
+-- TODO(Nordfriese): All warship animations needed
+local placeholder_table = {
+   basename = "warship",
+   play_once = true,
+   fps = 10,
+   frames = 39,
+   rows = 7,
+   columns = 6,
+   hotspot = { 58, 55 }
+}
+
 wl.Descriptions():new_ship_type {
    name = "atlanteans_ship",
    -- TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
@@ -173,6 +184,15 @@ wl.Descriptions():new_ship_type {
          columns = 4,
          hotspot = { 58, 54 }
       },
+
+      atk_ok_w = placeholder_table,
+      atk_ok_e = placeholder_table,
+      atk_fail_w = placeholder_table,
+      atk_fail_e = placeholder_table,
+      eva_ok_w = placeholder_table,
+      eva_ok_e = placeholder_table,
+      eva_fail_w = placeholder_table,
+      eva_fail_e = placeholder_table,
    },
 
    names = {
