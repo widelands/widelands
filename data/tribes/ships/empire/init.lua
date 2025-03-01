@@ -2,6 +2,17 @@ push_textdomain("tribes")
 
 local dirname = path.dirname(__file__)
 
+-- TODO(Nordfriese): All warship animations and a sinking animation needed
+local placeholder_table = {
+   basename = "warship",
+   play_once = true,
+   fps = 10,
+   frames = 40,
+   rows = 4,
+   columns = 10,
+   hotspot = { 83, 95 }
+}
+
 wl.Descriptions():new_ship_type {
    name = "empire_ship",
    -- TRANSLATORS: This is the Empire's ship's name used in lists of units
@@ -34,6 +45,33 @@ wl.Descriptions():new_ship_type {
          directional = true,
          hotspot = { 107, 99 }
       },
+
+      warship = {
+         fps = 10,
+         frames = 40,
+         rows = 4,
+         columns = 10,
+         hotspot = { 83, 95 }
+      },
+      sail_warship = {
+         fps = 10,
+         frames = 40,
+         rows = 4,
+         columns = 10,
+         directional = true,
+         hotspot = { 107, 99 }
+      },
+
+      sinking = placeholder_table,
+      sinking_warship = placeholder_table,
+      atk_ok_w = placeholder_table,
+      atk_ok_e = placeholder_table,
+      atk_fail_w = placeholder_table,
+      atk_fail_e = placeholder_table,
+      eva_ok_w = placeholder_table,
+      eva_ok_e = placeholder_table,
+      eva_fail_w = placeholder_table,
+      eva_fail_e = placeholder_table,
    },
 
    names = {
