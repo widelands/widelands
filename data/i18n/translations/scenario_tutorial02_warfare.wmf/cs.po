@@ -457,7 +457,7 @@ msgstr "Pokud chceš poslat některého vojáka pryč, stačí na něj kliknout.
 msgid ""
 "Let me also describe what the numbers in the status string mean. This string"
 " can contain an arrow and up to three numbers, e.g. ‘↑ 1 (+5) soldier (+2)’."
-msgstr "Dovolte mi také vysvětlit, co znamenají čísla ve stavovém řetězci. Tento řetězec může obsahovat šipku a až tři čísla, např. ‘↑ 1 (+5) voják (+2)‘."
+msgstr "Dovol mi také vysvětlit, co znamenají čísla v popisku stavu budovy. Tento popisek může obsahovat šipku a až tři čísla, např. ‘↑ 1 (+5) voják (+2)‘."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:198
 msgid ""
@@ -532,7 +532,7 @@ msgid ""
 "soldiers to more than zero, then the headquarters will show the same soldier"
 " information as military sites in the status. Surplus soldiers are never "
 "shown in the status."
-msgstr ""
+msgstr "Když se podíváš na popisek stavu budovy, můžeš si všimnout, že sklad ho nemá, ale hlavní budova má přednastaveno \"—\". To znamená, že není vyhrazena žádná posádka k obraně budovy, přesto v ní stále mohou být nějací vojáci. Pokud nastavíš požadovanou posádku na více než nula, pak se i u hlavní budovy začne zobrazovat stejný popisek jako u vojenské budovy. Nadbytečné vojáky popisek nezohledňuje."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your sentry"

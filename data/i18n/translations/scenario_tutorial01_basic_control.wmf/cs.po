@@ -177,7 +177,7 @@ msgid ""
 " connect it with a road. There is a sweet spot for a lumberjack right next "
 "to those trees. I’ll describe the steps I will take and then demonstrate "
 "them."
-msgstr "A je to. Teď ti ukážu, jak postavit chatu dřevorubce a jak ji napojit na cestu. Hned vedle těch stromů je krásné místečko pro dřevorubce. Vysvětlím ti to krok po kroku a pak ti je předvedu."
+msgstr "A je to. Teď ti ukážu, jak postavit chatu dřevorubce a jak ji napojit na cestu. Hned vedle těch stromů je krásné místečko pro dřevorubce. Vysvětlím ti to krok po kroku a také ti to předvedu."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:118
 msgid "Building the Lumberjack"
@@ -222,7 +222,7 @@ msgstr "To ještě není všechno. Stále je potřeba napojit chatu dřevorubce 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:187
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:231
 msgid "Waiting for the Lumberjack to Go Up"
-msgstr "Čekání na dostavení dřevorubce"
+msgstr "Čekání než se postaví dřevorubec"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:157
 msgid ""
@@ -746,7 +746,7 @@ msgid ""
 "In addition to the buildings’ census, you can also activate status labels on"
 " them. This will display information about the productivity of buildings or "
 "the progress of construction sites."
-msgstr "Kromě popisů budov můžeš také nechat zobrazit popisy jejich stav. Dojde tak k zobrazení informace o produktivitě u každé budovy, nebo informace o průběhu stavby u každého staveniště."
+msgstr "Kromě popisů budov můžeš také nechat zobrazit popisy jejich stavu. Dojde tak k zobrazení informace o produktivitě u každé budovy, nebo informace o průběhu stavby u každého staveniště."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:494
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
@@ -930,7 +930,7 @@ msgstr "Zavírání oken"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:577
 msgid "Excellent. Now we need to focus on other things."
-msgstr "Výborně. Teď se můžeme soustředit na další úkoly."
+msgstr "Výborně. Teď se můžeme pokročit dál."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:587
 msgid ""

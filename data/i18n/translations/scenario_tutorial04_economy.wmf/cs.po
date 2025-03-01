@@ -346,7 +346,7 @@ msgstr "Okno zásob bylo zavřeno, ale já jsem ještě nevysvětlil vše. Můž
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:211
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:213
 msgid "Open the stock window again"
-msgstr "Otevři znovu okno zásob"
+msgstr "Znovuotevření okna zásob"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:193
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:215
@@ -354,12 +354,12 @@ msgid ""
 "You closed the stock window before I finished telling you everything about "
 "it. If you already know everything, please feel free to leave this tutorial "
 "at any time."
-msgstr "Okno zásob bylo zavřeno ještě předtím, než jsem ti o něm stihl říct vše. Pokud už vše znáš, můžeš klidně ukončit tento tutoriál, kdykoli budeš chtít."
+msgstr "Okno zásob bylo zavřeno ještě předtím, než jsem ti o něm stihl říct vše. Prosím, snaž se respektovat postup v tutoriálu."
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
 msgid "Otherwise, please reopen it and have a look at all its tabs."
-msgstr "Jinak, prosím, otevři znovu okno zásob a pokračuj v prohlížení jeho záložek."
+msgstr "Prosím otevři okno zásob a pokračuj v prohlížení jeho záložek."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:203
 msgid ""
@@ -548,12 +548,12 @@ msgid ""
 "You closed the encyclopedia window without searching for the information we "
 "need. If you already know everything, please feel free to leave this "
 "tutorial at any time."
-msgstr "Encyklopedie byla zavřena bez dohledání potřebné informace. Pokud už vše znáš, můžeš klidně ukončit tento tutoriál, kdykoli budeš chtít."
+msgstr "Encyklopedie byla zavřena bez dohledání potřebné informace. Prosím, snaž se respektovat postup v tutoriálu."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:311
 msgid ""
 "Otherwise, please reopen the encyclopedia window and choose the second tab."
-msgstr "Jinak, prosím, otevři encyklopedii znovu a vyber druhou záložku."
+msgstr "Prosím otevři encyklopedii znovu a vyber druhou záložku."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:316
 msgid "Priority Settings"
@@ -734,7 +734,7 @@ msgid ""
 "You closed the ware statistics window before I finished telling you "
 "everything about it. If you already know everything, please feel free to "
 "leave this tutorial at any time."
-msgstr "Okno statistiky surovin bylo zavřeno ještě předtím, než jsem ti o něm stihl říct vše. Pokud už vše znáš, můžeš klidně ukončit tento tutoriál, kdykoli budeš chtít."
+msgstr "Okno statistiky surovin bylo zavřeno ještě předtím, než jsem ti o něm stihl říct vše. Prosím, snaž se respektovat postup v tutoriálu."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:437
 msgid ""
@@ -825,7 +825,7 @@ msgid ""
 "carrier will take a scythe and become a farmer. Then there will be no "
 "scythes left, but the target quantity is 1, therefore your toolsmith will "
 "start producing another one."
-msgstr "Například nastavená hodnota pro kosy je 1. Pokud postavíš statek, nosič vezme kosu a stane se sedlákem. Tím pádem už nemáš žádnou kosu, ale cílové množství je 1. Kovář tedy začne vyrábět novou."
+msgstr "Například nastavená hodnota pro kosy je 1. Pokud postavíš statek, nosič vezme kosu a stane se sedlákem. Tím pádem už nemáš žádnou kosu, ale cílové množství je 1. Nástrojář tedy začne vyrábět novou."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:491
 msgid ""
@@ -844,14 +844,14 @@ msgid ""
 "the balance between wasteful stockpiling and just-in-time production in your"
 " supply chains is one of most profound challenges of perfecting your "
 "economy. When in doubt, lean towards having some extra reserves."
-msgstr "Skladování zboží je dvousečná zbraň. Na jedné straně je zboží na skladě užitečné k tlumení dočasných výkyvů ve vaší ekonomice, ke kterým dochází neustále. Na druhou stranu veškeré zboží, které leží ve skladu, místo aby bylo zpracováno na něco jiného, ​​je plýtvání. Nalezení rovnováhy mezi nehospodárným hromaděním zásob a výrobou just-in-time ve vašich dodavatelských řetězcích je jednou z nejzávažnějších výzev při zdokonalování vaší ekonomiky. V případě pochybností se přiklánějte k tomu, abyste měli nějaké rezervy navíc."
+msgstr "Hromadění surovin má svá pro i proti. Na jedné straně mohou být uskladněné suroviny užitečné k pokrytí dočasných výkyvů v tvém hospodářství a k těm dochází poměrně často. Na druhé straně každá surovina, která leží nevyužita ve skladu místo toho, aby byla dále zpracována, byla vyrobena zbytečně. Nalezení rovnováhy tak, aby nedocházelo k zbytečnému hromadění zásob, ale aby byly všechny suroviny ve výrobním řetězci doručeny včas, je největší výzvou při zlepšování fungování tvého hospodářství. Pokud se někdy nemůžeš rozhodnout, vždy je lepší zvolit více zásob na skladě."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
 msgid ""
 "To ease the process of switching between different economic situations, you "
 "can save and apply economy profiles at the bottom of the economy options "
 "window. A profile for stockpiling and one for efficiency are preset there."
-msgstr "Pro usnadnění procesu přepínání mezi různými ekonomickými situacemi můžete uložit a použít ekonomické profily ve spodní části okna ekonomických možností. Je zde přednastaven profil pro předzásobení a profil pro efektivitu."
+msgstr "K usnadnění přechodů mezi různými stavy a fázemi, kterými hospodářství prochází, můžeš ukládat a nastavovat ekonomické profily ve spodní části okna nastavení hospodářství. Základní profily pro hromadění zásob i efektivitu jsou již přednastaveny."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:508
 msgid ""
@@ -860,7 +860,7 @@ msgid ""
 "need. However, sometimes it can be useful to stockpile a ware in very large "
 "quantities. To achieve this, the economy options window allows you to set "
 "the target of a ware to infinite, so that it will always be produced."
-msgstr "Většinu času jsou ekonomické možnosti užitečným nástrojem, který zajistí, že nebude plýtváno zdroji na výrobu zboží, které vaše ekonomika aktuálně nepotřebuje. Nicméně, někdy může být užitečné skladovat zboží ve velmi velkém množství. K dosažení tohoto vám okno ekonomických možností umožňuje nastavit produkci na nekonečno, takže bude vždy vyráběno."
+msgstr "Většinou je nastavení hospodářství užitečným nástrojem k zajištění toho, aby nedocházelo k plýtvání surovin na výrobu toho, co tvé hospodářství ve skutečnosti nepotřebuje. Ale někdy může být naopak výhodné předzásobit se surovinami opravdu ve velkém. Pro tyto případy dovoluje okno nastavení hospodářství nastavit cílovou hodnotu na nekonečno a vyrábět tak zvolenou surovinu bez omezení."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:509
 msgid ""
@@ -869,7 +869,7 @@ msgid ""
 "regardless of the economy settings. This can be useful to arrange, for "
 "example, that more building materials are produced near the border even if "
 "there are plenty in stock far away in your homeland."
-msgstr "Stejné tlačítko lze nalézt také v okně budovy výrobních míst. Tam způsobí neomezenou produkci pouze zde, bez ohledu na nastavení ekonomiky. To může být užitečné například pro zřízení produkci stavebních materiálů v blízkosti hranic, i když daleko ve vaší domovině je jich dost na skladě."
+msgstr "Stejné tlačítko lze nalézt také v okně výrobních budov. Tam umožňuje, aby pouze tato zvolená budova vyráběla neomezeně, bez ohledu na samotné nastavení hospodářství. Tím můžeme například docílit toho, že poblíž hranice  se bude neustále vyrábět další stavební materiál a to i přesto, že ho máš ve svém vnitrozemí skladem již spousty."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517

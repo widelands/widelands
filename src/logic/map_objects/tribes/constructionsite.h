@@ -48,8 +48,7 @@ struct ConstructionsiteInformation {
 	const BuildingDescr* was{nullptr};  // only valid if "becomes" is an enhanced building.
 	std::vector<const BuildingDescr*>
 	   intermediates;  // If we enhance a building while it's still under construction
-	Duration totaltime{0U};
-	Duration completedtime{0U};
+	uint32_t progress_64k{0U};
 };
 
 /*
