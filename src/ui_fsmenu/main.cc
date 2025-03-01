@@ -29,6 +29,7 @@
 #include "base/random.h"
 #include "base/time_string.h"
 #include "base/warning.h"
+#include "base/wexception.h"
 #include "build_info.h"
 #include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
@@ -268,10 +269,20 @@ void MainMenu::main_loop() {
 			return;  // We only get here though normal termination by the user.
 		} catch (const WLWarning& e) {
 			// WLWarning is reserved for bad circumstances that are (most likely) not a bug.
+			// But they still should make the regression test suite fail.
+			if (g_fail_on_errors) {
+				log_warn("Something went wrong. The error message is:\n%s", e.what());
+				abort();
+			}
 			show_messagebox(e.title(), e.what());
 		} catch (const std::exception& e) {
 			// This is the outermost wrapper within the GUI and should only very rarely be reached.
 			// Most likely we got here through a bug in Widelands.
+			if (g_fail_on_errors) {
+				log_err("An error has occured. The error message is:\n%s", e.what());
+				log_err("Please report this problem to help us improve Widelands.");
+				abort();
+			}
 			show_messagebox(
 			   _("Error!"),
 			   format(

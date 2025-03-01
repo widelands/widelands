@@ -86,4 +86,5 @@ jobs:
         build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf || [ $? -eq 2 ]
     - name: Testsuite
       run: |
+        utils/test/download_loadgame_testcases.sh
         ./regression_test.py
