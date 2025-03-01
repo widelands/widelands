@@ -28,6 +28,7 @@ wl.Descriptions():new_ship_type {
       },
       sinking = {
          hotspot = {73, 49},
+         play_once = true,
          fps = 7,
          frames = 22,
          columns = 6,
@@ -51,6 +52,7 @@ wl.Descriptions():new_ship_type {
       },
       sinking_warship = {
          hotspot = {73, 49},
+         play_once = true,
          fps = 7,
          frames = 22,
          columns = 6,
@@ -58,7 +60,7 @@ wl.Descriptions():new_ship_type {
       },
       sail_warship = {
          directional = true,
-         hotspot = {80, 52},
+         hotspot = {79, 53},
          fps = 15,
          frames = 30,
          columns = 6,
