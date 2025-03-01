@@ -361,7 +361,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 				}
 				site.mutable_soldier_control()->set_soldier_capacity(ws->desired_capacity);
 				site.set_soldier_preference(ws->soldier_preference);
-			} else if (upcast(MarketSettings, mkt, settings_.get())) {
+			} else if (upcast(MarketSettings, mkt, settings_.get()); mkt != nullptr) {
 				// Nothing to do currently.
 			} else {
 				NEVER_HERE();
