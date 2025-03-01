@@ -320,7 +320,7 @@ int LuaGame::set_allow_naval_warfare(lua_State* L) {
 
       Each trade agreement is a :class:`table` with the following properties:
 
-      - **id** (:class:`integer`): The unique identifier for this trade.
+      - **trade_id** (:class:`integer`): The unique identifier for this trade.
       - **state** (:class:`string`): Either ``"proposed"`` or ``"running"``.
       - **initiator** (:class:`wl.map.Market`): The market that initiated this trade.
       - **receiver** (:class:`wl.map.Market`): The market that receives this trade,
