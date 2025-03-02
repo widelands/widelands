@@ -18,10 +18,10 @@
 
 #include "ui_basic/scrollbar.h"
 
+#include <algorithm>
+
 #include <SDL_mouse.h>
 #include <SDL_timer.h>
-
-#include <algorithm>
 
 #include "graphic/image_cache.h"
 #include "graphic/rendertarget.h"
