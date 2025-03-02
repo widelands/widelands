@@ -1254,7 +1254,7 @@ wl.Descriptions():new_tribe {
             },
             performance = {
                -- TRANSLATORS: Performance helptext for an Empire production site: Quarry, part 1
-               pgettext("empire_building", "This building can produce one granite between %1$s and %2$s and one marble between %3$s and %4$s, depending on how far the stonemason has to walk."):bformat(format_seconds(59), format_minutes_seconds(1, 34), format_minutes_seconds(2, 28), format_minutes_seconds(3, 56)),
+               pgettext("empire_building", "This building can produce one granite between %1$s and %2$s and one marble between %3$s and %4$s, depending on how far the stonemason has to walk."):bformat(format_seconds(56), format_minutes_seconds(1, 30), format_minutes_seconds(2, 49), format_minutes_seconds(4, 30)),
                -- TRANSLATORS: Performance helptext for an Empire production site: Quarry, part 2
                pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
@@ -1441,7 +1441,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Stonemason's House
             lore_author = pgettext("empire_building", "Motto of the Stonemasons’ Guild"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Stonemason's House
-            purpose = pgettext("empire_building", "Carves marble columns out of marble.")
+            purpose = pgettext("empire_building", "Carves marble columns out of marble."),
+            -- TRANSLATORS: Performance helptext for an Empire production site: Stonemason’s House
+            performance = pgettext("empire_building", "The stonemason needs %s on average to produce one marble column."):bformat(format_minutes_seconds(1, 36))
          }
       },
       {
