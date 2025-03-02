@@ -34,7 +34,7 @@ DescriptionsCompatibilityTable::DescriptionsCompatibilityTable()
      ships_{} {
 }
 
-const std::string& DescriptionsCompatibilityTable::lookup_entry(
+std::string DescriptionsCompatibilityTable::lookup_entry(
    const std::string& entry, const std::map<std::string, std::string>& table) const {
 	const auto& i = table.find(entry);
 	if (i != table.end()) {
@@ -43,20 +43,20 @@ const std::string& DescriptionsCompatibilityTable::lookup_entry(
 	return entry;
 }
 
-const std::string& DescriptionsCompatibilityTable::lookup_worker(const std::string& worker) const {
+std::string DescriptionsCompatibilityTable::lookup_worker(const std::string& worker) const {
 	return lookup_entry(worker, workers_);
 }
 
-const std::string& DescriptionsCompatibilityTable::lookup_ware(const std::string& ware) const {
+std::string DescriptionsCompatibilityTable::lookup_ware(const std::string& ware) const {
 	return lookup_entry(ware, wares_);
 }
 
-const std::string&
+std::string
 DescriptionsCompatibilityTable::lookup_building(const std::string& building) const {
 	return lookup_entry(building, buildings_);
 }
 
-const std::string& DescriptionsCompatibilityTable::lookup_ship(const std::string& ship) const {
+std::string DescriptionsCompatibilityTable::lookup_ship(const std::string& ship) const {
 	return lookup_entry(ship, ships_);
 }
 
@@ -451,7 +451,7 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
 {
 }
 
-const std::string& OneWorldLegacyLookupTable::lookup_world_entry(
+std::string OneWorldLegacyLookupTable::lookup_world_entry(
    const std::string& entry,
    const std::map<std::string, std::map<std::string, std::string>>& table) const {
 	const std::map<std::string, std::string>& world_entries = table.at(old_world_name_);
