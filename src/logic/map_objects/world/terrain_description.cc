@@ -46,12 +46,10 @@ TerrainDescription::Is terrain_type_from_string(const std::string& type) {
 		return TerrainDescription::Is::kWalkable;
 	}
 	if (type == "water") {
-		return (TerrainDescription::Is::kWater |
-		                                           TerrainDescription::Is::kUnwalkable);
+		return (TerrainDescription::Is::kWater | TerrainDescription::Is::kUnwalkable);
 	}
 	if (type == "unreachable") {
-		return (TerrainDescription::Is::kUnreachable |
-		                                           TerrainDescription::Is::kUnwalkable);
+		return (TerrainDescription::Is::kUnreachable | TerrainDescription::Is::kUnwalkable);
 	}
 	if (type == "mineable") {
 		return TerrainDescription::Is::kMineable;

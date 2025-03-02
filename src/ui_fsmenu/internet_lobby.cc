@@ -478,8 +478,8 @@ void InternetLobby::clicked_joingame() {
 
 		try {
 			running_game_ = std::make_shared<GameClient>(capsule_, running_game_, ips,
-			                                   InternetGaming::ref().get_local_clientname(), true,
-			                                   opengames_list_.get_selected().name);
+			                                             InternetGaming::ref().get_local_clientname(),
+			                                             true, opengames_list_.get_selected().name);
 		} catch (const std::exception& e) {
 			running_game_.reset();
 			UI::WLMessageBox mbox(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Network Error"),
@@ -540,9 +540,8 @@ void InternetLobby::clicked_hostgame() {
 
 	// Start our relay host
 	try {
-		running_game_ = std::make_shared<GameHost>(&capsule_, running_game_,
-		                                 InternetGaming::ref().get_local_clientname(), tribeinfos_,
-		                                 true);
+		running_game_ = std::make_shared<GameHost>(
+		   &capsule_, running_game_, InternetGaming::ref().get_local_clientname(), tribeinfos_, true);
 	} catch (const std::exception& e) {
 		running_game_.reset();
 		UI::WLMessageBox mbox(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Network Error"),

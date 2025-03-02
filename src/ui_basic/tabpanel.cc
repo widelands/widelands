@@ -433,7 +433,7 @@ void TabPanel::draw(RenderTarget& dst) {
 			constexpr int kMaxImageSize = kTabPanelButtonHeight - 2 * kTabPanelImageMargin;
 			double image_scale =
 			   std::min({1., static_cast<double>(kMaxImageSize) / tabs_[idx]->pic->width(),
-			                         static_cast<double>(kMaxImageSize) / tabs_[idx]->pic->height()});
+			             static_cast<double>(kMaxImageSize) / tabs_[idx]->pic->height()});
 
 			uint16_t picture_width = image_scale * tabs_[idx]->pic->width();
 			uint16_t picture_height = image_scale * tabs_[idx]->pic->height();

@@ -51,8 +51,7 @@ std::string DescriptionsCompatibilityTable::lookup_ware(const std::string& ware)
 	return lookup_entry(ware, wares_);
 }
 
-std::string
-DescriptionsCompatibilityTable::lookup_building(const std::string& building) const {
+std::string DescriptionsCompatibilityTable::lookup_building(const std::string& building) const {
 	return lookup_entry(building, buildings_);
 }
 
