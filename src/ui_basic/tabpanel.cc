@@ -20,6 +20,8 @@
 
 #include <SDL_mouse.h>
 
+#include <algorithm>
+
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
@@ -430,8 +432,8 @@ void TabPanel::draw(RenderTarget& dst) {
 			// Scale the image down if needed, but keep the ratio.
 			constexpr int kMaxImageSize = kTabPanelButtonHeight - 2 * kTabPanelImageMargin;
 			double image_scale =
-			   std::min(1., std::min(static_cast<double>(kMaxImageSize) / tabs_[idx]->pic->width(),
-			                         static_cast<double>(kMaxImageSize) / tabs_[idx]->pic->height()));
+			   std::min({1., static_cast<double>(kMaxImageSize) / tabs_[idx]->pic->width(),
+			                         static_cast<double>(kMaxImageSize) / tabs_[idx]->pic->height()});
 
 			uint16_t picture_width = image_scale * tabs_[idx]->pic->width();
 			uint16_t picture_height = image_scale * tabs_[idx]->pic->height();

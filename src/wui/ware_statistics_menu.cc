@@ -160,26 +160,26 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	for (Widelands::DescriptionIndex cur_ware : player_tribe.wares()) {
 		plot_production_->register_plot_data(
 		   cur_ware,
-		   parent.get_player()->get_ware_production_statistics(Widelands::DescriptionIndex(cur_ware)),
+		   parent.get_player()->get_ware_production_statistics(cur_ware),
 		   colors[kInactiveColorIndex]);
 
 		plot_consumption_->register_plot_data(cur_ware,
 		                                      parent.get_player()->get_ware_consumption_statistics(
-		                                         Widelands::DescriptionIndex(cur_ware)),
+		                                         cur_ware),
 		                                      colors[kInactiveColorIndex]);
 
 		plot_economy_->register_plot_data(
 		   cur_ware,
-		   parent.get_player()->get_ware_production_statistics(Widelands::DescriptionIndex(cur_ware)),
+		   parent.get_player()->get_ware_production_statistics(cur_ware),
 		   colors[kInactiveColorIndex]);
 
 		plot_economy_->register_negative_plot_data(
 		   cur_ware, parent.get_player()->get_ware_consumption_statistics(
-		                Widelands::DescriptionIndex(cur_ware)));
+		                cur_ware));
 
 		plot_stock_->register_plot_data(
 		   cur_ware,
-		   parent.get_player()->get_ware_stock_statistics(Widelands::DescriptionIndex(cur_ware)),
+		   parent.get_player()->get_ware_stock_statistics(cur_ware),
 		   colors[kInactiveColorIndex]);
 	}
 

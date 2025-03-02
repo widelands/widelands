@@ -127,9 +127,8 @@ void WorkareaProgram::add_vertex(const FieldsToDraw::Field& field,
 constexpr float kBorderStrength = 2.8f;
 
 // Helper functions for calculating the border thickness
-const static float kOffsetFactor = static_cast<float>(
-   std::sqrt(kBorderStrength * kBorderStrength /
-             (kTriangleWidth * kTriangleWidth + kTriangleHeight * kTriangleHeight)));
+const static float kOffsetFactor = std::sqrt(kBorderStrength * kBorderStrength /
+             (kTriangleWidth * kTriangleWidth + kTriangleHeight * kTriangleHeight));
 static Vector2f offset(size_t radius, size_t pos) {
 	if (pos % radius == 0) {
 		switch (pos / radius) {
