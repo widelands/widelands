@@ -444,7 +444,7 @@ msgid ""
 " then or if you’re unsure about your tribe’s needs and abilities and how its"
 " buildings and workers operate, you can look it up easily in our tribe-"
 "specific in-game help and encyclopedia."
-msgstr "Až budeš mít za sebou několik her, budeš si v těchto věcech jistější.  Ale do té doby, pokud nevíš přesně, co tvůj kmen potřebuje, jaké má schopnosti a co jeho budovy a dělníci dělají, můžeš si to jednoduše najít v encyklopedii svého kmene, která je součástí nápovědy."
+msgstr "Až budeš mít za sebou několik her, budeš si v těchto věcech jistější. Ale do té doby, pokud nevíš přesně, co tvůj kmen potřebuje, jaké má schopnosti a co jeho budovy a dělníci dělají, můžeš si to jednoduše najít v encyklopedii svého kmene, která je součástí nápovědy."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:266
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:268
@@ -869,7 +869,7 @@ msgid ""
 "regardless of the economy settings. This can be useful to arrange, for "
 "example, that more building materials are produced near the border even if "
 "there are plenty in stock far away in your homeland."
-msgstr "Stejné tlačítko lze nalézt také v okně výrobních budov. Tam umožňuje, aby pouze tato zvolená budova vyráběla neomezeně, bez ohledu na samotné nastavení hospodářství. Tím můžeme například docílit toho, že poblíž hranice  se bude neustále vyrábět další stavební materiál a to i přesto, že ho máš ve svém vnitrozemí skladem již spousty."
+msgstr "Stejné tlačítko lze nalézt také v okně výrobních budov. Tam umožňuje, aby pouze tato zvolená budova vyráběla neomezeně, bez ohledu na samotné nastavení hospodářství. Tím můžeme například docílit toho, že poblíž hranice se bude neustále vyrábět další stavební materiál a to i přesto, že ho máš ve svém vnitrozemí skladem již spousty."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
