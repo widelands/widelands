@@ -283,7 +283,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 							} else {
 								uint32_t totaltime = fr.unsigned_32();
 								uint32_t completedtime = fr.unsigned_32();
-								field->constructionsite->progress_64k = (completedtime << 16) / totaltime;
+								field->constructionsite->progress_64k = totaltime > 0 ? (completedtime << 16) / totaltime : 0;
 							}
 						}
 					}
