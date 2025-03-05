@@ -117,7 +117,7 @@ msgstr "Rovnou spustí mapu `FILENAME` jako scénář pro jednoho hráče."
 #, c-format
 msgid ""
 "Load the savegame `%1$s` directly or the last saved game if `=%2$s` is used."
-msgstr "Rovnou nahraje uloženou hru `%1$s`  nebo  poslední uloženou hru pokud je použito `=%2$s` ."
+msgstr "Rovnou nahraje uloženou hru `%1$s` nebo poslední uloženou hru, pokud je použito `=%2$s`."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -125,7 +125,7 @@ msgstr "Rovnou nahraje uloženou hru `%1$s`  nebo  poslední uloženou hru pokud
 #, c-format
 msgid ""
 "Load the replay `%1$s` directly or the last saved replay if `=%2$s` is used."
-msgstr "Rovnou nahraje záznam hry `%1$s`  nebo  poslední uložený záznam hry pokud je použito `=%2$s` ."
+msgstr "Rovnou nahraje záznam hry `%1$s` nebo poslední uložený záznam hry, pokud je použito `=%2$s`."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -191,7 +191,7 @@ msgstr "n"
 msgid ""
 "Enable AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ "
 "for a full description of the AI training logic."
-msgstr "Aktivuje režim AI training. Stránka                      https://www.widelands.org/wiki/Ai%20Training/ obsahuje podrobnější informace k jeho využití."
+msgstr "Aktivuje režim AI training. Stránka https://www.widelands.org/wiki/Ai%20Training/ obsahuje podrobnější informace k jeho využití."
 
 #: ../../../../src/wlapplication_messages.cc:132
 msgid ""
@@ -209,12 +209,12 @@ msgstr "Volby hry:"
 
 #: ../../../../src/wlapplication_messages.cc:139
 msgid "Note: New values will be written to the config file."
-msgstr "Poznámka: Nové hodnoty budou zapsány do konfiguračního souboru"
+msgstr "Poznámka: Nové hodnoty budou zapsány do konfiguračního souboru."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:145
 msgid "Automatically save each `n` minutes."
-msgstr "Automaticky ukládat každých `n` minut"
+msgstr "Automaticky ukložit každých `n` minut."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:148
@@ -263,7 +263,7 @@ msgstr "Zobrazuj názvy souborů v okně záznamů."
 msgid ""
 "Whether a warning should be shown in the editor if there are too many "
 "players."
-msgstr "Zda by mělo být v editoru zobrazeno varování o velkém množství hráčů"
+msgstr "Nastavit, zda má být v editoru zobrazeno varování při příliš vysokém počtu hráčů."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:167

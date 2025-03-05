@@ -1013,7 +1013,7 @@ msgstr "Hier sünd keene Mineraale im Grund."
 msgid ""
 "Gold veins contain gold ore that can be washed from the gravel at gold "
 "digger dwellings."
-msgstr "In Gold-Aders is Goldkluut, dat vun Goldwaschersken ut de Stoff wascht worden worden kann."
+msgstr "In Gold-Aders is Goldkluut, dat vun Goldwaschersken ut de Stoff wascht worden kann."
 
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Gold, part 2
@@ -1259,7 +1259,7 @@ msgstr "»Sünnenlücht blickt blied up uns un uns’ Vörmoders daal as wi wark
 #: ../../../../data/tribes/initialization/amazons/units.lua:1360
 msgctxt "amazons_building"
 msgid "Mistress WeaverSong, recollecting her early years as a liana cutter."
-msgstr "Meisterske WeverLied över hör frohen Jahren as Boomreep-Slagerske"
+msgstr "Meisterske WeverLied över hör frohen Jahren as Boomreep-Slagerske."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Liana Cutter's
 #. Hut
@@ -1388,7 +1388,7 @@ msgstr "»Miene Moder hett mi bibrocht, de Tauen ut Boomreep to folden, wo man d
 #: ../../../../data/tribes/initialization/amazons/units.lua:1432
 msgctxt "amazons_building"
 msgid "Mistress WeaverSong, reflecting on training."
-msgstr "Meisterske WeverLied över hör Lehrjahren"
+msgstr "Meisterske WeverLied över hör Lehrjahren."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Rope Weaver's
 #. Booth
@@ -4294,7 +4294,7 @@ msgid ""
 "‘Take your net and come to the sea<br>In the early morning the moon ya still"
 " see<br>Collect ya catch by net or by spear,<br>and don’t forget to give "
 "Satul his share.’"
-msgstr "Gah mit dien Nett tur Waterkant<br>Froh mörgens süchst’ noch Maan sien Rand<br>Treck de Angels ut de Fissen hör Muul<br>un vergeet nich to geven recht Pand an Satuul."
+msgstr "»Gah mit dien Nett tur Waterkant<br>Froh mörgens süchst’ noch Maan sien Rand<br>Treck de Angels ut de Fissen hör Muul<br>un vergeet nich to geven recht Pand an Satuul.«"
 
 #. TRANSLATORS: Note lore_autor for an Atlantean production site: Fisher's
 #. House
@@ -6801,7 +6801,7 @@ msgstr "De Boomplanter plant eenen Boom in %1$s bit %2$s, je nadeem, wo wied he 
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1192
 msgctxt "barbarians_building"
 msgid "‘What do you mean, my fish ain’t fresh?!’"
-msgstr "Wat sall dat heten, miene Fisse sünd nich frisk!?"
+msgstr "»Wat sall dat heten, miene Fisse sünd nich frisk?!«"
 
 #. TRANSLATORS: Lore author helptext for a Barbarian production site: Fisher's
 #. Hut
@@ -7352,7 +7352,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘A new warrior’s ax brings forth the best in its wielder – or the worst in "
 "its maker.’"
-msgstr "Eene neje Ridderext wiest dat beste in hör Drager – of dat leepste in hör Maker."
+msgstr "»Eene neje Ridderext wiest dat beste in hör Drager – of dat leepste in hör Maker.«"
 
 #. TRANSLATORS: Lore author helptext for a Barbarian production site: Warmill
 #. TRANSLATORS: Lore author helptext for a Barbarian production site: Ax
@@ -13839,7 +13839,7 @@ msgstr "Fiskernetten sünd dat Warktüüg, wat Fiskers bruken."
 #: ../../../../data/tribes/initialization/frisians/units.lua:459
 msgctxt "frisians_ware"
 msgid "Hunting spears are produced by the blacksmithy"
-msgstr "Jaggtsperen worden vun de Smede produzeert."
+msgstr "Jaggtsperen worden vun de Smede produzeert"
 
 #. TRANSLATORS: Helptext for a Frisian ware: Scythe, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:472
@@ -15357,7 +15357,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the supply is steady and there is continuous demand for fur, then the "
 "reindeer farm produces one meat after producing three pieces of fur."
-msgstr "Wenn de Versörgung good is un de hele Tied Fell bruukt word, produzeert de Sneeihirsktüchteree eenmaal Fleesk, nadeem se dree Stücken Fell produzeert hett,"
+msgstr "Wenn de Versörgung good is un de hele Tied Fell bruukt word, produzeert de Sneeihirsktüchteree eenmaal Fleesk, nadeem se dree Stücken Fell produzeert hett."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Reindeer
 #. Farm
@@ -15385,7 +15385,7 @@ msgctxt "frisians_building"
 msgid ""
 "A farmer’s reply when asked by his chieftain why he was planting such a "
 "slow-growing grain."
-msgstr "Wat een Buur seggt, wenn sien Anföhrer hüm fraggt, waarum he een Koorn plant, dat so langsaam wasst"
+msgstr "Wat een Buur seggt, wenn sien Anföhrer hüm fraggt, waarum he een Koorn plant, dat so langsaam wasst."
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Farm
 #: ../../../../data/tribes/initialization/frisians/units.lua:2033

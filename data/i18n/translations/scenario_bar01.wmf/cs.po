@@ -186,7 +186,7 @@ msgstr "Vylepši budovy a postav malý pivovar"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:86
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr "Vylepši důl, hospodu a postav malý pivovar"
+msgstr "Vylepši důl, hospodu a postav malý pivovar."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:87
 msgid ""
