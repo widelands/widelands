@@ -147,7 +147,7 @@ void find_former_buildings(const Descriptions& descriptions,
                            const Widelands::DescriptionIndex bi,
                            Widelands::FormerBuildings* former_buildings) {
 	assert(former_buildings && former_buildings->empty());
-	former_buildings->push_back(std::make_pair(bi, true));
+	former_buildings->emplace_back(bi, true);
 
 	for (;;) {
 		Widelands::DescriptionIndex oldest_idx = former_buildings->front().first;

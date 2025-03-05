@@ -95,8 +95,7 @@ Add a new building to the list of buildable buildings
 ===============
 */
 void BuildGrid::add(Widelands::DescriptionIndex id) {
-	const Widelands::BuildingDescr& descr =
-	   *plr_->tribe().get_building_descr(Widelands::DescriptionIndex(id));
+	const Widelands::BuildingDescr& descr = *plr_->tribe().get_building_descr(id);
 
 	UI::IconGrid::add(descr.name(), descr.representative_image(&plr_->get_playercolor()),
 	                  reinterpret_cast<void*>(id),
@@ -997,8 +996,7 @@ void FieldActionWindow::act_build(Widelands::DescriptionIndex idx) {
 	upcast(Game, game, &ibase().egbase());
 	upcast(InteractivePlayer, iaplayer, &ibase());
 
-	game->send_player_build_building(
-	   iaplayer->player_number(), node_, Widelands::DescriptionIndex(idx));
+	game->send_player_build_building(iaplayer->player_number(), node_, idx);
 	iaplayer->set_flag_to_connect(game->map().br_n(node_));
 	reset_mouse_and_die();
 }

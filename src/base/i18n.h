@@ -58,7 +58,7 @@
 inline const char* gettext_noop(const char* str) {
 	return str;
 }
-inline const std::string& gettext_noop(const std::string& str) {
+inline std::string gettext_noop(std::string str) {
 	return str;
 }
 

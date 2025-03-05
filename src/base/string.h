@@ -82,7 +82,7 @@ std::string join(const Container& words, const std::string& separator) {
 }
 
 /** Convert various types to string. Useful in templates where the parameter type is not fixed. */
-inline const std::string& as_string(const std::string& str) {
+inline std::string as_string(std::string str) {
 	return str;
 }
 inline std::string as_string(const char* str) {

@@ -1364,7 +1364,7 @@ void AddOnsCtrl::refresh_remotes(const bool showall) {
 			progress.step(format_l(step_message, (100.0 * counter / nr_orig_entries)));
 
 			try {
-				remotes_[i].reset(new AddOns::AddOnInfo(net().fetch_one_remote(names[i])));
+				remotes_[i] = std::make_shared<AddOns::AddOnInfo>(net().fetch_one_remote(names[i]));
 			} catch (const std::exception& e) {
 				log_err("Skip add-on %s because: %s", names[i].c_str(), e.what());
 				names[i] = names.back();

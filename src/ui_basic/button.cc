@@ -18,6 +18,7 @@
 
 #include "ui_basic/button.h"
 
+#include <algorithm>
 #include <memory>
 
 #include <SDL_mouse.h>
@@ -222,8 +223,8 @@ void Button::draw(RenderTarget& dst) {
 			const int max_image_w = get_w() - 2 * kButtonImageMargin;
 			const int max_image_h = get_h() - 2 * kButtonImageMargin;
 			const float image_scale =
-			   std::min(1.f, std::min(static_cast<float>(max_image_w) / title_image_->width(),
-			                          static_cast<float>(max_image_h) / title_image_->height()));
+			   std::min({1.f, static_cast<float>(max_image_w) / title_image_->width(),
+			             static_cast<float>(max_image_h) / title_image_->height()});
 			int blit_width = image_scale * title_image_->width();
 			int blit_height = image_scale * title_image_->height();
 

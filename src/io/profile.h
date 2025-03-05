@@ -93,7 +93,7 @@ public:
 			translate_ = t;
 		}
 
-		friend void swap(Value& first, Value& second);
+		friend void swap(Value& first, Value& second) noexcept;
 
 	private:
 		bool used_;

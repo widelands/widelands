@@ -18,6 +18,7 @@
 
 #include "editor/map_generator.h"
 
+#include <algorithm>
 #include <memory>
 
 #include "base/log.h"
@@ -214,8 +215,8 @@ uint8_t MapGenerator::make_node_elevation(double const elevation, const Coords& 
 
 	//  Handle Map Border in island mode
 	if (map_info_.islandMode) {
-		int32_t const border_dist = std::min(
-		   std::min<int16_t>(c.x, map_info_.w - c.x), std::min<int16_t>(c.y, map_info_.h - c.y));
+		int32_t const border_dist = std::min({c.x, static_cast<int16_t>(map_info_.w - c.x), c.y,
+		                                      static_cast<int16_t>(map_info_.h - c.y)});
 		if (border_dist <= kIslandBorder) {
 			res_h = static_cast<uint8_t>(static_cast<double>(res_h) * border_dist /
 			                             static_cast<double>(kIslandBorder));
