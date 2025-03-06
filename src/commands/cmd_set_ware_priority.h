@@ -34,7 +34,8 @@ struct CmdSetWarePriority : public PlayerCommand {
 	                   WareWorker type,
 	                   DescriptionIndex index,
 	                   const WarePriority& priority,
-	                   bool cs);
+	                   bool cs,
+	                   uint32_t disambiguator_id);
 
 	// Write these commands to a file (for savegames)
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
@@ -55,6 +56,7 @@ private:
 	DescriptionIndex index_{INVALID_INDEX};
 	WarePriority priority_{WarePriority::kNormal};
 	bool is_constructionsite_setting_{false};
+	uint32_t disambiguator_id_{0};
 };
 
 }  // namespace Widelands

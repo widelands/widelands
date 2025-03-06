@@ -51,6 +51,14 @@ void CmdTradeAction::execute(Game& game) {
 		}
 		break;
 
+	case TradeAction::kPause:
+	case TradeAction::kResume:
+		if (Market* market = dynamic_cast<Market*>(game.objects().get_object(accepter_));
+		    market != nullptr) {
+			market->set_paused(game, trade_id_, action_ == TradeAction::kPause);
+		}
+		break;
+
 	default:
 		throw wexception("CmdTradeAction: unrecognized action %u", static_cast<uint8_t>(action_));
 	}
