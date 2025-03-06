@@ -66,7 +66,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		   known ? g_animation_manager->get_animation(anim_idx).nr_frames() : 1;
 		assert(nrframes);
 		*tf += nrframes;
-		anims->push_back(std::make_pair(anim_idx, nrframes));
+		anims->emplace_back(anim_idx, nrframes);
 	};
 	for (const BuildingDescr* d : intermediates) {
 		push_animation(d, &animations, &total_frames);

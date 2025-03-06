@@ -638,9 +638,9 @@ msgstr ""
 "Ale pokud si chceme být opravdu jistí, že vše zvládneme, neměli bychom "
 "zapomínat, že ostrov můžeme jednoduše zvětšit. Když nyní máme stabilní "
 "dodávky klád, můžeme stavět hráze a vlnolamy, abychom získali více "
-"stavebního  místa na úkor moře. Až budeme připraveni k útoku, můžeme je také"
-" použít k rozšíření úzkého místa na východě. A nebo, pokud bychom chtěli být"
-" opravdu vynalézaví, mohli bychom postavit hráze podél celého západního "
+"stavebního místa na úkor moře. Až budeme připraveni k útoku, můžeme je také "
+"použít k rozšíření úzkého místa na východě. A nebo, pokud bychom chtěli být "
+"opravdu vynalézaví, mohli bychom postavit hráze podél celého západního "
 "pobřeží ostrova a napadnout nepřítele ze dvou stran současně!"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:277
