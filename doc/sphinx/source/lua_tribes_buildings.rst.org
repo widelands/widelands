@@ -61,7 +61,11 @@ Buildings are defined with Lua functions called ``new_<building_type>_type{table
     *Optional*. A table defining the name of a building that this building can be enhanced to,
     and its additional build cost and wares that this enhanced building will give back to the player
     when it is dismantled. The ``enhancement_cost`` and ``enhancement_return_on_dismantle``
-    table contents can be empty. Example::
+    table contents can be empty.
+    Since v1.3, the optional ``base_animation`` key allows specifying a base animation for the
+    build animation of the enhanced building that will be used instead of this building's
+    unoccupied animation.
+    Example::
 
         enhancement = {
            name = "atlanteans_fancy_building",
@@ -73,7 +77,8 @@ Buildings are defined with Lua functions called ``new_<building_type>_type{table
            enhancement_return_on_dismantle = {
               log = 1,
               granite = 1
-           }
+           },
+           base_animation = "enhancement_base",
         },
 
 **enhancement_cost**
