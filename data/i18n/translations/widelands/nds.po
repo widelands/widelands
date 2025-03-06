@@ -748,7 +748,7 @@ msgstr "Widelands kunn de Datei »%s« nich laden. Dat Formaat is openbaar nich 
 
 #: ../../../../src/editor/editorinteractive.cc:649
 msgid "Exit Editor Confirmation"
-msgstr "Bewarker würrelk verlaten?"
+msgstr "Bewarker verlaten utwiesen"
 
 #: ../../../../src/editor/editorinteractive.cc:649
 msgid "Unsaved Map"
@@ -1378,7 +1378,7 @@ msgstr "Teken:"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:504
 msgid "Teams"
-msgstr "Klottjen:"
+msgstr "Klottjen"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:538
 #, c-format
@@ -1737,13 +1737,13 @@ msgstr "Sette de Höcht fast to:"
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease terrain "
 "height"
-msgstr "Klick de Kaart tum Verhogen an; drücke daar de Umschalt-Tast bi tum lütter maken."
+msgstr "Klick de Kaart tum Verhogen an; drück daar de Umschalt-Tast bi tum lütter maken"
 
 #. * TRANSLATORS: Editor set height access key. *
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:74
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:90
 msgid "Ctrl + Click on the map to set terrain height"
-msgstr "Klick de Kaart an un drücke daar de Strg-Tast bi tum Fastsetten vun de Höcht."
+msgstr "Klick de Kaart an un drück daar de Strg-Tast bi tum Fastsetten vun de Höcht"
 
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:62
 msgid "Increase/Decrease amount by:"
@@ -1758,14 +1758,14 @@ msgstr "Sette de Mass fast to:"
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease the "
 "amount of the selected resource"
-msgstr "Klick de Kaart tum Verhogen, of drücke daar de Umschalt-Tast bi tum lütter maken, vun de Mass vun de utköört Mineraal."
+msgstr "Klick de Kaart tum Verhogen, of drück daar de Umschalt-Tast bi tum lütter maken, vun de Mass vun de utköört Mineraal"
 
 #. * TRANSLATORS: Editor set rseources access key. *
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:97
 msgid ""
 "Ctrl + Click on the map to set the amount of the selected resource. This "
 "will replace already set resources."
-msgstr "Klick de Kaart tum an un drücke daar de Strg-Tast bi tum Fastsetten vun de Mass vun de utköört Mineraal. Daar wesen Mineraale warrn utwesselt."
+msgstr "Klick de Kaart tum an un drück daar de Strg-Tast bi tum Fastsetten vun de Mass vun de utköört Mineraal. Daar wesen Mineraale warrn utwesselt."
 
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:32
 msgid "Random Height Options"
@@ -1785,7 +1785,7 @@ msgstr "Gröttste Höcht:"
 msgid ""
 "Click on the map to set terrain height to a random value within the "
 "specified range"
-msgstr "Klick de Kaart an tum Fastmaken vun de Höcht to eene tofällige Tahl in de utköört Intervall."
+msgstr "Klick de Kaart an tum Fastmaken vun de Höcht to eene tofällige Tahl in de utköört Intervall"
 
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:106
 msgid "Fixed height"
@@ -2513,7 +2513,7 @@ msgstr "Angriff!"
 
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:715
 msgid "You are under attack"
-msgstr "Du worst angrepen!"
+msgstr "Du worst angrepen"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
@@ -2869,7 +2869,7 @@ msgstr "Küst funnen"
 #. * TRANSLATORS: A ship has discovered land
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1868
 msgid "Land Ahoy!"
-msgstr "Küst to sehn kregen"
+msgstr "Küst to sehn kregen!"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1869
 msgid ""
@@ -3219,7 +3219,7 @@ msgstr "Sekern is fehlslaan!"
 #: ../../../../src/logic/save_handler.cc:186
 #: ../../../../src/wui/game_main_menu_save_game.cc:360
 msgid "Game saved"
-msgstr "Dat Speel is sekert worden!"
+msgstr "Dat Speel is sekert worden"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:891
 msgid "Building’s inputs changed!"
@@ -3803,7 +3803,7 @@ msgstr "De Verbinnung to de Metaserver was quietworden."
 
 #: ../../../../src/network/internet_gaming_messages.cc:42
 msgid "Metaserver did not answer"
-msgstr "De Metaserver hett nicht antwoordt."
+msgstr "De Metaserver hett nicht antwoordt"
 
 #: ../../../../src/network/internet_gaming_messages.cc:45
 msgid ""
@@ -3951,12 +3951,12 @@ msgstr "De Weert hett Speler %s in de Deel schickt!"
 #: ../../../../src/network/network_gaming_messages.cc:71
 #, c-format
 msgid "WARNING: %1$s uses version: %2$s, while Host uses version: %3$s"
-msgstr "WAHRSCHAU: %1$s bruukt deese Versioon: %2$s. Aver de Weert bruukt Versioon %3$s."
+msgstr "WAHRSCHAU: %1$s bruukt deese Versioon: %2$s. Aver de Weert bruukt de Versioon: %3$s"
 
 #: ../../../../src/network/network_gaming_messages.cc:72
 #, c-format
 msgid "%s has joined the game"
-msgstr "%s is in dat Speel intreden."
+msgstr "%s is in dat Speel intreden"
 
 #: ../../../../src/network/network_gaming_messages.cc:73
 #, c-format
@@ -3966,7 +3966,7 @@ msgstr "Hebb anfangen, Datei %1$s an %2$s to schicken!"
 #: ../../../../src/network/network_gaming_messages.cc:74
 #, c-format
 msgid "Completed transfer of file %1$s to %2$s"
-msgstr "Dat Schicken vun Datei %1$s an %2$s is fardig."
+msgstr "Dat Schicken vun Datei %1$s an %2$s is fardig"
 
 #: ../../../../src/network/network_gaming_messages.cc:75
 #, c-format
@@ -6406,7 +6406,7 @@ msgstr "Kämpe tüsken Spelers verseggen"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:343
 msgid "All selected starting conditions ignore the map’s starting positions"
-msgstr "Keene utköört Anfangs-Kondiesje bruukt de Anfangs-Steden vun de Kaart."
+msgstr "Keene utköört Anfangs-Kondiesje bruukt de Anfangs-Steden vun de Kaart"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:349
 msgid "The starting positions are set by the scenario"
@@ -6526,7 +6526,7 @@ msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
 "The file was: %s\n"
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
-msgstr "Widelands wull een Speel begünnen, kunn de Datei daarför aver nich an de angeven Padd finnen.\nDe Datei weer: %s\nWenn dat in eenem Internett-Speel passeert, hett de Weert wull eene Datei utköört, wat du nich hest. De Weert sall di eene sülke Datei egentlik schicken, aver se is villicht noch nich ganz överdragen?!"
+msgstr "Widelands wull een Speel begünnen, kunn de Datei daarför aver nich an de angeven Padd finnen.\nDe Datei weer: %s\nWenn dat in eenem Internett-Speel passeert, hett de Weert wull eene Datei utköört, wat du nich hest. De Weert sall di eene sülke Datei egentlik schicken, aver se is villicht noch nich ganz överdragen!?!"
 
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:281
 msgid ""
@@ -6841,7 +6841,7 @@ msgstr "Verschuvig Verwiedern funnen"
 
 #: ../../../../src/ui_fsmenu/main.cc:958
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
-msgstr "Een anknipst Verwiedern maakt bekennterwies Verschuvens. Büst du seker, dat du wiedermaken willst?"
+msgstr "Een anknipst Verwiedern maakt bekennterwies Verschuvens. Maak up dien eegen Gefahr wieder."
 
 #: ../../../../src/ui_fsmenu/main.cc:1067
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:352
@@ -6855,7 +6855,7 @@ msgstr "Keene Völkers sünd in data/tribes/initialization/[volknaam]/init.lua f
 
 #: ../../../../src/ui_fsmenu/main.cc:1111
 msgid "Exit Confirmation"
-msgstr "Würrelk verlaten?"
+msgstr "Verlaten utwiesen"
 
 #: ../../../../src/ui_fsmenu/main.cc:1112
 msgid "Are you sure you wish to exit Widelands?"
@@ -7257,7 +7257,7 @@ msgstr "LAN-Speel begünnen"
 
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:46
 msgid "List of games in your local network:"
-msgstr "Liste vun Speelen in dien stedenwies Nett"
+msgstr "Liste vun Speelen in dien stedenwies Nett:"
 
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:58
 msgid "Your nickname:"
@@ -7339,11 +7339,11 @@ msgstr "Fensters an Rannen fastbinnen"
 
 #: ../../../../src/ui_fsmenu/options.cc:202
 msgid "Distance for windows to snap to other panels:"
-msgstr "Ofstand dat Fensters an anner Rannen binnen"
+msgstr "Ofstand dat Fensters an anner Rannen binnen:"
 
 #: ../../../../src/ui_fsmenu/options.cc:215
 msgid "Distance for windows to snap to borders:"
-msgstr "Ofstand dat Fensters an de Rand binnen"
+msgstr "Ofstand dat Fensters an de Rand binnen:"
 
 #: ../../../../src/ui_fsmenu/options.cc:225
 msgid "Edit keyboard and mouse actions…"
@@ -7491,7 +7491,7 @@ msgstr "Muus nagahn"
 #. 1080)'
 #: ../../../../src/ui_fsmenu/options.cc:589
 msgid "#%1% (%2%, %3%, %4%, %5%)"
-msgstr ""
+msgstr "#%1% (%2%, %3%, %4%, %5%)"
 
 #. * TRANSLATORS: Entry in the window size dropdown
 #: ../../../../src/ui_fsmenu/options.cc:603
@@ -8846,7 +8846,7 @@ msgstr "Waren behollen"
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the dismantling time"
-msgstr "Elkeen Waar, wat noch im Huus is, word vun de Baukeerl rutsmieten. Dat Plattrieten düürt dann langer."
+msgstr "Elkeen Waar, wat noch im Huus is, word vun de Baukeerl rutsmieten; dat Plattrieten düürt dann langer"
 
 #: ../../../../src/wui/actionconfirm.cc:316
 msgid "Enhance building?"
@@ -8867,7 +8867,7 @@ msgstr "Pass up, wenn de Feind in de Naberskupp is!"
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the enhancing time"
-msgstr "Elkeen Waar, wat noch im Huus is, word vun de Baukeerl rutsmieten. Dat Utbauen düürt dann langer."
+msgstr "Elkeen Waar, wat noch im Huus is, word vun de Baukeerl rutsmieten; dat Utbauen düürt dann langer"
 
 #: ../../../../src/wui/actionconfirm.cc:380
 msgid "Sink the ship?"
@@ -9066,7 +9066,7 @@ msgstr "Anner Huus wiesen"
 msgid ""
 "Buildings will be considered unproductive if their productivity falls below "
 "this percentage"
-msgstr "Husen worden as lege Wöörde tellt, wenn hör Wöörde sünner deese Tahl fällt."
+msgstr "Husen worden as lege Wöörde tellt, wenn hör Wöörde unner deese Tahl fällt"
 
 #: ../../../../src/wui/building_statistics_menu.cc:366
 msgid "Small buildings"
@@ -9189,7 +9189,7 @@ msgstr "Söök ofbreken"
 #: ../../../../src/wui/constructionsitewindow.cc:164
 #: ../../../../src/wui/dismantlesitewindow.cc:79
 msgid "Send the builder away"
-msgstr ""
+msgstr "De Baukeerl wegstüren"
 
 #: ../../../../src/wui/constructionsitewindow.cc:170
 #: ../../../../src/wui/dismantlesitewindow.cc:85
@@ -9733,7 +9733,7 @@ msgstr "Torüggtrecken"
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../../../src/wui/game_exit_confirm_box.cc:27
 msgid "Exit Game Confirmation"
-msgstr "Speel würrelk verlaten?"
+msgstr "Speel verlaten utwiesen"
 
 #: ../../../../src/wui/game_exit_confirm_box.cc:28
 msgid "Are you sure you wish to exit this game?"

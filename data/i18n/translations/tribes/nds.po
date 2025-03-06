@@ -5598,7 +5598,7 @@ msgstr "Nares Dörp"
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can’t successfully start from this."
-msgstr "Begünn dat Speel mit nix as eenem Kraamhuus un so minn Waren as würrelk nödig, um eene Weertskupp uptobauen. Wahrschau: Künstelk Spelers könen daar nich mit spölen"
+msgstr "Begünn dat Speel mit nix as eenem Kraamhuus un so minn Waren as würrelk nödig, um eene Weertskupp uptobauen. Wahrschau: Künstelk Spelers könen daar nich mit spölen."
 
 #: ../../../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:46
 #: ../../../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
@@ -5633,7 +5633,7 @@ msgid ""
 "Start the game with just your headquarters and very few wares for "
 "bootstrapping an economy. Warning: the AI can’t successfully start from "
 "this."
-msgstr "Begünn dat Speel mit dienem Raadhuus un blot een paar Waren, um eene Weertskupp uptobauen. Wahrschau: Künstelk Spelers könen daar nich mit spölen"
+msgstr "Begünn dat Speel mit dienem Raadhuus un blot een paar Waren, um eene Weertskupp uptobauen. Wahrschau: Künstelk Spelers könen daar nich mit spölen."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../../../data/tribes/initialization/amazons/starting_conditions/trading_outpost.lua:11
@@ -5719,7 +5719,7 @@ msgstr "Fresen"
 
 #: ../../../../data/tribes/initialization/frisians/init.lua:13
 msgid "The inhabitants of the rough North Sea shore."
-msgstr "De Lüü vun de wööste Noordseeküst!"
+msgstr "De Lüü vun de wööste Noordseeküst."
 
 #: ../../../../data/tribes/scripting/help/init.lua:85
 msgid "Tribal Encyclopedia"

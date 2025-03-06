@@ -828,7 +828,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:319
 msgid "Frisian fighting"
-msgstr "Boj po frísku "
+msgstr "Boj po frísku"
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:321
