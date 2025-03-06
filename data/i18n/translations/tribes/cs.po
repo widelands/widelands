@@ -232,7 +232,7 @@ msgstr "Nepřítel napadl tvoji strážnici na stromě."
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:47
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the treetop sentry."
-msgstr "Nepřítel dobyl tvoji strážnici na stromě"
+msgstr "Nepřítel dobyl tvoji strážnici na stromě."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:49

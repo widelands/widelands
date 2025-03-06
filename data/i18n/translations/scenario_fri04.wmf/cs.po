@@ -55,7 +55,7 @@ msgstr "Poraž cizince"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:42
 msgid "Defeat the hostile tribe."
-msgstr "Poraž nepřátelský kmen"
+msgstr "Poraž nepřátelský kmen."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:47
 msgid "Defeat the Empire"
@@ -424,8 +424,8 @@ msgstr ""
 "Mám takový pocit, že už jsme se s těmito nezvanými hosty také potkali. Je "
 "nemyslitelné, abychom tu posedávali a popíjeli džbánky medoviny, když vy tu "
 "bojujete o své životy. Jako správní přátelé a na památku dobrým mužům, o "
-"které jste přišli, budeme proti těmto nezvaným útočníkům bojovat s vámi,  "
-"bok po boku!"
+"které jste přišli, budeme proti těmto nezvaným útočníkům bojovat s vámi, bok"
+" po boku!"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9b
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:189
@@ -438,7 +438,7 @@ msgstr ""
 "Je nemyslitelné, abychom tu posedávali a popíjeli džbánky medoviny, když vy "
 "tu bojujete o své životy. Jako správní přátelé a na památku dobrým mužům, o "
 "které jste přišli, vydáme se těmto nezvaným útočníkům naproti a budeme proti"
-" nim bojovat s vámi,  bok po boku!"
+" nim bojovat s vámi, bok po boku!"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud 9c
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:196
@@ -571,7 +571,7 @@ msgstr ""
 "Poblíž naší severozápadní hranice jsme dnes narazili na zraněného vojáka. "
 "Popadaje dech vykládal, jak byl jeho kmen napaden a přemožen krutými "
 "cizinci. Se svým posledním dechem nám sdělil, že vůdce jeho kmene se "
-"jmenoval Rýbaud. "
+"jmenoval Rýbaud."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:243

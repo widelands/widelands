@@ -3560,9 +3560,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 
 			if (pda.action == Widelands::DiplomacyAction::kInvite && accept) {
 				const bool other_alone = player_statistics.get_is_alone(pda.sender);
-				const int32_t ots = other_alone ?
-				                       diploscore - static_cast<uint32_t>(RNG::static_rand(10)) :
-				                       player_statistics.get_team_average_score(other_tn);
+				const int32_t ots = other_alone ? diploscore - RNG::static_rand(10) :
+				                                  player_statistics.get_team_average_score(other_tn);
 				if (!other_alone && g_verbose) {
 					other_team_score_str = format(" and team score %d", ots);
 				}
@@ -5692,21 +5691,18 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[37] = -1;
 			inputs[38] = -1;
 			inputs[39] = -1;
-			if (productionsites.size() / 3 > static_cast<uint32_t>(bo.total_count()) &&
-			    get_stocklevel(bo, gametime) < 20) {
+			if (productionsites.size() / 3 > bo.total_count() && get_stocklevel(bo, gametime) < 20) {
 				inputs[40] = static_cast<int>(persistent_data->trees_around_cutters < 40) * 1;
 				inputs[41] = static_cast<int>(persistent_data->trees_around_cutters < 60) * 1;
 				inputs[42] = static_cast<int>(persistent_data->trees_around_cutters < 80) * 1;
 			}
-			if (productionsites.size() / 4 > static_cast<uint32_t>(bo.total_count()) &&
-			    get_stocklevel(bo, gametime) < 20) {
+			if (productionsites.size() / 4 > bo.total_count() && get_stocklevel(bo, gametime) < 20) {
 				inputs[43] = static_cast<int>(persistent_data->trees_around_cutters < 40) * 2;
 				inputs[44] = static_cast<int>(persistent_data->trees_around_cutters < 60) * 2;
 				inputs[45] = static_cast<int>(persistent_data->trees_around_cutters < 80) * 2;
 			}
 
-			if (productionsites.size() / 2 > static_cast<uint32_t>(bo.total_count()) &&
-			    get_stocklevel(bo, gametime) < 10) {
+			if (productionsites.size() / 2 > bo.total_count() && get_stocklevel(bo, gametime) < 10) {
 				inputs[46] = static_cast<int>(persistent_data->trees_around_cutters < 20) * 1;
 				inputs[47] = static_cast<int>(persistent_data->trees_around_cutters < 40) * 1;
 				inputs[48] = static_cast<int>(persistent_data->trees_around_cutters < 60) * 1;
@@ -8102,7 +8098,7 @@ void DefaultAI::pre_calculating_needness_of_buildings(const Time& gametime) {
 		// we check if a previously not buildable Building of the basic economy is buildable again
 		// If so and we don't have basic economy achieved we add it to basic buildings list
 		// This should only happen in scenarios via scripting
-		if (!basic_economy_established && bo.basic_amount > static_cast<uint32_t>(bo.total_count()) &&
+		if (!basic_economy_established && bo.basic_amount > bo.total_count() &&
 		    bo.buildable(*player_)) {
 			persistent_data->remaining_basic_buildings.emplace(bo.id, bo.basic_amount);
 		}

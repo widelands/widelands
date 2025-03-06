@@ -218,7 +218,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:115
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:128
 msgid "Pay all tributes to Kalitath"
-msgstr "Splať Kalitathovi všechny příspěvky "
+msgstr "Splať Kalitathovi všechny příspěvky"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:117
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:130
@@ -582,7 +582,7 @@ msgid ""
 "most perilous case, for as you know, spidercloth is needed for many "
 "buildings."
 msgstr ""
-"Nechť Vás Satul hřeje, %s.  Jako vrchní tkadlec cechu musím Vám sdělit "
+"Nechť Vás Satul hřeje, %s. Jako vrchní tkadlec cechu musím Vám sdělit "
 "špatnou zprávu. Právě jsem zjistil, že nám dochází pavoučí látka. To je "
 "velmi závažná skutečnost. Jak jistě víte, pavoučí látku potřebujeme na "
 "stavbu mnoha budov."
@@ -719,7 +719,7 @@ msgid ""
 "definitely need to send out a scout to gather some information."
 msgstr ""
 "Souhlasím Sidole, to je velmi znepokojivé. Musíme získat více informací. "
-"Abychom se něco dozvěděli, není jiné cesty než vyslat průzkumníka, "
+"Abychom se něco dozvěděli, není jiné cesty než vyslat průzkumníka."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:366
 msgid "Allies?"
@@ -1009,8 +1009,8 @@ msgstr ""
 "stavbou chrámu, abychom mohli vzdát úctu našemu Bohu. Než budeme připraveni "
 "požádat o Satulovu moc, neměli bychom spouštět pohled z naší princezny a "
 "toho barbara. Protože bychom měli pozastavit naše dodávky, abychom už "
-"neplýtvali zdroji na ty barbary, chci, abys  zajistil průzkumníka, který "
-"bude sbírat informace."
+"neplýtvali zdroji na ty barbary, chci, abys zajistil průzkumníka, který bude"
+" sbírat informace."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:536
 msgid "Temple Completed"

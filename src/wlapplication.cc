@@ -2163,7 +2163,7 @@ bool WLApplication::redirect_output(std::string path) {
 	setvbuf(stdout, nullptr, _IOLBF, BUFSIZ);
 
 	/* No buffering */
-	setbuf(stderr, nullptr);
+	setbuf(stderr, nullptr);  // NOLINT(bugprone-unsafe-functions)
 
 	redirected_stdio_ = true;
 	return true;
