@@ -33,7 +33,7 @@ msgstr "Pomalu, ale jistě k vytčenému cíli"
 msgid ""
 "I am sorry, but I will have to tear this down. We might need the space here "
 "later on."
-msgstr "Omlouvám se, ale budu muset stavbu strhnout. Později můžeme toto místo potřebovat. "
+msgstr "Omlouvám se, ale budu muset stavbu strhnout. Později můžeme toto místo potřebovat."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:20
 msgid ""
@@ -147,7 +147,7 @@ msgid ""
 "game are the basic construction wares: logs and granite. Let’s make sure "
 "that we do not run out of logs. For this, we need a lumberjack and a hut for"
 " him to stay in."
-msgstr "Obvykle začínáš hru s jednou hlavní budovou. To je ta velká budova s modrou vlajkou vpředu. Hlavní budova uchovává  suroviny, dělníky a vojáky. Některé suroviny jsou potřeba pro stavbu budov, jiné pro výrobu dalších surovin. Samozřejmě, že suroviny v tvé hlavní budově ti nevystačí napořád, takže je musíš doplňovat. Nejdůležitějšími surovinami v počáteční fázi hry jsou základní stavební suroviny: klády a žula. Dávej si tedy pozor, aby ti nedošly klády. Právě proto potřebujeme dřevorubce a chatu, ve které bydlí."
+msgstr "Obvykle začínáš hru s jednou hlavní budovou. To je ta velká budova s modrou vlajkou vpředu. Hlavní budova uchovává suroviny, dělníky a vojáky. Některé suroviny jsou potřeba pro stavbu budov, jiné pro výrobu dalších surovin. Samozřejmě, že suroviny v tvé hlavní budově ti nevystačí napořád, takže je musíš doplňovat. Nejdůležitějšími surovinami v počáteční fázi hry jsou základní stavební suroviny: klády a žula. Dávej si tedy pozor, aby ti nedošly klády. Právě proto potřebujeme dřevorubce a chatu, ve které bydlí."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:85
 msgid ""

@@ -1248,7 +1248,7 @@ msgid ""
 "This building can produce one meat or one fish between %1$s and %2$s, "
 "depending on how far the hunter-gatherer has to walk. If both kinds of food "
 "are available, then one of each kind is produced between %3$s and %4$s."
-msgstr "Tato budova může vyprodukovat jedno maso, nebo rybu za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí lovkyně-sběračka urazit. Pokud jsou dostupné oba zdroje, pak je jeden kus od každé suroviny vyprodukován  za %3$s až %4$s."
+msgstr "Tato budova může vyprodukovat jedno maso, nebo rybu za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí lovkyně-sběračka urazit. Pokud jsou dostupné oba zdroje, pak je jeden kus od každé suroviny vyprodukován za %3$s až %4$s."
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Liana
 #. Cutter's Hut
@@ -4711,7 +4711,7 @@ msgstr "Připouštím, že tímto bychom se my Atlanťané určitě neuživili, 
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1723
 msgctxt "atlanteans_building"
 msgid "A black voice from inside the charcoal kiln"
-msgstr "tajemný hlas  vycházející z milíře na dřevěné uhlí"
+msgstr "tajemný hlas vycházející z milíře na dřevěné uhlí"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Charcoal Kiln
@@ -5006,7 +5006,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Here are the Wide Lands where people may dwell, walking around caring "
 "everything’s well."
-msgstr "Zde je naše naše Širá země, kde lidé mohou přebývat, kol dokola chodívat, by mohla dobře prospívat."
+msgstr "Zde je naše Širá země, kde lidé mohou přebývat, kol dokola chodívat, by mohla dobře prospívat."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Weaving
 #. Mill
@@ -5324,7 +5324,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "All the other tribes envy us for our towers, elegant outside, comfortable "
 "inside, still perfect for defense."
-msgstr "Všechny kmeny nám závidí naše věže, elegantní vzhled ani pohodlný interiér neubírají nic na jejich vynikajících obranných vlastnostech. "
+msgstr "Všechny kmeny nám závidí naše věže, elegantní vzhled ani pohodlný interiér neubírají nic na jejich vynikajících obranných vlastnostech."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Tower
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2014
@@ -10924,7 +10924,7 @@ msgctxt "empire_building"
 msgid ""
 "The stonemason finds 5 blocks of granite and 2 blocks of marble out of 7 "
 "rocks."
-msgstr "Kameník vytěží ze skal na 5 kvádrů žuly 2 kvádry mramoru. "
+msgstr "Kameník vytěží ze skal na 5 kvádrů žuly 2 kvádry mramoru."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Quarry,
 #. part 1
@@ -11105,7 +11105,7 @@ msgstr "Venator venatus insidiatur."
 #. "Venator venatus insidiatur."
 #: ../../../../data/tribes/initialization/empire/units.lua:1359
 msgid "The hunter lies in ambush for the game."
-msgstr "Lovec číhá na zvěř. "
+msgstr "Lovec číhá na zvěř."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Hunter's
 #. House
@@ -13679,7 +13679,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Water is used to bake bread and brew beer. Reindeer farms and aqua farms "
 "also consume it."
-msgstr "Voda se používá při pečení chleba a vaření piva. Také se spotřebovává na sobích farmách a rybích sádkách. "
+msgstr "Voda se používá při pečení chleba a vaření piva. Také se spotřebovává na sobích farmách a rybích sádkách."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Barley
 #: ../../../../data/tribes/initialization/frisians/units.lua:190
@@ -16872,7 +16872,7 @@ msgstr "Útok"
 #. TRANSLATORS: Points are 4 digit numbers.
 #: ../../../../data/tribes/scripting/help/worker_help.lua:202
 msgid "A random value between %1% and %2% points is added to each attack."
-msgstr "Náhodná hodnota v rozmezí %1% a %2% bodů je přidána k útoku."
+msgstr "Každý vedený útok má přiřazenou náhodnou hodnotu v rozmezí %1% a %2% bodů."
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:209
 msgid "Defense"
