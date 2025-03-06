@@ -62,12 +62,11 @@ template <typename Number> struct NumberNodeT : FormatNode {
 			return append_nullptr_node(out, localize);
 		default:
 			throw wexception("Wrong argument type: expected %s, found %s",
-			                 (std::is_signed<Number>::value ? "int" : "unsigned"),
-			                 to_string(t).c_str());
+			                 (std::is_signed_v<Number> ? "int" : "unsigned"), to_string(t).c_str());
 		}
 
 		bool is_negative = false;
-		if (std::is_signed<Number>::value && (arg < 0)) {
+		if (std::is_signed_v<Number> && (arg < 0)) {
 			is_negative = true;
 			arg = -arg;
 		}
