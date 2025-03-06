@@ -486,7 +486,7 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players."
-msgstr "Jednu z posledních tří možností může nastavit pouze hostitel, kliknutím na tlačítko \"Typ\" u každého z hráčů. Hostitel může také nastavovat startovní podmínky u všech hráčů (budovy, zboží a pracovníky, které hráči na začátku hry dostanou) a u počítačových hráčů navíc i kmen a tým ."
+msgstr "Poslední tři může nastavit pouze hostitel, kliknutím na tlačítko \"Typ\" u každého z hráčů. Hostitel může také nastavovat startovní podmínky u všech hráčů (budovy, zboží a pracovníky, které hráči na začátku hry dostanou) a u počítačových hráčů navíc i kmen a tým."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:23
 msgid ""
@@ -569,7 +569,7 @@ msgstr "Lana jsou důležitá pro zpevnění staveb, šití pevného oblečení 
 msgid ""
 "Jungle masters learn their skills by working as jungle preservers before "
 "working in gardening centres or rare tree plantations."
-msgstr "Aby paní džungle získala dovednosti pro práci v zahradnictví nebo na plantáži vzácných dřevin, musí nejprve pracovat jako ochránkyně džungle. "
+msgstr "Aby paní džungle získala dovednosti pro práci v zahradnictví nebo na plantáži vzácných dřevin, musí nejprve pracovat jako ochránkyně džungle."
 
 #: ../../../../data/txts/tips/atlanteans.lua:4
 msgid ""

@@ -4,7 +4,7 @@ on:
 
 jobs:
   clang_tidy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     env:
       CC:  /usr/bin/clang
       CXX: /usr/bin/clang++

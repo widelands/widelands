@@ -167,13 +167,11 @@ void Section::Value::set_string(char const* const value) {
 	copy(value, value + len, value_.get());
 }
 
-void swap(Section::Value& first, Section::Value& second) {
-	using std::swap;
-
-	swap(first.name_, second.name_);
-	swap(first.value_, second.value_);
-	swap(first.used_, second.used_);
-	swap(first.translate_, second.translate_);
+void swap(Section::Value& first, Section::Value& second) noexcept {
+	std::swap(first.name_, second.name_);
+	std::swap(first.value_, second.value_);
+	std::swap(first.used_, second.used_);
+	std::swap(first.translate_, second.translate_);
 }
 
 /*
