@@ -865,7 +865,8 @@ function building_help(tribe, building_description)
             -- TODO(GunChleoc) Get them a crew string for the builder
       return building_help_general_string(tribe, building_description)
    elseif (building_description.type_name == "market") then
-      return building_help_general_string(tribe, building_description)
+      return building_help_general_string(tribe, building_description) ..
+         building_help_building_section(building_description)
    else
       return ""
    end
