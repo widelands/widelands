@@ -540,7 +540,7 @@ msgstr "Nemoveblaĵoj"
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:334
 msgid "Add or remove immovables"
-msgstr "Aldoni aŭ forigi nemoveblaĵojn."
+msgstr "Aldoni aŭ forigi nemoveblaĵojn"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:341
@@ -588,7 +588,7 @@ msgstr "Ludantoj"
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:373
 msgid "Set number of players and their names, tribes and starting positions"
-msgstr "Agordu la nombron de ludantoj kaj iliajn nomojn, tribojn kaj komencajn poziciojn."
+msgstr "Agordi la nombron de ludantoj kaj iliajn nomojn, tribojn kaj komencajn poziciojn."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:377
@@ -600,7 +600,7 @@ msgstr "Origino de la mapo"
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
-msgstr "Agordu la pozicion, kiu havos la koordinatojn (0, 0). Ĉi tiu estos la supra-maldekstra angulo de la generita mapeto."
+msgstr "Agordi la pozicion, kiu havos la koordinatojn (0, 0). Ĉi tiu estos la supra-maldekstra angulo de la generita mapeto."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:388
@@ -610,17 +610,17 @@ msgstr "Mapograndeco"
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:391
 msgid "Change the map’s size"
-msgstr "Ŝanĝas la grandecon de la mapo"
+msgstr "Ŝanĝi la grandecon de la mapo"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:395
 msgid "Information"
-msgstr "Informo"
+msgstr "Informacio"
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:398
 msgid "Click on a field to show information about it"
-msgstr "Alklaku kampon por montri informon pri ĝi."
+msgstr "Alklaku kampon por montri informon pri ĝi"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:402
@@ -632,7 +632,7 @@ msgstr "Ilohistorio"
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:405
 msgid "Restore previous tool settings"
-msgstr "Restarigas la antaŭajn iloagordojn"
+msgstr "Restarigi la antaŭajn iloagordojn"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -667,7 +667,7 @@ msgstr "Montri maksimumajn konstruejojn"
 msgid ""
 "Toggle whether to show maximum building spaces that will be available if all"
 " immovables (trees, rocks, etc.) are removed"
-msgstr "Alternas inter montri aŭ ne ĉiujn konstruejojn, kiuj estas disponeblaj, se ĉiuj nemoveblaĵoj (arboj, rokoj, ktp.) estas forigitaj."
+msgstr "Alterni inter montri aŭ ne ĉiujn konstruejojn, kiuj estas disponeblaj, se ĉiuj nemoveblaĵoj (arboj, rokoj, ktp.) estas forigitaj."
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map height heat map is shown
@@ -703,7 +703,7 @@ msgstr "Montri oceanojn"
 msgid ""
 "Display separate water bodies with differently coloured overlays to see "
 "which coasts can be connected by shipping routes"
-msgstr "Montras apartajn akvokorpojn kun malsamkoloraj tavoloj por vidi, kiuj marbordoj povas esti konektitaj per maraj itineroj."
+msgstr "Montri apartajn akvokorpojn kun malsamkoloraj tavoloj por vidi, kiuj marbordoj povas esti konektitaj per maraj itineroj."
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
@@ -3667,7 +3667,7 @@ msgstr[1] "La servila tempa diferenco estas %d sekundoj."
 #: ../../../../src/network/internet_gaming.cc:509
 #, c-format
 msgid "Invalid chat message type \"%s\"."
-msgstr "Nevalida babila mesaĝtipo \"%s\"."
+msgstr "Nevalida babileja mesaĝtipo \"%s\"."
 
 #: ../../../../src/network/internet_gaming.cc:509
 msgid "Invalid message type"
@@ -3686,20 +3686,20 @@ msgstr "La ludo %s estis fermita"
 #: ../../../../src/network/internet_gaming.cc:598
 #, c-format
 msgid "%s joined the lobby"
-msgstr ""
+msgstr "%s aliĝis al la vestiblo"
 
 #: ../../../../src/network/internet_gaming.cc:609
 #, c-format
 msgid "%s left the lobby"
-msgstr ""
+msgstr "%s forlasis la vestiblon"
 
 #: ../../../../src/network/internet_gaming.cc:666
 msgid "Chat message could not be sent."
-msgstr ""
+msgstr "Babileja mesaĝo ne povis esti sendita."
 
 #: ../../../../src/network/internet_gaming.cc:674
 msgid "Command could not be executed."
-msgstr ""
+msgstr "Komando ne povis esti plenumita."
 
 #: ../../../../src/network/internet_gaming.cc:692
 #, c-format
@@ -3708,12 +3708,12 @@ msgstr "ERARO: %s"
 
 #: ../../../../src/network/internet_gaming.cc:695
 msgid "An unexpected error message has been received about command %1%: %2%"
-msgstr ""
+msgstr "Neatendita erarmesaĝo estis ricevita pri la komando %1%: %2%"
 
 #: ../../../../src/network/internet_gaming.cc:706
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
-msgstr ""
+msgstr "Oni ricevis nekonatan komandon de la metaservilo: %s"
 
 #: ../../../../src/network/internet_gaming.cc:859
 msgid "Message could not be sent: You are not connected to the metaserver!"

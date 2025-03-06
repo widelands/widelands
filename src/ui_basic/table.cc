@@ -288,7 +288,7 @@ void BaseTable::draw(RenderTarget& dst) {
 	dst.brighten_rect(Recti(0, 0, get_eff_w(), get_h()), ms_darken_value);
 
 	while (idx < entry_records_.size()) {
-		if (y >= static_cast<int32_t>(get_h())) {
+		if (y >= get_h()) {
 			return;
 		}
 

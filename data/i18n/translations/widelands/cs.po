@@ -909,7 +909,7 @@ msgstr "Náhodný hráč"
 #: ../../../../src/editor/tools/increase_height_tool.cc:62
 #, c-format
 msgid "Height: inc./dec. %1$d, set to %2$d"
-msgstr "Výška: změnit o %1$d, nastavit na  %2$d"
+msgstr "Výška: změnit o %1$d, nastavit na %2$d"
 
 #. * TRANSLATORS: An entry in the tool history list. Inc. and dec. stand for
 #. increase and
@@ -3479,7 +3479,7 @@ msgstr "%1$s\n• ‘%2$s’ požadováno hostitelem a nebylo nalezeno"
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
-msgstr "%1$s\n• ‘%2$s’ instalováno ve verzi %3$s, ale hostitel používá  %4$s"
+msgstr "%1$s\n• ‘%2$s’ instalováno ve verzi %3$s, ale hostitel používá %4$s"
 
 #: ../../../../src/network/gameclient.cc:989
 msgid "/me ’s file failed md5 checksumming."
@@ -3605,7 +3605,7 @@ msgstr "Nezdařilo se vytvořit server!"
 msgid ""
 "Widelands could not start hosting a server.\n"
 "This should not happen and there is most likely nothing you can do about it. Please report a bug."
-msgstr "Widelands se nepodařilo spustit server.\nToto by se nemělo stávat. Pravděpodobně není v tuto chvíli nic, co  by se s tím dalo dělat. Chybu prosím nahlas."
+msgstr "Widelands se nepodařilo spustit server.\nToto by se nemělo stávat. Pravděpodobně není v tuto chvíli nic, co by se s tím dalo dělat. Chybu prosím nahlaste."
 
 #: ../../../../src/network/gamehost.cc:363
 msgid "Failed to start the server!"
@@ -3722,12 +3722,12 @@ msgstr "Hra %s byla uzavřena"
 #: ../../../../src/network/internet_gaming.cc:598
 #, c-format
 msgid "%s joined the lobby"
-msgstr "%s se připojil k lobby"
+msgstr "%s se připojuje k lobby"
 
 #: ../../../../src/network/internet_gaming.cc:609
 #, c-format
 msgid "%s left the lobby"
-msgstr "%s opustil lobby"
+msgstr "%s opouští lobby"
 
 #: ../../../../src/network/internet_gaming.cc:666
 msgid "Chat message could not be sent."
@@ -3993,7 +3993,7 @@ msgstr "VAROVÁNÍ: %1$s používá verzi: %2$s, zatímco Hostitel používá ve
 #: ../../../../src/network/network_gaming_messages.cc:72
 #, c-format
 msgid "%s has joined the game"
-msgstr "%s se připojil ke hře"
+msgstr "%s se připojuje ke hře"
 
 #: ../../../../src/network/network_gaming_messages.cc:73
 #, c-format
@@ -4568,7 +4568,7 @@ msgstr "Jakákoli"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:141
 msgid "Quality not yet evaluated"
-msgstr "Kvalita zatím nebyla vypočtena"
+msgstr "Kvalita zatím nebyla ověřena"
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../../../src/ui_fsmenu/addons/manager.cc:147
@@ -4610,7 +4610,7 @@ msgstr "Pouze ověřené"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:310
 msgid "Show only verified add-ons"
-msgstr "Zobraz pouze ověřená rozšíření"
+msgstr "Zobrazit pouze ověřená rozšíření"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:318
 #: ../../../../src/ui_fsmenu/addons/manager.cc:329
@@ -4910,25 +4910,25 @@ msgstr "Aktualizovat vše"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1175
 msgid "Not logged in"
-msgstr "Nejsi přihlášen"
+msgstr "Nejsi přihlášen(á)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1176
 msgid ""
 "Click to log in. You can then comment and vote on add-ons and upload your "
 "own add-ons."
-msgstr "Klikni pro přihlášení. Poté budeš moci komentovat, hlasovat na rozšířeních a nahrát své vlastní rozšíření."
+msgstr "Klikni pro přihlášení. Poté budeš moci komentovat a hodnotit rozšíření a nahrávat svá vlastní rozšíření."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1180
 msgid "Please log in to upload add-ons"
-msgstr "K nahrání rozšíření se, prosím, přihlaš "
+msgstr "Pro nahrávání rozšíření se prosím přihlas"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1182
 msgid "Please log in to upload content"
-msgstr "K nahrání obsahu se, prosím, přihlaš"
+msgstr "Pro nahrávání obsahu se prosím přihlas"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1184
 msgid "Please log in to send an enquiry"
-msgstr "K odeslání požadavku se, prosím, přihlaš"
+msgstr "Pro odeslání dotazu se prosím přihlas"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1189
 #, c-format
@@ -5097,14 +5097,14 @@ msgstr "Rozšíření, která způsobují chyby závislostí, nemusí pracovat s
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
-msgstr "Rozšíření \"%1$s\" nemůže být nahráno, protože verze (%2$s) je starší než verze dostupná na serveru (%3$s)"
+msgstr "Rozšíření \"%1$s\" nemůže být nahráno, protože jeho verze (%2$s) je starší než verze dostupná na serveru (%3$s)."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1922
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
-msgstr "Rozšíření \"%1$s\" nemůže být nahráno, protože kategorie této verze (%2$s) není stejná jako kategorie verze dostupné na serveru (%3$s)"
+msgstr "Rozšíření \"%1$s\" nemůže být nahráno, protože jeho kategorie (%2$s) se neschoduje s kategorií jeho aktuální verze dostupné na serveru (%3$s)."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1933
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:54
@@ -5790,7 +5790,7 @@ msgstr "Bez hodnocení"
 msgid ""
 "The vote could not be submitted.\n"
 "Error code: %s"
-msgstr "Hlas nemohl být odeslán.\nKód chyby: %s"
+msgstr "Hodnocení nemohlo být odesláno.\nKód chyby: %s"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:788
 #, c-format
@@ -5861,7 +5861,7 @@ msgstr "%1$s (upraveno %2$s)"
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:909
 #, c-format
 msgid "%1$s (edited by ‘%2$s’ on %3$s)"
-msgstr "%1$s (upravil '%2$s', čas %3$s)"
+msgstr "%1$s (upravil(a) '%2$s', čas %3$s)"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:915
 #, c-format
@@ -5879,11 +5879,11 @@ msgstr "Tento snímek se nepodařilo ze serveru načíst. Došlo k chybě."
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:995
 msgid "Please log in to comment"
-msgstr "K přidání komentáře se, prosím, přihlaš"
+msgstr "Pro přidání komentáře se prosím přihlas"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:997
 msgid "Please log in to vote"
-msgstr "K hlasování se, prosím, přihlaš"
+msgstr "Pro hlasování se prosím přihlas"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:46
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:206
@@ -6517,7 +6517,7 @@ msgstr "Viditelnost mapy určena nastavením uložené hry"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:378
 msgid "Give all players permanent vision of the entire map"
-msgstr "Trvale umožnit viditelnost celé mapy "
+msgstr "Trvale umožnit viditelnost celé mapy"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:400
 msgid "Naval warfare is set by the scenario"
@@ -6686,7 +6686,7 @@ msgstr "Přezdívka:"
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:138
 #: ../../../../src/wlapplication.cc:828
 msgid "nobody"
-msgstr "bezejména"
+msgstr "bezejmena"
 
 #: ../../../../src/ui_fsmenu/login_box.cc:218
 msgid "Please enter a nickname!"
@@ -6926,7 +6926,7 @@ msgstr "Detekováno rozšíření způsobující desynchronizaci"
 
 #: ../../../../src/ui_fsmenu/main.cc:958
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
-msgstr "Je povoleno rozšíření způsobující desynchronizaci. Pokračuj na vlastní riziko."
+msgstr "Je povoleno rozšíření způsobující desynchronizaci. Je nutné přijmout možná rizika."
 
 #: ../../../../src/ui_fsmenu/main.cc:1067
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:352
@@ -7119,7 +7119,7 @@ msgstr "Konflikt v nastavení posunu"
 msgid ""
 "‘%1$s%2$s’ conflicts with ‘%3$s’. Please select a different combination or "
 "change the conflicting setting first."
-msgstr "'%1$s%2$s' má konflikt s '%3$s'. Prosím vyber jinou kombinaci nebo změň nejprve konfliktní nastavení."
+msgstr "'%1$s%2$s' je v konfliktu s '%3$s'. Prosím vyber jinou kombinaci, nebo nejprve změň současné použití."
 
 #: ../../../../src/ui_fsmenu/mousewheel_options.cc:371
 msgid "Reset Scrolling"
@@ -9444,7 +9444,7 @@ msgstr "Chybný odkaz"
 #: ../../../../src/wui/encyclopedia_window.cc:236
 #: ../../../../src/wui/helpwindow.cc:148
 msgid "This hyperlink seems to be broken."
-msgstr "Tento hypertextový odkaz není funkční"
+msgstr "Tento hypertextový odkaz není funkční."
 
 #: ../../../../src/wui/fieldaction.cc:236
 msgid "Build medium building"
@@ -9523,7 +9523,7 @@ msgstr "Zničit cestu"
 
 #: ../../../../src/wui/fieldaction.cc:502
 msgid "Destroy a waterway"
-msgstr "Zničit vodní cestu"
+msgstr "Zrušit vodní cestu"
 
 #: ../../../../src/wui/fieldaction.cc:522
 msgid "Configure this ocean’s ship fleet"
@@ -9881,7 +9881,7 @@ msgstr "Zobrazit pouze zprávy o nově nalezených zdrojích surovin"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:553
 msgid "Show economy messages only"
-msgstr "Zobrazit pouze zprávy o hospodářství"
+msgstr "Zobrazit pouze zprávy hospodářství"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:558
@@ -10519,7 +10519,7 @@ msgstr "Neoficiální"
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../../../src/wui/map_tags.cc:37
 msgid "Custom or add-on map"
-msgstr "Mapy dostupné z rozšíření nebo upravené "
+msgstr "Mapy dostupné z rozšíření nebo upravené"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../../../src/wui/map_tags.cc:40
