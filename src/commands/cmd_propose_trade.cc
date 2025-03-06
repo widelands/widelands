@@ -83,7 +83,7 @@ CmdProposeTrade::CmdProposeTrade(StreamRead& des) : PlayerCommand(Time(0), des.u
 	trade_.receiving_player = des.unsigned_8();
 	trade_.items_to_send = deserialize_bill_of_materials(&des);
 	trade_.items_to_receive = deserialize_bill_of_materials(&des);
-	trade_.num_batches = des.unsigned_32();
+	trade_.num_batches = des.signed_32();
 }
 
 void CmdProposeTrade::serialize(StreamWrite& ser) {
@@ -94,7 +94,7 @@ void CmdProposeTrade::serialize(StreamWrite& ser) {
 	ser.unsigned_8(trade_.receiving_player);
 	serialize_bill_of_materials(trade_.items_to_send, &ser);
 	serialize_bill_of_materials(trade_.items_to_receive, &ser);
-	ser.unsigned_32(trade_.num_batches);
+	ser.signed_32(trade_.num_batches);
 }
 
 constexpr uint8_t kCurrentPacketVersionCmdProposeTrade = 1;
@@ -115,7 +115,7 @@ void CmdProposeTrade::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader
 			trade_.receiving_player = fr.unsigned_8();
 			trade_.items_to_send = deserialize_bill_of_materials(&fr);
 			trade_.items_to_receive = deserialize_bill_of_materials(&fr);
-			trade_.num_batches = fr.unsigned_32();
+			trade_.num_batches = fr.signed_32();
 		} else {
 			throw UnhandledVersionError(
 			   "CmdProposeTrade", packet_version, kCurrentPacketVersionCmdProposeTrade);
@@ -134,7 +134,7 @@ void CmdProposeTrade::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSave
 	fw.unsigned_8(trade_.receiving_player);
 	serialize_bill_of_materials(trade_.items_to_send, &fw);
 	serialize_bill_of_materials(trade_.items_to_receive, &fw);
-	fw.unsigned_32(trade_.num_batches);
+	fw.signed_32(trade_.num_batches);
 }
 
 }  // namespace Widelands
