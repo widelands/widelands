@@ -52,6 +52,16 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- the longest possible transition from tiny to ripe field:
+            --   2 * (22 + 28 + 40) = 180 sec
+            --   see data/tribes/immovables/reedfield/ and src/logic/map_objects/immovable_program.cc - ImmovableProgram::ActAnimate::execute()
+            -- how many fields are needed for 100% productivity in worst case (nearest fields, longest field transition):
+            --   1 + (180 - (2.333 * 1.8 + 18)) / 54.8 = 3.880
+            -- calculation of productivity with 3 fields:
+            --   irwinhall(6, scale=1/6).cdf(3/3.880) = 0.991
+            --   using SciPy 1.14+
+            -- min. time total (free 3 nearest fields):  29.4 + 25.4 = 54.8 sec
+            -- max. time total (free 3 furthest fields): 33   + 29   = 62   sec
             "call=plant_reed",
             "call=harvest_reed",
          }
@@ -60,6 +70,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
          descname = _("planting reed"),
          actions = {
+            -- time of worker: 11.4-15 sec
+            -- min. time: 11.4 + 18 = 29.4 sec
+            -- max. time: 15   + 18 = 33   sec
             "callworker=plantreed",
             "sleep=duration:18s"
          }
@@ -68,6 +81,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
          descname = _("harvesting reed"),
          actions = {
+            -- time of worker: 20.4-24 sec
+            -- min. time: 20.4 + 5 = 25.4 sec
+            -- max. time: 24   + 5 = 29   sec
             "callworker=harvestreed",
             "sleep=duration:5s"
          }
