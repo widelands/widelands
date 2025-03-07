@@ -2,14 +2,14 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2024
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2024\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -326,7 +326,7 @@ msgstr "Eenen annern Metaserver för dat Spölen över ’t Internett bruken."
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:198
 msgid "Port number `n` of the metaserver for internet gaming."
-msgstr "Port-Tahl `n` för de Metaserver för dat Spölen över ’t Internett"
+msgstr "Port-Tahl `n` för de Metaserver för dat Spölen över ’t Internett."
 
 #: ../../../../src/wlapplication_messages.cc:199
 msgid "The name of the last hosted game."

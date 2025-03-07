@@ -349,7 +349,7 @@ msgid ""
 "I really don’t know if and how we will get back home. And the war is going "
 "on without us. I hope my fellow soldiers are defending our empire well."
 msgstr ""
-"Ick weet würrelk nich, of un wo wo torügg na Huus komen sallen. Un de Krieg "
+"Ick weet würrelk nich, of un wo wi torügg na Huus komen sallen. Un de Krieg "
 "gaht sünner uns wieder. Ick hoop, miene Soldaten-Fründe verteidigen uns’ "
 "Riek good."
 
