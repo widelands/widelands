@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # Facundo Gomez <facundogomez15@gmail.com>, 2019
@@ -8,6 +8,7 @@
 # Thadah D. Denyse <gontzalpujana@protonmail.com>, 2018
 # Jhonatan Hurtado, 2024
 # Juan Miguel Bernal González, 2024
+# CansecoGPC, 2024
 # Madkat Here, 2015,2020
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022
 # X Bello <xbello@gmail.com>, 2020
@@ -15,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-10-21 03:01+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
-"Last-Translator: Jhonatan Hurtado, 2024\n"
+"Last-Translator: CansecoGPC, 2024\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,7 +45,7 @@ msgstr "FILENAME"
 #. punctuation marks
 #: ../../../../src/wlapplication_messages.cc:60
 msgid "last"
-msgstr ""
+msgstr "último"
 
 #: ../../../../src/wlapplication_messages.cc:66
 msgid "Usage:"
@@ -117,7 +118,7 @@ msgstr "Inicie el mapa `FILENAME` directamente como un escenario para un jugador
 #, c-format
 msgid ""
 "Load the savegame `%1$s` directly or the last saved game if `=%2$s` is used."
-msgstr ""
+msgstr "Cargar la partida guardada `%1$s` directamente o la ultima partida guardada si `=%2$s` se usa."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -125,7 +126,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Load the replay `%1$s` directly or the last saved replay if `=%2$s` is used."
-msgstr ""
+msgstr "Cargar la repetición `%1$s` directamente o la última repetición guardada si `=%2$s` se usa."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -135,7 +136,7 @@ msgid ""
 "Start the Widelands map editor directly. You can add `=%1$s` to directly "
 "load the map `FILENAME` in the editor or `=%2$s` to load the last edited "
 "map."
-msgstr ""
+msgstr "Arranca el editor de mapas de Widelands directamente. Puedes añadir `=%1$s` directamente cargar el mapa `FILENAME` en el editor o `=%2$s` para cargar el último mapa editado."
 
 #: ../../../../src/wlapplication_messages.cc:114
 msgid ""
@@ -165,7 +166,7 @@ msgstr "[true*|false]"
 
 #: ../../../../src/wlapplication_messages.cc:124
 msgid "Play the intro music at startup and show splash image until it ends."
-msgstr ""
+msgstr "Reproducir la música de inicio al arrancar y mostrar la imagen de bienvenida hasta que termine."
 
 #: ../../../../src/wlapplication_messages.cc:125
 msgid "Force Widelands to crash when a Lua error occurs."
@@ -233,7 +234,7 @@ msgstr "No guarde archivos como archivos zip binarios."
 
 #: ../../../../src/wlapplication_messages.cc:153
 msgid "Save files as binary zip archives."
-msgstr ""
+msgstr "Guardar ficheros como archivos zip binarios."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -418,7 +419,7 @@ msgid ""
 "Whether to let the system draw the mouse cursor. Disable it only if the "
 "cursor doesn't appear right, or if you want it to be visible in screenshots "
 "or screencasts."
-msgstr ""
+msgstr "Permite que el sistema dibuje el cursor del ratón. Desactívalo sólo si el cursor no aparece bien, o si quieres que sea visible en capturas o grabaciones de pantalla."
 
 #: ../../../../src/wlapplication_messages.cc:235
 msgid "Whether to use sticky tooltips."

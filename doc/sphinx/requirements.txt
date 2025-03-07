@@ -1,2 +1,0 @@
-sphinxcontrib-serializinghtml<1.1.6
-sphinx<7.2

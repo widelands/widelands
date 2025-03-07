@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2024 by the Widelands Development Team
+ * Copyright (C) 2020-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1303,8 +1303,9 @@ void AddOnsCtrl::world_filter_maps_changed(const std::string& which) {
 }
 
 void AddOnsCtrl::check_enable_move_buttons() {
-	const bool enable_move_buttons =
-	   tabs_.active() == 0 && installed_addons_box_.focused_child() != nullptr;
+	const bool enable_move_buttons = tabs_.active() == 0 &&
+	                                 installed_addons_box_.focused_child() != nullptr &&
+	                                 !AddOns::g_addons.empty();
 	for (UI::Button* b : {&move_top_, &move_up_, &move_down_, &move_bottom_}) {
 		b->set_enabled(enable_move_buttons);
 	}
@@ -1363,7 +1364,7 @@ void AddOnsCtrl::refresh_remotes(const bool showall) {
 			progress.step(format_l(step_message, (100.0 * counter / nr_orig_entries)));
 
 			try {
-				remotes_[i].reset(new AddOns::AddOnInfo(net().fetch_one_remote(names[i])));
+				remotes_[i] = std::make_shared<AddOns::AddOnInfo>(net().fetch_one_remote(names[i]));
 			} catch (const std::exception& e) {
 				log_err("Skip add-on %s because: %s", names[i].c_str(), e.what());
 				names[i] = names.back();

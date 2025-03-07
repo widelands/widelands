@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,7 +58,7 @@
 inline const char* gettext_noop(const char* str) {
 	return str;
 }
-inline const std::string& gettext_noop(const std::string& str) {
+inline std::string gettext_noop(std::string str) {
 	return str;
 }
 

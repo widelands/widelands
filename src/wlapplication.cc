@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -418,8 +418,9 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_gr = new Graphic();
 	g_gr->initialize(
 	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
-	   get_config_int("xres", kDefaultResolutionW), get_config_int("yres", kDefaultResolutionH),
-	   get_config_bool("fullscreen", false), get_config_bool("maximized", false));
+	   get_config_int("display", -1), get_config_int("xres", kDefaultResolutionW),
+	   get_config_int("yres", kDefaultResolutionH), get_config_bool("fullscreen", false),
+	   get_config_bool("maximized", false));
 
 	{
 		// The window manager may resize the window on creation, so we have to handle resize events
@@ -1653,17 +1654,7 @@ void WLApplication::handle_commandline_parameters() {
 			}
 
 			if (sep_pos != build_id().size() || 0 != text.compare(0, sep_pos, build_id())) {
-				return std::string("Incorrect version string part");
-			}
-
-			text = text.substr(sep_pos + (text.at(sep_pos) == '\r' ? 2 : 1));
-			sep_pos = text.find_first_of("\n\r");
-			if (sep_pos == std::string::npos) {
-				return std::string("Malformed two-liner version string");
-			}
-
-			if (sep_pos != build_type().size() || 0 != text.compare(0, sep_pos, build_type())) {
-				return std::string("Incorrect type string part");
+				return std::string("Incorrect version string");
 			}
 		} catch (const std::exception& e) {
 			return std::string(e.what());
@@ -2172,7 +2163,7 @@ bool WLApplication::redirect_output(std::string path) {
 	setvbuf(stdout, nullptr, _IOLBF, BUFSIZ);
 
 	/* No buffering */
-	setbuf(stderr, nullptr);
+	setbuf(stderr, nullptr);  // NOLINT(bugprone-unsafe-functions)
 
 	redirected_stdio_ = true;
 	return true;

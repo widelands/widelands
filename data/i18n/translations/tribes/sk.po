@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
@@ -7,14 +7,14 @@
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
 # Miroslav Remák <Unknown>, 2014
 # MiroslavR <miroslavr256@gmail.com>, 2015
-# Pavol Gono, 2024
+# Pavol Gono, 2024-2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-03 02:40+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Pavol Gono, 2024\n"
+"Last-Translator: Pavol Gono, 2024-2025\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4819,19 +4819,19 @@ msgstr "Čučoriedkový krík (maličký)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/currant_black/medium/init.lua:9
 msgid "Black Currant (medium)"
-msgstr "Čierne ríbezľe (stredné)"
+msgstr "Čierne ríbezle (stredné)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/currant_black/ripe/init.lua:9
 msgid "Black Currant (ripe)"
-msgstr "Čierne ríbezľe (zrelé)"
+msgstr "Čierne ríbezle (zrelé)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/currant_black/small/init.lua:9
 msgid "Black Currant (small)"
-msgstr "Čierne ríbezľe (malé)"
+msgstr "Čierne ríbezle (malé)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/currant_black/tiny/init.lua:9
 msgid "Black Currant (tiny)"
-msgstr "Čierne ríbezľe (maličké)"
+msgstr "Čierne ríbezle (maličké)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/currant_red/medium/init.lua:9
 msgid "Red Currant (medium)"
@@ -4851,19 +4851,19 @@ msgstr "Červené ríbezle (maličké)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/desert_hackberry/medium/init.lua:9
 msgid "Desert Hackberry (medium)"
-msgstr "Brusnice (stredné)"
+msgstr "Púštny brestovec (stredný)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/desert_hackberry/ripe/init.lua:9
 msgid "Desert Hackberry (ripe)"
-msgstr "Brusnice (zrelé)"
+msgstr "Púštny brestovec (zrelý)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/desert_hackberry/small/init.lua:9
 msgid "Desert Hackberry (small)"
-msgstr "Brusnice (malé)"
+msgstr "Púštny brestovec (malý)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/desert_hackberry/tiny/init.lua:9
 msgid "Desert Hackberry (tiny)"
-msgstr "Brusnice (maličké)"
+msgstr "Púštny brestovec (maličký)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/juniper/medium/init.lua:9
 msgid "Juniper (medium)"
@@ -8238,7 +8238,7 @@ msgstr "Balza"
 #: ../../../../data/tribes/wares/barley/init.lua:8
 msgctxt "ware"
 msgid "Barley"
-msgstr "Pšenica"
+msgstr "Jačmeň"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/basket/init.lua:8

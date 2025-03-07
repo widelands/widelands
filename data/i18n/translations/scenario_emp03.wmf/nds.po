@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2024
+# Benedikt Straub <benedikt-straub@web.de>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2024\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2025\n"
 "Language-Team: Low German (https://app.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,7 +53,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:63
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
-msgstr "Bau eene Boomhaueree, eene Saagmöhlen un een Steenbickerhuus"
+msgstr "Bau een Boomhauerhuus, eene Saagmöhlen un een Steenbickerhuus"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Lumberjack, Sawmill and Stonemason"
@@ -65,7 +65,7 @@ msgid ""
 "there is enough space for them. This will complete the basic building "
 "material supply chain."
 msgstr ""
-"Bau eene Boomhaueree, eene Saagmöhlen un een Steenbickerhuus, sobold daar "
+"Bau een Boomhauerhuus, eene Saagmöhlen un een Steenbickerhuus, sobold daar "
 "genoog Rüümte för daar is. Dann is de Versörgung mit eenfach Baukraam seker."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:72
@@ -147,7 +147,7 @@ msgid ""
 " wool. Afterwards use the wool to weave cloth in order to build a ship."
 msgstr ""
 "Nu bau eene Schaaptüchteree un bruuk all de Weit, um tominnst 50 Ballen "
-"Wulle to produzeren. Spinn daarna ut de Wulle Stoff, um een Schipp to bauen."
+"Wulle to produzeren. Weev daarna ut de Wulle Stoff, um een Schipp to bauen."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
@@ -349,7 +349,7 @@ msgid ""
 "I really don’t know if and how we will get back home. And the war is going "
 "on without us. I hope my fellow soldiers are defending our empire well."
 msgstr ""
-"Ick weet würrelk nich, of un wo wo torügg na Huus komen sallen. Un de Krieg "
+"Ick weet würrelk nich, of un wo wi torügg na Huus komen sallen. Un de Krieg "
 "gaht sünner uns wieder. Ick hoop, miene Soldaten-Fründe verteidigen uns’ "
 "Riek good."
 
@@ -556,8 +556,8 @@ msgid ""
 "I found out that the construction of the lumberjack’s house and the sawmill "
 "is complete, so we can begin to harvest logs and make planks out of them."
 msgstr ""
-"De Boomhaueree un de Saagmöhlen sünd nu beschickt, wi könen also anfangen, "
-"Boomstammen to arnten un Planken daarut to maken."
+"Dat Boomhauerhuus un de Saagmöhlen sünd nu beschickt, wi könen also "
+"anfangen, Boomstammen to arnten un Planken daarut to maken."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:326
@@ -686,9 +686,8 @@ msgstr ""
 "Wenn wi genoog Weit produzeert hebben, könen wi de Buurderee plattrieten un "
 "eene Schaaptüchteree bauen, um Wulle to produzeren. Wenn de Schaaptüchteree "
 "mit de Warken begünnt, könen wi Rüümte för een middelgrotes Huus finnen of "
-"freeimaken un daar eene Spinnweelmöhlen bauen, um Stoff ut uns’ Wulle to "
-"maken. Aver nu laat uns daarmit anfangen, eenen goden Bült vun Weit to "
-"sammeln."
+"freeimaken un daar eenen Weevstohl bauen, um Stoff ut uns’ Wulle to maken. "
+"Aver nu laat uns daarmit anfangen, eenen goden Bült vun Weit to sammeln."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:378
@@ -850,7 +849,7 @@ msgid ""
 msgstr ""
 "Ick raad absolut an, eene Wirschaft för ’t Ofboen un Smelten vun Gold to "
 "bauen. Ick gloov, wi bruken eene Wienplanteree, eene Wienmakeree, eene "
-"Kneipe, eene Fiskeree of een Jaggthuus un een Smeltwark. Un natürelk de "
+"Kneipe, een Fiskerhuus of een Jaggthuus un een Smeltwark. Un natürelk de "
 "Bargwarken sülvst."
 
 #. TRANSLATORS: Amalea
@@ -1047,7 +1046,7 @@ msgid ""
 "taking to the sea again. However, I thought it would be helpful to remind "
 "you that ship production is not the only industry that needs cloth."
 msgstr ""
-"Salve Lutius. Uns’ Spinnweelmöhlen is nu beschickt. Nu sünd wi bannig dicht "
+"Salve Lutius. Uns’ Weevstohl is nu beschickt. Nu sünd wi bannig dicht "
 "daarbi, weer to schippern. Aver ick gloov, ’t is good, wenn du nich "
 "vergettst, dat wi Stoff nich blot för Schippen bruken."
 

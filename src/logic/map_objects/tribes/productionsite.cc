@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,7 +71,7 @@ void parse_working_positions(const Descriptions& descriptions,
 			if (!descriptions.worker_exists(woi)) {
 				throw GameDataError("not a worker");
 			}
-			working_positions->push_back(std::make_pair(woi, amount));
+			working_positions->emplace_back(woi, amount);
 		} catch (const WException& e) {
 			throw GameDataError("%s=\"%d\": %s", worker_name.c_str(), amount, e.what());
 		}

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-11-30 03:02+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -306,11 +306,11 @@ msgid ""
 "This button toggles showing the building’s work area. When the lumberjack "
 "leaves the building to look for trees to fell, he will only look for them "
 "within this area. Let me show you how perfect this spot is."
-msgstr ""
+msgstr "Toto tlačidlo prepína zobrazenie pracovnej oblasti budovy. Keď drevorubač opustí budovu, aby hľadal stromy na výrub, bude ich hľadať iba v tejto oblasti. Dovoľte mi ukázať vám, aké výborné je toto miesto."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:224
 msgid "Close the construction site window when you have seen enough."
-msgstr ""
+msgstr "Keď ste videli dostatočne, zatvorte okno staveniska."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:234
 msgid "Well done! Let’s wait till the hut is finished."
@@ -324,7 +324,7 @@ msgstr "Ak chcete zvýšiť rýchlosť hry, jednoducho stlačte kláves %1$s na 
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:237
 msgid "Change is rapid with %1$s/%2$s and smooth with %3$s/%4$s."
-msgstr ""
+msgstr "Zmena je rýchla použitím %1$s/%2$s a pomalá použitím %3$s/%4$s."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:244
 msgid "The Lumberjack’s Hut is Done"

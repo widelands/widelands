@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # Tóth András <txa-dev@posteo.hu>, 2021
@@ -14,15 +14,16 @@
 # Tóth András <txa-dev@posteo.hu>, 2023
 # vargaviktor <viktor.varga@gmail.com>, 2021
 # vargaviktor <viktor.varga@gmail.com>, 2021
+# Zoltan Kloczka, 2025
 # zone <z-one@freemail.hu>, 2015
 # zone <z-one@freemail.hu>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-10-21 03:01+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2024\n"
+"Last-Translator: Zoltan Kloczka, 2025\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -170,7 +171,7 @@ msgstr "[true*|false]"
 
 #: ../../../../src/wlapplication_messages.cc:124
 msgid "Play the intro music at startup and show splash image until it ends."
-msgstr ""
+msgstr "Játsszd le az intro zenét a rendszerindításkor, és mutasd a splash képet, amíg az véget nem ér!"
 
 #: ../../../../src/wlapplication_messages.cc:125
 msgid "Force Widelands to crash when a Lua error occurs."
@@ -423,7 +424,7 @@ msgid ""
 "Whether to let the system draw the mouse cursor. Disable it only if the "
 "cursor doesn't appear right, or if you want it to be visible in screenshots "
 "or screencasts."
-msgstr ""
+msgstr "Döntsd el, hogy engedélyezed-e a rendszernek az egérkurzor megjelenítését. Csak akkor tiltsd le, ha a kurzor nem jelenik meg megfelelően, vagy ha azt szeretnéd, hogy látható legyen a képernyőképeken vagy képernyőfelvételeken."
 
 #: ../../../../src/wlapplication_messages.cc:235
 msgid "Whether to use sticky tooltips."

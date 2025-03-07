@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -383,7 +383,7 @@ public:
 		}
 	}
 
-	void notify_worker_evicted(Game&, Worker&);
+	virtual void notify_worker_evicted(Game&, Worker&);
 	const Time& get_worker_evicted() const {
 		return worker_evicted_;
 	}
