@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2019
@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-15 02:44+0000\n"
+"POT-Creation-Date: 2025-03-01 03:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Georgi Georgiev (RacerBG) <g.georgiev.shumen@gmail.com>, 2021\n"
 "Language-Team: Bulgarian (http://app.transifex.com/widelands/widelands/language/bg/)\n"
@@ -209,13 +209,13 @@ msgid "Elders"
 msgstr "Старейшини"
 
 #: ../../../../data/txts/developers.lua:22
-#: ../../../../data/txts/developers.lua:416
+#: ../../../../data/txts/developers.lua:417
 msgid "Graphics"
 msgstr "Графика"
 
 #: ../../../../data/txts/developers.lua:28
-#: ../../../../data/txts/developers.lua:360
-#: ../../../../data/txts/developers.lua:423
+#: ../../../../data/txts/developers.lua:361
+#: ../../../../data/txts/developers.lua:424
 msgid "Homepage"
 msgstr "Уеб сайт"
 
@@ -224,7 +224,7 @@ msgid "Scripting"
 msgstr ""
 
 #: ../../../../data/txts/developers.lua:40
-#: ../../../../data/txts/developers.lua:431
+#: ../../../../data/txts/developers.lua:432
 msgid "Sound"
 msgstr "Звук"
 
@@ -240,103 +240,103 @@ msgstr "Езици"
 msgid "Coders"
 msgstr "Програмисти"
 
-#: ../../../../data/txts/developers.lua:150
+#: ../../../../data/txts/developers.lua:151
 msgid "Graphicians"
 msgstr "Художници"
 
-#: ../../../../data/txts/developers.lua:188
+#: ../../../../data/txts/developers.lua:189
 msgid "Musicians"
 msgstr "Музиканти"
 
-#: ../../../../data/txts/developers.lua:207
+#: ../../../../data/txts/developers.lua:208
 msgid "Sound Effects"
 msgstr "Звукови ефекти"
 
-#: ../../../../data/txts/developers.lua:223
+#: ../../../../data/txts/developers.lua:224
 msgid "Maps and Missions"
 msgstr "Карти и мисии"
 
-#: ../../../../data/txts/developers.lua:257
+#: ../../../../data/txts/developers.lua:258
 msgid "Campaign Story"
 msgstr "Кампании и история"
 
-#: ../../../../data/txts/developers.lua:261
+#: ../../../../data/txts/developers.lua:262
 msgid "Barbarians"
 msgstr "Варвари"
 
-#: ../../../../data/txts/developers.lua:269
+#: ../../../../data/txts/developers.lua:270
 msgid "Empire"
 msgstr "Империя"
 
-#: ../../../../data/txts/developers.lua:276
+#: ../../../../data/txts/developers.lua:277
 msgid "Atlanteans"
 msgstr "Атландци"
 
-#: ../../../../data/txts/developers.lua:284
+#: ../../../../data/txts/developers.lua:285
 msgid "Frisians"
 msgstr "Фризийци"
 
-#: ../../../../data/txts/developers.lua:292
+#: ../../../../data/txts/developers.lua:293
 msgid "Packagers"
 msgstr "Пакетиране"
 
-#: ../../../../data/txts/developers.lua:296
+#: ../../../../data/txts/developers.lua:297
 msgid "Debian Linux"
 msgstr "Линукс — Дебиан"
 
-#: ../../../../data/txts/developers.lua:302
+#: ../../../../data/txts/developers.lua:303
 msgid "Fedora Linux"
 msgstr "Линукс — Федора"
 
-#: ../../../../data/txts/developers.lua:310
+#: ../../../../data/txts/developers.lua:311
 msgid "Mandriva Linux"
 msgstr "Линукс — Мандрива"
 
-#: ../../../../data/txts/developers.lua:316
+#: ../../../../data/txts/developers.lua:317
 msgid "FreeBSD"
 msgstr "FreeBSD"
 
-#: ../../../../data/txts/developers.lua:322
+#: ../../../../data/txts/developers.lua:323
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: ../../../../data/txts/developers.lua:329
+#: ../../../../data/txts/developers.lua:330
 msgid "Mac OS X"
 msgstr "Mac OS X"
 
-#: ../../../../data/txts/developers.lua:341
+#: ../../../../data/txts/developers.lua:342
 msgid "Windows"
 msgstr "Уиндоус"
 
-#: ../../../../data/txts/developers.lua:352
+#: ../../../../data/txts/developers.lua:353
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
-#: ../../../../data/txts/developers.lua:364
+#: ../../../../data/txts/developers.lua:365
 msgid "Homepage Coders"
 msgstr "Програмисти на уеб сайта"
 
-#: ../../../../data/txts/developers.lua:375
+#: ../../../../data/txts/developers.lua:376
 msgid "Documentation, Help and Wiki"
 msgstr "Документация, помощ и уики"
 
-#: ../../../../data/txts/developers.lua:393
+#: ../../../../data/txts/developers.lua:394
 msgid "Add-Ons"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:412
+#: ../../../../data/txts/developers.lua:413
 msgid "Former Elders"
 msgstr "Предишни старейшини"
 
-#: ../../../../data/txts/developers.lua:438
+#: ../../../../data/txts/developers.lua:439
 msgid "Translation"
 msgstr "Превод"
 
-#: ../../../../data/txts/developers.lua:447
+#: ../../../../data/txts/developers.lua:448
 msgid "Other"
 msgstr "Други"
 
-#: ../../../../data/txts/developers.lua:455
+#: ../../../../data/txts/developers.lua:456
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr ""
 

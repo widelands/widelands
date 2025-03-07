@@ -1,15 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2022,2024
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2022,2024-2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022,2024\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022,2024-2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -597,7 +597,7 @@ msgstr "Waren, wat fehlen, sünd gries."
 msgid ""
 "Wares not present in the building yet but already being transported there "
 "are shown in a darker grey."
-msgstr "Waren, wat nich nich im Huus sünd, aver al daarhen brocht worden, worden in dunker Grau wiest."
+msgstr "Waren, wat noch nich im Huus sünd, aver al daarhen brocht worden, worden in dunker Grau wiest."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:326
 msgid ""

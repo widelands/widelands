@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
@@ -8,15 +8,15 @@
 # Zlopez <michal.konecny@psmail.xyz>, 2021
 # Zlopez <michal.konecny@psmail.xyz>, 2021
 # Milan Fašina <matrix17@seznam.cz>, 2016-2018
-# Ondřej Itřech, 2020-2021,2024
+# Ondřej Itřech, 2020-2021,2024-2025
 # Václav Černý <vaclav.vatoz.cerny@gmail.com>, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-03 02:40+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Ondřej Itřech, 2020-2021,2024\n"
+"Last-Translator: Ondřej Itřech, 2020-2021,2024-2025\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -232,7 +232,7 @@ msgstr "Nepřítel napadl tvoji strážnici na stromě."
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:47
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the treetop sentry."
-msgstr "Nepřítel dobyl tvoji strážnici na stromě"
+msgstr "Nepřítel dobyl tvoji strážnici na stromě."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:49
@@ -1244,12 +1244,12 @@ msgstr "vyrábění"
 #. TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:49
 msgid "planting cassava"
-msgstr "sázení manioků"
+msgstr "sázení manioku"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:57
 msgid "harvesting cassava"
-msgstr "sklízení manioků"
+msgstr "sklízení manioku"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:66
 #: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:72
@@ -1282,7 +1282,7 @@ msgctxt "amazons_building"
 msgid ""
 "The farmer working at this cassava plantation has no cleared soil to plant "
 "her seeds."
-msgstr "Pěstitelka pracující na této maniokové plantáži nemá k dipozici volnou půdu pro výsadbu."
+msgstr "Pěstitelka pracující na této maniokové plantáži nemá k dispozici volnou půdu pro výsadbu."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
@@ -1341,7 +1341,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cocoa farmer working at this cocoa farm has no cleared soil to plant her"
 " seeds."
-msgstr "Pěstitelka kakaa z této farmy nemá k dipozici volnou půdu pro výsev semen."
+msgstr "Pěstitelka kakaa z této farmy nemá k dispozici volnou půdu pro výsev semen."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:8
@@ -1615,7 +1615,7 @@ msgstr "Chata na těžbu vzácných dřevin"
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:42
 msgid "harvesting balsa"
-msgstr "sklízení balsy"
+msgstr "sklízení balzy"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
@@ -2032,7 +2032,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer working at this blackroot farm has no cleared soil to "
 "plant his seeds."
-msgstr "Pěstitel rozrazilu nemůže sázet rozrazil, protože nemá žádnou volnou půdu na osev."
+msgstr "Pěstitel rozrazilu nemůže sázet rozrazil, protože nemá kam sázet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:8
@@ -2187,7 +2187,7 @@ msgid ""
 "water where he can breed fish in his work area. Remember that you can only "
 "regenerate your fish resources if there ever were some fish in the vicinity "
 "in the first place."
-msgstr "Porybnému, pracujícímu v tomto domku porybného, se nedaří ve svém okolí najít žádnou vodu vhodnou k chovu ryb. Nezapomeň, že obnovovat populaci ryb lze pouze tehdy, pokud v okolí nějaké ryby jsou."
+msgstr "Porybnému pracujícímu v tomto domku porybného se nedaří ve svém okolí najít žádnou vodu vhodnou k chovu ryb. Nezapomeň, že obnovovat populaci ryb lze pouze tehdy, pokud v okolí nějaké ryby jsou."
 
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
 msgid "The fishing grounds are full"
@@ -2214,7 +2214,7 @@ msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area. Remember that you can increase the number of existing fish by "
 "building a fish breeder’s house."
-msgstr "Rybář, pracující v tomto domku rybáře, nemůže ve své pracovní oblasti najít žádné ryby. Pamatuj, že na udržení rybí populace je potřeba postavit domek porybného."
+msgstr "Rybář pracující v tomto domku rybáře nemůže ve své pracovní oblasti najít žádné ryby. Pamatuj, že na udržení rybí populace je potřeba postavit domek porybného."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:8
@@ -2456,7 +2456,7 @@ msgstr "Pavoučí farma"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Toolsmithy"
-msgstr "Kovárna"
+msgstr "Dílna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
@@ -2944,7 +2944,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
 "work area. You should consider dismantling or destroying the building or "
 "building a ranger’s hut."
-msgstr "Dřevorubec, pracující v této chatě dřevorubce, nemůže ve svém okolí najít žádné stromy. Zvaž její rozebrání, zničení nebo postavení chaty lesníka."
+msgstr "Dřevorubec pracující v této chatě dřevorubce nemůže ve svém okolí najít žádné stromy. Zvaž její rozebrání, její zničení nebo postavení chaty lesníka."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:8
@@ -3328,7 +3328,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "Dřevorubec, pracující v tomto domku dřevorubce, nemůže ve svém okolí najít žádné stromy. Zvaž jeho rozebrání, zničení nebo postavení domku lesníka."
+msgstr "Dřevorubec pracující v tomto domku dřevorubce nemůže ve svém okolí najít žádné stromy. Zvaž jeho rozebrání, její zničení nebo postavení domku lesníka."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:8
@@ -3472,7 +3472,7 @@ msgstr "Hospoda"
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:8
 msgctxt "empire_building"
 msgid "Toolsmithy"
-msgstr "Kovárna"
+msgstr "Dílna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:88
@@ -3590,7 +3590,7 @@ msgid ""
 "area. Please make sure there is a working clay pit nearby and the aqua farm "
 "is supplied with all needed wares, or consider dismantling or destroying "
 "this building."
-msgstr "Rybář pracující na této rybí sádce nemůže ve své pracovní oblasti najít žádné rybníčky. Prosím zajisti, aby byl v blízkosti aktivní jámový výkop a rybí sádka měla dostatek potřebných surovin nebo zvaž rozebrání či zničení budovy."
+msgstr "Rybář pracující na této rybí sádce nemůže ve své pracovní oblasti najít žádné rybníčky. Prosím zajisti, aby byl v blízkosti aktivní jámový výkop a rybí sádka měla dostatek potřebných surovin, nebo zvaž rozebrání, nebo zničení budovy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:8
@@ -3672,7 +3672,7 @@ msgid ""
 "The beekeeper working at this beekeeper’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr "Včelař pracující na tomto včelařském domku nenašel žádnéý keř či pole v pracovní oblasti. Zvažte stavbu dalšího statku či sadu  v okolí, nebo rzebrání či zboření této budovy."
+msgstr "Včelař pracující v tomto včelařském domku nenašel žádný keř ani pole ve své pracovní oblasti. Zvaž stavbu dalšího statku či sadu v okolí, nebo rozebrání či zboření této budovy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:8
@@ -3862,7 +3862,7 @@ msgstr "Hodovní síň"
 #: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:8
 msgctxt "frisians_building"
 msgid "Farm"
-msgstr "Obilná farma"
+msgstr "Statek"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:74
@@ -3897,7 +3897,7 @@ msgctxt "frisians_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area."
-msgstr "Rybář pracující v tomto domku nemůže ve své pracovní oblasti najít žádné ryby ."
+msgstr "Rybář pracující v tomto domku nemůže ve své pracovní oblasti najít žádné ryby."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:8
@@ -5445,7 +5445,7 @@ msgstr "Pšeničné pole (oseté)"
 #: ../../../../data/tribes/initialization/empire/init.lua:10
 #: ../../../../data/tribes/initialization/frisians/init.lua:10
 msgid "The Widelands Development Team"
-msgstr "Vývojový tým Widelands"
+msgstr "Tým vývojářů Widelands"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/amazons/init.lua:13
@@ -5603,7 +5603,7 @@ msgstr "Král cizinec"
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can’t successfully start from this."
-msgstr "Začni hru jen se skladem a nejzákladnějším minimem pro rozběh hospodářství. Pozor: UI za těchto podmínek nedokáže úspěšně zahájit hru."
+msgstr "Začni hru jen se skladem a nejzákladnějším minimem pro rozběh hospodářství. Pozor: AI za těchto podmínek nedokáže úspěšně zahájit hru."
 
 #: ../../../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:46
 #: ../../../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
@@ -5638,7 +5638,7 @@ msgid ""
 "Start the game with just your headquarters and very few wares for "
 "bootstrapping an economy. Warning: the AI can’t successfully start from "
 "this."
-msgstr "Začni hru jen s hlavní budovou a velmi málo surovinami pro rozběh hospodářství. Pozor: UI za těchto podmínek nedokáže úspěšně zahájit hru."
+msgstr "Začni hru jen s hlavní budovou a velmi málo surovinami pro rozběh hospodářství. Pozor: AI za těchto podmínek nedokáže úspěšně zahájit hru."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../../../data/tribes/initialization/amazons/starting_conditions/trading_outpost.lua:11
@@ -6915,7 +6915,7 @@ msgstr "Zinchi Roqa"
 #: ../../../../data/tribes/ships/amazons/init.lua:428
 msgctxt "shipname"
 msgid "Lake Titicaca"
-msgstr ""
+msgstr "Titicaca"
 
 #. TRANSLATORS: This Amazonian ship is named after the main Inca temple
 #: ../../../../data/tribes/ships/amazons/init.lua:430
@@ -6981,7 +6981,7 @@ msgstr "Akvamarín"
 #: ../../../../data/tribes/ships/atlanteans/init.lua:169
 msgctxt "shipname"
 msgid "Atlantean’s Stronghold"
-msgstr "Atlantská pevnost"
+msgstr "Mořská hvězdice"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../../../data/tribes/ships/atlanteans/init.lua:171
@@ -7317,7 +7317,7 @@ msgstr "Beowulf"
 #: ../../../../data/tribes/ships/barbarians/init.lua:51
 msgctxt "shipname"
 msgid "Bison"
-msgstr ""
+msgstr "Bizon"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../../../data/tribes/ships/barbarians/init.lua:53
@@ -7341,7 +7341,7 @@ msgstr "Dellingr"
 #: ../../../../data/tribes/ships/barbarians/init.lua:59
 msgctxt "shipname"
 msgid "Eagle"
-msgstr ""
+msgstr "Orel"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../../../data/tribes/ships/barbarians/init.lua:61
@@ -7365,7 +7365,7 @@ msgstr "Hagbard"
 #: ../../../../data/tribes/ships/barbarians/init.lua:67
 msgctxt "shipname"
 msgid "Hakhor"
-msgstr ""
+msgstr "Hakhor"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../../../data/tribes/ships/barbarians/init.lua:69
@@ -7503,13 +7503,13 @@ msgstr "Kanec"
 #: ../../../../data/tribes/ships/barbarians/init.lua:113
 msgctxt "shipname"
 msgid "Valkyrie"
-msgstr ""
+msgstr "Valkyrie"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../../../data/tribes/ships/barbarians/init.lua:115
 msgctxt "shipname"
 msgid "Wisent"
-msgstr ""
+msgstr "Zubr"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../../../data/tribes/ships/barbarians/init.lua:117
@@ -7539,13 +7539,13 @@ msgstr "Jadran"
 #: ../../../../data/tribes/ships/empire/init.lua:43
 msgctxt "shipname"
 msgid "Adamas"
-msgstr ""
+msgstr "Adamas"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:45
 msgctxt "shipname"
 msgid "Agrippa"
-msgstr ""
+msgstr "Agrippa"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:47
@@ -7575,7 +7575,7 @@ msgstr "Apollo"
 #: ../../../../data/tribes/ships/empire/init.lua:55
 msgctxt "shipname"
 msgid "Aquila"
-msgstr ""
+msgstr "Aquila"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:57
@@ -7587,7 +7587,7 @@ msgstr "Augustus"
 #: ../../../../data/tribes/ships/empire/init.lua:59
 msgctxt "shipname"
 msgid "Aurum"
-msgstr ""
+msgstr "Aurum"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:61
@@ -7635,19 +7635,19 @@ msgstr "Carrara"
 #: ../../../../data/tribes/ships/empire/init.lua:75
 msgctxt "shipname"
 msgid "Cato"
-msgstr ""
+msgstr "Cato"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:77
 msgctxt "shipname"
 msgid "Cæsar"
-msgstr ""
+msgstr "Cézar"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:79
 msgctxt "shipname"
 msgid "Cervus"
-msgstr ""
+msgstr "Cervus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:81
@@ -7671,7 +7671,7 @@ msgstr "Diana"
 #: ../../../../data/tribes/ships/empire/init.lua:87
 msgctxt "shipname"
 msgid "Delphinus"
-msgstr ""
+msgstr "Delfín"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:89
@@ -7683,7 +7683,7 @@ msgstr "Domitianus"
 #: ../../../../data/tribes/ships/empire/init.lua:91
 msgctxt "shipname"
 msgid "Etna"
-msgstr ""
+msgstr "Etna"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:93
@@ -7695,7 +7695,7 @@ msgstr "Faustulus"
 #: ../../../../data/tribes/ships/empire/init.lua:95
 msgctxt "shipname"
 msgid "Ferrum"
-msgstr ""
+msgstr "Ferrum"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:97
@@ -7713,13 +7713,13 @@ msgstr "Gallus"
 #: ../../../../data/tribes/ships/empire/init.lua:101
 msgctxt "shipname"
 msgid "Gladiator"
-msgstr ""
+msgstr "Gladiátor"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:103
 msgctxt "shipname"
 msgid "Gloria Imperii"
-msgstr ""
+msgstr "Gloria Imperii"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:105
@@ -7731,7 +7731,7 @@ msgstr "Janus"
 #: ../../../../data/tribes/ships/empire/init.lua:107
 msgctxt "shipname"
 msgid "Iulius Cæsar"
-msgstr ""
+msgstr "Julius Cézar"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
 #: ../../../../data/tribes/ships/empire/init.lua:109
@@ -7761,13 +7761,13 @@ msgstr "Latonia"
 #: ../../../../data/tribes/ships/empire/init.lua:117
 msgctxt "shipname"
 msgid "Leo"
-msgstr ""
+msgstr "Lev"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:119
 msgctxt "shipname"
 msgid "Lepus"
-msgstr ""
+msgstr "Zajíc"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:121
@@ -7791,7 +7791,7 @@ msgstr "Diskobolos"
 #: ../../../../data/tribes/ships/empire/init.lua:127
 msgctxt "shipname"
 msgid "Marcus Aurelius"
-msgstr ""
+msgstr "Marcus Aurelius"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../../../data/tribes/ships/empire/init.lua:129
@@ -7851,7 +7851,7 @@ msgstr "Portus Bellus"
 #: ../../../../data/tribes/ships/empire/init.lua:147
 msgctxt "shipname"
 msgid "Præda"
-msgstr ""
+msgstr "Præda"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:149
@@ -7875,7 +7875,7 @@ msgstr "Romulus"
 #: ../../../../data/tribes/ships/empire/init.lua:155
 msgctxt "shipname"
 msgid "Sagitta"
-msgstr ""
+msgstr "Šíp"
 
 #. TRANSLATORS: This Empire ship is named after an in-game character
 #: ../../../../data/tribes/ships/empire/init.lua:157
@@ -7893,13 +7893,13 @@ msgstr "Saturn"
 #: ../../../../data/tribes/ships/empire/init.lua:161
 msgctxt "shipname"
 msgid "Scipio"
-msgstr ""
+msgstr "Scipio"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:163
 msgctxt "shipname"
 msgid "Seneca"
-msgstr ""
+msgstr "Seneka"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:165
@@ -7911,7 +7911,7 @@ msgstr "Siena"
 #: ../../../../data/tribes/ships/empire/init.lua:167
 msgctxt "shipname"
 msgid "Spiculum"
-msgstr ""
+msgstr "Spiculum"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:169
@@ -7941,7 +7941,7 @@ msgstr "Traianus"
 #: ../../../../data/tribes/ships/empire/init.lua:177
 msgctxt "shipname"
 msgid "Venator"
-msgstr ""
+msgstr "Venator"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:179
@@ -7953,13 +7953,13 @@ msgstr "Venus"
 #: ../../../../data/tribes/ships/empire/init.lua:181
 msgctxt "shipname"
 msgid "Vergilius"
-msgstr ""
+msgstr "Vergílius"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:183
 msgctxt "shipname"
 msgid "Vespa"
-msgstr ""
+msgstr "Vespa"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:185
@@ -7977,7 +7977,7 @@ msgstr "Vesta"
 #: ../../../../data/tribes/ships/empire/init.lua:189
 msgctxt "shipname"
 msgid "Vesuvius"
-msgstr ""
+msgstr "Vesuv"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:191
@@ -8075,7 +8075,7 @@ msgstr "Kormoransand"
 #: ../../../../data/tribes/ships/frisians/init.lua:72
 msgctxt "shipname"
 msgid "Langeneß"
-msgstr "Langeneß"
+msgstr "Laněnés"
 
 #. TRANSLATORS: This Frisian ship is named after a water body in Northern
 #. Frisia
@@ -8234,7 +8234,7 @@ msgstr "Válečná sekera"
 #: ../../../../data/tribes/wares/balsa/init.lua:8
 msgctxt "ware"
 msgid "Balsa"
-msgstr "Balsa"
+msgstr "Balza"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/barley/init.lua:8
@@ -9286,7 +9286,7 @@ msgstr "Průzkumník"
 #: ../../../../data/tribes/workers/atlanteans/shipwright/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Shipwright"
-msgstr "Stavitel lodí"
+msgstr "Loďař"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/smelter/init.lua:8
@@ -9310,7 +9310,7 @@ msgstr "Voják"
 #: ../../../../data/tribes/workers/atlanteans/spiderbreeder/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Spider Breeder"
-msgstr "Chovatel pavouků"
+msgstr "Chovatelka pavouků"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/stonecutter/init.lua:8
@@ -9322,7 +9322,7 @@ msgstr "Kameník"
 #: ../../../../data/tribes/workers/atlanteans/toolsmith/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Toolsmith"
-msgstr "Kovář"
+msgstr "Nástrojář"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/trainer/init.lua:8
@@ -9514,7 +9514,7 @@ msgstr "Průzkumník"
 #: ../../../../data/tribes/workers/barbarians/shipwright/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Shipwright"
-msgstr "Stavitel lodí"
+msgstr "Loďař"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/smelter/init.lua:8
@@ -9694,7 +9694,7 @@ msgstr "Pastýř"
 #: ../../../../data/tribes/workers/empire/shipwright/init.lua:8
 msgctxt "empire_worker"
 msgid "Shipwright"
-msgstr "Stavitel lodí"
+msgstr "Loďař"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/smelter/init.lua:8
@@ -9718,7 +9718,7 @@ msgstr "Kameník"
 #: ../../../../data/tribes/workers/empire/toolsmith/init.lua:8
 msgctxt "empire_worker"
 msgid "Toolsmith"
-msgstr "Kovář"
+msgstr "Nástrojář"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/trainer/init.lua:8
@@ -9934,7 +9934,7 @@ msgstr "Vrchní švadlena"
 #: ../../../../data/tribes/workers/frisians/shipwright/init.lua:8
 msgctxt "frisians_worker"
 msgid "Shipwright"
-msgstr "Stavitel lodí"
+msgstr "Loďař"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/smelter/init.lua:8

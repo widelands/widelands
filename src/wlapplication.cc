@@ -418,8 +418,9 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_gr = new Graphic();
 	g_gr->initialize(
 	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
-	   get_config_int("xres", kDefaultResolutionW), get_config_int("yres", kDefaultResolutionH),
-	   get_config_bool("fullscreen", false), get_config_bool("maximized", false));
+	   get_config_int("display", -1), get_config_int("xres", kDefaultResolutionW),
+	   get_config_int("yres", kDefaultResolutionH), get_config_bool("fullscreen", false),
+	   get_config_bool("maximized", false));
 
 	{
 		// The window manager may resize the window on creation, so we have to handle resize events
@@ -2162,7 +2163,7 @@ bool WLApplication::redirect_output(std::string path) {
 	setvbuf(stdout, nullptr, _IOLBF, BUFSIZ);
 
 	/* No buffering */
-	setbuf(stderr, nullptr);
+	setbuf(stderr, nullptr);  // NOLINT(bugprone-unsafe-functions)
 
 	redirected_stdio_ = true;
 	return true;

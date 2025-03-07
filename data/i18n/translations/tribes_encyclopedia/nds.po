@@ -1013,7 +1013,7 @@ msgstr "Hier sünd keene Mineraale im Grund."
 msgid ""
 "Gold veins contain gold ore that can be washed from the gravel at gold "
 "digger dwellings."
-msgstr "In Gold-Aders is Goldkluut, dat vun Goldwaschersken ut de Stoff wascht worden worden kann."
+msgstr "In Gold-Aders is Goldkluut, dat vun Goldwaschersken ut de Stoff wascht worden kann."
 
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Gold, part 2
@@ -1259,7 +1259,7 @@ msgstr "»Sünnenlücht blickt blied up uns un uns’ Vörmoders daal as wi wark
 #: ../../../../data/tribes/initialization/amazons/units.lua:1360
 msgctxt "amazons_building"
 msgid "Mistress WeaverSong, recollecting her early years as a liana cutter."
-msgstr "Meisterske WeverLied över hör frohen Jahren as Boomreep-Slagerske"
+msgstr "Meisterske WeverLied över hör frohen Jahren as Boomreep-Slagerske."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Liana Cutter's
 #. Hut
@@ -1388,7 +1388,7 @@ msgstr "»Miene Moder hett mi bibrocht, de Tauen ut Boomreep to folden, wo man d
 #: ../../../../data/tribes/initialization/amazons/units.lua:1432
 msgctxt "amazons_building"
 msgid "Mistress WeaverSong, reflecting on training."
-msgstr "Meisterske WeverLied över hör Lehrjahren"
+msgstr "Meisterske WeverLied över hör Lehrjahren."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Rope Weaver's
 #. Booth
@@ -3193,7 +3193,7 @@ msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It can "
 "be processed into spidercloth or tabards in a weaving mill, or used to make "
 "tools in the toolsmithy."
-msgstr "Spinnensied word vun Spinnen produzeert, de in Spinnentüchtereen tücht worden. ’t word in Spinnweelmöhlen to Spinnenstoff of Kluften verarbeidt, of in de Warktüügsmee bruukt, um Warktüüg to maken."
+msgstr "Spinnensied word vun Spinnen produzeert, de in Spinnentüchtereen tücht worden. ’t word in eenem Weevstohl to Spinnenstoff of Kluften verarbeidt, of in de Warktüügsmee bruukt, um Warktüüg to maken."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:481
@@ -3202,7 +3202,7 @@ msgid ""
 "Spidercloth is made out of spider silk in a weaving mill. It is used in the "
 "shipyard. Also some higher developed buildings need spidercloth for their "
 "construction."
-msgstr "Spinnenstoff word in Spinnweelmöhlen ut Spinnensied maakt. ’t word vun de Warft bruukt. Eenige grote Husen bruken Spinnenstoff tum Bauen."
+msgstr "Spinnenstoff word in eenem Weevstohl ut Spinnensied maakt. ’t word vun de Warft bruukt. Eenige grote Husen bruken Spinnenstoff tum Bauen."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fish
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:492
@@ -3606,7 +3606,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving mill."
-msgstr "Eene Kluft un een Lütter Dreespitz sünd de Utrüstung för neje Soldaten. Kluften worden in Spinnweelmöhlen produzeert."
+msgstr "Eene Kluft un een Lütter Dreespitz sünd de Utrüstung för neje Soldaten. Kluften worden in eenem Weevstohl produzeert."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Gold Thread
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:878
@@ -3614,7 +3614,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "This thread, made of gold by the gold spinning mill, is used for weaving the"
 " exclusive golden tabard in the weaving mill."
-msgstr "Deese Wulle, de in de Goldspinneree ut Gold maakt word, bruukt man, um de düre Goldene Kluft in de Spinnweelmöhlen to weven."
+msgstr "Deese Wulle, de in de Goldspinneree ut Gold maakt word, bruukt man, um de düre Goldene Kluft in de Weevstohl to weven."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Golden Tabard
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:887
@@ -3623,7 +3623,7 @@ msgid ""
 "Golden tabards are produced in Atlantean weaving mills out of gold thread. "
 "They are used in the labyrinth – together with food – to train soldiers from"
 " health level 0 to level 1."
-msgstr "Goldene Kluften worden in Atlantisken Spinnweelmöhlen ut Goldwulle produzeert. Se worden in Dwaalwegen – tosamen mit Spiesen – bruukt, um Soldaten vun Gesundheid-Stand 0 up Stand 1 uttobilden."
+msgstr "Goldene Kluften worden im Atlantisken Weevstohl ut Goldwulle produzeert. Se worden in Dwaalwegen – tosamen mit Spiesen – bruukt, um Soldaten vun Gesundheid-Stand 0 up Stand 1 uttobilden."
 
 #. TRANSLATORS: Helptext for an Atlantean worker: Carrier
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:903
@@ -4294,7 +4294,7 @@ msgid ""
 "‘Take your net and come to the sea<br>In the early morning the moon ya still"
 " see<br>Collect ya catch by net or by spear,<br>and don’t forget to give "
 "Satul his share.’"
-msgstr "Gah mit dien Nett tur Waterkant<br>Froh mörgens süchst’ noch Maan sien Rand<br>Treck de Angels ut de Fissen hör Muul<br>un vergeet nich to geven recht Pand an Satuul."
+msgstr "»Gah mit dien Nett tur Waterkant<br>Froh mörgens süchst’ noch Maan sien Rand<br>Treck de Angels ut de Fissen hör Muul<br>un vergeet nich to geven recht Pand an Satuul.«"
 
 #. TRANSLATORS: Note lore_autor for an Atlantean production site: Fisher's
 #. House
@@ -4967,7 +4967,7 @@ msgid ""
 "gain the spider silk once a day. There is no need to spin this again. The "
 "thread can directly be used by the weaving mill. Oh hello, here is one of "
 "our nice spiders … Hey! Why are you running away?"
-msgstr "Nee, wi föden de Spinnen nich mit Mais. Wi föden de Mais to fetten Grashüppers, wat dann vun de Spinnen eten worden. Wi setten se een Maal am Dag up een besünner Gereedskupp, um de Spinnensied to arnten. Se mutt dann nich noch maal spunnen worden; de Gaarn kann stracks vun de Spinnweelmöhlen bruukt worden. Ach moin, hier is man eene vun uns’ nüten Spinnen … Ahoi! Um wat löppst du weg?"
+msgstr "Nee, wi föden de Spinnen nich mit Mais. Wi föden de Mais to fetten Grashüppers, wat dann vun de Spinnen eten worden. Wi setten se een Maal am Dag up een besünner Gereedskupp, um de Spinnensied to arnten. Se mutt dann nich noch maal spunnen worden; de Gaarn kann stracks vun de Weevstohl bruukt worden. Ach moin, hier is man eene vun uns’ nüten Spinnen … Ahoi! Um wat löppst du weg?"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Spider
 #. Farm
@@ -4983,7 +4983,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Weaves spidercloth for buildings and ships’ sails, and tabards to equip and "
 "train the soldiers."
-msgstr "Spinnt Spinnenstoff för Husen un Seils, un Kluften, um Soldaten uttorüsten un to lehren."
+msgstr "Weevt Spinnenstoff för Husen un Seils, un Kluften, um Soldaten uttorüsten un to lehren."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Weaving Mill
 #. -- listen to that song please
@@ -6801,7 +6801,7 @@ msgstr "De Boomplanter plant eenen Boom in %1$s bit %2$s, je nadeem, wo wied he 
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1192
 msgctxt "barbarians_building"
 msgid "‘What do you mean, my fish ain’t fresh?!’"
-msgstr "Wat sall dat heten, miene Fisse sünd nich frisk!?"
+msgstr "»Wat sall dat heten, miene Fisse sünd nich frisk?!«"
 
 #. TRANSLATORS: Lore author helptext for a Barbarian production site: Fisher's
 #. Hut
@@ -7352,7 +7352,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘A new warrior’s ax brings forth the best in its wielder – or the worst in "
 "its maker.’"
-msgstr "Eene neje Ridderext wiest dat beste in hör Drager – of dat leepste in hör Maker."
+msgstr "»Eene neje Ridderext wiest dat beste in hör Drager – of dat leepste in hör Maker.«"
 
 #. TRANSLATORS: Lore author helptext for a Barbarian production site: Warmill
 #. TRANSLATORS: Lore author helptext for a Barbarian production site: Ax
@@ -7941,7 +7941,7 @@ msgstr "Khantarakh, »De modeerne Wille Weertskupp«, <br>9. Kohhuud »Seefahrt 
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1855
 msgctxt "barbarians_building"
 msgid "Weaves cloth out of reed."
-msgstr "Spinnt Stoff ut Reit."
+msgstr "Weevt Stoff ut Reit."
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1886
@@ -10159,7 +10159,7 @@ msgstr "Se worden ok in de Wapensmee bruukt."
 #: ../../../../data/tribes/initialization/empire/units.lua:152
 msgctxt "empire_ware"
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
-msgstr "Wulle is dat Fell vun Schapen. Spinnweelmöhlen maken daarut Stoff."
+msgstr "Wulle is dat Fell vun Schapen. Een Weevstohl maakt daarut Stoff."
 
 #. TRANSLATORS: Helptext for an Empire ware: Cloth
 #: ../../../../data/tribes/initialization/empire/units.lua:161
@@ -11779,7 +11779,7 @@ msgstr "Motto vun de Wever-Vereen"
 #: ../../../../data/tribes/initialization/empire/units.lua:1827
 msgctxt "empire_building"
 msgid "Weaves cloth out of wool."
-msgstr "Spinnt Stoff ut Wulle."
+msgstr "Weevt Stoff ut Wulle."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -13839,7 +13839,7 @@ msgstr "Fiskernetten sünd dat Warktüüg, wat Fiskers bruken."
 #: ../../../../data/tribes/initialization/frisians/units.lua:459
 msgctxt "frisians_ware"
 msgid "Hunting spears are produced by the blacksmithy"
-msgstr "Jaggtsperen worden vun de Smede produzeert."
+msgstr "Jaggtsperen worden vun de Smede produzeert"
 
 #. TRANSLATORS: Helptext for a Frisian ware: Scythe, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:472
@@ -15357,7 +15357,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the supply is steady and there is continuous demand for fur, then the "
 "reindeer farm produces one meat after producing three pieces of fur."
-msgstr "Wenn de Versörgung good is un de hele Tied Fell bruukt word, produzeert de Sneeihirsktüchteree eenmaal Fleesk, nadeem se dree Stücken Fell produzeert hett,"
+msgstr "Wenn de Versörgung good is un de hele Tied Fell bruukt word, produzeert de Sneeihirsktüchteree eenmaal Fleesk, nadeem se dree Stücken Fell produzeert hett."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Reindeer
 #. Farm
@@ -15385,7 +15385,7 @@ msgctxt "frisians_building"
 msgid ""
 "A farmer’s reply when asked by his chieftain why he was planting such a "
 "slow-growing grain."
-msgstr "Wat een Buur seggt, wenn sien Anföhrer hüm fraggt, waarum he een Koorn plant, dat so langsaam wasst"
+msgstr "Wat een Buur seggt, wenn sien Anföhrer hüm fraggt, waarum he een Koorn plant, dat so langsaam wasst."
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Farm
 #: ../../../../data/tribes/initialization/frisians/units.lua:2033
@@ -15655,7 +15655,7 @@ msgstr "Naiht Stoff för de Seils vun Schipp ut Reit un Sneeihirsken-Fell."
 #, lua-format
 msgctxt "frisians_building"
 msgid "The weaving mill needs %s on average to produce one piece of cloth."
-msgstr "De Spinnweelmöhlen bruukt dör de Bank %s um een Stück Stoff to produzeren."
+msgstr "De Weevstohl bruukt dör de Bank %s um een Stück Stoff to produzeren."
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia

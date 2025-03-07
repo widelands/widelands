@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
-# Daniel Nylander <po@danielnylander.se>, 2005
+# Daniel Nylander <po@danielnylander.se>, 2005,2025
 # D M <kamera001dm@gmail.com>, 2017
 # D M <kamera001dm@gmail.com>, 2021,2023
 # GunChleoc, 2016,2018
@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-12-23 02:56+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: D M <kamera001dm@gmail.com>, 2021,2023\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2005,2025\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -326,7 +326,7 @@ msgid ""
 "Meat is used by the food preserver to prepare rations for the workers "
 "digging for gold dust and granite. It is also consumed at the training sites"
 " (training glade and warriors’ gathering) and for recruiting new soldiers."
-msgstr ""
+msgstr "Köttet används av matkonservatorn för att tillaga ransoner till arbetarna som gräver efter guldstoft och granit. Det konsumeras också på träningsplatserna (träningsgläntan och krigarnas samling) och för att rekrytera nya soldater."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Ration, part 1
 #: ../../../../data/tribes/initialization/amazons/units.lua:261
@@ -461,7 +461,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:378
 msgctxt "ware"
 msgid "The chisel is an essential tool."
-msgstr ""
+msgstr "Mejseln är ett viktigt verktyg."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Chisel, part 2
 #: ../../../../data/tribes/initialization/amazons/units.lua:380
@@ -469,7 +469,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Stone carvers need a chisel. Make sure you’ve always got some in reserve! "
 "They are produced by the stone carvers themselves."
-msgstr ""
+msgstr "Stenhuggare behöver en mejsel. Se till att du alltid har några i reserv! De tillverkas av stenhuggarna själva."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Kitchen Tools
 #: ../../../../data/tribes/initialization/amazons/units.lua:391
