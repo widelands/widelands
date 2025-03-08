@@ -180,7 +180,16 @@ public:
 	bool fetch_from_flag(Game&) override;
 
 	Quantity count_workers(const Game&, DescriptionIndex worker, const Requirements&, Match);
+	Quantity count_soldiers(const Game&, const Requirements&);
+	Quantity count_all_soldiers() {
+		return incorporated_soldiers_.size();
+	}
+
 	Worker& launch_worker(Game&, DescriptionIndex worker, const Requirements&);
+	Soldier& launch_soldier(Game&,
+	                        const Requirements&,
+	                        bool defender = false,
+	                        SoldierPreference pref = SoldierPreference::kAny);
 
 	// Adds the worker to the inventory. Takes ownership and might delete
 	// 'worker'.
@@ -236,7 +245,7 @@ public:
 
 	void set_soldier_preference(SoldierPreference);
 	[[nodiscard]] SoldierPreference get_soldier_preference() const {
-		return soldier_request_.get_preference();
+		return soldier_request_manager_.get_preference();
 	}
 
 	void log_general_info(const EditorGameBase&) const override;
@@ -317,7 +326,7 @@ private:
 	Quantity desired_soldier_count_{0U};
 	AttackTarget attack_target_;
 	SoldierControl soldier_control_;
-	SoldierRequest soldier_request_;
+	SoldierRequestManager soldier_request_manager_;
 	Time next_swap_soldiers_time_{0U};
 
 	WarehouseSupply* supply_;
@@ -330,6 +339,22 @@ private:
 	using WorkerList = std::vector<OPtr<Worker>>;
 	using IncorporatedWorkers = std::map<DescriptionIndex, WorkerList>;
 	IncorporatedWorkers incorporated_workers_;
+
+	// TODO(tothxa): won't this clash with struct SoldierList in wui/soldierlist.cc?
+	//               this is class Warehouse namespace, isn't it?
+	using SoldierList = std::vector<OPtr<Soldier>>;
+
+	// We keep soldiers separately, always sorted by level
+	SoldierList incorporated_soldiers_;
+
+	// Called by incorporate_worker() for soldiers. This handles keeping them sorted.
+	void incorporate_soldier_inner(EditorGameBase& egbase, Soldier* soldier);
+
+	// TODO(tothxa): savegame compatibility with v1.2 or keep for safety?
+	// Flag for launch_soldier() whether it needs to sort them first.
+	// Adding soldiers on game loading in map_io/map_buildingdata_packet.cc sets it to false.
+	bool soldiers_are_sorted_{true};
+
 	std::vector<Time> next_worker_without_cost_spawn_;
 	Time next_military_act_{0U};
 	Time next_stock_remove_act_{0U};
