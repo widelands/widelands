@@ -86,11 +86,11 @@ msgstr ""
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:25
 msgid "Conquer pirate sentry"
-msgstr "Poraž pirátskou strážnici."
+msgstr "Poraž pirátskou strážnici"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:27
 msgid "Conquer the Pirate Sentry"
-msgstr "Dobuď tuto pirátskou strážnici."
+msgstr "Dobuď tuto pirátskou strážnici"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:28
 msgid ""
@@ -106,7 +106,7 @@ msgstr "Postav sklad"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:36
 msgid "Build a Warehouse near the Pirate Sentry"
-msgstr "Postav sklad nedaleko pirátské strážnice."
+msgstr "Postav sklad nedaleko pirátské strážnice"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:37
 msgid ""
@@ -126,7 +126,7 @@ msgstr "Přines lopaty"
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:45
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:54
 msgid "Bring Four Shovels to the new Warehouse"
-msgstr "Přines čtyři lopaty do nového skladu."
+msgstr "Přines čtyři lopaty do nového skladu"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:46
 msgid "They will be handed out to some volunteers for drying up the swamps."
@@ -171,7 +171,7 @@ msgstr "Poraž Hjalmara"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:81
 msgid "Defeat the Armies of Hjalmar"
-msgstr "Poraž vojsko Hlajmara"
+msgstr "Poraž vojsko Hjalmara"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:82
 msgid ""
@@ -234,7 +234,7 @@ msgid ""
 "too strong to be defeated."
 msgstr ""
 "Ze severu nás ohrožuje bojovný kmen vedený vojevůdcem Törverem, který rychle"
-" šikuje svá vojska. Brzy by se mohla stát příliš silnými na to, abychom je  "
+" šikuje svá vojska. Brzy by se mohla stát příliš silnými na to, abychom je "
 "mohli porazit."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
@@ -284,7 +284,7 @@ msgid ""
 " our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
-"Pane, přestože se naši vojáci dokáží bezestrachu postavit jakémukoli "
+"Pane, přestože se naši vojáci dokáží beze strachu postavit jakémukoli "
 "nepříteli, nepřítel na severu je stále silnější než celé naše vojsko. Měli "
 "bychom se vyhnout konfliktu do doby, než ho budeme schopni porazit."
 
@@ -306,7 +306,7 @@ msgid ""
 "expanding his front line and approaching our territory."
 msgstr ""
 "Pane, dostali jsme výstražnou zprávu od jednoho z našich průzkumníků. Törver"
-" posouvá své přední linie a přiblížil se až k našemu území. "
+" posouvá své přední linie a přiblížil se až k našemu území."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:38
 msgid ""
@@ -471,7 +471,7 @@ msgid ""
 "mighty enemy in front of us."
 msgstr ""
 "Pane, po našich útocích se piráti snaží reorganizovat s piráty z dalších "
-"kmenů. Mohli by tak získat zpět velkou čás své již ztacené síly. Naše "
+"kmenů. Mohli by tak získat zpět velkou část své již ztracené síly. Naše "
 "ubývající zdroje by mohly být problémem proti tak silnému nepříteli."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
@@ -546,7 +546,7 @@ msgid ""
 "Sire, our scout has returned to our territory, and he has shown us the road "
 "through the swamps towards Hjalmar."
 msgstr ""
-"Pane, náš průzkumník se vrátil zpět a ukázal nám cestu srkz bažinu směrem k "
+"Pane, náš průzkumník se vrátil zpět a ukázal nám cestu skrz bažinu směrem k "
 "Hjalmarovi."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:142

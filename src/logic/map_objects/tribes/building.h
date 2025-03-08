@@ -383,7 +383,7 @@ public:
 		}
 	}
 
-	void notify_worker_evicted(Game&, Worker&);
+	virtual void notify_worker_evicted(Game&, Worker&);
 	const Time& get_worker_evicted() const {
 		return worker_evicted_;
 	}

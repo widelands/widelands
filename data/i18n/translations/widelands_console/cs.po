@@ -117,7 +117,7 @@ msgstr "Rovnou spustí mapu `FILENAME` jako scénář pro jednoho hráče."
 #, c-format
 msgid ""
 "Load the savegame `%1$s` directly or the last saved game if `=%2$s` is used."
-msgstr "Rovnou nahraje uloženou hru `%1$s`  nebo  poslední uloženou hru pokud je použito `=%2$s` ."
+msgstr "Rovnou nahraje uloženou hru `%1$s` nebo poslední uloženou hru, pokud je použito `=%2$s`."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -125,7 +125,7 @@ msgstr "Rovnou nahraje uloženou hru `%1$s`  nebo  poslední uloženou hru pokud
 #, c-format
 msgid ""
 "Load the replay `%1$s` directly or the last saved replay if `=%2$s` is used."
-msgstr "Rovnou nahraje záznam hry `%1$s`  nebo  poslední uložený záznam hry pokud je použito `=%2$s` ."
+msgstr "Rovnou nahraje záznam hry `%1$s` nebo poslední uložený záznam hry, pokud je použito `=%2$s`."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -165,7 +165,7 @@ msgstr "[ano*|ne]"
 
 #: ../../../../src/wlapplication_messages.cc:124
 msgid "Play the intro music at startup and show splash image until it ends."
-msgstr ""
+msgstr "Zobrazit úvodní obrazovku a přehrát úvodní znělku v plné délce."
 
 #: ../../../../src/wlapplication_messages.cc:125
 msgid "Force Widelands to crash when a Lua error occurs."
@@ -191,7 +191,7 @@ msgstr "n"
 msgid ""
 "Enable AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ "
 "for a full description of the AI training logic."
-msgstr "Aktivuje režim AI training. Stránka                      https://www.widelands.org/wiki/Ai%20Training/ obsahuje podrobnější informace k jeho využití."
+msgstr "Aktivuje režim AI training. Stránka https://www.widelands.org/wiki/Ai%20Training/ obsahuje podrobnější informace k jeho využití."
 
 #: ../../../../src/wlapplication_messages.cc:132
 msgid ""
@@ -201,7 +201,7 @@ msgstr "Průběžně upravuje rychlost hry podle zpoždění AI. Používá se p
 
 #: ../../../../src/wlapplication_messages.cc:137
 msgid "Enable the Script Console and Cheating Mode."
-msgstr ""
+msgstr "Aktivuje skriptovací konzoli a cheatovací mód."
 
 #: ../../../../src/wlapplication_messages.cc:139
 msgid "Game options:"
@@ -209,12 +209,12 @@ msgstr "Volby hry:"
 
 #: ../../../../src/wlapplication_messages.cc:139
 msgid "Note: New values will be written to the config file."
-msgstr "Poznámka: Nové hodnoty budou zapsány do konfiguračního souboru"
+msgstr "Poznámka: Nové hodnoty budou zapsány do konfiguračního souboru."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:145
 msgid "Automatically save each `n` minutes."
-msgstr "Automaticky ukládat každých `n` minut"
+msgstr "Automaticky ukložit každých `n` minut."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:148
@@ -263,7 +263,7 @@ msgstr "Zobrazuj názvy souborů v okně záznamů."
 msgid ""
 "Whether a warning should be shown in the editor if there are too many "
 "players."
-msgstr "Zda by mělo být v editoru zobrazeno varování o velkém množství hráčů"
+msgstr "Nastavit, zda má být v editoru zobrazeno varování při příliš vysokém počtu hráčů."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:167
@@ -492,7 +492,7 @@ msgid ""
 "Load the given savegame or replay directly. Useful for .wgf/.wry file "
 "extension association. Does not work with other options. Also see "
 "--loadgame/--replay."
-msgstr ""
+msgstr "Rovnou načíst zavolenou uloženou hru nebo záznam. Praktické ve spojení s příponami .wgf/.wrpl. Nepodporuje jiné varianty. Podobné příkazy --loadgame/--replay."
 
 #. * TRANSLATORS: %s = version information
 #: ../../../../src/wlapplication_messages.cc:302

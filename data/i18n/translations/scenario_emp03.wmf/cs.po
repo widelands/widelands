@@ -439,8 +439,8 @@ msgid ""
 "comfortable?"
 msgstr ""
 "I když je to krok správným směrem, není tu moc místa na budovy. Celý ostrov "
-"je posetý skalami. Jak takto budeme schopni postavit novou loď, nebo alespoň"
-" základní zázemí, abychom si usnadnili život?"
+"je posetý skalami. Jak takto budeme kdy schopni postavit novou loď, nebo "
+"alespoň základní zázemí, abychom si usnadnili život?"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:269
 msgid "Amalea’s Plan"
@@ -671,9 +671,9 @@ msgid ""
 "farm. The sheep farm itself needs wheat and water to work. So, let’s find a "
 "space for a big building and build a farm first."
 msgstr ""
-"Takže si to projdeme. Na tkaní látky potřebujeme vlnu z ovčince. Ovčinec sám"
-" potřebuje na svůj provoz obilí a vodu. Takže se nejprve podívejme po velkém"
-" stavebním místě a postavme obilné pole."
+"Takže si to projděme. Na tkaní látky potřebujeme vlnu z ovčince. Ovčinec sám"
+" potřebuje na svůj provoz pšenici a vodu. Takže se nejprve podívejme po "
+"velkém stavebním místě a postavme statek."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:375

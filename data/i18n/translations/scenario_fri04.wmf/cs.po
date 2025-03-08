@@ -55,7 +55,7 @@ msgstr "Poraž cizince"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:42
 msgid "Defeat the hostile tribe."
-msgstr "Poraž nepřátelský kmen"
+msgstr "Poraž nepřátelský kmen."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:47
 msgid "Defeat the Empire"
@@ -75,7 +75,7 @@ msgstr "Rekrutuj a cvič"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:57
 msgid "Recruit And Train Your Soldiers"
-msgstr "Rektutuj a cvič své vojáky"
+msgstr "Rekrutuj a cvič své vojáky"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:58
 msgid ""
@@ -424,8 +424,8 @@ msgstr ""
 "Mám takový pocit, že už jsme se s těmito nezvanými hosty také potkali. Je "
 "nemyslitelné, abychom tu posedávali a popíjeli džbánky medoviny, když vy tu "
 "bojujete o své životy. Jako správní přátelé a na památku dobrým mužům, o "
-"které jste přišli, budeme proti těmto nezvaným útočníkům bojovat s vámi,  "
-"bok po boku!"
+"které jste přišli, budeme proti těmto nezvaným útočníkům bojovat s vámi, bok"
+" po boku!"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9b
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:189
@@ -438,7 +438,7 @@ msgstr ""
 "Je nemyslitelné, abychom tu posedávali a popíjeli džbánky medoviny, když vy "
 "tu bojujete o své životy. Jako správní přátelé a na památku dobrým mužům, o "
 "které jste přišli, vydáme se těmto nezvaným útočníkům naproti a budeme proti"
-" nim bojovat s vámi,  bok po boku!"
+" nim bojovat s vámi, bok po boku!"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud 9c
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:196
@@ -451,14 +451,14 @@ msgid ""
 " for our own soldiers, so that they may learn from yours and become as "
 "strong as possible before we return to our homeland."
 msgstr ""
-"Jsem téměř až zklamaný, že tvá pověst nepřekoná tvé skutečné činny, protože "
-"tak jak jsi popisoval ty nezvané útočníky, velmi rád bych proti nim bojoval "
-"společně s tebou. Je mi líto tvých ztrát a také mě mrzí, že se nebudu moci "
-"potkat s Haukem, o kterém jsem toho tolik slyšel a jehož jméno bude "
-"vzpomínáno vždy v dobrém. Než tví vojáci nabydou sil, postarám se o výcvik "
-"našich vlastních vojáků, aby mohli získat zkušenosti od tvých vojáků a stát "
-"se tak silnými, jak jen bude možné, a to ještě předtím než se vrátíme do "
-"naší domoviny."
+"Jsem téměř až zklamaný, že vaše pověst nepřekoná vaše skutečné činy, protože"
+" tak jak jste popisoval ty nezvané útočníky, velmi rád bych proti nim "
+"bojoval společně s vámi. Je mi líto vašich ztrát a také mě mrzí, že se "
+"nebudu moci potkat s Haukem, o kterém jsem toho tolik slyšel a jehož jméno "
+"bude vzpomínáno vždy v dobrém. Než vaši vojáci nabudou sil, postarám se o "
+"výcvik našich vlastních vojáků, aby mohli získat zkušenosti od vašich vojáků"
+" a stát se tak silnými, jak jen bude možné, a to ještě předtím, než se "
+"vrátíme do naší domoviny."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:201
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:213
@@ -505,10 +505,10 @@ msgid ""
 msgstr ""
 "Svými činy jste na sebe přivolali zlobu císařství, přísahám při Jupiteru "
 "Optimu Maximu, že nenajdu klid, dokud se ty a tví věrní nebudete topit ve "
-"vlastní krvi. Slytování budeme mít pouze s těmi, kteří byli příliš mladí, "
-"aby se zůčastnili předešlých bojů, ponechám je na životě a budou moci "
-"nahradit ty naše otroky na galéře, kteří neměli to štěstí a nepřežili "
-"poslední plavbu."
+"vlastní krvi. Slitování budeme mít pouze s těmi, kteří byli příliš mladí na "
+"to, aby se zúčastnili předešlých bojů, ponechám je na životě a budou moci "
+"nahradit ty naše galejníky, kteří neměli to štěstí a nepřežili poslední "
+"plavbu."
 
 #. TRANSLATORS: Reebaud – Reebaud 11
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:216
@@ -571,7 +571,7 @@ msgstr ""
 "Poblíž naší severozápadní hranice jsme dnes narazili na zraněného vojáka. "
 "Popadaje dech vykládal, jak byl jeho kmen napaden a přemožen krutými "
 "cizinci. Se svým posledním dechem nám sdělil, že vůdce jeho kmene se "
-"jmenoval Rýbaud. "
+"jmenoval Rýbaud."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:243
@@ -728,7 +728,7 @@ msgid ""
 "my soldiers except for a small garrison to safeguard my lands, and we will "
 "reconquer your island!"
 msgstr ""
-"Nepřádelé jsou poraženi. Teď s tebou půjdu na jih, vezmem všechny vojáky, "
+"Nepřátelé jsou poraženi. Teď s tebou půjdu na jih, vezmeme všechny vojáky, "
 "vyjma malé posádky na obranu mé země, a dobudeme zpět tvůj ostrov!"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:299

@@ -346,7 +346,7 @@ msgstr "Okno zásob bylo zavřeno, ale já jsem ještě nevysvětlil vše. Můž
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:211
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:213
 msgid "Open the stock window again"
-msgstr "Otevři znovu okno zásob"
+msgstr "Znovuotevření okna zásob"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:193
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:215
@@ -354,12 +354,12 @@ msgid ""
 "You closed the stock window before I finished telling you everything about "
 "it. If you already know everything, please feel free to leave this tutorial "
 "at any time."
-msgstr "Okno zásob bylo zavřeno ještě předtím, než jsem ti o něm stihl říct vše. Pokud už vše znáš, můžeš klidně ukončit tento tutoriál, kdykoli budeš chtít."
+msgstr "Okno zásob bylo zavřeno ještě předtím, než jsem ti o něm stihl říct vše. Prosím, snaž se respektovat postup v tutoriálu."
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
 msgid "Otherwise, please reopen it and have a look at all its tabs."
-msgstr "Jinak, prosím, otevři znovu okno zásob a pokračuj v prohlížení jeho záložek."
+msgstr "Prosím otevři okno zásob a pokračuj v prohlížení jeho záložek."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:203
 msgid ""
@@ -444,7 +444,7 @@ msgid ""
 " then or if you’re unsure about your tribe’s needs and abilities and how its"
 " buildings and workers operate, you can look it up easily in our tribe-"
 "specific in-game help and encyclopedia."
-msgstr "Až budeš mít za sebou několik her, budeš si v těchto věcech jistější.  Ale do té doby, pokud nevíš přesně, co tvůj kmen potřebuje, jaké má schopnosti a co jeho budovy a dělníci dělají, můžeš si to jednoduše najít v encyklopedii svého kmene, která je součástí nápovědy."
+msgstr "Až budeš mít za sebou několik her, budeš si v těchto věcech jistější. Ale do té doby, pokud nevíš přesně, co tvůj kmen potřebuje, jaké má schopnosti a co jeho budovy a dělníci dělají, můžeš si to jednoduše najít v encyklopedii svého kmene, která je součástí nápovědy."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:266
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:268
@@ -548,12 +548,12 @@ msgid ""
 "You closed the encyclopedia window without searching for the information we "
 "need. If you already know everything, please feel free to leave this "
 "tutorial at any time."
-msgstr "Encyklopedie byla zavřena bez dohledání potřebné informace. Pokud už vše znáš, můžeš klidně ukončit tento tutoriál, kdykoli budeš chtít."
+msgstr "Encyklopedie byla zavřena bez dohledání potřebné informace. Prosím, snaž se respektovat postup v tutoriálu."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:311
 msgid ""
 "Otherwise, please reopen the encyclopedia window and choose the second tab."
-msgstr "Jinak, prosím, otevři encyklopedii znovu a vyber druhou záložku."
+msgstr "Prosím otevři encyklopedii znovu a vyber druhou záložku."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:316
 msgid "Priority Settings"
@@ -734,7 +734,7 @@ msgid ""
 "You closed the ware statistics window before I finished telling you "
 "everything about it. If you already know everything, please feel free to "
 "leave this tutorial at any time."
-msgstr "Okno statistiky surovin bylo zavřeno ještě předtím, než jsem ti o něm stihl říct vše. Pokud už vše znáš, můžeš klidně ukončit tento tutoriál, kdykoli budeš chtít."
+msgstr "Okno statistiky surovin bylo zavřeno ještě předtím, než jsem ti o něm stihl říct vše. Prosím, snaž se respektovat postup v tutoriálu."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:437
 msgid ""
@@ -825,7 +825,7 @@ msgid ""
 "carrier will take a scythe and become a farmer. Then there will be no "
 "scythes left, but the target quantity is 1, therefore your toolsmith will "
 "start producing another one."
-msgstr "Například nastavená hodnota pro kosy je 1. Pokud postavíš statek, nosič vezme kosu a stane se sedlákem. Tím pádem už nemáš žádnou kosu, ale cílové množství je 1. Kovář tedy začne vyrábět novou."
+msgstr "Například nastavená hodnota pro kosy je 1. Pokud postavíš statek, nosič vezme kosu a stane se sedlákem. Tím pádem už nemáš žádnou kosu, ale cílové množství je 1. Nástrojář tedy začne vyrábět novou."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:491
 msgid ""
@@ -869,7 +869,7 @@ msgid ""
 "regardless of the economy settings. This can be useful to arrange, for "
 "example, that more building materials are produced near the border even if "
 "there are plenty in stock far away in your homeland."
-msgstr "Stejné tlačítko lze nalézt také v okně výrobních budov. Tam umožňuje, aby pouze tato zvolená budova vyráběla neomezeně, bez ohledu na samotné nastavení hospodářství. Tím můžeme například docílit toho, že poblíž hranice  se bude neustále vyrábět další stavební materiál a to i přesto, že ho máš ve svém vnitrozemí skladem již spousty."
+msgstr "Stejné tlačítko lze nalézt také v okně výrobních budov. Tam umožňuje, aby pouze tato zvolená budova vyráběla neomezeně, bez ohledu na samotné nastavení hospodářství. Tím můžeme například docílit toho, že poblíž hranice se bude neustále vyrábět další stavební materiál a to i přesto, že ho máš ve svém vnitrozemí skladem již spousty."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
