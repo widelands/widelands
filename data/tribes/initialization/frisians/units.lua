@@ -2260,7 +2260,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Weaving Mill
             purpose = pgettext("building", "Sews cloth for ship sails out of reed and reindeer fur."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Weaving Mill
-            performance = pgettext("frisians_building", "The weaving mill needs %s on average to produce one piece of cloth."):bformat(format_seconds(45))
+            performance = pgettext("frisians_building", "The weaving mill needs %s on average to produce one piece of cloth."):bformat(format_seconds(49))
          }
       },
 
