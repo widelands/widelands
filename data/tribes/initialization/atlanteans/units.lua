@@ -1960,8 +1960,12 @@ wl.Descriptions():new_tribe {
            "Check the way we train, in this labyrinth they may be right."),
             -- TRANSLATORS: Lore author helptext for an Atlantean training site: Labyrinth
             lore_author = pgettext("atlanteans_building", "Atlantean hero after first contact with a real enemy"),
-            -- TRANSLATORS: Performance helptext for an Atlantean training site: Labyrinth
-            performance = pgettext("atlanteans_building", "If all needed wares are delivered in time, a labyrinth can train one soldier one level in defense, evade or health in %s on average."):bformat(format_seconds(35))
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean training site: Labyrinth, part 1
+               pgettext("atlanteans_building", "If all needed wares are delivered in time, a labyrinth can train one soldier one level in defense, evade or health in %s on average."):bformat(format_seconds(36)),
+               -- TRANSLATORS: Performance helptext for an Atlantean training site: Labyrinth, part 2
+               pgettext("atlanteans_building", "Complete training of one soldier takes %s on average."):bformat(format_minutes_seconds(3, 6))
+            }
          }
       },
 
