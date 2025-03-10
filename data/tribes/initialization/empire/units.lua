@@ -2127,8 +2127,12 @@ wl.Descriptions():new_tribe {
             },
             -- TRANSLATORS: Note helptext for an Empire training site: Training Camp
             note = pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came."),
-            -- TRANSLATORS: Performance helptext for an Empire training site: Training Camp
-            performance = pgettext("empire_building", "If all needed wares are delivered in time, a training camp can train one soldier one level in attack or health in %s on average."):bformat(format_seconds(35))
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire training site: Training Camp, part 1
+               pgettext("empire_building", "If all needed wares are delivered in time, a training camp can train one soldier one level in attack or health in %s on average."):bformat(format_seconds(36)),
+               -- TRANSLATORS: Performance helptext for an Empire training site: Training Camp, part 2
+               pgettext("empire_building", "Complete training of one soldier takes %s on average."):bformat(format_minutes_seconds(4, 48))
+            }
          }
       },
 
