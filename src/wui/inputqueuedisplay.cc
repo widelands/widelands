@@ -382,8 +382,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 void InputQueueDisplay::set_lock_desired_fill(bool lock, const std::string& reason) {
 	lock_desired_fill_ = lock;
 
-	b_decrease_desired_fill_.set_enabled(can_act_ && !lock);
-	b_increase_desired_fill_.set_enabled(can_act_ && !lock);
+	b_decrease_desired_fill_.set_enabled(can_act_ && !lock_desired_fill_);
+	b_increase_desired_fill_.set_enabled(can_act_ && !lock_desired_fill_);
 
 	if (lock) {
 		b_decrease_desired_fill_.set_tooltip(reason);

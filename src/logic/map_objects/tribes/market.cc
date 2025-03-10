@@ -670,19 +670,29 @@ std::string TradeInstance::format_richtext(const TradeID id,
 		                                          num_batches - trade->second.num_shipped_batches),
 		                                 num_batches - trade->second.num_shipped_batches));
 
+		bool other_paused = false;
+		if (const auto other_trade = other_market->trade_orders().find(id); other_trade != other_market->trade_orders().end()) {
+			other_paused = other_trade->second.paused;
+		}
+
+		std::string paused_text;
 		if (trade->second.paused) {
-			infotext += "</p><p>";
-			infotext +=
-			   as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
-			               can_act ? _("Paused by you") :
-			                         format_l(_("Paused by %s"), own_market->owner().get_name()));
+			if (other_paused) {
+				paused_text = _("Paused by both players");
+			} else {
+				paused_text = can_act ? _("Paused by you") :
+					                     format_l(_("Paused by %s"), own_market->owner().get_name());
+			}
+		} else {
+			if (other_paused) {
+				paused_text = format_l(_("Paused by %s"), other_market->owner().get_name());
+			} else {
+				paused_text = _("Active");
+			}
 		}
-		if (const auto other_trade = other_market->trade_orders().find(id);
-		    other_trade != other_market->trade_orders().end() && other_trade->second.paused) {
-			infotext += "</p><p>";
-			infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
-			                        format_l(_("Paused by %s"), other_market->owner().get_name()));
-		}
+
+		infotext += "</p><p>";
+		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph, paused_text);
 	}
 
 	infotext += "</p>";

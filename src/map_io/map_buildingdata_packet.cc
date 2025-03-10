@@ -74,7 +74,7 @@ constexpr uint16_t kCurrentPacketVersionTrainingsite = 7;
 
 /* Packet versions changelog:
  * Overall: v1.1 = 9
- * - 10: Added priority disambiguator id
+ * - 10 (v1.3): Added priority disambiguator id
  * Dismantlesite: v1.1 = 1
  * Constructionsite: v1.1 = 5
  * PFBuilding: v1.1 = 2
