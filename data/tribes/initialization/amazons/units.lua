@@ -1613,8 +1613,12 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("amazons_building", "Trains soldiers in Evade, Defense and Health. Equips the soldiers with all necessary equipment and armor parts."),
             -- TRANSLATORS: Note helptext for an Amazon training site: Training Glade
             note = pgettext("amazons_building", "Amazon soldiers need chocolate to train properly."),
-            -- TRANSLATORS: Performance helptext for an Amazon training site: Training Glade
-            performance = pgettext("amazons_building", "If all needed wares are delivered in time, a training glade can train one soldier first level in evade or health, or both defense levels in %1$s on average. The rest of evade and health levels are trained in %2$s each."):bformat(format_seconds(28), format_seconds(21))
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon training site: Training Glade, part 1
+               pgettext("amazons_building", "If all needed wares are delivered in time, a training glade can train one soldier first level in evade or health, or both defense levels in %1$s on average. The rest of evade and health levels are trained in %2$s each."):bformat(format_seconds(29), format_seconds(22)),
+               -- TRANSLATORS: Performance helptext for an Amazon training site: Training Glade, part 2
+               pgettext("amazons_building", "Complete training of one soldier takes %s on average."):bformat(format_minutes_seconds(3, 33))
+            }
          }
       },
 
