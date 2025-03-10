@@ -2068,7 +2068,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note helptext for an Empire training site: Arena
             note = pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came."),
             -- TRANSLATORS: Performance helptext for an Empire training site: Arena
-            performance = pgettext("empire_building", "If all needed wares are delivered in time, an arena can train one soldier first level in evade in %s on average."):bformat(format_seconds(35))
+            performance = pgettext("empire_building", "If all needed wares are delivered in time, an arena can train one soldier first level in evade in %s on average."):bformat(format_seconds(36))
          }
       },
       {
@@ -2094,8 +2094,12 @@ wl.Descriptions():new_tribe {
             },
             -- TRANSLATORS: Note helptext for an Empire training site: Colosseum
             note = pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came."),
-            -- TRANSLATORS: Performance helptext for an Empire training site: Colosseum
-            performance = pgettext("empire_building", "If all needed wares are delivered in time, a colosseum can train one soldier one level in evade in %s on average."):bformat(format_seconds(35))
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire training site: Colosseum, part 1
+               pgettext("empire_building", "If all needed wares are delivered in time, a colosseum can train one soldier one level in evade in %s on average."):bformat(format_seconds(36)),
+               -- TRANSLATORS: Performance helptext for an Empire training site: Colosseum, part 2
+               pgettext("empire_building", "Complete training of one soldier takes %s on average."):bformat(format_minutes_seconds(1, 12))
+            }
          }
       },
       {

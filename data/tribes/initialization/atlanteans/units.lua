@@ -1942,9 +1942,13 @@ wl.Descriptions():new_tribe {
             lore = pgettext("atlanteans_building", "Make our enemies feel the pain, so enter here to gain your train!"),
             -- TRANSLATORS: Lore author helptext for an Atlantean training site: Dungeon
             lore_author = pgettext("atlanteans_building", "Engraving on the entrance to the dungeon"),
-            -- TRANSLATORS: Performance helptext for an Atlantean training site: Dungeon
-            performance = pgettext("atlanteans_building", "If all needed wares are delivered in time, a dungeon can train one soldier one level in attack in %s on average."):bformat(format_seconds(35))
-    }
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean training site: Dungeon, part 1
+               pgettext("atlanteans_building", "If all needed wares are delivered in time, a dungeon can train one soldier one level in attack in %s on average."):bformat(format_seconds(36)),
+               -- TRANSLATORS: Performance helptext for an Atlantean training site: Dungeon, part 2
+               pgettext("atlanteans_building", "Complete training of one soldier takes %s on average."):bformat(format_minutes_seconds(2, 24))
+            }
+         }
       },
       {
          name = "atlanteans_labyrinth",

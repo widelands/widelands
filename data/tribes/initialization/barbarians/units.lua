@@ -1707,8 +1707,12 @@ wl.Descriptions():new_tribe {
             },
             -- TRANSLATORS: Note helptext for a Barbarian training site: Battle Arena
             note = pgettext("barbarians_building", "Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their initial level."),
-            -- TRANSLATORS: Performance helptext for a Barbarian training site: Battle Arena
-            performance = pgettext("barbarians_building", "If all needed wares are delivered in time, a battle arena can train one soldier one level in evade in %s on average."):bformat(format_seconds(35))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian training site: Battle Arena, part 1
+               pgettext("barbarians_building", "If all needed wares are delivered in time, a battle arena can train one soldier one level in evade in %s on average."):bformat(format_seconds(36)),
+               -- TRANSLATORS: Performance helptext for a Barbarian training site: Battle Arena, part 2
+               pgettext("barbarians_building", "Complete training of one soldier takes %s on average."):bformat(format_minutes_seconds(1, 12))
+            }
          }
       },
       {
