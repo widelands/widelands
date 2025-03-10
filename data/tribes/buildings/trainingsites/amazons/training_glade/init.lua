@@ -68,6 +68,10 @@ wl.Descriptions():new_trainingsite_type {
    },
 
    programs = {
+      -- Calculation of complete training of one soldier:
+      -- each partial training takes additional 6 sec - see TrainingSite::TrainingSite()
+      -- according to measurements, additional 5 sec are spent for sleeping + 6 sec for post_timer
+      -- time total: 5 + 6 + 4 * 28.8 + 4 * 21.6 = 212.6 sec
       sleep = {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
          descname = _("sleeping"),

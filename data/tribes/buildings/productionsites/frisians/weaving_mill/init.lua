@@ -64,9 +64,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
          descname = _("weaving cloth"),
          actions = {
+            -- time total: 25.4 + 20 + 3.6 = 49 sec
             "return=skipped unless economy needs cloth",
             "consume=fur reed",
-            "sleep=duration:25s",
+            "sleep=duration:25s400ms",
             "animate=working duration:20s",
             "produce=cloth"
          },
