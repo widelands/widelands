@@ -22,6 +22,7 @@
 #include "economy/economy.h"
 #include "graphic/font_handler.h"
 #include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
@@ -144,6 +145,20 @@ struct CancelTradeConfirm : public ActionConfirm {
 	void ok() override;
 
 private:
+	Widelands::TradeID trade_id_;
+};
+
+/**
+ * Confirmation dialog box for unpausing a trade.
+ */
+struct UnpauseTradeConfirm : public ActionConfirm {
+	explicit UnpauseTradeConfirm(InteractivePlayer& parent, Widelands::Market& market, Widelands::TradeID trade_id);
+
+	void think() override;
+	void ok() override;
+
+private:
+	Widelands::OPtr<Widelands::Market> market_;
 	Widelands::TradeID trade_id_;
 };
 
@@ -521,6 +536,47 @@ void CancelTradeConfirm::ok() {
 }
 
 /**
+ * Create the panels for confirmation.
+ */
+UnpauseTradeConfirm::UnpauseTradeConfirm(InteractivePlayer& parent, Widelands::Market& market, Widelands::TradeID trade_id)
+   : ActionConfirm(
+        parent, _("Unpause?"), _("Do you really want to unpause this trade?\n\nDoing to will reset all queues to their maximum capacity."), &market),
+     market_(&market),
+     trade_id_(trade_id) {
+	// Nothing special to do
+}
+
+/**
+ * Make sure the trade still exists.
+ */
+void UnpauseTradeConfirm::think() {
+	if (!iaplayer().game().has_trade(trade_id_)) {
+		die();
+	}
+}
+
+/**
+ * The "Ok" button was clicked, so issue the command for cancelling the trade.
+ */
+void UnpauseTradeConfirm::ok() {
+	Widelands::Game& game = iaplayer().game();
+	MutexLock m(MutexLock::ID::kObjects);
+
+	if (game.has_trade(trade_id_)) {
+		Widelands::Market* market = market_.get(game);
+		assert(market != nullptr);
+		const Widelands::Market::TradeOrder& order = market->trade_orders().at(trade_id_);
+		for (const auto& pair : order.wares_queues_) {
+			game.send_player_set_input_max_fill(*market, pair.second->get_index(), pair.second->get_type(), pair.second->get_max_size(), false, trade_id_);
+		}
+		game.send_player_set_input_max_fill(*market, order.carriers_queue_->get_index(), order.carriers_queue_->get_type(), order.carriers_queue_->get_max_size(), false, trade_id_);
+		game.send_player_trade_action(iaplayer().player_number(), trade_id_, Widelands::TradeAction::kResume, market->serial());
+	}
+
+	die();
+}
+
+/**
  * Create a BulldozeConfirm window.
  * No further action is required by the caller: any action necessary to actually
  * bulldoze the building if the user confirms is taken automatically.
@@ -591,4 +647,8 @@ void show_resign_confirm(InteractivePlayer& player) {
 
 void show_cancel_trade_confirm(InteractivePlayer& player, Widelands::TradeID trade_id) {
 	new CancelTradeConfirm(player, trade_id);
+}
+
+void show_unpause_trade_resume(InteractivePlayer& player, Widelands::Market& market, Widelands::TradeID trade_id) {
+	new UnpauseTradeConfirm(player, market, trade_id);
 }

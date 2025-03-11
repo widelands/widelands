@@ -284,8 +284,26 @@ public:
 					return;
 				}
 
+				const bool is_paused = own_market->is_paused(trade_id_);
+				if (is_paused && !own_market->can_resume(trade_id_)) {
+					const auto it = own_market->trade_orders().find(trade_id_);
+					if (it == own_market->trade_orders().end()) {
+						return;
+					}
+
+					if ((SDL_GetModState() & KMOD_CTRL) == 0) {
+						show_unpause_trade_resume(*ipl, *own_market, trade_id_);
+						return;
+					}
+
+					for (const auto& pair : it->second.wares_queues_) {
+						game.send_player_set_input_max_fill(*own_market, pair.second->get_index(), pair.second->get_type(), pair.second->get_max_size(), false, trade_id_);
+					}
+					game.send_player_set_input_max_fill(*own_market, it->second.carriers_queue_->get_index(), it->second.carriers_queue_->get_type(), it->second.carriers_queue_->get_max_size(), false, trade_id_);
+				}
+
 				game.send_player_trade_action(ipl->player_number(), trade_id_,
-				                              own_market->is_paused(trade_id_) ?
+				                              is_paused ?
 				                                 Widelands::TradeAction::kResume :
 				                                 Widelands::TradeAction::kPause,
 				                              own_market->serial());
@@ -345,13 +363,8 @@ private:
 
 		if (button_pause_ != nullptr) {
 			if (paused) {
-				const bool can_resume = market.can_resume(trade_id_);
-				button_pause_->set_enabled(can_resume);
 				button_pause_->set_title(_("Resume"));
-				button_pause_->set_tooltip(can_resume ?
-				                              _("Resume this paused trade") :
-				                              _("You need to set all queues to their maximum capacity "
-				                                "before you can resume this paused trade."));
+				button_pause_->set_tooltip(_("Resume this paused trade. This requires all queues to be at their maximum capacity."));
 			} else {
 				button_pause_->set_title(_("Pause"));
 				button_pause_->set_tooltip(_("Pause this trade"));
