@@ -23,7 +23,8 @@
 #include "graphic/text_layout.h"
 #include "logic/player.h"
 #include "wlapplication_mousewheel_options.h"
-#include "wui/interactive_base.h"
+#include "wui/actionconfirm.h"
+#include "wui/interactive_player.h"
 
 constexpr int8_t kButtonSize = 25;
 
@@ -379,19 +380,24 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	// Do not call think() yet, it might deadlock
 }
 
-void InputQueueDisplay::set_lock_desired_fill(bool lock, const std::string& reason) {
-	lock_desired_fill_ = lock;
-
-	b_decrease_desired_fill_.set_enabled(can_act_ && !lock_desired_fill_);
-	b_increase_desired_fill_.set_enabled(can_act_ && !lock_desired_fill_);
-
-	if (lock) {
-		b_decrease_desired_fill_.set_tooltip(reason);
-		b_increase_desired_fill_.set_tooltip(reason);
-	} else {
-		b_decrease_desired_fill_.set_tooltip(create_tooltip(false));
-		b_increase_desired_fill_.set_tooltip(create_tooltip(true));
+void InputQueueDisplay::unlock_desired_fill(bool call_unlock_fn) {
+	if (call_unlock_fn) {
+		unlock_fn_();
 	}
+
+	lock_desired_fill_ = false;
+	b_decrease_desired_fill_.set_tooltip(create_tooltip(false));
+	b_increase_desired_fill_.set_tooltip(create_tooltip(true));
+}
+
+void InputQueueDisplay::lock_desired_fill(const std::string& reason, const std::string& unlock_title, const std::string& unlock_body, std::function<void()> unlock_fn) {
+	lock_desired_fill_ = true;
+	unlock_fn_ = unlock_fn;
+	unlock_title_ = unlock_title;
+	unlock_body_ = unlock_body;
+
+	b_decrease_desired_fill_.set_tooltip(reason);
+	b_increase_desired_fill_.set_tooltip(reason);
 }
 
 void InputQueueDisplay::recurse(const std::function<void(InputQueueDisplay&)>& functor) {
@@ -530,15 +536,26 @@ void InputQueueDisplay::set_priority(const Widelands::WarePriority& priority) {
 }
 
 void InputQueueDisplay::clicked_desired_fill(const int8_t delta) {
-	if (lock_desired_fill_) {
-		return;
-	}
-
 	assert(delta == 1 || delta == -1);
 	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::Building* b = building_.get(ibase_.egbase());
 	if (b == nullptr) {
 		return;
+	}
+
+	const bool ctrl_down = (SDL_GetModState() & KMOD_CTRL) != 0;
+
+	if (lock_desired_fill_) {
+		if (!ctrl_down) {
+			upcast(InteractivePlayer, ipl, &ibase_);
+			assert(ipl != nullptr);
+			show_generic_callback_confirm(*ipl, b, unlock_title_, unlock_body_, [this, delta]() {
+				unlock_desired_fill(true);
+				clicked_desired_fill(delta);
+			});
+			return;
+		}
+		unlock_desired_fill(true);
 	}
 
 	const unsigned desired_fill =
@@ -550,7 +567,6 @@ void InputQueueDisplay::clicked_desired_fill(const int8_t delta) {
 		return;
 	}
 
-	const bool ctrl_down = (SDL_GetModState() & KMOD_CTRL) != 0;
 	const unsigned new_fill = ctrl_down ? delta < 0 ? 0 : max_fill : desired_fill + delta;
 
 	if (Widelands::Game* game = ibase_.get_game()) {
@@ -566,13 +582,28 @@ void InputQueueDisplay::clicked_desired_fill(const int8_t delta) {
 }
 
 void InputQueueDisplay::change_desired_fill(const int8_t delta) {
-	if (delta == 0 || lock_desired_fill_) {
+	if (delta == 0) {
 		return;
 	}
+
 	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::Building* b = building_.get(ibase_.egbase());
 	if (b == nullptr) {
 		return;
+	}
+
+	if (lock_desired_fill_) {
+		const bool ctrl_down = (SDL_GetModState() & KMOD_CTRL) != 0;
+		if (!ctrl_down) {
+			upcast(InteractivePlayer, ipl, &ibase_);
+			assert(ipl != nullptr);
+			show_generic_callback_confirm(*ipl, b, unlock_title_, unlock_body_, [this, delta]() {
+				unlock_desired_fill(true);
+				change_desired_fill(delta);
+			});
+			return;
+		}
+		unlock_desired_fill(true);
 	}
 
 	unsigned desired_fill = queue_ != nullptr ? queue_->get_max_fill() : get_setting()->desired_fill;
@@ -605,14 +636,24 @@ void InputQueueDisplay::change_desired_fill(const int8_t delta) {
 }
 
 void InputQueueDisplay::set_desired_fill(unsigned new_fill) {
-	if (lock_desired_fill_) {
-		return;
-	}
-
 	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::Building* b = building_.get(ibase_.egbase());
 	if (b == nullptr) {
 		return;
+	}
+
+	if (lock_desired_fill_) {
+		const bool ctrl_down = (SDL_GetModState() & KMOD_CTRL) != 0;
+		if (!ctrl_down) {
+			upcast(InteractivePlayer, ipl, &ibase_);
+			assert(ipl != nullptr);
+			show_generic_callback_confirm(*ipl, b, unlock_title_, unlock_body_, [this, new_fill]() {
+				unlock_desired_fill(true);
+				set_desired_fill(new_fill);
+			});
+			return;
+		}
+		unlock_desired_fill(true);
 	}
 
 	const unsigned desired_fill =
@@ -787,7 +828,7 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 		                 (icons_[0]->get_h() - max_fill_indicator_.height()) / 2;
 		r.blit(Vector2i(calc_xpos(desired_fill), ypos), &max_fill_indicator_);
 
-		if (can_act_ && !lock_desired_fill_ && fill_index_under_mouse_ >= 0) {
+		if (can_act_ && fill_index_under_mouse_ >= 0 && (!lock_desired_fill_ || (SDL_GetModState() & KMOD_CTRL) != 0)) {
 			r.blitrect_scale(Rectf(calc_xpos(fill_index_under_mouse_), ypos,
 			                       max_fill_indicator_.width(), max_fill_indicator_.height()),
 			                 &max_fill_indicator_, max_fill_indicator_.rect(), 0.4f,

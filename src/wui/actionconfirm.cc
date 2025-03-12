@@ -162,6 +162,19 @@ private:
 	Widelands::TradeID trade_id_;
 };
 
+/**
+ * Confirmation dialog box with an arbitrary title, body, and callback function.
+ */
+struct GenericCallbackConfirm : public ActionConfirm {
+	explicit GenericCallbackConfirm(InteractivePlayer& parent, Widelands::MapObject* object, const std::string& title, const std::string& body, std::function<void()> callback);
+
+	void think() override;
+	void ok() override;
+
+private:
+	std::function<void()> callback_;
+};
+
 ActionConfirm::ActionConfirm(InteractivePlayer& parent,
                              const std::string& windowtitle,
                              const std::string& message,
@@ -577,6 +590,32 @@ void UnpauseTradeConfirm::ok() {
 }
 
 /**
+ * Create the panels for confirmation.
+ */
+GenericCallbackConfirm::GenericCallbackConfirm(InteractivePlayer& parent, Widelands::MapObject* object, const std::string& title, const std::string& body, std::function<void()> callback)
+   : ActionConfirm(parent, title, body, object),
+     callback_(callback) {
+	// Nothing special to do
+}
+
+/**
+ * Make sure the building still exists, if we have one.
+ */
+void GenericCallbackConfirm::think() {
+	if (object_.is_set() && object_.get(iaplayer().egbase()) == nullptr) {
+		die();
+	}
+}
+
+/**
+ * The "Ok" button was clicked, so invoke the callback function.
+ */
+void GenericCallbackConfirm::ok() {
+	callback_();
+	die();
+}
+
+/**
  * Create a BulldozeConfirm window.
  * No further action is required by the caller: any action necessary to actually
  * bulldoze the building if the user confirms is taken automatically.
@@ -649,6 +688,10 @@ void show_cancel_trade_confirm(InteractivePlayer& player, Widelands::TradeID tra
 	new CancelTradeConfirm(player, trade_id);
 }
 
-void show_unpause_trade_resume(InteractivePlayer& player, Widelands::Market& market, Widelands::TradeID trade_id) {
+void show_resume_trade_confirm(InteractivePlayer& player, Widelands::Market& market, Widelands::TradeID trade_id) {
 	new UnpauseTradeConfirm(player, market, trade_id);
+}
+
+void show_generic_callback_confirm(InteractivePlayer& player, Widelands::MapObject* object, const std::string& title, const std::string& body, std::function<void()> callback) {
+	new GenericCallbackConfirm(player, object, title, body, callback);
 }
