@@ -390,7 +390,10 @@ void InputQueueDisplay::unlock_desired_fill(bool call_unlock_fn) {
 	b_increase_desired_fill_.set_tooltip(create_tooltip(true));
 }
 
-void InputQueueDisplay::lock_desired_fill(const std::string& reason, const std::string& unlock_title, const std::string& unlock_body, std::function<void()> unlock_fn) {
+void InputQueueDisplay::lock_desired_fill(const std::string& reason,
+                                          const std::string& unlock_title,
+                                          const std::string& unlock_body,
+                                          std::function<void()> unlock_fn) {
 	lock_desired_fill_ = true;
 	unlock_fn_ = unlock_fn;
 	unlock_title_ = unlock_title;
@@ -828,7 +831,8 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 		                 (icons_[0]->get_h() - max_fill_indicator_.height()) / 2;
 		r.blit(Vector2i(calc_xpos(desired_fill), ypos), &max_fill_indicator_);
 
-		if (can_act_ && fill_index_under_mouse_ >= 0 && (!lock_desired_fill_ || (SDL_GetModState() & KMOD_CTRL) != 0)) {
+		if (can_act_ && fill_index_under_mouse_ >= 0 &&
+		    (!lock_desired_fill_ || (SDL_GetModState() & KMOD_CTRL) != 0)) {
 			r.blitrect_scale(Rectf(calc_xpos(fill_index_under_mouse_), ypos,
 			                       max_fill_indicator_.width(), max_fill_indicator_.height()),
 			                 &max_fill_indicator_, max_fill_indicator_.rect(), 0.4f,

@@ -107,7 +107,10 @@ public:
 
 	void set_max_icons(size_t);
 
-	void lock_desired_fill(const std::string& reason, const std::string& unlock_title, const std::string& unlock_body, std::function<void()> unlock_fn);
+	void lock_desired_fill(const std::string& reason,
+	                       const std::string& unlock_title,
+	                       const std::string& unlock_body,
+	                       std::function<void()> unlock_fn);
 	void unlock_desired_fill(bool call_unlock_fn);
 
 protected:

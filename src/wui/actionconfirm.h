@@ -33,7 +33,11 @@ struct PlayerImmovable;
 struct Ship;
 }  // namespace Widelands
 
-void show_generic_callback_confirm(InteractivePlayer& player, Widelands::MapObject* object, const std::string& title, const std::string& body, std::function<void()> callback);
+void show_generic_callback_confirm(InteractivePlayer& player,
+                                   Widelands::MapObject* object,
+                                   const std::string& title,
+                                   const std::string& body,
+                                   std::function<void()> callback);
 
 // Building confirm windows
 void show_bulldoze_confirm(InteractivePlayer& player,
@@ -58,6 +62,8 @@ void show_resign_confirm(InteractivePlayer& player);
 // Trade confirm windows
 void show_cancel_trade_confirm(InteractivePlayer& player, Widelands::TradeID trade_id);
 
-void show_resume_trade_confirm(InteractivePlayer& player, Widelands::Market& market, Widelands::TradeID trade_id);
+void show_resume_trade_confirm(InteractivePlayer& player,
+                               Widelands::Market& market,
+                               Widelands::TradeID trade_id);
 
 #endif  // end of include guard: WL_WUI_ACTIONCONFIRM_H

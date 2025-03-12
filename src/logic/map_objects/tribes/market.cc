@@ -671,7 +671,8 @@ std::string TradeInstance::format_richtext(const TradeID id,
 		                                 num_batches - trade->second.num_shipped_batches));
 
 		bool other_paused = false;
-		if (const auto other_trade = other_market->trade_orders().find(id); other_trade != other_market->trade_orders().end()) {
+		if (const auto other_trade = other_market->trade_orders().find(id);
+		    other_trade != other_market->trade_orders().end()) {
 			other_paused = other_trade->second.paused;
 		}
 
@@ -681,7 +682,7 @@ std::string TradeInstance::format_richtext(const TradeID id,
 				paused_text = _("Paused by both players");
 			} else {
 				paused_text = can_act ? _("Paused by you") :
-					                     format_l(_("Paused by %s"), own_market->owner().get_name());
+				                        format_l(_("Paused by %s"), own_market->owner().get_name());
 			}
 		} else {
 			if (other_paused) {

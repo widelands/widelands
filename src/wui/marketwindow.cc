@@ -330,7 +330,8 @@ private:
 		if (button_pause_ != nullptr) {
 			if (paused) {
 				button_pause_->set_title(_("Resume"));
-				button_pause_->set_tooltip(_("Resume this paused trade. This requires all queues to be at their maximum capacity."));
+				button_pause_->set_tooltip(_("Resume this paused trade. This requires all queues to be "
+				                             "at their maximum capacity."));
 			} else {
 				button_pause_->set_title(_("Pause"));
 				button_pause_->set_tooltip(_("Pause this trade"));
@@ -343,9 +344,11 @@ private:
 				iqd->unlock_desired_fill(false);
 			}
 		} else {
-			std::string reason(_("You need to pause the trade before you can change the queue capacity."));
+			std::string reason(
+			   _("You need to pause the trade before you can change the queue capacity."));
 			std::string title(_("Pause Trade?"));
-			std::string body(_("Changing the capacity of the input queues will cause the trade to be paused. Pause the trade now?"));
+			std::string body(_("Changing the capacity of the input queues will cause the trade to be "
+			                   "paused. Pause the trade now?"));
 
 			std::function<void()> unlock_fn = [this]() { toggle_pause_action(); };
 
@@ -379,16 +382,20 @@ private:
 			}
 
 			for (const auto& pair : it->second.wares_queues_) {
-				game.send_player_set_input_max_fill(*own_market, pair.second->get_index(), pair.second->get_type(), pair.second->get_max_size(), false, trade_id_);
+				game.send_player_set_input_max_fill(*own_market, pair.second->get_index(),
+				                                    pair.second->get_type(),
+				                                    pair.second->get_max_size(), false, trade_id_);
 			}
-			game.send_player_set_input_max_fill(*own_market, it->second.carriers_queue_->get_index(), it->second.carriers_queue_->get_type(), it->second.carriers_queue_->get_max_size(), false, trade_id_);
+			game.send_player_set_input_max_fill(*own_market, it->second.carriers_queue_->get_index(),
+			                                    it->second.carriers_queue_->get_type(),
+			                                    it->second.carriers_queue_->get_max_size(), false,
+			                                    trade_id_);
 		}
 
-		game.send_player_trade_action(ipl->player_number(), trade_id_,
-		                              is_paused ?
-		                                 Widelands::TradeAction::kResume :
-		                                 Widelands::TradeAction::kPause,
-		                              own_market->serial());
+		game.send_player_trade_action(
+		   ipl->player_number(), trade_id_,
+		   is_paused ? Widelands::TradeAction::kResume : Widelands::TradeAction::kPause,
+		   own_market->serial());
 	}
 
 	InteractiveBase& ibase_;

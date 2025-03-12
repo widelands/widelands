@@ -152,7 +152,9 @@ private:
  * Confirmation dialog box for unpausing a trade.
  */
 struct UnpauseTradeConfirm : public ActionConfirm {
-	explicit UnpauseTradeConfirm(InteractivePlayer& parent, Widelands::Market& market, Widelands::TradeID trade_id);
+	explicit UnpauseTradeConfirm(InteractivePlayer& parent,
+	                             Widelands::Market& market,
+	                             Widelands::TradeID trade_id);
 
 	void think() override;
 	void ok() override;
@@ -166,7 +168,11 @@ private:
  * Confirmation dialog box with an arbitrary title, body, and callback function.
  */
 struct GenericCallbackConfirm : public ActionConfirm {
-	explicit GenericCallbackConfirm(InteractivePlayer& parent, Widelands::MapObject* object, const std::string& title, const std::string& body, std::function<void()> callback);
+	explicit GenericCallbackConfirm(InteractivePlayer& parent,
+	                                Widelands::MapObject* object,
+	                                const std::string& title,
+	                                const std::string& body,
+	                                std::function<void()> callback);
 
 	void think() override;
 	void ok() override;
@@ -551,9 +557,14 @@ void CancelTradeConfirm::ok() {
 /**
  * Create the panels for confirmation.
  */
-UnpauseTradeConfirm::UnpauseTradeConfirm(InteractivePlayer& parent, Widelands::Market& market, Widelands::TradeID trade_id)
-   : ActionConfirm(
-        parent, _("Unpause?"), _("Do you really want to unpause this trade?\n\nDoing to will reset all queues to their maximum capacity."), &market),
+UnpauseTradeConfirm::UnpauseTradeConfirm(InteractivePlayer& parent,
+                                         Widelands::Market& market,
+                                         Widelands::TradeID trade_id)
+   : ActionConfirm(parent,
+                   _("Unpause?"),
+                   _("Do you really want to unpause this trade?\n\nDoing to will reset all queues "
+                     "to their maximum capacity."),
+                   &market),
      market_(&market),
      trade_id_(trade_id) {
 	// Nothing special to do
@@ -580,10 +591,15 @@ void UnpauseTradeConfirm::ok() {
 		assert(market != nullptr);
 		const Widelands::Market::TradeOrder& order = market->trade_orders().at(trade_id_);
 		for (const auto& pair : order.wares_queues_) {
-			game.send_player_set_input_max_fill(*market, pair.second->get_index(), pair.second->get_type(), pair.second->get_max_size(), false, trade_id_);
+			game.send_player_set_input_max_fill(*market, pair.second->get_index(),
+			                                    pair.second->get_type(), pair.second->get_max_size(),
+			                                    false, trade_id_);
 		}
-		game.send_player_set_input_max_fill(*market, order.carriers_queue_->get_index(), order.carriers_queue_->get_type(), order.carriers_queue_->get_max_size(), false, trade_id_);
-		game.send_player_trade_action(iaplayer().player_number(), trade_id_, Widelands::TradeAction::kResume, market->serial());
+		game.send_player_set_input_max_fill(*market, order.carriers_queue_->get_index(),
+		                                    order.carriers_queue_->get_type(),
+		                                    order.carriers_queue_->get_max_size(), false, trade_id_);
+		game.send_player_trade_action(
+		   iaplayer().player_number(), trade_id_, Widelands::TradeAction::kResume, market->serial());
 	}
 
 	die();
@@ -592,9 +608,12 @@ void UnpauseTradeConfirm::ok() {
 /**
  * Create the panels for confirmation.
  */
-GenericCallbackConfirm::GenericCallbackConfirm(InteractivePlayer& parent, Widelands::MapObject* object, const std::string& title, const std::string& body, std::function<void()> callback)
-   : ActionConfirm(parent, title, body, object),
-     callback_(callback) {
+GenericCallbackConfirm::GenericCallbackConfirm(InteractivePlayer& parent,
+                                               Widelands::MapObject* object,
+                                               const std::string& title,
+                                               const std::string& body,
+                                               std::function<void()> callback)
+   : ActionConfirm(parent, title, body, object), callback_(callback) {
 	// Nothing special to do
 }
 
@@ -688,10 +707,16 @@ void show_cancel_trade_confirm(InteractivePlayer& player, Widelands::TradeID tra
 	new CancelTradeConfirm(player, trade_id);
 }
 
-void show_resume_trade_confirm(InteractivePlayer& player, Widelands::Market& market, Widelands::TradeID trade_id) {
+void show_resume_trade_confirm(InteractivePlayer& player,
+                               Widelands::Market& market,
+                               Widelands::TradeID trade_id) {
 	new UnpauseTradeConfirm(player, market, trade_id);
 }
 
-void show_generic_callback_confirm(InteractivePlayer& player, Widelands::MapObject* object, const std::string& title, const std::string& body, std::function<void()> callback) {
+void show_generic_callback_confirm(InteractivePlayer& player,
+                                   Widelands::MapObject* object,
+                                   const std::string& title,
+                                   const std::string& body,
+                                   std::function<void()> callback) {
 	new GenericCallbackConfirm(player, object, title, body, callback);
 }
