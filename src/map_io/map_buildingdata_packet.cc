@@ -61,7 +61,7 @@
 namespace Widelands {
 
 // Overall package version
-constexpr uint16_t kCurrentPacketVersion = 9;
+constexpr uint16_t kCurrentPacketVersion = 10;
 
 // Building type package versions
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
@@ -74,6 +74,7 @@ constexpr uint16_t kCurrentPacketVersionTrainingsite = 7;
 
 /* Packet versions changelog:
  * Overall: v1.1 = 9
+ * - 10 (v1.3): Added priority disambiguator id
  * Dismantlesite: v1.1 = 1
  * Constructionsite: v1.1 = 5
  * PFBuilding: v1.1 = 2
@@ -104,6 +105,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
+		// TODO(Nordfriese): Savegame compatibility v1.2
 		if (packet_version <= kCurrentPacketVersion && packet_version >= 9) {
 			while (!fr.end_of_file()) {
 				Serial const serial = fr.unsigned_32();
@@ -160,8 +162,9 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 
 					for (size_t i = fr.unsigned_32(); i != 0u; --i) {
 						const std::string warename(fr.string());
-						building.set_priority(
-						   wwWARE, egbase.descriptions().ware_index(warename), WarePriority(fr));
+						const uint32_t disambiguator_id = packet_version >= 10 ? fr.unsigned_32() : 0;
+						building.set_priority(wwWARE, egbase.descriptions().ware_index(warename),
+						                      WarePriority(fr), disambiguator_id);
 					}
 
 					if (uint32_t const leaver_serial = fr.unsigned_32()) {
@@ -624,6 +627,7 @@ void MapBuildingdataPacket::read_market(Market& market,
 				trade.initial_num_batches = fr.unsigned_32();
 				trade.num_shipped_batches = fr.unsigned_32();
 				trade.received_traded_wares_in_this_batch = fr.unsigned_32();
+				trade.paused = fr.unsigned_8() != 0;
 
 				for (size_t j = fr.unsigned_32(); j > 0; --j) {
 					const std::string warename(fr.string());
@@ -1223,7 +1227,8 @@ void MapBuildingdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 
 			fw.unsigned_32(building->ware_priorities_.size());
 			for (const auto& pair : building->ware_priorities_) {
-				fw.string(egbase.descriptions().get_ware_descr(pair.first)->name());
+				fw.string(egbase.descriptions().get_ware_descr(pair.first.first)->name());
+				fw.unsigned_32(pair.first.second);
 				pair.second.write(fw);
 			}
 
@@ -1496,6 +1501,7 @@ void MapBuildingdataPacket::write_market(const Market& market,
 		fw.unsigned_32(order.second.initial_num_batches);
 		fw.unsigned_32(order.second.num_shipped_batches);
 		fw.unsigned_32(order.second.received_traded_wares_in_this_batch);
+		fw.unsigned_8(order.second.paused ? 1 : 0);
 
 		fw.unsigned_32(order.second.items.size());
 		for (const auto& ware_amount : order.second.items) {
