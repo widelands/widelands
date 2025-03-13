@@ -305,6 +305,10 @@ bool Market::is_ready_to_launch_batch(const TradeID trade_id) const {
 	const auto& trade_order = it->second;
 	assert(!trade_order.fulfilled());
 
+	if (trade_order.paused) {
+		return false;
+	}
+
 	// Do we have all necessary carriers and wares for a batch?
 	if (static_cast<int>(trade_order.carriers_queue_->get_filled()) <
 	    trade_order.num_wares_per_batch()) {
@@ -355,20 +359,156 @@ void Market::launch_batch(const TradeID trade_id, Game* game) {
 	}
 }
 
-InputQueue& Market::inputqueue(DescriptionIndex index, WareWorker ware_worker, const Request* r) {
-	for (auto& pair : trade_orders_) {
-		if (ware_worker == wwWARE) {
-			auto it = pair.second.wares_queues_.find(index);
-			if (it != pair.second.wares_queues_.end() && it->second->matches(*r)) {
-				return *it->second;
-			}
-		} else if (pair.second.carriers_queue_->matches(*r)) {
-			return *pair.second.carriers_queue_;
-		}
+InputQueue& Market::inputqueue(const DescriptionIndex index,
+                               const WareWorker ware_worker,
+                               const Request* r,
+                               const uint32_t disambiguator_id) {
+	std::pair<InputQueue*, TradeID> pair = find_inputqueue(index, ware_worker, r, disambiguator_id);
+	if (pair.first != nullptr) {
+		return *pair.first;
 	}
 
 	// The parent will throw an exception.
-	return Building::inputqueue(index, ware_worker, r);
+	return Building::inputqueue(index, ware_worker, r, disambiguator_id);
+}
+
+std::pair<InputQueue*, TradeID> Market::find_inputqueue(const DescriptionIndex index,
+                                                        const WareWorker ware_worker,
+                                                        const Request* r,
+                                                        const uint32_t disambiguator_id) {
+	if (r != nullptr) {
+		for (auto& pair : trade_orders_) {
+			if (ware_worker == wwWARE) {
+				auto it = pair.second.wares_queues_.find(index);
+				if (it != pair.second.wares_queues_.end() && it->second->matches(*r)) {
+					assert(it->second->get_index() == index);
+					return {it->second.get(), pair.first};
+				}
+			} else if (pair.second.carriers_queue_->matches(*r)) {
+				return {pair.second.carriers_queue_.get(), pair.first};
+			}
+		}
+	} else {
+		if (auto pair = trade_orders_.find(disambiguator_id); pair != trade_orders_.end()) {
+			if (ware_worker == wwWARE) {
+				auto it = pair->second.wares_queues_.find(index);
+				if (it != pair->second.wares_queues_.end()) {
+					assert(it->second->get_index() == index);
+					return {it->second.get(), pair->first};
+				}
+			} else if (pair->second.carriers_queue_->get_index() == index) {
+				return {pair->second.carriers_queue_.get(), pair->first};
+			}
+		}
+	}
+
+	return {nullptr, kInvalidTrade};
+}
+
+bool Market::can_change_max_fill(const DescriptionIndex index,
+                                 const WareWorker ware_worker,
+                                 const Request* r,
+                                 const uint32_t disambiguator_id) {
+	const std::pair<InputQueue*, TradeID> pair =
+	   find_inputqueue(index, ware_worker, r, disambiguator_id);
+	const auto order = trade_orders_.find(pair.second);
+	return order != trade_orders_.end() && order->second.paused &&
+	       Building::can_change_max_fill(index, ware_worker, r, disambiguator_id);
+}
+
+uint32_t Market::get_priority_disambiguator_id(const Request* req) const {
+	if (req != nullptr) {
+		for (const auto& pair : trade_orders_) {
+			for (const auto& queue : pair.second.wares_queues_) {
+				if (queue.second->matches(*req)) {
+					return pair.first;
+				}
+			}
+			if (pair.second.carriers_queue_->matches(*req)) {
+				return pair.first;
+			}
+		}
+	}
+
+	return Building::get_priority_disambiguator_id(req);
+}
+
+bool Market::is_paused(const TradeID id) const {
+	const auto trade_order = trade_orders_.find(id);
+	return trade_order != trade_orders_.end() && trade_order->second.paused;
+}
+
+bool Market::can_resume(const TradeID id) const {
+	if (!is_paused(id)) {
+		return false;
+	}
+
+	const TradeOrder& order = trade_orders_.at(id);
+	for (const auto& pair : order.wares_queues_) {
+		if (pair.second->get_max_fill() < pair.second->get_max_size()) {
+			return false;
+		}
+	}
+	return order.carriers_queue_->get_max_fill() >= order.carriers_queue_->get_max_size();
+}
+
+void Market::set_paused(Game& game, const TradeID id, const bool pause) {
+	auto trade_order = trade_orders_.find(id);
+	if (trade_order == trade_orders_.end() || trade_order->second.paused == pause) {
+		return;
+	}
+
+	if (!pause && !can_resume(id)) {
+		molog(game.get_gametime(), "Attempt to resume but cannot resume");
+		return;
+	}
+
+	trade_order->second.paused = pause;
+
+	if (Market* other = trade_order->second.other_side.get(game); other != nullptr) {
+		if (pause) {
+			other->send_message(game, Message::Type::kTrading, _("Trade Paused"),
+			                    other->descr().icon_filename(), _("Trade agreement paused"),
+			                    format_l(_("%1$s paused the trade with you at %2$s."),
+			                             other->owner().get_name(), other->get_market_name()),
+			                    true);
+		} else {
+			other->send_message(game, Message::Type::kTrading, _("Trade Resumed"),
+			                    other->descr().icon_filename(), _("Trade agreement resumed"),
+			                    format_l(_("%1$s resumed the trade with you at %2$s."),
+			                             other->owner().get_name(), other->get_market_name()),
+			                    true);
+		}
+	}
+
+	Notifications::publish(NoteTradeChanged(
+	   id, pause ? NoteTradeChanged::Action::kPaused : NoteTradeChanged::Action::kUnpaused));
+
+	if (!pause) {
+		try_launching_batch(&game);
+	}
+}
+
+InputQueue* Market::find_overfull_input_queue() {
+	for (auto& order : trade_orders_) {
+		for (auto& pair : order.second.wares_queues_) {
+			if (pair.second->get_type() == wwWARE &&
+			    pair.second->get_filled() > pair.second->get_max_fill()) {
+				return pair.second.get();
+			}
+		}
+	}
+	return nullptr;
+}
+
+void Market::inputqueue_max_fill_changed() {
+	Building::inputqueue_max_fill_changed();
+
+	if (find_overfull_input_queue() != nullptr) {
+		if (Worker* carrier = carrier_.get(get_owner()->egbase()); carrier != nullptr) {
+			carrier->update_task_buildingwork(dynamic_cast<Game&>(get_owner()->egbase()));
+		}
+	}
 }
 
 bool Market::fetch_from_flag(Game& game) {
@@ -396,6 +536,15 @@ bool Market::get_building_work(Game& game, Worker& worker, bool /* success */) {
 		ware.init(game);
 		worker.start_task_dropoff(game, ware);
 		pending_dropout_wares_.pop_front();
+		return true;
+	}
+
+	if (InputQueue* queue = find_overfull_input_queue(); queue != nullptr) {
+		queue->set_filled(queue->get_filled() - 1);
+		const WareDescr& wd = *owner().tribe().get_ware_descr(queue->get_index());
+		WareInstance& ware = *new WareInstance(queue->get_index(), &wd);
+		ware.init(game);
+		worker.start_task_dropoff(game, ware);
 		return true;
 	}
 
@@ -523,10 +672,35 @@ std::string TradeInstance::format_richtext(const TradeID id,
 		if (num_batches != kInfiniteTrade) {
 			infotext += "</p><p>";
 			infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
-			                        format_l(ngettext("%d batch remaining", "%d batches remaining",
-			                                          num_batches - trade->second.num_shipped_batches),
-			                                 num_batches - trade->second.num_shipped_batches));
+				                    format_l(ngettext("%d batch remaining", "%d batches remaining",
+				                                      num_batches - trade->second.num_shipped_batches),
+				                             num_batches - trade->second.num_shipped_batches));
 		}
+
+		bool other_paused = false;
+		if (const auto other_trade = other_market->trade_orders().find(id);
+		    other_trade != other_market->trade_orders().end()) {
+			other_paused = other_trade->second.paused;
+		}
+
+		std::string paused_text;
+		if (trade->second.paused) {
+			if (other_paused) {
+				paused_text = _("Paused by both players");
+			} else {
+				paused_text = can_act ? _("Paused by you") :
+				                        format_l(_("Paused by %s"), own_market->owner().get_name());
+			}
+		} else {
+			if (other_paused) {
+				paused_text = format_l(_("Paused by %s"), other_market->owner().get_name());
+			} else {
+				paused_text = _("Active");
+			}
+		}
+
+		infotext += "</p><p>";
+		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph, paused_text);
 	}
 
 	infotext += "</p>";

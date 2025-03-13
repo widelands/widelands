@@ -63,6 +63,8 @@ enum class TradeAction : uint8_t {
 	kAccept = 1,
 	kReject = 2,
 	kRetract = 3,
+	kPause = 4,
+	kResume = 5,
 };
 
 struct NoteTradeChanged {
@@ -75,7 +77,9 @@ struct NoteTradeChanged {
 		kRetracted,
 		kCancelled,
 		kCompleted,
-		kWareArrived
+		kWareArrived,
+		kPaused,
+		kUnpaused
 	};
 
 	TradeID id;
