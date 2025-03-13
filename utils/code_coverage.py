@@ -60,7 +60,7 @@ os.makedirs(reports_dir, exist_ok=True)
 
 hit_lines_total = 0
 missed_lines_total = 0
-for src_file in StatsForAllLines:
+for src_file in sorted(StatsForAllLines):
 	hit_lines = 0
 	missed_lines = 0
 	for line in StatsForAllLines[src_file]:
@@ -80,12 +80,12 @@ for src_file in StatsForAllLines:
 		if args.details:
 			with open(src_file, mode='r') as src:
 				src_lines = src.readlines()
-				output_file = f'{reports_dir}/{src_file.replace('/', '_').removeprefix('_')}.csv'
+				output_file = reports_dir + '/' + src_file.replace('/', '_').lstrip('_') + '.csv'
 				with open(output_file, mode='w', newline='') as file:
 					writer = csv.writer(file)
 					writer.writerow(['Line', 'Count', 'Code'])
 					for line in StatsForAllLines[src_file]:
-						writer.writerow([line, StatsForAllLines[src_file][line], src_lines[line - 1].removesuffix('\n').removesuffix('\r')])
+						writer.writerow([line, StatsForAllLines[src_file][line], src_lines[line - 1].rstrip('\r\n')])
 
 			if args.verbose:
 				print(f'{src_file}: Found {total} lines total, hit {hit_lines}, miss {missed_lines}, coverage {coverage * 100}%. Detailed report was written to {output_file}.')
