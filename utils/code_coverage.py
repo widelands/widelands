@@ -80,7 +80,7 @@ for src_file in StatsForAllLines:
 		if args.details:
 			with open(src_file, mode='r') as src:
 				src_lines = src.readlines()
-				output_file = f'{reports_dir}/{src_file.replace("/", "_").removeprefix("_")}.csv'
+				output_file = f'{reports_dir}/{src_file.replace('/', '_').removeprefix('_')}.csv'
 				with open(output_file, mode='w', newline='') as file:
 					writer = csv.writer(file)
 					writer.writerow(['Line', 'Count', 'Code'])
