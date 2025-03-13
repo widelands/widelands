@@ -753,7 +753,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:373
 msgid "Defeat the enemies!"
-msgstr ""
+msgstr "Porazte nepriateľov!"
 
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:375
