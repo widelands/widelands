@@ -562,7 +562,7 @@ UnpauseTradeConfirm::UnpauseTradeConfirm(InteractivePlayer& parent,
                                          Widelands::TradeID trade_id)
    : ActionConfirm(parent,
                    _("Unpause?"),
-                   _("Do you really want to unpause this trade?\n\nDoing to will reset all queues "
+                   _("Do you really want to unpause this trade?\n\nDoing so will reset all queues "
                      "to their maximum capacity."),
                    &market),
      market_(&market),
@@ -580,7 +580,7 @@ void UnpauseTradeConfirm::think() {
 }
 
 /**
- * The "Ok" button was clicked, so issue the command for cancelling the trade.
+ * The "Ok" button was clicked, so issue the command for resuming the trade.
  */
 void UnpauseTradeConfirm::ok() {
 	Widelands::Game& game = iaplayer().game();
