@@ -672,9 +672,9 @@ std::string TradeInstance::format_richtext(const TradeID id,
 		if (num_batches != kInfiniteTrade) {
 			infotext += "</p><p>";
 			infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
-				                    format_l(ngettext("%d batch remaining", "%d batches remaining",
-				                                      num_batches - trade->second.num_shipped_batches),
-				                             num_batches - trade->second.num_shipped_batches));
+			                        format_l(ngettext("%d batch remaining", "%d batches remaining",
+			                                          num_batches - trade->second.num_shipped_batches),
+			                                 num_batches - trade->second.num_shipped_batches));
 		}
 
 		bool other_paused = false;
