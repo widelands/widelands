@@ -620,7 +620,7 @@ msgstr "Informácie"
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:398
 msgid "Click on a field to show information about it"
-msgstr "Kliknutím zobraziť ďalšie informácie o políčku."
+msgstr "Kliknutím zobraziť ďalšie informácie o políčku"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:402
@@ -1610,7 +1610,7 @@ msgstr "Chyba pri vytváraní adresára!"
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:186
 #, c-format
 msgid "Error while creating directory ‘%s’."
-msgstr "Chyba pri vytváraní adresára: %s"
+msgstr "Chyba pri vytváraní adresára: %s."
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:313
 #: ../../../../src/wui/game_main_menu_save_game.cc:325
@@ -2905,7 +2905,7 @@ msgstr "Zmizlo stavenisko nového prístavu"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1922
 msgid "Port Lost!"
-msgstr "Strata prístavu"
+msgstr "Strata prístavu!"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1923
 msgid "Unloading of wares failed, expedition is cancelled now."
@@ -9009,7 +9009,7 @@ msgstr "Počet lodí"
 
 #: ../../../../src/wui/attack_window.cc:376
 msgid "Number of soldiers"
-msgstr "Počet vojakov:"
+msgstr "Počet vojakov"
 
 #: ../../../../src/wui/attack_window.cc:383
 msgid "Send less ships. Hold down Ctrl to send no ships"
@@ -10812,11 +10812,11 @@ msgstr "Ukončiť zamestnanie vybraného pracovníka"
 
 #: ../../../../src/wui/productionsitewindow.cc:246
 msgid "coming"
-msgstr "Prichádza"
+msgstr "prichádza"
 
 #: ../../../../src/wui/productionsitewindow.cc:246
 msgid "vacant"
-msgstr "Neobsadené"
+msgstr "neobsadené"
 
 #: ../../../../src/wui/productionsitewindow.cc:311
 msgid "(vacant)"
@@ -11486,7 +11486,7 @@ msgstr "Začať teraz ďalšiu misiu"
 
 #: ../../../../src/wui/story_message_box.cc:125
 msgid "Continue playing this mission"
-msgstr "Pokračovať v hraní tejto misie."
+msgstr "Pokračovať v hraní tejto misie"
 
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
 #: ../../../../src/wui/suggested_teams_box.cc:85
