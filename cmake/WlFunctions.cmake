@@ -72,6 +72,8 @@ macro(_common_compile_tasks)
     set(TARGET_LINK_FLAGS "-static")
   endif()
 
+  target_compile_options(${NAME} PUBLIC -fprofile-dir=${CMAKE_BINARY_DIR}/coverage/binary/${NAME})
+
   if(ARG_THIRD_PARTY OR ARG_THIRD_PARTY_WITH_INCLUDES)
     # Disable all warnings for third_party.
     set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} -w")
