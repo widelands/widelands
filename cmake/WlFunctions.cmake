@@ -242,7 +242,12 @@ function(wl_test NAME)
 
   _common_compile_tasks()
 
-  add_test(${NAME} ${NAME})
+  add_test(
+    NAME ${NAME}
+    COMMAND ${CMAKE_SOURCE_DIR}/utils/test_wrapper.sh ${CMAKE_CURRENT_BINARY_DIR}/${NAME}
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+  )
+
   add_dependencies(wl_tests ${NAME})
 endfunction()
 

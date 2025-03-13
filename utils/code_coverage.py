@@ -6,6 +6,7 @@ import sys
 
 StatsForAllLines = {}
 TotalUniqueLines = 0
+TotalHits = 0
 
 widelands_basedir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -33,11 +34,14 @@ def process(json_file_path):
 
 				for line_object in source_file_object['lines']:
 					line_number = line_object['line_number']
+					count = line_object['count']
 					if not line_number in LineStats:
 						LineStats[line_number] = 0
 						global TotalUniqueLines
 						TotalUniqueLines += 1
-					LineStats[line_number] += line_object['count']
+					global TotalHits
+					TotalHits += count
+					LineStats[line_number] += count
 	except Exception as e:
 		print(f'ERROR: Could not process {json_file_path}:', e)
 
@@ -103,7 +107,7 @@ if TotalUniqueLines == 0:
 
 coverage_total = hit_lines_total / TotalUniqueLines
 
-print(f'Total unit test code coverage: Found {TotalUniqueLines} lines total, hit {hit_lines_total}, missed {missed_lines_total}, coverage {coverage_total * 100}%.')
+print(f'Total unit test code coverage: Found {TotalUniqueLines} lines total with {TotalHits} total hits, hit {hit_lines_total}, missed {missed_lines_total}, coverage {coverage_total * 100}%.')
 
 output_file = os.path.abspath(reports_dir + '/report.csv')
 with open(output_file, mode='w', newline='') as file:

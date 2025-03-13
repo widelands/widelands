@@ -9,11 +9,11 @@ test -d coverage/json || mkdir -p coverage/json
 rm coverage/json/* coverage/report/* >/dev/null 2>&1 || true
 cd coverage/json
 
-for unit_test in ../binary/*
+for unit_test in ../test_runs/*
 do
 	unit_test="$(basename "$unit_test")"
 
-	for gcda_file_orig_relative in $(find "../binary/$unit_test" -name "*.gcda")
+	for gcda_file_orig_relative in $(find "../test_runs/$unit_test" -name "*.gcda")
 	do
 		gcda_file_orig="$(realpath "$gcda_file_orig_relative")"
 		gcda_file="$(sed 's|#|/|g' <<< "$(basename "$gcda_file_orig")")"
