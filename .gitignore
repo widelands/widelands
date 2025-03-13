@@ -39,6 +39,9 @@ CMakeSettings.json
 
 # Profilers
 gmon.out
+*.gcda
+*.gcno
+*.gcov
 
 # Validation checks
 /po_validation

@@ -497,6 +497,23 @@ if (OPTION_BUILD_TESTS)
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     DEPENDS wl_tests
   )
+
+  if((CMAKE_BUILD_TYPE STREQUAL "Debug") AND ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU"))
+    message(STATUS "Adding GCOV code coverage diagnostics")
+
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fprofile-arcs")
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-ftest-coverage")
+    link_libraries(gcov)
+
+    # Needed so the coverage files don't overwrite each other
+    set(CTEST_PARALLEL_LEVEL 1)
+
+    add_custom_target(_code_coverage ALL
+      COMMAND ${CMAKE_SOURCE_DIR}/utils/code_coverage.sh ${CODE_COVERAGE_ARGS}
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+      DEPENDS _run_all_tests
+    )
+  endif()
 endif (OPTION_BUILD_TESTS)
 
 install (
