@@ -35,9 +35,9 @@ constexpr int kButtonSize = 34;
 constexpr int kSpacing = 8;
 constexpr int kMinBoxWidth = 250;
 
-constexpr const char* pic_tab_trade_new = "images/wui/buildings/menu_tab_trade.png";
-constexpr const char* pic_tab_trade_proposals = "images/wui/buildings/menu_tab_trade_proposals.png";
-constexpr const char* pic_tab_trade_offers = "images/wui/buildings/menu_tab_trade_offers.png";
+constexpr const char* kIconTabTradeNew = "images/wui/buildings/menu_tab_trade.png";
+constexpr const char* kIconTabTradeProposals = "images/wui/buildings/menu_tab_trade_proposals.png";
+constexpr const char* kIconTabTradeOffers = "images/wui/buildings/menu_tab_trade_offers.png";
 constexpr const char* kIconEndInfinity = "images/wui/menus/end_infinity.png";
 constexpr const char* kIconInfinity = "images/wui/menus/infinity.png";
 
@@ -713,19 +713,19 @@ void MarketWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	const bool can_act = iplayer != nullptr && iplayer->can_act(market->owner().player_number());
 
 	if (can_act) {
-		get_tabs()->add("propose", g_image_cache->get(pic_tab_trade_new),
+		get_tabs()->add("propose", g_image_cache->get(kIconTabTradeNew),
 		                new NewTradeProposalBox(*get_tabs(), *iplayer, *market), _("Propose Trade"));
 	}
 
 	TradeProposalsBox* tpb = new TradeProposalsBox(*get_tabs(), *this, *ibase(), *market);
 	get_tabs()->add(
-	   "proposals", g_image_cache->get(pic_tab_trade_proposals), tpb, _("Proposed Trades"));
+	   "proposals", g_image_cache->get(kIconTabTradeProposals), tpb, _("Proposed Trades"));
 	tab_proposals_ = get_tabs()->tabs().back();
 	tpb->update_proposals_tooltip();
 
 	if (can_act) {
 		TradeOffersBox* tob = new TradeOffersBox(*get_tabs(), *this, *iplayer, *market);
-		get_tabs()->add("offers", g_image_cache->get(pic_tab_trade_offers), tob, _("Trade Offers"));
+		get_tabs()->add("offers", g_image_cache->get(kIconTabTradeOffers), tob, _("Trade Offers"));
 		tab_offers_ = get_tabs()->tabs().back();
 		tob->update_offers_tooltip();
 	}
