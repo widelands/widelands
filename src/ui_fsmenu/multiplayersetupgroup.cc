@@ -460,7 +460,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 			tribes_dropdown_.add(pgettext("tribe", "Random"), kRandom,
 			                     g_image_cache->get("images/ui_fsmenu/random.png"), false,
-			                     _("The tribe will be selected at random"));
+			                     _("The tribe will be selected at random."));
 			if (player_setting.random_tribe) {
 				tribes_dropdown_.select(kRandom);
 			} else {
