@@ -63,6 +63,7 @@ jobs:
         else
           export CXX="/usr/bin/${{ matrix.compiler }}" # g++-10
           export CC="${CXX/g++/gcc}"                   # gcc-10
+          export GCOV_BINARY="${CXX/g++/gcov}"         # gcov-10
         fi
         mkdir build
         pushd build

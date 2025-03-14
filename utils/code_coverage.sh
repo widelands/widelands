@@ -20,7 +20,7 @@ do
 		notes_file="${gcda_file%.gcda}.gcno"
 
 		ln -s -f "$gcda_file_orig" "$gcda_file"
-		gcov "$gcda_file" -o "$notes_file" --json-format > /dev/null
+		"${GCOV_BINARY:-gcov}" "$gcda_file" -o "$notes_file" --json-format > /dev/null
 		rm "$gcda_file"
 
 		output_basename="$(basename "$gcda_file_orig_relative")"
