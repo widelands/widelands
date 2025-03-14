@@ -33,6 +33,8 @@ constexpr int kButtonSize = 34;
 constexpr int kSpacing = 8;
 
 constexpr const char* pic_tab_wares = "images/wui/buildings/menu_tab_wares.png";
+constexpr const char* kIconEndInfinity = "images/wui/menus/end_infinity.png";
+constexpr const char* kIconInfinity = "images/wui/menus/infinity.png";
 
 constexpr Duration kUpdateTimeInGametimeMs(500);  //  half a second, gametime
 
@@ -43,6 +45,7 @@ public:
 	     iplayer_(iplayer),
 	     market_(&market),
 	     hbox_(this, UI::PanelStyle::kWui, "hbox", 0, 0, UI::Box::Horizontal),
+	     batches_box_(this, UI::PanelStyle::kWui, "batches_box", 0, 0, UI::Box::Horizontal),
 	     buttons_box_(this, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal),
 	     player_(this,
 	             "player",
@@ -55,7 +58,7 @@ public:
 	             UI::DropdownType::kTextual,
 	             UI::PanelStyle::kWui,
 	             UI::ButtonStyle::kWuiSecondary),
-	     batches_(this,
+	     batches_(&batches_box_,
 	              "batches",
 	              0,
 	              0,
@@ -68,6 +71,15 @@ public:
 	              _("Batches:"),
 	              UI::SpinBox::Units::kNone,
 	              UI::SpinBox::Type::kBig),
+	     infinite_(&batches_box_,
+	               "toggle_infinite",
+	               0,
+	               0,
+	               34,
+	               34,
+	               UI::ButtonStyle::kWuiSecondary,
+	               g_image_cache->get(kIconInfinity),
+	               _("Toggle indefinite trade")),
 	     ok_(this, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("Propose")) {
 		set_size(400, 100);  // guard against SpinBox asserts
 
@@ -122,13 +134,27 @@ public:
 		buttons_box_.add_space(kSpacing);
 		b->set_repeating(true);
 
+		batches_box_.add(&infinite_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		batches_box_.add(&batches_, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
+
+		infinite_.sigclicked.connect([this]() {
+			const bool now_infinite = infinite_.style() != UI::Button::VisualState::kPermpressed;
+			infinite_.set_perm_pressed(now_infinite);
+			infinite_.set_pic(g_image_cache->get(now_infinite ? kIconEndInfinity : kIconInfinity));
+			if (now_infinite) {
+				batches_.set_interval(batches_.get_value(), batches_.get_value());
+			} else {
+				batches_.set_interval(1, 100);
+			}
+		});
+
 		add(&player_, UI::Box::Resizing::kFullSize);
 		add_space(kSpacing);
 		add(&hbox_, UI::Box::Resizing::kExpandBoth);
 		add_space(kSpacing);
 		add(&buttons_box_, UI::Box::Resizing::kExpandBoth);
 		add_space(kSpacing);
-		add(&batches_, UI::Box::Resizing::kFullSize);
+		add(&batches_box_, UI::Box::Resizing::kFullSize);
 		add_space(kSpacing);
 		add(&ok_, UI::Box::Resizing::kFullSize);
 		add_space(kSpacing);
@@ -150,7 +176,9 @@ private:
 		Widelands::TradeInstance trade;
 		trade.items_to_send = offer_->get_selection();
 		trade.items_to_receive = demand_->get_selection();
-		trade.num_batches = batches_.get_value();
+		trade.num_batches = infinite_.style() == UI::Button::VisualState::kPermpressed ?
+		                       Widelands::kInfiniteTrade :
+		                       batches_.get_value();
 		trade.initiator = market_;
 		trade.sending_player = iplayer_.player_number();
 		trade.receiving_player = player_.get_selected()->player_number();
@@ -214,12 +242,12 @@ private:
 	InteractivePlayer& iplayer_;
 	Widelands::OPtr<Widelands::Market> market_;
 
-	UI::Box hbox_, buttons_box_;
+	UI::Box hbox_, batches_box_, buttons_box_;
 	UI::Dropdown<Widelands::Player*> player_;
 	TradeProposalWaresDisplay* offer_;
 	TradeProposalWaresDisplay* demand_;
 	UI::SpinBox batches_;
-	UI::Button ok_;
+	UI::Button infinite_, ok_;
 };
 
 class TradeAgreementTab : public UI::Box {

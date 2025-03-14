@@ -92,7 +92,8 @@ int LuaMarket::set_marketname(lua_State* L) {
 
       :arg player: The player to make the trade offer to.
       :type player: :class:`wl.game.Player`
-      :arg num_batches: Total number of trading batches to send.
+      :arg num_batches: Total number of trading batches to send
+         (use :const:`-1` for indefinite trades).
       :type num_batches: :class:`integer`
       :arg items_to_send: A table of warename to amount of items to send in each batch.
       :type items_to_send: :class:`table`
