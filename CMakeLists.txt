@@ -22,6 +22,13 @@ set(CMAKE_FIND_FRAMEWORK LAST)
 # Absolute path reference for submodules
 set(WL_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 
+if(OPTION_BUILD_TESTS AND (CMAKE_BUILD_TYPE STREQUAL "Debug") AND ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU"))
+  set(ANALYSE_CODE_COVERAGE ON)
+  message(STATUS "Adding code coverage diagnostics")
+else()
+  set(ANALYSE_CODE_COVERAGE OFF)
+endif()
+
 # Add custom includes to override system libs
 FILE(GLOB custom_include_directories auto_dependencies/*)
 foreach(custom_include_dir ${custom_include_directories})
@@ -498,9 +505,7 @@ if (OPTION_BUILD_TESTS)
     DEPENDS wl_tests
   )
 
-  if((CMAKE_BUILD_TYPE STREQUAL "Debug") AND ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU"))
-    message(STATUS "Adding GCOV code coverage diagnostics")
-
+  if(ANALYSE_CODE_COVERAGE)
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fprofile-arcs")
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-ftest-coverage")
     link_libraries(gcov)
@@ -513,7 +518,7 @@ if (OPTION_BUILD_TESTS)
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
       DEPENDS _run_all_tests
     )
-  endif()
+  endif(ANALYSE_CODE_COVERAGE)
 endif (OPTION_BUILD_TESTS)
 
 install (
