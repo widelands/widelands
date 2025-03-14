@@ -331,7 +331,8 @@ int LuaGame::set_allow_naval_warfare(lua_State* L) {
          of the player who receives the trade.
       - **items_to_send** (:class:`table`): A table of ware names to amounts of wares to send.
       - **items_to_receive** (:class:`table`): A table of ware names to amounts of wares to receive.
-      - **num_batches** (:class:`integer`): The number of ware batches to exchange.
+      - **num_batches** (:class:`integer`): The number of ware batches to exchange
+         (:const:`-1` for indefinite trades).
 
       :see also: :meth:`get_trade`
       :see also: :meth:`wl.map.Market.propose_trade`
