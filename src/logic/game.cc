@@ -94,6 +94,7 @@
 #include "logic/addons.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game_settings.h"
+#include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/militarysite.h"
@@ -1424,24 +1425,39 @@ void Game::cancel_trade(TradeID trade_id, bool reached_regular_end, const Player
 	                                                     NoteTradeChanged::Action::kCancelled));
 }
 
-std::vector<TradeID> Game::find_trade_offers(PlayerNumber receiver) const {
+std::vector<TradeID> Game::find_trade_offers(PlayerNumber receiver, Coords accept_at) const {
 	std::vector<TradeID> result;
+	Path unused;
 	for (const auto& pair : trade_agreements_) {
 		if (pair.second.state == TradeInstance::State::kProposed &&
 		    pair.second.receiving_player == receiver) {
-			result.push_back(pair.first);
+
+			if (!accept_at.valid()) {
+				result.push_back(pair.first);
+			} else {
+				MutexLock m(MutexLock::ID::kObjects);
+				Market* initiator = pair.second.initiator.get(*this);
+				if (initiator != nullptr &&
+				    map().findpath(map().br_n(accept_at), map().br_n(initiator->get_position()), 0,
+				                   unused, CheckStepDefault(MOVECAPS_WALK), 0, 0, wwWORKER) >= 0) {
+					result.push_back(pair.first);
+				}
+			}
 		}
 	}
 	return result;
 }
 
-std::vector<TradeID> Game::find_trade_proposals(PlayerNumber initiator) const {
+std::vector<TradeID> Game::find_trade_proposals(PlayerNumber initiator,
+                                                Serial market_filter) const {
 	std::vector<TradeID> result;
 	for (const auto& pair : trade_agreements_) {
 		if (pair.second.state == TradeInstance::State::kProposed) {
-			if (Market* market = pair.second.initiator.get(*this);
-			    market != nullptr && market->owner().player_number() == initiator) {
-				result.push_back(pair.first);
+			if (market_filter == 0 || pair.second.initiator.serial() == market_filter) {
+				if (Market* market = pair.second.initiator.get(*this);
+				    market != nullptr && market->owner().player_number() == initiator) {
+					result.push_back(pair.first);
+				}
 			}
 		}
 	}

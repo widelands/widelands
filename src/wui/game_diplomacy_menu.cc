@@ -31,6 +31,7 @@
 constexpr int16_t kSpacing = 4;
 constexpr int16_t kRowSize = 32;
 constexpr int16_t kButtonWidth = 128;
+constexpr int16_t kMinBoxWidth = 250;
 
 GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
                                      UI::UniqueWindow::Registry& registry)
@@ -175,6 +176,10 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 	actions_hbox_.add(&actions_vbox_yes_, UI::Box::Resizing::kFullSize);
 	actions_hbox_.add_space(kSpacing);
 	actions_hbox_.add(&actions_vbox_no_, UI::Box::Resizing::kFullSize);
+
+	trades_box_offers_.set_min_desired_breadth(kMinBoxWidth);
+	trades_box_proposed_.set_min_desired_breadth(kMinBoxWidth);
+	trades_box_active_.set_min_desired_breadth(kMinBoxWidth);
 
 	trades_tabs_.add(
 	   "active", "", &trades_box_offers_, _("Trade offers you have received from other players"));
