@@ -62,8 +62,9 @@ std::vector<Soldier*> MilitarySite::SoldierControl::stationed_soldiers() const {
 
 std::vector<Soldier*> MilitarySite::SoldierControl::associated_soldiers() const {
 	std::vector<Soldier*> soldiers = stationed_soldiers();
-	if (military_site_->soldier_request_.get_request() != nullptr) {
-		for (const Transfer* t : military_site_->soldier_request_.get_request()->get_transfers()) {
+	if (military_site_->soldier_request_manager_.get_request() != nullptr) {
+		for (const Transfer* t :
+		     military_site_->soldier_request_manager_.get_request()->get_transfers()) {
 			Soldier& s = dynamic_cast<Soldier&>(*t->get_worker());
 			soldiers.push_back(&s);
 		}
@@ -348,7 +349,7 @@ MilitarySite::MilitarySite(const MilitarySiteDescr& ms_descr)
      soldier_control_(this),
 
      capacity_(ms_descr.get_max_number_of_soldiers()),
-     soldier_request_(
+     soldier_request_manager_(
         *this,
         ms_descr.prefers_heroes_at_start_ ? SoldierPreference::kHeroes :
                                             SoldierPreference::kRookies,
@@ -360,7 +361,7 @@ MilitarySite::MilitarySite(const MilitarySiteDescr& ms_descr)
 }
 
 MilitarySite::~MilitarySite() {
-	assert(soldier_request_.get_request() == nullptr);
+	assert(soldier_request_manager_.get_request() == nullptr);
 }
 
 /**
@@ -404,7 +405,7 @@ Note that the workers are dealt with in the PlayerImmovable code.
 */
 void MilitarySite::set_economy(Economy* const e, WareWorker type) {
 	Building::set_economy(e, type);
-	soldier_request_.set_economy(e, type);
+	soldier_request_manager_.set_economy(e, type);
 }
 
 /**
@@ -536,7 +537,7 @@ void MilitarySite::request_soldier_callback(Game& game,
 }
 
 void MilitarySite::update_soldier_request(bool /* incd */) {
-	soldier_request_.update();
+	soldier_request_manager_.update();
 
 	if (soldier_control()->soldier_capacity() < soldier_control_.present_soldiers().size()) {
 		drop_least_suited_soldier(false, nullptr);
@@ -787,7 +788,7 @@ std::unique_ptr<const BuildingSettings> MilitarySite::create_building_settings()
 // setters
 
 void MilitarySite::set_soldier_preference(SoldierPreference p) {
-	soldier_request_.set_preference(p);
+	soldier_request_manager_.set_preference(p);
 	next_swap_soldiers_time_ = Time(0);
 }
 }  // namespace Widelands

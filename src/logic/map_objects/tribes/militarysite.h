@@ -97,7 +97,7 @@ public:
 
 	void set_soldier_preference(SoldierPreference);
 	[[nodiscard]] SoldierPreference get_soldier_preference() const {
-		return soldier_request_.get_preference();
+		return soldier_request_manager_.get_preference();
 	}
 
 	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
@@ -179,7 +179,7 @@ private:
 	};
 	std::vector<SoldierJob> soldierjobs_;
 	Time next_swap_soldiers_time_{0U};
-	SoldierRequest soldier_request_;
+	SoldierRequestManager soldier_request_manager_;
 
 	static constexpr size_t kNoOfStatisticsStringCases = 4U;
 	std::vector<std::map<std::tuple<int, int, int>, std::string>> statistics_string_cache_{
