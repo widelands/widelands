@@ -537,6 +537,42 @@ public:
 				}
 			});
 
+			dropdown_move_ = new UI::Dropdown<Widelands::Serial>(this,
+					"move",
+					0,
+					0,
+					100,
+					8,
+					kButtonSize,
+					_("Move this trade…"),
+					UI::DropdownType::kTextualMenu,
+					UI::PanelStyle::kWui,
+					UI::ButtonStyle::kWuiSecondary);
+
+			std::multimap<uint32_t, const Widelands::Market*> markets = market.owner().get_markets(order.other_side.get(ibase.egbase())->get_position());
+			for (const auto& pair : markets) {
+				if (pair.second != &market) {
+					dropdown_move_->add(
+							pair.second->get_market_name(),
+							pair.second->serial(),
+							pair.second->descr().icon(),
+							false,
+							format_l(pair.first == markets.begin()->first ? _("Move this trade to %s (closest)") : _("Move this trade to %s"), pair.second->get_market_name()));
+				}
+			}
+			if (dropdown_move_->empty()) {
+				dropdown_move_->set_enabled(false);
+				dropdown_move_->set_tooltip(_("You have no markets you could move this trade to."));
+			}
+
+			dropdown_move_->selected.connect([this]() {
+				upcast(InteractivePlayer, ipl, &ibase_);
+				assert(ipl != nullptr);
+				ipl->game().send_player_trade_action(ipl->player_number(), trade_id_, Widelands::TradeAction::kMove, dropdown_move_->get_selected(), market_.serial());
+			});
+
+			add_space(kSpacing);
+			add(dropdown_move_, UI::Box::Resizing::kFullSize);
 			add_space(kSpacing);
 			add(button_pause_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			add_space(kSpacing);
@@ -653,6 +689,7 @@ private:
 	Time nextupdate_;
 	UI::MultilineTextarea info_;
 	UI::Button* button_pause_{nullptr};
+	UI::Dropdown<Widelands::Serial>* dropdown_move_{nullptr};
 	std::vector<InputQueueDisplay*> input_queues_;
 };
 
