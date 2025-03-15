@@ -264,7 +264,8 @@ void Market::move_trade_to(Game& game, const TradeID trade_id, Market& dest) {
 		return;  // Other side no longer exists
 	}
 	const auto other_it = other_market->trade_orders_.find(trade_id);
-	if (other_it == other_market->trade_orders_.end() || other_it->second->other_side.serial() != serial()) {
+	if (other_it == other_market->trade_orders_.end() ||
+	    other_it->second->other_side.serial() != serial()) {
 		return;  // Trade no longer exists
 	}
 
@@ -717,10 +718,11 @@ std::string TradeInstance::format_richtext(const TradeID id,
 
 		if (num_batches != kInfiniteTrade) {
 			infotext += "</p><p>";
-			infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
-			                        format_l(ngettext("%d batch remaining", "%d batches remaining",
-			                                          num_batches - trade->second->num_shipped_batches),
-			                                 num_batches - trade->second->num_shipped_batches));
+			infotext +=
+			   as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
+			               format_l(ngettext("%d batch remaining", "%d batches remaining",
+			                                 num_batches - trade->second->num_shipped_batches),
+			                        num_batches - trade->second->num_shipped_batches));
 		}
 
 		bool other_paused = false;

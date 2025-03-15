@@ -1243,12 +1243,10 @@ void Game::send_player_propose_trade(const TradeInstance& trade) {
 	   new CmdProposeTrade(get_gametime(), object->get_owner()->player_number(), trade));
 }
 
-void Game::send_player_trade_action(PlayerNumber sender,
-                                    TradeID trade_id,
-                                    TradeAction action,
-                                    Serial accepter,
-	                                Serial source) {
-	send_player_command(new CmdTradeAction(get_gametime(), sender, trade_id, action, accepter, source));
+void Game::send_player_trade_action(
+   PlayerNumber sender, TradeID trade_id, TradeAction action, Serial accepter, Serial source) {
+	send_player_command(
+	   new CmdTradeAction(get_gametime(), sender, trade_id, action, accepter, source));
 }
 
 void Game::send_player_set_stock_policy(Building& imm,
@@ -1438,7 +1436,8 @@ void Game::move_trade(const TradeID trade_id, Market& old_market, Market& new_ma
 		return;
 	}
 
-	if (instance->second.initiator.serial() == new_market.serial() || instance->second.receiver.serial() == new_market.serial()) {
+	if (instance->second.initiator.serial() == new_market.serial() ||
+	    instance->second.receiver.serial() == new_market.serial()) {
 		return;  // Trade is already there
 	}
 

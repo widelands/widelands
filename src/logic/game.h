@@ -318,11 +318,8 @@ public:
 	                                 const std::vector<uint32_t>& parameters);
 	void send_player_cancel_expedition_ship(const Ship&);
 	void send_player_propose_trade(const TradeInstance& trade);
-	void send_player_trade_action(PlayerNumber sender,
-	                              TradeID trade_id,
-	                              TradeAction action,
-	                              Serial accepter,
-	                              Serial source);
+	void send_player_trade_action(
+	   PlayerNumber sender, TradeID trade_id, TradeAction action, Serial accepter, Serial source);
 	void send_player_toggle_mute(const Building&, bool all);
 	void send_player_diplomacy(PlayerNumber, DiplomacyAction, PlayerNumber);
 	void send_player_pinned_note(

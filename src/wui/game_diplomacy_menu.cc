@@ -537,39 +537,30 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 			   iplayer_->player_number(), trade_id, Widelands::TradeAction::kRetract, 0, 0);
 		});
 
-					UI::Dropdown<Widelands::Serial>* move = new UI::Dropdown<Widelands::Serial>(buttons,
-							"move",
-							0,
-							0,
-							100,
-							8,
-							kRowSize,
-							_("Move this trade proposal…"),
-							UI::DropdownType::kPictorialMenu,
-							UI::PanelStyle::kWui,
-							UI::ButtonStyle::kWuiSecondary);
-					move->set_min_lineheight(kRowSize);
-					move->set_image(g_image_cache->get(kIconMoveTrade));
+		UI::Dropdown<Widelands::Serial>* move = new UI::Dropdown<Widelands::Serial>(
+		   buttons, "move", 0, 0, 100, 8, kRowSize, _("Move this trade proposal…"),
+		   UI::DropdownType::kPictorialMenu, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
+		move->set_min_lineheight(kRowSize);
+		move->set_image(g_image_cache->get(kIconMoveTrade));
 
-					std::vector<const Widelands::Market*> markets = iplayer_->player().get_markets();
-					for (const Widelands::Market* candidate : markets) {
-						if (candidate->serial() != market_serial) {
-							move->add(
-									candidate->get_market_name(),
-									candidate->serial(),
-									candidate->descr().icon(),
-									false,
-									format_l(_("Move this trade proposal to %s"), candidate->get_market_name()));
-						}
-					}
-					if (move->empty()) {
-						move->set_enabled(false);
-						move->set_tooltip(_("You have no markets you could move this trade to."));
-					} else {
-						move->selected.connect([this, move, trade_id, market_serial]() {
-							iplayer_->game().send_player_trade_action(iplayer_->player_number(), trade_id, Widelands::TradeAction::kMove, move->get_selected(), market_serial);
-						});
-					}
+		std::vector<const Widelands::Market*> markets = iplayer_->player().get_markets();
+		for (const Widelands::Market* candidate : markets) {
+			if (candidate->serial() != market_serial) {
+				move->add(candidate->get_market_name(), candidate->serial(), candidate->descr().icon(),
+				          false,
+				          format_l(_("Move this trade proposal to %s"), candidate->get_market_name()));
+			}
+		}
+		if (move->empty()) {
+			move->set_enabled(false);
+			move->set_tooltip(_("You have no markets you could move this trade to."));
+		} else {
+			move->selected.connect([this, move, trade_id, market_serial]() {
+				iplayer_->game().send_player_trade_action(iplayer_->player_number(), trade_id,
+				                                          Widelands::TradeAction::kMove,
+				                                          move->get_selected(), market_serial);
+			});
+		}
 
 		buttons->add(move, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		buttons->add_space(kSpacing);
@@ -643,40 +634,35 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		   buttons, "cancel", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
 		   g_image_cache->get("images/wui/menu_abort.png"), _("Cancel this trade agreement"));
 
-				UI::Dropdown<Widelands::Serial>* move = new UI::Dropdown<Widelands::Serial>(buttons,
-						"move",
-						0,
-						0,
-						100,
-						8,
-						kRowSize,
-						_("Move this trade…"),
-						UI::DropdownType::kPictorialMenu,
-						UI::PanelStyle::kWui,
-						UI::ButtonStyle::kWuiSecondary);
-					move->set_min_lineheight(kRowSize);
-					move->set_image(g_image_cache->get(kIconMoveTrade));
+		UI::Dropdown<Widelands::Serial>* move = new UI::Dropdown<Widelands::Serial>(
+		   buttons, "move", 0, 0, 100, 8, kRowSize, _("Move this trade…"),
+		   UI::DropdownType::kPictorialMenu, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
+		move->set_min_lineheight(kRowSize);
+		move->set_image(g_image_cache->get(kIconMoveTrade));
 
-				std::multimap<uint32_t, const Widelands::Market*> markets = own_market->owner().get_markets(other_market->get_position());
-				for (const auto& pair : markets) {
-					if (pair.second != own_market) {
-						const bool is_closest = pair.first == markets.begin()->first;
-						move->add(
-								is_closest ? format_l(_("%s (closest)"), pair.second->get_market_name()) : pair.second->get_market_name(),
-								pair.second->serial(),
-								pair.second->descr().icon(),
-								false,
-								format_l(is_closest ? _("Move this trade to %s (closest)") : _("Move this trade to %s"), pair.second->get_market_name()));
-					}
-				}
-				if (move->empty()) {
-					move->set_enabled(false);
-					move->set_tooltip(_("You have no markets you could move this trade to."));
-				}
+		std::multimap<uint32_t, const Widelands::Market*> markets =
+		   own_market->owner().get_markets(other_market->get_position());
+		for (const auto& pair : markets) {
+			if (pair.second != own_market) {
+				const bool is_closest = pair.first == markets.begin()->first;
+				move->add(is_closest ? format_l(_("%s (closest)"), pair.second->get_market_name()) :
+				                       pair.second->get_market_name(),
+				          pair.second->serial(), pair.second->descr().icon(), false,
+				          format_l(is_closest ? _("Move this trade to %s (closest)") :
+				                                _("Move this trade to %s"),
+				                   pair.second->get_market_name()));
+			}
+		}
+		if (move->empty()) {
+			move->set_enabled(false);
+			move->set_tooltip(_("You have no markets you could move this trade to."));
+		}
 
-				move->selected.connect([this, move, trade_id, market_serial]() {
-					iplayer_->game().send_player_trade_action(iplayer_->player_number(), trade_id, Widelands::TradeAction::kMove, move->get_selected(), market_serial);
-				});
+		move->selected.connect([this, move, trade_id, market_serial]() {
+			iplayer_->game().send_player_trade_action(iplayer_->player_number(), trade_id,
+			                                          Widelands::TradeAction::kMove,
+			                                          move->get_selected(), market_serial);
+		});
 
 		go_to->sigclicked.connect([this, own_market]() {
 			iplayer_->map_view()->scroll_to_field(

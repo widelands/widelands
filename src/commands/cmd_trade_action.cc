@@ -23,9 +23,17 @@
 
 namespace Widelands {
 
-CmdTradeAction::CmdTradeAction(
-   const Time& time, PlayerNumber pn, TradeID trade_id, TradeAction action, Serial accepter, Serial source)
-   : PlayerCommand(time, pn), trade_id_(trade_id), action_(action), accepter_(accepter), source_(source) {
+CmdTradeAction::CmdTradeAction(const Time& time,
+                               PlayerNumber pn,
+                               TradeID trade_id,
+                               TradeAction action,
+                               Serial accepter,
+                               Serial source)
+   : PlayerCommand(time, pn),
+     trade_id_(trade_id),
+     action_(action),
+     accepter_(accepter),
+     source_(source) {
 }
 
 CmdTradeAction::CmdTradeAction() = default;
@@ -60,8 +68,10 @@ void CmdTradeAction::execute(Game& game) {
 		break;
 
 	case TradeAction::kMove:
-		if (Market* new_market = dynamic_cast<Market*>(game.objects().get_object(accepter_)); new_market != nullptr) {
-			if (Market* old_market = dynamic_cast<Market*>(game.objects().get_object(source_)); old_market != nullptr) {
+		if (Market* new_market = dynamic_cast<Market*>(game.objects().get_object(accepter_));
+		    new_market != nullptr) {
+			if (Market* old_market = dynamic_cast<Market*>(game.objects().get_object(source_));
+			    old_market != nullptr) {
 				game.move_trade(trade_id_, *old_market, *new_market);
 			}
 		}

@@ -598,8 +598,8 @@ void UnpauseTradeConfirm::ok() {
 		game.send_player_set_input_max_fill(*market, order.carriers_queue_->get_index(),
 		                                    order.carriers_queue_->get_type(),
 		                                    order.carriers_queue_->get_max_size(), false, trade_id_);
-		game.send_player_trade_action(
-		   iaplayer().player_number(), trade_id_, Widelands::TradeAction::kResume, market->serial(), 0);
+		game.send_player_trade_action(iaplayer().player_number(), trade_id_,
+		                              Widelands::TradeAction::kResume, market->serial(), 0);
 	}
 
 	die();
