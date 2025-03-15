@@ -18,6 +18,8 @@
 
 #include "wui/marketwindow.h"
 
+#include <memory>
+
 #include "graphic/font_handler.h"
 #include "ui_basic/box.h"
 #include "ui_basic/dropdown.h"
@@ -31,16 +33,19 @@
 
 constexpr int kButtonSize = 34;
 constexpr int kSpacing = 8;
+constexpr int kMinBoxWidth = 250;
 
-constexpr const char* pic_tab_wares = "images/wui/buildings/menu_tab_wares.png";
+constexpr const char* kIconTabTradeNew = "images/wui/buildings/menu_tab_trade.png";
+constexpr const char* kIconTabTradeProposals = "images/wui/buildings/menu_tab_trade_proposals.png";
+constexpr const char* kIconTabTradeOffers = "images/wui/buildings/menu_tab_trade_offers.png";
 constexpr const char* kIconEndInfinity = "images/wui/menus/end_infinity.png";
 constexpr const char* kIconInfinity = "images/wui/menus/infinity.png";
 
 constexpr Duration kUpdateTimeInGametimeMs(500);  //  half a second, gametime
 
-class TradeProposalBox : public UI::Box {
+class NewTradeProposalBox : public UI::Box {
 public:
-	TradeProposalBox(UI::Panel& parent, InteractivePlayer& iplayer, Widelands::Market& market)
+	NewTradeProposalBox(UI::Panel& parent, InteractivePlayer& iplayer, Widelands::Market& market)
 	   : UI::Box(&parent, UI::PanelStyle::kWui, "propose_trade", 0, 0, UI::Box::Vertical),
 	     iplayer_(iplayer),
 	     market_(&market),
@@ -250,6 +255,220 @@ private:
 	UI::Button infinite_, ok_;
 };
 
+class TradeProposalsBox : public UI::Box {
+public:
+	TradeProposalsBox(UI::Panel& parent,
+	                  MarketWindow& mw,
+	                  InteractiveBase& ibase,
+	                  const Widelands::Market& market)
+	   : UI::Box(&parent, UI::PanelStyle::kWui, "proposed_trades", 0, 0, UI::Box::Vertical),
+	     ibase_(ibase),
+	     iplayer_(dynamic_cast<InteractivePlayer*>(&ibase_)),
+	     window_(mw),
+	     player_number_(market.owner().player_number()),
+	     market_serial_(market.serial()) {
+		set_min_desired_breadth(kMinBoxWidth);
+
+		trade_changed_subscriber_ = Notifications::subscribe<Widelands::NoteTradeChanged>(
+		   [this](const Widelands::NoteTradeChanged& /*note*/) { needs_update_ = true; });
+
+		update(true);
+	}
+
+	void think() override {
+		UI::Box::think();
+
+		update(needs_update_);
+		needs_update_ = false;
+	}
+
+	inline void update_proposals_tooltip() {
+		window_.update_proposals_tooltip(cached_trades_.size());
+	}
+
+private:
+	void update(const bool always) {
+		const std::vector<Widelands::TradeID> trades =
+		   ibase_.game().find_trade_proposals(player_number_, market_serial_);
+		if (!always && trades == cached_trades_) {
+			return;
+		}
+
+		cached_trades_ = trades;
+		delete_all_children();
+
+		update_proposals_tooltip();
+
+		if (trades.empty()) {
+			UI::MultilineTextarea* txt = new UI::MultilineTextarea(
+			   this, "text", 0, 0, 0, 0, UI::PanelStyle::kWui, std::string(),
+			   UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
+			   UI::MultilineTextarea::ScrollMode::kNoScrolling);
+			txt->set_style(UI::FontStyle::kWuiInfoPanelParagraph);
+			if (iplayer_ != nullptr) {
+				txt->set_text(
+				   _("There are no pending trade proposals at the moment. You can propose a new "
+				     "trade from the first tab."));
+			} else {
+				txt->set_text(_("There are no pending trade proposals at the moment."));
+			}
+			add(txt, UI::Box::Resizing::kFullSize);
+
+		} else {
+			const bool can_act = iplayer_ != nullptr && iplayer_->can_act(player_number_);
+
+			for (Widelands::TradeID trade_id : trades) {
+				const Widelands::TradeInstance& trade = ibase_.game().get_trade(trade_id);
+				UI::Box* box = new UI::Box(this, UI::PanelStyle::kWui, format("proposal_%u", trade_id),
+				                           0, 0, UI::Box::Horizontal);
+
+				box->add(new UI::MultilineTextarea(
+				            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui,
+				            trade.format_richtext(trade_id, ibase_.egbase(), player_number_, can_act),
+				            UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
+				            UI::MultilineTextarea::ScrollMode::kNoScrolling),
+				         UI::Box::Resizing::kExpandBoth);
+
+				if (can_act) {
+					UI::Button* cancel = new UI::Button(
+					   box, "cancel", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+					   g_image_cache->get("images/wui/menu_abort.png"), _("Retract this trade offer"));
+
+					cancel->sigclicked.connect([this, trade_id]() {
+						iplayer_->game().send_player_trade_action(
+						   iplayer_->player_number(), trade_id, Widelands::TradeAction::kRetract, 0);
+					});
+
+					box->add_space(kSpacing);
+					box->add(cancel, UI::Box::Resizing::kAlign, UI::Align::kTop);
+				}
+
+				add(box, UI::Box::Resizing::kExpandBoth);
+				add_space(kSpacing);
+			}
+		}
+
+		initialization_complete();
+	}
+
+	InteractiveBase& ibase_;
+	InteractivePlayer* iplayer_;
+	MarketWindow& window_;
+	const Widelands::PlayerNumber player_number_;
+	const Widelands::Serial market_serial_;
+	std::vector<Widelands::TradeID> cached_trades_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteTradeChanged>>
+	   trade_changed_subscriber_;
+	bool needs_update_ = false;
+};
+
+class TradeOffersBox : public UI::Box {
+public:
+	TradeOffersBox(UI::Panel& parent,
+	               MarketWindow& mw,
+	               InteractivePlayer& iplayer,
+	               const Widelands::Market& market)
+	   : UI::Box(&parent, UI::PanelStyle::kWui, "offered_trades", 0, 0, UI::Box::Vertical),
+	     iplayer_(iplayer),
+	     window_(mw),
+	     player_number_(market.owner().player_number()),
+	     market_serial_(market.serial()),
+	     market_coords_(market.get_position()) {
+		set_min_desired_breadth(kMinBoxWidth);
+
+		trade_changed_subscriber_ = Notifications::subscribe<Widelands::NoteTradeChanged>(
+		   [this](const Widelands::NoteTradeChanged& /*note*/) { needs_update_ = true; });
+
+		update(true);
+	}
+
+	void think() override {
+		UI::Box::think();
+
+		update(needs_update_);
+		needs_update_ = false;
+	}
+
+	inline void update_offers_tooltip() {
+		window_.update_offers_tooltip(cached_trades_.size());
+	}
+
+private:
+	void update(const bool always) {
+		const std::vector<Widelands::TradeID> trades =
+		   iplayer_.game().find_trade_offers(player_number_, market_coords_);
+		if (!always && trades == cached_trades_) {
+			return;
+		}
+
+		cached_trades_ = trades;
+		delete_all_children();
+
+		update_offers_tooltip();
+
+		if (trades.empty()) {
+			UI::MultilineTextarea* txt = new UI::MultilineTextarea(
+			   this, "text", 0, 0, 0, 0, UI::PanelStyle::kWui, std::string(),
+			   UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
+			   UI::MultilineTextarea::ScrollMode::kNoScrolling);
+			txt->set_style(UI::FontStyle::kWuiInfoPanelParagraph);
+			txt->set_text(_("Nobody has offered you any trades at the moment."));
+			add(txt, UI::Box::Resizing::kFullSize);
+
+		} else {
+			for (Widelands::TradeID trade_id : trades) {
+				const Widelands::TradeInstance& trade = iplayer_.game().get_trade(trade_id);
+				UI::Box* box = new UI::Box(this, UI::PanelStyle::kWui, format("proposal_%u", trade_id),
+				                           0, 0, UI::Box::Horizontal);
+
+				box->add(new UI::MultilineTextarea(
+				            box, "description", 0, 0, 0, 0, UI::PanelStyle::kWui,
+				            trade.format_richtext(trade_id, iplayer_.egbase(), player_number_, true),
+				            UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
+				            UI::MultilineTextarea::ScrollMode::kNoScrolling),
+				         UI::Box::Resizing::kExpandBoth);
+
+				UI::Button* yes = new UI::Button(
+				   box, "yes", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+				   g_image_cache->get("images/wui/menu_okay.png"), _("Accept this trade offer"));
+				UI::Button* no = new UI::Button(
+				   box, "no", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+				   g_image_cache->get("images/wui/menu_abort.png"), _("Reject this trade offer"));
+
+				yes->sigclicked.connect([this, trade_id]() {
+					iplayer_.game().send_player_trade_action(iplayer_.player_number(), trade_id,
+					                                         Widelands::TradeAction::kAccept,
+					                                         market_serial_);
+				});
+				no->sigclicked.connect([this, trade_id]() {
+					iplayer_.game().send_player_trade_action(
+					   iplayer_.player_number(), trade_id, Widelands::TradeAction::kReject, 0);
+				});
+
+				box->add_space(kSpacing);
+				box->add(no, UI::Box::Resizing::kAlign, UI::Align::kTop);
+				box->add_space(kSpacing);
+				box->add(yes, UI::Box::Resizing::kAlign, UI::Align::kTop);
+
+				add(box, UI::Box::Resizing::kExpandBoth);
+				add_space(kSpacing);
+			}
+		}
+
+		initialization_complete();
+	}
+
+	InteractivePlayer& iplayer_;
+	MarketWindow& window_;
+	const Widelands::PlayerNumber player_number_;
+	const Widelands::Serial market_serial_;
+	const Widelands::Coords market_coords_;
+	std::vector<Widelands::TradeID> cached_trades_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteTradeChanged>>
+	   trade_changed_subscriber_;
+	bool needs_update_ = false;
+};
+
 class TradeAgreementTab : public UI::Box {
 public:
 	TradeAgreementTab(UI::Panel& parent,
@@ -280,7 +499,7 @@ public:
 	           UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
 	           UI::MultilineTextarea::ScrollMode::kNoScrolling) {
 		ensure_box_can_hold_input_queues(*this);
-		set_min_desired_breadth(250);
+		set_min_desired_breadth(kMinBoxWidth);
 
 		add(&info_, UI::Box::Resizing::kExpandBoth);
 		add_space(kSpacing);
@@ -446,6 +665,18 @@ MarketWindow::MarketWindow(InteractiveBase& parent,
 	init(avoid_fastclick, workarea_preview_wanted);
 }
 
+void MarketWindow::update_proposals_tooltip(const uint32_t count) {
+	if (tab_proposals_ != nullptr) {
+		tab_proposals_->set_tooltip_text(format_l(_("Proposed Trades (%u)"), count));
+	}
+}
+
+void MarketWindow::update_offers_tooltip(const uint32_t count) {
+	if (tab_offers_ != nullptr) {
+		tab_offers_->set_tooltip_text(format_l(_("Trade Offers (%u)"), count));
+	}
+}
+
 void MarketWindow::setup_name_field_editbox(UI::Box& vbox) {
 	Widelands::Market* market = market_.get(ibase()->egbase());
 	if (market == nullptr || !ibase()->can_act(market->owner().player_number())) {
@@ -470,23 +701,41 @@ void MarketWindow::setup_name_field_editbox(UI::Box& vbox) {
 }
 
 void MarketWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
+	tab_offers_ = nullptr;
+	tab_proposals_ = nullptr;
+
 	Widelands::Market* market = market_.get(ibase()->egbase());
 	assert(market != nullptr);
 	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
 
-	if (upcast(InteractivePlayer, iplayer, ibase());
-	    iplayer != nullptr && iplayer->can_act(market->owner().player_number())) {
-		get_tabs()->add("propose", g_image_cache->get(pic_tab_wares),
-		                new TradeProposalBox(*get_tabs(), *iplayer, *market), _("Propose Trade"));
+	upcast(InteractivePlayer, iplayer, ibase());
+
+	const bool can_act = iplayer != nullptr && iplayer->can_act(market->owner().player_number());
+
+	if (can_act) {
+		get_tabs()->add("propose", g_image_cache->get(kIconTabTradeNew),
+		                new NewTradeProposalBox(*get_tabs(), *iplayer, *market), _("Propose Trade"));
+	}
+
+	TradeProposalsBox* tpb = new TradeProposalsBox(*get_tabs(), *this, *ibase(), *market);
+	get_tabs()->add(
+	   "proposals", g_image_cache->get(kIconTabTradeProposals), tpb, _("Proposed Trades"));
+	tab_proposals_ = get_tabs()->tabs().back();
+	tpb->update_proposals_tooltip();
+
+	if (can_act) {
+		TradeOffersBox* tob = new TradeOffersBox(*get_tabs(), *this, *iplayer, *market);
+		get_tabs()->add("offers", g_image_cache->get(kIconTabTradeOffers), tob, _("Trade Offers"));
+		tab_offers_ = get_tabs()->tabs().back();
+		tob->update_offers_tooltip();
 	}
 
 	for (const auto& pair : market->trade_orders()) {
 		get_tabs()->add(
 		   format("trade_%u", pair.first),
 		   ibase()->egbase().descriptions().get_ware_descr(pair.second.items.front().first)->icon(),
-		   new TradeAgreementTab(*get_tabs(), *ibase(), *market, pair.first,
-		                         ibase()->can_act(market->owner().player_number()),
-		                         priority_collapsed()),
+		   new TradeAgreementTab(
+		      *get_tabs(), *ibase(), *market, pair.first, can_act, priority_collapsed()),
 		   _("Active Trade"));
 	}
 
