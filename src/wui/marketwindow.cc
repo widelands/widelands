@@ -339,6 +339,42 @@ private:
 						   iplayer_->player_number(), trade_id, Widelands::TradeAction::kRetract, 0, 0);
 					});
 
+					UI::Dropdown<Widelands::Serial>* dropdown_move_ = new UI::Dropdown<Widelands::Serial>(box,
+							"move",
+							0,
+							0,
+							100,
+							8,
+							kButtonSize,
+							_("Move this trade proposal…"),
+							UI::DropdownType::kPictorialMenu,
+							UI::PanelStyle::kWui,
+							UI::ButtonStyle::kWuiSecondary);
+					dropdown_move_->set_min_lineheight(kButtonSize);
+					dropdown_move_->set_image(g_image_cache->get(kIconTabTradeOffers));
+
+					std::vector<const Widelands::Market*> markets = iplayer_->player().get_markets();
+					for (const Widelands::Market* candidate : markets) {
+						if (candidate->serial() != market_serial_) {
+							dropdown_move_->add(
+									candidate->get_market_name(),
+									candidate->serial(),
+									candidate->descr().icon(),
+									false,
+									format_l(_("Move this trade proposal to %s"), candidate->get_market_name()));
+						}
+					}
+					if (dropdown_move_->empty()) {
+						dropdown_move_->set_enabled(false);
+						dropdown_move_->set_tooltip(_("You have no markets you could move this trade to."));
+					}
+
+					dropdown_move_->selected.connect([this, dropdown_move_, trade_id]() {
+						iplayer_->game().send_player_trade_action(iplayer_->player_number(), trade_id, Widelands::TradeAction::kMove, dropdown_move_->get_selected(), market_serial_);
+					});
+
+					box->add_space(kSpacing);
+					box->add(dropdown_move_, UI::Box::Resizing::kAlign, UI::Align::kTop);
 					box->add_space(kSpacing);
 					box->add(cancel, UI::Box::Resizing::kAlign, UI::Align::kTop);
 				}
@@ -548,6 +584,7 @@ public:
 					UI::DropdownType::kTextualMenu,
 					UI::PanelStyle::kWui,
 					UI::ButtonStyle::kWuiSecondary);
+			dropdown_move_->set_min_lineheight(kButtonSize);
 
 			std::multimap<uint32_t, const Widelands::Market*> markets = market.owner().get_markets(order.other_side.get(ibase.egbase())->get_position());
 			for (const auto& pair : markets) {
