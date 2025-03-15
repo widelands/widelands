@@ -97,6 +97,7 @@ public:
 	               int num_batches,
 	               OPtr<Market> other_side);
 	void cancel_trade(Game& game, TradeID trade_id, bool reached_regular_end, bool send_msg);
+	void move_trade_to(Game& game, TradeID trade_id, Market& dest);
 
 	[[nodiscard]] InputQueue&
 	inputqueue(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id) override;
@@ -111,7 +112,7 @@ public:
 	void try_launching_batch(Game* game);
 	void traded_ware_arrived(TradeID trade_id, DescriptionIndex ware_index, Game* game);
 
-	[[nodiscard]] const std::map<TradeID, TradeOrder>& trade_orders() const {
+	[[nodiscard]] const std::map<TradeID, std::unique_ptr<TradeOrder>>& trade_orders() const {
 		return trade_orders_;
 	}
 
@@ -134,7 +135,7 @@ private:
 	[[nodiscard]] InputQueue* find_overfull_input_queue();
 
 	std::string market_name_;
-	std::map<TradeID, TradeOrder> trade_orders_;
+	std::map<TradeID, std::unique_ptr<TradeOrder>> trade_orders_;
 	std::deque<DescriptionIndex> pending_dropout_wares_;
 
 	OPtr<Worker> carrier_;

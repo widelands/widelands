@@ -75,7 +75,7 @@ bool Market::init(EditorGameBase& egbase) {
 
 void Market::cleanup(EditorGameBase& egbase) {
 	for (auto& pair : trade_orders_) {
-		pair.second.cleanup();
+		pair.second->cleanup();
 	}
 
 	if (Worker* carrier = carrier_.get(egbase); carrier != nullptr) {
@@ -131,7 +131,7 @@ void Market::remove_worker(Worker& worker) {
 	}
 
 	for (auto& pair : trade_orders_) {
-		if (pair.second.carriers_queue_->remove_if_present(worker)) {
+		if (pair.second->carriers_queue_->remove_if_present(worker)) {
 			return;
 		}
 	}
@@ -168,22 +168,22 @@ void Market::set_economy(Economy* const e, WareWorker type) {
 	for (auto& pair : trade_orders_) {
 		if (type == wwWARE) {
 			if (old != nullptr) {
-				for (auto& q : pair.second.wares_queues_) {
+				for (auto& q : pair.second->wares_queues_) {
 					q.second->remove_from_economy(*old);
 				}
 			}
 
 			if (e != nullptr) {
-				for (auto& q : pair.second.wares_queues_) {
+				for (auto& q : pair.second->wares_queues_) {
 					q.second->add_to_economy(*e);
 				}
 			}
 		} else {
 			if (old != nullptr) {
-				pair.second.carriers_queue_->remove_from_economy(*old);
+				pair.second->carriers_queue_->remove_from_economy(*old);
 			}
 			if (e != nullptr) {
-				pair.second.carriers_queue_->add_to_economy(*old);
+				pair.second->carriers_queue_->add_to_economy(*old);
 			}
 		}
 	}
@@ -201,18 +201,19 @@ void Market::new_trade(const TradeID trade_id,
 	MutexLock m(MutexLock::ID::kObjects);
 
 	assert(trade_orders_.count(trade_id) == 0);
-	TradeOrder& trade_order = trade_orders_[trade_id];
+	std::unique_ptr<TradeOrder>& trade_order = trade_orders_[trade_id];
+	trade_order.reset(new TradeOrder);
 
-	trade_order.market = this;
-	trade_order.items = items;
-	trade_order.initial_num_batches = num_batches;
-	trade_order.other_side = other_side;
+	trade_order->market = this;
+	trade_order->items = items;
+	trade_order->initial_num_batches = num_batches;
+	trade_order->other_side = other_side;
 
-	trade_order.carriers_queue_.reset(
-	   new WorkersQueue(*this, descr().trade_carrier, trade_order.num_wares_per_batch()));
-	trade_order.carriers_queue_->set_callback(Market::ware_arrived_callback, this);
+	trade_order->carriers_queue_.reset(
+	   new WorkersQueue(*this, descr().trade_carrier, trade_order->num_wares_per_batch()));
+	trade_order->carriers_queue_->set_callback(Market::ware_arrived_callback, this);
 	for (const auto& entry : items) {
-		auto& queue = trade_order.wares_queues_[entry.first];
+		auto& queue = trade_order->wares_queues_[entry.first];
 		queue.reset(new WaresQueue(*this, entry.first, entry.second));
 		queue->set_callback(Market::ware_arrived_callback, this);
 	}
@@ -244,11 +245,57 @@ void Market::cancel_trade(Game& game,
 			   false);
 		}
 
-		it->second.cleanup();
+		it->second->cleanup();
 		trade_orders_.erase(trade_id);
 		Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));
 	} else {
 		molog(owner().egbase().get_gametime(), "cancel_trade: trade #%u not found", trade_id);
+	}
+}
+
+void Market::move_trade_to(Game& game, const TradeID trade_id, Market& dest) {
+	const auto it = trade_orders_.find(trade_id);
+	if (it == trade_orders_.end()) {
+		return;  // Trade no longer exists
+	}
+
+	Market* other_market = it->second->other_side.get(game);
+	if (other_market == nullptr) {
+		return;  // Other side no longer exists
+	}
+	const auto other_it = other_market->trade_orders_.find(trade_id);
+	if (other_it == other_market->trade_orders_.end() ||
+	    other_it->second->other_side.serial() != serial()) {
+		return;  // Trade no longer exists
+	}
+
+	// Clear the old queues and dismiss the trade's carriers
+	it->second->cleanup();
+
+	// Move the trade
+	assert(dest.trade_orders_.count(trade_id) == 0);
+	TradeOrder* order = it->second.release();
+	trade_orders_.erase(it);
+	order->market = &dest;
+	dest.trade_orders_.emplace(trade_id, order);
+	assert(dest.trade_orders_.count(trade_id) == 1);
+
+	// Notify the other side and cancel any in-progress trade batches
+	other_it->second->other_side = &dest;
+	for (Worker* carrier : other_it->second->carriers_queue_->workers_in_queue()) {
+		if (carrier->get_state(Worker::taskCarryTradeItem) != nullptr) {
+			carrier->send_signal(game, "cancel");
+		}
+	}
+
+	// Create the new queues
+	order->carriers_queue_.reset(
+	   new WorkersQueue(dest, descr().trade_carrier, order->num_wares_per_batch()));
+	order->carriers_queue_->set_callback(Market::ware_arrived_callback, &dest);
+	for (const auto& entry : order->items) {
+		auto& queue = order->wares_queues_[entry.first];
+		queue.reset(new WaresQueue(dest, entry.first, entry.second));
+		queue->set_callback(Market::ware_arrived_callback, &dest);
 	}
 }
 
@@ -281,7 +328,7 @@ void Market::try_launching_batch(Game* game) {
 			continue;
 		}
 
-		Market* other_market = pair.second.other_side.get(*game);
+		Market* other_market = pair.second->other_side.get(*game);
 		if (other_market == nullptr) {
 			// TODO(sirver,trading): Can this even happen? Where is this function called from?
 			// The other market seems to have vanished. The game tracks this and
@@ -302,7 +349,7 @@ bool Market::is_ready_to_launch_batch(const TradeID trade_id) const {
 	if (it == trade_orders_.end()) {
 		return false;
 	}
-	const auto& trade_order = it->second;
+	const TradeOrder& trade_order = *it->second;
 	assert(!trade_order.fulfilled());
 
 	if (trade_order.paused) {
@@ -330,7 +377,7 @@ bool Market::is_ready_to_launch_batch(const TradeID trade_id) const {
 
 void Market::launch_batch(const TradeID trade_id, Game* game) {
 	assert(is_ready_to_launch_batch(trade_id));
-	TradeOrder& trade_order = trade_orders_.at(trade_id);
+	TradeOrder& trade_order = *trade_orders_.at(trade_id);
 	molog(game->get_gametime(), "Launching batch for trade #%u", trade_id);
 
 	// Do we have all necessary wares for a batch?
@@ -379,25 +426,25 @@ std::pair<InputQueue*, TradeID> Market::find_inputqueue(const DescriptionIndex i
 	if (r != nullptr) {
 		for (auto& pair : trade_orders_) {
 			if (ware_worker == wwWARE) {
-				auto it = pair.second.wares_queues_.find(index);
-				if (it != pair.second.wares_queues_.end() && it->second->matches(*r)) {
+				auto it = pair.second->wares_queues_.find(index);
+				if (it != pair.second->wares_queues_.end() && it->second->matches(*r)) {
 					assert(it->second->get_index() == index);
 					return {it->second.get(), pair.first};
 				}
-			} else if (pair.second.carriers_queue_->matches(*r)) {
-				return {pair.second.carriers_queue_.get(), pair.first};
+			} else if (pair.second->carriers_queue_->matches(*r)) {
+				return {pair.second->carriers_queue_.get(), pair.first};
 			}
 		}
 	} else {
 		if (auto pair = trade_orders_.find(disambiguator_id); pair != trade_orders_.end()) {
 			if (ware_worker == wwWARE) {
-				auto it = pair->second.wares_queues_.find(index);
-				if (it != pair->second.wares_queues_.end()) {
+				auto it = pair->second->wares_queues_.find(index);
+				if (it != pair->second->wares_queues_.end()) {
 					assert(it->second->get_index() == index);
 					return {it->second.get(), pair->first};
 				}
-			} else if (pair->second.carriers_queue_->get_index() == index) {
-				return {pair->second.carriers_queue_.get(), pair->first};
+			} else if (pair->second->carriers_queue_->get_index() == index) {
+				return {pair->second->carriers_queue_.get(), pair->first};
 			}
 		}
 	}
@@ -412,19 +459,19 @@ bool Market::can_change_max_fill(const DescriptionIndex index,
 	const std::pair<InputQueue*, TradeID> pair =
 	   find_inputqueue(index, ware_worker, r, disambiguator_id);
 	const auto order = trade_orders_.find(pair.second);
-	return order != trade_orders_.end() && order->second.paused &&
+	return order != trade_orders_.end() && order->second->paused &&
 	       Building::can_change_max_fill(index, ware_worker, r, disambiguator_id);
 }
 
 uint32_t Market::get_priority_disambiguator_id(const Request* req) const {
 	if (req != nullptr) {
 		for (const auto& pair : trade_orders_) {
-			for (const auto& queue : pair.second.wares_queues_) {
+			for (const auto& queue : pair.second->wares_queues_) {
 				if (queue.second->matches(*req)) {
 					return pair.first;
 				}
 			}
-			if (pair.second.carriers_queue_->matches(*req)) {
+			if (pair.second->carriers_queue_->matches(*req)) {
 				return pair.first;
 			}
 		}
@@ -435,7 +482,7 @@ uint32_t Market::get_priority_disambiguator_id(const Request* req) const {
 
 bool Market::is_paused(const TradeID id) const {
 	const auto trade_order = trade_orders_.find(id);
-	return trade_order != trade_orders_.end() && trade_order->second.paused;
+	return trade_order != trade_orders_.end() && trade_order->second->paused;
 }
 
 bool Market::can_resume(const TradeID id) const {
@@ -443,7 +490,7 @@ bool Market::can_resume(const TradeID id) const {
 		return false;
 	}
 
-	const TradeOrder& order = trade_orders_.at(id);
+	const TradeOrder& order = *trade_orders_.at(id);
 	for (const auto& pair : order.wares_queues_) {
 		if (pair.second->get_max_fill() < pair.second->get_max_size()) {
 			return false;
@@ -454,7 +501,7 @@ bool Market::can_resume(const TradeID id) const {
 
 void Market::set_paused(Game& game, const TradeID id, const bool pause) {
 	auto trade_order = trade_orders_.find(id);
-	if (trade_order == trade_orders_.end() || trade_order->second.paused == pause) {
+	if (trade_order == trade_orders_.end() || trade_order->second->paused == pause) {
 		return;
 	}
 
@@ -463,9 +510,9 @@ void Market::set_paused(Game& game, const TradeID id, const bool pause) {
 		return;
 	}
 
-	trade_order->second.paused = pause;
+	trade_order->second->paused = pause;
 
-	if (Market* other = trade_order->second.other_side.get(game); other != nullptr) {
+	if (Market* other = trade_order->second->other_side.get(game); other != nullptr) {
 		if (pause) {
 			other->send_message(game, Message::Type::kTrading, _("Trade Paused"),
 			                    other->descr().icon_filename(), _("Trade agreement paused"),
@@ -491,7 +538,7 @@ void Market::set_paused(Game& game, const TradeID id, const bool pause) {
 
 InputQueue* Market::find_overfull_input_queue() {
 	for (auto& order : trade_orders_) {
-		for (auto& pair : order.second.wares_queues_) {
+		for (auto& pair : order.second->wares_queues_) {
 			if (pair.second->get_type() == wwWARE &&
 			    pair.second->get_filled() > pair.second->get_max_fill()) {
 				return pair.second.get();
@@ -554,7 +601,7 @@ bool Market::get_building_work(Game& game, Worker& worker, bool /* success */) {
 void Market::traded_ware_arrived(const TradeID trade_id,
                                  const DescriptionIndex ware_index,
                                  Game* game) {
-	TradeOrder& trade_order = trade_orders_.at(trade_id);
+	TradeOrder& trade_order = *trade_orders_.at(trade_id);
 
 	pending_dropout_wares_.push_back(ware_index);
 	get_economy(wwWARE)->add_wares_or_workers(ware_index, 1);
@@ -569,7 +616,7 @@ void Market::traded_ware_arrived(const TradeID trade_id,
 	assert(other_market != nullptr);
 	other_market->get_owner()->ware_consumed(ware_index, 1);
 
-	TradeOrder& other_trade_order = other_market->trade_orders_.at(trade_id);
+	TradeOrder& other_trade_order = *other_market->trade_orders_.at(trade_id);
 	if (trade_order.received_traded_wares_in_this_batch == other_trade_order.num_wares_per_batch() &&
 	    other_trade_order.received_traded_wares_in_this_batch == trade_order.num_wares_per_batch()) {
 		// This batch is completed.
@@ -593,9 +640,9 @@ void Market::log_general_info(const EditorGameBase& egbase) const {
 	molog(egbase.get_gametime(), "%" PRIuS " trade orders", trade_orders_.size());
 	for (const auto& pair : trade_orders_) {
 		molog(egbase.get_gametime(), "  - #%6u: %3d/%3d to %6u, received %4d", pair.first,
-		      pair.second.num_shipped_batches, pair.second.initial_num_batches,
-		      pair.second.other_side.serial(), pair.second.received_traded_wares_in_this_batch);
-		for (const auto& ware_amount : pair.second.items) {
+		      pair.second->num_shipped_batches, pair.second->initial_num_batches,
+		      pair.second->other_side.serial(), pair.second->received_traded_wares_in_this_batch);
+		for (const auto& ware_amount : pair.second->items) {
 			molog(egbase.get_gametime(), "    - %3u x %s", ware_amount.second,
 			      owner().tribe().get_ware_descr(ware_amount.first)->name().c_str());
 		}
@@ -666,25 +713,26 @@ std::string TradeInstance::format_richtext(const TradeID id,
 		infotext += "</p><p>";
 		infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
 		                        format_l(ngettext("%d batch delivered", "%d batches delivered",
-		                                          trade->second.num_shipped_batches),
-		                                 trade->second.num_shipped_batches));
+		                                          trade->second->num_shipped_batches),
+		                                 trade->second->num_shipped_batches));
 
 		if (num_batches != kInfiniteTrade) {
 			infotext += "</p><p>";
-			infotext += as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
-			                        format_l(ngettext("%d batch remaining", "%d batches remaining",
-			                                          num_batches - trade->second.num_shipped_batches),
-			                                 num_batches - trade->second.num_shipped_batches));
+			infotext +=
+			   as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
+			               format_l(ngettext("%d batch remaining", "%d batches remaining",
+			                                 num_batches - trade->second->num_shipped_batches),
+			                        num_batches - trade->second->num_shipped_batches));
 		}
 
 		bool other_paused = false;
 		if (const auto other_trade = other_market->trade_orders().find(id);
 		    other_trade != other_market->trade_orders().end()) {
-			other_paused = other_trade->second.paused;
+			other_paused = other_trade->second->paused;
 		}
 
 		std::string paused_text;
-		if (trade->second.paused) {
+		if (trade->second->paused) {
 			if (other_paused) {
 				paused_text = _("Paused by both players");
 			} else {

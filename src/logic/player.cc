@@ -1954,6 +1954,21 @@ std::multimap<uint32_t, const Market*> Player::get_markets(Coords closest_to) co
 	return result;
 }
 
+std::vector<const Market*> Player::get_markets() const {
+	std::vector<const Market*> result;
+	const Widelands::Map& map = egbase().map();
+	for (DescriptionIndex di : tribe().buildings()) {
+		if (tribe().get_building_descr(di)->type() == MapObjectType::MARKET) {
+			for (const BuildingStats& bs : get_building_statistics(di)) {
+				if (!bs.is_constructionsite) {
+					result.emplace_back(dynamic_cast<const Market*>(map[bs.pos].get_immovable()));
+				}
+			}
+		}
+	}
+	return result;
+}
+
 void Player::register_pinned_note(PinnedNote* note) {
 	assert(pinned_notes_.count(note) == 0);
 	pinned_notes_.insert(note);
