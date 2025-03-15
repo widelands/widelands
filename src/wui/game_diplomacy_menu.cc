@@ -452,12 +452,12 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 			yes->sigclicked.connect([this, trade_id, select_market]() {
 				iplayer_->game().send_player_trade_action(iplayer_->player_number(), trade_id,
 				                                          Widelands::TradeAction::kAccept,
-				                                          select_market->get_selected());
+				                                          select_market->get_selected(), 0);
 			});
 		}
 		no->sigclicked.connect([this, trade_id]() {
 			iplayer_->game().send_player_trade_action(
-			   iplayer_->player_number(), trade_id, Widelands::TradeAction::kReject, 0);
+			   iplayer_->player_number(), trade_id, Widelands::TradeAction::kReject, 0, 0);
 		});
 
 		buttons->add(select_market, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -530,7 +530,7 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 		});
 		cancel->sigclicked.connect([this, trade_id]() {
 			iplayer_->game().send_player_trade_action(
-			   iplayer_->player_number(), trade_id, Widelands::TradeAction::kRetract, 0);
+			   iplayer_->player_number(), trade_id, Widelands::TradeAction::kRetract, 0, 0);
 		});
 
 		buttons->add(cancel, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -607,7 +607,7 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		});
 		cancel->sigclicked.connect([this, trade_id]() {
 			iplayer_->game().send_player_trade_action(
-			   iplayer_->player_number(), trade_id, Widelands::TradeAction::kCancel, 0);
+			   iplayer_->player_number(), trade_id, Widelands::TradeAction::kCancel, 0, 0);
 		});
 
 		buttons->add(cancel, UI::Box::Resizing::kAlign, UI::Align::kCenter);

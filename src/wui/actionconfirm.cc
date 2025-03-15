@@ -550,7 +550,7 @@ void CancelTradeConfirm::think() {
  */
 void CancelTradeConfirm::ok() {
 	iaplayer().game().send_player_trade_action(
-	   iaplayer().player_number(), trade_id_, Widelands::TradeAction::kCancel, 0);
+	   iaplayer().player_number(), trade_id_, Widelands::TradeAction::kCancel, 0, 0);
 	die();
 }
 
@@ -589,7 +589,7 @@ void UnpauseTradeConfirm::ok() {
 	if (game.has_trade(trade_id_)) {
 		Widelands::Market* market = market_.get(game);
 		assert(market != nullptr);
-		const Widelands::Market::TradeOrder& order = market->trade_orders().at(trade_id_);
+		const Widelands::Market::TradeOrder& order = *market->trade_orders().at(trade_id_);
 		for (const auto& pair : order.wares_queues_) {
 			game.send_player_set_input_max_fill(*market, pair.second->get_index(),
 			                                    pair.second->get_type(), pair.second->get_max_size(),
@@ -599,7 +599,7 @@ void UnpauseTradeConfirm::ok() {
 		                                    order.carriers_queue_->get_type(),
 		                                    order.carriers_queue_->get_max_size(), false, trade_id_);
 		game.send_player_trade_action(
-		   iaplayer().player_number(), trade_id_, Widelands::TradeAction::kResume, market->serial());
+		   iaplayer().player_number(), trade_id_, Widelands::TradeAction::kResume, market->serial(), 0);
 	}
 
 	die();

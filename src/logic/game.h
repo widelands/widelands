@@ -321,7 +321,8 @@ public:
 	void send_player_trade_action(PlayerNumber sender,
 	                              TradeID trade_id,
 	                              TradeAction action,
-	                              Serial serial);
+	                              Serial accepter,
+	                              Serial source);
 	void send_player_toggle_mute(const Building&, bool all);
 	void send_player_diplomacy(PlayerNumber, DiplomacyAction, PlayerNumber);
 	void send_player_pinned_note(
@@ -401,11 +402,15 @@ public:
 	void reject_trade(TradeID trade_id);
 	void retract_trade(TradeID trade_id);
 	void cancel_trade(TradeID trade_id, bool reached_regular_end, const Player* canceller);
+	void move_trade(TradeID trade_id, Market& old_market, Market& new_market);
 
 	[[nodiscard]] bool has_trade(TradeID trade_id) const {
 		return trade_agreements_.count(trade_id) != 0;
 	}
 	[[nodiscard]] const TradeInstance& get_trade(TradeID trade_id) const {
+		return trade_agreements_.at(trade_id);
+	}
+	[[nodiscard]] TradeInstance& get_mutable_trade(TradeID trade_id) {
 		return trade_agreements_.at(trade_id);
 	}
 	[[nodiscard]] const std::map<TradeID, TradeInstance>& all_trade_agreements() const {

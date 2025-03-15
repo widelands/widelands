@@ -26,7 +26,7 @@ namespace Widelands {
 
 struct CmdTradeAction : PlayerCommand {
 	CmdTradeAction(
-	   const Time& time, PlayerNumber pn, TradeID trade_id, TradeAction action, Serial accepter);
+	   const Time& time, PlayerNumber pn, TradeID trade_id, TradeAction action, Serial accepter, Serial source);
 
 	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kTradeAction;
@@ -47,6 +47,7 @@ private:
 	TradeID trade_id_{0U};
 	TradeAction action_{TradeAction::kCancel};
 	Serial accepter_{0U};
+	Serial source_{0U};
 };
 
 }  // namespace Widelands

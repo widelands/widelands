@@ -65,6 +65,7 @@ enum class TradeAction : uint8_t {
 	kRetract = 3,
 	kPause = 4,
 	kResume = 5,
+	kMove = 6,
 };
 
 struct NoteTradeChanged {

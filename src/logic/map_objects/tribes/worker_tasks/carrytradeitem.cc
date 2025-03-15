@@ -48,6 +48,12 @@ void Worker::carry_trade_item_update(Game& game, State& state) {
 		// TODO(sirver,trading): Remove once signals are correctly handled.
 		log_dbg_time(
 		   game.get_gametime(), "carry_trade_item_update: signal received: %s\n", signal.c_str());
+
+		if (signal == "cancel") {
+			pop_task(game);
+			start_task_return(game, false);
+			return;
+		}
 	}
 
 	// First of all, make sure we're outside

@@ -3433,14 +3433,14 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 				verb_log_dbg("AI %u: accepting trade #%u at %s", static_cast<unsigned>(player_number()),
 				             trade_id, select->get_market_name().c_str());
 				game().send_player_trade_action(
-				   player_number(), trade_id, Widelands::TradeAction::kAccept, select->serial());
+				   player_number(), trade_id, Widelands::TradeAction::kAccept, select->serial(), 0);
 			}
 		} else {
 			// The trade is not advantageous, reject.
 			verb_log_dbg(
 			   "AI %u: rejecting trade #%u", static_cast<unsigned>(player_number()), trade_id);
 			game().send_player_trade_action(
-			   player_number(), trade_id, Widelands::TradeAction::kReject, 0);
+			   player_number(), trade_id, Widelands::TradeAction::kReject, 0, 0);
 		}
 	}
 }

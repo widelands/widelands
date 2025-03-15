@@ -1246,8 +1246,9 @@ void Game::send_player_propose_trade(const TradeInstance& trade) {
 void Game::send_player_trade_action(PlayerNumber sender,
                                     TradeID trade_id,
                                     TradeAction action,
-                                    Serial serial) {
-	send_player_command(new CmdTradeAction(get_gametime(), sender, trade_id, action, serial));
+                                    Serial accepter,
+	                                Serial source) {
+	send_player_command(new CmdTradeAction(get_gametime(), sender, trade_id, action, accepter, source));
 }
 
 void Game::send_player_set_stock_policy(Building& imm,
@@ -1423,6 +1424,41 @@ void Game::cancel_trade(TradeID trade_id, bool reached_regular_end, const Player
 	Notifications::publish(NoteTradeChanged(trade_id, reached_regular_end ?
 	                                                     NoteTradeChanged::Action::kCompleted :
 	                                                     NoteTradeChanged::Action::kCancelled));
+}
+
+void Game::move_trade(const TradeID trade_id, Market& old_market, Market& new_market) {
+	MutexLock m(MutexLock::ID::kObjects);
+
+	if (old_market.get_owner() != new_market.get_owner() || &old_market == &new_market) {
+		return;  // Doesn't make sense
+	}
+
+	auto instance = trade_agreements_.find(trade_id);
+	if (instance == trade_agreements_.end()) {
+		return;
+	}
+
+	if (instance->second.initiator.serial() == new_market.serial() || instance->second.receiver.serial() == new_market.serial()) {
+		return;  // Trade is already there
+	}
+
+	const bool is_sender = (instance->second.initiator.serial() == old_market.serial());
+	if (!is_sender && instance->second.receiver.serial() != old_market.serial()) {
+		return;  // Old market is neither sender nor receiver
+	}
+
+	if (is_sender) {
+		instance->second.initiator = &new_market;
+	} else {
+		instance->second.receiver = &new_market;
+	}
+
+	if (instance->second.state == TradeInstance::State::kRunning) {
+		old_market.move_trade_to(*this, trade_id, new_market);
+	}
+
+	Notifications::publish(NoteBuilding(old_market.serial(), NoteBuilding::Action::kChanged));
+	Notifications::publish(NoteBuilding(new_market.serial(), NoteBuilding::Action::kChanged));
 }
 
 std::vector<TradeID> Game::find_trade_offers(PlayerNumber receiver, Coords accept_at) const {

@@ -336,7 +336,7 @@ private:
 
 					cancel->sigclicked.connect([this, trade_id]() {
 						iplayer_->game().send_player_trade_action(
-						   iplayer_->player_number(), trade_id, Widelands::TradeAction::kRetract, 0);
+						   iplayer_->player_number(), trade_id, Widelands::TradeAction::kRetract, 0, 0);
 					});
 
 					box->add_space(kSpacing);
@@ -438,11 +438,11 @@ private:
 				yes->sigclicked.connect([this, trade_id]() {
 					iplayer_.game().send_player_trade_action(iplayer_.player_number(), trade_id,
 					                                         Widelands::TradeAction::kAccept,
-					                                         market_serial_);
+					                                         market_serial_, 0);
 				});
 				no->sigclicked.connect([this, trade_id]() {
 					iplayer_.game().send_player_trade_action(
-					   iplayer_.player_number(), trade_id, Widelands::TradeAction::kReject, 0);
+					   iplayer_.player_number(), trade_id, Widelands::TradeAction::kReject, 0, 0);
 				});
 
 				box->add_space(kSpacing);
@@ -504,7 +504,7 @@ public:
 		add(&info_, UI::Box::Resizing::kExpandBoth);
 		add_space(kSpacing);
 
-		const Widelands::Market::TradeOrder& order = market.trade_orders().at(trade_id_);
+		const Widelands::Market::TradeOrder& order = *market.trade_orders().at(trade_id_);
 		InputQueueDisplay* iqd = new InputQueueDisplay(
 		   this, ibase, market, *order.carriers_queue_, false, false, collapsed, trade_id_);
 		input_queues_.push_back(iqd);
@@ -531,7 +531,7 @@ public:
 				Widelands::Game& game = ipl->game();
 				if ((SDL_GetModState() & KMOD_CTRL) != 0) {
 					game.send_player_trade_action(
-					   ipl->player_number(), trade_id_, Widelands::TradeAction::kCancel, 0);
+					   ipl->player_number(), trade_id_, Widelands::TradeAction::kCancel, 0, 0);
 				} else {
 					show_cancel_trade_confirm(*ipl, trade_id_);
 				}
@@ -628,21 +628,21 @@ private:
 				return;
 			}
 
-			for (const auto& pair : it->second.wares_queues_) {
+			for (const auto& pair : it->second->wares_queues_) {
 				game.send_player_set_input_max_fill(*own_market, pair.second->get_index(),
 				                                    pair.second->get_type(),
 				                                    pair.second->get_max_size(), false, trade_id_);
 			}
-			game.send_player_set_input_max_fill(*own_market, it->second.carriers_queue_->get_index(),
-			                                    it->second.carriers_queue_->get_type(),
-			                                    it->second.carriers_queue_->get_max_size(), false,
+			game.send_player_set_input_max_fill(*own_market, it->second->carriers_queue_->get_index(),
+			                                    it->second->carriers_queue_->get_type(),
+			                                    it->second->carriers_queue_->get_max_size(), false,
 			                                    trade_id_);
 		}
 
 		game.send_player_trade_action(
 		   ipl->player_number(), trade_id_,
 		   is_paused ? Widelands::TradeAction::kResume : Widelands::TradeAction::kPause,
-		   own_market->serial());
+		   own_market->serial(), 0);
 	}
 
 	InteractiveBase& ibase_;
@@ -733,7 +733,7 @@ void MarketWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	for (const auto& pair : market->trade_orders()) {
 		get_tabs()->add(
 		   format("trade_%u", pair.first),
-		   ibase()->egbase().descriptions().get_ware_descr(pair.second.items.front().first)->icon(),
+		   ibase()->egbase().descriptions().get_ware_descr(pair.second->items.front().first)->icon(),
 		   new TradeAgreementTab(
 		      *get_tabs(), *ibase(), *market, pair.first, can_act, priority_collapsed()),
 		   _("Active Trade"));
