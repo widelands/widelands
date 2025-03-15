@@ -1459,6 +1459,7 @@ void Game::move_trade(const TradeID trade_id, Market& old_market, Market& new_ma
 
 	Notifications::publish(NoteBuilding(old_market.serial(), NoteBuilding::Action::kChanged));
 	Notifications::publish(NoteBuilding(new_market.serial(), NoteBuilding::Action::kChanged));
+	Notifications::publish(NoteTradeChanged(trade_id, NoteTradeChanged::Action::kMoved));
 }
 
 std::vector<TradeID> Game::find_trade_offers(PlayerNumber receiver, Coords accept_at) const {

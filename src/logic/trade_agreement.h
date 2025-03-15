@@ -80,7 +80,8 @@ struct NoteTradeChanged {
 		kCompleted,
 		kWareArrived,
 		kPaused,
-		kUnpaused
+		kUnpaused,
+		kMoved
 	};
 
 	TradeID id;
