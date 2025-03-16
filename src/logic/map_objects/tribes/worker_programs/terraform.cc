@@ -51,36 +51,42 @@ bool Worker::run_terraform(Game& game, State& state, const Action& a) {
 	if (imm_brn == nullptr || imm_brn->descr().type() != MapObjectType::PORTDOCK) {
 		di = descriptions.terrain_index(
 		   descriptions.get_terrain_descr(f.field->terrain_r())->enhancement(a.sparam1));
-		if (di != INVALID_INDEX && (imm_rn == nullptr || imm_rn->descr().type() != MapObjectType::PORTDOCK)) {
+		if (di != INVALID_INDEX &&
+		    (imm_rn == nullptr || imm_rn->descr().type() != MapObjectType::PORTDOCK)) {
 			triangles.emplace(TCoords<FCoords>(f, TriangleIndex::R), di);
 		}
 		di = descriptions.terrain_index(
 		   descriptions.get_terrain_descr(f.field->terrain_d())->enhancement(a.sparam1));
-		if (di != INVALID_INDEX && (imm_bln == nullptr || imm_bln->descr().type() != MapObjectType::PORTDOCK)) {
+		if (di != INVALID_INDEX &&
+		    (imm_bln == nullptr || imm_bln->descr().type() != MapObjectType::PORTDOCK)) {
 			triangles.emplace(TCoords<FCoords>(f, TriangleIndex::D), di);
 		}
 	}
 	if (imm_tln == nullptr || imm_tln->descr().type() != MapObjectType::PORTDOCK) {
 		di = descriptions.terrain_index(
 		   descriptions.get_terrain_descr(tln.field->terrain_r())->enhancement(a.sparam1));
-		if (di != INVALID_INDEX && (imm_trn == nullptr || imm_trn->descr().type() != MapObjectType::PORTDOCK)) {
+		if (di != INVALID_INDEX &&
+		    (imm_trn == nullptr || imm_trn->descr().type() != MapObjectType::PORTDOCK)) {
 			triangles.emplace(TCoords<FCoords>(tln, TriangleIndex::R), di);
 		}
 		di = descriptions.terrain_index(
 		   descriptions.get_terrain_descr(tln.field->terrain_d())->enhancement(a.sparam1));
-		if (di != INVALID_INDEX && (imm_ln == nullptr || imm_ln->descr().type() != MapObjectType::PORTDOCK)) {
+		if (di != INVALID_INDEX &&
+		    (imm_ln == nullptr || imm_ln->descr().type() != MapObjectType::PORTDOCK)) {
 			triangles.emplace(TCoords<FCoords>(tln, TriangleIndex::D), di);
 		}
 	}
 	di = descriptions.terrain_index(
 	   descriptions.get_terrain_descr(ln.field->terrain_r())->enhancement(a.sparam1));
-	if (di != INVALID_INDEX && (imm_ln == nullptr || imm_ln->descr().type() != MapObjectType::PORTDOCK) && 
+	if (di != INVALID_INDEX &&
+	    (imm_ln == nullptr || imm_ln->descr().type() != MapObjectType::PORTDOCK) &&
 	    (imm_bln == nullptr || imm_bln->descr().type() != MapObjectType::PORTDOCK)) {
 		triangles.emplace(TCoords<FCoords>(ln, TriangleIndex::R), di);
 	}
 	di = descriptions.terrain_index(
 	   descriptions.get_terrain_descr(trn.field->terrain_d())->enhancement(a.sparam1));
-	if (di != INVALID_INDEX && (imm_trn == nullptr || imm_trn->descr().type() != MapObjectType::PORTDOCK) && 
+	if (di != INVALID_INDEX &&
+	    (imm_trn == nullptr || imm_trn->descr().type() != MapObjectType::PORTDOCK) &&
 	    (imm_rn == nullptr || imm_rn->descr().type() != MapObjectType::PORTDOCK)) {
 		triangles.emplace(TCoords<FCoords>(trn, TriangleIndex::D), di);
 	}
