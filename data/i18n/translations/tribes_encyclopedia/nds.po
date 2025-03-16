@@ -5156,7 +5156,7 @@ msgid ""
 "‘Way down here in these golden grounds<br>with stones above us the thousand "
 "pounds<br>I dig in the dust until I see the spark;<br>The golden ore I find "
 "in the dark.’"
-msgstr "»In deesen depen golden Grünnen<br>unner Fels to dusend Tünnen<br>graav ick im Klei dör de stoffig Spold<br>bit ick finn im Düüster dat lechte Gold.«"
+msgstr "»In deesen deepen golden Grünnen<br>unner Fels to dusend Tünnen<br>graav ick im Klei dör de stoffig Spold<br>bit ick finn im Düüster dat lechte Gold.«"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Gold
 #. Mine

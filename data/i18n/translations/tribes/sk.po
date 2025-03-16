@@ -3358,7 +3358,7 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider enhancing, dismantling or "
 "destroying it."
-msgstr "Hlavná žila tejto mramorovej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Zvážte, či by nebolo vhodné baňu vylepšiť, rozobrať alebo zničiť"
+msgstr "Hlavná žila tejto mramorovej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Zvážte, či by nebolo vhodné baňu vylepšiť, rozobrať alebo zničiť."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:8
@@ -5722,7 +5722,7 @@ msgstr "Frízania"
 
 #: ../../../../data/tribes/initialization/frisians/init.lua:13
 msgid "The inhabitants of the rough North Sea shore."
-msgstr "Obyvatelia drsných severomorských brehov"
+msgstr "Obyvatelia drsných severomorských brehov."
 
 #: ../../../../data/tribes/scripting/help/init.lua:85
 msgid "Tribal Encyclopedia"
