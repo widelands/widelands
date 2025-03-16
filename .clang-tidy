@@ -5,7 +5,7 @@
 #
 # Alias list must be updated when clang-tidy version is bumped. Current list
 # was taken from:
-# https://releases.llvm.org/14.0.0/tools/clang/tools/extra/docs/clang-tidy/checks/list.html
+# https://releases.llvm.org/18.1.0/tools/clang/tools/extra/docs/clang-tidy/checks/list.html
 #
 # TODO(tothxa): can be converted to "Checks: |" when lowest supported clang
 #               version reaches 15
@@ -124,6 +124,7 @@ Checks: >-
   -readability-static-accessed-through-instance,
   -readability-suspicious-call-argument,
   -COMMENT---disable-aliases---,
+  -bugprone-non-zero-enum-to-bool-conversion,
   -cert-con36-c,
   -cert-con54-cpp,
   -cert-dcl03-c,
@@ -142,16 +143,23 @@ Checks: >-
   -cert-msc30-c,
   -cert-msc32-c,
   -cert-msc33-c,
+  -cert-msc54-cpp,
   -cert-oop11-cpp,
   -cert-oop54-cpp,
   -cert-pos44-c,
   -cert-pos47-c,
   -cert-sig30-c,
   -cert-str34-c,
+  -clang-analyzer-apiModeling.Errno,
+  -clang-analyzer-apiModeling.StdCLibraryFunctions,
   -cppcoreguidelines-avoid-c-arrays,
   -cppcoreguidelines-avoid-magic-numbers,
   -cppcoreguidelines-c-copy-assignment-signature,
   -cppcoreguidelines-explicit-virtual-functions,
+  -cppcoreguidelines-macro-to-enum,
+  -cppcoreguidelines-noexcept-destructor,
+  -cppcoreguidelines-noexcept-move-operations,
+  -cppcoreguidelines-noexcept-swap,
   -cppcoreguidelines-non-private-member-variables-in-classes,
   -cppcoreguidelines-use-default-member-init,
   -google-readability-braces-around-statements,
@@ -162,6 +170,7 @@ Checks: >-
   -hicpp-deprecated-headers,
   -hicpp-explicit-conversions,
   -hicpp-function-size,
+  -hicpp-ignored-remove-result,
   -hicpp-invalid-access-moved,
   -hicpp-member-init,
   -hicpp-move-const-arg,
