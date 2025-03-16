@@ -58,6 +58,7 @@ jobs:
             - 'utils/run-clang-tidy.py'
             - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_clang_tidy.yaml'
+            - '.clang-tidy'
           test_suite:
             - *ubuntu_dependencies
             - 'data/**' # TODO(aDiscoverer) list what needs to be checked
