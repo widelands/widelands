@@ -1,0 +1,38 @@
+# Automatically created by Widelands 1.2~git26575 (5372ade@master) Release
+
+[global]
+packet_version="1"
+map_w="304"
+map_h="304"
+nr_players="8"
+name=_"The Islands of the Eight Tribes"
+author="Nytren"
+descr=_"This map is designed for a long game! Eight tribes, three islands, and lots of resources. You have a big advantage by creating colonies and using ferries, but this is not necessary to defeat other players. If you want to delay the fighting, you can turn off the last four players."
+hint=
+theme="summer"
+tags="2teams,4teams,artifacts,ferries,ffa,seafaring,unbalanced,official"
+addons=
+
+[teams00]
+team1="0"
+team2="4"
+team3="1"
+team4="5"
+team5="2"
+team6="6"
+team7="3"
+team8="7"
+
+[teams01]
+team1="0,4"
+team2="1,5"
+team3="2,6"
+team4="3,7"
+
+[teams02]
+team1="0,4,1,5"
+team2="2,6,3,7"
+
+[teams03]
+team1="0,4,2,6"
+team2="1,5,3,7"
