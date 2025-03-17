@@ -17,6 +17,12 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       plantreed = {
+         -- steps from building to field: 2-4
+         -- avg. step in ideal case (free 3 nearest fields): (2*2+1*3)/3 = 2.333
+         -- avg. step in worst case (free 3 furthest fields):  (2*3+1*4)/3 = 3.333
+         -- avg. step in std case (free all fields): (2*2+2*3+1*4)/5 = 2.8
+         -- min. worker time: 2 * 2.333 * 1.8 + 2 + 1 = 11.4 sec
+         -- max. worker time: 2 * 3.333 * 1.8 + 2 + 1 = 15   sec
          "findspace=size:any radius:1",
          "walk=coords",
          "animate=dig duration:2s",
@@ -25,6 +31,8 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       harvestreed = {
+         -- min. worker time: 2 * 2.333 * 1.8 + 6 + 6 = 20.4 sec
+         -- max. worker time: 2 * 3.333 * 1.8 + 6 + 6 = 24   sec
          "findobject=attrib:ripe_reed radius:1",
          "walk=object",
          "animate=harvesting duration:6s",
