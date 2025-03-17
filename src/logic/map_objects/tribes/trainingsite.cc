@@ -372,7 +372,7 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
 	// Initialize this in the constructor so that loading code may
 	// overwrite priorities.
 	calc_upgrades();
-	current_upgrade_ = nullptr;
+	current_upgrade_ = upgrades_.end();
 	set_post_timer(Duration(6000));
 	training_failure_count_.clear();
 	max_stall_val_ = training_state_multiplier_ * d.get_max_stall();
@@ -468,10 +468,12 @@ void TrainingSite::add_worker(Worker& w) {
 	}
 }
 
+/*
 void TrainingSite::switch_heroes() {
 	build_heroes_ = !build_heroes_;
 	molog(owner().egbase().get_gametime(), "BUILD_HEROES: %s", build_heroes_ ? "TRUE" : "FALSE");
 }
+*/
 
 void TrainingSite::remove_worker(Worker& w) {
 	upcast(Game, game, &get_owner()->egbase());
@@ -881,6 +883,16 @@ void TrainingSite::act(Game& game, uint32_t const data) {
 }
 
 void TrainingSite::program_end(Game& game, ProgramResult const result) {
+
+	// NOCOM for testing
+	if (current_upgrade_ != upgrades_.end()) {
+		log_dbg_time(game.get_gametime(), "%s%i ended with result %i",
+		   current_upgrade_->prefix.c_str(), current_upgrade_->lastattempt, static_cast<int>(result));
+	} else {
+		log_dbg_time(game.get_gametime(), "trainingsite other program ended with result %i",
+		   static_cast<int>(result));
+	}
+
 	result_ = result;
 	ProductionSite::program_end(game, result);
 	// For unknown reasons sometimes there is a fully upgraded soldier
@@ -889,14 +901,14 @@ void TrainingSite::program_end(Game& game, ProgramResult const result) {
 	// function were run
 	bool leftover_soldiers_check = true;
 
-	if (current_upgrade_ != nullptr) {
+	if (current_upgrade_ != upgrades_.end()) {
 		if (result_ == ProgramResult::kCompleted) {
 			drop_unupgradable_soldiers(game);
 			leftover_soldiers_check = false;
 			current_upgrade_->lastsuccess = true;
 			current_upgrade_->failures = 0;
 
-			// I try to already somewhat trained soldiers here, except when
+			// I try to train already somewhat trained soldiers here, except when
 			// no training happens. Now some training has happened, hence zero.
 			// read in update_soldier_request
 			repeated_layoff_ctr_ = 0;
@@ -906,7 +918,6 @@ void TrainingSite::program_end(Game& game, ProgramResult const result) {
 			drop_stalled_soldiers(game);
 			leftover_soldiers_check = false;
 		}
-		current_upgrade_ = nullptr;
 	}
 
 	if (leftover_soldiers_check) {
@@ -926,34 +937,15 @@ void TrainingSite::program_end(Game& game, ProgramResult const result) {
 void TrainingSite::find_and_start_next_program(Game& game) {
 	checked_soldier_training_.level = INVALID_INDEX;
 	checked_soldier_training_.attribute = TrainingAttribute::kTotal;
-	for (;;) {
-		uint32_t maxprio = 0;
-		uint32_t maxcredit = 0;
 
-		for (Upgrade& upgrade : upgrades_) {
-			if (upgrade.credit >= 10) {
-				upgrade.credit -= 10;
-				return start_upgrade(game, upgrade);
-			}
-
-			if (maxprio < upgrade.prio) {
-				maxprio = upgrade.prio;
-			}
-			if (maxcredit < upgrade.credit) {
-				maxcredit = upgrade.credit;
-			}
-		}
-
-		if (maxprio == 0) {
-			return program_start(game, "sleep");
-		}
-
-		uint32_t const multiplier = 1 + (10 - maxcredit) / maxprio;
-
-		for (Upgrade& upgrade : upgrades_) {
-			upgrade.credit += multiplier * upgrade.prio;
-		}
+	if (current_upgrade_ != upgrades_.end()) {
+		++current_upgrade_;
 	}
+	if (current_upgrade_ == upgrades_.end()) {
+		current_upgrade_ = upgrades_.begin();
+	}
+	start_upgrade(game, *current_upgrade_);
+
 }
 
 /**
@@ -961,6 +953,7 @@ void TrainingSite::find_and_start_next_program(Game& game) {
  * Let's do our worst.
  */
 void TrainingSite::start_upgrade(Game& game, Upgrade& upgrade) {
+	/*
 	int32_t minlevel = upgrade.max;
 	int32_t maxlevel = upgrade.min;
 
@@ -979,7 +972,8 @@ void TrainingSite::start_upgrade(Game& game, Upgrade& upgrade) {
 	}
 
 	if (minlevel > maxlevel) {
-		return program_start(game, "sleep");
+		return; // program_start(game, "sleep");
+		// skip to next attribute
 	}
 
 	int32_t level;
@@ -1008,12 +1002,18 @@ void TrainingSite::start_upgrade(Game& game, Upgrade& upgrade) {
 			}
 		}
 	}
+	*/
 
-	current_upgrade_ = &upgrade;
-	upgrade.lastattempt = level;
+	if (++upgrade.lastattempt > upgrade.max) {
+		upgrade.lastattempt = upgrade.min;
+	}
+	// upgrade.lastattempt = level;
 	upgrade.lastsuccess = false;
 
-	return program_start(game, format("%s%i", upgrade.prefix, level));
+	// NOCOM for testing
+	log_dbg_time(game.get_gametime(), "%s%i started", upgrade.prefix.c_str(), upgrade.lastattempt);
+
+	return program_start(game, format("%s%i", upgrade.prefix, /* level */ upgrade.lastattempt));
 }
 
 TrainingSite::Upgrade* TrainingSite::get_upgrade(TrainingAttribute const atr) {
@@ -1028,6 +1028,7 @@ TrainingSite::Upgrade* TrainingSite::get_upgrade(TrainingAttribute const atr) {
 /**
  * Gets the priority of given attribute
  */
+/*
 int32_t TrainingSite::get_pri(TrainingAttribute atr) {
 	for (const Upgrade& upgrade : upgrades_) {
 		if (upgrade.attribute == atr) {
@@ -1036,10 +1037,12 @@ int32_t TrainingSite::get_pri(TrainingAttribute atr) {
 	}
 	return 0;
 }
+*/
 
 /**
  * Sets the priority of given attribute
  */
+/*
 void TrainingSite::set_pri(TrainingAttribute atr, int32_t prio) {
 	if (prio < 0) {
 		prio = 0;
@@ -1052,6 +1055,7 @@ void TrainingSite::set_pri(TrainingAttribute atr, int32_t prio) {
 		}
 	}
 }
+*/
 
 /**
  * Only called from \ref calc_upgrades
@@ -1062,8 +1066,8 @@ void TrainingSite::add_upgrade(TrainingAttribute const atr, const std::string& p
 	u.prefix = prefix;
 	u.min = descr().get_min_level(atr);
 	u.max = descr().get_max_level(atr) - 1;
-	u.prio = 6;
-	u.credit = 0;
+	// u.prio = 6;
+	// u.credit = 0;
 	u.lastattempt = -1;
 	u.lastsuccess = false;
 	u.failures = 0;

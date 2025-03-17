@@ -135,8 +135,8 @@ class TrainingSite : public ProductionSite {
 		TrainingAttribute attribute;  // attribute for this upgrade
 		std::string prefix;           // prefix for programs
 		int32_t min, max;             // minimum and maximum program number (inclusive)
-		uint32_t prio;                // relative priority
-		uint32_t credit;              // whenever an upgrade gets credit >= 10, it can be run
+		// uint32_t prio;                // relative priority
+		// uint32_t credit;              // whenever an upgrade gets credit >= 10, it can be run
 		int32_t lastattempt;          // level of the last attempt in this upgrade category
 
 		// whether the last attempt in this upgrade category was successful
@@ -155,18 +155,20 @@ public:
 	void remove_worker(Worker&) override;
 	bool is_present(Worker& worker) const override;
 
+	// TODO(tothxa): implement controlling by UI
+	//               also make it SoldierPreference instead of bool
 	bool get_build_heroes() const {
 		return build_heroes_;
 	}
 	void set_build_heroes(bool b_heroes) {
 		build_heroes_ = b_heroes;
 	}
-	void switch_heroes();
+	// void switch_heroes();
 
 	void set_economy(Economy* e, WareWorker type) override;
 
-	int32_t get_pri(enum TrainingAttribute atr);
-	void set_pri(enum TrainingAttribute atr, int32_t prio);
+	// int32_t get_pri(enum TrainingAttribute atr);
+	// void set_pri(enum TrainingAttribute atr, int32_t prio);
 
 	// These are for premature soldier kick-out
 	void training_attempted(TrainingAttribute type, uint32_t level);
@@ -228,10 +230,10 @@ private:
 
 	/** True, \b always upgrade already experienced soldiers first, when possible
 	 * False, \b always upgrade inexperienced soldiers first, when possible */
-	bool build_heroes_{false};
+	bool build_heroes_{true};
 
 	std::vector<Upgrade> upgrades_;
-	Upgrade* current_upgrade_;
+	std::vector<Upgrade>::iterator current_upgrade_;
 
 	ProgramResult result_{ProgramResult::kFailed};  /// The result of the last training program.
 
@@ -244,7 +246,9 @@ private:
 	using FailAndPresence = std::pair<uint16_t, uint8_t>;  // first might wrap in a long play..
 	using TrainFailCount = std::map<TypeAndLevel, FailAndPresence>;
 	TrainFailCount training_failure_count_;
+
 	uint32_t max_stall_val_;
+
 	// These are for soldier import.
 	// If the training site can complete its job, or, in other words, soldiers leave
 	// because of they are unupgradeable, then the training site tries to grab already-trained

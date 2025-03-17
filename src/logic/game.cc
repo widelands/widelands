@@ -46,7 +46,7 @@
 #include "commands/cmd_calculate_statistics.h"
 #include "commands/cmd_call_economy_balance.h"
 #include "commands/cmd_change_soldier_capacity.h"
-#include "commands/cmd_change_training_options.h"
+// #include "commands/cmd_change_training_options.h"
 #include "commands/cmd_delete_message.h"
 #include "commands/cmd_diplomacy.h"
 #include "commands/cmd_dismantle_building.h"
@@ -1140,12 +1140,14 @@ void Game::send_player_set_input_max_fill(PlayerImmovable& imm,
 	   get_gametime(), imm.owner().player_number(), imm, index, type, max_fill, cs));
 }
 
+/*
 void Game::send_player_change_training_options(TrainingSite& ts,
                                                TrainingAttribute attr,
                                                int32_t const val) {
 	send_player_command(
 	   new CmdChangeTrainingOptions(get_gametime(), ts.owner().player_number(), ts, attr, val));
 }
+*/
 
 void Game::send_player_drop_soldier(MapObject& b, int32_t const ser) {
 	assert(ser != -1);

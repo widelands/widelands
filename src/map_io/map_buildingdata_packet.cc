@@ -1009,9 +1009,10 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 			uint8_t const nr_upgrades = fr.unsigned_8();
 			for (uint8_t i = 0; i < nr_upgrades; ++i) {
 				TrainingAttribute attribute = static_cast<TrainingAttribute>(fr.unsigned_8());
-				if (TrainingSite::Upgrade* const upgrade = trainingsite.get_upgrade(attribute)) {
-					upgrade->prio = fr.unsigned_8();
-					upgrade->credit = fr.unsigned_8();
+				if (TrainingSite::Upgrade* const upgrade = trainingsite.get_upgrade(attribute);
+				    upgrade != nullptr) {
+					/* upgrade->prio = */ fr.unsigned_8();
+					/* upgrade->credit = */ fr.unsigned_8();
 					upgrade->lastattempt = fr.signed_32();
 					upgrade->lastsuccess = (fr.unsigned_8() != 0u);
 				} else {
@@ -1546,8 +1547,10 @@ void MapBuildingdataPacket::write_trainingsite(const TrainingSite& trainingsite,
 	fw.unsigned_8(trainingsite.upgrades_.size());
 	for (const TrainingSite::Upgrade& upgrade : trainingsite.upgrades_) {
 		fw.unsigned_8(static_cast<uint8_t>(upgrade.attribute));
-		fw.unsigned_8(upgrade.prio);
-		fw.unsigned_8(upgrade.credit);
+		// fw.unsigned_8(upgrade.prio);
+		// fw.unsigned_8(upgrade.credit);
+		fw.unsigned_8(6);
+		fw.unsigned_8(10);
 		fw.signed_32(upgrade.lastattempt);
 		fw.signed_8(static_cast<int8_t>(upgrade.lastsuccess));
 	}

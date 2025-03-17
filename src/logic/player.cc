@@ -1221,6 +1221,7 @@ bool Player::has_economy(Widelands::Serial serial) const {
 Change the training priotity values
 ==========
 */
+/*
 void Player::change_training_options(TrainingSite& trainingsite,
                                      TrainingAttribute attr,
                                      int32_t const val) {
@@ -1228,6 +1229,7 @@ void Player::change_training_options(TrainingSite& trainingsite,
 		trainingsite.set_pri(attr, trainingsite.get_pri(attr) + val);
 	}
 }
+*/
 
 /*
 ===========
