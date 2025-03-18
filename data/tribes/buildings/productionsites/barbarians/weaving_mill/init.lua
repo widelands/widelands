@@ -51,7 +51,8 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving because ...
          descname = _("weaving"),
          actions = {
-            "sleep=duration:25s",
+            -- time total: 25.4 + 20 + 3.6 = 49 sec
+            "sleep=duration:25s400ms",
             "return=skipped unless economy needs cloth",
             "consume=reed",
             "playsound=sound/barbarians/weaver priority:90%",

@@ -54,6 +54,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
          descname = pgettext("empire_building", "rearing donkeys"),
          actions = {
+            -- time total: 15 + 15 = 30 sec
             "return=skipped unless economy needs empire_donkey",
             "consume=wheat water",
             "sleep=duration:15s",
