@@ -66,7 +66,7 @@ constexpr uint16_t kCurrentPacketVersionConstructionsite = 5;
 constexpr uint16_t kCurrentPacketPFBuilding = 3;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 8;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 11;
-constexpr uint16_t kCurrentPacketVersionTrainingsite = 7;
+constexpr uint16_t kCurrentPacketVersionTrainingsite = 8;
 
 /* Packet versions changelog:
  * Overall: v1.1 = 9
@@ -79,7 +79,8 @@ constexpr uint16_t kCurrentPacketVersionTrainingsite = 7;
  * Productionsite: v1.1 = 9
  * - 9 -> 10: Added infinite production
  * - 10 -> 11: Added ship/ferry fleet/yard interfaces
- * Trainingesite: v1.1 = 7
+ * Trainingsite: v1.1 = 7
+ * - 7 -> 8 (v1.4): Complete redesign
  */
 
 void MapBuildingdataPacket::read(FileSystem& fs,
@@ -1006,52 +1007,47 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 			trainingsite.capacity_ = fr.unsigned_8();
 			trainingsite.build_heroes_ = (fr.unsigned_8() != 0u);
 
-			uint8_t const nr_upgrades = fr.unsigned_8();
-			for (uint8_t i = 0; i < nr_upgrades; ++i) {
-				TrainingAttribute attribute = static_cast<TrainingAttribute>(fr.unsigned_8());
-				if (TrainingSite::Upgrade* const upgrade = trainingsite.get_upgrade(attribute);
-				    upgrade != nullptr) {
-					/* upgrade->prio = */ fr.unsigned_8();
-					/* upgrade->credit = */ fr.unsigned_8();
-					upgrade->lastattempt = fr.signed_32();
-					upgrade->lastsuccess = (fr.unsigned_8() != 0u);
-				} else {
-					fr.unsigned_8();
-					fr.unsigned_8();
-					fr.signed_32();
-					fr.signed_32();
+			if (packet_version < 8) {
+				uint8_t const nr_upgrades = fr.unsigned_8();
+				for (uint8_t i = 0; i < nr_upgrades; ++i) {
+					fr.unsigned_8();  // training attribute
+					fr.unsigned_8();  // priority
+					fr.unsigned_8();  // credit
+					fr.signed_32();  // lastattempt
+					fr.unsigned_8();  // lastsuccess
 				}
-			}
 
-			uint16_t mapsize = fr.unsigned_16();  // map of training levels (not _the_ map)
-			while (mapsize != 0u) {
-				// Get the training attribute and check if it is a valid enum member
-				// We use a temp value, because the static_cast to the enum might be undefined.
-				uint8_t temp_traintype = fr.unsigned_8();
-				switch (temp_traintype) {
-				case static_cast<uint8_t>(TrainingAttribute::kHealth):
-				case static_cast<uint8_t>(TrainingAttribute::kAttack):
-				case static_cast<uint8_t>(TrainingAttribute::kDefense):
-				case static_cast<uint8_t>(TrainingAttribute::kEvade):
-				case static_cast<uint8_t>(TrainingAttribute::kTotal):
-					break;
-				default:
-					throw GameDataError("expected kHealth (%u), kAttack (%u), kDefense (%u), kEvade "
-					                    "(%u) or kTotal (%u) but found unknown attribute value (%u)",
-					                    static_cast<unsigned int>(TrainingAttribute::kHealth),
-					                    static_cast<unsigned int>(TrainingAttribute::kAttack),
-					                    static_cast<unsigned int>(TrainingAttribute::kDefense),
-					                    static_cast<unsigned int>(TrainingAttribute::kEvade),
-					                    static_cast<unsigned int>(TrainingAttribute::kTotal),
-					                    temp_traintype);
+				// TODO(tothxa): these will probably be removed, convert them to empty reads then
+				uint16_t mapsize = fr.unsigned_16();  // map of training levels (not _the_ map)
+				while (mapsize != 0u) {
+					// Get the training attribute and check if it is a valid enum member
+					// We use a temp value, because the static_cast to the enum might be undefined.
+					uint8_t temp_traintype = fr.unsigned_8();
+					switch (temp_traintype) {
+					case static_cast<uint8_t>(TrainingAttribute::kHealth):
+					case static_cast<uint8_t>(TrainingAttribute::kAttack):
+					case static_cast<uint8_t>(TrainingAttribute::kDefense):
+					case static_cast<uint8_t>(TrainingAttribute::kEvade):
+					case static_cast<uint8_t>(TrainingAttribute::kTotal):
+						break;
+					default:
+						throw GameDataError("expected kHealth (%u), kAttack (%u), kDefense (%u), kEvade "
+						                    "(%u) or kTotal (%u) but found unknown attribute value (%u)",
+						                    static_cast<unsigned int>(TrainingAttribute::kHealth),
+						                    static_cast<unsigned int>(TrainingAttribute::kAttack),
+						                    static_cast<unsigned int>(TrainingAttribute::kDefense),
+						                    static_cast<unsigned int>(TrainingAttribute::kEvade),
+						                    static_cast<unsigned int>(TrainingAttribute::kTotal),
+						                    temp_traintype);
+					}
+					TrainingAttribute traintype = static_cast<TrainingAttribute>(temp_traintype);
+					uint16_t trainlevel = fr.unsigned_16();
+					uint16_t trainstall = fr.unsigned_16();
+					uint16_t spresence = fr.unsigned_8();
+					mapsize--;
+					// trainingsite.training_failure_count_[std::make_pair(traintype, trainlevel)] =
+					//    std::make_pair(trainstall, spresence);
 				}
-				TrainingAttribute traintype = static_cast<TrainingAttribute>(temp_traintype);
-				uint16_t trainlevel = fr.unsigned_16();
-				uint16_t trainstall = fr.unsigned_16();
-				uint16_t spresence = fr.unsigned_8();
-				mapsize--;
-				trainingsite.training_failure_count_[std::make_pair(traintype, trainlevel)] =
-				   std::make_pair(trainstall, spresence);
 			}
 
 			trainingsite.highest_trainee_level_seen_ = fr.unsigned_8();
@@ -1543,17 +1539,7 @@ void MapBuildingdataPacket::write_trainingsite(const TrainingSite& trainingsite,
 	fw.unsigned_8(trainingsite.capacity_);
 	fw.unsigned_8(static_cast<uint8_t>(trainingsite.build_heroes_));
 
-	// upgrades
-	fw.unsigned_8(trainingsite.upgrades_.size());
-	for (const TrainingSite::Upgrade& upgrade : trainingsite.upgrades_) {
-		fw.unsigned_8(static_cast<uint8_t>(upgrade.attribute));
-		// fw.unsigned_8(upgrade.prio);
-		// fw.unsigned_8(upgrade.credit);
-		fw.unsigned_8(6);
-		fw.unsigned_8(10);
-		fw.signed_32(upgrade.lastattempt);
-		fw.signed_8(static_cast<int8_t>(upgrade.lastsuccess));
-	}
+	/*
 	if (255 < trainingsite.training_failure_count_.size()) {
 		log_warn_time(game.get_gametime(),
 		              "Save TrainingSite: Failure counter has ridiculously many entries! (%u)\n",
@@ -1566,6 +1552,7 @@ void MapBuildingdataPacket::write_trainingsite(const TrainingSite& trainingsite,
 		fw.unsigned_16(fail_and_presence.second.first);
 		fw.unsigned_8(fail_and_presence.second.second);
 	}
+	*/
 	fw.unsigned_8(trainingsite.highest_trainee_level_seen_);
 	fw.unsigned_8(trainingsite.latest_trainee_kickout_level_);
 	fw.unsigned_8(trainingsite.trainee_general_lower_bound_);

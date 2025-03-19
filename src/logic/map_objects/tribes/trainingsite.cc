@@ -49,6 +49,11 @@ std::string training_attribute_to_string(Widelands::TrainingAttribute attribute)
 		return "unknown";
 	}
 }
+
+inline Widelands::TypeAndLevel upgrade_key(const Widelands::TrainingAttribute attr, const uint16_t level) {
+	// We want them ordered by level first
+	return (static_cast<uint32_t>(level) << 8) + static_cast<uint32_t>(attr);
+}
 }  // namespace
 
 namespace Widelands {
@@ -71,23 +76,6 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 	//  These sections also seem redundant. Eliminate them (having the
 	//  programs should be enough).
 	std::unique_ptr<LuaTable> items_table;
-
-	// TODO(hessenfarmer): Compatibility, remove these after v1.2
-	if (table.has_key("soldier health")) {
-		log_warn("Trainingsite '%s': Key 'soldier_health' is no longer needed\n", name().c_str());
-	}
-	// TODO(hessenfarmer): Compatibility, remove these after v1.2
-	if (table.has_key("soldier attack")) {
-		log_warn("Trainingsite '%s': Key 'soldier_attack' is no longer needed\n", name().c_str());
-	}
-	// TODO(hessenfarmer): Compatibility, remove these after v1.2
-	if (table.has_key("soldier defense")) {
-		log_warn("Trainingsite '%s': Key 'soldier_defense' is no longer needed\n", name().c_str());
-	}
-	// TODO(hessenfarmer): Compatibility, remove these after v1.2
-	if (table.has_key("soldier evade")) {
-		log_warn("Trainingsite '%s': Key 'soldier_evade' is no longer needed\n", name().c_str());
-	}
 
 	// Check dependencies between 'checksoldier' & 'train', and set min and max levels
 	for (const auto& program : programs()) {
@@ -123,6 +111,8 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 				}
 				// All clear, let's add the training information
 				update_level(from_checksoldier.attribute, from_checksoldier.level, checkme.level);
+				training_costs_.emplace(upgrade_key(from_checksoldier.attribute, from_checksoldier.level),
+				                        program.second->consumed_wares_workers());
 			}
 		}
 	}
@@ -196,7 +186,7 @@ int32_t TrainingSite::get_max_unstall_level(const TrainingAttribute at,
 	int32_t lev = min;
 	int32_t rtv = min;
 	while (++lev < max) {
-		TypeAndLevel train_tl(at, lev);
+		TypeAndLevel train_tl = upgrade_key(at, lev);
 		TrainFailCount::const_iterator tstep = training_failure_count_.find(train_tl);
 		if (max_stall_val_ > tstep->second.first) {
 			rtv = lev;
@@ -216,7 +206,6 @@ void TrainingSiteDescr::update_level(TrainingAttribute attrib,
 		min_health_ = std::min(min_health_, from_level);
 		max_health_ = std::max(max_health_, to_level);
 		train_health_ = true;
-
 		return;
 	case TrainingAttribute::kAttack:
 		min_attack_ = std::min(min_attack_, from_level);
@@ -365,13 +354,13 @@ class TrainingSite
 TrainingSite::TrainingSite(const TrainingSiteDescr& d)
    : ProductionSite(d),
      soldier_control_(this),
-
      capacity_(descr().get_max_number_of_soldiers()) {
+
 	set_soldier_control(&soldier_control_);
 
 	// Initialize this in the constructor so that loading code may
 	// overwrite priorities.
-	calc_upgrades();
+	init_upgrades();
 	current_upgrade_ = upgrades_.end();
 	set_post_timer(Duration(6000));
 	training_failure_count_.clear();
@@ -398,7 +387,18 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
 	if (d.get_train_evade()) {
 		init_kick_state(TrainingAttribute::kEvade, d);
 	}
+
+	// TODO(tothxa): This is just wrong. ProductionSite should already provide a searchable
+	//               inputs list.
+	for (InputQueue* iq : inputqueues()) {
+		// Don't want a composite key and no training step needs workers currently.
+		if (iq->get_type() != WareWorker::wwWARE) {
+			throw wexception("Trainingsites should only have ware inputs.");
+		}
+		inputs_map_.emplace(iq->get_index(), iq);
+	}
 }
+
 void TrainingSite::init_kick_state(const TrainingAttribute& art, const TrainingSiteDescr& d) {
 	// Now with kick-out state saving implemented, initializing is an overkill
 	for (unsigned t = d.get_min_level(art); t < d.get_max_level(art); t++) {
@@ -468,13 +468,6 @@ void TrainingSite::add_worker(Worker& w) {
 	}
 }
 
-/*
-void TrainingSite::switch_heroes() {
-	build_heroes_ = !build_heroes_;
-	molog(owner().egbase().get_gametime(), "BUILD_HEROES: %s", build_heroes_ ? "TRUE" : "FALSE");
-}
-*/
-
 void TrainingSite::remove_worker(Worker& w) {
 	upcast(Game, game, &get_owner()->egbase());
 
@@ -507,7 +500,7 @@ bool TrainingSite::is_present(Worker& worker) const {
  * Request soldiers up to capacity, or let go of surplus soldiers.
  *
  * Now, we attempt to intelligently select most suitable soldiers
- * (either already somwhat trained, or if training stalls, less
+ * (either already somewhat trained, or if training stalls, less
  * trained ones). If no luck, the criteria is made relaxed until
  * somebody shows up.
  */
@@ -747,25 +740,18 @@ void TrainingSite::request_soldier_callback(Game& game,
  * Drop all the soldiers that can not be upgraded further at this building.
  */
 void TrainingSite::drop_unupgradable_soldiers(Game& /* game */) {
-	std::vector<Soldier*> droplist;
-
-	for (Soldier* soldier : soldiers_) {
-		std::vector<Upgrade>::iterator it = upgrades_.begin();
-		for (; it != upgrades_.end(); ++it) {
-			int32_t level = soldier->get_level(it->attribute);
-			if (level >= it->min && level <= it->max) {
-				break;
-			}
-		}
-
-		if (it == upgrades_.end()) {
-			droplist.push_back(soldier);
-		}
+	if (untrainable_soldiers_.empty()) {
+		return;
 	}
 
-	// Drop soldiers only now, so that changes in the soldiers array don't
-	// mess things up
-	for (Soldier* soldier : droplist) {
+	while (!untrainable_soldiers_.empty()) {
+		soldier_control_.drop_soldier(*untrainable_soldiers_.back());
+		untrainable_soldiers_.pop_back();
+	}
+	update_soldier_request(true);
+
+	/*
+	for (Soldier* soldier : untrainable_soldiers_) {
 		uint8_t level = soldier->get_level(TrainingAttribute::kTotal);
 		if (level > highest_trainee_level_seen_) {
 			highest_trainee_level_seen_ = level;
@@ -780,6 +766,7 @@ void TrainingSite::drop_unupgradable_soldiers(Game& /* game */) {
 		}
 		repeated_layoff_inc_ = false;
 	}
+	*/
 }
 
 /**
@@ -787,6 +774,36 @@ void TrainingSite::drop_unupgradable_soldiers(Game& /* game */) {
  *
  */
 void TrainingSite::drop_stalled_soldiers(Game& /* game */) {
+	if (failures_count_ <= max_stall_val_) {
+		// Trainer is still patient
+		return;
+	}
+
+	// First kick out the ones who are waiting for unavailable wares, let the rest wait some more.
+	if (!stalled_soldiers_.empty()) {
+		while (!stalled_soldiers_.empty()) {
+			soldier_control_.drop_soldier(*stalled_soldiers_.back());
+			stalled_soldiers_.pop_back();
+		}
+		update_soldier_request(false);
+		return;
+	}
+
+	if (!has_possible_upgrade_ || waiting_soldiers_.empty()) {
+		// No point in requesting new trainees if we can't train them anyway.
+		// We just have to wait some more until the needed wares arrive.
+		return;
+	}
+
+	// We may be able to request replacement soldiers whose next upgrade already has the wares here.
+	while (!waiting_soldiers_.empty()) {
+		soldier_control_.drop_soldier(*waiting_soldiers_.back());
+		waiting_soldiers_.pop_back();
+	}
+	update_soldier_request(false);
+
+
+	/*
 	Soldier* soldier_to_drop = nullptr;
 	uint8_t highest_soldier_level_seen = 0;
 
@@ -812,7 +829,7 @@ void TrainingSite::drop_stalled_soldiers(Game& /* game */) {
 						continue;
 					}
 
-					TypeAndLevel train_tl(upgrade.attribute, level);
+					TypeAndLevel train_tl = upgrade_key(upgrade.attribute, level);
 					TrainFailCount::iterator tstep = training_failure_count_.find(train_tl);
 					if (tstep == training_failure_count_.end()) {
 						log_warn("TrainingSite::drop_stalled_soldiers: training step %u,%u "
@@ -858,6 +875,7 @@ void TrainingSite::drop_stalled_soldiers(Game& /* game */) {
 			repeated_layoff_inc_ = false;
 		}
 	}
+	*/
 }
 
 std::unique_ptr<const BuildingSettings> TrainingSite::create_building_settings() const {
@@ -886,8 +904,8 @@ void TrainingSite::program_end(Game& game, ProgramResult const result) {
 
 	// NOCOM for testing
 	if (current_upgrade_ != upgrades_.end()) {
-		log_dbg_time(game.get_gametime(), "%s%i ended with result %i",
-		   current_upgrade_->prefix.c_str(), current_upgrade_->lastattempt, static_cast<int>(result));
+		log_dbg_time(game.get_gametime(), "%s ended with result %i",
+		   current_upgrade_->second.program_name.c_str(), static_cast<int>(result));
 	} else {
 		log_dbg_time(game.get_gametime(), "trainingsite other program ended with result %i",
 		   static_cast<int>(result));
@@ -905,8 +923,10 @@ void TrainingSite::program_end(Game& game, ProgramResult const result) {
 		if (result_ == ProgramResult::kCompleted) {
 			drop_unupgradable_soldiers(game);
 			leftover_soldiers_check = false;
-			current_upgrade_->lastsuccess = true;
-			current_upgrade_->failures = 0;
+			/*
+			current_upgrade_->second.lastsuccess = true;
+			current_upgrade_->second.failures = 0;
+			*/
 
 			// I try to train already somewhat trained soldiers here, except when
 			// no training happens. Now some training has happened, hence zero.
@@ -914,7 +934,7 @@ void TrainingSite::program_end(Game& game, ProgramResult const result) {
 			repeated_layoff_ctr_ = 0;
 			repeated_layoff_inc_ = false;
 		} else {
-			current_upgrade_->failures++;
+			/* current_upgrade_->second.failures++; */
 			drop_stalled_soldiers(game);
 			leftover_soldiers_check = false;
 		}
@@ -929,12 +949,9 @@ void TrainingSite::program_end(Game& game, ProgramResult const result) {
 
 /**
  * Find and start the next training program.
- *
- * Prioritize such that if UpgradeA.prio is twice UpgradeB.prio, then
- * start_upgrade will be called twice as often for UpgradeA.
- * If all priorities are zero, nothing will happen.
  */
 void TrainingSite::find_and_start_next_program(Game& game) {
+	// These must be set by ActCheckSoldier::execute() after the program delays
 	checked_soldier_training_.level = INVALID_INDEX;
 	checked_soldier_training_.attribute = TrainingAttribute::kTotal;
 
@@ -944,14 +961,21 @@ void TrainingSite::find_and_start_next_program(Game& game) {
 	if (current_upgrade_ == upgrades_.end()) {
 		current_upgrade_ = upgrades_.begin();
 	}
-	start_upgrade(game, *current_upgrade_);
 
+	// start_upgrade(game, *current_upgrade_);
+	const std::string& next_upgrade(current_upgrade_->second.program_name);
+
+	// NOCOM for testing
+	log_dbg_time(game.get_gametime(), "%s started", next_upgrade.c_str());
+
+	program_start(game, next_upgrade);
 }
 
 /**
  * The prioritizer decided that the given type of upgrade should run.
- * Let's do our worst.
  */
+// TODO(tothxa): looks like it won't be necessary any more, but kept around for reference
+//               of old logic
 void TrainingSite::start_upgrade(Game& game, Upgrade& upgrade) {
 	/*
 	int32_t minlevel = upgrade.max;
@@ -1003,101 +1027,48 @@ void TrainingSite::start_upgrade(Game& game, Upgrade& upgrade) {
 		}
 	}
 	*/
-
-	if (++upgrade.lastattempt > upgrade.max) {
-		upgrade.lastattempt = upgrade.min;
-	}
-	// upgrade.lastattempt = level;
-	upgrade.lastsuccess = false;
-
-	// NOCOM for testing
-	log_dbg_time(game.get_gametime(), "%s%i started", upgrade.prefix.c_str(), upgrade.lastattempt);
-
-	return program_start(game, format("%s%i", upgrade.prefix, /* level */ upgrade.lastattempt));
-}
-
-TrainingSite::Upgrade* TrainingSite::get_upgrade(TrainingAttribute const atr) {
-	for (Upgrade& upgrade : upgrades_) {
-		if (upgrade.attribute == atr) {
-			return &upgrade;
-		}
-	}
-	return nullptr;
-}
-
-/**
- * Gets the priority of given attribute
- */
-/*
-int32_t TrainingSite::get_pri(TrainingAttribute atr) {
-	for (const Upgrade& upgrade : upgrades_) {
-		if (upgrade.attribute == atr) {
-			return upgrade.prio;
-		}
-	}
-	return 0;
-}
-*/
-
-/**
- * Sets the priority of given attribute
- */
-/*
-void TrainingSite::set_pri(TrainingAttribute atr, int32_t prio) {
-	if (prio < 0) {
-		prio = 0;
-	}
-
-	for (Upgrade& upgrade : upgrades_) {
-		if (upgrade.attribute == atr) {
-			upgrade.prio = prio;
-			return;
-		}
-	}
-}
-*/
-
-/**
- * Only called from \ref calc_upgrades
- */
-void TrainingSite::add_upgrade(TrainingAttribute const atr, const std::string& prefix) {
-	Upgrade u;
-	u.attribute = atr;
-	u.prefix = prefix;
-	u.min = descr().get_min_level(atr);
-	u.max = descr().get_max_level(atr) - 1;
-	// u.prio = 6;
-	// u.credit = 0;
-	u.lastattempt = -1;
-	u.lastsuccess = false;
-	u.failures = 0;
-	upgrades_.push_back(u);
 }
 
 /**
  * Called once at initialization to populate \ref upgrades_.
  */
-void TrainingSite::calc_upgrades() {
+void TrainingSite::init_upgrades() {
 	assert(upgrades_.empty());
 
-	//  TODO(unknown): This is currently hardcoded for "soldier" but it should allow any
-	//  soldier type name.
 	if (descr().get_train_health()) {
-		add_upgrade(TrainingAttribute::kHealth, "upgrade_soldier_health_");
+		add_upgrades(TrainingAttribute::kHealth);
 	}
 	if (descr().get_train_attack()) {
-		add_upgrade(TrainingAttribute::kAttack, "upgrade_soldier_attack_");
+		add_upgrades(TrainingAttribute::kAttack);
 	}
 	if (descr().get_train_defense()) {
-		add_upgrade(TrainingAttribute::kDefense, "upgrade_soldier_defense_");
+		add_upgrades(TrainingAttribute::kDefense);
 	}
 	if (descr().get_train_evade()) {
-		add_upgrade(TrainingAttribute::kEvade, "upgrade_soldier_evade_");
+		add_upgrades(TrainingAttribute::kEvade);
 	}
 }
 
+/**
+ * Only called from \ref init_upgrades
+ */
+void TrainingSite::add_upgrades(TrainingAttribute const attr) {
+	int32_t min = descr().get_min_level(attr);
+	int32_t max = descr().get_max_level(attr);
+
+	for (int32_t level = min; level <= max; ++level) {
+		const TypeAndLevel key = upgrade_key(attr, level);
+		upgrades_.emplace(key, Upgrade(attr, level));
+	}
+}
+
+TrainingSite::Upgrade::Upgrade(const TrainingAttribute attr, const uint16_t level)
+	: key(upgrade_key(attr, level)),
+	  program_name(format("upgrade_soldier_%s_%d", training_attribute_to_string(attr), level)) {
+}
+
 void TrainingSite::training_attempted(TrainingAttribute type, uint32_t level) {
-	TypeAndLevel key(type, level);
+	TypeAndLevel key = upgrade_key(type, level);
 	checked_soldier_training_.level = level;
 	checked_soldier_training_.attribute = type;
 	if (training_failure_count_.find(key) == training_failure_count_.end()) {
@@ -1112,7 +1083,7 @@ void TrainingSite::training_attempted(TrainingAttribute type, uint32_t level) {
  */
 
 void TrainingSite::training_successful(TrainingAttribute type, uint32_t level) {
-	TypeAndLevel key(type, level);
+	TypeAndLevel key = upgrade_key(type, level);
 	// Here I assume that key exists: training has been attempted before it can succeed.
 	training_failure_count_[key].first = 0;
 }
@@ -1132,4 +1103,96 @@ void TrainingSite::training_done() {
 ProductionProgram::Action::TrainingParameters TrainingSite::checked_soldier_training() const {
 	return checked_soldier_training_;
 }
+
+void TrainingSite::update_upgrade_statuses() {
+	for (auto& upgrade_it : upgrades_) {
+		Upgrade& upgrade = upgrade_it.second;
+		upgrade.status = Upgrade::Status::kCanStart;
+		const ProductionProgram::Groups& costs = descr().get_training_cost(upgrade.key);
+		for (const ProductionProgram::WareTypeGroup& group : costs) {
+			uint32_t max = 0;
+			uint32_t here = 0;
+			uint32_t soon = 0;
+			for (const auto& ware : group.first) {
+				InputQueue* iq = inputs_map_.at(ware.first);
+				max += iq->get_max_fill();
+				here += iq->get_filled();
+				soon += iq->get_max_fill() - iq->get_missing();
+			}
+			if (max < group.second) {
+				upgrade.status = Upgrade::Status::kDisabled;
+				break;
+			}
+			if (here >= group.second) {
+				continue;
+			}
+			if (soon < group.second) {
+				upgrade.status = Upgrade::Status::kNotPossible;
+			} else if (upgrade.status == Upgrade::Status::kCanStart) {
+				upgrade.status = Upgrade::Status::kWait;
+			}
+		}
+		if (upgrade.status == Upgrade::Status::kCanStart) {
+			has_possible_upgrade_ = true;
+		}
+	}
+
+	for (Soldier* soldier : soldiers_) {
+		Upgrade::Status best_status = Upgrade::Status::kDisabled;
+		std::map<TypeAndLevel, Upgrade>::iterator upgrade_it;
+
+		if (descr().get_train_health()) {
+			upgrade_it =
+			   upgrades_.find(upgrade_key(TrainingAttribute::kHealth, soldier->get_health_level()));
+			if (upgrade_it != upgrades_.end()) {
+				upgrade_it->second.candidates.emplace_back(soldier);
+				best_status = std::max(best_status, upgrade_it->second.status);
+			}
+		}
+
+		if (descr().get_train_attack()) {
+			upgrade_it =
+			   upgrades_.find(upgrade_key(TrainingAttribute::kAttack, soldier->get_attack_level()));
+			if (upgrade_it != upgrades_.end()) {
+				upgrade_it->second.candidates.emplace_back(soldier);
+				best_status = std::max(best_status, upgrade_it->second.status);
+			}
+		}
+
+		if (descr().get_train_defense()) {
+			upgrade_it =
+			   upgrades_.find(upgrade_key(TrainingAttribute::kDefense, soldier->get_defense_level()));
+			if (upgrade_it != upgrades_.end()) {
+				upgrade_it->second.candidates.emplace_back(soldier);
+				best_status = std::max(best_status, upgrade_it->second.status);
+			}
+		}
+
+		if (descr().get_train_evade()) {
+			upgrade_it =
+			   upgrades_.find(upgrade_key(TrainingAttribute::kEvade, soldier->get_evade_level()));
+			if (upgrade_it != upgrades_.end()) {
+				upgrade_it->second.candidates.emplace_back(soldier);
+				best_status = std::max(best_status, upgrade_it->second.status);
+			}
+		}
+
+		switch (best_status) {
+			case Upgrade::Status::kCanStart:
+				break;
+			case Upgrade::Status::kDisabled:
+				untrainable_soldiers_.emplace_back(soldier);
+				break;
+			case Upgrade::Status::kNotPossible:
+				stalled_soldiers_.emplace_back(soldier);
+				break;
+			case Upgrade::Status::kWait:
+				waiting_soldiers_.emplace_back(soldier);
+				break;
+			default:
+				NEVER_HERE();
+		}
+	}
+}
+
 }  // namespace Widelands

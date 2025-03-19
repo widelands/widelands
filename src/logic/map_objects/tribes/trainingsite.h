@@ -30,6 +30,9 @@ struct TrainingSiteWindow;
 
 namespace Widelands {
 
+// Unique key to address each training level of each war art
+using TypeAndLevel = uint32_t;
+
 class TrainingSiteDescr : public ProductionSiteDescr {
 public:
 	TrainingSiteDescr(const std::string& init_descname,
@@ -75,6 +78,10 @@ public:
 		return no_soldier_for_training_level_message_;
 	}
 
+	[[nodiscard]] const ProductionProgram::Groups& get_training_cost(const TypeAndLevel& upgrade_step) const {
+		return training_costs_.at(upgrade_step);
+	}
+
 private:
 	void update_level(TrainingAttribute attrib, unsigned from_level, unsigned to_level);
 
@@ -112,6 +119,8 @@ private:
 	/** Maximum evasion a soldier can acquire at this site */
 	unsigned max_evade_{0U};
 
+	std::map<TypeAndLevel, ProductionProgram::Groups> training_costs_;
+
 	std::string no_soldier_to_train_message_;
 	std::string no_soldier_for_training_level_message_;
 
@@ -132,16 +141,19 @@ class TrainingSite : public ProductionSite {
 	friend struct ::TrainingSiteWindow;
 
 	struct Upgrade {
-		TrainingAttribute attribute;  // attribute for this upgrade
-		std::string prefix;           // prefix for programs
-		int32_t min, max;             // minimum and maximum program number (inclusive)
-		// uint32_t prio;                // relative priority
-		// uint32_t credit;              // whenever an upgrade gets credit >= 10, it can be run
-		int32_t lastattempt;          // level of the last attempt in this upgrade category
+		TypeAndLevel key;
+		std::string program_name;
 
-		// whether the last attempt in this upgrade category was successful
-		bool lastsuccess;
-		uint32_t failures;
+		enum class Status : uint8_t {
+			kDisabled = 0,     // the input queue settings prevent this upgrade
+			kNotPossible = 1,  // one or more wares are missing
+			kWait = 2,         // one or more wares are missing, but they all have active transfers
+			kCanStart = 3      // all necessary wares are available
+		};
+		Status status{Status::kNotPossible};
+		std::vector<Soldier*> candidates;
+
+		Upgrade(TrainingAttribute attr, const uint16_t level);
 	};
 
 public:
@@ -206,13 +218,18 @@ private:
 
 	void find_and_start_next_program(Game&) override;
 	void start_upgrade(Game&, Upgrade&);
-	void add_upgrade(TrainingAttribute, const std::string& prefix);
-	void calc_upgrades();
+
+	// Used in initialization of TrainingSite
+	void init_upgrades();
+	void add_upgrades(TrainingAttribute attr);
+
+	// Checks input queues and updates status and candidates of each Upgrade as well as lists of
+	// soldiers who cannot start any upgrade
+	void update_upgrade_statuses();
 
 	int32_t get_max_unstall_level(TrainingAttribute, const TrainingSiteDescr&) const;
 	void drop_unupgradable_soldiers(Game&);
 	void drop_stalled_soldiers(Game&);
-	Upgrade* get_upgrade(TrainingAttribute);
 
 	SoldierControl soldier_control_;
 	/// Open requests for soldiers. The soldiers can be under way or unavailable
@@ -220,6 +237,11 @@ private:
 
 	/** The soldiers currently at the training site*/
 	std::vector<Soldier*> soldiers_;
+
+	// Keep track of soldiers who cannot start any upgrade
+	std::vector<Soldier*> untrainable_soldiers_;  // all statuses are Upgrade::Status::kDisabled
+	std::vector<Soldier*> stalled_soldiers_;      // best status is Upgrade::Status::kNotPossible
+	std::vector<Soldier*> waiting_soldiers_;      // best status is Upgrade::Status::kWait
 
 	/** Number of soldiers that should be trained concurrently.
 	 * Equal or less to maximum number of soldiers supported by a training site.
@@ -232,22 +254,25 @@ private:
 	 * False, \b always upgrade inexperienced soldiers first, when possible */
 	bool build_heroes_{true};
 
-	std::vector<Upgrade> upgrades_;
-	std::vector<Upgrade>::iterator current_upgrade_;
+	std::map<TypeAndLevel, Upgrade> upgrades_;
+	std::map<TypeAndLevel, Upgrade>::iterator current_upgrade_;
+	bool has_possible_upgrade_;
+
+	// TODO(tothxa): Shouldn't ProductionSite already provide a searchable list of inputs?
+	std::map<DescriptionIndex, InputQueue*> inputs_map_;
 
 	ProgramResult result_{ProgramResult::kFailed};  /// The result of the last training program.
 
 	// These are used for kicking out soldiers prematurely
 	static const uint32_t training_state_multiplier_;
-	// Unuque key to address each training level of each war art
 
-	using TypeAndLevel = std::pair<TrainingAttribute, uint16_t>;
 	// First entry is the "stallness", second is a bool
 	using FailAndPresence = std::pair<uint16_t, uint8_t>;  // first might wrap in a long play..
 	using TrainFailCount = std::map<TypeAndLevel, FailAndPresence>;
 	TrainFailCount training_failure_count_;
 
 	uint32_t max_stall_val_;
+	uint32_t failures_count_{0};
 
 	// These are for soldier import.
 	// If the training site can complete its job, or, in other words, soldiers leave
