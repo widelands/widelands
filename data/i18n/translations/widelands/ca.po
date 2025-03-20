@@ -1709,7 +1709,7 @@ msgstr "Aleatòria"
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:463
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:99
 msgid "The tribe will be selected at random."
-msgstr ""
+msgstr "S’escollirà una cultura de manera aleatòria."
 
 #. * TRANSLATORS: Button tooltip in the editor for using a player's starting
 #. position tool

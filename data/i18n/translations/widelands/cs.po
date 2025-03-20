@@ -1718,7 +1718,7 @@ msgstr "Náhodně"
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:463
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:99
 msgid "The tribe will be selected at random."
-msgstr ""
+msgstr "Kmen bude vybrán náhodně."
 
 #. * TRANSLATORS: Button tooltip in the editor for using a player's starting
 #. position tool
