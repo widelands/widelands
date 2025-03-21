@@ -179,14 +179,16 @@ public:
 
 	void set_economy(Economy* e, WareWorker type) override;
 
-	// int32_t get_pri(enum TrainingAttribute atr);
-	// void set_pri(enum TrainingAttribute atr, int32_t prio);
-
 	// These are for premature soldier kick-out
-	void training_attempted(TrainingAttribute type, uint32_t level);
+	// void training_attempted(TrainingAttribute type, uint32_t level);
 	void training_successful(TrainingAttribute type, uint32_t level);
 	void training_done();
-	ProductionProgram::Action::TrainingParameters checked_soldier_training() const;
+
+	[[nodiscard]] unsigned current_training_level() const;
+	[[nodiscard]] TrainingAttribute current_training_attribute() const;
+
+	// Returns the previously selected soldier if still available, or tries to find a replacement
+	Soldier* get_selected_soldier(Game& game, TrainingAttribute attr, unsigned level);
 
 	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
@@ -217,7 +219,9 @@ private:
 	request_soldier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
 	void find_and_start_next_program(Game&) override;
-	void start_upgrade(Game&, Upgrade&);
+	// void start_upgrade(Game&, Upgrade&);
+	Soldier* pick_soldier(TrainingAttribute attr, unsigned level, bool full_search);
+	bool compare_levels(unsigned first, unsigned second);
 
 	// Used in initialization of TrainingSite
 	void init_upgrades();
@@ -250,13 +254,15 @@ private:
 	 * available*/
 	Quantity capacity_;
 
-	/** True, \b always upgrade already experienced soldiers first, when possible
-	 * False, \b always upgrade inexperienced soldiers first, when possible */
+	/** True, \b request and upgrade already experienced soldiers first, when possible
+	 * False, \b request and upgrade inexperienced soldiers first, when possible */
 	bool build_heroes_{true};
 
 	std::map<TypeAndLevel, Upgrade> upgrades_;
 	std::map<TypeAndLevel, Upgrade>::iterator current_upgrade_;
 	bool has_possible_upgrade_;
+
+	OPtr<Soldier> selected_soldier_;
 
 	// TODO(tothxa): Shouldn't ProductionSite already provide a searchable list of inputs?
 	std::map<DescriptionIndex, InputQueue*> inputs_map_;
@@ -300,9 +306,7 @@ private:
 	const Duration acceptance_threshold_timeout =
 	   Duration(5555);         // Lower the bar after this many milliseconds.
 	Time request_open_since_;  // Time units. If no soldiers appear, threshold is lowered after this.
-	void init_kick_state(const TrainingAttribute&, const TrainingSiteDescr&);
-
-	ProductionProgram::Action::TrainingParameters checked_soldier_training_;
+	// void init_kick_state(const TrainingAttribute&, const TrainingSiteDescr&);
 };
 
 /**

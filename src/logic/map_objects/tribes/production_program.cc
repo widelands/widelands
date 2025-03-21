@@ -1766,48 +1766,16 @@ ProductionProgram::ActCheckSoldier::ActCheckSoldier(const std::vector<std::strin
 
 void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps) const {
 	assert(ps.descr().type() == MapObjectType::TRAININGSITE);
-	const SoldierControl* ctrl = ps.soldier_control();
-	assert(ctrl != nullptr);
-	const std::vector<Soldier*> soldiers = ctrl->present_soldiers();
-
 	upcast(TrainingSite, ts, &ps);
-
-	if (soldiers.empty()) {
-		ps.set_production_result(ts->descr().no_soldier_to_train_message());
-		return ps.program_end(game, ProgramResult::kSkipped);
-	}
 	ps.molog(game.get_gametime(), "  Checking soldier (%u) level %u)\n",
 	         static_cast<unsigned int>(training_.attribute), training_.level);
 
-	const std::vector<Soldier*>::const_iterator soldiers_end = soldiers.end();
-	for (std::vector<Soldier*>::const_iterator it = soldiers.begin();; ++it) {
-		if (it == soldiers_end) {
-			ps.set_production_result(ts->descr().no_soldier_for_training_level_message());
-			return ps.program_end(game, ProgramResult::kSkipped);
-		}
-
-		if (training_.attribute == TrainingAttribute::kHealth) {
-			if ((*it)->get_health_level() == training_.level) {
-				break;
-			}
-		} else if (training_.attribute == TrainingAttribute::kAttack) {
-			if ((*it)->get_attack_level() == training_.level) {
-				break;
-			}
-		} else if (training_.attribute == TrainingAttribute::kDefense) {
-			if ((*it)->get_defense_level() == training_.level) {
-				break;
-			}
-		} else if (training_.attribute == TrainingAttribute::kEvade) {
-			if ((*it)->get_evade_level() == training_.level) {
-				break;
-			}
-		}
+	if (ts->get_selected_soldier(game, training_.attribute, training_.level) == nullptr) {
+		ps.set_production_result(ts->descr().no_soldier_to_train_message());
+		return ps.program_end(game, ProgramResult::kSkipped);
 	}
+
 	ps.molog(game.get_gametime(), "    okay\n");  // okay, do nothing
-
-	ts->training_attempted(training_.attribute, training_.level);
-
 	ps.molog(game.get_gametime(), "  Check done!\n");
 
 	return ps.program_step(game);
@@ -1862,59 +1830,46 @@ ProductionProgram::ActTrain::ActTrain(const std::vector<std::string>& arguments,
 void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const {
 	assert(ps.descr().type() == MapObjectType::TRAININGSITE);
 	TrainingSite& ts = dynamic_cast<TrainingSite&>(ps);
-	const SoldierControl* ctrl = ps.soldier_control();
-	const std::vector<Soldier*> soldiers = ctrl->present_soldiers();
-	const std::vector<Soldier*>::const_iterator soldiers_end = soldiers.end();
 
-	const unsigned current_level = ts.checked_soldier_training().level;
-	assert(current_level != INVALID_INDEX);
+	const unsigned current_level = ts.current_training_level();
 
 	ps.molog(game.get_gametime(), "  Training soldier's %u (%u to %u)",
 	         static_cast<unsigned int>(training_.attribute), current_level, training_.level);
 
 	assert(current_level < training_.level);
-	assert(ts.checked_soldier_training().attribute == training_.attribute);
+	assert(ts.current_training_attribute() == training_.attribute);
 
-	bool training_done = false;
-	for (auto it = soldiers.begin(); !training_done; ++it) {
-		if (it == soldiers_end) {
-			ps.set_production_result(_("No soldier found for this training level!"));
-			return ps.program_end(game, ProgramResult::kSkipped);
+	Soldier* soldier = ts.get_selected_soldier(game, training_.attribute, training_.level);
+	if (soldier == nullptr) {
+		ps.set_production_result(_("No soldier found for this training level!"));
+		return ps.program_end(game, ProgramResult::kSkipped);
+	}
+
+	try {
+		switch (training_.attribute) {
+		case TrainingAttribute::kHealth:
+			assert(soldier->get_health_level() == current_level);
+			soldier->set_health_level(training_.level);
+			break;
+		case TrainingAttribute::kAttack:
+			assert(soldier->get_attack_level() == current_level);
+			soldier->set_attack_level(training_.level);
+			break;
+		case TrainingAttribute::kDefense:
+			assert(soldier->get_defense_level() == current_level);
+			soldier->set_defense_level(training_.level);
+			break;
+		case TrainingAttribute::kEvade:
+			assert(soldier->get_evade_level() == current_level);
+			soldier->set_evade_level(training_.level);
+			break;
+		case TrainingAttribute::kTotal:
+			throw wexception("'total' training attribute can't be trained");
+		default:
+			NEVER_HERE();
 		}
-		try {
-			switch (training_.attribute) {
-			case TrainingAttribute::kHealth:
-				if ((*it)->get_health_level() == current_level) {
-					(*it)->set_health_level(training_.level);
-					training_done = true;
-				}
-				break;
-			case TrainingAttribute::kAttack:
-				if ((*it)->get_attack_level() == current_level) {
-					(*it)->set_attack_level(training_.level);
-					training_done = true;
-				}
-				break;
-			case TrainingAttribute::kDefense:
-				if ((*it)->get_defense_level() == current_level) {
-					(*it)->set_defense_level(training_.level);
-					training_done = true;
-				}
-				break;
-			case TrainingAttribute::kEvade:
-				if ((*it)->get_evade_level() == current_level) {
-					(*it)->set_evade_level(training_.level);
-					training_done = true;
-				}
-				break;
-			case TrainingAttribute::kTotal:
-				throw wexception("'total' training attribute can't be trained");
-			default:
-				NEVER_HERE();
-			}
-		} catch (...) {
-			throw wexception("Fail training soldier!!");
-		}
+	} catch (...) {
+		throw wexception("Fail training soldier!!");
 	}
 
 	ps.molog(game.get_gametime(), "  Training done!\n");

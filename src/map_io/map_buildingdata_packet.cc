@@ -1040,13 +1040,12 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 						                    static_cast<unsigned int>(TrainingAttribute::kTotal),
 						                    temp_traintype);
 					}
-					TrainingAttribute traintype = static_cast<TrainingAttribute>(temp_traintype);
-					uint16_t trainlevel = fr.unsigned_16();
-					uint16_t trainstall = fr.unsigned_16();
-					uint16_t spresence = fr.unsigned_8();
+					if (packet_version < 8) {
+						fr.unsigned_16();  // trainlevel
+						fr.unsigned_16();  // trainstall
+						fr.unsigned_8();   // spresence
+					}
 					mapsize--;
-					// trainingsite.training_failure_count_[std::make_pair(traintype, trainlevel)] =
-					//    std::make_pair(trainstall, spresence);
 				}
 			}
 
@@ -1062,9 +1061,10 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 			trainingsite.repeated_layoff_ctr_ = fr.unsigned_8();
 			trainingsite.request_open_since_ = Time(fr);
 
-			trainingsite.checked_soldier_training_.attribute =
-			   static_cast<TrainingAttribute>(fr.unsigned_8());
-			trainingsite.checked_soldier_training_.level = fr.unsigned_8();
+			if (packet_version < 8) {
+				fr.unsigned_8();  // checked_soldier_training_.attribute
+				fr.unsigned_8();  // checked_soldier_training_.level
+			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Trainingsite", packet_version,
 			                            kCurrentPacketVersionTrainingsite);
@@ -1572,9 +1572,6 @@ void MapBuildingdataPacket::write_trainingsite(const TrainingSite& trainingsite,
 	fw.unsigned_8(somebits);
 	fw.unsigned_8(trainingsite.repeated_layoff_ctr_);
 	trainingsite.request_open_since_.save(fw);
-
-	fw.unsigned_8(static_cast<uint8_t>(trainingsite.checked_soldier_training_.attribute));
-	fw.unsigned_8(trainingsite.checked_soldier_training_.level);
 
 	// DONE
 }
