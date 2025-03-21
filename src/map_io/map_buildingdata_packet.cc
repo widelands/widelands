@@ -1017,34 +1017,12 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 					fr.unsigned_8();  // lastsuccess
 				}
 
-				// TODO(tothxa): these will probably be removed, convert them to empty reads then
-				uint16_t mapsize = fr.unsigned_16();  // map of training levels (not _the_ map)
+				uint16_t mapsize = fr.unsigned_16();  // map of training levels
 				while (mapsize != 0u) {
-					// Get the training attribute and check if it is a valid enum member
-					// We use a temp value, because the static_cast to the enum might be undefined.
-					uint8_t temp_traintype = fr.unsigned_8();
-					switch (temp_traintype) {
-					case static_cast<uint8_t>(TrainingAttribute::kHealth):
-					case static_cast<uint8_t>(TrainingAttribute::kAttack):
-					case static_cast<uint8_t>(TrainingAttribute::kDefense):
-					case static_cast<uint8_t>(TrainingAttribute::kEvade):
-					case static_cast<uint8_t>(TrainingAttribute::kTotal):
-						break;
-					default:
-						throw GameDataError("expected kHealth (%u), kAttack (%u), kDefense (%u), kEvade "
-						                    "(%u) or kTotal (%u) but found unknown attribute value (%u)",
-						                    static_cast<unsigned int>(TrainingAttribute::kHealth),
-						                    static_cast<unsigned int>(TrainingAttribute::kAttack),
-						                    static_cast<unsigned int>(TrainingAttribute::kDefense),
-						                    static_cast<unsigned int>(TrainingAttribute::kEvade),
-						                    static_cast<unsigned int>(TrainingAttribute::kTotal),
-						                    temp_traintype);
-					}
-					if (packet_version < 8) {
-						fr.unsigned_16();  // trainlevel
-						fr.unsigned_16();  // trainstall
-						fr.unsigned_8();   // spresence
-					}
+					fr.unsigned_8();   // training attribute
+					fr.unsigned_16();  // trainlevel
+					fr.unsigned_16();  // trainstall
+					fr.unsigned_8();   // spresence
 					mapsize--;
 				}
 			}
@@ -1539,20 +1517,6 @@ void MapBuildingdataPacket::write_trainingsite(const TrainingSite& trainingsite,
 	fw.unsigned_8(trainingsite.capacity_);
 	fw.unsigned_8(static_cast<uint8_t>(trainingsite.build_heroes_));
 
-	/*
-	if (255 < trainingsite.training_failure_count_.size()) {
-		log_warn_time(game.get_gametime(),
-		              "Save TrainingSite: Failure counter has ridiculously many entries! (%u)\n",
-		              static_cast<uint16_t>(trainingsite.training_failure_count_.size()));
-	}
-	fw.unsigned_16(static_cast<uint16_t>(trainingsite.training_failure_count_.size()));
-	for (const auto& fail_and_presence : trainingsite.training_failure_count_) {
-		fw.unsigned_8(static_cast<uint8_t>(fail_and_presence.first.first));
-		fw.unsigned_16(fail_and_presence.first.second);
-		fw.unsigned_16(fail_and_presence.second.first);
-		fw.unsigned_8(fail_and_presence.second.second);
-	}
-	*/
 	fw.unsigned_8(trainingsite.highest_trainee_level_seen_);
 	fw.unsigned_8(trainingsite.latest_trainee_kickout_level_);
 	fw.unsigned_8(trainingsite.trainee_general_lower_bound_);

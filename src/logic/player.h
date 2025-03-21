@@ -470,7 +470,6 @@ public:
 
 	// Military stuff
 	void drop_soldier(PlayerImmovable&, Soldier&);
-	// void change_training_options(TrainingSite&, TrainingAttribute attr, int32_t val);
 
 	uint32_t find_attack_soldiers(const Flag&,
 	                              std::vector<Soldier*>* soldiers = nullptr,

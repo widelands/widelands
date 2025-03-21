@@ -185,23 +185,9 @@ unsigned TrainingSiteDescr::get_max_level(const TrainingAttribute at) const {
  * Return the maximum level that can be trained, both by school type
  * and resourcing.
  */
-int32_t TrainingSite::get_max_unstall_level(const TrainingAttribute at,
-                                            const TrainingSiteDescr& tsd) const {
-	const int32_t max = tsd.get_max_level(at);
-	const int32_t min = tsd.get_min_level(at);
-	int32_t lev = min;
-	int32_t rtv = min;
-	while (++lev < max) {
-		TypeAndLevel train_tl = upgrade_key(at, lev);
-		TrainFailCount::const_iterator tstep = training_failure_count_.find(train_tl);
-		if (max_stall_val_ > tstep->second.first) {
-			rtv = lev;
-		} else {
-			lev = max;
-		}
-	}
-
-	return rtv;
+int32_t TrainingSite::get_max_unstall_level(const TrainingAttribute,
+                                            const TrainingSiteDescr&) const {
+	return 10;
 }
 
 void TrainingSiteDescr::update_level(TrainingAttribute attrib,
@@ -369,7 +355,6 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
 	init_upgrades();
 	current_upgrade_ = upgrades_.end();
 	set_post_timer(Duration(6000));
-	training_failure_count_.clear();
 	max_stall_val_ = training_state_multiplier_ * d.get_max_stall();
 	highest_trainee_level_seen_ = 1;
 	latest_trainee_kickout_level_ = 1;
@@ -381,21 +366,6 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
 	repeated_layoff_inc_ = false;
 	recent_capacity_increase_ = false;
 
-	/*
-	if (d.get_train_health()) {
-		init_kick_state(TrainingAttribute::kHealth, d);
-	}
-	if (d.get_train_attack()) {
-		init_kick_state(TrainingAttribute::kAttack, d);
-	}
-	if (d.get_train_defense()) {
-		init_kick_state(TrainingAttribute::kDefense, d);
-	}
-	if (d.get_train_evade()) {
-		init_kick_state(TrainingAttribute::kEvade, d);
-	}
-	*/
-
 	// TODO(tothxa): This is just wrong. ProductionSite should already provide a searchable
 	//               inputs list.
 	for (InputQueue* iq : inputqueues()) {
@@ -406,15 +376,6 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
 		inputs_map_.emplace(iq->get_index(), iq);
 	}
 }
-
-/*
-void TrainingSite::init_kick_state(const TrainingAttribute& art, const TrainingSiteDescr& d) {
-	// Now with kick-out state saving implemented, initializing is an overkill
-	for (unsigned t = d.get_min_level(art); t < d.get_max_level(art); t++) {
-		training_attempted(art, t);
-	}
-}
-*/
 
 /**
  * Setup the building and request soldiers
@@ -830,24 +791,6 @@ void TrainingSite::drop_unupgradable_soldiers(Game& /* game */) {
 		untrainable_soldiers_.pop_back();
 	}
 	update_soldier_request(true);
-
-	/*
-	for (Soldier* soldier : untrainable_soldiers_) {
-		uint8_t level = soldier->get_level(TrainingAttribute::kTotal);
-		if (level > highest_trainee_level_seen_) {
-			highest_trainee_level_seen_ = level;
-		}
-
-		soldier_control_.drop_soldier(*soldier);
-		repeated_layoff_ctr_ = 0;  // redundant, but safe (also reset whenever level increases)
-		if (latest_trainee_was_kickout_) {
-			// If I am calling in weaklings: Stop that. Immediately.
-			latest_trainee_was_kickout_ = false;
-			update_soldier_request(true);
-		}
-		repeated_layoff_inc_ = false;
-	}
-	*/
 }
 
 /**
@@ -882,81 +825,6 @@ void TrainingSite::drop_stalled_soldiers(Game& /* game */) {
 		waiting_soldiers_.pop_back();
 	}
 	update_soldier_request(false);
-
-
-	/*
-	Soldier* soldier_to_drop = nullptr;
-	uint8_t highest_soldier_level_seen = 0;
-
-	for (Soldier* soldier : soldiers_) {
-		uint8_t this_soldier_level = soldier->get_level(TrainingAttribute::kTotal);
-
-		bool this_soldier_is_safe = false;
-		if (this_soldier_level <= highest_soldier_level_seen) {
-			// Skip the innermost loop for soldiers that would not be kicked out anyway.
-			// level-zero soldiers are excepted from kick-out implicitly. This is intentional.
-			this_soldier_is_safe = true;
-		} else {
-			for (const Upgrade& upgrade : upgrades_) {
-				if (!this_soldier_is_safe) {
-					// Soldier is safe, if he:
-					//  - is below maximum, and
-					//  - is not in a stalled state
-					// Check done separately for each art.
-					const unsigned level = soldier->get_level(upgrade.attribute);
-
-					// Below maximum -check
-					if (static_cast<int32_t>(level) > upgrade.max) {
-						continue;
-					}
-
-					TypeAndLevel train_tl = upgrade_key(upgrade.attribute, level);
-					TrainFailCount::iterator tstep = training_failure_count_.find(train_tl);
-					if (tstep == training_failure_count_.end()) {
-						log_warn("TrainingSite::drop_stalled_soldiers: training step %u,%u "
-						         "not found in this school!\n",
-						         static_cast<unsigned int>(upgrade.attribute), level);
-						break;
-					}
-
-					tstep->second.second = 1;  // a soldier is present at this level
-
-					// Stalled state -check
-					if (max_stall_val_ > tstep->second.first) {
-						this_soldier_is_safe = true;
-						break;
-					}
-				}
-			}
-		}
-		if (!this_soldier_is_safe) {
-			// Make this soldier a kick-out candidate
-			soldier_to_drop = soldier;
-			highest_soldier_level_seen = this_soldier_level;
-		}
-	}
-
-	// Finally drop the soldier.
-	if (nullptr != soldier_to_drop) {
-		verb_log_info("TrainingSite::drop_stalled_soldiers: Kicking somebody out.\n");
-		uint8_t level = soldier_to_drop->get_level(TrainingAttribute::kTotal);
-		if (level > highest_trainee_level_seen_) {
-			highest_trainee_level_seen_ = level;
-		}
-		latest_trainee_kickout_level_ = level;
-		soldier_control_.drop_soldier(*soldier_to_drop);
-		latest_trainee_was_kickout_ = true;
-		// We can enter into state where same soldiers repeatedly enter the site
-		// even if they cannot be promited (lack of gold, lack of an equipmentsmith
-		// of some kind or so). The repeated_layoff_ctr_ works around that.
-		//
-		// Only repeated drops with incorporating new soldiers in between causes this to happen!
-		if (std::numeric_limits<uint8_t>::max() - 1 > repeated_layoff_ctr_ && repeated_layoff_inc_) {
-			repeated_layoff_ctr_++;
-			repeated_layoff_inc_ = false;
-		}
-	}
-	*/
 }
 
 std::unique_ptr<const BuildingSettings> TrainingSite::create_building_settings() const {
@@ -1001,24 +869,13 @@ void TrainingSite::program_end(Game& game, ProgramResult const result) {
 	bool leftover_soldiers_check = true;
 
 	if (current_upgrade_ != upgrades_.end()) {
+		// TODO(tothxa): these need update_upgrade_statuses(), move to beginning of
+		//               find_and_start_next_program()?
 		if (result_ == ProgramResult::kCompleted) {
 			failures_count_ = 0;
 			drop_unupgradable_soldiers(game);
-
 			leftover_soldiers_check = false;
-
-			/*
-			current_upgrade_->second.lastsuccess = true;
-			current_upgrade_->second.failures = 0;
-
-			// I try to train already somewhat trained soldiers here, except when
-			// no training happens. Now some training has happened, hence zero.
-			// read in update_soldier_request
-			repeated_layoff_ctr_ = 0;
-			repeated_layoff_inc_ = false;
-			*/
 		} else {
-			/* current_upgrade_->second.failures++; */
 			drop_stalled_soldiers(game);
 			leftover_soldiers_check = false;
 		}
@@ -1027,8 +884,6 @@ void TrainingSite::program_end(Game& game, ProgramResult const result) {
 	if (leftover_soldiers_check) {
 		drop_unupgradable_soldiers(game);
 	}
-
-	training_done();
 }
 
 /**
@@ -1117,42 +972,6 @@ void TrainingSite::add_upgrades(TrainingAttribute const attr) {
 TrainingSite::Upgrade::Upgrade(const TrainingAttribute attr, const uint16_t level)
 	: key(upgrade_key(attr, level)),
 	  program_name(format("upgrade_soldier_%s_%d", training_attribute_to_string(attr), level)) {
-}
-
-/*
-void TrainingSite::training_attempted(TrainingAttribute type, uint32_t level) {
-	TypeAndLevel key = upgrade_key(type, level);
-	checked_soldier_training_.level = level;
-	checked_soldier_training_.attribute = type;
-	if (training_failure_count_.find(key) == training_failure_count_.end()) {
-		training_failure_count_[key] = std::make_pair(training_state_multiplier_, 0);
-	} else {
-		training_failure_count_[key].first += training_state_multiplier_;
-	}
-}
-*/
-
-/**
- * Called whenever it was possible to promote another guy
- */
-void TrainingSite::training_successful(TrainingAttribute type, uint32_t level) {
-	failures_count_ = 0;
-
-	TypeAndLevel key = upgrade_key(type, level);
-	// Here I assume that key exists: training has been attempted before it can succeed.
-	training_failure_count_[key].first = 0;
-}
-
-void TrainingSite::training_done() {
-	for (auto& fail_and_presence : training_failure_count_) {
-		// If a soldier is present at this training level and site is running, deteoriate
-		if ((fail_and_presence.second.second != 0u) && (!is_stopped())) {
-			fail_and_presence.second.first++;
-			fail_and_presence.second.second = 0;
-		} else if (0 < fail_and_presence.second.first) {  // If no soldier, let's become optimistic
-			fail_and_presence.second.first--;
-		}
-	}
 }
 
 unsigned TrainingSite::current_training_level() const {

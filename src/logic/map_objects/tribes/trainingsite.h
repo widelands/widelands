@@ -175,14 +175,8 @@ public:
 	void set_build_heroes(bool b_heroes) {
 		build_heroes_ = b_heroes;
 	}
-	// void switch_heroes();
 
 	void set_economy(Economy* e, WareWorker type) override;
-
-	// These are for premature soldier kick-out
-	// void training_attempted(TrainingAttribute type, uint32_t level);
-	void training_successful(TrainingAttribute type, uint32_t level);
-	void training_done();
 
 	[[nodiscard]] unsigned current_training_level() const;
 	[[nodiscard]] TrainingAttribute current_training_attribute() const;
@@ -214,12 +208,12 @@ private:
 	private:
 		TrainingSite* const training_site_;
 	};
+
 	void update_soldier_request(bool);
 	static void
 	request_soldier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
 	void find_and_start_next_program(Game&) override;
-	// void start_upgrade(Game&, Upgrade&);
 	Soldier* pick_soldier(TrainingAttribute attr, unsigned level, bool full_search);
 	bool compare_levels(unsigned first, unsigned second);
 
@@ -231,11 +225,14 @@ private:
 	// soldiers who cannot start any upgrade
 	void update_upgrade_statuses();
 
+	// NOCOM: this one doesn't work any more, but users are not converted yet
 	int32_t get_max_unstall_level(TrainingAttribute, const TrainingSiteDescr&) const;
+
 	void drop_unupgradable_soldiers(Game&);
 	void drop_stalled_soldiers(Game&);
 
 	SoldierControl soldier_control_;
+
 	/// Open requests for soldiers. The soldiers can be under way or unavailable
 	Request* soldier_request_{nullptr};
 
@@ -271,12 +268,6 @@ private:
 
 	// These are used for kicking out soldiers prematurely
 	static const uint32_t training_state_multiplier_;
-
-	// First entry is the "stallness", second is a bool
-	using FailAndPresence = std::pair<uint16_t, uint8_t>;  // first might wrap in a long play..
-	using TrainFailCount = std::map<TypeAndLevel, FailAndPresence>;
-	TrainFailCount training_failure_count_;
-
 	uint32_t max_stall_val_;
 	uint32_t failures_count_{0};
 
@@ -306,7 +297,6 @@ private:
 	const Duration acceptance_threshold_timeout =
 	   Duration(5555);         // Lower the bar after this many milliseconds.
 	Time request_open_since_;  // Time units. If no soldiers appear, threshold is lowered after this.
-	// void init_kick_state(const TrainingAttribute&, const TrainingSiteDescr&);
 };
 
 /**

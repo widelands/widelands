@@ -1878,8 +1878,6 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 	    * training program, e.g. Completed upgrading soldier evade from level 0 to level 1 */
 	   format(_("Completed %s"), ps.top_state().program->descname()));
 
-	ts.training_successful(training_.attribute, current_level);
-
 	return ps.program_step(game);
 }
 

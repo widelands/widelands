@@ -22,8 +22,6 @@ wl_library(commands
     cmd_call_economy_balance.h
     cmd_change_soldier_capacity.cc
     cmd_change_soldier_capacity.h
-    # cmd_change_training_options.cc
-    # cmd_change_training_options.h
     cmd_delete_message.cc
     cmd_delete_message.h
     cmd_destroy_map_object.cc

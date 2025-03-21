@@ -30,7 +30,6 @@
 #include "commands/cmd_calculate_statistics.h"
 #include "commands/cmd_call_economy_balance.h"
 #include "commands/cmd_change_soldier_capacity.h"
-// #include "commands/cmd_change_training_options.h"
 #include "commands/cmd_delete_message.h"
 #include "commands/cmd_destroy_map_object.h"
 #include "commands/cmd_diplomacy.h"
