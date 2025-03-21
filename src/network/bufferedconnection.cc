@@ -141,12 +141,12 @@ void BufferedConnection::close() {
 		verb_log_info("[BufferedConnection] Closing network socket.");
 	}
 	// Stop the thread
-	io_service_.stop();
+	io_context_.stop();
 	// Not sure if that is required, wait up to one second for the io_service to stop
-	for (int i = 0; i < 1000 && !io_service_.stopped(); i++) {
+	for (int i = 0; i < 1000 && !io_context_.stopped(); i++) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	}
-	assert(io_service_.stopped());
+	assert(io_context_.stopped());
 	if (asio_thread_.joinable()) {
 		try {
 			asio_thread_.join();
@@ -334,7 +334,7 @@ void BufferedConnection::reduce_send_buffer(asio::ip::tcp::socket& socket) {
 }
 
 BufferedConnection::BufferedConnection(const NetAddress& host)
-   : socket_(io_service_), currently_sending_(false) {
+   : socket_(io_context_), currently_sending_(false) {
 
 	const asio::ip::tcp::endpoint destination(host.ip, host.port);
 
@@ -353,7 +353,7 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 		asio_thread_ = std::thread([this]() {
 			// The output might actually be messed up if it collides with the main thread...
 			verb_log_info("[BufferedConnection] Starting networking thread\n");
-			io_service_.run();
+			io_context_.run();
 			verb_log_info("[BufferedConnection] Stopping networking thread\n");
 		});
 	} else {
@@ -364,7 +364,7 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 	}
 }
 
-BufferedConnection::BufferedConnection() : socket_(io_service_) {
+BufferedConnection::BufferedConnection() : socket_(io_context_) {
 }
 
 void BufferedConnection::notify_connected() {
@@ -379,7 +379,7 @@ void BufferedConnection::notify_connected() {
 	asio_thread_ = std::thread([this]() {
 		// The output might actually be messed up if it collides with the main thread...
 		verb_log_info("[BufferedConnection] Starting networking thread");
-		io_service_.run();
+		io_context_.run();
 		verb_log_info("[BufferedConnection] Stopping networking thread");
 	});
 }
