@@ -142,7 +142,7 @@ void BufferedConnection::close() {
 	}
 	// Stop the thread
 	io_context_.stop();
-	// Not sure if that is required, wait up to one second for the io_service to stop
+	// Not sure if that is required, wait up to one second for the io_context to stop
 	for (int i = 0; i < 1000 && !io_context_.stopped(); i++) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	}
