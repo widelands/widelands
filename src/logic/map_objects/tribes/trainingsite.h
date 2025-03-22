@@ -154,6 +154,9 @@ class TrainingSite : public ProductionSite {
 		std::vector<Soldier*> candidates;
 
 		Upgrade(TrainingAttribute attr, const uint16_t level);
+		bool has_wares_and_candidate() const {
+			return status == Upgrade::Status::kCanStart && !candidates.empty();
+		}
 	};
 
 public:
@@ -214,7 +217,12 @@ private:
 	request_soldier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
 	void find_and_start_next_program(Game&) override;
-	Soldier* pick_soldier(TrainingAttribute attr, unsigned level, bool full_search);
+
+	// Only called when selected_soldier_ or the wares to train him or her are gone by the time
+	// we need them.
+	Soldier* pick_another_soldier(TrainingAttribute attr, unsigned level);
+
+	// Takes preference in account, returns true if second is more preferred.
 	bool compare_levels(unsigned first, unsigned second);
 
 	// Used in initialization of TrainingSite
@@ -225,11 +233,11 @@ private:
 	// soldiers who cannot start any upgrade
 	void update_upgrade_statuses();
 
-	// NOCOM: this one doesn't work any more, but users are not converted yet
-	int32_t get_max_unstall_level(TrainingAttribute, const TrainingSiteDescr&) const;
-
 	void drop_unupgradable_soldiers(Game&);
 	void drop_stalled_soldiers(Game&);
+
+	// Only for loading from savegame!
+	void set_current_training_step(uint8_t attr, uint16_t level);
 
 	SoldierControl soldier_control_;
 
@@ -257,46 +265,18 @@ private:
 
 	std::map<TypeAndLevel, Upgrade> upgrades_;
 	std::map<TypeAndLevel, Upgrade>::iterator current_upgrade_;
-	bool has_possible_upgrade_;
+	Upgrade::Status max_possible_status_{Upgrade::Status::kNotPossible};
 
+	// The soldier we picked to be trained next
 	OPtr<Soldier> selected_soldier_;
 
 	// TODO(tothxa): Shouldn't ProductionSite already provide a searchable list of inputs?
 	std::map<DescriptionIndex, InputQueue*> inputs_map_;
 
-	ProgramResult result_{ProgramResult::kFailed};  /// The result of the last training program.
-
 	// These are used for kicking out soldiers prematurely
 	static const uint32_t training_state_multiplier_;
 	uint32_t max_stall_val_;
 	uint32_t failures_count_{0};
-
-	// These are for soldier import.
-	// If the training site can complete its job, or, in other words, soldiers leave
-	// because of they are unupgradeable, then the training site tries to grab already-trained
-	// folks in. If the site kicks soldiers off in the middle, it attempts to get poorly trained
-	// replacements.
-	//
-	// Since ALL training sites do this, there needs to be a way to avoid deadlocks.
-	// That makes this a bit messy. Sorry.
-	//
-	// If I was importing strong folks, and switch to weak ones, the switch only happens
-	// after ongoing request is (partially) fulfilled. The other direction happens immediately.
-	uint8_t highest_trainee_level_seen_;    // When requesting already-trained, start here.
-	uint8_t latest_trainee_kickout_level_;  // If I cannot train, request soldiers that have been
-	                                        // trainable
-	uint8_t trainee_general_lower_bound_;   // This is the acceptance threshold currently in use.
-	uint8_t repeated_layoff_ctr_;  // increases when soldier is prematurely releases, reset when
-	                               // training succeeds.
-	bool repeated_layoff_inc_;
-	bool latest_trainee_was_kickout_;  // If soldier was not dropped, requesting new soldier.
-	bool requesting_weak_trainees_;    // Value of the previous after incorporate.
-	bool recent_capacity_increase_;    // If used explicitly asks for more folks
-	const uint8_t kUpperBoundThreshold_ =
-	   3;  // Higher value makes it less likely to get weak soldiers in.
-	const Duration acceptance_threshold_timeout =
-	   Duration(5555);         // Lower the bar after this many milliseconds.
-	Time request_open_since_;  // Time units. If no soldiers appear, threshold is lowered after this.
 };
 
 /**
