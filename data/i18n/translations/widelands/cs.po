@@ -10143,7 +10143,7 @@ msgstr "Umožněno obcházení pravidel hry (Cheat mode)"
 #: ../../../../src/wui/info_panel.cc:460
 #, c-format
 msgid "%1$s • %2$s"
-msgstr "%1$s • %2$s"
+msgstr "Herní čas: %1$s • Místní čas: %2$s"
 
 #. * TRANSLATORS: Gametime • Realtime • Gamespeed
 #: ../../../../src/wui/info_panel.cc:465
