@@ -32,7 +32,8 @@ bool do_resolve(const asio::ip::tcp& protocol,
 	try {
 		asio::io_context io_context;
 		asio::ip::tcp::resolver resolver(io_context);
-		asio::ip::tcp::resolver::results_type iter = resolver.resolve(protocol, hostname, as_string(port));
+		asio::ip::tcp::resolver::results_type iter =
+		   resolver.resolve(protocol, hostname, as_string(port));
 		if (iter.empty()) {
 			// Resolution failed
 			log_err("Could not resolve network name '%s:%u' to %s-address\n", hostname.c_str(), port,
