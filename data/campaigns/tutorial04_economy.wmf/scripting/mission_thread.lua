@@ -263,6 +263,7 @@ function trading()
    set_objective_done(o)
    local p1marketpos = plr:get_buildings("empire_market")[1].fields[1]
    local p2market = plr2:get_buildings("frisians_market")[1]
+   local p2hq = plr2:get_buildings("frisians_headquarters")[1]
 
    scroll_to_field(p1marketpos)
    campaign_message_box(trading_4)
@@ -293,6 +294,10 @@ function trading()
             else
                p2market:accept_trade(trade.trade_id)
                trade_accepted = true
+
+               for ware,amount in pairs(trade.items_to_receive) do
+                  p2hq:set_wares(ware, math.max(p2hq:get_wares(ware), amount * (trade.num_batches + 3)))
+               end
             end
          end
       end
