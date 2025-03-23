@@ -1048,8 +1048,11 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 
 				fr.unsigned_32();  // request_open_since_
 
-				fr.unsigned_8();  // checked_soldier_training_.attribute
-				fr.unsigned_8();  // checked_soldier_training_.level
+				uint8_t attr = fr.unsigned_8();
+				uint8_t level = fr.unsigned_8();
+				log_dbg("trainingsite.read: set attr %d level %d", attr, level);
+				trainingsite.set_current_training_step(attr, level);
+				// trainingsite.set_current_training_step(fr.unsigned_8(), fr.unsigned_8());
 			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Trainingsite", packet_version,

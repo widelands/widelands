@@ -212,7 +212,7 @@ private:
 		TrainingSite* const training_site_;
 	};
 
-	void update_soldier_request(bool);
+	void update_soldier_request(bool needs_update_statuses);
 	static void
 	request_soldier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
@@ -231,7 +231,7 @@ private:
 
 	// Checks input queues and updates status and candidates of each Upgrade as well as lists of
 	// soldiers who cannot start any upgrade
-	void update_upgrade_statuses();
+	void update_upgrade_statuses(bool select_next_step);
 
 	void drop_unupgradable_soldiers(Game&);
 	void drop_stalled_soldiers(Game&);
@@ -277,6 +277,8 @@ private:
 	static const uint32_t training_state_multiplier_;
 	uint32_t max_stall_val_;
 	uint32_t failures_count_{0};
+
+	bool force_rebuild_soldier_requests_{true};
 };
 
 /**
