@@ -30,17 +30,17 @@ bool do_resolve(const asio::ip::tcp& protocol,
                 uint16_t port) {
 	assert(addr != nullptr);
 	try {
-		asio::io_service io_service;
-		asio::ip::tcp::resolver resolver(io_service);
-		asio::ip::tcp::resolver::query query(protocol, hostname, as_string(port));
-		asio::ip::tcp::resolver::iterator iter = resolver.resolve(query);
-		if (iter == asio::ip::tcp::resolver::iterator()) {
+		asio::io_context io_context;
+		asio::ip::tcp::resolver resolver(io_context);
+		asio::ip::tcp::resolver::results_type iter =
+		   resolver.resolve(protocol, hostname, as_string(port));
+		if (iter.empty()) {
 			// Resolution failed
 			log_err("Could not resolve network name '%s:%u' to %s-address\n", hostname.c_str(), port,
 			        ((protocol == asio::ip::tcp::v4()) ? "IPv4" : "IPv6"));
 			return false;
 		}
-		addr->ip = iter->endpoint().address();
+		addr->ip = iter.begin()->endpoint().address();
 		addr->port = port;
 		verb_log_info("Resolved network name '%s:%u' to %s", hostname.c_str(), port,
 		              addr->ip.to_string().c_str());
@@ -64,7 +64,7 @@ bool NetAddress::resolve_to_v6(NetAddress* addr, const std::string& hostname, ui
 
 bool NetAddress::parse_ip(NetAddress* addr, const std::string& ip, uint16_t port) {
 	std::error_code ec;
-	asio::ip::address new_addr = asio::ip::address::from_string(ip, ec);
+	asio::ip::address new_addr = asio::ip::make_address(ip, ec);
 	if (ec) {
 		return false;
 	}
