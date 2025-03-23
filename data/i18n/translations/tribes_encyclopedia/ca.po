@@ -5,14 +5,14 @@
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Juanjo, 2015
-# Juanjo, 2015-2024
+# Juanjo, 2015-2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-03-17 03:05+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Juanjo, 2015-2024\n"
+"Last-Translator: Juanjo, 2015-2025\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -6194,7 +6194,7 @@ msgid ""
 "hammer. Make sure you’ve always got some in reserve! They are one of the "
 "basic tools produced at the metal workshop (but cease to be produced by the "
 "building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Els geòlegs, constructors, forjadors, fabricants de cascos i mestres d'aixa necessiten un martell per treballar. Assegureu-vos tenir-ne sempre alguns de reserva! Es produeixen al taller de metall  (però no se’n faran més a l’edifici si s’amplia a taller de destrals o de guerra)."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Fishing Rod, part 1
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 1
@@ -10348,7 +10348,7 @@ msgid ""
 "Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
 "hammer. Make sure you’ve always got some in reserve! They are produced by "
 "the toolsmith."
-msgstr ""
+msgstr "Els geòlegs, constructors, armers, fabricants d’armadures i mestres d'aixa necessiten un martell per treballar. Assegureu-vos tenir-ne sempre alguns de reserva! Es produeixen al taller d’eines."
 
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 2
 #. TRANSLATORS: Helptext for an Empire ware: Hunting Spear, part 2
@@ -13829,7 +13829,7 @@ msgid ""
 "Geologists, builders, blacksmiths and shipwrights all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the "
 "blacksmithy."
-msgstr ""
+msgstr "Els geòlegs, constructors, forjadors i mestres d'aixa necessiten un martell per treballar. Assegureu-vos que sempre en teniu alguns de reserva! Es produeixen a la forja."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Fishing Net
 #: ../../../../data/tribes/initialization/frisians/units.lua:447

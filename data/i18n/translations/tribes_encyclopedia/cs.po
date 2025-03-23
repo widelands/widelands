@@ -3460,7 +3460,7 @@ msgid ""
 "Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
 "hammer. Make sure you’ve always got some in reserve! They are produced by "
 "the toolsmith."
-msgstr "Geologové, stavitelé, zbrojíři, platnéři a loďaři, všichni potřebují kladivo. Postarej se o to, aby bylo vždy nějaké v zásobě! Vyrábí je kovář."
+msgstr "Geologové, stavitelé, zbrojíři, platnéři a loďaři, ti všichni potřebují kladivo. Postarej se o to, aby bylo vždy nějaké v zásobě! Vyrábí je nástrojář."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Milking Tongs
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:719
@@ -3468,7 +3468,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Milking tongs are used by the spider breeder to milk the spiders. They are "
 "produced by the toolsmith."
-msgstr "Pavoučí kleště používá chovatelka pavouků na získávání pavoučích vláken. Vyrábí je kovář."
+msgstr "Pavoučí kleště používá chovatelka pavouků na získávání pavoučích vláken. Vyrábí je nástrojář."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fishing Net
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:728
@@ -6216,7 +6216,7 @@ msgid ""
 "hammer. Make sure you’ve always got some in reserve! They are one of the "
 "basic tools produced at the metal workshop (but cease to be produced by the "
 "building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Geologové, stavitelé, kováři, zbrojíři a loďaři ti všichni potřebují kladivo. Postarej se o to, aby bylo vždy nějaké v zásobě! Je to jeden ze základních nástrojů, který se vyrábí v dílně na železo (ale pozor, přestává se zde vyrábět, jakmile je budova vylepšena na dílnu na sekery, nebo válečnou akademii)."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Fishing Rod, part 1
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 1
@@ -10378,7 +10378,7 @@ msgid ""
 "Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
 "hammer. Make sure you’ve always got some in reserve! They are produced by "
 "the toolsmith."
-msgstr ""
+msgstr "Geologové, stavitelé, zbrojíři, platnéři a loďaři, ti všichni potřebují kladivo. Postarej se o to, aby bylo vždy nějaké v zásobě! Vyrábí je nástrojář."
 
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 2
 #. TRANSLATORS: Helptext for an Empire ware: Hunting Spear, part 2
@@ -13867,7 +13867,7 @@ msgid ""
 "Geologists, builders, blacksmiths and shipwrights all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the "
 "blacksmithy."
-msgstr ""
+msgstr "Geologové, stavaři, kováři a loďaři, ti všichni potřebují kladivo. Postarej se, aby byla neustále nějaká v zásobě! Vyrábí se v kovárně."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Fishing Net
 #: ../../../../data/tribes/initialization/frisians/units.lua:447
