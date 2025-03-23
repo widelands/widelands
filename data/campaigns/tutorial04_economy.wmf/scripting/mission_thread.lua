@@ -251,6 +251,7 @@ function trading()
 
    sleep(500)
    hide_concentric(plr, sf2, 6, false)
+   hide_concentric(plr, sf2, 6, false)  -- Hide twice and with a higher radius to ensure the big buildings are hidden completely.
    scroll_to_map_pixel(center_pixel);
 
    local o = campaign_message_with_objective(trading_2, obj_build_market)

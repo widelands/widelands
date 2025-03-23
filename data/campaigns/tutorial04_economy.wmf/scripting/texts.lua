@@ -602,7 +602,6 @@ trading_3 = {
 }
 
 trading_4 = {
-   position = "bottomright",
    title = _("Trading"),
    body = (
       p(_([[The market is now complete, and we can start creating a trade proposal for the Frisians. This is done from the market’s window. Let me just open it for you.]]))
@@ -611,7 +610,6 @@ trading_4 = {
 }
 
 trading_5 = {
-   position = "bottomright",
    title = _("Trading"),
    body = (
       p(_([[As you can see, the market window contains three tabs. The first tab is the most interesting to us right now: Here you can configure and propose a new trade.]])) ..
@@ -622,7 +620,6 @@ trading_5 = {
 }
 
 trading_6 = {
-   position = "bottomright",
    title = _("Trading"),
    body = (
       p(_([[Proposing a trade is straightforward. The first step is to select the player you want to trade with from the dropdown. In this case, there is only one other player, and he is automatically preselected for you.]]))
@@ -631,7 +628,6 @@ trading_6 = {
 }
 
 trading_7 = {
-   position = "bottomright",
    title = _("Trading"),
    body = (
       p(_([[Next, you select the wares you want to send and receive respectively from the large double panel in the center of the market window.]])) ..
@@ -642,7 +638,6 @@ trading_7 = {
 }
 
 trading_8 = {
-   position = "bottomright",
    title = _("Trading"),
    body = (
       p(_([[Lastly, select how many batches of the selected wares will be exchanged. You can also set the trade to run indefinitely using the Infinity icon.]])) ..
@@ -724,7 +719,6 @@ obj_decide_trade_offer = {
 }
 
 trading_12 = {
-   position = "bottomright",
    title = _("Trading"),
    body = (
       p(_([[Well done! That’s all there is to it really; now you know how to send and manage trade proposals and offers.]])) ..
@@ -742,7 +736,7 @@ conclusion = {
       p(_([[This concludes our tutorial! I hope I could teach you how you can control the economy in Widelands. There are many options and they can be confusing at first. Even if you’ve only understood a few concepts, you mustn’t give up. Try them out in some games, become familiar with them and experience the possibilities. Then, return to this tutorial and learn the rest!]])) ..
       p([[]]) ..
       p(_([[This was the last tutorial I had prepared for you. I’ve now taught you everything I know. There are still secrets hidden in this world even I don’t know about. I will now search for a quiet place to spend my sunset years. If you have still questions, the Widelands community will surely help you. You can find it at:]])) ..
-      h1(p("align=center", u("widelands.org"))),
+      h1(p("align=center", a("widelands.org", "url", "https://www.widelands.org"))),
    allow_next_scenario = true,
    h = messagebox_h_step(1),
 }
