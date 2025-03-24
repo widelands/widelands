@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-03-08 02:34+0000\n"
+"POT-Creation-Date: 2025-03-17 03:05+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Pavol Gono, 2024-2025\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -620,7 +620,7 @@ msgstr "Informácie"
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:398
 msgid "Click on a field to show information about it"
-msgstr "Kliknutím zobraziť ďalšie informácie o políčku."
+msgstr "Kliknutím zobraziť ďalšie informácie o políčku"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:402
@@ -1363,7 +1363,7 @@ msgid "%u Player"
 msgid_plural "%u Players"
 msgstr[0] "%u hráč"
 msgstr[1] "%u hráči"
-msgstr[2] "%u hráčov"
+msgstr[2] "%u hráča"
 msgstr[3] "%u hráčov"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:477
@@ -1610,7 +1610,7 @@ msgstr "Chyba pri vytváraní adresára!"
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:186
 #, c-format
 msgid "Error while creating directory ‘%s’."
-msgstr "Chyba pri vytváraní adresára: %s"
+msgstr "Chyba pri vytváraní adresára: %s."
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:313
 #: ../../../../src/wui/game_main_menu_save_game.cc:325
@@ -1713,8 +1713,8 @@ msgstr "Náhodne vybratý"
 #: ../../../../src/editor/ui_menus/player_menu.cc:205
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:463
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:99
-msgid "The tribe will be selected at random"
-msgstr "Kmeň sa vyberie náhodne"
+msgid "The tribe will be selected at random."
+msgstr "Kmeň sa vyberie náhodne."
 
 #. * TRANSLATORS: Button tooltip in the editor for using a player's starting
 #. position tool
@@ -2190,7 +2190,7 @@ msgid "%u game-relevant add-on in use:"
 msgid_plural "%u game-relevant add-ons in use:"
 msgstr[0] "%u použitý doplnok týkajúci sa hry:"
 msgstr[1] "%u použité doplnky týkajúce sa hry:"
-msgstr[2] "%u použitých doplnkov týkajúcich sa hry:"
+msgstr[2] "%u použitého doplnku týkajúceho sa hry:"
 msgstr[3] "%u použitých doplnkov týkajúcich sa hry:"
 
 #. * TRANSLATORS: "12 steps northwest of Port1"
@@ -2905,7 +2905,7 @@ msgstr "Zmizlo stavenisko nového prístavu"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1922
 msgid "Port Lost!"
-msgstr "Strata prístavu"
+msgstr "Strata prístavu!"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1923
 msgid "Unloading of wares failed, expedition is cancelled now."
@@ -3619,7 +3619,7 @@ msgid "%li second"
 msgid_plural "%li seconds"
 msgstr[0] "%li sekunda"
 msgstr[1] "%li sekundy"
-msgstr[2] "%li sekúnd"
+msgstr[2] "%li sekundy"
 msgstr[3] "%li sekúnd"
 
 #: ../../../../src/network/internet_gaming.cc:105
@@ -3693,7 +3693,7 @@ msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] "Časový posun servera je %d sekunda."
 msgstr[1] "Časový posun servera sú %d sekundy."
-msgstr[2] "Časový posun servera je %d sekúnd."
+msgstr[2] "Časový posun servera je %d sekundy."
 msgstr[3] "Časový posun servera je %d sekúnd."
 
 #: ../../../../src/network/internet_gaming.cc:509
@@ -4187,7 +4187,7 @@ msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minútu"
 msgstr[1] "%d minúty"
-msgstr[2] "%d minút"
+msgstr[2] "%d minúty"
 msgstr[3] "%d minút"
 
 #. * TRANSLATORS: The current value of a spinbox
@@ -4198,7 +4198,7 @@ msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minúta"
 msgstr[1] "%d minúty"
-msgstr[2] "%d minút"
+msgstr[2] "%d minúty"
 msgstr[3] "%d minút"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n> hours"
@@ -4211,7 +4211,7 @@ msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d hodinu"
 msgstr[1] "%d hodiny"
-msgstr[2] "%d hodín"
+msgstr[2] "%d hodiny"
 msgstr[3] "%d hodín"
 
 #. * TRANSLATORS: The current value of a spinbox
@@ -4222,7 +4222,7 @@ msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d hodina"
 msgstr[1] "%d hodiny"
-msgstr[2] "%d hodín"
+msgstr[2] "%d hodiny"
 msgstr[3] "%d hodín"
 
 #. * TRANSLATORS: "Increase/Decrease the value by X hours and Y minutes"
@@ -4249,7 +4249,7 @@ msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d hodinu"
 msgstr[1] "%d hodiny"
-msgstr[2] "%d hodín"
+msgstr[2] "%d hodiny"
 msgstr[3] "%d hodín"
 
 #. * TRANSLATORS: ..
@@ -4263,7 +4263,7 @@ msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minútu"
 msgstr[1] "%d minúty"
-msgstr[2] "%d minút"
+msgstr[2] "%d minúty"
 msgstr[3] "%d minút"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n> weeks"
@@ -4276,7 +4276,7 @@ msgid "%d week"
 msgid_plural "%d weeks"
 msgstr[0] "%d týždeň"
 msgstr[1] "%d týždne"
-msgstr[2] "%d týždňov"
+msgstr[2] "%d týždňa"
 msgstr[3] "%d týždňov"
 
 #. * TRANSLATORS: The current value of a spinbox
@@ -4286,7 +4286,7 @@ msgid "%d week"
 msgid_plural "%d weeks"
 msgstr[0] "%d týždeň"
 msgstr[1] "%d týždne"
-msgstr[2] "%d týždňov"
+msgstr[2] "%d týždňa"
 msgstr[3] "%d týždňov"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n> pixels"
@@ -4297,10 +4297,10 @@ msgstr[3] "%d týždňov"
 msgctxt "spinbox_change"
 msgid "%d pixel"
 msgid_plural "%d pixels"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d pixel"
+msgstr[1] "%d pixely"
+msgstr[2] "%d pixela"
+msgstr[3] "%d pixelov"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../../../src/ui_basic/spinbox.cc:576
@@ -4309,7 +4309,7 @@ msgid "%d pixel"
 msgid_plural "%d pixels"
 msgstr[0] "%d pixel"
 msgstr[1] "%d pixely"
-msgstr[2] "%d pixelov"
+msgstr[2] "%d pixela"
 msgstr[3] "%d pixelov"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n> fields"
@@ -4322,7 +4322,7 @@ msgid "%d field"
 msgid_plural "%d fields"
 msgstr[0] "%d políčko"
 msgstr[1] "%d políčka"
-msgstr[2] "%d políčok"
+msgstr[2] "%d políčka"
 msgstr[3] "%d políčok"
 
 #. * TRANSLATORS: The current value of a spinbox
@@ -4332,7 +4332,7 @@ msgid "%d field"
 msgid_plural "%d fields"
 msgstr[0] "%d políčko"
 msgstr[1] "%d políčka"
-msgstr[2] "%d políčok"
+msgstr[2] "%d políčka"
 msgstr[3] "%d políčok"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n>%"
@@ -8988,7 +8988,7 @@ msgid "%u ship"
 msgid_plural "%u ships"
 msgstr[0] "%u loď"
 msgstr[1] "%u lode"
-msgstr[2] "%u lodí"
+msgstr[2] "%u lode"
 msgstr[3] "%u lodí"
 
 #. * TRANSLATORS: Number of soldiers that should attack. Used in the attack
@@ -9000,7 +9000,7 @@ msgid "%u soldier"
 msgid_plural "%u soldiers"
 msgstr[0] "%u vojak"
 msgstr[1] "%u vojaci"
-msgstr[2] "%u vojakov"
+msgstr[2] "%u vojaka"
 msgstr[3] "%u vojakov"
 
 #: ../../../../src/wui/attack_window.cc:376
@@ -9009,7 +9009,7 @@ msgstr "Počet lodí"
 
 #: ../../../../src/wui/attack_window.cc:376
 msgid "Number of soldiers"
-msgstr "Počet vojakov:"
+msgstr "Počet vojakov"
 
 #: ../../../../src/wui/attack_window.cc:383
 msgid "Send less ships. Hold down Ctrl to send no ships"
@@ -10017,7 +10017,7 @@ msgid "%d file"
 msgid_plural "%d files"
 msgstr[0] "%d súbor"
 msgstr[1] "%d súbory"
-msgstr[2] "%d súborov"
+msgstr[2] "%d súbora"
 msgstr[3] "%d súborov"
 
 #. * TRANSLATORS: %1% = number of selected directories, %2% = number of
@@ -10455,7 +10455,7 @@ msgid "%u new message"
 msgid_plural "%u new messages"
 msgstr[0] "%u nová správa"
 msgstr[1] "%u nové správy"
-msgstr[2] "%u nových správ"
+msgstr[2] "%u novej správy"
 msgstr[3] "%u nových správ"
 
 #: ../../../../src/wui/interactive_player.cc:1008
@@ -10812,11 +10812,11 @@ msgstr "Ukončiť zamestnanie vybraného pracovníka"
 
 #: ../../../../src/wui/productionsitewindow.cc:246
 msgid "coming"
-msgstr "Prichádza"
+msgstr "prichádza"
 
 #: ../../../../src/wui/productionsitewindow.cc:246
 msgid "vacant"
-msgstr "Neobsadené"
+msgstr "neobsadené"
 
 #: ../../../../src/wui/productionsitewindow.cc:311
 msgid "(vacant)"
@@ -10880,7 +10880,7 @@ msgid "Do you really want to delete this %d game?"
 msgid_plural "Do you really want to delete these %d games?"
 msgstr[0] "Naozaj chcete vymazať túto %d hru?"
 msgstr[1] "Naozaj chcete vymazať tieto %d hry?"
-msgstr[2] "Naozaj chcete vymazať týchto %d hier?"
+msgstr[2] "Naozaj chcete vymazať týchto %d hry?"
 msgstr[3] "Naozaj chcete vymazať týchto %d hier?"
 
 #: ../../../../src/wui/savegamedeleter.cc:96
@@ -10904,7 +10904,7 @@ msgid "%d game could not be deleted."
 msgid_plural "%d games could not be deleted."
 msgstr[0] "Nepodarilo sa vymazať %d hru."
 msgstr[1] "Nepodarilo sa vymazať %d hry."
-msgstr[2] "Nepodarilo sa vymazať %d hier."
+msgstr[2] "Nepodarilo sa vymazať %d hry."
 msgstr[3] "Nepodarilo sa vymazať %d hier."
 
 #: ../../../../src/wui/savegamedeleter.cc:124
@@ -10919,7 +10919,7 @@ msgid "Do you really want to delete this %d replay?"
 msgid_plural "Do you really want to delete these %d replays?"
 msgstr[0] "Naozaj chcete vymazať tento %d záznam?"
 msgstr[1] "Naozaj chcete vymazať tieto %d záznamy?"
-msgstr[2] "Naozaj chcete vymazať týchto %d záznamov?"
+msgstr[2] "Naozaj chcete vymazať týchto %d záznamu?"
 msgstr[3] "Naozaj chcete vymazať týchto %d záznamov?"
 
 #: ../../../../src/wui/savegamedeleter.cc:137
@@ -10935,7 +10935,7 @@ msgid "%d replay could not be deleted."
 msgid_plural "%d replays could not be deleted."
 msgstr[0] "Nepodarilo sa vymazať %d záznam."
 msgstr[1] "Nepodarilo sa vymazať %d záznamy."
-msgstr[2] "Nepodarilo sa vymazať %d záznamov."
+msgstr[2] "Nepodarilo sa vymazať %d záznamu."
 msgstr[3] "Nepodarilo sa vymazať %d záznamov."
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
@@ -11165,7 +11165,7 @@ msgid "Seafaring Statistics (%u Ship)"
 msgid_plural "Seafaring Statistics (%u Ships)"
 msgstr[0] "Námorná štatistika (%u loď)"
 msgstr[1] "Námorná štatistika (%u lode)"
-msgstr[2] "Námorná štatistika (%u lodí)"
+msgstr[2] "Námorná štatistika (%u lode)"
 msgstr[3] "Námorná štatistika (%u lodí)"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
@@ -11486,7 +11486,7 @@ msgstr "Začať teraz ďalšiu misiu"
 
 #: ../../../../src/wui/story_message_box.cc:125
 msgid "Continue playing this mission"
-msgstr "Pokračovať v hraní tejto misie."
+msgstr "Pokračovať v hraní tejto misie"
 
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
 #: ../../../../src/wui/suggested_teams_box.cc:85

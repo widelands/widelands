@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-03-17 03:05+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: GunChleoc, 2015-2020\n"
 "Language-Team: Gaelic, Scottish (http://app.transifex.com/widelands/widelands/language/gd/)\n"
@@ -6206,11 +6206,11 @@ msgstr "Mar sin, cleachdaidh an gàirnealair is am maor-coille tè. Thèid a sao
 #: ../../../../data/tribes/initialization/barbarians/units.lua:373
 msgctxt "barbarians_ware"
 msgid ""
-"Geologists, builders, blacksmiths and helmsmiths all need a hammer. Make "
-"sure you’ve always got some in reserve! They are one of the basic tools "
-"produced at the metal workshop (but cease to be produced by the building if "
-"it is enhanced to an ax workshop and war mill)."
-msgstr "Feumaidh gach clach-eòlaiche, fear-togail, gobha is gobha chlogaidean òrd. Dèan cinnteach gu bheil cuid air fhàgail dhut an-còmhnaidh! Seo aon dhe na h-acainnean bunasach a thèid a shaothrachadh sa cheàrdach meatailt (ach cha saothraich an togalach e tuilleadh nuair a thèid a leasachadh gu ceàrdach thuaghan is ceàrdach-cogaidh)."
+"Geologists, builders, blacksmiths, helmsmiths and shipwrights all need a "
+"hammer. Make sure you’ve always got some in reserve! They are one of the "
+"basic tools produced at the metal workshop (but cease to be produced by the "
+"building if it is enhanced to an ax workshop and war mill)."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Fishing Rod, part 1
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 1
@@ -10369,9 +10369,10 @@ msgstr "Mar sin, cleachdaidh am planntair-coille is an tuathanach-fìona tè. Th
 #: ../../../../data/tribes/initialization/empire/units.lua:419
 msgctxt "empire_ware"
 msgid ""
-"Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
-"sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr "Feumaidh gach clach-eòlaiche, fear-togail, ceàrd-armachd is airm-cheàrd òrd. Dèan cinnteach gu bheil cuid air fhàgail dhut an-còmhnaidh! Nì an ceàrdach acainnean iad."
+"Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
+"hammer. Make sure you’ve always got some in reserve! They are produced by "
+"the toolsmith."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 2
 #. TRANSLATORS: Helptext for an Empire ware: Hunting Spear, part 2
@@ -13857,9 +13858,10 @@ msgstr "Cleachdaidh fir nan dearcan, tuathanaich-fheòir agus planntairean-coill
 #: ../../../../data/tribes/initialization/frisians/units.lua:437
 msgctxt "frisians_ware"
 msgid ""
-"Geologists, builders and blacksmiths all need a hammer. Make sure you’ve "
-"always got some in reserve! They are produced by the blacksmithy."
-msgstr "Feumaidh gach clach-eòlaiche, fear-togail is gobha òrd. Dèan cinnteach gu bheil cuid air fhàgail dhut an-còmhnaidh! Nì an ceàrdach gobhainn iad."
+"Geologists, builders, blacksmiths and shipwrights all need a hammer. Make "
+"sure you’ve always got some in reserve! They are produced by the "
+"blacksmithy."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a Frisian ware: Fishing Net
 #: ../../../../data/tribes/initialization/frisians/units.lua:447
