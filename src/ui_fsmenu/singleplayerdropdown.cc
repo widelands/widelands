@@ -96,7 +96,7 @@ void SinglePlayerTribeDropdown::rebuild() {
 		}
 		dropdown_.add(pgettext("tribe", "Random"), kRandom,
 		              g_image_cache->get("images/ui_fsmenu/random.png"), false,
-		              _("The tribe will be selected at random"));
+		              _("The tribe will be selected at random."));
 		if (player_setting.random_tribe) {
 			dropdown_.select(kRandom);
 		} else {

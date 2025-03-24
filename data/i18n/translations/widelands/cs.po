@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-03-08 02:34+0000\n"
+"POT-Creation-Date: 2025-03-17 03:05+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Ondřej Itřech, 2020-2021,2024-2025\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -1717,8 +1717,8 @@ msgstr "Náhodně"
 #: ../../../../src/editor/ui_menus/player_menu.cc:205
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:463
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:99
-msgid "The tribe will be selected at random"
-msgstr "Kmen bude vybrán náhodně"
+msgid "The tribe will be selected at random."
+msgstr "Kmen bude vybrán náhodně."
 
 #. * TRANSLATORS: Button tooltip in the editor for using a player's starting
 #. position tool
@@ -10143,7 +10143,7 @@ msgstr "Umožněno obcházení pravidel hry (Cheat mode)"
 #: ../../../../src/wui/info_panel.cc:460
 #, c-format
 msgid "%1$s • %2$s"
-msgstr "%1$s • %2$s"
+msgstr "Herní čas: %1$s • Místní čas: %2$s"
 
 #. * TRANSLATORS: Gametime • Realtime • Gamespeed
 #: ../../../../src/wui/info_panel.cc:465
