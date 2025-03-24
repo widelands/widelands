@@ -572,6 +572,7 @@ public:
 	bool is_attack_forbidden(PlayerNumber who) const;
 
 	[[nodiscard]] std::multimap<uint32_t, const Market*> get_markets(Coords closest_to) const;
+	[[nodiscard]] std::vector<const Market*> get_markets() const;
 
 	enum class WarehouseNameType { kWarehouse, kPort, kMarket };
 	[[nodiscard]] std::string pick_shipname();
