@@ -41,6 +41,9 @@ struct NetAddons {
 	[[nodiscard]] const std::string& server_descname() const {
 		return server_descname_;
 	}
+	[[nodiscard]] uint32_t websitemaps_i18n_version() const {
+		return websitemaps_i18n_version_;
+	}
 
 	// Fetch the list of all available add-ons from the server
 	std::vector<std::string> refresh_remotes(bool all);
@@ -118,6 +121,7 @@ private:
 	bool is_admin_{false};
 	size_t cached_remotes_{0U};
 	std::string server_descname_;
+	uint32_t websitemaps_i18n_version_{0U};
 	bool is_uploading_addon_{false};
 	bool timeout_was_suppressed_{false};
 	mutable std::string last_error_message_;
