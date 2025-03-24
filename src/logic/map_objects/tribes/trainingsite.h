@@ -61,6 +61,10 @@ public:
 		return train_evade_;
 	}
 
+	[[nodiscard]] const std::set<TrainingAttribute>& trained_attributes() const {
+		return trained_attributes_;
+	}
+
 	[[nodiscard]] unsigned get_min_level(TrainingAttribute) const;
 	[[nodiscard]] unsigned get_max_level(TrainingAttribute) const;
 	[[nodiscard]] int32_t get_max_stall() const {
@@ -92,6 +96,7 @@ private:
 	Quantity num_soldiers_;
 	/** Number of rounds w/o successful training, after which a soldier is kicked out. */
 	uint32_t max_stall_;
+
 	/** Whether this site can train health */
 	bool train_health_{false};
 	/** Whether this site can train attack */
@@ -100,6 +105,8 @@ private:
 	bool train_defense_{false};
 	/** Whether this site can train evasion */
 	bool train_evade_{false};
+
+	std::set<TrainingAttribute> trained_attributes_;
 
 	/** Minimum health a soldier needs to train at this site */
 	unsigned min_health_{std::numeric_limits<uint32_t>::max()};
@@ -233,6 +240,8 @@ private:
 	// soldiers who cannot start any upgrade
 	void update_upgrade_statuses(bool select_next_step);
 
+	void drop_all_soldiers_from_vector(std::vector<Soldier*>& v);
+	void drop_soldiers_from_vector(std::vector<Soldier*>& v, unsigned number_to_drop);
 	void drop_unupgradable_soldiers(Game&);
 	void drop_stalled_soldiers(Game&);
 
