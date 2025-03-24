@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-03-17 03:05+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015-2018,2021,2025\n"
 "Language-Team: Italian (http://app.transifex.com/widelands/widelands/language/it/)\n"
@@ -723,8 +723,8 @@ msgstr "Posto di guardia"
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:50
 msgctxt "empire_building"
-msgid "Your soldiers have occupied your blockhouse."
-msgstr "I tuoi soldati hanno occupato il tuo posto di guardia."
+msgid "Your soldier has occupied your blockhouse."
+msgstr ""
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:52
@@ -1083,8 +1083,8 @@ msgstr "Torre di legno"
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:60
 msgctxt "frisians_building"
-msgid "Your soldiers have occupied your wooden tower."
-msgstr "I tuoi soldati hanno occupato la tua torre di legno."
+msgid "Your soldier has occupied your wooden tower."
+msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:62

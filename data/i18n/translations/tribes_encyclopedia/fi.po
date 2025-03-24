@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-03-17 03:05+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: LINUX-SAUNA, 2022\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
@@ -6199,11 +6199,11 @@ msgstr "Sen vuoksi puutarhuri ja metsänvartija käyttävät niitä. Niitä tuot
 #: ../../../../data/tribes/initialization/barbarians/units.lua:373
 msgctxt "barbarians_ware"
 msgid ""
-"Geologists, builders, blacksmiths and helmsmiths all need a hammer. Make "
-"sure you’ve always got some in reserve! They are one of the basic tools "
-"produced at the metal workshop (but cease to be produced by the building if "
-"it is enhanced to an ax workshop and war mill)."
-msgstr "Kaikki geologit, rakentajat, sepät ja kypäräsepät tarvitsevat vasaran. Varmista, että sinulla on niitä aina varastossa! Ne ovat perustyökaluja, joita tuotetaan metallipajassa (mutta tuotanto loppuu rakennuksessa, jos se laajennetaan kirvespajaksi ja asetehtaaksi)."
+"Geologists, builders, blacksmiths, helmsmiths and shipwrights all need a "
+"hammer. Make sure you’ve always got some in reserve! They are one of the "
+"basic tools produced at the metal workshop (but cease to be produced by the "
+"building if it is enhanced to an ax workshop and war mill)."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Fishing Rod, part 1
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 1
@@ -10354,9 +10354,10 @@ msgstr "Sen vuoksi metsänhoitaja ja viinitarhuri käyttää niitä. Niitä tuot
 #: ../../../../data/tribes/initialization/empire/units.lua:419
 msgctxt "empire_ware"
 msgid ""
-"Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
-"sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr "Kaikki geologit, rakentajat, asesepät ja haarniskasepät tarvitsevat vasaran. Varmista, että sinulla on niitä aina varastossa! Niitä tuotttaa työkaluseppä."
+"Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
+"hammer. Make sure you’ve always got some in reserve! They are produced by "
+"the toolsmith."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 2
 #. TRANSLATORS: Helptext for an Empire ware: Hunting Spear, part 2
@@ -13834,9 +13835,10 @@ msgstr "Niitä käyttävät marjatarhurit ja ruokofarmarit sekä myös metsänho
 #: ../../../../data/tribes/initialization/frisians/units.lua:437
 msgctxt "frisians_ware"
 msgid ""
-"Geologists, builders and blacksmiths all need a hammer. Make sure you’ve "
-"always got some in reserve! They are produced by the blacksmithy."
-msgstr "Kaikki geologit, rakentajat ja sepät tarvitsevat vasaran. Varmista, että sinulla on aina jokunen varmuusvarastossa! Niitä tuotetaan sepän pajassa."
+"Geologists, builders, blacksmiths and shipwrights all need a hammer. Make "
+"sure you’ve always got some in reserve! They are produced by the "
+"blacksmithy."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a Frisian ware: Fishing Net
 #: ../../../../data/tribes/initialization/frisians/units.lua:447

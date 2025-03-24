@@ -30,7 +30,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-03-17 03:05+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Laurent Godard, 2024\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -6218,11 +6218,11 @@ msgstr "L'horticulteur et le sylviculteur les utilisent donc. Elles sont produit
 #: ../../../../data/tribes/initialization/barbarians/units.lua:373
 msgctxt "barbarians_ware"
 msgid ""
-"Geologists, builders, blacksmiths and helmsmiths all need a hammer. Make "
-"sure you’ve always got some in reserve! They are one of the basic tools "
-"produced at the metal workshop (but cease to be produced by the building if "
-"it is enhanced to an ax workshop and war mill)."
-msgstr "Les géologues, les bâtisseurs, et les forgerons ont tous besoin d'un marteau. Assurez-vous de toujours en avoir en réserve&nbsp;! C'est un outil basique produit dans la forge (mais cesse d'être produit par le bâtiment si amélioré en fabrique de haches ou en moulin de guerre)."
+"Geologists, builders, blacksmiths, helmsmiths and shipwrights all need a "
+"hammer. Make sure you’ve always got some in reserve! They are one of the "
+"basic tools produced at the metal workshop (but cease to be produced by the "
+"building if it is enhanced to an ax workshop and war mill)."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Fishing Rod, part 1
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 1
@@ -10377,9 +10377,10 @@ msgstr "Le sylviculteur et le vigneron l'utilisent donc. Elle est produite par l
 #: ../../../../data/tribes/initialization/empire/units.lua:419
 msgctxt "empire_ware"
 msgid ""
-"Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
-"sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr "Les géologues, les bâtisseurs, et les forgerons ont tous besoin d'un marteau.  Tâchez de toujours en avoir en réserve&nbsp;! Ils sont produits dans les forges d'outils."
+"Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
+"hammer. Make sure you’ve always got some in reserve! They are produced by "
+"the toolsmith."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 2
 #. TRANSLATORS: Helptext for an Empire ware: Hunting Spear, part 2
@@ -13861,9 +13862,10 @@ msgstr "Ils sont utilisés par les cultivateurs de baies et de roseaux ainsi que
 #: ../../../../data/tribes/initialization/frisians/units.lua:437
 msgctxt "frisians_ware"
 msgid ""
-"Geologists, builders and blacksmiths all need a hammer. Make sure you’ve "
-"always got some in reserve! They are produced by the blacksmithy."
-msgstr "Les géologues, les constructeurs et les forgerons ont tous besoin d'un marteau. Assurez-vous d'en avoir toujours en réserve ! Ils sont produits par le forgeron."
+"Geologists, builders, blacksmiths and shipwrights all need a hammer. Make "
+"sure you’ve always got some in reserve! They are produced by the "
+"blacksmithy."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a Frisian ware: Fishing Net
 #: ../../../../data/tribes/initialization/frisians/units.lua:447
