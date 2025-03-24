@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-03-17 03:05+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -5156,7 +5156,7 @@ msgid ""
 "‘Way down here in these golden grounds<br>with stones above us the thousand "
 "pounds<br>I dig in the dust until I see the spark;<br>The golden ore I find "
 "in the dark.’"
-msgstr "»In deesen depen golden Grünnen<br>unner Fels to dusend Tünnen<br>graav ick im Klei dör de stoffig Spold<br>bit ick finn im Düüster dat lechte Gold.«"
+msgstr "»In deesen deepen golden Grünnen<br>unner Fels to dusend Tünnen<br>graav ick im Klei dör de stoffig Spold<br>bit ick finn im Düüster dat lechte Gold.«"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Gold
 #. Mine
@@ -6190,11 +6190,11 @@ msgstr "De Gaardner un de Boomplanter bruken se also. Se worden in de Metalldrei
 #: ../../../../data/tribes/initialization/barbarians/units.lua:373
 msgctxt "barbarians_ware"
 msgid ""
-"Geologists, builders, blacksmiths and helmsmiths all need a hammer. Make "
-"sure you’ve always got some in reserve! They are one of the basic tools "
-"produced at the metal workshop (but cease to be produced by the building if "
-"it is enhanced to an ax workshop and war mill)."
-msgstr "Schattsökers, Baukeerls, Wapensmidds un Panzersmidds bruken all eenen Klöpper. Pass up, dat du alltied welke över hest! Se worden as elkeen Warktüüg in de Metalldreihbank produzeert (aver nich mehr, wenn dat Huus to eener Extensmede of Oorlogs-Smee utbaut word)."
+"Geologists, builders, blacksmiths, helmsmiths and shipwrights all need a "
+"hammer. Make sure you’ve always got some in reserve! They are one of the "
+"basic tools produced at the metal workshop (but cease to be produced by the "
+"building if it is enhanced to an ax workshop and war mill)."
+msgstr "Schattsökers, Baukeerls, Wapensmidds, Panzersmidds un Schippebauers bruken all eenen Klöpper. Pass up, dat du alltied welke över hest! Se worden as elkeen Warktüüg in de Metalldreihbank produzeert (aver nich mehr, wenn dat Huus to eener Extensmede of Oorlogs-Smee utbaut word)."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Fishing Rod, part 1
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 1
@@ -10345,9 +10345,10 @@ msgstr "De Förster un de Wienplanter bruken se also. Se worden vum Warktüügsm
 #: ../../../../data/tribes/initialization/empire/units.lua:419
 msgctxt "empire_ware"
 msgid ""
-"Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
-"sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr "Schattsökers, Baukeerls, Wapensmidds un Panzersmidds bruken all eenen Klöpper. Pass up, dat du alltied welke över hest! Se worden vum Warktüügsmidd produzeert."
+"Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
+"hammer. Make sure you’ve always got some in reserve! They are produced by "
+"the toolsmith."
+msgstr "Schattsökers, Baukeerls, Wapensmidds, Panzersmidds un Schippebauers bruken all eenen Klöpper. Pass up, dat du alltied welke över hest! Se worden vum Warktüügsmidd produzeert."
 
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 2
 #. TRANSLATORS: Helptext for an Empire ware: Hunting Spear, part 2
@@ -13825,9 +13826,10 @@ msgstr "Se worden vun Buskenplanters, Reitburen un Försters bruukt. Lehmgravers
 #: ../../../../data/tribes/initialization/frisians/units.lua:437
 msgctxt "frisians_ware"
 msgid ""
-"Geologists, builders and blacksmiths all need a hammer. Make sure you’ve "
-"always got some in reserve! They are produced by the blacksmithy."
-msgstr "Schattsökers, Baukeerls un Smidds bruken all eenen Klöpper. Pass up, dat du alltied welke över hest! Se worden vun de Smede produzeert."
+"Geologists, builders, blacksmiths and shipwrights all need a hammer. Make "
+"sure you’ve always got some in reserve! They are produced by the "
+"blacksmithy."
+msgstr "Schattsökers, Baukeerls, Smidds un Schippebauers bruken all eenen Klöpper. Pass up, dat du alltied welke över hest! Se worden vun de Smede produzeert."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Fishing Net
 #: ../../../../data/tribes/initialization/frisians/units.lua:447

@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-03-17 03:05+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015-2017,2019,2021-2022,2025\n"
 "Language-Team: Italian (http://app.transifex.com/widelands/widelands/language/it/)\n"
@@ -6209,10 +6209,10 @@ msgstr ""
 #: ../../../../data/tribes/initialization/barbarians/units.lua:373
 msgctxt "barbarians_ware"
 msgid ""
-"Geologists, builders, blacksmiths and helmsmiths all need a hammer. Make "
-"sure you’ve always got some in reserve! They are one of the basic tools "
-"produced at the metal workshop (but cease to be produced by the building if "
-"it is enhanced to an ax workshop and war mill)."
+"Geologists, builders, blacksmiths, helmsmiths and shipwrights all need a "
+"hammer. Make sure you’ve always got some in reserve! They are one of the "
+"basic tools produced at the metal workshop (but cease to be produced by the "
+"building if it is enhanced to an ax workshop and war mill)."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Fishing Rod, part 1
@@ -10368,9 +10368,10 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:419
 msgctxt "empire_ware"
 msgid ""
-"Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
-"sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr "Geologi, Costruttori, Armaioli e Fabbri di armature hanno tutti bisogno di un Martello. Assicurati di averne sempra alcuni di riserva! Essi sono prodotti dal Fabbro, nella Fucina di strumenti."
+"Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
+"hammer. Make sure you’ve always got some in reserve! They are produced by "
+"the toolsmith."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 2
 #. TRANSLATORS: Helptext for an Empire ware: Hunting Spear, part 2
@@ -13852,8 +13853,9 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:437
 msgctxt "frisians_ware"
 msgid ""
-"Geologists, builders and blacksmiths all need a hammer. Make sure you’ve "
-"always got some in reserve! They are produced by the blacksmithy."
+"Geologists, builders, blacksmiths and shipwrights all need a hammer. Make "
+"sure you’ve always got some in reserve! They are produced by the "
+"blacksmithy."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a Frisian ware: Fishing Net

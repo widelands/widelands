@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-02-27 02:59+0000\n"
+"POT-Creation-Date: 2025-03-17 03:05+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Ondřej Itřech, 2020-2021,2024-2025\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -768,8 +768,8 @@ msgid "Are you sure you wish to exit the editor?"
 msgstr "Opravdu chceš opustit editor?"
 
 #: ../../../../src/editor/editorinteractive.cc:1274
-#: ../../../../src/logic/addons.cc:48 ../../../../src/ui_basic/dropdown.cc:358
-#: ../../../../src/ui_basic/dropdown.cc:360
+#: ../../../../src/logic/addons.cc:48 ../../../../src/ui_basic/dropdown.cc:360
+#: ../../../../src/ui_basic/dropdown.cc:362
 #: ../../../../src/ui_fsmenu/addons/contact.cc:81
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1910
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1921
@@ -899,7 +899,7 @@ msgstr "Úspěšně nahráno"
 msgid "The add-on was uploaded successfully."
 msgstr "Rozšíření bylo úspěšně nahráno."
 
-#: ../../../../src/editor/map_generator.cc:754
+#: ../../../../src/editor/map_generator.cc:755
 msgid "Random Player"
 msgstr "Náhodný hráč"
 
@@ -1013,7 +1013,7 @@ msgstr "přístav"
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../../../src/editor/ui_menus/field_info_window.cc:116
-#: ../../../../src/logic/map_objects/world/terrain_description.cc:76
+#: ../../../../src/logic/map_objects/world/terrain_description.cc:74
 msgid "walkable"
 msgstr "schůdný"
 
@@ -1085,7 +1085,7 @@ msgstr "%1%× %2%"
 #: ../../../../src/editor/ui_menus/field_info_window.cc:229
 #: ../../../../src/logic/addons.cc:59
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:159
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:141
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:143
 #: ../../../../src/wui/mapdetails.cc:138 ../../../../src/wui/minimap.cc:142
 msgid "Map"
 msgstr "Mapa"
@@ -1513,7 +1513,7 @@ msgstr "Atol"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:320
-#: ../../../../src/logic/map.cc:76
+#: ../../../../src/logic/map.cc:77
 msgid "Wasteland"
 msgstr "Pustina"
 
@@ -1598,7 +1598,7 @@ msgstr "Vytvoř adresář"
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:164
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:519
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:521
 msgid "unnamed"
 msgstr "nepojmenovaný"
 
@@ -1717,8 +1717,8 @@ msgstr "Náhodně"
 #: ../../../../src/editor/ui_menus/player_menu.cc:205
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:463
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:99
-msgid "The tribe will be selected at random"
-msgstr "Kmen bude vybrán náhodně"
+msgid "The tribe will be selected at random."
+msgstr "Kmen bude vybrán náhodně."
 
 #. * TRANSLATORS: Button tooltip in the editor for using a player's starting
 #. position tool
@@ -1853,10 +1853,10 @@ msgstr "Zvol nový rozměr mapy, pak klikni na mapu do místa, kde má být mapa
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
 #: ../../../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
-#: ../../../../src/ui_basic/dropdown.cc:306
-#: ../../../../src/ui_basic/dropdown.cc:358
-#: ../../../../src/ui_basic/dropdown.cc:429
-#: ../../../../src/ui_basic/dropdown.cc:437
+#: ../../../../src/ui_basic/dropdown.cc:308
+#: ../../../../src/ui_basic/dropdown.cc:360
+#: ../../../../src/ui_basic/dropdown.cc:431
+#: ../../../../src/ui_basic/dropdown.cc:439
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:370
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "%1%: %2%"
@@ -2476,17 +2476,17 @@ msgid "An unexpected error occurred:"
 msgstr "Vyskytla se neočekávaná chyba:"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../../../src/logic/map.cc:70
+#: ../../../../src/logic/map.cc:71
 msgid "Summer"
 msgstr "Léto"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../../../src/logic/map.cc:73
+#: ../../../../src/logic/map.cc:74
 msgid "Winter"
 msgstr "Zima"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../../../src/logic/map.cc:79
+#: ../../../../src/logic/map.cc:80
 msgid "Desert"
 msgstr "Poušť"
 
@@ -3177,27 +3177,27 @@ msgid "Logic error"
 msgstr "Logická chyba"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../../../src/logic/map_objects/world/terrain_description.cc:71
+#: ../../../../src/logic/map_objects/world/terrain_description.cc:69
 msgid "arable"
 msgstr "úrodný"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../../../src/logic/map_objects/world/terrain_description.cc:81
+#: ../../../../src/logic/map_objects/world/terrain_description.cc:79
 msgid "navigable"
 msgstr "splavný"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../../../src/logic/map_objects/world/terrain_description.cc:86
+#: ../../../../src/logic/map_objects/world/terrain_description.cc:84
 msgid "unreachable"
 msgstr "nepřístupný"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../../../src/logic/map_objects/world/terrain_description.cc:91
+#: ../../../../src/logic/map_objects/world/terrain_description.cc:89
 msgid "mineable"
 msgstr "vytěžitelný"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../../../src/logic/map_objects/world/terrain_description.cc:96
+#: ../../../../src/logic/map_objects/world/terrain_description.cc:94
 msgid "unwalkable"
 msgstr "neobydlitelný"
 
@@ -4127,13 +4127,13 @@ msgstr "–"
 msgid "Add current color to favorites"
 msgstr "Přidat aktuální barvu mezi oblíbené"
 
-#: ../../../../src/ui_basic/dropdown.cc:111
+#: ../../../../src/ui_basic/dropdown.cc:113
 msgctxt "dropdown"
 msgid "Select Item"
 msgstr "Vybrat položku"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../../../src/ui_basic/dropdown.cc:422
+#: ../../../../src/ui_basic/dropdown.cc:424
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Nevybráno"
@@ -6246,94 +6246,94 @@ msgstr "Připomenout později"
 msgid "Help: %s"
 msgstr "Nápověda: %s"
 
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:55
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:57
 #: ../../../../src/wlapplication_options.cc:320
 msgid "Metaserver Lobby"
 msgstr "Lobby metaserveru"
 
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:65
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:67
 msgid "Clients online:"
 msgstr "Uživatelé online:"
 
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:89
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:91
 msgid "Open Games:"
 msgstr "Otevřít hru:"
 
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:99
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:90
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:101
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:92
 msgid "Join this game"
 msgstr "Připojit se ke hře"
 
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:108
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:110
 msgid "Name of your server:"
 msgstr "Název tvého serveru:"
 
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:117
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:119
 msgid "Open a new game"
 msgstr "Otevřít novou hru"
 
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:126
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:128
 msgid "Leave Lobby"
 msgstr "Opustit lobby"
 
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:182
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:184
 msgid "User Status"
 msgstr "Stav uživatele"
 
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:183
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:185
 msgid "Administrator"
 msgstr "Administrátor"
 
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:184
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:186
 msgid "Registered"
 msgstr "Registrován"
 
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:185
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:187
 msgid "Unregistered"
 msgstr "Neregistrován"
 
 #. * TRANSLATORS: Player Name
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:188
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:190
 msgctxt "player"
 msgid "Name"
 msgstr "Jméno"
 
 #. * TRANSLATORS: Widelands version
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:190
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:192
 msgid "Version"
 msgstr "Verze"
 
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:192
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:194
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:300
 msgid "Game"
 msgstr "Hra"
 
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:438
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:440
 #, c-format
 msgid "The game %s is already running. Please choose a different name."
 msgstr "Hra se jménem %s už probíhá. Prosím zvol jiný název."
 
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:451
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:453
 msgid ""
 "Widelands was unable to get the IP address of the server in time. There "
 "seems to be a network problem, either on your side or on the side of the "
 "server.\n"
 msgstr "Widelands se nepodařilo včas získat IP adresu serveru. Vypadá to na chybu sítě buďto na tvojí straně, anebo na straně serveru.\n"
 
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:454
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:456
 msgid "Connection Timed Out"
 msgstr "Čas spojení vypršel"
 
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:483
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:546
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:337
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:364
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:485
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:547
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:339
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:366
 msgid "Network Error"
 msgstr "Chyba sítě"
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../../../src/ui_fsmenu/internet_lobby.cc:511
+#: ../../../../src/ui_fsmenu/internet_lobby.cc:513
 #, c-format
 msgid "unnamed %u"
 msgstr "neznámý %u"
@@ -6683,7 +6683,7 @@ msgstr "Přezdívka:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../../../src/ui_fsmenu/login_box.cc:119
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:138
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:140
 #: ../../../../src/wlapplication.cc:828
 msgid "nobody"
 msgstr "bezejmena"
@@ -6929,12 +6929,12 @@ msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr "Je povoleno rozšíření způsobující desynchronizaci. Je nutné přijmout možná rizika."
 
 #: ../../../../src/ui_fsmenu/main.cc:1067
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:352
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:354
 msgid "No tribes found!"
 msgstr "Nenalezeny žádné kmeny!"
 
 #: ../../../../src/ui_fsmenu/main.cc:1068
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:353
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:355
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "Nenalezeny žádné kmeny v rámci data/tribes/initialization/[tribename]/init.lua."
 
@@ -7293,13 +7293,13 @@ msgstr "Sdíleno"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:358
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:359
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:246
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:248
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:188
 msgid "Closed"
 msgstr "Neobsazeno"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:363
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:243
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:245
 msgid "Open"
 msgstr "Otevřené"
 
@@ -7336,55 +7336,55 @@ msgstr "Tým %d"
 msgid "Clients"
 msgstr "Uživatelé"
 
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:35
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:37
 msgid "Begin LAN Game"
 msgstr "Zahájit LAN hru"
 
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:46
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:48
 msgid "List of games in your local network:"
 msgstr "Seznam her na tvé lokální síti:"
 
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:58
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:60
 msgid "Your nickname:"
 msgstr "Tvoje přezdívka:"
 
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:68
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:70
 msgid "Host to connect:"
 msgstr "Připojit se k hostiteli:"
 
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:81
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:83
 msgid "Load previous host"
 msgstr "Nahrát předchozího hostitele"
 
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:98
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:100
 msgid "Host a new game"
 msgstr "Hostovat novou hru"
 
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:140
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:142
 msgid "Host"
 msgstr "Hostitel"
 
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:142
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:144
 msgid "State"
 msgstr "Status"
 
 #. * TRANSLATORS: The state of a LAN game can be open, closed or unknown
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:250
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:252
 msgctxt "game_state"
 msgid "Unknown"
 msgstr "Neznámý"
 
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:300
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:302
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters and must not be \"team\"."
 msgstr "Volba platné přezdívky. Musí obsahovat pouze písmena anglické abecedy, čísla a znaky @ . + - _ a nesmí být \"team\"."
 
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:325
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:327
 msgid "Invalid Address"
 msgstr "Neplatná adresa"
 
-#: ../../../../src/ui_fsmenu/netsetup_lan.cc:326
+#: ../../../../src/ui_fsmenu/netsetup_lan.cc:328
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "Zadané jméno hostitele nebo adresa nejsou platné a nelze se tak připojit."
 
@@ -9238,7 +9238,7 @@ msgid "Enhance to %s"
 msgstr "Vylepšit na %s"
 
 #: ../../../../src/wui/buildingwindow.cc:331
-#: ../../../../src/wui/fieldaction.cc:106
+#: ../../../../src/wui/fieldaction.cc:105
 msgid "Construction costs:"
 msgstr "Stavební náklady:"
 
@@ -9446,191 +9446,191 @@ msgstr "Chybný odkaz"
 msgid "This hyperlink seems to be broken."
 msgstr "Tento hypertextový odkaz není funkční."
 
-#: ../../../../src/wui/fieldaction.cc:236
+#: ../../../../src/wui/fieldaction.cc:235
 msgid "Build medium building"
 msgstr "Postavit střední budovu"
 
-#: ../../../../src/wui/fieldaction.cc:236
+#: ../../../../src/wui/fieldaction.cc:235
 msgid "Build small building"
 msgstr "Postavit malou budovu"
 
-#: ../../../../src/wui/fieldaction.cc:237
+#: ../../../../src/wui/fieldaction.cc:236
 msgid "Build big building"
 msgstr "Postavit velkou budovu"
 
-#: ../../../../src/wui/fieldaction.cc:237
+#: ../../../../src/wui/fieldaction.cc:236
 msgid "Build port building"
 msgstr "Postavit budovu přístavu"
 
-#: ../../../../src/wui/fieldaction.cc:269
+#: ../../../../src/wui/fieldaction.cc:268
 msgid "Action"
 msgstr "Akce"
 
-#: ../../../../src/wui/fieldaction.cc:395
+#: ../../../../src/wui/fieldaction.cc:394
 msgid "Marked for removal by a worker – click to unmark"
 msgstr "Označeno pro přednostní zpracování – kliknutím zrušíš"
 
-#: ../../../../src/wui/fieldaction.cc:396
-#: ../../../../src/wui/fieldaction.cc:403
+#: ../../../../src/wui/fieldaction.cc:395
+#: ../../../../src/wui/fieldaction.cc:402
 msgid "Immovable Actions"
 msgstr "Nastavení pevného předmětu"
 
-#: ../../../../src/wui/fieldaction.cc:402
+#: ../../../../src/wui/fieldaction.cc:401
 msgid "Mark this immovable for timely removal by a suited worker"
 msgstr "Označ tento pevný předmět, aby byl příslušným dělníkem odstraněn ihned, jak situace dovolí."
 
-#: ../../../../src/wui/fieldaction.cc:424
-#: ../../../../src/wui/fieldaction.cc:555
+#: ../../../../src/wui/fieldaction.cc:423
+#: ../../../../src/wui/fieldaction.cc:554
 msgid "Build road"
 msgstr "Postavit cestu"
 
-#: ../../../../src/wui/fieldaction.cc:428
+#: ../../../../src/wui/fieldaction.cc:427
 msgid "Build waterway"
 msgstr "Vytvořit vodní cestu"
 
-#: ../../../../src/wui/fieldaction.cc:436
+#: ../../../../src/wui/fieldaction.cc:435
 msgid "Destroy this flag"
 msgstr "Znič tuto vlajku"
 
-#: ../../../../src/wui/fieldaction.cc:443
+#: ../../../../src/wui/fieldaction.cc:442
 msgid "Configure this flag’s economy"
 msgstr "Nastavení hospodářství této vlajky"
 
-#: ../../../../src/wui/fieldaction.cc:446
+#: ../../../../src/wui/fieldaction.cc:445
 msgid "Send geologist to explore site"
 msgstr "Provést průzkum nerostných a podzemních zdrojů"
 
-#: ../../../../src/wui/fieldaction.cc:452
-#: ../../../../src/wui/fieldaction.cc:472
+#: ../../../../src/wui/fieldaction.cc:451
+#: ../../../../src/wui/fieldaction.cc:471
 msgid "Send scout to explore surroundings"
 msgstr "Zahájit průzkum okolí"
 
 #. * TRANSLATORS: This string is used only when the name of the tribe’s scout
 #. house/hut is unknown.
-#: ../../../../src/wui/fieldaction.cc:464
+#: ../../../../src/wui/fieldaction.cc:463
 msgid ""
 "You need to connect this flag to a scouting building before you can send a "
 "scout here."
 msgstr "Než bude možné zahájit průzkum z místa této vlajky, je třeba napojit ji na budovu, v které pracovník provádějící průzkum bydlí."
 
-#: ../../../../src/wui/fieldaction.cc:492
+#: ../../../../src/wui/fieldaction.cc:491
 msgid "Place a flag"
 msgstr "Umístit vlajku"
 
-#: ../../../../src/wui/fieldaction.cc:497
+#: ../../../../src/wui/fieldaction.cc:496
 msgid "Destroy a road"
 msgstr "Zničit cestu"
 
-#: ../../../../src/wui/fieldaction.cc:502
+#: ../../../../src/wui/fieldaction.cc:501
 msgid "Destroy a waterway"
 msgstr "Zrušit vodní cestu"
 
-#: ../../../../src/wui/fieldaction.cc:522
+#: ../../../../src/wui/fieldaction.cc:521
 msgid "Configure this ocean’s ship fleet"
 msgstr "Nastavit velikost loďstva"
 
-#: ../../../../src/wui/fieldaction.cc:533
+#: ../../../../src/wui/fieldaction.cc:532
 msgid "Configure this ocean’s ferry fleet"
 msgstr "Nastavit počet přívozů"
 
-#: ../../../../src/wui/fieldaction.cc:540
+#: ../../../../src/wui/fieldaction.cc:539
 msgid "Watch field in a separate window"
 msgstr "Sledovat ve vlastním okně"
 
-#: ../../../../src/wui/fieldaction.cc:545
+#: ../../../../src/wui/fieldaction.cc:544
 msgid "Pinned note"
 msgstr "Umístit poznámku"
 
-#: ../../../../src/wui/fieldaction.cc:550
+#: ../../../../src/wui/fieldaction.cc:549
 msgid "Show debug window"
 msgstr "Zobrazit okno ladění"
 
-#: ../../../../src/wui/fieldaction.cc:558
+#: ../../../../src/wui/fieldaction.cc:557
 #: ../../../../src/wui/watchwindow.cc:85
 msgid "Watch"
 msgstr "Sledovat"
 
-#: ../../../../src/wui/fieldaction.cc:675
+#: ../../../../src/wui/fieldaction.cc:674
 msgid "Build mines"
 msgstr "Postavit doly"
 
-#: ../../../../src/wui/fieldaction.cc:690
-#: ../../../../src/wui/fieldaction.cc:717
+#: ../../../../src/wui/fieldaction.cc:689
+#: ../../../../src/wui/fieldaction.cc:716
 msgid "Build flag"
 msgstr "Postavit vlajku"
 
-#: ../../../../src/wui/fieldaction.cc:694
+#: ../../../../src/wui/fieldaction.cc:693
 msgid "Cancel road"
 msgstr "Zrušit cestu"
 
-#: ../../../../src/wui/fieldaction.cc:696
+#: ../../../../src/wui/fieldaction.cc:695
 msgid "Go to road"
 msgstr "Jít k cestě"
 
-#: ../../../../src/wui/fieldaction.cc:704
+#: ../../../../src/wui/fieldaction.cc:703
 msgid "Cancel road and start building waterway"
 msgstr "Vytvořit vodní cestu místo klasické"
 
-#: ../../../../src/wui/fieldaction.cc:708
+#: ../../../../src/wui/fieldaction.cc:707
 msgid "Build roads"
 msgstr "Stavět cesty"
 
-#: ../../../../src/wui/fieldaction.cc:721
+#: ../../../../src/wui/fieldaction.cc:720
 msgid "Cancel waterway"
 msgstr "Zrušit vodní cestu"
 
-#: ../../../../src/wui/fieldaction.cc:723
+#: ../../../../src/wui/fieldaction.cc:722
 msgid "Go to waterway"
 msgstr "Jít k vodní cestě"
 
-#: ../../../../src/wui/fieldaction.cc:726
+#: ../../../../src/wui/fieldaction.cc:725
 msgid "Cancel waterway and start building road"
 msgstr "Postavit cestu místo vodní cesty"
 
-#: ../../../../src/wui/fieldaction.cc:729
+#: ../../../../src/wui/fieldaction.cc:728
 msgid "Build waterways"
 msgstr "Vytváření vodních cest"
 
 #. * TRANSLATORS: Placeholders are the hitpoints and the attack bonus of the
 #. warship.
-#: ../../../../src/wui/fieldaction.cc:1254
+#: ../../../../src/wui/fieldaction.cc:1252
 #, c-format
 msgctxt "ship_state"
 msgid "Warship · HP %1$u%% · AT +%2$u%%"
 msgstr "Bitevní loď · HP %1$u%% · ÚT +%2$u%%"
 
-#: ../../../../src/wui/fieldaction.cc:1258
+#: ../../../../src/wui/fieldaction.cc:1256
 msgctxt "ship_state"
 msgid "Enemy Transport Ship"
 msgstr "Nepřátelská přepravní loď"
 
-#: ../../../../src/wui/fieldaction.cc:1260
+#: ../../../../src/wui/fieldaction.cc:1258
 msgctxt "ship_state"
 msgid "Expedition"
 msgstr "Výprava"
 
-#: ../../../../src/wui/fieldaction.cc:1262
+#: ../../../../src/wui/fieldaction.cc:1260
 msgctxt "ship_state"
 msgid "Transport"
 msgstr "Přeprava"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../../../src/wui/fieldaction.cc:1264
+#: ../../../../src/wui/fieldaction.cc:1262
 #: ../../../../src/wui/interactive_gamebase.cc:626
 #: ../../../../src/wui/productionsitewindow.cc:246
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: ../../../../src/wui/fieldaction.cc:1274
+#: ../../../../src/wui/fieldaction.cc:1272
 msgid "Select Ship"
 msgstr "Vybrat loď"
 
-#: ../../../../src/wui/fieldaction.cc:1297
+#: ../../../../src/wui/fieldaction.cc:1295
 msgid "Own Ships"
 msgstr "Vlastní lodě"
 
-#: ../../../../src/wui/fieldaction.cc:1311
+#: ../../../../src/wui/fieldaction.cc:1309
 msgid "Attackable Ships"
 msgstr "Napadnutelné lodě"
 
@@ -10143,7 +10143,7 @@ msgstr "Umožněno obcházení pravidel hry (Cheat mode)"
 #: ../../../../src/wui/info_panel.cc:460
 #, c-format
 msgid "%1$s • %2$s"
-msgstr "%1$s • %2$s"
+msgstr "Herní čas: %1$s • Místní čas: %2$s"
 
 #. * TRANSLATORS: Gametime • Realtime • Gamespeed
 #: ../../../../src/wui/info_panel.cc:465

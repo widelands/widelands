@@ -32,7 +32,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-03-17 03:05+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2025\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
@@ -6212,11 +6212,11 @@ msgstr "Daher verwenden sie der Reetbauer und der Förster. Sie wird in der Werk
 #: ../../../../data/tribes/initialization/barbarians/units.lua:373
 msgctxt "barbarians_ware"
 msgid ""
-"Geologists, builders, blacksmiths and helmsmiths all need a hammer. Make "
-"sure you’ve always got some in reserve! They are one of the basic tools "
-"produced at the metal workshop (but cease to be produced by the building if "
-"it is enhanced to an ax workshop and war mill)."
-msgstr "Er wird von Geologen, Bauarbeitern, Schmieden und Helmschmieden gebraucht. Sorge dafür, dass du immer einige in Reserve hast! Er gehört zu den grundlegenden Werkzeugen, die in der Werkzeugschmiede hergestellt werden (aber nicht mehr, wenn diese zu einer Axt- oder Waffenschmiede erweitert wurde)."
+"Geologists, builders, blacksmiths, helmsmiths and shipwrights all need a "
+"hammer. Make sure you’ve always got some in reserve! They are one of the "
+"basic tools produced at the metal workshop (but cease to be produced by the "
+"building if it is enhanced to an ax workshop and war mill)."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Fishing Rod, part 1
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 1
@@ -10367,9 +10367,10 @@ msgstr "Daher werden sie vom Förster und vom Winzer benötigt. Sie werden vom W
 #: ../../../../data/tribes/initialization/empire/units.lua:419
 msgctxt "empire_ware"
 msgid ""
-"Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
-"sure you’ve always got some in reserve! They are produced by the toolsmith."
-msgstr "Er wird von Geologen, Bauarbeitern, Waffen- und Rüstungsschmieden gebraucht. Sorge dafür, dass du immer einige in Reserve hast! Er wird vom Werkzeugmacher hergestellt."
+"Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
+"hammer. Make sure you’ve always got some in reserve! They are produced by "
+"the toolsmith."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 2
 #. TRANSLATORS: Helptext for an Empire ware: Hunting Spear, part 2
@@ -13847,9 +13848,10 @@ msgstr "Schaufeln werden von Beerenzüchtern und Reetbauern sowie Förstern benu
 #: ../../../../data/tribes/initialization/frisians/units.lua:437
 msgctxt "frisians_ware"
 msgid ""
-"Geologists, builders and blacksmiths all need a hammer. Make sure you’ve "
-"always got some in reserve! They are produced by the blacksmithy."
-msgstr "Geologen, Bauarbeiter und Schmiede brauchen alle einen Hammer. Sorge dafür, dass du immer einige in Reserve hast! Sie werden in der Schmiede hergestellt."
+"Geologists, builders, blacksmiths and shipwrights all need a hammer. Make "
+"sure you’ve always got some in reserve! They are produced by the "
+"blacksmithy."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a Frisian ware: Fishing Net
 #: ../../../../data/tribes/initialization/frisians/units.lua:447
