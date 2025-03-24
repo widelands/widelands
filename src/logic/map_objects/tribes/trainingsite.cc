@@ -50,7 +50,8 @@ std::string training_attribute_to_string(Widelands::TrainingAttribute attribute)
 	}
 }
 
-inline Widelands::TypeAndLevel upgrade_key(const Widelands::TrainingAttribute attr, const uint16_t level) {
+inline Widelands::TypeAndLevel upgrade_key(const Widelands::TrainingAttribute attr,
+                                           const uint16_t level) {
 	// We want them ordered by level first
 	return (static_cast<uint32_t>(level) << 8) + static_cast<uint32_t>(attr);
 }
@@ -117,8 +118,9 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 				}
 				// All clear, let's add the training information
 				update_level(from_checksoldier.attribute, from_checksoldier.level, checkme.level);
-				training_costs_.emplace(upgrade_key(from_checksoldier.attribute, from_checksoldier.level),
-				                        program.second->consumed_wares_workers());
+				training_costs_.emplace(
+				   upgrade_key(from_checksoldier.attribute, from_checksoldier.level),
+				   program.second->consumed_wares_workers());
 			}
 		}
 	}
@@ -261,17 +263,17 @@ void TrainingSite::SoldierControl::set_soldier_capacity(Quantity const capacity)
 	// This piece implements this demand. If we add more control buttons to the
 	// UI later, side-effects like this could go away.
 	if (capacity > training_site_->capacity_) {
-		// This is the capacity increased part from above.
-		// Splitting a bit futher.
-		if (0 == training_site_->capacity_ && 1 == capacity) {
-			// If the site had a capacity of zero, then the player probably micromanages
-			// and wants a partially trained soldier, if available. Resetting the state.
-			training_site_->repeated_layoff_ctr_ = 0;
-			training_site_->latest_trainee_was_kickout_ = false;
-		} else {
-			// Now the player just wants soldier. Any soldiers.
-			training_site_->recent_capacity_increase_ = true;
-		}
+	   // This is the capacity increased part from above.
+	   // Splitting a bit futher.
+	   if (0 == training_site_->capacity_ && 1 == capacity) {
+	      // If the site had a capacity of zero, then the player probably micromanages
+	      // and wants a partially trained soldier, if available. Resetting the state.
+	      training_site_->repeated_layoff_ctr_ = 0;
+	      training_site_->latest_trainee_was_kickout_ = false;
+	   } else {
+	      // Now the player just wants soldier. Any soldiers.
+	      training_site_->recent_capacity_increase_ = true;
+	   }
 	}
 	*/
 
@@ -340,9 +342,7 @@ class TrainingSite
 */
 
 TrainingSite::TrainingSite(const TrainingSiteDescr& d)
-   : ProductionSite(d),
-     soldier_control_(this),
-     capacity_(descr().get_max_number_of_soldiers()) {
+   : ProductionSite(d), soldier_control_(this), capacity_(descr().get_max_number_of_soldiers()) {
 
 	set_soldier_control(&soldier_control_);
 
@@ -444,7 +444,8 @@ bool TrainingSite::is_present(Worker& worker) const {
 	       worker.get_position() == get_position();
 }
 
-Soldier* TrainingSite::get_selected_soldier(Game& game, const TrainingAttribute attr, const unsigned level) {
+Soldier*
+TrainingSite::get_selected_soldier(Game& game, const TrainingAttribute attr, const unsigned level) {
 	Soldier* soldier = selected_soldier_.get(game);
 	if (soldier != nullptr && is_present(*soldier) && soldier->get_level(attr) == level) {
 		return soldier;
@@ -764,8 +765,8 @@ void TrainingSite::find_and_start_next_program(Game& game) {
 		if (current_upgrade_ == upgrades_.end()) {
 			current_upgrade_ = upgrades_.begin();
 		}
-	} while(!current_upgrade_->second.has_wares_and_candidate() &&
-	        current_upgrade_->first != last_upgrade);
+	} while (!current_upgrade_->second.has_wares_and_candidate() &&
+	         current_upgrade_->first != last_upgrade);
 
 	if (!current_upgrade_->second.has_wares_and_candidate()) {
 		++failures_count_;
@@ -811,8 +812,8 @@ void TrainingSite::add_upgrades(TrainingAttribute const attr) {
 }
 
 TrainingSite::Upgrade::Upgrade(const TrainingAttribute attr, const uint16_t level)
-	: key(upgrade_key(attr, level)),
-	  program_name(format("upgrade_soldier_%s_%d", training_attribute_to_string(attr), level)) {
+   : key(upgrade_key(attr, level)),
+     program_name(format("upgrade_soldier_%s_%d", training_attribute_to_string(attr), level)) {
 }
 
 unsigned TrainingSite::current_training_level() const {
@@ -931,29 +932,30 @@ void TrainingSite::update_upgrade_statuses(const bool select_next_step) {
 		}
 
 		switch (best_status) {
-			case Upgrade::Status::kCanStart:
-				if (select_next_step) {  // TODO(tothxa): && preference != kAny
-					const unsigned this_total_level = soldier->get_total_level();
-					if (compare_levels(best_total_level, this_total_level) || selected_soldier_ == nullptr) {
-						best_total_level = this_total_level;
-						// Already set these here to avoid repeating the iterations in
-						// find_and_start_next_program()
-						selected_soldier_ = soldier;
-						current_upgrade_ = possible_upgrade;
-					}
+		case Upgrade::Status::kCanStart:
+			if (select_next_step) {  // TODO(tothxa): && preference != kAny
+				const unsigned this_total_level = soldier->get_total_level();
+				if (compare_levels(best_total_level, this_total_level) ||
+				    selected_soldier_ == nullptr) {
+					best_total_level = this_total_level;
+					// Already set these here to avoid repeating the iterations in
+					// find_and_start_next_program()
+					selected_soldier_ = soldier;
+					current_upgrade_ = possible_upgrade;
 				}
-				break;
-			case Upgrade::Status::kDisabled:
-				untrainable_soldiers_.emplace_back(soldier);
-				break;
-			case Upgrade::Status::kNotPossible:
-				stalled_soldiers_.emplace_back(soldier);
-				break;
-			case Upgrade::Status::kWait:
-				waiting_soldiers_.emplace_back(soldier);
-				break;
-			default:
-				NEVER_HERE();
+			}
+			break;
+		case Upgrade::Status::kDisabled:
+			untrainable_soldiers_.emplace_back(soldier);
+			break;
+		case Upgrade::Status::kNotPossible:
+			stalled_soldiers_.emplace_back(soldier);
+			break;
+		case Upgrade::Status::kWait:
+			waiting_soldiers_.emplace_back(soldier);
+			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 }

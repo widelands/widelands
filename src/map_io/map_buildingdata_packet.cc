@@ -1009,7 +1009,7 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 
 			if (packet_version > 7) {
 				uint32_t soldier_serial = fr.unsigned_32();
-				if (soldier_serial !=0) {
+				if (soldier_serial != 0) {
 					Soldier& soldier = mol.get<Soldier>(soldier_serial);
 					trainingsite.selected_soldier_ = &soldier;
 				} else {

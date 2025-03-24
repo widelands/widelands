@@ -82,7 +82,8 @@ public:
 		return no_soldier_for_training_level_message_;
 	}
 
-	[[nodiscard]] const ProductionProgram::Groups& get_training_cost(const TypeAndLevel& upgrade_step) const {
+	[[nodiscard]] const ProductionProgram::Groups&
+	get_training_cost(const TypeAndLevel& upgrade_step) const {
 		return training_costs_.at(upgrade_step);
 	}
 
