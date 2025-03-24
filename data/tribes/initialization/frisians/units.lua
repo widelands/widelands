@@ -432,7 +432,7 @@ wl.Descriptions():new_tribe {
                   -- TRANSLATORS: Helptext for a Frisian ware: Hammer, part 1
                   pgettext("ware", "The hammer is an essential tool."),
                   -- TRANSLATORS: Helptext for a Frisian ware: Hammer, part 2
-                  pgettext("frisians_ware", "Geologists, builders and blacksmiths all need a hammer. Make sure you’ve always got some in reserve! They are produced by the blacksmithy.")
+                  pgettext("frisians_ware", "Geologists, builders, blacksmiths and shipwrights all need a hammer. Make sure you’ve always got some in reserve! They are produced by the blacksmithy.")
                }
             }
          },

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-03-17 03:05+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: 425467bb0c9da71484550c3c99a0865a_432023a <42ebb87f8d673776150a6c232428c0ac_329642>, 2016-2018\n"
 "Language-Team: Arabic (http://app.transifex.com/widelands/widelands/language/ar/)\n"
@@ -713,7 +713,7 @@ msgstr ""
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:50
 msgctxt "empire_building"
-msgid "Your soldiers have occupied your blockhouse."
+msgid "Your soldier has occupied your blockhouse."
 msgstr ""
 
 #. TRANSLATORS: Message sent by an Empire military site
@@ -1073,7 +1073,7 @@ msgstr ""
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:60
 msgctxt "frisians_building"
-msgid "Your soldiers have occupied your wooden tower."
+msgid "Your soldier has occupied your wooden tower."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site

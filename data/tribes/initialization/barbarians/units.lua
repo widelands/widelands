@@ -368,7 +368,7 @@ wl.Descriptions():new_tribe {
                   -- TRANSLATORS: Helptext for a Barbarian ware: Hammer, part 1
                   pgettext("ware", "The hammer is an essential tool."),
                   -- TRANSLATORS: Helptext for a Barbarian ware: Hammer, part 2
-                  pgettext("barbarians_ware", "Geologists, builders, blacksmiths and helmsmiths all need a hammer. Make sure you’ve always got some in reserve! They are one of the basic tools produced at the metal workshop (but cease to be produced by the building if it is enhanced to an ax workshop and war mill).")
+                  pgettext("barbarians_ware", "Geologists, builders, blacksmiths, helmsmiths and shipwrights all need a hammer. Make sure you’ve always got some in reserve! They are one of the basic tools produced at the metal workshop (but cease to be produced by the building if it is enhanced to an ax workshop and war mill).")
                }
             }
          },

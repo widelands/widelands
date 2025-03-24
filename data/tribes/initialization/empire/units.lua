@@ -414,7 +414,7 @@ wl.Descriptions():new_tribe {
                   -- TRANSLATORS: Helptext for an Empire ware: Hammer, part 1
                   pgettext("ware", "The hammer is an essential tool."),
                   -- TRANSLATORS: Helptext for an Empire ware: Hammer, part 2
-                  pgettext("empire_ware", "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make sure you’ve always got some in reserve! They are produced by the toolsmith.")
+                  pgettext("empire_ware", "Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a hammer. Make sure you’ve always got some in reserve! They are produced by the toolsmith.")
                }
             }
          },
