@@ -53,7 +53,6 @@ enum class IslandExploreDirection;
 class PortDock;
 enum class ScoutingDirection;
 struct Ship;
-class TrainingSite;
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 class TrainingWheels;
 #endif

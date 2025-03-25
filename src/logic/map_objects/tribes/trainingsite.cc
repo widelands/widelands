@@ -18,6 +18,7 @@
 
 #include "logic/map_objects/tribes/trainingsite.h"
 
+#include <algorithm>
 #include <memory>
 
 #include "base/i18n.h"
@@ -476,7 +477,7 @@ Soldier* TrainingSite::pick_another_soldier(const TrainingAttribute attr, const 
 
 	Soldier* best_soldier = nullptr;
 	unsigned best_level = build_heroes_ ? 0 : soldiers_.front()->descr().get_max_total_level();
-	unsigned current_level = best_level;
+	unsigned current_level;
 
 	for (Soldier* soldier : soldiers_) {
 		if (soldier->get_level(attr) != level) {
@@ -493,7 +494,7 @@ Soldier* TrainingSite::pick_another_soldier(const TrainingAttribute attr, const 
 	return best_soldier;
 }
 
-inline bool TrainingSite::compare_levels(const unsigned first, const unsigned second) {
+inline bool TrainingSite::compare_levels(const unsigned first, const unsigned second) const {
 	// TODO(tothxa): if (build_heroes_ == kAny) { return false }
 	return build_heroes_ ? (second > first) : (second < first);
 }

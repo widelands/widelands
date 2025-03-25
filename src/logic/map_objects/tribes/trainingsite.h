@@ -161,8 +161,8 @@ class TrainingSite : public ProductionSite {
 		Status status{Status::kNotPossible};
 		std::vector<Soldier*> candidates;
 
-		Upgrade(TrainingAttribute attr, const uint16_t level);
-		bool has_wares_and_candidate() const {
+		Upgrade(TrainingAttribute attr, uint16_t level);
+		[[nodiscard]] bool has_wares_and_candidate() const {
 			return status == Upgrade::Status::kCanStart && !candidates.empty();
 		}
 	};
@@ -231,7 +231,7 @@ private:
 	Soldier* pick_another_soldier(TrainingAttribute attr, unsigned level);
 
 	// Takes preference in account, returns true if second is more preferred.
-	bool compare_levels(unsigned first, unsigned second);
+	bool compare_levels(unsigned first, unsigned second) const;
 
 	// Used in initialization of TrainingSite
 	void init_upgrades();

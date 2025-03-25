@@ -43,7 +43,6 @@ namespace Widelands {
 struct Path;
 class PinnedNote;
 struct PlayerImmovable;
-class TrainingSite;
 struct Road;
 struct Waterway;
 
