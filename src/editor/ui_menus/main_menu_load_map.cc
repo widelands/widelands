@@ -34,7 +34,6 @@
  */
 MainMenuLoadMap::MainMenuLoadMap(EditorInteractive& parent, UI::UniqueWindow::Registry& registry)
    : MainMenuLoadOrSaveMap(parent, registry, "load_map_menu", _("Load Map"), true) {
-	set_current_directory(curdir_);
 
 	table_.selected.connect([this](unsigned /* value */) { entry_selected(); });
 	table_.double_clicked.connect([this](unsigned /* value */) { clicked_ok(); });
@@ -42,7 +41,7 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive& parent, UI::UniqueWindow::Re
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 	cancel_.sigclicked.connect([this]() { die(); });
 
-	fill_table();
+	navigate_directory(curdir_, kMapsDir);
 	layout();
 
 	initialization_complete();
@@ -56,8 +55,7 @@ void MainMenuLoadMap::clicked_ok() {
 	assert(!mapdata.filenames.empty());
 	if (g_fs->is_directory(mapdata.filenames.at(0)) &&
 	    !Widelands::WidelandsMapLoader::is_widelands_map(mapdata.filenames.at(0))) {
-		set_current_directory(mapdata.filenames);
-		fill_table();
+		navigate_directory(mapdata.filenames, mapdata.localized_name);
 	} else {
 		assert(mapdata.filenames.size() == 1);
 		// Prevent description notes from reaching a subscriber

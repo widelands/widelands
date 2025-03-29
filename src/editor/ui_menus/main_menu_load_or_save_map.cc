@@ -183,12 +183,37 @@ void MainMenuLoadOrSaveMap::layout() {
 	center_to_parent();
 }
 
+void MainMenuLoadOrSaveMap::update_table() {
+	table_.fill(maps_data_, display_mode_.get_selected());
+	if (!table_.empty()) {
+		table_.select(0);
+	} else {
+		ok_.set_enabled(false);
+	}
+}
+
+void MainMenuLoadOrSaveMap::navigate_directory(const std::vector<std::string>& filenames, const std::string& localized_name) {
+	set_current_directory(filenames);
+	if (!localized_name.empty() && localized_name == MapData::parent_name()) {
+		/* navigate up */
+		table_.clear();
+		maps_data_.clear();
+		maps_data_ = std::move(parent_data_.at(0));
+		parent_data_.pop_front();
+
+		update_table();
+	} else {
+		fill_table();
+	}
+}
+
 /**
  * fill the file list
  */
 // TODO(Nordfriese): Code duplication with FsMenu::MapSelect::fill_table
 void MainMenuLoadOrSaveMap::fill_table() {
 	table_.clear();
+	parent_data_.push_front(maps_data_);
 	maps_data_.clear();
 
 	//  Fill it with all files we find.
@@ -210,7 +235,7 @@ void MainMenuLoadOrSaveMap::fill_table() {
 		// In the toplevel directory we also need to include add-on maps –
 		// but only in the load screen, not in the save screen!
 		if (include_addon_maps_) {
-			for (auto& addon : AddOns::g_addons) {
+			for (const auto& addon : AddOns::g_addons) {
 				if (addon.first->category == AddOns::AddOnCategory::kMaps && addon.second) {
 					for (const std::string& mapname : g_fs->list_directory(
 					        kAddOnDir + FileSystem::file_separator() + addon.first->internal_name)) {
@@ -260,25 +285,20 @@ void MainMenuLoadOrSaveMap::fill_table() {
 			}
 
 			MapData new_md = MapData::create_directory(mapfilename);
-			bool found = false;
-			for (MapData& md : maps_data_) {
-				if (md.maptype == MapData::MapType::kDirectory &&
-				    md.localized_name == new_md.localized_name) {
-					found = true;
-					md.add(new_md);
-					break;
-				}
-			}
-			if (!found) {
+
+			auto found = std::find_if(maps_data_.begin(), maps_data_.end(),
+									   [&new_md](const MapData& md) {
+										   return md.maptype == MapData::MapType::kDirectory &&
+												  md.localized_name == new_md.localized_name;
+									   });
+
+			if (found != maps_data_.end()) {
+				found->add(new_md);
+			} else {
 				maps_data_.push_back(new_md);
 			}
 		}
 	}
 
-	table_.fill(maps_data_, display_type);
-	if (!table_.empty()) {
-		table_.select(0);
-	} else {
-		ok_.set_enabled(false);
-	}
+	update_table();
 }

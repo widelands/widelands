@@ -45,7 +45,7 @@ protected:
 	// Sets the current dir and updates labels.
 	virtual void set_current_directory(const std::vector<std::string>& filenames) = 0;
 	void layout() override;
-	void fill_table();
+	void navigate_directory(const std::vector<std::string>& filenames, const std::string& localized_name);
 
 	bool compare_players(uint32_t, uint32_t);
 	bool compare_mapnames(uint32_t, uint32_t);
@@ -53,6 +53,11 @@ protected:
 
 	// Private variables first, because compiler would complain about initialization order otherwise
 private:
+	void update_table();
+	void fill_table();
+
+	// Store directory hierarchy
+	std::deque<std::vector<MapData>> parent_data_;
 	// Common padding between panels
 	int32_t const padding_{4};
 
