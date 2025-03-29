@@ -51,7 +51,7 @@ void MainMenuLoadMap::clicked_ok() {
 	if (!ok_.enabled() || !table_.has_selection()) {
 		return;
 	}
-	const MapData& mapdata = maps_data_[table_.get_selected()];
+	const MapData& mapdata = table_.get_selected_data();
 	assert(!mapdata.filenames.empty());
 	if (g_fs->is_directory(mapdata.filenames.at(0)) &&
 	    !Widelands::WidelandsMapLoader::is_widelands_map(mapdata.filenames.at(0))) {
@@ -126,13 +126,9 @@ void MainMenuLoadMap::set_current_directory(const std::vector<std::string>& file
  * Called when a entry is selected
  */
 void MainMenuLoadMap::entry_selected() {
-	bool has_selection = table_.has_selection();
-	if (!has_selection) {
-		ok_.set_enabled(false);
-		map_details_.clear();
-	} else {
+	if (set_has_selection()) {
 		ok_.set_enabled(map_details_.update(
-		   maps_data_[table_.get_selected()],
+		   table_.get_selected_data(),
 		   display_mode_.get_selected() == MapData::DisplayType::kMapnamesLocalized, true));
 	}
 }

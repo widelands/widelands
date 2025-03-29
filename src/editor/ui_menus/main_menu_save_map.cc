@@ -130,8 +130,8 @@ void MainMenuSaveMap::clicked_ok() {
 	std::string localized_name;
 
 	if (filename.empty() && table_.has_selection()) {  //  Maybe a directory is selected.
-		complete_filename = filename = maps_data_[table_.get_selected()].filenames;
-		localized_name = maps_data_[table_.get_selected()].localized_name;
+		complete_filename = filename = table_.get_selected_data().filenames;
+		localized_name = table_.get_selected_data().localized_name;
 	} else {
 		complete_filename = {curdir_.at(0) + FileSystem::file_separator() + filename.at(0)};
 	}
@@ -235,10 +235,10 @@ void MainMenuSaveMap::update_map_options() {
 void MainMenuSaveMap::clicked_item() {
 	// Only change editbox contents
 	if (table_.has_selection()) {
-		const MapData& mapdata = maps_data_[table_.get_selected()];
+		const MapData& mapdata = table_.get_selected_data();
 		if (mapdata.maptype != MapData::MapType::kDirectory) {
 			editbox_.set_text(
-			   FileSystem::fs_filename(maps_data_[table_.get_selected()].filenames.at(0).c_str()));
+			   FileSystem::fs_filename(mapdata.filenames.at(0).c_str()));
 			edit_box_changed();
 		}
 	}
@@ -249,7 +249,7 @@ void MainMenuSaveMap::clicked_item() {
  */
 void MainMenuSaveMap::double_clicked_item() {
 	assert(table_.has_selection());
-	const MapData& mapdata = maps_data_[table_.get_selected()];
+	const MapData& mapdata = table_.get_selected_data();
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
 		navigate_directory(mapdata.filenames, mapdata.localized_name);
 	} else {

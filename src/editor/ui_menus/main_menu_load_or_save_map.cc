@@ -26,8 +26,6 @@
 #include "graphic/font_handler.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/addons.h"
-#include "map_io/widelands_map_loader.h"
 
 MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
                                              Registry& registry,
@@ -128,10 +126,6 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	main_box_.add_space(padding_);
 	main_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
 
-	table_.set_column_compare(0, [this](uint32_t a, uint32_t b) { return compare_players(a, b); });
-	table_.set_column_compare(1, [this](uint32_t a, uint32_t b) { return compare_mapnames(a, b); });
-	table_.set_column_compare(2, [this](uint32_t a, uint32_t b) { return compare_size(a, b); });
-
 	table_box_.add(&display_mode_, UI::Box::Resizing::kFullSize);
 	table_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
 	table_and_details_box_.add(&table_box_, UI::Box::Resizing::kExpandBoth);
@@ -162,18 +156,6 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	set_z(UI::Panel::ZOrder::kFullscreenWindow);
 }
 
-bool MainMenuLoadOrSaveMap::compare_players(uint32_t rowa, uint32_t rowb) {
-	return maps_data_[table_[rowa]].compare_players(maps_data_[table_[rowb]]);
-}
-
-bool MainMenuLoadOrSaveMap::compare_mapnames(uint32_t rowa, uint32_t rowb) {
-	return maps_data_[table_[rowa]].compare_names(maps_data_[table_[rowb]]);
-}
-
-bool MainMenuLoadOrSaveMap::compare_size(uint32_t rowa, uint32_t rowb) {
-	return maps_data_[table_[rowa]].compare_size(maps_data_[table_[rowb]]);
-}
-
 void MainMenuLoadOrSaveMap::layout() {
 	main_box_.set_size(get_inner_w() - 2 * padding_, get_inner_h() - 2 * padding_);
 
@@ -183,122 +165,39 @@ void MainMenuLoadOrSaveMap::layout() {
 	center_to_parent();
 }
 
-void MainMenuLoadOrSaveMap::update_table() {
-	table_.fill(maps_data_, display_mode_.get_selected());
-	if (!table_.empty()) {
-		table_.select(0);
-	} else {
+bool MainMenuLoadOrSaveMap::set_has_selection() {
+	bool has_selection = table_.has_selection();
+
+	if (!has_selection) {
 		ok_.set_enabled(false);
+		map_details_.clear();
 	}
+	return has_selection;
 }
 
 void MainMenuLoadOrSaveMap::navigate_directory(const std::vector<std::string>& filenames, const std::string& localized_name) {
 	set_current_directory(filenames);
-	if (!localized_name.empty() && localized_name == MapData::parent_name()) {
-		/* navigate up */
-		table_.clear();
-		maps_data_.clear();
-		maps_data_ = std::move(parent_data_.at(0));
-		parent_data_.pop_front();
-
-		update_table();
+	if (localized_name == MapData::parent_name()) {
+		table_.update_table(display_mode_.get_selected(), true);
 	} else {
 		fill_table();
 	}
+	set_has_selection();
 }
 
 /**
  * fill the file list
  */
-// TODO(Nordfriese): Code duplication with FsMenu::MapSelect::fill_table
 void MainMenuLoadOrSaveMap::fill_table() {
-	table_.clear();
-	parent_data_.push_front(maps_data_);
-	maps_data_.clear();
+	Widelands::Map::ScenarioTypes scenario_types = Widelands::Map::MP_SCENARIO | Widelands::Map::SP_SCENARIO;
+	/* No filtering */
+	MapTable::FilterFn filter = [](MapData&) { return true; };
 
-	//  Fill it with all files we find.
-	assert(!curdir_.empty());
-	FilenameSet files;
-	for (const std::string& dir : curdir_) {
-		FilenameSet f = g_fs->list_directory(dir);
-		files.insert(f.begin(), f.end());
-	}
-
-	// If we are not at the top of the map directory hierarchy (we're not talking
-	// about the absolute filesystem top!) we manually add ".."
-	if (curdir_.at(0) != basedir_) {
-		maps_data_.push_back(MapData::create_parent_dir(curdir_.at(0)));
-	} else {
-		if (files.empty()) {
-			maps_data_.push_back(MapData::create_empty_dir(curdir_.at(0)));
-		}
-		// In the toplevel directory we also need to include add-on maps –
-		// but only in the load screen, not in the save screen!
-		if (include_addon_maps_) {
-			for (const auto& addon : AddOns::g_addons) {
-				if (addon.first->category == AddOns::AddOnCategory::kMaps && addon.second) {
-					for (const std::string& mapname : g_fs->list_directory(
-					        kAddOnDir + FileSystem::file_separator() + addon.first->internal_name)) {
-						files.insert(mapname);
-					}
-				}
-			}
-		}
-	}
-
-	const MapData::DisplayType display_type = display_mode_.get_selected();
-
-	Widelands::Map map;
-
-	for (const std::string& mapfilename : files) {
-		// Add map file (compressed) or map directory (uncompressed)
-		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
-		if (ml != nullptr) {
-			try {
-				ml->preload_map(true, nullptr);
-
-				if ((map.get_width() == 0) || (map.get_height() == 0)) {
-					continue;
-				}
-
-				MapData::MapType maptype;
-
-				if (((map.scenario_types() & Widelands::Map::MP_SCENARIO) != 0u) ||
-				    ((map.scenario_types() & Widelands::Map::SP_SCENARIO) != 0u)) {
-					maptype = MapData::MapType::kScenario;
-				} else if (dynamic_cast<Widelands::WidelandsMapLoader*>(ml.get()) != nullptr) {
-					maptype = MapData::MapType::kNormal;
-				} else {
-					maptype = MapData::MapType::kSettlers2;
-				}
-
-				maps_data_.emplace_back(map, mapfilename, maptype, display_type);
-			} catch (const std::exception& e) {
-				log_warn("Map list: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
-			}  //  we simply skip illegal entries
-		} else if (g_fs->is_directory(mapfilename) &&
-		           (show_empty_dirs_ || !g_fs->list_directory(mapfilename).empty())) {
-			// Add subdirectory to the list
-			const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
-			if ((strcmp(fs_filename, ".") == 0) || (strcmp(fs_filename, "..") == 0)) {
-				continue;
-			}
-
-			MapData new_md = MapData::create_directory(mapfilename);
-
-			auto found = std::find_if(maps_data_.begin(), maps_data_.end(),
-									   [&new_md](const MapData& md) {
-										   return md.maptype == MapData::MapType::kDirectory &&
-												  md.localized_name == new_md.localized_name;
-									   });
-
-			if (found != maps_data_.end()) {
-				found->add(new_md);
-			} else {
-				maps_data_.push_back(new_md);
-			}
-		}
-	}
-
-	update_table();
+	table_.fill(curdir_,
+				basedir_,
+				display_mode_.get_selected(),
+				scenario_types,
+				filter,
+				include_addon_maps_,
+				show_empty_dirs_);
 }
