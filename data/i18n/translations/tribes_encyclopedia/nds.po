@@ -1620,7 +1620,7 @@ msgctxt "amazons_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce a tapir"
 " in %s on average."
-msgstr ""
+msgstr "Wenn alle nödigen Waren to rechter Tied ankomen, produzeert deeses Huus dör de Bank all %s eenen Tapir."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Cassava
 #. Plantation
@@ -1705,7 +1705,7 @@ msgctxt "amazons_building"
 msgid ""
 "If all needed wares are delivered in time, a warriors’ gathering can train "
 "one soldier one level in attack in %s on average."
-msgstr ""
+msgstr "Wenn alle nödigen Waren to rechter Tied ankomen, bildt de Soldatsken-Versammeln dör de Bank in %s eene Soldatske um eenen Stand in Angriff ut."
 
 #. TRANSLATORS: Performance helptext for an Amazon training site: Warriors’
 #. Gathering, part 2
@@ -1716,7 +1716,7 @@ msgstr ""
 #, lua-format
 msgctxt "amazons_building"
 msgid "Complete training of one soldier takes %s on average."
-msgstr ""
+msgstr "Eene Soldatske kumpleet uttobilden düürt dör de Bank %s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon training site: Training Glade
 #: ../../../../data/tribes/initialization/amazons/units.lua:1613
@@ -1734,7 +1734,7 @@ msgid ""
 "If all needed wares are delivered in time, a training glade can train one "
 "soldier first level in evade or health, or both defense levels in %1$s on "
 "average. The rest of evade and health levels are trained in %2$s each."
-msgstr ""
+msgstr "Wenn alle nödigen Waren to rechter Tied ankomen, bildt de Övenshain dör de Bank eene Soldatske in %1$s um eenen Stand in Verteidigung of um de eersten Stand in Utwieken of Gesundheid ut. Elkeen vun de anner Standen vun Utwieken un Gesundheid düürt %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon military site: Patrol Post
 #. TRANSLATORS: Purpose helptext for an Amazon military site: Treetop Sentry
@@ -4945,7 +4945,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce a horse"
 " in %s on average."
-msgstr ""
+msgstr "Wenn alle nödigen Waren to rechter Tied ankomen, produzeert deeses Huus dör de Bank all %s een Peerd."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1815
@@ -5262,7 +5262,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If all needed wares are delivered in time, a dungeon can train one soldier "
 "one level in attack in %s on average."
-msgstr ""
+msgstr "Wenn alle nödigen Waren to rechter Tied ankomen, bilden de Gefahrelken Gangen dör de Bank in %s eenen Soldaten um eenen Stand in Angriff ut."
 
 #. TRANSLATORS: Performance helptext for an Atlantean training site: Dungeon,
 #. part 2
@@ -5273,7 +5273,7 @@ msgstr ""
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "Complete training of one soldier takes %s on average."
-msgstr ""
+msgstr "Eenen Soldaten kumpleet uttobilden düürt dör de Bank %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean training site: Labyrinth,
 #. part 1
@@ -5304,7 +5304,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If all needed wares are delivered in time, a labyrinth can train one soldier"
 " one level in defense, evade or health in %s on average."
-msgstr ""
+msgstr "Wenn alle nödigen Waren to rechter Tied ankomen, bilden de Dwaalwegen dör de Bank in %s eenen Soldaten um eenen Stand in Verteidigung, Utwieken of Gesundheid ut."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean military site: Guardhouse
 #. TRANSLATORS: Purpose helptext for an Atlantean military site: Guardhall
@@ -7839,7 +7839,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, a battle arena can train one "
 "soldier one level in evade in %s on average."
-msgstr ""
+msgstr "Wenn alle nödigen Waren to rechter Tied ankomen, bildt de Slachtenring dör de Bank in %s eenen Soldaten um eenen Stand in Utwieken ut."
 
 #. TRANSLATORS: Performance helptext for a Barbarian training site: Battle
 #. Arena, part 2
@@ -7850,7 +7850,7 @@ msgstr ""
 #, lua-format
 msgctxt "barbarians_building"
 msgid "Complete training of one soldier takes %s on average."
-msgstr ""
+msgstr "Eenen Soldaten kumpleet uttobilden düürt dör de Bank %s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian training site: Training Camp
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1722
@@ -7889,7 +7889,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, a training camp can train one "
 "soldier one level in attack or health in %s on average."
-msgstr ""
+msgstr "Wenn alle nödigen Waren to rechter Tied ankomen, bildt dat Övens-Lager dör de Bank in %s eenen Soldaten um eenen Stand in Angriff of Gesundheid ut."
 
 #. TRANSLATORS: Lore helptext for a Barbarian military site: Sentry
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1747
@@ -8040,7 +8040,7 @@ msgstr "Weevt Stoff ut Reit."
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The weaving mill needs %s on average to produce one cloth."
-msgstr ""
+msgstr "De Weevstohl bruukt dör de Bank %s um een Deel Stoff to produzeren."
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1896
@@ -11771,7 +11771,7 @@ msgctxt "empire_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce a "
 "donkey in %s on average."
-msgstr ""
+msgstr "Wenn alle nödigen Waren to rechter Tied ankomen, produzeert deeses Huus dör de Bank all %s een Langohr."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11897,7 +11897,7 @@ msgstr "Weevt Stoff ut Wulle."
 #, lua-format
 msgctxt "empire_building"
 msgid "The weaving mill needs %s on average to produce one cloth."
-msgstr ""
+msgstr "De Weevstohl bruukt dör de Bank %s um een Deel Stoff to produzeren."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12232,7 +12232,7 @@ msgctxt "empire_building"
 msgid ""
 "If all needed wares are delivered in time, an arena can train one soldier "
 "first level in evade in %s on average."
-msgstr ""
+msgstr "Wenn alle nödigen Waren to rechter Tied ankomen, bildt de Ring dör de Bank in %s eenen Soldaten um de eersten Stand in Utwieken ut."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12263,7 +12263,7 @@ msgctxt "empire_building"
 msgid ""
 "If all needed wares are delivered in time, a colosseum can train one soldier"
 " one level in evade in %s on average."
-msgstr ""
+msgstr "Wenn alle nödigen Waren to rechter Tied ankomen, bildt de Grote Ring dör de Bank in %s eenen Soldaten um eenen Stand in Utwieken ut."
 
 #. TRANSLATORS: Performance helptext for an Empire training site: Colosseum,
 #. part 2
@@ -12274,7 +12274,7 @@ msgstr ""
 #, lua-format
 msgctxt "empire_building"
 msgid "Complete training of one soldier takes %s on average."
-msgstr ""
+msgstr "Eenen Soldaten kumpleet uttobilden düürt dör de Bank %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12320,7 +12320,7 @@ msgctxt "empire_building"
 msgid ""
 "If all needed wares are delivered in time, a training camp can train one "
 "soldier one level in attack or health in %s on average."
-msgstr ""
+msgstr "Wenn alle nödigen Waren to rechter Tied ankomen, bildt dat Övens-Lager dör de Bank in %s eenen Soldaten um eenen Stand in Angriff of Gesundheid ut."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -15700,7 +15700,7 @@ msgctxt "frisians_building"
 msgid ""
 "If all needed wares are delivered in time, a training camp can train one "
 "soldier one level in attack, defense or health in %s on average."
-msgstr ""
+msgstr "Wenn alle nödigen Waren to rechter Tied ankomen, bildt dat Övens-Lager dör de Bank in %s eenen Soldaten um eenen Stand in Angriff, Verteidigung of Gesundheid ut."
 
 #. TRANSLATORS: Performance helptext for a Frisian training site: Training
 #. Camp, part 2
@@ -15711,7 +15711,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "Complete training of one soldier takes %s on average."
-msgstr ""
+msgstr "Eenen Soldaten kumpleet uttobilden düürt dör de Bank %s."
 
 #. TRANSLATORS: Lore helptext for a Frisian training site: Training Arena
 #: ../../../../data/tribes/initialization/frisians/units.lua:2146
@@ -15746,7 +15746,7 @@ msgid ""
 "If all needed wares are delivered in time, a training arena can train one "
 "soldier one level in attack in %1$s, one level in defense in %2$s and one "
 "level in health in %3$s on average."
-msgstr ""
+msgstr "Wenn alle nödigen Waren to rechter Tied ankomen, bildt de Övens-Ring dör de Bank eenen Soldaten in %1$s um eenen Stand in Angriff, in %2$s um eenen Stand in Verteidigung of in %3$s um eenen Stand in Gesundheid ut."
 
 #. TRANSLATORS: Purpose helptext for a Frisian military site: Wooden Tower
 #. TRANSLATORS: Purpose helptext for a Frisian military site: High Wooden
