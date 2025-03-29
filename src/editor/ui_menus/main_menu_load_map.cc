@@ -18,6 +18,8 @@
 
 #include "editor/ui_menus/main_menu_load_map.h"
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "base/string.h"
 #include "editor/editorinteractive.h"
@@ -74,10 +76,41 @@ void MainMenuLoadMap::set_current_directory(const std::vector<std::string>& file
 	assert(!filenames.empty());
 	curdir_ = filenames;
 
-	std::string display_dir = curdir_.at(0).substr(basedir_.size());
+	std::string display_dir = curdir_.at(0);
+	if (starts_with(display_dir, basedir_)) {
+		replace_first(display_dir, basedir_, "");
+	} else if (starts_with(display_dir, kAddOnDir)) {
+		std::vector<std::string> result;
+		split(result, display_dir, {'/'});
+		assert(result.size() > 2);
+
+		/* translate directory names */
+		std::string& addon = result.at(1);
+		std::unique_ptr<i18n::GenericTextdomain> td(AddOns::create_textdomain_for_addon(addon));
+		std::string profilepath = kAddOnDir;
+		profilepath += FileSystem::file_separator();
+		profilepath += addon;
+		profilepath += FileSystem::file_separator();
+		profilepath += "dirnames";
+		Profile p(profilepath.c_str());
+
+		/* strip away addons/<addon-name>/ */
+		result.erase(result.begin(), result.begin() + 2);
+
+		if (Section* s = p.get_section("global")) {
+			for (auto& fname : result) {
+				if (s->has_val(fname.c_str())) {
+					fname = s->get_safe_string(fname);
+				}
+			}
+		}
+		display_dir = join(result, "/");
+	}
+
 	if (starts_with(display_dir, "/")) {
 		display_dir = display_dir.substr(1);
 	}
+
 	if (starts_with(display_dir, kMyMapsDir)) {
 		replace_first(display_dir, kMyMapsDir, _("My Maps"));
 	} else if (starts_with(display_dir, kMultiPlayerScenarioDir)) {
