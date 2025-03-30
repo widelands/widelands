@@ -1552,7 +1552,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Tapir Farm
             purpose = pgettext("amazons_building", "Breeds tapirs for adding them to the transportation system."),
             -- TRANSLATORS: Note helptext for an Amazon production site: Tapir Farm
-            note = pgettext ("amazons_building", "Tapirs help to prevent traffic jams on highly used roads.")
+            note = pgettext ("amazons_building", "Tapirs help to prevent traffic jams on highly used roads."),
+            -- TRANSLATORS: Performance helptext for an Amazon production site: Tapir Farm
+            performance = pgettext("amazons_building", "If all needed wares are delivered in time, this building can produce a tapir in %s on average."):bformat(format_seconds(30))
          }
       },
       {
@@ -1601,7 +1603,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon training site: Warriors’ Gathering
             purpose = pgettext("amazons_building", "Trains soldiers in Attack up to level 2. Equips the soldiers with all necessary weapons."),
             -- TRANSLATORS: Note helptext for an Amazon training site: Warriors’ Gathering
-            note = pgettext("amazons_building", "Amazon soldiers need chocolate to train properly.")
+            note = pgettext("amazons_building", "Amazon soldiers need chocolate to train properly."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon training site: Warriors’ Gathering, part 1
+               pgettext("amazons_building", "If all needed wares are delivered in time, a warriors’ gathering can train one soldier one level in attack in %s on average."):bformat(format_seconds(36)),
+               -- TRANSLATORS: Performance helptext for an Amazon training site: Warriors’ Gathering, part 2
+               pgettext("amazons_building", "Complete training of one soldier takes %s on average."):bformat(format_minutes_seconds(1, 12))
+            }
          }
       },
       {
@@ -1610,7 +1618,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon training site: Training Glade
             purpose = pgettext("amazons_building", "Trains soldiers in Evade, Defense and Health. Equips the soldiers with all necessary equipment and armor parts."),
             -- TRANSLATORS: Note helptext for an Amazon training site: Training Glade
-            note = pgettext("amazons_building", "Amazon soldiers need chocolate to train properly.")
+            note = pgettext("amazons_building", "Amazon soldiers need chocolate to train properly."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon training site: Training Glade, part 1
+               pgettext("amazons_building", "If all needed wares are delivered in time, a training glade can train one soldier first level in evade or health, or both defense levels in %1$s on average. The rest of evade and health levels are trained in %2$s each."):bformat(format_seconds(29), format_seconds(22)),
+               -- TRANSLATORS: Performance helptext for an Amazon training site: Training Glade, part 2
+               pgettext("amazons_building", "Complete training of one soldier takes %s on average."):bformat(format_minutes_seconds(3, 33))
+            }
          }
       },
 
