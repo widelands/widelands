@@ -251,7 +251,8 @@ bool MapSelect::set_has_selection() {
 	return has_selection;
 }
 
-void MapSelect::navigate_directory(const std::vector<std::string>& filenames, const std::string& localized_name) {
+void MapSelect::navigate_directory(const std::vector<std::string>& filenames,
+                                   const std::string& localized_name) {
 	curdir_ = filenames;
 	if (localized_name == MapData::parent_name()) {
 		MapData::DisplayType display_type;
@@ -302,8 +303,7 @@ void MapSelect::fill_table() {
 	bool unspecified_balancing_found = false;
 
 	MapTable::FilterFn filter = [this, &unspecified_balancing_found](MapData& mapdata) {
-		has_translated_mapname_ =
-			has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
+		has_translated_mapname_ = has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
 
 		bool has_all_tags = true;
 		if (team_tags_dropdown_->has_selection()) {
@@ -334,14 +334,13 @@ void MapSelect::fill_table() {
 			}
 		}
 		// Backwards compatibility
-		if ((mapdata.tags.count("balanced") == 0u) &&
-			(mapdata.tags.count("unbalanced") == 0u)) {
+		if ((mapdata.tags.count("balanced") == 0u) && (mapdata.tags.count("unbalanced") == 0u)) {
 			unspecified_balancing_found = true;
 		} else if ((mapdata.tags.count("balanced") != 0u) &&
-				   (mapdata.tags.count("unbalanced") != 0u)) {
+		           (mapdata.tags.count("unbalanced") != 0u)) {
 			log_warn("Map '%s' is both balanced and unbalanced - please fix the 'elemental' "
-					 "packet\n",
-					 mapdata.localized_name.c_str());
+			         "packet\n",
+			         mapdata.localized_name.c_str());
 		}
 
 		for (uint32_t tag : req_tags_) {
@@ -351,12 +350,7 @@ void MapSelect::fill_table() {
 		return has_all_tags;
 	};
 
-	table_.fill(curdir_,
-				basedir_,
-				display_type,
-				scenario_types_,
-				filter,
-				true);
+	table_.fill(curdir_, basedir_, display_type, scenario_types_, filter, true);
 
 	if (unspecified_balancing_found != unspecified_balancing_found_) {
 		unspecified_balancing_found_ = unspecified_balancing_found;

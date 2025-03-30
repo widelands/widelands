@@ -175,7 +175,8 @@ bool MainMenuLoadOrSaveMap::set_has_selection() {
 	return has_selection;
 }
 
-void MainMenuLoadOrSaveMap::navigate_directory(const std::vector<std::string>& filenames, const std::string& localized_name) {
+void MainMenuLoadOrSaveMap::navigate_directory(const std::vector<std::string>& filenames,
+                                               const std::string& localized_name) {
 	set_current_directory(filenames);
 	if (localized_name == MapData::parent_name()) {
 		table_.update_table(display_mode_.get_selected(), true);
@@ -189,15 +190,11 @@ void MainMenuLoadOrSaveMap::navigate_directory(const std::vector<std::string>& f
  * fill the file list
  */
 void MainMenuLoadOrSaveMap::fill_table() {
-	Widelands::Map::ScenarioTypes scenario_types = Widelands::Map::MP_SCENARIO | Widelands::Map::SP_SCENARIO;
+	Widelands::Map::ScenarioTypes scenario_types =
+	   Widelands::Map::MP_SCENARIO | Widelands::Map::SP_SCENARIO;
 	/* No filtering */
 	MapTable::FilterFn filter = [](MapData&) { return true; };
 
-	table_.fill(curdir_,
-				basedir_,
-				display_mode_.get_selected(),
-				scenario_types,
-				filter,
-				include_addon_maps_,
-				show_empty_dirs_);
+	table_.fill(curdir_, basedir_, display_mode_.get_selected(), scenario_types, filter,
+	            include_addon_maps_, show_empty_dirs_);
 }

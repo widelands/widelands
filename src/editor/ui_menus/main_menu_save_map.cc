@@ -237,8 +237,7 @@ void MainMenuSaveMap::clicked_item() {
 	if (table_.has_selection()) {
 		const MapData& mapdata = table_.get_selected_data();
 		if (mapdata.maptype != MapData::MapType::kDirectory) {
-			editbox_.set_text(
-			   FileSystem::fs_filename(mapdata.filenames.at(0).c_str()));
+			editbox_.set_text(FileSystem::fs_filename(mapdata.filenames.at(0).c_str()));
 			edit_box_changed();
 		}
 	}

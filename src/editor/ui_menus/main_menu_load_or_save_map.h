@@ -45,7 +45,8 @@ protected:
 	// Sets the current dir and updates labels.
 	virtual void set_current_directory(const std::vector<std::string>& filenames) = 0;
 	void layout() override;
-	void navigate_directory(const std::vector<std::string>& filenames, const std::string& localized_name);
+	void navigate_directory(const std::vector<std::string>& filenames,
+	                        const std::string& localized_name);
 	bool set_has_selection();
 
 	// Private variables first, because compiler would complain about initialization order otherwise

@@ -111,17 +111,17 @@ void MapTable::fill(const std::vector<MapData>& entries, MapData::DisplayType ty
  *
  */
 void MapTable::fill(const std::vector<std::string>& directories,
-					const std::string& basedir,
-					MapData::DisplayType display_type,
-					Widelands::Map::ScenarioTypes scenario_types,
-					FilterFn filter,
-					bool include_addon_maps,
-					bool show_empty_dirs) {
+                    const std::string& basedir,
+                    MapData::DisplayType display_type,
+                    Widelands::Map::ScenarioTypes scenario_types,
+                    FilterFn filter,
+                    bool include_addon_maps,
+                    bool show_empty_dirs) {
 	clear();
 	parent_data_.push_front(maps_data_);
 	maps_data_.clear();
 
-		   //  Fill it with all files we find.
+	//  Fill it with all files we find.
 	assert(!directories.empty());
 	FilenameSet files;
 	for (const std::string& dir : directories) {
@@ -129,8 +129,8 @@ void MapTable::fill(const std::vector<std::string>& directories,
 		files.insert(f.begin(), f.end());
 	}
 
-		   // If we are not at the top of the map directory hierarchy (we're not talking
-		   // about the absolute filesystem top!) we manually add ".."
+	// If we are not at the top of the map directory hierarchy (we're not talking
+	// about the absolute filesystem top!) we manually add ".."
 	if (directories.at(0) != basedir) {
 		maps_data_.push_back(MapData::create_parent_dir(directories.at(0)));
 	} else {
@@ -143,7 +143,7 @@ void MapTable::fill(const std::vector<std::string>& directories,
 			for (const auto& addon : AddOns::g_addons) {
 				if (addon.first->category == AddOns::AddOnCategory::kMaps && addon.second) {
 					for (const std::string& mapname : g_fs->list_directory(
-							 kAddOnDir + FileSystem::file_separator() + addon.first->internal_name)) {
+					        kAddOnDir + FileSystem::file_separator() + addon.first->internal_name)) {
 						files.insert(mapname);
 					}
 				}
@@ -184,7 +184,7 @@ void MapTable::fill(const std::vector<std::string>& directories,
 				log_warn("Map list: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
 			}  //  we simply skip illegal entries
 		} else if (g_fs->is_directory(mapfilename) &&
-				   (show_empty_dirs || !g_fs->list_directory(mapfilename).empty())) {
+		           (show_empty_dirs || !g_fs->list_directory(mapfilename).empty())) {
 			// Add subdirectory to the list
 			const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
 			if ((strcmp(fs_filename, ".") == 0) || (strcmp(fs_filename, "..") == 0)) {
@@ -193,11 +193,11 @@ void MapTable::fill(const std::vector<std::string>& directories,
 
 			MapData new_md = MapData::create_directory(mapfilename);
 
-			auto found = std::find_if(maps_data_.begin(), maps_data_.end(),
-									  [&new_md](const MapData& md) {
-										  return md.maptype == MapData::MapType::kDirectory &&
-												 md.localized_name == new_md.localized_name;
-									  });
+			auto found =
+			   std::find_if(maps_data_.begin(), maps_data_.end(), [&new_md](const MapData& md) {
+				   return md.maptype == MapData::MapType::kDirectory &&
+				          md.localized_name == new_md.localized_name;
+			   });
 
 			if (found != maps_data_.end()) {
 				found->add(new_md);
