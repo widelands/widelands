@@ -49,8 +49,8 @@ public:
 	struct TradeOrder {
 		Market* market{nullptr};
 		BillOfMaterials items;
-		int initial_num_batches{0};
-		int num_shipped_batches{0};
+		int32_t initial_num_batches{0};
+		int32_t num_shipped_batches{0};
 		OPtr<Market> other_side{nullptr};
 		bool paused{false};
 
@@ -94,7 +94,7 @@ public:
 
 	void new_trade(TradeID trade_id,
 	               const BillOfMaterials& items,
-	               int num_batches,
+	               int32_t num_batches,
 	               OPtr<Market> other_side);
 	void cancel_trade(Game& game, TradeID trade_id, bool reached_regular_end, bool send_msg);
 	void move_trade_to(Game& game, TradeID trade_id, Market& dest);
