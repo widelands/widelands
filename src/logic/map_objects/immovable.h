@@ -367,6 +367,8 @@ struct PlayerImmovable : public BaseImmovable {
 	virtual void add_worker(Worker&);
 	virtual void remove_worker(Worker&);
 
+	virtual void kickout_worker_from_queue(Game& game, Worker& worker);
+
 	using Workers = std::vector<Worker*>;
 
 	/**
