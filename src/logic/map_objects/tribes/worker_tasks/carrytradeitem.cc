@@ -47,7 +47,10 @@ void Worker::carry_trade_item_update(Game& game, State& state) {
 	signal_handled();
 	if (!signal.empty()) {
 		if (signal == "trade") {
-			molog(game.get_gametime(), "carry_trade_item_update: trade interrupted in phase %d, will pop task after delivery", state.ivar1);
+			molog(
+			   game.get_gametime(),
+			   "carry_trade_item_update: trade interrupted in phase %d, will pop task after delivery",
+			   state.ivar1);
 			state.ivar3 = 1;
 		} else {
 			// TODO(sirver,trading): Remove once signals are correctly handled.
@@ -82,7 +85,8 @@ void Worker::carry_trade_item_update(Game& game, State& state) {
 		// Otherwise continue making progress towards the other market.
 		if (!start_task_movepath(game, other_market->base_flag().get_position(), 5,
 		                         descr().get_right_walk_anims(does_carry_ware(), this))) {
-			molog(game.get_gametime(), "carry_trade_item_update: Could not move to other flag! Cancelling trade.");
+			molog(game.get_gametime(),
+			      "carry_trade_item_update: Could not move to other flag! Cancelling trade.");
 
 			game.cancel_trade(state.ivar2, false, get_owner());
 
@@ -115,7 +119,8 @@ void Worker::carry_trade_item_update(Game& game, State& state) {
 			start_task_idle(game, 0, -1);
 			market->try_launching_batch(&game);
 		} else {
-			molog(game.get_gametime(), "carry_trade_item_update: Completed delivery; disassociated from market.\n");
+			molog(game.get_gametime(),
+			      "carry_trade_item_update: Completed delivery; disassociated from market.\n");
 			reset_tasks(game);
 		}
 		return;

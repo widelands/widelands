@@ -623,13 +623,16 @@ void Market::traded_ware_arrived(const TradeID trade_id,
 	}
 
 	if (trade_order != trade_orders_.end()) {
-		if (Market* other_market = trade_order->second->other_side.get(*game); other_market != nullptr) {
+		if (Market* other_market = trade_order->second->other_side.get(*game);
+		    other_market != nullptr) {
 			other_market->get_owner()->ware_consumed(ware_index, 1);
 
 			auto other_trade_order = other_market->trade_orders_.find(trade_id);
 			if (other_trade_order != other_market->trade_orders_.end() &&
-				trade_order->second->received_traded_wares_in_this_batch == other_trade_order->second->num_wares_per_batch() &&
-				other_trade_order->second->received_traded_wares_in_this_batch == trade_order->second->num_wares_per_batch()) {
+			    trade_order->second->received_traded_wares_in_this_batch ==
+			       other_trade_order->second->num_wares_per_batch() &&
+			    other_trade_order->second->received_traded_wares_in_this_batch ==
+			       trade_order->second->num_wares_per_batch()) {
 				// This batch is completed.
 				++trade_order->second->num_shipped_batches;
 				trade_order->second->received_traded_wares_in_this_batch = 0;
