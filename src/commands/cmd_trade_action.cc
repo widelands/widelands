@@ -23,9 +23,17 @@
 
 namespace Widelands {
 
-CmdTradeAction::CmdTradeAction(
-   const Time& time, PlayerNumber pn, TradeID trade_id, TradeAction action, Serial accepter)
-   : PlayerCommand(time, pn), trade_id_(trade_id), action_(action), accepter_(accepter) {
+CmdTradeAction::CmdTradeAction(const Time& time,
+                               PlayerNumber pn,
+                               TradeID trade_id,
+                               TradeAction action,
+                               Serial accepter,
+                               Serial source)
+   : PlayerCommand(time, pn),
+     trade_id_(trade_id),
+     action_(action),
+     accepter_(accepter),
+     source_(source) {
 }
 
 CmdTradeAction::CmdTradeAction() = default;
@@ -59,6 +67,16 @@ void CmdTradeAction::execute(Game& game) {
 		}
 		break;
 
+	case TradeAction::kMove:
+		if (Market* new_market = dynamic_cast<Market*>(game.objects().get_object(accepter_));
+		    new_market != nullptr) {
+			if (Market* old_market = dynamic_cast<Market*>(game.objects().get_object(source_));
+			    old_market != nullptr) {
+				game.move_trade(trade_id_, *old_market, *new_market);
+			}
+		}
+		break;
+
 	default:
 		throw wexception("CmdTradeAction: unrecognized action %u", static_cast<uint8_t>(action_));
 	}
@@ -68,6 +86,7 @@ CmdTradeAction::CmdTradeAction(StreamRead& des) : PlayerCommand(Time(0), des.uns
 	trade_id_ = des.unsigned_32();
 	action_ = static_cast<TradeAction>(des.unsigned_8());
 	accepter_ = des.unsigned_32();
+	source_ = des.unsigned_32();
 }
 
 void CmdTradeAction::serialize(StreamWrite& ser) {
@@ -75,18 +94,25 @@ void CmdTradeAction::serialize(StreamWrite& ser) {
 	ser.unsigned_32(trade_id_);
 	ser.unsigned_8(static_cast<uint8_t>(action_));
 	ser.unsigned_32(accepter_);
+	ser.unsigned_32(source_);
 }
 
-constexpr uint8_t kCurrentPacketVersionCmdTradeAction = 1;
+/* Changelog:
+ * 1 (pre-v1.3): Initial version
+ * 2 (v1.3): Added `source` parameter
+ */
+constexpr uint8_t kCurrentPacketVersionCmdTradeAction = 2;
 
 void CmdTradeAction::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersionCmdTradeAction) {
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionCmdTradeAction) {
 			PlayerCommand::read(fr, egbase, mol);
 			trade_id_ = fr.unsigned_32();
 			action_ = static_cast<TradeAction>(fr.unsigned_8());
 			accepter_ = fr.unsigned_32();
+			// TODO(Nordfriese): Savegame compatibility v1.2
+			source_ = packet_version >= 2 ? fr.unsigned_32() : 0;
 		} else {
 			throw UnhandledVersionError(
 			   "CmdTradeAction", packet_version, kCurrentPacketVersionCmdTradeAction);
@@ -102,6 +128,7 @@ void CmdTradeAction::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver
 	fw.unsigned_32(trade_id_);
 	fw.unsigned_8(static_cast<uint8_t>(action_));
 	fw.unsigned_32(accepter_);
+	fw.unsigned_32(source_);
 }
 
 }  // namespace Widelands

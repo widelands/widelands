@@ -45,9 +45,14 @@ void Worker::carry_trade_item_update(Game& game, State& state) {
 	std::string signal = get_signal();
 	signal_handled();
 	if (!signal.empty()) {
-		// TODO(sirver,trading): Remove once signals are correctly handled.
-		log_dbg_time(
-		   game.get_gametime(), "carry_trade_item_update: signal received: %s\n", signal.c_str());
+		if (signal == "cancel" && state.ivar1 < 3) {
+			// On cancel, skip ahead to returning home without delivering the ware.
+			state.ivar1 = 3;
+		} else {
+			// TODO(sirver,trading): Remove once signals are correctly handled.
+			log_dbg_time(
+			   game.get_gametime(), "carry_trade_item_update: signal received: %s\n", signal.c_str());
+		}
 	}
 
 	// First of all, make sure we're outside
@@ -86,7 +91,7 @@ void Worker::carry_trade_item_update(Game& game, State& state) {
 
 	if (state.ivar1 == 3) {
 		++state.ivar1;
-		start_task_return(game, false);
+		start_task_return(game, true);
 		return;
 	}
 

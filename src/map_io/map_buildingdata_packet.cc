@@ -618,21 +618,22 @@ void MapBuildingdataPacket::read_market(Market& market,
 			assert(market.trade_orders_.empty());
 			for (size_t i = fr.unsigned_32(); i > 0; --i) {
 				const TradeID trade_id = fr.unsigned_32();
-				Market::TradeOrder& trade = market.trade_orders_[trade_id];
-				trade.market = &market;
+				std::unique_ptr<Market::TradeOrder>& trade = market.trade_orders_[trade_id];
+				trade.reset(new Market::TradeOrder());
+				trade->market = &market;
 
 				Serial s = fr.unsigned_32();
-				trade.other_side = s == 0 ? nullptr : &mol.get<Market>(s);
+				trade->other_side = s == 0 ? nullptr : &mol.get<Market>(s);
 
-				trade.initial_num_batches = fr.signed_32();
-				trade.num_shipped_batches = fr.signed_32();
-				trade.received_traded_wares_in_this_batch = fr.unsigned_32();
-				trade.paused = fr.unsigned_8() != 0;
+				trade->initial_num_batches = fr.signed_32();
+				trade->num_shipped_batches = fr.signed_32();
+				trade->received_traded_wares_in_this_batch = fr.unsigned_32();
+				trade->paused = fr.unsigned_8() != 0;
 
 				for (size_t j = fr.unsigned_32(); j > 0; --j) {
 					const std::string warename(fr.string());
 					const DescriptionIndex ware_index = game.descriptions().ware_index(warename);
-					trade.items.emplace_back(ware_index, fr.unsigned_32());
+					trade->items.emplace_back(ware_index, fr.unsigned_32());
 				}
 
 				for (size_t j = fr.unsigned_32(); j > 0; --j) {
@@ -641,12 +642,12 @@ void MapBuildingdataPacket::read_market(Market& market,
 					std::unique_ptr<WaresQueue> queue(new WaresQueue(market, ware_index, 1));
 					queue->read(fr, game, mol);
 					queue->set_callback(Market::ware_arrived_callback, &market);
-					trade.wares_queues_[ware_index] = std::move(queue);
+					trade->wares_queues_[ware_index] = std::move(queue);
 				}
 
-				trade.carriers_queue_.reset(new WorkersQueue(market, 0, 1));
-				trade.carriers_queue_->read(fr, game, mol);
-				trade.carriers_queue_->set_callback(Market::ware_arrived_callback, &market);
+				trade->carriers_queue_.reset(new WorkersQueue(market, 0, 1));
+				trade->carriers_queue_->read(fr, game, mol);
+				trade->carriers_queue_->set_callback(Market::ware_arrived_callback, &market);
 			}
 
 		} else {
@@ -1497,25 +1498,25 @@ void MapBuildingdataPacket::write_market(const Market& market,
 	fw.unsigned_32(market.trade_orders_.size());
 	for (const auto& order : market.trade_orders_) {
 		fw.unsigned_32(order.first);
-		fw.unsigned_32(mos.get_object_file_index(*order.second.other_side.get(game)));
-		fw.signed_32(order.second.initial_num_batches);
-		fw.signed_32(order.second.num_shipped_batches);
-		fw.unsigned_32(order.second.received_traded_wares_in_this_batch);
-		fw.unsigned_8(order.second.paused ? 1 : 0);
+		fw.unsigned_32(mos.get_object_file_index(*order.second->other_side.get(game)));
+		fw.signed_32(order.second->initial_num_batches);
+		fw.signed_32(order.second->num_shipped_batches);
+		fw.unsigned_32(order.second->received_traded_wares_in_this_batch);
+		fw.unsigned_8(order.second->paused ? 1 : 0);
 
-		fw.unsigned_32(order.second.items.size());
-		for (const auto& ware_amount : order.second.items) {
+		fw.unsigned_32(order.second->items.size());
+		for (const auto& ware_amount : order.second->items) {
 			fw.string(game.descriptions().get_ware_descr(ware_amount.first)->name());
 			fw.unsigned_32(ware_amount.second);
 		}
 
-		fw.unsigned_32(order.second.wares_queues_.size());
-		for (const auto& queue : order.second.wares_queues_) {
+		fw.unsigned_32(order.second->wares_queues_.size());
+		for (const auto& queue : order.second->wares_queues_) {
 			fw.string(game.descriptions().get_ware_descr(queue.first)->name());
 			queue.second->write(fw, game, mos);
 		}
 
-		order.second.carriers_queue_->write(fw, game, mos);
+		order.second->carriers_queue_->write(fw, game, mos);
 	}
 }
 
