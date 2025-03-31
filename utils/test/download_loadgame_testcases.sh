@@ -4,7 +4,7 @@
 
 SAVES_VER=1.2
 
-URL="https://github.com/tothxa/widelands-test-saves/archive/refs/tags/v${SAVES_VER}.tar.gz"
+URL="https://github.com/widelands/widelands-test-saves/archive/refs/tags/v${SAVES_VER}.tar.gz"
 
 TMPDIR="$(mktemp -d)"
 DL_TARGET="${TMPDIR}/widelands-test-saves-${SAVES_VER}.tar.gz"
