@@ -79,6 +79,17 @@ wl_set_if_unset(WL_INSTALL_DATADIR "./data")
 # Note: 'CMAKE_INSTALL_PREFIX' defaults to /usr/local on UNIX and c:/Program Files/${PROJECT_NAME} on Windows
 wl_set_if_unset(WL_INSTALL_BINDIR "${CMAKE_INSTALL_PREFIX}/games")
 
+if(NOT CMAKE_C_COMPILER_LAUNCHER)
+  find_program(CCACHE_PROGRAM ccache)
+  if(CCACHE_PROGRAM)
+    set(CMAKE_C_COMPILER_LAUNCHER ${CCACHE_PROGRAM} CACHE STRING "C Compiler Launcher" FORCE)
+    set(CMAKE_CXX_COMPILER_LAUNCHER ${CCACHE_PROGRAM} CACHE STRING "CXX Compiler Launcher" FORCE)
+    message("ccache found and it will be used for compiling")
+  else()
+    message("ccache not found")
+  endif()
+endif()
+
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 8)
     message(FATAL_ERROR "Widelands needs GCC >= 8 to compile.")
