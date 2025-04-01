@@ -46,7 +46,7 @@ struct UniqueWindow : public Window {
 
 		void create() const;
 		void destroy() const;
-		void toggle();
+		void toggle() const;
 
 		bool exists() const;
 		bool is_open() const;
