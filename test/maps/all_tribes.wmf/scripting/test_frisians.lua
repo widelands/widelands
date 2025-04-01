@@ -433,6 +433,5 @@ run(function()
    -- Did buildings saveload OK?
    verify_buildings(playernumber, expected_number_of_buildings)
 
-   print("# All Tests passed.")
-   mapview:close()
+   check_reload_version()
 end)
