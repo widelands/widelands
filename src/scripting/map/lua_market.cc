@@ -117,7 +117,7 @@ int LuaMarket::propose_trade(lua_State* L) {
 	trade.receiving_player =
 	   (*get_user_class<LuaGame::LuaPlayer>(L, 2))->get(L, game).player_number();
 
-	trade.num_batches = luaL_checkinteger(L, 3);
+	trade.num_batches = luaL_checkint32(L, 3);
 	trade.items_to_send = parse_wares_as_bill_of_material(L, 4, self->owner().tribe());
 	trade.items_to_receive = parse_wares_as_bill_of_material(L, 5, self->owner().tribe());
 
