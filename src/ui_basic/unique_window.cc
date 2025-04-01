@@ -54,7 +54,7 @@ void UniqueWindow::Registry::destroy() const {
 /**
  * Either destroys or creates the window.
  */
-void UniqueWindow::Registry::toggle() {
+void UniqueWindow::Registry::toggle() const {
 	if (window != nullptr) {
 		// There is already a window. If it is minimal, restore it.
 		if (window->is_minimal()) {
@@ -63,8 +63,6 @@ void UniqueWindow::Registry::toggle() {
 		} else {
 			window->save_position();
 			window->die();
-			closed();
-			window = nullptr;
 		}
 	} else {
 		open_window();
