@@ -209,7 +209,7 @@ void Market::set_market_name(const std::string& name) {
 
 void Market::new_trade(const TradeID trade_id,
                        const BillOfMaterials& items,
-                       const int num_batches,
+                       const int32_t num_batches,
                        OPtr<Market> other_side) {
 	MutexLock m(MutexLock::ID::kObjects);
 
