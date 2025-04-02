@@ -117,10 +117,13 @@ void Worker::carry_trade_item_update(Game& game, State& state) {
 		}
 
 		// The market is gone, return to saved coords instead.
-		molog(game.get_gametime(), "carry_trade_item_update: Market is gone, returning to last coords.");
+		molog(
+		   game.get_gametime(), "carry_trade_item_update: Market is gone, returning to last coords.");
 
-		if (!start_task_movepath(game, state.coords, 5, descr().get_right_walk_anims(does_carry_ware(), this))) {
-			molog(game.get_gametime(), "carry_trade_item_update: Could not find a path to last coords!");
+		if (!start_task_movepath(
+		       game, state.coords, 5, descr().get_right_walk_anims(does_carry_ware(), this))) {
+			molog(
+			   game.get_gametime(), "carry_trade_item_update: Could not find a path to last coords!");
 			reset_tasks(game);
 			// The worker will become fugitive on the next act() call.
 		}
