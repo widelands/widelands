@@ -37,6 +37,7 @@ void Worker::start_task_carry_trade_item(Game& game,
 	state.ivar2 = trade_id;
 	state.ivar3 = 0;
 	state.objvar1 = other_market;
+	state.coords = dynamic_cast<Market&>(*get_location(game)).base_flag().get_position();
 }
 
 // This is a state machine: leave building, go to the other market, drop off
@@ -83,17 +84,19 @@ void Worker::carry_trade_item_update(Game& game, State& state) {
 		}
 
 		// Otherwise continue making progress towards the other market.
-		if (!start_task_movepath(game, other_market->base_flag().get_position(), 5,
-		                         descr().get_right_walk_anims(does_carry_ware(), this))) {
-			molog(game.get_gametime(),
-			      "carry_trade_item_update: Could not move to other flag! Cancelling trade.");
-
-			game.cancel_trade(state.ivar2, false, get_owner());
-
-			reset_tasks(game);
-			start_task_return(game, true);
+		if (start_task_movepath(game, other_market->base_flag().get_position(), 5,
+		                        descr().get_right_walk_anims(does_carry_ware(), this))) {
+			return;
 		}
-		return;
+
+		molog(game.get_gametime(),
+		      "carry_trade_item_update: Could not move to other flag! Cancelling trade.");
+
+		game.cancel_trade(state.ivar2, false, get_owner());
+
+		// Fall through to return
+		state.ivar1 = 3;
+		state.ivar3 = 1;
 	}
 
 	if (state.ivar1 == 2) {
@@ -108,7 +111,20 @@ void Worker::carry_trade_item_update(Game& game, State& state) {
 
 	if (state.ivar1 == 3) {
 		++state.ivar1;
-		start_task_return(game, true);
+
+		if (get_location(game) != nullptr && state.ivar3 == 0) {
+			return start_task_return(game, true);
+		}
+
+		// The market is gone, return to saved coords instead.
+		molog(game.get_gametime(), "carry_trade_item_update: Market is gone, returning to last coords.");
+
+		if (!start_task_movepath(game, state.coords, 5, descr().get_right_walk_anims(does_carry_ware(), this))) {
+			molog(game.get_gametime(), "carry_trade_item_update: Could not find a path to last coords!");
+			reset_tasks(game);
+			// The worker will become fugitive on the next act() call.
+		}
+
 		return;
 	}
 
