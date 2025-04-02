@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         config: [Debug, Release]
-        compiler: [clang-10]
+        compiler: [clang-12]
     # Must run on the oldest still-supported Ubuntu LTS release
     runs-on: ubuntu-22.04
     env:
