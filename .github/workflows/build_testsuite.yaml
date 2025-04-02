@@ -31,10 +31,10 @@ jobs:
           - compiler: clang-12
             os: ubuntu-22.04
             config: Release
-          - compiler: clang-11
+          - compiler: clang-13
             os: ubuntu-22.04
             config: Debug
-          - compiler: clang-11
+          - compiler: clang-13
             os: ubuntu-22.04
             config: Release
     runs-on: ${{ matrix.os }}
