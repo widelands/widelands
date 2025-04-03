@@ -34,12 +34,12 @@ struct InfiniteSpinner : public Box {
 
 	InfiniteSpinner(Panel* parent,
 	                const std::string& name,
-	                const PanelStyle style,
+	                PanelStyle style,
 	                const std::string& button_tooltip,
 	                const std::string& spinner_label,
-	                const int32_t spinner_val,
-	                const int32_t spinner_min,
-	                const int32_t spinner_max,
+	                int32_t spinner_val,
+	                int32_t spinner_min,
+	                int32_t spinner_max,
 	                SpinBox::Units spinner_units = SpinBox::Units::kNone);
 
 	Notifications::Signal<> changed;
@@ -47,7 +47,7 @@ struct InfiniteSpinner : public Box {
 	[[nodiscard]] bool is_infinite() const;
 	[[nodiscard]] int32_t get_value() const;
 
-	void set_infinite();
+	void set_infinite() const;
 	void set_value(int32_t value, bool trigger_signal = true);
 
 private:

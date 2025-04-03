@@ -82,9 +82,10 @@ int32_t InfiniteSpinner::get_value() const {
 	return spinner_.get_value();
 }
 
-void InfiniteSpinner::set_infinite() {
+void InfiniteSpinner::set_infinite() const {
 	if (!is_infinite()) {
 		button_.sigclicked();
+		assert(is_infinite());
 	}
 }
 void InfiniteSpinner::set_value(int32_t value, bool trigger_signal) {
