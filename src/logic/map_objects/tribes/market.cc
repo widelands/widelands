@@ -90,9 +90,14 @@ void Market::TradeOrder::cleanup() {
 
 	while (carriers_queue_->get_filled() > 0) {
 		Worker* worker = carriers_queue_->extract_worker();
-		worker->set_location(&market->base_flag());
-		worker->reset_tasks(*game);
-		worker->start_task_return(*game, true);
+
+		if (worker->get_state(Worker::taskCarryTradeItem) != nullptr) {
+			worker->send_signal(*game, "trade");
+		} else {
+			worker->set_location(&market->base_flag());
+			worker->reset_tasks(*game);
+			worker->start_task_return(*game, true);
+		}
 	}
 
 	carriers_queue_->cleanup();
@@ -108,6 +113,14 @@ void Market::TradeOrder::cleanup() {
 
 	if (Worker* carrier = market->carrier_.get(*game); carrier != nullptr) {
 		carrier->update_task_buildingwork(*game);
+	}
+}
+
+void Market::kickout_worker_from_queue(Game& game, Worker& worker) {
+	if (worker.get_state(Worker::taskCarryTradeItem) != nullptr) {
+		worker.send_signal(game, "trade");
+	} else {
+		Building::kickout_worker_from_queue(game, worker);
 	}
 }
 
@@ -280,13 +293,7 @@ void Market::move_trade_to(Game& game, const TradeID trade_id, Market& dest) {
 	dest.trade_orders_.emplace(trade_id, order);
 	assert(dest.trade_orders_.count(trade_id) == 1);
 
-	// Notify the other side and cancel any in-progress trade batches
 	other_it->second->other_side = &dest;
-	for (Worker* carrier : other_it->second->carriers_queue_->workers_in_queue()) {
-		if (carrier->get_state(Worker::taskCarryTradeItem) != nullptr) {
-			carrier->send_signal(game, "cancel");
-		}
-	}
 
 	// Create the new queues
 	order->carriers_queue_.reset(
@@ -601,32 +608,41 @@ bool Market::get_building_work(Game& game, Worker& worker, bool /* success */) {
 void Market::traded_ware_arrived(const TradeID trade_id,
                                  const DescriptionIndex ware_index,
                                  Game* game) {
-	TradeOrder& trade_order = *trade_orders_.at(trade_id);
+	auto trade_order = trade_orders_.find(trade_id);
+
+	if (trade_order != trade_orders_.end()) {
+		++trade_order->second->received_traded_wares_in_this_batch;
+	}
 
 	pending_dropout_wares_.push_back(ware_index);
 	get_economy(wwWARE)->add_wares_or_workers(ware_index, 1);
-	++trade_order.received_traded_wares_in_this_batch;
 	get_owner()->ware_produced(ware_index);
 
 	if (Worker* carrier = carrier_.get(*game); carrier != nullptr) {
 		carrier->update_task_buildingwork(*game);
 	}
 
-	Market* other_market = trade_order.other_side.get(*game);
-	assert(other_market != nullptr);
-	other_market->get_owner()->ware_consumed(ware_index, 1);
+	if (trade_order != trade_orders_.end()) {
+		if (Market* other_market = trade_order->second->other_side.get(*game);
+		    other_market != nullptr) {
+			other_market->get_owner()->ware_consumed(ware_index, 1);
 
-	TradeOrder& other_trade_order = *other_market->trade_orders_.at(trade_id);
-	if (trade_order.received_traded_wares_in_this_batch == other_trade_order.num_wares_per_batch() &&
-	    other_trade_order.received_traded_wares_in_this_batch == trade_order.num_wares_per_batch()) {
-		// This batch is completed.
-		++trade_order.num_shipped_batches;
-		trade_order.received_traded_wares_in_this_batch = 0;
-		++other_trade_order.num_shipped_batches;
-		other_trade_order.received_traded_wares_in_this_batch = 0;
-		if (trade_order.fulfilled()) {
-			assert(other_trade_order.fulfilled());
-			game->cancel_trade(trade_id, true, get_owner());
+			auto other_trade_order = other_market->trade_orders_.find(trade_id);
+			if (other_trade_order != other_market->trade_orders_.end() &&
+			    trade_order->second->received_traded_wares_in_this_batch ==
+			       other_trade_order->second->num_wares_per_batch() &&
+			    other_trade_order->second->received_traded_wares_in_this_batch ==
+			       trade_order->second->num_wares_per_batch()) {
+				// This batch is completed.
+				++trade_order->second->num_shipped_batches;
+				trade_order->second->received_traded_wares_in_this_batch = 0;
+				++other_trade_order->second->num_shipped_batches;
+				other_trade_order->second->received_traded_wares_in_this_batch = 0;
+				if (trade_order->second->fulfilled()) {
+					assert(other_trade_order->second->fulfilled());
+					game->cancel_trade(trade_id, true, get_owner());
+				}
+			}
 		}
 	}
 
