@@ -207,6 +207,10 @@ void Market::set_market_name(const std::string& name) {
 	get_owner()->reserve_warehousename(name);
 }
 
+void Market::notify_trade_extended(const TradeID trade_id, const int new_total_batches) {
+	trade_orders_.at(trade_id)->initial_num_batches = new_total_batches;
+}
+
 void Market::new_trade(const TradeID trade_id,
                        const BillOfMaterials& items,
                        const int32_t num_batches,

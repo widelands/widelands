@@ -20,6 +20,8 @@
 
 #include "base/time_string.h"
 #include "graphic/font_handler.h"
+#include "graphic/style_manager.h"
+#include "graphic/text_layout.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/market.h"
 #include "logic/player.h"
@@ -621,6 +623,7 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		}
 
 		const Widelands::Serial market_serial = own_market->serial();
+		const bool can_extend = trade.num_batches != Widelands::kInfiniteTrade;
 
 		UI::Box* box = new UI::Box(&trades_box_active_, UI::PanelStyle::kWui,
 		                           format("active_%u", trade_id), 0, 0, UI::Box::Horizontal);
@@ -630,6 +633,18 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		UI::Button* go_to = new UI::Button(
 		   buttons, "go_to", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
 		   g_image_cache->get("images/wui/menus/goto.png"), _("Center view on this market"));
+		UI::Button* extend = new UI::Button(
+		   buttons, "extend", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary, g_image_cache->get("images/wui/buildings/menu_tab_trade.png"),
+											can_extend ?
+											format(
+												"<p>%s%s%s</p>",
+												g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader).as_font_tag(
+													_("Propose extending this trade"))
+												, as_listitem(format(ngettext("Hold down Ctrl to extend it by %d batch", "Hold down Ctrl to extend it by %d batches", trade.num_batches), trade.num_batches), UI::FontStyle::kWuiTooltip)
+												, as_listitem(_("Hold down Shift to extend the trade indefinitely"), UI::FontStyle::kWuiTooltip)
+			                               )
+			                               : _("Propose extending this trade")
+			                               );
 		UI::Button* cancel = new UI::Button(
 		   buttons, "cancel", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
 		   g_image_cache->get("images/wui/menu_abort.png"), _("Cancel this trade agreement"));
@@ -664,6 +679,12 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 			                                          move->get_selected(), market_serial);
 		});
 
+		if (can_extend) {
+			extend->sigclicked.connect([this, trade_id]() { propose_extending_trade(trade_id); });
+		} else {
+			extend->set_enabled(false);
+		}
+
 		go_to->sigclicked.connect([this, own_market]() {
 			iplayer_->map_view()->scroll_to_field(
 			   own_market->get_position(), MapView::Transition::Smooth);
@@ -674,6 +695,8 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		});
 
 		buttons->add(move, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		buttons->add_space(kSpacing);
+		buttons->add(extend, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		buttons->add_space(kSpacing);
 		buttons->add(cancel, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		buttons->add_space(kSpacing);
@@ -691,6 +714,25 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		trades_box_active_.add(box, UI::Box::Resizing::kExpandBoth);
 		trades_box_active_.add_space(kSpacing);
 	}
+}
+
+void GameDiplomacyMenu::propose_extending_trade(const Widelands::TradeID trade_id) {
+	assert(iplayer_ != nullptr);
+	Widelands::Game& game = iplayer_->game();
+
+	MutexLock m(MutexLock::ID::kObjects);
+	if (!game.has_trade(trade_id)) {
+		return;
+	}
+
+	if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+		return game.send_player_extend_trade(iplayer_->player_number(), trade_id, Widelands::TradeAction::kExtend, Widelands::kInfiniteTrade);
+	}
+	if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+		return game.send_player_extend_trade(iplayer_->player_number(), trade_id, Widelands::TradeAction::kExtend, game.get_trade(trade_id).num_batches);
+	}
+
+	// NOCOM show dialog window with spinbox
 }
 
 void GameDiplomacyMenu::draw(RenderTarget& rt) {
