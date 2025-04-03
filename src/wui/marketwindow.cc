@@ -866,7 +866,7 @@ private:
 			return game.send_player_extend_trade(ipl->player_number(), trade_id_, Widelands::TradeAction::kExtend, game.get_trade(trade_id_).num_batches);
 		}
 
-		// NOCOM show dialog window with spinbox
+		show_trade_extension_dialog(*ipl, trade_id_);
 	}
 
 	InteractiveBase& ibase_;

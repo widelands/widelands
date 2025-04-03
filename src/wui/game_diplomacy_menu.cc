@@ -810,7 +810,7 @@ void GameDiplomacyMenu::propose_extending_trade(const Widelands::TradeID trade_i
 		return game.send_player_extend_trade(iplayer_->player_number(), trade_id, Widelands::TradeAction::kExtend, game.get_trade(trade_id).num_batches);
 	}
 
-	// NOCOM show dialog window with spinbox
+	show_trade_extension_dialog(*iplayer_, trade_id);
 }
 
 void GameDiplomacyMenu::draw(RenderTarget& rt) {
