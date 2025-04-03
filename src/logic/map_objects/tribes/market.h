@@ -108,6 +108,7 @@ public:
 	void cleanup(EditorGameBase&) override;
 
 	void inputqueue_max_fill_changed() override;
+	void kickout_worker_from_queue(Game& game, Worker& worker) override;
 
 	void try_launching_batch(Game* game);
 	void traded_ware_arrived(TradeID trade_id, DescriptionIndex ware_index, Game* game);

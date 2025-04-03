@@ -163,8 +163,7 @@ void WorkersQueue::set_max_fill(Quantity q) {
 	// If requested, kick out workers
 	upcast(Game, game, &get_owner()->egbase());
 	while (workers_.size() > max_fill_) {
-		workers_.back()->reset_tasks(*game);
-		workers_.back()->start_task_leavebuilding(*game, true);
+		owner_.kickout_worker_from_queue(*game, *workers_.back());
 		workers_.pop_back();
 	}
 }
