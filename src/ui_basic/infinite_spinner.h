@@ -32,17 +32,15 @@ struct InfiniteSpinner : public Box {
 	static constexpr const char* kIconEndInfinity = "images/wui/menus/end_infinity.png";
 	static constexpr const char* kIconInfinity = "images/wui/menus/infinity.png";
 
-	InfiniteSpinner(
-		Panel* parent,
-		const std::string& name,
-		const PanelStyle style,
-		const std::string& button_tooltip,
-		const std::string& spinner_label,
-		const int32_t spinner_val,
-		const int32_t spinner_min,
-		const int32_t spinner_max,
-		SpinBox::Units spinner_units = SpinBox::Units::kNone
-	);
+	InfiniteSpinner(Panel* parent,
+	                const std::string& name,
+	                const PanelStyle style,
+	                const std::string& button_tooltip,
+	                const std::string& spinner_label,
+	                const int32_t spinner_val,
+	                const int32_t spinner_min,
+	                const int32_t spinner_max,
+	                SpinBox::Units spinner_units = SpinBox::Units::kNone);
 
 	Notifications::Signal<> changed;
 

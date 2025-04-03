@@ -22,41 +22,38 @@
 
 namespace UI {
 
-InfiniteSpinner::InfiniteSpinner(
-	Panel* parent,
-	const std::string& name,
-	const PanelStyle style,
-	const std::string& button_tooltip,
-	const std::string& spinner_label,
-	const int32_t spinner_val,
-	const int32_t spinner_min,
-	const int32_t spinner_max,
-	SpinBox::Units spinner_units
-)
-: Box(parent, style, name, 0, 0, Box::Horizontal),
-spinner_(this,
-	              "spinner",
-	              0,
-	              0,
-	              400,
-	              250,
-	              spinner_val,
-	              spinner_min,
-	              spinner_max,
-	              style,
-	              spinner_label,
-	              spinner_units,
-	              SpinBox::Type::kBig),
-	     button_(this,
-	               "button",
-	               0,
-	               0,
-	               34,
-	               34,
-	               style == PanelStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary,
-	               g_image_cache->get(kIconInfinity),
-	               button_tooltip)
-     {
+InfiniteSpinner::InfiniteSpinner(Panel* parent,
+                                 const std::string& name,
+                                 const PanelStyle style,
+                                 const std::string& button_tooltip,
+                                 const std::string& spinner_label,
+                                 const int32_t spinner_val,
+                                 const int32_t spinner_min,
+                                 const int32_t spinner_max,
+                                 SpinBox::Units spinner_units)
+   : Box(parent, style, name, 0, 0, Box::Horizontal),
+     spinner_(this,
+              "spinner",
+              0,
+              0,
+              400,
+              250,
+              spinner_val,
+              spinner_min,
+              spinner_max,
+              style,
+              spinner_label,
+              spinner_units,
+              SpinBox::Type::kBig),
+     button_(this,
+             "button",
+             0,
+             0,
+             34,
+             34,
+             style == PanelStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary,
+             g_image_cache->get(kIconInfinity),
+             button_tooltip) {
 
 	button_.sigclicked.connect([this, spinner_min, spinner_max]() {
 		const bool now_infinite = button_.style() != Button::VisualState::kPermpressed;

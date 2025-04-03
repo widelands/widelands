@@ -318,7 +318,10 @@ public:
 	                                 const std::vector<uint32_t>& parameters);
 	void send_player_cancel_expedition_ship(const Ship&);
 	void send_player_propose_trade(const TradeInstance& trade);
-	void send_player_extend_trade(PlayerNumber sender, TradeID trade_id, TradeAction action, int32_t batches);
+	void send_player_extend_trade(PlayerNumber sender,
+	                              TradeID trade_id,
+	                              TradeAction action,
+	                              int32_t batches);
 	void send_player_trade_action(
 	   PlayerNumber sender, TradeID trade_id, TradeAction action, Serial accepter, Serial source);
 	void send_player_toggle_mute(const Building&, bool all);
@@ -427,7 +430,8 @@ public:
 	[[nodiscard]] std::vector<TradeID> find_trade_proposals(PlayerNumber initiator,
 	                                                        Serial market_filter = 0) const;
 	[[nodiscard]] std::vector<TradeID> find_active_trades(PlayerNumber player) const;
-	[[nodiscard]] std::vector<TradeExtension> find_trade_extensions(TradeID trade_id, PlayerNumber player, bool as_proposer) const;
+	[[nodiscard]] std::vector<TradeExtension>
+	find_trade_extensions(TradeID trade_id, PlayerNumber player, bool as_proposer) const;
 
 	struct PendingDiplomacyAction {
 		PlayerNumber sender;     ///< The player who initiated the action.

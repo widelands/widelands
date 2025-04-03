@@ -25,9 +25,9 @@
 
 namespace Widelands {
 
-CmdExtendTrade::CmdExtendTrade(const Time& time, PlayerNumber pn, TradeID trade_id, TradeAction action, int32_t batches)
-   : PlayerCommand(time, pn), trade_id_(trade_id), action_(action), batches_(batches)
-   {
+CmdExtendTrade::CmdExtendTrade(
+   const Time& time, PlayerNumber pn, TradeID trade_id, TradeAction action, int32_t batches)
+   : PlayerCommand(time, pn), trade_id_(trade_id), action_(action), batches_(batches) {
 }
 
 void CmdExtendTrade::execute(Game& game) {

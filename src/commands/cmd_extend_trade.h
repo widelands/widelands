@@ -25,7 +25,8 @@
 namespace Widelands {
 
 struct CmdExtendTrade : PlayerCommand {
-	CmdExtendTrade(const Time& time, PlayerNumber pn, TradeID trade_id, TradeAction action, int32_t batches);
+	CmdExtendTrade(
+	   const Time& time, PlayerNumber pn, TradeID trade_id, TradeAction action, int32_t batches);
 
 	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kExtendTrade;

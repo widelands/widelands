@@ -64,16 +64,14 @@ public:
 	             UI::DropdownType::kTextual,
 	             UI::PanelStyle::kWui,
 	             UI::ButtonStyle::kWuiSecondary),
-		batches_(
-			this,
-			"batches",
-			UI::PanelStyle::kWui,
-			_("Toggle indefinite trade"),
-			_("Batches:"),
-			1,
-			1,
-			100
-		),
+	     batches_(this,
+	              "batches",
+	              UI::PanelStyle::kWui,
+	              _("Toggle indefinite trade"),
+	              _("Batches:"),
+	              1,
+	              1,
+	              100),
 	     ok_(this, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("Propose")) {
 		set_size(400, 100);  // guard against SpinBox asserts
 
@@ -156,9 +154,7 @@ private:
 		Widelands::TradeInstance trade;
 		trade.items_to_send = offer_->get_selection();
 		trade.items_to_receive = demand_->get_selection();
-		trade.num_batches = batches_.is_infinite() ?
-		                       Widelands::kInfiniteTrade :
-		                       batches_.get_value();
+		trade.num_batches = batches_.is_infinite() ? Widelands::kInfiniteTrade : batches_.get_value();
 		trade.initiator = market_;
 		trade.sending_player = iplayer_.player_number();
 		trade.receiving_player = player_.get_selected()->player_number();
@@ -502,13 +498,7 @@ public:
 	           std::string(),
 	           UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
 	           UI::MultilineTextarea::ScrollMode::kNoScrolling),
-		extensions_box_(this,
-	             UI::PanelStyle::kWui,
-	             "extensions_box",
-	             0,
-	             0,
-	             UI::Box::Vertical)
-{
+	     extensions_box_(this, UI::PanelStyle::kWui, "extensions_box", 0, 0, UI::Box::Vertical) {
 		ensure_box_can_hold_input_queues(*this);
 		set_min_desired_breadth(kMinBoxWidth);
 
@@ -530,34 +520,38 @@ public:
 		}
 
 		if (can_act) {
-			action_box_ = new UI::Box(this, UI::PanelStyle::kWui, "actions", 0, 0, UI::Box::Horizontal);
+			action_box_ =
+			   new UI::Box(this, UI::PanelStyle::kWui, "actions", 0, 0, UI::Box::Horizontal);
 
 			button_pause_ = new UI::Button(action_box_, "toggle_pause", 0, 0, kButtonSize, kButtonSize,
 			                               UI::ButtonStyle::kWuiSecondary, std::string());
 			button_pause_->sigclicked.connect([this]() { toggle_pause_action(); });
 
 			const bool can_extend = trade_instance.num_batches != Widelands::kInfiniteTrade;
-			button_extend_ = new UI::Button(action_box_, "extend", 0, 0, kButtonSize, kButtonSize,
-			                               UI::ButtonStyle::kWuiSecondary, g_image_cache->get("images/wui/buildings/menu_tab_trade.png"),
-											can_extend ?
-											format(
-												"<p>%s%s%s</p>",
-												g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader).as_font_tag(
-													_("Propose extending this trade"))
-												, as_listitem(format(ngettext("Hold down Ctrl to extend it by %d batch", "Hold down Ctrl to extend it by %d batches", trade_instance.num_batches), trade_instance.num_batches), UI::FontStyle::kWuiTooltip)
-												, as_listitem(_("Hold down Shift to extend the trade indefinitely"), UI::FontStyle::kWuiTooltip)
-			                               )
-			                               : _("Propose extending this trade")
-			                               );
+			button_extend_ = new UI::Button(
+			   action_box_, "extend", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+			   g_image_cache->get("images/wui/buildings/menu_tab_trade.png"),
+			   can_extend ?
+			      format("<p>%s%s%s</p>",
+			             g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
+			                .as_font_tag(_("Propose extending this trade")),
+			             as_listitem(format(ngettext("Hold down Ctrl to extend it by %d batch",
+			                                         "Hold down Ctrl to extend it by %d batches",
+			                                         trade_instance.num_batches),
+			                                trade_instance.num_batches),
+			                         UI::FontStyle::kWuiTooltip),
+			             as_listitem(_("Hold down Shift to extend the trade indefinitely"),
+			                         UI::FontStyle::kWuiTooltip)) :
+			      _("Propose extending this trade"));
 			if (can_extend) {
 				button_extend_->sigclicked.connect([this]() { propose_extending_trade(); });
 			} else {
 				button_extend_->set_enabled(false);
 			}
 
-			UI::Button* cancel =
-			   new UI::Button(action_box_, "cancel", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
-			                  g_image_cache->get("images/wui/menu_abort.png"), _("Cancel this trade"));
+			UI::Button* cancel = new UI::Button(
+			   action_box_, "cancel", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+			   g_image_cache->get("images/wui/menu_abort.png"), _("Cancel this trade"));
 			cancel->sigclicked.connect([this]() {
 				upcast(InteractivePlayer, ipl, &ibase_);
 				assert(ipl != nullptr);
@@ -575,7 +569,8 @@ public:
 			   UI::DropdownType::kPictorialMenu, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
 			dropdown_move_->set_desired_size(kButtonSize, kButtonSize);
 			dropdown_move_->set_min_lineheight(kButtonSize);
-			dropdown_move_->set_image(g_image_cache->get("images/wui/buildings/menu_tab_trade_offers.png"));
+			dropdown_move_->set_image(
+			   g_image_cache->get("images/wui/buildings/menu_tab_trade_offers.png"));
 
 			std::multimap<uint32_t, const Widelands::Market*> markets =
 			   market.owner().get_markets(order.other_side.get(ibase.egbase())->get_position());
@@ -624,7 +619,11 @@ public:
 		rebuild_extensions();
 
 		trade_changed_subscriber_ = Notifications::subscribe<Widelands::NoteTradeChanged>(
-		   [this](const Widelands::NoteTradeChanged& note) { if (note.id == trade_id_) { rebuild_extensions(); } });
+		   [this](const Widelands::NoteTradeChanged& note) {
+			   if (note.id == trade_id_) {
+				   rebuild_extensions();
+			   }
+		   });
 
 		update_paused(market);
 		think();
@@ -659,42 +658,45 @@ private:
 
 		MutexLock m(MutexLock::ID::kObjects);
 		if (const Widelands::Market* market = market_.get(ibase_.egbase()); market != nullptr) {
-			for (const Widelands::TradeExtension& te : ibase_.game().find_trade_extensions(trade_id_, market->owner().player_number(), false)) {
-				UI::Box* box = new UI::Box(&extensions_box_, UI::PanelStyle::kWui, "extension_offer", 0, 0, UI::Box::Horizontal);
+			for (const Widelands::TradeExtension& te : ibase_.game().find_trade_extensions(
+			        trade_id_, market->owner().player_number(), false)) {
+				UI::Box* box = new UI::Box(&extensions_box_, UI::PanelStyle::kWui, "extension_offer", 0,
+				                           0, UI::Box::Horizontal);
 
-				box->add(new UI::Textarea(box,
-			              UI::PanelStyle::kWui,
-			              "description",
-			              UI::FontStyle::kWuiInfoPanelHeading,
-			              te.batches == Widelands::kInfiniteTrade ?
-						format(
-							_("%1$s proposed to extend this trade indefinitely."), ibase_.egbase().player(te.proposer).get_name()
-						)
-						: format(
-							ngettext("%1$s proposed to extend this trade by %2$d batch.", "%1$s proposed to extend this trade by %2$d batches.", te.batches),
-							ibase_.egbase().player(te.proposer).get_name(),
-							te.batches
-						),
-						UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl())
-					), UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
+				box->add(
+				   new UI::Textarea(
+				      box, UI::PanelStyle::kWui, "description", UI::FontStyle::kWuiInfoPanelHeading,
+				      te.batches == Widelands::kInfiniteTrade ?
+				         format(_("%1$s proposed to extend this trade indefinitely."),
+				                ibase_.egbase().player(te.proposer).get_name()) :
+				         format(
+				            ngettext("%1$s proposed to extend this trade by %2$d batch.",
+				                     "%1$s proposed to extend this trade by %2$d batches.", te.batches),
+				            ibase_.egbase().player(te.proposer).get_name(), te.batches),
+				      UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl())),
+				   UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 
 				if (can_act_) {
-					UI::Button* reject = new UI::Button(
-					   box, "reject", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
-					   g_image_cache->get("images/wui/menu_abort.png"), _("Reject this trade extension proposal"));
-					UI::Button* accept = new UI::Button(
-					   box, "accept", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
-					   g_image_cache->get("images/wui/menu_okay.png"), _("Accept this trade extension proposal"));
+					UI::Button* reject = new UI::Button(box, "reject", 0, 0, kButtonSize, kButtonSize,
+					                                    UI::ButtonStyle::kWuiSecondary,
+					                                    g_image_cache->get("images/wui/menu_abort.png"),
+					                                    _("Reject this trade extension proposal"));
+					UI::Button* accept = new UI::Button(box, "accept", 0, 0, kButtonSize, kButtonSize,
+					                                    UI::ButtonStyle::kWuiSecondary,
+					                                    g_image_cache->get("images/wui/menu_okay.png"),
+					                                    _("Accept this trade extension proposal"));
 
 					reject->sigclicked.connect([this, te]() {
 						upcast(InteractivePlayer, ipl, &ibase_);
 						assert(ipl != nullptr);
-						ipl->game().send_player_extend_trade(ipl->player_number(), trade_id_, Widelands::TradeAction::kReject, te.batches);
+						ipl->game().send_player_extend_trade(
+						   ipl->player_number(), trade_id_, Widelands::TradeAction::kReject, te.batches);
 					});
 					accept->sigclicked.connect([this, te]() {
 						upcast(InteractivePlayer, ipl, &ibase_);
 						assert(ipl != nullptr);
-						ipl->game().send_player_extend_trade(ipl->player_number(), trade_id_, Widelands::TradeAction::kAccept, te.batches);
+						ipl->game().send_player_extend_trade(
+						   ipl->player_number(), trade_id_, Widelands::TradeAction::kAccept, te.batches);
 					});
 
 					box->add_space(kSpacing);
@@ -707,31 +709,34 @@ private:
 				extensions_box_.add_space(kSpacing);
 			}
 
-			for (const Widelands::TradeExtension& te : ibase_.game().find_trade_extensions(trade_id_, market->owner().player_number(), true)) {
-				UI::Box* box = new UI::Box(&extensions_box_, UI::PanelStyle::kWui, "extension_proposal", 0, 0, UI::Box::Horizontal);
+			for (const Widelands::TradeExtension& te : ibase_.game().find_trade_extensions(
+			        trade_id_, market->owner().player_number(), true)) {
+				UI::Box* box = new UI::Box(&extensions_box_, UI::PanelStyle::kWui, "extension_proposal",
+				                           0, 0, UI::Box::Horizontal);
 
-				box->add(new UI::Textarea(box,
-			              UI::PanelStyle::kWui,
-			              "description",
-			              UI::FontStyle::kWuiInfoPanelHeading,
-					te.batches == Widelands::kInfiniteTrade ?
-						_("You proposed to extend this trade indefinitely.")
-					: format(
-						ngettext("You proposed to extend this trade by %d batch.", "You proposed to extend this trade by %d batches.", te.batches),
-						te.batches
-					),
-					UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl())
-				), UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
+				box->add(
+				   new UI::Textarea(
+				      box, UI::PanelStyle::kWui, "description", UI::FontStyle::kWuiInfoPanelHeading,
+				      te.batches == Widelands::kInfiniteTrade ?
+				         _("You proposed to extend this trade indefinitely.") :
+				         format(
+				            ngettext("You proposed to extend this trade by %d batch.",
+				                     "You proposed to extend this trade by %d batches.", te.batches),
+				            te.batches),
+				      UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl())),
+				   UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 
 				if (can_act_) {
-					UI::Button* retract = new UI::Button(
-					   box, "retract", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
-					   g_image_cache->get("images/wui/menu_abort.png"), _("Retract this trade extension proposal"));
+					UI::Button* retract = new UI::Button(box, "retract", 0, 0, kButtonSize, kButtonSize,
+					                                     UI::ButtonStyle::kWuiSecondary,
+					                                     g_image_cache->get("images/wui/menu_abort.png"),
+					                                     _("Retract this trade extension proposal"));
 
 					retract->sigclicked.connect([this, te]() {
 						upcast(InteractivePlayer, ipl, &ibase_);
 						assert(ipl != nullptr);
-						ipl->game().send_player_extend_trade(ipl->player_number(), trade_id_, Widelands::TradeAction::kRetract, te.batches);
+						ipl->game().send_player_extend_trade(
+						   ipl->player_number(), trade_id_, Widelands::TradeAction::kRetract, te.batches);
 					});
 
 					box->add_space(kSpacing);
@@ -832,10 +837,14 @@ private:
 		}
 
 		if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
-			return game.send_player_extend_trade(ipl->player_number(), trade_id_, Widelands::TradeAction::kExtend, Widelands::kInfiniteTrade);
+			return game.send_player_extend_trade(ipl->player_number(), trade_id_,
+			                                     Widelands::TradeAction::kExtend,
+			                                     Widelands::kInfiniteTrade);
 		}
 		if ((SDL_GetModState() & KMOD_CTRL) != 0) {
-			return game.send_player_extend_trade(ipl->player_number(), trade_id_, Widelands::TradeAction::kExtend, game.get_trade(trade_id_).num_batches);
+			return game.send_player_extend_trade(ipl->player_number(), trade_id_,
+			                                     Widelands::TradeAction::kExtend,
+			                                     game.get_trade(trade_id_).num_batches);
 		}
 
 		show_trade_extension_dialog(*ipl, trade_id_);

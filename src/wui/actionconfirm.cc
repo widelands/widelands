@@ -49,7 +49,7 @@ struct ActionConfirm : public UI::Window {
 
 protected:
 	Widelands::ObjectPointer object_;
-	UI::Box* custom_content_box_ {nullptr};
+	UI::Box* custom_content_box_{nullptr};
 };
 
 /**
@@ -88,7 +88,7 @@ struct DismantleConfirm : public ActionConfirm {
 	void ok() override;
 
 private:
-	UI::Checkbox* checkbox_ {nullptr};
+	UI::Checkbox* checkbox_{nullptr};
 };
 
 /**
@@ -108,7 +108,7 @@ private:
 	const Widelands::DescriptionIndex id_;
 	bool still_under_construction_;
 
-	UI::Checkbox* checkbox_ {nullptr};
+	UI::Checkbox* checkbox_{nullptr};
 };
 
 /**
@@ -216,7 +216,8 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	UI::Box* button_box =
 	   new UI::Box(main_box, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal);
 
-    custom_content_box_ = new UI::Box(main_box, UI::PanelStyle::kWui, "box", 0, 0, UI::Box::Horizontal);
+	custom_content_box_ =
+	   new UI::Box(main_box, UI::PanelStyle::kWui, "box", 0, 0, UI::Box::Horizontal);
 
 	UI::MultilineTextarea* textarea = new UI::MultilineTextarea(
 	   main_box, "message", 0, 0, 200, 74, UI::PanelStyle::kWui, message, UI::Align::kCenter,
@@ -232,11 +233,11 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	cancelbtn->sigclicked.connect([this]() { die(); });
 
 	button_box->add_space(kPadding);
-	button_box->add(
-	   UI::g_fh->fontset()->is_rtl() ? okbtn : cancelbtn, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	button_box->add(UI::g_fh->fontset()->is_rtl() ? okbtn : cancelbtn, UI::Box::Resizing::kAlign,
+	                UI::Align::kCenter);
 	button_box->add_space(2 * kPadding);
-	button_box->add(
-	   UI::g_fh->fontset()->is_rtl() ? cancelbtn : okbtn, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	button_box->add(UI::g_fh->fontset()->is_rtl() ? cancelbtn : okbtn, UI::Box::Resizing::kAlign,
+	                UI::Align::kCenter);
 	button_box->add_space(kPadding);
 
 	main_box->add(textarea, UI::Box::Resizing::kExpandBoth);
@@ -332,8 +333,8 @@ DismantleConfirm::DismantleConfirm(InteractivePlayer& parent, Widelands::Buildin
                    _("Do you really want to dismantle this building?"),
                    &building) {
 	if (should_allow_preserving_wares(building.descr())) {
-		checkbox_ =
-		   new UI::Checkbox(custom_content_box_, UI::PanelStyle::kWui, "checkbox", Vector2i(0, 0), _("Preserve wares"));
+		checkbox_ = new UI::Checkbox(custom_content_box_, UI::PanelStyle::kWui, "checkbox",
+		                             Vector2i(0, 0), _("Preserve wares"));
 		custom_content_box_->add(checkbox_, UI::Box::Resizing::kFullSize);
 
 		checkbox_->set_tooltip(_("Any wares left in the building will be dropped out by the builder, "
@@ -400,8 +401,8 @@ EnhanceConfirm::EnhanceConfirm(InteractivePlayer& parent,
      still_under_construction_(still_under_construction) {
 
 	if (should_allow_preserving_wares(building.descr())) {
-		checkbox_ =
-		   new UI::Checkbox(custom_content_box_, UI::PanelStyle::kWui, "checkbox", Vector2i(0, 0), _("Preserve wares"));
+		checkbox_ = new UI::Checkbox(custom_content_box_, UI::PanelStyle::kWui, "checkbox",
+		                             Vector2i(0, 0), _("Preserve wares"));
 		custom_content_box_->add(checkbox_, UI::Box::Resizing::kFullSize);
 
 		checkbox_->set_tooltip(_("Any wares left in the building will be dropped out by the builder, "
@@ -591,20 +592,19 @@ void CancelTradeConfirm::ok() {
  * Create the panels for configuration.
  */
 TradeExtensionDialog::TradeExtensionDialog(InteractivePlayer& parent, Widelands::TradeID trade_id)
-   : ActionConfirm(
-        parent, _("Extend Trade"), _("Select by how many batches you want to extend this trade:"), nullptr),
+   : ActionConfirm(parent,
+                   _("Extend Trade"),
+                   _("Select by how many batches you want to extend this trade:"),
+                   nullptr),
      trade_id_(trade_id),
-	batches_(
-		custom_content_box_,
-		"batches",
-		UI::PanelStyle::kWui,
-		_("Toggle indefinite trade"),
-		_("Batches:"),
-		1,
-		1,
-		100
-	)
-     {
+     batches_(custom_content_box_,
+              "batches",
+              UI::PanelStyle::kWui,
+              _("Toggle indefinite trade"),
+              _("Batches:"),
+              1,
+              1,
+              100) {
 	custom_content_box_->add(&batches_, UI::Box::Resizing::kFullSize);
 
 	initialization_complete();
@@ -623,10 +623,9 @@ void TradeExtensionDialog::think() {
  * The "Ok" button was clicked, so issue the command for proposing to extend the trade.
  */
 void TradeExtensionDialog::ok() {
-	iaplayer().game().send_player_extend_trade(iaplayer().player_number(), trade_id_, Widelands::TradeAction::kExtend,
-		batches_.is_infinite() ?
-				                   Widelands::kInfiniteTrade :
-				                   batches_.get_value());
+	iaplayer().game().send_player_extend_trade(
+	   iaplayer().player_number(), trade_id_, Widelands::TradeAction::kExtend,
+	   batches_.is_infinite() ? Widelands::kInfiniteTrade : batches_.get_value());
 	die();
 }
 
