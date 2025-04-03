@@ -28,13 +28,10 @@
 #include "logic/playersmanager.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/infinite_spinner.h"
 #include "ui_basic/multilinetextarea.h"
-#include "ui_basic/spinbox.h"
 #include "ui_basic/window.h"
 #include "wui/interactive_player.h"
-
-constexpr const char* kIconEndInfinity = "images/wui/menus/end_infinity.png";
-constexpr const char* kIconInfinity = "images/wui/menus/infinity.png";
 
 constexpr int kPadding = 8;
 
@@ -169,9 +166,7 @@ struct TradeExtensionDialog : public ActionConfirm {
 private:
 	Widelands::TradeID trade_id_;
 
-	UI::Box batches_box_;
-	UI::SpinBox batches_;
-	UI::Button infinite_;
+	UI::InfiniteSpinner batches_;
 };
 
 /**
@@ -599,47 +594,18 @@ TradeExtensionDialog::TradeExtensionDialog(InteractivePlayer& parent, Widelands:
    : ActionConfirm(
         parent, _("Extend Trade"), _("Select by how many batches you want to extend this trade:"), nullptr),
      trade_id_(trade_id),
-     batches_box_(custom_content_box_, UI::PanelStyle::kWui, "batches_box", 0, 0, UI::Box::Horizontal),
-batches_(&batches_box_,
-	              "batches",
-	              0,
-	              0,
-	              400,
-	              250,
-	              1,
-	              1,
-	              100,
-	              UI::PanelStyle::kWui,
-	              _("Batches:"),
-	              UI::SpinBox::Units::kNone,
-	              UI::SpinBox::Type::kBig),
-	     infinite_(&batches_box_,
-	               "toggle_infinite",
-	               0,
-	               0,
-	               34,
-	               34,
-	               UI::ButtonStyle::kWuiSecondary,
-	               g_image_cache->get(kIconInfinity),
-	               _("Toggle indefinite trade"))
+	batches_(
+		custom_content_box_,
+		"batches",
+		UI::PanelStyle::kWui,
+		_("Toggle indefinite trade"),
+		_("Batches:"),
+		1,
+		1,
+		100
+	)
      {
-
-	infinite_.sigclicked.connect([this]() {
-		const bool now_infinite = infinite_.style() != UI::Button::VisualState::kPermpressed;
-		infinite_.set_perm_pressed(now_infinite);
-		infinite_.set_pic(g_image_cache->get(now_infinite ? kIconEndInfinity : kIconInfinity));
-		if (now_infinite) {
-			batches_.set_interval(batches_.get_value(), batches_.get_value());
-		} else {
-			batches_.set_interval(1, 100);
-		}
-	});
-
-	batches_box_.add(&infinite_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	batches_box_.add_space(kPadding / 2);
-	batches_box_.add(&batches_, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
-
-	custom_content_box_->add(&batches_box_, UI::Box::Resizing::kFullSize);
+	custom_content_box_->add(&batches_, UI::Box::Resizing::kFullSize);
 
 	initialization_complete();
 }
@@ -658,7 +624,7 @@ void TradeExtensionDialog::think() {
  */
 void TradeExtensionDialog::ok() {
 	iaplayer().game().send_player_extend_trade(iaplayer().player_number(), trade_id_, Widelands::TradeAction::kExtend,
-		infinite_.style() == UI::Button::VisualState::kPermpressed ?
+		batches_.is_infinite() ?
 				                   Widelands::kInfiniteTrade :
 				                   batches_.get_value());
 	die();

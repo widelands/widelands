@@ -9,7 +9,7 @@
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * GNU General Public License for more details.InfiniteSpinner
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see <https://www.gnu.org/licenses/>.
@@ -59,6 +59,7 @@ private:
 	bool is_updating_{false};
 
 	UI::Box main_box_;
+	// TODO(Nordfriese): Refactor to use UI::InfiniteSpinner instead
 	UI::Box buttons_box_;
 	UI::SpinBox spinbox_;
 	UI::Button infinite_target_;
