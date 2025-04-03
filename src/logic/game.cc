@@ -1482,7 +1482,7 @@ void Game::propose_trade_extension(const PlayerNumber sender, const TradeID trad
 	MutexLock m(MutexLock::ID::kObjects);
 
 	const auto trade = trade_agreements_.find(trade_id);
-	if (trade == trade_agreements_.end() || (trade->second.sending_player != sender && trade->second.receiving_player != sender)) {
+	if (trade == trade_agreements_.end() || (trade->second.sending_player != sender && trade->second.receiving_player != sender) || trade->second.num_batches == kInfiniteTrade) {
 		return;
 	}
 
@@ -1628,6 +1628,14 @@ void Game::accept_trade_extension(const PlayerNumber sender, const TradeID trade
 			}
 
 			trade_extension_proposals_.erase(it);
+
+			if (trade->second.num_batches == kInfiniteTrade) {
+				// If the trade is infinite now, further extension don't make sense.
+				trade_extension_proposals_.erase(std::remove_if(trade_extension_proposals_.begin(), trade_extension_proposals_.end(), [trade_id](const TradeExtension& te) {
+					return te.trade_id == trade_id;
+				}));
+			}
+
 			Notifications::publish(NoteTradeChanged(trade_id, NoteTradeChanged::Action::kExtensionProposal));
 			return;
 		}
