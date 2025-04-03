@@ -1492,11 +1492,12 @@ void Game::propose_trade_extension(const PlayerNumber sender,
 		const Market* market =
 		   (proposer_is_initiator ? trade->second.receiver : trade->second.initiator).get(*this);
 		p2->add_message(
-		   *this, std::unique_ptr<Message>(new Message(
-		             Message::Type::kTrading, get_gametime(), _("Trade Extension Proposal"),
-		             market != nullptr ? market->descr().icon_filename() : "images/wui/menus/diplomacy.png",
-		             _("New trade extension proposal received"),
-		             format_l(_("%s has proposed to extend a trade."), p1->get_name()))));
+		   *this,
+		   std::unique_ptr<Message>(new Message(
+		      Message::Type::kTrading, get_gametime(), _("Trade Extension Proposal"),
+		      market != nullptr ? market->descr().icon_filename() : "images/wui/menus/diplomacy.png",
+		      _("New trade extension proposal received"),
+		      format_l(_("%s has proposed to extend a trade."), p1->get_name()))));
 	}
 
 	Notifications::publish(NoteTradeChanged(trade_id, NoteTradeChanged::Action::kExtensionProposal));
@@ -1523,7 +1524,8 @@ void Game::retract_trade_extension(const PlayerNumber sender,
 				p2->add_message(
 				   *this, std::unique_ptr<Message>(new Message(
 				             Message::Type::kTrading, get_gametime(), _("Trade Extension Retracted"),
-				             market != nullptr ? market->descr().icon_filename() : "images/wui/menus/diplomacy.png",
+				             market != nullptr ? market->descr().icon_filename() :
+				                                 "images/wui/menus/diplomacy.png",
 				             _("Trade extension proposal retracted"),
 				             format_l(_("The proposal by %s to extend a trade has been retracted."),
 				                      p1->get_name()))));
@@ -1577,7 +1579,8 @@ void Game::reject_trade_extension(const PlayerNumber sender,
 				p1->add_message(
 				   *this, std::unique_ptr<Message>(new Message(
 				             Message::Type::kTrading, get_gametime(), _("Trade Extension Rejected"),
-				             market != nullptr ? market->descr().icon_filename() : "images/wui/menus/diplomacy.png",
+				             market != nullptr ? market->descr().icon_filename() :
+				                                 "images/wui/menus/diplomacy.png",
 				             _("Trade extension proposal rejected"),
 				             format_l(_("%s has rejected your proposal to extend a trade."),
 				                      p2->get_name()))));
@@ -1646,7 +1649,8 @@ void Game::accept_trade_extension(const PlayerNumber sender,
 				p1->add_message(
 				   *this, std::unique_ptr<Message>(new Message(
 				             Message::Type::kTrading, get_gametime(), _("Trade Extension Accepted"),
-				             market != nullptr ? market->descr().icon_filename() : "images/wui/menus/diplomacy.png",
+				             market != nullptr ? market->descr().icon_filename() :
+				                                 "images/wui/menus/diplomacy.png",
 				             _("Trade extension proposal accepted"),
 				             format_l(_("%s has accepted your proposal to extend a trade."),
 				                      p2->get_name()))));
