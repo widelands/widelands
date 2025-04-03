@@ -1295,19 +1295,6 @@ TradeID Game::propose_trade(TradeInstance trade) {
 	Market* initiator = trade.initiator.get(*this);
 	assert(initiator != nullptr);
 
-	Player* initiating_player = initiator->get_owner();
-	initiator->removed.connect([this, id, initiating_player](const uint32_t /* serial */) {
-		auto it = trade_agreements_.find(id);
-		if (it == trade_agreements_.end()) {
-			return;
-		}
-		if (it->second.state == TradeInstance::State::kProposed) {
-			retract_trade(id);
-		} else {
-			cancel_trade(id, false, initiating_player);
-		}
-	});
-
 	trade.state = TradeInstance::State::kProposed;
 	trade_agreements_[id] = trade;
 
@@ -1340,10 +1327,6 @@ void Game::accept_trade(const TradeID trade_id, Market& receiver) {
 
 	// TODO(sirver,trading): Check connectivity between the markets.
 
-	Player* receiving_player = receiver.get_owner();
-	receiver.removed.connect([this, trade_id, receiving_player](const uint32_t /* serial */) {
-		cancel_trade(trade_id, false, receiving_player);
-	});
 	it->second.receiver = &receiver;
 	it->second.state = TradeInstance::State::kRunning;
 
