@@ -1430,7 +1430,7 @@ void Game::cancel_trade(TradeID trade_id, bool reached_regular_end, const Player
 	// TODO(Nordfriese): Turn pending extension proposals into new trade proposals automatically?
 	trade_extension_proposals_.erase(std::remove_if(trade_extension_proposals_.begin(), trade_extension_proposals_.end(), [trade_id](const TradeExtension& te) {
 		return te.trade_id == trade_id;
-	}));
+	}), trade_extension_proposals_.end());
 
 	Notifications::publish(NoteTradeChanged(trade_id, reached_regular_end ?
 	                                                     NoteTradeChanged::Action::kCompleted :
@@ -1633,7 +1633,7 @@ void Game::accept_trade_extension(const PlayerNumber sender, const TradeID trade
 				// If the trade is infinite now, further extension don't make sense.
 				trade_extension_proposals_.erase(std::remove_if(trade_extension_proposals_.begin(), trade_extension_proposals_.end(), [trade_id](const TradeExtension& te) {
 					return te.trade_id == trade_id;
-				}));
+				}), trade_extension_proposals_.end());
 			}
 
 			Notifications::publish(NoteTradeChanged(trade_id, NoteTradeChanged::Action::kExtensionProposal));
