@@ -75,7 +75,7 @@ bool Market::init(EditorGameBase& egbase) {
 
 void Market::cleanup(EditorGameBase& egbase) {
 	if (upcast(Game, game, &egbase); game != nullptr) {
-		for (const auto &pair : game->all_trade_agreements()) {
+		for (const auto& pair : game->all_trade_agreements()) {
 			if (pair.second.initiator == this || pair.second.receiver == this) {
 				if (pair.second.state == TradeInstance::State::kProposed) {
 					game->retract_trade(pair.first);
