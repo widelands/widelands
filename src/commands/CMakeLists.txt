@@ -40,6 +40,8 @@ wl_library(commands
     cmd_evict_worker.h
     cmd_expedition_config.cc
     cmd_expedition_config.h
+    cmd_extend_trade.cc
+    cmd_extend_trade.h
     cmd_flag_action.cc
     cmd_flag_action.h
     cmd_fleet_targets.cc
