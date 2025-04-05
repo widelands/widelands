@@ -7796,18 +7796,18 @@ msgstr "Oorderreeg-Befehl »%s« is unbekannt.\nVillicht föhlt een »=«?"
 #: ../../../../src/wlapplication.cc:1785
 #, c-format
 msgid "Non-integer value for command line parameter --messagebox-timeout=%s"
-msgstr ""
+msgstr "Keen Ganztahl-Weert för Oorderreeg-Angaav --messagebox-timeout=%s"
 
 #: ../../../../src/wlapplication.cc:1799
 #, c-format
 msgid ""
 "Value is out of range for command line parameter --messagebox-timeout=%s"
-msgstr ""
+msgstr "Weert is to groot of to minn för Oorderreeg-Angaav --messagebox-timeout=%s"
 
 #: ../../../../src/wlapplication.cc:1867
 #, c-format
 msgid "Non-integer value for command line parameter --difficulty=%s"
-msgstr ""
+msgstr "Keen Ganztahl-Weert för Oorderreeg-Angaav --difficulty=%s"
 
 #: ../../../../src/wlapplication.cc:1964
 #, c-format

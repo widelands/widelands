@@ -151,7 +151,7 @@ msgstr "n"
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:122
 msgid "Start the scenario with difficulty `n`. Only valid with --scenario."
-msgstr ""
+msgstr "Begünn de Rutfödderung mit Swierigkeid `n`. Kann blots mit --scenario bruukt worden."
 
 #: ../../../../src/wlapplication_messages.cc:124
 msgid "Start the game with sound disabled."
@@ -184,18 +184,18 @@ msgstr "Dwingt Widelands tum Ofstörten, wenn een Lua-Fehler passeert."
 #: ../../../../src/wlapplication_messages.cc:132
 msgid ""
 "Force Widelands to crash when a game or the editor terminates with an error."
-msgstr ""
+msgstr "Dwingt Widelands tum Ofstörten, wenn een Speel of de Bewarker mit eenem Fehler ofslutt."
 
 #. * TRANSLATORS: Placeholder for a time value in seconds
 #: ../../../../src/wlapplication_messages.cc:135
 msgid "<seconds>"
-msgstr ""
+msgstr "<Sekünnen>"
 
 #: ../../../../src/wlapplication_messages.cc:136
 msgid ""
 "Automatically close modal message boxes after the given number of seconds "
 "time."
-msgstr ""
+msgstr "Modaale Narichtenfensters na de angeven Tahl vun Sekünnen automatisk dichtmaken."
 
 #: ../../../../src/wlapplication_messages.cc:137
 msgid "Delete replays automatically after `n` weeks."
