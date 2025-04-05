@@ -2438,7 +2438,7 @@ std::pair<Player::CustomNamingList, Player::CustomNamingList> read_custom_wareho
 							current.insert(&(*result_sets[i])[t]);
 						}
 					} else {
-						for (auto& set : current) {
+						for (auto* set : current) {
 							set->insert(name);
 						}
 					}
