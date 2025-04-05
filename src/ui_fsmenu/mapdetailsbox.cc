@@ -18,6 +18,8 @@
 
 #include "ui_fsmenu/mapdetailsbox.h"
 
+#include <memory>
+
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
@@ -213,7 +215,8 @@ void MapDetailsBox::show_map_name(const GameSettings& game_settings) {
 	const char* nomap = _("(no map)");
 	// TODO(Nordfriese): If the map was defined by an add-on, use that add-on's textdomain
 	// instead (if available). We'll need to store the add-on name in the savegame for this.
-	i18n::Textdomain td("maps");
+	std::unique_ptr<i18n::GenericTextdomain> td(
+	   AddOns::create_textdomain_for_map(game_settings.mapfilename));
 	map_name_.set_text(!game_settings.mapname.empty() ? _(game_settings.mapname) : nomap);
 }
 
