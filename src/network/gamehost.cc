@@ -507,7 +507,8 @@ void GameHost::run_callback() {
 		packet.string(a->internal_name);
 	}
 
-	std::map<Widelands::PlayerNumber, std::pair<Widelands::Player::CustomNamingList, Widelands::Player::CustomNamingList>>
+	std::map<Widelands::PlayerNumber,
+	         std::pair<Widelands::Player::CustomNamingList, Widelands::Player::CustomNamingList>>
 	   custom_naming_lists;
 	if (!d->settings.savegame) {  // Naming lists don't make sense in savegames
 		int playernumber = d->settings.playernum + 1;

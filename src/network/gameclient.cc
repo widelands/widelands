@@ -324,7 +324,8 @@ void GameClient::do_run(RecvPacket& packet) {
 		}
 	}
 
-	std::map<Widelands::PlayerNumber, std::pair<Widelands::Player::CustomNamingList, Widelands::Player::CustomNamingList>>
+	std::map<Widelands::PlayerNumber,
+	         std::pair<Widelands::Player::CustomNamingList, Widelands::Player::CustomNamingList>>
 	   custom_naming_lists;
 	for (;;) {
 		Widelands::PlayerNumber number = packet.unsigned_8();
