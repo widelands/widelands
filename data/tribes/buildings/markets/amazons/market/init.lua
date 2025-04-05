@@ -12,14 +12,19 @@ wl.Descriptions():new_market_type {
 
    buildcost = {
       balsa = 3,
-      log = 5,
-      rubber = 1,
-      rope = 3
+      granite = 2,
+      quartz = 2,
+      log = 4,
+      rubber = 4,
+      rope = 4
    },
    return_on_dismantle = {
       balsa = 2,
-      log = 3,
-      rope = 1
+      granite = 1,
+      quartz = 1,
+      log = 2,
+      rubber = 2,
+      rope = 2
    },
 
    local_carrier = "amazons_carrier",
