@@ -579,9 +579,19 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 					      cur.x, cur.y, idx);
 
 					Path subpath(cur);
+
 					while (idx < path.get_nsteps()) {
 						subpath.append(map, path[idx]);
+						map.get_neighbour(cur, path[idx], &cur);
 						idx++;
+						if ((map[cur].nodecaps() & MOVECAPS_SWIM) == 0) {
+							fleet_->remove_port(game, destination);
+							molog(game.get_gametime(),
+							      "non swimmable terrain at (%i,%i) removed port %u\n", cur.x, cur.y,
+							      destination->serial());
+							fleet_->add_port(game, destination);
+							return true;
+						}
 					}
 
 					start_task_movepath(game, subpath, descr().get_sail_anims());
@@ -2177,10 +2187,10 @@ bool Ship::start_task_movetodock(Game& game, PortDock& pd) {
 	   game.get_gametime(),
 	   "start_task_movedock: Failed to find a path: ship at %3dx%3d to port at: %3dx%3d\n",
 	   get_position().x, get_position().y, pd.get_positions(game)[0].x, pd.get_positions(game)[0].y);
-	if (get_fleet() != nullptr) {
-		get_fleet()->update(game);
+	if (fleet_ != nullptr) {
+		fleet_->remove_port(game, &pd);
 	}
-	return false;
+	return true;
 }
 
 /// Prepare everything for the coming exploration
