@@ -5,6 +5,7 @@
 # Antoni Szpikowski <szantek2004@gmail.com>, 2021-2022
 # Endrju <endrjux@gmail.com>, 2005
 # GunChleoc, 2016,2018
+# Gurthg Shae, 2025
 # Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2015
 # Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2016-2017
 # Karol Zygmunt, 2024
@@ -29,7 +30,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-04-03 03:08+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Leszek Szary, 2024\n"
+"Last-Translator: Gurthg Shae, 2025\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -687,11 +688,11 @@ msgstr "Przełącz, czy wyświetlać maksymalne miejsca na budynki, które będ�
 #. the map height heat map is shown
 #: ../../../../src/editor/editorinteractive.cc:495
 msgid "Disable height heat map"
-msgstr ""
+msgstr "Wyłącz pokazywanie mapy wysokości terenu"
 
 #: ../../../../src/editor/editorinteractive.cc:496
 msgid "Enable height heat map"
-msgstr ""
+msgstr "Włącz pokazywanie mapy wysokości terenu"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
@@ -1728,7 +1729,7 @@ msgstr "Losowe"
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:463
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:99
 msgid "The tribe will be selected at random."
-msgstr ""
+msgstr "Plemię zostanie wybrane losowo."
 
 #. * TRANSLATORS: Button tooltip in the editor for using a player's starting
 #. position tool
@@ -3276,19 +3277,19 @@ msgstr "Następujące towary zostały usunięte:"
 #, c-format
 msgid "%1$u piece of %2$s"
 msgid_plural "%1$u pieces of %2$s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1$u kawałek z %2$s"
+msgstr[1] "%1$u kawałki z %2$s"
+msgstr[2] "%1$u kawałków z %2$s"
+msgstr[3] "%1$u kawałków z %2$s"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:918
 #, c-format
 msgid "%1$u piece of an unknown ware"
 msgid_plural "%1$u pieces of unknown wares"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1$u kawałek nieznanego towaru"
+msgstr[1] "%1$u kawałki nieznanego towaru"
+msgstr[2] "%1$u kawałków nieznanego towaru"
+msgstr[3] "%1$u kawałków nieznanego towaru"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:924
 msgid ""
@@ -7586,7 +7587,7 @@ msgstr "Śledź myszkę"
 #. 1080)'
 #: ../../../../src/ui_fsmenu/options.cc:589
 msgid "#%1% (%2%, %3%, %4%, %5%)"
-msgstr ""
+msgstr "#%1% (%2%, %3%, %4%, %5%)"
 
 #. * TRANSLATORS: Entry in the window size dropdown
 #: ../../../../src/ui_fsmenu/options.cc:603
@@ -8323,7 +8324,7 @@ msgstr "Menu graczy"
 
 #: ../../../../src/wlapplication_options.cc:521
 msgid "Toggle Height Heat Map"
-msgstr ""
+msgstr "Przełącz pokazywanie mapy wysokości terenu"
 
 #: ../../../../src/wlapplication_options.cc:525
 msgid "Toggle Grid"
@@ -9304,7 +9305,7 @@ msgstr "Anuluj ekspedycję"
 #: ../../../../src/wui/constructionsitewindow.cc:164
 #: ../../../../src/wui/dismantlesitewindow.cc:79
 msgid "Send the builder away"
-msgstr ""
+msgstr "Odeślij budowniczego"
 
 #: ../../../../src/wui/constructionsitewindow.cc:170
 #: ../../../../src/wui/dismantlesitewindow.cc:85
