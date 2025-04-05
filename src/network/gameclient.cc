@@ -141,14 +141,22 @@ void GameClientImpl::send_custom_naming_lists() const {
 	SendPacket s;
 	s.unsigned_8(NETCMD_CUSTOM_NAMING_LISTS);
 
-	auto names = Widelands::read_custom_warehouse_ship_names();
-	s.unsigned_32(names.first.size());
-	for (const std::string& name : names.first) {
-		s.string(name);
+	auto lists = Widelands::read_custom_warehouse_ship_names();
+	s.unsigned_32(lists.first.size());
+	for (const auto& tribe_and_list : lists.first) {
+		s.string(tribe_and_list.first);
+		s.unsigned_32(tribe_and_list.second.size());
+		for (const std::string& name : tribe_and_list.second) {
+			s.string(name);
+		}
 	}
-	s.unsigned_32(names.second.size());
-	for (const std::string& name : names.second) {
-		s.string(name);
+	s.unsigned_32(lists.second.size());
+	for (const auto& tribe_and_list : lists.second) {
+		s.string(tribe_and_list.first);
+		s.unsigned_32(tribe_and_list.second.size());
+		for (const std::string& name : tribe_and_list.second) {
+			s.string(name);
+		}
 	}
 
 	net->send(s);
@@ -316,7 +324,7 @@ void GameClient::do_run(RecvPacket& packet) {
 		}
 	}
 
-	std::map<Widelands::PlayerNumber, std::pair<std::set<std::string>, std::set<std::string>>>
+	std::map<Widelands::PlayerNumber, std::pair<Widelands::Player::CustomNamingList, Widelands::Player::CustomNamingList>>
 	   custom_naming_lists;
 	for (;;) {
 		Widelands::PlayerNumber number = packet.unsigned_8();
@@ -325,10 +333,16 @@ void GameClient::do_run(RecvPacket& packet) {
 		}
 
 		for (size_t i = packet.unsigned_32(); i > 0; --i) {
-			custom_naming_lists[number].first.insert(packet.string());
+			auto& set = custom_naming_lists[number].first[packet.string()];
+			for (size_t j = packet.unsigned_32(); j > 0; --j) {
+				set.insert(packet.string());
+			}
 		}
 		for (size_t i = packet.unsigned_32(); i > 0; --i) {
-			custom_naming_lists[number].second.insert(packet.string());
+			auto& set = custom_naming_lists[number].second[packet.string()];
+			for (size_t j = packet.unsigned_32(); j > 0; --j) {
+				set.insert(packet.string());
+			}
 		}
 	}
 
