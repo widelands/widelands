@@ -12,16 +12,17 @@ wl.Descriptions():new_market_type {
 
    buildcost = {
       log = 3,
-      blackwood = 2,
-      granite = 2,
-      grout = 3,
-      reed = 1
+      blackwood = 4,
+      granite = 5,
+      grout = 2,
+      reed = 4,
    },
    return_on_dismantle = {
       log = 1,
-      blackwood = 1,
-      granite = 1,
-      grout = 1
+      blackwood = 2,
+      granite = 3,
+      grout = 1,
+      reed = 1,
    },
 
    local_carrier = "barbarians_carrier",

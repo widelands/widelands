@@ -11,16 +11,16 @@ wl.Descriptions():new_market_type {
    size = "big",
 
    buildcost = {
-      brick = 5,
-      granite = 2,
-      log = 2,
-      reed = 3
+      brick = 6,
+      granite = 5,
+      log = 6,
+      reed = 5
    },
    return_on_dismantle = {
       brick = 3,
-      granite = 1,
-      log = 1,
-      reed = 1
+      granite = 3,
+      log = 3,
+      reed = 2
    },
 
    local_carrier = "frisians_carrier",

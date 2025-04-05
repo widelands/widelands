@@ -86,17 +86,18 @@ wl.Descriptions():new_market_type {
    size = "big",
 
    buildcost = {
-      log = 2,
-      planks = 2,
-      granite = 2,
+      log = 3,
+      planks = 4,
+      granite = 4,
+      diamond = 1,
       quartz = 1,
-      spidercloth = 1
+      spidercloth = 3,
    },
    return_on_dismantle = {
       log = 1,
       planks = 1,
-      granite = 1,
-      quartz = 1
+      granite = 2,
+      spidercloth = 1,
    },
 
    local_carrier = "atlanteans_carrier",

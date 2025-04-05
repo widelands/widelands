@@ -11,17 +11,19 @@ wl.Descriptions():new_market_type {
    size = "big",
 
    buildcost = {
-      log = 2,
-      planks = 2,
-      granite = 2,
-      marble = 3,
-      marble_column = 2
+      log = 3,
+      planks = 4,
+      granite = 3,
+      marble = 2,
+      marble_column = 1,
+      cloth = 2,
    },
    return_on_dismantle = {
-      planks = 1,
+      log = 1,
+      planks = 2,
       granite = 2,
       marble = 2,
-      marble_column = 1
+      cloth = 1,
    },
 
    local_carrier = "empire_carrier",
