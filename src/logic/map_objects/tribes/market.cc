@@ -721,7 +721,10 @@ std::string TradeInstance::format_richtext(const TradeID id,
 		      egbase.player(receiving_player).get_name()));
 	}
 
-	infotext += "</p><p>";
+	infotext += format("</p><div padding_l=%d padding_b=%d><p>",
+		g_style_manager->styled_size(UI::StyledSize::kWuiTextSpaceBeforeInlineHeader),
+		g_style_manager->styled_size(UI::StyledSize::kWuiTextDefaultGap)
+	);
 	if (num_batches != kInfiniteTrade) {
 		infotext +=
 		   as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
@@ -800,7 +803,8 @@ std::string TradeInstance::format_richtext(const TradeID id,
 		                        egbase.descriptions().get_ware_descr(pair.first)->descname()),
 		               UI::FontStyle::kWuiInfoPanelParagraph);
 	}
-	infotext += "</p></rt>";
+	// Add some spacing at the end
+	infotext += "</p><p><br><br></p></div></rt>";
 
 	return infotext;
 }
