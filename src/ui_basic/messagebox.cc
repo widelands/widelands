@@ -21,6 +21,7 @@
 #include <memory>
 
 #include <SDL_mouse.h>
+#include <SDL_timer.h>
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -28,6 +29,8 @@
 #include "graphic/graphic.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/window.h"
+
+unsigned g_message_box_timeout = 0;
 
 namespace UI {
 
@@ -122,6 +125,8 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	center_to_parent();
 	focus();
 
+	start_time_ = SDL_GetTicks();
+
 	initialization_complete();
 }
 
@@ -182,4 +187,18 @@ void WLMessageBox::clicked_back() {
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	}
 }
+
+void WLMessageBox::think() {
+	Window::think();
+
+	if (is_modal() && g_message_box_timeout > 0 &&
+	    SDL_GetTicks() > start_time_ + g_message_box_timeout) {
+		if (type_ == MBoxType::kOk) {
+			clicked_ok();
+		} else {
+			clicked_back();
+		}
+	}
+}
+
 }  // namespace UI

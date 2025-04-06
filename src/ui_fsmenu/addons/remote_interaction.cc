@@ -912,8 +912,10 @@ void RemoteInteractionWindow::update_data() {
 		text += "<br>";
 		text +=
 		   g_style_manager->font_style(UI::FontStyle::kItalic)
-		      .as_font_tag(format(_("‘%1$s’ commented on version %2$s:"), comment.second.username,
-		                          AddOns::version_to_string(comment.second.version)));
+		      .as_font_tag(info_->category == AddOns::AddOnCategory::kSingleMap ?
+		                      format(_("‘%1$s’ commented:"), comment.second.username) :
+		                      format(_("‘%1$s’ commented on version %2$s:"), comment.second.username,
+		                             AddOns::version_to_string(comment.second.version)));
 		text += "<br>";
 		text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 		           .as_font_tag(comment.second.message);
