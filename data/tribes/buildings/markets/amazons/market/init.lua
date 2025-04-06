@@ -15,7 +15,7 @@ wl.Descriptions():new_market_type {
       granite = 2,
       quartz = 2,
       log = 4,
-      rubber = 4,
+      rubber = 3,
       rope = 4
    },
    return_on_dismantle = {
@@ -23,7 +23,7 @@ wl.Descriptions():new_market_type {
       granite = 1,
       quartz = 1,
       log = 2,
-      rubber = 2,
+      rubber = 1,
       rope = 2
    },
 

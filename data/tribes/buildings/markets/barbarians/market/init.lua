@@ -14,11 +14,11 @@ wl.Descriptions():new_market_type {
       log = 3,
       blackwood = 4,
       granite = 5,
-      grout = 2,
+      grout = 3,
       reed = 4,
    },
    return_on_dismantle = {
-      log = 1,
+      log = 2,
       blackwood = 2,
       granite = 3,
       grout = 1,
