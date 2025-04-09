@@ -58,7 +58,6 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making wine because ...
          descname = _("making wine"),
          actions = {
-            "return=skipped unless economy needs wine",
             "consume=grape:2",
             "sleep=duration:30s",
             "playsound=sound/empire/winebubble priority:40% allow_multiple",
