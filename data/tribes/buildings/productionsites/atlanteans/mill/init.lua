@@ -82,7 +82,6 @@ wl.Descriptions():new_productionsite_type {
             -- time: 3.4 + 15 + 3.6 = 22 sec
             -- No check whether we need blackroot_flour because blackroots cannot be used for anything else.
             "return=skipped when site has corn and economy needs cornmeal and not economy needs blackroot_flour",
-            "return=skipped unless economy needs blackroot_flour",
             "consume=blackroot",
             "sleep=duration:3s400ms",
             "playsound=sound/mill/mill_turning priority:85% allow_multiple",
