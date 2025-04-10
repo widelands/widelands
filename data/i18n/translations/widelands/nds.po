@@ -4954,7 +4954,7 @@ msgstr "Dörsöken (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1618
 msgid "Translations for website maps"
-msgstr ""
+msgstr "Översettens för Internettsied-Kaarten"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1621
 #, c-format
@@ -5127,11 +5127,11 @@ msgstr "De Översettens för dat Verwiedern »%1$s« kunnen nich vun de Server r
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2239
 msgid "Website Maps Translations"
-msgstr ""
+msgstr "Internettsied-Kaarten-Översettens"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2240
 msgid "Downloading website maps translations…"
-msgstr ""
+msgstr "Lade Översettens för Internettsied-Kaarten runner …"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2296
 #, c-format
@@ -5801,7 +5801,7 @@ msgstr "%1$s (vun »%2$s« bewarkt: %3$s)"
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:916
 #, c-format
 msgid "‘%1$s’ commented:"
-msgstr ""
+msgstr "»%1$s« hett kommenteert:"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:917
 #, c-format

@@ -2,14 +2,14 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
-# Juanjo, 2015-2024
+# Juanjo, 2015-2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-04-03 03:08+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
-"Last-Translator: Juanjo, 2015-2024\n"
+"Last-Translator: Juanjo, 2015-2025\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -151,7 +151,7 @@ msgstr "n"
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:122
 msgid "Start the scenario with difficulty `n`. Only valid with --scenario."
-msgstr ""
+msgstr "Comença l'escenari amb dificultat «n». Només és vàlid amb --scenario."
 
 #: ../../../../src/wlapplication_messages.cc:124
 msgid "Start the game with sound disabled."
@@ -184,18 +184,18 @@ msgstr "Força una fallada del Widelands quan hi hagi un error Lua."
 #: ../../../../src/wlapplication_messages.cc:132
 msgid ""
 "Force Widelands to crash when a game or the editor terminates with an error."
-msgstr ""
+msgstr "Força una fallada del Widelands quan una partida o l'editor detecten un error."
 
 #. * TRANSLATORS: Placeholder for a time value in seconds
 #: ../../../../src/wlapplication_messages.cc:135
 msgid "<seconds>"
-msgstr ""
+msgstr "<seconds>"
 
 #: ../../../../src/wlapplication_messages.cc:136
 msgid ""
 "Automatically close modal message boxes after the given number of seconds "
 "time."
-msgstr ""
+msgstr "Tanca les caixes dels missatges modals automàticament després del nombre de segons indicat."
 
 #: ../../../../src/wlapplication_messages.cc:137
 msgid "Delete replays automatically after `n` weeks."

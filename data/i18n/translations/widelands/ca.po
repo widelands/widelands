@@ -4952,7 +4952,7 @@ msgstr "Navega (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1618
 msgid "Translations for website maps"
-msgstr ""
+msgstr "Traduccions dels mapes del lloc web"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1621
 #, c-format
@@ -5125,11 +5125,11 @@ msgstr "Les traduccions del complement «%1$s» no s’han pogut baixar del serv
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2239
 msgid "Website Maps Translations"
-msgstr ""
+msgstr "Traduccions dels mapes del lloc web"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2240
 msgid "Downloading website maps translations…"
-msgstr ""
+msgstr "Es descarreguen les traduccions dels mapes del lloc web…"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2296
 #, c-format
@@ -5799,7 +5799,7 @@ msgstr "%1$s (editat per «%2$s» en %3$s)"
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:916
 #, c-format
 msgid "‘%1$s’ commented:"
-msgstr ""
+msgstr "«%1$s» ha comentat:"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:917
 #, c-format
@@ -7811,18 +7811,18 @@ msgstr "Paràmetre de línia d’ordre desconegut: %s\nPotser falta un signe d�
 #: ../../../../src/wlapplication.cc:1785
 #, c-format
 msgid "Non-integer value for command line parameter --messagebox-timeout=%s"
-msgstr ""
+msgstr "Valor no enter del paràmetre de la línia d’ordres --messagebox-timeout=%s"
 
 #: ../../../../src/wlapplication.cc:1799
 #, c-format
 msgid ""
 "Value is out of range for command line parameter --messagebox-timeout=%s"
-msgstr ""
+msgstr "El valor del paràmetre de la línia d’ordres --messagebox-timeout=%s està fora del rang vàlid."
 
 #: ../../../../src/wlapplication.cc:1867
 #, c-format
 msgid "Non-integer value for command line parameter --difficulty=%s"
-msgstr ""
+msgstr "Valor no enter del paràmetre de la línia d’ordres --difficulty=%s"
 
 #: ../../../../src/wlapplication.cc:1964
 #, c-format
