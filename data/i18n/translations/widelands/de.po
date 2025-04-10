@@ -1738,7 +1738,7 @@ msgstr "Zufällig"
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:463
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:99
 msgid "The tribe will be selected at random."
-msgstr ""
+msgstr "Der Stamm wird per Zufall ausgewählt."
 
 #. * TRANSLATORS: Button tooltip in the editor for using a player's starting
 #. position tool
@@ -4981,7 +4981,7 @@ msgstr "Durchsuchen (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1618
 msgid "Translations for website maps"
-msgstr ""
+msgstr "Übersetzungen für Homepage Karten"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1621
 #, c-format
@@ -5154,11 +5154,11 @@ msgstr "Die Übersetzungsdateien für die Erweiterung „%1$s“ konnten nicht h
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2239
 msgid "Website Maps Translations"
-msgstr ""
+msgstr "Übersetzungen der Homepage Karten"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2240
 msgid "Downloading website maps translations…"
-msgstr ""
+msgstr "Lade Übersetzungen der Homepage Karten herunter…"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2296
 #, c-format
@@ -5828,7 +5828,7 @@ msgstr "%1$s (bearbeitet von ‘%2$s’ am %3$s)"
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:916
 #, c-format
 msgid "‘%1$s’ commented:"
-msgstr ""
+msgstr "‘%1$s’ hat kommentiert:"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:917
 #, c-format
@@ -7535,7 +7535,7 @@ msgstr "Mauszeiger folgen"
 #. 1080)'
 #: ../../../../src/ui_fsmenu/options.cc:589
 msgid "#%1% (%2%, %3%, %4%, %5%)"
-msgstr ""
+msgstr "#%1% (%2%, %3%, %4%, %5%)"
 
 #. * TRANSLATORS: Entry in the window size dropdown
 #: ../../../../src/ui_fsmenu/options.cc:603
@@ -7840,18 +7840,18 @@ msgstr "Unbekannter Kommandozeilenparameter:%s\nVielleicht fehlt ein „=“?"
 #: ../../../../src/wlapplication.cc:1785
 #, c-format
 msgid "Non-integer value for command line parameter --messagebox-timeout=%s"
-msgstr ""
+msgstr "Nicht ganzzahliger Wert für Kommandozeilenparameter --messagebox-timeout=%s"
 
 #: ../../../../src/wlapplication.cc:1799
 #, c-format
 msgid ""
 "Value is out of range for command line parameter --messagebox-timeout=%s"
-msgstr ""
+msgstr "Wert außerhalb des Wertebereichs für Kommandozeilenparameter --messagebox-timeout=%s"
 
 #: ../../../../src/wlapplication.cc:1867
 #, c-format
 msgid "Non-integer value for command line parameter --difficulty=%s"
-msgstr ""
+msgstr "Nicht ganzzahliger Wert für Kommandozeilenparameter --difficulty=%s"
 
 #: ../../../../src/wlapplication.cc:1964
 #, c-format
@@ -9249,7 +9249,7 @@ msgstr "Expedition abbrechen"
 #: ../../../../src/wui/constructionsitewindow.cc:164
 #: ../../../../src/wui/dismantlesitewindow.cc:79
 msgid "Send the builder away"
-msgstr ""
+msgstr "Bauarbeiter wegschicken"
 
 #: ../../../../src/wui/constructionsitewindow.cc:170
 #: ../../../../src/wui/dismantlesitewindow.cc:85
