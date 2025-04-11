@@ -37,7 +37,7 @@ wl.Descriptions():new_productionsite_type {
 
    aihints = {
       prohibited_till = 530,
-      forced_after = 720,
+      forced_after = 720  -- outdated AI hint that should no longer be used in the future.
    },
 
    working_positions = {
