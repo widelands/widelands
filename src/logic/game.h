@@ -546,7 +546,13 @@ private:
 	std::map<TradeID, TradeInstance> trade_agreements_;
 	std::vector<TradeExtension> trade_extension_proposals_;
 
-	[[nodiscard]] bool check_trade_player_matches(const TradeInstance& trade, const PlayerNumber sender, PlayerNumber proposer, bool check_recipient, Player** p1, Player** p2, const Market** market);
+	[[nodiscard]] bool check_trade_player_matches(const TradeInstance& trade,
+	                                              const PlayerNumber sender,
+	                                              PlayerNumber proposer,
+	                                              bool check_recipient,
+	                                              Player** p1,
+	                                              Player** p2,
+	                                              const Market** market);
 
 	Serial last_economy_serial_ = 0;
 	Serial last_detectedportspace_serial_ = 0;
