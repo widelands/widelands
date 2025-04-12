@@ -49,9 +49,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: 25.4 + 30 + 3.6 = 59 sec
             "return=skipped unless economy needs spider_silk",
             "consume=corn water",
-            "sleep=duration:25s",
+            "sleep=duration:25s400ms",
             "animate=working duration:30s",
             "produce=spider_silk"
          }
