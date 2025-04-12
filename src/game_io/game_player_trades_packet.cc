@@ -75,12 +75,13 @@ void GamePlayerTradesPacket::read(FileSystem& fs, Game& game, MapObjectLoader* m
 				}
 			}
 
-			for (size_t i = packet_version >= 2 ? fr.unsigned_32() : 0; i > 0; --i) {
-				game.trade_extension_proposals_.emplace_back();
-				TradeExtension& te = game.trade_extension_proposals_.back();
-				te.trade_id = fr.unsigned_32();
-				te.proposer = fr.unsigned_8();
-				te.batches = fr.signed_32();
+			if (packet_version >= 2) {  // TODO(Nordfriese): Savegame compatibility v1.3~dev
+				for (size_t i = fr.unsigned_32(); i > 0; --i) {
+					const TradeID trade_id = fr.unsigned_32();
+					const PlayerNumber proposer = fr.unsigned_8();
+					const int32_t batches = fr.signed_32();
+					game.trade_extension_proposals_.emplace_back(trade_id, proposer, batches);
+				}
 			}
 		} else {
 			throw UnhandledVersionError(

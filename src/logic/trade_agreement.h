@@ -62,6 +62,9 @@ struct TradeExtension {
 	TradeID trade_id;
 	PlayerNumber proposer;
 	int32_t batches;
+
+	TradeExtension(TradeID ti, PlayerNumber p, int32_t b) : trade_id(ti), proposer(p), batches(b) {
+	}
 };
 
 enum class TradeAction : uint8_t {

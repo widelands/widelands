@@ -1288,6 +1288,35 @@ void Game::send_player_fleet_targets(PlayerNumber p, Serial i, Quantity q) {
 	send_player_command(new CmdFleetTargets(get_gametime(), p, i, q));
 }
 
+bool Game::check_trade_player_matches(const TradeInstance& trade, const PlayerNumber sender, const PlayerNumber proposer, const bool check_recipient, Player** p1, Player** p2, const Market** market)
+{
+	if (check_recipient) {
+		// Check if this is the correct recipient player
+		if (proposer == trade.sending_player) {
+			if (sender != trade.receiving_player) {
+				return false;
+			}
+		} else if (proposer == trade.receiving_player) {
+			if (sender != trade.sending_player) {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	const bool proposer_is_initiator = proposer == trade.sending_player;
+	*p1 = get_safe_player(proposer_is_initiator ? trade.sending_player :
+	                                                     trade.receiving_player);
+	*p2 = get_safe_player(proposer_is_initiator ? trade.receiving_player :
+	                                                     trade.sending_player);
+	*market =
+	   (proposer_is_initiator ? trade.initiator : trade.receiver)
+	      .get(*this);
+
+	return true;
+}
+
 TradeID Game::propose_trade(TradeInstance trade) {
 	MutexLock m(MutexLock::ID::kObjects);
 	const TradeID id = next_trade_agreement_id_++;
@@ -1413,7 +1442,8 @@ void Game::cancel_trade(TradeID trade_id, bool reached_regular_end, const Player
 
 	trade_agreements_.erase(trade_id);
 
-	// TODO(Nordfriese): Turn pending extension proposals into new trade proposals automatically?
+	// TODO(Nordfriese): Turn pending extension proposals into new trade proposals
+	// automatically if the trade reached its regular end?
 	trade_extension_proposals_.erase(
 	   std::remove_if(trade_extension_proposals_.begin(), trade_extension_proposals_.end(),
 	                  [trade_id](const TradeExtension& te) { return te.trade_id == trade_id; }),
@@ -1477,20 +1507,16 @@ void Game::propose_trade_extension(const PlayerNumber sender,
 		return;
 	}
 
-	trade_extension_proposals_.emplace_back();
-	TradeExtension& te = trade_extension_proposals_.back();
-	te.trade_id = trade_id;
-	te.proposer = sender;
-	te.batches = batches;
+	trade_extension_proposals_.emplace_back(trade_id, sender, batches);
 
 	{
-		const bool proposer_is_initiator = te.proposer == trade->second.sending_player;
-		Player* p1 = get_safe_player(proposer_is_initiator ? trade->second.sending_player :
-		                                                     trade->second.receiving_player);
-		Player* p2 = get_safe_player(proposer_is_initiator ? trade->second.receiving_player :
-		                                                     trade->second.sending_player);
-		const Market* market =
-		   (proposer_is_initiator ? trade->second.receiver : trade->second.initiator).get(*this);
+		Player* p1;
+		Player* p2;
+		const Market* market;
+		if (!check_trade_player_matches(trade->second, sender, sender, false, &p1, &p2, &market)) {
+			NEVER_HERE();
+		}
+
 		p2->add_message(
 		   *this,
 		   std::unique_ptr<Message>(new Message(
@@ -1513,14 +1539,14 @@ void Game::retract_trade_extension(const PlayerNumber sender,
 
 			if (const auto trade = trade_agreements_.find(trade_id);
 			    trade != trade_agreements_.end()) {
-				const bool proposer_is_initiator = it->proposer == trade->second.sending_player;
-				Player* p1 = get_safe_player(proposer_is_initiator ? trade->second.sending_player :
-				                                                     trade->second.receiving_player);
-				Player* p2 = get_safe_player(proposer_is_initiator ? trade->second.receiving_player :
-				                                                     trade->second.sending_player);
-				const Market* market =
-				   (proposer_is_initiator ? trade->second.receiver : trade->second.initiator)
-				      .get(*this);
+
+				Player* p1;
+				Player* p2;
+				const Market* market;
+				if (!check_trade_player_matches(trade->second, sender, it->proposer, false, &p1, &p2, &market)) {
+					NEVER_HERE();
+				}
+
 				p2->add_message(
 				   *this, std::unique_ptr<Message>(new Message(
 				             Message::Type::kTrading, get_gametime(), _("Trade Extension Retracted"),
@@ -1554,37 +1580,21 @@ void Game::reject_trade_extension(const PlayerNumber sender,
 				continue;
 			}
 
-			// Check if this is the correct recipient player
-			if (it->proposer == trade->second.sending_player) {
-				if (sender != trade->second.receiving_player) {
-					continue;
-				}
-			} else if (it->proposer == trade->second.receiving_player) {
-				if (sender != trade->second.sending_player) {
-					continue;
-				}
-			} else {
+			Player* p1;
+			Player* p2;
+			const Market* market;
+			if (!check_trade_player_matches(trade->second, sender, it->proposer, true, &p1, &p2, &market)) {
 				continue;
 			}
 
-			{
-				const bool proposer_is_initiator = it->proposer == trade->second.sending_player;
-				Player* p1 = get_safe_player(proposer_is_initiator ? trade->second.sending_player :
-				                                                     trade->second.receiving_player);
-				Player* p2 = get_safe_player(proposer_is_initiator ? trade->second.receiving_player :
-				                                                     trade->second.sending_player);
-				const Market* market =
-				   (proposer_is_initiator ? trade->second.initiator : trade->second.receiver)
-				      .get(*this);
-				p1->add_message(
-				   *this, std::unique_ptr<Message>(new Message(
-				             Message::Type::kTrading, get_gametime(), _("Trade Extension Rejected"),
-				             market != nullptr ? market->descr().icon_filename() :
-				                                 "images/wui/menus/diplomacy.png",
-				             _("Trade extension proposal rejected"),
-				             format_l(_("%s has rejected your proposal to extend a trade."),
-				                      p2->get_name()))));
-			}
+			p1->add_message(
+			   *this, std::unique_ptr<Message>(new Message(
+			             Message::Type::kTrading, get_gametime(), _("Trade Extension Rejected"),
+			             market != nullptr ? market->descr().icon_filename() :
+			                                 "images/wui/menus/diplomacy.png",
+			             _("Trade extension proposal rejected"),
+			             format_l(_("%s has rejected your proposal to extend a trade."),
+			                      p2->get_name()))));
 
 			trade_extension_proposals_.erase(it);
 			Notifications::publish(
@@ -1609,16 +1619,10 @@ void Game::accept_trade_extension(const PlayerNumber sender,
 				continue;
 			}
 
-			// Check if this is the correct recipient player
-			if (it->proposer == trade->second.sending_player) {
-				if (sender != trade->second.receiving_player) {
-					continue;
-				}
-			} else if (it->proposer == trade->second.receiving_player) {
-				if (sender != trade->second.sending_player) {
-					continue;
-				}
-			} else {
+			Player* p1;
+			Player* p2;
+			const Market* proposing_market;
+			if (!check_trade_player_matches(trade->second, sender, it->proposer, true, &p1, &p2, &proposing_market)) {
 				continue;
 			}
 
@@ -1637,24 +1641,14 @@ void Game::accept_trade_extension(const PlayerNumber sender,
 				}
 			}
 
-			{
-				const bool proposer_is_initiator = it->proposer == trade->second.sending_player;
-				Player* p1 = get_safe_player(proposer_is_initiator ? trade->second.sending_player :
-				                                                     trade->second.receiving_player);
-				Player* p2 = get_safe_player(proposer_is_initiator ? trade->second.receiving_player :
-				                                                     trade->second.sending_player);
-				const Market* market =
-				   (proposer_is_initiator ? trade->second.initiator : trade->second.receiver)
-				      .get(*this);
-				p1->add_message(
-				   *this, std::unique_ptr<Message>(new Message(
-				             Message::Type::kTrading, get_gametime(), _("Trade Extension Accepted"),
-				             market != nullptr ? market->descr().icon_filename() :
-				                                 "images/wui/menus/diplomacy.png",
-				             _("Trade extension proposal accepted"),
-				             format_l(_("%s has accepted your proposal to extend a trade."),
-				                      p2->get_name()))));
-			}
+			p1->add_message(
+			   *this, std::unique_ptr<Message>(new Message(
+			             Message::Type::kTrading, get_gametime(), _("Trade Extension Accepted"),
+			             proposing_market != nullptr ? proposing_market->descr().icon_filename() :
+			                                 "images/wui/menus/diplomacy.png",
+			             _("Trade extension proposal accepted"),
+			             format_l(_("%s has accepted your proposal to extend a trade."),
+			                      p2->get_name()))));
 
 			trade_extension_proposals_.erase(it);
 
