@@ -4958,7 +4958,7 @@ msgstr "Bladeren (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1618
 msgid "Translations for website maps"
-msgstr ""
+msgstr "Vertalingen voor websitekaarten"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1621
 #, c-format
@@ -5131,11 +5131,11 @@ msgstr "De vertalingen voor de add-on ‘%1$s’ kon niet worden gedownload van 
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2239
 msgid "Website Maps Translations"
-msgstr ""
+msgstr "Website Kaarten Vertalingen"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2240
 msgid "Downloading website maps translations…"
-msgstr ""
+msgstr "Vertalingen van websitekaarten downloaden..."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2296
 #, c-format
@@ -5805,7 +5805,7 @@ msgstr "%1$s (bewerkt door ‘%2$s’ op %3$s)"
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:916
 #, c-format
 msgid "‘%1$s’ commented:"
-msgstr ""
+msgstr "‘%1$s’ gereageerd:"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:917
 #, c-format
@@ -7817,18 +7817,18 @@ msgstr "Onbekende opdracht regel parameter: %s\nMisschien ontbreekt er een '=' ?
 #: ../../../../src/wlapplication.cc:1785
 #, c-format
 msgid "Non-integer value for command line parameter --messagebox-timeout=%s"
-msgstr ""
+msgstr "Niet-gehele waarde voor commandoregelparameter --berichtenbox-timeout=%s"
 
 #: ../../../../src/wlapplication.cc:1799
 #, c-format
 msgid ""
 "Value is out of range for command line parameter --messagebox-timeout=%s"
-msgstr ""
+msgstr "Waarde is buiten bereik voor opdrachtregelparameter --berichtbox-timeout=%s"
 
 #: ../../../../src/wlapplication.cc:1867
 #, c-format
 msgid "Non-integer value for command line parameter --difficulty=%s"
-msgstr ""
+msgstr "Niet-gehele waarde voor opdrachtregelparameter -- moeilijkheidsgraad=%s"
 
 #: ../../../../src/wlapplication.cc:1964
 #, c-format
