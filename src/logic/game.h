@@ -547,7 +547,7 @@ private:
 	std::vector<TradeExtension> trade_extension_proposals_;
 
 	[[nodiscard]] bool check_trade_player_matches(const TradeInstance& trade,
-	                                              const PlayerNumber sender,
+	                                              PlayerNumber sender,
 	                                              PlayerNumber proposer,
 	                                              bool check_recipient,
 	                                              Player** p1,
