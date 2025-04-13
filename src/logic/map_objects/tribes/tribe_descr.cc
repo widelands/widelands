@@ -979,7 +979,7 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 		if (building->workarea_info().size() > 3) {
 			// InteractiveBase cannot visualize more than 3 workarea rings
 			throw GameDataError("%s: Building cannot have more than 3 workareas, found %" PRIuS,
-				                name().c_str(), building->workarea_info().size());
+			                    name().c_str(), building->workarea_info().size());
 		}
 
 		// Calculate largest possible workarea radius
