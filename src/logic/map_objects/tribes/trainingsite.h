@@ -280,9 +280,6 @@ private:
 	// The soldier we picked to be trained next
 	OPtr<Soldier> selected_soldier_;
 
-	// TODO(tothxa): Shouldn't ProductionSite already provide a searchable list of inputs?
-	std::map<DescriptionIndex, InputQueue*> inputs_map_;
-
 	// These are used for kicking out soldiers prematurely
 	static const uint32_t training_state_multiplier_;
 	uint32_t max_stall_val_;

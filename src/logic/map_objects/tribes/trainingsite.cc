@@ -840,22 +840,8 @@ void TrainingSite::set_current_training_step(const uint8_t attr, const uint16_t 
 }
 
 void TrainingSite::update_upgrade_statuses(const bool select_next_step) {
-	// TODO(tothxa): This is just wrong. ProductionSite should already provide a searchable
-	//               inputs list.
-	//               Also, make this a separate function.
-	// Inputqueues are set up in init() for new buildings, or loaded from savegames.
-	// It's easiest to set this up here, where it is needed.
-	if (inputs_map_.empty()) {
-		for (InputQueue* iq : inputqueues()) {
-			// Don't want a composite key and no training step needs workers currently.
-			if (iq->get_type() != WareWorker::wwWARE) {
-				throw wexception("Trainingsites should only have ware inputs.");
-			}
-			inputs_map_.emplace(iq->get_index(), iq);
-		}
-	}
-
 	max_possible_status_ = Upgrade::Status::kDisabled;
+
 	for (auto& upgrade_it : upgrades_) {
 		Upgrade& upgrade = upgrade_it.second;
 		upgrade.candidates.clear();
@@ -869,10 +855,10 @@ void TrainingSite::update_upgrade_statuses(const bool select_next_step) {
 			uint32_t here = 0;
 			uint32_t soon = 0;
 			for (const auto& ware : group.first) {
-				InputQueue* iq = inputs_map_.at(ware.first);
-				max += iq->get_max_fill();
-				here += iq->get_filled();
-				soon += iq->get_max_fill() - iq->get_missing();
+				const InputQueue& iq = inputqueue(ware.first, ware.second, nullptr);
+				max += iq.get_max_fill();
+				here += iq.get_filled();
+				soon += iq.get_max_fill() - iq.get_missing();
 			}
 			if (max < group.second) {
 				upgrade.status = Upgrade::Status::kDisabled;
