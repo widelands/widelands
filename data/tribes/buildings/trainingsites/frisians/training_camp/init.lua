@@ -58,10 +58,10 @@ wl.Descriptions():new_trainingsite_type {
    },
 
    inputs = {
-      { name = "beer", amount = 6 },
-      { name = "bread_frisians", amount = 6 },
       { name = "smoked_fish", amount = 6 },
       { name = "smoked_meat", amount = 6 },
+      { name = "bread_frisians", amount = 6 },
+      { name = "beer", amount = 6 },
       { name = "sword_long", amount = 2 },
       { name = "sword_broad", amount = 2 },
       { name = "sword_double", amount = 2 },

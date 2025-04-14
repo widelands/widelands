@@ -61,8 +61,8 @@ wl.Descriptions():new_trainingsite_type {
    inputs = {
       { name = "smoked_fish", amount = 6 },
       { name = "smoked_meat", amount = 6 },
-      { name = "mead", amount = 6 },
       { name = "honey_bread", amount = 6 },
+      { name = "mead", amount = 6 },
       { name = "sword_long", amount = 3 },
       { name = "sword_broad", amount = 3 },
       { name = "sword_double", amount = 3 },
