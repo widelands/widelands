@@ -182,7 +182,7 @@ void NetAddons::append_multiline_message(std::string& send, const std::string& m
 
 void NetAddons::set_timeouts(bool suppress_timeout) {
 	timeout_was_suppressed_ = suppress_timeout;
-	const uint32_t kTimeout = suppress_timeout ? (60 * 60 * 12) : 4;
+	const uint32_t kTimeout = suppress_timeout ? (60 * 60 * 12) : 12;
 #ifdef _WIN32
 	DWORD timeout_val = kTimeout * 1000;
 	const char* timeout_ptr = reinterpret_cast<const char*>(&timeout_val);
