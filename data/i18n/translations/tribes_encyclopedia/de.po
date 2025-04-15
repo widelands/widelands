@@ -1642,7 +1642,7 @@ msgctxt "amazons_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce a tapir"
 " in %s on average."
-msgstr ""
+msgstr "Wenn alle benötigten Waren rechtzeitig geliefert werden, kann dieses Gebäude einen Tapir in durchschnittlich %s züchten."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Cassava
 #. Plantation
@@ -4967,7 +4967,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce a horse"
 " in %s on average."
-msgstr ""
+msgstr "Wenn alle benötigten Waren rechtzeitig geliefert werden, kann dieses Gebäude ein Pferd in durchschnittlich %s züchten."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1815
@@ -6296,7 +6296,7 @@ msgid ""
 "hammer. Make sure you’ve always got some in reserve! They are one of the "
 "basic tools produced at the metal workshop (but cease to be produced by the "
 "building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Er wird von Geologen, Bauarbeitern, Schmieden, Helmschmieden und Schiffbauern gebraucht. Sorge dafür, dass du immer einige in Reserve hast! Er gehört zu den grundlegenden Werkzeugen, die in der Werkzeugschmiede hergestellt werden (aber nicht mehr, wenn diese zu einer Axt- oder Waffenschmiede erweitert wurde)."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Fishing Rod, part 1
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 1
@@ -8062,7 +8062,7 @@ msgstr "Webt Stoff aus Reet."
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The weaving mill needs %s on average to produce one cloth."
-msgstr ""
+msgstr "Die Weberei benötigt durchschnittlich %s, um ein Stück Stoff zu weben."
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1896
@@ -10469,7 +10469,7 @@ msgid ""
 "Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
 "hammer. Make sure you’ve always got some in reserve! They are produced by "
 "the toolsmith."
-msgstr ""
+msgstr "Er wird von Geologen, Bauarbeitern, Waffen- und Rüstungsschmieden und Schiffbauern gebraucht. Sorge dafür, dass du immer einige in Reserve hast! Er wird vom Werkzeugmacher hergestellt."
 
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 2
 #. TRANSLATORS: Helptext for an Empire ware: Hunting Spear, part 2
@@ -11793,7 +11793,7 @@ msgctxt "empire_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce a "
 "donkey in %s on average."
-msgstr ""
+msgstr "Wenn alle benötigten Waren rechtzeitig geliefert werden, kann dieses Gebäude einen Esel in durchschnittlich %s züchten."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11919,7 +11919,7 @@ msgstr "Webt Stoff aus Wolle."
 #, lua-format
 msgctxt "empire_building"
 msgid "The weaving mill needs %s on average to produce one cloth."
-msgstr ""
+msgstr "Die Weberei benötigt durchschnittlich %s, um ein Stück Stoff zu weben."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14008,7 +14008,7 @@ msgid ""
 "Geologists, builders, blacksmiths and shipwrights all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the "
 "blacksmithy."
-msgstr ""
+msgstr "Geologen, Bauarbeiter, Schmiede und Schiffbauer brauchen alle einen Hammer. Sorge dafür, dass du immer einige in Reserve hast! Sie werden in der Schmiede hergestellt."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Fishing Net
 #: ../../../../data/tribes/initialization/frisians/units.lua:447
