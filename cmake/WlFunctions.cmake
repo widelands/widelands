@@ -65,6 +65,9 @@ macro(_common_compile_tasks)
     # This is needed for header only libraries. While they do not really mean
     # anything for cmake, they are useful to make dependencies explicit.
     set_target_properties(${NAME} PROPERTIES LINKER_LANGUAGE CXX)
+  else()
+    set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} ${WL_GENERIC_C_LIBRARY_FLAGS}")
+    set_target_properties(${NAME} PROPERTIES LINKER_LANGUAGE C)
   endif()
 
   set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} ${WL_OPTIMIZE_FLAGS} ${WL_DEBUG_FLAGS}")
