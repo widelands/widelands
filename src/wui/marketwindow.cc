@@ -21,6 +21,7 @@
 #include <memory>
 
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "ui_basic/box.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
@@ -43,6 +44,10 @@ constexpr const char* kIconInfinity = "images/wui/menus/infinity.png";
 constexpr const char* kIconMoveTrade = "images/wui/buildings/menu_tab_trade_offers.png";
 
 constexpr Duration kUpdateTimeInGametimeMs(500);  //  half a second, gametime
+
+static inline int32_t calc_max_box_height() {
+	return g_gr->get_yres() - 7 * kButtonSize;
+}
 
 class NewTradeProposalBox : public UI::Box {
 public:
@@ -269,6 +274,8 @@ public:
 	     player_number_(market.owner().player_number()),
 	     market_serial_(market.serial()) {
 		set_min_desired_breadth(kMinBoxWidth);
+		set_force_scrolling(true);
+		set_max_size(get_max_x(), calc_max_box_height());
 
 		trade_changed_subscriber_ = Notifications::subscribe<Widelands::NoteTradeChanged>(
 		   [this](const Widelands::NoteTradeChanged& /*note*/) { needs_update_ = true; });
@@ -374,7 +381,6 @@ private:
 				}
 
 				add(box, UI::Box::Resizing::kExpandBoth);
-				add_space(kSpacing);
 			}
 		}
 
@@ -405,6 +411,8 @@ public:
 	     market_serial_(market.serial()),
 	     market_coords_(market.get_position()) {
 		set_min_desired_breadth(kMinBoxWidth);
+		set_force_scrolling(true);
+		set_max_size(get_max_x(), calc_max_box_height());
 
 		trade_changed_subscriber_ = Notifications::subscribe<Widelands::NoteTradeChanged>(
 		   [this](const Widelands::NoteTradeChanged& /*note*/) { needs_update_ = true; });
@@ -481,7 +489,6 @@ private:
 				box->add(yes, UI::Box::Resizing::kAlign, UI::Align::kTop);
 
 				add(box, UI::Box::Resizing::kExpandBoth);
-				add_space(kSpacing);
 			}
 		}
 
@@ -532,7 +539,6 @@ public:
 		set_min_desired_breadth(kMinBoxWidth);
 
 		add(&info_, UI::Box::Resizing::kExpandBoth);
-		add_space(kSpacing);
 
 		const Widelands::Market::TradeOrder& order = *market.trade_orders().at(trade_id_);
 		InputQueueDisplay* iqd = new InputQueueDisplay(

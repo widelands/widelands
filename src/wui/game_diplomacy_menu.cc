@@ -20,6 +20,7 @@
 
 #include "base/time_string.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/market.h"
 #include "logic/player.h"
@@ -179,9 +180,12 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 	actions_hbox_.add_space(kSpacing);
 	actions_hbox_.add(&actions_vbox_no_, UI::Box::Resizing::kFullSize);
 
-	trades_box_offers_.set_min_desired_breadth(kMinBoxWidth);
-	trades_box_proposed_.set_min_desired_breadth(kMinBoxWidth);
-	trades_box_active_.set_min_desired_breadth(kMinBoxWidth);
+	const int maxh = g_gr->get_yres() - hbox_.get_h() - hbox_.get_h() - 7 * kRowSize;
+	for (UI::Box* box : {&trades_box_offers_, &trades_box_proposed_, &trades_box_active_}) {
+		box->set_min_desired_breadth(kMinBoxWidth);
+		box->set_force_scrolling(true);
+		box->set_max_size(box->get_max_x(), maxh);
+	}
 
 	trades_tabs_.add(
 	   "active", "", &trades_box_offers_, _("Trade offers you have received from other players"));
@@ -478,7 +482,6 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 		box->add_space(kSpacing);
 		box->add(buttons, UI::Box::Resizing::kAlign, UI::Align::kTop);
 		trades_box_offers_.add(box, UI::Box::Resizing::kExpandBoth);
-		trades_box_offers_.add_space(kSpacing);
 	}
 }
 
@@ -578,7 +581,6 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 		box->add_space(kSpacing);
 		box->add(buttons, UI::Box::Resizing::kAlign, UI::Align::kTop);
 		trades_box_proposed_.add(box, UI::Box::Resizing::kExpandBoth);
-		trades_box_proposed_.add_space(kSpacing);
 	}
 }
 
@@ -689,7 +691,6 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		box->add_space(kSpacing);
 		box->add(buttons, UI::Box::Resizing::kAlign, UI::Align::kTop);
 		trades_box_active_.add(box, UI::Box::Resizing::kExpandBoth);
-		trades_box_active_.add_space(kSpacing);
 	}
 }
 

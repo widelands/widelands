@@ -121,6 +121,11 @@ void AbstractWaresDisplay::set_vgap(int32_t gap, bool relayout) {
 	recalc_desired_size(relayout);
 }
 
+void AbstractWaresDisplay::set_min_free_vertical_space(int32_t s, bool relayout) {
+	min_free_vertical_space_ = s;
+	recalc_desired_size(relayout);
+}
+
 void AbstractWaresDisplay::recalc_desired_size(bool relayout) {
 	relayout_icons_order_coords();
 
@@ -736,6 +741,7 @@ TradeProposalWaresDisplay::TradeProposalWaresDisplay(UI::Panel* parent,
                                                      const Widelands::TribeDescr& tribe)
    : WaresDisplay(parent, 0, 0, tribe, Widelands::wwWARE, true) {
 	set_other(nullptr);
+	set_min_free_vertical_space(430, true);
 }
 
 uint32_t TradeProposalWaresDisplay::amount_of(Widelands::DescriptionIndex di) {
