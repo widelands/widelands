@@ -35,7 +35,6 @@ wl.Descriptions():new_productionsite_type {
    },
 
    aihints = {
-      --supports_production_of = { "balsa", "rubber", "ironwood" },
       prohibited_till = 460
    },
 
