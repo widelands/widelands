@@ -5,6 +5,7 @@
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006
 # Antoni Szpikowski <szantek2004@gmail.com>, 2021-2022
 # GunChleoc, 2014
+# Gurthg Shae, 2025
 # Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2015
 # Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2016-2017
 # Jacek Wolszczak <shutdownrunner@o2.pl>, 2008
@@ -20,9 +21,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-03-27 03:05+0000\n"
+"POT-Creation-Date: 2025-04-12 03:06+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Leszek Szary, 2024\n"
+"Last-Translator: Gurthg Shae, 2025\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -724,7 +725,7 @@ msgstr "Ostróg"
 #: ../../../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:50
 msgctxt "empire_building"
 msgid "Your soldier has occupied your blockhouse."
-msgstr ""
+msgstr "Twój żołnierz zajął miejsce w twoim ostrogu."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:52
@@ -1084,7 +1085,7 @@ msgstr "Drewniana wieża"
 #: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:60
 msgctxt "frisians_building"
 msgid "Your soldier has occupied your wooden tower."
-msgstr ""
+msgstr "Twój żołnierz zajął miejsce w twojej drewnianej wieży."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:62
@@ -1418,7 +1419,7 @@ msgid "Food Preserver"
 msgstr "Konserwator żywności"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:60
+#: ../../../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:59
 #: ../../../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:62
 #: ../../../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:71
 #: ../../../../data/tribes/buildings/productionsites/barbarians/tavern/init.lua:77
@@ -1435,7 +1436,7 @@ msgid "Furnace"
 msgstr "Huta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:59
+#: ../../../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:58
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:91
 #: ../../../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:95
 #: ../../../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:103
@@ -1451,8 +1452,8 @@ msgstr "Centrum ogrodnicze"
 
 #. TRANSLATORS: Completed/Skipped/Did not start enhancing the fertility of
 #. land because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:54
-#: ../../../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:68
+#: ../../../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:53
+#: ../../../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:67
 msgid "enhancing the fertility of land"
 msgstr "zwiększanie żywności ziemi"
 
@@ -1520,31 +1521,31 @@ msgid "Hunter-Gatherer’s Hut"
 msgstr "Chata myśliwego"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:40
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:39
 msgid "gathering"
 msgstr "zbieranie"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:51
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:50
 msgid "gathering meat"
 msgstr "zbieranie mięsa"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:63
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:62
 msgid "gathering fish"
 msgstr "zbieranie ryb"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:76
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:75
 msgid "No Game, No Fish"
 msgstr "Brak zwierzyny, brak ryb"
 
 #. TRANSLATORS: "Game" means animals that you can hunt
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:78
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:77
 msgid "Out of Game and Fish"
 msgstr "Brak zwierzyny i ryb"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:80
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:79
 msgctxt "amazons_building"
 msgid ""
 "The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any"
@@ -6921,7 +6922,7 @@ msgstr "Zinchi Roqa"
 #: ../../../../data/tribes/ships/amazons/init.lua:428
 msgctxt "shipname"
 msgid "Lake Titicaca"
-msgstr ""
+msgstr "Jezioro Titicaca"
 
 #. TRANSLATORS: This Amazonian ship is named after the main Inca temple
 #: ../../../../data/tribes/ships/amazons/init.lua:430
@@ -7323,7 +7324,7 @@ msgstr "Beowulf"
 #: ../../../../data/tribes/ships/barbarians/init.lua:51
 msgctxt "shipname"
 msgid "Bison"
-msgstr ""
+msgstr "Bizon"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../../../data/tribes/ships/barbarians/init.lua:53
@@ -7347,7 +7348,7 @@ msgstr "Dellingr"
 #: ../../../../data/tribes/ships/barbarians/init.lua:59
 msgctxt "shipname"
 msgid "Eagle"
-msgstr ""
+msgstr "Orzeł"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../../../data/tribes/ships/barbarians/init.lua:61
@@ -7509,7 +7510,7 @@ msgstr "Wild Boar"
 #: ../../../../data/tribes/ships/barbarians/init.lua:113
 msgctxt "shipname"
 msgid "Valkyrie"
-msgstr ""
+msgstr "Walkiria"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../../../data/tribes/ships/barbarians/init.lua:115
