@@ -53,6 +53,8 @@ private:
 	void update_trades_proposed(bool always);
 	void update_trades_active(bool always);
 
+	void propose_extending_trade(Widelands::TradeID trade_id);
+
 	UI::Box diplomacy_box_;
 
 	UI::Box hbox_, vbox_flag_, vbox_name_, vbox_team_, vbox_status_, vbox_action_;

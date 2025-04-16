@@ -75,14 +75,22 @@ bool Market::init(EditorGameBase& egbase) {
 
 void Market::cleanup(EditorGameBase& egbase) {
 	if (upcast(Game, game, &egbase); game != nullptr) {
+		std::vector<TradeID> to_cancel;
+		std::vector<TradeID> to_retract;
 		for (const auto& pair : game->all_trade_agreements()) {
 			if (pair.second.initiator == this || pair.second.receiver == this) {
 				if (pair.second.state == TradeInstance::State::kProposed) {
-					game->retract_trade(pair.first);
+					to_retract.push_back(pair.first);
 				} else {
-					game->cancel_trade(pair.first, false, get_owner());
+					to_cancel.push_back(pair.first);
 				}
 			}
+		}
+		for (TradeID id : to_cancel) {
+			game->cancel_trade(id, false, get_owner());
+		}
+		for (TradeID id : to_retract) {
+			game->retract_trade(id);
 		}
 	}
 
@@ -215,6 +223,10 @@ void Market::set_economy(Economy* const e, WareWorker type) {
 void Market::set_market_name(const std::string& name) {
 	market_name_ = name;
 	get_owner()->reserve_warehousename(name);
+}
+
+void Market::notify_trade_extended(const TradeID trade_id, const int new_total_batches) {
+	trade_orders_.at(trade_id)->initial_num_batches = new_total_batches;
 }
 
 void Market::new_trade(const TradeID trade_id,

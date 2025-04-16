@@ -81,7 +81,8 @@ enum class QueueCommandTypes : uint8_t {
 	kSetSoldierPreference,
 	kProposeTrade,
 	kBuildWaterway,
-	kTradeAction,  // 29
+	kTradeAction,
+	kExtendTrade,  // 30
 
 	kShipSink = 121,
 	kShipCancelExpedition,

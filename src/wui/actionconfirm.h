@@ -66,4 +66,6 @@ void show_resume_trade_confirm(InteractivePlayer& player,
                                Widelands::Market& market,
                                Widelands::TradeID trade_id);
 
+void show_trade_extension_dialog(InteractivePlayer& player, Widelands::TradeID trade_id);
+
 #endif  // end of include guard: WL_WUI_ACTIONCONFIRM_H

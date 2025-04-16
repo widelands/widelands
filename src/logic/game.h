@@ -318,6 +318,10 @@ public:
 	                                 const std::vector<uint32_t>& parameters);
 	void send_player_cancel_expedition_ship(const Ship&);
 	void send_player_propose_trade(const TradeInstance& trade);
+	void send_player_extend_trade(PlayerNumber sender,
+	                              TradeID trade_id,
+	                              TradeAction action,
+	                              int32_t batches);
 	void send_player_trade_action(
 	   PlayerNumber sender, TradeID trade_id, TradeAction action, Serial accepter, Serial source);
 	void send_player_toggle_mute(const Building&, bool all);
@@ -401,6 +405,11 @@ public:
 	void cancel_trade(TradeID trade_id, bool reached_regular_end, const Player* canceller);
 	void move_trade(TradeID trade_id, Market& old_market, Market& new_market);
 
+	void propose_trade_extension(PlayerNumber sender, TradeID trade_id, int batches);
+	void reject_trade_extension(PlayerNumber sender, TradeID trade_id, int batches);
+	void retract_trade_extension(PlayerNumber sender, TradeID trade_id, int batches);
+	void accept_trade_extension(PlayerNumber sender, TradeID trade_id, int batches);
+
 	[[nodiscard]] bool has_trade(TradeID trade_id) const {
 		return trade_agreements_.count(trade_id) != 0;
 	}
@@ -413,11 +422,16 @@ public:
 	[[nodiscard]] const std::map<TradeID, TradeInstance>& all_trade_agreements() const {
 		return trade_agreements_;
 	}
+	[[nodiscard]] const std::vector<TradeExtension>& all_trade_extension_proposals() const {
+		return trade_extension_proposals_;
+	}
 	[[nodiscard]] std::vector<TradeID> find_trade_offers(PlayerNumber receiver,
 	                                                     Coords accept_at = Coords::null()) const;
 	[[nodiscard]] std::vector<TradeID> find_trade_proposals(PlayerNumber initiator,
 	                                                        Serial market_filter = 0) const;
 	[[nodiscard]] std::vector<TradeID> find_active_trades(PlayerNumber player) const;
+	[[nodiscard]] std::vector<TradeExtension>
+	find_trade_extensions(TradeID trade_id, PlayerNumber player, bool as_proposer) const;
 
 	struct PendingDiplomacyAction {
 		PlayerNumber sender;     ///< The player who initiated the action.
@@ -526,9 +540,20 @@ private:
 	uint32_t scenario_difficulty_{kScenarioDifficultyNotSet};
 
 	GeneralStatsVector general_stats_;
+
 	TradeID next_trade_agreement_id_ = 1;
 	// Maps from trade agreement id to the agreement.
 	std::map<TradeID, TradeInstance> trade_agreements_;
+	std::vector<TradeExtension> trade_extension_proposals_;
+
+	[[nodiscard]] bool check_trade_player_matches(const TradeInstance& trade,
+	                                              PlayerNumber sender,
+	                                              PlayerNumber proposer,
+	                                              bool check_recipient,
+	                                              Player** p1,
+	                                              Player** p2,
+	                                              const Market** market);
+
 	Serial last_economy_serial_ = 0;
 	Serial last_detectedportspace_serial_ = 0;
 

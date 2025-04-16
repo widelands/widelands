@@ -58,6 +58,15 @@ struct TradeInstance {
 	                                          bool can_act) const;
 };
 
+struct TradeExtension {
+	TradeID trade_id;
+	PlayerNumber proposer;
+	int32_t batches;
+
+	TradeExtension(TradeID ti, PlayerNumber p, int32_t b) : trade_id(ti), proposer(p), batches(b) {
+	}
+};
+
 enum class TradeAction : uint8_t {
 	kCancel = 0,
 	kAccept = 1,
@@ -66,6 +75,7 @@ enum class TradeAction : uint8_t {
 	kPause = 4,
 	kResume = 5,
 	kMove = 6,
+	kExtend = 7,
 };
 
 struct NoteTradeChanged {
@@ -81,7 +91,8 @@ struct NoteTradeChanged {
 		kWareArrived,
 		kPaused,
 		kUnpaused,
-		kMoved
+		kMoved,
+		kExtensionProposal,
 	};
 
 	TradeID id;
