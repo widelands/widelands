@@ -75,14 +75,22 @@ bool Market::init(EditorGameBase& egbase) {
 
 void Market::cleanup(EditorGameBase& egbase) {
 	if (upcast(Game, game, &egbase); game != nullptr) {
+		std::vector<TradeID> to_cancel;
+		std::vector<TradeID> to_retract;
 		for (const auto& pair : game->all_trade_agreements()) {
 			if (pair.second.initiator == this || pair.second.receiver == this) {
 				if (pair.second.state == TradeInstance::State::kProposed) {
-					game->retract_trade(pair.first);
+					to_retract.push_back(pair.first);
 				} else {
-					game->cancel_trade(pair.first, false, get_owner());
+					to_cancel.push_back(pair.first);
 				}
 			}
+		}
+		for (TradeID id : to_cancel) {
+			game->cancel_trade(id, false, get_owner());
+		}
+		for (TradeID id : to_retract) {
+			game->retract_trade(id);
 		}
 	}
 
