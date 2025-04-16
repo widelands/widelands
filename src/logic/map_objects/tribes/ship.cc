@@ -253,7 +253,7 @@ bool Ship::init_fleet(EditorGameBase& egbase) {
 }
 
 void Ship::cleanup(EditorGameBase& egbase) {
-	erase_warship_soldier_request();
+	erase_warship_soldier_request_manager();
 
 	if (fleet_ != nullptr) {
 		fleet_->remove_ship(egbase, this);
@@ -471,7 +471,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 			items_.clear();
 
 			ship_type_ = pending_refit_;
-			erase_warship_soldier_request();
+			erase_warship_soldier_request_manager();
 
 			if (ship_type_ == ShipType::kWarship) {
 				start_task_expedition(game);
@@ -761,7 +761,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 	}
 
 	if (destination_coords_ != nullptr) {
-		erase_warship_soldier_request();
+		erase_warship_soldier_request_manager();
 
 		if (destination_coords_->has_dockpoint(get_position())) {  // Already there
 			destination_coords_ = nullptr;
@@ -792,7 +792,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 
 			// Sail to the destination port if we're not there yet.
 			if (position.field->get_immovable() != dest) {
-				erase_warship_soldier_request();
+				erase_warship_soldier_request_manager();
 				if (!start_task_movetodock(game, *dest)) {
 					if (send_message_at_destination_) {
 						send_message(
@@ -829,7 +829,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 
 		case MapObjectType::SHIP:
 		case MapObjectType::PINNED_NOTE: {
-			erase_warship_soldier_request();
+			erase_warship_soldier_request_manager();
 			Bob* dest = dynamic_cast<Bob*>(destination_object);
 
 			if (map->calc_distance(position, dest->get_position()) <=
@@ -870,7 +870,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 		}
 	}
 
-	erase_warship_soldier_request();  // Clear the request when not in port
+	erase_warship_soldier_request_manager();  // Clear the request when not in port
 
 	if (ship_state_ == ShipStates::kExpeditionScouting && get_ship_type() == ShipType::kTransport) {
 		// TODO(tothxa): Implement expedition options for stop_on_report and report_known
@@ -888,19 +888,19 @@ void Ship::set_soldier_preference(SoldierPreference pref) {
 	update_warship_soldier_request(false);
 }
 
-void Ship::erase_warship_soldier_request() {
+void Ship::erase_warship_soldier_request_manager() {
 	const EditorGameBase& egbase = owner().egbase();
 	if (PortDock* dock = requestdock_.get(egbase); dock != nullptr) {
-		molog(egbase.get_gametime(), "Erasing soldier request at %s",
+		molog(egbase.get_gametime(), "Erasing soldier request manager at %s",
 		      dock->get_warehouse()->get_warehouse_name().c_str());
-		dock->erase_warship_request(serial());
+		dock->erase_warship_request_manager(serial());
 	}
 	requestdock_ = nullptr;
 }
 
 void Ship::update_warship_soldier_request(bool create) {
 	if (ship_type_ != ShipType::kWarship || is_refitting()) {
-		erase_warship_soldier_request();
+		erase_warship_soldier_request_manager();
 		return;
 	}
 
@@ -908,17 +908,17 @@ void Ship::update_warship_soldier_request(bool create) {
 	PortDock* dock = requestdock_.get(egbase);
 
 	if (dock != nullptr) {
-		// We should already have a request
-		molog(egbase.get_gametime(), "Updating existing soldier request at %s",
+		// We should already have a request manager
+		molog(egbase.get_gametime(), "Updating existing soldier request manager at %s",
 		      dock->get_warehouse()->get_warehouse_name().c_str());
-		SoldierRequest* req = dock->get_warship_request(serial());
-		if (req == nullptr) {
-			throw wexception("Ship %s has no soldier request at request dock %s",
+		SoldierRequestManager* srm = dock->get_warship_request_manager(serial());
+		if (srm == nullptr) {
+			throw wexception("Ship %s has no soldier request manager at request dock %s",
 			                 get_shipname().c_str(),
 			                 dock->get_warehouse()->get_warehouse_name().c_str());
 		}
-		req->set_preference(soldier_preference_);
-		req->update();
+		srm->set_preference(soldier_preference_);
+		srm->update();
 		return;
 	}
 
@@ -927,31 +927,32 @@ void Ship::update_warship_soldier_request(bool create) {
 		return;
 	}
 
-	// Create a new request at the current port.
+	// Create a new request manager at the current port.
 	dock = lastdock_.get(owner().egbase());
 	if (dock == nullptr) {
-		throw wexception("Ship %s attempts to create warship soldier request while not in dock",
-		                 get_shipname().c_str());
+		throw wexception(
+		   "Ship %s attempts to create warship soldier request manager while not in dock",
+		   get_shipname().c_str());
 	}
-	molog(egbase.get_gametime(), "Creating new soldier request at %s",
+	molog(egbase.get_gametime(), "Creating new soldier request manager at %s",
 	      dock->get_warehouse()->get_warehouse_name().c_str());
 	if (get_position().field->get_immovable() != dock) {
 		throw wexception(
-		   "Ship %s attempts to create warship soldier request while not on request dock %s",
+		   "Ship %s attempts to create warship soldier request manager while not on request dock %s",
 		   get_shipname().c_str(), dock->get_warehouse()->get_warehouse_name().c_str());
 	}
 
-	SoldierRequest* req = dock->get_warship_request(serial());
-	if (req == nullptr) {
-		req = &dock->create_warship_request(this, soldier_preference_);
+	SoldierRequestManager* srm = dock->get_warship_request_manager(serial());
+	if (srm == nullptr) {
+		srm = &dock->create_warship_request_manager(this, soldier_preference_);
 	} else {
 		// TODO(Nordfriese): Can only happen with legacy savegames, replace this with an assert
-		log_warn("Ship %s already has soldier request at new request dock %s", get_shipname().c_str(),
-		         dock->get_warehouse()->get_warehouse_name().c_str());
+		log_warn("Ship %s already has soldier request manager at new request dock %s",
+		         get_shipname().c_str(), dock->get_warehouse()->get_warehouse_name().c_str());
 	}
 
 	requestdock_ = dock;
-	req->update();
+	srm->update();
 }
 
 bool Ship::remember_detected_portspace(const Coords& coords) {
@@ -1160,8 +1161,9 @@ std::vector<Soldier*> Ship::associated_soldiers() const {
 	std::vector<Soldier*> result = onboard_soldiers();
 
 	if (PortDock* dock = requestdock_.get(owner().egbase()); dock != nullptr) {
-		if (const SoldierRequest* sr = dock->get_warship_request(serial()); sr != nullptr) {
-			if (const Request* request = sr->get_request(); request != nullptr) {
+		if (const SoldierRequestManager* srm = dock->get_warship_request_manager(serial());
+		    srm != nullptr) {
+			if (const Request* request = srm->get_request(); request != nullptr) {
 				for (const Transfer* t : request->get_transfers()) {
 					Soldier& s = dynamic_cast<Soldier&>(*t->get_worker());
 					result.push_back(&s);
@@ -2161,7 +2163,7 @@ uint32_t Ship::calculate_sea_route(EditorGameBase& egbase, PortDock& pd, Path* f
  * Returns false if the dock is unreachable.
  */
 bool Ship::start_task_movetodock(Game& game, PortDock& pd) {
-	erase_warship_soldier_request();
+	erase_warship_soldier_request_manager();
 
 	Path path;
 
