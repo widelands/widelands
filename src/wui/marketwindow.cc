@@ -717,21 +717,19 @@ private:
 				box->add(
 				   new UI::Textarea(
 				      box, UI::PanelStyle::kWui, "description", UI::FontStyle::kWuiInfoPanelHeading,
-				      can_act_ ?
+				      can_act_ ? te.batches == Widelands::kInfiniteTrade ?
+				                 _("You proposed to extend this trade indefinitely.") :
+				                 format(ngettext("You proposed to extend this trade by %d batch.",
+				                                 "You proposed to extend this trade by %d batches.",
+				                                 te.batches),
+				                        te.batches) :
 				      te.batches == Widelands::kInfiniteTrade ?
-				         _("You proposed to extend this trade indefinitely.") :
-				         format(
-				            ngettext("You proposed to extend this trade by %d batch.",
-				                     "You proposed to extend this trade by %d batches.", te.batches),
-				            te.batches)
-				            :
-				      te.batches == Widelands::kInfiniteTrade ?
-				         format(_("%1$s proposed to extend this trade indefinitely."),
-				                market->owner().get_name()) :
-				         format(
-				            ngettext("%1$s proposed to extend this trade by %2$d batch.",
-				                     "%1$s proposed to extend this trade by %2$d batches.", te.batches),
-				            market->owner().get_name(), te.batches),
+				                 format(_("%1$s proposed to extend this trade indefinitely."),
+				                        market->owner().get_name()) :
+				                 format(ngettext("%1$s proposed to extend this trade by %2$d batch.",
+				                                 "%1$s proposed to extend this trade by %2$d batches.",
+				                                 te.batches),
+				                        market->owner().get_name(), te.batches),
 				      UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl())),
 				   UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 
