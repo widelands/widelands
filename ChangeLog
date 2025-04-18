@@ -1,8 +1,11 @@
 [TOC]
 
-## Post-1.2.1 until [git a065ca7](https://codeberg.org/wl/widelands/commit/a065ca721cce8427891ba7765148e5be52b9e83f)
+## Post-1.2.1 until [git f8c9ff3](https://codeberg.org/wl/widelands/commit/f8c9ff36639025615abf5a36e5fecedab04fbe76)
 
 ### Animations, Icons and Overlays
+
+- New icon for Frisians tribe (CB #4942 / GH #6582)
+- Fix double shadow of empire mill (GH #6650 / CB #5010)
 
 
 ### Sounds and Music
@@ -15,6 +18,7 @@
 - bar02: Adjust check for sentry in 'basic economy' objective (GH #6482 / CB #4844)
 - Fix empire 4 starting bug (GH #6508 / CB #4869)
 - atl01: Don't eat sawdust (GH #6521 / CB #4882)
+- Allow garrison in fri03/fri04 scenario ports (GH #6627 / CB #4987)
 
 
 ### Scripting
@@ -24,11 +28,13 @@
 - Expose more functions to Lua Dropdown and Listselect API (CB #4848 / GH #6486)
 - Make mapobjects findeable by their name from worker program findobject (CB #4855 / GH #6493)
 - Lua attribute `player.ai_type` (GH #6001 / CB #4412)
+- More functions, properties, and classes for the Lua UI API (GH #6555 / CB #4915)
 
 
 ### Maps
 
 - Remove playername duplicity from Astoria map (CB #4767 / GH #6405)
+- Fix maps requiring "build 22" as minimum version (GH #6693 / CB #5053)
 
 
 ### Add-Ons
@@ -44,18 +50,30 @@
 - Show add-ons alpha server name earlier (CB #4911 / GH #6550)
 - Keyboard shortcuts for add-ons (CB #4889 / GH #6528)
 - Add-Ons Website Maps Integration (CB #4692 / GH #6329)
+- Refactor and speedup add-ons manager rebuild (GH #6580 / CB #4940)
+- Fix crash when uninstalling the only add-on (CB #4981 / GH #6621)
+- Translations for Website Maps (CB #4956 / GH #6596)
 
 
 ### Saveloading
 
+- Productionsite input queue compatibility with notification (GH #6570 / CB #4930)
+- Fix map loading compatibility (CB #4966 / GH #6606)
+- Fix division by zero in buildingdata packet (CB #5012 / GH #6652)
+- Tools for saveloading compatibility testing (CB #4859 / GH #6497)
+
 
 ### AI
+
+- Update some buildings' AI hints (GH #6686 / CB #5046)
 
 
 ### Gameplay
 
 - Fix soldier request for expedition ships (CB #4765 / GH #6403)
 - Economic Districts (CB #4708 / GH #6345)
+- Use silk rather than cloth for fishing nets and bows (CB #4866 / GH #6505)
+- Button to evict builder from construction-/dismantlesites (CB #4551 / GH #6208)
 
 
 ### User Interface
@@ -71,6 +89,13 @@
 - BuildingStatisticsMenu: fix update spam when minimized (CB #4873 / GH #6512)
 - Listselect: properly clear entry_cache_ (CB #4879 / GH #6518)
 - Listselect: reset/recalculate max_pic_width_ upon clear()/remove() (CB #4846 / GH #6484)
+- Improve census and status lines of warehouses (GH #6576 / CB #4936)
+- BuildingStatisticsMenu: fix mismatched logic of update_building_list() vs init() (GH #6513 / CB #4874)
+- Clear InputQueueDisplay hover marker on mouse-out (CB #4958 / GH #6598)
+- Fix in-game loadsave table selection (CB #4961 / GH #6601)
+- Trim whitespace from map author lists (GH #6646 / CB #5006)
+- Add display selection to graphics options (GH #6342 / CB #4705)
+- Let unique window close itself (CB #5029 / GH #6669)
 
 
 ### Internationalization
@@ -79,6 +104,9 @@
 - Update paths for `buildcat.py` (GH #6458 / CB #4820)
 - Fix Textdomains for Launch Game Checkboxes (CB #4824 / GH #6462)
 - Validate environment locale settings (CB #4817 / GH #6455)
+- Don't use whitespace-only translatable string (CB #4943 / GH #6583)
+- Tut02 string fix (CB #4959 / GH #6599)
+- Improvement in some english texts (CB #5018 / GH #6658)
 
 
 ### Help and Documentation
@@ -86,6 +114,9 @@
 - Update performance helptext for comparable buildings between tribes, medium sites (GH #6460 / CB #4822)
 - Misc documentation fixes (GH #6540 / CB #4901)
 - Documentation fix and examples for `modify_unit` (CB #4932 / GH #6571)
+- Documentation fixes for `lua_global` (CB #4920 / GH #6560)
+- Encyclopedia: Show Experience chain for all workers in the chain (CB #4951 / GH #6591)
+- Update performance helptext for comparable buildings between tribes, big sites (CB #4947 / GH #6587)
 
 
 ### Editor
@@ -101,9 +132,14 @@
 - Remove hardcoded window border sizes (CB #4778 / GH #6416)
 - Fix format strings in gl/initialize.cc (CB #4880 / GH #6519)
 - Update window borders on theme change (CB #4885 / GH #6524)
+- Use an algorithmically generated palette for ocean colours (CB #4904 / GH #6543)
+- Fix pixel coordinate clamping in minimap (CB #4980 / GH #6620)
 
 
 ### Networking
+
+- Update asio interfaces (GH #6665 / CB #5025)
+- Increase add-ons networking timeout (GH #6692 / CB #5052)
 
 
 ### Build System
@@ -121,6 +157,18 @@
 - Add new modplug dependency to sdl2 mixer (GH #6573 / CB #4933)
 - Retry hdiutil with any error code (CB #4927 / GH #6567)
 - Use all workarounds for hdiutil errors from actions/runner-images#7522 (GH #6574 / CB #4934)
+- Compiler fixes for clang-19 (GH #6546 / CB #4907)
+- Preserve debug symbols in windows debug builds (GH #6563 / CB #4923)
+- Cleanup `check_vcpkg.yaml`, remove option `CMAKE_BUILD_TYPE`, ... (GH #6317 / CB #4680)
+- Workflow fixes (CB #4955 / GH #6595)
+- Use stable version of sphinx for building documentation (CB #4962 / GH #6602)
+- Set CMake policies CMP0177 and CMP0153 (CB #4965 / GH #6605)
+- Directly include cstring in machdep.h (CB #4978 / GH #6618) (CB #4979 / GH #6619)
+- install-dependencies.sh: Don't error on MacOS when all dependencies already installed. (CB #4983 / GH #6623)
+- Remove rav1e dependency for mingw32 (CB #4986 / GH #6626)
+- Update mingw sdl-mixer dependencies (CB #5039 / GH #6679)
+- Mask Eris `main()` to fix windows builds (CB #5050 / GH #6690)
+- Compile C-only libraries with c11 standard (GH #6698 / CB #5058)
 
 
 ### Other Issues
@@ -138,6 +186,16 @@
 - Update compiler versions in CI (CB #4908 / GH #6547)
 - Temporary fix for macos CI builds (CB #4912 / GH #6552)
 - Update macOS versions in the CI (CB #4809 / GH #6447)
+- Split LuaMap into smaller files (GH #6431 / CB #4793)
+- Split LuaUi into smaller files (CB #4946 / GH #6586)
+- Revert clang-tidy CI to Ubuntu 22.04 with clang-tidy-14 (GH #6603 / CB #4963)
+- Run Launchpad mirror CI under 22.04 again
+- Split PlayerCommand into smaller files (CB #4786 / GH #6424)
+- Splitup worker tasks and programs (GH #6589 / CB #4949)
+- Make serial counters for `Economy` and `DetectedPortSpace` properties of `Game` (GH #6611 / CB #4971)
+- Fix or categorize new checks in clang-tidy-19 (CB #5011 / GH #6651)
+- Remove duplicate clang-tidy checks (CB #5014 / GH #6654)
+- Bump AppImage and compiler targets in the CI to Ubuntu Jammy (GH #6673 / CB #5033, CB #5034 / GH #6674)
 
 
 ## Release 1.2.1
