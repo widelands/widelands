@@ -1,6 +1,6 @@
 [TOC]
 
-## Post-1.2.1 until [git f8c9ff3](https://codeberg.org/wl/widelands/commit/f8c9ff36639025615abf5a36e5fecedab04fbe76)
+## Post-1.2.1 until [git ea54b16](https://codeberg.org/wl/widelands/commit/ea54b162e4b9f92eb5025116a3bf3f77d4b3da45)
 
 ### Animations, Icons and Overlays
 
@@ -107,6 +107,7 @@
 - Don't use whitespace-only translatable string (CB #4943 / GH #6583)
 - Tut02 string fix (CB #4959 / GH #6599)
 - Improvement in some english texts (CB #5018 / GH #6658)
+- Atlantean campaign spelling: Standardize 'Lutas’' to 'Lutas’s' (CB #5055 / GH #6695)
 
 
 ### Help and Documentation
