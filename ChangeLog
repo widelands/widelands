@@ -436,26 +436,26 @@
     - Prompt for confirmation before resigning.
 - Quick Navigation GUI (#5487)
 - UI Elements Fixes And Tweaks (#5668)
-     * Allow using PageUp/PageDown and Ctrl+scroll in sliders and spinboxes to change the value faster
-     * Make sure that no slider nor spinbox can wrap around due to integer overflow
-     * Add missing changed() call in spinbox when value is set to min/max (fixes warning update in Editor/Map Options/Ferry Range)
-     * Decrease width of big step buttons of spinboxes (should help dealing with #5631)
-     * Fix updating slider position when min/max is changed (affected attack window)
-     * Add "Click to sort/reverse" to table header tooltips (requested by @frankystone for map selection)
-     * Reset sorting order when user changes column to sort by
-     * Handle big step in inputqueue
-     * Allow using Shift + arrow keys in priority slider to set all input priorities at once
-     * Stabilize selection end in editbox (fixes #5676)
-     * Handle big step in soldier capacity settings
-     * Converted all users of `get_keyboard_change()` to handle big step, remove `enable_big_step` option
+     - Allow using PageUp/PageDown and Ctrl+scroll in sliders and spinboxes to change the value faster
+     - Make sure that no slider nor spinbox can wrap around due to integer overflow
+     - Add missing changed() call in spinbox when value is set to min/max (fixes warning update in Editor/Map Options/Ferry Range)
+     - Decrease width of big step buttons of spinboxes (should help dealing with #5631)
+     - Fix updating slider position when min/max is changed (affected attack window)
+     - Add "Click to sort/reverse" to table header tooltips (requested by @frankystone for map selection)
+     - Reset sorting order when user changes column to sort by
+     - Handle big step in inputqueue
+     - Allow using Shift + arrow keys in priority slider to set all input priorities at once
+     - Stabilize selection end in editbox (fixes #5676)
+     - Handle big step in soldier capacity settings
+     - Converted all users of `get_keyboard_change()` to handle big step, remove `enable_big_step` option
 - Add shortcut keys for all menu items (#5705)
-     * add shortcut to statistics button tooltip in interactive_spectator.cc
-     * unify Load and Save hotkeys
-     * change some editor tool hotkeys and make all tools use Shift modifier
-     * editor new map window: create new map when terrain is doubleclicked
-     * editor: remove Alt modifier for third tool function (old TODO item)
-     * editor: ask for exit confirmation even if map is not modified (still skip on Ctrl+click)
-     * ask for exit confirmation in main menu (can be skipped by Ctrl+clicking)
+     - add shortcut to statistics button tooltip in interactive_spectator.cc
+     - unify Load and Save hotkeys
+     - change some editor tool hotkeys and make all tools use Shift modifier
+     - editor new map window: create new map when terrain is doubleclicked
+     - editor: remove Alt modifier for third tool function (old TODO item)
+     - editor: ask for exit confirmation even if map is not modified (still skip on Ctrl+click)
+     - ask for exit confirmation in main menu (can be skipped by Ctrl+clicking)
 - Worker and Soldier Statistics Tweaks (#5607)
     - Fix incorrect genstats labels font colour
     - Add statistics about civil buildings defeated
@@ -4125,12 +4125,12 @@
 - Improved and remodelled a lot of the bobs' animations.
 - Improved and remodelled a lot of terrain graphics.
 - Improved dedicated server functionality:
-    * now runable as daemon and thus via init.d script on servers
-    * added possibility to write server statistics to html files
-    * added functionality to save the game on the server via chat command.
-    * added functionality to set up a password for the server.
-    * added functionality to set a custom message of the day (motd).
-    * improved client side handling / setting up of dedicated servers.
+    - now runable as daemon and thus via init.d script on servers
+    - added possibility to write server statistics to html files
+    - added functionality to save the game on the server via chat command.
+    - added functionality to set up a password for the server.
+    - added functionality to set a custom message of the day (motd).
+    - improved client side handling / setting up of dedicated servers.
 - Improved a lot of icons and button appearence.
 - Improved statistics window.
 - Improved the Widelands code to use less resources.
@@ -4139,18 +4139,18 @@
   dismantle feature.
 - Replaced the old libggz based metaserver support with our own ggz
   independed solution, which brings some new features as well:
-    * The metaserver is now checking whether a game is connectable
+    - The metaserver is now checking whether a game is connectable
       if it is not, it sends an error message to the client to
       inform it.
-    * System messages on the metaserver like global announcements
+    - System messages on the metaserver like global announcements
       motd changes or Error-Messages are now imported to running
       games and shown there as well.
-    * The metaserver does now check whether a client is still online
+    - The metaserver does now check whether a client is still online
       regulary and disconnects it, if it isn't.
-    * If the client gets disconnected from the metaserver during a
+    - If the client gets disconnected from the metaserver during a
       running game, the client is able to reconnect silently.
-    * Games can now have more than 7 connected clients
-    * The Version of Widelands used in a game is now shown as hover text
+    - Games can now have more than 7 connected clients
+    - The Version of Widelands used in a game is now shown as hover text
       in the game list. If a game is connectable, but uses a different
       version, a "?" icon is shown to visualise that difference.
 - Added a new piece of music to Widelands
@@ -4159,9 +4159,9 @@
 - Made road textures world dependend and improved the style of the roads
   for each world.
 - Added basic seafaring functionality:
-    * Ports, ships and shipyards are already working as they should.
-    * Loading of settlers 2 seafaring maps is supported
-    * (Scouting and colonization *NOT* yet implemented)
+    - Ports, ships and shipyards are already working as they should.
+    - Loading of settlers 2 seafaring maps is supported
+    - (Scouting and colonization *NOT* yet implemented)
   yet implemented.
 - Added port buildspace tool to the editor.
 - Added a new feature to list maps in the map selection menu in categories
@@ -4461,12 +4461,12 @@
 - Added new loading screens for Desert, Greenland and Winterland. (svn:r4778,
   svn:r4816)
 - Improved Battle code
-    * Added support for soldier combat animations (svn:r4772)
-    * Let soldiers retreat, when they are injured. Let the player configure in
+    - Added support for soldier combat animations (svn:r4772)
+    - Let soldiers retreat, when they are injured. Let the player configure in
       the game how injured they have to be to retreat. Make it configurable in
       scenarios and initializations to what extent a player should be able to
       configure this feature during the game. (svn:r4796, svn:r4812)
-    * New attack user interface (svn:r4802, svn:r4803, svn:r4813)
+    - New attack user interface (svn:r4802, svn:r4803, svn:r4813)
 - Fix bug that if a user sent a private chat message to himself, the nethost
   delivered it to him twice. (svn:r4764)
 - Added a new map 'Atoll' (svn:r4755)
@@ -4502,8 +4502,8 @@
 - Fix the map Sun of fire so that there is no longer possible to walk (attack)
   along the coast between players 4 and 5.
 - Improvements in replay handling to save diskspace (svn:r4719, svn:r4720)
-    * Only write syncstreams in multiplayer games
-    * Delete old (definable) replay files and syncstreams at startup
+    - Only write syncstreams in multiplayer games
+    - Delete old (definable) replay files and syncstreams at startup
 - Replace the event type that allows or forbids a building type for a player
   with 2 separate event types (for allow and forbid respectively). They can
   handle multiple building types in the same event and the configuration dialog
@@ -4517,9 +4517,9 @@
 - Fix bug that caused undenfined behaviour, particularly segmentations faults in
   64-bit optimized builds. (svn:r4702)
 - Improve player's message queue: (svn:r4698)
-    * Add only important and not doubled messages.
-    * Play a sound, if a new message arrives.
-    * Play special sounds at special events (e.g. "You are under attack")
+    - Add only important and not doubled messages.
+    - Play a sound, if a new message arrives.
+    - Play special sounds at special events (e.g. "You are under attack")
 - Fix bug that a savegame, with a flag on a node that was not interior to the
   flag's owner, could be loaded. (svn:r4695)
 - Fix bug that a scenario game could be started from a map, where a player did
@@ -4709,8 +4709,8 @@
   (many different svn rev.)
 - Implemented very basic "dedicated" server (many different svn rev.)
 - Improved chat system:
-    * Added personal messages (use "@username message") (svn:r4186)
-    * Added a time string in front of each message (svn:r4253)
+    - Added personal messages (use "@username message") (svn:r4186)
+    - Added a time string in front of each message (svn:r4253)
 - Implemented metaserver lobby for internet game (many different svn rev.)
 - Implemented check of free diskspace to avoid segfaults (different svn rev.)
 - Added new ware icons. (svn:r4152, svn:r4250, svn:r4471)
@@ -4720,14 +4720,14 @@
 - Implemented basic messaging system to inform players of important events.
   (many different svn rev.)
 - Improved computer player behaviour (many different svn rev.)
-    * Computer player should now be able to build up a working infrastructure
+    - Computer player should now be able to build up a working infrastructure
       (including mining, tools and weapons production and soldier training) and
       to attack and defeat their enemies.
-    * Users are now able, to select the type of a computer player. The
+    - Users are now able, to select the type of a computer player. The
       available types are: Aggressive, Normal, Defensive and None. First three
       are based upon the improved AI and only behave different in case of
       attacking strength and expansion, while latter does simply nothing.
-    * It is now possible to define the computer player type for camapign maps.
+    - It is now possible to define the computer player type for camapign maps.
 - Throw out the bundled version of scons. Scons is widely available by now and
   the bundled version caused more trouble than it was worth: many
   incompatibilities, where a distribution-supplied version would have worked
@@ -4893,14 +4893,14 @@
 - Fix bug that the back buttons in the campaign selection UI had the wrong
   background. (svn:r3619)
 - Improvements of full screen menu UI (svn:r3579, svn:r3581)
-   * Make fullscreen menus dynamic resizable. Now the menus use the same
+   - Make fullscreen menus dynamic resizable. Now the menus use the same
      resolution as the whole game. Still the resolution must be saved in the
      config, so it is not yet possible to resize via mouse.
-   * Clean up menu design, make some menus more straight and intuitive and
+   - Clean up menu design, make some menus more straight and intuitive and
      follow the same alignment in similar menus.
-   * Add note to intro screen, so players are not confused anymore, whether
+   - Add note to intro screen, so players are not confused anymore, whether
      Widelands is still loading.
-   * Introduce config option and commandline parameter "ui_font". This option
+   - Introduce config option and commandline parameter "ui_font". This option
      allows the user, to use a different font in the fullscreen menus, which
      can be quite important if the resolution is very low and the serif font is
      nearly unreadable. Besides a path to a TTF file relative to
@@ -4938,23 +4938,23 @@
 - Make automatic roadbuilding mode after creation of non-connected flag
   optional (svn:r3177).
 - Improved production program handling (svn:r3373, svn:r3384):
-   * Eliminate the need for line numbers in the programs.
-   * Fix bug that the consume command required that all wares in a
+   - Eliminate the need for line numbers in the programs.
+   - Fix bug that the consume command required that all wares in a
      consume-group must be of the same type. For example the command "2=consume
      smoked_fish,smoked_meat 2" required 2 smoked_fish or 2 smoked_meat. Now it
      will also work if there is only one of each.
-   * Change the syntax of a consume-group to ware1[,ware2[,...]][:quantitiy]
+   - Change the syntax of a consume-group to ware1[,ware2[,...]][:quantitiy]
      (for example "smoked_fish,smoked_meat:2").
-   * Extend the consume command to take any number of consume-groups (for
+   - Extend the consume command to take any number of consume-groups (for
      example smoked_fish,smoked_meat:2 bread:2"). This means that unless all
      consume-groups can be satisfied, nothing is consumed when the command
      fails. This will fix many bugs in the game data where programs had for
      example "2=consume smoked_fish,smoked_meat 2" and "3=consume bread 2". If
      there was not 2 bread, it would consume 2 smoked_fish or 2 smoked_meat and
      then fail.
-   * Get rid of the command check. It was only a work-around for the previously
+   - Get rid of the command check. It was only a work-around for the previously
      deficient command consume (and some programs forgot to use it).
-   * Implement the new command return. It can return from a program. There are
+   - Implement the new command return. It can return from a program. There are
      3 different return values; Failed, Completed and Skipped. Only programs
      returning Failed and Completed will affect statistics. A program that
      reaches the end will be considered to have implicitly returned Completed.
@@ -4971,33 +4971,33 @@
      used in the barbarian micro-brewery to let it practice making beer until
      the brewer has become a master_brewer even if the economy does not need
      any beer.
-   * Extend the produce command to take any number of ware types with
+   - Extend the produce command to take any number of ware types with
      quantities.
-   * Fix the call command to validate that the called program exists. This
+   - Fix the call command to validate that the called program exists. This
      requires changing declaration order in some data files (for example if
      "work" calls "seed", "program=seed" must come before "program=work" in the
      "global" section of the productionsite definition. (However the definition
      order of the programs does not matter.) This fixes the bug that a call
      command may fail at run-time because the called program does not exist.
-   * Extend the call command with an optional error handling specification
+   - Extend the call command with an optional error handling specification
      (call=<program_name> [on failure {ignore|repeat|fail}]). It will make it
      possible to ignore a failure of a called program and continue the calling
      program, or repeat the failed program until it succeeds.
-   * Extend the sleep and animate commands. If no duration is given as the last
+   - Extend the sleep and animate commands. If no duration is given as the last
      parameter, the return value from a previous action is used for duration.
      This makes it possible to for example let the mining command calculate how
      long the following sleep/animation should last, depending on ore
      concentration and mining depth.
-   * Get rid of the set command and the associated catch and nostats flags.
-   * Fix the mine command to parse and validate its parameters at parse-time
+   - Get rid of the set command and the associated catch and nostats flags.
+   - Fix the mine command to parse and validate its parameters at parse-time
      instead of at run-time. This fixes the bug that the game engine could fail
      with the message "Should mine resource <resource_type>, which does not
      exist in world. Tribe is not compatible with world!!" at run-time the
      first time a mining command is executed.
-   * Fix most other commands that had insufficient validation or did parsing at
+   - Fix most other commands that had insufficient validation or did parsing at
      run-time (for example the consume command reparsed its wares at each
      execution).
-   * Optimize the parsing by eliminating needless string copying.
+   - Optimize the parsing by eliminating needless string copying.
 - Rename the building property "enhance_to" to "enhancement" and validate that
   the given building type exists (svn:r3373).
 - Improved editor handling of bobs and animals, so they can not be placed on
@@ -5207,9 +5207,9 @@
 - save changed to save into directory
 - added trigger conditionals
 - Patch to fix graphic problems:
-   * Alpha instead of clrkey
-   * Fixed all bugs with !MacOSx
-   * Caching landscape renderer speeds things up
+   - Alpha instead of clrkey
+   - Fixed all bugs with !MacOSx
+   - Caching landscape renderer speeds things up
 - Sound patch + Music
 - RTF Renderer
 - show workarea preview
@@ -5230,9 +5230,9 @@
 - fixed "Worker Type 11 not found" bug
 - new Tree Graphics from Wolfgang Weidner
 - Added patch from Florian Falkner
-   * new Option Dialog UIListselect can have now a selection-indicator
+   - new Option Dialog UIListselect can have now a selection-indicator
      !WatchWindow
-   * functionality is user selectable
+   - functionality is user selectable
 - Windows can be minimized (middle mouse or Ctrl+left mouse)
 - fixed crash when using 32-bit fullscreen mode under win32
 
@@ -5313,5 +5313,5 @@
 
 
 ## Build 1
-* First release
+- First release
 
