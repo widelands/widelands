@@ -714,26 +714,17 @@ private:
 				UI::Box* box = new UI::Box(&extensions_box_, UI::PanelStyle::kWui, "extension_proposal",
 				                           0, 0, UI::Box::Horizontal);
 
-				box->add(
-				   new UI::Textarea(
-				      box, UI::PanelStyle::kWui, "description", UI::FontStyle::kWuiInfoPanelHeading,
-				      can_act_ ? te.batches == Widelands::kInfiniteTrade ?
-				                 _("You proposed to extend this trade indefinitely.") :
-				                 format(ngettext("You proposed to extend this trade by %d batch.",
-				                                 "You proposed to extend this trade by %d batches.",
-				                                 te.batches),
-				                        te.batches) :
-				      te.batches == Widelands::kInfiniteTrade ?
-				                 format(_("%1$s proposed to extend this trade indefinitely."),
-				                        market->owner().get_name()) :
-				                 format(ngettext("%1$s proposed to extend this trade by %2$d batch.",
-				                                 "%1$s proposed to extend this trade by %2$d batches.",
-				                                 te.batches),
-				                        market->owner().get_name(), te.batches),
-				      UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl())),
-				   UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
+				UI::Textarea* description =
+				   new UI::Textarea(box, UI::PanelStyle::kWui, "description", UI::FontStyle::kWuiInfoPanelHeading, std::string(), UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()));
+				box->add(description, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 
 				if (can_act_) {
+					if (te.batches != Widelands::kInfiniteTrade) {
+						description->set_text(format(ngettext("You proposed to extend this trade by %d batch.", "You proposed to extend this trade by %d batches.", te.batches), te.batches));
+					} else {
+						description->set_text(_("You proposed to extend this trade indefinitely."));
+					}
+
 					UI::Button* retract = new UI::Button(box, "retract", 0, 0, kButtonSize, kButtonSize,
 					                                     UI::ButtonStyle::kWuiSecondary,
 					                                     g_image_cache->get("images/wui/menu_abort.png"),
@@ -748,6 +739,13 @@ private:
 
 					box->add_space(kSpacing);
 					box->add(retract);
+
+				} else {
+					if (te.batches != Widelands::kInfiniteTrade) {
+						description->set_text(format(ngettext("%1$s proposed to extend this trade by %2$d batch.", "%1$s proposed to extend this trade by %2$d batches.", te.batches), market->owner().get_name(), te.batches));
+					} else {
+						description->set_text(format(_("%1$s proposed to extend this trade indefinitely."), market->owner().get_name()));
+					}
 				}
 
 				extensions_box_.add(box, UI::Box::Resizing::kFullSize);
