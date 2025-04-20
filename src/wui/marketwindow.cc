@@ -714,13 +714,18 @@ private:
 				UI::Box* box = new UI::Box(&extensions_box_, UI::PanelStyle::kWui, "extension_proposal",
 				                           0, 0, UI::Box::Horizontal);
 
-				UI::Textarea* description =
-				   new UI::Textarea(box, UI::PanelStyle::kWui, "description", UI::FontStyle::kWuiInfoPanelHeading, std::string(), UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()));
+				UI::Textarea* description = new UI::Textarea(
+				   box, UI::PanelStyle::kWui, "description", UI::FontStyle::kWuiInfoPanelHeading,
+				   std::string(),
+				   UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()));
 				box->add(description, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 
 				if (can_act_) {
 					if (te.batches != Widelands::kInfiniteTrade) {
-						description->set_text(format(ngettext("You proposed to extend this trade by %d batch.", "You proposed to extend this trade by %d batches.", te.batches), te.batches));
+						description->set_text(format(
+						   ngettext("You proposed to extend this trade by %d batch.",
+						            "You proposed to extend this trade by %d batches.", te.batches),
+						   te.batches));
 					} else {
 						description->set_text(_("You proposed to extend this trade indefinitely."));
 					}
@@ -742,9 +747,14 @@ private:
 
 				} else {
 					if (te.batches != Widelands::kInfiniteTrade) {
-						description->set_text(format(ngettext("%1$s proposed to extend this trade by %2$d batch.", "%1$s proposed to extend this trade by %2$d batches.", te.batches), market->owner().get_name(), te.batches));
+						description->set_text(format(
+						   ngettext("%1$s proposed to extend this trade by %2$d batch.",
+						            "%1$s proposed to extend this trade by %2$d batches.", te.batches),
+						   market->owner().get_name(), te.batches));
 					} else {
-						description->set_text(format(_("%1$s proposed to extend this trade indefinitely."), market->owner().get_name()));
+						description->set_text(
+						   format(_("%1$s proposed to extend this trade indefinitely."),
+						          market->owner().get_name()));
 					}
 				}
 
