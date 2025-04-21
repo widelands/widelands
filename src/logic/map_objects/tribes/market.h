@@ -117,6 +117,8 @@ public:
 		return trade_orders_;
 	}
 
+	void notify_trade_extended(TradeID trade_id, int new_total_batches);
+
 	[[nodiscard]] uint32_t get_priority_disambiguator_id(const Request* req) const override;
 
 	void set_paused(Game& game, TradeID id, bool pause);
