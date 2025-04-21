@@ -28,9 +28,10 @@ namespace Widelands {
 
 /**
  * Changelog:
- * 1: v1.3
+ * 1: Initial version
+ * 2 (v1.3): Added extension proposals.
  */
-constexpr uint16_t kCurrentPacketVersion = 1;
+constexpr uint16_t kCurrentPacketVersion = 2;
 
 void GamePlayerTradesPacket::read(FileSystem& fs, Game& game, MapObjectLoader* mol) {
 	try {
@@ -42,7 +43,8 @@ void GamePlayerTradesPacket::read(FileSystem& fs, Game& game, MapObjectLoader* m
 		}
 
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		// TODO(Nordfriese): Savegame compatibility v1.3~dev
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersion) {
 			for (size_t i = fr.unsigned_32(); i > 0; --i) {
 				const TradeID id = fr.unsigned_32();
 				game.next_trade_agreement_id_ = std::max(game.next_trade_agreement_id_, id + 1);
@@ -70,6 +72,15 @@ void GamePlayerTradesPacket::read(FileSystem& fs, Game& game, MapObjectLoader* m
 					uint32_t di = fr.unsigned_32();
 					uint32_t amount = fr.unsigned_32();
 					trade.items_to_receive.emplace_back(di, amount);
+				}
+			}
+
+			if (packet_version >= 2) {  // TODO(Nordfriese): Savegame compatibility v1.3~dev
+				for (size_t i = fr.unsigned_32(); i > 0; --i) {
+					const TradeID trade_id = fr.unsigned_32();
+					const PlayerNumber proposer = fr.unsigned_8();
+					const int32_t batches = fr.signed_32();
+					game.trade_extension_proposals_.emplace_back(trade_id, proposer, batches);
 				}
 			}
 		} else {
@@ -109,6 +120,13 @@ void GamePlayerTradesPacket::write(FileSystem& fs, Game& game, MapObjectSaver* c
 			fw.unsigned_32(amount.first);
 			fw.unsigned_32(amount.second);
 		}
+	}
+
+	fw.unsigned_32(game.trade_extension_proposals_.size());
+	for (const TradeExtension& te : game.trade_extension_proposals_) {
+		fw.unsigned_32(te.trade_id);
+		fw.unsigned_8(te.proposer);
+		fw.signed_32(te.batches);
 	}
 
 	fw.write(fs, "binary/player_trades");
