@@ -445,7 +445,7 @@ field_flooded_msg = {
       title = _("A Young Man Approaches"),
       body = ostur(
          -- TRANSLATORS: Ostur
-         _([[May Satul warm you, Jundlina. My name is Ostur and I construct ships. I have invented a new kind of ship: smaller than those we are used to, but much sturdier. If we build them correctly, I am confident that we can sail a much longer distance with them and maybe escape from Lutas’ influence.]]))
+         _([[May Satul warm you, Jundlina. My name is Ostur and I construct ships. I have invented a new kind of ship: smaller than those we are used to, but much sturdier. If we build them correctly, I am confident that we can sail a much longer distance with them and maybe escape from Lutas’s influence.]]))
    },
    {
       title = _("Jundlina Replies"),

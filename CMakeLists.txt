@@ -276,6 +276,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   endif()
 elseif(MSVC)
   wl_add_flag(WL_GENERIC_CXX_FLAGS "/std:c++17")
+  wl_add_flag(WL_GENERIC_C_LIBRARY_FLAGS "/std:c11")
   # https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/
   # Disabled warnings that are overly verbose right now or just do not make sense.
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "/wd4244")
@@ -288,6 +289,7 @@ else()
   if(WIN32)
     # This is needed for getenv().
     wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=gnu++17")
+    wl_add_flag(WL_GENERIC_C_LIBRARY_FLAGS "-std=c11")
     if (OPTION_BUILD_WINSTATIC)
       set(CMAKE_CXX_STANDARD_LIBRARIES "-static-libgcc -static-libstdc++ ${CMAKE_CXX_STANDARD_LIBRARIES}")
       set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Bstatic")
@@ -369,6 +371,7 @@ if(NOT MSVC)
   endif()
 
   wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=c++17")
+  wl_add_flag(WL_GENERIC_C_LIBRARY_FLAGS "-std=c11")
 endif()
 
 # Cross-compile-unit optimization slows linking significantly.

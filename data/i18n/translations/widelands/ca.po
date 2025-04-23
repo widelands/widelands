@@ -7483,7 +7483,7 @@ msgstr "Partides noves"
 
 #: ../../../../src/ui_fsmenu/options.cc:424
 msgid "In-Game"
-msgstr "En partides"
+msgstr "Durant les partides"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #: ../../../../src/ui_fsmenu/options.cc:525
