@@ -525,7 +525,9 @@ int LuaMapView::add_plugin_timer(lua_State* L) {
       :returns: :class:`wl.Subscriber`
 */
 int LuaMapView::subscribe_to_jump(lua_State* L) {
-	to_lua<LuaRoot::LuaSubscriber>(L, new LuaRoot::LuaSubscriber(get_egbase(L), LuaRoot::LuaNotifications::create_mapview_jump(L)));
+	to_lua<LuaRoot::LuaSubscriber>(
+	   L,
+	   new LuaRoot::LuaSubscriber(get_egbase(L), LuaRoot::LuaNotifications::create_mapview_jump(L)));
 	return 1;
 }
 
@@ -543,7 +545,9 @@ int LuaMapView::subscribe_to_jump(lua_State* L) {
       :returns: :class:`wl.Subscriber`
 */
 int LuaMapView::subscribe_to_changeview(lua_State* L) {
-	to_lua<LuaRoot::LuaSubscriber>(L, new LuaRoot::LuaSubscriber(get_egbase(L), LuaRoot::LuaNotifications::create_mapview_changeview(L)));
+	to_lua<LuaRoot::LuaSubscriber>(
+	   L, new LuaRoot::LuaSubscriber(
+	         get_egbase(L), LuaRoot::LuaNotifications::create_mapview_changeview(L)));
 	return 1;
 }
 
@@ -563,7 +567,9 @@ int LuaMapView::subscribe_to_changeview(lua_State* L) {
       :returns: :class:`wl.Subscriber`
 */
 int LuaMapView::subscribe_to_field_clicked(lua_State* L) {
-	to_lua<LuaRoot::LuaSubscriber>(L, new LuaRoot::LuaSubscriber(get_egbase(L), LuaRoot::LuaNotifications::create_mapview_field_clicked(L)));
+	to_lua<LuaRoot::LuaSubscriber>(
+	   L, new LuaRoot::LuaSubscriber(
+	         get_egbase(L), LuaRoot::LuaNotifications::create_mapview_field_clicked(L)));
 	return 1;
 }
 
@@ -585,7 +591,9 @@ int LuaMapView::subscribe_to_field_clicked(lua_State* L) {
       :returns: :class:`wl.Subscriber`
 */
 int LuaMapView::subscribe_to_track_selection(lua_State* L) {
-	to_lua<LuaRoot::LuaSubscriber>(L, new LuaRoot::LuaSubscriber(get_egbase(L), LuaRoot::LuaNotifications::create_mapview_track_selection(L)));
+	to_lua<LuaRoot::LuaSubscriber>(
+	   L, new LuaRoot::LuaSubscriber(
+	         get_egbase(L), LuaRoot::LuaNotifications::create_mapview_track_selection(L)));
 	return 1;
 }
 

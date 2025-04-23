@@ -1637,11 +1637,13 @@ const PropertyType<LuaSubscriber> LuaSubscriber::Properties[] = {
    {nullptr, nullptr, nullptr},
 };
 
-LuaSubscriber::LuaSubscriber(const Widelands::EditorGameBase& egbase, LuaNotifications::Wrapper* impl) : egbase_(&egbase), impl_(impl) {
+LuaSubscriber::LuaSubscriber(const Widelands::EditorGameBase& egbase,
+                             LuaNotifications::Wrapper* impl)
+   : egbase_(&egbase), impl_(impl) {
 	impl_->owner = this;
 }
 
-LuaSubscriber::LuaSubscriber(lua_State* L): egbase_(&get_egbase(L)) {
+LuaSubscriber::LuaSubscriber(lua_State* L) : egbase_(&get_egbase(L)) {
 	std::string type = luaL_checkstring(L, -1);
 	impl_.reset(LuaNotifications::create(type));
 	if (impl_ == nullptr) {
@@ -1656,7 +1658,8 @@ void LuaSubscriber::__persist(lua_State* L) {
 	Widelands::MapObjectSaver& mos = *get_mos(L);
 
 	uint32_t idx = 0;
-	if (Widelands::MapObject* obj = egbase_->objects().get_object(impl_->persistance.serial); obj != nullptr) {
+	if (Widelands::MapObject* obj = egbase_->objects().get_object(impl_->persistance.serial);
+	    obj != nullptr) {
 		idx = mos.get_object_file_index(*obj);
 	}
 
@@ -1673,22 +1676,23 @@ void LuaSubscriber::__persist(lua_State* L) {
 			PERS_UINT32(format("type_%u_%u", i, j).c_str(), it->second.type);
 
 			switch (it->second.type) {
-				case LuaSubscriber::Value::Type::kString:
-					PERS_STRING(format("value_%u_%u", i, j).c_str(), it->second.string_val);
-					break;
-				case LuaSubscriber::Value::Type::kInt:
-					PERS_INT32(format("value_%u_%u", i, j).c_str(), it->second.int_val);
-					break;
-				case LuaSubscriber::Value::Type::kMapObject:
-					if (Widelands::MapObject* obj = egbase_->objects().get_object(it->second.int_val); obj != nullptr) {
-						idx = mos.get_object_file_index(*obj);
-					} else {
-						idx = 0;
-					}
-					PERS_UINT32(format("value_%u_%u", i, j).c_str(), idx);
-					break;
-				default:
-					report_error(L, "Bad value type %d", static_cast<int>(it->second.type));
+			case LuaSubscriber::Value::Type::kString:
+				PERS_STRING(format("value_%u_%u", i, j).c_str(), it->second.string_val);
+				break;
+			case LuaSubscriber::Value::Type::kInt:
+				PERS_INT32(format("value_%u_%u", i, j).c_str(), it->second.int_val);
+				break;
+			case LuaSubscriber::Value::Type::kMapObject:
+				if (Widelands::MapObject* obj = egbase_->objects().get_object(it->second.int_val);
+				    obj != nullptr) {
+					idx = mos.get_object_file_index(*obj);
+				} else {
+					idx = 0;
+				}
+				PERS_UINT32(format("value_%u_%u", i, j).c_str(), idx);
+				break;
+			default:
+				report_error(L, "Bad value type %d", static_cast<int>(it->second.type));
 			}
 		}
 	}
@@ -1719,31 +1723,26 @@ void LuaSubscriber::__unpersist(lua_State* L) {
 			uint32_t datatype;
 			UNPERS_UINT32(format("type_%u_%u", i, j).c_str(), datatype);
 			switch (static_cast<LuaSubscriber::Value::Type>(datatype)) {
-				case LuaSubscriber::Value::Type::kString:
-					{
-						std::string str;
-						UNPERS_STRING(format("value_%u_%u", i, j).c_str(), str);
-						msg[key] = str;
-					}
-					break;
-				case LuaSubscriber::Value::Type::kInt:
-					{
-						int32_t value;
-						UNPERS_UINT32(format("value_%u_%u", i, j).c_str(), value);
-						msg[key] = value;
-					}
-					break;
-				case LuaSubscriber::Value::Type::kMapObject:
-					{
-						uint32_t value;
-						UNPERS_UINT32(format("value_%u_%u", i, j).c_str(), value);
-						msg[key] = LuaSubscriber::Value(LuaSubscriber::Value::Type::kMapObject, Widelands::get_object_serial_or_zero<Widelands::MapObject>(value, *get_mol(L)));
-					}
-					break;
-				default:
-					report_error(L, "Bad value type %d", datatype);
+			case LuaSubscriber::Value::Type::kString: {
+				std::string str;
+				UNPERS_STRING(format("value_%u_%u", i, j).c_str(), str);
+				msg[key] = str;
+			} break;
+			case LuaSubscriber::Value::Type::kInt: {
+				int32_t value;
+				UNPERS_UINT32(format("value_%u_%u", i, j).c_str(), value);
+				msg[key] = value;
+			} break;
+			case LuaSubscriber::Value::Type::kMapObject: {
+				uint32_t value;
+				UNPERS_UINT32(format("value_%u_%u", i, j).c_str(), value);
+				msg[key] = LuaSubscriber::Value(
+				   LuaSubscriber::Value::Type::kMapObject,
+				   Widelands::get_object_serial_or_zero<Widelands::MapObject>(value, *get_mol(L)));
+			} break;
+			default:
+				report_error(L, "Bad value type %d", datatype);
 			}
-
 		}
 
 		queue_.push_back(msg);
@@ -1760,9 +1759,11 @@ void LuaSubscriber::__unpersist(lua_State* L) {
 		} else if (type == LuaNotifications::PersistanceInfo::kMapViewTrackSelection) {
 			impl_.reset(LuaNotifications::create_mapview_track_selection(L));
 		} else if (type == LuaNotifications::PersistanceInfo::kMapObjectRemoved) {
-			impl_.reset(LuaNotifications::create_map_object_removed(get_mol(L)->get<Widelands::MapObject>(serial)));
+			impl_.reset(LuaNotifications::create_map_object_removed(
+			   get_mol(L)->get<Widelands::MapObject>(serial)));
 		} else if (type == LuaNotifications::PersistanceInfo::kBuildingMuted) {
-			impl_.reset(LuaNotifications::create_building_muted(get_mol(L)->get<Widelands::Building>(serial)));
+			impl_.reset(
+			   LuaNotifications::create_building_muted(get_mol(L)->get<Widelands::Building>(serial)));
 		}
 	}
 
@@ -1817,7 +1818,8 @@ int LuaSubscriber::get(lua_State* L) {
 
 	const uint32_t index = luaL_checkuint32(L, 2);
 	if (index < 1 || index > queue_.size()) {
-		report_error(L, "Index %u out of bounds for queue size %u", index, static_cast<unsigned>(queue_.size()));
+		report_error(L, "Index %u out of bounds for queue size %u", index,
+		             static_cast<unsigned>(queue_.size()));
 	}
 
 	lua_newtable(L);
@@ -1825,19 +1827,20 @@ int LuaSubscriber::get(lua_State* L) {
 		lua_pushstring(L, pair.first.c_str());
 
 		switch (pair.second.type) {
-			case LuaSubscriber::Value::Type::kString:
-				lua_pushstring(L, pair.second.string_val.c_str());
-				break;
-			case LuaSubscriber::Value::Type::kInt:
+		case LuaSubscriber::Value::Type::kString:
+			lua_pushstring(L, pair.second.string_val.c_str());
+			break;
+		case LuaSubscriber::Value::Type::kInt:
+			lua_pushinteger(L, pair.second.int_val);
+			break;
+		case LuaSubscriber::Value::Type::kMapObject:
+			if (LuaMaps::upcasted_map_object_to_lua(
+			       L, egbase_->objects().get_object(pair.second.int_val)) == 0) {
 				lua_pushinteger(L, pair.second.int_val);
-				break;
-			case LuaSubscriber::Value::Type::kMapObject:
-				if (LuaMaps::upcasted_map_object_to_lua(L, egbase_->objects().get_object(pair.second.int_val)) == 0) {
-					lua_pushinteger(L, pair.second.int_val);
-				}
-				break;
-			default:
-				report_error(L, "Bad value type %d", static_cast<int>(pair.second.type));
+			}
+			break;
+		default:
+			report_error(L, "Bad value type %d", static_cast<int>(pair.second.type));
 		}
 
 		lua_settable(L, -3);

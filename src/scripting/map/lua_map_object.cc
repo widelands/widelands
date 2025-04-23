@@ -36,8 +36,10 @@ MapObject
 */
 const char LuaMapObject::className[] = "MapObject";
 const MethodType<LuaMapObject> LuaMapObject::Methods[] = {
-   METHOD(LuaMapObject, remove), METHOD(LuaMapObject, destroy),
-   METHOD(LuaMapObject, __eq),   METHOD(LuaMapObject, has_attribute),
+   METHOD(LuaMapObject, remove),
+   METHOD(LuaMapObject, destroy),
+   METHOD(LuaMapObject, __eq),
+   METHOD(LuaMapObject, has_attribute),
    METHOD(LuaMapObject, subscribe_to_removed),
    {nullptr, nullptr},
 };
@@ -152,8 +154,7 @@ int LuaMapObject::__eq(lua_State* L) {
 	           you == nullptr) {  // One of the objects is destroyed: they are distinct
 		lua_pushboolean(L, 0);
 	} else {  // Compare their serial number.
-		lua_pushboolean(
-		   L, static_cast<int>(other->ptr_.serial() == ptr_.serial()));
+		lua_pushboolean(L, static_cast<int>(other->ptr_.serial() == ptr_.serial()));
 	}
 
 	return 1;
@@ -236,7 +237,9 @@ int LuaMapObject::has_attribute(lua_State* L) {
 */
 int LuaMapObject::subscribe_to_removed(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	to_lua<LuaRoot::LuaSubscriber>(L, new LuaRoot::LuaSubscriber(egbase, LuaRoot::LuaNotifications::create_map_object_removed(*get(L, egbase))));
+	to_lua<LuaRoot::LuaSubscriber>(
+	   L, new LuaRoot::LuaSubscriber(
+	         egbase, LuaRoot::LuaNotifications::create_map_object_removed(*get(L, egbase))));
 	return 1;
 }
 

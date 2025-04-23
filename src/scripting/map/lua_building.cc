@@ -136,7 +136,9 @@ int LuaBuilding::enhance(lua_State* L) {
 */
 int LuaBuilding::subscribe_to_muted(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	to_lua<LuaRoot::LuaSubscriber>(L, new LuaRoot::LuaSubscriber(egbase, LuaRoot::LuaNotifications::create_building_muted(*get(L, egbase))));
+	to_lua<LuaRoot::LuaSubscriber>(
+	   L, new LuaRoot::LuaSubscriber(
+	         egbase, LuaRoot::LuaNotifications::create_building_muted(*get(L, egbase))));
 	return 1;
 }
 

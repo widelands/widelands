@@ -191,15 +191,20 @@ public:
 			kString = 2,
 			kMapObject = 3,
 		};
-		Type type {Type::kInt};
-		int32_t int_val {0};
+		Type type{Type::kInt};
+		int32_t int_val{0};
 		std::string string_val;
 
 		Value() = default;
-		Value(std::string str) : type(Type::kString), string_val(str) {}
-		Value(int32_t i) : type(Type::kInt), int_val(i) {}
-		Value(const Widelands::MapObject* mo) : type(Type::kMapObject), int_val(mo != nullptr ? mo->serial() : 0) {}
-		Value(Type t, int32_t i) : type(t), int_val(i) {}
+		Value(std::string str) : type(Type::kString), string_val(str) {
+		}
+		Value(int32_t i) : type(Type::kInt), int_val(i) {
+		}
+		Value(const Widelands::MapObject* mo)
+		   : type(Type::kMapObject), int_val(mo != nullptr ? mo->serial() : 0) {
+		}
+		Value(Type t, int32_t i) : type(t), int_val(i) {
+		}
 	};
 
 	using Message = std::map<std::string, Value>;
@@ -234,8 +239,8 @@ public:
 	void add_message(Message msg);
 
 private:
-	MutexLock::ID mutex_ {MutexLock::create_custom_mutex()};
-	const Widelands::EditorGameBase* egbase_ {nullptr};
+	MutexLock::ID mutex_{MutexLock::create_custom_mutex()};
+	const Widelands::EditorGameBase* egbase_{nullptr};
 	std::unique_ptr<LuaNotifications::Wrapper> impl_;
 	std::deque<Message> queue_;
 };

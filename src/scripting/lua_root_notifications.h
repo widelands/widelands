@@ -30,7 +30,7 @@ namespace LuaNotifications {
 
 struct PersistanceInfo {
 	std::string type;
-	uint32_t serial {0U};
+	uint32_t serial{0U};
 
 	static constexpr const char kMapViewJump[] = "mapview_jump";
 	static constexpr const char kMapViewChangeview[] = "mapview_changeview";
@@ -59,7 +59,7 @@ struct PersistanceInfo {
 struct Wrapper {
 	virtual ~Wrapper() = default;
 
-	LuaSubscriber* owner {nullptr};
+	LuaSubscriber* owner{nullptr};
 	PersistanceInfo persistance;
 };
 

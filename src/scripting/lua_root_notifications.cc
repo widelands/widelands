@@ -44,9 +44,7 @@ template <typename... Args> struct SignalImpl : public Wrapper {
 		persistance.serial = serial;
 		persistance.type = type;
 
-		signal.connect([this](Args... args) {
-			owner->add_message(generate_message(args...));
-		});
+		signal.connect([this](Args... args) { owner->add_message(generate_message(args...)); });
 	}
 };
 
@@ -55,9 +53,8 @@ template <typename Note> struct NoteImpl : public Wrapper {
 		persistance.serial = 0;
 		persistance.type = type;
 
-		subscriber_ = Notifications::subscribe<Note>([this](const Note& note) {
-			owner->add_message(generate_message(note));
-		});
+		subscriber_ = Notifications::subscribe<Note>(
+		   [this](const Note& note) { owner->add_message(generate_message(note)); });
 	}
 
 	LuaSubscriber::Message generate_message(const Note& note) const;
@@ -115,19 +112,23 @@ Wrapper* create(const std::string& type) {
 }
 
 Wrapper* create_mapview_jump(lua_State* L) {
-	return new SignalImpl(PersistanceInfo::kMapViewJump, 0, get_egbase(L).get_ibase()->map_view()->jump);
+	return new SignalImpl(
+	   PersistanceInfo::kMapViewJump, 0, get_egbase(L).get_ibase()->map_view()->jump);
 }
 
 Wrapper* create_mapview_changeview(lua_State* L) {
-	return new SignalImpl(PersistanceInfo::kMapViewChangeview, 0, get_egbase(L).get_ibase()->map_view()->changeview);
+	return new SignalImpl(
+	   PersistanceInfo::kMapViewChangeview, 0, get_egbase(L).get_ibase()->map_view()->changeview);
 }
 
 Wrapper* create_mapview_field_clicked(lua_State* L) {
-	return new SignalImpl(PersistanceInfo::kMapViewFieldClicked, 0, get_egbase(L).get_ibase()->map_view()->field_clicked);
+	return new SignalImpl(PersistanceInfo::kMapViewFieldClicked, 0,
+	                      get_egbase(L).get_ibase()->map_view()->field_clicked);
 }
 
 Wrapper* create_mapview_track_selection(lua_State* L) {
-	return new SignalImpl(PersistanceInfo::kMapViewTrackSelection, 0, get_egbase(L).get_ibase()->map_view()->track_selection);
+	return new SignalImpl(PersistanceInfo::kMapViewTrackSelection, 0,
+	                      get_egbase(L).get_ibase()->map_view()->track_selection);
 }
 
 Wrapper* create_map_object_removed(const Widelands::MapObject& obj) {
@@ -183,7 +184,8 @@ Wrapper* create_player_details() {
 }
 
 Wrapper* create_production_site_out_of_resources() {
-	return new NoteImpl<Widelands::NoteProductionSiteOutOfResources>(PersistanceInfo::kProductionSiteOutOfResources);
+	return new NoteImpl<Widelands::NoteProductionSiteOutOfResources>(
+	   PersistanceInfo::kProductionSiteOutOfResources);
 }
 
 Wrapper* create_quicknav_changed() {
@@ -195,191 +197,239 @@ Wrapper* create_ship() {
 }
 
 Wrapper* create_training_site_soldier_trained() {
-	return new NoteImpl<Widelands::NoteTrainingSiteSoldierTrained>(PersistanceInfo::kTrainingSiteSoldierTrained);
+	return new NoteImpl<Widelands::NoteTrainingSiteSoldierTrained>(
+	   PersistanceInfo::kTrainingSiteSoldierTrained);
 }
 
-template<>
-LuaSubscriber::Message SignalImpl<>::generate_message() const {
+template <> LuaSubscriber::Message SignalImpl<>::generate_message() const {
 	return LuaSubscriber::Message();
 }
 
-template<>
-LuaSubscriber::Message SignalImpl<uint32_t>::generate_message(uint32_t serial) const {
+template <> LuaSubscriber::Message SignalImpl<uint32_t>::generate_message(uint32_t serial) const {
 	return {{"object", LuaSubscriber::Value(LuaSubscriber::Value::Type::kMapObject, serial)}};
 }
 
-template<>
-LuaSubscriber::Message SignalImpl<const Widelands::NodeAndTriangle<>&>::generate_message(const Widelands::NodeAndTriangle<>& field) const {
+template <>
+LuaSubscriber::Message SignalImpl<const Widelands::NodeAndTriangle<>&>::generate_message(
+   const Widelands::NodeAndTriangle<>& field) const {
 	return {
-		{"node_x", field.node.x},
-		{"node_y", field.node.y},
-		{"triangle_x", field.triangle.node.x},
-		{"triangle_y", field.triangle.node.y},
-		{"triangle_t", std::string(field.triangle.t == Widelands::TriangleIndex::D ? "D" : "R")},
+	   {"node_x", field.node.x},
+	   {"node_y", field.node.y},
+	   {"triangle_x", field.triangle.node.x},
+	   {"triangle_y", field.triangle.node.y},
+	   {"triangle_t", std::string(field.triangle.t == Widelands::TriangleIndex::D ? "D" : "R")},
 	};
 }
 
-template<>
-LuaSubscriber::Message NoteImpl<Widelands::NoteBuilding>::generate_message(const Widelands::NoteBuilding& note) const {
+template <>
+LuaSubscriber::Message
+NoteImpl<Widelands::NoteBuilding>::generate_message(const Widelands::NoteBuilding& note) const {
 	std::string action;
 	switch (note.action) {
-		case Widelands::NoteBuilding::Action::kChanged: action = "changed"; break;
-		case Widelands::NoteBuilding::Action::kStartWarp: action = "start_warp"; break;
-		case Widelands::NoteBuilding::Action::kFinishWarp: action = "finish_warp"; break;
-		case Widelands::NoteBuilding::Action::kWorkersChanged: action = "workers_changed"; break;
-		default: throw wexception("Invalid building change action %d", static_cast<int>(note.action));
+	case Widelands::NoteBuilding::Action::kChanged:
+		action = "changed";
+		break;
+	case Widelands::NoteBuilding::Action::kStartWarp:
+		action = "start_warp";
+		break;
+	case Widelands::NoteBuilding::Action::kFinishWarp:
+		action = "finish_warp";
+		break;
+	case Widelands::NoteBuilding::Action::kWorkersChanged:
+		action = "workers_changed";
+		break;
+	default:
+		throw wexception("Invalid building change action %d", static_cast<int>(note.action));
 	}
 
 	return {
-		{"object", LuaSubscriber::Value(LuaSubscriber::Value::Type::kMapObject, note.serial)},
-		{"action", action},
+	   {"object", LuaSubscriber::Value(LuaSubscriber::Value::Type::kMapObject, note.serial)},
+	   {"action", action},
 	};
 }
 
-template<>
+template <>
 LuaSubscriber::Message NoteImpl<ChatMessage>::generate_message(const ChatMessage& note) const {
 	return {
-		{"sender", note.sender},
-		{"recipient", note.recipient},
-		{"msg", note.msg},
-		{"player", note.playern},
-		{"time", note.time},
+	   {"sender", note.sender},  {"recipient", note.recipient}, {"msg", note.msg},
+	   {"player", note.playern}, {"time", note.time},
 	};
 }
 
-template<>
-LuaSubscriber::Message NoteImpl<Widelands::NoteEconomy>::generate_message(const Widelands::NoteEconomy& note) const {
+template <>
+LuaSubscriber::Message
+NoteImpl<Widelands::NoteEconomy>::generate_message(const Widelands::NoteEconomy& note) const {
 	std::string action;
 	switch (note.action) {
-	case Widelands::NoteEconomy::Action::kMerged: action = "merged"; break;
-	case Widelands::NoteEconomy::Action::kDeleted: action = "deleted"; break;
-	default: throw wexception("Invalid economy change action %d", static_cast<int>(note.action));
+	case Widelands::NoteEconomy::Action::kMerged:
+		action = "merged";
+		break;
+	case Widelands::NoteEconomy::Action::kDeleted:
+		action = "deleted";
+		break;
+	default:
+		throw wexception("Invalid economy change action %d", static_cast<int>(note.action));
 	}
 	return {
-		{"old_economy", note.old_economy},
-		{"new_economy", note.new_economy},
-		{"action", action},
+	   {"old_economy", note.old_economy},
+	   {"new_economy", note.new_economy},
+	   {"action", action},
 	};
 }
 
-template<>
-LuaSubscriber::Message NoteImpl<NoteEconomyProfile>::generate_message(const NoteEconomyProfile& /*note*/) const {
+template <>
+LuaSubscriber::Message
+NoteImpl<NoteEconomyProfile>::generate_message(const NoteEconomyProfile& /*note*/) const {
 	return LuaSubscriber::Message();
 }
 
-template<>
-LuaSubscriber::Message NoteImpl<Widelands::NoteExpeditionCanceled>::generate_message(const Widelands::NoteExpeditionCanceled& /*note*/) const {
+template <>
+LuaSubscriber::Message NoteImpl<Widelands::NoteExpeditionCanceled>::generate_message(
+   const Widelands::NoteExpeditionCanceled& /*note*/) const {
 	return LuaSubscriber::Message();
 }
 
-template<>
-LuaSubscriber::Message NoteImpl<Widelands::NoteFieldPossession>::generate_message(const Widelands::NoteFieldPossession& note) const {
+template <>
+LuaSubscriber::Message NoteImpl<Widelands::NoteFieldPossession>::generate_message(
+   const Widelands::NoteFieldPossession& note) const {
 	std::string action;
 	switch (note.ownership) {
-		case Widelands::NoteFieldPossession::Ownership::LOST: action = "lost"; break;
-		case Widelands::NoteFieldPossession::Ownership::GAINED: action = "gained"; break;
-		default: throw wexception("Invalid field possession ownership %d", static_cast<int>(note.ownership));
+	case Widelands::NoteFieldPossession::Ownership::LOST:
+		action = "lost";
+		break;
+	case Widelands::NoteFieldPossession::Ownership::GAINED:
+		action = "gained";
+		break;
+	default:
+		throw wexception("Invalid field possession ownership %d", static_cast<int>(note.ownership));
 	}
 
 	return {
-		{"x", note.fc.x},
-		{"y", note.fc.y},
-		{"player", note.player != nullptr ? note.player->player_number() : 0},
-		{"ownership", action},
+	   {"x", note.fc.x},
+	   {"y", note.fc.y},
+	   {"player", note.player != nullptr ? note.player->player_number() : 0},
+	   {"ownership", action},
 	};
 }
 
-template<>
-LuaSubscriber::Message NoteImpl<Widelands::NoteFieldTerrainChanged>::generate_message(const Widelands::NoteFieldTerrainChanged& note) const {
+template <>
+LuaSubscriber::Message NoteImpl<Widelands::NoteFieldTerrainChanged>::generate_message(
+   const Widelands::NoteFieldTerrainChanged& note) const {
 	std::string action;
 	switch (note.action) {
-	case Widelands::NoteFieldTerrainChanged::Change::kTerrain: action = "terrain"; break;
-	case Widelands::NoteFieldTerrainChanged::Change::kImmovable: action = "immovable"; break;
-	default: throw wexception("Invalid terrain change action %d", static_cast<int>(note.action));
+	case Widelands::NoteFieldTerrainChanged::Change::kTerrain:
+		action = "terrain";
+		break;
+	case Widelands::NoteFieldTerrainChanged::Change::kImmovable:
+		action = "immovable";
+		break;
+	default:
+		throw wexception("Invalid terrain change action %d", static_cast<int>(note.action));
 	}
 	return {
-		{"x", note.fc.x},
-		{"y", note.fc.y},
-		{"action", action},
+	   {"x", note.fc.x},
+	   {"y", note.fc.y},
+	   {"action", action},
 	};
 }
 
-template<>
-LuaSubscriber::Message NoteImpl<GraphicResolutionChanged>::generate_message(const GraphicResolutionChanged& note) const {
+template <>
+LuaSubscriber::Message
+NoteImpl<GraphicResolutionChanged>::generate_message(const GraphicResolutionChanged& note) const {
 	return {
-		{"old_w", note.old_width},
-		{"old_h", note.old_height},
-		{"new_w", note.new_width},
-		{"new_h", note.new_height},
+	   {"old_w", note.old_width},
+	   {"old_h", note.old_height},
+	   {"new_w", note.new_width},
+	   {"new_h", note.new_height},
 	};
 }
 
-template<>
-LuaSubscriber::Message NoteImpl<Widelands::NoteImmovable>::generate_message(const Widelands::NoteImmovable& note) const {
+template <>
+LuaSubscriber::Message
+NoteImpl<Widelands::NoteImmovable>::generate_message(const Widelands::NoteImmovable& note) const {
 	std::string action;
 	switch (note.ownership) {
-		case Widelands::NoteImmovable::Ownership::LOST: action = "lost"; break;
-		case Widelands::NoteImmovable::Ownership::GAINED: action = "gained"; break;
-		default: throw wexception("Invalid immovable ownership %d", static_cast<int>(note.ownership));
+	case Widelands::NoteImmovable::Ownership::LOST:
+		action = "lost";
+		break;
+	case Widelands::NoteImmovable::Ownership::GAINED:
+		action = "gained";
+		break;
+	default:
+		throw wexception("Invalid immovable ownership %d", static_cast<int>(note.ownership));
 	}
 
 	return {
-		{"object", note.pi},
-		{"ownership", action},
+	   {"object", note.pi},
+	   {"ownership", action},
 	};
 }
 
-template<>
-LuaSubscriber::Message NoteImpl<Widelands::NotePinnedNoteMoved>::generate_message(const Widelands::NotePinnedNoteMoved& note) const {
+template <>
+LuaSubscriber::Message NoteImpl<Widelands::NotePinnedNoteMoved>::generate_message(
+   const Widelands::NotePinnedNoteMoved& note) const {
 	return {
-		{"old_x", note.old_pos.x},
-		{"old_y", note.old_pos.y},
-		{"new_x", note.new_pos.x},
-		{"new_y", note.new_pos.y},
-		{"player", note.player},
+	   {"old_x", note.old_pos.x}, {"old_y", note.old_pos.y}, {"new_x", note.new_pos.x},
+	   {"new_y", note.new_pos.y}, {"player", note.player},
 	};
 }
 
-template<>
-LuaSubscriber::Message NoteImpl<Widelands::NotePlayerDetailsEvent>::generate_message(const Widelands::NotePlayerDetailsEvent& note) const {
+template <>
+LuaSubscriber::Message NoteImpl<Widelands::NotePlayerDetailsEvent>::generate_message(
+   const Widelands::NotePlayerDetailsEvent& note) const {
 	return {
-		{"player", note.player.player_number()},
+	   {"player", note.player.player_number()},
 	};
 }
 
-template<>
-LuaSubscriber::Message NoteImpl<Widelands::NoteProductionSiteOutOfResources>::generate_message(const Widelands::NoteProductionSiteOutOfResources& note) const {
+template <>
+LuaSubscriber::Message NoteImpl<Widelands::NoteProductionSiteOutOfResources>::generate_message(
+   const Widelands::NoteProductionSiteOutOfResources& note) const {
 	return {
-		{"object", note.ps},
+	   {"object", note.ps},
 	};
 }
 
-template<>
-LuaSubscriber::Message NoteImpl<NoteQuicknavChangedEvent>::generate_message(const NoteQuicknavChangedEvent& /*note*/) const {
+template <>
+LuaSubscriber::Message NoteImpl<NoteQuicknavChangedEvent>::generate_message(
+   const NoteQuicknavChangedEvent& /*note*/) const {
 	return LuaSubscriber::Message();
 }
 
-template<>
-LuaSubscriber::Message NoteImpl<Widelands::NoteShip>::generate_message(const Widelands::NoteShip& note) const {
+template <>
+LuaSubscriber::Message
+NoteImpl<Widelands::NoteShip>::generate_message(const Widelands::NoteShip& note) const {
 	std::string action;
 	switch (note.action) {
-	case Widelands::NoteShip::Action::kDestinationChanged: action = "destination_changed"; break;
-	case Widelands::NoteShip::Action::kWaitingForCommand: action = "waiting_for_command"; break;
-	case Widelands::NoteShip::Action::kNoPortLeft: action = "no_port_left"; break;
-	case Widelands::NoteShip::Action::kLost: action = "lost"; break;
-	case Widelands::NoteShip::Action::kGained: action = "gained"; break;
-	default: throw wexception("Invalid ship action %d", static_cast<int>(note.action));
+	case Widelands::NoteShip::Action::kDestinationChanged:
+		action = "destination_changed";
+		break;
+	case Widelands::NoteShip::Action::kWaitingForCommand:
+		action = "waiting_for_command";
+		break;
+	case Widelands::NoteShip::Action::kNoPortLeft:
+		action = "no_port_left";
+		break;
+	case Widelands::NoteShip::Action::kLost:
+		action = "lost";
+		break;
+	case Widelands::NoteShip::Action::kGained:
+		action = "gained";
+		break;
+	default:
+		throw wexception("Invalid ship action %d", static_cast<int>(note.action));
 	}
 	return {
-		{"object", note.ship},
-		{"action", action},
+	   {"object", note.ship},
+	   {"action", action},
 	};
 }
 
-template<>
-LuaSubscriber::Message NoteImpl<Widelands::NoteTrainingSiteSoldierTrained>::generate_message(const Widelands::NoteTrainingSiteSoldierTrained& note) const {
+template <>
+LuaSubscriber::Message NoteImpl<Widelands::NoteTrainingSiteSoldierTrained>::generate_message(
+   const Widelands::NoteTrainingSiteSoldierTrained& note) const {
 	return {
-		{"object", note.ts},
+	   {"object", note.ts},
 	};
 }
 
