@@ -286,7 +286,7 @@ struct NoteTrainingSiteSoldierTrained {
 	// The trainingsite from where soldier is leaving.
 	TrainingSite* ts;
 
-	// The player that owns the ttraining site.
+	// The player that owns the training site.
 	Player* player;
 
 	NoteTrainingSiteSoldierTrained(TrainingSite* const init_ts, Player* init_player)

@@ -19,6 +19,7 @@
 #include "scripting/map/lua_map_object.h"
 
 #include "scripting/globals.h"
+#include "scripting/lua_root_notifications.h"
 
 namespace LuaMaps {
 
@@ -37,6 +38,7 @@ const char LuaMapObject::className[] = "MapObject";
 const MethodType<LuaMapObject> LuaMapObject::Methods[] = {
    METHOD(LuaMapObject, remove), METHOD(LuaMapObject, destroy),
    METHOD(LuaMapObject, __eq),   METHOD(LuaMapObject, has_attribute),
+   METHOD(LuaMapObject, subscribe_to_removed),
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapObject> LuaMapObject::Properties[] = {
@@ -78,7 +80,7 @@ void LuaMapObject::__unpersist(lua_State* L) {
       (RO) The map object's serial. Used to identify a class in a Set.
 */
 int LuaMapObject::get___hash(lua_State* L) {
-	lua_pushuint32(L, get(L, get_egbase(L))->serial());
+	lua_pushuint32(L, ptr_.serial());
 	return 1;
 }
 
@@ -89,7 +91,7 @@ int LuaMapObject::get___hash(lua_State* L) {
       constant after saving/loading.
 */
 int LuaMapObject::get_serial(lua_State* L) {
-	lua_pushuint32(L, get(L, get_egbase(L))->serial());
+	lua_pushuint32(L, ptr_.serial());
 	return 1;
 }
 
@@ -151,7 +153,7 @@ int LuaMapObject::__eq(lua_State* L) {
 		lua_pushboolean(L, 0);
 	} else {  // Compare their serial number.
 		lua_pushboolean(
-		   L, static_cast<int>(other->get(L, egbase)->serial() == get(L, egbase)->serial()));
+		   L, static_cast<int>(other->ptr_.serial() == ptr_.serial()));
 	}
 
 	return 1;
@@ -218,6 +220,23 @@ int LuaMapObject::has_attribute(lua_State* L) {
 	} else {
 		lua_pushboolean(L, 0);
 	}
+	return 1;
+}
+
+/* RST
+   .. method:: subscribe_to_removed()
+
+      .. versionadded:: 1.3
+
+      Subscribe to the "removed" signal, which is triggered when the map object is removed.
+
+      The signal provides the object's :attr:`serial` as a parameter named ``"object"``.
+
+      :returns: :class:`wl.Subscriber`
+*/
+int LuaMapObject::subscribe_to_removed(lua_State* L) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	to_lua<LuaRoot::LuaSubscriber>(L, new LuaRoot::LuaSubscriber(egbase, LuaRoot::LuaNotifications::create_map_object_removed(*get(L, egbase))));
 	return 1;
 }
 

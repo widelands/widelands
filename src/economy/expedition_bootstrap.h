@@ -115,7 +115,7 @@ private:
 };
 
 struct NoteExpeditionCanceled {
-	CAN_BE_SENT_AS_NOTE(NoteId::NoteExpeditionCanceled)
+	CAN_BE_SENT_AS_NOTE(NoteId::ExpeditionCanceled)
 
 	ExpeditionBootstrap* bootstrap;
 

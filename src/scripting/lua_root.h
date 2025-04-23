@@ -19,11 +19,17 @@
 #ifndef WL_SCRIPTING_LUA_ROOT_H
 #define WL_SCRIPTING_LUA_ROOT_H
 
+#include <memory>
+
 #include "scripting/lua.h"
 #include "scripting/lua_bases.h"
 #include "scripting/luna.h"
 
 namespace LuaRoot {
+
+namespace LuaNotifications {
+struct Wrapper;
+}
 
 /*
  * Base class for all classes in wl
@@ -177,7 +183,65 @@ public:
 	void do_modify_ship(lua_State* L, const std::string&, const std::string&);
 };
 
+class LuaSubscriber : public LuaRootModuleClass {
+public:
+	struct Value {
+		enum class Type : uint8_t {
+			kInt = 1,
+			kString = 2,
+			kMapObject = 3,
+		};
+		Type type {Type::kInt};
+		int32_t int_val {0};
+		std::string string_val;
+
+		Value() = default;
+		Value(std::string str) : type(Type::kString), string_val(str) {}
+		Value(int32_t i) : type(Type::kInt), int_val(i) {}
+		Value(const Widelands::MapObject* mo) : type(Type::kMapObject), int_val(mo != nullptr ? mo->serial() : 0) {}
+		Value(Type t, int32_t i) : type(t), int_val(i) {}
+	};
+
+	using Message = std::map<std::string, Value>;
+
+	LUNA_CLASS_HEAD(LuaSubscriber);
+
+	LuaSubscriber() = default;
+	explicit LuaSubscriber(const Widelands::EditorGameBase& egbase, LuaNotifications::Wrapper* impl);
+	explicit LuaSubscriber(lua_State* L);
+	~LuaSubscriber() override = default;
+
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
+	void __persist(lua_State* L) override;
+	void __unpersist(lua_State* L) override;
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
+
+	/*
+	 * Properties
+	 */
+	int get_size(lua_State* L);
+
+	/*
+	 * Lua methods
+	 */
+	int get(lua_State* L);
+	int pop(lua_State* L);
+	int clear(lua_State* L);
+
+	/*
+	 * C methods
+	 */
+	void add_message(Message msg);
+
+private:
+	MutexLock::ID mutex_ {MutexLock::create_custom_mutex()};
+	const Widelands::EditorGameBase* egbase_ {nullptr};
+	std::unique_ptr<LuaNotifications::Wrapper> impl_;
+	std::deque<Message> queue_;
+};
+
 void luaopen_wlroot(lua_State*, bool in_editor);
 
-#endif  // end of include guard: WL_SCRIPTING_LUA_ROOT_H
 }  // namespace LuaRoot
+
+#endif  // end of include guard: WL_SCRIPTING_LUA_ROOT_H
