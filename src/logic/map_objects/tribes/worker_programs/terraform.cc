@@ -19,9 +19,22 @@
 #include "logic/map_objects/tribes/worker.h"
 
 #include "logic/map_objects/descriptions.h"
+#include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/world/terrain_description.h"
 
 namespace Widelands {
+
+bool is_port_construction(const FCoords& coord, Game& game) {
+	Coords ports_space = game.map().find_portspace_for_dockpoint(coord);
+	if (ports_space == Coords::null()) {
+		return false;
+	}
+
+	Widelands::BaseImmovable* ps_imm = game.map().get_fcoords(ports_space).field->get_immovable();
+	if (upcast(Widelands::ConstructionSite const, constructionsite, ps_imm)) {
+		return constructionsite->building().type() == MapObjectType::WAREHOUSE;
+	}
+}
 
 bool Worker::run_terraform(Game& game, State& state, const Action& a) {
 	const Descriptions& descriptions = game.descriptions();
@@ -48,46 +61,45 @@ bool Worker::run_terraform(Game& game, State& state, const Action& a) {
 	BaseImmovable* imm_brn = brn.field->get_immovable();
 	BaseImmovable* imm_rn = rn.field->get_immovable();
 
-	if (imm_brn == nullptr || imm_brn->descr().type() != MapObjectType::PORTDOCK) {
+
+	if ((imm_brn == nullptr || imm_brn->descr().type() != MapObjectType::PORTDOCK) && !is_port_construction(brn, game)) {
 		di = descriptions.terrain_index(
 		   descriptions.get_terrain_descr(f.field->terrain_r())->enhancement(a.sparam1));
 		if (di != INVALID_INDEX &&
-		    (imm_rn == nullptr || imm_rn->descr().type() != MapObjectType::PORTDOCK)) {
+		    (imm_rn == nullptr || imm_rn->descr().type() != MapObjectType::PORTDOCK) && !is_port_construction(rn, game)) {
 			triangles.emplace(TCoords<FCoords>(f, TriangleIndex::R), di);
 		}
 		di = descriptions.terrain_index(
 		   descriptions.get_terrain_descr(f.field->terrain_d())->enhancement(a.sparam1));
 		if (di != INVALID_INDEX &&
-		    (imm_bln == nullptr || imm_bln->descr().type() != MapObjectType::PORTDOCK)) {
+		    (imm_bln == nullptr || imm_bln->descr().type() != MapObjectType::PORTDOCK) && !is_port_construction(bln, game)) {
 			triangles.emplace(TCoords<FCoords>(f, TriangleIndex::D), di);
 		}
 	}
-	if (imm_tln == nullptr || imm_tln->descr().type() != MapObjectType::PORTDOCK) {
+	if ((imm_tln == nullptr || imm_tln->descr().type() != MapObjectType::PORTDOCK) && !is_port_construction(tln, game)) {
 		di = descriptions.terrain_index(
 		   descriptions.get_terrain_descr(tln.field->terrain_r())->enhancement(a.sparam1));
 		if (di != INVALID_INDEX &&
-		    (imm_trn == nullptr || imm_trn->descr().type() != MapObjectType::PORTDOCK)) {
+		    (imm_trn == nullptr || imm_trn->descr().type() != MapObjectType::PORTDOCK) && !is_port_construction(trn, game)) {
 			triangles.emplace(TCoords<FCoords>(tln, TriangleIndex::R), di);
 		}
 		di = descriptions.terrain_index(
 		   descriptions.get_terrain_descr(tln.field->terrain_d())->enhancement(a.sparam1));
 		if (di != INVALID_INDEX &&
-		    (imm_ln == nullptr || imm_ln->descr().type() != MapObjectType::PORTDOCK)) {
+		    (imm_ln == nullptr || imm_ln->descr().type() != MapObjectType::PORTDOCK) && !is_port_construction(ln, game)) {
 			triangles.emplace(TCoords<FCoords>(tln, TriangleIndex::D), di);
 		}
 	}
 	di = descriptions.terrain_index(
 	   descriptions.get_terrain_descr(ln.field->terrain_r())->enhancement(a.sparam1));
-	if (di != INVALID_INDEX &&
-	    (imm_ln == nullptr || imm_ln->descr().type() != MapObjectType::PORTDOCK) &&
-	    (imm_bln == nullptr || imm_bln->descr().type() != MapObjectType::PORTDOCK)) {
+	if (di != INVALID_INDEX && (imm_ln == nullptr || imm_ln->descr().type() != MapObjectType::PORTDOCK) &&
+	    (imm_bln == nullptr || imm_bln->descr().type() != MapObjectType::PORTDOCK) && !is_port_construction(bln, game) && !is_port_construction(ln, game)) {
 		triangles.emplace(TCoords<FCoords>(ln, TriangleIndex::R), di);
 	}
 	di = descriptions.terrain_index(
 	   descriptions.get_terrain_descr(trn.field->terrain_d())->enhancement(a.sparam1));
-	if (di != INVALID_INDEX &&
-	    (imm_trn == nullptr || imm_trn->descr().type() != MapObjectType::PORTDOCK) &&
-	    (imm_rn == nullptr || imm_rn->descr().type() != MapObjectType::PORTDOCK)) {
+	if (di != INVALID_INDEX && (imm_trn == nullptr || imm_trn->descr().type() != MapObjectType::PORTDOCK) &&
+	    (imm_rn == nullptr || imm_rn->descr().type() != MapObjectType::PORTDOCK) && !is_port_construction(rn, game) && !is_port_construction(trn, game)) {
 		triangles.emplace(TCoords<FCoords>(trn, TriangleIndex::D), di);
 	}
 
