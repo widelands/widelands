@@ -46,7 +46,9 @@ template <typename... Args> struct SignalImpl : public Wrapper {
 };
 
 template <typename... Args>
-SignalImpl(std::string type, uint32_t serial, const Notifications::Signal<Args...>& signal) -> SignalImpl<Args...>;
+SignalImpl(std::string type,
+           uint32_t serial,
+           const Notifications::Signal<Args...>& signal) -> SignalImpl<Args...>;
 
 template <typename Note> struct NoteImpl : public Wrapper {
 	explicit NoteImpl(std::string type) {
