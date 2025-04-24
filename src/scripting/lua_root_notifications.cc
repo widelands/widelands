@@ -120,12 +120,14 @@ Wrapper* create_mapview_changeview(lua_State* L) {
 
 Wrapper* create_mapview_field_clicked(lua_State* L) {
 	return new SignalImpl(  // NOLINT
-	   PersistenceInfo::kMapViewFieldClicked, 0, get_egbase(L).get_ibase()->map_view()->field_clicked);
+	   PersistenceInfo::kMapViewFieldClicked, 0,
+	   get_egbase(L).get_ibase()->map_view()->field_clicked);
 }
 
 Wrapper* create_mapview_track_selection(lua_State* L) {
 	return new SignalImpl(  // NOLINT
-	   PersistenceInfo::kMapViewTrackSelection, 0, get_egbase(L).get_ibase()->map_view()->track_selection);
+	   PersistenceInfo::kMapViewTrackSelection, 0,
+	   get_egbase(L).get_ibase()->map_view()->track_selection);
 }
 
 Wrapper* create_map_object_removed(const Widelands::MapObject& obj) {
