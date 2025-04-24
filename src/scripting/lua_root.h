@@ -29,7 +29,7 @@ namespace LuaRoot {
 
 namespace LuaNotifications {
 struct Wrapper;
-}
+}  // namespace LuaNotifications
 
 /*
  * Base class for all classes in wl
@@ -196,11 +196,12 @@ public:
 		std::string string_val;
 
 		Value() = default;
-		Value(std::string str) : type(Type::kString), string_val(str) {
+		Value(std::string str)  // NOLINT(google-explicit-constructor)
+		   : type(Type::kString), string_val(str) {
 		}
-		Value(int32_t i) : type(Type::kInt), int_val(i) {
+		Value(int32_t i) : type(Type::kInt), int_val(i) {  // NOLINT(google-explicit-constructor)
 		}
-		Value(const Widelands::MapObject* mo)
+		Value(const Widelands::MapObject* mo)  // NOLINT(google-explicit-constructor)
 		   : type(Type::kMapObject), int_val(mo != nullptr ? mo->serial() : 0) {
 		}
 		Value(Type t, int32_t i) : type(t), int_val(i) {

@@ -1658,13 +1658,13 @@ void LuaSubscriber::__persist(lua_State* L) {
 	Widelands::MapObjectSaver& mos = *get_mos(L);
 
 	uint32_t idx = 0;
-	if (Widelands::MapObject* obj = egbase_->objects().get_object(impl_->persistance.serial);
+	if (Widelands::MapObject* obj = egbase_->objects().get_object(impl_->persistence.serial);
 	    obj != nullptr) {
 		idx = mos.get_object_file_index(*obj);
 	}
 
 	PERS_UINT32("file_index", idx);
-	PERS_STRING("type", impl_->persistance.type);
+	PERS_STRING("type", impl_->persistence.type);
 
 	PERS_UINT32("size", queue_.size());
 	for (size_t i = 0; i < queue_.size(); ++i) {
@@ -1706,36 +1706,36 @@ void LuaSubscriber::__unpersist(lua_State* L) {
 
 	uint32_t serial;
 	std::string type;
-	UNPERS_UINT32("file_index", serial);
-	UNPERS_STRING("type", type);
+	UNPERS_UINT32("file_index", serial)
+	UNPERS_STRING("type", type)
 
 	uint32_t size;
-	UNPERS_UINT32("size", size);
+	UNPERS_UINT32("size", size)
 	for (uint32_t i = 0; i < size; ++i) {
 		uint32_t msg_size;
-		UNPERS_UINT32(format("size_%u", i).c_str(), msg_size);
+		UNPERS_UINT32(format("size_%u", i).c_str(), msg_size)
 		Message msg;
 
 		for (size_t j = 0; j < msg_size; ++j) {
 			std::string key;
-			UNPERS_STRING(format("key_%u_%u", i, j).c_str(), key);
+			UNPERS_STRING(format("key_%u_%u", i, j).c_str(), key)
 
 			uint32_t datatype;
-			UNPERS_UINT32(format("type_%u_%u", i, j).c_str(), datatype);
+			UNPERS_UINT32(format("type_%u_%u", i, j).c_str(), datatype)
 			switch (static_cast<LuaSubscriber::Value::Type>(datatype)) {
 			case LuaSubscriber::Value::Type::kString: {
 				std::string str;
-				UNPERS_STRING(format("value_%u_%u", i, j).c_str(), str);
+				UNPERS_STRING(format("value_%u_%u", i, j).c_str(), str)
 				msg[key] = str;
 			} break;
 			case LuaSubscriber::Value::Type::kInt: {
 				int32_t value;
-				UNPERS_UINT32(format("value_%u_%u", i, j).c_str(), value);
+				UNPERS_UINT32(format("value_%u_%u", i, j).c_str(), value)
 				msg[key] = value;
 			} break;
 			case LuaSubscriber::Value::Type::kMapObject: {
 				uint32_t value;
-				UNPERS_UINT32(format("value_%u_%u", i, j).c_str(), value);
+				UNPERS_UINT32(format("value_%u_%u", i, j).c_str(), value)
 				msg[key] = LuaSubscriber::Value(
 				   LuaSubscriber::Value::Type::kMapObject,
 				   Widelands::get_object_serial_or_zero<Widelands::MapObject>(value, *get_mol(L)));
@@ -1750,18 +1750,18 @@ void LuaSubscriber::__unpersist(lua_State* L) {
 
 	impl_.reset(LuaNotifications::create(type));
 	if (impl_ == nullptr) {
-		if (type == LuaNotifications::PersistanceInfo::kMapViewJump) {
+		if (type == LuaNotifications::PersistenceInfo::kMapViewJump) {
 			impl_.reset(LuaNotifications::create_mapview_jump(L));
-		} else if (type == LuaNotifications::PersistanceInfo::kMapViewChangeview) {
+		} else if (type == LuaNotifications::PersistenceInfo::kMapViewChangeview) {
 			impl_.reset(LuaNotifications::create_mapview_changeview(L));
-		} else if (type == LuaNotifications::PersistanceInfo::kMapViewFieldClicked) {
+		} else if (type == LuaNotifications::PersistenceInfo::kMapViewFieldClicked) {
 			impl_.reset(LuaNotifications::create_mapview_field_clicked(L));
-		} else if (type == LuaNotifications::PersistanceInfo::kMapViewTrackSelection) {
+		} else if (type == LuaNotifications::PersistenceInfo::kMapViewTrackSelection) {
 			impl_.reset(LuaNotifications::create_mapview_track_selection(L));
-		} else if (type == LuaNotifications::PersistanceInfo::kMapObjectRemoved) {
+		} else if (type == LuaNotifications::PersistenceInfo::kMapObjectRemoved) {
 			impl_.reset(LuaNotifications::create_map_object_removed(
 			   get_mol(L)->get<Widelands::MapObject>(serial)));
-		} else if (type == LuaNotifications::PersistanceInfo::kBuildingMuted) {
+		} else if (type == LuaNotifications::PersistenceInfo::kBuildingMuted) {
 			impl_.reset(
 			   LuaNotifications::create_building_muted(get_mol(L)->get<Widelands::Building>(serial)));
 		}

@@ -24,11 +24,9 @@
 
 #include "scripting/lua_root.h"
 
-namespace LuaRoot {
+namespace LuaRoot::LuaNotifications {
 
-namespace LuaNotifications {
-
-struct PersistanceInfo {
+struct PersistenceInfo {
 	std::string type;
 	uint32_t serial{0U};
 
@@ -60,7 +58,7 @@ struct Wrapper {
 	virtual ~Wrapper() = default;
 
 	LuaSubscriber* owner{nullptr};
-	PersistanceInfo persistance;
+	PersistenceInfo persistence;
 };
 
 Wrapper* create_mapview_jump(lua_State* L);
@@ -87,8 +85,6 @@ Wrapper* create_quicknav_changed();
 Wrapper* create_ship();
 Wrapper* create_training_site_soldier_trained();
 
-}  // namespace LuaNotifications
-
-}  // namespace LuaRoot
+}  // namespace LuaRoot::LuaNotifications
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_ROOT_NOTIFICATIONS_H

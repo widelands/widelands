@@ -32,17 +32,14 @@
 #include "wui/interactive_base.h"
 #include "wui/quicknavigation.h"
 
-namespace LuaRoot {
-namespace LuaNotifications {
+namespace LuaRoot::LuaNotifications {
 
 template <typename... Args> struct SignalImpl : public Wrapper {
-	using Signal = Notifications::Signal<Args...>;
+	[[nodiscard]] LuaSubscriber::Message generate_message(Args... args) const;
 
-	LuaSubscriber::Message generate_message(Args... args) const;
-
-	SignalImpl(std::string type, uint32_t serial, const Signal& signal) {
-		persistance.serial = serial;
-		persistance.type = type;
+	SignalImpl(std::string type, uint32_t serial, const Notifications::Signal<Args...>& signal) {
+		persistence.serial = serial;
+		persistence.type = type;
 
 		signal.connect([this](Args... args) { owner->add_message(generate_message(args...)); });
 	}
@@ -50,62 +47,62 @@ template <typename... Args> struct SignalImpl : public Wrapper {
 
 template <typename Note> struct NoteImpl : public Wrapper {
 	explicit NoteImpl(std::string type) {
-		persistance.serial = 0;
-		persistance.type = type;
+		persistence.serial = 0;
+		persistence.type = type;
 
 		subscriber_ = Notifications::subscribe<Note>(
 		   [this](const Note& note) { owner->add_message(generate_message(note)); });
 	}
 
-	LuaSubscriber::Message generate_message(const Note& note) const;
+	[[nodiscard]] LuaSubscriber::Message generate_message(const Note& note) const;
 
 	std::unique_ptr<Notifications::Subscriber<Note>> subscriber_;
 };
 
 Wrapper* create(const std::string& type) {
-	if (type == PersistanceInfo::kBuilding) {
+	if (type == PersistenceInfo::kBuilding) {
 		return create_building();
 	}
-	if (type == PersistanceInfo::kChatMessage) {
+	if (type == PersistenceInfo::kChatMessage) {
 		return create_chat_message();
 	}
-	if (type == PersistanceInfo::kEconomy) {
+	if (type == PersistenceInfo::kEconomy) {
 		return create_economy();
 	}
-	if (type == PersistanceInfo::kEconomyProfile) {
+	if (type == PersistenceInfo::kEconomyProfile) {
 		return create_economy_profile();
 	}
-	if (type == PersistanceInfo::kExpeditionCancelled) {
+	if (type == PersistenceInfo::kExpeditionCancelled) {
 		return create_expedition_cancelled();
 	}
-	if (type == PersistanceInfo::kFieldPossession) {
+	if (type == PersistenceInfo::kFieldPossession) {
 		return create_field_possession();
 	}
-	if (type == PersistanceInfo::kFieldTerrainChanged) {
+	if (type == PersistenceInfo::kFieldTerrainChanged) {
 		return create_field_terrain_changed();
 	}
-	if (type == PersistanceInfo::kGraphicResolutionChanged) {
+	if (type == PersistenceInfo::kGraphicResolutionChanged) {
 		return create_graphic_resolution_changed();
 	}
-	if (type == PersistanceInfo::kImmovable) {
+	if (type == PersistenceInfo::kImmovable) {
 		return create_immovable();
 	}
-	if (type == PersistanceInfo::kPinnedNoteMoved) {
+	if (type == PersistenceInfo::kPinnedNoteMoved) {
 		return create_pinned_note_moved();
 	}
-	if (type == PersistanceInfo::kPlayerDetailsEvent) {
+	if (type == PersistenceInfo::kPlayerDetailsEvent) {
 		return create_player_details();
 	}
-	if (type == PersistanceInfo::kProductionSiteOutOfResources) {
+	if (type == PersistenceInfo::kProductionSiteOutOfResources) {
 		return create_production_site_out_of_resources();
 	}
-	if (type == PersistanceInfo::kQuicknavChangedEvent) {
+	if (type == PersistenceInfo::kQuicknavChangedEvent) {
 		return create_quicknav_changed();
 	}
-	if (type == PersistanceInfo::kShip) {
+	if (type == PersistenceInfo::kShip) {
 		return create_ship();
 	}
-	if (type == PersistanceInfo::kTrainingSiteSoldierTrained) {
+	if (type == PersistenceInfo::kTrainingSiteSoldierTrained) {
 		return create_training_site_soldier_trained();
 	}
 	return nullptr;
@@ -113,92 +110,92 @@ Wrapper* create(const std::string& type) {
 
 Wrapper* create_mapview_jump(lua_State* L) {
 	return new SignalImpl(
-	   PersistanceInfo::kMapViewJump, 0, get_egbase(L).get_ibase()->map_view()->jump);
+	   PersistenceInfo::kMapViewJump, 0, get_egbase(L).get_ibase()->map_view()->jump);
 }
 
 Wrapper* create_mapview_changeview(lua_State* L) {
 	return new SignalImpl(
-	   PersistanceInfo::kMapViewChangeview, 0, get_egbase(L).get_ibase()->map_view()->changeview);
+	   PersistenceInfo::kMapViewChangeview, 0, get_egbase(L).get_ibase()->map_view()->changeview);
 }
 
 Wrapper* create_mapview_field_clicked(lua_State* L) {
-	return new SignalImpl(PersistanceInfo::kMapViewFieldClicked, 0,
+	return new SignalImpl(PersistenceInfo::kMapViewFieldClicked, 0,
 	                      get_egbase(L).get_ibase()->map_view()->field_clicked);
 }
 
 Wrapper* create_mapview_track_selection(lua_State* L) {
-	return new SignalImpl(PersistanceInfo::kMapViewTrackSelection, 0,
+	return new SignalImpl(PersistenceInfo::kMapViewTrackSelection, 0,
 	                      get_egbase(L).get_ibase()->map_view()->track_selection);
 }
 
 Wrapper* create_map_object_removed(const Widelands::MapObject& obj) {
-	return new SignalImpl(PersistanceInfo::kMapObjectRemoved, obj.serial(), obj.removed);
+	return new SignalImpl(PersistenceInfo::kMapObjectRemoved, obj.serial(), obj.removed);
 }
 
 Wrapper* create_building_muted(const Widelands::Building& obj) {
-	return new SignalImpl(PersistanceInfo::kBuildingMuted, obj.serial(), obj.muted);
+	return new SignalImpl(PersistenceInfo::kBuildingMuted, obj.serial(), obj.muted);
 }
 
 Wrapper* create_building() {
-	return new NoteImpl<Widelands::NoteBuilding>(PersistanceInfo::kBuilding);
+	return new NoteImpl<Widelands::NoteBuilding>(PersistenceInfo::kBuilding);
 }
 
 Wrapper* create_chat_message() {
-	return new NoteImpl<ChatMessage>(PersistanceInfo::kChatMessage);
+	return new NoteImpl<ChatMessage>(PersistenceInfo::kChatMessage);
 }
 
 Wrapper* create_economy() {
-	return new NoteImpl<Widelands::NoteEconomy>(PersistanceInfo::kEconomy);
+	return new NoteImpl<Widelands::NoteEconomy>(PersistenceInfo::kEconomy);
 }
 
 Wrapper* create_economy_profile() {
-	return new NoteImpl<NoteEconomyProfile>(PersistanceInfo::kEconomyProfile);
+	return new NoteImpl<NoteEconomyProfile>(PersistenceInfo::kEconomyProfile);
 }
 
 Wrapper* create_expedition_cancelled() {
-	return new NoteImpl<Widelands::NoteExpeditionCanceled>(PersistanceInfo::kExpeditionCancelled);
+	return new NoteImpl<Widelands::NoteExpeditionCanceled>(PersistenceInfo::kExpeditionCancelled);
 }
 
 Wrapper* create_field_possession() {
-	return new NoteImpl<Widelands::NoteFieldPossession>(PersistanceInfo::kFieldPossession);
+	return new NoteImpl<Widelands::NoteFieldPossession>(PersistenceInfo::kFieldPossession);
 }
 
 Wrapper* create_field_terrain_changed() {
-	return new NoteImpl<Widelands::NoteFieldTerrainChanged>(PersistanceInfo::kFieldTerrainChanged);
+	return new NoteImpl<Widelands::NoteFieldTerrainChanged>(PersistenceInfo::kFieldTerrainChanged);
 }
 
 Wrapper* create_graphic_resolution_changed() {
-	return new NoteImpl<GraphicResolutionChanged>(PersistanceInfo::kGraphicResolutionChanged);
+	return new NoteImpl<GraphicResolutionChanged>(PersistenceInfo::kGraphicResolutionChanged);
 }
 
 Wrapper* create_immovable() {
-	return new NoteImpl<Widelands::NoteImmovable>(PersistanceInfo::kImmovable);
+	return new NoteImpl<Widelands::NoteImmovable>(PersistenceInfo::kImmovable);
 }
 
 Wrapper* create_pinned_note_moved() {
-	return new NoteImpl<Widelands::NotePinnedNoteMoved>(PersistanceInfo::kPinnedNoteMoved);
+	return new NoteImpl<Widelands::NotePinnedNoteMoved>(PersistenceInfo::kPinnedNoteMoved);
 }
 
 Wrapper* create_player_details() {
-	return new NoteImpl<Widelands::NotePlayerDetailsEvent>(PersistanceInfo::kPlayerDetailsEvent);
+	return new NoteImpl<Widelands::NotePlayerDetailsEvent>(PersistenceInfo::kPlayerDetailsEvent);
 }
 
 Wrapper* create_production_site_out_of_resources() {
 	return new NoteImpl<Widelands::NoteProductionSiteOutOfResources>(
-	   PersistanceInfo::kProductionSiteOutOfResources);
+	   PersistenceInfo::kProductionSiteOutOfResources);
 }
 
 Wrapper* create_quicknav_changed() {
-	return new NoteImpl<NoteQuicknavChangedEvent>(PersistanceInfo::kQuicknavChangedEvent);
+	return new NoteImpl<NoteQuicknavChangedEvent>(PersistenceInfo::kQuicknavChangedEvent);
 }
 
 Wrapper* create_ship() {
-	return new NoteImpl<Widelands::NoteShip>(PersistanceInfo::kShip);
+	return new NoteImpl<Widelands::NoteShip>(PersistenceInfo::kShip);
 }
 
 Wrapper* create_training_site_soldier_trained() {
 	return new NoteImpl<Widelands::NoteTrainingSiteSoldierTrained>(
-	   PersistanceInfo::kTrainingSiteSoldierTrained);
+	   PersistenceInfo::kTrainingSiteSoldierTrained);
 }
 
 template <> LuaSubscriber::Message SignalImpl<>::generate_message() const {
@@ -433,5 +430,4 @@ LuaSubscriber::Message NoteImpl<Widelands::NoteTrainingSiteSoldierTrained>::gene
 	};
 }
 
-}  // namespace LuaNotifications
-}  // namespace LuaRoot
+}  // namespace LuaRoot::LuaNotifications
