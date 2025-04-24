@@ -32,8 +32,6 @@
 #include "wui/interactive_base.h"
 #include "wui/quicknavigation.h"
 
-CLANG_DIAG_OFF("-Wclang-diagnostic-ctad-maybe-unsupported")
-
 namespace LuaRoot::LuaNotifications {
 
 template <typename... Args> struct SignalImpl : public Wrapper {
@@ -111,31 +109,33 @@ Wrapper* create(const std::string& type) {
 }
 
 Wrapper* create_mapview_jump(lua_State* L) {
-	return new SignalImpl(
+	return new SignalImpl(  // NOLINT
 	   PersistenceInfo::kMapViewJump, 0, get_egbase(L).get_ibase()->map_view()->jump);
 }
 
 Wrapper* create_mapview_changeview(lua_State* L) {
-	return new SignalImpl(
+	return new SignalImpl(  // NOLINT
 	   PersistenceInfo::kMapViewChangeview, 0, get_egbase(L).get_ibase()->map_view()->changeview);
 }
 
 Wrapper* create_mapview_field_clicked(lua_State* L) {
-	return new SignalImpl(PersistenceInfo::kMapViewFieldClicked, 0,
-	                      get_egbase(L).get_ibase()->map_view()->field_clicked);
+	return new SignalImpl(  // NOLINT
+	   PersistenceInfo::kMapViewFieldClicked, 0, get_egbase(L).get_ibase()->map_view()->field_clicked);
 }
 
 Wrapper* create_mapview_track_selection(lua_State* L) {
-	return new SignalImpl(PersistenceInfo::kMapViewTrackSelection, 0,
-	                      get_egbase(L).get_ibase()->map_view()->track_selection);
+	return new SignalImpl(  // NOLINT
+	   PersistenceInfo::kMapViewTrackSelection, 0, get_egbase(L).get_ibase()->map_view()->track_selection);
 }
 
 Wrapper* create_map_object_removed(const Widelands::MapObject& obj) {
-	return new SignalImpl(PersistenceInfo::kMapObjectRemoved, obj.serial(), obj.removed);
+	return new SignalImpl(  // NOLINT
+	   PersistenceInfo::kMapObjectRemoved, obj.serial(), obj.removed);
 }
 
 Wrapper* create_building_muted(const Widelands::Building& obj) {
-	return new SignalImpl(PersistenceInfo::kBuildingMuted, obj.serial(), obj.muted);
+	return new SignalImpl(  // NOLINT
+	   PersistenceInfo::kBuildingMuted, obj.serial(), obj.muted);
 }
 
 Wrapper* create_building() {
