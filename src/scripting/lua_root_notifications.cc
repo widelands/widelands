@@ -32,6 +32,8 @@
 #include "wui/interactive_base.h"
 #include "wui/quicknavigation.h"
 
+CLANG_DIAG_OFF("-Wclang-diagnostic-ctad-maybe-unsupported")
+
 namespace LuaRoot::LuaNotifications {
 
 template <typename... Args> struct SignalImpl : public Wrapper {
