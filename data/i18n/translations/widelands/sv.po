@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-04-03 03:08+0000\n"
+"POT-Creation-Date: 2025-04-07 03:10+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Jan Lindblom <janlindblom@fastmail.fm>, 2024\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -114,7 +114,7 @@ msgstr "%1$s eller %2$s"
 #: ../../../../data/scripting/richtext.lua:707
 #: ../../../../data/scripting/richtext.lua:712
 #: ../../../../src/base/i18n.cc:343 ../../../../src/base/i18n.cc:352
-#: ../../../../src/logic/addons.cc:242
+#: ../../../../src/logic/addons.cc:245
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
@@ -769,14 +769,14 @@ msgstr "Är du säker på att du vill lämna kartredigeraren?"
 #: ../../../../src/logic/addons.cc:48 ../../../../src/ui_basic/dropdown.cc:360
 #: ../../../../src/ui_basic/dropdown.cc:362
 #: ../../../../src/ui_fsmenu/addons/contact.cc:81
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1910
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1921
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1993
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2001
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2026
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2093
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2172
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2250
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1919
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1930
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2002
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2010
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2035
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2105
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2215
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2295
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:104
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:292
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:566
@@ -1082,7 +1082,7 @@ msgstr "%1%× %2%"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:229
 #: ../../../../src/logic/addons.cc:59
-#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:159
+#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:161
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:143
 #: ../../../../src/wui/mapdetails.cc:138 ../../../../src/wui/minimap.cc:142
 msgid "Map"
@@ -1115,7 +1115,7 @@ msgstr "Upphovsman: %s"
 #: ../../../../src/editor/ui_menus/field_info_window.cc:244
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:297
 #: ../../../../src/ui_fsmenu/main.cc:468
-#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:124
+#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:126
 #, c-format
 msgid "Description: %s"
 msgstr "Beskrivning: %s"
@@ -1703,7 +1703,7 @@ msgid "Tribe"
 msgstr "Stam"
 
 #: ../../../../src/editor/ui_menus/player_menu.cc:203
-#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:30
+#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:32
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:461
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:97
 msgctxt "tribe"
@@ -2100,62 +2100,62 @@ msgstr "Ursprungligt förhållande"
 msgid "UI Plugin"
 msgstr "Gränssnittsplugin"
 
-#: ../../../../src/logic/addons.cc:117
+#: ../../../../src/logic/addons.cc:120
 #, c-format
 msgid "%1$s.%2$u"
 msgstr "%1$s.%2$u"
 
-#: ../../../../src/logic/addons.cc:215
+#: ../../../../src/logic/addons.cc:218
 msgid "No conflicts"
 msgstr "Inga konflikter"
 
-#: ../../../../src/logic/addons.cc:220
+#: ../../../../src/logic/addons.cc:223
 #, c-format
 msgid "%1$s (expected version %2$s, found %3$s)"
 msgstr "%1$s (förväntad version %2$s, hittade %3$s)"
 
-#: ../../../../src/logic/addons.cc:223 ../../../../src/logic/addons.cc:259
+#: ../../../../src/logic/addons.cc:226 ../../../../src/logic/addons.cc:262
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
 msgstr "%1$s, %2$s (förväntad version %3$s, hittade %4$s)"
 
-#: ../../../../src/logic/addons.cc:230
+#: ../../../../src/logic/addons.cc:233
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
 msgstr[0] "%1$u tillägg med fel version: %2$s"
 msgstr[1] "%1$u tillägg med fel version: %2$s"
 
-#: ../../../../src/logic/addons.cc:245
+#: ../../../../src/logic/addons.cc:248
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
 msgstr[0] "%1$usaknat tillägg: %2$s"
 msgstr[1] "%1$usaknade tillägg: %2$s"
 
-#: ../../../../src/logic/addons.cc:253
+#: ../../../../src/logic/addons.cc:256
 #, c-format
 msgid "%s (missing)"
 msgstr "%s (saknas)"
 
-#: ../../../../src/logic/addons.cc:255
+#: ../../../../src/logic/addons.cc:258
 #, c-format
 msgid "%1$s, %2$s (missing)"
 msgstr "%1$s, %2$s (saknas)"
 
-#: ../../../../src/logic/addons.cc:263
+#: ../../../../src/logic/addons.cc:266
 #, c-format
 msgid "%1$s and %2$s: %3$s"
 msgstr "%1$s och %2$s: %3$s"
 
-#: ../../../../src/logic/addons.cc:264
+#: ../../../../src/logic/addons.cc:267
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
 msgstr[0] "%u saknat tillägg"
 msgstr[1] "%u saknade tillägg"
 
-#: ../../../../src/logic/addons.cc:266
+#: ../../../../src/logic/addons.cc:269
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
@@ -2163,20 +2163,20 @@ msgstr[0] "%u tillägg med fel version"
 msgstr[1] "%u tillägg med fel version"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
-#: ../../../../src/logic/addons.cc:277
+#: ../../../../src/logic/addons.cc:280
 msgid "None"
 msgstr "Inga"
 
-#: ../../../../src/logic/addons.cc:281
+#: ../../../../src/logic/addons.cc:284
 #, c-format
 msgid "%1$s<br>• %2$s (version %3$s)"
 msgstr "%1$s<br>• %2$s (version %3$s)"
 
-#: ../../../../src/logic/addons.cc:311
+#: ../../../../src/logic/addons.cc:314
 msgid "No game-relevant add-ons in use."
 msgstr "Inga tillägg relevanta för spelet används."
 
-#: ../../../../src/logic/addons.cc:316
+#: ../../../../src/logic/addons.cc:319
 #, c-format
 msgid "%u game-relevant add-on in use:"
 msgid_plural "%u game-relevant add-ons in use:"
@@ -3814,12 +3814,12 @@ msgid ""
 "request in time."
 msgstr "Du blev frånkopplad från servern eftersom en PING inte besvarades i tid."
 
-#: ../../../../src/network/net_addons.cc:894
+#: ../../../../src/network/net_addons.cc:895
 #, c-format
 msgid "Sending metadata for %s"
 msgstr ""
 
-#: ../../../../src/network/net_addons.cc:936
+#: ../../../../src/network/net_addons.cc:937
 #, c-format
 msgid "Uploading %s"
 msgstr "Laddar upp %s"
@@ -4661,11 +4661,11 @@ msgstr "Starta tilläggsförpackaren..."
 msgid "Contact us…"
 msgstr "Kontakta oss..."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:604
+#: ../../../../src/ui_fsmenu/addons/manager.cc:609
 msgid "Tools for Add-Ons Developers"
 msgstr "Verktyg för tilläggsutvecklare"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:612
+#: ../../../../src/ui_fsmenu/addons/manager.cc:617
 msgid ""
 "The interactive add-ons packager allows you to create, edit, and delete add-"
 "ons. You can bundle maps designed with the Widelands Map Editor as an add-on"
@@ -4673,14 +4673,14 @@ msgid ""
 "having to write a single line of code."
 msgstr "Den interaktiva tilläggsförpackaren tillåter dig att skapa, editera och ta bort tillägg. Du kan bunta ihop kartor designade med Widelands kartredigerare som ett tillägg genom att använda det grafiska gränssnittet och dela dem med andra spelare, utan att behöva skriva en enda rad kod."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:627
+#: ../../../../src/ui_fsmenu/addons/manager.cc:632
 #, c-format
 msgid ""
 "For more information regarding how to develop and package your own add-ons, "
 "please visit %s."
 msgstr "För mer information angående hur du kan utveckla och packa dina egna tillägg är du välkommen att besöka %s."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:643
+#: ../../../../src/ui_fsmenu/addons/manager.cc:648
 msgid ""
 "Here, you can upload your add-ons to the server to make them available to "
 "other players. By uploading, you agree to publish your creation under the "
@@ -4689,7 +4689,7 @@ msgid ""
 "GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu."
 msgstr "Här kan du ladda upp dina tillägg till servern för att göra dem tillgängliga för andra spelare. Genom din uppladdning samtycker du till att din skapelse publiceras under villkoren för GNU General Public License (GPL) version 2 (samma licens som Widelands självt distribueras under). För mer information om GPL, var vänlig och läs under 'Om Widelands' → 'Licens' i huvudmenyn."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:650
+#: ../../../../src/ui_fsmenu/addons/manager.cc:655
 msgid ""
 "It is forbidden to upload add-ons containing harmful or malicious content or"
 " spam. By uploading an add-on, you assert that the add-on is of your own "
@@ -4697,7 +4697,7 @@ msgid ""
 " stead."
 msgstr "Det är inte tillåtet att ladda upp tillägg med skadligt eller illvilligt innehåll eller spam. Vid uppladdning av ett tillägg gör du gällande att tillägget är skapat av dig eller att du har upphovsmannens/upphovsmännens godkännande att skicka in det."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:656
+#: ../../../../src/ui_fsmenu/addons/manager.cc:661
 msgid ""
 "You are required to have read the add-ons documentation under the link given"
 " further above before submitting content. Since the documentation is subject"
@@ -4705,7 +4705,7 @@ msgid ""
 "followed all guidelines stated there."
 msgstr "Det krävs att du har läst dokumentationen om tillägg under länken ovan innan du skickar in innehåll. Eftersom dokumentationen regelbundet uppdateras är det viktigt att du har läst den nyligen. Se till att följa alla direktiv som anges där."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:662
+#: ../../../../src/ui_fsmenu/addons/manager.cc:667
 msgid ""
 "The Widelands Development Team will review your add-on soon after uploading."
 " In case they have further inquiries, they will contact you via a PM on the "
@@ -4713,7 +4713,7 @@ msgid ""
 "profile page frequently."
 msgstr "Widelands utvecklingsteam kommer att granska ditt tillägg efter uppladdning. Om de undrar över någonting kommer de kontakta dig via ett PM på Widelands webbsida. Kolla därför regelbundet inboxen till din online användarprofil."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:692
+#: ../../../../src/ui_fsmenu/addons/manager.cc:697
 #, c-format
 msgid ""
 "Technical problems? Unclear documentation? Advanced needs such as deletion "
@@ -4722,7 +4722,7 @@ msgid ""
 "be happy to help."
 msgstr "Tekniska problem? Otydlig dokumentation? Avancerade behov som borttagande av ett tillägg eller samarbete med andra tilläggsdesigners? Besök då vårt diskussionsforum på %s. Förklara vad du behöver och Widelands utvecklingsteam kommer vara glada att kunna hjälpa dig."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:709
+#: ../../../../src/ui_fsmenu/addons/manager.cc:714
 msgid ""
 "Alternatively you can also send a message to the Widelands Development Team "
 "and we’ll try to help you with your enquiry as soon as we can. Only the "
@@ -4733,15 +4733,15 @@ msgid ""
 " website user profile page."
 msgstr "Alternativt kan du också skicka ett meddelande till Widelands utvecklingsteam så kommer vi att försöka hjälpa dig med din förfrågan så snart vi kan. Bara serverns administratörer kan läsa meddelanden som sänds på detta sätt. Eftersom andra tilläggsdesigners ofta kan dra nytta av varandras frågor och svar bör du helst bara använda detta kommunikationssätt om det finns någon anledning till att din angelägenhet inte är lämpad för allas öron. Du kommer att få ditt svar via ett PM under din användarprofilsida på Widelands webbsida."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:749
+#: ../../../../src/ui_fsmenu/addons/manager.cc:754
 msgid "Manage your installed add-ons"
 msgstr "Hantera dina installerade tillägg"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:751
+#: ../../../../src/ui_fsmenu/addons/manager.cc:756
 msgid "Browse and install add-ons available on the server"
 msgstr "Bläddra bland och installera tillägg som är tillgängliga på servern"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:753
+#: ../../../../src/ui_fsmenu/addons/manager.cc:758
 #, c-format
 msgid ""
 "Browse and install maps from the widelands.org website maps archive. Like "
@@ -4749,154 +4749,154 @@ msgid ""
 "directory under the Widelands home directory."
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:757
+#: ../../../../src/ui_fsmenu/addons/manager.cc:762
 msgid "Development"
 msgstr "Utveckling"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:757
+#: ../../../../src/ui_fsmenu/addons/manager.cc:762
 msgid "Tools for add-on developers"
 msgstr "Verktyg för tilläggsutvecklare"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
-#: ../../../../src/ui_fsmenu/addons/manager.cc:761
+#: ../../../../src/ui_fsmenu/addons/manager.cc:766
 msgid "Name"
 msgstr "Namn"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
-#: ../../../../src/ui_fsmenu/addons/manager.cc:763
+#: ../../../../src/ui_fsmenu/addons/manager.cc:768
 msgid "Name (descending)"
 msgstr "Namn (i fallande ordning)"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../../../src/ui_fsmenu/addons/manager.cc:765
+#: ../../../../src/ui_fsmenu/addons/manager.cc:770
 msgid "Most popular"
 msgstr "De populäraste"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../../../src/ui_fsmenu/addons/manager.cc:767
+#: ../../../../src/ui_fsmenu/addons/manager.cc:772
 msgid "Least popular"
 msgstr "De minst populära"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../../../src/ui_fsmenu/addons/manager.cc:769
+#: ../../../../src/ui_fsmenu/addons/manager.cc:774
 msgid "Most often downloaded"
 msgstr "Oftast nedladdade"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../../../src/ui_fsmenu/addons/manager.cc:771
+#: ../../../../src/ui_fsmenu/addons/manager.cc:776
 msgid "Least often downloaded"
 msgstr "Mest sällan nedladdade"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../../../src/ui_fsmenu/addons/manager.cc:773
+#: ../../../../src/ui_fsmenu/addons/manager.cc:778
 msgid "Oldest"
 msgstr "Äldst"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../../../src/ui_fsmenu/addons/manager.cc:775
+#: ../../../../src/ui_fsmenu/addons/manager.cc:780
 msgid "Newest"
 msgstr "Nyast"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:784
+#: ../../../../src/ui_fsmenu/addons/manager.cc:789
 msgid "Filter add-ons by name"
 msgstr "Filtrera tillägg efter namn"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:785
+#: ../../../../src/ui_fsmenu/addons/manager.cc:790
 msgid "Filter maps by name"
 msgstr "Filtrera kartor efter namn"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:796
+#: ../../../../src/ui_fsmenu/addons/manager.cc:801
 #, c-format
 msgid "Toggle category ‘%s’"
 msgstr "Växla kategori \"%s\""
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:812
+#: ../../../../src/ui_fsmenu/addons/manager.cc:817
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:709
 msgid "One World"
 msgstr " En värld"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:820
+#: ../../../../src/ui_fsmenu/addons/manager.cc:825
 #, c-format
 msgid "Toggle world ‘%s’"
 msgstr "Växla värld '%s'"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1012
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1016
 #, c-format
 msgid "Are you certain that you want to upgrade this %u add-on?"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
 msgstr[0] "Är du säker på att du vill uppgradera detta %u tillägg?"
 msgstr[1] "Är du säker på att du vill uppgradera dessa %u tillägg?"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1018
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1022
 #, c-format
 msgid ""
 "\n"
 "• %1$s (%2$s) by %3$s"
 msgstr "\n• %1$s (%2$s) av %3$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1019
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1023
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:491
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:525
 msgid "NOT VERIFIED"
 msgstr "INTE VERIFIERADE"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1019
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1023
 msgid "verified"
 msgstr "verifierad"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1023
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1027
 msgid "Upgrade All"
 msgstr "Uppgradera alla"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1175
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1180
 msgid "Not logged in"
 msgstr "Inte inloggad"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1176
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1181
 msgid ""
 "Click to log in. You can then comment and vote on add-ons and upload your "
 "own add-ons."
 msgstr "Klicka för att logga in. Då kan du kommentera och rösta på tillägg och ladda upp dina egna tillägg."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1180
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1185
 msgid "Please log in to upload add-ons"
 msgstr "Var vänlig och logga in för att kunna ladda upp tillägg"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1182
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1187
 msgid "Please log in to upload content"
 msgstr "Var vänlig och logga in för att kunna ladda upp innehåll"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1184
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1189
 msgid "Please log in to send an enquiry"
 msgstr "Var vänlig och logga in för att kunna sända en förfrågan"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1189
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1194
 #, c-format
 msgid "Logged in as %s"
 msgstr "Inloggad som %s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1189
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1194
 #, c-format
 msgid "Logged in as %s (admin)"
 msgstr "Inloggad som %s (administratör)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1190
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1195
 msgid "Click to log out"
 msgstr "Klicka för att logga ut"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1195
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1200
 msgid "Please tick the confirmation checkbox to upload add-ons"
 msgstr "Var vänlig och klicka i bekräftelserutan för att ladda upp tillägg"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1198
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1203
 msgid "Please tick the confirmation checkbox to upload content"
 msgstr "Var vänlig och klicka i bekräftelserutan för att ladda upp innehåll"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1225
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1230
 msgid "Server Error"
 msgstr "Serverfel"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1226
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1231
 #, c-format
 msgid ""
 "Unable to connect to the server.\n"
@@ -4904,110 +4904,114 @@ msgid ""
 "%s"
 msgstr "Kunde inte ansluta till servern.\nFelmeddelande:\n%s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1234
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1239
 msgid "Wrong Password"
 msgstr "Fel lösenord"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1235
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1240
 #, c-format
 msgid ""
 "The entered username or password is invalid:\n"
 "%s"
 msgstr "Det angivna användarnamnet eller lösenordet är felaktigt: %s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1352
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1357
 #, c-format
 msgid "Fetching add-ons… (%.1f%%)"
 msgstr "Hämtar tillägg...  (%.1f %%)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1355
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1360
 msgid "Connecting to the server…"
 msgstr "Ansluter till servern..."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1378
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1383
 msgid "Server Connection Error"
 msgstr "Fel vid anslutning till servern"
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1380
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1385
 msgid "a networking bug"
 msgstr "ett nätverksfel"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1381
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1386
 #, c-format
 msgid ""
 "Unable to fetch the list of available add-ons from the server!<br>Error "
 "Message: %s"
 msgstr "Kunde inte hämta listan med tillgängliga tillägg från servern! <br>Felmeddelande: %s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1537
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1542
 #, c-format
 msgid "Installed (%u)"
 msgstr "Installerad (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1606
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1611
 msgid "Browse"
 msgstr "Bläddra"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1606
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1611
 #, c-format
 msgid "Browse (%u)"
 msgstr "Bläddra (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1612
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1618
+msgid "Translations for website maps"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1621
 #, c-format
 msgid "Upgrade all (%u)"
 msgstr "Uppgradera alla (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1615
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1624
 msgid "No upgrades are available for your installed add-ons"
 msgstr "Inga uppgraderingar finns tillgängliga för dina installerade tillägg"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1617
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1626
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
 msgstr[0] "Uppgradera följande %u tillägg:"
 msgstr[1] "Uppgradera följande %u tillägg:"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1622
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1631
 #, c-format
 msgid "• %s"
 msgstr "• %s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1675
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1684
 msgid "Website Maps"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1676
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1685
 #, c-format
 msgid "Website Maps (%u)"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1708
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1717
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which could not be found"
 msgstr "• ‘%1$s’ kräver ‘%2$s’ som inte kunde hittas"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1713
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1722
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is disabled"
 msgstr "• ‘%1$s’ kräver ‘%2$s’ som är inaktiverad"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1720
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1729
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1748
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1757
 #, c-format
 msgid ""
 "• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1764
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1773
 #, c-format
 msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
@@ -5015,67 +5019,67 @@ msgid ""
 "%s"
 msgstr "Ett aktiverat tillägg är defekt. Inga spel kan startas med nuvarande konfiguration.\nFelmeddelande:\n%s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1781
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1790
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
 msgstr[0] "%u beroendefel"
 msgstr[1] "%u beroendefel"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1783
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1792
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
 msgstr "Tillägg med beroendefel kan fungera felaktigt eller förhindra spel och kartor att laddas."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1911
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1920
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
 msgstr "Tillägget '%1$s' kan inte laddas upp eftersom dess version (%2$s) inte är nyare än versionen som finns på servern (%3$s)."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1922
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1931
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
 msgstr "Tillägget '%1$s' kan inte laddas upp eftersom dess kategori (%2$s) inte stämmer överens med kategorin på versionen som finns på servern (%3$s)."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1933
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1942
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:54
 msgid "Upload"
 msgstr "Uppladdning"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1934
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1943
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
 msgstr "Vill du verkligen ladda upp tillägget '%s' till servern?"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1944
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1953
 #, c-format
 msgid "Uploading ‘%s’…"
 msgstr "Laddar upp '%s'..."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1951
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2079
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2141
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1960
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2091
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2180
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1975
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1984
 #, c-format
 msgid "‘%s’"
 msgstr "‘%s’"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1983
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1992
 #, c-format
 msgid ""
 "The add-on ‘%s’ may not be uploaded to the server because the following "
 "filenames contained in the add-on are not allowed:"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1987
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1996
 msgid ""
 "Filenames may only contain alphanumeric characters (A-Z, a-z, 0-9) and "
 "simple punctuation (period, hyphen, and underscore; not multiple periods). "
@@ -5083,7 +5087,7 @@ msgid ""
 "exceed 80 characters."
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2002
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2011
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be uploaded to the server.\n"
@@ -5092,7 +5096,7 @@ msgid ""
 "%2$s"
 msgstr "Tillägget '%1$s' kunde inte laddas upp till servern.\n\nFelmeddelande:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2028
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2037
 #, c-format
 msgid ""
 "The map ‘%1$s’ could not be downloaded from the server.\n"
@@ -5101,12 +5105,12 @@ msgid ""
 "%2$s"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2059
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2070
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr "Laddar ner \"%s\"..."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2095
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2107
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -5115,7 +5119,7 @@ msgid ""
 "%2$s"
 msgstr "Tillägget \"%1$s\" kunde inte laddas ned från servern. Installation/uppgradering av detta tillägg kommer att hoppas över.\n\nFelmeddelande:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2173
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2216
 #, c-format
 msgid ""
 "The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations will be skipped.\n"
@@ -5124,7 +5128,15 @@ msgid ""
 "%2$s"
 msgstr "Översättningarna för tillägget '%1$s' kunde inte laddas ner från servern. Installation/uppgradering av översättningarna kommer att hoppas över.\n\nFelmeddelande:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2251
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2239
+msgid "Website Maps Translations"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2240
+msgid "Downloading website maps translations…"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2296
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr "Det nödvändiga tillägget \"%s\" kunde inte hittas på servern."
@@ -5407,14 +5419,14 @@ msgstr "Namn: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:285
 #: ../../../../src/ui_fsmenu/main.cc:463
-#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:112
+#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:114
 #, c-format
 msgid "Size: %s"
 msgstr "Storlek: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:287
 #: ../../../../src/ui_fsmenu/main.cc:465
-#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:114
+#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:116
 #, c-format
 msgid "%1$u×%2$u"
 msgstr "%1$u×%2$u"
@@ -5422,7 +5434,7 @@ msgstr "%1$u×%2$u"
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:288
 #: ../../../../src/ui_fsmenu/main.cc:415 ../../../../src/ui_fsmenu/main.cc:466
 #: ../../../../src/ui_fsmenu/main.cc:496
-#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:119
+#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:121
 #, c-format
 msgid "Players: %s"
 msgstr "Spelare: %s"
@@ -5789,25 +5801,30 @@ msgstr "%1$s (editerad %2$s)"
 msgid "%1$s (edited by ‘%2$s’ on %3$s)"
 msgstr "%1$s (editerad av '%2$s' den %3$s)"
 
-#: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:915
+#: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:916
+#, c-format
+msgid "‘%1$s’ commented:"
+msgstr ""
+
+#: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:917
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
 msgstr "\"%1$s\" kommenterade version %2$s:"
 
-#: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:941
+#: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:943
 #, c-format
 msgid "%1$u / %2$u"
 msgstr "%1$u / %2$u"
 
-#: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:977
+#: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:979
 msgid "This screenshot could not be fetched from the server due to an error."
 msgstr "Denna skärmdump kunde inte hämtas från servern på grund av ett fel."
 
-#: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:995
+#: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:997
 msgid "Please log in to comment"
 msgstr "Var vänlig och logga in för att kommentera"
 
-#: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:997
+#: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:999
 msgid "Please log in to vote"
 msgstr "Var vänlig och logga in för att rösta"
 
@@ -6864,44 +6881,44 @@ msgstr "Bekräfta avslut"
 msgid "Are you sure you wish to exit Widelands?"
 msgstr "Är du säker på att du vill avsluta Widelands?"
 
-#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:38
+#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:40
 #, c-format
 msgid "invalid tribe ‘%s’"
 msgstr "Ogiltig stam \"%s\""
 
-#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:51
+#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:53
 msgid "Saved Players"
 msgstr "Sparade spelare"
 
-#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:58
+#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:60
 #, c-format
 msgid "Player %u: –"
 msgstr "Spelare %u: –"
 
 #. * TRANSLATORS: "Player 1 (Barbarians): Playername"
-#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:81
+#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:83
 #, c-format
 msgid "Player %1$u (%2$s): %3$s"
 msgstr "Spelare %1$u (%2$s): %3$s"
 
-#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:107
+#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:109
 msgid "Map Details"
 msgstr "Kartdetaljer"
 
-#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:107
+#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:109
 msgid "Scenario Details"
 msgstr "Scenariodetaljer"
 
-#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:132
+#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:134
 #, c-format
 msgid "Hint: %s"
 msgstr "Tips: %s"
 
-#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:170
+#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:172
 msgid "No map selected"
 msgstr "Ingen karta vald"
 
-#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:213
+#: ../../../../src/ui_fsmenu/mapdetailsbox.cc:215
 msgid "(no map)"
 msgstr "(ingen karta)"
 

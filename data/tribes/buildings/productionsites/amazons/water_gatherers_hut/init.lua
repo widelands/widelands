@@ -25,7 +25,7 @@ wl.Descriptions():new_productionsite_type {
    },
 
    aihints = {
-      needs_water = true,
+      needs_water = true  -- is not a well but collects from bodies of water on the map
    },
 
    working_positions = {
