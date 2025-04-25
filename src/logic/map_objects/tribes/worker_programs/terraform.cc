@@ -24,13 +24,13 @@
 
 namespace Widelands {
 
-bool is_port_construction(const FCoords& coord, Game& game) {
+bool Worker::is_port_construction(const FCoords& coord, Game& game) {
 	Coords ports_space = game.map().find_portspace_for_dockpoint(coord);
 	if (ports_space == Coords::null()) {
 		return false;
 	}
 
-	Widelands::BaseImmovable* ps_imm = game.map().get_fcoords(ports_space).field->get_immovable();
+	BaseImmovable* ps_imm = game.map().get_fcoords(ports_space).field->get_immovable();
 	if (upcast(Widelands::ConstructionSite const, constructionsite, ps_imm)) {
 		return constructionsite->building().type() == MapObjectType::WAREHOUSE;
 	}
