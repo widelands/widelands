@@ -111,7 +111,8 @@ bool Worker::run_terraform(Game& game, State& state, const Action& a) {
 		game.map().get_rn(it->first.node, &second_triangle_point);
 		game.map().get_brn(it->first.node, &third_triangle_point);
 	}
-	if (terraform_prevented(it->first.node, game) || terraform_prevented(second_triangle_point, game) ||
+	if (terraform_prevented(it->first.node, game) ||
+	    terraform_prevented(second_triangle_point, game) ||
 	    terraform_prevented(third_triangle_point, game)) {
 		send_signal(game, "fail");
 		pop_task(game);
