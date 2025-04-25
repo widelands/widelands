@@ -24,15 +24,28 @@
 
 namespace Widelands {
 
-bool Worker::is_port_construction(const FCoords& coord, Game& game) {
-	Coords ports_space = game.map().find_portspace_for_dockpoint(coord);
-	if (ports_space == Coords::null()) {
+bool Worker::terraform_prevented(const FCoords& coord, Game& game) {
+	if ((coord.field->nodecaps() & Widelands::MOVECAPS_WALK) != 0) {
+		// fields that are on the shore or inland can't hold a portdock
 		return false;
 	}
-
-	BaseImmovable* ps_imm = game.map().get_fcoords(ports_space).field->get_immovable();
-	if (upcast(Widelands::ConstructionSite const, constructionsite, ps_imm)) {
-		return constructionsite->building().type() == MapObjectType::WAREHOUSE;
+	BaseImmovable* imm = coord.field->get_immovable();
+	if (imm == nullptr) {
+		// there is no immovable ergo no portdock
+		Coords ports_space = game.map().find_portspace_for_dockpoint(coord);
+		if (ports_space == Coords::null()) {
+			// no portspace is available from this firld
+			return false;
+		}
+		BaseImmovable* ps_imm = game.map().get_fcoords(ports_space).field->get_immovable();
+		if (upcast(Widelands::ConstructionSite const, constructionsite, ps_imm)) {
+			// only true if a port (warehouse) construction is going on at the field
+			return constructionsite->building().type() == MapObjectType::WAREHOUSE;
+		}
+	}
+	if (imm->descr().type() == MapObjectType::PORTDOCK) {
+		// there is a portdock
+		return true;
 	}
 	return false;
 }
@@ -41,75 +54,41 @@ bool Worker::run_terraform(Game& game, State& state, const Action& a) {
 	const Descriptions& descriptions = game.descriptions();
 	std::map<TCoords<FCoords>, DescriptionIndex> triangles;
 	const FCoords f = get_position();
-	DescriptionIndex di;
 	FCoords tln;
 	FCoords ln;
 	FCoords trn;
-	FCoords bln;
-	FCoords rn;
-	FCoords brn;
 	game.map().get_tln(f, &tln);
 	game.map().get_trn(f, &trn);
 	game.map().get_ln(f, &ln);
-	game.map().get_bln(f, &bln);
-	game.map().get_brn(f, &brn);
-	game.map().get_rn(f, &rn);
 
-	BaseImmovable* imm_tln = tln.field->get_immovable();
-	BaseImmovable* imm_bln = bln.field->get_immovable();
-	BaseImmovable* imm_ln = ln.field->get_immovable();
-	BaseImmovable* imm_trn = trn.field->get_immovable();
-	BaseImmovable* imm_brn = brn.field->get_immovable();
-	BaseImmovable* imm_rn = rn.field->get_immovable();
-
-	if ((imm_brn == nullptr || imm_brn->descr().type() != MapObjectType::PORTDOCK) &&
-	    !is_port_construction(brn, game)) {
-		di = descriptions.terrain_index(
-		   descriptions.get_terrain_descr(f.field->terrain_r())->enhancement(a.sparam1));
-		if (di != INVALID_INDEX &&
-		    (imm_rn == nullptr || imm_rn->descr().type() != MapObjectType::PORTDOCK) &&
-		    !is_port_construction(rn, game)) {
-			triangles.emplace(TCoords<FCoords>(f, TriangleIndex::R), di);
-		}
-		di = descriptions.terrain_index(
-		   descriptions.get_terrain_descr(f.field->terrain_d())->enhancement(a.sparam1));
-		if (di != INVALID_INDEX &&
-		    (imm_bln == nullptr || imm_bln->descr().type() != MapObjectType::PORTDOCK) &&
-		    !is_port_construction(bln, game)) {
-			triangles.emplace(TCoords<FCoords>(f, TriangleIndex::D), di);
-		}
+	DescriptionIndex di = descriptions.terrain_index(
+	   descriptions.get_terrain_descr(f.field->terrain_r())->enhancement(a.sparam1));
+	if (di != INVALID_INDEX) {
+		triangles.emplace(TCoords<FCoords>(f, TriangleIndex::R), di);
 	}
-	if ((imm_tln == nullptr || imm_tln->descr().type() != MapObjectType::PORTDOCK) &&
-	    !is_port_construction(tln, game)) {
-		di = descriptions.terrain_index(
-		   descriptions.get_terrain_descr(tln.field->terrain_r())->enhancement(a.sparam1));
-		if (di != INVALID_INDEX &&
-		    (imm_trn == nullptr || imm_trn->descr().type() != MapObjectType::PORTDOCK) &&
-		    !is_port_construction(trn, game)) {
-			triangles.emplace(TCoords<FCoords>(tln, TriangleIndex::R), di);
-		}
-		di = descriptions.terrain_index(
-		   descriptions.get_terrain_descr(tln.field->terrain_d())->enhancement(a.sparam1));
-		if (di != INVALID_INDEX &&
-		    (imm_ln == nullptr || imm_ln->descr().type() != MapObjectType::PORTDOCK) &&
-		    !is_port_construction(ln, game)) {
-			triangles.emplace(TCoords<FCoords>(tln, TriangleIndex::D), di);
-		}
+	di = descriptions.terrain_index(
+	   descriptions.get_terrain_descr(f.field->terrain_d())->enhancement(a.sparam1));
+	if (di != INVALID_INDEX) {
+		triangles.emplace(TCoords<FCoords>(f, TriangleIndex::D), di);
+	}
+	di = descriptions.terrain_index(
+	   descriptions.get_terrain_descr(tln.field->terrain_r())->enhancement(a.sparam1));
+	if (di != INVALID_INDEX) {
+		triangles.emplace(TCoords<FCoords>(tln, TriangleIndex::R), di);
+	}
+	di = descriptions.terrain_index(
+	   descriptions.get_terrain_descr(tln.field->terrain_d())->enhancement(a.sparam1));
+	if (di != INVALID_INDEX) {
+		triangles.emplace(TCoords<FCoords>(tln, TriangleIndex::D), di);
 	}
 	di = descriptions.terrain_index(
 	   descriptions.get_terrain_descr(ln.field->terrain_r())->enhancement(a.sparam1));
-	if (di != INVALID_INDEX &&
-	    (imm_ln == nullptr || imm_ln->descr().type() != MapObjectType::PORTDOCK) &&
-	    (imm_bln == nullptr || imm_bln->descr().type() != MapObjectType::PORTDOCK) &&
-	    !is_port_construction(bln, game) && !is_port_construction(ln, game)) {
+	if (di != INVALID_INDEX) {
 		triangles.emplace(TCoords<FCoords>(ln, TriangleIndex::R), di);
 	}
 	di = descriptions.terrain_index(
 	   descriptions.get_terrain_descr(trn.field->terrain_d())->enhancement(a.sparam1));
-	if (di != INVALID_INDEX &&
-	    (imm_trn == nullptr || imm_trn->descr().type() != MapObjectType::PORTDOCK) &&
-	    (imm_rn == nullptr || imm_rn->descr().type() != MapObjectType::PORTDOCK) &&
-	    !is_port_construction(rn, game) && !is_port_construction(trn, game)) {
+	if (di != INVALID_INDEX) {
 		triangles.emplace(TCoords<FCoords>(trn, TriangleIndex::D), di);
 	}
 
@@ -122,6 +101,21 @@ bool Worker::run_terraform(Game& game, State& state, const Action& a) {
 	auto it = triangles.begin();
 	for (size_t rand = game.logic_rand() % triangles.size(); rand > 0; --rand) {
 		++it;
+	}
+	FCoords second_triangle_point;
+	FCoords third_triangle_point;
+	if (it->first.t == TriangleIndex::D) {
+		game.map().get_brn(it->first.node, &second_triangle_point);
+		game.map().get_bln(it->first.node, &third_triangle_point); 
+	} else if (it->first.t == TriangleIndex::R) {
+		game.map().get_rn(it->first.node, &second_triangle_point);
+		game.map().get_brn(it->first.node, &third_triangle_point);
+	}
+	if (terraform_prevented(it->first.node, game) || terraform_prevented(second_triangle_point, game) ||
+	    terraform_prevented(third_triangle_point, game)) {
+		send_signal(game, "fail");
+		pop_task(game);
+		return true;
 	}
 	game.mutable_map()->change_terrain(game, it->first, it->second);
 	++state.ivar1;

@@ -270,8 +270,8 @@ private:
 	bool run_terraform(Game&, State&, const Action&);
 	bool run_script(Game&, State&, const Action&);
 
-	// Helper function for preventing to terraform a possible portdock field
-	bool is_port_construction(const FCoords&, Game&);
+	// Helper function to prevent terraforming a possible portdock field
+	bool terraform_prevented(const FCoords&, Game&);
 
 	// Forester considers multiple spaces in findspace, unlike others.
 	int16_t findspace_helper_for_forester(const Coords& pos, const Map& map, Game& game);
