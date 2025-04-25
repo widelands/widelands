@@ -34,6 +34,7 @@ bool is_port_construction(const FCoords& coord, Game& game) {
 	if (upcast(Widelands::ConstructionSite const, constructionsite, ps_imm)) {
 		return constructionsite->building().type() == MapObjectType::WAREHOUSE;
 	}
+	return false;
 }
 
 bool Worker::run_terraform(Game& game, State& state, const Action& a) {
