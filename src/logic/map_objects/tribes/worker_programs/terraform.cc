@@ -106,7 +106,7 @@ bool Worker::run_terraform(Game& game, State& state, const Action& a) {
 	FCoords third_triangle_point;
 	if (it->first.t == TriangleIndex::D) {
 		game.map().get_brn(it->first.node, &second_triangle_point);
-		game.map().get_bln(it->first.node, &third_triangle_point); 
+		game.map().get_bln(it->first.node, &third_triangle_point);
 	} else if (it->first.t == TriangleIndex::R) {
 		game.map().get_rn(it->first.node, &second_triangle_point);
 		game.map().get_brn(it->first.node, &third_triangle_point);
