@@ -70,7 +70,7 @@ wl.Descriptions():new_productionsite_type {
          },
       },
       produce_tunic = {
-         -- TRANSLATORS: Completed/Skipped/Did not start producing a tunic ax because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start sewing a tunic because ...
          descname = _("sewing a tunic"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
@@ -82,7 +82,7 @@ wl.Descriptions():new_productionsite_type {
          },
       },
       produce_armor_wooden = {
-         -- TRANSLATORS: Completed/Skipped/Did not start producing wooden armor because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start producing a light wooden armor because ...
          descname = _("making a light wooden armor"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
