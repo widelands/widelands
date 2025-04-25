@@ -1471,18 +1471,22 @@ void Ship::battle_update(Game& game) {
 			assert(current_battle.battle_position.valid());
 
 			if (get_position() == current_battle.battle_position) {
-				molog(game.get_gametime(), "[battle] Defender at battle position, waiting for the attacker to begin");
+				molog(game.get_gametime(),
+				      "[battle] Defender at battle position, waiting for the attacker to begin");
 				start_task_idle(game, descr().main_animation(), 500);
 				return;
 			}
 
-			if (start_task_movepath(game, current_battle.battle_position, 3, descr().get_sail_anims(), true)) {
+			if (start_task_movepath(
+			       game, current_battle.battle_position, 3, descr().get_sail_anims(), true)) {
 				molog(game.get_gametime(), "[battle] Defender moving towards battle position");
 				return;
 			}
 
-			throw wexception("Defending ship %s at %dx%d could not find a path to battle position at %dx%d!",
-				get_shipname().c_str(), get_position().x, get_position().y, current_battle.battle_position.x, current_battle.battle_position.y);
+			throw wexception(
+			   "Defending ship %s at %dx%d could not find a path to battle position at %dx%d!",
+			   get_shipname().c_str(), get_position().x, get_position().y,
+			   current_battle.battle_position.x, current_battle.battle_position.y);
 		}
 
 		default:
@@ -1511,10 +1515,9 @@ void Ship::battle_update(Game& game) {
 			Path path;
 			bool success = false;
 			for (int i = 0; i <= 2; ++i) {
-				if (
-					map.findpath(get_position(), current_battle.battle_position, 3, path, cstep) >= 0 &&
-					map.findpath(target_ship->get_position(), other_battle->battle_position, 3, path, cstep) >= 0
-				) {
+				if (map.findpath(get_position(), current_battle.battle_position, 3, path, cstep) >= 0 &&
+				    map.findpath(target_ship->get_position(), other_battle->battle_position, 3, path,
+				                 cstep) >= 0) {
 					success = true;
 					break;
 				}
@@ -1524,10 +1527,11 @@ void Ship::battle_update(Game& game) {
 			}
 
 			if (!success) {
-				throw wexception("Could not find suitable battle position for fight between %s at %dx%d and %s at %dx%d!",
-					get_shipname().c_str(), get_position().x, get_position().y,
-					target_ship->get_shipname().c_str(), target_ship->get_position().x, target_ship->get_position().y
-				);
+				throw wexception("Could not find suitable battle position for fight between %s at "
+				                 "%dx%d and %s at %dx%d!",
+				                 get_shipname().c_str(), get_position().x, get_position().y,
+				                 target_ship->get_shipname().c_str(), target_ship->get_position().x,
+				                 target_ship->get_position().y);
 			}
 
 		} else {
@@ -1540,23 +1544,28 @@ void Ship::battle_update(Game& game) {
 		assert(current_battle.battle_position.valid());
 
 		if (get_position() == current_battle.battle_position) {
-			if (target_ship != nullptr && target_ship->get_position() != other_battle->battle_position) {
+			if (target_ship != nullptr &&
+			    target_ship->get_position() != other_battle->battle_position) {
 				molog(game.get_gametime(), "[battle] Waiting for defender to reach battle position");
 				start_task_idle(game, descr().main_animation(), 500);
 				return;
 			}
 			molog(game.get_gametime(), "[battle] Attacker reached battle position, ready to begin");
-			set_phase(target_ship != nullptr ? Battle::Phase::kAttackersTurn : Battle::Phase::kAttackerAttacking);
+			set_phase(target_ship != nullptr ? Battle::Phase::kAttackersTurn :
+			                                   Battle::Phase::kAttackerAttacking);
 			return start_task_idle(game, descr().main_animation(), 100);
 		}
 
-		if (start_task_movepath(game, current_battle.battle_position, 3, descr().get_sail_anims(), true)) {
+		if (start_task_movepath(
+		       game, current_battle.battle_position, 3, descr().get_sail_anims(), true)) {
 			molog(game.get_gametime(), "[battle] Attacker moving towards battle position");
 			return;
 		}
 
-		throw wexception("Attacking ship %s at %dx%d could not find a path to battle position at %dx%d!",
-			get_shipname().c_str(), get_position().x, get_position().y, current_battle.battle_position.x, current_battle.battle_position.y);
+		throw wexception(
+		   "Attacking ship %s at %dx%d could not find a path to battle position at %dx%d!",
+		   get_shipname().c_str(), get_position().x, get_position().y,
+		   current_battle.battle_position.x, current_battle.battle_position.y);
 	}
 
 	case Battle::Phase::kAttackerAttacking:
