@@ -42,6 +42,8 @@ bool Worker::terraform_prevented(const FCoords& coord, Game& game) {
 			// only true if a port (warehouse) construction is going on at the field
 			return constructionsite->building().type() == MapObjectType::WAREHOUSE;
 		}
+		// no constructionsite on portspace
+		return false;
 	}
 	if (imm->descr().type() == MapObjectType::PORTDOCK) {
 		// there is a portdock
