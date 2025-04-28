@@ -132,7 +132,8 @@ struct StepEvalFindShipFleet {
 		if ((from.field->nodecaps() & MOVECAPS_SWIM) == 0) {
 			// We are allowed to land on and leave the shore,
 			// but not in the middle of a path
-			if (fromcost > 0) {
+			// also prevent 1 step paths between 2 land nodes
+			if (fromcost > 0 || (fromcost == 0 && (to.field->nodecaps() & MOVECAPS_SWIM) == 0)) {
 				return -1;
 			}
 
@@ -154,6 +155,7 @@ bool ShipFleet::find_other_fleet(EditorGameBase& egbase) {
 	}
 
 	for (const ShipFleetYardInterface* temp_interface : interfaces_) {
+		molog(egbase.get_gametime(), "searching other fleet for fleet interface at %3dx%3d with fleet %d.\n", temp_interface->get_position().x, temp_interface->get_position().y, this->serial());
 		astar.push(temp_interface->get_position());
 	}
 
