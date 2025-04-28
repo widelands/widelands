@@ -1,6 +1,6 @@
 [TOC]
 
-## Post-1.2.1 until [git 42b2066](https://codeberg.org/wl/widelands/commit/42b2066798e7fda18e69553431588e581000cff5)
+## Post-1.2.1 until [git e82de5c](https://codeberg.org/wl/widelands/commit/e82de5c348863308362dd44aafc35ceacc4a7eeb)
 
 ### Animations, Icons and Overlays
 
@@ -29,6 +29,7 @@
 - Make mapobjects findeable by their name from worker program findobject (CB #4855 / GH #6493)
 - Lua attribute `player.ai_type` (GH #6001 / CB #4412)
 - More functions, properties, and classes for the Lua UI API (GH #6555 / CB #4915)
+- Improvement of the Lua code of some buildings (GH #6730 / CB #5090)
 
 
 ### Maps
