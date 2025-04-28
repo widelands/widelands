@@ -1240,8 +1240,15 @@ void ProductionSite::init_yard_interfaces(EditorGameBase& egbase) {
 		   Area<FCoords>(map.get_fcoords(get_position()), descr().workarea_info().rbegin()->first),
 		   &result, CheckStepDefault(MOVECAPS_WALK), FindNodeShore(kMinOceanSize));
 
+		// This is "list" of unique fields in result we got above
+		static std::set<Widelands::Coords> processed_fields;
+		processed_fields.clear();
+
 		for (const Coords& coords : result) {
-			ship_fleet_interfaces_.push_back(ShipFleetYardInterface::create(egbase, *this, coords));
+			if (processed_fields.insert(coords).second) {
+				molog(egbase.get_gametime(), "trying to add fleet interface at %3dx%3d.\n", coords.x, coords.y);
+				ship_fleet_interfaces_.push_back(ShipFleetYardInterface::create(egbase, *this, coords));
+			}
 		}
 
 		if (ship_fleet_interfaces_.empty()) {
@@ -1261,8 +1268,14 @@ void ProductionSite::init_yard_interfaces(EditorGameBase& egbase) {
 		   Area<FCoords>(map.get_fcoords(get_position()), descr().workarea_info().rbegin()->first),
 		   &result, CheckStepDefault(MOVECAPS_WALK), FindNodeFerry(0));
 
+		// This is "list" of unique fields in result we got above
+		static std::set<Widelands::Coords> processed_fields;
+		processed_fields.clear();
+
 		for (const Coords& coords : result) {
-			ferry_fleet_interfaces_.push_back(FerryFleetYardInterface::create(egbase, *this, coords));
+			if (processed_fields.insert(coords).second) {
+				ferry_fleet_interfaces_.push_back(FerryFleetYardInterface::create(egbase, *this, coords));
+			}
 		}
 
 		if (ferry_fleet_interfaces_.empty()) {
