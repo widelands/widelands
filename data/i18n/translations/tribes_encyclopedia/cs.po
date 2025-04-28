@@ -3247,7 +3247,7 @@ msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It can "
 "be processed into spidercloth or tabards in a weaving mill, or used to make "
 "tools in the toolsmithy."
-msgstr "Pavoučí hedvábí vyrábí pavouci, kteří jsou chováni na pavoučích farmách. Může být zpracováno na pavoučí látku či tabardy v tkalcovně, nebo použito na výrobu nástrojů v kovárně."
+msgstr "Pavoučí hedvábí vyrábí pavouci, kteří jsou chováni na pavoučích farmách. Může být zpracováno na pavoučí látku či tabardy v tkalcovně nebo použito na výrobu nástrojů v dílně."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:481
@@ -4468,7 +4468,7 @@ msgstr "No, bez studny bude život suchý."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1607
 msgctxt "atlanteans_building"
 msgid "Water carrier muttering to himself"
-msgstr "Nosič vody si mumlá pro sebe"
+msgstr "nosič vody si mumlá sám pro sebe"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Well,
 #. part 1
@@ -4808,7 +4808,7 @@ msgstr "Pokud je budova dobře zásobována a hospodářství potřebuje všechn
 #: ../../../../data/tribes/initialization/empire/units.lua:1674
 msgctxt "building"
 msgid "Forges all the tools that your workers need."
-msgstr "Ková všechny nástroje, které dělníci potřebují."
+msgstr "Vyrábí všechny nástroje, které dělníci potřebují."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Toolsmithy
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1747
@@ -5031,7 +5031,7 @@ msgid ""
 "gain the spider silk once a day. There is no need to spin this again. The "
 "thread can directly be used by the weaving mill. Oh hello, here is one of "
 "our nice spiders … Hey! Why are you running away?"
-msgstr "Ne, opravdu tu nekrmíme naše pavouky kukuřicí. Tu spásají naše tlusté kobylky, které jsou následně potravou pro naše pavouky. Jednou denně je dáváme na náš speciální přístroj, abychom získali pavoučí hedvábí. To už není třeba příst. Vlákno může jít přímo na zpracování do tkalcovny. Ah pěkně vítám, tady je jeden z našich krásných pavouků.. No copak! Kam to utíkáš?"
+msgstr "Ne, opravdu tu nekrmíme naše pavouky kukuřicí. Tu spásají naše tlusté kobylky, které jsou následně potravou pro naše pavouky. Jednou denně je dáváme na náš speciální přístroj, abychom získali pavoučí hedvábí. To už není třeba příst. Vlákno může jít přímo na zpracování do tkalcovny. Ah pěkně vítám, tady je jeden z našich krásných pavouků … No copak! Kam to utíkáš?"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Spider
 #. Farm
