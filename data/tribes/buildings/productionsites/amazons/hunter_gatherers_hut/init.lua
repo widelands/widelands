@@ -26,8 +26,7 @@ wl.Descriptions():new_productionsite_type {
 
    aihints = {
       needs_water = true,
-      requires_supporters = true,
-      --basic_amount = 1,
+      requires_supporters = true
    },
 
    working_positions = {
