@@ -87,14 +87,13 @@ wl.Descriptions():new_market_type {
 
    buildcost = {
       log = 3,
-      planks = 4,
+      planks = 3,
       granite = 4,
-      diamond = 1,
       quartz = 1,
       spidercloth = 3,
    },
    return_on_dismantle = {
-      log = 1,
+      log = 2,
       planks = 1,
       granite = 2,
       spidercloth = 1,

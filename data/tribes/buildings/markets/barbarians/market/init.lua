@@ -12,14 +12,14 @@ wl.Descriptions():new_market_type {
 
    buildcost = {
       log = 3,
-      blackwood = 4,
+      blackwood = 3,
       granite = 5,
       grout = 3,
       reed = 4,
    },
    return_on_dismantle = {
       log = 2,
-      blackwood = 2,
+      blackwood = 1,
       granite = 3,
       grout = 1,
       reed = 1,

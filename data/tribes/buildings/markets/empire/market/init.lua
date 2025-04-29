@@ -12,16 +12,17 @@ wl.Descriptions():new_market_type {
 
    buildcost = {
       log = 3,
-      planks = 4,
-      granite = 3,
-      marble = 2,
+      planks = 2,
+      granite = 2,
+      -- TODO(tothxa): make this marble=2 and column=2 if column is made to only cost 1 marble
+      marble = 3,
       marble_column = 1,
       cloth = 2,
    },
    return_on_dismantle = {
       log = 1,
-      planks = 2,
-      granite = 2,
+      planks = 1,
+      granite = 1,
       marble = 2,
       cloth = 1,
    },
