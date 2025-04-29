@@ -1273,7 +1273,8 @@ void ProductionSite::init_yard_interfaces(EditorGameBase& egbase) {
 
 		for (const Coords& coords : result) {
 			if (processed_fields.insert(coords).second) {
-				ferry_fleet_interfaces_.push_back(FerryFleetYardInterface::create(egbase, *this, coords));
+				ferry_fleet_interfaces_.push_back(
+				   FerryFleetYardInterface::create(egbase, *this, coords));
 			}
 		}
 
