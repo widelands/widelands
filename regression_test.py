@@ -154,7 +154,8 @@ class WidelandsTestCase():
             lsan = env.get("LSAN_OPTIONS", "")
             if "suppressions=" not in lsan:  # allow to overwrite
                 lsan += f" suppressions={datadir_for_testing()}/asan_3rd_party_leaks"
-            lsan += f" exitcode={LSAN_ERROR}"
+            lsan_path = stdout_filename.replace('stdout', 'lsan').replace('.txt', '')
+            lsan += f" exitcode={LSAN_ERROR} log_path={lsan_path} log_suffix=.txt"
             env["LSAN_OPTIONS"] = lsan
 
             start_time = get_time()
@@ -277,6 +278,16 @@ class WidelandsTestCase():
             self.result = old_result
 
     def verify_success(self, stdout, stdout_filename):
+        lsan_path = stdout_filename.replace('stdout', 'lsan').replace('.txt', '')
+        for f_name in glob(lsan_path + "*"):
+            with open(f_name) as file:
+                lsan_log_txt = file.read()
+            if "ERROR: " in lsan_log_txt:
+                self.outputs.append(f_name)
+                if not self.report_header:
+                    self.report_header = 'lsan'  # might be overwritten, which is no problem
+            # else it is information about what was skipped matching suppression file
+
         # Catch instabilities with SDL in CI environment
         if self.widelands_returncode == 2:
             # Print stdout in the final summary with this header
