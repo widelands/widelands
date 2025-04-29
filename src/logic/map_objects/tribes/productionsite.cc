@@ -1246,7 +1246,6 @@ void ProductionSite::init_yard_interfaces(EditorGameBase& egbase) {
 
 		for (const Coords& coords : result) {
 			if (processed_fields.insert(coords).second) {
-				molog(egbase.get_gametime(), "trying to add fleet interface at %3dx%3d.\n", coords.x, coords.y);
 				ship_fleet_interfaces_.push_back(ShipFleetYardInterface::create(egbase, *this, coords));
 			}
 		}

@@ -155,7 +155,6 @@ bool ShipFleet::find_other_fleet(EditorGameBase& egbase) {
 	}
 
 	for (const ShipFleetYardInterface* temp_interface : interfaces_) {
-		molog(egbase.get_gametime(), "searching other fleet for fleet interface at %3dx%3d with fleet %d.\n", temp_interface->get_position().x, temp_interface->get_position().y, this->serial());
 		astar.push(temp_interface->get_position());
 	}
 
