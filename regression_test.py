@@ -341,7 +341,7 @@ class WidelandsTestCase():
                 if self.widelands_returncode == LSAN_ERROR and self.ignore_error_code:
                     self.out_status(' IGN ', f'IGNORING error code {LSAN_ERROR}')
                 else:
-                    self.fail("FAILED", "Widelands exited abnormally.", stdout_filename)
+                    self.fail("FAILED", f"Widelands exited abnormally ({self.widelands_returncode}).", stdout_filename)
                     return
             if not "All Tests passed" in stdout or "lua_errors.cc" in stdout:
                 self.fail("FAILED", "Not all tests pass.", stdout_filename)
