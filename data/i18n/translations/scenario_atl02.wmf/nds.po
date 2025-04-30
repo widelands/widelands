@@ -413,6 +413,9 @@ msgid ""
 "was pulled below the sea level by Lutas’s forces and we lost most men and "
 "all wares it carried."
 msgstr ""
+"De sware Last un daarto de baldadigen Drifften weren to vööl för dat Schipp,"
+" un Luutas in sien Macht hett ’t unner de See trocken, so dat wi de meesten "
+"Lüü un all de Waren daarup verloren hebben."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:203

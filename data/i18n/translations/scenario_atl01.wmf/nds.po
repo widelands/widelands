@@ -870,7 +870,7 @@ msgid ""
 " invented a new kind of ship: smaller than those we are used to, but much "
 "sturdier. If we build them correctly, I am confident that we can sail a much"
 " longer distance with them and maybe escape from Lutas’s influence."
-msgstr ""
+msgstr "Satuul sall Jo warmen, Jundlin’. Mien Naam is Ostuur un ick bau Schippen. Ick hebb eene neje Aard vun Schipp utdacht: Lütter as de Schippen, wat wi sünst bruken, aver faster. Wenn wi se good bauen, könen wi wiss eene vööl grotere Streck daarmit seilen un villicht vun Luutas sien Macht utnaihen."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:454

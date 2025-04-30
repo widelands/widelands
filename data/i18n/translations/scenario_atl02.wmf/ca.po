@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Juanjo, 2023
+# Juanjo, 2025
 # 
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-04-19 03:04+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
-"Last-Translator: Juanjo, 2023\n"
+"Last-Translator: Juanjo, 2025\n"
 "Language-Team: Catalan (https://app.transifex.com/widelands/teams/35159/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -411,6 +411,9 @@ msgid ""
 "was pulled below the sea level by Lutas’s forces and we lost most men and "
 "all wares it carried."
 msgstr ""
+"El vaixell no va suportar tota la massa del que portava a dins i les aigües "
+"turbulentes que el colpejaven. Les forces d’en Lutas van endur-se’l al fons "
+"del mar i vam perdre molts homes i els béns que portava."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:203

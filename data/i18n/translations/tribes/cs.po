@@ -5573,7 +5573,7 @@ msgstr "Začít hru pouze s hlavní budovou"
 #: ../../../../data/tribes/initialization/empire/starting_conditions/new_world.lua:11
 #: ../../../../data/tribes/initialization/frisians/starting_conditions/new_world.lua:11
 msgid "New World"
-msgstr "Nový Svět"
+msgstr "Nový svět"
 
 #. TRANSLATORS: This is the tooltip for the "New World" starting condition
 #: ../../../../data/tribes/initialization/amazons/starting_conditions/new_world.lua:13
