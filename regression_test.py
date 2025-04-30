@@ -68,6 +68,35 @@ def colorize_log(text):
             return colorize(text, color)
     return text
 
+
+class FileToPrint:
+    """For files in WidelandsTestCase.outputs[]
+
+    To print those files, colorized by default.
+
+    Only use inside print, as __str__() does not return the string but prints it.
+    """
+
+    def __init__(self, file_path, colorize=True):
+        self.file_path = file_path
+        self.colorize = colorize
+
+    def to_stream(self, out_file):
+        with open(self.file_path, "r") as stdout:
+            for line in stdout:
+                if self.colorize:
+                    line = colorize_log(line)
+                print(line, end='', file=out_file)
+
+    def __str__(self):
+        try:
+            self.to_stream(out_file=None)  # to stdout
+        except Exception as ex:
+            # __str__() may not throw an exception (until python 3.xx)
+            return f'Exception: {ex}'
+        return ''  # output was printed
+
+
 group_start = '\n'
 group_end = ''
 if os.getenv('GITHUB_ACTION'):
@@ -156,6 +185,8 @@ class WidelandsTestCase():
                 lsan += f" suppressions={datadir_for_testing()}/asan_3rd_party_leaks"
             lsan_path = stdout_filename.replace('stdout', 'lsan').replace('.txt', '')
             lsan += f" exitcode={LSAN_ERROR} log_path={lsan_path} log_suffix=.txt"
+            if use_colors:
+                lsan += ' color=always'
             env["LSAN_OPTIONS"] = lsan
 
             start_time = get_time()
@@ -179,7 +210,7 @@ class WidelandsTestCase():
                 f'return code is {widelands.returncode:d}', info_color))
             stdout_file.write('\n')
             self.widelands_returncode = widelands.returncode
-        self.outputs.append(stdout_filename)
+        self.outputs.append(FileToPrint(stdout_filename))
         return stdout_filename
 
     def run(self):
@@ -283,7 +314,11 @@ class WidelandsTestCase():
             with open(f_name) as file:
                 lsan_log_txt = file.read()
             if "ERROR: " in lsan_log_txt:
-                self.outputs.append(f_name)
+                if os.getenv('GITHUB_ACTION'):
+                    self.outputs.append(FileToPrint(f_name, False))  # no coloring from here
+                else:
+                    self.outputs.append(colorize('lsan errors', warning_color) +
+                                        f', see in {f_name}\n')
                 if not self.report_header:
                     self.report_header = 'lsan'  # might be overwritten, which is no problem
             # else it is information about what was skipped matching suppression file
@@ -319,10 +354,7 @@ class WidelandsTestCase():
         print(group_start, end='')
         print(colorize("stdout:", info_color))
         for stdout_fn in self.outputs:
-            with open(stdout_fn, "r") as stdout:
-                for line in stdout:
-                    line = colorize_log(line)
-                    print(line, end='')
+            print(stdout_fn)
         print(group_end, end='')
 
 
