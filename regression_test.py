@@ -352,7 +352,8 @@ class WidelandsTestCase():
         print(f'{colorize(self.result, self.get_result_color())}: {self.test_script}\n')
         print(self.report_header)
         for stdout_fn in self.outputs:
-            print(group_start, colorize("stdout:", info_color))
+            title = getattr(stdout_fn, 'file_path', 'output').replace('_00', '').replace('.txt', '')
+            print(group_start, colorize(f'{title}:', info_color))
             print(stdout_fn)
             print(group_end, end='')
 
