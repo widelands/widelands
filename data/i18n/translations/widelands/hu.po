@@ -7,7 +7,7 @@
 # GunChleoc, 2016,2018
 # GunChleoc, 2014,2016,2018
 # GunChleoc, 2014
-# Herczeg Attila <hnczy.public@gmail.com>, 2015
+# 247e0b0e3f59f71cef8a30dd79033969_321a326 <46457d161282ca8bdcca64d100622306_122920>, 2015
 # litoll <litoll@freemail.hu>, 2016-2017,2020
 # litoll <litoll@freemail.hu>, 2020
 # litoll <litoll@freemail.hu>, 2020

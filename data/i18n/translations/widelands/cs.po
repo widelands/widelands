@@ -5017,7 +5017,7 @@ msgstr "Procházet (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1618
 msgid "Translations for website maps"
-msgstr ""
+msgstr "Překlad k internetovým mapám"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1621
 #, c-format
@@ -5194,11 +5194,11 @@ msgstr "Soubory s překladem k rozšíření „%1$s“ se nepodařilo ze server
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2239
 msgid "Website Maps Translations"
-msgstr ""
+msgstr "Překlad internetových map"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2240
 msgid "Downloading website maps translations…"
-msgstr ""
+msgstr "Stahování překladu internetových map…"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2296
 #, c-format
@@ -5878,7 +5878,7 @@ msgstr "%1$s (upravil(a) '%2$s', čas %3$s)"
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:916
 #, c-format
 msgid "‘%1$s’ commented:"
-msgstr ""
+msgstr "‘%1$s’ okomentoval(a):"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:917
 #, c-format
@@ -7898,18 +7898,18 @@ msgstr "Neznámý parametr: %s\nMožná chybí \"=\"?"
 #: ../../../../src/wlapplication.cc:1785
 #, c-format
 msgid "Non-integer value for command line parameter --messagebox-timeout=%s"
-msgstr ""
+msgstr "Parametr  --messagebox-timeout=%s nemá číselný formát integer"
 
 #: ../../../../src/wlapplication.cc:1799
 #, c-format
 msgid ""
 "Value is out of range for command line parameter --messagebox-timeout=%s"
-msgstr ""
+msgstr "Hodnota parametru --messagebox-timeout=%s je mimo povolený rozsah"
 
 #: ../../../../src/wlapplication.cc:1867
 #, c-format
 msgid "Non-integer value for command line parameter --difficulty=%s"
-msgstr ""
+msgstr "Parametr  --difficulty=%s nemá číselný formát integer"
 
 #: ../../../../src/wlapplication.cc:1964
 #, c-format
