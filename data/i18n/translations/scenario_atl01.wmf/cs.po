@@ -876,7 +876,7 @@ msgid ""
 " invented a new kind of ship: smaller than those we are used to, but much "
 "sturdier. If we build them correctly, I am confident that we can sail a much"
 " longer distance with them and maybe escape from Lutas’s influence."
-msgstr ""
+msgstr "Satulova vroucnost s vámi, Jundlino. Jmenuji se Ostur a jsem stavitel lodí. Vynalezl jsem nový typ lodě. Sice je menší než ty, které jsme používali dosud, ale mnohem odolnější. Pokud je postavíme správně, jsem si jistý, že s nimi můžeme doplout mnohem dál, možná dokonce i uniknout z Lutasova vlivu."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:454

@@ -411,6 +411,9 @@ msgid ""
 "was pulled below the sea level by Lutas’s forces and we lost most men and "
 "all wares it carried."
 msgstr ""
+"Velká váha v kombinaci se silnými proudy byla pro tuto loď příliš a byla "
+"Lutasovou silou stažena pod mořskou hladinu. Tím jsme přišli o většinu "
+"posádky a všechno zboží, které nesla."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:203

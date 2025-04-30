@@ -68,70 +68,22 @@ wl.Descriptions():new_productionsite_type {
          actions = {
             -- "return=skipped" causes 10 sec delay
             -- time total: 12 * 70.167 + 10 = 852 sec
-            "call=produce_4",
-            "call=produce_2",
-            "call=produce_10",
-            "call=produce_11",
-            "call=produce_1",
-            "call=produce_3",
-            "call=produce_12",
-            "call=produce_5",
-            "call=produce_9",
-            "call=produce_8",
-            "call=produce_7",
-            "call=produce_6",
+            "call=produce_shovel",
+            "call=produce_pick",
+            "call=produce_hammer",
+            "call=produce_fire_tongs",
+            "call=produce_felling_ax",
+            "call=produce_scythe",
+            "call=produce_needles",
+            "call=produce_basket",
+            "call=produce_kitchen_tools",
+            "call=produce_bread_paddle",
+            "call=produce_fishing_net",
+            "call=produce_hunting_spear",
             "return=skipped"
          },
       },
-      produce_1 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because ...
-         descname = _("forging a felling ax"),
-         actions = {
-            -- time: 31.567 + 35 + 3.6 = 70.167 sec
-            "return=skipped unless economy needs felling_ax",
-            "consume=log iron",
-            "sleep=duration:31s567ms",
-            "animate=working duration:35s",
-            "produce=felling_ax"
-         },
-      },
-      produce_2 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-         descname = _("forging a pick"),
-         actions = {
-            -- time: 31.567 + 35 + 3.6 = 70.167 sec
-            "return=skipped unless economy needs pick",
-            "consume=log iron",
-            "sleep=duration:31s567ms",
-            "animate=working duration:35s",
-            "produce=pick"
-         },
-      },
-      produce_3 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-         descname = _("making a scythe"),
-         actions = {
-            -- time: 31.567 + 35 + 3.6 = 70.167 sec
-            "return=skipped unless economy needs scythe",
-            "consume=log iron",
-            "sleep=duration:31s567ms",
-            "animate=working duration:35s",
-            "produce=scythe"
-         },
-      },
-      produce_4 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-         descname = _("making a shovel"),
-         actions = {
-            -- time: 31.567 + 35 + 3.6 = 70.167 sec
-            "return=skipped unless economy needs shovel",
-            "consume=log iron",
-            "sleep=duration:31s567ms",
-            "animate=working duration:35s",
-            "produce=shovel"
-         },
-      },
-      produce_5 = {
+      produce_basket = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
          descname = _("making a basket"),
          actions = {
@@ -143,31 +95,7 @@ wl.Descriptions():new_productionsite_type {
             "produce=basket"
          },
       },
-      produce_6 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because ...
-         descname = _("making a hunting spear"),
-         actions = {
-            -- time: 31.567 + 35 + 3.6 = 70.167 sec
-            "return=skipped unless economy needs hunting_spear",
-            "consume=log iron",
-            "sleep=duration:31s567ms",
-            "animate=working duration:35s",
-            "produce=hunting_spear"
-         },
-      },
-      produce_7 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making a fishing net because ...
-         descname = _("making a fishing net"),
-         actions = {
-            -- time: 31.567 + 35 + 3.6 = 70.167 sec
-            "return=skipped unless economy needs fishing_net",
-            "consume=reed:2",
-            "sleep=duration:31s567ms",
-            "animate=working duration:35s",
-            "produce=fishing_net"
-         },
-      },
-      produce_8 = {
+      produce_bread_paddle = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because ...
          descname = _("making a bread paddle"),
          actions = {
@@ -179,31 +107,19 @@ wl.Descriptions():new_productionsite_type {
             "produce=bread_paddle"
          },
       },
-      produce_9 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
-         descname = _("making kitchen tools"),
+      produce_felling_ax = {
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because ...
+         descname = _("forging a felling ax"),
          actions = {
             -- time: 31.567 + 35 + 3.6 = 70.167 sec
-            "return=skipped unless economy needs kitchen_tools",
+            "return=skipped unless economy needs felling_ax",
             "consume=log iron",
             "sleep=duration:31s567ms",
             "animate=working duration:35s",
-            "produce=kitchen_tools"
+            "produce=felling_ax"
          },
       },
-      produce_10 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
-         descname = _("making a hammer"),
-         actions = {
-            -- time: 31.567 + 35 + 3.6 = 70.167 sec
-            "return=skipped unless economy needs hammer",
-            "consume=log iron",
-            "sleep=duration:31s567ms",
-            "animate=working duration:35s",
-            "produce=hammer"
-         },
-      },
-      produce_11 = {
+      produce_fire_tongs = {
          -- TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
          descname = _("making fire tongs"),
          actions = {
@@ -215,7 +131,55 @@ wl.Descriptions():new_productionsite_type {
             "produce=fire_tongs"
          },
       },
-      produce_12 = {
+      produce_fishing_net = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making a fishing net because ...
+         descname = _("making a fishing net"),
+         actions = {
+            -- time: 31.567 + 35 + 3.6 = 70.167 sec
+            "return=skipped unless economy needs fishing_net",
+            "consume=reed:2",
+            "sleep=duration:31s567ms",
+            "animate=working duration:35s",
+            "produce=fishing_net"
+         },
+      },
+      produce_hammer = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
+         descname = _("making a hammer"),
+         actions = {
+            -- time: 31.567 + 35 + 3.6 = 70.167 sec
+            "return=skipped unless economy needs hammer",
+            "consume=log iron",
+            "sleep=duration:31s567ms",
+            "animate=working duration:35s",
+            "produce=hammer"
+         },
+      },
+      produce_hunting_spear = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because ...
+         descname = _("making a hunting spear"),
+         actions = {
+            -- time: 31.567 + 35 + 3.6 = 70.167 sec
+            "return=skipped unless economy needs hunting_spear",
+            "consume=log iron",
+            "sleep=duration:31s567ms",
+            "animate=working duration:35s",
+            "produce=hunting_spear"
+         },
+      },
+      produce_kitchen_tools = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
+         descname = _("making kitchen tools"),
+         actions = {
+            -- time: 31.567 + 35 + 3.6 = 70.167 sec
+            "return=skipped unless economy needs kitchen_tools",
+            "consume=log iron",
+            "sleep=duration:31s567ms",
+            "animate=working duration:35s",
+            "produce=kitchen_tools"
+         },
+      },
+      produce_needles = {
          -- TRANSLATORS: Completed/Skipped/Did not start making needles because ...
          descname = _("making needles"),
          actions = {
@@ -225,6 +189,42 @@ wl.Descriptions():new_productionsite_type {
             "sleep=duration:27s967ms",
             "animate=working duration:35s",
             "produce=needles:2"
+         },
+      },
+      produce_pick = {
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
+         descname = _("forging a pick"),
+         actions = {
+            -- time: 31.567 + 35 + 3.6 = 70.167 sec
+            "return=skipped unless economy needs pick",
+            "consume=log iron",
+            "sleep=duration:31s567ms",
+            "animate=working duration:35s",
+            "produce=pick"
+         },
+      },
+      produce_scythe = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+         descname = _("making a scythe"),
+         actions = {
+            -- time: 31.567 + 35 + 3.6 = 70.167 sec
+            "return=skipped unless economy needs scythe",
+            "consume=log iron",
+            "sleep=duration:31s567ms",
+            "animate=working duration:35s",
+            "produce=scythe"
+         },
+      },
+      produce_shovel = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
+         descname = _("making a shovel"),
+         actions = {
+            -- time: 31.567 + 35 + 3.6 = 70.167 sec
+            "return=skipped unless economy needs shovel",
+            "consume=log iron",
+            "sleep=duration:31s567ms",
+            "animate=working duration:35s",
+            "produce=shovel"
          },
       },
    },

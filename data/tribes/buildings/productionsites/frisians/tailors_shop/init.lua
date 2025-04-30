@@ -54,12 +54,12 @@ wl.Descriptions():new_productionsite_type {
          actions = {
             -- "return=skipped" causes 10 sec delay
             -- time total: 49 + 49 + 10 = 108 sec
-            "call=weave_studded",
-            "call=weave_gold",
+            "call=weave_fur_garment_studded",
+            "call=weave_fur_garment_golden",
             "return=skipped"
          },
       },
-      weave_studded = {
+      weave_fur_garment_studded = {
          -- TRANSLATORS: Completed/Skipped/Did not start sewing studded fur garment because ...
          descname = _("sewing studded fur garment"),
          actions = {
@@ -71,7 +71,7 @@ wl.Descriptions():new_productionsite_type {
             "produce=fur_garment_studded"
          },
       },
-      weave_gold = {
+      weave_fur_garment_golden = {
          -- TRANSLATORS: Completed/Skipped/Did not start sewing golden fur garment because ...
          descname = _("sewing golden fur garment"),
          actions = {
