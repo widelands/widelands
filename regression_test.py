@@ -288,16 +288,17 @@ class WidelandsTestCase():
 
     def out_result(self, stdout_filename):
         self.out_status(self.statuses[self.result], f'{self.result} in {self.duration}')
-        if self.keep_output_around:
+        if self.keep_output_around or self.report_header and not os.getenv('GITHUB_ACTION'):
+            # files are kept in this cases, show early that the user can examine them already
             self.out_status('Info ', f'stdout: {stdout_filename}')
 
     def fail(self, short, long, stdout_filename):
         self.success = False
         self.result = short
-        self.out_result(stdout_filename)
         long = colorize(long, self.status_colors['FAIL '])
         self.report_header = f'{long} Analyze the files in {self.run_dir} to see why this test case failed.\n'
         self.report_header += colorize(f'Stdout is: {stdout_filename}', info_color)
+        self.out_result(stdout_filename)  # after report_header is set
 
     def step_success(self, stdout_filename):
         old_result = self.result
