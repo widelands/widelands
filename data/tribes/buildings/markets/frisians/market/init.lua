@@ -12,14 +12,14 @@ wl.Descriptions():new_market_type {
 
    buildcost = {
       brick = 5,
-      granite = 2,
-      log = 2,
-      reed = 3
+      granite = 4,
+      log = 5,
+      reed = 4
    },
    return_on_dismantle = {
       brick = 3,
-      granite = 1,
-      log = 1,
+      granite = 2,
+      log = 2,
       reed = 1
    },
 

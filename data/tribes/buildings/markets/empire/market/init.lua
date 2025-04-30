@@ -11,17 +11,20 @@ wl.Descriptions():new_market_type {
    size = "big",
 
    buildcost = {
-      log = 2,
+      log = 3,
       planks = 2,
       granite = 2,
+      -- TODO(tothxa): make this marble=2 and column=2 if column is made to only cost 1 marble
       marble = 3,
-      marble_column = 2
+      marble_column = 1,
+      cloth = 2,
    },
    return_on_dismantle = {
+      log = 1,
       planks = 1,
-      granite = 2,
+      granite = 1,
       marble = 2,
-      marble_column = 1
+      cloth = 1,
    },
 
    local_carrier = "empire_carrier",
