@@ -40,15 +40,15 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
-            -- longest possible transition from tiny to ripe field:
-            --   2 * (30 + 45 + 50) = 250 sec
+            -- nominal transition from tiny to ripe field (the longest possible transition is double):
+            --   30 + 45 + 50 = 125 sec
             --   see data/tribes/immovables/cassavafield/ and src/logic/map_objects/immovable_program.cc - ImmovableProgram::ActAnimate::execute()
-            -- how many fields are needed for reliable 100% productivity: 6
-            --   with 5 fields, this inequation is not fulfilled:
-            --   (250 + 55.84 - (6 + 2.2 * 1.8 + 10)) / 55.84 < 5
-            -- min. time total (free 5 nearest fields):  29.92 + 25.92 = 55.84 sec
-            -- min. time total (free 6 nearest fields):  30.4  + 26.4  = 56.8  sec
-            -- max. time total (free 6 furthest fields): 43    + 39    = 82    sec
+            -- estimation of number of nearest fields for optimal productivity (nominal + 1):
+            --   2 + (125 - (6 + 2 * 1.8 + 10)) / 54.4 = 3.94
+            -- procedure how to make verification measurement:
+            --   https://codeberg.org/wl/widelands/pulls/4725#issuecomment-4062998
+            -- min. time total (free 4 nearest fields):  29.2 + 25.2 = 54.4 sec
+            -- max. time total (free 4 furthest fields): 44.5 + 40.5 = 85   sec
             "call=plant_cassava",
             "call=harvest_cassava",
          }
@@ -57,10 +57,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
          descname = _("planting cassava"),
          actions = {
-            -- time of worker: 20.4-33 sec, min. time for 5 fields 19.92 sec
-            -- min. time (5 fields): 19.92 + 10 = 29.92 sec
-            -- min. time:            20.4  + 10 = 30.4  sec
-            -- max. time:            33    + 10 = 43    sec
+            -- time of worker: 19.2-34.5 sec
+            -- min. time: 19.2 + 10 = 29.2 sec
+            -- max. time: 34.5 + 10 = 44.5 sec
             "callworker=plant",
             "sleep=duration:10s"
          }
@@ -69,10 +68,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
          descname = _("harvesting cassava"),
          actions = {
-            -- time of worker: 22.4-35 sec, min. time for 5 fields 21.92 sec
-            -- min. time (5 fields): 21.92 + 4 = 25.92 sec
-            -- min. time:            22.4  + 4 = 26.4  sec
-            -- max. time:            35    + 4 = 39    sec
+            -- time of worker: 21.2-36.5 sec
+            -- min. time: 21.2 + 4 = 25.2 sec
+            -- max. time: 36.5 + 4 = 40.5 sec
             "callworker=harvest",
             "sleep=duration:4s",
          }

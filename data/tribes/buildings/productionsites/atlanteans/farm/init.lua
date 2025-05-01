@@ -47,14 +47,13 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
-            -- the longest possible transition from tiny to ripe field:
-            --   2 * (30 + 45 + 50) = 250 sec
+            -- nominal transition from tiny to ripe field (the longest possible transition is double):
+            --   30 + 45 + 50 = 125 sec
             --   see data/tribes/immovables/cornfield/ and src/logic/map_objects/immovable_program.cc - ImmovableProgram::ActAnimate::execute()
-            -- how many fields are needed for 100% productivity in worst case (nearest fields, longest field transition):
-            --   1 + (250 - (6 + 2 * 1.8 + 10)) / 54.4 = 5.235
-            -- calculation of productivity with 4 fields:
-            --   irwinhall(8, scale=1/8).cdf(4/5.235) = 0.996
-            --   using SciPy 1.14+
+            -- estimation of number of nearest fields for optimal productivity (nominal + 1):
+            --   2 + (125 - (6 + 2 * 1.8 + 10)) / 54.4 = 3.94
+            -- procedure how to make verification measurement:
+            --   https://codeberg.org/wl/widelands/pulls/4725#issuecomment-4062998
             -- min. time total (free 4 nearest fields):  29.2 + 25.2 = 54.4 sec
             -- max. time total (free 4 furthest fields): 40   + 36   = 76   sec
             "call=plant",

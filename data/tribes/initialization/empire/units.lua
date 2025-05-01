@@ -1773,8 +1773,8 @@ wl.Descriptions():new_tribe {
             performance = {
                -- TRANSLATORS: Performance helptext for an Empire production site: Farm, part 1
                pgettext("empire_building", "The farmer sows and harvests one sheaf of wheat between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(54), format_minutes_seconds(1, 16)),
-               -- TRANSLATORS: Performance helptext for an Empire production site: Farm, part 2; %1$s is replaced by 'N growing fields'
-               pgettext("empire_building", "The farm needs at least %1$s to achieve %2$.1f%% productivity."):bformat(ngettext("%d growing field", "%d growing fields", 4):bformat(4), 99.6)
+               -- TRANSLATORS: Performance helptext for an Empire production site: Farm, part 2; %s is replaced by 'N growing fields'
+               pgettext("empire_building", "The farm needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 4):bformat(4))
             }
          }
       },
