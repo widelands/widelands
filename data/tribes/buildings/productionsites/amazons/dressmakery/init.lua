@@ -70,7 +70,7 @@ wl.Descriptions():new_productionsite_type {
          },
       },
       produce_tunic = {
-         -- TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start sewing a tunic because ...
          descname = _("sewing a tunic"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
@@ -82,7 +82,7 @@ wl.Descriptions():new_productionsite_type {
          },
       },
       produce_armor_wooden = {
-         -- TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start producing a light wooden armor because ...
          descname = _("making a light wooden armor"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
@@ -94,7 +94,7 @@ wl.Descriptions():new_productionsite_type {
          },
       },
       produce_helmet_wooden = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making a wooden helmet because ...
          descname = _("making a wooden helmet"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
@@ -106,7 +106,7 @@ wl.Descriptions():new_productionsite_type {
          },
       },
       produce_warriors_coat = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making a warrior’s coat because ...
          descname = _("sewing a warrior’s coat"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
@@ -118,7 +118,7 @@ wl.Descriptions():new_productionsite_type {
          },
       },
       produce_boots_sturdy = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making sturdy boots because ...
          descname = _("making sturdy boots"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
@@ -130,7 +130,7 @@ wl.Descriptions():new_productionsite_type {
          },
       },
       produce_boots_swift = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making swift boots because ...
          descname = _("making swift boots"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
@@ -142,7 +142,7 @@ wl.Descriptions():new_productionsite_type {
          },
       },
       produce_boots_hero = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making a fishing net because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making hero boots because ...
          descname = _("making hero boots"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
@@ -154,7 +154,7 @@ wl.Descriptions():new_productionsite_type {
          },
       },
       produce_vest_padded = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making a padded vest because ...
          descname = _("making a padded vest"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
@@ -166,7 +166,7 @@ wl.Descriptions():new_productionsite_type {
          },
       },
       produce_protector_padded = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making a padded protector because ...
          descname = _("making a padded protector"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
