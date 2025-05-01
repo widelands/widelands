@@ -37,7 +37,7 @@ void CmdFleetTargets::execute(Game& game) {
 
 	switch (mo->descr().type()) {
 	case MapObjectType::SHIP_FLEET_YARD_INTERFACE:
-		dynamic_cast<ShipFleetYardInterface*>(mo)->get_fleet()->set_ships_target(game, target_);
+		dynamic_cast<ShipFleetYardInterface*>(mo)->get_fleet()->set_ships_target(game, target_, warships_);
 		return;
 
 	case MapObjectType::FERRY_FLEET_YARD_INTERFACE:
@@ -54,23 +54,28 @@ void CmdFleetTargets::execute(Game& game) {
 CmdFleetTargets::CmdFleetTargets(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 	interface_ = des.unsigned_32();
 	target_ = des.unsigned_32();
+	warships_ = des.unsigned_32() > 0;
 }
 
 void CmdFleetTargets::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
 	ser.unsigned_32(interface_);
 	ser.unsigned_32(target_);
+	ser.unsigned_32(warships_ ? 1 : 0);
 }
 
-constexpr uint8_t kCurrentPacketVersionCmdFleetTargets = 1;
+// version 2 added warships target
+constexpr uint8_t kCurrentPacketVersionCmdFleetTargets = 2;
 
 void CmdFleetTargets::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersionCmdFleetTargets) {
+		if (packet_version <= kCurrentPacketVersionCmdFleetTargets) {
 			PlayerCommand::read(fr, egbase, mol);
 			interface_ = fr.unsigned_32();
 			target_ = fr.unsigned_32();
+			warships_ = packet_version == kCurrentPacketVersionCmdFleetTargets ?
+			                fr.unsigned_32() > 0 : false;
 		} else {
 			throw UnhandledVersionError(
 			   "CmdFleetTargets", packet_version, kCurrentPacketVersionCmdFleetTargets);
@@ -85,6 +90,7 @@ void CmdFleetTargets::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSave
 	PlayerCommand::write(fw, egbase, mos);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(interface_)));
 	fw.unsigned_32(target_);
+	fw.unsigned_32(warships_ ? 1 : 0);
 }
 
 }  // namespace Widelands

@@ -24,8 +24,8 @@
 namespace Widelands {
 
 struct CmdFleetTargets : PlayerCommand {
-	CmdFleetTargets(const Time& t, PlayerNumber p, Serial i, Quantity q)
-	   : PlayerCommand(t, p), interface_(i), target_(q) {
+	CmdFleetTargets(const Time& t, PlayerNumber p, Serial i, Quantity q, bool ws)
+	   : PlayerCommand(t, p), interface_(i), target_(q), warships_(ws) {
 	}
 
 	[[nodiscard]] QueueCommandTypes id() const override {
@@ -44,6 +44,7 @@ struct CmdFleetTargets : PlayerCommand {
 private:
 	Serial interface_{0U};
 	Quantity target_{0U};
+	bool warships_{false};
 };
 
 }  // namespace Widelands

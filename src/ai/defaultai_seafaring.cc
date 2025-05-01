@@ -235,7 +235,7 @@ void DefaultAI::evaluate_fleet() {
 void DefaultAI::manage_shipyards() {
 	Widelands::ShipFleet* fleet = get_main_fleet();
 
-	bool update_ships_target = fleet != nullptr && fleet->get_ships_target() != fleet_target;
+	bool update_ships_target = fleet != nullptr && fleet->get_ships_target(false) != fleet_target;
 
 	for (const ProductionSiteObserver& sy_obs : shipyardsites) {
 
@@ -271,14 +271,14 @@ void DefaultAI::manage_shipyards() {
 			// fleet for a different ocean that will have to be sunk.
 			// TODO(tothxa): May need update when the AI is made to handle multiple fleets.
 			update_ships_target =
-			   yard_fleet != nullptr && yard_fleet->get_ships_target() != fleet_target;
+			   yard_fleet != nullptr && yard_fleet->get_ships_target(false) != fleet_target;
 		}
 
 		if (update_ships_target) {
 			verb_log_dbg_time(game().get_gametime(), "AI %u: setting ships target to %u",
 			                  static_cast<unsigned>(player_number()), fleet_target);
 			game().send_player_fleet_targets(
-			   player_number(), yard_interfaces.front()->serial(), fleet_target);
+			   player_number(), yard_interfaces.front()->serial(), fleet_target, false);
 			update_ships_target = false;
 		}
 

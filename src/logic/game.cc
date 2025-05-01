@@ -1262,8 +1262,8 @@ void Game::send_player_building_name(PlayerNumber p, Serial s, const std::string
 	send_player_command(new CmdBuildingName(get_gametime(), p, s, name));
 }
 
-void Game::send_player_fleet_targets(PlayerNumber p, Serial i, Quantity q) {
-	send_player_command(new CmdFleetTargets(get_gametime(), p, i, q));
+void Game::send_player_fleet_targets(PlayerNumber p, Serial i, Quantity q, bool ws) {
+	send_player_command(new CmdFleetTargets(get_gametime(), p, i, q, ws));
 }
 
 int Game::propose_trade(const Trade& trade) {

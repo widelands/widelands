@@ -49,8 +49,9 @@ private:
 	FleetOptionsWindow(UI::Panel* parent, InteractiveBase& ibase, Type t, Widelands::Bob* interface);
 
 	void set_target(Widelands::Quantity target, bool is_war_ship = false);
-	Widelands::Quantity get_current_target() const;
+	Widelands::Quantity get_current_target(bool is_war_ship = false) const;
 	Widelands::Quantity previous_target_{0U};
+	Widelands::Quantity previous_target_war_{0U};
 
 	InteractiveBase& ibase_;
 	bool can_act_;

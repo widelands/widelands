@@ -314,7 +314,7 @@ public:
 	void send_player_pinned_note(
 	   PlayerNumber p, Coords pos, const std::string& text, const RGBColor& rgb, bool del);
 	void send_player_building_name(PlayerNumber p, Serial s, const std::string& name);
-	void send_player_fleet_targets(PlayerNumber p, Serial i, Quantity q);
+	void send_player_fleet_targets(PlayerNumber p, Serial i, Quantity q, bool ws);
 
 	InteractivePlayer* get_ipl();
 	const InteractivePlayer* get_ipl() const;

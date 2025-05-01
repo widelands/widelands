@@ -231,11 +231,14 @@ FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent,
 			set_target(was_pressed_war ? previous_target_ : Widelands::kEconomyTargetInfinity, true);
 		});
 
-		const Widelands::Quantity current_target = get_current_target();
+		const Widelands::Quantity current_target = get_current_target(false);
+		const Widelands::Quantity current_target_war = get_current_target(true);
 		const bool infinite = current_target == Widelands::kEconomyTargetInfinity;
+		const bool infinite_war = current_target_war == Widelands::kEconomyTargetInfinity;
 		previous_target_ = infinite ? 0 : current_target;
+		previous_target_war_ = infinite_war ? 0 : current_target_war;
 		infinite_target_.set_perm_pressed(infinite);
-		infinite_target_war_.set_perm_pressed(infinite);
+		infinite_target_war_.set_perm_pressed(infinite_war);
 	} else {
 		infinite_target_.set_enabled(false);
 		infinite_target_war_.set_enabled(false);
@@ -263,11 +266,11 @@ void FleetOptionsWindow::set_target(Widelands::Quantity target, bool is_war_ship
 
 	if (ibase_.egbase().is_game()) {
 		ibase_.game().send_player_fleet_targets(
-		   bob->owner().player_number(), interface_.serial(), target);
+		   bob->owner().player_number(), interface_.serial(), target, is_war_ship);
 	} else {
 		if (type_ == Type::kShip) {
 			dynamic_cast<const Widelands::ShipFleetYardInterface*>(bob)->get_fleet()->set_ships_target(
-			   ibase_.egbase(), target);
+			   ibase_.egbase(), target, is_war_ship);
 		} else {
 			dynamic_cast<const Widelands::FerryFleetYardInterface*>(bob)
 			   ->get_fleet()
@@ -276,7 +279,7 @@ void FleetOptionsWindow::set_target(Widelands::Quantity target, bool is_war_ship
 	}
 }
 
-Widelands::Quantity FleetOptionsWindow::get_current_target() const {
+Widelands::Quantity FleetOptionsWindow::get_current_target(bool is_war_ship) const {
 	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::Bob* bob = interface_.get(ibase_.egbase());
 	if (bob == nullptr) {
@@ -286,7 +289,7 @@ Widelands::Quantity FleetOptionsWindow::get_current_target() const {
 	if (type_ == Type::kShip) {
 		return dynamic_cast<const Widelands::ShipFleetYardInterface*>(bob)
 		   ->get_fleet()
-		   ->get_ships_target();
+		   ->get_ships_target(is_war_ship);
 	}
 	return dynamic_cast<const Widelands::FerryFleetYardInterface*>(bob)
 	   ->get_fleet()
@@ -304,9 +307,10 @@ void FleetOptionsWindow::think() {
 
 	is_updating_ = true;
 
-	const Widelands::Quantity current_target = get_current_target();
+	const Widelands::Quantity current_target = get_current_target(false);
+	const Widelands::Quantity current_target_war = get_current_target(true);
 	const bool infinite = current_target == Widelands::kEconomyTargetInfinity;
-	const bool infinite_war = current_target == Widelands::kEconomyTargetInfinity;
+	const bool infinite_war = current_target_war == Widelands::kEconomyTargetInfinity;
 
 	if (type_ == Type::kShip) {
 		const Widelands::ShipFleet* fleet =
@@ -335,11 +339,11 @@ void FleetOptionsWindow::think() {
 			spinbox_.set_value(current_target);
 		}
 		if (infinite_war) {
-			spinbox_war_.set_interval(previous_target_, previous_target_);
-			spinbox_war_.set_value(previous_target_);
+			spinbox_war_.set_interval(previous_target_war_, previous_target_war_);
+			spinbox_war_.set_value(previous_target_war_);
 		} else {
 			spinbox_war_.set_interval(0, kMaxTarget);
-			spinbox_war_.set_value(current_target);
+			spinbox_war_.set_value(current_target_war);
 		}
 	} else {
 		infinite_target_.set_perm_pressed(infinite);
@@ -348,7 +352,7 @@ void FleetOptionsWindow::think() {
 		spinbox_.set_value(show);
 
 		infinite_target_war_.set_perm_pressed(infinite_war);
-		Widelands::Quantity show_war = infinite_war ? previous_target_ : current_target;
+		Widelands::Quantity show_war = infinite_war ? previous_target_war_ : current_target_war;
 		spinbox_war_.set_interval(show_war, show_war);
 		spinbox_war_.set_value(show_war);
 	}

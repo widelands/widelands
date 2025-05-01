@@ -139,10 +139,10 @@ struct ShipFleet : MapObject {
 		return ports_;
 	}
 
-	[[nodiscard]] Quantity get_ships_target() const {
-		return ships_target_;
+	[[nodiscard]] Quantity get_ships_target(bool war_ships) const {
+		return war_ships ? ships_target_war_ : ships_target_;
 	}
-	void set_ships_target(EditorGameBase& egbase, Quantity t);
+	void set_ships_target(EditorGameBase& egbase, Quantity t, bool war_ships = false);
 
 protected:
 	void act(Game&, uint32_t data) override;
@@ -163,6 +163,7 @@ private:
 	std::vector<PortDock*> ports_;
 
 	Quantity ships_target_{kEconomyTargetInfinity};
+	Quantity ships_target_war_{kEconomyTargetInfinity};
 	Time target_last_modified_{0U};
 	bool act_pending_{false};
 

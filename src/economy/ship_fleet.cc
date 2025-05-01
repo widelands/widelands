@@ -208,8 +208,12 @@ bool ShipFleet::find_other_fleet(EditorGameBase& egbase) {
 	return false;
 }
 
-void ShipFleet::set_ships_target(EditorGameBase& egbase, Quantity t) {
-	ships_target_ = t;
+void ShipFleet::set_ships_target(EditorGameBase& egbase, Quantity t, bool war_ships) {
+	if (war_ships) {
+		ships_target_war_ = t;
+	} else {
+		ships_target_ = t;
+	}
 	target_last_modified_ = egbase.get_gametime();
 }
 
