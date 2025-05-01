@@ -26,6 +26,16 @@ wl.Descriptions():new_worker_type {
          "animate=work duration:5s",
          "return"
       },
+      buildwarship = {
+         -- worker time: 0.5 + 5 = 5.5 sec
+         "walk=object-or-coords",
+         "plant=attrib:empire_war_shipconstruction unless object",
+         "playsound=sound/sawmill/sawmill priority:80% allow_multiple",
+         "animate=work duration:500ms",
+         "construct",
+         "animate=work duration:5s",
+         "return"
+      },
       buildferry = {
          -- steps from building to water: 2-8
          -- min. worker time: 2 * 2 * 1.8 + 10 = 17.2 sec
