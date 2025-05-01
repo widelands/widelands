@@ -386,6 +386,16 @@ uint32_t ShipFleet::count_ships() const {
 	return ships_.size();
 }
 
+uint32_t ShipFleet::count_war_ships() const {
+	uint32_t number_of_warships = 0;
+	for (const Ship* temp_ship : ships_) {
+		if (temp_ship->get_ship_type() == ShipType::kWarship) {
+			++number_of_warships;
+		}
+	}
+	return number_of_warships;
+}
+
 uint32_t ShipFleet::count_ports() const {
 	return ports_.size();
 }

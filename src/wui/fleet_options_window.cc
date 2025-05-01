@@ -121,13 +121,39 @@ FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent,
                       34,
                       UI::ButtonStyle::kWuiSecondary,
                       g_image_cache->get(kIconInfinity),
-                      _("Toggle infinite production")) {
+                      _("Toggle infinite production")),
+     buttons_box_war_(&main_box_, UI::PanelStyle::kWui, "buttons_box_war", 0, 0, UI::Box::Horizontal),
+     spinbox_war_(&buttons_box_war_,
+              "target_war",
+              0,
+              0,
+              300,
+              300,
+              0,
+              0,
+              0,
+              UI::PanelStyle::kWui,
+              "",
+              UI::SpinBox::Units::kNone,
+              UI::SpinBox::Type::kBig),
+     infinite_target_war_(&buttons_box_war_,
+                      "toggle_infinite_war",
+                      0,
+                      0,
+                      34,
+                      34,
+                      UI::ButtonStyle::kWuiSecondary,
+                      g_image_cache->get(kIconInfinity),
+                      _("Toggle infinite production"))  {
 	living_fleet_option_windows.insert(this);
 
 	const bool rtl = UI::g_fh->fontset()->is_rtl();
 
 	buttons_box_.add(&infinite_target_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	buttons_box_.add(&spinbox_, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
+
+	buttons_box_war_.add(&infinite_target_war_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	buttons_box_war_.add(&spinbox_war_, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 
 	main_box_.add(
 	   new UI::Textarea(&main_box_, UI::PanelStyle::kWui, "label_statistics",
@@ -157,6 +183,7 @@ FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent,
 	if (type_ == Type::kShip) {
 		create_textarea(&txt_ports_, _("Ports:"));
 		create_textarea(&txt_ships_, _("Ships:"));
+		create_textarea(&txt_war_ships_, _("War Ships:"));
 	} else {
 		create_textarea(&txt_waterways_total_, _("Total waterways:"));
 		create_textarea(&txt_waterways_lacking_, _("Unserviced waterways:"));
@@ -179,22 +206,39 @@ FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent,
 
 	main_box_.add_space(kPadding);
 	main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
+	if (type_ == Type::kShip) {
+		main_box_.add(
+		   new UI::Textarea(&main_box_, UI::PanelStyle::kWui, "label_target_war", UI::FontStyle::kWuiLabel,
+							_("Desired number of war ships:"),
+							UI::Align::kCenter),
+		   UI::Box::Resizing::kFullSize);
+		main_box_.add_space(kPadding);
+		main_box_.add(&buttons_box_war_, UI::Box::Resizing::kFullSize);
+	}
 
 	if (can_act_) {
-		spinbox_.changed.connect([this]() { set_target(spinbox_.get_value()); });
+		spinbox_.changed.connect([this]() { set_target(spinbox_.get_value(), false); });
+		spinbox_war_.changed.connect([this]() { set_target(spinbox_war_.get_value(), true); });
 
 		infinite_target_.sigclicked.connect([this]() {
 			bool was_pressed = infinite_target_.style() == UI::Button::VisualState::kPermpressed;
 			infinite_target_.set_perm_pressed(!was_pressed);
-			set_target(was_pressed ? previous_target_ : Widelands::kEconomyTargetInfinity);
+			set_target(was_pressed ? previous_target_ : Widelands::kEconomyTargetInfinity, false);
+		});
+		infinite_target_war_.sigclicked.connect([this]() {
+			bool was_pressed_war = infinite_target_war_.style() == UI::Button::VisualState::kPermpressed;
+			infinite_target_war_.set_perm_pressed(!was_pressed_war);
+			set_target(was_pressed_war ? previous_target_ : Widelands::kEconomyTargetInfinity, true);
 		});
 
 		const Widelands::Quantity current_target = get_current_target();
 		const bool infinite = current_target == Widelands::kEconomyTargetInfinity;
 		previous_target_ = infinite ? 0 : current_target;
 		infinite_target_.set_perm_pressed(infinite);
+		infinite_target_war_.set_perm_pressed(infinite);
 	} else {
 		infinite_target_.set_enabled(false);
+		infinite_target_war_.set_enabled(false);
 	}
 
 	set_center_panel(&main_box_);
@@ -202,7 +246,7 @@ FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent,
 	initialization_complete();
 }
 
-void FleetOptionsWindow::set_target(Widelands::Quantity target) {
+void FleetOptionsWindow::set_target(Widelands::Quantity target, bool is_war_ship) {
 	if (is_updating_ || !can_act_) {
 		return;
 	}
@@ -262,12 +306,14 @@ void FleetOptionsWindow::think() {
 
 	const Widelands::Quantity current_target = get_current_target();
 	const bool infinite = current_target == Widelands::kEconomyTargetInfinity;
+	const bool infinite_war = current_target == Widelands::kEconomyTargetInfinity;
 
 	if (type_ == Type::kShip) {
 		const Widelands::ShipFleet* fleet =
 		   dynamic_cast<const Widelands::ShipFleetYardInterface*>(bob)->get_fleet();
 
 		txt_ships_->set_text(as_string(fleet->count_ships()));
+		txt_war_ships_->set_text(as_string(fleet->count_war_ships()));
 		txt_ports_->set_text(as_string(fleet->count_ports()));
 
 	} else {
@@ -288,13 +334,26 @@ void FleetOptionsWindow::think() {
 			spinbox_.set_interval(0, kMaxTarget);
 			spinbox_.set_value(current_target);
 		}
+		if (infinite_war) {
+			spinbox_war_.set_interval(previous_target_, previous_target_);
+			spinbox_war_.set_value(previous_target_);
+		} else {
+			spinbox_war_.set_interval(0, kMaxTarget);
+			spinbox_war_.set_value(current_target);
+		}
 	} else {
 		infinite_target_.set_perm_pressed(infinite);
 		Widelands::Quantity show = infinite ? previous_target_ : current_target;
 		spinbox_.set_interval(show, show);
 		spinbox_.set_value(show);
+
+		infinite_target_war_.set_perm_pressed(infinite_war);
+		Widelands::Quantity show_war = infinite_war ? previous_target_ : current_target;
+		spinbox_war_.set_interval(show_war, show_war);
+		spinbox_war_.set_value(show_war);
 	}
 	infinite_target_.set_pic(g_image_cache->get(infinite ? kIconEndInfinity : kIconInfinity));
+	infinite_target_war_.set_pic(g_image_cache->get(infinite_war ? kIconEndInfinity : kIconInfinity));
 
 	is_updating_ = false;
 }

@@ -121,6 +121,7 @@ struct ShipFleet : MapObject {
 	void add_neighbours(PortDock& pd, std::vector<RoutingNodeNeighbour>& neighbours);
 
 	[[nodiscard]] uint32_t count_ships() const;
+	[[nodiscard]] uint32_t count_war_ships() const;
 	[[nodiscard]] uint32_t count_ports() const;
 	[[nodiscard]] bool get_act_pending() const;
 

@@ -48,7 +48,7 @@ protected:
 private:
 	FleetOptionsWindow(UI::Panel* parent, InteractiveBase& ibase, Type t, Widelands::Bob* interface);
 
-	void set_target(Widelands::Quantity target);
+	void set_target(Widelands::Quantity target, bool is_war_ship = false);
 	Widelands::Quantity get_current_target() const;
 	Widelands::Quantity previous_target_{0U};
 
@@ -62,7 +62,11 @@ private:
 	UI::Box buttons_box_;
 	UI::SpinBox spinbox_;
 	UI::Button infinite_target_;
+	UI::Box buttons_box_war_;
+	UI::SpinBox spinbox_war_;
+	UI::Button infinite_target_war_;
 	UI::Textarea* txt_ships_{nullptr};
+	UI::Textarea* txt_war_ships_{nullptr};
 	UI::Textarea* txt_ports_{nullptr};
 	UI::Textarea* txt_ferries_total_{nullptr};
 	UI::Textarea* txt_ferries_unemployed_{nullptr};
