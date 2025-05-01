@@ -843,7 +843,8 @@ void ShipFleetYardInterface::log_general_info(const EditorGameBase& egbase) cons
 
 // Changelog of version 4 → 5: Added ShippingSchedule
 // Changelog of version 5 → 6: Added ship yard interfaces
-constexpr uint8_t kCurrentPacketVersionShip = 6;
+// Changelog of version 6 → 7: added  war ships target
+constexpr uint8_t kCurrentPacketVersionShip = 7;
 constexpr uint8_t kCurrentPacketVersionInterface = 1;
 
 void ShipFleet::Loader::load(FileRead& fr, uint8_t packet_version) {
@@ -871,6 +872,7 @@ void ShipFleet::Loader::load(FileRead& fr, uint8_t packet_version) {
 
 	fleet.act_pending_ = (fr.unsigned_8() != 0u);
 	fleet.ships_target_ = packet_version >= 6 ? fr.unsigned_32() : kEconomyTargetInfinity;
+	fleet.ships_target_war_ = packet_version >= 7 ? fr.unsigned_32() : 0;
 	fleet.target_last_modified_ = packet_version >= 6 ? Time(fr) : Time(0);
 
 	fleet.schedule_.load(fr);
@@ -977,6 +979,7 @@ void ShipFleet::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 
 	fw.unsigned_8(static_cast<uint8_t>(act_pending_));
 	fw.unsigned_32(ships_target_);
+	fw.unsigned_32(ships_target_war_);
 	target_last_modified_.save(fw);
 
 	schedule_.save(egbase, mos, fw);

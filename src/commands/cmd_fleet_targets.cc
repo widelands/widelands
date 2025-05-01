@@ -74,8 +74,7 @@ void CmdFleetTargets::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader
 			PlayerCommand::read(fr, egbase, mol);
 			interface_ = fr.unsigned_32();
 			target_ = fr.unsigned_32();
-			warships_ = packet_version == kCurrentPacketVersionCmdFleetTargets ?
-			                fr.unsigned_32() > 0 : false;
+			warships_ = packet_version >= 2 ? fr.unsigned_32() > 0 : false;
 		} else {
 			throw UnhandledVersionError(
 			   "CmdFleetTargets", packet_version, kCurrentPacketVersionCmdFleetTargets);
