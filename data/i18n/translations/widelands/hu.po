@@ -7,7 +7,7 @@
 # GunChleoc, 2016,2018
 # GunChleoc, 2014,2016,2018
 # GunChleoc, 2014
-# Herczeg Attila <hnczy.public@gmail.com>, 2015
+# 247e0b0e3f59f71cef8a30dd79033969_321a326 <46457d161282ca8bdcca64d100622306_122920>, 2015
 # litoll <litoll@freemail.hu>, 2016-2017,2020
 # litoll <litoll@freemail.hu>, 2020
 # litoll <litoll@freemail.hu>, 2020
@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-04-07 03:10+0000\n"
+"POT-Creation-Date: 2025-05-01 03:23+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2024\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -10212,31 +10212,31 @@ msgstr "Nagyítás alaphelyzet"
 msgid "Zoom –"
 msgstr "Kicsinyítés"
 
-#: ../../../../src/wui/interactive_base.cc:926
+#: ../../../../src/wui/interactive_base.cc:927
 #, c-format
 msgid "Road length: %1$u (%2$u)"
 msgstr "Út hossza: %1$u (%2$u)"
 
-#: ../../../../src/wui/interactive_base.cc:928
+#: ../../../../src/wui/interactive_base.cc:929
 #, c-format
 msgid "Waterway length: %1$u (%2$u) / %3$u"
 msgstr "Víziút hossza: %1$u (%2$u) / %3$u"
 
-#: ../../../../src/wui/interactive_base.cc:933
+#: ../../../../src/wui/interactive_base.cc:934
 #, c-format
 msgid "Road length: %u"
 msgstr "Út hossza: %u"
 
-#: ../../../../src/wui/interactive_base.cc:936
+#: ../../../../src/wui/interactive_base.cc:937
 #, c-format
 msgid "Waterway length: %1$u / %2$u"
 msgstr "Víziút hossza: %1$u / %2$u"
 
-#: ../../../../src/wui/interactive_base.cc:1858
+#: ../../../../src/wui/interactive_base.cc:1859
 msgid "Failed saving screenshot!"
 msgstr "Nem sikerült elmenteni a képernyőképet!"
 
-#: ../../../../src/wui/interactive_base.cc:1862
+#: ../../../../src/wui/interactive_base.cc:1863
 msgid "Screenshot saved"
 msgstr "Képernyőkép elmentve"
 
