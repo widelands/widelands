@@ -1573,9 +1573,9 @@ wl.Descriptions():new_tribe {
             note = pgettext("amazons_building", "Chocolate is essential for training Amazon soldiers."),
             performance = {
                -- TRANSLATORS: Performance helptext for an Amazon production site: Cocoa Farm, part 1
-               pgettext("amazons_building", "The cocoa farmer sows and harvests one basket of cocoa beans between %1$s and %2$s, depending on how far she has to walk."):bformat(format_seconds(58), format_minutes_seconds(1, 21)),
+               pgettext("amazons_building", "The cocoa farmer sows and harvests one basket of cocoa beans between %1$s and %2$s, depending on how far she has to walk."):bformat(format_seconds(57), format_minutes_seconds(1, 22)),
                -- TRANSLATORS: Performance helptext for an Amazon production site: Cocoa Farm, part 2; %s is replaced by 'N growing fields'
-               pgettext("amazons_building", "The cocoa farm needs at least %s to achieve 100%% productivity."):bformat(ngettext("%d growing field", "%d growing fields", 8):bformat(8))
+               pgettext("amazons_building", "The cocoa farm needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 6):bformat(6))
             }
          }
       },
