@@ -132,8 +132,16 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
   -sALLOW_MEMORY_GROWTH -sINITIAL_MEMORY=128mb -sMEMORY_GROWTH_LINEAR_STEP=32mb \
   -sENVIRONMENT=web,worker \
   -lidbfs.js \
+<<<<<<< HEAD
   -lwebsocket.js \
   -sPROXY_POSIX_SOCKETS \
+=======
+<<<<<<< HEAD
+  -lwebsocket.js \
+  -sPROXY_POSIX_SOCKETS \
+=======
+>>>>>>> 59c36f2fba58ef5c0e484264a1a336cc59c33b83
+>>>>>>> 2035ac0afa1e01aed6597356a8070e06dca27027
   -Wno-pthreads-mem-growth")
 else()
   find_package(OpenGL REQUIRED)
