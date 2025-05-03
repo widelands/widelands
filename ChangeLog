@@ -1,6 +1,6 @@
 [TOC]
 
-## Post-1.2.1 until [git e82de5c](https://codeberg.org/wl/widelands/commit/e82de5c348863308362dd44aafc35ceacc4a7eeb)
+## Post-1.2.1 until [git 34eccc1](https://codeberg.org/wl/widelands/commit/34eccc1614dcb4123813f66440eeba782f929b03)
 
 ### Animations, Icons and Overlays
 
@@ -30,6 +30,7 @@
 - Lua attribute `player.ai_type` (GH #6001 / CB #4412)
 - More functions, properties, and classes for the Lua UI API (GH #6555 / CB #4915)
 - Improvement of the Lua code of some buildings (GH #6730 / CB #5090)
+- Check in tribe loading that buildings don't have more than 3 workareas (CB #5054 / GH #6694)
 
 
 ### Maps
