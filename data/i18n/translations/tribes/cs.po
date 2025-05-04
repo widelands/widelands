@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-04-12 03:06+0000\n"
+"POT-Creation-Date: 2025-05-01 03:23+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Ondřej Itřech, 2020-2021,2024-2025\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -1349,52 +1349,53 @@ msgctxt "amazons_building"
 msgid "Dressmakery"
 msgstr "Krejčovství"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
-#. ...
+#. TRANSLATORS: Completed/Skipped/Did not start sewing a tunic because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:74
 msgid "sewing a tunic"
 msgstr "šití haleny"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
+#. TRANSLATORS: Completed/Skipped/Did not start producing a light wooden armor
+#. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:86
 msgid "making a light wooden armor"
 msgstr "vyrábění lehkého dřevěného brnění"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a wooden helmet because
+#. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:98
 msgid "making a wooden helmet"
 msgstr "vyrábění dřevěné přilby"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a warrior’s coat
+#. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:110
 msgid "sewing a warrior’s coat"
 msgstr "šití bojového kabátce"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making sturdy boots because
+#. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:122
 msgid "making sturdy boots"
 msgstr "šití pevných bot"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
-#. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making swift boots because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:134
 msgid "making swift boots"
 msgstr "šití mrštných bot"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
-#. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making hero boots because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:146
 msgid "making hero boots"
 msgstr "šití hrdinných bot"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
+#. TRANSLATORS: Completed/Skipped/Did not start making a padded vest because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:158
 msgid "making a padded vest"
 msgstr "šití vycpané vesty"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a padded protector
+#. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:170
 msgid "making a padded protector"
 msgstr "šití vycpávkového chrániče"
@@ -1711,7 +1712,7 @@ msgstr "Kamenická dílna"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:212
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:222
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:218
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:124
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:220
 msgid "making a shovel"
 msgstr "vyrábění lopaty"
 
@@ -1741,7 +1742,7 @@ msgstr "vyrábění mačety"
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:135
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:183
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:166
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:184
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:172
 msgid "making kitchen tools"
 msgstr "vyrábění kuchyňského náčiní"
 
@@ -1750,7 +1751,7 @@ msgstr "vyrábění kuchyňského náčiní"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:121
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:157
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:140
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:196
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:148
 msgid "making a hammer"
 msgstr "vyrábění kladiva"
 
@@ -1761,7 +1762,7 @@ msgstr "vyrábění dláta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:171
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:220
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:184
 msgid "making needles"
 msgstr "vyrábění jehlic"
 
@@ -2463,7 +2464,7 @@ msgstr "Dílna"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:69
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:105
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:101
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:172
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:100
 msgid "making a bread paddle"
 msgstr "vyrábění lopaty na chléb"
 
@@ -2477,14 +2478,14 @@ msgstr "vyrábění kýble"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:95
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:131
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:114
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:208
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:124
 msgid "making fire tongs"
 msgstr "vyrábění kovářských kleští"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:108
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:160
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:136
 msgid "making a fishing net"
 msgstr "vyrábění rybářské sítě"
 
@@ -2515,7 +2516,7 @@ msgstr "vyrábění pily"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:199
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:209
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:205
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:112
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:208
 msgid "making a scythe"
 msgstr "vyrábění kosy"
 
@@ -2963,7 +2964,7 @@ msgstr "vyrábění rybářského prutu"
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:170
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:153
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:148
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:160
 msgid "making a hunting spear"
 msgstr "vyrábění loveckého oštěpu"
 
@@ -3476,7 +3477,7 @@ msgstr "Dílna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:88
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:136
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:88
 msgid "making a basket"
 msgstr "vyrábění koše"
 
@@ -3693,12 +3694,12 @@ msgstr "Kovárna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:88
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:112
 msgid "forging a felling ax"
 msgstr "kování těžební sekery"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:100
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:196
 msgid "forging a pick"
 msgstr "kování krumpáče"
 

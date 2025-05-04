@@ -12,7 +12,7 @@
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
 # C138, 2020,2022
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
-# David D, 2017-2018,2021-2023
+# David D, 2017-2018,2021-2023,2025
 # GunChleoc, 2016,2018
 # Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
 # finki boy, 2015
@@ -31,9 +31,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-04-07 03:10+0000\n"
+"POT-Creation-Date: 2025-05-01 03:23+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Renaud Bouchard, 2015-2024\n"
+"Last-Translator: David D, 2017-2018,2021-2023,2025\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1731,7 +1731,7 @@ msgstr "Aléatoire"
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:463
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:99
 msgid "The tribe will be selected at random."
-msgstr ""
+msgstr "La tribu sera sélectionnée aléatoirement."
 
 #. * TRANSLATORS: Button tooltip in the editor for using a player's starting
 #. position tool
@@ -5002,7 +5002,7 @@ msgstr "Naviguer (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1618
 msgid "Translations for website maps"
-msgstr ""
+msgstr "Traductions pour les cartes du site web"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1621
 #, c-format
@@ -5177,11 +5177,11 @@ msgstr "La traduction du module complémentaire ‘%1$s’ n'a pas pu être tél
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2239
 msgid "Website Maps Translations"
-msgstr ""
+msgstr "Traductions cartes du site web"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2240
 msgid "Downloading website maps translations…"
-msgstr ""
+msgstr "Téléchargement de cartes du site web..."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2296
 #, c-format
@@ -5856,7 +5856,7 @@ msgstr "%1$s (édité par ‘%2$s’ le %3$s)"
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:916
 #, c-format
 msgid "‘%1$s’ commented:"
-msgstr ""
+msgstr "‘%1$s’ a commenté ::"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:917
 #, c-format
@@ -7872,18 +7872,18 @@ msgstr "Paramètre de ligne de commande inconnu: %s\nIl manque peut être '=' ?"
 #: ../../../../src/wlapplication.cc:1785
 #, c-format
 msgid "Non-integer value for command line parameter --messagebox-timeout=%s"
-msgstr ""
+msgstr "Valeur non entière pour le paramètre de ligne de commande --messagebox-timeout=%s"
 
 #: ../../../../src/wlapplication.cc:1799
 #, c-format
 msgid ""
 "Value is out of range for command line parameter --messagebox-timeout=%s"
-msgstr ""
+msgstr "La valeur est hors de la plage du paramètre de ligne de commande --messagebox-timeout=%s"
 
 #: ../../../../src/wlapplication.cc:1867
 #, c-format
 msgid "Non-integer value for command line parameter --difficulty=%s"
-msgstr ""
+msgstr "Valeur non entière pour le paramètre de ligne de commande --difficulty=%s"
 
 #: ../../../../src/wlapplication.cc:1964
 #, c-format
@@ -9283,7 +9283,7 @@ msgstr "Annuler l'expédition"
 #: ../../../../src/wui/constructionsitewindow.cc:164
 #: ../../../../src/wui/dismantlesitewindow.cc:79
 msgid "Send the builder away"
-msgstr ""
+msgstr "Envoyer le constructeur au loin"
 
 #: ../../../../src/wui/constructionsitewindow.cc:170
 #: ../../../../src/wui/dismantlesitewindow.cc:85
@@ -10270,31 +10270,31 @@ msgstr "Réinitialiser le zoom"
 msgid "Zoom –"
 msgstr "Zoom –"
 
-#: ../../../../src/wui/interactive_base.cc:926
+#: ../../../../src/wui/interactive_base.cc:927
 #, c-format
 msgid "Road length: %1$u (%2$u)"
 msgstr "Longueur de route : %1$u (%2$u)"
 
-#: ../../../../src/wui/interactive_base.cc:928
+#: ../../../../src/wui/interactive_base.cc:929
 #, c-format
 msgid "Waterway length: %1$u (%2$u) / %3$u"
 msgstr "Longueur de voie navigable : %1$u (%2$u) / %3$u"
 
-#: ../../../../src/wui/interactive_base.cc:933
+#: ../../../../src/wui/interactive_base.cc:934
 #, c-format
 msgid "Road length: %u"
 msgstr "Longueur de route : %u"
 
-#: ../../../../src/wui/interactive_base.cc:936
+#: ../../../../src/wui/interactive_base.cc:937
 #, c-format
 msgid "Waterway length: %1$u / %2$u"
 msgstr "Longueur de voie navigable : %1$u / %2$u"
 
-#: ../../../../src/wui/interactive_base.cc:1858
+#: ../../../../src/wui/interactive_base.cc:1859
 msgid "Failed saving screenshot!"
 msgstr "Capture d'écran échouée !"
 
-#: ../../../../src/wui/interactive_base.cc:1862
+#: ../../../../src/wui/interactive_base.cc:1863
 msgid "Screenshot saved"
 msgstr "Capture d'écran enregistrée"
 

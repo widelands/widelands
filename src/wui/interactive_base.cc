@@ -666,6 +666,7 @@ WorkareasEntry InteractiveBase::get_workarea_overlay(const Widelands::Map& map,
 		wa_index = 0;
 		break;
 	default:
+		// Should be impossible, checked by TribeDescr finalizing code
 		throw wexception(
 		   "Encountered unexpected WorkareaInfo size %i", static_cast<int>(workarea_info->size()));
 	}
