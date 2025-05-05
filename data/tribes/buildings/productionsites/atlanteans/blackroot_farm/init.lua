@@ -43,15 +43,15 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
-            -- longest possible transition from tiny to ripe field:
-            --   2 * (30 + 45 + 50) = 250 sec
+            -- nominal transition from tiny to ripe field (the longest possible transition is double):
+            --   30 + 45 + 50 = 125 sec
             --   see data/tribes/immovables/blackrootfield/ and src/logic/map_objects/immovable_program.cc - ImmovableProgram::ActAnimate::execute()
-            -- how many fields are needed for reliable 100% productivity: 5
-            --   with 5 fields, this inequation is not fulfilled:
-            --   (250 + 59.4 - (9 + 2 * 1.8 + 10)) / 59.4 < 4
-            -- min. time total (free 4 nearest fields):  35.2  + 24.2  = 59.4  sec
-            -- min. time total (free 5 nearest fields):  35.92 + 24.92 = 60.84 sec
-            -- max. time total (free 5 furthest fields): 45.28 + 34.28 = 79.56 sec
+            -- estimation of number of nearest fields for optimal productivity (nominal + 1):
+            --   2 + (125 - (9 + 2 * 1.8 + 10)) / 59.4 = 3.72
+            -- procedure how to make verification measurement:
+            --   https://codeberg.org/wl/widelands/pulls/4725#issuecomment-4062998
+            -- min. time total (free 4 nearest fields):  35.2 + 24.2 = 59.4 sec
+            -- max. time total (free 4 furthest fields): 46   + 35   = 81   sec
             "call=plant",
             "call=harvest",
          }
@@ -60,10 +60,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting blackroot because ...
          descname = _("planting blackroot"),
          actions = {
-            -- time of worker: 25.92-35.28 sec, min. time for 4 fields 25.2 sec
-            -- min. time (4 fields): 25.2  + 10 = 35.2  sec
-            -- min. time:            25.92 + 10 = 35.92 sec
-            -- max. time:            35.28 + 10 = 45.28 sec
+            -- time of worker: 25.2-36 sec
+            -- min. time: 25.2 + 10 = 35.2 sec
+            -- max. time: 36   + 10 = 46   sec
             "callworker=plant",
             "sleep=duration:10s"
          }
@@ -72,10 +71,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because ...
          descname = _("harvesting blackroot"),
          actions = {
-            -- time of worker: 21.92-31.28 sec, min. time for 4 fields 21.2 sec
-            -- min. time (4 fields): 21.2  + 3 = 24.2  sec
-            -- min. time:            21.92 + 3 = 24.92 sec
-            -- max. time:            31.28 + 3 = 34.28 sec
+            -- time of worker: 21.2-32 sec
+            -- min. time: 21.2 + 3 = 24.2 sec
+            -- max. time: 32   + 3 = 35   sec
             "callworker=harvest",
             "sleep=duration:3s"
          }

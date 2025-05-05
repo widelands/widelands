@@ -1835,9 +1835,9 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("atlanteans_building", "Blackroot farmer asked by a foreigner"),
             performance = {
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Blackroot Farm, part 1
-               pgettext("atlanteans_building", "The blackroot farmer sows and harvests one bundle of blackroot between %1$s and %2$s, depending on how far he has to walk."):bformat(format_minutes_seconds(1, 1), format_minutes_seconds(1, 20)),
+               pgettext("atlanteans_building", "The blackroot farmer sows and harvests one bundle of blackroot between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(59), format_minutes_seconds(1, 21)),
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Blackroot Farm, part 2; %s is replaced by 'N growing fields'
-               pgettext("atlanteans_building", "The blackroot farm needs at least %s to achieve 100%% productivity."):bformat(ngettext("%d growing field", "%d growing fields", 5):bformat(5))
+               pgettext("atlanteans_building", "The blackroot farm needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 4):bformat(4))
             }
          }
       },
