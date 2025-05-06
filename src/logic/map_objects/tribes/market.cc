@@ -814,8 +814,7 @@ std::string TradeInstance::format_richtext(const TradeID id,
 		                        egbase.descriptions().get_ware_descr(pair.first)->descname()),
 		               UI::FontStyle::kWuiInfoPanelParagraph);
 	}
-	// Add some spacing at the end
-	infotext += "</p><p><br><br></p></div></rt>";
+	infotext += "</p></div></rt>";
 
 	return infotext;
 }

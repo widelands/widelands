@@ -723,13 +723,13 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		inner_box->add(buttons, UI::Box::Resizing::kAlign, UI::Align::kTop);
 
 		trade_box->add(inner_box, UI::Box::Resizing::kExpandBoth);
-		trade_box->add_space(kSpacing);
 
 		for (const Widelands::TradeExtension& te : iplayer_->game().find_trade_extensions(
 		        trade_id, own_market->owner().player_number(), false)) {
 			UI::Box* hbox = new UI::Box(
 			   trade_box, UI::PanelStyle::kWui, "extension_offer", 0, 0, UI::Box::Horizontal);
 
+			hbox->add_space(g_style_manager->styled_size(UI::StyledSize::kWuiTextSpaceBeforeInlineHeader));
 			hbox->add(
 			   new UI::Textarea(
 			      hbox, UI::PanelStyle::kWui, "description", UI::FontStyle::kWuiInfoPanelHeading,
@@ -766,8 +766,8 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 			hbox->add_space(kSpacing);
 			hbox->add(accept);
 
-			trade_box->add(hbox, UI::Box::Resizing::kFullSize);
 			trade_box->add_space(kSpacing);
+			trade_box->add(hbox, UI::Box::Resizing::kFullSize);
 		}
 
 		for (const Widelands::TradeExtension& te : iplayer_->game().find_trade_extensions(
@@ -775,6 +775,7 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 			UI::Box* hbox = new UI::Box(
 			   trade_box, UI::PanelStyle::kWui, "extension_proposal", 0, 0, UI::Box::Horizontal);
 
+			hbox->add_space(g_style_manager->styled_size(UI::StyledSize::kWuiTextSpaceBeforeInlineHeader));
 			hbox->add(
 			   new UI::Textarea(
 			      hbox, UI::PanelStyle::kWui, "description", UI::FontStyle::kWuiInfoPanelHeading,
@@ -799,10 +800,11 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 			hbox->add_space(kSpacing);
 			hbox->add(retract);
 
-			trade_box->add(hbox, UI::Box::Resizing::kFullSize);
 			trade_box->add_space(kSpacing);
+			trade_box->add(hbox, UI::Box::Resizing::kFullSize);
 		}
 
+		trade_box->add_space(kRowSize);
 		trades_box_active_.add(trade_box, UI::Box::Resizing::kExpandBoth);
 	}
 }
