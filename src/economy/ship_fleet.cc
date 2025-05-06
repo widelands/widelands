@@ -132,7 +132,8 @@ struct StepEvalFindShipFleet {
 		if ((from.field->nodecaps() & MOVECAPS_SWIM) == 0) {
 			// We are allowed to land on and leave the shore,
 			// but not in the middle of a path
-			if (fromcost > 0) {
+			// also prevent 1 step paths between 2 land nodes
+			if (fromcost > 0 || (fromcost == 0 && (to.field->nodecaps() & MOVECAPS_SWIM) == 0)) {
 				return -1;
 			}
 
