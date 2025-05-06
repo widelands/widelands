@@ -78,21 +78,18 @@ public:
 	[[nodiscard]] int32_t get_vgap() const {
 		return vgap_;
 	}
-	void set_hgap(int32_t, bool = true);
-	void set_vgap(int32_t, bool = true);
+	[[nodiscard]] int32_t get_min_free_vertical_space() const {
+		return min_free_vertical_space_;
+	}
+	void set_hgap(int32_t gap, bool relayout = true);
+	void set_vgap(int32_t gap, bool relayout = true);
+	void set_min_free_vertical_space(int32_t s, bool relayout = true);
 
 	[[nodiscard]] Widelands::Extent get_extent() const;
 
 	[[nodiscard]] const WaresOrderCoords& icons_order_coords() const;
 	[[nodiscard]] Widelands::DescriptionIndex ware_at_coords(int16_t x, int16_t y) const;
 	[[nodiscard]] uint16_t column_length(int16_t) const;
-
-	void set_min_free_vertical_space(int32_t s) {
-		min_free_vertical_space_ = s;
-	}
-	[[nodiscard]] int32_t get_min_free_vertical_space() const {
-		return min_free_vertical_space_;
-	}
 
 	[[nodiscard]] static inline int32_t
 	calc_hgap(int32_t columns, int32_t total_w, int32_t min = 3) {

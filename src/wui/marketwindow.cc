@@ -21,6 +21,7 @@
 #include <memory>
 
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/box.h"
@@ -44,6 +45,10 @@ constexpr const char* kIconTabTradeOffers = "images/wui/buildings/menu_tab_trade
 constexpr const char* kIconMoveTrade = "images/wui/buildings/menu_tab_trade_offers.png";
 
 constexpr Duration kUpdateTimeInGametimeMs(500);  //  half a second, gametime
+
+static inline int32_t calc_max_box_height() {
+	return g_gr->get_yres() - 7 * kButtonSize;
+}
 
 class NewTradeProposalBox : public UI::Box {
 public:
@@ -239,6 +244,8 @@ public:
 	     player_number_(market.owner().player_number()),
 	     market_serial_(market.serial()) {
 		set_min_desired_breadth(kMinBoxWidth);
+		set_force_scrolling(true);
+		set_max_size(get_max_x(), calc_max_box_height());
 
 		trade_changed_subscriber_ = Notifications::subscribe<Widelands::NoteTradeChanged>(
 		   [this](const Widelands::NoteTradeChanged& /*note*/) { needs_update_ = true; });
@@ -284,6 +291,7 @@ private:
 				txt->set_text(_("There are no pending trade proposals at the moment."));
 			}
 			add(txt, UI::Box::Resizing::kFullSize);
+			add_space(3 * UI::Scrollbar::kSize);
 
 		} else {
 			const bool can_act = iplayer_ != nullptr && iplayer_->can_act(player_number_);
@@ -344,7 +352,6 @@ private:
 				}
 
 				add(box, UI::Box::Resizing::kExpandBoth);
-				add_space(kSpacing);
 			}
 		}
 
@@ -375,6 +382,8 @@ public:
 	     market_serial_(market.serial()),
 	     market_coords_(market.get_position()) {
 		set_min_desired_breadth(kMinBoxWidth);
+		set_force_scrolling(true);
+		set_max_size(get_max_x(), calc_max_box_height());
 
 		trade_changed_subscriber_ = Notifications::subscribe<Widelands::NoteTradeChanged>(
 		   [this](const Widelands::NoteTradeChanged& /*note*/) { needs_update_ = true; });
@@ -414,6 +423,7 @@ private:
 			txt->set_style(UI::FontStyle::kWuiInfoPanelParagraph);
 			txt->set_text(_("Nobody has offered you any trades at the moment."));
 			add(txt, UI::Box::Resizing::kFullSize);
+			add_space(3 * UI::Scrollbar::kSize);
 
 		} else {
 			for (Widelands::TradeID trade_id : trades) {
@@ -451,7 +461,6 @@ private:
 				box->add(yes, UI::Box::Resizing::kAlign, UI::Align::kTop);
 
 				add(box, UI::Box::Resizing::kExpandBoth);
-				add_space(kSpacing);
 			}
 		}
 
@@ -503,7 +512,6 @@ public:
 		set_min_desired_breadth(kMinBoxWidth);
 
 		add(&info_, UI::Box::Resizing::kExpandBoth);
-		add_space(kSpacing);
 
 		const Widelands::TradeInstance& trade_instance = ibase.game().get_trade(trade_id_);
 		const Widelands::Market::TradeOrder& order = *market.trade_orders().at(trade_id_);
