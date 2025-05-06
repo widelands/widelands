@@ -729,7 +729,8 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 			UI::Box* hbox = new UI::Box(
 			   trade_box, UI::PanelStyle::kWui, "extension_offer", 0, 0, UI::Box::Horizontal);
 
-			hbox->add_space(g_style_manager->styled_size(UI::StyledSize::kWuiTextSpaceBeforeInlineHeader));
+			hbox->add_space(
+			   g_style_manager->styled_size(UI::StyledSize::kWuiTextSpaceBeforeInlineHeader));
 			hbox->add(
 			   new UI::Textarea(
 			      hbox, UI::PanelStyle::kWui, "description", UI::FontStyle::kWuiInfoPanelHeading,
@@ -775,7 +776,8 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 			UI::Box* hbox = new UI::Box(
 			   trade_box, UI::PanelStyle::kWui, "extension_proposal", 0, 0, UI::Box::Horizontal);
 
-			hbox->add_space(g_style_manager->styled_size(UI::StyledSize::kWuiTextSpaceBeforeInlineHeader));
+			hbox->add_space(
+			   g_style_manager->styled_size(UI::StyledSize::kWuiTextSpaceBeforeInlineHeader));
 			hbox->add(
 			   new UI::Textarea(
 			      hbox, UI::PanelStyle::kWui, "description", UI::FontStyle::kWuiInfoPanelHeading,
