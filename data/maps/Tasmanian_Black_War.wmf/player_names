@@ -1,0 +1,36 @@
+# Automatically created by Widelands 1.2~git26575 (5372ade@master) Release
+
+[global]
+packet_version="2"
+
+[player_1]
+name="British Empire"
+tribe="empire"
+ai=
+closeable="false"
+team="0"
+random="false"
+
+[player_2]
+name="Mwumbu Zusu"
+tribe="barbarians"
+ai=
+closeable="false"
+team="0"
+random="false"
+
+[player_3]
+name="Abo Rigolo"
+tribe="barbarians"
+ai=
+closeable="false"
+team="0"
+random="false"
+
+[player_4]
+name="Xurululu"
+tribe="barbarians"
+ai=
+closeable="false"
+team="0"
+random="false"
