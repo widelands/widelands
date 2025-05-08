@@ -9,6 +9,12 @@ function stable_save(game, savename, desired_speed)
    print("###### stable_save: last save time " .. last_save_time)
 
    game.desired_speed = 1000
+   if lunit and lunit.stats and lunit.stats.run and
+   -- lunit     is loaded and   started running  and ...
+         lunit.stats.run + lunit.stats.notrun < lunit.stats.tests then
+         -- ... not finished running
+      print("WARNING: a testcase is probably running while saving. This might fail!")
+   end
    sleep(1000)
    game:save(savename)
    game.desired_speed = 1000
