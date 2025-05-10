@@ -1477,13 +1477,26 @@ void Ship::battle_update(Game& game) {
 			                kAttackAnimationDuration);  // TODO(Nordfriese): proper animation
 			return;
 
-		case Battle::Phase::kAttackerMovingTowardsOpponent: {
-			// Check if we need to move a little to the east to make room for an attacker west of us.
-			if (map.can_reach_by_water(map.l_n(map.l_n(get_position())))) {
-				break;
+		case Battle::Phase::kMovingToBattlePositions: {
+			assert(current_battle.battle_position.valid());
+
+			if (get_position() == current_battle.battle_position) {
+				molog(game.get_gametime(),
+				      "[battle] Defender at battle position, waiting for the attacker to begin");
+				start_task_idle(game, descr().main_animation(), 500);
+				return;
 			}
-			molog(game.get_gametime(), "[battle] Defender making room for attacker");
-			return start_task_move(game, WALK_E, descr().get_sail_anims(), true);
+
+			if (start_task_movepath(
+			       game, current_battle.battle_position, 3, descr().get_sail_anims(), true)) {
+				molog(game.get_gametime(), "[battle] Defender moving towards battle position");
+				return;
+			}
+
+			throw wexception(
+			   "Defending ship %s at %dx%d could not find a path to battle position at %dx%d!",
+			   get_shipname().c_str(), get_position().x, get_position().y,
+			   current_battle.battle_position.x, current_battle.battle_position.y);
 		}
 
 		default:
@@ -1503,54 +1516,66 @@ void Ship::battle_update(Game& game) {
 		return start_task_idle(game, descr().main_animation(), 100);
 
 	case Battle::Phase::kNotYetStarted:
-		molog(game.get_gametime(), "[battle] Preparing to engage");
-		set_phase(Battle::Phase::kAttackerMovingTowardsOpponent);
-		FALLS_THROUGH;
-	case Battle::Phase::kAttackerMovingTowardsOpponent: {
-		// Move towards the opponent.
-		Coords dest;
 		if (target_ship != nullptr) {
-			// If we are still some distance away, get closer first ...
-			dest = target_ship->get_position();
-			if (map.calc_distance(get_position(), dest) <= kNearDestinationShipRadius) {
-				// ... then take up attack position two nodes west of the target.
-				dest = map.l_n(map.l_n(dest));
+			other_battle->battle_position = target_ship->get_position();
+			current_battle.battle_position = map.l_n(map.l_n(other_battle->battle_position));
+
+			// Check if this is possible
+			CheckStepDefault cstep(MOVECAPS_SWIM);
+			Path path;
+			bool success = false;
+			for (int i = 0; i <= 2; ++i) {
+				if (map.findpath(get_position(), current_battle.battle_position, 3, path, cstep) >= 0 &&
+				    map.findpath(target_ship->get_position(), other_battle->battle_position, 3, path,
+				                 cstep) >= 0) {
+					success = true;
+					break;
+				}
+
+				current_battle.battle_position = map.r_n(current_battle.battle_position);
+				other_battle->battle_position = map.r_n(other_battle->battle_position);
 			}
+
+			if (!success) {
+				throw wexception("Could not find suitable battle position for fight between %s at "
+				                 "%dx%d and %s at %dx%d!",
+				                 get_shipname().c_str(), get_position().x, get_position().y,
+				                 target_ship->get_shipname().c_str(), target_ship->get_position().x,
+				                 target_ship->get_position().y);
+			}
+
 		} else {
-			dest = current_battle.attack_coords;
+			current_battle.battle_position = current_battle.attack_coords;
 		}
-		if (dest == get_position()) {
-			// Already there, start the fight in the next act.
-			// For ports, skip the first round to allow defense warships to approach.
-			molog(game.get_gametime(), "[battle] Enemy in range");
+
+		set_phase(Battle::Phase::kMovingToBattlePositions);
+		FALLS_THROUGH;
+	case Battle::Phase::kMovingToBattlePositions: {
+		assert(current_battle.battle_position.valid());
+
+		if (get_position() == current_battle.battle_position) {
+			if (target_ship != nullptr &&
+			    target_ship->get_position() != other_battle->battle_position) {
+				molog(game.get_gametime(), "[battle] Waiting for defender to reach battle position");
+				start_task_idle(game, descr().main_animation(), 500);
+				return;
+			}
+			molog(game.get_gametime(), "[battle] Attacker reached battle position, ready to begin");
 			set_phase(target_ship != nullptr ? Battle::Phase::kAttackersTurn :
 			                                   Battle::Phase::kAttackerAttacking);
 			return start_task_idle(game, descr().main_animation(), 100);
 		}
 
-		Path path;
-		if (map.findpath(get_position(), dest, 0, path, CheckStepDefault(MOVECAPS_SWIM)) < 0) {
-			if (target_ship != nullptr) {
-				molog(game.get_gametime(),
-				      "Could not find a path to opponent ship %u %s from %dx%d to %dx%d",
-				      target_ship->serial(), target_ship->get_shipname().c_str(), get_position().x,
-				      get_position().y, dest.x, dest.y);
-				// The defender is responsible for determining a good attack position, so wait a bit.
-				return start_task_idle(game, descr().main_animation(), 500);
-			}
-
-			molog(game.get_gametime(), "Could not find a path to attack coords from %dx%d to %dx%d",
-			      get_position().x, get_position().y, dest.x, dest.y);
-
-			battles_.pop_back();
-			return start_task_idle(game, descr().main_animation(), 100);
+		if (start_task_movepath(
+		       game, current_battle.battle_position, 3, descr().get_sail_anims(), true)) {
+			molog(game.get_gametime(), "[battle] Attacker moving towards battle position");
+			return;
 		}
 
-		molog(game.get_gametime(), "[battle] Moving towards enemy");
-		// Move in small steps to allow for defender position change.
-		start_task_movepath(
-		   game, path, descr().get_sail_anims(), true, std::min<unsigned>(path.get_nsteps(), 3));
-		return;
+		throw wexception(
+		   "Attacking ship %s at %dx%d could not find a path to battle position at %dx%d!",
+		   get_shipname().c_str(), get_position().x, get_position().y,
+		   current_battle.battle_position.x, current_battle.battle_position.y);
 	}
 
 	case Battle::Phase::kAttackerAttacking:
@@ -2704,9 +2729,10 @@ Load / Save implementation
  * 12 - v1.1
  * 13 - Added warships and naval warfare.
  * 14 - Another naval warfare change (coords as destination and soldier preference).
- * 15 - Another naval warfare change (remember request dock).
+ * 15 (v1.2.1) - Another naval warfare change (remember request dock).
+ * 16 - Another naval warfare change (added battle_position to Battle).
  */
-constexpr uint8_t kCurrentPacketVersion = 15;
+constexpr uint8_t kCurrentPacketVersion = 16;
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship") {
@@ -2716,8 +2742,8 @@ const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 }
 
 void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
-	// TODO(Nordfriese): Savegame compatibility v1.1
-	if (packet_version >= 12 && packet_version <= kCurrentPacketVersion) {
+	// TODO(Nordfriese): Savegame compatibility v1.2
+	if (packet_version >= 15 && packet_version <= kCurrentPacketVersion) {
 		Bob::Loader::load(fr);
 		// Economy
 		ware_economy_serial_ = fr.unsigned_32();
@@ -2725,9 +2751,8 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 
 		// The state the ship is in
 		ship_state_ = static_cast<ShipStates>(fr.unsigned_8());
-		ship_type_ =
-		   (packet_version >= 13) ? static_cast<ShipType>(fr.unsigned_8()) : ShipType::kTransport;
-		pending_refit_ = (packet_version >= 13) ? static_cast<ShipType>(fr.unsigned_8()) : ship_type_;
+		ship_type_ = static_cast<ShipType>(fr.unsigned_8());
+		pending_refit_ = static_cast<ShipType>(fr.unsigned_8());
 
 		// Expedition specific data
 		switch (ship_state_) {
@@ -2755,7 +2780,7 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 			// Whether the exploration is done clockwise or counter clockwise
 			expedition_->island_explore_direction =
 			   static_cast<IslandExploreDirection>(fr.unsigned_8());
-			for (unsigned i = (packet_version >= 13) ? fr.unsigned_32() : 0; i > 0; --i) {
+			for (unsigned i = fr.unsigned_32(); i > 0; --i) {
 				expedition_attack_target_serials_.insert(fr.unsigned_32());
 			}
 		} break;
@@ -2765,35 +2790,41 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 			break;
 		}
 
-		for (uint8_t i = (packet_version >= 13) ? fr.unsigned_8() : 0; i != 0U; --i) {
+		for (uint8_t i = fr.unsigned_8(); i != 0U; --i) {
 			const bool first = fr.unsigned_8() != 0U;
 			battle_serials_.push_back(fr.unsigned_32());
 			battles_.emplace_back(nullptr, Coords::null(), std::vector<uint32_t>(), first);
 			battles_.back().phase = static_cast<Battle::Phase>(fr.unsigned_8());
 			battles_.back().attack_coords.x = fr.signed_16();
 			battles_.back().attack_coords.y = fr.signed_16();
+			// TODO(Nordfriese): Savegame compatibility v1.2
+			if (packet_version >= 16) {
+				battles_.back().battle_position.x = fr.signed_16();
+				battles_.back().battle_position.y = fr.signed_16();
+			} else {
+				battles_.back().battle_position = Coords::null();
+				if (battles_.back().phase == Battle::Phase::kMovingToBattlePositions) {
+					battles_.back().phase = Battle::Phase::kNotYetStarted;
+				}
+			}
 			battles_.back().pending_damage = fr.unsigned_32();
 			for (size_t j = fr.unsigned_32(); j > 0U; --j) {
 				battles_.back().attack_soldier_serials.push_back(fr.unsigned_32());
 			}
 			battles_.back().time_of_last_action = Time(fr);
 		}
-		hitpoints_ = (packet_version >= 13) ? fr.unsigned_32() : -1;
-		if (packet_version >= 13) {
-			last_heal_time_ = Time(fr);
-			send_message_at_destination_ = fr.unsigned_8() != 0;
-		}
+		hitpoints_ = fr.unsigned_32();
+		last_heal_time_ = Time(fr);
+		send_message_at_destination_ = fr.unsigned_8() != 0;
 
 		shipname_ = fr.c_string();
 		capacity_ = fr.unsigned_32();
-		warship_soldier_capacity_ = (packet_version >= 13) ? fr.unsigned_32() : capacity_;
-		if (packet_version >= 14) {
-			soldier_preference_ = static_cast<SoldierPreference>(fr.unsigned_8());
-		}
+		warship_soldier_capacity_ = fr.unsigned_32();
+		soldier_preference_ = static_cast<SoldierPreference>(fr.unsigned_8());
 		lastdock_ = fr.unsigned_32();
-		requestdock_ = packet_version >= 15 ? fr.unsigned_32() : 0;
+		requestdock_ = fr.unsigned_32();
 		destination_object_ = fr.unsigned_32();
-		destination_coords_ = packet_version >= 14 ? fr.unsigned_32() : 0;
+		destination_coords_ = fr.unsigned_32();
 
 		items_.resize(fr.unsigned_32());
 		for (ShippingItem::Loader& item_loader : items_) {
@@ -2915,7 +2946,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 	try {
 		// The header has been peeled away by the caller
 		uint8_t const packet_version = fr.unsigned_8();
-		if (packet_version >= 12 && packet_version <= kCurrentPacketVersion) {
+		if (packet_version >= 15 && packet_version <= kCurrentPacketVersion) {
 			try {
 				const ShipDescr* descr = nullptr;
 				// Removing this will break the test suite
@@ -2984,6 +3015,8 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 		fw.unsigned_8(static_cast<uint8_t>(b.phase));
 		fw.signed_16(b.attack_coords.x);
 		fw.signed_16(b.attack_coords.y);
+		fw.signed_16(b.battle_position.x);
+		fw.signed_16(b.battle_position.y);
 		fw.unsigned_32(b.pending_damage);
 		fw.unsigned_32(b.attack_soldier_serials.size());
 		for (Serial s : b.attack_soldier_serials) {

@@ -24,11 +24,11 @@ run(function()
 
    -- open ship windows
    local sw1_name = string.bformat("shipwindow_%u", first_ship.serial)
-   assert_nil(mv.windows.sw1_name, "## ship window was open ##")
+   assert_nil(mv.windows[sw1_name], "## ship 1 window was open ##")
    mv:click(first_ship.field)
 
    local sw2_name = string.bformat("shipwindow_%u", second_ship.serial)
-   assert_nil(mv.windows.sw2_name, "## ship window was open ##")
+   assert_nil(mv.windows[sw2_name], "## ship 2 window was open ##")
    mv:click(second_ship.field)
 
    while(mv.windows[pw_name] == nil or
