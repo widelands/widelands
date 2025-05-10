@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1264,6 +1264,9 @@ bool EditorInteractive::run_editor(UI::Panel* error_message_parent,
 		        "  FATAL EXCEPTION in editor: %s\n"
 		        "##############################\n",
 		        e.what());
+		if (g_fail_on_errors) {
+			abort();
+		}
 		if (error_message_parent == nullptr) {
 			return false;
 		}

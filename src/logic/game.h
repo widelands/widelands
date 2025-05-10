@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,9 +23,9 @@
 
 #include "base/crypto.h"
 #include "base/random.h"
+#include "commands/cmd_queue.h"
 #include "economy/flag_job.h"
 #include "io/streamwrite.h"
-#include "logic/cmd_queue.h"
 #include "logic/detected_port_space.h"
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/tribes/shipstates.h"
@@ -272,7 +272,7 @@ public:
 
 	void send_player_bulldoze(PlayerImmovable&, bool recurse = false);
 	void send_player_dismantle(PlayerImmovable&, bool keep_wares);
-	void send_player_build(int32_t, const Coords&, DescriptionIndex);
+	void send_player_build_building(int32_t, const Coords&, DescriptionIndex);
 	void send_player_build_flag(int32_t, const Coords&);
 	void send_player_build_road(int32_t, Path&);
 	void send_player_build_waterway(int32_t, Path&);
@@ -293,10 +293,8 @@ public:
 	void send_player_change_training_options(TrainingSite&, TrainingAttribute, int32_t);
 	void send_player_drop_soldier(MapObject&, int32_t);
 	void send_player_change_soldier_capacity(Building&, int32_t);
-	void send_player_enemyflagaction(const Flag&,
-	                                 PlayerNumber,
-	                                 const std::vector<Serial>&,
-	                                 bool allow_conquer);
+	void
+	send_player_attack(const Flag&, PlayerNumber, const std::vector<Serial>&, bool allow_conquer);
 	void send_player_mark_object_for_removal(PlayerNumber, Immovable&, bool);
 
 	void send_player_ship_scouting_direction(const Ship& ship, WalkingDir direction);
@@ -315,7 +313,7 @@ public:
 	void send_player_diplomacy(PlayerNumber, DiplomacyAction, PlayerNumber);
 	void send_player_pinned_note(
 	   PlayerNumber p, Coords pos, const std::string& text, const RGBColor& rgb, bool del);
-	void send_player_ship_port_name(PlayerNumber p, Serial s, const std::string& name);
+	void send_player_building_name(PlayerNumber p, Serial s, const std::string& name);
 	void send_player_fleet_targets(PlayerNumber p, Serial i, Quantity q);
 
 	InteractivePlayer* get_ipl();
@@ -333,6 +331,11 @@ public:
 		assert(d != kScenarioDifficultyNotSet);
 		scenario_difficulty_ = d;
 	}
+
+	[[nodiscard]] Serial generate_economy_serial();
+	[[nodiscard]] Serial generate_detectedportspace_serial();
+	void notify_economy_serial(Serial serial);
+	void notify_detectedportspace_serial(Serial serial);
 
 	// Statistics
 	const GeneralStatsVector& get_general_statistics() const {
@@ -495,6 +498,8 @@ private:
 	int next_trade_agreement_id_ = 1;
 	// Maps from trade agreement id to the agreement.
 	std::map<int, TradeAgreement> trade_agreements_;
+	Serial last_economy_serial_ = 0;
+	Serial last_detectedportspace_serial_ = 0;
 
 	std::list<PendingDiplomacyAction> pending_diplomacy_actions_;
 	bool diplomacy_allowed_{true};

@@ -1,18 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
 # Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
-# Pavol Gono, 2024
+# Pavol Gono, 2024-2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: Pavol Gono, 2024\n"
+"Last-Translator: Pavol Gono, 2024-2025\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -89,7 +89,7 @@ msgstr "Ach, nie, horí nám krčma! Naša hostinská v tom veľkom zhone nedopa
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:47
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:49
 msgid "Open the building statistics window"
-msgstr "Otvorte okno Štatistika budov."
+msgstr "Otvorte okno Štatistika budov"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:50
 msgid ""
@@ -130,7 +130,7 @@ msgstr "Najprv treba zistiť, koľko krčiem momentálne máme. Widelands na to 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:67
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:69
 msgid "Look up how many taverns you have"
-msgstr "Zistite, koľko krčiem máte."
+msgstr "Zistite, koľko krčiem máte"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:70
 msgid "We want to know whether we still have taverns."
@@ -279,7 +279,7 @@ msgstr "V poriadku. Ako ste si mohli všimnúť zo zoznamu, už nemáte žiadne 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:142
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:144
 msgid "Examine the first two tabs in the stock window"
-msgstr "Vyskúšajte si prvé dve karty v okne Zásoby."
+msgstr "Vyskúšajte si prvé dve karty v okne Zásoby"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:145
 msgid ""
@@ -327,7 +327,7 @@ msgstr "Na štvrtej karte sa rovnakým spôsobom zobrazujú pracovníci."
 msgid ""
 "The third tab tells you that there are no rations left in your headquarters "
 "– that’s not good!"
-msgstr "Na tretej karte vidno, že v ústredí nie sú k dispozícii už žiadne prídely – to nie je dobré."
+msgstr "Na tretej karte vidno, že v ústredí nie sú k dispozícii už žiadne prídely – to nie je dobré!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:177
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:200

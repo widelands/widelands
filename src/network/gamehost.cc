@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2024 by the Widelands Development Team
+ * Copyright (C) 2008-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,6 +36,7 @@
 #include "base/wexception.h"
 #include "build_info.h"
 #include "chat/chat.h"
+#include "commands/cmd_net_check_sync.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
 #include "io/fileread.h"
@@ -44,7 +45,6 @@
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
-#include "logic/playercommand.h"
 #include "logic/playersmanager.h"
 #include "network/constants.h"
 #include "network/host_game_settings_provider.h"
@@ -2062,7 +2062,7 @@ void GameHost::request_sync_reports() {
 	broadcast(packet);
 
 	d->game->enqueue_command(
-	   new CmdNetCheckSync(d->syncreport_time, [this] { sync_report_callback(); }));
+	   new Widelands::CmdNetCheckSync(d->syncreport_time, [this] { sync_report_callback(); }));
 
 	committed_network_time(d->syncreport_time);
 }

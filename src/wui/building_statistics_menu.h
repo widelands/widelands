@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,10 +64,10 @@ private:
 	void init(int last_selected_tab = 1);
 
 	/// Whether a building that is used by the player's tribe should be added
-	bool own_building_is_valid(const Widelands::Player& player,
-	                           Widelands::DescriptionIndex index,
-	                           bool map_allows_seafaring,
-	                           bool map_allows_waterways) const;
+	bool own_tribe_building_is_valid(const Widelands::Player& player,
+	                                 Widelands::DescriptionIndex index,
+	                                 bool map_allows_seafaring,
+	                                 bool map_allows_waterways) const;
 	/// Whether a building that isn't used by the player's tribe should be added
 	bool foreign_tribe_building_is_valid(const Widelands::Player& player,
 	                                     Widelands::DescriptionIndex index) const;
@@ -78,7 +78,6 @@ private:
 	void update_building_list();
 
 	/// Adds a button for the building type belonging to the id and descr to the tab.
-	/// Returns true when a new row needs to be created.
 	void
 	add_button(Widelands::DescriptionIndex id, const Widelands::BuildingDescr& descr, UI::Box* row);
 

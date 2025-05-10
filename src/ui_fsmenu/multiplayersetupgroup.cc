@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2024 by the Widelands Development Team
+ * Copyright (C) 2010-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -460,7 +460,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 			tribes_dropdown_.add(pgettext("tribe", "Random"), kRandom,
 			                     g_image_cache->get("images/ui_fsmenu/random.png"), false,
-			                     _("The tribe will be selected at random"));
+			                     _("The tribe will be selected at random."));
 			if (player_setting.random_tribe) {
 				tribes_dropdown_.select(kRandom);
 			} else {

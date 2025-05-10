@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,7 +63,7 @@ constexpr uint16_t kCurrentPacketVersion = 9;
 // Building type package versions
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
 constexpr uint16_t kCurrentPacketVersionConstructionsite = 5;
-constexpr uint16_t kCurrentPacketPFBuilding = 2;
+constexpr uint16_t kCurrentPacketPFBuilding = 3;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 8;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 11;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 7;
@@ -73,6 +73,7 @@ constexpr uint16_t kCurrentPacketVersionTrainingsite = 7;
  * Dismantlesite: v1.1 = 1
  * Constructionsite: v1.1 = 5
  * PFBuilding: v1.1 = 2
+ * - 2 -> 3: added evict worker
  * Militarysite: v1.1 = 7
  * - 7 -> 8: Refactored soldier request handling
  * Productionsite: v1.1 = 9
@@ -260,7 +261,7 @@ void MapBuildingdataPacket::read_partially_finished_building(PartiallyFinishedBu
                                                              MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketPFBuilding) {
+		if (packet_version >= 2 && packet_version <= kCurrentPacketPFBuilding) {
 			const TribeDescr& tribe = pfb.owner().tribe();
 			pfb.building_ = tribe.get_building_descr(tribe.safe_building_index(fr.c_string()));
 
@@ -302,9 +303,12 @@ void MapBuildingdataPacket::read_partially_finished_building(PartiallyFinishedBu
 			}
 
 			pfb.working_ = (fr.unsigned_8() != 0u);
-			pfb.work_steptime_ = Time(fr);
+			pfb.workstep_completiontime_ = Time(fr);
 			pfb.work_completed_ = fr.unsigned_32();
 			pfb.work_steps_ = fr.unsigned_32();
+			if (packet_version >= 3) {
+				pfb.last_remaining_time_ = Duration(fr);
+			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Partially Finished Building",
 			                            packet_version, kCurrentPacketPFBuilding);
@@ -889,20 +893,19 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				// Probably not worth adding graphic/text_layout as a dependency. It would
 				// require specifying the font styles too, but we already get that through
 				// Building::send_message().
-				// TODO(tothxa): The main problem is the hard-coded vspace gap.
+				// TODO(tothxa): The main problem are the hard-coded spacing gaps.
 				static const std::string paragraph_separator("</p><vspace gap=8><p>");
 
 				std::string body("<p>");
 				body += format(
 				   /** TRANSLATORS: The argument is the buiding name */
-				   _("%s: the building's inputs have changed."), productionsite.descr().descname());
+				   _("%s: the building’s inputs have changed."), productionsite.descr().descname());
 				if (!deleted_wares.empty() || deleted_unknown > 0) {
-					/** TRANSLATORS: Amount and type of space between two sentences */
-					body += pgettext("sentence_separator", " ");
-					body += _("The following wares have been deleted:");
 					body += paragraph_separator;
+					body += _("The following wares have been deleted:");
+					body += "</p><p>";
 
-					static const std::string list_entry(" • %s</p><p>");  // ugly, but simple
+					static const std::string list_entry("<space gap=8>• %s</p><p>");  // ugly, but simple
 					for (const WareAmount& deleted : deleted_wares) {
 						body += format(
 						   list_entry,
@@ -1244,9 +1247,10 @@ void MapBuildingdataPacket::write_partially_finished_building(const PartiallyFin
 	}
 
 	fw.unsigned_8(static_cast<uint8_t>(pfb.working_));
-	pfb.work_steptime_.save(fw);
+	pfb.workstep_completiontime_.save(fw);
 	fw.unsigned_32(pfb.work_completed_);
 	fw.unsigned_32(pfb.work_steps_);
+	pfb.last_remaining_time_.save(fw);
 }
 
 void MapBuildingdataPacket::write_constructionsite(const ConstructionSite& constructionsite,

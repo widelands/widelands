@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2024 by the Widelands Development Team
+ * Copyright (C) 2020-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -594,6 +594,11 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                   "",
                   UI::Align::kRight) {
 
+	{
+		Profile prof(kAddOnLocaleVersions.c_str());
+		current_i18n_version_ = prof.pull_section("global").get_natural("websitemaps", 0);
+	}
+
 	installed_addons_box_.set_flag(UI::Panel::pf_unlimited_size, true);
 	browse_addons_box_.set_flag(UI::Panel::pf_unlimited_size, true);
 	maps_box_.set_flag(UI::Panel::pf_unlimited_size, true);
@@ -1005,7 +1010,6 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 				}
 			}
 		}
-		assert(!upgrades.empty());
 		if (nr_full_updates > 0 && (!all_verified || !matches_keymod(SDL_GetModState(), KMOD_CTRL))) {
 			// We ask for confirmation only for real upgrades. i18n-only upgrades are done silently.
 			std::string text = format(
@@ -1029,6 +1033,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		for (const auto& pair : upgrades) {
 			install_or_upgrade(pair.first, !pair.second);
 		}
+		install_websitemaps_translations_if_needed();
 		rebuild_installed();
 		rebuild_browse();
 		update_dependency_errors();
@@ -1303,8 +1308,9 @@ void AddOnsCtrl::world_filter_maps_changed(const std::string& which) {
 }
 
 void AddOnsCtrl::check_enable_move_buttons() {
-	const bool enable_move_buttons =
-	   tabs_.active() == 0 && installed_addons_box_.focused_child() != nullptr;
+	const bool enable_move_buttons = tabs_.active() == 0 &&
+	                                 installed_addons_box_.focused_child() != nullptr &&
+	                                 !AddOns::g_addons.empty();
 	for (UI::Button* b : {&move_top_, &move_up_, &move_down_, &move_bottom_}) {
 		b->set_enabled(enable_move_buttons);
 	}
@@ -1363,7 +1369,7 @@ void AddOnsCtrl::refresh_remotes(const bool showall) {
 			progress.step(format_l(step_message, (100.0 * counter / nr_orig_entries)));
 
 			try {
-				remotes_[i].reset(new AddOns::AddOnInfo(net().fetch_one_remote(names[i])));
+				remotes_[i] = std::make_shared<AddOns::AddOnInfo>(net().fetch_one_remote(names[i]));
 			} catch (const std::exception& e) {
 				log_err("Skip add-on %s because: %s", names[i].c_str(), e.what());
 				names[i] = names.back();
@@ -1606,6 +1612,10 @@ void AddOnsCtrl::rebuild_browse() {
 
 	if ((browse_addons_inner_wrapper_.get_scrollbar() != nullptr) && (scrollpos_b != 0u)) {
 		browse_addons_inner_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_b);
+	}
+
+	if (current_i18n_version_ < net().websitemaps_i18n_version()) {
+		has_upgrades.emplace_back(_("Translations for website maps"));
 	}
 
 	upgrade_all_.set_title(format(_("Upgrade all (%u)"), has_upgrades.size()));
@@ -2045,6 +2055,8 @@ void AddOnsCtrl::install_map(std::shared_ptr<AddOns::AddOnInfo> remote) {
 	}
 	g_fs->fs_rename(temp_file, new_path);
 
+	install_websitemaps_translations_if_needed();
+
 	rebuild_maps();
 	update_dependency_errors();
 }
@@ -2057,16 +2069,17 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 	   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, remote->descname());
 	w.set_message_1(format(_("Downloading ‘%s’…"), remote->descname()));
 
-	std::string temp_dir = kTempFileDir + FileSystem::file_separator() + timestring() + ".addon." +
-	                       remote->internal_name + kTempFileExtension;
-	if (g_fs->file_exists(temp_dir)) {
-		g_fs->fs_unlink(temp_dir);
-	}
 	g_fs->ensure_directory_exists(kAddOnDir);
 
 	bool need_to_rebuild_texture_atlas = false;
 	bool enable_theme = false;
 	if (!only_translations) {
+		std::string temp_dir = kTempFileDir + FileSystem::file_separator() + timestring() +
+		                       ".addon." + remote->internal_name + kTempFileExtension;
+		if (g_fs->file_exists(temp_dir)) {
+			g_fs->fs_unlink(temp_dir);
+		}
+
 		bool success = false;
 		g_fs->ensure_directory_exists(temp_dir);
 		try {
@@ -2126,57 +2139,7 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 		}
 	}
 
-	assert(!g_fs->file_exists(temp_dir));
-	g_fs->ensure_directory_exists(temp_dir);
-	try {
-		w.progressbar().set_state(0);
-		w.progressbar().set_total(1);
-		int64_t nr_translations = 0;
-		w.set_message_3("");
-		net().download_i18n(
-		   remote->internal_name, temp_dir,
-		   [this, &w, &nr_translations](const std::string& f, const int64_t l) {
-			   w.set_message_2(f);
-			   w.set_message_3(format(_("%1% / %2%"), l, nr_translations));
-			   w.progressbar().set_state(l);
-			   do_redraw_now();
-			   if (w.is_dying()) {
-				   throw OperationCancelledByUserException();
-			   }
-		   },
-		   [&w, &nr_translations](const std::string& /* unused */, const int64_t l) {
-			   nr_translations = l;
-			   w.progressbar().set_total(std::max<int64_t>(l, 1));
-		   });
-
-		for (const std::string& n : g_fs->list_directory(temp_dir)) {
-			install_translation(n, remote->internal_name);
-		}
-		i18n::clear_addon_translations_cache(remote->internal_name);
-		for (auto& pair : AddOns::g_addons) {
-			if (pair.first->internal_name == remote->internal_name) {
-				pair.first->i18n_version = remote->i18n_version;
-				break;
-			}
-		}
-		Profile prof(kAddOnLocaleVersions.c_str());
-		prof.pull_section("global").set_natural(remote->internal_name.c_str(), remote->i18n_version);
-		prof.write(kAddOnLocaleVersions.c_str(), false);
-	} catch (const OperationCancelledByUserException&) {
-		log_info("install translations for %s cancelled by user", remote->internal_name.c_str());
-	} catch (const std::exception& e) {
-		log_err("install translations for %s: %s", remote->internal_name.c_str(), e.what());
-		w.set_visible(false);
-		UI::WLMessageBox m(
-		   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-		   format(_("The translations for the add-on ‘%1$s’ could not be downloaded from the "
-		            "server. Installing/upgrading "
-		            "the translations will be skipped.\n\nError Message:\n%2$s"),
-		          remote->internal_name, e.what()),
-		   UI::WLMessageBox::MBoxType::kOk);
-		m.run<UI::Panel::Returncodes>();
-	}
-	g_fs->fs_unlink(temp_dir);
+	install_translations(remote->internal_name, remote->i18n_version, w);
 
 	WLApplication::get().init_plugin_shortcuts();
 	if (need_to_rebuild_texture_atlas) {
@@ -2195,6 +2158,89 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 	update_dependency_errors();
 	rebuild_installed();
 	rebuild_browse();
+}
+
+bool AddOnsCtrl::install_translations(const std::string& name,
+                                      uint32_t new_i18n_version,
+                                      ProgressIndicatorWindow& progress) {
+	std::string temp_dir = kTempFileDir + FileSystem::file_separator() + timestring() +
+	                       ".addoni18n." + name + kTempFileExtension;
+	assert(!g_fs->file_exists(temp_dir));
+	g_fs->ensure_directory_exists(temp_dir);
+	bool success = false;
+	try {
+		progress.progressbar().set_state(0);
+		progress.progressbar().set_total(1);
+		int64_t nr_translations = 0;
+		progress.set_message_3("");
+		net().download_i18n(
+		   name, temp_dir,
+		   [this, &progress, &nr_translations](const std::string& f, const int64_t l) {
+			   progress.set_message_2(f);
+			   progress.set_message_3(format(_("%1% / %2%"), l, nr_translations));
+			   progress.progressbar().set_state(l);
+			   do_redraw_now();
+			   if (progress.is_dying()) {
+				   throw OperationCancelledByUserException();
+			   }
+		   },
+		   [&progress, &nr_translations](const std::string& /* unused */, const int64_t l) {
+			   nr_translations = l;
+			   progress.progressbar().set_total(std::max<int64_t>(l, 1));
+		   });
+
+		for (const std::string& n : g_fs->list_directory(temp_dir)) {
+			install_translation(n, name);
+		}
+		i18n::clear_addon_translations_cache(name);
+		for (auto& pair : AddOns::g_addons) {
+			if (pair.first->internal_name == name) {
+				pair.first->i18n_version = new_i18n_version;
+				break;
+			}
+		}
+		Profile prof(kAddOnLocaleVersions.c_str());
+		prof.pull_section("global").set_natural(name.c_str(), new_i18n_version);
+		prof.write(kAddOnLocaleVersions.c_str(), false);
+
+		success = true;
+	} catch (const OperationCancelledByUserException&) {
+		log_info("install translations for %s cancelled by user", name.c_str());
+		success = false;
+	} catch (const std::exception& e) {
+		log_err("install translations for %s: %s", name.c_str(), e.what());
+		success = false;
+		progress.set_visible(false);
+		UI::WLMessageBox m(
+		   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+		   format(_("The translations for the add-on ‘%1$s’ could not be downloaded from the "
+		            "server. Installing/upgrading "
+		            "the translations will be skipped.\n\nError Message:\n%2$s"),
+		          name, e.what()),
+		   UI::WLMessageBox::MBoxType::kOk);
+		m.run<UI::Panel::Returncodes>();
+	}
+	g_fs->fs_unlink(temp_dir);
+	return success;
+}
+
+void AddOnsCtrl::install_websitemaps_translations_if_needed() {
+	if (g_fs->list_directory(kDownloadedMapsDirFull).empty()) {
+		return;  // No website maps installed
+	}
+
+	const uint32_t remote_i18n_version = net().websitemaps_i18n_version();
+
+	if (current_i18n_version_ >= remote_i18n_version) {
+		return;  // No newer version available
+	}
+
+	ProgressIndicatorWindow progress(
+	   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Website Maps Translations"));
+	progress.set_message_1(_("Downloading website maps translations…"));
+	if (install_translations("websitemaps", remote_i18n_version, progress)) {
+		current_i18n_version_ = remote_i18n_version;
+	}
 }
 
 #if 0  // TODO(Nordfriese): Disabled autofix_dependencies for v1.0

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2024 by the Widelands Development Team
+ * Copyright (C) 2008-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -101,8 +101,8 @@ private:
 	std::map<NetHostInterface::ConnectionId, std::unique_ptr<BufferedConnection>> clients_;
 	/// The next client id that will be used
 	NetHostInterface::ConnectionId next_id_{1};
-	/// An io_service needed by asio. Primary needed for async operations.
-	asio::io_service io_service_;
+	/// An io_context needed by asio. Primary needed for async operations.
+	asio::io_context io_context_;
 	/// The acceptor we get IPv4 connection requests to.
 	asio::ip::tcp::acceptor acceptor_v4_;
 	/// The acceptor we get IPv6 connection requests to.

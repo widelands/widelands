@@ -1,9 +1,10 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # Javier Mora <morehash@gmail.com>, 2015
+# CansecoGPC, 2024
 # Madkat Here, 2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020,2023
 # Thadah D. Denyse <gontzalpujana@protonmail.com>, 2017
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020,2023\n"
+"Last-Translator: CansecoGPC, 2024\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -315,7 +316,7 @@ msgstr "Las expediciones se pueden iniciar en todos los puertos. Entonces se tra
 msgid ""
 "You can check out the needed wares in the Expedition tab of your port (it "
 "will appear in the last place when you’ve started an expedition)."
-msgstr ""
+msgstr "Puedes consultar las mercancías necesarias en la pestaña Expedición de tu puerto (aparecerá en último lugar cuando hayas iniciado una expedición)."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:152
 msgid "Now try this out. I will tell you later what the next steps are."
@@ -476,14 +477,14 @@ msgid ""
 "any number of soldiers. The desired number makes sure that defenders are "
 "requested by the port or headquarters, and once they are garrisoned there, "
 "they don't get sent away to serve other needs."
-msgstr ""
+msgstr "Para asegurarte de que están bien defendidos, puedes establecer el número deseado de soldados defensores para ambos en la pestaña Soldados, de forma similar a los edificios militares. Pero al mismo tiempo son almacenes, por lo que pueden albergar cualquier número de soldados. El número deseado asegura que los defensores son solicitados por el puerto o el cuartel general, y una vez que están acuartelados allí, no son enviados lejos para servir a otras necesidades."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:216
 msgid ""
 "On this map, there is no enemy to fear. In other games, you should set some "
 "defenders for your ports and make building one or two military "
 "fortifications around your new colonies a priority."
-msgstr ""
+msgstr "En este mapa, no hay ningún enemigo al que temer. En otros juegos, deberías establecer algunos defensores para tus puertos y dar prioridad a la construcción de una o dos fortificaciones militares alrededor de tus nuevas colonias."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:223
 msgid "Our mission"
@@ -720,13 +721,13 @@ msgid ""
 "As you can see, ferries can be produced quite quickly, but you don't need to"
 " worry about wasted materials, because ferry yards normally only produce "
 "them on demand, when there are unserviced waterways."
-msgstr ""
+msgstr "Como puede ver, los transbordadores pueden fabricarse con bastante rapidez, pero no tiene que preocuparse por los materiales desperdiciados, porque los astilleros de transbordadores normalmente sólo los fabrican bajo demanda, cuando hay vías navegables sin servicio."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:340
 msgid ""
 "As long as a ferry services a waterway, its lifetime is unlimited, but "
 "unemployed ferries will rot away and eventually sink."
-msgstr ""
+msgstr "Mientras un transbordador preste servicio a una vía navegable, su vida útil es ilimitada, pero los transbordadores parados se pudren y acaban hundiéndose."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349

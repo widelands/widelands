@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2024 by the Widelands Development Team
+ * Copyright (C) 2003-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  */
 
 #include "ui_basic/tabpanel.h"
+
+#include <algorithm>
 
 #include <SDL_mouse.h>
 
@@ -430,8 +432,8 @@ void TabPanel::draw(RenderTarget& dst) {
 			// Scale the image down if needed, but keep the ratio.
 			constexpr int kMaxImageSize = kTabPanelButtonHeight - 2 * kTabPanelImageMargin;
 			double image_scale =
-			   std::min(1., std::min(static_cast<double>(kMaxImageSize) / tabs_[idx]->pic->width(),
-			                         static_cast<double>(kMaxImageSize) / tabs_[idx]->pic->height()));
+			   std::min({1., static_cast<double>(kMaxImageSize) / tabs_[idx]->pic->width(),
+			             static_cast<double>(kMaxImageSize) / tabs_[idx]->pic->height()});
 
 			uint16_t picture_width = image_scale * tabs_[idx]->pic->width();
 			uint16_t picture_height = image_scale * tabs_[idx]->pic->height();

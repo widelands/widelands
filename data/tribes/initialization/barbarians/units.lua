@@ -370,7 +370,7 @@ wl.Descriptions():new_tribe {
                   -- TRANSLATORS: Helptext for a Barbarian ware: Hammer, part 1
                   pgettext("ware", "The hammer is an essential tool."),
                   -- TRANSLATORS: Helptext for a Barbarian ware: Hammer, part 2
-                  pgettext("barbarians_ware", "Geologists, builders, blacksmiths and helmsmiths all need a hammer. Make sure you’ve always got some in reserve! They are one of the basic tools produced at the metal workshop (but cease to be produced by the building if it is enhanced to an ax workshop and war mill).")
+                  pgettext("barbarians_ware", "Geologists, builders, blacksmiths, helmsmiths and shipwrights all need a hammer. Make sure you’ve always got some in reserve! They are one of the basic tools produced at the metal workshop (but cease to be produced by the building if it is enhanced to an ax workshop and war mill).")
                }
             }
          },
@@ -1707,8 +1707,12 @@ wl.Descriptions():new_tribe {
             },
             -- TRANSLATORS: Note helptext for a Barbarian training site: Battle Arena
             note = pgettext("barbarians_building", "Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their initial level."),
-            -- TRANSLATORS: Performance helptext for a Barbarian training site: Battle Arena
-            performance = pgettext("barbarians_building", "If all needed wares are delivered in time, a battle arena can train evade for one soldier from 0 to the highest level in %s on average."):bformat(format_minutes_seconds(1, 10))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian training site: Battle Arena, part 1
+               pgettext("barbarians_building", "If all needed wares are delivered in time, a battle arena can train one soldier one level in evade in %s on average."):bformat(format_seconds(36)),
+               -- TRANSLATORS: Performance helptext for a Barbarian training site: Battle Arena, part 2
+               pgettext("barbarians_building", "Complete training of one soldier takes %s on average."):bformat(format_minutes_seconds(1, 12))
+            }
          }
       },
       {
@@ -1726,8 +1730,12 @@ wl.Descriptions():new_tribe {
             },
             -- TRANSLATORS: Note helptext for a Barbarian building: Training Camp
             note = pgettext("barbarians_building", "Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their initial level."),
-            -- TRANSLATORS: Performance helptext for a Barbarian training site: Training Camp
-            performance = pgettext("barbarians_building", "If all needed wares are delivered in time, a training camp can train one new soldier in attack and health to the final level in %s on average."):bformat(format_minutes_seconds(4, 40))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian training site: Training Camp, part 1
+               pgettext("barbarians_building", "If all needed wares are delivered in time, a training camp can train one soldier one level in attack or health in %s on average."):bformat(format_seconds(36)),
+               -- TRANSLATORS: Performance helptext for a Barbarian training site: Training Camp, part 2
+               pgettext("barbarians_building", "Complete training of one soldier takes %s on average."):bformat(format_minutes_seconds(5, 10))
+            }
          }
       },
 
@@ -1852,7 +1860,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a Barbarian production site: Weaving Mill
             lore_author = pgettext("barbarians_building", "Khantarakh, ‘The Modern Barbarian Economy’,<br>9ᵗʰ cowhide ‘Seafaring and Conquest’"),
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Weaving Mill
-            purpose = pgettext("barbarians_building", "Weaves cloth out of reed.")
+            purpose = pgettext("barbarians_building", "Weaves cloth out of reed."),
+            -- TRANSLATORS: Performance helptext for a Barbarian production site: Weaving Mill
+            performance = pgettext("barbarians_building", "The weaving mill needs %s on average to produce one cloth."):bformat(format_seconds(49))
          }
       },
 

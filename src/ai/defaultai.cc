@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2024 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,6 +28,7 @@
 #include "base/macros.h"
 #include "base/time_string.h"
 #include "base/wexception.h"
+#include "commands/cmd_set_ware_target_quantity.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/road.h"
@@ -49,7 +50,6 @@
 #include "logic/maphollowregion.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
-#include "logic/playercommand.h"
 
 namespace AI {
 
@@ -3219,7 +3219,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	verb_log_dbg_time(game().get_gametime(), "AI %u builds %s at %d,%d",
 	                  static_cast<unsigned>(player_number()), best_building->desc->name().c_str(),
 	                  proposed_coords.x, proposed_coords.y);
-	game().send_player_build(player_number(), proposed_coords, best_building->id);
+	game().send_player_build_building(player_number(), proposed_coords, best_building->id);
 	blocked_fields.add(proposed_coords, game().get_gametime() + Duration(2 * 60 * 1000));
 
 	// resetting new_building_overdue
@@ -3452,9 +3452,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 
 			if (pda.action == Widelands::DiplomacyAction::kInvite && accept) {
 				const bool other_alone = player_statistics.get_is_alone(pda.sender);
-				const int32_t ots = other_alone ?
-				                       diploscore - static_cast<uint32_t>(RNG::static_rand(10)) :
-				                       player_statistics.get_team_average_score(other_tn);
+				const int32_t ots = other_alone ? diploscore - RNG::static_rand(10) :
+				                                  player_statistics.get_team_average_score(other_tn);
 				if (!other_alone && g_verbose) {
 					other_team_score_str = format(" and team score %d", ots);
 				}
@@ -5584,21 +5583,18 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[37] = -1;
 			inputs[38] = -1;
 			inputs[39] = -1;
-			if (productionsites.size() / 3 > static_cast<uint32_t>(bo.total_count()) &&
-			    get_stocklevel(bo, gametime) < 20) {
+			if (productionsites.size() / 3 > bo.total_count() && get_stocklevel(bo, gametime) < 20) {
 				inputs[40] = static_cast<int>(persistent_data->trees_around_cutters < 40) * 1;
 				inputs[41] = static_cast<int>(persistent_data->trees_around_cutters < 60) * 1;
 				inputs[42] = static_cast<int>(persistent_data->trees_around_cutters < 80) * 1;
 			}
-			if (productionsites.size() / 4 > static_cast<uint32_t>(bo.total_count()) &&
-			    get_stocklevel(bo, gametime) < 20) {
+			if (productionsites.size() / 4 > bo.total_count() && get_stocklevel(bo, gametime) < 20) {
 				inputs[43] = static_cast<int>(persistent_data->trees_around_cutters < 40) * 2;
 				inputs[44] = static_cast<int>(persistent_data->trees_around_cutters < 60) * 2;
 				inputs[45] = static_cast<int>(persistent_data->trees_around_cutters < 80) * 2;
 			}
 
-			if (productionsites.size() / 2 > static_cast<uint32_t>(bo.total_count()) &&
-			    get_stocklevel(bo, gametime) < 10) {
+			if (productionsites.size() / 2 > bo.total_count() && get_stocklevel(bo, gametime) < 10) {
 				inputs[46] = static_cast<int>(persistent_data->trees_around_cutters < 20) * 1;
 				inputs[47] = static_cast<int>(persistent_data->trees_around_cutters < 40) * 1;
 				inputs[48] = static_cast<int>(persistent_data->trees_around_cutters < 60) * 1;
@@ -7994,7 +7990,7 @@ void DefaultAI::pre_calculating_needness_of_buildings(const Time& gametime) {
 		// we check if a previously not buildable Building of the basic economy is buildable again
 		// If so and we don't have basic economy achieved we add it to basic buildings list
 		// This should only happen in scenarios via scripting
-		if (!basic_economy_established && bo.basic_amount > static_cast<uint32_t>(bo.total_count()) &&
+		if (!basic_economy_established && bo.basic_amount > bo.total_count() &&
 		    bo.buildable(*player_)) {
 			persistent_data->remaining_basic_buildings.emplace(bo.id, bo.basic_amount);
 		}

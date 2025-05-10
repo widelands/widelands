@@ -1,9 +1,10 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # adrien vigneron <adrien.v@ml1.net>, 2016
 # C138, 2022-2023
+# David D, 2025
 # GunChleoc, 2014
 # GunChleoc, 2014
 # Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
@@ -16,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-04-19 03:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: C138, 2022-2023\n"
+"Last-Translator: David D, 2025\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -875,8 +876,8 @@ msgid ""
 "May Satul warm you, Jundlina. My name is Ostur and I construct ships. I have"
 " invented a new kind of ship: smaller than those we are used to, but much "
 "sturdier. If we build them correctly, I am confident that we can sail a much"
-" longer distance with them and maybe escape from Lutas’ influence."
-msgstr "Que Satul te réchauffe, Jundlina. Mon nom est Ostur et je construis des navires. J'ai inventé un nouveau genre de navire : plus petit que ceux auxquels nous sommes habitués, mais beaucoup plus robuste. Si nous les construisons correctement, je suis persuadé que nous pourrons aller bien plus loin avec eux et peut-être échapper à l'influence de Lutas."
+" longer distance with them and maybe escape from Lutas’s influence."
+msgstr "Que Satul te réchauffe, Jundlina. Mon nom est Ostur et je construis des navires. J'ai inventé un nouveau genre de navire : plus petit que ceux auxquels nous sommes habitués, mais beaucoup plus robuste. Si nous les construisons correctement, je suis persuadé que nous pourrons aller bien plus loin avec eux et peut-être échapper à l'influence de Lutas."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:454

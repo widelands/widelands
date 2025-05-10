@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # Tóth András <txa-dev@posteo.hu>, 2021
@@ -10,17 +10,19 @@
 # GunChleoc, 2014,2016
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016-2018
-# Tóth András <txa-dev@posteo.hu>, 2021-2022,2024
+# Tóth András <txa-dev@posteo.hu>, 2021-2025
 # Tóth András <txa-dev@posteo.hu>, 2023
+# Zoltan Kloczka, 2025
+# Zoltan Kloczka, 2025
 # zone <z-one@freemail.hu>, 2015
 # zone <z-one@freemail.hu>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-11-30 03:02+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2022,2024\n"
+"Last-Translator: zone <z-one@freemail.hu>, 2015\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -763,75 +765,75 @@ msgid ""
 "workplace and where any number of your wares can be stored until they are "
 "needed somewhere. So they act like a kind of town center, and to signify "
 "this, they get unique names."
-msgstr ""
+msgstr "Talán észrevetted, hogy a főhadiszállásod épületnév sora különbözik. Ez azért van, mert a főhadiszállás épülettípusa raktár. A raktárak olyan épületek, ahol a munkásaid pihenhetnek, amíg nincs munkahelyük, és ahol bármennyi árut tárolhatsz, amíg nincs rájuk szükség valahol. Tehát a raktárak afféle városközpontok, amik saját nevet kapnak."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:505
 msgid ""
 "The small crowns beside the name mark it as your headquarters. As you play "
 "Widelands, you will see three kinds of warehouses, marked by little icons:"
-msgstr ""
+msgstr "A név melletti kis koronák jelzik, hogy ez a főhadiszállásod. A Widelandsben háromféle raktárépülettel fogsz találkozni, amelyeknek különböző jele van:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:506
 msgid ""
 "The headquarters where you usually start the game. It is marked by small "
 "crowns: ♔"
-msgstr ""
+msgstr "A főhadiszállás, ahol általában a játékot kezded. Kis koronák jelölik: ♔"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:507
 msgid ""
 "Plain warehouses that simply hold wares and workers to keep them distributed"
 " all over your territory. They are marked by small houses: ⟰"
-msgstr ""
+msgstr "Egyszerű raktárak, amelyek csak tárolják az árukat és a munkásokat, hogy jobban el legyenek osztva a teljes területeden. Kis házikók jelölik őket: ⟰"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:508
 msgid ""
 "Ports that you’ll use in seafaring. They don’t only store your wares and "
 "workers, but can also load them on your ships to send them across the seas. "
 "They are marked by small anchors: ⚓"
-msgstr ""
+msgstr "Kikötők, amelyeket a hajózáshoz használsz majd. Ezek nem csak tárolják az árukat és a munkásokat, hanem itt hajóra is tudják rakni őket, ha át kell szállítani a tengeren. Kis horgonyok jelölik őket: ⚓"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:509
 msgid ""
 "All of them are assigned names automatically that match the tribe, but you "
 "can change their names to your liking too."
-msgstr ""
+msgstr "Mindegyik raktárépület automatikusan kap egy, a törzsre jellemző nevet, de ha szeretnéd, kedvedre át is nevezheted őket."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
 msgid "Change the name of your little village"
-msgstr ""
+msgstr "Nevezd át a kis településedet!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:519
 msgid "Change the name of your headquarters"
-msgstr ""
+msgstr "Változtasd meg a főhadiszállásod nevét!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid ""
 "In order to set a new name for your headquarters, first click on it to open "
 "its window."
-msgstr ""
+msgstr "Ahhoz, hogy új nevet adj a főhadiszállásodnak, először kattints rá az ablakának megnyitásához!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:521
 msgid "You will see an edit box at the top of the window showing the name."
-msgstr ""
+msgstr "Az ablak tetején találod a szerkeszthető szöveg mezőt a névvel."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:522
 msgid "All you have to do is delete the old name and type in the new one."
-msgstr ""
+msgstr "Csak annyit kell tenned, hogy kitörlöd a régi nevet, és beírod az újat."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:523
 msgid "When you’re done, just close the window."
-msgstr ""
+msgstr "Ha végeztél, zárd be az ablakot!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:528
 msgid "Be creative"
-msgstr ""
+msgstr "Legyél kreatív!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:529
 msgid ""
 "I see you closed the window without changing the name. I’m sure you can come"
 " up with something. But if you don’t want to, at least delete the old name, "
 "please, to show me you’ve found the editbox."
-msgstr ""
+msgstr "Látom, anélkül zártad be az ablakot, hogy megváltoztattad volna a nevet. Bízom benned, hogy ki tudsz találni valami jót. De ha nincs hozzá kedved, légy szíves, legalább töröld ki a régi nevet, hogy lássam, megtaláltad a név mezőt!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:540
 msgid "Archive all messages in your inbox"

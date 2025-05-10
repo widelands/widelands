@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
-# Alex Rijckaert, 2023
+# Alex Rijckaert, 2023-2024
 # CrisiusXIII <chris@cborn.nl>, 2021
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # FvZ, 2020
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-11-30 03:02+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Alex Rijckaert, 2023\n"
+"Last-Translator: Alex Rijckaert, 2023-2024\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -759,75 +759,75 @@ msgid ""
 "workplace and where any number of your wares can be stored until they are "
 "needed somewhere. So they act like a kind of town center, and to signify "
 "this, they get unique names."
-msgstr ""
+msgstr "Het is je misschien opgevallen dat de tellingslijn van het hoofdkantoor anders is. Dit komt omdat het een speciaal gebouwtype is dat magazijn heet. Magazijnen zijn gebouwen waar je arbeiders kunnen rusten tot ze aan een werkplaats worden toegewezen en waar een aantal van je goederen kunnen worden opgeslagen tot ze ergens nodig zijn. Ze fungeren dus als een soort stadscentrum en om dit aan te geven, krijgen ze unieke namen."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:505
 msgid ""
 "The small crowns beside the name mark it as your headquarters. As you play "
 "Widelands, you will see three kinds of warehouses, marked by little icons:"
-msgstr ""
+msgstr "De kleine kroontjes naast de naam geven aan dat het je hoofdkwartier is. Als je Widelands speelt, zie je drie soorten pakhuizen, gemarkeerd door kleine icoontjes:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:506
 msgid ""
 "The headquarters where you usually start the game. It is marked by small "
 "crowns: ♔"
-msgstr ""
+msgstr "Het hoofdkwartier waar je het spel meestal begint. Het wordt gemarkeerd door kleine kronen: ♔"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:507
 msgid ""
 "Plain warehouses that simply hold wares and workers to keep them distributed"
 " all over your territory. They are marked by small houses: ⟰"
-msgstr ""
+msgstr "Gewone pakhuizen die alleen maar goederen en arbeiders bevatten om ze over je hele territorium te verspreiden. Ze worden gemarkeerd door kleine huisjes: ⟰"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:508
 msgid ""
 "Ports that you’ll use in seafaring. They don’t only store your wares and "
 "workers, but can also load them on your ships to send them across the seas. "
 "They are marked by small anchors: ⚓"
-msgstr ""
+msgstr "Havens die je gebruikt in de zeevaart. Ze slaan niet alleen je goederen en arbeiders op, maar kunnen ze ook op je schepen laden om ze over de zeeën te sturen. Ze worden gemarkeerd door kleine ankers: ⚓"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:509
 msgid ""
 "All of them are assigned names automatically that match the tribe, but you "
 "can change their names to your liking too."
-msgstr ""
+msgstr "Ze krijgen allemaal automatisch een naam die bij de stam past, maar je kunt hun naam ook naar wens veranderen."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
 msgid "Change the name of your little village"
-msgstr ""
+msgstr "Verander de naam van je kleine dorp"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:519
 msgid "Change the name of your headquarters"
-msgstr ""
+msgstr "Wijzig de naam van je hoofdkantoor"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid ""
 "In order to set a new name for your headquarters, first click on it to open "
 "its window."
-msgstr ""
+msgstr "Om een nieuwe naam in te stellen voor je hoofdkantoor, klik je er eerst op om het venster te openen."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:521
 msgid "You will see an edit box at the top of the window showing the name."
-msgstr ""
+msgstr "Boven in het venster zie je een bewerkingsvak met de naam."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:522
 msgid "All you have to do is delete the old name and type in the new one."
-msgstr ""
+msgstr "Je hoeft alleen maar de oude naam te verwijderen en de nieuwe in te voeren."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:523
 msgid "When you’re done, just close the window."
-msgstr ""
+msgstr "Als je klaar bent, sluit je gewoon het venster."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:528
 msgid "Be creative"
-msgstr ""
+msgstr "Wees creatief"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:529
 msgid ""
 "I see you closed the window without changing the name. I’m sure you can come"
 " up with something. But if you don’t want to, at least delete the old name, "
 "please, to show me you’ve found the editbox."
-msgstr ""
+msgstr "Ik zie dat je het venster hebt gesloten zonder de naam te veranderen. Ik weet zeker dat je iets kunt verzinnen. Maar als je dat niet wilt, verwijder dan in ieder geval de oude naam om me te laten zien dat je de editbox hebt gevonden."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:540
 msgid "Archive all messages in your inbox"

@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
-# Alex Rijckaert, 2023-2024
+# Alex Rijckaert, 2023-2025
 # CrisiusXIII <chris@cborn.nl>, 2021
 # GunChleoc, 2016,2018
 # Foppe Benedictus <foppe.benedictus@gmail.com>, 2020
@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-08-03 02:40+0000\n"
+"POT-Creation-Date: 2025-05-01 03:23+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Alex Rijckaert, 2023-2024\n"
+"Last-Translator: Alex Rijckaert, 2023-2025\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -718,8 +718,8 @@ msgstr "Blokhuis"
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:50
 msgctxt "empire_building"
-msgid "Your soldiers have occupied your blockhouse."
-msgstr "Je soldaten hebben je blokhuis bezet."
+msgid "Your soldier has occupied your blockhouse."
+msgstr "Je soldaat heeft je blokhut bezet."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:52
@@ -1078,8 +1078,8 @@ msgstr "Houten Toren"
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:60
 msgctxt "frisians_building"
-msgid "Your soldiers have occupied your wooden tower."
-msgstr "Je soldaten hebben je houten toren bezet."
+msgid "Your soldier has occupied your wooden tower."
+msgstr "Je soldaat heeft je houten toren bezet."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:62
@@ -1350,52 +1350,53 @@ msgctxt "amazons_building"
 msgid "Dressmakery"
 msgstr "Kledingmakerij"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
-#. ...
+#. TRANSLATORS: Completed/Skipped/Did not start sewing a tunic because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:74
 msgid "sewing a tunic"
 msgstr "een tuniek naaien"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
+#. TRANSLATORS: Completed/Skipped/Did not start producing a light wooden armor
+#. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:86
 msgid "making a light wooden armor"
 msgstr "een licht houten harnas maken"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a wooden helmet because
+#. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:98
 msgid "making a wooden helmet"
 msgstr "een houten helm maken"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a warrior’s coat
+#. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:110
 msgid "sewing a warrior’s coat"
 msgstr "een krijgersmantel naaien"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making sturdy boots because
+#. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:122
 msgid "making sturdy boots"
 msgstr "stevige laarzen maken"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
-#. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making swift boots because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:134
 msgid "making swift boots"
 msgstr "snelle laarzen maken"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
-#. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making hero boots because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:146
 msgid "making hero boots"
 msgstr "heldenlaarzen maken"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
+#. TRANSLATORS: Completed/Skipped/Did not start making a padded vest because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:158
 msgid "making a padded vest"
 msgstr "een gewatteerd vest maken"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a padded protector
+#. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:170
 msgid "making a padded protector"
 msgstr "een gewatteerde beschermer maken"
@@ -1413,7 +1414,7 @@ msgid "Food Preserver"
 msgstr "Voedsel Conserverer"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:60
+#: ../../../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:59
 #: ../../../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:62
 #: ../../../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:71
 #: ../../../../data/tribes/buildings/productionsites/barbarians/tavern/init.lua:77
@@ -1430,7 +1431,7 @@ msgid "Furnace"
 msgstr "Smeltoven"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:59
+#: ../../../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:58
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:91
 #: ../../../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:95
 #: ../../../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:103
@@ -1446,8 +1447,8 @@ msgstr "Tuincentrum"
 
 #. TRANSLATORS: Completed/Skipped/Did not start enhancing the fertility of
 #. land because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:54
-#: ../../../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:68
+#: ../../../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:53
+#: ../../../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:67
 msgid "enhancing the fertility of land"
 msgstr "de vruchtbaarheid van het land verbeteren"
 
@@ -1515,31 +1516,31 @@ msgid "Hunter-Gatherer’s Hut"
 msgstr "Hut van de jager-verzamelaar"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:40
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:39
 msgid "gathering"
 msgstr "verzamelen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:51
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:50
 msgid "gathering meat"
 msgstr "vlees verzamelen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:63
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:62
 msgid "gathering fish"
 msgstr "vis verzamelen"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:76
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:75
 msgid "No Game, No Fish"
 msgstr "Geen Jacht, Geen Vis"
 
 #. TRANSLATORS: "Game" means animals that you can hunt
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:78
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:77
 msgid "Out of Game and Fish"
 msgstr "Buiten Jacht en Vis"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:80
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:79
 msgctxt "amazons_building"
 msgid ""
 "The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any"
@@ -1712,7 +1713,7 @@ msgstr "Steen Werkplaats"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:212
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:222
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:218
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:124
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:220
 msgid "making a shovel"
 msgstr "een schop produceren"
 
@@ -1742,7 +1743,7 @@ msgstr "een kapmes maken"
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:135
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:183
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:166
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:184
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:172
 msgid "making kitchen tools"
 msgstr "keukengerei produceren"
 
@@ -1751,7 +1752,7 @@ msgstr "keukengerei produceren"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:121
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:157
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:140
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:196
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:148
 msgid "making a hammer"
 msgstr "een hamer produceren"
 
@@ -1762,7 +1763,7 @@ msgstr "een beitel maken"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:171
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:220
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:184
 msgid "making needles"
 msgstr "naalden maken"
 
@@ -2464,7 +2465,7 @@ msgstr "Werktuigsmederij"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:69
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:105
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:101
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:172
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:100
 msgid "making a bread paddle"
 msgstr "een broodschep produceren"
 
@@ -2478,14 +2479,14 @@ msgstr "een paar emmers produceren"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:95
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:131
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:114
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:208
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:124
 msgid "making fire tongs"
 msgstr "een vuurtang produceren"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:108
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:160
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:136
 msgid "making a fishing net"
 msgstr "een visnet produceren"
 
@@ -2516,7 +2517,7 @@ msgstr "een zaag produceren"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:199
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:209
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:205
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:112
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:208
 msgid "making a scythe"
 msgstr "een zeis produceren"
 
@@ -2964,7 +2965,7 @@ msgstr "een vishengel produceren"
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:170
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:153
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:148
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:160
 msgid "making a hunting spear"
 msgstr "een jachtspeer produceren"
 
@@ -3477,7 +3478,7 @@ msgstr "Werktuigsmederij"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:88
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:136
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:88
 msgid "making a basket"
 msgstr "een mand produceren"
 
@@ -3694,12 +3695,12 @@ msgstr "Smederij"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:88
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:112
 msgid "forging a felling ax"
 msgstr "een kapbijl smeden"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:100
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:196
 msgid "forging a pick"
 msgstr "een pikhouweel smeden"
 
@@ -4207,79 +4208,79 @@ msgid "Training Glade"
 msgstr "Training Grasvelden"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:73
-#: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:68
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:218
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:58
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:78
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:76
-#: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:82
-#: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:42
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:66
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:76
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:75
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:77
+#: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:71
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:221
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:62
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:81
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:80
+#: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:85
+#: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:45
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:69
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:80
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:79
 msgid "sleeping"
 msgstr "slapen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:81
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:85
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "ontwijken soldaat opwaarderen van niveau 0 naar niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:95
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:99
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "ontwijken soldaat opwaarderen van niveau 1 naar niveau 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:109
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:113
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 2 to level 3"
 msgstr "ontwijken soldaat opwaarderen van niveau 2 naar niveau 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:124
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:128
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "Opwaarderen soldatenlevenspunten van niveau 0 naar niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:138
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:142
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "Opwaarderen soldatenlevenspunten van niveau 1 naar niveau 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:152
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:156
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "Opwaarderen soldatenlevenspunten van niveau 2 naar niveau 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:167
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:171
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "verdediging soldaat opwaarderen van niveau 0 naar niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:181
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:185
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "verdediging soldaat opwaarderen van niveau 1 naar niveau 2"
 
 #. TRANSLATORS: Amazon training site tooltip when it has no soldiers assigned
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:202
-#: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:110
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:206
+#: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:113
 msgctxt "amazons_building"
 msgid "No soldier to train!"
 msgstr "Geen soldaat om te trainen!"
 
 #. TRANSLATORS: Amazon training site tooltip when none of the present soldiers
 #. match the current training program
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:204
-#: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:112
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:208
+#: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:115
 msgctxt "amazons_building"
 msgid "No soldier found for this training level!"
 msgstr "Geen soldaat gevonden voor dit trainingsniveau!"
@@ -4291,13 +4292,13 @@ msgid "Warriors’ Gathering"
 msgstr "Bijeenkomst van krijgers"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:76
+#: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:79
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "Opwaarderen soldatenaanval van niveau 0 naar niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:90
+#: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:93
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "Opwaarderen soldatenaanval van niveau 1 naar niveau 2"
@@ -4309,41 +4310,41 @@ msgid "Dungeon"
 msgstr "Kerker"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:226
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:229
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "aanval soldaat opwaarderen van niveau 0 naar niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:240
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:243
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "aanval soldaat opwaarderen van niveau 1 naar niveau 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:254
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:257
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "aanval soldaat opwaarderen van niveau 2 naar niveau 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:268
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:271
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "aanval soldaat opwaarderen van niveau 3 naar niveau 4"
 
 #. TRANSLATORS: Atlantean training site tooltip when it has no soldiers
 #. assigned
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:287
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:138
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:290
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:142
 msgctxt "atlanteans_building"
 msgid "No soldier to train!"
 msgstr "Geen soldaat om te trainen!"
 
 #. TRANSLATORS: Atlantean training site tooltip when none of the present
 #. soldiers match the current training program
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:289
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:140
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:292
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:144
 msgctxt "atlanteans_building"
 msgid "No soldier found for this training level!"
 msgstr "Geen soldaat gevonden voor dit trainingsniveau!"
@@ -4355,31 +4356,31 @@ msgid "Labyrinth"
 msgstr "Labyrint"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:66
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:70
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "verdediging soldaat opwaarderen van niveau 0 naar niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:80
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:84
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "verdediging soldaat opwaarderen van niveau 1 naar niveau 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:94
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:98
 msgctxt "atlanteans_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "levenspunten soldaat opwaarderen van niveau 0 naar niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:107
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:111
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "ontwijken soldaat opwaarderen van niveau 0 naar niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:120
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:124
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "ontwijken soldaat opwaarderen van niveau 1 naar niveau 2"
@@ -4391,29 +4392,29 @@ msgid "Battle Arena"
 msgstr "Gevechtsarena"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:86
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:89
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "ontwijken soldaat opwaarderen van niveau 1 naar niveau 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:101
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:104
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "ontwijken soldaat opwaarderen van niveau 1 naar niveau 2"
 
 #. TRANSLATORS: Barbarian training site tooltip when it has no soldiers
 #. assigned
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:121
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:200
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:124
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:204
 msgctxt "barbarians_building"
 msgid "No soldier to train!"
 msgstr "Geen soldaat om te trainen!"
 
 #. TRANSLATORS: Barbarian training site tooltip when none of the present
 #. soldiers match the current training program
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:123
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:202
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:126
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:206
 msgctxt "barbarians_building"
 msgid "No soldier found for this training level!"
 msgstr "Geen soldaat gevonden voor dit trainingsniveau!"
@@ -4425,49 +4426,49 @@ msgid "Training Camp"
 msgstr "Trainingskamp"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:84
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:88
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "aanval soldaat opwaarderen van niveau 0 naar niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:98
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:102
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "aanval soldaat opwaarderen van niveau 1 naar niveau 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:112
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:116
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "aanval soldaat opwaarderen van niveau 2 naar niveau 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:126
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:130
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "aanval soldaat opwaarderen van niveau 3 naar niveau 4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:140
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:144
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "aanval soldaat opwaarderen van niveau 4 naar niveau 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:154
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:158
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "levenspunten soldaat opwaarderen van niveau 0 naar niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:167
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:171
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "levenspunten soldaat opwaarderen van niveau 1 naar niveau 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:181
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:185
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "levenspunten soldaat opwaarderen van niveau 2 naar niveau 3"
@@ -4479,25 +4480,25 @@ msgid "Arena"
 msgstr "Arena"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:90
-#: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:50
+#: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:93
+#: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:53
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "ontwijken soldaat opwaarderen van niveau 0 naar niveau 1"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
-#: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:108
-#: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:81
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:190
+#: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:111
+#: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:84
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:193
 msgctxt "empire_building"
 msgid "No soldier to train!"
 msgstr "Geen soldaat om te trainen!"
 
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program
-#: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:110
-#: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:83
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:192
+#: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:113
+#: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:86
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:195
 msgctxt "empire_building"
 msgid "No soldier found for this training level!"
 msgstr "Geen soldaat gevonden voor dit trainingsniveau!"
@@ -4509,7 +4510,7 @@ msgid "Colosseum"
 msgstr "Colosseum"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:63
+#: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:66
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "ontwijken soldaat opwaarderen van niveau 1 naar niveau 2"
@@ -4521,49 +4522,49 @@ msgid "Training Camp"
 msgstr "Trainingskamp"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:74
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:77
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "aanval soldaat opwaarderen van niveau 0 naar niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:88
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:91
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "aanval soldaat opwaarderen van niveau 1 naar niveau 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:102
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:105
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "aanval soldaat opwaarderen van niveau 2 naar niveau 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:116
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:119
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "aanval soldaat opwaarderen van niveau 3 naar niveau 4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:130
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:133
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "levenspunten soldaat opwaarderen van niveau 0 naar niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:143
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:146
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "levenspunten soldaat opwaarderen van niveau 1 naar niveau 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:157
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:160
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "levenspunten soldaat opwaarderen van niveau 2 naar niveau 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:171
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:174
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
 msgstr "levenspunten soldaat opwaarderen van niveau 3 naar niveau 4"
@@ -4575,46 +4576,46 @@ msgid "Training Arena"
 msgstr "Trainingsarena"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:84
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:88
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "aanval soldaat opwaarderen van niveau 3 naar niveau 4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:99
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:104
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "aanval soldaat opwaarderen van niveau 4 naar niveau 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:115
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:121
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 5 to level 6"
 msgstr "aanval soldaat opwaarderen van niveau 5 naar niveau 6"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:132
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:139
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "verdediging soldaat opwaarderen van niveau 1 naar niveau 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:148
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:156
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "levenspunten soldaat opwaarderen van niveau 1 naar niveau 2"
 
 #. TRANSLATORS: Frisian training site tooltip when it has no soldiers assigned
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:169
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:166
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:178
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:175
 msgctxt "frisians_building"
 msgid "No soldier to train!"
 msgstr "Geen soldaat om te trainen!"
 
 #. TRANSLATORS: Frisian training site tooltip when none of the present
 #. soldiers match the current training program
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:171
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:168
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:180
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:177
 msgctxt "frisians_building"
 msgid "No soldier found for this training level!"
 msgstr "Geen soldaat gevonden voor dit trainingsniveau!"
@@ -4626,31 +4627,31 @@ msgid "Training Camp"
 msgstr "Trainingskamp"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:83
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:87
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "aanval soldaat opwaarderen van niveau 0 naar niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:98
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:103
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "aanval soldaat opwaarderen van niveau 1 naar niveau 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:114
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:120
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "aanval soldaat opwaarderen van niveau 2 naar niveau 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:130
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:137
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "levenspunten soldaat opwaarderen van niveau 0 naar niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:145
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:153
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "verdediging soldaat opwaarderen van niveau 0 naar niveau 1"

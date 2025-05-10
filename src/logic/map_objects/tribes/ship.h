@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2024 by the Widelands Development Team
+ * Copyright (C) 2010-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -151,7 +151,7 @@ struct Ship : Bob {
 	struct Battle {
 		enum class Phase : uint8_t {
 			kNotYetStarted = 0,
-			kAttackerMovingTowardsOpponent = 1,
+			kMovingToBattlePositions = 1,
 			kAttackersTurn = 2,
 			kDefendersTurn = 3,
 			kAttackerAttacking = 4,
@@ -164,6 +164,7 @@ struct Ship : Bob {
 
 		OPtr<Ship> opponent;
 		Coords attack_coords;
+		Coords battle_position{Coords::null()};
 		std::vector<uint32_t> attack_soldier_serials;
 		Time time_of_last_action;
 		uint32_t pending_damage{0U};

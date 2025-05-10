@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2024 by the Widelands Development Team
+ * Copyright (C) 2008-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,9 @@
 #include <memory>
 
 #include "base/log.h"
+#include "commands/cmd_set_ware_target_quantity.h"
+#include "commands/cmd_set_worker_target_quantity.h"
+#include "economy/flag.h"
 #include "graphic/font_handler.h"
 #include "graphic/style_manager.h"
 #include "io/profile.h"
@@ -29,7 +32,6 @@
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/player.h"
-#include "logic/playercommand.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 #include "ui_basic/messagebox.h"
