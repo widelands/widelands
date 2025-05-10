@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
+# 247e0b0e3f59f71cef8a30dd79033969_321a326 <46457d161282ca8bdcca64d100622306_122920>, 2015
 # Tóth András <txa-dev@posteo.hu>, 2021
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016-2019
 # GunChleoc, 2016,2018
@@ -21,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-05-01 03:23+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2024\n"
+"Last-Translator: zone <z-one@freemail.hu>, 2015\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -679,11 +680,11 @@ msgstr "A mozdíthatatlan tereptárgyak (kövek, fák, stb.) eltávolítása ese
 #. the map height heat map is shown
 #: ../../../../src/editor/editorinteractive.cc:495
 msgid "Disable height heat map"
-msgstr ""
+msgstr "Magasság hőtérkép kikapcsolása"
 
 #: ../../../../src/editor/editorinteractive.cc:496
 msgid "Enable height heat map"
-msgstr ""
+msgstr "Magasság hőtérkép bekapcsolása"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
@@ -699,17 +700,17 @@ msgstr "Rács megjelenítése"
 #. the oceans are shown
 #: ../../../../src/editor/editorinteractive.cc:511
 msgid "Hide Oceans"
-msgstr ""
+msgstr "Tengerek elrejtése"
 
 #: ../../../../src/editor/editorinteractive.cc:511
 msgid "Show Oceans"
-msgstr ""
+msgstr "Tengerek megjelenítése"
 
 #: ../../../../src/editor/editorinteractive.cc:514
 msgid ""
 "Display separate water bodies with differently coloured overlays to see "
 "which coasts can be connected by shipping routes"
-msgstr ""
+msgstr "Az összefüggő vízterületek azonos színnel mutatása, hogy látható legyen, melyik helyek érhetők el egymástól hajókkal, és melyek nem."
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
@@ -1718,7 +1719,7 @@ msgstr "Véletlenszerű"
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:463
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:99
 msgid "The tribe will be selected at random."
-msgstr ""
+msgstr "A törzs véletlenszerűen lesz kiválasztva."
 
 #. * TRANSLATORS: Button tooltip in the editor for using a player's starting
 #. position tool
@@ -1983,7 +1984,7 @@ msgstr "A Widelands nem tud elindulni, mert a grafikus meghajtóprogramod túl r
 #: ../../../../src/graphic/gl/initialize.cc:227
 #, c-format
 msgid "The %1$s version needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "Az %1$s szükséges verziója %2$u.%3$u vagy újabb."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -3230,41 +3231,41 @@ msgstr "Játék elmentve"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:891
 msgid "Building’s inputs changed!"
-msgstr ""
+msgstr "Az épület nyersanyagai megváltoztak!"
 
 #. * TRANSLATORS: The argument is the buiding name
 #: ../../../../src/map_io/map_buildingdata_packet.cc:902
 #, c-format
 msgid "%s: the building’s inputs have changed."
-msgstr ""
+msgstr "%s: az épület nyersanyagai megváltoztak."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:905
 msgid "The following wares have been deleted:"
-msgstr ""
+msgstr "Az alábbi áruk elvesztek:"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:912
 #, c-format
 msgid "%1$u piece of %2$s"
 msgid_plural "%1$u pieces of %2$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u db. %2$s"
+msgstr[1] "%1$u db. %2$s"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:918
 #, c-format
 msgid "%1$u piece of an unknown ware"
 msgid_plural "%1$u pieces of unknown wares"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$u db. ismeretlen áru"
+msgstr[1] "%1$u db. ismeretlen áru"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:924
 msgid ""
 "The game was probably saved with a different Widelands version or with "
 "different enabled add-ons."
-msgstr ""
+msgstr "A játék valószínűleg a Widelands másik verziójával vagy más bővítményekkel volt elmentve."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:927
 msgid "Please review the current production programs and input settings."
-msgstr ""
+msgstr "Ellenőrizd az új anyagszükségleteket és a nyersanyagok beállításait!"
 
 #: ../../../../src/map_io/map_saver.cc:85
 #, c-format
@@ -4739,11 +4740,11 @@ msgstr "Küldhetsz üzenetet a Widelands Fejlesztőcsapatnak is. Igyekszünk meg
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:754
 msgid "Manage your installed add-ons"
-msgstr ""
+msgstr "A telepített bővítmények kezelése"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:756
 msgid "Browse and install add-ons available on the server"
-msgstr ""
+msgstr "A kiszolgálón található bővítmények böngészése és telepítése"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:758
 #, c-format
@@ -4759,7 +4760,7 @@ msgstr "Fejlesztőknek"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:762
 msgid "Tools for add-on developers"
-msgstr ""
+msgstr "Bővítmény-fejlesztői eszközök"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:766
@@ -4807,7 +4808,7 @@ msgstr "Bővítmények szűrése név alapján"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:790
 msgid "Filter maps by name"
-msgstr ""
+msgstr "Térképek szűrése név alapján"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:801
 #, c-format
@@ -5074,7 +5075,7 @@ msgstr "%1% / %2%"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1984
 #, c-format
 msgid "‘%s’"
-msgstr ""
+msgstr "„%s”"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1992
 #, c-format
@@ -6857,7 +6858,7 @@ msgstr "(C) %1%-%2%, Widelands fejlesztőcsapat • Licensz: GNU General Public 
 
 #: ../../../../src/ui_fsmenu/main.cc:890
 msgid "Click for the main menu"
-msgstr ""
+msgstr "Kattints a kihagyáshoz!"
 
 #: ../../../../src/ui_fsmenu/main.cc:968
 msgid "Desyncing Add-On Found"
@@ -7342,7 +7343,7 @@ msgstr "Ablakméret"
 #. * TRANSLATORS: short description for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:168
 msgid "Let the system draw the mouse cursor"
-msgstr ""
+msgstr "Rendszer egérmutató használata"
 
 #. * TRANSLATORS: tooltip text for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:170
@@ -7351,7 +7352,7 @@ msgid ""
 "and the cursor appears frozen during long operations. Disable it only if the"
 " cursor doesn’t appear right, or if you want it to be visible in screenshots"
 " or screencasts."
-msgstr ""
+msgstr "Hagyd bekapcsolva, ha minden megfelelően működik! Kikapcsolt állapotban az egérmutató rajzolása lassabb, a mozgása kevésbé egyenletes, várakozáskor egyáltalán nem is mozog. Csak akkor kapcsold ki, ha problémát észlelsz az egérmutatóval, vagy ha szeretnéd, ha látszana a képernyőképeken vagy videókon!"
 
 #: ../../../../src/ui_fsmenu/options.cc:179
 msgid "Accessibility mode for tooltips"
@@ -7515,7 +7516,7 @@ msgstr "Csak ha az egérmutató rajta van"
 #. 1080)'
 #: ../../../../src/ui_fsmenu/options.cc:589
 msgid "#%1% (%2%, %3%, %4%, %5%)"
-msgstr ""
+msgstr "#%1% (%2%, %3%, %4%, %5%)"
 
 #. * TRANSLATORS: Entry in the window size dropdown
 #: ../../../../src/ui_fsmenu/options.cc:603
@@ -7820,18 +7821,18 @@ msgstr "Ismeretlen parancssori beállítás: %s\nLehet, hogy az '=' hiányzik?"
 #: ../../../../src/wlapplication.cc:1785
 #, c-format
 msgid "Non-integer value for command line parameter --messagebox-timeout=%s"
-msgstr ""
+msgstr "Nem egész szám a parancssori --messagebox-timeout kapcsoló értéke: %s"
 
 #: ../../../../src/wlapplication.cc:1799
 #, c-format
 msgid ""
 "Value is out of range for command line parameter --messagebox-timeout=%s"
-msgstr ""
+msgstr "Nem használható a parancssori --messagebox-timeout kapcsoló értéke: %s"
 
 #: ../../../../src/wlapplication.cc:1867
 #, c-format
 msgid "Non-integer value for command line parameter --difficulty=%s"
-msgstr ""
+msgstr "Nem egész szám a parancssori --difficulty kapcsoló értéke: %s"
 
 #: ../../../../src/wlapplication.cc:1964
 #, c-format
@@ -8160,7 +8161,7 @@ msgstr "Képernyőkép készítése"
 
 #: ../../../../src/wlapplication_options.cc:385
 msgid "Change Music"
-msgstr ""
+msgstr "Zene váltás"
 
 #: ../../../../src/wlapplication_options.cc:390
 msgid "Open the Debug Console (developer tool)"
@@ -8252,7 +8253,7 @@ msgstr "Játékosok menü"
 
 #: ../../../../src/wlapplication_options.cc:521
 msgid "Toggle Height Heat Map"
-msgstr ""
+msgstr "Magasság hőtérkép ki/bekapcsolása"
 
 #: ../../../../src/wlapplication_options.cc:525
 msgid "Toggle Grid"
@@ -8260,7 +8261,7 @@ msgstr "Rács ki/bekapcsolása"
 
 #: ../../../../src/wlapplication_options.cc:529
 msgid "Toggle Oceans"
-msgstr ""
+msgstr "Tengerek megjelenítése ki/be"
 
 #: ../../../../src/wlapplication_options.cc:534
 msgid "Toggle Immovables"
@@ -8686,7 +8687,7 @@ msgstr "Menü"
 #: ../../../../src/wlapplication_options.cc:1415
 msgctxt "hotkey"
 msgid "Application"
-msgstr ""
+msgstr "Alkalmazás"
 
 #: ../../../../src/wlapplication_options.cc:1417
 msgctxt "hotkey"
@@ -9229,7 +9230,7 @@ msgstr "Expedíció lefújása"
 #: ../../../../src/wui/constructionsitewindow.cc:164
 #: ../../../../src/wui/dismantlesitewindow.cc:79
 msgid "Send the builder away"
-msgstr ""
+msgstr "Építőmunkás elküldése"
 
 #: ../../../../src/wui/constructionsitewindow.cc:170
 #: ../../../../src/wui/dismantlesitewindow.cc:85
@@ -10394,7 +10395,7 @@ msgstr "Épület elhelyezésekor mutassa-e az átfedő munkaterületeket."
 
 #: ../../../../src/wui/interactive_player.cc:484
 msgid "No current objectives"
-msgstr ""
+msgstr "Nincsenek kitűzött célok"
 
 #: ../../../../src/wui/interactive_player.cc:500
 #, c-format
@@ -11310,14 +11311,14 @@ msgstr "Lehetőséged van egyéni háttérzene használatára, ha a zenefájljai
 
 #: ../../../../src/wui/sound_options.cc:161
 msgid "Play the intro music at startup"
-msgstr ""
+msgstr "Zenei nyitány lejátszása indításkor"
 
 #: ../../../../src/wui/sound_options.cc:163
 msgid ""
 "Whether to play the intro music when Widelands is started. The splashscreen "
 "is only closed automatically when the intro music ends, but can be skipped "
 "by a keypress or a mouse click."
-msgstr ""
+msgstr "A Widelands indításakor lejátssza-e a zenei nyitányt. Ha be van kapcsolva, akkor a nyitóképernyő megvárja a nyitány végét, és csak utána indul a főmenü, de gombnyomással vagy kattintással átugorható."
 
 #: ../../../../src/wui/sound_options.cc:172
 msgctxt "sound_options"
