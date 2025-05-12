@@ -144,13 +144,9 @@ Program::~Program() {
 }
 
 void Program::build(const std::string& program_name) {
-#ifndef __EMSCRIPTEN__
 	std::string fragment_shader_source = read_file("shaders/" + program_name + ".fp");
 	std::string vertex_shader_source = read_file("shaders/" + program_name + ".vp");
-#else
-	std::string fragment_shader_source = read_file("shaders/webgl/" + program_name + ".fp");
-	std::string vertex_shader_source = read_file("shaders/webgl/" + program_name + ".vp");
-#endif
+
 	vertex_shader_.reset(new Shader(GL_VERTEX_SHADER));
 	vertex_shader_->compile(vertex_shader_source.c_str());
 	glAttachShader(program_object_, vertex_shader_->object());

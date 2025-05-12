@@ -1,4 +1,7 @@
-precision highp float;
+#define H(x)x
+#ifndef __EMSCRIPTEN__
+H(#)version 120
+#endif
 
 // Attributes.
 attribute vec2 attr_position;

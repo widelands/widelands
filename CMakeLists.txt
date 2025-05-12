@@ -625,9 +625,9 @@ install(
   PATTERN "CMakeLists.txt" EXCLUDE
 )
 
-if (UNIX AND NOT APPLE)
+if (UNIX AND NOT APPLE AND NOT ${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
   add_subdirectory(xdg)
-endif (UNIX AND NOT APPLE)
+endif (UNIX AND NOT APPLE AND NOT ${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
 
 # uninstall target
 # see https://gitlab.kitware.com/cmake/community/-/wikis/FAQ#can-i-do-make-uninstall-with-cmake

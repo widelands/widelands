@@ -1,4 +1,7 @@
-precision highp float;
+#define H(x)x
+#ifndef __EMSCRIPTEN__
+H(#)version 120
+#endif
 
 // Inputs.
 varying vec2 out_texture_position;
