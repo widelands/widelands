@@ -1,5 +1,7 @@
-#version 120
-
+#define H(x)x
+#ifndef __EMSCRIPTEN__
+H(#)version 120
+#endif
 uniform sampler2D u_texture;
 uniform sampler2D u_mask;
 

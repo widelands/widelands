@@ -1,4 +1,7 @@
-#version 120
+#define H(x)x
+#ifndef __EMSCRIPTEN__
+H(#)version 120
+#endif
 
 // Attributes.
 attribute float attr_brightness;

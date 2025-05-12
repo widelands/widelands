@@ -1,4 +1,7 @@
-#version 120
+#define H(x)x
+#ifndef __EMSCRIPTEN__
+H(#)version 120
+#endif
 
 // Inputs.
 varying vec2 out_texture_position;
