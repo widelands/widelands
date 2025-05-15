@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Alex Rijckaert, 2023
+# Alex Rijckaert, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-04-19 03:04+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
-"Last-Translator: Alex Rijckaert, 2023\n"
+"Last-Translator: Alex Rijckaert, 2025\n"
 "Language-Team: Dutch (https://app.transifex.com/widelands/teams/35159/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -413,8 +413,8 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:200
 msgid ""
 "The heavy weight plus the strong current was too much for the ship and it "
-"was pulled below the sea level by Lutas’ forces and we lost most men and all"
-" wares it carried."
+"was pulled below the sea level by Lutas’s forces and we lost most men and "
+"all wares it carried."
 msgstr ""
 "Het zware gewicht plus de sterke stroming was te veel voor het schip en het "
 "werd onder de zeespiegel getrokken door de krachten van Lutas en we verloren"
