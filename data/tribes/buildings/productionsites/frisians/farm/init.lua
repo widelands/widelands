@@ -65,15 +65,15 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
-            -- longest possible transition from tiny to ripe field:
-            --   2 * (150 + 225 + 250) = 1250 sec
+            -- nominal transition from tiny to ripe field (the longest possible transition is double):
+            --   150 + 225 + 250 = 625 sec
             --   see data/tribes/immovables/barleyfield/ and src/logic/map_objects/immovable_program.cc - ImmovableProgram::ActAnimate::execute()
-            -- how many fields are needed for reliable 100% productivity: 13
-            --   with 12 fields, this inequation is not fulfilled:
-            --   (1250 + 102.8 - (6 + 2.667 * 1.8 + 10)) / 102.8 < 12
-            -- min. time total (free 12 nearest fields):  31.6  + 71.2  = 102.8  sec
-            -- min. time total (free 13 nearest fields):  31.97 + 71.57 = 103.54 sec
-            -- max. time total (free 13 furthest fields): 40.55 + 80.15 = 120.7  sec
+            -- estimation of number of nearest fields for optimal productivity (nominal + 2):
+            --   3 + (625 - (6 + 2.556 * 1.8 + 10)) / 102 = 8.93
+            -- procedure how to make verification measurement:
+            --   https://codeberg.org/wl/widelands/pulls/4725#issuecomment-4062998
+            -- min. time total (free 9 nearest fields):  31.2 + 70.8 = 102   sec
+            -- max. time total (free 9 furthest fields): 42   + 81.6 = 123.6 sec
             "call=plant_barley",
             "call=harvest_barley",
          }
@@ -82,10 +82,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
          descname = _("planting barley"),
          actions = {
-            -- time of worker: 21.97-30.55 sec, min. time for 12 fields 21.6 sec
-            -- min. time (12 fields): 21.6  + 10 = 31.6  sec
-            -- min. time:             21.97 + 10 = 31.97 sec
-            -- max. time:             30.55 + 10 = 40.55 sec
+            -- time of worker: 21.2-32 sec
+            -- min. time: 21.2 + 10 = 31.2 sec
+            -- max. time: 32   + 10 = 42   sec
             "callworker=plant",
             "sleep=duration:10s"
          }
@@ -94,10 +93,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
          descname = _("harvesting barley"),
          actions = {
-            -- time of worker: 23.97-32.55 sec, min. time for 12 fields 23.6 sec
-            -- min. time (12 fields): 23.6  + 40 + 4 + 3.6 = 71.2  sec
-            -- min. time:             23.97 + 40 + 4 + 3.6 = 71.57 sec
-            -- max. time:             32.55 + 40 + 4 + 3.6 = 80.15 sec
+            -- time of worker: 23.2-34 sec
+            -- min. time: 23.2 + 40 + 4 + 3.6 = 70.8 sec
+            -- max. time: 34   + 40 + 4 + 3.6 = 81.6 sec
             "callworker=harvest",
             "animate=working duration:40s",
             "sleep=duration:4s",
