@@ -14,7 +14,7 @@
 # litoll <litoll@freemail.hu>, 2020
 # litoll <litoll@freemail.hu>, 2020
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
-# Tóth András <txa-dev@posteo.hu>, 2021-2024
+# Tóth András <txa-dev@posteo.hu>, 2021-2025
 # zone <z-one@freemail.hu>, 2015
 # zone <z-one@freemail.hu>, 2015
 msgid ""
@@ -23,7 +23,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-05-12 03:20+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Balázs Meskó <meskobalazs@mailbox.org>, 2025\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2025\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4116,11 +4116,11 @@ msgstr "Nincs találat"
 
 #: ../../../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
-msgstr "Kis türelmet…"
+msgstr "Kis türelmet kérek…"
 
 #: ../../../../src/ui_basic/panel.cc:467
 msgid "Game ending – please wait…"
-msgstr "Játék befejezése – kis türelmet…"
+msgstr "Játék befejezése – kis türelmet kérek…"
 
 #: ../../../../src/ui_basic/progresswindow.cc:83
 #: ../../../../src/wlapplication.cc:489
