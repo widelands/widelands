@@ -20,6 +20,7 @@
 
 #include "base/time_string.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/game_data_error.h"
@@ -181,9 +182,12 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 	actions_hbox_.add_space(kSpacing);
 	actions_hbox_.add(&actions_vbox_no_, UI::Box::Resizing::kFullSize);
 
-	trades_box_offers_.set_min_desired_breadth(kMinBoxWidth);
-	trades_box_proposed_.set_min_desired_breadth(kMinBoxWidth);
-	trades_box_active_.set_min_desired_breadth(kMinBoxWidth);
+	const int maxh = g_gr->get_yres() - hbox_.get_h() - hbox_.get_h() - 7 * kRowSize;
+	for (UI::Box* box : {&trades_box_offers_, &trades_box_proposed_, &trades_box_active_}) {
+		box->set_min_desired_breadth(kMinBoxWidth);
+		box->set_force_scrolling(true);
+		box->set_max_size(box->get_max_x(), maxh);
+	}
 
 	trades_tabs_.add(
 	   "active", "", &trades_box_offers_, _("Trade offers you have received from other players"));
@@ -409,6 +413,7 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 		txt->set_style(UI::FontStyle::kWuiInfoPanelParagraph);
 		txt->set_text(_("Nobody has offered you any trades at the moment."));
 		trades_box_offers_.add(txt, UI::Box::Resizing::kFullSize);
+		trades_box_offers_.add_space(3 * UI::Scrollbar::kSize);
 		return;
 	}
 
@@ -480,7 +485,6 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 		box->add_space(kSpacing);
 		box->add(buttons, UI::Box::Resizing::kAlign, UI::Align::kTop);
 		trades_box_offers_.add(box, UI::Box::Resizing::kExpandBoth);
-		trades_box_offers_.add_space(kSpacing);
 	}
 }
 
@@ -505,6 +509,7 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 		txt->set_text(_("There are no pending trade proposals at the moment. You can propose a new "
 		                "trade from a market."));
 		trades_box_proposed_.add(txt, UI::Box::Resizing::kFullSize);
+		trades_box_proposed_.add_space(3 * UI::Scrollbar::kSize);
 		return;
 	}
 
@@ -580,7 +585,6 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 		box->add_space(kSpacing);
 		box->add(buttons, UI::Box::Resizing::kAlign, UI::Align::kTop);
 		trades_box_proposed_.add(box, UI::Box::Resizing::kExpandBoth);
-		trades_box_proposed_.add_space(kSpacing);
 	}
 }
 
@@ -604,6 +608,7 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		txt->set_style(UI::FontStyle::kWuiInfoPanelParagraph);
 		txt->set_text(_("There are no active trade agreements at the moment."));
 		trades_box_active_.add(txt, UI::Box::Resizing::kFullSize);
+		trades_box_active_.add_space(3 * UI::Scrollbar::kSize);
 		return;
 	}
 
@@ -718,13 +723,13 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		inner_box->add(buttons, UI::Box::Resizing::kAlign, UI::Align::kTop);
 
 		trade_box->add(inner_box, UI::Box::Resizing::kExpandBoth);
-		trade_box->add_space(kSpacing);
 
 		for (const Widelands::TradeExtension& te : iplayer_->game().find_trade_extensions(
 		        trade_id, own_market->owner().player_number(), false)) {
 			UI::Box* hbox = new UI::Box(
 			   trade_box, UI::PanelStyle::kWui, "extension_offer", 0, 0, UI::Box::Horizontal);
 
+			hbox->add_space(g_style_manager->styled_size(UI::StyledSize::kUIDefaultIndent));
 			hbox->add(
 			   new UI::Textarea(
 			      hbox, UI::PanelStyle::kWui, "description", UI::FontStyle::kWuiInfoPanelHeading,
@@ -761,8 +766,8 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 			hbox->add_space(kSpacing);
 			hbox->add(accept);
 
-			trade_box->add(hbox, UI::Box::Resizing::kFullSize);
 			trade_box->add_space(kSpacing);
+			trade_box->add(hbox, UI::Box::Resizing::kFullSize);
 		}
 
 		for (const Widelands::TradeExtension& te : iplayer_->game().find_trade_extensions(
@@ -770,6 +775,7 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 			UI::Box* hbox = new UI::Box(
 			   trade_box, UI::PanelStyle::kWui, "extension_proposal", 0, 0, UI::Box::Horizontal);
 
+			hbox->add_space(g_style_manager->styled_size(UI::StyledSize::kUIDefaultIndent));
 			hbox->add(
 			   new UI::Textarea(
 			      hbox, UI::PanelStyle::kWui, "description", UI::FontStyle::kWuiInfoPanelHeading,
@@ -794,12 +800,12 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 			hbox->add_space(kSpacing);
 			hbox->add(retract);
 
-			trade_box->add(hbox, UI::Box::Resizing::kFullSize);
 			trade_box->add_space(kSpacing);
+			trade_box->add(hbox, UI::Box::Resizing::kFullSize);
 		}
 
+		trade_box->add_space(kRowSize);
 		trades_box_active_.add(trade_box, UI::Box::Resizing::kExpandBoth);
-		trades_box_active_.add_space(kSpacing);
 	}
 }
 

@@ -440,4 +440,5 @@ The ``styled_sizes`` table contains integer values to be used for paddings and U
 * **campaign_fri02_poem_indent**: The indentation of the poem in the second scenario in the Frisian campaign
 * **map_plateau_message_pos_y**: The y position of the message boxes in the SP scenario The Green Plateau
 * **ui_default_padding**: default size for padding between UI elements
+* **ui_default_indent** (*since version 1.3*): default horizontal gap for indenting UI elements
 
