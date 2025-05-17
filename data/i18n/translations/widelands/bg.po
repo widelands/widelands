@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-04-07 03:10+0000\n"
+"POT-Creation-Date: 2025-05-12 03:20+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Georgi Georgiev (RacerBG) <g.georgiev.shumen@gmail.com>, 2021\n"
 "Language-Team: Bulgarian (http://app.transifex.com/widelands/widelands/language/bg/)\n"
@@ -2819,12 +2819,12 @@ msgid "Your ship could not find a path to its destination port ‘%s’."
 msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1311
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1569
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1594
 msgid "Enemy Ship Attacking"
 msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1311
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1568
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1593
 msgid "Naval Attack"
 msgstr ""
 
@@ -2845,113 +2845,113 @@ msgstr ""
 msgid "An enemy ship has destroyed your warship."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1570
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1595
 msgid "Your coast is under attack from an enemy warship."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1802
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1827
 msgid "Island Circumnavigated"
 msgstr "Островът е заобиколен"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1802
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1827
 msgctxt "ship"
 msgid "Waiting"
 msgstr "В изчакване"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1803
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1828
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Кораб от експедиция обиколи острова си без нищо да се случи."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1868
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1893
 msgid "Coast Reached"
 msgstr "Достигнат е бряг"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1868
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1893
 msgid "Land Ahoy!"
 msgstr "Земя на хоризонта!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1869
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1894
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Кораб от експедиция достигна бряг и чака команда."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1922
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1947
 msgid "New port construction site is gone"
 msgstr "Новата строителна площадка за пристанище изчезна"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1922
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1947
 msgid "Port Lost!"
 msgstr "Загубено е пристанище!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1923
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1948
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Разтоварването на стоките се провали, експедицията е отменена."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1980
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2005
 msgid "No Port Can Be Built"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1980
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2005
 msgid "Port Space Lost!"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1981
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2006
 msgid ""
 "A discovered port build space is not available for building a port anymore."
 msgstr ""
 
 #. * TRANSLATORS: Warship ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2228
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2253
 msgctxt "ship"
 msgid "Warship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2228
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2253
 msgid "Warship Ready"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2229
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2254
 msgid "A warship is waiting for your commands."
 msgstr ""
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2234
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2259
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Експедиция"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2234
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2259
 msgid "Expedition Ready"
 msgstr "Експедицията е готова"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2235
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2260
 msgid "An expedition ship is waiting for your commands."
 msgstr "Кораб от експедиция чака Вашата команда."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2409
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2434
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2411
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2436
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2415
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2440
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2418
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2443
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2426
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2451
 #: ../../../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
@@ -2963,10 +2963,10 @@ msgstr ""
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2432
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2442
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2448
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2462
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2457
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2467
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2473
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2487
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -2974,7 +2974,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2437
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2462
 #: ../../../../src/wui/seafaring_statistics_menu.cc:260
 msgctxt "ship_state"
 msgid "Empty"
@@ -2982,7 +2982,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2457
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2482
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -2990,7 +2990,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2469
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2494
 #: ../../../../src/wui/seafaring_statistics_menu.cc:264
 msgctxt "ship_state"
 msgid "Waiting"
@@ -2998,14 +2998,14 @@ msgstr "Изчакване"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2473
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2498
 #: ../../../../src/wui/seafaring_statistics_menu.cc:266
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Разузнаване"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2477
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2502
 #: ../../../../src/wui/seafaring_statistics_menu.cc:268
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -3014,7 +3014,7 @@ msgstr "Открито е място за пристанище"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2482
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2507
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Основаване на колония"
@@ -10207,31 +10207,31 @@ msgstr "Връщане към нормалното ниво на приближ�
 msgid "Zoom –"
 msgstr ""
 
-#: ../../../../src/wui/interactive_base.cc:926
+#: ../../../../src/wui/interactive_base.cc:927
 #, c-format
 msgid "Road length: %1$u (%2$u)"
 msgstr ""
 
-#: ../../../../src/wui/interactive_base.cc:928
+#: ../../../../src/wui/interactive_base.cc:929
 #, c-format
 msgid "Waterway length: %1$u (%2$u) / %3$u"
 msgstr ""
 
-#: ../../../../src/wui/interactive_base.cc:933
+#: ../../../../src/wui/interactive_base.cc:934
 #, c-format
 msgid "Road length: %u"
 msgstr ""
 
-#: ../../../../src/wui/interactive_base.cc:936
+#: ../../../../src/wui/interactive_base.cc:937
 #, c-format
 msgid "Waterway length: %1$u / %2$u"
 msgstr ""
 
-#: ../../../../src/wui/interactive_base.cc:1858
+#: ../../../../src/wui/interactive_base.cc:1859
 msgid "Failed saving screenshot!"
 msgstr ""
 
-#: ../../../../src/wui/interactive_base.cc:1862
+#: ../../../../src/wui/interactive_base.cc:1863
 msgid "Screenshot saved"
 msgstr ""
 
