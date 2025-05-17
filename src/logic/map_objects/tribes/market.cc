@@ -734,7 +734,7 @@ std::string TradeInstance::format_richtext(const TradeID id,
 	}
 
 	infotext += format("</p><div padding_l=%d padding_b=%d><p>",
-	                   g_style_manager->styled_size(UI::StyledSize::kWuiTextSpaceBeforeInlineHeader),
+	                   g_style_manager->styled_size(UI::StyledSize::kUIDefaultIndent),
 	                   g_style_manager->styled_size(UI::StyledSize::kWuiTextDefaultGap));
 	if (num_batches != kInfiniteTrade) {
 		infotext +=
