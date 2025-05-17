@@ -39,6 +39,15 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- nominal transition from tiny to ripe field (the longest possible transition is double):
+            --   22 + 28 + 40 = 90 sec
+            --   see data/tribes/immovables/reedfield/ and src/logic/map_objects/immovable_program.cc - ImmovableProgram::ActAnimate::execute()
+            -- estimation of number of nearest fields for optimal productivity (nominal + 1):
+            --   2 + (90 - (6.5 + 2.333 * 1.8 + 8)) / 54.8 = 3.30
+            -- procedure how to make verification measurement:
+            --   https://codeberg.org/wl/widelands/pulls/4725#issuecomment-4062998
+            -- min. time total (free 3 nearest fields):  29.4 + 25.4 = 54.8 sec
+            -- max. time total (free 3 furthest fields): 33   + 29   = 62   sec
             "call=plant",
             "call=harvest",
          }
@@ -47,6 +56,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
          descname = _("planting reed"),
          actions = {
+            -- time of worker: 21.4-25 sec
+            -- min. time: 21.4 + 8 = 29.4 sec
+            -- max. time: 25   + 8 = 33   sec
             "callworker=plant",
             "sleep=duration:8s" -- orig sleep=duration:20s but gardener animation was increased by 2sec
          }
@@ -55,6 +67,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
          descname = _("harvesting reed"),
          actions = {
+            -- time of worker: 22.4-26 sec
+            -- min. time: 22.4 + 3 = 25.4 sec
+            -- max. time: 26   + 3 = 29   sec
             "callworker=harvest",
             "sleep=duration:3s"
          }
