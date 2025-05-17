@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-05-01 03:23+0000\n"
+"POT-Creation-Date: 2025-05-12 03:20+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
@@ -2823,12 +2823,12 @@ msgid "Your ship could not find a path to its destination port ‘%s’."
 msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1311
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1569
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1594
 msgid "Enemy Ship Attacking"
 msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1311
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1568
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1593
 msgid "Naval Attack"
 msgstr ""
 
@@ -2849,113 +2849,113 @@ msgstr ""
 msgid "An enemy ship has destroyed your warship."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1570
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1595
 msgid "Your coast is under attack from an enemy warship."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1802
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1827
 msgid "Island Circumnavigated"
 msgstr "Saari ympäripurjehdittu"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1802
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1827
 msgctxt "ship"
 msgid "Waiting"
 msgstr "Odottaa"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1803
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1828
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Tutkimusmatka-alus kiersi saaren löytämättä mitään kiintoisaa."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1868
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1893
 msgid "Coast Reached"
 msgstr "Rannikko saavutettu"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1868
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1893
 msgid "Land Ahoy!"
 msgstr "Maata näkyvissä!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1869
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1894
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Tutkimusmatka-alus saapui rannikolle ja odottaa ohjeitasi."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1922
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1947
 msgid "New port construction site is gone"
 msgstr "Uuden sataman työmaa-alue ei ole enää olemassa"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1922
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1947
 msgid "Port Lost!"
 msgstr "Satama menetetty!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1923
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1948
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Tuotteiden purkaminen epäonnistui, retkikunta on nyt peruutettu."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1980
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2005
 msgid "No Port Can Be Built"
 msgstr "Satamaa ei voida rakentaa"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1980
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2005
 msgid "Port Space Lost!"
 msgstr "Tila satamalle menetettiin!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1981
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2006
 msgid ""
 "A discovered port build space is not available for building a port anymore."
 msgstr "Löydetty satamatila ei ole enää saatavilla sataman rakentamiseksi."
 
 #. * TRANSLATORS: Warship ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2228
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2253
 msgctxt "ship"
 msgid "Warship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2228
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2253
 msgid "Warship Ready"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2229
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2254
 msgid "A warship is waiting for your commands."
 msgstr ""
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2234
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2259
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Tutkimusmatka"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2234
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2259
 msgid "Expedition Ready"
 msgstr "Tutkimusmatkailijat valmiina lähtöön"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2235
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2260
 msgid "An expedition ship is waiting for your commands."
 msgstr "Tutkimusmatka-alus odottaa ohjeitasi."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2409
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2434
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2411
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2436
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2415
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2440
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2418
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2443
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2426
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2451
 #: ../../../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
@@ -2967,10 +2967,10 @@ msgstr ""
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2432
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2442
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2448
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2462
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2457
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2467
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2473
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2487
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -2978,7 +2978,7 @@ msgstr "Purjehditaan kohteeseen %s"
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2437
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2462
 #: ../../../../src/wui/seafaring_statistics_menu.cc:260
 msgctxt "ship_state"
 msgid "Empty"
@@ -2986,7 +2986,7 @@ msgstr "Tyhjä"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2457
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2482
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -2994,7 +2994,7 @@ msgstr "Toimitetaan kohteeseen %s"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2469
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2494
 #: ../../../../src/wui/seafaring_statistics_menu.cc:264
 msgctxt "ship_state"
 msgid "Waiting"
@@ -3002,14 +3002,14 @@ msgstr "Odottaa"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2473
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2498
 #: ../../../../src/wui/seafaring_statistics_menu.cc:266
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Tutkii"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2477
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2502
 #: ../../../../src/wui/seafaring_statistics_menu.cc:268
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -3018,7 +3018,7 @@ msgstr "Luonnonsatama löytyi"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2482
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2507
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Perustaa siirtokuntaa"
