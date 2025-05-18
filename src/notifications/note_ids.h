@@ -49,6 +49,7 @@ enum class NoteId : uint32_t {
 	Sound,
 	ThreadSafeFunction,
 	ThreadSafeFunctionHandled,
+	TradeChanged,
 	TrainingSiteSoldierTrained,
 };
 

@@ -51,6 +51,7 @@ struct PersistenceInfo {
 	static constexpr const char kProductionSiteOutOfResources[] = "production_site_out_of_resources";
 	static constexpr const char kQuicknavChangedEvent[] = "quicknav_changed";
 	static constexpr const char kShip[] = "ship";
+	static constexpr const char kTradeChanged[] = "trade_changed";
 	static constexpr const char kTrainingSiteSoldierTrained[] = "training_site_soldier_trained";
 };
 
@@ -83,6 +84,7 @@ Wrapper* create_player_details();
 Wrapper* create_production_site_out_of_resources();
 Wrapper* create_quicknav_changed();
 Wrapper* create_ship();
+Wrapper* create_trade_changed();
 Wrapper* create_training_site_soldier_trained();
 
 }  // namespace LuaRoot::LuaNotifications

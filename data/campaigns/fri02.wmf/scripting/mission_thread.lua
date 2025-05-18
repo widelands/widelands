@@ -183,6 +183,8 @@ function expand_south()
    set_objective_done(o)
    p2:allow_buildings("all")
    p3:allow_buildings("all")
+   p2:forbid_buildings{"empire_market"}
+   p3:forbid_buildings{"barbarians_market"}
    -- We're done expanding, so we can start checking for victory
    run(victory)
 

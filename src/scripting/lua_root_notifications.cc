@@ -107,6 +107,9 @@ Wrapper* create(const std::string& type) {
 	if (type == PersistenceInfo::kShip) {
 		return create_ship();
 	}
+	if (type == PersistenceInfo::kTradeChanged) {
+		return create_trade_changed();
+	}
 	if (type == PersistenceInfo::kTrainingSiteSoldierTrained) {
 		return create_training_site_soldier_trained();
 	}
@@ -196,6 +199,10 @@ Wrapper* create_quicknav_changed() {
 
 Wrapper* create_ship() {
 	return new NoteImpl<Widelands::NoteShip>(PersistenceInfo::kShip);
+}
+
+Wrapper* create_trade_changed() {
+	return new NoteImpl<Widelands::NoteTradeChanged>(PersistenceInfo::kTradeChanged);
 }
 
 Wrapper* create_training_site_soldier_trained() {
@@ -423,6 +430,53 @@ NoteImpl<Widelands::NoteShip>::generate_message(const Widelands::NoteShip& note)
 	}
 	return {
 	   {"object", note.ship},
+	   {"action", action},
+	};
+}
+
+template <>
+LuaSubscriber::Message NoteImpl<Widelands::NoteTradeChanged>::generate_message(
+   const Widelands::NoteTradeChanged& note) const {
+	std::string action;
+	switch (note.action) {
+	case Widelands::NoteTradeChanged::Action::kProposed:
+		action = "proposed";
+		break;
+	case Widelands::NoteTradeChanged::Action::kAccepted:
+		action = "accepted";
+		break;
+	case Widelands::NoteTradeChanged::Action::kRejected:
+		action = "rejected";
+		break;
+	case Widelands::NoteTradeChanged::Action::kRetracted:
+		action = "retracted";
+		break;
+	case Widelands::NoteTradeChanged::Action::kCancelled:
+		action = "cancelled";
+		break;
+	case Widelands::NoteTradeChanged::Action::kCompleted:
+		action = "completed";
+		break;
+	case Widelands::NoteTradeChanged::Action::kWareArrived:
+		action = "ware_arrived";
+		break;
+	case Widelands::NoteTradeChanged::Action::kPaused:
+		action = "paused";
+		break;
+	case Widelands::NoteTradeChanged::Action::kUnpaused:
+		action = "unpaused";
+		break;
+	case Widelands::NoteTradeChanged::Action::kMoved:
+		action = "moved";
+		break;
+	case Widelands::NoteTradeChanged::Action::kExtensionProposal:
+		action = "extension_proposal";
+		break;
+	default:
+		throw wexception("Invalid trade action %d", static_cast<int>(note.action));
+	}
+	return {
+	   {"trade_id", note.id},
 	   {"action", action},
 	};
 }

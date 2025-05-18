@@ -109,9 +109,14 @@ void MessagePreview::draw(RenderTarget& r) {
 bool MessagePreview::handle_mousepress(const uint8_t button, int32_t /* x */, int32_t /* y */) {
 	switch (button) {
 	case SDL_BUTTON_LEFT:  // center view
-		if ((message_ != nullptr) && (message_->position().valid())) {
-			owner_.ibase_.map_view()->scroll_to_field(
-			   message_->position(), MapView::Transition::Smooth);
+		if (message_ != nullptr) {
+			if (message_->position().valid()) {
+				owner_.ibase_.map_view()->scroll_to_field(
+				   message_->position(), MapView::Transition::Smooth);
+			} else if (owner_.iplayer_ != nullptr &&
+			           message_->message_type_category() == Widelands::Message::Type::kDiplomacy) {
+				owner_.iplayer_->diplomacy_.create();
+			}
 		}
 		break;
 	case SDL_BUTTON_MIDDLE:  // hide and delete message
