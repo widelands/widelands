@@ -1,5 +1,3 @@
-descriptions = wl.Descriptions() -- TODO(matthiakl): only for savegame compatibility with 1.0, do not use.
-
 image_dirname = path.dirname(__file__) .. "images/"
 
 push_textdomain("tribes_encyclopedia")
@@ -1225,6 +1223,25 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("empire_building", "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools."),
             -- TRANSLATORS: Note helptext for an Empire warehouse: Port
             note = pgettext("empire_building", "Similar to the Headquarters a Port can be attacked and destroyed by an enemy. It is recommendable to send soldiers to defend it.")
+         }
+      },
+
+      -- Markets
+      {
+         name = "empire_market",
+         helptexts = {
+            lore = latin_lore(
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Good contracts make good friends."
+               _("Clara pacta, boni amici."),
+               -- TRANSLATORS: Lore helptext for an Empire market: Market
+               --    Translation for the classical Latin quote:
+               --    "Clara pacta, boni amici."
+               _("Good contracts make good friends.")
+            ),
+            -- TRANSLATORS: Purpose helptext for an Empire market: Market
+            purpose = pgettext("empire_building", "A market enables trading with other tribes.")
          }
       },
 
