@@ -1490,8 +1490,7 @@ void Ship::battle_update(Game& game) {
 				return;
 			}
 
-			if (start_task_movepath(
-			       game, current_battle.battle_position, 3, get_sail_anims(), true)) {
+			if (start_task_movepath(game, current_battle.battle_position, 3, get_sail_anims(), true)) {
 				molog(game.get_gametime(), "[battle] Defender moving towards battle position");
 				return;
 			}
@@ -1569,8 +1568,7 @@ void Ship::battle_update(Game& game) {
 			return start_task_idle(game, idle_animation(), 100);
 		}
 
-		if (start_task_movepath(
-		       game, current_battle.battle_position, 3, get_sail_anims(), true)) {
+		if (start_task_movepath(game, current_battle.battle_position, 3, get_sail_anims(), true)) {
 			molog(game.get_gametime(), "[battle] Attacker moving towards battle position");
 			return;
 		}
