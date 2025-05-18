@@ -30,7 +30,15 @@ wl.Descriptions():new_market_type {
    animation_directory = dirname,
    animations = {
       idle = {
-         hotspot = { 58, 58 }
+         hotspot = { 104, 97 }
+      },
+   },
+   spritesheets = {
+      build = {
+         frames = 2,
+         columns = 2,
+         rows = 1,
+         hotspot = { 104, 97 }
       }
    },
 
