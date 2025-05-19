@@ -246,9 +246,16 @@ private:
 	void collect_nearflags(std::map<uint32_t, NearFlag>&, const Widelands::Flag&, uint16_t);
 	// calculating distances from local warehouse to flags
 	void check_flag_distances(const Time&);
+	FlagWarehouseDistances flag_warehouse_distance;
+
 	void diplomacy_actions(const Time&);
 	void trading_actions(const Time&);
-	FlagWarehouseDistances flag_warehouse_distance;
+
+	// returns true if the trade offer or extension is advantageous
+	// targets and stock levels are taken from `economy`
+	// `batches` should be 0 for trade offers, or the new number of remaining batches if the proposal
+	// is accepted
+	bool evaluate_trade(const Widelands::TradeInstance& offer, const Widelands::Economy* economy, int32_t batches);
 
 	bool check_economies();
 	bool check_productionsites(const Time&);
