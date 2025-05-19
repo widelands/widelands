@@ -8,6 +8,7 @@ Call from src directory.
 """
 
 import copy
+import functools
 import os.path
 import re
 import sys
@@ -57,6 +58,7 @@ FUNCTION_EXCLUDES = {'_Pragma',
 INCLUDE_GUARD_REGEX = re.compile(r'WL_[A-Z_]+_H')
 
 
+@functools.lru_cache(512)
 def find_classes(file_to_check, include_functions, special_regex, special_regex_group):
     """Returns a set of classes defined by this file."""
     classes = set()
