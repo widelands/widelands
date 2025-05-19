@@ -63,6 +63,10 @@ struct Tab : public Panel {
 	void set_title(const std::string&);
 	void update_template() override;
 
+	void set_tooltip_text(const std::string& tt) {
+		tooltip = tt;
+	}
+
 private:
 	// Leave handling the mouse move to the TabPanel.
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override {

@@ -449,7 +449,8 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game& game) {
 
 InputQueue& ProductionSite::inputqueue(DescriptionIndex const wi,
                                        WareWorker const type,
-                                       const Request* /* req */) {
+                                       const Request* /* req */,
+                                       uint32_t /* disambiguator_id */) {
 	for (InputQueue* ip_queue : input_queues_) {
 		if (ip_queue->get_index() == wi && ip_queue->get_type() == type) {
 			return *ip_queue;
@@ -1316,7 +1317,7 @@ std::unique_ptr<const BuildingSettings> ProductionSite::create_building_settings
 	   new ProductionsiteSettings(descr(), owner().tribe()));
 	settings->stopped = is_stopped_;
 	for (auto& pair : settings->ware_queues) {
-		pair.second.priority = get_priority(wwWARE, pair.first);
+		pair.second.priority = get_priority(wwWARE, pair.first, 0);
 		for (const auto& queue : input_queues_) {
 			if (queue->get_type() == wwWARE && queue->get_index() == pair.first) {
 				pair.second.desired_fill = std::min(pair.second.max_fill, queue->get_max_fill());
@@ -1330,7 +1331,7 @@ std::unique_ptr<const BuildingSettings> ProductionSite::create_building_settings
 		}
 	}
 	for (auto& pair : settings->worker_queues) {
-		pair.second.priority = get_priority(wwWORKER, pair.first);
+		pair.second.priority = get_priority(wwWORKER, pair.first, 0);
 		for (const auto& queue : input_queues_) {
 			if (queue->get_type() == wwWORKER && queue->get_index() == pair.first) {
 				pair.second.desired_fill = std::min(pair.second.max_fill, queue->get_max_fill());

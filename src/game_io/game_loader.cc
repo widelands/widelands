@@ -29,6 +29,7 @@
 #include "game_io/game_player_ai_persistent_packet.h"
 #include "game_io/game_player_economies_packet.h"
 #include "game_io/game_player_info_packet.h"
+#include "game_io/game_player_trades_packet.h"
 #include "game_io/game_preload_packet.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/addons.h"
@@ -66,7 +67,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	assert(game_.has_loader_ui());
 	auto set_progress_message = [](const std::string& text, unsigned step) {
 		Notifications::publish(
-		   UI::NoteLoadingMessage(format(_("Loading game: %1$s (%2$u/%3$d)"), text, step, 6)));
+		   UI::NoteLoadingMessage(format(_("Loading game: %1$s (%2$u/%3$d)"), text, step, 7)));
 	};
 	set_progress_message(_("Elemental data"), 1);
 	verb_log_info("Game: Reading Preload Data ... ");
@@ -138,15 +139,22 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		p.read(fs_, game_, mol);
 	}
 
-	verb_log_info("Game: Reading ai persistent data ... ");
-	set_progress_message(_("AI"), 3);
+	verb_log_info("Game: Reading Player Trades Data ... ");
+	set_progress_message(_("Trades"), 3);
+	{
+		GamePlayerTradesPacket p;
+		p.read(fs_, game_, mol);
+	}
+
+	verb_log_info("Game: Reading AI persistent data ... ");
+	set_progress_message(_("AI"), 4);
 	{
 		GamePlayerAiPersistentPacket p;
 		p.read(fs_, game_, mol);
 	}
 
 	verb_log_info("Game: Reading Command Queue Data ... ");
-	set_progress_message(_("Command queue"), 4);
+	set_progress_message(_("Command queue"), 5);
 	{
 		GameCmdQueuePacket p;
 		p.read(fs_, game_, mol);
@@ -154,7 +162,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 
 	//  This must be after the command queue has been read.
 	verb_log_info("Game: Parsing messages ... ");
-	set_progress_message(_("Messages"), 5);
+	set_progress_message(_("Messages"), 6);
 	PlayerNumber const nr_players = game_.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game_, player) {
 		const MessageQueue& messages = player->messages();
@@ -172,7 +180,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		}
 	}
 
-	set_progress_message(_("Finishing"), 6);
+	set_progress_message(_("Finishing"), 7);
 	// For compatibility hacks only
 	mol->load_finish_game(game_);
 
