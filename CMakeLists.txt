@@ -102,7 +102,7 @@ message(STATUS "Picking up default CXX flags:
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 
 if (WIN32)
-  link_libraries(wsock32 ws2_32 bcrypt)
+  link_libraries(wsock32 ws2_32 bcrypt intl)
 endif()
 if (OPTION_BUILD_WINSTATIC)
   add_definitions(-DGLBINDING_STATIC_DEFINE -DNGHTTP2_STATICLIB)
