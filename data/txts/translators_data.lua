@@ -694,6 +694,7 @@ function translators() return {
       entries = {
          {
             members = {
+               "Alex Rijckaert",
                "ben2s",
                "BenW",
                "Christian Groenendijk",

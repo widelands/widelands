@@ -4,15 +4,15 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Juanjo, 2015
-# Juanjo, 2015-2020,2022-2023
+# Juanjo, 2015-2020,2022-2023,2025
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-04-19 03:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: Juanjo, 2015-2020,2022-2023\n"
+"Last-Translator: Juanjo, 2015-2020,2022-2023,2025\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -869,7 +869,7 @@ msgid ""
 "May Satul warm you, Jundlina. My name is Ostur and I construct ships. I have"
 " invented a new kind of ship: smaller than those we are used to, but much "
 "sturdier. If we build them correctly, I am confident that we can sail a much"
-" longer distance with them and maybe escape from Lutas’ influence."
+" longer distance with them and maybe escape from Lutas’s influence."
 msgstr "Que en Satul us abrigui, Jundlina. Em dic Ostur i construeixo vaixells. He inventat un nou tipus de vaixell: més petit que els que fèiem servir, però molt més resistents. Si els construïm bé, confio que podrem navegar a una distància molt més gran i escapar de la influència d’en Lutas."
 
 #. TRANSLATORS: Jundlina
