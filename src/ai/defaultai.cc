@@ -3522,7 +3522,8 @@ int32_t DefaultAI::trade_preciousness(const Widelands::DescriptionIndex ware_id,
 
 	constexpr int32_t kNoCostWaresTarget = 30;
 	const int32_t target = descr->has_demand_check(tribe_->name()) ?
-	                          economy->target_quantity(ware_id).permanent : kNoCostWaresTarget;
+	                          economy->target_quantity(ware_id).permanent :
+	                          kNoCostWaresTarget;
 
 	const int32_t stock = calculate_stocklevel(ware_id, WareWorker::kWare);
 
