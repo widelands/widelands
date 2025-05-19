@@ -255,7 +255,9 @@ private:
 	// targets and stock levels are taken from `economy`
 	// `batches` should be 0 for trade offers, or the new number of remaining batches if the proposal
 	// is accepted
-	bool evaluate_trade(const Widelands::TradeInstance& offer, const Widelands::Economy* economy, int32_t batches);
+	bool evaluate_trade(const Widelands::TradeInstance& offer,
+	                    const Widelands::Economy* economy,
+	                    int32_t batches);
 
 	bool check_economies();
 	bool check_productionsites(const Time&);

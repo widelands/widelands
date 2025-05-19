@@ -3383,8 +3383,8 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 			}
 		}
 		if (arbitrary_economy == nullptr) {
-			verb_log_dbg(
-			   "AI %u: no economies, cannot review trade offers", static_cast<unsigned>(player_number()));
+			verb_log_dbg("AI %u: no economies, cannot review trade offers",
+			             static_cast<unsigned>(player_number()));
 			// this means that the player can't have extension proposals either
 			assert(game().find_active_trades(player_number()).empty());
 			return;
@@ -3397,14 +3397,17 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 			if (evaluate_trade(offer, arbitrary_economy, 0)) {
 				// The trade is advantageous, accept.
 				std::multimap<uint32_t, const Widelands::Market*> candidates =
-				   game().player(player_number()).get_markets(offer.initiator.get(game())->get_position());
+				   game()
+				      .player(player_number())
+				      .get_markets(offer.initiator.get(game())->get_position());
 				if (candidates.empty()) {
 					verb_log_dbg("AI %u: no market to accept trade #%u",
 					             static_cast<unsigned>(player_number()), trade_id);
 				} else {
 					const Widelands::Market* select = candidates.begin()->second;
-					verb_log_dbg("AI %u: accepting trade #%u at %s", static_cast<unsigned>(player_number()),
-					             trade_id, select->get_market_name().c_str());
+					verb_log_dbg("AI %u: accepting trade #%u at %s",
+					             static_cast<unsigned>(player_number()), trade_id,
+					             select->get_market_name().c_str());
 					game().send_player_trade_action(
 					   player_number(), trade_id, Widelands::TradeAction::kAccept, select->serial(), 0);
 				}
@@ -3425,14 +3428,17 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 			const Widelands::TradeInstance& trade = game().get_trade(trade_id);
 
 			const Widelands::Market* market = player_number() == trade.sending_player ?
-			   trade.initiator.get(game()) : trade.receiver.get(game());
+			                                     trade.initiator.get(game()) :
+			                                     trade.receiver.get(game());
 			if (market == nullptr) {
-				log_err_time(game().get_gametime(), "AI player's market not found for active trade %d", trade_id);
+				log_err_time(
+				   game().get_gametime(), "AI player's market not found for active trade %d", trade_id);
 				continue;
 			}
 			const auto order_it = market->trade_orders().find(trade_id);
 			if (order_it == market->trade_orders().end()) {
-				log_err_time(game().get_gametime(), "TradeOrder not found at %s for active trade %d", market->get_market_name().c_str(), trade_id);
+				log_err_time(game().get_gametime(), "TradeOrder not found at %s for active trade %d",
+				             market->get_market_name().c_str(), trade_id);
 				continue;
 			}
 			const int32_t delivered = order_it->second->num_shipped_batches;
@@ -3441,21 +3447,27 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 			}
 			const Widelands::Economy* market_economy = market->get_economy(Widelands::wwWARE);
 			if (market_economy == nullptr) {
-				log_err_time(game().get_gametime(), "Economy not found for market %s", market->get_market_name().c_str());
+				log_err_time(game().get_gametime(), "Economy not found for market %s",
+				             market->get_market_name().c_str());
 				continue;
 			}
 
 			for (const Widelands::TradeExtension& te : extensions) {
-				if (te.batches != Widelands::kInfiniteTrade && evaluate_trade(trade, market_economy, trade.num_batches - delivered + te.batches)) {
+				if (te.batches != Widelands::kInfiniteTrade &&
+				    evaluate_trade(trade, market_economy, trade.num_batches - delivered + te.batches)) {
 					// The extended trade is advantageous, accept.
-					verb_log_dbg("AI %u: accepting extension of trade #%u at %s by %d batches", static_cast<unsigned>(player_number()),
-					             trade_id, market->get_market_name().c_str(), te.batches);
-					game().send_player_extend_trade(player_number(), trade_id, Widelands::TradeAction::kAccept, te.batches);
+					verb_log_dbg("AI %u: accepting extension of trade #%u at %s by %d batches",
+					             static_cast<unsigned>(player_number()), trade_id,
+					             market->get_market_name().c_str(), te.batches);
+					game().send_player_extend_trade(
+					   player_number(), trade_id, Widelands::TradeAction::kAccept, te.batches);
 				} else {
 					// The extended trade is infinite or not advantageous, reject.
-					verb_log_dbg("AI %u: rejecting extension of trade #%u at %s by %d batches", static_cast<unsigned>(player_number()),
-					             trade_id, market->get_market_name().c_str(), te.batches);
-					game().send_player_extend_trade(player_number(), trade_id, Widelands::TradeAction::kReject, te.batches);
+					verb_log_dbg("AI %u: rejecting extension of trade #%u at %s by %d batches",
+					             static_cast<unsigned>(player_number()), trade_id,
+					             market->get_market_name().c_str(), te.batches);
+					game().send_player_extend_trade(
+					   player_number(), trade_id, Widelands::TradeAction::kReject, te.batches);
 				}
 			}
 		}
@@ -3463,7 +3475,9 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 }
 
 // Returns true if trade is advantageous
-bool DefaultAI::evaluate_trade(const Widelands::TradeInstance& offer, const Widelands::Economy* economy, int32_t batches) {
+bool DefaultAI::evaluate_trade(const Widelands::TradeInstance& offer,
+                               const Widelands::Economy* economy,
+                               int32_t batches) {
 	if (batches == 0) {
 		batches = offer.num_batches;
 #ifndef NDEBUG
@@ -3488,7 +3502,8 @@ bool DefaultAI::evaluate_trade(const Widelands::TradeInstance& offer, const Wide
 		const Widelands::WareDescr* descr = game().descriptions().get_ware_descr(pair.first);
 
 		const int32_t target = descr->has_demand_check(tribe_->name()) ?
-		   economy->target_quantity(pair.first).permanent : kNoCostWaresTarget;
+		                          economy->target_quantity(pair.first).permanent :
+		                          kNoCostWaresTarget;
 
 		const int32_t stock = calculate_stocklevel(pair.first, WareWorker::kWare);
 		const int32_t shortage = target - stock;  // negative means surplus
@@ -3519,7 +3534,8 @@ bool DefaultAI::evaluate_trade(const Widelands::TradeInstance& offer, const Wide
 		const Widelands::WareDescr* descr = game().descriptions().get_ware_descr(pair.first);
 
 		const int32_t target = descr->has_demand_check(tribe_->name()) ?
-		   economy->target_quantity(pair.first).permanent : kNoCostWaresTarget;
+		                          economy->target_quantity(pair.first).permanent :
+		                          kNoCostWaresTarget;
 
 		const int32_t stock = calculate_stocklevel(pair.first, WareWorker::kWare);
 		const int32_t surplus = stock - target;  // negative means shortage
