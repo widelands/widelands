@@ -54,6 +54,7 @@
 #include "commands/cmd_enhance_building.h"
 #include "commands/cmd_evict_worker.h"
 #include "commands/cmd_expedition_config.h"
+#include "commands/cmd_extend_trade.h"
 #include "commands/cmd_flag_action.h"
 #include "commands/cmd_fleet_targets.h"
 #include "commands/cmd_incorporate.h"
@@ -81,6 +82,7 @@
 #include "commands/cmd_start_stop_building.h"
 #include "commands/cmd_toggle_infinite_production.h"
 #include "commands/cmd_toggle_mute_messages.h"
+#include "commands/cmd_trade_action.h"
 #include "commands/cmd_warship_command.h"
 #include "economy/economy.h"
 #include "economy/portdock.h"
@@ -93,6 +95,7 @@
 #include "logic/addons.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game_settings.h"
+#include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/militarysite.h"
@@ -903,6 +906,10 @@ void Game::cleanup_for_load() {
 	delete_pending_player_commands();
 	cmdqueue().flush();
 
+	trade_agreements_.clear();
+	trade_extension_proposals_.clear();
+	next_trade_agreement_id_ = 1;
+
 	pending_diplomacy_actions_.clear();
 	diplomacy_allowed_ = true;
 	naval_warfare_allowed_ = false;
@@ -1126,18 +1133,20 @@ void Game::send_player_set_ware_priority(PlayerImmovable& imm,
                                          const WareWorker type,
                                          const DescriptionIndex index,
                                          const WarePriority& prio,
-                                         bool cs) {
+                                         bool cs,
+                                         uint32_t disambiguator_id) {
 	send_player_command(new CmdSetWarePriority(
-	   get_gametime(), imm.owner().player_number(), imm, type, index, prio, cs));
+	   get_gametime(), imm.owner().player_number(), imm, type, index, prio, cs, disambiguator_id));
 }
 
 void Game::send_player_set_input_max_fill(PlayerImmovable& imm,
                                           DescriptionIndex const index,
                                           WareWorker type,
                                           uint32_t const max_fill,
-                                          bool cs) {
-	send_player_command(new CmdSetInputMaxFill(
-	   get_gametime(), imm.owner().player_number(), imm, index, type, max_fill, cs));
+                                          bool cs,
+                                          uint32_t disambiguator_id) {
+	send_player_command(new CmdSetInputMaxFill(get_gametime(), imm.owner().player_number(), imm,
+	                                           index, type, max_fill, cs, disambiguator_id));
 }
 
 void Game::send_player_change_training_options(TrainingSite& ts,
@@ -1229,11 +1238,24 @@ void Game::send_player_diplomacy(PlayerNumber p1, DiplomacyAction a, PlayerNumbe
 	send_player_command(new CmdDiplomacy(get_gametime(), p1, a, p2));
 }
 
-void Game::send_player_propose_trade(const Trade& trade) {
-	auto* object = objects().get_object(trade.initiator);
+void Game::send_player_propose_trade(const TradeInstance& trade) {
+	Market* object = trade.initiator.get(*this);
 	assert(object != nullptr);
 	send_player_command(
 	   new CmdProposeTrade(get_gametime(), object->get_owner()->player_number(), trade));
+}
+
+void Game::send_player_extend_trade(PlayerNumber sender,
+                                    TradeID trade_id,
+                                    TradeAction action,
+                                    int32_t batches) {
+	send_player_command(new CmdExtendTrade(get_gametime(), sender, trade_id, action, batches));
+}
+
+void Game::send_player_trade_action(
+   PlayerNumber sender, TradeID trade_id, TradeAction action, Serial accepter, Serial source) {
+	send_player_command(
+	   new CmdTradeAction(get_gametime(), sender, trade_id, action, accepter, source));
 }
 
 void Game::send_player_set_stock_policy(Building& imm,
@@ -1266,56 +1288,138 @@ void Game::send_player_fleet_targets(PlayerNumber p, Serial i, Quantity q) {
 	send_player_command(new CmdFleetTargets(get_gametime(), p, i, q));
 }
 
-int Game::propose_trade(const Trade& trade) {
-	// TODO(sirver,trading): Check if a trade is possible (i.e. if there is a
-	// path between the two markets);
-	const int id = next_trade_agreement_id_;
-	++next_trade_agreement_id_;
+bool Game::check_trade_player_matches(const TradeInstance& trade,
+                                      const PlayerNumber sender,
+                                      const PlayerNumber proposer,
+                                      const bool check_recipient,
+                                      Player** p1,
+                                      Player** p2,
+                                      const Market** market) {
+	if (check_recipient) {
+		// Check if this is the correct recipient player
+		if (proposer == trade.sending_player) {
+			if (sender != trade.receiving_player) {
+				return false;
+			}
+		} else if (proposer == trade.receiving_player) {
+			if (sender != trade.sending_player) {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 
-	auto* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
-	auto* receiver = dynamic_cast<Market*>(objects().get_object(trade.receiver));
-	// This is only ever called through a PlayerCommand and that already made
-	// sure that the objects still exist. Since no time has passed, they should
-	// not have vanished under us.
+	const bool proposer_is_initiator = proposer == trade.sending_player;
+	*p1 = get_safe_player(proposer_is_initiator ? trade.sending_player : trade.receiving_player);
+	*p2 = get_safe_player(proposer_is_initiator ? trade.receiving_player : trade.sending_player);
+	*market = (proposer_is_initiator ? trade.initiator : trade.receiver).get(*this);
+
+	return true;
+}
+
+TradeID Game::propose_trade(TradeInstance trade) {
+	MutexLock m(MutexLock::ID::kObjects);
+	const TradeID id = next_trade_agreement_id_++;
+
+	Market* initiator = trade.initiator.get(*this);
 	assert(initiator != nullptr);
-	assert(receiver != nullptr);
 
-	receiver->removed.connect([this, id](const uint32_t /* serial */) { cancel_trade(id); });
-	initiator->removed.connect([this, id](const uint32_t /* serial */) { cancel_trade(id); });
+	trade.state = TradeInstance::State::kProposed;
+	trade_agreements_[id] = trade;
 
-	receiver->send_message(*this, Message::Type::kTradeOfferReceived, _("Trade Offer"),
-	                       receiver->descr().icon_filename(), receiver->descr().descname(),
-	                       _("This market has received a new trade offer."), true);
-	trade_agreements_[id] = TradeAgreement{TradeAgreement::State::kProposed, trade};
+	get_safe_player(trade.receiving_player)
+	   ->add_message(*this, std::unique_ptr<Message>(new Message(
+	                           Message::Type::kTrading, get_gametime(), _("Trade Offer"),
+	                           // TODO(Nordfriese): Use receiver's own tribe's market here
+	                           initiator->descr().icon_filename(), _("New trade offer received"),
+	                           format_l(_("You have received a new trade offer from %s."),
+	                                    initiator->owner().get_name()))));
+	Notifications::publish(NoteTradeChanged(id, NoteTradeChanged::Action::kProposed));
 
-	// TODO(sirver,trading): this should be done through another player_command, but I
-	// want to get to the trade logic implementation now.
-	accept_trade(id);
 	return id;
 }
 
-void Game::accept_trade(const int trade_id) {
+void Game::accept_trade(const TradeID trade_id, Market& receiver) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	auto it = trade_agreements_.find(trade_id);
-	if (it == trade_agreements_.end()) {
-		log_warn_time(
-		   get_gametime(), "Game::accept_trade: Trade %d has vanished. Ignoring.\n", trade_id);
-		return;
-	}
-	const Trade& trade = it->second.trade;
-	auto* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
-	auto* receiver = dynamic_cast<Market*>(objects().get_object(trade.receiver));
-	if (initiator == nullptr || receiver == nullptr) {
-		cancel_trade(trade_id);
+	if (it == trade_agreements_.end() || it->second.state != TradeInstance::State::kProposed) {
 		return;
 	}
 
-	initiator->new_trade(trade_id, trade.items_to_send, trade.num_batches, trade.receiver);
-	receiver->new_trade(trade_id, trade.items_to_receive, trade.num_batches, trade.initiator);
+	const TradeInstance& trade = it->second;
+	Market* initiator = trade.initiator.get(*this);
+	if (initiator == nullptr) {
+		trade_agreements_.erase(it);
+		return;
+	}
 
-	// TODO(sirver,trading): Message the users that the trade has been accepted.
+	// TODO(sirver,trading): Check connectivity between the markets.
+
+	it->second.receiver = &receiver;
+	it->second.state = TradeInstance::State::kRunning;
+
+	initiator->new_trade(trade_id, trade.items_to_send, trade.num_batches, &receiver);
+	receiver.new_trade(trade_id, trade.items_to_receive, trade.num_batches, trade.initiator);
+
+	initiator->send_message(*this, Message::Type::kTrading, _("Trade Accepted"),
+	                        initiator->descr().icon_filename(), _("Trade offer accepted"),
+	                        format_l(_("%1$s has accepted your trade offer at %2$s."),
+	                                 receiver.owner().get_name(), initiator->get_market_name()),
+	                        false);
+	Notifications::publish(NoteTradeChanged(trade_id, NoteTradeChanged::Action::kAccepted));
 }
 
-void Game::cancel_trade(int trade_id) {
+void Game::reject_trade(const TradeID trade_id) {
+	MutexLock m(MutexLock::ID::kObjects);
+
+	auto it = trade_agreements_.find(trade_id);
+	if (it == trade_agreements_.end() || it->second.state != TradeInstance::State::kProposed) {
+		return;
+	}
+
+	const TradeInstance& trade = it->second;
+	Market* initiator = trade.initiator.get(*this);
+	if (initiator != nullptr) {
+		initiator->send_message(
+		   *this, Message::Type::kTrading, _("Trade Rejected"), initiator->descr().icon_filename(),
+		   _("Trade offer rejected"),
+		   format_l(_("%1$s has rejected your trade offer at %2$s."),
+		            player(trade.receiving_player).get_name(), initiator->get_market_name()),
+		   false);
+	}
+
+	trade_agreements_.erase(it);
+	Notifications::publish(NoteTradeChanged(trade_id, NoteTradeChanged::Action::kRejected));
+}
+
+void Game::retract_trade(const TradeID trade_id) {
+	MutexLock m(MutexLock::ID::kObjects);
+
+	auto it = trade_agreements_.find(trade_id);
+	if (it == trade_agreements_.end() || it->second.state != TradeInstance::State::kProposed) {
+		return;
+	}
+
+	const TradeInstance& trade = it->second;
+	Market* initiator = trade.initiator.get(*this);
+
+	get_safe_player(trade.receiving_player)
+	   ->add_message(*this, std::unique_ptr<Message>(new Message(
+	                           Message::Type::kTrading, get_gametime(), _("Trade Retracted"),
+	                           // TODO(Nordfriese): Use receiver's own tribe's market here
+	                           initiator->descr().icon_filename(), _("Trade offer retracted"),
+	                           format_l(_("The trade offer by %s has been retracted."),
+	                                    initiator->owner().get_name()))));
+
+	trade_agreements_.erase(it);
+	Notifications::publish(NoteTradeChanged(trade_id, NoteTradeChanged::Action::kRetracted));
+}
+
+void Game::cancel_trade(TradeID trade_id, bool reached_regular_end, const Player* canceller) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	// The trade id might be long gone - since we never disconnect from the
 	// 'removed' signal of the two buildings, we might be invoked long after the
 	// trade was deleted for other reasons.
@@ -1323,20 +1427,317 @@ void Game::cancel_trade(int trade_id) {
 	if (it == trade_agreements_.end()) {
 		return;
 	}
-	const auto& trade = it->second.trade;
+	const TradeInstance& trade = it->second;
 
-	auto* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
+	Market* initiator = trade.initiator.get(*this);
 	if (initiator != nullptr) {
-		initiator->cancel_trade(trade_id);
-		// TODO(sirver,trading): Send message to owner that the trade has been canceled.
+		initiator->cancel_trade(*this, trade_id, reached_regular_end,
+		                        reached_regular_end || canceller != initiator->get_owner());
 	}
 
-	auto* receiver = dynamic_cast<Market*>(objects().get_object(trade.receiver));
+	Market* receiver = it->second.receiver.get(*this);
 	if (receiver != nullptr) {
-		receiver->cancel_trade(trade_id);
-		// TODO(sirver,trading): Send message to owner that the trade has been canceled.
+		receiver->cancel_trade(*this, trade_id, reached_regular_end,
+		                       reached_regular_end || canceller != receiver->get_owner());
 	}
+
 	trade_agreements_.erase(trade_id);
+
+	// TODO(Nordfriese): Turn pending extension proposals into new trade proposals
+	// automatically if the trade reached its regular end?
+	trade_extension_proposals_.erase(
+	   std::remove_if(trade_extension_proposals_.begin(), trade_extension_proposals_.end(),
+	                  [trade_id](const TradeExtension& te) { return te.trade_id == trade_id; }),
+	   trade_extension_proposals_.end());
+
+	Notifications::publish(NoteTradeChanged(trade_id, reached_regular_end ?
+	                                                     NoteTradeChanged::Action::kCompleted :
+	                                                     NoteTradeChanged::Action::kCancelled));
+}
+
+void Game::move_trade(const TradeID trade_id, Market& old_market, Market& new_market) {
+	MutexLock m(MutexLock::ID::kObjects);
+
+	if (old_market.get_owner() != new_market.get_owner() || &old_market == &new_market) {
+		return;  // Doesn't make sense
+	}
+
+	auto instance = trade_agreements_.find(trade_id);
+	if (instance == trade_agreements_.end()) {
+		return;
+	}
+
+	if (instance->second.initiator.serial() == new_market.serial() ||
+	    instance->second.receiver.serial() == new_market.serial()) {
+		return;  // Trade is already there
+	}
+
+	const bool is_sender = (instance->second.initiator.serial() == old_market.serial());
+	if (!is_sender && instance->second.receiver.serial() != old_market.serial()) {
+		return;  // Old market is neither sender nor receiver
+	}
+
+	if (is_sender) {
+		instance->second.initiator = &new_market;
+	} else {
+		instance->second.receiver = &new_market;
+	}
+
+	if (instance->second.state == TradeInstance::State::kRunning) {
+		old_market.move_trade_to(*this, trade_id, new_market);
+	}
+
+	Notifications::publish(NoteBuilding(old_market.serial(), NoteBuilding::Action::kChanged));
+	Notifications::publish(NoteBuilding(new_market.serial(), NoteBuilding::Action::kChanged));
+	Notifications::publish(NoteTradeChanged(trade_id, NoteTradeChanged::Action::kMoved));
+}
+
+void Game::propose_trade_extension(const PlayerNumber sender,
+                                   const TradeID trade_id,
+                                   const int batches) {
+	if (batches <= 0 && batches != kInfiniteTrade) {
+		return;
+	}
+
+	MutexLock m(MutexLock::ID::kObjects);
+
+	const auto trade = trade_agreements_.find(trade_id);
+	if (trade == trade_agreements_.end() ||
+	    (trade->second.sending_player != sender && trade->second.receiving_player != sender) ||
+	    trade->second.num_batches == kInfiniteTrade) {
+		return;
+	}
+
+	trade_extension_proposals_.emplace_back(trade_id, sender, batches);
+
+	{
+		Player* p1;
+		Player* p2;
+		const Market* market;
+		if (!check_trade_player_matches(trade->second, sender, sender, false, &p1, &p2, &market)) {
+			NEVER_HERE();
+		}
+
+		p2->add_message(
+		   *this,
+		   std::unique_ptr<Message>(new Message(
+		      Message::Type::kTrading, get_gametime(), _("Trade Extension Proposal"),
+		      market != nullptr ? market->descr().icon_filename() : "images/wui/menus/diplomacy.png",
+		      _("New trade extension proposal received"),
+		      format_l(_("%s has proposed to extend a trade."), p1->get_name()))));
+	}
+
+	Notifications::publish(NoteTradeChanged(trade_id, NoteTradeChanged::Action::kExtensionProposal));
+}
+
+void Game::retract_trade_extension(const PlayerNumber sender,
+                                   const TradeID trade_id,
+                                   const int batches) {
+	for (auto it = trade_extension_proposals_.begin(); it != trade_extension_proposals_.end();
+	     ++it) {
+		if (it->trade_id == trade_id && it->proposer == sender && it->batches == batches) {
+			MutexLock m(MutexLock::ID::kObjects);
+
+			if (const auto trade = trade_agreements_.find(trade_id);
+			    trade != trade_agreements_.end()) {
+
+				Player* p1;
+				Player* p2;
+				const Market* market;
+				if (!check_trade_player_matches(
+				       trade->second, sender, it->proposer, false, &p1, &p2, &market)) {
+					NEVER_HERE();
+				}
+
+				p2->add_message(
+				   *this, std::unique_ptr<Message>(new Message(
+				             Message::Type::kTrading, get_gametime(), _("Trade Extension Retracted"),
+				             market != nullptr ? market->descr().icon_filename() :
+				                                 "images/wui/menus/diplomacy.png",
+				             _("Trade extension proposal retracted"),
+				             format_l(_("The proposal by %s to extend a trade has been retracted."),
+				                      p1->get_name()))));
+			}
+
+			trade_extension_proposals_.erase(it);
+			Notifications::publish(
+			   NoteTradeChanged(trade_id, NoteTradeChanged::Action::kExtensionProposal));
+			return;
+		}
+	}
+
+	verb_log_warn("retract_trade_extension(%u): not found, ignoring", trade_id);
+}
+
+void Game::reject_trade_extension(const PlayerNumber sender,
+                                  const TradeID trade_id,
+                                  const int batches) {
+	for (auto it = trade_extension_proposals_.begin(); it != trade_extension_proposals_.end();
+	     ++it) {
+		if (it->trade_id == trade_id && it->batches == batches) {
+			MutexLock m(MutexLock::ID::kObjects);
+
+			const auto trade = trade_agreements_.find(trade_id);
+			if (trade == trade_agreements_.end()) {
+				continue;
+			}
+
+			Player* p1;
+			Player* p2;
+			const Market* market;
+			if (!check_trade_player_matches(
+			       trade->second, sender, it->proposer, true, &p1, &p2, &market)) {
+				continue;
+			}
+
+			p1->add_message(
+			   *this,
+			   std::unique_ptr<Message>(new Message(
+			      Message::Type::kTrading, get_gametime(), _("Trade Extension Rejected"),
+			      market != nullptr ? market->descr().icon_filename() :
+			                          "images/wui/menus/diplomacy.png",
+			      _("Trade extension proposal rejected"),
+			      format_l(_("%s has rejected your proposal to extend a trade."), p2->get_name()))));
+
+			trade_extension_proposals_.erase(it);
+			Notifications::publish(
+			   NoteTradeChanged(trade_id, NoteTradeChanged::Action::kExtensionProposal));
+			return;
+		}
+	}
+
+	verb_log_warn("reject_trade_extension(%u): not found, ignoring", trade_id);
+}
+
+void Game::accept_trade_extension(const PlayerNumber sender,
+                                  const TradeID trade_id,
+                                  const int batches) {
+	for (auto it = trade_extension_proposals_.begin(); it != trade_extension_proposals_.end();
+	     ++it) {
+		if (it->trade_id == trade_id && it->batches == batches) {
+			MutexLock m(MutexLock::ID::kObjects);
+
+			auto trade = trade_agreements_.find(trade_id);
+			if (trade == trade_agreements_.end()) {
+				continue;
+			}
+
+			Player* p1;
+			Player* p2;
+			const Market* proposing_market;
+			if (!check_trade_player_matches(
+			       trade->second, sender, it->proposer, true, &p1, &p2, &proposing_market)) {
+				continue;
+			}
+
+			if (trade->second.num_batches != kInfiniteTrade) {
+				if (batches == kInfiniteTrade) {
+					trade->second.num_batches = kInfiniteTrade;
+				} else {
+					trade->second.num_batches += batches;
+				}
+
+				if (Market* market = trade->second.initiator.get(*this); market != nullptr) {
+					market->notify_trade_extended(trade_id, trade->second.num_batches);
+				}
+				if (Market* market = trade->second.receiver.get(*this); market != nullptr) {
+					market->notify_trade_extended(trade_id, trade->second.num_batches);
+				}
+			}
+
+			p1->add_message(
+			   *this,
+			   std::unique_ptr<Message>(new Message(
+			      Message::Type::kTrading, get_gametime(), _("Trade Extension Accepted"),
+			      proposing_market != nullptr ? proposing_market->descr().icon_filename() :
+			                                    "images/wui/menus/diplomacy.png",
+			      _("Trade extension proposal accepted"),
+			      format_l(_("%s has accepted your proposal to extend a trade."), p2->get_name()))));
+
+			trade_extension_proposals_.erase(it);
+
+			if (trade->second.num_batches == kInfiniteTrade) {
+				// If the trade is infinite now, further extension don't make sense.
+				trade_extension_proposals_.erase(
+				   std::remove_if(
+				      trade_extension_proposals_.begin(), trade_extension_proposals_.end(),
+				      [trade_id](const TradeExtension& te) { return te.trade_id == trade_id; }),
+				   trade_extension_proposals_.end());
+			}
+
+			Notifications::publish(
+			   NoteTradeChanged(trade_id, NoteTradeChanged::Action::kExtensionProposal));
+			return;
+		}
+	}
+
+	verb_log_warn("accept_trade_extension(%u): not found, ignoring", trade_id);
+}
+
+std::vector<TradeExtension> Game::find_trade_extensions(const TradeID trade_id,
+                                                        const PlayerNumber player,
+                                                        const bool as_proposer) const {
+	std::vector<TradeExtension> result;
+	MutexLock m(MutexLock::ID::kObjects);
+	for (const TradeExtension& te : trade_extension_proposals_) {
+		if (te.trade_id == trade_id) {
+			if ((te.proposer == player) == as_proposer) {
+				result.push_back(te);
+			}
+		}
+	}
+	return result;
+}
+
+std::vector<TradeID> Game::find_trade_offers(PlayerNumber receiver, Coords accept_at) const {
+	std::vector<TradeID> result;
+	Path unused;
+	for (const auto& pair : trade_agreements_) {
+		if (pair.second.state == TradeInstance::State::kProposed &&
+		    pair.second.receiving_player == receiver) {
+
+			if (!accept_at.valid()) {
+				result.push_back(pair.first);
+			} else {
+				MutexLock m(MutexLock::ID::kObjects);
+				Market* initiator = pair.second.initiator.get(*this);
+				if (initiator != nullptr &&
+				    map().findpath(map().br_n(accept_at), map().br_n(initiator->get_position()), 0,
+				                   unused, CheckStepDefault(MOVECAPS_WALK), 0, 0, wwWORKER) >= 0) {
+					result.push_back(pair.first);
+				}
+			}
+		}
+	}
+	return result;
+}
+
+std::vector<TradeID> Game::find_trade_proposals(PlayerNumber initiator,
+                                                Serial market_filter) const {
+	std::vector<TradeID> result;
+	for (const auto& pair : trade_agreements_) {
+		if (pair.second.state == TradeInstance::State::kProposed) {
+			if (market_filter == 0 || pair.second.initiator.serial() == market_filter) {
+				if (Market* market = pair.second.initiator.get(*this);
+				    market != nullptr && market->owner().player_number() == initiator) {
+					result.push_back(pair.first);
+				}
+			}
+		}
+	}
+	return result;
+}
+
+std::vector<TradeID> Game::find_active_trades(PlayerNumber player) const {
+	std::vector<TradeID> result;
+	for (const auto& pair : trade_agreements_) {
+		if (pair.second.state == TradeInstance::State::kRunning) {
+			if (pair.second.receiving_player == player || pair.second.sending_player == player) {
+				result.push_back(pair.first);
+			}
+		}
+	}
+	return result;
 }
 
 LuaGameInterface& Game::lua() {

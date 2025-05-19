@@ -294,6 +294,7 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameMessagesFilterSeafaring,
 	kInGameMessagesFilterWarfare,
 	kInGameMessagesFilterScenario,
+	kInGameMessagesFilterDiplomacy,
 	kInGameMessagesGoto,
 	kInGameMessages_End = kInGameMessagesGoto,
 
