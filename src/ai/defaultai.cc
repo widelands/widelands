@@ -3365,8 +3365,6 @@ void DefaultAI::check_flag_distances(const Time& gametime) {
 }
 
 void DefaultAI::trading_actions(const Time& /*gametime*/) {
-	// TODO(Nordfriese): Rewrite this ultra-simplistic logic to account for actual preciousness of
-	// wares for us instead of static preciousness, and diplomatic relation to the offering player.
 	// TODO(Nordfriese): Implement actual handling of market buildings.
 
 	const std::vector<Widelands::TradeID> offers = game().find_trade_offers(player_number());
@@ -3494,74 +3492,77 @@ bool DefaultAI::evaluate_trade(const Widelands::TradeInstance& offer,
 		return false;
 	}
 
-	constexpr int32_t kNoCostWaresTarget = 30;
-
 	// This is what the other player sends to us.
 	int32_t receive_preciousness = 0;
 	for (const auto& pair : offer.items_to_send) {
-		const Widelands::WareDescr* descr = game().descriptions().get_ware_descr(pair.first);
-
-		const int32_t target = descr->has_demand_check(tribe_->name()) ?
-		                          economy->target_quantity(pair.first).permanent :
-		                          kNoCostWaresTarget;
-
-		const int32_t stock = calculate_stocklevel(pair.first, WareWorker::kWare);
-		const int32_t shortage = target - stock;  // negative means surplus
-		const int32_t count = batches * pair.second;
-
-		int32_t preciousness = descr->ai_hints().preciousness(tribe_->name());
-
-		if (shortage >= 0) {
-			if (count <= shortage) {
-				preciousness += shortage / 2;
-			}
-		} else {
-			preciousness += shortage;  // we have surplus, ie. negative shortage
-			if (count >= target) {
-				preciousness -= count - target;
-			}
-			if (preciousness < 0) {
-				preciousness = 0;
-			}
-		}
-
-		receive_preciousness += count * preciousness;
+		const int32_t amount = batches * pair.second;
+		receive_preciousness += amount * trade_preciousness(pair.first, amount, economy, true);
 	}
 
 	// This is what we pay to the other player.
 	int32_t send_cost = 0;
 	for (const auto& pair : offer.items_to_receive) {
-		const Widelands::WareDescr* descr = game().descriptions().get_ware_descr(pair.first);
+		const int32_t amount = batches * pair.second;
+		send_cost += amount * trade_preciousness(pair.first, amount, economy, false);
+	}
 
-		const int32_t target = descr->has_demand_check(tribe_->name()) ?
-		                          economy->target_quantity(pair.first).permanent :
-		                          kNoCostWaresTarget;
+	// TODO(tothxa): consider alliances and diploscore too
+	return receive_preciousness > send_cost;
+}
 
-		const int32_t stock = calculate_stocklevel(pair.first, WareWorker::kWare);
-		const int32_t surplus = stock - target;  // negative means shortage
-		const int32_t count = batches * pair.second;
+int32_t DefaultAI::trade_preciousness(const Widelands::DescriptionIndex ware_id,
+                                      const int32_t amount,
+                                      const Widelands::Economy* economy,
+                                      const bool receive) {
+	// TODO(tothxa): Preciousness should be more dynamic, considering producers, consumers,
+	//               and resource availability. The static values from the tribe definition
+	//               are often misleading, and not always reflect production costs.
 
-		int32_t preciousness = descr->ai_hints().preciousness(tribe_->name());
+	const Widelands::WareDescr* descr = game().descriptions().get_ware_descr(ware_id);
 
-		if (surplus <= 0) {
-			preciousness -= surplus;  // ie. increase by shortage
-			if (count >= stock) {
-				preciousness += count * 2;  // we don't want to give all our wares
+	constexpr int32_t kNoCostWaresTarget = 30;
+	const int32_t target = descr->has_demand_check(tribe_->name()) ?
+	                          economy->target_quantity(ware_id).permanent : kNoCostWaresTarget;
+
+	const int32_t stock = calculate_stocklevel(ware_id, WareWorker::kWare);
+
+	int32_t preciousness = descr->ai_hints().preciousness(tribe_->name());
+
+	if (target >= stock) {
+		const int32_t shortage = target - stock;
+
+		if (receive) {
+			if (amount <= shortage) {
+				preciousness += shortage / 2;
 			}
-		} else {
-			if (surplus > count) {
-				preciousness -= surplus / 2;
-				if (preciousness < 0) {
-					preciousness = 0;
-				}
+
+		} else {  // send
+			preciousness += shortage;
+			if (amount >= stock) {
+				preciousness += amount * 2;  // we don't want to give all our wares
 			}
 		}
 
-		// TODO(tothxa): consider alliances and diploscore too
-		send_cost += count * preciousness;
+	} else {
+		const int32_t surplus = stock - target;
+
+		if (receive) {
+			preciousness -= surplus;
+			if (amount >= target) {
+				preciousness -= amount - target;
+			}
+
+		} else {  // send
+			if (surplus > amount) {
+				preciousness -= surplus / 2;
+			}
+		}
 	}
 
-	return receive_preciousness > send_cost;
+	if (preciousness < 0) {
+		preciousness = 0;
+	}
+	return preciousness;
 }
 
 // Dealing with diplomacy actions
