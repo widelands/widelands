@@ -131,9 +131,12 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
   -sASYNCIFY -sASYNCIFY_STACK_SIZE=32768 \
   -sALLOW_MEMORY_GROWTH -sINITIAL_MEMORY=128mb -sMEMORY_GROWTH_LINEAR_STEP=32mb \
   -sENVIRONMENT=web,worker \
+  -sMODULARIZE \
   -lidbfs.js \
   -lwebsocket.js \
-  -sPROXY_POSIX_SOCKETS \
+  -sEXPORTED_RUNTIME_METHODS=callMain,addRunDependency,removeRunDependency \
+  -sEXPORT_ALL \
+  -sEXIT_RUNTIME \
   -Wno-pthreads-mem-growth")
 else()
   find_package(OpenGL REQUIRED)
