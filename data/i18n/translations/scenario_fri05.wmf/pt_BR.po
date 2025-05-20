@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-05-19 03:23+0000\n"
 "PO-Revision-Date: 2023-01-04 20:43+0000\n"
 "Last-Translator: Daniel Martins <danieljogo982@gmail.com>, 2024\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/widelands/teams/35159/pt_BR/)\n"
@@ -34,13 +34,13 @@ msgstr ""
 "cenário, mas estará em desvantagem. Recomendo que complete o cenário "
 "anterior primeiro e depois reinicie esta missão."
 
-#: ../../../../data/campaigns/fri05.wmf/scripting/init_p1.lua:2978
+#: ../../../../data/campaigns/fri05.wmf/scripting/init_p1.lua:2979
 #: ../../../../data/campaigns/fri05.wmf/scripting/tribes/helgoland/init.lua:7
 msgid "Helgoland"
 msgstr "Helgolandia"
 
 #. TRANSLATORS: This Danish ship is named after the Capital of Denmark
-#: ../../../../data/campaigns/fri05.wmf/scripting/init_p2.lua:13
+#: ../../../../data/campaigns/fri05.wmf/scripting/init_p2.lua:14
 msgid "København"
 msgstr "København"
 
