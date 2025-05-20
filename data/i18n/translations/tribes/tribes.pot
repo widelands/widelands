@@ -6,13 +6,43 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-05-01 03:23+0000\n"
+"POT-Creation-Date: 2025-05-19 03:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/tribes/buildings/markets/amazons/market/init.lua:8
+msgctxt "amazons_building"
+msgid "Market"
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/tribes/buildings/markets/atlanteans/market/init.lua:83
+msgctxt "atlanteans_building"
+msgid "Market"
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/tribes/buildings/markets/barbarians/market/init.lua:8
+msgctxt "barbarians_building"
+msgid "Market"
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/tribes/buildings/markets/empire/market/init.lua:8
+msgctxt "empire_building"
+msgid "Market"
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/tribes/buildings/markets/frisians/market/init.lua:8
+msgctxt "frisians_building"
+msgid "Market"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:8

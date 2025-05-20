@@ -24,6 +24,8 @@ wl_library(ui_basic
     icon.h
     icongrid.cc
     icongrid.h
+    infinite_spinner.cc
+    infinite_spinner.h
     listselect.cc
     listselect.h
     messagebox.cc
