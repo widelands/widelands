@@ -299,7 +299,10 @@ public:
 	/// the Request is passed for disambiguation. This may be nullptr, e.g. when we want
 	/// to get info about a queue. Currently disambiguation is used only by warehouse
 	/// code because expedition bootstraps may have multiple queues for the same item.
-	virtual InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*);
+	virtual InputQueue&
+	inputqueue(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id);
+	virtual bool
+	can_change_max_fill(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id);
 
 	virtual bool burn_on_destroy();
 	void destroy(EditorGameBase&) override;
@@ -317,8 +320,9 @@ public:
 	bool leave_check_and_wait(Game&, Worker&);
 	void leave_skip(Game&, Worker&);
 
-	const WarePriority& get_priority(WareWorker, DescriptionIndex) const;
-	void set_priority(WareWorker, DescriptionIndex, const WarePriority&);
+	const WarePriority& get_priority(WareWorker, DescriptionIndex, uint32_t disambiguator_id) const;
+	void set_priority(WareWorker, DescriptionIndex, const WarePriority&, uint32_t disambiguator_id);
+	[[nodiscard]] virtual uint32_t get_priority_disambiguator_id(const Request* req) const;
 
 	/**
 	 * The former buildings vector keeps track of all former buildings
@@ -418,6 +422,9 @@ protected:
 	void
 	draw_info(InfoToDraw info_to_draw, const Vector2f& point_on_dst, float scale, RenderTarget* dst);
 
+	[[nodiscard]] std::string named_building_census_string(const std::string& icon_fmt,
+	                                                       std::string name) const;
+
 	void set_seeing(bool see);
 	void set_attack_target(AttackTarget* new_attack_target);
 	void set_soldier_control(SoldierControl* new_soldier_control);
@@ -438,7 +445,7 @@ protected:
 	//  The player who has defeated this building.
 	PlayerNumber defeating_player_{0U};
 
-	std::map<DescriptionIndex, WarePriority> ware_priorities_;
+	std::map<std::pair<DescriptionIndex, uint32_t>, WarePriority> ware_priorities_;
 
 	/// Whether we see our vision_range area based on workers in the building
 	bool seeing_{false};

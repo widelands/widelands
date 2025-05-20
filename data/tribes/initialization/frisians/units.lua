@@ -1,5 +1,3 @@
-descriptions = wl.Descriptions() -- TODO(matthiakl): only for savegame compatibility with 1.0, do not use.
-
 image_dirname = path.dirname(__file__) .. "images/"
 
 push_textdomain("tribes_encyclopedia")
@@ -1545,6 +1543,19 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("frisians_building", "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools."),
             -- TRANSLATORS: Note helptext for a Frisian warehouse: Port
             note = pgettext("frisians_building", "Similar to the Headquarters a Port can be attacked and destroyed by an enemy. It is recommendable to send soldiers to defend it.")
+         }
+      },
+
+      -- Markets
+      {
+         name = "frisians_market",
+         helptexts = {
+            -- TRANSLATORS: Lore helptext for a Frisian market: Market
+            lore = pgettext("frisians_building", "Tradecraft is the fine art of getting others to give you the wares that you want in exchange for wares you don’t want; excuse me, I mean, for wares you convince them to think that they need."),
+            -- TRANSLATORS: Lore author helptext for a Frisian market: Market
+            lore_author = pgettext("frisians_building", "A trader explaining his diplomacy"),
+            -- TRANSLATORS: Purpose helptext for a Frisian market: Market
+            purpose = pgettext("frisians_building", "A market enables trading with other tribes.")
          }
       },
 
