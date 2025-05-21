@@ -33,20 +33,6 @@
 #include "logic/game.h"
 #include "ui_basic/progresswindow.h"
 
-#ifdef __EMSCRIPTEN__
-#include <emscripten.h>
-EM_ASYNC_JS(void, __sync_em_fs_save, (), {
-	// clang-format off
-    // The following code is not C++ code, but JavaScript code.
-	console.log(`fs::__sync_em_fs_save`);
-    await new Promise((resolve, reject) => FS.syncfs(err => {
-        if (err) reject(err);
-        resolve();
-    }));
-    // (normally you would do something with the fetch here)
-});
-#endif
-
 namespace Widelands {
 
 GameSaver::GameSaver(FileSystem& fs, Game& game) : fs_(fs), game_(game) {
@@ -127,12 +113,5 @@ void GameSaver::save() {
 		GameInteractivePlayerPacket p;
 		p.write(fs_, game_, mos);
 	}
-#ifdef __EMSCRIPTEN__
-	verb_log_info_time(game_.get_gametime(), "Game: Syncing Browser Data ... ");
-	set_progress_message(_("Syncing browser data"), 5);
-	{
-		__sync_em_fs_save();
-	}
-#endif
 }
 }  // namespace Widelands

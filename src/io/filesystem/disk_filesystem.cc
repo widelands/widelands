@@ -219,6 +219,7 @@ void RealFSImpl::fs_unlink(const std::string& file) {
 	} else {
 		unlink_file(file);
 	}
+	do_sync_idbfs();
 }
 
 /**
@@ -463,6 +464,7 @@ void RealFSImpl::write(const std::string& fname,
 	if ((length != 0u) && c != 1) {  // data might be 0 blocks long
 		throw wexception("Write to %s (%s) failed", fname.c_str(), fullname.c_str());
 	}
+	do_sync_idbfs();
 }
 
 // rename a file or directory
@@ -474,6 +476,7 @@ void RealFSImpl::fs_rename(const std::string& old_name, const std::string& new_n
 		   "RealFSImpl::fs_rename", fullname1,
 		   std::string("unable to rename file to ") + fullname2 + ", " + strerror(errno));
 	}
+	do_sync_idbfs();
 }
 
 /*****************************************************************************
@@ -533,7 +536,6 @@ struct RealFSStreamWrite : public StreamWrite {
 	}
 
 	~RealFSStreamWrite() override {
-		StreamWrite::flush();
 		fclose(file_);
 	}
 
