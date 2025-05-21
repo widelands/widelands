@@ -69,6 +69,22 @@
 #define PATH_MAX 0x10000
 #endif
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+// clang-format off
+EM_ASYNC_JS(void, emscripten_do_sync_idbfs, (), {
+	 await new Promise((resolve, reject) => FS.syncfs(err => err ? reject(err) : resolve()))
+});
+// clang-format on
+#else
+<<<<<<< HEAD inline void emscripten_do_sync_idbfs() {
+}
+=======
+void emscripten_do_sync_idbfs() {
+}
+>>>>>>> 748ed6b7fc07b8fd5acc25ea0cd04353786f3d0b
+#endif
+
 namespace {
 /// A class that makes iteration over filename_?.* templates easy. It is much faster than using
 /// regex.
@@ -251,6 +267,10 @@ std::string FileSystem::get_homedir() {
 	}
 
 	return homedir;
+}
+
+void FileSystem::do_sync_idbfs() {
+	emscripten_do_sync_idbfs();
 }
 
 #ifdef USE_XDG
