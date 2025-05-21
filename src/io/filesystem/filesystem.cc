@@ -72,12 +72,12 @@
 #ifdef __EMSCRIPTEN__
 #include <emscripten.h>
 // clang-format off
-EM_ASYNC_JS(void, _do_sync_idbfs, (), {
+EM_ASYNC_JS(void, emscripten_do_sync_idbfs, (), {
 	 await new Promise((resolve, reject) => FS.syncfs(err => err ? reject(err) : resolve()))
 });
 // clang-format on
 #else
-void _do_sync_idbfs () {}
+void emscripten_do_sync_idbfs () {}
 #endif
 
 namespace {
@@ -265,7 +265,7 @@ std::string FileSystem::get_homedir() {
 }
 
 void FileSystem::do_sync_idbfs () {
-	_do_sync_idbfs();
+	emscripten_do_sync_idbfs();
 }
 
 #ifdef USE_XDG
