@@ -77,7 +77,8 @@ EM_ASYNC_JS(void, _do_sync_idbfs, (), {
 });
 // clang-format on
 #else
-void _do_sync_idbfs () {}
+void _do_sync_idbfs() {
+}
 #endif
 
 namespace {
@@ -264,7 +265,7 @@ std::string FileSystem::get_homedir() {
 	return homedir;
 }
 
-void FileSystem::do_sync_idbfs () {
+void FileSystem::do_sync_idbfs() {
 	_do_sync_idbfs();
 }
 
