@@ -23,7 +23,7 @@
 #include <string>
 #include <vector>
 
-void emscripten_do_sync_idbfs ();
+void emscripten_do_sync_idbfs();
 
 using FilenameSet = std::set<std::string>;
 
