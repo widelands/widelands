@@ -29,20 +29,6 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 
-#ifdef __EMSCRIPTEN__
-#include <emscripten.h>
-EM_ASYNC_JS(void, __sync_em_fs_generic, (), {
-	// clang-format off
-    // The following code is not C++ code, but JavaScript code.
-	console.log(`fs::__sync_em_fs_generic`);
-    await new Promise((resolve, reject) => FS.syncfs(err => {
-        if (err) reject(err);
-        resolve();
-    }));
-    // (normally you would do something with the fetch here)
-});
-#endif
-
 void GenericSaveHandler::clear() {
 	error_ = Error::kNone;
 	std::fill(std::begin(error_msg_), std::end(error_msg_), "");
@@ -111,9 +97,6 @@ void GenericSaveHandler::save_file() {
 	try {
 		std::unique_ptr<FileSystem> fs(g_fs->create_sub_file_system(complete_filename_, type_));
 		do_save_(*fs);
-#ifdef __EMSCRIPTEN__
-		__sync_em_fs_generic();
-#endif
 	} catch (const std::exception& e) {
 		error_ |= Error::kSavingDataFailed;
 		uint32_t index = get_index(Error::kSavingDataFailed);

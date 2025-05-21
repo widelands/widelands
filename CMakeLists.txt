@@ -124,7 +124,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
   --use-port=sdl2_mixer -sSDL2_MIXER_FORMATS=ogg \
   --use-port=sdl2_ttf \
   --use-port=zlib \
-  -sNO_DISABLE_EXCEPTION_CATCHING")
+  -sNO_DISABLE_EXCEPTION_CATCHING -Os")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${USE_FLAGS}")
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${USE_FLAGS}")
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${USE_FLAGS} \
