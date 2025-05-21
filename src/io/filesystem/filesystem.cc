@@ -77,7 +77,7 @@ EM_ASYNC_JS(void, emscripten_do_sync_idbfs, (), {
 });
 // clang-format on
 #else
-void emscripten_do_sync_idbfs() {}
+inline void emscripten_do_sync_idbfs() {}
 #endif
 
 namespace {
