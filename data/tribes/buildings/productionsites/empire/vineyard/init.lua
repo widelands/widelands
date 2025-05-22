@@ -48,6 +48,15 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- nominal transition from tiny to ripe field (the longest possible transition is double):
+            --   22 + 28 + 40 = 90 sec
+            --   see data/tribes/immovables/grapevine/ and src/logic/map_objects/immovable_program.cc - ImmovableProgram::ActAnimate::execute()
+            -- estimation of number of nearest fields for optimal productivity (nominal + 1):
+            --   2 + (90 - (5 + 2.5 * 1.8 + 5)) / 48 = 3.57
+            -- procedure how to make verification measurement:
+            --   https://codeberg.org/wl/widelands/pulls/4725#issuecomment-4062998
+            -- min. time total (free 4 nearest fields):  24   + 24   = 48   sec
+            -- max. time total (free 4 furthest fields): 25.8 + 25.8 = 51.6 sec
             "call=plant",
             "call=harvest",
          }
@@ -56,6 +65,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting grapevines because ...
          descname = _("planting grapevines"),
          actions = {
+            -- time of worker: 19-20.8 sec
+            -- min. time: 19   + 5 = 24   sec
+            -- max. time: 20.8 + 5 = 25.8 sec
             "callworker=plant",
             "sleep=duration:5s"
          }
@@ -64,6 +76,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because ...
          descname = _("harvesting grapes"),
          actions = {
+            -- time of worker: 19-20.8 sec
+            -- min. time: 19   + 5 = 24   sec
+            -- max. time: 20.8 + 5 = 25.8 sec
             "callworker=harvest",
             "sleep=duration:5s"
          }

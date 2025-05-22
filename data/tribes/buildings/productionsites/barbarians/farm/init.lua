@@ -64,6 +64,15 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- nominal transition from tiny to ripe field (the longest possible transition is double):
+            --   30 + 45 + 50 = 125 sec
+            --   see data/tribes/immovables/wheatfield/ and src/logic/map_objects/immovable_program.cc - ImmovableProgram::ActAnimate::execute()
+            -- estimation of number of nearest fields for optimal productivity (nominal + 1):
+            --   2 + (125 - (6 + 2 * 1.8 + 10)) / 54.4 = 3.94
+            -- procedure how to make verification measurement:
+            --   https://codeberg.org/wl/widelands/pulls/4725#issuecomment-4062998
+            -- min. time total (free 4 nearest fields):  29.2 + 25.2 = 54.4 sec
+            -- max. time total (free 4 furthest fields): 40   + 36   = 76   sec
             "call=plant",
             "call=harvest",
          }
@@ -72,6 +81,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
          descname = _("planting wheat"),
          actions = {
+            -- time of worker: 19.2-30 sec
+            -- min. time: 19.2 + 10 = 29.2 sec
+            -- max. time: 30   + 10 = 40   sec
             "callworker=plant",
             "animate=working duration:7s",
             "sleep=duration:3s"
@@ -81,6 +93,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
          descname = _("harvesting wheat"),
          actions = {
+            -- time of worker: 21.2-32 sec
+            -- min. time: 21.2 + 4 = 25.2 sec
+            -- max. time: 32   + 4 = 36   sec
             "callworker=harvest",
             "animate=working duration:3s",
             "sleep=duration:1s"
