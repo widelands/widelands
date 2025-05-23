@@ -125,6 +125,11 @@ def find_includes(file_to_check):
                 include_file = match.groups()[0]
                 if os.path.isfile(include_file):
                     files.add(include_file)
+                elif '/third_party/' not in file_to_check and \
+                        not os.path.isfile(include_file + '.cmake'):
+                    # include file not found, probably in the wrong directory
+                    msg = f'include file not found (from {file_to_check})'
+                    raise FileNotFoundError(2, msg, include_file)
 
     return files
 
