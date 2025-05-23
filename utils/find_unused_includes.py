@@ -226,6 +226,7 @@ def main():
     """
 
     error_count = 0
+    checked_f = 0
 
     print('Tool to check for superfluous includes in header files. Call from src directory.')
     print('Checking...')
@@ -243,9 +244,11 @@ def main():
                     for hit in forward_declarations:
                         print('\t' + hit)
                     error_count = error_count + len(forward_declarations)
+                checked_f += 1
 
             elif filename.endswith('.cc'):
                 hits = check_file(full_path, True)
+                checked_f += 1
 
             if hits:
                 print('\nSuperfluous includes in ' + full_path)
@@ -257,7 +260,7 @@ def main():
         print('\nFound %d error(s).' % error_count)
         return 1
     else:
-        print('\nDone, files are clean.')
+        print(f'\nDone, {checked_f} files are clean.')
 
     return 0
 
