@@ -1391,7 +1391,7 @@ msgstr "Csapatok"
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:538
 #, c-format
 msgid "It is not recommended to permit waterway lengths greater than %u"
-msgstr "Nem javasolt az ennél hosszabb vízi utak engedélyezése: %u"
+msgstr "Nem javasolt %u-nál hosszabb víziutak engedélyezése"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:554
 msgid "Size: %1% x %2%"
@@ -1412,7 +1412,7 @@ msgstr "Üres térkép létrehozása…"
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:63
 #: ../../../../src/logic/addons.cc:63
 msgid "Map Generator"
-msgstr "Térképgenerátor"
+msgstr "Térképelőállító"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:81
 #: ../../../../src/wui/gamedetails.cc:169
@@ -1560,7 +1560,7 @@ msgid ""
 "The map generator could not produce a good-enough map with the provided "
 "settings. This map will probably need extensive editing to be playable. "
 "Consider creating a new map with different parameters."
-msgstr "A térképgenerálónak nem sikerült megfelelő térképet készíteni a megadott beállításokkal. Ez a térkép valószínűleg jelentős átdolgozást igényel ahhoz, hogy játszható legyen. Javasoljuk, hogy inkább készíts egy új térképet más beállításokkal."
+msgstr "A térképelőállítónak nem sikerült megfelelő térképet készítenie a megadott beállításokkal. Ez a térkép valószínűleg jelentős átdolgozást igényel ahhoz, hogy játszható legyen. Javasoljuk, hogy inkább készíts egy új térképet más beállításokkal."
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:737
 msgid "The Widelands Random Map Generator"
@@ -1569,7 +1569,7 @@ msgstr "A Widelands véletlenszerű térkép-előállítója"
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:739
 msgid ""
 "This map was generated automatically by the Widelands Random Map Generator."
-msgstr "Ezt a térképek a Widelands véletlenszerű térkép-előállítója hozta létre."
+msgstr "Ezt a térképet a Widelands véletlenszerű térkép-előállítója hozta létre."
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:747
 #: ../../../../src/network/gamehost.cc:1662
@@ -1910,7 +1910,7 @@ msgstr "Gazdaságok"
 #: ../../../../src/game_io/game_loader.cc:143
 #: ../../../../src/game_io/game_saver.cc:90
 msgid "Trades"
-msgstr ""
+msgstr "Kereskedelem"
 
 #: ../../../../src/game_io/game_loader.cc:150
 #: ../../../../src/game_io/game_saver.cc:97
@@ -2408,103 +2408,103 @@ msgstr "Kereskedelmi ajánlat"
 
 #: ../../../../src/logic/game.cc:1335
 msgid "New trade offer received"
-msgstr ""
+msgstr "Új üzleti ajánlat érkezett"
 
 #: ../../../../src/logic/game.cc:1336
 #, c-format
 msgid "You have received a new trade offer from %s."
-msgstr ""
+msgstr "Új üzleti ajánlatot kaptál %s játékostól."
 
 #: ../../../../src/logic/game.cc:1366
 msgid "Trade Accepted"
-msgstr ""
+msgstr "Üzleti ajánlat elfogadva"
 
 #: ../../../../src/logic/game.cc:1367
 msgid "Trade offer accepted"
-msgstr ""
+msgstr "Üzleti ajánlat elfogadva"
 
 #: ../../../../src/logic/game.cc:1368
 #, c-format
 msgid "%1$s has accepted your trade offer at %2$s."
-msgstr ""
+msgstr "%1$s elfogadta az üzleti ajánlatodat %2$s piacról. "
 
 #: ../../../../src/logic/game.cc:1386
 msgid "Trade Rejected"
-msgstr ""
+msgstr "Üzleti ajánlat elutasítva"
 
 #: ../../../../src/logic/game.cc:1387
 msgid "Trade offer rejected"
-msgstr ""
+msgstr "Üzleti ajánlat elutasítva"
 
 #: ../../../../src/logic/game.cc:1388
 #, c-format
 msgid "%1$s has rejected your trade offer at %2$s."
-msgstr ""
+msgstr "%1$s elutasította az üzleti ajánlatodat %2$s piacról. "
 
 #: ../../../../src/logic/game.cc:1410
 msgid "Trade Retracted"
-msgstr ""
+msgstr "Üzleti ajánlat visszavonva"
 
 #: ../../../../src/logic/game.cc:1412
 msgid "Trade offer retracted"
-msgstr ""
+msgstr "Üzleti ajánlat visszavonva"
 
 #: ../../../../src/logic/game.cc:1413
 #, c-format
 msgid "The trade offer by %s has been retracted."
-msgstr ""
+msgstr "%s visszavonta az üzleti ajánlatát."
 
 #: ../../../../src/logic/game.cc:1524
 msgid "Trade Extension Proposal"
-msgstr ""
+msgstr "Javaslat üzlet meghosszabbítására"
 
 #: ../../../../src/logic/game.cc:1526
 msgid "New trade extension proposal received"
-msgstr ""
+msgstr "Új javaslat egy üzlet meghosszabbítására"
 
 #: ../../../../src/logic/game.cc:1527
 #, c-format
 msgid "%s has proposed to extend a trade."
-msgstr ""
+msgstr "%s kéri, hogy hosszabbítsatok meg egy üzletet."
 
 #: ../../../../src/logic/game.cc:1554
 msgid "Trade Extension Retracted"
-msgstr ""
+msgstr "Üzlet hosszabbítási javaslat visszavonva"
 
 #: ../../../../src/logic/game.cc:1557
 msgid "Trade extension proposal retracted"
-msgstr ""
+msgstr "Üzlet hosszabbítási javaslat visszavonva"
 
 #: ../../../../src/logic/game.cc:1558
 #, c-format
 msgid "The proposal by %s to extend a trade has been retracted."
-msgstr ""
+msgstr "%s visszavonta egy üzlet meghosszabbítási javaslatát."
 
 #: ../../../../src/logic/game.cc:1596
 msgid "Trade Extension Rejected"
-msgstr ""
+msgstr "Üzlet hosszabbítása elutasítva"
 
 #: ../../../../src/logic/game.cc:1599
 msgid "Trade extension proposal rejected"
-msgstr ""
+msgstr "Üzlet hosszabbítása elutasítva"
 
 #: ../../../../src/logic/game.cc:1600
 #, c-format
 msgid "%s has rejected your proposal to extend a trade."
-msgstr ""
+msgstr "%s elutasította a javaslatodat egy üzlet meghosszabbítására."
 
 #: ../../../../src/logic/game.cc:1651
 msgid "Trade Extension Accepted"
-msgstr ""
+msgstr "Üzlet meghosszabbítása elfogadva"
 
 #: ../../../../src/logic/game.cc:1654
 msgid "Trade extension proposal accepted"
-msgstr ""
+msgstr "Üzlet meghosszabbítása elfogadva"
 
 #: ../../../../src/logic/game.cc:1655
 #, c-format
 msgid "%s has accepted your proposal to extend a trade."
-msgstr ""
+msgstr "%s elfogadta a javaslatodat egy üzlet meghosszabbítására."
 
 #: ../../../../src/logic/game_data_error.cc:51
 msgid ""
@@ -2596,136 +2596,136 @@ msgstr "%u%% lebontva"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:70
 msgid "A new market was added to your economy."
-msgstr ""
+msgstr "Egy új piactérrel bővült a gazdaságod."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:152
 #, c-format
 msgid "%u trade"
 msgid_plural "%u trades"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u üzlet"
+msgstr[1] "%u üzlet"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:274
 msgid "Trade Cancelled"
-msgstr ""
+msgstr "Üzlet felbontva"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:274
 msgid "Trade Complete"
-msgstr ""
+msgstr "Üzlet teljesítve"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:276
 msgid "Trade agreement cancelled"
-msgstr ""
+msgstr "Üzleti megállapodás felbontva"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:276
 msgid "Trade agreement complete"
-msgstr ""
+msgstr "Üzlet teljesítve"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:277
 #, c-format
 msgid "Your trade agreement at %s has been completed."
-msgstr ""
+msgstr "Egy üzlet sikeresen lezárult %s piacon. "
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:278
 #, c-format
 msgid "Your trade agreement at %s has been cancelled."
-msgstr ""
+msgstr "Egy üzleti megállapodás %s piaccal fel lett bontva."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:546
 msgid "Trade Paused"
-msgstr ""
+msgstr "Üzlet felfüggesztve"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:547
 msgid "Trade agreement paused"
-msgstr ""
+msgstr "Üzlet felfüggesztve"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:548
 #, c-format
 msgid "%1$s paused the trade with you at %2$s."
-msgstr ""
+msgstr "%1$s felfüggesztette egy üzlet teljesítését %2$s piaccal."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:552
 msgid "Trade Resumed"
-msgstr ""
+msgstr "Üzlet újraindult"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:553
 msgid "Trade agreement resumed"
-msgstr ""
+msgstr "Üzlet újraindult"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:554
 #, c-format
 msgid "%1$s resumed the trade with you at %2$s."
-msgstr ""
+msgstr "%1$s újraindította egy felfüggesztett üzlet teljesítését %2$s piaccal."
 
 #. * TRANSLATORS: "At" is the market's name, and "with" is the receiving
 #. player's name
 #: ../../../../src/logic/map_objects/tribes/market.cc:714
 #, c-format
 msgid "Trade agreement at %1$s with %2$s"
-msgstr ""
+msgstr "Üzleti megállapodás %1$s piacon %2$s játékossal"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:722
 #, c-format
 msgid "Trade offer from %s"
-msgstr ""
+msgstr "Üzleti ajánlat %s játékostól"
 
 #. * TRANSLATORS: "From" is the market's name, and "to" is the receiving
 #. player's name
 #: ../../../../src/logic/map_objects/tribes/market.cc:732
 #, c-format
 msgid "Trade offer from %1$s to %2$s"
-msgstr ""
+msgstr "Üzleti ajánlat %1$s piacról %2$s játékosnak"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:742
 #, c-format
 msgid "%d batch"
 msgid_plural "%d batches"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d szállítmány"
+msgstr[1] "%d szállítmány"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:744
 msgid "Trade runs indefinitely"
-msgstr ""
+msgstr "Határozatlan idejű üzlet"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:755
 #, c-format
 msgid "%d batch delivered"
 msgid_plural "%d batches delivered"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Eddig %d szállítmány telesült"
+msgstr[1] "Eddig %d szállítmány telesült"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:763
 #, c-format
 msgid "%d batch remaining"
 msgid_plural "%d batches remaining"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Hátravan %d szállítmány"
+msgstr[1] "Hátravan %d szállítmány"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:777
 msgid "Paused by both players"
-msgstr ""
+msgstr "Mindkét játékos szünetelteti"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:779
 msgid "Paused by you"
-msgstr ""
+msgstr "Te szünetelteted"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:780
 #: ../../../../src/logic/map_objects/tribes/market.cc:784
 #, c-format
 msgid "Paused by %s"
-msgstr ""
+msgstr "%s szünetelteti"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:786
 msgid "Active"
-msgstr ""
+msgstr "Aktív"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:798
 msgid "Player sends:"
-msgstr ""
+msgstr "A tulajdonos küldi:"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:798
 msgid "You send:"
-msgstr ""
+msgstr "Te küldöd:"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
 #. * TRANSLATORS:    %1$i = "2"
@@ -2735,15 +2735,15 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1407
 #, c-format
 msgid "%1$i× %2$s"
-msgstr ""
+msgstr "%1$i× %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:810
 msgid "Player receives:"
-msgstr ""
+msgstr "A tulajdonos kapja:"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:810
 msgid "You receive:"
-msgstr ""
+msgstr "Te kapod:"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:253
@@ -3458,7 +3458,7 @@ msgstr "%d. kikötő"
 #, c-format
 msgctxt "market"
 msgid "Market %d"
-msgstr ""
+msgstr "%d. piactér"
 
 #: ../../../../src/logic/player.cc:2097
 #, c-format
@@ -3730,7 +3730,7 @@ msgstr "Kapcsolat bontva"
 msgid ""
 "The connection with the host was lost for the following reason:\n"
 "%s"
-msgstr "A gazdával való kapcsolat megszakadt az alábbi okból:\n%s"
+msgstr "A házigazdával való kapcsolat megszakadt az alábbi okból:\n%s"
 
 #: ../../../../src/network/gamehost.cc:118
 msgid "Available host commands are:"
@@ -3948,12 +3948,12 @@ msgstr "A játék %s lezárva"
 #: ../../../../src/network/internet_gaming.cc:598
 #, c-format
 msgid "%s joined the lobby"
-msgstr "%s belépett a szobába"
+msgstr "%s belépett a váróba"
 
 #: ../../../../src/network/internet_gaming.cc:609
 #, c-format
 msgid "%s left the lobby"
-msgstr "%s kilépett a szobából"
+msgstr "%s kilépett a váróból"
 
 #: ../../../../src/network/internet_gaming.cc:666
 msgid "Chat message could not be sent."
@@ -4110,12 +4110,12 @@ msgstr "A kiszolgáló összeomlott és elmentette a játék állapotát."
 
 #: ../../../../src/network/network_gaming_messages.cc:37
 msgid "Client and host have become desynchronized."
-msgstr "Az ügyfél és a gazda nincs többé szinkronban."
+msgstr "Az ügyfél és a házigazda nincs többé szinkronban."
 
 #: ../../../../src/network/network_gaming_messages.cc:38
 #, c-format
 msgid "Kicked by the host: %s"
-msgstr "Kirúgva a kiszolgáló által: %s"
+msgstr "Kirúgva a házigazda által: %s"
 
 #: ../../../../src/network/network_gaming_messages.cc:39
 #, c-format
@@ -4209,12 +4209,12 @@ msgstr "Az ügyfél egy fájlt kér, de nincs elérhető elküldendő fájl."
 #: ../../../../src/network/network_gaming_messages.cc:69
 #, c-format
 msgid "Host sent player %s to the lobby!"
-msgstr "A gazda elküldte %s játékost a váróba!"
+msgstr "A házigazda visszaküldte %s játékost a váróba!"
 
 #: ../../../../src/network/network_gaming_messages.cc:71
 #, c-format
 msgid "WARNING: %1$s uses version: %2$s, while Host uses version: %3$s"
-msgstr "FIGYELMEZTETÉS: %1$s ezt a verziót használja: %2$s, míg a gazda ezt a verziót: %3$s"
+msgstr "FIGYELMEZTETÉS: %1$s ezt a verziót használja: %2$s, míg a házigazda ezt a verziót: %3$s"
 
 #: ../../../../src/network/network_gaming_messages.cc:72
 #, c-format
@@ -4370,11 +4370,11 @@ msgstr "Nincs találat"
 
 #: ../../../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
-msgstr "Kis türelmet kérek…"
+msgstr "Egy kis türelmet kérek…"
 
 #: ../../../../src/ui_basic/panel.cc:467
 msgid "Game ending – please wait…"
-msgstr "Játék befejezése – kis türelmet kérek…"
+msgstr "Játék befejezése – egy kis türelmet kérek…"
 
 #: ../../../../src/ui_basic/progresswindow.cc:83
 #: ../../../../src/wlapplication.cc:489
@@ -4947,7 +4947,7 @@ msgid ""
 "terms of the GNU General Public License (GPL) version 2 (the same license "
 "under which Widelands itself is distributed). For more information on the "
 "GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu."
-msgstr "Itt tudod a saját bővítményeidet feltölteni a kiszolgálóra, hogy mások is használhassák. A feltöltéssel hozzájárulsz a munkád közzétételéhez a GNU GPL 2. verziójának a feltételei szerint (megegyezően magával a Widelands programmal). A GPL-ről további információkat a főmenüben „A Widelands névjegye” alatti „Licenc” fülön találsz."
+msgstr "Itt tudod a saját bővítményeidet feltölteni a kiszolgálóra, hogy mások is használhassák. A feltöltéssel hozzájárulsz a munkád közzétételéhez a GNU GPL 2. verziójának a feltételei szerint (megegyezően magával a Widelands programmal). A GPL-ről további információkat a főmenüben „A Widelands névjegye” alatti „Licensz” fülön találsz."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:655
 msgid ""
@@ -5007,7 +5007,7 @@ msgid ""
 "Browse and install maps from the widelands.org website maps archive. Like "
 "manually downloaded maps, installed website maps are stored in the ‘%s’ "
 "directory under the Widelands home directory."
-msgstr "Térképek tallózása és telepítése a wideland.org webhely térképarchívumából. A kézileg letöltött térképekhez hasonlóan, a webhelyről telepített térképek is a(z) „%s” könyvtárban találhatók, a Widelands könyvtára alatt."
+msgstr "Térképek tallózása és telepítése a wideland.org honlap térképarchívumából. A kézileg letöltött térképekhez hasonlóan, a honlapról telepített térképek is a „%s” könyvtárban találhatók, a Widelands könyvtára alatt."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:762
 msgid "Development"
@@ -5217,7 +5217,7 @@ msgstr "Böngésző (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1618
 msgid "Translations for website maps"
-msgstr "A webhelyen található térképek fordításai"
+msgstr "A honlapon található térképek fordításai"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1621
 #, c-format
@@ -5242,12 +5242,12 @@ msgstr "• %s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1684
 msgid "Website Maps"
-msgstr "Webhelyen található térképek"
+msgstr "Térképek a honlapról"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1685
 #, c-format
 msgid "Website Maps (%u)"
-msgstr "Webhelyen található térképek (%u)"
+msgstr "Térképek a honlapról (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1717
 #, c-format
@@ -5345,7 +5345,7 @@ msgid ""
 "simple punctuation (period, hyphen, and underscore; not multiple periods). "
 "Other characters such as whitespace are not permitted. Filenames may not "
 "exceed 80 characters."
-msgstr "A fájlnevek csak alfanumerikus karaktereket (A-Z, a-z, 0-9) és egyszerű központozásokat (pont, vessző, alávonás;  több pontot nem) tartalmazhatnak. Más karakterek, például szóközök, nem használhatóak. A fájlnevek legfeljebb 80 karakteresek lehetnek."
+msgstr "A fájlnevek csak ékezet nélküli betűket (A-Z, a-z), számjegyeket (0-9) és egyszerű központozásokat (vessző, egyszerű kötőjel, alávonás, egy darab pont) tartalmazhatnak. Más karakterek, például szóközök, nem használhatóak. A fájlnevek legfeljebb 80 karakterből állhatnak."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2011
 #, c-format
@@ -5390,11 +5390,11 @@ msgstr "A(z) „%1$s” bővítmény fordításait nem sikerült letölteni. A b
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2239
 msgid "Website Maps Translations"
-msgstr "Webhelyen található térképek fordításai"
+msgstr "A honlapon található térképek fordításai"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2240
 msgid "Downloading website maps translations…"
-msgstr "Webhelyen található térképek fordításainak letöltése…"
+msgstr "A honlapon található térképek fordításainak letöltése…"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2296
 #, c-format
@@ -5476,7 +5476,7 @@ msgid ""
 "This name is invalid. Reason: %s\n"
 "\n"
 "Please choose a different name."
-msgstr "Ez a név érvénytelen. Ok: %s\n\nVálassz más nevet."
+msgstr "Ez a név nem használható az alábbi okból: %s\n\nKérlek válassz más nevet!"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:396
 msgid "An add-on with this internal name already exists."
@@ -6444,7 +6444,7 @@ msgstr "Súgó: %s"
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:57
 #: ../../../../src/wlapplication_options.cc:320
 msgid "Metaserver Lobby"
-msgstr "Metakiszolgáló előszoba"
+msgstr "Metakiszolgáló váró"
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:67
 msgid "Clients online:"
@@ -6469,7 +6469,7 @@ msgstr "Új játék indítása"
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:128
 msgid "Leave Lobby"
-msgstr "Kilépés az előszobából"
+msgstr "Kilépés a váróból"
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:184
 msgid "User Status"
@@ -6781,7 +6781,7 @@ msgstr "Kérjük válassz egy térképet vagy egy mentett játékot!"
 
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:91
 msgid "The host has not yet selected a map or saved game."
-msgstr "A gazda még nem választott térképet vagy mentett játékot."
+msgstr "A házigazda még nem választott térképet vagy mentett játékot."
 
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:219
 msgid "Saved Game is Directory"
@@ -6806,13 +6806,13 @@ msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
 "The file was: %s\n"
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
-msgstr "A Widelands megpróbált elindítani egy játékot egy olyan fájlból amely nem található a megadott útvonalon.\nA fájl ez volt: %s\nHa ez történik egy hálózati játékban, akkor a gazda lehet hogy olyan fájlt választott amit nem birtokolsz. Alapesetben az ilyen fájlokat a gazdának kell elküldenie neked, de lehet hogy még nem végzett az átvitel!?!"
+msgstr "A Widelands olyan fájlból próbált meg elindítani egy játékot ami nincs a megadott könyvtárban: %s\nHa ez egy hálózati játék, akkor a házigazda lehet hogy olyan fájlt választott ami nincs meg nálad. Alapesetben az ilyen fájlokat a gazdagép a háttérben elküldi neked. Lehet hogy még nem végzett az átvitellel!?!"
 
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:281
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
-msgstr "A kiválasztott fájl nem található. Ha nem kerül automatikus átküldésre, akkor kérlek írj a gazdának erről a problémáról."
+msgstr "A kiválasztott fájl nem található. Ha nem jött át automatikusan, akkor kérjük, írd meg a problémát a házigazdának!"
 
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:330
 #, c-format
@@ -6998,7 +6998,7 @@ msgstr "Bejelentkezés regisztrált felhasználóként"
 #: ../../../../src/ui_fsmenu/main.cc:434
 #: ../../../../src/wlapplication_options.cc:316
 msgid "LAN / Direct IP"
-msgstr "Helyi hálózat / közvetlen IP"
+msgstr "Helyi hálózat / IP-cím közvetlen megadása"
 
 #: ../../../../src/ui_fsmenu/main.cc:435
 msgid "Play a private online game"
@@ -7085,7 +7085,7 @@ msgstr "A játék működésének és használatának beállításai"
 
 #: ../../../../src/ui_fsmenu/main.cc:536
 msgid "Readme, License, and Credits"
-msgstr "Útmutató, licenc és köszönetnyilvánítások"
+msgstr "Útmutató, licensz és köszönetnyilvánítások"
 
 #: ../../../../src/ui_fsmenu/main.cc:538
 #: ../../../../src/wlapplication_options.cc:304
@@ -7109,7 +7109,7 @@ msgstr "%1$s verzió"
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team • Licensed under the GNU "
 "General Public License V2.0"
-msgstr "(C) %1%-%2%, Widelands fejlesztőcsapat • Licenc: GNU General Public License V2.0"
+msgstr "(C) %1%-%2%, Widelands fejlesztőcsapat • Licensz: GNU General Public License V2.0"
 
 #: ../../../../src/ui_fsmenu/main.cc:890
 msgid "Click for the main menu"
@@ -7117,7 +7117,7 @@ msgstr "Kattints a kihagyáshoz!"
 
 #: ../../../../src/ui_fsmenu/main.cc:968
 msgid "Desyncing Add-On Found"
-msgstr "Szinkronizációs hibákat okozó bővítmény található"
+msgstr "Szinkronizációs hibákat okozó bővítményt találtunk"
 
 #: ../../../../src/ui_fsmenu/main.cc:969
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
@@ -7328,13 +7328,13 @@ msgstr "A görgetési beállítások visszaállítása a szabványos egy görgő
 
 #: ../../../../src/ui_fsmenu/mousewheel_options.cc:381
 msgid "Set for Touchpad"
-msgstr "Beállítás érintőpadhoz"
+msgstr "Beállítás érintőpárnához"
 
 #: ../../../../src/ui_fsmenu/mousewheel_options.cc:382
 msgid ""
 "Sets ‘Zoom Map’ and ‘Scroll Map’ to the recommended settings for a touchpad "
 "or other pointing device that can scroll horizontally as well as vertically."
-msgstr "Az érintőpadokhoz vagy más, vízszintes és függőleges görgetésre is alkalmas eszközökhöz javasolt beállítások alkalmazása a „Térkép nagyítása” és a „Térkép mozgatása” funkciókhoz"
+msgstr "Az érintőpárnákhoz vagy más, vízszintes és függőleges görgetésre is alkalmas eszközökhöz javasolt beállítások alkalmazása a „Térkép nagyítása” és a „Térkép mozgatása” funkciókhoz"
 
 #: ../../../../src/ui_fsmenu/mousewheel_options.cc:392
 msgid "Apply Scrolling"
@@ -7598,7 +7598,7 @@ msgstr "Ablakméret"
 #: ../../../../src/ui_fsmenu/options.cc:159
 msgctxt "multiscreen"
 msgid "Display"
-msgstr ""
+msgstr "Képernyő"
 
 #. * TRANSLATORS: short description for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:168
@@ -7737,7 +7737,7 @@ msgstr "Betanítás állása…"
 
 #: ../../../../src/ui_fsmenu/options.cc:420
 msgid "Interface"
-msgstr "Felület"
+msgstr "Kezelés"
 
 #: ../../../../src/ui_fsmenu/options.cc:421
 msgid "Sound"
@@ -7770,7 +7770,7 @@ msgstr "Soha"
 #: ../../../../src/ui_fsmenu/options.cc:583
 msgctxt "multiscreen"
 msgid "Follow mouse"
-msgstr ""
+msgstr "Ahol az egérmutató van"
 
 #. * TRANSLATORS: Display index and virtual coordinates, e.g, '#0 (0, 0, 1920,
 #. 1080)'
@@ -7820,7 +7820,7 @@ msgid ""
 "usually – but not always – well playable. Seafaring and artifacts are not "
 "supported. Add-ons of the Tribes and Script categories are disabled in "
 "random matches."
-msgstr "A véletlenszerű térképgeneráló még fejlesztés alatt áll. A generált térképek általában – de nem mindig – jól használhatóak. A hajózás és az ereklyék nem működnek. A törzsek és a parancsfájl kategóriákba tartozó bővítmények nem engedélyezettek a véletlen játékokban."
+msgstr "A véletlenszerű térképelőállító még fejlesztés alatt áll. Az előállított térképek általában – de nem mindig – jól használhatóak. A hajózás és az ereklyék nem működnek. A törzsek és a parancsfájl kategóriákba tartozó bővítmények nem engedélyezettek a véletlen játékokban."
 
 #: ../../../../src/ui_fsmenu/random_game.cc:127
 msgid "Map Generation Error"
@@ -7831,7 +7831,7 @@ msgid ""
 "The random map generator was unable to generate a suitable map. This happens"
 " occasionally because the generator is still in beta stage. Please try again"
 " with slightly different settings."
-msgstr "A véletlenszerű térképgeneráló nem tudott megfelelő térképet készíteni. Ez néha előfordul, mert a generáló még „béta” állapotban van. Kérjük próbálkozz újra kicsit más beállításokkal."
+msgstr "A véletlenszerű térképelőállító nem tudott megfelelő térképet készíteni. Ez néha előfordul, mert az előállító még „béta” állapotban van. Kérjük próbálkozz újra kicsit más beállításokkal."
 
 #: ../../../../src/ui_fsmenu/scenario_select.cc:47
 msgid "Choose Scenario"
@@ -8449,7 +8449,7 @@ msgstr "Kicsinyítés"
 
 #: ../../../../src/wlapplication_options.cc:425
 msgid "Reset Zoom"
-msgstr "Nagyítás visszaállítása"
+msgstr "Nagyítás alaphelyzet"
 
 #: ../../../../src/wlapplication_options.cc:430
 msgid "Jump to Next Location"
@@ -8634,7 +8634,7 @@ msgstr "Játéksebesség növelése 10-zel"
 
 #: ../../../../src/wlapplication_options.cc:695
 msgid "Reset Game Speed"
-msgstr "Játéksebesség visszaállítása"
+msgstr "Játéksebesség alaphelyzet"
 
 #: ../../../../src/wlapplication_options.cc:699
 msgid "Pause The Game"
@@ -8685,7 +8685,7 @@ msgstr "Csak küldetés"
 
 #: ../../../../src/wlapplication_options.cc:750
 msgid "Show Diplomacy Messages Only"
-msgstr ""
+msgstr "Csak diplomácia"
 
 #: ../../../../src/wlapplication_options.cc:755
 msgid "Go to Ship"
@@ -8733,7 +8733,7 @@ msgstr "Hadihajók"
 
 #: ../../../../src/wlapplication_options.cc:810
 msgid "Show Ships Being Refitted"
-msgstr "Átalakítás alatti hajók"
+msgstr "Átalakítás alatt lévő hajók"
 
 #: ../../../../src/wlapplication_options.cc:815
 msgid "Toggle Quick Navigation"
@@ -9202,40 +9202,40 @@ msgstr "Játék feladása?"
 
 #: ../../../../src/wui/actionconfirm.cc:568
 msgid "Cancel?"
-msgstr ""
+msgstr "Üzlet felbontása?"
 
 #: ../../../../src/wui/actionconfirm.cc:568
 msgid "Do you really want to cancel this trade agreement?"
-msgstr ""
+msgstr "Tényleg felbontod ezt az üzleti megállapodást?"
 
 #: ../../../../src/wui/actionconfirm.cc:596
 msgid "Extend Trade"
-msgstr ""
+msgstr "Üzlet meghosszabbítása"
 
 #: ../../../../src/wui/actionconfirm.cc:597
 msgid "Select by how many batches you want to extend this trade:"
-msgstr ""
+msgstr "Az kért hosszabbítás:"
 
 #: ../../../../src/wui/actionconfirm.cc:603
 #: ../../../../src/wui/marketwindow.cc:75
 msgid "Toggle indefinite trade"
-msgstr ""
+msgstr "Határozatlan idő beállítása/kikapcsolása"
 
 #: ../../../../src/wui/actionconfirm.cc:604
 #: ../../../../src/wui/marketwindow.cc:76
 msgid "Batches:"
-msgstr ""
+msgstr "Szállítmányok száma:"
 
 #: ../../../../src/wui/actionconfirm.cc:639
 msgid "Unpause?"
-msgstr ""
+msgstr "Üzlet újraindítása?"
 
 #: ../../../../src/wui/actionconfirm.cc:640
 msgid ""
 "Do you really want to unpause this trade?\n"
 "\n"
 "Doing so will reset all queues to their maximum capacity."
-msgstr ""
+msgstr "Biztosan újraindítod ezt az üzletet?\n\nFigyelem! Ez visszaállítja az összes árut a teljes mennyiségre."
 
 #: ../../../../src/wui/attack_window.cc:79
 msgid "Attack"
@@ -9957,7 +9957,7 @@ msgstr "mindenki"
 #. * TRANSLATORS: Window label
 #: ../../../../src/wui/game_client_disconnected.cc:47
 msgid "Client got disconnected"
-msgstr "A kliens elvesztette a kapcsolatot"
+msgstr "Egy játékossal megszakadt a kapcsolat"
 
 #: ../../../../src/wui/game_client_disconnected.cc:75
 msgid ""
@@ -10030,15 +10030,15 @@ msgstr "Ennek a játékosnak a meghívása a csapatodba"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:193
 msgid "Trade offers you have received from other players"
-msgstr ""
+msgstr "A többi játékos üzleti ajánlatai feléd"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:195
 msgid "Trades you have proposed to other players"
-msgstr ""
+msgstr "A te üzleti ajánlataid a többi játékos felé"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:196
 msgid "Your active trade agreements"
-msgstr ""
+msgstr "A folyamatban lévő üzleteid"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:246
 msgid "No team"
@@ -10088,141 +10088,141 @@ msgstr "Visszavonás"
 #: ../../../../src/wui/marketwindow.cc:911
 #, c-format
 msgid "Trade Offers (%u)"
-msgstr ""
+msgstr "Bejövő üzleti ajánlatok (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:414
 #: ../../../../src/wui/marketwindow.cc:424
 msgid "Nobody has offered you any trades at the moment."
-msgstr ""
+msgstr "Jelenleg nincsenek érvényes üzleti ajánlatok feléd"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:436
 msgid "Market to accept the trade at"
-msgstr ""
+msgstr "Végrehajtó piactér"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:442
 #: ../../../../src/wui/game_diplomacy_menu.cc:673
 #: ../../../../src/wui/marketwindow.cc:589
 #, c-format
 msgid "%s (closest)"
-msgstr ""
+msgstr "%s (a legközelebbi)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:445
 #, c-format
 msgid "%1$s (distance: %2$u field)"
 msgid_plural "%1$s (distance: %2$u fields)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s (táv: %2$u mező)"
+msgstr[1] "%1$s (táv: %2$u mező)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:452
 #: ../../../../src/wui/marketwindow.cc:443
 msgid "Accept this trade offer"
-msgstr ""
+msgstr "Ajánlat elfogadása"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:455
 #: ../../../../src/wui/marketwindow.cc:446
 msgid "Reject this trade offer"
-msgstr ""
+msgstr "Ajánlat elutasítása"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:459
 msgid "Build a market to accept trade offers."
-msgstr ""
+msgstr "Csak akkor tudsz üzleti ajánlatokat elfogadni, ha építesz egy piacteret."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:498
 #: ../../../../src/wui/marketwindow.cc:905
 #, c-format
 msgid "Proposed Trades (%u)"
-msgstr ""
+msgstr "Kimenő üzleti ajánlatok (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:509
 msgid ""
 "There are no pending trade proposals at the moment. You can propose a new "
 "trade from a market."
-msgstr ""
+msgstr "Jelenleg nincsenek megválaszolatlan üzleti ajánlataid. Új üzleti ajánlatot egy piactérről tehetsz."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:533
 #: ../../../../src/wui/game_diplomacy_menu.cc:642
 msgid "Center view on this market"
-msgstr ""
+msgstr "Ugrás a piactérhez"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:536
 #: ../../../../src/wui/marketwindow.cc:314
 msgid "Retract this trade offer"
-msgstr ""
+msgstr "Ajánlat visszavonása"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:548
 #: ../../../../src/wui/marketwindow.cc:322
 msgid "Move this trade proposal…"
-msgstr ""
+msgstr "Ajánlat áthelyezése…"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:558
 #: ../../../../src/wui/marketwindow.cc:333
 #, c-format
 msgid "Move this trade proposal to %s"
-msgstr ""
+msgstr "Ajánlat áthelyezése %s piacra"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:563
 #: ../../../../src/wui/game_diplomacy_menu.cc:683
 #: ../../../../src/wui/marketwindow.cc:339
 #: ../../../../src/wui/marketwindow.cc:599
 msgid "You have no markets you could move this trade to."
-msgstr ""
+msgstr "Nincs piactér, ahová át tudnád helyezni ezt az üzletet."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:598
 #, c-format
 msgid "Active Trades (%u)"
-msgstr ""
+msgstr "Futó üzletek (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:609
 msgid "There are no active trade agreements at the moment."
-msgstr ""
+msgstr "Jelenleg nincsenek folyamatban lévő üzleteid."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:649
 #: ../../../../src/wui/game_diplomacy_menu.cc:657
 #: ../../../../src/wui/marketwindow.cc:545
 #: ../../../../src/wui/marketwindow.cc:553
 msgid "Propose extending this trade"
-msgstr ""
+msgstr "Javaslat üzlet meghosszabbítására"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:650
 #: ../../../../src/wui/marketwindow.cc:546
 #, c-format
 msgid "Hold down Ctrl to extend it by %d batch"
 msgid_plural "Hold down Ctrl to extend it by %d batches"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "A Ctrl billentyűt lenyomva hosszabbítás %d szállítmánnyal"
+msgstr[1] "A Ctrl billentyűt lenyomva hosszabbítás %d szállítmánnyal"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:655
 #: ../../../../src/wui/marketwindow.cc:551
 msgid "Hold down Shift to extend the trade indefinitely"
-msgstr ""
+msgstr "A Shift billentyűt lenyomva határozatlan időre váltás"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:660
 msgid "Cancel this trade agreement"
-msgstr ""
+msgstr "Üzleti megállapodás felbontása"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:663
 #: ../../../../src/wui/marketwindow.cc:576
 msgid "Move this trade…"
-msgstr ""
+msgstr "Üzlet áthelyezése…"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:676
 #: ../../../../src/wui/marketwindow.cc:592
 #, c-format
 msgid "Move this trade to %s (closest)"
-msgstr ""
+msgstr "Üzlet áthelyezése %s (a legközelebbi) piacra"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:677
 #: ../../../../src/wui/marketwindow.cc:593
 #, c-format
 msgid "Move this trade to %s"
-msgstr ""
+msgstr "Üzlet áthelyezése %s piacra"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:737
 #: ../../../../src/wui/marketwindow.cc:678
 #: ../../../../src/wui/marketwindow.cc:764
 #, c-format
 msgid "%1$s proposed to extend this trade indefinitely."
-msgstr ""
+msgstr "%1$s kéri, hogy hosszabbítsátok meg ezt az üzletet határozatlan időre."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:740
 #: ../../../../src/wui/marketwindow.cc:681
@@ -10230,36 +10230,36 @@ msgstr ""
 #, c-format
 msgid "%1$s proposed to extend this trade by %2$d batch."
 msgid_plural "%1$s proposed to extend this trade by %2$d batches."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s kéri, hogy hosszabbítsátok meg ezt az üzletet %2$d szállítmánnyal."
+msgstr[1] "%1$s kéri, hogy hosszabbítsátok meg ezt az üzletet %2$d szállítmánnyal."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:749
 #: ../../../../src/wui/marketwindow.cc:691
 msgid "Reject this trade extension proposal"
-msgstr ""
+msgstr "Hosszabbítás elutasítása"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:753
 #: ../../../../src/wui/marketwindow.cc:695
 msgid "Accept this trade extension proposal"
-msgstr ""
+msgstr "Hosszabbítás elfogadása"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:783
 #: ../../../../src/wui/marketwindow.cc:738
 msgid "You proposed to extend this trade indefinitely."
-msgstr ""
+msgstr "Te kéred, hogy hosszabbítsátok meg ezt az üzletet határozatlan időre."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:784
 #: ../../../../src/wui/marketwindow.cc:734
 #, c-format
 msgid "You proposed to extend this trade by %d batch."
 msgid_plural "You proposed to extend this trade by %d batches."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Te kéred, hogy hosszabbítsátok meg ezt az üzletet %d szállítmánnyal."
+msgstr[1] "Te kéred, hogy hosszabbítsátok meg ezt az üzletet %d szállítmánnyal."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:793
 #: ../../../../src/wui/marketwindow.cc:744
 msgid "Retract this trade extension proposal"
-msgstr ""
+msgstr "Kérés visszavonása"
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../../../src/wui/game_exit_confirm_box.cc:27
@@ -10343,7 +10343,7 @@ msgstr "Csak a küldetés üzeneteinek megjelenítése"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:604
 msgid "Show diplomacy messages only"
-msgstr ""
+msgstr "Csak a diplomáciai üzenetek megjelenítése"
 
 #: ../../../../src/wui/game_message_menu.cc:647
 msgid "Messages: Archive"
@@ -10361,13 +10361,13 @@ msgstr "Bejövő üzenetek megjelenítése"
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
-msgstr[0] "A kijelölt %d üzenet helyreállítása"
-msgstr[1] "A kijelölt %d üzenet helyreállítása"
+msgstr[0] "A kijelölt %d üzenet visszaállítása"
+msgstr[1] "A kijelölt %d üzenet visszaállítása"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:687
 msgid "Restore selected message"
-msgstr "Kijelölt üzenet helyreállítása"
+msgstr "Kijelölt üzenet visszaállítása"
 
 #. * TRANSLATORS: Tooltip in the messages window. There is a separate string
 #. for 1
@@ -11134,102 +11134,102 @@ msgstr "Térkép neve"
 
 #: ../../../../src/wui/marketwindow.cc:80
 msgid "Propose"
-msgstr ""
+msgstr "Ajánlat elküldése"
 
 #: ../../../../src/wui/marketwindow.cc:96
 msgid "You offer:"
-msgstr ""
+msgstr "Ezt kínálod:"
 
 #: ../../../../src/wui/marketwindow.cc:100
 msgid "You demand:"
-msgstr ""
+msgstr "Ezt kéred:"
 
 #: ../../../../src/wui/marketwindow.cc:106
 msgid "Decrease amount by 10"
-msgstr ""
+msgstr "Mennyiség csökkentése 10-zel"
 
 #: ../../../../src/wui/marketwindow.cc:113
 msgid "Decrease amount"
-msgstr ""
+msgstr "Mennyiség csökkentése"
 
 #: ../../../../src/wui/marketwindow.cc:121
 msgid "Increase amount"
-msgstr ""
+msgstr "Mennyiség növelése"
 
 #: ../../../../src/wui/marketwindow.cc:128
 msgid "Increase amount by 10"
-msgstr ""
+msgstr "Mennyiség növelése 10-zel"
 
 #: ../../../../src/wui/marketwindow.cc:189
 msgid "Please select the player you want to trade with."
-msgstr ""
+msgstr "Kérjük válassz kereskedelmi partnert!"
 
 #: ../../../../src/wui/marketwindow.cc:195
 msgid "Please select the wares you want to send and receive."
-msgstr ""
+msgstr "Kérjük add meg a kínált és kért árukat!"
 
 #: ../../../../src/wui/marketwindow.cc:214
 #, c-format
 msgid "You cannot both send and receive the same ware type (%s)."
-msgstr ""
+msgstr "Nem kínálhatod és kérheted ugyanazt az árut (%s)."
 
 #: ../../../../src/wui/marketwindow.cc:220
 msgid "Propose the configured trade to the selected player"
-msgstr ""
+msgstr "A beállított üzleti ajánlat elküldése a címzettnek"
 
 #: ../../../../src/wui/marketwindow.cc:288
 msgid ""
 "There are no pending trade proposals at the moment. You can propose a new "
 "trade from the first tab."
-msgstr ""
+msgstr "Jelenleg nincsenek megválaszolatlan üzleti ajánlataid. Új üzleti ajánlatot az első fülön tehetsz."
 
 #: ../../../../src/wui/marketwindow.cc:291
 msgid "There are no pending trade proposals at the moment."
-msgstr ""
+msgstr "Jelenleg nincsenek megválaszolatlan üzleti ajánlatok."
 
 #: ../../../../src/wui/marketwindow.cc:562
 msgid "Cancel this trade"
-msgstr ""
+msgstr "Üzleti megállapodás felbontása"
 
 #: ../../../../src/wui/marketwindow.cc:784
 msgid ""
 "Resume this paused trade. This requires all queues to be at their maximum "
 "capacity."
-msgstr ""
+msgstr "A szünetelő üzlet újraindítása. Ehhez minden áruból engedélyezned kell a teljes mennyiséget."
 
 #: ../../../../src/wui/marketwindow.cc:788
 msgid "Pause this trade"
-msgstr ""
+msgstr "Üzlet felfüggesztése"
 
 #: ../../../../src/wui/marketwindow.cc:799
 msgid "You need to pause the trade before you can change the queue capacity."
-msgstr ""
+msgstr "Csak akkor csökkentheted az áruk mennyiségét, ha előtte felfüggeszted az üzletet."
 
 #: ../../../../src/wui/marketwindow.cc:800
 msgid "Pause Trade?"
-msgstr ""
+msgstr "Üzlet felfüggesztése?"
 
 #: ../../../../src/wui/marketwindow.cc:801
 msgid ""
 "Changing the capacity of the input queues will cause the trade to be paused."
 " Pause the trade now?"
-msgstr ""
+msgstr "Az áru mennyiségének a csökkentése az üzlet felfüggesztését jelenti. Fel szeretnéd függeszteni ezt az üzletet?"
 
 #: ../../../../src/wui/marketwindow.cc:952
 msgid "Propose Trade"
-msgstr ""
+msgstr "Ajánlattétel"
 
 #: ../../../../src/wui/marketwindow.cc:957
 msgid "Proposed Trades"
-msgstr ""
+msgstr "Kimenő üzleti ajánlatok"
 
 #: ../../../../src/wui/marketwindow.cc:963
 msgid "Trade Offers"
-msgstr ""
+msgstr "Bejövő üzleti ajánlatok"
 
 #: ../../../../src/wui/marketwindow.cc:974
 msgid "Active Trade"
-msgstr ""
+msgstr "Futó üzlet"
 
 #: ../../../../src/wui/minimap.cc:169
 msgid "Owner"

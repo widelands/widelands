@@ -7589,7 +7589,7 @@ msgstr "Fenster-Grött"
 #: ../../../../src/ui_fsmenu/options.cc:159
 msgctxt "multiscreen"
 msgid "Display"
-msgstr ""
+msgstr "Billschirm"
 
 #. * TRANSLATORS: short description for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:168
@@ -7761,7 +7761,7 @@ msgstr "Nienich"
 #: ../../../../src/ui_fsmenu/options.cc:583
 msgctxt "multiscreen"
 msgid "Follow mouse"
-msgstr ""
+msgstr "Muus nagahn"
 
 #. * TRANSLATORS: Display index and virtual coordinates, e.g, '#0 (0, 0, 1920,
 #. 1080)'
