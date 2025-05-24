@@ -80,8 +80,10 @@ end
 -- Test for auxiliary scripts
 -- ===========================
 local ret_values = include "map:scripting/set.lua"
+-- "map:scripting/table.lua" is included in function below
 local function test_with_coro(test_case, sleep_time)
    if sleep_time > 0 then
+      -- only call sleep in game but not in editor (even with 0)
       sleep(sleep_time)
    end
    local ret = include "map:scripting/table.lua"
@@ -126,7 +128,7 @@ end
 
 include "scripting/coroutine.lua"
 if wl.editor then
-   run(test_with_coro, test_include, 0)
+   run(test_with_coro, test_include, 0)  -- no sleeping
    lunit:run()
    wl.ui.MapView():close()
 else
@@ -135,6 +137,7 @@ else
       sleep(87)
       lunit:run()
       sleep(1000)
+      print("(quit)")
       wl.ui.MapView():close()
    end)
 end
