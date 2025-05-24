@@ -1560,7 +1560,7 @@ wl.Descriptions():new_tribe {
             note = pgettext ("amazons_building", "The cassava plantation needs free space within the work area to plant seeds."),
             performance = {
                -- TRANSLATORS: Performance helptext for an Amazon production site: Cassava Plantation, part 1
-               pgettext("amazons_building", "The cassava farmer sows and harvests one bundle of cassava between %1$s and %2$s, depending on how far she has to walk."):bformat(format_seconds(54), format_minutes_seconds(1, 25)),
+               pgettext("amazons_building", "The cassava farmer sows and harvests one bundle of cassava between %1$s and %2$s, depending on how far she has to walk."):bformat(format_seconds(54), format_minutes_seconds(1, 30)),
                -- TRANSLATORS: Performance helptext for an Amazon production site: Cassava Plantation, part 2; %s is replaced by 'N growing fields'
                pgettext("amazons_building", "The cassava plantation needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 4):bformat(4))
             }
@@ -1575,7 +1575,7 @@ wl.Descriptions():new_tribe {
             note = pgettext("amazons_building", "Chocolate is essential for training Amazon soldiers."),
             performance = {
                -- TRANSLATORS: Performance helptext for an Amazon production site: Cocoa Farm, part 1
-               pgettext("amazons_building", "The cocoa farmer sows and harvests one basket of cocoa beans between %1$s and %2$s, depending on how far she has to walk."):bformat(format_seconds(57), format_minutes_seconds(1, 22)),
+               pgettext("amazons_building", "The cocoa farmer sows and harvests one basket of cocoa beans between %1$s and %2$s, depending on how far she has to walk."):bformat(format_seconds(54), format_minutes_seconds(1, 30)),
                -- TRANSLATORS: Performance helptext for an Amazon production site: Cocoa Farm, part 2; %s is replaced by 'N growing fields'
                pgettext("amazons_building", "The cocoa farm needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 6):bformat(6))
             }

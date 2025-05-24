@@ -50,8 +50,8 @@ wl.Descriptions():new_productionsite_type {
             --   2 + (125 - (9 + 2 * 1.8 + 10)) / 59.4 = 3.72
             -- procedure how to make verification measurement:
             --   https://codeberg.org/wl/widelands/pulls/4725#issuecomment-4062998
-            -- min. time total (free 4 nearest fields):  35.2 + 24.2 = 59.4 sec
-            -- max. time total (free 4 furthest fields): 46   + 35   = 81   sec
+            -- min. time total: 35.2 + 24.2 = 59.4 sec
+            -- max. time total: 49.6 + 38.6 = 88.2 sec
             "call=plant",
             "call=harvest",
          }
@@ -60,9 +60,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting blackroot because ...
          descname = _("planting blackroot"),
          actions = {
-            -- time of worker: 25.2-36 sec
+            -- time of worker: 25.2-39.6 sec
             -- min. time: 25.2 + 10 = 35.2 sec
-            -- max. time: 36   + 10 = 46   sec
+            -- max. time: 39.6 + 10 = 49.6 sec
             "callworker=plant",
             "sleep=duration:10s"
          }
@@ -71,9 +71,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because ...
          descname = _("harvesting blackroot"),
          actions = {
-            -- time of worker: 21.2-32 sec
+            -- time of worker: 21.2-35.6 sec
             -- min. time: 21.2 + 3 = 24.2 sec
-            -- max. time: 32   + 3 = 35   sec
+            -- max. time: 35.6 + 3 = 38.6 sec
             "callworker=harvest",
             "sleep=duration:3s"
          }

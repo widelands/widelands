@@ -1774,7 +1774,7 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("building", "Sows and harvests wheat."),
             performance = {
                -- TRANSLATORS: Performance helptext for an Empire production site: Farm, part 1
-               pgettext("empire_building", "The farmer sows and harvests one sheaf of wheat between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(54), format_minutes_seconds(1, 16)),
+               pgettext("empire_building", "The farmer sows and harvests one sheaf of wheat between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(54), format_minutes_seconds(1, 23)),
                -- TRANSLATORS: Performance helptext for an Empire production site: Farm, part 2; %s is replaced by 'N growing fields'
                pgettext("empire_building", "The farm needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 4):bformat(4))
             }

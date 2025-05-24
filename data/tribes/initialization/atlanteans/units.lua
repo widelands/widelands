@@ -1819,7 +1819,7 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("atlanteans_building", "Atlantean harvesting song"),
             performance = {
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Farm, part 1
-               pgettext("atlanteans_building", "The farmer sows and harvests one sheaf of corn between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(54), format_minutes_seconds(1, 16)),
+               pgettext("atlanteans_building", "The farmer sows and harvests one sheaf of corn between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(54), format_minutes_seconds(1, 23)),
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Farm, part 2; %s is replaced by 'N growing fields'
                pgettext("atlanteans_building", "The farm needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 4):bformat(4))
             }
@@ -1837,7 +1837,7 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("atlanteans_building", "Blackroot farmer asked by a foreigner"),
             performance = {
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Blackroot Farm, part 1
-               pgettext("atlanteans_building", "The blackroot farmer sows and harvests one bundle of blackroot between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(59), format_minutes_seconds(1, 21)),
+               pgettext("atlanteans_building", "The blackroot farmer sows and harvests one bundle of blackroot between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(59), format_minutes_seconds(1, 28)),
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Blackroot Farm, part 2; %s is replaced by 'N growing fields'
                pgettext("atlanteans_building", "The blackroot farm needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 4):bformat(4))
             }

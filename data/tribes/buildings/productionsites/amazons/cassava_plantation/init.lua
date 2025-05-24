@@ -47,8 +47,8 @@ wl.Descriptions():new_productionsite_type {
             --   2 + (125 - (6 + 2 * 1.8 + 10)) / 54.4 = 3.94
             -- procedure how to make verification measurement:
             --   https://codeberg.org/wl/widelands/pulls/4725#issuecomment-4062998
-            -- min. time total (free 4 nearest fields):  29.2 + 25.2 = 54.4 sec
-            -- max. time total (free 4 furthest fields): 44.5 + 40.5 = 85   sec
+            -- min. time total: 29.2 + 25.2 = 54.4 sec
+            -- max. time total: 47.2 + 43.2 = 90.4 sec
             "call=plant_cassava",
             "call=harvest_cassava",
          }
@@ -57,9 +57,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
          descname = _("planting cassava"),
          actions = {
-            -- time of worker: 19.2-34.5 sec
+            -- time of worker: 19.2-37.2 sec
             -- min. time: 19.2 + 10 = 29.2 sec
-            -- max. time: 34.5 + 10 = 44.5 sec
+            -- max. time: 37.2 + 10 = 47.2 sec
             "callworker=plant",
             "sleep=duration:10s"
          }
@@ -68,9 +68,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
          descname = _("harvesting cassava"),
          actions = {
-            -- time of worker: 21.2-36.5 sec
+            -- time of worker: 21.2-39.2 sec
             -- min. time: 21.2 + 4 = 25.2 sec
-            -- max. time: 36.5 + 4 = 40.5 sec
+            -- max. time: 39.2 + 4 = 43.2 sec
             "callworker=harvest",
             "sleep=duration:4s",
          }

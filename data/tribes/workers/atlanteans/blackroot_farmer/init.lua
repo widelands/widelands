@@ -22,7 +22,7 @@ wl.Descriptions():new_worker_type {
          -- avg. step in worst case (free 4 furthest fields): (1*4+2*5+1*6)/4 = 5
          -- avg. step in std case (free all fields except road): (4*2+4*3+2*4+2*5+1*6)/13 = 3.385
          -- min. worker time: 2 * 2 * 1.8 + 9 + 9 = 25.2 sec
-         -- max. worker time: 2 * 5 * 1.8 + 9 + 9 = 36   sec
+         -- max. worker time: 2 * 6 * 1.8 + 9 + 9 = 39.6 sec
          "findspace=size:any radius:2",
          "walk=coords",
          "animate=planting duration:9s",
@@ -32,7 +32,7 @@ wl.Descriptions():new_worker_type {
       },
       harvest = {
          -- min. worker time: 2 * 2 * 1.8 + 10 + 4 = 21.2 sec
-         -- max. worker time: 2 * 5 * 1.8 + 10 + 4 = 32   sec
+         -- max. worker time: 2 * 6 * 1.8 + 10 + 4 = 35.6 sec
          "findobject=attrib:ripe_blackroot radius:2",
          "walk=object",
          "animate=harvesting duration:10s",
