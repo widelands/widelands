@@ -4,7 +4,7 @@
 # Translators:
 # adrien vigneron <adrien.v@ml1.net>, 2019
 # Atanase Albaran, 2021
-# David D, 2018,2021,2023-2024
+# David D, 2018,2021,2023-2025
 # xXxLolimixXx <e.osmaaane@gmail.com>, 2015
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: David D, 2018,2021,2023-2024\n"
+"Last-Translator: David D, 2018,2021,2023-2025\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -783,20 +783,20 @@ msgstr "Les quartiers-généraux sont l'endroit où vous commencez habituellemen
 msgid ""
 "Plain warehouses that simply hold wares and workers to keep them distributed"
 " all over your territory. They are marked by small houses: ⟰"
-msgstr ""
+msgstr "De simples entrepôtsqui détiennent simplement les marchandises et les ouvriers pour les garder répartis sur tout votre territoire. Ils sont marqués par de petites maisons : ⟰"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:508
 msgid ""
 "Ports that you’ll use in seafaring. They don’t only store your wares and "
 "workers, but can also load them on your ships to send them across the seas. "
 "They are marked by small anchors: ⚓"
-msgstr ""
+msgstr "Ports que vous utiliserez pour la navigation. Ils ne stockent pas seulement vos marchandises et vos travailleurs, mais peuvent également les charger sur vos navires pour les envoyer à travers les mers. Ils sont marqués par de petites ancres : ⚓"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:509
 msgid ""
 "All of them are assigned names automatically that match the tribe, but you "
 "can change their names to your liking too."
-msgstr ""
+msgstr "Tous ont des noms automatiquement assignés qui correspondent à la tribu, mais vous pouvez changer leurs noms à votre goût aussi."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
 msgid "Change the name of your little village"
@@ -833,7 +833,7 @@ msgid ""
 "I see you closed the window without changing the name. I’m sure you can come"
 " up with something. But if you don’t want to, at least delete the old name, "
 "please, to show me you’ve found the editbox."
-msgstr ""
+msgstr "Je vois que vous avez fermé la fenêtre sans changer le nom. Je suis sûr que vous pouvez trouver quelque chose. Mais si vous ne voulez pas, supprimez au moins l’ancien nom, s’il vous plaît, pour me montrer que vous avez trouvé la boîte d’édition."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:540
 msgid "Archive all messages in your inbox"

@@ -74,7 +74,7 @@ void InputQueue::request_callback(Game& game,
 		type = wwWORKER;
 	}
 
-	InputQueue& iq = dynamic_cast<Building&>(target).inputqueue(index, type, &r);
+	InputQueue& iq = dynamic_cast<Building&>(target).inputqueue(index, type, &r, 0);
 
 	iq.entered(index, worker);
 
@@ -111,6 +111,8 @@ void InputQueue::set_max_fill(Quantity size) {
 	max_fill_ = size;
 
 	update();
+
+	owner_.inputqueue_max_fill_changed();
 }
 
 void InputQueue::set_consume_interval(const Duration& time) {

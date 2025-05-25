@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-05-19 03:23+0000\n"
 "PO-Revision-Date: 2023-01-04 20:43+0000\n"
 "Language-Team: English (United States) (https://app.transifex.com/widelands/teams/35159/en_US/)\n"
 "MIME-Version: 1.0\n"
@@ -27,13 +27,13 @@ msgid ""
 "complete the previous scenario first and then restart this mission."
 msgstr ""
 
-#: ../../../../data/campaigns/fri05.wmf/scripting/init_p1.lua:2978
+#: ../../../../data/campaigns/fri05.wmf/scripting/init_p1.lua:2979
 #: ../../../../data/campaigns/fri05.wmf/scripting/tribes/helgoland/init.lua:7
 msgid "Helgoland"
 msgstr ""
 
 #. TRANSLATORS: This Danish ship is named after the Capital of Denmark
-#: ../../../../data/campaigns/fri05.wmf/scripting/init_p2.lua:13
+#: ../../../../data/campaigns/fri05.wmf/scripting/init_p2.lua:14
 msgid "København"
 msgstr ""
 
