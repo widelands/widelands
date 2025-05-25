@@ -38,11 +38,14 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_marketname(lua_State* L);
+	int set_marketname(lua_State* L);
 
 	/*
 	 * Lua Methods
 	 */
 	int propose_trade(lua_State* L);
+	int accept_trade(lua_State* L);
 
 	/*
 	 * C Methods

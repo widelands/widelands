@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-04-12 03:06+0000\n"
+"POT-Creation-Date: 2025-05-19 03:23+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Frank Carvalho, 2024\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/widelands/widelands/language/pt_BR/)\n"
@@ -25,6 +25,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/tribes/buildings/markets/amazons/market/init.lua:8
+msgctxt "amazons_building"
+msgid "Market"
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/tribes/buildings/markets/atlanteans/market/init.lua:83
+msgctxt "atlanteans_building"
+msgid "Market"
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/tribes/buildings/markets/barbarians/market/init.lua:8
+msgctxt "barbarians_building"
+msgid "Market"
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/tribes/buildings/markets/empire/market/init.lua:8
+msgctxt "empire_building"
+msgid "Market"
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/tribes/buildings/markets/frisians/market/init.lua:8
+msgctxt "frisians_building"
+msgid "Market"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:8
@@ -1351,52 +1381,53 @@ msgctxt "amazons_building"
 msgid "Dressmakery"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
-#. ...
+#. TRANSLATORS: Completed/Skipped/Did not start sewing a tunic because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:74
 msgid "sewing a tunic"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
+#. TRANSLATORS: Completed/Skipped/Did not start producing a light wooden armor
+#. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:86
 msgid "making a light wooden armor"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a wooden helmet because
+#. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:98
 msgid "making a wooden helmet"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a warrior’s coat
+#. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:110
 msgid "sewing a warrior’s coat"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making sturdy boots because
+#. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:122
 msgid "making sturdy boots"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
-#. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making swift boots because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:134
 msgid "making swift boots"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
-#. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making hero boots because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:146
 msgid "making hero boots"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
+#. TRANSLATORS: Completed/Skipped/Did not start making a padded vest because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:158
 msgid "making a padded vest"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a padded protector
+#. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:170
 msgid "making a padded protector"
 msgstr ""
@@ -1713,7 +1744,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:212
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:222
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:218
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:124
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:220
 msgid "making a shovel"
 msgstr ""
 
@@ -1743,7 +1774,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:135
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:183
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:166
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:184
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:172
 msgid "making kitchen tools"
 msgstr ""
 
@@ -1752,7 +1783,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:121
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:157
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:140
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:196
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:148
 msgid "making a hammer"
 msgstr ""
 
@@ -1763,7 +1794,7 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:171
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:220
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:184
 msgid "making needles"
 msgstr ""
 
@@ -2465,7 +2496,7 @@ msgstr "Ferraria"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:69
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:105
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:101
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:172
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:100
 msgid "making a bread paddle"
 msgstr ""
 
@@ -2479,14 +2510,14 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:95
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:131
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:114
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:208
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:124
 msgid "making fire tongs"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:108
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:160
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:136
 msgid "making a fishing net"
 msgstr ""
 
@@ -2517,7 +2548,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:199
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:209
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:205
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:112
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:208
 msgid "making a scythe"
 msgstr ""
 
@@ -2965,7 +2996,7 @@ msgstr ""
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:170
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:153
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:148
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:160
 msgid "making a hunting spear"
 msgstr ""
 
@@ -3478,7 +3509,7 @@ msgstr "Ferraria"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:88
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:136
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:88
 msgid "making a basket"
 msgstr ""
 
@@ -3695,12 +3726,12 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:88
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:112
 msgid "forging a felling ax"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:100
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:196
 msgid "forging a pick"
 msgstr ""
 

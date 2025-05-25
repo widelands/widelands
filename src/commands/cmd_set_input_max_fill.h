@@ -33,7 +33,8 @@ struct CmdSetInputMaxFill : public PlayerCommand {
 	                   DescriptionIndex,
 	                   WareWorker,
 	                   uint32_t max_fill,
-	                   bool cs);
+	                   bool cs,
+	                   uint32_t disambiguator_id);
 
 	// Write these commands to a file (for savegames)
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
@@ -54,6 +55,7 @@ private:
 	WareWorker type_{wwWARE};
 	uint32_t max_fill_{0U};
 	bool is_constructionsite_setting_{false};
+	uint32_t disambiguator_id_{0};
 };
 
 }  // namespace Widelands
