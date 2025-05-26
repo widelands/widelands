@@ -214,13 +214,13 @@ void Box::layout() {
 			sb_y = get_inner_h() - Scrollbar::kSize;
 			sb_w = get_inner_w();
 			sb_h = Scrollbar::kSize;
-			pagesize = get_inner_w() - Scrollbar::kSize;
+			pagesize = get_inner_w();
 		} else {
 			sb_x = get_inner_w() - Scrollbar::kSize;
 			sb_y = 0;
 			sb_w = Scrollbar::kSize;
 			sb_h = get_inner_h();
-			pagesize = get_inner_h() - Scrollbar::kSize;
+			pagesize = get_inner_h();
 		}
 		if (scrollbar_ == nullptr) {
 			scrollbar_.reset(new Scrollbar(

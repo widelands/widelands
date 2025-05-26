@@ -1,5 +1,3 @@
-descriptions = wl.Descriptions() -- TODO(matthiakl): only for savegame compatibility with 1.0, do not use.
-
 image_dirname = path.dirname(__file__) .. "images/"
 
 push_textdomain("tribes_encyclopedia")
@@ -1285,6 +1283,14 @@ wl.Descriptions():new_tribe {
          }
       },
 
+      -- Markets
+      {
+         name = "amazons_market",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an Amazon market: Market
+            purpose = pgettext("amazons_building", "A market enables trading with other tribes.")
+         }
+      },
 
       -- Small
       {

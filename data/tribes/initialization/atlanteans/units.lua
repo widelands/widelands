@@ -331,8 +331,6 @@
 --   The helptexts are then joined by the engine.
 --   In our example, we will get *"If all needed wares are delivered in time, this building can produce each type of ax in about 57 seconds on average. All three weapons take the same time for making, but the required raw materials vary."*
 
-descriptions = wl.Descriptions() -- TODO(matthiakl): only for savegame compatibility with 1.0, do not use.
-
 image_dirname = path.dirname(__file__) .. "images/"
 
 push_textdomain("tribes_encyclopedia")
@@ -1466,6 +1464,15 @@ wl.Descriptions():new_tribe {
             lore = pgettext("atlanteans_building", "This is the building where expeditions will be equipped to boldly go and find new shores."),
             -- TRANSLATORS: Note lore_autor for an Atlantean production site: Port
             lore_author = pgettext("atlanteans_building", "Ostur, the designer of the new Expedition ship class, during the opening of a new Port")
+         }
+      },
+
+      -- Markets
+      {
+         name = "atlanteans_market",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an Atlantean market: Market
+            purpose = pgettext("atlanteans_building", "A market enables trading with other tribes.")
          }
       },
 
