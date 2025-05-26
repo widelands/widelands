@@ -59,8 +59,9 @@ wl.Descriptions():new_productionsite_type {
             --   2 + (90 - (2.333 * 1.8 + 18)) / 54.8 = 3.24
             -- procedure how to make verification measurement:
             --   https://codeberg.org/wl/widelands/pulls/4725#issuecomment-4062998
-            -- min. time total (free 3 nearest fields):  29.4 + 25.4 = 54.8 sec
-            -- max. time total (free 3 furthest fields): 33   + 29   = 62   sec
+            -- min. time total (avg. for 3 nearest fields): 29.4 + 25.4 = 54.8 sec
+            -- min. time total:                             28.2 + 24.2 = 52.4 sec
+            -- max. time total:                             35.4 + 31.4 = 66.8 sec
             "call=plant_reed",
             "call=harvest_reed",
          }
@@ -69,9 +70,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
          descname = _("planting reed"),
          actions = {
-            -- time of worker: 11.4-15 sec
-            -- min. time: 11.4 + 18 = 29.4 sec
-            -- max. time: 15   + 18 = 33   sec
+            -- time of worker: 10.2-17.4 sec
+            -- min. time: 10.2 + 18 = 28.2 sec
+            -- max. time: 17.4 + 18 = 35.4 sec
             "callworker=plantreed",
             "sleep=duration:18s"
          }
@@ -80,9 +81,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
          descname = _("harvesting reed"),
          actions = {
-            -- time of worker: 20.4-24 sec
-            -- min. time: 20.4 + 5 = 25.4 sec
-            -- max. time: 24   + 5 = 29   sec
+            -- time of worker: 19.2-26.4 sec
+            -- min. time: 19.2 + 5 = 24.2 sec
+            -- max. time: 26.4 + 5 = 31.4 sec
             "callworker=harvestreed",
             "sleep=duration:5s"
          }

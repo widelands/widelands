@@ -55,8 +55,9 @@ wl.Descriptions():new_productionsite_type {
             --   2 + (90 - (5 + 2.5 * 1.8 + 5)) / 48 = 3.57
             -- procedure how to make verification measurement:
             --   https://codeberg.org/wl/widelands/pulls/4725#issuecomment-4062998
-            -- min. time total (free 4 nearest fields):  24   + 24   = 48   sec
-            -- max. time total (free 4 furthest fields): 25.8 + 25.8 = 51.6 sec
+            -- min. time total (avg. for 4 nearest fields): 24   + 24   = 48   sec
+            -- min. time total:                             22.2 + 22.2 = 44.4 sec
+            -- max. time total:                             29.4 + 29.4 = 58.8 sec
             "call=plant",
             "call=harvest",
          }
@@ -65,9 +66,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting grapevines because ...
          descname = _("planting grapevines"),
          actions = {
-            -- time of worker: 19-20.8 sec
-            -- min. time: 19   + 5 = 24   sec
-            -- max. time: 20.8 + 5 = 25.8 sec
+            -- time of worker: 17.2-24.4 sec
+            -- min. time: 17.2 + 5 = 22.2 sec
+            -- max. time: 24.4 + 5 = 29.4 sec
             "callworker=plant",
             "sleep=duration:5s"
          }
@@ -76,9 +77,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because ...
          descname = _("harvesting grapes"),
          actions = {
-            -- time of worker: 19-20.8 sec
-            -- min. time: 19   + 5 = 24   sec
-            -- max. time: 20.8 + 5 = 25.8 sec
+            -- time of worker: 17.2-24.4 sec
+            -- min. time: 17.2 + 5 = 22.2 sec
+            -- max. time: 24.4 + 5 = 29.4 sec
             "callworker=harvest",
             "sleep=duration:5s"
          }

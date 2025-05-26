@@ -72,8 +72,9 @@ wl.Descriptions():new_productionsite_type {
             --   3 + (625 - (6 + 2.556 * 1.8 + 10)) / 102 = 8.93
             -- procedure how to make verification measurement:
             --   https://codeberg.org/wl/widelands/pulls/4725#issuecomment-4062998
-            -- min. time total (free 9 nearest fields):  31.2 + 70.8 = 102   sec
-            -- max. time total (free 9 furthest fields): 42   + 81.6 = 123.6 sec
+            -- min. time total (avg. for 9 nearest fields): 31.2 + 70.8 = 102 sec
+            -- min. time total:                             29.2 + 68.8 =  98 sec
+            -- max. time total:                             47.2 + 86.8 = 134 sec
             "call=plant_barley",
             "call=harvest_barley",
          }
@@ -82,9 +83,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
          descname = _("planting barley"),
          actions = {
-            -- time of worker: 21.2-32 sec
-            -- min. time: 21.2 + 10 = 31.2 sec
-            -- max. time: 32   + 10 = 42   sec
+            -- time of worker: 19.2-37.2 sec
+            -- min. time: 19.2 + 10 = 29.2 sec
+            -- max. time: 37.2 + 10 = 47.2 sec
             "callworker=plant",
             "sleep=duration:10s"
          }
@@ -93,9 +94,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
          descname = _("harvesting barley"),
          actions = {
-            -- time of worker: 23.2-34 sec
-            -- min. time: 23.2 + 40 + 4 + 3.6 = 70.8 sec
-            -- max. time: 34   + 40 + 4 + 3.6 = 81.6 sec
+            -- time of worker: 21.2-39.2 sec
+            -- min. time: 21.2 + 40 + 4 + 3.6 = 68.8 sec
+            -- max. time: 39.2 + 40 + 4 + 3.6 = 86.8 sec
             "callworker=harvest",
             "animate=working duration:40s",
             "sleep=duration:4s",

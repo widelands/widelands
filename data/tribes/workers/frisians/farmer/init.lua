@@ -21,8 +21,8 @@ wl.Descriptions():new_worker_type {
          -- avg. step in ideal case (free 9 nearest fields): (4*2+5*3)/9 = 2.556
          -- avg. step in worst case (free 9 furthest fields): (5*5+3*6+1*7)/9 = 5.556
          -- avg. step in std case (free all fields except road): (4*2+8*3+8*4+6*5+3*6+1*7)/30 = 3.967
-         -- min. worker time: 2 * 2.556 * 1.8 + 6 + 6 = 21.2 sec
-         -- max. worker time: 2 * 5.556 * 1.8 + 6 + 6 = 32   sec
+         -- min. worker time: 2 * 2 * 1.8 + 6 + 6 = 19.2 sec
+         -- max. worker time: 2 * 7 * 1.8 + 6 + 6 = 37.2 sec
          "findspace=size:any radius:3 space",
          "walk=coords",
          "animate=planting duration:6s",
@@ -31,8 +31,8 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       harvest = {
-         -- min. worker time: 2 * 2.556 * 1.8 + 10 + 4 = 23.2 sec
-         -- max. worker time: 2 * 5.556 * 1.8 + 10 + 4 = 34   sec
+         -- min. worker time: 2 * 2 * 1.8 + 10 + 4 = 21.2 sec
+         -- max. worker time: 2 * 7 * 1.8 + 10 + 4 = 39.2 sec
          "findobject=attrib:ripe_barley radius:3",
          "walk=object",
          "animate=harvesting duration:10s",

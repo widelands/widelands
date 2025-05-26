@@ -1304,7 +1304,7 @@ wl.Descriptions():new_tribe {
             note = pgettext("barbarians_building", "Reed is the traditional material for roofing, and it is woven into the extremely durable cloth that they use for their ships’ sails."),
             performance = {
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Reed Yard, part 1
-               pgettext("barbarians_building", "The gardener sows and harvests one sheaf of reed between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(55), format_minutes_seconds(1, 2)),
+               pgettext("barbarians_building", "The gardener sows and harvests one sheaf of reed between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(52), format_minutes_seconds(1, 7)),
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Reed Yard, part 2; %s is replaced by 'N growing fields'
                pgettext("barbarians_building", "The reed yard needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 3):bformat(3))
             }

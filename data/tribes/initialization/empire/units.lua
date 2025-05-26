@@ -1550,7 +1550,7 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("empire_building", "Plants grapevines and harvests grapes."),
             performance = {
                -- TRANSLATORS: Performance helptext for an Empire production site: Vineyard, part 1
-               pgettext("empire_building", "The vine farmer sows and harvests one basket of grapes between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(48), format_seconds(52)),
+               pgettext("empire_building", "The vine farmer sows and harvests one basket of grapes between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(44), format_seconds(59)),
                -- TRANSLATORS: Performance helptext for an Empire production site: Vineyard, part 2; %s is replaced by 'N growing fields'
                pgettext("empire_building", "The vineyard needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 4):bformat(4))
             }
