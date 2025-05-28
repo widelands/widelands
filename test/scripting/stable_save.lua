@@ -15,6 +15,8 @@ function stable_save(game, savename, desired_speed)
          -- ... not finished running
       print("WARNING: a testcase is probably running while saving. This might fail!")
    end
+   assert_true(game.allow_saving, "stable_save() would hang if saving is not allowed")
+
    sleep(1000)
    game:save(savename)
    game.desired_speed = 1000
