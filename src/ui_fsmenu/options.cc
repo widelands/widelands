@@ -156,7 +156,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                        100,  // 100 is arbitrary, will be resized in layout().
                        50,
                        24,
-                       _("Display"),
+                       pgettext("multiscreen", "Display"),
                        UI::DropdownType::kTextual,
                        UI::PanelStyle::kFsMenu,
                        UI::ButtonStyle::kFsMenuMenu),
@@ -580,7 +580,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 void Options::add_displays(const OptionsCtrl::OptionsStruct& opt) {
 	display_dropdown_.add(
 	   /** TRANSLATORS: Entry in the display selection dropdown */
-	   _("Follow mouse"), kDropdownFollowMouse, nullptr, opt.display < 0);
+	   pgettext("multiscreen", "Follow mouse"), kDropdownFollowMouse, nullptr, opt.display < 0);
 	for (int i = 0; i < SDL_GetNumVideoDisplays(); ++i) {
 		SDL_Rect r;
 		if (SDL_GetDisplayBounds(i, &r) == 0) {
@@ -593,6 +593,7 @@ void Options::add_displays(const OptionsCtrl::OptionsStruct& opt) {
 	if (!display_dropdown_.has_selection()) {
 		display_dropdown_.select(kDropdownFollowMouse);
 	}
+	display_dropdown_.set_enabled(SDL_GetNumVideoDisplays() > 1);
 }
 
 void Options::add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt) {
