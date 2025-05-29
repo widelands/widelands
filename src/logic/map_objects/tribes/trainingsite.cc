@@ -855,7 +855,7 @@ void TrainingSite::update_upgrade_statuses(const bool select_next_step) {
 			uint32_t here = 0;
 			uint32_t soon = 0;
 			for (const auto& ware : group.first) {
-				const InputQueue& iq = inputqueue(ware.first, ware.second, nullptr);
+				const InputQueue& iq = inputqueue(ware.first, ware.second, nullptr, 0);
 				max += iq.get_max_fill();
 				here += iq.get_filled();
 				soon += iq.get_max_fill() - iq.get_missing();
