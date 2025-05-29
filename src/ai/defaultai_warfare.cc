@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2024 by the Widelands Development Team
+ * Copyright (C) 2009-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -626,7 +626,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 	   best_score, a, enemy_sites[best_target].attack_counter + 1,
 	   (gametime - enemy_sites[best_target].last_time_attacked).get() / 1000);
 
-	game().send_player_enemyflagaction(*flag, player_number(), attacking_soldiers, true);
+	game().send_player_attack(*flag, player_number(), attacking_soldiers, true);
 	assert(player_->is_seeing(
 	   Widelands::Map::get_index(flag->get_building()->get_position(), map.get_width())));
 	attackers_count_ += attackers;

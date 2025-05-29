@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -393,7 +393,8 @@ public:
 		production_result_ = text;
 	}
 
-	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
+	InputQueue&
+	inputqueue(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id) override;
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;

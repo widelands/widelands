@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
-# Juanjo, 2015-2024
+# Juanjo, 2015-2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-11-30 03:02+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
-"Last-Translator: Juanjo, 2015-2024\n"
+"Last-Translator: Juanjo, 2015-2025\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -488,12 +488,11 @@ msgstr "Soldats al quarter"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
 msgid ""
-"Your headquarters has some capabilities of military sites: It conqers some "
-"land, and the stored soldiers defend it when attacked. However this also "
-"means that the enemy can attack the headquarters itself too. On the other "
-"hand, there’s a difference too: you can’t start an attack with the soldiers "
-"in your headquarters."
-msgstr "El quarter té algunes habilitats dels llocs militars: conquereix part de terreny i els soldats que hi hagi a dins defensen l'edifici quan l'ataquen. No obstant, això també significa que els enemics poden atacar-lo. També hi ha una diferència: no podeu atacar amb els soldats del quarter."
+"Your headquarters has some capabilities of military sites: It conquers some "
+"land, the enemy can attack it directly, and the stored soldiers defend it "
+"and its surroundings when attacked. On the other hand, there’s a difference "
+"too: you can’t start an attack with the soldiers in your headquarters."
+msgstr "El quarter té algunes habilitats dels llocs militars: conquereix part de terreny, els enemics el poden atacar directament i els soldats que hi hagi a dins defensen l'edifici quan l'ataquen. No obstant, hi ha una diferència: no podeu iniciar un atac amb els soldats del quarter."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid ""

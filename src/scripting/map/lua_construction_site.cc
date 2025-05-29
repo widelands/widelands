@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -236,7 +236,7 @@ int LuaConstructionSite::get_priority(lua_State* L) {
 		NEVER_HERE();
 	}
 	lua_pushstring(
-	   L, priority_to_string(get(L, get_egbase(L))->get_priority(Widelands::wwWARE, item)));
+	   L, priority_to_string(get(L, get_egbase(L))->get_priority(Widelands::wwWARE, item, 0)));
 	return 1;
 }
 int LuaConstructionSite::set_priority(lua_State* L) {
@@ -261,7 +261,7 @@ int LuaConstructionSite::set_priority(lua_State* L) {
 	}
 	try {
 		get(L, get_egbase(L))
-		   ->set_priority(Widelands::wwWARE, item, string_to_priority(luaL_checkstring(L, 3)));
+		   ->set_priority(Widelands::wwWARE, item, string_to_priority(luaL_checkstring(L, 3)), 0);
 	} catch (const WException& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -288,7 +288,7 @@ int LuaConstructionSite::get_desired_fill(lua_State* L) {
 	}
 	lua_pushuint32(
 	   L, get(L, get_egbase(L))
-	         ->inputqueue(item, is_ware ? Widelands::wwWARE : Widelands::wwWORKER, nullptr)
+	         ->inputqueue(item, is_ware ? Widelands::wwWARE : Widelands::wwWORKER, nullptr, 0)
 	         .get_max_fill());
 	return 1;
 }
@@ -312,7 +312,7 @@ int LuaConstructionSite::set_desired_fill(lua_State* L) {
 		NEVER_HERE();
 	}
 	get(L, get_egbase(L))
-	   ->inputqueue(item, is_ware ? Widelands::wwWARE : Widelands::wwWORKER, nullptr)
+	   ->inputqueue(item, is_ware ? Widelands::wwWARE : Widelands::wwWORKER, nullptr, 0)
 	   .set_max_fill(luaL_checkuint32(L, 3));
 	return 0;
 }

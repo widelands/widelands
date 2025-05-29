@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-05-19 03:23+0000\n"
 "PO-Revision-Date: 2023-01-04 20:43+0000\n"
 "Last-Translator: Juanjo, 2024\n"
 "Language-Team: Catalan (https://app.transifex.com/widelands/teams/35159/ca/)\n"
@@ -34,13 +34,13 @@ msgstr ""
 "l’escenari, però estareu en desavantatge. Us recomano que completeu "
 "l’escenari anterior abans i que torneu a començar aquesta missió."
 
-#: ../../../../data/campaigns/fri05.wmf/scripting/init_p1.lua:2978
+#: ../../../../data/campaigns/fri05.wmf/scripting/init_p1.lua:2979
 #: ../../../../data/campaigns/fri05.wmf/scripting/tribes/helgoland/init.lua:7
 msgid "Helgoland"
 msgstr "Helgoland"
 
 #. TRANSLATORS: This Danish ship is named after the Capital of Denmark
-#: ../../../../data/campaigns/fri05.wmf/scripting/init_p2.lua:13
+#: ../../../../data/campaigns/fri05.wmf/scripting/init_p2.lua:14
 msgid "København"
 msgstr "København"
 

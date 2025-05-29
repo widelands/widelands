@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,6 +30,7 @@ class ConstructionSite;
 class PartiallyFinishedBuilding;
 class DismantleSite;
 class Game;
+class Market;
 class MilitarySite;
 class TrainingSite;
 class ProductionSite;
@@ -50,6 +51,7 @@ private:
 	void
 	read_partially_finished_building(PartiallyFinishedBuilding&, FileRead&, Game&, MapObjectLoader&);
 	void read_warehouse(Warehouse&, FileRead&, Game&, MapObjectLoader&);
+	void read_market(Market&, FileRead&, Game&, MapObjectLoader&);
 	void read_militarysite(MilitarySite&, FileRead&, Game&, MapObjectLoader&);
 	void read_trainingsite(TrainingSite&, FileRead&, Game&, MapObjectLoader&);
 	void read_productionsite(ProductionSite&, FileRead&, Game&, MapObjectLoader&);
@@ -61,6 +63,7 @@ private:
 	                                       Game&,
 	                                       MapObjectSaver&);
 	void write_warehouse(const Warehouse&, FileWrite&, Game&, MapObjectSaver&);
+	void write_market(const Market&, FileWrite&, Game&, MapObjectSaver&);
 	void write_militarysite(const MilitarySite&, FileWrite&, Game&, MapObjectSaver&);
 	void write_trainingsite(const TrainingSite&, FileWrite&, Game&, MapObjectSaver&);
 	void write_productionsite(const ProductionSite&, FileWrite&, Game&, MapObjectSaver&);

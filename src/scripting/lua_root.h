@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -69,16 +69,19 @@ public:
 	int get_interactive_player(lua_State*);
 	int get_win_condition(lua_State*);
 	int get_win_condition_duration(lua_State*);
+	int get_trades(lua_State*);
 
 	/*
 	 * Lua methods
 	 */
 	int launch_coroutine(lua_State*);
 	int save(lua_State*);
+	int get_trade(lua_State*);
 
 	/*
 	 * C methods
 	 */
+	void push_trade(lua_State* L, Widelands::TradeID id);
 };
 
 class LuaEditor : public LuaBases::LuaEditorGameBase {

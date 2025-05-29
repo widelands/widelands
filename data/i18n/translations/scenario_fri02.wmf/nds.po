@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2023
+# Benedikt Straub <benedikt-straub@web.de>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2023\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2025\n"
 "Language-Team: Low German (https://app.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -204,7 +204,7 @@ msgstr "Schick eenen Bespejer, um dat Riek uttospioneren"
 msgid ""
 "Build a scout’s house near the border to discover the Empire’s secrets."
 msgstr ""
-"Bau eene Bespejeree tegen de Grenz, um de Geheimnissen vum Riek to finnen."
+"Bau een Bespejerhuus tegen de Grenz, um de Geheimnissen vum Riek to finnen."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:88
 msgid "Decipher the poem"

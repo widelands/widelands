@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -974,6 +974,12 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 		if (building->type() != MapObjectType::CONSTRUCTIONSITE &&
 		    building->type() != MapObjectType::DISMANTLESITE) {
 			building->set_owning_tribe(name());
+		}
+
+		if (building->workarea_info().size() > 3) {
+			// InteractiveBase cannot visualize more than 3 workarea rings
+			throw GameDataError("%s: Building cannot have more than 3 workareas, found %" PRIuS,
+			                    name().c_str(), building->workarea_info().size());
 		}
 
 		// Calculate largest possible workarea radius

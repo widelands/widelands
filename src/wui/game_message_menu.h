@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 #include "base/i18n.h"
 #include "logic/message.h"
 #include "logic/message_id.h"
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
@@ -78,6 +79,7 @@ private:
 	void update_record(UI::Table<uintptr_t>::EntryRecord& er, const Widelands::Message&);
 	void update_archive_button_tooltip();
 
+	// TODO(Nordfriese): Convert everything to box layout
 	UI::Table<uintptr_t>* list;
 	UI::MultilineTextarea message_body;
 	UI::Button* archivebtn_;
@@ -85,11 +87,13 @@ private:
 	UI::Button* centerviewbtn_;
 	Mode mode{Mode::kInbox};
 	// Buttons for message types
+	UI::Box* filter_box_;
 	UI::Button* geologistsbtn_;
 	UI::Button* economybtn_;
 	UI::Button* seafaringbtn_;
 	UI::Button* warfarebtn_;
 	UI::Button* scenariobtn_;
+	UI::Button* diplomacybtn_;
 	Widelands::Message::Type message_filter_;
 };
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,8 +48,7 @@ struct ConstructionsiteInformation {
 	const BuildingDescr* was{nullptr};  // only valid if "becomes" is an enhanced building.
 	std::vector<const BuildingDescr*>
 	   intermediates;  // If we enhance a building while it's still under construction
-	Duration totaltime{0U};
-	Duration completedtime{0U};
+	uint32_t progress_64k{0U};
 };
 
 /*
@@ -99,7 +98,8 @@ public:
 		return info_;
 	}
 
-	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
+	InputQueue&
+	inputqueue(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id) override;
 
 	void set_building(const BuildingDescr&) override;
 	const BuildingDescr& building() const {

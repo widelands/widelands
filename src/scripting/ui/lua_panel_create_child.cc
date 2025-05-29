@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -409,7 +409,6 @@ UI::Panel* LuaPanel::do_create_child_listselect(lua_State* L, UI::Panel* parent)
 	UI::ListselectLayout layout = get_table_listselect_layout(L, "type", false);
 	std::string datatype = get_table_string(L, "datatype", true);
 
-	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
 	int32_t y = get_table_int(L, "y", false);
 	int32_t w = get_table_int(L, "w", false);

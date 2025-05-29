@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +38,9 @@ struct DismantleSiteWindow : public BuildingWindow {
 
 	void think() override;
 	void draw(RenderTarget& rt) override;
+
+protected:
+	void evict_builder();
 
 private:
 	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;

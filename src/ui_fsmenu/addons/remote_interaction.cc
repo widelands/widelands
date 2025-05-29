@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024 by the Widelands Development Team
+ * Copyright (C) 2021-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -912,8 +912,10 @@ void RemoteInteractionWindow::update_data() {
 		text += "<br>";
 		text +=
 		   g_style_manager->font_style(UI::FontStyle::kItalic)
-		      .as_font_tag(format(_("‘%1$s’ commented on version %2$s:"), comment.second.username,
-		                          AddOns::version_to_string(comment.second.version)));
+		      .as_font_tag(info_->category == AddOns::AddOnCategory::kSingleMap ?
+		                      format(_("‘%1$s’ commented:"), comment.second.username) :
+		                      format(_("‘%1$s’ commented on version %2$s:"), comment.second.username,
+		                             AddOns::version_to_string(comment.second.version)));
 		text += "<br>";
 		text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 		           .as_font_tag(comment.second.message);

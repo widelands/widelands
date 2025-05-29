@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2023
+# Benedikt Straub <benedikt-straub@web.de>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2023\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2025\n"
 "Language-Team: Low German (https://app.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -385,7 +385,7 @@ msgid ""
 " here before we proceed."
 msgstr ""
 "Aver wi sallen uppassen, wenn wi de Wachters-Kamer innehmen wollen. ’t kann "
-"noch mehr feindelk Husen geven, wat wi nich nich sehn, un de Seerovers "
+"noch mehr feindelk Husen geven, wat wi noch nich sehn, un de Seerovers "
 "sallen baldadig good kämpen könen. Laat uns eerst eene machtige Soldateree "
 "um dat Gewest upbauen, ehr wi daarmit wiedermaken."
 

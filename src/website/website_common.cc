@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2024 by the Widelands Development Team
+ * Copyright (C) 2018-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,7 +52,7 @@ void initialize() {
 	// We don't really need graphics here, but we will get error messages
 	// when they aren't initialized
 	g_gr = new Graphic();
-	g_gr->initialize(Graphic::TraceGl::kNo, 1, 1, false, false);
+	g_gr->initialize(Graphic::TraceGl::kNo, 0, 1, 1, false, false);
 }
 
 // Cleanup before program end

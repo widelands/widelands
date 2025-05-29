@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2024 by the Widelands Development Team
+ * Copyright (C) 2012-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -743,6 +743,11 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_5, KMOD_ALT),
                          "game_msg_filter_scenario",
                          gettext_noop("Show Scenario Messages Only"))},
+   {KeyboardShortcut::kInGameMessagesFilterDiplomacy,
+    KeyboardShortcutInfo({KeyboardShortcutScope::kGame},
+                         keysym(SDLK_6, KMOD_ALT),
+                         "game_msg_filter_diplomacy",
+                         gettext_noop("Show Diplomacy Messages Only"))},
    {KeyboardShortcut::kInGameSeafaringstatsGotoShip,
     KeyboardShortcutInfo({KeyboardShortcutScope::kGame},
                          keysym(SDLK_j),

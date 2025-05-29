@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,8 +31,8 @@ public:
 	~LuaMarketDescription() override = default;
 
 	LuaMarketDescription() = default;
-	explicit LuaMarketDescription(const Widelands::MarketDescr* const warehousedescr)
-	   : LuaBuildingDescription(warehousedescr) {
+	explicit LuaMarketDescription(const Widelands::MarketDescr* const marketdescr)
+	   : LuaBuildingDescription(marketdescr) {
 	}
 	explicit LuaMarketDescription(lua_State* L) : LuaBuildingDescription(L) {
 	}
@@ -40,6 +40,8 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_local_carrier(lua_State*);
+	int get_trade_carrier(lua_State*);
 
 	/*
 	 * Lua methods

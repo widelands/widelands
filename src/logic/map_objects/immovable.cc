@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -862,6 +862,11 @@ void PlayerImmovable::remove_worker(Worker& w) {
 	}
 
 	throw wexception("PlayerImmovable::remove_worker: not in list");
+}
+
+void PlayerImmovable::kickout_worker_from_queue(Game& game, Worker& worker) {
+	worker.reset_tasks(game);
+	worker.start_task_leavebuilding(game, true);
 }
 
 void Immovable::set_former_building(const BuildingDescr& building) {

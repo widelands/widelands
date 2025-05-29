@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 #include "base/i18n.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/textinput.h"
 #include "ui_basic/unique_window.h"
@@ -55,6 +56,8 @@ private:
 	void layout() override;
 	InteractiveGameBase& igbase();
 
+	void fill_table();
+
 	/// Update button status and game details and prefill the edibox.
 	void entry_selected();
 
@@ -84,6 +87,10 @@ private:
 	UI::Box filename_box_;
 	UI::Textarea filename_label_;
 	UI::EditBox filename_editbox_;
+
+	UI::Checkbox* show_filenames_{nullptr};
+	bool showing_filenames_{false};
+	void toggle_filenames();
 
 	UI::Box buttons_box_;
 	UI::Button cancel_, ok_;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@ public:
 	Notifications::Signal<> changed;
 	Notifications::Signal<> cancel;
 
-	void set_text(const std::string&);
+	void set_text(const std::string&, bool send_signal = true);
 	[[nodiscard]] const std::string& get_text() const;
 
 	void focus(bool topcaller = true) override;

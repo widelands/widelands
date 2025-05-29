@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2024 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  */
 
 #include "ui_fsmenu/netsetup_lan.h"
+
+#include <memory>
 
 #include "base/i18n.h"
 #include "graphic/image_cache.h"
@@ -330,8 +332,8 @@ void NetSetupLAN::clicked_joingame() {
 	}
 
 	try {
-		running_game_.reset(new GameClient(
-		   capsule_, running_game_, std::make_pair(addr, NetAddress()), playername_.get_text()));
+		running_game_ = std::make_shared<GameClient>(
+		   capsule_, running_game_, std::make_pair(addr, NetAddress()), playername_.get_text());
 	} catch (const std::exception& e) {
 		running_game_.reset();
 		UI::WLMessageBox mbox(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Network Error"),
@@ -357,8 +359,8 @@ void NetSetupLAN::clicked_hostgame() {
 	}
 
 	try {
-		running_game_.reset(
-		   new GameHost(&capsule_, running_game_, playername_.get_text(), tribeinfos));
+		running_game_ =
+		   std::make_shared<GameHost>(&capsule_, running_game_, playername_.get_text(), tribeinfos);
 	} catch (const std::exception& e) {
 		running_game_.reset();
 		UI::WLMessageBox mbox(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Network Error"),

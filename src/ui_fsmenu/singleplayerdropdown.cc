@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -96,7 +96,7 @@ void SinglePlayerTribeDropdown::rebuild() {
 		}
 		dropdown_.add(pgettext("tribe", "Random"), kRandom,
 		              g_image_cache->get("images/ui_fsmenu/random.png"), false,
-		              _("The tribe will be selected at random"));
+		              _("The tribe will be selected at random."));
 		if (player_setting.random_tribe) {
 			dropdown_.select(kRandom);
 		} else {

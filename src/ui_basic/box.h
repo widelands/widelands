@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2024 by the Widelands Development Team
+ * Copyright (C) 2003-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -92,6 +92,11 @@ struct Box : public Panel {
 	// Forget all our entries. Does not delete or even remove them.
 	void clear() {
 		items_.clear();
+	}
+	void delete_all_children() {
+		scrollbar_.reset();
+		free_children();
+		clear();
 	}
 
 	Scrollbar* get_scrollbar() {

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
@@ -7,14 +7,14 @@
 # Matej Svrcek <mmatej@yahoo.com>, 2015
 # Zlopez <michal.konecny@psmail.xyz>, 2021-2022
 # Milan Fašina <matrix17@seznam.cz>, 2016-2018
-# af24e571988b09e5b46468ac89010e87_d1b4333, 2020-2021
+# Ondřej Itřech, 2020-2021,2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Zlopez <michal.konecny@psmail.xyz>, 2021-2022\n"
+"Last-Translator: Ondřej Itřech, 2020-2021,2025\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,13 +34,13 @@ msgstr "Po přistání na tajemném ostrově blízko Atlantidy se zbývající A
 
 #: ../../../../data/campaigns/atl02.wmf/elemental:8
 msgid "Struggling For a New Home Again"
-msgstr ""
+msgstr "V nesnázích za novým domovem"
 
 #: ../../../../data/campaigns/atl02.wmf/elemental:10
 msgid ""
 "After the quick escape from the drowning island, the Atlanteans around "
 "Jundlina are faced with new challenges."
-msgstr ""
+msgstr "Po rychlém útěku z potápějícího se ostrova, čelí Atlanťané stojící při Jundlině novým výzvám."
 
 #: ../../../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
@@ -60,7 +60,7 @@ msgstr "Tato země je naše země"
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
-msgstr "Tento tutoriál vysvětluje zacházení s vojenskými budovami a cvičišti a také vás uvede do tajů boje."
+msgstr "Tento tutoriál vysvětluje zacházení s vojenskými budovami, cvičišti a podíváme se i na boj."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:14
@@ -153,7 +153,7 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr "Když bůh Atlanťanů ztratil víru v jejich skutky a potopil jejich ostrov, boj jedné ženy za spravedlnost a druhou šanci pro její lid se stal námětem legend. V době, kdy vedla poslední Atlanťany vstříc nové budoucnosti neznámými končinami, stala se Jundlina nejmocnějším člověkem své doby. Avšak tohle jí stálo mnoho, její lidskost a duši."
+msgstr "Když bůh Atlanťanů ztratil víru v jejich skutky a potopil jejich ostrov, boj jedné ženy za spravedlnost a druhou šanci pro její lid se stal námětem legend. V době, kdy vedla poslední Atlanťany vstříc nové budoucnosti neznámými končinami, stala se Jundlina nejmocnější lidskou bytostí své doby. To vše za cenu velkých obětí, její lidskosti a duše."
 
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../../../data/campaigns/campaigns.lua:108
@@ -214,7 +214,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr ""
+msgstr "Po prohrané bitvě s barbary, která vedla ke ztrátě velké části území císařství, Lutius opouští Fremil, aby začal nový život. Ale osud zavedl jeho loď do velké bouře, která ji téměř zničila. Pouze díky velkému štěstí dokázal navést svou loď na písečnou pláž neznámého ostrova a zachránit svou družinu. Alespoň prozatím."
 
 #: ../../../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
@@ -247,7 +247,7 @@ msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the Empire."
-msgstr ""
+msgstr "Poté, co se Lutius a jeho družina vrátí domů, setkává se s hospodářstvím v troskách. Náprava hospodářských výpadků a nedostatků dostává nejvyšší prioritu, aby Císařství získalo zpět svou zašlou slávu."
 
 #: ../../../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
@@ -287,28 +287,28 @@ msgid ""
 "Reebaud and his tribe are living happily in the North. Meanwhile, the "
 "countries they have left behind are all but peaceful, and an old friend is "
 "in desperate need for their help…"
-msgstr "Rýbaud a jeho kmen vedou šťastný život v severních končinách. Ale život v zemích, které opustili, je všechno, jen ne pokojný a starý přítel zoufale potřebuje jeho pomoc…"
+msgstr "Rýbaud a jeho kmen vedou šťastný život v severních končinách. Ale život v zemích, které opustili, je všechno jen ne pokojný a starý přítel zoufale potřebuje jeho pomoc…"
 
 #: ../../../../data/campaigns/fri04.wmf/elemental:8
 msgid "Two Friends Reunited"
-msgstr ""
+msgstr "Opětovné setkání dvou přátel"
 
 #: ../../../../data/campaigns/fri04.wmf/elemental:10
 msgid ""
 "Claus and Henneke Lembeck have reached the North at last. But will they be "
 "able to convince Reebaud to send them aid?"
-msgstr ""
+msgstr "Klaus a Hennek Lemmek konečně dorazili na sever. Ale podaří se jim přesvědčit Rýbauda, aby jim poskytl pomoc?"
 
 #: ../../../../data/campaigns/fri05.wmf/elemental:8
 msgid "Reconquest"
-msgstr ""
+msgstr "Znovudobytí"
 
 #: ../../../../data/campaigns/fri05.wmf/elemental:10
 msgid ""
 "Back in Northern Frisia at last, Claus, Henneke, and Reebaud are preparing "
 "for battle against the invaders. They must gather allies and plan their "
 "strategy, but the foe is never far away…"
-msgstr ""
+msgstr "Konečně zpátky v severním Frísku, Klaus, Hennek a Rýbaud se připravují na bitvu proti nezvaným hostům. Musí si obstarat spojence a naplánovat svou strategii, ale nepřítel nikdy nespí..."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -371,7 +371,7 @@ msgid ""
 "Large plots are rare on those small islands. Prioritize construction of "
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
-msgstr "Velké pozemky jsou na těchto malých ostrovech vzácné. Upřednostňuj je pro velké budovy. Občas budeš potřebovat velkou vojenskou budovy, pro rozšíření území až na další ostrov. UI si tu moc dobře nepovede."
+msgstr "Velká stavební místa jsou na těchto malých ostrovech vzácná. Používej je přednostně na stavbu velkých budov. Občas budeš potřebovat velkou vojenskou budovy, pro rozšíření území až na další ostrov. AI si tu moc dobře nepovede."
 
 #: ../../../../data/maps/Astoria_2.R.wmf/elemental:8
 msgid "Astoria 2.R"
@@ -402,7 +402,7 @@ msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But "
 "the ways to encompass these large territories are long and meandering, so it"
 " is easy to err into the land of the foreign clans."
-msgstr "Je velkým štěstím usadit se zde na této členité pevnině. Ale abychom si ji podmanili, budeme muset překonat dlouhou a strastiplnou cestu. Může se lehce stát, že nás dovede k území cizích kmenů."
+msgstr "Je velkým štěstím usadit se zde, na této krásné členité pevnině. Ale abychom si ji podmanili, budeme muset překonat dlouhou a strastiplnou cestu. Může se lehce stát, že nás dovede na území cizích kmenů."
 
 #: ../../../../data/maps/Checkmate.wmf/elemental:8
 msgid "Checkmate"
@@ -413,7 +413,7 @@ msgid ""
 "Whether just one of nature’s strangest features or the creation of a mad "
 "(and game-hungry) god, this weird battleground awaits two opponents for "
 "another confrontation."
-msgstr "Ať už se jedná o jeden z nejzvláštnějších výstřelků přírody nebo výtvor šíleného (ale hravého) boha, toto podivné bojiště očekává dva soupeře, aby na něm změřili své síly."
+msgstr "Ať už se jedná o jeden z nejzvláštnějších výstřelků přírody, nebo výtvor šíleného (ale hravého) boha, toto podivné bojiště očekává dva soupeře, aby na něm změřili své síly."
 
 #: ../../../../data/maps/Comet_Island.wmf/elemental:8
 msgid "Comet Island"
@@ -431,7 +431,7 @@ msgid ""
 "came from the sky and touched down in its center. Is this a sign of the "
 "Gods? You believe it is and you hope that your tribe will find the treasure "
 "of this island before other tribes will follow."
-msgstr "Několik mil od pobřeží Gerionu leží malý, nepojmenovaný ostrov. Dosud neexistoval důvod, proč se tam vypravit - až do včerejška, kdy se z oblohy snesla obrovská ohnivá koule a dopadla doprostřed ostrova. Je to snad znamení bohů? Věříš, že ano, a doufáš, že na tomto ostrově tvůj kmen nalezne tento poklad dříve, než jej objeví ostatní."
+msgstr "Několik mil od pobřeží Gerionu leží malý, nepojmenovaný ostrov. Dosud neexistoval důvod, proč se tam vypravit - až do včerejška, kdy se z oblohy snesla obrovská ohnivá koule a dopadla doprostřed ostrova. Je to snad znamení bohů? Věříš že ano a doufáš, že na tomto ostrově tvůj kmen nalezne tento poklad dříve, než jej objeví ostatní."
 
 #: ../../../../data/maps/Comet_Island.wmf/elemental:11
 msgid ""
@@ -449,7 +449,7 @@ msgstr "Kráter"
 msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the"
 " crater. Two tribes are now fighting for the rich resources."
-msgstr "Před dávnými dobami spadl do pohoří meteor. Nyní se kráter opět zelená a dva kmeny bojují o jeho bohaté nerostné bohatství."
+msgstr "Před dávnými dobami spadl do pohoří meteor. Nyní se kráter opět zabydluje a dva kmeny bojují o nerostné bohatství."
 
 #: ../../../../data/maps/Crossing_the_Horizon.wmf/elemental:8
 msgid "Crossing the Horizon"
@@ -519,7 +519,7 @@ msgstr "Velká mapa Evropy. Modrý = Švédsko, Červený = Itálie, Žlutý = �
 
 #: ../../../../data/maps/Fellowships.wmf/elemental:8
 msgid "Fellowships"
-msgstr "Přátelství na moři"
+msgstr "Družnost"
 
 #: ../../../../data/maps/Fellowships.wmf/elemental:10
 msgid ""
@@ -701,7 +701,7 @@ msgstr "Čtyři kmeny bojují o nadvládu v nehostinné oblasti. Suroviny jsou r
 
 #: ../../../../data/maps/Lesser_Ring.wmf/elemental:8
 msgid "Lesser Ring 1.2"
-msgstr "Malý kruh 1.2"
+msgstr "Nepodstatný kruh 1.2"
 
 #: ../../../../data/maps/Lesser_Ring.wmf/elemental:10
 msgid ""
@@ -778,7 +778,7 @@ msgid ""
 " of iron to kickstart your economy), so you have to rely on the 5% "
 "production of an empty mine. And you’re still 1 vs 6 (though of course you "
 "can remove some AI players to make it a bit easier). Good luck!"
-msgstr "Tato mapa je navržena jako výzva pro jednoho. Je pro zkušené hráče, pro které je 1 proti 6 UI příliš snadné. Pozice modrého nemá k dispozici žádné kovy (jen trochu železa pro rozběh hospodářství), takže bude muset spoléhat na 5% produkce prázdných dolů. A to stále ve hře 1 proti 6 (samozřejmě počet UI hráčů lze snížit a hru tak udělat snazší). Hodně štěstí!"
+msgstr "Tato mapa je navržena jako výzva pro jednoho. Je pro zkušené hráče, pro které je 1 proti 6 AI příliš snadné. Pozice modrého nemá k dispozici žádné kovy (jen trochu železa pro rozběh hospodářství), takže budeš muset spoléhat na pětiprocentní produkci prázdných dolů. A to stále ve hře 1 proti 6 (samozřejmě počet AI hráčů lze snížit a hru tak udělat snazší). Hodně štěstí!"
 
 #: ../../../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
@@ -808,7 +808,7 @@ msgid ""
 "building a single ship, players are advised to make ports and shipyards a "
 "priority – expeditions are universally useful and are often the fastest way "
 "to gold deposits."
-msgstr "Každému hráči překáží v rozvoji jiné překážky a vždy existuje několik cest, jak je překonat. V tomto scénáři sice lze UI porazit bez stavby lodí, hráčům je ale doporučeno dát si stavbu přístavů a loděnic za svou prioritu. Výpravy jsou obecně prospěšné a často jsou nejrychlejším způsobem, jak se dostat k zásobám zlata."
+msgstr "Každému hráči brání v rozvoji jiné překážky a vždy existuje několik cest, jak je překonat. I když lze AI porazit bez stavby jediné lodě, hráčům je doporučeno stanovit si stavbu přístavů a loděnic jako svou prioritu. Výpravy jsou všeobecně užitečné a často jsou nejrychlejším způsobem, jak se dostat k zásobám zlata."
 
 #: ../../../../data/maps/Riverlands.wmf/elemental:8
 msgid "Riverlands"
@@ -867,7 +867,7 @@ msgid ""
 "It smells like swamp, it looks like swamp and it is a swamp. But it is the "
 "place you were born and where you’ve lived your whole life. If you don’t "
 "want to lose it, defend it!"
-msgstr "Páchne to jako bažina, vypadá to jako bažina a je to bažina. Ale je to také místo, kde ses narodil a prožil celý svůj život. A pokud ho nechceš ztratit, musíš ho bránit!"
+msgstr "Páchne to jako bažina, vypadá to jako bažina a je to bažina. Ale je to místo, kde ses narodil a prožil celý svůj život. A pokud ho nechceš ztratit, musíš ho bránit!"
 
 #: ../../../../data/maps/Swamp_Monks.wmf/elemental:8
 msgid "Swamp Monks"
@@ -957,7 +957,7 @@ msgstr "Horský průsmyk"
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories, unaware of the fact that they are not alone!"
-msgstr "Dva princové se usadili na odvrácených stranách tohoto pohoří. Nyní rozšiřují svá území a ani jeden z nich netuší, že v této krajině nejsou sami!"
+msgstr "Dva princi se usadili na odvrácených stranách tohoto pohoří. Nyní rozšiřují svá území a ani jeden z nich netuší, že v této krajině nejsou sami!"
 
 #: ../../../../data/maps/The_Thaw.wmf/elemental:8
 msgid "The Thaw"
@@ -1075,4 +1075,4 @@ msgid ""
 " 4 players’ map, with a black AI to add a complication to the expansion of "
 "the other players, or you can play as a challenge with the black player "
 "against the other 4 (VERY difficult)."
-msgstr "Černý hráč je obklíčen ve středu mapy a bez surovin, takže jsou tři možné způsoby jak hrát tuto mapu: bez černého hráče, jako běžnou mapu pro 4 hráče, s černým hráčem, coby UI pro zkomplikování rozšiřování ostatních hráčů nebo zkusit s černým hráčem hrát proti zbylým čtyřem (velmi obtížné)."
+msgstr "Černý hráč je obklíčen ve středu mapy a bez surovin, takže jsou tři možné způsoby jak hrát tuto mapu: bez černého hráče, jako běžnou mapu pro 4 hráče, s černým hráčem, coby AI pro zkomplikování rozšiřování ostatních hráčů, nebo zkusit s černým hráčem hrát proti zbylým čtyřem (velmi obtížné)."

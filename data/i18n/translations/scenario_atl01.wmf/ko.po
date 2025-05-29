@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # ks k, 2018
@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-04-19 03:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
 "Last-Translator: wig sejo <sejojun@gmail.com>, 2019\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -870,8 +870,8 @@ msgid ""
 "May Satul warm you, Jundlina. My name is Ostur and I construct ships. I have"
 " invented a new kind of ship: smaller than those we are used to, but much "
 "sturdier. If we build them correctly, I am confident that we can sail a much"
-" longer distance with them and maybe escape from Lutas’ influence."
-msgstr "사툴님이 당신을 따뜻하게 해주시길 바랍니다, 준들리나. 제 이름은 오스투르이고 배를 만듭니다. 저는 우리가 익숙한 것보다 작지만 훨씬 더 튼튼한 새로운 종류의 배를 발명했습니다. 제대로 구축하면 훨씬 더 먼 거리를 항해하고 루타스의 영향에서 벗어날 수 있다고 확신합니다."
+" longer distance with them and maybe escape from Lutas’s influence."
+msgstr ""
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:454
