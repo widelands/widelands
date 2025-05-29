@@ -983,7 +983,7 @@ msgstr "Každý sklad má čtyři tlačítka na nastavení preferencí. Když na
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:641
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:722
 msgid "Trading"
-msgstr ""
+msgstr "Obchodování"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:567
 msgid ""
@@ -1011,15 +1011,15 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:584
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:586
 msgid "Build a market"
-msgstr ""
+msgstr "Postav tržnici"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:587
 msgid "Build a market near the wasteland."
-msgstr ""
+msgstr "Postav tržnici poblíž pustiny."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:588
 msgid "The market is a big building."
-msgstr ""
+msgstr "Tržnice je velká budova."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:597
 msgid ""
@@ -1113,36 +1113,36 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:645
 msgid "Try it out!"
-msgstr ""
+msgstr "Zkus si to!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:652
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:654
 msgid "Propose a trade"
-msgstr ""
+msgstr "Navrhni směnu zboží"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:655
 msgid "Offer the Frisians a trade."
-msgstr ""
+msgstr "Zkus s Frísy uzavřít obchod."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:656
 msgid ""
 "The Frisians will only accept a trade that is advantageous to them; that is,"
 " they will not give away more wares than they receive."
-msgstr ""
+msgstr "Frísové přijmou pouze takovou směnu, která pro ně bude výhodná. To znamená, že nedají více zboží, než dostanou zpět."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:662
 msgid "Trade Rejected"
-msgstr ""
+msgstr "Obchod zamítnut"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:664
 msgid ""
 "The Frisians have rejected your trade offer. They will not accept a trade "
 "that may be disadvantageous to them. Send them a new trade proposal."
-msgstr ""
+msgstr "Frísové tvou nabídku zamítli. Nepřistoupí na směnu, která by pro ně mohla být nevýhodná. Pošli jim nový návrh."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:671
 msgid "Trade Accepted"
-msgstr ""
+msgstr "Obchod přijat"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:673
 msgid ""
@@ -1150,44 +1150,44 @@ msgid ""
 "the market window now has a new tab? It has one such tab for every active "
 "trade at this market. The tab shows more details about the running trade, "
 "and also allows you to cancel it at any time."
-msgstr ""
+msgstr "Výborně! Frísové tvou nabídku přijali. Okno tržnice má nyní novou záložku. Každý obchod probíhající na této tržnici bude mít takovou záložku. Ta ti umožňuje zobrazit si podrobnosti k danému obchodu nebo ho kdykoliv ukončit."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:674
 msgid ""
 "Soon you will see a caravan of your donkeys leaving the market to bring "
 "wares to the Frisians, and a caravan of their reindeer bringing you wares in"
 " exchange."
-msgstr ""
+msgstr "Z tržnice brzy vyrazí na cestu karavana oslů, aby doručila Frísům zboží. Tobě pak směněné zboží přinese karavana sobů."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:681
 msgid "Trade Offered"
-msgstr ""
+msgstr "Nabídka k obchodu"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:683
 msgid ""
 "Now the Frisians have offered you a trade as well. You can find a list of "
 "all trade offers and proposals as well as running trades in the Diplomacy "
 "window. Open it via the button from the main toolbar."
-msgstr ""
+msgstr "Nyní Frísové navrhují směnu i tobě. Seznam všech probíhajících obchodů a obchodních nabídek najdeš v nabídce \"Diplomacie\". Tu lze otevřít kliknutím na příslušné tlačítko v hlavní nabídce."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:690
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:692
 msgid "Open the diplomacy window"
-msgstr ""
+msgstr "Otevři okno diplomacie"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:693
 msgid ""
 "The diplomacy window gives you an overview over all your trades, trade "
 "offers, and trade proposals."
-msgstr ""
+msgstr "Okno diplomacie poskytuje přehled všech obchodů a zaslaných i obdržených nabídek."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:694
 msgid "You can open it via this button from the main toolbar."
-msgstr ""
+msgstr "Můžeš ho otevřít kliknutím na toto tlačítko v hlavní nabídce."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:701
 msgid "The Diplomacy Window"
-msgstr ""
+msgstr "Okno \"Diplomacie\""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:703
 msgid ""
@@ -1266,7 +1266,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:734
 msgid "Congratulations"
-msgstr ""
+msgstr "Gratuluji"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:736
 msgid ""
@@ -1275,7 +1275,7 @@ msgid ""
 "at first. Even if you’ve only understood a few concepts, you mustn’t give "
 "up. Try them out in some games, become familiar with them and experience the"
 " possibilities. Then, return to this tutorial and learn the rest!"
-msgstr ""
+msgstr "A to je konec tohoto tutoriálu! Doufám, že se mi podařilo naučit tě, jak ovládat hospodářství ve Widelands. Je tu hodně nastavení a to může být z počátku matoucí. Pokud nebylo vše hned jasné, nenech se odradit. Zkus si nastavení v nějaké hře, osvoj si ho a objevuj další možnosti. Pak se můžeš vrátit k tomuto tutoriálům a určitě pochopíš i to, co zatím nebylo úplně jasné!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:738
 msgid ""
