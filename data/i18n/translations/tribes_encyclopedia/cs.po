@@ -1116,7 +1116,7 @@ msgstr "Na přístav, stejně jako na hlavní budovu, může nepřítel zaútoč
 #: ../../../../data/tribes/initialization/amazons/units.lua:1291
 msgctxt "amazons_building"
 msgid "A market enables trading with other tribes."
-msgstr ""
+msgstr "Tržnice umožňuje obchodování s dalšími kmeny."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stonecutter's
 #. Hut
@@ -4160,7 +4160,7 @@ msgstr "Ostur, návrhář třídy lodí pro výpravy, během otevření nového 
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1475
 msgctxt "atlanteans_building"
 msgid "A market enables trading with other tribes."
-msgstr ""
+msgstr "Tržnice umožňuje obchodování s dalšími kmeny."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Quarry
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1484
@@ -6789,7 +6789,7 @@ msgstr "Na přístav, stejně jako na hlavní budovu, může nepřítel zaútoč
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1132
 msgctxt "barbarians_building"
 msgid "A market enables trading with other tribes."
-msgstr ""
+msgstr "Tržnice umožňuje obchodování s dalšími kmeny."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Quarry
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1141
@@ -11005,20 +11005,20 @@ msgstr "Na přístav, stejně jako na hlavní budovu, může nepřítel zaútoč
 #. "Good contracts make good friends."
 #: ../../../../data/tribes/initialization/empire/units.lua:1237
 msgid "Clara pacta, boni amici."
-msgstr ""
+msgstr "Clara pacta, boni amici."
 
 #. TRANSLATORS: Lore helptext for an Empire market: Market
 #. Translation for the classical Latin quote:
 #. "Clara pacta, boni amici."
 #: ../../../../data/tribes/initialization/empire/units.lua:1241
 msgid "Good contracts make good friends."
-msgstr ""
+msgstr "Pořádek dělá přátele."
 
 #. TRANSLATORS: Purpose helptext for an Empire market: Market
 #: ../../../../data/tribes/initialization/empire/units.lua:1244
 msgctxt "empire_building"
 msgid "A market enables trading with other tribes."
-msgstr ""
+msgstr "Tržnice umožňuje obchodování s dalšími kmeny."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14592,19 +14592,19 @@ msgid ""
 "Tradecraft is the fine art of getting others to give you the wares that you "
 "want in exchange for wares you don’t want; excuse me, I mean, for wares you "
 "convince them to think that they need."
-msgstr ""
+msgstr "Umění obchodovat je ceněnou dovedností umožňující získávat zboží, které potřebujete, za zboží, které je vám k ničemu. Prominou mi, myslím tím za zboží, o kterém jste schopni druhé přesvědčit, že se bez něj neobejdou."
 
 #. TRANSLATORS: Lore author helptext for a Frisian market: Market
 #: ../../../../data/tribes/initialization/frisians/units.lua:1556
 msgctxt "frisians_building"
 msgid "A trader explaining his diplomacy"
-msgstr ""
+msgstr "obchodník komentuje své diplomatické jednání"
 
 #. TRANSLATORS: Purpose helptext for a Frisian market: Market
 #: ../../../../data/tribes/initialization/frisians/units.lua:1558
 msgctxt "frisians_building"
 msgid "A market enables trading with other tribes."
-msgstr ""
+msgstr "Tržnice umožňuje obchodování s dalšími kmeny."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Quarry
 #: ../../../../data/tribes/initialization/frisians/units.lua:1567

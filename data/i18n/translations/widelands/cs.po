@@ -1908,7 +1908,7 @@ msgstr "Hospodářství"
 #: ../../../../src/game_io/game_loader.cc:143
 #: ../../../../src/game_io/game_saver.cc:90
 msgid "Trades"
-msgstr ""
+msgstr "Obchod"
 
 #: ../../../../src/game_io/game_loader.cc:150
 #: ../../../../src/game_io/game_saver.cc:97
@@ -2420,103 +2420,103 @@ msgstr "Obchodní nabídka"
 
 #: ../../../../src/logic/game.cc:1335
 msgid "New trade offer received"
-msgstr ""
+msgstr "Obdržena nová nabídka ke směně"
 
 #: ../../../../src/logic/game.cc:1336
 #, c-format
 msgid "You have received a new trade offer from %s."
-msgstr ""
+msgstr "%s ti posílá novou obchodní nabídku."
 
 #: ../../../../src/logic/game.cc:1366
 msgid "Trade Accepted"
-msgstr ""
+msgstr "Obchod přijat"
 
 #: ../../../../src/logic/game.cc:1367
 msgid "Trade offer accepted"
-msgstr ""
+msgstr "Nabídka ke směně přijata"
 
 #: ../../../../src/logic/game.cc:1368
 #, c-format
 msgid "%1$s has accepted your trade offer at %2$s."
-msgstr ""
+msgstr "%1$s přijímá nabídku ke směně poslanou z %2$s."
 
 #: ../../../../src/logic/game.cc:1386
 msgid "Trade Rejected"
-msgstr ""
+msgstr "Obchod zamítnut"
 
 #: ../../../../src/logic/game.cc:1387
 msgid "Trade offer rejected"
-msgstr ""
+msgstr "Nabídka ke směně zamítnuta"
 
 #: ../../../../src/logic/game.cc:1388
 #, c-format
 msgid "%1$s has rejected your trade offer at %2$s."
-msgstr ""
+msgstr "%1$s odmítá tvou nabídku ke směně poslanou z %2$s."
 
 #: ../../../../src/logic/game.cc:1410
 msgid "Trade Retracted"
-msgstr ""
+msgstr "Obchod odvolán"
 
 #: ../../../../src/logic/game.cc:1412
 msgid "Trade offer retracted"
-msgstr ""
+msgstr "Nabídka ke směně byla stažena"
 
 #: ../../../../src/logic/game.cc:1413
 #, c-format
 msgid "The trade offer by %s has been retracted."
-msgstr ""
+msgstr "Nabídka ke směně od hráče %s byla stažena."
 
 #: ../../../../src/logic/game.cc:1524
 msgid "Trade Extension Proposal"
-msgstr ""
+msgstr "Nabídka na prodloužení obchodu"
 
 #: ../../../../src/logic/game.cc:1526
 msgid "New trade extension proposal received"
-msgstr ""
+msgstr "Byl obdržen nový návrh na prodloužení obchodu"
 
 #: ../../../../src/logic/game.cc:1527
 #, c-format
 msgid "%s has proposed to extend a trade."
-msgstr ""
+msgstr "%s navrhuje prodloužení obchodu."
 
 #: ../../../../src/logic/game.cc:1554
 msgid "Trade Extension Retracted"
-msgstr ""
+msgstr "Nabídka k prodloužení obchodu stažena"
 
 #: ../../../../src/logic/game.cc:1557
 msgid "Trade extension proposal retracted"
-msgstr ""
+msgstr "Nabídka k prodloužení obchodu byla stažena"
 
 #: ../../../../src/logic/game.cc:1558
 #, c-format
 msgid "The proposal by %s to extend a trade has been retracted."
-msgstr ""
+msgstr "Nabídka k prodloužení obchodu od hráče %s byla stažena."
 
 #: ../../../../src/logic/game.cc:1596
 msgid "Trade Extension Rejected"
-msgstr ""
+msgstr "Nabídka k prodloužení obchodu zamítnuta"
 
 #: ../../../../src/logic/game.cc:1599
 msgid "Trade extension proposal rejected"
-msgstr ""
+msgstr "Nabídka k prodloužení obchodu byla zamítnuta"
 
 #: ../../../../src/logic/game.cc:1600
 #, c-format
 msgid "%s has rejected your proposal to extend a trade."
-msgstr ""
+msgstr "%s odmítá tvůj návrh k prodloužení obchodu."
 
 #: ../../../../src/logic/game.cc:1651
 msgid "Trade Extension Accepted"
-msgstr ""
+msgstr "Nabídka k prodloužení obchodu přijata"
 
 #: ../../../../src/logic/game.cc:1654
 msgid "Trade extension proposal accepted"
-msgstr ""
+msgstr "Nabídka k prodloužení obchodu byla přijata"
 
 #: ../../../../src/logic/game.cc:1655
 #, c-format
 msgid "%s has accepted your proposal to extend a trade."
-msgstr ""
+msgstr "%s přijímá tvůj návrh k prodloužení obchodu."
 
 #: ../../../../src/logic/game_data_error.cc:51
 msgid ""
@@ -2608,75 +2608,75 @@ msgstr "%u%% rozebráno"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:70
 msgid "A new market was added to your economy."
-msgstr ""
+msgstr "Tvé hospodářství má k dispozici novou tržnici."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:152
 #, c-format
 msgid "%u trade"
 msgid_plural "%u trades"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%u obchod"
+msgstr[1] "%u obchody"
+msgstr[2] "%u obchodu"
+msgstr[3] "%u obchodů"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:274
 msgid "Trade Cancelled"
-msgstr ""
+msgstr "Obchod zrušen"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:274
 msgid "Trade Complete"
-msgstr ""
+msgstr "Obchod dokončen"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:276
 msgid "Trade agreement cancelled"
-msgstr ""
+msgstr "Obchod byl zrušen"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:276
 msgid "Trade agreement complete"
-msgstr ""
+msgstr "Obchod úspěšně proběhl"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:277
 #, c-format
 msgid "Your trade agreement at %s has been completed."
-msgstr ""
+msgstr "Obchodní dohoda z %s úspěšně proběhla."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:278
 #, c-format
 msgid "Your trade agreement at %s has been cancelled."
-msgstr ""
+msgstr "Obchodní dohoda z %s byla zrušena."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:546
 msgid "Trade Paused"
-msgstr ""
+msgstr "Obchod pozastaven"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:547
 msgid "Trade agreement paused"
-msgstr ""
+msgstr "Obchodní dohoda je pozastavena"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:548
 #, c-format
 msgid "%1$s paused the trade with you at %2$s."
-msgstr ""
+msgstr "%1$s pozastavuje vzájemný obchod s tržnicí %2$s. "
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:552
 msgid "Trade Resumed"
-msgstr ""
+msgstr "Obchod obnoven"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:553
 msgid "Trade agreement resumed"
-msgstr ""
+msgstr "Plnění obchodní dohody obnoveno"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:554
 #, c-format
 msgid "%1$s resumed the trade with you at %2$s."
-msgstr ""
+msgstr "%1$s obnovuje vzájemný obchod s tržnicí %2$s."
 
 #. * TRANSLATORS: "At" is the market's name, and "with" is the receiving
 #. player's name
 #: ../../../../src/logic/map_objects/tribes/market.cc:714
 #, c-format
 msgid "Trade agreement at %1$s with %2$s"
-msgstr ""
+msgstr "Obchod s hráčem %2$s z tržnice %1$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:722
 #, c-format
@@ -2694,58 +2694,58 @@ msgstr ""
 #, c-format
 msgid "%d batch"
 msgid_plural "%d batches"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d dodávka"
+msgstr[1] "%d dodávky"
+msgstr[2] "%d dodávky"
+msgstr[3] "%d dodávek"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:744
 msgid "Trade runs indefinitely"
-msgstr ""
+msgstr "Obchod neomezen"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:755
 #, c-format
 msgid "%d batch delivered"
 msgid_plural "%d batches delivered"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d dodávka doručena"
+msgstr[1] "%d dodávky doručeny"
+msgstr[2] "%d dodávky doručeno"
+msgstr[3] "%d dodávek doručeno"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:763
 #, c-format
 msgid "%d batch remaining"
 msgid_plural "%d batches remaining"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d  dodávka zbývá"
+msgstr[1] "%d  dodávky zbývají"
+msgstr[2] "%d  dodávky zbývá"
+msgstr[3] "%d dodávek zbývá"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:777
 msgid "Paused by both players"
-msgstr ""
+msgstr "Pozastaveno oběma hráči"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:779
 msgid "Paused by you"
-msgstr ""
+msgstr "Mnou pozastaveno"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:780
 #: ../../../../src/logic/map_objects/tribes/market.cc:784
 #, c-format
 msgid "Paused by %s"
-msgstr ""
+msgstr "Pozastaveno hráčem %s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:786
 msgid "Active"
-msgstr ""
+msgstr "Probíhá"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:798
 msgid "Player sends:"
-msgstr ""
+msgstr "Spoluhráč posílá:"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:798
 msgid "You send:"
-msgstr ""
+msgstr "Mnou odesíláno:"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
 #. * TRANSLATORS:    %1$i = "2"
@@ -2755,15 +2755,15 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1407
 #, c-format
 msgid "%1$i× %2$s"
-msgstr ""
+msgstr "%1$i× %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:810
 msgid "Player receives:"
-msgstr ""
+msgstr "Spoluhráč obdržel:"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:810
 msgid "You receive:"
-msgstr ""
+msgstr "Mnou odbdrženo:"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:253
@@ -3484,7 +3484,7 @@ msgstr "Přístav %d"
 #, c-format
 msgctxt "market"
 msgid "Market %d"
-msgstr ""
+msgstr "Tržnice %d"
 
 #: ../../../../src/logic/player.cc:2097
 #, c-format
@@ -9286,40 +9286,40 @@ msgstr "Vzdáváš se?"
 
 #: ../../../../src/wui/actionconfirm.cc:568
 msgid "Cancel?"
-msgstr ""
+msgstr "Zrušit?"
 
 #: ../../../../src/wui/actionconfirm.cc:568
 msgid "Do you really want to cancel this trade agreement?"
-msgstr ""
+msgstr "Opravdu chceš zrušit tuto obchodní dohodu?"
 
 #: ../../../../src/wui/actionconfirm.cc:596
 msgid "Extend Trade"
-msgstr ""
+msgstr "Prodloužit obchod"
 
 #: ../../../../src/wui/actionconfirm.cc:597
 msgid "Select by how many batches you want to extend this trade:"
-msgstr ""
+msgstr "Vyber o kolik dodávek chceš prodloužit tento obchod:"
 
 #: ../../../../src/wui/actionconfirm.cc:603
 #: ../../../../src/wui/marketwindow.cc:75
 msgid "Toggle indefinite trade"
-msgstr ""
+msgstr "Přepnout neomezené dodávky"
 
 #: ../../../../src/wui/actionconfirm.cc:604
 #: ../../../../src/wui/marketwindow.cc:76
 msgid "Batches:"
-msgstr ""
+msgstr "Dodávky:"
 
 #: ../../../../src/wui/actionconfirm.cc:639
 msgid "Unpause?"
-msgstr ""
+msgstr "Obnovit?"
 
 #: ../../../../src/wui/actionconfirm.cc:640
 msgid ""
 "Do you really want to unpause this trade?\n"
 "\n"
 "Doing so will reset all queues to their maximum capacity."
-msgstr ""
+msgstr "Opravdu chceš obnovit tuto obchodní dohodu?\n\nPotvrzením obnovíš veškeré hodnoty čekajícího zboží na jejich maximum."
 
 #: ../../../../src/wui/attack_window.cc:79
 msgid "Attack"
@@ -10118,15 +10118,15 @@ msgstr "Pozvání hráče do svého týmu"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:193
 msgid "Trade offers you have received from other players"
-msgstr ""
+msgstr "Nabídky obdržené od ostatních hráčů"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:195
 msgid "Trades you have proposed to other players"
-msgstr ""
+msgstr "Mnou navržené nabídky jiným hráčům"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:196
 msgid "Your active trade agreements"
-msgstr ""
+msgstr "Moje aktivní obchodní dohody"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:246
 msgid "No team"
@@ -10176,52 +10176,52 @@ msgstr "Stáhnout zpět"
 #: ../../../../src/wui/marketwindow.cc:911
 #, c-format
 msgid "Trade Offers (%u)"
-msgstr ""
+msgstr "Obchodní nabídky (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:414
 #: ../../../../src/wui/marketwindow.cc:424
 msgid "Nobody has offered you any trades at the moment."
-msgstr ""
+msgstr "V tuto chvíli nemáš žádné obchodní nabídky."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:436
 msgid "Market to accept the trade at"
-msgstr ""
+msgstr "Tržnice k přijetí zboží:"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:442
 #: ../../../../src/wui/game_diplomacy_menu.cc:673
 #: ../../../../src/wui/marketwindow.cc:589
 #, c-format
 msgid "%s (closest)"
-msgstr ""
+msgstr "%s (nejbližší)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:445
 #, c-format
 msgid "%1$s (distance: %2$u field)"
 msgid_plural "%1$s (distance: %2$u fields)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1$s (vzdálenost %2$u pole)"
+msgstr[1] "%1$s (vzdálenost %2$u pole)"
+msgstr[2] "%1$s (vzdálenost %2$u pole)"
+msgstr[3] "%1$s (vzdálenost %2$u polí)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:452
 #: ../../../../src/wui/marketwindow.cc:443
 msgid "Accept this trade offer"
-msgstr ""
+msgstr "Přijmout nabídku ke směně"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:455
 #: ../../../../src/wui/marketwindow.cc:446
 msgid "Reject this trade offer"
-msgstr ""
+msgstr "Odmítnout nabídku ke směně"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:459
 msgid "Build a market to accept trade offers."
-msgstr ""
+msgstr "Pro přijetí nabídky ke směně postav tržnici."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:498
 #: ../../../../src/wui/marketwindow.cc:905
 #, c-format
 msgid "Proposed Trades (%u)"
-msgstr ""
+msgstr "Navržené obchody (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:509
 msgid ""
@@ -10232,7 +10232,7 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:533
 #: ../../../../src/wui/game_diplomacy_menu.cc:642
 msgid "Center view on this market"
-msgstr ""
+msgstr "Přesunout se k této tržnici"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:536
 #: ../../../../src/wui/marketwindow.cc:314
@@ -10242,36 +10242,36 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:548
 #: ../../../../src/wui/marketwindow.cc:322
 msgid "Move this trade proposal…"
-msgstr ""
+msgstr "Přemístit tuto obchodní nabídku…"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:558
 #: ../../../../src/wui/marketwindow.cc:333
 #, c-format
 msgid "Move this trade proposal to %s"
-msgstr ""
+msgstr "Přemístit obchodní nabídku do tržnice %s"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:563
 #: ../../../../src/wui/game_diplomacy_menu.cc:683
 #: ../../../../src/wui/marketwindow.cc:339
 #: ../../../../src/wui/marketwindow.cc:599
 msgid "You have no markets you could move this trade to."
-msgstr ""
+msgstr "Nejsou k dispozici žádné tržnice, kam by bylo možné směnu přemístit."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:598
 #, c-format
 msgid "Active Trades (%u)"
-msgstr ""
+msgstr "Probíhající obchody (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:609
 msgid "There are no active trade agreements at the moment."
-msgstr ""
+msgstr "V této chvíli nejsou realizovány žádné obchodní dohody."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:649
 #: ../../../../src/wui/game_diplomacy_menu.cc:657
 #: ../../../../src/wui/marketwindow.cc:545
 #: ../../../../src/wui/marketwindow.cc:553
 msgid "Propose extending this trade"
-msgstr ""
+msgstr "Navrhnout prodloužení této obchodní dohody"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:650
 #: ../../../../src/wui/marketwindow.cc:546
@@ -11240,62 +11240,62 @@ msgstr "Název mapy"
 
 #: ../../../../src/wui/marketwindow.cc:80
 msgid "Propose"
-msgstr ""
+msgstr "Odeslat nabídku"
 
 #: ../../../../src/wui/marketwindow.cc:96
 msgid "You offer:"
-msgstr ""
+msgstr "Nabídka:"
 
 #: ../../../../src/wui/marketwindow.cc:100
 msgid "You demand:"
-msgstr ""
+msgstr "Poptávka:"
 
 #: ../../../../src/wui/marketwindow.cc:106
 msgid "Decrease amount by 10"
-msgstr ""
+msgstr "Snížit množství o 10"
 
 #: ../../../../src/wui/marketwindow.cc:113
 msgid "Decrease amount"
-msgstr ""
+msgstr "Snížit množství"
 
 #: ../../../../src/wui/marketwindow.cc:121
 msgid "Increase amount"
-msgstr ""
+msgstr "Zvýšit množství"
 
 #: ../../../../src/wui/marketwindow.cc:128
 msgid "Increase amount by 10"
-msgstr ""
+msgstr "Zvýšit množství o 10"
 
 #: ../../../../src/wui/marketwindow.cc:189
 msgid "Please select the player you want to trade with."
-msgstr ""
+msgstr "Prosím zvol hráče k obchodování."
 
 #: ../../../../src/wui/marketwindow.cc:195
 msgid "Please select the wares you want to send and receive."
-msgstr ""
+msgstr "Prosím zvol zboží, které nabízíš a které poptáváš."
 
 #: ../../../../src/wui/marketwindow.cc:214
 #, c-format
 msgid "You cannot both send and receive the same ware type (%s)."
-msgstr ""
+msgstr "Nelze nabízet a poptávat stejný typ zboží (%s)."
 
 #: ../../../../src/wui/marketwindow.cc:220
 msgid "Propose the configured trade to the selected player"
-msgstr ""
+msgstr "Odeslat návrh zvolenému hráči"
 
 #: ../../../../src/wui/marketwindow.cc:288
 msgid ""
 "There are no pending trade proposals at the moment. You can propose a new "
 "trade from the first tab."
-msgstr ""
+msgstr "V tuto chvíli nepoptáváš žádné zboží. Novou poptávku můžeš vytvořit v první záložce."
 
 #: ../../../../src/wui/marketwindow.cc:291
 msgid "There are no pending trade proposals at the moment."
-msgstr ""
+msgstr "V tuto chvíli nepoptáváš žádné zboží."
 
 #: ../../../../src/wui/marketwindow.cc:562
 msgid "Cancel this trade"
-msgstr ""
+msgstr "Zrušit tento obchod"
 
 #: ../../../../src/wui/marketwindow.cc:784
 msgid ""
@@ -11305,37 +11305,37 @@ msgstr ""
 
 #: ../../../../src/wui/marketwindow.cc:788
 msgid "Pause this trade"
-msgstr ""
+msgstr "Pozastavit tento obchod"
 
 #: ../../../../src/wui/marketwindow.cc:799
 msgid "You need to pause the trade before you can change the queue capacity."
-msgstr ""
+msgstr "Před provedením změny obchodovaného množství zboží je třeba obchod pozastavit."
 
 #: ../../../../src/wui/marketwindow.cc:800
 msgid "Pause Trade?"
-msgstr ""
+msgstr "Pozastavit obchod?"
 
 #: ../../../../src/wui/marketwindow.cc:801
 msgid ""
 "Changing the capacity of the input queues will cause the trade to be paused."
 " Pause the trade now?"
-msgstr ""
+msgstr "Změna obchodovaného množství způsobí pozastavení obchodu. Pozastavit obchod?"
 
 #: ../../../../src/wui/marketwindow.cc:952
 msgid "Propose Trade"
-msgstr ""
+msgstr "Navrhnout obchod"
 
 #: ../../../../src/wui/marketwindow.cc:957
 msgid "Proposed Trades"
-msgstr ""
+msgstr "Navržené obchody"
 
 #: ../../../../src/wui/marketwindow.cc:963
 msgid "Trade Offers"
-msgstr ""
+msgstr "Obchodní nabídky"
 
 #: ../../../../src/wui/marketwindow.cc:974
 msgid "Active Trade"
-msgstr ""
+msgstr "Probíhající obchod"
 
 #: ../../../../src/wui/minimap.cc:169
 msgid "Owner"
