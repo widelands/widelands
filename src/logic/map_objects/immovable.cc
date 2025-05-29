@@ -864,6 +864,11 @@ void PlayerImmovable::remove_worker(Worker& w) {
 	throw wexception("PlayerImmovable::remove_worker: not in list");
 }
 
+void PlayerImmovable::kickout_worker_from_queue(Game& game, Worker& worker) {
+	worker.reset_tasks(game);
+	worker.start_task_leavebuilding(game, true);
+}
+
 void Immovable::set_former_building(const BuildingDescr& building) {
 	former_building_descr_ = &building;
 }
