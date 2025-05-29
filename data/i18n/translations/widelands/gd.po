@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-05-19 03:23+0000\n"
+"POT-Creation-Date: 2025-05-22 03:18+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2015-2021\n"
 "Language-Team: Gaelic, Scottish (http://app.transifex.com/widelands/widelands/language/gd/)\n"
@@ -1176,7 +1176,6 @@ msgstr "Am pasgan làithreach: %s"
 
 #. * TRANSLATORS: "Display: Original/Localized map/file names"
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:94
-#: ../../../../src/ui_fsmenu/options.cc:159
 msgid "Display"
 msgstr "Seall"
 
@@ -7674,6 +7673,11 @@ msgstr "Cànan"
 msgid "Window Size"
 msgstr "Meud na h-uinneige"
 
+#: ../../../../src/ui_fsmenu/options.cc:159
+msgctxt "multiscreen"
+msgid "Display"
+msgstr ""
+
 #. * TRANSLATORS: short description for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:168
 msgid "Let the system draw the mouse cursor"
@@ -7842,9 +7846,9 @@ msgstr ""
 
 #. * TRANSLATORS: Entry in the display selection dropdown
 #: ../../../../src/ui_fsmenu/options.cc:583
-#: ../../../../src/wui/info_panel.cc:212
+msgctxt "multiscreen"
 msgid "Follow mouse"
-msgstr "Lean air an luchag"
+msgstr ""
 
 #. * TRANSLATORS: Display index and virtual coordinates, e.g, '#0 (0, 0, 1920,
 #. 1080)'
@@ -7853,37 +7857,37 @@ msgid "#%1% (%2%, %3%, %4%, %5%)"
 msgstr ""
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../../../src/ui_fsmenu/options.cc:603
+#: ../../../../src/ui_fsmenu/options.cc:604
 msgid "Fullscreen"
 msgstr "Làn-sgrìn"
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../../../src/ui_fsmenu/options.cc:606
+#: ../../../../src/ui_fsmenu/options.cc:607
 msgid "Maximized"
 msgstr "Làn-mheudaichte"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 × 600
-#: ../../../../src/ui_fsmenu/options.cc:622
-#: ../../../../src/ui_fsmenu/options.cc:630
+#: ../../../../src/ui_fsmenu/options.cc:623
+#: ../../../../src/ui_fsmenu/options.cc:631
 msgid "%1% × %2%"
 msgstr ""
 
-#: ../../../../src/ui_fsmenu/options.cc:698
+#: ../../../../src/ui_fsmenu/options.cc:699
 msgid "Try system language"
 msgstr "Feuch cànan an t-siostaim"
 
 #. * TRANSLATORS: %s = language name
-#: ../../../../src/ui_fsmenu/options.cc:810
+#: ../../../../src/ui_fsmenu/options.cc:811
 #, c-format
 msgid "The translation into %s is complete."
 msgstr "Tha an t-eadar-theangachadh gu %s coileanta."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../../../src/ui_fsmenu/options.cc:814
+#: ../../../../src/ui_fsmenu/options.cc:815
 msgid "The translation into %1% is %2%%% complete."
 msgstr "Chaidh %2%%% dheth eadar-theangachadh gu %1%."
 
-#: ../../../../src/ui_fsmenu/options.cc:826
+#: ../../../../src/ui_fsmenu/options.cc:827
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr "Nam bu toigh leat taic a thoirt dhuinn leis an eadar-theangachadh, tadhail air %s"
@@ -10654,6 +10658,10 @@ msgstr "An t-arm"
 #: ../../../../src/wui/info_panel.cc:153
 msgid "Info Panel Visibility"
 msgstr "So-fhaicsinneach panail an fhiosrachaidh"
+
+#: ../../../../src/wui/info_panel.cc:212
+msgid "Follow mouse"
+msgstr "Lean air an luchag"
 
 #: ../../../../src/wui/info_panel.cc:217
 msgid "Hide"

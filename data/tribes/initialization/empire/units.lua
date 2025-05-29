@@ -1564,7 +1564,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Vineyard
             lore_author = pgettext("empire_building", "A proud vine farmer boasting"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Vineyard
-            purpose = pgettext("empire_building", "Plants grapevines and harvests grapes.")
+            purpose = pgettext("empire_building", "Plants grapevines and harvests grapes."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Vineyard, part 1
+               pgettext("empire_building", "The vine farmer sows and harvests one basket of grapes between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(44), format_seconds(59)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Vineyard, part 2; %s is replaced by 'N growing fields'
+               pgettext("empire_building", "The vineyard needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 4):bformat(4))
+            }
          }
       },
       {
@@ -1783,8 +1789,12 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("empire_building", "History of the Empire, Part VII"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Farm
             purpose = pgettext("building", "Sows and harvests wheat."),
-            -- TRANSLATORS: Performance helptext for an Empire production site: Farm
-            performance = pgettext("empire_building", "The farmer needs %1% on average to sow and harvest a sheaf of wheat."):bformat(format_minutes_seconds(1, 20))
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Farm, part 1
+               pgettext("empire_building", "The farmer sows and harvests one sheaf of wheat between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(54), format_minutes_seconds(1, 23)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Farm, part 2; %s is replaced by 'N growing fields'
+               pgettext("empire_building", "The farm needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 4):bformat(4))
+            }
          }
       },
       {

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-05-19 03:23+0000\n"
+"POT-Creation-Date: 2025-05-22 03:18+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -1177,7 +1177,6 @@ msgstr "Stedenwies Verteeknis: %s"
 
 #. * TRANSLATORS: "Display: Original/Localized map/file names"
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:94
-#: ../../../../src/ui_fsmenu/options.cc:159
 msgid "Display"
 msgstr "Wiesen"
 
@@ -1902,7 +1901,7 @@ msgstr "Weertskuppen"
 #: ../../../../src/game_io/game_loader.cc:143
 #: ../../../../src/game_io/game_saver.cc:90
 msgid "Trades"
-msgstr ""
+msgstr "Hannels"
 
 #: ../../../../src/game_io/game_loader.cc:150
 #: ../../../../src/game_io/game_saver.cc:97
@@ -2396,107 +2395,107 @@ msgstr "Vörbereiden …"
 
 #: ../../../../src/logic/game.cc:1333
 msgid "Trade Offer"
-msgstr "Hannel-Anbott"
+msgstr "Hannels-Angebood"
 
 #: ../../../../src/logic/game.cc:1335
 msgid "New trade offer received"
-msgstr ""
+msgstr "Nejes Hannels-Angebood kregen"
 
 #: ../../../../src/logic/game.cc:1336
 #, c-format
 msgid "You have received a new trade offer from %s."
-msgstr ""
+msgstr "Du hest een nejes Hannel-Angebood vun %s kregen."
 
 #: ../../../../src/logic/game.cc:1366
 msgid "Trade Accepted"
-msgstr ""
+msgstr "Hannel annohmen"
 
 #: ../../../../src/logic/game.cc:1367
 msgid "Trade offer accepted"
-msgstr ""
+msgstr "Hannels-Angebood annohmen"
 
 #: ../../../../src/logic/game.cc:1368
 #, c-format
 msgid "%1$s has accepted your trade offer at %2$s."
-msgstr ""
+msgstr "%1$s hett dien Hannels-Angebood bi %2$s annohmen."
 
 #: ../../../../src/logic/game.cc:1386
 msgid "Trade Rejected"
-msgstr ""
+msgstr "Hannel oflehnt"
 
 #: ../../../../src/logic/game.cc:1387
 msgid "Trade offer rejected"
-msgstr ""
+msgstr "Hannels-Angebood oflehnt"
 
 #: ../../../../src/logic/game.cc:1388
 #, c-format
 msgid "%1$s has rejected your trade offer at %2$s."
-msgstr ""
+msgstr "%1$s hett dien Hannels-Angebood bi %2$s oflehnt."
 
 #: ../../../../src/logic/game.cc:1410
 msgid "Trade Retracted"
-msgstr ""
+msgstr "Hannel torüggnohmen"
 
 #: ../../../../src/logic/game.cc:1412
 msgid "Trade offer retracted"
-msgstr ""
+msgstr "Hannels-Angebood torüggnohmen"
 
 #: ../../../../src/logic/game.cc:1413
 #, c-format
 msgid "The trade offer by %s has been retracted."
-msgstr ""
+msgstr "Dat Hannels-Angebood vun %s is torüggnohmen worden."
 
 #: ../../../../src/logic/game.cc:1524
 msgid "Trade Extension Proposal"
-msgstr ""
+msgstr "Hannels-Verlangerns-Vörslag"
 
 #: ../../../../src/logic/game.cc:1526
 msgid "New trade extension proposal received"
-msgstr ""
+msgstr "Nejen Hannels-Verlangerns-Vörslag kregen"
 
 #: ../../../../src/logic/game.cc:1527
 #, c-format
 msgid "%s has proposed to extend a trade."
-msgstr ""
+msgstr "%s hett vörslagen, eenen Hannel to verlangern."
 
 #: ../../../../src/logic/game.cc:1554
 msgid "Trade Extension Retracted"
-msgstr ""
+msgstr "Hannels-Verlangern torüggnohmen"
 
 #: ../../../../src/logic/game.cc:1557
 msgid "Trade extension proposal retracted"
-msgstr ""
+msgstr "Hannels-Verlangerns-Vörslag torüggnohmen"
 
 #: ../../../../src/logic/game.cc:1558
 #, c-format
 msgid "The proposal by %s to extend a trade has been retracted."
-msgstr ""
+msgstr "De Vörslag vun %s, eenen Hannel to verlangern, is torüggnohmen worden."
 
 #: ../../../../src/logic/game.cc:1596
 msgid "Trade Extension Rejected"
-msgstr ""
+msgstr "Hannels-Verlangern oflehnt"
 
 #: ../../../../src/logic/game.cc:1599
 msgid "Trade extension proposal rejected"
-msgstr ""
+msgstr "Hannels-Verlangerns-Vörslag oflehnt"
 
 #: ../../../../src/logic/game.cc:1600
 #, c-format
 msgid "%s has rejected your proposal to extend a trade."
-msgstr ""
+msgstr "%s hett dienen Vörslag, eenen Hannel to verlangern, oflehnt."
 
 #: ../../../../src/logic/game.cc:1651
 msgid "Trade Extension Accepted"
-msgstr ""
+msgstr "Hannels-Verlangern annohmen"
 
 #: ../../../../src/logic/game.cc:1654
 msgid "Trade extension proposal accepted"
-msgstr ""
+msgstr "Hannels-Verlangerns-Vörslag annohmen"
 
 #: ../../../../src/logic/game.cc:1655
 #, c-format
 msgid "%s has accepted your proposal to extend a trade."
-msgstr ""
+msgstr "%s hett dienen Vörslag, eenen Hannel to verlangern, annohmen."
 
 #: ../../../../src/logic/game_data_error.cc:51
 msgid ""
@@ -2588,136 +2587,136 @@ msgstr "%u%% ofbroken"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:70
 msgid "A new market was added to your economy."
-msgstr ""
+msgstr "Diene Weertskupp hett eenen nejen Markt kregen."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:152
 #, c-format
 msgid "%u trade"
 msgid_plural "%u trades"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u Hannel"
+msgstr[1] "%u Hannels"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:274
 msgid "Trade Cancelled"
-msgstr ""
+msgstr "Hannel ofbroken"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:274
 msgid "Trade Complete"
-msgstr ""
+msgstr "Hannel ofsluten"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:276
 msgid "Trade agreement cancelled"
-msgstr ""
+msgstr "Hannels-Ofmaken ofbroken"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:276
 msgid "Trade agreement complete"
-msgstr ""
+msgstr "Hannels-Ofmaken ofsluten"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:277
 #, c-format
 msgid "Your trade agreement at %s has been completed."
-msgstr ""
+msgstr "Dien Hannels-Angebood bi %s is ofsluten worden."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:278
 #, c-format
 msgid "Your trade agreement at %s has been cancelled."
-msgstr ""
+msgstr "Dien Hannels-Angebood bi %s is ofbroken worden."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:546
 msgid "Trade Paused"
-msgstr ""
+msgstr "Hannel anhollt"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:547
 msgid "Trade agreement paused"
-msgstr ""
+msgstr "Hannels-Ofmaken anhollt"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:548
 #, c-format
 msgid "%1$s paused the trade with you at %2$s."
-msgstr ""
+msgstr "%1$s hett de Hannel mit di bi %2$s anhollt."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:552
 msgid "Trade Resumed"
-msgstr ""
+msgstr "Hannel wiederföhrt"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:553
 msgid "Trade agreement resumed"
-msgstr ""
+msgstr "Hannels-Ofmaken wiederföhrt"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:554
 #, c-format
 msgid "%1$s resumed the trade with you at %2$s."
-msgstr ""
+msgstr "%1$s hett de Hannel mit di bi %2$s wiederföhrt."
 
 #. * TRANSLATORS: "At" is the market's name, and "with" is the receiving
 #. player's name
 #: ../../../../src/logic/map_objects/tribes/market.cc:714
 #, c-format
 msgid "Trade agreement at %1$s with %2$s"
-msgstr ""
+msgstr "Hannels-Ofmaken bi %1$s mit %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:722
 #, c-format
 msgid "Trade offer from %s"
-msgstr ""
+msgstr "Hannels-Angebood vun %s"
 
 #. * TRANSLATORS: "From" is the market's name, and "to" is the receiving
 #. player's name
 #: ../../../../src/logic/map_objects/tribes/market.cc:732
 #, c-format
 msgid "Trade offer from %1$s to %2$s"
-msgstr ""
+msgstr "Hannels-Angebood vun %1$s an %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:742
 #, c-format
 msgid "%d batch"
 msgid_plural "%d batches"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Bünsel"
+msgstr[1] "%d Bünsels"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:744
 msgid "Trade runs indefinitely"
-msgstr ""
+msgstr "Hannel löppt sünner Enn"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:755
 #, c-format
 msgid "%d batch delivered"
 msgid_plural "%d batches delivered"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Bünsel levert"
+msgstr[1] "%d Bünsels levert"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:763
 #, c-format
 msgid "%d batch remaining"
 msgid_plural "%d batches remaining"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Bünsel över"
+msgstr[1] "%d Bünsels över"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:777
 msgid "Paused by both players"
-msgstr ""
+msgstr "Vun beiden Spelers anhollt"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:779
 msgid "Paused by you"
-msgstr ""
+msgstr "Vun di anhollt"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:780
 #: ../../../../src/logic/map_objects/tribes/market.cc:784
 #, c-format
 msgid "Paused by %s"
-msgstr ""
+msgstr "Vun %s anhollt"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:786
 msgid "Active"
-msgstr ""
+msgstr "Löppt"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:798
 msgid "Player sends:"
-msgstr ""
+msgstr "Speler schickt:"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:798
 msgid "You send:"
-msgstr ""
+msgstr "Du schickst:"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
 #. * TRANSLATORS:    %1$i = "2"
@@ -2727,15 +2726,15 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1407
 #, c-format
 msgid "%1$i× %2$s"
-msgstr ""
+msgstr "%1$i× %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:810
 msgid "Player receives:"
-msgstr ""
+msgstr "Speler kriggt:"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:810
 msgid "You receive:"
-msgstr ""
+msgstr "Du kriggst:"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:253
@@ -3450,7 +3449,7 @@ msgstr "Muu %d"
 #, c-format
 msgctxt "market"
 msgid "Market %d"
-msgstr ""
+msgstr "Markt %d"
 
 #: ../../../../src/logic/player.cc:2097
 #, c-format
@@ -7587,6 +7586,11 @@ msgstr "Spraak"
 msgid "Window Size"
 msgstr "Fenster-Grött"
 
+#: ../../../../src/ui_fsmenu/options.cc:159
+msgctxt "multiscreen"
+msgid "Display"
+msgstr "Billschirm"
+
 #. * TRANSLATORS: short description for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:168
 msgid "Let the system draw the mouse cursor"
@@ -7755,7 +7759,7 @@ msgstr "Nienich"
 
 #. * TRANSLATORS: Entry in the display selection dropdown
 #: ../../../../src/ui_fsmenu/options.cc:583
-#: ../../../../src/wui/info_panel.cc:212
+msgctxt "multiscreen"
 msgid "Follow mouse"
 msgstr "Muus nagahn"
 
@@ -7766,37 +7770,37 @@ msgid "#%1% (%2%, %3%, %4%, %5%)"
 msgstr "#%1% (%2%, %3%, %4%, %5%)"
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../../../src/ui_fsmenu/options.cc:603
+#: ../../../../src/ui_fsmenu/options.cc:604
 msgid "Fullscreen"
 msgstr "Heler Billschirm"
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../../../src/ui_fsmenu/options.cc:606
+#: ../../../../src/ui_fsmenu/options.cc:607
 msgid "Maximized"
 msgstr "Grot"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 × 600
-#: ../../../../src/ui_fsmenu/options.cc:622
-#: ../../../../src/ui_fsmenu/options.cc:630
+#: ../../../../src/ui_fsmenu/options.cc:623
+#: ../../../../src/ui_fsmenu/options.cc:631
 msgid "%1% × %2%"
 msgstr "%1% × %2%"
 
-#: ../../../../src/ui_fsmenu/options.cc:698
+#: ../../../../src/ui_fsmenu/options.cc:699
 msgid "Try system language"
 msgstr "Spraak vun de Reekner versöken"
 
 #. * TRANSLATORS: %s = language name
-#: ../../../../src/ui_fsmenu/options.cc:810
+#: ../../../../src/ui_fsmenu/options.cc:811
 #, c-format
 msgid "The translation into %s is complete."
 msgstr "De Översetten na %s is kumpleet."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../../../src/ui_fsmenu/options.cc:814
+#: ../../../../src/ui_fsmenu/options.cc:815
 msgid "The translation into %1% is %2%%% complete."
 msgstr "De Översetten na %1% is to %2%%% kumpleet."
 
-#: ../../../../src/ui_fsmenu/options.cc:826
+#: ../../../../src/ui_fsmenu/options.cc:827
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr "Wenn du mit de Översetten helpen willst, besöök bidde %s"
@@ -8672,7 +8676,7 @@ msgstr "Blot Rutfödderungs-Narichten wiesen"
 
 #: ../../../../src/wlapplication_options.cc:750
 msgid "Show Diplomacy Messages Only"
-msgstr ""
+msgstr "Blot Betreckens-Narichten wiesen"
 
 #: ../../../../src/wlapplication_options.cc:755
 msgid "Go to Ship"
@@ -9189,40 +9193,40 @@ msgstr "Upgeven?"
 
 #: ../../../../src/wui/actionconfirm.cc:568
 msgid "Cancel?"
-msgstr ""
+msgstr "Ofbreken?"
 
 #: ../../../../src/wui/actionconfirm.cc:568
 msgid "Do you really want to cancel this trade agreement?"
-msgstr ""
+msgstr "Willst du deeses Hannels-Ofmaken würrelk ofbreken?"
 
 #: ../../../../src/wui/actionconfirm.cc:596
 msgid "Extend Trade"
-msgstr ""
+msgstr "Hannel verlangern"
 
 #: ../../../../src/wui/actionconfirm.cc:597
 msgid "Select by how many batches you want to extend this trade:"
-msgstr ""
+msgstr "Köör ut, um wo völe Bünsels du deesen Hannel verlangern willst:"
 
 #: ../../../../src/wui/actionconfirm.cc:603
 #: ../../../../src/wui/marketwindow.cc:75
 msgid "Toggle indefinite trade"
-msgstr ""
+msgstr "Hannel sünner Enn an- of utknipsen"
 
 #: ../../../../src/wui/actionconfirm.cc:604
 #: ../../../../src/wui/marketwindow.cc:76
 msgid "Batches:"
-msgstr ""
+msgstr "Bünsels:"
 
 #: ../../../../src/wui/actionconfirm.cc:639
 msgid "Unpause?"
-msgstr ""
+msgstr "Wiederföhren?"
 
 #: ../../../../src/wui/actionconfirm.cc:640
 msgid ""
 "Do you really want to unpause this trade?\n"
 "\n"
 "Doing so will reset all queues to their maximum capacity."
-msgstr ""
+msgstr "Willst du deesen Hannel würrelk wiederföhren?\n\nWenn du dat maakst, worden all Waar-Ingaven to de hoogste Grött torüggsett."
 
 #: ../../../../src/wui/attack_window.cc:79
 msgid "Attack"
@@ -10017,15 +10021,15 @@ msgstr "Deesen Speler in dien Klottje inladen"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:193
 msgid "Trade offers you have received from other players"
-msgstr ""
+msgstr "Hannels-Angeboden, wat du vun anner Spelers kregen hest"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:195
 msgid "Trades you have proposed to other players"
-msgstr ""
+msgstr "Hannels, wat du anner Spelers vörslagen hest"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:196
 msgid "Your active trade agreements"
-msgstr ""
+msgstr "Diene lopend Hannels-Ofmakens"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:246
 msgid "No team"
@@ -10075,141 +10079,141 @@ msgstr "Torüggtrecken"
 #: ../../../../src/wui/marketwindow.cc:911
 #, c-format
 msgid "Trade Offers (%u)"
-msgstr ""
+msgstr "Hannels-Ofmakens (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:414
 #: ../../../../src/wui/marketwindow.cc:424
 msgid "Nobody has offered you any trades at the moment."
-msgstr ""
+msgstr "Nüüms hett du jüüst elkeen Hannel anboden."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:436
 msgid "Market to accept the trade at"
-msgstr ""
+msgstr "Markt, waar de Hannel annohmen worden sall"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:442
 #: ../../../../src/wui/game_diplomacy_menu.cc:673
 #: ../../../../src/wui/marketwindow.cc:589
 #, c-format
 msgid "%s (closest)"
-msgstr ""
+msgstr "%s (nahst)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:445
 #, c-format
 msgid "%1$s (distance: %2$u field)"
 msgid_plural "%1$s (distance: %2$u fields)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s (Feernte: %2$u Feld)"
+msgstr[1] "%1$s (Feernte: %2$u Felden)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:452
 #: ../../../../src/wui/marketwindow.cc:443
 msgid "Accept this trade offer"
-msgstr ""
+msgstr "Deeses Hannels-Angebood annehmen"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:455
 #: ../../../../src/wui/marketwindow.cc:446
 msgid "Reject this trade offer"
-msgstr ""
+msgstr "Deeses Hannels-Angebood oflehnen"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:459
 msgid "Build a market to accept trade offers."
-msgstr ""
+msgstr "Bau eenen Markt, um Hannels-Angeboden antonehmen."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:498
 #: ../../../../src/wui/marketwindow.cc:905
 #, c-format
 msgid "Proposed Trades (%u)"
-msgstr ""
+msgstr "Vörslagen Hannels (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:509
 msgid ""
 "There are no pending trade proposals at the moment. You can propose a new "
 "trade from a market."
-msgstr ""
+msgstr "Dat gifft jüüst keene utstahn Hannels-Vörslagen. Du kannst eenen nejen Hannel vun eenem Markt vörslagen."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:533
 #: ../../../../src/wui/game_diplomacy_menu.cc:642
 msgid "Center view on this market"
-msgstr ""
+msgstr "To deesem Markt gahn"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:536
 #: ../../../../src/wui/marketwindow.cc:314
 msgid "Retract this trade offer"
-msgstr ""
+msgstr "Deeses Hannels-Angebood torüggnehmen"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:548
 #: ../../../../src/wui/marketwindow.cc:322
 msgid "Move this trade proposal…"
-msgstr ""
+msgstr "Deeses Hannels-Angebood verschuven …"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:558
 #: ../../../../src/wui/marketwindow.cc:333
 #, c-format
 msgid "Move this trade proposal to %s"
-msgstr ""
+msgstr "Deeses Hannels-Angebood na %s verschuven"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:563
 #: ../../../../src/wui/game_diplomacy_menu.cc:683
 #: ../../../../src/wui/marketwindow.cc:339
 #: ../../../../src/wui/marketwindow.cc:599
 msgid "You have no markets you could move this trade to."
-msgstr ""
+msgstr "Du hest keene Markten, waar du deesen Hannel hen verschuven kannst."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:598
 #, c-format
 msgid "Active Trades (%u)"
-msgstr ""
+msgstr "Lopend Hannels (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:609
 msgid "There are no active trade agreements at the moment."
-msgstr ""
+msgstr "Dat gifft jüüst keene lopend Hannels-Ofmakens."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:649
 #: ../../../../src/wui/game_diplomacy_menu.cc:657
 #: ../../../../src/wui/marketwindow.cc:545
 #: ../../../../src/wui/marketwindow.cc:553
 msgid "Propose extending this trade"
-msgstr ""
+msgstr "Slaa vör, deesen Hannel to verlangern"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:650
 #: ../../../../src/wui/marketwindow.cc:546
 #, c-format
 msgid "Hold down Ctrl to extend it by %d batch"
 msgid_plural "Hold down Ctrl to extend it by %d batches"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Holl de Strg-Tast drückt, um ’t um %d Bünsel to verlangern"
+msgstr[1] "Holl de Strg-Tast drückt, um ’t um %d Bünsels to verlangern"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:655
 #: ../../../../src/wui/marketwindow.cc:551
 msgid "Hold down Shift to extend the trade indefinitely"
-msgstr ""
+msgstr "Holl de Umschalt-Tast drückt, um de Hannel sünner Enn to verlangern"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:660
 msgid "Cancel this trade agreement"
-msgstr ""
+msgstr "Deeses Hannels-Angebood ofbreken"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:663
 #: ../../../../src/wui/marketwindow.cc:576
 msgid "Move this trade…"
-msgstr ""
+msgstr "Verschuuv deesen Hannel …"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:676
 #: ../../../../src/wui/marketwindow.cc:592
 #, c-format
 msgid "Move this trade to %s (closest)"
-msgstr ""
+msgstr "Deesen Hannel na %s verschuven (nahst)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:677
 #: ../../../../src/wui/marketwindow.cc:593
 #, c-format
 msgid "Move this trade to %s"
-msgstr ""
+msgstr "Deesen Hannel na %s verschuven"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:737
 #: ../../../../src/wui/marketwindow.cc:678
 #: ../../../../src/wui/marketwindow.cc:764
 #, c-format
 msgid "%1$s proposed to extend this trade indefinitely."
-msgstr ""
+msgstr "%1$s hett vörslagen, deesen Hannel sünner Enn to verlangern."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:740
 #: ../../../../src/wui/marketwindow.cc:681
@@ -10217,36 +10221,36 @@ msgstr ""
 #, c-format
 msgid "%1$s proposed to extend this trade by %2$d batch."
 msgid_plural "%1$s proposed to extend this trade by %2$d batches."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s hett vörslagen, deesen Hannel um %2$d Bünsel to verlangern."
+msgstr[1] "%1$s hett vörslagen, deesen Hannel um %2$d Bünsels to verlangern."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:749
 #: ../../../../src/wui/marketwindow.cc:691
 msgid "Reject this trade extension proposal"
-msgstr ""
+msgstr "Deesen Hannels-Verlangerns-Vörslag oflehnen"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:753
 #: ../../../../src/wui/marketwindow.cc:695
 msgid "Accept this trade extension proposal"
-msgstr ""
+msgstr "Deesen Hannels-Verlangerns-Vörslag annehmen"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:783
 #: ../../../../src/wui/marketwindow.cc:738
 msgid "You proposed to extend this trade indefinitely."
-msgstr ""
+msgstr "Du hest vörslagen, deesen Hannel sünner Enn to verlangern."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:784
 #: ../../../../src/wui/marketwindow.cc:734
 #, c-format
 msgid "You proposed to extend this trade by %d batch."
 msgid_plural "You proposed to extend this trade by %d batches."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Du hest vörslagen, deesen Hannel um %d Bünsel to verlangern."
+msgstr[1] "Du hest vörslagen, deesen Hannel um %d Bünsels to verlangern."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:793
 #: ../../../../src/wui/marketwindow.cc:744
 msgid "Retract this trade extension proposal"
-msgstr ""
+msgstr "Deesen Hannels-Verlangerns-Vörslag torüggnehmen"
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../../../src/wui/game_exit_confirm_box.cc:27
@@ -10330,7 +10334,7 @@ msgstr "Blot Rutfödderungs-Narichten wiesen"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:604
 msgid "Show diplomacy messages only"
-msgstr ""
+msgstr "Blot Betreckens-Narichten wiesen"
 
 #: ../../../../src/wui/game_message_menu.cc:647
 msgid "Messages: Archive"
@@ -10547,6 +10551,10 @@ msgstr "Soldateree"
 #: ../../../../src/wui/info_panel.cc:153
 msgid "Info Panel Visibility"
 msgstr "Infobalken-Sicht"
+
+#: ../../../../src/wui/info_panel.cc:212
+msgid "Follow mouse"
+msgstr "Muus nagahn"
 
 #: ../../../../src/wui/info_panel.cc:217
 msgid "Hide"
@@ -11117,102 +11125,102 @@ msgstr "Naam vun de Kaart"
 
 #: ../../../../src/wui/marketwindow.cc:80
 msgid "Propose"
-msgstr ""
+msgstr "Vörslagen"
 
 #: ../../../../src/wui/marketwindow.cc:96
 msgid "You offer:"
-msgstr ""
+msgstr "Du büddst an:"
 
 #: ../../../../src/wui/marketwindow.cc:100
 msgid "You demand:"
-msgstr ""
+msgstr "Du verlangst:"
 
 #: ../../../../src/wui/marketwindow.cc:106
 msgid "Decrease amount by 10"
-msgstr ""
+msgstr "Tahl um 10 minnern"
 
 #: ../../../../src/wui/marketwindow.cc:113
 msgid "Decrease amount"
-msgstr ""
+msgstr "Tahl minnern"
 
 #: ../../../../src/wui/marketwindow.cc:121
 msgid "Increase amount"
-msgstr ""
+msgstr "Tahl verhogen"
 
 #: ../../../../src/wui/marketwindow.cc:128
 msgid "Increase amount by 10"
-msgstr ""
+msgstr "Tahl um 10 verhogen"
 
 #: ../../../../src/wui/marketwindow.cc:189
 msgid "Please select the player you want to trade with."
-msgstr ""
+msgstr "Bidde köör de Speler ut, mit well du hanneln willst."
 
 #: ../../../../src/wui/marketwindow.cc:195
 msgid "Please select the wares you want to send and receive."
-msgstr ""
+msgstr "Bidde köör de Waren ut, wat du schicken un kriegen willst."
 
 #: ../../../../src/wui/marketwindow.cc:214
 #, c-format
 msgid "You cannot both send and receive the same ware type (%s)."
-msgstr ""
+msgstr "Du kannst de sülve Waar (%s) nich schicken un ok kriegen."
 
 #: ../../../../src/wui/marketwindow.cc:220
 msgid "Propose the configured trade to the selected player"
-msgstr ""
+msgstr "De inricht Hannel to de utköört Speler vörslagen"
 
 #: ../../../../src/wui/marketwindow.cc:288
 msgid ""
 "There are no pending trade proposals at the moment. You can propose a new "
 "trade from the first tab."
-msgstr ""
+msgstr "Dat gifft jüüst keene utstahn Hannels-Vörslagen. Du kannst eenen nejen Hannel vun de eersten Listenwessler vörslagen."
 
 #: ../../../../src/wui/marketwindow.cc:291
 msgid "There are no pending trade proposals at the moment."
-msgstr ""
+msgstr "Dat gifft jüüst keene utstahn Hannels-Vörslagen."
 
 #: ../../../../src/wui/marketwindow.cc:562
 msgid "Cancel this trade"
-msgstr ""
+msgstr "Deesen Hannel ofbreken"
 
 #: ../../../../src/wui/marketwindow.cc:784
 msgid ""
 "Resume this paused trade. This requires all queues to be at their maximum "
 "capacity."
-msgstr ""
+msgstr "Deesen anhollt Hannel wiederföhren. Daarto mutten all Waar-Ingaven up de hoogste Grött stahn."
 
 #: ../../../../src/wui/marketwindow.cc:788
 msgid "Pause this trade"
-msgstr ""
+msgstr "Deesen Hannel anhollen"
 
 #: ../../../../src/wui/marketwindow.cc:799
 msgid "You need to pause the trade before you can change the queue capacity."
-msgstr ""
+msgstr "Du muttst de Hannel anhollen, ehr du de Grött vun de Waar-Ingaven ännern kannst."
 
 #: ../../../../src/wui/marketwindow.cc:800
 msgid "Pause Trade?"
-msgstr ""
+msgstr "Hannel anhollen?"
 
 #: ../../../../src/wui/marketwindow.cc:801
 msgid ""
 "Changing the capacity of the input queues will cause the trade to be paused."
 " Pause the trade now?"
-msgstr ""
+msgstr "Wenn du de Grött vun de Waar-Ingaven ännerst, word de Hannel anhollt. De Hannel nu anhollen?"
 
 #: ../../../../src/wui/marketwindow.cc:952
 msgid "Propose Trade"
-msgstr ""
+msgstr "Hannel vörslagen"
 
 #: ../../../../src/wui/marketwindow.cc:957
 msgid "Proposed Trades"
-msgstr ""
+msgstr "Vörslagen Hannels"
 
 #: ../../../../src/wui/marketwindow.cc:963
 msgid "Trade Offers"
-msgstr ""
+msgstr "Hannels-Angeboden"
 
 #: ../../../../src/wui/marketwindow.cc:974
 msgid "Active Trade"
-msgstr ""
+msgstr "Lopend Hannel"
 
 #: ../../../../src/wui/minimap.cc:169
 msgid "Owner"

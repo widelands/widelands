@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-05-19 03:23+0000\n"
+"POT-Creation-Date: 2025-05-22 03:18+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Jan Lindblom <janlindblom@fastmail.fm>, 2024\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -1180,7 +1180,6 @@ msgstr "Nuvarande katalog: %s"
 
 #. * TRANSLATORS: "Display: Original/Localized map/file names"
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:94
-#: ../../../../src/ui_fsmenu/options.cc:159
 msgid "Display"
 msgstr "Visning"
 
@@ -7590,6 +7589,11 @@ msgstr "Språk"
 msgid "Window Size"
 msgstr "Fönsterstorlek"
 
+#: ../../../../src/ui_fsmenu/options.cc:159
+msgctxt "multiscreen"
+msgid "Display"
+msgstr ""
+
 #. * TRANSLATORS: short description for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:168
 msgid "Let the system draw the mouse cursor"
@@ -7758,9 +7762,9 @@ msgstr "Aldrig"
 
 #. * TRANSLATORS: Entry in the display selection dropdown
 #: ../../../../src/ui_fsmenu/options.cc:583
-#: ../../../../src/wui/info_panel.cc:212
+msgctxt "multiscreen"
 msgid "Follow mouse"
-msgstr "Följ musen"
+msgstr ""
 
 #. * TRANSLATORS: Display index and virtual coordinates, e.g, '#0 (0, 0, 1920,
 #. 1080)'
@@ -7769,37 +7773,37 @@ msgid "#%1% (%2%, %3%, %4%, %5%)"
 msgstr ""
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../../../src/ui_fsmenu/options.cc:603
+#: ../../../../src/ui_fsmenu/options.cc:604
 msgid "Fullscreen"
 msgstr "Fullskärm"
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../../../src/ui_fsmenu/options.cc:606
+#: ../../../../src/ui_fsmenu/options.cc:607
 msgid "Maximized"
 msgstr "Maximerat"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 × 600
-#: ../../../../src/ui_fsmenu/options.cc:622
-#: ../../../../src/ui_fsmenu/options.cc:630
+#: ../../../../src/ui_fsmenu/options.cc:623
+#: ../../../../src/ui_fsmenu/options.cc:631
 msgid "%1% × %2%"
 msgstr "%1% × %2%"
 
-#: ../../../../src/ui_fsmenu/options.cc:698
+#: ../../../../src/ui_fsmenu/options.cc:699
 msgid "Try system language"
 msgstr "Försök med systemspråket"
 
 #. * TRANSLATORS: %s = language name
-#: ../../../../src/ui_fsmenu/options.cc:810
+#: ../../../../src/ui_fsmenu/options.cc:811
 #, c-format
 msgid "The translation into %s is complete."
 msgstr "Översättningen till %s är klar."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../../../src/ui_fsmenu/options.cc:814
+#: ../../../../src/ui_fsmenu/options.cc:815
 msgid "The translation into %1% is %2%%% complete."
 msgstr "Översättningen till %1% är %2% %% komplett."
 
-#: ../../../../src/ui_fsmenu/options.cc:826
+#: ../../../../src/ui_fsmenu/options.cc:827
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr "Om du vill hjälpa oss med översättningen, var vänlig och besök %s"
@@ -10550,6 +10554,10 @@ msgstr "Militär"
 #: ../../../../src/wui/info_panel.cc:153
 msgid "Info Panel Visibility"
 msgstr "Informationspanelens synlighet"
+
+#: ../../../../src/wui/info_panel.cc:212
+msgid "Follow mouse"
+msgstr "Följ musen"
 
 #: ../../../../src/wui/info_panel.cc:217
 msgid "Hide"
