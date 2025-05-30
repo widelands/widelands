@@ -314,8 +314,8 @@ private:
 	/// Each packet in the queue is a vector of uint8_t.
 	std::map<uint8_t, std::queue<std::vector<uint8_t>>> buffers_to_send_;
 
-	/// An io_service needed by asio. Primarily needed for asynchronous operations.
-	asio::io_service io_service_;
+	/// An io_context needed by asio. Primarily needed for asynchronous operations.
+	asio::io_context io_context_;
 
 	/// The socket that connects us to the host.
 	asio::ip::tcp::socket socket_;

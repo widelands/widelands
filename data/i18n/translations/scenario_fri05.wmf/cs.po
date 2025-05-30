@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-05-19 03:23+0000\n"
 "PO-Revision-Date: 2023-01-04 20:43+0000\n"
 "Last-Translator: Ondřej Itřech, 2025\n"
 "Language-Team: Czech (https://app.transifex.com/widelands/teams/35159/cs/)\n"
@@ -34,13 +34,13 @@ msgstr ""
 "ale budeš v nevýhodě. Doporučuji ti, nejprve dokončit předchozí scénář a "
 "poté začít tuto misi od začátku."
 
-#: ../../../../data/campaigns/fri05.wmf/scripting/init_p1.lua:2978
+#: ../../../../data/campaigns/fri05.wmf/scripting/init_p1.lua:2979
 #: ../../../../data/campaigns/fri05.wmf/scripting/tribes/helgoland/init.lua:7
 msgid "Helgoland"
 msgstr "Helgoland"
 
 #. TRANSLATORS: This Danish ship is named after the Capital of Denmark
-#: ../../../../data/campaigns/fri05.wmf/scripting/init_p2.lua:13
+#: ../../../../data/campaigns/fri05.wmf/scripting/init_p2.lua:14
 msgid "København"
 msgstr "Kodaň"
 
@@ -638,9 +638,9 @@ msgstr ""
 "Ale pokud si chceme být opravdu jistí, že vše zvládneme, neměli bychom "
 "zapomínat, že ostrov můžeme jednoduše zvětšit. Když nyní máme stabilní "
 "dodávky klád, můžeme stavět hráze a vlnolamy, abychom získali více "
-"stavebního  místa na úkor moře. Až budeme připraveni k útoku, můžeme je také"
-" použít k rozšíření úzkého místa na východě. A nebo, pokud bychom chtěli být"
-" opravdu vynalézaví, mohli bychom postavit hráze podél celého západního "
+"stavebního místa na úkor moře. Až budeme připraveni k útoku, můžeme je také "
+"použít k rozšíření úzkého místa na východě. A nebo, pokud bychom chtěli být "
+"opravdu vynalézaví, mohli bychom postavit hráze podél celého západního "
 "pobřeží ostrova a napadnout nepřítele ze dvou stran současně!"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:277

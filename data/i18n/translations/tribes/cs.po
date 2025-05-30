@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-05-29 03:19+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Ondřej Itřech, 2020-2021,2024-2025\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -23,6 +23,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/tribes/buildings/markets/amazons/market/init.lua:8
+msgctxt "amazons_building"
+msgid "Market"
+msgstr "Tržnice"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/tribes/buildings/markets/atlanteans/market/init.lua:83
+msgctxt "atlanteans_building"
+msgid "Market"
+msgstr "Tržnice"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/tribes/buildings/markets/barbarians/market/init.lua:8
+msgctxt "barbarians_building"
+msgid "Market"
+msgstr "Tržnice"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/tribes/buildings/markets/empire/market/init.lua:8
+msgctxt "empire_building"
+msgid "Market"
+msgstr "Tržnice"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/tribes/buildings/markets/frisians/market/init.lua:8
+msgctxt "frisians_building"
+msgid "Market"
+msgstr "Tržnice"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:8
@@ -232,7 +262,7 @@ msgstr "Nepřítel napadl tvoji strážnici na stromě."
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:47
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the treetop sentry."
-msgstr "Nepřítel dobyl tvoji strážnici na stromě"
+msgstr "Nepřítel dobyl tvoji strážnici na stromě."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:49
@@ -717,7 +747,7 @@ msgstr "Malá pevnost"
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:50
 msgctxt "empire_building"
-msgid "Your soldiers have occupied your blockhouse."
+msgid "Your soldier has occupied your blockhouse."
 msgstr "Malá pevnost obydlena tvou posádkou."
 
 #. TRANSLATORS: Message sent by an Empire military site
@@ -1077,7 +1107,7 @@ msgstr "Dřevěná věž"
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:60
 msgctxt "frisians_building"
-msgid "Your soldiers have occupied your wooden tower."
+msgid "Your soldier has occupied your wooden tower."
 msgstr "Dřevěná věž obydlena tvou posádkou."
 
 #. TRANSLATORS: Message sent by a Frisian military site
@@ -1242,42 +1272,42 @@ msgid "working"
 msgstr "vyrábění"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:49
+#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:58
 msgid "planting cassava"
 msgstr "sázení manioku"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:57
+#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:69
 msgid "harvesting cassava"
 msgstr "sklízení manioku"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:66
-#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:72
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:69
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:73
-#: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:92
-#: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:65
-#: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:75
-#: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:74
-#: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:93
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:78
+#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:81
+#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:89
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:84
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:88
+#: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:107
+#: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:81
+#: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:90
+#: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:90
+#: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:109
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:94
 msgid "No Fields"
 msgstr "Žádná pole"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:67
-#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:73
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:70
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:74
-#: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:93
-#: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:66
-#: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:76
-#: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:75
-#: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:94
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:79
+#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:82
+#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:90
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:85
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:89
+#: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:108
+#: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:82
+#: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:91
+#: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:91
+#: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:110
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:95
 msgid "Out of Fields"
 msgstr "Došla pole"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:68
+#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:83
 msgctxt "amazons_building"
 msgid ""
 "The farmer working at this cassava plantation has no cleared soil to plant "
@@ -1327,16 +1357,16 @@ msgid "Cocoa Farm"
 msgstr "Kakaová farma"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:55
+#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:66
 msgid "planting cocoa"
 msgstr "setí kakaa"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:63
+#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:77
 msgid "harvesting cocoa"
 msgstr "sklízení kakaa"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:74
+#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:91
 msgctxt "amazons_building"
 msgid ""
 "The cocoa farmer working at this cocoa farm has no cleared soil to plant her"
@@ -1349,52 +1379,53 @@ msgctxt "amazons_building"
 msgid "Dressmakery"
 msgstr "Krejčovství"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
-#. ...
+#. TRANSLATORS: Completed/Skipped/Did not start sewing a tunic because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:74
 msgid "sewing a tunic"
 msgstr "šití haleny"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
+#. TRANSLATORS: Completed/Skipped/Did not start producing a light wooden armor
+#. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:86
 msgid "making a light wooden armor"
 msgstr "vyrábění lehkého dřevěného brnění"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a wooden helmet because
+#. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:98
 msgid "making a wooden helmet"
 msgstr "vyrábění dřevěné přilby"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a warrior’s coat
+#. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:110
 msgid "sewing a warrior’s coat"
 msgstr "šití bojového kabátce"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making sturdy boots because
+#. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:122
 msgid "making sturdy boots"
 msgstr "šití pevných bot"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
-#. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making swift boots because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:134
 msgid "making swift boots"
 msgstr "šití mrštných bot"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
-#. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making hero boots because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:146
 msgid "making hero boots"
 msgstr "šití hrdinných bot"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
+#. TRANSLATORS: Completed/Skipped/Did not start making a padded vest because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:158
 msgid "making a padded vest"
 msgstr "šití vycpané vesty"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a padded protector
+#. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:170
 msgid "making a padded protector"
 msgstr "šití vycpávkového chrániče"
@@ -1412,7 +1443,7 @@ msgid "Food Preserver"
 msgstr "Konzervárna potravin"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:60
+#: ../../../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:59
 #: ../../../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:62
 #: ../../../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:71
 #: ../../../../data/tribes/buildings/productionsites/barbarians/tavern/init.lua:77
@@ -1429,7 +1460,7 @@ msgid "Furnace"
 msgstr "Pec"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:59
+#: ../../../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:58
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:91
 #: ../../../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:95
 #: ../../../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:103
@@ -1445,8 +1476,8 @@ msgstr "Zahradnictví"
 
 #. TRANSLATORS: Completed/Skipped/Did not start enhancing the fertility of
 #. land because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:54
-#: ../../../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:68
+#: ../../../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:53
+#: ../../../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:67
 msgid "enhancing the fertility of land"
 msgstr "zlepšování úrodnosti půdy"
 
@@ -1514,31 +1545,31 @@ msgid "Hunter-Gatherer’s Hut"
 msgstr "Chata lovkyně-sběračky"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:40
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:39
 msgid "gathering"
 msgstr "sbírání"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:51
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:50
 msgid "gathering meat"
 msgstr "lovení masa"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:63
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:62
 msgid "gathering fish"
 msgstr "chytání ryb"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:76
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:75
 msgid "No Game, No Fish"
 msgstr "Žádná zvěř, žádná ryba"
 
 #. TRANSLATORS: "Game" means animals that you can hunt
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:78
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:77
 msgid "Out of Game and Fish"
 msgstr "Došla zvěř i ryby"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:80
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:79
 msgctxt "amazons_building"
 msgid ""
 "The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any"
@@ -1711,7 +1742,7 @@ msgstr "Kamenická dílna"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:212
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:222
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:218
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:124
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:220
 msgid "making a shovel"
 msgstr "vyrábění lopaty"
 
@@ -1741,7 +1772,7 @@ msgstr "vyrábění mačety"
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:135
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:183
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:166
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:184
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:172
 msgid "making kitchen tools"
 msgstr "vyrábění kuchyňského náčiní"
 
@@ -1750,7 +1781,7 @@ msgstr "vyrábění kuchyňského náčiní"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:121
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:157
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:140
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:196
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:148
 msgid "making a hammer"
 msgstr "vyrábění kladiva"
 
@@ -1761,7 +1792,7 @@ msgstr "vyrábění dláta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:171
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:220
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:184
 msgid "making needles"
 msgstr "vyrábění jehlic"
 
@@ -2017,17 +2048,17 @@ msgid "Blackroot Farm"
 msgstr "Pěstírna rozrazilu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting blackroot because ...
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:52
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:61
 msgid "planting blackroot"
 msgstr "pěstování rozrazilu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because
 #. ...
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:60
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:72
 msgid "harvesting blackroot"
 msgstr "sklízení rozrazilu"
 
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:71
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:86
 msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer working at this blackroot farm has no cleared soil to "
@@ -2137,16 +2168,16 @@ msgid "Farm"
 msgstr "Statek"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:56
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:65
 msgid "planting corn"
 msgstr "setí kukuřice"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:64
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:76
 msgid "harvesting corn"
 msgstr "sklízení kukuřice"
 
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:75
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:90
 msgctxt "atlanteans_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -2463,7 +2494,7 @@ msgstr "Dílna"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:69
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:105
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:101
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:172
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:100
 msgid "making a bread paddle"
 msgstr "vyrábění lopaty na chléb"
 
@@ -2477,14 +2508,14 @@ msgstr "vyrábění kýble"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:95
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:131
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:114
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:208
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:124
 msgid "making fire tongs"
 msgstr "vyrábění kovářských kleští"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:108
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:160
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:136
 msgid "making a fishing net"
 msgstr "vyrábění rybářské sítě"
 
@@ -2515,7 +2546,7 @@ msgstr "vyrábění pily"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:199
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:209
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:205
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:112
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:208
 msgid "making a scythe"
 msgstr "vyrábění kosy"
 
@@ -2741,18 +2772,18 @@ msgid "Farm"
 msgstr "Statek"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
-#: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:73
-#: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:58
+#: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:82
+#: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:67
 msgid "planting wheat"
 msgstr "setí pšenice"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
-#: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:82
-#: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:66
+#: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:94
+#: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:78
 msgid "harvesting wheat"
 msgstr "sklízení pšenice"
 
-#: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:94
+#: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:109
 msgctxt "barbarians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -2963,7 +2994,7 @@ msgstr "vyrábění rybářského prutu"
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:170
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:153
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:148
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:160
 msgid "making a hunting spear"
 msgstr "vyrábění loveckého oštěpu"
 
@@ -3006,18 +3037,18 @@ msgid "Reed Yard"
 msgstr "Rákosové pole"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
-#: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:48
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:61
+#: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:58
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:71
 msgid "planting reed"
 msgstr "sázení rákosí"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
-#: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:56
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:69
+#: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:69
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:82
 msgid "harvesting reed"
 msgstr "sklízení rákosí"
 
-#: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:67
+#: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:83
 msgctxt "barbarians_building"
 msgid ""
 "The gardener working at this reed yard has no cleared soil to plant his "
@@ -3211,7 +3242,7 @@ msgctxt "empire_building"
 msgid "Farm"
 msgstr "Statek"
 
-#: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:77
+#: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:92
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -3476,7 +3507,7 @@ msgstr "Dílna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:88
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:136
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:88
 msgid "making a basket"
 msgstr "vyrábění koše"
 
@@ -3488,17 +3519,17 @@ msgstr "Vinohrad"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting grapevines because
 #. ...
-#: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:57
+#: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:67
 msgid "planting grapevines"
 msgstr "vysazování vinné révy"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because
 #. ...
-#: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:65
+#: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:78
 msgid "harvesting grapes"
 msgstr "sklízení hroznů"
 
-#: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:76
+#: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:92
 msgctxt "empire_building"
 msgid ""
 "The vine farmer working at this vineyard has no cleared soil to plant his "
@@ -3693,12 +3724,12 @@ msgstr "Kovárna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:88
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:112
 msgid "forging a felling ax"
 msgstr "kování těžební sekery"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:100
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:196
 msgid "forging a pick"
 msgstr "kování krumpáče"
 
@@ -3821,15 +3852,15 @@ msgstr "Domek sběrače ovoce"
 msgid "gathering berries"
 msgstr "sbírání bobulí"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:60
+#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:63
 msgid "No Bushes"
 msgstr "Žádné keře"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:61
+#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:64
 msgid "Out of Berries"
 msgstr "Došly ovocné bobule"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:62
+#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:65
 msgctxt "frisians_building"
 msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
@@ -3865,16 +3896,16 @@ msgid "Farm"
 msgstr "Statek"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:74
+#: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:84
 msgid "planting barley"
 msgstr "setí ječmene"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:82
+#: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:95
 msgid "harvesting barley"
 msgstr "sklízení ječmene"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:95
+#: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:111
 msgctxt "frisians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -4046,7 +4077,7 @@ msgctxt "frisians_building"
 msgid "Reed Farm"
 msgstr "Rákosová farma"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:80
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:96
 msgctxt "frisians_building"
 msgid ""
 "The reed farmer working at this reed farm has no cleared soil to plant his "
@@ -4206,79 +4237,79 @@ msgid "Training Glade"
 msgstr "Tréninkový palouk"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:73
-#: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:68
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:218
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:58
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:78
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:76
-#: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:82
-#: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:42
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:66
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:76
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:75
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:77
+#: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:71
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:221
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:62
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:81
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:80
+#: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:85
+#: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:45
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:69
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:80
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:79
 msgid "sleeping"
 msgstr "podřimování"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:81
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:85
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "cvičení úhybu z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:95
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:99
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "cvičení úhybu z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:109
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:113
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 2 to level 3"
 msgstr "cvičení úhybu z úrovně 2 na úroveň 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:124
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:128
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "vylepšení zdraví bojovnice z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:138
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:142
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "vylepšení zdraví bojovnice z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:152
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:156
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "vylepšení zdraví bojovnice z úrovně 2 na úroveň 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:167
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:171
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "cvičení obrany bojovnice z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:181
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:185
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "cvičení obrany bojovnice z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Amazon training site tooltip when it has no soldiers assigned
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:202
-#: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:110
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:206
+#: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:113
 msgctxt "amazons_building"
 msgid "No soldier to train!"
 msgstr "Nejsou bojovnice k výcviku!"
 
 #. TRANSLATORS: Amazon training site tooltip when none of the present soldiers
 #. match the current training program
-#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:204
-#: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:112
+#: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:208
+#: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:115
 msgctxt "amazons_building"
 msgid "No soldier found for this training level!"
 msgstr "Nenalezena bojovnice pro požadovanou úroveň výcviku!"
@@ -4290,13 +4321,13 @@ msgid "Warriors’ Gathering"
 msgstr "Bojový sněm"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:76
+#: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:79
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "cvičení útoku bojovnice z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:90
+#: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:93
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "cvičení útoku bojovnice z úrovně 1 na úroveň 2"
@@ -4308,41 +4339,41 @@ msgid "Dungeon"
 msgstr "Kobky"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:226
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:229
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "cvičení útoku vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:240
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:243
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "cvičení útoku vojáka z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:254
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:257
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "cvičení útoku vojáka z úrovně 2 na úroveň 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:268
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:271
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "cvičení útoku vojáka z úrovně 3 na úroveň 4"
 
 #. TRANSLATORS: Atlantean training site tooltip when it has no soldiers
 #. assigned
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:287
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:138
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:290
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:142
 msgctxt "atlanteans_building"
 msgid "No soldier to train!"
 msgstr "Žádný voják k výcviku!"
 
 #. TRANSLATORS: Atlantean training site tooltip when none of the present
 #. soldiers match the current training program
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:289
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:140
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:292
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:144
 msgctxt "atlanteans_building"
 msgid "No soldier found for this training level!"
 msgstr "Nenalezen voják pro požadovanou úroveň výcviku!"
@@ -4354,31 +4385,31 @@ msgid "Labyrinth"
 msgstr "Labyrint"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:66
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:70
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "cvičení obrany vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:80
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:84
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "cvičení obrany vojáka z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:94
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:98
 msgctxt "atlanteans_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "vylepšení zdraví vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:107
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:111
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "cvičení úhybu vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:120
+#: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:124
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "cvičení úhybu vojáka z úrovně 1 na úroveň 2"
@@ -4390,29 +4421,29 @@ msgid "Battle Arena"
 msgstr "Bitevní aréna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:86
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:89
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "cvičení úhybu vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:101
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:104
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "cvičení úhybu vojáka z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Barbarian training site tooltip when it has no soldiers
 #. assigned
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:121
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:200
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:124
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:204
 msgctxt "barbarians_building"
 msgid "No soldier to train!"
 msgstr "Žádný voják k výcviku!"
 
 #. TRANSLATORS: Barbarian training site tooltip when none of the present
 #. soldiers match the current training program
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:123
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:202
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:126
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:206
 msgctxt "barbarians_building"
 msgid "No soldier found for this training level!"
 msgstr "Nenalezen voják pro požadovanou úroveň výcviku!"
@@ -4424,49 +4455,49 @@ msgid "Training Camp"
 msgstr "Výcvikový tábor"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:84
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:88
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "cvičení útoku vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:98
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:102
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "cvičení útoku vojáka z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:112
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:116
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "cvičení útoku vojáka z úrovně 2 na úroveň 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:126
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:130
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "cvičení útoku vojáka z úrovně 3 na úroveň 4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:140
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:144
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "cvičení útoku vojáka z úrovně 4 na úroveň 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:154
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:158
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "vylepšení zdraví vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:167
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:171
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "vylepšení zdraví vojáka z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:181
+#: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:185
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "vylepšení zdraví vojáka z úrovně 2 na úroveň 3"
@@ -4478,25 +4509,25 @@ msgid "Arena"
 msgstr "Aréna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:90
-#: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:50
+#: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:93
+#: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:53
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "cvičení úhybu vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
-#: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:108
-#: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:81
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:190
+#: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:111
+#: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:84
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:193
 msgctxt "empire_building"
 msgid "No soldier to train!"
 msgstr "Žádný voják k výcviku!"
 
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program
-#: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:110
-#: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:83
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:192
+#: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:113
+#: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:86
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:195
 msgctxt "empire_building"
 msgid "No soldier found for this training level!"
 msgstr "Nenalezen voják pro požadovanou úroveň výcviku!"
@@ -4508,7 +4539,7 @@ msgid "Colosseum"
 msgstr "Koloseum"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:63
+#: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:66
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "cvičení úhybu vojáka z úrovně 1 na úroveň 2"
@@ -4520,49 +4551,49 @@ msgid "Training Camp"
 msgstr "Výcvikový tábor"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:74
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:77
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "cvičení útoku vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:88
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:91
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "cvičení útoku vojáka z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:102
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:105
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "cvičení útoku vojáka z úrovně 2 na úroveň 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:116
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:119
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "cvičení útoku vojáka z úrovně 3 na úroveň 4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:130
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:133
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "vylepšení zdraví vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:143
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:146
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "vylepšení zdraví vojáka z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:157
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:160
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "vylepšení zdraví vojáka z úrovně 2 na úroveň 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:171
+#: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:174
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
 msgstr "vylepšení zdraví vojáka z úrovně 3 na úroveň 4"
@@ -4574,46 +4605,46 @@ msgid "Training Arena"
 msgstr "Výcviková aréna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:84
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:88
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "cvičení útoku vojáka z úrovně 3 na úroveň 4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:99
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:104
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "cvičení útoku vojáka z úrovně 4 na úroveň 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:115
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:121
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 5 to level 6"
 msgstr "cvičení útoku vojáka z úrovně 5 na úroveň 6"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:132
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:139
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "cvičení obrany vojáka z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:148
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:156
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "vylepšení zdraví vojáka z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Frisian training site tooltip when it has no soldiers assigned
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:169
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:166
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:178
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:175
 msgctxt "frisians_building"
 msgid "No soldier to train!"
 msgstr "Žádný voják k výcviku!"
 
 #. TRANSLATORS: Frisian training site tooltip when none of the present
 #. soldiers match the current training program
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:171
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:168
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:180
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:177
 msgctxt "frisians_building"
 msgid "No soldier found for this training level!"
 msgstr "Nenalezen voják pro požadovanou úroveň výcviku!"
@@ -4625,31 +4656,31 @@ msgid "Training Camp"
 msgstr "Výcvikový tábor"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:83
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:87
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "cvičení útoku vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:98
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:103
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "cvičení útoku vojáka z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:114
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:120
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "cvičení útoku vojáka z úrovně 2 na úroveň 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:130
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:137
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "vylepšení zdraví vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:145
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:153
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "cvičení obrany vojáka z úrovně 0 na úroveň 1"
@@ -5573,7 +5604,7 @@ msgstr "Začít hru pouze s hlavní budovou"
 #: ../../../../data/tribes/initialization/empire/starting_conditions/new_world.lua:11
 #: ../../../../data/tribes/initialization/frisians/starting_conditions/new_world.lua:11
 msgid "New World"
-msgstr "Nový Svět"
+msgstr "Nový svět"
 
 #. TRANSLATORS: This is the tooltip for the "New World" starting condition
 #: ../../../../data/tribes/initialization/amazons/starting_conditions/new_world.lua:13

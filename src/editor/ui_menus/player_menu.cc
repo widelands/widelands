@@ -202,7 +202,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 
 		plr_tribe->add(pgettext("tribe", "Random"), "",
 		               g_image_cache->get("images/ui_fsmenu/random.png"), false,
-		               _("The tribe will be selected at random"));
+		               _("The tribe will be selected at random."));
 
 		plr_tribe->select(
 		   (p <= map.get_nrplayers() &&

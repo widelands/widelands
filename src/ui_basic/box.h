@@ -93,6 +93,11 @@ struct Box : public Panel {
 	void clear() {
 		items_.clear();
 	}
+	void delete_all_children() {
+		scrollbar_.reset();
+		free_children();
+		clear();
+	}
 
 	Scrollbar* get_scrollbar() {
 		return scrollbar_.get();

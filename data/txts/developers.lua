@@ -142,6 +142,7 @@ function developers() return {
                "Javier G. Sogo (jgsogo)",
                "aDiscoverer",
                "cake>pie",
+               "Christoph Elsenhans (frosch)",
             },
          },
       },

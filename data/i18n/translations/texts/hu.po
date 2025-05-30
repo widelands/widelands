@@ -4,19 +4,20 @@
 # Translators:
 # Tóth András <txa-dev@posteo.hu>, 2021
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016-2017,2020
+# Balázs Meskó <meskobalazs@mailbox.org>, 2025
 # Balázs Meskó <meskobalazs@mailbox.org>, 2020
 # GunChleoc, 2014
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016-2017,2019-2020
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
-# Tóth András <txa-dev@posteo.hu>, 2021-2024
+# Tóth András <txa-dev@posteo.hu>, 2021-2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-03-01 03:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2024\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2025\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +31,7 @@ msgstr "Útmutató"
 
 #: ../../../../data/txts/ABOUT.lua:11
 msgid "License"
-msgstr "Licenc"
+msgstr "Licensz"
 
 #: ../../../../data/txts/ABOUT.lua:15
 msgid "Developers"
@@ -46,7 +47,7 @@ msgstr "Widelands fejlesztőcsapat"
 
 #: ../../../../data/txts/LICENSE.lua:12
 msgid "Licensing information for Widelands"
-msgstr "Licencelési információ a Widelandshez"
+msgstr "Widelands szerzői jogi tudnivalók"
 
 #. TRANSLATORS: Placeholder is copyright end year
 #: ../../../../data/txts/LICENSE.lua:14
@@ -64,13 +65,13 @@ msgstr "Ez a játék szabad és nyílt forrású, a GNU General Public License (
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr "További információkat találhatsz a szabad és nyílt forrású szoftverekről, valamint a GPL-ről, ha meglátogatod ezt a weboldalt: %s"
+msgstr "További információkat találhatsz a szabad és nyílt forráskódú szoftverekről, valamint a GPL-ről, ha felkeresed ezt az oldalt: %s"
 
 #: ../../../../data/txts/LICENSE.lua:20
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
-msgstr "Itt megtalálod a licenc teljes szövegét, illetve további tudnivalókat ennek filozófiájáról és jogi következményeiről. (A fordító megjegyzése: A GPL nemhivatalos magyar fordítása elérhető a http://gnu.hu/gpl.html webcímen.)"
+msgstr "Itt megtalálod a licensz teljes szövegét, illetve további tudnivalókat ennek filozófiájáról és jogi következményeiről. (A fordító megjegyzése: A GPL nemhivatalos magyar fordítása elérhető a http://gnu.hu/gpl.html oldalon.)"
 
 #: ../../../../data/txts/LICENSE.lua:22
 msgid "We are also shipping the GPL as a text document with Widelands itself."
@@ -111,7 +112,7 @@ msgstr "Szabad forráskódú stratégiai játék"
 
 #: ../../../../data/txts/README.lua:11
 msgid "Check out the Widelands project homepage:"
-msgstr "Ezen a weblapon nézhetsz utána a Widelands projektnek:"
+msgstr "A Widelands honlapja:"
 
 #: ../../../../data/txts/README.lua:12
 msgid ""
@@ -213,13 +214,13 @@ msgid "Elders"
 msgstr "Vének"
 
 #: ../../../../data/txts/developers.lua:22
-#: ../../../../data/txts/developers.lua:416
+#: ../../../../data/txts/developers.lua:417
 msgid "Graphics"
 msgstr "Grafika"
 
 #: ../../../../data/txts/developers.lua:28
-#: ../../../../data/txts/developers.lua:360
-#: ../../../../data/txts/developers.lua:423
+#: ../../../../data/txts/developers.lua:361
+#: ../../../../data/txts/developers.lua:424
 msgid "Homepage"
 msgstr "Honlap"
 
@@ -228,7 +229,7 @@ msgid "Scripting"
 msgstr "Parancsfájlok"
 
 #: ../../../../data/txts/developers.lua:40
-#: ../../../../data/txts/developers.lua:431
+#: ../../../../data/txts/developers.lua:432
 msgid "Sound"
 msgstr "Hang"
 
@@ -244,103 +245,103 @@ msgstr "Nyelvek"
 msgid "Coders"
 msgstr "Programozók"
 
-#: ../../../../data/txts/developers.lua:150
+#: ../../../../data/txts/developers.lua:151
 msgid "Graphicians"
 msgstr "Grafikusok"
 
-#: ../../../../data/txts/developers.lua:188
+#: ../../../../data/txts/developers.lua:189
 msgid "Musicians"
 msgstr "Zenészek"
 
-#: ../../../../data/txts/developers.lua:207
+#: ../../../../data/txts/developers.lua:208
 msgid "Sound Effects"
 msgstr "Hanghatások"
 
-#: ../../../../data/txts/developers.lua:223
+#: ../../../../data/txts/developers.lua:224
 msgid "Maps and Missions"
 msgstr "Térképek és hadjáratok"
 
-#: ../../../../data/txts/developers.lua:257
+#: ../../../../data/txts/developers.lua:258
 msgid "Campaign Story"
 msgstr "A hadjárat története"
 
-#: ../../../../data/txts/developers.lua:261
+#: ../../../../data/txts/developers.lua:262
 msgid "Barbarians"
 msgstr "Barbárok"
 
-#: ../../../../data/txts/developers.lua:269
+#: ../../../../data/txts/developers.lua:270
 msgid "Empire"
 msgstr "Birodalom"
 
-#: ../../../../data/txts/developers.lua:276
+#: ../../../../data/txts/developers.lua:277
 msgid "Atlanteans"
 msgstr "Atlantisziak"
 
-#: ../../../../data/txts/developers.lua:284
+#: ../../../../data/txts/developers.lua:285
 msgid "Frisians"
 msgstr "Frízek"
 
-#: ../../../../data/txts/developers.lua:292
+#: ../../../../data/txts/developers.lua:293
 msgid "Packagers"
 msgstr "Csomagkészítők"
 
-#: ../../../../data/txts/developers.lua:296
+#: ../../../../data/txts/developers.lua:297
 msgid "Debian Linux"
 msgstr "Debian Linux"
 
-#: ../../../../data/txts/developers.lua:302
+#: ../../../../data/txts/developers.lua:303
 msgid "Fedora Linux"
 msgstr "Fedora Linux"
 
-#: ../../../../data/txts/developers.lua:310
+#: ../../../../data/txts/developers.lua:311
 msgid "Mandriva Linux"
 msgstr "Mandriva Linux"
 
-#: ../../../../data/txts/developers.lua:316
+#: ../../../../data/txts/developers.lua:317
 msgid "FreeBSD"
 msgstr "FreeBSD"
 
-#: ../../../../data/txts/developers.lua:322
+#: ../../../../data/txts/developers.lua:323
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: ../../../../data/txts/developers.lua:329
+#: ../../../../data/txts/developers.lua:330
 msgid "Mac OS X"
 msgstr "Mac OS X"
 
-#: ../../../../data/txts/developers.lua:341
+#: ../../../../data/txts/developers.lua:342
 msgid "Windows"
 msgstr "Windows"
 
-#: ../../../../data/txts/developers.lua:352
+#: ../../../../data/txts/developers.lua:353
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
-#: ../../../../data/txts/developers.lua:364
+#: ../../../../data/txts/developers.lua:365
 msgid "Homepage Coders"
 msgstr "Honlap fejlesztői és karbantartói"
 
-#: ../../../../data/txts/developers.lua:375
+#: ../../../../data/txts/developers.lua:376
 msgid "Documentation, Help and Wiki"
 msgstr "Fejlesztői, felhasználói kézikönyv és Wiki"
 
-#: ../../../../data/txts/developers.lua:393
+#: ../../../../data/txts/developers.lua:394
 msgid "Add-Ons"
 msgstr "Bővítmények"
 
-#: ../../../../data/txts/developers.lua:412
+#: ../../../../data/txts/developers.lua:413
 msgid "Former Elders"
 msgstr "Korábbi vének"
 
-#: ../../../../data/txts/developers.lua:438
+#: ../../../../data/txts/developers.lua:439
 msgid "Translation"
 msgstr "Fordítás"
 
-#: ../../../../data/txts/developers.lua:447
+#: ../../../../data/txts/developers.lua:448
 msgid "Other"
 msgstr "Mások"
 
-#: ../../../../data/txts/developers.lua:455
+#: ../../../../data/txts/developers.lua:456
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr "és nagyon sokan mások (köszönünk minden segítséget)"
 
@@ -851,7 +852,7 @@ msgid ""
 "touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
 "menu. For example, moving the map view can be much more comfortable by "
 "scrolling instead of dragging with the right mouse button."
-msgstr "Ha érintőpados laptopon játszol, az érintőpados görgetést is használhatod egyes funkciókhoz, ha beállítod a „Beállítások” → „Billentyű- és egér-hozzárendelések szerkesztése” menüben. Pl. a térkép mozgatása sokkal kényelmesebb így érintőpadon mint a jobb gombos mozgatással."
+msgstr "Ha érintőpárnás laptopon játszol, az érintőpárnás görgetést is használhatod egyes funkciókhoz, ha beállítod a „Beállítások” → „Billentyű- és egér-hozzárendelések szerkesztése” menüben. Pl. a térkép mozgatása sokkal kényelmesebb így érintőpárnán mint a jobb gombos mozgatással."
 
 #: ../../../../data/txts/tips/general_game.lua:106
 msgid ""
@@ -891,4 +892,4 @@ msgstr "Ha a játék összeomlana, ne aggódj!\nA játék automatikusan mentésr
 msgid ""
 "Are the computer players too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr "A mesterséges intelligencia ellen játszani túl unalmas? Látogasd meg weblapunkat a %s címen, ismerd meg a többi játékost, és játssz az Interneten!"
+msgstr "A mesterséges intelligencia ellen játszani túl unalmas? Látogasd meg honlapunkat a %s címen, ismerd meg a többi játékost, és játssz az Interneten!"
