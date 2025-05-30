@@ -2393,6 +2393,9 @@ void Ship::exp_cancel(Game& game) {
 	// Bring us back into a fleet and a economy.
 	set_economy(game, nullptr, wwWARE);
 	set_economy(game, nullptr, wwWORKER);
+	destination_object_ = nullptr;  // remove potential destination, ...
+	destination_coords_ = nullptr;  // ... for assert in ShippingSchedule::ship_added()
+
 	init_fleet(game);
 	if ((get_fleet() == nullptr) || !get_fleet()->has_ports()) {
 		// We lost our last reachable port, so we reset the expedition's state

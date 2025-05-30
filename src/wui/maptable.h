@@ -38,6 +38,38 @@ public:
 
 	/// Fill the table with maps and directories.
 	void fill(const std::vector<MapData>& entries, MapData::DisplayType type);
+
+	using FilterFn = std::function<bool(MapData&)>;
+	/// Fill the table by searching the file system
+	void fill(const std::vector<std::string>& directories,
+	          const std::string& basedir,
+	          MapData::DisplayType type,
+	          Widelands::Map::ScenarioTypes scenario_types,
+	          FilterFn filter,
+	          bool include_addon_maps = false,
+	          bool show_empty_dirs = false);
+	void update_table(MapData::DisplayType type, bool to_parent = false);
+
+	[[nodiscard]] const MapData& get_selected_data() const {
+		return maps_data_[get_selected()];
+	}
+
+private:
+	[[nodiscard]] bool compare_players(uint32_t rowa, uint32_t rowb) const {
+		return maps_data_[get(get_record(rowa))].compare_players(maps_data_[get(get_record(rowb))]);
+	}
+
+	[[nodiscard]] bool compare_mapnames(uint32_t rowa, uint32_t rowb) const {
+		return maps_data_[get(get_record(rowa))].compare_names(maps_data_[get(get_record(rowb))]);
+	}
+
+	[[nodiscard]] bool compare_size(uint32_t rowa, uint32_t rowb) const {
+		return maps_data_[get(get_record(rowa))].compare_size(maps_data_[get(get_record(rowb))]);
+	}
+
+	// Store directory hierarchy
+	std::deque<std::vector<MapData>> parent_data_;
+	std::vector<MapData> maps_data_;
 };
 
 struct MapEntry {
