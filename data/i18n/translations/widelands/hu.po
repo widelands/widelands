@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-05-22 03:18+0000\n"
+"POT-Creation-Date: 2025-05-31 03:16+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2025\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -470,7 +470,7 @@ msgstr "Új véletlen térkép"
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/editor/editorinteractive.cc:230
-#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:34
+#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:36
 #: ../../../../src/ui_fsmenu/main.cc:443
 #: ../../../../src/wlapplication_options.cc:851
 msgid "Load Map"
@@ -869,8 +869,8 @@ msgid "Saving map…"
 msgstr "Térkép mentése…"
 
 #: ../../../../src/editor/editorinteractive.cc:1619
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:315
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:370
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:314
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:369
 msgid "Error Saving Map!"
 msgstr "Térkép mentés hiba!"
 
@@ -1152,44 +1152,44 @@ msgid "Error!"
 msgstr "Hiba!"
 
 #. * TRANSLATORS: Directory name for user maps in map selection
-#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:82
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:284
+#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:113
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:283
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:217
 #: ../../../../src/wui/mapdata.cc:199
 msgid "My Maps"
 msgstr "Az én térképeim"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:84
+#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:115
 #: ../../../../src/wui/mapdata.cc:193
 msgid "Multiplayer Scenarios"
 msgstr "Többszemélyes küldetések"
 
 #. * TRANSLATORS: Directory name for SP Scenarios in map selection
-#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:86
+#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:117
 #: ../../../../src/wui/mapdata.cc:196
 msgid "Singleplayer Scenarios"
 msgstr "Egyszemélyes küldetések"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
-#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:88
+#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:119
 #: ../../../../src/wui/mapdata.cc:202
 msgid "Downloaded Maps"
 msgstr "Letöltött térképek"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
-#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:91
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:284
+#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:122
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:283
 #, c-format
 msgid "Current directory: %s"
 msgstr "Jelenlegi könyvtár: %s"
 
 #. * TRANSLATORS: "Display: Original/Localized map/file names"
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:94
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:92
 msgid "Display"
 msgstr "Megjelenítés"
 
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:114
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:112
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:250
 #: ../../../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:62
 #: ../../../../src/editor/ui_menus/player_menu.cc:87
@@ -1214,7 +1214,7 @@ msgstr "Megjelenítés"
 msgid "OK"
 msgstr "Rendben"
 
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:115
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:113
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:258
 #: ../../../../src/editor/ui_menus/main_menu_new_map.cc:70
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:871
@@ -1237,19 +1237,19 @@ msgstr "Rendben"
 msgid "Cancel"
 msgstr "Mégse"
 
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:143
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:137
 msgid "File names"
 msgstr "Fájlnevek"
 
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:144
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:138
 msgid "Map names"
 msgstr "Térképnevek"
 
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:144
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:138
 msgid "Original map names"
 msgstr "Eredeti térképnevek"
 
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:148
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:142
 msgid "Translated map names"
 msgstr "Lefordított térképnevek"
 
@@ -1618,17 +1618,17 @@ msgstr "Hiba a könyvtár létrehozásakor."
 msgid "Error while creating directory ‘%s’."
 msgstr "Hiba a(z) „%s” könyvtár létrehozásakor."
 
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:313
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:312
 #: ../../../../src/wui/game_main_menu_save_game.cc:325
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Egy fájl már létezik ezzel a névvel: „%s” Felülírod?"
 
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:345
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:344
 msgid "Saving the map…"
 msgstr "Térkép mentése…"
 
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:363
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:362
 msgid "Map saved"
 msgstr "Térkép elmentve"
 
@@ -3186,27 +3186,27 @@ msgstr "Expedíció készen áll"
 msgid "An expedition ship is waiting for your commands."
 msgstr "Expedíciós hajó parancsra vár."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2434
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2437
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr "Süllyed"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2436
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2439
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr "Harcol"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2440
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2443
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr "Átalakítás teherhajóvá"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2443
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2446
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr "Átalakítás hadihajóvá"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2451
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2454
 #: ../../../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
@@ -3218,10 +3218,10 @@ msgstr "Hadihajó"
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2457
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2467
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2473
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2487
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2460
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2470
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2476
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2490
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -3229,7 +3229,7 @@ msgstr "Útban %s kikötőhöz"
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2462
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2465
 #: ../../../../src/wui/seafaring_statistics_menu.cc:260
 msgctxt "ship_state"
 msgid "Empty"
@@ -3237,7 +3237,7 @@ msgstr "Üres"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2482
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2485
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -3245,7 +3245,7 @@ msgstr "Szállít %s kikötőbe"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2494
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2497
 #: ../../../../src/wui/seafaring_statistics_menu.cc:264
 msgctxt "ship_state"
 msgid "Waiting"
@@ -3253,14 +3253,14 @@ msgstr "Várakozik"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2498
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2501
 #: ../../../../src/wui/seafaring_statistics_menu.cc:266
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Felderít"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2502
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2505
 #: ../../../../src/wui/seafaring_statistics_menu.cc:268
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -3269,7 +3269,7 @@ msgstr "Kikötőhelyet talált"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2507
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2510
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Kolóniát alapít"
@@ -6656,93 +6656,93 @@ msgstr "Térkép választása…"
 msgid "Change saved game…"
 msgstr "Mentett játék választása…"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:204
+#: ../../../../src/ui_fsmenu/launch_game.cc:203
 msgid "Start game"
 msgstr "Játék indítása"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:290
+#: ../../../../src/ui_fsmenu/launch_game.cc:289
 msgid "Show fewer options"
 msgstr "Kevesebb lehetőség mutatása"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:290
+#: ../../../../src/ui_fsmenu/launch_game.cc:289
 msgid "Show more options"
 msgstr "Több lehetőség mutatása"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:306
+#: ../../../../src/ui_fsmenu/launch_game.cc:305
 msgid "The relations between players are set by the scenario"
 msgstr "A békés mód beállítását a küldetés határozza meg."
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:308
+#: ../../../../src/ui_fsmenu/launch_game.cc:307
 msgid "The relations between players are set by the saved game"
 msgstr "A békés mód beállítását a mentett játék határozza meg."
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:310
+#: ../../../../src/ui_fsmenu/launch_game.cc:309
 msgid "The selected win condition does not allow peaceful matches"
 msgstr "A kiválasztott játékmód nem teszi lehetővé a békés mérkőzést."
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:312
+#: ../../../../src/ui_fsmenu/launch_game.cc:311
 msgid "Forbid fighting between players"
 msgstr "Ne harcolhassanak egymással a játékosok"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:343
+#: ../../../../src/ui_fsmenu/launch_game.cc:342
 msgid "All selected starting conditions ignore the map’s starting positions"
 msgstr "Minden kiválasztott kezdőállapot figyelmen kívül hagyja a térkép kezdőpozícióit."
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:349
+#: ../../../../src/ui_fsmenu/launch_game.cc:348
 msgid "The starting positions are set by the scenario"
 msgstr "A kezdőpozíciókat a küldetés határozza meg."
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:351
+#: ../../../../src/ui_fsmenu/launch_game.cc:350
 msgid "The starting positions are set by the saved game"
 msgstr "A kezdőpozíciókat a mentett játék határozza meg."
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:354
+#: ../../../../src/ui_fsmenu/launch_game.cc:353
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr "A játékosok maguk választhatják meg a kezdőpozíciójukat a játék elején."
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:374
+#: ../../../../src/ui_fsmenu/launch_game.cc:373
 msgid "Player vision is set by the scenario"
 msgstr "A láthatóságot a küldetés határozza meg"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:376
+#: ../../../../src/ui_fsmenu/launch_game.cc:375
 msgid "Player vision is set by the saved game"
 msgstr "A láthatóságot a mentett játék határozza meg"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:378
+#: ../../../../src/ui_fsmenu/launch_game.cc:377
 msgid "Give all players permanent vision of the entire map"
 msgstr "A játékosok mindig látják a teljes térképet"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:400
+#: ../../../../src/ui_fsmenu/launch_game.cc:399
 msgid "Naval warfare is set by the scenario"
 msgstr "A tengeri hadviselés engedélyezését a küldetés határozza meg"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:402
+#: ../../../../src/ui_fsmenu/launch_game.cc:401
 msgid "Naval warfare is set by the saved game"
 msgstr "A tengeri hadviselés engedélyezését a mentett játék határozza meg"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:405
+#: ../../../../src/ui_fsmenu/launch_game.cc:404
 msgid ""
 "Enable coastal invasions and ship-to-ship battles. This feature is "
 "experimental and may undergo substantial redesign in future versions of "
 "Widelands."
 msgstr "A kikötőknél és kikötőhelyeknél partra szállhatnak támadó katonák a hadihajókról, és a hadihajók is harcolhatnak egymás ellen. Ez a játékmód még fejlesztés alatt áll, és jelentős változások várhatók benne a Widelands későbbi verzióiban."
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:426
+#: ../../../../src/ui_fsmenu/launch_game.cc:425
 msgid "Player relations are set by the scenario"
 msgstr "A szövetségeket a küldetés határozza meg"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:428
+#: ../../../../src/ui_fsmenu/launch_game.cc:427
 msgid "Player relations are set by the saved game"
 msgstr "A szövetségeket a mentett játék határozza meg"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:430
+#: ../../../../src/ui_fsmenu/launch_game.cc:429
 msgid "Disallow players to change their alliances during the game"
 msgstr "A játékosok nem változtathatnak a csapatokon a játék során"
 
 #. * TRANSLATORS: This is a map tag
-#: ../../../../src/ui_fsmenu/launch_game.cc:439
+#: ../../../../src/ui_fsmenu/launch_game.cc:438
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:506
 #: ../../../../src/ui_fsmenu/scenariodetails.cc:47
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:283
@@ -6750,21 +6750,21 @@ msgstr "A játékosok nem változtathatnak a csapatokon a játék során"
 msgid "Scenario"
 msgstr "Küldetés"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:440
+#: ../../../../src/ui_fsmenu/launch_game.cc:439
 msgid "Win condition is set through the scenario"
 msgstr "A játék célját a küldetés határozza meg"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:446
+#: ../../../../src/ui_fsmenu/launch_game.cc:445
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:510
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:287
 msgid "Saved Game"
 msgstr "Mentett játék"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:448
+#: ../../../../src/ui_fsmenu/launch_game.cc:447
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Ez egy mentett játék - a játék célja hamarabb lett beállítva."
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:523
+#: ../../../../src/ui_fsmenu/launch_game.cc:522
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -6842,12 +6842,12 @@ msgid "Load this replay"
 msgstr "A kiválasztott visszajátszás betöltése"
 
 #: ../../../../src/ui_fsmenu/loadgame.cc:79
-#: ../../../../src/ui_fsmenu/mapselect.cc:75
+#: ../../../../src/ui_fsmenu/mapselect.cc:72
 msgid "Return to the multiplayer game setup"
 msgstr "Visszatérés a többjátékos játék beállításaiba"
 
 #: ../../../../src/ui_fsmenu/loadgame.cc:80
-#: ../../../../src/ui_fsmenu/mapselect.cc:77
+#: ../../../../src/ui_fsmenu/mapselect.cc:74
 msgid "Return to the single player menu"
 msgstr "Visszatérés az egyjátékos-menübe"
 
@@ -7182,63 +7182,63 @@ msgstr "Nincs térkép kiválasztva"
 msgid "(no map)"
 msgstr "(nincs térkép)"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:49
+#: ../../../../src/ui_fsmenu/mapselect.cc:46
 msgid "Choose Map"
 msgstr "Térkép kiválasztása"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:90
+#: ../../../../src/ui_fsmenu/mapselect.cc:85
 msgid "Show all maps"
 msgstr "Minden térkép megjelenítése"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:93
+#: ../../../../src/ui_fsmenu/mapselect.cc:88
 msgid "Show original map names"
 msgstr "Eredeti térképnevek megjelenítése"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:111
+#: ../../../../src/ui_fsmenu/mapselect.cc:106
 msgid "Filter by official status"
 msgstr "Szűrés hivatalosság szerint"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:113
+#: ../../../../src/ui_fsmenu/mapselect.cc:108
 msgid "Official & Unofficial"
 msgstr "Hivatalos és nem hivatalos"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:113
+#: ../../../../src/ui_fsmenu/mapselect.cc:108
 msgid "Show both official and unofficial maps"
 msgstr "A hivatalos és a nem hivatalos térképek egyaránt láthatók"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:125
+#: ../../../../src/ui_fsmenu/mapselect.cc:120
 msgid "Filter by desired line-up"
 msgstr "Szűrés csapatbeállítások szerint"
 
 #. * TRANSLATORS: Filter entry in map selection. Other entries are "Free for
 #. all"",
 #. * "Teams of 2" etc.
-#: ../../../../src/ui_fsmenu/mapselect.cc:129
+#: ../../../../src/ui_fsmenu/mapselect.cc:124
 msgid "Any Teams"
 msgstr "Bármilyen csapatok"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:129
+#: ../../../../src/ui_fsmenu/mapselect.cc:124
 msgid "Do not filter by line-up suggestions"
 msgstr "Nincs szűrés javasolt csapatbeállításra"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:144
+#: ../../../../src/ui_fsmenu/mapselect.cc:139
 msgid "Filter by balancing status"
 msgstr "Szürés kiegyenlítettség szerint"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:499
+#: ../../../../src/ui_fsmenu/mapselect.cc:409
 msgid "Balanced & Unbalanced"
 msgstr "Kiegyenlített és kiegyenlítetlen"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:499
+#: ../../../../src/ui_fsmenu/mapselect.cc:409
 msgid "Show both balanced and unbalanced maps"
 msgstr "A kiegyenlített és a kiegyenlítetlen térképek egyaránt láthatók"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:504
+#: ../../../../src/ui_fsmenu/mapselect.cc:414
 msgctxt "balancing"
 msgid "Unspecified"
 msgstr "Nincs megadva"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:505
+#: ../../../../src/ui_fsmenu/mapselect.cc:415
 msgid "The map does not specify whether it is balanced"
 msgstr "A térképre nincs beállítva, hogy kiegyenlített-e"
 
@@ -11112,7 +11112,7 @@ msgstr "Játékadat hiba"
 msgid "Pl."
 msgstr "J."
 
-#: ../../../../src/wui/maptable.cc:35 ../../../../src/wui/maptable.cc:64
+#: ../../../../src/wui/maptable.cc:35 ../../../../src/wui/maptable.cc:69
 msgid "Filename"
 msgstr "Fájlnév"
 
@@ -11128,7 +11128,7 @@ msgstr "Méret"
 msgid "The size of the map (Width x Height)"
 msgstr "A térkép mérete (szélesség × magasság)"
 
-#: ../../../../src/wui/maptable.cc:68
+#: ../../../../src/wui/maptable.cc:73
 msgid "Map Name"
 msgstr "Térkép neve"
 
