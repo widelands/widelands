@@ -216,11 +216,33 @@ function test_case_battle.test_battle_cancel_by_team()
    -- and that it happened (there are wounded solders on both sides)
    local DEFENDER_RETURN_TIME = 5 * 1000
    sleep(DEFENDER_RETURN_TIME)  -- soldiers go back, defenders arrive
-   -- currently the soldiers who fought before fight again
-   check_soldiers_inside_and_healthy(bld_defender, INITIAL_SOLDIERS, -1)  -- check defenders
+   local unhealthy = count_healty_soldiers(bld_defender.fields[1]) - INITIAL_SOLDIERS
+   -- cases to handle:
+   -- * only same soldier fought (against one)      --> one is hurt
+   -- * same and other soldier fought (against two) --> two are hurt
+   -- * one other soldiers fought (agains one)      --> two are hurt
+   -- * two other soldiers fought (against two)     --> three are hurt
+   if unhealthy ~= -1 and  -- often the soldier who fought before fights again
+      unhealty ~= -2 and  -- one other (or one other plus same) did some fighting
+      unhealty ~= -3  -- two other did fight
+   then
+      unhealthy = -1  -- take one same fighter as default
+   end
+   check_soldiers_inside_and_healthy(bld_defender, INITIAL_SOLDIERS, unhealthy)  -- check defenders
 
    sleep(21 * 1000)  -- all soldiers arrive, takes longer here
-   check_soldiers_inside_and_healthy(bld_attacker, INITIAL_SOLDIERS, -1)
+   local unh_attack = count_healty_soldiers(bld_attacker.fields[1]) - INITIAL_SOLDIERS
+   -- cases to handle:
+   -- * as above, and matching to defenders
+   -- => max 1 difference to hurt defenders, but in same range
+   if unh_attack ~= unhealthy and  -- matches defenders
+      unh_attack - unhealthy ~= -1 and unh_attack - unhealthy ~= 1 -- one difference,
+      -- ... (probably) the unhealthy soldier acted differently
+      or unh_attack < -3 or unh_attack > -1  -- within range
+   then
+      unh_attack = unhealthy  -- unmatching, default to same as defenders
+   end
+   check_soldiers_inside_and_healthy(bld_attacker, INITIAL_SOLDIERS, unh_attack)  -- check attackers
 end
 
 function test_case_battle.test_attack_team()
