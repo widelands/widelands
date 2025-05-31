@@ -3442,10 +3442,9 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 			const int32_t delivered = order_it->second->num_shipped_batches;
 			if (delivered < trade.num_batches / 2) {
 				// it's too soon to tell
-				verb_log_dbg_time(game().get_gametime(),
-				                  "AI %u: postponing decision on extensions of trade #%d at %s",
-				                  static_cast<unsigned>(player_number()), trade_id,
-				                  market->get_market_name().c_str());
+				verb_log_dbg_time(
+				   game().get_gametime(), "AI %u: postponing decision on extensions of trade #%d at %s",
+				   static_cast<unsigned>(player_number()), trade_id, market->get_market_name().c_str());
 				continue;
 			}
 			const Widelands::Economy* market_economy = market->get_economy(Widelands::wwWARE);
