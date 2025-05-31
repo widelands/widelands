@@ -31,16 +31,37 @@ namespace Widelands {
 
 class Soldier;
 
-class SoldierRequest {
+class SoldierRequest : public Request {
+public:
+	SoldierRequest(PlayerImmovable& target,
+	               DescriptionIndex di,
+	               CallbackFn cb,
+	               WareWorker ww,
+	               SoldierPreference pref)
+	   : Request(target, di, cb, ww), preference_(pref) {
+	}
+
+	[[nodiscard]] SoldierPreference get_preference() const {
+		return preference_;
+	}
+	void set_preference(SoldierPreference pref) {
+		preference_ = pref;
+	}
+
+private:
+	SoldierPreference preference_{SoldierPreference::kAny};
+};
+
+class SoldierRequestManager {
 public:
 	using DesiredCapacityFn = std::function<Quantity()>;
 	using StationedSoldiersFn = std::function<std::vector<Soldier*>()>;
 
-	SoldierRequest(PlayerImmovable& target,
-	               SoldierPreference pref,
-	               Request::CallbackFn callback,
-	               DesiredCapacityFn dcfn,
-	               StationedSoldiersFn ssfn)
+	SoldierRequestManager(PlayerImmovable& target,
+	                      SoldierPreference pref,
+	                      Request::CallbackFn callback,
+	                      DesiredCapacityFn dcfn,
+	                      StationedSoldiersFn ssfn)
 	   : target_(target),
 	     preference_(pref),
 	     callback_(callback),
@@ -62,10 +83,10 @@ public:
 		return preference_;
 	}
 
-	[[nodiscard]] const Request* get_request() const {
+	[[nodiscard]] const SoldierRequest* get_request() const {
 		return request_.get();
 	}
-	[[nodiscard]] Request* get_request() {
+	[[nodiscard]] SoldierRequest* get_request() {
 		return request_.get();
 	}
 
@@ -79,12 +100,12 @@ private:
 	SoldierPreference preference_;
 	Request::CallbackFn callback_;
 
-	std::unique_ptr<Request> request_;
+	std::unique_ptr<SoldierRequest> request_;
 
 	DesiredCapacityFn get_desired_capacity_;
 	StationedSoldiersFn get_stationed_soldiers_;
 
-	DISALLOW_COPY_AND_ASSIGN(SoldierRequest);
+	DISALLOW_COPY_AND_ASSIGN(SoldierRequestManager);
 };
 
 }  // namespace Widelands
