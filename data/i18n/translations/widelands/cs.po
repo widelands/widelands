@@ -2681,14 +2681,14 @@ msgstr "Obchod s hráčem %2$s z tržnice %1$s"
 #: ../../../../src/logic/map_objects/tribes/market.cc:722
 #, c-format
 msgid "Trade offer from %s"
-msgstr ""
+msgstr "Z tržnice %s přišla nabídka ke směně"
 
 #. * TRANSLATORS: "From" is the market's name, and "to" is the receiving
 #. player's name
 #: ../../../../src/logic/map_objects/tribes/market.cc:732
 #, c-format
 msgid "Trade offer from %1$s to %2$s"
-msgstr ""
+msgstr "Nabídka ke směně z tržnice %1$s pro hráče %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:742
 #, c-format
@@ -7682,7 +7682,7 @@ msgstr "Velikost okna"
 #: ../../../../src/ui_fsmenu/options.cc:159
 msgctxt "multiscreen"
 msgid "Display"
-msgstr ""
+msgstr "Zobrazit"
 
 #. * TRANSLATORS: short description for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:168
@@ -7854,7 +7854,7 @@ msgstr "Nikdy"
 #: ../../../../src/ui_fsmenu/options.cc:583
 msgctxt "multiscreen"
 msgid "Follow mouse"
-msgstr ""
+msgstr "Zobrazit pohybem myši"
 
 #. * TRANSLATORS: Display index and virtual coordinates, e.g, '#0 (0, 0, 1920,
 #. 1080)'
@@ -8769,7 +8769,7 @@ msgstr "Zobrazit pouze zprávy scénáře"
 
 #: ../../../../src/wlapplication_options.cc:750
 msgid "Show Diplomacy Messages Only"
-msgstr ""
+msgstr "Zobrazit pouze zprávy týkající se diplomacie"
 
 #: ../../../../src/wlapplication_options.cc:755
 msgid "Go to Ship"
@@ -10227,7 +10227,7 @@ msgstr "Navržené obchody (%u)"
 msgid ""
 "There are no pending trade proposals at the moment. You can propose a new "
 "trade from a market."
-msgstr ""
+msgstr "V tuto chvíli nepoptáváš žádné zboží. Novou poptávku můžeš vytvořit pomocí tržnice."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:533
 #: ../../../../src/wui/game_diplomacy_menu.cc:642
@@ -10237,7 +10237,7 @@ msgstr "Přesunout se k této tržnici"
 #: ../../../../src/wui/game_diplomacy_menu.cc:536
 #: ../../../../src/wui/marketwindow.cc:314
 msgid "Retract this trade offer"
-msgstr ""
+msgstr "Odvolat tuto nabídku ke směně"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:548
 #: ../../../../src/wui/marketwindow.cc:322
@@ -10278,43 +10278,43 @@ msgstr "Navrhnout prodloužení této obchodní dohody"
 #, c-format
 msgid "Hold down Ctrl to extend it by %d batch"
 msgid_plural "Hold down Ctrl to extend it by %d batches"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Při současném přidržení Ctrl se zvýší o %d dodávku"
+msgstr[1] "Při současném přidržení Ctrl se zvýší o %d dodávky"
+msgstr[2] "Při současném přidržení Ctrl se zvýší o %d dodávky"
+msgstr[3] "Při současném přidržení Ctrl se zvýší o %d dodávek"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:655
 #: ../../../../src/wui/marketwindow.cc:551
 msgid "Hold down Shift to extend the trade indefinitely"
-msgstr ""
+msgstr "Při současném přidržení Shift se nastaví obchod bez omezení"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:660
 msgid "Cancel this trade agreement"
-msgstr ""
+msgstr "Zrušit tuto obchodní dohodu"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:663
 #: ../../../../src/wui/marketwindow.cc:576
 msgid "Move this trade…"
-msgstr ""
+msgstr "Přemístit tento obchod…"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:676
 #: ../../../../src/wui/marketwindow.cc:592
 #, c-format
 msgid "Move this trade to %s (closest)"
-msgstr ""
+msgstr "Přemístit do nejbližší tržnice %s"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:677
 #: ../../../../src/wui/marketwindow.cc:593
 #, c-format
 msgid "Move this trade to %s"
-msgstr ""
+msgstr "Přemístit do tržnice %s"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:737
 #: ../../../../src/wui/marketwindow.cc:678
 #: ../../../../src/wui/marketwindow.cc:764
 #, c-format
 msgid "%1$s proposed to extend this trade indefinitely."
-msgstr ""
+msgstr "%1$s navrhuje zrušení limitu u tohoto obchodu."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:740
 #: ../../../../src/wui/marketwindow.cc:681
@@ -10322,40 +10322,40 @@ msgstr ""
 #, c-format
 msgid "%1$s proposed to extend this trade by %2$d batch."
 msgid_plural "%1$s proposed to extend this trade by %2$d batches."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1$s navrhuje navýšení limitu u tohoto obchodu o %2$d dodávku."
+msgstr[1] "%1$s navrhuje navýšení limitu u tohoto obchodu o %2$d dodávky."
+msgstr[2] "%1$s navrhuje navýšení limitu u tohoto obchodu o %2$d dodávky."
+msgstr[3] "%1$s navrhuje navýšení limitu u tohoto obchodu o %2$d dodávek."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:749
 #: ../../../../src/wui/marketwindow.cc:691
 msgid "Reject this trade extension proposal"
-msgstr ""
+msgstr "Zamítnout návrh na změnu množství dodávek"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:753
 #: ../../../../src/wui/marketwindow.cc:695
 msgid "Accept this trade extension proposal"
-msgstr ""
+msgstr "Přijmout návrh na změnu množství dodávek"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:783
 #: ../../../../src/wui/marketwindow.cc:738
 msgid "You proposed to extend this trade indefinitely."
-msgstr ""
+msgstr "Navrhuji zrušení limitu u tohoto obchodu."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:784
 #: ../../../../src/wui/marketwindow.cc:734
 #, c-format
 msgid "You proposed to extend this trade by %d batch."
 msgid_plural "You proposed to extend this trade by %d batches."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Navrhuji navýšení limitu u tohoto obchodu o %d dodávku."
+msgstr[1] "Navrhuji navýšení limitu u tohoto obchodu o %d dodávky."
+msgstr[2] "Navrhuji navýšení limitu u tohoto obchodu o %d dodávky."
+msgstr[3] "Navrhuji navýšení limitu u tohoto obchodu o %d dodávek."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:793
 #: ../../../../src/wui/marketwindow.cc:744
 msgid "Retract this trade extension proposal"
-msgstr ""
+msgstr "Stáhnout návrh na změnu množství dodávek"
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../../../src/wui/game_exit_confirm_box.cc:27
@@ -10439,7 +10439,7 @@ msgstr "Zobrazit pouze zprávy scénáře"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:604
 msgid "Show diplomacy messages only"
-msgstr ""
+msgstr "Zobrazit pouze zprávy týkající se diplomacie"
 
 #: ../../../../src/wui/game_message_menu.cc:647
 msgid "Messages: Archive"
@@ -11301,7 +11301,7 @@ msgstr "Zrušit tento obchod"
 msgid ""
 "Resume this paused trade. This requires all queues to be at their maximum "
 "capacity."
-msgstr ""
+msgstr "Obnovit tuto obchodní dohodu. Předpokládá, že veškeré hodnoty zboží k odeslání budou na svém maximumu."
 
 #: ../../../../src/wui/marketwindow.cc:788
 msgid "Pause this trade"
