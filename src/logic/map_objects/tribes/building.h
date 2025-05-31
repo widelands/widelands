@@ -176,6 +176,9 @@ public:
 	void set_hints_trainingsites_max_percent(int percent);
 
 	[[nodiscard]] uint32_t get_unoccupied_animation() const;
+	[[nodiscard]] uint32_t get_enhancement_base_image() const {
+		return enhancement_base_image_;
+	}
 
 	[[nodiscard]] DescriptionIndex get_built_over_immovable() const {
 		return built_over_immovable_;
@@ -217,6 +220,8 @@ private:
 	AI::BuildingHints hints_;                // hints (knowledge) for computer players
 	DescriptionIndex built_over_immovable_;  // can be built only on nodes where an immovable with
 	                                         // this attribute stands
+	uint32_t enhancement_base_image_{
+	   0};  // The override base image when enhancing to this building, if any.
 
 	std::string owning_tribe_;
 
