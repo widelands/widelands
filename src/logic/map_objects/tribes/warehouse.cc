@@ -1109,7 +1109,6 @@ Soldier& Warehouse::launch_soldier(Game& game,
 	const DescriptionIndex soldier_index = owner().tribe().soldier();
 	assert(incorporated_soldiers_.size() == supply_->stock_workers(soldier_index));
 
-	// TODO(tothxa): savegame compatibility with v1.2 or keep for safety?
 	// Make sure incorporated_soldiers_ is sorted after loading a game.
 	if (!soldiers_are_sorted_) {
 		std::sort(incorporated_soldiers_.begin(), incorporated_soldiers_.end(),
@@ -1244,7 +1243,7 @@ void Warehouse::incorporate_soldier_inner(EditorGameBase& egbase, Soldier* soldi
 		return;
 	}
 
-	// Keep them sorted by total level
+	// Keep them sorted in decreasing order of total level
 	auto it = incorporated_soldiers_.begin();
 	while (it != incorporated_soldiers_.end() && it->get(egbase)->get_total_level() > total_level) {
 		++it;

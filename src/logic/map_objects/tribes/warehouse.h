@@ -341,17 +341,13 @@ private:
 	using IncorporatedWorkers = std::map<DescriptionIndex, WorkerList>;
 	IncorporatedWorkers incorporated_workers_;
 
-	// TODO(tothxa): won't this clash with struct SoldierList in wui/soldierlist.cc?
-	//               this is class Warehouse namespace, isn't it?
+	// We keep soldiers separately, always sorted by level in decreasing order
 	using SoldierList = std::vector<OPtr<Soldier>>;
-
-	// We keep soldiers separately, always sorted by level
 	SoldierList incorporated_soldiers_;
 
 	// Called by incorporate_worker() for soldiers. This handles keeping them sorted.
 	void incorporate_soldier_inner(EditorGameBase& egbase, Soldier* soldier);
 
-	// TODO(tothxa): savegame compatibility with v1.2 or keep for safety?
 	// Flag for launch_soldier() whether it needs to sort them first.
 	// Adding soldiers on game loading in map_io/map_buildingdata_packet.cc sets it to false.
 	bool soldiers_are_sorted_{true};
