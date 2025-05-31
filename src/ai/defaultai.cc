@@ -3441,7 +3441,12 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 			}
 			const int32_t delivered = order_it->second->num_shipped_batches;
 			if (delivered < trade.num_batches / 2) {
-				continue;  // it's too soon to tell
+				// it's too soon to tell
+				verb_log_dbg_time(game().get_gametime(),
+				                  "AI %u: postponing decision on extensions of trade #%d at %s",
+				                  static_cast<unsigned>(player_number()), trade_id,
+				                  market->get_market_name().c_str());
+				continue;
 			}
 			const Widelands::Economy* market_economy = market->get_economy(Widelands::wwWARE);
 			if (market_economy == nullptr) {
@@ -3485,16 +3490,20 @@ bool DefaultAI::evaluate_trade(const Widelands::TradeInstance& offer,
 #endif
 	}
 
-	// TODO(tothxa): There are lots of user controlled opportunities here for integer overflows.
-	//               Shouldn't we limit num_batches and the number of items too?
-	if (batches == Widelands::kInfiniteTrade) {
-		// Don't commit AIs to infinite trades
+	// Limit to prevent both integer overflows and long term commitments for the AI
+	constexpr int32_t kMaxReasonableAmount = 100;
+
+	if (batches == Widelands::kInfiniteTrade || batches > kMaxReasonableAmount) {
+		// Don't commit AIs to overly long trades
 		return false;
 	}
 
 	// This is what the other player sends to us.
 	int32_t receive_preciousness = 0;
 	for (const auto& pair : offer.items_to_send) {
+		if (pair.second > kMaxReasonableAmount) {
+			return false;
+		}
 		const int32_t amount = batches * pair.second;
 		receive_preciousness += amount * trade_preciousness(pair.first, amount, economy, true);
 	}
@@ -3502,6 +3511,9 @@ bool DefaultAI::evaluate_trade(const Widelands::TradeInstance& offer,
 	// This is what we pay to the other player.
 	int32_t send_cost = 0;
 	for (const auto& pair : offer.items_to_receive) {
+		if (pair.second > kMaxReasonableAmount) {
+			return false;
+		}
 		const int32_t amount = batches * pair.second;
 		send_cost += amount * trade_preciousness(pair.first, amount, economy, false);
 	}
@@ -3539,9 +3551,6 @@ int32_t DefaultAI::trade_preciousness(const Widelands::DescriptionIndex ware_id,
 
 		} else {  // send
 			preciousness += shortage;
-			if (amount >= stock) {
-				preciousness += amount * 2;  // we don't want to give all our wares
-			}
 		}
 
 	} else {
@@ -3558,6 +3567,10 @@ int32_t DefaultAI::trade_preciousness(const Widelands::DescriptionIndex ware_id,
 				preciousness -= surplus / 2;
 			}
 		}
+	}
+
+	if (!receive && amount >= stock) {
+		preciousness += amount * 2;  // we don't want to give all our wares
 	}
 
 	if (preciousness < 0) {
