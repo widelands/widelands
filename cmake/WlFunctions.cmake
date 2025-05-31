@@ -75,6 +75,10 @@ macro(_common_compile_tasks)
     set(TARGET_LINK_FLAGS "-static")
   endif()
 
+  if(ANALYSE_CODE_COVERAGE)
+    target_compile_options(${NAME} PUBLIC -fprofile-dir=${CMAKE_BINARY_DIR}/coverage/binary/${NAME})
+  endif(ANALYSE_CODE_COVERAGE)
+
   if(ARG_THIRD_PARTY OR ARG_THIRD_PARTY_WITH_INCLUDES)
     # Disable all warnings for third_party.
     set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} -w")
@@ -243,7 +247,16 @@ function(wl_test NAME)
 
   _common_compile_tasks()
 
-  add_test(${NAME} ${NAME})
+  if(ANALYSE_CODE_COVERAGE)
+    add_test(
+      NAME ${NAME}
+      COMMAND ${CMAKE_SOURCE_DIR}/utils/test_wrapper.sh ${CMAKE_CURRENT_BINARY_DIR}/${NAME}
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    )
+  else()
+    add_test(${NAME} ${NAME})
+  endif()
+
   add_dependencies(wl_tests ${NAME})
 endfunction()
 
