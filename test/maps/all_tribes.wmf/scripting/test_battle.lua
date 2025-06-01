@@ -173,12 +173,16 @@ function test_case_battle.test_battle_cancel_by_forbidden()
 end
 
 function test_case_battle.test_attack_peace()
+   assert_true(bld_defender.owner:is_attack_forbidden(bld_attacker.owner.number))
+   assert_true(bld_attacker.owner:is_attack_forbidden(bld_defender.owner.number))
+
    test_attack_when_forbidden()
 end
 
 function test_case_battle.test_attack_onesided()
    -- defender could attack, but not the attacker
    bld_defender.owner:set_attack_forbidden(bld_attacker.owner.number, false)
+   assert_true(bld_attacker.owner:is_attack_forbidden(bld_defender.owner.number))
 
    test_attack_when_forbidden()
 end
