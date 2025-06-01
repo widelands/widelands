@@ -2095,7 +2095,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note helptext for an Empire training site: Arena
             note = pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came."),
             -- TRANSLATORS: Performance helptext for an Empire training site: Arena
-            performance = pgettext("empire_building", "If all needed wares are delivered in time, an arena can train one soldier the first level in evade in %s on average."):bformat(format_seconds(36))
+            performance = pgettext("empire_building", "If all needed wares are delivered in time, an arena can train one soldier to the first level in evade in %s on average."):bformat(format_seconds(36))
          }
       },
       {
