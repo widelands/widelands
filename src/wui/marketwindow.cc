@@ -222,9 +222,11 @@ private:
 
 		if (count1 > Widelands::kMaxWaresPerBatch || count2 > Widelands::kMaxWaresPerBatch) {
 			ok_.set_enabled(false);
-			ok_.set_tooltip(format(
-				ngettext("It is not allowed to exchange more than %d ware per batch.", "It is not allowed to exchange more than %d wares per batch.", Widelands::kMaxWaresPerBatch),
-				Widelands::kMaxWaresPerBatch));
+			ok_.set_tooltip(
+			   format(ngettext("It is not allowed to exchange more than %d ware per batch.",
+			                   "It is not allowed to exchange more than %d wares per batch.",
+			                   Widelands::kMaxWaresPerBatch),
+			          Widelands::kMaxWaresPerBatch));
 			return;
 		}
 

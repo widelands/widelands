@@ -73,7 +73,8 @@ void CmdProposeTrade::execute(Game& game) {
 	}
 
 	if (std::string err = trade_.check_illegal(); !err.empty()) {
-		log_warn_time(game.get_gametime(), "CmdProposeTrade: malformed trade proposal: %s", err.c_str());
+		log_warn_time(
+		   game.get_gametime(), "CmdProposeTrade: malformed trade proposal: %s", err.c_str());
 		return;
 	}
 
