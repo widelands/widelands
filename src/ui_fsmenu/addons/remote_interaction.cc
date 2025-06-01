@@ -153,7 +153,8 @@ void CommentRow::layout() {
 
 	update_desired_size();
 
-	int dw, dh;
+	int dw;
+	int dh;
 	get_desired_size(&dw, &dh);
 	set_size(dw, dh);
 	update_positions();
