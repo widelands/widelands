@@ -206,7 +206,8 @@ private:
 			if (w1.second < Widelands::kMaxWaresPerBatch) {
 				count1 += w1.second;
 			} else {  // integer overflow protection
-				count1 = Widelands::kMaxWaresPerBatch;
+				count1 = Widelands::kMaxWaresPerBatch + 1;
+				break;
 			}
 			set1.insert(w1.first);
 		}
@@ -214,18 +215,13 @@ private:
 			if (w2.second < Widelands::kMaxWaresPerBatch) {
 				count2 += w2.second;
 			} else {  // integer overflow protection
-				count2 = Widelands::kMaxWaresPerBatch;
+				count2 = Widelands::kMaxWaresPerBatch + 1;
+				break;
 			}
 			if (set1.count(w2.first) != 0) {
 				conflicts.emplace_back(
 				   iplayer_.egbase().descriptions().get_ware_descr(w2.first)->descname());
 			}
-		}
-		if (!conflicts.empty()) {
-			ok_.set_enabled(false);
-			ok_.set_tooltip(format(_("You cannot both send and receive the same ware type (%s)."),
-			                       i18n::localize_list(conflicts, i18n::ConcatenateWith::AND)));
-			return;
 		}
 
 		if (count1 > Widelands::kMaxWaresPerBatch || count2 > Widelands::kMaxWaresPerBatch) {
@@ -235,6 +231,13 @@ private:
 			                   "It is not allowed to exchange more than %d wares per batch.",
 			                   Widelands::kMaxWaresPerBatch),
 			          Widelands::kMaxWaresPerBatch));
+			return;
+		}
+
+		if (!conflicts.empty()) {
+			ok_.set_enabled(false);
+			ok_.set_tooltip(format(_("You cannot both send and receive the same ware type (%s)."),
+			                       i18n::localize_list(conflicts, i18n::ConcatenateWith::AND)));
 			return;
 		}
 
