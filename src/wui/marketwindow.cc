@@ -203,11 +203,19 @@ private:
 		int32_t count1 = 0;
 		int32_t count2 = 0;
 		for (const Widelands::WareAmount& w1 : b1) {
-			count1 += w1.second;
+			if (w1.second < Widelands::kMaxWaresPerBatch) {
+				count1 += w1.second;
+			} else {  // integer overflow protection
+				count1 = Widelands::kMaxWaresPerBatch;
+			}
 			set1.insert(w1.first);
 		}
 		for (const Widelands::WareAmount& w2 : b2) {
-			count2 += w2.second;
+			if (w2.second < Widelands::kMaxWaresPerBatch) {
+				count2 += w2.second;
+			} else {  // integer overflow protection
+				count2 = Widelands::kMaxWaresPerBatch;
+			}
 			if (set1.count(w2.first) != 0) {
 				conflicts.emplace_back(
 				   iplayer_.egbase().descriptions().get_ware_descr(w2.first)->descname());

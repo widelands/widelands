@@ -695,10 +695,10 @@ std::string TradeInstance::check_illegal() const {
 		return format("Bad number of batches %d", num_batches);
 	}
 
-	int c = 0;
+	int32_t c = 0;
 	for (const WareAmount& pair : items_to_send) {
-		if (pair.second < 1) {
-			return format("Sending %d items of ware %d", pair.second, pair.first);
+		if (pair.second < 1 || pair.second > kMaxWaresPerBatch) {
+			return format("Sending %u items of ware %d", pair.second, pair.first);
 		}
 		c += pair.second;
 	}
@@ -711,8 +711,8 @@ std::string TradeInstance::check_illegal() const {
 
 	c = 0;
 	for (const WareAmount& pair : items_to_receive) {
-		if (pair.second < 1) {
-			return format("Receiving %d items of ware %d", pair.second, pair.first);
+		if (pair.second < 1 || pair.second > kMaxWaresPerBatch) {
+			return format("Receiving %u items of ware %d", pair.second, pair.first);
 		}
 		c += pair.second;
 	}
