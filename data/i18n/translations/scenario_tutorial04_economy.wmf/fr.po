@@ -4,6 +4,7 @@
 # Translators:
 # David D, 2021,2023
 # GunChleoc, 2016
+# François Ch., 2025
 # Jaypad <ju-ju@nataju.fr>, 2015
 # Julien Schneider <schneider.julien@gmail.com>, 2020
 # Renaud Bouchard, 2016-2020,2024
@@ -15,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-05-19 03:23+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: Renaud Bouchard, 2016-2020,2024\n"
+"Last-Translator: François Ch., 2025\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -985,7 +986,7 @@ msgstr "Chaque entrepôt dispose de quatre boutons pour fixer vos préférences.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:641
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:722
 msgid "Trading"
-msgstr ""
+msgstr "Commercer"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:567
 msgid ""
@@ -993,14 +994,14 @@ msgid ""
 " can build up our fortifications. However, it turns out that there is indeed"
 " a tribe of Frisians living in this wasteland, and they’re peaceful. They "
 "have asked to trade with us."
-msgstr ""
+msgstr "Bien. Nous disposons maintenant de suffisamment de colonnes de marbre pour que, en cas d'agression, nous puissions ériger nos fortifications. En revanche, il s'avère qu'une tribu de Frisiens vit bel et bien dans ces terres désolées et que ceux-ci sont pacifiques. Ils ont demandé à pouvoir commercer avec nous."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:568
 msgid ""
 "Since Widelands is all about building up rather than burning down, trading "
 "is a much better way to interact with other tribes than to invade their "
 "land. So let’s trade."
-msgstr ""
+msgstr "Puisque Widelands consiste plutôt à contruire qu'à incendier, le commerce est un moyen bien meilleur d'interagir avec d'autres tribus que d'envahir leur territoire. Donc commerçons."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:577
 msgid ""
@@ -1008,20 +1009,20 @@ msgid ""
 "player negotiate about which wares you wish to exchange with each other, and"
 " how many of them. But I’ll walk you through the process step by step. "
 "First, you need to build a market."
-msgstr ""
+msgstr "Les échanges sont organisés via les marchés. Dès que vous possédez un marché, les autres joueurs et vous négociez quelles marchandises vous souhaitez échanger l'un avec l'autre et quelle quantité de chacune. Je vais vous accompagner durant le processus, un pas après l'autre. D'abord, vous devez construire un marché."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:584
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:586
 msgid "Build a market"
-msgstr ""
+msgstr "Construisez un marché"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:587
 msgid "Build a market near the wasteland."
-msgstr ""
+msgstr "Construisez un marché à proximité des terres désolées"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:588
 msgid "The market is a big building."
-msgstr ""
+msgstr "Le marché est un bâtiment imposant"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:597
 msgid ""
