@@ -18,6 +18,8 @@
 
 #include "editor/ui_menus/main_menu_load_map.h"
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "base/string.h"
 #include "editor/editorinteractive.h"
@@ -32,7 +34,6 @@
  */
 MainMenuLoadMap::MainMenuLoadMap(EditorInteractive& parent, UI::UniqueWindow::Registry& registry)
    : MainMenuLoadOrSaveMap(parent, registry, "load_map_menu", _("Load Map"), true) {
-	set_current_directory(curdir_);
 
 	table_.selected.connect([this](unsigned /* value */) { entry_selected(); });
 	table_.double_clicked.connect([this](unsigned /* value */) { clicked_ok(); });
@@ -40,7 +41,7 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive& parent, UI::UniqueWindow::Re
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 	cancel_.sigclicked.connect([this]() { die(); });
 
-	fill_table();
+	navigate_directory(curdir_, kMapsDir);
 	layout();
 
 	initialization_complete();
@@ -50,12 +51,11 @@ void MainMenuLoadMap::clicked_ok() {
 	if (!ok_.enabled() || !table_.has_selection()) {
 		return;
 	}
-	const MapData& mapdata = maps_data_[table_.get_selected()];
+	const MapData& mapdata = table_.get_selected_data();
 	assert(!mapdata.filenames.empty());
 	if (g_fs->is_directory(mapdata.filenames.at(0)) &&
 	    !Widelands::WidelandsMapLoader::is_widelands_map(mapdata.filenames.at(0))) {
-		set_current_directory(mapdata.filenames);
-		fill_table();
+		navigate_directory(mapdata.filenames, mapdata.localized_name);
 	} else {
 		assert(mapdata.filenames.size() == 1);
 		// Prevent description notes from reaching a subscriber
@@ -74,10 +74,41 @@ void MainMenuLoadMap::set_current_directory(const std::vector<std::string>& file
 	assert(!filenames.empty());
 	curdir_ = filenames;
 
-	std::string display_dir = curdir_.at(0).substr(basedir_.size());
+	std::string display_dir = curdir_.at(0);
+	if (starts_with(display_dir, basedir_)) {
+		replace_first(display_dir, basedir_, "");
+	} else if (starts_with(display_dir, kAddOnDir)) {
+		std::vector<std::string> result;
+		split(result, display_dir, {'/'});
+		assert(result.size() > 2);
+
+		/* translate directory names */
+		std::string& addon = result.at(1);
+		std::unique_ptr<i18n::GenericTextdomain> td(AddOns::create_textdomain_for_addon(addon));
+		std::string profilepath = kAddOnDir;
+		profilepath += FileSystem::file_separator();
+		profilepath += addon;
+		profilepath += FileSystem::file_separator();
+		profilepath += "dirnames";
+		Profile p(profilepath.c_str());
+
+		/* strip away addons/<addon-name>/ */
+		result.erase(result.begin(), result.begin() + 2);
+
+		if (Section* s = p.get_section("global")) {
+			for (auto& fname : result) {
+				if (s->has_val(fname.c_str())) {
+					fname = s->get_safe_string(fname);
+				}
+			}
+		}
+		display_dir = join(result, "/");
+	}
+
 	if (starts_with(display_dir, "/")) {
 		display_dir = display_dir.substr(1);
 	}
+
 	if (starts_with(display_dir, kMyMapsDir)) {
 		replace_first(display_dir, kMyMapsDir, _("My Maps"));
 	} else if (starts_with(display_dir, kMultiPlayerScenarioDir)) {
@@ -95,13 +126,9 @@ void MainMenuLoadMap::set_current_directory(const std::vector<std::string>& file
  * Called when a entry is selected
  */
 void MainMenuLoadMap::entry_selected() {
-	bool has_selection = table_.has_selection();
-	if (!has_selection) {
-		ok_.set_enabled(false);
-		map_details_.clear();
-	} else {
+	if (set_has_selection()) {
 		ok_.set_enabled(map_details_.update(
-		   maps_data_[table_.get_selected()],
+		   table_.get_selected_data(),
 		   display_mode_.get_selected() == MapData::DisplayType::kMapnamesLocalized, true));
 	}
 }

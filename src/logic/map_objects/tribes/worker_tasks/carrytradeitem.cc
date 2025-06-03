@@ -35,7 +35,9 @@ void Worker::start_task_carry_trade_item(Game& game,
 	auto& state = top_state();
 	state.ivar1 = 0;
 	state.ivar2 = trade_id;
+	state.ivar3 = 0;
 	state.objvar1 = other_market;
+	state.coords = dynamic_cast<Market&>(*get_location(game)).base_flag().get_position();
 }
 
 // This is a state machine: leave building, go to the other market, drop off
@@ -45,9 +47,17 @@ void Worker::carry_trade_item_update(Game& game, State& state) {
 	std::string signal = get_signal();
 	signal_handled();
 	if (!signal.empty()) {
-		// TODO(sirver,trading): Remove once signals are correctly handled.
-		log_dbg_time(
-		   game.get_gametime(), "carry_trade_item_update: signal received: %s\n", signal.c_str());
+		if (signal == "trade") {
+			molog(
+			   game.get_gametime(),
+			   "carry_trade_item_update: trade interrupted in phase %d, will pop task after delivery",
+			   state.ivar1);
+			state.ivar3 = 1;
+		} else {
+			// TODO(sirver,trading): Remove once signals are correctly handled.
+			log_dbg_time(
+			   game.get_gametime(), "carry_trade_item_update: signal received: %s\n", signal.c_str());
+		}
 	}
 
 	// First of all, make sure we're outside
@@ -57,25 +67,40 @@ void Worker::carry_trade_item_update(Game& game, State& state) {
 		return;
 	}
 
-	auto* other_market = dynamic_cast<Market*>(state.objvar1.get(game));
+	Market* other_market = dynamic_cast<Market*>(state.objvar1.get(game));
+
+	if (other_market == nullptr && state.ivar1 < 3) {
+		molog(game.get_gametime(), "carry_trade_item_update: Destination market vanished!");
+		state.ivar1 = 3;  // Jump ahead to returning home without delivering the ware.
+	}
+
 	if (state.ivar1 == 1) {
 		// Arrived on site. Move to the building and advance our state.
 		if (other_market->base_flag().get_position() == get_position()) {
+			molog(game.get_gametime(), "carry_trade_item_update: Entering destination market.");
 			++state.ivar1;
 			return start_task_move(
 			   game, WALK_NW, descr().get_right_walk_anims(does_carry_ware(), this), true);
 		}
 
 		// Otherwise continue making progress towards the other market.
-		if (!start_task_movepath(game, other_market->base_flag().get_position(), 5,
-		                         descr().get_right_walk_anims(does_carry_ware(), this))) {
-			molog(game.get_gametime(), "carry_trade_item_update: Could not move to other flag.\n");
-			// TODO(sirver,trading): something needs to happen here.
+		if (start_task_movepath(game, other_market->base_flag().get_position(), 5,
+		                        descr().get_right_walk_anims(does_carry_ware(), this))) {
+			return;
 		}
-		return;
+
+		molog(game.get_gametime(),
+		      "carry_trade_item_update: Could not move to other flag! Cancelling trade.");
+
+		game.cancel_trade(state.ivar2, false, get_owner());
+
+		// Fall through to return
+		state.ivar1 = 3;
+		state.ivar3 = 1;
 	}
 
 	if (state.ivar1 == 2) {
+		molog(game.get_gametime(), "carry_trade_item_update: Delivering ware.");
 		WareInstance* const ware = fetch_carried_ware(game);
 		other_market->traded_ware_arrived(state.ivar2, ware->descr_index(), &game);
 		ware->remove(game);
@@ -86,16 +111,40 @@ void Worker::carry_trade_item_update(Game& game, State& state) {
 
 	if (state.ivar1 == 3) {
 		++state.ivar1;
-		start_task_return(game, false);
+
+		if (get_location(game) != nullptr && state.ivar3 == 0) {
+			return start_task_return(game, true);
+		}
+
+		// The market is gone, return to saved coords instead.
+		molog(
+		   game.get_gametime(), "carry_trade_item_update: Market is gone, returning to last coords.");
+
+		if (!start_task_movepath(
+		       game, state.coords, 5, descr().get_right_walk_anims(does_carry_ware(), this))) {
+			molog(
+			   game.get_gametime(), "carry_trade_item_update: Could not find a path to last coords!");
+			reset_tasks(game);
+			// The worker will become fugitive on the next act() call.
+		}
+
 		return;
 	}
 
 	if (state.ivar1 == 4) {
 		pop_task(game);
-		start_task_idle(game, 0, -1);
-		dynamic_cast<Market*>(get_location(game))->try_launching_batch(&game);
+		if (upcast(Market, market, get_location(game)); market != nullptr && state.ivar3 == 0) {
+			molog(game.get_gametime(), "carry_trade_item_update: Returned home.");
+			start_task_idle(game, 0, -1);
+			market->try_launching_batch(&game);
+		} else {
+			molog(game.get_gametime(),
+			      "carry_trade_item_update: Completed delivery; disassociated from market.\n");
+			reset_tasks(game);
+		}
 		return;
 	}
+
 	NEVER_HERE();
 }
 
