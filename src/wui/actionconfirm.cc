@@ -604,7 +604,7 @@ TradeExtensionDialog::TradeExtensionDialog(InteractivePlayer& parent, Widelands:
               _("Batches:"),
               1,
               1,
-              100) {
+              Widelands::kMaxBatches) {
 	custom_content_box_->add(&batches_, UI::Box::Resizing::kFullSize);
 
 	initialization_complete();
