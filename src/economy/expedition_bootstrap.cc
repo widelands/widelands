@@ -79,9 +79,9 @@ void ExpeditionBootstrap::start() {
 
 	// Load the buildcosts for the port building + builder
 	Warehouse* const warehouse = portdock_->get_warehouse();
-	Warehouse* const default_port = port_->get_warehouse();
+	const Widelands::TribeDescr& tribe = warehouse->owner().tribe();
 
-	const std::map<DescriptionIndex, uint8_t>& buildcost = default_port->descr().buildcost();
+	const std::map<DescriptionIndex, uint8_t>& buildcost = tribe.get_building_descr(tribe.port())->buildcost();
 	size_t const buildcost_size = buildcost.size();
 
 	// Issue request for wares for this expedition.
