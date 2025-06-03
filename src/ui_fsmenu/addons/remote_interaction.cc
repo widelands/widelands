@@ -142,6 +142,8 @@ void CommentRow::layout() {
 	}
 	layouting_ = true;
 
+	// TODO(Nordfriese): Integrate this logic into MultilineTextarea to make it play nice with Boxes
+
 	// First step: Figure out how much width we have available
 	text_wrapper_.set_desired_size(5, 5);
 	set_size(get_w(), 5);
