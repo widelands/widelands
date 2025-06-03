@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -224,7 +224,14 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool /*success
 	}
 
 	// Check if one step has completed
-	if (game.get_gametime() >= work_steptime_ && working_) {
+	if (working_) {
+		if (game.get_gametime() < workstep_completiontime_) {
+			worker.start_task_idle(game, worker.descr().get_animation("work", &worker),
+			                       (workstep_completiontime_ - game.get_gametime()).get());
+			return true;
+		}
+		// TODO(hessenfarmer): cause "demolition sounds" to be played -
+		// perhaps dependent on kind of dismantled building?
 		++work_completed_;
 
 		for (WaresQueue* wq : consume_wares_) {
@@ -257,7 +264,7 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool /*success
 		   game, WALK_SE, worker.descr().get_right_walk_anims(false, &worker), true);
 		worker.set_location(nullptr);
 	} else if (!working_) {
-		work_steptime_ = game.get_gametime() + kDismantlesiteStepTime;
+		workstep_completiontime_ = game.get_gametime() + kDismantlesiteStepTime;
 		worker.start_task_idle(
 		   game, worker.descr().get_animation("work", &worker), kDismantlesiteStepTime.get());
 

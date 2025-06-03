@@ -2,7 +2,7 @@
 --                                 Player 1
 -- =======================================================================
 p1:allow_buildings("all")
-p1:forbid_buildings({"frisians_dikers_house"})
+p1:forbid_buildings({"frisians_dikers_house", "frisians_market"})
 hq = p1:place_building("frisians_port", map.player_slots[1].starting_field, false, true)
 hq.destruction_blocked = true
 hq:set_wares {
@@ -56,6 +56,7 @@ p2:forbid_buildings {
    "atlanteans_port",
    "atlanteans_shipyard",
    "atlanteans_castle",
+   "atlanteans_market",
 }
 
 hq = p2:place_building("atlanteans_headquarters", map.player_slots[2].starting_field, false, true)
@@ -130,6 +131,7 @@ p3:forbid_buildings {
    "empire_port",
    "empire_shipyard",
    "empire_fortress",
+   "empire_market",
 }
 
 hq = p3:place_building("empire_port_large", map.player_slots[3].starting_field, false, true)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2024 by the Widelands Development Team
+ * Copyright (C) 2011-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -546,7 +546,7 @@ void ShipWindow::act_rename() {
 		return;
 	}
 	if (Widelands::Game* game = ibase_.get_game()) {
-		game->send_player_ship_port_name(
+		game->send_player_building_name(
 		   ship->owner().player_number(), ship->serial(), name_field_->get_text());
 	} else {
 		ship->set_shipname(name_field_->get_text());

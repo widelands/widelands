@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,6 +29,7 @@
 #include "base/random.h"
 #include "base/time_string.h"
 #include "base/warning.h"
+#include "base/wexception.h"
 #include "build_info.h"
 #include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
@@ -268,10 +269,20 @@ void MainMenu::main_loop() {
 			return;  // We only get here though normal termination by the user.
 		} catch (const WLWarning& e) {
 			// WLWarning is reserved for bad circumstances that are (most likely) not a bug.
+			// But they still should make the regression test suite fail.
+			if (g_fail_on_errors) {
+				log_warn("Something went wrong. The error message is:\n%s", e.what());
+				abort();
+			}
 			show_messagebox(e.title(), e.what());
 		} catch (const std::exception& e) {
 			// This is the outermost wrapper within the GUI and should only very rarely be reached.
 			// Most likely we got here through a bug in Widelands.
+			if (g_fail_on_errors) {
+				log_err("An error has occured. The error message is:\n%s", e.what());
+				log_err("Please report this problem to help us improve Widelands.");
+				abort();
+			}
 			show_messagebox(
 			   _("Error!"),
 			   format(
@@ -573,13 +584,13 @@ void MainMenu::abort_splashscreen() {
 
 void MainMenu::think() {
 	UI::Panel::think();
-	plugin_timers_->think();
+	plugin_actions_->think();
 }
 
 void MainMenu::reinit_plugins() {
 	lua_.reset(new LuaFsMenuInterface(this));
-	plugin_timers_.reset(
-	   new PluginTimers(this, [this](const std::string& cmd) { lua_->interpret_string(cmd); }));
+	plugin_actions_.reset(
+	   new PluginActions(this, [this](const std::string& cmd) { lua_->interpret_string(cmd); }));
 
 	for (const auto& pair : AddOns::g_addons) {
 		if (pair.second && pair.first->category == AddOns::AddOnCategory::kUIPlugin) {
@@ -619,15 +630,19 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 		return true;
 	}
 
-	if (down) {
-		if (splash_state_ != SplashState::kDone) {
-			abort_splashscreen();
-			if (matches_shortcut(KeyboardShortcut::kMainMenuQuit, code)) {
-				// don't initiate quitting in this case
-				return true;
-			}
+	if (splash_state_ != SplashState::kDone && down) {
+		abort_splashscreen();
+		if (matches_shortcut(KeyboardShortcut::kMainMenuQuit, code)) {
+			// don't initiate quitting in this case
+			return true;
 		}
+	}
 
+	if (plugin_actions_->check_keyboard_shortcut_action(code, down)) {
+		return true;
+	}
+
+	if (down) {
 		auto check_match_shortcut = [this, &code](KeyboardShortcut k, MenuTarget t) {
 			if (matches_shortcut(k, code)) {
 				action(t);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2024 by the Widelands Development Team
+ * Copyright (C) 2007-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,8 +40,9 @@ namespace Widelands {
 /* Changelog:
  * 5: v1.1
  * 6: Removed obsolete data fields time_triangle_last_surveyed and resource_amounts.
+ * 7: changes ConstructionsiteInfoPacket
  */
-constexpr uint16_t kCurrentPacketVersion = 6;
+constexpr uint16_t kCurrentPacketVersion = 7;
 
 /// Vision values for saveloading. We only care about PreviouslySeen and Revealed states here,
 /// the details about current player objects' vision are reconstructed when loading map object data.
@@ -74,7 +75,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 		if (packet_version >= 3 && packet_version <= kCurrentPacketVersion) {
 			const PlayerNumber nr_players = fr.unsigned_8();
 			if (map.get_nrplayers() != nr_players) {
-				throw wexception("Wrong number of players. Expected %d but read %d from packet\n",
+				throw wexception("Wrong number of players. Expected %u but read %u from packet\n",
 				                 static_cast<unsigned>(map.get_nrplayers()),
 				                 static_cast<unsigned>(nr_players));
 			}
@@ -83,7 +84,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 			iterate_players_existing(p, nr_players, egbase, player) {
 				const unsigned player_no_from_packet = fr.unsigned_8();
 				if (p != player_no_from_packet) {
-					throw wexception("Wrong player number. Expected %d but read %d from packet\n",
+					throw wexception("Wrong player number. Expected %u but read %u from packet\n",
 					                 static_cast<unsigned>(p),
 					                 static_cast<unsigned>(player_no_from_packet));
 				}
@@ -150,7 +151,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 
 				if (seen_fields.size() != no_of_seen_fields) {
 					throw wexception("Read %" PRIuS
-					                 " unseen fields but detected %d when the packet was written\n",
+					                 " unseen fields but detected %u when the packet was written\n",
 					                 seen_fields.size(), static_cast<unsigned>(no_of_seen_fields));
 				}
 
@@ -277,9 +278,14 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 								   descriptions.get_building_descr(
 								      descriptions.safe_building_index(fr.string())));
 							}
-
-							field->constructionsite->totaltime = Duration(fr);
-							field->constructionsite->completedtime = Duration(fr);
+							if (packet_version >= 7 && packet_version <= kCurrentPacketVersion) {
+								field->constructionsite->progress_64k = fr.unsigned_32();
+							} else {
+								uint32_t totaltime = fr.unsigned_32();
+								uint32_t completedtime = fr.unsigned_32();
+								field->constructionsite->progress_64k =
+								   totaltime > 0 ? (completedtime << 16) / totaltime : 0;
+							}
 						}
 					}
 				}
@@ -473,8 +479,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 						fw.string(d->name());
 					}
 
-					field->constructionsite->totaltime.save(fw);
-					field->constructionsite->completedtime.save(fw);
+					fw.unsigned_32(field->constructionsite->progress_64k);
 				}
 			} else {
 				fw.string("");

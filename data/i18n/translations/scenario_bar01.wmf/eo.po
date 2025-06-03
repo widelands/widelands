@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:30+0000\n"
 "Last-Translator: Raúl Contreras, 2024\n"
 "Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/language/eo/)\n"
@@ -324,7 +324,7 @@ msgstr "La Aventuro Komenciĝas"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:142
 msgid "Thron sighs…"
-msgstr "Thron suspiras..."
+msgstr "Thron sopiras..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:144
@@ -344,7 +344,7 @@ msgstr "Miaj militistoj ĉasas tage kaj restas sendormaj nokte – aŭskultante 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:156
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
-msgstr ""
+msgstr "Ni povas vidi la furiozajn flamojn, kiuj englutas Al'thunran de ĉi tie, milojn da mejloj for."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:159
@@ -452,7 +452,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:223
 msgid "An old man says…"
-msgstr ""
+msgstr "Maljuna viro diras…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:225
@@ -480,11 +480,11 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:457
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:468
 msgid "The Advisor"
-msgstr ""
+msgstr "La Konsilanto"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:235
 msgid "Khantrukh notes…"
-msgstr ""
+msgstr "Khantrukh notas..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:237
@@ -515,7 +515,7 @@ msgstr "En la Nokto"
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:250
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:264
 msgid "Thron says…"
-msgstr ""
+msgstr "Thron diras..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:252
@@ -557,7 +557,7 @@ msgstr "La Alia Tago"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:278
 msgid "Thron says thoughtfully…"
-msgstr ""
+msgstr "Thron diras penseme..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:280
@@ -581,7 +581,7 @@ msgstr "La Ĵuro"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:289
 msgid "Thron looks furious…"
-msgstr ""
+msgstr "Thron aspektas furioza..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:291
@@ -610,7 +610,7 @@ msgstr "Via Lojala Kunulo"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:300
 msgid "Brave Boldreth steps to your side…"
-msgstr ""
+msgstr "Kuraĝa Boldreth paŝas al via flanko..."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:302
@@ -619,11 +619,11 @@ msgid ""
 " see the wisdom in doing so, yet my heart is yearning for a glorious return "
 "to Al’thunran. Too long have we waited while our brethren have fought on the"
 " battlefield, and our axes and swords have turned rusty over time."
-msgstr ""
+msgstr "Do vi volas prepari nin por pli longa restado en ĉi tiuj arbaroj, Thron? Bone, mi vidas la saĝecon en fari tion, tamen mia koro sopiras al glora reveno al Al'thunran. Tro longe ni atendis dum niaj fratoj batalis sur la bataloĉejo, kaj niaj hakiloj kaj glavoj rustiĝis kun la tempo."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:308
 msgid "Khantrukh joins in…"
-msgstr ""
+msgstr "Khantrukh aliĝas..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:310

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # D M <kamera001dm@gmail.com>, 2017
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-04-19 03:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
 "Last-Translator: Niklas Nordgren, 2022-2023\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -872,8 +872,8 @@ msgid ""
 "May Satul warm you, Jundlina. My name is Ostur and I construct ships. I have"
 " invented a new kind of ship: smaller than those we are used to, but much "
 "sturdier. If we build them correctly, I am confident that we can sail a much"
-" longer distance with them and maybe escape from Lutas’ influence."
-msgstr "Må Satul värma dig, Jundlina. Jag heter Ostur och jag bygger skepp. Jag har uppfunnit en ny sorts skepp: mindre än de vi är vana vid, men mycket stadigare. Om vi bygger dem ordentligt så är jag säker på att vi kan ta oss mycket längre än förut, och kanske komma undan Lutas inflytande."
+" longer distance with them and maybe escape from Lutas’s influence."
+msgstr ""
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:454

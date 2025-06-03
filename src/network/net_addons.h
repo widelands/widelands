@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2024 by the Widelands Development Team
+ * Copyright (C) 2020-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,6 +41,9 @@ struct NetAddons {
 	[[nodiscard]] const std::string& server_descname() const {
 		return server_descname_;
 	}
+	[[nodiscard]] uint32_t websitemaps_i18n_version() const {
+		return websitemaps_i18n_version_;
+	}
 
 	// Fetch the list of all available add-ons from the server
 	std::vector<std::string> refresh_remotes(bool all);
@@ -51,6 +54,7 @@ struct NetAddons {
 	// Downloads the add-on with the given name (e.g. "cool_feature.wad")
 	// from the server and downloads it to the given canonical location.
 	void download_addon(const std::string& name, const std::string& save_as, const CallbackFn&);
+	void download_map(const std::string& name, const std::string& save_as);
 
 	// Requests the PO files for the given add-on (cool_feature.wad) from the server and
 	// downloads them into the given temporary location (e.g. ~/.widelands/temp/some_dir).
@@ -117,6 +121,7 @@ private:
 	bool is_admin_{false};
 	size_t cached_remotes_{0U};
 	std::string server_descname_;
+	uint32_t websitemaps_i18n_version_{0U};
 	bool is_uploading_addon_{false};
 	bool timeout_was_suppressed_{false};
 	mutable std::string last_error_message_;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2024 by the Widelands Development Team
+ * Copyright (C) 2023-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,11 +30,11 @@
 
 namespace Widelands {
 class EditorGameBase;
+class Game;
 
 struct DetectedPortSpace {
-	DetectedPortSpace();
-	static void initialize_serial();
-	void set_serial(Serial s);
+	explicit DetectedPortSpace(Game& game);
+	void set_serial(Game& game, Serial s);
 
 	Serial serial;
 	Coords coords;

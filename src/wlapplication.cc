@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -418,8 +418,9 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_gr = new Graphic();
 	g_gr->initialize(
 	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
-	   get_config_int("xres", kDefaultResolutionW), get_config_int("yres", kDefaultResolutionH),
-	   get_config_bool("fullscreen", false), get_config_bool("maximized", false));
+	   get_config_int("display", -1), get_config_int("xres", kDefaultResolutionW),
+	   get_config_int("yres", kDefaultResolutionH), get_config_bool("fullscreen", false),
+	   get_config_bool("maximized", false));
 
 	{
 		// The window manager may resize the window on creation, so we have to handle resize events
@@ -656,6 +657,8 @@ void WLApplication::init_mouse_cursor() {
 }
 
 void WLApplication::initialize_g_addons() {
+	init_plugin_shortcuts();
+
 	AddOns::g_addons.clear();
 	if (g_fs->is_directory(kAddOnDir)) {
 		std::set<std::string> found;
@@ -774,7 +777,7 @@ static void init_one_player_from_template(unsigned p,
 	}
 	if (!found_init) {
 		throw wexception(
-		   "Invalid starting condition '%s' for player %d", init_script_name.c_str(), p + 1);
+		   "Invalid starting condition '%s' for player %u", init_script_name.c_str(), p + 1);
 	}
 }
 
@@ -955,7 +958,9 @@ void WLApplication::run() {
 				} else {
 					const std::string message = _("Widelands could not find the last edited map.");
 					log_err("%s\n", message.c_str());
-
+					if (g_fail_on_errors) {
+						abort();
+					}
 					menu.show_messagebox(_("No Last Edited Map"), message);
 					have_filename = false;
 				}
@@ -1009,6 +1014,9 @@ void WLApplication::run() {
 		if (!message.empty()) {
 			log_err("%s\n", message.c_str());
 			game.full_cleanup();
+			if (g_fail_on_errors) {
+				abort();
+			}
 			menu.show_messagebox(title, message);
 			menu.main_loop();
 		}
@@ -1017,6 +1025,9 @@ void WLApplication::run() {
 	case GameType::kScenario: {
 		Widelands::Game game;
 		try {
+			if (scenario_difficulty_ != Widelands::kScenarioDifficultyNotSet) {
+				game.set_scenario_difficulty(scenario_difficulty_);
+			}
 			game.run_splayer_scenario_direct({filename_}, script_to_run_);
 		} catch (const std::exception& e) {
 			emergency_save(&menu, game, e.what());
@@ -1387,6 +1398,80 @@ void WLApplication::init_language() {
 	i18n::set_locale(language);
 }
 
+void WLApplication::init_plugin_shortcuts() {
+	LuaInterface lua;
+	for (const std::string& name : g_fs->list_directory(kAddOnDir)) {
+		std::string path = name;
+		path += FileSystem::file_separator();
+		path += kAddOnKeyboardShortcutsFile;
+		if (g_fs->file_exists(path)) {
+			try {
+				std::unique_ptr<LuaTable> all_definitions(lua.run_script(path));
+				for (const auto& table : all_definitions->array_entries<std::unique_ptr<LuaTable>>()) {
+					std::string internal_name;
+					try {
+						internal_name = table->get_string("internal_name");
+						std::string descname = table->get_string("descname");
+
+						std::set<KeyboardShortcutScope> scopes;
+						std::unique_ptr<LuaTable> scopes_table = table->get_table("scopes");
+						for (const std::string& scope : scopes_table->array_entries<std::string>()) {
+							if (scope == "global") {
+								scopes.insert(KeyboardShortcutScope::kGlobal);
+							} else if (scope == "game") {
+								scopes.insert(KeyboardShortcutScope::kGame);
+							} else if (scope == "editor") {
+								scopes.insert(KeyboardShortcutScope::kEditor);
+							} else if (scope == "main_menu") {
+								scopes.insert(KeyboardShortcutScope::kMainMenu);
+							} else {
+								throw WLWarning("", "Invalid scope '%s'", scope.c_str());
+							}
+						}
+						if (scopes.empty()) {
+							throw WLWarning("", "No scopes");
+						}
+
+						std::string keycode_name = table->get_string("keycode");
+						SDL_Keycode default_shortcut = SDL_GetKeyFromName(keycode_name.c_str());
+						if (default_shortcut == SDLK_UNKNOWN) {
+							throw WLWarning("", "Invalid keycode '%s'", keycode_name.c_str());
+						}
+
+						int default_mods = 0;
+						if (table->has_key("mods")) {
+							std::unique_ptr<LuaTable> mods_table = table->get_table("mods");
+							for (const std::string& mod : mods_table->array_entries<std::string>()) {
+								if (mod == "ctrl" || mod == "control") {
+									default_mods |= KMOD_CTRL;
+								} else if (mod == "shift") {
+									default_mods |= KMOD_SHIFT;
+								} else if (mod == "alt") {
+									default_mods |= KMOD_ALT;
+								} else if (mod == "gui" || mod == "super" || mod == "meta" ||
+								           mod == "cmd" || mod == "command" || mod == "windows") {
+									default_mods |= KMOD_GUI;
+								} else {
+									throw WLWarning("", "Invalid modifier '%s'", mod.c_str());
+								}
+							}
+						}
+
+						create_replace_shortcut(
+						   internal_name, descname, scopes, keysym(default_shortcut, default_mods));
+					} catch (const std::exception& e) {
+						log_err("Error in plugin keyboard shortcut definition in '%s': '%s': %s",
+						        path.c_str(), internal_name.c_str(), e.what());
+					}
+				}
+			} catch (const std::exception& e) {
+				log_err("Error reading plugin keyboard shortcut definitions from '%s': %s",
+				        path.c_str(), e.what());
+			}
+		}
+	}
+}
+
 /**
  * Remember the last settings: write them into the config file
  */
@@ -1577,17 +1662,7 @@ void WLApplication::handle_commandline_parameters() {
 			}
 
 			if (sep_pos != build_id().size() || 0 != text.compare(0, sep_pos, build_id())) {
-				return std::string("Incorrect version string part");
-			}
-
-			text = text.substr(sep_pos + (text.at(sep_pos) == '\r' ? 2 : 1));
-			sep_pos = text.find_first_of("\n\r");
-			if (sep_pos == std::string::npos) {
-				return std::string("Malformed two-liner version string");
-			}
-
-			if (sep_pos != build_type().size() || 0 != text.compare(0, sep_pos, build_type())) {
-				return std::string("Incorrect type string part");
+				return std::string("Incorrect version string");
 			}
 		} catch (const std::exception& e) {
 			return std::string(e.what());
@@ -1701,6 +1776,31 @@ void WLApplication::handle_commandline_parameters() {
 		g_fail_on_lua_error = true;
 	}
 
+	if (OptionalParameter msg_timeout = get_commandline_option_value("messagebox-timeout");
+	    msg_timeout.has_value()) {
+		int64_t t;
+		if (!to_long(msg_timeout.value(), &t)) {
+			throw ParameterError(
+			   CmdLineVerbosity::None,
+			   format(_("Non-integer value for command line parameter --messagebox-timeout=%s"),
+			          msg_timeout.value()));
+		}
+		if (t <= 0) {
+			throw ParameterError(
+			   CmdLineVerbosity::None,
+			   ("Value for command line parameter --messagebox-timeout must be positive."));
+		}
+
+		g_message_box_timeout = 1000 * t;
+		if (g_message_box_timeout / 1000 != t) {
+			g_message_box_timeout = 0;
+			throw ParameterError(
+			   CmdLineVerbosity::None,
+			   format(_("Value is out of range for command line parameter --messagebox-timeout=%s"),
+			          msg_timeout.value()));
+		}
+	}
+
 	// Mutually exclusive options.
 	// These would be better as e.g. "--use_zip=[true|false]", but then we'd have to negate the
 	// boolean value stored in the string, but trueWords and falseWords are hidden in io/profile.cc.
@@ -1717,6 +1817,10 @@ void WLApplication::handle_commandline_parameters() {
 	}
 
 	// *** End of moved checks ***
+
+	if (check_commandline_flag("fail-on-errors")) {
+		g_fail_on_errors = true;
+	}
 
 	if (check_commandline_flag("verbose")) {
 		g_verbose = true;
@@ -1747,6 +1851,27 @@ void WLApplication::handle_commandline_parameters() {
 			// Strip trailing directory separator
 			filename_.erase(filename_.size() - 1);
 		}
+	}
+
+	if (OptionalParameter difficulty = get_commandline_option_value("difficulty");
+	    difficulty.has_value()) {
+		if (game_type_ != GameType::kScenario) {
+			throw ParameterError(
+			   CmdLineVerbosity::None,
+			   ("Command line parameter --difficulty can only be used with --scenario=..."));
+		}
+		int64_t d;
+		if (!to_long(difficulty.value(), &d)) {
+			throw ParameterError(
+			   CmdLineVerbosity::None,
+			   format(_("Non-integer value for command line parameter --difficulty=%s"),
+			          difficulty.value()));
+		}
+		if (d <= 0) {
+			throw ParameterError(CmdLineVerbosity::None,
+			                     ("Value for command line parameter --difficulty must be positive."));
+		}
+		scenario_difficulty_ = d;
 	}
 
 	if (OptionalParameter val = get_commandline_option_value("script"); val.has_value()) {
@@ -1866,6 +1991,9 @@ void WLApplication::emergency_save(UI::Panel* panel,
 
 	if (Widelands::UnhandledVersionError::is_unhandled_version_error(error)) {
 		// It's an incompatible savegame. Don't ask for a bug report, don't bother trying to save.
+		if (g_fail_on_errors) {
+			abort();
+		}
 		if (panel != nullptr) {
 			UI::WLMessageBox m(panel, UI::WindowStyle::kFsMenu, _("Incompatible"), error,
 			                   UI::WLMessageBox::MBoxType::kOk);
@@ -1880,6 +2008,9 @@ void WLApplication::emergency_save(UI::Panel* panel,
 		        "  You are using version %s.\n"
 		        "  Please add this information to your report.\n",
 		        build_ver_details().c_str());
+	}
+	if (g_fail_on_errors) {
+		abort();
 	}
 	log_err("  If desired, Widelands attempts to create an emergency savegame.\n"
 	        "  It is often – though not always – possible to load it and continue playing.\n"
@@ -2096,7 +2227,7 @@ bool WLApplication::redirect_output(std::string path) {
 	setvbuf(stdout, nullptr, _IOLBF, BUFSIZ);
 
 	/* No buffering */
-	setbuf(stderr, nullptr);
+	setbuf(stderr, nullptr);  // NOLINT(bugprone-unsafe-functions)
 
 	redirected_stdio_ = true;
 	return true;

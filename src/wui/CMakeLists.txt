@@ -61,8 +61,8 @@ wl_library(wui_common_plugins
     plugins.cc
   DEPENDS
     base
-    scripting_base
     ui_basic
+    widelands_options
   USES_SDL2
 )
 
@@ -262,6 +262,8 @@ wl_library(wui
     interactive_spectator.h
     itemwaresdisplay.cc
     itemwaresdisplay.h
+    marketwindow.cc
+    marketwindow.h
     militarysitewindow.cc
     militarysitewindow.h
     minimap.cc
@@ -334,7 +336,7 @@ wl_library(wui
     io_profile
     logic
     logic_constants
-    logic_commands
+    commands
     logic_exceptions
     logic_filesystem_constants
     logic_game_controller

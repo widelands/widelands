@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2024 by the Widelands Development Team
+ * Copyright (C) 2008-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "build_info.h"
+#include "commands/cmd_net_check_sync.h"
 #include "config.h"
 #include "game_io/game_loader.h"
 #include "io/fileread.h"
@@ -36,7 +37,6 @@
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
-#include "logic/playercommand.h"
 #include "logic/playersmanager.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/constants.h"
@@ -419,7 +419,7 @@ void GameClient::do_send_player_command(Widelands::PlayerCommand* pc) {
 	// TODO(Klaus Halfmann): should this be an assert?
 	if (pc->sender() == d->settings.playernum + 1)  //  allow command for current player only
 	{
-		verb_log_info("[Client]: enqueue playercommand at time %i\n", d->game->get_gametime().get());
+		verb_log_info("[Client]: enqueue playercommand at time %u\n", d->game->get_gametime().get());
 
 		d->send_player_command(pc);
 
@@ -735,7 +735,7 @@ const std::vector<ChatMessage>& GameClient::get_messages() const {
 void GameClient::send_time() {
 	assert(d->game);
 
-	verb_log_info("[Client]: sending timestamp: %i", d->game->get_gametime().get());
+	verb_log_info("[Client]: sending timestamp: %u", d->game->get_gametime().get());
 
 	SendPacket s;
 	s.unsigned_8(NETCMD_TIME);
@@ -856,6 +856,8 @@ void GameClient::handle_setting_map(RecvPacket& packet) {
 
 	// New map was set, so we clean up the buffer of a previously requested file
 	d->file_.reset(nullptr);
+
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 }
 
 /**
@@ -1114,7 +1116,8 @@ void GameClient::handle_syncrequest(RecvPacket& packet) {
 	}
 	const Time time(packet.unsigned_32());
 	d->time.receive(time);
-	d->game->enqueue_command(new CmdNetCheckSync(time, [this] { sync_report_callback(); }));
+	d->game->enqueue_command(
+	   new Widelands::CmdNetCheckSync(time, [this] { sync_report_callback(); }));
 	d->game->report_sync_request();
 }
 

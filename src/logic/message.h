@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,17 +31,29 @@ struct Message {
 	enum class Type : uint8_t {
 		kNoMessages,
 		kAllMessages,
+
 		kGameLogic,
+
 		kGeologists,
+
 		kScenario,
+
 		kSeafaring,
 		kEconomy,              // economy
 		kEconomySiteOccupied,  // economy
-		kWarfare,              // everything starting from here is warfare
+		kWarfare,              // warfare messages
 		kWarfareSiteDefeated,
 		kWarfareSiteLost,
 		kWarfareUnderAttack,
-		kTradeOfferReceived,
+		kWarfareEnd = kWarfareUnderAttack,  // end of warfare messages
+
+		kDiplomacyBegin,
+		kDiplomacy = kDiplomacyBegin,
+		kTrading,
+		kDiplomacyEnd = kTrading,
+
+		kEconomyLoadGame = 255,  // Only this type is allowed in game loading code,
+		                         // must not be used elsewhere.
 	};
 
 	/**
@@ -122,14 +134,24 @@ struct Message {
 	 * Returns the main type for the message's sub type
 	 */
 	[[nodiscard]] Message::Type message_type_category() const {
-		if (type_ >= Widelands::Message::Type::kWarfare) {
+		if (type_ >= Widelands::Message::Type::kWarfare &&
+		    type_ <= Widelands::Message::Type::kWarfareEnd) {
 			return Widelands::Message::Type::kWarfare;
 		}
-		if (type_ >= Widelands::Message::Type::kEconomy &&
-		    type_ <= Widelands::Message::Type::kEconomySiteOccupied) {
+		if (type_ >= Widelands::Message::Type::kDiplomacyBegin &&
+		    type_ <= Widelands::Message::Type::kDiplomacyEnd) {
+			return Widelands::Message::Type::kDiplomacy;
+		}
+		if (type_ == Widelands::Message::Type::kEconomy ||
+		    type_ == Widelands::Message::Type::kEconomySiteOccupied ||
+		    type_ == Widelands::Message::Type::kEconomyLoadGame) {
 			return Widelands::Message::Type::kEconomy;
 		}
 		return type_;
+	}
+
+	[[nodiscard]] bool allowed_during_game_loading() const {
+		return type_ == Widelands::Message::Type::kEconomyLoadGame;
 	}
 
 private:
@@ -145,6 +167,7 @@ private:
 	Widelands::Serial serial_;  // serial to map object
 	Status status_;
 };
+
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MESSAGE_H

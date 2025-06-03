@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2024 by the Widelands Development Team
+ * Copyright (C) 2020-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,10 +23,10 @@
 #include <SDL_timer.h>
 
 #include "base/time_string.h"
+#include "commands/cmd_message_set_status_archived.h"
 #include "graphic/font_handler.h"
 #include "graphic/text_layout.h"
 #include "logic/message_queue.h"
-#include "logic/playercommand.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/toolbar.h"
@@ -109,9 +109,14 @@ void MessagePreview::draw(RenderTarget& r) {
 bool MessagePreview::handle_mousepress(const uint8_t button, int32_t /* x */, int32_t /* y */) {
 	switch (button) {
 	case SDL_BUTTON_LEFT:  // center view
-		if ((message_ != nullptr) && (message_->position().valid())) {
-			owner_.ibase_.map_view()->scroll_to_field(
-			   message_->position(), MapView::Transition::Smooth);
+		if (message_ != nullptr) {
+			if (message_->position().valid()) {
+				owner_.ibase_.map_view()->scroll_to_field(
+				   message_->position(), MapView::Transition::Smooth);
+			} else if (owner_.iplayer_ != nullptr &&
+			           message_->message_type_category() == Widelands::Message::Type::kDiplomacy) {
+				owner_.iplayer_->diplomacy_.create();
+			}
 		}
 		break;
 	case SDL_BUTTON_MIDDLE:  // hide and delete message
@@ -483,6 +488,15 @@ void InfoPanel::think() {
 	}
 	if ((iplayer_ != nullptr) && (message_queue_ == nullptr)) {
 		message_queue_ = &iplayer_->player().messages();
+
+		// Check for unexpired messages and messages generated during loading the game
+		const uint32_t gametime = iplayer_->game().get_gametime().get();
+		const Time oldest_to_show(
+		   gametime > kMessagePreviewMaxLifetime ? gametime - kMessagePreviewMaxLifetime : 0u);
+		while (last_message_id_->value() > 0 &&
+		       (*message_queue_)[*last_message_id_]->sent() > oldest_to_show) {
+			*last_message_id_ = Widelands::MessageId(last_message_id_->value() - 1);
+		}
 	}
 
 	while ((message_queue_ != nullptr) &&

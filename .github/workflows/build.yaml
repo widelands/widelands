@@ -58,6 +58,7 @@ jobs:
             - 'utils/run-clang-tidy.py'
             - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_clang_tidy.yaml'
+            - '.clang-tidy'
           test_suite:
             - *ubuntu_dependencies
             - 'data/**' # TODO(aDiscoverer) list what needs to be checked
@@ -149,8 +150,10 @@ jobs:
           do
             [ "${ARTIFACT%%-*}" != "Widelands" ] && continue
             MATRIX=$(echo $ARTIFACT | sed 's/Widelands-[0-9a-f]*-//' -)
-            ls ../Widelands*/Widelands*${MATRIX} || \
+            if ! ls ../Widelands*/Widelands*${MATRIX} ; then
+              echo "::warning::Falling back to old artifact $ARTIFACT"
               curl -L -o $ARTIFACT "$RELEASE_URL/Widelands-daily-${MATRIX}"
+            fi
           done
       - name: List and rename artifacts
         run: |

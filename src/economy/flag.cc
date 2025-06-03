@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2024 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1038,7 +1038,7 @@ void Flag::log_general_info(const Widelands::EditorGameBase& egbase) const {
 		molog(egbase.get_gametime(), "Wares at flag:\n");
 		for (int i = 0; i < ware_filled_; ++i) {
 			PendingWare& pi = wares_[i];
-			molog(egbase.get_gametime(), " %i/%i: %s(%i), nextstep %i, %s\n", i + 1, ware_capacity_,
+			molog(egbase.get_gametime(), " %i/%i: %s(%u), nextstep %u, %s\n", i + 1, ware_capacity_,
 			      pi.ware->descr().name().c_str(), pi.ware->serial(), pi.nextstep.serial(),
 			      pi.pending ? "pending" : "acked by carrier");
 		}

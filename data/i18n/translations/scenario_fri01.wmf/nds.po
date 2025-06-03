@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2024
+# Benedikt Straub <benedikt-straub@web.de>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2024\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2025\n"
 "Language-Team: Low German (https://app.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,7 +41,7 @@ msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
 msgstr ""
-"Bau tominnst eene Boomslageree un twee Förster-Husen, um Boomstammen to "
+"Bau tominnst een Boomslagerhuus un twee Försterhusen, um Boomstammen to "
 "produzeren, un eene Reitbuurderee, um Reit antobauen."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:33
@@ -118,7 +118,7 @@ msgid ""
 "Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
 "collector’s house."
 msgstr ""
-"Bau eene Kneipe, eene Fiskeree, eene Rökelkamer, eene Buskenplanteree un "
+"Bau eene Kneipe, een Fiskerhuus, eene Rökelkamer, eene Buskenplanteree un "
 "eene Früchtenpottjeree."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:64
@@ -226,8 +226,8 @@ msgid ""
 "Build a port, a weaving mill and a shipyard, then start an expedition to "
 "flee before the storm flood drowns the island."
 msgstr ""
-"Bau eene Muu, eene Spinnweelmöhlen un eene Warft; fang dann eene Söök an, um"
-" to flüchten ehr de Störmflood de Hallig överswemmt."
+"Bau eene Muu, eenen Weevstohl un eene Warft; fang dann eene Söök an, um to "
+"flüchten ehr de Störmflood de Hallig överswemmt."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:116
 msgid ""
@@ -564,9 +564,9 @@ msgid ""
 " a fruit collector’s house so the bushes will be harvested."
 msgstr ""
 "Wi bruken eene Kneipe, um Happen torechttomaken. Um dat ruge Eten to kriegen"
-" bruken wi eene Fiskeree, un wiel nüms rugen Fiss mag, eene Rökelkamer, um "
-"’t to rökeln. Bau ok eene Buskenplanteree, de Busken för Früchten anplant, "
-"un eene Früchtenpottjeree, um de Busken to arnten."
+" bruken wi een Fiskerhuus, un um dat, dat nüms rugen Fiss mag, eene "
+"Rökelkamer, um ’t to rökeln. Bau ok eene Buskenplanteree, de Busken för "
+"Früchten anplant, un eene Früchtenpottjeree, um de Busken to arnten."
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:223
@@ -1084,9 +1084,9 @@ msgid ""
 "make haste!"
 msgstr ""
 "De Störmflood kummt wull vun Westen her. Wenn wi futtmaken, könen wi ’t "
-"knapp schaffen! Wi mutten nix as eene Muu un eene Warft bauen – och, un eene"
-" Spinnweelmöhlen, um ut Reit un Fell de starken Stoff för de Seils to weven."
-" Dann könen wi an de Muu eene Söök utrüsten. Beedt to de Gotten un maakt to!"
+"knapp schaffen! Wi mutten nix as eene Muu un eene Warft bauen – och, un "
+"eenen Weevstohl, um ut Reit un Fell de starken Stoff för de Seils to weven. "
+"Dann könen wi an de Muu eene Söök utrüsten. Beedt to de Gotten un maakt to!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Don’t Forget the Soldiers"

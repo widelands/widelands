@@ -3,7 +3,7 @@
 /*
  * FILE:	sha2.c
  * AUTHOR:	Aaron D. Gifford <me@aarongifford.com>
- * 
+ *
  * Copyright (c) 2000-2001, Aaron D. Gifford
  * All rights reserved.
  *
@@ -18,7 +18,7 @@
  * 3. Neither the name of the copyright holder nor the names of contributors
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTOR(S) ``AS IS'' AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -464,11 +464,11 @@ SHA256Transform(uint32_t state[8], const uint8_t data[SHA256_BLOCK_LENGTH])
 		/* Part of the message block expansion: */
 		s0 = W256[(j+1)&0x0f];
 		s0 = sigma0_256(s0);
-		s1 = W256[(j+14)&0x0f];	
+		s1 = W256[(j+14)&0x0f];
 		s1 = sigma1_256(s1);
 
 		/* Apply the SHA-256 compression function to update a..h */
-		T1 = h + Sigma1_256(e) + Ch(e, f, g) + K256[j] + 
+		T1 = h + Sigma1_256(e) + Ch(e, f, g) + K256[j] +
 		     (W256[j&0x0f] += s1 + W256[(j+9)&0x0f] + s0);
 		T2 = Sigma0_256(a) + Maj(a, b, c);
 		h = g;

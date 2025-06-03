@@ -215,7 +215,7 @@
 --    singular and plural strings. Additionally, it is necessary to specify an ``npgettext`` call for all four types of soldier strings
 --    so as to ensure that all keys appear in the PO files. The ``npgettext`` results (i.e. the translated pluralized strings for an arbitrary constant)
 --    are unused; the actual use is performed later in C++. Their table keys must be prefixed with ``UNUSED_``; the rest of the name is irrelevant.
---    The strings themselves **must not** derivate from the template below in anything other than the name of the soldier.
+--    The strings themselves **must not** deviate from the template below in anything other than the name of the soldier.
 --    Make sure that the unlocalized string constants are exactly identical to the strings in the ``npgettext`` dummy calls.
 --    Example:
 --
@@ -330,8 +330,6 @@
 --   as with the ``performance`` example above.
 --   The helptexts are then joined by the engine.
 --   In our example, we will get *"If all needed wares are delivered in time, this building can produce each type of ax in about 57 seconds on average. All three weapons take the same time for making, but the required raw materials vary."*
-
-descriptions = wl.Descriptions() -- TODO(matthiakl): only for savegame compatibility with 1.0, do not use.
 
 image_dirname = path.dirname(__file__) .. "images/"
 
@@ -465,20 +463,20 @@ wl.Descriptions():new_tribe {
          },
          {
             name = "spider_silk",
-            default_target_quantity = 10,
+            default_target_quantity = 15,
             preciousness = 11,
             helptexts = {
                -- TRANSLATORS: Helptext for an Atlantean ware: Spider Silk
-               purpose = pgettext("atlanteans_ware", "Spider silk is produced by spiders, which are bred by spider farms. It is processed into spidercloth or tabards in a weaving mill.")
+               purpose = pgettext("atlanteans_ware", "Spider silk is produced by spiders, which are bred by spider farms. It can be processed into spidercloth or tabards in a weaving mill, or used to make tools in the toolsmithy.")
             }
          },
          {
             name = "spidercloth",
-            default_target_quantity = 20,
+            default_target_quantity = 15,
             preciousness = 7,
             helptexts = {
                -- TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
-               purpose = pgettext("atlanteans_ware", "Spidercloth is made out of spider silk in a weaving mill. It is used in the toolsmithy and the shipyard. Also some higher developed buildings need spidercloth for their construction.")
+               purpose = pgettext("atlanteans_ware", "Spidercloth is made out of spider silk in a weaving mill. It is used in the shipyard. Also some higher developed buildings need spidercloth for their construction.")
             }
          },
       },
@@ -1469,6 +1467,15 @@ wl.Descriptions():new_tribe {
          }
       },
 
+      -- Markets
+      {
+         name = "atlanteans_market",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an Atlantean market: Market
+            purpose = pgettext("atlanteans_building", "A market enables trading with other tribes.")
+         }
+      },
+
       -- Small
       {
          name = "atlanteans_quarry",
@@ -1803,7 +1810,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an Atlantean production site: Horse Farm
             lore = pgettext("atlanteans_building", "I walk all day just back and forth. I need? I need … I need a horse!"),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Horse Farm
-            lore_author = pgettext("atlanteans_building", "Busy carrier murmuring to himself")
+            lore_author = pgettext("atlanteans_building", "Busy carrier murmuring to himself"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Horse Farm
+            performance = pgettext("atlanteans_building", "If all needed wares are delivered in time, this building can produce a horse in %s on average."):bformat(format_seconds(30))
          }
       },
       {
@@ -1815,8 +1824,12 @@ wl.Descriptions():new_tribe {
             lore = pgettext("atlanteans_building", "I use my feet, I use my arm, I’m caring for this farm!"),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Farm
             lore_author = pgettext("atlanteans_building", "Atlantean harvesting song"),
-            -- TRANSLATORS: Performance helptext for an Atlantean production site: Farm
-            performance = pgettext("atlanteans_building", "The farmer needs %1% on average to sow and harvest a sheaf of corn."):bformat(format_minutes_seconds(1, 20))
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Farm, part 1
+               pgettext("atlanteans_building", "The farmer sows and harvests one sheaf of corn between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(54), format_minutes_seconds(1, 23)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Farm, part 2; %s is replaced by 'N growing fields'
+               pgettext("atlanteans_building", "The farm needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 4):bformat(4))
+            }
          }
       },
       {
@@ -1829,8 +1842,12 @@ wl.Descriptions():new_tribe {
                      "It’s not spinach, it’s not a carrot, it’s … a secret."),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Blackroot Farm
             lore_author = pgettext("atlanteans_building", "Blackroot farmer asked by a foreigner"),
-            -- TRANSLATORS: Performance helptext for an Atlantean production site: Blackroot Farm
-            performance = pgettext("atlanteans_building", "The blackroot farmer needs %1% on average to sow and harvest a bundle of blackroot."):bformat(format_minutes_seconds(1, 20))
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Blackroot Farm, part 1
+               pgettext("atlanteans_building", "The blackroot farmer sows and harvests one bundle of blackroot between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(59), format_minutes_seconds(1, 28)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Blackroot Farm, part 2; %s is replaced by 'N growing fields'
+               pgettext("atlanteans_building", "The blackroot farm needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 4):bformat(4))
+            }
          }
       },
       {
@@ -1843,7 +1860,7 @@ wl.Descriptions():new_tribe {
                                                    "We put them on a special device to gain the spider silk once a day. There is no need to spin this again. " ..
                      "The thread can directly be used by the weaving mill. Oh hello, here is one of our nice spiders … Hey! Why are you running away?"),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Spider Farm
-            lore_author = pgettext("atlanteans_building", "A spider breeder showing his farm")
+            lore_author = pgettext("atlanteans_building", "A spider breeder showing her farm")
 
          }
       },
@@ -1936,11 +1953,17 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Purpose helptext for an Atlantean training site: Dungeon, part 2
                pgettext("atlanteans_building", "Equips the soldiers with all necessary weapons and armor parts.")
             },
-            -- TRANSLATORS: Lore helptext for an Atlantean production site: Dungeon
+            -- TRANSLATORS: Lore helptext for an Atlantean training site: Dungeon
             lore = pgettext("atlanteans_building", "Make our enemies feel the pain, so enter here to gain your train!"),
-            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Dungeon
-            lore_author = pgettext("atlanteans_building", "Engraving on the entrance to the dungeon")
-    }
+            -- TRANSLATORS: Lore author helptext for an Atlantean training site: Dungeon
+            lore_author = pgettext("atlanteans_building", "Engraving on the entrance to the dungeon"),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean training site: Dungeon, part 1
+               pgettext("atlanteans_building", "If all needed wares are delivered in time, a dungeon can train one soldier one level in attack in %s on average."):bformat(format_seconds(36)),
+               -- TRANSLATORS: Performance helptext for an Atlantean training site: Dungeon, part 2
+               pgettext("atlanteans_building", "Complete training of one soldier takes %s on average."):bformat(format_minutes_seconds(2, 24))
+            }
+         }
       },
       {
          name = "atlanteans_labyrinth",
@@ -1951,11 +1974,17 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Purpose helptext for an Atlantean training site: Labyrinth, part 2
                pgettext("atlanteans_building", "Equips the soldiers with all necessary weapons and armor parts.")
             },
-            -- TRANSLATORS: Lore helptext for an Atlantean production site: Labyrinth
+            -- TRANSLATORS: Lore helptext for an Atlantean training site: Labyrinth
             lore = pgettext("atlanteans_building", "Our enemies claim: we have a ruddy twisted way to fight. "..
            "Check the way we train, in this labyrinth they may be right."),
-            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Labyrinth
-            lore_author = pgettext("atlanteans_building", "Atlantean hero after first contact with a real enemy")
+            -- TRANSLATORS: Lore author helptext for an Atlantean training site: Labyrinth
+            lore_author = pgettext("atlanteans_building", "Atlantean hero after first contact with a real enemy"),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean training site: Labyrinth, part 1
+               pgettext("atlanteans_building", "If all needed wares are delivered in time, a labyrinth can train one soldier one level in defense, evade or health in %s on average."):bformat(format_seconds(36)),
+               -- TRANSLATORS: Performance helptext for an Atlantean training site: Labyrinth, part 2
+               pgettext("atlanteans_building", "Complete training of one soldier takes %s on average."):bformat(format_minutes_seconds(3, 6))
+            }
          }
       },
 

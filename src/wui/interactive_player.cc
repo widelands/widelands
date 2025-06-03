@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,6 @@
 #include "graphic/game_renderer.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/text_layout.h"
-#include "logic/cmd_queue.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
@@ -93,8 +92,7 @@ InfoToDraw filter_info_to_draw(InfoToDraw info_to_draw,
                                const Widelands::Player& player) {
 	InfoToDraw result = info_to_draw;
 	const Widelands::Player* owner = object->get_owner();
-	if (owner != nullptr && !player.see_all() && player.is_hostile(*owner) &&
-	    object->descr().type() != Widelands::MapObjectType::WAREHOUSE) {
+	if (owner != nullptr && !player.see_all() && player.is_hostile(*owner)) {
 		result = static_cast<InfoToDraw>(result & ~InfoToDraw::kStatistics);
 	}
 	return result;
@@ -900,6 +898,10 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& coord
  * \li Return: write chat message
  */
 bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
+	if (InteractiveGameBase::handle_key(down, code)) {
+		return true;
+	}
+
 	if (down) {
 		if (matches_shortcut(KeyboardShortcut::kCommonEncyclopedia, code)) {
 			encyclopedia_.toggle();
@@ -968,12 +970,12 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 		const Widelands::DescriptionIndex fastplace = egbase().descriptions().building_index(
 		   matching_fastplace_shortcut(code, player().tribe().name()));
 		if (player().tribe().has_building(fastplace)) {
-			game().send_player_build(player_number(), get_sel_pos().node, fastplace);
+			game().send_player_build_building(player_number(), get_sel_pos().node, fastplace);
 			set_flag_to_connect(game().map().br_n(get_sel_pos().node));
 		}
 	}
 
-	return InteractiveGameBase::handle_key(down, code);
+	return false;
 }
 
 void InteractivePlayer::do_toggle_objective_menu() {

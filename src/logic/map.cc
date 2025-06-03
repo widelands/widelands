@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,7 @@
 
 #include "logic/map.h"
 
+#include <algorithm>
 #include <cstddef>
 #include <cstdlib>
 #include <memory>
@@ -53,15 +54,30 @@
 
 namespace Widelands {
 
+static std::vector<int32_t> gather_map_field_counts() {
+	std::set<int32_t> counts;
+	for (int32_t x : kMapDimensions) {
+		for (int32_t y : kMapDimensions) {
+			counts.insert(x * y);
+		}
+	}
+	return std::vector<int32_t>(counts.begin(), counts.end());
+}
+const std::vector<int32_t> Map::kMapFieldCounts = gather_map_field_counts();
+
 const std::vector<Map::OldWorldInfo> Map::kOldWorldNames = {
-   /** TRANSLATORS: A world name for the random map generator in the editor */
-   {"summer", "greenland", []() { return _("Summer"); }},
-   /** TRANSLATORS: A world name for the random map generator in the editor */
-   {"winter", "winterland", []() { return _("Winter"); }},
-   /** TRANSLATORS: A world name for the random map generator in the editor */
-   {"wasteland", "blackland", []() { return _("Wasteland"); }},
-   /** TRANSLATORS: A world name for the random map generator in the editor */
-   {"desert", "desert", []() { return _("Desert"); }}};
+   {"summer", "greenland", "world/pics/editor_terrain_category_green.png",
+    /** TRANSLATORS: A world name for the random map generator in the editor */
+    []() { return _("Summer"); }},
+   {"winter", "winterland", "world/pics/editor_terrain_category_winter.png",
+    /** TRANSLATORS: A world name for the random map generator in the editor */
+    []() { return _("Winter"); }},
+   {"wasteland", "blackland", "world/pics/editor_terrain_category_wasteland.png",
+    /** TRANSLATORS: A world name for the random map generator in the editor */
+    []() { return _("Wasteland"); }},
+   {"desert", "desert", "world/pics/editor_terrain_category_desert.png",
+    /** TRANSLATORS: A world name for the random map generator in the editor */
+    []() { return _("Desert"); }}};
 const Map::OldWorldInfo& Map::get_old_world_info_by_old_name(const std::string& old_name) {
 	for (const OldWorldInfo& owi : kOldWorldNames) {
 		if (owi.old_name == old_name) {
@@ -1072,7 +1088,7 @@ void Map::delete_tag(const std::string& tag) {
 NodeCaps Map::get_max_nodecaps(const EditorGameBase& egbase, const FCoords& fc) const {
 	NodeCaps max_caps = calc_nodecaps_pass1(egbase, fc, false);
 	max_caps = calc_nodecaps_pass2(egbase, fc, false, max_caps);
-	return static_cast<NodeCaps>(max_caps);
+	return max_caps;
 }
 
 /// \returns the immovable at the given coordinate
@@ -2736,8 +2752,8 @@ MilitaryInfluence Map::calc_influence(Coords const a, Area<> const area) const {
 	const int16_t w = get_width();
 	const int16_t h = get_height();
 	MilitaryInfluence influence =
-	   std::max(std::min(std::min(abs(a.x - area.x), abs(a.x - area.x + w)), abs(a.x - area.x - w)),
-	            std::min(std::min(abs(a.y - area.y), abs(a.y - area.y + h)), abs(a.y - area.y - h)));
+	   std::max(std::min({abs(a.x - area.x), abs(a.x - area.x + w), abs(a.x - area.x - w)}),
+	            std::min({abs(a.y - area.y), abs(a.y - area.y + h), abs(a.y - area.y - h)}));
 
 	influence = influence > area.radius ? 0 : influence == 0 ? MAX_RADIUS : MAX_RADIUS - influence;
 	influence *= influence;

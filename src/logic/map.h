@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -186,6 +186,8 @@ public:
 	friend struct MapElementalPacket;
 	friend struct WidelandsMapLoader;
 
+	static const std::vector<int32_t> kMapFieldCounts;
+
 	struct OldWorldInfo {
 		// What we call it now (used for the gameloading UI's themes
 		// and by the random map generator)
@@ -194,6 +196,9 @@ public:
 		// What this is called in very old map files. Used ONLY to map
 		// the world names of old maps to the new theme definitions.
 		std::string old_name;
+
+		// Representative icon filepath.
+		std::string icon;
 
 		// Localized name
 		std::function<std::string()> descname;

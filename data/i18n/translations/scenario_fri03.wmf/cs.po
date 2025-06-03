@@ -1,19 +1,20 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
 # Zlopez <michal.konecny@psmail.xyz>, 2021
 # Tomáš Mráz, 2022
+# Ondřej Itřech, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: Tomáš Mráz, 2022\n"
+"Last-Translator: Ondřej Itřech, 2025\n"
 "Language-Team: Czech (https://app.transifex.com/widelands/teams/35159/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -156,7 +157,7 @@ msgid ""
 " knight who rules the island of Föhr… or I did until I was forced out by the"
 " conqueror."
 msgstr ""
-"Ale omlouvám se. Ještě jsem se nepředstavil. Jmenuji se Nils Zemmek, jsem rytíř a patří mi ostrov Föhr…\n"
+"Ale omlouvám se. Ještě jsem se nepředstavil. Jmenuji se Klaus Lemmek, jsem rytíř a patří mi ostrov Föhr…\n"
 "Tedy patřil mi, než mě napadli útočníci a musel jsem uprchnout."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
@@ -240,6 +241,10 @@ msgid ""
 " and his tremendous skill in battle are unmatched in all parts of the known "
 "world. If anyone can stand up to Atterdag, it must be him."
 msgstr ""
+"A právě proto, abych ho získal, podnikám tuto cestu. Rýbaud, vůdce malé, ale"
+" silné fríské komunity, můj dobrý přítel. Jeho udatné šlechetnosti a "
+"obrovským zkušenostem v boji není v širém známém světě rovno. Pokud je někdo"
+" hoden toho, aby se Zítřkovi postavil, musí to být on."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:121
@@ -406,7 +411,7 @@ msgid ""
 "years ago to seek out a new home in the far North. If I may ask, have you "
 "heard of him before, and can you tell us where to find him?"
 msgstr ""
-"Vaše Veličenstvo, přicházíme v míru. Jmenuji se Nils Zemmek a tady je můj "
+"Vaše Veličenstvo, přicházíme v míru. Jmenuji se Klaus Lemmek a tady je můj "
 "syn Hennek. Hledáme našeho přítele Rýbauda, který opustil naši zemi, aby "
 "našel nový domov na dalekém severu. Mohl bych se Vašeho Veličenstva zeptat, "
 "zda jste o něm už někdy neslyšel nebo nevíte, kde bychom ho mohli najít?"
@@ -447,7 +452,7 @@ msgid ""
 " a port on this island other than the one where you did land, and it is "
 "located directly under my palace."
 msgstr ""
-"Je mi líto, že Vám nemohu pomoci, pane Zemmeku, ale toto jméno jsem nikdy "
+"Je mi líto, že Vám nemohu pomoci, pane Lemmeku, ale toto jméno jsem nikdy "
 "dříve neslyšel, a proto nevím, kde se může nyní zdržovat. Co se vaší cesty "
 "na sever týká, obávám se, že jediné vhodné místo pro stavbu přístavu na "
 "tomto ostrově kromě místa, na kterém jste přistáli, je místo, na kterém "
@@ -602,7 +607,7 @@ msgid ""
 "getting around a lot. Have you heard news of my old friend Reebaud? I only "
 "know that he is living in the North, can you tell us where to find him?"
 msgstr ""
-"Mír s Vámi, Vážený pane Obávaný! Mé jméno je Nils Zemmek a toto je můj syn "
+"Mír s Vámi, Vážený pane Obávaný! Mé jméno je Klaus Lemmek a toto je můj syn "
 "Hennek. Také tudy pouze procházíme. Říkáte, že jste vyslancem? To jste "
 "určitě často na cestách. Neslyšel jste tedy o mém ztraceném příteli "
 "Rýbaudovi? Pouze vím, že odešel na sever, nevíte, kde ho najít?"
@@ -778,7 +783,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:321
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:329
 msgid "Stuck"
-msgstr "Zaseklý"
+msgstr "Uvíznutí"
 
 #. TRANSLATORS: M. C. Iniucundus – lost
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:323
@@ -789,11 +794,11 @@ msgid ""
 "remain on this island for such a long time that you will never accomplish "
 "the objective of your futile journey. Despair in your triumph!"
 msgstr ""
-"Teď se podívej, kam nás tvoje hloupost dovedla. Bouře ustala ale od té doby,"
-" co jsi vypálil náš přístav, jsme tu všichni uvízli. Bohové jsou spravedliví"
-" – i když se zdáte v boji mocnější než my, nutí vás zůstat na tomto ostrově "
-"tak dlouho, že nikdy nesplníte cíl své marné cesty. Zoufalství ve svém "
-"triumfu!"
+"Teď se podívej, co nám tvůj nerozum způsobil. Spustila se bouře a my všichni"
+" tu uvázli, protože jsi spálil náš přístav. Bohové jsou spravedliví – i když"
+" se zdá, že v boji si vedete lépe než my, jste nuceni zůstat na tomto "
+"ostrově tak dlouho, že nikdy nebudete schopni cíl své zbytečné cesty "
+"naplnit. Užijte si to vítězství!"
 
 #. TRANSLATORS: Claus Lembeck – lost
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:331
@@ -801,8 +806,8 @@ msgid ""
 "This is a disaster! We have reached another shore, but another tribe has "
 "already settled there. They won’t allow us to land on their coast."
 msgstr ""
-"To je katastrofa! Dostali jsme se k dalšímu břehu, ale už je obydlený jiným "
-"kmenem. Nedovolí nám přistát na pobřeží."
+"Takové neštěstí! Dostali jsme se k dalšímu břehu, ale ten už je obydlený "
+"jiným kmenem. Nedovolí nám přistát na pobřeží."
 
 #. TRANSLATORS: Claus Lembeck – lost
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:334

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,6 +80,7 @@ public:
 	int set_allow_additional_expedition_items(lua_State* L);
 	int get_hidden_from_general_statistics(lua_State* L);
 	int set_hidden_from_general_statistics(lua_State* L);
+	int get_ai_type(lua_State* L);
 
 	/*
 	 * Lua methods
@@ -110,6 +111,9 @@ public:
 	int get_produced_wares_count(lua_State* L);
 	int set_attack_forbidden(lua_State* L);
 	int is_attack_forbidden(lua_State* L);
+	int cancel_trade(lua_State* L);
+	int reject_trade(lua_State* L);
+	int retract_trade(lua_State* L);
 
 	/*
 	 * C methods

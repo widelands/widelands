@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 #include "economy/flag.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game_controller.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message.h"
 #include "logic/objective.h"
@@ -32,7 +33,8 @@
 #include "logic/player_end_result.h"
 #include "logic/playersmanager.h"
 #include "scripting/globals.h"
-#include "scripting/lua_map.h"
+#include "scripting/map/lua_field.h"
+#include "scripting/map/lua_tribe_description.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/story_message_box.h"
@@ -115,6 +117,9 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, get_produced_wares_count),
    METHOD(LuaPlayer, set_attack_forbidden),
    METHOD(LuaPlayer, is_attack_forbidden),
+   METHOD(LuaPlayer, cancel_trade),
+   METHOD(LuaPlayer, reject_trade),
+   METHOD(LuaPlayer, retract_trade),
    {nullptr, nullptr},
 };
 const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
@@ -132,6 +137,7 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
    PROP_RW(LuaPlayer, see_all),
    PROP_RW(LuaPlayer, allow_additional_expedition_items),
    PROP_RW(LuaPlayer, hidden_from_general_statistics),
+   PROP_RO(LuaPlayer, ai_type),
    {nullptr, nullptr, nullptr},
 };
 
@@ -364,6 +370,24 @@ int LuaPlayer::get_hidden_from_general_statistics(lua_State* L) {
 int LuaPlayer::set_hidden_from_general_statistics(lua_State* L) {
 	get(L, get_egbase(L)).set_hidden_from_general_statistics(luaL_checkboolean(L, -1));
 	return 0;
+}
+
+/* RST
+   .. attribute:: ai_type
+
+      .. versionadded:: 1.2
+
+      (RO) Type of the AI controlling this player
+      ("normal", "weak", "very_weak", "empty"; "" if human controlled only)
+
+      This information is reliable for multi player games. For single player games,
+      the value for an ai player may also be "random" or even "".
+*/
+int LuaPlayer::get_ai_type(lua_State* L) {
+	Widelands::Game& game = get_game(L);
+	const Widelands::Player& p = get(L, game);
+	lua_pushstring(L, p.get_ai());
+	return 1;
 }
 
 /*
@@ -1148,6 +1172,67 @@ int LuaPlayer::is_attack_forbidden(lua_State* L) {
 */
 int LuaPlayer::set_attack_forbidden(lua_State* L) {
 	get(L, get_egbase(L)).set_attack_forbidden(luaL_checkinteger(L, 2), luaL_checkboolean(L, 3));
+	return 0;
+}
+
+/* RST
+   .. method:: cancel_trade(id)
+
+      .. versionadded:: 1.3
+
+      Cancel the trade agreement with the provided ID.
+
+      Only active trade agreements can be cancelled.
+      Either of the two players between whom the agreement exists may cancel it at any time.
+
+      :arg id: Unique ID of the trade to cancel.
+      :type id: :class:`integer`
+
+      :see also: :attr:`wl.Game.trades`
+*/
+int LuaPlayer::cancel_trade(lua_State* L) {
+	Widelands::Game& game = get_game(L);
+	game.cancel_trade(luaL_checkinteger(L, 2), false, &get(L, game));
+	return 0;
+}
+
+/* RST
+   .. method:: reject_trade(id)
+
+      .. versionadded:: 1.3
+
+      Reject the proposed trade with the provided ID.
+
+      Only proposed trade offers can be rejected.
+      Only the recipient of the offer may reject it.
+
+      :arg id: Unique ID of the trade to reject.
+      :type id: :class:`integer`
+
+      :see also: :attr:`wl.Game.trades`
+*/
+int LuaPlayer::reject_trade(lua_State* L) {
+	get_game(L).reject_trade(luaL_checkinteger(L, 2));
+	return 0;
+}
+
+/* RST
+   .. method:: retract_trade(id)
+
+      .. versionadded:: 1.3
+
+      Retract the proposed trade with the provided ID.
+
+      Only proposed trade offers can be retracted.
+      Only the player who initiated the offer may retract it.
+
+      :arg id: Unique ID of the trade to retract.
+      :type id: :class:`integer`
+
+      :see also: :attr:`wl.Game.trades`
+*/
+int LuaPlayer::retract_trade(lua_State* L) {
+	get_game(L).retract_trade(luaL_checkinteger(L, 2));
 	return 0;
 }
 

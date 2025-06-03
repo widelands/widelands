@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2024 by the Widelands Development Team
+ * Copyright (C) 2023-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,6 +59,7 @@ private:
 	bool is_updating_{false};
 
 	UI::Box main_box_;
+	// TODO(Nordfriese): Refactor to use UI::InfiniteSpinner instead
 	UI::Box buttons_box_;
 	UI::SpinBox spinbox_;
 	UI::Button infinite_target_;

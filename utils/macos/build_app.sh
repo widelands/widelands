@@ -57,35 +57,47 @@ function MakeDMG {
 
    find $DESTINATION -name ".?*" -exec rm -v {} \;
    UP=$(dirname $DESTINATION)
+   DMGFILE="$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg"
 
    echo "Copying COPYING"
    cp "$SOURCE_DIR"/COPYING  "$DESTINATION"/COPYING.txt
 
    echo "Creating DMG ..."
+   SUDO=""
    if [ -n "$GITHUB_ACTION" ]; then
       # Sometimes we get resource busy errors in the github actions
       HDI_MAX_TRIES=3
+      # MacOS 13 is the worst
+      if [ "${MATRIX_OS}" = 13 ]; then
+         echo "Running on MacOS 13, run hdiutil as root"
+         SUDO=sudo
+      fi
    else
       HDI_MAX_TRIES=1
    fi
    HDI_TRY=0
-   HDI_RESULT=0
    while true; do
       HDI_TRY=$(( ++HDI ))
-      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" \
-              "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg" || HDI_RESULT=$?
+      HDI_RESULT=0
+      $SUDO hdiutil create -verbose -fs APFS -volname "Widelands $WLVERSION" \
+                    -srcfolder "$DESTINATION" "$DMGFILE" \
+         || HDI_RESULT=$?
       if [ $HDI_RESULT -eq 0 ]; then
          return
       fi
-      # EBUSY is error code 16. We only allow that, all others should fail immediately.
-      if [ $HDI_RESULT -ne 16 -o $HDI_TRY -eq $HDI_MAX_TRIES ]; then
+      if [ $HDI_TRY -eq $HDI_MAX_TRIES ]; then
          exit $HDI_RESULT
       fi
       if [ -n "$GITHUB_ACTION" ]; then
-         echo "::warning::hdiutil resource busy error... retrying"
+         echo "::warning::hdiutil MacOS $MATRIX_OS $TYPE try $HDI_TRY error code: ${HDI_RESULT}... retrying"
       fi
-      echo "  will retry after 10 seconds..."
-      sleep 10
+      if [ -f "$DMGFILE" ]; then
+        rm "$DMGFILE"
+      fi
+      # XProtect is one of the possible causes of the resource busy errors
+      sudo pkill -9 XProtect
+      echo "  will retry after 20 seconds..."
+      sleep 20
    done
 }
 
@@ -139,7 +151,7 @@ EOF
 	--fix-file "$DESTINATION/Widelands.app/Contents/MacOS/widelands" \
 	--dest-dir "$DESTINATION/Widelands.app/Contents/libs"
 
-   echo "Re-sign libraries with an 'ad-hoc signing' see man codesign"
+   echo "Re-sign libraries with 'ad-hoc signing' see man codesign"
    codesign --sign - --force $DESTINATION/Widelands.app/Contents/libs/*
 
    echo "Stripping binary ..."
@@ -148,7 +160,8 @@ EOF
 
 function BuildWidelands() {
    PREFIX_PATH=$(brew --prefix)
-   eval "$("$PREFIX_PATH/bin/brew shellenv")"
+   # TODO(tothxa): I don't think this is actually needed, as brew isn't used in this script
+   eval "$($PREFIX_PATH/bin/brew shellenv)"
    export CMAKE_PREFIX_PATH="${PREFIX_PATH}/opt/icu4c"
 
    echo "FIXED ICU Issue $CMAKE_PREFIX_PATH"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -86,6 +86,7 @@ const std::string kAddOnMainFile = "addon";
 const std::string kAddOnIconFile = "icon.png";
 const std::string kAddOnLocaleDir = "addons_i18n";
 const std::string kAddOnLocaleVersions = "addons_i18n_versions";
+const std::string kAddOnKeyboardShortcutsFile = "shortcuts.lua";
 
 /// Filesystem names for screenshots
 const std::string kScreenshotsDir = "screenshots";

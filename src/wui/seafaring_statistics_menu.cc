@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2024 by the Widelands Development Team
+ * Copyright (C) 2017-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,6 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
-#include "logic/playercommand.h"
 #include "ui_basic/box.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"

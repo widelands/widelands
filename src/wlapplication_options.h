@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2024 by the Widelands Development Team
+ * Copyright (C) 2012-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -136,7 +136,8 @@ enum class KeyboardShortcut : uint16_t {
 	kCommonTooltipAccessibilityMode,
 	kCommonFullscreen,
 	kCommonScreenshot,
-	kCommonGeneral_End = kCommonScreenshot,
+	kCommonChangeMusic,
+	kCommonGeneral_End = kCommonChangeMusic,
 
 	// These are only shown in the help in debug builds
 	kCommonDebugConsole,
@@ -291,6 +292,7 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameMessagesFilterSeafaring,
 	kInGameMessagesFilterWarfare,
 	kInGameMessagesFilterScenario,
+	kInGameMessagesFilterDiplomacy,
 	kInGameMessagesGoto,
 	kInGameMessages_End = kInGameMessagesGoto,
 
@@ -321,6 +323,14 @@ KeyboardShortcut operator+(const KeyboardShortcut& id, int i);
 KeyboardShortcut& operator++(KeyboardShortcut& id);
 uint16_t operator-(const KeyboardShortcut& a, const KeyboardShortcut& b);
 
+enum class KeyboardShortcutScope {
+	kGlobal,  // special value that intersects with all other scopes
+
+	kMainMenu,
+	kEditor,
+	kGame,
+};
+
 /**
  * Check whether the given shortcut can be used for setting and retrieving the
  * actual key combination.
@@ -339,6 +349,13 @@ bool is_developer_tool(KeyboardShortcut id);
 inline bool is_fastplace(const KeyboardShortcut id) {
 	return id >= KeyboardShortcut::kFastplace_Begin && id <= KeyboardShortcut::kFastplace_End;
 }
+
+void create_replace_shortcut(const std::string& name,
+                             const std::string& descname,
+                             const std::set<KeyboardShortcutScope>& scopes,
+                             SDL_Keysym default_shortcut);
+KeyboardShortcut get_highest_used_keyboard_shortcut();
+std::vector<std::string> get_all_keyboard_shortcut_names();
 
 /**
  * Change a keyboard shortcut.
@@ -398,6 +415,7 @@ std::string to_string(KeyboardShortcut);
 
 /** Get the shortcut ID from an internal shortcut name. Throws an exception for invalid names. */
 KeyboardShortcut shortcut_from_string(const std::string&);
+bool shortcut_exists(const std::string&);
 
 /**
  * Generate a human-readable description of a keyboard shortcut.

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -464,7 +464,7 @@ void ZipFilesystem::write(const std::string& fname, void const* const data, size
 		break;
 	case ZIP_ERRNO:
 		throw FileError("ZipFilesystem::write", complete_filename,
-		                format("in path '%s'', Error", zip_file_->path(), strerror(errno)));
+		                format("in path '%s', Error '%s'", zip_file_->path(), strerror(errno)));
 	default:
 		throw FileError(
 		   "ZipFilesystem::write", complete_filename, format("in path '%s'", zip_file_->path()));

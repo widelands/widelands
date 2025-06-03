@@ -18,7 +18,7 @@ function dismantle()
    end
    sleep(2000)
    p1:allow_buildings("all")
-   p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery","empire_trainingcamp", "empire_colosseum", "empire_lumberjacks_house1", "empire_well1", "empire_foresters_house1"}
+   p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery","empire_trainingcamp", "empire_colosseum", "empire_lumberjacks_house1", "empire_well1", "empire_foresters_house1", "empire_market"}
    o.done = true
 
    campaign_message_box(amalea_3)
@@ -482,7 +482,8 @@ function wheat_chain()
       place_building_in_region(p1, "empire_well", {field_well})
       place_building_in_region(p1, "empire_brewery", {field_brewery})
       place_building_in_region(p1, "empire_mill", {field_mill})
-      place_building_in_region(p1, "empire_temple_of_vesta", {field_warehouse}, {wares = {water = 30, flour = 30, beer = 40,}})
+      local temple = place_building_in_region(p1, "empire_temple_of_vesta", {field_warehouse}, {wares = {water = 30, flour = 30, beer = 40,}})
+      temple.warehousename = ""
       connected_road("normal", p1, field_warehouse.immovable.flag, "l, tl", true)
       connected_road("normal", p1, field_mill.immovable.flag, "tr, r", true)
       connected_road("normal", p1, field_mill.immovable.flag, "l, tl, tr", true)

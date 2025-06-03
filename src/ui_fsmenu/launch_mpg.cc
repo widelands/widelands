@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -97,8 +97,15 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
 	left_column_box_.add(chat_.get(), UI::Box::Resizing::kFullSize);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
-		if (s.action == NoteGameSettings::Action::kMap) {
+		switch (s.action) {
+		case NoteGameSettings::Action::kMap:
 			map_changed();
+			break;
+		case NoteGameSettings::Action::kWinCondition:
+			last_win_condition_ = settings_.get_win_condition_script();
+			break;
+		default:
+			break;
 		}
 	});
 	update_warn_desyncing_addon();
@@ -175,7 +182,6 @@ void LaunchMPG::clicked_select_map_callback(const MapData* map, const bool scena
 	settings_.set_map(map->name, map->filenames.at(0), map->theme, map->background, map->nrplayers);
 
 	map_changed();
-	update_win_conditions();
 }
 
 /**
@@ -221,7 +227,7 @@ void LaunchMPG::clicked_select_savegame() {
 				warning.run<UI::Panel::Returncodes>();
 			}
 		}
-		update_win_conditions();
+		update_tags_and_win_conditions();
 	});
 }
 
@@ -287,6 +293,8 @@ void LaunchMPG::map_changed() {
 			}
 		}
 	}
+
+	update_tags_and_win_conditions();
 }
 
 /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,12 +28,20 @@
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/descriptions.h"
+#include "logic/map_objects/pinned_note.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/player.h"
 #include "scripting/factory.h"
 #include "scripting/globals.h"
-#include "scripting/lua_map.h"
+#include "scripting/map/lua_field.h"
+#include "scripting/map/lua_flag.h"
+#include "scripting/map/lua_map.h"
+#include "scripting/map/lua_resource_description.h"
+#include "scripting/map/lua_road.h"
+#include "scripting/map/lua_terrain_description.h"
+#include "scripting/map/lua_tribe_description.h"
 #include "ui_basic/progresswindow.h"
 
 namespace LuaBases {

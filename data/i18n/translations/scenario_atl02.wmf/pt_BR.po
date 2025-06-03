@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-04-19 03:04+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
 "Last-Translator: tiu lau, 2024\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/widelands/teams/35159/pt_BR/)\n"
@@ -66,20 +66,25 @@ msgid ""
 "To set foot on this island, we must first find a building space where a port"
 " can be built. Explore the nearby coast line to find such a building plot."
 msgstr ""
+"Para colocarmos os pés nesta ilha, precisamos primeiro encontrar um local "
+"onde um porto possa ser construído. Explore a linha costeira para encontrar "
+"tal terreno de construção."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:53
 msgid ""
 "After the port is built we should cancel the other ship’s expedition, to "
 "unload its wares as well."
 msgstr ""
+"Depois que o porto for construído, devemos cancelar a expedição dos outros "
+"navios, para descarregar suas mercadorias também."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:58
 msgid "Ensure the supply of construction materials"
-msgstr ""
+msgstr "Asegure o fornecimento de materiais de construção"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:60
 msgid "Establish Basic Production Chain"
-msgstr ""
+msgstr "Estabelecer Cadeia Básica de Produção"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:61
 msgid ""
@@ -87,14 +92,17 @@ msgid ""
 " might or might not be needed depending on how fast the trees are growing "
 "around us. Find the balance."
 msgstr ""
+"Precisaremos de pelo menos uma pedreira, alguns lenhadores e uma serraria. "
+"Um engenheiro florestal pode ou não ser necessário, dependendo da rapidez "
+"com que as árvores estão crescendo ao nosso redor. Encontre o equilíbrio."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:66
 msgid "Build tools quickly"
-msgstr ""
+msgstr "Faça ferramentas rapidamente"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:68
 msgid "Make New Tools"
-msgstr ""
+msgstr "Faça novas ferramentas"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:69
 msgid ""
@@ -104,14 +112,19 @@ msgid ""
 "prerequisite for success on the island. Don’t forget to build a smelting "
 "works as well."
 msgstr ""
+"A maioria das nossas ferramentas foi perdida na tragédia do navio. Nosso "
+"povo não será capaz de executar suas tarefas sem as ferramentas adequadas. "
+"Felizmente, ainda temos algum minério de ferro e muito carvão. Construa uma "
+"ferraria, pois é um pré-requisito para o sucesso na ilha. Não se esqueça de "
+"construir uma fundição também."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:74
 msgid "Search the mountains for resources"
-msgstr ""
+msgstr "Procure por recursos nas montanhas"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:76
 msgid "Build Mines"
-msgstr ""
+msgstr "Construa Minas"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:77
 msgid ""
@@ -359,8 +372,8 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:200
 msgid ""
 "The heavy weight plus the strong current was too much for the ship and it "
-"was pulled below the sea level by Lutas’ forces and we lost most men and all"
-" wares it carried."
+"was pulled below the sea level by Lutas’s forces and we lost most men and "
+"all wares it carried."
 msgstr ""
 
 #. TRANSLATORS: Jundlina - Diary

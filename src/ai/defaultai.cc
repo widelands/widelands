@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2024 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,6 +28,7 @@
 #include "base/macros.h"
 #include "base/time_string.h"
 #include "base/wexception.h"
+#include "commands/cmd_set_ware_target_quantity.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/road.h"
@@ -39,6 +40,7 @@
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/ship.h"
@@ -49,7 +51,6 @@
 #include "logic/maphollowregion.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
-#include "logic/playercommand.h"
 
 namespace AI {
 
@@ -161,8 +162,8 @@ DefaultAI::DefaultAI(Widelands::Game& ggame, Widelands::PlayerNumber const pid, 
 								   assert(pso.ships_assigned > 0);
 								   --pso.ships_assigned;
 								   verb_log_dbg_time(game().get_gametime(),
-								                     "AI %d: port %s lost guard ship %s, %u remaining",
-								                     player_->player_number(),
+								                     "AI %u: port %s lost guard ship %s, %u remaining",
+								                     static_cast<unsigned>(player_->player_number()),
 								                     pso.site->get_warehouse_name().c_str(),
 								                     so.ship->get_shipname().c_str(), pso.ships_assigned);
 								   break;
@@ -326,7 +327,7 @@ void DefaultAI::think() {
 	assert(!current_task_queue.empty() && current_task_queue.size() <= jobs_to_run_count);
 
 	if (GameController* const ctrl = game().game_controller()) {
-		verb_log_dbg_time(gametime, "Player: %d; Jobs: %d; delay: %d; gamespeed: %d \n",
+		verb_log_dbg_time(gametime, "Player: %d; Jobs: %u; delay: %d; gamespeed: %u \n",
 		                  player_->player_number(), jobs_to_run_count, delay_time,
 		                  ctrl->real_speed());
 	}
@@ -548,6 +549,11 @@ void DefaultAI::think() {
 			   gametime + kDiplomacyInterval + Duration(RNG::static_rand(30) * 1000),
 			   SchedulerTaskId::kDiplomacy);
 			break;
+		case SchedulerTaskId::kTrading:
+			trading_actions(gametime);
+			set_taskpool_task_time(gametime + kTradingInterval + Duration(RNG::static_rand(30) * 1000),
+			                       SchedulerTaskId::kTrading);
+			break;
 		default:
 			NEVER_HERE();
 		}
@@ -711,7 +717,8 @@ void DefaultAI::late_initialization() {
 		}
 		bo.basic_amount = bh.basic_amount();
 		if (bh.needs_water()) {
-			verb_log_dbg_time(gametime, "AI %d detected coast building: %s", player_number(), bo.name);
+			verb_log_dbg_time(gametime, "AI %u detected coast building: %s",
+			                  static_cast<unsigned>(player_number()), bo.name);
 			bo.set_is(BuildingAttribute::kNeedsCoast);
 		}
 		if (bh.is_space_consumer()) {
@@ -768,8 +775,8 @@ void DefaultAI::late_initialization() {
 				}
 				if (!bo.is(BuildingAttribute::kBarracks) && bo.ware_outputs.empty()) {
 					bo.set_is(BuildingAttribute::kRecruitment);
-					verb_log_dbg_time(
-					   gametime, "AI %d detected recruitment site: %s", player_number(), bo.name);
+					verb_log_dbg_time(gametime, "AI %u detected recruitment site: %s",
+					                  static_cast<unsigned>(player_number()), bo.name);
 				}
 			}
 
@@ -781,8 +788,8 @@ void DefaultAI::late_initialization() {
 
 			// If this is a producer, does it act also as supporter?
 			if (!bo.ware_outputs.empty() && !prod.supported_productionsites().empty()) {
-				verb_log_dbg_time(
-				   gametime, "AI %d detected supporting producer: %s", player_number(), bo.name);
+				verb_log_dbg_time(gametime, "AI %u detected supporting producer: %s",
+				                  static_cast<unsigned>(player_number()), bo.name);
 				for (const auto& supp : prod.supported_productionsites()) {
 					verb_log_dbg_time(gametime, "  -> %s", supp.c_str());
 				}
@@ -809,14 +816,14 @@ void DefaultAI::late_initialization() {
 				// get the resource needed by the mine
 				const auto& collected_resources = prod.collected_resources();
 				if (collected_resources.size() > 1) {
-					log_warn("AI %d: The mine '%s' will mine multiple resources. The AI can't handle "
+					log_warn("AI %u: The mine '%s' will mine multiple resources. The AI can't handle "
 					         "this and will simply pick the first one from the list.",
-					         player_number(), bo.name);
+					         static_cast<unsigned>(player_number()), bo.name);
 				}
 				const auto& first_resource_it = collected_resources.begin();
 				if (first_resource_it == collected_resources.end()) {
-					log_warn(
-					   "AI %d: The mine '%s' does not mine any resources!", player_number(), bo.name);
+					log_warn("AI %u: The mine '%s' does not mine any resources!",
+					         static_cast<unsigned>(player_number()), bo.name);
 					bo.mines = Widelands::INVALID_INDEX;
 				} else {
 					bo.mines = game().descriptions().resource_index(first_resource_it->first);
@@ -903,8 +910,8 @@ void DefaultAI::late_initialization() {
 				// TODO(hessenfarmer): hardcoded strings should be parsed from a definition file
 				for (const auto& attribute : prod.collected_attributes()) {
 					if (attribute.second == Widelands::MapObjectDescr::get_attribute_id("rocks")) {
-						verb_log_dbg_time(
-						   gametime, "AI %d detected quarry: %s", player_number(), bo.name);
+						verb_log_dbg_time(gametime, "AI %u detected quarry: %s",
+						                  static_cast<unsigned>(player_number()), bo.name);
 						bo.set_is(BuildingAttribute::kNeedsRocks);
 						buildings_immovable_attributes_[attribute.second].insert(
 						   ImmovableAttribute(bo.name, BuildingAttribute::kNeedsRocks));
@@ -913,16 +920,16 @@ void DefaultAI::late_initialization() {
 					if (attribute.second == Widelands::MapObjectDescr::get_attribute_id("tree") ||
 					    attribute.second == Widelands::MapObjectDescr::get_attribute_id("normal_tree") ||
 					    attribute.second == Widelands::MapObjectDescr::get_attribute_id("tree_balsa")) {
-						verb_log_dbg_time(
-						   gametime, "AI %d detected lumberjack: %s", player_number(), bo.name);
+						verb_log_dbg_time(gametime, "AI %u detected lumberjack: %s",
+						                  static_cast<unsigned>(player_number()), bo.name);
 						bo.set_is(BuildingAttribute::kLumberjack);
 						buildings_immovable_attributes_[attribute.second].insert(
 						   ImmovableAttribute(bo.name, BuildingAttribute::kLumberjack));
 						break;
 					}
 					if (attribute.second == Widelands::MapObjectDescr::get_attribute_id("ripe_bush")) {
-						verb_log_dbg_time(
-						   gametime, "AI %d detected berry collector: %s", player_number(), bo.name);
+						verb_log_dbg_time(gametime, "AI %u detected berry collector: %s",
+						                  static_cast<unsigned>(player_number()), bo.name);
 						bo.set_is(BuildingAttribute::kNeedsBerry);
 						buildings_immovable_attributes_[attribute.second].insert(
 						   ImmovableAttribute(bo.name, BuildingAttribute::kNeedsBerry));
@@ -935,13 +942,15 @@ void DefaultAI::late_initialization() {
 
 			// here we identify hunters
 			if (!prod.collected_bobs().empty()) {
-				verb_log_dbg_time(gametime, "AI %d detected hunter: %s", player_number(), bo.name);
+				verb_log_dbg_time(gametime, "AI %u detected hunter: %s",
+				                  static_cast<unsigned>(player_number()), bo.name);
 				bo.set_is(BuildingAttribute::kHunter);
 			}
 
 			// fishers
 			if (bh.needs_water() && prod.collected_resources().count("resource_fish") == 1) {
-				verb_log_dbg_time(gametime, "AI %d detected fisher: %s", player_number(), bo.name);
+				verb_log_dbg_time(gametime, "AI %u detected fisher: %s",
+				                  static_cast<unsigned>(player_number()), bo.name);
 				bo.set_is(BuildingAttribute::kFisher);
 			}
 
@@ -950,7 +959,8 @@ void DefaultAI::late_initialization() {
 				for (Widelands::DescriptionIndex ware_index : prod.output_ware_types()) {
 					if (tribe_->get_ware_descr(ware_index)->name() == "water" &&
 					    prod.collected_resources().count("resource_water") == 1) {
-						verb_log_dbg_time(gametime, "AI %d detected well: %s", player_number(), bo.name);
+						verb_log_dbg_time(gametime, "AI %u detected well: %s",
+						                  static_cast<unsigned>(player_number()), bo.name);
 						bo.set_is(BuildingAttribute::kWell);
 					}
 				}
@@ -958,8 +968,8 @@ void DefaultAI::late_initialization() {
 
 			bo.requires_supporters = bh.requires_supporters();
 			if (bo.requires_supporters) {
-				verb_log_dbg_time(
-				   gametime, "AI %d: %s strictly requires supporters\n", player_number(), bo.name);
+				verb_log_dbg_time(gametime, "AI %u: %s strictly requires supporters\n",
+				                  static_cast<unsigned>(player_number()), bo.name);
 			}
 			continue;
 		}
@@ -1019,10 +1029,22 @@ void DefaultAI::late_initialization() {
 			continue;
 		}
 
+		if (bld.type() == Widelands::MapObjectType::MARKET) {
+			bo.type = BuildingObserver::Type::kMarket;
+			continue;
+		}
+
 		if (bld.type() == Widelands::MapObjectType::CONSTRUCTIONSITE) {
 			bo.type = BuildingObserver::Type::kConstructionsite;
 			continue;
 		}
+
+		if (bld.type() == Widelands::MapObjectType::DISMANTLESITE) {
+			continue;
+		}
+
+		throw wexception(
+		   "AI does not support buildings of type %s", Widelands::to_string(bld.type()).c_str());
 	}
 
 	// Forester/Ranger
@@ -1037,8 +1059,9 @@ void DefaultAI::late_initialization() {
 		for (const std::string& candidate : prodsite->supported_productionsites()) {
 			for (const Widelands::ProductionSiteDescr* lumberjack : lumberjacks) {
 				if (lumberjack->name() == candidate) {
-					verb_log_dbg_time(gametime, "AI %d detected ranger: %s -> %s", player_number(),
-					                  bo.name, lumberjack->name().c_str());
+					verb_log_dbg_time(gametime, "AI %u detected ranger: %s -> %s",
+					                  static_cast<unsigned>(player_number()), bo.name,
+					                  lumberjack->name().c_str());
 					bo.set_is(BuildingAttribute::kRanger);
 					rangers_.push_back(bo);
 					wood_policy_[bo.id] = WoodPolicy::kAllowRangers;
@@ -1150,6 +1173,10 @@ void DefaultAI::late_initialization() {
 	                                                   SchedulerTaskId::kWarehouseFlagDist, 5,
 	                                                   "flag warehouse Update"));
 
+	taskPool.push_back(
+	   std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(10 * 60 * 1000)),
+	                                   SchedulerTaskId::kTrading, 5, "Trading tasks"));
+
 	if (game().diplomacy_allowed()) {
 		// don't do any diplomacy for the first 10 + x minutes to avoid click races for allies,
 		// and allow statistics to settle after loading game
@@ -1244,7 +1271,7 @@ void DefaultAI::late_initialization() {
 		                  "%2d: Initializing in the basic economy mode, required buildings:\n",
 		                  player_number());
 		for (auto bb : persistent_data->remaining_basic_buildings) {
-			verb_log_dbg_time(gametime, "   %3d / %-28s- target %d\n", bb.first,
+			verb_log_dbg_time(gametime, "   %3d / %-28s- target %u\n", bb.first,
 			                  get_building_observer(bb.first).name, bb.second);
 		}
 	}
@@ -1367,7 +1394,7 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 	   gametime,
 	   " first round: %2d of %3" PRIuS " fields updated. Fields unupdated: Spec: %d, Mid: "
 	   "%d, Big: %d. Invalid "
-	   "fields found: %3d\n",
+	   "fields found: %3u\n",
 	   updated_fields_count, buildable_fields.size(), special_fields_to_prefer[kSpecialFieldPos],
 	   special_fields_to_prefer[kMediumlFieldPos], special_fields_to_prefer[kBigFieldPos],
 	   invalidated_bf_count);
@@ -1915,7 +1942,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	if (flags_count > 0) {
 		field.average_flag_dist_to_wh /= flags_count;
 	}
-	verb_log_dbg_time(gametime, "[AI %u] flags count: %2d, avg: %3d\n", player_number(), flags_count,
+	verb_log_dbg_time(gametime, "[AI %u] flags count: %2u, avg: %3u\n",
+	                  static_cast<unsigned>(player_number()), flags_count,
 	                  field.average_flag_dist_to_wh);
 
 	Widelands::HollowArea<> har(
@@ -2473,8 +2501,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 		   management_data.neuron_pool[35].get_result_safe(bf->average_flag_dist_to_wh, kAbsValue) +
 		   management_data.neuron_pool[42].get_result_safe(
 		      bf->average_flag_dist_to_wh / 3, kAbsValue);
-		verb_log_dbg_time(gametime, "[AI %u] wh distance malus: %3d [dist to wh: %3d]\n",
-		                  player_number(), wh_distance_malus, bf->average_flag_dist_to_wh);
+		verb_log_dbg_time(gametime, "[AI %u] wh distance malus: %3d [dist to wh: %3u]\n",
+		                  static_cast<unsigned>(player_number()), wh_distance_malus,
+		                  bf->average_flag_dist_to_wh);
 
 		// For every field test all buildings
 		for (BuildingObserver& bo : buildings_) {
@@ -3048,6 +3077,11 @@ bool DefaultAI::construct_building(const Time& gametime) {
 				if ((bf->unowned_land_nearby != 0u) || (bf->enemy_owned_land_nearby != 0u)) {
 					prio -= 15;
 				}
+			} else if (bo.type == BuildingObserver::Type::kMarket) {
+				// TODO(Nordfriese): Make an intelligent decision here
+				if (bo.new_building == BuildingNecessity::kForced) {
+					prio += 200;
+				}
 			}
 
 			// think of space consuming buildings nearby like farms or vineyards
@@ -3209,9 +3243,10 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	}
 
 	// send the command to construct a new building
-	verb_log_dbg_time(game().get_gametime(), "AI %d builds %s at %d,%d", player_number(),
-	                  best_building->desc->name().c_str(), proposed_coords.x, proposed_coords.y);
-	game().send_player_build(player_number(), proposed_coords, best_building->id);
+	verb_log_dbg_time(game().get_gametime(), "AI %u builds %s at %d,%d",
+	                  static_cast<unsigned>(player_number()), best_building->desc->name().c_str(),
+	                  proposed_coords.x, proposed_coords.y);
+	game().send_player_build_building(player_number(), proposed_coords, best_building->id);
 	blocked_fields.add(proposed_coords, game().get_gametime() + Duration(2 * 60 * 1000));
 
 	// resetting new_building_overdue
@@ -3329,6 +3364,87 @@ void DefaultAI::check_flag_distances(const Time& gametime) {
 	flag_warehouse_distance.remove_old_flag(gametime);
 }
 
+void DefaultAI::trading_actions(const Time& /*gametime*/) {
+	// TODO(Nordfriese): Rewrite this ultra-simplistic logic to account for actual preciousness of
+	// wares for us instead of static preciousness, and diplomatic relation to the offering player.
+	// TODO(Nordfriese): Implement actual handling of market buildings.
+
+	const std::vector<Widelands::TradeID> offers = game().find_trade_offers(player_number());
+	if (offers.empty()) {
+		return;
+	}
+
+	const Widelands::Economy* arbitrary_economy = nullptr;
+	for (const auto& economy : player_->economies()) {
+		if (economy.second->type() == Widelands::wwWARE &&
+		    economy.second->get_arbitrary_flag() != nullptr) {
+			if (arbitrary_economy == nullptr ||
+			    economy.second->get_nrflags() > arbitrary_economy->get_nrflags()) {
+				arbitrary_economy = economy.second.get();
+			}
+		}
+	}
+	if (arbitrary_economy == nullptr) {
+		verb_log_dbg(
+		   "AI %u: no economies, cannot review trade offers", static_cast<unsigned>(player_number()));
+		return;
+	}
+
+	for (Widelands::TradeID trade_id : offers) {
+		const Widelands::TradeInstance& offer = game().get_trade(trade_id);
+		assert(offer.receiving_player == player_number());
+
+		int32_t send_cost = 0;
+		int32_t receive_preciousness = 0;
+		for (const auto& pair : offer.items_to_send) {
+			// This is what the other player sends to us.
+			receive_preciousness += pair.second * game()
+			                                         .descriptions()
+			                                         .get_ware_descr(pair.first)
+			                                         ->ai_hints()
+			                                         .preciousness(tribe_->name());
+			// Bonus if we want to stockpile this ware.
+			receive_preciousness += arbitrary_economy->target_quantity(pair.first).permanent;
+			// Malus if we already have lots of it.
+			receive_preciousness -= calculate_stocklevel(pair.first, WareWorker::kWare);
+		}
+		for (const auto& pair : offer.items_to_receive) {
+			// This is what we pay to the other player.
+			send_cost += pair.second * game()
+			                              .descriptions()
+			                              .get_ware_descr(pair.first)
+			                              ->ai_hints()
+			                              .preciousness(tribe_->name());
+			// Malus if we want to stockpile this ware.
+			send_cost += arbitrary_economy->target_quantity(pair.first).permanent;
+			// Bonus if we have lots of it to spare.
+			send_cost -= calculate_stocklevel(pair.first, WareWorker::kWare);
+		}
+
+		if (receive_preciousness > send_cost) {
+			// The trade is advantageous, accept.
+			std::multimap<uint32_t, const Widelands::Market*> candidates =
+			   game().player(player_number()).get_markets(offer.initiator.get(game())->get_position());
+			if (candidates.empty()) {
+				verb_log_dbg("AI %u: no market to accept trade #%u",
+				             static_cast<unsigned>(player_number()), trade_id);
+			} else {
+				const Widelands::Market* select = candidates.begin()->second;
+				verb_log_dbg("AI %u: accepting trade #%u at %s", static_cast<unsigned>(player_number()),
+				             trade_id, select->get_market_name().c_str());
+				game().send_player_trade_action(
+				   player_number(), trade_id, Widelands::TradeAction::kAccept, select->serial(), 0);
+			}
+		} else {
+			// The trade is not advantageous, reject.
+			verb_log_dbg(
+			   "AI %u: rejecting trade #%u", static_cast<unsigned>(player_number()), trade_id);
+			game().send_player_trade_action(
+			   player_number(), trade_id, Widelands::TradeAction::kReject, 0, 0);
+		}
+	}
+}
+
 // Dealing with diplomacy actions
 void DefaultAI::diplomacy_actions(const Time& gametime) {
 
@@ -3361,7 +3477,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 		if (g_verbose) {
 			planned_log_append_text = me_alone ? " as last one" : " as defeated";
 			/* verb_ */ log_dbg_time(gametime,
-			                         "AI Diplomacy: Player(%d) plans to leave team with priority %d",
+			                         "AI Diplomacy: Player(%u) plans to leave team with priority %d",
 			                         static_cast<unsigned int>(mypn), plan_priority);
 		}
 	}
@@ -3378,7 +3494,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 		if (g_verbose) {
 			planned_log_append_text = myts_s;
 			/* verb_ */ log_dbg_time(gametime,
-			                         "AI Diplomacy: Player(%d) plans to leave team with priority %d",
+			                         "AI Diplomacy: Player(%u) plans to leave team with priority %d",
 			                         static_cast<unsigned int>(mypn), plan_priority);
 		}
 	}
@@ -3391,8 +3507,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 		if ((team_vs_worst > 0 && my_team_size > 3) ||
 		    (team_vs_worst > -10 && RNG::static_rand(my_team_size * 2 - 2) > 0)) {
 			verb_log_dbg_time(gametime,
-			                  "AI Diplomacy: Player(%d) tolerates player (%d) with diploscore "
-			                  "%d in team (%d)%s\n",
+			                  "AI Diplomacy: Player(%u) tolerates player (%u) with diploscore "
+			                  "%d in team (%u)%s\n",
 			                  static_cast<unsigned int>(mypn),
 			                  static_cast<unsigned int>(player_statistics.get_worst_ally()),
 			                  player_statistics.get_worst_ally_score(),
@@ -3406,7 +3522,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 				          static_cast<unsigned int>(player_statistics.get_worst_ally()),
 				          player_statistics.get_worst_ally_score());
 				/* verb_ */ log_dbg_time(
-				   gametime, "AI Diplomacy: Player(%d) plans to leave team with priority %d",
+				   gametime, "AI Diplomacy: Player(%u) plans to leave team with priority %d",
 				   static_cast<unsigned int>(mypn), plan_priority);
 			}
 		}
@@ -3444,9 +3560,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 
 			if (pda.action == Widelands::DiplomacyAction::kInvite && accept) {
 				const bool other_alone = player_statistics.get_is_alone(pda.sender);
-				const int32_t ots = other_alone ?
-				                       diploscore - static_cast<uint32_t>(RNG::static_rand(10)) :
-				                       player_statistics.get_team_average_score(other_tn);
+				const int32_t ots = other_alone ? diploscore - RNG::static_rand(10) :
+				                                  player_statistics.get_team_average_score(other_tn);
 				if (!other_alone && g_verbose) {
 					other_team_score_str = format(" and team score %d", ots);
 				}
@@ -3464,7 +3579,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			if (!accept) {
 				verb_log_dbg_time(
 				   gametime,
-				   "AI Diplomacy: Player(%d)%s denies the %s of player (%d) with diploscore %d%s\n",
+				   "AI Diplomacy: Player(%u)%s denies the %s of player (%u) with diploscore %d%s\n",
 				   static_cast<unsigned int>(pda.other), myts_s.c_str(),
 				   pda.action == Widelands::DiplomacyAction::kInvite ? "invitation" : "join request",
 				   static_cast<unsigned int>(pda.sender), diploscore, other_team_score_str.c_str());
@@ -3477,11 +3592,11 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 				if (planned_action != kNoAction) {
 					verb_log_dbg_time(
 					   gametime,
-					   "AI Diplomacy: Player(%d) replaces plan: old priority: %d, new priority: %d",
+					   "AI Diplomacy: Player(%u) replaces plan: old priority: %d, new priority: %d",
 					   static_cast<unsigned int>(mypn), plan_priority, priority);
 					if (planned_action != Widelands::DiplomacyAction::kLeaveTeam) {
 						verb_log_dbg_time(gametime,
-						                  "AI Diplomacy: Player(%d)%s denies the %s of player (%d) with "
+						                  "AI Diplomacy: Player(%u)%s denies the %s of player (%u) with "
 						                  "diploscore %d%s\n",
 						                  static_cast<unsigned int>(mypn), myts_s.c_str(),
 						                  planned_action == Widelands::DiplomacyAction::kAcceptInvite ?
@@ -3507,7 +3622,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 					planned_log_append_text = other_team_score_str;
 					/* verb_ */ log_dbg_time(
 					   gametime,
-					   "AI Diplomacy: Player(%d) plans to accept the %s of player (%d) with priority %d",
+					   "AI Diplomacy: Player(%u) plans to accept the %s of player (%d) with priority %d",
 					   static_cast<unsigned int>(mypn),
 					   pda.action == Widelands::DiplomacyAction::kInvite ? "invitation" : "join request",
 					   pda.sender, plan_priority);
@@ -3525,7 +3640,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			std::string action_str = "join request";
 			switch (planned_action) {
 			case Widelands::DiplomacyAction::kLeaveTeam:
-				verb_log_dbg_time(gametime, "AI Diplomacy: Player(%d) leaves team (%d)%s.\n",
+				verb_log_dbg_time(gametime, "AI Diplomacy: Player(%u) leaves team (%u)%s.\n",
 				                  static_cast<unsigned int>(mypn), static_cast<unsigned int>(mytn),
 				                  planned_log_append_text.c_str());
 				break;
@@ -3537,7 +3652,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 				assert(planned_other_score != kNoScore);
 				verb_log_dbg_time(
 				   gametime,
-				   "AI Diplomacy: Player(%d)%s accepts the %s of player (%d) with diploscore %d%s.\n",
+				   "AI Diplomacy: Player(%u)%s accepts the %s of player (%u) with diploscore %d%s.\n",
 				   static_cast<unsigned int>(mypn), myts_s.c_str(), action_str.c_str(),
 				   static_cast<unsigned int>(planned_opn), planned_other_score,
 				   planned_log_append_text.c_str());
@@ -4312,7 +4427,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 
 	// Inform if we are above ai type limit.
 	if (site.bo->total_count() > site.bo->cnt_limit_by_aimode) {
-		verb_log_warn_time(gametime, "AI check_productionsites: Too many %s: %d, ai limit: %d\n",
+		verb_log_warn_time(gametime, "AI check_productionsites: Too many %s: %u, ai limit: %u\n",
 		                   site.bo->name, site.bo->total_count(), site.bo->cnt_limit_by_aimode);
 	}
 
@@ -4516,7 +4631,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 		if (site.bo->total_count() > 1) {
 			verb_log_info_time(
 			   gametime,
-			   "AI %2d: We have %d barracks, that is not supported by AI and if caused by AI it is an "
+			   "AI %2d: We have %u barracks, that is not supported by AI and if caused by AI it is an "
 			   "error; dismantling the barracks at %3dx%3d\n",
 			   player_number(), site.bo->total_count(), site.site->get_position().x,
 			   site.site->get_position().y);
@@ -5381,7 +5496,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		// Inform if we are above ai type limit.
 		if (bo.total_count() > bo.cnt_limit_by_aimode) {
 			verb_log_warn_time(gametime,
-			                   "AI check_building_necessity: Too many %s: %d, ai limit: %d\n", bo.name,
+			                   "AI check_building_necessity: Too many %s: %u, ai limit: %u\n", bo.name,
 			                   bo.total_count(), bo.cnt_limit_by_aimode);
 		}
 
@@ -5576,21 +5691,18 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[37] = -1;
 			inputs[38] = -1;
 			inputs[39] = -1;
-			if (productionsites.size() / 3 > static_cast<uint32_t>(bo.total_count()) &&
-			    get_stocklevel(bo, gametime) < 20) {
+			if (productionsites.size() / 3 > bo.total_count() && get_stocklevel(bo, gametime) < 20) {
 				inputs[40] = static_cast<int>(persistent_data->trees_around_cutters < 40) * 1;
 				inputs[41] = static_cast<int>(persistent_data->trees_around_cutters < 60) * 1;
 				inputs[42] = static_cast<int>(persistent_data->trees_around_cutters < 80) * 1;
 			}
-			if (productionsites.size() / 4 > static_cast<uint32_t>(bo.total_count()) &&
-			    get_stocklevel(bo, gametime) < 20) {
+			if (productionsites.size() / 4 > bo.total_count() && get_stocklevel(bo, gametime) < 20) {
 				inputs[43] = static_cast<int>(persistent_data->trees_around_cutters < 40) * 2;
 				inputs[44] = static_cast<int>(persistent_data->trees_around_cutters < 60) * 2;
 				inputs[45] = static_cast<int>(persistent_data->trees_around_cutters < 80) * 2;
 			}
 
-			if (productionsites.size() / 2 > static_cast<uint32_t>(bo.total_count()) &&
-			    get_stocklevel(bo, gametime) < 10) {
+			if (productionsites.size() / 2 > bo.total_count() && get_stocklevel(bo, gametime) < 10) {
 				inputs[46] = static_cast<int>(persistent_data->trees_around_cutters < 20) * 1;
 				inputs[47] = static_cast<int>(persistent_data->trees_around_cutters < 40) * 1;
 				inputs[48] = static_cast<int>(persistent_data->trees_around_cutters < 60) * 1;
@@ -6949,7 +7061,7 @@ bool DefaultAI::check_supply(const BuildingObserver& bo) {
 		}
 	}
 	verb_log_dbg_time(
-	   game().get_gametime(), "Found supplies for %d of %d input wares for Building %s",
+	   game().get_gametime(), "Found supplies for %u of %u input wares for Building %s",
 	   static_cast<unsigned int>(supplied), static_cast<unsigned int>(bo.inputs.size()), bo.name);
 
 	return supplied == bo.inputs.size();
@@ -7286,7 +7398,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 						}
 					}
 					verb_log_dbg_time(
-					   gametime, "AI Diplomacy: For player(%d), the player(%d) has the diploscore: %d\n",
+					   gametime, "AI Diplomacy: For player(%u), the player(%u) has the diploscore: %d\n",
 					   static_cast<unsigned int>(pn), static_cast<unsigned int>(j), diplo_score);
 				}
 
@@ -7294,7 +7406,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 				                      cur_strength, old_strength, old60_strength, cass, cur_land,
 				                      old_land, old60_land, diplo_score, buildings, player_def);
 			} catch (const std::out_of_range&) {
-				verb_log_warn_time(gametime, "ComputerPlayer(%d): genstats entry missing - size :%d\n",
+				verb_log_warn_time(gametime, "ComputerPlayer(%u): genstats entry missing - size :%u\n",
 				                   static_cast<unsigned int>(player_number()),
 				                   static_cast<unsigned int>(genstats.size()));
 			}
@@ -7504,7 +7616,7 @@ void DefaultAI::print_stats(const Time& gametime) {
 				btype = "?";
 			}
 
-			verb_log_dbg_time(gametime, " %1s %-30s %5d(%3d%%)  %6d %6d %6d %8s %5d %5d %5d %5d\n",
+			verb_log_dbg_time(gametime, " %1s %-30s %5u(%3u%%)  %6u %6u %6u %8s %5d %5d %5u %5u\n",
 			                  btype.c_str(), bo.name,
 			                  bo.total_count() - bo.cnt_under_construction - bo.unoccupied_count -
 			                     bo.unconnected_count,
@@ -7531,14 +7643,14 @@ void DefaultAI::print_stats(const Time& gametime) {
 	}
 
 	verb_log_dbg_time(
-	   gametime, "Prodsites in constr: %2d, mines in constr: %2d %s %s\n", numof_psites_in_constr,
+	   gametime, "Prodsites in constr: %2u, mines in constr: %2u %s %s\n", numof_psites_in_constr,
 	   mines_in_constr(),
 	   (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) ? "NEW BUILDING STOP" : "",
 	   why.c_str());
 
 	verb_log_dbg_time(gametime,
-	                  "Least military score: %5d/%3d, msites in constr: %3d,"
-	                  "soldier st: %2d, strength: %3d\n",
+	                  "Least military score: %5d/%3d, msites in constr: %3u,"
+	                  "soldier st: %2d, strength: %3u\n",
 	                  persistent_data->least_military_score,
 	                  persistent_data->ai_personality_mil_upper_limit, msites_in_constr(),
 	                  static_cast<int8_t>(soldier_status_),
@@ -7568,7 +7680,7 @@ void DefaultAI::check_range(T value, T bottom_range, T upper_range, const char* 
 
 template <typename T> void DefaultAI::check_range(T value, T upper_range, const char* value_name) {
 	if (value > upper_range) {
-		verb_log_dbg_time(game().get_gametime(), " %d: unexpected value for %s: %d\n",
+		verb_log_dbg_time(game().get_gametime(), " %d: unexpected value for %s: %u\n",
 		                  player_number(), value_name, value.get());
 	}
 }
@@ -7986,7 +8098,7 @@ void DefaultAI::pre_calculating_needness_of_buildings(const Time& gametime) {
 		// we check if a previously not buildable Building of the basic economy is buildable again
 		// If so and we don't have basic economy achieved we add it to basic buildings list
 		// This should only happen in scenarios via scripting
-		if (!basic_economy_established && bo.basic_amount > static_cast<uint32_t>(bo.total_count()) &&
+		if (!basic_economy_established && bo.basic_amount > bo.total_count() &&
 		    bo.buildable(*player_)) {
 			persistent_data->remaining_basic_buildings.emplace(bo.id, bo.basic_amount);
 		}
@@ -8077,7 +8189,8 @@ void DefaultAI::pre_calculating_needness_of_buildings(const Time& gametime) {
 
 		} else if (bo.type == BuildingObserver::Type::kMilitarysite) {
 			bo.new_building = check_building_necessity(bo, gametime);
-		} else if (bo.type == BuildingObserver::Type::kTrainingsite) {
+		} else if (bo.type == BuildingObserver::Type::kTrainingsite ||
+		           bo.type == BuildingObserver::Type::kMarket) {
 			bo.new_building = check_building_necessity(bo, PerfEvaluation::kForConstruction, gametime);
 		} else if (bo.type == BuildingObserver::Type::kWarehouse) {
 			bo.new_building = check_warehouse_necessity(bo, gametime);
@@ -8095,8 +8208,8 @@ void DefaultAI::pre_calculating_needness_of_buildings(const Time& gametime) {
 		    (gametime.get() % 20 == 0 || log_needed)) {
 			log_dbg_time(
 			   gametime,
-			   "AI %2d: %-35s(%2d now) %-11s: max prec: %2d/%2d, primary priority: %4d, overdue: "
-			   "%3d\n",
+			   "AI %2d: %-35s(%2u now) %-11s: max prec: %2d/%2d, primary priority: %4d, overdue: "
+			   "%3u\n",
 			   player_number(), bo.name, bo.total_count(), (log_needed) ? "needed" : "not needed",
 			   bo.max_needed_preciousness, bo.max_preciousness, bo.primary_priority,
 			   bo.new_building_overdue);

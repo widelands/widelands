@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,6 @@
 #include "graphic/graphic.h"
 #include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
-#include "logic/cmd_queue.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_data_error.h"
@@ -71,6 +70,7 @@
 #include "wui/game_objectives_menu.h"
 #include "wui/info_panel.h"
 #include "wui/mapviewpixelfunctions.h"
+#include "wui/marketwindow.h"
 #include "wui/militarysitewindow.h"
 #include "wui/minimap.h"
 #include "wui/seafaring_statistics_menu.h"
@@ -159,7 +159,8 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
                        UI::PanelStyle::kWui,
                        UI::ButtonStyle::kWuiPrimary),
      quick_navigation_(&map_view_),
-     plugin_timers_(this, [this](const std::string& cmd) { egbase().lua().interpret_string(cmd); }),
+     plugin_actions_(
+        this, [this](const std::string& cmd) { egbase().lua().interpret_string(cmd); }),
      minimap_registry_(the_egbase.is_game()),
      workareas_cache_(nullptr),
      egbase_(the_egbase),
@@ -289,14 +290,15 @@ void InteractiveBase::add_plugin_menu() {
 	plugins_dropdown_.set_image(g_image_cache->get("images/plugin.png"));
 	toolbar()->add(&plugins_dropdown_);
 	plugins_dropdown_.selected.connect(
-	   [this] { plugin_timers_.plugin_action(plugins_dropdown_.get_selected(), true); });
+	   [this] { plugin_actions_.plugin_action(plugins_dropdown_.get_selected(), true); });
 }
 
 void InteractiveBase::add_toolbar_plugin(const std::string& action,
                                          const std::string& icon,
                                          const std::string& label,
-                                         const std::string& tt) {
-	plugins_dropdown_.add(label, action, g_image_cache->get(icon), false, tt);
+                                         const std::string& tt,
+                                         const std::string& hotkey) {
+	plugins_dropdown_.add(label, action, g_image_cache->get(icon), false, tt, hotkey);
 	finalize_toolbar();
 }
 
@@ -665,6 +667,7 @@ WorkareasEntry InteractiveBase::get_workarea_overlay(const Widelands::Map& map,
 		wa_index = 0;
 		break;
 	default:
+		// Should be impossible, checked by TribeDescr finalizing code
 		throw wexception(
 		   "Encountered unexpected WorkareaInfo size %i", static_cast<int>(workarea_info->size()));
 	}
@@ -957,7 +960,7 @@ void InteractiveBase::think() {
 		it = wanted_building_windows_.erase(it);
 	}
 
-	plugin_timers_.think();
+	plugin_actions_.think();
 }
 
 double InteractiveBase::average_fps() const {
@@ -1366,7 +1369,7 @@ void InteractiveBase::finish_build_road() {
 	if (road_building_mode_->type == RoadBuildingType::kWaterway &&
 	    length > egbase().map().get_waterway_max_length()) {
 		log_warn_time(egbase().get_gametime(),
-		              "Refusing to finish waterway building: length is %" PRIuS " but limit is %d\n",
+		              "Refusing to finish waterway building: length is %" PRIuS " but limit is %u\n",
 		              length, egbase().map().get_waterway_max_length());
 	} else if (length != 0u) {
 		upcast(Game, g, &egbase());
@@ -1778,7 +1781,12 @@ UI::UniqueWindow* InteractiveBase::show_building_window(const Widelands::Coords&
 			                    avoid_fastclick, workarea_preview_wanted);
 		};
 		break;
-	// TODO(sirver,trading): Add UI for market.
+	case Widelands::MapObjectType::MARKET:
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
+			new MarketWindow(*this, registry, *dynamic_cast<Widelands::Market*>(building),
+			                 avoid_fastclick, workarea_preview_wanted);
+		};
+		break;
 	default:
 		log_err_time(egbase().get_gametime(), "Unable to show window for building '%s', type '%s'.\n",
 		             building->descr().name().c_str(), to_string(building->descr().type()).c_str());
@@ -1843,6 +1851,10 @@ void InteractiveBase::broadcast_cheating_message(const std::string& code,
 }
 
 bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
+	if (plugin_actions_.check_keyboard_shortcut_action(code, down)) {
+		return true;
+	}
+
 	if (quick_navigation_.handle_key(down, code)) {
 		return true;
 	}
@@ -1858,6 +1870,12 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			screenshot_failed_ = false;
 		}
+		return true;
+	}
+
+	if (matches_shortcut(KeyboardShortcut::kCommonChangeMusic, code)) {
+		// request soundhandler to change music
+		g_sh->change_music();
 		return true;
 	}
 

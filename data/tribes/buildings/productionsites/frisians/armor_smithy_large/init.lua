@@ -54,15 +54,15 @@ wl.Descriptions():new_productionsite_type {
          actions = {
             -- "return=skipped" causes 10 sec delay
             -- time total: 58.8 + 58.8 + 68.8 + 58.8 + 58.8 + 10 = 314 sec
-            "call=produce_s3",
-            "call=produce_s4",
-            "call=produce_hg",
-            "call=produce_s3",
-            "call=produce_s4",
+            "call=produce_sword_broad",
+            "call=produce_sword_double",
+            "call=produce_helmet_golden",
+            "call=produce_sword_broad",
+            "call=produce_sword_double",
             "return=skipped"
          },
       },
-      produce_s3 = {
+      produce_sword_broad = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a broadsword because ...
          descname = _("forging a broadsword"),
          actions = {
@@ -77,7 +77,7 @@ wl.Descriptions():new_productionsite_type {
             "produce=sword_broad"
          },
       },
-      produce_s4 = {
+      produce_sword_double = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a double-edged sword because ...
          descname = _("forging a double-edged sword"),
          actions = {
@@ -92,7 +92,7 @@ wl.Descriptions():new_productionsite_type {
             "produce=sword_double"
          },
       },
-      produce_hg = {
+      produce_helmet_golden = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a golden helmet because ...
          descname = _("forging a golden helmet"),
          actions = {

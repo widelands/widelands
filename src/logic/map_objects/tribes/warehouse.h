@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -214,13 +214,16 @@ public:
 	PortDock* get_portdock() const {
 		return portdock_;
 	}
+
+	std::string warehouse_census_string() const;
 	void update_statistics_string(std::string* str) override;
 
 	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
 	// Returns the waresqueue of the expedition if this is a port.
 	// Will throw an exception otherwise.
-	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
+	InputQueue&
+	inputqueue(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id) override;
 
 	[[nodiscard]] const std::string& get_warehouse_name() const {
 		return warehouse_name_;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024 by the Widelands Development Team
+ * Copyright (C) 2021-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -552,7 +552,7 @@ void AddOnsPackager::clicked_write_changes() {
 		addon_selected();
 
 		// Update the global catalogue
-		WLApplication::initialize_g_addons();
+		WLApplication::get().initialize_g_addons();
 
 		progress_window_.set_visible(false);
 	}

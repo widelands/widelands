@@ -6,13 +6,6 @@ return {
    barbarians = {
       buildings = {
          {
-            name = "barbarians_market",
-            helptexts = {
-               -- TRANSLATORS: Purpose helptext for a Barbarian market: Market
-               purpose = pgettext("barbarians_building", "A market enables trading with other tribes.")
-            }
-         },
-         {
             name = "barbarians_custom_building",
             helptexts = {}
          }
