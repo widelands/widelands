@@ -1684,7 +1684,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a Frisian production site: Clay Pit
             lore_author = pgettext("frisians_building", "A clay digger arguing with a builder"),
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Clay Pit
-            purpose = pgettext("building", "Digs up mud from the ground and uses water to turn it into clay. Clay is used to make bricks, reinforce the charcoal kiln and to build ships.")
+            purpose = pgettext("building", "Digs up mud from the ground and uses water to turn it into clay. Clay is used to make bricks, reinforce the charcoal kiln and to build ships."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Clay Pit, part 1
+               pgettext("frisians_building", "This building can produce one clay between %1$s and %2$s, depending on how far the clay digger has to walk."):bformat(format_seconds(55), format_minutes_seconds(1, 13)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Clay Pit, part 2
+               pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1761,7 +1767,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Aqua Farm
             purpose = pgettext("frisians_building", "Breeds fish as food for soldiers and miners."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Aqua Farm
-            note = pgettext("building", "The aqua farm needs holes in the ground that were dug by a clay pit’s worker nearby to use as fishing ponds.")
+            note = pgettext("building", "The aqua farm needs holes in the ground that were dug by a clay pit’s worker nearby to use as fishing ponds."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Aqua Farm, part 1
+               pgettext("frisians_building", "This building can produce one fish between %1$s and %2$s, depending on how far the fisher has to walk."):bformat(format_seconds(51), format_minutes_seconds(1, 56)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Aqua Farm, part 2
+               pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
