@@ -93,11 +93,13 @@ int LuaMarket::set_marketname(lua_State* L) {
       :arg player: The player to make the trade offer to.
       :type player: :class:`wl.game.Player`
       :arg num_batches: Total number of trading batches to send
-         (use :const:`-1` for indefinite trades).
+         (use :const:`-1` for indefinite trades). Maximum 100.
       :type num_batches: :class:`integer`
-      :arg items_to_send: A table of warename to amount of items to send in each batch.
+      :arg items_to_send: A table of warename to amount of items to send in each batch
+         (maximum 100 wares in total).
       :type items_to_send: :class:`table`
-      :arg items_to_receive: A table of warename to amount of items to receive in each batch.
+      :arg items_to_receive: A table of warename to amount of items to receive in each batch
+         (maximum 100 wares in total).
       :type items_to_receive: :class:`table`
 
       :returns: The unique ID for the new trade offer.
@@ -120,6 +122,10 @@ int LuaMarket::propose_trade(lua_State* L) {
 	trade.num_batches = luaL_checkint32(L, 3);
 	trade.items_to_send = parse_wares_as_bill_of_material(L, 4, self->owner().tribe());
 	trade.items_to_receive = parse_wares_as_bill_of_material(L, 5, self->owner().tribe());
+
+	if (std::string err = trade.check_illegal(); !err.empty()) {
+		report_error(L, "Malformed trade: %s", err.c_str());
+	}
 
 	const Widelands::TradeID trade_id = game.propose_trade(trade);
 	lua_pushint32(L, trade_id);
