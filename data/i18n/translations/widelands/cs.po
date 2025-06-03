@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-05-19 03:23+0000\n"
+"POT-Creation-Date: 2025-05-31 03:16+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Ondřej Itřech, 2020-2021,2024-2025\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -466,7 +466,7 @@ msgstr "Nová náhodná mapa"
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/editor/editorinteractive.cc:230
-#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:34
+#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:36
 #: ../../../../src/ui_fsmenu/main.cc:443
 #: ../../../../src/wlapplication_options.cc:851
 msgid "Load Map"
@@ -865,8 +865,8 @@ msgid "Saving map…"
 msgstr "Ukládání mapy..."
 
 #: ../../../../src/editor/editorinteractive.cc:1619
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:315
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:370
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:314
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:369
 msgid "Error Saving Map!"
 msgstr "Chyba při ukládání mapy!"
 
@@ -1148,45 +1148,44 @@ msgid "Error!"
 msgstr "Chyba!"
 
 #. * TRANSLATORS: Directory name for user maps in map selection
-#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:82
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:284
+#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:113
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:283
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:217
 #: ../../../../src/wui/mapdata.cc:199
 msgid "My Maps"
 msgstr "Moje mapy"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:84
+#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:115
 #: ../../../../src/wui/mapdata.cc:193
 msgid "Multiplayer Scenarios"
 msgstr "Scénáře pro hry více hráčů"
 
 #. * TRANSLATORS: Directory name for SP Scenarios in map selection
-#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:86
+#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:117
 #: ../../../../src/wui/mapdata.cc:196
 msgid "Singleplayer Scenarios"
 msgstr "Scénáře pro hru jednoho hráče"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
-#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:88
+#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:119
 #: ../../../../src/wui/mapdata.cc:202
 msgid "Downloaded Maps"
 msgstr "Stažené mapy"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
-#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:91
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:284
+#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:122
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:283
 #, c-format
 msgid "Current directory: %s"
 msgstr "Aktuální adresář: %s"
 
 #. * TRANSLATORS: "Display: Original/Localized map/file names"
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:94
-#: ../../../../src/ui_fsmenu/options.cc:159
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:92
 msgid "Display"
 msgstr "Zobrazení"
 
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:114
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:112
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:250
 #: ../../../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:62
 #: ../../../../src/editor/ui_menus/player_menu.cc:87
@@ -1211,7 +1210,7 @@ msgstr "Zobrazení"
 msgid "OK"
 msgstr "OK"
 
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:115
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:113
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:258
 #: ../../../../src/editor/ui_menus/main_menu_new_map.cc:70
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:871
@@ -1234,19 +1233,19 @@ msgstr "OK"
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:143
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:137
 msgid "File names"
 msgstr "Názvy souborů"
 
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:144
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:138
 msgid "Map names"
 msgstr "Názvy mapy"
 
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:144
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:138
 msgid "Original map names"
 msgstr "Původní názvy map"
 
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:148
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:142
 msgid "Translated map names"
 msgstr "Přeložené názvy map"
 
@@ -1617,17 +1616,17 @@ msgstr "Chyba vytváření adresáře!"
 msgid "Error while creating directory ‘%s’."
 msgstr "Nastala chyba při vytváření adresáře ‘%s’."
 
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:313
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:312
 #: ../../../../src/wui/game_main_menu_save_game.cc:325
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Soubor s názvem \"%s\" již existuje. Chceš ho přepsat?"
 
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:345
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:344
 msgid "Saving the map…"
 msgstr "Mapa se ukládá…"
 
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:363
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:362
 msgid "Map saved"
 msgstr "Mapa uložena"
 
@@ -1909,7 +1908,7 @@ msgstr "Hospodářství"
 #: ../../../../src/game_io/game_loader.cc:143
 #: ../../../../src/game_io/game_saver.cc:90
 msgid "Trades"
-msgstr ""
+msgstr "Obchod"
 
 #: ../../../../src/game_io/game_loader.cc:150
 #: ../../../../src/game_io/game_saver.cc:97
@@ -2421,103 +2420,103 @@ msgstr "Obchodní nabídka"
 
 #: ../../../../src/logic/game.cc:1335
 msgid "New trade offer received"
-msgstr ""
+msgstr "Obdržena nová nabídka ke směně"
 
 #: ../../../../src/logic/game.cc:1336
 #, c-format
 msgid "You have received a new trade offer from %s."
-msgstr ""
+msgstr "%s ti posílá novou obchodní nabídku."
 
 #: ../../../../src/logic/game.cc:1366
 msgid "Trade Accepted"
-msgstr ""
+msgstr "Obchod přijat"
 
 #: ../../../../src/logic/game.cc:1367
 msgid "Trade offer accepted"
-msgstr ""
+msgstr "Nabídka ke směně přijata"
 
 #: ../../../../src/logic/game.cc:1368
 #, c-format
 msgid "%1$s has accepted your trade offer at %2$s."
-msgstr ""
+msgstr "%1$s přijímá nabídku ke směně poslanou z %2$s."
 
 #: ../../../../src/logic/game.cc:1386
 msgid "Trade Rejected"
-msgstr ""
+msgstr "Obchod zamítnut"
 
 #: ../../../../src/logic/game.cc:1387
 msgid "Trade offer rejected"
-msgstr ""
+msgstr "Nabídka ke směně zamítnuta"
 
 #: ../../../../src/logic/game.cc:1388
 #, c-format
 msgid "%1$s has rejected your trade offer at %2$s."
-msgstr ""
+msgstr "%1$s odmítá tvou nabídku ke směně poslanou z %2$s."
 
 #: ../../../../src/logic/game.cc:1410
 msgid "Trade Retracted"
-msgstr ""
+msgstr "Obchod odvolán"
 
 #: ../../../../src/logic/game.cc:1412
 msgid "Trade offer retracted"
-msgstr ""
+msgstr "Nabídka ke směně byla stažena"
 
 #: ../../../../src/logic/game.cc:1413
 #, c-format
 msgid "The trade offer by %s has been retracted."
-msgstr ""
+msgstr "Nabídka ke směně od hráče %s byla stažena."
 
 #: ../../../../src/logic/game.cc:1524
 msgid "Trade Extension Proposal"
-msgstr ""
+msgstr "Nabídka na prodloužení obchodu"
 
 #: ../../../../src/logic/game.cc:1526
 msgid "New trade extension proposal received"
-msgstr ""
+msgstr "Byl obdržen nový návrh na prodloužení obchodu"
 
 #: ../../../../src/logic/game.cc:1527
 #, c-format
 msgid "%s has proposed to extend a trade."
-msgstr ""
+msgstr "%s navrhuje prodloužení obchodu."
 
 #: ../../../../src/logic/game.cc:1554
 msgid "Trade Extension Retracted"
-msgstr ""
+msgstr "Nabídka k prodloužení obchodu stažena"
 
 #: ../../../../src/logic/game.cc:1557
 msgid "Trade extension proposal retracted"
-msgstr ""
+msgstr "Nabídka k prodloužení obchodu byla stažena"
 
 #: ../../../../src/logic/game.cc:1558
 #, c-format
 msgid "The proposal by %s to extend a trade has been retracted."
-msgstr ""
+msgstr "Nabídka k prodloužení obchodu od hráče %s byla stažena."
 
 #: ../../../../src/logic/game.cc:1596
 msgid "Trade Extension Rejected"
-msgstr ""
+msgstr "Nabídka k prodloužení obchodu zamítnuta"
 
 #: ../../../../src/logic/game.cc:1599
 msgid "Trade extension proposal rejected"
-msgstr ""
+msgstr "Nabídka k prodloužení obchodu byla zamítnuta"
 
 #: ../../../../src/logic/game.cc:1600
 #, c-format
 msgid "%s has rejected your proposal to extend a trade."
-msgstr ""
+msgstr "%s odmítá tvůj návrh k prodloužení obchodu."
 
 #: ../../../../src/logic/game.cc:1651
 msgid "Trade Extension Accepted"
-msgstr ""
+msgstr "Nabídka k prodloužení obchodu přijata"
 
 #: ../../../../src/logic/game.cc:1654
 msgid "Trade extension proposal accepted"
-msgstr ""
+msgstr "Nabídka k prodloužení obchodu byla přijata"
 
 #: ../../../../src/logic/game.cc:1655
 #, c-format
 msgid "%s has accepted your proposal to extend a trade."
-msgstr ""
+msgstr "%s přijímá tvůj návrh k prodloužení obchodu."
 
 #: ../../../../src/logic/game_data_error.cc:51
 msgid ""
@@ -2609,144 +2608,144 @@ msgstr "%u%% rozebráno"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:70
 msgid "A new market was added to your economy."
-msgstr ""
+msgstr "Tvé hospodářství má k dispozici novou tržnici."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:152
 #, c-format
 msgid "%u trade"
 msgid_plural "%u trades"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%u obchod"
+msgstr[1] "%u obchody"
+msgstr[2] "%u obchodu"
+msgstr[3] "%u obchodů"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:274
 msgid "Trade Cancelled"
-msgstr ""
+msgstr "Obchod zrušen"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:274
 msgid "Trade Complete"
-msgstr ""
+msgstr "Obchod dokončen"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:276
 msgid "Trade agreement cancelled"
-msgstr ""
+msgstr "Obchod byl zrušen"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:276
 msgid "Trade agreement complete"
-msgstr ""
+msgstr "Obchod úspěšně proběhl"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:277
 #, c-format
 msgid "Your trade agreement at %s has been completed."
-msgstr ""
+msgstr "Obchodní dohoda z %s úspěšně proběhla."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:278
 #, c-format
 msgid "Your trade agreement at %s has been cancelled."
-msgstr ""
+msgstr "Obchodní dohoda z %s byla zrušena."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:546
 msgid "Trade Paused"
-msgstr ""
+msgstr "Obchod pozastaven"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:547
 msgid "Trade agreement paused"
-msgstr ""
+msgstr "Obchodní dohoda je pozastavena"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:548
 #, c-format
 msgid "%1$s paused the trade with you at %2$s."
-msgstr ""
+msgstr "%1$s pozastavuje vzájemný obchod s tržnicí %2$s. "
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:552
 msgid "Trade Resumed"
-msgstr ""
+msgstr "Obchod obnoven"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:553
 msgid "Trade agreement resumed"
-msgstr ""
+msgstr "Plnění obchodní dohody obnoveno"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:554
 #, c-format
 msgid "%1$s resumed the trade with you at %2$s."
-msgstr ""
+msgstr "%1$s obnovuje vzájemný obchod s tržnicí %2$s."
 
 #. * TRANSLATORS: "At" is the market's name, and "with" is the receiving
 #. player's name
 #: ../../../../src/logic/map_objects/tribes/market.cc:714
 #, c-format
 msgid "Trade agreement at %1$s with %2$s"
-msgstr ""
+msgstr "Obchod s hráčem %2$s z tržnice %1$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:722
 #, c-format
 msgid "Trade offer from %s"
-msgstr ""
+msgstr "Z tržnice %s přišla nabídka ke směně"
 
 #. * TRANSLATORS: "From" is the market's name, and "to" is the receiving
 #. player's name
 #: ../../../../src/logic/map_objects/tribes/market.cc:732
 #, c-format
 msgid "Trade offer from %1$s to %2$s"
-msgstr ""
+msgstr "Nabídka ke směně z tržnice %1$s pro hráče %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:742
 #, c-format
 msgid "%d batch"
 msgid_plural "%d batches"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d dodávka"
+msgstr[1] "%d dodávky"
+msgstr[2] "%d dodávky"
+msgstr[3] "%d dodávek"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:744
 msgid "Trade runs indefinitely"
-msgstr ""
+msgstr "Obchod neomezen"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:755
 #, c-format
 msgid "%d batch delivered"
 msgid_plural "%d batches delivered"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d dodávka doručena"
+msgstr[1] "%d dodávky doručeny"
+msgstr[2] "%d dodávky doručeno"
+msgstr[3] "%d dodávek doručeno"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:763
 #, c-format
 msgid "%d batch remaining"
 msgid_plural "%d batches remaining"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d  dodávka zbývá"
+msgstr[1] "%d  dodávky zbývají"
+msgstr[2] "%d  dodávky zbývá"
+msgstr[3] "%d dodávek zbývá"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:777
 msgid "Paused by both players"
-msgstr ""
+msgstr "Pozastaveno oběma hráči"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:779
 msgid "Paused by you"
-msgstr ""
+msgstr "Mnou pozastaveno"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:780
 #: ../../../../src/logic/map_objects/tribes/market.cc:784
 #, c-format
 msgid "Paused by %s"
-msgstr ""
+msgstr "Pozastaveno hráčem %s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:786
 msgid "Active"
-msgstr ""
+msgstr "Probíhá"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:798
 msgid "Player sends:"
-msgstr ""
+msgstr "Spoluhráč posílá:"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:798
 msgid "You send:"
-msgstr ""
+msgstr "Mnou odesíláno:"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
 #. * TRANSLATORS:    %1$i = "2"
@@ -2756,15 +2755,15 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1407
 #, c-format
 msgid "%1$i× %2$s"
-msgstr ""
+msgstr "%1$i× %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:810
 msgid "Player receives:"
-msgstr ""
+msgstr "Spoluhráč obdržel:"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:810
 msgid "You receive:"
-msgstr ""
+msgstr "Mnou odbdrženo:"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:253
@@ -3213,27 +3212,27 @@ msgstr "Výprava je připravena"
 msgid "An expedition ship is waiting for your commands."
 msgstr "Vypravená loď čeká na tvé rozkazy."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2434
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2437
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr "Potápí se"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2436
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2439
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr "Bojuje"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2440
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2443
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr "V přestavbě na přepravní loď"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2443
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2446
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr "V přestavbě na válečnou loď"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2451
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2454
 #: ../../../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
@@ -3245,10 +3244,10 @@ msgstr "Válečná loď"
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2457
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2467
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2473
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2487
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2460
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2470
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2476
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2490
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -3256,7 +3255,7 @@ msgstr "Pluje do %s"
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2462
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2465
 #: ../../../../src/wui/seafaring_statistics_menu.cc:260
 msgctxt "ship_state"
 msgid "Empty"
@@ -3264,7 +3263,7 @@ msgstr "Bez nákladu"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2482
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2485
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -3272,7 +3271,7 @@ msgstr "Převáží náklad do %s"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2494
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2497
 #: ../../../../src/wui/seafaring_statistics_menu.cc:264
 msgctxt "ship_state"
 msgid "Waiting"
@@ -3280,14 +3279,14 @@ msgstr "Čeká"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2498
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2501
 #: ../../../../src/wui/seafaring_statistics_menu.cc:266
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Průzkum"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2502
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2505
 #: ../../../../src/wui/seafaring_statistics_menu.cc:268
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -3296,7 +3295,7 @@ msgstr "Nalezeno místo pro přístav"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2507
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2510
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Zakládání kolonie"
@@ -3485,7 +3484,7 @@ msgstr "Přístav %d"
 #, c-format
 msgctxt "market"
 msgid "Market %d"
-msgstr ""
+msgstr "Tržnice %d"
 
 #: ../../../../src/logic/player.cc:2097
 #, c-format
@@ -6741,93 +6740,93 @@ msgstr "Vybrat mapu…"
 msgid "Change saved game…"
 msgstr "Vybrat uloženou hru…"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:204
+#: ../../../../src/ui_fsmenu/launch_game.cc:203
 msgid "Start game"
 msgstr "Začít hru"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:290
+#: ../../../../src/ui_fsmenu/launch_game.cc:289
 msgid "Show fewer options"
 msgstr "Skrýt možnosti"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:290
+#: ../../../../src/ui_fsmenu/launch_game.cc:289
 msgid "Show more options"
 msgstr "Zobrazit možnosti"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:306
+#: ../../../../src/ui_fsmenu/launch_game.cc:305
 msgid "The relations between players are set by the scenario"
 msgstr "Vztahy mezi hráči jsou definovány scénářem"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:308
+#: ../../../../src/ui_fsmenu/launch_game.cc:307
 msgid "The relations between players are set by the saved game"
 msgstr "Vztahy mezi hráči jsou převzaty z uložené hry"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:310
+#: ../../../../src/ui_fsmenu/launch_game.cc:309
 msgid "The selected win condition does not allow peaceful matches"
 msgstr "Zvolená výherní podmínka nedovoluje mírové nastavení"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:312
+#: ../../../../src/ui_fsmenu/launch_game.cc:311
 msgid "Forbid fighting between players"
 msgstr "Zakázat souboje mezi hráči"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:343
+#: ../../../../src/ui_fsmenu/launch_game.cc:342
 msgid "All selected starting conditions ignore the map’s starting positions"
 msgstr "Všechna zvolená počáteční nastavení nerespektují výchozí pozice dané mapy"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:349
+#: ../../../../src/ui_fsmenu/launch_game.cc:348
 msgid "The starting positions are set by the scenario"
 msgstr "Výchozí pozice je definována scénářem"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:351
+#: ../../../../src/ui_fsmenu/launch_game.cc:350
 msgid "The starting positions are set by the saved game"
 msgstr "Výchozí pozice je převzata z uložené hry"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:354
+#: ../../../../src/ui_fsmenu/launch_game.cc:353
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr "Dovolit hráčům, aby si vybrali svou výchozí pozici na začátku hry"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:374
+#: ../../../../src/ui_fsmenu/launch_game.cc:373
 msgid "Player vision is set by the scenario"
 msgstr "Viditelnost mapy definována scénářem"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:376
+#: ../../../../src/ui_fsmenu/launch_game.cc:375
 msgid "Player vision is set by the saved game"
 msgstr "Viditelnost mapy určena nastavením uložené hry"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:378
+#: ../../../../src/ui_fsmenu/launch_game.cc:377
 msgid "Give all players permanent vision of the entire map"
 msgstr "Trvale umožnit viditelnost celé mapy"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:400
+#: ../../../../src/ui_fsmenu/launch_game.cc:399
 msgid "Naval warfare is set by the scenario"
 msgstr "Námořní vojenství určeno nastavením scénáře"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:402
+#: ../../../../src/ui_fsmenu/launch_game.cc:401
 msgid "Naval warfare is set by the saved game"
 msgstr "Námořní vojenství určeno nastavením uložené hry"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:405
+#: ../../../../src/ui_fsmenu/launch_game.cc:404
 msgid ""
 "Enable coastal invasions and ship-to-ship battles. This feature is "
 "experimental and may undergo substantial redesign in future versions of "
 "Widelands."
 msgstr "Povolit námořní invazi a námořní bitvy mezi bitevními loděmi. Jde o zkušební provoz, v budoucích verzích může být tento herní prvek výrazně změněn."
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:426
+#: ../../../../src/ui_fsmenu/launch_game.cc:425
 msgid "Player relations are set by the scenario"
 msgstr "Diplomatické vztahy určeny scénářem"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:428
+#: ../../../../src/ui_fsmenu/launch_game.cc:427
 msgid "Player relations are set by the saved game"
 msgstr "Diplomatické vztahy určeny nastavením uložené hry"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:430
+#: ../../../../src/ui_fsmenu/launch_game.cc:429
 msgid "Disallow players to change their alliances during the game"
 msgstr "Znemožnit změny spojenectví v průběhu hry"
 
 #. * TRANSLATORS: This is a map tag
-#: ../../../../src/ui_fsmenu/launch_game.cc:439
+#: ../../../../src/ui_fsmenu/launch_game.cc:438
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:506
 #: ../../../../src/ui_fsmenu/scenariodetails.cc:47
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:283
@@ -6835,21 +6834,21 @@ msgstr "Znemožnit změny spojenectví v průběhu hry"
 msgid "Scenario"
 msgstr "Scénář"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:440
+#: ../../../../src/ui_fsmenu/launch_game.cc:439
 msgid "Win condition is set through the scenario"
 msgstr "Výherní podmínka je definována prostřednictvím scénáře."
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:446
+#: ../../../../src/ui_fsmenu/launch_game.cc:445
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:510
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:287
 msgid "Saved Game"
 msgstr "Uložená hra"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:448
+#: ../../../../src/ui_fsmenu/launch_game.cc:447
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Jde o uloženou rozehranou hru – výherní podmínka již byla nastavena dříve."
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:523
+#: ../../../../src/ui_fsmenu/launch_game.cc:522
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -6927,12 +6926,12 @@ msgid "Load this replay"
 msgstr "Nahrát záznam"
 
 #: ../../../../src/ui_fsmenu/loadgame.cc:79
-#: ../../../../src/ui_fsmenu/mapselect.cc:75
+#: ../../../../src/ui_fsmenu/mapselect.cc:72
 msgid "Return to the multiplayer game setup"
 msgstr "Návrat do nastavení hry pro více hráčů"
 
 #: ../../../../src/ui_fsmenu/loadgame.cc:80
-#: ../../../../src/ui_fsmenu/mapselect.cc:77
+#: ../../../../src/ui_fsmenu/mapselect.cc:74
 msgid "Return to the single player menu"
 msgstr "Návrat do nabídky hry jednoho hráče"
 
@@ -7267,63 +7266,63 @@ msgstr "Nevybrána žádná mapa"
 msgid "(no map)"
 msgstr "(žádná mapa)"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:49
+#: ../../../../src/ui_fsmenu/mapselect.cc:46
 msgid "Choose Map"
 msgstr "Výběr mapy"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:90
+#: ../../../../src/ui_fsmenu/mapselect.cc:85
 msgid "Show all maps"
 msgstr "Zobrazit všechny mapy"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:93
+#: ../../../../src/ui_fsmenu/mapselect.cc:88
 msgid "Show original map names"
 msgstr "Zobrazit originální názvy map"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:111
+#: ../../../../src/ui_fsmenu/mapselect.cc:106
 msgid "Filter by official status"
 msgstr "Filtrovat podle oficiálního statusu"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:113
+#: ../../../../src/ui_fsmenu/mapselect.cc:108
 msgid "Official & Unofficial"
 msgstr "Oficiální a neoficiální"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:113
+#: ../../../../src/ui_fsmenu/mapselect.cc:108
 msgid "Show both official and unofficial maps"
 msgstr "Zobrazit oficiální i neoficiální mapy"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:125
+#: ../../../../src/ui_fsmenu/mapselect.cc:120
 msgid "Filter by desired line-up"
 msgstr "Filtrovat podle týmového rozložení"
 
 #. * TRANSLATORS: Filter entry in map selection. Other entries are "Free for
 #. all"",
 #. * "Teams of 2" etc.
-#: ../../../../src/ui_fsmenu/mapselect.cc:129
+#: ../../../../src/ui_fsmenu/mapselect.cc:124
 msgid "Any Teams"
 msgstr "Týmy – vše"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:129
+#: ../../../../src/ui_fsmenu/mapselect.cc:124
 msgid "Do not filter by line-up suggestions"
 msgstr "Nefiltrovat navržená týmová rozložení"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:144
+#: ../../../../src/ui_fsmenu/mapselect.cc:139
 msgid "Filter by balancing status"
 msgstr "Filtrovat podle vyváženosti"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:499
+#: ../../../../src/ui_fsmenu/mapselect.cc:409
 msgid "Balanced & Unbalanced"
 msgstr "Vyvážené a nevyvážené"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:499
+#: ../../../../src/ui_fsmenu/mapselect.cc:409
 msgid "Show both balanced and unbalanced maps"
 msgstr "Zobrazit vyvážené i nevyvážené mapy"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:504
+#: ../../../../src/ui_fsmenu/mapselect.cc:414
 msgctxt "balancing"
 msgid "Unspecified"
 msgstr "Blíže neurčeno"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:505
+#: ../../../../src/ui_fsmenu/mapselect.cc:415
 msgid "The map does not specify whether it is balanced"
 msgstr "Neurčeno zda je mapa vyvážená"
 
@@ -7680,6 +7679,11 @@ msgstr "Jazyk"
 msgid "Window Size"
 msgstr "Velikost okna"
 
+#: ../../../../src/ui_fsmenu/options.cc:159
+msgctxt "multiscreen"
+msgid "Display"
+msgstr "Zobrazit"
+
 #. * TRANSLATORS: short description for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:168
 msgid "Let the system draw the mouse cursor"
@@ -7848,9 +7852,9 @@ msgstr "Nikdy"
 
 #. * TRANSLATORS: Entry in the display selection dropdown
 #: ../../../../src/ui_fsmenu/options.cc:583
-#: ../../../../src/wui/info_panel.cc:212
+msgctxt "multiscreen"
 msgid "Follow mouse"
-msgstr "Skrývat panel"
+msgstr "Zobrazit pohybem myši"
 
 #. * TRANSLATORS: Display index and virtual coordinates, e.g, '#0 (0, 0, 1920,
 #. 1080)'
@@ -7859,37 +7863,37 @@ msgid "#%1% (%2%, %3%, %4%, %5%)"
 msgstr "#%1% (%2%, %3%, %4%, %5%)"
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../../../src/ui_fsmenu/options.cc:603
+#: ../../../../src/ui_fsmenu/options.cc:604
 msgid "Fullscreen"
 msgstr "Celá obrazovka"
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../../../src/ui_fsmenu/options.cc:606
+#: ../../../../src/ui_fsmenu/options.cc:607
 msgid "Maximized"
 msgstr "Maximalizované okno"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 × 600
-#: ../../../../src/ui_fsmenu/options.cc:622
-#: ../../../../src/ui_fsmenu/options.cc:630
+#: ../../../../src/ui_fsmenu/options.cc:623
+#: ../../../../src/ui_fsmenu/options.cc:631
 msgid "%1% × %2%"
 msgstr "%1% × %2%"
 
-#: ../../../../src/ui_fsmenu/options.cc:698
+#: ../../../../src/ui_fsmenu/options.cc:699
 msgid "Try system language"
 msgstr "Zkus jazyk systému"
 
 #. * TRANSLATORS: %s = language name
-#: ../../../../src/ui_fsmenu/options.cc:810
+#: ../../../../src/ui_fsmenu/options.cc:811
 #, c-format
 msgid "The translation into %s is complete."
 msgstr "Zvolena jazyková mutace: %s. Text je plně přeložen."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../../../src/ui_fsmenu/options.cc:814
+#: ../../../../src/ui_fsmenu/options.cc:815
 msgid "The translation into %1% is %2%%% complete."
 msgstr "Zvolena jazyková mutace: %1%. Překlad do toho jazyka je úplný z %2%%%."
 
-#: ../../../../src/ui_fsmenu/options.cc:826
+#: ../../../../src/ui_fsmenu/options.cc:827
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr "Chceš-li pomoci s překladem, prosím navštiv %s"
@@ -8765,7 +8769,7 @@ msgstr "Zobrazit pouze zprávy scénáře"
 
 #: ../../../../src/wlapplication_options.cc:750
 msgid "Show Diplomacy Messages Only"
-msgstr ""
+msgstr "Zobrazit pouze zprávy týkající se diplomacie"
 
 #: ../../../../src/wlapplication_options.cc:755
 msgid "Go to Ship"
@@ -9282,40 +9286,40 @@ msgstr "Vzdáváš se?"
 
 #: ../../../../src/wui/actionconfirm.cc:568
 msgid "Cancel?"
-msgstr ""
+msgstr "Zrušit?"
 
 #: ../../../../src/wui/actionconfirm.cc:568
 msgid "Do you really want to cancel this trade agreement?"
-msgstr ""
+msgstr "Opravdu chceš zrušit tuto obchodní dohodu?"
 
 #: ../../../../src/wui/actionconfirm.cc:596
 msgid "Extend Trade"
-msgstr ""
+msgstr "Prodloužit obchod"
 
 #: ../../../../src/wui/actionconfirm.cc:597
 msgid "Select by how many batches you want to extend this trade:"
-msgstr ""
+msgstr "Vyber o kolik dodávek chceš prodloužit tento obchod:"
 
 #: ../../../../src/wui/actionconfirm.cc:603
 #: ../../../../src/wui/marketwindow.cc:75
 msgid "Toggle indefinite trade"
-msgstr ""
+msgstr "Přepnout neomezené dodávky"
 
 #: ../../../../src/wui/actionconfirm.cc:604
 #: ../../../../src/wui/marketwindow.cc:76
 msgid "Batches:"
-msgstr ""
+msgstr "Dodávky:"
 
 #: ../../../../src/wui/actionconfirm.cc:639
 msgid "Unpause?"
-msgstr ""
+msgstr "Obnovit?"
 
 #: ../../../../src/wui/actionconfirm.cc:640
 msgid ""
 "Do you really want to unpause this trade?\n"
 "\n"
 "Doing so will reset all queues to their maximum capacity."
-msgstr ""
+msgstr "Opravdu chceš obnovit tuto obchodní dohodu?\n\nPotvrzením obnovíš veškeré hodnoty čekajícího zboží na jejich maximum."
 
 #: ../../../../src/wui/attack_window.cc:79
 msgid "Attack"
@@ -10114,15 +10118,15 @@ msgstr "Pozvání hráče do svého týmu"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:193
 msgid "Trade offers you have received from other players"
-msgstr ""
+msgstr "Nabídky obdržené od ostatních hráčů"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:195
 msgid "Trades you have proposed to other players"
-msgstr ""
+msgstr "Mnou navržené nabídky jiným hráčům"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:196
 msgid "Your active trade agreements"
-msgstr ""
+msgstr "Moje aktivní obchodní dohody"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:246
 msgid "No team"
@@ -10172,145 +10176,145 @@ msgstr "Stáhnout zpět"
 #: ../../../../src/wui/marketwindow.cc:911
 #, c-format
 msgid "Trade Offers (%u)"
-msgstr ""
+msgstr "Obchodní nabídky (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:414
 #: ../../../../src/wui/marketwindow.cc:424
 msgid "Nobody has offered you any trades at the moment."
-msgstr ""
+msgstr "V tuto chvíli nemáš žádné obchodní nabídky."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:436
 msgid "Market to accept the trade at"
-msgstr ""
+msgstr "Tržnice k přijetí zboží:"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:442
 #: ../../../../src/wui/game_diplomacy_menu.cc:673
 #: ../../../../src/wui/marketwindow.cc:589
 #, c-format
 msgid "%s (closest)"
-msgstr ""
+msgstr "%s (nejbližší)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:445
 #, c-format
 msgid "%1$s (distance: %2$u field)"
 msgid_plural "%1$s (distance: %2$u fields)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1$s (vzdálenost %2$u pole)"
+msgstr[1] "%1$s (vzdálenost %2$u pole)"
+msgstr[2] "%1$s (vzdálenost %2$u pole)"
+msgstr[3] "%1$s (vzdálenost %2$u polí)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:452
 #: ../../../../src/wui/marketwindow.cc:443
 msgid "Accept this trade offer"
-msgstr ""
+msgstr "Přijmout nabídku ke směně"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:455
 #: ../../../../src/wui/marketwindow.cc:446
 msgid "Reject this trade offer"
-msgstr ""
+msgstr "Odmítnout nabídku ke směně"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:459
 msgid "Build a market to accept trade offers."
-msgstr ""
+msgstr "Pro přijetí nabídky ke směně postav tržnici."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:498
 #: ../../../../src/wui/marketwindow.cc:905
 #, c-format
 msgid "Proposed Trades (%u)"
-msgstr ""
+msgstr "Navržené obchody (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:509
 msgid ""
 "There are no pending trade proposals at the moment. You can propose a new "
 "trade from a market."
-msgstr ""
+msgstr "V tuto chvíli nepoptáváš žádné zboží. Novou poptávku můžeš vytvořit pomocí tržnice."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:533
 #: ../../../../src/wui/game_diplomacy_menu.cc:642
 msgid "Center view on this market"
-msgstr ""
+msgstr "Přesunout se k této tržnici"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:536
 #: ../../../../src/wui/marketwindow.cc:314
 msgid "Retract this trade offer"
-msgstr ""
+msgstr "Odvolat tuto nabídku ke směně"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:548
 #: ../../../../src/wui/marketwindow.cc:322
 msgid "Move this trade proposal…"
-msgstr ""
+msgstr "Přemístit tuto obchodní nabídku…"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:558
 #: ../../../../src/wui/marketwindow.cc:333
 #, c-format
 msgid "Move this trade proposal to %s"
-msgstr ""
+msgstr "Přemístit obchodní nabídku do tržnice %s"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:563
 #: ../../../../src/wui/game_diplomacy_menu.cc:683
 #: ../../../../src/wui/marketwindow.cc:339
 #: ../../../../src/wui/marketwindow.cc:599
 msgid "You have no markets you could move this trade to."
-msgstr ""
+msgstr "Nejsou k dispozici žádné tržnice, kam by bylo možné směnu přemístit."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:598
 #, c-format
 msgid "Active Trades (%u)"
-msgstr ""
+msgstr "Probíhající obchody (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:609
 msgid "There are no active trade agreements at the moment."
-msgstr ""
+msgstr "V této chvíli nejsou realizovány žádné obchodní dohody."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:649
 #: ../../../../src/wui/game_diplomacy_menu.cc:657
 #: ../../../../src/wui/marketwindow.cc:545
 #: ../../../../src/wui/marketwindow.cc:553
 msgid "Propose extending this trade"
-msgstr ""
+msgstr "Navrhnout prodloužení této obchodní dohody"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:650
 #: ../../../../src/wui/marketwindow.cc:546
 #, c-format
 msgid "Hold down Ctrl to extend it by %d batch"
 msgid_plural "Hold down Ctrl to extend it by %d batches"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Při současném přidržení Ctrl se zvýší o %d dodávku"
+msgstr[1] "Při současném přidržení Ctrl se zvýší o %d dodávky"
+msgstr[2] "Při současném přidržení Ctrl se zvýší o %d dodávky"
+msgstr[3] "Při současném přidržení Ctrl se zvýší o %d dodávek"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:655
 #: ../../../../src/wui/marketwindow.cc:551
 msgid "Hold down Shift to extend the trade indefinitely"
-msgstr ""
+msgstr "Při současném přidržení Shift se nastaví obchod bez omezení"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:660
 msgid "Cancel this trade agreement"
-msgstr ""
+msgstr "Zrušit tuto obchodní dohodu"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:663
 #: ../../../../src/wui/marketwindow.cc:576
 msgid "Move this trade…"
-msgstr ""
+msgstr "Přemístit tento obchod…"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:676
 #: ../../../../src/wui/marketwindow.cc:592
 #, c-format
 msgid "Move this trade to %s (closest)"
-msgstr ""
+msgstr "Přemístit do nejbližší tržnice %s"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:677
 #: ../../../../src/wui/marketwindow.cc:593
 #, c-format
 msgid "Move this trade to %s"
-msgstr ""
+msgstr "Přemístit do tržnice %s"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:737
 #: ../../../../src/wui/marketwindow.cc:678
 #: ../../../../src/wui/marketwindow.cc:764
 #, c-format
 msgid "%1$s proposed to extend this trade indefinitely."
-msgstr ""
+msgstr "%1$s navrhuje zrušení limitu u tohoto obchodu."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:740
 #: ../../../../src/wui/marketwindow.cc:681
@@ -10318,40 +10322,40 @@ msgstr ""
 #, c-format
 msgid "%1$s proposed to extend this trade by %2$d batch."
 msgid_plural "%1$s proposed to extend this trade by %2$d batches."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1$s navrhuje navýšení limitu u tohoto obchodu o %2$d dodávku."
+msgstr[1] "%1$s navrhuje navýšení limitu u tohoto obchodu o %2$d dodávky."
+msgstr[2] "%1$s navrhuje navýšení limitu u tohoto obchodu o %2$d dodávky."
+msgstr[3] "%1$s navrhuje navýšení limitu u tohoto obchodu o %2$d dodávek."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:749
 #: ../../../../src/wui/marketwindow.cc:691
 msgid "Reject this trade extension proposal"
-msgstr ""
+msgstr "Zamítnout návrh na změnu množství dodávek"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:753
 #: ../../../../src/wui/marketwindow.cc:695
 msgid "Accept this trade extension proposal"
-msgstr ""
+msgstr "Přijmout návrh na změnu množství dodávek"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:783
 #: ../../../../src/wui/marketwindow.cc:738
 msgid "You proposed to extend this trade indefinitely."
-msgstr ""
+msgstr "Navrhuji zrušení limitu u tohoto obchodu."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:784
 #: ../../../../src/wui/marketwindow.cc:734
 #, c-format
 msgid "You proposed to extend this trade by %d batch."
 msgid_plural "You proposed to extend this trade by %d batches."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Navrhuji navýšení limitu u tohoto obchodu o %d dodávku."
+msgstr[1] "Navrhuji navýšení limitu u tohoto obchodu o %d dodávky."
+msgstr[2] "Navrhuji navýšení limitu u tohoto obchodu o %d dodávky."
+msgstr[3] "Navrhuji navýšení limitu u tohoto obchodu o %d dodávek."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:793
 #: ../../../../src/wui/marketwindow.cc:744
 msgid "Retract this trade extension proposal"
-msgstr ""
+msgstr "Stáhnout návrh na změnu množství dodávek"
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../../../src/wui/game_exit_confirm_box.cc:27
@@ -10435,7 +10439,7 @@ msgstr "Zobrazit pouze zprávy scénáře"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:604
 msgid "Show diplomacy messages only"
-msgstr ""
+msgstr "Zobrazit pouze zprávy týkající se diplomacie"
 
 #: ../../../../src/wui/game_message_menu.cc:647
 msgid "Messages: Archive"
@@ -10660,6 +10664,10 @@ msgstr "Armáda"
 #: ../../../../src/wui/info_panel.cc:153
 msgid "Info Panel Visibility"
 msgstr "Zobrazení informačního panelu"
+
+#: ../../../../src/wui/info_panel.cc:212
+msgid "Follow mouse"
+msgstr "Skrývat panel"
 
 #: ../../../../src/wui/info_panel.cc:217
 msgid "Hide"
@@ -11210,7 +11218,7 @@ msgstr "Chyba herních dat"
 msgid "Pl."
 msgstr "Hr."
 
-#: ../../../../src/wui/maptable.cc:35 ../../../../src/wui/maptable.cc:64
+#: ../../../../src/wui/maptable.cc:35 ../../../../src/wui/maptable.cc:69
 msgid "Filename"
 msgstr "Název souboru"
 
@@ -11226,108 +11234,108 @@ msgstr "Rozměr"
 msgid "The size of the map (Width x Height)"
 msgstr "Rozměr mapy (šířka x výška)"
 
-#: ../../../../src/wui/maptable.cc:68
+#: ../../../../src/wui/maptable.cc:73
 msgid "Map Name"
 msgstr "Název mapy"
 
 #: ../../../../src/wui/marketwindow.cc:80
 msgid "Propose"
-msgstr ""
+msgstr "Odeslat nabídku"
 
 #: ../../../../src/wui/marketwindow.cc:96
 msgid "You offer:"
-msgstr ""
+msgstr "Nabídka:"
 
 #: ../../../../src/wui/marketwindow.cc:100
 msgid "You demand:"
-msgstr ""
+msgstr "Poptávka:"
 
 #: ../../../../src/wui/marketwindow.cc:106
 msgid "Decrease amount by 10"
-msgstr ""
+msgstr "Snížit množství o 10"
 
 #: ../../../../src/wui/marketwindow.cc:113
 msgid "Decrease amount"
-msgstr ""
+msgstr "Snížit množství"
 
 #: ../../../../src/wui/marketwindow.cc:121
 msgid "Increase amount"
-msgstr ""
+msgstr "Zvýšit množství"
 
 #: ../../../../src/wui/marketwindow.cc:128
 msgid "Increase amount by 10"
-msgstr ""
+msgstr "Zvýšit množství o 10"
 
 #: ../../../../src/wui/marketwindow.cc:189
 msgid "Please select the player you want to trade with."
-msgstr ""
+msgstr "Prosím zvol hráče k obchodování."
 
 #: ../../../../src/wui/marketwindow.cc:195
 msgid "Please select the wares you want to send and receive."
-msgstr ""
+msgstr "Prosím zvol zboží, které nabízíš a které poptáváš."
 
 #: ../../../../src/wui/marketwindow.cc:214
 #, c-format
 msgid "You cannot both send and receive the same ware type (%s)."
-msgstr ""
+msgstr "Nelze nabízet a poptávat stejný typ zboží (%s)."
 
 #: ../../../../src/wui/marketwindow.cc:220
 msgid "Propose the configured trade to the selected player"
-msgstr ""
+msgstr "Odeslat návrh zvolenému hráči"
 
 #: ../../../../src/wui/marketwindow.cc:288
 msgid ""
 "There are no pending trade proposals at the moment. You can propose a new "
 "trade from the first tab."
-msgstr ""
+msgstr "V tuto chvíli nepoptáváš žádné zboží. Novou poptávku můžeš vytvořit v první záložce."
 
 #: ../../../../src/wui/marketwindow.cc:291
 msgid "There are no pending trade proposals at the moment."
-msgstr ""
+msgstr "V tuto chvíli nepoptáváš žádné zboží."
 
 #: ../../../../src/wui/marketwindow.cc:562
 msgid "Cancel this trade"
-msgstr ""
+msgstr "Zrušit tento obchod"
 
 #: ../../../../src/wui/marketwindow.cc:784
 msgid ""
 "Resume this paused trade. This requires all queues to be at their maximum "
 "capacity."
-msgstr ""
+msgstr "Obnovit tuto obchodní dohodu. Předpokládá, že veškeré hodnoty zboží k odeslání budou na svém maximumu."
 
 #: ../../../../src/wui/marketwindow.cc:788
 msgid "Pause this trade"
-msgstr ""
+msgstr "Pozastavit tento obchod"
 
 #: ../../../../src/wui/marketwindow.cc:799
 msgid "You need to pause the trade before you can change the queue capacity."
-msgstr ""
+msgstr "Před provedením změny obchodovaného množství zboží je třeba obchod pozastavit."
 
 #: ../../../../src/wui/marketwindow.cc:800
 msgid "Pause Trade?"
-msgstr ""
+msgstr "Pozastavit obchod?"
 
 #: ../../../../src/wui/marketwindow.cc:801
 msgid ""
 "Changing the capacity of the input queues will cause the trade to be paused."
 " Pause the trade now?"
-msgstr ""
+msgstr "Změna obchodovaného množství způsobí pozastavení obchodu. Pozastavit obchod?"
 
 #: ../../../../src/wui/marketwindow.cc:952
 msgid "Propose Trade"
-msgstr ""
+msgstr "Navrhnout obchod"
 
 #: ../../../../src/wui/marketwindow.cc:957
 msgid "Proposed Trades"
-msgstr ""
+msgstr "Navržené obchody"
 
 #: ../../../../src/wui/marketwindow.cc:963
 msgid "Trade Offers"
-msgstr ""
+msgstr "Obchodní nabídky"
 
 #: ../../../../src/wui/marketwindow.cc:974
 msgid "Active Trade"
-msgstr ""
+msgstr "Probíhající obchod"
 
 #: ../../../../src/wui/minimap.cc:169
 msgid "Owner"

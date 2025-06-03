@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-05-19 03:23+0000\n"
+"POT-Creation-Date: 2025-05-31 03:16+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2025\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
@@ -474,7 +474,7 @@ msgstr "Новая случайная карта"
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/editor/editorinteractive.cc:230
-#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:34
+#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:36
 #: ../../../../src/ui_fsmenu/main.cc:443
 #: ../../../../src/wlapplication_options.cc:851
 msgid "Load Map"
@@ -873,8 +873,8 @@ msgid "Saving map…"
 msgstr "Сохранение карты..."
 
 #: ../../../../src/editor/editorinteractive.cc:1619
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:315
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:370
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:314
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:369
 msgid "Error Saving Map!"
 msgstr "Ошибка сохранения карты!"
 
@@ -1156,45 +1156,44 @@ msgid "Error!"
 msgstr "Ошибка!"
 
 #. * TRANSLATORS: Directory name for user maps in map selection
-#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:82
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:284
+#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:113
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:283
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:217
 #: ../../../../src/wui/mapdata.cc:199
 msgid "My Maps"
 msgstr "Мои карты"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:84
+#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:115
 #: ../../../../src/wui/mapdata.cc:193
 msgid "Multiplayer Scenarios"
 msgstr "Многопользовательские сценарии"
 
 #. * TRANSLATORS: Directory name for SP Scenarios in map selection
-#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:86
+#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:117
 #: ../../../../src/wui/mapdata.cc:196
 msgid "Singleplayer Scenarios"
 msgstr "Одиночные сценарии"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
-#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:88
+#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:119
 #: ../../../../src/wui/mapdata.cc:202
 msgid "Downloaded Maps"
 msgstr "Загруженные карты"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
-#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:91
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:284
+#: ../../../../src/editor/ui_menus/main_menu_load_map.cc:122
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:283
 #, c-format
 msgid "Current directory: %s"
 msgstr "Текущий каталог: %s"
 
 #. * TRANSLATORS: "Display: Original/Localized map/file names"
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:94
-#: ../../../../src/ui_fsmenu/options.cc:159
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:92
 msgid "Display"
 msgstr "Экран"
 
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:114
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:112
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:250
 #: ../../../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:62
 #: ../../../../src/editor/ui_menus/player_menu.cc:87
@@ -1219,7 +1218,7 @@ msgstr "Экран"
 msgid "OK"
 msgstr "OK"
 
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:115
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:113
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:258
 #: ../../../../src/editor/ui_menus/main_menu_new_map.cc:70
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:871
@@ -1242,19 +1241,19 @@ msgstr "OK"
 msgid "Cancel"
 msgstr "Отмена"
 
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:143
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:137
 msgid "File names"
 msgstr "Имя файла"
 
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:144
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:138
 msgid "Map names"
 msgstr "Название карты"
 
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:144
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:138
 msgid "Original map names"
 msgstr "Оригинальное название карты"
 
-#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:148
+#: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:142
 msgid "Translated map names"
 msgstr "Переведенное название карты"
 
@@ -1625,17 +1624,17 @@ msgstr "Ошибка создания каталога!"
 msgid "Error while creating directory ‘%s’."
 msgstr "Ошибка при создании каталога ‘%s’."
 
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:313
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:312
 #: ../../../../src/wui/game_main_menu_save_game.cc:325
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Файл с названием «%s» уже существует. Перезаписать?"
 
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:345
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:344
 msgid "Saving the map…"
 msgstr "Сохранение карты...."
 
-#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:363
+#: ../../../../src/editor/ui_menus/main_menu_save_map.cc:362
 msgid "Map saved"
 msgstr "Карта сохранена"
 
@@ -3221,27 +3220,27 @@ msgstr "Экспедиция готова"
 msgid "An expedition ship is waiting for your commands."
 msgstr "Экспедиционный корабль ждёт ваших указаний."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2434
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2437
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr "Тонет"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2436
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2439
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr "Сражается"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2440
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2443
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr "Переоборудуется в транспорт"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2443
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2446
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr "Переоборудовать в военный корабль"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2451
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2454
 #: ../../../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
@@ -3253,10 +3252,10 @@ msgstr "Военный корабль"
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2457
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2467
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2473
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2487
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2460
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2470
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2476
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2490
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -3264,7 +3263,7 @@ msgstr "Плывёт к %s"
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2462
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2465
 #: ../../../../src/wui/seafaring_statistics_menu.cc:260
 msgctxt "ship_state"
 msgid "Empty"
@@ -3272,7 +3271,7 @@ msgstr "Порожняком"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2482
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2485
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -3280,7 +3279,7 @@ msgstr "Доставляет товары в %s"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2494
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2497
 #: ../../../../src/wui/seafaring_statistics_menu.cc:264
 msgctxt "ship_state"
 msgid "Waiting"
@@ -3288,14 +3287,14 @@ msgstr "Ожидает"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2498
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2501
 #: ../../../../src/wui/seafaring_statistics_menu.cc:266
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Разведывает"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2502
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2505
 #: ../../../../src/wui/seafaring_statistics_menu.cc:268
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -3304,7 +3303,7 @@ msgstr "Нашел место для постройки порта"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2507
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2510
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Основывает колонию"
@@ -6749,93 +6748,93 @@ msgstr "Изменить карту..."
 msgid "Change saved game…"
 msgstr "Изменить сохранение..."
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:204
+#: ../../../../src/ui_fsmenu/launch_game.cc:203
 msgid "Start game"
 msgstr "Начать игру"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:290
+#: ../../../../src/ui_fsmenu/launch_game.cc:289
 msgid "Show fewer options"
 msgstr "Показывать меньше настроек"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:290
+#: ../../../../src/ui_fsmenu/launch_game.cc:289
 msgid "Show more options"
 msgstr "Показывать больше настроек"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:306
+#: ../../../../src/ui_fsmenu/launch_game.cc:305
 msgid "The relations between players are set by the scenario"
 msgstr "Отношения между игроками задаются сценарием"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:308
+#: ../../../../src/ui_fsmenu/launch_game.cc:307
 msgid "The relations between players are set by the saved game"
 msgstr "Отношения между игроками устанавливаются сохраненной игрой"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:310
+#: ../../../../src/ui_fsmenu/launch_game.cc:309
 msgid "The selected win condition does not allow peaceful matches"
 msgstr "Выбранное условие победы не позволяет проводить мирные матчи"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:312
+#: ../../../../src/ui_fsmenu/launch_game.cc:311
 msgid "Forbid fighting between players"
 msgstr "Запретить борьбу между игроками"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:343
+#: ../../../../src/ui_fsmenu/launch_game.cc:342
 msgid "All selected starting conditions ignore the map’s starting positions"
 msgstr "Указанные стартовые условия игнорируют начальные позиции в игре"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:349
+#: ../../../../src/ui_fsmenu/launch_game.cc:348
 msgid "The starting positions are set by the scenario"
 msgstr "Начальные позиции заданы в сценарии"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:351
+#: ../../../../src/ui_fsmenu/launch_game.cc:350
 msgid "The starting positions are set by the saved game"
 msgstr "Начальные позиции заданы в сохранении"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:354
+#: ../../../../src/ui_fsmenu/launch_game.cc:353
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr "Разрешить пользователям самим выбирать стартовые позиции в игре"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:374
+#: ../../../../src/ui_fsmenu/launch_game.cc:373
 msgid "Player vision is set by the scenario"
 msgstr "Установленная в сценарии для игрока видимость карты"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:376
+#: ../../../../src/ui_fsmenu/launch_game.cc:375
 msgid "Player vision is set by the saved game"
 msgstr "Установленная в сохранении для игрока видимость карты"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:378
+#: ../../../../src/ui_fsmenu/launch_game.cc:377
 msgid "Give all players permanent vision of the entire map"
 msgstr "Сделать карту видимой для всех игроков"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:400
+#: ../../../../src/ui_fsmenu/launch_game.cc:399
 msgid "Naval warfare is set by the scenario"
 msgstr "Морские сражения устанавливаются сценарием"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:402
+#: ../../../../src/ui_fsmenu/launch_game.cc:401
 msgid "Naval warfare is set by the saved game"
 msgstr "Морские сражения устанавливаются сохранением"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:405
+#: ../../../../src/ui_fsmenu/launch_game.cc:404
 msgid ""
 "Enable coastal invasions and ship-to-ship battles. This feature is "
 "experimental and may undergo substantial redesign in future versions of "
 "Widelands."
 msgstr "Включите захват берега и сражения между кораблями. Эта функция является экспериментальной и может подвергнуться существенной переработке в будущих версиях Widelands."
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:426
+#: ../../../../src/ui_fsmenu/launch_game.cc:425
 msgid "Player relations are set by the scenario"
 msgstr "Отношения между игроками устанавливаются сценарием"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:428
+#: ../../../../src/ui_fsmenu/launch_game.cc:427
 msgid "Player relations are set by the saved game"
 msgstr "Отношения между игроками устанавливаются сохранением"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:430
+#: ../../../../src/ui_fsmenu/launch_game.cc:429
 msgid "Disallow players to change their alliances during the game"
 msgstr "Запрещать игрокам менять свои союзные отношения во время игры"
 
 #. * TRANSLATORS: This is a map tag
-#: ../../../../src/ui_fsmenu/launch_game.cc:439
+#: ../../../../src/ui_fsmenu/launch_game.cc:438
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:506
 #: ../../../../src/ui_fsmenu/scenariodetails.cc:47
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:283
@@ -6843,21 +6842,21 @@ msgstr "Запрещать игрокам менять свои союзные �
 msgid "Scenario"
 msgstr "Сценарий"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:440
+#: ../../../../src/ui_fsmenu/launch_game.cc:439
 msgid "Win condition is set through the scenario"
 msgstr "Условия для победы установлены сценарием"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:446
+#: ../../../../src/ui_fsmenu/launch_game.cc:445
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:510
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:287
 msgid "Saved Game"
 msgstr "Сохраненная игра"
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:448
+#: ../../../../src/ui_fsmenu/launch_game.cc:447
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Эта игра сохранена ранее. Условия победы уже заданы."
 
-#: ../../../../src/ui_fsmenu/launch_game.cc:523
+#: ../../../../src/ui_fsmenu/launch_game.cc:522
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -6935,12 +6934,12 @@ msgid "Load this replay"
 msgstr "Загрузить этот повтор"
 
 #: ../../../../src/ui_fsmenu/loadgame.cc:79
-#: ../../../../src/ui_fsmenu/mapselect.cc:75
+#: ../../../../src/ui_fsmenu/mapselect.cc:72
 msgid "Return to the multiplayer game setup"
 msgstr "Вернуться к установкам многопользовательской игры"
 
 #: ../../../../src/ui_fsmenu/loadgame.cc:80
-#: ../../../../src/ui_fsmenu/mapselect.cc:77
+#: ../../../../src/ui_fsmenu/mapselect.cc:74
 msgid "Return to the single player menu"
 msgstr "Вернуться в меню одиночной игры"
 
@@ -7275,63 +7274,63 @@ msgstr "Карта не выбрана"
 msgid "(no map)"
 msgstr "(нет карты)"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:49
+#: ../../../../src/ui_fsmenu/mapselect.cc:46
 msgid "Choose Map"
 msgstr "Выбрать карту"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:90
+#: ../../../../src/ui_fsmenu/mapselect.cc:85
 msgid "Show all maps"
 msgstr "Показать все карты"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:93
+#: ../../../../src/ui_fsmenu/mapselect.cc:88
 msgid "Show original map names"
 msgstr "Отображать реальные имена карт"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:111
+#: ../../../../src/ui_fsmenu/mapselect.cc:106
 msgid "Filter by official status"
 msgstr "Фильтровать по официальному статусу"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:113
+#: ../../../../src/ui_fsmenu/mapselect.cc:108
 msgid "Official & Unofficial"
 msgstr "Официальные и неофициальные"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:113
+#: ../../../../src/ui_fsmenu/mapselect.cc:108
 msgid "Show both official and unofficial maps"
 msgstr "Показывать как официальные, так и неофициальные карты"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:125
+#: ../../../../src/ui_fsmenu/mapselect.cc:120
 msgid "Filter by desired line-up"
 msgstr "Фильтровать по выбранным параметрам"
 
 #. * TRANSLATORS: Filter entry in map selection. Other entries are "Free for
 #. all"",
 #. * "Teams of 2" etc.
-#: ../../../../src/ui_fsmenu/mapselect.cc:129
+#: ../../../../src/ui_fsmenu/mapselect.cc:124
 msgid "Any Teams"
 msgstr "Любые команды"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:129
+#: ../../../../src/ui_fsmenu/mapselect.cc:124
 msgid "Do not filter by line-up suggestions"
 msgstr "Не фильтровать по предложенным параметрам"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:144
+#: ../../../../src/ui_fsmenu/mapselect.cc:139
 msgid "Filter by balancing status"
 msgstr "Фильтровать по статусу балансировки"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:499
+#: ../../../../src/ui_fsmenu/mapselect.cc:409
 msgid "Balanced & Unbalanced"
 msgstr "Сбалансированные и нет"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:499
+#: ../../../../src/ui_fsmenu/mapselect.cc:409
 msgid "Show both balanced and unbalanced maps"
 msgstr "Показывать как сбалансированные, так и несбалансированные карты"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:504
+#: ../../../../src/ui_fsmenu/mapselect.cc:414
 msgctxt "balancing"
 msgid "Unspecified"
 msgstr "Без особенностей"
 
-#: ../../../../src/ui_fsmenu/mapselect.cc:505
+#: ../../../../src/ui_fsmenu/mapselect.cc:415
 msgid "The map does not specify whether it is balanced"
 msgstr "Не указано, сбалансирована ли карта"
 
@@ -7688,6 +7687,11 @@ msgstr "Язык"
 msgid "Window Size"
 msgstr "Оконный размер"
 
+#: ../../../../src/ui_fsmenu/options.cc:159
+msgctxt "multiscreen"
+msgid "Display"
+msgstr ""
+
 #. * TRANSLATORS: short description for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:168
 msgid "Let the system draw the mouse cursor"
@@ -7856,9 +7860,9 @@ msgstr "Никогда"
 
 #. * TRANSLATORS: Entry in the display selection dropdown
 #: ../../../../src/ui_fsmenu/options.cc:583
-#: ../../../../src/wui/info_panel.cc:212
+msgctxt "multiscreen"
 msgid "Follow mouse"
-msgstr "Следовать за курсором"
+msgstr ""
 
 #. * TRANSLATORS: Display index and virtual coordinates, e.g, '#0 (0, 0, 1920,
 #. 1080)'
@@ -7867,37 +7871,37 @@ msgid "#%1% (%2%, %3%, %4%, %5%)"
 msgstr ""
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../../../src/ui_fsmenu/options.cc:603
+#: ../../../../src/ui_fsmenu/options.cc:604
 msgid "Fullscreen"
 msgstr "Во весь экран"
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../../../src/ui_fsmenu/options.cc:606
+#: ../../../../src/ui_fsmenu/options.cc:607
 msgid "Maximized"
 msgstr "Развернуть"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 × 600
-#: ../../../../src/ui_fsmenu/options.cc:622
-#: ../../../../src/ui_fsmenu/options.cc:630
+#: ../../../../src/ui_fsmenu/options.cc:623
+#: ../../../../src/ui_fsmenu/options.cc:631
 msgid "%1% × %2%"
 msgstr "%1% × %2%"
 
-#: ../../../../src/ui_fsmenu/options.cc:698
+#: ../../../../src/ui_fsmenu/options.cc:699
 msgid "Try system language"
 msgstr "Пытаться использовать язык системы"
 
 #. * TRANSLATORS: %s = language name
-#: ../../../../src/ui_fsmenu/options.cc:810
+#: ../../../../src/ui_fsmenu/options.cc:811
 #, c-format
 msgid "The translation into %s is complete."
 msgstr "Перевод на %sзавершен."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../../../src/ui_fsmenu/options.cc:814
+#: ../../../../src/ui_fsmenu/options.cc:815
 msgid "The translation into %1% is %2%%% complete."
 msgstr "Перевод на %1% завершен на %2%%%."
 
-#: ../../../../src/ui_fsmenu/options.cc:826
+#: ../../../../src/ui_fsmenu/options.cc:827
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr "Если вы хотите помочь нам с переводами, пожалуйста посетите %s"
@@ -10669,6 +10673,10 @@ msgstr "Войска"
 msgid "Info Panel Visibility"
 msgstr "Видимость информационной панели"
 
+#: ../../../../src/wui/info_panel.cc:212
+msgid "Follow mouse"
+msgstr "Следовать за курсором"
+
 #: ../../../../src/wui/info_panel.cc:217
 msgid "Hide"
 msgstr "Скрыть"
@@ -11218,7 +11226,7 @@ msgstr "Ошибка в данных игры"
 msgid "Pl."
 msgstr "Игр."
 
-#: ../../../../src/wui/maptable.cc:35 ../../../../src/wui/maptable.cc:64
+#: ../../../../src/wui/maptable.cc:35 ../../../../src/wui/maptable.cc:69
 msgid "Filename"
 msgstr "Имя файла"
 
@@ -11234,7 +11242,7 @@ msgstr "Размер"
 msgid "The size of the map (Width x Height)"
 msgstr "Размер карты (ширина x высота)"
 
-#: ../../../../src/wui/maptable.cc:68
+#: ../../../../src/wui/maptable.cc:73
 msgid "Map Name"
 msgstr "Карта"
 
