@@ -4,19 +4,20 @@
 # Translators:
 # Tóth András <txa-dev@posteo.hu>, 2021
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016-2017,2020
+# Balázs Meskó <meskobalazs@mailbox.org>, 2025
 # Balázs Meskó <meskobalazs@mailbox.org>, 2020
 # GunChleoc, 2014
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016-2017,2019-2020
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
-# Tóth András <txa-dev@posteo.hu>, 2021-2024
+# Tóth András <txa-dev@posteo.hu>, 2021-2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-03-01 03:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2024\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2025\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +31,7 @@ msgstr "Útmutató"
 
 #: ../../../../data/txts/ABOUT.lua:11
 msgid "License"
-msgstr "Licenc"
+msgstr "Licensz"
 
 #: ../../../../data/txts/ABOUT.lua:15
 msgid "Developers"
@@ -46,7 +47,7 @@ msgstr "Widelands fejlesztőcsapat"
 
 #: ../../../../data/txts/LICENSE.lua:12
 msgid "Licensing information for Widelands"
-msgstr "Licencelési információ a Widelandshez"
+msgstr "Widelands szerzői jogi tudnivalók"
 
 #. TRANSLATORS: Placeholder is copyright end year
 #: ../../../../data/txts/LICENSE.lua:14
@@ -64,13 +65,13 @@ msgstr "Ez a játék szabad és nyílt forrású, a GNU General Public License (
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr "További információkat találhatsz a szabad és nyílt forrású szoftverekről, valamint a GPL-ről, ha meglátogatod ezt a weboldalt: %s"
+msgstr "További információkat találhatsz a szabad és nyílt forráskódú szoftverekről, valamint a GPL-ről, ha felkeresed ezt az oldalt: %s"
 
 #: ../../../../data/txts/LICENSE.lua:20
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
-msgstr "Itt megtalálod a licenc teljes szövegét, illetve további tudnivalókat ennek filozófiájáról és jogi következményeiről. (A fordító megjegyzése: A GPL nemhivatalos magyar fordítása elérhető a http://gnu.hu/gpl.html webcímen.)"
+msgstr "Itt megtalálod a licensz teljes szövegét, illetve további tudnivalókat ennek filozófiájáról és jogi következményeiről. (A fordító megjegyzése: A GPL nemhivatalos magyar fordítása elérhető a http://gnu.hu/gpl.html oldalon.)"
 
 #: ../../../../data/txts/LICENSE.lua:22
 msgid "We are also shipping the GPL as a text document with Widelands itself."
@@ -111,7 +112,7 @@ msgstr "Szabad forráskódú stratégiai játék"
 
 #: ../../../../data/txts/README.lua:11
 msgid "Check out the Widelands project homepage:"
-msgstr "Ezen a weblapon nézhetsz utána a Widelands projektnek:"
+msgstr "A Widelands honlapja:"
 
 #: ../../../../data/txts/README.lua:12
 msgid ""
@@ -851,7 +852,7 @@ msgid ""
 "touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
 "menu. For example, moving the map view can be much more comfortable by "
 "scrolling instead of dragging with the right mouse button."
-msgstr "Ha érintőpados laptopon játszol, az érintőpados görgetést is használhatod egyes funkciókhoz, ha beállítod a „Beállítások” → „Billentyű- és egér-hozzárendelések szerkesztése” menüben. Pl. a térkép mozgatása sokkal kényelmesebb így érintőpadon mint a jobb gombos mozgatással."
+msgstr "Ha érintőpárnás laptopon játszol, az érintőpárnás görgetést is használhatod egyes funkciókhoz, ha beállítod a „Beállítások” → „Billentyű- és egér-hozzárendelések szerkesztése” menüben. Pl. a térkép mozgatása sokkal kényelmesebb így érintőpárnán mint a jobb gombos mozgatással."
 
 #: ../../../../data/txts/tips/general_game.lua:106
 msgid ""
@@ -891,4 +892,4 @@ msgstr "Ha a játék összeomlana, ne aggódj!\nA játék automatikusan mentésr
 msgid ""
 "Are the computer players too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr "A mesterséges intelligencia ellen játszani túl unalmas? Látogasd meg weblapunkat a %s címen, ismerd meg a többi játékost, és játssz az Interneten!"
+msgstr "A mesterséges intelligencia ellen játszani túl unalmas? Látogasd meg honlapunkat a %s címen, ismerd meg a többi játékost, és játssz az Interneten!"

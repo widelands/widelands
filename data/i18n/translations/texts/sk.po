@@ -445,7 +445,7 @@ msgstr "Hráč s farbou vlajky. Ak si viacerí klienti vyberú rovnakú farbu, z
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr "Divácky režim, čo znamená, že vidíte všetko, ale nemáte kontrolu nad žiadnym hráčom."
+msgstr "Divácky režim, čo znamená, že vidíte všetko, ale nemáte kontrolu nad žiadnym hráčom"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
@@ -696,7 +696,7 @@ msgid ""
 "To produce bricks, you need granite; to produce granite, you need a quarry "
 "or rock mine; to build those, you need bricks. Take care not to get "
 "deadlocked!"
-msgstr "Pre výrobu tehiel potrebujete žulu; pre ťažbu žuly potrebujete kameňolom alebo baňu; pre postavenie týchto potrebujete tehly. Dajte pozor, aby ste sa nezasekli, aby ste neostali na mŕtvom bode."
+msgstr "Pre výrobu tehiel potrebujete žulu; pre ťažbu žuly potrebujete kameňolom alebo baňu; pre postavenie týchto potrebujete tehly. Dajte pozor, aby ste sa nezasekli, aby ste neostali na mŕtvom bode!"
 
 #: ../../../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."
