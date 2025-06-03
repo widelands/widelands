@@ -3439,14 +3439,18 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 				             market->get_market_name().c_str(), trade_id);
 				continue;
 			}
-			const int32_t delivered = order_it->second->num_shipped_batches;
-			if (delivered < trade.num_batches / 2) {
-				// it's too soon to tell
+			const int32_t remaining = trade.num_batches - order_it->second->num_shipped_batches;
+
+			// Only consider trades that are already running to make sure the AI can actually deliver.
+			// We also have to consider that the trade may already have been extended, and make sure
+			// that we keep the new number of remaining batches reasonable.
+			if (remaining > std::min(trade.num_batches, Widelands::kMaxBatches) / 2) {
 				verb_log_dbg_time(
 				   game().get_gametime(), "AI %u: postponing decision on extensions of trade #%d at %s",
 				   static_cast<unsigned>(player_number()), trade_id, market->get_market_name().c_str());
 				continue;
 			}
+
 			const Widelands::Economy* market_economy = market->get_economy(Widelands::wwWARE);
 			if (market_economy == nullptr) {
 				log_err_time(game().get_gametime(), "Economy not found for market %s",
@@ -3455,8 +3459,10 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 			}
 
 			for (const Widelands::TradeExtension& te : extensions) {
+				assert((te.batches > 0 && te.batches <= Widelands::kMaxBatches) ||
+				       te.batches == Widelands::kInfiniteTrade);
 				if (te.batches != Widelands::kInfiniteTrade &&
-				    evaluate_trade(trade, market_economy, trade.num_batches - delivered + te.batches)) {
+				    evaluate_trade(trade, market_economy, remaining + te.batches)) {
 					// The extended trade is advantageous, accept.
 					verb_log_dbg("AI %u: accepting extension of trade #%u at %s by %d batches",
 					             static_cast<unsigned>(player_number()), trade_id,
@@ -3484,25 +3490,21 @@ bool DefaultAI::evaluate_trade(const Widelands::TradeInstance& offer,
 		batches = offer.num_batches;
 #ifndef NDEBUG
 		assert(offer.state == Widelands::TradeInstance::State::kProposed);
+		assert(offer.check_illegal().empty());
 	} else {
 		assert(offer.state == Widelands::TradeInstance::State::kRunning);
 #endif
 	}
 
-	// Limit to prevent both integer overflows and long term commitments for the AI
-	constexpr int32_t kMaxReasonableAmount = 100;
-
-	if (batches == Widelands::kInfiniteTrade || batches > kMaxReasonableAmount) {
-		// Don't commit AIs to overly long trades
+	if (batches == Widelands::kInfiniteTrade) {
+		// Don't commit AIs to infinite trades
 		return false;
 	}
+	assert(batches > 0 && batches < 2 * Widelands::kMaxBatches);
 
 	// This is what the other player sends to us.
 	int32_t receive_preciousness = 0;
 	for (const auto& pair : offer.items_to_send) {
-		if (pair.second > kMaxReasonableAmount) {
-			return false;
-		}
 		const int32_t amount = batches * pair.second;
 		receive_preciousness += amount * trade_preciousness(pair.first, amount, economy, true);
 	}
@@ -3510,9 +3512,6 @@ bool DefaultAI::evaluate_trade(const Widelands::TradeInstance& offer,
 	// This is what we pay to the other player.
 	int32_t send_cost = 0;
 	for (const auto& pair : offer.items_to_receive) {
-		if (pair.second > kMaxReasonableAmount) {
-			return false;
-		}
 		const int32_t amount = batches * pair.second;
 		send_cost += amount * trade_preciousness(pair.first, amount, economy, false);
 	}
