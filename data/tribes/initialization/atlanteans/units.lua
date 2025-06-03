@@ -1860,7 +1860,7 @@ wl.Descriptions():new_tribe {
                                                    "We put them on a special device to gain the spider silk once a day. There is no need to spin this again. " ..
                      "The thread can directly be used by the weaving mill. Oh hello, here is one of our nice spiders … Hey! Why are you running away?"),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Spider Farm
-            lore_author = pgettext("atlanteans_building", "A spider breeder showing his farm")
+            lore_author = pgettext("atlanteans_building", "A spider breeder showing her farm")
 
          }
       },
