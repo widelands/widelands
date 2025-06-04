@@ -52,9 +52,10 @@ struct Pagination : public Box {
 
 	void set_nr_items(int32_t items, bool trigger_signal = true);
 	void set_page(int32_t page, bool trigger_signal = true);
-	void set_pagesize(int32_t size, bool trigger_signal = true);
+	void set_pagesize(int32_t size, bool trigger_signal = true, bool store_config = true);
 
 private:
+	void load_last_pagesize();
 	void update_buttons();
 	void update_pagesizes();
 
@@ -64,10 +65,12 @@ private:
 	std::vector<Button*> buttons_right_;
 	Button button_cur_, button_first_, button_last_;
 	Dropdown<int32_t> dd_pagesize_;
+	std::set<int32_t> available_default_pagesizes_;
 
 	int32_t nr_items_;
 	int32_t pagesize_;
 	int32_t current_page_;
+	bool selecting_ {false};
 };
 }  // namespace UI
 
