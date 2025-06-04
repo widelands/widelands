@@ -3,14 +3,14 @@
 # 
 # Translators:
 # GunChleoc, 2016
-# Juanjo, 2015-2022,2024
+# Juanjo, 2015-2022,2024-2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-05-19 03:23+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: Juanjo, 2015-2022,2024\n"
+"Last-Translator: Juanjo, 2015-2022,2024-2025\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1263,7 +1263,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:734
 msgid "Congratulations"
-msgstr ""
+msgstr "Enhorabona"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:736
 msgid ""
@@ -1272,7 +1272,7 @@ msgid ""
 "at first. Even if you’ve only understood a few concepts, you mustn’t give "
 "up. Try them out in some games, become familiar with them and experience the"
 " possibilities. Then, return to this tutorial and learn the rest!"
-msgstr ""
+msgstr "I ja s'ha acabat el tutorial!. Espero haver-vos ensenyat com controlar l’economia del Widelands. Hi ha moltes opcions i poden semblar difícils d’entendre. De moment, només cal que entengueu els conceptes bàsics i provar-los en algunes partides. Un cop ho hàgiu fet, podeu tornar a aquest tutorial i aprendre’n la resta!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:738
 msgid ""
