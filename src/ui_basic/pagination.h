@@ -17,7 +17,7 @@
  */
 
 #ifndef WL_UI_BASIC_PAGINATION_H
-#define WL_UI_BASIC_INFINITE_SPINNER_H
+#define WL_UI_BASIC_PAGINATION_H
 
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -71,4 +71,4 @@ private:
 };
 }  // namespace UI
 
-#endif  // end of include guard: WL_UI_BASIC_INFINITE_SPINNER_H
+#endif  // end of include guard: WL_UI_BASIC_PAGINATION_H
