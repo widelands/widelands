@@ -592,7 +592,9 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                   0,
                   0,
                   "",
-                  UI::Align::kRight) {
+                  UI::Align::kRight),
+     maps_pagination_(&maps_outer_wrapper_, "maps_pagination", UI::PanelStyle::kFsMenu, 0)
+{
 
 	{
 		Profile prof(kAddOnLocaleVersions.c_str());
@@ -747,6 +749,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	maps_outer_wrapper_.add(&maps_buttons_box_, UI::Box::Resizing::kFullSize);
 	maps_outer_wrapper_.add_space(2 * kRowButtonSpacing);
 	maps_outer_wrapper_.add(&maps_inner_wrapper_, UI::Box::Resizing::kExpandBoth);
+	maps_outer_wrapper_.add_space(2 * kRowButtonSpacing);
+	maps_outer_wrapper_.add(&maps_pagination_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	installed_addons_inner_wrapper_.add(&installed_addons_box_, UI::Box::Resizing::kExpandBoth);
 	browse_addons_inner_wrapper_.add(&browse_addons_box_, UI::Box::Resizing::kExpandBoth);
@@ -1093,6 +1097,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		update_dependency_errors();
 		focus_installed_addon_row(info);
 	});
+
+	maps_pagination_.changed.connect([this]() { maps_pagination_changed(); });
 
 	launch_packager_.sigclicked.connect([this]() {
 		AddOnsPackager a(fsmm_, *this);
@@ -1565,19 +1571,19 @@ void AddOnsCtrl::rebuild_browse() {
 		pair.second->set_visible(false);
 	}
 
-	std::vector<std::shared_ptr<AddOns::AddOnInfo>> remotes_to_show;
+	remotes_to_show_.clear();
 	for (auto& a : remotes_) {
 		if (matches_filter_browse(a)) {
-			remotes_to_show.emplace_back(a);
+			remotes_to_show_.emplace_back(a);
 		}
 	}
-	std::sort(remotes_to_show.begin(), remotes_to_show.end(),
+	std::sort(remotes_to_show_.begin(), remotes_to_show_.end(),
 	          create_sort_functor(sort_order_browse_.get_selected()));
 
 	std::vector<std::string> has_upgrades;
 
 	size_t index = 0;
-	for (const auto& a : remotes_to_show) {
+	for (const auto& a : remotes_to_show_) {
 		if (index > 0) {
 			browse_addons_box_.add_space(kRowButtonSize);
 		}
@@ -1638,6 +1644,24 @@ void AddOnsCtrl::rebuild_browse() {
 }
 
 void AddOnsCtrl::rebuild_maps() {
+	maps_to_show_.clear();
+	for (auto& a : remotes_) {
+		if (matches_filter_maps(a)) {
+			maps_to_show_.push_back(a);
+		}
+	}
+	std::sort(maps_to_show_.begin(), maps_to_show_.end(),
+	          create_sort_functor(sort_order_maps_.get_selected()));
+
+	const size_t total_count = maps_to_show_.size();
+
+	tabs_.tabs()[2]->set_title(total_count == 0 ? _("Website Maps") :
+	                                        format(_("Website Maps (%u)"), total_count));
+
+	maps_pagination_.set_nr_items(total_count);
+}
+
+void AddOnsCtrl::maps_pagination_changed() {
 	const uint32_t scrollpos_m = maps_inner_wrapper_.get_scrollbar() != nullptr ?
 	                                maps_inner_wrapper_.get_scrollbar()->get_scrollpos() :
 	                                0;
@@ -1649,21 +1673,14 @@ void AddOnsCtrl::rebuild_maps() {
 		pair.second->set_visible(false);
 	}
 
-	std::vector<std::shared_ptr<AddOns::AddOnInfo>> maps_to_show;
-	for (auto& a : remotes_) {
-		if (matches_filter_maps(a)) {
-			maps_to_show.push_back(a);
-		}
-	}
-	std::sort(maps_to_show.begin(), maps_to_show.end(),
-	          create_sort_functor(sort_order_maps_.get_selected()));
+	const size_t first = maps_pagination_.get_pagesize() * (maps_pagination_.get_current_page() - 1);
+	const size_t last = std::min(first + maps_pagination_.get_pagesize(), maps_to_show_.size());
 
-	size_t index = 0;
-	for (const auto& a : maps_to_show) {
-		if (index > 0) {
+	for (size_t index = first; index < last; ++index) {
+		if (index != first) {
 			maps_box_.add_space(kRowButtonSize);
 		}
-		++index;
+		std::shared_ptr<AddOns::AddOnInfo> a = maps_to_show_.at(index);
 
 		auto row_it = cached_map_rows_.find(a->internal_name);
 		if (row_it == cached_map_rows_.end()) {
@@ -1681,8 +1698,6 @@ void AddOnsCtrl::rebuild_maps() {
 		maps_box_.add(row_it->second, UI::Box::Resizing::kFullSize);
 		row_it->second->set_visible(true);
 	}
-	tabs_.tabs()[2]->set_title(index == 0 ? _("Website Maps") :
-	                                        format(_("Website Maps (%u)"), index));
 
 	if ((maps_inner_wrapper_.get_scrollbar() != nullptr) && (scrollpos_m != 0u)) {
 		maps_inner_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_m);
@@ -1840,7 +1855,7 @@ void AddOnsCtrl::layout() {
 		   tabs_placeholder_.get_h() - 2 * kRowButtonSize - browse_addons_buttons_box_.get_h());
 		maps_inner_wrapper_.set_max_size(
 		   tabs_placeholder_.get_w(),
-		   tabs_placeholder_.get_h() - 2 * kRowButtonSize - maps_buttons_box_.get_h());
+		   tabs_placeholder_.get_h() - 4 * kRowButtonSize - maps_buttons_box_.get_h() - maps_pagination_.get_h());
 
 		login_button_.set_size(get_inner_w() / 3, login_button_.get_h());
 		login_button_.set_pos(Vector2i(get_inner_w() - login_button_.get_w(), 0));
