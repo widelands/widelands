@@ -116,7 +116,6 @@ private:
 	void set_item_pos(uint32_t idx, int32_t pos);
 	bool is_item_visible(uint32_t idx);
 	void scrollbar_moved(int32_t);
-	void update_positions();
 	void on_death(Panel* p) override;
 	void on_visibility_changed() override;
 
@@ -124,6 +123,8 @@ private:
 	int max_x_, max_y_;
 
 public:
+	void update_positions();
+
 	struct Item {
 		enum Type {
 			ItemPanel,
