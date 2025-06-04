@@ -1645,8 +1645,8 @@ void AddOnsCtrl::browse_pagination_changed() {
 		pair.second->set_visible(false);
 	}
 
-	const size_t first =
-	   static_cast<size_t>(browse_pagination_.get_pagesize()) * (browse_pagination_.get_current_page() - 1);
+	const size_t first = static_cast<size_t>(browse_pagination_.get_pagesize()) *
+	                     (browse_pagination_.get_current_page() - 1);
 	const size_t last = std::min(first + browse_pagination_.get_pagesize(), remotes_to_show_.size());
 
 	for (size_t index = first; index < last; ++index) {
@@ -1709,7 +1709,8 @@ void AddOnsCtrl::maps_pagination_changed() {
 		pair.second->set_visible(false);
 	}
 
-	const size_t first = static_cast<size_t>(maps_pagination_.get_pagesize()) * (maps_pagination_.get_current_page() - 1);
+	const size_t first = static_cast<size_t>(maps_pagination_.get_pagesize()) *
+	                     (maps_pagination_.get_current_page() - 1);
 	const size_t last = std::min(first + maps_pagination_.get_pagesize(), maps_to_show_.size());
 
 	for (size_t index = first; index < last; ++index) {
