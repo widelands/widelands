@@ -3430,12 +3430,12 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 			                                     trade.receiver.get(game());
 			if (market == nullptr) {
 				log_err_time(
-				   game().get_gametime(), "AI player's market not found for active trade %d", trade_id);
+				   game().get_gametime(), "AI player's market not found for active trade %u", trade_id);
 				continue;
 			}
 			const auto order_it = market->trade_orders().find(trade_id);
 			if (order_it == market->trade_orders().end()) {
-				log_err_time(game().get_gametime(), "TradeOrder not found at %s for active trade %d",
+				log_err_time(game().get_gametime(), "TradeOrder not found at %s for active trade %u",
 				             market->get_market_name().c_str(), trade_id);
 				continue;
 			}
@@ -3446,7 +3446,7 @@ void DefaultAI::trading_actions(const Time& /*gametime*/) {
 			// that we keep the new number of remaining batches reasonable.
 			if (remaining > std::min(trade.num_batches, Widelands::kMaxBatches) / 2) {
 				verb_log_dbg_time(
-				   game().get_gametime(), "AI %u: postponing decision on extensions of trade #%d at %s",
+				   game().get_gametime(), "AI %u: postponing decision on extensions of trade #%u at %s",
 				   static_cast<unsigned>(player_number()), trade_id, market->get_market_name().c_str());
 				continue;
 			}
