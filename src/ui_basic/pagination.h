@@ -70,7 +70,7 @@ private:
 	int32_t nr_items_;
 	int32_t pagesize_;
 	int32_t current_page_;
-	bool selecting_ {false};
+	bool selecting_{false};
 };
 }  // namespace UI
 

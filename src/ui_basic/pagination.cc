@@ -123,7 +123,9 @@ void Pagination::set_page(const int32_t page, const bool trigger_signal) {
 	}
 }
 
-void Pagination::set_pagesize(const int32_t size, const bool trigger_signal, const bool store_config) {
+void Pagination::set_pagesize(const int32_t size,
+                              const bool trigger_signal,
+                              const bool store_config) {
 	selecting_ = true;
 	pagesize_ = size;
 
@@ -147,7 +149,8 @@ void Pagination::load_last_pagesize() {
 
 		if (desired != kShowAll && available_default_pagesizes_.count(desired) == 0) {
 			assert(!available_default_pagesizes_.empty());
-			for (auto it = available_default_pagesizes_.begin(); it != available_default_pagesizes_.end(); ++it) {
+			for (auto it = available_default_pagesizes_.begin();
+			     it != available_default_pagesizes_.end(); ++it) {
 				pagesize_ = *it;
 				if (*it > desired) {
 					break;
