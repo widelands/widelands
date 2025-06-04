@@ -149,10 +149,9 @@ void Pagination::load_last_pagesize() {
 
 		if (desired != kShowAll && available_default_pagesizes_.count(desired) == 0) {
 			assert(!available_default_pagesizes_.empty());
-			for (auto it = available_default_pagesizes_.begin();
-			     it != available_default_pagesizes_.end(); ++it) {
-				pagesize_ = *it;
-				if (*it > desired) {
+			for (int32_t candidate : available_default_pagesizes_) {
+				pagesize_ = candidate;
+				if (candidate > desired) {
 					break;
 				}
 			}
