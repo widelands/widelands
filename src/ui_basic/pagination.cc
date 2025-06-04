@@ -50,7 +50,7 @@ Pagination::Pagination(Panel* parent,
 		buttons_right_.at(i)->set_disable_style(ButtonDisableStyle::kFlat | ButtonDisableStyle::kMonochrome);
 	}
 
-	dd_pagesize_.selected.connect([this]() { do_set_pagesize(dd_pagesize_.get_selected()); });
+	dd_pagesize_.selected.connect([this]() { set_pagesize(dd_pagesize_.get_selected()); });
 	button_first_.sigclicked.connect([this]() { set_page(1); });
 	button_last_.sigclicked.connect([this]() { set_page(get_nr_pages()); });
 	for (int i = 0; i < nr_adjacent_buttons_per_side; ++i) {
@@ -94,22 +94,18 @@ void Pagination::set_page(const int32_t page, const bool trigger_signal) {
 	}
 }
 
-void Pagination::do_set_pagesize(const int32_t size, const bool trigger_signal) {
+void Pagination::set_pagesize(const int32_t size, const bool trigger_signal) {
 	pagesize_ = size;
-	update_buttons();
-	if (trigger_signal) {
-		changed();
+
+	dd_pagesize_.select(pagesize_);
+	if (dd_pagesize_.get_selected() != pagesize_) {
+		dd_pagesize_.add(format_l("%d", pagesize_), pagesize_, nullptr, true);
 	}
+
+	set_page(current_page_, trigger_signal);
 }
 
-void Pagination::set_pagesize(const int32_t size) {
-	dd_pagesize_.select(size);
-	if (dd_pagesize_.get_selected() != size) {
-		dd_pagesize_.add(format_l("%d", size), size, nullptr, true);
-	}
-}
-
-void Pagination::set_nr_items(const int32_t items, bool trigger_signal) {
+void Pagination::set_nr_items(const int32_t items, const bool trigger_signal) {
 	nr_items_ = items;
 	update_pagesizes();
 	update_buttons();
@@ -140,7 +136,7 @@ void Pagination::update_pagesizes() {
 		dd_pagesize_.select(kValues[0]);
 		assert(dd_pagesize_.has_selection());
 	}
-	do_set_pagesize(dd_pagesize_.get_selected(), false);
+	set_pagesize(dd_pagesize_.get_selected(), false);
 }
 
 void Pagination::update_buttons() {

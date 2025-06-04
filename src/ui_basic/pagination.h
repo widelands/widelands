@@ -52,11 +52,9 @@ struct Pagination : public Box {
 
 	void set_nr_items(int32_t items, bool trigger_signal = true);
 	void set_page(int32_t page, bool trigger_signal = true);
-	void set_pagesize(int32_t size);
+	void set_pagesize(int32_t size, bool trigger_signal = true);
 
 private:
-	void do_set_pagesize(int32_t size, bool trigger_signal = true);
-
 	void update_buttons();
 	void update_pagesizes();
 

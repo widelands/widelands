@@ -159,10 +159,17 @@ private:
 	std::map<std::string, InstalledAddOnRow*> cached_installed_rows_;
 	std::map<std::string, RemoteAddOnRow*> cached_browse_rows_;
 	std::map<std::string, MapRow*> cached_map_rows_;
-	// UI::Pagination browse_pagination_;
+	UI::Pagination browse_pagination_;
 	UI::Pagination maps_pagination_;
+
 	std::vector<std::shared_ptr<AddOns::AddOnInfo>> remotes_to_show_;
 	std::vector<std::shared_ptr<AddOns::AddOnInfo>> maps_to_show_;
+
+	struct RemoteInstalledInfo {
+		AddOns::AddOnVersion installed_version;
+		uint32_t installed_i18n_version = 0;
+	};
+	std::vector<RemoteInstalledInfo> remotes_to_show_installed_info_;
 
 	void category_filter_browse_changed(AddOns::AddOnCategory);
 	void world_filter_maps_changed(const std::string&);
@@ -170,6 +177,7 @@ private:
 	std::shared_ptr<AddOns::AddOnInfo> selected_installed_addon() const;
 	void focus_installed_addon_row(std::shared_ptr<AddOns::AddOnInfo>);
 
+	void browse_pagination_changed();
 	void maps_pagination_changed();
 
 	// TODO(Nordfriese): Disabled autofix_dependencies for v1.0
