@@ -7,7 +7,7 @@
 # Dániel Varga <vargad88@gmail.com>, 2007
 # GunChleoc, 2016
 # GunChleoc, 2014,2016
-# litoll <litoll@freemail.hu>, 2016
+# litoll <litoll@freemail.hu>, 2016,2025
 # litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015-2016
 # Tóth András <txa-dev@posteo.hu>, 2021-2025
@@ -17,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-05-29 03:19+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2025\n"
+"Last-Translator: litoll <litoll@freemail.hu>, 2016,2025\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1654,7 +1654,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cassava farmer sows and harvests one bundle of cassava between %1$s and "
 "%2$s, depending on how far she has to walk."
-msgstr ""
+msgstr "A maniókatermesztő egy köteg maniókát vet és takarít be %1$s és %2$s között, attól függően, milyen messzire kell gyalogolnia."
 
 #: ../../../../data/tribes/initialization/amazons/units.lua:1571
 #: ../../../../data/tribes/initialization/amazons/units.lua:1586
@@ -1680,7 +1680,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cassava plantation needs at least %s to work at full productivity most "
 "of the time."
-msgstr ""
+msgstr "A maniókaültetvénynek legalább %s szükséges ahhoz, hogy többnyire teljes hatékonysággal működjön."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Cocoa Farm
 #: ../../../../data/tribes/initialization/amazons/units.lua:1579
@@ -1701,7 +1701,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cocoa farmer sows and harvests one basket of cocoa beans between %1$s "
 "and %2$s, depending on how far she has to walk."
-msgstr ""
+msgstr "A kakaótermesztő egy kosár kakaóbabot vet és takarít be %1$s és %2$s között, attól függően, milyen messzire kell gyalogolnia."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Cocoa
 #. Farm, part 2; %s is replaced by 'N growing fields'

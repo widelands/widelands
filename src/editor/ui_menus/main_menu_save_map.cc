@@ -79,7 +79,6 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
                      UI::ButtonStyle::kWuiSecondary,
                      _("Make Directory")),
      illegal_filename_tooltip_(FileSystemHelper::illegal_filename_tooltip()) {
-	set_current_directory(curdir_);
 
 	map_details_box_.add(&edit_options_, UI::Box::Resizing::kFullSize);
 	table_footer_box_.add(&editbox_label_);
@@ -87,7 +86,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 	table_footer_box_.add_space(0);
 	table_footer_box_.add(&make_directory_);
 
-	fill_table();
+	navigate_directory(curdir_, kMapsDir);
 
 	table_.selected.connect([this](unsigned /* value */) { clicked_item(); });
 	table_.double_clicked.connect([this](unsigned /* value */) { double_clicked_item(); });
@@ -128,17 +127,18 @@ void MainMenuSaveMap::clicked_ok() {
 	}
 	std::vector<std::string> filename = {editbox_.get_text()};
 	std::vector<std::string> complete_filename;
+	std::string localized_name;
 
 	if (filename.empty() && table_.has_selection()) {  //  Maybe a directory is selected.
-		complete_filename = filename = maps_data_[table_.get_selected()].filenames;
+		complete_filename = filename = table_.get_selected_data().filenames;
+		localized_name = table_.get_selected_data().localized_name;
 	} else {
 		complete_filename = {curdir_.at(0) + FileSystem::file_separator() + filename.at(0)};
 	}
 
 	if (g_fs->is_directory(complete_filename.at(0)) &&
 	    !Widelands::WidelandsMapLoader::is_widelands_map(complete_filename.at(0))) {
-		set_current_directory(complete_filename);
-		fill_table();
+		navigate_directory(complete_filename, localized_name);
 	} else {  //  Ok, save this map
 		Widelands::Map* map = eia().egbase().mutable_map();
 		if (map->get_name() == _("No Name")) {
@@ -188,7 +188,8 @@ void MainMenuSaveMap::clicked_make_directory() {
 					                      UI::WLMessageBox::MBoxType::kOk);
 					mbox.run<UI::Panel::Returncodes>();
 				}
-				fill_table();
+				/* Refresh */
+				navigate_directory(curdir_, kMapsDir);
 			}
 		}
 	}
@@ -234,10 +235,9 @@ void MainMenuSaveMap::update_map_options() {
 void MainMenuSaveMap::clicked_item() {
 	// Only change editbox contents
 	if (table_.has_selection()) {
-		const MapData& mapdata = maps_data_[table_.get_selected()];
+		const MapData& mapdata = table_.get_selected_data();
 		if (mapdata.maptype != MapData::MapType::kDirectory) {
-			editbox_.set_text(
-			   FileSystem::fs_filename(maps_data_[table_.get_selected()].filenames.at(0).c_str()));
+			editbox_.set_text(FileSystem::fs_filename(mapdata.filenames.at(0).c_str()));
 			edit_box_changed();
 		}
 	}
@@ -248,10 +248,9 @@ void MainMenuSaveMap::clicked_item() {
  */
 void MainMenuSaveMap::double_clicked_item() {
 	assert(table_.has_selection());
-	const MapData& mapdata = maps_data_[table_.get_selected()];
+	const MapData& mapdata = table_.get_selected_data();
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
-		set_current_directory(mapdata.filenames);
-		fill_table();
+		navigate_directory(mapdata.filenames, mapdata.localized_name);
 	} else {
 		clicked_ok();
 	}
