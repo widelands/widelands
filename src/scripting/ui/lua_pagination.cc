@@ -36,10 +36,8 @@ const MethodType<LuaPagination> LuaPagination::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaPagination> LuaPagination::Properties[] = {
-   PROP_RW(LuaPagination, current_page),
-   PROP_RW(LuaPagination, pagesize),
-   PROP_RO(LuaPagination, no_of_pages),
-   PROP_RO(LuaPagination, no_of_items),
+   PROP_RW(LuaPagination, current_page), PROP_RW(LuaPagination, pagesize),
+   PROP_RO(LuaPagination, no_of_pages),  PROP_RO(LuaPagination, no_of_items),
    {nullptr, nullptr, nullptr},
 };
 

@@ -26,28 +26,51 @@ constexpr int kButtonSize = 32;
 constexpr int kSpacing = 4;
 
 Pagination::Pagination(Panel* parent,
-	           const std::string& name,
-	           const PanelStyle style,
-	           const int32_t nr_items,
-	           const int32_t nr_adjacent_buttons_per_side)
+                       const std::string& name,
+                       const PanelStyle style,
+                       const int32_t nr_items,
+                       const int32_t nr_adjacent_buttons_per_side)
    : Box(parent, style, name, 0, 0, Box::Horizontal),
-   button_style_(style == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu),
-   button_cur_(this, "current", 0, 0, kButtonSize, kButtonSize, button_style_, std::string()),
-   button_first_(this, "first", 0, 0, kButtonSize, kButtonSize, button_style_, "1", _("Go to first page")),
-   button_last_(this, "last", 0, 0, kButtonSize, kButtonSize, button_style_, std::string(), _("Go to last page")),
-   dd_pagesize_(this, "last", 0, 0, 250, 4, kButtonSize, _("Items per page"), DropdownType::kTextual, style, button_style_),
-   nr_items_(nr_items),
-   pagesize_(0),
-   current_page_(1) {
+     button_style_(style == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu),
+     button_cur_(this, "current", 0, 0, kButtonSize, kButtonSize, button_style_, std::string()),
+     button_first_(
+        this, "first", 0, 0, kButtonSize, kButtonSize, button_style_, "1", _("Go to first page")),
+     button_last_(this,
+                  "last",
+                  0,
+                  0,
+                  kButtonSize,
+                  kButtonSize,
+                  button_style_,
+                  std::string(),
+                  _("Go to last page")),
+     dd_pagesize_(this,
+                  "last",
+                  0,
+                  0,
+                  250,
+                  4,
+                  kButtonSize,
+                  _("Items per page"),
+                  DropdownType::kTextual,
+                  style,
+                  button_style_),
+     nr_items_(nr_items),
+     pagesize_(0),
+     current_page_(1) {
 
 	button_cur_.set_disable_style(ButtonDisableStyle::kPermpressed);
 	button_cur_.set_enabled(false);
 
 	for (int i = 0; i < nr_adjacent_buttons_per_side; ++i) {
-		buttons_left_.push_back(new Button(this, format("prev_%d", i + 1), 0, 0, kButtonSize, kButtonSize, button_style_, std::string()));
-		buttons_right_.push_back(new Button(this, format("next_%d", i + 1), 0, 0, kButtonSize, kButtonSize, button_style_, std::string()));
-		buttons_left_.at(i)->set_disable_style(ButtonDisableStyle::kFlat | ButtonDisableStyle::kMonochrome);
-		buttons_right_.at(i)->set_disable_style(ButtonDisableStyle::kFlat | ButtonDisableStyle::kMonochrome);
+		buttons_left_.push_back(new Button(this, format("prev_%d", i + 1), 0, 0, kButtonSize,
+		                                   kButtonSize, button_style_, std::string()));
+		buttons_right_.push_back(new Button(this, format("next_%d", i + 1), 0, 0, kButtonSize,
+		                                    kButtonSize, button_style_, std::string()));
+		buttons_left_.at(i)->set_disable_style(ButtonDisableStyle::kFlat |
+		                                       ButtonDisableStyle::kMonochrome);
+		buttons_right_.at(i)->set_disable_style(ButtonDisableStyle::kFlat |
+		                                        ButtonDisableStyle::kMonochrome);
 	}
 
 	dd_pagesize_.selected.connect([this]() { set_pagesize(dd_pagesize_.get_selected()); });
