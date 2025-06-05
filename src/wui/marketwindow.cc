@@ -76,7 +76,7 @@ public:
 	              _("Batches:"),
 	              1,
 	              1,
-	              100),
+	              Widelands::kMaxBatches),
 	     ok_(this, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("Propose")) {
 		set_size(400, 100);  // guard against SpinBox asserts
 
@@ -200,15 +200,40 @@ private:
 		const Widelands::BillOfMaterials b2 = demand_->get_selection();
 		std::set<Widelands::DescriptionIndex> set1;
 		std::vector<std::string> conflicts;
+		int32_t count1 = 0;
+		int32_t count2 = 0;
 		for (const Widelands::WareAmount& w1 : b1) {
+			if (w1.second < Widelands::kMaxWaresPerBatch) {
+				count1 += w1.second;
+			} else {  // integer overflow protection
+				count1 = Widelands::kMaxWaresPerBatch + 1;
+				break;
+			}
 			set1.insert(w1.first);
 		}
 		for (const Widelands::WareAmount& w2 : b2) {
+			if (w2.second < Widelands::kMaxWaresPerBatch) {
+				count2 += w2.second;
+			} else {  // integer overflow protection
+				count2 = Widelands::kMaxWaresPerBatch + 1;
+				break;
+			}
 			if (set1.count(w2.first) != 0) {
 				conflicts.emplace_back(
 				   iplayer_.egbase().descriptions().get_ware_descr(w2.first)->descname());
 			}
 		}
+
+		if (count1 > Widelands::kMaxWaresPerBatch || count2 > Widelands::kMaxWaresPerBatch) {
+			ok_.set_enabled(false);
+			ok_.set_tooltip(
+			   format(ngettext("It is not allowed to exchange more than %d ware per batch.",
+			                   "It is not allowed to exchange more than %d wares per batch.",
+			                   Widelands::kMaxWaresPerBatch),
+			          Widelands::kMaxWaresPerBatch));
+			return;
+		}
+
 		if (!conflicts.empty()) {
 			ok_.set_enabled(false);
 			ok_.set_tooltip(format(_("You cannot both send and receive the same ware type (%s)."),

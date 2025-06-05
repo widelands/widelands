@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-06-05 03:23+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2024\n"
 "Language-Team: Hungarian (https://app.transifex.com/widelands/teams/35159/hu/)\n"
@@ -534,14 +534,10 @@ msgstr "Valami nincs rendben…"
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:230
 msgid ""
 "We met a wounded soldier near our north-western border today. He gasped "
-"something about his tribe being attacked by vicous strangers, but he died "
+"something about his tribe being attacked by vicious strangers, but he died "
 "before he could tell us more. His armour and weaponry looked startlingly "
 "familiar. I wonder if Reebaud’s tribe is in danger?"
 msgstr ""
-"Az észak-nyugati határon találkoztunk ma egy sebesült katonával. Valami "
-"olyasmit próbált elmondani az utolsó leheletével, mielőtt meghalt, hogy a "
-"törzsét kegyetlen idegenek támadták meg. A páncélja és a fegyverei meglepően"
-" ismerősnek tűntek. Lehet, hogy Reebaud törzsét fenyegeti veszély?"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:233
@@ -556,13 +552,9 @@ msgstr "Elkéstünk"
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:240
 msgid ""
 "We met a wounded soldier near our north-western border today. He gasped "
-"something about his tribe being attacked and vanquished by vicous strangers."
-" With his last breath he told us his leader’s name: Reebaud."
+"something about his tribe being attacked and vanquished by vicious "
+"strangers. With his last breath he told us his leader’s name: Reebaud."
 msgstr ""
-"Az észak-nyugati határon találkoztunk ma egy sebesült katonával. Valami "
-"olyasmit próbált elmondani, hogy a törzsét kegyetlen idegenek támadták meg "
-"és irtották ki. Az utolsó leheletével, mielőtt meghalt, elmondta, hogy a "
-"törzsfőnöke Reebaud volt."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:243

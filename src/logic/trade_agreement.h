@@ -34,6 +34,9 @@ class Market;
 
 constexpr int32_t kInfiniteTrade = -1;
 
+constexpr int32_t kMaxBatches = 100;
+constexpr int32_t kMaxWaresPerBatch = 100;
+
 struct TradeInstance {
 	enum class State : uint8_t {
 		kProposed = 0,
@@ -51,6 +54,8 @@ struct TradeInstance {
 	BillOfMaterials items_to_send;
 	BillOfMaterials items_to_receive;
 	int32_t num_batches{0};
+
+	[[nodiscard]] std::string check_illegal() const;
 
 	[[nodiscard]] std::string format_richtext(TradeID id,
 	                                          const EditorGameBase& egbase,

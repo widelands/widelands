@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-06-05 03:23+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
 "Last-Translator: Ondřej Itřech, 2025\n"
 "Language-Team: Czech (https://app.transifex.com/widelands/teams/35159/cs/)\n"
@@ -542,15 +542,10 @@ msgstr "Něco se děje..."
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:230
 msgid ""
 "We met a wounded soldier near our north-western border today. He gasped "
-"something about his tribe being attacked by vicous strangers, but he died "
+"something about his tribe being attacked by vicious strangers, but he died "
 "before he could tell us more. His armour and weaponry looked startlingly "
 "familiar. I wonder if Reebaud’s tribe is in danger?"
 msgstr ""
-"Poblíž naší severozápadní hranice jsme dnes narazili na zraněného vojáka. "
-"Popadaje dech vykládal, jak byl jeho kmen napaden krutými cizinci. Dříve než"
-" stihl říci více, vydechl naposledy. Jeho zbroj a výbava vypadaly až "
-"zarážejícím způsobem povědomě. Nutí mě to ptát se, jestli není Rýbaudův kmen"
-" v ohrožení?"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:233
@@ -565,13 +560,9 @@ msgstr "Máme zpoždění"
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:240
 msgid ""
 "We met a wounded soldier near our north-western border today. He gasped "
-"something about his tribe being attacked and vanquished by vicous strangers."
-" With his last breath he told us his leader’s name: Reebaud."
+"something about his tribe being attacked and vanquished by vicious "
+"strangers. With his last breath he told us his leader’s name: Reebaud."
 msgstr ""
-"Poblíž naší severozápadní hranice jsme dnes narazili na zraněného vojáka. "
-"Popadaje dech vykládal, jak byl jeho kmen napaden a přemožen krutými "
-"cizinci. Se svým posledním dechem nám sdělil, že vůdce jeho kmene se "
-"jmenoval Rýbaud."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:243

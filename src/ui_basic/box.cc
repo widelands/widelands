@@ -20,10 +20,12 @@
 
 #include "base/log.h"
 #include "base/wexception.h"
-#include "graphic/graphic.h"
 #include "ui_basic/scrollbar.h"
 
 namespace UI {
+
+constexpr int kLargeBox = 30000;
+
 /**
  * Initialize an empty box
  */
@@ -38,8 +40,8 @@ Box::Box(Panel* const parent,
          uint32_t const inner_spacing)
    : Panel(parent, s, name, x, y, 0, 0),
 
-     max_x_(max_x != 0 ? max_x : g_gr->get_xres()),
-     max_y_(max_y != 0 ? max_y : g_gr->get_yres()),
+     max_x_(max_x != 0 ? max_x : kLargeBox),
+     max_y_(max_y != 0 ? max_y : kLargeBox),
 
      scrollbar_(nullptr),
      orientation_(orientation),

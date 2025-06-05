@@ -687,6 +687,45 @@ void Market::log_general_info(const EditorGameBase& egbase) const {
 	}
 }
 
+std::string TradeInstance::check_illegal() const {
+	if (num_batches > kMaxWaresPerBatch) {
+		return format("Too many batches (found %d, limit %d)", num_batches, kMaxWaresPerBatch);
+	}
+	if (num_batches < 1 && num_batches != kInfiniteTrade) {
+		return format("Bad number of batches %d", num_batches);
+	}
+
+	int32_t c = 0;
+	for (const WareAmount& pair : items_to_send) {
+		if (pair.second < 1 || pair.second > kMaxWaresPerBatch) {
+			return format("Sending %u items of ware %d", pair.second, pair.first);
+		}
+		c += pair.second;
+	}
+	if (c < 1) {
+		return "Not sending any items";
+	}
+	if (c > kMaxWaresPerBatch) {
+		return format("Sending too many items (found %d, limit %d)", c, kMaxWaresPerBatch);
+	}
+
+	c = 0;
+	for (const WareAmount& pair : items_to_receive) {
+		if (pair.second < 1 || pair.second > kMaxWaresPerBatch) {
+			return format("Receiving %u items of ware %d", pair.second, pair.first);
+		}
+		c += pair.second;
+	}
+	if (c < 1) {
+		return "Not receiving any items";
+	}
+	if (c > kMaxWaresPerBatch) {
+		return format("Receiving too many items (found %d, limit %d)", c, kMaxWaresPerBatch);
+	}
+
+	return std::string();
+}
+
 std::string TradeInstance::format_richtext(const TradeID id,
                                            const EditorGameBase& egbase,
                                            const PlayerNumber iplayer,
