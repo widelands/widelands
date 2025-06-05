@@ -1,4 +1,4 @@
-# Automatically created by Widelands 1.2~git26575 (5372ade@master) Release
+# Automatically created by Widelands 1.3~git26993 (9b95363@HEAD) Release
 
 [global]
 packet_version="1"
@@ -6,8 +6,8 @@ map_w="192"
 map_h="160"
 nr_players="2"
 name=_"Plateau"
-author="tvj"
+author="tvj, tothxa"
 descr=_"A large island with coastal plains and a forested plateau. Rich in resources and plenty of flat building space along the coasts."
 hint=
-tags="1v1,balanced,ferries,official,seafaring"
+tags="1v1,balanced,official,seafaring"
 addons=
