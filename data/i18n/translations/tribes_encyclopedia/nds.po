@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-05-29 03:19+0000\n"
+"POT-Creation-Date: 2025-06-05 03:23+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -1649,7 +1649,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cassava farmer sows and harvests one bundle of cassava between %1$s and "
 "%2$s, depending on how far she has to walk."
-msgstr ""
+msgstr "De Maniok-Buurske sait un arnt een Bünsel Maniok in %1$s bit %2$s, je nadeem, wo wied se lopen mutt."
 
 #: ../../../../data/tribes/initialization/amazons/units.lua:1571
 #: ../../../../data/tribes/initialization/amazons/units.lua:1586
@@ -1664,8 +1664,8 @@ msgstr ""
 #, lua-format
 msgid "%d growing field"
 msgid_plural "%d growing fields"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Acker"
+msgstr[1] "%d Ackers"
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Cassava
 #. Plantation, part 2; %s is replaced by 'N growing fields'
@@ -1675,7 +1675,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cassava plantation needs at least %s to work at full productivity most "
 "of the time."
-msgstr ""
+msgstr "De Maniok-Planteree bruukt tominnst %s, um tomeest bi hoogste Wöörde to warken."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Cocoa Farm
 #: ../../../../data/tribes/initialization/amazons/units.lua:1579
@@ -1696,7 +1696,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cocoa farmer sows and harvests one basket of cocoa beans between %1$s "
 "and %2$s, depending on how far she has to walk."
-msgstr ""
+msgstr "De Kakao-Buurske sait un arnt een Körv Kakaobohnen in %1$s bit %2$s, je nadeem, wo wied se lopen mutt."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Cocoa
 #. Farm, part 2; %s is replaced by 'N growing fields'
@@ -1706,7 +1706,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cocoa farm needs at least %s to work at full productivity most of the "
 "time."
-msgstr ""
+msgstr "De Kakao-Planteree bruukt tominnst %s, um tomeest bi hoogste Wöörde to warken."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stone Mine
 #: ../../../../data/tribes/initialization/amazons/units.lua:1596
@@ -1791,9 +1791,10 @@ msgstr "Lehrt Soldaten Utwieken, Verteidigung un Gesundheid. Rüst de Soldatsken
 msgctxt "amazons_building"
 msgid ""
 "If all needed wares are delivered in time, a training glade can train one "
-"soldier first level in evade or health, or both defense levels in %1$s on "
-"average. The rest of evade and health levels are trained in %2$s each."
-msgstr "Wenn alle nödigen Waren to rechter Tied ankomen, bildt de Övenshain dör de Bank eene Soldatske in %1$s um eenen Stand in Verteidigung of um de eersten Stand in Utwieken of Gesundheid ut. Elkeen vun de anner Standen vun Utwieken un Gesundheid düürt %2$s."
+"soldier to the first level in evade or health, or both defense levels in "
+"%1$s on average. The rest of evade and health levels are trained in %2$s "
+"each."
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon military site: Patrol Post
 #. TRANSLATORS: Purpose helptext for an Amazon military site: Treetop Sentry
@@ -3553,7 +3554,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Milking tongs are used by the spider breeder to milk the spiders. They are "
 "produced by the toolsmith."
-msgstr "Spinnentüchters bruken Melktangen, um de Spinnen to melken. Se worden vum Warktüügsmidd produzeert."
+msgstr "Spinnentüchtersken bruken Melktangen, um de Spinnen to melken. Se worden vum Warktüügsmidd produzeert."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fishing Net
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:726
@@ -5037,7 +5038,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The farmer sows and harvests one sheaf of corn between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr ""
+msgstr "De Buur sait un arnt een Bünsel Mais in %1$s bit %2$s, je nadeem, wo wied he lopen mutt."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Farm,
 #. part 2; %s is replaced by 'N growing fields'
@@ -5046,7 +5047,7 @@ msgstr ""
 msgctxt "atlanteans_building"
 msgid ""
 "The farm needs at least %s to work at full productivity most of the time."
-msgstr ""
+msgstr "De Buurderee bruukt tominnst %s, um tomeest bi hoogste Wöörde to warken."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Blackroot
 #. Farm https://en.wikipedia.org/wiki/Scorzonera_hispanica
@@ -5077,7 +5078,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer sows and harvests one bundle of blackroot between %1$s "
 "and %2$s, depending on how far he has to walk."
-msgstr ""
+msgstr "De Swartwuddel-Buur sait un arnt een Bünsel Swartwuddels in %1$s bit %2$s, je nadeem, wo wied he lopen mutt."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Blackroot Farm, part 2; %s is replaced by 'N growing fields'
@@ -5087,7 +5088,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farm needs at least %s to work at full productivity most of "
 "the time."
-msgstr ""
+msgstr "De Swartwuddel-Buurderee bruukt tominnst %s, um tomeest bi hoogste Wöörde to warken."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Spider Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1857
@@ -5110,8 +5111,8 @@ msgstr "Nee, wi föden de Spinnen nich mit Mais. Wi föden de Mais to fetten Gra
 #. Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1863
 msgctxt "atlanteans_building"
-msgid "A spider breeder showing his farm"
-msgstr "Een Spinnentüchter wiest sien Buurderee"
+msgid "A spider breeder showing her farm"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weaving
 #. Mill
@@ -7200,7 +7201,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The gardener sows and harvests one sheaf of reed between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr ""
+msgstr "De Gaardner sait un arnt een Bünsel Reit in %1$s bit %2$s, je nadeem, wo wied he lopen mutt."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Reed
 #. Yard, part 2; %s is replaced by 'N growing fields'
@@ -7210,7 +7211,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The reed yard needs at least %s to work at full productivity most of the "
 "time."
-msgstr ""
+msgstr "De Reitplanteree bruukt tominnst %s, um tomeest bi hoogste Wöörde to warken."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Lime Kiln
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1324
@@ -7698,7 +7699,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The farmer sows and harvests one sheaf of wheat between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr ""
+msgstr "De Buur sait un arnt een Bünsel Weit in %1$s bit %2$s, je nadeem, wo wied he lopen mutt."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Farm,
 #. part 2; %s is replaced by 'N growing fields'
@@ -7707,7 +7708,7 @@ msgstr ""
 msgctxt "barbarians_building"
 msgid ""
 "The farm needs at least %s to work at full productivity most of the time."
-msgstr ""
+msgstr "De Buurderee bruukt tominnst %s, um tomeest bi hoogste Wöörde to warken."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Helm Smithy
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1553
@@ -11600,7 +11601,7 @@ msgctxt "empire_building"
 msgid ""
 "The vine farmer sows and harvests one basket of grapes between %1$s and "
 "%2$s, depending on how far he has to walk."
-msgstr ""
+msgstr "De Wienplanter sait un arnt een Körv Wiendruven in %1$s bit %2$s, je nadeem, wo wied he lopen mutt."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Vineyard,
 #. part 2; %s is replaced by 'N growing fields'
@@ -11610,7 +11611,7 @@ msgctxt "empire_building"
 msgid ""
 "The vineyard needs at least %s to work at full productivity most of the "
 "time."
-msgstr ""
+msgstr "De Wienplanteree bruukt tominnst %s, um tomeest bi hoogste Wöörde to warken."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11966,7 +11967,7 @@ msgctxt "empire_building"
 msgid ""
 "The farmer sows and harvests one sheaf of wheat between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr ""
+msgstr "De Buur sait un arnt een Bünsel Weit in %1$s bit %2$s, je nadeem, wo wied he lopen mutt."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Farm, part
 #. 2; %s is replaced by 'N growing fields'
@@ -11975,7 +11976,7 @@ msgstr ""
 msgctxt "empire_building"
 msgid ""
 "The farm needs at least %s to work at full productivity most of the time."
-msgstr ""
+msgstr "De Buurderee bruukt tominnst %s, um tomeest bi hoogste Wöörde to warken."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12398,9 +12399,9 @@ msgstr "Rieks-Soldaten könen keene »Verteidigung« öven un blieven immer up h
 #, lua-format
 msgctxt "empire_building"
 msgid ""
-"If all needed wares are delivered in time, an arena can train one soldier "
-"first level in evade in %s on average."
-msgstr "Wenn alle nödigen Waren to rechter Tied ankomen, bildt de Ring dör de Bank in %s eenen Soldaten um de eersten Stand in Utwieken ut."
+"If all needed wares are delivered in time, an arena can train one soldier to"
+" the first level in evade in %s on average."
+msgstr ""
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14933,7 +14934,7 @@ msgctxt "frisians_building"
 msgid ""
 "The reed farmer sows and harvests one sheaf of reed between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr ""
+msgstr "De Reitbuur sait un arnt een Bünsel Reit in %1$s bit %2$s, je nadeem, wo wied he lopen mutt."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Reed Farm,
 #. part 2; %s is replaced by 'N growing fields'
@@ -14943,7 +14944,7 @@ msgctxt "frisians_building"
 msgid ""
 "The reed farm needs at least %s to work at full productivity most of the "
 "time."
-msgstr ""
+msgstr "De Reitbuurderee bruukt tominnst %s, um tomeest bi hoogste Wöörde to warken."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Well
 #: ../../../../data/tribes/initialization/frisians/units.lua:1683
@@ -15067,7 +15068,7 @@ msgctxt "frisians_building"
 msgid ""
 "The berry farmer plants one bush between %1$s and %2$s, depending on how far"
 " he has to walk."
-msgstr ""
+msgstr "De Buskenplanter plant eenen Busk in %1$s bit %2$s, je nadeem, wo wied he lopen mutt."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Fruit Collector's
 #. House
@@ -15104,7 +15105,7 @@ msgctxt "frisians_building"
 msgid ""
 "The fruit collector harvests one bush between %1$s and %2$s, depending on "
 "how far he has to walk."
-msgstr ""
+msgstr "De Früchtenpottjer arnt eenen Busk in %1$s bit %2$s, je nadeem, wo wied he lopen mutt."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Beekeeper's House
 #: ../../../../data/tribes/initialization/frisians/units.lua:1768
@@ -15782,7 +15783,7 @@ msgctxt "frisians_building"
 msgid ""
 "The farmer sows and harvests one sheaf of barley between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr ""
+msgstr "De Buur sait un arnt een Bünsel Garst in %1$s bit %2$s, je nadeem, wo wied he lopen mutt."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Farm, part
 #. 2; %s is replaced by 'N growing fields'
@@ -15791,7 +15792,7 @@ msgstr ""
 msgctxt "frisians_building"
 msgid ""
 "The farm needs at least %s to work at full productivity most of the time."
-msgstr ""
+msgstr "De Buurderee bruukt tominnst %s, um tomeest bi hoogste Wöörde to warken."
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Diker's House
 #: ../../../../data/tribes/initialization/frisians/units.lua:2073

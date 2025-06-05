@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-05-29 03:19+0000\n"
+"POT-Creation-Date: 2025-06-05 03:23+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Ondřej Itřech, 2020-2021,2025\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -1655,7 +1655,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cassava farmer sows and harvests one bundle of cassava between %1$s and "
 "%2$s, depending on how far she has to walk."
-msgstr ""
+msgstr "Pěstitelka manioku vysadí a sklidí jeden svazek manioku za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí urazit."
 
 #: ../../../../data/tribes/initialization/amazons/units.lua:1571
 #: ../../../../data/tribes/initialization/amazons/units.lua:1586
@@ -1670,10 +1670,10 @@ msgstr ""
 #, lua-format
 msgid "%d growing field"
 msgid_plural "%d growing fields"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d obhospodařované pole"
+msgstr[1] "%d obhospodařovaná pole"
+msgstr[2] "%d obhospodařovaného pole"
+msgstr[3] "%d obhospodařovaných polí"
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Cassava
 #. Plantation, part 2; %s is replaced by 'N growing fields'
@@ -1683,7 +1683,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cassava plantation needs at least %s to work at full productivity most "
 "of the time."
-msgstr ""
+msgstr "Manioková plantáž potřebuje alespoň %s, aby produkovala na úrovni své maximální kapacity. "
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Cocoa Farm
 #: ../../../../data/tribes/initialization/amazons/units.lua:1579
@@ -1704,7 +1704,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cocoa farmer sows and harvests one basket of cocoa beans between %1$s "
 "and %2$s, depending on how far she has to walk."
-msgstr ""
+msgstr "Pěstitelka kakaa vysadí a sklidí jeden koš kakaových bobů za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí urazit."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Cocoa
 #. Farm, part 2; %s is replaced by 'N growing fields'
@@ -1714,7 +1714,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cocoa farm needs at least %s to work at full productivity most of the "
 "time."
-msgstr ""
+msgstr "Kakaová farma potřebuje alespoň %s, aby produkovala na úrovni své maximální kapacity. "
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stone Mine
 #: ../../../../data/tribes/initialization/amazons/units.lua:1596
@@ -1799,9 +1799,10 @@ msgstr "Cvičí bojovnice v úhybu, obraně a zdraví. Poskytuje jim nezbytné z
 msgctxt "amazons_building"
 msgid ""
 "If all needed wares are delivered in time, a training glade can train one "
-"soldier first level in evade or health, or both defense levels in %1$s on "
-"average. The rest of evade and health levels are trained in %2$s each."
-msgstr "Pokud jsou všechny potřebné suroviny doručeny včas, může tréninkový palouk zlepšit úhyb nebo zdraví na první stupeň nebo zlepšit obranu o jeden stupeň v průměru za %1$s. Výcvik jenoho stupně úhybu nebo zdraví vyšší úrovně pak trvá v průměru %2$s."
+"soldier to the first level in evade or health, or both defense levels in "
+"%1$s on average. The rest of evade and health levels are trained in %2$s "
+"each."
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon military site: Patrol Post
 #. TRANSLATORS: Purpose helptext for an Amazon military site: Treetop Sentry
@@ -5053,7 +5054,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The farmer sows and harvests one sheaf of corn between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr ""
+msgstr "Sedlák zaseje a sklidí jeden svazek kukuřice za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí urazit."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Farm,
 #. part 2; %s is replaced by 'N growing fields'
@@ -5062,7 +5063,7 @@ msgstr ""
 msgctxt "atlanteans_building"
 msgid ""
 "The farm needs at least %s to work at full productivity most of the time."
-msgstr ""
+msgstr "Statek potřebuje alespoň %s, aby produkoval na úrovni své maximální kapacity. "
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Blackroot
 #. Farm https://en.wikipedia.org/wiki/Scorzonera_hispanica
@@ -5093,7 +5094,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer sows and harvests one bundle of blackroot between %1$s "
 "and %2$s, depending on how far he has to walk."
-msgstr ""
+msgstr "Pěstitel rozrazilu vysadí a sklidí jeden svazek rozrazilu za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí urazit."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Blackroot Farm, part 2; %s is replaced by 'N growing fields'
@@ -5103,7 +5104,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farm needs at least %s to work at full productivity most of "
 "the time."
-msgstr ""
+msgstr "Pěstírna rozrazilu potřebuje alespoň %s, aby produkovala na úrovni své maximální kapacity. "
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Spider Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1857
@@ -5126,8 +5127,8 @@ msgstr "Ne, opravdu tu nekrmíme naše pavouky kukuřicí. Tu spásají naše tl
 #. Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1863
 msgctxt "atlanteans_building"
-msgid "A spider breeder showing his farm"
-msgstr "chovatelka pavouků ukazuje svou farmu"
+msgid "A spider breeder showing her farm"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weaving
 #. Mill
@@ -7224,7 +7225,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The gardener sows and harvests one sheaf of reed between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr ""
+msgstr "Zahradník zaseje a sklidí jeden svazek rákosu za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí urazit."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Reed
 #. Yard, part 2; %s is replaced by 'N growing fields'
@@ -7234,7 +7235,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The reed yard needs at least %s to work at full productivity most of the "
 "time."
-msgstr ""
+msgstr "Rákosové pole potřebuje alespoň %s, aby produkovalo na úrovni své maximální kapacity. "
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Lime Kiln
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1324
@@ -7722,7 +7723,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The farmer sows and harvests one sheaf of wheat between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr ""
+msgstr "Sedlák zaseje a sklidí jeden svazek pšenice za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí urazit."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Farm,
 #. part 2; %s is replaced by 'N growing fields'
@@ -7731,7 +7732,7 @@ msgstr ""
 msgctxt "barbarians_building"
 msgid ""
 "The farm needs at least %s to work at full productivity most of the time."
-msgstr ""
+msgstr "Statek potřebuje alespoň %s, aby produkoval na úrovni své maximální kapacity. "
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Helm Smithy
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1553
@@ -11632,7 +11633,7 @@ msgctxt "empire_building"
 msgid ""
 "The vine farmer sows and harvests one basket of grapes between %1$s and "
 "%2$s, depending on how far he has to walk."
-msgstr ""
+msgstr "Vinař vysadí a sklidí jeden koš hroznů za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí urazit."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Vineyard,
 #. part 2; %s is replaced by 'N growing fields'
@@ -11642,7 +11643,7 @@ msgctxt "empire_building"
 msgid ""
 "The vineyard needs at least %s to work at full productivity most of the "
 "time."
-msgstr ""
+msgstr "Vinohrad potřebuje alespoň %s, aby produkoval na úrovni své maximální kapacity. "
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11998,7 +11999,7 @@ msgctxt "empire_building"
 msgid ""
 "The farmer sows and harvests one sheaf of wheat between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr ""
+msgstr "Sedlák zaseje a sklidí jeden svazek pšenice za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí urazit."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Farm, part
 #. 2; %s is replaced by 'N growing fields'
@@ -12007,7 +12008,7 @@ msgstr ""
 msgctxt "empire_building"
 msgid ""
 "The farm needs at least %s to work at full productivity most of the time."
-msgstr ""
+msgstr "Statek potřebuje alespoň %s, aby produkoval na úrovni své maximální kapacity. "
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12430,9 +12431,9 @@ msgstr "Vojáci císařství se v obraně necvičí a drží si svou počátečn
 #, lua-format
 msgctxt "empire_building"
 msgid ""
-"If all needed wares are delivered in time, an arena can train one soldier "
-"first level in evade in %s on average."
-msgstr "Pokud jsou všechny potřebné suroviny doručeny včas, může aréna zlepšit úhyb vojáka o jeden stupeň v průměru za %s."
+"If all needed wares are delivered in time, an arena can train one soldier to"
+" the first level in evade in %s on average."
+msgstr ""
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14973,7 +14974,7 @@ msgctxt "frisians_building"
 msgid ""
 "The reed farmer sows and harvests one sheaf of reed between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr ""
+msgstr "Pěstitel rákosí zaseje a sklidí jeden svazek rákosu za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí urazit."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Reed Farm,
 #. part 2; %s is replaced by 'N growing fields'
@@ -14983,7 +14984,7 @@ msgctxt "frisians_building"
 msgid ""
 "The reed farm needs at least %s to work at full productivity most of the "
 "time."
-msgstr ""
+msgstr "Rákosová farma potřebuje alespoň %s, aby produkovala na úrovni své maximální kapacity. "
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Well
 #: ../../../../data/tribes/initialization/frisians/units.lua:1683
@@ -15107,7 +15108,7 @@ msgctxt "frisians_building"
 msgid ""
 "The berry farmer plants one bush between %1$s and %2$s, depending on how far"
 " he has to walk."
-msgstr ""
+msgstr "Sadař vysadí jeden ovocný keř za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí urazit."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Fruit Collector's
 #. House
@@ -15144,7 +15145,7 @@ msgctxt "frisians_building"
 msgid ""
 "The fruit collector harvests one bush between %1$s and %2$s, depending on "
 "how far he has to walk."
-msgstr ""
+msgstr "Sběrač ovoce sklidí jeden ovocný keř za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí urazit."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Beekeeper's House
 #: ../../../../data/tribes/initialization/frisians/units.lua:1768
@@ -15822,7 +15823,7 @@ msgctxt "frisians_building"
 msgid ""
 "The farmer sows and harvests one sheaf of barley between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr ""
+msgstr "Sedlák zaseje a sklidí jednu otep ječmene za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí urazit."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Farm, part
 #. 2; %s is replaced by 'N growing fields'
@@ -15831,7 +15832,7 @@ msgstr ""
 msgctxt "frisians_building"
 msgid ""
 "The farm needs at least %s to work at full productivity most of the time."
-msgstr ""
+msgstr "Statek potřebuje alespoň %s, aby produkoval na úrovni své maximální kapacity. "
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Diker's House
 #: ../../../../data/tribes/initialization/frisians/units.lua:2073
