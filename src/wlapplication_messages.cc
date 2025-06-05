@@ -201,6 +201,7 @@ void fill_parameter_vector() {
 	   {"", "transparent_chat", _("[true*|false]"),
 	    _("Show in-game chat with transparent background."), true},
 	   {"", "toolbar_pos", _("[...]"), _("Bitmask to set the toolbar location and mode."), true},
+	   {"", "pagination_pagesize", _("n"), _("Default pagesize for paginated structures."), true},
 	   /// Networking
 	   {_("Networking:"), "metaserver", _("URI"),
 	    _("Connect to a different metaserver for internet gaming."), false},
