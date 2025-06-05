@@ -65,9 +65,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start burning bricks because ...
          descname = _("burning bricks"),
          actions = {
+            -- time total: 29.2 + 50 + 3 * 3.6 = 90 sec
             "return=skipped unless economy needs brick",
             "consume=granite clay:3 coal",
-            "sleep=duration:30s",
+            "sleep=duration:29s200ms",
             "animate=working duration:50s",
             "produce=brick:3"
          },

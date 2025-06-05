@@ -16,6 +16,9 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       bees = {
+         -- steps from building to flowering plant: 2-8
+         -- min. worker time: 2 * 2 * 1.8 + 10 = 17.2 sec
+         -- max. worker time: 2 * 8 * 1.8 + 10 = 38.8 sec
          "findobject=attrib:flowering radius:5",
          "walk=object",
          "animate=beeswarm duration:10s",
