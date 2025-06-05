@@ -3553,7 +3553,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Milking tongs are used by the spider breeder to milk the spiders. They are "
 "produced by the toolsmith."
-msgstr "Spinnentüchters bruken Melktangen, um de Spinnen to melken. Se worden vum Warktüügsmidd produzeert."
+msgstr "Spinnentüchtersken bruken Melktangen, um de Spinnen to melken. Se worden vum Warktüügsmidd produzeert."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fishing Net
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:726
@@ -5111,7 +5111,7 @@ msgstr "Nee, wi föden de Spinnen nich mit Mais. Wi föden de Mais to fetten Gra
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1863
 msgctxt "atlanteans_building"
 msgid "A spider breeder showing his farm"
-msgstr "Een Spinnentüchter wiest sien Buurderee"
+msgstr "Eene Spinnentüchterske wiest hör Buurderee"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weaving
 #. Mill

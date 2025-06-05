@@ -23,7 +23,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-05-31 03:16+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2025\n"
+"Last-Translator: zone <z-one@freemail.hu>, 2015\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1235,7 +1235,7 @@ msgstr "Rendben"
 #: ../../../../src/wui/game_main_menu_save_game.cc:99
 #: ../../../../src/wui/pinned_note.cc:67
 msgid "Cancel"
-msgstr "Mégse"
+msgstr "Mégsem"
 
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:137
 msgid "File names"
@@ -1354,7 +1354,7 @@ msgstr "Kompok hatótávja:"
 msgid ""
 "Enable ferries, waterways, and ferry yards on this map by setting the "
 "maximum length of waterways for ferries"
-msgstr "A kompok, vízi utak és csónakkészítő műhelyek akkor lesznek használhatók ezen a térképen, ha itt beállítod a vízi utak legnagyobb engedélyezett hosszát."
+msgstr "A kompok és a csónakkészítő műhelyek akkor lesznek használhatók ezen a térképen, ha itt beállítod a kompjáratok legnagyobb engedélyezett hosszát."
 
 #. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
@@ -1391,7 +1391,7 @@ msgstr "Csapatok"
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:538
 #, c-format
 msgid "It is not recommended to permit waterway lengths greater than %u"
-msgstr "Nem javasolt %u-nál hosszabb víziutak engedélyezése"
+msgstr "Nem javasolt %u-nál hosszabb kompjáratok engedélyezése"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:554
 msgid "Size: %1% x %2%"
@@ -2692,7 +2692,7 @@ msgstr "Határozatlan idejű üzlet"
 msgid "%d batch delivered"
 msgid_plural "%d batches delivered"
 msgstr[0] "Eddig %d szállítmány telesült"
-msgstr[1] "Eddig %d szállítmány telesült"
+msgstr[1] "Eddig %d szállítmány teljesült"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:763
 #, c-format
@@ -3371,15 +3371,15 @@ msgstr "Új raktárral bővült a gazdaságod."
 #. * available)
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:695
 msgid "Waterway"
-msgstr "Vízi út"
+msgstr "Kompjárat"
 
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:696
 msgid "Waterway destroyed"
-msgstr "Vízi út megsemmisítve"
+msgstr "Kompjárat megsemmisítve"
 
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:697
 msgid "A waterway had to be destroyed to make room for your new port dock."
-msgstr "Egy vízi utat meg kellett semmisíteni, hogy legyen helye az új kikötődokknak."
+msgstr "Egy kompjáratot meg kellett semmisíteni, hogy legyen helye az új kikötődokknak."
 
 #: ../../../../src/logic/map_objects/tribes/worker_programs/findresources.cc:58
 msgid "A geologist found resources."
@@ -3565,7 +3565,7 @@ msgstr "Zászlók"
 #: ../../../../src/map_io/map_saver.cc:206
 #: ../../../../src/map_io/widelands_map_loader.cc:323
 msgid "Roads and waterways"
-msgstr "Szárazföldi és vízi utak"
+msgstr "Utak és kompjáratok"
 
 #: ../../../../src/map_io/map_saver.cc:228
 #: ../../../../src/map_io/widelands_map_loader.cc:253
@@ -3583,7 +3583,7 @@ msgstr "Zászlók adatai"
 
 #: ../../../../src/map_io/map_saver.cc:255
 msgid "Road and waterway details"
-msgstr "Szárazföldi és vízi utak adatai"
+msgstr "Utak és kompjáratok adatai"
 
 #: ../../../../src/map_io/map_saver.cc:272
 msgid "Building details"
@@ -3652,7 +3652,7 @@ msgstr "Zászlók előkészítése"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:351
 msgid "Initializing roads and waterways"
-msgstr "Szárazföldi és vízi utak előkészítése"
+msgstr "Utak és kompjáratok előkészítése"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:364
 msgid "Initializing buildings"
@@ -4370,11 +4370,11 @@ msgstr "Nincs találat"
 
 #: ../../../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
-msgstr "Egy kis türelmet kérek…"
+msgstr "Egy kis türelmet kérünk…"
 
 #: ../../../../src/ui_basic/panel.cc:467
 msgid "Game ending – please wait…"
-msgstr "Játék befejezése – egy kis türelmet kérek…"
+msgstr "Játék befejezése – egy kis türelmet kérünk…"
 
 #: ../../../../src/ui_basic/progresswindow.cc:83
 #: ../../../../src/wlapplication.cc:489
@@ -5428,7 +5428,7 @@ msgstr "Bővítmények mentése"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:138
 msgid "Please be patient while your changes are written."
-msgstr "Kis türelmet, amíg a változások ki lesznek írva."
+msgstr "Kérjük légy türelemmel, amíg a változásokat elmentjük!"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:161
 msgid "Name:"
@@ -9739,7 +9739,7 @@ msgstr "Út építése"
 
 #: ../../../../src/wui/fieldaction.cc:427
 msgid "Build waterway"
-msgstr "Vízi út építése"
+msgstr "Kompjárat építése"
 
 #: ../../../../src/wui/fieldaction.cc:435
 msgid "Destroy this flag"
@@ -9776,7 +9776,7 @@ msgstr "Út megsemmisítése"
 
 #: ../../../../src/wui/fieldaction.cc:501
 msgid "Destroy a waterway"
-msgstr "Vízi út megsemmisítése"
+msgstr "Kompjárat megsemmisítése"
 
 #: ../../../../src/wui/fieldaction.cc:521
 msgid "Configure this ocean’s ship fleet"
@@ -9822,7 +9822,7 @@ msgstr "Vissza a félkész úthoz"
 
 #: ../../../../src/wui/fieldaction.cc:703
 msgid "Cancel road and start building waterway"
-msgstr "Szárazföldi út elvetése, helyette vízi út építése"
+msgstr "Út elvetése, helyette kompjárat építése"
 
 #: ../../../../src/wui/fieldaction.cc:707
 msgid "Build roads"
@@ -9830,19 +9830,19 @@ msgstr "Út építése"
 
 #: ../../../../src/wui/fieldaction.cc:720
 msgid "Cancel waterway"
-msgstr "Vízi út elvetése"
+msgstr "Kompjárat elvetése"
 
 #: ../../../../src/wui/fieldaction.cc:722
 msgid "Go to waterway"
-msgstr "Vissza a félkész vízi úthoz"
+msgstr "Vissza a félkész kompjárathoz"
 
 #: ../../../../src/wui/fieldaction.cc:725
 msgid "Cancel waterway and start building road"
-msgstr "Vízi út elvetése, helyette szárazföldi út építése"
+msgstr "Kompjárat elvetése, helyette út építése"
 
 #: ../../../../src/wui/fieldaction.cc:728
 msgid "Build waterways"
-msgstr "Vízi utak építése"
+msgstr "Kompjáratok építése"
 
 #. * TRANSLATORS: Placeholders are the hitpoints and the attack bonus of the
 #. warship.
@@ -9913,11 +9913,11 @@ msgstr "Hajók:"
 
 #: ../../../../src/wui/fleet_options_window.cc:161
 msgid "Total waterways:"
-msgstr "Összes vízi út:"
+msgstr "Összes kompjárat:"
 
 #: ../../../../src/wui/fleet_options_window.cc:162
 msgid "Unserviced waterways:"
-msgstr "Komp nélküli vízi út:"
+msgstr "Hiányzó kompok:"
 
 #: ../../../../src/wui/fleet_options_window.cc:163
 msgid "Total ferries:"
@@ -10720,7 +10720,7 @@ msgstr "Út hossza: %1$u (%2$u)"
 #: ../../../../src/wui/interactive_base.cc:930
 #, c-format
 msgid "Waterway length: %1$u (%2$u) / %3$u"
-msgstr "Vízi út hossza: %1$u (%2$u) / %3$u"
+msgstr "Kompjárat hossza: %1$u (%2$u) / %3$u"
 
 #: ../../../../src/wui/interactive_base.cc:935
 #, c-format
@@ -10730,7 +10730,7 @@ msgstr "Út hossza: %u"
 #: ../../../../src/wui/interactive_base.cc:938
 #, c-format
 msgid "Waterway length: %1$u / %2$u"
-msgstr "Vízi út hossza: %1$u / %2$u"
+msgstr "Kompjárat hossza: %1$u / %2$u"
 
 #: ../../../../src/wui/interactive_base.cc:1865
 msgid "Failed saving screenshot!"
@@ -10995,7 +10995,7 @@ msgstr "Kompok"
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../../../src/wui/map_tags.cc:58
 msgid "The map allows building ferries, ferry yards and waterways"
-msgstr "A térképen használhatók kompok, vízi utak és csónakkészítő műhelyek"
+msgstr "A térképen használhatók kompok és csónakkészítő műhelyek"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../../../src/wui/map_tags.cc:61 ../../../../src/wui/minimap.cc:226
