@@ -1778,8 +1778,12 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("frisians_building", "Keeps bees and lets them swarm over flowering fields to produce honey."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Beekeeper's House
             note = pgettext("frisians_building", "Needs medium-sized fields (barley, wheat, reed, corn or blackroot) or bushes (berry bushes or grapevines) nearby."),
-            -- TRANSLATORS: Performance helptext for a Frisian production site: Beekeeper's House
-            performance = pgettext("frisians_building", "The beekeeper pauses %s before going to work again."):bformat(format_seconds(45))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Beekeeper's House, part 1
+               pgettext("frisians_building", "The beekeeper collects one honey between %1$s and %2$s, depending on how far he has to walk."):bformat(format_minutes_seconds(1, 2), format_minutes_seconds(1, 24)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Beekeeper's House, part 2
+               pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1831,7 +1835,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Brick Kiln
             purpose = pgettext("building", "Burns bricks using granite and clay, and coal as fuel. Bricks are the most important building material."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Brick Kiln
-            performance = pgettext("frisians_building", "The brick kiln needs %s on average to produce three bricks."):bformat(format_minutes_seconds(1, 24))
+            performance = pgettext("frisians_building", "The brick kiln needs %s on average to produce one brick."):bformat(format_seconds(30))
          }
       },
       {
@@ -2084,7 +2088,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Diker's House
             purpose = pgettext("frisians_building", "Constructs breakwaters nearby to gain new land from the sea."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Diker's House
-            note = pgettext("frisians_building", "The diker will terraform the land around each breakwater he builds several times. You can manually remove breakwaters when the land is sufficiently secured to prevent wasting resources; to do so, build a flag, road, or building in the dike’s place.")
+            note = pgettext("frisians_building", "The diker will terraform the land around each breakwater he builds several times. You can manually remove breakwaters when the land is sufficiently secured to prevent wasting resources; to do so, build a flag, road, or building in the dike’s place."),
+            -- TRANSLATORS: Performance helptext for a Frisian production site: Diker's House
+            performance = pgettext("frisians_building", "The diker constructs a breakwater and performs three terraforms between %1$s and %2$s, depending on how far he has to walk."):bformat(format_minutes_seconds(8, 9), format_minutes_seconds(9, 50))
          }
       },
 
