@@ -1319,6 +1319,8 @@ bool Game::check_trade_player_matches(const TradeInstance& trade,
 }
 
 TradeID Game::propose_trade(TradeInstance trade) {
+	assert(trade.check_illegal().empty());
+
 	MutexLock m(MutexLock::ID::kObjects);
 	const TradeID id = next_trade_agreement_id_++;
 
@@ -1494,8 +1496,8 @@ void Game::move_trade(const TradeID trade_id, Market& old_market, Market& new_ma
 
 void Game::propose_trade_extension(const PlayerNumber sender,
                                    const TradeID trade_id,
-                                   const int batches) {
-	if (batches <= 0 && batches != kInfiniteTrade) {
+                                   const int32_t batches) {
+	if ((batches <= 0 && batches != kInfiniteTrade) || batches > kMaxWaresPerBatch) {
 		return;
 	}
 
@@ -1532,7 +1534,7 @@ void Game::propose_trade_extension(const PlayerNumber sender,
 
 void Game::retract_trade_extension(const PlayerNumber sender,
                                    const TradeID trade_id,
-                                   const int batches) {
+                                   const int32_t batches) {
 	for (auto it = trade_extension_proposals_.begin(); it != trade_extension_proposals_.end();
 	     ++it) {
 		if (it->trade_id == trade_id && it->proposer == sender && it->batches == batches) {
@@ -1571,7 +1573,7 @@ void Game::retract_trade_extension(const PlayerNumber sender,
 
 void Game::reject_trade_extension(const PlayerNumber sender,
                                   const TradeID trade_id,
-                                  const int batches) {
+                                  const int32_t batches) {
 	for (auto it = trade_extension_proposals_.begin(); it != trade_extension_proposals_.end();
 	     ++it) {
 		if (it->trade_id == trade_id && it->batches == batches) {
@@ -1611,7 +1613,7 @@ void Game::reject_trade_extension(const PlayerNumber sender,
 
 void Game::accept_trade_extension(const PlayerNumber sender,
                                   const TradeID trade_id,
-                                  const int batches) {
+                                  const int32_t batches) {
 	for (auto it = trade_extension_proposals_.begin(); it != trade_extension_proposals_.end();
 	     ++it) {
 		if (it->trade_id == trade_id && it->batches == batches) {
