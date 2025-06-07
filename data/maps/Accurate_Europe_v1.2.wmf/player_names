@@ -21,7 +21,7 @@ random="false"
 
 [player_3]
 name="Spain"
-tribe="atlanteans"
+tribe="empire"
 ai=
 closeable="false"
 team="0"
@@ -37,7 +37,7 @@ random="false"
 
 [player_5]
 name="German Empire"
-tribe="barbarians"
+tribe="frisians"
 ai=
 closeable="false"
 team="0"
@@ -61,7 +61,7 @@ random="false"
 
 [player_8]
 name="Greece"
-tribe="barbarians"
+tribe="atlanteans"
 ai=
 closeable="false"
 team="0"
@@ -85,7 +85,7 @@ random="false"
 
 [player_11]
 name="Russian Empire"
-tribe="empire"
+tribe="barbarians"
 ai=
 closeable="false"
 team="0"

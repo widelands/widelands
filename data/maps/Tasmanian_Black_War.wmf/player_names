@@ -13,7 +13,7 @@ random="false"
 
 [player_2]
 name="Mwumbu Zusu"
-tribe="barbarians"
+tribe="amazons"
 ai=
 closeable="false"
 team="0"
@@ -29,7 +29,7 @@ random="false"
 
 [player_4]
 name="Xurululu"
-tribe="barbarians"
+tribe="amazons"
 ai=
 closeable="false"
 team="0"
