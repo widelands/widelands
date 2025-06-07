@@ -11172,8 +11172,8 @@ msgstr "Kérjük add meg a kínált és kért árukat!"
 #, c-format
 msgid "It is not allowed to exchange more than %d ware per batch."
 msgid_plural "It is not allowed to exchange more than %d wares per batch."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Egy szállítmány legfeljebb %d áruból állhat."
+msgstr[1] "Egy szállítmány legfeljebb %d áruból állhat."
 
 #: ../../../../src/wui/marketwindow.cc:239
 #, c-format
