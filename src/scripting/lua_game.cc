@@ -1256,7 +1256,8 @@ int LuaPlayer::retract_trade(lua_State* L) {
       :see also: :attr:`wl.Game.trade_extension_proposals`
 */
 int LuaPlayer::propose_trade_extension(lua_State* L) {
-	get_game(L).propose_trade_extension(player_number(), luaL_checkinteger(L, 2), luaL_checkinteger(L, 3));
+	get_game(L).propose_trade_extension(
+	   player_number(), luaL_checkinteger(L, 2), luaL_checkinteger(L, 3));
 	return 0;
 }
 
@@ -1276,7 +1277,8 @@ int LuaPlayer::propose_trade_extension(lua_State* L) {
       :see also: :attr:`wl.Game.trade_extension_proposals`
 */
 int LuaPlayer::accept_trade_extension(lua_State* L) {
-	get_game(L).accept_trade_extension(player_number(), luaL_checkinteger(L, 2), luaL_checkinteger(L, 3));
+	get_game(L).accept_trade_extension(
+	   player_number(), luaL_checkinteger(L, 2), luaL_checkinteger(L, 3));
 	return 0;
 }
 
@@ -1296,7 +1298,8 @@ int LuaPlayer::accept_trade_extension(lua_State* L) {
       :see also: :attr:`wl.Game.trade_extension_proposals`
 */
 int LuaPlayer::reject_trade_extension(lua_State* L) {
-	get_game(L).reject_trade_extension(player_number(), luaL_checkinteger(L, 2), luaL_checkinteger(L, 3));
+	get_game(L).reject_trade_extension(
+	   player_number(), luaL_checkinteger(L, 2), luaL_checkinteger(L, 3));
 	return 0;
 }
 
@@ -1316,7 +1319,8 @@ int LuaPlayer::reject_trade_extension(lua_State* L) {
       :see also: :attr:`wl.Game.trade_extension_proposals`
 */
 int LuaPlayer::retract_trade_extension(lua_State* L) {
-	get_game(L).retract_trade_extension(player_number(), luaL_checkinteger(L, 2), luaL_checkinteger(L, 3));
+	get_game(L).retract_trade_extension(
+	   player_number(), luaL_checkinteger(L, 2), luaL_checkinteger(L, 3));
 	return 0;
 }
 
