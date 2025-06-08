@@ -1114,7 +1114,7 @@ Soldier& Warehouse::launch_soldier(Game& game,
 		std::sort(incorporated_soldiers_.begin(), incorporated_soldiers_.end(),
 		          [&game](OPtr<Soldier> a, OPtr<Soldier> b) {
 			          // We're sorting in decreasing order
-			          return a.get(game)->get_total_level() < b.get(game)->get_total_level();
+			          return a.get(game)->get_total_level() > b.get(game)->get_total_level();
 		          });
 		soldiers_are_sorted_ = true;
 	}
