@@ -11163,8 +11163,8 @@ msgstr "Bidde köör de Waren ut, wat du schicken un kriegen willst."
 #, c-format
 msgid "It is not allowed to exchange more than %d ware per batch."
 msgid_plural "It is not allowed to exchange more than %d wares per batch."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Dat is nich verlöövt, mehr as %d Waar pro Bünsel to tuusken."
+msgstr[1] "Dat is nich verlöövt, mehr as %d Waren pro Bünsel to tuusken."
 
 #: ../../../../src/wui/marketwindow.cc:239
 #, c-format

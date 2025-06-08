@@ -546,6 +546,11 @@ msgid ""
 "before he could tell us more. His armour and weaponry looked startlingly "
 "familiar. I wonder if Reebaud’s tribe is in danger?"
 msgstr ""
+"Poblíž naší severozápadní hranice jsme dnes narazili na zraněného vojáka. "
+"Popadaje dech vykládal, jak byl jeho kmen napaden krutými cizinci. Dříve než"
+" stihl říci více, vydechl naposledy. Jeho zbroj a výbava vypadaly až "
+"zarážejícím způsobem povědomě. Nutí mě to ptát se, jestli není Rýbaudův kmen"
+" v ohrožení?"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:233
@@ -563,6 +568,10 @@ msgid ""
 "something about his tribe being attacked and vanquished by vicious "
 "strangers. With his last breath he told us his leader’s name: Reebaud."
 msgstr ""
+"Poblíž naší severozápadní hranice jsme dnes narazili na zraněného vojáka. "
+"Popadaje dech vykládal, jak byl jeho kmen napaden a přemožen krutými "
+"cizinci. Se svým posledním dechem nám sdělil, že vůdce jeho kmene se "
+"jmenoval Rýbaud."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:243
