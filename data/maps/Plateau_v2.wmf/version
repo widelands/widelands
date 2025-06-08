@@ -1,12 +1,12 @@
-# Automatically created by Widelands 1.3~git26993 (9b95363@HEAD) Release
+# Automatically created by Widelands 1.3~git27021 (73ac0b4@new_maps_2024) Release
 
 [global]
 map_source_url=
 map_release=
 map_creator_version="build-20"
 map_version_major="0"
-map_version_minor="5"
-map_version_timestamp="1749082581"
+map_version_minor="13"
+map_version_timestamp="1749409464"
 packet_version="1"
 packet_compatibility="1"
 minimum_required_widelands_version="1.2"
