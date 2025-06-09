@@ -27,6 +27,7 @@
 #include "game_io/game_player_ai_persistent_packet.h"
 #include "game_io/game_player_economies_packet.h"
 #include "game_io/game_player_info_packet.h"
+#include "game_io/game_player_trades_packet.h"
 #include "game_io/game_preload_packet.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/game.h"
@@ -47,7 +48,7 @@ void GameSaver::save() {
 	// We also don't want it for game objectives.
 	auto set_progress_message = [](std::string text, int step) {
 		Notifications::publish(UI::NoteLoadingMessage(
-		   step < 0 ? text : format(_("Saving game: %1$s (%2$d/%3$d)"), text, step, 5)));
+		   step < 0 ? text : format(_("Saving game: %1$s (%2$d/%3$d)"), text, step, 6)));
 	};
 	set_progress_message(_("Autosaving game…"), -1);
 
@@ -85,22 +86,29 @@ void GameSaver::save() {
 		p.write(fs_, game_, mos);
 	}
 
-	verb_log_info_time(game_.get_gametime(), "Game: Writing ai persistent data ... ");
-	set_progress_message(_("AI"), 3);
+	verb_log_info_time(game_.get_gametime(), "Game: Writing Player Trades Data ... ");
+	set_progress_message(_("Trades"), 3);
+	{
+		GamePlayerTradesPacket p;
+		p.write(fs_, game_, mos);
+	}
+
+	verb_log_info_time(game_.get_gametime(), "Game: Writing AI persistent data ... ");
+	set_progress_message(_("AI"), 4);
 	{
 		GamePlayerAiPersistentPacket p;
 		p.write(fs_, game_, mos);
 	}
 
 	verb_log_info_time(game_.get_gametime(), "Game: Writing Command Queue Data ... ");
-	set_progress_message(_("Command queue"), 4);
+	set_progress_message(_("Command queue"), 5);
 	{
 		GameCmdQueuePacket p;
 		p.write(fs_, game_, mos);
 	}
 
 	verb_log_info_time(game_.get_gametime(), "Game: Writing Interactive Player Data ... ");
-	set_progress_message(_("Interactive player"), 5);
+	set_progress_message(_("Interactive player"), 6);
 	{
 		GameInteractivePlayerPacket p;
 		p.write(fs_, game_, mos);

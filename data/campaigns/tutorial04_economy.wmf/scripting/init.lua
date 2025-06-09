@@ -20,10 +20,12 @@ mv = wl.ui.MapView()
 wl.Game().allow_diplomacy = false
 
 tavern_field = map:get_field(105, 44)
+donkeyfarm_field = map:get_field(96, 58)
 warehouse_field = map:get_field(78, 67)
 field_near_border = map:get_field(69, 66)
 
 sf = map.player_slots[1].starting_field
+sf2 = map.player_slots[2].starting_field
 
 include "map:scripting/helper_functions.lua"
 include "map:scripting/texts.lua"

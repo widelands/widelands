@@ -46,6 +46,17 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- nominal transition from sapling to old tree (the longest possible transition is double):
+            --   80 + 60 + 60 = 200 sec
+            --   in each tree stage, it may disappear with certain small probability
+            --   see data/tribes/immovables/trees/cocoa/ and src/logic/map_objects/immovable_program.cc - ImmovableProgram::ActAnimate::execute()
+            -- estimation of number of nearest fields for optimal productivity (nominal + 2):
+            --   3 + (200 - (6 + 2.333 * 1.8 + 10)) / 56.8 = 6.17
+            -- procedure how to make verification measurement:
+            --   https://codeberg.org/wl/widelands/pulls/4725#issuecomment-4062998
+            -- min. time total (avg. for 6 nearest fields): 30.4 + 26.4 = 56.8 sec
+            -- min. time total:                             29.2 + 25.2 = 54.4 sec
+            -- max. time total:                             47.2 + 43.2 = 90.4 sec
             "call=plant_cocoa",
             "call=harvest_cocoa",
          }
@@ -54,6 +65,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
          descname = _("planting cocoa"),
          actions = {
+            -- time of worker: 19.2-37.2 sec
+            -- min. time: 19.2 + 10 = 29.2 sec
+            -- max. time: 37.2 + 10 = 47.2 sec
             "callworker=plant",
             "sleep=duration:10s"
          }
@@ -62,6 +76,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
          descname = _("harvesting cocoa"),
          actions = {
+            -- time of worker: 21.2-39.2 sec
+            -- min. time: 21.2 + 4 = 25.2 sec
+            -- max. time: 39.2 + 4 = 43.2 sec
             "callworker=harvest",
             "sleep=duration:4s"
          }

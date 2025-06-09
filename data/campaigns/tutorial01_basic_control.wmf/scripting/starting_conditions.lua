@@ -3,6 +3,7 @@
 -- ===============
 
 plr:allow_buildings("all")
+plr:forbid_buildings{"barbarians_market"}
 
 -- A default headquarters
 include "tribes/initialization/barbarians/starting_conditions/headquarters.lua"

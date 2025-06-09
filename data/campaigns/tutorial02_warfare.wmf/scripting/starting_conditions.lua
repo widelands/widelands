@@ -5,6 +5,7 @@
 function init_player()
 
    plr:allow_buildings("all")
+   plr:forbid_buildings{"barbarians_market"}
 
    prefilled_buildings(plr,
       {"barbarians_fortress", 32, 62, soldiers = {[{3,5,0,2}] = 8 }},

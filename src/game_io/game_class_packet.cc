@@ -30,7 +30,7 @@ namespace Widelands {
  * Changelog:
  * 8: v1.1
  * 9: Added RNG state
- * 10: Added naval warfare flag.
+ * 10: Added naval warfare flag. v1.2.
  */
 constexpr uint16_t kCurrentPacketVersion = 10;
 
@@ -128,7 +128,8 @@ void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const /*
 		fw.unsigned_8(a.other);
 	}
 
-	// TODO(sirver,trading): save/load trade_agreements and related data.
+	// Trade agreements belong here semantically but need access to object serials, which are not
+	// available at this point in the loading logic. I stuck them with the economies data instead.
 
 	// We do not care for players, since they were set
 	// on game initialization to match Map::scenario_player_[names|tribes]

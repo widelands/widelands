@@ -31,9 +31,13 @@ struct Message {
 	enum class Type : uint8_t {
 		kNoMessages,
 		kAllMessages,
+
 		kGameLogic,
+
 		kGeologists,
+
 		kScenario,
+
 		kSeafaring,
 		kEconomy,              // economy
 		kEconomySiteOccupied,  // economy
@@ -42,9 +46,14 @@ struct Message {
 		kWarfareSiteLost,
 		kWarfareUnderAttack,
 		kWarfareEnd = kWarfareUnderAttack,  // end of warfare messages
-		kTradeOfferReceived,
-		kEconomyLoadGame,  // only this type is allowed in game loading code
-		                   // must not be used elsewhere
+
+		kDiplomacyBegin,
+		kDiplomacy = kDiplomacyBegin,
+		kTrading,
+		kDiplomacyEnd = kTrading,
+
+		kEconomyLoadGame = 255,  // Only this type is allowed in game loading code,
+		                         // must not be used elsewhere.
 	};
 
 	/**
@@ -129,6 +138,10 @@ struct Message {
 		    type_ <= Widelands::Message::Type::kWarfareEnd) {
 			return Widelands::Message::Type::kWarfare;
 		}
+		if (type_ >= Widelands::Message::Type::kDiplomacyBegin &&
+		    type_ <= Widelands::Message::Type::kDiplomacyEnd) {
+			return Widelands::Message::Type::kDiplomacy;
+		}
 		if (type_ == Widelands::Message::Type::kEconomy ||
 		    type_ == Widelands::Message::Type::kEconomySiteOccupied ||
 		    type_ == Widelands::Message::Type::kEconomyLoadGame) {
@@ -154,6 +167,7 @@ private:
 	Widelands::Serial serial_;  // serial to map object
 	Status status_;
 };
+
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MESSAGE_H

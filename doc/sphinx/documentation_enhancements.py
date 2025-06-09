@@ -10,9 +10,7 @@ RSTDATA_CLS_RE = re.compile(r'.. class:: (\w+)')
 MAX_CHILDREN = 2
 MAX_PARENTS = 1
 
-EXCLUDE_CLASSES = ['Market',
-                   'MarketDescription',
-                   ]
+EXCLUDE_CLASSES = []
 
 
 class LuaClass:

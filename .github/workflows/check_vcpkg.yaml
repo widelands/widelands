@@ -18,6 +18,9 @@ jobs:
         arch: [x64, x86]
     name: Build vcpkg packages for ${{ matrix.arch }}
     runs-on: windows-2022
+    # Don't waste cycles in forks that don't use it.
+    # Initialise the variable manually in your fork to enable caching.
+    if: ${{ vars.VCPKG_REF != '' }}
     env:
       VCPKG_ROOT: C:\vcpkg
       VCPKG_TARGET_TRIPLET: ${{ matrix.arch }}-windows-static
@@ -78,6 +81,7 @@ jobs:
       GH_TOKEN: ${{ secrets.WIDELANDS_FORMAT_TOKEN }}
     steps:
     - name: Checkout
+      # We need a repo for setting the variable
       uses: actions/checkout@v4
       with:
         fetch-depth: 1
@@ -85,9 +89,20 @@ jobs:
       shell: bash
       run: |
         gh variable set VCPKG_REF -b "${{ needs.vcpkg-packages.outputs.vcpkg_ref }}"
-        echo "${{ needs.vcpkg-packages.outputs.vcpkg_ref }}" > vcpkg_ref
+  refresh_ref_cache:
+    needs: update
+    # We want to keep the vcpkg_ref cache updated so that it doesn't get dropped
+    # even if the main cache is up to date or if the build failed.
+    if: ${{ vars.VCPKG_REF != '' && always() }}
+    name: Store ref in cache
+    runs-on: windows-2022
+    steps:
+    - name: Create ref file
+      shell: bash
+      run: |
+        echo "${{ vars.VCPKG_REF }}" > vcpkg_ref
     - name: Store in cache
       uses: actions/cache/save@v4
       with:
         path: vcpkg_ref
-        key: vcpkg_ref-${{ github.run_id }}-${{ needs.vcpkg-packages.outputs.vcpkg_ref }}
+        key: vcpkg_ref-${{ github.run_id }}-${{ vars.VCPKG_REF }}

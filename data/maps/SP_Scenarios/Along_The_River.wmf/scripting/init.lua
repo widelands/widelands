@@ -238,7 +238,7 @@ function mission_thread()
       while not p3.defeated do sleep(2089) end
       if not p4.defeated then
          p4:allow_buildings("all")
-         p4:forbid_buildings{"barbarians_shipyard","barbarians_weaving_mill","barbarians_scouts_hut"}
+         p4:forbid_buildings{"barbarians_shipyard","barbarians_weaving_mill","barbarians_scouts_hut","barbarians_market"}
       end
    end)
 
@@ -380,7 +380,7 @@ function mission_thread()
             p3:place_building("barbarians_tower", map:get_field(116, 19), true, true)
          end
          p3:allow_buildings("all")
-         p3:forbid_buildings{"barbarians_shipyard","barbarians_weaving_mill","barbarians_scouts_hut"}
+         p3:forbid_buildings{"barbarians_shipyard","barbarians_weaving_mill","barbarians_scouts_hut","barbarians_market"}
          campaign_message_box(briefing_defeat_yellow)
          o_defeat_yellow = add_campaign_objective(obj_defeat_yellow)
          -- Show barriers on mountain to yellow.

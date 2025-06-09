@@ -117,6 +117,9 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, get_produced_wares_count),
    METHOD(LuaPlayer, set_attack_forbidden),
    METHOD(LuaPlayer, is_attack_forbidden),
+   METHOD(LuaPlayer, cancel_trade),
+   METHOD(LuaPlayer, reject_trade),
+   METHOD(LuaPlayer, retract_trade),
    {nullptr, nullptr},
 };
 const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
@@ -1169,6 +1172,67 @@ int LuaPlayer::is_attack_forbidden(lua_State* L) {
 */
 int LuaPlayer::set_attack_forbidden(lua_State* L) {
 	get(L, get_egbase(L)).set_attack_forbidden(luaL_checkinteger(L, 2), luaL_checkboolean(L, 3));
+	return 0;
+}
+
+/* RST
+   .. method:: cancel_trade(id)
+
+      .. versionadded:: 1.3
+
+      Cancel the trade agreement with the provided ID.
+
+      Only active trade agreements can be cancelled.
+      Either of the two players between whom the agreement exists may cancel it at any time.
+
+      :arg id: Unique ID of the trade to cancel.
+      :type id: :class:`integer`
+
+      :see also: :attr:`wl.Game.trades`
+*/
+int LuaPlayer::cancel_trade(lua_State* L) {
+	Widelands::Game& game = get_game(L);
+	game.cancel_trade(luaL_checkinteger(L, 2), false, &get(L, game));
+	return 0;
+}
+
+/* RST
+   .. method:: reject_trade(id)
+
+      .. versionadded:: 1.3
+
+      Reject the proposed trade with the provided ID.
+
+      Only proposed trade offers can be rejected.
+      Only the recipient of the offer may reject it.
+
+      :arg id: Unique ID of the trade to reject.
+      :type id: :class:`integer`
+
+      :see also: :attr:`wl.Game.trades`
+*/
+int LuaPlayer::reject_trade(lua_State* L) {
+	get_game(L).reject_trade(luaL_checkinteger(L, 2));
+	return 0;
+}
+
+/* RST
+   .. method:: retract_trade(id)
+
+      .. versionadded:: 1.3
+
+      Retract the proposed trade with the provided ID.
+
+      Only proposed trade offers can be retracted.
+      Only the player who initiated the offer may retract it.
+
+      :arg id: Unique ID of the trade to retract.
+      :type id: :class:`integer`
+
+      :see also: :attr:`wl.Game.trades`
+*/
+int LuaPlayer::retract_trade(lua_State* L) {
+	get_game(L).retract_trade(luaL_checkinteger(L, 2));
 	return 0;
 }
 

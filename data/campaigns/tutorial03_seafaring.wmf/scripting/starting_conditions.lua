@@ -3,6 +3,7 @@
 -- ===============
 
 plr:allow_buildings("all")
+plr:forbid_buildings{"atlanteans_market"}
 
 function init_player()
    filled_buildings(plr, {"atlanteans_port", sf.x, sf.y,

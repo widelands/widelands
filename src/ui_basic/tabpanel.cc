@@ -274,6 +274,11 @@ void TabPanel::update_desired_size() {
 		h += panelh;
 	}
 
+	// size of tab headers
+	if (!tabs_.empty()) {
+		w = std::max(w, tabs_.back()->get_x() + tabs_.back()->get_w());
+	}
+
 	set_desired_size(w, h);
 
 	// This is not redundant, because even if all this doesn't change our

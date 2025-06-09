@@ -31,6 +31,7 @@ class FileWrite;
 namespace Widelands {
 
 class Game;
+class MarketDescr;
 class MilitarySiteDescr;
 class ProductionSiteDescr;
 enum class StockPolicy;
@@ -117,6 +118,15 @@ struct WarehouseSettings : public BuildingSettings {
 	uint32_t desired_capacity{0U};
 	const uint32_t max_garrison;
 	SoldierPreference soldier_preference{SoldierPreference::kAny};
+};
+
+struct MarketSettings : public BuildingSettings {
+	MarketSettings(const MarketDescr&, const TribeDescr& tribe);
+	~MarketSettings() override = default;
+	void apply(const BuildingSettings&) override;
+
+	void save(const Game&, FileWrite&) const override;
+	void read(const Game&, FileRead&) override;
 };
 
 }  // namespace Widelands

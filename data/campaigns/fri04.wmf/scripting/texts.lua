@@ -227,7 +227,7 @@ reebaud_in_danger = {
    title =_("Strangers"),
    body=henneke(_("Something is going on…"),
       -- TRANSLATORS: Henneke Lembeck – Reebaud in danger
-      _([[We met a wounded soldier near our north-western border today. He gasped something about his tribe being attacked by vicous strangers, but he died before he could tell us more. His armour and weaponry looked startlingly familiar. I wonder if Reebaud’s tribe is in danger?]])
+      _([[We met a wounded soldier near our north-western border today. He gasped something about his tribe being attacked by vicious strangers, but he died before he could tell us more. His armour and weaponry looked startlingly familiar. I wonder if Reebaud’s tribe is in danger?]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Henneke Lembeck – Reebaud in danger
       _([[We must hurry.]])),
@@ -237,7 +237,7 @@ reebaud_defeated_1 = {
    title =_("Strangers"),
    body=henneke(_("We are too late"),
       -- TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
-      _([[We met a wounded soldier near our north-western border today. He gasped something about his tribe being attacked and vanquished by vicous strangers. With his last breath he told us his leader’s name: Reebaud.]])
+      _([[We met a wounded soldier near our north-western border today. He gasped something about his tribe being attacked and vanquished by vicious strangers. With his last breath he told us his leader’s name: Reebaud.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
       _([[We are too late. Reebaud was already in our reach, and he was defeated mere hours before we could meet him. There is no hope in this world for any of us.]]))

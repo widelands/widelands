@@ -22,6 +22,7 @@
 #include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/trainingsite.h"
@@ -70,6 +71,11 @@ WarehouseSettings::WarehouseSettings(const WarehouseDescr& wh, const TribeDescr&
 	for (const DescriptionIndex di : tribe.worker_types_without_cost()) {
 		worker_preferences.erase(di);
 	}
+}
+
+MarketSettings::MarketSettings(const MarketDescr& m, const TribeDescr& tribe)
+   : BuildingSettings(m.name(), tribe) {
+	// Nothing to do currently.
 }
 
 inline uint32_t new_desired_capacity(uint32_t old_max, uint32_t old_des, uint32_t new_max) {
@@ -142,10 +148,16 @@ void WarehouseSettings::apply(const BuildingSettings& bs) {
 	}
 }
 
+void MarketSettings::apply(const BuildingSettings& bs) {
+	BuildingSettings::apply(bs);
+	// Nothing to do currently.
+}
+
 // Saveloading
 
 /* Versions changelogs:
  * Global: 2: v1.1
+ * Market: 1: v1.3
  * Militarysite: 1: v1.1
  * Productionsite: 2: v1.1
  * Trainingsite: 1: v1.1
@@ -153,6 +165,7 @@ void WarehouseSettings::apply(const BuildingSettings& bs) {
  *   - 3: Added soldier preference and capacity
  */
 constexpr uint8_t kCurrentPacketVersion = 2;
+constexpr uint8_t kCurrentPacketVersionMarket = 1;
 constexpr uint8_t kCurrentPacketVersionMilitarysite = 1;
 constexpr uint8_t kCurrentPacketVersionProductionsite = 2;
 constexpr uint8_t kCurrentPacketVersionTrainingsite = 1;
@@ -185,6 +198,10 @@ BuildingSettings* BuildingSettings::load(const Game& game, const TribeDescr& tri
 			}
 			case MapObjectType::WAREHOUSE: {
 				result = new WarehouseSettings(*dynamic_cast<const WarehouseDescr*>(descr), tribe);
+				break;
+			}
+			case MapObjectType::MARKET: {
+				result = new MarketSettings(*dynamic_cast<const MarketDescr*>(descr), tribe);
 				break;
 			}
 			default:
@@ -375,6 +392,26 @@ void WarehouseSettings::save(const Game& game, FileWrite& fw) const {
 		fw.c_string(tribe_.get_worker_descr(pair.first)->name());
 		fw.unsigned_8(static_cast<uint8_t>(pair.second));
 	}
+}
+
+void MarketSettings::read(const Game& game, FileRead& fr) {
+	BuildingSettings::read(game, fr);
+	try {
+		const uint8_t packet_version = fr.unsigned_8();
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionMarket) {
+			// Nothing to do currently.
+		} else {
+			throw UnhandledVersionError("MarketSettings", packet_version, kCurrentPacketVersionMarket);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("MarketSettings: %s", e.what());
+	}
+}
+
+void MarketSettings::save(const Game& game, FileWrite& fw) const {
+	BuildingSettings::save(game, fw);
+	fw.unsigned_8(kCurrentPacketVersionMarket);
+	// Nothing to do currently.
 }
 
 }  // namespace Widelands

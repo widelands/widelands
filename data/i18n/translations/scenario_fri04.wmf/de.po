@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-06-05 03:23+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
 "Last-Translator: Simon Heimberg, 2023\n"
 "Language-Team: German (https://app.transifex.com/widelands/teams/35159/de/)\n"
@@ -558,15 +558,10 @@ msgstr "Es geht etwas vor sich …"
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:230
 msgid ""
 "We met a wounded soldier near our north-western border today. He gasped "
-"something about his tribe being attacked by vicous strangers, but he died "
+"something about his tribe being attacked by vicious strangers, but he died "
 "before he could tell us more. His armour and weaponry looked startlingly "
 "familiar. I wonder if Reebaud’s tribe is in danger?"
 msgstr ""
-"Wir trafen einen verwundeten Krieger nahe unserer nordwestlichen Grenze. Er "
-"hauchte noch etwas über seinen Stamm der von teuflischen Fremden angegriffen"
-" wird, aber er starb bevor er uns mehr sagen konnte. Seine Rüstung und "
-"Waffen schauten alarmierend vertraut aus. Ich frage mich ob Reebauds Stamm "
-"in Gefahr ist?"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:233
@@ -581,13 +576,9 @@ msgstr "Wir sind zu spät"
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:240
 msgid ""
 "We met a wounded soldier near our north-western border today. He gasped "
-"something about his tribe being attacked and vanquished by vicous strangers."
-" With his last breath he told us his leader’s name: Reebaud."
+"something about his tribe being attacked and vanquished by vicious "
+"strangers. With his last breath he told us his leader’s name: Reebaud."
 msgstr ""
-"Wir trafen einen verwundeten Krieger nahe unserer nordwestlichen Grenze. Er "
-"hauchte noch etwas über seinen Stamm der von teuflischen Fremden angegriffen"
-" und besiegt wurde. Mit seinem letzten Atemzug sagte er uns den Namen seines"
-" Anführers: Reebaud."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:243

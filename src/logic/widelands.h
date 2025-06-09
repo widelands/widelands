@@ -73,6 +73,9 @@ constexpr Quantity kEconomyTargetInfinity = std::numeric_limits<Quantity>::max()
 using Serial = uint32_t;  /// Serial number for MapObject.
 constexpr Serial kInvalidSerial = std::numeric_limits<uint32_t>::max();
 
+using TradeID = uint32_t;
+constexpr TradeID kInvalidTrade = std::numeric_limits<TradeID>::max();
+
 using Direction = uint8_t;
 
 struct SoldierStrength {

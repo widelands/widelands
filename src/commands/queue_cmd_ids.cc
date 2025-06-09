@@ -39,6 +39,7 @@
 #include "commands/cmd_enhance_building.h"
 #include "commands/cmd_evict_worker.h"
 #include "commands/cmd_expedition_config.h"
+#include "commands/cmd_extend_trade.h"
 #include "commands/cmd_flag_action.h"
 #include "commands/cmd_fleet_targets.h"
 #include "commands/cmd_incorporate.h"
@@ -67,6 +68,7 @@
 #include "commands/cmd_start_stop_building.h"
 #include "commands/cmd_toggle_infinite_production.h"
 #include "commands/cmd_toggle_mute_messages.h"
+#include "commands/cmd_trade_action.h"
 #include "commands/cmd_warship_command.h"
 
 namespace Widelands {
@@ -123,6 +125,10 @@ static GameLogicCommand& do_create_correct_queue_command(QueueCommandTypes const
 		return *new CmdSetSoldierPreference(args...);
 	case QueueCommandTypes::kProposeTrade:
 		return *new CmdProposeTrade(args...);
+	case QueueCommandTypes::kTradeAction:
+		return *new CmdTradeAction(args...);
+	case QueueCommandTypes::kExtendTrade:
+		return *new CmdExtendTrade(args...);
 	case QueueCommandTypes::kShipSink:
 		return *new CmdShipSink(args...);
 	case QueueCommandTypes::kShipCancelExpedition:

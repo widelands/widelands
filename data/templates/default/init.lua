@@ -1077,6 +1077,7 @@ return {
       campaign_fri02_poem_indent = 10,
       map_plateau_message_pos_y = 1,
       ui_default_padding = 4,
+      ui_default_indent = 8,
       toolbar_button_size = 33,
    }
 }

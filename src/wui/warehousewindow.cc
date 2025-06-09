@@ -74,7 +74,7 @@ WarehouseWaresDisplay::WarehouseWaresDisplay(UI::Panel* parent,
 		const std::vector<Widelands::DescriptionIndex>& worker_types_without_cost =
 		   warehouse_.owner().tribe().worker_types_without_cost();
 		for (const Widelands::DescriptionIndex& workertype : worker_types_without_cost) {
-			hide_ware(workertype);
+			set_hidden(workertype, true);
 		}
 	}
 }

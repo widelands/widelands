@@ -181,7 +181,6 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
      settings_(settings),
      ctrl_(ctrl),
      has_desyncing_addon_(false) {
-	warn_desyncing_addon_.set_visible(false);
 	write_replay_.set_state(true);
 
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });

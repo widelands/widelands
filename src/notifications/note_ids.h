@@ -51,7 +51,8 @@ enum class NoteId : uint32_t {
 	PinnedNoteMoved,
 	QuicknavChangedEvent,
 	Hyperlink,
-	PlayerDetailsEvent
+	PlayerDetailsEvent,
+	TradeChanged
 };
 
 #endif  // end of include guard: WL_NOTIFICATIONS_NOTE_IDS_H

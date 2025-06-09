@@ -108,6 +108,7 @@ enum class SchedulerTaskId : uint8_t {
 	kUpdateStats,
 	kWarehouseFlagDist,
 	kDiplomacy,
+	kTrading,
 	kUnset
 };
 
@@ -475,7 +476,8 @@ struct BuildingObserver {
 		kMilitarysite,
 		kWarehouse,
 		kTrainingsite,
-		kMine
+		kMine,
+		kMarket
 	};
 
 	[[nodiscard]] uint32_t total_count() const;

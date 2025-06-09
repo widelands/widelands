@@ -16,6 +16,12 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       plant = {
+         -- steps from building to field: 2-7
+         -- avg. step in ideal case (free 6 nearest fields): (4*2+2*3)/6 = 2.333
+         -- avg. step in worst case (free 6 furthest fields): (2*5+3*6+1*7)/6 = 5.833
+         -- avg. step in std case (free all fields except road): (4*2+8*3+8*4+6*5+3*6+1*7)/30 = 3.967
+         -- min. worker time: 2 * 2 * 1.8 + 6 + 6 = 19.2 sec
+         -- max. worker time: 2 * 7 * 1.8 + 6 + 6 = 37.2 sec
          "findspace=size:any radius:3 space",
          "walk=coords",
          "animate=dig duration:6s",
@@ -24,6 +30,8 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       harvest = {
+         -- min. worker time: 2 * 2 * 1.8 + 8 + 6 = 21.2 sec
+         -- max. worker time: 2 * 7 * 1.8 + 8 + 6 = 39.2 sec
          "findobject=attrib:ripe_cocoa radius:3",
          "walk=object",
          "animate=planting_harvesting duration:8s",

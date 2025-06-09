@@ -10,14 +10,14 @@
 # litoll <litoll@freemail.hu>, 2016
 # litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
-# Tóth András <txa-dev@posteo.hu>, 2021,2024
+# Tóth András <txa-dev@posteo.hu>, 2021,2024-2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021,2024\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021,2024-2025\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -602,7 +602,7 @@ msgstr "A csónakkészítő műhelyt a part közelébe kell építened, különb
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:294
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:313
 msgid "Waterways"
-msgstr "Víziutak"
+msgstr "Kompjáratok"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:282
 msgid ""
@@ -610,7 +610,7 @@ msgid ""
 "fixed transport routes called waterways. A waterway is built just like a "
 "road: You click on a flag near the shore, choose ‘Build a waterway’, and "
 "select the path for the waterway just as you would do for a road."
-msgstr "A hajóktól, amelyek szükség szerint utaznak bármelyik kikötőbe, a kompoknak rögzített szállítási útvonalaik vannak, amiket víziutaknak nevezünk. Víziutakat a szárazföldi utakhoz hasonlóan építhetsz: Rákattintasz egy vízparti zászlóra, kiválasztod a „Víziút építésé”-t, és ugyanúgy kijelölöd az útvonalat, mint a szárazföldi utaknál."
+msgstr "A hajóktól, amelyek szükség szerint utaznak bármelyik kikötőbe, a kompoknak rögzített szállítási útvonalaik vannak, amiket kompjáratoknak nevezünk. kompjáratokat az utakhoz hasonlóan építhetsz: Rákattintasz egy vízparti zászlóra, kiválasztod a „Kompjárat építésé”-t, és ugyanúgy kijelölöd az útvonalat, mint az utaknál."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:283
 msgid ""
@@ -618,14 +618,14 @@ msgid ""
 "the water is too shallow for big ships. The only rule is that the two "
 "triangles directly adjacent to each segment of the waterway have to be "
 "water, and the entire path needs to be within your territory."
-msgstr "Víziutakat építhetsz a tengeren is a part közelében, ami túl sekély lenne a nagy hajóknak. Csak annyi a szabály, hogy a víziút minden szakaszának mindkét oldalán víznek kell lennie, és az egész útvonalnak a területeden belül kell haladnia."
+msgstr "Kompjáratokat építhetsz a tengeren is a part közelében, ami túl sekély lenne a nagy hajóknak. Csak annyi a szabály, hogy a kompjárat minden szakaszának mindkét oldalán víznek kell lennie, és az egész útvonalnak a területeden belül kell haladnia."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:284
 msgid ""
 "Also note that waterways, unlike roads, may not be built quite as long as "
 "you want them to. Every map has a length restriction for waterways. On this "
 "map, this is 5 tiles."
-msgstr "Ezen kívül, az utaktól eltérően, a víziutak hossza korlátozva van. Minden térképen meg van adva a víziutak engedélyezett hossza. Ezen a térképen ez 5 mező."
+msgstr "Ezen kívül, az utaktól eltérően, a kompjáratok hossza korlátozva van. Minden térképen meg van adva a kompjáratok engedélyezett hossza. Ezen a térképen ez 5 mező."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:285
 msgid ""
@@ -635,7 +635,7 @@ msgstr "Mindig jusson eszedbe, hogy a kompok nem tudnak munkásokat szállítani
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:295
 msgid "Allow me to show you how to build a waterway…"
-msgstr "Hadd mutassam meg, hogyan tudsz víziutat építeni…"
+msgstr "Hadd mutassam meg, hogyan tudsz kompjáratot építeni…"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:305
 msgid "Golden waves"
@@ -645,35 +645,35 @@ msgstr "Arany hullámok"
 msgid ""
 "As you can see, it is not that hard. When you build a waterway, the closest "
 "idle ferry will assign itself to it."
-msgstr "Mint látod, nem olyan nehéz. Amikor megépítesz egy víziutat, a legközelebbi szabad komp odamegy dolgozni."
+msgstr "Mint látod, nem olyan nehéz. Amikor megépítesz egy kompjáratot, a legközelebbi szabad komp odamegy dolgozni."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:307
 msgid ""
 "Now it’s your turn: Build a gold mine on the mountain in the south and "
 "connect it to the main land by building waterways over the streams."
-msgstr "Most te következel: Építs egy aranybányát a déli hegyen, és kösd össze a fő szárazfölddel a folyókon átvezető víziutakkal!"
+msgstr "Most te következel: Építs egy aranybányát a déli hegyen, és kösd össze a fő szárazfölddel a folyókon átvezető kompjáratokkal!"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:315
 msgid "Build a gold mine and waterways"
-msgstr "Építs aranybányát és víziutakat!"
+msgstr "Építs aranybányát és kompjáratokat!"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:316
 msgid ""
 "Build a gold mine on the mountain in the south, and connect it to the "
 "mainland by building waterways over the streams."
-msgstr "Építs egy aranybányát a déli hegyen, és kösd össze a fő szárazfölddel a folyókon átvezető víziutakkal!"
+msgstr "Építs egy aranybányát a déli hegyen, és kösd össze a fő szárazfölddel a folyókon átvezető kompjáratokkal!"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:317
 msgid ""
 "A waterway is built just like a road: You click on a flag near the shore, "
 "choose ‘Build a waterway’, and select the path for the waterway just as you "
 "would do for a road."
-msgstr "Víziutakat a szárazföldi utakhoz hasonlóan építhetsz: Rákattintasz egy vízparti zászlóra, kiválasztod a „Vízi út építésé”-t, és ugyanúgy kijelölöd az útvonalat, mint a szárazföldi utaknál."
+msgstr "Kompjáratokat az utakhoz hasonlóan építhetsz: Rákattintasz egy vízparti zászlóra, kiválasztod a „Kompjárat építésé”-t, és ugyanúgy kijelölöd az útvonalat, mint az utaknál."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:318
 msgid ""
 "However, each segment of the waterway needs two water triangles next to it."
-msgstr "Viszont a víziút minden szakaszának mindkét oldalán víznek kell lennie."
+msgstr "Viszont a kompjárat minden szakaszának mindkét oldalán víznek kell lennie."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:324
 msgid "Conclusion"
@@ -696,7 +696,7 @@ msgid ""
 "not to claim regions you can reach neither by road nor by ship. Never cut "
 "all your roads between two places connected by waterways unless you are "
 "certain no worker will ever have to walk there."
-msgstr "Soha ne felejtsd el, hogy a kompok túl kicsik a munkások szállításához! Le tudod vágni velük az áruk útját a területed egyes részei között, de nem tudsz a segítségükkel meghódítani olyan helyeket, amelyeket nem tudsz se szárazföldön, se hajóval elérni. Soha ne vágd el teljesen a víziutakkal összekötött helyek között a szárazföldi összeköttetést, hacsak nem vagy teljesen biztos benne, hogy soha többé nem kell munkásnak átjutnia!"
+msgstr "Soha ne felejtsd el, hogy a kompok túl kicsik a munkások szállításához! Le tudod vágni velük az áruk útját a területed egyes részei között, de nem tudsz a segítségükkel meghódítani olyan helyeket, amelyeket nem tudsz se szárazföldön, se hajóval elérni. Soha ne vágd el teljesen a kompjáratokkal összekötött helyek között a szárazföldi összeköttetést, hacsak nem vagy teljesen biztos benne, hogy soha többé nem kell munkásnak átjutnia!"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:329
 msgid ""
@@ -708,7 +708,7 @@ msgid ""
 "of waterways becoming severe bottlenecks in your economy. Try to build "
 "several of them in parallel to distribute the strain. If this is not "
 "possible, it is in some cases even more efficient not to use waterways."
-msgstr "Ha egy víziút nagyon hosszú és fontos szárazföldi utat vág le, előfordulhat az is, hogy nagyon nagy forgalom terelődik a víziútra. Egy vízi úton viszont mindig csak egy komp tud dolgozni – eltérően a szárazföldi utaktól, ahol egy szállító állat is be tud segíteni nagy forgalom esetén – és gyakran hosszabbak is, mint a két-három mezőnyi távolság, amire a szárazföldi utakat fel szoktuk osztani, ezért mindig fennáll a veszélye, hogy súlyos torlódás alakul ki a víziútnál. Ilyenkor igyekezz többet is építeni egymás mellé a terhelés elosztásához. Ha ez nem lehetséges, akkor néha lehet, hogy jobban jársz víziút nélkül."
+msgstr "Ha egy kompjárat egy nagyon hosszú és fontos szárazföldi útvonalat vág le, akkor előfordulhat az is, hogy nagyon nagy forgalom terelődik a kompjáratra. Egy kompjáraton viszont mindig csak egy komp tud dolgozni – eltérően az utaktól, ahol egy szállító állat is be tud segíteni nagy forgalom esetén – és gyakran hosszabbak is, mint a két-három mezőnyi távolság, amire az utakat fel szoktuk osztani, ezért mindig fennáll a veszélye, hogy súlyos torlódás alakul ki a kompjáratnál. Ilyenkor igyekezz többet is építeni egymás mellé a terhelés elosztásához. Ha ez nem lehetséges, akkor néha lehet, hogy jobban jársz kompjárat nélkül."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:336
 msgid "Ferry yard production"
@@ -723,13 +723,13 @@ msgid ""
 "As you can see, ferries can be produced quite quickly, but you don't need to"
 " worry about wasted materials, because ferry yards normally only produce "
 "them on demand, when there are unserviced waterways."
-msgstr "Láthatod, hogy a kompok elég gyorsan készülnek, de nem kell aggódnod amiatt, hogy szükségtelenül pocsékolnák a nyersanyagokat, mert alaphelyzetben a csónakkészítő műhely csak addig készíti őket, amíg van üres víziút."
+msgstr "Láthatod, hogy a kompok elég gyorsan készülnek, de nem kell aggódnod amiatt, hogy szükségtelenül pocsékolnák a nyersanyagokat, mert alaphelyzetben a csónakkészítő műhely csak addig készíti őket, amíg nem jut belőlük az összes kompjáratra."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:340
 msgid ""
 "As long as a ferry services a waterway, its lifetime is unlimited, but "
 "unemployed ferries will rot away and eventually sink."
-msgstr "Amíg egy komp be van osztva egy víziútra, addig nincs korlátozva az élettartama, de a nem használt kompok idővel tönkremennek és eltűnnek."
+msgstr "Amíg egy komp be van osztva egy kompjárathoz, addig nincs korlátozva az élettartama, de a nem használt kompok idővel tönkremennek és eltűnnek."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349

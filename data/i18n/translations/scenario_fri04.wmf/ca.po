@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-06-05 03:23+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
 "Last-Translator: Juanjo, 2022\n"
 "Language-Team: Catalan (https://app.transifex.com/widelands/teams/35159/ca/)\n"
@@ -542,14 +542,10 @@ msgstr "Està passant alguna cosa…"
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:230
 msgid ""
 "We met a wounded soldier near our north-western border today. He gasped "
-"something about his tribe being attacked by vicous strangers, but he died "
+"something about his tribe being attacked by vicious strangers, but he died "
 "before he could tell us more. His armour and weaponry looked startlingly "
 "familiar. I wonder if Reebaud’s tribe is in danger?"
 msgstr ""
-"Hem trobat un soldat ferit prop de la frontera nord-oest. Ens ha dit alguna "
-"cosa sobre un atac a la seva tribu per part d’uns forasters viciosos, però "
-"ha mort abans que ens pogués dir res més. La seva armadura i armes semblaven"
-" familiars. Em pregunto si la tribu d’en Reebaud està en perill."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:233
@@ -564,12 +560,9 @@ msgstr "Arribem massa tard"
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:240
 msgid ""
 "We met a wounded soldier near our north-western border today. He gasped "
-"something about his tribe being attacked and vanquished by vicous strangers."
-" With his last breath he told us his leader’s name: Reebaud."
+"something about his tribe being attacked and vanquished by vicious "
+"strangers. With his last breath he told us his leader’s name: Reebaud."
 msgstr ""
-"Hem trobat un soldat ferit prop de la frontera nord-oest. Deia que la seva "
-"tribu havia estat atacada per uns estrangers. Amb el seu últim alè ens ha "
-"dit el nom del seu líder: Reebaud."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:243

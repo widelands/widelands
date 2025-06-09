@@ -262,6 +262,8 @@ wl_library(wui
     interactive_spectator.h
     itemwaresdisplay.cc
     itemwaresdisplay.h
+    marketwindow.cc
+    marketwindow.h
     militarysitewindow.cc
     militarysitewindow.h
     minimap.cc

@@ -52,7 +52,8 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
      info_(info),
      index_(index),
 
-     text_(this,
+     text_wrapper_(this, UI::PanelStyle::kFsMenu, "text_wrapper", 0, 0, 0, 0),
+     text_(&text_wrapper_,
            "text",
            0,
            0,
@@ -68,9 +69,11 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
 	buttons_.add(&edit_, UI::Box::Resizing::kFullSize);
 	buttons_.add_space(kRowButtonSpacing);
 	buttons_.add(&delete_, UI::Box::Resizing::kFullSize);
-
-	add(&text_, UI::Box::Resizing::kExpandBoth);
 	buttons_.add_space(kRowButtonSpacing);
+
+	text_wrapper_.set_layout_toplevel(true);
+
+	add(&text_wrapper_, UI::Box::Resizing::kExpandBoth);
 	add(&buttons_, UI::Box::Resizing::kFullSize);
 
 	edit_.sigclicked.connect([this, &r]() {
@@ -134,13 +137,32 @@ void CommentRow::update_edit_enabled() {
 }
 
 void CommentRow::layout() {
-	UI::Box::layout();
 	if (layouting_) {
 		return;
 	}
-	// Prevent stack overflow through recursive call of layout()
 	layouting_ = true;
-	text_.set_desired_size(0, 0);
+
+	// TODO(Nordfriese): Integrate this logic into MultilineTextarea to make it play nice with Boxes
+
+	// First step: Figure out how much width we have available
+	text_wrapper_.set_desired_size(5, 5);
+	set_size(get_w(), 5);
+	UI::Box::layout();
+
+	// Second step: Figure out how much height is required for the available width
+	text_.set_size(text_wrapper_.get_inner_w(), 5);
+	text_wrapper_.set_desired_size(text_.get_w(), text_.get_h());
+
+	update_desired_size();
+
+	int dw;
+	int dh;
+	get_desired_size(&dw, &dh);
+	set_size(dw, dh);
+	update_positions();
+
+	UI::Box::layout();
+
 	layouting_ = false;
 }
 
@@ -855,7 +877,7 @@ void RemoteInteractionWindow::layout() {
 		admin_action_.set_pos(Vector2i(
 		   login_button_.get_x() - admin_action_.get_w() - kRowButtonSpacing, login_button_.get_y()));
 
-		box_comment_rows_.set_max_size(get_inner_w(), 0);
+		box_comment_rows_.set_max_size(box_comment_rows_.get_max_x(), 0);
 		box_comment_rows_.set_desired_size(0, 0);
 	}
 	UI::Window::layout();

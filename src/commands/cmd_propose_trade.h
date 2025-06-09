@@ -20,12 +20,12 @@
 #define WL_COMMANDS_CMD_PROPOSE_TRADE_H
 
 #include "commands/command.h"
-#include "logic/trade_agreement.h"
+#include "logic/game.h"
 
 namespace Widelands {
 
 struct CmdProposeTrade : PlayerCommand {
-	CmdProposeTrade(const Time& time, PlayerNumber pn, const Trade& trade);
+	CmdProposeTrade(const Time& time, PlayerNumber pn, const TradeInstance& trade);
 
 	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kProposeTrade;
@@ -43,7 +43,8 @@ struct CmdProposeTrade : PlayerCommand {
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 private:
-	Trade trade_;
+	TradeInstance trade_;
+	Serial initiator_;
 };
 
 }  // namespace Widelands

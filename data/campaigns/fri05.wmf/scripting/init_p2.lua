@@ -7,6 +7,7 @@ p2:forbid_buildings({
    "empire_vineyard", "empire_winery", "empire_brewery", "empire_shipyard",
    "empire_coalmine", "empire_ironmine", "empire_goldmine", "empire_marblemine",
    "empire_coalmine_deep", "empire_ironmine_deep", "empire_goldmine_deep", "empire_marblemine_deep",
+   "empire_market",
 })
 p2:conquer(map.player_slots[2].starting_field, 9)
 -- TRANSLATORS: This Danish ship is named after the Capital of Denmark

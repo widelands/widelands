@@ -7,7 +7,7 @@
 -- ===============
 
 p1:allow_buildings("all")
-p1:forbid_buildings{"atlanteans_shipyard"}
+p1:forbid_buildings{"atlanteans_shipyard", "atlanteans_market"}
 
 -- A default headquarters
 include "tribes/initialization/atlanteans/starting_conditions/headquarters.lua"

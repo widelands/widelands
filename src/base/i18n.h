@@ -32,6 +32,9 @@
 #include "config.h"
 
 // Prevent even more symbol clashes with libintl.h
+#ifdef fprintf
+#undef fprintf
+#endif
 #ifdef sprintf
 #undef sprintf
 #endif

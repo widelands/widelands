@@ -40,6 +40,15 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- nominal transition from tiny to ripe field (the longest possible transition is double):
+            --   30 + 45 + 50 = 125 sec
+            --   see data/tribes/immovables/cassavafield/ and src/logic/map_objects/immovable_program.cc - ImmovableProgram::ActAnimate::execute()
+            -- estimation of number of nearest fields for optimal productivity (nominal + 1):
+            --   2 + (125 - (6 + 2 * 1.8 + 10)) / 54.4 = 3.94
+            -- procedure how to make verification measurement:
+            --   https://codeberg.org/wl/widelands/pulls/4725#issuecomment-4062998
+            -- min. time total: 29.2 + 25.2 = 54.4 sec
+            -- max. time total: 47.2 + 43.2 = 90.4 sec
             "call=plant_cassava",
             "call=harvest_cassava",
          }
@@ -48,6 +57,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
          descname = _("planting cassava"),
          actions = {
+            -- time of worker: 19.2-37.2 sec
+            -- min. time: 19.2 + 10 = 29.2 sec
+            -- max. time: 37.2 + 10 = 47.2 sec
             "callworker=plant",
             "sleep=duration:10s"
          }
@@ -56,6 +68,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
          descname = _("harvesting cassava"),
          actions = {
+            -- time of worker: 21.2-39.2 sec
+            -- min. time: 21.2 + 4 = 25.2 sec
+            -- max. time: 39.2 + 4 = 43.2 sec
             "callworker=harvest",
             "sleep=duration:4s",
          }
