@@ -1581,7 +1581,7 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("atlanteans_building", "Prophecy of the fish breeders"),
             performance = {
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Fish Breeder’s House, part 1
-               pgettext("atlanteans_building", "This building can breed one fish between %1$s and %2$s, depending on how far the fish breeder has to walk."):bformat(format_seconds(34), format_minutes_seconds(1, 3)),
+               pgettext("atlanteans_building", "The fish breeder can breed one fish between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(34), format_minutes_seconds(1, 3)),
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Fish Breeder’s House, part 2
                pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
