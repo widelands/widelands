@@ -585,11 +585,10 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 						map.get_neighbour(cur, path[idx], &cur);
 						idx++;
 						if ((map[cur].nodecaps() & MOVECAPS_SWIM) == 0) {
-							fleet_->remove_port(game, destination);
 							molog(game.get_gametime(),
-							      "non swimmable terrain at (%i,%i) removed port %u\n", cur.x, cur.y,
+							      "non swimmable terrain at (%i,%i) recalculate path to port %u\n", cur.x, cur.y,
 							      destination->serial());
-							fleet_->add_port(game, destination);
+							start_task_movetodock(game, *destination);
 							return true;
 						}
 					}
@@ -2213,9 +2212,54 @@ bool Ship::start_task_movetodock(Game& game, PortDock& pd) {
 	   "start_task_movedock: Failed to find a path: ship at %3dx%3d to port at: %3dx%3d\n",
 	   get_position().x, get_position().y, pd.get_positions(game)[0].x, pd.get_positions(game)[0].y);
 	if (fleet_ != nullptr) {
-		fleet_->remove_port(game, &pd);
+		// something changed the map, splitting fleets (Diker, maps scripts, etc.)
+		// we do not know which ports and ships are affected in the fleet
+		// therefore we need to remove them all from the fleet (effectively deleting the fleet)
+		// and afterwards reinit new fleets
+		std::vector<Ship*> fleetships = fleet_->get_ships();
+		std::vector<PortDock*> fleetports = fleet_->get_ports();
+		std::vector<ShipFleetYardInterface*> fleetinterfaces = fleet_->get_interfaces();
+		std::set<ProductionSite*> fleetshipyards;
+
+		for (auto& interface : fleetinterfaces) {
+			fleetshipyards.insert(interface->get_building());
+			interface->get_fleet()->remove_interface(game, interface);
+		}
+		molog(game.get_gametime(), "interfaces removed");
+		for (auto& ship : fleetships) {
+			ship->set_destination(game, nullptr);
+			ship->get_fleet()->remove_ship(game, ship);
+		}
+		molog(game.get_gametime(), "ships removed");
+		for (auto& port : fleetports) {
+			port->get_fleet()->remove_port(game, port);
+		}
+		molog(game.get_gametime(), "ports removed");
+		for (auto& port : fleetports) {
+			if (port->expedition_started()) {
+				port->cancel_expedition(game);
+				port->init(game);
+				port->start_expedition();
+			} else {
+				port->init(game);
+			}
+		}
+		molog(game.get_gametime(), "ports added");
+		for (auto& ship : fleetships) {
+			ship->init_fleet(game);
+		}
+		molog(game.get_gametime(), "ships added");
+		for (auto& yard : fleetshipyards) {
+			yard->init(game);
+		}
+		molog(game.get_gametime(), "yards added");
+		send_message(game,
+			 /** TRANSLATORS: Ship fleets had to be splitted */
+			 pgettext("ship", "Fleet splitted"), _("Ship Fleet splitted"),
+			 _("A ship fleet had to be splitted, because a terrain change blocked a passage."),
+			 descr().icon_filename());
 	}
-	return true;
+	return false;
 }
 
 /// Prepare everything for the coming exploration
