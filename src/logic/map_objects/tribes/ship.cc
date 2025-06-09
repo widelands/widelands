@@ -586,8 +586,8 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 						idx++;
 						if ((map[cur].nodecaps() & MOVECAPS_SWIM) == 0) {
 							molog(game.get_gametime(),
-							      "non swimmable terrain at (%i,%i) recalculate path to port %u\n", cur.x, cur.y,
-							      destination->serial());
+							      "non swimmable terrain at (%i,%i) recalculate path to port %u\n", cur.x,
+							      cur.y, destination->serial());
 							start_task_movetodock(game, *destination);
 							return true;
 						}
@@ -2253,11 +2253,12 @@ bool Ship::start_task_movetodock(Game& game, PortDock& pd) {
 			yard->init(game);
 		}
 		molog(game.get_gametime(), "yards added");
-		send_message(game,
-			 /** TRANSLATORS: Ship fleets had to be splitted */
-			 pgettext("ship", "Fleet splitted"), _("Ship Fleet splitted"),
-			 _("A ship fleet had to be splitted, because a terrain change blocked a passage."),
-			 descr().icon_filename());
+		send_message(
+		   game,
+		   /** TRANSLATORS: Ship fleets had to be splitted */
+		   pgettext("ship", "Fleet splitted"), _("Ship Fleet splitted"),
+		   _("A ship fleet had to be splitted, because a terrain change blocked a passage."),
+		   descr().icon_filename());
 	}
 	return false;
 }
