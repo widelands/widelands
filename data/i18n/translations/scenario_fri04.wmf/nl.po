@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Alex Rijckaert, 2023
+# Alex Rijckaert, 2025
 # 
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-06-05 03:23+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
-"Last-Translator: Alex Rijckaert, 2023\n"
+"Last-Translator: Alex Rijckaert, 2025\n"
 "Language-Team: Dutch (https://app.transifex.com/widelands/teams/35159/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -553,6 +553,11 @@ msgid ""
 "before he could tell us more. His armour and weaponry looked startlingly "
 "familiar. I wonder if Reebaud’s tribe is in danger?"
 msgstr ""
+"Vandaag hebben we een gewonde soldaat aangetroffen bij onze noordwestelijke "
+"grens. Hij mompelde iets over een aanval op zijn stam door wrede "
+"vreemdelingen, maar stierf voordat hij ons meer kon vertellen. Zijn "
+"wapenrusting en wapens kwamen me opvallend bekend voor. Ik vraag me af of de"
+" stam van Reebaud in gevaar is?"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:233
@@ -570,6 +575,10 @@ msgid ""
 "something about his tribe being attacked and vanquished by vicious "
 "strangers. With his last breath he told us his leader’s name: Reebaud."
 msgstr ""
+"Vandaag hebben we een gewonde soldaat ontmoet bij onze noordwestelijke "
+"grens. Hij hijgde iets over zijn stam die was aangevallen en verslagen door "
+"wrede vreemdelingen. Met zijn laatste adem vertelde hij ons de naam van zijn"
+" leider: Reebaud."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:243
