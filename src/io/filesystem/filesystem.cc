@@ -77,7 +77,12 @@ EM_ASYNC_JS(void, emscripten_do_sync_idbfs, (), {
 });
 // clang-format on
 #else
-inline void emscripten_do_sync_idbfs() {}
+<<<<<<< HEAD inline void emscripten_do_sync_idbfs() {
+}
+=======
+void emscripten_do_sync_idbfs() {
+}
+>>>>>>> 748ed6b7fc07b8fd5acc25ea0cd04353786f3d0b
 #endif
 
 namespace {
