@@ -1556,7 +1556,7 @@ wl.Descriptions():new_tribe {
             note = pgettext ("amazons_building", "Only a Jungle Master has the necessary experience to coax more growth from land."),
             performance = {
                -- TRANSLATORS: Performance helptext for an Amazon production site: Gardening Center, part 1
-               pgettext("amazons_building", "The jungle master performs one terraform between %1$s and %2$s, depending on how far she has to walk."):bformat(format_seconds(19), format_seconds(44)),
+               pgettext("amazons_building", "The jungle master can perform one terraform between %1$s and %2$s, depending on how far she has to walk."):bformat(format_seconds(19), format_seconds(44)),
                -- TRANSLATORS: Performance helptext for an Amazon production site: Gardening Center, part 2
                pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
