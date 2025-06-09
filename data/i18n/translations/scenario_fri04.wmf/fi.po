@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-06-05 03:23+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
 "Last-Translator: LINUX-SAUNA, 2022\n"
 "Language-Team: Finnish (https://app.transifex.com/widelands/teams/35159/fi/)\n"
@@ -555,15 +555,10 @@ msgstr "Jotakin on meneillään..."
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:230
 msgid ""
 "We met a wounded soldier near our north-western border today. He gasped "
-"something about his tribe being attacked by vicous strangers, but he died "
+"something about his tribe being attacked by vicious strangers, but he died "
 "before he could tell us more. His armour and weaponry looked startlingly "
 "familiar. I wonder if Reebaud’s tribe is in danger?"
 msgstr ""
-"Tapasimme tänään haavoittuneen sotilaan lähellä luoteista rajaamme. Hän "
-"korisi jotakin hyökkäyksestä heimoaan vastaan ilkeämielisten muukalaisten "
-"toimesta, mutta hänestä lähti henki ennen kuin hän kerkisi kertoa enempää. "
-"Hänen haarniskansa ja aseensa olivat häkellyttävän tuttuja. Ounastelen "
-"voisiko Reebaud:in heimo olla vaarassa?  "
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:233
@@ -578,12 +573,9 @@ msgstr "Olemme liian myöhässä"
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:240
 msgid ""
 "We met a wounded soldier near our north-western border today. He gasped "
-"something about his tribe being attacked and vanquished by vicous strangers."
-" With his last breath he told us his leader’s name: Reebaud."
+"something about his tribe being attacked and vanquished by vicious "
+"strangers. With his last breath he told us his leader’s name: Reebaud."
 msgstr ""
-"Tapasimme tänään haavoittuneen sotilaan lähellä luoteista rajaamme. Hän "
-"korisi jotakin hyökkäyksestä heimoaan vastaan ilkeämielisten muukalaisten "
-"toimesta. Viime henkäyksellään hän sai sanottua johtajansa nimen: Reebaud."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:243

@@ -7,14 +7,14 @@
 # Balázs Meskó <meskobalazs@mailbox.org>, 2017
 # litoll <litoll@freemail.hu>, 2016-2017
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
-# Tóth András <txa-dev@posteo.hu>, 2021,2023-2024
+# Tóth András <txa-dev@posteo.hu>, 2021,2023-2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-05-19 03:23+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021,2023-2024\n"
+"Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -984,7 +984,7 @@ msgstr "Minden raktárnak négy gombja van az áruk tárolásának beállítás�
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:641
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:722
 msgid "Trading"
-msgstr ""
+msgstr "Kereskedés"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:567
 msgid ""
@@ -1012,15 +1012,15 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:584
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:586
 msgid "Build a market"
-msgstr ""
+msgstr "Építs egy piacteret!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:587
 msgid "Build a market near the wasteland."
-msgstr ""
+msgstr "Építs egy piacteret a pusztaság közelében!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:588
 msgid "The market is a big building."
-msgstr ""
+msgstr "A piactér egy nagy épület."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:597
 msgid ""
@@ -1114,16 +1114,16 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:645
 msgid "Try it out!"
-msgstr ""
+msgstr "Próbáld ki!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:652
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:654
 msgid "Propose a trade"
-msgstr ""
+msgstr "Tegyél egy üzleti ajánlatot!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:655
 msgid "Offer the Frisians a trade."
-msgstr ""
+msgstr "Ajánlj egy üzletet a frízeknek!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:656
 msgid ""
@@ -1133,7 +1133,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:662
 msgid "Trade Rejected"
-msgstr ""
+msgstr "Üzleti ajánlat elutasítva"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:664
 msgid ""
@@ -1143,7 +1143,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:671
 msgid "Trade Accepted"
-msgstr ""
+msgstr "Üzleti ajánlat elfogadva"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:673
 msgid ""
@@ -1267,7 +1267,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:734
 msgid "Congratulations"
-msgstr ""
+msgstr "Gratulálunk!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:736
 msgid ""
@@ -1276,7 +1276,7 @@ msgid ""
 "at first. Even if you’ve only understood a few concepts, you mustn’t give "
 "up. Try them out in some games, become familiar with them and experience the"
 " possibilities. Then, return to this tutorial and learn the rest!"
-msgstr ""
+msgstr "Ezzel véget ért az oktatójáték. Remélem meg tudtam tanítani, hogy hogyan irányíthatod a gazdaságot a Widelandsben. Sok a lehetőség, és elsőre nehéz lehet eligazodni. Ha most még csak néhány témát értettél is meg belőle, akkor se add fel! Próbáld ki ezeket néhány játékban, így megszokhatod őket és kitapasztalhatod a lehetőségeket. Ezután térj vissza ehhez az oktatójátékhoz, és tanuld meg a többit is!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:738
 msgid ""
