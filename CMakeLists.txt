@@ -185,7 +185,16 @@ endif()
 if(NOT asio_location OR asio_location STREQUAL "")
   unset(asio_location CACHE)
   if (${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
-    set(asio_location "/src/asio/asio/include")
+    include(ExternalProject)
+    ExternalProject_Add(asio
+      PREFIX "asio"
+      URL "https://sourceforge.net/projects/asio/files/asio/1.34.2%20%28Stable%29/asio-1.34.2.tar.bz2/download"
+      BUILD_IN_SOURCE true
+      CONFIGURE_COMMAND ""
+      BUILD_COMMAND ""
+      INSTALL_COMMAND ""
+    )
+    set(asio_location "${CMAKE_BINARY_DIR}/asio/src/asio/include")
     include_directories(${asio_location})
   endif()
 
