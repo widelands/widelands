@@ -1824,8 +1824,12 @@ wl.Descriptions():new_tribe {
             lore = pgettext("atlanteans_building", "I use my feet, I use my arm, I’m caring for this farm!"),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Farm
             lore_author = pgettext("atlanteans_building", "Atlantean harvesting song"),
-            -- TRANSLATORS: Performance helptext for an Atlantean production site: Farm
-            performance = pgettext("atlanteans_building", "The farmer needs %1% on average to sow and harvest a sheaf of corn."):bformat(format_minutes_seconds(1, 20))
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Farm, part 1
+               pgettext("atlanteans_building", "The farmer sows and harvests one sheaf of corn between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(54), format_minutes_seconds(1, 23)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Farm, part 2; %s is replaced by 'N growing fields'
+               pgettext("atlanteans_building", "The farm needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 4):bformat(4))
+            }
          }
       },
       {
@@ -1838,8 +1842,12 @@ wl.Descriptions():new_tribe {
                      "It’s not spinach, it’s not a carrot, it’s … a secret."),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Blackroot Farm
             lore_author = pgettext("atlanteans_building", "Blackroot farmer asked by a foreigner"),
-            -- TRANSLATORS: Performance helptext for an Atlantean production site: Blackroot Farm
-            performance = pgettext("atlanteans_building", "The blackroot farmer needs %1% on average to sow and harvest a bundle of blackroot."):bformat(format_minutes_seconds(1, 20))
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Blackroot Farm, part 1
+               pgettext("atlanteans_building", "The blackroot farmer sows and harvests one bundle of blackroot between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(59), format_minutes_seconds(1, 28)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Blackroot Farm, part 2; %s is replaced by 'N growing fields'
+               pgettext("atlanteans_building", "The blackroot farm needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 4):bformat(4))
+            }
          }
       },
       {
@@ -1852,7 +1860,7 @@ wl.Descriptions():new_tribe {
                                                    "We put them on a special device to gain the spider silk once a day. There is no need to spin this again. " ..
                      "The thread can directly be used by the weaving mill. Oh hello, here is one of our nice spiders … Hey! Why are you running away?"),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Spider Farm
-            lore_author = pgettext("atlanteans_building", "A spider breeder showing his farm")
+            lore_author = pgettext("atlanteans_building", "A spider breeder showing her farm")
 
          }
       },
