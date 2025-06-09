@@ -1368,8 +1368,12 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("amazons_building", "Home of the liana cutter who cuts lianas for making ropes."),
             -- TRANSLATORS: Note helptext for an Amazon production site: Liana Cutter's Hut
             note = pgettext("amazons_building", "The liana cutter harvests liana from fully matured trees within the work area which are not being used as lookouts."),
-            -- TRANSLATORS: Performance helptext for an Amazon production site: Liana Cutter's Hut
-            performance = pgettext("amazons_building", "The liana cutter rests %s before going to work again."):bformat(format_seconds(30))
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Liana Cutter's Hut, part 1
+               pgettext("amazons_building", "This building can produce one liana between %1$s and %2$s, depending on how far the liana cutter has to walk."):bformat(format_seconds(42), format_minutes_seconds(1, 7)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Liana Cutter's Hut, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1410,7 +1414,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Wilderness Keeper's Tent
             purpose = pgettext("amazons_building", "Breeds fish and game to renew food resources."),
             -- TRANSLATORS: Note helptext for an Amazon production site: Wilderness Keeper's Tent
-            note = pgettext("amazons_building", "The wilderness keeper will only release new game at a nearby tree which is not being used as a lookout.")
+            note = pgettext("amazons_building", "The wilderness keeper will only release new game at a nearby tree which is not being used as a lookout."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Wilderness Keeper's Tent, part 1
+               pgettext("amazons_building", "The wilderness keeper can breed one fish and release one animal between %1$s and %2$s, depending on how far she has to walk."):bformat(format_minutes_seconds(2, 16), format_minutes_seconds(3, 25)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Wilderness Keeper's Tent, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1437,7 +1447,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Amazon production site: Rope Weaver's Booth
             lore_author = pgettext("amazons_building", "Mistress WeaverSong, reflecting on training."),
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Rope Weaver's Booth
-            purpose = pgettext("amazons_building", "Makes ropes from lianas.")
+            purpose = pgettext("amazons_building", "Makes ropes from lianas."),
+            -- TRANSLATORS: Performance helptext for an Amazon production site: Rope Weaver's Booth
+            performance = pgettext("amazons_building", "The rope weaver booth needs %s on average to produce one rope."):bformat(format_seconds(59))
          }
       },
       {
@@ -1541,7 +1553,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Gardening Center
             purpose = pgettext("amazons_building", "Enhances the fertility of the landscape for trees."),
             -- TRANSLATORS: Note helptext for an Amazon production site: Gardening Center
-            note = pgettext ("amazons_building", "Only a Jungle Master has the necessary experience to coax more growth from land.")
+            note = pgettext ("amazons_building", "Only a Jungle Master has the necessary experience to coax more growth from land."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Gardening Center, part 1
+               pgettext("amazons_building", "The jungle master performs one terraform between %1$s and %2$s, depending on how far she has to walk."):bformat(format_seconds(19), format_seconds(44)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Gardening Center, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
 
