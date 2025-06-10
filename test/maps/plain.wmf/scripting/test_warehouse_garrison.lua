@@ -1,3 +1,5 @@
+include "test/scripting/stable_save.lua"
+
 run(function()
    print("Testing headquarters garrison settings")
 
@@ -33,12 +35,15 @@ run(function()
    assert_equal("rookies", sentry.soldier_preference)
    assert_equal(2, sentry.capacity)
 
+   -- We're all set, let's test loading too
+   stable_save(game, "warehouse_garrison", 1000)
+
    -- Connect sentry to HQ, the weakest soldier should occupy the sentry
    print("Allowing only the weakest soldier to the sentry")
    sentry.soldier_preference = "heroes"
    connected_road("normal", p1, fhq, "r,r|", true)
 
-   game.desired_speed = 10000
+   game.desired_speed = 20000
    sleep(15000)
 
    assert_equal(10, hq:get_workers("barbarians_soldier"))

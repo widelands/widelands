@@ -121,6 +121,8 @@ int LuaWarehouse::set_warehousename(lua_State* L) {
 /* RST
    .. attribute:: capacity
 
+   .. versionadded:: 1.3
+
       (RW) The number of soldiers meant to be stationed here.
 */
 int LuaWarehouse::set_capacity(lua_State* L) {
@@ -134,6 +136,8 @@ int LuaWarehouse::get_capacity(lua_State* L) {
 
 /* RST
    .. attribute:: soldier_preference
+
+   .. versionadded:: 1.3
 
       (RW) ``"heroes"`` if this site prefers heroes; ``"rookies"`` for rookies;
          or ``"any"`` for no predilection.
