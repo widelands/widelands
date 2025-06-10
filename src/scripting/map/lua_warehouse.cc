@@ -56,12 +56,9 @@ const MethodType<LuaWarehouse> LuaWarehouse::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaWarehouse> LuaWarehouse::Properties[] = {
-   PROP_RO(LuaWarehouse, portdock),
-   PROP_RO(LuaWarehouse, expedition_in_progress),
-   PROP_RW(LuaWarehouse, warehousename),
-   PROP_RW(LuaWarehouse, soldier_preference),
-   PROP_RW(LuaWarehouse, capacity),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaWarehouse, portdock),      PROP_RO(LuaWarehouse, expedition_in_progress),
+   PROP_RW(LuaWarehouse, warehousename), PROP_RW(LuaWarehouse, soldier_preference),
+   PROP_RW(LuaWarehouse, capacity),      {nullptr, nullptr, nullptr},
 };
 
 /*
