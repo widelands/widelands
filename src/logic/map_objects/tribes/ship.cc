@@ -2249,7 +2249,7 @@ bool Ship::start_task_movetodock(Game& game, PortDock& pd) {
 			ship->init_fleet(game);
 		}
 		molog(game.get_gametime(), "ships added");
-		for (auto& yard : fleetshipyards) {
+		for (const auto& yard : fleetshipyards) {
 			yard->init(game);
 		}
 		molog(game.get_gametime(), "yards added");
