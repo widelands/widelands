@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-05-29 03:19+0000\n"
+"POT-Creation-Date: 2025-06-05 03:23+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Ondřej Itřech, 2020-2021,2025\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -1799,8 +1799,9 @@ msgstr "Cvičí bojovnice v úhybu, obraně a zdraví. Poskytuje jim nezbytné z
 msgctxt "amazons_building"
 msgid ""
 "If all needed wares are delivered in time, a training glade can train one "
-"soldier first level in evade or health, or both defense levels in %1$s on "
-"average. The rest of evade and health levels are trained in %2$s each."
+"soldier to the first level in evade or health, or both defense levels in "
+"%1$s on average. The rest of evade and health levels are trained in %2$s "
+"each."
 msgstr "Pokud jsou všechny potřebné suroviny doručeny včas, může tréninkový palouk zlepšit úhyb nebo zdraví na první stupeň nebo zlepšit obranu o jeden stupeň v průměru za %1$s. Výcvik jenoho stupně úhybu nebo zdraví vyšší úrovně pak trvá v průměru %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon military site: Patrol Post
@@ -5126,7 +5127,7 @@ msgstr "Ne, opravdu tu nekrmíme naše pavouky kukuřicí. Tu spásají naše tl
 #. Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1863
 msgctxt "atlanteans_building"
-msgid "A spider breeder showing his farm"
+msgid "A spider breeder showing her farm"
 msgstr "chovatelka pavouků ukazuje svou farmu"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weaving
@@ -12430,9 +12431,9 @@ msgstr "Vojáci císařství se v obraně necvičí a drží si svou počátečn
 #, lua-format
 msgctxt "empire_building"
 msgid ""
-"If all needed wares are delivered in time, an arena can train one soldier "
-"first level in evade in %s on average."
-msgstr "Pokud jsou všechny potřebné suroviny doručeny včas, může aréna zlepšit úhyb vojáka o jeden stupeň v průměru za %s."
+"If all needed wares are delivered in time, an arena can train one soldier to"
+" the first level in evade in %s on average."
+msgstr "Pokud jsou všechny potřebné suroviny doručeny včas, může aréna zlepšit úhyb vojáka na první úroveň v průměru za %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
