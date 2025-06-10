@@ -42,6 +42,10 @@ public:
 	int get_expedition_in_progress(lua_State* L);
 	int get_warehousename(lua_State* L);
 	int set_warehousename(lua_State* L);
+	int get_soldier_preference(lua_State*);
+	int set_soldier_preference(lua_State*);
+	int get_capacity(lua_State*);
+	int set_capacity(lua_State*);
 
 	/*
 	 * Lua Methods
