@@ -127,10 +127,10 @@ int LuaWarehouse::set_warehousename(lua_State* L) {
 
    .. versionadded:: 1.3
 
-      (RO) The maximum garrison size that can be set for this warehouse. Unlike
-      :ref:`max_soldiers`, which is always :const:`nil` for warehouses, :attribute:`max_garrison`
-      is always a valid number: either 0 for plain warehouses or :attr:`max_garrison` from the
-      building definition of ports and headquarters.
+   (RO) The maximum garrison size that can be set for this warehouse. Unlike
+   :ref:`max_soldiers`, which is always :const:`nil` for warehouses, :attr:`max_garrison`
+   is always a valid number: either 0 for plain warehouses or :ref:`max_garrison` from the
+   building definition of ports and headquarters.
 */
 int LuaWarehouse::get_max_garrison(lua_State* L) {
 	lua_pushuint32(L, get(L, get_egbase(L))->soldier_control()->max_soldier_capacity());
@@ -142,7 +142,7 @@ int LuaWarehouse::get_max_garrison(lua_State* L) {
 
    .. versionadded:: 1.3
 
-      (RW) The number of soldiers meant to be stationed here.
+   (RW) The number of soldiers meant to be stationed here.
 */
 int LuaWarehouse::set_capacity(lua_State* L) {
 	get(L, get_egbase(L))->mutable_soldier_control()->set_soldier_capacity(luaL_checkuint32(L, -1));
@@ -158,8 +158,8 @@ int LuaWarehouse::get_capacity(lua_State* L) {
 
    .. versionadded:: 1.3
 
-      (RW) ``"heroes"`` if this site prefers heroes; ``"rookies"`` for rookies;
-         or ``"any"`` for no predilection.
+   (RW) ``"heroes"`` if this site prefers heroes; ``"rookies"`` for rookies; or ``"any"`` for
+   no predilection.
 */
 int LuaWarehouse::get_soldier_preference(lua_State* L) {
 	lua_pushstring(

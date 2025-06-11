@@ -60,8 +60,12 @@ run(function()
    sentry.soldier_preference = "heroes"
    connected_road("normal", p1, fhq, "r,r|", true)
 
-   game.desired_speed = 10000
-   sleep(15000)
+   game.desired_speed = 20000
+
+   while sentry:get_soldiers{0, 0, 0, 0} ~= 1 do
+      sleep(1000)
+   end
+   sleep(5000)
 
    assert_equal(10, hq:get_workers("barbarians_soldier"))
    local sentry_soldiers = sentry:get_soldiers("all")
@@ -79,9 +83,17 @@ run(function()
    hq.capacity = 3
    sleep(10)
    sentry.soldier_preference = "heroes"
-   sleep(25000)
+
+   while sentry:get_soldiers{0, 5, 0, 2} ~= 1 do
+      sleep(1000)
+   end
+
    sentry.capacity = 2
-   sleep(25000)
+
+   while sentry:get_soldiers{0, 4, 0, 2} ~= 1 do
+      sleep(1000)
+   end
+   sleep(5000)
 
    assert_equal(9, hq:get_workers("barbarians_soldier"))
    assert_equal(0, sentry:get_soldiers{0, 0, 0, 0}, "Weakest soldier is still in the sentry")
@@ -103,9 +115,17 @@ run(function()
    sentry.capacity = 1
    sleep(10)
    sentry.soldier_preference = "heroes"
-   sleep(25000)
+
+   while sentry:get_soldiers{3, 5, 0, 2} ~= 1 do
+      sleep(1000)
+   end
+
    sentry.capacity = 2
-   sleep(25000)
+
+   while sentry:get_soldiers{2, 5, 0, 2} ~= 1 do
+      sleep(1000)
+   end
+   sleep(5000)
 
    assert_equal(0, sentry:get_soldiers{0, 5, 0, 2}, "Unexpected soldier is in the sentry")
    assert_equal(0, sentry:get_soldiers{0, 4, 0, 2}, "Unexpected soldier is in the sentry")
@@ -121,9 +141,17 @@ run(function()
    print("Request rookies but don't allow the weakest soldiers to the sentry")
    sentry.soldier_preference = "rookies"
    sentry.capacity = 1
-   sleep(25000)
+
+   while sentry:get_soldiers{0, 1, 0, 2} ~= 1 do
+      sleep(1000)
+   end
+
    sentry.capacity = 2
-   sleep(25000)
+
+   while sentry:get_soldiers{0, 2, 0, 2} ~= 1 do
+      sleep(1000)
+   end
+   sleep(5000)
 
    assert_equal(0, sentry:get_soldiers{0, 0, 0, 0}, "Unexpected soldier is in the sentry")
    assert_equal(0, sentry:get_soldiers{3, 5, 0, 2}, "Unexpected soldier is in the sentry")
