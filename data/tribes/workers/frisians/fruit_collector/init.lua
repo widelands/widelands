@@ -17,6 +17,9 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       harvest = {
+         -- steps from building to field: 2-9
+         -- min. worker time: 2 * 2 * 1.8 + 8 + 1 = 16.2 sec
+         -- max. worker time: 2 * 9 * 1.8 + 8 + 1 = 41.4 sec
          "findobject=attrib:ripe_bush radius:6",
          "walk=object",
          "animate=gather duration:8s",
