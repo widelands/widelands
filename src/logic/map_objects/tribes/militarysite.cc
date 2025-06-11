@@ -84,9 +84,9 @@ Quantity MilitarySite::SoldierControl::soldier_capacity() const {
 	return military_site_->capacity_;
 }
 
-void MilitarySite::SoldierControl::set_soldier_capacity(uint32_t const capacity) {
-	assert(min_soldier_capacity() <= capacity);
-	assert(capacity <= max_soldier_capacity());
+void MilitarySite::SoldierControl::set_soldier_capacity(uint32_t capacity) {
+	capacity = std::max(capacity, min_soldier_capacity());
+	capacity = std::min(capacity, max_soldier_capacity());
 	if (military_site_->capacity_ != capacity) {
 		military_site_->capacity_ = capacity;
 		military_site_->update_soldier_request();

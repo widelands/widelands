@@ -1656,8 +1656,11 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index,
 }
 
 void Warehouse::set_desired_soldier_count(Quantity q) {
-	desired_soldier_count_ = q;
-	soldier_request_manager_.update();
+	q = std::min(q, soldier_control_.max_soldier_capacity());
+	if (q != desired_soldier_count_) {
+		desired_soldier_count_ = q;
+		soldier_request_manager_.update();
+	}
 }
 
 void Warehouse::set_soldier_preference(SoldierPreference p) {

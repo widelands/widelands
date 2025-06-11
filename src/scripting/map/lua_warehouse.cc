@@ -56,9 +56,10 @@ const MethodType<LuaWarehouse> LuaWarehouse::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaWarehouse> LuaWarehouse::Properties[] = {
-   PROP_RO(LuaWarehouse, portdock),      PROP_RO(LuaWarehouse, expedition_in_progress),
-   PROP_RW(LuaWarehouse, warehousename), PROP_RW(LuaWarehouse, soldier_preference),
-   PROP_RW(LuaWarehouse, capacity),      {nullptr, nullptr, nullptr},
+   PROP_RO(LuaWarehouse, portdock),           PROP_RO(LuaWarehouse, expedition_in_progress),
+   PROP_RW(LuaWarehouse, warehousename),      PROP_RO(LuaWarehouse, max_garrison),
+   PROP_RW(LuaWarehouse, soldier_preference), PROP_RW(LuaWarehouse, capacity),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -117,6 +118,21 @@ int LuaWarehouse::set_warehousename(lua_State* L) {
 }
 
 // Garrison settings
+
+/* RST
+   .. attribute:: max_garrison
+
+   .. versionadded:: 1.3
+
+      (RO) The maximum garrison size that can be set for this warehouse. Unlike
+      :ref:`max_soldiers`, which is always :const:`nil` for warehouses, :attribute:`max_garrison`
+      is always a valid number: either 0 for plain warehouses or :attr:`max_garrison` from the
+      building definition of ports and headquarters.
+*/
+int LuaWarehouse::get_max_garrison(lua_State* L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->soldier_control()->max_soldier_capacity());
+	return 1;
+}
 
 /* RST
    .. attribute:: capacity
