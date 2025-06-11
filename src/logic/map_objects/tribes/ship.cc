@@ -586,9 +586,13 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 						idx++;
 						if ((map[cur].nodecaps() & MOVECAPS_SWIM) == 0) {
 							molog(game.get_gametime(),
-							      "non swimmable terrain at (%i,%i) recalculate path to port %u\n", cur.x,
+							      "Non swimmable terrain at (%i,%i) recalculate path to port %u\n", cur.x,
 							      cur.y, destination->serial());
-							start_task_movetodock(game, *destination);
+							fleet_->remove_port(game, destination);
+							fleet_->add_port(game, destination);
+							if (!fleet_->get_path(*lastdock, *destination, path)) {
+								start_task_movetodock(game, *destination);
+							}
 							return true;
 						}
 					}
