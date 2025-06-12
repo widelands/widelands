@@ -272,6 +272,54 @@ bool ShipFleet::merge(EditorGameBase& egbase, ShipFleet* other) {
 }
 
 /**
+ * Split the fleet into two or more fleets, due to changed terrain.
+ *
+ */
+void ShipFleet::split(Game& game) {
+	// something changed the map, splitting fleets (Diker, maps scripts, etc.)
+	// we do not know which ports and ships are affected in the fleet
+	// therefore we need to remove them all from the fleet (effectively deleting the fleet)
+	// and afterwards reinit new fleets
+	std::vector<Ship*> fleetships = ships_;
+	std::vector<PortDock*> fleetports = ports_;
+	std::vector<ShipFleetYardInterface*> fleetinterfaces = interfaces_;
+	std::set<ProductionSite*> fleetshipyards;
+
+	for (auto& interface : fleetinterfaces) {
+		fleetshipyards.insert(interface->get_building());
+		remove_interface(game, interface);
+	}
+	molog(game.get_gametime(), "interfaces removed");
+	for (auto& ship : fleetships) {
+		ship->set_destination(game, nullptr);
+		remove_ship(game, ship);
+	}
+	molog(game.get_gametime(), "ships removed");
+	for (auto& port : fleetports) {
+		remove_port(game, port);
+	}
+	molog(game.get_gametime(), "ports removed");
+	for (auto& port : fleetports) {
+		if (port->expedition_started()) {
+			port->cancel_expedition(game);
+			port->init_fleet(game);
+			port->start_expedition();
+		} else {
+			port->init_fleet(game);
+		}
+	}
+	molog(game.get_gametime(), "ports added");
+	for (auto& ship : fleetships) {
+		ship->init_fleet(game);
+	}
+	molog(game.get_gametime(), "ships added");
+	for (const auto& yard : fleetshipyards) {
+		yard->init(game);
+	}
+	molog(game.get_gametime(), "yardinterfaces added");
+}
+
+/**
  * If we have ports and ships, ensure that all ports belong to the same economy.
  */
 void ShipFleet::check_merge_economy() {
