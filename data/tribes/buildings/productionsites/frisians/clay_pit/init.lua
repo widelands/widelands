@@ -60,7 +60,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making clay because ...
          descname = _("making clay"),
          actions = {
-
+            -- time of worker: 15.2-33.2 sec
+            -- min. time total: 15.2 + 22 + 17 + 1 = 55.2 sec
+            -- max. time total: 33.2 + 22 + 17 + 1 = 73.2 sec
             "return=skipped unless economy needs clay or economy needs fish or economy needs coal",
             -- Fish-producing aqua farms and charcoal burners houses can stop working if the clay pits do so
             "return=failed unless site has water",

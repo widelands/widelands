@@ -15,6 +15,9 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       release_game = {
+         -- steps from building to tree: 2-13
+         -- min. worker time: 2 *  2 * 1.8 + 4.181 = 11.381 sec
+         -- max. worker time: 2 * 13 * 1.8 + 4.181 = 50.981 sec
          "findobject=attrib:tree radius:10",
          "walk=object",
          "animate=release duration:4s181ms",
@@ -22,6 +25,9 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       breed_fish = {
+         -- steps from building to water: 2-10
+         -- min. worker time: 2 *  2 * 1.8 + 12.545 = 19.745 sec
+         -- max. worker time: 2 * 10 * 1.8 + 12.545 = 48.545 sec
          "findspace=size:swim radius:7",
          "walk=coords",
          "animate=release duration:12s545ms",

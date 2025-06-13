@@ -51,8 +51,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
          descname = _("making a rope"),
          actions = {
+            -- time total: 20.4 + 35 + 3.6 = 59 sec
             "consume=liana:2",
-            "sleep=duration:20s",
+            "sleep=duration:20s400ms",
             "animate=working duration:35s",
             "produce=rope"
          },
