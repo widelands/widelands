@@ -347,6 +347,9 @@ const CritterDescr* Descriptions::get_critter_descr(DescriptionIndex index) cons
 const CritterDescr* Descriptions::get_critter_descr(const std::string& name) const {
 	return critters_->exists(name);
 }
+CritterDescr* Descriptions::get_mutable_critter_descr(DescriptionIndex index) const {
+	return critters_->get_mutable(index);
+}
 
 const ImmovableDescr* Descriptions::get_immovable_descr(DescriptionIndex index) const {
 	return immovables_->get_mutable(index);
@@ -364,6 +367,9 @@ const ResourceDescription* Descriptions::get_resource_descr(DescriptionIndex con
 }
 
 const ShipDescr* Descriptions::get_ship_descr(DescriptionIndex index) const {
+	return ships_->get_mutable(index);
+}
+ShipDescr* Descriptions::get_mutable_ship_descr(DescriptionIndex index) const {
 	return ships_->get_mutable(index);
 }
 
