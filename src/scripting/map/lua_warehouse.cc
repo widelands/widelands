@@ -128,8 +128,8 @@ int LuaWarehouse::set_warehousename(lua_State* L) {
    .. versionadded:: 1.3
 
    (RO) The maximum garrison size that can be set for this warehouse. Unlike
-   :ref:`max_soldiers`, which is always :const:`nil` for warehouses, :attr:`max_garrison`
-   is always a valid number: either 0 for plain warehouses or :ref:`max_garrison` from the
+   :attr:`max_soldiers`, which is always :const:`nil` for warehouses, :attr:`max_garrison`
+   is always a valid number: either 0 for plain warehouses or :attr:`max_garrison` from the
    building definition of ports and headquarters.
 */
 int LuaWarehouse::get_max_garrison(lua_State* L) {
