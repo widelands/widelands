@@ -1586,8 +1586,7 @@ void LuaDescriptions::do_modify_ship(lua_State* L,
                                      const std::string& property) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
-	Widelands::ShipDescr& ship =
-	   *descrs.get_mutable_ship_descr(descrs.load_ship(unit_name));
+	Widelands::ShipDescr& ship = *descrs.get_mutable_ship_descr(descrs.load_ship(unit_name));
 
 	if (property == "descname") {
 		ship.set_descname(luaL_checkstring(L, 5));
