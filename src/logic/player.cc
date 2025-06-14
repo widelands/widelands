@@ -2131,18 +2131,29 @@ void Player::reserve_warehousename(const std::string& name) {
 	}
 }
 
-void Player::set_shipnames(const std::set<std::string>& names) {
-	if (!names.empty()) {
-		remaining_shipnames_.clear();
-		remaining_shipnames_.insert(remaining_shipnames_.begin(), names.begin(), names.end());
+void Player::set_shipnames(const CustomNamingList& names) {
+	std::vector<std::string> result;
+	if (auto it = names.find(std::string()); it != names.end()) {
+		result.insert(result.end(), it->second.begin(), it->second.end());
+	}
+	if (auto it = names.find(tribe().name()); it != names.end()) {
+		result.insert(result.end(), it->second.begin(), it->second.end());
+	}
+	if (!result.empty()) {
+		remaining_shipnames_ = result;
 	}
 }
 
-void Player::set_warehousenames(const std::set<std::string>& names) {
-	if (!names.empty()) {
-		remaining_warehousenames_.clear();
-		remaining_warehousenames_.insert(
-		   remaining_warehousenames_.begin(), names.begin(), names.end());
+void Player::set_warehousenames(const CustomNamingList& names) {
+	std::vector<std::string> result;
+	if (auto it = names.find(std::string()); it != names.end()) {
+		result.insert(result.end(), it->second.begin(), it->second.end());
+	}
+	if (auto it = names.find(tribe().name()); it != names.end()) {
+		result.insert(result.end(), it->second.begin(), it->second.end());
+	}
+	if (!result.empty()) {
+		remaining_warehousenames_ = result;
 	}
 }
 
@@ -2445,14 +2456,15 @@ void Player::write_statistics(FileWrite& fw) const {
 	}
 }
 
-std::pair<std::set<std::string>, std::set<std::string>> read_custom_warehouse_ship_names() {
-	std::pair<std::set<std::string>, std::set<std::string>> result;
+std::pair<Player::CustomNamingList, Player::CustomNamingList> read_custom_warehouse_ship_names() {
+	std::pair<Player::CustomNamingList, Player::CustomNamingList> result;
 
 	const std::string* filenames[2] = {&kCustomShipNamesFile, &kCustomWarehouseNamesFile};
-	std::set<std::string>* result_sets[2] = {&result.first, &result.second};
+	Player::CustomNamingList* result_sets[2] = {&result.first, &result.second};
 
 	for (int i = 0; i < 2; ++i) {  // To deduplicate this a bit
 		if (FileRead fr; fr.try_open(*g_fs, *filenames[i])) {
+			std::set<std::set<std::string>*> current = {&(*result_sets[i])[std::string()]};
 			for (;;) {
 				const char* line = nullptr;
 				try {
@@ -2477,7 +2489,19 @@ std::pair<std::set<std::string>, std::set<std::string>> read_custom_warehouse_sh
 				}
 
 				if (!name.empty()) {
-					result_sets[i]->insert(name);
+					if (name.front() == '[' && name.back() == ']') {
+						std::vector<std::string> tribes;
+						split(tribes, name.substr(1, name.size() - 2), {','});
+						current.clear();
+						for (std::string t : tribes) {
+							trim(t);
+							current.insert(&(*result_sets[i])[t]);
+						}
+					} else {
+						for (auto* set : current) {
+							set->insert(name);
+						}
+					}
 				}
 			}
 		}
