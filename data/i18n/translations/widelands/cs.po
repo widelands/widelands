@@ -11278,10 +11278,10 @@ msgstr "Prosím zvol zboží, které nabízíš a které poptáváš."
 #, c-format
 msgid "It is not allowed to exchange more than %d ware per batch."
 msgid_plural "It is not allowed to exchange more than %d wares per batch."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "V rámci jedné dodávky není dovoleno směnit více než %d kus zboží."
+msgstr[1] "V rámci jedné dodávky není dovoleno směnit více než %d kusy zboží."
+msgstr[2] "V rámci jedné dodávky není dovoleno směnit více než %d kusu zboží."
+msgstr[3] "V rámci jedné dodávky není dovoleno směnit více než %d kusů zboží."
 
 #: ../../../../src/wui/marketwindow.cc:239
 #, c-format

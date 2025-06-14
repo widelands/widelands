@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-06-12 03:24+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: TaeMin An, 2017\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -349,6 +349,45 @@ msgid ""
 " economy. Recommended for players with some experience."
 msgstr "이번 자습서에서는 당신이 와이드랜드가 제공할 당신의 경제에 적용할 옵션이 무엇이 있는지 배울 것입니다. 경험이 있는 플레이어에게 추천합니다."
 
+#: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
+msgid "Accurate Europe 1.2"
+msgstr ""
+
+#: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:10
+msgid ""
+"Warning: This map is provided as an experimental preview. Although it is "
+"better in many ways than Europa 1.2 that it replaces, it probably still has "
+"bugs. Furthermore, it is a very large map with more player positions than "
+"generally recommended, so it has high hardware requirements.  —  A map for "
+"roleplaying historical empires. – This map of Europe aims to be as accurate "
+"as practically possible in Widelands. – EASY: Ottoman Empire, Sweden, "
+"Russian Empire, Carthage – MEDIUM: French Empire, British Empire, Spain, "
+"German Empire, Roman Empire – HARD: Egypt, Poland, Greece"
+msgstr ""
+
+#: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:11
+msgid ""
+"The wide rivers are navigable to create a ”trade network”. All players have "
+"their own challenges, but are relatively balanced to be playable: – British "
+"Empire: create sustainable colonies – Russian Empire: Very large distances …"
+msgstr ""
+
+#: ../../../../data/maps/Amoebae.wmf/elemental:8
+msgid "Amoebae"
+msgstr ""
+
+#: ../../../../data/maps/Amoebae.wmf/elemental:10
+msgid "You are an Amoeba, expand and conquer all other Amoebae …"
+msgstr ""
+
+#: ../../../../data/maps/Amoebae.wmf/elemental:11
+msgid ""
+"Be aware that you are surrounded by enemies. Disable diplomacy for an easier"
+" game, enable it for a more challenging game. Additionally you can define "
+"the difficulty by playing against different AI teams. Although some players "
+"have more space in the beginning, the map is well balanced."
+msgstr ""
+
 #: ../../../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
 msgstr "다도해"
@@ -483,15 +522,17 @@ msgid ""
 " you can – it’s the only way to find all the precious farm spaces."
 msgstr "그 산에는 평평한 땅이 풍부합니다. 불행히도, 그것의 대부분은 수직입니다 – 당신이 가지고 있는 작은 건물 공간을 현명하게 사용하십시오. 좁은 산길 어귀에 있는 요새는 적군에게 만만치 않은 장애물이 될 수 있습니다 – 지형을 유리하게 활용하십시오. 모든 나무를 자르고 당신이 할 수 있는 모든 곳을 확장하십시오 – 그것이 모든 귀중한 농장 공간을 찾을 수 있는 유일한 방법입니다."
 
-#: ../../../../data/maps/Elven_Forests.wmf/elemental:8
-msgid "Elven Forests"
-msgstr "요정의 숲"
+#: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:8
+msgid "Egyptian Mandala v1.2"
+msgstr ""
 
-#: ../../../../data/maps/Elven_Forests.wmf/elemental:10
+#: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:10
 msgid ""
-"The breath-taking beauty of these emerald lands has lured many tribes into "
-"an attempt to take them for themselves."
-msgstr "숨 막힐듯 아름다운 이 에메랄드 땅은 여러 부족들이 그땅을 차지하기 위한 시도로 이끌고 있습니다."
+"They hardly had time to prepare themselves when they embarked for this "
+"island. According to your explorers, however, things will not go as easily "
+"as you were told earlier. You should expect fierce opposition. Expand your "
+"base and be the first to reach the ring of power."
+msgstr ""
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
@@ -504,16 +545,6 @@ msgstr "3 명의 선수가 출발 조건이 같습니다."
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:11
 msgid "v0.2"
 msgstr "v0.2"
-
-#: ../../../../data/maps/Europa.wmf/elemental:8
-msgid "Europa 1.2"
-msgstr "유로파 1.2"
-
-#: ../../../../data/maps/Europa.wmf/elemental:10
-msgid ""
-"A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
-"Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
-msgstr "거대한 유럽지도입니다. 파란색 = 스웨덴, 빨간색 = 이탈리아, 노란색 = 스페인, 녹색 = 터키, 검정색 = 러시아, 주황색 = 영국, 보라색 = 프랑스, 흰색 = 폴란드 입니다"
 
 #: ../../../../data/maps/Fellowships.wmf/elemental:8
 msgid "Fellowships"
@@ -559,6 +590,16 @@ msgid ""
 " if you are alone, but no-one knows what might happen if you met an opposing"
 " tribe?"
 msgstr "이것은 신들의 시험인가 다른 누군가의 사악한 계획인가? 당신과 당신 부족은 불과 용암에 둘러쌓인 섬에서 깨어난것인가요? 지금까지는 당신 부족만 있는것처럼 보이지만, 반대 종족을 만난다면 어떤 일이 일어날지 아무도 모를까요?"
+
+#: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:8
+msgid "Forest Valley v2.0"
+msgstr ""
+
+#: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:10
+msgid ""
+"A river valley surrounded by mountains with lots of resources except coal. "
+"Plenty of flat building space."
+msgstr ""
 
 #: ../../../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
@@ -877,6 +918,36 @@ msgid ""
 "key to control over the whole island."
 msgstr "심지어 오래된 늪에 살고 있는 옛 전쟁 수도자들이 섬 전체를 다스릴 수 있는 열쇠라고 한다."
 
+#: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:8
+msgid "Tasmanian Black War"
+msgstr ""
+
+#: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:10
+msgid ""
+"Welcome, intruder! You’re like a European conqueror from the early 1800s "
+"when they settled the Van Diemen land – later known as Tasmania. Between "
+"1828 and 1832 there was a war called the Black War in which the British "
+"Empire eradicated almost the entire Aboriginal population of the Van Diemen "
+"land. – The map simulates a scattered British Empire but without any "
+"advantages – actually it offers some great disadvantages and you will likely"
+" have a hard time conquering Tasmania. During the historical Black War the "
+"ratio between Europeans and Aboriginals was around one against ten, but this"
+" time they’re armed to the teeth for a rematch."
+msgstr ""
+
+#: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:11
+msgid ""
+"This map is intended to be played by a single player from the blue player’s "
+"starting location as Empire. Choose Barbarians and Amazons for the rival "
+"tribes. If you want a challenge, put them all on the same side and disable "
+"Diplomacy. Or you can play with every player against all others, with a win "
+"condition of Territorial Time. This map isn’t suitable for short games and "
+"one game will likely take more than ten hours. The AI has great capability "
+"on this map. One of the computer players will likely also begin seafaring "
+"and competing for the best harbor places on the Tasmanian coast, so you’ve "
+"been warned!"
+msgstr ""
+
 #: ../../../../data/maps/The_Big_Lake.wmf/elemental:8
 msgid "The Big Lake"
 msgstr "큰 호수"
@@ -909,6 +980,18 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
 msgstr "어떤이들은 눈앞이 안 보일 정도의 먼 북쪽 땅은 가장 용감한 정착민들과 용사중의 용사들 조차도 쫓아버렸다고 말합니다. 습지와 언덕을 가로 지르는 크고 약탈적인 놀이로 가득 찬 크고 오래된 숲은 수수께끼에 싸여있었습니다. 가까스로 돌아올 수 있었던 사람들은 황무지의 어딘가에 있는 웅장한 산맥에서 나온 조각과 금으로 장식된 엄청난 건물을 언급했습니다. 일부 부서지기 쉬운 폐허만이 이런 좋은 시절의 잔재를 남겨둔 수십년 후, 이곳은 이끼와 나무로 뒤덮였습니다. 그것들의 모양은 고대 건축가의 장인 정신에 대한 생각만을 줍니다. 그들이 왜 사라졌는지는 아무도 모른다. 아무도… 사람들은 이제 부자로 가는 길을 가로 막고 있는것은 아무것도 없다고 말합니다. 하지만 많은 사람들이 늪으로 둘러쌓인… 늑대에 의해 갈갈히 찣겨져 죽을것입니다. 적대적인 부족들에게 둘러 쌓인체. (번역확인??)"
+
+#: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:8
+msgid "The Islands of the Eight Tribes"
+msgstr ""
+
+#: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:10
+msgid ""
+"This map is designed for a long game! Eight tribes, three islands, and lots "
+"of resources. Colonization and ferries can give you a big advantage, but "
+"this is not necessary to defeat other players. If you want to delay the "
+"fighting, you can turn off the last four players."
+msgstr ""
 
 #: ../../../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"
@@ -1019,22 +1102,6 @@ msgid ""
 "Defend your transport lines, or use ships to bypass the opponent. Then "
 "remove all enemy activity."
 msgstr "운송노선을 방어하거나 선박을 사용하여 상대방을 우회하십시오. 그런 다음 모든 적의 활동을 제거 하십시오."
-
-#: ../../../../data/maps/Twinkling_Waves.wmf/elemental:8
-msgid "Twinkling Waves"
-msgstr "반짝이는 물결"
-
-#: ../../../../data/maps/Twinkling_Waves.wmf/elemental:10
-msgid ""
-"Many beautiful, green islands await the ones brave enough to pass the "
-"thousand waves, twinkling in the sun."
-msgstr "많은 아름답고 초록의 섬은 햇빛에 반짝이며 수천개의 파도를 넘어 갈 만큼 충분히 용감한 자들을 기다리고 있습니다."
-
-#: ../../../../data/maps/Twinkling_Waves.wmf/elemental:11
-msgid ""
-"Take care not to build your ships in the lagoons. They cannot pass through "
-"the reefs to the main ocean, where your ports are located."
-msgstr "석호에서 배를 건조하지 않도록 주의하십시오. 그들은 산호초를 통과하여 항구가 있는 큰 바다로 이동할 수 없습니다."
 
 #: ../../../../data/maps/Two_Frontiers.wmf/elemental:8
 msgid "Two Frontiers"
