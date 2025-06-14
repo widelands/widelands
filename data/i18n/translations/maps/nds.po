@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2024
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2025
 # GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2014
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-06-12 03:24+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2024\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -352,7 +352,7 @@ msgstr "In deese Inföhren lehrst du, welke Kansen Widelands hett, wo du diene W
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"
-msgstr ""
+msgstr "Akkeraates Europa 1.2"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:10
 msgid ""
@@ -364,22 +364,22 @@ msgid ""
 "as practically possible in Widelands. – EASY: Ottoman Empire, Sweden, "
 "Russian Empire, Carthage – MEDIUM: French Empire, British Empire, Spain, "
 "German Empire, Roman Empire – HARD: Egypt, Poland, Greece"
-msgstr ""
+msgstr "Wahrschau: Deese Kaart word as noch nich steviger Utkiek klaargeven. Dat is in mennig Aarden beter as Europa 1.2, wat ’t utwesselt, enthollt man aver wull noch Fehlers. Daarto is dat eene bannig grote Kaart mit mehr Spelers, as normaal anraden worden, stellt also hooge Anförderns an de Reekner. – Eene Kaart, um histoorisk Rieken natospölen. – Deese Kaart vun Europa versöcht, so akkeraat as in Widelands praktisk mögelk to wesen. – LICHT: Ottomaansk Riek, Sweden, Russisk Riek, Kartago – MIDDEL: Frankriek, Engelks Riek, Spaanje, Düütsches Riek, Römisk Riek – STUUV: Ägypten, Polen, Grekenland"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:11
 msgid ""
 "The wide rivers are navigable to create a ”trade network”. All players have "
 "their own challenges, but are relatively balanced to be playable: – British "
 "Empire: create sustainable colonies – Russian Empire: Very large distances …"
-msgstr ""
+msgstr "Up de wieden Stromen is Seefahrt mögelk, um een »Hannelsnett« uptobauen. All Spelers hebben hör eegen Rutfödderungen, sünd aver eenigermaten utgleken, um spöölbaar to wesen: – Engelsk Riek: sett versörgbaare Kolonien up – Russisk Riek: bannig grote Feernten …"
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:8
 msgid "Amoebae"
-msgstr ""
+msgstr "Amöbens"
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:10
 msgid "You are an Amoeba, expand and conquer all other Amoebae …"
-msgstr ""
+msgstr "Du büst eene Amööb, verwieder un manntje all anner Amöbens …"
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:11
 msgid ""
@@ -387,7 +387,7 @@ msgid ""
 " game, enable it for a more challenging game. Additionally you can define "
 "the difficulty by playing against different AI teams. Although some players "
 "have more space in the beginning, the map is well balanced."
-msgstr ""
+msgstr "Weet, dat du vun Feinden umgeven büst. Knips Betreckens-Ännerns ut, um dat Speel lichter to maken, of an, um ’t swaarer to maken. Du kannst de Swaarigheid ok setten, indeem du tegen unnerschedelk Klottjen ut künstelk Spelers spöölst. Eenige Spelers hebben to Begünn mehr Rüümte as anner, aver deese Kaart is doch utgleken."
 
 #: ../../../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
@@ -525,7 +525,7 @@ msgstr "Dat gifft vööl flackes Land up deesen Bargen, aver dat meeste daarvun 
 
 #: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:8
 msgid "Egyptian Mandala v1.2"
-msgstr ""
+msgstr "Agyptisk Mandala v1.2"
 
 #: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:10
 msgid ""
@@ -533,7 +533,7 @@ msgid ""
 "island. According to your explorers, however, things will not go as easily "
 "as you were told earlier. You should expect fierce opposition. Expand your "
 "base and be the first to reach the ring of power."
-msgstr ""
+msgstr "Se hebben haast keene Tied hebbt, sik vörtobereiden, as se to deeser Insel seilt sünd. Diene Utförskers vertellen di man, dat dat nich so licht word, as man di tovör vertellt hett. Du sallst stuve Tegenwehr verwachten. Verwieder dien Gewest un wees de eerste, de Ring vun Macht intonehmen."
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
@@ -594,13 +594,13 @@ msgstr "Is dat een Test vun de Gotten of een düvelsker Plaan vun well anner, da
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:8
 msgid "Forest Valley v2.0"
-msgstr ""
+msgstr "Walddaal v2.0"
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:10
 msgid ""
 "A river valley surrounded by mountains with lots of resources except coal. "
 "Plenty of flat building space."
-msgstr ""
+msgstr "Een Stroomdaal, wat vun Bargen mit mennig Mineraale bit up Köhl umgeven is. Mennig flacke Rüümte tum Bauen."
 
 #: ../../../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
@@ -921,7 +921,7 @@ msgstr "’t heet, dat de ollen Kriegs-Mönken, wat in de noch ollern Broken lev
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:8
 msgid "Tasmanian Black War"
-msgstr ""
+msgstr "Swarter Tasmaansk Krieg"
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:10
 msgid ""
@@ -934,7 +934,7 @@ msgid ""
 " have a hard time conquering Tasmania. During the historical Black War the "
 "ratio between Europeans and Aboriginals was around one against ten, but this"
 " time they’re armed to the teeth for a rematch."
-msgstr ""
+msgstr "Willkommen, Indringer! Du büst as een europäisk Innehmer ut de frohen 1800ers, as se dat Van-Diemen-Land besiedelt hebben – wat nu Tasmanien heet. Vun 1828 bit 1832 hett dat eenen Krieg geven, wat de Swarte Krieg heet, waar dat Britisk Riek haast all de Urinwohners vun de Van-Diemen-Land utradeert hett. – Deese Kaart is as een verdeelt Britisk Riek, aver sünner all Vördelen – ’t hett sogaar een paar slimme Nadelen un dat word bannig swaar för di worden, all Tasmanien intonehmen. In de histoorsk Swarte Krieg weer de Tahl vun Europäers tegen Urinwohners umbi eens to teihn, aver deeses Maal sünd se bit an de Tähnen bewapent tur Verteidigung."
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:11
 msgid ""
@@ -947,7 +947,7 @@ msgid ""
 "on this map. One of the computer players will likely also begin seafaring "
 "and competing for the best harbor places on the Tasmanian coast, so you’ve "
 "been warned!"
-msgstr ""
+msgstr "Deese Kaart sall as Rutfödderung för eenen Speler vun de blaue Anfangsstee spöölt worden. Köör de Willen Lüü för de feindelk Spelers ut un spööl sülvst as een Riek. Bruuk Wille Lüü un Amazoonen för de Gegners. Wenn du eene besünnere Rutfödderung willst, sett se all in de sülve Klottje un knips Betreckens ut. Of du kannst mit elkeen Speler tegen all anner spöle, mit Gewestenloper as de Upgaav tum Winnen. Deese Kaart is för körte Spelen nich to bruken un een Speel düürt meestens mehr as teihn Stünnen. De künstelk Spelers spölen hier bannig good. Een vun se word wull ok to See fahren un mit di um de besten Muden-Steden an de Tasmaansk Küst strieden; du büst warnt worden!"
 
 #: ../../../../data/maps/The_Big_Lake.wmf/elemental:8
 msgid "The Big Lake"
@@ -984,7 +984,7 @@ msgstr "Eenige seggen, dat de unbetredtbaren Lannen wied im Noorden sülvst de m
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:8
 msgid "The Islands of the Eight Tribes"
-msgstr ""
+msgstr "De Insels vun de acht Völkers"
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:10
 msgid ""
@@ -992,7 +992,7 @@ msgid ""
 "of resources. Colonization and ferries can give you a big advantage, but "
 "this is not necessary to defeat other players. If you want to delay the "
 "fighting, you can turn off the last four players."
-msgstr ""
+msgstr "Deese Kaart is för een langes Speel baut! Acht Völkers, dree Insels un mennig Mineraale. Seefahrt un Fähren könen di eenen groten Vördeel geven, sünd aver nich nödig, um anner Spelers to manntjen. Wenn du later kämpen willst, knips de lesten veer Spelers ut."
 
 #: ../../../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"

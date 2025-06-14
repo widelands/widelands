@@ -353,7 +353,7 @@ msgstr "V tomto tutoriálu se seznámíš s volbami Widelands pro úpravu hospod
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"
-msgstr ""
+msgstr "Přesná mapa Evropy 1.2"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:10
 msgid ""
@@ -365,22 +365,22 @@ msgid ""
 "as practically possible in Widelands. – EASY: Ottoman Empire, Sweden, "
 "Russian Empire, Carthage – MEDIUM: French Empire, British Empire, Spain, "
 "German Empire, Roman Empire – HARD: Egypt, Poland, Greece"
-msgstr ""
+msgstr "Upozornění: Tato mapa je nabízena jako testovací. Ve spoustě ohledů jde o lepší verzi mapy Evropa 1.2, kterou nahradila, přesto může stále obsahovat chyby. Navíc jde o velkou mapu, která nabízí více startovních pozic, než je všeobecně doporučeno, takže klade zvýšené nároky na výkon počítače.\n\nMapa pro simulaci souboje historických mocností. Snahou je nabídnout tak přesnou mapu Evropy, jak jen Widelands umožňuje.\nSNADNÉ: Ottoman Empire (Osmanská říše), Sweden, Russia, Carthage (Kartágo)\nSTŘEDNĚ OBTÍŽNÉ: French Empire, British Empire, Spain, Germany (Německo), Roman Empire\nTĚŽKÉ: Egypt, Poland, Greece (Řecko)"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:11
 msgid ""
 "The wide rivers are navigable to create a ”trade network”. All players have "
 "their own challenges, but are relatively balanced to be playable: – British "
 "Empire: create sustainable colonies – Russian Empire: Very large distances …"
-msgstr ""
+msgstr "Řeky jsou splavné a mohou sloužit jako obchodní cesty. Každý hráč se potýká se svými problémy, i tak jsou pozice více méně vyvážené a hratelné. Britské impérium potřebuje kolonie a Rusko to má všude daleko …"
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:8
 msgid "Amoebae"
-msgstr ""
+msgstr "Améba"
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:10
 msgid "You are an Amoeba, expand and conquer all other Amoebae …"
-msgstr ""
+msgstr "Jsi amébou, roztáhni se a pohlť ostatní améby..."
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:11
 msgid ""
@@ -388,7 +388,7 @@ msgid ""
 " game, enable it for a more challenging game. Additionally you can define "
 "the difficulty by playing against different AI teams. Although some players "
 "have more space in the beginning, the map is well balanced."
-msgstr ""
+msgstr "Dávej pozor na to, že jsi obklopen nepřáteli. Pro zjednodušení hry můžeš zakázat diplomacii, pro ztížení ji povol. Dále můžeš ovlivnit obtížnost rozdělením AI do týmů. Přestože někteří hráči mají na počátku o něco více místa, mapa se dá považovat za vyváženou."
 
 #: ../../../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
@@ -526,7 +526,7 @@ msgstr "Hory poskytují hodně rovné země, bohužel většinu ve strmém svahu
 
 #: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:8
 msgid "Egyptian Mandala v1.2"
-msgstr ""
+msgstr "Egyptská mandala v1.2"
 
 #: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:10
 msgid ""
@@ -595,13 +595,13 @@ msgstr "Je to snad boží zkouška, nebo ďábelský plán někoho jiného, že 
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:8
 msgid "Forest Valley v2.0"
-msgstr ""
+msgstr "Lesní údolí v2.0"
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:10
 msgid ""
 "A river valley surrounded by mountains with lots of resources except coal. "
 "Plenty of flat building space."
-msgstr ""
+msgstr "Říční údolí obklopené horami s množstvím zdrojů vyjma uhlí. Spousta rovin a stavebního místa."
 
 #: ../../../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
@@ -922,7 +922,7 @@ msgstr "Říká se, že řád mnichů-válečníků, kteří žijí v těchto pr
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:8
 msgid "Tasmanian Black War"
-msgstr ""
+msgstr "Tasmánská Černá válka"
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:10
 msgid ""
@@ -985,7 +985,7 @@ msgstr "Říká se, že neproniknutelné severní země odstrašily i ty nejodv�
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:8
 msgid "The Islands of the Eight Tribes"
-msgstr ""
+msgstr "Ostrovy osmi kmenů"
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:10
 msgid ""
@@ -993,7 +993,7 @@ msgid ""
 "of resources. Colonization and ferries can give you a big advantage, but "
 "this is not necessary to defeat other players. If you want to delay the "
 "fighting, you can turn off the last four players."
-msgstr ""
+msgstr "Mapa je navržena pro dlouhé hry! Osm kmenů, tři ostrovy a spouta zdrojů. Zakládání kolonií a používání přívozů může být velmi přínosné, ale pro vítězství není nezbytné. Pro oddálení soubojů s nepřáteli lze nechat poslední čtyři startovní pozice neobsazené."
 
 #: ../../../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"
