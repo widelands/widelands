@@ -105,7 +105,7 @@ struct ShipFleet : MapObject {
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void update(EditorGameBase&);
-	void split(Game& egbase);
+	void split(Game& game);
 
 	void add_ship(EditorGameBase&, Ship* ship);
 	void remove_ship(EditorGameBase& egbase, Ship* ship);
