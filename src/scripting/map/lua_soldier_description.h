@@ -57,6 +57,10 @@ public:
 	/*
 	 * Lua methods
 	 */
+	int get_health_level_image_filepath(lua_State* L);
+	int get_attack_level_image_filepath(lua_State* L);
+	int get_defense_level_image_filepath(lua_State* L);
+	int get_evade_level_image_filepath(lua_State* L);
 
 	/*
 	 * C methods
