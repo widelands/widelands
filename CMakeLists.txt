@@ -125,7 +125,7 @@ endif()
 
 find_package (Python3 REQUIRED)
 
-if (${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
+if (CMAKE_SYSTEM_NAME MATCHES "Emscripten")
   set(USE_FLAGS "-pthread \
   --use-port=sdl2 \
   --use-port=sdl2_image:formats=png,jpg --use-port=libpng --use-port=libjpeg \
@@ -160,7 +160,7 @@ endif()
 if(${CMAKE_VERSION} VERSION_LESS 3.9.0)
     find_package(ICU_old REQUIRED)
 else()
-  if (${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
+  if (CMAKE_SYSTEM_NAME MATCHES "Emscripten")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --use-port=icu")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --use-port=icu")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --use-port=icu")
@@ -169,12 +169,12 @@ else()
   endif()
 endif()
 if(OPTION_USE_GLBINDING)
-  if (${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
+  if (CMAKE_SYSTEM_NAME MATCHES "Emscripten")
     message(FATAL_ERROR "glbinding not supported in emscripten sdk")
   endif()
   find_package(glbinding REQUIRED)
 else()
-  if (${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
+  if (CMAKE_SYSTEM_NAME MATCHES "Emscripten")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2")
   else()
     find_package(GLEW REQUIRED)
@@ -184,7 +184,10 @@ endif()
 # Check that Asio is installed. Asio does not have (or need) a Find… CMake Module, so we "only" need to check if the header exists.
 if(NOT asio_location OR asio_location STREQUAL "")
   unset(asio_location CACHE)
-  if (${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
+  if (CMAKE_SYSTEM_NAME MATCHES "Emscripten")
+    if(CMAKE_VERSION VERSION_GREATER "3.24.0")
+      cmake_policy(SET CMP0135 NEW)
+    endif ()
     include(ExternalProject)
     ExternalProject_Add(asio
       PREFIX "asio"
@@ -645,9 +648,9 @@ install(
   PATTERN "CMakeLists.txt" EXCLUDE
 )
 
-if (UNIX AND NOT APPLE AND NOT ${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
+if (UNIX AND NOT APPLE AND NOT CMAKE_SYSTEM_NAME MATCHES "Emscripten")
   add_subdirectory(xdg)
-endif (UNIX AND NOT APPLE AND NOT ${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
+endif (UNIX AND NOT APPLE AND NOT CMAKE_SYSTEM_NAME MATCHES "Emscripten")
 
 # uninstall target
 # see https://gitlab.kitware.com/cmake/community/-/wikis/FAQ#can-i-do-make-uninstall-with-cmake
