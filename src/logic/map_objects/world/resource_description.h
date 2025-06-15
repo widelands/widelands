@@ -59,18 +59,22 @@ public:
 		return representative_image_;
 	}
 
+	void set_descname(std::string dn) {
+		descname_ = dn;
+	}
+
 	void set_max_amount(ResourceAmount r) {
 		max_amount_ = r;
 	}
 
 private:
 	const std::string name_;
-	const std::string descname_;
-	const bool detectable_;
-	const uint32_t timeout_ms_;
-	const uint32_t timeout_radius_;
+	std::string descname_;
+	bool detectable_;
+	uint32_t timeout_ms_;
+	uint32_t timeout_radius_;
 	ResourceAmount max_amount_;
-	const std::string representative_image_;
+	std::string representative_image_;
 	std::vector<std::pair<std::string /* image */, uint32_t /* upper limit */>> editor_pictures_;
 
 	DISALLOW_COPY_AND_ASSIGN(ResourceDescription);
