@@ -314,7 +314,7 @@ void ShipFleet::split(Game& game) {
 	}
 	molog(game.get_gametime(), "ships added");
 	for (const auto& yard : fleetshipyards) {
-		yard->init(game);
+		yard->init_yard_interfaces(game);
 	}
 	molog(game.get_gametime(), "yardinterfaces added");
 }
