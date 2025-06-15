@@ -61,7 +61,7 @@ const PropertyType<LuaWarehouse> LuaWarehouse::Properties[] = {
    PROP_RW(LuaWarehouse, warehousename),
    PROP_RO(LuaWarehouse, max_garrison),
    PROP_RW(LuaWarehouse, soldier_preference),
-   PROP_RW(LuaWarehouse, capacity),
+   PROP_RW(LuaWarehouse, garrison),
    {nullptr, nullptr, nullptr},
 };
 
@@ -138,17 +138,17 @@ int LuaWarehouse::get_max_garrison(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: capacity
+   .. attribute:: garrison
 
    .. versionadded:: 1.3
 
-   (RW) The number of soldiers meant to be stationed here.
+   (RW) The number of soldiers meant to be garrisoned here.
 */
-int LuaWarehouse::set_capacity(lua_State* L) {
+int LuaWarehouse::set_garrison(lua_State* L) {
 	get(L, get_egbase(L))->mutable_soldier_control()->set_soldier_capacity(luaL_checkuint32(L, -1));
 	return 0;
 }
-int LuaWarehouse::get_capacity(lua_State* L) {
+int LuaWarehouse::get_garrison(lua_State* L) {
 	lua_pushuint32(L, get(L, get_egbase(L))->soldier_control()->soldier_capacity());
 	return 1;
 }
@@ -158,8 +158,8 @@ int LuaWarehouse::get_capacity(lua_State* L) {
 
    .. versionadded:: 1.3
 
-   (RW) ``"heroes"`` if this site prefers heroes; ``"rookies"`` for rookies; or ``"any"`` for
-   no predilection.
+   (RW) ``"heroes"`` if this warehouse's garrison prefers heroes; ``"rookies"`` for rookies;
+   or ``"any"`` for no predilection.
 */
 int LuaWarehouse::get_soldier_preference(lua_State* L) {
 	lua_pushstring(

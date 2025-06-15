@@ -29,19 +29,19 @@ run(function()
    assert_equal(11, hq:get_workers("barbarians_soldier"))
 
    -- test limiting soldier capacity
-   hq.capacity = hq.max_garrison + 20  -- should be capped
-   assert_equal(hq.max_garrison, hq.capacity)
+   hq.garrison = hq.max_garrison + 20  -- should be capped
+   assert_equal(hq.max_garrison, hq.garrison)
    -- negative numbers are cast to large positive ones, no need for separate test
 
    -- also for warehouse
    wh = p1:place_building("barbarians_warehouse", map:get_field(18, 25), false, true)
    assert_equal(0, wh.max_garrison)
-   wh.capacity = 20  -- should be ignored
-   assert_equal(0, wh.capacity)
+   wh.garrison = 20  -- should be ignored
+   assert_equal(0, wh.garrison)
    wh:remove()
 
    hq.soldier_preference = "heroes"
-   hq.capacity = 10  -- one free soldier
+   hq.garrison = 10  -- one free soldier
 
    sentry = p1:place_building("barbarians_sentry", map:get_field(24, 25), false, true)
    assert_equal("rookies", sentry.soldier_preference)
@@ -73,7 +73,7 @@ run(function()
 
    -- Free up more soldiers
    print("Allow stronger soldiers to the sentry")
-   hq.capacity = 3
+   hq.garrison = 3
 
    sleep(1000)
    while sentry:get_soldiers("present") < 2 or sentry:get_soldiers("associated") > 2 do
