@@ -1091,19 +1091,18 @@ Soldier& Warehouse::launch_soldier(Game& game,
                                    const Requirements& req,
                                    const bool defender,
                                    const SoldierPreference pref) {
-	if (incorporated_soldiers_.empty()) {
-		throw wexception("Warehouse::launch_soldier: no stored soldiers");
-	}
-
 	// counterpart to remove_no_longer_existing_workers()
-	// TODO(tothxa): let's see first if we need it...
 	std::vector<OPtr<Soldier>>::iterator it = incorporated_soldiers_.begin();
 	while (it != incorporated_soldiers_.end()) {
 		if (it->get(game) == nullptr) {
-			throw wexception("Warehouse::launch_soldier: a soldier got deleted from the game");
-			// it = incorporated_soldiers_.erase(it);
-		}  // else
-		++it;
+			it = incorporated_soldiers_.erase(it);
+		} else {
+			++it;
+		}
+	}
+
+	if (incorporated_soldiers_.empty()) {
+		throw wexception("Warehouse::launch_soldier: no stored soldiers");
 	}
 
 	const DescriptionIndex soldier_index = owner().tribe().soldier();
