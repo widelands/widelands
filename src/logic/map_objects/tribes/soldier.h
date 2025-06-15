@@ -165,10 +165,10 @@ private:
 	struct BattleAttribute {
 		explicit BattleAttribute(std::unique_ptr<LuaTable> table);
 
-		uint32_t base;                     // Base value
-		uint32_t maximum;                  // Maximum value for randomizing attack values
-		uint32_t increase;                 // Per level increase
-		uint32_t max_level;                // Maximum level
+		uint32_t base;       // Base value
+		uint32_t maximum;    // Maximum value for randomizing attack values
+		uint32_t increase;   // Per level increase
+		uint32_t max_level;  // Maximum level
 		std::vector<std::pair<std::string, const Image*>> images;  // Level images
 	};
 
