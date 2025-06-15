@@ -112,7 +112,7 @@ obj_reopen_building_stats = {
       li_image("images/wui/menus/statistics_buildings.png",
          _([[You closed the building statistics window, although you have not yet looked up the number of taverns.]])) ..
       -- TRANSLATORS: "it" refers to the building statistics window.
-      li(_([[Please reopen it and choose the second tab (medium buildings).]]))
+      li(_([[Please reopen it and choose the third tab (medium buildings).]]))
    )
 }
 
