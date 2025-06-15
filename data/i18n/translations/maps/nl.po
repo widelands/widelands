@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
-# Alex Rijckaert, 2023
+# Alex Rijckaert, 2023,2025
 # CrisiusXIII <chris@cborn.nl>, 2021-2022
 # FvZ, 2020
 # FvZ, 2020
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-06-12 03:24+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Alex Rijckaert, 2023\n"
+"Last-Translator: Alex Rijckaert, 2023,2025\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -353,7 +353,7 @@ msgstr "In deze oefencampagne zal je leren welke opties Widelands biedt om je ec
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"
-msgstr ""
+msgstr "Actueel Europa 1.2"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:10
 msgid ""
@@ -365,22 +365,22 @@ msgid ""
 "as practically possible in Widelands. – EASY: Ottoman Empire, Sweden, "
 "Russian Empire, Carthage – MEDIUM: French Empire, British Empire, Spain, "
 "German Empire, Roman Empire – HARD: Egypt, Poland, Greece"
-msgstr ""
+msgstr "Waarschuwing: Deze kaart wordt aangeboden als een experimentele preview. Hoewel deze kaart in veel opzichten beter is dan Europa 1.2, die hij vervangt, bevat hij waarschijnlijk nog steeds bugs. Bovendien is het een zeer grote kaart met meer spelersposities dan doorgaans wordt aanbevolen, waardoor de hardware-eisen hoog zijn. — Een kaart voor het naspelen van historische rijken. – Deze kaart van Europa streeft ernaar zo nauwkeurig mogelijk te zijn in Widelands. – GEMAKKELIJK: Ottomaans Rijk, Zweden, Russisch Rijk, Carthago – GEMIDDELD: Frans Rijk, Brits Rijk, Spanje, Duits Rijk, Romeins Rijk – MOEILIJK: Egypte, Polen, Griekenland"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:11
 msgid ""
 "The wide rivers are navigable to create a ”trade network”. All players have "
 "their own challenges, but are relatively balanced to be playable: – British "
 "Empire: create sustainable colonies – Russian Empire: Very large distances …"
-msgstr ""
+msgstr "De brede rivieren zijn bevaarbaar om een “handelsnetwerk” te vormen. Alle spelers hebben hun eigen uitdagingen, maar zijn relatief evenwichtig om speelbaar te zijn: – Brits Rijk: duurzame kolonies opzetten – Russisch Rijk: zeer grote afstanden …"
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:8
 msgid "Amoebae"
-msgstr ""
+msgstr "Amoebae"
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:10
 msgid "You are an Amoeba, expand and conquer all other Amoebae …"
-msgstr ""
+msgstr "Je bent een Amoeba, breid je uit en verover alle andere Amoebae ..."
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:11
 msgid ""
@@ -388,7 +388,7 @@ msgid ""
 " game, enable it for a more challenging game. Additionally you can define "
 "the difficulty by playing against different AI teams. Although some players "
 "have more space in the beginning, the map is well balanced."
-msgstr ""
+msgstr "Wees je ervan bewust dat je omringd bent door vijanden. Schakel diplomatie uit voor een gemakkelijker spel, schakel het in voor een uitdagender spel. Daarnaast kun je de moeilijkheidsgraad bepalen door tegen verschillende AI-teams te spelen. Hoewel sommige spelers in het begin meer ruimte hebben, is de kaart goed uitgebalanceerd."
 
 #: ../../../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
@@ -526,7 +526,7 @@ msgstr "Aan de bergen ontbreekt het vlakke grond. Erger nog, het meeste is verti
 
 #: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:8
 msgid "Egyptian Mandala v1.2"
-msgstr ""
+msgstr "Egyptische Mandala v1.2"
 
 #: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:10
 msgid ""
@@ -534,7 +534,7 @@ msgid ""
 "island. According to your explorers, however, things will not go as easily "
 "as you were told earlier. You should expect fierce opposition. Expand your "
 "base and be the first to reach the ring of power."
-msgstr ""
+msgstr "Ze hadden nauwelijks tijd om zich voor te bereiden toen ze naar dit eiland vertrokken. Volgens uw ontdekkingsreizigers zal het echter niet zo gemakkelijk gaan als u eerder werd verteld. U kunt hevige tegenstand verwachten. Breid uw basis uit en wees de eerste die de ring van macht bereikt."
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
@@ -595,13 +595,13 @@ msgstr "Is dit een test door de Goden of een kwaad plan van iemand anders, dat j
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:8
 msgid "Forest Valley v2.0"
-msgstr ""
+msgstr "Bosvallei v2.0"
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:10
 msgid ""
 "A river valley surrounded by mountains with lots of resources except coal. "
 "Plenty of flat building space."
-msgstr ""
+msgstr "Een riviervallei omgeven door bergen met veel grondstoffen, behalve steenkool. Veel vlakke bouwgrond."
 
 #: ../../../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
@@ -922,7 +922,7 @@ msgstr "Er word gefluisterd dat de oude gevechtsmonniken die in het nog oudere m
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:8
 msgid "Tasmanian Black War"
-msgstr ""
+msgstr "Tasmaanse Zwarte Oorlog"
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:10
 msgid ""
@@ -935,7 +935,7 @@ msgid ""
 " have a hard time conquering Tasmania. During the historical Black War the "
 "ratio between Europeans and Aboriginals was around one against ten, but this"
 " time they’re armed to the teeth for a rematch."
-msgstr ""
+msgstr "Welkom, indringer! Je bent net als een Europese veroveraar uit het begin van de jaren 1800, toen ze het land Van Diemen koloniseerden – later bekend als Tasmanië. Tussen 1828 en 1832 vond er een oorlog plaats die de Zwarte Oorlog werd genoemd, waarin het Britse Rijk bijna de hele Aboriginalbevolking van het land Van Diemen uitroeide. – De kaart simuleert een verspreid Brits Rijk, maar zonder enige voordelen – het biedt zelfs een aantal grote nadelen en je zult waarschijnlijk moeite hebben om Tasmanië te veroveren. Tijdens de historische Black War was de verhouding tussen Europeanen en Aboriginals ongeveer één op tien, maar deze keer zijn ze tot de tanden bewapend voor een rematch."
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:11
 msgid ""
@@ -948,7 +948,7 @@ msgid ""
 "on this map. One of the computer players will likely also begin seafaring "
 "and competing for the best harbor places on the Tasmanian coast, so you’ve "
 "been warned!"
-msgstr ""
+msgstr "Deze kaart is bedoeld om door één speler te worden gespeeld vanaf de startlocatie van de blauwe speler als Empire. Kies Barbarians en Amazons als rivaliserende stammen. Als je een uitdaging wilt, zet ze dan allemaal aan dezelfde kant en schakel Diplomacy uit. Of je kunt spelen met elke speler tegen alle anderen, met als winstvoorwaarde Territoriale Tijd. Deze kaart is niet geschikt voor korte spellen en een spel duurt waarschijnlijk meer dan tien uur. De AI heeft grote capaciteiten op deze kaart. Een van de computerspelers zal waarschijnlijk ook gaan zeilen en strijden om de beste havenplaatsen aan de Tasmaanse kust, dus je bent gewaarschuwd!"
 
 #: ../../../../data/maps/The_Big_Lake.wmf/elemental:8
 msgid "The Big Lake"
@@ -985,7 +985,7 @@ msgstr "Sommigen zeggen dat ondoordringbare landen in het verre noorden zelfs de
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:8
 msgid "The Islands of the Eight Tribes"
-msgstr ""
+msgstr "De Eilanden van de Acht Stammen"
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:10
 msgid ""
@@ -993,7 +993,7 @@ msgid ""
 "of resources. Colonization and ferries can give you a big advantage, but "
 "this is not necessary to defeat other players. If you want to delay the "
 "fighting, you can turn off the last four players."
-msgstr ""
+msgstr "Deze kaart is ontworpen voor een lang spel! Acht stammen, drie eilanden en veel grondstoffen. Kolonisatie en veerboten kunnen je een groot voordeel opleveren, maar dit is niet noodzakelijk om andere spelers te verslaan. Als je de gevechten wilt uitstellen, kun je de laatste vier spelers uitschakelen."
 
 #: ../../../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"
