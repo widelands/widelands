@@ -590,6 +590,7 @@ const MethodType<LuaDescriptions> LuaDescriptions::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaDescriptions> LuaDescriptions::Properties[] = {
+   PROP_RO(LuaDescriptions, all_tribes_names),
    PROP_RO(LuaDescriptions, tribes_descriptions),
    PROP_RO(LuaDescriptions, immovable_descriptions),
    PROP_RO(LuaDescriptions, terrain_descriptions),
@@ -622,9 +623,31 @@ void LuaDescriptions::__unpersist(lua_State* /* L */) {
  */
 
 /* RST
+   .. attribute:: all_tribes_names
+
+      .. versionadded:: 1.3
+
+      Returns an array with the names of all registered tribes,
+      including tribes not currently loaded.
+
+      (RO) :class:`array` of :class:`string`
+*/
+int LuaDescriptions::get_all_tribes_names(lua_State* L) {
+	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
+	lua_newtable(L);
+	int i = 0;
+	for (const Widelands::TribeBasicInfo& tbi : descriptions.all_tribes()) {
+		lua_pushint32(L, ++i);
+		lua_pushstring(L, tbi.name.c_str());
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+/* RST
    .. attribute:: tribes_descriptions
 
-      Returns a list of all the tribes that are available.
+      Returns a list of all the tribes that are available and loaded.
 
       (RO) a list of :class:`~wl.map.TribeDescription` objects
 */
@@ -643,7 +666,7 @@ int LuaDescriptions::get_tribes_descriptions(lua_State* L) {
 /* RST
    .. attribute:: immovable_descriptions
 
-      Returns a list of all the immovables that are available.
+      Returns a list of all the immovables that are available and loaded.
 
       (RO) a list of :class:`~wl.map.ImmovableDescription` objects
 */
@@ -664,7 +687,8 @@ int LuaDescriptions::get_immovable_descriptions(lua_State* L) {
 
       .. versionadded:: 1.2
 
-      (RO) An :class:`array` of all :class:`~wl.map.BuildingDescription` objects that are available.
+      (RO) An :class:`array` of all :class:`~wl.map.BuildingDescription` objects
+      that are available and loaded.
 */
 int LuaDescriptions::get_building_descriptions(lua_State* L) {
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
@@ -680,7 +704,7 @@ int LuaDescriptions::get_building_descriptions(lua_State* L) {
 /* RST
    .. attribute:: terrain_descriptions
 
-      Returns a list of all the terrains that are available.
+      Returns a list of all the terrains that are available and loaded.
 
       (RO) a list of :class:`~wl.map.TerrainDescription` objects
 */
@@ -699,7 +723,7 @@ int LuaDescriptions::get_terrain_descriptions(lua_State* L) {
 /* RST
    .. attribute:: worker_descriptions
 
-      Returns a list of all the workers that are available.
+      Returns a list of all the workers that are available and loaded.
 
       (RO) a list of :class:`~wl.map.WorkerDescription` objects
 */

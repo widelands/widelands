@@ -131,6 +131,7 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_all_tribes_names(lua_State* L);
 	int get_tribes_descriptions(lua_State* L);
 	int get_immovable_descriptions(lua_State* L);
 	int get_building_descriptions(lua_State* L);
