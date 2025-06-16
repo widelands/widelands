@@ -289,16 +289,16 @@ void ShipFleet::split(Game& game) {
 		fleetshipyards.insert(interface->get_building());
 		remove_interface(game, interface);
 	}
-	molog(game.get_gametime(), "interfaces removed");
+	verb_log_dbg_time(game.get_gametime(), "interfaces removed");
 	for (auto& ship : fleetships) {
 		ship->set_destination(game, nullptr);
 		remove_ship(game, ship);
 	}
-	molog(game.get_gametime(), "ships removed");
+	verb_log_dbg_time(game.get_gametime(), "ships removed");
 	for (auto& port : fleetports) {
 		remove_port(game, port);
 	}
-	molog(game.get_gametime(), "ports removed");
+	verb_log_dbg_time(game.get_gametime(), "ports removed");
 	for (auto& port : fleetports) {
 		if (port->expedition_started()) {
 			port->cancel_expedition(game);
@@ -308,15 +308,15 @@ void ShipFleet::split(Game& game) {
 			port->init_fleet(game);
 		}
 	}
-	molog(game.get_gametime(), "ports added");
+	verb_log_dbg_time(game.get_gametime(), "ports added");
 	for (auto& ship : fleetships) {
 		ship->init_fleet(game);
 	}
-	molog(game.get_gametime(), "ships added");
+	verb_log_dbg_time(game.get_gametime(), "ships added");
 	for (const auto& yard : fleetshipyards) {
 		yard->init_yard_interfaces(game);
 	}
-	molog(game.get_gametime(), "yardinterfaces added");
+	verb_log_dbg_time(game.get_gametime(), "yardinterfaces added");
 }
 
 /**
