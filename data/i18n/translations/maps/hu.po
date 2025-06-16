@@ -358,7 +358,7 @@ msgstr "Ebben az oktatójátékban megtudod, milyen lehetőségeket kínál a Wi
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"
-msgstr ""
+msgstr "Élethű Európa 1.2"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:10
 msgid ""
@@ -370,22 +370,22 @@ msgid ""
 "as practically possible in Widelands. – EASY: Ottoman Empire, Sweden, "
 "Russian Empire, Carthage – MEDIUM: French Empire, British Empire, Spain, "
 "German Empire, Roman Empire – HARD: Egypt, Poland, Greece"
-msgstr ""
+msgstr "Figyelem! Ez a térkép fejlesztés alatt áll. Bár sok szempontból jobb, mint a régi Európa 1.2 volt, aminek a helyébe lép, még tartalmazhat hibákat. Ezen túl pedig ez egy nagyon nagy térkép, az általában ajánlottnál több játékoshellyel, így nagyon erős számítógépeket igényel minden játékosnál. — Egy térkép történelmi háborúk újrajátszásához. Ez az Európa-térkép igyekszik annyira élethű lenni, amennyire csak lehet a Widelandsben. – KÖNNYŰ: Oszmán birodalom, Svédország, Orosz birodalom, Karthágó – KÖZEPES: Francia birodalom, Brit birodalom, Spanyolország, Német birodalom, Római birodalom – NEHÉZ: Egyiptom, Lengyelország, Görögország"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:11
 msgid ""
 "The wide rivers are navigable to create a ”trade network”. All players have "
 "their own challenges, but are relatively balanced to be playable: – British "
 "Empire: create sustainable colonies – Russian Empire: Very large distances …"
-msgstr ""
+msgstr "A széles folyók hajózhatók, így alkalmasak kereskedelmi hálózatok kiépítésére. Minden játékosnak megvan a maga kihívása, de ezek többé-kevésbé kiegyenlítettek: Brit birodalom: alapíts fenntartható gyarmatokat, Orosz birodalom: nagy távolságok, stb."
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:8
 msgid "Amoebae"
-msgstr ""
+msgstr "Amőbák"
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:10
 msgid "You are an Amoeba, expand and conquer all other Amoebae …"
-msgstr ""
+msgstr "Amőba vagy. Terjeszkedj és győzz le minden más amőbát!"
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:11
 msgid ""
@@ -393,7 +393,7 @@ msgid ""
 " game, enable it for a more challenging game. Additionally you can define "
 "the difficulty by playing against different AI teams. Although some players "
 "have more space in the beginning, the map is well balanced."
-msgstr ""
+msgstr "Vigyázz, mert ellenségek vesznek körül! A játék nehézségét a csapat- és diplomácia beállításokkal tudod szabályozni. Bár egyes játékosoknak nagyobb tere van kezdetben, a térkép összességében kiegyenlített."
 
 #: ../../../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
@@ -531,7 +531,7 @@ msgstr "Sok lapos terület van a hegyeken. Sajnos a legtöbb függőleges. Haszn
 
 #: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:8
 msgid "Egyptian Mandala v1.2"
-msgstr ""
+msgstr "Egyiptomi mandala v1.2"
 
 #: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:10
 msgid ""
@@ -539,7 +539,7 @@ msgid ""
 "island. According to your explorers, however, things will not go as easily "
 "as you were told earlier. You should expect fierce opposition. Expand your "
 "base and be the first to reach the ring of power."
-msgstr ""
+msgstr "Nem sok idejük volt felkészülni, amikor útnak indultak erre a szigetre. A felderítőid szerint viszont nem lesz olyan egyszerű dolgod, mint amire számítottál. Kegyetlen ellenségekre számíthatsz. Erősödj meg, és legyél az első, aki eléri a hatalom gyűrűjét!"
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
@@ -600,13 +600,13 @@ msgstr "Ez az istenek próbája? Vagy egy gonosz terv, amelyben te és a törzse
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:8
 msgid "Forest Valley v2.0"
-msgstr ""
+msgstr "Erdős völgy v2.0"
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:10
 msgid ""
 "A river valley surrounded by mountains with lots of resources except coal. "
 "Plenty of flat building space."
-msgstr ""
+msgstr "Egy folyóvölgy az ásványokban gazdag, de szénben szegény hegyek között, sok sík területtel az építkezéshez."
 
 #: ../../../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
@@ -927,7 +927,7 @@ msgstr "Azt mondják, a vén mocsarakban élő öreg harcos remeték a kulcsai a
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:8
 msgid "Tasmanian Black War"
-msgstr ""
+msgstr "A tasmán fekete háború"
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:10
 msgid ""
@@ -940,7 +940,7 @@ msgid ""
 " have a hard time conquering Tasmania. During the historical Black War the "
 "ratio between Europeans and Aboriginals was around one against ten, but this"
 " time they’re armed to the teeth for a rematch."
-msgstr ""
+msgstr "Üdvözlet, betolakodó! Európai hódítót alakítasz a kora 1800-as évekből, amikor a Van Diemen-földet, a későbbi Tasmániát gyarmatosították. A Fekete háború 1828-tól 1832-ig tartott, amelyben a brit gyarmatosítók a Van Diemen-föld szinte teljes bennszülött lakosságát kiirtották. – A térkép a Brit birodalom távolságát utánozza, de az előnyei nélkül. Helyettük sok nehezítést tartalmaz, ezért valószínűleg nem lesz könnyű dolgod. A valódi Fekete háborúban az európaiak és az őslakosok aránya nagyjából egy a tízhez volt, de ezúttal állig fel vannak fegyverezve a bosszúhoz."
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:11
 msgid ""
@@ -953,7 +953,7 @@ msgid ""
 "on this map. One of the computer players will likely also begin seafaring "
 "and competing for the best harbor places on the Tasmanian coast, so you’ve "
 "been warned!"
-msgstr ""
+msgstr "A térkép elsősorban egyszemélyes játékhoz készült a kék kezdőpontról a birodalommal. A számítógépes játékosoknak barbárokat és amazonokat állíts be! Az igazán nehéz játékhoz tedd mindhármat egy csapatba, és kapcsold ki a diplomáciát! De játszhatsz mindenki mindenki ellen is „Földesúr (időkorláttal)” játékmódban. A térkép nem alkalmas gyors játszmákra, egy játék jellemzően tíz óránál is tovább tart rajta. A számítógépes játékosok jól teljesítenek ezen a térképen. Egyikük valószínűleg hajózni is elkezd, így versenyezned kell vele a tasmán partok legjobb kikötőiért. Mi szóltunk!"
 
 #: ../../../../data/maps/The_Big_Lake.wmf/elemental:8
 msgid "The Big Lake"
@@ -990,7 +990,7 @@ msgstr "Azt mondják, a távoli északra vezető áthatolhatatlan vidék elijesz
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:8
 msgid "The Islands of the Eight Tribes"
-msgstr ""
+msgstr "A nyolc törzs szigetei"
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:10
 msgid ""
@@ -998,7 +998,7 @@ msgid ""
 "of resources. Colonization and ferries can give you a big advantage, but "
 "this is not necessary to defeat other players. If you want to delay the "
 "fighting, you can turn off the last four players."
-msgstr ""
+msgstr "Ez a térkép hosszú játékokhoz készült! Nyolc törzs, három sziget, sok nyersanyag. A felfedező hajók és a kompok sokat segíthetnek, de akár nélkülük is le tudod győzni az összes többi játékost. Ha csak később szeretnél harcolni, akkor kapcsold ki az utolsó négy játékost!"
 
 #: ../../../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"
