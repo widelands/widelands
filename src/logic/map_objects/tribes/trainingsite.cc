@@ -476,7 +476,8 @@ Soldier* TrainingSite::pick_another_soldier(const TrainingAttribute attr, const 
 
 	Soldier* best_soldier = nullptr;
 	unsigned best_level = (build_heroes_ == SoldierPreference::kRookies) ?
-                          soldiers_.front()->descr().get_max_total_level() : 0;
+	                         soldiers_.front()->descr().get_max_total_level() :
+	                         0;
 	unsigned current_level;
 
 	for (Soldier* soldier : soldiers_) {
@@ -558,9 +559,9 @@ void TrainingSite::update_soldier_request(const bool needs_update_statuses) {
 			update_upgrade_statuses(false);
 		}
 
-		soldier_request_ = new SoldierRequest(
-		   *this, owner().tribe().soldier(), TrainingSite::request_soldier_callback, wwWORKER,
-		   build_heroes_);
+		soldier_request_ =
+		   new SoldierRequest(*this, owner().tribe().soldier(),
+		                      TrainingSite::request_soldier_callback, wwWORKER, build_heroes_);
 
 		RequireOr r;
 
@@ -912,7 +913,8 @@ void TrainingSite::update_upgrade_statuses(const bool select_next_step) {
 		selected_soldier_ = nullptr;
 	}
 	unsigned best_total_level = (build_heroes_ == SoldierPreference::kRookies) ?
-	                               soldiers_.front()->descr().get_max_total_level() : 0;
+	                               soldiers_.front()->descr().get_max_total_level() :
+	                               0;
 
 	for (Soldier* soldier : soldiers_) {
 		Upgrade::Status best_status = Upgrade::Status::kDisabled;
