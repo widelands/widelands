@@ -155,6 +155,7 @@ public:
 	void remove_worker(Worker&) override;
 	bool is_present(Worker& worker) const override;
 
+	// TODO(tothxa): These are never used, the variable is always false.
 	bool get_build_heroes() const {
 		return build_heroes_;
 	}
@@ -162,6 +163,10 @@ public:
 		build_heroes_ = b_heroes;
 	}
 	void switch_heroes();
+
+	bool get_requesting_weak_trainees() const {
+		return requesting_weak_trainees_;
+	}
 
 	void set_economy(Economy* e, WareWorker type) override;
 
@@ -214,7 +219,7 @@ private:
 
 	SoldierControl soldier_control_;
 	/// Open requests for soldiers. The soldiers can be under way or unavailable
-	Request* soldier_request_{nullptr};
+	SoldierRequest* soldier_request_{nullptr};
 
 	/** The soldiers currently at the training site*/
 	std::vector<Soldier*> soldiers_;
