@@ -84,10 +84,12 @@ lunit:run()
 
 include "scripting/coroutine.lua"
 if wl.editor then
+   print("(quit)")
    wl.ui.MapView():close()
 else
    run(function()
       sleep(1000)
+      print("(quit)")
       wl.ui.MapView():close()
    end)
 end

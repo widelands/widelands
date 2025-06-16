@@ -1,5 +1,6 @@
 if player1 then -- was loaded before
    -- avoid running tests twice, which happens in editor
+   print("(quit again)")
    wl.ui.MapView():close() -- was done by init.lua, but must be repeated
    return
 end

@@ -2,6 +2,7 @@
 
 if editor_init_has_run then -- was loaded before
    -- avoid reporting twice (for cleanness), which happens in editor
+   print("(quit again)")
    wl.ui.MapView():close() -- must be repeated
    return
 end
