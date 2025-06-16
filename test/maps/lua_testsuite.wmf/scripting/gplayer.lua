@@ -11,6 +11,7 @@ end
 function player_tests:test_basic_properties()
    -- winner/looser
    assert_equal(false, player1.defeated, "defeated")
+   -- in case defeated is true, check if the head quarter was removed by a test before
    assert_equal(false, player1.resigned, "resigned")
    assert_equal(255, player1.end_result, "end result")
    -- other
