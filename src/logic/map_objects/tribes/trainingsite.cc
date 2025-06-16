@@ -466,6 +466,7 @@ Soldier* TrainingSite::pick_another_soldier(const TrainingAttribute attr, const 
 
 	auto upgrade_it = upgrades_.find(upgrade_key(attr, level));
 	if (upgrade_it == upgrades_.end()) {
+		// TODO(tothxa): throw exception after v1.4
 		// May happen after loading old savegame
 		return nullptr;
 		// throw wexception("Invalid use of pick_soldier(): %s cannot train attribute %s at level %u",
@@ -474,14 +475,17 @@ Soldier* TrainingSite::pick_another_soldier(const TrainingAttribute attr, const 
 	}
 
 	Soldier* best_soldier = nullptr;
-	unsigned best_level = build_heroes_ ? 0 : soldiers_.front()->descr().get_max_total_level();
+	unsigned best_level = (build_heroes_ == SoldierPreference::kRookies) ?
+                          soldiers_.front()->descr().get_max_total_level() : 0;
 	unsigned current_level;
 
 	for (Soldier* soldier : soldiers_) {
 		if (soldier->get_level(attr) != level) {
 			continue;
 		}
-		// TODO(tothxa): if (build_heroes_ == kAny) { return soldier }
+		if (build_heroes_ == SoldierPreference::kAny) {
+			return soldier;
+		}
 		current_level = soldier->get_total_level();
 		if (compare_levels(best_level, current_level)) {
 			best_soldier = soldier;
@@ -493,8 +497,16 @@ Soldier* TrainingSite::pick_another_soldier(const TrainingAttribute attr, const 
 }
 
 inline bool TrainingSite::compare_levels(const unsigned first, const unsigned second) const {
-	// TODO(tothxa): if (build_heroes_ == kAny) { return false }
-	return build_heroes_ ? (second > first) : (second < first);
+	switch (build_heroes_) {
+	case SoldierPreference::kAny:
+		return false;
+	case SoldierPreference::kHeroes:
+		return (second > first);
+	case SoldierPreference::kRookies:
+		return (second < first);
+	default:
+		NEVER_HERE();
+	}
 }
 
 /**
@@ -548,7 +560,7 @@ void TrainingSite::update_soldier_request(const bool needs_update_statuses) {
 
 		soldier_request_ = new SoldierRequest(
 		   *this, owner().tribe().soldier(), TrainingSite::request_soldier_callback, wwWORKER,
-		   build_heroes_ ? SoldierPreference::kHeroes : SoldierPreference::kRookies);
+		   build_heroes_);
 
 		RequireOr r;
 
@@ -744,13 +756,17 @@ void TrainingSite::find_and_start_next_program(Game& game) {
 		return;
 	}
 
-	// TODO(tothxa): When build_heroes_ != kAny (add assert)
-	if (Soldier* s = selected_soldier_.get(game); s != nullptr) {
+	if (build_heroes_ != SoldierPreference::kAny) {
+		// update_upgrade_statuses() picked the soldier and the training step for us,
+		// unless there are no soldiers for the possible training steps
+		if (selected_soldier_.get(game) == nullptr) {
+			++failures_count_;
+			program_start(game, "sleep");
+		}
+		assert(current_upgrade_ != upgrades_.end());
 		program_start(game, current_upgrade_->second.program_name);
 		return;
 	}
-
-	// TODO(tothxa): The rest is for build_heroes_ == kAny
 
 	// We know there are wares for at least one upgrade, and we know there is at least one
 	// soldier, but we don't know if they actually match. We also need wrap-around.
@@ -895,7 +911,8 @@ void TrainingSite::update_upgrade_statuses(const bool select_next_step) {
 	if (select_next_step) {
 		selected_soldier_ = nullptr;
 	}
-	unsigned best_total_level = build_heroes_ ? 0 : soldiers_.front()->descr().get_max_total_level();
+	unsigned best_total_level = (build_heroes_ == SoldierPreference::kRookies) ?
+	                               soldiers_.front()->descr().get_max_total_level() : 0;
 
 	for (Soldier* soldier : soldiers_) {
 		Upgrade::Status best_status = Upgrade::Status::kDisabled;
@@ -919,7 +936,7 @@ void TrainingSite::update_upgrade_statuses(const bool select_next_step) {
 
 		switch (best_status) {
 		case Upgrade::Status::kCanStart:
-			if (select_next_step) {  // TODO(tothxa): && preference != kAny
+			if (select_next_step && build_heroes_ != SoldierPreference::kAny) {
 				const unsigned this_total_level = soldier->get_total_level();
 				if (compare_levels(best_total_level, this_total_level) ||
 				    selected_soldier_ == nullptr) {

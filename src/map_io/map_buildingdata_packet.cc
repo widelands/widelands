@@ -1099,12 +1099,10 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 			}
 
 			trainingsite.capacity_ = fr.unsigned_8();
-			trainingsite.build_heroes_ = (fr.unsigned_8() != 0u);
-
+			trainingsite.build_heroes_ = static_cast<Widelands::SoldierPreference>(fr.unsigned_8());
 			if (trainingsite.soldier_request_ != nullptr) {
-				trainingsite.soldier_request_->set_preference(build_heroes_ ?
-				                                                 SoldierPreference::kHeroes :
-				                                                 SoldierPreference::kRookies);
+				trainingsite.soldier_request_->set_preference(trainingsite.build_heroes_);
+			}
 
 			if (packet_version > 7) {
 				uint32_t soldier_serial = fr.unsigned_32();

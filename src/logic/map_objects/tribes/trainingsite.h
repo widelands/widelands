@@ -179,11 +179,10 @@ public:
 	bool is_present(Worker& worker) const override;
 
 	// TODO(tothxa): implement controlling by UI
-	//               also make it SoldierPreference instead of bool
-	bool get_build_heroes() const {
+	SoldierPreference get_build_heroes() const {
 		return build_heroes_;
 	}
-	void set_build_heroes(bool b_heroes) {
+	void set_build_heroes(SoldierPreference b_heroes) {
 		build_heroes_ = b_heroes;
 	}
 
@@ -269,9 +268,10 @@ private:
 	 * available */
 	Quantity capacity_;
 
-	/** True, \b request and upgrade already experienced soldiers first, when possible
-	 * False, \b request and upgrade inexperienced soldiers first, when possible */
-	bool build_heroes_{true};
+	/** kHeroes, \b request and upgrade already experienced soldiers first, when possible
+	 *  kRookies, \b request and upgrade inexperienced soldiers first, when possible
+	 *  kAny, \b request and upgrade first found suitable soldier */
+	SoldierPreference build_heroes_{SoldierPreference::kHeroes};
 
 	std::map<TypeAndLevel, Upgrade> upgrades_;
 	std::map<TypeAndLevel, Upgrade>::iterator current_upgrade_;
