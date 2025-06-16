@@ -8,6 +8,12 @@ function player_tests:test_name_property()
    assert_equal("Awesome Atlantean", egbase.players[3].name)
 end
 
+function player_tests:test_winner_properties()
+   assert_equal(false, player1.defeated, "defeated")
+   assert_equal(false, player1.resigned, "resigned")
+   assert_equal(255, player1.end_result, "end result")
+end
+
 -- =========================
 -- Forbid & Allow buildings
 -- =========================

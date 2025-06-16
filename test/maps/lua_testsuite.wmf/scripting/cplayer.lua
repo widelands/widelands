@@ -22,10 +22,6 @@ function player_tests:test_number_property()
 end
 
 function player_tests:test_basic_properties()
-   assert_equal(false, player1.defeated, "defeated")
-   assert_equal(false, player1.resigned, "resigned")
-   print("checking p1.end_result")
-   assert_equal(255, player1.end_result, "end result")
    assert_not_nil(player1.color)
 end
 
