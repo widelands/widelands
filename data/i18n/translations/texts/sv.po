@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-03-01 03:04+0000\n"
+"POT-Creation-Date: 2025-06-12 03:24+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -210,13 +210,13 @@ msgid "Elders"
 msgstr "Åldermän"
 
 #: ../../../../data/txts/developers.lua:22
-#: ../../../../data/txts/developers.lua:417
+#: ../../../../data/txts/developers.lua:421
 msgid "Graphics"
 msgstr "Grafik"
 
 #: ../../../../data/txts/developers.lua:28
-#: ../../../../data/txts/developers.lua:361
-#: ../../../../data/txts/developers.lua:424
+#: ../../../../data/txts/developers.lua:365
+#: ../../../../data/txts/developers.lua:428
 msgid "Homepage"
 msgstr "Webbplats"
 
@@ -225,7 +225,7 @@ msgid "Scripting"
 msgstr "Skript"
 
 #: ../../../../data/txts/developers.lua:40
-#: ../../../../data/txts/developers.lua:432
+#: ../../../../data/txts/developers.lua:436
 msgid "Sound"
 msgstr "Ljud"
 
@@ -257,87 +257,87 @@ msgstr "Ljudeffekter"
 msgid "Maps and Missions"
 msgstr "Banor och uppdrag"
 
-#: ../../../../data/txts/developers.lua:258
+#: ../../../../data/txts/developers.lua:262
 msgid "Campaign Story"
 msgstr "Fälttågsberättelse"
 
-#: ../../../../data/txts/developers.lua:262
+#: ../../../../data/txts/developers.lua:266
 msgid "Barbarians"
 msgstr "Barbarerna"
 
-#: ../../../../data/txts/developers.lua:270
+#: ../../../../data/txts/developers.lua:274
 msgid "Empire"
 msgstr "Imperiet"
 
-#: ../../../../data/txts/developers.lua:277
+#: ../../../../data/txts/developers.lua:281
 msgid "Atlanteans"
 msgstr "Atlanterna"
 
-#: ../../../../data/txts/developers.lua:285
+#: ../../../../data/txts/developers.lua:289
 msgid "Frisians"
 msgstr "Friserna"
 
-#: ../../../../data/txts/developers.lua:293
+#: ../../../../data/txts/developers.lua:297
 msgid "Packagers"
 msgstr "Paketerare"
 
-#: ../../../../data/txts/developers.lua:297
+#: ../../../../data/txts/developers.lua:301
 msgid "Debian Linux"
 msgstr "Debian Linux"
 
-#: ../../../../data/txts/developers.lua:303
+#: ../../../../data/txts/developers.lua:307
 msgid "Fedora Linux"
 msgstr "Fedora Linux"
 
-#: ../../../../data/txts/developers.lua:311
+#: ../../../../data/txts/developers.lua:315
 msgid "Mandriva Linux"
 msgstr "Mandriva Linux"
 
-#: ../../../../data/txts/developers.lua:317
+#: ../../../../data/txts/developers.lua:321
 msgid "FreeBSD"
 msgstr "FreeBSD"
 
-#: ../../../../data/txts/developers.lua:323
+#: ../../../../data/txts/developers.lua:327
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: ../../../../data/txts/developers.lua:330
+#: ../../../../data/txts/developers.lua:334
 msgid "Mac OS X"
 msgstr "Mac OS X"
 
-#: ../../../../data/txts/developers.lua:342
+#: ../../../../data/txts/developers.lua:346
 msgid "Windows"
 msgstr "Windows"
 
-#: ../../../../data/txts/developers.lua:353
+#: ../../../../data/txts/developers.lua:357
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
-#: ../../../../data/txts/developers.lua:365
+#: ../../../../data/txts/developers.lua:369
 msgid "Homepage Coders"
 msgstr "Webbplatens kodare"
 
-#: ../../../../data/txts/developers.lua:376
+#: ../../../../data/txts/developers.lua:380
 msgid "Documentation, Help and Wiki"
 msgstr "Dokumentation, hjälp och uppslagsbok"
 
-#: ../../../../data/txts/developers.lua:394
+#: ../../../../data/txts/developers.lua:398
 msgid "Add-Ons"
 msgstr "Tillägg"
 
-#: ../../../../data/txts/developers.lua:413
+#: ../../../../data/txts/developers.lua:417
 msgid "Former Elders"
 msgstr "Tidigare åldermän"
 
-#: ../../../../data/txts/developers.lua:439
+#: ../../../../data/txts/developers.lua:443
 msgid "Translation"
 msgstr "Översättning"
 
-#: ../../../../data/txts/developers.lua:448
+#: ../../../../data/txts/developers.lua:452
 msgid "Other"
 msgstr "Övriga"
 
-#: ../../../../data/txts/developers.lua:456
+#: ../../../../data/txts/developers.lua:460
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr "och många många fler (tack för allting ni har gjort)"
 

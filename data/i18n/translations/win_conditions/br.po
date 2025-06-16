@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Anthony Guéchoum <a.guechoum@proton.me>, 2020
+# Anthony Guéchoum <a.guechoum@proton.me>, 2025
 # Irriep Nala Novram <per.morvan.bzh29@gmail.com>, 2016
 msgid ""
 msgstr ""
@@ -10,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
-"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2020\n"
+"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2025\n"
 "Language-Team: Breton (http://app.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,7 +49,7 @@ msgstr ""
 #. "New artifact"
 #: ../../../../data/scripting/win_conditions/artifacts.lua:82
 msgid "Artifact Found"
-msgstr "Daraozadoù Kavet"
+msgstr "Daraozad Kavet"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:83
 msgid "Your team found a new artifact."
@@ -56,12 +57,12 @@ msgstr "Un daraozad ouzhpenn zo bet kavet gant ho skipailh."
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:84
 msgid "You found a new artifact."
-msgstr ""
+msgstr "Kavet ho peus un daraozad nevez."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../../../data/scripting/win_conditions/artifacts.lua:88
 msgid "Artifact Lost"
-msgstr "Daraozadoù Kollet"
+msgstr "Daraozad kollet"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:89
 msgid "One of your team’s artifacts was stolen by an enemy."
@@ -94,21 +95,21 @@ msgstr ""
 msgid "%i artifact"
 msgid_plural "%i artifacts"
 msgstr[0] "%i daraozad"
-msgstr[1] "%i daraozadoù"
-msgstr[2] "%i daraozadoù"
-msgstr[3] "%i daraozadoù"
-msgstr[4] "%i daraozadoù"
+msgstr[1] "%i zaraozad"
+msgstr[2] "%i daraozad"
+msgstr[3] "%i  a zaraozadoù"
+msgstr[4] "%i daraozad"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
 #: ../../../../data/scripting/win_conditions/artifacts.lua:184
 msgid "%1$s owns %2$s."
-msgstr ""
+msgstr "%2$s a zo gant %1$s."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
 #: ../../../../data/scripting/win_conditions/artifacts.lua:197
 msgid "Team %1$i (%2$s) owns %3$s."
-msgstr ""
+msgstr "%3$s a zo gant skipailh %1$i (%2$s)."
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:17
 msgid "Collectors"
@@ -134,12 +135,12 @@ msgstr ""
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:28
 msgid "Points"
-msgstr ""
+msgstr "Poentoù"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:72
 #, lua-format
 msgid "Status for %s"
-msgstr ""
+msgstr "Statud evit %s"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
 #: ../../../../data/scripting/win_conditions/collectors.lua:84
@@ -342,7 +343,7 @@ msgstr ""
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:57
 msgid "You won"
-msgstr ""
+msgstr "Trec'h oc'h"
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:58
 msgid "You are the winner!"
