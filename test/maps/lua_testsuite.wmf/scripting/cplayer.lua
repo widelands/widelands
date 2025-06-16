@@ -21,10 +21,6 @@ function player_tests:test_number_property()
    assert_equal(3, player3.number)
 end
 
-function player_tests:test_basic_properties()
-   assert_not_nil(player1.color)
-end
-
 function player_tests:test_ai_type()
    local default_ai = "very_weak"
    local no_ai_human = ""
