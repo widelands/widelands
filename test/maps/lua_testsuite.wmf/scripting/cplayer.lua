@@ -21,6 +21,14 @@ function player_tests:test_number_property()
    assert_equal(3, player3.number)
 end
 
+function player_tests:test_basic_properties()
+   assert_equal(false, player1.defeated, "defeated")
+   assert_equal(false, player1.resigned, "resigned")
+   print("checking p1.end_result")
+   assert_equal(255, player1.end_result, "end result")
+   assert_not_nil(player1.color)
+end
+
 function player_tests:test_ai_type()
    local default_ai = "very_weak"
    local no_ai_human = ""
