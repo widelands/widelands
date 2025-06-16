@@ -246,8 +246,6 @@ std::vector<Soldier*> TrainingSite::SoldierControl::associated_soldiers() const 
 }
 
 void TrainingSite::SoldierControl::set_soldier_capacity(Quantity const capacity) {
-	assert(min_soldier_capacity() <= capacity);
-	assert(capacity <= max_soldier_capacity());
 	if (training_site_->capacity_ == capacity) {
 		return;  // Nothing to do
 	}
@@ -278,7 +276,7 @@ void TrainingSite::SoldierControl::set_soldier_capacity(Quantity const capacity)
 	}
 	*/
 
-	training_site_->capacity_ = capacity;
+	training_site_->capacity_ = std::min(capacity, max_soldier_capacity());
 	training_site_->update_soldier_request(true);
 }
 
@@ -548,8 +546,9 @@ void TrainingSite::update_soldier_request(const bool needs_update_statuses) {
 			update_upgrade_statuses(false);
 		}
 
-		soldier_request_ = new Request(
-		   *this, owner().tribe().soldier(), TrainingSite::request_soldier_callback, wwWORKER);
+		soldier_request_ = new SoldierRequest(
+		   *this, owner().tribe().soldier(), TrainingSite::request_soldier_callback, wwWORKER,
+		   build_heroes_ ? SoldierPreference::kHeroes : SoldierPreference::kRookies);
 
 		RequireOr r;
 

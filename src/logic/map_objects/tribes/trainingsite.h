@@ -252,7 +252,7 @@ private:
 	SoldierControl soldier_control_;
 
 	/// Open requests for soldiers. The soldiers can be under way or unavailable
-	Request* soldier_request_{nullptr};
+	SoldierRequest* soldier_request_{nullptr};
 
 	/** The soldiers currently at the training site*/
 	std::vector<Soldier*> soldiers_;
@@ -266,7 +266,7 @@ private:
 	 * Equal or less to maximum number of soldiers supported by a training site.
 	 * There is no guarantee there really are capacity_ soldiers in the
 	 * building - some of them might still be under way or even not yet
-	 * available*/
+	 * available */
 	Quantity capacity_;
 
 	/** True, \b request and upgrade already experienced soldiers first, when possible
