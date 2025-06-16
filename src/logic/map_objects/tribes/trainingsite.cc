@@ -763,6 +763,7 @@ void TrainingSite::find_and_start_next_program(Game& game) {
 		if (selected_soldier_.get(game) == nullptr) {
 			++failures_count_;
 			program_start(game, "sleep");
+			return;
 		}
 		assert(current_upgrade_ != upgrades_.end());
 		program_start(game, current_upgrade_->second.program_name);
