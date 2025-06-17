@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  */
 
 #include "ui_basic/scrollbar.h"
+
+#include <algorithm>
 
 #include <SDL_mouse.h>
 #include <SDL_timer.h>
@@ -141,7 +143,7 @@ Scrollbar::Area Scrollbar::get_area_for_point(int32_t x, int32_t y) {
 	int32_t extent = 0;
 
 	// Out of panel
-	if (x < 0 || x >= static_cast<int32_t>(get_w()) || y < 0 || y >= static_cast<int32_t>(get_h())) {
+	if (x < 0 || x >= get_w() || y < 0 || y >= get_h()) {
 		return Area::None;
 	}
 
@@ -244,6 +246,8 @@ void Scrollbar::action(Area const area) {
 	case Area::Knob:
 	case Area::None:
 		return;
+	default:
+		NEVER_HERE();
 	}
 
 	pos = static_cast<int32_t>(pos_) + diff;
@@ -262,15 +266,15 @@ void Scrollbar::draw_button(RenderTarget& dst, Area area, const Recti& r) {
 	}
 
 	if (pic != nullptr) {
-		double image_scale = std::min(1., std::min(static_cast<double>(r.w - 4) / pic->width(),
-		                                           static_cast<double>(r.h - 4) / pic->height()));
+		double image_scale = std::min({1., static_cast<double>(r.w - 4) / pic->width(),
+		                               static_cast<double>(r.h - 4) / pic->height()});
 		int blit_width = image_scale * pic->width();
 		int blit_height = image_scale * pic->height();
 
 		dst.blitrect_scale(
 		   Rectf(r.origin() + Vector2i((r.w - blit_width) / 2, (r.h - blit_height) / 2), blit_width,
 		         blit_height),
-		   pic, Recti(0, 0, pic->width(), pic->height()), 1., BlendMode::UseAlpha);
+		   pic, pic->rect(), 1., BlendMode::UseAlpha);
 	}
 
 	// Draw border

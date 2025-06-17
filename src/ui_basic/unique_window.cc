@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,7 +54,7 @@ void UniqueWindow::Registry::destroy() const {
 /**
  * Either destroys or creates the window.
  */
-void UniqueWindow::Registry::toggle() {
+void UniqueWindow::Registry::toggle() const {
 	if (window != nullptr) {
 		// There is already a window. If it is minimal, restore it.
 		if (window->is_minimal()) {
@@ -63,12 +63,24 @@ void UniqueWindow::Registry::toggle() {
 		} else {
 			window->save_position();
 			window->die();
-			closed();
-			window = nullptr;
 		}
 	} else {
 		open_window();
 	}
+}
+
+/**
+ * Does the window exist? (may be open or minimal)
+ */
+bool UniqueWindow::Registry::exists() const {
+	return window != nullptr;
+}
+
+/**
+ * Is the window open? (not minimal)
+ */
+bool UniqueWindow::Registry::is_open() const {
+	return window != nullptr && !window->is_minimal();
 }
 
 /**

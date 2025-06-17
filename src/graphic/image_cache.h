@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,6 +63,8 @@ public:
 	void
 	fill_with_texture_atlases(std::vector<std::unique_ptr<Texture>> texture_atlases,
 	                          std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas);
+
+	uint8_t get_mipmap_bitset(const std::string& hash);
 
 private:
 	std::vector<std::unique_ptr<Texture>> texture_atlases_;

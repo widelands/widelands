@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,14 +57,12 @@ protected:
 	void fill_table();
 
 private:
-	bool compare_players(uint32_t, uint32_t);
-	bool compare_mapnames(uint32_t, uint32_t);
-	bool compare_size(uint32_t, uint32_t);
-
 	LaunchMPG* parent_screen_;
 
 	/// Updates buttons and text labels and returns whether a table entry is selected.
 	bool set_has_selection();
+	void navigate_directory(const std::vector<std::string>& filenames,
+	                        const std::string& localized_name);
 	UI::Checkbox* add_tag_checkbox(UI::Box* box, const std::string& tag);
 	void tagbox_changed(int32_t, bool);
 	void clear_filter();
@@ -100,8 +98,6 @@ private:
 
 	std::vector<std::string> tags_ordered_;
 	std::set<uint32_t> req_tags_;
-
-	std::vector<MapData> maps_data_;
 
 	bool update_map_details_{false};
 };

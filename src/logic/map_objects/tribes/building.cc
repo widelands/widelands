@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +38,7 @@
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
@@ -100,37 +101,8 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 
 	// Parse build options
 	if (table.has_key("enhancement")) {
-		// TODO(GunChleoc): Compatibility code, remove "if" section after v1.0.
-		// The "else" branch with get_table is the current code.
-		if (table.get_datatype("enhancement") == LuaTable::DataType::kString) {
-			const std::string enh = table.get_string("enhancement");
-			log_warn("Deprecated enhancement code found in building '%s'", name().c_str());
-
-			if (enh == name()) {
-				throw wexception("enhancement to same type");
-			}
-			DescriptionIndex const en_i = descriptions.load_building(enh);
-			if (descriptions.building_exists(en_i)) {
-				enhancement_ = en_i;
-
-				//  Merge the enhancements workarea info into this building's
-				//  workarea info.
-				const BuildingDescr* tmp_enhancement = descriptions.get_building_descr(en_i);
-				for (const auto& area : tmp_enhancement->workarea_info_) {
-					std::set<std::string>& strs = workarea_info_[area.first];
-					for (const std::string& str : area.second) {
-						strs.insert(str);
-					}
-				}
-			} else {
-				throw GameDataError(
-				   "\"%s\" has not been defined as a building type (wrong declaration order?)",
-				   enh.c_str());
-			}
-		} else {
-			std::unique_ptr<LuaTable> enhancement_table = table.get_table("enhancement");
-			set_enhancement(descriptions, *enhancement_table);
-		}
+		std::unique_ptr<LuaTable> enhancement_table = table.get_table("enhancement");
+		set_enhancement(descriptions, *enhancement_table);
 	}
 
 	// We define a building as buildable if it has a "buildcost" table.
@@ -146,19 +118,6 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			   "The building '%s' has a \"buildcost\" but no \"return_on_dismantle\"", name().c_str());
 		}
 		buildcost_ = Buildcost(table.get_table("buildcost"), descriptions);
-	}
-
-	if (table.has_key("enhancement_cost")) {
-		// TODO(GunChleoc): Compatibility code, remove after v1.0
-		log_warn("Deprecated enhancement_cost code found in building '%s'", name().c_str());
-		if (!table.has_key("return_on_dismantle_on_enhanced")) {
-			throw GameDataError("The enhanced building '%s' has an \"enhancement_cost\" but no "
-			                    "\"return_on_dismantle_on_enhanced\"",
-			                    name().c_str());
-		}
-		set_enhancement_cost(
-		   Buildcost(table.get_table("enhancement_cost"), descriptions),
-		   Buildcost(table.get_table("return_on_dismantle_on_enhanced"), descriptions));
 	}
 
 	needs_seafaring_ = false;
@@ -258,7 +217,7 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 	if (immovable != INVALID_INDEX) {
 		// Remember that we're building on top of an immovable so we can put it back if the building
 		// gets removed
-		b.old_buildings_.push_back(std::make_pair(immovable, false));
+		b.old_buildings_.emplace_back(immovable, false);
 	}
 	for (const auto& pair : former_buildings) {
 		b.old_buildings_.push_back(pair);
@@ -273,9 +232,9 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 
 bool BuildingDescr::suitability(const Map& /* map */, const FCoords& fc) const {
 	return ((mine_ ? fc.field->nodecaps() & Widelands::BUILDCAPS_MINE :
-                    static_cast<int>(
+	                 static_cast<int>(
 	                    size_ <= ((built_over_immovable_ == INVALID_INDEX ? fc.field->nodecaps() :
-                                                                           fc.field->maxcaps()) &
+	                                                                        fc.field->maxcaps()) &
 	                              Widelands::BUILDCAPS_SIZEMASK))) != 0) &&
 	       (built_over_immovable_ == INVALID_INDEX ||
 	        ((fc.field->get_immovable() != nullptr) &&
@@ -402,6 +361,9 @@ bool Building::get_passable() const {
 }
 
 Flag& Building::base_flag() {
+	return *flag_;
+}
+const Flag& Building::base_flag() const {
 	return *flag_;
 }
 
@@ -587,28 +549,69 @@ std::string Building::info_string(const InfoStringFormat& format) {
 	std::string result;
 	switch (format) {
 	case InfoStringFormat::kCensus:
-		if (upcast(ConstructionSite const, constructionsite, this)) {
+		switch (descr().type()) {
+		case MapObjectType::CONSTRUCTIONSITE: {
+			upcast(ConstructionSite const, constructionsite, this);
 			result = constructionsite->building().descname();
-		} else {
+		} break;
+
+		case MapObjectType::WAREHOUSE: {
+			upcast(Warehouse const, warehouse, this);
+			result = warehouse->warehouse_census_string();
+		} break;
+
+		case MapObjectType::MARKET: {
+			upcast(Market const, market, this);
+			result = market->market_census_string();
+		} break;
+
+		default:
 			result = descr().descname();
+			break;
 		}
+
 		break;
+
 	case InfoStringFormat::kStatistics:
 		result = update_and_get_statistics_string();
 		break;
+
 	case InfoStringFormat::kTooltip:
 		if (upcast(ProductionSite const, productionsite, this)) {
 			result = productionsite->production_result();
 		}
 		break;
+
+	default:
+		NEVER_HERE();
 	}
+
 	return result;
+}
+
+std::string Building::named_building_census_string(const std::string& icon_fmt,
+                                                   std::string name) const {
+	if (name.empty()) {
+		name = descr().descname();
+		// See explanation in set_warehouse_name().
+		// Needed because of e.g. Temple of Vesta in emp04
+		replace_all(name, " ", " ");
+	}
+	return format(icon_fmt, richtext_escape(name));
 }
 
 InputQueue& Building::inputqueue(DescriptionIndex const wi,
                                  WareWorker const /* type */,
-                                 const Request* /* req */) {
+                                 const Request* /* req */,
+                                 uint32_t /* disambiguator_id */) {
 	throw wexception("%s (%u) has no InputQueue for %u", descr().name().c_str(), serial(), wi);
+}
+
+bool Building::can_change_max_fill(DescriptionIndex /* di */,
+                                   WareWorker /* ww */,
+                                   const Request* /* r */,
+                                   uint32_t /* disambiguator_id */) {
+	return true;
 }
 
 /*
@@ -654,7 +657,7 @@ bool Building::leave_check_and_wait(Game& game, Worker& w) {
 		schedule_act(game, leave_time_ - time);
 	}
 
-	leave_queue_.push_back(&w);
+	leave_queue_.emplace_back(&w);
 	return false;
 }
 
@@ -743,7 +746,7 @@ void Building::draw(const Time& gametime,
 			                    &get_owner()->get_playercolor());
 		} else {
 			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(), t,
-			                    nullptr, kBuildingSilhouetteOpacity);
+			                    nullptr, kImmovableSilhouetteOpacity);
 		}
 	}
 
@@ -751,7 +754,7 @@ void Building::draw(const Time& gametime,
 		dst->blit_animation(point_on_dst, coords, scale, anim_, t, &get_owner()->get_playercolor());
 	} else {
 		dst->blit_animation(
-		   point_on_dst, coords, scale, anim_, t, nullptr, kBuildingSilhouetteOpacity);
+		   point_on_dst, coords, scale, anim_, t, nullptr, kImmovableSilhouetteOpacity);
 	}
 
 	//  door animation?
@@ -770,16 +773,21 @@ void Building::draw_info(const InfoToDraw info_to_draw,
                          const float scale,
                          RenderTarget* dst) {
 	const std::string statistics_string = (info_to_draw & InfoToDraw::kStatistics) != 0 ?
-                                            info_string(InfoStringFormat::kStatistics) :
-                                            "";
+	                                         info_string(InfoStringFormat::kStatistics) :
+	                                         "";
 	do_draw_info(info_to_draw, info_string(InfoStringFormat::kCensus), statistics_string,
 	             point_on_dst, scale, dst);
 }
 
+uint32_t Building::get_priority_disambiguator_id(const Request* /*req*/) const {
+	return 0;
+}
+
 const WarePriority& Building::get_priority(const WareWorker type,
-                                           const DescriptionIndex ware_index) const {
+                                           const DescriptionIndex ware_index,
+                                           const uint32_t disambiguator_id) const {
 	if (type == wwWARE) {
-		const auto it = ware_priorities_.find(ware_index);
+		const auto it = ware_priorities_.find({ware_index, disambiguator_id});
 		if (it != ware_priorities_.end()) {
 			return it->second;
 		}
@@ -793,13 +801,15 @@ const WarePriority& Building::get_priority(const WareWorker type,
  */
 void Building::set_priority(const WareWorker type,
                             const DescriptionIndex ware_index,
-                            const WarePriority& new_priority) {
+                            const WarePriority& new_priority,
+                            const uint32_t disambiguator_id) {
 	if (type == wwWARE) {
 		// WarePriority is not default-constructible, so no [] access :(
-		if (ware_priorities_.count(ware_index) != 0u) {
-			ware_priorities_.at(ware_index) = new_priority;
+		std::pair<DescriptionIndex, uint32_t> key(ware_index, disambiguator_id);
+		if (ware_priorities_.count(key) != 0u) {
+			ware_priorities_.at(key) = new_priority;
 		} else {
-			ware_priorities_.emplace(ware_index, new_priority);
+			ware_priorities_.emplace(key, new_priority);
 		}
 	}
 }
@@ -815,9 +825,9 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 	      flag_->get_position().y);
 
 	molog(egbase.get_gametime(), "anim: %s\n", descr().get_animation_name(anim_).c_str());
-	molog(egbase.get_gametime(), "animstart: %i\n", animstart_.get());
+	molog(egbase.get_gametime(), "animstart: %u\n", animstart_.get());
 
-	molog(egbase.get_gametime(), "leave_time: %i\n", leave_time_.get());
+	molog(egbase.get_gametime(), "leave_time: %u\n", leave_time_.get());
 
 	molog(egbase.get_gametime(), "leave_queue.size(): %" PRIuS "\n", leave_queue_.size());
 	FORMAT_WARNINGS_OFF

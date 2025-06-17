@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,12 +28,20 @@
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/descriptions.h"
+#include "logic/map_objects/pinned_note.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/player.h"
 #include "scripting/factory.h"
 #include "scripting/globals.h"
-#include "scripting/lua_map.h"
+#include "scripting/map/lua_field.h"
+#include "scripting/map/lua_flag.h"
+#include "scripting/map/lua_map.h"
+#include "scripting/map/lua_resource_description.h"
+#include "scripting/map/lua_road.h"
+#include "scripting/map/lua_terrain_description.h"
+#include "scripting/map/lua_tribe_description.h"
 #include "ui_basic/progresswindow.h"
 
 namespace LuaBases {
@@ -622,11 +630,17 @@ PlayerBase
 
 const char LuaPlayerBase::className[] = "PlayerBase";
 const MethodType<LuaPlayerBase> LuaPlayerBase::Methods[] = {
-   METHOD(LuaPlayerBase, __eq),        METHOD(LuaPlayerBase, __tostring),
-   METHOD(LuaPlayerBase, conquer),     METHOD(LuaPlayerBase, get_wares),
-   METHOD(LuaPlayerBase, get_workers), METHOD(LuaPlayerBase, place_building),
-   METHOD(LuaPlayerBase, place_flag),  METHOD(LuaPlayerBase, place_road),
-   METHOD(LuaPlayerBase, place_ship),  {nullptr, nullptr},
+   METHOD(LuaPlayerBase, __eq),
+   METHOD(LuaPlayerBase, __tostring),
+   METHOD(LuaPlayerBase, conquer),
+   METHOD(LuaPlayerBase, get_wares),
+   METHOD(LuaPlayerBase, get_workers),
+   METHOD(LuaPlayerBase, place_building),
+   METHOD(LuaPlayerBase, place_flag),
+   METHOD(LuaPlayerBase, place_road),
+   METHOD(LuaPlayerBase, place_ship),
+   METHOD(LuaPlayerBase, place_pinned_note),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaPlayerBase> LuaPlayerBase::Properties[] = {
    PROP_RO(LuaPlayerBase, number),
@@ -945,8 +959,8 @@ int LuaPlayerBase::place_building(lua_State* L) {  // NOLINT - can not be made c
 		}
 		if (b == nullptr) {
 			const std::string tempname(force ? constructionsite ? "force constructionsite" :
-                                                               "force building" :
-                                            "place building");
+			                                                      "force building" :
+			                                   "place building");
 			report_error(L, "Couldn't %s '%s' at (%d, %d)!", tempname.c_str(), name.c_str(),
 			             c->coords().x, c->coords().y);
 		}
@@ -987,6 +1001,47 @@ int LuaPlayerBase::place_ship(lua_State* L) {  // NOLINT - can not be made const
 	Widelands::Bob& ship = egbase.create_ship(c->coords(), descr->name(), &player);
 
 	LuaMaps::upcasted_map_object_to_lua(L, &ship);
+
+	return 1;
+}
+
+/* RST
+   .. method:: place_pinned_note(field, text[, r, g, b])
+
+      .. versionadded:: 1.2
+
+      Place a pinned note on the map for this player.
+
+      :arg field: The field where the note should be placed.
+      :type field: :class:`~wl.map.Field`
+      :arg text: The text of the note.
+      :type text: :class:`string`
+      :arg r: The Red component of the note's color.
+      :type r: :class:`integer`
+      :arg g: The Green component of the note's color.
+      :type g: :class:`integer`
+      :arg b: The Blue component of the note's color.
+      :type b: :class:`integer`
+
+      :returns: The new :class:`~wl.map.PinnedNote` that was created.
+*/
+int LuaPlayerBase::place_pinned_note(lua_State* L) {  // NOLINT - can not be made const
+	if (lua_gettop(L) != 3 && lua_gettop(L) != 6) {
+		report_error(L, "Takes either 2 or 5 arguments");
+	}
+
+	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 2);
+
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Player& player = get(L, egbase);
+
+	Widelands::PinnedNote& note = Widelands::PinnedNote::create(
+	   egbase, player, c->coords(), luaL_checkstring(L, 3),
+	   lua_gettop(L) < 6 ?
+	      get(L, get_egbase(L)).get_playercolor() :
+	      RGBColor(luaL_checkuint32(L, 4), luaL_checkuint32(L, 5), luaL_checkuint32(L, 6)));
+
+	LuaMaps::upcasted_map_object_to_lua(L, &note);
 
 	return 1;
 }

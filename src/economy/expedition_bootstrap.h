@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,7 +71,10 @@ public:
 	[[nodiscard]] std::vector<InputQueue*> queues(bool all) const;
 
 	// Returns the matching input queue for the given index and type.
-	[[nodiscard]] InputQueue& inputqueue(DescriptionIndex index, WareWorker type, bool) const;
+	[[nodiscard]] InputQueue& inputqueue(DescriptionIndex index,
+	                                     WareWorker type,
+	                                     bool additional,
+	                                     uint32_t disambiguator_id) const;
 	[[nodiscard]] InputQueue* inputqueue(size_t additional_index) const;
 	[[nodiscard]] InputQueue& inputqueue(const Request&) const;
 

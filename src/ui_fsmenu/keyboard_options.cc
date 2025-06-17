@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2023 by the Widelands Development Team
+ * Copyright (C) 2020-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -244,7 +244,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	                  UI::Box& box, const KeyboardShortcut key) {
 		UI::Button* b = new UI::Button(&box, std::to_string(static_cast<int>(key)), 0, 0, 0, 0,
 		                               UI::ButtonStyle::kFsMenuMenu, generate_title(key));
-		all_keyboard_buttons.emplace(std::make_pair(key, b));
+		all_keyboard_buttons.emplace(key, b);
 		box.add(b, UI::Box::Resizing::kFullSize);
 		box.add_space(kPadding);
 		b->sigclicked.connect([this, b, key, generate_title]() {
@@ -279,7 +279,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	auto create_tab = [this, add_key](const std::string& title,
 	                                  const KeyboardShortcut shortcut_start,
 	                                  const KeyboardShortcut shortcut_end) {
-		assert(shortcut_start < shortcut_end);
+		assert(shortcut_start <= shortcut_end);
 		UI::Box* b = new UI::Box(
 		   &tabs_, UI::PanelStyle::kFsMenu, "shortcut_box", 0, 0, UI::Box::Vertical, 0, 0, kPadding);
 		b->set_force_scrolling(true);
@@ -301,6 +301,11 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 
 	const size_t fastplace_tab_index = tabs_.tabs().size();
 	create_tab(_("Fastplace"), KeyboardShortcut::kFastplace_Begin, KeyboardShortcut::kFastplace_End);
+
+	if (const KeyboardShortcut max_shortcut = get_highest_used_keyboard_shortcut();
+	    max_shortcut > KeyboardShortcut::k_End) {
+		create_tab(_("Add-Ons"), KeyboardShortcut::k_End + 1, max_shortcut);
+	}
 
 	tabs_.add("options_scroll", _("Mouse Scrolling"), &mousewheel_options_, "");
 

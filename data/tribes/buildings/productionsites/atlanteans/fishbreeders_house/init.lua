@@ -28,7 +28,7 @@ wl.Descriptions():new_productionsite_type {
    aihints = {
       needs_water = true,
       prohibited_till = 560,
-      forced_after = 890
+      forced_after = 890  -- outdated AI hint that should no longer be used in the future.
    },
 
    working_positions = {

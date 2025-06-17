@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,11 +18,11 @@
 
 #include "ui_fsmenu/login_box.h"
 
+#include "base/crypto.h"
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
 #include "network/internet_gaming.h"
 #include "network/internet_gaming_protocol.h"
-#include "third_party/sha1/sha1.h"
 #include "ui_basic/button.h"
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/main.h"

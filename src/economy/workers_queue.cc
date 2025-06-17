@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2023 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -163,8 +163,7 @@ void WorkersQueue::set_max_fill(Quantity q) {
 	// If requested, kick out workers
 	upcast(Game, game, &get_owner()->egbase());
 	while (workers_.size() > max_fill_) {
-		workers_.back()->reset_tasks(*game);
-		workers_.back()->start_task_leavebuilding(*game, true);
+		owner_.kickout_worker_from_queue(*game, *workers_.back());
 		workers_.pop_back();
 	}
 }
@@ -178,6 +177,17 @@ Worker* WorkersQueue::extract_worker() {
 	// Remove reference from list
 	workers_.erase(workers_.begin());
 	return w;
+}
+
+bool WorkersQueue::remove_if_present(Worker& worker) {
+	for (auto it = workers_.begin(); it != workers_.end(); ++it) {
+		if (*it == &worker) {
+			*it = workers_.back();
+			workers_.pop_back();
+			return true;
+		}
+	}
+	return false;
 }
 
 /**

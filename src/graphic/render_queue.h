@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -79,7 +79,7 @@ class RenderQueue {
 public:
 	enum Program {
 		kTerrainBase,
-		kTerrainDither,
+		kTerrainDitherOrHeightHeatMap,
 		kTerrainWorkarea,
 		kTerrainGrid,
 		kTerrainRoad,
@@ -123,6 +123,7 @@ public:
 		float scale = 1.f;
 		Rectf destination_rect = Rectf(0.f, 0.f, 0.f, 0.f);
 		const Widelands::Player* player = nullptr;
+		bool height_heat_map = false;
 	};
 
 	// The union of all possible program arguments represents an Item that is
@@ -171,6 +172,8 @@ public:
 
 	// Clear the render queue without drawing anything.
 	void clear();
+
+	void set_dither_mask(const std::string& filepath);
 
 private:
 	RenderQueue();

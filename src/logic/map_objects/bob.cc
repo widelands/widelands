@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -672,7 +672,7 @@ void Bob::movepath_update(Game& game, State& state) {
 			   game, Widelands::Area<Widelands::FCoords>(get_position(), 0), nullptr, FindBobShip());
 			assert(ships_count > 0);
 			if (ships_count > 1) {
-				molog(game.get_gametime(), "Pausing the ship because %d ships on the same spot\n",
+				molog(game.get_gametime(), "Pausing the ship because %u ships on the same spot\n",
 				      ships_count);
 				return start_task_idle(
 				   game, state.diranims.get_animation(dir), ((game.logic_rand() % 3) + 1) * 5000);
@@ -778,6 +778,9 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 	case IDLE:
 		start.field = nullptr;
 		break;
+
+	default:
+		NEVER_HERE();
 	}
 
 	if (start.field != nullptr) {
@@ -898,13 +901,19 @@ bool Bob::check_node_blocked(Game& game, const FCoords& field, bool /* commit */
  * This will update the owner's viewing area.
  */
 void Bob::set_owner(Player* const player) {
-	if ((owner_ != nullptr) && (position_.field != nullptr)) {
-		owner_.load()->unsee_area(Area<FCoords>(get_position(), descr().vision_range()));
+	Player* old_owner = owner_.load();
+
+	if (old_owner != nullptr && position_.field != nullptr) {
+		old_owner->unsee_area(Area<FCoords>(get_position(), descr().vision_range()));
 	}
+
 	owner_ = player;
-	if ((owner_ != nullptr) && (position_.field != nullptr)) {
-		owner_.load()->see_area(Area<FCoords>(get_position(), descr().vision_range()));
+
+	if (player != nullptr && position_.field != nullptr) {
+		player->see_area(Area<FCoords>(get_position(), descr().vision_range()));
 	}
+
+	owner_changed(old_owner, player);
 }
 
 /**
@@ -912,6 +921,8 @@ void Bob::set_owner(Player* const player) {
  *
  * Performs the necessary (un)linking in the \ref Field structures and
  * updates the owner's viewing area, if the bob has an owner.
+ *
+ * Overriding implementations must always call this function!
  */
 void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 	FCoords oldposition = position_;
@@ -960,16 +971,16 @@ void Bob::log_general_info(const EditorGameBase& egbase) const {
 	FORMAT_WARNINGS_OFF
 	molog(egbase.get_gametime(), "Owner: %p\n", owner_.load());
 	FORMAT_WARNINGS_ON
-	molog(egbase.get_gametime(), "Postition: (%i, %i)\n", position_.x, position_.y);
-	molog(egbase.get_gametime(), "ActID: %i\n", actid_);
+	molog(egbase.get_gametime(), "Position: (%i, %i)\n", position_.x, position_.y);
+	molog(egbase.get_gametime(), "ActID: %u\n", actid_);
 	molog(egbase.get_gametime(), "ActScheduled: %s\n", actscheduled_ ? "true" : "false");
 	molog(egbase.get_gametime(), "Animation: %s\n",
 	      anim_ != 0u ? descr().get_animation_name(anim_).c_str() : "\\<none\\>");
 
-	molog(egbase.get_gametime(), "AnimStart: %i\n", animstart_.get());
+	molog(egbase.get_gametime(), "AnimStart: %u\n", animstart_.get());
 	molog(egbase.get_gametime(), "WalkingDir: %i\n", walking_);
-	molog(egbase.get_gametime(), "WalkingStart: %i\n", walkstart_.get());
-	molog(egbase.get_gametime(), "WalkEnd: %i\n", walkend_.get());
+	molog(egbase.get_gametime(), "WalkingStart: %u\n", walkstart_.get());
+	molog(egbase.get_gametime(), "WalkEnd: %u\n", walkend_.get());
 
 	molog(egbase.get_gametime(), "Signal: %s\n", signal_.c_str());
 
@@ -992,7 +1003,7 @@ void Bob::log_general_info(const EditorGameBase& egbase) const {
 		molog(egbase.get_gametime(), "* coords: (%i, %i)\n", stack_[i].coords.x, stack_[i].coords.y);
 		molog(egbase.get_gametime(), "* diranims:");
 		for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-			molog(egbase.get_gametime(), " %d", stack_[i].diranims.get_animation(dir));
+			molog(egbase.get_gametime(), " %u", stack_[i].diranims.get_animation(dir));
 		}
 		FORMAT_WARNINGS_OFF
 		molog(egbase.get_gametime(), "\n* path: %p\n", stack_[i].path);
@@ -1216,7 +1227,7 @@ void Bob::save(EditorGameBase& eg, MapObjectSaver& mos, FileWrite& fw) {
 
 		write_coords_32(&fw, state.coords);
 
-		if (state.diranims) {
+		if (state.diranims.valid()) {
 			fw.unsigned_8(1);
 			for (int dir = 1; dir <= 6; ++dir) {
 				fw.c_string(descr().get_animation_name(state.diranims.get_animation(dir)).c_str());

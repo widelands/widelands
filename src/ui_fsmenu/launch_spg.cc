@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,7 +55,7 @@ LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
 	}
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 
-	update_win_conditions();
+	update_tags_and_win_conditions();
 	for (auto& pair : game_flag_checkboxes_) {
 		(this->*pair.second.second)();
 	}

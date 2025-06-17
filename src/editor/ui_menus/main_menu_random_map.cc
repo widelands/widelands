@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -253,7 +253,9 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 	set_size(inner_w, 50);  // Prevent assert failures
 
 	generator_.set_enabled(false);
-	generator_.add(_("Default"), nullptr, g_image_cache->get("images/logos/wl-ico-64.png"), true);
+	/** TRANSLATORS: Default Map Generator */
+	generator_.add(pgettext("map_generator", "Default"), nullptr,
+	               g_image_cache->get("images/logos/wl-ico-64.png"), true);
 	for (const auto& addon : AddOns::g_addons) {
 		if (addon.second && addon.first->category == AddOns::AddOnCategory::kMapGenerator) {
 			generator_.add(addon.first->descname(), addon.first, addon.first->icon, false);
@@ -279,7 +281,8 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 
 	// ---------- Worlds ----------
 
-	world_.add(_("Random"), Widelands::Map::kOldWorldNames.size(), nullptr, true);
+	/** TRANSLATORS: Random Climate */
+	world_.add(pgettext("climate", "Random"), Widelands::Map::kOldWorldNames.size(), nullptr, true);
 	for (size_t i = 0; i < Widelands::Map::kOldWorldNames.size(); ++i) {
 		world_.add(Widelands::Map::kOldWorldNames[i].descname(), i);
 	}
@@ -309,11 +312,14 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 
 	// Terrains Distribution
 
-	terrains_distribution_.add(_("Default"), TerrainDistribution::kDefault, nullptr, true);
+	terrains_distribution_.add(/** TRANSLATORS: Default Terrain Distribution */
+	                           pgettext("terrain", "Default"), TerrainDistribution::kDefault,
+	                           nullptr, true);
 	terrains_distribution_.add(_("Alpine"), TerrainDistribution::kAlpine);
 	terrains_distribution_.add(_("Atoll"), TerrainDistribution::kAtoll);
 	terrains_distribution_.add(_("Wasteland"), TerrainDistribution::kWasteland);
-	terrains_distribution_.add(_("Random"), TerrainDistribution::kRandom);
+	/** TRANSLATORS: Random Terrain Distribution */
+	terrains_distribution_.add(pgettext("terrain", "Random"), TerrainDistribution::kRandom);
 
 	select_terrains_distribution();
 	terrains_distribution_.selected.connect([this]() { select_terrains_distribution(); });
@@ -438,6 +444,9 @@ void MainMenuNewRandomMapPanel::button_clicked(MainMenuNewRandomMapPanel::Button
 		}
 		// Make sure that landmass is consistent
 		normalize_landmass(n);
+		break;
+	default:
+		NEVER_HERE();
 	}
 	nr_edit_box_changed();  // Update ID String
 }
@@ -614,7 +623,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	      << "ID = " << map_id_edit_.get_text() << "\n"
 	      << "Generator = "
 	      << (generator_.get_selected() == nullptr ? "default" :
-                                                    generator_.get_selected()->internal_name)
+	                                                 generator_.get_selected()->internal_name)
 	      << "\n";
 
 	map->create_empty_map(egbase, map_info.w, map_info.h, 0, _("No Name"),
@@ -626,7 +635,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	log_info("============== Generating Map ==============\n");
 	log_info("ID:            %s\n", map_id_edit_.get_text().c_str());
 	log_info("Random number: %u\n", map_info.mapNumber);
-	log_info("Dimensions:    %d x %d\n", map_info.w, map_info.h);
+	log_info("Dimensions:    %u x %u\n", map_info.w, map_info.h);
 	log_info("Players:       %d\n", map_info.numPlayers);
 	log_info("World:         %s\n", map_info.world_name.c_str());
 	switch (map_info.resource_amount) {
@@ -639,6 +648,8 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	case Widelands::UniqueRandomMapInfo::ResourceAmount::raHigh:
 		log_info("Resources:     high\n");
 		break;
+	default:
+		NEVER_HERE();
 	}
 	log_info("Land: %0.2f  Water: %0.2f  Wasteland: %0.2f\n", map_info.landRatio,
 	         map_info.waterRatio, map_info.wastelandRatio);
@@ -646,8 +657,8 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 		log_info("Using Island Mode\n");
 	}
 	log_info("Generator:     %s\n", generator_.get_selected() == nullptr ?
-                                      "default" :
-                                      generator_.get_selected()->internal_name.c_str());
+	                                   "default" :
+	                                   generator_.get_selected()->internal_name.c_str());
 	log_info("\n");
 
 	bool result;
@@ -690,19 +701,19 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 		     editor.*/
 		   _("Random Map"),
 		   result ?
-              /** TRANSLATORS: This is shown after a random map has been created in the editor. */
-              /** TRANSLATORS: You don't need to be literal with your translation, */
-              /** TRANSLATORS: as long as the user understands that he needs to check the player
-                positions.*/
-              _("The map has been generated. Please double-check the player starting positions to "
-              "make sure that your carriers won’t drown, or be stuck on an island or on top of a "
-              "mountain.") :
-              /** TRANSLATORS: This is shown after a random map has been created in the editor. */
-              /** TRANSLATORS: You don't need to be literal with your translation, as long as */
-              /** TRANSLATORS: the user understands that the map's quality is pretty poor.*/
-              _("The map generator could not produce a good-enough map with the provided settings. "
-              "This map will probably need extensive editing to be playable. Consider creating a "
-              "new map with different parameters."),
+		      /** TRANSLATORS: This is shown after a random map has been created in the editor. */
+		      /** TRANSLATORS: You don't need to be literal with your translation, */
+		      /** TRANSLATORS: as long as the user understands that he needs to check the player
+		        positions.*/
+		      _("The map has been generated. Please double-check the player starting positions to "
+		        "make sure that your carriers won’t drown, or be stuck on an island or on top of a "
+		        "mountain.") :
+		      /** TRANSLATORS: This is shown after a random map has been created in the editor. */
+		      /** TRANSLATORS: You don't need to be literal with your translation, as long as */
+		      /** TRANSLATORS: the user understands that the map's quality is pretty poor.*/
+		      _("The map generator could not produce a good-enough map with the provided settings. "
+		        "This map will probably need extensive editing to be playable. Consider creating a "
+		        "new map with different parameters."),
 		   UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
 	} else {

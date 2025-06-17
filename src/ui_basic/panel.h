@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 
 #include <atomic>
 #include <deque>
+#include <functional>
 #include <list>
 #include <memory>
 #include <set>
@@ -91,6 +92,10 @@ public:
 		pf_hide_all_overlays = 1 << 13,
 		// Other panels will snap to this one.
 		pf_snap_target = 1 << 14,
+		// Layouting hint that this panel is expected to grow to some very large sizes.
+		pf_unlimited_size = 1 << 15,
+		// Use the "wait" mouse cursor when this panel is active.
+		pf_unresponsive = 1 << 16,
 	};
 
 	/** The Z ordering of overlapping panels; highest value is always on top. */
@@ -371,6 +376,10 @@ public:
 		return tooltip_;
 	}
 
+	void set_hyperlink_action(std::function<void(std::string)> fn) {
+		hyperlink_action_ = fn;
+	}
+
 	virtual void die();
 	static void register_click();
 
@@ -398,6 +407,10 @@ public:
 	void find_all_children_at(int16_t x, int16_t y, std::vector<Panel*>& result) const;
 
 	[[nodiscard]] Panel& get_topmost_forefather();
+
+	[[nodiscard]] PanelStyle get_panel_style() const {
+		return panel_style_;
+	}
 
 	struct ModalGuard {
 		explicit ModalGuard(Panel& p);
@@ -451,6 +464,20 @@ public:
 		NEVER_HERE();
 	}
 
+	struct ContextMenuEntry {
+		std::string descname;
+		std::string tooltip;
+		std::string shortcut;
+		const Image* icon;
+		bool enable;
+		std::function<void()> callback;
+	};
+	void show_context_menu(Vector2i pos, const std::vector<ContextMenuEntry>& entries);
+
+	virtual bool show_default_context_menu(Vector2i /* pos */) {
+		return false;
+	}
+
 protected:
 	// This panel will never receive keypresses (do_key), instead
 	// textinput will be passed on (do_textinput).
@@ -496,6 +523,7 @@ protected:
 	}
 
 	[[nodiscard]] virtual Panel* get_open_dropdown();
+	[[nodiscard]] Panel* find_context_menu();
 
 	[[nodiscard]] virtual bool is_focus_toplevel() const;
 
@@ -513,6 +541,7 @@ protected:
 
 	const PanelStyle panel_style_;
 
+public:
 	/** Never call this function, except when you need Widelands to stay responsive
 	 *  during a costly operation and you can guarantee that it will not interfere
 	 *  with the "normal" graphics refreshing done periodically from `Panel::do_run`.
@@ -523,7 +552,6 @@ protected:
 	void do_redraw_now(bool handle_input = true,
 	                   const std::string& message_to_display = std::string());
 
-public:
 	virtual bool check_handles_mouse(int32_t /* x */, int32_t /* y */) {
 		return get_flag(pf_handle_mouse);
 	}
@@ -629,7 +657,11 @@ private:
 
 	static FxId click_fx_;
 
+	friend struct ContextMenu;
+	Panel* context_menu_{nullptr};
+
 	std::unique_ptr<Notifications::Subscriber<NoteHyperlink>> hyperlink_subscriber_;
+	std::function<void(std::string)> hyperlink_action_;
 
 	enum class LogicThreadState { kFree, kLocked, kEndingRequested, kEndingConfirmed };
 	std::atomic<LogicThreadState> logic_thread_locked_;

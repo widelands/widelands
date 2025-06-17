@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,8 +40,8 @@ int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::NodeAndT
 		Widelands::ResourceAmount amount = mr.location().field->get_resources_amount();
 		Widelands::ResourceAmount max_amount =
 		   args->current_resource != Widelands::kNoResource ?
-            descriptions.get_resource_descr(args->current_resource)->max_amount() :
-            0;
+		      descriptions.get_resource_descr(args->current_resource)->max_amount() :
+		      0;
 
 		amount += args->change_by;
 		if (amount > max_amount) {

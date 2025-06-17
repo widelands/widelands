@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,11 +36,17 @@ struct MapAuthorData {
 
 	void set_authors(const std::string& author_list) {
 		std::vector<std::string> authors;
+
 		{
 			i18n::Textdomain td("maps");
 			const std::string loc_author_list = _(author_list);
 			split(authors, loc_author_list, {','});
 		}
+
+		for (std::string& author : authors) {
+			trim(author);
+		}
+
 		names_ = i18n::localize_list(authors, i18n::ConcatenateWith::AMPERSAND);
 		number_ = authors.size();
 	}

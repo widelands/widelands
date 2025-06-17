@@ -34,13 +34,27 @@ wl.Descriptions():new_worker_type {
       harvest = {
          "findobject=attrib:tree radius:10",
          "walk=object",
-         "playsound=sound/woodcutting/woodcutting 255",
+         "playsound=sound/woodcutting/woodcutting priority:100%",
          "animate=hacking duration:15s",
-         "playsound=sound/woodcutting/tree_falling 130",
+         "playsound=sound/woodcutting/tree_falling priority:50%",
          "callobject=fall",
          "animate=idle duration:2s",
          "createware=custom_ware",
+         "script=barbarians_custom_worker_program_counter_increment",
+         "return"
+      },
+      remove_pinned_note = {
+         "findobject=type:special name:pinned_note radius:5",
+         "walk=object",
+         "animate=hacking duration:15s",
+         "removeobject",
+         "animate=idle duration:2s",
          "return"
       }
    },
 }
+
+function barbarians_custom_worker_program_counter_increment(worker)
+   assert_equal("barbarians_custom_worker", worker.descr.name)
+   barbarians_custom_worker_program_counter = (barbarians_custom_worker_program_counter or 0) + 1
+end

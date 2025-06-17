@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,9 @@
 #include "base/log.h"
 #include "base/mutex.h"
 #include "base/wexception.h"
+#include "commands/cmd_act.h"
+#include "commands/cmd_destroy_map_object.h"
+#include "commands/cmd_queue.h"
 #include "graphic/animation/animation_manager.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
@@ -32,7 +35,6 @@
 #include "graphic/text_layout.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/cmd_queue.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
@@ -45,116 +47,13 @@ char const* const animation_direction_names[6] = {"_ne", "_e", "_se", "_sw", "_w
 
 namespace Widelands {
 
-CmdDestroyMapObject::CmdDestroyMapObject(const Time& t, MapObject& o)
-   : GameLogicCommand(t), obj_serial(o.serial()) {
-}
-
-void CmdDestroyMapObject::execute(Game& game) {
-	game.syncstream().unsigned_8(SyncEntry::kDestroyObject);
-	game.syncstream().unsigned_32(obj_serial);
-
-	if (MapObject* obj = game.objects().get_object(obj_serial)) {
-		obj->destroy(game);
-	}
-}
-
-constexpr uint16_t kCurrentPacketVersionDestroyMapObject = 1;
-
-void CmdDestroyMapObject::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
-	try {
-		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionDestroyMapObject) {
-			GameLogicCommand::read(fr, egbase, mol);
-			if (Serial const serial = fr.unsigned_32()) {
-				try {
-					obj_serial = mol.get<MapObject>(serial).serial();
-				} catch (const WException& e) {
-					throw GameDataError("%u: %s", serial, e.what());
-				}
-			} else {
-				obj_serial = 0;
-			}
-		} else {
-			throw UnhandledVersionError(
-			   "CmdDestroyMapObject", packet_version, kCurrentPacketVersionDestroyMapObject);
-		}
-	} catch (const WException& e) {
-		throw GameDataError("destroy map object: %s", e.what());
-	}
-}
-void CmdDestroyMapObject::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
-	// First, write version
-	fw.unsigned_16(kCurrentPacketVersionDestroyMapObject);
-
-	// Write base classes
-	GameLogicCommand::write(fw, egbase, mos);
-
-	// Now serial
-	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(obj_serial)));
-}
-
-CmdAct::CmdAct(const Time& t, MapObject& o, int32_t const a)
-   : GameLogicCommand(t), obj_serial(o.serial()), arg(a) {
-}
-
-void CmdAct::execute(Game& game) {
-	game.syncstream().unsigned_8(SyncEntry::kCmdAct);
-	game.syncstream().unsigned_32(obj_serial);
-
-	if (MapObject* const obj = game.objects().get_object(obj_serial)) {
-		game.syncstream().unsigned_8(static_cast<uint8_t>(obj->descr().type()));
-		obj->act(game, arg);
-	} else {
-		game.syncstream().unsigned_8(static_cast<uint8_t>(MapObjectType::MAPOBJECT));
-	}
-	// the object must queue the next CMD_ACT itself if necessary
-}
-
-constexpr uint16_t kCurrentPacketVersionCmdAct = 1;
-
-void CmdAct::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
-	try {
-		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdAct) {
-			GameLogicCommand::read(fr, egbase, mol);
-			if (Serial const object_serial = fr.unsigned_32()) {
-				try {
-					obj_serial = mol.get<MapObject>(object_serial).serial();
-				} catch (const WException& e) {
-					throw GameDataError("object %u: %s", object_serial, e.what());
-				}
-			} else {
-				obj_serial = 0;
-			}
-			arg = fr.unsigned_32();
-		} else {
-			throw UnhandledVersionError("CmdAct", packet_version, kCurrentPacketVersionCmdAct);
-		}
-	} catch (const WException& e) {
-		throw wexception("act: %s", e.what());
-	}
-}
-void CmdAct::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
-	// First, write version
-	fw.unsigned_16(kCurrentPacketVersionCmdAct);
-
-	// Write base classes
-	GameLogicCommand::write(fw, egbase, mos);
-
-	// Now serial
-	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(obj_serial)));
-
-	// And arg
-	fw.unsigned_32(arg);
-}
-
 ObjectManager::~ObjectManager() {
 	// better not throw an exception in a destructor...
 	if (!objects_.empty()) {
 		log_warn("ObjectManager: ouch! remaining objects\n");
 	}
 
-	verb_log_info("lastserial: %i\n", lastserial_);
+	verb_log_info("lastserial: %u\n", lastserial_);
 }
 
 /**
@@ -267,12 +166,6 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                                const LuaTable& table,
                                const std::vector<std::string>& attribs)
    : MapObjectDescr(init_type, init_name, init_descname, attribs) {
-	if (table.has_key("helptext_script")) {
-		// TODO(GunChleoc): Compatibility - remove after v1.0
-		log_warn("Helptexts script for %s is obsolete - please move strings to "
-		         "tribes/initializations/<tribename>/units.lua",
-		         name().c_str());
-	}
 
 	bool has_animations = false;
 	const std::string animation_directory(
@@ -300,11 +193,6 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 		}
 	}
 	check_representative_image();
-
-	// TODO(GunChleoc): Compatibility, remove after v1.0
-	if (table.has_key("attributes")) {
-		throw GameDataError("Attributes need to be defined in 'register.lua' now");
-	}
 }
 MapObjectDescr::~MapObjectDescr() {
 	anims_.clear();
@@ -634,7 +522,7 @@ void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
 
 const Image* MapObject::representative_image() const {
 	return descr().representative_image(get_owner() != nullptr ? &get_owner()->get_playercolor() :
-                                                                nullptr);
+	                                                             nullptr);
 }
 
 /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -92,7 +92,7 @@ struct ImmovableProgram : public MapObjectProgram {
 
 	class ActRemove : public Action {
 	public:
-		ActRemove(std::vector<std::string>& arguments, const ImmovableDescr& descr);
+		explicit ActRemove(std::vector<std::string>& arguments);
 		void execute(Game&, Immovable&) const override;
 
 	private:
@@ -124,11 +124,29 @@ struct ImmovableProgram : public MapObjectProgram {
 	/// sound effect is actually played is determined by the sound handler.
 	class ActPlaySound : public Action {
 	public:
-		ActPlaySound(const std::vector<std::string>& arguments, const ImmovableDescr& descr);
+		explicit ActPlaySound(const std::vector<std::string>& arguments);
 		void execute(Game&, Immovable&) const override;
 
 	private:
 		PlaySoundParameters parameters;
+	};
+
+	/// Runs a Lua script.
+	///
+	/// Parameter syntax:
+	///    parameters ::= function
+	/// Parameter semantics:
+	///    function:
+	///       The name of the function to call.
+	///
+	/// Invokes the specified Lua function with this immovable as the argument.
+	class ActRunScript : public Action {
+	public:
+		explicit ActRunScript(const std::vector<std::string>& arguments);
+		void execute(Game&, Immovable&) const override;
+
+	private:
+		RunScriptParameters parameters;
 	};
 
 	/**

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,6 +55,8 @@ protected:
 		clicked_ok();
 	}
 
+	void think() override;
+
 private:
 	/// Get the game running again and close the window.
 	void clicked_ok();
@@ -71,6 +73,7 @@ private:
 	const uint32_t desired_speed_;  // Remember the previous game speed
 	const bool modal_;
 	Widelands::Game* game_;  // For controlling the game speed
+	uint32_t start_time_;    // For timeout check
 };
 
 #endif  // end of include guard: WL_WUI_STORY_MESSAGE_BOX_H

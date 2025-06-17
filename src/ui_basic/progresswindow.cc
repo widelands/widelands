@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2023 by the Widelands Development Team
+ * Copyright (C) 2007-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,6 +31,7 @@
 #include "base/random.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/mouse_cursor.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text/font_set.h"
@@ -64,6 +65,7 @@ ProgressWindow::ProgressWindow(UI::Panel* parent,
 	// As long as this window exists and is visible, no tooltips will be drawn.
 	set_hide_all_overlays();
 	Panel::set_allow_fastclick(false);
+	g_mouse_cursor->change_wait(true);
 
 	if (parent == nullptr) {
 		graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
@@ -74,6 +76,8 @@ ProgressWindow::ProgressWindow(UI::Panel* parent,
 
 	event_buffer_.clear();
 	initialization_complete();
+
+	set_flag(UI::Panel::pf_unresponsive, true);
 
 	set_background(background);
 	step(_("Loading…"));
@@ -97,11 +101,8 @@ inline const UI::ProgressbarStyleInfo& ProgressWindow::progress_style() const {
 
 void ProgressWindow::draw(RenderTarget& rt) {
 	{  // Center and downscale background image
-		const Image& bg = *g_image_cache->get(background_);
-		const float w = bg.width();
-		const float h = bg.height();
-		rt.blitrect_scale(fit_image(w, h, get_w(), get_h(), crop_), &bg, Recti(0, 0, w, h), 1.f,
-		                  BlendMode::UseAlpha);
+		const Image* bg = g_image_cache->get(background_);
+		rt.blit_fit(bg, crop_);
 	}
 
 	// No float division to avoid Texture subsampling.

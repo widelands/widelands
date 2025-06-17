@@ -55,7 +55,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
          descname = _("planting balsa tree"),
          actions = {
-            -- time total: xx
+            -- time of worker: 11.2-32.8 sec, mean 21.784 sec
+            -- min. time: 11.2 + 13 = 24.2 sec
+            -- max. time: 32.8 + 13 = 45.8 sec
+            -- mean time: 21.784 + 13 = 34.784 sec
             "return=skipped unless economy needs balsa",
             "callworker=plant_balsa",
             "sleep=duration:13s"
@@ -65,7 +68,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
          descname = _("planting rubber tree"),
          actions = {
-            -- time total: xx
+            -- time of worker: 11.2-32.8 sec, mean 21.784 sec
+            -- min. time: 11.2 + 13 = 24.2 sec
+            -- max. time: 32.8 + 13 = 45.8 sec
+            -- mean time: 21.784 + 13 = 34.784 sec
             "return=skipped unless economy needs rubber",
             "callworker=plant_rubber",
             "sleep=duration:13s"
@@ -75,7 +81,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
          descname = _("planting ironwood tree"),
          actions = {
-            -- time total: xx
+            -- time of worker: 11.2-32.8 sec, mean 21.784 sec
+            -- min. time: 11.2 + 13 = 24.2 sec
+            -- max. time: 32.8 + 13 = 45.8 sec
+            -- mean time: 21.784 + 13 = 34.784 sec
             "return=skipped unless economy needs ironwood",
             "callworker=plant_ironwood",
             "sleep=duration:13s"

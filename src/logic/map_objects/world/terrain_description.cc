@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,12 +46,10 @@ TerrainDescription::Is terrain_type_from_string(const std::string& type) {
 		return TerrainDescription::Is::kWalkable;
 	}
 	if (type == "water") {
-		return static_cast<TerrainDescription::Is>(TerrainDescription::Is::kWater |
-		                                           TerrainDescription::Is::kUnwalkable);
+		return (TerrainDescription::Is::kWater | TerrainDescription::Is::kUnwalkable);
 	}
 	if (type == "unreachable") {
-		return static_cast<TerrainDescription::Is>(TerrainDescription::Is::kUnreachable |
-		                                           TerrainDescription::Is::kUnwalkable);
+		return (TerrainDescription::Is::kUnreachable | TerrainDescription::Is::kUnwalkable);
 	}
 	if (type == "mineable") {
 		return TerrainDescription::Is::kMineable;
@@ -96,6 +94,8 @@ TerrainDescription::Type::Type(TerrainDescription::Is init_is) : is(init_is) {
 		descname = _("unwalkable");
 		icon = g_image_cache->get("images/wui/editor/terrain_unwalkable.png");
 		break;
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -116,11 +116,6 @@ TerrainDescription::TerrainDescription(const LuaTable& table,
 		                 name_.c_str(), dither_layer_disambiguator, kMaxDitherLayerDisambiguator);
 	}
 
-	if (table.has_key("tooltips")) {
-		// TODO(GunChleoc): Compatibility, remove after v1.0
-		log_warn("Terrain '%s' contains obsolete 'tooltips' table", name().c_str());
-	}
-
 	for (DescriptionIndex di = descriptions.nr_terrains(); di != 0u; --di) {
 		const TerrainDescription* t = descriptions.get_terrain_descr(di - 1);
 		if (t->dither_layer_ == dither_layer_) {
@@ -136,10 +131,10 @@ TerrainDescription::TerrainDescription(const LuaTable& table,
 		}
 	}
 
-	if (!(0 < fertility_ && fertility_ < 1000)) {
+	if (fertility_ <= 0 || fertility_ >= 1000) {
 		throw GameDataError("%s: fertility is not in (0, 1000).", name_.c_str());
 	}
-	if (!(0 < humidity_ && humidity_ < 1000)) {
+	if (humidity_ <= 0 || humidity_ >= 1000) {
 		throw GameDataError("%s: humidity is not in (0, 1000).", name_.c_str());
 	}
 	if (temperature_ < 0) {
@@ -153,8 +148,8 @@ TerrainDescription::TerrainDescription(const LuaTable& table,
 
 	const std::string default_resource(table.get_string("default_resource"));
 	default_resource_index_ = !default_resource.empty() ?
-                                descriptions.load_resource(default_resource) :
-                                Widelands::INVALID_INDEX;
+	                             descriptions.load_resource(default_resource) :
+	                             Widelands::INVALID_INDEX;
 
 	if (default_resource_amount_ > 0 && !is_resource_valid(default_resource_index_)) {
 		throw GameDataError("Default resource is not in valid resources.\n");

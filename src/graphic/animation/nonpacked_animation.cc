@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,7 +85,7 @@ void NonPackedAnimation::NonPackedMipMapEntry::load_graphics() {
 		if (!frames.empty() && (frames.front()->width() != image->width() ||
 		                        frames.front()->height() != image->height())) {
 			throw Widelands::GameDataError(
-			   "wrong size: (%u, %u) for file %s, should be (%u, %u) like the first frame",
+			   "wrong size: (%d, %d) for file %s, should be (%d, %d) like the first frame",
 			   image->width(), image->height(), filename.c_str(), frames.front()->width(),
 			   frames.front()->height());
 		}
@@ -98,8 +98,8 @@ void NonPackedAnimation::NonPackedMipMapEntry::load_graphics() {
 		const Image* pc_image = g_image_cache->get(filename);
 		if (frames.front()->width() != pc_image->width() ||
 		    frames.front()->height() != pc_image->height()) {
-			throw Widelands::GameDataError("playercolor mask %s has wrong size: (%u, %u), should "
-			                               "be (%u, %u) like the animation frame",
+			throw Widelands::GameDataError("playercolor mask %s has wrong size: (%d, %d), should "
+			                               "be (%d, %d) like the animation frame",
 			                               filename.c_str(), pc_image->width(), pc_image->height(),
 			                               frames.front()->width(), frames.front()->height());
 		}
@@ -172,8 +172,8 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table,
 			                           table.get_table("pictures")->array_entries<std::string>()))));
 		} else {
 			add_available_scales(basename, animation_directory.empty() ?
-                                           table.get_string("directory") :
-                                           animation_directory);
+			                                  table.get_string("directory") :
+			                                  animation_directory);
 		}
 
 		// Frames
@@ -223,8 +223,8 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 	assert(!mipmap.image_files.empty());
 	const std::string& image_filename = mipmap.image_files[representative_frame()];
 	const Image* image = (mipmap.has_playercolor_masks && (clr != nullptr)) ?
-                           playercolor_image(*clr, image_filename) :
-                           g_image_cache->get(image_filename);
+	                        playercolor_image(*clr, image_filename) :
+	                        g_image_cache->get(image_filename);
 
 	const int w = image->width();
 	const int h = image->height();

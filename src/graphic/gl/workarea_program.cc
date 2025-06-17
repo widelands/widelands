@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -127,9 +127,9 @@ void WorkareaProgram::add_vertex(const FieldsToDraw::Field& field,
 constexpr float kBorderStrength = 2.8f;
 
 // Helper functions for calculating the border thickness
-const static float kOffsetFactor = static_cast<float>(
+const static float kOffsetFactor =
    std::sqrt(kBorderStrength * kBorderStrength /
-             (kTriangleWidth * kTriangleWidth + kTriangleHeight * kTriangleHeight)));
+             (kTriangleWidth * kTriangleWidth + kTriangleHeight * kTriangleHeight));
 static Vector2f offset(size_t radius, size_t pos) {
 	if (pos % radius == 0) {
 		switch (pos / radius) {
@@ -179,11 +179,10 @@ void WorkareaProgram::draw(uint32_t texture_id,
                            Vector2f rendertarget_dimension) {
 	const FieldsToDraw::Field& topleft = fields_to_draw.at(0);
 	if (cache_ && cache_->fcoords == topleft.fcoords &&
-	    !(cache_->surface_pixel.x > topleft.surface_pixel.x ||
-	      cache_->surface_pixel.x < topleft.surface_pixel.x ||
-	      cache_->surface_pixel.y > topleft.surface_pixel.y ||
-	      cache_->surface_pixel.y < topleft.surface_pixel.y) &&
-	    cache_->workareas == workarea) {
+	    cache_->surface_pixel.x <= topleft.surface_pixel.x &&
+	    cache_->surface_pixel.x >= topleft.surface_pixel.x &&
+	    cache_->surface_pixel.y <= topleft.surface_pixel.y &&
+	    cache_->surface_pixel.y >= topleft.surface_pixel.y && cache_->workareas == workarea) {
 		return gl_draw(texture_id, z_value);
 	}
 	cache_.reset(new WorkareasCache(workarea, topleft.fcoords, topleft.surface_pixel));

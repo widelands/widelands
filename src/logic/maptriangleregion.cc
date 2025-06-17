@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -141,6 +141,8 @@ template <> bool MapTriangleRegion<>::advance(const Map& map) {
 			map.get_rn(location_.node, &location_.node);
 		}
 		break;
+	default:
+		NEVER_HERE();
 	}
 	assert(remaining_in_row_ < 10000);  //  Catch wrapping (integer underflow)
 	return true;
@@ -267,6 +269,8 @@ template <> bool MapTriangleRegion<TCoords<FCoords>>::advance(const Map& map) {
 			map.get_rn(location_.node, &location_.node);
 		}
 		break;
+	default:
+		NEVER_HERE();
 	}
 	assert(remaining_in_row_ < 10000);  //  Catch wrapping (integer underflow)
 	return true;

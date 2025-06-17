@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -96,7 +96,7 @@ struct Vector3f {
 	}
 
 	void normalize() {
-		const float f = static_cast<float>(std::sqrt(x * x + y * y + z * z));
+		const float f = std::sqrt(x * x + y * y + z * z);
 		if (std::fabs(f) < 0.00001f) {  // check for ==0
 			return;
 		}

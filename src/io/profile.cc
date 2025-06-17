@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,28 +32,28 @@
 #include "io/filewrite.h"
 
 static char const* trueWords[] = {
-   "true",
+   "1",
    /** TRANSLATORS: A variant of the commandline parameter "true" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   _("true"), "yes",
+   gettext_noop("true"),
    /** TRANSLATORS: A variant of the commandline parameter "true" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   _("yes"), "on",
+   gettext_noop("yes"),
    /** TRANSLATORS: A variant of the commandline parameter "true" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   _("on"), "1"};
+   gettext_noop("on")};
 
 static char const* falseWords[] = {
-   "false",
+   "0",
    /** TRANSLATORS: A variant of the commandline parameter "false" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   _("false"), "no",
+   gettext_noop("false"),
    /** TRANSLATORS: A variant of the commandline parameter "false" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   _("no"), "off",
+   gettext_noop("no"),
    /** TRANSLATORS: A variant of the commandline parameter "false" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   _("off"), "0"};
+   gettext_noop("off")};
 
 Section::Value::Value(const std::string& nname, const char* const nval)
    : used_(false), translate_(false), name_(nname) {
@@ -124,12 +124,12 @@ uint32_t Section::Value::get_positive() const {
 
 bool Section::Value::get_bool() const {
 	for (char const* word : trueWords) {
-		if (iequals(value_.get(), word)) {
+		if (iequals(value_.get(), word) || iequals(value_.get(), i18n::translate(word))) {
 			return true;
 		}
 	}
 	for (char const* word : falseWords) {
-		if (iequals(value_.get(), word)) {
+		if (iequals(value_.get(), word) || iequals(value_.get(), i18n::translate(word))) {
 			return false;
 		}
 	}
@@ -167,13 +167,11 @@ void Section::Value::set_string(char const* const value) {
 	copy(value, value + len, value_.get());
 }
 
-void swap(Section::Value& first, Section::Value& second) {
-	using std::swap;
-
-	swap(first.name_, second.name_);
-	swap(first.value_, second.value_);
-	swap(first.used_, second.used_);
-	swap(first.translate_, second.translate_);
+void swap(Section::Value& first, Section::Value& second) noexcept {
+	std::swap(first.name_, second.name_);
+	std::swap(first.value_, second.value_);
+	std::swap(first.used_, second.used_);
+	std::swap(first.translate_, second.translate_);
 }
 
 /*
@@ -637,7 +635,7 @@ Section& Profile::create_section(char const* const name) {
 }
 
 Section& Profile::create_section_duplicate(char const* const name) {
-	sections_.push_back(Section(this, name));
+	sections_.emplace_back(this, name);
 	return sections_.back();
 }
 
@@ -794,7 +792,7 @@ void Profile::read(char const* const filename, char const* const global_section,
 	} catch (const FileNotFoundError&) {
 		// It's no problem if the config file does not exist. (It'll get
 		// written on exit anyway)
-		log_warn("There's no configuration file, using default values.\n");
+		log_warn("There's no configuration file %s, using default values.", filename);
 	} catch (const std::exception& e) {
 		error("%s:%u: %s", filename, linenr, e.what());
 	}

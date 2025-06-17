@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,6 +58,10 @@ public:
 	[[nodiscard]] bool is_buildable() const {
 		return buildable_;
 	}
+	[[nodiscard]] bool is_promoted() const {
+		return promoted_from_ != INVALID_INDEX;
+	}
+
 	[[nodiscard]] const Buildcost& buildcost() const {
 		assert(is_buildable());
 		return buildcost_;
@@ -109,6 +113,15 @@ public:
 		return becomes_;
 	}
 	void set_becomes(Descriptions&, const std::string&);
+
+	// Returns the worker that this worker was promoted from by experience or
+	// INVALID_INDEX if it cannot be promoted by experience.
+	[[nodiscard]] const DescriptionIndex& promoted_from() const {
+		return promoted_from_;
+	}
+	void set_promoted_from(const DescriptionIndex& index) {
+		promoted_from_ = index;
+	}
 	[[nodiscard]] DescriptionIndex worker_index() const;
 	[[nodiscard]] bool can_act_as(DescriptionIndex) const;
 
@@ -163,6 +176,9 @@ private:
 	 * or INVALID_INDEX if the worker cannot level up.
 	 */
 	int32_t needed_experience_;
+
+	DescriptionIndex promoted_from_{
+	   INVALID_INDEX};  // The worker this worker was promoted from, or INVALID_INDEX
 
 	/// Buildings where this worker can work
 	std::set<DescriptionIndex> employers_;

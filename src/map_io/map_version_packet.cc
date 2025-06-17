@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2023 by the Widelands Development Team
+ * Copyright (C) 2013-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,9 +72,13 @@ void MapVersionPacket::pre_read(FileSystem& fs, Map* map, bool skip, bool is_pos
 				map->map_version_.minimum_required_widelands_version =
 				   globv.get_safe_string("minimum_required_widelands_version");
 			} else if (globv.has_val("needs_widelands_version_after")) {
-				map->map_version_.minimum_required_widelands_version = "build ";
-				map->map_version_.minimum_required_widelands_version +=
-				   std::to_string(globv.get_safe_int("needs_widelands_version_after") + 1);
+				const int minver = globv.get_safe_int("needs_widelands_version_after") + 1;
+				if (minver < 22) {
+					map->map_version_.minimum_required_widelands_version = "build ";
+					map->map_version_.minimum_required_widelands_version += std::to_string(minver);
+				} else {
+					map->map_version_.minimum_required_widelands_version = "1.0";
+				}
 			}
 			map->calculate_minimum_required_widelands_version(is_post_one_world);
 		} else {

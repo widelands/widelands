@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2023 by the Widelands Development Team
+ * Copyright (C) 2016-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  */
 
 #include "ui_basic/dropdown.h"
+
+#include <algorithm>
 
 #include "base/i18n.h"
 #include "base/utf8.h"
@@ -219,9 +221,9 @@ UI::Panel* BaseDropdown::get_open_dropdown() {
 void BaseDropdown::layout() {
 	int list_width = list_->calculate_desired_width();
 
-	const int new_list_height = std::min(max_list_height_ / list_->get_lineheight(),
-	                                     std::min(list_->size(), max_list_items_)) *
-	                            list_->get_lineheight();
+	const int new_list_height =
+	   std::min({max_list_height_ / list_->get_lineheight(), list_->size(), max_list_items_}) *
+	   list_->get_lineheight();
 	list_->set_size(std::max(list_width, button_box_.get_w()), new_list_height);
 
 	// Update list position. The list is hooked into the highest parent that we can get so that we
@@ -364,6 +366,10 @@ void BaseDropdown::set_errored(const std::string& error_message) {
 }
 
 void BaseDropdown::set_enabled(bool on) {
+	if (is_enabled_ == on) {
+		return;
+	}
+
 	is_enabled_ = on;
 	set_can_focus(on);
 	if (push_button_ != nullptr) {
@@ -413,9 +419,9 @@ void BaseDropdown::update() {
 	}
 
 	const std::string name = list_->has_selection() ?
-                               list_->get_selected_name() :
-                               /** TRANSLATORS: Selection in Dropdown menus. */
-                               pgettext("dropdown", "Not Selected");
+	                            list_->get_selected_name() :
+	                            /** TRANSLATORS: Selection in Dropdown menus. */
+	                            pgettext("dropdown", "Not Selected");
 
 	if (type_ != DropdownType::kPictorial) {
 		if (label_.empty()) {
@@ -425,11 +431,11 @@ void BaseDropdown::update() {
 			display_button_.set_title(format(_("%1%: %2%"), label_, name));
 		}
 		display_button_.set_tooltip(list_->has_selection() ? list_->get_selected_tooltip() :
-                                                           tooltip_);
+		                                                     tooltip_);
 	} else {
 		display_button_.set_pic(list_->has_selection() ?
-                                 list_->get_selected_image() :
-                                 g_image_cache->get("images/ui_basic/different.png"));
+		                           list_->get_selected_image() :
+		                           g_image_cache->get("images/ui_basic/different.png"));
 		display_button_.set_tooltip(format(_("%1%: %2%"), label_, name));
 	}
 }

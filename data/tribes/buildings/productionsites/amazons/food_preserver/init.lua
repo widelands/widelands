@@ -39,8 +39,7 @@ wl.Descriptions():new_productionsite_type {
    aihints = {
       prohibited_till = 520,
       very_weak_ai_limit = 1,
-      weak_ai_limit = 2,
-      --basic_amount = 1
+      weak_ai_limit = 2
    },
 
    working_positions = {
@@ -59,10 +58,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
          descname = _("preparing a ration"),
          actions = {
-            -- time total: 33
+            -- time total: 4.8 + 18 + 10 + 2 * 3.6 = 40 sec
             "return=skipped unless economy needs ration",
             "consume=amazons_bread:2 fish,meat:2 coal",
-            "sleep=duration:5s",
+            "sleep=duration:4s800ms",
             "animate=working duration:18s",
             "sleep=duration:10s",
             "produce=ration:2"

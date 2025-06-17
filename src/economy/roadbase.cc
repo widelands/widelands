@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2023 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,6 +66,9 @@ BaseImmovable::PositionList RoadBase::get_positions(const EditorGameBase& egbase
 }
 
 Flag& RoadBase::base_flag() {
+	return *flags_[FlagStart];
+}
+const Flag& RoadBase::base_flag() const {
 	return *flags_[FlagStart];
 }
 
