@@ -534,6 +534,21 @@ int do_get_soldiers(lua_State* L,
 		report_error(L, "Invalid arguments!");
 	}
 
+	if (lua_isstring(L, -1) != 0) {
+		if (std::string(luaL_checkstring(L, -1)) == "present") {
+			lua_pushuint32(L, sc.present_soldiers().size());
+			return 1;
+		}
+		if (std::string(luaL_checkstring(L, -1)) == "stationed") {
+			lua_pushuint32(L, sc.stationed_soldiers().size());
+			return 1;
+		}
+		if (std::string(luaL_checkstring(L, -1)) == "associated") {
+			lua_pushuint32(L, sc.associated_soldiers().size());
+			return 1;
+		}
+	}
+
 	const SoldiersList soldiers = sc.stationed_soldiers();
 	if (lua_isstring(L, -1) != 0) {
 		if (std::string(luaL_checkstring(L, -1)) != "all") {
@@ -1357,6 +1372,26 @@ Supported at the time of this writing by
                   print(count)
             end
          end
+
+   * The string :const:`"present"`.
+      .. versionadded:: 1.3
+
+      Returns an :class:`integer` which is the number of soldiers present
+      in this building.
+
+   * The string :const:`"stationed"`.
+      .. versionadded:: 1.3
+
+      Returns an :class:`integer` which is the number of soldiers stationed
+      in this building. Stationed soldiers include present soldiers and the
+      soldiers who left this building to fight.
+
+   * The string :const:`"associated"`.
+      .. versionadded:: 1.3
+
+      Returns an :class:`integer` which is the number of soldiers associated
+      to this building. Associated soldiers include stationed soldiers and
+      soldiers who are coming to this building.
 
    :returns: Number of soldiers that match **descr** or the :class:`table`
       containing all soldiers
