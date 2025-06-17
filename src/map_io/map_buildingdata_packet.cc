@@ -569,7 +569,8 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 						   ship->serial(), srm);
 					}
 				} else {
-					log_err("Loading port %s without a portdock.", warehouse.get_warehouse_name().c_str());
+					log_err(
+					   "Loading port %s without a portdock.", warehouse.get_warehouse_name().c_str());
 				}
 			}
 
