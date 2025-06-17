@@ -318,7 +318,9 @@ class WidelandsTestCase():
                 if os.getenv('GITHUB_ACTION'):
                     self.outputs.append(FileToPrint(f_name, False))  # no coloring from here
                 else:
-                    self.outputs.append(colorize('lsan errors', warning_color) +
+                    idx1 = lsan_log_txt.find('ERROR: ')
+                    idx2 = lsan_log_txt.find('\n', idx1)
+                    self.outputs.append(colorize(lsan_log_txt[idx1:idx2], warning_color) +
                                         f', see in {f_name}\n')
                 if not self.report_header:
                     self.report_header = 'lsan'  # might be overwritten, which is no problem
