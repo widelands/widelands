@@ -36,7 +36,6 @@ ImmovableDescription
 */
 const char LuaImmovableDescription::className[] = "ImmovableDescription";
 const MethodType<LuaImmovableDescription> LuaImmovableDescription::Methods[] = {
-   METHOD(LuaImmovableDescription, has_attribute),
    METHOD(LuaImmovableDescription, probability_to_grow),
    {nullptr, nullptr},
 };

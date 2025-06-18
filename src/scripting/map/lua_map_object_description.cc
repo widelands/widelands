@@ -42,6 +42,7 @@ MapObjectDescription
 const char LuaMapObjectDescription::className[] = "MapObjectDescription";
 const MethodType<LuaMapObjectDescription> LuaMapObjectDescription::Methods[] = {
    METHOD(LuaMapObjectDescription, helptexts),
+   METHOD(LuaImmovableDescription, has_attribute),
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapObjectDescription> LuaMapObjectDescription::Properties[] = {
