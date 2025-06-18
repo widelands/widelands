@@ -224,6 +224,9 @@ int LuaMapObjectDescription::get_type_name(lua_State* L) {
 /* RST
    .. method:: has_attribute(attribute_name)
 
+      .. versionchanged:: 1.3
+         Only available for :class:`ImmovableDescription` and :class:`CritterDescr` in 1.2.1 and older.
+
       Returns :const:`true` if the immovable has the attribute, :const:`false` otherwise.
 
       :arg attribute_name: The attribute that we are checking for.
