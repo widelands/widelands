@@ -644,12 +644,14 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	      format(
 	         "<rt><p>%s</p><p>%s</p><p>%s</p><p>%s</p></rt>",
 	         g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-	            .as_font_tag(format(_(
-	               "Here, you can upload your add-ons to the server to make them available to other "
-	               "players. By uploading, you agree to publish your creation under the terms of "
-	               "the GNU General Public License (GPL) version 2 (the same license under which "
-	               "Widelands itself is distributed). For more information on the GPL, please refer "
-	               "to ‘About Widelands’ → ‘License’ in the main menu or see %s."),
+	            .as_font_tag(format(
+	               _("Here, you can upload your add-ons to the server to make them available to "
+	                 "other "
+	                 "players. By uploading, you agree to publish your creation under the terms of "
+	                 "the GNU General Public License (GPL) version 2 (the same license under which "
+	                 "Widelands itself is distributed). For more information on the GPL, please "
+	                 "refer "
+	                 "to ‘About Widelands’ → ‘License’ in the main menu or see %s."),
 	               as_url_hyperlink("https://www.gnu.org/licenses/"))),
 	         g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 	            .as_font_tag(
