@@ -1582,7 +1582,7 @@ void EditorInteractive::publish_map() {
 		          g_style_manager->font_style(UI::FontStyle::kWuiLabel).as_font_tag(temp),
 		          g_style_manager->font_style(UI::FontStyle::kWuiInfoPanelParagraph)
 		             .as_font_tag(format(
-		                _("The map will be published under the terms of the "
+		                _("By uploading, you agree to publish the map under the terms of the "
 		                  "GNU General Public License (GPL) version 2 (the same license under which "
 		                  "Widelands itself is distributed). For more information, see %s."),
 		                as_url_hyperlink("https://www.gnu.org/licenses/")))),
