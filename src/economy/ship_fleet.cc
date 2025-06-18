@@ -300,13 +300,7 @@ void ShipFleet::split(Game& game) {
 	}
 	verb_log_dbg_time(game.get_gametime(), "[Splitting ShipFleet]: ports removed");
 	for (auto& port : fleetports) {
-		if (port->expedition_started()) {
-			port->cancel_expedition(game);
-			port->init_fleet(game);
-			port->start_expedition();
-		} else {
-			port->init_fleet(game);
-		}
+		port->init_fleet(game);
 	}
 	verb_log_dbg_time(game.get_gametime(), "[Splitting ShipFleet]: ports added");
 	for (auto& ship : fleetships) {
