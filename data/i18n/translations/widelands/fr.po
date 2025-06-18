@@ -14,7 +14,7 @@
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
 # David D, 2017-2018,2021-2023,2025
 # GunChleoc, 2016,2018
-# François Ch., 2025
+# L. Ch., 2025
 # Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
 # finki boy, 2015
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
@@ -22,7 +22,7 @@
 # Laurent Godard, 2024
 # nicolas jardin <niko472006@sfr.fr>, 2016
 # Papa Ben <ben-oni@hotmail.fr>, 2024
-# Renaud Bouchard, 2015-2024
+# Renaud Bouchard, 2015-2025
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022
 # syl_, 2016
 # Tubuntu, 2015,2018
@@ -34,7 +34,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-06-05 03:23+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: François Ch., 2025\n"
+"Last-Translator: Renaud Bouchard, 2015-2025\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -9283,7 +9283,7 @@ msgstr "Lots :"
 
 #: ../../../../src/wui/actionconfirm.cc:639
 msgid "Unpause?"
-msgstr ""
+msgstr "Enlever la pause ?"
 
 #: ../../../../src/wui/actionconfirm.cc:640
 msgid ""
@@ -10087,15 +10087,15 @@ msgstr "Inviter ce joueur à rejoindre votre équipe"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:193
 msgid "Trade offers you have received from other players"
-msgstr ""
+msgstr "Offres commerciales reçues d'autres joueurs"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:195
 msgid "Trades you have proposed to other players"
-msgstr ""
+msgstr "Offres commerciales proposées à d'autres joueurs"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:196
 msgid "Your active trade agreements"
-msgstr ""
+msgstr "Vos accords commerciaux actifs"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:246
 msgid "No team"
@@ -10150,7 +10150,7 @@ msgstr "Propositions d'échange (%u)"
 #: ../../../../src/wui/game_diplomacy_menu.cc:414
 #: ../../../../src/wui/marketwindow.cc:449
 msgid "Nobody has offered you any trades at the moment."
-msgstr ""
+msgstr "Personne ne vous a fait d'offre commerciale pour le moment"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:436
 msgid "Market to accept the trade at"
@@ -10161,78 +10161,78 @@ msgstr ""
 #: ../../../../src/wui/marketwindow.cc:614
 #, c-format
 msgid "%s (closest)"
-msgstr ""
+msgstr "%s (le plus près)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:445
 #, c-format
 msgid "%1$s (distance: %2$u field)"
 msgid_plural "%1$s (distance: %2$u fields)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1$s (distance: %2$u champ)"
+msgstr[1] "%1$s (distance: %2$u champs)"
+msgstr[2] "%1$s (distance: %2$u champs)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:452
 #: ../../../../src/wui/marketwindow.cc:468
 msgid "Accept this trade offer"
-msgstr ""
+msgstr "Accepter cette offre commerciale"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:455
 #: ../../../../src/wui/marketwindow.cc:471
 msgid "Reject this trade offer"
-msgstr ""
+msgstr "Rejeter cette offre commerciale"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:459
 msgid "Build a market to accept trade offers."
-msgstr ""
+msgstr "Bâtir un marché pour accepter les offres commerciales"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:498
 #: ../../../../src/wui/marketwindow.cc:930
 #, c-format
 msgid "Proposed Trades (%u)"
-msgstr ""
+msgstr "Offres proposées (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:509
 msgid ""
 "There are no pending trade proposals at the moment. You can propose a new "
 "trade from a market."
-msgstr ""
+msgstr "Il n'y a pas de propositions commerciales pour le moment. Vous pouvez proposer une nouvelle offre depuis un marché."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:533
 #: ../../../../src/wui/game_diplomacy_menu.cc:642
 msgid "Center view on this market"
-msgstr ""
+msgstr "Centrer la vue sur ce marché"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:536
 #: ../../../../src/wui/marketwindow.cc:339
 msgid "Retract this trade offer"
-msgstr ""
+msgstr "Se rétracter de cette offre commerciale"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:548
 #: ../../../../src/wui/marketwindow.cc:347
 msgid "Move this trade proposal…"
-msgstr ""
+msgstr "Déplacer cette proposition commerciale..."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:558
 #: ../../../../src/wui/marketwindow.cc:358
 #, c-format
 msgid "Move this trade proposal to %s"
-msgstr ""
+msgstr "Déplacer cette proposition commerciale à %s"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:563
 #: ../../../../src/wui/game_diplomacy_menu.cc:683
 #: ../../../../src/wui/marketwindow.cc:364
 #: ../../../../src/wui/marketwindow.cc:624
 msgid "You have no markets you could move this trade to."
-msgstr ""
+msgstr "Vous n'avez pas de marchés vers lesquels déplacer cette offre. "
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:598
 #, c-format
 msgid "Active Trades (%u)"
-msgstr ""
+msgstr "Échanges actifs (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:609
 msgid "There are no active trade agreements at the moment."
-msgstr ""
+msgstr "Il n'y a pas pas d'accords commerciaux actifs pour le moment."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:649
 #: ../../../../src/wui/game_diplomacy_menu.cc:657
@@ -10257,24 +10257,24 @@ msgstr "Maintenez Shift pour le proroger indéfiniment"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:660
 msgid "Cancel this trade agreement"
-msgstr ""
+msgstr "Annuler cet accord commercial"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:663
 #: ../../../../src/wui/marketwindow.cc:601
 msgid "Move this trade…"
-msgstr ""
+msgstr "Déplacer cette offre..."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:676
 #: ../../../../src/wui/marketwindow.cc:617
 #, c-format
 msgid "Move this trade to %s (closest)"
-msgstr ""
+msgstr "Déplacer cette offre à %s (le plus près)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:677
 #: ../../../../src/wui/marketwindow.cc:618
 #, c-format
 msgid "Move this trade to %s"
-msgstr ""
+msgstr "Déplacer cette offre à %s"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:737
 #: ../../../../src/wui/marketwindow.cc:703
@@ -10296,12 +10296,12 @@ msgstr[2] "%1$s a proposé de prolonger cet échange de %2$d lots."
 #: ../../../../src/wui/game_diplomacy_menu.cc:749
 #: ../../../../src/wui/marketwindow.cc:716
 msgid "Reject this trade extension proposal"
-msgstr ""
+msgstr "Rejeter cette proposition d'extension commerciale"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:753
 #: ../../../../src/wui/marketwindow.cc:720
 msgid "Accept this trade extension proposal"
-msgstr ""
+msgstr "Accepter cette proposition d'extension commerciale"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:783
 #: ../../../../src/wui/marketwindow.cc:763
@@ -10320,7 +10320,7 @@ msgstr[2] "Vous avez proposé de prolonger cet échange de %d lots."
 #: ../../../../src/wui/game_diplomacy_menu.cc:793
 #: ../../../../src/wui/marketwindow.cc:769
 msgid "Retract this trade extension proposal"
-msgstr ""
+msgstr "Se rétracter de la proposition d'extension commerciale"
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../../../src/wui/game_exit_confirm_box.cc:27
@@ -10404,7 +10404,7 @@ msgstr "N'afficher que les messages du scénario"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:604
 msgid "Show diplomacy messages only"
-msgstr ""
+msgstr "Voir seulement les messages diplomatiques"
 
 #: ../../../../src/wui/game_message_menu.cc:647
 msgid "Messages: Archive"
@@ -11200,31 +11200,31 @@ msgstr "Nom de la carte"
 
 #: ../../../../src/wui/marketwindow.cc:80
 msgid "Propose"
-msgstr ""
+msgstr "Proposer"
 
 #: ../../../../src/wui/marketwindow.cc:96
 msgid "You offer:"
-msgstr ""
+msgstr "Vous offrez :"
 
 #: ../../../../src/wui/marketwindow.cc:100
 msgid "You demand:"
-msgstr ""
+msgstr "Vous demandez :"
 
 #: ../../../../src/wui/marketwindow.cc:106
 msgid "Decrease amount by 10"
-msgstr ""
+msgstr "Baisser la somme par 10"
 
 #: ../../../../src/wui/marketwindow.cc:113
 msgid "Decrease amount"
-msgstr ""
+msgstr "Baisser la somme"
 
 #: ../../../../src/wui/marketwindow.cc:121
 msgid "Increase amount"
-msgstr ""
+msgstr "Augmenter la somme"
 
 #: ../../../../src/wui/marketwindow.cc:128
 msgid "Increase amount by 10"
-msgstr ""
+msgstr "Augmenter la somme par 10"
 
 #: ../../../../src/wui/marketwindow.cc:189
 msgid "Please select the player you want to trade with."
@@ -11291,19 +11291,19 @@ msgstr ""
 
 #: ../../../../src/wui/marketwindow.cc:977
 msgid "Propose Trade"
-msgstr ""
+msgstr "Faire une proposition commerciale"
 
 #: ../../../../src/wui/marketwindow.cc:982
 msgid "Proposed Trades"
-msgstr ""
+msgstr "Échanges proposés"
 
 #: ../../../../src/wui/marketwindow.cc:988
 msgid "Trade Offers"
-msgstr ""
+msgstr "Offres d'échanges"
 
 #: ../../../../src/wui/marketwindow.cc:999
 msgid "Active Trade"
-msgstr ""
+msgstr "Échange actif"
 
 #: ../../../../src/wui/minimap.cc:169
 msgid "Owner"

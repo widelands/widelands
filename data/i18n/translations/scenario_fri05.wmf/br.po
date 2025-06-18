@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Anthony Guéchoum <a.guechoum@proton.me>, 2025
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-05-19 03:23+0000\n"
 "PO-Revision-Date: 2023-01-04 20:43+0000\n"
+"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2025\n"
 "Language-Team: Breton (https://app.transifex.com/widelands/teams/35159/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -323,7 +327,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:197
 msgid "Economy"
-msgstr ""
+msgstr "Armerzh"
 
 #. TRANSLATORS: Henneke Lembeck – Trade 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:199
@@ -353,7 +357,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:265
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:276
 msgid "Planning the War"
-msgstr ""
+msgstr "Raktresañ ar brezel"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:213
 msgid "Use the Uplands wisely"
@@ -493,7 +497,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:277
 msgid "Good luck!"
-msgstr ""
+msgstr "Chañs vat!"
 
 #. TRANSLATORS: Ocke Ketelsen – Getting Started 4
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:279
@@ -700,7 +704,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:368
 msgid "Congratulations"
-msgstr ""
+msgstr "Gourc'hemennoù"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:369
 msgid ""
