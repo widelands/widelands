@@ -11997,7 +11997,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1789
 msgctxt "empire_building"
 msgid "History of the Empire, Part VII"
-msgstr ""
+msgstr "Istor an Impalaerezh, Lodenn VII"
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Farm, part
 #. 1
@@ -12205,7 +12205,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1920
 msgctxt "empire_building"
 msgid "History of the Empire, Part VI on the return of Lutius to Fremil"
-msgstr ""
+msgstr "Istor an Impalaerezh, Lodenn VI diwar-benn distro Lutius da Fremil"
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -16635,11 +16635,11 @@ msgstr[4] ""
 msgctxt "frisians_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%1% soudard"
+msgstr[1] "%1% soudard"
+msgstr[2] "%1% soudard"
+msgstr[3] "%1% a soudarded"
+msgstr[4] "%1% soudard"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -16682,7 +16682,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/init.lua:90
 #: ../../../../data/tribes/scripting/help/tips.lua:29
 msgid "General"
-msgstr ""
+msgstr "Hollek"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:255
 msgid "Purpose:"
@@ -16771,7 +16771,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:465
 msgid "None"
-msgstr ""
+msgstr "Tra ebet"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:466
 msgid "Dependencies"
