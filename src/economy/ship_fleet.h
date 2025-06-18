@@ -138,10 +138,6 @@ struct ShipFleet : MapObject {
 	[[nodiscard]] std::vector<PortDock*>& get_ports() {
 		return ports_;
 	}
-	[[nodiscard]] std::vector<ShipFleetYardInterface*>& get_interfaces() {
-		return interfaces_;
-	}
-
 	[[nodiscard]] Quantity get_ships_target() const {
 		return ships_target_;
 	}
