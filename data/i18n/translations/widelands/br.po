@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Anthony Guéchoum <a.guechoum@proton.me>, 2020
+# Anthony Guéchoum <a.guechoum@proton.me>, 2025
 # Irriep Nala Novram <per.morvan.bzh29@gmail.com>, 2016
 msgid ""
 msgstr ""
@@ -10,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-06-05 03:23+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2020\n"
+"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2025\n"
 "Language-Team: Breton (http://app.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +28,7 @@ msgstr "%2.1f%%"
 #. TRANSLATORS: Short for "Not enough space"
 #: ../../../../data/scripting/infrastructure.lua:188
 msgid "No Space"
-msgstr "Spas Ebet"
+msgstr "Spas ebet"
 
 #: ../../../../data/scripting/infrastructure.lua:189
 msgid ""
@@ -52,7 +53,7 @@ msgstr ""
 
 #: ../../../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
-msgstr ""
+msgstr "N'eus ket a-walc'h a wez en trowardroioù"
 
 #: ../../../../data/scripting/infrastructure.lua:294
 msgid ""
@@ -136,17 +137,17 @@ msgstr "AI Ebet"
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../../../src/ai/defaultai.h:95
 msgid "Normal AI"
-msgstr ""
+msgstr "AI Etre"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../../../src/ai/defaultai.h:110
 msgid "Weak AI"
-msgstr "AI Gwann"
+msgstr "AI Gwan"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../../../src/ai/defaultai.h:125
 msgid "Very Weak AI"
-msgstr "AI Gwann-kenañ"
+msgstr "AI Gwan-kenañ"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -167,7 +168,7 @@ msgstr "gwir"
 #: ../../../../src/base/format/float_node.h:33
 msgctxt "decimal_separator"
 msgid "."
-msgstr ""
+msgstr "."
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -281,7 +282,7 @@ msgstr "Kzu"
 #: ../../../../src/wui/game_diplomacy_menu.cc:44
 #: ../../../../src/wui/interactive_gamebase.cc:250
 msgid "Diplomacy"
-msgstr ""
+msgstr "Diplomaterezh"
 
 #: ../../../../src/commands/cmd_diplomacy.cc:56
 #, c-format
@@ -404,7 +405,7 @@ msgstr "Achp"
 #: ../../../../src/wlapplication_options.cc:1042
 msgctxt "editor"
 msgid "Tools"
-msgstr ""
+msgstr "Ostilhoù"
 
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
@@ -419,7 +420,7 @@ msgstr "Diskouez / Kuzhat"
 
 #: ../../../../src/editor/editorinteractive.cc:146
 msgid "Tool size"
-msgstr ""
+msgstr "Ment an ostilh"
 
 #: ../../../../src/editor/editorinteractive.cc:161
 #: ../../../../src/wlapplication_options.cc:457
@@ -474,7 +475,7 @@ msgstr "Enrollañ ar gartenn"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../../../src/editor/editorinteractive.cc:243
 msgid "Publish Map Online…"
-msgstr ""
+msgstr "Embann ar gartenn enlinenn..."
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../../../src/editor/editorinteractive.cc:251
@@ -494,7 +495,7 @@ msgstr "Kuitaat an embanner"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:300
 msgid "Change height"
-msgstr ""
+msgstr "Cheñch uhelder"
 
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:303
@@ -505,7 +506,7 @@ msgstr ""
 #: ../../../../src/editor/editorinteractive.cc:310
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:98
 msgid "Random height"
-msgstr ""
+msgstr "Uhelder dre zegouezh"
 
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:313
@@ -546,7 +547,7 @@ msgstr "Loened"
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:344
 msgid "Add or remove animals"
-msgstr ""
+msgstr "Ouzhpennañ pe zilemel loened"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:352
@@ -556,7 +557,7 @@ msgstr ""
 #: ../../../../src/map_io/map_saver.cc:154
 #: ../../../../src/map_io/widelands_map_loader.cc:275
 msgid "Resources"
-msgstr ""
+msgstr "Danvezioù"
 
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:355
@@ -588,7 +589,7 @@ msgstr ""
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:377
 msgid "Map origin"
-msgstr ""
+msgstr "Orin ar gartenn"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:380
@@ -605,7 +606,7 @@ msgstr "Ment ar gartenn"
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:391
 msgid "Change the map’s size"
-msgstr ""
+msgstr "Cheñch ment ar gartenn"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:395
@@ -622,7 +623,7 @@ msgstr ""
 #: ../../../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../../../src/wlapplication_options.cc:516
 msgid "Tool History"
-msgstr ""
+msgstr "Roll-istor an ostilh"
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:405
@@ -715,21 +716,21 @@ msgstr ""
 #. animals are shown
 #: ../../../../src/editor/editorinteractive.cc:526
 msgid "Hide Animals"
-msgstr ""
+msgstr "Kuzhat al loened"
 
 #: ../../../../src/editor/editorinteractive.cc:526
 msgid "Show Animals"
-msgstr ""
+msgstr "Diskouez al loened"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. resources are shown
 #: ../../../../src/editor/editorinteractive.cc:532
 msgid "Hide Resources"
-msgstr ""
+msgstr "Kuzhat an danvezioù"
 
 #: ../../../../src/editor/editorinteractive.cc:532
 msgid "Show Resources"
-msgstr ""
+msgstr "Diskouez an danvezioù"
 
 #: ../../../../src/editor/editorinteractive.cc:583
 msgid "Unsupported Format"
@@ -829,7 +830,7 @@ msgstr ""
 
 #: ../../../../src/editor/editorinteractive.cc:1569
 msgid "Publish Map"
-msgstr ""
+msgstr "Embann ar gartenn"
 
 #: ../../../../src/editor/editorinteractive.cc:1570
 #, c-format
@@ -853,7 +854,7 @@ msgstr ""
 
 #: ../../../../src/editor/editorinteractive.cc:1600
 msgid "Saving map…"
-msgstr ""
+msgstr "Oc'h enrolliñ ar gartenn..."
 
 #: ../../../../src/editor/editorinteractive.cc:1619
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:314
@@ -876,7 +877,7 @@ msgstr ""
 #: ../../../../src/editor/editorinteractive.cc:1684
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:108
 msgid "Uploading…"
-msgstr ""
+msgstr "O bellgargañ..."
 
 #: ../../../../src/editor/editorinteractive.cc:1690
 msgid "Upload Error"
@@ -979,7 +980,7 @@ msgstr "bihan"
 #. * TRANSLATORS: Editor terrain property: medium building plot
 #: ../../../../src/editor/ui_menus/field_info_window.cc:92
 msgid "medium"
-msgstr ""
+msgstr "etre"
 
 #. * TRANSLATORS: Editor terrain property: big building plot
 #: ../../../../src/editor/ui_menus/field_info_window.cc:96
@@ -1046,7 +1047,7 @@ msgstr "A zo: %s"
 #. * TRANSLATORS: Heading for immovables and animals in editor info tool
 #: ../../../../src/editor/ui_menus/field_info_window.cc:164
 msgid "Objects"
-msgstr ""
+msgstr "Objedoù"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:166
 #, c-format
@@ -1071,7 +1072,7 @@ msgstr "Listri: %s"
 #: ../../../../src/editor/ui_menus/field_info_window.cc:222
 msgctxt "resources"
 msgid "%1%× %2%"
-msgstr ""
+msgstr "%1%× %2%"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:229
 #: ../../../../src/logic/addons.cc:59
@@ -1089,7 +1090,7 @@ msgstr "Anv: %s"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:233
 msgid "Size: %1% × %2%"
-msgstr ""
+msgstr "Ment: %1% × %2%"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:237
 #, c-format
@@ -1117,12 +1118,12 @@ msgstr "Deskrivadur: %s"
 #: ../../../../src/editor/ui_menus/field_info_window.cc:251
 msgctxt "addons"
 msgid "(none)"
-msgstr ""
+msgstr "(hini ebet)"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:258
 #, c-format
 msgid "%1$s; %2$s"
-msgstr ""
+msgstr "%1$s; %2$s"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:262
 #, c-format
@@ -1144,7 +1145,7 @@ msgstr "Fazi!"
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:217
 #: ../../../../src/wui/mapdata.cc:199
 msgid "My Maps"
-msgstr ""
+msgstr "Ma c'hartennoù"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
 #: ../../../../src/editor/ui_menus/main_menu_load_map.cc:115
@@ -1230,15 +1231,15 @@ msgstr "Anvioù ar restroù"
 
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:138
 msgid "Map names"
-msgstr ""
+msgstr "Anvioù ar c'hartennoù"
 
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:138
 msgid "Original map names"
-msgstr ""
+msgstr "Anvioù-orin ar c'hartennoù"
 
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:142
 msgid "Translated map names"
-msgstr ""
+msgstr "Anvioù troet ar c'hartennoù"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:51
 msgid "Click player to remove"
@@ -1274,7 +1275,7 @@ msgstr ""
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:327
 #: ../../../../src/logic/addons.cc:74
 msgid "Theme"
-msgstr ""
+msgstr "Tem"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:338
 msgid "Add lineup"
@@ -1291,7 +1292,7 @@ msgstr "Anv ar gartenn:"
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:366
 #: ../../../../src/ui_fsmenu/addons/packager.cc:166
 msgid "Author:"
-msgstr ""
+msgstr "Aozer:"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:372
 #: ../../../../src/ui_fsmenu/addons/packager.cc:189
@@ -1306,7 +1307,7 @@ msgstr ""
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:389
 msgid "Tags:"
-msgstr ""
+msgstr "Tikedennoù:"
 
 #. * TRANSLATORS: Header for suitable team line-up tags, like "Free for all",
 #. * "Teams of 2", etc.
@@ -1331,7 +1332,7 @@ msgstr ""
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:421
 msgctxt "map_theme"
 msgid "(none)"
-msgstr ""
+msgstr "(hini ebet)"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:432
 msgid "Ferry range:"
@@ -1349,7 +1350,7 @@ msgstr ""
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:451
 #: ../../../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
-msgstr ""
+msgstr "Diweredekaet"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:473
 #, c-format
@@ -1372,7 +1373,7 @@ msgstr "Dibarzhioù pennañ"
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:502
 #: ../../../../src/wui/mapdetails.cc:179
 msgid "Tags"
-msgstr ""
+msgstr "Tikedennoù"
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:504
 msgid "Teams"
@@ -1430,7 +1431,7 @@ msgstr "Uhel"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:102
 msgid "Climate"
-msgstr ""
+msgstr "Hin"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:126
 msgid "Terrain Distribution"
@@ -1480,19 +1481,19 @@ msgstr ""
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:257
 msgctxt "map_generator"
 msgid "Default"
-msgstr ""
+msgstr "Diouer"
 
 #. * TRANSLATORS: Random Climate
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:285
 msgctxt "climate"
 msgid "Random"
-msgstr ""
+msgstr "Degouezh"
 
 #. * TRANSLATORS: Default Terrain Distribution
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:316
 msgctxt "terrain"
 msgid "Default"
-msgstr ""
+msgstr "Diouer"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:318
 msgid "Alpine"
@@ -1512,7 +1513,7 @@ msgstr ""
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:322
 msgctxt "terrain"
 msgid "Random"
-msgstr ""
+msgstr "Degouezh"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:633
 msgid "Generating random map…"
@@ -1525,7 +1526,7 @@ msgstr ""
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:736
 #: ../../../../src/ui_fsmenu/main.cc:440
 msgid "Random Map"
-msgstr ""
+msgstr "Kartenn dre zegouezh"
 
 #. * TRANSLATORS: This is shown after a random map has been created in the
 #. editor.
@@ -1772,11 +1773,11 @@ msgstr ""
 
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:53
 msgid "Minimum height:"
-msgstr ""
+msgstr "Uhelder izelañ:"
 
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:66
 msgid "Maximum height:"
-msgstr ""
+msgstr "Uhelder uhelañ:"
 
 #. * TRANSLATORS: Editor random height access key. *
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:84
@@ -1799,7 +1800,7 @@ msgstr ""
 #: ../../../../src/wui/stock_menu.cc:36
 #, c-format
 msgid "%1$s %2$s"
-msgstr ""
+msgstr "%1$s %2$s"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:51
 #, c-format
@@ -1866,7 +1867,7 @@ msgstr "Ment an ostilh"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:51
 msgid "Size:"
-msgstr ""
+msgstr "Ment:"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:64
 msgid "Gaps:"
@@ -1992,7 +1993,7 @@ msgstr ""
 
 #: ../../../../src/graphic/gl/initialize.cc:263
 msgid "OpenGL"
-msgstr ""
+msgstr "OpenGL"
 
 #: ../../../../src/graphic/gl/initialize.cc:310
 msgid "Shading Language"
@@ -2006,7 +2007,7 @@ msgstr ""
 #, c-format
 msgctxt "definitionterm"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces the
@@ -2069,15 +2070,15 @@ msgstr "off"
 
 #: ../../../../src/logic/addons.cc:50
 msgid "Tribes"
-msgstr ""
+msgstr "Meuriadoù"
 
 #: ../../../../src/logic/addons.cc:53
 msgid "World"
-msgstr ""
+msgstr "Bed"
 
 #: ../../../../src/logic/addons.cc:55
 msgid "Script"
-msgstr ""
+msgstr "Skript"
 
 #: ../../../../src/logic/addons.cc:60
 msgid "Map Set"
@@ -2104,7 +2105,7 @@ msgstr ""
 #: ../../../../src/logic/addons.cc:120
 #, c-format
 msgid "%1$s.%2$u"
-msgstr ""
+msgstr "%1$s.%2$u"
 
 #: ../../../../src/logic/addons.cc:218
 msgid "No conflicts"
@@ -2178,7 +2179,7 @@ msgstr[4] ""
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../../../src/logic/addons.cc:280
 msgid "None"
-msgstr ""
+msgstr "Hini ebet"
 
 #: ../../../../src/logic/addons.cc:284
 #, c-format
@@ -2202,42 +2203,42 @@ msgstr[4] ""
 #. * TRANSLATORS: "12 steps northwest of Port1"
 #: ../../../../src/logic/detected_port_space.cc:47
 msgid "northwest"
-msgstr ""
+msgstr "gwalarn"
 
 #. * TRANSLATORS: "12 steps northeast of Port1"
 #: ../../../../src/logic/detected_port_space.cc:51
 msgid "northeast"
-msgstr ""
+msgstr "biz"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../../../src/logic/detected_port_space.cc:55
 msgid "southwest"
-msgstr ""
+msgstr "mervent"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../../../src/logic/detected_port_space.cc:59
 msgid "southeast"
-msgstr ""
+msgstr "gevred"
 
 #. * TRANSLATORS: "12 steps north of Port1"
 #: ../../../../src/logic/detected_port_space.cc:63
 msgid "north"
-msgstr ""
+msgstr "norzh"
 
 #. * TRANSLATORS: "12 steps south of Port1"
 #: ../../../../src/logic/detected_port_space.cc:67
 msgid "south"
-msgstr ""
+msgstr "su"
 
 #. * TRANSLATORS: "12 steps west of Port1"
 #: ../../../../src/logic/detected_port_space.cc:71
 msgid "west"
-msgstr ""
+msgstr "kornog"
 
 #. * TRANSLATORS: "12 steps east of Port1"
 #: ../../../../src/logic/detected_port_space.cc:75
 msgid "east"
-msgstr ""
+msgstr "reter"
 
 #: ../../../../src/logic/detected_port_space.cc:83
 #, c-format
@@ -2607,7 +2608,7 @@ msgstr "%u%% bet divontet"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:70
 msgid "A new market was added to your economy."
-msgstr ""
+msgstr "Ur marc'had nevez a zo bet ouzhpennet d'hoc'h armerzh."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:152
 #, c-format
@@ -2748,7 +2749,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:837
 msgid "You send:"
-msgstr ""
+msgstr "Kas a rit:"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
 #. * TRANSLATORS:    %1$i = "2"
@@ -2766,13 +2767,13 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:849
 msgid "You receive:"
-msgstr ""
+msgstr "Degemer a rit:"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:253
 msgctxt "building"
 msgid "Lost!"
-msgstr ""
+msgstr "Kollet!"
 
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:254
 msgid "Militarysite lost!"
@@ -2793,11 +2794,11 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:715
 msgctxt "building"
 msgid "Attack!"
-msgstr ""
+msgstr "Taget!"
 
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:715
 msgid "You are under attack"
-msgstr ""
+msgstr "O vezañ taget emaoc'h"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
@@ -2805,7 +2806,7 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:456
 #, c-format
 msgid "the economy needs the ware ‘%s’"
-msgstr ""
+msgstr "an armerzh he deus ezhomm eus ‘%s’"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn't need the
@@ -2813,7 +2814,7 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:463
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
-msgstr ""
+msgstr "an armerzh n'he deus ket ezhomm eus ‘%s’"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
@@ -2821,14 +2822,14 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:476
 #, c-format
 msgid "the economy needs the worker ‘%s’"
-msgstr ""
+msgstr "an armerzh he deus ezhomm eus ‘%s’"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker '%s'
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:485
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
-msgstr ""
+msgstr "an armerzh n'he deus ket ezhomm eus ‘%s’"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
 #. * TRANSLATORS:    %1$i = "3"
@@ -2855,13 +2856,13 @@ msgstr "%1$ix %2$s"
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:540
 #, c-format
 msgid "the building has the following wares: %s"
-msgstr ""
+msgstr "er savadur ez eus ar marc'hadouriezhioù da-heul: %s"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:564
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
-msgstr ""
+msgstr "er savadur n'eus ket ar marc'hadouriezhioù da-heul: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
@@ -2981,7 +2982,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:397
 msgid "(stopped)"
-msgstr ""
+msgstr "(paouezet)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
@@ -2999,7 +3000,7 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1271
 msgctxt "building"
 msgid "No Shore"
-msgstr ""
+msgstr "Aod ebet"
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1251
 msgid "Shipyard Without Shore"
@@ -3171,7 +3172,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1947
 msgid "Port Lost!"
-msgstr ""
+msgstr "Porzh-mor kollet!"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1948
 msgid "Unloading of wares failed, expedition is cancelled now."
@@ -3194,15 +3195,15 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2253
 msgctxt "ship"
 msgid "Warship"
-msgstr ""
+msgstr "Lestr-brezel"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2253
 msgid "Warship Ready"
-msgstr ""
+msgstr "Lestr-brezel oberiat"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2254
 msgid "A warship is waiting for your commands."
-msgstr ""
+msgstr "Ul lestr-brezel a zo o c'hortoz hoc'h urzhioù."
 
 #. * TRANSLATORS: Ship expedition ready
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2259
@@ -3226,7 +3227,7 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2439
 msgctxt "ship_state"
 msgid "Fighting"
-msgstr ""
+msgstr "En em gannañ"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2443
 msgctxt "ship_state"
@@ -3242,7 +3243,7 @@ msgstr ""
 #: ../../../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
-msgstr ""
+msgstr "Lestr-brezel"
 
 #. * TRANSLATORS: This is a ship state. The ship is
 #. * currently sailing to a specific destination ship.
@@ -3325,7 +3326,7 @@ msgstr "Listri"
 #: ../../../../src/wui/productionsitewindow.cc:90
 #: ../../../../src/wui/warehousewindow.cc:295
 msgid "Wares"
-msgstr ""
+msgstr "Marc'hadouriezhioù"
 
 #. * TRANSLATORS: Header in production site window if there is more than 1
 #. worker. If you
@@ -3352,7 +3353,7 @@ msgstr "Savadurioù"
 #. missing
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:236
 msgid "Worker missing"
-msgstr ""
+msgstr "Ul labourer a vank"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker missing.
@@ -3364,14 +3365,14 @@ msgstr "Mankout a ra labourerien"
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker coming
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:245
 msgid "Worker is coming"
-msgstr ""
+msgstr "Ul labourer zo o tont"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker coming. If
 #. you need plural forms here, please let us know.
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:250
 msgid "Workers are coming"
-msgstr ""
+msgstr "Labourerien zo o tont"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1
 #. experienced worker missing.
@@ -3388,15 +3389,15 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:596
 msgid "A new port was added to your economy."
-msgstr ""
+msgstr "Ur porzh-mor nevez a zo bet ouzhpennet d'hoc'h armerzh."
 
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:599
 msgid "A new headquarters was added to your economy."
-msgstr ""
+msgstr "Ur penngarter nevez a zo bet ouzhpennet d'hoc'h armerzh."
 
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:602
 msgid "A new warehouse was added to your economy."
-msgstr ""
+msgstr "Un etrepaouez nevez a zo bet ouzhpennet d'hoc'h armerzh."
 
 #. * TRANSLATORS: Message header, short for "Waterway Destroyed" (not much
 #. space
@@ -3431,7 +3432,7 @@ msgstr "Labourer"
 
 #: ../../../../src/logic/map_objects/tribes/worker_tasks/return.cc:121
 msgid "Worker got lost!"
-msgstr ""
+msgstr "Ul labourer zo kollet!"
 
 #: ../../../../src/logic/map_objects/tribes/worker_tasks/soldier_battle.cc:158
 #: ../../../../src/logic/map_objects/tribes/worker_tasks/soldier_battle.cc:162
@@ -3484,19 +3485,19 @@ msgstr "Lestr %d"
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
-msgstr ""
+msgstr "Porzh-mor %d"
 
 #: ../../../../src/logic/player.cc:2094
 #, c-format
 msgctxt "market"
 msgid "Market %d"
-msgstr ""
+msgstr "Marc'had %d"
 
 #: ../../../../src/logic/player.cc:2097
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
-msgstr ""
+msgstr "Etrepaouez %d"
 
 #: ../../../../src/logic/save_handler.cc:114
 msgid "Saving game…"
@@ -3528,7 +3529,7 @@ msgstr ""
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:985
 msgid "The following wares have been deleted:"
-msgstr ""
+msgstr "Ar marc'hadouriezhioù da-heul o deus bet dilamet:"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:992
 #, c-format
@@ -3598,7 +3599,7 @@ msgstr ""
 #: ../../../../src/map_io/widelands_map_loader.cc:316
 #: ../../../../src/wui/minimap.cc:180
 msgid "Flags"
-msgstr ""
+msgstr "Bannieloù"
 
 #: ../../../../src/map_io/map_saver.cc:206
 #: ../../../../src/map_io/widelands_map_loader.cc:323
@@ -3764,7 +3765,7 @@ msgstr ""
 
 #: ../../../../src/network/gameclient.cc:1353
 msgid "Disconnected"
-msgstr ""
+msgstr "Digennasket"
 
 #: ../../../../src/network/gameclient.cc:1354
 #, c-format
@@ -4345,7 +4346,7 @@ msgstr ""
 
 #: ../../../../src/ui_basic/color_chooser.cc:259
 msgid "Choose Color…"
-msgstr ""
+msgstr "Dibab ul liv..."
 
 #: ../../../../src/ui_basic/color_chooser.cc:296
 msgid "Initial Color"
@@ -4355,35 +4356,35 @@ msgstr ""
 #: ../../../../src/ui_basic/color_chooser.cc:305
 msgctxt "color"
 msgid "R"
-msgstr ""
+msgstr "R"
 
 #. * TRANSLATORS: First letter of the word "Green"
 #: ../../../../src/ui_basic/color_chooser.cc:314
 msgctxt "color"
 msgid "G"
-msgstr ""
+msgstr "G"
 
 #. * TRANSLATORS: First letter of the word "Blue"
 #: ../../../../src/ui_basic/color_chooser.cc:323
 msgctxt "color"
 msgid "B"
-msgstr ""
+msgstr "G"
 
 #: ../../../../src/ui_basic/color_chooser.cc:333
 msgid "Default Color"
-msgstr ""
+msgstr "Liv dre ziouer"
 
 #: ../../../../src/ui_basic/color_chooser.cc:345
 msgid "Red"
-msgstr ""
+msgstr "Ruz"
 
 #: ../../../../src/ui_basic/color_chooser.cc:358
 msgid "Green"
-msgstr ""
+msgstr "Gwer"
 
 #: ../../../../src/ui_basic/color_chooser.cc:371
 msgid "Blue"
-msgstr ""
+msgstr "Glas"
 
 #: ../../../../src/ui_basic/color_chooser.cc:490
 msgid "Remove from favorites"
@@ -4394,7 +4395,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:171
 #: ../../../../src/wui/quicknavigation.cc:286
 msgid "–"
-msgstr ""
+msgstr "–"
 
 #: ../../../../src/ui_basic/color_chooser.cc:497
 msgid "Add current color to favorites"
@@ -4403,13 +4404,13 @@ msgstr ""
 #: ../../../../src/ui_basic/dropdown.cc:113
 msgctxt "dropdown"
 msgid "Select Item"
-msgstr ""
+msgstr "Diuz un elfenn"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
 #: ../../../../src/ui_basic/dropdown.cc:424
 msgctxt "dropdown"
 msgid "Not Selected"
-msgstr ""
+msgstr "Ket diuzet"
 
 #: ../../../../src/ui_basic/dropdown.h:483
 msgid "No matches"
@@ -4417,7 +4418,7 @@ msgstr ""
 
 #: ../../../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
-msgstr ""
+msgstr "Gortozit mar plij..."
 
 #: ../../../../src/ui_basic/panel.cc:467
 msgid "Game ending – please wait…"
@@ -4462,11 +4463,11 @@ msgstr ""
 msgctxt "spinbox_change"
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%d vunutenn"
+msgstr[1] "%d vunutenn"
+msgstr[2] "%d munutenn"
+msgstr[3] "%d a vunutennoù"
+msgstr[4] "%d munutenn"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../../../src/ui_basic/spinbox.cc:503
@@ -4474,11 +4475,11 @@ msgstr[4] ""
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%d vunutenn"
+msgstr[1] "%d vunutenn"
+msgstr[2] "%d munutenn"
+msgstr[3] "%d a vunutennoù"
+msgstr[4] "%d munutenn"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n> hours"
 #. You may want to treat this as "by <n> hours", depending on how you
@@ -4488,11 +4489,11 @@ msgstr[4] ""
 msgctxt "spinbox_change"
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%d eur"
+msgstr[1] "%d eur"
+msgstr[2] "%d eur"
+msgstr[3] "%d a eurioù"
+msgstr[4] "%d eur"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../../../src/ui_basic/spinbox.cc:516
@@ -4500,11 +4501,11 @@ msgstr[4] ""
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%d eur"
+msgstr[1] "%d eur"
+msgstr[2] "%d eur"
+msgstr[3] "%d a eurioù"
+msgstr[4] "%d eur"
 
 #. * TRANSLATORS: "Increase/Decrease the value by X hours and Y minutes"
 #. You may want to treat this as "by X hours and Y minutes", depending on how
@@ -4516,7 +4517,7 @@ msgstr[4] ""
 #, c-format
 msgctxt "spinbox_change_hours_mins"
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s ha %2$s"
 
 #. * TRANSLATORS: ..
 #. The hours part of "Increase/Decrease the value by X hours and Y minutes".
@@ -4528,11 +4529,11 @@ msgstr ""
 msgctxt "spinbox_change_hours_mins"
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%d eur"
+msgstr[1] "%d eur"
+msgstr[2] "%d eur"
+msgstr[3] "%d a eurioù"
+msgstr[4] "%d eur"
 
 #. * TRANSLATORS: ..
 #. The minutes part of "Increase/Decrease the value by X hours and Y minutes"
@@ -4543,11 +4544,11 @@ msgstr[4] ""
 msgctxt "spinbox_change_hours_mins"
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%d vunutenn"
+msgstr[1] "%d vunutenn"
+msgstr[2] "%d munutenn"
+msgstr[3] "%d a vunutennoù"
+msgstr[4] "%d munutenn"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n> weeks"
 #. You may want to treat this as "by <n> weeks", depending on how you
@@ -4557,22 +4558,22 @@ msgstr[4] ""
 msgctxt "spinbox_change"
 msgid "%d week"
 msgid_plural "%d weeks"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%d sizhun"
+msgstr[1] "%d sizhun"
+msgstr[2] "%d sizhun"
+msgstr[3] "%d sizhunioù"
+msgstr[4] "%d sizhun"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../../../src/ui_basic/spinbox.cc:567
 #, c-format
 msgid "%d week"
 msgid_plural "%d weeks"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%d sizhun"
+msgstr[1] "%d sizhun"
+msgstr[2] "%d sizhun"
+msgstr[3] "%d sizhunioù"
+msgstr[4] "%d sizhun"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n> pixels"
 #. You may want to treat this as "by <n> pixels", depending on how you
@@ -4631,7 +4632,7 @@ msgstr[4] ""
 #, c-format
 msgctxt "spinbox_change"
 msgid "%i %%"
-msgstr ""
+msgstr "%i %%"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n>"
 #. You may want to treat this as "by <n>", depending on how you
@@ -4640,7 +4641,7 @@ msgstr ""
 #, c-format
 msgctxt "spinbox_change"
 msgid "%d"
-msgstr ""
+msgstr "%d"
 
 #: ../../../../src/ui_basic/table.cc:157
 msgid "Click to reverse sorting"
@@ -4660,7 +4661,7 @@ msgstr ""
 
 #: ../../../../src/ui_basic/textinput.cc:376
 msgid "Cut"
-msgstr ""
+msgstr "Trochañ"
 
 #: ../../../../src/ui_basic/textinput.cc:376
 msgid "Cut the selected text to the clipboard"
@@ -4669,7 +4670,7 @@ msgstr ""
 #: ../../../../src/ui_basic/textinput.cc:379
 #: ../../../../src/ui_fsmenu/tech_info.cc:238
 msgid "Copy"
-msgstr ""
+msgstr "Eilañ"
 
 #: ../../../../src/ui_basic/textinput.cc:379
 msgid "Copy the selected text to the clipboard"
@@ -4677,7 +4678,7 @@ msgstr ""
 
 #: ../../../../src/ui_basic/textinput.cc:382
 msgid "Paste"
-msgstr ""
+msgstr "Pegañ"
 
 #: ../../../../src/ui_basic/textinput.cc:382
 msgid "Paste the clipboard content"
@@ -4690,7 +4691,7 @@ msgstr ""
 #: ../../../../src/ui_basic/textinput.cc:388
 #: ../../../../src/wlapplication_options.cc:364
 msgid "Select All"
-msgstr ""
+msgstr "Diuz pep tra"
 
 #: ../../../../src/ui_basic/textinput.cc:388
 msgid "Select the entire text"
@@ -4786,7 +4787,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/contact.cc:90
 msgid "Sent"
-msgstr ""
+msgstr "Kas"
 
 #: ../../../../src/ui_fsmenu/addons/contact.cc:91
 msgid ""
@@ -4818,7 +4819,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:93
 msgid "Username:"
-msgstr ""
+msgstr "Anv-arveriad:"
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:100
 #: ../../../../src/ui_fsmenu/login_box.cc:63
@@ -5002,7 +5003,7 @@ msgstr ""
 #. Development Team
 #: ../../../../src/ui_fsmenu/addons/manager.cc:585
 msgid "Contact us…"
-msgstr ""
+msgstr "Mont e darempred ganeomp..."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:609
 msgid "Tools for Add-Ons Developers"
@@ -5094,7 +5095,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:762
 msgid "Development"
-msgstr ""
+msgstr "Diorren"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:762
 msgid "Tools for add-on developers"
@@ -5103,7 +5104,7 @@ msgstr ""
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:766
 msgid "Name"
-msgstr ""
+msgstr "Anv"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
 #: ../../../../src/ui_fsmenu/addons/manager.cc:768
@@ -5294,12 +5295,12 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1611
 msgid "Browse"
-msgstr ""
+msgstr "Furchal"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1611
 #, c-format
 msgid "Browse (%u)"
-msgstr ""
+msgstr "Furchal (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1618
 msgid "Translations for website maps"
@@ -5327,7 +5328,7 @@ msgstr[4] ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1631
 #, c-format
 msgid "• %s"
-msgstr ""
+msgstr "• %s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1684
 msgid "Website Maps"
@@ -5417,12 +5418,12 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2091
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2180
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1984
 #, c-format
 msgid "‘%s’"
-msgstr ""
+msgstr "‘%s’"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1992
 #, c-format
@@ -5524,21 +5525,21 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:161
 msgid "Name:"
-msgstr ""
+msgstr "Anv:"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:171
 #: ../../../../src/ui_fsmenu/tech_info.cc:76
 msgid "Version:"
-msgstr ""
+msgstr "Handelv:"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:177
 #: ../../../../src/wui/mapdetails.cc:201 ../../../../src/wui/mapdetails.cc:206
 msgid "Minimum Widelands Version:"
-msgstr ""
+msgstr "Handelv Widelands izelañ:"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:183
 msgid "Maximum Widelands Version:"
-msgstr ""
+msgstr "Handelv Widelands uhelañ:"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:356
 msgid "New Add-On"
@@ -5550,7 +5551,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:359
 msgid "Category"
-msgstr ""
+msgstr "Rummad"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:380
 #: ../../../../src/ui_fsmenu/addons/packager.cc:396
@@ -5730,7 +5731,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:58
 msgid "Name too long"
-msgstr ""
+msgstr "Anv re hir"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:63
 #, c-format
@@ -5748,7 +5749,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:162
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:163
 msgid "Create subdirectory"
@@ -5776,21 +5777,21 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/main.cc:461
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Anv: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:285
 #: ../../../../src/ui_fsmenu/main.cc:463
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:114
 #, c-format
 msgid "Size: %s"
-msgstr ""
+msgstr "Ment: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:287
 #: ../../../../src/ui_fsmenu/main.cc:465
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:116
 #, c-format
 msgid "%1$u×%2$u"
-msgstr ""
+msgstr "%1$u×%2$u"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:288
 #: ../../../../src/ui_fsmenu/main.cc:415 ../../../../src/ui_fsmenu/main.cc:466
@@ -5809,7 +5810,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:295
 msgctxt "version"
 msgid "(none)"
-msgstr ""
+msgstr "(hini ebet)"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:325
 msgid "Top-level directory"
@@ -5855,7 +5856,7 @@ msgstr "Diaesder"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:503
 msgid "Difficulty:"
-msgstr ""
+msgstr "Diaesder:"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:528
 msgid "The campaigns difficulty. One word."
@@ -5918,7 +5919,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:242
 msgctxt "markup"
 msgid "_"
-msgstr ""
+msgstr "_"
 
 #. * TRANSLATORS: Short for Shadow text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:246
@@ -5944,43 +5945,43 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:268
 msgctxt "markup"
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:268
 msgid "Tiny"
-msgstr ""
+msgstr "Munut"
 
 #. * TRANSLATORS: Short for Small text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:272
 msgctxt "markup"
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:272
 msgid "Small"
-msgstr ""
+msgstr "Bihan"
 
 #. * TRANSLATORS: Short for Medium text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:276
 msgctxt "markup"
 msgid "3"
-msgstr ""
+msgstr "3"
 
 #. * TRANSLATORS: Short for Large text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:280
 msgctxt "markup"
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:280
 msgid "Large"
-msgstr ""
+msgstr "Bras"
 
 #. * TRANSLATORS: Short for Huge text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:284
 msgctxt "markup"
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:284
 msgid "Huge"
@@ -6181,7 +6182,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:965
 #, c-format
 msgid "%1$u / %2$u"
-msgstr ""
+msgstr "%1$u / %2$u"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:1001
 msgid "This screenshot could not be fetched from the server due to an error."
@@ -6200,7 +6201,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:379
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:673
 msgid "Uninstall"
-msgstr ""
+msgstr "Distaliañ"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:49
 #, c-format
@@ -6281,19 +6282,19 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:216
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:267
 msgid "Disable"
-msgstr ""
+msgstr "Diweredekaat"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:216
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:267
 msgid "Enable"
-msgstr ""
+msgstr "Gweredekaat"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:232
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:412
 #, c-format
 msgid "%1$s+%2$u"
-msgstr ""
+msgstr "%1$s+%2$u"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:250
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:461
@@ -6301,33 +6302,33 @@ msgstr ""
 #: ../../../../src/wui/constructionsitewindow.cc:140
 #, c-format
 msgid "(%s)"
-msgstr ""
+msgstr "(%s)"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:252
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:465
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:698
 #, c-format
 msgid "by %s"
-msgstr ""
+msgstr "gant %s"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:289
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:563
 #, c-format
 msgid "Category: %s"
-msgstr ""
+msgstr "Rummad: %s"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:293
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:566
 #, c-format
 msgid "Version: %1$s+%2$u"
-msgstr ""
+msgstr "Handelv: %1$s+%2$u"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:361
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:481
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:664
 msgid "Install"
-msgstr ""
+msgstr "Staliañ"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:370
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:514
@@ -6502,7 +6503,7 @@ msgstr "Anv ar c'hampagn"
 #: ../../../../src/ui_fsmenu/campaigns.cc:45
 msgctxt "difficulty"
 msgid "Default"
-msgstr ""
+msgstr "Diouer"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:44
 msgid "Crash Report Details"
@@ -6511,12 +6512,12 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/crash_report.cc:62
 #: ../../../../src/ui_fsmenu/crash_report.cc:149
 msgid "Open link"
-msgstr ""
+msgstr "Digor al liamm"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:64
 #: ../../../../src/ui_fsmenu/crash_report.cc:151
 msgid "Copy link"
-msgstr ""
+msgstr "Eilañ al liamm"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:68
 #: ../../../../src/ui_fsmenu/crash_report.cc:156
@@ -6544,7 +6545,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:142
 msgid "Show details…"
-msgstr ""
+msgstr "Diskouez ar munudoù..."
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:142
 msgid "View the detailed crash report"
@@ -7221,7 +7222,7 @@ msgstr "Kuitaat ar c'hoariadenn"
 #: ../../../../src/ui_fsmenu/main.cc:546
 #, c-format
 msgid "Version %1$s"
-msgstr ""
+msgstr "Handelv %1$s"
 
 #. * TRANSLATORS: Placeholders are the copyright years
 #: ../../../../src/ui_fsmenu/main.cc:549
@@ -7282,7 +7283,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:109
 msgid "Map Details"
-msgstr ""
+msgstr "Munudoù ar gartenn"
 
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:109
 msgid "Scenario Details"
@@ -7303,11 +7304,11 @@ msgstr "(kartenn ebet)"
 
 #: ../../../../src/ui_fsmenu/mapselect.cc:46
 msgid "Choose Map"
-msgstr ""
+msgstr "Dibab ar gartenn"
 
 #: ../../../../src/ui_fsmenu/mapselect.cc:85
 msgid "Show all maps"
-msgstr ""
+msgstr "Diskouez an holl kartennoù"
 
 #: ../../../../src/ui_fsmenu/mapselect.cc:88
 msgid "Show original map names"
@@ -7900,7 +7901,7 @@ msgstr ""
 #. * TRANSLATORS: Entry in the window size dropdown
 #: ../../../../src/ui_fsmenu/options.cc:604
 msgid "Fullscreen"
-msgstr ""
+msgstr "Skrammad a-bezh"
 
 #. * TRANSLATORS: Entry in the window size dropdown
 #: ../../../../src/ui_fsmenu/options.cc:607
@@ -7911,7 +7912,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/options.cc:623
 #: ../../../../src/ui_fsmenu/options.cc:631
 msgid "%1% × %2%"
-msgstr ""
+msgstr "%1% × %2%"
 
 #: ../../../../src/ui_fsmenu/options.cc:699
 msgid "Try system language"
@@ -8036,7 +8037,7 @@ msgstr "C'hwi"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:80
 msgid "MacOS"
-msgstr ""
+msgstr "MacOS"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:82
 msgid "Windows (64 bit)"
@@ -8048,15 +8049,15 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:86
 msgid "Linux"
-msgstr ""
+msgstr "Linux"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:88
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:90
 msgid "Unix"
-msgstr ""
+msgstr "Unix"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:92
 msgid "Unknown"
@@ -8268,11 +8269,11 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:182
 msgid "Warehouse"
-msgstr ""
+msgstr "Etrepaouez"
 
 #: ../../../../src/wlapplication_options.cc:183
 msgid "Port"
-msgstr ""
+msgstr "Porzh-mor"
 
 #: ../../../../src/wlapplication_options.cc:184
 msgid "Minor Training Site"
@@ -8300,11 +8301,11 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:190
 msgid "Tower"
-msgstr ""
+msgstr "Tour"
 
 #: ../../../../src/wlapplication_options.cc:191
 msgid "Fortress"
-msgstr ""
+msgstr "Kreñvlec'h"
 
 #: ../../../../src/wlapplication_options.cc:192
 msgid "Woodcutter’s House"
@@ -8312,11 +8313,11 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:193
 msgid "Forester’s House"
-msgstr ""
+msgstr "Ti ar foricher"
 
 #: ../../../../src/wlapplication_options.cc:194
 msgid "Quarry"
-msgstr ""
+msgstr "Mengleuz"
 
 #: ../../../../src/wlapplication_options.cc:195
 msgid "Primary Building Materials Industry"
@@ -8332,11 +8333,11 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:198
 msgid "Fishing"
-msgstr ""
+msgstr "Pesketa"
 
 #: ../../../../src/wlapplication_options.cc:199
 msgid "Hunting"
-msgstr ""
+msgstr "Chaseal"
 
 #: ../../../../src/wlapplication_options.cc:200
 msgid "Fish/Meat Replenishing"
@@ -8344,7 +8345,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:201
 msgid "Well"
-msgstr ""
+msgstr "Puñs"
 
 #: ../../../../src/wlapplication_options.cc:202
 msgid "Primary Farm"
@@ -8356,15 +8357,15 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:204
 msgid "Mill"
-msgstr ""
+msgstr "Milin"
 
 #: ../../../../src/wlapplication_options.cc:205
 msgid "Bakery"
-msgstr ""
+msgstr "Ti ar baraer"
 
 #: ../../../../src/wlapplication_options.cc:206
 msgid "Brewery"
-msgstr ""
+msgstr "Breserezh"
 
 #: ../../../../src/wlapplication_options.cc:207
 msgid "Smokery"
@@ -8372,7 +8373,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:208
 msgid "Tavern"
-msgstr ""
+msgstr "Tavarn"
 
 #: ../../../../src/wlapplication_options.cc:209
 msgid "Ore Smelting"
@@ -8412,7 +8413,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:218
 msgid "Second Carrier"
-msgstr ""
+msgstr "An eil degaser"
 
 #: ../../../../src/wlapplication_options.cc:219
 msgid "Charcoal"
@@ -8420,19 +8421,19 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:220
 msgid "Stone Mine"
-msgstr ""
+msgstr "Mengleuz maen-greun"
 
 #: ../../../../src/wlapplication_options.cc:221
 msgid "Coal Mine"
-msgstr ""
+msgstr "Mengleuz glaou"
 
 #: ../../../../src/wlapplication_options.cc:222
 msgid "Iron Mine"
-msgstr ""
+msgstr "Mengleuz houarn"
 
 #: ../../../../src/wlapplication_options.cc:223
 msgid "Gold Mine"
-msgstr ""
+msgstr "Mengleuz aour"
 
 #: ../../../../src/wlapplication_options.cc:224
 msgid "Agricultural Producer"
@@ -8472,7 +8473,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:274
 msgid "Multiplayer"
-msgstr ""
+msgstr "Liesc'hoarier"
 
 #: ../../../../src/wlapplication_options.cc:281
 msgid "Editor – Load Map"
@@ -8488,7 +8489,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:308
 msgid "About"
-msgstr ""
+msgstr "A-zivout"
 
 #: ../../../../src/wlapplication_options.cc:324
 msgid "Internet Login"
@@ -8552,11 +8553,11 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:405
 msgid "Load"
-msgstr ""
+msgstr "Kargañ"
 
 #: ../../../../src/wlapplication_options.cc:410
 msgid "Exit"
-msgstr ""
+msgstr "Kuitaat"
 
 #: ../../../../src/wlapplication_options.cc:415
 msgid "Zoom In"
@@ -8707,7 +8708,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:631
 #: ../../../../src/wui/ware_statistics_menu.cc:105
 msgid "Ware Statistics"
-msgstr ""
+msgstr "Stadegoù ar marc'hadouriezhioù"
 
 #: ../../../../src/wlapplication_options.cc:636
 #: ../../../../src/wui/building_statistics_menu.cc:52
@@ -8767,7 +8768,7 @@ msgstr ""
 #: ../../../../src/wui/game_chat_menu.cc:68
 #: ../../../../src/wui/interactive_gamebase.cc:416
 msgid "Chat"
-msgstr ""
+msgstr "Flapadenn"
 
 #: ../../../../src/wlapplication_options.cc:711
 #: ../../../../src/wui/pinned_note.cc:41
@@ -8934,7 +8935,7 @@ msgstr ""
 #, c-format
 msgctxt "hotkey"
 msgid "%1$s / %2$s"
-msgstr ""
+msgstr "%1$s / %2$s"
 
 #: ../../../../src/wlapplication_options.cc:988
 #: ../../../../src/wlapplication_options.cc:1032
@@ -8964,7 +8965,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1052
 msgctxt "hotkey"
 msgid "Click"
-msgstr ""
+msgstr "Klik"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1054
@@ -8977,7 +8978,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1058
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Pennlizh. + Klik"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1060
@@ -9015,7 +9016,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1375
 msgctxt "hotkey"
 msgid "Shift"
-msgstr ""
+msgstr "Pennlizh."
 
 #: ../../../../src/wlapplication_options.cc:1378
 msgctxt "hotkey"
@@ -9040,7 +9041,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1397
 #, c-format
 msgid "%1$s+%2$s"
-msgstr ""
+msgstr "%1$s+%2$s"
 
 #: ../../../../src/wlapplication_options.cc:1410
 msgctxt "hotkey"
@@ -9229,7 +9230,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:1491
 msgid "(disabled)"
-msgstr ""
+msgstr "(diweredekaet)"
 
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
@@ -9238,7 +9239,7 @@ msgstr ""
 #: ../../../../src/wui/waresdisplay.cc:646
 #, c-format
 msgid "%1$s%2$s"
-msgstr ""
+msgstr "%1$s%2$s"
 
 #: ../../../../src/wlapplication_options.cc:1550
 #, c-format
@@ -9321,7 +9322,7 @@ msgstr ""
 
 #: ../../../../src/wui/actionconfirm.cc:568
 msgid "Cancel?"
-msgstr ""
+msgstr "Nullañ?"
 
 #: ../../../../src/wui/actionconfirm.cc:568
 msgid "Do you really want to cancel this trade agreement?"
@@ -9358,7 +9359,7 @@ msgstr ""
 
 #: ../../../../src/wui/attack_window.cc:79
 msgid "Attack"
-msgstr ""
+msgstr "Tagañ"
 
 #. * TRANSLATORS: Number of ships that should attack. Used in the attack
 #. window.
@@ -9366,11 +9367,11 @@ msgstr ""
 #, c-format
 msgid "%u ship"
 msgid_plural "%u ships"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%u lestr"
+msgstr[1] "%u lestr"
+msgstr[2] "%u lestr"
+msgstr[3] "%u lestr"
+msgstr[4] "%u lestr"
 
 #. * TRANSLATORS: Number of soldiers that should attack. Used in the attack
 #. window.
@@ -9387,7 +9388,7 @@ msgstr[4] "%u soudard"
 
 #: ../../../../src/wui/attack_window.cc:376
 msgid "Number of ships"
-msgstr ""
+msgstr "Niver a listri"
 
 #: ../../../../src/wui/attack_window.cc:376
 msgid "Number of soldiers"
@@ -9503,7 +9504,7 @@ msgstr ""
 
 #: ../../../../src/wui/building_statistics_menu.cc:82
 msgid "(no building selected)"
-msgstr ""
+msgstr "(savadur diuzet ebet)"
 
 #: ../../../../src/wui/building_statistics_menu.cc:88
 msgid "Owned:"
@@ -9541,7 +9542,7 @@ msgstr "Savadurioù bihan"
 
 #: ../../../../src/wui/building_statistics_menu.cc:368
 msgid "Medium buildings"
-msgstr ""
+msgstr "Savadurioù etre"
 
 #: ../../../../src/wui/building_statistics_menu.cc:370
 msgid "Big buildings"
@@ -9572,7 +9573,7 @@ msgstr "%1%/%2%"
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
 #: ../../../../src/wui/building_statistics_menu.cc:754
 msgid "Lacking soldiers:"
-msgstr ""
+msgstr "A vank soudarded:"
 
 #: ../../../../src/wui/buildingwindow.cc:218
 msgid "Muted – click to unmute"
@@ -9598,7 +9599,7 @@ msgstr "Kenderc'hel ganti"
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
 #: ../../../../src/wui/buildingwindow.cc:294
 msgid "Stop"
-msgstr ""
+msgstr "Paouez"
 
 #. * TRANSLATORS: Infinite Production toggle button for production sites.
 #: ../../../../src/wui/buildingwindow.cc:308
@@ -9661,11 +9662,11 @@ msgstr ""
 #: ../../../../src/wui/constructionsitewindow.cc:170
 #: ../../../../src/wui/dismantlesitewindow.cc:85
 msgid "Building materials"
-msgstr ""
+msgstr "Danvezioù sevel"
 
 #: ../../../../src/wui/constructionsitewindow.cc:246
 msgid "Stopped"
-msgstr ""
+msgstr "Paouezet"
 
 #: ../../../../src/wui/constructionsitewindow.cc:247
 msgid "Stop this building’s work after completion"
@@ -9736,7 +9737,7 @@ msgstr ""
 
 #: ../../../../src/wui/economy_options_window.cc:51
 msgid "Economy options"
-msgstr ""
+msgstr "Dibarzhioù an armerzh"
 
 #: ../../../../src/wui/economy_options_window.cc:84
 msgid "Decrease target by 10"
@@ -9817,16 +9818,16 @@ msgstr ""
 #: ../../../../src/wui/encyclopedia_window.cc:235
 #: ../../../../src/wui/helpwindow.cc:147
 msgid "Broken Link"
-msgstr ""
+msgstr "Liamm torret"
 
 #: ../../../../src/wui/encyclopedia_window.cc:236
 #: ../../../../src/wui/helpwindow.cc:148
 msgid "This hyperlink seems to be broken."
-msgstr ""
+msgstr "War a seblant eo torret al liamm."
 
 #: ../../../../src/wui/fieldaction.cc:235
 msgid "Build medium building"
-msgstr ""
+msgstr "Sevel ar savadur etre"
 
 #: ../../../../src/wui/fieldaction.cc:235
 msgid "Build small building"
@@ -9838,7 +9839,7 @@ msgstr "Sevel ar savadur bras"
 
 #: ../../../../src/wui/fieldaction.cc:236
 msgid "Build port building"
-msgstr ""
+msgstr "Sevel ur porzh-mor"
 
 #: ../../../../src/wui/fieldaction.cc:268
 msgid "Action"
@@ -9860,7 +9861,7 @@ msgstr ""
 #: ../../../../src/wui/fieldaction.cc:423
 #: ../../../../src/wui/fieldaction.cc:554
 msgid "Build road"
-msgstr ""
+msgstr "Sevel un hent"
 
 #: ../../../../src/wui/fieldaction.cc:427
 msgid "Build waterway"
@@ -9868,7 +9869,7 @@ msgstr ""
 
 #: ../../../../src/wui/fieldaction.cc:435
 msgid "Destroy this flag"
-msgstr ""
+msgstr "Distrujañ ar banniel-mañ "
 
 #: ../../../../src/wui/fieldaction.cc:442
 msgid "Configure this flag’s economy"
@@ -9893,11 +9894,11 @@ msgstr ""
 
 #: ../../../../src/wui/fieldaction.cc:491
 msgid "Place a flag"
-msgstr ""
+msgstr "Lakaat ur banniel"
 
 #: ../../../../src/wui/fieldaction.cc:496
 msgid "Destroy a road"
-msgstr ""
+msgstr "Distrujañ un hent"
 
 #: ../../../../src/wui/fieldaction.cc:501
 msgid "Destroy a waterway"
@@ -9935,7 +9936,7 @@ msgstr "Sevel mengleuzioù"
 #: ../../../../src/wui/fieldaction.cc:689
 #: ../../../../src/wui/fieldaction.cc:716
 msgid "Build flag"
-msgstr ""
+msgstr "Sevel bannieloù"
 
 #: ../../../../src/wui/fieldaction.cc:693
 msgid "Cancel road"
@@ -9951,7 +9952,7 @@ msgstr ""
 
 #: ../../../../src/wui/fieldaction.cc:707
 msgid "Build roads"
-msgstr ""
+msgstr "Sevel hentoù"
 
 #: ../../../../src/wui/fieldaction.cc:720
 msgid "Cancel waterway"
@@ -10002,7 +10003,7 @@ msgstr "%1$s (%2$s)"
 
 #: ../../../../src/wui/fieldaction.cc:1272
 msgid "Select Ship"
-msgstr ""
+msgstr "Diuz ul lestr"
 
 #: ../../../../src/wui/fieldaction.cc:1295
 msgid "Own Ships"
@@ -10030,11 +10031,11 @@ msgstr ""
 
 #: ../../../../src/wui/fleet_options_window.cc:158
 msgid "Ports:"
-msgstr ""
+msgstr "Porzhioù-mor:"
 
 #: ../../../../src/wui/fleet_options_window.cc:159
 msgid "Ships:"
-msgstr ""
+msgstr "Listri:"
 
 #: ../../../../src/wui/fleet_options_window.cc:161
 msgid "Total waterways:"
@@ -10077,7 +10078,7 @@ msgstr ""
 
 #: ../../../../src/wui/game_chat_panel.cc:443
 msgid "All"
-msgstr ""
+msgstr "Pep tra"
 
 #. * TRANSLATORS: Window label
 #: ../../../../src/wui/game_client_disconnected.cc:47
@@ -10093,7 +10094,7 @@ msgstr ""
 #. * TRANSLATORS: Button text
 #: ../../../../src/wui/game_client_disconnected.cc:87
 msgid "Continue game"
-msgstr ""
+msgstr "Kenderc'hel da c'hoari"
 
 #. * TRANSLATORS: Button tooltip
 #: ../../../../src/wui/game_client_disconnected.cc:89
@@ -10123,7 +10124,7 @@ msgstr ""
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:107
 msgid "Leave"
-msgstr ""
+msgstr "Mont kuit"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:108
 msgid "Leave your current team and become teamless"
@@ -10147,7 +10148,7 @@ msgstr ""
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:131
 msgid "Invite"
-msgstr ""
+msgstr "Pediñ"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:132
 msgid "Invite this player to join your team"
@@ -10167,12 +10168,12 @@ msgstr ""
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:246
 msgid "No team"
-msgstr ""
+msgstr "Skipailh ebet"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:246
 #, c-format
 msgid "Team %u"
-msgstr ""
+msgstr "Skipailh %u"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:261
 #, c-format
@@ -10195,19 +10196,19 @@ msgstr ""
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:324
 msgid "Reject"
-msgstr ""
+msgstr "Nac'hañ"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:330
 msgid "Accept"
-msgstr ""
+msgstr "Asantiñ"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:331
 msgid "Refuse"
-msgstr ""
+msgstr "Nac'hañ"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:347
 msgid "Retract"
-msgstr ""
+msgstr "Nullañ"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:403
 #: ../../../../src/wui/marketwindow.cc:936
@@ -10534,7 +10535,7 @@ msgstr ""
 
 #: ../../../../src/wui/game_summary.cc:59
 msgid "Player Info:"
-msgstr ""
+msgstr "Titouroù ar c'hoarier:"
 
 #: ../../../../src/wui/game_summary.cc:92
 msgid "Elapsed time:"
@@ -10542,7 +10543,7 @@ msgstr ""
 
 #: ../../../../src/wui/game_summary.cc:104
 msgid "Continue playing"
-msgstr ""
+msgstr "Kenderc'hel da c'hoari"
 
 #: ../../../../src/wui/game_summary.cc:120
 msgid "Time"
@@ -10584,12 +10585,12 @@ msgstr ""
 #: ../../../../src/wui/game_summary.cc:257
 #, c-format
 msgid "%s won!"
-msgstr ""
+msgstr "%s a zo bet trec'h!"
 
 #: ../../../../src/wui/game_summary.cc:259
 #, c-format
 msgid "Team %u won!"
-msgstr ""
+msgstr "Skipailh %u a zo bet trec'h!"
 
 #: ../../../../src/wui/game_summary.cc:313
 msgid "Score"
@@ -10716,7 +10717,7 @@ msgstr ""
 
 #: ../../../../src/wui/info_panel.cc:217
 msgid "Hide"
-msgstr ""
+msgstr "Kuzhat"
 
 #: ../../../../src/wui/info_panel.cc:222
 msgid "Move panel to bottom"
@@ -10735,13 +10736,13 @@ msgstr ""
 #: ../../../../src/wui/info_panel.cc:465
 #, c-format
 msgid "%1$s • %2$s"
-msgstr ""
+msgstr "%1$s • %2$s"
 
 #. * TRANSLATORS: Gametime • Realtime • Gamespeed
 #: ../../../../src/wui/info_panel.cc:470
 #, c-format
 msgid "%1$s • %2$s • %3$s"
-msgstr ""
+msgstr "%1$s • %2$s • %3$s"
 
 #: ../../../../src/wui/inputqueuedisplay.cc:70
 msgid "Priority: Very Low"
@@ -10799,11 +10800,11 @@ msgstr ""
 
 #: ../../../../src/wui/inputqueuedisplay.cc:217
 msgid "Remove ware"
-msgstr ""
+msgstr "Dilemel ar varc'hadouriezh"
 
 #: ../../../../src/wui/inputqueuedisplay.cc:226
 msgid "Add ware"
-msgstr ""
+msgstr "Ouzhpennañ ar varc'hadouriezh"
 
 #: ../../../../src/wui/inputqueuedisplay.cc:713
 msgid "Hide controls"
@@ -10816,7 +10817,7 @@ msgstr ""
 #: ../../../../src/wui/inputqueuedisplay.cc:769
 #, c-format
 msgid "+%u"
-msgstr ""
+msgstr "+%u"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../../../src/wui/interactive_base.cc:144
@@ -10859,7 +10860,7 @@ msgstr ""
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../../../src/wui/interactive_base.cc:349
 msgid "Zoom –"
-msgstr ""
+msgstr "Zoum –"
 
 #: ../../../../src/wui/interactive_base.cc:928
 #, c-format
@@ -10893,7 +10894,7 @@ msgstr ""
 #: ../../../../src/wui/interactive_gamebase.cc:58
 #, c-format
 msgid "%1$u.%2$u×"
-msgstr ""
+msgstr "%1$u.%2$u×"
 
 #: ../../../../src/wui/interactive_gamebase.cc:60
 msgid "PAUSE"
@@ -10994,7 +10995,7 @@ msgstr "Ehanañ ar c'hoari"
 #: ../../../../src/wui/interactive_gamebase.cc:630
 #, c-format
 msgid "%1$s (%2$s) (%3$s)"
-msgstr ""
+msgstr "%1$s (%2$s) (%3$s)"
 
 #: ../../../../src/wui/interactive_gamebase.cc:669
 msgid "Remaining construction costs:"
@@ -11216,7 +11217,7 @@ msgstr ""
 
 #: ../../../../src/wui/mapdata.cc:51 ../../../../src/wui/mapdata.cc:80
 msgid "No Author"
-msgstr ""
+msgstr "Aozer ebet"
 
 #. * TRANSLATORS: Parent directory/folder
 #: ../../../../src/wui/mapdata.cc:179 ../../../../src/wui/savegametable.cc:127
@@ -11226,7 +11227,7 @@ msgstr ""
 #. * TRANSLATORS: This label is shown when a folder is empty
 #: ../../../../src/wui/mapdata.cc:185
 msgid "empty"
-msgstr ""
+msgstr "goullo"
 
 #: ../../../../src/wui/mapdetails.cc:131
 msgid "Directory"
@@ -12004,7 +12005,7 @@ msgstr ""
 #: ../../../../src/wui/shipwindow.cc:364
 msgctxt "destination"
 msgid "(none)"
-msgstr ""
+msgstr "(hini ebet)"
 
 #: ../../../../src/wui/shipwindow.cc:429 ../../../../src/wui/shipwindow.cc:434
 #: ../../../../src/wui/shipwindow.cc:439
@@ -12027,13 +12028,13 @@ msgstr ""
 #: ../../../../src/wui/shipwindow.cc:494
 #, c-format
 msgid "HP: %1$u/%2$u"
-msgstr ""
+msgstr "PY: %1$u/%2$u"
 
 #: ../../../../src/wui/soldier_statistics_menu.cc:89
 #: ../../../../src/wui/soldier_statistics_menu.cc:182
 #, c-format
 msgid "Health: %u"
-msgstr ""
+msgstr "Yec'hed: %u"
 
 #: ../../../../src/wui/soldier_statistics_menu.cc:90
 #: ../../../../src/wui/soldier_statistics_menu.cc:198
@@ -12152,7 +12153,7 @@ msgstr ""
 
 #: ../../../../src/wui/stock_menu.cc:59
 msgid "Red:"
-msgstr ""
+msgstr "Ruz:"
 
 #: ../../../../src/wui/stock_menu.cc:59
 msgid "Stock is lower than the target"
@@ -12160,7 +12161,7 @@ msgstr ""
 
 #: ../../../../src/wui/stock_menu.cc:62
 msgid "Yellow:"
-msgstr ""
+msgstr "Melen:"
 
 #: ../../../../src/wui/stock_menu.cc:63
 msgid "Stock is equal to the target"
@@ -12168,7 +12169,7 @@ msgstr ""
 
 #: ../../../../src/wui/stock_menu.cc:66
 msgid "Green:"
-msgstr ""
+msgstr "Gwer:"
 
 #: ../../../../src/wui/stock_menu.cc:67
 msgid "Stock is higher than the target"
@@ -12176,7 +12177,7 @@ msgstr ""
 
 #: ../../../../src/wui/stock_menu.cc:71
 msgid "Wares (total)"
-msgstr ""
+msgstr "Marc'hadouriezhioù (en holl)"
 
 #: ../../../../src/wui/stock_menu.cc:75
 msgid "Workers (total)"
@@ -12184,11 +12185,11 @@ msgstr ""
 
 #: ../../../../src/wui/stock_menu.cc:80
 msgid "Wares in warehouses"
-msgstr ""
+msgstr "Marc'hadouriezhioù e-barzh an etrepaouezioù"
 
 #: ../../../../src/wui/stock_menu.cc:85
 msgid "Workers in warehouses"
-msgstr ""
+msgstr "Labourerien e-barzh an etrepaouezioù"
 
 #: ../../../../src/wui/story_message_box.cc:80
 msgid "Next Mission"
@@ -12257,15 +12258,15 @@ msgstr ""
 
 #: ../../../../src/wui/waresdisplay.cc:640
 msgid "↓"
-msgstr ""
+msgstr "↓"
 
 #: ../../../../src/wui/waresdisplay.cc:642
 msgid "↑"
-msgstr ""
+msgstr "↑"
 
 #: ../../../../src/wui/waresdisplay.cc:643
 msgid "="
-msgstr ""
+msgstr "="
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
