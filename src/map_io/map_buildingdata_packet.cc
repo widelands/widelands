@@ -531,7 +531,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 			warehouse.next_stock_remove_act_ = Time(fr);
 
 			if (warehouse.descr().get_isport()) {
-				if (Serial portdock = fr.unsigned_32()) {
+				if (Serial portdock = fr.unsigned_32(); portdock != 0) {
 					warehouse.portdock_ = &mol.get<PortDock>(portdock);
 					warehouse.portdock_->set_economy(warehouse.get_economy(wwWARE), wwWARE);
 					warehouse.portdock_->set_economy(warehouse.get_economy(wwWORKER), wwWORKER);
@@ -569,6 +569,9 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 						warehouse.portdock_->warship_soldier_request_managers_.emplace(
 						   ship->serial(), srm);
 					}
+				} else {
+					log_err(
+					   "Loading port %s without a portdock.", warehouse.get_warehouse_name().c_str());
 				}
 			}
 
@@ -1468,15 +1471,21 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 	if (warehouse.descr().get_isport()) {
 		fw.unsigned_32(mos.get_object_file_index_or_zero(warehouse.portdock_));
 
-		// Expedition specific stuff. See comment in loader.
-		if (warehouse.portdock_->expedition_started()) {
-			warehouse.portdock_->expedition_bootstrap()->save(fw, game, mos);
-		}
+		if (warehouse.portdock_ != nullptr) {
+			// Expedition specific stuff. See comment in loader.
+			if (warehouse.portdock_->expedition_started()) {
+				warehouse.portdock_->expedition_bootstrap()->save(fw, game, mos);
+			}
 
-		fw.unsigned_32(warehouse.portdock_->warship_soldier_request_managers_.size());
-		for (const auto& pair : warehouse.portdock_->warship_soldier_request_managers_) {
-			fw.unsigned_32(mos.get_object_file_index(*game.objects().get_object(pair.first)));
-			pair.second->write(fw, game, mos);
+			fw.unsigned_32(warehouse.portdock_->warship_soldier_request_managers_.size());
+			for (const auto& pair : warehouse.portdock_->warship_soldier_request_managers_) {
+				fw.unsigned_32(mos.get_object_file_index(*game.objects().get_object(pair.first)));
+				pair.second->write(fw, game, mos);
+			}
+		} else {
+			log_err_time(game.get_gametime(),
+			             "Saving port %s without a portdock. Expect problems on loading.",
+			             warehouse.get_warehouse_name().c_str());
 		}
 	}
 
