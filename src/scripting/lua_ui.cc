@@ -35,6 +35,7 @@
 #include "scripting/ui/lua_main_menu.h"
 #include "scripting/ui/lua_map_view.h"
 #include "scripting/ui/lua_multiline_textarea.h"
+#include "scripting/ui/lua_pagination.h"
 #include "scripting/ui/lua_panel.h"
 #include "scripting/ui/lua_progress_bar.h"
 #include "scripting/ui/lua_radio_button.h"
@@ -88,6 +89,7 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 
 	// clang-format off
 	TRY_TO_LUA(Window, LuaWindow)
+	else TRY_TO_LUA(Pagination, LuaPagination)
 	else TRY_TO_LUA(Box, LuaBox)
 	else TRY_TO_LUA(Button, LuaButton)
 	else TRY_TO_LUA(Checkbox, LuaCheckbox)
@@ -450,6 +452,10 @@ void luaopen_wlui(lua_State* L, const bool game_or_editor) {
 
 	register_class<LuaListselect>(L, "ui", true);
 	add_parent<LuaListselect, LuaPanel>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaPagination>(L, "ui", true);
+	add_parent<LuaPagination, LuaPanel>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaTable>(L, "ui", true);
