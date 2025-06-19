@@ -769,6 +769,7 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 	// This will launch all workers including incorporated ones up to kFleeingUnitsCap and then empty
 	// the stock.
 	if (upcast(Game, game, &egbase)) {
+		set_desired_soldier_count(0);  // allow garrisoned soldiers to flee
 		const WareList& workers = get_workers();
 		for (DescriptionIndex id = 0; id < workers.get_nrwareids(); ++id) {
 			// If the game is running, have the workers flee the warehouse.
@@ -1179,7 +1180,8 @@ Soldier& Warehouse::launch_soldier(Game& game,
 	}
 
 	if (i == end) {
-		throw wexception("Warehouse::launch_soldier: no stored soldier met the requirements");
+		throw wexception("Warehouse::launch_soldier: no stored soldier met the requirements at %s",
+		                 warehouse_name_.c_str());
 	}
 
 	Soldier* soldier = incorporated_soldiers_.at(i).get(game);

@@ -41,7 +41,7 @@ msgstr "Mengleuz"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:37
 msgid "Build a quarry to the south of your headquarters."
-msgstr ""
+msgstr "Savit ur vengleuz war-zu Su ho penngarter."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:43
 msgid "Protect your colony"
@@ -53,7 +53,7 @@ msgstr "Difennit ho trevadenn"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Build some blockhouses and sentries around the colony."
-msgstr ""
+msgstr "Savit un nebeud bertimoù ha gedoù tro-dro an drevadenn."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:52
 msgid "Start mining marble"
@@ -143,15 +143,15 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:94
 msgid "Destroy the Barbarian tribe"
-msgstr ""
+msgstr "Distrujit meuriad ar varbared"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:96
 msgid "Destroy the Barbarian Tribe"
-msgstr ""
+msgstr "Distrujit meuriad ar varbared"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Build a barracks to start training soldiers."
-msgstr ""
+msgstr "Savit ur c'hazarn da gomañs tuta soudarded."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:98
 msgid ""
@@ -247,7 +247,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:145
 msgid "Wood for the Colony"
-msgstr ""
+msgstr "Koad evit an drevadenn"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:149
@@ -258,7 +258,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:153
 msgid "Stones for the Colony"
-msgstr ""
+msgstr "Maen evit an drevadenn"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:157
@@ -326,7 +326,7 @@ msgstr ""
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:188
 msgid "Please, expand to that mountain and start mining marble."
-msgstr ""
+msgstr "Astennit war-zu ar menez-mañ ha komañsit eztennañ marbr mar plij."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:195
 msgid "Further Mountains"
@@ -412,7 +412,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:233
 msgid "The Barbarians"
-msgstr ""
+msgstr "Ar varbared"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:237

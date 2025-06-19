@@ -120,6 +120,10 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, cancel_trade),
    METHOD(LuaPlayer, reject_trade),
    METHOD(LuaPlayer, retract_trade),
+   METHOD(LuaPlayer, propose_trade_extension),
+   METHOD(LuaPlayer, accept_trade_extension),
+   METHOD(LuaPlayer, reject_trade_extension),
+   METHOD(LuaPlayer, retract_trade_extension),
    {nullptr, nullptr},
 };
 const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
@@ -238,7 +242,11 @@ int LuaPlayer::get_resigned(lua_State* L) {
 int LuaPlayer::get_end_result(lua_State* L) {
 	const Widelands::PlayerEndStatus* p =
 	   get_egbase(L).player_manager()->get_player_end_status(player_number());
-	lua_pushinteger(L, static_cast<int>(p->result));
+	if (p == nullptr) {
+		lua_pushinteger(L, 255);
+	} else {
+		lua_pushinteger(L, static_cast<int>(p->result));
+	}
 	return 1;
 }
 
@@ -1233,6 +1241,90 @@ int LuaPlayer::reject_trade(lua_State* L) {
 */
 int LuaPlayer::retract_trade(lua_State* L) {
 	get_game(L).retract_trade(luaL_checkinteger(L, 2));
+	return 0;
+}
+
+/* RST
+   .. method:: propose_trade_extension(id, batches)
+
+      .. versionadded:: 1.3
+
+      Propose to extend the trade with the given ID by the given number of batches.
+
+      :arg id: Unique ID of the trade to propose to extend.
+      :type id: :class:`integer`
+      :arg batches: Number of batches to add to the trade.
+         Maximum 100. Use :const:`-1` to make the trade indefinite.
+      :type batches: :class:`integer`
+
+      :see also: :attr:`wl.Game.trade_extension_proposals`
+*/
+int LuaPlayer::propose_trade_extension(lua_State* L) {
+	get_game(L).propose_trade_extension(
+	   player_number(), luaL_checkinteger(L, 2), luaL_checkinteger(L, 3));
+	return 0;
+}
+
+/* RST
+   .. method:: accept_trade_extension(id, batches)
+
+      .. versionadded:: 1.3
+
+      Accept the proposal to extend the trade with the given ID by the given number of batches.
+
+      :arg id: Unique ID of the trade to propose to extend.
+      :type id: :class:`integer`
+      :arg batches: Number of batches to add to the trade.
+         Maximum 100. Use :const:`-1` to make the trade indefinite.
+      :type batches: :class:`integer`
+
+      :see also: :attr:`wl.Game.trade_extension_proposals`
+*/
+int LuaPlayer::accept_trade_extension(lua_State* L) {
+	get_game(L).accept_trade_extension(
+	   player_number(), luaL_checkinteger(L, 2), luaL_checkinteger(L, 3));
+	return 0;
+}
+
+/* RST
+   .. method:: reject_trade_extension(id, batches)
+
+      .. versionadded:: 1.3
+
+      Reject the proposal to extend the trade with the given ID by the given number of batches.
+
+      :arg id: Unique ID of the trade to propose to extend.
+      :type id: :class:`integer`
+      :arg batches: Number of batches to add to the trade.
+         Maximum 100. Use :const:`-1` to make the trade indefinite.
+      :type batches: :class:`integer`
+
+      :see also: :attr:`wl.Game.trade_extension_proposals`
+*/
+int LuaPlayer::reject_trade_extension(lua_State* L) {
+	get_game(L).reject_trade_extension(
+	   player_number(), luaL_checkinteger(L, 2), luaL_checkinteger(L, 3));
+	return 0;
+}
+
+/* RST
+   .. method:: retract_trade_extension(id, batches)
+
+      .. versionadded:: 1.3
+
+      Retract the proposal to extend the trade with the given ID by the given number of batches.
+
+      :arg id: Unique ID of the trade to propose to extend.
+      :type id: :class:`integer`
+      :arg batches: Number of batches to add to the trade.
+         Maximum 100. Use :const:`-1` to make the trade indefinite.
+      :type batches: :class:`integer`
+
+      :see also: :attr:`wl.Game.trade_extension_proposals`
+*/
+int LuaPlayer::retract_trade_extension(lua_State* L) {
+	get_game(L).retract_trade_extension(
+	   player_number(), luaL_checkinteger(L, 2), luaL_checkinteger(L, 3));
 	return 0;
 }
 

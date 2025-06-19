@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Anthony Guéchoum <a.guechoum@proton.me>, 2020
+# Anthony Guéchoum <a.guechoum@proton.me>, 2025
 # Irriep Nala Novram <per.morvan.bzh29@gmail.com>, 2016
 msgid ""
 msgstr ""
@@ -10,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2020\n"
+"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2025\n"
 "Language-Team: Breton (http://app.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -174,7 +175,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:118
 msgid "Building the Lumberjack"
-msgstr ""
+msgstr "Sevel ar bucher"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:122
 msgid ""
@@ -324,7 +325,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:244
 msgid "The Lumberjack’s Hut is Done"
-msgstr ""
+msgstr "Prest eo lochenn ar bucher"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:247
 msgid ""
@@ -417,7 +418,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:294
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:309
 msgid "Using the Minimap"
-msgstr ""
+msgstr "Implijañ ar minikartenn"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:296
 msgid "Very good. And now about the minimap."
@@ -579,7 +580,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:398
 msgid "Connect the quarry to the headquarters"
-msgstr ""
+msgstr "Liammit ar vengleuz ouzh ar penngarter"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:400
 msgid "Connect Your Construction Site"
@@ -588,7 +589,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:401
 msgid ""
 "Connect your quarry construction site to your headquarters with a road."
-msgstr ""
+msgstr "Liammit lec'hiad sevel ho mengleuz ouzh ho penngarter dre un hent."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:402
 msgid ""
@@ -792,7 +793,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:519
 msgid "Change the name of your headquarters"
-msgstr ""
+msgstr "Cheñchit anv ho penngarter"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid ""
@@ -978,11 +979,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:619
 msgid "Expand your territory"
-msgstr ""
+msgstr "Astennit ho tomani"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:621
 msgid "Make your Territory Grow"
-msgstr ""
+msgstr "Lakaat ho tomani da greskiñ"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:622
 msgid ""
@@ -1006,7 +1007,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:628
 msgid "Expanding Your Territory!"
-msgstr ""
+msgstr "Astenn ho tomani!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:631
 msgid ""
@@ -1040,7 +1041,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:642
 msgid "Your territory has just grown!"
-msgstr ""
+msgstr "O paouez kreskiñ emañ ho tomani!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:644
 msgid ""
