@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -182,7 +182,7 @@ void SaveHandler::think(Widelands::Game& game) {
 
 		if (!force_skip) {
 			verb_log_info_time(
-			   game.get_gametime(), "Autosave: save took %d ms\n", SDL_GetTicks() - realtime);
+			   game.get_gametime(), "Autosave: save took %u ms\n", SDL_GetTicks() - realtime);
 			game.get_ibase()->log_message(_("Game saved"));
 		}
 	} else {

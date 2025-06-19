@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@ public:
 	Notifications::Signal<> changed;
 	Notifications::Signal<> cancel;
 
-	void set_text(const std::string&);
+	void set_text(const std::string&, bool send_signal = true);
 	[[nodiscard]] const std::string& get_text() const;
 
 	void focus(bool topcaller = true) override;
@@ -94,6 +94,13 @@ protected:
 	[[nodiscard]] virtual bool should_expand_selection() const {
 		return false;
 	}
+
+	bool show_default_context_menu(Vector2i pos) override;
+
+	void handle_cut();
+	void handle_copy();
+	void handle_paste();
+	void handle_select_all();
 
 	struct Data;
 	std::unique_ptr<Data> d_;

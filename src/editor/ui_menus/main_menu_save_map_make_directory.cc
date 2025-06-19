@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -107,8 +107,8 @@ void MainMenuSaveMapMakeDirectory::edit_changed() {
 	                               ends_with(text, kS2MapExtension2, false);
 	ok_button_.set_enabled(is_legal_filename && !has_map_extension);
 	edit_.set_tooltip(is_legal_filename ?
-                        (has_map_extension ? _("This extension is reserved!") : "") :
-                        illegal_filename_tooltip_);
+	                     (has_map_extension ? _("This extension is reserved!") : "") :
+	                     illegal_filename_tooltip_);
 	dirname_ = text;
 }
 

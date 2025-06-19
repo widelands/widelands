@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -93,7 +93,7 @@ public:
 			translate_ = t;
 		}
 
-		friend void swap(Value& first, Value& second);
+		friend void swap(Value& first, Value& second) noexcept;
 
 	private:
 		bool used_;

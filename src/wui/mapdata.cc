@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -108,6 +108,9 @@ bool MapData::compare_names(const MapData& other) const {
 		this_name = localized_name;
 		other_name = other.localized_name;
 		break;
+
+	default:
+		NEVER_HERE();
 	}
 
 	// If there is no width, we have a directory - we want them first.
@@ -185,16 +188,16 @@ MapData MapData::create_empty_dir(const std::string& current_dir) {
 // static
 MapData MapData::create_directory(const std::string& directory) {
 	std::string localized_name = FileSystem::fs_filename(directory.c_str());
-	if (directory == "maps/MP_Scenarios") {
+	if (directory == kMultiPlayerScenarioDirFull) {
 		/** TRANSLATORS: Directory name for MP Scenarios in map selection */
 		localized_name = _("Multiplayer Scenarios");
-	} else if (directory == "maps/SP_Scenarios") {
+	} else if (directory == kSinglePlayerScenarioDirFull) {
 		/** TRANSLATORS: Directory name for SP Scenarios in map selection */
 		localized_name = _("Singleplayer Scenarios");
-	} else if (directory == kMapsDir + "/" + kMyMapsDir) {
+	} else if (directory == kMyMapsDirFull) {
 		/** TRANSLATORS: Directory name for user maps in map selection */
 		localized_name = _("My Maps");
-	} else if (directory == kMapsDir + "/" + kDownloadedMapsDir) {
+	} else if (directory == kDownloadedMapsDirFull) {
 		/** TRANSLATORS: Directory name for downloaded maps in map selection */
 		localized_name = _("Downloaded Maps");
 	} else if (starts_with(directory, kAddOnDir)) {

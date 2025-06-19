@@ -6,6 +6,7 @@ example "a,b,c", which should be "a, b, c".
 
 It is a little complex because it should not catch commas in string
 constants or character constants.
+
 """
 
 error_msg = "A space is mandatory after ','."

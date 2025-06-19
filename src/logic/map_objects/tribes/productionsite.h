@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,8 @@
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/production_program.h"
 #include "logic/map_objects/tribes/program_result.h"
+#include "logic/map_objects/tribes/worker.h"
+#include "logic/map_objects/tribes/worker_descr.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
@@ -34,7 +36,6 @@ namespace Widelands {
 class FerryFleetYardInterface;
 class ShipFleetYardInterface;
 class Soldier;
-class WorkerDescr;
 
 enum class FailNotificationType { kDefault, kFull };
 
@@ -328,6 +329,7 @@ private:
 
 class ProductionSite : public Building {
 	friend class MapBuildingdataPacket;
+	// TODO(Nordfriese): Refactor this. Many friend classes are bad style.
 	friend struct ProductionProgram::ActReturn;
 	friend struct ProductionProgram::ActReturn::WorkersNeedExperience;
 	friend struct ProductionProgram::ActCall;
@@ -341,6 +343,7 @@ class ProductionSite : public Building {
 	friend struct ProductionProgram::ActCheckSoldier;
 	friend struct ProductionProgram::ActTrain;
 	friend struct ProductionProgram::ActPlaySound;
+	friend struct ProductionProgram::ActRunScript;
 	friend struct ProductionProgram::ActConstruct;
 	MO_DESCR(ProductionSiteDescr)
 
@@ -390,7 +393,8 @@ public:
 		production_result_ = text;
 	}
 
-	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
+	InputQueue&
+	inputqueue(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id) override;
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;

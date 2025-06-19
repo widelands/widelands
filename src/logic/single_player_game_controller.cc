@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2023 by the Widelands Development Team
+ * Copyright (C) 2015-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,9 +21,9 @@
 #include <SDL_timer.h>
 
 #include "ai/computer_player.h"
+#include "commands/command.h"
 #include "logic/game.h"
 #include "logic/player.h"
-#include "logic/playercommand.h"
 #include "logic/playersmanager.h"
 #include "wlapplication_options.h"
 

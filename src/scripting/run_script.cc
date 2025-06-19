@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,6 +47,8 @@ std::unique_ptr<LuaTable> run_string_as_script(lua_State* L,
                                                const std::string& identifier,
                                                const std::string& content,
                                                const bool keep_lua_table = false) {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
 	MutexLock m(MutexLock::ID::kLua);
 
 	// Get the current value of __file__
@@ -91,6 +93,9 @@ std::unique_ptr<LuaTable> run_string_as_script(lua_State* L,
 }  // namespace
 
 int check_return_value_for_errors(lua_State* L, int rv) {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
+	MutexLock m(MutexLock::ID::kLua);
 	if (rv != 0) {
 		const std::string err = luaL_checkstring(L, -1);
 		lua_pop(L, 1);
@@ -101,6 +106,9 @@ int check_return_value_for_errors(lua_State* L, int rv) {
 
 std::unique_ptr<LuaTable>
 run_script(lua_State* L, const std::string& path, FileSystem* fs, const bool keep_lua_table) {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
+	MutexLock m(MutexLock::ID::kLua);
 	const std::string content = get_file_content(fs, path);
 	return run_string_as_script(L, path, content, keep_lua_table);
 }

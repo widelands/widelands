@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2023 by the Widelands Development Team
+ * Copyright (C) 2010-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -236,11 +236,11 @@ void QuickNavigationWindow::rebuild() {
 		   &box, format("goto_%u", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 		   g_image_cache->get("images/wui/menus/goto.png"),
 		   i < kQuicknavSlots ?
-            as_tooltip_text_with_hotkey(
+		      as_tooltip_text_with_hotkey(
 		         _("Go to this landmark"),
 		         shortcut_string_for(KeyboardShortcut::kInGameQuicknavGoto1 + 2 * i, true),
 		         UI::PanelStyle::kWui) :
-            _("Go to this landmark"));
+		      _("Go to this landmark"));
 		b->set_enabled(q.landmarks()[i].set);
 		b->sigclicked.connect([&q, i]() { q.goto_landmark(i); });
 		box.add(b);
@@ -271,11 +271,11 @@ void QuickNavigationWindow::rebuild() {
 		   &box, format("set_%u", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 		   g_image_cache->get("images/wui/menus/quicknav_set.png"),
 		   i < kQuicknavSlots ?
-            as_tooltip_text_with_hotkey(
+		      as_tooltip_text_with_hotkey(
 		         _("Set this landmark to the current map view location"),
 		         shortcut_string_for(KeyboardShortcut::kInGameQuicknavSet1 + 2 * i, true),
 		         UI::PanelStyle::kWui) :
-            _("Set this landmark to the current map view location"));
+		      _("Set this landmark to the current map view location"));
 		b->sigclicked.connect([&q, i]() { q.set_landmark_to_current(i); });
 		box.add(b);
 

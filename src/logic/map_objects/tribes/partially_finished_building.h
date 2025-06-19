@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,6 +80,8 @@ public:
 
 	void add_worker(Worker&) override;
 
+	void notify_worker_evicted(Game& game, Worker& worker) override;
+
 private:
 	void request_builder(Game&);
 
@@ -96,10 +98,12 @@ protected:
 	                       // (dismantlesites)
 	Wares dropout_wares_;  // additional items to drop out immediately
 
-	bool working_{false};          // true if the builder is currently working
-	Time work_steptime_{0U};       // time when next step is completed
-	uint32_t work_completed_{0U};  // how many steps have we done so far?
-	uint32_t work_steps_{0U};      // how many steps (= wares) until we're done?
+	bool working_{
+	   false};  // true if the work has been started (stays true if the builder is evicted)
+	Time workstep_completiontime_{0U};     // time when next step is completed
+	uint32_t work_completed_{0U};          // how many steps have we done so far?
+	uint32_t work_steps_{0U};              // how many steps (= wares) until we're done?
+	Duration last_remaining_time_{30000};  // time remaining to complete in the last draw cycle
 };
 }  // namespace Widelands
 

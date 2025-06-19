@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2023 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,6 +49,12 @@ public:
 	void set_filled(Quantity) override;
 
 	void set_max_fill(Quantity q) override;
+
+	std::vector<Worker*>& workers_in_queue() {
+		return workers_;
+	}
+
+	bool remove_if_present(Worker& worker);
 
 	/**
 	 * Extracts the first worker from the queue and returns it

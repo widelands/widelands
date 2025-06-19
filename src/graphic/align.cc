@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  */
 
 #include "graphic/align.h"
+
+#include "base/wexception.h"
 
 namespace UI {
 
@@ -59,6 +61,8 @@ Align mirror_alignment(Align alignment, bool is_rtl) {
 			break;
 		case Align::kCenter:
 			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 	return alignment;
@@ -66,7 +70,7 @@ Align mirror_alignment(Align alignment, bool is_rtl) {
 
 Rectf fit_image(float img_w, float img_h, float available_w, float available_h, bool crop) {
 	if (crop ? (img_w < available_w || img_h < available_h) :
-              (img_w < available_w && img_h < available_h)) {
+	           (img_w < available_w && img_h < available_h)) {
 		return Rectf((available_w - img_w) / 2.f, (available_h - img_h) / 2.f, img_w, img_h);
 	}
 

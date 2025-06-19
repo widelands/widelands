@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,12 +21,14 @@
 
 #include <memory>
 
-#include "base/md5.h"
+#include "base/crypto.h"
 #include "base/random.h"
+#include "commands/cmd_queue.h"
 #include "economy/flag_job.h"
 #include "io/streamwrite.h"
-#include "logic/cmd_queue.h"
+#include "logic/detected_port_space.h"
 #include "logic/editor_game_base.h"
+#include "logic/map_objects/tribes/shipstates.h"
 #include "logic/save_handler.h"
 #include "logic/trade_agreement.h"
 #include "scripting/logic.h"
@@ -50,7 +52,6 @@ struct PlayerImmovable;
 enum class IslandExploreDirection;
 class PortDock;
 enum class ScoutingDirection;
-enum class SoldierPreference : uint8_t;
 struct Ship;
 class TrainingSite;
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
@@ -138,6 +139,9 @@ public:
 		std::vector<uint32_t> nr_civil_blds_lost;
 		std::vector<uint32_t> nr_civil_blds_defeated;
 		std::vector<uint32_t> miltary_strength;
+		std::vector<uint32_t> nr_ships;
+		std::vector<uint32_t> nr_naval_victories;
+		std::vector<uint32_t> nr_naval_losses;
 
 		std::vector<uint32_t> custom_statistic;
 	};
@@ -145,6 +149,7 @@ public:
 
 	friend class CmdQueue;  // this class handles the commands
 	friend struct GameClassPacket;
+	friend struct GamePlayerTradesPacket;
 	friend struct GamePlayerInfoPacket;
 	friend struct GameLoader;
 
@@ -214,7 +219,6 @@ public:
 
 	void postload() override;
 	void postload_addons_before_loading();
-	void check_legacy_addons_desync_magic();
 
 	void think() override;
 
@@ -261,7 +265,7 @@ public:
 	StreamWrite& syncstream();
 	void report_sync_request();
 	void report_desync(int32_t playernumber);
-	Md5Checksum get_sync_hash() const;
+	crypto::MD5Checksum get_sync_hash() const;
 
 	void enqueue_command(Command*);
 
@@ -269,44 +273,62 @@ public:
 
 	void send_player_bulldoze(PlayerImmovable&, bool recurse = false);
 	void send_player_dismantle(PlayerImmovable&, bool keep_wares);
-	void send_player_build(int32_t, const Coords&, DescriptionIndex);
+	void send_player_build_building(int32_t, const Coords&, DescriptionIndex);
 	void send_player_build_flag(int32_t, const Coords&);
 	void send_player_build_road(int32_t, Path&);
 	void send_player_build_waterway(int32_t, Path&);
 	void send_player_flagaction(Flag&, FlagJob::Type);
 	void send_player_start_stop_building(Building&);
 	void send_player_toggle_infinite_production(Building&);
-	void send_player_militarysite_set_soldier_preference(Building&, SoldierPreference preference);
+	void send_player_set_soldier_preference(MapObject&, SoldierPreference preference);
 	void send_player_start_or_cancel_expedition(Building&);
 	void send_player_expedition_config(PortDock&, WareWorker, DescriptionIndex, bool);
 
 	void send_player_enhance_building(Building&, DescriptionIndex, bool keep_wares);
 	void send_player_evict_worker(Worker&);
 	void send_player_set_stock_policy(Building&, WareWorker, DescriptionIndex, StockPolicy);
-	void send_player_set_ware_priority(
-	   PlayerImmovable&, WareWorker, DescriptionIndex, const WarePriority&, bool is_cs = false);
-	void send_player_set_input_max_fill(
-	   PlayerImmovable&, DescriptionIndex index, WareWorker type, uint32_t, bool is_cs = false);
+	void send_player_set_ware_priority(PlayerImmovable&,
+	                                   WareWorker,
+	                                   DescriptionIndex,
+	                                   const WarePriority&,
+	                                   bool is_cs = false,
+	                                   uint32_t disambiguator_id = 0);
+	void send_player_set_input_max_fill(PlayerImmovable&,
+	                                    DescriptionIndex index,
+	                                    WareWorker type,
+	                                    uint32_t,
+	                                    bool is_cs = false,
+	                                    uint32_t disambiguator_id = 0);
 	void send_player_change_training_options(TrainingSite&, TrainingAttribute, int32_t);
-	void send_player_drop_soldier(Building&, int32_t);
+	void send_player_drop_soldier(MapObject&, int32_t);
 	void send_player_change_soldier_capacity(Building&, int32_t);
-	void send_player_enemyflagaction(const Flag&,
-	                                 PlayerNumber,
-	                                 const std::vector<Serial>&,
-	                                 bool allow_conquer);
+	void
+	send_player_attack(const Flag&, PlayerNumber, const std::vector<Serial>&, bool allow_conquer);
 	void send_player_mark_object_for_removal(PlayerNumber, Immovable&, bool);
 
-	void send_player_ship_scouting_direction(const Ship&, WalkingDir);
-	void send_player_ship_construct_port(const Ship&, Coords);
-	void send_player_ship_explore_island(const Ship&, IslandExploreDirection);
-	void send_player_sink_ship(const Ship&);
+	void send_player_ship_scouting_direction(const Ship& ship, WalkingDir direction);
+	void send_player_ship_construct_port(const Ship& ship, Coords coords);
+	void send_player_ship_explore_island(const Ship& ship, IslandExploreDirection direction);
+	void send_player_ship_set_destination(const Ship& ship, const MapObject* dest);
+	void send_player_ship_set_destination(const Ship& ship, const DetectedPortSpace& dest);
+	void send_player_sink_ship(const Ship& ship);
+	void send_player_refit_ship(const Ship& ship, ShipType t);
+	void send_player_warship_command(const Ship& ship,
+	                                 WarshipCommand cmd,
+	                                 const std::vector<uint32_t>& parameters);
 	void send_player_cancel_expedition_ship(const Ship&);
-	void send_player_propose_trade(const Trade& trade);
+	void send_player_propose_trade(const TradeInstance& trade);
+	void send_player_extend_trade(PlayerNumber sender,
+	                              TradeID trade_id,
+	                              TradeAction action,
+	                              int32_t batches);
+	void send_player_trade_action(
+	   PlayerNumber sender, TradeID trade_id, TradeAction action, Serial accepter, Serial source);
 	void send_player_toggle_mute(const Building&, bool all);
 	void send_player_diplomacy(PlayerNumber, DiplomacyAction, PlayerNumber);
 	void send_player_pinned_note(
 	   PlayerNumber p, Coords pos, const std::string& text, const RGBColor& rgb, bool del);
-	void send_player_ship_port_name(PlayerNumber p, Serial s, const std::string& name);
+	void send_player_building_name(PlayerNumber p, Serial s, const std::string& name);
 	void send_player_fleet_targets(PlayerNumber p, Serial i, Quantity q);
 
 	InteractivePlayer* get_ipl();
@@ -325,19 +347,25 @@ public:
 		scenario_difficulty_ = d;
 	}
 
+	[[nodiscard]] Serial generate_economy_serial();
+	[[nodiscard]] Serial generate_detectedportspace_serial();
+	void notify_economy_serial(Serial serial);
+	void notify_detectedportspace_serial(Serial serial);
+
 	// Statistics
 	const GeneralStatsVector& get_general_statistics() const {
 		return general_stats_;
 	}
 
-	void read_statistics(FileRead&);
-	void write_statistics(FileWrite&);
+	void read_statistics(FileRead& fr, uint16_t packet_version);
+	void write_statistics(FileWrite& fw);
 
 	void sample_statistics();
 
 	const std::string& get_win_condition_displayname() const;
 	void set_win_condition_displayname(const std::string& name);
 	int32_t get_win_condition_duration() const;
+	void set_win_condition_duration(int32_t);
 
 	bool is_replay() const {
 		return !replay_filename_.empty();
@@ -370,10 +398,40 @@ public:
 		return list_of_scenarios_;
 	}
 
-	// TODO(sirver,trading): document these functions once the interface settles.
-	int propose_trade(const Trade& trade);
-	void accept_trade(int trade_id);
-	void cancel_trade(int trade_id);
+	TradeID propose_trade(TradeInstance trade);
+	void accept_trade(TradeID trade_id, Market& receiver);
+	void reject_trade(TradeID trade_id);
+	void retract_trade(TradeID trade_id);
+	void cancel_trade(TradeID trade_id, bool reached_regular_end, const Player* canceller);
+	void move_trade(TradeID trade_id, Market& old_market, Market& new_market);
+
+	void propose_trade_extension(PlayerNumber sender, TradeID trade_id, int32_t batches);
+	void reject_trade_extension(PlayerNumber sender, TradeID trade_id, int32_t batches);
+	void retract_trade_extension(PlayerNumber sender, TradeID trade_id, int32_t batches);
+	void accept_trade_extension(PlayerNumber sender, TradeID trade_id, int32_t batches);
+
+	[[nodiscard]] bool has_trade(TradeID trade_id) const {
+		return trade_agreements_.count(trade_id) != 0;
+	}
+	[[nodiscard]] const TradeInstance& get_trade(TradeID trade_id) const {
+		return trade_agreements_.at(trade_id);
+	}
+	[[nodiscard]] TradeInstance& get_mutable_trade(TradeID trade_id) {
+		return trade_agreements_.at(trade_id);
+	}
+	[[nodiscard]] const std::map<TradeID, TradeInstance>& all_trade_agreements() const {
+		return trade_agreements_;
+	}
+	[[nodiscard]] const std::vector<TradeExtension>& all_trade_extension_proposals() const {
+		return trade_extension_proposals_;
+	}
+	[[nodiscard]] std::vector<TradeID> find_trade_offers(PlayerNumber receiver,
+	                                                     Coords accept_at = Coords::null()) const;
+	[[nodiscard]] std::vector<TradeID> find_trade_proposals(PlayerNumber initiator,
+	                                                        Serial market_filter = 0) const;
+	[[nodiscard]] std::vector<TradeID> find_active_trades(PlayerNumber player) const;
+	[[nodiscard]] std::vector<TradeExtension>
+	find_trade_extensions(TradeID trade_id, PlayerNumber player, bool as_proposer) const;
 
 	struct PendingDiplomacyAction {
 		PlayerNumber sender;     ///< The player who initiated the action.
@@ -395,11 +453,18 @@ public:
 		return pending_diplomacy_actions_;
 	}
 
-	bool diplomacy_allowed() const {
+	[[nodiscard]] bool diplomacy_allowed() const {
 		return diplomacy_allowed_;
 	}
-	void set_diplomacy_allowed(bool d) {
-		diplomacy_allowed_ = d;
+	void set_diplomacy_allowed(bool allow) {
+		diplomacy_allowed_ = allow;
+	}
+
+	[[nodiscard]] bool naval_warfare_allowed() const {
+		return naval_warfare_allowed_;
+	}
+	void set_naval_warfare_allowed(bool allow) {
+		naval_warfare_allowed_ = allow;
 	}
 
 private:
@@ -407,10 +472,10 @@ private:
 
 	void sync_reset();
 
-	MD5Checksum<StreamWrite> synchash_;
+	crypto::MD5Checksummer synchash_;
 
 	struct SyncWrapper : public StreamWrite {
-		SyncWrapper(Game& game, StreamWrite& target) : game_(game), target_(target) {
+		SyncWrapper(Game& game, crypto::MD5Checksummer& target) : game_(game), target_(target) {
 		}
 
 		~SyncWrapper() override;
@@ -423,13 +488,9 @@ private:
 
 		void data(void const* data, size_t size) override;
 
-		void flush() override {
-			target_.flush();
-		}
-
 	public:
 		Game& game_;
-		StreamWrite& target_;
+		crypto::MD5Checksummer& target_;
 		uint32_t counter_{0U};
 		uint32_t next_diskspacecheck_{0U};
 		std::unique_ptr<StreamWrite> dump_;
@@ -479,12 +540,26 @@ private:
 	uint32_t scenario_difficulty_{kScenarioDifficultyNotSet};
 
 	GeneralStatsVector general_stats_;
-	int next_trade_agreement_id_ = 1;
+
+	TradeID next_trade_agreement_id_ = 1;
 	// Maps from trade agreement id to the agreement.
-	std::map<int, TradeAgreement> trade_agreements_;
+	std::map<TradeID, TradeInstance> trade_agreements_;
+	std::vector<TradeExtension> trade_extension_proposals_;
+
+	[[nodiscard]] bool check_trade_player_matches(const TradeInstance& trade,
+	                                              PlayerNumber sender,
+	                                              PlayerNumber proposer,
+	                                              bool check_recipient,
+	                                              Player** p1,
+	                                              Player** p2,
+	                                              const Market** market);
+
+	Serial last_economy_serial_ = 0;
+	Serial last_detectedportspace_serial_ = 0;
 
 	std::list<PendingDiplomacyAction> pending_diplomacy_actions_;
 	bool diplomacy_allowed_{true};
+	bool naval_warfare_allowed_{false};
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;
@@ -507,6 +582,7 @@ inline Coords Game::random_location(Coords location, uint8_t radius) {
 	const uint16_t s = radius * 2 + 1;
 	location.x += logic_rand() % s - radius;
 	location.y += logic_rand() % s - radius;
+	map().normalize_coords(location);
 	return location;
 }
 }  // namespace Widelands

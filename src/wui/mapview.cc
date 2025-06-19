@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -358,13 +358,16 @@ void MapView::mouse_to_pixel(const Vector2i& pixel, const Transition& transition
 		}
 		return;
 	}
+
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
                                     const Widelands::Player* player,
                                     const Workareas& workarea,
+                                    bool height_heat_map,
                                     bool grid,
                                     RenderTarget* dst) {
 	uint32_t now = SDL_GetTicks();
@@ -417,7 +420,7 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
 	}
 	const float scale = 1.f / view_.zoom;
 	::draw_terrain(egbase.get_gametime().get(), egbase.descriptions(), fields_to_draw_, scale,
-	               workarea, grid, player, dst);
+	               workarea, height_heat_map, grid, player, dst);
 	return &fields_to_draw_;
 }
 
@@ -450,6 +453,9 @@ void MapView::set_view(const View& target_view, const Transition& passed_transit
 		}
 		return;
 	}
+
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -553,12 +559,12 @@ bool MapView::handle_mousemove(
 
 	is_scrolling_x_ = edge_scrolling_ ? x < kEdgeScrollingMargin           ? -1 :
 	                                    x > get_w() - kEdgeScrollingMargin ? 1 :
-                                                                            0 :
-                                       0;
+	                                                                         0 :
+	                                    0;
 	is_scrolling_y_ = edge_scrolling_ ? y < kEdgeScrollingMargin           ? -1 :
 	                                    y > get_h() - kEdgeScrollingMargin ? 1 :
-                                                                            0 :
-                                       0;
+	                                                                         0 :
+	                                    0;
 
 	track_sel(Vector2i(x, y));
 
@@ -584,7 +590,7 @@ void MapView::think() {
 
 		const int16_t speed = (SDL_GetModState() & KMOD_CTRL) != 0  ? kEdgeScrollingSpeedFast :
 		                      (SDL_GetModState() & KMOD_SHIFT) != 0 ? kEdgeScrollingSpeedSlow :
-                                                                    kEdgeScrollingSpeedNormal;
+		                                                              kEdgeScrollingSpeedNormal;
 		pan_by(Vector2i(is_scrolling_x_ * speed, is_scrolling_y_ * speed), Transition::Jump);
 	}
 }
@@ -656,8 +662,10 @@ void MapView::zoom_around(float new_zoom,
 		}
 		return;
 	}
+
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 void MapView::reset_zoom() {

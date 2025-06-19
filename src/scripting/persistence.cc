@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -148,9 +148,11 @@ add_iterator_function_to_not_unpersist(lua_State* L, const std::string& global, 
  * ========================================================================
  */
 
-// Those are the globals that will be regenerated (not by the persistence engine),
-// e.g. C-functions or automatically populated fields. Changing the ordering here will
-// break save game compatibility.
+/* Those are the globals that will be regenerated (not by the persistence engine),
+ * e.g. C-functions or automatically populated fields.
+ * Always append new globals to the end, and never remove any list entries.
+ * Otherwise you break savegame compatibility.
+ */
 static const char* kPersistentGlobals[] = {"_VERSION",
                                            "assert",
                                            "collectgarbage",
@@ -204,6 +206,7 @@ static const char* kPersistentGlobals[] = {"_VERSION",
                                            "pop_textdomain",
                                            "npgettext",
                                            "styles",
+                                           "play_sound",
                                            nullptr};
 
 /**
@@ -241,9 +244,9 @@ uint32_t persist_object(lua_State* L, FileWrite& fw, Widelands::MapObjectSaver& 
 	eris_set_setting(L, "path", lua_gettop(L));
 	lua_pop(L, 1);
 
-	size_t cpos = fw.get_pos();
+	const size_t cpos = fw.get_pos().value();
 	eris_dump(L, &LuaWriter, &fw);
-	uint32_t nwritten = fw.get_pos() - cpos;
+	uint32_t nwritten = fw.get_pos().value() - cpos;
 
 	lua_pop(L, 2);  // pop the object and the table
 

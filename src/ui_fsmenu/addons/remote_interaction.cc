@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2023 by the Widelands Development Team
+ * Copyright (C) 2021-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,7 +52,8 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
      info_(info),
      index_(index),
 
-     text_(this,
+     text_wrapper_(this, UI::PanelStyle::kFsMenu, "text_wrapper", 0, 0, 0, 0),
+     text_(&text_wrapper_,
            "text",
            0,
            0,
@@ -68,9 +69,11 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
 	buttons_.add(&edit_, UI::Box::Resizing::kFullSize);
 	buttons_.add_space(kRowButtonSpacing);
 	buttons_.add(&delete_, UI::Box::Resizing::kFullSize);
-
-	add(&text_, UI::Box::Resizing::kExpandBoth);
 	buttons_.add_space(kRowButtonSpacing);
+
+	text_wrapper_.set_layout_toplevel(true);
+
+	add(&text_wrapper_, UI::Box::Resizing::kExpandBoth);
 	add(&buttons_, UI::Box::Resizing::kFullSize);
 
 	edit_.sigclicked.connect([this, &r]() {
@@ -134,13 +137,32 @@ void CommentRow::update_edit_enabled() {
 }
 
 void CommentRow::layout() {
-	UI::Box::layout();
 	if (layouting_) {
 		return;
 	}
-	// Prevent stack overflow through recursive call of layout()
 	layouting_ = true;
-	text_.set_desired_size(0, 0);
+
+	// TODO(Nordfriese): Integrate this logic into MultilineTextarea to make it play nice with Boxes
+
+	// First step: Figure out how much width we have available
+	text_wrapper_.set_desired_size(5, 5);
+	set_size(get_w(), 5);
+	UI::Box::layout();
+
+	// Second step: Figure out how much height is required for the available width
+	text_.set_size(text_wrapper_.get_inner_w(), 5);
+	text_wrapper_.set_desired_size(text_.get_w(), text_.get_h());
+
+	update_desired_size();
+
+	int dw;
+	int dh;
+	get_desired_size(&dw, &dh);
+	set_size(dw, dh);
+	update_positions();
+
+	UI::Box::layout();
+
 	layouting_ = false;
 }
 
@@ -559,7 +581,8 @@ void AdminDialog::ok() {
 			break;
 		}
 
-		parent_.rebuild(false);
+		parent_.clear_cache_for_browse(info_->internal_name);
+		parent_.rebuild_browse();
 		die();
 	} catch (const std::exception& e) {
 		UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"), e.what(),
@@ -726,13 +749,15 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 			return;
 		}
 		update_data();
-		parent_.rebuild(false);
+		parent_.clear_cache_for_browse(info_->internal_name);
+		parent_.rebuild_browse();
 	});
 	write_comment_.sigclicked.connect([this]() {
 		CommentEditor m(parent_, info_, nullptr);
 		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 			update_data();
-			parent_.rebuild(false);
+			parent_.clear_cache_for_browse(info_->internal_name);
+			parent_.rebuild_browse();
 		}
 	});
 
@@ -852,7 +877,7 @@ void RemoteInteractionWindow::layout() {
 		admin_action_.set_pos(Vector2i(
 		   login_button_.get_x() - admin_action_.get_w() - kRowButtonSpacing, login_button_.get_y()));
 
-		box_comment_rows_.set_max_size(get_inner_w(), 0);
+		box_comment_rows_.set_max_size(box_comment_rows_.get_max_x(), 0);
 		box_comment_rows_.set_desired_size(0, 0);
 	}
 	UI::Window::layout();
@@ -864,10 +889,10 @@ void RemoteInteractionWindow::update_data() {
 
 	voting_stats_summary_.set_text(
 	   info_->number_of_votes() != 0u ?
-         format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
+	      format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
 	                        "Average rating: %1$.3f (%2$u votes)", info_->number_of_votes()),
 	               info_->average_rating(), info_->number_of_votes()) :
-         _("No votes yet"));
+	      _("No votes yet"));
 
 	uint32_t most_votes = 1;
 	for (uint32_t v : info_->votes) {
@@ -885,8 +910,8 @@ void RemoteInteractionWindow::update_data() {
 	text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 	           .as_font_tag(
 	              info_->user_comments.empty() ?
-                    _("No comments yet.") :
-                    format(ngettext("%u comment:", "%u comments:", info_->user_comments.size()),
+	                 _("No comments yet.") :
+	                 format(ngettext("%u comment:", "%u comments:", info_->user_comments.size()),
 	                        info_->user_comments.size()));
 	text += "</p></rt>";
 	comments_header_.set_text(text);
@@ -909,8 +934,10 @@ void RemoteInteractionWindow::update_data() {
 		text += "<br>";
 		text +=
 		   g_style_manager->font_style(UI::FontStyle::kItalic)
-		      .as_font_tag(format(_("‘%1$s’ commented on version %2$s:"), comment.second.username,
-		                          AddOns::version_to_string(comment.second.version)));
+		      .as_font_tag(info_->category == AddOns::AddOnCategory::kSingleMap ?
+		                      format(_("‘%1$s’ commented:"), comment.second.username) :
+		                      format(_("‘%1$s’ commented on version %2$s:"), comment.second.username,
+		                             AddOns::version_to_string(comment.second.version)));
 		text += "<br>";
 		text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 		           .as_font_tag(comment.second.message);
@@ -992,11 +1019,17 @@ void RemoteInteractionWindow::login_changed() {
 		write_comment_.set_tooltip(_("Please log in to comment"));
 		own_voting_.set_enabled(false);
 		own_voting_.set_tooltip(_("Please log in to vote"));
-	} else {
+	} else if (ends_with(info_->internal_name, ".wad")) {
 		write_comment_.set_enabled(true);
 		write_comment_.set_tooltip("");
 		own_voting_.set_enabled(true);
 		own_voting_.set_tooltip("");
+	} else {
+		// No i18n markup here, since these are temporary strings
+		write_comment_.set_enabled(false);
+		write_comment_.set_tooltip("Commenting on maps is not yet implemented");
+		own_voting_.set_enabled(false);
+		own_voting_.set_tooltip("Voting on maps is not yet implemented");
 	}
 
 	admin_action_.set_visible(parent_.net().is_admin());

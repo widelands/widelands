@@ -17,6 +17,10 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       cut_granite = {
+         -- steps from building to rock: 2-9, min+max average 5.5
+         -- min. worker time: 2 * 2 * 1.8 + 18.5 = 25.7 sec
+         -- max. worker time: 2 * 9 * 1.8 + 18.5 = 50.9 sec
+         -- avg. worker time: 2 * 5.5 * 1.8 + 18.5 = 38.3 sec
          "findobject=attrib:rocks radius:6",
          "walk=object",
          "playsound=sound/atlanteans/cutting/stonecutter priority:50% allow_multiple",

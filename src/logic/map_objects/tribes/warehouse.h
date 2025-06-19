@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 
 #include "base/macros.h"
 #include "economy/request.h"
+#include "economy/soldier_request.h"
 #include "economy/ware_instance.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
@@ -59,9 +60,18 @@ public:
 		heal_per_second_ = h;
 	}
 
+	[[nodiscard]] Quantity get_max_garrison() const {
+		return max_garrison_;
+	}
+	void set_max_garrison(Quantity g) {
+		max_garrison_ = g;
+	}
+
 private:
 	int32_t conquers_{0};
 	unsigned heal_per_second_{0U};
+	Quantity max_garrison_{0U};
+
 	DISALLOW_COPY_AND_ASSIGN(WarehouseDescr);
 };
 
@@ -170,7 +180,16 @@ public:
 	bool fetch_from_flag(Game&) override;
 
 	Quantity count_workers(const Game&, DescriptionIndex worker, const Requirements&, Match);
+	Quantity count_soldiers(const Game&, const Requirements&);
+	Quantity count_all_soldiers() {
+		return incorporated_soldiers_.size();
+	}
+
 	Worker& launch_worker(Game&, DescriptionIndex worker, const Requirements&);
+	Soldier& launch_soldier(Game&,
+	                        const Requirements&,
+	                        bool defender = false,
+	                        SoldierPreference pref = SoldierPreference::kAny);
 
 	// Adds the worker to the inventory. Takes ownership and might delete
 	// 'worker'.
@@ -204,21 +223,31 @@ public:
 	PortDock* get_portdock() const {
 		return portdock_;
 	}
+
+	std::string warehouse_census_string() const;
 	void update_statistics_string(std::string* str) override;
 
-	// Returns the first matching not completely filled waresqueue of the expedition if this is a
-	// port.
-	// Will throw an exception otherwise or if all queues of this type are full.
 	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
 	// Returns the waresqueue of the expedition if this is a port.
 	// Will throw an exception otherwise.
-	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
+	InputQueue&
+	inputqueue(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id) override;
 
 	[[nodiscard]] const std::string& get_warehouse_name() const {
 		return warehouse_name_;
 	}
 	void set_warehouse_name(const std::string& name);
+
+	[[nodiscard]] Quantity get_desired_soldier_count() const {
+		return desired_soldier_count_;
+	}
+	void set_desired_soldier_count(Quantity q);
+
+	void set_soldier_preference(SoldierPreference);
+	[[nodiscard]] SoldierPreference get_soldier_preference() const {
+		return soldier_request_manager_.get_preference();
+	}
 
 	void log_general_info(const EditorGameBase&) const override;
 
@@ -293,8 +322,14 @@ private:
 	void update_planned_workers(Game&, PlannedWorkers& pw);
 	void update_all_planned_workers(Game&);
 
+	static void
+	request_soldier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
+	Quantity desired_soldier_count_{0U};
 	AttackTarget attack_target_;
 	SoldierControl soldier_control_;
+	SoldierRequestManager soldier_request_manager_;
+	Time next_swap_soldiers_time_{0U};
+
 	WarehouseSupply* supply_;
 
 	std::vector<StockPolicy> ware_policy_;
@@ -305,6 +340,18 @@ private:
 	using WorkerList = std::vector<OPtr<Worker>>;
 	using IncorporatedWorkers = std::map<DescriptionIndex, WorkerList>;
 	IncorporatedWorkers incorporated_workers_;
+
+	// We keep soldiers separately, always sorted by level in decreasing order
+	using SoldierList = std::vector<OPtr<Soldier>>;
+	SoldierList incorporated_soldiers_;
+
+	// Called by incorporate_worker() for soldiers. This handles keeping them sorted.
+	void incorporate_soldier_inner(EditorGameBase& egbase, Soldier* soldier);
+
+	// Flag for launch_soldier() whether it needs to sort them first.
+	// Adding soldiers on game loading in map_io/map_buildingdata_packet.cc sets it to false.
+	bool soldiers_are_sorted_{true};
+
 	std::vector<Time> next_worker_without_cost_spawn_;
 	Time next_military_act_{0U};
 	Time next_stock_remove_act_{0U};

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2023 by the Widelands Development Team
+ * Copyright (C) 2008-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,11 @@
 #ifndef WL_NETWORK_BUFFEREDCONNECTION_H
 #define WL_NETWORK_BUFFEREDCONNECTION_H
 
+#include <deque>
 #include <map>
 #include <memory>
 #include <mutex>
+#include <queue>
 #include <thread>
 
 #include "network/network.h"
@@ -312,8 +314,8 @@ private:
 	/// Each packet in the queue is a vector of uint8_t.
 	std::map<uint8_t, std::queue<std::vector<uint8_t>>> buffers_to_send_;
 
-	/// An io_service needed by asio. Primarily needed for asynchronous operations.
-	asio::io_service io_service_;
+	/// An io_context needed by asio. Primarily needed for asynchronous operations.
+	asio::io_context io_context_;
 
 	/// The socket that connects us to the host.
 	asio::ip::tcp::socket socket_;

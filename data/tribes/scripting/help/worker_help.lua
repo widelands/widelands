@@ -163,11 +163,21 @@ function worker_help_string(tribe, worker_description)
 
    result = result .. worker_help_employers_string(worker_description)
 
-   -- TODO(GunChleoc): Add "enhanced from" info in one_tribe branch
+   -- TODO(hessenfarmer): make this work for more then 2 promotion steps
    local becomes_description = worker_description.becomes
+   local promoted_from_description = worker_description.promoted_from
+   if (promoted_from_description) then
+      becomes_description = worker_description
+      if (promoted_from_description.promoted_from) then
+         becomes_description = promoted_from_description
+         promoted_from_description = promoted_from_description.promoted_from
+      end
+   else
+      promoted_from_description = worker_description
+   end
    if (becomes_description) then
       result = result .. h2(_("Experience levels"))
-      result = result .. help_worker_experience(worker_description, becomes_description)
+      result = result .. help_worker_experience(promoted_from_description, becomes_description)
    end
    -- Soldier properties
    if (worker_description.type_name == "soldier") then

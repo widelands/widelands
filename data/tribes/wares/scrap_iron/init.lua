@@ -11,7 +11,7 @@ wl.Descriptions():new_ware_type {
    animation_directory = dirname,
    animations = {
       idle = {
-         hotspot = { 7, 9 },
+         hotspot = { 10, 10 },
       },
    }
 }

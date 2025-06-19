@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,9 @@
 
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
+#include "wlapplication_options.h"
 
 constexpr int kTextPadding = 48;
 
@@ -44,4 +46,24 @@ void draw_game_tip(RenderTarget& rt,
 	pt = Vector2i(bounds.x + (bounds.w - rendered_text->width()) / 2,
 	              bounds.y + (bounds.h - rendered_text->height()) / 2);
 	rendered_text->draw(rt, pt);
+}
+
+void draw_splashscreen(RenderTarget& rt, const std::string& footer_message, const float opacity) {
+	std::string image_name = get_config_string("splash_image", "");
+	if (image_name.empty() || resolve_template_image_filename(image_name) == kFallbackImage) {
+		image_name = kSplashImage;
+	}
+
+	const Image* image = g_image_cache->get(image_name);
+	rt.fill_rect(Recti(0, 0, rt.width(), rt.height()), RGBAColor(0, 0, 0, 255), BlendMode::Default);
+	rt.blit_fit(image, false, opacity);
+
+	if (!footer_message.empty()) {
+		std::string intro_font = get_config_string(
+		   "intro_font", g_style_manager->font_style(UI::FontStyle::kFsMenuIntro).as_font_open());
+		std::shared_ptr<const UI::RenderedText> footer = UI::g_fh->render(
+		   format("<rt><p align=center>%s%s</font></p></rt>", intro_font, footer_message));
+		Vector2i footer_pos(rt.width() / 2, rt.height() - 3 * footer->height());
+		footer->draw(rt, footer_pos, UI::Align::kCenter);
+	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -499,12 +499,7 @@ void TribeDescr::load_workers(const LuaTable& table, Descriptions& descriptions)
 			try {
 				DescriptionIndex workerindex = descriptions.load_worker(workername);
 				if (has_worker(workerindex)) {
-					if (workername == "frisians_diker") {
-						// TODO(Nordfriese): Ugly v1.0 savegame compatibility hack, remove after v1.1
-						continue;
-					}
-
-					throw GameDataError("Duplicate definition of worker");
+					throw GameDataError("Duplicate definition of worker '%s'", workername.c_str());
 				}
 
 				// Set default_target_quantity and preciousness (both optional)
@@ -524,6 +519,12 @@ void TribeDescr::load_workers(const LuaTable& table, Descriptions& descriptions)
 
 				// Add helptexts
 				load_helptexts(worker_descr, *worker_table);
+
+				// Register at promoted worker
+				const DescriptionIndex& becomes = worker_descr->becomes();
+				if (becomes != INVALID_INDEX) {
+					descriptions.get_mutable_worker_descr(becomes)->set_promoted_from(workerindex);
+				}
 
 				// Add to tribe
 				workers_.insert(workerindex);
@@ -577,11 +578,6 @@ void TribeDescr::load_buildings(const LuaTable& table, Descriptions& description
 		try {
 			DescriptionIndex index = descriptions.load_building(buildingname);
 			if (has_building(index)) {
-				if (buildingname == "frisians_dikers_house") {
-					// TODO(Nordfriese): Ugly v1.0 savegame compatibility hack, remove after v1.1
-					continue;
-				}
-
 				throw GameDataError("Duplicate definition of building '%s'", buildingname.c_str());
 			}
 			buildings_.insert(index);
@@ -793,6 +789,15 @@ const RoadTextures& TribeDescr::road_textures() const {
 	return road_textures_;
 }
 
+std::string TribeDescr::get_soldiers_format_string(const CapacityStringIndex index,
+                                                   const int number_to_format) const {
+	std::unique_ptr<i18n::GenericTextdomain> td(
+	   AddOns::create_textdomain_for_addon(basic_info().addon, "tribes_encyclopedia"));
+	const int i = static_cast<int>(index);
+	return npgettext(soldier_context_.c_str(), soldier_capacity_strings_sg_[i].c_str(),
+	                 soldier_capacity_strings_pl_[i].c_str(), number_to_format);
+}
+
 /*
 ==============
 Find the best matching indicator for the given amount.
@@ -825,8 +830,8 @@ DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* c
 	}
 
 	if (lowest < amount) {
-		throw GameDataError("Tribe '%s' has no indicators for amount %i of resource '%s' (highest "
-		                    "possible amount is %i)!",
+		throw GameDataError("Tribe '%s' has no indicators for amount %u of resource '%s' (highest "
+		                    "possible amount is %u)!",
 		                    name_.c_str(), amount, res->name().c_str(), lowest);
 	}
 
@@ -969,6 +974,12 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 		if (building->type() != MapObjectType::CONSTRUCTIONSITE &&
 		    building->type() != MapObjectType::DISMANTLESITE) {
 			building->set_owning_tribe(name());
+		}
+
+		if (building->workarea_info().size() > 3) {
+			// InteractiveBase cannot visualize more than 3 workarea rings
+			throw GameDataError("%s: Building cannot have more than 3 workareas, found %" PRIuS,
+			                    name().c_str(), building->workarea_info().size());
 		}
 
 		// Calculate largest possible workarea radius

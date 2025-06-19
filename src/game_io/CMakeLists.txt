@@ -17,6 +17,8 @@ wl_library(game_io
     game_player_economies_packet.h
     game_player_info_packet.cc
     game_player_info_packet.h
+    game_player_trades_packet.cc
+    game_player_trades_packet.h
     game_preload_packet.cc
     game_preload_packet.h
     game_saver.cc
@@ -36,7 +38,7 @@ wl_library(game_io
     io_profile
     logic
     logic_addons
-    logic_commands
+    commands
     logic_exceptions
     logic_game_controller
     logic_map

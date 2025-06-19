@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2023 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -176,7 +176,7 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 		Flag& curflag(route_.get_flag(game_, 0));
 		Flag& nextflag(route_.get_flag(game_, 1));
 		if (type == wwWORKER ? curflag.get_road(nextflag) == nullptr :
-                             curflag.get_roadbase(nextflag) == nullptr) {
+		                       curflag.get_roadbase(nextflag) == nullptr) {
 			upcast(Warehouse, wh, curflag.get_building());
 			assert(wh);
 

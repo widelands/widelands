@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #include <memory>
 
 #include <SDL_mouse.h>
+#include <SDL_timer.h>
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -28,6 +29,8 @@
 #include "graphic/graphic.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/window.h"
+
+unsigned g_message_box_timeout = 0;
 
 namespace UI {
 
@@ -72,8 +75,8 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 
 	// Stupid heuristic to avoid excessively long lines
 	if (height < 2 * text_height(font_style)) {
-		std::shared_ptr<const UI::RenderedText> temp_rendered_text =
-		   g_fh->render(as_richtext_paragraph(text, font_style), maxwidth / 2);
+		std::shared_ptr<const UI::RenderedText> temp_rendered_text = g_fh->render(
+		   is_richtext(text) ? text : as_richtext_paragraph(text, font_style), maxwidth / 2);
 		width = temp_rendered_text->width();
 		height = temp_rendered_text->height();
 	}
@@ -102,7 +105,7 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	   this, "ok",
 	   type_ == MBoxType::kOk        ? (width - button_w) / 2 :
 	   UI::g_fh->fontset()->is_rtl() ? left_button_x :
-                                      right_button_x,
+	                                   right_button_x,
 	   button_y, button_w, 0,
 	   s == WindowStyle::kWui ? UI::ButtonStyle::kWuiPrimary : UI::ButtonStyle::kFsMenuPrimary,
 	   _("OK")));
@@ -113,7 +116,7 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 		   new Button(this, "cancel", UI::g_fh->fontset()->is_rtl() ? right_button_x : left_button_x,
 		              button_y, button_w, 0,
 		              s == WindowStyle::kWui ? UI::ButtonStyle::kWuiSecondary :
-                                             UI::ButtonStyle::kFsMenuSecondary,
+		                                       UI::ButtonStyle::kFsMenuSecondary,
 		              _("Cancel")));
 		cancel_button_->sigclicked.connect([this]() { clicked_back(); });
 	}
@@ -121,6 +124,8 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	set_inner_size(width, button_y + ok_button_->get_h() + margin);
 	center_to_parent();
 	focus();
+
+	start_time_ = SDL_GetTicks();
 
 	initialization_complete();
 }
@@ -182,4 +187,18 @@ void WLMessageBox::clicked_back() {
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	}
 }
+
+void WLMessageBox::think() {
+	Window::think();
+
+	if (is_modal() && g_message_box_timeout > 0 &&
+	    SDL_GetTicks() > start_time_ + g_message_box_timeout) {
+		if (type_ == MBoxType::kOk) {
+			clicked_ok();
+		} else {
+			clicked_back();
+		}
+	}
+}
+
 }  // namespace UI

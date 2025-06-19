@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,11 +67,11 @@ bool NetHost::is_connected(const ConnectionId id) const {
 void NetHost::stop_listening() {
 
 	// Stop the thread
-	io_service_.stop();
-	for (int i = 0; i < 1000 && !io_service_.stopped(); i++) {
+	io_context_.stop();
+	for (int i = 0; i < 1000 && !io_context_.stopped(); i++) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	}
-	assert(io_service_.stopped());
+	assert(io_context_.stopped());
 	if (asio_thread_.joinable()) {
 		try {
 			asio_thread_.join();
@@ -183,7 +183,7 @@ void NetHost::start_accepting(
 	});
 }
 
-NetHost::NetHost(const uint16_t port) : acceptor_v4_(io_service_), acceptor_v6_(io_service_) {
+NetHost::NetHost(const uint16_t port) : acceptor_v4_(io_context_), acceptor_v6_(io_context_) {
 
 	if (open_acceptor(&acceptor_v4_, asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port))) {
 		verb_log_info("[NetHost] Opening a listening IPv4 socket on TCP port %u", port);
@@ -198,7 +198,7 @@ NetHost::NetHost(const uint16_t port) : acceptor_v4_(io_service_), acceptor_v6_(
 
 	asio_thread_ = std::thread([this]() {
 		verb_log_info("[NetHost] Starting networking thread");
-		io_service_.run();
+		io_context_.run();
 		verb_log_info("[NetHost] Stopping networking thread");
 	});
 }
@@ -214,7 +214,7 @@ bool NetHost::open_acceptor(asio::ip::tcp::acceptor* acceptor,
 			acceptor->set_option(option_v6only);
 		}
 		acceptor->bind(endpoint);
-		acceptor->listen(asio::socket_base::max_connections);
+		acceptor->listen(asio::socket_base::max_listen_connections);
 		return true;
 	} catch (const std::system_error&) {
 		return false;

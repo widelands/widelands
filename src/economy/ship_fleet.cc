@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2023 by the Widelands Development Team
+ * Copyright (C) 2011-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -613,7 +613,7 @@ void ShipFleet::connect_port(EditorGameBase& egbase, uint32_t idx) {
 			}
 
 			ppath.cost = cost;
-			ppath.path.reset(new Path);
+			ppath.path = std::make_shared<Path>();
 			astar.pathto(cur, *ppath.path);
 			if (reverse) {
 				ppath.path->reverse();

@@ -109,7 +109,7 @@ obj_produce_cloth = {
    title=_("Produce cloth for building our first ship"),
    number = 1,
    body = objective_text(_("Cloth Production"),
-      li(_([[Now build a sheep farm and turn all the wheat into at least 50 bales of wool. Afterwards use the wool to weave cloth in order to build a ship.]]))
+      li(_([[Now build a sheep farm and use all the wheat to produce at least 50 bales of wool. Afterwards use the wool to weave cloth in order to build a ship.]]))
    ),
 }
 

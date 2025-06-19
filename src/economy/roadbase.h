@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2023 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,6 +65,7 @@ struct RoadBase : public PlayerImmovable {
 	PositionList get_positions(const EditorGameBase&) const override;
 
 	Flag& base_flag() override;
+	const Flag& base_flag() const override;
 
 	int32_t get_cost(FlagId fromflag);
 	const Path& get_path() const {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 by the Widelands Development Team
+ * Copyright (C) 2023-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,8 +71,8 @@ FleetOptionsWindow::create(UI::Panel* parent, InteractiveBase& ibase, Widelands:
 	return *new FleetOptionsWindow(
 	   parent, ibase,
 	   interface->descr().type() == Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE ?
-         Type::kShip :
-         Type::kFerry,
+	      Type::kShip :
+	      Type::kFerry,
 	   interface);
 }
 
@@ -173,7 +173,7 @@ FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent,
 	main_box_.add(
 	   new UI::Textarea(&main_box_, UI::PanelStyle::kWui, "label_target", UI::FontStyle::kWuiLabel,
 	                    type_ == Type::kShip ? _("Desired number of transport ships:") :
-                                              _("Desired number of unemployed ferries:"),
+	                                           _("Desired number of unemployed ferries:"),
 	                    UI::Align::kCenter),
 	   UI::Box::Resizing::kFullSize);
 

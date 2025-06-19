@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2023 by the Widelands Development Team
+ * Copyright (C) 2003-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  */
 
 #include "ui_basic/tabpanel.h"
+
+#include <algorithm>
 
 #include <SDL_mouse.h>
 
@@ -272,6 +274,11 @@ void TabPanel::update_desired_size() {
 		h += panelh;
 	}
 
+	// size of tab headers
+	if (!tabs_.empty()) {
+		w = std::max(w, tabs_.back()->get_x() + tabs_.back()->get_w());
+	}
+
 	set_desired_size(w, h);
 
 	// This is not redundant, because even if all this doesn't change our
@@ -430,16 +437,15 @@ void TabPanel::draw(RenderTarget& dst) {
 			// Scale the image down if needed, but keep the ratio.
 			constexpr int kMaxImageSize = kTabPanelButtonHeight - 2 * kTabPanelImageMargin;
 			double image_scale =
-			   std::min(1., std::min(static_cast<double>(kMaxImageSize) / tabs_[idx]->pic->width(),
-			                         static_cast<double>(kMaxImageSize) / tabs_[idx]->pic->height()));
+			   std::min({1., static_cast<double>(kMaxImageSize) / tabs_[idx]->pic->width(),
+			             static_cast<double>(kMaxImageSize) / tabs_[idx]->pic->height()});
 
 			uint16_t picture_width = image_scale * tabs_[idx]->pic->width();
 			uint16_t picture_height = image_scale * tabs_[idx]->pic->height();
 			dst.blitrect_scale(
 			   Rectf(x + (kTabPanelButtonHeight - picture_width) / 2.f,
 			         (kTabPanelButtonHeight - picture_height) / 2.f, picture_width, picture_height),
-			   tabs_[idx]->pic, Recti(0, 0, tabs_[idx]->pic->width(), tabs_[idx]->pic->height()), 1,
-			   BlendMode::UseAlpha);
+			   tabs_[idx]->pic, tabs_[idx]->pic->rect(), 1.f, BlendMode::UseAlpha);
 		} else if (tabs_[idx]->rendered_title != nullptr) {
 			tabs_[idx]->rendered_title->draw(
 			   dst, Vector2i(x + kTabPanelTextMargin,

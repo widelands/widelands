@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -566,10 +566,10 @@ unsigned long long RealFSImpl::disk_space() {  // NOLINT
 	ULARGE_INTEGER freeavailable;
 
 	return GetDiskFreeSpaceEx(root_.c_str(), &freeavailable, 0, 0) ?
-             // If more than 2G free space report that much
-             freeavailable.HighPart ? std::numeric_limits<unsigned long>::max() :  // NOLINT
-                                      freeavailable.LowPart :
-             0;
+	          // If more than 2G free space report that much
+	          freeavailable.HighPart ? std::numeric_limits<unsigned long>::max() :  // NOLINT
+	                                   freeavailable.LowPart :
+	          0;
 #else
 	struct statvfs svfs;
 	if (statvfs(root_.c_str(), &svfs) != -1) {

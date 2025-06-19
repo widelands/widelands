@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,23 +47,23 @@ public:
 	[[nodiscard]] virtual std::string lookup_immovable(const std::string& immovable) const = 0;
 
 	/// Looks up the new name for the 'worker'.
-	[[nodiscard]] const std::string& lookup_worker(const std::string& worker) const;
+	[[nodiscard]] std::string lookup_worker(const std::string& worker) const;
 
 	/// Looks up the new name for the 'ware'.
-	[[nodiscard]] const std::string& lookup_ware(const std::string& ware) const;
+	[[nodiscard]] std::string lookup_ware(const std::string& ware) const;
 
 	/// Looks up the new name for the 'building'.
-	[[nodiscard]] const std::string& lookup_building(const std::string& building) const;
+	[[nodiscard]] std::string lookup_building(const std::string& building) const;
 
 	/// Looks up the new name for the 'ship'.
-	[[nodiscard]] const std::string& lookup_ship(const std::string& ship) const;
+	[[nodiscard]] std::string lookup_ship(const std::string& ship) const;
 
 	/// Looks up the new name for the 'program'.
 	[[nodiscard]] const std::string& lookup_program(const std::string& program) const;
 
 protected:
-	[[nodiscard]] const std::string&
-	lookup_entry(const std::string& entry, const std::map<std::string, std::string>& table) const;
+	[[nodiscard]] std::string lookup_entry(const std::string& entry,
+	                                       const std::map<std::string, std::string>& table) const;
 
 	// <old name, new name>
 	const std::map<std::string, std::string> workers_;
@@ -107,7 +107,7 @@ public:
 	[[nodiscard]] std::string lookup_immovable(const std::string& immovable) const override;
 
 private:
-	[[nodiscard]] const std::string&
+	[[nodiscard]] std::string
 	lookup_world_entry(const std::string& entry,
 	                   const std::map<std::string, std::map<std::string, std::string>>& table) const;
 

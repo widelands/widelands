@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,7 @@
 
 #include "logic/map_objects/tribes/warehouse.h"
 
+#include <algorithm>
 #include <memory>
 
 #include "base/log.h"
@@ -31,15 +32,16 @@
 #include "economy/ship_fleet.h"
 #include "economy/warehousesupply.h"
 #include "economy/wares_queue.h"
-#include "graphic/text_layout.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/findbob.h"
 #include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/carrier.h"
+#include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/requirements.h"
 #include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/message_queue.h"
@@ -55,16 +57,19 @@ constexpr int kFleeingUnitsCap = 500;
 // Goes through the list and removes all workers that are no longer in the
 // game.
 void remove_no_longer_existing_workers(Game& game, std::vector<OPtr<Worker>>* workers) {
-	for (std::vector<OPtr<Worker>>::iterator i = workers->begin(); i != workers->end(); ++i) {
+	std::vector<OPtr<Worker>>::iterator i = workers->begin();
+	while (i != workers->end()) {
 		if (i->get(game) == nullptr) {
-			workers->erase(i);
-			remove_no_longer_existing_workers(game, workers);
-			return;
+			i = workers->erase(i);
+		} else {
+			++i;
 		}
 	}
 }
 
 }  // namespace
+
+constexpr unsigned kDefendersKeptInside = 2;
 
 bool Warehouse::AttackTarget::can_be_attacked() const {
 	return warehouse_->descr().get_conquers() > 0;
@@ -90,27 +95,22 @@ void Warehouse::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) con
 		return;
 	}
 
-	DescriptionIndex const soldier_index = owner->tribe().soldier();
-	Requirements noreq;
-
-	if (warehouse_->count_workers(game, soldier_index, noreq, Match::kCompatible) == 0u) {
+	if (warehouse_->count_all_soldiers() <= kDefendersKeptInside) {
 		return;
 	}
 
-	Soldier& defender =
-	   dynamic_cast<Soldier&>(warehouse_->launch_worker(game, soldier_index, noreq));
+	Requirements noreq;
+	Soldier& defender = warehouse_->launch_soldier(game, noreq, true);
 	defender.start_task_defense(game, false);
 }
 
 AttackTarget::AttackResult Warehouse::AttackTarget::attack(Soldier* enemy) const {
 	Player* owner = warehouse_->get_owner();
 	Game& game = dynamic_cast<Game&>(owner->egbase());
-	DescriptionIndex const soldier_index = owner->tribe().soldier();
 	Requirements noreq;
 
-	if (warehouse_->count_workers(game, soldier_index, noreq, Match::kCompatible) != 0u) {
-		Soldier& defender =
-		   dynamic_cast<Soldier&>(warehouse_->launch_worker(game, soldier_index, noreq));
+	if (warehouse_->count_all_soldiers() != 0u) {
+		Soldier& defender = warehouse_->launch_soldier(game, noreq, true);
 		defender.start_task_defense(game, true);
 		enemy->send_signal(game, "sleep");
 		return AttackTarget::AttackResult::DefenderLaunched;
@@ -176,6 +176,8 @@ void WarehouseSupply::set_economy(Economy* const e, WareWorker type) {
 				}
 			}
 			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 
@@ -197,6 +199,8 @@ void WarehouseSupply::set_economy(Economy* const e, WareWorker type) {
 				}
 			}
 			break;
+		default:
+			NEVER_HERE();
 		}
 		ec->add_supply(*this);
 	}
@@ -279,11 +283,20 @@ void WarehouseSupply::send_to_storage(Game& /* game */, Warehouse* /* wh */) {
 }
 
 uint32_t WarehouseSupply::nr_supplies(const Game& game, const Request& req) const {
-	return req.get_type() == wwWORKER ?
-             warehouse_->count_workers(game, req.get_index(), req.get_requirements(),
-	                                    (req.get_exact_match() ? Warehouse::Match::kExact :
-                                                                Warehouse::Match::kCompatible)) :
-             wares_.stock(req.get_index());
+	if (req.get_type() == wwWARE) {
+		return wares_.stock(req.get_index());
+	}
+
+	Quantity available = warehouse_->count_workers(
+	   game, req.get_index(), req.get_requirements(),
+	   (req.get_exact_match() ? Warehouse::Match::kExact : Warehouse::Match::kCompatible));
+
+	if (req.get_index() != warehouse_->owner().tribe().soldier()) {
+		return available;
+	}
+
+	Quantity garrison = warehouse_->get_desired_soldier_count();
+	return available > garrison ? available - garrison : 0;
 }
 
 /// Launch a ware.
@@ -300,6 +313,13 @@ WareInstance& WarehouseSupply::launch_ware(Game& game, const Request& req) {
 
 /// Launch a ware as worker.
 Worker& WarehouseSupply::launch_worker(Game& game, const Request& req) {
+	if (req.get_index() == warehouse_->owner().tribe().soldier()) {
+		SoldierPreference pref = SoldierPreference::kAny;
+		if (upcast(const SoldierRequest, sr, &req); sr != nullptr) {
+			pref = sr->get_preference();
+		}
+		return warehouse_->launch_soldier(game, req.get_requirements(), false, pref);
+	}
 	return warehouse_->launch_worker(game, req.get_index(), req.get_requirements());
 }
 
@@ -318,32 +338,43 @@ WarehouseDescr::WarehouseDescr(const std::string& init_descname,
                                Descriptions& descriptions)
    : BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, descriptions) {
 	heal_per_second_ = table.get_int("heal_per_second");
+
 	if (table.has_key("conquers")) {
 		conquers_ = table.get_int("conquers");
 		workarea_info_[conquers_].insert(name() + " conquer");
+	}
+
+	if (table.has_key("max_garrison")) {
+		max_garrison_ = table.get_int("max_garrison");
 	}
 }
 
 std::vector<Soldier*> Warehouse::SoldierControl::present_soldiers() const {
 	std::vector<Soldier*> rv;
-	DescriptionIndex const soldier_index = warehouse_->owner().tribe().soldier();
-	IncorporatedWorkers::const_iterator sidx = warehouse_->incorporated_workers_.find(soldier_index);
-
-	if (sidx != warehouse_->incorporated_workers_.end()) {
-		const WorkerList& soldiers = sidx->second;
-		for (OPtr<Worker> temp_soldier : soldiers) {
-			rv.push_back(dynamic_cast<Soldier*>(temp_soldier.get(warehouse_->get_owner()->egbase())));
+	if (!warehouse_->incorporated_soldiers_.empty()) {
+		for (OPtr<Soldier> temp_soldier : warehouse_->incorporated_soldiers_) {
+			rv.push_back(temp_soldier.get(warehouse_->get_owner()->egbase()));
 		}
 	}
 	return rv;
 }
 
 std::vector<Soldier*> Warehouse::SoldierControl::stationed_soldiers() const {
+	// TODO(tothxa): Outside defenders should be tracked. At least AI soldier accounting needs
+	//               this to be correct.
 	return present_soldiers();
 }
 
 std::vector<Soldier*> Warehouse::SoldierControl::associated_soldiers() const {
-	return stationed_soldiers();
+	std::vector<Soldier*> soldiers = stationed_soldiers();
+	Request* sr = warehouse_->soldier_request_manager_.get_request();
+	if (sr != nullptr) {
+		for (const Transfer* t : sr->get_transfers()) {
+			Soldier& s = dynamic_cast<Soldier&>(*t->get_worker());
+			soldiers.push_back(&s);
+		}
+	}
+	return soldiers;
 }
 
 Quantity Warehouse::SoldierControl::min_soldier_capacity() const {
@@ -351,15 +382,16 @@ Quantity Warehouse::SoldierControl::min_soldier_capacity() const {
 }
 
 Quantity Warehouse::SoldierControl::max_soldier_capacity() const {
-	return std::numeric_limits<Quantity>::max();
+	return warehouse_->attack_target()->can_be_attacked() ? warehouse_->descr().get_max_garrison() :
+	                                                        0;
 }
 
 Quantity Warehouse::SoldierControl::soldier_capacity() const {
-	return max_soldier_capacity();
+	return warehouse_->get_desired_soldier_count();
 }
 
-void Warehouse::SoldierControl::set_soldier_capacity(Quantity /* capacity */) {
-	throw wexception("Not implemented for a Warehouse!");
+void Warehouse::SoldierControl::set_soldier_capacity(Quantity capacity) {
+	warehouse_->set_desired_soldier_count(capacity);
 }
 
 void Warehouse::SoldierControl::drop_soldier(Soldier& /* soldier */) {
@@ -367,20 +399,21 @@ void Warehouse::SoldierControl::drop_soldier(Soldier& /* soldier */) {
 }
 
 int Warehouse::SoldierControl::outcorporate_soldier(Soldier& soldier) {
-	DescriptionIndex const soldier_index = warehouse_->owner().tribe().soldier();
-	if (warehouse_->incorporated_workers_.count(soldier_index) != 0u) {
-		WorkerList& soldiers = warehouse_->incorporated_workers_[soldier_index];
-
-		WorkerList::iterator i = std::find(soldiers.begin(), soldiers.end(), &soldier);
-
-		soldiers.erase(i);
-		warehouse_->supply_->remove_workers(soldier_index, 1);
-	}
+	if (!warehouse_->incorporated_soldiers_.empty()) {
+		SoldierList::iterator i = std::find(warehouse_->incorporated_soldiers_.begin(),
+		                                    warehouse_->incorporated_soldiers_.end(), &soldier);
+		if (i != warehouse_->incorporated_soldiers_.end()) {
+			warehouse_->incorporated_soldiers_.erase(i);
+			warehouse_->supply_->remove_workers(warehouse_->owner().tribe().soldier(), 1);
+		}
 #ifndef NDEBUG
-	else {
-		throw wexception("outcorporate_soldier: soldier not in this warehouse!");
-	}
+		else {
+			throw wexception("outcorporate_soldier: soldier not in this warehouse!");
+		}
+	} else {
+		throw wexception("outcorporate_soldier: no soldiers in this warehouse!");
 #endif
+	}
 	return 0;
 }
 
@@ -393,6 +426,12 @@ Warehouse::Warehouse(const WarehouseDescr& warehouse_descr)
    : Building(warehouse_descr),
      attack_target_(this),
      soldier_control_(this),
+     soldier_request_manager_(
+        *this,
+        SoldierPreference::kAny /* no exchange by default */,
+        Warehouse::request_soldier_callback,
+        [this]() { return soldier_control_.soldier_capacity(); },
+        [this]() { return soldier_control_.stationed_soldiers(); }),
      supply_(new WarehouseSupply(this)) {
 	cleanup_in_progress_ = false;
 	set_attack_target(&attack_target_);
@@ -521,9 +560,14 @@ bool Warehouse::init(EditorGameBase& egbase) {
 	Player* player = get_owner();
 
 	init_containers(*player);
-	warehouse_name_ = player->pick_warehousename(descr().get_isport());
+	warehouse_name_ =
+	   player->pick_warehousename(descr().get_isport() ? Player::WarehouseNameType::kPort :
+	                                                     Player::WarehouseNameType::kWarehouse);
 
 	set_seeing(true);
+
+	// Garrisons should be treated as more important than militarysites
+	set_priority(wwWORKER, player->tribe().soldier(), WarePriority::kHigh, 0);
 
 	// Even though technically, a warehouse might be completely empty,
 	// we let warehouse see always for simplicity's sake (since there's
@@ -580,6 +624,8 @@ bool Warehouse::init(EditorGameBase& egbase) {
 			log_warn_time(egbase.get_gametime(), " Portdock without a fleet created (%3dx%3d)\n",
 			              get_position().x, get_position().y);
 		}
+
+		player->remove_detected_port_space(get_position(), pd);
 	}
 	cleanup_in_progress_ = false;
 	return true;
@@ -588,6 +634,11 @@ bool Warehouse::init(EditorGameBase& egbase) {
 void Warehouse::set_warehouse_name(const std::string& name) {
 	warehouse_name_ = name;
 	get_owner()->reserve_warehousename(name);
+
+	// Line breaks mess up the type icons in the census strings and push the garrison strings
+	// down where they're covered by the flag, so we replace spaces with non-breaking ones.
+	// The names will be richtext escaped for safety, so we can't use "&nbsp;".
+	replace_all(warehouse_name_, " ", " ");
 }
 
 void Warehouse::init_containers(const Player& player) {
@@ -717,6 +768,7 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 	// This will launch all workers including incorporated ones up to kFleeingUnitsCap and then empty
 	// the stock.
 	if (upcast(Game, game, &egbase)) {
+		set_desired_soldier_count(0);  // allow garrisoned soldiers to flee
 		const WareList& workers = get_workers();
 		for (DescriptionIndex id = 0; id < workers.get_nrwareids(); ++id) {
 			// If the game is running, have the workers flee the warehouse.
@@ -734,6 +786,7 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 		}
 	}
 	incorporated_workers_.clear();
+	incorporated_soldiers_.clear();
 
 	while (!planned_workers_.empty()) {
 		planned_workers_.back().cleanup();
@@ -793,20 +846,17 @@ void Warehouse::act(Game& game, uint32_t const data) {
 	if (next_military_act_ <= gametime) {
 		DescriptionIndex const soldier_index = owner().tribe().soldier();
 
-		if (incorporated_workers_.count(soldier_index) != 0u) {
-			WorkerList& soldiers = incorporated_workers_[soldier_index];
-
+		if (!incorporated_soldiers_.empty()) {
 			unsigned total_heal = descr().get_heal_per_second();
 			// Using an explicit iterator, as we plan to erase some
 			// of those guys
-			for (WorkerList::iterator it = soldiers.begin(); it != soldiers.end(); ++it) {
-				// This is a safe cast: we know only soldiers can land in this
-				// slot in the incorporated array
-				Soldier* soldier = dynamic_cast<Soldier*>(it->get(game));
+			for (SoldierList::iterator it = incorporated_soldiers_.begin();
+			     it != incorporated_soldiers_.end(); ++it) {
+				Soldier* soldier = it->get(game);
 
 				//  Soldier dead ...
 				if ((soldier == nullptr) || soldier->get_current_health() == 0) {
-					it = soldiers.erase(it);
+					it = incorporated_soldiers_.erase(it);
 					supply_->remove_workers(soldier_index, 1);
 					continue;
 				}
@@ -818,6 +868,11 @@ void Warehouse::act(Game& game, uint32_t const data) {
 			}
 		}
 		next_military_act_ = schedule_act(game, Duration(1000));
+	}
+
+	if (gametime > next_swap_soldiers_time_) {
+		next_swap_soldiers_time_ = gametime + kSoldierSwapTime;
+		soldier_request_manager_.update();
 	}
 
 	if (next_stock_remove_act_ <= gametime) {
@@ -852,6 +907,7 @@ void Warehouse::set_economy(Economy* const e, WareWorker type) {
 	}
 	supply_->set_economy(e, type);
 	Building::set_economy(e, type);
+	soldier_request_manager_.set_economy(e, type);
 
 	for (const PlannedWorkers& pw : planned_workers_) {
 		for (Request* req : pw.requests) {
@@ -881,6 +937,10 @@ PlayerImmovable::Workers Warehouse::get_incorporated_workers() {
 		for (OPtr<Worker> worker : worker_pair.second) {
 			all_workers.push_back(worker.get(get_owner()->egbase()));
 		}
+	}
+	// Soldiers are stored separately
+	for (OPtr<Soldier> soldier : incorporated_soldiers_) {
+		all_workers.push_back(soldier.get(get_owner()->egbase()));
 	}
 	return all_workers;
 }
@@ -929,6 +989,10 @@ Quantity Warehouse::count_workers(const Game& game,
                                   DescriptionIndex worker_id,
                                   const Requirements& req,
                                   Match exact) {
+	if (worker_id == owner().tribe().soldier()) {
+		return count_soldiers(game, req);
+	}
+
 	Quantity sum = 0;
 
 	do {
@@ -954,9 +1018,26 @@ Quantity Warehouse::count_workers(const Game& game,
 	return sum;
 }
 
+Quantity Warehouse::count_soldiers(const Game& game, const Requirements& req) {
+	Quantity sum = incorporated_soldiers_.size();
+	assert(sum == supply_->stock_workers(owner().tribe().soldier()));
+
+	for (OPtr<Soldier> soldier : incorporated_soldiers_) {
+		if (!req.check(*soldier.get(game))) {
+			// This soldier doesn't match the requirements
+			--sum;
+		}
+	}
+
+	return sum;
+}
+
 /// Start a worker of a given type. The worker will
 /// be assigned a job by the caller.
 Worker& Warehouse::launch_worker(Game& game, DescriptionIndex worker_id, const Requirements& req) {
+	if (worker_id == owner().tribe().soldier()) {
+		return launch_soldier(game, req);
+	}
 	do {
 		if (supply_->stock_workers(worker_id) != 0u) {
 			uint32_t unincorporated = supply_->stock_workers(worker_id);
@@ -1007,6 +1088,111 @@ Worker& Warehouse::launch_worker(Game& game, DescriptionIndex worker_id, const R
 	throw wexception("Warehouse::launch_worker: worker does not actually exist");
 }
 
+Soldier& Warehouse::launch_soldier(Game& game,
+                                   const Requirements& req,
+                                   const bool defender,
+                                   const SoldierPreference pref) {
+	// counterpart to remove_no_longer_existing_workers()
+	std::vector<OPtr<Soldier>>::iterator it = incorporated_soldiers_.begin();
+	while (it != incorporated_soldiers_.end()) {
+		if (it->get(game) == nullptr) {
+			it = incorporated_soldiers_.erase(it);
+		} else {
+			++it;
+		}
+	}
+
+	if (incorporated_soldiers_.empty()) {
+		throw wexception("Warehouse::launch_soldier: no stored soldiers");
+	}
+
+	const DescriptionIndex soldier_index = owner().tribe().soldier();
+	assert(incorporated_soldiers_.size() == supply_->stock_workers(soldier_index));
+
+	// Make sure incorporated_soldiers_ is sorted after loading a game.
+	if (!soldiers_are_sorted_) {
+		std::sort(incorporated_soldiers_.begin(), incorporated_soldiers_.end(),
+		          [&game](OPtr<Soldier> a, OPtr<Soldier> b) {
+			          // We're sorting in decreasing order
+			          return a.get(game)->get_total_level() > b.get(game)->get_total_level();
+		          });
+		soldiers_are_sorted_ = true;
+	}
+
+	// Can't mix forward and reverse iterators, so we use indices :(
+	int i = 0;
+	int end = incorporated_soldiers_.size();
+
+	if (defender) {
+		// TODO(tothxa): This saves the strongest soldiers for the final battle.
+		//               Should it be the most preferred soldiers instead?
+		if (incorporated_soldiers_.size() > kDefendersKeptInside) {
+			i = kDefendersKeptInside;
+
+			// Try to send a fully healed soldier, fall back to highest remaining health
+			unsigned best_health = 0;
+			int best_health_index = -1;
+			Soldier* s = nullptr;
+			while (i < end) {
+				s = incorporated_soldiers_.at(i).get(game);
+				if (s->get_current_health() == s->get_max_health()) {
+					break;
+				}
+				if (s->get_current_health() > best_health) {
+					best_health = s->get_current_health();
+					best_health_index = i;
+				}
+				++i;
+			}
+			if (i == end) {
+				i = best_health_index;
+			}
+
+		} else {
+			i = incorporated_soldiers_.size() - 1;
+		}
+	} else {
+		assert(incorporated_soldiers_.size() > soldier_control_.soldier_capacity());
+		int step = 1;
+
+		if (pref == SoldierPreference::kHeroes) {
+			i = 0;
+			end = incorporated_soldiers_.size();
+		} else {
+			i = incorporated_soldiers_.size() - 1;
+			end = -1;
+			step = -1;
+		}
+		if (get_soldier_preference() != SoldierPreference::kAny) {
+			if (get_soldier_preference() == pref) {
+				i += step * soldier_control_.soldier_capacity();
+			} else {
+				end -= step * soldier_control_.soldier_capacity();
+			}
+		}
+		while (i != end) {
+			if (req.check(*incorporated_soldiers_.at(i).get(game))) {
+				break;
+			}
+			i += step;
+		}
+	}
+
+	if (i == end) {
+		throw wexception("Warehouse::launch_soldier: no stored soldier met the requirements at %s",
+		                 warehouse_name_.c_str());
+	}
+
+	Soldier* soldier = incorporated_soldiers_.at(i).get(game);
+	soldier->reset_tasks(game);   //  forget everything you did
+	soldier->set_location(this);  //  back in a economy
+	it = incorporated_soldiers_.begin();
+	it += i;
+	incorporated_soldiers_.erase(it);
+	supply_->remove_workers(soldier_index, 1);
+	return *soldier;
+}
+
 void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 	assert(w != nullptr);
 	assert(w->get_owner() == get_owner());
@@ -1032,11 +1218,15 @@ void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 		return;
 	}
 
-	// Incorporate the worker
-	if (incorporated_workers_.count(worker_index) == 0u) {
-		incorporated_workers_[worker_index] = WorkerList();
+	if (worker_index == owner().tribe().soldier()) {
+		incorporate_soldier_inner(egbase, dynamic_cast<Soldier*>(w));
+	} else {
+		// Incorporate the worker
+		if (incorporated_workers_.count(worker_index) == 0u) {
+			incorporated_workers_[worker_index] = WorkerList();
+		}
+		incorporated_workers_[worker_index].emplace_back(w);
 	}
-	incorporated_workers_[worker_index].push_back(w);
 
 	w->set_location(nullptr);  //  no longer in an economy
 
@@ -1045,6 +1235,21 @@ void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 		w->reset_tasks(*game);
 		w->start_task_idle(*game, 0, -1);
 	}
+}
+
+void Warehouse::incorporate_soldier_inner(EditorGameBase& egbase, Soldier* soldier) {
+	const unsigned total_level = soldier->get_total_level();
+	if (total_level == 0 || incorporated_soldiers_.empty()) {
+		incorporated_soldiers_.emplace_back(soldier);
+		return;
+	}
+
+	// Keep them sorted in decreasing order of total level
+	auto it = incorporated_soldiers_.begin();
+	while (it != incorporated_soldiers_.end() && it->get(egbase)->get_total_level() > total_level) {
+		++it;
+	}
+	incorporated_soldiers_.emplace(it, soldier);
 }
 
 /// Create an instance of a ware and make sure it gets
@@ -1429,6 +1634,10 @@ void Warehouse::check_remove_stock(Game& game) {
 		if (get_worker_policy(widx) != StockPolicy::kRemove || (get_workers().stock(widx) == 0u)) {
 			continue;
 		}
+		if (widx == owner().tribe().soldier() &&
+		    get_workers().stock(widx) <= get_desired_soldier_count()) {
+			continue;
+		}
 
 		Worker& worker = launch_worker(game, widx, Requirements());
 		worker.start_task_leavebuilding(game, true);
@@ -1436,15 +1645,76 @@ void Warehouse::check_remove_stock(Game& game) {
 	}
 }
 
-InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type, const Request* r) {
+InputQueue& Warehouse::inputqueue(DescriptionIndex index,
+                                  WareWorker type,
+                                  const Request* r,
+                                  uint32_t disambiguator_id) {
 	assert(portdock_ != nullptr);
 	assert(portdock_->expedition_bootstrap() != nullptr);
-	return r != nullptr ? portdock_->expedition_bootstrap()->inputqueue(*r) :
-                         portdock_->expedition_bootstrap()->inputqueue(index, type, false);
+	return r != nullptr ?
+	          portdock_->expedition_bootstrap()->inputqueue(*r) :
+	          portdock_->expedition_bootstrap()->inputqueue(index, type, false, disambiguator_id);
+}
+
+void Warehouse::set_desired_soldier_count(Quantity q) {
+	q = std::min(q, soldier_control_.max_soldier_capacity());
+	if (q != desired_soldier_count_) {
+		desired_soldier_count_ = q;
+		soldier_request_manager_.update();
+	}
+}
+
+void Warehouse::set_soldier_preference(SoldierPreference p) {
+	soldier_request_manager_.set_preference(p);
+	soldier_request_manager_.update();
+}
+
+void Warehouse::request_soldier_callback(Game& game,
+                                         Request& /* req */,
+                                         DescriptionIndex /* index */,
+                                         Worker* const w,
+                                         PlayerImmovable& target) {
+	Warehouse& wh = dynamic_cast<Warehouse&>(target);
+	Soldier& s = dynamic_cast<Soldier&>(*w);
+
+	wh.soldier_control_.incorporate_soldier(game, s);
+}
+
+std::string Warehouse::warehouse_census_string() const {
+	// U+2654 white chess king character
+	// "👑" U+1F451 crown character is missing from our font
+	static const std::string hq_fmt = "♔&nbsp;%s&nbsp;♔";
+
+	static const std::string port_fmt = "⚓&nbsp;%s&nbsp;⚓";  // U+2693 anchor character
+
+	// U+27F0 upwards quadruple arrow character (similar to a house)
+	// "📦" U+1F4E6 package character is missing from our font
+	static const std::string wh_fmt = "⟰&nbsp;%s&nbsp;⟰";
+
+	std::string icon_format;
+	if (descr().get_isport()) {
+		icon_format = port_fmt;
+	} else if (descr().get_conquers() > 0) {
+		icon_format = hq_fmt;
+	} else {
+		icon_format = wh_fmt;
+	}
+
+	return named_building_census_string(icon_format, get_warehouse_name());
 }
 
 void Warehouse::update_statistics_string(std::string* str) {
-	*str = richtext_escape(get_warehouse_name());
+	if (descr().get_conquers() > 0) {
+		// Port or HQ
+		if (get_desired_soldier_count() > 0) {
+			*str = soldier_control_.get_status_string(owner().tribe(), get_soldier_preference());
+		} else {
+			*str = "—";
+		}
+	} else {
+		// plain warehouse
+		str->clear();
+	}
 }
 
 std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() const {
@@ -1456,6 +1726,8 @@ std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() co
 		pair.second = get_worker_policy(pair.first);
 	}
 	settings->launch_expedition = (portdock_ != nullptr) && portdock_->expedition_started();
+	settings->desired_capacity = get_desired_soldier_count();
+	settings->soldier_preference = get_soldier_preference();
 	// Prior to the resolution of a defect report against ISO C++11, local variable 'settings' would
 	// have been copied despite being returned by name, due to its not matching the function return
 	// type. Call 'std::move' explicitly to avoid copying on older compilers.

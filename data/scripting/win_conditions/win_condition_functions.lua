@@ -80,13 +80,13 @@ win_conditions__initially_without_warehouse = {}
 
 function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
    for idx,p in ipairs(plrs) do
-      if win_conditions__initially_without_warehouse[idx] == nil then
-         win_conditions__initially_without_warehouse[idx] = p.defeated
-      elseif (p.defeated and not win_conditions__initially_without_warehouse[idx]) or p.resigned then
+      if win_conditions__initially_without_warehouse[p.number] == nil then
+         win_conditions__initially_without_warehouse[p.number] = p.defeated
+      elseif (p.defeated and not win_conditions__initially_without_warehouse[p.number]) or p.resigned then
          if not p.resigned then p:send_to_inbox(heading, msg) end
          local fields_to_destroy = {}
          -- first sink all ships a player still has
-         for idx,s in ipairs(array_combine(p:get_ships())) do
+         for i,s in ipairs(array_combine(p:get_ships())) do
             s:destroy()
          end
          -- now collect the warehouses/ports/milsites including constructionsites a player has
@@ -101,7 +101,7 @@ function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
             end
          end
          -- destroy the collected sites
-         for idx,f in ipairs(fields_to_destroy) do
+         for i,f in ipairs(fields_to_destroy) do
             if f.immovable then
                f.immovable:destroy()
                -- add some delay to the destruction for dramaturgical reason
@@ -115,7 +115,7 @@ function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
          table.remove(plrs, idx)
          break
       elseif not p.defeated then
-         win_conditions__initially_without_warehouse[idx] = false
+         win_conditions__initially_without_warehouse[p.number] = false
       end
    end
 end
