@@ -114,7 +114,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid "Building statistics"
-msgstr "Stadegoù ar Savadur"
+msgstr "Stadegoù ar savadurioù"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:60
 msgid "Check out your taverns"
@@ -153,7 +153,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:75
 msgid "Close the building statistics window when you are done."
-msgstr ""
+msgstr "Serrit prenestr stadegoù ar savadurioù pa viot prest."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:80
 msgid "Building Statistics"
@@ -226,7 +226,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:109
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:111
 msgid "Open the building statistics window again"
-msgstr "Digorit en-dro prenestr stadegoù ar savadur"
+msgstr "Digorit en-dro prenestr stadegoù ar savadurioù"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:113
 msgid ""
@@ -242,7 +242,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:121
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:123
 msgid "Open your stock window"
-msgstr ""
+msgstr "Digorit prenestr ho stok"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:124
 msgid ""
@@ -263,7 +263,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:152
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:165
 msgid "Stock"
-msgstr ""
+msgstr "Stok"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:134
 msgid "Check for rations"
@@ -332,7 +332,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:177
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:200
 msgid "You closed the stock window!"
-msgstr ""
+msgstr "Serret ho peus prenestr ar stok!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:180
 msgid ""
@@ -345,7 +345,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:211
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:213
 msgid "Open the stock window again"
-msgstr ""
+msgstr "Digorit prenestr ar stok en-dro"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:193
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:215
@@ -613,7 +613,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:334
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:336
 msgid "Open the ware statistics window"
-msgstr ""
+msgstr "Digerit prenestr stadegoù ar marc'hadouriezhioù"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:337
 msgid "Select the ‘Wares’ entry from the ‘Statistics’ menu."
@@ -624,7 +624,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:380
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:401
 msgid "Ware Statistics"
-msgstr ""
+msgstr "Stadegoù ar marc'hadouriezhioù"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:343
 msgid "Let’s have a look at how our wares production is doing."
@@ -696,7 +696,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:395
 msgid "When you have finished, close the ware statistics window."
-msgstr ""
+msgstr "Serrit prenestr stadegoù ar marc'hadouriezhioù pa viot prest."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:404
 msgid ""
@@ -714,7 +714,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:411
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:434
 msgid "You closed the ware statistics window!"
-msgstr ""
+msgstr "Serret ho peus prenestr stadegoù ar marc'hadouriezhioù!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:414
 msgid ""
@@ -725,7 +725,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:423
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:446
 msgid "Open the ware statistics window again"
-msgstr ""
+msgstr "Digorit en-dro prenestr stadegoù ar marc'hadouriezhioù"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:427
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:450
@@ -1116,11 +1116,11 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:652
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:654
 msgid "Propose a trade"
-msgstr ""
+msgstr "Kinnig un eskemm"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:655
 msgid "Offer the Frisians a trade."
-msgstr ""
+msgstr "Kinnig un eskemm d'ar Frizoned"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:656
 msgid ""
@@ -1130,7 +1130,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:662
 msgid "Trade Rejected"
-msgstr ""
+msgstr "Eskemm bet nac'het"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:664
 msgid ""
@@ -1140,7 +1140,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:671
 msgid "Trade Accepted"
-msgstr ""
+msgstr "Eskemm bet asantet"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:673
 msgid ""
@@ -1159,7 +1159,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:681
 msgid "Trade Offered"
-msgstr ""
+msgstr "Eskemm bet kinniget"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:683
 msgid ""
@@ -1264,7 +1264,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:734
 msgid "Congratulations"
-msgstr ""
+msgstr "Gourc'hemennoù"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:736
 msgid ""
