@@ -36,7 +36,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:22
 msgid "Build a lumberjack’s hut"
-msgstr ""
+msgstr "Savit ul lochenn vucher"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:23
 msgid "Build a ranger’s hut"
@@ -85,7 +85,7 @@ msgstr "Savit un atant"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:40
 msgid "Build a bakery"
-msgstr ""
+msgstr "Savit un ti-bara"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:45
 msgid "Build a cattle farm"
@@ -116,7 +116,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:63
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:65
 msgid "Explore further"
-msgstr ""
+msgstr "Ergerzhout pelloc'h"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:66
 msgid ""
@@ -178,7 +178,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:99
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:101
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Savit un etrepaouez"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:102
 msgid "Build a warehouse to the west of the mountains."
@@ -223,7 +223,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:127
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:129
 msgid "Build a helm smithy"
-msgstr ""
+msgstr "Savit ur c'hovel tokarnoù"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:135
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:137
@@ -557,7 +557,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:312
 msgid "Enhanced Economy and Training"
-msgstr ""
+msgstr "Armerzh ha gourdonañ araokaet"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:315

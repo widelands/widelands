@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-05 03:23+0000\n"
+"POT-Creation-Date: 2025-06-19 03:23+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Juanjo, 2015-2025\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
@@ -2735,33 +2735,33 @@ msgid "You receive:"
 msgstr ""
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
-#: ../../../../src/logic/map_objects/tribes/militarysite.cc:253
+#: ../../../../src/logic/map_objects/tribes/militarysite.cc:254
 msgctxt "building"
 msgid "Lost!"
 msgstr "Edifici perdut!"
 
-#: ../../../../src/logic/map_objects/tribes/militarysite.cc:254
+#: ../../../../src/logic/map_objects/tribes/militarysite.cc:255
 msgid "Militarysite lost!"
 msgstr "S’ha perdut un edifici militar!"
 
 #. * TRANSLATORS: Message title.
 #. * TRANSLATORS: If you run out of space, you can also translate this as
 #. "Success!"
-#: ../../../../src/logic/map_objects/tribes/militarysite.cc:296
+#: ../../../../src/logic/map_objects/tribes/militarysite.cc:297
 msgid "Enemy Defeated!"
 msgstr "Enemic derrotat!"
 
-#: ../../../../src/logic/map_objects/tribes/militarysite.cc:296
+#: ../../../../src/logic/map_objects/tribes/militarysite.cc:297
 msgid "Enemy at site defeated!"
 msgstr "S’ha derrotat l’enemic en un edifici enemic!"
 
 #. * TRANSLATORS: Militarysite is being attacked
-#: ../../../../src/logic/map_objects/tribes/militarysite.cc:715
+#: ../../../../src/logic/map_objects/tribes/militarysite.cc:716
 msgctxt "building"
 msgid "Attack!"
 msgstr "Ens ataquen!"
 
-#: ../../../../src/logic/map_objects/tribes/militarysite.cc:715
+#: ../../../../src/logic/map_objects/tribes/militarysite.cc:716
 msgid "You are under attack"
 msgstr "T’estan atacant"
 
@@ -3062,140 +3062,140 @@ msgstr "El vostre vaixell no pot trobar un camí fins al seu destí."
 msgid "Your ship could not find a path to its destination port ‘%s’."
 msgstr "El vostre vaixell no pot trobar un camí fins al seu port de destí «%s»."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1311
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1594
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1313
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1596
 msgid "Enemy Ship Attacking"
 msgstr "Atac de vaixell enemic"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1311
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1593
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1313
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1595
 msgid "Naval Attack"
 msgstr "Atac naval"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1312
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1314
 #, c-format
 msgid "Your ship ‘%s’ is under attack from an enemy warship."
 msgstr "Un vaixell de guerra enemic ataca el vostre vaixell «%s»."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1431
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1433
 msgid "Ship Destroyed"
 msgstr "Vaixell destruït"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1431
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1433
 msgid "Ship Sunk"
 msgstr "Vaixell enfonsat"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1432
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1434
 msgid "An enemy ship has destroyed your warship."
 msgstr "Un vaixell enemic ha destruït el vostre vaixell de guerra."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1595
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1597
 msgid "Your coast is under attack from an enemy warship."
 msgstr "Un vaixell de guerra enemic ataca la vostra costa."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1827
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1829
 msgid "Island Circumnavigated"
 msgstr "Illa circumnavegada"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1827
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1829
 msgctxt "ship"
 msgid "Waiting"
 msgstr "Esperant"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1828
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1830
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Un vaixell d’expedició ha navegat al voltant de la seva illa sense esdeveniments."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1893
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1895
 msgid "Coast Reached"
 msgstr "Hem arribat a la costa"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1893
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1895
 msgid "Land Ahoy!"
 msgstr "Terra a la vista!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1894
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1896
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Un vaixell d’expedició ha arribat a la costa i espera ordres."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1947
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1949
 msgid "New port construction site is gone"
 msgstr "La zona portuària nova s’ha esfumat"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1947
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1949
 msgid "Port Lost!"
 msgstr "Hem perdut un port!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1948
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1950
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "La descàrrega de béns ha fallat. L’expedició s’ha cancel·lat."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2005
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2007
 msgid "No Port Can Be Built"
 msgstr "No es pot construir cap port"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2005
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2007
 msgid "Port Space Lost!"
 msgstr "S'ha perdut el lloc per al port!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2006
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2008
 msgid ""
 "A discovered port build space is not available for building a port anymore."
 msgstr "Un lloc on s'hi podia construir un port ja no està disponible."
 
 #. * TRANSLATORS: Warship ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2253
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2255
 msgctxt "ship"
 msgid "Warship"
 msgstr "Vaixell de guerra"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2253
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2255
 msgid "Warship Ready"
 msgstr "Vaixell de guerra preparat"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2254
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2256
 msgid "A warship is waiting for your commands."
 msgstr "Un vaixell de guerra espera les vostres ordres."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2259
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2261
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Expedició"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2259
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2261
 msgid "Expedition Ready"
 msgstr "Expedició preparada"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2260
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2262
 msgid "An expedition ship is waiting for your commands."
 msgstr "Un vaixell espera l’ordre de començar l’expedició."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2437
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2439
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr "Enfonsant-se"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2439
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2441
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr "Lluita"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2443
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2445
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr "Es converteix a vaixell de transport"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2446
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2448
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr "Es converteix a vaixell de guerra"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2454
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2456
 #: ../../../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
@@ -3207,10 +3207,10 @@ msgstr "Vaixell de guerra"
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2460
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2470
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2476
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2490
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2462
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2472
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2478
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2492
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -3218,7 +3218,7 @@ msgstr "Es navega cap a %s"
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2465
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2467
 #: ../../../../src/wui/seafaring_statistics_menu.cc:260
 msgctxt "ship_state"
 msgid "Empty"
@@ -3226,7 +3226,7 @@ msgstr "Buit"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2485
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2487
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -3234,7 +3234,7 @@ msgstr "Es fa un enviament a %s"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2497
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2499
 #: ../../../../src/wui/seafaring_statistics_menu.cc:264
 msgctxt "ship_state"
 msgid "Waiting"
@@ -3242,14 +3242,14 @@ msgstr "Està a l’espera"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2501
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2503
 #: ../../../../src/wui/seafaring_statistics_menu.cc:266
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Està explorant"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2505
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2507
 #: ../../../../src/wui/seafaring_statistics_menu.cc:268
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -3258,7 +3258,7 @@ msgstr "S’ha trobat una zona portuària"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2510
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2512
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Fundació de colònies"
@@ -3343,30 +3343,30 @@ msgstr "Fa falta un expert"
 msgid "Experts missing"
 msgstr "Fan falta experts"
 
-#: ../../../../src/logic/map_objects/tribes/warehouse.cc:596
+#: ../../../../src/logic/map_objects/tribes/warehouse.cc:601
 msgid "A new port was added to your economy."
 msgstr "Teniu un nou port sota control."
 
-#: ../../../../src/logic/map_objects/tribes/warehouse.cc:599
+#: ../../../../src/logic/map_objects/tribes/warehouse.cc:604
 msgid "A new headquarters was added to your economy."
 msgstr "Teniu un nou quarter general sota control."
 
-#: ../../../../src/logic/map_objects/tribes/warehouse.cc:602
+#: ../../../../src/logic/map_objects/tribes/warehouse.cc:607
 msgid "A new warehouse was added to your economy."
 msgstr "Teniu un nou magatzem sota control."
 
 #. * TRANSLATORS: Message header, short for "Waterway Destroyed" (not much
 #. space
 #. * available)
-#: ../../../../src/logic/map_objects/tribes/warehouse.cc:695
+#: ../../../../src/logic/map_objects/tribes/warehouse.cc:700
 msgid "Waterway"
 msgstr "Via d’aigua"
 
-#: ../../../../src/logic/map_objects/tribes/warehouse.cc:696
+#: ../../../../src/logic/map_objects/tribes/warehouse.cc:701
 msgid "Waterway destroyed"
 msgstr "Vies d’aigua destruïdes"
 
-#: ../../../../src/logic/map_objects/tribes/warehouse.cc:697
+#: ../../../../src/logic/map_objects/tribes/warehouse.cc:702
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr "Cal destruir una via d’aigua per deixar espai al nou edifici portuari."
 
@@ -3473,41 +3473,41 @@ msgstr "La desada de la partida ha fallat!"
 msgid "Game saved"
 msgstr "Partida desada"
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:971
+#: ../../../../src/map_io/map_buildingdata_packet.cc:986
 msgid "Building’s inputs changed!"
 msgstr "Els elements que pot rebre l'edifici han canviat!"
 
 #. * TRANSLATORS: The argument is the buiding name
-#: ../../../../src/map_io/map_buildingdata_packet.cc:982
+#: ../../../../src/map_io/map_buildingdata_packet.cc:997
 #, c-format
 msgid "%s: the building’s inputs have changed."
 msgstr "%s: els elements que pot rebre l'edifici han canviat."
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:985
+#: ../../../../src/map_io/map_buildingdata_packet.cc:1000
 msgid "The following wares have been deleted:"
 msgstr "Aquests béns s'han eliminat:"
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:992
+#: ../../../../src/map_io/map_buildingdata_packet.cc:1007
 #, c-format
 msgid "%1$u piece of %2$s"
 msgid_plural "%1$u pieces of %2$s"
 msgstr[0] "%1$u unitat de %2$s"
 msgstr[1] "%1$u unitats de %2$s"
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:998
+#: ../../../../src/map_io/map_buildingdata_packet.cc:1013
 #, c-format
 msgid "%1$u piece of an unknown ware"
 msgid_plural "%1$u pieces of unknown wares"
 msgstr[0] "%1$u unitat d'un bé desconegut"
 msgstr[1] "%1$u unitats de béns desconeguts"
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:1004
+#: ../../../../src/map_io/map_buildingdata_packet.cc:1019
 msgid ""
 "The game was probably saved with a different Widelands version or with "
 "different enabled add-ons."
 msgstr "Probablement la partida es va desar amb una versió del Widelands diferent o amb altres complements activats."
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:1007
+#: ../../../../src/map_io/map_buildingdata_packet.cc:1022
 msgid "Please review the current production programs and input settings."
 msgstr "Reviseu la producció actual i la configuració dels elements d'entrada."
 
@@ -4266,7 +4266,7 @@ msgstr "El Widelands no ha pogut usar la xarxa local. Potser algun altre procés
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../../../src/scripting/lua_game.cc:1471
+#: ../../../../src/scripting/lua_game.cc:1475
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 

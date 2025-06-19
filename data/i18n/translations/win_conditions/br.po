@@ -49,7 +49,7 @@ msgstr ""
 #. "New artifact"
 #: ../../../../data/scripting/win_conditions/artifacts.lua:82
 msgid "Artifact Found"
-msgstr "Daraozad Kavet"
+msgstr "Daraozad kavet"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:83
 msgid "Your team found a new artifact."
@@ -217,7 +217,7 @@ msgstr ""
 #. consistent with the translation of the Win condition.
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:29
 msgid "Territory percentage"
-msgstr ""
+msgstr "Dregantad an domani"
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:235
 msgid "You own more than half of the map’s area."
@@ -333,7 +333,7 @@ msgstr ""
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:45
 msgid "You are defeated!"
-msgstr ""
+msgstr "Pilet oc'h bet!"
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:46
 msgid ""
