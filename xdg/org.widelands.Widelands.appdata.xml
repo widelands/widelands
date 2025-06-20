@@ -3,7 +3,7 @@
 <component type="desktop-application">
   <id>org.widelands.Widelands</id>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-2.0+</project_license>
+  <project_license>GPL-2.0-or-later</project_license>
   <name>Widelands</name>
   <name xml:lang="ko">와이드랜드</name>
   <summary>A real-time build-up strategy game</summary>
