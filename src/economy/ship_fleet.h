@@ -39,7 +39,8 @@ class ShipFleetYardInterface;
 class ShipFleetDescr : public MapObjectDescr {
 public:
 	ShipFleetDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::SHIP_FLEET, init_name, init_descname) {
+	   : MapObjectDescr(
+	        MapObjectType::SHIP_FLEET, init_name, init_descname, std::vector<std::string>()) {
 	}
 	~ShipFleetDescr() override = default;
 
@@ -53,7 +54,8 @@ public:
 	   : BobDescr(init_name,
 	              init_descname,
 	              MapObjectType::SHIP_FLEET_YARD_INTERFACE,
-	              MapObjectDescr::OwnerType::kTribe) {
+	              MapObjectDescr::OwnerType::kTribe,
+	              std::vector<std::string>() /*no attrib*/) {
 	}
 	~ShipFleetYardInterfaceDescr() override = default;
 	[[nodiscard]] Bob& create_object() const override;

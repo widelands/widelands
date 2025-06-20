@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Anthony Guéchoum <a.guechoum@proton.me>, 2020
+# Anthony Guéchoum <a.guechoum@proton.me>, 2025
 # Irriep Nala Novram <per.morvan.bzh29@gmail.com>, 2016
 msgid ""
 msgstr ""
@@ -10,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-06-12 03:24+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2020\n"
+"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2025\n"
 "Language-Team: Breton (http://app.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,17 +62,17 @@ msgstr ""
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:14
 msgid "Easy."
-msgstr ""
+msgstr "Aes."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:20
 msgid "Medium."
-msgstr ""
+msgstr "Etre."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:25
 msgid "Hard."
-msgstr ""
+msgstr "Diaes."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:30
@@ -86,7 +87,7 @@ msgstr "An Eil Impalaerezh"
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:49
 msgid "Introduces the Barbarians."
-msgstr ""
+msgstr "Un tañva d'ar varbared."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:52
@@ -114,7 +115,7 @@ msgstr ""
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:73
 msgid "Introduces the Empire."
-msgstr ""
+msgstr "Un tañva d'an Impalaerezh."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:75
@@ -134,12 +135,12 @@ msgstr ""
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../../../data/campaigns/campaigns.lua:93
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "Redadeg an Tan"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:96
 msgid "Introduces the Atlanteans."
-msgstr ""
+msgstr "Un tañva d'an Atlantiz."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:98
@@ -154,12 +155,12 @@ msgstr ""
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../../../data/campaigns/campaigns.lua:108
 msgid "From Water to Ice"
-msgstr ""
+msgstr "Diouzh dour da skorn"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:111
 msgid "Introduces the Frisians."
-msgstr ""
+msgstr "Un tañva d'ar Frizoned."
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
 #: ../../../../data/campaigns/campaigns.lua:116
@@ -318,7 +319,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/elemental:8
 msgid "Warfare"
-msgstr ""
+msgstr "Ar brezeliñ"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
@@ -339,7 +340,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
-msgstr ""
+msgstr "An armerzh"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
@@ -478,7 +479,7 @@ msgstr ""
 
 #: ../../../../data/maps/Crater.wmf/elemental:8
 msgid "Crater"
-msgstr ""
+msgstr "Ar c'hrater"
 
 #: ../../../../data/maps/Crater.wmf/elemental:10
 msgid ""
@@ -601,7 +602,7 @@ msgstr ""
 
 #: ../../../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
-msgstr ""
+msgstr "Ar pevar c'hastell"
 
 #: ../../../../data/maps/Four_Castles.wmf/elemental:10
 msgid ""
@@ -611,7 +612,7 @@ msgstr ""
 
 #: ../../../../data/maps/Four_Mountains.wmf/elemental:8
 msgid "Four Mountains"
-msgstr ""
+msgstr "Ar pevar menez"
 
 #: ../../../../data/maps/Four_Mountains.wmf/elemental:10
 msgid ""
@@ -627,7 +628,7 @@ msgstr ""
 
 #: ../../../../data/maps/Full_Moon.wmf/elemental:8
 msgid "Full Moon"
-msgstr ""
+msgstr "Kann al loar"
 
 #: ../../../../data/maps/Full_Moon.wmf/elemental:10
 msgid ""
@@ -637,7 +638,7 @@ msgstr ""
 
 #: ../../../../data/maps/Glacier_Lake.wmf/elemental:8
 msgid "Glacier Lake"
-msgstr ""
+msgstr "Lenn ar skorneg"
 
 #: ../../../../data/maps/Glacier_Lake.wmf/elemental:10
 msgid ""
@@ -650,7 +651,7 @@ msgstr ""
 
 #: ../../../../data/maps/Golden_Peninsula.wmf/elemental:8
 msgid "Golden Peninsula"
-msgstr ""
+msgstr "Al ledenez alaouret"
 
 #: ../../../../data/maps/Golden_Peninsula.wmf/elemental:10
 msgid "Two empires race for the treasures of a legendary peninsula…"
@@ -658,7 +659,7 @@ msgstr ""
 
 #: ../../../../data/maps/Ice_wars.wmf/elemental:8
 msgid "Ice wars"
-msgstr ""
+msgstr "Brezelioù ar skorn"
 
 #: ../../../../data/maps/Ice_wars.wmf/elemental:10
 msgid "Autumn became winter. Some things are frozen, but not the war."
@@ -670,7 +671,7 @@ msgstr ""
 
 #: ../../../../data/maps/Islands_at_War.wmf/elemental:8
 msgid "Islands at War"
-msgstr ""
+msgstr "Brezel war an inizi"
 
 #: ../../../../data/maps/Islands_at_War.wmf/elemental:10
 msgid ""
@@ -681,7 +682,7 @@ msgstr ""
 
 #: ../../../../data/maps/Kings_and_Queens.wmf/elemental:8
 msgid "Kings and Queens"
-msgstr ""
+msgstr "Roueed ha rouanezed"
 
 #: ../../../../data/maps/Kings_and_Queens.wmf/elemental:10
 msgid ""
@@ -692,7 +693,7 @@ msgstr ""
 
 #: ../../../../data/maps/Lake_of_Tranquility.wmf/elemental:8
 msgid "Lake of Tranquility"
-msgstr ""
+msgstr "Lenn ar sioulder"
 
 #: ../../../../data/maps/Lake_of_Tranquility.wmf/elemental:10
 msgid ""
@@ -707,7 +708,7 @@ msgstr ""
 
 #: ../../../../data/maps/Last_Bastion.wmf/elemental:9
 msgid "Another Barbarian – edited by king_of_nowhere"
-msgstr ""
+msgstr "Ur barbar all – embannet gant king_of_nowhere"
 
 #: ../../../../data/maps/Last_Bastion.wmf/elemental:10
 msgid ""
@@ -761,7 +762,7 @@ msgstr ""
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:8
 msgid "Island Hopping"
-msgstr ""
+msgstr "Lamm-enez"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:10
 msgid ""
@@ -784,7 +785,7 @@ msgstr ""
 
 #: ../../../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
 msgid "Trident of Fire"
-msgstr ""
+msgstr "Tridant an Tan"
 
 #: ../../../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
 msgid ""
@@ -948,7 +949,7 @@ msgstr ""
 
 #: ../../../../data/maps/The_Big_Lake.wmf/elemental:8
 msgid "The Big Lake"
-msgstr ""
+msgstr "Al lenn vras"
 
 #: ../../../../data/maps/The_Big_Lake.wmf/elemental:10
 msgid ""
@@ -981,7 +982,7 @@ msgstr ""
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:8
 msgid "The Islands of the Eight Tribes"
-msgstr ""
+msgstr "Inizi an Eizh Meuriad"
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:10
 msgid ""
@@ -1003,7 +1004,7 @@ msgstr ""
 
 #: ../../../../data/maps/The_Nile.wmf/elemental:8
 msgid "The Nile"
-msgstr ""
+msgstr "An Nil"
 
 #: ../../../../data/maps/The_Nile.wmf/elemental:10
 msgid ""
@@ -1053,7 +1054,7 @@ msgstr ""
 
 #: ../../../../data/maps/Three_Warriors.wmf/elemental:8
 msgid "Three Warriors"
-msgstr ""
+msgstr "An tri brezelour"
 
 #: ../../../../data/maps/Three_Warriors.wmf/elemental:10
 msgid ""
@@ -1063,11 +1064,11 @@ msgstr ""
 
 #: ../../../../data/maps/Three_Warriors.wmf/elemental:11
 msgid "Water can be found around the lakes."
-msgstr ""
+msgstr "Kavet e vez dour tro-dro al lennoù."
 
 #: ../../../../data/maps/Together_We_re_Strong.wmf/elemental:8
 msgid "Together We’re Strong"
-msgstr ""
+msgstr "Asambles omp kreñv"
 
 #: ../../../../data/maps/Together_We_re_Strong.wmf/elemental:10
 msgid ""
