@@ -178,7 +178,7 @@ SoldierDescr::BattleAttribute::BattleAttribute(std::unique_ptr<LuaTable> table) 
 		   image_filenames.size());
 	}
 	for (const std::string& image_filename : image_filenames) {
-		images.push_back(g_image_cache->get(image_filename));
+		images.emplace_back(image_filename, g_image_cache->get(image_filename));
 	}
 }
 

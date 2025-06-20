@@ -119,19 +119,36 @@ public:
 
 	const Image* get_health_level_pic(uint32_t const level) const {
 		assert(level <= get_max_health_level());
-		return health_.images[level];
+		return health_.images.at(level).second;
 	}
 	const Image* get_attack_level_pic(uint32_t const level) const {
 		assert(level <= get_max_attack_level());
-		return attack_.images[level];
+		return attack_.images.at(level).second;
 	}
 	const Image* get_defense_level_pic(uint32_t const level) const {
 		assert(level <= get_max_defense_level());
-		return defense_.images[level];
+		return defense_.images.at(level).second;
 	}
 	const Image* get_evade_level_pic(uint32_t const level) const {
 		assert(level <= get_max_evade_level());
-		return evade_.images[level];
+		return evade_.images.at(level).second;
+	}
+
+	const std::string& get_health_level_image_filepath(uint32_t const level) const {
+		assert(level <= get_max_health_level());
+		return health_.images.at(level).first;
+	}
+	const std::string& get_attack_level_image_filepath(uint32_t const level) const {
+		assert(level <= get_max_attack_level());
+		return attack_.images.at(level).first;
+	}
+	const std::string& get_defense_level_image_filepath(uint32_t const level) const {
+		assert(level <= get_max_defense_level());
+		return defense_.images.at(level).first;
+	}
+	const std::string& get_evade_level_image_filepath(uint32_t const level) const {
+		assert(level <= get_max_evade_level());
+		return evade_.images.at(level).first;
 	}
 
 	uint16_t get_max_anim_height() const {
@@ -151,11 +168,11 @@ private:
 	struct BattleAttribute {
 		explicit BattleAttribute(std::unique_ptr<LuaTable> table);
 
-		uint32_t base;                     // Base value
-		uint32_t maximum;                  // Maximum value for randomizing attack values
-		uint32_t increase;                 // Per level increase
-		uint32_t max_level;                // Maximum level
-		std::vector<const Image*> images;  // Level images
+		uint32_t base;       // Base value
+		uint32_t maximum;    // Maximum value for randomizing attack values
+		uint32_t increase;   // Per level increase
+		uint32_t max_level;  // Maximum level
+		std::vector<std::pair<std::string, const Image*>> images;  // Level images
 	};
 
 	BattleAttribute health_;
