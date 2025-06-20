@@ -55,6 +55,7 @@ public:
 	BuildingDescr(const std::string& init_descname,
 	              MapObjectType type,
 	              const LuaTable& t,
+	              const std::vector<std::string>& attribs,
 	              Descriptions& descriptions);
 	~BuildingDescr() override = default;
 

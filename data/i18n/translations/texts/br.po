@@ -253,7 +253,7 @@ msgstr ""
 
 #: ../../../../data/txts/developers.lua:224
 msgid "Maps and Missions"
-msgstr ""
+msgstr "Kartennoù ha kefridioù"
 
 #: ../../../../data/txts/developers.lua:262
 msgid "Campaign Story"
@@ -261,7 +261,7 @@ msgstr ""
 
 #: ../../../../data/txts/developers.lua:266
 msgid "Barbarians"
-msgstr ""
+msgstr "Ar varbared"
 
 #: ../../../../data/txts/developers.lua:274
 msgid "Empire"
@@ -273,7 +273,7 @@ msgstr "Atlantiz"
 
 #: ../../../../data/txts/developers.lua:289
 msgid "Frisians"
-msgstr ""
+msgstr "Frizoned"
 
 #: ../../../../data/txts/developers.lua:297
 msgid "Packagers"
