@@ -132,6 +132,7 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_all_tribes_names(lua_State* L);
 	int get_tribes_descriptions(lua_State* L);
 	int get_immovable_descriptions(lua_State* L);
 	int get_building_descriptions(lua_State* L);
@@ -171,6 +172,7 @@ public:
 	void do_modify_trainingsite(lua_State* L, const std::string&, const std::string&);
 	void do_modify_productionsite(lua_State* L, const std::string&, const std::string&);
 	void do_modify_militarysite(lua_State* L, const std::string&, const std::string&);
+	void do_modify_market(lua_State* L, const std::string&, const std::string&);
 	void do_modify_warehouse(lua_State* L, const std::string&, const std::string&);
 	void do_modify_worker(lua_State* L, const std::string&, const std::string&);
 	void do_modify_ware(lua_State* L, const std::string&, const std::string&);

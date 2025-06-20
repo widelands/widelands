@@ -75,6 +75,10 @@ public:
 		return type_;
 	}
 
+	void set_descname(std::string dn) {
+		descname_ = dn;
+	}
+
 	virtual uint32_t get_animation(const std::string& animname, const MapObject* mo) const;
 
 	[[nodiscard]] uint32_t main_animation() const;
@@ -130,9 +134,9 @@ private:
 	static std::map<std::string, AttributeIndex> attribute_names_;
 	Attributes attribute_ids_;
 
-	const MapObjectType type_;    /// Subclasses pick from the enum above
-	std::string const name_;      /// The name for internal reference
-	std::string const descname_;  /// A localized Descriptive name
+	const MapObjectType type_;  /// Subclasses pick from the enum above
+	std::string const name_;    /// The name for internal reference
+	std::string descname_;      /// A localized Descriptive name
 
 	/// Tribe-specific helptexts. Format: <tribename, <category, localized_text>>
 	std::map<std::string, std::map<std::string, std::string>> helptexts_;
