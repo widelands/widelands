@@ -1583,8 +1583,9 @@ void EditorInteractive::publish_map() {
 		          g_style_manager->font_style(UI::FontStyle::kWuiInfoPanelParagraph)
 		             .as_font_tag(format(
 		                _("By uploading, you agree to publish the map under the terms of the "
-		                  "GNU General Public License (GPL) version 2 (the same license under which "
-		                  "Widelands itself is distributed). For more information, see %s."),
+		                  "GNU General Public License (GPL) version 2 or any later version "
+		                  "(the same license under which Widelands itself is distributed). "
+		                  "For more information, see %s."),
 		                as_url_hyperlink("https://www.gnu.org/licenses/")))),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
