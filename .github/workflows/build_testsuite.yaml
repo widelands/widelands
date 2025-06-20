@@ -84,7 +84,8 @@ jobs:
         mkdir temp_web
         build/src/website/wl_map_object_info temp_web || [ $? -eq 2 ]
         build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf || [ $? -eq 2 ]
+    - name: download savegame testcases
+      run: utils/test/download_loadgame_testcases.sh
     - name: Testsuite
       run: |
-        utils/test/download_loadgame_testcases.sh
         ./regression_test.py

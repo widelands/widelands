@@ -65,7 +65,10 @@ class SoldierDescr : public WorkerDescr {
 public:
 	friend class Economy;
 
-	SoldierDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
+	SoldierDescr(const std::string& init_descname,
+	             const LuaTable& t,
+	             const std::vector<std::string>& attribs,
+	             Descriptions& descriptions);
 	~SoldierDescr() override = default;
 
 	uint32_t get_max_health_level() const {

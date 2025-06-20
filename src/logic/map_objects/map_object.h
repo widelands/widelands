@@ -54,11 +54,13 @@ public:
 
 	MapObjectDescr(MapObjectType init_type,
 	               const std::string& init_name,
-	               const std::string& init_descname);
+	               const std::string& init_descname,
+	               const std::vector<std::string>& attribs);
 	MapObjectDescr(MapObjectType init_type,
 	               const std::string& init_name,
 	               const std::string& init_descname,
-	               const LuaTable& table);
+	               const LuaTable& table,
+	               const std::vector<std::string>& attribs);
 	virtual ~MapObjectDescr();
 
 	[[nodiscard]] const std::string& name() const {
