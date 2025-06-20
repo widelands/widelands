@@ -6,6 +6,7 @@
 # Atte Timonen, 2022
 # GunChleoc, 2016,2018
 # GunChleoc, 2014
+# Ilmo Nurminen <ilmo.nurminen@gmail.com>, 2025
 # Jukka Pakarinen, 2016-2020,2022
 # LINUX-SAUNA, 2022
 # Markus <markus@hallfors.com>, 2015
@@ -18,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-05 03:23+0000\n"
+"POT-Creation-Date: 2025-06-19 03:23+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
+"Last-Translator: Ilmo Nurminen <ilmo.nurminen@gmail.com>, 2025\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,13 +63,13 @@ msgstr "Aloituspaikkasi lähellä ei ole kivenlohkareita. Siksi saat lisätarvik
 
 #: ../../../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
-msgstr ""
+msgstr "Puita ei löydy tarpeeksi lähistöltä"
 
 #: ../../../../data/scripting/infrastructure.lua:294
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Aloituspaikkasi lähellä ei ole tarpeeksi puita. Siksi saat lisätarvikkeita taloutesi kuntoon laittoa varten."
 
 #: ../../../../data/scripting/messages.lua:66
 #: ../../../../data/scripting/messages.lua:68
@@ -309,7 +310,7 @@ msgstr "Pelaaja jättää joukkueen"
 #: ../../../../src/commands/cmd_diplomacy.cc:69
 #, c-format
 msgid "%1$s has left team %2$u and is now teamless."
-msgstr "%1$s jätti joukkueen %2$u ollen nyt vailla joukkuetta."
+msgstr "%1$s jätti joukkueen %2$u ja on nyt vailla joukkuetta."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:77
 msgid "Team Joining Request"
@@ -329,7 +330,7 @@ msgstr "%1$s on tehnyt pyynnön liittyä %2$s:n joukkueeseen."
 #: ../../../../src/wui/game_diplomacy_menu.cc:327
 #, c-format
 msgid "%1$s has invited %2$s to join their team."
-msgstr "%1$s on kutsunut %2$s liittyäkseen heidän joukkueeseensa."
+msgstr "%1$s on kutsunut %2$s liittymään heidän joukkueeseensa."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:120
 #, c-format
@@ -354,7 +355,7 @@ msgstr "%1$s eväsi %2$s jäsenyyden joukkueessaan."
 #: ../../../../src/commands/cmd_diplomacy.cc:132
 #, c-format
 msgid "%1$s has retracted the invitation to %2$s to join their team."
-msgstr "%1$s veti pois kutsun taholle %2$s liittyäkseen joukkueeseensa."
+msgstr "%1$s veti pois kutsun taholle %2$s liittyä heidän joukkueeseensa."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:134
 #, c-format
@@ -414,7 +415,7 @@ msgstr "Esc"
 #: ../../../../src/wlapplication_options.cc:1042
 msgctxt "editor"
 msgid "Tools"
-msgstr ""
+msgstr "Työkalut"
 
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
@@ -678,11 +679,11 @@ msgstr "Kytke näytetäänkö suurimmat mahdolliset rakennuspaikat jotka ovat sa
 #. the map height heat map is shown
 #: ../../../../src/editor/editorinteractive.cc:495
 msgid "Disable height heat map"
-msgstr ""
+msgstr "Laita maastonkorkeuden lämpökartta pois päältä"
 
 #: ../../../../src/editor/editorinteractive.cc:496
 msgid "Enable height heat map"
-msgstr ""
+msgstr "Laita maastonkorkeuden lämpökartta päälle"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
@@ -698,28 +699,28 @@ msgstr "Näytä ritilä"
 #. the oceans are shown
 #: ../../../../src/editor/editorinteractive.cc:511
 msgid "Hide Oceans"
-msgstr ""
+msgstr "Piilota meret"
 
 #: ../../../../src/editor/editorinteractive.cc:511
 msgid "Show Oceans"
-msgstr ""
+msgstr "Näytä meret"
 
 #: ../../../../src/editor/editorinteractive.cc:514
 msgid ""
 "Display separate water bodies with differently coloured overlays to see "
 "which coasts can be connected by shipping routes"
-msgstr ""
+msgstr "Näytä eri vesialueet eri värein, nähdäksesi mitkä rannikot voidaan yhdistää meriteitse"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
 #. *  (trees, rocks etc.) are shown
 #: ../../../../src/editor/editorinteractive.cc:521
 msgid "Hide Immovables"
-msgstr "Piilota kohteet"
+msgstr "Piilota kiinteät kohteet"
 
 #: ../../../../src/editor/editorinteractive.cc:521
 msgid "Show Immovables"
-msgstr "Näytä kohteet"
+msgstr "Näytä kiinteät kohteet"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
@@ -936,7 +937,7 @@ msgstr "Jyrsijä: %1$s"
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:95
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:100
 msgid "Automatic Trees"
-msgstr ""
+msgstr "Automaattiset puut"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../../../src/editor/tools/place_immovable_tool.cc:148
@@ -1351,7 +1352,7 @@ msgstr "Lautan ulottuma:"
 msgid ""
 "Enable ferries, waterways, and ferry yards on this map by setting the "
 "maximum length of waterways for ferries"
-msgstr "Ota käyttöön lautat, vesireitit, ja lauttavarustamot tälle kartalle asettamalla niiden vesireittien enimmäispituuden"
+msgstr "Ota käyttöön lautat, vesireitit, ja lauttavarustamot tälle kartalle asettamalla niiden vesireittien enimmäispituus"
 
 #. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
@@ -1409,7 +1410,7 @@ msgstr "Alustan tyhjää karttaa…"
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:63
 #: ../../../../src/logic/addons.cc:63
 msgid "Map Generator"
-msgstr "Karttamuovain"
+msgstr "Kartan luontityökalu"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:81
 #: ../../../../src/wui/gamedetails.cc:169
@@ -1487,19 +1488,19 @@ msgstr "Kartan tunniste:"
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:257
 msgctxt "map_generator"
 msgid "Default"
-msgstr ""
+msgstr "Vakio"
 
 #. * TRANSLATORS: Random Climate
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:285
 msgctxt "climate"
 msgid "Random"
-msgstr ""
+msgstr "Satunnainen"
 
 #. * TRANSLATORS: Default Terrain Distribution
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:316
 msgctxt "terrain"
 msgid "Default"
-msgstr ""
+msgstr "Vakio"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:318
 msgid "Alpine"
@@ -1519,7 +1520,7 @@ msgstr "Erämaa"
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:322
 msgctxt "terrain"
 msgid "Random"
-msgstr ""
+msgstr "Satunnainen"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:633
 msgid "Generating random map…"
@@ -1717,7 +1718,7 @@ msgstr "Satunnainen"
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:463
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:99
 msgid "The tribe will be selected at random."
-msgstr ""
+msgstr "Heimo valitaan sattumanvaraisesti"
 
 #. * TRANSLATORS: Button tooltip in the editor for using a player's starting
 #. position tool
@@ -1811,30 +1812,30 @@ msgstr "%1$s %2$s"
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:51
 #, c-format
 msgid "%1$s (removable by e.g. placing roads)"
-msgstr ""
+msgstr "%1$s (poistettavissa esimerkiksi asettamalla teitä)"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:54
 #, c-format
 msgid "%1$s (needs a small building plot)"
-msgstr ""
+msgstr "%1$s (vaatii pienen rakennuspaikan)"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:57
 #, c-format
 msgid "%1$s (needs a medium building plot)"
-msgstr ""
+msgstr "%1$s (vaatii keskikokoisen rakennuspaikan)"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:60
 #, c-format
 msgid "%1$s (needs a big building plot)"
-msgstr ""
+msgstr "%1$s (vaatii suuren rakennuspaikan)"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:101
 msgid "Automatically place the trees which grow best on the terrain"
-msgstr ""
+msgstr "Aseta automaattisesti puita, jotka kasvavat parhaiten kyseisellä maastotyypillä."
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:117
 msgid "Automatic Immovable Placement"
-msgstr ""
+msgstr "Automaattinen kiinteiden kohteiden asettaminen"
 
 #: ../../../../src/editor/ui_menus/tool_resize_options_menu.cc:34
 msgid "Resize"
@@ -1873,19 +1874,19 @@ msgstr "Työkalun koko"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:51
 msgid "Size:"
-msgstr ""
+msgstr "Koko"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:64
 msgid "Gaps:"
-msgstr ""
+msgstr "Välit"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:67
 msgid "Radius of the active tool"
-msgstr ""
+msgstr "Aktiivisen työkalun säde"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:68
 msgid "Amount of random gaps in the tool’s area"
-msgstr ""
+msgstr "Sattumanvaraisten välien määrä työkalun alueella"
 
 #: ../../../../src/game_io/game_loader.cc:70
 #, c-format
@@ -1907,7 +1908,7 @@ msgstr "Taloudet"
 #: ../../../../src/game_io/game_loader.cc:143
 #: ../../../../src/game_io/game_saver.cc:90
 msgid "Trades"
-msgstr ""
+msgstr "Kaupat"
 
 #: ../../../../src/game_io/game_loader.cc:150
 #: ../../../../src/game_io/game_saver.cc:97
@@ -2743,33 +2744,33 @@ msgid "You receive:"
 msgstr ""
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
-#: ../../../../src/logic/map_objects/tribes/militarysite.cc:253
+#: ../../../../src/logic/map_objects/tribes/militarysite.cc:254
 msgctxt "building"
 msgid "Lost!"
 msgstr "Hävisit!"
 
-#: ../../../../src/logic/map_objects/tribes/militarysite.cc:254
+#: ../../../../src/logic/map_objects/tribes/militarysite.cc:255
 msgid "Militarysite lost!"
 msgstr "Armeijarakennus menetty!"
 
 #. * TRANSLATORS: Message title.
 #. * TRANSLATORS: If you run out of space, you can also translate this as
 #. "Success!"
-#: ../../../../src/logic/map_objects/tribes/militarysite.cc:296
+#: ../../../../src/logic/map_objects/tribes/militarysite.cc:297
 msgid "Enemy Defeated!"
 msgstr "Vihollinen kukistettu!"
 
-#: ../../../../src/logic/map_objects/tribes/militarysite.cc:296
+#: ../../../../src/logic/map_objects/tribes/militarysite.cc:297
 msgid "Enemy at site defeated!"
 msgstr "Vihollinen kukistettu kohteessa!"
 
 #. * TRANSLATORS: Militarysite is being attacked
-#: ../../../../src/logic/map_objects/tribes/militarysite.cc:715
+#: ../../../../src/logic/map_objects/tribes/militarysite.cc:716
 msgctxt "building"
 msgid "Attack!"
 msgstr "Hyökkäys!"
 
-#: ../../../../src/logic/map_objects/tribes/militarysite.cc:715
+#: ../../../../src/logic/map_objects/tribes/militarysite.cc:716
 msgid "You are under attack"
 msgstr "Olet hyökkäyksen kohteena"
 
@@ -3070,140 +3071,140 @@ msgstr ""
 msgid "Your ship could not find a path to its destination port ‘%s’."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1311
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1594
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1313
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1596
 msgid "Enemy Ship Attacking"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1311
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1593
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1313
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1595
 msgid "Naval Attack"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1312
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1314
 #, c-format
 msgid "Your ship ‘%s’ is under attack from an enemy warship."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1431
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1433
 msgid "Ship Destroyed"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1431
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1433
 msgid "Ship Sunk"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1432
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1434
 msgid "An enemy ship has destroyed your warship."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1595
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1597
 msgid "Your coast is under attack from an enemy warship."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1827
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1829
 msgid "Island Circumnavigated"
 msgstr "Saari ympäripurjehdittu"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1827
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1829
 msgctxt "ship"
 msgid "Waiting"
 msgstr "Odottaa"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1828
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1830
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Tutkimusmatka-alus kiersi saaren löytämättä mitään kiintoisaa."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1893
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1895
 msgid "Coast Reached"
 msgstr "Rannikko saavutettu"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1893
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1895
 msgid "Land Ahoy!"
 msgstr "Maata näkyvissä!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1894
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1896
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Tutkimusmatka-alus saapui rannikolle ja odottaa ohjeitasi."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1947
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1949
 msgid "New port construction site is gone"
 msgstr "Uuden sataman työmaa-alue ei ole enää olemassa"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1947
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1949
 msgid "Port Lost!"
 msgstr "Satama menetetty!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1948
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1950
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Tuotteiden purkaminen epäonnistui, retkikunta on nyt peruutettu."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2005
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2007
 msgid "No Port Can Be Built"
 msgstr "Satamaa ei voida rakentaa"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2005
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2007
 msgid "Port Space Lost!"
 msgstr "Tila satamalle menetettiin!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2006
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2008
 msgid ""
 "A discovered port build space is not available for building a port anymore."
 msgstr "Löydetty satamatila ei ole enää saatavilla sataman rakentamiseksi."
 
 #. * TRANSLATORS: Warship ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2253
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2255
 msgctxt "ship"
 msgid "Warship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2253
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2255
 msgid "Warship Ready"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2254
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2256
 msgid "A warship is waiting for your commands."
 msgstr ""
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2259
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2261
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Tutkimusmatka"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2259
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2261
 msgid "Expedition Ready"
 msgstr "Tutkimusmatkailijat valmiina lähtöön"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2260
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2262
 msgid "An expedition ship is waiting for your commands."
 msgstr "Tutkimusmatka-alus odottaa ohjeitasi."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2437
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2439
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2439
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2441
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2443
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2445
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2446
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2448
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2454
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2456
 #: ../../../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
@@ -3215,10 +3216,10 @@ msgstr ""
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2460
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2470
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2476
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2490
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2462
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2472
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2478
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2492
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -3226,7 +3227,7 @@ msgstr "Purjehditaan kohteeseen %s"
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2465
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2467
 #: ../../../../src/wui/seafaring_statistics_menu.cc:260
 msgctxt "ship_state"
 msgid "Empty"
@@ -3234,7 +3235,7 @@ msgstr "Tyhjä"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2485
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2487
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -3242,7 +3243,7 @@ msgstr "Toimitetaan kohteeseen %s"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2497
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2499
 #: ../../../../src/wui/seafaring_statistics_menu.cc:264
 msgctxt "ship_state"
 msgid "Waiting"
@@ -3250,14 +3251,14 @@ msgstr "Odottaa"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2501
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2503
 #: ../../../../src/wui/seafaring_statistics_menu.cc:266
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Tutkii"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2505
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2507
 #: ../../../../src/wui/seafaring_statistics_menu.cc:268
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -3266,7 +3267,7 @@ msgstr "Luonnonsatama löytyi"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2510
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2512
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Perustaa siirtokuntaa"
@@ -3351,30 +3352,30 @@ msgstr "Asiantaitaja puuttuu"
 msgid "Experts missing"
 msgstr "Asiantaitajat puuttuvat"
 
-#: ../../../../src/logic/map_objects/tribes/warehouse.cc:596
+#: ../../../../src/logic/map_objects/tribes/warehouse.cc:601
 msgid "A new port was added to your economy."
 msgstr "Uusi satama valmiina laivaliikenteeseen."
 
-#: ../../../../src/logic/map_objects/tribes/warehouse.cc:599
+#: ../../../../src/logic/map_objects/tribes/warehouse.cc:604
 msgid "A new headquarters was added to your economy."
 msgstr "Uusi päämaja on lisätty valtakuntaasi."
 
-#: ../../../../src/logic/map_objects/tribes/warehouse.cc:602
+#: ../../../../src/logic/map_objects/tribes/warehouse.cc:607
 msgid "A new warehouse was added to your economy."
 msgstr "Uusi varastorakennus käytettävissä."
 
 #. * TRANSLATORS: Message header, short for "Waterway Destroyed" (not much
 #. space
 #. * available)
-#: ../../../../src/logic/map_objects/tribes/warehouse.cc:695
+#: ../../../../src/logic/map_objects/tribes/warehouse.cc:700
 msgid "Waterway"
 msgstr "Vesiväylä"
 
-#: ../../../../src/logic/map_objects/tribes/warehouse.cc:696
+#: ../../../../src/logic/map_objects/tribes/warehouse.cc:701
 msgid "Waterway destroyed"
 msgstr "Vesiväylä tuhottu"
 
-#: ../../../../src/logic/map_objects/tribes/warehouse.cc:697
+#: ../../../../src/logic/map_objects/tribes/warehouse.cc:702
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr "Vesiväylä oli tuhottava uuden telakan tieltä"
 
@@ -3481,41 +3482,41 @@ msgstr "Tallentaminen epäonnistui!"
 msgid "Game saved"
 msgstr "Peli tallennettu"
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:971
+#: ../../../../src/map_io/map_buildingdata_packet.cc:986
 msgid "Building’s inputs changed!"
 msgstr ""
 
 #. * TRANSLATORS: The argument is the buiding name
-#: ../../../../src/map_io/map_buildingdata_packet.cc:982
+#: ../../../../src/map_io/map_buildingdata_packet.cc:997
 #, c-format
 msgid "%s: the building’s inputs have changed."
 msgstr ""
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:985
+#: ../../../../src/map_io/map_buildingdata_packet.cc:1000
 msgid "The following wares have been deleted:"
 msgstr ""
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:992
+#: ../../../../src/map_io/map_buildingdata_packet.cc:1007
 #, c-format
 msgid "%1$u piece of %2$s"
 msgid_plural "%1$u pieces of %2$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:998
+#: ../../../../src/map_io/map_buildingdata_packet.cc:1013
 #, c-format
 msgid "%1$u piece of an unknown ware"
 msgid_plural "%1$u pieces of unknown wares"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:1004
+#: ../../../../src/map_io/map_buildingdata_packet.cc:1019
 msgid ""
 "The game was probably saved with a different Widelands version or with "
 "different enabled add-ons."
 msgstr ""
 
-#: ../../../../src/map_io/map_buildingdata_packet.cc:1007
+#: ../../../../src/map_io/map_buildingdata_packet.cc:1022
 msgid "Please review the current production programs and input settings."
 msgstr ""
 
@@ -4274,7 +4275,7 @@ msgstr "Paikallisverkon käyttö epäonnistui. Kenties joku muu pitää jo portt
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../../../src/scripting/lua_game.cc:1471
+#: ../../../../src/scripting/lua_game.cc:1475
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 

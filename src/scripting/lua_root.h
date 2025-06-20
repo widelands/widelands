@@ -70,6 +70,7 @@ public:
 	int get_win_condition(lua_State*);
 	int get_win_condition_duration(lua_State*);
 	int get_trades(lua_State*);
+	int get_trade_extension_proposals(lua_State*);
 
 	/*
 	 * Lua methods

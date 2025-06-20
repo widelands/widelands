@@ -59,6 +59,9 @@ const PropertyType<LuaWarehouse> LuaWarehouse::Properties[] = {
    PROP_RO(LuaWarehouse, portdock),
    PROP_RO(LuaWarehouse, expedition_in_progress),
    PROP_RW(LuaWarehouse, warehousename),
+   PROP_RO(LuaWarehouse, max_garrison),
+   PROP_RW(LuaWarehouse, soldier_preference),
+   PROP_RW(LuaWarehouse, garrison),
    {nullptr, nullptr, nullptr},
 };
 
@@ -102,9 +105,9 @@ int LuaWarehouse::get_expedition_in_progress(lua_State* L) {
 /* RST
    .. attribute:: warehousename
 
-   .. versionadded:: 1.2
+      .. versionadded:: 1.2
 
-   (RW) The name of the warehouse as :class:`string`.
+      (RW) The name of the warehouse as :class:`string`.
 */
 int LuaWarehouse::get_warehousename(lua_State* L) {
 	Widelands::Warehouse* wh = get(L, get_egbase(L));
@@ -114,6 +117,62 @@ int LuaWarehouse::get_warehousename(lua_State* L) {
 int LuaWarehouse::set_warehousename(lua_State* L) {
 	Widelands::Warehouse* wh = get(L, get_egbase(L));
 	wh->set_warehouse_name(luaL_checkstring(L, -1));
+	return 0;
+}
+
+// Garrison settings
+
+/* RST
+   .. attribute:: max_garrison
+
+      .. versionadded:: 1.3
+
+      (RO) The maximum garrison size that can be set for this warehouse. Unlike
+      :attr:`max_soldiers`, which is always :const:`nil` for warehouses, :attr:`max_garrison`
+      is always a valid number: either 0 for plain warehouses or :attr:`max_garrison` from the
+      building definition of ports and headquarters.
+*/
+int LuaWarehouse::get_max_garrison(lua_State* L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->soldier_control()->max_soldier_capacity());
+	return 1;
+}
+
+/* RST
+   .. attribute:: garrison
+
+      .. versionadded:: 1.3
+
+      (RW) The number of soldiers meant to be garrisoned here.
+*/
+int LuaWarehouse::set_garrison(lua_State* L) {
+	get(L, get_egbase(L))->mutable_soldier_control()->set_soldier_capacity(luaL_checkuint32(L, -1));
+	return 0;
+}
+int LuaWarehouse::get_garrison(lua_State* L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->soldier_control()->soldier_capacity());
+	return 1;
+}
+
+/* RST
+   .. attribute:: soldier_preference
+
+      .. versionadded:: 1.3
+
+      (RW) ``"heroes"`` if this warehouse's garrison prefers heroes; ``"rookies"`` for rookies;
+      or ``"any"`` for no predilection.
+*/
+int LuaWarehouse::get_soldier_preference(lua_State* L) {
+	lua_pushstring(
+	   L, soldier_preference_to_string(get(L, get_egbase(L))->get_soldier_preference()).c_str());
+	return 1;
+}
+int LuaWarehouse::set_soldier_preference(lua_State* L) {
+	try {
+		get(L, get_egbase(L))
+		   ->set_soldier_preference(string_to_soldier_preference(luaL_checkstring(L, -1)));
+	} catch (const WException& e) {
+		report_error(L, "%s", e.what());
+	}
 	return 0;
 }
 

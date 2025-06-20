@@ -106,6 +106,7 @@ const PropertyType<LuaGame> LuaGame::Properties[] = {
    PROP_RW(LuaGame, allow_diplomacy),
    PROP_RW(LuaGame, allow_naval_warfare),
    PROP_RO(LuaGame, trades),
+   PROP_RO(LuaGame, trade_extension_proposals),
    {nullptr, nullptr, nullptr},
 };
 
@@ -350,6 +351,56 @@ int LuaGame::get_trades(lua_State* L) {
 	for (const auto& pair : game.all_trade_agreements()) {
 		lua_pushuint32(L, index++);
 		push_trade(L, pair.first);
+		lua_rawset(L, -3);
+	}
+
+	return 1;
+}
+
+/* RST
+   .. attribute:: trade_extension_proposals
+
+      .. versionadded:: 1.3
+
+      (RO) An :class:`array` of all proposed trade extensions.
+
+      Each trade extensions proposal is a :class:`table` with the following properties:
+
+      - **trade_id** (:class:`integer`): The unique identifier for the trade to extend.
+      - **proposer** (:class:`integer`): The :attr:`wl.game.Player.number`
+         of the player who proposed the trade extension.
+      - **num_batches** (:class:`integer`): The number of ware batches to add to the trade
+         (:const:`-1` to make the trade indefinite).
+
+      :see also: :meth:`wl.game.Player.propose_trade_extension`
+      :see also: :meth:`wl.game.Player.accept_trade_extension`
+      :see also: :meth:`wl.game.Player.reject_trade_extension`
+      :see also: :meth:`wl.game.Player.retract_trade_extension`
+*/
+int LuaGame::get_trade_extension_proposals(lua_State* L) {
+	Widelands::Game& game = get_game(L);
+	lua_newtable(L);
+
+	unsigned index = 1;
+	for (const Widelands::TradeExtension& ext : game.all_trade_extension_proposals()) {
+		lua_pushuint32(L, index++);
+
+		{
+			lua_newtable(L);
+
+			lua_pushstring(L, "trade_id");
+			lua_pushuint32(L, ext.trade_id);
+			lua_rawset(L, -3);
+
+			lua_pushstring(L, "proposer");
+			lua_pushuint32(L, ext.proposer);
+			lua_rawset(L, -3);
+
+			lua_pushstring(L, "num_batches");
+			lua_pushint32(L, ext.batches);
+			lua_rawset(L, -3);
+		}
+
 		lua_rawset(L, -3);
 	}
 

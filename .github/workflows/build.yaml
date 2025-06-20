@@ -44,7 +44,6 @@ jobs:
             - &installer
               - *src_cmake_dependencies
               - 'data/**'
-              - 'po/**'
             - &ubuntu_dependencies
               - *src_cmake_dependencies
               - 'utils/ubuntu/packages'
@@ -72,7 +71,6 @@ jobs:
             - *installer
             # doc/** maybe for some installers TODO(unknown)
             - 'utils/windows/**' # utils\windows\innosetup\Widelands.iss used by build_windows_msvc.yaml
-            - '.github/scripts/vcpkg_ref'
             - '.github/workflows/build_windows_msvc.yaml' # calls install-dependencies.sh
           inst_windows:
             - *installer
