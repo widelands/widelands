@@ -442,7 +442,9 @@ static int L_npgettext(lua_State* L) {
 
    :type script: :class:`string`
    :arg script: The filename relative to the root of the data directory.
-   :returns: :const:`nil`
+   :returns: The table returned by the included script, or an empty table if the script does not
+      return anything.
+      .. versionchanged:: 1.x  It returned nil before
 */
 static int L_include(lua_State* L) {
 	const std::string script = luaL_checkstring(L, -1);
@@ -452,13 +454,13 @@ static int L_include(lua_State* L) {
 	try {
 		lua_getfield(L, LUA_REGISTRYINDEX, "lua_interface");
 		LuaInterface* lua = static_cast<LuaInterface*>(lua_touserdata(L, -1));
-		lua_pop(L, 1);  // pop this userdata
-		std::unique_ptr<LuaTable> table(lua->run_script(script));
+		lua_pop(L, 1);                                                   // pop this userdata
+		std::unique_ptr<LuaTable> table(lua->run_script(script, true));  // keeps lua table
 		table->do_not_warn_about_unaccessed_keys();
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
-	return 0;
+	return 1;
 }
 
 /* RST

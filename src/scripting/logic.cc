@@ -54,12 +54,14 @@ void setup_for_editor_and_game(lua_State* L, Widelands::EditorGameBase* g) {
 }
 
 // Can run script also from the map.
-std::unique_ptr<LuaTable> run_script_maybe_from_map(lua_State* L, const std::string& path) {
+std::unique_ptr<LuaTable> run_script_maybe_from_map(lua_State* L,
+                                                    const std::string& path,
+                                                    const bool keep_lua_table = false) {
 	// run_script locks kLua
 	if (starts_with(path, "map:")) {
-		return run_script(L, path.substr(4), get_egbase(L).map().filesystem());
+		return run_script(L, path.substr(4), get_egbase(L).map().filesystem(), keep_lua_table);
 	}
-	return run_script(L, path, g_fs);
+	return run_script(L, path, g_fs, keep_lua_table);
 }
 
 }  // namespace
@@ -79,8 +81,9 @@ LuaEditorInterface::LuaEditorInterface(Widelands::EditorGameBase* g)
 	lua_setfield(lua_state_, LUA_REGISTRYINDEX, "factory");
 }
 
-std::unique_ptr<LuaTable> LuaEditorInterface::run_script(const std::string& script) {
-	return run_script_maybe_from_map(lua_state_, script);
+std::unique_ptr<LuaTable> LuaEditorInterface::run_script(const std::string& script,
+                                                         const bool keep_lua_table) {
+	return run_script_maybe_from_map(lua_state_, script, keep_lua_table);
 }
 
 LuaFsMenuInterface::LuaFsMenuInterface(FsMenu::MainMenu* menu) : LuaInterface(true) {
@@ -279,6 +282,7 @@ std::unique_ptr<LuaTable> LuaGameInterface::get_hook(const std::string& name) {
 	return return_value;
 }
 
-std::unique_ptr<LuaTable> LuaGameInterface::run_script(const std::string& script) {
-	return run_script_maybe_from_map(lua_state_, script);
+std::unique_ptr<LuaTable> LuaGameInterface::run_script(const std::string& script,
+                                                       const bool keep_lua_table) {
+	return run_script_maybe_from_map(lua_state_, script, keep_lua_table);
 }

@@ -36,7 +36,8 @@ public:
 	void interpret_string(const std::string&);
 
 	// Runs 'script' and returns the table it returned.
-	virtual std::unique_ptr<LuaTable> run_script(const std::string& path);
+	virtual std::unique_ptr<LuaTable> run_script(const std::string& path,
+	                                             bool keep_lua_table = false);
 
 	// Returns an empty table.
 	std::unique_ptr<LuaTable> empty_table();
