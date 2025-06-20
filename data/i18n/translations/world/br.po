@@ -3,7 +3,7 @@
 # 
 # Translators:
 # Anthony Guéchoum <a.guechoum@proton.me>, 2020
-# Anthony Guéchoum <a.guechoum@proton.me>, 2024
+# Anthony Guéchoum <a.guechoum@proton.me>, 2024-2025
 # Irriep Nala Novram <per.morvan.bzh29@gmail.com>, 2016
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-02 13:54+0000\n"
-"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2024\n"
+"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2024-2025\n"
 "Language-Team: Breton (http://app.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,7 +33,7 @@ msgstr "Konifl"
 
 #: ../../../../data/world/critters/chamois/init.lua:7
 msgid "Chamois"
-msgstr "Gavr-Menez"
+msgstr "Gavr-menez"
 
 #: ../../../../data/world/critters/deer/init.lua:7
 msgid "Deer"
@@ -61,7 +61,7 @@ msgstr "Elan"
 
 #: ../../../../data/world/critters/reindeer/init.lua:7
 msgid "Reindeer"
-msgstr "Karv-Erc'h"
+msgstr "Karv-erc'h"
 
 #: ../../../../data/world/critters/sheep/init.lua:7
 msgid "Sheep"
@@ -73,7 +73,7 @@ msgstr "Karv"
 
 #: ../../../../data/world/critters/wildboar/init.lua:7
 msgid "Wild boar"
-msgstr "Morc'h-gouez"
+msgstr "Moc'h-gouez"
 
 #: ../../../../data/world/critters/wisent/init.lua:7
 msgid "Wisent"
@@ -88,7 +88,7 @@ msgstr "Bleiz"
 #: ../../../../data/world/immovables/artifacts/artifact02/init.lua:7
 #: ../../../../data/world/immovables/artifacts/artifact03/init.lua:7
 msgid "Artifact"
-msgstr ""
+msgstr "Daraozad"
 
 #: ../../../../data/world/immovables/miscellaneous/bar-ruin00/init.lua:7
 #: ../../../../data/world/immovables/miscellaneous/bar-ruin01/init.lua:7
@@ -230,7 +230,7 @@ msgstr "Mein 6"
 #: ../../../../data/world/immovables/standing_stones/standing_stone6/init.lua:7
 #: ../../../../data/world/immovables/standing_stones/standing_stone7/init.lua:7
 msgid "Standing Stone"
-msgstr ""
+msgstr "Peulvan"
 
 #: ../../../../data/world/immovables/trees/alder/mature/init.lua:9
 msgid "Alder (Mature)"
@@ -258,11 +258,11 @@ msgstr ""
 
 #: ../../../../data/world/immovables/trees/aspen/old/init.lua:9
 msgid "Aspen (Old)"
-msgstr ""
+msgstr "Brizhkrenerez (kozh)"
 
 #: ../../../../data/world/immovables/trees/aspen/old/init.lua:10
 msgid "Aspen"
-msgstr ""
+msgstr "Brizhkrenerez"
 
 #: ../../../../data/world/immovables/trees/aspen/pole/init.lua:9
 msgid "Aspen (Pole)"
@@ -356,11 +356,11 @@ msgstr ""
 
 #: ../../../../data/world/immovables/trees/larch/old/init.lua:9
 msgid "Larch (Old)"
-msgstr ""
+msgstr "Melezenn (kozh)"
 
 #: ../../../../data/world/immovables/trees/larch/old/init.lua:10
 msgid "Larch"
-msgstr ""
+msgstr "Melezenn"
 
 #: ../../../../data/world/immovables/trees/larch/pole/init.lua:9
 msgid "Larch (Pole)"
@@ -401,11 +401,11 @@ msgstr ""
 
 #: ../../../../data/world/immovables/trees/maple/old/init.lua:9
 msgid "Maple (Old)"
-msgstr ""
+msgstr " Skavenn-wrac'h (kozh)"
 
 #: ../../../../data/world/immovables/trees/maple/old/init.lua:10
 msgid "Maple"
-msgstr ""
+msgstr " Skavenn-wrac'h"
 
 #: ../../../../data/world/immovables/trees/maple/pole/init.lua:9
 msgid "Maple (Pole)"
@@ -536,11 +536,11 @@ msgstr ""
 
 #: ../../../../data/world/immovables/trees/palm_coconut/old/init.lua:9
 msgid "Coconut Palm (Old)"
-msgstr ""
+msgstr "Gwezenn-gokoz (kozh)"
 
 #: ../../../../data/world/immovables/trees/palm_coconut/old/init.lua:10
 msgid "Coconut Palm"
-msgstr ""
+msgstr "Gwezenn-gokoz"
 
 #: ../../../../data/world/immovables/trees/palm_coconut/pole/init.lua:9
 msgid "Coconut Palm (Pole)"
@@ -616,11 +616,11 @@ msgstr ""
 
 #: ../../../../data/world/immovables/trees/rowan/old/init.lua:9
 msgid "Rowan (Old)"
-msgstr ""
+msgstr "Hiliberenn (kozh)"
 
 #: ../../../../data/world/immovables/trees/rowan/old/init.lua:10
 msgid "Rowan"
-msgstr ""
+msgstr "Hiliberenn"
 
 #: ../../../../data/world/immovables/trees/rowan/pole/init.lua:9
 msgid "Rowan (Pole)"
@@ -636,11 +636,11 @@ msgstr ""
 
 #: ../../../../data/world/immovables/trees/spruce/old/init.lua:9
 msgid "Spruce (Old)"
-msgstr ""
+msgstr "Pruñsenn (kozh)"
 
 #: ../../../../data/world/immovables/trees/spruce/old/init.lua:10
 msgid "Spruce"
-msgstr ""
+msgstr "Pruñsenn"
 
 #: ../../../../data/world/immovables/trees/spruce/pole/init.lua:9
 msgid "Spruce (Pole)"
@@ -728,27 +728,27 @@ msgstr ""
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../../../data/world/init.lua:121
 msgid "Herbivores"
-msgstr ""
+msgstr "Geotdebrerien"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../../../data/world/init.lua:139
 msgid "Carnivores"
-msgstr ""
+msgstr "Kidebrer"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../../../data/world/init.lua:154
 msgid "Aquatic"
-msgstr ""
+msgstr "Dourel"
 
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../../../data/world/init.lua:168
 msgid "Miscellaneous"
-msgstr ""
+msgstr "A-bep-seurt"
 
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../../../data/world/init.lua:207
 msgid "Artifacts"
-msgstr ""
+msgstr "Daraozadoù"
 
 #: ../../../../data/world/init.lua:207
 msgid "These immovables are used by the win condition “Artifacts”."
@@ -762,7 +762,7 @@ msgstr "Plant"
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../../../data/world/init.lua:242
 msgid "Standing Stones"
-msgstr ""
+msgstr "Peulvanoù"
 
 #: ../../../../data/world/init.lua:277
 msgid "Rocks"
@@ -889,7 +889,7 @@ msgstr ""
 
 #: ../../../../data/world/terrains/desert/meadow/init.lua:5
 msgid "Meadow"
-msgstr ""
+msgstr "Frankizenn"
 
 #: ../../../../data/world/terrains/desert/mountain1/init.lua:5
 #: ../../../../data/world/terrains/summer/mountain1/init.lua:5
@@ -927,7 +927,7 @@ msgstr ""
 #: ../../../../data/world/terrains/desert/steppe/init.lua:5
 #: ../../../../data/world/terrains/summer/steppe/init.lua:5
 msgid "Steppe"
-msgstr ""
+msgstr "Stepenn"
 
 #: ../../../../data/world/terrains/summer/lava/init.lua:5
 msgid "Lava"
@@ -935,19 +935,19 @@ msgstr ""
 
 #: ../../../../data/world/terrains/summer/meadow1/init.lua:5
 msgid "Meadow 1"
-msgstr ""
+msgstr "Frankizenn 1"
 
 #: ../../../../data/world/terrains/summer/meadow2/init.lua:5
 msgid "Meadow 2"
-msgstr ""
+msgstr "Frankizenn 2"
 
 #: ../../../../data/world/terrains/summer/meadow3/init.lua:5
 msgid "Meadow 3"
-msgstr ""
+msgstr "Frankizenn 3"
 
 #: ../../../../data/world/terrains/summer/meadow4/init.lua:5
 msgid "Meadow 4"
-msgstr ""
+msgstr "Frankizenn 4"
 
 #: ../../../../data/world/terrains/summer/snow/init.lua:5
 #: ../../../../data/world/terrains/winter/snow/init.lua:5
@@ -956,7 +956,7 @@ msgstr "Erc'h"
 
 #: ../../../../data/world/terrains/summer/steppe_barren/init.lua:5
 msgid "Barren Steppe"
-msgstr ""
+msgstr "Stepenn zezerzhel"
 
 #: ../../../../data/world/terrains/summer/swamp/init.lua:5
 msgid "Swamp"
@@ -964,11 +964,11 @@ msgstr ""
 
 #: ../../../../data/world/terrains/wasteland/ashes1/init.lua:5
 msgid "Ashes 1"
-msgstr ""
+msgstr "Ludu 1"
 
 #: ../../../../data/world/terrains/wasteland/ashes2/init.lua:5
 msgid "Ashes 2"
-msgstr ""
+msgstr "Ludu 2"
 
 #: ../../../../data/world/terrains/wasteland/hardground1/init.lua:5
 msgid "Hard Ground 1"
@@ -1000,7 +1000,7 @@ msgstr ""
 
 #: ../../../../data/world/terrains/winter/ice/init.lua:5
 msgid "Ice"
-msgstr ""
+msgstr "Skorn"
 
 #: ../../../../data/world/terrains/winter/ice_floes/init.lua:5
 msgid "Ice Floes 1"
@@ -1012,19 +1012,19 @@ msgstr ""
 
 #: ../../../../data/world/terrains/winter/taiga1/init.lua:5
 msgid "Taiga 1"
-msgstr ""
+msgstr "Taiga 1"
 
 #: ../../../../data/world/terrains/winter/taiga2/init.lua:5
 msgid "Taiga 2"
-msgstr ""
+msgstr "Taiga 2"
 
 #: ../../../../data/world/terrains/winter/taiga3/init.lua:5
 msgid "Taiga 3"
-msgstr ""
+msgstr "Taiga 3"
 
 #: ../../../../data/world/terrains/winter/tundra/init.lua:5
 msgid "Tundra"
-msgstr ""
+msgstr "Toundra"
 
 #: ../../../../data/world/terrains/winter/tundra_taiga/init.lua:5
 msgid "Tundra Taiga"

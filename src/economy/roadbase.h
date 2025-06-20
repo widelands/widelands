@@ -31,7 +31,7 @@ struct Carrier;
 class RoadBaseDescr : public MapObjectDescr {
 public:
 	RoadBaseDescr(char const* const init_name, char const* const init_descname, MapObjectType mot)
-	   : MapObjectDescr(mot, init_name, init_descname) {
+	   : MapObjectDescr(mot, init_name, init_descname, std::vector<std::string>()) {
 	}
 	~RoadBaseDescr() override = default;
 
