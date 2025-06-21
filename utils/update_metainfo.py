@@ -82,12 +82,14 @@ tagline_en = english_source['tagline']
 descriptions_en = english_source['description']
 generic_name_en = english_source['category']
 desktop_name_en = english_source['name']
+developer_en = english_source['developer']
 
 english_source_file.close()
 
 # For metainfo.xml
 names = '  <name>' + name_en + '</name>\n'
 summaries = '  <summary>' + tagline_en + '</summary>\n'
+developer = '  <developer id="org.widelands.Widelands">\n    <name>' + developer_en + '</name>\n'
 descriptions = '  <description>\n'
 for description in descriptions_en:
     descriptions += '    <p>\n'
@@ -134,12 +136,15 @@ for translation_filename in translation_files:
         if 'name' in translation and translation['name'] != name_en:
             names += "  <name xml:lang=\"" + lang_code + \
                 "\">" + translation['name'] + '</name>\n'
+        if 'developer' in translation and translation['developer'] != developer_en:
+            developer += f'    <name xml:lang="{ lang_code }">{ translation["developer"] }</name>\n'
         if translation['description'] != descriptions_en:  # metainfo.xml
             for description in translation['description']:
                 descriptions += "    <p xml:lang=\"" + lang_code + "\">\n"
                 descriptions += '      ' + description + '\n'
                 descriptions += '    </p>\n'
         translation_file.close()
+developer += '  </developer>\n'
 descriptions += '  </description>\n'
 
 print('- Writing org.widelands.Widelands.metainfo.xml')
@@ -156,6 +161,8 @@ for line in input_file:
         metainfo += '  </languages>\n'
         for textdomain in textdomains:
             metainfo += '  <translation type="gettext">' + textdomain + '</translation>\n'
+    elif line.strip() == 'DEVELOPER_HOOK':
+        metainfo += developer
     else:
         metainfo += line
 
