@@ -17,6 +17,9 @@ wl.Descriptions():new_worker_type {
          "findobject=attrib:dike radius:5",
       },
       build = {
+         -- steps from building to dike: 2-9
+         -- min. worker time: 2 * 2 * 1.8 + 70 =  77.2 sec
+         -- max. worker time: 2 * 9 * 1.8 + 70 = 102.4 sec
          "findspace=size:swim radius:5 terraform:diking",
          "walk=coords",
          "animate=work duration:70s",
@@ -24,6 +27,9 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       dike = {
+         -- steps from building to dike: 2-9
+         -- min. worker time: 2 * 2 * 1.8 + 3 * 30 =  97.2 sec
+         -- max. worker time: 2 * 9 * 1.8 + 3 * 30 = 122.4 sec
          "findobject=attrib:dike radius:5",
          "walk=object",
          "animate=work duration:30s",

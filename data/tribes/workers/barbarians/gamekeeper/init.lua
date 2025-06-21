@@ -16,6 +16,10 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       release = {
+         -- steps from building to free spot: 2-6, min+max average 4
+         -- min. worker time: 2 * 2 * 1.8 + 2 + 2 = 11.2 sec
+         -- max. worker time: 2 * 6 * 1.8 + 2 + 2 = 25.6 sec
+         -- avg. worker time: 2 * 4 * 1.8 + 2 + 2 = 18.4 sec
          "findspace=size:any radius:3",
          "walk=coords",
          "animate=releasein duration:2s",

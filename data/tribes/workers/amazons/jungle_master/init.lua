@@ -53,6 +53,9 @@ wl.Descriptions():new_worker_type {
          "findspace=size:any radius:6 terraform:amazons",
       },
       terraform = {
+         -- steps from building to place of terraform: 2-9
+         -- min. worker time: 2 * 2 * 1.8 + 2 + 2 = 11.2 sec
+         -- max. worker time: 2 * 9 * 1.8 + 2 + 2 = 36.4 sec
          "findspace=size:any radius:6 terraform:amazons",
          "walk=coords",
          "animate=dig duration:2s",
