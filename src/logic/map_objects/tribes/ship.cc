@@ -176,8 +176,11 @@ private:
  * The contents of 'table' are documented in
  * /data/tribes/ships/atlanteans/init.lua
  */
-ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
-   : BobDescr(init_descname, MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table),
+ShipDescr::ShipDescr(const std::string& init_descname,
+                     const LuaTable& table,
+                     const std::vector<std::string>& attribs)
+   : BobDescr(
+        init_descname, MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table, attribs),
      max_hitpoints_(table.get_int("hitpoints")),
      min_attack_(table.get_int("min_attack")),
      max_attack_(table.get_int("max_attack")),

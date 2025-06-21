@@ -26,7 +26,7 @@ msgstr "Koñtroloù"
 
 #: ../../../../data/scripting/editor/editor_help.lua:50
 msgid "Editor Help"
-msgstr ""
+msgstr "Skoazell an embanner"
 
 #: ../../../../data/scripting/editor/editor_help.lua:55
 msgid "General"
@@ -35,16 +35,16 @@ msgstr "Hollek"
 #: ../../../../data/scripting/editor/editor_help.lua:60
 #: ../../../../data/scripting/editor/editor_introduction.lua:10
 msgid "Introduction"
-msgstr ""
+msgstr "Digoradur"
 
 #: ../../../../data/scripting/editor/editor_help.lua:72
 #: ../../../../data/scripting/editor/tips.lua:15
 msgid "Tips"
-msgstr ""
+msgstr "Alioù"
 
 #: ../../../../data/scripting/editor/editor_help.lua:82
 msgid "Terrains"
-msgstr ""
+msgstr "Tachennoù"
 
 #: ../../../../data/scripting/editor/editor_help.lua:89
 msgid "Trees"
@@ -52,7 +52,7 @@ msgstr "Gwez"
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:8
 msgid "The Widelands Editor"
-msgstr ""
+msgstr "Embanner Widelands"
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:12
 msgid ""
