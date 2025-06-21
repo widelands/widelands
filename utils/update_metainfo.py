@@ -56,6 +56,7 @@ if (not os.path.isdir(translations_path)):
     sys.exit(1)
 
 english_source_filename = os.path.normpath(
+    # metainfo used to be called appdata, that's how it was added on transifex
     base_path + '/xdg/translations/appdata.json')
 if (not os.path.isfile(english_source_filename)):
     print('Error: File ' + english_source_filename + ' not found.')
