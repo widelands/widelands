@@ -8,15 +8,15 @@ import os.path
 import shutil
 import sys
 
-# This script collects translations for the appdata.xml and .desktop files
+# This script collects translations for the metainfo.xml and .desktop files
 #
-# All non-translatable content for ../xdg/org.widelands.Widelands.appdata.xml is taken from
-# ../xdg/org.widelands.Widelands.appdata.xml.stub
+# All non-translatable content for ../xdg/org.widelands.Widelands.metainfo.xml is taken from
+# ../xdg/org.widelands.Widelands.metainfo.xml.stub
 # That file contains a SUMMARY_DESCRIPTION_HOOK where the translatable information
 # is inserted.
 # A language list and textdomain info is inserted into LANGUAGES_HOOK
 #
-# The output is written to ../xdg/org.widelands.Widelands.appdata.xml
+# The output is written to ../xdg/org.widelands.Widelands.metainfo.xml
 #
 # All non-translatable content for ../xdg/org.widelands.Widelands.desktop is taken from
 # ../xdg/org.widelands.Widelands.desktop.stub
@@ -27,21 +27,21 @@ import sys
 # All translations are sourced from ../xdg/translations/
 #
 # If used with the --nonet command line option, the validator for the generated
-# appdata.xml file will be executed with the same, or the equivalent --no-net option.
+# metainfo.xml file will be executed with the same, or the equivalent --no-net option.
 # This skips the downloading of the screenshot images in restricted environments
 # without network access, such as e.g. flatpak-builder.
 
 
-print('Updating appdata.xml and .desktop files')
+print('Updating metainfo.xml and .desktop files')
 print('- Checking files')
 
 base_path = os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir))
 
-appdata_input_filename = os.path.normpath(
-    base_path + '/xdg/org.widelands.Widelands.appdata.xml.stub')
-if (not os.path.isfile(appdata_input_filename)):
-    print('Error: File ' + appdata_input_filename + ' not found.')
+metainfo_input_filename = os.path.normpath(
+    base_path + '/xdg/org.widelands.Widelands.metainfo.xml.stub')
+if (not os.path.isfile(metainfo_input_filename)):
+    print('Error: File ' + metainfo_input_filename + ' not found.')
     sys.exit(1)
 
 desktop_input_filename = os.path.normpath(
@@ -84,7 +84,7 @@ desktop_name_en = english_source['name']
 
 english_source_file.close()
 
-# For appdata.xml
+# For metainfo.xml
 names = '  <name>' + name_en + '</name>\n'
 summaries = '  <summary>' + tagline_en + '</summary>\n'
 descriptions = '  <description>\n'
@@ -115,7 +115,7 @@ for translation_filename in translation_files:
         tagline = translation['tagline']
         if tagline != tagline_en:
             summaries += "  <summary xml:lang=\"" + lang_code + \
-                "\">" + tagline + '</summary>\n'  # appdata.xml
+                "\">" + tagline + '</summary>\n'  # metainfo.xml
             comments += 'Comment[' + lang_code + ']=' + \
                 tagline + '\n'  # .desktop
         generic_name = translation['category']
@@ -129,11 +129,11 @@ for translation_filename in translation_files:
                 # .desktop
                 desktop_names += 'Name[' + \
                     lang_code + ']=' + desktop_name + '\n'
-        # appdata.xml
+        # metainfo.xml
         if 'name' in translation and translation['name'] != name_en:
             names += "  <name xml:lang=\"" + lang_code + \
                 "\">" + translation['name'] + '</name>\n'
-        if translation['description'] != descriptions_en:  # appdata.xml
+        if translation['description'] != descriptions_en:  # metainfo.xml
             for description in translation['description']:
                 descriptions += "    <p xml:lang=\"" + lang_code + "\">\n"
                 descriptions += '      ' + description + '\n'
@@ -141,28 +141,28 @@ for translation_filename in translation_files:
         translation_file.close()
 descriptions += '  </description>\n'
 
-print('- Writing org.widelands.Widelands.appdata.xml')
-input_file = open(appdata_input_filename, 'r')
-appdata = ''
+print('- Writing org.widelands.Widelands.metainfo.xml')
+input_file = open(metainfo_input_filename, 'r')
+metainfo = ''
 
 for line in input_file:
     if line.strip() == 'SUMMARY_DESCRIPTION_HOOK':
-        appdata += names + summaries + descriptions
+        metainfo += names + summaries + descriptions
     elif line.strip() == 'LANGUAGES_HOOK':
-        appdata += '  <languages>\n'
+        metainfo += '  <languages>\n'
         for langcode in langcodes:
-            appdata += '    <lang>' + langcode + '</lang>\n'
-        appdata += '  </languages>\n'
+            metainfo += '    <lang>' + langcode + '</lang>\n'
+        metainfo += '  </languages>\n'
         for textdomain in textdomains:
-            appdata += '  <translation type="gettext">' + textdomain + '</translation>\n'
+            metainfo += '  <translation type="gettext">' + textdomain + '</translation>\n'
     else:
-        appdata += line
+        metainfo += line
 
 input_file.close()
 
-appdata_filepath = base_path + '/xdg/org.widelands.Widelands.appdata.xml'
-dest_file = codecs.open(appdata_filepath, encoding='utf-8', mode='w')
-dest_file.write(appdata)
+metainfo_filepath = base_path + '/xdg/org.widelands.Widelands.metainfo.xml'
+dest_file = codecs.open(metainfo_filepath, encoding='utf-8', mode='w')
+dest_file.write(metainfo)
 dest_file.close()
 
 print('- Writing .desktop')
@@ -184,24 +184,24 @@ dest_file.close()
 print('Done!')
 
 
-# Validate Appdata
+# Validate the MetaInfo file
 skip_screenshot_check = len(sys.argv) > 1 and sys.argv[1] == '--nonet'
 
 if shutil.which('appstreamcli'):
-    validate_cmd = ['appstreamcli', 'validate', appdata_filepath]
+    validate_cmd = ['appstreamcli', 'validate', metainfo_filepath]
     if skip_screenshot_check:
         validate_cmd.insert(2, '--no-net')
-    appdata_result = subprocess.run(validate_cmd)
+    metainfo_result = subprocess.run(validate_cmd)
 elif shutil.which('appstream-util'):
-    validate_cmd = ['appstream-util', 'validate-relax', appdata_filepath]
+    validate_cmd = ['appstream-util', 'validate-relax', metainfo_filepath]
     if skip_screenshot_check:
         validate_cmd.insert(2, '--nonet')
-    appdata_result = subprocess.run(validate_cmd)
+    metainfo_result = subprocess.run(validate_cmd)
 else:
-    print('Cannot validate generated appdata file.')
-    appdata_result = FileNotFoundError() # dummy object for returncode
-    appdata_result.returncode = 0
+    print('Cannot validate generated metainfo file.')
+    metainfo_result = FileNotFoundError() # dummy object for returncode
+    metainfo_result.returncode = 0
 
 desktop_result = subprocess.run(['desktop-file-validate', desktop_filepath])
 
-sys.exit(max(desktop_result.returncode, appdata_result.returncode))
+sys.exit(max(desktop_result.returncode, metainfo_result.returncode))
