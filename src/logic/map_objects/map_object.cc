@@ -153,14 +153,19 @@ MapObjectDescr IMPLEMENTATION
 */
 MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                                const std::string& init_name,
-                               const std::string& init_descname)
+                               const std::string& init_descname,
+                               const std::vector<std::string>& attribs)
    : type_(init_type), name_(init_name), descname_(init_descname) {
+	if (!attribs.empty()) {
+		add_attributes(attribs);
+	}
 }
 MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                                const std::string& init_name,
                                const std::string& init_descname,
-                               const LuaTable& table)
-   : MapObjectDescr(init_type, init_name, init_descname) {
+                               const LuaTable& table,
+                               const std::vector<std::string>& attribs)
+   : MapObjectDescr(init_type, init_name, init_descname, attribs) {
 
 	bool has_animations = false;
 	const std::string animation_directory(

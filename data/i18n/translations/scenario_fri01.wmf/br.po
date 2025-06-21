@@ -26,11 +26,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/starting_conditions.lua:8
 msgid "Langeneß"
-msgstr ""
+msgstr "Langeneß"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:25
 msgid "Build a wood economy and a reed farm"
-msgstr ""
+msgstr "Savit un armerzh koad hag un atant korz"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Wood Economy"
@@ -44,7 +44,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:33
 msgid "Start producing bricks"
-msgstr ""
+msgstr "Komañsit produiñ brikez"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:35
 msgid "Brick Economy"
@@ -55,10 +55,12 @@ msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
 msgstr ""
+"Savit ur vrikennerezh, ur vengleuz glaou, un toull-pri hag ur puñs da gomañs"
+" produiñ brikez."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:41
 msgid "Gather building materials"
-msgstr ""
+msgstr "Dastum danvezioù sevel"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:43
 msgid "Stockpile Building Materials"
@@ -71,27 +73,27 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:45
 msgid "30 × Log"
-msgstr ""
+msgstr "30 × Koad"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:46
 msgid "30 × Granite"
-msgstr ""
+msgstr "30 × Maen-greun"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:47
 msgid "10 × Clay"
-msgstr ""
+msgstr "10 × Pri"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:48
 msgid "40 × Brick"
-msgstr ""
+msgstr "40 × Brikez"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:49
 msgid "20 × Coal"
-msgstr ""
+msgstr "20 × Glaou"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:50
 msgid "30 × Reed"
-msgstr ""
+msgstr "30 × Korz"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:51
 msgid ""
@@ -112,14 +114,16 @@ msgid ""
 "Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
 "collector’s house."
 msgstr ""
+"Savit un davarn, un ti peskeater, ur vogederezh, un atant hugennoù hag un ti"
+" dastumer frouezh."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:64
 msgid "Enhance your food economy"
-msgstr ""
+msgstr "Gwellait ho armerzh boued"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:66
 msgid "Enhance Food Economy"
-msgstr ""
+msgstr "Gwellaat armerzh ar boued"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:67
 msgid ""
@@ -138,36 +142,38 @@ msgstr ""
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:75
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
 msgstr ""
+"Savit ur vengleuz houarn, ur fornez, ur c'hovel-houarn hag ur c'hovel "
+"houarnwisk bihan."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:80
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:255
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:264
 msgid "Start recruiting soldiers"
-msgstr ""
+msgstr "Komañsit da duta soudarded"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:82
 msgid "Recruiting Soldiers"
-msgstr ""
+msgstr "An tuta soudarded"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:83
 msgid "Build a barracks, a reindeer farm and a sewing room."
-msgstr ""
+msgstr "Savit ur c'hazarn, un atant kirvi-erc'h hag ur sal-gwriat."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:88
 msgid "Discover more of the island"
-msgstr ""
+msgstr "Dizoloit muioc'h eus an enezenn"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:90
 msgid "Expand and Discover"
-msgstr ""
+msgstr "Astenn ha dizoleiñ"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:91
 msgid "Expand further and discover more of the island."
-msgstr ""
+msgstr "Astennit pelloc'h ha dizoloit muioc'h eus an enezenn."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:96
 msgid "Train your soldiers"
-msgstr ""
+msgstr "Lakait ho soudarded da c'hourdonañ"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:98
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:309
@@ -177,7 +183,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:352
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:358
 msgid "Training Soldiers"
-msgstr ""
+msgstr "Ar gourdonañ soudarded"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:99
 msgid ""
@@ -189,11 +195,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:104
 msgid "Defeat the enemy!"
-msgstr ""
+msgstr "Pilit an enebour!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:106
 msgid "Defeat the Enemy!"
-msgstr ""
+msgstr "Pilit an enebour!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:107
 msgid "Destroy the enemy tribe’s headquarters."
@@ -232,11 +238,11 @@ msgstr ""
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:160
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:176
 msgid "Introduction"
-msgstr ""
+msgstr "Digoradur"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:127
 msgid "Welcome!"
-msgstr ""
+msgstr "Donemat!"
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:129
@@ -257,7 +263,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:136
 msgid "A new home"
-msgstr ""
+msgstr "Un ti nevez"
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:138
@@ -275,7 +281,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:145
 msgid "The first buildings"
-msgstr ""
+msgstr "Ar savadurioù kentañ"
 
 #. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional Frisian
 #. greeting
@@ -312,7 +318,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:161
 msgid "Building our new home"
-msgstr ""
+msgstr "Sevel hon ti nevez"
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:163
@@ -366,7 +372,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:185
 msgid "Build another reed farm"
-msgstr ""
+msgstr "Savit un atant korz ouzhpenn"
 
 #. TRANSLATORS: Hauke – no reed
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:187
@@ -389,7 +395,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:192
 msgid "Build another clay pit"
-msgstr ""
+msgstr "Savit un toull-pri ouzhpenn"
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:194
@@ -414,7 +420,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:201
 msgid "Build another brick kiln"
-msgstr ""
+msgstr "Savit ur vrikennerezh ouzhpenn"
 
 #. TRANSLATORS: Hauke – no bricks
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:203
@@ -434,11 +440,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:207
 msgid "Warehouses"
-msgstr ""
+msgstr "Etrepaouezioù"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:208
 msgid "Build a warehouse in the east"
-msgstr ""
+msgstr "Savit un etrepaouez er reter"
 
 #. TRANSLATORS: Hauke – build a warehouse
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:210
@@ -484,11 +490,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:227
 msgid "Enhancing the Food Economy"
-msgstr ""
+msgstr "Gwellaat armerzh ar boued"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:228
 msgid "Feeding the soldiers"
-msgstr ""
+msgstr "Boueta ar soudarded"
 
 #. TRANSLATORS: Hauke – better food
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:230
@@ -524,11 +530,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:244
 msgid "Build a Mining Economy"
-msgstr ""
+msgstr "Savit un armerzh mengleuziañ"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:245
 msgid "Mining economy"
-msgstr ""
+msgstr "An armerzh mengleuziañ"
 
 #. TRANSLATORS: Reebaud – mining economy
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:247
@@ -550,7 +556,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:254
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:263
 msgid "Be Prepared"
-msgstr ""
+msgstr "Bezit prest"
 
 #. TRANSLATORS: Reebaud – recruit 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:257
@@ -596,17 +602,17 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:276
 msgid "Explore the Island"
-msgstr ""
+msgstr "Ergerzhit an enezenn"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:277
 msgid "Expanding"
-msgstr ""
+msgstr "Astenn"
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:279
 msgid ""
 "Our barracks has started working, and we are recruiting new soldiers now."
-msgstr ""
+msgstr "Oberiat eo hor c'hazarn bremañ, hag emaomp o tuta soudarded nevez."
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:282
@@ -626,7 +632,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:296
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:302
 msgid "Enemies!"
-msgstr ""
+msgstr "Enebourien!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:291
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:297
@@ -745,7 +751,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:347
 msgid "Our soldiers are strong"
-msgstr ""
+msgstr "Kreñv eo hor soudarded"
 
 #. TRANSLATORS: Reebaud – attack enemy 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:349
@@ -754,7 +760,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:353
 msgid "Are our soldiers strong enough?"
-msgstr ""
+msgstr "Ha kreñv a-walc'h eo hor soudarded?"
 
 #. TRANSLATORS: Hauke – attack enemy 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:355
@@ -781,7 +787,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:365
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:371
 msgid "Beware!"
-msgstr ""
+msgstr "Diwallit!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:366
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:372
@@ -817,12 +823,12 @@ msgstr ""
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:380
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:386
 msgid "Enemy Defeated"
-msgstr ""
+msgstr "Pilet eo bet an enebour"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:381
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:387
 msgid "Enemy defeated!"
-msgstr ""
+msgstr "Pilet eo bet an enebour!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:383
@@ -880,7 +886,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:412
 msgid "Soldiers to the port!"
-msgstr ""
+msgstr "D'ar porzh-mor, soudarded!"
 
 #. TRANSLATORS: Reebaud – rising water
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:414
@@ -915,7 +921,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"
-msgstr ""
+msgstr "Trec'h"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:422
 msgid "We escaped!"
@@ -931,7 +937,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:425
 msgid "Congratulations"
-msgstr ""
+msgstr "Gourc'hemennoù"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:427

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-12 03:24+0000\n"
+"POT-Creation-Date: 2025-06-21 03:18+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2015-2017,2019-2021\n"
 "Language-Team: Danish (http://app.transifex.com/widelands/widelands/language/da/)\n"
@@ -52,8 +52,8 @@ msgstr "Ophavsret 2002 - %1% Widelands-udviklingsholdet."
 #: ../../../../data/txts/LICENSE.lua:16
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
-"Public License (GPL) V2.0."
-msgstr "Dette spil er Free and Open Source (FOSS), licenseret under GNU General Public License (GPL) V2.0."
+"Public License (GPL) V2.0 (or, at your option, any later version)."
+msgstr ""
 
 #: ../../../../data/txts/LICENSE.lua:18
 #, lua-format

@@ -29,7 +29,8 @@ public:
 	   : BobDescr(init_name,
 	              init_descname,
 	              MapObjectType::NAVAL_INVASION_BASE,
-	              MapObjectDescr::OwnerType::kTribe) {
+	              MapObjectDescr::OwnerType::kTribe,
+	              std::vector<std::string>() /*no attribs*/) {
 	}
 	~NavalInvasionBaseDescr() override = default;
 	[[nodiscard]] Bob& create_object() const override;
