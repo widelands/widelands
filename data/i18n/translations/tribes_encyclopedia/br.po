@@ -5219,7 +5219,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2111
 msgctxt "building"
 msgid "Digs coal out of the ground in mountain terrain."
-msgstr ""
+msgstr "Eztennañ a ra glaou diouzh leurenn ar menez."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Coal Mine
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Iron Mine
@@ -5270,7 +5270,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2129
 msgctxt "building"
 msgid "Digs iron ore out of the ground in mountain terrain."
-msgstr ""
+msgstr "Eztennañ a ra kailh houarn diouzh leurenn ar menez."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Iron
 #. Mine
@@ -5300,7 +5300,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2147
 msgctxt "building"
 msgid "Digs gold ore out of the ground in mountain terrain."
-msgstr ""
+msgstr "Eztennañ a ra kailh aour diouzh leurenn ar menez."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Gold Mine
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1935
@@ -7799,7 +7799,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1576
 msgctxt "barbarians_building"
 msgid "Carves granite out of the rock in mountain terrain."
-msgstr ""
+msgstr "Eztennañ a ra maen-greun diouzh leurenn ar menez."
 
 #. TRANSLATORS: 'It' is a mine
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1579
@@ -12171,7 +12171,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1923
 msgctxt "empire_building"
 msgid "Carves marble and granite out of the rock in mountain terrain."
-msgstr ""
+msgstr "Eztennañ a ra marbr ha maen-greun diouzh leurenn ar menez."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Marble
 #. Mine
@@ -15867,7 +15867,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2093
 msgctxt "building"
 msgid "Digs granite out of the ground in mountain terrain."
-msgstr ""
+msgstr "Eztennañ a ra maen-greun diouzh leurenn ar menez."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Rock Mine
 #: ../../../../data/tribes/initialization/frisians/units.lua:2086
@@ -16139,42 +16139,42 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2333
 msgctxt "warehousename"
 msgid "Aalkersem"
-msgstr ""
+msgstr "Aalkersem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2335
 msgctxt "warehousename"
 msgid "Äfkebel"
-msgstr ""
+msgstr "Äfkebel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2337
 msgctxt "warehousename"
 msgid "Ämelsbel"
-msgstr ""
+msgstr "Ämelsbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2339
 msgctxt "warehousename"
 msgid "A Nääs"
-msgstr ""
+msgstr "A Nääs"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2341
 msgctxt "warehousename"
 msgid "Ārichsem"
-msgstr ""
+msgstr "Ārichsem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2343
 msgctxt "warehousename"
 msgid "Baamst"
-msgstr ""
+msgstr "Baamst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
@@ -16188,420 +16188,420 @@ msgstr "Beergem"
 #: ../../../../data/tribes/initialization/frisians/units.lua:2347
 msgctxt "warehousename"
 msgid "Borigsem"
-msgstr ""
+msgstr "Borigsem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2349
 msgctxt "warehousename"
 msgid "Bousbel"
-msgstr ""
+msgstr "Bousbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2351
 msgctxt "warehousename"
 msgid "Bräist"
-msgstr ""
+msgstr "Bräist"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2353
 msgctxt "warehousename"
 msgid "Bualigsem"
-msgstr ""
+msgstr "Bualigsem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2355
 msgctxt "warehousename"
 msgid "Deesbel"
-msgstr ""
+msgstr "Deesbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2357
 msgctxt "warehousename"
 msgid "Doogebel"
-msgstr ""
+msgstr "Doogebel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2359
 msgctxt "warehousename"
 msgid "Dunsem"
-msgstr ""
+msgstr "Dunsem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2361
 msgctxt "warehousename"
 msgid "E Hoorne"
-msgstr ""
+msgstr "E Hoorne"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2363
 msgctxt "warehousename"
 msgid "Emst"
-msgstr ""
+msgstr "Emst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2365
 msgctxt "warehousename"
 msgid "Fåålst"
-msgstr ""
+msgstr "Fåålst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2367
 msgctxt "warehousename"
 msgid "Friedrichstääd"
-msgstr ""
+msgstr "Friedrichstääd"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2369
 msgctxt "warehousename"
 msgid "Gaarding"
-msgstr ""
+msgstr "Gaarding"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2371
 msgctxt "warehousename"
 msgid "Haatst"
-msgstr ""
+msgstr "Haatst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2373
 msgctxt "warehousename"
 msgid "Hoorbel"
-msgstr ""
+msgstr "Hoorbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2375
 msgctxt "warehousename"
 msgid "Hoorst"
-msgstr ""
+msgstr "Hoorst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2377
 msgctxt "warehousename"
 msgid "Hörnem"
-msgstr ""
+msgstr "Hörnem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2379
 msgctxt "warehousename"
 msgid "Hüsem"
-msgstr ""
+msgstr "Hüsem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2381
 msgctxt "warehousename"
 msgid "Iibel"
-msgstr ""
+msgstr "Iibel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2383
 msgctxt "warehousename"
 msgid "Imensteed"
-msgstr ""
+msgstr "Imensteed"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2385
 msgctxt "warehousename"
 msgid "Kååting"
-msgstr ""
+msgstr "Kååting"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2387
 msgctxt "warehousename"
 msgid "Kairem"
-msgstr ""
+msgstr "Kairem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2389
 msgctxt "warehousename"
 msgid "Klangsbel"
-msgstr ""
+msgstr "Klangsbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2391
 msgctxt "warehousename"
 msgid "Kläntem"
-msgstr ""
+msgstr "Kläntem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2393
 msgctxt "warehousename"
 msgid "Klasbel"
-msgstr ""
+msgstr "Klasbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2395
 msgctxt "warehousename"
 msgid "Kuurlem"
-msgstr ""
+msgstr "Kuurlem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2397
 msgctxt "warehousename"
 msgid "Läitjholem"
-msgstr ""
+msgstr "Läitjholem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2399
 msgctxt "warehousename"
 msgid "Madlem"
-msgstr ""
+msgstr "Madlem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2401
 msgctxt "warehousename"
 msgid "Mälst"
-msgstr ""
+msgstr "Mälst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2403
 msgctxt "warehousename"
 msgid "Mönkebel"
-msgstr ""
+msgstr "Mönkebel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2405
 msgctxt "warehousename"
 msgid "Moosbel"
-msgstr ""
+msgstr "Moosbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2407
 msgctxt "warehousename"
 msgid "Muasem"
-msgstr ""
+msgstr "Muasem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2409
 msgctxt "warehousename"
 msgid "Naibel"
-msgstr ""
+msgstr "Naibel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2411
 msgctxt "warehousename"
 msgid "Neebel"
-msgstr ""
+msgstr "Neebel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2413
 msgctxt "warehousename"
 msgid "Njiblem"
-msgstr ""
+msgstr "Njiblem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2415
 msgctxt "warehousename"
 msgid "Noorst"
-msgstr ""
+msgstr "Noorst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2417
 msgctxt "warehousename"
 msgid "Olersem"
-msgstr ""
+msgstr "Olersem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2419
 msgctxt "warehousename"
 msgid "Odenbel"
-msgstr ""
+msgstr "Odenbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2421
 msgctxt "warehousename"
 msgid "Ödersem"
-msgstr ""
+msgstr "Ödersem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2423
 msgctxt "warehousename"
 msgid "Popenbel"
-msgstr ""
+msgstr "Popenbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2425
 msgctxt "warehousename"
 msgid "Raantem"
-msgstr ""
+msgstr "Raantem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2427
 msgctxt "warehousename"
 msgid "Reinsbel"
-msgstr ""
+msgstr "Reinsbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2429
 msgctxt "warehousename"
 msgid "Rikesbel"
-msgstr ""
+msgstr "Rikesbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2431
 msgctxt "warehousename"
 msgid "Risem"
-msgstr ""
+msgstr "Risem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2433
 msgctxt "warehousename"
 msgid "Seebel"
-msgstr ""
+msgstr "Seebel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2435
 msgctxt "warehousename"
 msgid "Snootebel"
-msgstr ""
+msgstr "Snootebel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2437
 msgctxt "warehousename"
 msgid "Söleraanj"
-msgstr ""
+msgstr "Söleraanj"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2439
 msgctxt "warehousename"
 msgid "Strükem"
-msgstr ""
+msgstr "Strükem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2441
 msgctxt "warehousename"
 msgid "Tååting"
-msgstr ""
+msgstr "Tååting"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2443
 msgctxt "warehousename"
 msgid "Taning"
-msgstr ""
+msgstr "Taning"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2445
 msgctxt "warehousename"
 msgid "Teedenbel"
-msgstr ""
+msgstr "Teedenbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2447
 msgctxt "warehousename"
 msgid "Tinem"
-msgstr ""
+msgstr "Tinem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2449
 msgctxt "warehousename"
 msgid "Toorpem"
-msgstr ""
+msgstr "Toorpem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2451
 msgctxt "warehousename"
 msgid "Ülwelsbel"
-msgstr ""
+msgstr "Ülwelsbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2453
 msgctxt "warehousename"
 msgid "Wiisem"
-msgstr ""
+msgstr "Wiisem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2455
 msgctxt "warehousename"
 msgid "A Wik"
-msgstr ""
+msgstr "A Wik"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../../../data/tribes/initialization/frisians/units.lua:2457
 msgctxt "warehousename"
 msgid "Witjdün"
-msgstr ""
+msgstr "Witjdün"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is 1 worker
 #. missing
 #: ../../../../data/tribes/initialization/frisians/units.lua:2463
 msgctxt "frisians"
 msgid "Worker missing"
-msgstr ""
+msgstr "Ul labourer a vank"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is 1 worker
 #. coming
 #: ../../../../data/tribes/initialization/frisians/units.lua:2465
 msgctxt "frisians"
 msgid "Worker is coming"
-msgstr ""
+msgstr "Ul labourer zo o tont"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is more than
 #. 1 worker missing. If you need plural forms here, please let us know.
 #: ../../../../data/tribes/initialization/frisians/units.lua:2467
 msgctxt "frisians"
 msgid "Workers missing"
-msgstr ""
+msgstr "Labourerien a vank"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is more than
 #. 1 worker coming. If you need plural forms here, please let us know.
 #: ../../../../data/tribes/initialization/frisians/units.lua:2469
 msgctxt "frisians"
 msgid "Workers are coming"
-msgstr ""
+msgstr "Labourerien zo o tont"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is 1
 #. experienced worker missing
@@ -16624,11 +16624,11 @@ msgstr ""
 msgctxt "frisians_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%1% soudard (+%2%)"
+msgstr[1] "%1% soudard (+%2%)"
+msgstr[2] "%1% soudard (+%2%)"
+msgstr[3] "%1% a soudarded (+%2%)"
+msgstr[4] "%1% soudard (+%2%)"
 
 #. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
 #: ../../../../data/tribes/initialization/frisians/units.lua:2489
@@ -16648,11 +16648,11 @@ msgstr[4] "%1% soudard"
 msgctxt "frisians_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%1%(+%2%) soudard (+%3%)"
+msgstr[1] "%1%(+%2%) soudard (+%3%)"
+msgstr[2] "%1%(+%2%) soudard (+%3%)"
+msgstr[3] "%1%(+%2%) a soudarded (+%3%)"
+msgstr[4] "%1%(+%2%) soudard (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -16660,11 +16660,11 @@ msgstr[4] ""
 msgctxt "frisians_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%1%(+%2%) soudard"
+msgstr[1] "%1%(+%2%) soudard"
+msgstr[2] "%1%(+%2%) soudard"
+msgstr[3] "%1%(+%2%) a soudarded"
+msgstr[4] "%1%(+%2%) soudard"
 
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
@@ -16852,13 +16852,13 @@ msgstr "%s pe gwelloc'h"
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool 1 worker uses
 #: ../../../../data/tribes/scripting/help/building_help.lua:699
 msgid "Worker uses:"
-msgstr ""
+msgstr "Al labourer a implij:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool more than 1 worker
 #. uses
 #: ../../../../data/tribes/scripting/help/building_help.lua:702
 msgid "Workers use:"
-msgstr ""
+msgstr "Al labourerien a implij:"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:712
 #: ../../../../data/tribes/scripting/help/worker_help.lua:179
@@ -16867,7 +16867,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:734
 msgid "Production"
-msgstr ""
+msgstr "Produadur"
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:743
@@ -16949,7 +16949,7 @@ msgstr ""
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../data/tribes/scripting/help/controls.lua:14
 msgid "Close window"
-msgstr ""
+msgstr "Serriñ ar prenestr"
 
 #. TRANSLATORS: This is an access key combination.
 #: ../../../../data/tribes/scripting/help/controls.lua:16
@@ -17125,7 +17125,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:43
 #: ../../../../data/tribes/scripting/help/worker_help.lua:143
 msgid "Note"
-msgstr ""
+msgstr "Notenn"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:58
 msgid "Requirements"
@@ -17133,7 +17133,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:62
 msgid "Size"
-msgstr ""
+msgstr "Ment"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."
@@ -17157,16 +17157,16 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
-msgstr ""
+msgstr "Digoradur"
 
 #: ../../../../data/tribes/scripting/help/init.lua:107
 #: ../../../../data/tribes/scripting/help/tips.lua:60
 msgid "Tips"
-msgstr ""
+msgstr "Alioù"
 
 #: ../../../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
-msgstr ""
+msgstr "Marc'hadouriezhioù"
 
 #: ../../../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"
@@ -17182,48 +17182,48 @@ msgstr "Traoù difiñvus ar bed"
 
 #: ../../../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
-msgstr ""
+msgstr "A-zivout Widelands"
 
 #: ../../../../data/tribes/scripting/help/time_strings.lua:26
 #: ../../../../data/tribes/scripting/help/time_strings.lua:62
 #, lua-format
 msgid "%d second"
 msgid_plural "%d seconds"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%d eilenn"
+msgstr[1] "%d eilenn"
+msgstr[2] "%d eilenn"
+msgstr[3] "%d a eilennoù"
+msgstr[4] "%d eilenn"
 
 #: ../../../../data/tribes/scripting/help/time_strings.lua:42
 #: ../../../../data/tribes/scripting/help/time_strings.lua:61
 #, lua-format
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%d vunutenn"
+msgstr[1] "%d vunutenn"
+msgstr[2] "%d munutenn"
+msgstr[3] "%d a vunutennoù"
+msgstr[4] "%d munutenn"
 
 #: ../../../../data/tribes/scripting/help/time_strings.lua:60
 msgid "%1% and %2%"
-msgstr ""
+msgstr "%1% ha %2%"
 
 #: ../../../../data/tribes/scripting/help/tips.lua:52
 msgid "Single Player"
-msgstr ""
+msgstr "Unc'hoarier"
 
 #: ../../../../data/tribes/scripting/help/tips.lua:55
 msgid "Multiplayer"
-msgstr ""
+msgstr "Liesc'hoarier"
 
 #. TRANSLATORS: Ware Encyclopedia: A building producing a ware
 #. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
 #: ../../../../data/tribes/scripting/help/ware_help.lua:51
 #: ../../../../data/tribes/scripting/help/worker_help.lua:40
 msgid "Producer"
-msgstr ""
+msgstr "Produer"
 
 #. TRANSLATORS: Ware Encyclopedia: Heading for 1 building and / or worker that
 #. consumes a ware
@@ -17240,7 +17240,7 @@ msgstr ""
 #. TRANSLATORS: Worker Encyclopedia: 1 worker recruited by a productionsite
 #: ../../../../data/tribes/scripting/help/worker_help.lua:53
 msgid "Worker recruited:"
-msgstr ""
+msgstr "Labourer bet tutaet:"
 
 #. TRANSLATORS: Worker Encyclopedia: Heading for 1 building where a worker can
 #. work
@@ -17248,7 +17248,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/worker_help.lua:86
 msgctxt "workerhelp_one_building"
 msgid "Works at"
-msgstr ""
+msgstr "A labour e"
 
 #. TRANSLATORS: Worker Encyclopedia: A list of more than 1 building where a
 #. worker can work
@@ -17256,33 +17256,33 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/worker_help.lua:90
 msgctxt "workerhelp_multiple_buildings"
 msgid "Works at"
-msgstr ""
+msgstr "A labour e"
 
 #. TRANSLATORS: You can also translate this as 'additional workplace'
 #: ../../../../data/tribes/scripting/help/worker_help.lua:106
 msgctxt "workerhelp_one_building"
 msgid "Can also work at"
-msgstr ""
+msgstr "A c'hall labourat ivez e"
 
 #. TRANSLATORS: You can also translate this as 'additional workplaces'
 #: ../../../../data/tribes/scripting/help/worker_help.lua:110
 msgctxt "workerhelp_multiple_buildings"
 msgid "Can also work at"
-msgstr ""
+msgstr "A c'hall labourat ivez e"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
 #: ../../../../data/tribes/scripting/help/worker_help.lua:158
 msgid "Worker uses"
-msgstr ""
+msgstr "Al labourer a implij"
 
 #. TRANSLATORS: Soldier levels
 #: ../../../../data/tribes/scripting/help/worker_help.lua:185
 msgid "Levels"
-msgstr ""
+msgstr "Liveoù"
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:187
 msgid "Health"
-msgstr ""
+msgstr "Yec'hed"
 
 #. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
 #: ../../../../data/tribes/scripting/help/worker_help.lua:191
@@ -17315,7 +17315,7 @@ msgstr[4] ""
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:199
 msgid "Attack"
-msgstr ""
+msgstr "Taguster"
 
 #. TRANSLATORS: Points are 4 digit numbers.
 #: ../../../../data/tribes/scripting/help/worker_help.lua:202

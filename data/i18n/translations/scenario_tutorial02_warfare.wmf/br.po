@@ -159,11 +159,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:69
 msgid "Battle Arena"
-msgstr ""
+msgstr "Lis emgann"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:71
 msgid "Build a battle arena"
-msgstr ""
+msgstr "Savit ul lis emgann"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:72
 msgid "Build a battle arena. It is a big building."
@@ -225,7 +225,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:97
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:115
 msgid "The Training Camp"
-msgstr ""
+msgstr "Ar c'hamp gourdonañ"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:98
 msgid ""
@@ -237,15 +237,15 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:99
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:109
 msgid "Build a training camp."
-msgstr ""
+msgstr "Savit ur c'hamp gourdonañ."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
 msgid "Training Camp"
-msgstr ""
+msgstr "Kamp gourdonañ"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:107
 msgid "Build a training camp"
-msgstr ""
+msgstr "Savit ur c'hamp gourdonañ"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
 msgid ""
@@ -286,7 +286,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:126
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:138
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Lochenn ar sklêrijenner"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:128
 msgid "Explore Your Surroundings"
@@ -311,11 +311,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:132
 msgid "Build a scout’s hut."
-msgstr ""
+msgstr "Savit ul lochenn sklêrijenner"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:140
 msgid "Build a scout’s hut"
-msgstr ""
+msgstr "Savit ul lochenn sklêrijenner"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:141
 msgid ""
@@ -325,11 +325,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:142
 msgid "Build a Scout’s Hut."
-msgstr ""
+msgstr "Savit ul lochenn sklêrijenner"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:148
 msgid "Scout is ready"
-msgstr ""
+msgstr "Prest eo ar sklêrijenner"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:150
 msgid "Ready to go!"
@@ -535,7 +535,7 @@ msgstr "Divontit ho ked"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:229
 msgid "Dismantling military buildings"
-msgstr ""
+msgstr "Divontañ savadurioù milourel"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:230
 msgid ""

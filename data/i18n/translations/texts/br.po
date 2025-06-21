@@ -321,7 +321,7 @@ msgstr ""
 
 #: ../../../../data/txts/developers.lua:398
 msgid "Add-Ons"
-msgstr ""
+msgstr "Askouezhioù"
 
 #: ../../../../data/txts/developers.lua:417
 msgid "Former Elders"

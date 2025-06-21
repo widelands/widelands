@@ -475,7 +475,7 @@ msgstr "Enrollañ ar gartenn"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../../../src/editor/editorinteractive.cc:243
 msgid "Publish Map Online…"
-msgstr "Embann ar gartenn enlinenn..."
+msgstr "Embann ar gartenn enlinenn…"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../../../src/editor/editorinteractive.cc:251
@@ -628,7 +628,7 @@ msgstr "Roll-istor an ostilh"
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:405
 msgid "Restore previous tool settings"
-msgstr ""
+msgstr "Assav arventennoù kent an ostilh"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -679,21 +679,21 @@ msgstr ""
 #. the map grid is shown
 #: ../../../../src/editor/editorinteractive.cc:504
 msgid "Hide Grid"
-msgstr ""
+msgstr "Kuzhat ar gael"
 
 #: ../../../../src/editor/editorinteractive.cc:504
 msgid "Show Grid"
-msgstr ""
+msgstr "Diskouez ar gael"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the oceans are shown
 #: ../../../../src/editor/editorinteractive.cc:511
 msgid "Hide Oceans"
-msgstr ""
+msgstr "Kuzhat ar meurvorioù"
 
 #: ../../../../src/editor/editorinteractive.cc:511
 msgid "Show Oceans"
-msgstr ""
+msgstr "Diskouez ar meurvorioù"
 
 #: ../../../../src/editor/editorinteractive.cc:514
 msgid ""
@@ -734,7 +734,7 @@ msgstr "Diskouez an danvezioù"
 
 #: ../../../../src/editor/editorinteractive.cc:583
 msgid "Unsupported Format"
-msgstr ""
+msgstr "Mentrezh diskor"
 
 #: ../../../../src/editor/editorinteractive.cc:584
 #, c-format
@@ -757,7 +757,7 @@ msgstr "N'eo ket bet enrollet ar gartenn, ha sur oc'h e fell deoc'h mont kuit?"
 
 #: ../../../../src/editor/editorinteractive.cc:651
 msgid "Are you sure you wish to exit the editor?"
-msgstr ""
+msgstr "Ha sur oc'h e fell deoc'h kuitaat an embanner?"
 
 #: ../../../../src/editor/editorinteractive.cc:1277
 #: ../../../../src/logic/addons.cc:48 ../../../../src/ui_basic/dropdown.cc:360
@@ -821,7 +821,7 @@ msgstr "Dianav"
 
 #: ../../../../src/editor/editorinteractive.cc:1364
 msgid "Loading world…"
-msgstr "O kargañ ar bed..."
+msgstr "O kargañ ar bed…"
 
 #: ../../../../src/editor/editorinteractive.cc:1546
 #, c-format
@@ -850,11 +850,11 @@ msgstr ""
 
 #: ../../../../src/editor/editorinteractive.cc:1599
 msgid "Uploading Add-On…"
-msgstr ""
+msgstr "O pellgas an askouezh…"
 
 #: ../../../../src/editor/editorinteractive.cc:1600
 msgid "Saving map…"
-msgstr "Oc'h enrolliñ ar gartenn..."
+msgstr "Oc'h enrollañ ar gartenn…"
 
 #: ../../../../src/editor/editorinteractive.cc:1619
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:314
@@ -864,7 +864,7 @@ msgstr "Fazi en ur enrollañ ar gartenn!"
 
 #: ../../../../src/editor/editorinteractive.cc:1625
 msgid "Packaging add-on…"
-msgstr ""
+msgstr "O pakañ an askouezh…"
 
 #: ../../../../src/editor/editorinteractive.cc:1676
 msgid "Add-On Generation Error"
@@ -877,11 +877,11 @@ msgstr ""
 #: ../../../../src/editor/editorinteractive.cc:1684
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:108
 msgid "Uploading…"
-msgstr "O bellgargañ..."
+msgstr "O pellgas…"
 
 #: ../../../../src/editor/editorinteractive.cc:1690
 msgid "Upload Error"
-msgstr ""
+msgstr "Fazi pellgas"
 
 #: ../../../../src/editor/editorinteractive.cc:1712
 msgid "Success"
@@ -1128,7 +1128,7 @@ msgstr "%1$s; %2$s"
 #: ../../../../src/editor/ui_menus/field_info_window.cc:262
 #, c-format
 msgid "Enabled Add-Ons: %s"
-msgstr ""
+msgstr "Askouezhioù enaouet: %s"
 
 #: ../../../../src/editor/ui_menus/help.cc:36
 #: ../../../../src/ui_fsmenu/login_box.cc:255
@@ -1617,7 +1617,7 @@ msgstr ""
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:344
 msgid "Saving the map…"
-msgstr "Oc'h enrollañ ar gartenn..."
+msgstr "Oc'h enrollañ ar gartenn…"
 
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:362
 msgid "Map saved"
@@ -2135,11 +2135,11 @@ msgstr[4] ""
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%1$u askouezh a vank: %2$s"
+msgstr[1] "%1$u askouezh a vank: %2$s"
+msgstr[2] "%1$u askouezh a vank: %2$s"
+msgstr[3] "%1$u a askouezhioù a vank: %2$s"
+msgstr[4] "%1$u askouezh a vank: %2$s"
 
 #: ../../../../src/logic/addons.cc:256
 #, c-format
@@ -2160,11 +2160,11 @@ msgstr "%1$s ha %2$s: %3$s"
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%u askouezh a vank"
+msgstr[1] "%u askouezh a vank"
+msgstr[2] "%u askouezh a vank"
+msgstr[3] "%u a askouezhioù a vank"
+msgstr[4] "%u askouezh a vank"
 
 #: ../../../../src/logic/addons.cc:269
 #, c-format
@@ -2388,11 +2388,11 @@ msgstr ""
 #: ../../../../src/logic/game.cc:291 ../../../../src/logic/game.cc:334
 #: ../../../../src/logic/game.cc:452 ../../../../src/logic/game.cc:507
 msgid "Preloading map…"
-msgstr "O rakkargañ ar gartenn..."
+msgstr "O rakkargañ ar gartenn…"
 
 #: ../../../../src/logic/game.cc:390
 msgid "Initializing game…"
-msgstr "O teraouekaat ar c'hoariadenn..."
+msgstr "O teraouekaat ar c'hoariadenn…"
 
 #. * TRANSLATORS: All players (plural)
 #: ../../../../src/logic/game.cc:649
@@ -2412,7 +2412,7 @@ msgstr ""
 
 #: ../../../../src/logic/game.cc:767
 msgid "Initializing…"
-msgstr "O teraouekaat..."
+msgstr "O teraouekaat…"
 
 #: ../../../../src/logic/game.cc:1335
 msgid "Trade Offer"
@@ -3501,7 +3501,7 @@ msgstr "Etrepaouez %d"
 
 #: ../../../../src/logic/save_handler.cc:114
 msgid "Saving game…"
-msgstr "Oc'h enrollañ ar c'hoariadenn..."
+msgstr "Oc'h enrollañ ar c'hoariadenn…"
 
 #: ../../../../src/logic/save_handler.cc:152
 msgid "Saving skipped"
@@ -3670,7 +3670,7 @@ msgstr ""
 #: ../../../../src/map_io/s2map.cc:422
 #: ../../../../src/map_io/widelands_map_loader.cc:196
 msgid "Loading map…"
-msgstr "O kargañ ar gartenn..."
+msgstr "O kargañ ar gartenn…"
 
 #: ../../../../src/map_io/s2map.cc:460
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -4130,7 +4130,7 @@ msgstr ""
 #: ../../../../src/network/net_addons.cc:937
 #, c-format
 msgid "Uploading %s"
-msgstr ""
+msgstr "O pellgas %s"
 
 #: ../../../../src/network/network_gaming_messages.cc:30
 msgid "Client has left the game."
@@ -4346,7 +4346,7 @@ msgstr ""
 
 #: ../../../../src/ui_basic/color_chooser.cc:259
 msgid "Choose Color…"
-msgstr "Dibab ul liv..."
+msgstr "Dibab ul liv…"
 
 #: ../../../../src/ui_basic/color_chooser.cc:296
 msgid "Initial Color"
@@ -4418,7 +4418,7 @@ msgstr ""
 
 #: ../../../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
-msgstr "Gortozit mar plij..."
+msgstr "Gortozit mar plij…"
 
 #: ../../../../src/ui_basic/panel.cc:467
 msgid "Game ending – please wait…"
@@ -4427,7 +4427,7 @@ msgstr ""
 #: ../../../../src/ui_basic/progresswindow.cc:83
 #: ../../../../src/wlapplication.cc:489
 msgid "Loading…"
-msgstr "O kargañ..."
+msgstr "O kargañ…"
 
 #: ../../../../src/ui_basic/spinbox.cc:151
 msgid "Decrease the value"
@@ -4888,7 +4888,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:172
 msgid "Add-On Manager"
-msgstr ""
+msgstr "Ardoer an askouezhioù"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:309
 msgid "Verified only"
@@ -4945,7 +4945,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:466
 msgid "Upload a screenshot…"
-msgstr ""
+msgstr "Pellgas un dapadenn-skramm…"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:474
 msgid "Understood and confirmed"
@@ -4996,18 +4996,18 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:574
 msgid "Launch the add-ons packager…"
-msgstr ""
+msgstr "Lañsañ ar paker askouezhioù…"
 
 #. * TRANSLATORS: This button allows the user to send a message to the
 #. Widelands
 #. Development Team
 #: ../../../../src/ui_fsmenu/addons/manager.cc:585
 msgid "Contact us…"
-msgstr "Mont e darempred ganeomp..."
+msgstr "Mont e darempred ganeomp…"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:609
 msgid "Tools for Add-Ons Developers"
-msgstr ""
+msgstr "Ostilhoù evit an diorroerien askouezhioù"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:617
 msgid ""
@@ -5079,7 +5079,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:754
 msgid "Manage your installed add-ons"
-msgstr ""
+msgstr "Merañ an askouezhioù staliet"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:756
 msgid "Browse and install add-ons available on the server"
@@ -5099,7 +5099,7 @@ msgstr "Diorren"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:762
 msgid "Tools for add-on developers"
-msgstr ""
+msgstr "Ostilhoù evit an diorroerien askouezhioù"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:766
@@ -5134,20 +5134,20 @@ msgstr ""
 #. * TRANSLATORS: Sort add-ons by upload date/time
 #: ../../../../src/ui_fsmenu/addons/manager.cc:778
 msgid "Oldest"
-msgstr ""
+msgstr "Ar re goshañ"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
 #: ../../../../src/ui_fsmenu/addons/manager.cc:780
 msgid "Newest"
-msgstr ""
+msgstr "Ar re nevesañ"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:789
 msgid "Filter add-ons by name"
-msgstr ""
+msgstr "Silañ an askouezhioù dre o anv"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:790
 msgid "Filter maps by name"
-msgstr ""
+msgstr "Silañ ar c'hartennoù dre o anv"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:801
 #, c-format
@@ -5179,25 +5179,25 @@ msgstr[4] ""
 msgid ""
 "\n"
 "• %1$s (%2$s) by %3$s"
-msgstr ""
+msgstr "\n• %1$s (%2$s) gant %3$s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1023
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:491
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:525
 msgid "NOT VERIFIED"
-msgstr ""
+msgstr "KET GWIRIET"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1023
 msgid "verified"
-msgstr ""
+msgstr "gwiriet"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1027
 msgid "Upgrade All"
-msgstr ""
+msgstr "Hizivaat pep tra"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1180
 msgid "Not logged in"
-msgstr ""
+msgstr "Digennasket"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1181
 msgid ""
@@ -5207,11 +5207,11 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1185
 msgid "Please log in to upload add-ons"
-msgstr ""
+msgstr "Kennaskit evit pellgas askouezhioù"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1187
 msgid "Please log in to upload content"
-msgstr ""
+msgstr "Kennaskit evit pellgas endalc'h"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1189
 msgid "Please log in to send an enquiry"
@@ -5220,16 +5220,16 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1194
 #, c-format
 msgid "Logged in as %s"
-msgstr ""
+msgstr "Kennasket evel %s"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1194
 #, c-format
 msgid "Logged in as %s (admin)"
-msgstr ""
+msgstr "Kennasket evel %s (merour)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1195
 msgid "Click to log out"
-msgstr ""
+msgstr "Klikit da zigennaskañ"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1200
 msgid "Please tick the confirmation checkbox to upload add-ons"
@@ -5241,7 +5241,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1230
 msgid "Server Error"
-msgstr ""
+msgstr "Fazi an dafariad"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1231
 #, c-format
@@ -5269,11 +5269,11 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1360
 msgid "Connecting to the server…"
-msgstr ""
+msgstr "O kennaskañ ouzh an dafariad…"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1383
 msgid "Server Connection Error"
-msgstr ""
+msgstr "Fazi en ur c'hennaskañ ouzh an dafariad"
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
@@ -5304,12 +5304,12 @@ msgstr "Furchal (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1618
 msgid "Translations for website maps"
-msgstr ""
+msgstr "Troidigezhioù kartennoù al lec'hienn"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1621
 #, c-format
 msgid "Upgrade all (%u)"
-msgstr ""
+msgstr "Hizivaat pep tra (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1624
 msgid "No upgrades are available for your installed add-ons"
@@ -5402,17 +5402,17 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1942
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:54
 msgid "Upload"
-msgstr ""
+msgstr "Pellgas"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1943
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
-msgstr ""
+msgstr "Ha sur oc'h e fell deoc'h pellgas an askouezh  ‘%s’  d'an dafariad?"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1953
 #, c-format
 msgid "Uploading ‘%s’…"
-msgstr ""
+msgstr "O pellgas ‘%s’…"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1960
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2091
@@ -5461,7 +5461,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2070
 #, c-format
 msgid "Downloading ‘%s’…"
-msgstr ""
+msgstr "O pellgargañ ‘%s’…"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2107
 #, c-format
@@ -5483,11 +5483,11 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2239
 msgid "Website Maps Translations"
-msgstr ""
+msgstr "Troidigezhioù kartennoù al lec'hienn"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2240
 msgid "Downloading website maps translations…"
-msgstr ""
+msgstr "O pellgargañ troidigezhioù kartennoù al lec'hienn…"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2296
 #, c-format
@@ -5496,16 +5496,16 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:49
 msgid "Add-Ons Packager"
-msgstr ""
+msgstr "Paker askouezhioù"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:101
 msgid "New add-on"
-msgstr ""
+msgstr "Askouezh nevez"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:110
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:838
 msgid "Delete this add-on"
-msgstr ""
+msgstr "Dilemel an askouezh-mañ"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:118
 msgid "Discard changes"
@@ -5517,7 +5517,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:136
 msgid "Writing Add-Ons…"
-msgstr ""
+msgstr "Skrivañ askouezhioù…"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:138
 msgid "Please be patient while your changes are written."
@@ -5543,7 +5543,7 @@ msgstr "Handelv Widelands uhelañ:"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:356
 msgid "New Add-On"
-msgstr ""
+msgstr "Askouezh nevez"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:357
 msgid "Enter the name for the new add-on."
@@ -5583,12 +5583,12 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:427
 msgid "Delete Add-on"
-msgstr ""
+msgstr "Dilemel an askouezh"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:429
 #, c-format
 msgid "Do you really want to delete the add-on ‘%s’?"
-msgstr ""
+msgstr "Ha sur oc'h e fell deoc'h dilemel an askouezh ‘%s’?"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:430
 #, c-format
@@ -5619,11 +5619,11 @@ msgstr[4] ""
 msgid ""
 "%1$s\n"
 "• %2$s"
-msgstr ""
+msgstr "%1$s\n• %2$s"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:463
 msgid "Quit Packager"
-msgstr ""
+msgstr "Kuitaat ar paker"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:478
 #, c-format
@@ -5895,25 +5895,25 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:234
 msgctxt "markup"
 msgid "B"
-msgstr ""
+msgstr "T"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:234
 msgid "Bold"
-msgstr ""
+msgstr "Tev"
 
 #. * TRANSLATORS: Short for Italic text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:238
 msgctxt "markup"
 msgid "I"
-msgstr ""
+msgstr "S"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:238
 msgid "Italic"
-msgstr ""
+msgstr "Stouet"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:242
 msgid "Underline"
-msgstr ""
+msgstr "Islinennet"
 
 #. * TRANSLATORS: Short for Underline text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:242
@@ -5935,11 +5935,11 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:252
 msgctxt "markup"
 msgid "C"
-msgstr ""
+msgstr "L"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:252
 msgid "Color…"
-msgstr "Liv..."
+msgstr "Liv…"
 
 #. * TRANSLATORS: Short for Tiny text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:268
@@ -6053,7 +6053,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:491
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:525
 msgid "Verified"
-msgstr ""
+msgstr "Gwiriet"
 
 #. * TRANSLATORS: This add-on is known to cause desyncs
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:528
@@ -6079,7 +6079,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:718
 msgid "Write a comment…"
-msgstr ""
+msgstr "Skrivañ un askelenn…"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:728
 msgid "Administrator actions"
@@ -6120,7 +6120,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:887
 #, c-format
 msgid "Comments (%u)"
-msgstr ""
+msgstr "Askelennoù (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:888
 #, c-format
@@ -6153,11 +6153,11 @@ msgstr ""
 #, c-format
 msgid "%u comment:"
 msgid_plural "%u comments:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%u askelenn:"
+msgstr[1] "%u askelenn:"
+msgstr[2] "%u askelenn:"
+msgstr[3] "%u a askelennoù:"
+msgstr[4] "%u askelenn:"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:925
 #, c-format
@@ -6273,11 +6273,11 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:168
 msgid "Hint:"
-msgstr ""
+msgstr "Ali:"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:175
 msgid "Comment by uploader:"
-msgstr ""
+msgstr "Askelenn ar pellgaser:"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:216
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:267
@@ -6333,7 +6333,7 @@ msgstr "Staliañ"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:370
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:514
 msgid "Upgrade"
-msgstr ""
+msgstr "Hizivaat"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:388
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:682
@@ -6352,7 +6352,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:699
 #, c-format
 msgid "by %1$s (uploaded by %2$s)"
-msgstr ""
+msgstr "gant %1$s (pellgaset gant %2$s)"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:483
 #, c-format
@@ -6383,7 +6383,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:571
 msgid "Verified by the Widelands Development Team"
-msgstr ""
+msgstr "Gwiriet gant skipailh diorren Widelands"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:572
 msgid ""
@@ -6449,7 +6449,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:41
 #, c-format
 msgid "Upload Screenshot for ‘%s’"
-msgstr ""
+msgstr "Pellgas un dapadenn-skramm evit  ‘%s’"
 
 #. * TRANSLATORS: Header for campaign description
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:95
@@ -6489,7 +6489,7 @@ msgstr "C'hoari ar c'hampagn-mañ"
 #. * TRANSLATORS: Campaign difficulty table header
 #: ../../../../src/ui_fsmenu/campaign_select.cc:47
 msgid "Diff."
-msgstr ""
+msgstr "Diaester"
 
 #: ../../../../src/ui_fsmenu/campaign_select.cc:48
 msgid "Tribe Name"
@@ -6545,7 +6545,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:142
 msgid "Show details…"
-msgstr "Diskouez ar munudoù..."
+msgstr "Diskouez ar munudoù…"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:142
 msgid "View the detailed crash report"
@@ -6553,7 +6553,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:159
 msgid "Remind me later"
-msgstr ""
+msgstr "Degas soñj din diwezhatoc'h"
 
 #: ../../../../src/ui_fsmenu/helpwindow.cc:46
 #: ../../../../src/wui/helpwindow.cc:48
@@ -6572,7 +6572,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:91
 msgid "Open Games:"
-msgstr ""
+msgstr "C'hoariadennoù digor:"
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:101
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:92
@@ -6581,11 +6581,11 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:110
 msgid "Name of your server:"
-msgstr ""
+msgstr "Anv ho tafariad:"
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:119
 msgid "Open a new game"
-msgstr ""
+msgstr "Digeriñ ur c'hoariadenn nevez"
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:128
 msgid "Leave Lobby"
@@ -6682,7 +6682,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:240
 #, c-format
 msgid "%1$s: %2$s"
-msgstr ""
+msgstr "%1$s: %2$s"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:265
 msgid "Keyboard Shortcut Conflict"
@@ -6717,7 +6717,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1008
 #: ../../../../src/wlapplication_options.cc:1067
 msgid "Add-Ons"
-msgstr ""
+msgstr "Askouezhioù"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:310
 msgid "Mouse Scrolling"
@@ -6729,7 +6729,7 @@ msgstr "Lañsañ ar c'hoari"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:53
 msgid "Configure this game"
-msgstr ""
+msgstr "Kefluniañ ar c'hoariadenn-mañ"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:66
 msgid ""
@@ -6770,7 +6770,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:167
 msgid "Change map…"
-msgstr "Cheñch kartenn..."
+msgstr "Cheñch kartenn…"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:177
 msgid "Change saved game…"
@@ -6782,11 +6782,11 @@ msgstr "Kregiñ ganti"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:289
 msgid "Show fewer options"
-msgstr ""
+msgstr "Diskouez nebeutoc'h a zibarzhioù"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:289
 msgid "Show more options"
-msgstr ""
+msgstr "Diskouez muioc'h a zibarzhioù"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:305
 msgid "The relations between players are set by the scenario"
@@ -6917,7 +6917,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:239
 #: ../../../../src/ui_fsmenu/launch_spg.cc:134
 msgid "File not found"
-msgstr ""
+msgstr "N'eo ket bet kavet ar restr"
 
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:240
 #: ../../../../src/ui_fsmenu/launch_spg.cc:135
@@ -7001,7 +7001,7 @@ msgstr "Lesanv:"
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:140
 #: ../../../../src/wlapplication.cc:828
 msgid "nobody"
-msgstr ""
+msgstr "nikun"
 
 #: ../../../../src/ui_fsmenu/login_box.cc:218
 msgid "Please enter a nickname!"
@@ -7056,7 +7056,7 @@ msgstr "C'hoari ur c'hampagn"
 #: ../../../../src/ui_fsmenu/main.cc:387
 #: ../../../../src/wlapplication_options.cc:262
 msgid "Tutorials"
-msgstr ""
+msgstr "C'hoariadennoù-deskiñ"
 
 #: ../../../../src/ui_fsmenu/main.cc:388
 msgid "Play one of our beginners’ tutorials"
@@ -7159,15 +7159,15 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/main.cc:509
 msgid "Single Player…"
-msgstr "Unc'hoarier..."
+msgstr "Unc'hoarier…"
 
 #: ../../../../src/ui_fsmenu/main.cc:510
 msgid "Multiplayer…"
-msgstr "Liesc'hoarier..."
+msgstr "Liesc'hoarier…"
 
 #: ../../../../src/ui_fsmenu/main.cc:511
 msgid "Editor…"
-msgstr "Embanner..."
+msgstr "Embanner…"
 
 #: ../../../../src/ui_fsmenu/main.cc:512
 msgid "Watch Replay…"
@@ -7233,7 +7233,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/main.cc:890
 msgid "Click for the main menu"
-msgstr ""
+msgstr "Klikit da ziskouez al lañser pennañ"
 
 #: ../../../../src/ui_fsmenu/main.cc:968
 msgid "Desyncing Add-On Found"
@@ -7246,7 +7246,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/main.cc:1078
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:354
 msgid "No tribes found!"
-msgstr ""
+msgstr "N'eus meuriad ebet!"
 
 #: ../../../../src/ui_fsmenu/main.cc:1079
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:355
@@ -7273,13 +7273,13 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:60
 #, c-format
 msgid "Player %u: –"
-msgstr ""
+msgstr "C'hoarier %u: –"
 
 #. * TRANSLATORS: "Player 1 (Barbarians): Playername"
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:83
 #, c-format
 msgid "Player %1$u (%2$s): %3$s"
-msgstr ""
+msgstr "C'hoarier %1$u (%2$s): %3$s"
 
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:109
 msgid "Map Details"
@@ -7572,7 +7572,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:146
 msgid "Spectator"
-msgstr ""
+msgstr "Arvester"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:198
 #: ../../../../src/ui_fsmenu/singleplayersetupbox.cc:54
@@ -7665,7 +7665,7 @@ msgstr "Ho lesanv:"
 
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:70
 msgid "Host to connect:"
-msgstr ""
+msgstr "Ostiz da gennaskañ dioutañ:"
 
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:83
 msgid "Load previous host"
@@ -7677,7 +7677,7 @@ msgstr "Herberc'hiañ ur c'hoariadenn nevez"
 
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:142
 msgid "Host"
-msgstr "Herberc'hier"
+msgstr "Ostiz"
 
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:144
 msgid "State"
@@ -8113,7 +8113,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:126
 msgid "Enabled Add-Ons:"
-msgstr ""
+msgstr "Askouezhioù enaouet:"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:128
 msgid "Inactive Installed Add-Ons:"
@@ -10657,7 +10657,7 @@ msgstr ""
 #: ../../../../src/wui/gamedetails.cc:184
 #: ../../../../src/wui/mapdetails.cc:185
 msgid "Add-Ons:"
-msgstr ""
+msgstr "Askouezhioù:"
 
 #: ../../../../src/wui/gamedetails.cc:198
 msgid "Game data error:"
@@ -11416,7 +11416,7 @@ msgstr "Zoum"
 
 #: ../../../../src/wui/pinned_note.cc:76
 msgid "Change color…"
-msgstr "Cheñch liv..."
+msgstr "Cheñch liv…"
 
 #. * TRANSLATORS: day(s). Keep this as short as possible. Used in statistics.
 #: ../../../../src/wui/plot_area.cc:102
@@ -11736,7 +11736,7 @@ msgstr "UC"
 #. * TRANSLATORS: %1% is the number of players
 #: ../../../../src/wui/savegametable.cc:74
 msgid "H (%1%)"
-msgstr "H (%1%)"
+msgstr "O (%1%)"
 
 #. * TRANSLATORS: "Multiplayer" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 2 letters maximum.
@@ -11802,7 +11802,7 @@ msgstr "LC = Liesc'hoarier"
 #: ../../../../src/wui/savegametable.cc:190
 #: ../../../../src/wui/savegametable.cc:249
 msgid "H = Multiplayer (Host)"
-msgstr "H = (Herberc'hier) Liesc'hoarier"
+msgstr "O = (Ostiz) Liesc'hoarier"
 
 #: ../../../../src/wui/savegametable.cc:193
 #: ../../../../src/wui/savegametable.cc:252

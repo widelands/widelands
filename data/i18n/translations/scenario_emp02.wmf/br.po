@@ -88,7 +88,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:72
 msgid "Food For Your Miners"
-msgstr ""
+msgstr "Boued evit ho mengleuzierien"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Build a tavern to produce some food to sustain our miners."
@@ -487,7 +487,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:276
 msgid "7 days later…"
-msgstr "7 deiz warlerc'h..."
+msgstr "7 deiz warlerc'h…"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:280
 msgid "A Message"
