@@ -19,8 +19,11 @@ function full_headquarters(player, x, y)
       hq:set_wares(descr.name, 350)
    end
    for idx,descr in ipairs(game:get_tribe_description("barbarians").workers) do
-      hq:set_workers(descr.name, 50)
+      if descr.type_name == "worker" then
+         hq:set_workers(descr.name, 50)
+      end
    end
+   hq:set_soldiers({0,0,0,0}, 30)
 end
 
 function place_markets()
