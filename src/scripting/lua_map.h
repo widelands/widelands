@@ -92,7 +92,8 @@ RequestedWareWorker parse_wares_workers_list(lua_State*,
 RequestedWareWorker parse_wares_workers_counted(lua_State*,
                                                 const Widelands::TribeDescr&,
                                                 LuaMaps::InputMap*,
-                                                bool is_ware);
+                                                bool is_ware,
+                                                bool allow_ferry);
 
 // Sort functor to sort the owners claiming a field by their influence.
 inline int sort_claimers(const PlrInfluence& first, const PlrInfluence& second) {
