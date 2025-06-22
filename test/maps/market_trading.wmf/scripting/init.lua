@@ -19,7 +19,7 @@ function full_headquarters(player, x, y)
       hq:set_wares(descr.name, 350)
    end
    for idx,descr in ipairs(game:get_tribe_description("barbarians").workers) do
-      if descr.type_name == "worker" then
+      if descr.type_name ~= "soldier" and descr.type_name ~= "ferry" then
          hq:set_workers(descr.name, 50)
       end
    end
