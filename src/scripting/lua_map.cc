@@ -389,7 +389,8 @@ static int do_set_workers(lua_State* L, TMapObject* pi, const WaresWorkersMap& v
 
 	// setpoints is map of index:quantity
 	InputMap setpoints;
-	parse_wares_workers_counted(L, tribe, &setpoints, false, pi->descr().type() == Widelands::MapObjectType::WATERWAY);
+	parse_wares_workers_counted(
+	   L, tribe, &setpoints, false, pi->descr().type() == Widelands::MapObjectType::WATERWAY);
 
 	// c_workers is actual statistics, the map index:quantity
 	WaresWorkersMap c_workers;
@@ -1062,7 +1063,8 @@ RequestedWareWorker parse_wares_workers_counted(lua_State* L,
 			   std::make_pair(tribe.ware_index(luaL_checkstring(L, 2)), Widelands::WareWorker::wwWARE),
 			   luaL_checkuint32(L, 3)));
 		} else {
-			const Widelands::DescriptionIndex worker_index = tribe.worker_index(luaL_checkstring(L, 2));
+			const Widelands::DescriptionIndex worker_index =
+			   tribe.worker_index(luaL_checkstring(L, 2));
 			if (worker_index == Widelands::INVALID_INDEX) {
 				report_error(L, "Illegal worker %s", luaL_checkstring(L, 2));
 			}
@@ -1072,9 +1074,8 @@ RequestedWareWorker parse_wares_workers_counted(lua_State* L,
 			if (worker_index == tribe.ferry() && !allow_ferry) {
 				report_error(L, "This map object can not contain ferries");
 			}
-			ware_workers_list->insert(
-			   std::make_pair(std::make_pair(worker_index, Widelands::WareWorker::wwWORKER),
-			                  luaL_checkuint32(L, 3)));
+			ware_workers_list->insert(std::make_pair(
+			   std::make_pair(worker_index, Widelands::WareWorker::wwWORKER), luaL_checkuint32(L, 3)));
 		}
 	} else {
 		result = RequestedWareWorker::kList;
