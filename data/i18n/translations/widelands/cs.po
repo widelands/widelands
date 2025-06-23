@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-21 03:18+0000\n"
+"POT-Creation-Date: 2025-06-23 03:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Ondřej Itřech, 2020-2021,2024-2025\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -1580,7 +1580,7 @@ msgid ""
 msgstr "Tato mapa byla vytvořena automaticky prostřednictvím Generátoru náhodných map Widelands."
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:747
-#: ../../../../src/network/gamehost.cc:1662
+#: ../../../../src/network/gamehost.cc:1675
 #, c-format
 msgid "Computer %u"
 msgstr "Počítač %u"
@@ -3710,19 +3710,19 @@ msgstr "Ověřování mapy"
 msgid "Postloading map objects"
 msgstr "Donačítání prvků mapy"
 
-#: ../../../../src/network/gameclient.cc:163
-#: ../../../../src/network/gamehost.cc:561
+#: ../../../../src/network/gameclient.cc:171
+#: ../../../../src/network/gamehost.cc:574
 #: ../../../../src/ui_fsmenu/launch_spg.cc:174
 #: ../../../../src/wlapplication.cc:909
 msgid "Preparing game…"
 msgstr "Příprava hry…"
 
-#: ../../../../src/network/gameclient.cc:233
+#: ../../../../src/network/gameclient.cc:241
 #: ../../../../src/network/internet_gaming.cc:104
 msgid "Could not establish connection to host"
 msgstr "Nepodařilo se navázat spojení s hostitelem"
 
-#: ../../../../src/network/gameclient.cc:234
+#: ../../../../src/network/gameclient.cc:242
 #, c-format
 msgid ""
 "Widelands could not establish a connection to the given address. Either no "
@@ -3730,7 +3730,7 @@ msgid ""
 " you tried to connect."
 msgstr "Hra Widelands nemohla navázat spojení se zadanou adresou. Buďto není na síťovém portu TCP %u dostupný žádný Widelands server, nebo byl v době pokusu o připojení nedostupný."
 
-#: ../../../../src/network/gameclient.cc:817
+#: ../../../../src/network/gameclient.cc:832
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
@@ -3739,35 +3739,35 @@ msgstr[1] "Byly zjištěny %u nesoulady v rámci vybraných rozšíření:\n"
 msgstr[2] "Bylo zjištěno %u nesouladů v rámci vybraných rozšíření:\n"
 msgstr[3] "Bylo zjištěno %u nesouladů v rámci vybraných rozšíření:\n"
 
-#: ../../../../src/network/gameclient.cc:819
+#: ../../../../src/network/gameclient.cc:834
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
 msgstr "%1$s\n• ‘%2$s’ požadováno hostitelem a nebylo nalezeno"
 
-#: ../../../../src/network/gameclient.cc:822
+#: ../../../../src/network/gameclient.cc:837
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n• ‘%2$s’ instalováno ve verzi %3$s, ale hostitel používá %4$s"
 
-#: ../../../../src/network/gameclient.cc:989
+#: ../../../../src/network/gameclient.cc:1004
 msgid "/me ’s file failed md5 checksumming."
 msgstr "/me soubor neprošel kontrolním součtem md5."
 
-#: ../../../../src/network/gameclient.cc:1031
+#: ../../../../src/network/gameclient.cc:1046
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me zkontroloval přijatý soubor. Přestože kontrolní součet md5 souhlasí, nemohu se souborem pracovat."
 
-#: ../../../../src/network/gameclient.cc:1353
+#: ../../../../src/network/gameclient.cc:1368
 msgid "Disconnected"
 msgstr "Odpojen"
 
-#: ../../../../src/network/gameclient.cc:1354
+#: ../../../../src/network/gameclient.cc:1369
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -3889,7 +3889,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Widelands se nepodařilo spustit server.\nZřejmě je již spuštěn jiný proces, který využívá port serveru."
 
-#: ../../../../src/network/gamehost.cc:1921
+#: ../../../../src/network/gamehost.cc:1934
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
