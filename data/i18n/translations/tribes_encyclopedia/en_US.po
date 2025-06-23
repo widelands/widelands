@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-05 03:23+0000\n"
+"POT-Creation-Date: 2025-06-21 03:18+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: GunChleoc, 2016\n"
 "Language-Team: English (United States) (http://app.transifex.com/widelands/widelands/language/en_US/)\n"
@@ -16801,44 +16801,44 @@ msgid "Production"
 msgstr ""
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
-#: ../../../../data/tribes/scripting/help/building_help.lua:743
+#: ../../../../data/tribes/scripting/help/building_help.lua:744
 msgid "Health improvement:"
 msgstr ""
 
-#: ../../../../data/tribes/scripting/help/building_help.lua:744
-#: ../../../../data/tribes/scripting/help/building_help.lua:751
-#: ../../../../data/tribes/scripting/help/building_help.lua:758
-#: ../../../../data/tribes/scripting/help/building_help.lua:765
+#: ../../../../data/tribes/scripting/help/building_help.lua:745
+#: ../../../../data/tribes/scripting/help/building_help.lua:753
+#: ../../../../data/tribes/scripting/help/building_help.lua:761
+#: ../../../../data/tribes/scripting/help/building_help.lua:769
 msgid "From %1% to %2%"
 msgstr ""
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
-#: ../../../../data/tribes/scripting/help/building_help.lua:750
+#: ../../../../data/tribes/scripting/help/building_help.lua:752
 msgid "Attack training:"
 msgstr ""
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
-#: ../../../../data/tribes/scripting/help/building_help.lua:757
+#: ../../../../data/tribes/scripting/help/building_help.lua:760
 msgid "Defense training:"
 msgstr ""
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
-#: ../../../../data/tribes/scripting/help/building_help.lua:764
+#: ../../../../data/tribes/scripting/help/building_help.lua:768
 msgid "Evade training:"
 msgstr ""
 
 #. TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
-#: ../../../../data/tribes/scripting/help/building_help.lua:773
-#: ../../../../data/tribes/scripting/help/building_help.lua:790
-#: ../../../../data/tribes/scripting/help/building_help.lua:798
+#: ../../../../data/tribes/scripting/help/building_help.lua:778
+#: ../../../../data/tribes/scripting/help/building_help.lua:795
+#: ../../../../data/tribes/scripting/help/building_help.lua:803
 #: ../../../../data/tribes/scripting/help/ware_help.lua:60
 msgid "Ware produced:"
 msgstr ""
 
 #. TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a
 #. productionsite
-#: ../../../../data/tribes/scripting/help/building_help.lua:776
-#: ../../../../data/tribes/scripting/help/building_help.lua:801
+#: ../../../../data/tribes/scripting/help/building_help.lua:781
+#: ../../../../data/tribes/scripting/help/building_help.lua:806
 #: ../../../../data/tribes/scripting/help/ware_help.lua:63
 msgid "Wares produced:"
 msgstr ""
@@ -16847,18 +16847,18 @@ msgstr ""
 #. productionsite
 #. TRANSLATORS: Worker Encyclopedia: More than 1 worker recruited by a
 #. productionsite
-#: ../../../../data/tribes/scripting/help/building_help.lua:814
+#: ../../../../data/tribes/scripting/help/building_help.lua:819
 #: ../../../../data/tribes/scripting/help/worker_help.lua:56
 msgid "Workers recruited:"
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building - it hasn't been written
 #. yet.
-#: ../../../../data/tribes/scripting/help/building_help.lua:825
+#: ../../../../data/tribes/scripting/help/building_help.lua:830
 msgid "Calculation needed"
 msgstr ""
 
-#: ../../../../data/tribes/scripting/help/building_help.lua:829
+#: ../../../../data/tribes/scripting/help/building_help.lua:834
 msgid "Performance:"
 msgstr ""
 

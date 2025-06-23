@@ -521,37 +521,37 @@ msgstr "Ho soudarded a zo bet trec'h war an enebour en tour bihan."
 #: ../../../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:8
 msgctxt "barbarians_building"
 msgid "Barrier"
-msgstr ""
+msgstr "Kloued"
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:52
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your barrier."
-msgstr ""
+msgstr "Ho soudarded o deus aloubet ho kloued."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:54
 msgctxt "barbarians_building"
 msgid "Your barrier discovered an aggressor."
-msgstr ""
+msgstr "Dizoloet eo bet un enebour gant ho kloued."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:56
 msgctxt "barbarians_building"
 msgid "Your barrier is under attack."
-msgstr ""
+msgstr "O vezañ taget emañ ho kloued."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:58
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr ""
+msgstr "An enebour a zo bet trec'h war ho soudarded er gloued."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:60
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr ""
+msgstr "Ho soudarded a zo bet trec'h war an enebour er gloued."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:8
@@ -701,37 +701,37 @@ msgstr "Ho soudarded a zo bet trec'h war an enebour en tour."
 #: ../../../../data/tribes/buildings/militarysites/empire/barrier/init.lua:8
 msgctxt "empire_building"
 msgid "Barrier"
-msgstr ""
+msgstr "Kloued"
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/barrier/init.lua:45
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your barrier."
-msgstr ""
+msgstr "Ho soudarded o deus aloubet ho kloued."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/barrier/init.lua:47
 msgctxt "empire_building"
 msgid "Your barrier discovered an aggressor."
-msgstr ""
+msgstr "Dizoloet eo bet un enebour gant ho kloued."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/barrier/init.lua:49
 msgctxt "empire_building"
 msgid "Your barrier is under attack."
-msgstr ""
+msgstr "O vezañ taget emañ ho kloued."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/barrier/init.lua:51
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr ""
+msgstr "An enebour a zo bet trec'h war ho soudarded er gloued."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/barrier/init.lua:53
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr ""
+msgstr "Ho soudarded a zo bet trec'h war an enebour er gloued."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:8
@@ -1025,37 +1025,37 @@ msgstr "Ho soudarded a zo bet trec'h war an enebour er rakpost."
 #: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:8
 msgctxt "frisians_building"
 msgid "Sentinel"
-msgstr ""
+msgstr "Garid"
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:51
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your sentinel."
-msgstr ""
+msgstr "Ho soudarded o deus aloubet ho karid."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:53
 msgctxt "frisians_building"
 msgid "Your sentinel discovered an aggressor."
-msgstr ""
+msgstr "Dizoloet eo bet un enebour gant ho karid."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:55
 msgctxt "frisians_building"
 msgid "Your sentinel is under attack."
-msgstr ""
+msgstr "O vezañ taget emañ ho karid."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:57
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the sentinel."
-msgstr ""
+msgstr "An enebour a zo bet trec'h war ho soudarded er garid."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:59
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the sentinel."
-msgstr ""
+msgstr "Ho soudarded a zo bet trec'h war an enebour er garid."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:8
@@ -1313,7 +1313,7 @@ msgstr "N'eus bet kavet tachenn zieub ebet da blantañ e had enni gant ar feurme
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
 msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
-msgstr ""
+msgstr "Poazher gwrizienn gasava"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
@@ -1338,12 +1338,12 @@ msgstr "produiñ glaou-koad"
 #: ../../../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:8
 msgctxt "amazons_building"
 msgid "Chocolate Brewery"
-msgstr ""
+msgstr "Breserezh chokolad"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing chocolate because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:55
 msgid "brewing chocolate"
-msgstr ""
+msgstr "bresañ chokolad"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:8
@@ -1372,18 +1372,18 @@ msgstr "N'eus bet kavet tachenn zieub ebet da blantañ e had enni gant ar feurme
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:8
 msgctxt "amazons_building"
 msgid "Dressmakery"
-msgstr ""
+msgstr "Atalier fardañ saeoù"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing a tunic because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:74
 msgid "sewing a tunic"
-msgstr ""
+msgstr "gwriat un doneg"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing a light wooden armor
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:86
 msgid "making a light wooden armor"
-msgstr ""
+msgstr "oberiañ un houarnwisk koad skañv"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a wooden helmet because
 #. ...
@@ -1395,7 +1395,7 @@ msgstr "oberiañ un tokarn koad"
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:110
 msgid "sewing a warrior’s coat"
-msgstr ""
+msgstr "gwriat ur vantell brezelour "
 
 #. TRANSLATORS: Completed/Skipped/Did not start making sturdy boots because
 #. ...
@@ -1417,7 +1417,7 @@ msgstr ""
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:158
 msgid "making a padded vest"
-msgstr ""
+msgstr "oberiañ ur chupenn vourellet"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a padded protector
 #. because ...
@@ -1429,13 +1429,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/amazons/ferry_yard/init.lua:8
 msgctxt "amazons_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Karrdi ar bigi"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:8
 msgctxt "amazons_building"
 msgid "Food Preserver"
-msgstr ""
+msgstr "Mirlec'h boued"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:59
@@ -1446,7 +1446,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/empire/tavern/init.lua:71
 #: ../../../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:63
 msgid "preparing a ration"
-msgstr ""
+msgstr "fardañ ul lodad"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:8
@@ -1461,13 +1461,13 @@ msgstr "Forn"
 #: ../../../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:103
 #: ../../../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:113
 msgid "smelting gold"
-msgstr ""
+msgstr "teuziñ aour"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:8
 msgctxt "amazons_building"
 msgid "Gardening Center"
-msgstr ""
+msgstr "Kreizenn liorzhañ"
 
 #. TRANSLATORS: Completed/Skipped/Did not start enhancing the fertility of
 #. land because ...
@@ -1499,7 +1499,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:72
 msgid "mining gold"
-msgstr ""
+msgstr "eztennañ aour"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:66
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:83
@@ -1537,7 +1537,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Hunter-Gatherer’s Hut"
-msgstr ""
+msgstr "Lochenn ar chaseour-dastumer"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:39
@@ -1587,7 +1587,7 @@ msgstr "o tuta ur soudard"
 #: ../../../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Jungle Preserver’s Hut"
-msgstr ""
+msgstr "Lochenn mirer ar janglenn"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:48
@@ -1602,12 +1602,12 @@ msgstr "plantañ gwez"
 #: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Liana Cutter’s Hut"
-msgstr ""
+msgstr "Lochenn an troc'her lianennoù"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making clay because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:39
 msgid "cutting lianas"
-msgstr ""
+msgstr "troc'hañ lianennoù"
 
 #. TRANSLATORS: Short for "No Trees to cut lianas" for clay pits
 #: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:49
@@ -1621,7 +1621,7 @@ msgstr "Gwezenn ebet"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:50
 msgid "No Tree to Cut Lianas"
-msgstr ""
+msgstr "Gwezenn ebet da droc'hañ lianennoù diouti"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:51
 msgctxt "amazons_building"
@@ -1629,19 +1629,19 @@ msgid ""
 "The liana cutter working at this site can’t find any tree in her work area. "
 "You should consider dismantling or destroying the building or building a "
 "jungle preserver’s hut."
-msgstr ""
+msgstr "N'eus bet kavet gwezenn ebet en e dachenn-labour gant an troc'her lianennoù a labour el lochenn-mañ. Soñjit e distruj pe divontañ ar savadur, pe e sevel lochenn ur mirer janglenn."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Rare Tree Cutter’s Hut"
-msgstr ""
+msgstr "Lochenn an troc'her koad ral"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:42
 msgid "harvesting balsa"
-msgstr ""
+msgstr "dastum balza"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
@@ -1653,19 +1653,19 @@ msgstr "dastum kaoutchoug"
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:66
 msgid "harvesting ironwood"
-msgstr ""
+msgstr "dastum koad houarn"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:8
 msgctxt "amazons_building"
 msgid "Rare Tree Plantation"
-msgstr ""
+msgstr "Plantadeg gwez ral"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:56
 msgid "planting balsa tree"
-msgstr ""
+msgstr "plantañ gwez-valza"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
@@ -1677,7 +1677,7 @@ msgstr "plantañ gwez-kaoutchoug"
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:82
 msgid "planting ironwood tree"
-msgstr ""
+msgstr "plntañ ur wezenn goad houarn"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua:8
@@ -1694,7 +1694,7 @@ msgstr "kordennañ"
 #: ../../../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Lochenn ar sklêrijenner"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:41
@@ -1708,7 +1708,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:52
 #: ../../../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:64
 msgid "scouting"
-msgstr ""
+msgstr "sklêrijennañ"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:8
@@ -1730,7 +1730,7 @@ msgstr "sevel ul lestr"
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:8
 msgctxt "amazons_building"
 msgid "Stone Workshop"
-msgstr ""
+msgstr "Atalier benañ mein"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:87
@@ -1739,7 +1739,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:218
 #: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:220
 msgid "making a shovel"
-msgstr ""
+msgstr "oberiañ ur bal"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1755,12 +1755,12 @@ msgstr "oberiañ ur vouc'hal"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:196
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:179
 msgid "making a pick"
-msgstr ""
+msgstr "oberiañ ur bigell"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a machete because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:123
 msgid "making a machete"
-msgstr ""
+msgstr "oberiañ ur machete"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1789,18 +1789,18 @@ msgstr "oberiañ ur gizell"
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:171
 #: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:184
 msgid "making needles"
-msgstr ""
+msgstr "oberiañ nadozioù"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a stone bowl because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:183
 msgid "making a stone bowl"
-msgstr ""
+msgstr "oberiañ ur volenn vaen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making firestones because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:195
 msgid "making firestones"
-msgstr ""
+msgstr "oberiañ mein-tan"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a wooden spear because
 #. ...
@@ -1818,7 +1818,7 @@ msgstr ""
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:231
 msgid "making a hardened spear"
-msgstr ""
+msgstr "oberiañ ur goaf kalet"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:8
@@ -1852,7 +1852,7 @@ msgctxt "amazons_building"
 msgid ""
 "The stonecutter working at this stonecutter’s hut can’t find any rocks in "
 "her work area."
-msgstr ""
+msgstr "N'eus bet kavet maen ebet en e dachenn-labour gant ar bener-mein a labour el lochenn-mañ."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:8
@@ -1919,7 +1919,7 @@ msgstr "desevel tapired"
 #: ../../../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Water Gatherer’s Hut"
-msgstr ""
+msgstr "Lochenn an douraer"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:55
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:58
@@ -1942,13 +1942,13 @@ msgctxt "amazons_building"
 msgid ""
 "The carrier working at this water gatherer’s hut can’t find any water in its"
 " vicinity."
-msgstr ""
+msgstr "N'eus ket bet kavet dour en trowardroioù gant an degaser a labour el lochenn zouraer-mañ."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:8
 msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
-msgstr ""
+msgstr "Teltenn ar gward-maezioù"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
@@ -1976,7 +1976,7 @@ msgstr "Lochenn ar c'hoadour"
 #: ../../../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:40
 #: ../../../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:47
 msgid "felling trees"
-msgstr ""
+msgstr "diskar gwez"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:66
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:51
@@ -1992,31 +1992,31 @@ msgid ""
 "The woodcutter working at this woodcutter’s hut can’t find any trees in her "
 "work area. You should consider dismantling or destroying the building or "
 "building a jungle preserver’s hut."
-msgstr ""
+msgstr "N'eus bet kavet gwezenn ebet en e dachenn-labour gant ar c'hoadour a labour el lochenn-mañ. Soñjit e distruj pe divontañ ar savadur, pe e sevel lochenn ur mirer janglenn."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:170
 msgctxt "atlanteans_building"
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Govel houarnwiskoù"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:223
 msgid "forging a steel shield"
-msgstr ""
+msgstr "goveliañ ur skoed dir"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:235
 msgid "forging an advanced shield"
-msgstr ""
+msgstr "goveliañ ur skoed araokaet"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/bakery/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Bakery"
-msgstr "Ti ar baraer"
+msgstr "Ti-bara"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/bakery/init.lua:57
@@ -2028,7 +2028,7 @@ msgstr "fardañ bara"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Barracks"
-msgstr ""
+msgstr "Kazarn"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:56
@@ -2040,25 +2040,25 @@ msgstr "o tuta ur soudard"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Blackroot Farm"
-msgstr ""
+msgstr "Atant gwrizienn-zu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting blackroot because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:61
 msgid "planting blackroot"
-msgstr ""
+msgstr "plantañ gwrizienn-zu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:72
 msgid "harvesting blackroot"
-msgstr ""
+msgstr "dastum gwrizienn-zu"
 
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:86
 msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer working at this blackroot farm has no cleared soil to "
 "plant his seeds."
-msgstr ""
+msgstr "N'eus bet kavet tachenn zieub ebet da blantañ e had enni gant ar feurmer gwrizienn-zu a labour en atant-mañ."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:8
@@ -2182,7 +2182,7 @@ msgstr "N'eus bet kavet tachenn zieub ebet da blantañ e had enni gant ar feurme
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Karrdi ar bigi"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:8
@@ -2217,7 +2217,7 @@ msgstr ""
 
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
 msgid "The fishing grounds are full"
-msgstr ""
+msgstr "An tachennoù pesketa a zo leun."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:8
@@ -2388,7 +2388,7 @@ msgstr "malañ maiz"
 #. TRANSLATORS: Completed/Skipped/Did not start grinding blackroot because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:80
 msgid "grinding blackroot"
-msgstr ""
+msgstr "malañ gwrizienn-zu"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:8
@@ -2409,7 +2409,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his work "
 "area."
-msgstr ""
+msgstr "N'eus bet kavet maen ebet en e dachenn-labour gant ar bener-mein a labour er vengleuz-mañ."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/sawmill/init.lua:8
@@ -2427,7 +2427,7 @@ msgstr "heskennañ koad"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Scout’s House"
-msgstr ""
+msgstr "Ti ar sklêrijenner"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:8
@@ -2439,7 +2439,7 @@ msgstr "Chanter-bigi"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Smelting Works"
-msgstr ""
+msgstr "Teuzerezh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:63
@@ -2451,13 +2451,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:85
 #: ../../../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:99
 msgid "smelting iron"
-msgstr ""
+msgstr "teuziñ houarn"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Smokery"
-msgstr ""
+msgstr "Mogederezh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:70
@@ -2482,7 +2482,7 @@ msgstr "Atant kevnid"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Toolsmithy"
-msgstr ""
+msgstr "Govel ostilhoù"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
@@ -2491,13 +2491,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:101
 #: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:100
 msgid "making a bread paddle"
-msgstr ""
+msgstr "oberiañ ur plankenn vara"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:82
 msgid "making a pair of buckets"
-msgstr ""
+msgstr "oberiañ un daouad sailhoù"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:95
@@ -2505,7 +2505,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:114
 #: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:124
 msgid "making fire tongs"
-msgstr ""
+msgstr "oberiañ gevelioù"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
@@ -2517,19 +2517,19 @@ msgstr "ober ur roued pesketa"
 #. TRANSLATORS: Completed/Skipped/Did not start making a hook pole because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:134
 msgid "making a hook pole"
-msgstr ""
+msgstr "oberiañ ur c'hrog"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:147
 msgid "making a hunting bow"
-msgstr ""
+msgstr "oberiañ ur wareg chaseal"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making milking tongs because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:160
 msgid "making milking tongs"
-msgstr ""
+msgstr "oberiañ ur waskell-c'horo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:186
@@ -2555,31 +2555,31 @@ msgstr "Govel armoù"
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:66
 msgid "forging a light trident"
-msgstr ""
+msgstr "goveliañ un tridant skañv"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long trident because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:81
 msgid "forging a long trident"
-msgstr ""
+msgstr "goveliañ un tridant hir"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel trident
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:96
 msgid "forging a steel trident"
-msgstr ""
+msgstr "goveliañ un tridant dir"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a double trident
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:111
 msgid "forging a double trident"
-msgstr ""
+msgstr "goveliañ un tridant doubl"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:126
 msgid "forging a heavy double trident"
-msgstr ""
+msgstr "goveliañ un tridant doubl pounner"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:8
@@ -2591,18 +2591,18 @@ msgstr "Gwiaderezh"
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:63
 msgid "weaving spidercloth"
-msgstr ""
+msgstr "stammañ gwiad kevnid"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:76
 msgid "tailoring a tabard"
-msgstr ""
+msgstr "gwriat un tabar"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:89
 msgid "tailoring a golden tabard"
-msgstr ""
+msgstr "gwriat un tabar alaouret"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:8
@@ -2627,7 +2627,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr ""
+msgstr "N'eus bet kavet gwezenn ebet en e dachenn-labour gant ar c'hoadour a labour en ti-mañ. Soñjit e distruj pe divontañ ar savadur, pe e sevel un ti foricher."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:8
@@ -2657,19 +2657,19 @@ msgstr "goveliañ un hach ledan"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/bakery/init.lua:8
 msgctxt "barbarians_building"
 msgid "Bakery"
-msgstr "Ti ar baraer"
+msgstr "Ti-bara"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/bakery/init.lua:54
 msgctxt "barbarians_building"
 msgid "baking pitta bread"
-msgstr ""
+msgstr "fardañ bara-pita"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:8
 msgctxt "barbarians_building"
 msgid "Barracks"
-msgstr ""
+msgstr "Kazarn"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:54
@@ -2706,7 +2706,7 @@ msgstr "Breserezh"
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/brewery/init.lua:38
 msgid "brewing strong beer"
-msgstr ""
+msgstr "bresañ bier kreñv"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:8
@@ -2718,7 +2718,7 @@ msgstr "Atant chatal"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:49
 msgctxt "barbarians_building"
 msgid "rearing cattle"
-msgstr ""
+msgstr "desevel chatal"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:8
@@ -2788,7 +2788,7 @@ msgstr "N'eus bet kavet tachenn zieub ebet da blantañ e had enni gant ar feurme
 #: ../../../../data/tribes/buildings/productionsites/barbarians/ferry_yard/init.lua:8
 msgctxt "barbarians_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Karrdi ar bigi"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:8
@@ -2970,7 +2970,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
 "work area. You should consider dismantling or destroying the building or "
 "building a ranger’s hut."
-msgstr ""
+msgstr "N'eus bet kavet gwezenn ebet en e dachenn-labour gant ar bucher a labour en ti-mañ. Soñjit e distruj pe divontañ ar savadur, pe e sevel ul lochenn forester."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:8
@@ -2997,7 +2997,7 @@ msgstr "oberiañ ur goaf chaseal"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:8
 msgctxt "barbarians_building"
 msgid "Micro Brewery"
-msgstr ""
+msgstr "Mikrobreserezh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:65
@@ -3017,13 +3017,13 @@ msgstr "Mengleuz"
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr ""
+msgstr "N'eus bet kavet maen ebet en e dachenn-labour gant ar bener-mein a labour er vengleuz-mañ."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:8
 msgctxt "barbarians_building"
 msgid "Ranger’s Hut"
-msgstr ""
+msgstr "Lochenn ar forester"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:8
@@ -3054,7 +3054,7 @@ msgstr "N'eus bet kavet tachenn zieub ebet da blantañ e had enni gant al liorzh
 #: ../../../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:8
 msgctxt "barbarians_building"
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Lochenn ar sklêrijenner"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:8
@@ -3066,7 +3066,7 @@ msgstr "Chanter-bigi"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:8
 msgctxt "barbarians_building"
 msgid "Smelting Works"
-msgstr ""
+msgstr "Teuzerezh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/tavern/init.lua:8
@@ -3125,18 +3125,18 @@ msgstr "N'eus ket bet kavet dour er puñs-mañ gant an degaser a labour ennañ."
 #: ../../../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:8
 msgctxt "barbarians_building"
 msgid "Wood Hardener"
-msgstr ""
+msgstr "Kaletaer koad"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:65
 msgid "hardening wood"
-msgstr ""
+msgstr "kaletaat koad"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:8
 msgctxt "empire_building"
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Govel houarnwiskoù"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor
 #. because ...
@@ -3148,7 +3148,7 @@ msgstr "goveliañ un houarnwisk"
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:107
 msgid "forging a suit of chain armor"
-msgstr ""
+msgstr "goveliañ ur sae-vailhek"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor
 #. because ...
@@ -3160,7 +3160,7 @@ msgstr "goveliañ un houarnwisk aouret"
 #: ../../../../data/tribes/buildings/productionsites/empire/bakery/init.lua:8
 msgctxt "empire_building"
 msgid "Bakery"
-msgstr "Ti ar baraer"
+msgstr "Ti-bara"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/bakery/init.lua:64
@@ -3172,7 +3172,7 @@ msgstr "fardañ bara"
 #: ../../../../data/tribes/buildings/productionsites/empire/barracks/init.lua:8
 msgctxt "empire_building"
 msgid "Barracks"
-msgstr ""
+msgstr "Kazarn"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/barracks/init.lua:57
@@ -3223,7 +3223,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:8
 msgctxt "empire_building"
 msgid "Donkey Farm"
-msgstr "Atant azened"
+msgstr "Atant ezen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:55
@@ -3247,7 +3247,7 @@ msgstr "N'eus bet kavet tachenn zieub ebet da blantañ e had enni gant ar feurme
 #: ../../../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:8
 msgctxt "empire_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Karrdi ar bigi"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:8
@@ -3354,7 +3354,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr ""
+msgstr "N'eus bet kavet gwezenn ebet en e dachenn-labour gant ar bucher a labour en ti-mañ. Soñjit e distruj pe divontañ ar savadur, pe e sevel un ti foricher."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:8
@@ -3417,7 +3417,7 @@ msgstr "malañ gwinizh"
 #: ../../../../data/tribes/buildings/productionsites/empire/piggery/init.lua:8
 msgctxt "empire_building"
 msgid "Piggery"
-msgstr ""
+msgstr "Atant moc'h"
 
 #. TRANSLATORS: Completed/Skipped/Did not start raising pigs because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/piggery/init.lua:57
@@ -3439,7 +3439,7 @@ msgstr "eztennañ marbr"
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr ""
+msgstr "N'eus bet kavet maen ebet en e dachenn-labour gant ar bener-mein a labour er vengleuz-mañ."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:8
@@ -3451,7 +3451,7 @@ msgstr "Heskenndi"
 #: ../../../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:8
 msgctxt "empire_building"
 msgid "Scout’s House"
-msgstr ""
+msgstr "Ti ar sklêrijenner"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/sheepfarm/init.lua:8
@@ -3474,19 +3474,19 @@ msgstr "Chanter-bigi"
 #: ../../../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:8
 msgctxt "empire_building"
 msgid "Smelting Works"
-msgstr ""
+msgstr "Teuzerezh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/stonemasons_house/init.lua:8
 msgctxt "empire_building"
 msgid "Stonemason’s House"
-msgstr ""
+msgstr "Ti ar bener-mein"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/stonemasons_house/init.lua:57
 msgid "sculpting a marble column"
-msgstr ""
+msgstr "kizellañ ur golonenn marbr"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/tavern/init.lua:8
@@ -3510,26 +3510,26 @@ msgstr "oberiañ ur baner"
 #: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:8
 msgctxt "empire_building"
 msgid "Vineyard"
-msgstr ""
+msgstr "Gwinieg"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting grapevines because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:67
 msgid "planting grapevines"
-msgstr ""
+msgstr "plantañ gwiniennoù"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:78
 msgid "harvesting grapes"
-msgstr ""
+msgstr "dastum rezin"
 
 #: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:92
 msgctxt "empire_building"
 msgid ""
 "The vine farmer working at this vineyard has no cleared soil to plant his "
 "grapevines."
-msgstr ""
+msgstr "N'eus bet kavet tachenn zieub ebet da blantañ e winiennoù enni gant ar gwiniegour a labour er winieg-mañ."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:8
@@ -3552,13 +3552,13 @@ msgstr "goveliañ ur goaf"
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:114
 msgid "forging an advanced spear"
-msgstr ""
+msgstr "goveliañ ur goaf araokaet"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:129
 msgid "forging a heavy spear"
-msgstr ""
+msgstr "goveliañ ur goaf pounner"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a war spear because
 #. ...
@@ -3587,7 +3587,7 @@ msgstr "N'eus ket bet kavet dour er puñs-mañ gant an degaser a labour ennañ."
 #: ../../../../data/tribes/buildings/productionsites/empire/winery/init.lua:8
 msgctxt "empire_building"
 msgid "Winery"
-msgstr ""
+msgstr "Gwaskerez-gwin"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making wine because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/winery/init.lua:59
@@ -3598,7 +3598,7 @@ msgstr "fardañ gwin"
 #: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:8
 msgctxt "frisians_building"
 msgid "Aqua Farm"
-msgstr ""
+msgstr "Atant pesked"
 
 #: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:94
 #: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:102
@@ -3616,13 +3616,13 @@ msgid ""
 "area. Please make sure there is a working clay pit nearby and the aqua farm "
 "is supplied with all needed wares, or consider dismantling or destroying "
 "this building."
-msgstr ""
+msgstr "N'eus bet kavet poull-besketa dieub ebet en e dachenn labour gant ar pesketaer a labour en atant-mañ. En em asurit ez eus un toull-pri oberiat nepell hag e vez pourvezet ar marc’hadourezhioù he deus ezhomm d'an atant pesked, pe soñjit e distruj pe divontañ ar savadur."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:8
 msgctxt "frisians_building"
 msgid "Large Armor Smithy"
-msgstr ""
+msgstr "Govel houarnwiskoù bras"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broadsword because
 #. ...
@@ -3646,7 +3646,7 @@ msgstr "goveliañ un tokarn aour"
 #: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:8
 msgctxt "frisians_building"
 msgid "Small Armor Smithy"
-msgstr ""
+msgstr "Govel houarnwiskoù bihan"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a short sword because
 #. ...
@@ -3664,13 +3664,13 @@ msgstr "goveliañ ur c'hleze hir"
 #: ../../../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:8
 msgctxt "frisians_building"
 msgid "Bakery"
-msgstr "Ti ar baraer"
+msgstr "Ti-bara"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/barracks/init.lua:8
 msgctxt "frisians_building"
 msgid "Barracks"
-msgstr ""
+msgstr "Kazarn"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/barracks/init.lua:67
@@ -3698,24 +3698,24 @@ msgid ""
 "The beekeeper working at this beekeeper’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr ""
+msgstr "N'eus bet kavet park pe bodenn ebet o vleuniañ en e dachenn labour gant ar gwenaner a labour en ti-mañ. Soñjit e sevel un atant pe un atant hugennoù ouzhpenn nepell, pe e distruj pe divontañ ar savadur."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:8
 msgctxt "frisians_building"
 msgid "Berry Farm"
-msgstr ""
+msgstr "Atant hugennoù"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting bushes because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:50
 msgid "planting bushes"
-msgstr ""
+msgstr "plantañ bod"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:8
 msgctxt "frisians_building"
 msgid "Blacksmithy"
-msgstr ""
+msgstr "Govel-houarn"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
@@ -3738,12 +3738,12 @@ msgstr "Breserezh"
 #: ../../../../data/tribes/buildings/productionsites/frisians/brick_kiln/init.lua:8
 msgctxt "frisians_building"
 msgid "Brick Kiln"
-msgstr ""
+msgstr "Brikennerezh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start burning bricks because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/brick_kiln/init.lua:66
 msgid "burning bricks"
-msgstr ""
+msgstr "poazhañ brikez"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:8
@@ -3773,7 +3773,7 @@ msgid ""
 "clay ponds in his work area. Please make sure there is a working clay pit "
 "nearby and the charcoal burner’s house is supplied with all needed wares, or"
 " consider dismantling or destroying this building."
-msgstr ""
+msgstr "N'eus bet kavet poull-pri ebet en e dachenn labour gant ar glaouer a labour en ti-mañ. En em asurit ez eus un toull-pri oberiat nepell hag e vez pourvezet ar marc’hadourezhioù en deus ezhomm d'an ti glaouer, pe soñjit e distruj pe divontañ ar savadur."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:8
@@ -3785,21 +3785,21 @@ msgstr "Glaoueri"
 #: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:8
 msgctxt "frisians_building"
 msgid "Clay Pit"
-msgstr ""
+msgstr "Toull-pri"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making clay because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:61
 msgid "making clay"
-msgstr ""
+msgstr "meskañ pri"
 
 #. TRANSLATORS: Short for "No Level Ground" for clay pits
 #: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:78
 msgid "No Ground"
-msgstr ""
+msgstr "Tachenn ebet"
 
 #: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:79
 msgid "No Level Ground"
-msgstr ""
+msgstr "N'eus tachenn ebet a live"
 
 #: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:80
 msgctxt "frisians_building"
@@ -3807,7 +3807,7 @@ msgid ""
 "The clay digger working at this clay pit can’t find any level ground in his "
 "work area. Consider dismantling this clay pit and rebuilding it somewhere "
 "else."
-msgstr ""
+msgstr "N'eus bet kavet tachenn ebet a-live en e dachenn-labour gant ar c'hleuzer pri a labour en toull-pri-mañ. Soñjit e divontañ an toull-pri-mañ hag e sevel lec’h all."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:8
@@ -3840,12 +3840,12 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:8
 msgctxt "frisians_building"
 msgid "Fruit Collector’s House"
-msgstr ""
+msgstr "Ti an dastumer frouezh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:50
 msgid "gathering berries"
-msgstr ""
+msgstr "dastum hugennoù"
 
 #: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:63
 msgid "No Bushes"
@@ -3853,7 +3853,7 @@ msgstr "Bodenn ebet"
 
 #: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:64
 msgid "Out of Berries"
-msgstr ""
+msgstr "N'eus hugenn ebet ken"
 
 #: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:65
 msgctxt "frisians_building"
@@ -3861,22 +3861,22 @@ msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
 "berry bushes in his work area. You should consider building another berry "
 "farm, or dismantling or destroying this building."
-msgstr ""
+msgstr "N'eus bet kavet bodenn-hugennoù ebet en e dachenn labour gant an dastumer frouezh a labour en ti-mañ. Soñjit e sevel un atant hugennoù ouzhpenn, pe e distruj pe divontañ ar savadur."
 
 #: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Diker’s House"
-msgstr ""
+msgstr "Ti ar chaoserier"
 
 #. TRANSLATORS: Completed/Skipped/Did not start diking because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:62
 msgid "diking"
-msgstr ""
+msgstr "chaoseriañ"
 
 #. TRANSLATORS: Completed/Skipped/Did not start building a dike because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:72
 msgid "building a dike"
-msgstr ""
+msgstr "sevel ur chaoser"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:8
@@ -3888,17 +3888,17 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:8
 msgctxt "frisians_building"
 msgid "Farm"
-msgstr "Ti-feurm"
+msgstr "Atant"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:84
 msgid "planting barley"
-msgstr ""
+msgstr "plantañ heiz"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:95
 msgid "harvesting barley"
-msgstr ""
+msgstr "dastum heiz"
 
 #: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:111
 msgctxt "frisians_building"
@@ -3910,7 +3910,7 @@ msgstr "N'eus bet kavet tachenn zieub ebet da blantañ e had enni gant ar feurme
 #: ../../../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:8
 msgctxt "frisians_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Karrdi ar bigi"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:8
@@ -3968,13 +3968,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:8
 msgctxt "frisians_building"
 msgid "Honey Bread Bakery"
-msgstr ""
+msgstr "Ti-bara mel"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking honey bread because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:64
 #: ../../../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:76
 msgid "baking honey bread"
-msgstr ""
+msgstr "fardañ bara mel"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:8
@@ -4039,32 +4039,32 @@ msgstr "Mengleuz"
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr ""
+msgstr "N'eus bet kavet maen ebet en e dachenn-labour gant ar bener-mein a labour er vengleuz-mañ."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:8
 msgctxt "frisians_building"
 msgid "Recycling Center"
-msgstr ""
+msgstr "Kreizenn adaozañ"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling fur because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:88
 msgctxt "frisians_building"
 msgid "recycling fur"
-msgstr ""
+msgstr "adaozañ feur"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:100
 msgctxt "frisians_building"
 msgid "recycling iron"
-msgstr ""
+msgstr "adaozañ houarn"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron and gold
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:112
 msgctxt "frisians_building"
 msgid "recycling iron and gold"
-msgstr ""
+msgstr "adaozañ houarn hag aour"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:8
@@ -4089,14 +4089,14 @@ msgstr "Atant kirvi-erc'h"
 #: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:77
 msgctxt "frisians_building"
 msgid "rearing reindeer"
-msgstr ""
+msgstr "desevel kirvi-erc'h"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing fur because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:89
 #: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:101
 msgctxt "frisians_building"
 msgid "producing fur"
-msgstr ""
+msgstr "produiñ feur"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:8
@@ -4129,18 +4129,18 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:8
 msgctxt "frisians_building"
 msgid "Scout’s House"
-msgstr ""
+msgstr "Ti ar sklêrijenner"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/sewing_room/init.lua:8
 msgctxt "frisians_building"
 msgid "Sewing Room"
-msgstr ""
+msgstr "Sal-gwriat"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing fur garment because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/sewing_room/init.lua:75
 msgid "sewing fur garment"
-msgstr ""
+msgstr "gwriat ur gwiskamant feur"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:8
@@ -4152,7 +4152,7 @@ msgstr "Chanter-bigi"
 #: ../../../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:8
 msgctxt "frisians_building"
 msgid "Smokery"
-msgstr ""
+msgstr "Mogederezh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:8
@@ -4164,13 +4164,13 @@ msgstr "Stal ar c'hemener"
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:64
 msgid "sewing studded fur garment"
-msgstr ""
+msgstr "gwriat ur gwiskamant feur bourellet"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing golden fur garment
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:76
 msgid "sewing golden fur garment"
-msgstr ""
+msgstr "gwriat ur gwiskamant fur alaouret"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:8
@@ -4182,12 +4182,12 @@ msgstr "Tavarn"
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:91
 msgid "preparing only one ration"
-msgstr ""
+msgstr "fardañ ul lodad hepken"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing rations because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:105
 msgid "preparing rations"
-msgstr ""
+msgstr "fardañ lodadoù"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/weaving_mill/init.lua:8
@@ -4223,7 +4223,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr ""
+msgstr "N'eus bet kavet gwezenn ebet en e dachenn-labour gant ar c'hoadour a labour en ti-mañ. Soñjit e distruj pe divontañ ar savadur, pe e sevel un ti foricher."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:8
@@ -4313,7 +4313,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:8
 msgctxt "amazons_building"
 msgid "Warriors’ Gathering"
-msgstr ""
+msgstr "Bodadeg ar vrezelourien"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:79
@@ -4745,7 +4745,7 @@ msgstr "Penngarter"
 #: ../../../../data/tribes/buildings/warehouses/empire/headquarters_shipwreck/init.lua:8
 msgctxt "empire_building"
 msgid "Headquarters Shipwreck"
-msgstr ""
+msgstr "Peñse penngarter"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/warehouses/empire/port/init.lua:8
@@ -4803,47 +4803,47 @@ msgstr "Ludu"
 #: ../../../../data/tribes/immovables/barleyfield/harvested/init.lua:8
 msgctxt "immovable"
 msgid "Barley Field (harvested)"
-msgstr ""
+msgstr "Park heiz (dastumet)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/barleyfield/medium/init.lua:8
 msgctxt "immovable"
 msgid "Barley Field (medium)"
-msgstr ""
+msgstr "Park heiz (etre)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/barleyfield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Barley Field (ripe)"
-msgstr ""
+msgstr "Park heiz (azv)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/barleyfield/small/init.lua:8
 msgctxt "immovable"
 msgid "Barley Field (small)"
-msgstr ""
+msgstr "Park heiz (bihan)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/barleyfield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Barley Field (tiny)"
-msgstr ""
+msgstr "Park heiz (munut)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/blueberry/medium/init.lua:9
 msgid "Blueberry Bush (medium)"
-msgstr ""
+msgstr "Bodenn-lus (etre)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/blueberry/ripe/init.lua:9
 msgid "Blueberry Bush (ripe)"
-msgstr ""
+msgstr "Bodenn-lus (azv)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/blueberry/small/init.lua:9
 msgid "Blueberry Bush (small)"
-msgstr ""
+msgstr "Bodenn-lus (bihan)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/blueberry/tiny/init.lua:9
 msgid "Blueberry Bush (tiny)"
-msgstr ""
+msgstr "Bodenn-lus (munut)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/currant_black/medium/init.lua:9
 msgid "Black Currant (medium)"
@@ -4879,19 +4879,19 @@ msgstr ""
 
 #: ../../../../data/tribes/immovables/berry_bushes/desert_hackberry/medium/init.lua:9
 msgid "Desert Hackberry (medium)"
-msgstr ""
+msgstr "Mikokoulezenn an dezerzh (etre)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/desert_hackberry/ripe/init.lua:9
 msgid "Desert Hackberry (ripe)"
-msgstr ""
+msgstr "Mikokoulezenn an dezerzh (azv)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/desert_hackberry/small/init.lua:9
 msgid "Desert Hackberry (small)"
-msgstr ""
+msgstr "Mikokoulezenn an dezerzh (bihan)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/desert_hackberry/tiny/init.lua:9
 msgid "Desert Hackberry (tiny)"
-msgstr ""
+msgstr "Mikokoulezenn an dezerzh (munut)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/juniper/medium/init.lua:9
 msgid "Juniper (medium)"
@@ -4911,19 +4911,19 @@ msgstr ""
 
 #: ../../../../data/tribes/immovables/berry_bushes/raspberry/medium/init.lua:9
 msgid "Raspberry Bush (medium)"
-msgstr ""
+msgstr "Bodenn-flamboez (etre)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/raspberry/ripe/init.lua:9
 msgid "Raspberry Bush (ripe)"
-msgstr ""
+msgstr "Bodenn-flamboez (azv)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/raspberry/small/init.lua:9
 msgid "Raspberry Bush (small)"
-msgstr ""
+msgstr "Bodenn-flamboez (bihan)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/raspberry/tiny/init.lua:9
 msgid "Raspberry Bush (tiny)"
-msgstr ""
+msgstr "Bodenn-flamboez (munut)"
 
 #: ../../../../data/tribes/immovables/berry_bushes/sea_buckthorn/medium/init.lua:9
 msgid "Sea Buckthorn (medium)"
@@ -4977,31 +4977,31 @@ msgstr "Sivi (munut)"
 #: ../../../../data/tribes/immovables/blackrootfield/harvested/init.lua:8
 msgctxt "immovable"
 msgid "Blackroot Field (harvested)"
-msgstr ""
+msgstr "Park gwrizienn-zu (dastumet)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/blackrootfield/medium/init.lua:8
 msgctxt "immovable"
 msgid "Blackroot Field (medium)"
-msgstr ""
+msgstr "Park gwrizienn-zu (etre)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/blackrootfield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Blackroot Field (ripe)"
-msgstr ""
+msgstr "Park gwrizienn-zu (azv)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/blackrootfield/small/init.lua:8
 msgctxt "immovable"
 msgid "Blackroot Field (small)"
-msgstr ""
+msgstr "Park gwrizienn-zu (bihan)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/blackrootfield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Blackroot Field (tiny)"
-msgstr ""
+msgstr "Park gwrizienn-zu (munut)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/cassavafield/harvested/init.lua:8
@@ -5310,7 +5310,7 @@ msgstr ""
 #: ../../../../data/tribes/immovables/trees/balsa/old/green/init.lua:13
 #: ../../../../data/tribes/immovables/trees/balsa/old/winter/init.lua:13
 msgid "Balsa Tree"
-msgstr ""
+msgstr "Gwezenn-valza"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/balsa/pole/black/init.lua:11
@@ -5338,7 +5338,7 @@ msgstr ""
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/cocoa/old/init.lua:8
 msgid "Cocoa Tree (old)"
-msgstr ""
+msgstr "Gwezenn-gakao (kozh)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/cocoa/pole/init.lua:8
@@ -5369,7 +5369,7 @@ msgstr ""
 #: ../../../../data/tribes/immovables/trees/ironwood/old/green/init.lua:11
 #: ../../../../data/tribes/immovables/trees/ironwood/old/winter/init.lua:11
 msgid "Ironwood Tree (Old)"
-msgstr ""
+msgstr "Gwezenn-goad-houarn (kozh)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/ironwood/old/black/init.lua:13
@@ -5377,7 +5377,7 @@ msgstr ""
 #: ../../../../data/tribes/immovables/trees/ironwood/old/green/init.lua:13
 #: ../../../../data/tribes/immovables/trees/ironwood/old/winter/init.lua:13
 msgid "Ironwood Tree"
-msgstr ""
+msgstr "Gwezenn-goad-houarn"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/ironwood/pole/black/init.lua:11
@@ -5562,7 +5562,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/starting_conditions/fortified_village.lua:11
 #: ../../../../data/tribes/initialization/frisians/starting_conditions/fortified_village.lua:11
 msgid "Fortified Village"
-msgstr ""
+msgstr "Kêriadenn vogeriet"
 
 #. TRANSLATORS: This is the tooltip for the "Fortified Village" starting
 #. condition
@@ -5590,7 +5590,7 @@ msgstr "Penngarter"
 #: ../../../../data/tribes/initialization/empire/starting_conditions/headquarters.lua:13
 #: ../../../../data/tribes/initialization/frisians/starting_conditions/headquarters.lua:13
 msgid "Start the game with your headquarters only"
-msgstr ""
+msgstr "Komañs ar c'hoari gant ho penngarter hepken"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../../../data/tribes/initialization/amazons/starting_conditions/new_world.lua:11
@@ -5762,15 +5762,15 @@ msgstr "Hollek"
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
-msgstr ""
+msgstr "Digoradur"
 
 #: ../../../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
-msgstr ""
+msgstr "Koñtroloù"
 
 #: ../../../../data/tribes/scripting/help/init.lua:107
 msgid "Tips"
-msgstr ""
+msgstr "Alioù"
 
 #: ../../../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
@@ -5786,11 +5786,11 @@ msgstr "Savadurioù"
 
 #: ../../../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
-msgstr ""
+msgstr "Traoù difiñvus ar meuriadoù"
 
 #: ../../../../data/tribes/scripting/help/init.lua:144
 msgid "World Immovables"
-msgstr ""
+msgstr "Traoù difiñvus ar bed"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../../../data/tribes/ships/amazons/init.lua:8
@@ -7007,7 +7007,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/atlanteans/init.lua:169
 msgctxt "shipname"
 msgid "Atlantean’s Stronghold"
-msgstr ""
+msgstr "Kreñvlec'h an Atlantiz"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../../../data/tribes/ships/atlanteans/init.lua:171
@@ -7127,13 +7127,13 @@ msgstr "Juventud"
 #: ../../../../data/tribes/ships/atlanteans/init.lua:209
 msgctxt "shipname"
 msgid "King Ajanthul"
-msgstr ""
+msgstr "Roue Ajanthul"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../../../data/tribes/ships/atlanteans/init.lua:211
 msgctxt "shipname"
 msgid "King Askandor"
-msgstr ""
+msgstr "Roue Askandor"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../../../data/tribes/ships/atlanteans/init.lua:213
@@ -7253,7 +7253,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/atlanteans/init.lua:251
 msgctxt "shipname"
 msgid "Spider"
-msgstr ""
+msgstr "Kevnidenn"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../../../data/tribes/ships/atlanteans/init.lua:253
@@ -7313,7 +7313,7 @@ msgstr "Lestr"
 #: ../../../../data/tribes/ships/barbarians/init.lua:41
 msgctxt "shipname"
 msgid "Agilaz"
-msgstr ""
+msgstr "Agilaz"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../../../data/tribes/ships/barbarians/init.lua:43
@@ -7379,7 +7379,7 @@ msgstr "Fulla"
 #: ../../../../data/tribes/ships/barbarians/init.lua:63
 msgctxt "shipname"
 msgid "Gersemi"
-msgstr ""
+msgstr "Gersemi"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../../../data/tribes/ships/barbarians/init.lua:65
@@ -7391,7 +7391,7 @@ msgstr "Hagbard"
 #: ../../../../data/tribes/ships/barbarians/init.lua:67
 msgctxt "shipname"
 msgid "Hakhor"
-msgstr ""
+msgstr "Hakhor"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../../../data/tribes/ships/barbarians/init.lua:69
@@ -7463,7 +7463,7 @@ msgstr "Louarn ruz"
 #: ../../../../data/tribes/ships/barbarians/init.lua:91
 msgctxt "shipname"
 msgid "Saxnot"
-msgstr ""
+msgstr "Saxnot"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../../../data/tribes/ships/barbarians/init.lua:93
@@ -7517,7 +7517,7 @@ msgstr "Vili"
 #: ../../../../data/tribes/ships/barbarians/init.lua:109
 msgctxt "shipname"
 msgid "Volf"
-msgstr ""
+msgstr "Volf"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../../../data/tribes/ships/barbarians/init.lua:111
@@ -7565,7 +7565,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/empire/init.lua:43
 msgctxt "shipname"
 msgid "Adamas"
-msgstr ""
+msgstr "Adamas"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:45
@@ -7661,13 +7661,13 @@ msgstr "Carrara"
 #: ../../../../data/tribes/ships/empire/init.lua:75
 msgctxt "shipname"
 msgid "Cato"
-msgstr ""
+msgstr "Cato"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:77
 msgctxt "shipname"
 msgid "Cæsar"
-msgstr ""
+msgstr "Cæsar"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:79
@@ -7697,7 +7697,7 @@ msgstr "Diana"
 #: ../../../../data/tribes/ships/empire/init.lua:87
 msgctxt "shipname"
 msgid "Delphinus"
-msgstr ""
+msgstr "Delphinus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:89
@@ -7709,7 +7709,7 @@ msgstr "Domitianus"
 #: ../../../../data/tribes/ships/empire/init.lua:91
 msgctxt "shipname"
 msgid "Etna"
-msgstr ""
+msgstr "Etna"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:93
@@ -7721,7 +7721,7 @@ msgstr "Faustulus"
 #: ../../../../data/tribes/ships/empire/init.lua:95
 msgctxt "shipname"
 msgid "Ferrum"
-msgstr ""
+msgstr "Ferrum"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:97
@@ -7745,7 +7745,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/empire/init.lua:103
 msgctxt "shipname"
 msgid "Gloria Imperii"
-msgstr ""
+msgstr "Gloria Imperii"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:105
@@ -7757,7 +7757,7 @@ msgstr "Ianus"
 #: ../../../../data/tribes/ships/empire/init.lua:107
 msgctxt "shipname"
 msgid "Iulius Cæsar"
-msgstr ""
+msgstr "Iulius Cæsar"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
 #: ../../../../data/tribes/ships/empire/init.lua:109
@@ -7787,13 +7787,13 @@ msgstr "Latonia"
 #: ../../../../data/tribes/ships/empire/init.lua:117
 msgctxt "shipname"
 msgid "Leo"
-msgstr ""
+msgstr "Leo"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:119
 msgctxt "shipname"
 msgid "Lepus"
-msgstr ""
+msgstr "Lepus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:121
@@ -7811,13 +7811,13 @@ msgstr "Lutius"
 #: ../../../../data/tribes/ships/empire/init.lua:125
 msgctxt "shipname"
 msgid "Marble"
-msgstr ""
+msgstr "Marbr"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:127
 msgctxt "shipname"
 msgid "Marcus Aurelius"
-msgstr ""
+msgstr "Marcus Aurelius"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../../../data/tribes/ships/empire/init.lua:129
@@ -7835,7 +7835,7 @@ msgstr "Minerva"
 #: ../../../../data/tribes/ships/empire/init.lua:133
 msgctxt "shipname"
 msgid "Neptune"
-msgstr ""
+msgstr "Neizhan"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:135
@@ -7865,7 +7865,7 @@ msgstr "Otho"
 #: ../../../../data/tribes/ships/empire/init.lua:143
 msgctxt "shipname"
 msgid "Pluto"
-msgstr ""
+msgstr "Pluto"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:145
@@ -7877,7 +7877,7 @@ msgstr "Portus Bellus"
 #: ../../../../data/tribes/ships/empire/init.lua:147
 msgctxt "shipname"
 msgid "Præda"
-msgstr ""
+msgstr "Præda"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:149
@@ -7901,7 +7901,7 @@ msgstr "Romulus"
 #: ../../../../data/tribes/ships/empire/init.lua:155
 msgctxt "shipname"
 msgid "Sagitta"
-msgstr ""
+msgstr "Sagitta"
 
 #. TRANSLATORS: This Empire ship is named after an in-game character
 #: ../../../../data/tribes/ships/empire/init.lua:157
@@ -7919,13 +7919,13 @@ msgstr "Sadorn"
 #: ../../../../data/tribes/ships/empire/init.lua:161
 msgctxt "shipname"
 msgid "Scipio"
-msgstr ""
+msgstr "Scipio"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:163
 msgctxt "shipname"
 msgid "Seneca"
-msgstr ""
+msgstr "Seneca"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:165
@@ -7937,7 +7937,7 @@ msgstr "Siena"
 #: ../../../../data/tribes/ships/empire/init.lua:167
 msgctxt "shipname"
 msgid "Spiculum"
-msgstr ""
+msgstr "Spiculum"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:169
@@ -7967,7 +7967,7 @@ msgstr "Traianus"
 #: ../../../../data/tribes/ships/empire/init.lua:177
 msgctxt "shipname"
 msgid "Venator"
-msgstr ""
+msgstr "Venator"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:179
@@ -7979,13 +7979,13 @@ msgstr "Venus"
 #: ../../../../data/tribes/ships/empire/init.lua:181
 msgctxt "shipname"
 msgid "Vergilius"
-msgstr ""
+msgstr "Vergilius"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:183
 msgctxt "shipname"
 msgid "Vespa"
-msgstr ""
+msgstr "Vespa"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:185
@@ -8003,7 +8003,7 @@ msgstr "Vesta"
 #: ../../../../data/tribes/ships/empire/init.lua:189
 msgctxt "shipname"
 msgid "Vesuvius"
-msgstr ""
+msgstr "Vesuvius"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:191
@@ -8034,7 +8034,7 @@ msgstr "Amrum"
 #: ../../../../data/tribes/ships/frisians/init.lua:50
 msgctxt "shipname"
 msgid "Alt-Nordstrand"
-msgstr ""
+msgstr "Alt-Nordstrand"
 
 #. TRANSLATORS: This Frisian ship is named after a peninsula in Northern
 #. Frisia
@@ -8059,13 +8059,13 @@ msgstr "Gröde"
 #: ../../../../data/tribes/ships/frisians/init.lua:58
 msgctxt "shipname"
 msgid "Habel"
-msgstr ""
+msgstr "Habel"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:60
 msgctxt "shipname"
 msgid "Hamburger Hallig"
-msgstr ""
+msgstr "Hamburger Hallig"
 
 #. TRANSLATORS: This Frisian ship is named after an island in the North Sea
 #: ../../../../data/tribes/ships/frisians/init.lua:62
@@ -8089,7 +8089,7 @@ msgstr "Hooge"
 #: ../../../../data/tribes/ships/frisians/init.lua:68
 msgctxt "shipname"
 msgid "Japsand"
-msgstr ""
+msgstr "Japsand"
 
 #. TRANSLATORS: This Frisian ship is named after a sand in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:70
@@ -8260,7 +8260,7 @@ msgstr "Hach brezel"
 #: ../../../../data/tribes/wares/balsa/init.lua:8
 msgctxt "ware"
 msgid "Balsa"
-msgstr ""
+msgstr "Koad balza"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/barley/init.lua:8
@@ -8284,19 +8284,19 @@ msgstr "Bier"
 #: ../../../../data/tribes/wares/beer_strong/init.lua:8
 msgctxt "ware"
 msgid "Strong Beer"
-msgstr ""
+msgstr "Bier kreñv"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/blackroot/init.lua:8
 msgctxt "ware"
 msgid "Blackroot"
-msgstr ""
+msgstr "Gwrizienn-zu"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/blackroot_flour/init.lua:8
 msgctxt "ware"
 msgid "Blackroot Flour"
-msgstr ""
+msgstr "Bleud gwrizienn-zu"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/blackwood/init.lua:8
@@ -8338,7 +8338,7 @@ msgstr "Bara"
 #: ../../../../data/tribes/wares/bread_barbarians/init.lua:8
 msgctxt "barbarians_ware"
 msgid "Pitta Bread"
-msgstr ""
+msgstr "Bara-pita"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/bread_empire/init.lua:8
@@ -8356,7 +8356,7 @@ msgstr "Bara"
 #: ../../../../data/tribes/wares/bread_paddle/init.lua:8
 msgctxt "ware"
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Plankenn vara"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/brick/init.lua:8
@@ -8368,7 +8368,7 @@ msgstr "Brikez"
 #: ../../../../data/tribes/wares/buckets/init.lua:8
 msgctxt "ware"
 msgid "Buckets"
-msgstr ""
+msgstr "Sailhoù"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/cassavaroot/init.lua:8
@@ -8410,7 +8410,7 @@ msgstr "Glaou"
 #: ../../../../data/tribes/wares/cocoa_beans/init.lua:8
 msgctxt "ware"
 msgid "Cocoa Beans"
-msgstr ""
+msgstr "Kakao"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/corn/init.lua:8
@@ -8422,7 +8422,7 @@ msgstr "Maiz"
 #: ../../../../data/tribes/wares/cornmeal/init.lua:8
 msgctxt "ware"
 msgid "Cornmeal"
-msgstr ""
+msgstr "Bleud maiz"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/diamond/init.lua:8
@@ -8440,13 +8440,13 @@ msgstr "Bouc'hal"
 #: ../../../../data/tribes/wares/fire_tongs/init.lua:8
 msgctxt "ware"
 msgid "Fire Tongs"
-msgstr ""
+msgstr "Gevelioù"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/firestones/init.lua:8
 msgctxt "ware"
 msgid "Firestones"
-msgstr ""
+msgstr "Mein-tan"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/fish/init.lua:8
@@ -8506,7 +8506,7 @@ msgstr "Gwiskmant feur kozh"
 #: ../../../../data/tribes/wares/fur_garment_studded/init.lua:8
 msgctxt "ware"
 msgid "Studded Fur Garment"
-msgstr ""
+msgstr "Gwiskamant feur bourellet"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/gold/init.lua:8
@@ -8518,7 +8518,7 @@ msgstr "Aour"
 #: ../../../../data/tribes/wares/gold_dust/init.lua:8
 msgctxt "ware"
 msgid "Gold Dust"
-msgstr ""
+msgstr "Malzennoù aour"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/gold_ore/init.lua:8
@@ -8530,7 +8530,7 @@ msgstr "Kailh aour"
 #: ../../../../data/tribes/wares/gold_thread/init.lua:8
 msgctxt "ware"
 msgid "Gold Thread"
-msgstr ""
+msgstr "Neud aour"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/granite/init.lua:8
@@ -8602,7 +8602,7 @@ msgstr "Bara mel"
 #: ../../../../data/tribes/wares/hook_pole/init.lua:8
 msgctxt "ware"
 msgid "Hook Pole"
-msgstr ""
+msgstr "Krog"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/hunting_bow/init.lua:8
@@ -8632,7 +8632,7 @@ msgstr "Kailh houarn"
 #: ../../../../data/tribes/wares/ironwood/init.lua:8
 msgctxt "ware"
 msgid "Ironwood"
-msgstr ""
+msgstr "Koad-houarn"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/kitchen_tools/init.lua:8
@@ -8645,7 +8645,7 @@ msgstr "Ostilhoù keginañ"
 #: ../../../../data/tribes/wares/liana/init.lua:8
 msgctxt "ware"
 msgid "Liana"
-msgstr ""
+msgstr "Lianenn"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/log/init.lua:8
@@ -8699,13 +8699,13 @@ msgstr ""
 #: ../../../../data/tribes/wares/needles/init.lua:8
 msgctxt "ware"
 msgid "Needles"
-msgstr ""
+msgstr "Nadozioù"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/pick/init.lua:8
 msgctxt "ware"
 msgid "Pick"
-msgstr ""
+msgstr "Pigell"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/planks/init.lua:8
@@ -8729,7 +8729,7 @@ msgstr "Kouarz"
 #: ../../../../data/tribes/wares/ration/init.lua:8
 msgctxt "ware"
 msgid "Ration"
-msgstr ""
+msgstr "Lodad"
 
 #. TRANSLATORS: This is a ware name used in lists of wares. Used for thatching
 #. roofs and as a fiber for weaving cloth, fishing nets etc.
@@ -8778,13 +8778,13 @@ msgstr "Falc'h"
 #: ../../../../data/tribes/wares/shield_advanced/init.lua:8
 msgctxt "ware"
 msgid "Advanced Shield"
-msgstr ""
+msgstr "Skoed araokaet"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/shield_steel/init.lua:8
 msgctxt "ware"
 msgid "Steel Shield"
-msgstr ""
+msgstr "Skoed dir"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/shovel/init.lua:8
@@ -8820,19 +8820,19 @@ msgstr "Goaf"
 #: ../../../../data/tribes/wares/spear_advanced/init.lua:8
 msgctxt "ware"
 msgid "Advanced Spear"
-msgstr ""
+msgstr "Goaf araokaet"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/spear_hardened/init.lua:8
 msgctxt "ware"
 msgid "Hardened Spear"
-msgstr ""
+msgstr "Goaf kalet"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/spear_heavy/init.lua:8
 msgctxt "ware"
 msgid "Heavy Spear"
-msgstr ""
+msgstr "Goaf pounner"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/spear_stone_tipped/init.lua:8
@@ -8856,19 +8856,19 @@ msgstr "Goaf koad"
 #: ../../../../data/tribes/wares/spider_silk/init.lua:8
 msgctxt "ware"
 msgid "Spider Silk"
-msgstr ""
+msgstr "Neud kevnid"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/spidercloth/init.lua:8
 msgctxt "ware"
 msgid "Spidercloth"
-msgstr ""
+msgstr "Gwiad kevnid"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/stone_bowl/init.lua:8
 msgctxt "ware"
 msgid "Stone Bowl"
-msgstr ""
+msgstr "Bolenn vaen"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/sword_broad/init.lua:8
@@ -8910,31 +8910,31 @@ msgstr ""
 #: ../../../../data/tribes/wares/trident_double/init.lua:8
 msgctxt "ware"
 msgid "Double Trident"
-msgstr ""
+msgstr "Tridant doubl"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/trident_heavy_double/init.lua:8
 msgctxt "ware"
 msgid "Heavy Double Trident"
-msgstr ""
+msgstr "Tridant doubl pounner"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/trident_light/init.lua:8
 msgctxt "ware"
 msgid "Light Trident"
-msgstr ""
+msgstr "Tridant skañv"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/trident_long/init.lua:8
 msgctxt "ware"
 msgid "Long Trident"
-msgstr ""
+msgstr "Tridant hir"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/trident_steel/init.lua:8
 msgctxt "ware"
 msgid "Steel Trident"
-msgstr ""
+msgstr "Tridant dir"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/tunic/init.lua:8
@@ -9024,13 +9024,13 @@ msgstr ""
 #: ../../../../data/tribes/workers/amazons/ferry/init.lua:8
 msgctxt "amazons_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Bag"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/amazons/geologist/init.lua:8
 msgctxt "amazons_worker"
 msgid "Geologist"
-msgstr ""
+msgstr "Douarour"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/amazons/gold_digger/init.lua:8
@@ -9042,7 +9042,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/amazons/gold_smelter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Gold Smelter"
-msgstr ""
+msgstr "Teuzer aour"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/amazons/hunter_gatherer/init.lua:8
@@ -9054,25 +9054,25 @@ msgstr "Chaseour-dastumer"
 #: ../../../../data/tribes/workers/amazons/jungle_master/init.lua:8
 msgctxt "amazons_worker"
 msgid "Jungle Master"
-msgstr ""
+msgstr "Mestr ar janglenn"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/amazons/jungle_preserver/init.lua:8
 msgctxt "amazons_worker"
 msgid "Jungle Preserver"
-msgstr ""
+msgstr "Mirer ar janglenn"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/amazons/liana_cutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Liana Cutter"
-msgstr ""
+msgstr "Troc'her lianennoù"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/amazons/scout/init.lua:8
 msgctxt "amazons_worker"
 msgid "Scout"
-msgstr ""
+msgstr "Sklêrijenner"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/amazons/shipwright/init.lua:8
@@ -9090,13 +9090,13 @@ msgstr "Soudard"
 #: ../../../../data/tribes/workers/amazons/stone_carver/init.lua:8
 msgctxt "amazons_worker"
 msgid "Stone Carver"
-msgstr ""
+msgstr "Kizeller mein"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/amazons/stonecutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Stonecutter"
-msgstr ""
+msgstr "Bener-mein"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/amazons/tapir/init.lua:8
@@ -9192,7 +9192,7 @@ msgstr "Mestr koadour"
 #: ../../../../data/tribes/workers/atlanteans/armorsmith/init.lua:104
 msgctxt "atlanteans_worker"
 msgid "Armorsmith"
-msgstr "Gov houarnwiskoù"
+msgstr "Govelier houarnwiskoù"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/baker/init.lua:8
@@ -9204,7 +9204,7 @@ msgstr "Baraer"
 #: ../../../../data/tribes/workers/atlanteans/blackroot_farmer/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Blackroot Farmer"
-msgstr ""
+msgstr "Feurmer gwrizienn-zu"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/builder/init.lua:8
@@ -9234,7 +9234,7 @@ msgstr "Feurmer"
 #: ../../../../data/tribes/workers/atlanteans/ferry/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Bag"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/fishbreeder/init.lua:8
@@ -9258,7 +9258,7 @@ msgstr "Foricher"
 #: ../../../../data/tribes/workers/atlanteans/geologist/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Geologist"
-msgstr ""
+msgstr "Douarour"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/horse/init.lua:8
@@ -9306,7 +9306,7 @@ msgstr "Heskenner"
 #: ../../../../data/tribes/workers/atlanteans/scout/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Scout"
-msgstr ""
+msgstr "Sklêrijenner"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/shipwright/init.lua:8
@@ -9318,7 +9318,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/atlanteans/smelter/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Smelter"
-msgstr ""
+msgstr "Teuzer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/smoker/init.lua:8
@@ -9342,13 +9342,13 @@ msgstr "Desaver kevnid"
 #: ../../../../data/tribes/workers/atlanteans/stonecutter/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Stonecutter"
-msgstr ""
+msgstr "Bener-mein"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/toolsmith/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Toolsmith"
-msgstr "Gov ostilhoù"
+msgstr "Govelier ostilhoù"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/trainer/init.lua:8
@@ -9360,7 +9360,7 @@ msgstr "Gourdoner"
 #: ../../../../data/tribes/workers/atlanteans/weaponsmith/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Weaponsmith"
-msgstr "Gov armoù"
+msgstr "Govelier armoù"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/weaver/init.lua:8
@@ -9438,7 +9438,7 @@ msgstr "Feurmer"
 #: ../../../../data/tribes/workers/barbarians/ferry/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Bag"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/fisher/init.lua:8
@@ -9462,13 +9462,13 @@ msgstr "Liorzher"
 #: ../../../../data/tribes/workers/barbarians/geologist/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Geologist"
-msgstr ""
+msgstr "Douarour"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/helmsmith/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Helmsmith"
-msgstr "Gov tokarnoù"
+msgstr "Govelier tokarnoù"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/hunter/init.lua:8
@@ -9480,7 +9480,7 @@ msgstr "Chaseour"
 #: ../../../../data/tribes/workers/barbarians/innkeeper/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Innkeeper"
-msgstr ""
+msgstr "Ostiz"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/lime_burner/init.lua:8
@@ -9522,7 +9522,7 @@ msgstr "Ejen"
 #: ../../../../data/tribes/workers/barbarians/ranger/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Ranger"
-msgstr ""
+msgstr "Forester"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/recruit/init.lua:8
@@ -9534,7 +9534,7 @@ msgstr "Tutaad"
 #: ../../../../data/tribes/workers/barbarians/scout/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Scout"
-msgstr ""
+msgstr "Sklêrijenner"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/shipwright/init.lua:8
@@ -9546,7 +9546,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/barbarians/smelter/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Smelter"
-msgstr ""
+msgstr "Teuzer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/soldier/init.lua:107
@@ -9558,7 +9558,7 @@ msgstr "Soudard"
 #: ../../../../data/tribes/workers/barbarians/stonemason/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Stonemason"
-msgstr ""
+msgstr "Bener-mein"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/trainer/init.lua:8
@@ -9576,7 +9576,7 @@ msgstr "Gwiader"
 #: ../../../../data/tribes/workers/empire/armorsmith/init.lua:8
 msgctxt "empire_worker"
 msgid "Armorsmith"
-msgstr ""
+msgstr "Govelier houarnwiskoù"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/baker/init.lua:8
@@ -9600,7 +9600,7 @@ msgstr "Saver"
 #: ../../../../data/tribes/workers/empire/carpenter/init.lua:8
 msgctxt "empire_worker"
 msgid "Carpenter"
-msgstr ""
+msgstr "Kalvez"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/carrier/init.lua:8
@@ -9618,7 +9618,7 @@ msgstr "Glaouer"
 #: ../../../../data/tribes/workers/empire/donkey/init.lua:8
 msgctxt "empire_worker"
 msgid "Donkey"
-msgstr ""
+msgstr "Azen"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/donkeybreeder/init.lua:8
@@ -9636,7 +9636,7 @@ msgstr "Feurmer"
 #: ../../../../data/tribes/workers/empire/ferry/init.lua:8
 msgctxt "empire_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Bag"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/fisher/init.lua:8
@@ -9654,7 +9654,7 @@ msgstr "Foricher"
 #: ../../../../data/tribes/workers/empire/geologist/init.lua:8
 msgctxt "empire_worker"
 msgid "Geologist"
-msgstr ""
+msgstr "Douarour"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/hunter/init.lua:8
@@ -9666,7 +9666,7 @@ msgstr "Chaseour"
 #: ../../../../data/tribes/workers/empire/innkeeper/init.lua:8
 msgctxt "empire_worker"
 msgid "Innkeeper"
-msgstr ""
+msgstr "Ostiz"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/lumberjack/init.lua:8
@@ -9708,13 +9708,13 @@ msgstr "Tutaad"
 #: ../../../../data/tribes/workers/empire/scout/init.lua:8
 msgctxt "empire_worker"
 msgid "Scout"
-msgstr ""
+msgstr "Sklêrijenner"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/shepherd/init.lua:8
 msgctxt "empire_worker"
 msgid "Shepherd"
-msgstr ""
+msgstr "Paotr-deñved"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/shipwright/init.lua:8
@@ -9726,7 +9726,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/empire/smelter/init.lua:8
 msgctxt "empire_worker"
 msgid "Smelter"
-msgstr ""
+msgstr "Teuzer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/soldier/init.lua:107
@@ -9738,13 +9738,13 @@ msgstr "Soudard"
 #: ../../../../data/tribes/workers/empire/stonemason/init.lua:8
 msgctxt "empire_worker"
 msgid "Stonemason"
-msgstr ""
+msgstr "Bener-mein"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/toolsmith/init.lua:8
 msgctxt "empire_worker"
 msgid "Toolsmith"
-msgstr ""
+msgstr "Govelier ostilhoù"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/trainer/init.lua:8
@@ -9756,7 +9756,7 @@ msgstr "Gourdoner"
 #: ../../../../data/tribes/workers/empire/vinefarmer/init.lua:8
 msgctxt "empire_worker"
 msgid "Vine Farmer"
-msgstr ""
+msgstr "Gwiniegour"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/vintner/init.lua:8
@@ -9768,7 +9768,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/empire/weaponsmith/init.lua:8
 msgctxt "empire_worker"
 msgid "Weaponsmith"
-msgstr ""
+msgstr "Govelier armoù"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/weaver/init.lua:8
@@ -9786,7 +9786,7 @@ msgstr "Baraer"
 #: ../../../../data/tribes/workers/frisians/baker_master/init.lua:8
 msgctxt "frisians_worker"
 msgid "Master Baker"
-msgstr ""
+msgstr "Mestr baraer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/beekeeper/init.lua:8
@@ -9798,19 +9798,19 @@ msgstr ""
 #: ../../../../data/tribes/workers/frisians/berry_farmer/init.lua:8
 msgctxt "frisians_worker"
 msgid "Berry Farmer"
-msgstr ""
+msgstr "Feurmer hugennoù"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/blacksmith/init.lua:8
 msgctxt "frisians_worker"
 msgid "Blacksmith"
-msgstr ""
+msgstr "Gov"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/blacksmith_master/init.lua:8
 msgctxt "frisians_worker"
 msgid "Master Blacksmith"
-msgstr ""
+msgstr "Mestr gov"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/brewer/init.lua:8
@@ -9828,7 +9828,7 @@ msgstr "Mestr breser"
 #: ../../../../data/tribes/workers/frisians/brickmaker/init.lua:8
 msgctxt "frisians_worker"
 msgid "Brickmaker"
-msgstr ""
+msgstr "Brikenner"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/builder/init.lua:8
@@ -9852,7 +9852,7 @@ msgstr "Glaouer"
 #: ../../../../data/tribes/workers/frisians/claydigger/init.lua:8
 msgctxt "frisians_worker"
 msgid "Clay Digger"
-msgstr ""
+msgstr "Kleuzer pri"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/diker/init.lua:8
@@ -9870,7 +9870,7 @@ msgstr "Feurmer"
 #: ../../../../data/tribes/workers/frisians/ferry/init.lua:8
 msgctxt "frisians_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Bag"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/fisher/init.lua:8
@@ -9894,7 +9894,7 @@ msgstr "Dastumer frouezh"
 #: ../../../../data/tribes/workers/frisians/geologist/init.lua:8
 msgctxt "frisians_worker"
 msgid "Geologist"
-msgstr ""
+msgstr "Douarour"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/hunter/init.lua:8
@@ -9942,7 +9942,7 @@ msgstr "Desaver kirvi-erc'h"
 #: ../../../../data/tribes/workers/frisians/scout/init.lua:8
 msgctxt "frisians_worker"
 msgid "Scout"
-msgstr ""
+msgstr "Sklêrijenner"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/seamstress/init.lua:8
@@ -9966,7 +9966,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/frisians/smelter/init.lua:8
 msgctxt "frisians_worker"
 msgid "Smelter"
-msgstr ""
+msgstr "Teuzer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/smoker/init.lua:8
@@ -9984,7 +9984,7 @@ msgstr "Soudard"
 #: ../../../../data/tribes/workers/frisians/stonemason/init.lua:8
 msgctxt "frisians_worker"
 msgid "Stonemason"
-msgstr ""
+msgstr "Bener-mein"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/trainer/init.lua:8

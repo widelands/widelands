@@ -33,6 +33,7 @@ class MilitarySiteDescr : public BuildingDescr {
 public:
 	MilitarySiteDescr(const std::string& init_descname,
 	                  const LuaTable& t,
+	                  const std::vector<std::string>& attribs,
 	                  Descriptions& descriptions);
 	~MilitarySiteDescr() override = default;
 

@@ -44,6 +44,7 @@ class DismantleSiteDescr : public BuildingDescr {
 public:
 	DismantleSiteDescr(const std::string& init_descname,
 	                   const LuaTable& t,
+	                   const std::vector<std::string>& attribs,
 	                   Descriptions& descriptions);
 	~DismantleSiteDescr() override = default;
 
