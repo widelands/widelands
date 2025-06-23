@@ -1417,7 +1417,7 @@ msgstr ""
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:158
 msgid "making a padded vest"
-msgstr ""
+msgstr "oberiañ ur chupenn vourellet"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a padded protector
 #. because ...
@@ -1602,12 +1602,12 @@ msgstr "plantañ gwez"
 #: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Liana Cutter’s Hut"
-msgstr ""
+msgstr "Lochenn an troc'her lianennoù"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making clay because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:39
 msgid "cutting lianas"
-msgstr ""
+msgstr "troc'hañ lianennoù"
 
 #. TRANSLATORS: Short for "No Trees to cut lianas" for clay pits
 #: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:49
@@ -1621,7 +1621,7 @@ msgstr "Gwezenn ebet"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:50
 msgid "No Tree to Cut Lianas"
-msgstr ""
+msgstr "Gwezenn ebet da droc'hañ lianennoù diouti"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:51
 msgctxt "amazons_building"
@@ -1629,7 +1629,7 @@ msgid ""
 "The liana cutter working at this site can’t find any tree in her work area. "
 "You should consider dismantling or destroying the building or building a "
 "jungle preserver’s hut."
-msgstr ""
+msgstr "N'eus bet kavet gwezenn ebet en e dachenn-labour gant an troc'her lianennoù a labour el lochenn-mañ. Soñjit e distruj pe divontañ ar savadur, pe e sevel lochenn ur mirer janglenn."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:8
@@ -2217,7 +2217,7 @@ msgstr ""
 
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
 msgid "The fishing grounds are full"
-msgstr ""
+msgstr "An tachennoù pesketa a zo leun."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:8
@@ -2970,7 +2970,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
 "work area. You should consider dismantling or destroying the building or "
 "building a ranger’s hut."
-msgstr ""
+msgstr "N'eus bet kavet gwezenn ebet en e dachenn-labour gant ar bucher a labour en ti-mañ. Soñjit e distruj pe divontañ ar savadur, pe e sevel ul lochenn forester."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:8
@@ -3023,7 +3023,7 @@ msgstr "N'eus bet kavet maen ebet en e dachenn-labour gant ar bener-mein a labou
 #: ../../../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:8
 msgctxt "barbarians_building"
 msgid "Ranger’s Hut"
-msgstr ""
+msgstr "Lochenn ar forester"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:8
@@ -3795,11 +3795,11 @@ msgstr "meskañ pri"
 #. TRANSLATORS: Short for "No Level Ground" for clay pits
 #: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:78
 msgid "No Ground"
-msgstr ""
+msgstr "Tachenn ebet"
 
 #: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:79
 msgid "No Level Ground"
-msgstr ""
+msgstr "N'eus tachenn ebet a live"
 
 #: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:80
 msgctxt "frisians_building"
@@ -8645,7 +8645,7 @@ msgstr "Ostilhoù keginañ"
 #: ../../../../data/tribes/wares/liana/init.lua:8
 msgctxt "ware"
 msgid "Liana"
-msgstr ""
+msgstr "Lianenn"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/log/init.lua:8
@@ -9066,7 +9066,7 @@ msgstr "Mirer ar janglenn"
 #: ../../../../data/tribes/workers/amazons/liana_cutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Liana Cutter"
-msgstr ""
+msgstr "Troc'her lianennoù"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/amazons/scout/init.lua:8
@@ -9480,7 +9480,7 @@ msgstr "Chaseour"
 #: ../../../../data/tribes/workers/barbarians/innkeeper/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Innkeeper"
-msgstr ""
+msgstr "Ostiz"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/lime_burner/init.lua:8
@@ -9522,7 +9522,7 @@ msgstr "Ejen"
 #: ../../../../data/tribes/workers/barbarians/ranger/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Ranger"
-msgstr ""
+msgstr "Forester"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/recruit/init.lua:8
@@ -9666,7 +9666,7 @@ msgstr "Chaseour"
 #: ../../../../data/tribes/workers/empire/innkeeper/init.lua:8
 msgctxt "empire_worker"
 msgid "Innkeeper"
-msgstr ""
+msgstr "Ostiz"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/lumberjack/init.lua:8

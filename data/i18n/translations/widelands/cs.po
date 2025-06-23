@@ -847,7 +847,7 @@ msgid ""
 "Description: %4$s\n"
 "Hint: %5$s\n"
 "\n"
-msgstr ""
+msgstr "Opravdu chceš uveřejnit tuto mapu online?\n\nJméno: %1$s\nInterní pojmenování: %2$s\nAutor: %3$s\nPopis: %4$s\nDalší poznámky: %5$s\n\n"
 
 #: ../../../../src/editor/editorinteractive.cc:1580
 msgid "Publish Map"
@@ -860,7 +860,7 @@ msgid ""
 "General Public License (GPL) version 2 or any later version (the same "
 "license under which Widelands itself is distributed). For more information, "
 "see %s."
-msgstr ""
+msgstr "Nahráním souhlasíte se zveřejněním své mapy pod GNU General Public Licence (GPL) verze 2 nebo jiné pozdější verze (stejná licence, pod kterou se distribuuje samotný Widelands). Více informací o GPL lze nalézt na %s."
 
 #: ../../../../src/editor/editorinteractive.cc:1606
 msgid "Login Error"
@@ -5019,7 +5019,7 @@ msgid ""
 " (the same license under which Widelands itself is distributed). For more "
 "information on the GPL, please refer to ‘About Widelands’ → ‘License’ in the"
 " main menu or see %s."
-msgstr ""
+msgstr "Zde můžete nahrát svoje rozšíření na server, aby bylo dostupné pro ostatní hráče. Nahráním souhlasíte se zveřejněním své tvorby pod GNU General Public Licence (GPL) verze 2 nebo jiné pozdější verze (stejná licence, pod kterou se distribuuje samotný Widelands). Více informací o GPL lze nalézt  v hlavní nabídce 'O Widelands' → 'Licence' nebo na %s."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:657
 msgid ""

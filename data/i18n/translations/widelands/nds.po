@@ -842,7 +842,7 @@ msgid ""
 "Description: %4$s\n"
 "Hint: %5$s\n"
 "\n"
-msgstr ""
+msgstr "Willst du deese Kaart würrelk im Internett publik maken?\n\nNaam: %1$s\nVerwieders-Naam: %2$s\nSchriever: %3$s\nBeschrieven: %4$s\nTipp: %5$s\n\n"
 
 #: ../../../../src/editor/editorinteractive.cc:1580
 msgid "Publish Map"
@@ -855,7 +855,7 @@ msgid ""
 "General Public License (GPL) version 2 or any later version (the same "
 "license under which Widelands itself is distributed). For more information, "
 "see %s."
-msgstr ""
+msgstr "Indeem du se uplaadst, büst du inverstahn, de Kaart unner de Kondiesjes vun de GNU General Public License (GPL) Versioon 2 of elkeen later Versioon (de sülve Lizenz, unner wat Widelands sülvst deelt word) uttodoon. För mehr Informationen över de GPL, kiek bidde %s an."
 
 #: ../../../../src/editor/editorinteractive.cc:1606
 msgid "Login Error"
@@ -4950,7 +4950,7 @@ msgid ""
 " (the same license under which Widelands itself is distributed). For more "
 "information on the GPL, please refer to ‘About Widelands’ → ‘License’ in the"
 " main menu or see %s."
-msgstr ""
+msgstr "Hier kannst du diene Verwiederns to de Server upladen, um se mit anner Spelers to delen. Wenn du se uplaadst, büst du inverstahn, dien Wark unner de Kondiesjes vun de GNU General Public License (GPL) Versioon 2 of elkeen later Versioon (de sülve Lizenz, unner wat Widelands sülvst deelt word) uttodoon. För mehr Informationen över de GPL, kiek bidde im Höövdmenü »Över Widelands« → »Lizenz« of %s an."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:657
 msgid ""
