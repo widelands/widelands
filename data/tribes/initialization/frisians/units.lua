@@ -2090,7 +2090,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note helptext for a Frisian production site: Diker's House
             note = pgettext("frisians_building", "The diker will terraform the land around each breakwater he builds several times. You can manually remove breakwaters when the land is sufficiently secured to prevent wasting resources; to do so, build a flag, road, or building in the dike’s place."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Diker's House
-            performance = pgettext("frisians_building", "If there is at least one breakwater available, the diker can perform one terraform between %1$s and %2$s, depending on how far he has to walk."):bformat(format_minutes_seconds(2, 43), format_minutes_seconds(3, 17))
+            performance = pgettext("frisians_building", "If this building is fully supplied, the diker can perform one terraform between %1$s and %2$s, depending on how far he has to walk."):bformat(format_minutes_seconds(2, 43), format_minutes_seconds(3, 17))
          }
       },
 
