@@ -1326,7 +1326,7 @@ For workers which are consumed, see: :ref:`has_inputs`.
    Note that soldiers must not be set via this method.
    Use :meth:`wl.map.MapObject.set_soldiers` instead.
 
-   Ferries can not be set by this method either except for waterways.
+   Ferries can not be set by this method either, except for waterways.
 */
 
 /* RST
