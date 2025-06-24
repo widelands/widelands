@@ -166,11 +166,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:82
 msgid "Build a shipyard"
-msgstr ""
+msgstr "Savit ur chanter-bigi"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
 msgid "Build a shipyard close to the coast"
-msgstr ""
+msgstr "Savit ur chanter-bigi e-kichen an aod"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
 msgid "Ships are produced by a shipyard. It is a medium building."
@@ -629,7 +629,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:295
 msgid "Allow me to show you how to build a waterway…"
-msgstr "Lezit ac'hanon diskouez deoc'h penaos sevel un hent bageal..."
+msgstr "Lezit ac'hanon diskouez deoc'h penaos sevel un hent bageal…"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:305
 msgid "Golden waves"
@@ -675,7 +675,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:326
 msgid "About Ferries"
-msgstr ""
+msgstr "A-zivout ar bigi"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:327
 msgid ""
