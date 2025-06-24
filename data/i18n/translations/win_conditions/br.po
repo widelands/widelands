@@ -113,7 +113,7 @@ msgstr "%3$s a zo gant skipailh %1$i (%2$s)."
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:17
 msgid "Collectors"
-msgstr ""
+msgstr "Dastumerien"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:20
 #, lua-format
@@ -145,7 +145,7 @@ msgstr "Statud evit %s"
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
 #: ../../../../data/scripting/win_conditions/collectors.lua:84
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
-msgstr ""
+msgstr "%1$s (%2$i P) x %3$i = %4$i P"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:88
 #, lua-format
@@ -192,7 +192,7 @@ msgstr ""
 
 #: ../../../../data/scripting/win_conditions/hq_hunter.lua:16
 msgid "HQ Hunter"
-msgstr ""
+msgstr "Chaseour penngarterioù"
 
 #: ../../../../data/scripting/win_conditions/hq_hunter.lua:18
 msgid ""
@@ -299,23 +299,23 @@ msgstr[4] "%1% eurvezh"
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:359
 msgid "%1% minute"
 msgid_plural "%1% minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%1% vunutenn"
+msgstr[1] "%1% vunutenn"
+msgstr[2] "%1% munutenn"
+msgstr[3] "%1% a vunutennoù"
+msgstr[4] "%1% munutenn"
 
 #. TRANSLATORS: 1 day, 12 hours, and 30 minutes
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:364
 msgid "%1$s, %2$s, and %3$s"
-msgstr ""
+msgstr "%1$s, %2$s, ha %3$s"
 
 #. TRANSLATORS: "2 hours and 30 minutes" or "2 days and 12 hours" or "2 days
 #. and 30 minutes"
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:367
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:371
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s ha %2$s"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:394

@@ -116,7 +116,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:92
 msgid "Building Spaces"
-msgstr ""
+msgstr "Lec'hiadoù sevel"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:96
@@ -231,7 +231,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:167
 msgid "Build a Flag on the Road"
-msgstr ""
+msgstr "Savit ur banniel war an hent"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:168
 msgid ""
@@ -452,11 +452,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:331
 msgid "Build a quarry next to the rocks"
-msgstr ""
+msgstr "Savit ur vengleuz e-kichen ar mein"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:333
 msgid "Build a Quarry"
-msgstr ""
+msgstr "Savit ur vengleuz"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:334
 msgid ""
@@ -480,7 +480,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:342
 msgid "How to Build a Quarry"
-msgstr ""
+msgstr "Penaos sevel ur vengleuz"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:345
 msgid ""
@@ -667,7 +667,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:441
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:443
 msgid "Build another quarry"
-msgstr ""
+msgstr "Savit ur vengleuz ouzhpenn"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:444
 msgid ""
@@ -682,7 +682,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 msgid "Build a second quarry"
-msgstr ""
+msgstr "Savit un eil mengleuz"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:452
 msgid ""
@@ -896,11 +896,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:564
 msgid "Close the messages window"
-msgstr ""
+msgstr "Serrit prenestr ar c'hemennadennoù"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:566
 msgid "Close the Messages Window"
-msgstr ""
+msgstr "Serrit prenestr ar c'hemennadennoù"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:567
 msgid ""
