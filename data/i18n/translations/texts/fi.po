@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-03-01 03:04+0000\n"
+"POT-Creation-Date: 2025-06-21 03:18+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: LINUX-SAUNA, 2022\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
@@ -57,8 +57,8 @@ msgstr "Copyright 2002 - %1% Widelands-kehittäjätiimi."
 #: ../../../../data/txts/LICENSE.lua:16
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
-"Public License (GPL) V2.0."
-msgstr "Tämä peli on vapaata ohjelmistoa (FOSS), lisenssinä GNU General Public License (GPL) V2.0."
+"Public License (GPL) V2.0 (or, at your option, any later version)."
+msgstr ""
 
 #: ../../../../data/txts/LICENSE.lua:18
 #, lua-format
@@ -214,13 +214,13 @@ msgid "Elders"
 msgstr "Vanhimmat"
 
 #: ../../../../data/txts/developers.lua:22
-#: ../../../../data/txts/developers.lua:417
+#: ../../../../data/txts/developers.lua:421
 msgid "Graphics"
 msgstr "Grafiikka"
 
 #: ../../../../data/txts/developers.lua:28
-#: ../../../../data/txts/developers.lua:361
-#: ../../../../data/txts/developers.lua:424
+#: ../../../../data/txts/developers.lua:365
+#: ../../../../data/txts/developers.lua:428
 msgid "Homepage"
 msgstr "Kotisivu"
 
@@ -229,7 +229,7 @@ msgid "Scripting"
 msgstr "Ohjelmakoodisyöttö"
 
 #: ../../../../data/txts/developers.lua:40
-#: ../../../../data/txts/developers.lua:432
+#: ../../../../data/txts/developers.lua:436
 msgid "Sound"
 msgstr "Ääni"
 
@@ -261,87 +261,87 @@ msgstr "Äänitehosteet"
 msgid "Maps and Missions"
 msgstr "Kartat ja missiot"
 
-#: ../../../../data/txts/developers.lua:258
+#: ../../../../data/txts/developers.lua:262
 msgid "Campaign Story"
 msgstr "Kampanjatarina"
 
-#: ../../../../data/txts/developers.lua:262
+#: ../../../../data/txts/developers.lua:266
 msgid "Barbarians"
 msgstr "Barbaarit"
 
-#: ../../../../data/txts/developers.lua:270
+#: ../../../../data/txts/developers.lua:274
 msgid "Empire"
 msgstr "Keisarikunta"
 
-#: ../../../../data/txts/developers.lua:277
+#: ../../../../data/txts/developers.lua:281
 msgid "Atlanteans"
 msgstr "Atlantislaiset"
 
-#: ../../../../data/txts/developers.lua:285
+#: ../../../../data/txts/developers.lua:289
 msgid "Frisians"
 msgstr "Vapaamieliset"
 
-#: ../../../../data/txts/developers.lua:293
+#: ../../../../data/txts/developers.lua:297
 msgid "Packagers"
 msgstr "Paketoijat"
 
-#: ../../../../data/txts/developers.lua:297
+#: ../../../../data/txts/developers.lua:301
 msgid "Debian Linux"
 msgstr "Debian Linux"
 
-#: ../../../../data/txts/developers.lua:303
+#: ../../../../data/txts/developers.lua:307
 msgid "Fedora Linux"
 msgstr "Fedora Linux"
 
-#: ../../../../data/txts/developers.lua:311
+#: ../../../../data/txts/developers.lua:315
 msgid "Mandriva Linux"
 msgstr "Mandriva Linux"
 
-#: ../../../../data/txts/developers.lua:317
+#: ../../../../data/txts/developers.lua:321
 msgid "FreeBSD"
 msgstr "FreeBSD"
 
-#: ../../../../data/txts/developers.lua:323
+#: ../../../../data/txts/developers.lua:327
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: ../../../../data/txts/developers.lua:330
+#: ../../../../data/txts/developers.lua:334
 msgid "Mac OS X"
 msgstr "Mac OS X"
 
-#: ../../../../data/txts/developers.lua:342
+#: ../../../../data/txts/developers.lua:346
 msgid "Windows"
 msgstr "Windows"
 
-#: ../../../../data/txts/developers.lua:353
+#: ../../../../data/txts/developers.lua:357
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
-#: ../../../../data/txts/developers.lua:365
+#: ../../../../data/txts/developers.lua:369
 msgid "Homepage Coders"
 msgstr "Kotisivun koodarit"
 
-#: ../../../../data/txts/developers.lua:376
+#: ../../../../data/txts/developers.lua:380
 msgid "Documentation, Help and Wiki"
 msgstr "Dokumentaatio, Ohje ja Wiki"
 
-#: ../../../../data/txts/developers.lua:394
+#: ../../../../data/txts/developers.lua:398
 msgid "Add-Ons"
 msgstr "Lisäosat"
 
-#: ../../../../data/txts/developers.lua:413
+#: ../../../../data/txts/developers.lua:417
 msgid "Former Elders"
 msgstr "Entiset vanhimmat"
 
-#: ../../../../data/txts/developers.lua:439
+#: ../../../../data/txts/developers.lua:443
 msgid "Translation"
 msgstr "Käännökset"
 
-#: ../../../../data/txts/developers.lua:448
+#: ../../../../data/txts/developers.lua:452
 msgid "Other"
 msgstr "Muut"
 
-#: ../../../../data/txts/developers.lua:456
+#: ../../../../data/txts/developers.lua:460
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr "ja monia, monia muita lisää (kiitokset kaikesta mitä olet tehnyt)"
 

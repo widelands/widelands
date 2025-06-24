@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Anthony Guéchoum <a.guechoum@proton.me>, 2020
+# Anthony Guéchoum <a.guechoum@proton.me>, 2025
 # GunChleoc, 2018
 # Irriep Nala Novram <per.morvan.bzh29@gmail.com>, 2017,2021
 # Irriep Nala Novram <per.morvan.bzh29@gmail.com>, 2016
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-04-19 03:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: Irriep Nala Novram <per.morvan.bzh29@gmail.com>, 2017,2021\n"
+"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2025\n"
 "Language-Team: Breton (http://app.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +32,7 @@ msgstr "Pourchas Pourvezioù Sevel-Tiez"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Supply basic building material for your economy:"
-msgstr ""
+msgstr "Pourvezit danvezioù sevel diazez evit hoc'h armerzh:"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:33
 msgid "Build a quarry"
@@ -99,7 +100,7 @@ msgstr "Savit un atant hag un atant wriziennzu"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:58
 msgid "Build a mill to make cornmeal and blackroot flour"
-msgstr ""
+msgstr "Savit ur milin d'ober bleud maiz ha bleud gwrizienn-zu"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:59
 msgid "Build a well"
@@ -107,15 +108,15 @@ msgstr "Savit ur puñs"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr ""
+msgstr "Savit un ti-bara da fardañ bara diouzh bleud maiz, bleud gwrizienn-zu ha dour"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s house to get raw meat"
-msgstr ""
+msgstr "Savit un ti chaseour da gaout kig kriz"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a fisher’s house close to water to get raw fish"
-msgstr ""
+msgstr "Savit un ti pesketaer e-kichen an dour da gaout pesked kriz"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:63
 msgid ""
@@ -125,15 +126,15 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build two smokeries to smoke raw meat and fish"
-msgstr ""
+msgstr "Savit div vogederezhioù da vogediñ kig ha pesked kriz"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:70
 msgid "Build a spider farm and a weaving mill"
-msgstr ""
+msgstr "Savit un atant kevnid hag ur wiaderezh"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:72
 msgid "Spidercloth Production"
-msgstr ""
+msgstr "Ar produiñ gwiad kevnid"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:73
 msgid ""
@@ -146,15 +147,15 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:74
 msgid "Build a weaving mill"
-msgstr ""
+msgstr "Savit ur wiaderezh"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:75
 msgid "Build a spider farm"
-msgstr ""
+msgstr "Savit un atant kevnid"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:76
 msgid "Build a gold spinning mill"
-msgstr ""
+msgstr "Savit ur milin nezañ aour"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:82
 msgid "Build industry and mines"
@@ -187,24 +188,24 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:88
 msgid "Build a smelting works"
-msgstr ""
+msgstr "Savit un deuzerezh"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:89
 msgid "Build an armor smithy and a weapon smithy"
-msgstr ""
+msgstr "Savit ur c'hovel houarnwiskoù hag ur c'hovel armoù"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:90
 msgid "Build a toolsmithy"
-msgstr ""
+msgstr "Savit ur c'hovel ostilhoù"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:96
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:100
 msgid "Build a barracks"
-msgstr ""
+msgstr "Savit ur c'hazarn"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:98
 msgid "Recruiting new soldiers"
-msgstr ""
+msgstr "Tutait soudarded nevez"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:99
 msgid ""
@@ -216,7 +217,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:106
 msgid "Build training sites for soldiers"
-msgstr ""
+msgstr "Savit lec'hioù gourdonañ evit ar soudarded"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:108
 msgid "Soldier Training Sites"
@@ -236,11 +237,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:116
 msgid "Build a warehouse and a horse farm"
-msgstr ""
+msgstr "Savit un etrepaouez hag un atant kezeg"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:118
 msgid "Warehouse and Horse Farm"
-msgstr ""
+msgstr "An etrepaouez hag an atant kezeg"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:119
 msgid ""
@@ -252,19 +253,19 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Savit un etrepaouez"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:121
 msgid "Build a horse farm"
-msgstr ""
+msgstr "Savit un atant kezeg"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:127
 msgid "Build 3 ships to escape from the island"
-msgstr ""
+msgstr "Savit 3 lestr evit mont tec'hout kuit eus an enezenn"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:129
 msgid "Escape From the Island"
-msgstr ""
+msgstr "Tec'hout kuit eus an enezenn"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:130
 msgid ""
@@ -275,7 +276,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:131
 msgid "Build a shipyard close to the lake to start building ships"
-msgstr ""
+msgstr "Savit ur chanter-bigi e-kichen al lenn da gomañs sevel listri"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:142
 msgid "Proud to the Death"
