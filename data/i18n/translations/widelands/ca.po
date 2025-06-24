@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-21 03:18+0000\n"
+"POT-Creation-Date: 2025-06-23 03:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Juanjo, 2015-2025\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
@@ -1571,7 +1571,7 @@ msgid ""
 msgstr "Aquest mapa ha sigut generat automàticament pel generador de mapes aleatoris del Widelands."
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:747
-#: ../../../../src/network/gamehost.cc:1662
+#: ../../../../src/network/gamehost.cc:1675
 #, c-format
 msgid "Computer %u"
 msgstr "IA %u"
@@ -3669,19 +3669,19 @@ msgstr "Es comprova el mapa."
 msgid "Postloading map objects"
 msgstr "Es fa la càrrega final dels objectes del mapa"
 
-#: ../../../../src/network/gameclient.cc:163
-#: ../../../../src/network/gamehost.cc:561
+#: ../../../../src/network/gameclient.cc:171
+#: ../../../../src/network/gamehost.cc:574
 #: ../../../../src/ui_fsmenu/launch_spg.cc:174
 #: ../../../../src/wlapplication.cc:909
 msgid "Preparing game…"
 msgstr "Es prepara la partida…"
 
-#: ../../../../src/network/gameclient.cc:233
+#: ../../../../src/network/gameclient.cc:241
 #: ../../../../src/network/internet_gaming.cc:104
 msgid "Could not establish connection to host"
 msgstr "No s’ha pogut establir connexió amb l’amfitrió"
 
-#: ../../../../src/network/gameclient.cc:234
+#: ../../../../src/network/gameclient.cc:242
 #, c-format
 msgid ""
 "Widelands could not establish a connection to the given address. Either no "
@@ -3689,42 +3689,42 @@ msgid ""
 " you tried to connect."
 msgstr "El Widelands no ha pogut establir una connexió amb l’adreça donada. O bé no hi ha servidors amb els quals contactar al port TCP %u o bé el servidor s’ha tancat quan us hi heu intentat connectar."
 
-#: ../../../../src/network/gameclient.cc:817
+#: ../../../../src/network/gameclient.cc:832
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] "S’ha detectat %u incompatibilitat de complements:\n"
 msgstr[1] "S’han detectat %u incompatibilitats de complements:\n"
 
-#: ../../../../src/network/gameclient.cc:819
+#: ../../../../src/network/gameclient.cc:834
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
 msgstr "%1$s\n•  no s'ha trobat «%2$s», que necessita l'hoste"
 
-#: ../../../../src/network/gameclient.cc:822
+#: ../../../../src/network/gameclient.cc:837
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n• «%2$s» s'ha instal·lat amb la versió %3$s, però l'hoste necessita la versió %4$s"
 
-#: ../../../../src/network/gameclient.cc:989
+#: ../../../../src/network/gameclient.cc:1004
 msgid "/me ’s file failed md5 checksumming."
 msgstr "La suma md5 del fitxer de /me ha fallat."
 
-#: ../../../../src/network/gameclient.cc:1031
+#: ../../../../src/network/gameclient.cc:1046
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me ha comprovat el fitxer rebut. Encara que la suma md5 és correcta, el fitxer no es pot manipular."
 
-#: ../../../../src/network/gameclient.cc:1353
+#: ../../../../src/network/gameclient.cc:1368
 msgid "Disconnected"
 msgstr "Desconnectat"
 
-#: ../../../../src/network/gameclient.cc:1354
+#: ../../../../src/network/gameclient.cc:1369
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -3846,7 +3846,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "El Widelands no ha pogut iniciar el servidor.\nProbablement algun altre procés està fent servir el port."
 
-#: ../../../../src/network/gamehost.cc:1921
+#: ../../../../src/network/gamehost.cc:1934
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
