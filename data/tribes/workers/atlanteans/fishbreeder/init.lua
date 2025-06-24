@@ -17,6 +17,10 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       breed = {
+         -- steps from building to water: 2-10, min+max average 6
+         -- min. worker time: 2 * 2 * 1.8 + 13.5 = 20.7 sec
+         -- max. worker time: 2 * 10 * 1.8 + 13.5 = 49.5 sec
+         -- avg. worker time: 2 * 6 * 1.8 + 13.5 = 35.1 sec
          "findspace=size:any radius:7 breed resource:resource_fish",
          "walk=coords",
          "animate=freeing duration:13s500ms", -- Play a freeing animation
