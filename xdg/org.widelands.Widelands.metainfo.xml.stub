@@ -43,6 +43,10 @@
     <id>org.widelands.widelands</id>
   </provides>
   <launchable type="desktop-id">org.widelands.Widelands.desktop</launchable>
+  <branding>
+    <color type="primary" scheme_preference="light">#7a6440</color>
+    <color type="primary" scheme_preference="dark">#493921</color>
+  </branding>
   <releases>
     <release date="2024-11-15" version="1.2.1"/>
     <release date="2024-03-30" version="1.2"/>
