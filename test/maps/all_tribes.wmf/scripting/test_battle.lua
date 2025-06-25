@@ -65,6 +65,12 @@ local function start_attack(building, additional_soldiers)
    assert_equal(INITIAL_SOLDIERS, #building.fields[1].bobs,
                 "all defending soldiers should be inside")
    assert_nil(mapview.windows[window_name], "attack window should be closed")
+   local sld_dsc = "present"
+   assert_equal(INITIAL_SOLDIERS - attacking_soldiers, bld_attacker:get_soldiers(sld_dsc), sld_dsc)
+   sld_dsc = "stationed"
+   assert_equal(INITIAL_SOLDIERS, bld_attacker:get_soldiers(sld_dsc), sld_dsc)
+   sld_dsc = "associated"
+   assert_equal(INITIAL_SOLDIERS, bld_attacker:get_soldiers(sld_dsc), sld_dsc)
 end
 
 local function count_healty_soldiers(field)
@@ -132,6 +138,10 @@ function test_case_battle.test_attack_start()
    sleep(30 * 1000)
    assert_true(#bld_defender.fields[1].bobs < INITIAL_SOLDIERS,
                "some defending soldiers should be outside")
+               -- no check of exact number of defenders outside, is up to the defending logic
+   assert_equal(#bld_defender.fields[1].bobs, bld_defender:get_soldiers("present"), "present")
+   assert_equal(INITIAL_SOLDIERS, bld_defender:get_soldiers("stationed"), "stationed")
+   assert_equal(INITIAL_SOLDIERS, bld_defender:get_soldiers("associated"), "associated")
    game.desired_speed = 1 * 1000
    sleep(700)
 end
@@ -192,6 +202,8 @@ function test_case_battle.test_attack_plain_defenders()
    -- and fighting does not get blocked (fixed in pr CB #4574 / GH #6233)
    game.desired_speed = 1000
 
+   assert_equal(INITIAL_SOLDIERS, bld_defender:get_soldiers("present"), "all inside")
+
    bld_defender.owner:set_attack_forbidden(bld_attacker.owner.number, true)
    bld_attacker.owner:set_attack_forbidden(bld_defender.owner.number, false)
 
@@ -201,6 +213,8 @@ function test_case_battle.test_attack_plain_defenders()
    sleep(30 * 1000)
    assert_true(#bld_defender.fields[1].bobs < INITIAL_SOLDIERS,
                "some defending soldiers should be outside")
+               -- no check of exact number of defenders outside, is up to the defending logic
+
    game.desired_speed = 1000
    sleep(700)
 end
@@ -293,6 +307,7 @@ function test_case_battle.test_attack_till_deads()
    local surviving_soldiers = get_solders_of_player(bld_defender.owner) +
                               get_solders_of_player(bld_attacker.owner)
    assert_equal(2 * INITIAL_SOLDIERS, surviving_soldiers, "no soldiers have died yet")
+   assert_equal(INITIAL_SOLDIERS, bld_attacker:get_soldiers("present"), "all attackers inside")
 
    bld_defender.owner.team = 0
 
