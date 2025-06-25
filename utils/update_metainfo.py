@@ -7,14 +7,31 @@ import json
 import os.path
 import shutil
 import sys
+import re
 
-# This script collects translations for the metainfo.xml and .desktop files
+# This script collects release notes and translations for the metainfo.xml and .desktop files
 #
 # All non-translatable content for ../xdg/org.widelands.Widelands.metainfo.xml is taken from
 # ../xdg/org.widelands.Widelands.metainfo.xml.stub
 # That file contains a SUMMARY_DESCRIPTION_HOOK where the translatable information
 # is inserted.
 # A language list and textdomain info is inserted into LANGUAGES_HOOK
+#
+# Release notes for the last three releases are collected from ../Release_Notes.md. They are
+# also updated in the catalog of translatable strings, and existing translations are inserted
+# in the metainfo file too.
+#
+# For this to work, the Release_Notes.md must use a limited subset of markdown like this:
+#
+#>## Widelands <version_number>
+#>
+#> - Release highlight 1
+#> - Release highlight 2
+#>
+#>[More info](https://www.widelands.org/news/...)
+#
+# <version_number> must match a release listed in the metainfo stub.
+# Each highlight must fit on one line.
 #
 # The output is written to ../xdg/org.widelands.Widelands.metainfo.xml
 #
@@ -50,6 +67,11 @@ if (not os.path.isfile(desktop_input_filename)):
     print('Error: File ' + desktop_input_filename + ' not found.')
     sys.exit(1)
 
+release_notes_filename = os.path.normpath(base_path + '/Release_Notes.md')
+if (not os.path.isfile(release_notes_filename)):
+    print('Error: File ' + release_notes_filename + ' not found.')
+    sys.exit(1)
+
 translations_path = os.path.normpath(base_path + '/xdg/translations')
 if (not os.path.isdir(translations_path)):
     print('Error: Path ' + translations_path + ' not found.')
@@ -72,10 +94,46 @@ for textdomain in textdomain_path_contents:
     if os.path.isdir(os.path.normpath(textdomain_path + '/' + textdomain)):
         textdomains.append(textdomain)
 
+print('- Reading release notes:')
+
+release_heading = "## Widelands "
+item_bullet = " - "
+url_text = "[More info]("
+
+releases = {}
+release_urls = {}
+version = ""
+release_notes_file = open(release_notes_filename, 'r', encoding = 'utf-8')
+for line in release_notes_file.readlines():
+    if line.startswith(release_heading):
+        if len(releases) >= 3:
+            # we only include the last 3 in the metainfo
+            break
+        version = line[len(release_heading):].strip()
+        if version in releases:
+            print('Duplicate version in Release_Notes.md: ' + version)
+            release_notes_file.close()
+            sys.exit(1)
+        releases[version] = []
+    elif line.startswith(item_bullet):
+        if version == "":
+            print('List item without release header')
+            release_notes_file.close()
+            sys.exit(1)
+        releases[version] += [line[len(item_bullet):].strip()]
+    elif line.startswith(url_text):
+        link = line.rstrip()[len(url_text):-1]
+        # Plain '&' causes xml error, link with %26 doesn't work.
+        # Maybe this?
+        release_urls[version] = link.replace('&', '&amp;')
+
+release_notes_file.close()
+
 print('- Reading source from JSON:')
 
 english_source_file = open(english_source_filename, 'r')
 english_source = json.load(english_source_file)
+english_source_file.close()
 
 name_en = english_source['name']
 tagline_en = english_source['tagline']
@@ -83,8 +141,20 @@ descriptions_en = english_source['description']
 generic_name_en = english_source['category']
 desktop_name_en = english_source['name']
 developer_en = english_source['developer']
+release_notes_en = {}
+if 'release_notes' in english_source:
+    release_notes_en = english_source['release_notes']
+translate_release_notes = True
 
-english_source_file.close()
+if release_notes_en != releases:
+    translate_release_notes = False
+    print("- Updating translation catalog of release notes:")
+    english_source['release_notes'] = releases
+    english_source_file = open(english_source_filename, 'w', encoding = 'utf-8')
+    json.dump(english_source, english_source_file, ensure_ascii = False, indent = '\t')
+    english_source_file.flush()
+    english_source_file.close()
+    release_notes_en = releases
 
 # For metainfo.xml
 names = '  <name>' + name_en + '</name>\n'
@@ -95,6 +165,11 @@ for description in descriptions_en:
     descriptions += '    <p>\n'
     descriptions += '      ' + description + '\n'
     descriptions += '    </p>\n'
+release_notes = {}
+for release in release_notes_en.keys():
+    release_notes[release] = '      <description><ul>\n'
+    for highlight in release_notes_en[release]:
+        release_notes[release] += '        <li>' + highlight +'</li>\n'
 
 # For .desktop
 desktop_names = 'Name=' + desktop_name_en + '\n'
@@ -143,13 +218,26 @@ for translation_filename in translation_files:
                 descriptions += "    <p xml:lang=\"" + lang_code + "\">\n"
                 descriptions += '      ' + description + '\n'
                 descriptions += '    </p>\n'
+        if translate_release_notes and 'release_notes' in translation:
+            trans_relnotes = translation['release_notes']
+            for release in release_notes_en.keys():
+                if release in trans_relnotes and \
+                   trans_relnotes[release] != release_notes_en[release]:
+                    for highlight in trans_relnotes[release]:
+                        release_notes[release] += f'        <li xml:lang="{ lang_code }">{ highlight }</li>\n'
         translation_file.close()
+
 developer += '  </developer>\n'
 descriptions += '  </description>\n'
+for release in release_notes_en.keys():
+    release_notes[release] += '      </ul></description>\n'
 
 print('- Writing org.widelands.Widelands.metainfo.xml')
 input_file = open(metainfo_input_filename, 'r')
 metainfo = ''
+
+release_regex = re.compile(r'^ *<release[^>]* version="([0-9.A-Za-z~@ _-]*)"/>$')
+releases_processed = 0
 
 for line in input_file:
     if line.strip() == 'SUMMARY_DESCRIPTION_HOOK':
@@ -163,6 +251,20 @@ for line in input_file:
             metainfo += '  <translation type="gettext">' + textdomain + '</translation>\n'
     elif line.strip() == 'DEVELOPER_HOOK':
         metainfo += developer
+    elif releases_processed < len(release_notes) and release_regex.match(line):
+        version = release_regex.match(line).group(1)
+        if not version in release_notes:
+            print('WARNING: <releases> in metainfo stub are not in sync with Release_Notes.md!')
+            metainfo += line
+            continue
+        releases_processed += 1
+        metainfo += line.rstrip()[:-2] + '>\n'  # replace '/>' with '>'
+        metainfo += release_notes[version]
+        if version in release_urls:
+            metainfo += f'      <url type="details">{ release_urls[version] }</url>\n'
+        else:
+            print('WARNING: No URL for version ' + version)
+        metainfo += '    </release>\n'
     else:
         metainfo += line
 
