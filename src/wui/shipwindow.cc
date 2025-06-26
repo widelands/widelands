@@ -373,32 +373,34 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 			set_destination_->add(temp_ship->get_shipname(), DestinationWrapper(temp_ship, nullptr),
 			                      temp_ship->descr().icon(), temp_ship == dest_ship);
 		}
-		for (Widelands::PinnedNote* note : all_notes) {
-			constexpr int kTextureSize = 24;
-			const Image* unscaled = g_animation_manager->get_representative_image(note->owner().tribe().pinned_note_animation(), &note->get_rgb());
+		NoteThreadSafeFunction::instantiate([this, &all_notes, &dest_note]() {
+			for (Widelands::PinnedNote* note : all_notes) {
+				constexpr int kTextureSize = 24;
+				const Image* unscaled = g_animation_manager->get_representative_image(note->owner().tribe().pinned_note_animation(), &note->get_rgb());
 
-			Texture* downscaled = new Texture(kTextureSize, kTextureSize);
-			RenderTarget rt(downscaled);
-			rt.fill_rect(rt.get_rect(), RGBAColor(0, 0, 0, 0), BlendMode::Copy);  // Initialize to fully transparent background
-			float aspect_ratio = static_cast<float>(unscaled->width()) / unscaled->height();
-			Rectf result_rect;
-			if (aspect_ratio < 1.f) {
-				result_rect.h = kTextureSize;
-				result_rect.w = kTextureSize * aspect_ratio;
-				result_rect.y = 0;
-				result_rect.x = (kTextureSize - result_rect.w) / 2.f;
-			} else {
-				result_rect.w = kTextureSize;
-				result_rect.h = kTextureSize / aspect_ratio;
-				result_rect.x = 0;
-				result_rect.y = (kTextureSize - result_rect.h) / 2.f;
+				Texture* downscaled = new Texture(kTextureSize, kTextureSize);
+				RenderTarget rt(downscaled);
+				rt.fill_rect(rt.get_rect(), RGBAColor(0, 0, 0, 0), BlendMode::Copy);  // Initialize to fully transparent background
+				float aspect_ratio = static_cast<float>(unscaled->width()) / unscaled->height();
+				Rectf result_rect;
+				if (aspect_ratio < 1.f) {
+					result_rect.h = kTextureSize;
+					result_rect.w = kTextureSize * aspect_ratio;
+					result_rect.y = 0;
+					result_rect.x = (kTextureSize - result_rect.w) / 2.f;
+				} else {
+					result_rect.w = kTextureSize;
+					result_rect.h = kTextureSize / aspect_ratio;
+					result_rect.x = 0;
+					result_rect.y = (kTextureSize - result_rect.h) / 2.f;
+				}
+				rt.blitrect_scale(result_rect, unscaled, unscaled->rect(), 1.f, BlendMode::UseAlpha);
+				texture_cache_.emplace(downscaled);
+
+				set_destination_->add(
+				   note->get_text(), DestinationWrapper(note, nullptr), downscaled, note == dest_note);
 			}
-			rt.blitrect_scale(result_rect, unscaled, unscaled->rect(), 1.f, BlendMode::UseAlpha);
-			texture_cache_.emplace(downscaled);
-
-			set_destination_->add(
-			   note->get_text(), DestinationWrapper(note, nullptr), downscaled, note == dest_note);
-		}
+		}, true, true);
 		for (const Widelands::DetectedPortSpace* temp_dps : all_spaces) {
 			set_destination_->add(temp_dps->to_short_string(egbase),
 			                      DestinationWrapper(nullptr, temp_dps),
