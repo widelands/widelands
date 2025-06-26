@@ -96,13 +96,13 @@ for textdomain in textdomain_path_contents:
 
 print('- Reading release notes:')
 
-release_heading = "## Widelands "
-item_bullet = " - "
-url_text = "[More info]("
+release_heading = '## Widelands '
+item_bullet = ' - '
+url_text = '[More info]('
 
 releases = {}
 release_urls = {}
-version = ""
+version = ''
 release_notes_file = open(release_notes_filename, 'r', encoding = 'utf-8')
 for line in release_notes_file.readlines():
     if line.startswith(release_heading):
@@ -116,7 +116,7 @@ for line in release_notes_file.readlines():
             sys.exit(1)
         releases[version] = []
     elif line.startswith(item_bullet):
-        if version == "":
+        if version == '':
             print('List item without release header')
             release_notes_file.close()
             sys.exit(1)
@@ -148,7 +148,7 @@ translate_release_notes = True
 
 if release_notes_en != releases:
     translate_release_notes = False
-    print("- Updating translation catalog of release notes:")
+    print('- Updating translation catalog of release notes:')
     english_source['release_notes'] = releases
     english_source_file = open(english_source_filename, 'w', encoding = 'utf-8')
     json.dump(english_source, english_source_file, ensure_ascii = False, indent = '\t')
@@ -212,7 +212,7 @@ for translation_filename in translation_files:
             names += "  <name xml:lang=\"" + lang_code + \
                 "\">" + translation['name'] + '</name>\n'
         if 'developer' in translation and translation['developer'] != developer_en:
-            developer += f'    <name xml:lang="{ lang_code }">{ translation["developer"] }</name>\n'
+            developer += f'    <name xml:lang="{ lang_code }">{ translation['developer'] }</name>\n'
         if translation['description'] != descriptions_en:  # metainfo.xml
             for description in translation['description']:
                 descriptions += "    <p xml:lang=\"" + lang_code + "\">\n"
