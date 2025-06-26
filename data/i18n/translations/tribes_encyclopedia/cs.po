@@ -3381,7 +3381,7 @@ msgid ""
 "This corn is processed in the mill into fine cornmeal that every Atlantean "
 "baker needs for a good bread. Also horse and spider farms need to be "
 "provided with corn."
-msgstr "Kukuřice se zpracovává ve mlýně na kukuřičnou mouku, kterou potřebuje každý atlantský pekař k přípravě chleba. Kukuřici potřebují také stáje a pavoučí farmy."
+msgstr "Kukuřice se zpracovává ve mlýně na kukuřičnou mouku, kterou potřebuje každá atlantská pekařka k přípravě chleba. Kukuřici potřebují také stáje a pavoučí farmy."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Cornmeal
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:549
@@ -3627,7 +3627,7 @@ msgstr "Kosy vyrábí nástrojář."
 #: ../../../../data/tribes/initialization/frisians/units.lua:481
 msgctxt "ware"
 msgid "The bread paddle is the tool of the baker, each baker needs one."
-msgstr "Lopata na chléb je nástrojem pekaře a každý pekař ji potřebuje."
+msgstr "Lopata na chléb je nástrojem pekařů a pekařek, žádný z nich se bez ní neobejde."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Bread Paddle, part 2
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:778
@@ -6244,7 +6244,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Wheat is produced by farms and consumed by bakeries, micro breweries and "
 "breweries. Cattle farms also need to be supplied with wheat."
-msgstr "Pšenice se pěstuje na statcích a zpracovávají ji pekaři, malé pivovary a pivovary. I dobytčí farmy musí být zásobeny pšenicí."
+msgstr "Pšenice se pěstuje na statcích a zpracovávají ji pekárny, malé pivovary a pivovary. I dobytčí farmy musí být zásobeny pšenicí."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Pitta Bread
 #: ../../../../data/tribes/initialization/barbarians/units.lua:204
@@ -6254,7 +6254,7 @@ msgid ""
 "is made out of wheat and water following a secret recipe. Pitta bread is "
 "used in the taverns, inns and big inns to prepare rations, snacks and meals."
 " It is also consumed at training sites (training camp and battle arena)."
-msgstr "Barbarští pekaři jsou nejlepší v pečení těchto placatých a chutných chlebových placek. Vyrábí se z pšenice a vody podle tajného receptu. Chlebové placky se používají v hospodách, hostincích a velkých hostincích k přípravě malých svačin, svačin a jídel. Také jsou potřeba pro cvičiště (výcvikový tábor a bitevní aréna)."
+msgstr "Barbarské pekařky jsou nejlepší v pečení těchto placatých a chutných chlebových placek. Vyrábí se z pšenice a vody podle tajného receptu. Chlebové placky se používají v hospodách, hostincích a velkých hostincích k přípravě malých svačin, svačin a jídel. Také jsou potřeba pro cvičiště (výcvikový tábor a bitevní aréna)."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Beer
 #: ../../../../data/tribes/initialization/barbarians/units.lua:213
@@ -6376,7 +6376,7 @@ msgid ""
 "Therefore the gardener and the ranger use them. Produced at the metal "
 "workshop (but cease to be produced by the building if it is enhanced to an "
 "ax workshop and war mill)."
-msgstr "Proto ji používá zahradník i lesník. Vyrábí se v dílně na železo (ale pozor, přestává se zde vyrábět, jakmile je budova vylepšena na dílnu na sekery, nebo válečnou akademii)."
+msgstr "Proto ji používá zahradnice i lesník. Vyrábí se v dílně na železo (ale pozor, přestává se zde vyrábět, jakmile je budova vylepšena na dílnu na sekery, nebo válečnou akademii)."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Hammer, part 2
 #: ../../../../data/tribes/initialization/barbarians/units.lua:371
@@ -7225,7 +7225,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The gardener sows and harvests one sheaf of reed between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr "Zahradník zaseje a sklidí jeden svazek rákosu za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí urazit."
+msgstr "Zahradnice zaseje a sklidí jeden svazek rákosu za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí urazit."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Reed
 #. Yard, part 2; %s is replaced by 'N growing fields'
@@ -11567,7 +11567,7 @@ msgstr "Peče chléb pro vojáky, stejně jako pro horníky."
 #: ../../../../data/tribes/initialization/empire/units.lua:1524
 msgctxt "empire_building"
 msgid "The baker needs %1% on average to bake a loaf of bread."
-msgstr "Pekař potřebuje na upečení bochníku chleba v průměru %1%."
+msgstr "Pekařka potřebuje na upečení bochníku chleba v průměru %1%."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11704,7 +11704,7 @@ msgstr "varování nenasytnému horníkovi"
 #: ../../../../data/tribes/initialization/empire/units.lua:1613
 msgctxt "empire_building"
 msgid "The innkeeper needs %1% on average to prepare a ration."
-msgstr "Hostinský potřebuje na přípravu malé svačiny v průměru %1%."
+msgstr "Hostinská potřebuje na přípravu malé svačiny v průměru %1%."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
