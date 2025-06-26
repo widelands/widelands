@@ -375,12 +375,11 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 		}
 		for (Widelands::PinnedNote* note : all_notes) {
 			constexpr int kTextureSize = 24;
-			const Image* unscaled =
-			   g_animation_manager->get_animation(note->owner().tribe().pinned_note_animation())
-			      .representative_image(&note->get_rgb());
+			const Image* unscaled = g_animation_manager->get_representative_image(note->owner().tribe().pinned_note_animation(), &note->get_rgb());
 
 			Texture* downscaled = new Texture(kTextureSize, kTextureSize);
 			RenderTarget rt(downscaled);
+			rt.fill_rect(rt.get_rect(), RGBAColor(0, 0, 0, 0), BlendMode::Copy);  // Initialize to fully transparent background
 			float aspect_ratio = static_cast<float>(unscaled->width()) / unscaled->height();
 			Rectf result_rect;
 			if (aspect_ratio < 1.f) {
