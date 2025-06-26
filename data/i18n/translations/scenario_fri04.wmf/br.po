@@ -22,7 +22,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../../../data/campaigns/fri04.wmf/scripting/init.lua:28
 msgid "Note"
-msgstr ""
+msgstr "Notenn"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/init.lua:29
 msgid ""
