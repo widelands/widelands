@@ -212,7 +212,8 @@ for translation_filename in translation_files:
             names += "  <name xml:lang=\"" + lang_code + \
                 "\">" + translation['name'] + '</name>\n'
         if 'developer' in translation and translation['developer'] != developer_en:
-            developer += f'    <name xml:lang="{ lang_code }">{ translation['developer'] }</name>\n'
+            developer_lang = translation['developer']
+            developer += f'    <name xml:lang="{ lang_code }">{ developer_lang }</name>\n'
         if translation['description'] != descriptions_en:  # metainfo.xml
             for description in translation['description']:
                 descriptions += "    <p xml:lang=\"" + lang_code + "\">\n"
