@@ -8,6 +8,7 @@ import os.path
 import shutil
 import sys
 import re
+import datetime
 
 # This script collects release notes and translations for the metainfo.xml and .desktop files
 #
@@ -99,6 +100,7 @@ print('- Reading release notes:')
 release_heading = '## Widelands '
 item_bullet = ' - '
 url_text = '[More info]('
+dev_version_suffix = '~git'
 
 releases = {}
 release_urls = {}
@@ -110,6 +112,12 @@ for line in release_notes_file.readlines():
             # we only include the last 3 in the metainfo
             break
         version = line[len(release_heading):].strip()
+        if version.endswith(dev_version_suffix):
+            if len(releases) > 0:
+                print('Development version is not first one in Release_Notes.md')
+                release_notes_file.close()
+                sys.exit(1)
+            version = version[:-len(dev_version_suffix)]
         if version in releases:
             print('Duplicate version in Release_Notes.md: ' + version)
             release_notes_file.close()
@@ -159,7 +167,7 @@ if release_notes_en != releases:
 # For metainfo.xml
 names = '  <name>' + name_en + '</name>\n'
 summaries = '  <summary>' + tagline_en + '</summary>\n'
-developer = '  <developer id="org.widelands.Widelands">\n    <name>' + developer_en + '</name>\n'
+developer = '    <name>' + developer_en + '</name>\n'
 descriptions = '  <description>\n'
 for description in descriptions_en:
     descriptions += '    <p>\n'
@@ -228,7 +236,6 @@ for translation_filename in translation_files:
                         release_notes[release] += f'        <li xml:lang="{ lang_code }">{ highlight }</li>\n'
         translation_file.close()
 
-developer += '  </developer>\n'
 descriptions += '  </description>\n'
 for release in release_notes_en.keys():
     release_notes[release] += '      </ul></description>\n'
@@ -254,18 +261,32 @@ for line in input_file:
         metainfo += developer
     elif releases_processed < len(release_notes) and release_regex.match(line):
         version = release_regex.match(line).group(1)
-        if not version in release_notes:
-            print('WARNING: <releases> in metainfo stub are not in sync with Release_Notes.md!')
-            metainfo += line
-            continue
-        releases_processed += 1
+        if version.endswith(dev_version_suffix):
+            if releases_processed > 0:
+                print('Development version is not first one in metainfo stub!')
+                sys.exit(1)
+            version = version[:-len(dev_version_suffix)]
+            if not ' date=' in line:
+                # Date is not in stub to not have to update it all the time, but we need something
+                # stable to avoid churn in git. We still use current date as fallback value.
+                date = datetime.datetime.today().strftime('%Y-%m-%d')
+                result = subprocess.run(('git log -1 --format=%ci -- ' + release_notes_filename).split(), \
+                                        text=True, encoding='utf-8', capture_output=True)
+                if result.returncode == 0:
+                    date = result.stdout[:10]
+                idx = line.find('version=')
+                line = line[:idx] + f'date="{ date }" ' + line[idx:]
         metainfo += line.rstrip()[:-2] + '>\n'  # replace '/>' with '>'
+        if not version in release_notes:
+            print('<releases> in metainfo stub are not in sync with Release_Notes.md!')
+            sys.exit(1)
         metainfo += release_notes[version]
         if version in release_urls:
             metainfo += f'      <url type="details">{ release_urls[version] }</url>\n'
         else:
             print('WARNING: No URL for version ' + version)
         metainfo += '    </release>\n'
+        releases_processed += 1
     else:
         metainfo += line
 

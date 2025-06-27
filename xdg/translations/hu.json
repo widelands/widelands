@@ -8,7 +8,7 @@
 		"A Widelands tartalmaz egyjátékos módot hadjáratokkal, amelyek a törzsekről és az ő viszontagságaikról mesélnek a Widelands univerzumában. A móka azonban akkor kezdődik csak el igazán, amikor összejössz a barátaiddal az Interneten vagy helyi hálózaton keresztül, hogy közösen építsetek fel új birodalmakat – vagy háborúban porig romboljátok egymást. A Widelands mesterséges intelligenciája is készen áll, hogy kihívjon téged."
 	],
 	"release_notes": {
-		"1.3~git": [
+		"1.3": [
 			"Kereskedés",
 			"A játék hat új térképpel bővült, és három régi térkép el lett távolítva",
 			"Raktár körzetek",
