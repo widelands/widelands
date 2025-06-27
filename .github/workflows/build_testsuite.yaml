@@ -63,10 +63,11 @@ jobs:
         else
           export CXX="/usr/bin/${{ matrix.compiler }}" # g++-10
           export CC="${CXX/g++/gcc}"                   # gcc-10
+          export GCOV_BINARY="${CXX/g++/gcov}"         # gcov-10
         fi
         mkdir build
         pushd build
-        cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="ON" -DOPTION_BUILD_CODECHECK="OFF"
+        cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="ON" -DOPTION_BUILD_CODECHECK="OFF" -DCODE_COVERAGE_ARGS="--verbose"
         grep -v REVDETECT-BROKEN VERSION
         make -k -j$(nproc) VERBOSE=1
     - name: Make install/uninstall
@@ -89,3 +90,9 @@ jobs:
     - name: Testsuite
       run: |
         ./regression_test.py
+    - name: Code Coverage
+      uses: actions/upload-artifact@v4
+      with:
+        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} Code Coverage Reports
+        path: ${{ github.workspace }}/build/coverage/report
+        if-no-files-found: ignore
