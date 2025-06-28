@@ -37,7 +37,8 @@ public:
 	explicit LuaEditorInterface(Widelands::EditorGameBase* g);
 	~LuaEditorInterface() override = default;
 
-	std::unique_ptr<LuaTable> run_script(const std::string& script) override;
+	std::unique_ptr<LuaTable> run_script(const std::string& script,
+	                                     bool keep_lua_table = false) override;
 
 private:
 	std::unique_ptr<EditorFactory> factory_;
@@ -51,7 +52,8 @@ public:
 	// Returns a given hook if one is defined, otherwise returns 0
 	std::unique_ptr<LuaTable> get_hook(const std::string& name);
 
-	std::unique_ptr<LuaTable> run_script(const std::string& script) override;
+	std::unique_ptr<LuaTable> run_script(const std::string& script,
+	                                     bool keep_lua_table = false) override;
 
 	// Input/output for coroutines.
 	std::unique_ptr<LuaCoroutine> read_coroutine(FileRead&);
