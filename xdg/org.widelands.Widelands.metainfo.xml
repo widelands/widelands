@@ -345,7 +345,7 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <color type="primary" scheme_preference="dark">#493921</color>
   </branding>
   <releases>
-    <release date="2025-06-26" version="1.3~git">
+    <release date="2025-06-28" version="1.3~git">
       <description><ul>
         <li>Market trading</li>
         <li>Six new maps added and three old maps removed</li>
