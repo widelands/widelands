@@ -1304,7 +1304,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one liana between %1$s and %2$s, depending on how "
 "far the liana cutter has to walk."
-msgstr ""
+msgstr "Tato budova může vyprodukovat jednu liánu za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí sběračka lián urazit."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Water
 #. Gatherer's Hut
@@ -1381,7 +1381,7 @@ msgctxt "amazons_building"
 msgid ""
 "The wilderness keeper can breed one fish and release one animal between %1$s"
 " and %2$s, depending on how far she has to walk."
-msgstr ""
+msgstr "Ochránkyně divoké fauny vysadí jednu rybu nebo zvíře za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí urazit."
 
 #: ../../../../data/tribes/initialization/amazons/units.lua:1429
 msgctxt "amazons_building"
@@ -1433,7 +1433,7 @@ msgstr "Vyrábí lana z lián."
 #, lua-format
 msgctxt "amazons_building"
 msgid "The rope weaver booth needs %s on average to produce one rope."
-msgstr ""
+msgstr "Provaznická bouda potřebuje na výrobu jednoho lana v průměru %s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Furnace
 #: ../../../../data/tribes/initialization/amazons/units.lua:1459
@@ -1646,7 +1646,7 @@ msgctxt "amazons_building"
 msgid ""
 "The jungle master can perform one terraform between %1$s and %2$s, depending"
 " on how far she has to walk."
-msgstr ""
+msgstr "Paní džungle zúrodní jeden díl země za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí urazit."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Tapir Farm
 #: ../../../../data/tribes/initialization/amazons/units.lua:1571
@@ -4511,7 +4511,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The fish breeder can breed one fish between %1$s and %2$s, depending on how "
 "far he has to walk."
-msgstr ""
+msgstr "Porybný vysadí jednu rybu za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí urazit."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Hunter's
 #. House
@@ -4638,7 +4638,7 @@ msgstr "nápis na přádelně zlata, které se nedostává zásob"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The gold spinning mill needs %s on average to produce one gold thread."
-msgstr ""
+msgstr "Přádelna zlata potřebuje v průměru %s na výrobu jedné zlaté příze."
 
 #. TRANSLATORS: Special helptext for an Atlantean production site: Scout's
 #. House without road connection
@@ -5192,7 +5192,7 @@ msgstr "chovatelka pavouků ukazuje svou farmu"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The spider farm needs %s on average to produce one spider silk."
-msgstr ""
+msgstr "Pavoučí farma potřebuje na výrobu jedné role pavoučího hedvábi v průměru %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weaving
 #. Mill
@@ -7162,7 +7162,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The gamekeeper can release one animal between %1$s and %2$s, depending on "
 "how far he has to walk."
-msgstr ""
+msgstr "Hajný vysadí jedno zvíře za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí urazit."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Well
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1258
@@ -11551,7 +11551,7 @@ msgstr "Řeže mramorové sloupy z mramoru."
 msgctxt "empire_building"
 msgid ""
 "The stonemason’s house needs %s on average to produce one marble column."
-msgstr ""
+msgstr "Domek kameníka potřebuje na výrobu jednoho mramorového sloupku v průměru %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11762,7 +11762,7 @@ msgstr "Vyrábí víno."
 #, lua-format
 msgctxt "empire_building"
 msgid "The winery needs %s on average to produce one wine."
-msgstr ""
+msgstr "Vinný sklep potřebuje na výrobu jednoho vína v průměru %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12154,7 +12154,7 @@ msgstr "Chová ovce pro jejich vlnu."
 #, lua-format
 msgctxt "empire_building"
 msgid "The sheep farm needs %s on average to produce one wool."
-msgstr ""
+msgstr "Ovčinec potřebuje na výrobu jednoho kusu vlny v průměru %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -15147,7 +15147,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one clay between %1$s and %2$s, depending on how "
 "far the clay digger has to walk."
-msgstr ""
+msgstr "Tato budova vyprodukuje kýbl cihlářské hlíny za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí kopáč hlíny urazit."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Charcoal Burner's
 #. House
@@ -15297,7 +15297,7 @@ msgctxt "frisians_building"
 msgid ""
 "The beekeeper collects one honey between %1$s and %2$s, depending on how far"
 " he has to walk."
-msgstr ""
+msgstr "Včelař vyrobí jeden med za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí urazit."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Aqua Farm
 #: ../../../../data/tribes/initialization/frisians/units.lua:1793
@@ -15382,7 +15382,7 @@ msgstr "Pálí cihly z žuly a cihlářské hlíny za pomoci uhlí jako paliva. 
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brick kiln needs %s on average to produce one brick."
-msgstr ""
+msgstr "Cihelna potřebuje na výrobu jedné cihly v průměru %s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Furnace
 #: ../../../../data/tribes/initialization/frisians/units.lua:1845
@@ -15971,7 +15971,7 @@ msgctxt "frisians_building"
 msgid ""
 "If this building is fully supplied, the diker can perform one terraform "
 "between %1$s and %2$s, depending on how far he has to walk."
-msgstr ""
+msgstr "Pokud je budova dobře zásobována, postaví hrázný jednu hráz za %1$s až %2$s, záleží na tom, jak dlouhou cestu musí urazit."
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Rock Mine
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Deep Rock Mine
