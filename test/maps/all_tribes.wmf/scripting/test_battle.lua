@@ -113,16 +113,6 @@ local function test_attack_when_forbidden()
    assert_equal(INITIAL_SOLDIERS, #bld_attacker.fields[1].bobs, "no soldier should have left")
 end
 
---[[ nonworking:
-local function reset_soldiers(bld)
-   bld:set_soldiers({0, 0, 0, 0}, INITIAL_SOLDIERS)
-
-   -- the soldiers fighting seem not to be influenced nor counted,
-   --   some more soldiers are added to those in the house
-end
-]]
-
-
 local test_case_battle = lunit.TestCase("Battle")
 
 function test_case_battle.test_attack_start()
