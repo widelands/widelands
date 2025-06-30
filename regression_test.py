@@ -69,6 +69,15 @@ def colorize_log(text):
     return text
 
 
+def github_asan_line(text):
+    "annotates asan summary on GitHub"
+    # GitHub only supports 10 error and 10 warning annotations per step. This might be too few.
+    # Therefore only annotate the summary line of ASan.
+    if 'SUMMARY' in text:
+        return '::warning title=ASan error::' + text
+    return text
+
+
 class FileToPrint:
     """For files in WidelandsTestCase.outputs[]
 
@@ -77,15 +86,16 @@ class FileToPrint:
     Only use inside print, as __str__() does not return the string but prints it.
     """
 
-    def __init__(self, file_path, colorize=True):
+    def __init__(self, file_path, colorize_fn=colorize_log):
         self.file_path = file_path
-        self.colorize = colorize
+        self.colorize_fn = colorize_fn
 
     def to_stream(self, out_file):
+        colorize_fn = self.colorize_fn
         with open(self.file_path, "r") as stdout:
             for line in stdout:
-                if self.colorize:
-                    line = colorize_log(line)
+                if colorize_fn:
+                    line = colorize_fn(line)
                 print(line, end='', file=out_file)
 
     def __str__(self):
@@ -316,7 +326,7 @@ class WidelandsTestCase():
                 lsan_log_txt = file.read()
             if "ERROR: " in lsan_log_txt:
                 if os.getenv('GITHUB_ACTION'):
-                    self.outputs.append(FileToPrint(f_name, False))  # no coloring from here
+                    self.outputs.append(FileToPrint(f_name, github_asan_line))
                 else:
                     idx1 = lsan_log_txt.find('ERROR: ')
                     idx2 = lsan_log_txt.find('\n', idx1)
