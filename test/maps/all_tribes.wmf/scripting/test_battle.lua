@@ -188,7 +188,7 @@ function test_case_battle.test_attack_onesided()
 end
 
 function test_case_battle.test_attack_plain_defenders()
-   -- defenders are allwed to defend even if not allowed to attack
+   -- defenders are allowed to defend even if not allowed to attack
    -- and fighting does not get blocked (fixed in pr CB #4574 / GH #6233)
    game.desired_speed = 1000
 
