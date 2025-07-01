@@ -457,10 +457,12 @@ static int L_include(lua_State* L) {
 		lua_pop(L, 1);  // pop this userdata
 		std::unique_ptr<LuaTable> table(lua->run_script(script));
 		table->do_not_warn_about_unaccessed_keys();
+		lua_pushlightuserdata(L, table.get());  // S: ... userdata
+		lua_rawget(L, LUA_REGISTRYINDEX);       // S: ... table
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
-	return 0;
+	return 1;
 }
 
 /* RST
