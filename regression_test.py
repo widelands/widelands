@@ -332,6 +332,7 @@ class WidelandsTestCase():
                     idx2 = lsan_log_txt.find('\n', idx1)
                     self.outputs.append(colorize(lsan_log_txt[idx1:idx2], warning_color) +
                                         f', see in {f_name}\n')
+                self.out_status('Info ', f'ASan log: {f_name}')
                 if not self.report_header:
                     self.report_header = 'lsan'  # might be overwritten, which is no problem
             # else it is information about what was skipped matching suppression file
